@@ -1,0 +1,197 @@
+phase13_dry_run_dispatch_readiness:
+  readiness_metadata:
+    readiness_id: phase13-dry-run-dispatch-readiness-001
+    phase: "Phase 13"
+    purpose_cn: "验证 dry-run dispatch 可以消费占位能力状态并生成 display-only 调度草案；全程不选择真实插件、不执行。"
+    status: draft_acceptance_fixture
+    candidate_id: candidate-plugin-placeholder-001
+    created_at: "2026-05-04T22:00:00+08:00"
+    owner_role: ImageLab_Master
+
+  capability_state_snapshot:
+    candidate_id: candidate-plugin-placeholder-001
+    plugin_display_name_cn: "待确认插件"
+    plugin_name_is_placeholder: true
+    current_status: pending_manifest_review
+    current_status_is_real_plugin_capability: false
+    input_mode: unknown
+    output_mode: unknown
+    best_for_cn: "待读取真实 manifest 并完成未来脱敏审查后确认。"
+    permission_risk_cn: "未读取真实 manifest，权限风险保持未确认。"
+    source_authorized: false
+    source_read_performed: false
+    real_manifest_read: false
+    real_execution_allowed: false
+    state_note_cn: "该状态只表示候选准备进入 manifest 审查，不代表插件可用或可执行。"
+
+  dispatch_readiness_input:
+    task_id: task-phase13-dry-run-dispatch-readiness-001
+    task_type: photo_studio_os_review
+    mode: dry_run
+    user_request_cn: "基于占位能力状态生成 dry-run 调度草案，用于 Gatekeeper 和 Review Console 展示。"
+    sanitized_capability_ref: phase12-capability-state-governance-001
+    prompt_package_ref: prompt-package-placeholder-phase13-001
+    dry_run_controls:
+      max_plugin_calls: 0
+      allow_external_api: false
+      allow_file_write: false
+      allow_image_binary: false
+      expected_command: dry_run
+      execution_mode_allowed: false
+    safety:
+      contains_secret: false
+      contains_private_path: false
+      contains_customer_private_data: false
+      contains_image_binary: false
+
+  dispatch_plan_draft:
+    dispatch_id: dispatch-phase13-dry-run-readiness-001
+    task_id: task-phase13-dry-run-dispatch-readiness-001
+    mode: dry_run
+    selected_plugin: null
+    fallback_plugins: []
+    capability_matrix_status: pending_manifest_review
+    reason_cn: "只消费占位能力状态；未读取真实 manifest，不能选择真实插件。"
+    input_mode: unknown
+    output_mode: plan
+    dry_run_required: true
+    approval_required: true
+    risk_level: medium
+    expected_outputs: 0
+    max_outputs: 0
+    overwrite_allowed: false
+    external_api_allowed: false
+    execution_blocked: true
+    gatekeeper_required: true
+    review_console_required: true
+    allow_file_write: false
+    allow_image_binary: false
+    max_plugin_calls: 0
+    preflight_result:
+      status: needs_review
+      checked_mode: dry_run
+      checked_max_plugin_calls: 0
+      checked_external_api_allowed: false
+      checked_file_write_allowed: false
+      checked_image_binary_allowed: false
+      rejection_reason_cn: null
+    manifest_review:
+      required_before_real_execution: true
+      status: pending_manifest_review
+      sanitized_summary_cn: "仅有 no-read 占位能力状态，未读取真实 manifest。"
+      sensitive_original_copied: false
+      real_execution_allowed: false
+    rollback_plan:
+      dry_run_reversible: true
+      rollback_action_cn: "丢弃本 dispatch_plan 草案，回到上一份人工确认草案。"
+      external_rollback_required: false
+    audit_record:
+      audit_id: audit-phase13-dry-run-readiness-001
+      audit_summary_cn: "仅生成 dry-run dispatch readiness 草案，未调用插件、API、DailyNote 或文件写入。"
+      contains_sensitive_original: false
+    forbidden_actions:
+      - execute
+      - generate
+      - run
+      - call_plugin
+      - write_memory
+      - write_image_file
+
+  gatekeeper_handoff:
+    required: true
+    display_only: true
+    reviewer_role: Gatekeeper_Agent
+    status: needs_review
+    risk_summary_cn: "候选仍处于 pending_manifest_review；dispatch 只展示 no-execution 草案，不允许选择真实插件。"
+    blocked_actions:
+      - execute
+      - generate
+      - call_plugin
+      - external_api
+      - write_daily_note
+      - write_image_file
+    sensitive_original_allowed: false
+    approval_to_execute_allowed: false
+
+  review_console_handoff:
+    required: true
+    display_only: true
+    purpose_cn: "展示 dry-run dispatch readiness 草案、被阻止动作和人工复查入口。"
+    allowed_actions:
+      - mark_candidate
+      - reject_candidate
+      - request_manifest_authorization
+      - request_gatekeeper_review
+      - request_memory_edit
+    forbidden_actions:
+      - execute_plugin
+      - call_api
+      - write_daily_note
+      - save_image
+      - mark_dry_run_checked
+      - mark_tested
+    handoff_summary_cn: "Review Console 只能展示草案和人工意见，不能触发真实插件、API、DailyNote 或图片保存。"
+
+  memory_delta_draft:
+    delta_id: md-phase13-dry-run-dispatch-readiness-001
+    task_id: task-phase13-dry-run-dispatch-readiness-001
+    case_id: case-phase13-dry-run-dispatch-readiness-001
+    agent_name: Archivist_Agent
+    target_notebook: Rejected_Visual_Lessons
+    write_mode: draft
+    approval_required: true
+    approval_status: pending
+    approved_by: null
+    approved_at: null
+    chinese_diary_title: "Phase 13 dry-run dispatch readiness 草案"
+    chinese_diary_content: |
+      本记录说明 Phase 13 只基于占位能力状态生成 dry-run dispatch readiness 草案。当前未读取真实 manifest，未选择真实插件，未调用插件、API、DailyNote 或文件写入。Gatekeeper 和 Review Console handoff 只能用于展示和人工复查，不能触发真实执行。
+    tags:
+      - Phase13
+      - dry-run
+      - dispatch
+      - no-execution
+    memory_safety:
+      contains_secret: false
+      contains_private_path: false
+      contains_customer_private_data: false
+      contains_image_binary: false
+      safety_notes_cn: "本草案为中文脱敏摘要，不含密钥、私密路径、客户隐私或图片二进制。"
+    final_decision:
+      should_write_to_vcp: false
+      should_show_in_review_console: true
+      rejection_reason_cn: null
+
+  no_execution_guard:
+    selected_plugin: null
+    max_plugin_calls: 0
+    source_authorized: false
+    source_read_performed: false
+    real_manifest_read: false
+    real_execution_allowed: false
+    external_api_allowed: false
+    execution_blocked: true
+    api_called: false
+    vcp_plugin_called: false
+    plugin_called: false
+    daily_note_called: false
+    vcp_memory_written: false
+    disk_write_performed: false
+    image_file_created: false
+    image_binary_included: false
+    vcp_toolbox_read: false
+    vcp_toolbox_modified: false
+    vcpchat_read: false
+    vcpchat_modified: false
+
+  acceptance_assertions:
+    - "dispatch 只消费占位能力状态，不选择真实插件。"
+    - "selected_plugin 必须为 null。"
+    - "max_plugin_calls 必须为 0。"
+    - "execution_blocked 必须为 true。"
+    - "external_api_allowed 必须为 false。"
+    - "allow_file_write 和 allow_image_binary 必须为 false。"
+    - "Gatekeeper handoff 和 Review Console handoff 必须是 display-only。"
+    - "pending_manifest_review 不得被解释为可执行插件。"
+    - "不得进入 dry_run_checked 或 tested。"
+    - "所有记忆正文和审计摘要必须为中文脱敏内容。"

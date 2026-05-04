@@ -274,6 +274,25 @@
 - [ ] Phase 12 样例的记忆正文和审计摘要必须为中文脱敏内容。
 - [ ] Phase 12 不调用 API、VCP 插件、DailyNote，不写文件，不创建图片。
 
+## Phase 13 dry-run dispatch readiness 检查
+
+- [ ] Phase 13 只补齐 dry-run dispatch readiness fixture，不读取真实 VCPToolBox。
+- [ ] Phase 13 不读取真实 VCPChat。
+- [ ] Phase 13 不读取真实 manifest。
+- [ ] `integrations/vcp/vcp_tool_request_examples.md` 包含 Phase 13 dry-run dispatch readiness 说明。
+- [ ] `tests/schema_examples/phase13_dry_run_dispatch_readiness.example.yaml` 存在。
+- [ ] Phase 13 样例包含 `capability_state_snapshot`、`dispatch_readiness_input`、`dispatch_plan_draft`、`gatekeeper_handoff`、`review_console_handoff`、`memory_delta_draft`、`no_execution_guard` 和 `acceptance_assertions`。
+- [ ] Phase 13 样例只消费 sanitized placeholder capability data，不选择真实插件。
+- [ ] Phase 13 样例保持 `selected_plugin=null`、`max_plugin_calls=0`、`execution_blocked=true`。
+- [ ] Phase 13 样例保持 `external_api_allowed=false`、`allow_file_write=false`、`allow_image_binary=false`。
+- [ ] Phase 13 样例保持 `real_execution_allowed=false`、`api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`。
+- [ ] Phase 13 样例不得把 `pending_manifest_review` 解释为可执行插件。
+- [ ] Phase 13 样例不得进入 `dry_run_checked` 或 `tested`。
+- [ ] Phase 13 样例的 Gatekeeper / Review Console handoff 必须是 display-only。
+- [ ] Phase 13 样例不得记录真实插件名、真实 manifest 原文、真实插件路径或真实能力结论。
+- [ ] Phase 13 样例的记忆正文和审计摘要必须为中文脱敏内容。
+- [ ] Phase 13 不调用 API、VCP 插件、DailyNote，不写文件，不创建图片。
+
 ## 无执行闭环检查
 
 - [ ] `tests/schema_examples/task_envelope.example.yaml` 是 Photo Studio OS 无执行样例。

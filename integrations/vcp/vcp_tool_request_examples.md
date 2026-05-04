@@ -134,3 +134,25 @@ write_memory
 - 返回中 `allow_image_binary=false`。
 - 返回中 `rollback_plan.external_rollback_required=false`。
 - 返回中 `audit_record.contains_sensitive_original=false`。
+
+## Phase 13 dry-run dispatch readiness
+
+Phase 13 只补齐未来 dry-run dispatch readiness 的示例口径，不读取真实 VCPToolBox，不读取真实 VCPChat，不读取真实 manifest，不调用插件，不调用 API，不写 DailyNote，不创建图片。
+
+dispatch readiness 可以消费 Phase 12 的占位能力状态，但只能使用中文脱敏摘要和占位候选 ID。它不得选择真实插件，不得把 `pending_manifest_review` 解释为可执行插件。
+
+Phase 13 返回草案必须保持：
+
+```yaml
+mode: dry_run
+selected_plugin: null
+capability_matrix_status: pending_manifest_review
+external_api_allowed: false
+execution_blocked: true
+allow_file_write: false
+allow_image_binary: false
+max_plugin_calls: 0
+real_execution_allowed: false
+```
+
+Gatekeeper handoff 和 Review Console handoff 只能用于 display-only 人工展示，不触发真实执行、不写文件、不写 DailyNote。
