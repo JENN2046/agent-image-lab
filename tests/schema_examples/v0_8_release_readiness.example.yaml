@@ -1,0 +1,24 @@
+v0_8_release_readiness:
+  checkpoint: v0.8_release_readiness
+  can_release_as_pre_execution_checkpoint: true
+  can_release_as_true_real_loop_final: false
+  completed:
+    documentation_complete: true
+    adapter_dry_run_complete: true
+    vcptoolbox_adapter_only_install_verified: true
+    single_manifest_sanitized_review_complete: true
+    gatekeeper_preflight_complete: true
+    review_console_preflight_complete: true
+    photo_studio_os_zero_call_rehearsal_complete: true
+  blocked_until_authorized:
+    real_execution_complete: false
+    selected_plugin_for_execution: null
+    max_plugin_calls_authorized: 0
+    real_execution_allowed: false
+    required_next_authorization: v0.7_photo_studio_os_minimal_real_execution
+  no_execution_guard:
+    api_called: false
+    vcp_plugin_called: false
+    daily_note_called: false
+    file_write_performed: false
+    image_file_created: false

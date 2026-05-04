@@ -108,6 +108,13 @@
 - Review Console、Adapter、manifest 审查、真实闭环都有验收记录。
 - 打 tag 并生成发布包。
 
+当前 release-readiness checkpoint：
+
+- `docs/30_release_readiness_report.md` 已形成。
+- `docs/31_install_and_operation_guide.md` 已形成。
+- `docs/32_final_acceptance_report.md` 已形成。
+- 当前只建议发布为 pre-execution checkpoint，不建议标记为 v1.0 final。
+
 ## 永久停止条件
 
 出现以下任一情况必须停止推进并回滚到上一个 dry-run 草案：

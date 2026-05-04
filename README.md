@@ -1,4 +1,4 @@
-# Agent Image Lab v0.2
+# Agent Image Lab
 
 Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不重新造生图插件，也不重新造记忆系统，而是把 VCP 的生图 / 编辑插件、VCPChat 的窗口能力、VCP 的长期记忆系统组织成一条可评审、可迭代、可归档、可沉淀的视觉生产线。
 
@@ -37,6 +37,9 @@ Photo Studio OS UI 生图生产线，以及 AI 图片评审与修正生产线。
 
 - `docs/00_project_roadmap.md`：从 v0.2 基线到 v0.3 授权、MVP-B dry-run 和未来真实闭环的总路线图。
 - `docs/20_real_loop_completion_plan.md`：从 v0.4 到 v1.0 的真实闭环完成计划。
+- `docs/30_release_readiness_report.md`：当前 release readiness 结论。
+- `docs/31_install_and_operation_guide.md`：安装、校验和操作指南。
+- `docs/32_final_acceptance_report.md`：当前验收报告。
 - `docs/`：项目定义、SOP、评分表、VCP 记忆适配、审片台设计。
 - `agents/`：ImageLab_Master 和岗位型子 Agent 的规则。
 - `memory_policy/`：中文日记、memory_delta、写入权限、召回策略、禁写清单。
@@ -47,9 +50,14 @@ Photo Studio OS UI 生图生产线，以及 AI 图片评审与修正生产线。
 
 ## 当前状态
 
-当前仓库已经完成 v0.2 规格基线和 Review Console 静态原型，并开始 v0.3 manifest 授权门槛规划。真实 manifest 读取、真实插件选择、真实 API 调用、DailyNote 写入和图片生成仍未开始，必须作为后续独立授权点处理。
+当前仓库处于 v0.8 release-readiness checkpoint：
 
-当前还包含 v0.4 dry-run Adapter 导出候选文件；它仍是 draft-not-installed，不代表真实 VCPToolBox 已安装。
+- v0.5 已完成用户授权的 VCPToolBox Adapter-only dry-run 安装验证。
+- v0.6 已完成用户授权的单一真实生图插件 manifest 只读脱敏审查。
+- v0.7 已完成 Gatekeeper 风险边界、Review Console 人工审批前置记录和真实执行前确认表。
+- v0.7.1 已完成 Photo Studio OS 0 调用 dry-run rehearsal。
+
+真实执行仍未授权：没有真实插件调用、没有外部 API 调用、没有 DailyNote 写入、没有图片创建。v1.0 final 必须等待用户单独授权真实插件、调用次数、输入引用、输出目录和回滚方案。
 
 ## 只读校验
 
@@ -59,6 +67,17 @@ powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
 
 该脚本只检查仓库结构、安全边界、静态原型和 dry-run 锁定值，不调用 VCP 插件、不调用 API、不写 DailyNote、不创建图片。
 
+## 真实执行授权门
+
+真实执行前必须先阅读并确认：
+
+- `integrations/vcp/v0_7_real_execution_authorization_gate.md`
+- `integrations/vcp/v0_7_gatekeeper_risk_boundary.md`
+- `review_console/v0_7_human_approval_preflight.md`
+- `workflows/v0_7_real_execution_preflight_confirmation.md`
+
+仅说“继续”不构成真实执行授权。
+
 ## 不做什么
 
-本包不包含真实生图调用、不包含 VCPToolBox 改动、不包含 VCPChat 改动、不包含密钥、不包含图片大文件。
+本包不包含真实生图调用、不包含真实执行授权、不包含 VCPChat 改动、不包含密钥、不包含图片大文件。v0.5 曾在用户授权下把 Adapter-only dry-run 包安装到 VCPToolBox 预发布候选工作线；该安装不代表真实生图插件已启用。

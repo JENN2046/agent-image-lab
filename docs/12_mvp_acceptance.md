@@ -23,6 +23,21 @@
 - 写清未来单插件接入前置条件，但不读取真实 manifest，不选择真实插件。
 - 可回滚 dry-run。
 
+## Release-readiness checkpoint
+
+当前 release-readiness checkpoint 必须满足：
+
+- Adapter dry-run lab 可运行。
+- VCPToolBox Adapter-only dry-run 安装验证已记录。
+- 单一真实生图插件 manifest 已完成只读脱敏审查。
+- Gatekeeper 风险边界已定义。
+- Review Console 人工审批前置记录已定义。
+- 真实执行授权门已定义。
+- Photo Studio OS dry-run rehearsal 已完成，且真实调用为 0。
+- 最终验收报告明确 v1.0 final 尚未完成。
+
+Release-readiness 不等于真实闭环 final。真实闭环 final 必须完成一次单独授权的真实执行。
+
 ## Phase 4：MVP-B dry-run integration planning
 
 Phase 4 不是 MVP-B 真实执行实现，只规划进入 MVP-B 前的 dry-run integration 条件。

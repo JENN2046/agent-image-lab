@@ -18,7 +18,7 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-v0.7.1 real-loop dry-run rehearsal
+v0.8.0 release-readiness checkpoint
 ```
 
 已经完成：
@@ -36,6 +36,7 @@ v0.7.1 real-loop dry-run rehearsal
 - v0.6 单一真实生图插件 manifest 只读脱敏审查记录。
 - v0.7 Gatekeeper 风险边界、Review Console 人工审批前置记录和真实执行前确认表。
 - v0.7 独立真实执行授权门和 Photo Studio OS 0 调用 dry-run rehearsal。
+- v0.8 release readiness 报告、安装操作指南和最终验收报告。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：
@@ -193,10 +194,10 @@ daily_note_called: false
 
 ## 当前优先队列
 
-1. 完成并归档 v0.7 dry-run rehearsal。
+1. 完成并归档 v0.8 release-readiness checkpoint。
 2. 等待用户单独授权 v0.7 Photo Studio OS 最小真实执行。
 3. 真实执行前再次确认插件、调用次数、输入引用、输出目录和回滚方案。
-4. v0.7 通过后，收束 v1.0 release、使用说明和最终验收报告。
+4. 真实执行通过后，升级到 v1.0 final 并补最终真实闭环验收报告。
 
 ## 永久安全门
 

@@ -39,6 +39,9 @@ $requiredFiles = @(
   'exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
+  'docs/30_release_readiness_report.md',
+  'docs/31_install_and_operation_guide.md',
+  'docs/32_final_acceptance_report.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
@@ -79,6 +82,7 @@ $requiredFiles = @(
   'tests/schema_examples/v0_7_real_execution_preflight_confirmation.example.yaml',
   'tests/schema_examples/v0_7_real_execution_authorization_gate.example.yaml',
   'tests/schema_examples/v0_7_photo_studio_os_dry_run_rehearsal.example.yaml',
+  'tests/schema_examples/v0_8_release_readiness.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -387,6 +391,54 @@ foreach ($path in $v07PreflightExamples) {
   foreach ($pattern in $forbiddenV07ExamplePatterns) {
     if ($content -match $pattern) {
       Add-Failure "v0.7 preflight boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$v08ReleaseReadinessFiles = @(
+  'docs/30_release_readiness_report.md',
+  'docs/32_final_acceptance_report.md',
+  'tests/schema_examples/v0_8_release_readiness.example.yaml'
+)
+
+$requiredV08Patterns = @(
+  'v0\.8_release_readiness',
+  'real_execution_allowed:\s+false',
+  'max_plugin_calls_authorized:\s+0'
+)
+
+$forbiddenV08Patterns = @(
+  'can_release_as_true_real_loop_final:\s+true',
+  'final_v1_0_ready:\s+true',
+  'real_execution_allowed:\s+true',
+  'real_execution_complete:\s+true',
+  'selected_plugin_for_execution:\s+(?!null\b)\S+',
+  'max_plugin_calls_authorized:\s+[1-9]',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'file_write_performed:\s+true',
+  'image_file_created:\s+true',
+  '[A-Za-z]:\\',
+  'https?://'
+)
+
+foreach ($path in $v08ReleaseReadinessFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v0.8 release readiness file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV08Patterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v0.8 release readiness missing required guard in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV08Patterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v0.8 release readiness boundary violation in ${path}: $pattern"
     }
   }
 }
