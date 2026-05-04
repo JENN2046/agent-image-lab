@@ -382,6 +382,32 @@
 - [ ] `index.js`、`.exe`、`.ps1`、图片扩展如被扫描命中，只能作为负面检查项出现，不得是真实文件证据。
 - [ ] 本阶段不调用 API、VCP 插件、DailyNote，不写文件，不创建图片。
 
+## v0.3.0 manifest sanitized read preflight 检查
+
+- [ ] v0.3.0 manifest sanitized read preflight 只补齐真实 manifest 脱敏读取执行前授权规划，不读取真实 VCPToolBox。
+- [ ] v0.3.0 manifest sanitized read preflight 不读取真实 VCPChat。
+- [ ] v0.3.0 manifest sanitized read preflight 不读取真实 manifest。
+- [ ] `integrations/vcp/manifest_sanitized_read_preflight.md` 存在。
+- [ ] `tests/schema_examples/v0_3_manifest_sanitized_read_preflight.example.yaml` 存在。
+- [ ] preflight 文档明确 Patch 03 不构成读取授权，也不开始读取。
+- [ ] preflight 样例包含 `preflight_request`、`source_scope_guard`、`read_method_preflight`、`sanitized_output_policy`、`approval_chain`、`state_rules`、`no_execution_guard`、`memory_delta_draft` 和 `acceptance_assertions`。
+- [ ] preflight 样例保持 `read_execution_authorized=false`、`read_execution_started=false`、`read_completed=false`。
+- [ ] preflight 样例保持 `source_authorized=false`、`source_read_performed=false`、`real_manifest_read=false`、`raw_manifest_copied=false`。
+- [ ] preflight 样例保持 `external_repo_access_allowed=false`、`allowed_source_paths=[]`、`allowed_file_types=[]`、`sensitive_path_redaction_required=true`。
+- [ ] preflight 样例保持 `real_execution_allowed=false`、`selected_plugin=null`、`max_plugin_calls=0`。
+- [ ] preflight 样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`。
+- [ ] preflight 样例当前状态保持 `pending_manifest_review`。
+- [ ] preflight 样例不得进入 `manifest_reviewed_safe`、`dry_run_checked`、`tested`、`plugin_selected`、`execution_ready` 或 `real_execution_ready`。
+- [ ] preflight 样例只列出未来允许输出的中文脱敏字段名，不写真实摘录值。
+- [ ] 允许输出仅限脱敏显示名摘要、命令集合中文摘要、输入输出模式中文摘要、权限风险中文摘要、Gatekeeper 复查点和中文脱敏审计摘要。
+- [ ] 禁止输出覆盖 raw manifest 原文、真实私密路径、API key、token、cookie、密码、endpoint 原文、客户隐私、图片二进制、真实插件输出、运行日志和真实插件能力结论。
+- [ ] preflight 样例不包含真实插件名、真实 manifest 原文、真实插件路径或真实能力结论。
+- [ ] preflight 样例不包含密钥、token、cookie、密码、私密路径、客户隐私或客户未公开信息。
+- [ ] preflight 样例不新增 `index.js`、`.exe`、`.ps1` 或其他真实执行入口。
+- [ ] preflight 样例不创建图片文件。
+- [ ] preflight 样例的记忆正文、拒绝原因和审计摘要必须为中文脱敏内容。
+- [ ] 本阶段不调用 API、VCP 插件、DailyNote，不写文件，不创建图片。
+
 ## 无执行闭环检查
 
 - [ ] `tests/schema_examples/task_envelope.example.yaml` 是 Photo Studio OS 无执行样例。

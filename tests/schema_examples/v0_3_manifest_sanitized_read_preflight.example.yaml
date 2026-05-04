@@ -1,0 +1,170 @@
+v0_3_manifest_sanitized_read_preflight:
+  preflight_request:
+    preflight_id: v0-3-manifest-sanitized-read-preflight-001
+    requested_phase: "v0.3.0-manifest-sanitized-read-preflight"
+    candidate_id: candidate-plugin-placeholder-001
+    purpose_cn: "规划未来真实 manifest 脱敏读取的执行前授权条件；本记录不读取真实 manifest。"
+    target_repository_ref: repository-ref-placeholder-not-read
+    target_manifest_ref: manifest-ref-placeholder-not-read
+    read_execution_authorized: false
+    read_execution_started: false
+    read_completed: false
+    source_authorized: false
+    source_read_performed: false
+    real_manifest_read: false
+    current_state: pending_manifest_review
+    next_allowed_state: pending_manifest_review
+    audit_summary_cn: "仅创建脱敏读取执行前授权草案，未读取真实 VCPToolBox、VCPChat 或 manifest。"
+
+  source_scope_guard:
+    unique_candidate_required: true
+    repository_wide_scan_allowed: false
+    external_repo_access_allowed: false
+    allowed_source_paths: []
+    allowed_file_types: []
+    sensitive_path_redaction_required: true
+    allowed_target_ref_cn: "未来如获独立授权，只能读取一个脱敏候选 manifest 引用。"
+    forbidden_source_scope_cn:
+      - "不得读取真实 VCPChat。"
+      - "不得扫描整个 VCPToolBox 仓库。"
+      - "不得读取 config.env、日志、图片、运行态目录或客户目录。"
+      - "不得读取候选 manifest 之外的文件。"
+
+  read_method_preflight:
+    read_method_required: true
+    read_method_cn: "只允许未来独立授权后的单文件只读查看方式，不允许执行命令或触发插件运行。"
+    executable_command_allowed: false
+    script_execution_allowed: false
+    plugin_execution_allowed: false
+    api_call_allowed: false
+    daily_note_write_allowed: false
+    file_write_allowed: false
+    image_file_write_allowed: false
+    rejection_if_method_unclear_cn: "读取方式不清晰、可能执行脚本或可能触发插件时，必须拒绝。"
+
+  sanitized_output_policy:
+    allowed_output_fields:
+      - "脱敏插件显示名摘要"
+      - "命令集合中文摘要"
+      - "输入输出模式中文摘要"
+      - "权限风险中文摘要"
+      - "Gatekeeper 需要复查的风险点"
+      - "中文脱敏审计摘要"
+    allowed_output_values_present: false
+    raw_manifest_copied: false
+    raw_manifest_copy_allowed: false
+    real_plugin_name_allowed: false
+    real_capability_claim_allowed: false
+    forbidden_output_fields:
+      - "raw manifest 原文"
+      - "真实私密路径"
+      - "API key、token、cookie、密码"
+      - "webhook、数据库地址或 endpoint 原文"
+      - "客户隐私或客户未公开信息"
+      - "图片二进制"
+      - "真实插件输出"
+      - "运行日志"
+      - "真实插件能力结论"
+
+  approval_chain:
+    human_reviewer_required: true
+    gatekeeper_required: true
+    review_console_required: true
+    archivist_required_for_memory: true
+    imagelab_master_required: true
+    approval_status: pending
+    approved_by: null
+    approved_at: null
+    approval_notes_cn: "当前尚未授权执行真实 manifest 读取；后续读取必须另开独立授权点。"
+
+  state_rules:
+    current_state: pending_manifest_review
+    next_allowed_state: pending_manifest_review
+    forbidden_states_without_future_authorized_read:
+      - manifest_reviewed_safe
+      - dry_run_checked
+      - tested
+      - plugin_selected
+      - execution_ready
+      - real_execution_ready
+    rejection_state: rejected
+    rule_summary_cn: "本 preflight 只规划执行前授权条件，不能推进到 manifest_reviewed_safe、dry_run_checked、tested 或任何执行就绪状态。"
+
+  no_execution_guard:
+    read_execution_authorized: false
+    read_execution_started: false
+    read_completed: false
+    source_authorized: false
+    source_read_performed: false
+    real_manifest_read: false
+    raw_manifest_copied: false
+    raw_manifest_copy_allowed: false
+    external_repo_access_allowed: false
+    allowed_source_paths: []
+    allowed_file_types: []
+    sensitive_path_redaction_required: true
+    selected_plugin: null
+    max_plugin_calls: 0
+    api_called: false
+    vcp_plugin_called: false
+    plugin_called: false
+    daily_note_called: false
+    vcp_memory_written: false
+    disk_write_performed: false
+    image_file_created: false
+    real_execution_allowed: false
+    contains_raw_manifest: false
+    contains_real_plugin_name: false
+    contains_real_capability_claim: false
+    audit_summary_cn: "本 preflight 未读取真实 manifest，未调用插件、API、DailyNote，未写文件或创建图片。"
+
+  memory_delta_draft:
+    delta_id: md-v0-3-manifest-sanitized-read-preflight-001
+    task_id: task-v0-3-manifest-sanitized-read-preflight-001
+    case_id: case-v0-3-manifest-sanitized-read-preflight-001
+    agent_name: Archivist_Agent
+    target_notebook: Rejected_Visual_Lessons
+    write_mode: draft
+    approval_required: true
+    approval_status: pending
+    approved_by: null
+    approved_at: null
+    chinese_diary_title: "v0.3 manifest 脱敏读取 preflight 草案"
+    chinese_diary_content: |
+      本记录说明 v0.3.0 只规划未来真实 manifest 脱敏读取的执行前授权条件。当前未读取真实 VCPToolBox、VCPChat 或 manifest，未选择真实插件，未调用插件、API、DailyNote，未写文件或创建图片。后续如需实际读取，必须另开独立授权点，并限定为单一候选 manifest、只读方式和中文脱敏摘要输出。
+    tags:
+      - v0.3
+      - manifest脱敏读取
+      - preflight
+      - no-execution
+    memory_safety:
+      contains_secret: false
+      contains_private_path: false
+      contains_customer_private_data: false
+      contains_image_binary: false
+      safety_notes_cn: "本草案为中文脱敏摘要，不含密钥、私密路径、客户隐私或图片二进制。"
+    final_decision:
+      should_write_to_vcp: false
+      should_show_in_review_console: true
+      rejection_reason_cn: null
+
+  acceptance_assertions:
+    - "read_execution_authorized 必须为 false。"
+    - "read_execution_started 必须为 false。"
+    - "read_completed 必须为 false。"
+    - "source_authorized 必须为 false。"
+    - "source_read_performed 必须为 false。"
+    - "real_manifest_read 必须为 false。"
+    - "raw_manifest_copied 必须为 false。"
+    - "external_repo_access_allowed 必须为 false。"
+    - "allowed_source_paths 必须为空数组。"
+    - "allowed_file_types 必须为空数组。"
+    - "sensitive_path_redaction_required 必须为 true。"
+    - "real_execution_allowed 必须为 false。"
+    - "selected_plugin 必须为 null。"
+    - "max_plugin_calls 必须为 0。"
+    - "api_called、vcp_plugin_called、daily_note_called 必须为 false。"
+    - "当前状态必须保持 pending_manifest_review。"
+    - "不得进入 manifest_reviewed_safe、dry_run_checked、tested、plugin_selected、execution_ready 或 real_execution_ready。"
+    - "不得记录真实插件名、真实 manifest 原文、真实插件路径或真实能力结论。"
+    - "所有记忆正文、拒绝原因和审计摘要必须为中文脱敏内容。"
