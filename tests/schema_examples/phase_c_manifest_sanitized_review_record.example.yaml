@@ -1,0 +1,84 @@
+phase_c_manifest_sanitized_review_record:
+  review_id: phase-c-manifest-review-agent-image-lab-adapter-draft-001
+  authorization_id: phase-c-manifest-read-auth-user-approved-001
+  candidate_id: agent-image-lab-adapter-draft
+  read_performed: true
+  raw_manifest_copied: false
+
+  source_scope:
+    single_manifest_only: true
+    repository_wide_scan_performed: false
+    vcpchat_read_performed: false
+    runtime_data_read_performed: false
+
+  sanitized_review:
+    plugin_display_name_summary_cn: "候选 manifest 表示一个 Agent Image Lab Adapter 草案桥接组件，用途是 dry-run 桥接。"
+    command_summary_cn: "允许命令仅限 dry-run；执行、生成、真实插件调用、写记忆、写图片等命令被列为禁止。"
+    input_output_summary_cn: "manifest 只描述 dry-run 合同和审批要求，没有声明真实图片输入输出能力。"
+    permission_risk_cn: "风险等级为低到中：当前是草案 manifest，不含执行入口；必须继续保持不安装、不执行、不外连。"
+    gatekeeper_notes_cn: "后续应重点复查执行阻断、调用次数为 0、外部 API 禁止、文件和图片写入禁止。"
+    sanitized_review_summary_cn: "该候选 manifest 可作为项目内 Adapter dry-run 草案继续进入 dry-run 设计评估；不得据此选择真实插件或进入真实执行。"
+
+  safety_result:
+    raw_manifest_saved: false
+    contains_secret: false
+    contains_private_path: false
+    contains_customer_private_data: false
+    contains_endpoint_raw: false
+    contains_image_binary: false
+    contains_real_plugin_output: false
+
+  state_decision:
+    previous_state: pending_manifest_review
+    next_state: manifest_reviewed_safe
+    scope_note_cn: "仅限仓库内 AgentImageLabAdapter 草案 manifest 的脱敏审查状态。"
+    real_execution_allowed: false
+    dry_run_allowed: false
+    plugin_selected: false
+    decision_reason_cn: "manifest 脱敏审查未发现敏感原文或真实执行入口，可进入后续 dry-run 设计评估；但仍不允许真实执行。"
+
+  no_execution_guard:
+    selected_plugin: null
+    max_plugin_calls: 0
+    api_called: false
+    vcp_plugin_called: false
+    daily_note_called: false
+    file_write_performed: false
+    image_file_created: false
+    real_execution_allowed: false
+
+  memory_delta_draft:
+    delta_id: md-phase-c-agent-image-lab-adapter-draft-001
+    task_id: task-phase-c-agent-image-lab-adapter-draft-001
+    case_id: case-phase-c-agent-image-lab-adapter-draft-001
+    agent_name: Archivist_Agent
+    target_notebook: Execution_Audit_Log
+    write_mode: draft
+    approval_required: true
+    approval_status: pending
+    chinese_diary_title: "Phase C Adapter 草案 manifest 脱敏审查记录"
+    chinese_diary_content: |
+      本记录说明：已按用户授权只读审查单一候选 manifest，并仅保存中文脱敏摘要。该候选是 Agent Image Lab Adapter 的 dry-run 草案 manifest，未发现密钥、私密路径、客户隐私、图片二进制、真实插件输出或真实执行入口。该结论只允许进入后续 dry-run 设计评估，不代表插件已安装、已测试或可真实执行。
+    tags:
+      - PhaseC
+      - manifest脱敏审查
+      - Adapter草案
+      - no-execution
+    memory_safety:
+      contains_secret: false
+      contains_private_path: false
+      contains_customer_private_data: false
+      contains_image_binary: false
+      safety_notes_cn: "本记录只保存中文脱敏摘要，不保存 raw manifest 原文。"
+    final_decision:
+      should_write_to_vcp: false
+      should_show_in_review_console: true
+      rejection_reason_cn: null
+
+  acceptance_assertions:
+    - "raw_manifest_copied 必须为 false。"
+    - "raw_manifest_saved 必须为 false。"
+    - "selected_plugin 必须为 null。"
+    - "max_plugin_calls 必须为 0。"
+    - "api_called、vcp_plugin_called、daily_note_called 必须为 false。"
+    - "next_state=manifest_reviewed_safe 只表示脱敏审查通过，不表示允许真实执行。"

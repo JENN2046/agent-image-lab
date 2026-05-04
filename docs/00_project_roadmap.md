@@ -29,11 +29,12 @@ v0.2.5 final baseline + v0.3.0 manifest authorization planning
 - Adapter dry-run planning。
 - v0.3 manifest recon / authorization gate / sanitized read preflight 文档。
 - v0.3 authorization planning closeout。
+- 仓库内 AgentImageLabAdapter 草案 manifest 的 Phase C 脱敏审查记录。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：
 
-- 真实 manifest 读取。
+- 真实外部 VCPToolBox manifest 读取。
 - 真实插件选择。
 - Adapter dry-run 的真实运行实现。
 - VCPChat 子窗口接入。
@@ -85,6 +86,8 @@ v0.2.5 final baseline + v0.3.0 manifest authorization planning
 目标：在独立授权下，只读取一个候选 manifest，并只输出中文脱敏摘要。
 
 进入 Phase C 前必须先使用 `integrations/vcp/phase_c_manifest_sanitized_read_contract.md` 形成独立授权申请。没有唯一候选和用户明确授权时，只允许维护授权模板，不得读取真实 manifest。
+
+当前已完成一次仓库内草案 manifest 的授权脱敏读取，记录位于 `integrations/vcp/phase_c_manifest_sanitized_review_record.md`。该记录只允许进入 Phase D dry-run 设计评估，不代表真实插件选择、dry-run 已执行或真实执行授权。
 
 允许输出：
 

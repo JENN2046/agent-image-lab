@@ -33,6 +33,7 @@ $requiredFiles = @(
   'docs/00_project_roadmap.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
+  'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
   'integrations/vcp/phase_d_adapter_dry_run_minimal_contract.md',
   'docs/01_project_definition.md',
   'docs/02_workflow_sop.md',
@@ -193,6 +194,48 @@ foreach ($path in $v03Files) {
   foreach ($pattern in $forbiddenV03Patterns) {
     if ($content -match $pattern) {
       Add-Failure "v0.3 authorization boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$phaseCReviewFiles = @(
+  'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
+  'tests/schema_examples/phase_c_manifest_sanitized_review_record.example.yaml'
+)
+
+$forbiddenPhaseCReviewPatterns = @(
+  'raw_manifest_copied:\s+true',
+  'raw_manifest_saved:\s+true',
+  'raw_manifest_copy_allowed:\s+true',
+  'contains_secret:\s+true',
+  'contains_private_path:\s+true',
+  'contains_customer_private_data:\s+true',
+  'contains_endpoint_raw:\s+true',
+  'contains_image_binary:\s+true',
+  'contains_real_plugin_output:\s+true',
+  'real_execution_allowed:\s+true',
+  'dry_run_allowed:\s+true',
+  'plugin_selected:\s+true',
+  'selected_plugin:\s+(?!null\b)\S+',
+  'max_plugin_calls:\s+[1-9]',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'file_write_performed:\s+true',
+  'image_file_created:\s+true'
+)
+
+foreach ($path in $phaseCReviewFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing Phase C review record file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $forbiddenPhaseCReviewPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "Phase C review boundary violation in ${path}: $pattern"
     }
   }
 }

@@ -97,6 +97,14 @@ Phase 4 不填真实插件名，也不把任何占位行标记为可用。未来
 | rollback | 明确如何回退到 dry-run 草案 | 不允许真实执行 |
 | audit | 记录中文脱敏摘要 | 不记录敏感原文 |
 
+## Phase C 脱敏审查记录
+
+以下记录只表示候选 manifest 已完成中文脱敏审查，不代表插件已安装、已测试或允许真实执行。
+
+| candidate_id | plugin_display_name_summary_cn | review_status | allowed_next_step | real_execution_allowed | notes_cn |
+|---|---|---|---|---|---|
+| agent-image-lab-adapter-draft | Agent Image Lab Adapter 草案桥接组件 | manifest_reviewed_safe | Phase D dry-run 设计评估 | false | 仅限仓库内草案 manifest；不选择真实插件，不调用插件，不写 DailyNote。 |
+
 ## 禁止
 
 - 不要写真实 API key、token、cookie、密码。

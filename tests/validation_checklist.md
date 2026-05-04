@@ -423,10 +423,14 @@
 
 - [ ] `integrations/vcp/phase_c_manifest_sanitized_read_contract.md` 存在。
 - [ ] `tests/schema_examples/phase_c_manifest_read_authorization_request.example.yaml` 存在。
+- [ ] `integrations/vcp/phase_c_manifest_sanitized_review_record.md` 存在。
+- [ ] `tests/schema_examples/phase_c_manifest_sanitized_review_record.example.yaml` 存在。
 - [ ] Phase C 合约明确没有唯一候选和用户明确授权时不得读取真实 manifest。
 - [ ] Phase C 授权样例保持 `user_authorized=false`、`source_authorized=false`、`source_read_performed=false`、`real_manifest_read=false`。
 - [ ] Phase C 授权样例保持 `selected_plugin=null`、`max_plugin_calls=0`、`api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`。
 - [ ] Phase C 只允许未来输出中文脱敏摘要，不允许保存 raw manifest 原文。
+- [ ] Phase C 审查记录可以进入 `manifest_reviewed_safe`，但必须保持 `real_execution_allowed=false`。
+- [ ] Phase C 审查记录不得保存 raw manifest 原文，不得写 DailyNote，不得选择真实插件。
 
 ## Phase D Adapter dry-run 最小契约检查
 
