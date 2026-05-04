@@ -120,7 +120,7 @@
 - [ ] `plugin_test_results.md` 明确 manifest 读取需要另行授权。
 - [ ] `plugin_test_results.md` 明确不复制 manifest 中的 API key、token、cookie、密码、私密路径或客户隐私。
 - [ ] `plugin_test_results.md` 明确 `tested` 不自动表示允许真实执行。
-- [ ] 能力矩阵仍保持 `待实测` / `pending_manifest_review` / `dry_run_checked` / `tested` 的人工推进语义。
+- [ ] 能力矩阵仍保持 `待实测` / `pending_manifest_review` / `manifest_reviewed_safe` / `dry_run_checked` / `tested` 的人工推进语义。
 - [ ] `tests/schema_examples/phase7_dry_run_review_memory.example.yaml` 串联 `vcp_task_envelope`、`vcp_dispatch_plan`、`review_session`、`memory_delta`。
 - [ ] Phase 7 验收用例中 `task_id` 在四段对象中保持一致。
 - [ ] Phase 7 验收用例中 `dispatch_plan` 保持 `selected_plugin=null`、`max_plugin_calls=0`、`execution_blocked=true`。
@@ -153,6 +153,7 @@
 - [ ] Phase 8 状态推进样例明确 `real_manifest_read=false`。
 - [ ] Phase 8 状态推进样例不包含真实 manifest 原文。
 - [ ] Phase 8 状态推进样例只允许从 `待实测` 推进到 `pending_manifest_review`、`manifest_reviewed_safe` 或 `rejected`。
+- [ ] Phase 8 的 `manifest_reviewed_safe` 示例如未读取真实 manifest，必须标记为模板字段，不得作为状态推进证据。
 - [ ] Phase 8 状态推进样例未完成 dry-run 前禁止进入 `dry_run_checked` 或 `tested`。
 - [ ] Phase 8 状态推进样例明确 `selected_plugin=null`、`max_plugin_calls=0`、`execution_blocked=true`。
 - [ ] 未新增真实插件名称或真实插件能力结论。
@@ -162,6 +163,21 @@
 - [ ] 未创建图片文件。
 - [ ] 未修改真实 VCPToolBox。
 - [ ] 未修改真实 VCPChat。
+
+## Phase 9 单插件 dry-run 准备前置检查
+
+- [ ] Phase 9 只准备单插件 dry-run 实测结构，不读取真实 VCPToolBox。
+- [ ] Phase 9 不读取真实 VCPChat。
+- [ ] Phase 9 不调用真实插件、API、DailyNote 或文件写入。
+- [ ] `plugin_test_results.md` 的 `manifest_review_status` 使用 `not_started` / `pending_manifest_review` / `manifest_reviewed_safe` / `rejected`。
+- [ ] `plugin_test_results.md` 的 `capability_status` 使用 `待实测` / `pending_manifest_review` / `manifest_reviewed_safe` / `dry_run_checked` / `tested` / `rejected`。
+- [ ] 旧式“批准进入 dry-run only”命名不再作为状态词使用。
+- [ ] 未获得单独授权前，真实候选插件只能停留在 `待实测` 或 `pending_manifest_review`。
+- [ ] `manifest_reviewed_safe` 只能由已授权的真实 manifest 脱敏审查产生，模板示例不能自动推进状态。
+- [ ] 未完成 dry-run 验收前，不得进入 `dry_run_checked` 或 `tested`。
+- [ ] 进入任何真实 manifest 读取任务前，必须先列出读取对象、读取方式、可摘录字段和禁止摘录字段。
+- [ ] Phase 9 前置检查仍保持 `selected_plugin=null`、`max_plugin_calls=0`、`execution_blocked=true`。
+- [ ] Phase 9 不新增真实插件名称、真实 manifest 原文或真实插件能力结论。
 
 ## 无执行闭环检查
 

@@ -39,8 +39,8 @@
 |---|---|
 | candidate_id | 占位 ID，例如 `candidate-plugin-001` |
 | plugin_display_name | 可脱敏名称；未授权前写 `待确认插件` |
-| manifest_review_status | `not_started` / `pending_manifest_review` / `rejected` / `approved_for_dry_run_only` |
-| capability_status | `待实测` / `pending_manifest_review` / `dry_run_checked` / `tested` / `rejected` |
+| manifest_review_status | `not_started` / `pending_manifest_review` / `manifest_reviewed_safe` / `rejected` |
+| capability_status | `待实测` / `pending_manifest_review` / `manifest_reviewed_safe` / `dry_run_checked` / `tested` / `rejected` |
 | task_type_fit_cn | 中文说明适合的任务类型；未实测时写 `待读取 manifest 后确认` |
 | input_mode_observed | `unknown` / `text` / `image` / `text_image` |
 | output_mode_observed | `unknown` / `image` / `plan` / `review` |
@@ -107,7 +107,8 @@ test_record:
 - [ ] 是否确认没有 API key、token、cookie、密码。
 - [ ] 是否确认没有私密路径。
 - [ ] 是否确认没有客户隐私。
-- [ ] 是否确认能力矩阵仍为 `待实测` 或 `pending_manifest_review`。
+- [ ] 是否确认能力矩阵仍为 `待实测`、`pending_manifest_review` 或 `manifest_reviewed_safe`。
+- [ ] 是否确认未完成 dry-run 验收前不得进入 `dry_run_checked` 或 `tested`。
 - [ ] 是否确认所有审计摘要为中文脱敏摘要。
 - [ ] 是否确认真实执行需要另开任务并再次授权。
 
@@ -118,6 +119,7 @@ test_record:
 ```text
 待实测
 → pending_manifest_review
+→ manifest_reviewed_safe
 → dry_run_checked
 → tested
 ```
@@ -127,6 +129,8 @@ test_record:
 ```text
 rejected
 ```
+
+`manifest_reviewed_safe` 只表示 manifest 脱敏审查通过、可准备 dry-run 评估，不表示 dry-run 已完成，也不表示允许真实执行。
 
 `tested` 只表示人工确认过测试结果，不自动表示允许真实执行。
 

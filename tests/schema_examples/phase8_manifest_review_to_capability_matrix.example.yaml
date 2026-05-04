@@ -50,19 +50,21 @@ phase8_manifest_review_to_capability_matrix:
     real_execution_allowed: false
     audit_summary_cn: "仅创建 manifest 审查准备记录，未读取真实 manifest。"
 
-  step_2_sanitized_manifest_review_pass_example:
+  step_2_manifest_reviewed_safe_template_only:
     review_id: manifest-review-phase8-002
     review_date: "2026-05-04"
     reviewer_role: human_reviewer
-    source_authorized: true
+    template_only: true
+    source_authorized: false
     source_read_performed: false
     manifest_review_status_before: pending_manifest_review
-    manifest_review_status_after: manifest_reviewed_safe
-    sanitized_summary_cn: "这是脱敏通过示例，不代表真实 manifest 已读取；真实审查必须另行授权后填写。"
+    manifest_review_status_after: pending_manifest_review
+    status_after_if_authorized_review_passes: manifest_reviewed_safe
+    sanitized_summary_cn: "这是 manifest_reviewed_safe 的模板字段示例；未读取真实 manifest，因此不得作为状态推进证据。"
     command_summary_cn: "示例仅说明命令摘要字段，不记录真实命令原文。"
     input_mode_observed: unknown
     output_mode_observed: unknown
-    permission_risk_cn: "未发现可记录风险；该句为占位示例，不是实测结论。"
+    permission_risk_cn: "未读取，未确认；该句为模板示例，不是实测结论。"
     sensitive_original_copied: false
     private_path_copied: false
     customer_private_data_copied: false
@@ -73,20 +75,20 @@ phase8_manifest_review_to_capability_matrix:
     daily_note_write_observed: false
     gatekeeper_required: true
     review_console_required: true
-    next_allowed_state: manifest_reviewed_safe
+    next_allowed_state: pending_manifest_review
     real_execution_allowed: false
-    audit_summary_cn: "脱敏审查通过示例仍不授权真实执行，也不代表真实插件能力。"
+    audit_summary_cn: "模板示例不改变真实状态；只有另行授权并完成脱敏审查后，才可记录 manifest_reviewed_safe。"
 
   step_3_rejected_manifest_review_example:
     review_id: manifest-review-phase8-003
     review_date: "2026-05-04"
     reviewer_role: human_reviewer
-    source_authorized: true
+    source_authorized: false
     source_read_performed: false
     manifest_review_status_before: pending_manifest_review
     manifest_review_status_after: rejected
-    sanitized_summary_cn: "拒绝示例：manifest 审查发现不可记录的敏感配置字段，仅保留脱敏拒绝原因。"
-    rejection_reason_cn: "本 manifest 含敏感配置字段，拒绝进入 dry-run 候选评估。"
+    sanitized_summary_cn: "拒绝示例：未获得读取真实 manifest 的单独授权，仅保留脱敏拒绝原因。"
+    rejection_reason_cn: "未获得单独授权，拒绝进入 dry-run 候选评估。"
     sensitive_original_copied: false
     private_path_copied: false
     customer_private_data_copied: false
@@ -147,8 +149,8 @@ phase8_manifest_review_to_capability_matrix:
   acceptance_assertions:
     - "未获得单独授权前，real_manifest_read 必须为 false。"
     - "manifest 审查记录不得复制敏感原文、私密路径、客户隐私或图片二进制。"
-    - "能力矩阵只能从 待实测 推进到 pending_manifest_review、manifest_reviewed_safe 或 rejected。"
+    - "能力矩阵只能从 待实测 推进到 pending_manifest_review；只有另行授权并完成脱敏审查后，才可推进到 manifest_reviewed_safe。"
     - "未完成 dry-run 验收前，不能进入 dry_run_checked 或 tested。"
-    - "manifest_reviewed_safe 不代表真实执行授权。"
+    - "manifest_reviewed_safe 不代表真实执行授权，也不能由模板示例自动产生。"
     - "dispatch_plan 仍保持 selected_plugin=null、max_plugin_calls=0、execution_blocked=true。"
     - "API、VCP 插件、DailyNote、文件写入和图片创建均未发生。"
