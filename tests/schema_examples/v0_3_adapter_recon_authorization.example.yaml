@@ -1,0 +1,152 @@
+v0_3_adapter_recon_authorization:
+  recon_request:
+    recon_request_id: v0-3-adapter-recon-authorization-001
+    requested_phase: "v0.3.0-adapter-recon"
+    candidate_id: candidate-plugin-placeholder-001
+    purpose_cn: "为未来单一候选 manifest 读取准备授权记录模板；本记录不读取真实 manifest。"
+    target_repository_ref: repository-ref-placeholder-not-read
+    target_manifest_ref: manifest-ref-placeholder-not-read
+    source_authorized: false
+    source_read_performed: false
+    real_manifest_read: false
+    next_allowed_state: pending_manifest_review
+    real_execution_allowed: false
+    audit_summary_cn: "仅创建 v0.3.0 Adapter recon 授权草案，未读取真实 VCPToolBox、VCPChat 或 manifest。"
+
+  target_scope_gate:
+    unique_candidate_required: true
+    candidate_id: candidate-plugin-placeholder-001
+    target_scope_cn: "未来若单独授权读取，只能限定到一个候选 manifest；本记录不读取任何真实源。"
+    source_authorized: false
+    source_read_performed: false
+    real_manifest_read: false
+    forbidden_scope_cn:
+      - "不得读取真实 VCPChat。"
+      - "不得扩展到整个 VCPToolBox 仓库。"
+      - "不得读取客户目录、私密路径或运行态数据目录。"
+      - "不得读取图片二进制、插件输出或运行日志。"
+
+  extract_policy:
+    allowed_extract_fields:
+      - "脱敏插件显示名摘要"
+      - "命令集合中文摘要"
+      - "输入输出模式中文摘要"
+      - "权限风险中文摘要"
+      - "Gatekeeper 需要复查的风险点"
+    allowed_extract_values_present: false
+    forbidden_extract_fields:
+      - "API key、token、cookie、密码"
+      - "私密路径"
+      - "客户隐私或客户未公开信息"
+      - "webhook、数据库地址或服务端点原文"
+      - "manifest 敏感配置原文"
+      - "图片二进制"
+      - "真实插件输出"
+      - "真实运行日志"
+    raw_manifest_copy_allowed: false
+    sanitized_chinese_summary_required: true
+
+  safety_gate:
+    contains_secret: false
+    contains_private_path: false
+    contains_customer_private_data: false
+    contains_image_binary: false
+    contains_raw_manifest: false
+    contains_real_plugin_name: false
+    contains_real_capability_claim: false
+    source_authorized: false
+    source_read_performed: false
+    real_manifest_read: false
+    selected_plugin: null
+    max_plugin_calls: 0
+    api_called: false
+    vcp_plugin_called: false
+    plugin_called: false
+    daily_note_called: false
+    vcp_memory_written: false
+    disk_write_performed: false
+    image_file_created: false
+    real_execution_allowed: false
+    safety_summary_cn: "本授权草案不含密钥、私密路径、客户隐私、图片二进制、真实 manifest 原文或真实插件能力结论。"
+
+  approval_chain:
+    human_reviewer_required: true
+    gatekeeper_required: true
+    review_console_required: true
+    archivist_required_for_memory: true
+    imagelab_master_required: true
+    approval_status: pending
+    approved_by: null
+    approved_at: null
+    approval_notes_cn: "尚未授权读取真实 manifest；任何读取动作必须另开独立授权点。"
+
+  state_rules:
+    current_state: pending_manifest_review
+    next_allowed_state: pending_manifest_review
+    forbidden_states_without_future_authorized_read:
+      - manifest_reviewed_safe
+      - dry_run_checked
+      - tested
+    rejection_state: rejected
+    rule_summary_cn: "v0.3.0-adapter-recon 只能准备授权草案，不能把候选推进到 manifest_reviewed_safe、dry_run_checked 或 tested。"
+
+  review_console_handoff:
+    required: true
+    display_only: true
+    allowed_actions:
+      - request_manifest_authorization
+      - request_gatekeeper_review
+      - reject_candidate
+      - request_memory_edit
+    forbidden_actions:
+      - read_manifest
+      - mark_manifest_reviewed_safe
+      - execute_plugin
+      - call_api
+      - write_daily_note
+      - save_image
+    handoff_summary_cn: "Review Console 只能展示 v0.3 recon 授权草案和人工意见，不能读取真实 manifest 或触发执行。"
+
+  memory_delta_draft:
+    delta_id: md-v0-3-adapter-recon-authorization-001
+    task_id: task-v0-3-adapter-recon-authorization-001
+    case_id: case-v0-3-adapter-recon-authorization-001
+    agent_name: Archivist_Agent
+    target_notebook: Rejected_Visual_Lessons
+    write_mode: draft
+    approval_required: true
+    approval_status: pending
+    approved_by: null
+    approved_at: null
+    chinese_diary_title: "v0.3 Adapter recon 授权草案"
+    chinese_diary_content: |
+      本记录说明 v0.3.0-adapter-recon 只准备未来单一候选 manifest 读取的授权草案。当前未读取真实 VCPToolBox、VCPChat 或 manifest，未选择真实插件，未调用插件、API、DailyNote，未写文件或创建图片。后续如需读取真实 manifest，必须另开独立授权点并先确认读取对象、读取方式、可摘录字段、禁止字段和审查链。
+    tags:
+      - v0.3
+      - AdapterRecon
+      - manifest授权
+      - no-execution
+    memory_safety:
+      contains_secret: false
+      contains_private_path: false
+      contains_customer_private_data: false
+      contains_image_binary: false
+      safety_notes_cn: "本草案为中文脱敏摘要，不含密钥、私密路径、客户隐私或图片二进制。"
+    final_decision:
+      should_write_to_vcp: false
+      should_show_in_review_console: true
+      rejection_reason_cn: null
+
+  acceptance_assertions:
+    - "source_authorized 必须为 false。"
+    - "source_read_performed 必须为 false。"
+    - "real_manifest_read 必须为 false。"
+    - "real_execution_allowed 必须为 false。"
+    - "selected_plugin 必须为 null。"
+    - "max_plugin_calls 必须为 0。"
+    - "api_called、vcp_plugin_called、daily_note_called 必须为 false。"
+    - "当前状态必须保持 pending_manifest_review。"
+    - "不得进入 manifest_reviewed_safe、dry_run_checked 或 tested。"
+    - "不得记录真实插件名、真实 manifest 原文、真实插件路径或真实能力结论。"
+    - "不得包含密钥、token、cookie、密码、私密路径、客户隐私、服务端点原文、图片二进制或真实插件输出。"
+    - "所有记忆正文和审计摘要必须为中文脱敏内容。"

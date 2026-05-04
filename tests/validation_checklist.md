@@ -329,6 +329,32 @@
 - [ ] Phase 15 不读取真实 VCPToolBox，不读取真实 VCPChat，不读取真实 manifest。
 - [ ] Phase 15 不调用 API、VCP 插件、DailyNote，不写文件，不创建图片。
 
+## v0.3.0-adapter-recon 检查
+
+- [ ] v0.3.0-adapter-recon 只补齐 Adapter recon 前置规划，不读取真实 VCPToolBox。
+- [ ] v0.3.0-adapter-recon 不读取真实 VCPChat。
+- [ ] v0.3.0-adapter-recon 不读取真实 manifest。
+- [ ] `integrations/vcp/adapter_recon_plan.md` 存在。
+- [ ] `tests/schema_examples/v0_3_adapter_recon_authorization.example.yaml` 存在。
+- [ ] recon 计划明确真实 manifest 读取必须作为后续独立授权点。
+- [ ] recon 计划明确唯一目标是为未来单一候选 manifest 读取做授权准备。
+- [ ] 授权样例包含 `recon_request`、`target_scope_gate`、`extract_policy`、`safety_gate`、`approval_chain`、`state_rules`、`review_console_handoff`、`memory_delta_draft` 和 `acceptance_assertions`。
+- [ ] 授权样例保持 `source_authorized=false`、`source_read_performed=false`、`real_manifest_read=false`。
+- [ ] 授权样例保持 `real_execution_allowed=false`、`selected_plugin=null`、`max_plugin_calls=0`。
+- [ ] 授权样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`。
+- [ ] 授权样例当前状态保持 `pending_manifest_review`。
+- [ ] 授权样例不得进入 `manifest_reviewed_safe`、`dry_run_checked` 或 `tested`。
+- [ ] 授权样例只写未来允许摘录的脱敏字段名，不写真实摘录值。
+- [ ] 允许摘录字段仅限脱敏显示名摘要、命令集合中文摘要、输入输出模式中文摘要、权限风险中文摘要和 Gatekeeper 复查点。
+- [ ] 禁止字段覆盖 API key、token、cookie、密码、私密路径、客户隐私、服务端点原文、manifest 敏感配置原文、图片二进制和真实插件输出。
+- [ ] 授权样例不包含真实插件名、真实 manifest 原文、真实插件路径或真实能力结论。
+- [ ] 授权样例不包含密钥、token、cookie、密码、私密路径、客户隐私或客户未公开信息。
+- [ ] Review Console handoff 只能 display-only，不能读取 manifest 或触发执行。
+- [ ] `memory_delta_draft.write_mode=draft` 且 `final_decision.should_write_to_vcp=false`。
+- [ ] 授权样例的记忆正文和审计摘要必须为中文脱敏内容。
+- [ ] v0.3.0-adapter-recon 不新增 `index.js`、`.exe`、`.ps1` 或其他真实执行入口。
+- [ ] v0.3.0-adapter-recon 不调用 API、VCP 插件、DailyNote，不写文件，不创建图片。
+
 ## 无执行闭环检查
 
 - [ ] `tests/schema_examples/task_envelope.example.yaml` 是 Photo Studio OS 无执行样例。
