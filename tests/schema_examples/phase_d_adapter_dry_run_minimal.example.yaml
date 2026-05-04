@@ -1,0 +1,118 @@
+phase_d_adapter_dry_run_minimal:
+  request:
+    command: dry_run
+    request_id: dry-run-request-phase-d-001
+    task_envelope:
+      task_id: task-phase-d-dry-run-001
+      task_type: photo_studio_os_review
+      mode: dry_run
+      user_request_cn: "为 Photo Studio OS 审片任务生成 dry-run 调度草案。"
+      prompt_package_ref: prompt-package-phase-d-placeholder-001
+      dry_run_controls:
+        max_plugin_calls: 0
+        allow_external_api: false
+        allow_file_write: false
+        allow_image_binary: false
+      approval_context:
+        gatekeeper_required: true
+        review_console_required: true
+        daily_note_direct_write_allowed: false
+      safety:
+        contains_secret: false
+        contains_private_path: false
+        contains_customer_private_data: false
+        contains_image_binary: false
+
+  accepted_response:
+    request_id: dry-run-request-phase-d-001
+    status: accepted_draft
+    dispatch_plan_draft:
+      dispatch_id: dispatch-phase-d-dry-run-001
+      task_id: task-phase-d-dry-run-001
+      mode: dry_run
+      selected_plugin: null
+      fallback_plugins: []
+      capability_matrix_status: pending_manifest_review
+      reason_cn: "仅生成 dry-run 调度草案；未读取真实 manifest，未选择真实插件。"
+      dry_run_required: true
+      approval_required: true
+      execution_blocked: true
+      external_api_allowed: false
+      gatekeeper_required: true
+      review_console_required: true
+      allow_file_write: false
+      allow_image_binary: false
+      max_plugin_calls: 0
+      expected_outputs: 0
+      max_outputs: 0
+
+    gatekeeper_handoff:
+      required: true
+      display_only: true
+      risk_level: medium
+      risk_summary_cn: "候选仍处于 pending_manifest_review；dry-run 草案不能执行。"
+      blocked_actions:
+        - execute
+        - call_plugin
+        - call_api
+        - write_daily_note
+        - write_image_file
+      approval_to_execute_allowed: false
+
+    review_console_handoff:
+      required: true
+      display_only: true
+      allowed_actions:
+        - mark_candidate
+        - reject_candidate
+        - request_manifest_authorization
+        - request_gatekeeper_review
+      forbidden_actions:
+        - execute_plugin
+        - call_api
+        - write_daily_note
+        - save_image
+
+    audit_record:
+      audit_summary_cn: "仅完成 Adapter dry-run 草案生成，未调用插件、API、DailyNote 或文件写入。"
+      contains_sensitive_original: false
+      max_plugin_calls_observed: 0
+      external_api_observed: false
+      file_write_observed: false
+      image_binary_observed: false
+
+  rejected_response_example:
+    request_id: dry-run-request-phase-d-rejected-001
+    status: rejected
+    rejection_reason_cn: "输入请求不满足 no-execution 不变量，已拒绝生成 dispatch 草案。"
+    execution_blocked: true
+    selected_plugin: null
+    max_plugin_calls: 0
+    api_called: false
+    vcp_plugin_called: false
+    daily_note_called: false
+    file_write_performed: false
+    image_file_created: false
+
+  no_execution_guard:
+    selected_plugin: null
+    max_plugin_calls: 0
+    external_api_allowed: false
+    execution_blocked: true
+    api_called: false
+    vcp_plugin_called: false
+    daily_note_called: false
+    file_write_performed: false
+    image_file_created: false
+    real_execution_allowed: false
+
+  acceptance_assertions:
+    - "command 必须为 dry_run。"
+    - "mode 必须为 dry_run。"
+    - "selected_plugin 必须为 null。"
+    - "max_plugin_calls 必须为 0。"
+    - "external_api_allowed 必须为 false。"
+    - "execution_blocked 必须为 true。"
+    - "Gatekeeper handoff 和 Review Console handoff 必须是 display-only。"
+    - "accepted_draft 不代表允许真实执行。"
+    - "不得调用插件、API、DailyNote，不得写文件或创建图片。"

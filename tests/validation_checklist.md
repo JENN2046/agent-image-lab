@@ -428,6 +428,15 @@
 - [ ] Phase C 授权样例保持 `selected_plugin=null`、`max_plugin_calls=0`、`api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`。
 - [ ] Phase C 只允许未来输出中文脱敏摘要，不允许保存 raw manifest 原文。
 
+## Phase D Adapter dry-run 最小契约检查
+
+- [ ] `integrations/vcp/phase_d_adapter_dry_run_minimal_contract.md` 存在。
+- [ ] `tests/schema_examples/phase_d_adapter_dry_run_minimal.example.yaml` 存在。
+- [ ] Phase D 契约明确唯一允许命令是 `dry_run`。
+- [ ] Phase D 样例保持 `selected_plugin=null`、`max_plugin_calls=0`、`external_api_allowed=false`、`execution_blocked=true`。
+- [ ] Phase D 样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`file_write_performed=false`、`image_file_created=false`。
+- [ ] 未在 `exports/vcptoolbox/Plugin/AgentImageLabAdapter/` 下创建 `index.js` 或其他真实执行入口。
+
 ## 无执行闭环检查
 
 - [ ] `tests/schema_examples/task_envelope.example.yaml` 是 Photo Studio OS 无执行样例。

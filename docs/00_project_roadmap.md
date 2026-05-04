@@ -114,6 +114,8 @@ v0.2.5 final baseline + v0.3.0 manifest authorization planning
 
 目标：实现一个只接受 dry-run 输入、只返回草案对象的最小 Adapter 骨架。
 
+Phase D 的实现边界以 `integrations/vcp/phase_d_adapter_dry_run_minimal_contract.md` 为准。未获得真实执行授权前，不得在 `exports/vcptoolbox/Plugin/AgentImageLabAdapter/` 中创建 `index.js` 或任何真实 VCP 插件执行入口。
+
 必须保持：
 
 ```yaml
