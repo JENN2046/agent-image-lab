@@ -237,6 +237,24 @@
 - [ ] Phase 10 样例的记忆正文和审计摘要必须为中文脱敏内容。
 - [ ] Phase 10 不调用 API、VCP 插件、DailyNote，不写文件，不创建图片。
 
+## Phase 11 manifest review record template 检查
+
+- [ ] Phase 11 只补齐 no-read manifest review record template，不读取真实 VCPToolBox。
+- [ ] Phase 11 不读取真实 VCPChat。
+- [ ] Phase 11 不读取真实 manifest。
+- [ ] `integrations/vcp/manifest_review_checklist.md` 包含 Phase 11 no-read manifest review record template。
+- [ ] `tests/schema_examples/phase11_manifest_review_record_template.example.yaml` 存在。
+- [ ] Phase 11 样例包含 `source_scope`、`sanitized_review_record`、`state_control`、`no_execution_guard`、`forbidden_raw_fields`、`review_console_handoff`、`memory_delta_draft` 和 `acceptance_assertions`。
+- [ ] Phase 11 样例只允许中文脱敏摘要字段：`plugin_display_name_summary_cn`、`command_summary_cn`、`input_output_summary_cn`、`permission_risk_cn`、`gatekeeper_notes_cn`、`sanitized_review_summary_cn`。
+- [ ] Phase 11 样例保持 `source_authorized=false`、`source_read_performed=false`、`real_execution_allowed=false`。
+- [ ] Phase 11 样例保持 `selected_plugin=null`、`max_plugin_calls=0`。
+- [ ] Phase 11 样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`。
+- [ ] Phase 11 样例不得把状态推进到 `manifest_reviewed_safe`、`dry_run_checked` 或 `tested`。
+- [ ] Phase 11 样例不得记录真实插件名、真实 manifest 原文、真实插件路径或真实能力结论。
+- [ ] Phase 11 样例不得包含 API key、token、cookie、密码、私密路径、客户隐私或客户未公开信息。
+- [ ] Phase 11 样例的记忆正文和审计摘要必须为中文脱敏内容。
+- [ ] Phase 11 不调用 API、VCP 插件、DailyNote，不写文件，不创建图片。
+
 ## 无执行闭环检查
 
 - [ ] `tests/schema_examples/task_envelope.example.yaml` 是 Photo Studio OS 无执行样例。

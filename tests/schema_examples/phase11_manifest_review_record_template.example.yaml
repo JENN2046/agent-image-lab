@@ -1,0 +1,141 @@
+phase11_manifest_review_record_template:
+  record_metadata:
+    record_id: phase11-manifest-review-record-template-001
+    phase: "Phase 11"
+    purpose_cn: "提供未来 manifest 审查记录的 no-read 脱敏模板；本样例不读取真实 manifest。"
+    status: draft_acceptance_fixture
+    candidate_id: candidate-plugin-placeholder-001
+    created_at: "2026-05-04T20:00:00+08:00"
+    owner_role: ImageLab_Master
+
+  source_scope:
+    candidate_id: candidate-plugin-placeholder-001
+    target_repository_ref: repository-ref-placeholder-not-read
+    target_manifest_ref: manifest-ref-placeholder-not-read
+    source_authorized: false
+    source_read_performed: false
+    real_manifest_read: false
+    target_scope_cn: "本模板只描述未来审查记录形状，不读取真实 VCPToolBox、VCPChat 或 manifest。"
+
+  sanitized_review_record:
+    review_id: manifest-review-template-phase11-001
+    reviewer_role: human_reviewer_placeholder
+    review_date: "YYYY-MM-DD"
+    plugin_display_name_summary_cn: "待确认插件；未读取真实 manifest，不能记录真实插件名。"
+    command_summary_cn: "未读取真实 manifest，命令集合只能保持未确认摘要。"
+    input_output_summary_cn: "未读取真实 manifest，输入输出模式保持 unknown。"
+    permission_risk_cn: "未读取真实 manifest，权限风险保持未确认；如未来发现外部调用、写文件或写 DailyNote 暗示，必须拒绝。"
+    gatekeeper_notes_cn: "Gatekeeper 需在未来独立授权读取后复查权限、敏感字段和执行边界。"
+    sanitized_review_summary_cn: "本记录为 no-read 模板，未读取真实 manifest，不保存原文，仅保留中文脱敏字段形状。"
+    sanitized_record_only: true
+    raw_manifest_copy_allowed: false
+    sensitive_original_copied: false
+    private_path_copied: false
+    customer_private_data_copied: false
+    image_binary_copied: false
+
+  state_control:
+    manifest_review_status_before: pending_manifest_review
+    manifest_review_status_after: pending_manifest_review
+    capability_status_before: pending_manifest_review
+    capability_status_after: pending_manifest_review
+    current_state: pending_manifest_review
+    next_allowed_state: pending_manifest_review
+    forbidden_states_without_future_read:
+      - manifest_reviewed_safe
+      - dry_run_checked
+      - tested
+    state_note_cn: "v0.2 不读取真实 manifest，因此本模板不能产生 manifest_reviewed_safe。"
+
+  no_execution_guard:
+    selected_plugin: null
+    max_plugin_calls: 0
+    source_authorized: false
+    source_read_performed: false
+    real_manifest_read: false
+    real_execution_allowed: false
+    api_called: false
+    vcp_plugin_called: false
+    plugin_called: false
+    daily_note_called: false
+    vcp_memory_written: false
+    disk_write_performed: false
+    file_write_observed: false
+    image_file_created: false
+    image_binary_included: false
+    vcp_toolbox_read: false
+    vcp_toolbox_modified: false
+    vcpchat_read: false
+    vcpchat_modified: false
+    audit_summary_cn: "Phase 11 仅提供 no-read 审查记录模板，未读取真实 manifest，未调用插件、API、DailyNote 或文件写入。"
+
+  forbidden_raw_fields:
+    real_plugin_name: null
+    real_plugin_path: null
+    raw_manifest_text: null
+    raw_command_payload: null
+    raw_permission_block: null
+    raw_config_block: null
+    raw_endpoint: null
+    raw_secret: null
+    raw_customer_data: null
+    raw_image_binary: null
+    note_cn: "以上字段必须保持空值或缺省，不能复制真实 manifest 原文或敏感内容。"
+
+  review_console_handoff:
+    required: true
+    display_only: true
+    allowed_actions:
+      - request_manifest_authorization
+      - request_gatekeeper_review
+      - reject_candidate
+      - request_memory_edit
+    forbidden_actions:
+      - mark_manifest_reviewed_safe
+      - execute_plugin
+      - call_api
+      - write_daily_note
+      - save_image
+    handoff_summary_cn: "Review Console 只能展示 no-read 审查记录模板和人工意见，不能触发真实读取或执行。"
+
+  memory_delta_draft:
+    delta_id: md-phase11-manifest-review-record-template-001
+    task_id: task-phase11-manifest-review-record-template-001
+    case_id: case-phase11-manifest-review-record-template-001
+    agent_name: Archivist_Agent
+    target_notebook: Rejected_Visual_Lessons
+    write_mode: draft
+    approval_required: true
+    approval_status: pending
+    approved_by: null
+    approved_at: null
+    chinese_diary_title: "Phase 11 no-read manifest 审查记录模板"
+    chinese_diary_content: |
+      本记录说明 Phase 11 只补齐未来 manifest 审查记录的 no-read 脱敏模板。当前未读取真实 VCPToolBox、VCPChat 或 manifest，未选择真实插件，未调用插件、API、DailyNote 或文件写入。模板中的插件显示名、命令集合、输入输出模式和权限风险都只能保持中文脱敏摘要或未确认状态。
+    tags:
+      - Phase11
+      - manifest审查
+      - no-read
+      - no-execution
+    memory_safety:
+      contains_secret: false
+      contains_private_path: false
+      contains_customer_private_data: false
+      contains_image_binary: false
+      safety_notes_cn: "本草案为中文脱敏摘要，不含密钥、私密路径、客户隐私或图片二进制。"
+    final_decision:
+      should_write_to_vcp: false
+      should_show_in_review_console: true
+      rejection_reason_cn: null
+
+  acceptance_assertions:
+    - "source_authorized 必须为 false。"
+    - "source_read_performed 必须为 false。"
+    - "real_execution_allowed 必须为 false。"
+    - "selected_plugin 必须为 null。"
+    - "max_plugin_calls 必须为 0。"
+    - "api_called、vcp_plugin_called、daily_note_called 必须为 false。"
+    - "当前状态必须保持 pending_manifest_review。"
+    - "不得进入 manifest_reviewed_safe、dry_run_checked 或 tested。"
+    - "只能填写中文脱敏摘要字段，不能保存真实 manifest 原文。"
+    - "所有记忆正文和审计摘要必须为中文脱敏内容。"

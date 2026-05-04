@@ -72,6 +72,44 @@ real_execution_allowed: false
 
 这些默认值只能由未来独立授权任务改变。本文件和 Phase 10 样例本身不构成授权。
 
+## Phase 11 no-read manifest review record template
+
+Phase 11 提供未来 manifest 审查记录的 no-read 模板。该模板仍不读取真实 VCPToolBox，不读取真实 VCPChat，不读取真实 manifest，不调用插件，不调用 API，不写 DailyNote，不创建图片。
+
+Phase 11 记录只能作为“未来审查记录形状”，不得作为真实 manifest 审查结果。当前状态必须停留在 `pending_manifest_review`，不得推进到 `manifest_reviewed_safe`、`dry_run_checked` 或 `tested`。
+
+允许填写的审查摘要字段仅限：
+
+- `plugin_display_name_summary_cn`：脱敏插件显示名摘要。
+- `command_summary_cn`：命令集合中文摘要。
+- `input_output_summary_cn`：输入输出模式中文摘要。
+- `permission_risk_cn`：权限风险中文摘要。
+- `gatekeeper_notes_cn`：Gatekeeper 复查要点。
+- `sanitized_review_summary_cn`：整体中文脱敏审查摘要。
+
+禁止填写：
+
+- 真实插件名、真实路径或真实 manifest 原文。
+- manifest 敏感配置原文。
+- API key、token、cookie、密码。
+- webhook、数据库地址或服务端点原文。
+- 客户隐私或客户未公开信息。
+- 图片二进制、真实插件输出或运行日志。
+
+Phase 11 模板默认必须保持：
+
+```yaml
+source_authorized: false
+source_read_performed: false
+current_state: pending_manifest_review
+next_allowed_state: pending_manifest_review
+selected_plugin: null
+max_plugin_calls: 0
+real_execution_allowed: false
+sanitized_record_only: true
+raw_manifest_copy_allowed: false
+```
+
 ## 审查目标
 
 manifest 审查只回答以下问题：
