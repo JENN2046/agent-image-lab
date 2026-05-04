@@ -12,7 +12,7 @@
 - 生成 case_summary。
 - 不调用真实插件。
 
-## MVP-B：最小真实执行闭环
+## MVP-B readiness：Adapter dry-run 准备态
 
 必须完成：
 
@@ -20,12 +20,14 @@
 - Review Console 可打开 review_session。
 - 可人工评分。
 - 可批准 / 拒绝 memory_delta。
-- 只接一个真实插件。
+- 写清未来单插件接入前置条件，但不读取真实 manifest，不选择真实插件。
 - 可回滚 dry-run。
 
 ## Phase 4：MVP-B dry-run integration planning
 
 Phase 4 不是 MVP-B 真实执行实现，只规划进入 MVP-B 前的 dry-run integration 条件。
+
+v0.2 final baseline 只到 MVP-B readiness / Adapter dry-run planning。真实插件接入、真实 manifest 读取和真实执行闭环均移至 v0.3 或独立明确授权任务。
 
 必须完成：
 
