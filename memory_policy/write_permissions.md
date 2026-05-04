@@ -15,6 +15,16 @@ memory_delta
 
 任何子 Agent 都不能直接写入 VCP 长期记忆。任何子 Agent 只能生成 `memory_delta`、审计草案或写入申请。
 
+## Phase 15 DailyNote / VCP 记忆交接边界
+
+MVP 阶段的 `memory_delta` 只能表达写入申请、审批状态和后续交接意图，不能作为 DailyNote 或 VCP 长期记忆已经写入的证明。
+
+- `final_decision.should_write_to_vcp=true` 只表示写入请求已被批准，可进入未来受控写入流程。
+- `write_mode: confirmed` 只表示 `memory_delta` 已满足审批不变量，不表示已经调用 DailyNote。
+- DailyNote / VCP 长期记忆的真实写入必须由未来独立授权流程执行，并产生单独的执行审计记录。
+- 在 v0.2 no-execution baseline 中，即使写入请求已批准，也必须保持 `daily_note_called=false`、`vcp_memory_written=false`、`actual_write_performed=false`。
+- 如果候选内容涉及密钥、token、cookie、密码、私密路径、客户隐私、客户未公开信息或真实 manifest 敏感原文，必须拒绝写入长期记忆，只能保留中文脱敏拒绝摘要和安全标记。
+
 ## 权限矩阵
 
 | Agent | 可直接生成草案 | 可直接记录审计草案 | 可提交写入申请 | 必须审核 | 禁止写入 / 禁止申请 |

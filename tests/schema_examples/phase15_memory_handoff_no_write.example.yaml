@@ -1,0 +1,217 @@
+phase15_memory_handoff_no_write:
+  handoff_metadata:
+    handoff_fixture_id: phase15-memory-handoff-no-write-001
+    phase: "Phase 15"
+    purpose_cn: "验证已批准记忆写入请求仍然不是 DailyNote 或 VCP 长期记忆的实际写入；同时验证敏感 manifest 内容必须拒绝沉淀。"
+    status: draft_acceptance_fixture
+    candidate_id: candidate-plugin-placeholder-001
+    created_at: "2026-05-05T00:00:00+08:00"
+    owner_role: ImageLab_Master
+
+  no_execution_guard:
+    selected_plugin: null
+    max_plugin_calls: 0
+    source_authorized: false
+    source_read_performed: false
+    real_manifest_read: false
+    real_execution_allowed: false
+    external_api_allowed: false
+    execution_blocked: true
+    api_called: false
+    vcp_plugin_called: false
+    plugin_called: false
+    daily_note_called: false
+    vcp_memory_written: false
+    actual_write_performed: false
+    daily_note_write_proof_present: false
+    disk_write_performed: false
+    image_file_created: false
+    image_binary_included: false
+    vcp_toolbox_read: false
+    vcp_toolbox_modified: false
+    vcpchat_read: false
+    vcpchat_modified: false
+    audit_summary_cn: "Phase 15 只验证记忆交接记录，不调用 DailyNote、VCP 记忆、插件、API 或文件写入。"
+
+  handoff_rules:
+    approved_request_is_not_execution:
+      rule_cn: "final_decision.should_write_to_vcp=true 只表示写入请求已获批准，不是 DailyNote 已写入的证据。"
+      required_execution_evidence_for_future_write:
+        - daily_note_call_audit_id
+        - vcp_memory_write_receipt
+        - executed_by
+        - executed_at
+        - sanitized_execution_summary_cn
+      current_fixture_has_execution_evidence: false
+    sensitive_content_rejection:
+      rule_cn: "涉及敏感 manifest 内容、密钥、私密路径或客户隐私时，不复制原文，只保留中文脱敏拒绝摘要。"
+      raw_sensitive_text_copied: false
+      preserved_original_allowed: false
+      tag_sensitive_original_allowed: false
+      rejection_reason_raw_secret_allowed: false
+
+  approved_memory_request_no_write:
+    review_console_handoff:
+      handoff_id: handoff-phase15-approved-request-001
+      source_session_id: session-phase14-review-console-approval-001
+      source_case_id: case-phase14-review-console-approval-001
+      memory_approval:
+        status: approved
+        approved_by: human_reviewer_placeholder
+        approved_at: "2026-05-05T00:05:00+08:00"
+        note_cn: "人工批准该中文记忆写入请求进入未来受控写入流程，但当前未执行 DailyNote 写入。"
+      daily_note_handoff:
+        requested: true
+        execution_allowed_in_v0_2: false
+        daily_note_called: false
+        vcp_memory_written: false
+        actual_write_performed: false
+        handoff_status: approved_request_waiting_future_executor
+        handoff_summary_cn: "这是写入申请交接记录，不是 DailyNote 写入回执。"
+    memory_delta:
+      delta_id: md-phase15-approved-request-no-write-001
+      task_id: task-phase15-memory-handoff-001
+      case_id: case-phase15-memory-handoff-001
+      created_at: "2026-05-05T00:05:00+08:00"
+      agent_name: Archivist_Agent
+      agent_role: 案例归档与中文记忆草案
+      project: Agent Image Lab
+      memory_type: approved_write_request_boundary
+      target_notebook: Rejected_Visual_Lessons
+      write_mode: confirmed
+      importance: medium
+      approval_required: true
+      approval_status: approved
+      approved_by: human_reviewer_placeholder
+      approved_at: "2026-05-05T00:05:00+08:00"
+      source:
+        source_type: review_console_memory_approval
+        source_ids:
+          - session-phase14-review-console-approval-001
+          - handoff-phase15-approved-request-001
+      chinese_diary_title: "Phase 15 已批准写入请求但未执行"
+      chinese_diary_content: |
+        本记录说明：人工已批准一条中文记忆写入请求进入未来受控流程，但 v0.2 当前没有调用 DailyNote，也没有写入 VCP 长期记忆。final_decision.should_write_to_vcp=true 只表示写入请求被批准，不是执行完成证明。
+      preserved_original:
+        prompt_en: null
+        plugin_name: null
+        model_name: null
+        file_ref: null
+      tags:
+        - Phase15
+        - 记忆交接
+        - 已批准请求
+        - 未执行写入
+        - no-execution
+      visibility: audit
+      memory_safety:
+        contains_secret: false
+        contains_private_path: false
+        contains_customer_private_data: false
+        contains_image_binary: false
+        safety_notes_cn: "中文脱敏写入申请，不含密钥、私密路径、客户隐私或图片二进制。"
+      promotion:
+        sync_to_git_candidate: false
+        promoted_to_git: false
+        git_target_file: null
+        promotion_reason_cn: null
+      final_decision:
+        should_write_to_vcp: true
+        should_show_in_review_console: true
+        rejection_reason_cn: null
+    execution_audit_stub:
+      audit_id: audit-phase15-approved-request-no-write-001
+      audit_type: no_write_handoff
+      daily_note_called: false
+      vcp_memory_written: false
+      actual_write_performed: false
+      audit_summary_cn: "已批准写入请求仅停留在交接草案层，没有 DailyNote 调用或 VCP 长期记忆写入。"
+
+  sensitive_manifest_rejection:
+    safety_gate:
+      gate_id: safety-phase15-sensitive-manifest-rejection-001
+      source_type: hypothetical_manifest_review_summary
+      real_manifest_read: false
+      raw_manifest_text_copied: false
+      sanitized_summary_cn: "候选内容被标记为可能涉及敏感字段，原文未复制，真实 manifest 未读取。"
+      contains_secret: true
+      contains_private_path: true
+      contains_customer_private_data: true
+      contains_image_binary: false
+      rejection_required: true
+      allowed_record_cn: "仅允许记录中文脱敏拒绝摘要和安全标记。"
+      forbidden_record_fields:
+        - raw_api_key
+        - raw_token
+        - raw_cookie
+        - raw_password
+        - raw_private_path
+        - raw_customer_private_data
+        - raw_manifest_text
+    memory_delta:
+      delta_id: md-phase15-sensitive-manifest-rejection-001
+      task_id: task-phase15-memory-handoff-001
+      case_id: case-phase15-sensitive-manifest-rejection-001
+      created_at: "2026-05-05T00:10:00+08:00"
+      agent_name: Gatekeeper_Agent
+      agent_role: 安全与敏感信息审计
+      project: Agent Image Lab
+      memory_type: sensitive_manifest_rejection
+      target_notebook: Execution_Audit_Log
+      write_mode: forbidden
+      importance: high
+      approval_required: true
+      approval_status: rejected
+      approved_by: null
+      approved_at: null
+      source:
+        source_type: safety_gate_rejection
+        source_ids:
+          - safety-phase15-sensitive-manifest-rejection-001
+      chinese_diary_title: "Phase 15 敏感 manifest 内容拒绝写入"
+      chinese_diary_content: |
+        本记录仅保留中文脱敏拒绝摘要：候选内容被标记为可能涉及敏感凭据、私密路径或客户隐私，因此不得写入长期记忆，不得复制原文，不得调用 DailyNote。
+      preserved_original:
+        prompt_en: null
+        plugin_name: null
+        model_name: null
+        file_ref: null
+      tags:
+        - Phase15
+        - 敏感信息
+        - 拒绝写入
+        - 安全审计
+        - no-execution
+      visibility: audit
+      memory_safety:
+        contains_secret: true
+        contains_private_path: true
+        contains_customer_private_data: true
+        contains_image_binary: false
+        safety_notes_cn: "仅记录安全标记和中文脱敏摘要，不复制敏感原文、私密路径、客户隐私或真实 manifest 内容。"
+      promotion:
+        sync_to_git_candidate: false
+        promoted_to_git: false
+        git_target_file: null
+        promotion_reason_cn: null
+      final_decision:
+        should_write_to_vcp: false
+        should_show_in_review_console: true
+        rejection_reason_cn: "本条记忆因被标记为可能包含敏感凭据、私密路径或客户隐私，被拒绝写入长期记忆。"
+    execution_audit_stub:
+      audit_id: audit-phase15-sensitive-rejection-001
+      audit_type: forbidden_memory_rejection
+      daily_note_called: false
+      vcp_memory_written: false
+      actual_write_performed: false
+      sensitive_original_copied: false
+      audit_summary_cn: "敏感内容拒绝路径只保留中文脱敏摘要，没有 DailyNote 调用或 VCP 长期记忆写入。"
+
+  acceptance_assertions:
+    - "final_decision.should_write_to_vcp=true 只表示写入请求获批，不表示 DailyNote 已写入。"
+    - "已批准写入请求仍必须保持 daily_note_called=false、vcp_memory_written=false、actual_write_performed=false。"
+    - "confirmed memory_delta 必须满足 approval_status=approved、approved_by、approved_at 和 should_write_to_vcp=true。"
+    - "敏感 manifest 内容拒绝路径必须使用 write_mode=forbidden、approval_status=rejected、should_write_to_vcp=false。"
+    - "敏感原文不得进入 memory_delta、preserved_original、tags、审计日志、拒绝原因或 DailyNote 中文正文。"
+    - "所有记忆正文、拒绝原因和审计摘要必须为中文脱敏内容。"
+    - "Phase 15 不读取真实 manifest，不读取 VCPToolBox 或 VCPChat，不调用插件、API、DailyNote，不写文件，不创建图片。"

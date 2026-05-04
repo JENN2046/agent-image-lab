@@ -311,6 +311,24 @@
 - [ ] Phase 14 样例的记忆正文和审计摘要必须为中文脱敏内容。
 - [ ] Phase 14 不调用 API、VCP 插件、DailyNote，不写文件，不创建图片。
 
+## Phase 15 Memory / DailyNote handoff closure 检查
+
+- [ ] Phase 15 只补齐 Memory / DailyNote no-write handoff 样例与边界说明，不实现写入逻辑。
+- [ ] `memory_policy/write_permissions.md` 明确 `final_decision.should_write_to_vcp=true` 只表示写入请求获批，不是执行证明。
+- [ ] `memory_policy/write_permissions.md` 明确 v0.2 保持 `daily_note_called=false`、`vcp_memory_written=false`、`actual_write_performed=false`。
+- [ ] `tests/schema_examples/phase15_memory_handoff_no_write.example.yaml` 存在。
+- [ ] Phase 15 样例包含 `approved_memory_request_no_write` 和 `sensitive_manifest_rejection`。
+- [ ] 已批准写入请求样例允许 `write_mode=confirmed`、`approval_status=approved`、`approved_by`、`approved_at` 和 `final_decision.should_write_to_vcp=true`，但必须同时保持未执行写入。
+- [ ] 已批准写入请求样例保持 `daily_note_called=false`、`vcp_memory_written=false`、`actual_write_performed=false`。
+- [ ] 敏感 manifest 拒绝样例使用 `write_mode=forbidden`、`approval_status=rejected`、`final_decision.should_write_to_vcp=false`。
+- [ ] 敏感 manifest 拒绝样例不得复制真实 manifest 原文、密钥、token、cookie、密码、私密路径、客户隐私或客户未公开信息。
+- [ ] 敏感原文不得进入 `memory_delta`、`preserved_original`、`tags`、审计日志、拒绝原因或 DailyNote 中文正文。
+- [ ] Phase 15 样例保持 `selected_plugin=null`、`max_plugin_calls=0`、`source_authorized=false`、`source_read_performed=false`。
+- [ ] Phase 15 样例保持 `real_manifest_read=false`、`real_execution_allowed=false`、`api_called=false`、`vcp_plugin_called=false`。
+- [ ] Phase 15 样例的记忆正文、拒绝原因和审计摘要必须为中文脱敏内容。
+- [ ] Phase 15 不读取真实 VCPToolBox，不读取真实 VCPChat，不读取真实 manifest。
+- [ ] Phase 15 不调用 API、VCP 插件、DailyNote，不写文件，不创建图片。
+
 ## 无执行闭环检查
 
 - [ ] `tests/schema_examples/task_envelope.example.yaml` 是 Photo Studio OS 无执行样例。
