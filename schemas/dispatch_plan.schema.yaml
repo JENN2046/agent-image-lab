@@ -12,11 +12,33 @@ dispatch_plan:
   input_mode: text | image | text_image | none # 输入模式
   output_mode: image | plan | review | none # 输出模式
   parameters: map                 # 参数占位，不写真实执行参数
-  dry_run_required: boolean       # 是否必须 dry-run
-  approval_required: boolean      # 是否需要人工审批
+  dry_run_required: true          # MVP 阶段必须 dry-run
+  approval_required: true         # MVP 阶段必须人工审批
   risk_level: low | medium | high | critical # 风险等级
   expected_outputs: integer       # 预期输出数量
   max_outputs: integer            # 最大输出数量
-  overwrite_allowed: boolean      # 是否允许覆盖文件
-  external_api_allowed: boolean   # 是否允许外部 API，MVP-A 必须 false
-  execution_blocked: boolean      # 是否阻止真实执行，MVP-A 必须 true
+  overwrite_allowed: false        # MVP 阶段不允许覆盖文件
+  external_api_allowed: false     # MVP 阶段不允许外部 API
+  execution_blocked: true         # MVP 阶段必须阻止真实执行
+  gatekeeper_required: true       # MVP 阶段必须经过 Gatekeeper 审查
+  allow_file_write: false         # MVP 阶段不允许写文件
+  allow_image_binary: false       # MVP 阶段不允许写图片二进制
+  max_plugin_calls: 0             # MVP 阶段真实插件调用次数必须为 0
+  forbidden_actions:
+    - execute                     # 禁止真实执行
+    - generate                    # 禁止真实生成
+    - run                         # 禁止运行执行链
+    - call_plugin                 # 禁止调用插件
+    - write_memory                # 禁止直接写记忆
+    - write_image_file            # 禁止写图片文件
+  invariants:
+    - MVP 阶段 dispatch_plan 只能用于 dry-run 和人工审批展示。
+    - 不允许真实执行插件，不允许外部 API，不允许写文件，不允许写图片。
+    - dry_run_required 必须为 true。
+    - execution_blocked 必须为 true。
+    - external_api_allowed 必须为 false。
+    - approval_required 必须为 true。
+    - gatekeeper_required 必须为 true。
+    - allow_file_write 必须为 false。
+    - allow_image_binary 必须为 false。
+    - max_plugin_calls 必须为 0。

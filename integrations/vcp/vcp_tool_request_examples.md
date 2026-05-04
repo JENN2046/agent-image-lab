@@ -26,6 +26,18 @@ dry_run_controls:
   allow_external_api: false
   allow_file_write: false
   allow_image_binary: false
+  expected_command: dry_run
+  execution_mode_allowed: false
+approval_context:
+  gatekeeper_required: true
+  review_console_required: true
+  human_approval_required_before_execution: true
+  daily_note_direct_write_allowed: false
+safety:
+  contains_secret: false
+  contains_private_path: false
+  contains_customer_private_data: false
+  contains_image_binary: false
 ```
 
 ## dry-run 返回示例
@@ -48,6 +60,38 @@ external_api_allowed: false
 execution_blocked: true
 gatekeeper_required: true
 review_console_required: true
+allow_file_write: false
+allow_image_binary: false
+max_plugin_calls: 0
+preflight_result:
+  status: pass
+  checked_mode: dry_run
+  checked_max_plugin_calls: 0
+  checked_external_api_allowed: false
+  checked_file_write_allowed: false
+  checked_image_binary_allowed: false
+  rejection_reason_cn: null
+gatekeeper_handoff:
+  required: true
+  risk_summary_cn: "本次仅为 dry-run 草案，真实执行被阻止。"
+  blocked_actions:
+    - execute
+    - generate
+    - run
+    - call_plugin
+    - write_memory
+    - write_image_file
+review_console_handoff:
+  required: true
+  purpose_cn: "展示 dry-run 风险结论和人工审批入口。"
+rollback_plan:
+  dry_run_reversible: true
+  rollback_action_cn: "丢弃当前 dispatch_plan 草案，回到上一份草案。"
+  external_rollback_required: false
+audit_record:
+  audit_id: audit-photo-studio-os-001
+  audit_summary_cn: "仅生成 dry-run 调度草案，未调用插件、API、DailyNote 或文件写入。"
+  contains_sensitive_original: false
 ```
 
 ## 示例边界
@@ -60,6 +104,8 @@ review_console_required: true
 - 不包含客户隐私。
 - 不会创建真实图片文件。
 - 不会写入 VCP 记忆。
+- Review Console 只能审批草案，不触发真实执行。
+- Gatekeeper 只接收 dry-run 风险摘要，不接收敏感原文。
 
 ## 禁止示例
 
@@ -76,3 +122,15 @@ write_memory
 ## 未来执行前提
 
 真实执行必须另开任务，并经过 Gatekeeper dry-run、Review Console 审批、插件 manifest 人工复查、回滚方案确认和执行审计。MVP-A 阶段 `external_api_allowed=false` 且 `execution_blocked=true`。
+
+## Phase 4 no-execution 验收
+
+- 请求中 `mode=dry_run`。
+- 请求中 `dry_run_controls.max_plugin_calls=0`。
+- 返回中 `selected_plugin=null`。
+- 返回中 `execution_blocked=true`。
+- 返回中 `external_api_allowed=false`。
+- 返回中 `allow_file_write=false`。
+- 返回中 `allow_image_binary=false`。
+- 返回中 `rollback_plan.external_rollback_required=false`。
+- 返回中 `audit_record.contains_sensitive_original=false`。

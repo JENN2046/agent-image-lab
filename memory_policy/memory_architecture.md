@@ -36,8 +36,17 @@ TopicMemo 用于完整话题回看，适合复盘长项目，不适合日常轻�
 
 ```text
 子 Agent 输出 memory_delta 草案
-→ Memory Router / Archivist_Agent 初筛
+→ Archivist_Agent / Gatekeeper_Agent 初筛
 → Review Console 中文预览
 → ImageLab_Master / 人工审批
 → DailyNote 写入或拒绝
 ```
+
+## Memory Router 状态
+
+MVP 阶段不单独实现 Memory Router。记忆初筛由 Archivist_Agent 与 Gatekeeper_Agent 共同承担：
+
+- Archivist_Agent 负责内容归档、案例摘要、风格记忆候选和中文 DailyNote 草案初筛。
+- Gatekeeper_Agent 负责安全、敏感信息、执行风险和审计记录初筛。
+
+未来阶段可以将这些职责抽象为 Memory Router，但它不是 MVP 正式模块。

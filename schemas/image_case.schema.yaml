@@ -14,7 +14,12 @@ image_case:
   review_ids:
     - string                      # 关联评审 ID
   final_score: number | null      # 最终分数，人工评分优先
-  asset_status: accepted | candidate | rejected | none # 资产状态
+  asset_status: accepted | candidate | rejected | draft # 资产状态
+  human_approval:
+    approved: boolean             # 是否人工批准
+    approved_by: string | null    # 人工批准人，accepted 时必填
+    approved_at: string | null    # 人工批准时间，accepted 时必填
+    approval_notes_cn: string | null # 中文批准备注
   strengths_cn:
     - string                      # 中文优点总结
   weaknesses_cn:
@@ -24,3 +29,10 @@ image_case:
   memory_entries:
     - string                      # 关联 memory_delta 或 VCP 记忆引用
   git_promotion_candidate: boolean # 是否建议升级为 Git 规则候选
+  invariants:
+    - asset_status 为 accepted 时，human_approval.approved 必须为 true。
+    - asset_status 为 accepted 时，human_approval.approved_by 必须存在。
+    - asset_status 为 accepted 时，human_approval.approved_at 必须存在。
+    - asset_status 为 accepted 时，不能仅由 AI review 决定。
+    - AI 的 archive_recommendation 只是建议，不能替代人工批准。
+    - 未人工批准时，asset_status 只能是 candidate、rejected 或 draft。

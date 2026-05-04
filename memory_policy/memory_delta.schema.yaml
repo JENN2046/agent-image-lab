@@ -45,3 +45,53 @@ memory_delta:
     should_write_to_vcp: boolean  # 是否建议写入 VCP 记忆
     should_show_in_review_console: boolean # 是否展示给审片台
     rejection_reason_cn: string | null # 中文拒绝原因
+
+# invariants / validation notes
+# 这些不变量用于人工审查和未来验证器设计，MVP 阶段不实现复杂验证器。
+invariants:
+  confirmed_mode:
+    when: "write_mode == confirmed"
+    must:
+      approval_status: approved   # confirmed 必须已审批
+      approved_by: required       # 必须有审批人
+      approved_at: required       # 必须有审批时间
+      final_decision.should_write_to_vcp: true # 必须允许写入 VCP
+    forbidden:
+      approval_status:
+        - not_required            # confirmed 不允许免审批
+        - pending
+        - rejected
+  draft_mode:
+    when: "write_mode == draft"
+    may:
+      approval_status:
+        - pending
+        - not_required
+    default:
+      final_decision.should_write_to_vcp: false # 草案默认不写入 VCP
+  audit_only_mode:
+    when: "write_mode == audit_only"
+    must:
+      final_decision.should_write_to_vcp: false # 只进审计，不进长期经验记忆
+    note_cn: "audit_only 只能进入审计记录，不得进入长期经验记忆。"
+  forbidden_mode:
+    when: "write_mode == forbidden"
+    must:
+      approval_status: rejected   # 禁止写入必须视为拒绝
+      final_decision.should_write_to_vcp: false
+      final_decision.rejection_reason_cn: required # 必须有中文拒绝原因
+  approval_status_not_required:
+    allowed_only_when:
+      - "write_mode == audit_only"
+      - "write_mode == draft 且风险低、无敏感信息、无核心规则"
+    forbidden_when:
+      - "write_mode == confirmed"
+  sensitive_content:
+    if_any_true:
+      - memory_safety.contains_secret
+      - memory_safety.contains_private_path
+      - memory_safety.contains_customer_private_data
+      - memory_safety.contains_image_binary
+    must:
+      final_decision.should_write_to_vcp: false
+    note_cn: "敏感原文不得进入 memory_delta、preserved_original、Tag、审计日志、拒绝原因或 DailyNote 正文。"

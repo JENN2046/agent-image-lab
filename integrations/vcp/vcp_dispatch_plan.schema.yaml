@@ -20,10 +20,63 @@ vcp_dispatch_plan:
   external_api_allowed: false     # 是否允许外部 API，必须为 false
   execution_blocked: true         # 是否阻止真实执行，必须为 true
   gatekeeper_required: true       # 是否需要 Gatekeeper，必须为 true
+  allow_file_write: false         # 不允许写文件，必须为 false
+  allow_image_binary: false       # 不允许写图片二进制，必须为 false
+  max_plugin_calls: 0             # 真实插件调用次数必须为 0
   review_console_required: true   # 是否需要 Review Console，必须为 true
+  preflight_result:
+    status: pass | rejected | needs_review # preflight 结果
+    checked_mode: dry_run        # 已检查模式，必须为 dry_run
+    checked_max_plugin_calls: 0  # 已检查插件调用上限，必须为 0
+    checked_external_api_allowed: false # 已检查外部 API，必须为 false
+    checked_file_write_allowed: false # 已检查写文件，必须为 false
+    checked_image_binary_allowed: false # 已检查图片二进制，必须为 false
+    rejection_reason_cn: string | null # 中文脱敏拒绝原因
+  gatekeeper_handoff:
+    required: true               # 必须交给 Gatekeeper
+    risk_summary_cn: string      # 中文风险摘要
+    blocked_actions:
+      - string                   # 被阻止动作
+  review_console_handoff:
+    required: true               # 必须进入 Review Console
+    purpose_cn: string           # 中文展示目的
+    allowed_actions:
+      - mark_candidate           # 标记候选
+      - reject_archive           # 拒绝入库
+      - request_iteration        # 要求迭代
+      - approve_memory_write     # 仅批准记忆写入申请草案
+      - reject_memory_write      # 拒绝记忆写入申请草案
+      - request_memory_edit      # 要求修改记忆正文
+  rollback_plan:
+    dry_run_reversible: true     # dry-run 草案可丢弃
+    rollback_action_cn: string   # 中文回滚说明
+    external_rollback_required: false # 不需要撤销外部动作
+  audit_record:
+    audit_id: string             # 审计记录 ID，占位
+    audit_summary_cn: string     # 中文脱敏审计摘要
+    contains_sensitive_original: false # 不包含敏感原文
   audit_notes_cn: string          # 中文审计说明
   forbidden_actions:
     - execute                     # 禁止真实执行
+    - generate                    # 禁止真实生成
+    - run                         # 禁止运行执行链
     - call_plugin                 # 禁止调用插件
     - write_memory                # 禁止直接写记忆
     - write_image_file            # 禁止写图片文件
+  invariants:
+    - VCP Adapter MVP 只能返回 dry-run dispatch plan。
+    - 不允许 execution mode。
+    - 不允许真实执行插件，不允许外部 API，不允许写文件，不允许写图片。
+    - dry_run_required 必须为 true。
+    - execution_blocked 必须为 true。
+    - external_api_allowed 必须为 false。
+    - approval_required 必须为 true。
+    - gatekeeper_required 必须为 true。
+    - allow_file_write 必须为 false。
+    - allow_image_binary 必须为 false。
+    - max_plugin_calls 必须为 0。
+    - preflight_result.checked_max_plugin_calls 必须为 0。
+    - gatekeeper_handoff.required 必须为 true。
+    - review_console_handoff.required 必须为 true。
+    - rollback_plan.external_rollback_required 必须为 false。
+    - audit_record.contains_sensitive_original 必须为 false。

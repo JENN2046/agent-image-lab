@@ -12,6 +12,7 @@
 - 允许批准、拒绝或要求修改记忆写入。
 - 输出更新后的 `review_session`。
 - 生成 `image_case` 草案。
+- Phase 2 允许隔离静态原型验证交互，但静态原型只生成浏览器内草案文本，不接 VCPChat、VCPToolBox、插件、API 或 DailyNote。
 
 ## 页面区域
 
@@ -35,10 +36,14 @@
 
 ## AI 评分与人工评分关系
 
+- AI 评分只是建议。
 - 人工评分 > AI 评分。
 - 人工审批 > Agent 建议。
 - 人工评论 > 自动摘要。
 - 如果人工评分存在，最终分数采用人工评分。
+- `final_review` 必须优先采用 `human_review`。
+- 没有 `human_review` 时，不允许正式 `accepted`。
+- AI 的 `archive_recommendation` 不能替代人工批准。
 
 ## 评论模型
 
@@ -74,6 +79,14 @@ memory_safety:
 
 审批动作包括批准写入、拒绝写入、要求修改正文、标记为风格规则候选。
 
+记忆写入边界：
+
+- `memory_preview` 只是预览，不等于已写入 DailyNote。
+- `memory_preview.chinese_diary_content` 必须是中文正文。
+- `memory_approval.status != approved` 时，不得调用 DailyNote。
+- `memory_approval.status = approved` 时，必须有 `approved_by` 和 `approved_at`。
+- 静态原型只能生成草案文本，不得调用 DailyNote。
+
 ## 与 DailyNote / LightMemo / Image_Case_Archive 的关系
 
 - DailyNote 是未来中文记忆写入入口。
@@ -92,17 +105,25 @@ VCPChat/ImageLabmodules/review.css
 VCPChat/modules/ipc/imageLabReviewHandlers.js
 ```
 
-本 MVP 不修改 VCPChat，不实现 UI。
+本 MVP 不修改 VCPChat。Phase 2 的 `review_console/static_prototype/` 只是隔离静态原型，不是 VCPChat 子窗口实现。
+
+Phase 3 只冻结 VCPChat 接入设计，不实现真实子窗口、不创建 IPC handler、不改 VCPChat。详细边界见 `review_console/vcpchat_integration_notes.md`。
+
+未来子窗口只能接收受控的 `review_session` 草案对象，并只能返回 `review_session_draft`、`image_case_draft`、`memory_delta_draft`。renderer 不得直接保存、入库、写 DailyNote、调用 VCP 插件或写磁盘资产。
 
 ## 安全规则
 
 - `contextIsolation: true`
 - `nodeIntegration: false`
 - 不在 URL query 中传 key、token、私密路径。
+- 不在 URL query、hash 或窗口标题中传 cookie、密码、客户隐私。
 - renderer 不直接调用 DailyNote。
 - renderer 不直接写文件。
+- renderer 不直接调用 VCP 插件。
+- renderer 不发起外部 API 请求。
 - 所有写入动作走 IPC handler。
 - 必须校验 IPC sender。
+- IPC handler 返回错误时只返回脱敏中文摘要。
 
 ## 不建议 MVP 做的功能
 
@@ -114,6 +135,9 @@ VCPChat/modules/ipc/imageLabReviewHandlers.js
 - 能说明人工评分如何覆盖 AI 评分。
 - 能说明评论和审批动作。
 - 能说明中文记忆预览与审批。
-- 不包含真实 UI 实现。
+- 静态原型与 VCPChat / VCPToolBox 隔离。
 - 不包含真实插件执行逻辑。
+- 不调用 API。
+- 不调用 DailyNote。
+- 不写磁盘资产。
 - 不修改 VCPChat。

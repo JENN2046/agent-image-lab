@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ImageLab Review Console Static Prototype</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="review-shell" aria-label="ImageLab Review Console 静态原型">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Agent Image Lab / Review Console</p>
+          <h1>Photo Studio OS 审片台</h1>
+        </div>
+        <div class="session-meta" aria-label="会话状态">
+          <span id="sessionId">session-photo-studio-os-001</span>
+          <span id="sessionStatus" class="status-pill">human_reviewing</span>
+          <span class="lock-pill">Dry-run only</span>
+        </div>
+      </header>
+
+      <section class="workspace-grid">
+        <aside class="panel preview-panel" aria-labelledby="previewTitle">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Image Version</p>
+              <h2 id="previewTitle">视觉版本</h2>
+            </div>
+            <span id="currentVersionScore" class="score-badge">84</span>
+          </div>
+
+          <div class="visual-preview" aria-label="Photo Studio OS 占位预览">
+            <div class="preview-topline"></div>
+            <div class="gauge-cluster">
+              <div class="gauge small left">
+                <span>Risk</span>
+              </div>
+              <div class="gauge main">
+                <span>Core</span>
+              </div>
+              <div class="gauge small right">
+                <span>Queue</span>
+              </div>
+            </div>
+            <div class="side-rail">
+              <span>Risk Pulse</span>
+              <span>Approval Queue</span>
+            </div>
+            <div class="module-strip">
+              <span>Project Execution</span>
+              <span>Activity Timeline</span>
+              <span>AI Inspection Feed</span>
+            </div>
+          </div>
+
+          <div id="versionList" class="version-list" aria-label="版本列表"></div>
+        </aside>
+
+        <section class="panel scoring-panel" aria-labelledby="scoreTitle">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Review Score</p>
+              <h2 id="scoreTitle">评分与评论</h2>
+            </div>
+            <div class="score-stack">
+              <span>AI <strong id="aiTotal">81</strong></span>
+              <span>Human <strong id="humanTotal">84</strong></span>
+              <span>Final <strong id="finalTotal">84</strong></span>
+            </div>
+          </div>
+
+          <div id="scoreControls" class="score-controls"></div>
+
+          <div class="comment-composer" aria-label="中文评论">
+            <div class="field-row">
+              <label>
+                目标
+                <select id="commentTarget">
+                  <option value="composition">构图</option>
+                  <option value="style">风格</option>
+                  <option value="detail">细节</option>
+                  <option value="typography">文字可读性</option>
+                  <option value="memory_preview">记忆预览</option>
+                </select>
+              </label>
+              <label>
+                严重度
+                <select id="commentSeverity">
+                  <option value="medium">medium</option>
+                  <option value="low">low</option>
+                  <option value="high">high</option>
+                  <option value="critical">critical</option>
+                </select>
+              </label>
+            </div>
+            <label>
+              评论
+              <textarea id="commentText" rows="3">右侧小仪表需要与侧栏保持距离，避免破坏三仪表平衡。</textarea>
+            </label>
+            <button id="addCommentBtn" type="button">添加评论</button>
+          </div>
+
+          <div id="commentList" class="comment-list" aria-live="polite"></div>
+        </section>
+
+        <aside class="panel decision-panel" aria-labelledby="decisionTitle">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Approval</p>
+              <h2 id="decisionTitle">审批与记忆</h2>
+            </div>
+          </div>
+
+          <div class="action-group" aria-label="资产审批动作">
+            <button type="button" data-archive="accepted">批准入库</button>
+            <button type="button" data-archive="candidate" class="is-active">标记候选</button>
+            <button type="button" data-archive="rejected">拒绝入库</button>
+            <button type="button" data-archive="draft">继续迭代</button>
+          </div>
+
+          <section class="memory-preview" aria-label="中文记忆预览">
+            <p class="eyebrow">Memory Preview</p>
+            <label>
+              标题
+              <input id="memoryTitle" type="text" value="Photo Studio OS 三仪表构图经验" />
+            </label>
+            <label>
+              中文正文
+              <textarea id="memoryContent" rows="5">本次评审确认三仪表需要保持横向平衡，中央大仪表是视觉焦点，右侧小仪表不得贴近右侧栏。</textarea>
+            </label>
+            <div class="memory-meta">
+              <span>Photo_Studio_OS_Style_Memory</span>
+              <span>PhotoStudioOS</span>
+              <span>三仪表</span>
+            </div>
+            <div id="dailyNoteLock" class="safety-box">
+              DailyNote locked: memory_approval.status 不是 approved。
+            </div>
+          </section>
+
+          <div class="action-group" aria-label="记忆审批动作">
+            <button type="button" data-memory="approved">批准记忆</button>
+            <button type="button" data-memory="rejected">拒绝记忆</button>
+            <button type="button" data-memory="pending" class="is-active">要求修改</button>
+          </div>
+        </aside>
+      </section>
+
+      <section class="bottom-grid">
+        <section class="panel iteration-panel" aria-labelledby="iterationTitle">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Next Iteration</p>
+              <h2 id="iterationTitle">下一轮建议</h2>
+            </div>
+          </div>
+          <ul id="iterationList"></ul>
+        </section>
+
+        <section class="panel output-panel" aria-labelledby="outputTitle">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Draft Output</p>
+              <h2 id="outputTitle">草案输出</h2>
+            </div>
+            <button id="refreshDraftBtn" type="button">刷新草案</button>
+          </div>
+          <textarea id="draftOutput" rows="14" readonly></textarea>
+        </section>
+      </section>
+    </main>
+
+    <script src="./mock_data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

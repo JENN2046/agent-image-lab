@@ -45,3 +45,16 @@ memory_delta:
     should_write_to_vcp: boolean  # 是否建议写入 VCP
     should_show_in_review_console: boolean # 是否展示给 Review Console
     rejection_reason_cn: string | null # 中文拒绝原因
+  invariants:
+    - write_mode 为 confirmed 时，approval_status 必须是 approved。
+    - write_mode 为 confirmed 时，approved_by 必须存在。
+    - write_mode 为 confirmed 时，approved_at 必须存在。
+    - write_mode 为 confirmed 时，final_decision.should_write_to_vcp 必须为 true。
+    - write_mode 为 draft 时，final_decision.should_write_to_vcp 默认 false。
+    - write_mode 为 audit_only 时，final_decision.should_write_to_vcp 必须为 false。
+    - write_mode 为 audit_only 时，只能进入审计记录，不进入长期经验记忆。
+    - write_mode 为 forbidden 时，approval_status 必须是 rejected。
+    - write_mode 为 forbidden 时，final_decision.should_write_to_vcp 必须为 false。
+    - write_mode 为 forbidden 时，final_decision.rejection_reason_cn 必须存在。
+    - approval_status 为 not_required 时，不能配合 write_mode confirmed 使用。
+    - approval_status 为 not_required 时，只能用于 audit_only 或低风险草案。

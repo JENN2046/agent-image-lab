@@ -11,7 +11,7 @@ Agent Image Lab 负责把视觉需求变成视觉策略、提示词、VCP 插件
 - 不真实调用生图插件，不创建真实图片文件，不修改 VCPToolBox / VCPChat 主仓。
 - 所有可沉淀经验必须通过 `memory_delta` 表达，且默认是草案。
 - DailyNote 正文必须中文；英文提示词只能作为原文保留，并附中文解释。
-- 发现 API key、token、cookie、密码、私密路径、客户隐私时，必须停止写入长期记忆。
+- 发现 API key、token、cookie、密码、私密路径、客户隐私或客户未公开信息时，必须停止写入长期记忆，并只保留脱敏安全摘要。
 
 ## 3. ImageLab_Master 规则
 
@@ -63,6 +63,33 @@ ImageLab Review Console 是人工评分、评论、审批、记忆写入预览�
 - 单次 AI 推测。
 - 插件偶发失败结论。
 
-## 9. 项目根目录规则
+## 9. 敏感信息脱敏规则
+
+如果任务、图片说明、提示词、配置、插件返回或人工评论中出现 API key、token、cookie、密码、私密路径、客户隐私或客户未公开信息：
+
+- 不得复制敏感原文进 `memory_delta`。
+- 不得复制敏感原文进 `preserved_original`。
+- 不得复制敏感原文进 Tag。
+- 不得复制敏感原文进审计日志。
+- 不得复制敏感原文进拒绝原因。
+- 不得复制敏感原文进 DailyNote 中文正文。
+
+只能写脱敏摘要，例如：
+
+- “本条记忆因包含敏感凭据被拒绝写入。”
+- “本条记录涉及客户隐私，仅保留安全标记，不保留原文。”
+
+同时必须设置：
+
+```yaml
+memory_safety:
+  contains_secret: true
+  contains_private_path: true | false
+  contains_customer_private_data: true | false
+final_decision:
+  should_write_to_vcp: false
+```
+
+## 10. 项目根目录规则
 
 当前项目根目录是 `A:\agent-image-lab\agent-image-lab-v0.2\`。后续文件直接位于该目录下，不创建嵌套的 `agent-image-lab/` 项目副本。

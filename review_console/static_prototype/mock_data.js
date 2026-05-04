@@ -1,0 +1,161 @@
+window.REVIEW_CONSOLE_MOCK = {
+  score_model: [
+    ["composition", "构图与空间关系", 15, 11, 10],
+    ["subject_clarity", "主体清晰度", 10, 8, 9],
+    ["style_consistency", "风格一致性", 15, 12, 12],
+    ["premium_quality", "高级感 / 商业质感", 15, 12, 12],
+    ["detail_control", "细节控制", 10, 7, 8],
+    ["color_light", "色彩与光线", 10, 8, 8],
+    ["text_ui_readability", "文字 / UI 可读性", 10, 7, 7],
+    ["iteration_potential", "迭代潜力", 10, 8, 8],
+    ["asset_value", "资产沉淀价值", 5, 3, 2]
+  ],
+  review_session: {
+    session_id: "session-photo-studio-os-001",
+    task_id: "task-photo-studio-os-001",
+    case_id: "case-photo-studio-os-dashboard-001",
+    project: "Agent Image Lab v0.2",
+    status: "human_reviewing",
+    image_versions: [
+      {
+        version_id: "v1",
+        label: "初版构图",
+        asset_ref: "asset_archive/candidates/photo_studio_os_v1.placeholder",
+        thumbnail_ref: null,
+        source: "placeholder",
+        score: 78
+      },
+      {
+        version_id: "v2",
+        label: "候选版本",
+        asset_ref: "asset_archive/candidates/photo_studio_os_v2.placeholder",
+        thumbnail_ref: null,
+        source: "placeholder",
+        score: 84
+      }
+    ],
+    current_version_id: "v2",
+    compare_version_id: "v1",
+    ai_review: {
+      reviewer_type: "ai",
+      reviewer_name: "Critic_Agent",
+      total_score: 81,
+      archive_recommendation: "candidate",
+      memory_write_recommendation: true,
+      note_cn: "AI 初评仅供参考，不能替代人工批准。"
+    },
+    human_review: {
+      reviewer_type: "human",
+      reviewer_name: "human_reviewer",
+      total_score: 84,
+      breakdown: {
+        composition: 10,
+        subject_clarity: 9,
+        style_consistency: 12,
+        premium_quality: 12,
+        detail_control: 8,
+        color_light: 8,
+        text_ui_readability: 7,
+        iteration_potential: 8,
+        asset_value: 2
+      },
+      note_cn: "人工评分覆盖 AI 评分。"
+    },
+    final_review: {
+      source: "human_review",
+      total_score: 84,
+      rule_cn: "final_review 必须优先采用 human_review。"
+    },
+    comments: [
+      {
+        comment_id: "comment-001",
+        author: "human_reviewer",
+        author_type: "human",
+        target: "composition",
+        severity: "high",
+        comment_cn: "右侧小仪表距离侧栏太近，破坏三仪表横向平衡。",
+        status: "open",
+        created_at: "2026-05-04T11:40:00+08:00"
+      }
+    ],
+    annotation_notes: [
+      {
+        note_id: "annotation-note-001",
+        target: "right_gauge_spacing",
+        note_cn: "MVP 只记录文字批注，不做图上坐标绘制。",
+        severity: "medium"
+      }
+    ],
+    version_comparison: {
+      base_version_id: "v1",
+      current_version_id: "v2",
+      summary_cn: "候选版本保留中央仪表焦点，但右侧小仪表仍需外移。",
+      score_delta: 6
+    },
+    approval: {
+      archive_action: "mark_candidate",
+      memory_action: "request_memory_edit",
+      approved_by: null,
+      approved_at: null,
+      note_cn: "当前仍为候选，不代表正式入库。"
+    },
+    archive_decision: {
+      asset_status: "candidate",
+      human_approval_required: true,
+      ai_archive_recommendation_is_final: false,
+      note_cn: "AI 的 archive_recommendation 只是建议。"
+    },
+    memory_preview: {
+      chinese_diary_title: "Photo Studio OS 三仪表构图经验",
+      chinese_diary_content: "本次评审确认三仪表需要保持横向平衡，中央大仪表是视觉焦点，右侧小仪表不得贴近右侧栏。",
+      target_notebook: "Photo_Studio_OS_Style_Memory",
+      maid: null,
+      tags: ["PhotoStudioOS", "三仪表", "高级黑"],
+      safety: {
+        contains_secret: false,
+        contains_private_path: false,
+        contains_customer_private_data: false,
+        contains_image_binary: false
+      }
+    },
+    memory_approval: {
+      status: "pending",
+      approved_by: null,
+      approved_at: null,
+      rejection_reason_cn: null
+    },
+    next_iteration: {
+      continue_iteration: true,
+      revision_advice_cn: [
+        "保留三仪表中心构图，只微调右侧小仪表与侧栏距离。",
+        "压低过强蓝光，保留深冷蓝底色和冷白细字体。",
+        "保持下方 Project Execution / Activity Timeline / AI Inspection Feed 的扫描节奏。"
+      ]
+    },
+    audit_log: [
+      {
+        event: "mock_session_loaded",
+        actor: "Review_Console_Static_Prototype",
+        created_at: "2026-05-04T11:45:00+08:00",
+        note_cn: "静态原型加载 mock 数据，未调用外部系统。"
+      }
+    ]
+  },
+  image_case_seed: {
+    input_assets: ["asset_archive/references/photo_studio_os_reference.placeholder"],
+    prompt_package_id: "prompt-package-photo-studio-os-001",
+    review_ids: ["review-photo-studio-os-001"],
+    strengths_cn: [
+      "整体高级黑方向正确，中央仪表焦点明确。",
+      "冷白 UI 与深冷蓝底色符合 Photo Studio OS 基调。"
+    ],
+    weaknesses_cn: [
+      "右侧小仪表距离右侧栏太近，破坏三仪表横向平衡。",
+      "局部蓝光偏强，需要避免过度蓝光。"
+    ],
+    reusable_rules_cn: [
+      "三仪表横向距离必须平衡。",
+      "右侧仪表不得贴近侧栏。"
+    ]
+  }
+};

@@ -81,17 +81,23 @@ MVP 只做文本评论和区域标签。评论至少包含作者、目标区域�
 - `VCPChat/ImageLabmodules/review.css`
 - `VCPChat/modules/ipc/imageLabReviewHandlers.js`
 
-本 MVP 不修改 VCPChat，不实现真实 UI。
+本 MVP 不修改 VCPChat。Phase 2 的 `review_console/static_prototype/` 只是隔离静态原型，不是 VCPChat 子窗口实现。Phase 3 只写接入设计和迁移清单，不创建真实 IPC handler。
+
+未来子窗口只能接收受控 `review_session` 草案对象，并返回 `review_session_draft`、`image_case_draft`、`memory_delta_draft`。renderer 不得直接保存、入库、写 DailyNote、调用 VCP 插件或写磁盘资产。
 
 ## 安全边界
 
 - `contextIsolation: true`。
 - `nodeIntegration: false`。
 - 不在 URL query 中传 key、token、私密路径。
+- 不在 URL query、hash 或窗口标题中传 cookie、密码、客户隐私。
 - renderer 不直接调用 DailyNote。
 - renderer 不直接写文件。
+- renderer 不直接调用 VCP 插件。
+- renderer 不发起外部 API 请求。
 - 所有写入动作走 IPC handler。
 - 必须校验 IPC sender。
+- IPC handler 返回错误时只返回脱敏中文摘要。
 
 ## 不建议 MVP 做的功能
 

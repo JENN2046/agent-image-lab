@@ -15,17 +15,41 @@ review_session:
       score: number | null        # 版本分数
   current_version_id: string      # 当前版本 ID
   compare_version_id: string | null # 对比版本 ID
-  ai_review: map                  # AI 评分
-  human_review: map               # 人工评分，优先级高于 AI
+  ai_review: map                  # AI 评分结果，只是建议
+  human_review: map               # 人工评分结果，优先级高于 AI
+  final_review: map               # 最终评审结果，必须优先使用 human_review
   comments:
-    - map                         # 文本评论
+    - map                         # 评论列表
   annotation_notes:
     - map                         # 批注备注，MVP 可为空
   version_comparison: map         # 版本对比摘要
-  approval: map                   # 审批动作与状态
-  archive_decision: map           # 资产归档决定
-  memory_preview: map             # 中文记忆写入预览
-  memory_approval: map            # 记忆审批结果
+  approval: map                   # 审批动作
+  archive_decision: map           # 归档决定，AI 入库建议不能替代人工批准
+  memory_preview:                 # 中文记忆预览，不代表已写入 DailyNote
+    chinese_diary_title: string   # 中文日记标题
+    chinese_diary_content: string # 中文日记正文，必须为中文
+    target_notebook: string       # 目标记忆本
+    maid: string | null           # 记忆引用占位
+    tags:
+      - string                    # 标签，不得包含敏感原文
+    safety: map                   # 安全检查摘要
+  memory_approval:                # 记忆审批状态
+    status: pending | approved | rejected | not_required # 审批状态
+    approved_by: string | null    # 审批人，approved 时必填
+    approved_at: string | null    # 审批时间，approved 时必填
+    rejection_reason_cn: string | null # 中文拒绝原因
   next_iteration: map             # 下一轮迭代建议
   audit_log:
-    - map                         # 操作审计记录
+    - map                         # 审计记录
+  invariants:
+    - AI 评分只是建议。
+    - human_review 覆盖 ai_review。
+    - final_review 必须优先使用 human_review。
+    - 没有 human_review 时，不允许正式 accepted。
+    - AI 的 archive_recommendation 不能替代人工批准。
+    - memory_preview.chinese_diary_content 必须是中文正文。
+    - memory_preview 只能作为预览，不代表已写入 DailyNote。
+    - memory_approval.status 未等于 approved 时，不得调用 DailyNote。
+    - memory_approval.status 等于 approved 时，必须有 approved_by 和 approved_at。
+    - Review Console 渲染层不得直接调用 DailyNote，写入必须通过后续受控流程。
+    - 静态原型只能在浏览器内生成草案文本，不得调用 DailyNote。
