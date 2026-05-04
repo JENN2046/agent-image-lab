@@ -109,7 +109,7 @@ adapter_dry_run_response:
     mode: dry_run
     selected_plugin: null
     fallback_plugins: []
-    capability_matrix_status: pending_manifest_review
+    capability_matrix_status: manifest_reviewed_safe
     reason_cn: "仅生成 dry-run 调度草案，未选择真实插件。"
     dry_run_required: true
     approval_required: true
@@ -207,3 +207,5 @@ image_file_created: false
 ```
 
 即使 dry-run response 为 `accepted_draft`，也不代表允许真实执行。
+
+`capability_matrix_status=manifest_reviewed_safe` 只表示 Phase C 脱敏审查已通过；如果候选仍处于 `pending_manifest_review`，Adapter dry-run lab 必须保持 display-only，并由 Gatekeeper 决定是否拒绝或要求补审查。

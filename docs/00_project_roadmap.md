@@ -30,13 +30,14 @@ v0.2.5 final baseline + v0.3.0 manifest authorization planning
 - v0.3 manifest recon / authorization gate / sanitized read preflight 文档。
 - v0.3 authorization planning closeout。
 - 仓库内 AgentImageLabAdapter 草案 manifest 的 Phase C 脱敏审查记录。
+- Phase D 项目内 Adapter dry-run lab 最小实现。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：
 
 - 真实外部 VCPToolBox manifest 读取。
 - 真实插件选择。
-- Adapter dry-run 的真实运行实现。
+- VCPToolBox 内 Adapter dry-run 插件实现。
 - VCPChat 子窗口接入。
 - DailyNote / VCP 长期记忆真实写入。
 - 真实图片生成、编辑、归档。
@@ -118,6 +119,8 @@ v0.2.5 final baseline + v0.3.0 manifest authorization planning
 目标：实现一个只接受 dry-run 输入、只返回草案对象的最小 Adapter 骨架。
 
 Phase D 的实现边界以 `integrations/vcp/phase_d_adapter_dry_run_minimal_contract.md` 为准。未获得真实执行授权前，不得在 `exports/vcptoolbox/Plugin/AgentImageLabAdapter/` 中创建 `index.js` 或任何真实 VCP 插件执行入口。
+
+当前已有项目内实验实现 `adapter_dry_run_lab/adapter_dry_run.js`，只读 JSON fixture 并向 stdout 输出 dry-run 草案；它不是 VCP 插件，不安装到 VCPToolBox，不写文件、不调用插件、不调用 API。
 
 必须保持：
 

@@ -30,6 +30,10 @@ $requiredFiles = @(
   '00_project_skeleton.md',
   'DECISIONS.md',
   'MANIFEST.md',
+  'adapter_dry_run_lab/README.md',
+  'adapter_dry_run_lab/adapter_dry_run.js',
+  'adapter_dry_run_lab/fixtures/accepted_request.json',
+  'adapter_dry_run_lab/fixtures/rejected_request.json',
   'docs/00_project_roadmap.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
@@ -63,6 +67,7 @@ $requiredFiles = @(
 
 $requiredDirectories = @(
   'agents',
+  'adapter_dry_run_lab',
   'asset_archive',
   'case_studies',
   'codex',
@@ -115,6 +120,14 @@ foreach ($path in $staticPrototypeFiles) {
     if ($content -match 'fetch\(|XMLHttpRequest|writeFile|fs\.|eval\(|Function\(') {
       Add-Failure "Static prototype contains forbidden runtime pattern: $path"
     }
+  }
+}
+
+$labSource = Join-Path $Root 'adapter_dry_run_lab/adapter_dry_run.js'
+if (Test-Path -LiteralPath $labSource) {
+  $content = Get-Content -Raw -Encoding UTF8 $labSource
+  if ($content -match 'fetch\(|XMLHttpRequest|writeFile|appendFile|child_process|exec\(|spawn\(|https\.|http\.|net\.') {
+    Add-Failure "Adapter dry-run lab contains forbidden runtime pattern"
   }
 }
 
@@ -236,6 +249,56 @@ foreach ($path in $phaseCReviewFiles) {
   foreach ($pattern in $forbiddenPhaseCReviewPatterns) {
     if ($content -match $pattern) {
       Add-Failure "Phase C review boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$node = Get-Command node -ErrorAction SilentlyContinue
+if (-not $node) {
+  Add-Failure "Node.js is required to validate adapter_dry_run_lab"
+} else {
+  & node --check (Join-Path $Root 'adapter_dry_run_lab/adapter_dry_run.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "adapter_dry_run_lab/adapter_dry_run.js failed node --check"
+  }
+
+  $acceptedOutput = & node (Join-Path $Root 'adapter_dry_run_lab/adapter_dry_run.js') (Join-Path $Root 'adapter_dry_run_lab/fixtures/accepted_request.json')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "adapter dry-run lab accepted fixture exited with failure"
+  } else {
+    $accepted = ($acceptedOutput -join "`n") | ConvertFrom-Json
+    $response = $accepted.adapter_dry_run_response
+    if ($response.status -ne 'accepted_draft') {
+      Add-Failure "accepted fixture must return accepted_draft"
+    }
+    if ($response.dispatch_plan_draft.selected_plugin -ne $null) {
+      Add-Failure "accepted fixture must keep selected_plugin null"
+    }
+    if ($response.dispatch_plan_draft.max_plugin_calls -ne 0) {
+      Add-Failure "accepted fixture must keep max_plugin_calls 0"
+    }
+    if ($response.dispatch_plan_draft.execution_blocked -ne $true) {
+      Add-Failure "accepted fixture must keep execution_blocked true"
+    }
+  }
+
+  $rejectedOutput = & node (Join-Path $Root 'adapter_dry_run_lab/adapter_dry_run.js') (Join-Path $Root 'adapter_dry_run_lab/fixtures/rejected_request.json')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "adapter dry-run lab rejected fixture exited with failure"
+  } else {
+    $rejected = ($rejectedOutput -join "`n") | ConvertFrom-Json
+    $response = $rejected.adapter_dry_run_response
+    if ($response.status -ne 'rejected') {
+      Add-Failure "rejected fixture must return rejected"
+    }
+    if ($response.selected_plugin -ne $null) {
+      Add-Failure "rejected fixture must keep selected_plugin null"
+    }
+    if ($response.max_plugin_calls -ne 0) {
+      Add-Failure "rejected fixture must keep max_plugin_calls 0"
+    }
+    if ($response.execution_blocked -ne $true) {
+      Add-Failure "rejected fixture must keep execution_blocked true"
     }
   }
 }

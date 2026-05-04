@@ -434,9 +434,13 @@
 
 ## Phase D Adapter dry-run 最小契约检查
 
+- [ ] `adapter_dry_run_lab/adapter_dry_run.js` 存在，且只属于项目内实验目录。
+- [ ] `adapter_dry_run_lab/fixtures/accepted_request.json` 和 `adapter_dry_run_lab/fixtures/rejected_request.json` 存在。
 - [ ] `integrations/vcp/phase_d_adapter_dry_run_minimal_contract.md` 存在。
 - [ ] `tests/schema_examples/phase_d_adapter_dry_run_minimal.example.yaml` 存在。
 - [ ] Phase D 契约明确唯一允许命令是 `dry_run`。
+- [ ] `adapter_dry_run_lab/adapter_dry_run.js` 通过 `node --check`。
+- [ ] accepted fixture 返回 `accepted_draft`，rejected fixture 返回 `rejected`。
 - [ ] Phase D 样例保持 `selected_plugin=null`、`max_plugin_calls=0`、`external_api_allowed=false`、`execution_blocked=true`。
 - [ ] Phase D 样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`file_write_performed=false`、`image_file_created=false`。
 - [ ] 未在 `exports/vcptoolbox/Plugin/AgentImageLabAdapter/` 下创建 `index.js` 或其他真实执行入口。

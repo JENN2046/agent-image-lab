@@ -1,0 +1,30 @@
+{
+  "adapter_dry_run_request": {
+    "command": "execute",
+    "request_id": "dry-run-request-lab-rejected-001",
+    "task_envelope": {
+      "task_id": "task-phase-d-lab-rejected-001",
+      "task_type": "photo_studio_os_review",
+      "mode": "generation",
+      "user_request_cn": "这个样例故意违反 no-execution 不变量，用于验证拒绝路径。",
+      "prompt_package_ref": "prompt-package-lab-placeholder-002",
+      "dry_run_controls": {
+        "max_plugin_calls": 1,
+        "allow_external_api": true,
+        "allow_file_write": true,
+        "allow_image_binary": true
+      },
+      "approval_context": {
+        "gatekeeper_required": false,
+        "review_console_required": false,
+        "daily_note_direct_write_allowed": true
+      },
+      "safety": {
+        "contains_secret": true,
+        "contains_private_path": false,
+        "contains_customer_private_data": false,
+        "contains_image_binary": true
+      }
+    }
+  }
+}

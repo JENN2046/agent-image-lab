@@ -32,8 +32,8 @@ phase_d_adapter_dry_run_minimal:
       mode: dry_run
       selected_plugin: null
       fallback_plugins: []
-      capability_matrix_status: pending_manifest_review
-      reason_cn: "仅生成 dry-run 调度草案；未读取真实 manifest，未选择真实插件。"
+      capability_matrix_status: manifest_reviewed_safe
+      reason_cn: "仅生成 dry-run 调度草案；Phase C 脱敏审查已通过，但仍未选择真实插件。"
       dry_run_required: true
       approval_required: true
       execution_blocked: true
@@ -50,7 +50,7 @@ phase_d_adapter_dry_run_minimal:
       required: true
       display_only: true
       risk_level: medium
-      risk_summary_cn: "候选仍处于 pending_manifest_review；dry-run 草案不能执行。"
+      risk_summary_cn: "候选仅完成 Phase C 脱敏审查；dry-run 草案仍不能执行。"
       blocked_actions:
         - execute
         - call_plugin
