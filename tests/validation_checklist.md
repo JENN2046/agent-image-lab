@@ -203,6 +203,23 @@
 - [ ] 授权前置样例不得把 `pending_manifest_review` 自动推进到 `manifest_reviewed_safe`、`dry_run_checked` 或 `tested`。
 - [ ] `manifest_reviewed_safe` 只能在未来真实 manifest 被单独授权读取并完成脱敏审查后产生。
 
+## Phase 9 Review Console 审批记录映射检查
+
+- [ ] Phase 9 Review Console 审批记录映射只写文档和验收样例，不实现 UI 或执行逻辑。
+- [ ] `review_console/static_prototype/FIELD_MAPPING.md` 包含 Phase 9 审批记录映射说明。
+- [ ] `tests/schema_examples/phase9_review_console_approval_mapping.example.yaml` 存在。
+- [ ] 映射样例包含 `review_session_draft`、`approval`、`archive_decision`、`memory_preview`、`memory_approval`、`audit_log` 和 `memory_delta_draft`。
+- [ ] 映射样例使用 `candidate-plugin-placeholder-001`，不记录真实插件名、真实路径或真实 manifest 原文。
+- [ ] 映射样例保持 `source_authorized=false`、`source_read_performed=false`、`real_plugin_selected=false`。
+- [ ] 映射样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`disk_write_performed=false`、`image_file_created=false`。
+- [ ] 映射样例中的 `approval.status` 只代表授权申请草案，不代表已读取真实 manifest。
+- [ ] 映射样例中的 `archive_decision.asset_status` 未人工批准时保持 `candidate`，不得为 `accepted`。
+- [ ] 映射样例中的 `memory_approval.status=pending` 时，`memory_delta_draft.write_mode=draft`。
+- [ ] 映射样例中的 `memory_delta_draft.final_decision.should_write_to_vcp=false`。
+- [ ] 映射样例的记忆预览和审计摘要均为中文脱敏内容。
+- [ ] Phase 9 Review Console 审批记录映射不得调用 API、VCP 插件、DailyNote，不得写文件或创建图片。
+- [ ] Phase 9 Review Console 审批记录映射不得自动推进到 `manifest_reviewed_safe`、`dry_run_checked` 或 `tested`。
+
 ## 无执行闭环检查
 
 - [ ] `tests/schema_examples/task_envelope.example.yaml` 是 Photo Studio OS 无执行样例。

@@ -62,6 +62,34 @@
 | `promotion` | 固定 false | 不自动升级 Git 规则 |
 | `final_decision.should_write_to_vcp` | `memory_approval.status === approved` | 未 approved 时为 false |
 
+## Phase 9 审批记录映射
+
+本节用于规划单插件候选 no-execution 评估进入 Review Console 后的审批记录映射。它只描述草案字段关系，不读取真实 manifest，不选择真实插件，不调用 VCP 插件、API、DailyNote 或文件写入。
+
+| Phase 9 来源 | Review Console 字段 | 说明 |
+| --- | --- | --- |
+| `phase9_single_plugin_dry_run_package.package_metadata` | `review_session.task_id` / `case_id` / `project` / `audit_log` | 只记录占位候选和测试包草案来源 |
+| `candidate_snapshot.candidate_id` | `approval.candidate_id` | 使用 `candidate-plugin-placeholder-001` 等占位 ID，不记录真实插件名 |
+| `candidate_snapshot.manifest_review_status` | `approval.manifest_review_status` | 未授权读取前保持 `pending_manifest_review` |
+| `manifest_review_gate.source_authorized` | `approval.source_authorized` | 默认 `false`，不能代表已授权读取 |
+| `manifest_review_gate.source_read_performed` | `approval.source_read_performed` | 默认 `false`，不能代表已读取真实 manifest |
+| `dispatch_plan_draft` | `audit_log.dispatch_guard` | 固定展示 `selected_plugin=null`、`max_plugin_calls=0`、`execution_blocked=true` |
+| `gatekeeper_review_draft` | `approval.gatekeeper_status` / `audit_log` | 只记录 Gatekeeper 待复查状态和中文脱敏风险摘要 |
+| `review_console_handoff_draft.allowed_actions` | `approval.allowed_actions` | 只允许标记候选、拒绝候选、申请 manifest 授权、请求 Gatekeeper 复查、请求记忆修改 |
+| `review_console_handoff_draft.forbidden_actions` | `approval.forbidden_actions` | 必须禁止执行插件、调用 API、写 DailyNote、保存图片 |
+| `phase9_manifest_authorization_precheck.authorization_request` | `approval.manifest_authorization_request` | 只生成授权申请草案，不触发读取 |
+| `phase9_manifest_authorization_precheck.approval_chain` | `approval.approval_chain` | `approval_status=pending` 时不得推进状态 |
+| `memory_delta_draft` | `memory_preview` / `memory_approval` | `memory_approval.status=pending` 时只能生成 `write_mode=draft` 的记忆草案 |
+
+Phase 9 审批记录必须满足：
+
+- `archive_decision.asset_status` 只能是 `candidate`、`rejected` 或 `draft`，未人工批准时不得是 `accepted`。
+- `archive_decision.human_approval.approved=false` 时，AI 建议不能替代人工批准。
+- `memory_approval.status` 未等于 `approved` 时，`memory_delta.write_mode=draft` 且 `final_decision.should_write_to_vcp=false`。
+- `audit_log` 必须保留 no-execution 证据：未读取真实源、未调用插件、未调用 API、未调用 DailyNote、未写文件、未创建图片。
+- 任何审批记录都不得复制真实 manifest 原文、密钥、token、cookie、密码、私密路径、客户隐私或客户未公开信息。
+- Review Console 的审批动作只能生成草案或授权请求，不能直接执行真实插件或写入长期记忆。
+
 ## 原型防越界标记
 
 草案输出包含：

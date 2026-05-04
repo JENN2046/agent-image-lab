@@ -1,0 +1,221 @@
+phase9_review_console_approval_mapping:
+  mapping_metadata:
+    mapping_id: phase9-review-console-approval-mapping-001
+    phase: "Phase 9"
+    purpose_cn: "验证单插件候选 no-execution 测试包如何映射为 Review Console 审批记录、授权申请草案和 memory_delta 草案。"
+    status: draft_acceptance_fixture
+    candidate_id: candidate-plugin-placeholder-001
+    created_at: "2026-05-04T18:00:00+08:00"
+    owner_role: ImageLab_Master
+
+  no_execution_guard:
+    real_manifest_read: false
+    source_read_performed: false
+    source_authorized: false
+    real_plugin_selected: false
+    real_plugin_name_recorded: false
+    real_plugin_capability_recorded: false
+    api_called: false
+    vcp_plugin_called: false
+    daily_note_called: false
+    vcp_memory_written: false
+    disk_write_performed: false
+    image_file_created: false
+    image_binary_included: false
+    vcp_toolbox_read: false
+    vcp_toolbox_modified: false
+    vcpchat_read: false
+    vcpchat_modified: false
+    sensitive_original_copied: false
+    max_plugin_calls_observed: 0
+    audit_summary_cn: "本映射用例只验证 Review Console 审批记录草案，不读取真实 VCP 仓库、真实 manifest，不调用插件、API、DailyNote 或文件写入。"
+
+  source_records:
+    dry_run_package_ref: tests/schema_examples/phase9_single_plugin_dry_run_package.example.yaml
+    manifest_authorization_precheck_ref: tests/schema_examples/phase9_manifest_authorization_precheck.example.yaml
+    dry_run_package_read_as_project_fixture: true
+    real_external_source_read: false
+    source_note_cn: "引用的是项目内验收样例，不是外部 VCPToolBox 或 VCPChat 的真实 manifest。"
+
+  review_session_draft:
+    session_id: session-phase9-review-console-approval-001
+    task_id: task-phase9-dry-run-package-001
+    case_id: case-phase9-review-console-approval-001
+    project: Agent Image Lab
+    status: human_reviewing
+    image_versions:
+      - version_id: v-phase9-candidate-placeholder-001
+        label: "候选插件 dry-run 占位记录"
+        asset_ref: "asset_archive/candidates/phase9-candidate-placeholder.asset-ref"
+        thumbnail_ref: null
+        source: placeholder
+        score: null
+    current_version_id: v-phase9-candidate-placeholder-001
+    compare_version_id: null
+    ai_review:
+      reviewer_type: ai
+      total_score: null
+      archive_recommendation: candidate
+      memory_write_recommendation: false
+      note_cn: "AI 只能建议继续人工审查，不能批准真实插件、真实 manifest 读取或记忆写入。"
+    human_review:
+      reviewer_type: human
+      reviewer_name: human_reviewer_placeholder
+      total_score: null
+      archive_recommendation: candidate
+      memory_write_recommendation: false
+      note_cn: "人工评审仅确认该候选可进入授权读取申请草案，不批准真实读取或真实执行。"
+    final_review:
+      source: human_review
+      total_score: null
+      archive_recommendation: candidate
+      memory_write_recommendation: false
+      note_cn: "最终结论采用人工评审：仅保留候选状态并请求后续独立授权。"
+    comments:
+      - comment_id: comment-phase9-approval-001
+        author: human_reviewer_placeholder
+        body_cn: "保持候选状态，先补齐真实 manifest 读取的独立授权申请，不得读取外部仓库或调用插件。"
+    annotation_notes:
+      - annotation_id: anno-phase9-approval-001
+        target_version_id: v-phase9-candidate-placeholder-001
+        note_cn: "这是候选插件审批记录占位，不含真实图片或真实插件输出。"
+    version_comparison:
+      summary_cn: "本用例不比较真实图片，只验证审批记录字段映射。"
+      layout_change_cn: "无真实图片输入，无视觉资产写入。"
+    approval:
+      status: manifest_authorization_requested
+      candidate_id: candidate-plugin-placeholder-001
+      manifest_review_status: pending_manifest_review
+      source_authorized: false
+      source_read_performed: false
+      gatekeeper_status: needs_review
+      approved_by: null
+      approved_at: null
+      note_cn: "Review Console 只能生成 manifest 授权读取申请草案，不能直接读取真实 manifest。"
+      allowed_actions:
+        - mark_candidate
+        - reject_candidate
+        - request_manifest_authorization
+        - request_gatekeeper_review
+        - request_memory_edit
+      forbidden_actions:
+        - execute_plugin
+        - call_api
+        - write_daily_note
+        - save_image
+      manifest_authorization_request:
+        authorization_request_id: manifest-auth-precheck-phase9-001
+        target_manifest_ref: manifest-ref-placeholder-not-read
+        target_repository_ref: repository-ref-placeholder-not-read
+        approval_status: pending
+        real_execution_allowed: false
+    archive_decision:
+      asset_status: candidate
+      human_approval:
+        approved: false
+        approved_by: null
+        approved_at: null
+        approval_notes_cn: "候选记录未人工批准入库，不得标记 accepted。"
+      ai_archive_recommendation_cn: "AI 建议候选审查，但不能替代人工批准。"
+    memory_preview:
+      chinese_diary_title: "Phase 9 Review Console 审批记录映射草案"
+      chinese_diary_content: |
+        本记录仅说明 Phase 9 单插件候选 no-execution 测试包已映射为 Review Console 审批记录草案。当前没有读取真实 manifest，没有选择真实插件，没有调用插件、API、DailyNote 或文件写入。后续如需读取真实 manifest，必须另开授权点并限定读取对象、读取方式、可摘录字段和禁止摘录字段。
+      target_notebook: Rejected_Visual_Lessons
+      maid: null
+      tags:
+        - Phase9
+        - ReviewConsole
+        - 审批记录
+        - manifest授权
+        - no-execution
+      safety:
+        contains_secret: false
+        contains_private_path: false
+        contains_customer_private_data: false
+        contains_image_binary: false
+        safety_notes_cn: "记忆预览为中文脱敏正文，不含密钥、私密路径、客户隐私或图片二进制。"
+    memory_approval:
+      status: pending
+      approved_by: null
+      approved_at: null
+      rejection_reason_cn: null
+    next_iteration:
+      required: true
+      instruction_cn: "如需继续推进，只能进入独立授权读取真实 manifest 的前置审查，不得自动执行。"
+    audit_log:
+      - audit_id: audit-phase9-approval-mapping-001
+        action: approval_mapping_draft_created
+        actor: static_review_console
+        note_cn: "Review Console 仅生成审批记录草案，未调用 DailyNote、API 或 VCP 插件。"
+        guard:
+          source_read_performed: false
+          api_called: false
+          vcp_plugin_called: false
+          daily_note_called: false
+          disk_write_performed: false
+          image_file_created: false
+
+  memory_delta_draft:
+    delta_id: md-phase9-review-console-approval-001
+    task_id: task-phase9-dry-run-package-001
+    case_id: case-phase9-review-console-approval-001
+    created_at: "2026-05-04T18:00:00+08:00"
+    agent_name: Archivist_Agent
+    agent_role: 案例归档与中文记忆草案
+    project: Agent Image Lab
+    memory_type: process_boundary_note
+    target_notebook: Rejected_Visual_Lessons
+    write_mode: draft
+    importance: medium
+    approval_required: true
+    approval_status: pending
+    approved_by: null
+    approved_at: null
+    source:
+      source_type: review_console_approval_mapping_draft
+      source_ids:
+        - session-phase9-review-console-approval-001
+        - manifest-auth-precheck-phase9-001
+        - phase9-dry-run-package-placeholder-001
+    chinese_diary_title: "Phase 9 Review Console 审批记录映射草案"
+    chinese_diary_content: |
+      本记录仅作为审批记录映射草案：候选插件仍处于 pending_manifest_review，真实 manifest 未读取，真实插件未选择，插件、API、DailyNote、文件写入和图片创建均未发生。该草案只能帮助人工确认下一步是否另行授权读取真实 manifest，不能直接推进到执行或长期记忆写入。
+    preserved_original:
+      prompt_en: null
+      plugin_name: null
+      model_name: null
+      file_ref: null
+    tags:
+      - Phase9
+      - ReviewConsole
+      - 审批记录
+      - no-execution
+      - 草案
+    visibility: audit
+    memory_safety:
+      contains_secret: false
+      contains_private_path: false
+      contains_customer_private_data: false
+      contains_image_binary: false
+      safety_notes_cn: "未发现 API key、token、cookie、密码、私密路径、客户隐私或图片二进制。"
+    promotion:
+      sync_to_git_candidate: false
+      promoted_to_git: false
+      git_target_file: null
+      promotion_reason_cn: null
+    final_decision:
+      should_write_to_vcp: false
+      should_show_in_review_console: true
+      rejection_reason_cn: null
+
+  acceptance_assertions:
+    - "Review Console 审批记录只能生成草案和授权申请，不能读取真实 manifest。"
+    - "候选记录保持 candidate-plugin-placeholder-001，不记录真实插件名、真实路径或真实能力结论。"
+    - "approval.source_authorized=false 且 approval.source_read_performed=false。"
+    - "dispatch 相关证据保持 selected_plugin=null、max_plugin_calls=0、execution_blocked=true。"
+    - "archive_decision.asset_status=candidate，human_approval.approved=false，不能标记 accepted。"
+    - "memory_approval.status=pending 时，memory_delta_draft.write_mode=draft。"
+    - "memory_delta_draft.final_decision.should_write_to_vcp=false。"
+    - "audit_log 记录未调用插件、API、DailyNote，未写文件，未创建图片。"
+    - "所有说明和记忆正文均为中文脱敏内容。"
