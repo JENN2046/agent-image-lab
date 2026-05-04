@@ -355,6 +355,31 @@
 - [ ] v0.3.0-adapter-recon 不新增 `index.js`、`.exe`、`.ps1` 或其他真实执行入口。
 - [ ] v0.3.0-adapter-recon 不调用 API、VCP 插件、DailyNote，不写文件，不创建图片。
 
+## v0.3.0 manifest read authorization gate 检查
+
+- [ ] v0.3.0 manifest read authorization gate 只补齐真实 manifest 读取授权门槛，不读取真实 VCPToolBox。
+- [ ] v0.3.0 manifest read authorization gate 不读取真实 VCPChat。
+- [ ] v0.3.0 manifest read authorization gate 不读取真实 manifest。
+- [ ] `integrations/vcp/manifest_read_authorization_gate.md` 存在。
+- [ ] `tests/schema_examples/v0_3_manifest_read_authorization_gate.example.yaml` 存在。
+- [ ] 授权门槛文档明确“准备授权读取”和“实际读取 manifest”是两个不同阶段。
+- [ ] 授权门槛样例包含 `authorization_request`、`target_scope`、`read_method_gate`、`extract_policy`、`forbidden_content_policy`、`approval_chain`、`state_transition_rules`、`no_execution_guard`、`audit_record`、`memory_delta_draft` 和 `acceptance_assertions`。
+- [ ] 授权门槛样例保持 `read_authorized=false`、`read_performed=false`、`source_authorized=false`、`source_read_performed=false`、`real_manifest_read=false`。
+- [ ] 授权门槛样例保持 `raw_manifest_copy_allowed=false`、`real_execution_allowed=false`、`selected_plugin=null`、`max_plugin_calls=0`。
+- [ ] 授权门槛样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`。
+- [ ] 授权门槛样例当前状态保持 `pending_manifest_review`。
+- [ ] 授权门槛样例不得进入 `manifest_reviewed_safe`、`dry_run_checked` 或 `tested`。
+- [ ] 授权门槛样例只列出未来允许摘录字段名，不写真实摘录值。
+- [ ] 允许摘录字段仅限脱敏显示名摘要、命令集合中文摘要、输入输出模式中文摘要、权限风险中文摘要和 Gatekeeper 复查点。
+- [ ] 禁止字段覆盖 API key、token、cookie、密码、私密路径、客户隐私、服务端点原文、manifest 敏感配置原文、图片二进制、真实插件输出和真实运行日志。
+- [ ] 授权门槛样例不包含真实插件名、真实 manifest 原文、真实插件路径或真实能力结论。
+- [ ] 授权门槛样例不包含密钥、token、cookie、密码、私密路径、客户隐私或客户未公开信息。
+- [ ] 授权门槛样例不新增 `index.js`、`.exe`、`.ps1` 或其他真实执行入口。
+- [ ] 授权门槛样例不创建图片文件。
+- [ ] 授权门槛样例的记忆正文、拒绝原因和审计摘要必须为中文脱敏内容。
+- [ ] `index.js`、`.exe`、`.ps1`、图片扩展如被扫描命中，只能作为负面检查项出现，不得是真实文件证据。
+- [ ] 本阶段不调用 API、VCP 插件、DailyNote，不写文件，不创建图片。
+
 ## 无执行闭环检查
 
 - [ ] `tests/schema_examples/task_envelope.example.yaml` 是 Photo Studio OS 无执行样例。
