@@ -38,12 +38,14 @@ $requiredFiles = @(
   'adapter_dry_run_lab/fixtures/photo_studio_os_v0_7_rehearsal_request.json',
   'exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js',
   'scripts/run_v0_7_photo_studio_os_real_execution.ps1',
+  'scripts/run_v0_10_gptimagegen_real_execution.ps1',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
   'docs/31_install_and_operation_guide.md',
   'docs/32_final_acceptance_report.md',
   'docs/33_post_execution_checkpoint.md',
+  'docs/34_v1_0_true_loop_closeout.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
@@ -56,6 +58,12 @@ $requiredFiles = @(
   'integrations/vcp/v0_7_real_execution_authorization_gate.md',
   'integrations/vcp/v0_7_photo_studio_os_dry_run_rehearsal.md',
   'integrations/vcp/v0_7_photo_studio_os_real_execution_record.md',
+  'integrations/vcp/v0_9_photo_studio_os_retry_real_execution_record.md',
+  'integrations/vcp/v0_9_generation_plugin_candidate_scan.md',
+  'integrations/vcp/v0_10_gptimagegen_real_execution_record.md',
+  'integrations/vcp/v0_10_gptimagegen_retry2_real_execution_record.md',
+  'integrations/vcp/v0_10_gptimagegen_gpt55_real_execution_record.md',
+  'integrations/vcp/v0_10_doubaogen_retry_real_execution_record.md',
   'review_console/v0_7_human_approval_preflight.md',
   'workflows/photo_studio_os_real_loop_runbook.md',
   'workflows/v0_7_real_execution_preflight_confirmation.md',
@@ -90,6 +98,12 @@ $requiredFiles = @(
   'tests/schema_examples/v0_8_release_readiness.example.yaml',
   'tests/schema_examples/v0_9_post_execution_checkpoint.example.yaml',
   'tests/schema_examples/v0_9_photo_studio_os_retry_authorization_gate.example.yaml',
+  'tests/schema_examples/v0_9_photo_studio_os_retry_real_execution_record.example.yaml',
+  'tests/schema_examples/v0_10_gptimagegen_real_execution_record.example.yaml',
+  'tests/schema_examples/v0_10_gptimagegen_retry2_real_execution_record.example.yaml',
+  'tests/schema_examples/v0_10_gptimagegen_gpt55_real_execution_record.example.yaml',
+  'tests/schema_examples/v0_10_doubaogen_retry_real_execution_record.example.yaml',
+  'tests/schema_examples/v1_0_true_loop_closeout.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -515,9 +529,415 @@ foreach ($path in $v09PostExecutionFiles) {
   }
 }
 
+$v09RetryExecutionFiles = @(
+  'integrations/vcp/v0_9_photo_studio_os_retry_real_execution_record.md',
+  'tests/schema_examples/v0_9_photo_studio_os_retry_real_execution_record.example.yaml'
+)
+
+$requiredV09RetryExecutionPatterns = @(
+  'phase:\s+v0\.9_photo_studio_os_retry_real_execution',
+  'status:\s+completed_validated_with_visual_rejection',
+  'selected_plugin_id:\s+DoubaoGen',
+  'max_plugin_calls_authorized:\s+1',
+  'actual_plugin_calls:\s+1',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'file_write_performed:\s+true',
+  'image_file_created:\s+true',
+  'daily_note_called:\s+false',
+  'daily_note_direct_write_allowed:\s+false',
+  'memory_delta_only:\s+true',
+  'raw_plugin_output_saved:\s+false',
+  'secret_value_saved:\s+false',
+  'endpoint_raw_saved:\s+false',
+  'runtime_log_saved:\s+false',
+  'image_binary_saved_to_memory:\s+false',
+  'vcp_toolbox_files_modified:\s+false',
+  'visual_review:',
+  'status:\s+rejected_for_prompt_mismatch',
+  'additional_plugin_call_authorized:\s+false',
+  'next_action_requires_new_user_authorization:\s+true'
+)
+
+$forbiddenV09RetryExecutionPatterns = @(
+  'raw_plugin_output_saved:\s+true',
+  'secret_value_saved:\s+true',
+  'endpoint_raw_saved:\s+true',
+  'runtime_log_saved:\s+true',
+  'image_binary_saved_to_memory:\s+true',
+  'daily_note_called:\s+true',
+  'daily_note_direct_write_allowed:\s+true',
+  'vcp_toolbox_files_modified:\s+true',
+  'accepted_as_project_cover:\s+true',
+  'additional_plugin_call_authorized:\s+true',
+  '[A-Za-z]:\\',
+  'https?://'
+)
+
+foreach ($path in $v09RetryExecutionFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v0.9 retry execution record file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV09RetryExecutionPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v0.9 retry execution record missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV09RetryExecutionPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v0.9 retry execution record boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$v09CandidateScanFiles = @(
+  'integrations/vcp/v0_9_generation_plugin_candidate_scan.md'
+)
+
+$requiredV09CandidateScanPatterns = @(
+  'mode:\s+local_read_only_candidate_discovery',
+  'plugin_execution_performed:\s+false',
+  'config_values_output:\s+false',
+  'raw_manifest_output:\s+false',
+  'endpoint_raw_output:\s+false',
+  'secret_value_output:\s+false',
+  'daily_note_called:\s+false',
+  'image_file_created_by_scan:\s+false',
+  'primary_candidate:\s+ComfyUIGen',
+  'real_execution_allowed_now:\s+false',
+  'real_execution_authorized:\s+false'
+)
+
+$forbiddenV09CandidateScanPatterns = @(
+  'plugin_execution_performed:\s+true',
+  'config_values_output:\s+true',
+  'raw_manifest_output:\s+true',
+  'endpoint_raw_output:\s+true',
+  'secret_value_output:\s+true',
+  'daily_note_called:\s+true',
+  'image_file_created_by_scan:\s+true',
+  'real_execution_allowed_now:\s+true',
+  'real_execution_authorized:\s+true',
+  '[A-Za-z]:\\',
+  'https?://'
+)
+
+foreach ($path in $v09CandidateScanFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v0.9 candidate scan file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV09CandidateScanPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v0.9 candidate scan missing required guard in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV09CandidateScanPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v0.9 candidate scan boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$v10GptImageExecutionFiles = @(
+  'integrations/vcp/v0_10_gptimagegen_real_execution_record.md',
+  'tests/schema_examples/v0_10_gptimagegen_real_execution_record.example.yaml'
+)
+
+$requiredV10GptImagePatterns = @(
+  'phase:\s+v0\.10_gptimagegen_real_execution',
+  'status:\s+failed_auth_rolled_back',
+  'selected_plugin_id:\s+GPTImageGen',
+  'command:\s+GPTGenerateImage',
+  'max_plugin_calls_authorized:\s+1',
+  'actual_plugin_calls:\s+1',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'file_write_performed:\s+true',
+  'image_file_created:\s+false',
+  'rollback_performed:\s+true',
+  'daily_note_called:\s+false',
+  'daily_note_direct_write_allowed:\s+false',
+  'memory_delta_only:\s+true',
+  'raw_plugin_output_saved:\s+false',
+  'secret_value_saved:\s+false',
+  'endpoint_raw_saved:\s+false',
+  'runtime_log_saved:\s+false',
+  'request_identifier_saved:\s+false',
+  'image_binary_saved_to_memory:\s+false',
+  'vcp_toolbox_files_modified:\s+false',
+  'failure_review:',
+  'status:\s+blocked_by_plugin_credential',
+  'additional_plugin_call_authorized:\s+false',
+  'next_action_requires_new_user_authorization:\s+true'
+)
+
+$forbiddenV10GptImagePatterns = @(
+  'raw_plugin_output_saved:\s+true',
+  'secret_value_saved:\s+true',
+  'endpoint_raw_saved:\s+true',
+  'runtime_log_saved:\s+true',
+  'request_identifier_saved:\s+true',
+  'image_binary_saved_to_memory:\s+true',
+  'daily_note_called:\s+true',
+  'daily_note_direct_write_allowed:\s+true',
+  'vcp_toolbox_files_modified:\s+true',
+  'image_asset_available_for_review:\s+true',
+  'additional_plugin_call_authorized:\s+true',
+  'OPENAI_API_KEY\s*[:=]',
+  '[A-Za-z]:\\',
+  'https?://'
+)
+
+foreach ($path in $v10GptImageExecutionFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v0.10 GPTImageGen execution record file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV10GptImagePatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v0.10 GPTImageGen record missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV10GptImagePatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v0.10 GPTImageGen record boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$v10GptImageRetry2Files = @(
+  'integrations/vcp/v0_10_gptimagegen_retry2_real_execution_record.md',
+  'tests/schema_examples/v0_10_gptimagegen_retry2_real_execution_record.example.yaml'
+)
+
+$requiredV10GptImageRetry2Patterns = @(
+  'phase:\s+v0\.10_gptimagegen_retry2_real_execution',
+  'status:\s+failed_auth_rolled_back',
+  'selected_plugin_id:\s+GPTImageGen',
+  'command:\s+GPTGenerateImage',
+  'model_ref:\s+gpt-image-2',
+  'max_plugin_calls_authorized:\s+1',
+  'actual_plugin_calls:\s+1',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'file_write_performed:\s+true',
+  'image_file_created:\s+false',
+  'rollback_performed:\s+true',
+  'daily_note_called:\s+false',
+  'daily_note_direct_write_allowed:\s+false',
+  'memory_delta_only:\s+true',
+  'raw_plugin_output_saved:\s+false',
+  'secret_value_saved:\s+false',
+  'endpoint_raw_saved:\s+false',
+  'runtime_log_saved:\s+false',
+  'request_identifier_saved:\s+false',
+  'image_binary_saved_to_memory:\s+false',
+  'vcp_toolbox_files_modified:\s+false',
+  'failure_review:',
+  'status:\s+blocked_by_plugin_credential',
+  'additional_plugin_call_authorized:\s+false',
+  'next_action_requires_new_user_authorization:\s+true'
+)
+
+$forbiddenV10GptImageRetry2Patterns = @(
+  'raw_plugin_output_saved:\s+true',
+  'secret_value_saved:\s+true',
+  'endpoint_raw_saved:\s+true',
+  'runtime_log_saved:\s+true',
+  'request_identifier_saved:\s+true',
+  'image_binary_saved_to_memory:\s+true',
+  'daily_note_called:\s+true',
+  'daily_note_direct_write_allowed:\s+true',
+  'vcp_toolbox_files_modified:\s+true',
+  'image_asset_available_for_review:\s+true',
+  'additional_plugin_call_authorized:\s+true',
+  'OPENAI_API_KEY\s*[:=]',
+  '[A-Za-z]:\\',
+  'https?://'
+)
+
+foreach ($path in $v10GptImageRetry2Files) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v0.10 GPTImageGen retry2 record file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV10GptImageRetry2Patterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v0.10 GPTImageGen retry2 record missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV10GptImageRetry2Patterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v0.10 GPTImageGen retry2 record boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$v10GptImageGpt55Files = @(
+  'integrations/vcp/v0_10_gptimagegen_gpt55_real_execution_record.md',
+  'tests/schema_examples/v0_10_gptimagegen_gpt55_real_execution_record.example.yaml'
+)
+
+$requiredV10GptImageGpt55Patterns = @(
+  'phase:\s+v0\.10_gptimagegen_gpt55_real_execution',
+  'status:\s+failed_auth_rolled_back',
+  'selected_plugin_id:\s+GPTImageGen',
+  'command:\s+GPTGenerateImage',
+  'model_ref:\s+gpt-5\.5',
+  'model_override_applied:\s+true',
+  'config_model_modified:\s+false',
+  'max_plugin_calls_authorized:\s+1',
+  'actual_plugin_calls:\s+1',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'file_write_performed:\s+true',
+  'image_file_created:\s+false',
+  'rollback_performed:\s+true',
+  'daily_note_called:\s+false',
+  'daily_note_direct_write_allowed:\s+false',
+  'memory_delta_only:\s+true',
+  'raw_plugin_output_saved:\s+false',
+  'secret_value_saved:\s+false',
+  'endpoint_raw_saved:\s+false',
+  'runtime_log_saved:\s+false',
+  'request_identifier_saved:\s+false',
+  'image_binary_saved_to_memory:\s+false',
+  'vcp_toolbox_files_modified:\s+false',
+  'failure_review:',
+  'status:\s+blocked_by_plugin_credential',
+  'model_compatibility_verified:\s+false',
+  'additional_plugin_call_authorized:\s+false',
+  'next_action_requires_new_user_authorization:\s+true'
+)
+
+$forbiddenV10GptImageGpt55Patterns = @(
+  'raw_plugin_output_saved:\s+true',
+  'secret_value_saved:\s+true',
+  'endpoint_raw_saved:\s+true',
+  'runtime_log_saved:\s+true',
+  'request_identifier_saved:\s+true',
+  'image_binary_saved_to_memory:\s+true',
+  'daily_note_called:\s+true',
+  'daily_note_direct_write_allowed:\s+true',
+  'vcp_toolbox_files_modified:\s+true',
+  'config_model_modified:\s+true',
+  'image_asset_available_for_review:\s+true',
+  'additional_plugin_call_authorized:\s+true',
+  'OPENAI_API_KEY\s*[:=]',
+  '[A-Za-z]:\\',
+  'https?://'
+)
+
+foreach ($path in $v10GptImageGpt55Files) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v0.10 GPTImageGen gpt-5.5 record file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV10GptImageGpt55Patterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v0.10 GPTImageGen gpt-5.5 record missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV10GptImageGpt55Patterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v0.10 GPTImageGen gpt-5.5 record boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$v10DoubaoRetryFiles = @(
+  'integrations/vcp/v0_10_doubaogen_retry_real_execution_record.md',
+  'tests/schema_examples/v0_10_doubaogen_retry_real_execution_record.example.yaml'
+)
+
+$requiredV10DoubaoRetryPatterns = @(
+  'phase:\s+v0\.10_doubaogen_retry_real_execution',
+  'status:\s+completed_validated_with_human_acceptance',
+  'selected_plugin_id:\s+DoubaoGen',
+  'command:\s+generate',
+  'model_ref:\s+doubao-seedream-5-0-260128',
+  'max_plugin_calls_authorized:\s+1',
+  'actual_plugin_calls:\s+1',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'file_write_performed:\s+true',
+  'image_file_created:\s+true',
+  'rollback_performed:\s+false',
+  'daily_note_called:\s+false',
+  'daily_note_direct_write_allowed:\s+false',
+  'memory_delta_only:\s+true',
+  'generated_image_count:\s+1',
+  'generated_image_sha256:\s+b162fab50e6a5bf95b8f761441149ee27d498a3b136eafe6322f05c5499d06f0',
+  'raw_plugin_output_saved:\s+false',
+  'secret_value_saved:\s+false',
+  'endpoint_raw_saved:\s+false',
+  'runtime_log_saved:\s+false',
+  'image_binary_saved_to_memory:\s+false',
+  'vcp_toolbox_files_modified:\s+false',
+  'visual_review:',
+  'status:\s+accepted_by_human_override',
+  'human_acceptance_override:\s+true',
+  'usable_for_next_phase:\s+true',
+  'prompt_compliance_perfect:\s+false',
+  'no_people_observed:\s+true',
+  'accepted_as_project_cover:\s+true',
+  'additional_plugin_call_authorized:\s+false',
+  'next_action_requires_new_user_authorization:\s+true'
+)
+
+$forbiddenV10DoubaoRetryPatterns = @(
+  'raw_plugin_output_saved:\s+true',
+  'secret_value_saved:\s+true',
+  'endpoint_raw_saved:\s+true',
+  'runtime_log_saved:\s+true',
+  'image_binary_saved_to_memory:\s+true',
+  'daily_note_called:\s+true',
+  'daily_note_direct_write_allowed:\s+true',
+  'vcp_toolbox_files_modified:\s+true',
+  'prompt_compliance_perfect:\s+true',
+  'additional_plugin_call_authorized:\s+true',
+  '[A-Za-z]:\\',
+  'https?://'
+)
+
+foreach ($path in $v10DoubaoRetryFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v0.10 DoubaoGen retry record file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV10DoubaoRetryPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v0.10 DoubaoGen retry record missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV10DoubaoRetryPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v0.10 DoubaoGen retry record boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
 $v08ReleaseReadinessFiles = @(
-  'docs/30_release_readiness_report.md',
-  'docs/32_final_acceptance_report.md',
   'tests/schema_examples/v0_8_release_readiness.example.yaml'
 )
 
@@ -559,6 +979,68 @@ foreach ($path in $v08ReleaseReadinessFiles) {
   foreach ($pattern in $forbiddenV08Patterns) {
     if ($content -match $pattern) {
       Add-Failure "v0.8 release readiness boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$v10TrueLoopCloseoutFiles = @(
+  'docs/30_release_readiness_report.md',
+  'docs/32_final_acceptance_report.md',
+  'docs/34_v1_0_true_loop_closeout.md',
+  'tests/schema_examples/v1_0_true_loop_closeout.example.yaml'
+)
+
+$requiredV10TrueLoopCloseoutPatterns = @(
+  'checkpoint:\s+v1\.0_true_loop_closeout',
+  'real_execution_complete:\s+true',
+  'generated_asset_accepted:\s+true',
+  'human_acceptance_override:\s+true',
+  'prompt_compliance_perfect:\s+false',
+  'final_v1_0_ready:\s+true',
+  'release_publish_authorized:\s+false',
+  'commit_or_tag_authorized:\s+false',
+  'daily_note_called:\s+false',
+  'image_binary_saved_to_memory:\s+false',
+  'raw_plugin_output_saved:\s+false',
+  'secret_value_saved:\s+false',
+  'endpoint_raw_saved:\s+false',
+  'vcp_toolbox_files_modified:\s+false',
+  'additional_plugin_call_authorized:\s+false'
+)
+
+$forbiddenV10TrueLoopCloseoutPatterns = @(
+  'release_publish_authorized:\s+true',
+  'commit_or_tag_authorized:\s+true',
+  'daily_note_called:\s+true',
+  'daily_note_direct_write_allowed:\s+true',
+  'image_binary_saved_to_memory:\s+true',
+  'raw_plugin_output_saved:\s+true',
+  'secret_value_saved:\s+true',
+  'endpoint_raw_saved:\s+true',
+  'runtime_log_saved:\s+true',
+  'vcp_toolbox_files_modified:\s+true',
+  'additional_plugin_call_authorized:\s+true',
+  'prompt_compliance_perfect:\s+true',
+  '[A-Za-z]:\\',
+  'https?://'
+)
+
+foreach ($path in $v10TrueLoopCloseoutFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v1.0 true-loop closeout file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV10TrueLoopCloseoutPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v1.0 true-loop closeout missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV10TrueLoopCloseoutPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v1.0 true-loop closeout boundary violation in ${path}: $pattern"
     }
   }
 }

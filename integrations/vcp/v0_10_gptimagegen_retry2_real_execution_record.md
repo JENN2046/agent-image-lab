@@ -1,0 +1,64 @@
+# v0.10 GPTImageGen Retry2 Real Execution Record
+
+This record summarizes the second authorized GPTImageGen v0.10 attempt. It is
+sanitized and does not store raw plugin output, secrets, raw endpoints, runtime
+logs, cookies, passwords, request identifiers, or image binary data in project
+docs.
+
+## Sanitized Execution Summary
+
+```yaml
+gptimagegen_retry2_execution_record:
+  phase: v0.10_gptimagegen_retry2_real_execution
+  status: failed_auth_rolled_back
+  selected_plugin_id: GPTImageGen
+  command: GPTGenerateImage
+  model_ref: gpt-image-2
+  max_plugin_calls_authorized: 1
+  actual_plugin_calls: 1
+  gatekeeper_approved: true
+  review_console_human_approved: true
+  api_called: true
+  vcp_plugin_called: true
+  file_write_performed: true
+  image_file_created: false
+  rollback_performed: true
+  rolled_back_image_files: 0
+  daily_note_called: false
+  daily_note_direct_write_allowed: false
+  memory_delta_only: true
+  output_directory_ref: runs/photo_studio_os_v0_10_gptimagegen_retry2
+  requested_size: 1536x1024
+  requested_quality: high
+  requested_count: 1
+  raw_plugin_output_saved: false
+  secret_value_saved: false
+  endpoint_raw_saved: false
+  runtime_log_saved: false
+  request_identifier_saved: false
+  image_binary_saved_to_memory: false
+  vcp_toolbox_files_modified: false
+  isolated_runtime_used: true
+```
+
+## Failure Review
+
+```yaml
+failure_review:
+  status: blocked_by_plugin_credential
+  sanitized_reason: API authentication was rejected by the provider
+  credential_value_exposed: false
+  endpoint_raw_exposed: false
+  request_identifier_exposed: false
+  image_asset_available_for_review: false
+  additional_plugin_call_authorized: false
+  next_action_requires_human_credential_fix: true
+  next_action_requires_new_user_authorization: true
+```
+
+## Conclusion
+
+The retry consumed the single authorized plugin-call budget. No usable image was
+produced because authentication was rejected again. Do not retry GPTImageGen
+until the plugin credential and target service configuration are repaired and a
+new explicit authorization is provided.

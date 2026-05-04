@@ -1,12 +1,12 @@
 # 32 Final Acceptance Report
 
-本文是当前最终验收报告。由于尚未获得真实执行授权，本报告结论为“真实执行前验收通过，真实闭环 final 未完成”。
+本文是当前最终验收报告。项目已经完成一次受控 Photo Studio OS 真实执行闭环，并由用户人工判定资产可进入下一阶段。
 
 ## 验收结论
 
 ```yaml
 acceptance_result:
-  checkpoint: v0.8_release_readiness
+  checkpoint: v1.0_true_loop_closeout
   documentation_complete: true
   adapter_dry_run_complete: true
   vcptoolbox_adapter_only_install_verified: true
@@ -14,8 +14,13 @@ acceptance_result:
   gatekeeper_preflight_complete: true
   review_console_preflight_complete: true
   photo_studio_os_zero_call_rehearsal_complete: true
-  real_execution_complete: false
-  final_v1_0_ready: false
+  real_execution_complete: true
+  generated_asset_accepted: true
+  acceptance_mode: human_override
+  prompt_compliance_perfect: false
+  final_v1_0_ready: true
+  release_publish_authorized: false
+  commit_or_tag_authorized: false
 ```
 
 ## 验收项
@@ -28,36 +33,55 @@ acceptance_result:
 | VCPToolBox Adapter 包 | 通过 | stdio dry-run 包装可返回草案 |
 | VCPToolBox Adapter-only 安装验证 | 通过 | 只安装 Adapter，不安装真实生图插件 |
 | 单一 manifest 脱敏审查 | 通过 | 只保存中文脱敏摘要 |
-| Gatekeeper 风险边界 | 通过 | 当前阻断真实执行 |
-| Review Console 人工审批前置 | 通过 | 当前审批状态 pending |
+| Gatekeeper 风险边界 | 通过 | 真实执行前风险门已形成 |
+| Review Console 人工审批前置 | 通过 | 审批字段和禁止动作已定义 |
 | Photo Studio OS dry-run rehearsal | 通过 | 0 插件调用 |
-| 真实执行闭环 | 未通过 | 需要单独授权后执行 |
+| 真实执行闭环 | 通过 | 已完成受控真实插件调用和脱敏记录 |
+| 人工资产验收 | 通过 | v0.10 DoubaoGen retry 已被人工接受 |
 
-## 当前 No-Execution 状态
+## 已接受资产
 
 ```yaml
-no_execution_guard:
-  selected_plugin_for_execution: null
-  max_plugin_calls_authorized: 0
-  real_execution_allowed: false
-  api_called: false
-  vcp_plugin_called: false
-  daily_note_called: false
-  file_write_performed: false
-  image_file_created: false
+accepted_asset:
+  scenario: Photo Studio OS
+  selected_plugin_id: DoubaoGen
+  command: generate
+  model_ref: doubao-seedream-5-0-260128
+  max_plugin_calls_authorized: 1
+  actual_plugin_calls: 1
+  generated_image_ref: runs/photo_studio_os_v0_10_doubao_retry/image/doubaogen/bcbe3b60-6f7b-4e92-8a9d-b5044a86b7c3.jpg
+  generated_image_sha256: b162fab50e6a5bf95b8f761441149ee27d498a3b136eafe6322f05c5499d06f0
+  accepted_as_project_cover: true
+  human_acceptance_override: true
+  known_visual_deviations_recorded: true
 ```
 
-## v1.0 final 阻塞项
+## 执行后安全状态
 
-v1.0 final 必须等以下事项完成：
+```yaml
+post_execution_guard:
+  daily_note_called: false
+  daily_note_direct_write_allowed: false
+  memory_delta_only: true
+  raw_plugin_output_saved: false
+  secret_value_saved: false
+  endpoint_raw_saved: false
+  runtime_log_saved: false
+  image_binary_saved_to_memory: false
+  vcp_toolbox_files_modified: false
+  additional_plugin_call_authorized: false
+```
 
-1. 用户单独授权 Photo Studio OS 最小真实执行。
-2. 真实插件、最大调用次数、输入引用、输出目录和回滚方案明确。
-3. Gatekeeper 和 Review Console 均明确批准。
-4. 单插件真实调用完成并记录脱敏结果。
-5. 输出资产只归档路径、评分、摘要和规则。
-6. `memory_delta` 只生成写入申请，不绕过审批写 DailyNote。
+## 仍需单独授权的事项
+
+- 提交当前本地改动。
+- 推送到远端。
+- 打 v1.0 tag。
+- 生成正式 release 包。
+- 发布 GitHub release。
+- 再次调用任何真实生图插件。
+- 直接写 DailyNote 或 VCP 长期记忆。
 
 ## 最终建议
 
-当前可发布为 release-readiness checkpoint。不要标记为 v1.0 final，直到真实执行闭环完成。
+当前可作为 v1.0 true-loop closeout 候选。下一步应先提交本地收束材料，再在用户授权下打 tag 和推送。

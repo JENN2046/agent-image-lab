@@ -1,0 +1,68 @@
+# v0.10 GPTImageGen GPT-5.5 Real Execution Record
+
+This record summarizes the authorized GPTImageGen attempt with a per-process
+model override set to `gpt-5.5`. It is sanitized and does not store raw plugin
+output, secrets, raw endpoints, runtime logs, cookies, passwords, request
+identifiers, or image binary data in project docs.
+
+## Sanitized Execution Summary
+
+```yaml
+gptimagegen_gpt55_execution_record:
+  phase: v0.10_gptimagegen_gpt55_real_execution
+  status: failed_auth_rolled_back
+  selected_plugin_id: GPTImageGen
+  command: GPTGenerateImage
+  model_ref: gpt-5.5
+  model_override_applied: true
+  config_model_modified: false
+  max_plugin_calls_authorized: 1
+  actual_plugin_calls: 1
+  gatekeeper_approved: true
+  review_console_human_approved: true
+  api_called: true
+  vcp_plugin_called: true
+  file_write_performed: true
+  image_file_created: false
+  rollback_performed: true
+  rolled_back_image_files: 0
+  daily_note_called: false
+  daily_note_direct_write_allowed: false
+  memory_delta_only: true
+  output_directory_ref: runs/photo_studio_os_v0_10_gptimagegen_gpt55
+  requested_size: 1536x1024
+  requested_quality: high
+  requested_count: 1
+  raw_plugin_output_saved: false
+  secret_value_saved: false
+  endpoint_raw_saved: false
+  runtime_log_saved: false
+  request_identifier_saved: false
+  image_binary_saved_to_memory: false
+  vcp_toolbox_files_modified: false
+  isolated_runtime_used: true
+```
+
+## Failure Review
+
+```yaml
+failure_review:
+  status: blocked_by_plugin_credential
+  sanitized_reason: API authentication was rejected before image generation
+  model_compatibility_verified: false
+  model_compatibility_reason: authentication failed before provider could confirm model availability
+  credential_value_exposed: false
+  endpoint_raw_exposed: false
+  request_identifier_exposed: false
+  image_asset_available_for_review: false
+  additional_plugin_call_authorized: false
+  next_action_requires_human_credential_fix: true
+  next_action_requires_new_user_authorization: true
+```
+
+## Conclusion
+
+The GPT-5.5 override was applied to the isolated GPTImageGen process, but the
+request failed at authentication. No conclusion can be drawn about whether the
+current GPTImageGen endpoint accepts `gpt-5.5` as an image-generation model until
+the credential problem is fixed.

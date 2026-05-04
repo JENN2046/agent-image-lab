@@ -94,7 +94,11 @@
 当前结果：
 
 - v0.7 前置包已生成，并完成 Photo Studio OS 0 调用 dry-run rehearsal。
-- 下一步必须由用户单独授权真实插件、调用次数、输入引用、输出目录和回滚方案。
+- 已在后续用户授权下完成受控真实执行尝试。
+- 首次 v0.7 真实执行技术成功但资产拒收。
+- v0.9 retry 技术成功但资产仍有视觉偏差。
+- v0.10 DoubaoGen model-explicit retry 已由用户人工接受为可进入下一阶段的项目封面资产。
+- 后续任何新增真实执行必须重新授权插件、调用次数、输入引用、输出目录和回滚方案。
 
 ## v1.0：发布与验收
 
@@ -113,7 +117,9 @@
 - `docs/30_release_readiness_report.md` 已形成。
 - `docs/31_install_and_operation_guide.md` 已形成。
 - `docs/32_final_acceptance_report.md` 已形成。
-- 当前只建议发布为 pre-execution checkpoint，不建议标记为 v1.0 final。
+- `docs/34_v1_0_true_loop_closeout.md` 已形成。
+- 当前可作为 v1.0 true-loop closeout 候选。
+- commit、tag、push、release 包和远端发布仍需要用户单独授权。
 
 ## 永久停止条件
 

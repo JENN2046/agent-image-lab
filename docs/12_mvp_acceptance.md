@@ -25,7 +25,7 @@
 
 ## Release-readiness checkpoint
 
-当前 release-readiness checkpoint 必须满足：
+历史 release-readiness checkpoint 必须满足：
 
 - Adapter dry-run lab 可运行。
 - VCPToolBox Adapter-only dry-run 安装验证已记录。
@@ -37,6 +37,21 @@
 - 最终验收报告明确 v1.0 final 尚未完成。
 
 Release-readiness 不等于真实闭环 final。真实闭环 final 必须完成一次单独授权的真实执行。
+
+## v1.0 true-loop closeout
+
+当前 v1.0 closeout 必须满足：
+
+- Adapter dry-run lab 可运行。
+- VCPToolBox Adapter-only dry-run 安装验证已记录。
+- 单一真实生图插件 manifest 已完成只读脱敏审查。
+- Gatekeeper 风险边界已定义。
+- Review Console 人工审批前置记录已定义。
+- Photo Studio OS dry-run rehearsal 已完成。
+- 真实执行记录已归档，且不保存 raw 插件输出、密钥、endpoint 或运行日志。
+- 已有一个 Photo Studio OS 资产由人工接受进入下一阶段。
+- 图片二进制不进入 Git、DailyNote 或长期记忆。
+- 后续真实调用、DailyNote 写入、commit、tag、push 和 release 发布仍需单独授权。
 
 ## Phase 4：MVP-B dry-run integration planning
 

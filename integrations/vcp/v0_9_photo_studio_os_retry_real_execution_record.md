@@ -1,0 +1,70 @@
+# v0.9 Photo Studio OS Retry Real Execution Record
+
+This record summarizes the authorized v0.9 retry attempt. It is sanitized and
+does not store raw plugin output, secrets, raw endpoints, runtime logs, cookies,
+passwords, or image binary data in project docs.
+
+## Sanitized Execution Summary
+
+```yaml
+retry_execution_record:
+  phase: v0.9_photo_studio_os_retry_real_execution
+  status: completed_validated_with_visual_rejection
+  selected_plugin_id: DoubaoGen
+  command: generate
+  max_plugin_calls_authorized: 1
+  actual_plugin_calls: 1
+  gatekeeper_approved: true
+  review_console_human_approved: true
+  api_called: true
+  vcp_plugin_called: true
+  file_write_performed: true
+  image_file_created: true
+  daily_note_called: false
+  daily_note_direct_write_allowed: false
+  memory_delta_only: true
+  output_directory_ref: runs/photo_studio_os_v0_9_retry
+  generated_image_count: 1
+  generated_image_ref: runs/photo_studio_os_v0_9_retry/image/doubaogen/41c7b649-62df-41b2-8707-36792edc77b0.jpg
+  generated_image_bytes: 305895
+  generated_image_sha256: 642ea5d5a8de70eedcdd8a612b2cd9ae3e8b1ea263386bb34ee50be2124b4e35
+  raw_plugin_output_saved: false
+  secret_value_saved: false
+  endpoint_raw_saved: false
+  runtime_log_saved: false
+  image_binary_saved_to_memory: false
+  vcp_toolbox_files_modified: false
+  isolated_runtime_used: true
+  plugin_runtime_secret_cache_blocked: true
+```
+
+## Visual Review
+
+```yaml
+visual_review:
+  status: rejected_for_prompt_mismatch
+  reasons:
+    - generated image contains visible text
+    - generated image contains logo-like marks
+    - background screen content includes human portrait imagery
+  accepted_as_project_cover: false
+  additional_plugin_call_authorized: false
+  next_action_requires_new_user_authorization: true
+```
+
+## Memory Delta
+
+```yaml
+memory_delta:
+  generated: draft_only
+  direct_daily_note_write: false
+  binary_image_to_memory: false
+  record_ref: runs/photo_studio_os_v0_9_retry/memory_delta_request.sanitized.yaml
+```
+
+## Conclusion
+
+The v0.9 retry completed exactly one authorized real plugin call. The output is
+not accepted for Photo Studio OS use because it violates the no-people,
+no-logo-like-mark, and no-text visual constraints. Any further retry requires a
+new explicit authorization and a fresh max-call budget.

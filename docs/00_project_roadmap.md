@@ -11,14 +11,14 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 | L1 规格基线 | 已基本完成 | 文档、Agent 规则、schema、记忆策略、审片台规格、无执行样例完整，并能通过只读校验。 |
 | L2 审片台原型 | 已基本完成 | 静态 Review Console 能展示版本、评分、人工覆盖、审批和 memory_delta 草案，不调用 API、不写文件。 |
 | L3 MVP-B dry-run | 已基本完成 | Adapter dry-run 已有项目内实现、VCPToolBox 导出包和 v0.5 安装验证，仍保持 `max_plugin_calls=0`、不调用真实插件、不写 DailyNote。 |
-| L4 受控真实闭环 | 等待真实执行授权 | 已完成单一真实生图 manifest 脱敏审查、v0.7 前置包和 Photo Studio OS 0 调用 dry-run rehearsal；仍未真实执行。 |
+| L4 受控真实闭环 | 已完成 v1.0 closeout 候选 | 已完成单一真实生图 manifest 脱敏审查、v0.7 前置包、Photo Studio OS 0 调用 dry-run rehearsal、受控真实执行、脱敏记录和人工接受通过。 |
 
 ## 当前基线
 
 当前仓库处于：
 
 ```text
-v0.8.0 release-readiness checkpoint
+v1.0 true-loop closeout candidate
 ```
 
 已经完成：
@@ -37,14 +37,18 @@ v0.8.0 release-readiness checkpoint
 - v0.7 Gatekeeper 风险边界、Review Console 人工审批前置记录和真实执行前确认表。
 - v0.7 独立真实执行授权门和 Photo Studio OS 0 调用 dry-run rehearsal。
 - v0.8 release readiness 报告、安装操作指南和最终验收报告。
+- v0.9 post-execution checkpoint、retry authorization gate、retry 真实执行记录和候选插件扫描。
+- v0.10 GPTImageGen 脱敏失败记录。
+- v0.10 DoubaoGen model-explicit retry 真实执行记录，已由用户人工接受进入下一阶段。
+- v1.0 true-loop closeout 记录和最终验收材料。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：
 
-- 真实插件选择。
 - VCPChat 子窗口接入。
 - DailyNote / VCP 长期记忆真实写入。
-- 真实图片生成、编辑、归档。
+- commit、tag、push 和正式 release 发布。
+- 后续更多真实图片生成、编辑、归档。
 
 ## 阶段路线
 
@@ -194,10 +198,10 @@ daily_note_called: false
 
 ## 当前优先队列
 
-1. 完成并归档 v0.8 release-readiness checkpoint。
-2. 等待用户单独授权 v0.7 Photo Studio OS 最小真实执行。
-3. 真实执行前再次确认插件、调用次数、输入引用、输出目录和回滚方案。
-4. 真实执行通过后，升级到 v1.0 final 并补最终真实闭环验收报告。
+1. 完成并归档 v1.0 true-loop closeout 本地材料。
+2. 运行完整校验，确保文档、Adapter、Review Console 和执行记录均通过。
+3. 等待用户单独授权 commit、tag、push 或正式 release 发布。
+4. 后续任何新增真实生图调用都必须重新确认插件、调用次数、输入引用、输出目录和回滚方案。
 
 ## 永久安全门
 
