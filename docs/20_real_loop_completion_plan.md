@@ -9,7 +9,7 @@
 完成标准：
 
 - `exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js` 存在。
-- 该文件只导出 `dryRun(input)`，不读文件、不写文件、不调用 API、不调用 VCP 插件、不写 DailyNote。
+- 该文件保留 `dryRun(input)` 模块 API；v0.5 允许增加 VCPToolBox stdio dry-run 包装，但仍不读文件、不写文件、不调用 API、不调用 VCP 插件、不写 DailyNote。
 - `plugin-manifest.json` 保持 `dry-run-only`、`execution_blocked=true`、`max_plugin_calls=0`。
 - Review Console handoff fixture 能说明 Adapter 输出如何展示，但不能触发执行。
 
@@ -26,11 +26,18 @@
 
 完成标准：
 
+- `integrations/vcp/v0_5_adapter_install_verification.md` 形成中文脱敏安装验证记录。
 - 真实插件调用次数为 0。
 - 外部 API 调用为 0。
 - DailyNote 写入为 0。
 - 文件和图片写入为 0。
-- 生成中文脱敏安装验证记录。
+- accepted fixture 返回 `accepted_draft`，rejected fixture 返回 `rejected`。
+
+当前结果：
+
+- 已完成一次用户授权的 Adapter-only dry-run 安装验证。
+- 目标工作线采用 VCPToolBox 现有预发布候选线；没有切分支、没有提交、没有推送。
+- 未安装真实生图插件，未修改 Agent map、配置、DailyNote 或运行数据。
 
 ## v0.6：真实生图插件 manifest 授权审查
 

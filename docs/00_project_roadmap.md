@@ -10,7 +10,7 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 |---|---|---|
 | L1 规格基线 | 已基本完成 | 文档、Agent 规则、schema、记忆策略、审片台规格、无执行样例完整，并能通过只读校验。 |
 | L2 审片台原型 | 已基本完成 | 静态 Review Console 能展示版本、评分、人工覆盖、审批和 memory_delta 草案，不调用 API、不写文件。 |
-| L3 MVP-B dry-run | 未完成 | Adapter dry-run 有最小可验证实现，仍保持 `max_plugin_calls=0`、不调用真实插件、不写 DailyNote。 |
+| L3 MVP-B dry-run | 已基本完成 | Adapter dry-run 已有项目内实现、VCPToolBox 导出包和 v0.5 安装验证，仍保持 `max_plugin_calls=0`、不调用真实插件、不写 DailyNote。 |
 | L4 受控真实闭环 | 未开始 | 在独立授权下读取单一 manifest 脱敏摘要、选择单一插件、完成人工审批后的最小真实执行与回滚策略。 |
 
 ## 当前基线
@@ -18,7 +18,7 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-v0.2.5 final baseline + v0.3.0 manifest authorization planning
+v0.5.0 adapter dry-run install verification
 ```
 
 已经完成：
@@ -32,13 +32,13 @@ v0.2.5 final baseline + v0.3.0 manifest authorization planning
 - 仓库内 AgentImageLabAdapter 草案 manifest 的 Phase C 脱敏审查记录。
 - Phase D 项目内 Adapter dry-run lab 最小实现。
 - v0.4 VCPToolBox 导出级 dry-run Adapter 候选文件。
+- v0.5 VCPToolBox Adapter-only dry-run 安装验证记录。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：
 
 - 真实外部 VCPToolBox manifest 读取。
 - 真实插件选择。
-- VCPToolBox 内 Adapter dry-run 插件安装与验证。
 - VCPChat 子窗口接入。
 - DailyNote / VCP 长期记忆真实写入。
 - 真实图片生成、编辑、归档。
@@ -121,7 +121,9 @@ v0.2.5 final baseline + v0.3.0 manifest authorization planning
 
 Phase D 的实现边界以 `integrations/vcp/phase_d_adapter_dry_run_minimal_contract.md` 为准。未获得真实执行授权前，不得在 `exports/vcptoolbox/Plugin/AgentImageLabAdapter/` 中创建 `index.js` 或任何真实 VCP 插件执行入口。
 
-当前已有项目内实验实现 `adapter_dry_run_lab/adapter_dry_run.js`，只读 JSON fixture 并向 stdout 输出 dry-run 草案；它不是 VCP 插件，不安装到 VCPToolBox，不写文件、不调用插件、不调用 API。
+当前已有项目内实验实现 `adapter_dry_run_lab/adapter_dry_run.js`，只读 JSON fixture 并向 stdout 输出 dry-run 草案；它不是 VCP 插件，不写文件、不调用插件、不调用 API。
+
+v0.5 已在用户授权下把 `exports/vcptoolbox/Plugin/AgentImageLabAdapter/` 的 Adapter-only dry-run 包安装到 VCPToolBox 预发布候选工作线中验证，记录位于 `integrations/vcp/v0_5_adapter_install_verification.md`。该验证只证明 `dry_run` 可返回草案，不代表真实插件选择或真实执行授权。
 
 必须保持：
 
@@ -187,10 +189,10 @@ daily_note_called: false
 
 ## 当前优先队列
 
-1. 完成 v0.4 dry-run export baseline 并打 tag。
-2. 等待用户单独授权真实 VCPToolBox 路径后，进入 v0.5 Adapter dry-run 安装验证。
-3. v0.5 通过后，再单独授权 v0.6 真实生图插件 manifest 脱敏审查。
-4. v0.6 通过后，再单独授权 v0.7 Photo Studio OS 最小真实闭环。
+1. 完成并归档 v0.5 Adapter dry-run 安装验证。
+2. 等待用户单独授权 v0.6 真实生图插件 manifest 脱敏审查。
+3. v0.6 通过后，再单独授权 v0.7 Photo Studio OS 最小真实闭环。
+4. v0.7 通过后，收束 v1.0 release、使用说明和最终验收报告。
 
 ## 永久安全门
 

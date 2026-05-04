@@ -1,0 +1,41 @@
+v0_5_adapter_install_verification:
+  phase: v0.5
+  authorization_scope:
+    target_vcptoolbox_ref: user_authorized_local_vcptoolbox
+    branch_policy: staging_current_preferred
+    adapter_only: true
+    real_generation_plugin_allowed: false
+    overwrite_existing_files_allowed: false
+    allowed_command: dry_run
+    rollback_required: true
+  install_result:
+    target_plugin_dir_created: true
+    overwritten_existing_files: false
+    installed_files:
+      - Plugin/AgentImageLabAdapter/plugin-manifest.json
+      - Plugin/AgentImageLabAdapter/dry-run-adapter.js
+      - Plugin/AgentImageLabAdapter/README.md
+    real_generation_plugin_installed: false
+    agent_map_modified: false
+    config_modified: false
+    daily_note_modified: false
+  accepted_fixture:
+    status: accepted_draft
+    selected_plugin: null
+    max_plugin_calls: 0
+    execution_blocked: true
+  rejected_fixture:
+    status: rejected
+    selected_plugin: null
+    max_plugin_calls: 0
+    execution_blocked: true
+  no_execution_guard:
+    api_called: false
+    vcp_plugin_called: false
+    daily_note_called: false
+    file_write_performed: false
+    image_file_created: false
+    real_execution_allowed: false
+  next_step:
+    v0_6_requires_new_single_manifest_authorization: true
+    real_execution_allowed_by_v0_5: false

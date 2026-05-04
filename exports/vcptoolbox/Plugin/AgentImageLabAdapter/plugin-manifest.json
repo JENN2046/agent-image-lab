@@ -1,12 +1,22 @@
 {
+  "manifestVersion": "1.0.0",
   "name": "AgentImageLabAdapter",
-  "displayName": "Agent Image Lab Adapter Draft",
-  "version": "0.4.0-dry-run-export",
-  "description": "Draft manifest for Agent Image Lab dry-run bridge. This file is not installed in real VCPToolBox.",
-  "status": "draft",
+  "displayName": "Agent Image Lab Adapter Dry-Run",
+  "version": "0.5.0-dry-run-adapter",
+  "description": "Adapter-only dry-run bridge for Agent Image Lab. It generates a dispatch draft and blocks all real execution.",
+  "author": "Agent Image Lab",
+  "pluginType": "synchronous",
+  "entryPoint": {
+    "type": "nodejs",
+    "command": "node dry-run-adapter.js"
+  },
+  "communication": {
+    "protocol": "stdio",
+    "timeout": 10000
+  },
+  "status": "testing",
   "mvpMode": "dry-run-only",
-  "entryCandidate": "dry-run-adapter.js",
-  "entryCandidateStatus": "draft-not-installed",
+  "installScope": "adapter-only",
   "allowedCommands": [
     "dry_run"
   ],
@@ -18,6 +28,16 @@
     "write_memory",
     "write_image_file"
   ],
+  "configSchema": {},
+  "capabilities": {
+    "invocationCommands": [
+      {
+        "commandIdentifier": "dry_run",
+        "description": "Only generate an Agent Image Lab dry-run dispatch draft. The request must include command=dry_run, task_envelope.mode=dry_run, max_plugin_calls=0, external_api_allowed=false, file_write_allowed=false, image binary disabled, Gatekeeper required, Review Console required, and DailyNote direct write disabled. The adapter never selects or calls a real image generation plugin.",
+        "example": "<<<[TOOL_REQUEST]>>>\ntool_name:「始」AgentImageLabAdapter「末」,\ncommand:「始」dry_run「末」,\ntask_envelope:「始」{ \"task_id\": \"task-photo-studio-os-001\", \"mode\": \"dry_run\", \"dry_run_controls\": { \"max_plugin_calls\": 0, \"allow_external_api\": false, \"allow_file_write\": false, \"allow_image_binary\": false }, \"approval_context\": { \"gatekeeper_required\": true, \"review_console_required\": true, \"daily_note_direct_write_allowed\": false }, \"safety\": { \"contains_secret\": false, \"contains_private_path\": false, \"contains_customer_private_data\": false, \"contains_image_binary\": false } }「末」\n<<<[END_TOOL_REQUEST]>>>"
+      }
+    ]
+  },
   "dryRunContract": {
     "external_api_allowed": false,
     "execution_blocked": true,
@@ -30,8 +50,8 @@
     "daily_note_direct_write_allowed": false
   },
   "notes_cn": [
-    "这是导出草案，不代表真实 VCP 插件已安装。",
-    "只能说明 dry-run 命令，不包含真实执行入口。",
+    "这是 Adapter-only dry-run 插件清单，不代表真实生图能力已启用。",
+    "唯一允许命令是 dry_run。",
     "不调用任何 VCP 生图插件。",
     "不写 VCP 记忆。",
     "不包含 API key、token、cookie、密码、私密路径或客户隐私。"

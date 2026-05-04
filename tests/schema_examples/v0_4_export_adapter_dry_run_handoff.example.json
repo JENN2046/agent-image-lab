@@ -3,6 +3,7 @@
     "candidate_id": "agent-image-lab-adapter-draft",
     "export_file": "exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js",
     "status": "draft_not_installed",
+    "historical_note": "This fixture records the v0.4 export baseline before the separately authorized v0.5 Adapter-only dry-run installation.",
     "adapter_response_shape": {
       "dispatch_plan_draft": true,
       "gatekeeper_handoff": true,

@@ -7,7 +7,7 @@
 - [ ] 文件直接位于项目根目录下，没有创建第二套 `agent-image-lab/` 嵌套目录。
 - [ ] 可运行 `scripts/validate_mvp.ps1` 完成只读自动检查；该脚本不是 Adapter、VCP 插件或真实执行入口。
 - [ ] 未修改 `codex/00_MASTER_TASK.md`。
-- [ ] 未修改 VCPToolBox。
+- [ ] 除用户授权的 v0.5 Adapter-only dry-run 安装外，未修改 VCPToolBox 其他路径。
 - [ ] 未修改 VCPChat。
 
 ## 安全检查
@@ -79,14 +79,15 @@
 ## VCP dry-run 检查
 
 - [ ] `integrations/vcp/` 只包含文档和 schema 草案。
-- [ ] `exports/vcptoolbox/` 只包含导出草案，不代表真实 VCPToolBox 已修改。
+- [ ] `exports/vcptoolbox/` 只包含 Adapter-only dry-run 包，不代表真实生图能力已启用。
 - [ ] AgentImageLabAdapter 只允许 `dry_run` 命令。
 - [ ] AgentImageLabAdapter 不包含 execution mode。
-- [ ] AgentImageLabAdapter 没有 `index.js` 或其他真实执行入口。
-- [ ] AgentImageLabAdapter 可以包含 `dry-run-adapter.js` 导出候选文件，但该文件必须是 draft-not-installed。
+- [ ] AgentImageLabAdapter 没有 `index.js` 或真实生图执行入口。
+- [ ] AgentImageLabAdapter 可以包含 `dry-run-adapter.js` VCP stdio dry-run 入口，但该入口只能返回草案并保持 no-execution guard。
 - [ ] `plugin-manifest.json` 中 `external_api_allowed=false`。
 - [ ] `plugin-manifest.json` 中 `execution_blocked=true`。
 - [ ] `plugin-manifest.json` 中 `max_plugin_calls=0`。
+- [ ] `plugin-manifest.json` 只允许 `dry_run`，且 `entryPoint.command=node dry-run-adapter.js`。
 - [ ] 插件能力矩阵仅包含待实测 / 占位行，不推测真实插件能力。
 - [ ] VCP 工具请求示例标注不代表真实执行、不含真实插件调用、不含密钥。
 
@@ -452,6 +453,8 @@
 
 - [ ] `docs/20_real_loop_completion_plan.md` 存在。
 - [ ] `integrations/vcp/v0_5_adapter_install_authorization.md` 存在，且默认 `user_authorized=false`。
+- [ ] `integrations/vcp/v0_5_adapter_install_verification.md` 存在，并记录 accepted/rejected dry-run 验收。
+- [ ] `tests/schema_examples/v0_5_adapter_install_verification.example.yaml` 存在，并保持 no-execution guard 全为 false / 0。
 - [ ] `integrations/vcp/v0_6_real_plugin_manifest_authorization.md` 存在，且默认 `user_authorized=false`。
 - [ ] `workflows/photo_studio_os_real_loop_runbook.md` 存在。
 - [ ] `RELEASE_NOTES.md` 存在，并明确当前未安装真实 VCPToolBox、未调用插件、未写 DailyNote。

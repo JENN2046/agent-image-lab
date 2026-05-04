@@ -174,9 +174,109 @@ function dryRun(input) {
   return buildAcceptedResponse(request);
 }
 
+function toVcpPluginResult(response) {
+  return {
+    status: "success",
+    result: response,
+    meta: {
+      adapter_mode: "dry_run",
+      selected_plugin: null,
+      max_plugin_calls: 0,
+      api_called: false,
+      vcp_plugin_called: false,
+      daily_note_called: false,
+      file_write_performed: false,
+      image_file_created: false,
+    },
+  };
+}
+
+function toVcpPluginError(code, message) {
+  return {
+    status: "error",
+    error: {
+      code,
+      message,
+    },
+    meta: {
+      adapter_mode: "dry_run",
+      selected_plugin: null,
+      max_plugin_calls: 0,
+      api_called: false,
+      vcp_plugin_called: false,
+      daily_note_called: false,
+      file_write_performed: false,
+      image_file_created: false,
+    },
+  };
+}
+
+function readStdin() {
+  return new Promise((resolve, reject) => {
+    let inputData = "";
+
+    process.stdin.setEncoding("utf8");
+    process.stdin.on("data", (chunk) => {
+      inputData += chunk;
+    });
+    process.stdin.on("end", () => resolve(inputData));
+    process.stdin.on("error", reject);
+  });
+}
+
+async function runCli() {
+  try {
+    const inputData = await readStdin();
+    if (!inputData.trim()) {
+      process.stdout.write(
+        JSON.stringify(
+          toVcpPluginError("MISSING_INPUT", "dry_run requires JSON input on stdin."),
+          null,
+          2
+        )
+      );
+      return;
+    }
+
+    let input;
+    try {
+      input = JSON.parse(inputData);
+    } catch (error) {
+      process.stdout.write(
+        JSON.stringify(
+          toVcpPluginError("INVALID_JSON", `Invalid JSON input: ${error.message}`),
+          null,
+          2
+        )
+      );
+      return;
+    }
+
+    const response = dryRun(input);
+    process.stdout.write(JSON.stringify(toVcpPluginResult(response), null, 2));
+  } catch (error) {
+    process.stdout.write(
+      JSON.stringify(
+        toVcpPluginError(
+          "UNKNOWN_ERROR",
+          error && error.message ? error.message : "Unknown dry-run adapter error."
+        ),
+        null,
+        2
+      )
+    );
+  }
+}
+
+if (require.main === module) {
+  runCli();
+}
+
 module.exports = {
   dryRun,
   buildAcceptedResponse,
   buildRejectedResponse,
   buildViolationList,
+  toVcpPluginResult,
+  toVcpPluginError,
 };

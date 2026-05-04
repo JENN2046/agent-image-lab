@@ -1,6 +1,6 @@
 # v0.5 Adapter Dry-Run Installation Authorization
 
-本文定义未来把 AgentImageLabAdapter dry-run 草案安装到真实 VCPToolBox 前的授权门。当前文件不修改 VCPToolBox，不安装插件，不调用插件，不调用 API，不写 DailyNote。
+本文定义把 AgentImageLabAdapter dry-run 草案安装到真实 VCPToolBox 前的授权门。该文件本身是授权模板；实际 v0.5 安装验证记录见 `integrations/vcp/v0_5_adapter_install_verification.md`。
 
 ## 授权申请必须包含
 

@@ -43,6 +43,7 @@ $requiredFiles = @(
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
   'integrations/vcp/phase_d_adapter_dry_run_minimal_contract.md',
   'integrations/vcp/v0_5_adapter_install_authorization.md',
+  'integrations/vcp/v0_5_adapter_install_verification.md',
   'integrations/vcp/v0_6_real_plugin_manifest_authorization.md',
   'workflows/photo_studio_os_real_loop_runbook.md',
   'docs/01_project_definition.md',
@@ -64,6 +65,7 @@ $requiredFiles = @(
   'tests/schema_examples/task_envelope.example.yaml',
   'tests/schema_examples/review_score.example.yaml',
   'tests/schema_examples/memory_delta.example.yaml',
+  'tests/schema_examples/v0_5_adapter_install_verification.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -174,6 +176,16 @@ if (Test-Path -LiteralPath $manifestPath) {
   }
   if ($manifest.dryRunContract.max_plugin_calls -ne 0) {
     Add-Failure "Adapter manifest max_plugin_calls must be 0"
+  }
+  if ($manifest.pluginType -ne 'synchronous') {
+    Add-Failure "Adapter manifest pluginType must be synchronous"
+  }
+  if ($manifest.entryPoint.command -ne 'node dry-run-adapter.js') {
+    Add-Failure "Adapter manifest entryPoint command must be node dry-run-adapter.js"
+  }
+  $allowedCommands = @($manifest.allowedCommands)
+  if ($allowedCommands.Count -ne 1 -or $allowedCommands[0] -ne 'dry_run') {
+    Add-Failure "Adapter manifest must only allow dry_run"
   }
 }
 
@@ -334,6 +346,73 @@ if (response.dispatch_plan_draft.execution_blocked !== true) process.exit(4);
   $exportCheckOutput = $exportCheckScript | node
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "export dry-run adapter accepted fixture check failed"
+  }
+
+  $adapterCliPath = Join-Path $Root 'exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js'
+  $acceptedCliInput = Get-Content -Raw -Encoding UTF8 (Join-Path $Root 'adapter_dry_run_lab/fixtures/accepted_request.json')
+  $acceptedCliOutput = $acceptedCliInput | & node $adapterCliPath
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "export dry-run adapter CLI accepted fixture exited with failure"
+  } else {
+    $acceptedCli = ($acceptedCliOutput -join "`n") | ConvertFrom-Json
+    $response = $acceptedCli.result.adapter_dry_run_response
+    if ($acceptedCli.status -ne 'success') {
+      Add-Failure "export dry-run adapter CLI accepted fixture must return VCP status success"
+    }
+    if ($response.status -ne 'accepted_draft') {
+      Add-Failure "export dry-run adapter CLI accepted fixture must return accepted_draft"
+    }
+    if ($response.dispatch_plan_draft.selected_plugin -ne $null) {
+      Add-Failure "export dry-run adapter CLI accepted fixture must keep selected_plugin null"
+    }
+    if ($response.dispatch_plan_draft.max_plugin_calls -ne 0) {
+      Add-Failure "export dry-run adapter CLI accepted fixture must keep max_plugin_calls 0"
+    }
+    if ($response.dispatch_plan_draft.execution_blocked -ne $true) {
+      Add-Failure "export dry-run adapter CLI accepted fixture must keep execution_blocked true"
+    }
+    if (
+      $response.no_execution_guard.api_called -ne $false -or
+      $response.no_execution_guard.vcp_plugin_called -ne $false -or
+      $response.no_execution_guard.daily_note_called -ne $false -or
+      $response.no_execution_guard.file_write_performed -ne $false -or
+      $response.no_execution_guard.image_file_created -ne $false
+    ) {
+      Add-Failure "export dry-run adapter CLI accepted fixture violated no-execution guard"
+    }
+  }
+
+  $rejectedCliInput = Get-Content -Raw -Encoding UTF8 (Join-Path $Root 'adapter_dry_run_lab/fixtures/rejected_request.json')
+  $rejectedCliOutput = $rejectedCliInput | & node $adapterCliPath
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "export dry-run adapter CLI rejected fixture exited with failure"
+  } else {
+    $rejectedCli = ($rejectedCliOutput -join "`n") | ConvertFrom-Json
+    $response = $rejectedCli.result.adapter_dry_run_response
+    if ($rejectedCli.status -ne 'success') {
+      Add-Failure "export dry-run adapter CLI rejected fixture must return VCP status success"
+    }
+    if ($response.status -ne 'rejected') {
+      Add-Failure "export dry-run adapter CLI rejected fixture must return rejected"
+    }
+    if ($response.selected_plugin -ne $null) {
+      Add-Failure "export dry-run adapter CLI rejected fixture must keep selected_plugin null"
+    }
+    if ($response.max_plugin_calls -ne 0) {
+      Add-Failure "export dry-run adapter CLI rejected fixture must keep max_plugin_calls 0"
+    }
+    if ($response.execution_blocked -ne $true) {
+      Add-Failure "export dry-run adapter CLI rejected fixture must keep execution_blocked true"
+    }
+    if (
+      $response.api_called -ne $false -or
+      $response.vcp_plugin_called -ne $false -or
+      $response.daily_note_called -ne $false -or
+      $response.file_write_performed -ne $false -or
+      $response.image_file_created -ne $false
+    ) {
+      Add-Failure "export dry-run adapter CLI rejected fixture violated no-execution guard"
+    }
   }
 }
 
