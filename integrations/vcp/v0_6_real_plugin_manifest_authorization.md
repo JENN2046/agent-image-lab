@@ -1,6 +1,6 @@
 # v0.6 Real Plugin Manifest Authorization
 
-本文定义未来读取单一真实生图插件 manifest 的授权门。当前文件不读取真实 VCPToolBox，不读取真实 manifest，不调用插件，不调用 API，不写 DailyNote。
+本文定义读取单一真实生图插件 manifest 的授权门。该文件本身是授权模板；实际 v0.6 脱敏审查记录见 `integrations/vcp/v0_6_real_plugin_manifest_sanitized_review.md`。
 
 ## 授权申请必须包含
 

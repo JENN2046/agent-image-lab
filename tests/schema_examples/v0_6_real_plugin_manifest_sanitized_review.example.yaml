@@ -1,0 +1,59 @@
+v0_6_real_plugin_manifest_sanitized_review:
+  phase: v0.6
+  authorization_scope:
+    candidate_id: DoubaoGen
+    target_manifest_ref: user_authorized_single_vcptoolbox_plugin_manifest
+    read_method: read_only
+    single_manifest_only: true
+    repository_wide_scan_allowed: false
+    real_execution_authorized: false
+  source_scope:
+    single_manifest_read_performed: true
+    repository_wide_scan_performed: false
+    vcpchat_read_performed: false
+    runtime_data_read_performed: false
+    config_env_read_performed: false
+    plugin_execution_performed: false
+    api_call_performed: false
+    file_write_performed: false
+    daily_note_write_performed: false
+    image_file_created: false
+  sanitized_review:
+    plugin_display_name_summary_cn: "候选为图像生成类插件；不保存显示名原文。"
+    command_summary_cn: "声明 1 个图像生成类调用命令；不保存命令描述原文。"
+    input_output_summary_cn: "输入提及提示词、分辨率、种子和图像相关字段；输出提及图像引用类结果。"
+    permission_risk_cn: "存在凭据类和服务地址类配置声明；未复制字段名、值或 endpoint 原文。"
+    gatekeeper_notes_cn: "后续必须复查凭据注入、服务地址脱敏、输出目录、图片二进制边界、调用次数和回滚方案。"
+    sanitized_review_summary_cn: "仅完成脱敏 manifest 审查，不代表真实执行授权。"
+  safety_result:
+    raw_manifest_saved: false
+    raw_manifest_copied: false
+    secret_value_copied: false
+    credential_field_name_copied: false
+    endpoint_raw_copied: false
+    private_path_copied: false
+    customer_private_data_copied: false
+    runtime_log_copied: false
+    real_plugin_output_copied: false
+    image_binary_copied: false
+    credential_like_config_declaration_observed: true
+    endpoint_like_config_declaration_observed: true
+    raw_url_like_reference_observed: true
+    private_path_like_reference_observed: false
+  state_decision:
+    previous_state: pending_manifest_review
+    next_state: manifest_reviewed_safe
+    allowed_next_step: dry_run_evaluation_planning
+    real_execution_allowed: false
+    plugin_selected_for_real_execution: false
+    dry_run_completed: false
+    tested: false
+  no_execution_guard:
+    selected_plugin: null
+    max_plugin_calls: 0
+    api_called: false
+    vcp_plugin_called: false
+    daily_note_called: false
+    file_write_performed: false
+    image_file_created: false
+    real_execution_allowed: false

@@ -57,6 +57,12 @@
 - 不保存密钥、token、endpoint、私密路径、客户隐私或运行日志。
 - 不进入真实执行。
 
+当前结果：
+
+- 已完成一次用户授权的单一真实生图插件 manifest 只读脱敏审查。
+- 记录位于 `integrations/vcp/v0_6_real_plugin_manifest_sanitized_review.md`。
+- 候选可进入后续 dry-run 评估规划，但尚未完成 dry-run、尚未测试、尚未允许真实执行。
+
 ## v0.7：Photo Studio OS 最小真实闭环
 
 目标：完成一次受控 Photo Studio OS 真实任务闭环。

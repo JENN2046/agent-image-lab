@@ -11,6 +11,7 @@
 - 不允许基于猜测填写真实插件名称或能力。
 - Phase 4 不选择真实插件，只规划未来单插件接入前置条件。
 - Phase 8 只设计 manifest 审查流程，不读取真实 VCPToolBox，不更新真实插件能力。
+- v0.6 已完成一次单一真实生图插件 manifest 脱敏审查；状态推进仅限 `manifest_reviewed_safe`，不代表 dry-run、测试或真实执行。
 
 ## 矩阵字段
 
@@ -104,6 +105,14 @@ Phase 4 不填真实插件名，也不把任何占位行标记为可用。未来
 | candidate_id | plugin_display_name_summary_cn | review_status | allowed_next_step | real_execution_allowed | notes_cn |
 |---|---|---|---|---|---|
 | agent-image-lab-adapter-draft | Agent Image Lab Adapter 草案桥接组件 | manifest_reviewed_safe | Phase D dry-run 设计评估 | false | 仅限仓库内草案 manifest；不选择真实插件，不调用插件，不写 DailyNote。 |
+
+## v0.6 真实生图 manifest 脱敏审查记录
+
+以下记录只表示单一真实生图插件 manifest 已完成中文脱敏审查，不代表插件已选择、已调用、已测试或允许真实执行。
+
+| candidate_id | plugin_display_name_summary_cn | review_status | allowed_next_step | real_execution_allowed | notes_cn |
+|---|---|---|---|---|---|
+| DoubaoGen | 图像生成类候选插件 | manifest_reviewed_safe | dry-run evaluation planning | false | 只保存中文脱敏摘要；存在凭据类和服务地址类配置声明，后续必须复查凭据注入、输出目录、图片二进制边界、最大调用次数和回滚方案。 |
 
 ## 禁止
 

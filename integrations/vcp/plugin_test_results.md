@@ -8,9 +8,9 @@
 
 | 项目 | 状态 |
 |---|---|
-| 真实插件名称 | 未选择 |
-| manifest 读取 | 未授权 |
-| 能力矩阵状态 | 待实测 |
+| 真实插件名称 | 未选择用于执行 |
+| manifest 读取 | 已完成单一候选只读脱敏审查 |
+| 能力矩阵状态 | manifest_reviewed_safe |
 | dry-run 实测 | 未开始 |
 | 真实插件调用 | 0 |
 | 外部 API 调用 | 0 |
@@ -18,6 +18,25 @@
 | DailyNote 写入 | 0 |
 | VCPToolBox 修改 | 无 |
 | VCPChat 修改 | 无 |
+
+## v0.6 manifest 审查结果摘要
+
+| 字段 | 结果 |
+|---|---|
+| candidate_id | DoubaoGen |
+| manifest_review_status | manifest_reviewed_safe |
+| capability_status | manifest_reviewed_safe |
+| task_type_fit_cn | 可进入 Photo Studio OS 图像生成 dry-run 评估规划，尚未实测 |
+| input_mode_observed | text_image |
+| output_mode_observed | image_reference |
+| risk_level | high |
+| gatekeeper_required | true |
+| review_console_required | true |
+| max_plugin_calls_allowed_in_test | 0 |
+| external_api_allowed_in_test | false |
+| file_write_allowed_in_test | false |
+| image_binary_allowed_in_test | false |
+| rejection_reason_cn | 无；但真实执行前必须重新授权 |
 
 ## 记录规则
 

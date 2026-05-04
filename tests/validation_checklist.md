@@ -456,8 +456,21 @@
 - [ ] `integrations/vcp/v0_5_adapter_install_verification.md` 存在，并记录 accepted/rejected dry-run 验收。
 - [ ] `tests/schema_examples/v0_5_adapter_install_verification.example.yaml` 存在，并保持 no-execution guard 全为 false / 0。
 - [ ] `integrations/vcp/v0_6_real_plugin_manifest_authorization.md` 存在，且默认 `user_authorized=false`。
+- [ ] `integrations/vcp/v0_6_real_plugin_manifest_sanitized_review.md` 存在，并只保存中文脱敏摘要。
+- [ ] `tests/schema_examples/v0_6_real_plugin_manifest_sanitized_review.example.yaml` 存在，并保持 `real_execution_allowed=false`。
 - [ ] `workflows/photo_studio_os_real_loop_runbook.md` 存在。
-- [ ] `RELEASE_NOTES.md` 存在，并明确当前未安装真实 VCPToolBox、未调用插件、未写 DailyNote。
+- [ ] `RELEASE_NOTES.md` 存在，并明确当前只完成 Adapter dry-run 安装验证和 manifest 脱敏审查，未调用插件、未写 DailyNote。
+
+## v0.6 单一真实 manifest 脱敏审查检查
+
+- [ ] v0.6 只读取一个用户授权的真实生图插件 manifest。
+- [ ] v0.6 不执行插件、不调用 API、不读 config.env、不读运行日志、不读 VCPChat。
+- [ ] v0.6 审查记录不包含 raw manifest 原文。
+- [ ] v0.6 审查记录不包含本地绝对路径、endpoint 原文、密钥、token、cookie、密码或客户隐私。
+- [ ] v0.6 审查记录只包含中文脱敏显示名摘要、命令摘要、输入输出摘要、权限风险和 Gatekeeper 复查点。
+- [ ] v0.6 可以推进到 `manifest_reviewed_safe`，但不得推进到 `dry_run_checked` 或 `tested`。
+- [ ] v0.6 保持 `selected_plugin=null`、`max_plugin_calls=0`、`api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`。
+- [ ] v0.6 不授权真实执行，不创建图片文件。
 
 ## 无执行闭环检查
 

@@ -45,6 +45,7 @@ $requiredFiles = @(
   'integrations/vcp/v0_5_adapter_install_authorization.md',
   'integrations/vcp/v0_5_adapter_install_verification.md',
   'integrations/vcp/v0_6_real_plugin_manifest_authorization.md',
+  'integrations/vcp/v0_6_real_plugin_manifest_sanitized_review.md',
   'workflows/photo_studio_os_real_loop_runbook.md',
   'docs/01_project_definition.md',
   'docs/02_workflow_sop.md',
@@ -66,6 +67,7 @@ $requiredFiles = @(
   'tests/schema_examples/review_score.example.yaml',
   'tests/schema_examples/memory_delta.example.yaml',
   'tests/schema_examples/v0_5_adapter_install_verification.example.yaml',
+  'tests/schema_examples/v0_6_real_plugin_manifest_sanitized_review.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -276,6 +278,53 @@ foreach ($path in $phaseCReviewFiles) {
   foreach ($pattern in $forbiddenPhaseCReviewPatterns) {
     if ($content -match $pattern) {
       Add-Failure "Phase C review boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$v06ReviewFiles = @(
+  'integrations/vcp/v0_6_real_plugin_manifest_sanitized_review.md',
+  'tests/schema_examples/v0_6_real_plugin_manifest_sanitized_review.example.yaml'
+)
+
+$forbiddenV06ReviewPatterns = @(
+  'raw_manifest_copied:\s+true',
+  'raw_manifest_saved:\s+true',
+  'secret_value_copied:\s+true',
+  'credential_field_name_copied:\s+true',
+  'endpoint_raw_copied:\s+true',
+  'private_path_copied:\s+true',
+  'customer_private_data_copied:\s+true',
+  'runtime_log_copied:\s+true',
+  'real_plugin_output_copied:\s+true',
+  'image_binary_copied:\s+true',
+  'real_execution_authorized:\s+true',
+  'real_execution_allowed:\s+true',
+  'plugin_selected_for_real_execution:\s+true',
+  'dry_run_completed:\s+true',
+  'tested:\s+true',
+  'selected_plugin:\s+(?!null\b)\S+',
+  'max_plugin_calls:\s+[1-9]',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'file_write_performed:\s+true',
+  'image_file_created:\s+true',
+  '[A-Za-z]:\\',
+  'https?://'
+)
+
+foreach ($path in $v06ReviewFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v0.6 manifest review record file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $forbiddenV06ReviewPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v0.6 manifest review boundary violation in ${path}: $pattern"
     }
   }
 }
