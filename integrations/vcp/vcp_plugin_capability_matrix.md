@@ -57,6 +57,31 @@
 
 Phase 8 期间只能新增或更新脱敏审查记录，不得把占位插件标记为可用。
 
+## Phase 12 state governance
+
+Phase 12 将能力矩阵状态推进规则固定为 v0.2 的治理口径。v0.2 final baseline 不读取真实 VCPToolBox，不读取真实 VCPChat，不读取真实 manifest，不调用插件，不调用 API，不写 DailyNote，不创建图片。
+
+v0.2 可以记录状态规则和未来状态模板，但不得声称任何真实插件已经达到 `manifest_reviewed_safe`、`dry_run_checked` 或 `tested`。
+
+状态进入条件：
+
+| 状态 | v0.2 是否可作为当前真实状态 | 进入条件 |
+|---|---|---|
+| `待实测` | 是 | 默认占位状态，未读取 manifest，未形成候选审查记录 |
+| `pending_manifest_review` | 是 | 已有 no-read 候选记录或授权门槛草案，但未读取真实 manifest |
+| `manifest_reviewed_safe` | 否 | 未来必须先完成单独授权的真实 manifest 读取和脱敏审查 |
+| `dry_run_checked` | 否 | 未来必须先有 `manifest_reviewed_safe`，再完成 max_plugin_calls=0 的 dry-run 验收 |
+| `tested` | 否 | 未来必须先有 dry-run 记录和人工确认；仍不代表真实执行授权 |
+| `rejected` | 是 | 发现无授权、无法脱敏、敏感原文、越界权限或 Gatekeeper 拒绝 |
+
+反向规则：
+
+- 未授权读取真实 manifest 时，不能进入 `manifest_reviewed_safe`。
+- 未完成 dry-run 验收时，不能进入 `dry_run_checked`。
+- 未完成人工确认时，不能进入 `tested`。
+- 任何状态都不改变 `selected_plugin=null`、`max_plugin_calls=0`、`execution_blocked=true` 和 `real_execution_allowed=false`。
+- `manifest_reviewed_safe`、`dry_run_checked`、`tested` 在 v0.2 中只能作为未来状态说明或模板字段，不得作为真实当前状态。
+
 ## Phase 4 单插件前置条件
 
 Phase 4 不填真实插件名，也不把任何占位行标记为可用。未来如果只接一个真实插件，必须先完成：

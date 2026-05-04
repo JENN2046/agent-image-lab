@@ -1,0 +1,184 @@
+phase12_capability_state_governance:
+  governance_metadata:
+    governance_id: phase12-capability-state-governance-001
+    phase: "Phase 12"
+    purpose_cn: "固化 v0.2 能力矩阵状态治理规则，证明占位候选不能自动推进到安全或测试状态。"
+    status: draft_acceptance_fixture
+    candidate_id: candidate-plugin-placeholder-001
+    created_at: "2026-05-04T21:00:00+08:00"
+    owner_role: ImageLab_Master
+
+  no_execution_guard:
+    selected_plugin: null
+    max_plugin_calls: 0
+    source_authorized: false
+    source_read_performed: false
+    real_manifest_read: false
+    real_execution_allowed: false
+    api_called: false
+    vcp_plugin_called: false
+    plugin_called: false
+    daily_note_called: false
+    vcp_memory_written: false
+    disk_write_performed: false
+    image_file_created: false
+    image_binary_included: false
+    vcp_toolbox_read: false
+    vcp_toolbox_modified: false
+    vcpchat_read: false
+    vcpchat_modified: false
+    sensitive_original_copied: false
+    audit_summary_cn: "Phase 12 只治理能力矩阵状态，不读取真实 manifest，不调用插件、API、DailyNote 或文件写入。"
+
+  state_catalog:
+    allowed_current_states_in_v02:
+      - "待实测"
+      - pending_manifest_review
+      - rejected
+    future_template_states_not_current_in_v02:
+      - manifest_reviewed_safe
+      - dry_run_checked
+      - tested
+    state_meaning_cn:
+      待实测: "默认占位状态；未读取 manifest，未形成安全结论。"
+      pending_manifest_review: "已有 no-read 候选记录或授权门槛草案，但未读取真实 manifest。"
+      manifest_reviewed_safe: "未来真实 manifest 被单独授权读取并完成脱敏审查后才可能出现。"
+      dry_run_checked: "未来完成 max_plugin_calls=0 的 dry-run 验收后才可能出现。"
+      tested: "未来人工确认测试记录完整后才可能出现，但仍不代表真实执行授权。"
+      rejected: "发现无授权、无法脱敏、敏感原文、越界权限或 Gatekeeper 拒绝。"
+
+  positive_transition_rules:
+    - transition_id: transition-placeholder-to-pending-001
+      status_before: "待实测"
+      status_after: pending_manifest_review
+      allowed_in_v02: true
+      required_evidence_cn:
+        - "存在 no-read 授权门槛草案。"
+        - "存在候选 ID 和中文脱敏审计摘要。"
+        - "确认未读取真实 manifest。"
+      guard:
+        source_authorized: false
+        source_read_performed: false
+        real_execution_allowed: false
+      note_cn: "该推进只代表准备进入 manifest 审查，不代表读取或安全通过。"
+
+  forbidden_transition_rules:
+    - transition_id: forbidden-pending-to-manifest-reviewed-safe-001
+      status_before: pending_manifest_review
+      forbidden_status_after: manifest_reviewed_safe
+      forbidden_in_v02: true
+      missing_required_evidence_cn:
+        - "没有未来独立授权的真实 manifest 读取。"
+        - "没有脱敏审查通过记录。"
+        - "没有 Gatekeeper 对真实 manifest 的复查结论。"
+      rule_cn: "未授权读取真实 manifest 时，不能进入 manifest_reviewed_safe。"
+    - transition_id: forbidden-manifest-reviewed-safe-to-dry-run-checked-001
+      status_before: manifest_reviewed_safe
+      forbidden_status_after: dry_run_checked
+      forbidden_in_v02: true
+      missing_required_evidence_cn:
+        - "v0.2 没有真实 manifest_reviewed_safe 当前状态。"
+        - "没有 dry-run 验收记录。"
+        - "没有证明 max_plugin_calls_observed=0 的真实 dry-run 记录。"
+      rule_cn: "未完成 dry-run 验收时，不能进入 dry_run_checked。"
+    - transition_id: forbidden-dry-run-checked-to-tested-001
+      status_before: dry_run_checked
+      forbidden_status_after: tested
+      forbidden_in_v02: true
+      missing_required_evidence_cn:
+        - "v0.2 没有 dry_run_checked 当前状态。"
+        - "没有人工确认的测试记录完整性。"
+      rule_cn: "未完成人工确认时，不能进入 tested。"
+
+  rejected_transition_rule:
+    status_after: rejected
+    allowed_in_v02: true
+    rejected_if_cn:
+      - "没有独立授权读取真实 manifest。"
+      - "记录中出现密钥、token、cookie、密码。"
+      - "记录中出现私密路径、客户隐私或客户未公开信息。"
+      - "manifest 字段无法脱敏说明。"
+      - "manifest 暗示未授权外部 API、文件写入、图片写入或 DailyNote 写入。"
+      - "Gatekeeper 要求拒绝。"
+    rejection_summary_cn: "拒绝状态只保留中文脱敏原因，不复制敏感原文。"
+
+  capability_matrix_update_draft:
+    update_id: capability-state-governance-phase12-001
+    candidate_id: candidate-plugin-placeholder-001
+    plugin_name: "待实测插件占位"
+    plugin_name_is_placeholder: true
+    task_type: photo_studio_os_review
+    input_mode: unknown
+    output_mode: unknown
+    best_for_cn: "待读取真实 manifest 并完成未来脱敏审查后确认。"
+    not_suitable_for_cn: "未完成审查前不得填写真实限制或能力结论。"
+    risk_level: medium
+    approval_required: true
+    status_before: "待实测"
+    status_after: pending_manifest_review
+    status_after_is_real_plugin_capability: false
+    forbidden_status_after_without_future_read:
+      - manifest_reviewed_safe
+      - dry_run_checked
+      - tested
+    notes_cn: "本更新草案只治理占位候选状态，不写真实插件能力。"
+    real_execution_allowed: false
+
+  review_console_handoff:
+    required: true
+    display_only: true
+    allowed_actions:
+      - mark_pending_manifest_review
+      - reject_candidate
+      - request_manifest_authorization
+      - request_gatekeeper_review
+    forbidden_actions:
+      - mark_manifest_reviewed_safe
+      - mark_dry_run_checked
+      - mark_tested
+      - execute_plugin
+      - call_api
+      - write_daily_note
+      - save_image
+    handoff_summary_cn: "Review Console 只能展示状态治理草案，不能把占位候选推进到未来安全或测试状态。"
+
+  memory_delta_draft:
+    delta_id: md-phase12-capability-state-governance-001
+    task_id: task-phase12-capability-state-governance-001
+    case_id: case-phase12-capability-state-governance-001
+    agent_name: Archivist_Agent
+    target_notebook: Rejected_Visual_Lessons
+    write_mode: draft
+    approval_required: true
+    approval_status: pending
+    approved_by: null
+    approved_at: null
+    chinese_diary_title: "Phase 12 能力矩阵状态治理草案"
+    chinese_diary_content: |
+      本记录说明 v0.2 只允许能力矩阵占位候选保持“待实测”或 pending_manifest_review；manifest_reviewed_safe、dry_run_checked 和 tested 只能作为未来状态说明，不能作为当前真实状态。当前未读取真实 manifest，未选择真实插件，未调用插件、API、DailyNote 或文件写入。
+    tags:
+      - Phase12
+      - 能力矩阵
+      - 状态治理
+      - no-execution
+    memory_safety:
+      contains_secret: false
+      contains_private_path: false
+      contains_customer_private_data: false
+      contains_image_binary: false
+      safety_notes_cn: "本草案为中文脱敏摘要，不含密钥、私密路径、客户隐私或图片二进制。"
+    final_decision:
+      should_write_to_vcp: false
+      should_show_in_review_console: true
+      rejection_reason_cn: null
+
+  acceptance_assertions:
+    - "v0.2 当前状态只能使用 待实测、pending_manifest_review 或 rejected。"
+    - "未授权读取真实 manifest 前，不能进入 manifest_reviewed_safe。"
+    - "未完成 dry-run 验收前，不能进入 dry_run_checked。"
+    - "未完成人工确认前，不能进入 tested。"
+    - "selected_plugin 必须为 null。"
+    - "max_plugin_calls 必须为 0。"
+    - "api_called、vcp_plugin_called、daily_note_called 必须为 false。"
+    - "不得记录真实插件名、真实 manifest 原文、真实插件路径或真实能力结论。"
+    - "所有记忆正文和审计摘要必须为中文脱敏内容。"

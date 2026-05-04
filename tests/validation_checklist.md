@@ -255,6 +255,25 @@
 - [ ] Phase 11 样例的记忆正文和审计摘要必须为中文脱敏内容。
 - [ ] Phase 11 不调用 API、VCP 插件、DailyNote，不写文件，不创建图片。
 
+## Phase 12 capability matrix state governance 检查
+
+- [ ] Phase 12 只固化能力矩阵状态治理规则，不读取真实 VCPToolBox。
+- [ ] Phase 12 不读取真实 VCPChat。
+- [ ] Phase 12 不读取真实 manifest。
+- [ ] `integrations/vcp/vcp_plugin_capability_matrix.md` 包含 Phase 12 state governance。
+- [ ] `tests/schema_examples/phase12_capability_state_governance.example.yaml` 存在。
+- [ ] Phase 12 样例包含 `state_catalog`、`positive_transition_rules`、`forbidden_transition_rules`、`rejected_transition_rule`、`capability_matrix_update_draft`、`review_console_handoff`、`memory_delta_draft` 和 `acceptance_assertions`。
+- [ ] Phase 12 样例保持 `source_authorized=false`、`source_read_performed=false`、`real_execution_allowed=false`。
+- [ ] Phase 12 样例保持 `selected_plugin=null`、`max_plugin_calls=0`。
+- [ ] Phase 12 样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`。
+- [ ] Phase 12 样例只允许 `待实测`、`pending_manifest_review` 或 `rejected` 作为 v0.2 当前状态。
+- [ ] Phase 12 样例证明未授权读取真实 manifest 时不得进入 `manifest_reviewed_safe`。
+- [ ] Phase 12 样例证明未完成 dry-run 验收时不得进入 `dry_run_checked`。
+- [ ] Phase 12 样例证明未完成人工确认时不得进入 `tested`。
+- [ ] Phase 12 样例不得记录真实插件名、真实 manifest 原文、真实插件路径或真实能力结论。
+- [ ] Phase 12 样例的记忆正文和审计摘要必须为中文脱敏内容。
+- [ ] Phase 12 不调用 API、VCP 插件、DailyNote，不写文件，不创建图片。
+
 ## 无执行闭环检查
 
 - [ ] `tests/schema_examples/task_envelope.example.yaml` 是 Photo Studio OS 无执行样例。
