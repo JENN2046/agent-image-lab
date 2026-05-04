@@ -28,6 +28,7 @@ v0.2.5 final baseline + v0.3.0 manifest authorization planning
 - VCPChat 接入设计边界。
 - Adapter dry-run planning。
 - v0.3 manifest recon / authorization gate / sanitized read preflight 文档。
+- v0.3 authorization planning closeout。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：
@@ -177,8 +178,8 @@ daily_note_called: false
 
 1. 收束 Phase A：补路线图、README 入口、只读校验脚本并提交。
 2. 给当前 HEAD 打 `v0.3.0-planning-baseline` 或类似 tag。
-3. 进入 Phase B closeout：确认 v0.3 授权文档和样例没有越权。
-4. 等待用户单独授权后，才进入 Phase C 的单一 manifest 脱敏读取。
+3. 等待用户单独授权后，才进入 Phase C 的单一 manifest 脱敏读取。
+4. 未授权前，只允许继续完善只读校验、文档一致性和 Review Console 设计。
 
 ## 永久安全门
 

@@ -31,6 +31,7 @@ $requiredFiles = @(
   'DECISIONS.md',
   'MANIFEST.md',
   'docs/00_project_roadmap.md',
+  'integrations/vcp/v0_3_authorization_closeout.md',
   'docs/01_project_definition.md',
   'docs/02_workflow_sop.md',
   'docs/03_agent_roles.md',
@@ -143,6 +144,51 @@ if (Test-Path -LiteralPath $manifestPath) {
   }
   if ($manifest.dryRunContract.max_plugin_calls -ne 0) {
     Add-Failure "Adapter manifest max_plugin_calls must be 0"
+  }
+}
+
+$v03Files = @(
+  'integrations/vcp/adapter_recon_plan.md',
+  'integrations/vcp/manifest_read_authorization_gate.md',
+  'integrations/vcp/manifest_sanitized_read_preflight.md',
+  'integrations/vcp/v0_3_authorization_closeout.md',
+  'tests/schema_examples/v0_3_adapter_recon_authorization.example.yaml',
+  'tests/schema_examples/v0_3_manifest_read_authorization_gate.example.yaml',
+  'tests/schema_examples/v0_3_manifest_sanitized_read_preflight.example.yaml'
+)
+
+$forbiddenV03Patterns = @(
+  'source_authorized:\s+true',
+  'source_read_performed:\s+true',
+  'real_manifest_read:\s+true',
+  'real_execution_allowed:\s+true',
+  'selected_plugin:\s+(?!null\b)\S+',
+  'max_plugin_calls:\s+[1-9]',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'external_repo_access_allowed:\s+true',
+  'read_authorized:\s+true',
+  'read_performed:\s+true',
+  'read_execution_authorized:\s+true',
+  'read_execution_started:\s+true',
+  'read_completed:\s+true',
+  'raw_manifest_copied:\s+true',
+  'raw_manifest_copy_allowed:\s+true'
+)
+
+foreach ($path in $v03Files) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v0.3 authorization file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $forbiddenV03Patterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v0.3 authorization boundary violation in ${path}: $pattern"
+    }
   }
 }
 

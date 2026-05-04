@@ -410,6 +410,15 @@
 - [ ] preflight 样例的记忆正文、拒绝原因和审计摘要必须为中文脱敏内容。
 - [ ] 本阶段不调用 API、VCP 插件、DailyNote，不写文件，不创建图片。
 
+## v0.3.0 authorization planning closeout 检查
+
+- [ ] `integrations/vcp/v0_3_authorization_closeout.md` 存在。
+- [ ] closeout 只确认 no-read / no-execution 边界，不读取真实 VCPToolBox、VCPChat 或 manifest。
+- [ ] closeout 确认所有 v0.3 样例保持 `source_authorized=false`、`source_read_performed=false`、`real_manifest_read=false`。
+- [ ] closeout 确认所有 v0.3 样例保持 `real_execution_allowed=false`、`selected_plugin=null`、`max_plugin_calls=0`。
+- [ ] closeout 确认未出现真实插件名、真实 manifest 原文、真实插件路径或真实能力结论。
+- [ ] `scripts/validate_mvp.ps1` 会扫描 v0.3 授权文档和样例中的越权锁定值。
+
 ## 无执行闭环检查
 
 - [ ] `tests/schema_examples/task_envelope.example.yaml` 是 Photo Studio OS 无执行样例。
