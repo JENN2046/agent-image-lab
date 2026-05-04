@@ -340,6 +340,7 @@
 - [ ] recon 计划明确唯一目标是为未来单一候选 manifest 读取做授权准备。
 - [ ] 授权样例包含 `recon_request`、`target_scope_gate`、`extract_policy`、`safety_gate`、`approval_chain`、`state_rules`、`review_console_handoff`、`memory_delta_draft` 和 `acceptance_assertions`。
 - [ ] 授权样例保持 `source_authorized=false`、`source_read_performed=false`、`real_manifest_read=false`。
+- [ ] 授权样例保持 `external_repo_access_allowed=false`、`allowed_source_paths=[]`、`allowed_file_types=[]`、`sensitive_path_redaction_required=true`。
 - [ ] 授权样例保持 `real_execution_allowed=false`、`selected_plugin=null`、`max_plugin_calls=0`。
 - [ ] 授权样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`。
 - [ ] 授权样例当前状态保持 `pending_manifest_review`。
@@ -365,6 +366,7 @@
 - [ ] 授权门槛文档明确“准备授权读取”和“实际读取 manifest”是两个不同阶段。
 - [ ] 授权门槛样例包含 `authorization_request`、`target_scope`、`read_method_gate`、`extract_policy`、`forbidden_content_policy`、`approval_chain`、`state_transition_rules`、`no_execution_guard`、`audit_record`、`memory_delta_draft` 和 `acceptance_assertions`。
 - [ ] 授权门槛样例保持 `read_authorized=false`、`read_performed=false`、`source_authorized=false`、`source_read_performed=false`、`real_manifest_read=false`。
+- [ ] 授权门槛样例保持 `external_repo_access_allowed=false`、`allowed_source_paths=[]`、`allowed_file_types=[]`、`sensitive_path_redaction_required=true`。
 - [ ] 授权门槛样例保持 `raw_manifest_copy_allowed=false`、`real_execution_allowed=false`、`selected_plugin=null`、`max_plugin_calls=0`。
 - [ ] 授权门槛样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`。
 - [ ] 授权门槛样例当前状态保持 `pending_manifest_review`。

@@ -27,6 +27,10 @@ v0_3_manifest_read_authorization_gate:
     source_authorized: false
     source_read_performed: false
     real_manifest_read: false
+    external_repo_access_allowed: false
+    allowed_source_paths: []
+    allowed_file_types: []
+    sensitive_path_redaction_required: true
     forbidden_scope_cn:
       - "不得读取真实 VCPChat。"
       - "不得读取候选 manifest 之外的仓库内容。"
@@ -100,6 +104,10 @@ v0_3_manifest_read_authorization_gate:
     source_read_performed: false
     real_manifest_read: false
     raw_manifest_copy_allowed: false
+    external_repo_access_allowed: false
+    allowed_source_paths: []
+    allowed_file_types: []
+    sensitive_path_redaction_required: true
     selected_plugin: null
     max_plugin_calls: 0
     api_called: false

@@ -20,6 +20,10 @@ v0_3_adapter_recon_authorization:
     source_authorized: false
     source_read_performed: false
     real_manifest_read: false
+    external_repo_access_allowed: false
+    allowed_source_paths: []
+    allowed_file_types: []
+    sensitive_path_redaction_required: true
     forbidden_scope_cn:
       - "不得读取真实 VCPChat。"
       - "不得扩展到整个 VCPToolBox 仓库。"
@@ -54,6 +58,10 @@ v0_3_adapter_recon_authorization:
     contains_raw_manifest: false
     contains_real_plugin_name: false
     contains_real_capability_claim: false
+    external_repo_access_allowed: false
+    allowed_source_paths: []
+    allowed_file_types: []
+    sensitive_path_redaction_required: true
     source_authorized: false
     source_read_performed: false
     real_manifest_read: false
