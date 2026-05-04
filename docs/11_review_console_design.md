@@ -72,6 +72,20 @@ MVP 只做文本评论和区域标签。评论至少包含作者、目标区域�
 - `request_memory_edit`
 - `mark_style_rule_candidate`
 
+## v0.7 真实执行前审批边界
+
+v0.7 前置包要求 Review Console 展示 Gatekeeper 风险边界、候选 manifest 脱敏摘要、最大调用次数、输入引用、输出目录引用、回滚方案和停止条件。当前阶段只定义审批记录，不实现真实执行按钮。
+
+默认状态必须保持：
+
+- `execution_approval_status=pending`
+- `real_execution_allowed=false`
+- `selected_plugin_for_execution=null`
+- `max_plugin_calls_authorized=0`
+- `daily_note_called=false`
+
+没有新的用户真实执行授权前，Review Console 不得调用插件、API、DailyNote 或保存图片。
+
 ## VCPChat 接入说明
 
 未来可在 VCPChat 中新增或改造：

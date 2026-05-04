@@ -82,6 +82,18 @@
 - 不把图片二进制写入 Git 或 VCP 长期记忆。
 - `memory_delta` 只生成写入申请，不直接写 DailyNote。
 
+前置包完成标准：
+
+- `integrations/vcp/v0_7_gatekeeper_risk_boundary.md` 明确高风险边界、拒绝条件和当前阻断状态。
+- `review_console/v0_7_human_approval_preflight.md` 明确人工审批记录字段和禁止动作。
+- `workflows/v0_7_real_execution_preflight_confirmation.md` 明确真实执行前用户必须再次授权的字段。
+- 前置包默认保持 `real_execution_allowed=false`、`selected_plugin_for_execution=null`、`max_plugin_calls_authorized=0`。
+
+当前结果：
+
+- v0.7 前置包已可生成，但尚未获得真实执行授权。
+- 下一步必须由用户单独授权真实插件、调用次数、输入引用、输出目录和回滚方案。
+
 ## v1.0：发布与验收
 
 目标：形成可交付 release。

@@ -62,6 +62,18 @@ Review Console MVP 支持下列审批路径，但所有路径都只输出草案�
 - `memory_approval.status != approved` 时，`memory_delta.write_mode` 必须保持 `draft`。
 - Review Console 只能生成 `review_session_draft`、`image_case_draft`、`memory_delta_draft` 和授权申请草案，不得调用插件、API、DailyNote 或写磁盘资产。
 
+## v0.7 真实执行前人工审批
+
+v0.7 前置阶段新增真实执行前人工审批记录，见 `review_console/v0_7_human_approval_preflight.md`。该记录不实现 UI，也不触发真实执行。
+
+审批必须保持以下边界：
+
+- 审批状态默认 `pending`。
+- 没有人工审批人和审批时间时，`real_execution_allowed=false`。
+- 没有确认输出目录和回滚方案时，`max_plugin_calls_authorized=0`。
+- `execute_plugin`、`call_api`、`write_daily_note` 和 `save_image` 在审批前必须属于 forbidden actions。
+- `memory_delta` 只作为写入申请草案，不直接写 DailyNote。
+
 ## 评论模型
 
 MVP 只做文本评论和区域标签，不做复杂坐标绘制。评论必须使用中文正文，并包含作者、目标、严重程度、状态和创建时间。

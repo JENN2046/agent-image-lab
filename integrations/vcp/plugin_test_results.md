@@ -18,6 +18,8 @@
 | DailyNote 写入 | 0 |
 | VCPToolBox 修改 | 无 |
 | VCPChat 修改 | 无 |
+| v0.7 前置包 | 已准备 |
+| 真实执行授权 | 未授权 |
 
 ## v0.6 manifest 审查结果摘要
 
@@ -37,6 +39,18 @@
 | file_write_allowed_in_test | false |
 | image_binary_allowed_in_test | false |
 | rejection_reason_cn | 无；但真实执行前必须重新授权 |
+
+## v0.7 前置包状态摘要
+
+| 字段 | 结果 |
+|---|---|
+| gatekeeper_boundary | blocked_until_authorized |
+| review_console_execution_approval | pending |
+| real_execution_preflight_status | waiting_for_user_real_execution_authorization |
+| selected_plugin_for_execution | null |
+| max_plugin_calls_authorized | 0 |
+| real_execution_allowed | false |
+| next_required_action_cn | 用户单独授权真实执行，并明确插件、调用次数、输入引用、输出目录和回滚方案 |
 
 ## 记录规则
 

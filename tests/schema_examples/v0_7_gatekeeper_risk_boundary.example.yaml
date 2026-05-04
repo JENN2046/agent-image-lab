@@ -1,0 +1,32 @@
+v0_7_gatekeeper_risk_boundary:
+  phase: v0.7_preflight
+  business_scenario: Photo Studio OS
+  candidate_id: DoubaoGen
+  manifest_review_status: manifest_reviewed_safe
+  dry_run_status: not_completed
+  overall_risk_level: high
+  required_approvals:
+    user_real_execution_authorization: pending
+    selected_plugin_confirmation: pending
+    max_plugin_calls_confirmation: pending
+    controlled_input_reference: pending
+    controlled_output_directory: pending
+    rollback_plan: pending
+    review_console_human_approval: pending
+    memory_write_boundary: pending
+  gatekeeper_decision:
+    status: blocked_until_authorized
+    real_execution_allowed: false
+    selected_plugin_for_execution: null
+    max_plugin_calls_authorized: 0
+    api_call_authorized: false
+    daily_note_write_authorized: false
+    file_write_authorized: false
+    image_file_creation_authorized: false
+  no_execution_guard:
+    api_called: false
+    vcp_plugin_called: false
+    daily_note_called: false
+    file_write_performed: false
+    image_file_created: false
+    real_execution_allowed: false

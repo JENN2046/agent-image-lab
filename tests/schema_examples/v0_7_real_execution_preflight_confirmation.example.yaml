@@ -1,0 +1,43 @@
+v0_7_real_execution_preflight_confirmation:
+  phase: v0.7_preflight
+  scenario: Photo Studio OS
+  candidate_id: DoubaoGen
+  current_preflight_status:
+    adapter_dry_run_verified: true
+    manifest_review_status: manifest_reviewed_safe
+    gatekeeper_boundary_defined: true
+    review_console_approval_status: pending
+    real_execution_authorized: false
+    max_plugin_calls_authorized: 0
+  required_user_authorization:
+    selected_plugin_id: pending_user_confirmation
+    max_plugin_calls: pending_user_confirmation
+    input_reference: pending_user_confirmation
+    output_directory_ref: pending_user_confirmation
+    overwrite_existing_files_allowed: false
+    external_api_allowed_for_selected_plugin: pending_user_confirmation
+    image_file_creation_allowed: pending_user_confirmation
+    daily_note_direct_write_allowed: false
+    rollback_plan_ref: pending_user_confirmation
+    stop_conditions_acknowledged: false
+  minimal_real_execution_constraints:
+    one_plugin_only: true
+    one_task_only: true
+    review_console_human_approval_required: true
+    gatekeeper_approval_required: true
+    output_directory_must_be_controlled: true
+    rollback_plan_required: true
+    memory_delta_write_mode: draft
+    daily_note_direct_write_allowed: false
+    git_binary_asset_write_allowed: false
+    vcp_long_term_memory_binary_write_allowed: false
+  preflight_decision:
+    status: waiting_for_user_real_execution_authorization
+    real_execution_allowed: false
+    selected_plugin_for_execution: null
+    max_plugin_calls_authorized: 0
+    api_called: false
+    vcp_plugin_called: false
+    daily_note_called: false
+    file_write_performed: false
+    image_file_created: false

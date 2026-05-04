@@ -1,0 +1,33 @@
+v0_7_review_console_human_approval_preflight:
+  phase: v0.7_preflight
+  review_session_id: review-session-photo-studio-os-v0-7-preflight-001
+  candidate_id: DoubaoGen
+  manifest_review_status: manifest_reviewed_safe
+  gatekeeper_status: blocked_until_authorized
+  human_approval:
+    execution_approval_status: pending
+    approved_by: null
+    approved_at: null
+    approved_max_plugin_calls: 0
+    approved_output_directory_ref: null
+    rollback_plan_approved: false
+    stop_conditions_approved: false
+  allowed_actions_before_approval:
+    - view_gatekeeper_boundary
+    - request_changes
+    - reject_execution_request
+    - request_user_authorization
+  forbidden_actions_before_approval:
+    - execute_plugin
+    - call_api
+    - write_daily_note
+    - save_image
+    - increase_plugin_call_limit
+  review_console_decision:
+    execution_approval_status: pending
+    real_execution_allowed: false
+    selected_plugin_for_execution: null
+    max_plugin_calls_authorized: 0
+    daily_note_called: false
+    vcp_plugin_called: false
+    image_file_created: false

@@ -46,7 +46,10 @@ $requiredFiles = @(
   'integrations/vcp/v0_5_adapter_install_verification.md',
   'integrations/vcp/v0_6_real_plugin_manifest_authorization.md',
   'integrations/vcp/v0_6_real_plugin_manifest_sanitized_review.md',
+  'integrations/vcp/v0_7_gatekeeper_risk_boundary.md',
+  'review_console/v0_7_human_approval_preflight.md',
   'workflows/photo_studio_os_real_loop_runbook.md',
+  'workflows/v0_7_real_execution_preflight_confirmation.md',
   'docs/01_project_definition.md',
   'docs/02_workflow_sop.md',
   'docs/03_agent_roles.md',
@@ -68,6 +71,9 @@ $requiredFiles = @(
   'tests/schema_examples/memory_delta.example.yaml',
   'tests/schema_examples/v0_5_adapter_install_verification.example.yaml',
   'tests/schema_examples/v0_6_real_plugin_manifest_sanitized_review.example.yaml',
+  'tests/schema_examples/v0_7_gatekeeper_risk_boundary.example.yaml',
+  'tests/schema_examples/v0_7_review_console_human_approval_preflight.example.yaml',
+  'tests/schema_examples/v0_7_real_execution_preflight_confirmation.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -325,6 +331,53 @@ foreach ($path in $v06ReviewFiles) {
   foreach ($pattern in $forbiddenV06ReviewPatterns) {
     if ($content -match $pattern) {
       Add-Failure "v0.6 manifest review boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$v07PreflightExamples = @(
+  'tests/schema_examples/v0_7_gatekeeper_risk_boundary.example.yaml',
+  'tests/schema_examples/v0_7_review_console_human_approval_preflight.example.yaml',
+  'tests/schema_examples/v0_7_real_execution_preflight_confirmation.example.yaml'
+)
+
+$requiredV07ExamplePatterns = @(
+  'phase:\s+v0\.7_preflight',
+  'real_execution_allowed:\s+false',
+  'max_plugin_calls_authorized:\s+0',
+  'daily_note_called:\s+false'
+)
+
+$forbiddenV07ExamplePatterns = @(
+  'real_execution_allowed:\s+true',
+  'real_execution_authorized:\s+true',
+  'selected_plugin_for_execution:\s+(?!null\b)\S+',
+  'max_plugin_calls_authorized:\s+[1-9]',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'file_write_performed:\s+true',
+  'image_file_created:\s+true',
+  '[A-Za-z]:\\',
+  'https?://'
+)
+
+foreach ($path in $v07PreflightExamples) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v0.7 preflight example file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV07ExamplePatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v0.7 preflight example missing required guard in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV07ExamplePatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v0.7 preflight boundary violation in ${path}: $pattern"
     }
   }
 }

@@ -11,14 +11,14 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 | L1 规格基线 | 已基本完成 | 文档、Agent 规则、schema、记忆策略、审片台规格、无执行样例完整，并能通过只读校验。 |
 | L2 审片台原型 | 已基本完成 | 静态 Review Console 能展示版本、评分、人工覆盖、审批和 memory_delta 草案，不调用 API、不写文件。 |
 | L3 MVP-B dry-run | 已基本完成 | Adapter dry-run 已有项目内实现、VCPToolBox 导出包和 v0.5 安装验证，仍保持 `max_plugin_calls=0`、不调用真实插件、不写 DailyNote。 |
-| L4 受控真实闭环 | 早期准备中 | 已在独立授权下完成单一真实生图 manifest 脱敏审查；仍未选择真实执行插件，未调用插件，未生成图片。 |
+| L4 受控真实闭环 | 前置包准备中 | 已完成单一真实生图 manifest 脱敏审查，并开始固化 v0.7 Gatekeeper、Review Console 和真实执行前确认边界；仍未真实执行。 |
 
 ## 当前基线
 
 当前仓库处于：
 
 ```text
-v0.6.0 real plugin manifest sanitized review
+v0.7.0 real-loop preflight package
 ```
 
 已经完成：
@@ -34,6 +34,7 @@ v0.6.0 real plugin manifest sanitized review
 - v0.4 VCPToolBox 导出级 dry-run Adapter 候选文件。
 - v0.5 VCPToolBox Adapter-only dry-run 安装验证记录。
 - v0.6 单一真实生图插件 manifest 只读脱敏审查记录。
+- v0.7 Gatekeeper 风险边界、Review Console 人工审批前置记录和真实执行前确认表。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：
@@ -191,9 +192,9 @@ daily_note_called: false
 
 ## 当前优先队列
 
-1. 完成并归档 v0.6 单一真实生图插件 manifest 脱敏审查。
-2. 进入 v0.7 前补 Gatekeeper 风险边界、Review Console 人工审批和真实执行前确认表。
-3. 等待用户单独授权 v0.7 Photo Studio OS 最小真实闭环。
+1. 完成并归档 v0.7 前置包。
+2. 等待用户单独授权 v0.7 Photo Studio OS 最小真实执行。
+3. 真实执行前再次确认插件、调用次数、输入引用、输出目录和回滚方案。
 4. v0.7 通过后，收束 v1.0 release、使用说明和最终验收报告。
 
 ## 永久安全门

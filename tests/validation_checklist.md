@@ -458,6 +458,10 @@
 - [ ] `integrations/vcp/v0_6_real_plugin_manifest_authorization.md` 存在，且默认 `user_authorized=false`。
 - [ ] `integrations/vcp/v0_6_real_plugin_manifest_sanitized_review.md` 存在，并只保存中文脱敏摘要。
 - [ ] `tests/schema_examples/v0_6_real_plugin_manifest_sanitized_review.example.yaml` 存在，并保持 `real_execution_allowed=false`。
+- [ ] `integrations/vcp/v0_7_gatekeeper_risk_boundary.md` 存在。
+- [ ] `review_console/v0_7_human_approval_preflight.md` 存在。
+- [ ] `workflows/v0_7_real_execution_preflight_confirmation.md` 存在。
+- [ ] v0.7 三个 schema example 存在，并保持 `real_execution_allowed=false`、`max_plugin_calls_authorized=0`。
 - [ ] `workflows/photo_studio_os_real_loop_runbook.md` 存在。
 - [ ] `RELEASE_NOTES.md` 存在，并明确当前只完成 Adapter dry-run 安装验证和 manifest 脱敏审查，未调用插件、未写 DailyNote。
 
@@ -471,6 +475,19 @@
 - [ ] v0.6 可以推进到 `manifest_reviewed_safe`，但不得推进到 `dry_run_checked` 或 `tested`。
 - [ ] v0.6 保持 `selected_plugin=null`、`max_plugin_calls=0`、`api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`。
 - [ ] v0.6 不授权真实执行，不创建图片文件。
+
+## v0.7 真实执行前置包检查
+
+- [ ] v0.7 前置包只定义 Gatekeeper、Review Console 和真实执行前确认表，不调用真实插件。
+- [ ] Gatekeeper 风险边界当前状态为 `blocked_until_authorized`。
+- [ ] Review Console 人工审批当前状态为 `pending`。
+- [ ] 真实执行前确认表当前状态为 `waiting_for_user_real_execution_authorization`。
+- [ ] v0.7 前置包默认保持 `selected_plugin_for_execution=null`。
+- [ ] v0.7 前置包默认保持 `max_plugin_calls_authorized=0`。
+- [ ] v0.7 前置包默认保持 `real_execution_allowed=false`。
+- [ ] v0.7 前置包不得包含真实本地路径、endpoint 原文、密钥、token、cookie、密码或客户隐私。
+- [ ] v0.7 前置包不得把 Review Console approval、accepted_draft 或 manifest_reviewed_safe 解释为真实执行授权。
+- [ ] v0.7 前置包不写 DailyNote、不写文件、不创建图片。
 
 ## 无执行闭环检查
 
