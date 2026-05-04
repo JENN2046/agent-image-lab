@@ -187,6 +187,22 @@
 - [ ] Phase 9 测试包样例只包含中文脱敏审计摘要和中文记忆正文。
 - [ ] Phase 9 测试包样例未把 `pending_manifest_review` 自动推进到 `manifest_reviewed_safe`、`dry_run_checked` 或 `tested`。
 
+## Phase 9 manifest 授权读取前置检查
+
+- [ ] Phase 9 manifest 授权读取前置检查只规划门槛，不读取真实 VCPToolBox。
+- [ ] Phase 9 manifest 授权读取前置检查不读取真实 VCPChat。
+- [ ] Phase 9 manifest 授权读取前置检查不读取真实 manifest。
+- [ ] `integrations/vcp/manifest_review_checklist.md` 包含 Phase 9 manifest 授权读取前置门槛。
+- [ ] `tests/schema_examples/phase9_manifest_authorization_precheck.example.yaml` 存在。
+- [ ] 授权前置样例包含 `authorization_request`、`read_scope_gate`、`extract_policy`、`safety_gate`、`approval_chain`、`next_state_rules` 和 `acceptance_assertions`。
+- [ ] 授权前置样例包含 `authorization_request_id`、`candidate_id`、`requested_phase`、`target_manifest_ref`、`target_repository_ref`、`allowed_read_scope_cn`、`allowed_extract_fields`、`forbidden_extract_fields`、`next_allowed_state`、`real_execution_allowed` 和 `audit_summary_cn`。
+- [ ] 授权前置样例保持 `source_authorized=false`、`source_read_performed=false`、`next_allowed_state=pending_manifest_review`、`real_execution_allowed=false`。
+- [ ] 授权前置样例不包含真实插件名称、真实插件路径、真实 manifest 原文或真实插件能力结论。
+- [ ] 授权前置样例不包含 API key、token、cookie、密码、私密路径、客户隐私或客户未公开信息。
+- [ ] 授权前置样例不调用 API、VCP 插件、DailyNote，不写文件，不创建图片。
+- [ ] 授权前置样例不得把 `pending_manifest_review` 自动推进到 `manifest_reviewed_safe`、`dry_run_checked` 或 `tested`。
+- [ ] `manifest_reviewed_safe` 只能在未来真实 manifest 被单独授权读取并完成脱敏审查后产生。
+
 ## 无执行闭环检查
 
 - [ ] `tests/schema_examples/task_envelope.example.yaml` 是 Photo Studio OS 无执行样例。

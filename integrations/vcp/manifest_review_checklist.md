@@ -16,6 +16,30 @@ Phase 8 只设计 manifest 审查流程。真实 manifest 读取必须另行授�
 
 未获得单独授权前，所有插件状态必须保持 `待实测` 或 `pending_manifest_review`。
 
+## Phase 9 manifest 授权读取前置门槛
+
+Phase 9 只规划真实 manifest 读取前的授权门槛，不读取真实 VCPToolBox，不读取真实 VCPChat，不读取真实 manifest，不调用插件，不调用 API，不写 DailyNote，不写图片文件。
+
+真实 manifest 读取必须作为独立授权点。授权前必须先形成一份前置审查记录，并明确：
+
+- 读取对象：只能写占位引用或人工可读的脱敏目标说明，不写真实私密路径。
+- 读取方式：只说明未来人工读取或受控只读读取方式，不执行读取。
+- 允许摘录字段：只能是脱敏插件显示名、命令集合中文摘要、输入输出模式中文摘要、权限风险中文摘要。
+- 禁止摘录字段：API key、token、cookie、密码、私密路径、客户隐私、webhook、数据库地址、服务端点原文、图片二进制、真实插件输出。
+- 审查人：必须指定人工审查角色或 Gatekeeper 复查角色。
+- 拒绝条件：任何无法脱敏、权限不明、暗示外部调用、暗示写文件或写 DailyNote 的情况都必须拒绝。
+
+授权前置记录默认必须保持：
+
+```yaml
+source_authorized: false
+source_read_performed: false
+next_allowed_state: pending_manifest_review
+real_execution_allowed: false
+```
+
+前置审查通过也只允许进入“等待授权读取”状态，不自动进入 `manifest_reviewed_safe`。`manifest_reviewed_safe` 只能在未来真实 manifest 被单独授权读取并完成脱敏审查后产生。
+
 ## 审查目标
 
 manifest 审查只回答以下问题：

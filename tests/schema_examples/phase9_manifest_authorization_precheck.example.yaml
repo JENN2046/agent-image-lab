@@ -1,0 +1,104 @@
+phase9_manifest_authorization_precheck:
+  authorization_request:
+    authorization_request_id: manifest-auth-precheck-phase9-001
+    candidate_id: candidate-plugin-placeholder-001
+    requested_phase: "Phase 9"
+    request_purpose_cn: "规划真实 manifest 读取前的授权门槛；本记录不读取真实 manifest。"
+    target_manifest_ref: manifest-ref-placeholder-not-read
+    target_repository_ref: repository-ref-placeholder-not-read
+    target_manifest_ref_policy_cn: "只保留占位引用，不记录真实插件路径、私密路径或 manifest 原文。"
+    source_authorized: false
+    source_read_performed: false
+    allowed_read_scope_cn: "仅允许未来在单独授权后读取指定候选插件的 manifest；当前记录不执行读取。"
+    next_allowed_state: pending_manifest_review
+    real_execution_allowed: false
+    audit_summary_cn: "仅创建 manifest 授权读取前置审查草案，未读取真实 VCPToolBox、VCPChat 或 manifest。"
+
+  read_scope_gate:
+    target_repository_ref: repository-ref-placeholder-not-read
+    target_manifest_ref: manifest-ref-placeholder-not-read
+    source_authorized: false
+    source_read_performed: false
+    allowed_read_scope_cn: "未来授权必须限定到一个候选 manifest，占位记录不得扩展到整个仓库。"
+    forbidden_scope_cn:
+      - "不得读取真实 VCPToolBox 之外的路径。"
+      - "不得读取真实 VCPChat。"
+      - "不得读取客户目录、私密路径或运行态数据目录。"
+      - "不得读取图片二进制、插件输出或运行日志。"
+
+  extract_policy:
+    allowed_extract_fields:
+      - "脱敏插件显示名"
+      - "命令集合中文摘要"
+      - "输入输出模式中文摘要"
+      - "权限风险中文摘要"
+      - "Gatekeeper 需要复查的风险项"
+    forbidden_extract_fields:
+      - "API key、token、cookie、密码"
+      - "私密绝对路径"
+      - "客户隐私或客户未公开信息"
+      - "webhook、数据库地址或服务端点原文"
+      - "manifest 敏感配置原文"
+      - "图片二进制或真实插件输出"
+    sanitized_output_required: true
+    chinese_summary_required: true
+    raw_manifest_copy_allowed: false
+
+  safety_gate:
+    contains_secret: false
+    contains_private_path: false
+    contains_customer_private_data: false
+    contains_image_binary: false
+    contains_raw_manifest: false
+    api_called: false
+    plugin_called: false
+    daily_note_called: false
+    file_write_performed: false
+    image_file_created: false
+    vcp_toolbox_read: false
+    vcpchat_read: false
+    safety_summary_cn: "前置审查记录不包含密钥、私密路径、客户隐私、图片二进制或真实 manifest 原文。"
+
+  approval_chain:
+    human_reviewer_required: true
+    gatekeeper_required: true
+    review_console_required: true
+    archivist_required_for_memory: true
+    approved_by: null
+    approved_at: null
+    approval_status: pending
+    approval_notes_cn: "尚未授权读取真实 manifest；任何读取动作必须另开授权点。"
+
+  next_state_rules:
+    current_state: pending_manifest_review
+    next_allowed_state: pending_manifest_review
+    state_if_authorized_read_is_later_approved: pending_manifest_review
+    state_if_manifest_sanitized_review_later_passes: manifest_reviewed_safe
+    forbidden_states_without_manifest_read:
+      - manifest_reviewed_safe
+      - dry_run_checked
+      - tested
+    rejection_state: rejected
+    real_execution_allowed: false
+    rule_summary_cn: "本前置审查不能推进到 manifest_reviewed_safe；只有未来单独授权读取并完成脱敏审查后才可推进。"
+
+  audit_record:
+    audit_id: audit-phase9-manifest-auth-precheck-001
+    authorization_request_id: manifest-auth-precheck-phase9-001
+    candidate_id: candidate-plugin-placeholder-001
+    source_authorized: false
+    source_read_performed: false
+    next_allowed_state: pending_manifest_review
+    real_execution_allowed: false
+    audit_summary_cn: "本审计只确认授权读取前置门槛，未读取真实 manifest，未调用插件、API、DailyNote 或文件写入。"
+
+  acceptance_assertions:
+    - "source_authorized 必须为 false。"
+    - "source_read_performed 必须为 false。"
+    - "next_allowed_state 必须保持 pending_manifest_review。"
+    - "real_execution_allowed 必须为 false。"
+    - "target_manifest_ref 和 target_repository_ref 只能是占位引用，不能是真实私密路径。"
+    - "allowed_extract_fields 只能包含脱敏摘要字段。"
+    - "forbidden_extract_fields 必须覆盖密钥、私密路径、客户隐私、服务端点、图片二进制和真实插件输出。"
+    - "未读取真实 manifest 前，不得进入 manifest_reviewed_safe、dry_run_checked 或 tested。"
+    - "不得调用插件、API、DailyNote，不得写文件或创建图片。"
