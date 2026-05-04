@@ -1,0 +1,56 @@
+task_envelope:
+  task_id: task-photo-studio-os-001
+  created_at: "2026-05-04T00:00:00+08:00"
+  project: Photo Studio OS
+  requester: human_reviewer
+  task_type: photo_studio_os_review
+  mode: review_only
+  status: reviewing
+  user_request_cn: "评审一张 Photo Studio OS 高级黑三仪表指挥中心图，并给出下一轮精修建议。"
+  visual_goal_cn: "保持 16:9、高级黑、深冷蓝底色、冷白细字体、三仪表中心构图、中央大仪表视觉焦点和克制橙红警示。"
+  business_context_cn: "MVP 无执行样例，用于验证用户需求、任务包、提示词包引用、调度 dry-run、人工评审、记忆草案和案例摘要的纸面闭环。"
+  input_assets:
+    images:
+      - "asset_archive/candidates/photo-studio-os-placeholder.png"
+    references:
+      - "asset_archive/references/photo-studio-os-reference-placeholder.txt"
+    notes:
+      - "这是占位路径，不包含真实图片文件。"
+      - "本样例不调用真实插件，不创建真实图片。"
+  director_plan:
+    image_type: dashboard_ui_concept
+    composition_strategy_cn: "三仪表中心构图，中央大仪表为视觉焦点，左右小仪表与中央保持均衡距离，右侧仪表不得贴近侧栏。"
+    style_boundary_cn: "高级黑、近黑背景、深冷蓝底色、冷白 UI、克制橙红警示；不要赛博朋克、不要游戏 HUD、不要普通 SaaS、不要发灰、不要过亮、不要过度蓝光。"
+    preserve_cn:
+      - "保留 16:9 widescreen。"
+      - "保留中央大仪表作为视觉焦点。"
+      - "保留右侧 Risk Pulse / Approval Queue 区域。"
+      - "保留下方 Project Execution / Activity Timeline / AI Inspection Feed。"
+    change_cn:
+      - "检查右侧小仪表与右侧栏的距离。"
+      - "压低过强蓝光，避免画面变成赛博朋克或游戏 HUD。"
+    avoid_cn:
+      - "不要破坏三仪表平衡。"
+      - "不要让右侧仪表贴近侧栏。"
+      - "不要发灰、过亮、廉价科幻或大面积霓虹蓝。"
+  prompt_package_ref: prompt-package-photo-studio-os-001
+  dispatch_plan_ref: dispatch-photo-studio-os-001
+  review_score_ref: review-photo-studio-os-001
+  memory_delta_refs:
+    - md-photo-studio-os-001
+  budget:
+    max_plugin_calls: 0
+    max_iterations: 1
+    max_memory_reads: 3
+    max_outputs: 0
+  visibility:
+    public_fields:
+      - task_id
+      - project
+      - task_type
+    audit_fields:
+      - prompt_package_ref
+      - dispatch_plan_ref
+      - review_score_ref
+      - memory_delta_refs
+    private_fields: []

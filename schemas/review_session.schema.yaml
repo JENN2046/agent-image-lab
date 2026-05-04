@@ -1,0 +1,31 @@
+# review_session.schema.yaml
+# 审片会话草案：描述 Review Console 如何承载评分、评论、审批和记忆预览
+review_session:
+  session_id: string              # 审片会话唯一 ID
+  task_id: string                 # 关联任务 ID
+  case_id: string                 # 关联案例 ID
+  project: string                 # 项目名
+  status: draft | ai_review_ready | human_reviewing | approved | changes_required | rejected | archived # 会话状态
+  image_versions:
+    - version_id: string          # 图片版本 ID
+      label: string               # 版本标签
+      asset_ref: string           # 图片引用或占位路径
+      thumbnail_ref: string | null # 缩略图引用
+      source: vcp_plugin | manual_upload | reference | placeholder # 来源
+      score: number | null        # 版本分数
+  current_version_id: string      # 当前版本 ID
+  compare_version_id: string | null # 对比版本 ID
+  ai_review: map                  # AI 评分结果
+  human_review: map               # 人工评分结果，优先级高于 AI
+  comments:
+    - map                         # 评论列表
+  annotation_notes:
+    - map                         # 批注备注，MVP 可为空
+  version_comparison: map         # 版本对比摘要
+  approval: map                   # 审批动作
+  archive_decision: map           # 归档决定
+  memory_preview: map             # 中文记忆写入预览
+  memory_approval: map            # 记忆审批状态
+  next_iteration: map             # 下一轮迭代建议
+  audit_log:
+    - map                         # 审计记录

@@ -1,0 +1,22 @@
+# dispatch_plan.schema.yaml
+# 调度计划草案：描述未来可能如何选择 VCP 插件，但 MVP 只允许 dry-run
+dispatch_plan:
+  dispatch_id: string             # 调度计划唯一 ID
+  task_id: string                 # 关联任务 ID
+  agent_name: VCP_Dispatcher_Agent # 生成者
+  task_type: string               # 任务类型
+  selected_plugin: string | null  # 选择插件，未知时为空
+  fallback_plugins:
+    - string                      # 备选插件列表
+  reason_cn: string               # 中文选择理由
+  input_mode: text | image | text_image | none # 输入模式
+  output_mode: image | plan | review | none # 输出模式
+  parameters: map                 # 参数占位，不写真实执行参数
+  dry_run_required: boolean       # 是否必须 dry-run
+  approval_required: boolean      # 是否需要人工审批
+  risk_level: low | medium | high | critical # 风险等级
+  expected_outputs: integer       # 预期输出数量
+  max_outputs: integer            # 最大输出数量
+  overwrite_allowed: boolean      # 是否允许覆盖文件
+  external_api_allowed: boolean   # 是否允许外部 API，MVP-A 必须 false
+  execution_blocked: boolean      # 是否阻止真实执行，MVP-A 必须 true

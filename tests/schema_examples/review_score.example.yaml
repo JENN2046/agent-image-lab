@@ -1,0 +1,34 @@
+review_score:
+  review_id: review-photo-studio-os-001
+  task_id: task-photo-studio-os-001
+  case_id: case-photo-studio-os-dashboard-001
+  reviewer_type: human
+  reviewer_name: human_reviewer
+  total_score: 84
+  breakdown:
+    composition: 10
+    subject_clarity: 9
+    style_consistency: 12
+    premium_quality: 12
+    detail_control: 8
+    color_light: 8
+    text_ui_readability: 7
+    iteration_potential: 8
+    asset_value: 2
+  strengths_cn:
+    - "整体高级黑方向正确，中央仪表焦点明确。"
+    - "冷白 UI 与深冷蓝底色符合 Photo Studio OS 基调。"
+    - "右侧 Risk Pulse / Approval Queue 和下方执行模块的布局方向可保留。"
+  weaknesses_cn:
+    - "右侧小仪表距离右侧栏太近，破坏三仪表横向平衡。"
+    - "局部蓝光偏强，容易靠近赛博朋克或游戏 HUD 气质。"
+    - "局部文字可读性不足，不适合直接作为正式资产。"
+  revision_advice_cn:
+    - "保留整体布局，只微调右侧仪表与 Risk Pulse 区域的距离。"
+    - "压低高亮蓝光，保留深冷蓝底色，不要过度蓝光。"
+    - "保留中央大仪表焦点，不要重绘整体构图。"
+  continue_iteration: true
+  archive_recommendation: candidate
+  memory_write_recommendation: true
+  human_review_note_cn: "本评分视为人工评审结果；如果存在 AI 初评，人工评分覆盖 AI 评分。"
+  no_execution_note_cn: "本样例不调用真实插件，不创建真实图片。"

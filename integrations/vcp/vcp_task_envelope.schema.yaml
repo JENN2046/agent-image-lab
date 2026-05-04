@@ -1,0 +1,46 @@
+# vcp_task_envelope.schema.yaml
+# VCP Adapter 接收的任务包草案；仅用于 dry-run 格式说明，不代表真实执行
+vcp_task_envelope:
+  envelope_version: string        # 协议版本，占位
+  task_id: string                 # 任务唯一 ID
+  project: string                 # 项目名
+  task_type: string               # 任务类型
+  mode: dry_run                   # 仅允许 dry_run
+  user_request_cn: string         # 用户需求中文摘要
+  visual_goal_cn: string          # 视觉目标中文说明
+  input_assets:                   # 输入资产引用，不包含图片二进制
+    images:
+      - string                    # 图片引用或占位路径，不得为私密绝对路径
+    references:
+      - string                    # 参考引用或占位字段
+    notes:
+      - string                    # 中文备注
+  director_plan:                  # 视觉方向计划
+    composition_strategy_cn: string # 构图策略
+    style_boundary_cn: string     # 风格边界
+    preserve_cn:
+      - string                    # 保留项
+    change_cn:
+      - string                    # 修改项
+    avoid_cn:
+      - string                    # 避免项
+  prompt_package_ref: string | null # 提示词包引用
+  review_score_ref: string | null # 评审引用
+  memory_delta_refs:
+    - string                      # 记忆草案引用
+  dry_run_controls:               # dry-run 控制
+    max_plugin_calls: 0           # 最大插件调用次数，必须为 0
+    allow_external_api: false     # 是否允许外部 API，必须为 false
+    allow_file_write: false       # 是否允许写文件，必须为 false
+    allow_image_binary: false     # 是否允许图片二进制，必须为 false
+  visibility:
+    public_fields:
+      - string                    # 可公开字段
+    audit_fields:
+      - string                    # 审计字段
+    private_fields:
+      - string                    # 私有字段，不进入长期记忆
+  safety:
+    contains_secret: false        # 是否包含密钥，必须为 false
+    contains_private_path: false  # 是否包含私密路径，必须为 false
+    contains_customer_private_data: false # 是否包含客户隐私，必须为 false

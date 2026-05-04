@@ -1,0 +1,11 @@
+# comment_model.schema.yaml
+# 审片台文本评论模型草案
+comment:
+  comment_id: string              # 评论唯一 ID
+  author: string                  # 作者名称
+  author_type: human | agent      # 作者类型
+  target: overall | composition | style | detail | typography | memory_preview # 评论目标
+  severity: low | medium | high | critical # 严重程度
+  comment_cn: string              # 中文评论正文
+  status: open | resolved         # 评论状态
+  created_at: string              # 创建时间

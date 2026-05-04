@@ -1,0 +1,26 @@
+# image_case.schema.yaml
+# 图片案例草案：记录一次视觉任务的资产、评分、结论和记忆引用
+image_case:
+  case_id: string                 # 案例唯一 ID
+  project: string                 # 项目名
+  task_id: string                 # 关联任务 ID
+  image_type: string              # 图片类型
+  input_assets:
+    - string                      # 输入资产引用
+  output_assets:
+    - string                      # 输出资产引用或占位路径
+  plugin_used: string | null      # 使用插件，MVP-A 为空
+  prompt_package_id: string | null # 使用的提示词包 ID
+  review_ids:
+    - string                      # 关联评审 ID
+  final_score: number | null      # 最终分数，人工评分优先
+  asset_status: accepted | candidate | rejected | none # 资产状态
+  strengths_cn:
+    - string                      # 中文优点总结
+  weaknesses_cn:
+    - string                      # 中文问题总结
+  reusable_rules_cn:
+    - string                      # 可复用中文规则
+  memory_entries:
+    - string                      # 关联 memory_delta 或 VCP 记忆引用
+  git_promotion_candidate: boolean # 是否建议升级为 Git 规则候选

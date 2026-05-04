@@ -1,0 +1,51 @@
+memory_delta:
+  delta_id: md-photo-studio-os-001
+  task_id: task-photo-studio-os-001
+  case_id: case-photo-studio-os-dashboard-001
+  created_at: "2026-05-04T00:00:00+08:00"
+  agent_name: Archivist_Agent
+  agent_role: 案例归档与中文记忆草案
+  project: Photo Studio OS
+  memory_type: failed_visual_lesson
+  target_notebook: Rejected_Visual_Lessons
+  write_mode: draft
+  importance: medium
+  approval_required: true
+  approval_status: pending
+  approved_by: null
+  approved_at: null
+  source:
+    source_type: human_review
+    source_ids:
+      - review-photo-studio-os-001
+  chinese_diary_title: "Photo Studio OS 三仪表构图失败经验草案"
+  chinese_diary_content: |
+    本次 Photo Studio OS 样例评审确认：右侧小仪表距离右侧栏过近，会破坏三仪表横向平衡。下一轮应保留中央大仪表焦点，拉开右侧小仪表与 Risk Pulse / Approval Queue 区域的距离，同时压低过强蓝光，避免画面滑向赛博朋克或游戏 HUD。该内容只是中文记忆草案，需要人工确认后才能写入长期记忆。
+  preserved_original:
+    prompt_en: "balanced three gauges, do not place the right gauge too close to the sidebar"
+    plugin_name: null
+    model_name: null
+    file_ref: "asset_archive/candidates/photo-studio-os-placeholder.png"
+  tags:
+    - PhotoStudioOS
+    - 三仪表
+    - 失败经验
+    - 构图失衡
+    - 候选资产
+    - 记忆待审批
+  visibility: audit
+  memory_safety:
+    contains_secret: false
+    contains_private_path: false
+    contains_customer_private_data: false
+    contains_image_binary: false
+    safety_notes_cn: "未发现 API key、token、cookie、密码、私密路径、客户隐私或图片二进制。"
+  promotion:
+    sync_to_git_candidate: false
+    promoted_to_git: false
+    git_target_file: null
+    promotion_reason_cn: null
+  final_decision:
+    should_write_to_vcp: false
+    should_show_in_review_console: true
+    rejection_reason_cn: "等待 Review Console 人工确认后再决定是否写入 VCP 记忆。"

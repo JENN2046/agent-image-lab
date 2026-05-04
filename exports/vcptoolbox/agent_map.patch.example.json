@@ -1,0 +1,12 @@
+{
+  "_comment_cn": "这是未来 agent_map.json 的补丁示例，不要自动应用到真实 VCPToolBox。",
+  "add": {
+    "ImageLab_Master": "ImageLab/ImageLab_Master.md"
+  },
+  "safety": {
+    "requires_human_review": true,
+    "do_not_apply_automatically": true,
+    "source_file": "exports/vcptoolbox/Agent/ImageLab/ImageLab_Master.md",
+    "target_example": "VCPToolBox/Agent/ImageLab/ImageLab_Master.md"
+  }
+}

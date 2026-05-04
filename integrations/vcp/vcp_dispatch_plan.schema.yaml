@@ -1,0 +1,29 @@
+# vcp_dispatch_plan.schema.yaml
+# VCP Adapter 输出的调度计划草案；MVP 只允许 dry-run，不真实执行
+vcp_dispatch_plan:
+  dispatch_id: string             # 调度计划唯一 ID
+  task_id: string                 # 关联任务 ID
+  mode: dry_run                   # 仅允许 dry_run
+  selected_plugin: null           # MVP-A 不选择真实插件
+  fallback_plugins:
+    - string                      # 备选插件占位列表，可为空
+  capability_matrix_status: placeholder | pending_manifest_review | tested # 能力矩阵状态
+  reason_cn: string               # 中文选择理由
+  input_mode: text | image | text_image | none | unknown # 输入模式
+  output_mode: image | plan | review | none | unknown # 输出模式
+  dry_run_required: true          # 是否必须 dry-run，必须为 true
+  approval_required: true         # 是否需要人工审批，必须为 true
+  risk_level: low | medium | high | critical # 风险等级
+  expected_outputs: 0             # 预期输出数量，MVP-A 为 0
+  max_outputs: 0                  # 最大输出数量，MVP-A 为 0
+  overwrite_allowed: false        # 是否允许覆盖文件，必须为 false
+  external_api_allowed: false     # 是否允许外部 API，必须为 false
+  execution_blocked: true         # 是否阻止真实执行，必须为 true
+  gatekeeper_required: true       # 是否需要 Gatekeeper，必须为 true
+  review_console_required: true   # 是否需要 Review Console，必须为 true
+  audit_notes_cn: string          # 中文审计说明
+  forbidden_actions:
+    - execute                     # 禁止真实执行
+    - call_plugin                 # 禁止调用插件
+    - write_memory                # 禁止直接写记忆
+    - write_image_file            # 禁止写图片文件

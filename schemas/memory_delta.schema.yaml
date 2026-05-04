@@ -1,0 +1,47 @@
+# memory_delta.schema.yaml
+# 与 memory_policy/memory_delta.schema.yaml 保持一致的核心记忆增量草案
+memory_delta:
+  delta_id: string                # 记忆增量唯一 ID
+  task_id: string                 # 关联任务 ID
+  case_id: string | null          # 关联案例 ID，可为空
+  created_at: string              # 创建时间
+  agent_name: string              # 产生记忆的 Agent
+  agent_role: string              # Agent 岗位
+  project: string                 # 项目名
+  memory_type: string             # 记忆类型
+  target_notebook: string         # 目标记忆本
+  write_mode: draft | confirmed | audit_only | forbidden # 写入模式
+  importance: low | medium | high | critical # 重要性
+  approval_required: boolean      # 是否需要审批
+  approval_status: not_required | pending | approved | rejected # 审批状态
+  approved_by: string | null      # 审批人
+  approved_at: string | null      # 审批时间
+  source:                         # 来源信息
+    source_type: string           # 来源类型
+    source_ids:
+      - string                    # 来源 ID 列表
+  chinese_diary_title: string     # 中文日记标题
+  chinese_diary_content: string   # 中文日记正文
+  preserved_original:             # 保留原文
+    prompt_en: string | null      # 英文提示词原文
+    plugin_name: string | null    # 插件名
+    model_name: string | null     # 模型名
+    file_ref: string | null       # 文件引用或占位路径
+  tags:
+    - string                      # 标签
+  visibility: private | audit | shared | public # 可见性
+  memory_safety:
+    contains_secret: boolean      # 是否包含密钥
+    contains_private_path: boolean # 是否包含私密路径
+    contains_customer_private_data: boolean # 是否包含客户隐私
+    contains_image_binary: boolean # 是否包含图片二进制
+    safety_notes_cn: string       # 中文安全说明
+  promotion:
+    sync_to_git_candidate: boolean # 是否是 Git 升级候选
+    promoted_to_git: boolean      # 是否已升级到 Git
+    git_target_file: string | null # 目标文件
+    promotion_reason_cn: string | null # 中文升级理由
+  final_decision:
+    should_write_to_vcp: boolean  # 是否建议写入 VCP
+    should_show_in_review_console: boolean # 是否展示给 Review Console
+    rejection_reason_cn: string | null # 中文拒绝原因

@@ -1,0 +1,47 @@
+# memory_delta.schema.yaml
+# 记忆增量草案：描述一次任务中可沉淀或被拒绝沉淀的经验
+memory_delta:
+  delta_id: string                # 记忆增量唯一 ID
+  task_id: string                 # 关联任务 ID
+  case_id: string | null          # 关联案例 ID，可为空
+  created_at: string              # 创建时间，ISO 字符串
+  agent_name: string              # 产生记忆的 Agent 名称
+  agent_role: string              # Agent 岗位或职责
+  project: string                 # 所属项目
+  memory_type: string             # 记忆类型，如评审经验、失败经验、执行审计
+  target_notebook: string         # 目标 VCP 记忆本
+  write_mode: draft | confirmed | audit_only | forbidden # 写入模式
+  importance: low | medium | high | critical             # 重要性
+  approval_required: boolean      # 是否需要人工审批
+  approval_status: not_required | pending | approved | rejected # 审批状态
+  approved_by: string | null      # 审批人
+  approved_at: string | null      # 审批时间
+  source:                         # 来源信息
+    source_type: string           # 来源类型，如 review_score、human_review、dry_run
+    source_ids:
+      - string                    # 来源 ID 列表
+  chinese_diary_title: string     # 中文日记标题
+  chinese_diary_content: string   # 中文日记正文，写入 DailyNote 的主体
+  preserved_original:             # 保留的原文素材，不作为 DailyNote 英文正文
+    prompt_en: string | null      # 英文提示词原文
+    plugin_name: string | null    # 插件名
+    model_name: string | null     # 模型名
+    file_ref: string | null       # 文件引用或占位路径
+  tags:
+    - string                      # 中文为主的标签
+  visibility: private | audit | shared | public # 可见性
+  memory_safety:                  # 记忆安全检查
+    contains_secret: boolean      # 是否包含密钥
+    contains_private_path: boolean # 是否包含私密路径
+    contains_customer_private_data: boolean # 是否包含客户隐私
+    contains_image_binary: boolean # 是否包含图片二进制
+    safety_notes_cn: string       # 中文安全说明
+  promotion:                      # 是否可升级为 Git 硬规则
+    sync_to_git_candidate: boolean # 是否是 Git 升级候选
+    promoted_to_git: boolean      # 是否已经升级到 Git
+    git_target_file: string | null # 目标 Git 文件
+    promotion_reason_cn: string | null # 中文升级理由
+  final_decision:                 # 最终处理建议
+    should_write_to_vcp: boolean  # 是否建议写入 VCP 记忆
+    should_show_in_review_console: boolean # 是否展示给审片台
+    rejection_reason_cn: string | null # 中文拒绝原因

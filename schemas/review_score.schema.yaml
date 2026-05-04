@@ -1,0 +1,28 @@
+# review_score.schema.yaml
+# 图片评审分数草案：描述 AI 或人工对一个案例的评分
+review_score:
+  review_id: string               # 评审唯一 ID
+  task_id: string                 # 关联任务 ID
+  case_id: string | null          # 关联案例 ID
+  reviewer_type: ai | human       # 评审者类型
+  reviewer_name: string           # 评审者名称
+  total_score: number             # 总分，100 分制
+  breakdown:                      # 分项评分，总计 100
+    composition: number           # 构图与空间关系，15 分
+    subject_clarity: number       # 主体清晰度，10 分
+    style_consistency: number     # 风格一致性，15 分
+    premium_quality: number       # 高级感 / 商业质感，15 分
+    detail_control: number        # 细节控制，10 分
+    color_light: number           # 色彩与光线，10 分
+    text_ui_readability: number   # 文字 / UI 可读性，10 分
+    iteration_potential: number   # 迭代潜力，10 分
+    asset_value: number           # 资产沉淀价值，5 分
+  strengths_cn:
+    - string                      # 中文优点
+  weaknesses_cn:
+    - string                      # 中文问题
+  revision_advice_cn:
+    - string                      # 中文修正建议
+  continue_iteration: boolean     # 是否建议继续迭代
+  archive_recommendation: accepted | candidate | rejected | continue_iteration # 入库建议
+  memory_write_recommendation: boolean # 是否建议生成记忆草案

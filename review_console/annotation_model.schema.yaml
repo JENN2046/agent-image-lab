@@ -1,0 +1,13 @@
+# 后续阶段：图上坐标批注。MVP 暂不实现。
+annotation:
+  annotation_id: string
+  image_version_id: string
+  type: rectangle | point | freehand
+  normalized_box:
+    x: number
+    y: number
+    width: number
+    height: number
+  comment_cn: string
+  severity: low | medium | high | critical
+  resolved: boolean

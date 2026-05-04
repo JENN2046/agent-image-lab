@@ -1,0 +1,20 @@
+# prompt_package.schema.yaml
+# 提示词包草案：描述一组可审查、可迭代、可适配插件的提示词
+prompt_package:
+  package_id: string              # 提示词包唯一 ID
+  task_id: string                 # 关联任务 ID
+  agent_name: Prompt_Agent        # 生成者
+  target_plugin: string | null    # 目标插件，MVP 可为空
+  main_prompt_cn: string          # 中文主提示词
+  main_prompt_en: string          # 英文执行提示词，必须有中文解释
+  negative_prompt_cn: string      # 中文负面提示词
+  negative_prompt_en: string      # 英文负面提示词，必须有中文解释
+  preserve_cn:
+    - string                      # 保留项
+  change_cn:
+    - string                      # 修改项
+  avoid_cn:
+    - string                      # 避免项
+  short_control_cn: string        # 短控制词中文说明
+  plugin_parameters: map          # 插件参数占位，不写真实执行参数
+  risk_notes_cn: string           # 风险说明中文文本

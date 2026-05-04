@@ -1,0 +1,9 @@
+approval_actions:
+  - approve_archive          # 批准入库
+  - reject_archive           # 拒绝入库
+  - mark_candidate           # 标记候选资产
+  - request_iteration        # 要求继续迭代
+  - approve_memory_write     # 批准写入记忆
+  - reject_memory_write      # 拒绝写入记忆
+  - request_memory_edit      # 要求修改记忆正文
+  - mark_style_rule_candidate # 标记为风格规则候选
