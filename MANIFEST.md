@@ -16,5 +16,16 @@
 - `docs/30_release_readiness_report.md`
 - `docs/31_install_and_operation_guide.md`
 - `docs/32_final_acceptance_report.md`
+- `docs/33_post_execution_checkpoint.md`
 - `integrations/vcp/v0_7_real_execution_authorization_gate.md`
 - `integrations/vcp/v0_7_photo_studio_os_dry_run_rehearsal.md`
+- `integrations/vcp/v0_7_photo_studio_os_real_execution_record.md`
+- `workflows/v0_9_photo_studio_os_retry_authorization_gate.md`
+- `scripts/run_v0_7_photo_studio_os_real_execution.ps1`
+
+## Post-execution runtime outputs
+
+- Generated runtime files live under `runs/` and are ignored by Git.
+- The packaged project records only sanitized relative refs, hashes, and review status.
+- The first v0.7 real execution produced one image, but the asset was rejected because it violated the no-people visual constraint.
+- v0.9 adds the post-execution checkpoint and the next retry authorization gate.

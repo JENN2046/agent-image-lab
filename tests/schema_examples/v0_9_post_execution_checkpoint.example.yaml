@@ -1,0 +1,28 @@
+post_execution_checkpoint:
+  checkpoint: v0.9_post_execution_checkpoint
+  scenario: Photo Studio OS
+  selected_plugin_id: DoubaoGen
+  real_execution_attempted: true
+  max_plugin_calls_authorized: 1
+  actual_plugin_calls: 1
+  external_api_called: true
+  image_file_created: true
+  daily_note_called: false
+  raw_plugin_output_saved: false
+  endpoint_raw_saved: false
+  secret_value_saved: false
+  image_binary_saved_to_memory: false
+  vcp_toolbox_files_modified: false
+  generated_asset_accepted: false
+  final_v1_0_ready: false
+
+next_safe_step:
+  action: prepare_retry_authorization
+  requires_new_real_call_authorization: true
+  selected_plugin_id: DoubaoGen
+  max_plugin_calls: 1
+  output_directory_ref: runs/photo_studio_os_v0_9_retry
+  overwrite_existing_files_allowed: false
+  daily_note_direct_write_allowed: false
+  memory_delta_only: true
+

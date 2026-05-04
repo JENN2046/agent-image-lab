@@ -37,11 +37,13 @@ $requiredFiles = @(
   'adapter_dry_run_lab/fixtures/rejected_request.json',
   'adapter_dry_run_lab/fixtures/photo_studio_os_v0_7_rehearsal_request.json',
   'exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js',
+  'scripts/run_v0_7_photo_studio_os_real_execution.ps1',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
   'docs/31_install_and_operation_guide.md',
   'docs/32_final_acceptance_report.md',
+  'docs/33_post_execution_checkpoint.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
@@ -53,9 +55,11 @@ $requiredFiles = @(
   'integrations/vcp/v0_7_gatekeeper_risk_boundary.md',
   'integrations/vcp/v0_7_real_execution_authorization_gate.md',
   'integrations/vcp/v0_7_photo_studio_os_dry_run_rehearsal.md',
+  'integrations/vcp/v0_7_photo_studio_os_real_execution_record.md',
   'review_console/v0_7_human_approval_preflight.md',
   'workflows/photo_studio_os_real_loop_runbook.md',
   'workflows/v0_7_real_execution_preflight_confirmation.md',
+  'workflows/v0_9_photo_studio_os_retry_authorization_gate.md',
   'docs/01_project_definition.md',
   'docs/02_workflow_sop.md',
   'docs/03_agent_roles.md',
@@ -82,7 +86,10 @@ $requiredFiles = @(
   'tests/schema_examples/v0_7_real_execution_preflight_confirmation.example.yaml',
   'tests/schema_examples/v0_7_real_execution_authorization_gate.example.yaml',
   'tests/schema_examples/v0_7_photo_studio_os_dry_run_rehearsal.example.yaml',
+  'tests/schema_examples/v0_7_photo_studio_os_real_execution_record.example.yaml',
   'tests/schema_examples/v0_8_release_readiness.example.yaml',
+  'tests/schema_examples/v0_9_post_execution_checkpoint.example.yaml',
+  'tests/schema_examples/v0_9_photo_studio_os_retry_authorization_gate.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -119,6 +126,7 @@ $mediaExtensions = @('.png', '.jpg', '.jpeg', '.webp', '.gif', '.psd', '.zip')
 $mediaFiles = Get-ChildItem -LiteralPath $Root -Recurse -File -Force |
   Where-Object {
     $_.FullName -notlike '*\.git\*' -and
+    $_.FullName -notlike '*\runs\*' -and
     $mediaExtensions -contains $_.Extension.ToLowerInvariant()
   }
 foreach ($file in $mediaFiles) {
@@ -391,6 +399,118 @@ foreach ($path in $v07PreflightExamples) {
   foreach ($pattern in $forbiddenV07ExamplePatterns) {
     if ($content -match $pattern) {
       Add-Failure "v0.7 preflight boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$v07RealExecutionFiles = @(
+  'integrations/vcp/v0_7_photo_studio_os_real_execution_record.md',
+  'tests/schema_examples/v0_7_photo_studio_os_real_execution_record.example.yaml'
+)
+
+$requiredV07RealExecutionPatterns = @(
+  'phase:\s+v0\.7_photo_studio_os_minimal_real_execution',
+  'status:\s+completed_validated_with_visual_rejection',
+  'selected_plugin_id:\s+DoubaoGen',
+  'max_plugin_calls_authorized:\s+1',
+  'actual_plugin_calls:\s+1',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'file_write_performed:\s+true',
+  'image_file_created:\s+true',
+  'daily_note_called:\s+false',
+  'daily_note_direct_write_allowed:\s+false',
+  'memory_delta_only:\s+true',
+  'raw_plugin_output_saved:\s+false',
+  'secret_value_saved:\s+false',
+  'endpoint_raw_saved:\s+false',
+  'runtime_log_saved:\s+false',
+  'image_binary_saved_to_memory:\s+false',
+  'vcp_toolbox_files_modified:\s+false',
+  'visual_review:',
+  'status:\s+rejected_for_prompt_mismatch'
+)
+
+$forbiddenV07RealExecutionPatterns = @(
+  'raw_plugin_output_saved:\s+true',
+  'secret_value_saved:\s+true',
+  'endpoint_raw_saved:\s+true',
+  'runtime_log_saved:\s+true',
+  'image_binary_saved_to_memory:\s+true',
+  'daily_note_called:\s+true',
+  'daily_note_direct_write_allowed:\s+true',
+  'vcp_toolbox_files_modified:\s+true',
+  'additional_plugin_call_authorized:\s+true',
+  '[A-Za-z]:\\',
+  'https?://'
+)
+
+foreach ($path in $v07RealExecutionFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v0.7 real execution record file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV07RealExecutionPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v0.7 real execution record missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV07RealExecutionPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v0.7 real execution record boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$v09PostExecutionFiles = @(
+  'docs/33_post_execution_checkpoint.md',
+  'workflows/v0_9_photo_studio_os_retry_authorization_gate.md',
+  'tests/schema_examples/v0_9_post_execution_checkpoint.example.yaml',
+  'tests/schema_examples/v0_9_photo_studio_os_retry_authorization_gate.example.yaml'
+)
+
+$requiredV09Patterns = @(
+  'v0\.9_',
+  'daily_note_direct_write_allowed:\s+false',
+  'memory_delta_only:\s+true'
+)
+
+$forbiddenV09Patterns = @(
+  'raw_plugin_output_saved:\s+true',
+  'secret_value_saved:\s+true',
+  'endpoint_raw_saved:\s+true',
+  'runtime_log_saved:\s+true',
+  'image_binary_saved_to_memory:\s+true',
+  'daily_note_called:\s+true',
+  'daily_note_direct_write_allowed:\s+true',
+  'vcp_toolbox_files_modified:\s+true',
+  'generated_asset_accepted:\s+true',
+  'final_v1_0_ready:\s+true',
+  'retry_allowed_without_new_authorization:\s+true',
+  'real_execution_allowed:\s+true',
+  '[A-Za-z]:\\',
+  'https?://'
+)
+
+foreach ($path in $v09PostExecutionFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v0.9 post-execution file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV09Patterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v0.9 post-execution file missing required guard in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV09Patterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v0.9 post-execution boundary violation in ${path}: $pattern"
     }
   }
 }

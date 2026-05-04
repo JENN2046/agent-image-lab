@@ -1,5 +1,17 @@
 # Agent Image Lab
 
+## Post-v0.9 update
+
+The first v0.7 Photo Studio OS real-execution attempt has now been completed
+under a separate user authorization. It used `DoubaoGen` for exactly one call,
+saved a sanitized run summary under `runs/photo_studio_os_v0_7`, and did not
+write DailyNote or long-term memory.
+
+The generated asset is not accepted as the project cover: visual review found a
+human subject, while the authorized input required no people. The project now has
+a v0.9 post-execution checkpoint and retry authorization gate; a retry requires a
+new explicit authorization with a fresh call budget.
+
 Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不重新造生图插件，也不重新造记忆系统，而是把 VCP 的生图 / 编辑插件、VCPChat 的窗口能力、VCP 的长期记忆系统组织成一条可评审、可迭代、可归档、可沉淀的视觉生产线。
 
 ## 一句话定义
