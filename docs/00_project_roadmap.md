@@ -84,6 +84,8 @@ v0.2.5 final baseline + v0.3.0 manifest authorization planning
 
 目标：在独立授权下，只读取一个候选 manifest，并只输出中文脱敏摘要。
 
+进入 Phase C 前必须先使用 `integrations/vcp/phase_c_manifest_sanitized_read_contract.md` 形成独立授权申请。没有唯一候选和用户明确授权时，只允许维护授权模板，不得读取真实 manifest。
+
 允许输出：
 
 - 脱敏插件显示名摘要。

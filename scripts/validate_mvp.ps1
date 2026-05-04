@@ -32,6 +32,7 @@ $requiredFiles = @(
   'MANIFEST.md',
   'docs/00_project_roadmap.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
+  'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'docs/01_project_definition.md',
   'docs/02_workflow_sop.md',
   'docs/03_agent_roles.md',
@@ -154,10 +155,12 @@ $v03Files = @(
   'integrations/vcp/v0_3_authorization_closeout.md',
   'tests/schema_examples/v0_3_adapter_recon_authorization.example.yaml',
   'tests/schema_examples/v0_3_manifest_read_authorization_gate.example.yaml',
-  'tests/schema_examples/v0_3_manifest_sanitized_read_preflight.example.yaml'
+  'tests/schema_examples/v0_3_manifest_sanitized_read_preflight.example.yaml',
+  'tests/schema_examples/phase_c_manifest_read_authorization_request.example.yaml'
 )
 
 $forbiddenV03Patterns = @(
+  'user_authorized:\s+true',
   'source_authorized:\s+true',
   'source_read_performed:\s+true',
   'real_manifest_read:\s+true',

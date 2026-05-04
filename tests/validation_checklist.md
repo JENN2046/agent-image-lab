@@ -419,6 +419,15 @@
 - [ ] closeout 确认未出现真实插件名、真实 manifest 原文、真实插件路径或真实能力结论。
 - [ ] `scripts/validate_mvp.ps1` 会扫描 v0.3 授权文档和样例中的越权锁定值。
 
+## Phase C manifest 脱敏读取授权检查
+
+- [ ] `integrations/vcp/phase_c_manifest_sanitized_read_contract.md` 存在。
+- [ ] `tests/schema_examples/phase_c_manifest_read_authorization_request.example.yaml` 存在。
+- [ ] Phase C 合约明确没有唯一候选和用户明确授权时不得读取真实 manifest。
+- [ ] Phase C 授权样例保持 `user_authorized=false`、`source_authorized=false`、`source_read_performed=false`、`real_manifest_read=false`。
+- [ ] Phase C 授权样例保持 `selected_plugin=null`、`max_plugin_calls=0`、`api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`。
+- [ ] Phase C 只允许未来输出中文脱敏摘要，不允许保存 raw manifest 原文。
+
 ## 无执行闭环检查
 
 - [ ] `tests/schema_examples/task_envelope.example.yaml` 是 Photo Studio OS 无执行样例。

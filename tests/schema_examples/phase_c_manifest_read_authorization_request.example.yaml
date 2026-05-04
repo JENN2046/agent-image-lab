@@ -1,0 +1,127 @@
+phase_c_manifest_read_authorization_request:
+  authorization_id: phase-c-manifest-read-auth-001
+  requested_phase: phase_c_manifest_sanitized_read
+  candidate_id: candidate-plugin-placeholder-001
+  purpose_cn: "申请未来读取一个候选 manifest 的中文脱敏摘要；本样例不读取真实 manifest。"
+
+  target_scope:
+    target_repository_ref: repository-ref-placeholder-not-read
+    target_manifest_ref: manifest-ref-placeholder-not-read
+    single_manifest_only: true
+    repository_wide_scan_allowed: false
+    vcpchat_read_allowed: false
+    runtime_data_read_allowed: false
+    config_env_read_allowed: false
+    image_file_read_allowed: false
+
+  read_method:
+    read_only: true
+    executable_command_allowed: false
+    script_execution_allowed: false
+    plugin_execution_allowed: false
+    api_call_allowed: false
+    file_write_allowed: false
+    daily_note_write_allowed: false
+
+  extract_policy:
+    allowed_extract_fields:
+      - plugin_display_name_summary_cn
+      - command_summary_cn
+      - input_output_summary_cn
+      - permission_risk_cn
+      - gatekeeper_notes_cn
+      - sanitized_review_summary_cn
+    forbidden_extract_fields:
+      - raw_manifest_text
+      - api_key
+      - token
+      - cookie
+      - password
+      - private_path
+      - endpoint_raw
+      - webhook_raw
+      - database_url_raw
+      - customer_private_data
+      - image_binary
+      - real_plugin_output
+      - runtime_log
+    sanitized_chinese_summary_required: true
+    raw_manifest_copy_allowed: false
+
+  approval:
+    user_authorized: false
+    gatekeeper_approved: false
+    review_console_required: true
+    archivist_required_for_memory: true
+    imagelab_master_required: true
+    approval_status: pending
+    approved_by: null
+    approved_at: null
+    approval_notes_cn: "本样例只是授权申请模板；真实读取必须等待用户单独授权。"
+
+  no_read_guard:
+    source_authorized: false
+    source_read_performed: false
+    real_manifest_read: false
+    read_performed: false
+    raw_manifest_copied: false
+
+  no_execution_guard:
+    real_execution_allowed: false
+    selected_plugin: null
+    max_plugin_calls: 0
+    api_called: false
+    vcp_plugin_called: false
+    daily_note_called: false
+    file_write_performed: false
+    image_file_created: false
+
+  state_rules:
+    current_state: pending_manifest_review
+    next_allowed_state_before_authorized_read: pending_manifest_review
+    allowed_state_after_future_authorized_read:
+      - manifest_reviewed_safe
+      - rejected
+    forbidden_states:
+      - dry_run_checked
+      - tested
+      - plugin_selected
+      - execution_ready
+      - real_execution_ready
+
+  memory_delta_draft:
+    delta_id: md-phase-c-manifest-read-auth-001
+    task_id: task-phase-c-manifest-read-auth-001
+    case_id: case-phase-c-manifest-read-auth-001
+    agent_name: Archivist_Agent
+    target_notebook: Execution_Audit_Log
+    write_mode: draft
+    approval_required: true
+    approval_status: pending
+    chinese_diary_title: "Phase C manifest 脱敏读取授权申请草案"
+    chinese_diary_content: |
+      本记录只是 Phase C manifest 脱敏读取的授权申请模板。当前未读取真实 VCPToolBox、VCPChat 或 manifest，未选择真实插件，未调用插件、API、DailyNote，未写文件或创建图片。真实读取必须等待用户对单一候选 manifest 的独立授权。
+    tags:
+      - PhaseC
+      - manifest脱敏读取
+      - 授权申请
+      - no-read
+    memory_safety:
+      contains_secret: false
+      contains_private_path: false
+      contains_customer_private_data: false
+      contains_image_binary: false
+      safety_notes_cn: "本样例为中文脱敏授权申请，不包含真实 manifest 原文或敏感配置。"
+    final_decision:
+      should_write_to_vcp: false
+      should_show_in_review_console: true
+      rejection_reason_cn: null
+
+  acceptance_assertions:
+    - "user_authorized=false 时不得读取真实 manifest。"
+    - "source_authorized、source_read_performed、real_manifest_read 必须为 false。"
+    - "selected_plugin 必须为 null。"
+    - "max_plugin_calls 必须为 0。"
+    - "api_called、vcp_plugin_called、daily_note_called 必须为 false。"
+    - "未授权前状态必须保持 pending_manifest_review。"
+    - "本样例不得包含真实插件名、真实 manifest 原文、真实插件路径或真实能力结论。"
