@@ -1,0 +1,154 @@
+phase8_manifest_review_to_capability_matrix:
+  case_id: acceptance-phase8-manifest-review-001
+  purpose_cn: "验证 manifest 审查记录如何以脱敏方式推进能力矩阵状态；全程不读取真实 manifest，不调用插件，不进入真实执行。"
+  status: draft_acceptance_fixture
+  no_execution_guard:
+    real_manifest_read: false
+    api_called: false
+    vcp_plugin_called: false
+    daily_note_called: false
+    disk_write_performed: false
+    image_file_created: false
+    vcp_toolbox_modified: false
+    vcpchat_modified: false
+    sensitive_original_copied: false
+    max_plugin_calls_observed: 0
+    audit_summary_cn: "本样例只展示 manifest 审查状态推进，不读取真实 manifest，不调用插件、API、DailyNote 或文件写入。"
+
+  candidate_context:
+    candidate_id: candidate-plugin-placeholder-001
+    plugin_display_name_cn: "待确认插件"
+    plugin_name_recording_policy_cn: "未授权读取真实 manifest 前，只能记录脱敏占位名称。"
+    task_type: photo_studio_os_review
+    current_matrix_status_before: "待实测"
+    real_execution_allowed: false
+
+  step_1_prepare_manifest_review:
+    review_id: manifest-review-phase8-001
+    review_date: "2026-05-04"
+    reviewer_role: human_reviewer
+    source_authorized: false
+    source_read_performed: false
+    manifest_review_status_before: "待实测"
+    manifest_review_status_after: pending_manifest_review
+    sanitized_summary_cn: "准备进入 manifest 审查，但尚未获得读取真实 manifest 的单独授权。"
+    command_summary_cn: "未读取，未确认。"
+    input_mode_observed: unknown
+    output_mode_observed: unknown
+    permission_risk_cn: "未读取，未确认。"
+    sensitive_original_copied: false
+    private_path_copied: false
+    customer_private_data_copied: false
+    image_binary_copied: false
+    external_api_called: false
+    plugin_called: false
+    file_write_observed: false
+    daily_note_write_observed: false
+    gatekeeper_required: true
+    review_console_required: true
+    next_allowed_state: pending_manifest_review
+    real_execution_allowed: false
+    audit_summary_cn: "仅创建 manifest 审查准备记录，未读取真实 manifest。"
+
+  step_2_sanitized_manifest_review_pass_example:
+    review_id: manifest-review-phase8-002
+    review_date: "2026-05-04"
+    reviewer_role: human_reviewer
+    source_authorized: true
+    source_read_performed: false
+    manifest_review_status_before: pending_manifest_review
+    manifest_review_status_after: manifest_reviewed_safe
+    sanitized_summary_cn: "这是脱敏通过示例，不代表真实 manifest 已读取；真实审查必须另行授权后填写。"
+    command_summary_cn: "示例仅说明命令摘要字段，不记录真实命令原文。"
+    input_mode_observed: unknown
+    output_mode_observed: unknown
+    permission_risk_cn: "未发现可记录风险；该句为占位示例，不是实测结论。"
+    sensitive_original_copied: false
+    private_path_copied: false
+    customer_private_data_copied: false
+    image_binary_copied: false
+    external_api_called: false
+    plugin_called: false
+    file_write_observed: false
+    daily_note_write_observed: false
+    gatekeeper_required: true
+    review_console_required: true
+    next_allowed_state: manifest_reviewed_safe
+    real_execution_allowed: false
+    audit_summary_cn: "脱敏审查通过示例仍不授权真实执行，也不代表真实插件能力。"
+
+  step_3_rejected_manifest_review_example:
+    review_id: manifest-review-phase8-003
+    review_date: "2026-05-04"
+    reviewer_role: human_reviewer
+    source_authorized: true
+    source_read_performed: false
+    manifest_review_status_before: pending_manifest_review
+    manifest_review_status_after: rejected
+    sanitized_summary_cn: "拒绝示例：manifest 审查发现不可记录的敏感配置字段，仅保留脱敏拒绝原因。"
+    rejection_reason_cn: "本 manifest 含敏感配置字段，拒绝进入 dry-run 候选评估。"
+    sensitive_original_copied: false
+    private_path_copied: false
+    customer_private_data_copied: false
+    image_binary_copied: false
+    external_api_called: false
+    plugin_called: false
+    file_write_observed: false
+    daily_note_write_observed: false
+    next_allowed_state: rejected
+    real_execution_allowed: false
+
+  capability_matrix_update_draft:
+    update_id: capability-update-phase8-001
+    candidate_id: candidate-plugin-placeholder-001
+    plugin_name: "待确认插件"
+    task_type: photo_studio_os_review
+    input_mode: unknown
+    output_mode: unknown
+    best_for_cn: "待读取真实 manifest 并完成脱敏审查后确认。"
+    not_suitable_for_cn: "未完成审查前不得填写真实限制。"
+    approval_required: true
+    risk_level: medium
+    status_before: "待实测"
+    allowed_status_after:
+      - pending_manifest_review
+      - manifest_reviewed_safe
+      - rejected
+    forbidden_status_after_without_dry_run:
+      - dry_run_checked
+      - tested
+    notes_cn: "本更新草案只展示状态推进规则，不写真实插件能力。"
+    real_execution_allowed: false
+
+  dispatch_plan_alignment:
+    dispatch_id: dispatch-phase8-manifest-review-001
+    task_id: task-phase8-manifest-review-001
+    mode: dry_run
+    selected_plugin: null
+    capability_matrix_status: pending_manifest_review
+    dry_run_required: true
+    approval_required: true
+    external_api_allowed: false
+    execution_blocked: true
+    allow_file_write: false
+    allow_image_binary: false
+    max_plugin_calls: 0
+    manifest_review:
+      required_before_real_execution: true
+      status: pending_manifest_review
+      sanitized_summary_cn: "仅有审查准备状态，未读取真实 manifest。"
+      sensitive_original_copied: false
+      real_execution_allowed: false
+    audit_record:
+      audit_id: audit-phase8-manifest-review-001
+      audit_summary_cn: "仅生成 manifest 审查状态推进草案，未调用插件、API、DailyNote 或文件写入。"
+      contains_sensitive_original: false
+
+  acceptance_assertions:
+    - "未获得单独授权前，real_manifest_read 必须为 false。"
+    - "manifest 审查记录不得复制敏感原文、私密路径、客户隐私或图片二进制。"
+    - "能力矩阵只能从 待实测 推进到 pending_manifest_review、manifest_reviewed_safe 或 rejected。"
+    - "未完成 dry-run 验收前，不能进入 dry_run_checked 或 tested。"
+    - "manifest_reviewed_safe 不代表真实执行授权。"
+    - "dispatch_plan 仍保持 selected_plugin=null、max_plugin_calls=0、execution_blocked=true。"
+    - "API、VCP 插件、DailyNote、文件写入和图片创建均未发生。"

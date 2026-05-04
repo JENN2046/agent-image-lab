@@ -7,7 +7,7 @@ vcp_dispatch_plan:
   selected_plugin: null           # MVP-A 不选择真实插件
   fallback_plugins:
     - string                      # 备选插件占位列表，可为空
-  capability_matrix_status: placeholder | pending_manifest_review | tested # 能力矩阵状态
+  capability_matrix_status: placeholder | pending_manifest_review | manifest_reviewed_safe | dry_run_checked | tested | rejected # 能力矩阵状态
   reason_cn: string               # 中文选择理由
   input_mode: text | image | text_image | none | unknown # 输入模式
   output_mode: image | plan | review | none | unknown # 输出模式
@@ -55,6 +55,12 @@ vcp_dispatch_plan:
     audit_id: string             # 审计记录 ID，占位
     audit_summary_cn: string     # 中文脱敏审计摘要
     contains_sensitive_original: false # 不包含敏感原文
+  manifest_review:
+    required_before_real_execution: true # 真实执行前必须审查 manifest
+    status: not_started | pending_manifest_review | manifest_reviewed_safe | rejected # manifest 审查状态
+    sanitized_summary_cn: string | null # 中文脱敏摘要，不保存敏感原文
+    sensitive_original_copied: false # 不复制敏感原文
+    real_execution_allowed: false # manifest 审查不授权真实执行
   audit_notes_cn: string          # 中文审计说明
   forbidden_actions:
     - execute                     # 禁止真实执行
@@ -80,3 +86,6 @@ vcp_dispatch_plan:
     - review_console_handoff.required 必须为 true。
     - rollback_plan.external_rollback_required 必须为 false。
     - audit_record.contains_sensitive_original 必须为 false。
+    - manifest_review.sensitive_original_copied 必须为 false。
+    - manifest_review.real_execution_allowed 必须为 false。
+    - capability_matrix_status 为 manifest_reviewed_safe、dry_run_checked 或 tested 时，也不代表允许真实执行。

@@ -134,6 +134,35 @@
 - [ ] 未创建图片文件。
 - [ ] 未调用 API、VCP 插件或 DailyNote。
 
+## Phase 8 manifest 审查流程检查
+
+- [ ] Phase 8 只设计 manifest 审查流程，不读取真实 VCPToolBox。
+- [ ] Phase 8 不读取真实 VCPChat。
+- [ ] `integrations/vcp/manifest_review_checklist.md` 存在。
+- [ ] manifest 审查清单明确真实 manifest 读取必须另行授权。
+- [ ] manifest 审查清单明确不得复制密钥、令牌、cookie、密码、私密路径或客户隐私原文。
+- [ ] manifest 审查清单明确只允许保存中文脱敏摘要。
+- [ ] manifest 审查清单明确 `tested` 不代表允许真实执行。
+- [ ] 能力矩阵状态包含 `pending_manifest_review`、`manifest_reviewed_safe`、`dry_run_checked`、`tested`、`rejected`。
+- [ ] 能力矩阵明确 `manifest_reviewed_safe`、`dry_run_checked`、`tested` 均不代表真实执行授权。
+- [ ] `vcp_dispatch_plan.schema.yaml` 包含 `manifest_review` 字段。
+- [ ] `manifest_review.sensitive_original_copied` 必须为 `false`。
+- [ ] `manifest_review.real_execution_allowed` 必须为 `false`。
+- [ ] `capability_matrix_status` 新状态不允许改变 `selected_plugin=null`、`max_plugin_calls=0`、`execution_blocked=true`。
+- [ ] `tests/schema_examples/phase8_manifest_review_to_capability_matrix.example.yaml` 存在。
+- [ ] Phase 8 状态推进样例明确 `real_manifest_read=false`。
+- [ ] Phase 8 状态推进样例不包含真实 manifest 原文。
+- [ ] Phase 8 状态推进样例只允许从 `待实测` 推进到 `pending_manifest_review`、`manifest_reviewed_safe` 或 `rejected`。
+- [ ] Phase 8 状态推进样例未完成 dry-run 前禁止进入 `dry_run_checked` 或 `tested`。
+- [ ] Phase 8 状态推进样例明确 `selected_plugin=null`、`max_plugin_calls=0`、`execution_blocked=true`。
+- [ ] 未新增真实插件名称或真实插件能力结论。
+- [ ] 未新增真实 manifest 原文。
+- [ ] 未新增 `index.js` 或其他真实 Adapter 可执行入口。
+- [ ] 未调用 API、VCP 插件或 DailyNote。
+- [ ] 未创建图片文件。
+- [ ] 未修改真实 VCPToolBox。
+- [ ] 未修改真实 VCPChat。
+
 ## 无执行闭环检查
 
 - [ ] `tests/schema_examples/task_envelope.example.yaml` 是 Photo Studio OS 无执行样例。
