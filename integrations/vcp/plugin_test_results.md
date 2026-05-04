@@ -93,6 +93,35 @@ test_record:
   audit_summary_cn: "未调用插件、API、DailyNote 或文件写入；能力保持待实测。"
 ```
 
+## Phase 9 dry-run 测试包结构
+
+Phase 9 的单插件候选测试包只用于准备 dry-run 实测，不读取真实 VCPToolBox，不读取真实 VCPChat，不调用插件，不调用 API，不写 DailyNote，不写文件，不保存图片。
+
+测试包必须把以下对象打包在同一份草案中：
+
+| 区块 | 作用 | 必须保持 |
+|---|---|---|
+| `package_metadata` | 记录测试包 ID、阶段、用途和占位候选 | 不写真实插件名，不写真实 manifest 原文 |
+| `no_execution_guard` | 锁定无执行边界 | 全部外部动作字段为 `false`，`max_plugin_calls_observed=0` |
+| `candidate_snapshot` | 记录候选插件的脱敏状态 | 未授权前仅可写 `待确认插件` 和 `pending_manifest_review` |
+| `manifest_review_gate` | 记录 manifest 读取授权门槛 | 未授权前 `real_manifest_read=false` |
+| `dispatch_plan_draft` | 对齐 VCP Adapter dry-run 输出 | `selected_plugin=null`、`max_plugin_calls=0`、`execution_blocked=true` |
+| `gatekeeper_review_draft` | 给 Gatekeeper 的风险复查草案 | 只写中文脱敏风险摘要，不传敏感原文 |
+| `review_console_handoff_draft` | 给 Review Console 的展示草案 | 只允许人工评审，不触发执行 |
+| `memory_delta_draft` | 记录可选记忆草案 | `write_mode=draft`，默认不写 DailyNote |
+| `acceptance_assertions` | 验收断言 | 明确不进入 `dry_run_checked` 或 `tested` |
+
+测试包不得包含：
+
+- 真实插件名称或真实插件路径。
+- 真实 manifest 原文。
+- API key、token、cookie、密码。
+- 私密路径、客户隐私或客户未公开信息。
+- 真实插件输出、图片二进制或图片文件。
+- execution mode、插件调用入口或写文件逻辑。
+
+`manifest_reviewed_safe` 可以作为未来授权审查后的目标状态字段出现，但在未读取真实 manifest 的测试包中只能作为说明，不得成为当前状态。
+
 ## 人工复查清单
 
 - [ ] 是否确认本轮只做 dry-run 候选评估。

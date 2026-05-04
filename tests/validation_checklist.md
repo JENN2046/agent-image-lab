@@ -178,6 +178,14 @@
 - [ ] 进入任何真实 manifest 读取任务前，必须先列出读取对象、读取方式、可摘录字段和禁止摘录字段。
 - [ ] Phase 9 前置检查仍保持 `selected_plugin=null`、`max_plugin_calls=0`、`execution_blocked=true`。
 - [ ] Phase 9 不新增真实插件名称、真实 manifest 原文或真实插件能力结论。
+- [ ] `integrations/vcp/plugin_test_results.md` 包含 Phase 9 dry-run 测试包结构说明。
+- [ ] `tests/schema_examples/phase9_single_plugin_dry_run_package.example.yaml` 存在。
+- [ ] Phase 9 测试包样例包含 `package_metadata`、`no_execution_guard`、`candidate_snapshot`、`manifest_review_gate`、`dispatch_plan_draft`、`gatekeeper_review_draft`、`review_console_handoff_draft`、`memory_delta_draft` 和 `acceptance_assertions`。
+- [ ] Phase 9 测试包样例中 `real_manifest_read=false`、`source_read_performed=false`、`vcp_toolbox_read=false`、`vcpchat_read=false`。
+- [ ] Phase 9 测试包样例中 `selected_plugin=null`、`max_plugin_calls=0`、`execution_blocked=true`。
+- [ ] Phase 9 测试包样例中 `memory_delta_draft.write_mode=draft` 且 `final_decision.should_write_to_vcp=false`。
+- [ ] Phase 9 测试包样例只包含中文脱敏审计摘要和中文记忆正文。
+- [ ] Phase 9 测试包样例未把 `pending_manifest_review` 自动推进到 `manifest_reviewed_safe`、`dry_run_checked` 或 `tested`。
 
 ## 无执行闭环检查
 

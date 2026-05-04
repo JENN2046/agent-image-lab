@@ -1,0 +1,185 @@
+phase9_single_plugin_dry_run_package:
+  package_metadata:
+    package_id: phase9-dry-run-package-placeholder-001
+    package_version: "0.2-phase9"
+    phase: "Phase 9"
+    purpose_cn: "准备单插件候选 dry-run 测试包结构；全程不读取真实 manifest，不调用插件，不执行外部动作。"
+    status: draft_acceptance_fixture
+    candidate_id: candidate-plugin-placeholder-001
+    plugin_display_name_cn: "待确认插件"
+    created_for_task_type: photo_studio_os_review
+    created_at: "2026-05-04T16:00:00+08:00"
+    owner_role: ImageLab_Master
+
+  no_execution_guard:
+    real_manifest_read: false
+    source_read_performed: false
+    real_plugin_name_recorded: false
+    real_plugin_capability_recorded: false
+    api_called: false
+    vcp_plugin_called: false
+    daily_note_called: false
+    vcp_memory_written: false
+    disk_write_performed: false
+    image_file_created: false
+    image_binary_included: false
+    vcp_toolbox_read: false
+    vcp_toolbox_modified: false
+    vcpchat_read: false
+    vcpchat_modified: false
+    sensitive_original_copied: false
+    max_plugin_calls_observed: 0
+    audit_summary_cn: "本测试包只准备 dry-run 实测结构，未读取外部 VCP 仓库，未调用插件、API、DailyNote 或文件写入。"
+
+  candidate_snapshot:
+    candidate_id: candidate-plugin-placeholder-001
+    plugin_display_name_cn: "待确认插件"
+    plugin_name_recording_policy_cn: "未获得单独授权前，不记录真实插件名、真实路径或真实 manifest 原文。"
+    task_type: photo_studio_os_review
+    manifest_review_status: pending_manifest_review
+    capability_status_before: "待实测"
+    capability_status_after: pending_manifest_review
+    capability_status_note_cn: "仅进入候选准备状态；未读取真实 manifest，不能进入 manifest_reviewed_safe、dry_run_checked 或 tested。"
+    input_mode_observed: unknown
+    output_mode_observed: unknown
+    risk_level: medium
+    approval_required: true
+    gatekeeper_required: true
+    review_console_required: true
+    real_execution_allowed: false
+
+  manifest_review_gate:
+    required_before_real_execution: true
+    required_before_manifest_reviewed_safe: true
+    source_authorized: false
+    source_read_performed: false
+    allowed_to_extract_fields:
+      - "脱敏插件显示名"
+      - "命令集合中文摘要"
+      - "输入输出模式中文摘要"
+      - "权限风险中文摘要"
+    forbidden_to_extract_fields:
+      - "API key、token、cookie、密码"
+      - "私密绝对路径"
+      - "客户隐私或客户未公开信息"
+      - "webhook、数据库地址或服务端点原文"
+      - "图片二进制或真实插件输出"
+    next_allowed_status_if_authorized: manifest_reviewed_safe
+    current_status: pending_manifest_review
+    real_execution_allowed: false
+    gatekeeper_note_cn: "未获得读取真实 manifest 的单独授权，因此只能保留待审查状态。"
+
+  dispatch_plan_draft:
+    dispatch_id: dispatch-phase9-dry-run-package-001
+    task_id: task-phase9-dry-run-package-001
+    mode: dry_run
+    selected_plugin: null
+    fallback_plugins: []
+    capability_matrix_status: pending_manifest_review
+    reason_cn: "Phase 9 仅准备单插件候选 dry-run 测试包，不选择真实插件。"
+    input_mode: unknown
+    output_mode: plan
+    dry_run_required: true
+    approval_required: true
+    external_api_allowed: false
+    execution_blocked: true
+    gatekeeper_required: true
+    review_console_required: true
+    allow_file_write: false
+    allow_image_binary: false
+    max_plugin_calls: 0
+    preflight_result:
+      status: needs_review
+      checked_mode: dry_run
+      checked_max_plugin_calls: 0
+      checked_external_api_allowed: false
+      checked_file_write_allowed: false
+      checked_image_binary_allowed: false
+      rejection_reason_cn: null
+    manifest_review:
+      required_before_real_execution: true
+      status: pending_manifest_review
+      sanitized_summary_cn: "尚未读取真实 manifest，仅准备 dry-run 测试包结构。"
+      sensitive_original_copied: false
+      real_execution_allowed: false
+    forbidden_actions:
+      - execute
+      - generate
+      - run
+      - call_plugin
+      - write_memory
+      - write_image_file
+
+  gatekeeper_review_draft:
+    required: true
+    status: needs_review
+    reviewer_role: Gatekeeper_Agent
+    risk_summary_cn: "测试包仍处于 pending_manifest_review；未读取真实 manifest，未调用插件，不能进入 dry_run_checked 或 tested。"
+    blocked_actions:
+      - execute
+      - generate
+      - call_plugin
+      - external_api
+      - write_daily_note
+      - write_image_file
+    sensitive_original_allowed: false
+    approval_to_execute_allowed: false
+
+  review_console_handoff_draft:
+    required: true
+    purpose_cn: "向人工评审展示单插件候选 dry-run 测试包结构和 no-execution guard。"
+    allowed_actions:
+      - mark_candidate
+      - reject_candidate
+      - request_manifest_authorization
+      - request_gatekeeper_review
+      - request_memory_edit
+    forbidden_actions:
+      - execute_plugin
+      - call_api
+      - write_daily_note
+      - save_image
+    human_review_overrides_ai: true
+    note_cn: "Review Console 只能展示草案和人工意见，不能触发真实插件或 DailyNote。"
+
+  memory_delta_draft:
+    delta_id: md-phase9-dry-run-package-001
+    task_id: task-phase9-dry-run-package-001
+    case_id: case-phase9-dry-run-package-001
+    agent_name: Archivist_Agent
+    target_notebook: Rejected_Visual_Lessons
+    write_mode: draft
+    approval_required: true
+    approval_status: pending
+    approved_by: null
+    approved_at: null
+    chinese_diary_title: "Phase 9 单插件 dry-run 测试包准备记录"
+    chinese_diary_content: |
+      本记录仅说明 Phase 9 准备了单插件候选 dry-run 测试包结构。当前未读取真实 manifest，未选择真实插件，未调用插件、API、DailyNote 或文件写入。后续如需进入真实 manifest 审查，必须另行授权读取对象、读取方式、可摘录字段和禁止摘录字段。
+    tags:
+      - Phase9
+      - dry-run
+      - 单插件候选
+      - manifest审查
+      - no-execution
+    memory_safety:
+      contains_secret: false
+      contains_private_path: false
+      contains_customer_private_data: false
+      contains_image_binary: false
+      safety_notes_cn: "记忆草案为中文脱敏摘要，不含密钥、私密路径、客户隐私或图片二进制。"
+    final_decision:
+      should_write_to_vcp: false
+      should_show_in_review_console: true
+      rejection_reason_cn: null
+
+  acceptance_assertions:
+    - "测试包不读取真实 VCPToolBox 或 VCPChat。"
+    - "测试包不记录真实插件名、真实插件路径或真实 manifest 原文。"
+    - "dispatch_plan_draft 保持 selected_plugin=null、max_plugin_calls=0、execution_blocked=true。"
+    - "manifest_review_gate.source_authorized=false 时，current_status 必须保持 pending_manifest_review。"
+    - "未完成授权 manifest 脱敏审查前，不能进入 manifest_reviewed_safe。"
+    - "未完成 dry-run 验收前，不能进入 dry_run_checked 或 tested。"
+    - "Review Console handoff 只能展示草案，不能触发插件、API、DailyNote 或图片保存。"
+    - "memory_delta_draft.write_mode=draft，final_decision.should_write_to_vcp=false。"
+    - "所有审计摘要和记忆正文均为中文脱敏内容。"
