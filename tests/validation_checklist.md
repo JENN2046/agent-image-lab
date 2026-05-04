@@ -220,6 +220,23 @@
 - [ ] Phase 9 Review Console 审批记录映射不得调用 API、VCP 插件、DailyNote，不得写文件或创建图片。
 - [ ] Phase 9 Review Console 审批记录映射不得自动推进到 `manifest_reviewed_safe`、`dry_run_checked` 或 `tested`。
 
+## Phase 10 manifest authorization gate 检查
+
+- [ ] Phase 10 只固化 manifest 读取前置授权门槛，不读取真实 VCPToolBox。
+- [ ] Phase 10 不读取真实 VCPChat。
+- [ ] Phase 10 不读取真实 manifest。
+- [ ] `integrations/vcp/manifest_review_checklist.md` 明确 canonical pre-read gate。
+- [ ] `tests/schema_examples/phase10_manifest_authorization_gate.example.yaml` 存在。
+- [ ] Phase 10 样例包含 `canonical_gate`、`authorization_requirements`、`extract_policy`、`no_execution_guard`、`state_rules`、`review_console_handoff`、`memory_delta_draft` 和 `acceptance_assertions`。
+- [ ] Phase 10 样例保持 `source_authorized=false`、`source_read_performed=false`、`real_execution_allowed=false`。
+- [ ] Phase 10 样例保持 `selected_plugin=null`、`max_plugin_calls=0`。
+- [ ] Phase 10 样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`。
+- [ ] Phase 10 样例不得把状态推进到 `manifest_reviewed_safe`、`dry_run_checked` 或 `tested`。
+- [ ] Phase 10 样例不得记录真实插件名、真实 manifest 原文、真实插件路径或真实能力结论。
+- [ ] Phase 10 样例不得包含 API key、token、cookie、密码、私密路径、客户隐私或客户未公开信息。
+- [ ] Phase 10 样例的记忆正文和审计摘要必须为中文脱敏内容。
+- [ ] Phase 10 不调用 API、VCP 插件、DailyNote，不写文件，不创建图片。
+
 ## 无执行闭环检查
 
 - [ ] `tests/schema_examples/task_envelope.example.yaml` 是 Photo Studio OS 无执行样例。

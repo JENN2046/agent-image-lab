@@ -1,0 +1,148 @@
+phase10_manifest_authorization_gate:
+  gate_metadata:
+    gate_id: phase10-manifest-authorization-gate-001
+    phase: "Phase 10"
+    purpose_cn: "固化 v0.2 的 canonical manifest 读取前置授权门槛；本样例不读取真实 manifest。"
+    status: draft_acceptance_fixture
+    candidate_id: candidate-plugin-placeholder-001
+    created_at: "2026-05-04T19:00:00+08:00"
+    owner_role: ImageLab_Master
+
+  canonical_gate:
+    candidate_id: candidate-plugin-placeholder-001
+    target_repository_ref: repository-ref-placeholder-not-read
+    target_manifest_ref: manifest-ref-placeholder-not-read
+    target_scope_cn: "未来若进入真实读取，只能限定到一个候选 manifest；v0.2 final baseline 不执行读取。"
+    source_authorized: false
+    source_read_performed: false
+    current_state: pending_manifest_review
+    next_allowed_state: pending_manifest_review
+    real_execution_allowed: false
+    gate_summary_cn: "本门槛只确认读取前必须具备的授权字段和拒绝条件，不读取真实 VCPToolBox、VCPChat 或 manifest。"
+
+  authorization_requirements:
+    independent_authorization_required: true
+    explicit_candidate_required: true
+    explicit_read_method_required: true
+    gatekeeper_review_required: true
+    review_console_display_required: true
+    archivist_review_required_for_memory: true
+    required_before_read_cn:
+      - "列出唯一候选 ID。"
+      - "列出读取对象的脱敏引用。"
+      - "列出只读读取方式。"
+      - "列出允许摘录字段和禁止摘录字段。"
+      - "列出人工审查人和 Gatekeeper 复查角色。"
+      - "确认不调用插件、API、DailyNote，不写文件，不创建图片。"
+
+  extract_policy:
+    allowed_extract_fields:
+      - "脱敏插件显示名"
+      - "命令集合中文摘要"
+      - "输入输出模式中文摘要"
+      - "权限风险中文摘要"
+      - "Gatekeeper 需要复查的风险点"
+    forbidden_extract_fields:
+      - "API key、token、cookie、密码"
+      - "私密绝对路径"
+      - "客户隐私或客户未公开信息"
+      - "webhook、数据库地址或服务端点原文"
+      - "manifest 敏感配置原文"
+      - "图片二进制或真实插件输出"
+    raw_manifest_copy_allowed: false
+    sanitized_chinese_summary_required: true
+
+  no_execution_guard:
+    selected_plugin: null
+    max_plugin_calls: 0
+    source_authorized: false
+    source_read_performed: false
+    real_manifest_read: false
+    real_execution_allowed: false
+    api_called: false
+    vcp_plugin_called: false
+    plugin_called: false
+    daily_note_called: false
+    vcp_memory_written: false
+    disk_write_performed: false
+    image_file_created: false
+    image_binary_included: false
+    vcp_toolbox_read: false
+    vcp_toolbox_modified: false
+    vcpchat_read: false
+    vcpchat_modified: false
+    sensitive_original_copied: false
+    audit_summary_cn: "Phase 10 仅固化授权门槛，未读取真实 manifest，未调用插件、API、DailyNote 或文件写入。"
+
+  state_rules:
+    current_state: pending_manifest_review
+    next_allowed_state: pending_manifest_review
+    forbidden_current_states:
+      - manifest_reviewed_safe
+      - dry_run_checked
+      - tested
+    state_progression_note_cn: "v0.2 final baseline 不产生真实 manifest 审查结论，因此不得把候选状态推进到 manifest_reviewed_safe。"
+    rejected_if_cn:
+      - "没有独立授权读取。"
+      - "读取对象不是单一候选 manifest。"
+      - "需要保存敏感原文。"
+      - "权限、输入、输出或命令含义无法脱敏说明。"
+      - "manifest 暗示未授权外部调用、文件写入、图片写入或 DailyNote 写入。"
+      - "Gatekeeper 要求拒绝。"
+
+  review_console_handoff:
+    required: true
+    allowed_actions:
+      - request_manifest_authorization
+      - reject_candidate
+      - request_gatekeeper_review
+      - request_memory_edit
+    forbidden_actions:
+      - execute_plugin
+      - call_api
+      - write_daily_note
+      - save_image
+      - mark_manifest_reviewed_safe
+    handoff_summary_cn: "Review Console 只能展示授权门槛草案和人工意见，不能读取 manifest 或推进真实执行状态。"
+
+  memory_delta_draft:
+    delta_id: md-phase10-manifest-authorization-gate-001
+    task_id: task-phase10-manifest-authorization-gate-001
+    case_id: case-phase10-manifest-authorization-gate-001
+    agent_name: Archivist_Agent
+    target_notebook: Rejected_Visual_Lessons
+    write_mode: draft
+    approval_required: true
+    approval_status: pending
+    approved_by: null
+    approved_at: null
+    chinese_diary_title: "Phase 10 manifest 授权门槛草案"
+    chinese_diary_content: |
+      本记录说明 v0.2 final baseline 只固化真实 manifest 读取前的授权门槛，不读取真实 VCPToolBox、VCPChat 或 manifest，不调用插件、API、DailyNote，不写文件，不创建图片。未来若需要读取真实 manifest，必须另开授权点并先确认唯一候选、读取方式、可摘录字段、禁止摘录字段和 Gatekeeper 复查要求。
+    tags:
+      - Phase10
+      - manifest授权
+      - no-execution
+      - v0.2
+    memory_safety:
+      contains_secret: false
+      contains_private_path: false
+      contains_customer_private_data: false
+      contains_image_binary: false
+      safety_notes_cn: "本草案为中文脱敏摘要，不含密钥、私密路径、客户隐私或图片二进制。"
+    final_decision:
+      should_write_to_vcp: false
+      should_show_in_review_console: true
+      rejection_reason_cn: null
+
+  acceptance_assertions:
+    - "source_authorized 必须为 false。"
+    - "source_read_performed 必须为 false。"
+    - "real_execution_allowed 必须为 false。"
+    - "selected_plugin 必须为 null。"
+    - "max_plugin_calls 必须为 0。"
+    - "api_called、vcp_plugin_called、daily_note_called 必须为 false。"
+    - "当前状态必须保持 pending_manifest_review。"
+    - "不得进入 manifest_reviewed_safe、dry_run_checked 或 tested。"
+    - "不得记录真实插件名、真实 manifest 原文、私密路径、密钥、客户隐私或真实插件能力结论。"
+    - "所有记忆正文和审计摘要必须为中文脱敏内容。"

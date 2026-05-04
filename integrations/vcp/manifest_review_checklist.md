@@ -40,6 +40,38 @@ real_execution_allowed: false
 
 前置审查通过也只允许进入“等待授权读取”状态，不自动进入 `manifest_reviewed_safe`。`manifest_reviewed_safe` 只能在未来真实 manifest 被单独授权读取并完成脱敏审查后产生。
 
+## Phase 10 canonical pre-read gate
+
+Phase 10 将本文件固定为 v0.2 的 canonical pre-read gate。v0.2 final baseline 不读取真实 VCPToolBox，不读取真实 VCPChat，不读取真实 manifest，不调用插件，不调用 API，不写 DailyNote，不创建图片。
+
+任何未来真实 manifest 读取任务都必须先通过本门槛，并单独形成授权记录。授权记录必须在读取发生前明确：
+
+- 候选 ID：只能使用占位 ID 或已脱敏候选 ID。
+- 读取对象：只能指向一个候选 manifest，不得扩展到整个仓库。
+- 读取方式：只能是人工批准后的只读方式，不得包含执行命令。
+- 允许摘录字段：仅限脱敏显示名、命令集合中文摘要、输入输出模式中文摘要、权限风险中文摘要、Gatekeeper 复查点。
+- 禁止摘录字段：密钥、token、cookie、密码、私密路径、客户隐私、服务端点原文、manifest 敏感配置原文、图片二进制、真实插件输出。
+- 审批链：必须包含人工审查、Gatekeeper 复查和 Review Console 展示。
+- 拒绝条件：发现无法脱敏、权限不明、暗示执行、暗示写文件、暗示写 DailyNote 或含敏感原文时必须拒绝。
+
+Phase 10 的 canonical 默认值：
+
+```yaml
+candidate_id: candidate-plugin-placeholder-001
+source_authorized: false
+source_read_performed: false
+current_state: pending_manifest_review
+next_allowed_state: pending_manifest_review
+selected_plugin: null
+max_plugin_calls: 0
+api_called: false
+vcp_plugin_called: false
+daily_note_called: false
+real_execution_allowed: false
+```
+
+这些默认值只能由未来独立授权任务改变。本文件和 Phase 10 样例本身不构成授权。
+
 ## 审查目标
 
 manifest 审查只回答以下问题：
