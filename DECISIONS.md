@@ -23,3 +23,7 @@
 ## D006：核心风格记忆必须审核
 
 理由：Photo Studio OS 风格铁律不能被单次 AI 判断污染。
+
+## D007：v0.2.4-final-baseline 是无执行最终基线
+
+结论：`v0.2.4-final-baseline` 是 Agent Image Lab 的无执行最终基线。该版本只包含项目骨架、角色规则、VCP 记忆策略、Review Console 静态原型、schema、样例、dry-run-only Adapter manifest 草案；不包含真实 VCPToolBox / VCPChat 接入，不读取真实插件 manifest，不调用真实插件，不写 DailyNote，不创建图片文件。
