@@ -1,0 +1,315 @@
+phase7_acceptance_case:
+  case_id: acceptance-phase7-dry-run-review-memory-001
+  purpose_cn: "验证 VCP Adapter dry-run 草案可以进入 Review Console 人工评审，并生成 memory_delta 写入申请草案；全程不执行真实插件。"
+  scope: dry_run_review_memory_delta
+  status: draft_acceptance_fixture
+  no_execution_guard:
+    api_called: false
+    vcp_plugin_called: false
+    daily_note_called: false
+    disk_write_performed: false
+    image_file_created: false
+    image_binary_included: false
+    vcp_toolbox_modified: false
+    vcpchat_modified: false
+    max_plugin_calls_observed: 0
+    audit_summary_cn: "本验收用例只串联 dry-run 草案、人工审片和记忆申请草案，未调用插件、API、DailyNote 或文件写入。"
+  id_links:
+    task_id: task-phase7-photo-studio-os-001
+    dispatch_id: dispatch-phase7-photo-studio-os-001
+    session_id: session-phase7-photo-studio-os-001
+    review_id: review-phase7-photo-studio-os-001
+    memory_delta_id: md-phase7-photo-studio-os-001
+
+  step_1_vcp_task_envelope:
+    envelope_version: "0.2-phase7"
+    task_id: task-phase7-photo-studio-os-001
+    project: Photo Studio OS
+    task_type: photo_studio_os_review
+    mode: dry_run
+    user_request_cn: "对 Photo Studio OS 仪表盘候选图进行 dry-run 调度与人工审片，不调用真实插件。"
+    visual_goal_cn: "保持高级黑、三仪表中心构图、深冷蓝底色、冷白 UI 字体和克制橙红警示。"
+    input_assets:
+      images:
+        - "asset_archive/candidates/photo-studio-os-phase7-placeholder.asset-ref"
+      references:
+        - "asset_archive/references/photo-studio-os-phase7-reference-placeholder.txt"
+      notes:
+        - "以上均为占位引用，不包含真实图片文件。"
+        - "本步骤只生成 VCP Adapter dry-run 输入草案。"
+    director_plan:
+      composition_strategy_cn: "中央大仪表为焦点，左右小仪表保持平衡，右侧仪表不得贴近侧栏。"
+      style_boundary_cn: "高级黑、深冷蓝、冷白细字体、克制橙红警示；不要赛博朋克、不要游戏 HUD、不要普通 SaaS。"
+      preserve_cn:
+        - "保留 16:9 宽屏仪表盘。"
+        - "保留三仪表中心构图。"
+      change_cn:
+        - "检查右侧小仪表和右侧信息栏之间的安全距离。"
+        - "降低过强蓝光，避免发灰或过亮。"
+      avoid_cn:
+        - "不要破坏三仪表平衡。"
+        - "不要让右侧仪表贴近侧栏。"
+    prompt_package_ref: prompt-package-phase7-photo-studio-os-001
+    review_score_ref: review-phase7-photo-studio-os-001
+    memory_delta_refs:
+      - md-phase7-photo-studio-os-001
+    dry_run_controls:
+      max_plugin_calls: 0
+      allow_external_api: false
+      allow_file_write: false
+      allow_image_binary: false
+      expected_command: dry_run
+      execution_mode_allowed: false
+    approval_context:
+      gatekeeper_required: true
+      review_console_required: true
+      human_approval_required_before_execution: true
+      daily_note_direct_write_allowed: false
+    adapter_preflight_expectation:
+      should_return_dispatch_plan: true
+      should_select_real_plugin: false
+      should_call_plugin: false
+      should_write_file: false
+      should_write_image: false
+    visibility:
+      public_fields:
+        - task_id
+        - project
+        - task_type
+      audit_fields:
+        - prompt_package_ref
+        - review_score_ref
+        - memory_delta_refs
+      private_fields: []
+    safety:
+      contains_secret: false
+      contains_private_path: false
+      contains_customer_private_data: false
+      contains_image_binary: false
+
+  step_2_vcp_dispatch_plan:
+    dispatch_id: dispatch-phase7-photo-studio-os-001
+    task_id: task-phase7-photo-studio-os-001
+    mode: dry_run
+    selected_plugin: null
+    fallback_plugins: []
+    capability_matrix_status: placeholder
+    reason_cn: "Phase 7 只验证 dry-run 到 Review Console 的交接，不选择真实插件。"
+    input_mode: unknown
+    output_mode: plan
+    dry_run_required: true
+    approval_required: true
+    risk_level: medium
+    expected_outputs: 0
+    max_outputs: 0
+    overwrite_allowed: false
+    external_api_allowed: false
+    execution_blocked: true
+    gatekeeper_required: true
+    allow_file_write: false
+    allow_image_binary: false
+    max_plugin_calls: 0
+    review_console_required: true
+    preflight_result:
+      status: pass
+      checked_mode: dry_run
+      checked_max_plugin_calls: 0
+      checked_external_api_allowed: false
+      checked_file_write_allowed: false
+      checked_image_binary_allowed: false
+      rejection_reason_cn: null
+    gatekeeper_handoff:
+      required: true
+      risk_summary_cn: "真实执行已阻止，插件调用次数为 0，进入 Review Console 仅用于人工展示。"
+      blocked_actions:
+        - execute
+        - generate
+        - run
+        - call_plugin
+        - write_memory
+        - write_image_file
+    review_console_handoff:
+      required: true
+      purpose_cn: "展示 dry-run 风险结论、人工评分入口和记忆预览。"
+      allowed_actions:
+        - mark_candidate
+        - request_iteration
+        - approve_memory_write
+        - reject_memory_write
+        - request_memory_edit
+    rollback_plan:
+      dry_run_reversible: true
+      rollback_action_cn: "丢弃本 dispatch_plan 草案，回到上一份人工确认草案。"
+      external_rollback_required: false
+    audit_record:
+      audit_id: audit-phase7-photo-studio-os-001
+      audit_summary_cn: "Adapter 仅返回 dry-run 调度草案，未调用插件、API、DailyNote 或文件写入。"
+      contains_sensitive_original: false
+    audit_notes_cn: "该调度计划只能进入 Review Console 展示，不得触发真实执行。"
+    forbidden_actions:
+      - execute
+      - generate
+      - run
+      - call_plugin
+      - write_memory
+      - write_image_file
+
+  step_3_review_console_session:
+    session_id: session-phase7-photo-studio-os-001
+    task_id: task-phase7-photo-studio-os-001
+    case_id: case-phase7-photo-studio-os-dashboard-001
+    project: Photo Studio OS
+    status: human_reviewing
+    image_versions:
+      - version_id: v-phase7-placeholder-001
+        label: "dry-run 占位版本"
+        asset_ref: "asset_archive/candidates/photo-studio-os-phase7-placeholder.asset-ref"
+        thumbnail_ref: null
+        source: placeholder
+        score: null
+    current_version_id: v-phase7-placeholder-001
+    compare_version_id: null
+    ai_review:
+      reviewer_type: ai
+      total_score: 78
+      archive_recommendation: candidate
+      memory_write_recommendation: true
+      note_cn: "AI 评分只是建议，不能替代人工结论。"
+    human_review:
+      reviewer_type: human
+      reviewer_name: human_reviewer
+      total_score: 84
+      archive_recommendation: candidate
+      memory_write_recommendation: true
+      note_cn: "人工评审确认右侧仪表距离右侧栏偏近，需要进入下一轮精修。"
+    final_review:
+      source: human_review
+      total_score: 84
+      archive_recommendation: candidate
+      memory_write_recommendation: true
+      note_cn: "最终评审采用人工评分，覆盖 AI 初评。"
+    comments:
+      - comment_id: comment-phase7-001
+        author: human_reviewer
+        body_cn: "保持中央仪表焦点，拉开右侧小仪表与右侧栏的距离。"
+    annotation_notes:
+      - annotation_id: anno-phase7-001
+        target_version_id: v-phase7-placeholder-001
+        note_cn: "右侧仪表和侧栏之间需要增加呼吸空间。"
+    version_comparison:
+      summary_cn: "本用例只有一个占位版本，不做真实图片对比。"
+      layout_change_cn: "无真实图片输入，仅验证字段链路。"
+    approval:
+      status: changes_required
+      approved_by: null
+      approved_at: null
+      note_cn: "资产尚未 accepted，只允许作为候选继续迭代。"
+    archive_decision:
+      asset_status: candidate
+      human_approval:
+        approved: false
+        approved_by: null
+        approved_at: null
+        approval_notes_cn: "未人工批准入库，不得标记 accepted。"
+      ai_archive_recommendation_cn: "AI 建议候选入库，但不能替代人工批准。"
+    memory_preview:
+      chinese_diary_title: "Photo Studio OS 右侧仪表间距经验草案"
+      chinese_diary_content: |
+        本次 dry-run 审片确认：Photo Studio OS 的三仪表构图必须保持中央大仪表焦点和左右仪表平衡。右侧小仪表不能贴近右侧信息栏，否则会削弱指挥中心的秩序感。下一轮应拉开右侧仪表与 Risk Pulse / Approval Queue 区域的距离，并压低过强蓝光，避免画面滑向赛博朋克或游戏 HUD。
+      target_notebook: Rejected_Visual_Lessons
+      maid: null
+      tags:
+        - PhotoStudioOS
+        - 三仪表
+        - 间距
+        - 人工审片
+        - dry-run
+      safety:
+        contains_secret: false
+        contains_private_path: false
+        contains_customer_private_data: false
+        contains_image_binary: false
+        safety_notes_cn: "记忆预览为中文脱敏正文，不含密钥、私密路径、客户隐私或图片二进制。"
+    memory_approval:
+      status: approved
+      approved_by: human_reviewer
+      approved_at: "2026-05-04T13:00:00+08:00"
+      rejection_reason_cn: null
+    next_iteration:
+      required: true
+      instruction_cn: "继续下一轮精修，但仍需另行授权才可调用真实插件。"
+    audit_log:
+      - audit_id: audit-phase7-review-console-001
+        action: draft_refreshed
+        actor: static_review_console
+        note_cn: "Review Console 仅生成草案对象，未调用 DailyNote、API 或 VCP 插件。"
+
+  step_4_memory_delta:
+    delta_id: md-phase7-photo-studio-os-001
+    task_id: task-phase7-photo-studio-os-001
+    case_id: case-phase7-photo-studio-os-dashboard-001
+    created_at: "2026-05-04T13:00:00+08:00"
+    agent_name: Archivist_Agent
+    agent_role: 案例归档与中文记忆草案
+    project: Photo Studio OS
+    memory_type: failed_visual_lesson
+    target_notebook: Rejected_Visual_Lessons
+    write_mode: confirmed
+    importance: medium
+    approval_required: true
+    approval_status: approved
+    approved_by: human_reviewer
+    approved_at: "2026-05-04T13:00:00+08:00"
+    source:
+      source_type: review_console_human_approval
+      source_ids:
+        - session-phase7-photo-studio-os-001
+        - review-phase7-photo-studio-os-001
+        - dispatch-phase7-photo-studio-os-001
+    chinese_diary_title: "Photo Studio OS 右侧仪表间距经验草案"
+    chinese_diary_content: |
+      本次 dry-run 审片确认：Photo Studio OS 的三仪表构图必须保持中央大仪表焦点和左右仪表平衡。右侧小仪表不能贴近右侧信息栏，否则会削弱指挥中心的秩序感。下一轮应拉开右侧仪表与 Risk Pulse / Approval Queue 区域的距离，并压低过强蓝光，避免画面滑向赛博朋克或游戏 HUD。该记录已通过人工审批成为写入申请草案，但本验收用例不调用 DailyNote。
+    preserved_original:
+      prompt_en: null
+      plugin_name: null
+      model_name: null
+      file_ref: "asset_archive/candidates/photo-studio-os-phase7-placeholder.asset-ref"
+    tags:
+      - PhotoStudioOS
+      - 三仪表
+      - 间距
+      - 人工审片
+      - dry-run
+      - 写入申请已审批
+    visibility: audit
+    memory_safety:
+      contains_secret: false
+      contains_private_path: false
+      contains_customer_private_data: false
+      contains_image_binary: false
+      safety_notes_cn: "未发现 API key、token、cookie、密码、私密路径、客户隐私或图片二进制。"
+    promotion:
+      sync_to_git_candidate: false
+      promoted_to_git: false
+      git_target_file: null
+      promotion_reason_cn: null
+    final_decision:
+      should_write_to_vcp: true
+      should_show_in_review_console: true
+      rejection_reason_cn: null
+
+  post_memory_delta_guard:
+    daily_note_called_after_approval: false
+    vcp_memory_written_after_approval: false
+    handoff_status: write_request_ready_not_executed
+    note_cn: "memory_delta 已满足 confirmed 不变量，但本验收用例只证明审批链路，不执行 DailyNote 或 VCP 长期记忆写入。"
+
+  acceptance_assertions:
+    - "task_id 在 vcp_task_envelope、vcp_dispatch_plan、review_session、memory_delta 中一致。"
+    - "dispatch_plan 保持 selected_plugin=null、max_plugin_calls=0、execution_blocked=true。"
+    - "Review Console 的 final_review 使用 human_review 覆盖 ai_review。"
+    - "memory_preview.chinese_diary_content 是中文正文。"
+    - "memory_approval.status=approved 时存在 approved_by 和 approved_at。"
+    - "memory_delta.write_mode=confirmed 时 approval_status=approved，final_decision.should_write_to_vcp=true。"
+    - "资产 archive_decision 未人工批准，因此 asset_status 保持 candidate，不是 accepted。"
+    - "DailyNote、VCP 插件、API、文件写入和图片创建均未发生。"

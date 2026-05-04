@@ -104,6 +104,36 @@
 - [ ] audit 只记录中文脱敏摘要，不保存敏感原文。
 - [ ] no-execution 矩阵覆盖 API、插件调用、DailyNote、文件写入、图片写入和 VCPToolBox / VCPChat 修改。
 
+## Phase 7 单插件候选评估检查
+
+- [ ] Phase 7 只做单插件候选评估与 dry-run 验收设计，不执行真实插件。
+- [ ] `integrations/vcp/adapter_runtime_contract.md` 是契约说明，不是插件实现。
+- [ ] `adapter_runtime_contract.md` 明确唯一允许命令是 `dry_run`。
+- [ ] `adapter_runtime_contract.md` 明确禁止 `execute`、`generate`、`run`、`call_plugin`、`write_memory`、`write_image_file`。
+- [ ] `adapter_runtime_contract.md` 明确 `selected_plugin=null`、`max_plugin_calls=0`、`external_api_allowed=false`、`execution_blocked=true`。
+- [ ] `adapter_runtime_contract.md` 明确不写文件、不写图片、不写 DailyNote、不写 VCP 长期记忆。
+- [ ] `adapter_runtime_contract.md` 明确 Gatekeeper handoff 不传敏感原文。
+- [ ] `adapter_runtime_contract.md` 明确 Review Console handoff 只用于人工展示，不触发真实执行。
+- [ ] `integrations/vcp/plugin_test_results.md` 是评估模板，不是真实测试结果。
+- [ ] `plugin_test_results.md` 未填写真实插件名称或真实能力结论。
+- [ ] `plugin_test_results.md` 的占位记录保持 `selected_plugin=null` 和 `max_plugin_calls_observed=0`。
+- [ ] `plugin_test_results.md` 明确 manifest 读取需要另行授权。
+- [ ] `plugin_test_results.md` 明确不复制 manifest 中的 API key、token、cookie、密码、私密路径或客户隐私。
+- [ ] `plugin_test_results.md` 明确 `tested` 不自动表示允许真实执行。
+- [ ] 能力矩阵仍保持 `待实测` / `pending_manifest_review` / `dry_run_checked` / `tested` 的人工推进语义。
+- [ ] `tests/schema_examples/phase7_dry_run_review_memory.example.yaml` 串联 `vcp_task_envelope`、`vcp_dispatch_plan`、`review_session`、`memory_delta`。
+- [ ] Phase 7 验收用例中 `task_id` 在四段对象中保持一致。
+- [ ] Phase 7 验收用例中 `dispatch_plan` 保持 `selected_plugin=null`、`max_plugin_calls=0`、`execution_blocked=true`。
+- [ ] Phase 7 验收用例中 `final_review` 明确使用 `human_review` 覆盖 `ai_review`。
+- [ ] Phase 7 验收用例中 `memory_preview.chinese_diary_content` 是中文正文。
+- [ ] Phase 7 验收用例中 `memory_delta.write_mode=confirmed` 时满足 `approval_status=approved`、`approved_by`、`approved_at`、`final_decision.should_write_to_vcp=true`。
+- [ ] Phase 7 验收用例中 DailyNote / VCP 长期记忆写入仍标记为未执行。
+- [ ] 未新增 `index.js` 或其他真实 Adapter 可执行入口。
+- [ ] 未修改真实 VCPToolBox。
+- [ ] 未修改真实 VCPChat。
+- [ ] 未创建图片文件。
+- [ ] 未调用 API、VCP 插件或 DailyNote。
+
 ## 无执行闭环检查
 
 - [ ] `tests/schema_examples/task_envelope.example.yaml` 是 Photo Studio OS 无执行样例。
