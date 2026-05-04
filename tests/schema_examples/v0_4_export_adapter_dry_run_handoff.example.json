@@ -1,0 +1,44 @@
+{
+  "v0_4_export_adapter_dry_run_handoff": {
+    "candidate_id": "agent-image-lab-adapter-draft",
+    "export_file": "exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js",
+    "status": "draft_not_installed",
+    "adapter_response_shape": {
+      "dispatch_plan_draft": true,
+      "gatekeeper_handoff": true,
+      "review_console_handoff": true,
+      "audit_record": true
+    },
+    "no_execution_guard": {
+      "selected_plugin": null,
+      "max_plugin_calls": 0,
+      "api_called": false,
+      "vcp_plugin_called": false,
+      "daily_note_called": false,
+      "file_write_performed": false,
+      "image_file_created": false,
+      "real_execution_allowed": false
+    },
+    "review_console_handoff": {
+      "display_only": true,
+      "allowed_actions": [
+        "mark_candidate",
+        "reject_candidate",
+        "request_gatekeeper_review",
+        "request_memory_edit"
+      ],
+      "forbidden_actions": [
+        "execute_plugin",
+        "call_api",
+        "write_daily_note",
+        "save_image"
+      ]
+    },
+    "acceptance_assertions": [
+      "dry-run-adapter.js 不是 index.js。",
+      "导出候选文件仍未安装到真实 VCPToolBox。",
+      "输出只能作为 Review Console 展示草案。",
+      "不得调用插件、API、DailyNote，不得写文件或创建图片。"
+    ]
+  }
+}

@@ -30,15 +30,21 @@ $requiredFiles = @(
   '00_project_skeleton.md',
   'DECISIONS.md',
   'MANIFEST.md',
+  'RELEASE_NOTES.md',
   'adapter_dry_run_lab/README.md',
   'adapter_dry_run_lab/adapter_dry_run.js',
   'adapter_dry_run_lab/fixtures/accepted_request.json',
   'adapter_dry_run_lab/fixtures/rejected_request.json',
+  'exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js',
   'docs/00_project_roadmap.md',
+  'docs/20_real_loop_completion_plan.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
   'integrations/vcp/phase_d_adapter_dry_run_minimal_contract.md',
+  'integrations/vcp/v0_5_adapter_install_authorization.md',
+  'integrations/vcp/v0_6_real_plugin_manifest_authorization.md',
+  'workflows/photo_studio_os_real_loop_runbook.md',
   'docs/01_project_definition.md',
   'docs/02_workflow_sop.md',
   'docs/03_agent_roles.md',
@@ -131,6 +137,14 @@ if (Test-Path -LiteralPath $labSource) {
   }
 }
 
+$exportAdapterSource = Join-Path $Root 'exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js'
+if (Test-Path -LiteralPath $exportAdapterSource) {
+  $content = Get-Content -Raw -Encoding UTF8 $exportAdapterSource
+  if ($content -match 'fs\.|fetch\(|XMLHttpRequest|writeFile|appendFile|child_process|exec\(|spawn\(|https\.|http\.|net\.') {
+    Add-Failure "Export adapter dry-run candidate contains forbidden runtime pattern"
+  }
+}
+
 $agentFiles = Get-ChildItem -LiteralPath (Join-Path $Root 'agents') -Filter '*.md' -File -ErrorAction SilentlyContinue
 foreach ($file in $agentFiles) {
   $content = Get-Content -Raw -Encoding UTF8 $file.FullName
@@ -172,7 +186,8 @@ $v03Files = @(
   'tests/schema_examples/v0_3_manifest_read_authorization_gate.example.yaml',
   'tests/schema_examples/v0_3_manifest_sanitized_read_preflight.example.yaml',
   'tests/schema_examples/phase_c_manifest_read_authorization_request.example.yaml',
-  'tests/schema_examples/phase_d_adapter_dry_run_minimal.example.yaml'
+  'tests/schema_examples/phase_d_adapter_dry_run_minimal.example.yaml',
+  'tests/schema_examples/v0_4_export_adapter_dry_run_handoff.example.json'
 )
 
 $forbiddenV03Patterns = @(
@@ -300,6 +315,25 @@ if (-not $node) {
     if ($response.execution_blocked -ne $true) {
       Add-Failure "rejected fixture must keep execution_blocked true"
     }
+  }
+
+  & node --check (Join-Path $Root 'exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js failed node --check"
+  }
+
+  $exportCheckScript = @"
+const adapter = require('./exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js');
+const input = require('./adapter_dry_run_lab/fixtures/accepted_request.json');
+const response = adapter.dryRun(input).adapter_dry_run_response;
+if (response.status !== 'accepted_draft') process.exit(1);
+if (response.dispatch_plan_draft.selected_plugin !== null) process.exit(2);
+if (response.dispatch_plan_draft.max_plugin_calls !== 0) process.exit(3);
+if (response.dispatch_plan_draft.execution_blocked !== true) process.exit(4);
+"@
+  $exportCheckOutput = $exportCheckScript | node
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "export dry-run adapter accepted fixture check failed"
   }
 }
 

@@ -6,7 +6,7 @@
 
 - draft only。
 - dry-run only。
-- 没有真实执行入口。
+- 有 `dry-run-adapter.js` 导出候选文件，但仍是 draft-not-installed。
 - 没有 `index.js`。
 - 不调用任何 VCP 生图插件。
 - 不写 VCP 记忆。
@@ -39,6 +39,12 @@ external_api_allowed: false
 execution_blocked: true
 max_outputs: 0
 ```
+
+## 导出候选文件
+
+`dry-run-adapter.js` 只导出纯函数 `dryRun(input)`，用于把受控 dry-run 请求转换为草案响应。它不读文件、不写文件、不调用 API、不调用 VCP 插件、不写 DailyNote。
+
+该文件仍不是 VCPToolBox 已安装插件入口；真实安装必须另开授权任务，并先通过 Gatekeeper 与 Review Console 验收。
 
 ## 禁止
 

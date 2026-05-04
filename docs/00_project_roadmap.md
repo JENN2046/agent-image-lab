@@ -31,13 +31,14 @@ v0.2.5 final baseline + v0.3.0 manifest authorization planning
 - v0.3 authorization planning closeout。
 - 仓库内 AgentImageLabAdapter 草案 manifest 的 Phase C 脱敏审查记录。
 - Phase D 项目内 Adapter dry-run lab 最小实现。
+- v0.4 VCPToolBox 导出级 dry-run Adapter 候选文件。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：
 
 - 真实外部 VCPToolBox manifest 读取。
 - 真实插件选择。
-- VCPToolBox 内 Adapter dry-run 插件实现。
+- VCPToolBox 内 Adapter dry-run 插件安装与验证。
 - VCPChat 子窗口接入。
 - DailyNote / VCP 长期记忆真实写入。
 - 真实图片生成、编辑、归档。
@@ -186,10 +187,10 @@ daily_note_called: false
 
 ## 当前优先队列
 
-1. 收束 Phase A：补路线图、README 入口、只读校验脚本并提交。
-2. 给当前 HEAD 打 `v0.3.0-planning-baseline` 或类似 tag。
-3. 等待用户单独授权后，才进入 Phase C 的单一 manifest 脱敏读取。
-4. 未授权前，只允许继续完善只读校验、文档一致性和 Review Console 设计。
+1. 完成 v0.4 dry-run export baseline 并打 tag。
+2. 等待用户单独授权真实 VCPToolBox 路径后，进入 v0.5 Adapter dry-run 安装验证。
+3. v0.5 通过后，再单独授权 v0.6 真实生图插件 manifest 脱敏审查。
+4. v0.6 通过后，再单独授权 v0.7 Photo Studio OS 最小真实闭环。
 
 ## 永久安全门
 

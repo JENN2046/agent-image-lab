@@ -36,6 +36,7 @@ Photo Studio OS UI 生图生产线，以及 AI 图片评审与修正生产线。
 ## 目录导读
 
 - `docs/00_project_roadmap.md`：从 v0.2 基线到 v0.3 授权、MVP-B dry-run 和未来真实闭环的总路线图。
+- `docs/20_real_loop_completion_plan.md`：从 v0.4 到 v1.0 的真实闭环完成计划。
 - `docs/`：项目定义、SOP、评分表、VCP 记忆适配、审片台设计。
 - `agents/`：ImageLab_Master 和岗位型子 Agent 的规则。
 - `memory_policy/`：中文日记、memory_delta、写入权限、召回策略、禁写清单。
@@ -47,6 +48,8 @@ Photo Studio OS UI 生图生产线，以及 AI 图片评审与修正生产线。
 ## 当前状态
 
 当前仓库已经完成 v0.2 规格基线和 Review Console 静态原型，并开始 v0.3 manifest 授权门槛规划。真实 manifest 读取、真实插件选择、真实 API 调用、DailyNote 写入和图片生成仍未开始，必须作为后续独立授权点处理。
+
+当前还包含 v0.4 dry-run Adapter 导出候选文件；它仍是 draft-not-installed，不代表真实 VCPToolBox 已安装。
 
 ## 只读校验
 

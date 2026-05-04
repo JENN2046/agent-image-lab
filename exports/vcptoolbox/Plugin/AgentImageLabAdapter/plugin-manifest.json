@@ -1,10 +1,12 @@
 {
   "name": "AgentImageLabAdapter",
   "displayName": "Agent Image Lab Adapter Draft",
-  "version": "0.0.0-draft",
+  "version": "0.4.0-dry-run-export",
   "description": "Draft manifest for Agent Image Lab dry-run bridge. This file is not installed in real VCPToolBox.",
   "status": "draft",
   "mvpMode": "dry-run-only",
+  "entryCandidate": "dry-run-adapter.js",
+  "entryCandidateStatus": "draft-not-installed",
   "allowedCommands": [
     "dry_run"
   ],
@@ -23,7 +25,9 @@
     "allow_file_write": false,
     "allow_image_binary": false,
     "approval_required": true,
-    "gatekeeper_required": true
+    "gatekeeper_required": true,
+    "review_console_required": true,
+    "daily_note_direct_write_allowed": false
   },
   "notes_cn": [
     "这是导出草案，不代表真实 VCP 插件已安装。",
