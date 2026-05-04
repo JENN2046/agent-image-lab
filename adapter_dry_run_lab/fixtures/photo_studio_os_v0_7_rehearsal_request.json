@@ -1,0 +1,37 @@
+{
+  "adapter_dry_run_request": {
+    "command": "dry_run",
+    "request_id": "dry-run-request-photo-studio-os-v0-7-rehearsal-001",
+    "task_envelope": {
+      "task_id": "task-photo-studio-os-v0-7-rehearsal-001",
+      "task_type": "photo_studio_os_minimal_real_loop_preflight",
+      "mode": "dry_run",
+      "user_request_cn": "为 Photo Studio OS 最小真实闭环生成真实执行前 dry-run 调度草案。",
+      "prompt_package_ref": "prompt-package-photo-studio-os-v0-7-placeholder-001",
+      "dry_run_controls": {
+        "max_plugin_calls": 0,
+        "allow_external_api": false,
+        "allow_file_write": false,
+        "allow_image_binary": false
+      },
+      "approval_context": {
+        "gatekeeper_required": true,
+        "review_console_required": true,
+        "daily_note_direct_write_allowed": false
+      },
+      "candidate_context": {
+        "candidate_id": "DoubaoGen",
+        "manifest_review_status": "manifest_reviewed_safe",
+        "real_execution_authorized": false,
+        "selected_plugin_for_execution": null,
+        "max_plugin_calls_authorized": 0
+      },
+      "safety": {
+        "contains_secret": false,
+        "contains_private_path": false,
+        "contains_customer_private_data": false,
+        "contains_image_binary": false
+      }
+    }
+  }
+}

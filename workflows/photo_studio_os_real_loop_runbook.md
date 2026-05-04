@@ -9,6 +9,8 @@
 - v0.7 Gatekeeper 风险边界已形成，见 `integrations/vcp/v0_7_gatekeeper_risk_boundary.md`。
 - v0.7 Review Console 人工审批前置记录已形成，见 `review_console/v0_7_human_approval_preflight.md`。
 - v0.7 真实执行前确认表已形成，见 `workflows/v0_7_real_execution_preflight_confirmation.md`。
+- v0.7 独立真实执行授权门已形成，见 `integrations/vcp/v0_7_real_execution_authorization_gate.md`。
+- Photo Studio OS 0 调用 dry-run rehearsal 已形成，见 `integrations/vcp/v0_7_photo_studio_os_dry_run_rehearsal.md`。
 - 用户授权真实插件、最大调用次数、输入引用、输出目录和回滚方案。
 - Gatekeeper 和 Review Console 均已批准。
 
@@ -46,4 +48,5 @@
 - Gatekeeper 当前结论必须是 `blocked_until_authorized` 或后续明确人工批准。
 - Review Console 当前结论必须是 `pending` 或后续明确人工批准。
 - 真实执行前确认表必须保持 `real_execution_allowed=false`，直到用户另行授权。
+- dry-run rehearsal 必须保持 `max_plugin_calls=0`、`selected_plugin=null` 和 `real_execution_allowed=false`。
 - `memory_delta` 必须保持 `write_mode=draft`，不直接写 DailyNote。

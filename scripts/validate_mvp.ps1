@@ -35,6 +35,7 @@ $requiredFiles = @(
   'adapter_dry_run_lab/adapter_dry_run.js',
   'adapter_dry_run_lab/fixtures/accepted_request.json',
   'adapter_dry_run_lab/fixtures/rejected_request.json',
+  'adapter_dry_run_lab/fixtures/photo_studio_os_v0_7_rehearsal_request.json',
   'exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
@@ -47,6 +48,8 @@ $requiredFiles = @(
   'integrations/vcp/v0_6_real_plugin_manifest_authorization.md',
   'integrations/vcp/v0_6_real_plugin_manifest_sanitized_review.md',
   'integrations/vcp/v0_7_gatekeeper_risk_boundary.md',
+  'integrations/vcp/v0_7_real_execution_authorization_gate.md',
+  'integrations/vcp/v0_7_photo_studio_os_dry_run_rehearsal.md',
   'review_console/v0_7_human_approval_preflight.md',
   'workflows/photo_studio_os_real_loop_runbook.md',
   'workflows/v0_7_real_execution_preflight_confirmation.md',
@@ -74,6 +77,8 @@ $requiredFiles = @(
   'tests/schema_examples/v0_7_gatekeeper_risk_boundary.example.yaml',
   'tests/schema_examples/v0_7_review_console_human_approval_preflight.example.yaml',
   'tests/schema_examples/v0_7_real_execution_preflight_confirmation.example.yaml',
+  'tests/schema_examples/v0_7_real_execution_authorization_gate.example.yaml',
+  'tests/schema_examples/v0_7_photo_studio_os_dry_run_rehearsal.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -338,13 +343,14 @@ foreach ($path in $v06ReviewFiles) {
 $v07PreflightExamples = @(
   'tests/schema_examples/v0_7_gatekeeper_risk_boundary.example.yaml',
   'tests/schema_examples/v0_7_review_console_human_approval_preflight.example.yaml',
-  'tests/schema_examples/v0_7_real_execution_preflight_confirmation.example.yaml'
+  'tests/schema_examples/v0_7_real_execution_preflight_confirmation.example.yaml',
+  'tests/schema_examples/v0_7_real_execution_authorization_gate.example.yaml',
+  'tests/schema_examples/v0_7_photo_studio_os_dry_run_rehearsal.example.yaml'
 )
 
-$requiredV07ExamplePatterns = @(
-  'phase:\s+v0\.7_preflight',
+$requiredV07GuardPatterns = @(
+  'phase:\s+v0\.7_',
   'real_execution_allowed:\s+false',
-  'max_plugin_calls_authorized:\s+0',
   'daily_note_called:\s+false'
 )
 
@@ -370,10 +376,13 @@ foreach ($path in $v07PreflightExamples) {
   }
 
   $content = Get-Content -Raw -Encoding UTF8 $fullPath
-  foreach ($pattern in $requiredV07ExamplePatterns) {
+  foreach ($pattern in $requiredV07GuardPatterns) {
     if ($content -notmatch $pattern) {
       Add-Failure "v0.7 preflight example missing required guard in ${path}: $pattern"
     }
+  }
+  if ($content -notmatch 'max_plugin_calls_authorized:\s+0' -and $content -notmatch 'max_plugin_calls:\s+0') {
+    Add-Failure "v0.7 preflight example missing zero-call guard in ${path}"
   }
   foreach ($pattern in $forbiddenV07ExamplePatterns) {
     if ($content -match $pattern) {
@@ -514,6 +523,27 @@ if (response.dispatch_plan_draft.execution_blocked !== true) process.exit(4);
       $response.image_file_created -ne $false
     ) {
       Add-Failure "export dry-run adapter CLI rejected fixture violated no-execution guard"
+    }
+  }
+
+  $v07RehearsalPath = Join-Path $Root 'adapter_dry_run_lab/fixtures/photo_studio_os_v0_7_rehearsal_request.json'
+  $v07RehearsalOutput = & node (Join-Path $Root 'adapter_dry_run_lab/adapter_dry_run.js') $v07RehearsalPath
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v0.7 Photo Studio OS dry-run rehearsal fixture exited with failure"
+  } else {
+    $v07Rehearsal = ($v07RehearsalOutput -join "`n") | ConvertFrom-Json
+    $response = $v07Rehearsal.adapter_dry_run_response
+    if ($response.status -ne 'accepted_draft') {
+      Add-Failure "v0.7 Photo Studio OS dry-run rehearsal must return accepted_draft"
+    }
+    if ($response.dispatch_plan_draft.selected_plugin -ne $null) {
+      Add-Failure "v0.7 Photo Studio OS dry-run rehearsal must keep selected_plugin null"
+    }
+    if ($response.dispatch_plan_draft.max_plugin_calls -ne 0) {
+      Add-Failure "v0.7 Photo Studio OS dry-run rehearsal must keep max_plugin_calls 0"
+    }
+    if ($response.no_execution_guard.real_execution_allowed -ne $false) {
+      Add-Failure "v0.7 Photo Studio OS dry-run rehearsal must not allow real execution"
     }
   }
 }

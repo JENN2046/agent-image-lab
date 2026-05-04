@@ -1,0 +1,29 @@
+v0_7_real_execution_authorization_gate:
+  phase: v0.7_real_execution_gate
+  candidate_id: DoubaoGen
+  gatekeeper_boundary_status: blocked_until_authorized
+  review_console_approval_status: pending
+  dry_run_rehearsal_status: completed_zero_call
+  user_real_execution_authorized: false
+  real_execution_allowed: false
+  required_authorization_fields:
+    selected_plugin_id: pending
+    max_plugin_calls: pending
+    input_reference: pending
+    output_directory_ref: pending
+    overwrite_existing_files_allowed: false
+    rollback_plan: pending
+    gatekeeper_approved: pending
+    review_console_human_approved: pending
+    daily_note_direct_write_allowed: false
+    memory_delta_only: true
+  authorization_gate_decision:
+    status: waiting_for_explicit_user_authorization
+    real_execution_allowed: false
+    selected_plugin_for_execution: null
+    max_plugin_calls_authorized: 0
+    api_called: false
+    vcp_plugin_called: false
+    daily_note_called: false
+    file_write_performed: false
+    image_file_created: false

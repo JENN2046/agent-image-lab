@@ -1,0 +1,32 @@
+v0_7_photo_studio_os_dry_run_rehearsal:
+  phase: v0.7_dry_run_rehearsal
+  rehearsal_input:
+    request_id: dry-run-request-photo-studio-os-v0-7-rehearsal-001
+    task_id: task-photo-studio-os-v0-7-rehearsal-001
+    task_type: photo_studio_os_minimal_real_loop_preflight
+    mode: dry_run
+    candidate_id: DoubaoGen
+    manifest_review_status: manifest_reviewed_safe
+    real_execution_authorized: false
+    selected_plugin_for_execution: null
+    max_plugin_calls_authorized: 0
+  rehearsal_result:
+    adapter_status: accepted_draft
+    dispatch_plan_draft_created: true
+    gatekeeper_handoff_created: true
+    review_console_handoff_created: true
+    audit_record_created: true
+    selected_plugin: null
+    max_plugin_calls: 0
+    execution_blocked: true
+    external_api_allowed: false
+    api_called: false
+    vcp_plugin_called: false
+    daily_note_called: false
+    file_write_performed: false
+    image_file_created: false
+    real_execution_allowed: false
+  rehearsal_decision:
+    status: dry_run_rehearsal_completed_zero_call
+    allowed_next_step: wait_for_real_execution_authorization
+    real_execution_allowed: false
