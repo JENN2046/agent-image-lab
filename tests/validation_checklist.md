@@ -2,8 +2,10 @@
 
 ## 结构检查
 
+- [ ] `docs/00_project_roadmap.md` 存在，并明确当前已完成层级、未完成层级和后续授权点。
 - [ ] 所有任务书要求的 MVP 文件存在。
 - [ ] 文件直接位于项目根目录下，没有创建第二套 `agent-image-lab/` 嵌套目录。
+- [ ] 可运行 `scripts/validate_mvp.ps1` 完成只读自动检查；该脚本不是 Adapter、VCP 插件或真实执行入口。
 - [ ] 未修改 `codex/00_MASTER_TASK.md`。
 - [ ] 未修改 VCPToolBox。
 - [ ] 未修改 VCPChat。
@@ -353,7 +355,7 @@
 - [ ] Review Console handoff 只能 display-only，不能读取 manifest 或触发执行。
 - [ ] `memory_delta_draft.write_mode=draft` 且 `final_decision.should_write_to_vcp=false`。
 - [ ] 授权样例的记忆正文和审计摘要必须为中文脱敏内容。
-- [ ] v0.3.0-adapter-recon 不新增 `index.js`、`.exe`、`.ps1` 或其他真实执行入口。
+- [ ] v0.3.0-adapter-recon 不新增 `index.js`、`.exe` 或其他真实执行入口；`scripts/validate_mvp.ps1` 仅作为仓库只读校验工具，不属于 Adapter 执行入口。
 - [ ] v0.3.0-adapter-recon 不调用 API、VCP 插件、DailyNote，不写文件，不创建图片。
 
 ## v0.3.0 manifest read authorization gate 检查
@@ -376,10 +378,10 @@
 - [ ] 禁止字段覆盖 API key、token、cookie、密码、私密路径、客户隐私、服务端点原文、manifest 敏感配置原文、图片二进制、真实插件输出和真实运行日志。
 - [ ] 授权门槛样例不包含真实插件名、真实 manifest 原文、真实插件路径或真实能力结论。
 - [ ] 授权门槛样例不包含密钥、token、cookie、密码、私密路径、客户隐私或客户未公开信息。
-- [ ] 授权门槛样例不新增 `index.js`、`.exe`、`.ps1` 或其他真实执行入口。
+- [ ] 授权门槛样例不新增 `index.js`、`.exe` 或其他真实执行入口；`scripts/validate_mvp.ps1` 仅作为仓库只读校验工具，不属于 manifest 读取或 Adapter 执行入口。
 - [ ] 授权门槛样例不创建图片文件。
 - [ ] 授权门槛样例的记忆正文、拒绝原因和审计摘要必须为中文脱敏内容。
-- [ ] `index.js`、`.exe`、`.ps1`、图片扩展如被扫描命中，只能作为负面检查项出现，不得是真实文件证据。
+- [ ] `index.js`、`.exe`、图片扩展如被扫描命中，只能作为负面检查项出现，不得是真实文件证据；`scripts/validate_mvp.ps1` 是唯一允许的只读校验脚本。
 - [ ] 本阶段不调用 API、VCP 插件、DailyNote，不写文件，不创建图片。
 
 ## v0.3.0 manifest sanitized read preflight 检查
@@ -403,7 +405,7 @@
 - [ ] 禁止输出覆盖 raw manifest 原文、真实私密路径、API key、token、cookie、密码、endpoint 原文、客户隐私、图片二进制、真实插件输出、运行日志和真实插件能力结论。
 - [ ] preflight 样例不包含真实插件名、真实 manifest 原文、真实插件路径或真实能力结论。
 - [ ] preflight 样例不包含密钥、token、cookie、密码、私密路径、客户隐私或客户未公开信息。
-- [ ] preflight 样例不新增 `index.js`、`.exe`、`.ps1` 或其他真实执行入口。
+- [ ] preflight 样例不新增 `index.js`、`.exe` 或其他真实执行入口；`scripts/validate_mvp.ps1` 仅作为仓库只读校验工具，不属于读取或执行入口。
 - [ ] preflight 样例不创建图片文件。
 - [ ] preflight 样例的记忆正文、拒绝原因和审计摘要必须为中文脱敏内容。
 - [ ] 本阶段不调用 API、VCP 插件、DailyNote，不写文件，不创建图片。

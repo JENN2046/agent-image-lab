@@ -92,4 +92,4 @@ final_decision:
 
 ## 10. 项目根目录规则
 
-当前项目根目录是 `A:\agent-image-lab\agent-image-lab-v0.2\`。后续文件直接位于该目录下，不创建嵌套的 `agent-image-lab/` 项目副本。
+当前项目根目录以 Git 工作树根目录为准。后续文件直接位于当前仓库根目录下，不创建嵌套的 `agent-image-lab/` 项目副本。
