@@ -1,0 +1,402 @@
+phase14_review_console_approval_paths:
+  approval_metadata:
+    approval_fixture_id: phase14-review-console-approval-paths-001
+    phase: "Phase 14"
+    purpose_cn: "验证 Review Console 审批路径如何输出 review_session、image_case 和 memory_delta 草案；全程不调用插件、API、DailyNote 或文件写入。"
+    status: draft_acceptance_fixture
+    candidate_id: candidate-plugin-placeholder-001
+    created_at: "2026-05-04T23:00:00+08:00"
+    owner_role: ImageLab_Master
+
+  no_execution_guard:
+    selected_plugin: null
+    max_plugin_calls: 0
+    source_authorized: false
+    source_read_performed: false
+    real_manifest_read: false
+    real_execution_allowed: false
+    external_api_allowed: false
+    execution_blocked: true
+    api_called: false
+    vcp_plugin_called: false
+    plugin_called: false
+    daily_note_called: false
+    vcp_memory_written: false
+    disk_write_performed: false
+    image_file_created: false
+    image_binary_included: false
+    vcp_toolbox_read: false
+    vcp_toolbox_modified: false
+    vcpchat_read: false
+    vcpchat_modified: false
+    audit_summary_cn: "Phase 14 只验证 Review Console 审批路径草案，不读取真实 VCP 仓库、真实 manifest，不调用插件、API、DailyNote 或文件写入。"
+
+  accepted_gate:
+    accepted_allowed_only_if:
+      human_review_present: true
+      human_approval_approved: true
+      approved_by_required: true
+      approved_at_required: true
+      ai_archive_recommendation_sufficient: false
+    current_fixture_emits_accepted: false
+    allowed_without_human_approval:
+      - candidate
+      - rejected
+      - draft
+    rule_cn: "正式 accepted 只能由人工批准产生；本样例不输出 accepted。"
+
+  shared_review_context:
+    session_id: session-phase14-review-console-approval-001
+    task_id: task-phase14-review-console-approval-001
+    case_id: case-phase14-review-console-approval-001
+    current_version_id: v-phase14-placeholder-001
+    compare_version_id: null
+    image_versions:
+      - version_id: v-phase14-placeholder-001
+        label: "Review Console 审批路径占位记录"
+        asset_ref: "asset_archive/candidates/phase14-placeholder.asset-ref"
+        thumbnail_ref: null
+        source: placeholder
+        score: null
+    ai_review:
+      reviewer_type: ai
+      total_score: null
+      archive_recommendation: candidate
+      memory_write_recommendation: false
+      note_cn: "AI 只能建议候选状态，不能批准 accepted、真实 manifest 读取或记忆写入。"
+    human_review:
+      reviewer_type: human
+      reviewer_name: human_reviewer_placeholder
+      total_score: null
+      archive_recommendation: candidate
+      memory_write_recommendation: false
+      note_cn: "人工评审决定最终审批路径；本记录仍保持 no-execution。"
+    final_review:
+      source: human_review
+      total_score: null
+      archive_recommendation: candidate
+      memory_write_recommendation: false
+      note_cn: "最终评审采用人工评审，AI 建议不替代人工批准。"
+
+  approval_paths:
+    approve_as_candidate:
+      review_session_draft:
+        status: human_reviewing
+        approval:
+          action: approve_as_candidate
+          status: candidate_approved_for_review
+          approved_by: human_reviewer_placeholder
+          approved_at: "2026-05-04T23:05:00+08:00"
+          note_cn: "人工确认可保留为候选记录，但不批准正式 accepted，不允许执行。"
+          allowed_next_actions:
+            - request_manifest_authorization
+            - request_gatekeeper_review
+            - request_memory_edit
+          forbidden_actions:
+            - mark_accepted_without_human_archive_approval
+            - execute_plugin
+            - call_api
+            - write_daily_note
+            - save_image
+        archive_decision:
+          asset_status: candidate
+          human_approval:
+            approved: false
+            approved_by: null
+            approved_at: null
+            approval_notes_cn: "仅批准保留候选，不批准正式入库为 accepted。"
+          ai_archive_recommendation_cn: "AI 建议 candidate，但不能替代人工入库批准。"
+        memory_approval:
+          status: pending
+          approved_by: null
+          approved_at: null
+          rejection_reason_cn: null
+        audit_log:
+          - audit_id: audit-phase14-approve-candidate-001
+            action: approve_as_candidate_draft_created
+            actor: review_console_static_draft
+            note_cn: "只生成候选审批草案；未调用插件、API、DailyNote 或写文件。"
+      image_case_draft:
+        case_id: case-phase14-review-console-approval-001
+        asset_status: candidate
+        human_approval:
+          approved: false
+          approved_by: null
+          approved_at: null
+          approval_notes_cn: "未达到 accepted 条件，保留为候选。"
+      memory_delta_draft:
+        delta_id: md-phase14-approve-candidate-001
+        task_id: task-phase14-review-console-approval-001
+        case_id: case-phase14-review-console-approval-001
+        agent_name: Archivist_Agent
+        target_notebook: Rejected_Visual_Lessons
+        write_mode: draft
+        approval_required: true
+        approval_status: pending
+        approved_by: null
+        approved_at: null
+        chinese_diary_title: "Phase 14 候选审批草案"
+        chinese_diary_content: |
+          本记录说明 Review Console 已生成候选审批草案。该对象仅被保留为 candidate，尚未获得 accepted 所需的人工入库批准，也没有调用插件、API、DailyNote 或文件写入。
+        tags:
+          - Phase14
+          - ReviewConsole
+          - 候选审批
+          - no-execution
+        memory_safety:
+          contains_secret: false
+          contains_private_path: false
+          contains_customer_private_data: false
+          contains_image_binary: false
+          safety_notes_cn: "中文脱敏草案，不含密钥、私密路径、客户隐私或图片二进制。"
+        final_decision:
+          should_write_to_vcp: false
+          should_show_in_review_console: true
+          rejection_reason_cn: null
+
+    reject:
+      review_session_draft:
+        status: rejected
+        approval:
+          action: reject
+          status: rejected
+          approved_by: human_reviewer_placeholder
+          approved_at: "2026-05-04T23:10:00+08:00"
+          rejection_reason_cn: "人工评审认为当前候选信息不足，拒绝推进到 manifest 授权或入库。"
+          forbidden_actions:
+            - execute_plugin
+            - call_api
+            - write_daily_note
+            - save_image
+        archive_decision:
+          asset_status: rejected
+          human_approval:
+            approved: false
+            approved_by: null
+            approved_at: null
+            approval_notes_cn: "拒绝入库，不能标记 accepted。"
+          ai_archive_recommendation_cn: "AI 建议不构成批准。"
+        memory_approval:
+          status: rejected
+          approved_by: null
+          approved_at: null
+          rejection_reason_cn: "拒绝写入长期记忆，仅保留审计摘要草案。"
+        audit_log:
+          - audit_id: audit-phase14-reject-001
+            action: reject_draft_created
+            actor: review_console_static_draft
+            note_cn: "人工拒绝候选推进；只保留中文审计草案。"
+      image_case_draft:
+        case_id: case-phase14-review-console-reject-001
+        asset_status: rejected
+        human_approval:
+          approved: false
+          approved_by: null
+          approved_at: null
+          approval_notes_cn: "拒绝候选，不入库。"
+      memory_delta_draft:
+        delta_id: md-phase14-reject-001
+        task_id: task-phase14-review-console-approval-001
+        case_id: case-phase14-review-console-reject-001
+        agent_name: Archivist_Agent
+        target_notebook: Rejected_Visual_Lessons
+        write_mode: draft
+        approval_required: true
+        approval_status: rejected
+        approved_by: null
+        approved_at: null
+        chinese_diary_title: "Phase 14 拒绝审批审计草案"
+        chinese_diary_content: |
+          本记录仅作为拒绝路径的审计摘要：人工评审拒绝候选继续推进，未读取真实 manifest，未调用插件、API、DailyNote 或文件写入。
+        tags:
+          - Phase14
+          - ReviewConsole
+          - 拒绝
+          - 审计
+        memory_safety:
+          contains_secret: false
+          contains_private_path: false
+          contains_customer_private_data: false
+          contains_image_binary: false
+          safety_notes_cn: "仅保留中文脱敏审计摘要，不保留敏感原文。"
+        final_decision:
+          should_write_to_vcp: false
+          should_show_in_review_console: true
+          rejection_reason_cn: "拒绝写入长期记忆。"
+
+    request_manifest_authorization:
+      review_session_draft:
+        status: human_reviewing
+        approval:
+          action: request_manifest_authorization
+          status: manifest_authorization_requested
+          approved_by: null
+          approved_at: null
+          note_cn: "只生成读取真实 manifest 的独立授权申请草案；当前未授权、未读取。"
+          manifest_authorization_request:
+            authorization_request_id: manifest-auth-precheck-phase14-001
+            candidate_id: candidate-plugin-placeholder-001
+            target_manifest_ref: manifest-ref-placeholder-not-read
+            target_repository_ref: repository-ref-placeholder-not-read
+            source_authorized: false
+            source_read_performed: false
+            real_execution_allowed: false
+            approval_status: pending
+          forbidden_actions:
+            - read_real_manifest_without_authorization
+            - execute_plugin
+            - call_api
+            - write_daily_note
+            - save_image
+        archive_decision:
+          asset_status: candidate
+          human_approval:
+            approved: false
+            approved_by: null
+            approved_at: null
+            approval_notes_cn: "仅请求 manifest 授权读取，不批准 accepted。"
+          ai_archive_recommendation_cn: "AI 建议继续审查，但不能授权读取。"
+        memory_approval:
+          status: pending
+          approved_by: null
+          approved_at: null
+          rejection_reason_cn: null
+        audit_log:
+          - audit_id: audit-phase14-manifest-auth-001
+            action: manifest_authorization_request_draft_created
+            actor: review_console_static_draft
+            note_cn: "只生成授权读取申请草案，真实 manifest 未读取。"
+      image_case_draft:
+        case_id: case-phase14-review-console-manifest-auth-001
+        asset_status: candidate
+        human_approval:
+          approved: false
+          approved_by: null
+          approved_at: null
+          approval_notes_cn: "等待独立 manifest 授权读取前置审查。"
+      memory_delta_draft:
+        delta_id: md-phase14-manifest-auth-001
+        task_id: task-phase14-review-console-approval-001
+        case_id: case-phase14-review-console-manifest-auth-001
+        agent_name: Archivist_Agent
+        target_notebook: Rejected_Visual_Lessons
+        write_mode: draft
+        approval_required: true
+        approval_status: pending
+        approved_by: null
+        approved_at: null
+        chinese_diary_title: "Phase 14 manifest 授权申请草案"
+        chinese_diary_content: |
+          本记录说明 Review Console 仅生成真实 manifest 读取的授权申请草案。当前 source_authorized=false，source_read_performed=false，未读取真实 manifest，未调用插件、API、DailyNote 或文件写入。
+        tags:
+          - Phase14
+          - ReviewConsole
+          - manifest授权
+          - no-execution
+        memory_safety:
+          contains_secret: false
+          contains_private_path: false
+          contains_customer_private_data: false
+          contains_image_binary: false
+          safety_notes_cn: "中文脱敏草案，不含真实 manifest 原文、密钥、私密路径或客户隐私。"
+        final_decision:
+          should_write_to_vcp: false
+          should_show_in_review_console: true
+          rejection_reason_cn: null
+
+    request_memory_edit:
+      review_session_draft:
+        status: changes_required
+        approval:
+          action: request_memory_edit
+          status: memory_edit_requested
+          approved_by: human_reviewer_placeholder
+          approved_at: "2026-05-04T23:15:00+08:00"
+          note_cn: "人工要求修改中文记忆预览正文；未批准写入 DailyNote。"
+          forbidden_actions:
+            - write_daily_note
+            - write_vcp_memory
+            - execute_plugin
+            - call_api
+            - save_image
+        memory_preview:
+          chinese_diary_title: "Phase 14 记忆预览待修改"
+          chinese_diary_content: |
+            本记录仍需人工修改后才能重新提交审批。当前内容仅为中文草案，不代表 DailyNote 已写入。
+          target_notebook: Rejected_Visual_Lessons
+          maid: null
+          tags:
+            - Phase14
+            - 记忆修改
+            - 草案
+          safety:
+            contains_secret: false
+            contains_private_path: false
+            contains_customer_private_data: false
+            contains_image_binary: false
+        memory_approval:
+          status: changes_requested
+          approved_by: null
+          approved_at: null
+          rejection_reason_cn: "需要修改中文记忆正文后重新审批。"
+        archive_decision:
+          asset_status: candidate
+          human_approval:
+            approved: false
+            approved_by: null
+            approved_at: null
+            approval_notes_cn: "记忆修改不等于资产 accepted。"
+          ai_archive_recommendation_cn: "AI 建议不能替代人工批准。"
+        audit_log:
+          - audit_id: audit-phase14-memory-edit-001
+            action: memory_edit_request_draft_created
+            actor: review_console_static_draft
+            note_cn: "只生成记忆修改请求草案，未调用 DailyNote。"
+      image_case_draft:
+        case_id: case-phase14-review-console-memory-edit-001
+        asset_status: candidate
+        human_approval:
+          approved: false
+          approved_by: null
+          approved_at: null
+          approval_notes_cn: "记忆修改请求不改变资产入库状态。"
+      memory_delta_draft:
+        delta_id: md-phase14-memory-edit-001
+        task_id: task-phase14-review-console-approval-001
+        case_id: case-phase14-review-console-memory-edit-001
+        agent_name: Archivist_Agent
+        target_notebook: Rejected_Visual_Lessons
+        write_mode: draft
+        approval_required: true
+        approval_status: pending
+        approved_by: null
+        approved_at: null
+        chinese_diary_title: "Phase 14 记忆修改请求草案"
+        chinese_diary_content: |
+          本记录说明人工要求修改记忆预览正文。memory_approval.status 不是 approved，因此 memory_delta 只能保持 draft，不能写入 DailyNote 或 VCP 长期记忆。
+        tags:
+          - Phase14
+          - ReviewConsole
+          - 记忆修改
+          - no-execution
+        memory_safety:
+          contains_secret: false
+          contains_private_path: false
+          contains_customer_private_data: false
+          contains_image_binary: false
+          safety_notes_cn: "中文脱敏草案，不含密钥、私密路径、客户隐私或图片二进制。"
+        final_decision:
+          should_write_to_vcp: false
+          should_show_in_review_console: true
+          rejection_reason_cn: null
+
+  acceptance_assertions:
+    - "四条审批路径只输出草案，不调用插件、API、DailyNote 或文件写入。"
+    - "selected_plugin 必须为 null，max_plugin_calls 必须为 0。"
+    - "source_authorized=false 且 source_read_performed=false。"
+    - "request_manifest_authorization 只能生成独立授权申请草案，不能读取真实 manifest。"
+    - "approve_as_candidate 只保留 candidate，不等于正式 accepted。"
+    - "accepted 必须有人类批准，AI 的 archive_recommendation 不能替代人工批准。"
+    - "memory_approval.status 不等于 approved 时，memory_delta_draft.write_mode 必须为 draft；拒绝路径只能保留中文审计草案，不得写入长期记忆。"
+    - "所有记忆正文和审计摘要必须为中文脱敏内容。"
+    - "不得记录真实插件名、真实 manifest 原文、真实插件路径或真实能力结论。"

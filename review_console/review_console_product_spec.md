@@ -45,6 +45,23 @@
 - 没有 `human_review` 时，不允许正式 `accepted`。
 - AI 的 `archive_recommendation` 不能替代人工批准。
 
+## Phase 14 审批路径闭环
+
+Review Console MVP 支持下列审批路径，但所有路径都只输出草案记录，不触发真实执行：
+
+- `approve_as_candidate`：人工确认该对象可保留为候选，但 `archive_decision.asset_status` 仍为 `candidate`，不得等同于正式 `accepted`。
+- `reject`：人工拒绝候选或评审结果，输出中文拒绝原因和审计草案。
+- `request_manifest_authorization`：只生成真实 manifest 读取的独立授权申请草案，默认 `source_authorized=false`、`source_read_performed=false`。
+- `request_memory_edit`：要求修改中文记忆预览正文，`memory_approval.status` 不等于 `approved`，对应 `memory_delta.write_mode=draft`。
+
+审批不变量：
+
+- `accepted` 必须同时满足 `human_review` 存在、`human_approval.approved=true`、`approved_by` 存在、`approved_at` 存在。
+- 没有人工批准时，资产状态只能是 `candidate`、`rejected` 或 `draft`。
+- AI 的 `archive_recommendation` 只能作为建议，不能替代人工批准。
+- `memory_approval.status != approved` 时，`memory_delta.write_mode` 必须保持 `draft`。
+- Review Console 只能生成 `review_session_draft`、`image_case_draft`、`memory_delta_draft` 和授权申请草案，不得调用插件、API、DailyNote 或写磁盘资产。
+
 ## 评论模型
 
 MVP 只做文本评论和区域标签，不做复杂坐标绘制。评论必须使用中文正文，并包含作者、目标、严重程度、状态和创建时间。

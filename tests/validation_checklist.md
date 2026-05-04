@@ -293,6 +293,24 @@
 - [ ] Phase 13 样例的记忆正文和审计摘要必须为中文脱敏内容。
 - [ ] Phase 13 不调用 API、VCP 插件、DailyNote，不写文件，不创建图片。
 
+## Phase 14 Review Console approval closure 检查
+
+- [ ] Phase 14 只补齐 Review Console 审批路径样例，不实现 UI 或执行逻辑。
+- [ ] `review_console/review_console_product_spec.md` 包含 Phase 14 审批路径闭环说明。
+- [ ] `tests/schema_examples/phase14_review_console_approval_paths.example.yaml` 存在。
+- [ ] Phase 14 样例包含 `approve_as_candidate`、`reject`、`request_manifest_authorization` 和 `request_memory_edit` 四条审批路径。
+- [ ] Phase 14 样例保持 `selected_plugin=null`、`max_plugin_calls=0`、`execution_blocked=true`。
+- [ ] Phase 14 样例保持 `source_authorized=false`、`source_read_performed=false`、`real_manifest_read=false`、`real_execution_allowed=false`。
+- [ ] Phase 14 样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`disk_write_performed=false`、`image_file_created=false`。
+- [ ] `approve_as_candidate` 只能输出 `asset_status=candidate`，不得等同于正式 `accepted`。
+- [ ] `accepted` 必须有人类批准，AI 的 `archive_recommendation` 不能替代人工批准。
+- [ ] `request_manifest_authorization` 只能生成独立授权申请草案，不能读取真实 manifest。
+- [ ] `request_memory_edit` 中 `memory_approval.status != approved` 时，`memory_delta_draft.write_mode=draft`。
+- [ ] 拒绝路径只能保留中文审计草案，不写 DailyNote 或 VCP 长期记忆。
+- [ ] Phase 14 样例不得记录真实插件名、真实 manifest 原文、真实插件路径或真实能力结论。
+- [ ] Phase 14 样例的记忆正文和审计摘要必须为中文脱敏内容。
+- [ ] Phase 14 不调用 API、VCP 插件、DailyNote，不写文件，不创建图片。
+
 ## 无执行闭环检查
 
 - [ ] `tests/schema_examples/task_envelope.example.yaml` 是 Photo Studio OS 无执行样例。
