@@ -630,3 +630,24 @@
 - [ ] v2.0 baseline 保持 `vcpchat_modified=false`、`vcptoolbox_modified=false`。
 - [ ] v2.0 baseline 保持 `tag_created=false`、`package_created=false`、`sha256_created=false`、`release_published=false`、`release_assets_uploaded=false`。
 - [ ] v2.0 baseline 不新增真实执行能力、不创建发布资产、不修改真实外部仓库。
+
+## v2.1 VCPChat Embed Preflight Contract 检查
+
+- [ ] `docs/80_v2_1_vcpchat_embed_preflight.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_embed_contract.md` 存在。
+- [ ] `tests/schema_examples/v2_1_vcpchat_embed_preflight.example.yaml` 存在。
+- [ ] v2.1 只做 VCPChat 子窗口嵌入前置契约，不修改真实 VCPChat。
+- [ ] v2.1 不读取真实 VCPChat 或 VCPToolBox 源码。
+- [ ] v2.1 不创建真实 Electron IPC handler、preload 执行代码或执行入口。
+- [ ] IPC channel allowlist 只包含 `imageLabReview.loadSession`、`imageLabReview.previewDraft`、`imageLabReview.submitDraft` 和 `imageLabReview.cancel`。
+- [ ] Electron 边界明确 `contextIsolation=true`、`nodeIntegration=false`、preload 最小 allowlist、IPC sender 校验、来源窗口校验和 payload schema 校验。
+- [ ] renderer 不直接调用 DailyNote、VCP 插件、API、Node 文件系统或磁盘写入。
+- [ ] 不通过 URL query、hash、window title、localStorage、sessionStorage、clipboard、renderer console log、raw IPC、crash report 或 runtime log 原文传递敏感信息。
+- [ ] 输入只允许受控 `review_session_draft`。
+- [ ] 输出只允许 `review_session_draft`、`image_case_draft`、`memory_delta_draft` 和 `prototype_guard`。
+- [ ] v2.1 样例保持 `real_vcpchat_source_read=false`、`real_vcpchat_modified=false`、`ipc_handler_created=false`、`preload_runtime_code_created=false`。
+- [ ] v2.1 样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`disk_write_performed=false`、`image_file_created=false`。
+- [ ] v2.1 样例保持 `selected_plugin=null`、`max_plugin_calls=0`、`real_execution_allowed=false`、`real_manifest_read=false`。
+- [ ] v2.1 样例不包含 key、token、cookie、密码、私密路径、客户隐私、endpoint 原文、raw manifest、raw 插件输出或图片二进制。
+- [ ] v2.1 样例中的审计摘要、记忆正文和授权说明为中文脱敏内容。
+- [ ] 进入真实 VCPChat 源码读取、真实 VCPChat 修改或真实 IPC handler 创建前必须另行授权。

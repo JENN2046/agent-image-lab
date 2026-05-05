@@ -1,0 +1,145 @@
+phase: v2.1_vcpchat_embed_preflight
+record_id: v2-1-vcpchat-embed-preflight-001
+project: Agent Image Lab
+status: contract_only_no_execution
+
+scope_gate:
+  real_vcpchat_source_read: false
+  real_vcpchat_modified: false
+  real_vcptoolbox_source_read: false
+  real_vcptoolbox_modified: false
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  execution_entry_created: false
+  external_repo_access_allowed: false
+
+ipc_contract:
+  channel_allowlist:
+    - imageLabReview.loadSession
+    - imageLabReview.previewDraft
+    - imageLabReview.submitDraft
+    - imageLabReview.cancel
+  allowed_input:
+    review_session_draft:
+      required: true
+      source: controlled_host_payload
+      schema_ref: schemas/review_session.schema.yaml
+  allowed_output:
+    - review_session_draft
+    - image_case_draft
+    - memory_delta_draft
+    - prototype_guard
+  channel_status: draft_name_only
+
+electron_boundary:
+  context_isolation_required: true
+  context_isolation_expected_value: true
+  node_integration_allowed: false
+  node_integration_expected_value: false
+  preload_allowlist_required: true
+  ipc_sender_validation_required: true
+  origin_window_validation_required: true
+  payload_schema_validation_required: true
+
+preload_allowlist_policy:
+  allowed_api_groups:
+    - load_review_session_draft
+    - preview_review_draft
+    - submit_review_draft
+    - cancel_review_session
+  forbidden_api_groups:
+    - filesystem_access
+    - process_access
+    - shell_access
+    - network_access
+    - daily_note_access
+    - plugin_execution_access
+    - secret_access
+
+forbidden_transport:
+  - url_query
+  - url_hash
+  - window_title
+  - local_storage
+  - session_storage
+  - clipboard
+  - renderer_console_log
+  - raw_ipc_payload
+  - crash_report
+  - runtime_log_raw
+
+safety_gate:
+  contains_api_key: false
+  contains_token: false
+  contains_cookie: false
+  contains_password: false
+  contains_private_path: false
+  contains_customer_private_data: false
+  contains_endpoint_raw_value: false
+  contains_raw_manifest: false
+  contains_raw_plugin_output: false
+  contains_image_binary: false
+  sensitive_summary_cn: "本样例只记录未来嵌入前的安全契约，不包含敏感原文。"
+
+review_semantics:
+  human_review_overrides_ai_review: true
+  final_review_prefers_human_review: true
+  accepted_requires_human_approval: true
+  ai_archive_recommendation_is_advisory: true
+  memory_preview_must_be_chinese: true
+  memory_preview_is_not_daily_note_write: true
+  memory_approval_required_before_write_request: true
+
+draft_outputs:
+  review_session_draft:
+    status: draft
+    final_review_source: human_review_when_present
+    accepted_without_human_approval_allowed: false
+  image_case_draft:
+    asset_status: candidate
+    accepted_requires_human_approval: true
+    image_binary_saved: false
+  memory_delta_draft:
+    write_mode: draft
+    approval_status: pending
+    chinese_diary_content_cn: "本条记忆仍是草案预览，尚未写入 DailyNote。"
+    final_decision:
+      should_write_to_vcp: false
+
+prototype_guard:
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  disk_write_performed: false
+  file_write_performed: false
+  image_file_created: false
+  image_binary_saved: false
+  selected_plugin: null
+  max_plugin_calls: 0
+  real_execution_allowed: false
+  real_manifest_read: false
+
+next_authorization_point:
+  authorization_name: v2_1_patch_02_real_vcpchat_source_read_plan
+  authorization_required: true
+  authorization_reason_cn: "进入真实 VCPChat 接入前，必须先规划允许读取的源码范围、禁止摘录字段和审查链。"
+  allowed_after_authorization_cn:
+    - "规划真实 VCPChat 源码读取范围。"
+    - "列出允许读取和禁止读取的文件类别。"
+    - "列出 Electron 安全边界验收方法。"
+  forbidden_without_authorization_cn:
+    - "不得读取真实 VCPChat 源码。"
+    - "不得修改真实 VCPChat。"
+    - "不得创建真实 IPC handler。"
+    - "不得调用真实插件、API 或 DailyNote。"
+
+audit_summary_cn: "v2.1 当前只完成 VCPChat 嵌入前置契约规划，所有输出保持草案状态，没有真实外部读取或执行。"
+
+acceptance_assertions:
+  - "real_vcpchat_source_read=false。"
+  - "real_vcpchat_modified=false。"
+  - "ipc_handler_created=false。"
+  - "api_called=false。"
+  - "vcp_plugin_called=false。"
+  - "daily_note_called=false。"
+  - "image_file_created=false。"
