@@ -1891,3 +1891,17 @@
 - [ ] `validate_mvp.ps1` 执行 Review Console Adapter handoff validation 并检查输出字段。
 - [ ] v5.3 不执行新的 commit、tag、push 或 release。
 - [ ] v5.3 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.4 Local Sync Readiness Preflight 检查
+
+- [ ] `scripts/validate_v5_local_sync_readiness.js` 存在。
+- [ ] `docs/131_v5_4_local_sync_readiness.md` 存在。
+- [ ] `tests/schema_examples/v5_4_local_sync_readiness.example.yaml` 存在。
+- [ ] local sync readiness 记录 `origin/master` baseline `367d3c9`。
+- [ ] local sync readiness 记录本地 head `b04e253`。
+- [ ] local sync readiness 记录 pending local commits 数量为 `3`。
+- [ ] local sync readiness 记录本地提交链 `6bd255d -> 876d335 -> b04e253`。
+- [ ] local sync readiness 保持 `push_authorized=false`、`tag_authorized=false`、`pr_authorized=false`、`release_authorized=false`。
+- [ ] `validate_mvp.ps1` 执行 v5.4 local sync readiness validation 并检查输出字段。
+- [ ] v5.4 不执行 push、远端 tag、PR、merge 或 release。
+- [ ] v5.4 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。

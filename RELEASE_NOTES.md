@@ -49,6 +49,7 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Added v5.1 runtime delivery surface validation.
 - Added v5.2 adapter delivery surface validation.
 - Added v5.3 Review Console Adapter handoff validation.
+- Added v5.4 local sync readiness preflight.
 
 ## Safety Status
 

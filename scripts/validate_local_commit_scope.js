@@ -23,12 +23,14 @@ const allowedModifiedFiles = [
   "scripts/validate_v5_delivery_readiness.js",
   "scripts/validate_adapter_delivery_surface.js",
   "scripts/validate_review_console_adapter_handoff.js",
+  "scripts/validate_v5_local_sync_readiness.js",
   "scripts/validate_runtime_delivery_surface.js",
   "scripts/validate_runtime_prototype_suite.js",
   "scripts/validate_runtime_prototype_smoke.js",
   "tests/schema_examples/v5_1_runtime_delivery_surface.example.yaml",
   "tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml",
   "tests/schema_examples/v5_3_review_console_adapter_handoff.example.yaml",
+  "tests/schema_examples/v5_4_local_sync_readiness.example.yaml",
   "tests/validation_checklist.md"
 ];
 
@@ -58,6 +60,7 @@ const allowedUntrackedFiles = [
   "docs/128_v5_1_runtime_delivery_surface.md",
   "docs/129_v5_2_adapter_delivery_surface.md",
   "docs/130_v5_3_review_console_adapter_handoff.md",
+  "docs/131_v5_4_local_sync_readiness.md",
   "scripts/validate-agent-image-lab-local.ps1",
   "scripts/validate-agent-image-lab-local.sh",
   "scripts/validate_agent_board_state.js",
@@ -68,6 +71,7 @@ const allowedUntrackedFiles = [
   "scripts/validate_v5_delivery_readiness.js",
   "scripts/validate_adapter_delivery_surface.js",
   "scripts/validate_review_console_adapter_handoff.js",
+  "scripts/validate_v5_local_sync_readiness.js",
   "scripts/validate_runtime_delivery_surface.js",
   "scripts/validate_runtime_guard_unit.js",
   "scripts/validate_runtime_prototype_suite.js",
@@ -84,7 +88,8 @@ const allowedUntrackedFiles = [
   "tests/schema_examples/v5_0_delivery_readiness.example.yaml",
   "tests/schema_examples/v5_1_runtime_delivery_surface.example.yaml",
   "tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml",
-  "tests/schema_examples/v5_3_review_console_adapter_handoff.example.yaml"
+  "tests/schema_examples/v5_3_review_console_adapter_handoff.example.yaml",
+  "tests/schema_examples/v5_4_local_sync_readiness.example.yaml"
 ];
 
 function assert(condition, message) {
@@ -174,6 +179,18 @@ function main() {
   assert(
     allowedUntrackedFiles.includes("scripts/validate_review_console_adapter_handoff.js"),
     "v5.3 validation script must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("docs/131_v5_4_local_sync_readiness.md"),
+    "v5.4 docs must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("tests/schema_examples/v5_4_local_sync_readiness.example.yaml"),
+    "v5.4 schema example must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("scripts/validate_v5_local_sync_readiness.js"),
+    "v5.4 validation script must be included in the untracked allowlist."
   );
 
   const result = {

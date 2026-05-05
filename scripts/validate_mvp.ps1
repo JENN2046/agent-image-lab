@@ -65,6 +65,7 @@ $requiredFiles = @(
   'scripts/validate_runtime_delivery_surface.js',
   'scripts/validate_adapter_delivery_surface.js',
   'scripts/validate_review_console_adapter_handoff.js',
+  'scripts/validate_v5_local_sync_readiness.js',
   'scripts/validate_runtime_guard_unit.js',
   'scripts/validate_runtime_prototype_smoke.js',
   'scripts/validate_runtime_prototype_suite.js',
@@ -93,6 +94,7 @@ $requiredFiles = @(
   'docs/128_v5_1_runtime_delivery_surface.md',
   'docs/129_v5_2_adapter_delivery_surface.md',
   'docs/130_v5_3_review_console_adapter_handoff.md',
+  'docs/131_v5_4_local_sync_readiness.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
@@ -169,6 +171,7 @@ $requiredFiles = @(
   'tests/schema_examples/v5_1_runtime_delivery_surface.example.yaml',
   'tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml',
   'tests/schema_examples/v5_3_review_console_adapter_handoff.example.yaml',
+  'tests/schema_examples/v5_4_local_sync_readiness.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -1896,6 +1899,7 @@ $allowedV46ModifiedFiles = @(
   'scripts/validate_v5_delivery_readiness.js',
   'scripts/validate_adapter_delivery_surface.js',
   'scripts/validate_review_console_adapter_handoff.js',
+  'scripts/validate_v5_local_sync_readiness.js',
   'scripts/validate_runtime_delivery_surface.js',
   'scripts/validate_runtime_prototype_suite.js',
   'scripts/validate_runtime_prototype_smoke.js',
@@ -1903,6 +1907,7 @@ $allowedV46ModifiedFiles = @(
   'tests/schema_examples/v5_1_runtime_delivery_surface.example.yaml',
   'tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml',
   'tests/schema_examples/v5_3_review_console_adapter_handoff.example.yaml',
+  'tests/schema_examples/v5_4_local_sync_readiness.example.yaml',
   'tests/validation_checklist.md'
 )
 
@@ -1932,6 +1937,7 @@ $allowedV46UntrackedFiles = @(
   'docs/128_v5_1_runtime_delivery_surface.md',
   'docs/129_v5_2_adapter_delivery_surface.md',
   'docs/130_v5_3_review_console_adapter_handoff.md',
+  'docs/131_v5_4_local_sync_readiness.md',
   'scripts/validate-agent-image-lab-local.ps1',
   'scripts/validate-agent-image-lab-local.sh',
   'scripts/validate_agent_board_state.js',
@@ -1942,6 +1948,7 @@ $allowedV46UntrackedFiles = @(
   'scripts/validate_v5_delivery_readiness.js',
   'scripts/validate_adapter_delivery_surface.js',
   'scripts/validate_review_console_adapter_handoff.js',
+  'scripts/validate_v5_local_sync_readiness.js',
   'scripts/validate_runtime_delivery_surface.js',
   'scripts/validate_runtime_guard_unit.js',
   'scripts/validate_runtime_prototype_suite.js',
@@ -1958,7 +1965,8 @@ $allowedV46UntrackedFiles = @(
   'tests/schema_examples/v5_0_delivery_readiness.example.yaml',
   'tests/schema_examples/v5_1_runtime_delivery_surface.example.yaml',
   'tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml',
-  'tests/schema_examples/v5_3_review_console_adapter_handoff.example.yaml'
+  'tests/schema_examples/v5_3_review_console_adapter_handoff.example.yaml',
+  'tests/schema_examples/v5_4_local_sync_readiness.example.yaml'
 )
 
 foreach ($path in $v46LocalCommitScopeManifestFiles) {
@@ -2524,6 +2532,92 @@ foreach ($path in $v53ReviewConsoleAdapterHandoffFiles) {
   }
 }
 
+$v54LocalSyncReadinessFiles = @(
+  'docs/131_v5_4_local_sync_readiness.md',
+  'tests/schema_examples/v5_4_local_sync_readiness.example.yaml'
+)
+
+$requiredV54LocalSyncReadinessPatterns = @(
+  'status:\s+completed_validated_project_local_v5_4_local_sync_readiness',
+  'version:\s+v5\.4',
+  'validation_file:\s+scripts/validate_v5_local_sync_readiness\.js',
+  'origin_master_short:\s+367d3c9',
+  'local_head_short:\s+b04e253',
+  'pending_local_commit_count:\s+3',
+  'local_commit_chain_ordered:\s+true',
+  'local_commit_messages_recorded:\s+true',
+  'board_commit_chain_current:\s+true',
+  'top_indexes_updated:\s+true',
+  'validation_surface_current:\s+true',
+  'push_authorized:\s+false',
+  'tag_authorized:\s+false',
+  'pr_authorized:\s+false',
+  'release_authorized:\s+false',
+  'remote_write_performed:\s+false',
+  'external_network_required:\s+false',
+  'external_service_required:\s+false',
+  'file_write_performed:\s+false',
+  'real_vcpchat_source_read:\s+false',
+  'real_vcpchat_modified:\s+false',
+  'real_vcptoolbox_source_read:\s+false',
+  'real_vcptoolbox_modified:\s+false',
+  'real_manifest_read:\s+false',
+  'api_called:\s+false',
+  'vcp_plugin_called:\s+false',
+  'daily_note_called:\s+false',
+  'vcp_memory_written:\s+false',
+  'image_file_created:\s+false',
+  'commit_tag_push_authorized:\s+false'
+)
+
+$forbiddenV54LocalSyncReadinessPatterns = @(
+  'local_commit_chain_ordered:\s+false',
+  'local_commit_messages_recorded:\s+false',
+  'board_commit_chain_current:\s+false',
+  'top_indexes_updated:\s+false',
+  'validation_surface_current:\s+false',
+  'push_authorized:\s+true',
+  'tag_authorized:\s+true',
+  'pr_authorized:\s+true',
+  'release_authorized:\s+true',
+  'remote_write_performed:\s+true',
+  'external_network_required:\s+true',
+  'external_service_required:\s+true',
+  'file_write_performed:\s+true',
+  'real_vcpchat_source_read:\s+true',
+  'real_vcpchat_modified:\s+true',
+  'real_vcptoolbox_source_read:\s+true',
+  'real_vcptoolbox_modified:\s+true',
+  'real_manifest_read:\s+true',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'vcp_memory_written:\s+true',
+  'image_file_created:\s+true',
+  'commit_tag_push_authorized:\s+true',
+  'https?://'
+)
+
+foreach ($path in $v54LocalSyncReadinessFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v5.4 local sync readiness file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV54LocalSyncReadinessPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v5.4 local sync readiness missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV54LocalSyncReadinessPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v5.4 local sync readiness boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
 $node = Get-Command node -ErrorAction SilentlyContinue
 if (-not $node) {
   Add-Failure "Node.js is required to validate adapter_dry_run_lab"
@@ -2704,6 +2798,11 @@ if (-not $node) {
   & node --check (Join-Path $Root 'scripts/validate_review_console_adapter_handoff.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_review_console_adapter_handoff.js failed node --check"
+  }
+
+  & node --check (Join-Path $Root 'scripts/validate_v5_local_sync_readiness.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_v5_local_sync_readiness.js failed node --check"
   }
 
   & node --check (Join-Path $Root 'scripts/validate_agent_board_state.js') | Out-Null
@@ -3059,6 +3158,49 @@ if (-not $node) {
     }
     if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.file_write_performed -ne $false) {
       Add-Failure "Review Console Adapter handoff validation must not write files"
+    }
+  }
+
+  $v5LocalSyncReadinessOutput = & node (Join-Path $Root 'scripts/validate_v5_local_sync_readiness.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v5.4 local sync readiness validation exited with failure"
+  } else {
+    $v5LocalSyncReadiness = ($v5LocalSyncReadinessOutput -join "`n") | ConvertFrom-Json
+    if ($v5LocalSyncReadiness.passed -ne $true) {
+      Add-Failure "v5.4 local sync readiness validation must report passed true"
+    }
+    if ($v5LocalSyncReadiness.local_sync_readiness.origin_master_short -ne '367d3c9') {
+      Add-Failure "v5.4 local sync readiness must record origin master baseline 367d3c9"
+    }
+    if ($v5LocalSyncReadiness.local_sync_readiness.local_head_short -ne 'b04e253') {
+      Add-Failure "v5.4 local sync readiness must record local head b04e253"
+    }
+    if ($v5LocalSyncReadiness.local_sync_readiness.pending_local_commit_count -ne 3) {
+      Add-Failure "v5.4 local sync readiness must record 3 pending local commits"
+    }
+    if ($v5LocalSyncReadiness.local_sync_readiness.local_commit_chain_ordered -ne $true) {
+      Add-Failure "v5.4 local sync readiness must verify ordered commit chain"
+    }
+    if ($v5LocalSyncReadiness.local_sync_readiness.board_commit_chain_current -ne $true) {
+      Add-Failure "v5.4 local sync readiness must verify agent board commit chain"
+    }
+    if ($v5LocalSyncReadiness.local_sync_readiness.push_authorized -ne $false) {
+      Add-Failure "v5.4 local sync readiness must not authorize push"
+    }
+    if ($v5LocalSyncReadiness.local_sync_readiness.tag_authorized -ne $false) {
+      Add-Failure "v5.4 local sync readiness must not authorize tag"
+    }
+    if ($v5LocalSyncReadiness.local_sync_readiness.pr_authorized -ne $false) {
+      Add-Failure "v5.4 local sync readiness must not authorize PR"
+    }
+    if ($v5LocalSyncReadiness.local_sync_readiness.release_authorized -ne $false) {
+      Add-Failure "v5.4 local sync readiness must not authorize release"
+    }
+    if ($v5LocalSyncReadiness.local_sync_readiness.remote_write_performed -ne $false) {
+      Add-Failure "v5.4 local sync readiness must not perform remote write"
+    }
+    if ($v5LocalSyncReadiness.local_sync_readiness.file_write_performed -ne $false) {
+      Add-Failure "v5.4 local sync readiness validation must not write files"
     }
   }
 
