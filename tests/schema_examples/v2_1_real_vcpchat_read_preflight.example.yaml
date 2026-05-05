@@ -1,0 +1,146 @@
+phase: v2.1_real_vcpchat_read_preflight
+record_id: v2-1-real-vcpchat-read-preflight-001
+project: Agent Image Lab
+status: final_preflight_only
+
+read_preflight:
+  preflight_id: v2-1-real-vcpchat-read-preflight-placeholder-001
+  authorization_required: true
+  user_authorized: false
+  source_read_performed: false
+  real_vcpchat_source_read: false
+  real_vcpchat_modified: false
+  real_vcptoolbox_source_read: false
+  real_vcptoolbox_modified: false
+  selected_source_categories: []
+  exact_real_paths: []
+  exact_real_paths_listed: false
+  raw_source_copy_allowed: false
+  reviewer_required: true
+  approval_status: pending
+
+candidate_category_allowlist:
+  - review_console_child_window_candidate
+  - ipc_handler_candidate
+  - preload_boundary_candidate
+  - window_lifecycle_candidate
+  - schema_bridge_candidate
+
+read_command_policy:
+  command_written_in_this_phase: false
+  must_be_read_only: documented_only
+  recursive_unscoped_read_allowed: false
+  config_read_allowed: false
+  env_read_allowed: false
+  log_read_allowed: false
+  credential_read_allowed: false
+  binary_asset_read_allowed: false
+
+allowed_sanitized_output_fields: []
+future_allowed_sanitized_output_fields:
+  - sanitized_module_purpose_cn
+  - sanitized_window_lifecycle_summary_cn
+  - sanitized_ipc_channel_summary_cn
+  - sanitized_preload_boundary_summary_cn
+  - sanitized_schema_validation_summary_cn
+  - sanitized_security_risk_notes_cn
+  - sanitized_required_change_summary_cn
+  - sanitized_stop_condition_summary_cn
+
+forbidden_outputs:
+  - raw_source_code
+  - real_local_path
+  - endpoint_raw_value
+  - env_value
+  - secret_raw_value
+  - private_path_raw_value
+  - customer_private_data
+  - raw_runtime_log
+  - raw_ipc_payload
+  - raw_plugin_output
+  - image_binary
+
+stop_conditions:
+  - secret_like_content_detected
+  - endpoint_raw_value_detected
+  - private_path_detected
+  - customer_private_data_detected
+  - raw_runtime_log_detected
+  - raw_ipc_payload_detected
+  - credential_or_config_raw_value_detected
+  - unauthorized_file_category_detected
+
+safety_gate:
+  contains_real_local_path: false
+  contains_raw_source_code: false
+  contains_endpoint_raw_value: false
+  contains_env_value: false
+  contains_secret_raw_value: false
+  contains_private_path_raw_value: false
+  contains_customer_private_data: false
+  contains_raw_runtime_log: false
+  contains_raw_ipc_payload: false
+  contains_raw_plugin_output: false
+  contains_image_binary: false
+  sensitive_summary_cn: "本最终 preflight 样例只定义未来读取授权包，不读取真实源码，不列真实路径。"
+
+no_execution_guard:
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  execution_entry_created: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  file_write_performed: false
+  disk_write_performed: false
+  image_file_created: false
+  selected_plugin: null
+  max_plugin_calls: 0
+  real_manifest_read: false
+  real_execution_allowed: false
+
+post_read_boundary:
+  can_modify_vcpchat_after_read: false
+  can_create_ipc_handler_after_read: false
+  can_create_preload_code_after_read: false
+  can_call_plugin_after_read: false
+  can_call_api_after_read: false
+  can_call_daily_note_after_read: false
+  can_write_memory_after_read: false
+
+memory_delta_draft:
+  write_mode: audit_only
+  approval_status: not_required
+  chinese_audit_summary_cn: "真实 VCPChat 读取前最终 preflight 尚未授权读取，只保留中文脱敏审计摘要。"
+  preserved_original_allowed: false
+  final_decision:
+    should_write_to_vcp: false
+
+next_state_rules:
+  current_state: pending_real_vcpchat_read_preflight
+  next_allowed_state: pending_real_vcpchat_read_authorization_request
+  blocked_states:
+    - source_read_performed
+    - real_vcpchat_source_read
+    - exact_real_paths_listed
+    - raw_source_copied
+    - vcpchat_modified
+    - ipc_handler_created
+    - real_execution_ready
+
+audit_summary_cn: "v2.1 Patch 04 只补齐真实 VCPChat 读取前最终 preflight，未读取真实源码，未列真实路径，未创建执行能力。"
+
+acceptance_assertions:
+  - "user_authorized=false。"
+  - "source_read_performed=false。"
+  - "real_vcpchat_source_read=false。"
+  - "real_vcpchat_modified=false。"
+  - "exact_real_paths=[]。"
+  - "exact_real_paths_listed=false。"
+  - "raw_source_copy_allowed=false。"
+  - "selected_source_categories=[]。"
+  - "allowed_sanitized_output_fields=[]。"
+  - "api_called=false。"
+  - "vcp_plugin_called=false。"
+  - "daily_note_called=false。"
+  - "real_execution_allowed=false。"

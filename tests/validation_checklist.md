@@ -687,3 +687,20 @@
 - [ ] 样例不包含真实本地路径、真实源码片段、endpoint 原文、环境变量值、secret、token、cookie、密码、客户隐私、raw runtime log、raw IPC payload 或图片二进制。
 - [ ] 允许输出字段只能是中文脱敏摘要字段，不允许 raw source、真实路径或敏感原文。
 - [ ] scope review 不得被解释为真实 VCPChat 读取、修改、IPC handler 创建、插件调用、API 调用或 DailyNote 写入授权。
+
+## v2.1 Real VCPChat Read Preflight 检查
+
+- [ ] `docs/83_v2_1_real_vcpchat_read_preflight.md` 存在。
+- [ ] `review_console/embed_contract/real_vcpchat_read_preflight_contract.md` 存在。
+- [ ] `tests/schema_examples/v2_1_real_vcpchat_read_preflight.example.yaml` 存在。
+- [ ] real VCPChat read preflight 只定义最终读取前授权包，不读取真实 VCPChat 源码。
+- [ ] real VCPChat read preflight 不列真实 VCPChat 本地路径，不复制 raw source。
+- [ ] real VCPChat read preflight 不修改真实 VCPChat 或 VCPToolBox。
+- [ ] real VCPChat read preflight 不创建真实 IPC handler、preload 执行代码或执行入口。
+- [ ] 样例保持 `user_authorized=false`、`source_read_performed=false`、`real_vcpchat_source_read=false`、`real_vcpchat_modified=false`。
+- [ ] 样例保持 `exact_real_paths=[]`、`exact_real_paths_listed=false`、`selected_source_categories=[]`、`raw_source_copy_allowed=false`。
+- [ ] 样例保持 `allowed_sanitized_output_fields=[]`、`api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`real_execution_allowed=false`。
+- [ ] 样例不包含真实本地路径、真实源码片段、endpoint 原文、环境变量值、secret、token、cookie、密码、客户隐私、raw runtime log、raw IPC payload、raw plugin output 或图片二进制。
+- [ ] 未来读取命令政策必须保持只读、只读取授权 allowlist、不得递归扫描未授权目录。
+- [ ] stop conditions 必须覆盖 secret-like 内容、endpoint 原文、私密路径、客户隐私、raw runtime log、raw IPC payload、credential/config 原文和未授权文件类别。
+- [ ] 读取完成也不得自动授权真实 VCPChat 修改、IPC handler 创建、preload 代码创建、插件调用、API 调用、DailyNote 写入或 VCP 长期记忆写入。
