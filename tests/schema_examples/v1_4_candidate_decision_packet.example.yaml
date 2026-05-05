@@ -1,0 +1,100 @@
+phase: v1.4_multi_plugin_candidate_evaluation
+record_id: candidate-decision-packet-v1-4-001
+project: Agent Image Lab
+evaluation_mode: no_auto_execution
+current_status: pending_manifest_review
+
+candidate_decision_packet:
+  candidate_id: candidate-plugin-placeholder-001
+  candidate_label_cn: "候选插件甲，显示名已脱敏。"
+  source_state:
+    discovered_by: manual_placeholder_registry
+    source_ref_redacted: redacted-source-ref-001
+    batch_vcptoolbox_read_performed: false
+    batch_vcpchat_read_performed: false
+    real_manifest_read: false
+  manifest_authorization:
+    read_authorization_required: true
+    read_authorized: false
+    read_performed: false
+    raw_manifest_saved: false
+    endpoint_raw_saved: false
+    secret_value_saved: false
+    private_path_saved: false
+    customer_private_data_saved: false
+  sanitized_review_template:
+    display_name_summary_cn: "未来授权后只允许记录显示名中文脱敏摘要。"
+    command_summary_cn: "未来授权后只允许记录命令集合中文摘要，不记录真实参数原文。"
+    input_output_summary_cn: "未来授权后只允许记录输入输出模式中文摘要，不保存图片二进制。"
+    permission_risk_cn: "当前未读取真实 manifest，风险保持待复查。"
+    gatekeeper_notes_cn: "未授权前不得读取真实 manifest，也不得推断真实能力。"
+  gatekeeper_risk_classification:
+    risk_level: medium
+    risk_reason_cn: "候选仍处于占位状态，需单独授权 manifest 脱敏审查。"
+    blocked_until_human_review: true
+    dry_run_planning_allowed: false
+  performance_scoring_dimensions:
+    visual_fit: pending
+    controllability: pending
+    failure_recovery: pending
+    safety_boundary: pending
+    scoring_notes_cn: "v1.4 当前只记录评分维度，不记录真实插件表现分数。"
+  review_console_handoff:
+    allowed_actions:
+      - mark_candidate
+      - reject_candidate
+      - request_manifest_authorization
+      - request_gatekeeper_review
+      - request_memory_edit
+    forbidden_actions:
+      - execute_plugin
+      - call_api
+      - write_daily_note
+      - save_image
+      - read_manifest_without_authorization
+    handoff_summary_cn: "Review Console 只能生成候选审批草案或授权请求。"
+
+state_rules:
+  current_state: pending_manifest_review
+  next_allowed_states:
+    - rejected
+    - pending_manifest_review
+  forbidden_current_states:
+    - manifest_reviewed_safe
+    - dry_run_planned
+    - dry_run_checked
+    - real_execution_authorization_required
+    - tested
+  rules_cn:
+    - "未读取真实 manifest 时不能进入 manifest_reviewed_safe。"
+    - "未达到 manifest_reviewed_safe 时不能进入 dry_run_planned。"
+    - "tested 不等于真实执行授权。"
+
+no_execution_guard:
+  selected_plugin: null
+  max_plugin_calls: 0
+  external_api_allowed: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  file_write_performed: false
+  image_file_created: false
+  real_execution_allowed: false
+  raw_plugin_output_saved: false
+
+memory_delta_draft:
+  write_mode: draft
+  approval_status: pending
+  chinese_diary_title: "多插件候选评估占位记录"
+  chinese_diary_content: "本条记录只说明候选插件仍处于待授权审查状态，不能作为真实能力、dry-run 结果或真实执行授权。"
+  final_decision:
+    should_write_to_vcp: false
+    should_show_in_review_console: true
+    rejection_reason_cn: null
+
+acceptance_assertions:
+  - "没有批量读取真实 VCPToolBox 或 VCPChat。"
+  - "没有读取真实 manifest。"
+  - "没有保存 raw manifest、endpoint 原文、密钥、私密路径、客户隐私或图片二进制。"
+  - "没有调用插件、API 或 DailyNote。"
+  - "没有把占位候选标记为真实可用。"

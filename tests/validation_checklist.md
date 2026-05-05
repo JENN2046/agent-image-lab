@@ -545,10 +545,15 @@
 
 - [ ] `integrations/vcp/v1_4_multi_plugin_candidate_evaluation.md` 存在。
 - [ ] `tests/schema_examples/v1_4_multi_plugin_candidate_matrix.example.yaml` 存在。
+- [ ] `tests/schema_examples/v1_4_candidate_decision_packet.example.yaml` 存在。
 - [ ] 多插件候选评估不批量读取真实 VCPToolBox / VCPChat。
 - [ ] 每个真实 manifest 读取都必须单独授权。
+- [ ] 候选 decision packet 包含 manifest 授权状态、脱敏审查模板、Gatekeeper 风险分类、表现评分维度和 Review Console handoff。
 - [ ] 能力矩阵只记录中文脱敏摘要和风险分类。
 - [ ] 不保存 raw manifest、endpoint 原文、密钥、私密路径或客户隐私。
+- [ ] `read_authorized=false` 时，`read_performed=false`。
+- [ ] `dry_run_planned` 只能在 `manifest_reviewed_safe` 后出现。
+- [ ] Review Console 只能生成候选审批草案或授权请求，不触发读取、执行或写入。
 - [ ] `tested` 不等于真实执行授权。
 
 ## v2.0 Productization Plan 检查
