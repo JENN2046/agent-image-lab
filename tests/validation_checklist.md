@@ -721,3 +721,29 @@
 - [ ] future user-provided fields 必须保持 `required_later`，不得由本阶段代填。
 - [ ] 用户未提供真实根目录、精确 allowlist、类别选择、允许输出字段、reviewer 和读取命令权限前，不得读取真实 VCPChat。
 - [ ] 授权请求获批也只允许进入只读源码 intake，不得自动授权 VCPChat 修改、IPC handler、preload、插件、API、DailyNote 或记忆写入。
+
+## v2.2 Real VCPChat Read Authorization Fill 检查
+
+- [ ] `docs/85_v2_2_real_vcpchat_read_authorization_fill.md` 存在。
+- [ ] `review_console/embed_contract/real_vcpchat_read_authorization_fill.md` 存在。
+- [ ] `tests/schema_examples/v2_2_real_vcpchat_read_authorization_fill.example.yaml` 存在。
+- [ ] authorization fill 只定义未来用户填写真实 VCPChat 读取授权包的字段，不读取真实 VCPChat 源码。
+- [ ] authorization fill 不读取真实 VCPToolBox。
+- [ ] authorization fill 不在仓库中写入真实 VCPChat 根目录、真实本地路径或 raw source。
+- [ ] authorization fill 不修改真实 VCPChat 或 VCPToolBox。
+- [ ] authorization fill 不创建真实 IPC handler、preload、renderer、Adapter 执行入口或其他执行代码。
+- [ ] authorization fill 不调用插件、API、DailyNote、VCP 记忆或文件系统写入。
+- [ ] 样例保持 `user_authorized=false`、`source_read_authorized=false`、`authorization_status=pending`。
+- [ ] 样例保持 `target_repository_root_provided=false`、`target_repository_root_redacted=null`。
+- [ ] 样例保持 `exact_allowed_paths=[]`、`exact_allowed_paths_redacted=[]`、`exact_allowed_paths_listed=false`。
+- [ ] 样例保持 `allowed_source_categories=[]`、`allowed_sanitized_output_fields=[]`、`read_command_permission=false`。
+- [ ] 样例保持 `source_read_performed=false`、`real_vcpchat_source_read=false`、`real_vcpchat_modified=false`。
+- [ ] 样例保持 `real_vcptoolbox_source_read=false`、`real_vcptoolbox_modified=false`。
+- [ ] 样例保持 `raw_source_copy_allowed=false`、`raw_source_copied=false`。
+- [ ] 样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`real_execution_allowed=false`。
+- [ ] 样例保持 `ipc_handler_created=false`、`preload_runtime_code_created=false`、`renderer_runtime_code_created=false`、`execution_entry_created=false`。
+- [ ] 样例不包含真实本地路径、真实源码片段、endpoint 原文、环境变量值、secret、token、cookie、密码、客户隐私、raw runtime log、raw IPC payload、raw plugin output 或图片二进制。
+- [ ] `forbidden_source_categories` 覆盖配置文件、credential 或 secret 文件、runtime logs、用户数据或聊天历史、二进制资产和无关模块。
+- [ ] `stop_conditions` 覆盖真实路径写入仓库、secret-like 内容、endpoint 原文、私密路径、客户隐私、raw source 超范围、raw runtime log、raw IPC payload、credential/config 原文和未授权文件类别。
+- [ ] 授权填写包获批也只允许进入“读取前最终复核”，不得自动触发真实 VCPChat 源码读取。
+- [ ] 真实 VCPChat 读取仍必须等待下一独立授权点，且授权时必须明确精确 allowlist、读取命令权限和审查人。
