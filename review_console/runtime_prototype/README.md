@@ -30,6 +30,8 @@ prototype_guard:
   image_file_created: false
 ```
 
+`FIELD_MAPPING.md` 记录 runtime 输出到 `review_session`、`image_case` 和 `memory_delta` schema 的映射关系。`tests/schema_examples/v1_2_runtime_prototype_output.example.yaml` 是验收用的无外部副作用草案样例。
+
 ## Validation
 
 ```powershell
@@ -37,5 +39,11 @@ node --check review_console\runtime_prototype\host_bridge_mock.js
 node --check review_console\runtime_prototype\app.js
 ```
 
-人工验收时还应确认页面输出的 `memory_delta_draft.chinese_diary_content` 为中文，且未批准记忆时 `write_mode=draft`。
+人工验收时还应确认：
 
+- 页面输出包含 `review_session_draft`、`image_case_draft`、`memory_delta_draft` 和 `prototype_guard`。
+- `human_review` 覆盖 `ai_review`，`final_review.source=human_review`。
+- 未勾选人工批准时，`image_case_draft.asset_status` 不得为 `accepted`。
+- `memory_delta_draft.chinese_diary_content` 为中文。
+- 未批准记忆时，`memory_delta_draft.write_mode=draft` 且 `final_decision.should_write_to_vcp=false`。
+- 即使记忆被 approved，也只表示写入申请被批准，不代表 DailyNote 已执行。

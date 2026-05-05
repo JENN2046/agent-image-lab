@@ -30,6 +30,12 @@ function memoryWriteMode(status) {
   return "draft";
 }
 
+function reviewSessionStatus(assetStatus) {
+  if (assetStatus === "accepted") return "approved";
+  if (assetStatus === "rejected") return "rejected";
+  return "human_reviewing";
+}
+
 function finalAssetStatus() {
   if (els.humanApproved.checked) return "accepted";
   return els.assetStatus.value;
@@ -61,10 +67,25 @@ function approvalPayload() {
 }
 
 function buildDraft() {
+  const createdAt = nowIso();
   const score = Number(els.humanScore.value);
   const memoryApproval = approvalPayload();
   const assetStatus = finalAssetStatus();
   const version = currentVersion();
+  const memoryDeltaId = "memory-delta-v1-2-runtime-prototype-001";
+  const humanApproval = {
+    approved: els.humanApproved.checked,
+    approved_by: els.humanApproved.checked ? "human_reviewer" : null,
+    approved_at: els.humanApproved.checked ? createdAt : null,
+    approval_notes_cn: els.humanApproved.checked ? "人工明确批准 accepted。" : "未获得人工正式批准。"
+  };
+  const humanReview = {
+    reviewer_type: "human",
+    reviewer_name: "human_reviewer",
+    total_score: score,
+    note_cn: els.humanComment.value.trim()
+  };
+  const memoryContent = els.memoryContent.value.trim();
 
   return {
     review_session_draft: {
@@ -72,43 +93,62 @@ function buildDraft() {
       task_id: session.task_id,
       case_id: session.case_id,
       project: session.project,
+      status: reviewSessionStatus(assetStatus),
+      image_versions: session.image_versions,
       current_version_id: version.version_id,
+      compare_version_id: session.compare_version_id,
       ai_review: session.ai_review,
-      human_review: {
-        reviewer_type: "human",
-        reviewer_name: "human_reviewer",
-        total_score: score,
-        note_cn: els.humanComment.value.trim()
-      },
+      human_review: humanReview,
       final_review: {
         source: "human_review",
         total_score: score,
+        note_cn: humanReview.note_cn,
         rule_cn: "final_review 优先采用 human_review。"
+      },
+      comments: [
+        ...session.comments,
+        {
+          comment_id: "comment-v1-2-runtime-human-001",
+          author: "human_reviewer",
+          body_cn: humanReview.note_cn
+        }
+      ],
+      annotation_notes: session.annotation_notes,
+      version_comparison: session.version_comparison,
+      approval: {
+        status: humanApproval.approved ? "approved" : "pending",
+        approved_by: humanApproval.approved_by,
+        approved_at: humanApproval.approved_at,
+        approval_notes_cn: humanApproval.approval_notes_cn
       },
       archive_decision: {
         asset_status: assetStatus,
-        human_approval: {
-          approved: els.humanApproved.checked,
-          approved_by: els.humanApproved.checked ? "human_reviewer" : null,
-          approved_at: els.humanApproved.checked ? nowIso() : null,
-          approval_notes_cn: els.humanApproved.checked ? "人工明确批准 accepted。" : "未获得人工正式批准。"
-        },
+        human_approval: humanApproval,
         ai_archive_recommendation_is_final: false
       },
       memory_preview: {
         chinese_diary_title: session.memory_preview.chinese_diary_title,
-        chinese_diary_content: els.memoryContent.value.trim(),
+        chinese_diary_content: memoryContent,
         target_notebook: session.memory_preview.target_notebook,
+        maid: session.memory_preview.maid,
         tags: session.memory_preview.tags,
         safety: session.memory_preview.safety
       },
       memory_approval: memoryApproval,
+      next_iteration: session.next_iteration,
       audit_log: [
         {
           event: "runtime_prototype_draft_generated",
           actor: "Review_Console_Runtime_Prototype",
-          created_at: nowIso(),
-          note_cn: "runtime prototype 只生成草案，没有调用外部系统。"
+          created_at: createdAt,
+          note_cn: "runtime prototype 只生成草案，没有调用外部系统。",
+          prototype_guard: {
+            api_called: false,
+            daily_note_called: false,
+            vcp_plugin_called: false,
+            disk_write_performed: false,
+            image_file_created: false
+          }
         }
       ]
     },
@@ -116,28 +156,61 @@ function buildDraft() {
       case_id: session.case_id,
       task_id: session.task_id,
       project: session.project,
+      image_type: session.image_case_seed.image_type,
+      input_assets: session.image_case_seed.input_assets,
       output_assets: [version.asset_ref],
+      plugin_used: session.image_case_seed.plugin_used,
+      prompt_package_id: session.image_case_seed.prompt_package_id,
+      review_ids: session.image_case_seed.review_ids,
       final_score: score,
       asset_status: assetStatus,
-      human_approval_required: true,
-      image_binary_saved_to_git: false
+      human_approval: humanApproval,
+      strengths_cn: session.image_case_seed.strengths_cn,
+      weaknesses_cn: session.image_case_seed.weaknesses_cn,
+      reusable_rules_cn: session.image_case_seed.reusable_rules_cn,
+      memory_entries: [memoryDeltaId],
+      git_promotion_candidate: session.image_case_seed.git_promotion_candidate
     },
     memory_delta_draft: {
-      delta_id: "memory-delta-v1-2-runtime-prototype-001",
+      delta_id: memoryDeltaId,
       task_id: session.task_id,
       case_id: session.case_id,
+      created_at: createdAt,
       agent_name: "Review_Console_Runtime_Prototype",
+      agent_role: "runtime_prototype",
+      project: session.project,
+      memory_type: "style_review_handoff",
       target_notebook: session.memory_preview.target_notebook,
       write_mode: memoryWriteMode(memoryApproval.status),
+      importance: "medium",
+      approval_required: true,
       approval_status: memoryApproval.status,
       approved_by: memoryApproval.approved_by,
       approved_at: memoryApproval.approved_at,
+      source: {
+        source_type: "review_console_runtime_prototype",
+        source_ids: [session.session_id, session.task_id, session.case_id]
+      },
       chinese_diary_title: session.memory_preview.chinese_diary_title,
-      chinese_diary_content: els.memoryContent.value.trim(),
+      chinese_diary_content: memoryContent,
+      preserved_original: {
+        prompt_en: null,
+        plugin_name: null,
+        model_name: null,
+        file_ref: version.asset_ref
+      },
       tags: session.memory_preview.tags,
+      visibility: "audit",
       memory_safety: session.memory_preview.safety,
+      promotion: {
+        sync_to_git_candidate: false,
+        promoted_to_git: false,
+        git_target_file: null,
+        promotion_reason_cn: null
+      },
       final_decision: {
         should_write_to_vcp: memoryApproval.status === "approved",
+        should_show_in_review_console: true,
         rejection_reason_cn: memoryApproval.rejection_reason_cn
       }
     },
@@ -171,4 +244,3 @@ function init() {
 }
 
 init();
-

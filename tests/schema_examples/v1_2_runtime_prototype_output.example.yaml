@@ -1,0 +1,129 @@
+example_id: v1_2_runtime_prototype_output
+phase: v1.2_review_console_runtime_prototype
+status: draft_output_validated_locally
+
+review_session_draft:
+  session_id: session-v1-2-runtime-prototype-001
+  task_id: ail-v1-2-runtime-prototype-001
+  case_id: case-v1-2-runtime-prototype-001
+  project: Agent Image Lab
+  status: human_reviewing
+  current_version_id: v1
+  compare_version_id: null
+  ai_review:
+    reviewer_type: ai
+    reviewer_name: Critic_Agent
+    total_score: 81
+    archive_recommendation: candidate
+    note_cn: AI 评分只作为建议。
+  human_review:
+    reviewer_type: human
+    reviewer_name: human_reviewer
+    total_score: 84
+    note_cn: 人工评审确认该版本可作为候选，但仍需保留已知视觉偏差说明。
+  final_review:
+    source: human_review
+    total_score: 84
+    note_cn: 人工评审确认该版本可作为候选，但仍需保留已知视觉偏差说明。
+    rule_cn: final_review 优先采用 human_review。
+  archive_decision:
+    asset_status: candidate
+    human_approval:
+      approved: false
+      approved_by: null
+      approved_at: null
+      approval_notes_cn: 未获得人工正式批准。
+    ai_archive_recommendation_is_final: false
+  memory_preview:
+    chinese_diary_title: Photo Studio OS v1.0 人工接受经验
+    chinese_diary_content: 本次评审保留 Photo Studio OS 真实闭环经验：资产可作为项目推进候选，但必须记录人工覆盖接受和已知视觉偏差。
+    target_notebook: Photo_Studio_OS_Style_Memory
+    maid: null
+    tags:
+      - PhotoStudioOS
+      - v1.0
+      - 人工接受
+    safety:
+      contains_secret: false
+      contains_private_path: false
+      contains_customer_private_data: false
+      contains_image_binary: false
+      safety_notes_cn: 占位样例不包含敏感信息或图片二进制。
+  memory_approval:
+    status: pending
+    approved_by: null
+    approved_at: null
+    rejection_reason_cn: null
+  audit_log:
+    - event: runtime_prototype_draft_generated
+      actor: Review_Console_Runtime_Prototype
+      note_cn: runtime prototype 只生成草案，没有调用外部系统。
+
+image_case_draft:
+  case_id: case-v1-2-runtime-prototype-001
+  task_id: ail-v1-2-runtime-prototype-001
+  project: Agent Image Lab
+  image_type: Photo Studio OS dashboard
+  input_assets:
+    - references/photo_studio_os/accepted-reference.placeholder
+  output_assets:
+    - runs/photo_studio_os_v0_10_doubao_retry/image/doubaogen/accepted-image.placeholder
+  plugin_used: null
+  final_score: 84
+  asset_status: candidate
+  human_approval:
+    approved: false
+    approved_by: null
+    approved_at: null
+    approval_notes_cn: 未获得人工正式批准。
+  memory_entries:
+    - memory-delta-v1-2-runtime-prototype-001
+  git_promotion_candidate: false
+
+memory_delta_draft:
+  delta_id: memory-delta-v1-2-runtime-prototype-001
+  task_id: ail-v1-2-runtime-prototype-001
+  case_id: case-v1-2-runtime-prototype-001
+  agent_name: Review_Console_Runtime_Prototype
+  agent_role: runtime_prototype
+  project: Agent Image Lab
+  memory_type: style_review_handoff
+  target_notebook: Photo_Studio_OS_Style_Memory
+  write_mode: draft
+  importance: medium
+  approval_required: true
+  approval_status: pending
+  approved_by: null
+  approved_at: null
+  chinese_diary_title: Photo Studio OS v1.0 人工接受经验
+  chinese_diary_content: 本次评审保留 Photo Studio OS 真实闭环经验：资产可作为项目推进候选，但必须记录人工覆盖接受和已知视觉偏差。
+  visibility: audit
+  memory_safety:
+    contains_secret: false
+    contains_private_path: false
+    contains_customer_private_data: false
+    contains_image_binary: false
+    safety_notes_cn: 占位样例不包含敏感信息或图片二进制。
+  final_decision:
+    should_write_to_vcp: false
+    should_show_in_review_console: true
+    rejection_reason_cn: null
+
+prototype_guard:
+  api_called: false
+  daily_note_called: false
+  vcp_plugin_called: false
+  disk_write_performed: false
+  image_file_created: false
+
+acceptance_assertions:
+  no_real_vcpchat_modified: true
+  no_real_vcptoolbox_modified: true
+  no_api_call: true
+  no_daily_note_call: true
+  no_vcp_plugin_call: true
+  no_disk_write: true
+  image_file_creation_blocked: true
+  human_review_overrides_ai_review: true
+  accepted_requires_human_approval: true
+  pending_memory_keeps_write_mode_draft: true

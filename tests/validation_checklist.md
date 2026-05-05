@@ -512,13 +512,20 @@
 ## v1.2 Review Console Runtime Prototype 检查
 
 - [ ] `review_console/runtime_prototype/` 存在。
+- [ ] `review_console/runtime_prototype/FIELD_MAPPING.md` 存在，并覆盖 `review_session_draft`、`image_case_draft`、`memory_delta_draft`。
+- [ ] `tests/schema_examples/v1_2_runtime_prototype_output.example.yaml` 存在。
 - [ ] `node --check review_console/runtime_prototype/host_bridge_mock.js` 通过。
 - [ ] `node --check review_console/runtime_prototype/app.js` 通过。
 - [ ] runtime prototype 输出 `review_session_draft`、`image_case_draft`、`memory_delta_draft` 和 `prototype_guard`。
 - [ ] `prototype_guard` 保持 `api_called=false`、`daily_note_called=false`、`vcp_plugin_called=false`、`disk_write_performed=false`、`image_file_created=false`。
 - [ ] runtime prototype 不使用外部 API、DailyNote、VCP 插件、Node 文件系统或图片二进制。
+- [ ] `review_session_draft` 包含 `status`、`image_versions`、`comments`、`approval`、`archive_decision`、`memory_preview`、`memory_approval`、`next_iteration` 和 `audit_log`。
+- [ ] `image_case_draft` 包含 `image_type`、`input_assets`、`output_assets`、`plugin_used`、`review_ids`、`human_approval`、中文优缺点和可复用规则。
+- [ ] `memory_delta_draft` 包含 `created_at`、`agent_role`、`memory_type`、`approval_required`、`source`、`preserved_original`、`visibility`、`promotion` 和 `final_decision`。
+- [ ] `human_review` 覆盖 `ai_review`，`final_review.source=human_review`。
 - [ ] 未人工批准时不得生成正式 `accepted`。
 - [ ] `memory_approval.status != approved` 时，`memory_delta.write_mode=draft`。
+- [ ] `memory_approval.status != approved` 时，`memory_delta.final_decision.should_write_to_vcp=false`。
 
 ## v1.3 DailyNote / VCP Memory Handoff 检查
 
