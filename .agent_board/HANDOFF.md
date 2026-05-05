@@ -4,7 +4,7 @@
 
 ```text
 Status: ready for guarded local continuation
-Result: PR #1 merged into master at 367d3c9; local master synced to origin/master; v5.2 adapter delivery surface validation is active locally
+Result: PR #1 merged into master at 367d3c9; local master synced to origin/master; v5.3 Review Console Adapter handoff validation is active locally
 ```
 
 ## Current Repo
@@ -33,6 +33,7 @@ Historical v4.9 Push status: pending explicit authorization
 Historical v4.9 phase: v4.9 local tag push-readiness preflight
 Historical v5.0 phase: v5.0 post-merge delivery readiness index
 Historical v5.1 phase: v5.1 runtime delivery surface validation
+Historical v5.2 phase: v5.2 adapter delivery surface validation
 ```
 
 ## What Was Done
@@ -57,6 +58,9 @@ Added runtime delivery surface validation for Review Console runtime prototype.
 Validated v5.1 runtime delivery surface and left the batch uncommitted pending explicit version-action authorization.
 Added adapter delivery surface validation for the dry-run lab and export package.
 Validated v5.2 adapter delivery surface and left the batch uncommitted pending explicit version-action authorization.
+Committed v5.1/v5.2 local delivery surface batch as 876d335.
+Added Review Console Adapter dry-run handoff fixture, static draft output, field mapping, and validator.
+Validated v5.3 Review Console Adapter handoff and left the batch uncommitted pending explicit version-action authorization.
 ```
 
 ## Validation
@@ -74,6 +78,7 @@ node scripts/validate_local_tag_push_readiness.js: passed
 node scripts/validate_v5_delivery_readiness.js: passed
 node scripts/validate_runtime_delivery_surface.js: passed
 node scripts/validate_adapter_delivery_surface.js: passed
+node scripts/validate_review_console_adapter_handoff.js: passed
 git diff --check: passed
 ```
 
@@ -88,8 +93,8 @@ Commit/tag/push/release require explicit separate authorization.
 ## Human Decisions Needed
 
 ```text
-Whether to commit the new v5.2 local batch.
-Whether to open a PR for the v5.2 local batch after commit authorization.
+Whether to commit the new v5.3 local batch.
+Whether to open a PR for the v5.3 local batch after commit authorization.
 Whether to create a formal release tag after v5.0 validation.
 Whether to merge overlay policy into root AGENTS.md later, instead of keeping it as overlay only.
 ```

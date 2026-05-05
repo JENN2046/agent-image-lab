@@ -90,6 +90,22 @@ Phase 9 审批记录必须满足：
 - 任何审批记录都不得复制真实 manifest 原文、密钥、token、cookie、密码、私密路径、客户隐私或客户未公开信息。
 - Review Console 的审批动作只能生成草案或授权请求，不能直接执行真实插件或写入长期记忆。
 
+## v5.3 Adapter Dry-Run Handoff 映射
+
+本节用于验收 Adapter dry-run 输出进入静态 Review Console 草案输出的最小 handoff surface。它只读取项目内 fixture，不调用真实 VCP 插件、API、DailyNote 或文件写入。
+
+| Adapter dry-run 字段 | Review Console 字段 | 说明 |
+| --- | --- | --- |
+| `adapter_dry_run_response.status` | `adapter_dry_run_handoff.status` | 必须为 `accepted_draft`，只代表草案可展示 |
+| `dispatch_plan_draft` | `adapter_dry_run_handoff.dispatch_plan_draft` | 固定 `selected_plugin=null`、`max_plugin_calls=0`、`execution_blocked=true` |
+| `gatekeeper_handoff` | `adapter_dry_run_handoff.gatekeeper_handoff` | 只显示 Gatekeeper 风险摘要和阻断动作 |
+| `review_console_handoff.allowed_actions` | `adapter_dry_run_handoff.review_console_handoff.allowed_actions` | 只允许标记候选、拒绝候选、请求 Gatekeeper 复查和请求记忆修改 |
+| `review_console_handoff.forbidden_actions` | `adapter_dry_run_handoff.review_console_handoff.forbidden_actions` | 必须禁止执行插件、调用 API、写 DailyNote、保存图片 |
+| `audit_record` | `adapter_dry_run_handoff.audit_record` | 只保存中文脱敏审计摘要 |
+| `no_execution_guard` | `adapter_dry_run_handoff.no_execution_guard` | 所有执行副作用字段必须保持 false 或 0 |
+
+`accepted_draft` 不等于真实执行授权。静态 Review Console 只能展示 handoff 和审批动作草案，不能触发插件执行、API 调用、DailyNote 写入、文件写入或图片创建。
+
 ## 原型防越界标记
 
 草案输出包含：

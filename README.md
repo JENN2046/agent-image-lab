@@ -7,7 +7,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v5.2 adapter delivery surface validation
+v1.0 true-loop closeout candidate + v5.3 review console adapter handoff validation
 ```
 
 已经完成：
@@ -34,6 +34,7 @@ v1.0 true-loop closeout candidate + v5.2 adapter delivery surface validation
 - v5.0 post-merge delivery readiness index 记录 PR #1 已合并、本地 `master` 已同步到 `origin/master`，并收束交付验收入口。
 - v5.1 runtime delivery surface validation 机器检查 Review Console runtime prototype 的本地交付面、脚本顺序、DOM surface、host ack 和无外部副作用边界。
 - v5.2 adapter delivery surface validation 机器检查 Adapter dry-run lab 和 VCPToolBox 导出级 dry-run 包的 manifest、stdio、fixture 和 no-execution guard。
+- v5.3 review console adapter handoff validation 机器检查 Adapter dry-run accepted fixture 能以 no-execution handoff 草案进入 Review Console static prototype。
 
 当前 accepted asset 只以 ignored runtime 路径和哈希归档，不把图片二进制写入 Git、DailyNote 或 VCP 长期记忆。人工接受记录保留了已知视觉偏差：这是 `human_override` 通过，不是完美 prompt compliance。
 
@@ -91,6 +92,7 @@ Photo Studio OS UI 生图生产线，以及 AI 图片评审与修正生产线。
 - `docs/127_v5_0_delivery_readiness_index.md`：post-merge delivery readiness index 记录。
 - `docs/128_v5_1_runtime_delivery_surface.md`：runtime delivery surface validation 记录。
 - `docs/129_v5_2_adapter_delivery_surface.md`：adapter delivery surface validation 记录。
+- `docs/130_v5_3_review_console_adapter_handoff.md`：review console adapter handoff validation 记录。
 - `.agent_board/`：本地 guarded autopilot 状态板，用于续跑、校验记录和 handoff。
 - `docs/`：项目定义、SOP、评分表、VCP 记忆适配、审片台设计。
 - `agents/`：ImageLab_Master 和岗位型子 Agent 的规则。
@@ -117,6 +119,7 @@ node scripts\validate_runtime_guard_unit.js
 node scripts\validate_runtime_prototype_smoke.js
 node scripts\validate_runtime_delivery_surface.js
 node scripts\validate_adapter_delivery_surface.js
+node scripts\validate_review_console_adapter_handoff.js
 node scripts\validate_runtime_prototype_suite.js
 node scripts\validate_agent_board_state.js
 node scripts\validate_local_checkpoint_manifest.js

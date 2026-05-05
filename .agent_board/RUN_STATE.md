@@ -15,7 +15,7 @@ Advance Agent Image Lab safely within project-local no-execution / no-external-r
 ## Current Phase
 
 ```text
-v5.2 adapter delivery surface validation
+v5.3 review console adapter handoff validation
 ```
 
 ## Current Task
@@ -27,7 +27,7 @@ none
 ## Last Completed Task
 
 ```text
-Added adapter delivery surface validation for the dry-run lab and export package while preserving no-execution boundaries.
+Added Review Console Adapter dry-run handoff validation while preserving no-execution boundaries.
 ```
 
 ## Last Validation
@@ -45,6 +45,7 @@ node scripts/validate_local_tag_push_readiness.js: passed
 node scripts/validate_v5_delivery_readiness.js: passed
 node scripts/validate_runtime_delivery_surface.js: passed
 node scripts/validate_adapter_delivery_surface.js: passed
+node scripts/validate_review_console_adapter_handoff.js: passed
 git diff --check: passed
 ```
 
@@ -89,6 +90,7 @@ Historical v4.9 Push readiness: local tag present, push not authorized
 Historical v4.9 phase: v4.9 local tag push-readiness preflight
 Historical v5.0 phase: v5.0 post-merge delivery readiness index
 Historical v5.1 phase: v5.1 runtime delivery surface validation
+Historical v5.2 phase: v5.2 adapter delivery surface validation
 ```
 
 ## Current Stop Status
@@ -100,5 +102,5 @@ not blocked
 ## Next Action
 
 ```text
-Request explicit authorization before committing the v5.2 local batch, or continue safe local docs/schema/prototype validation work.
+Request explicit authorization before committing the v5.3 local batch, or continue safe local docs/schema/prototype validation work.
 ```

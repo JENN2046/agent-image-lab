@@ -13,17 +13,22 @@ const allowedModifiedFiles = [
   "adapter_dry_run_lab/README.md",
   "docs/00_project_roadmap.md",
   "exports/vcptoolbox/Plugin/AgentImageLabAdapter/README.md",
+  "review_console/static_prototype/FIELD_MAPPING.md",
+  "review_console/static_prototype/app.js",
+  "review_console/static_prototype/mock_data.js",
   "review_console/runtime_prototype/README.md",
   "scripts/validate_local_commit_scope.js",
   "scripts/validate_mvp.ps1",
   "scripts/validate_v4_index_consistency.js",
   "scripts/validate_v5_delivery_readiness.js",
   "scripts/validate_adapter_delivery_surface.js",
+  "scripts/validate_review_console_adapter_handoff.js",
   "scripts/validate_runtime_delivery_surface.js",
   "scripts/validate_runtime_prototype_suite.js",
   "scripts/validate_runtime_prototype_smoke.js",
   "tests/schema_examples/v5_1_runtime_delivery_surface.example.yaml",
   "tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml",
+  "tests/schema_examples/v5_3_review_console_adapter_handoff.example.yaml",
   "tests/validation_checklist.md"
 ];
 
@@ -52,6 +57,7 @@ const allowedUntrackedFiles = [
   "docs/127_v5_0_delivery_readiness_index.md",
   "docs/128_v5_1_runtime_delivery_surface.md",
   "docs/129_v5_2_adapter_delivery_surface.md",
+  "docs/130_v5_3_review_console_adapter_handoff.md",
   "scripts/validate-agent-image-lab-local.ps1",
   "scripts/validate-agent-image-lab-local.sh",
   "scripts/validate_agent_board_state.js",
@@ -61,6 +67,7 @@ const allowedUntrackedFiles = [
   "scripts/validate_local_tag_push_readiness.js",
   "scripts/validate_v5_delivery_readiness.js",
   "scripts/validate_adapter_delivery_surface.js",
+  "scripts/validate_review_console_adapter_handoff.js",
   "scripts/validate_runtime_delivery_surface.js",
   "scripts/validate_runtime_guard_unit.js",
   "scripts/validate_runtime_prototype_suite.js",
@@ -76,7 +83,8 @@ const allowedUntrackedFiles = [
   "tests/schema_examples/v4_9_local_tag_push_readiness.example.yaml",
   "tests/schema_examples/v5_0_delivery_readiness.example.yaml",
   "tests/schema_examples/v5_1_runtime_delivery_surface.example.yaml",
-  "tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml"
+  "tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml",
+  "tests/schema_examples/v5_3_review_console_adapter_handoff.example.yaml"
 ];
 
 function assert(condition, message) {
@@ -154,6 +162,18 @@ function main() {
   assert(
     allowedUntrackedFiles.includes("scripts/validate_adapter_delivery_surface.js"),
     "v5.2 validation script must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("docs/130_v5_3_review_console_adapter_handoff.md"),
+    "v5.3 docs must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("tests/schema_examples/v5_3_review_console_adapter_handoff.example.yaml"),
+    "v5.3 schema example must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("scripts/validate_review_console_adapter_handoff.js"),
+    "v5.3 validation script must be included in the untracked allowlist."
   );
 
   const result = {

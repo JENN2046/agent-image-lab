@@ -1875,3 +1875,19 @@
 - [ ] `validate_mvp.ps1` 执行 adapter delivery surface validation 并检查输出字段。
 - [ ] v5.2 不执行新的 commit、tag、push 或 release。
 - [ ] v5.2 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.3 Review Console Adapter Handoff Validation 检查
+
+- [ ] `scripts/validate_review_console_adapter_handoff.js` 存在。
+- [ ] `docs/130_v5_3_review_console_adapter_handoff.md` 存在。
+- [ ] `tests/schema_examples/v5_3_review_console_adapter_handoff.example.yaml` 存在。
+- [ ] Review Console static prototype 包含 `adapter_dry_run_handoff` fixture。
+- [ ] static app 草案输出包含 `adapter_dry_run_handoff`，只用于展示 dry-run handoff。
+- [ ] handoff validation 使用项目内 Adapter accepted fixture 交叉校验 static fixture。
+- [ ] handoff validation 验证 `accepted_draft`、`selected_plugin=null`、`max_plugin_calls=0`、`execution_blocked=true`。
+- [ ] handoff validation 验证 Gatekeeper handoff 只展示风险，不允许 execution approval。
+- [ ] handoff validation 验证 Review Console allowed actions 只包含标记、拒绝、Gatekeeper 复查和记忆修改请求。
+- [ ] handoff validation 验证 forbidden actions 包含执行插件、调用 API、写 DailyNote、保存图片。
+- [ ] `validate_mvp.ps1` 执行 Review Console Adapter handoff validation 并检查输出字段。
+- [ ] v5.3 不执行新的 commit、tag、push 或 release。
+- [ ] v5.3 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。

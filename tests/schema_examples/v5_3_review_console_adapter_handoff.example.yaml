@@ -1,0 +1,58 @@
+record_type: review_console_adapter_handoff_validation
+status: completed_validated_project_local_v5_3_review_console_adapter_handoff
+version: v5.3
+validation_file: scripts/validate_review_console_adapter_handoff.js
+static_handoff_fixture_present: true
+adapter_fixture_compared: true
+accepted_draft_status_verified: true
+dispatch_plan_mapped: true
+gatekeeper_handoff_mapped: true
+review_console_handoff_mapped: true
+audit_record_mapped: true
+no_execution_guard_verified: true
+allowed_actions_verified: true
+forbidden_actions_verified: true
+static_app_draft_output_current: true
+field_mapping_current: true
+external_network_required: false
+external_service_required: false
+file_write_performed: false
+real_vcpchat_source_read: false
+real_vcpchat_modified: false
+real_vcptoolbox_source_read: false
+real_vcptoolbox_modified: false
+real_manifest_read: false
+api_called: false
+vcp_plugin_called: false
+daily_note_called: false
+vcp_memory_written: false
+image_file_created: false
+commit_tag_push_authorized: false
+checked_surface:
+  - review_console/static_prototype/mock_data.js
+  - review_console/static_prototype/app.js
+  - review_console/static_prototype/FIELD_MAPPING.md
+  - adapter_dry_run_lab/fixtures/accepted_request.json
+  - exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js
+acceptance_assertions:
+  adapter_handoff_status: accepted_draft
+  selected_plugin: null
+  max_plugin_calls: 0
+  execution_blocked: true
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  file_write_performed: false
+  image_file_created: false
+  real_execution_allowed: false
+  allowed_actions:
+    - mark_candidate
+    - reject_candidate
+    - request_gatekeeper_review
+    - request_memory_edit
+  forbidden_actions:
+    - execute_plugin
+    - call_api
+    - write_daily_note
+    - save_image
+boundary_cn: "v5.3 只验证 Adapter dry-run handoff 能在 Review Console static prototype 草案中展示，不授权真实插件调用、DailyNote 写入、VCP 记忆写入、图片创建或远端版本动作。"

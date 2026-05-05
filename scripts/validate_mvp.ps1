@@ -64,6 +64,7 @@ $requiredFiles = @(
   'scripts/validate_v5_delivery_readiness.js',
   'scripts/validate_runtime_delivery_surface.js',
   'scripts/validate_adapter_delivery_surface.js',
+  'scripts/validate_review_console_adapter_handoff.js',
   'scripts/validate_runtime_guard_unit.js',
   'scripts/validate_runtime_prototype_smoke.js',
   'scripts/validate_runtime_prototype_suite.js',
@@ -91,6 +92,7 @@ $requiredFiles = @(
   'docs/127_v5_0_delivery_readiness_index.md',
   'docs/128_v5_1_runtime_delivery_surface.md',
   'docs/129_v5_2_adapter_delivery_surface.md',
+  'docs/130_v5_3_review_console_adapter_handoff.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
@@ -166,6 +168,7 @@ $requiredFiles = @(
   'tests/schema_examples/v5_0_delivery_readiness.example.yaml',
   'tests/schema_examples/v5_1_runtime_delivery_surface.example.yaml',
   'tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml',
+  'tests/schema_examples/v5_3_review_console_adapter_handoff.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -1883,18 +1886,23 @@ $allowedV46ModifiedFiles = @(
   'docs/00_project_roadmap.md',
   'docs/125_v4_8_v4_index_consistency_validation.md',
   'exports/vcptoolbox/Plugin/AgentImageLabAdapter/README.md',
+  'review_console/static_prototype/FIELD_MAPPING.md',
+  'review_console/static_prototype/app.js',
+  'review_console/static_prototype/mock_data.js',
   'review_console/runtime_prototype/README.md',
   'scripts/validate_local_commit_scope.js',
   'scripts/validate_mvp.ps1',
   'scripts/validate_v4_index_consistency.js',
   'scripts/validate_v5_delivery_readiness.js',
   'scripts/validate_adapter_delivery_surface.js',
+  'scripts/validate_review_console_adapter_handoff.js',
   'scripts/validate_runtime_delivery_surface.js',
   'scripts/validate_runtime_prototype_suite.js',
   'scripts/validate_runtime_prototype_smoke.js',
   'tests/schema_examples/v4_8_v4_index_consistency_validation.example.yaml',
   'tests/schema_examples/v5_1_runtime_delivery_surface.example.yaml',
   'tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml',
+  'tests/schema_examples/v5_3_review_console_adapter_handoff.example.yaml',
   'tests/validation_checklist.md'
 )
 
@@ -1923,6 +1931,7 @@ $allowedV46UntrackedFiles = @(
   'docs/127_v5_0_delivery_readiness_index.md',
   'docs/128_v5_1_runtime_delivery_surface.md',
   'docs/129_v5_2_adapter_delivery_surface.md',
+  'docs/130_v5_3_review_console_adapter_handoff.md',
   'scripts/validate-agent-image-lab-local.ps1',
   'scripts/validate-agent-image-lab-local.sh',
   'scripts/validate_agent_board_state.js',
@@ -1932,6 +1941,7 @@ $allowedV46UntrackedFiles = @(
   'scripts/validate_local_tag_push_readiness.js',
   'scripts/validate_v5_delivery_readiness.js',
   'scripts/validate_adapter_delivery_surface.js',
+  'scripts/validate_review_console_adapter_handoff.js',
   'scripts/validate_runtime_delivery_surface.js',
   'scripts/validate_runtime_guard_unit.js',
   'scripts/validate_runtime_prototype_suite.js',
@@ -1947,7 +1957,8 @@ $allowedV46UntrackedFiles = @(
   'tests/schema_examples/v4_9_local_tag_push_readiness.example.yaml',
   'tests/schema_examples/v5_0_delivery_readiness.example.yaml',
   'tests/schema_examples/v5_1_runtime_delivery_surface.example.yaml',
-  'tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml'
+  'tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml',
+  'tests/schema_examples/v5_3_review_console_adapter_handoff.example.yaml'
 )
 
 foreach ($path in $v46LocalCommitScopeManifestFiles) {
@@ -2426,6 +2437,93 @@ foreach ($path in $v52AdapterDeliverySurfaceFiles) {
   }
 }
 
+$v53ReviewConsoleAdapterHandoffFiles = @(
+  'docs/130_v5_3_review_console_adapter_handoff.md',
+  'tests/schema_examples/v5_3_review_console_adapter_handoff.example.yaml'
+)
+
+$requiredV53ReviewConsoleAdapterHandoffPatterns = @(
+  'status:\s+completed_validated_project_local_v5_3_review_console_adapter_handoff',
+  'version:\s+v5\.3',
+  'validation_file:\s+scripts/validate_review_console_adapter_handoff\.js',
+  'static_handoff_fixture_present:\s+true',
+  'adapter_fixture_compared:\s+true',
+  'accepted_draft_status_verified:\s+true',
+  'dispatch_plan_mapped:\s+true',
+  'gatekeeper_handoff_mapped:\s+true',
+  'review_console_handoff_mapped:\s+true',
+  'audit_record_mapped:\s+true',
+  'no_execution_guard_verified:\s+true',
+  'allowed_actions_verified:\s+true',
+  'forbidden_actions_verified:\s+true',
+  'static_app_draft_output_current:\s+true',
+  'field_mapping_current:\s+true',
+  'external_network_required:\s+false',
+  'external_service_required:\s+false',
+  'file_write_performed:\s+false',
+  'real_vcpchat_source_read:\s+false',
+  'real_vcpchat_modified:\s+false',
+  'real_vcptoolbox_source_read:\s+false',
+  'real_vcptoolbox_modified:\s+false',
+  'real_manifest_read:\s+false',
+  'api_called:\s+false',
+  'vcp_plugin_called:\s+false',
+  'daily_note_called:\s+false',
+  'vcp_memory_written:\s+false',
+  'image_file_created:\s+false',
+  'commit_tag_push_authorized:\s+false'
+)
+
+$forbiddenV53ReviewConsoleAdapterHandoffPatterns = @(
+  'static_handoff_fixture_present:\s+false',
+  'adapter_fixture_compared:\s+false',
+  'accepted_draft_status_verified:\s+false',
+  'dispatch_plan_mapped:\s+false',
+  'gatekeeper_handoff_mapped:\s+false',
+  'review_console_handoff_mapped:\s+false',
+  'audit_record_mapped:\s+false',
+  'no_execution_guard_verified:\s+false',
+  'allowed_actions_verified:\s+false',
+  'forbidden_actions_verified:\s+false',
+  'static_app_draft_output_current:\s+false',
+  'field_mapping_current:\s+false',
+  'external_network_required:\s+true',
+  'external_service_required:\s+true',
+  'file_write_performed:\s+true',
+  'real_vcpchat_source_read:\s+true',
+  'real_vcpchat_modified:\s+true',
+  'real_vcptoolbox_source_read:\s+true',
+  'real_vcptoolbox_modified:\s+true',
+  'real_manifest_read:\s+true',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'vcp_memory_written:\s+true',
+  'image_file_created:\s+true',
+  'commit_tag_push_authorized:\s+true',
+  'https?://'
+)
+
+foreach ($path in $v53ReviewConsoleAdapterHandoffFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v5.3 Review Console Adapter handoff file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV53ReviewConsoleAdapterHandoffPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v5.3 Review Console Adapter handoff missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV53ReviewConsoleAdapterHandoffPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v5.3 Review Console Adapter handoff boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
 $node = Get-Command node -ErrorAction SilentlyContinue
 if (-not $node) {
   Add-Failure "Node.js is required to validate adapter_dry_run_lab"
@@ -2601,6 +2699,11 @@ if (-not $node) {
   & node --check (Join-Path $Root 'scripts/validate_adapter_delivery_surface.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_adapter_delivery_surface.js failed node --check"
+  }
+
+  & node --check (Join-Path $Root 'scripts/validate_review_console_adapter_handoff.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_review_console_adapter_handoff.js failed node --check"
   }
 
   & node --check (Join-Path $Root 'scripts/validate_agent_board_state.js') | Out-Null
@@ -2919,6 +3022,43 @@ if (-not $node) {
     }
     if ($adapterDeliverySurface.adapter_delivery_surface.file_write_performed -ne $false) {
       Add-Failure "adapter delivery surface validation must not write files"
+    }
+  }
+
+  $reviewConsoleAdapterHandoffOutput = & node (Join-Path $Root 'scripts/validate_review_console_adapter_handoff.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console Adapter handoff validation exited with failure"
+  } else {
+    $reviewConsoleAdapterHandoff = ($reviewConsoleAdapterHandoffOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleAdapterHandoff.passed -ne $true) {
+      Add-Failure "Review Console Adapter handoff validation must report passed true"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.static_handoff_fixture_present -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify static handoff fixture"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.adapter_fixture_compared -ne $true) {
+      Add-Failure "Review Console Adapter handoff must compare Adapter fixture"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.accepted_draft_status_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify accepted_draft status"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.dispatch_plan_mapped -ne $true) {
+      Add-Failure "Review Console Adapter handoff must map dispatch plan"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.gatekeeper_handoff_mapped -ne $true) {
+      Add-Failure "Review Console Adapter handoff must map Gatekeeper handoff"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.review_console_handoff_mapped -ne $true) {
+      Add-Failure "Review Console Adapter handoff must map Review Console handoff"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.no_execution_guard_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify no-execution guard"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.forbidden_actions_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify forbidden actions"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.file_write_performed -ne $false) {
+      Add-Failure "Review Console Adapter handoff validation must not write files"
     }
   }
 

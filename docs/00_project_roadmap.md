@@ -18,7 +18,7 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v5.2 adapter delivery surface validation
+v1.0 true-loop closeout candidate + v5.3 review console adapter handoff validation
 ```
 
 已经完成：
@@ -55,6 +55,7 @@ v1.0 true-loop closeout candidate + v5.2 adapter delivery surface validation
 - v5.0 post-merge delivery readiness index：记录 PR #1 已合并、本地 `master` 已同步到 `origin/master`，并把交付验收入口机器可查化。
 - v5.1 runtime delivery surface validation：机器检查 Review Console runtime prototype 的本地交付面、脚本顺序、DOM surface、host ack 和无外部副作用边界。
 - v5.2 adapter delivery surface validation：机器检查 Adapter dry-run lab 和 VCPToolBox 导出级 dry-run 包的 manifest、stdio、fixture、README 边界和 no-execution guard。
+- v5.3 review console adapter handoff validation：机器检查 Adapter dry-run accepted fixture 能以 no-execution handoff 草案进入 Review Console static prototype。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：

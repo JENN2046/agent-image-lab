@@ -48,6 +48,7 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Added v5.0 post-merge delivery readiness index.
 - Added v5.1 runtime delivery surface validation.
 - Added v5.2 adapter delivery surface validation.
+- Added v5.3 Review Console Adapter handoff validation.
 
 ## Safety Status
 

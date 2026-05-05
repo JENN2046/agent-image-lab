@@ -53,7 +53,7 @@ none
 ### todo
 
 ```text
-1. If user authorizes v5.2 version movement, run commit/PR/release preflight with exact scope.
+1. If user authorizes v5.3 version movement, run commit/PR/release preflight with exact scope.
 2. If user asks for release movement, request explicit commit/tag/push scope and run preflight.
 3. Keep Adapter and Review Console work in no-execution / no-external-read mode.
 4. Update CHECKPOINT.md, RUN_STATE.md, VALIDATION_LOG.md, and HANDOFF.md after each meaningful batch.
@@ -76,6 +76,7 @@ none
 12. Completed v5.0 post-merge delivery readiness validation.
 13. Completed v5.1 runtime delivery surface validation.
 14. Completed v5.2 adapter delivery surface validation.
+15. Completed v5.3 Review Console Adapter handoff validation.
 ```
 
 ### blocked
