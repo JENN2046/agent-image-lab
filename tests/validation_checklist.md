@@ -670,3 +670,20 @@
 - [ ] `allowed_source_files=[]` 时，任何真实 VCPChat 源码读取都必须保持 forbidden。
 - [ ] `user_authorized=true` 也不得自动授权真实 VCPChat 修改、真实 IPC handler 创建、插件执行、API 调用或 DailyNote 写入。
 - [ ] 审计摘要、拒绝原因、memory_delta 草案正文必须为中文脱敏内容。
+
+## v2.1 VCPChat Source Scope Review 检查
+
+- [ ] `docs/82_v2_1_vcpchat_source_scope_review.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_source_scope_review_contract.md` 存在。
+- [ ] `tests/schema_examples/v2_1_vcpchat_source_scope_review.example.yaml` 存在。
+- [ ] v2.1 source scope review 只规划未来候选源码类别，不读取真实 VCPChat 源码。
+- [ ] v2.1 source scope review 不列真实 VCPChat 本地路径，不复制 raw source。
+- [ ] v2.1 source scope review 不修改真实 VCPChat 或 VCPToolBox。
+- [ ] v2.1 source scope review 不创建真实 IPC handler、preload 执行代码或执行入口。
+- [ ] 候选类别只能使用 `review_console_child_window_candidate`、`ipc_handler_candidate`、`preload_boundary_candidate`、`window_lifecycle_candidate`、`schema_bridge_candidate` 等占位类别。
+- [ ] 样例保持 `user_authorized=false`、`source_read_performed=false`、`real_vcpchat_source_read=false`、`real_vcpchat_modified=false`。
+- [ ] 样例保持 `exact_real_paths_listed=false`、`exact_real_paths=[]`、`raw_source_copy_allowed=false`、`selected_source_categories=[]`。
+- [ ] 样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`real_execution_allowed=false`。
+- [ ] 样例不包含真实本地路径、真实源码片段、endpoint 原文、环境变量值、secret、token、cookie、密码、客户隐私、raw runtime log、raw IPC payload 或图片二进制。
+- [ ] 允许输出字段只能是中文脱敏摘要字段，不允许 raw source、真实路径或敏感原文。
+- [ ] scope review 不得被解释为真实 VCPChat 读取、修改、IPC handler 创建、插件调用、API 调用或 DailyNote 写入授权。

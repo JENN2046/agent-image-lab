@@ -1,0 +1,125 @@
+phase: v2.1_vcpchat_source_scope_review
+record_id: v2-1-vcpchat-source-scope-review-001
+project: Agent Image Lab
+status: scope_review_plan_only
+
+scope_review:
+  scope_review_id: v2-1-source-scope-review-placeholder-001
+  authorization_required: true
+  user_authorized: false
+  source_read_performed: false
+  real_vcpchat_source_read: false
+  real_vcpchat_modified: false
+  real_vcptoolbox_source_read: false
+  real_vcptoolbox_modified: false
+  exact_real_paths_listed: false
+  exact_real_paths: []
+  raw_source_copy_allowed: false
+  reviewer_required: true
+  approval_status: pending
+
+candidate_source_categories:
+  review_console_child_window_candidate:
+    allowed_now: false
+    future_read_purpose_cn: "未来用于审查 Review Console 子窗口承载边界。"
+  ipc_handler_candidate:
+    allowed_now: false
+    future_read_purpose_cn: "未来用于审查 IPC channel 注册、sender 校验和 allowlist。"
+  preload_boundary_candidate:
+    allowed_now: false
+    future_read_purpose_cn: "未来用于审查 preload API allowlist 和禁止能力。"
+  window_lifecycle_candidate:
+    allowed_now: false
+    future_read_purpose_cn: "未来用于审查窗口生命周期、来源校验和隔离配置。"
+  schema_bridge_candidate:
+    allowed_now: false
+    future_read_purpose_cn: "未来用于审查 host payload 与 review_session draft 的 schema 校验衔接。"
+
+selected_source_categories: []
+
+allowed_sanitized_output_fields:
+  - sanitized_module_purpose_cn
+  - sanitized_window_lifecycle_summary_cn
+  - sanitized_ipc_channel_summary_cn
+  - sanitized_preload_boundary_summary_cn
+  - sanitized_schema_validation_summary_cn
+  - sanitized_security_risk_notes_cn
+  - sanitized_required_change_summary_cn
+
+forbidden_outputs:
+  - raw_source_code
+  - real_local_path
+  - endpoint_raw_value
+  - env_value
+  - secret_raw_value
+  - private_path_raw_value
+  - customer_private_data
+  - raw_runtime_log
+  - raw_ipc_payload
+  - raw_plugin_output
+  - image_binary
+
+safety_gate:
+  contains_real_local_path: false
+  contains_raw_source_code: false
+  contains_endpoint_raw_value: false
+  contains_env_value: false
+  contains_secret_raw_value: false
+  contains_private_path_raw_value: false
+  contains_customer_private_data: false
+  contains_raw_runtime_log: false
+  contains_raw_ipc_payload: false
+  contains_raw_plugin_output: false
+  contains_image_binary: false
+  sensitive_summary_cn: "本范围审查样例只登记未来候选源码类别，不读取真实源码，不列真实路径。"
+
+no_execution_guard:
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  execution_entry_created: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  file_write_performed: false
+  disk_write_performed: false
+  image_file_created: false
+  selected_plugin: null
+  max_plugin_calls: 0
+  real_manifest_read: false
+  real_execution_allowed: false
+
+memory_delta_draft:
+  write_mode: audit_only
+  approval_status: not_required
+  chinese_audit_summary_cn: "本记录只保留 VCPChat 源码读取范围审查的中文脱敏摘要，不进入 DailyNote 写入。"
+  preserved_original_allowed: false
+  final_decision:
+    should_write_to_vcp: false
+
+next_state_rules:
+  current_state: pending_source_scope_review
+  next_allowed_state: pending_real_vcpchat_read_preflight
+  blocked_states:
+    - source_read_performed
+    - real_vcpchat_source_read
+    - exact_real_paths_listed
+    - raw_source_copied
+    - vcpchat_modified
+    - ipc_handler_created
+    - real_execution_ready
+
+audit_summary_cn: "v2.1 Patch 03 只规划未来源码读取类别，不读取真实 VCPChat，不列真实路径，不创建执行能力。"
+
+acceptance_assertions:
+  - "user_authorized=false。"
+  - "source_read_performed=false。"
+  - "real_vcpchat_source_read=false。"
+  - "real_vcpchat_modified=false。"
+  - "exact_real_paths_listed=false。"
+  - "exact_real_paths=[]。"
+  - "raw_source_copy_allowed=false。"
+  - "selected_source_categories=[]。"
+  - "api_called=false。"
+  - "vcp_plugin_called=false。"
+  - "daily_note_called=false。"
+  - "real_execution_allowed=false。"
