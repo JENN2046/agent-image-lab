@@ -556,6 +556,20 @@
 - [ ] Review Console 只能生成候选审批草案或授权请求，不触发读取、执行或写入。
 - [ ] `tested` 不等于真实执行授权。
 
+## v1.5 Task Panel Status Backbone 检查
+
+- [ ] `task_panel/task_panel_product_spec.md` 存在。
+- [ ] `task_panel/task_panel_state.schema.yaml` 存在。
+- [ ] `task_panel/task_panel_state_mapping.md` 存在。
+- [ ] `tests/schema_examples/v1_5_task_panel_state.example.yaml` 存在。
+- [ ] Task Panel 只展示状态和下一授权点，不实现 UI。
+- [ ] Task Panel 状态覆盖 `task_status`、`dispatch_status`、`review_status`、`memory_status`、`asset_status`、`plugin_candidate_status`、`gatekeeper_status` 和 `next_authorization_point`。
+- [ ] `no_execution_guard` 保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`file_write_performed=false`、`image_file_created=false`、`real_manifest_read=false`、`real_execution_allowed=false`、`max_plugin_calls=0`。
+- [ ] `selected_plugin=null`，不得自动选择真实插件。
+- [ ] `daily_note_write_authorized=false`，不得把写入申请解释为已写入 DailyNote。
+- [ ] `image_binary_saved=false`，不得保存图片二进制。
+- [ ] 下一授权点必须写明授权名称、原因、授权前条件、授权后允许动作和当前禁止动作。
+
 ## v2.0 Productization Plan 检查
 
 - [ ] `docs/50_v2_0_productization_plan.md` 存在。

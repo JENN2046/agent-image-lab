@@ -1,0 +1,119 @@
+phase: v1.5_task_panel_status_backbone
+record_id: panel-state-v1-5-001
+project: Agent Image Lab
+status: draft
+
+task_panel_state:
+  panel_id: panel-state-v1-5-001
+  project: Agent Image Lab
+  phase: v1.5_task_panel_status_backbone
+  generated_at: "2026-05-05T11:20:00+08:00"
+  generated_by: Task_Panel_Status_Backbone
+  status: review_ready
+
+  task_status:
+    task_id: ail-v1-2-runtime-prototype-001
+    case_id: case-v1-2-runtime-prototype-001
+    task_goal_cn: "汇总 Review Console runtime prototype、记忆交接和多插件候选状态，明确下一授权点。"
+    source_agent: ImageLab_Master
+    current_owner: Task_Panel_Status_Backbone
+    current_step: v1.5_task_panel_status_backbone
+
+  dispatch_status:
+    dispatch_plan_id: dispatch-plan-placeholder-v1-5-001
+    dry_run_required: true
+    execution_blocked: true
+    external_api_allowed: false
+    max_plugin_calls: 0
+    approval_required: true
+    forbidden_actions:
+      - execute_plugin
+      - call_api
+      - write_daily_note
+      - write_file
+      - create_image_file
+      - read_manifest_without_authorization
+
+  review_status:
+    review_session_id: session-v1-2-runtime-prototype-001
+    ai_review_available: true
+    human_review_available: true
+    final_review_source: human_review
+    human_review_overrides_ai: true
+    accepted_requires_human_approval: true
+    review_summary_cn: "Review Console runtime prototype 已能输出草案，AI 评分只作为建议，最终评审优先使用人工评分。"
+
+  memory_status:
+    memory_delta_id: memory-delta-v1-3-001
+    write_mode: confirmed
+    approval_status: approved
+    should_write_to_vcp: true
+    daily_note_write_authorized: false
+    daily_note_called: false
+    archivist_review_required: true
+    imagelab_master_review_required: true
+    memory_summary_cn: "记忆写入申请已形成，但 DailyNote 写入尚未授权，仍需 Archivist_Agent 和 ImageLab_Master 复查。"
+
+  asset_status:
+    asset_ref: runs/photo_studio_os_v0_10_doubao_retry/image/doubaogen/accepted-image.placeholder
+    asset_sha256: null
+    asset_state: candidate
+    human_approval:
+      approved: false
+      approved_by: null
+      approved_at: null
+    image_binary_saved: false
+    asset_summary_cn: "当前只保留资产占位引用，不保存图片二进制。"
+
+  plugin_candidate_status:
+    candidate_count: 2
+    selected_plugin: null
+    manifest_authorized_count: 0
+    manifest_read_count: 0
+    current_state: pending_manifest_review
+    real_execution_allowed: false
+    candidate_summary_cn: "多插件候选仍处于待授权 manifest 审查状态，没有选择真实插件。"
+
+  gatekeeper_status:
+    risk_level: medium
+    risk_summary_cn: "后续如需读取真实 manifest、写 DailyNote 或执行插件，都必须进入独立授权点。"
+    execution_blocked: true
+    review_required: true
+    blocker_cn: "当前只允许状态展示，不允许真实外部副作用。"
+
+  next_authorization_point:
+    authorization_required: true
+    authorization_name: v1.6_asset_index_and_embed_readiness_plan
+    authorization_reason_cn: "下一阶段需要规划资产索引和 Review Console 嵌入前安全边界。"
+    required_before_cn:
+      - "确认 v1.5 状态骨架通过 no-execution 验收。"
+      - "确认不修改真实 VCPChat 或 VCPToolBox。"
+      - "确认不保存图片二进制。"
+    allowed_after_authorization_cn:
+      - "新增资产索引 schema 草案。"
+      - "新增 Review Console 嵌入前边界 contract。"
+      - "补充只读验收清单。"
+    forbidden_now_cn:
+      - "不得调用插件。"
+      - "不得调用 API。"
+      - "不得调用 DailyNote。"
+      - "不得读取真实 manifest。"
+      - "不得创建图片文件。"
+
+  no_execution_guard:
+    api_called: false
+    vcp_plugin_called: false
+    daily_note_called: false
+    file_write_performed: false
+    image_file_created: false
+    real_manifest_read: false
+    real_execution_allowed: false
+    max_plugin_calls: 0
+
+acceptance_assertions:
+  - "Task Panel 只展示状态和下一授权点。"
+  - "selected_plugin 保持 null。"
+  - "max_plugin_calls 保持 0。"
+  - "DailyNote 尚未授权写入。"
+  - "资产只保存路径引用或占位引用，不保存图片二进制。"
+  - "所有状态摘要均为中文脱敏说明。"

@@ -1,0 +1,103 @@
+# task_panel_state.schema.yaml
+# v1.5 Task Panel 状态骨架：只描述状态展示，不授权真实执行
+task_panel_state:
+  panel_id: string                # 任务面板状态 ID
+  project: string                 # 项目名
+  phase: string                   # 当前阶段
+  generated_at: string            # 状态草案生成时间
+  generated_by: string            # 生成者或来源模块
+  status: draft | review_ready | blocked | complete_candidate # 面板状态
+
+  task_status:
+    task_id: string               # 关联 task_envelope
+    case_id: string | null        # 关联 image_case
+    task_goal_cn: string          # 用户目标中文摘要
+    source_agent: string          # 来源 Agent
+    current_owner: string         # 当前负责人或模块
+    current_step: string          # 当前步骤
+
+  dispatch_status:
+    dispatch_plan_id: string | null # 关联 dispatch_plan
+    dry_run_required: boolean     # 是否必须 dry-run
+    execution_blocked: boolean    # 是否阻止真实执行
+    external_api_allowed: boolean # 是否允许外部 API
+    max_plugin_calls: number      # 最大插件调用次数
+    approval_required: boolean    # 是否需要审批
+    forbidden_actions:
+      - string                    # 禁止动作列表
+
+  review_status:
+    review_session_id: string | null # 关联 review_session
+    ai_review_available: boolean  # 是否有 AI 评分
+    human_review_available: boolean # 是否有人工评分
+    final_review_source: ai_review | human_review | none # 最终评分来源
+    human_review_overrides_ai: boolean # 人工评分是否覆盖 AI
+    accepted_requires_human_approval: boolean # accepted 是否需要人工批准
+    review_summary_cn: string     # 中文评审摘要
+
+  memory_status:
+    memory_delta_id: string | null # 关联 memory_delta
+    write_mode: draft | confirmed | audit_only | forbidden | none # 记忆写入模式
+    approval_status: not_required | pending | approved | rejected | none # 审批状态
+    should_write_to_vcp: boolean  # 是否是写入申请
+    daily_note_write_authorized: boolean # 是否已授权 DailyNote 写入
+    daily_note_called: boolean    # 是否已调用 DailyNote
+    archivist_review_required: boolean # 是否需要 Archivist_Agent
+    imagelab_master_review_required: boolean # 是否需要 ImageLab_Master
+    memory_summary_cn: string     # 中文记忆状态摘要
+
+  asset_status:
+    asset_ref: string | null      # 资产路径引用或占位
+    asset_sha256: string | null   # 资产哈希，可为空
+    asset_state: draft | candidate | accepted | rejected | none # 资产状态
+    human_approval:
+      approved: boolean           # 是否人工批准
+      approved_by: string | null  # 审批人
+      approved_at: string | null  # 审批时间
+    image_binary_saved: boolean   # 是否保存图片二进制
+    asset_summary_cn: string      # 中文资产摘要
+
+  plugin_candidate_status:
+    candidate_count: number       # 候选数量
+    selected_plugin: null | string # 当前选择插件，no-execution 下必须为空
+    manifest_authorized_count: number # 已授权 manifest 数量
+    manifest_read_count: number   # 已读取 manifest 数量
+    current_state: discovered | pending_manifest_review | manifest_reviewed_safe | dry_run_planned | dry_run_checked | real_execution_authorization_required | tested | none
+    real_execution_allowed: boolean # 是否允许真实执行
+    candidate_summary_cn: string  # 中文候选摘要
+
+  gatekeeper_status:
+    risk_level: low | medium | high | blocked | unknown # 风险等级
+    risk_summary_cn: string       # 中文风险摘要
+    execution_blocked: boolean    # 是否阻止执行
+    review_required: boolean      # 是否需要 Gatekeeper 复查
+    blocker_cn: string | null     # 中文阻断原因
+
+  next_authorization_point:
+    authorization_required: boolean # 是否需要下一授权
+    authorization_name: string    # 授权点名称
+    authorization_reason_cn: string # 中文原因
+    required_before_cn:
+      - string                    # 授权前条件
+    allowed_after_authorization_cn:
+      - string                    # 授权后允许动作
+    forbidden_now_cn:
+      - string                    # 当前禁止动作
+
+  no_execution_guard:
+    api_called: boolean
+    vcp_plugin_called: boolean
+    daily_note_called: boolean
+    file_write_performed: boolean
+    image_file_created: boolean
+    real_manifest_read: boolean
+    real_execution_allowed: boolean
+    max_plugin_calls: number
+
+  invariants:
+    - Task Panel 只能展示状态和下一授权点，不触发真实执行。
+    - no_execution_guard 必须保持无插件、无 API、无 DailyNote、无图片创建。
+    - selected_plugin 在未授权执行前必须为 null。
+    - accepted 必须有人工作为批准来源。
+    - daily_note_called 只能在未来独立授权后改变。
+    - 不得保存密钥、token、cookie、密码、endpoint 原文、私密路径、客户隐私、raw manifest 或 raw 插件输出。
