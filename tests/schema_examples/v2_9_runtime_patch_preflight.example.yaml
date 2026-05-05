@@ -1,0 +1,178 @@
+phase: v2.9_runtime_patch_preflight
+record_id: v2-9-runtime-patch-preflight-001
+project: Agent Image Lab
+status: runtime_patch_preflight_template_only
+
+runtime_patch_preflight:
+  preflight_id: v2-9-runtime-patch-preflight-placeholder-001
+  task_authorization_id: v2-8-runtime-implementation-task_authorization-placeholder-001
+  runtime_patch_preflight_required: true
+  runtime_patch_preflight_requested: false
+  runtime_patch_preflight_passed: false
+  preflight_reviewer: null
+  preflight_reviewed_at: null
+  authorization_status: pending_runtime_patch_preflight
+
+task_authorization_state:
+  runtime_implementation_task_authorization_exists: true
+  runtime_implementation_task_authorization_required: true
+  runtime_implementation_task_authorization_requested: false
+  runtime_implementation_task_authorization_granted: false
+  runtime_implementation_planning_approved: false
+  authorized_task_id: null
+  authorized_file_scope_ref: null
+  authorized_rollback_plan_ref: null
+  authorized_validation_plan_ref: null
+
+preflight_readiness:
+  file_scope_ready: false
+  rollback_plan_ready: false
+  validation_plan_ready: false
+  electron_boundary_ready: false
+  stop_conditions_ready: false
+  allowed_modify_files_ready: false
+  allowed_create_files_ready: false
+  forbidden_files_ready: false
+  allowed_ipc_channels_ready: false
+  preload_allowlist_ready: false
+  renderer_entry_points_ready: false
+
+authorization_state:
+  implementation_patch_authorized: false
+  ipc_handler_creation_authorized: false
+  preload_runtime_creation_authorized: false
+  renderer_runtime_creation_authorized: false
+  real_vcpchat_modification_authorized: false
+  daily_note_write_authorized: false
+  vcp_memory_write_authorized: false
+  asset_write_authorized: false
+
+electron_boundary_requirements:
+  context_isolation_required: true
+  node_integration_allowed: false
+  preload_allowlist_required: true
+  ipc_sender_validation_required: true
+  ipc_channel_allowlist_required: true
+  payload_schema_validation_required: true
+  renderer_direct_filesystem_access_allowed: false
+  renderer_direct_network_access_allowed: false
+  renderer_direct_daily_note_access_allowed: false
+  renderer_direct_plugin_access_allowed: false
+
+preflight_rules:
+  preflight_pass_is_code_authorization: false
+  preflight_pass_writes_code: false
+  implementation_patch_authorization_writes_code: false
+  preflight_fills_missing_scope: false
+  preflight_expands_task_scope: false
+  preflight_runs_validation_commands: false
+  preflight_calls_plugins: false
+  preflight_writes_daily_note: false
+  preflight_writes_vcp_memory: false
+  preflight_creates_image_file: false
+  direct_runtime_implementation_allowed: false
+
+forbidden_preflight_content:
+  - real_local_path
+  - raw_allowlist_path
+  - raw_read_command
+  - shell_command_text
+  - raw_source_code
+  - complete_function_body
+  - endpoint_raw_value
+  - env_value
+  - secret_raw_value
+  - private_path_raw_value
+  - customer_private_data
+  - raw_runtime_log
+  - raw_ipc_payload
+  - raw_plugin_output
+  - image_binary
+
+safety_gate:
+  contains_real_local_path: false
+  contains_raw_allowlist_path: false
+  contains_raw_read_command: false
+  contains_raw_source_code: false
+  contains_complete_function_body: false
+  contains_endpoint_raw_value: false
+  contains_env_value: false
+  contains_secret_raw_value: false
+  contains_private_path_raw_value: false
+  contains_customer_private_data: false
+  contains_raw_runtime_log: false
+  contains_raw_ipc_payload: false
+  contains_raw_plugin_output: false
+  contains_image_binary: false
+  sensitive_summary_cn: "本 runtime patch preflight 样例不包含真实路径、读取命令、源码原文或真实证据，只定义未来 implementation patch 前的最后 preflight 门槛。"
+
+no_execution_guard:
+  real_vcpchat_source_read: false
+  real_vcpchat_modified: false
+  real_vcptoolbox_source_read: false
+  real_vcptoolbox_modified: false
+  implementation_code_created: false
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  renderer_runtime_code_created: false
+  execution_entry_created: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  file_write_performed: false
+  disk_write_performed: false
+  image_file_created: false
+  selected_plugin: null
+  max_plugin_calls: 0
+  real_manifest_read: false
+  real_execution_allowed: false
+
+memory_delta_draft:
+  write_mode: audit_only
+  approval_status: not_required
+  chinese_audit_summary_cn: "Runtime patch preflight 仍停留在模板，未请求 preflight，未授权实现 patch，也未写 DailyNote 或 VCP 记忆。"
+  preserved_original_allowed: false
+  final_decision:
+    should_write_to_vcp: false
+
+next_state_rules:
+  current_state: waiting_for_runtime_patch_preflight
+  next_allowed_state: waiting_for_v2_9_closeout_or_v3_0_first_runtime_patch_authorization
+  blocked_states:
+    - runtime_patch_preflight_requested
+    - runtime_patch_preflight_passed
+    - implementation_patch_authorized
+    - ipc_handler_creation_authorized
+    - preload_runtime_creation_authorized
+    - renderer_runtime_creation_authorized
+    - real_vcpchat_modification_authorized
+    - ipc_handler_created
+    - preload_runtime_code_created
+    - renderer_runtime_code_created
+    - daily_note_called
+    - vcp_memory_written
+    - real_execution_ready
+
+audit_summary_cn: "v2.9 Plan 01 只补齐 runtime patch preflight，不读取真实 VCPChat，不创建运行时代码。"
+
+acceptance_assertions:
+  - "runtime_patch_preflight_required=true。"
+  - "runtime_patch_preflight_requested=false。"
+  - "runtime_patch_preflight_passed=false。"
+  - "runtime_implementation_task_authorization_granted=false。"
+  - "authorized_task_id=null。"
+  - "authorized_file_scope_ref=null。"
+  - "authorized_rollback_plan_ref=null。"
+  - "authorized_validation_plan_ref=null。"
+  - "file_scope_ready=false。"
+  - "rollback_plan_ready=false。"
+  - "validation_plan_ready=false。"
+  - "electron_boundary_ready=false。"
+  - "stop_conditions_ready=false。"
+  - "implementation_patch_authorized=false。"
+  - "real_execution_allowed=false。"
+  - "api_called=false。"
+  - "vcp_plugin_called=false。"
+  - "daily_note_called=false。"
+

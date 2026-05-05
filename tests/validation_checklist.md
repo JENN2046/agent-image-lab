@@ -1370,3 +1370,38 @@
 - [ ] 样例保持 `selected_plugin=null`、`max_plugin_calls=0`、`real_manifest_read=false`。
 - [ ] 样例不包含真实本地路径、真实读取命令、shell 命令文本、真实源码片段、完整函数体、endpoint 原文、环境变量值、secret、token、cookie、密码、客户隐私、raw runtime log、raw IPC payload、raw plugin output 或图片二进制。
 - [ ] runtime implementation task authorization 完成也只允许进入下一独立 closeout 或 v2.9 runtime patch preflight，不得自动触发实现、DailyNote、VCP 记忆或资产写入。
+
+## v2.9 Runtime Patch Preflight 检查
+
+- [ ] `docs/106_v2_9_runtime_patch_preflight.md` 存在。
+- [ ] `review_console/embed_contract/runtime_patch_preflight.md` 存在。
+- [ ] `tests/schema_examples/v2_9_runtime_patch_preflight.example.yaml` 存在。
+- [ ] runtime patch preflight 只定义真正写代码前的最后 preflight，不读取真实 VCPChat 源码。
+- [ ] runtime patch preflight 不读取真实 VCPToolBox。
+- [ ] runtime patch preflight 不保存真实根目录、真实 allowlist 路径、真实读取命令或 raw source。
+- [ ] runtime patch preflight 不填真实路径，不填真实文件名。
+- [ ] runtime patch preflight 不保存 raw evidence、raw runtime log、raw IPC payload 或 raw plugin output。
+- [ ] runtime patch preflight 不修改真实 VCPChat 或 VCPToolBox。
+- [ ] runtime patch preflight 不创建真实 IPC handler、preload、renderer runtime、Adapter 执行入口或其他执行代码。
+- [ ] runtime patch preflight 不调用插件、API、DailyNote、VCP 记忆或文件系统写入。
+- [ ] 样例保持 `runtime_patch_preflight_required=true`、`runtime_patch_preflight_requested=false`。
+- [ ] 样例保持 `runtime_patch_preflight_passed=false`。
+- [ ] 样例保持 `runtime_implementation_task_authorization_granted=false`。
+- [ ] 样例保持 `authorized_task_id=null`、`authorized_file_scope_ref=null`。
+- [ ] 样例保持 `authorized_rollback_plan_ref=null`、`authorized_validation_plan_ref=null`。
+- [ ] 样例保持 `file_scope_ready=false`、`rollback_plan_ready=false`、`validation_plan_ready=false`。
+- [ ] 样例保持 `electron_boundary_ready=false`、`stop_conditions_ready=false`。
+- [ ] 样例保持 `implementation_patch_authorized=false`。
+- [ ] 样例保持 `ipc_handler_creation_authorized=false`、`preload_runtime_creation_authorized=false`、`renderer_runtime_creation_authorized=false`。
+- [ ] 样例保持 `real_vcpchat_modification_authorized=false`。
+- [ ] 样例保持 `preflight_pass_is_code_authorization=false`、`preflight_pass_writes_code=false`。
+- [ ] 样例保持 `implementation_patch_authorization_writes_code=false`、`preflight_expands_task_scope=false`。
+- [ ] 样例保持 `preflight_calls_plugins=false`、`preflight_writes_daily_note=false`、`preflight_writes_vcp_memory=false`。
+- [ ] 样例保持 `real_vcpchat_source_read=false`、`real_vcpchat_modified=false`。
+- [ ] 样例保持 `real_vcptoolbox_source_read=false`、`real_vcptoolbox_modified=false`。
+- [ ] 样例保持 `implementation_code_created=false`、`ipc_handler_created=false`、`preload_runtime_code_created=false`、`renderer_runtime_code_created=false`、`execution_entry_created=false`。
+- [ ] 样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`real_execution_allowed=false`。
+- [ ] 样例保持 `image_file_created=false`、`file_write_performed=false`、`disk_write_performed=false`。
+- [ ] 样例保持 `selected_plugin=null`、`max_plugin_calls=0`、`real_manifest_read=false`。
+- [ ] 样例不包含真实本地路径、真实读取命令、shell 命令文本、真实源码片段、完整函数体、endpoint 原文、环境变量值、secret、token、cookie、密码、客户隐私、raw runtime log、raw IPC payload、raw plugin output 或图片二进制。
+- [ ] runtime patch preflight 完成也只允许进入下一独立 closeout 或 v3.0 first runtime patch authorization，不得自动触发实现、DailyNote、VCP 记忆或资产写入。
