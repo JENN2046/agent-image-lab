@@ -985,3 +985,39 @@
 - [ ] 样例保持 `ipc_handler_created=false`、`preload_runtime_code_created=false`、`renderer_runtime_code_created=false`、`execution_entry_created=false`。
 - [ ] 样例不包含真实本地路径、真实读取命令、shell 命令文本、真实源码片段、完整函数体、endpoint 原文、环境变量值、secret、token、cookie、密码、客户隐私、raw runtime log、raw IPC payload、raw plugin output 或图片二进制。
 - [ ] 最终读取授权门通过也只允许进入下一独立真实读取执行授权点，不得自动触发真实 VCPChat 源码读取。
+
+## v2.4 Execute-once Manual Parameter Fill Checklist 检查
+
+- [ ] `docs/94_v2_4_execute_once_manual_parameter_fill_checklist.md` 存在。
+- [ ] `review_console/embed_contract/execute_once_manual_parameter_fill_checklist.md` 存在。
+- [ ] `tests/schema_examples/v2_4_execute_once_manual_parameter_fill_checklist.example.yaml` 存在。
+- [ ] execute-once manual parameter fill checklist 只定义真实 VCPChat 一次性读取执行前人工填参清单，不读取真实 VCPChat 源码。
+- [ ] execute-once manual parameter fill checklist 不读取真实 VCPToolBox。
+- [ ] execute-once manual parameter fill checklist 不保存真实 VCPChat 根目录、真实 allowlist 路径、真实读取命令或 raw source。
+- [ ] execute-once manual parameter fill checklist 不修改真实 VCPChat 或 VCPToolBox。
+- [ ] execute-once manual parameter fill checklist 不创建真实 IPC handler、preload、renderer、Adapter 执行入口或其他执行代码。
+- [ ] execute-once manual parameter fill checklist 不调用插件、API、DailyNote、VCP 记忆或文件系统写入。
+- [ ] 样例保持 `manual_parameter_fill_required=true`、`manual_parameter_fill_completed=false`。
+- [ ] 样例保持 `manual_parameter_review_passed=false`。
+- [ ] 样例保持 `real_vcpchat_root_supplied_outside_git=false`。
+- [ ] 样例保持 `allowed_read_paths_supplied_outside_git=false`。
+- [ ] 样例保持 `read_command_supplied_outside_git=false`。
+- [ ] 样例保持 `source_read_authorized=false`、`authorization_status=pending_manual_parameter_fill`。
+- [ ] 样例保持 `final_read_authorization_gate_requested=false`、`final_read_authorization_gate_passed=false`。
+- [ ] 样例保持 `execute_once_authorization_granted=false`、`command_binding_preflight_passed=false`。
+- [ ] 样例保持 `read_command_bound=false`、`read_command_executed=false`。
+- [ ] 样例保持 `read_attempt_limit=1`、`read_attempt_used=0`。
+- [ ] 样例保持 `exact_real_paths_stored_in_git=false`、`raw_read_command_stored_in_git=false`。
+- [ ] 样例保持 `git_storage_for_real_root_allowed=false`、`git_storage_for_real_allowlist_allowed=false`、`git_storage_for_raw_command_allowed=false`。
+- [ ] 样例保持 `human_parameter_owner=null`、`parameter_filled_at=null`、`parameter_reviewed_by=null`、`parameter_reviewed_at=null`。
+- [ ] 样例保持 `recursive_scan_allowed=false`、`config_read_allowed=false`、`log_read_allowed=false`、`credential_read_allowed=false`、`customer_data_read_allowed=false`。
+- [ ] 样例保持 `raw_source_output_allowed=false`、`real_path_output_allowed=false`、`file_write_allowed=false`、`vcpchat_launch_allowed=false`、`vcpchat_modification_allowed=false`。
+- [ ] 样例保持 `plugin_call_allowed=false`、`api_call_allowed=false`、`daily_note_call_allowed=false`、`vcp_memory_write_allowed=false`。
+- [ ] 样例保持 `direct_implementation_allowed=false`、`daily_note_write_allowed=false`、`vcp_memory_write_allowed=false`、`asset_write_allowed=false`。
+- [ ] 样例保持 `source_read_performed=false`、`real_vcpchat_source_read=false`。
+- [ ] 样例保持 `real_vcpchat_modified=false`、`real_vcptoolbox_source_read=false`、`real_vcptoolbox_modified=false`。
+- [ ] 样例保持 `raw_source_copy_allowed=false`、`raw_source_copied=false`。
+- [ ] 样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`real_execution_allowed=false`。
+- [ ] 样例保持 `ipc_handler_created=false`、`preload_runtime_code_created=false`、`renderer_runtime_code_created=false`、`execution_entry_created=false`。
+- [ ] 样例不包含真实本地路径、真实读取命令、shell 命令文本、真实源码片段、完整函数体、endpoint 原文、环境变量值、secret、token、cookie、密码、客户隐私、raw runtime log、raw IPC payload、raw plugin output 或图片二进制。
+- [ ] 人工填参清单完成也只允许进入下一独立参数复核门，不得自动触发真实 VCPChat 源码读取。
