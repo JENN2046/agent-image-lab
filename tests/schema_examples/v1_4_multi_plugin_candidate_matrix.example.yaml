@@ -1,0 +1,66 @@
+phase: v1.4_multi_plugin_candidate_evaluation
+record_id: multi-plugin-candidate-matrix-v1-4-001
+project: Agent Image Lab
+evaluation_mode: no_auto_execution
+
+state_flow:
+  - discovered
+  - pending_manifest_review
+  - manifest_reviewed_safe
+  - dry_run_planned
+  - dry_run_checked
+  - real_execution_authorization_required
+
+candidates:
+  - candidate_id: candidate-plugin-placeholder-001
+    display_name_summary_cn: "候选插件甲，显示名已脱敏。"
+    source_ref_redacted: "redacted-source-ref-001"
+    manifest_status: pending_manifest_review
+    dry_run_status: not_planned
+    real_execution_status: not_authorized
+    capability_summary_cn: "尚未读取真实 manifest，仅保留候选占位。"
+    permission_risk_cn: "需要后续 Gatekeeper 单独审查。"
+    gatekeeper_notes_cn: "未授权前不得读取真实 manifest。"
+  - candidate_id: candidate-plugin-placeholder-002
+    display_name_summary_cn: "候选插件乙，显示名已脱敏。"
+    source_ref_redacted: "redacted-source-ref-002"
+    manifest_status: discovered
+    dry_run_status: not_planned
+    real_execution_status: not_authorized
+    capability_summary_cn: "只记录发现状态，不推断真实能力。"
+    permission_risk_cn: "未知，需要授权后脱敏审查。"
+    gatekeeper_notes_cn: "不得批量读取真实 VCPToolBox 或 VCPChat。"
+
+review_console_actions:
+  allowed:
+    - mark_candidate
+    - reject_candidate
+    - request_manifest_authorization
+    - request_gatekeeper_review
+    - request_memory_edit
+  forbidden:
+    - execute_plugin
+    - call_api
+    - write_daily_note
+    - save_image
+    - read_manifest_without_authorization
+
+guards:
+  batch_vcptoolbox_read_performed: false
+  batch_vcpchat_read_performed: false
+  raw_manifest_saved: false
+  endpoint_raw_saved: false
+  secret_value_saved: false
+  private_path_saved: false
+  customer_private_data_saved: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  image_file_created: false
+
+acceptance_assertions:
+  - "manifest 脱敏审查必须先于 dry-run 结论。"
+  - "每个真实 manifest 读取都必须单独授权。"
+  - "tested 不等于真实执行授权。"
+  - "真实执行必须再次限定插件、命令、模型、调用次数、输入引用、输出目录和回滚方案。"
+

@@ -1,0 +1,65 @@
+phase: v1.3_memory_handoff_preflight
+record_id: memory-handoff-preflight-v1-3-001
+project: Agent Image Lab
+source:
+  task_id: ail-v1-3-memory-handoff-001
+  case_id: case-v1-3-memory-handoff-001
+  review_session_id: session-v1-3-memory-handoff-001
+
+memory_delta:
+  delta_id: memory-delta-v1-3-001
+  write_mode: confirmed
+  approval_status: approved
+  approved_by: human_reviewer
+  approved_at: "2026-05-05T10:20:00+08:00"
+  target_notebook: Photo_Studio_OS_Style_Memory
+  chinese_diary_title: "Photo Studio OS v1.0 人工接受经验"
+  chinese_diary_content: "本次记录只表达写入申请已通过审批，不代表已经写入 DailyNote。资产可作为项目推进候选，但必须保留人工覆盖接受和视觉偏差说明。"
+  preserved_original:
+    prompt_en: null
+    plugin_name: null
+    model_name: null
+    file_ref: "runs/photo_studio_os_v0_10_doubao_retry/image/doubaogen/accepted-image.placeholder"
+  tags:
+    - PhotoStudioOS
+    - 人工接受
+    - 记忆写入申请
+  memory_safety:
+    contains_secret: false
+    contains_private_path: false
+    contains_customer_private_data: false
+    contains_image_binary: false
+    safety_notes_cn: "未发现密钥、私密路径、客户隐私或图片二进制。"
+  final_decision:
+    should_write_to_vcp: true
+    should_show_in_review_console: true
+    rejection_reason_cn: null
+
+handoff_preflight:
+  permission_checked: true
+  review_console_approved: true
+  archivist_agent_review_required: true
+  archivist_agent_reviewed: false
+  imagelab_master_review_required: true
+  imagelab_master_reviewed: false
+  daily_note_write_authorized: false
+  daily_note_called: false
+  vcp_memory_written: false
+  actual_write_performed: false
+
+rollback_plan:
+  required_before_write: true
+  rollback_available_now: false
+  rollback_notes_cn: "真实写入尚未发生，因此当前只需要保留写入申请撤销路径。"
+
+rejection_example:
+  write_mode: forbidden
+  approval_status: rejected
+  rejection_reason_cn: "本条记忆因涉及敏感配置风险被拒绝写入，仅保留安全审计摘要。"
+  sensitive_original_copied: false
+
+acceptance_assertions:
+  - "should_write_to_vcp=true 只表示写入申请获批，不代表已经写入。"
+  - "daily_note_called=false。"
+  - "actual_write_performed=false。"
+  - "图片二进制不进入 Git、DailyNote 或 VCP 长期记忆。"

@@ -499,3 +499,49 @@
 - [ ] `tests/schema_examples/review_score.example.yaml` 有分项评分和中文评审。
 - [ ] `tests/schema_examples/memory_delta.example.yaml` 有中文正文和安全检查。
 - [ ] MVP-A 闭环能串联：用户需求 → task_envelope → prompt_package → review_score → human_review → memory_delta → case_summary。
+
+## v1.1 VCPChat Review Console Integration Plan 检查
+
+- [ ] `review_console/v1_1_vcpchat_review_console_contract.md` 存在。
+- [ ] v1.1 只做 VCPChat 子窗口接入规划，不修改真实 VCPChat。
+- [ ] IPC 草案只包含 `imageLabReview.loadSession`、`imageLabReview.previewDraft`、`imageLabReview.submitDraft` 和 `imageLabReview.cancel`。
+- [ ] Electron 边界明确 `contextIsolation=true`、`nodeIntegration=false`、preload 最小 allowlist API 和 IPC sender 校验。
+- [ ] renderer 不直接调用 DailyNote、VCP 插件、API 或文件系统。
+- [ ] 不通过 URL query、hash 或窗口标题传 key、token、cookie、私密路径或客户隐私。
+
+## v1.2 Review Console Runtime Prototype 检查
+
+- [ ] `review_console/runtime_prototype/` 存在。
+- [ ] `node --check review_console/runtime_prototype/host_bridge_mock.js` 通过。
+- [ ] `node --check review_console/runtime_prototype/app.js` 通过。
+- [ ] runtime prototype 输出 `review_session_draft`、`image_case_draft`、`memory_delta_draft` 和 `prototype_guard`。
+- [ ] `prototype_guard` 保持 `api_called=false`、`daily_note_called=false`、`vcp_plugin_called=false`、`disk_write_performed=false`、`image_file_created=false`。
+- [ ] runtime prototype 不使用外部 API、DailyNote、VCP 插件、Node 文件系统或图片二进制。
+- [ ] 未人工批准时不得生成正式 `accepted`。
+- [ ] `memory_approval.status != approved` 时，`memory_delta.write_mode=draft`。
+
+## v1.3 DailyNote / VCP Memory Handoff 检查
+
+- [ ] `memory_policy/v1_3_daily_note_handoff_contract.md` 存在。
+- [ ] `tests/schema_examples/v1_3_memory_handoff_preflight.example.yaml` 存在。
+- [ ] `should_write_to_vcp=true` 只表示写入申请已批准，不代表已经写入。
+- [ ] `daily_note_called=false` 保持到未来独立写入授权点。
+- [ ] `actual_write_performed=false` 保持到未来独立写入授权点。
+- [ ] 所有记忆正文、拒绝原因和审计摘要为中文脱敏内容。
+- [ ] 敏感字段不得进入 `memory_delta`、`preserved_original`、tags、拒绝原因或审计日志。
+
+## v1.4 Multi-plugin Candidate Evaluation 检查
+
+- [ ] `integrations/vcp/v1_4_multi_plugin_candidate_evaluation.md` 存在。
+- [ ] `tests/schema_examples/v1_4_multi_plugin_candidate_matrix.example.yaml` 存在。
+- [ ] 多插件候选评估不批量读取真实 VCPToolBox / VCPChat。
+- [ ] 每个真实 manifest 读取都必须单独授权。
+- [ ] 能力矩阵只记录中文脱敏摘要和风险分类。
+- [ ] 不保存 raw manifest、endpoint 原文、密钥、私密路径或客户隐私。
+- [ ] `tested` 不等于真实执行授权。
+
+## v2.0 Productization Plan 检查
+
+- [ ] `docs/50_v2_0_productization_plan.md` 存在。
+- [ ] v2.0 不默认包含自动真实生图、自动 DailyNote 写入或自动插件选择。
+- [ ] v2.0 产品化入口条件包含 v1.1、v1.2、v1.3、v1.4 完成。

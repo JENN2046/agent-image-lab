@@ -141,6 +141,7 @@ $mediaFiles = Get-ChildItem -LiteralPath $Root -Recurse -File -Force |
   Where-Object {
     $_.FullName -notlike '*\.git\*' -and
     $_.FullName -notlike '*\runs\*' -and
+    $_.FullName -notlike '*\release_packages\*' -and
     $mediaExtensions -contains $_.Extension.ToLowerInvariant()
   }
 foreach ($file in $mediaFiles) {

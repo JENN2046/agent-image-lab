@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agent Image Lab Review Console Runtime Prototype</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="panel">
+        <header>
+          <p class="eyebrow">Runtime Prototype</p>
+          <h1>Review Console</h1>
+        </header>
+        <dl class="meta">
+          <div><dt>Task</dt><dd id="taskId">-</dd></div>
+          <div><dt>Case</dt><dd id="caseId">-</dd></div>
+          <div><dt>Asset</dt><dd id="assetRef">-</dd></div>
+        </dl>
+        <div class="asset-box" id="assetBox"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Human Review</h2>
+        <label class="field">
+          <span>人工评分</span>
+          <input id="humanScore" type="range" min="0" max="100" value="84" />
+          <output id="humanScoreOut">84</output>
+        </label>
+        <label class="field">
+          <span>中文评论</span>
+          <textarea id="humanComment" rows="5">人工评审确认该版本可作为候选，但仍需保留已知视觉偏差说明。</textarea>
+        </label>
+        <label class="field">
+          <span>资产状态</span>
+          <select id="assetStatus">
+            <option value="candidate">candidate</option>
+            <option value="rejected">rejected</option>
+            <option value="draft">draft</option>
+          </select>
+        </label>
+        <label class="check">
+          <input id="humanApproved" type="checkbox" />
+          <span>人工正式批准 accepted</span>
+        </label>
+      </section>
+
+      <section class="panel">
+        <h2>Memory Preview</h2>
+        <label class="field">
+          <span>中文记忆正文</span>
+          <textarea id="memoryContent" rows="6">本次评审保留 Photo Studio OS 真实闭环经验：资产可作为项目推进候选，但必须记录人工覆盖接受和已知视觉偏差。</textarea>
+        </label>
+        <label class="field">
+          <span>记忆审批</span>
+          <select id="memoryApproval">
+            <option value="pending">pending</option>
+            <option value="approved">approved</option>
+            <option value="rejected">rejected</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="panel output-panel">
+        <h2>Draft Output</h2>
+        <pre id="draftOutput"></pre>
+      </section>
+    </main>
+    <script src="./host_bridge_mock.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
+
