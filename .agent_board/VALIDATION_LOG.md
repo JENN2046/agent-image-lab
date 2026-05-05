@@ -2,6 +2,108 @@
 
 ## Entries
 
+## VALIDATION-20260506-V5-2
+
+Task:
+
+```text
+Add adapter delivery surface validation for the Adapter dry-run lab and export package.
+```
+
+Commands run:
+
+```text
+scripts/validate_mvp.ps1
+scripts/validate-agent-image-lab-local.ps1
+node scripts/validate_adapter_delivery_surface.js
+node scripts/validate_runtime_prototype_suite.js
+node scripts/validate_agent_board_state.js
+node scripts/validate_local_commit_scope.js
+git diff --check
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+The Adapter dry-run lab and export package now have a local validator for required files, dry_run-only manifest state, forbidden command declarations, accepted/rejected fixture behavior, exported VCP-shaped responses, README boundaries, placeholder config hygiene, and no-execution guard fields.
+```
+
+Warnings:
+
+```text
+Manual-review warnings may remain for forbidden strings such as token, cookie, password, image extensions, and script extensions because the project intentionally contains negative checklist references.
+```
+
+Not validated:
+
+```text
+No new commit, tag, push, release, real VCPChat read, real VCPToolBox read, real manifest read, plugin call, API call, DailyNote call, VCP memory write, or image creation is performed in this v5.2 local batch.
+```
+
+Notes:
+
+```text
+All current v5.2 work stays project-local and reversible.
+The v5.2 local batch is not a version-action authorization.
+```
+
+## VALIDATION-20260506-V5-1
+
+Task:
+
+```text
+Add runtime delivery surface validation for the Review Console runtime prototype.
+```
+
+Commands run:
+
+```text
+scripts/validate_mvp.ps1
+scripts/validate-agent-image-lab-local.ps1
+node scripts/validate_runtime_delivery_surface.js
+node scripts/validate_runtime_prototype_suite.js
+node scripts/validate_agent_board_state.js
+node scripts/validate_local_commit_scope.js
+git diff --check
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+The runtime prototype delivery surface now has a local validator for required files, local script order, DOM ids, host ack surface, field mapping coverage, README boundaries, and absence of external URL / fetch / IPC / storage / file-write calls.
+```
+
+Warnings:
+
+```text
+Manual-review warnings may remain for forbidden strings such as token, cookie, password, image extensions, and script extensions because the project intentionally contains negative checklist references.
+```
+
+Not validated:
+
+```text
+No new commit, tag, push, release, real VCPChat read, real VCPToolBox read, IPC/preload implementation, plugin call, API call, DailyNote call, VCP memory write, or image creation is performed in this v5.1 local batch.
+```
+
+Notes:
+
+```text
+All current v5.1 work stays project-local and reversible.
+The v5.1 local batch is ready for explicit commit/PR authorization, but this log entry does not grant that authorization.
+```
+
 ## VALIDATION-20260506-V5-0
 
 Task:

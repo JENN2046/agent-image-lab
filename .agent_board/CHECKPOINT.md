@@ -27,6 +27,10 @@ PR #1 merged: merge commit 367d3c9 includes v4.8 and v4.9 local checkpoint batch
 PR #1 head: b595851; checkpoint tag v4.8-local-validation-checkpoint points to 6d4253f
 v5.0 local: post-merge delivery readiness index records synced master and delivery validation entry
 v5.0 validation: delivery readiness entry is validated locally and awaits explicit commit/PR/release authorization
+v5.1 local: runtime delivery surface validation added for Review Console runtime prototype
+v5.1 validation: runtime delivery surface is validated locally and awaits explicit commit/PR/release authorization
+v5.2 local: adapter delivery surface validation added for Adapter dry-run lab and export package
+v5.2 validation: adapter delivery surface is validated locally and awaits explicit commit/PR/release authorization
 ```
 
 ## Current Boundary
@@ -56,6 +60,8 @@ node scripts/validate_post_push_state.js: passed
 node scripts/validate_v4_index_consistency.js: passed
 node scripts/validate_local_tag_push_readiness.js: passed
 node scripts/validate_v5_delivery_readiness.js: passed
+node scripts/validate_runtime_delivery_surface.js: passed
+node scripts/validate_adapter_delivery_surface.js: passed
 git diff --check: passed
 ```
 

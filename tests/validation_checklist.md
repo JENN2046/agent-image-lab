@@ -1844,3 +1844,34 @@
 - [ ] `validate_mvp.ps1` 执行 v5.0 delivery readiness validation 并检查输出字段。
 - [ ] v5.0 不执行新的 commit、tag、push 或 release。
 - [ ] v5.0 不读真实 VCPChat、不改真实 VCPChat、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.1 Runtime Delivery Surface Validation 检查
+
+- [ ] `scripts/validate_runtime_delivery_surface.js` 存在。
+- [ ] `docs/128_v5_1_runtime_delivery_surface.md` 存在。
+- [ ] `tests/schema_examples/v5_1_runtime_delivery_surface.example.yaml` 存在。
+- [ ] runtime delivery surface 验证 `review_console/runtime_prototype/` 入口文件齐全。
+- [ ] runtime delivery surface 验证 `index.html` 本地脚本顺序为 `runtime_guard.js -> host_bridge_mock.js -> app.js`。
+- [ ] runtime delivery surface 验证 DOM surface、host ack 和 draft output 入口存在。
+- [ ] runtime delivery surface 验证 README 和 FIELD_MAPPING 覆盖边界、draft、guard 和 Host Submit Ack。
+- [ ] runtime delivery surface 验证 runtime prototype 不加载外部 URL，不包含 `fetch`、IPC、storage 或文件写入调用。
+- [ ] `validate_runtime_prototype_suite.js` 聚合 runtime delivery surface validation。
+- [ ] `validate_mvp.ps1` 执行 runtime delivery surface validation 并检查输出字段。
+- [ ] v5.1 不执行新的 commit、tag、push 或 release。
+- [ ] v5.1 不读真实 VCPChat、不改真实 VCPChat、不创建 IPC/preload、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.2 Adapter Delivery Surface Validation 检查
+
+- [ ] `scripts/validate_adapter_delivery_surface.js` 存在。
+- [ ] `docs/129_v5_2_adapter_delivery_surface.md` 存在。
+- [ ] `tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml` 存在。
+- [ ] adapter delivery surface 验证 `adapter_dry_run_lab` 和 `exports/vcptoolbox/Plugin/AgentImageLabAdapter` 必需文件齐全。
+- [ ] adapter delivery surface 验证 manifest 只允许 `dry_run`，并声明 forbidden commands。
+- [ ] adapter delivery surface 验证 dry-run contract 保持 `external_api_allowed=false`、`execution_blocked=true`、`max_plugin_calls=0`。
+- [ ] adapter delivery surface 验证 accepted fixture 返回 `accepted_draft`。
+- [ ] adapter delivery surface 验证 rejected fixture 返回 `rejected`。
+- [ ] adapter delivery surface 验证导出级 stdio adapter 的 accepted / rejected 响应都保持 no-execution guard。
+- [ ] adapter delivery surface 验证 README 和 config example 不引入真实凭据、外部调用或写入边界。
+- [ ] `validate_mvp.ps1` 执行 adapter delivery surface validation 并检查输出字段。
+- [ ] v5.2 不执行新的 commit、tag、push 或 release。
+- [ ] v5.2 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。

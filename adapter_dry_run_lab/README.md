@@ -21,4 +21,12 @@ node adapter_dry_run_lab\adapter_dry_run.js adapter_dry_run_lab\fixtures\accepte
 node adapter_dry_run_lab\adapter_dry_run.js adapter_dry_run_lab\fixtures\rejected_request.json
 ```
 
+## 本地交付面校验
+
+```powershell
+node scripts\validate_adapter_delivery_surface.js
+```
+
+该校验只读取本仓库内 Adapter 文件和 fixture，并断言 accepted / rejected 输出都保持 `selected_plugin=null`、`max_plugin_calls=0`、`execution_blocked=true`。
+
 输出只代表 dry-run 草案或拒绝草案，不代表真实插件选择、dry-run 实测完成或真实执行授权。

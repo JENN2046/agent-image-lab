@@ -79,6 +79,17 @@ v4.1 增加 `scripts/validate_runtime_guard_unit.js`，直接在 Node VM 中加�
 
 v4.2 增加 `scripts/validate_runtime_prototype_suite.js`，把 runtime prototype 相关语法检查、guard unit validation 和 fake-DOM smoke test 聚合为一个本地入口。suite 只读取项目内源码并执行本地 Node 校验，不访问网络、不调用外部服务、不写文件。
 
+## v5.1 Runtime Delivery Surface
+
+v5.1 增加 `scripts/validate_runtime_delivery_surface.js`，把 runtime prototype 的交付面变成机器可查状态：
+
+- `index.html`、`styles.css`、`runtime_guard.js`、`host_bridge_mock.js`、`app.js`、`FIELD_MAPPING.md` 和本 README 必须齐全。
+- 页面脚本顺序仍为 `runtime_guard.js -> host_bridge_mock.js -> app.js`。
+- 预期 DOM id、host ack 面板和 draft output 面板必须存在。
+- `FIELD_MAPPING.md` 必须覆盖 `review_session_draft`、`image_case_draft`、`memory_delta_draft`、`prototype_guard` 和 Host Submit Ack。
+- runtime prototype 不加载外部 URL，不包含 `fetch`、IPC、storage 或文件写入调用。
+- 该校验仍只证明项目内浏览器原型可交付，不代表真实 VCPChat 子窗口、preload、IPC、DailyNote 或 VCP 记忆写入已经实现。
+
 ## Validation
 
 ```powershell
@@ -87,6 +98,7 @@ node --check review_console\runtime_prototype\host_bridge_mock.js
 node --check review_console\runtime_prototype\app.js
 node scripts\validate_runtime_guard_unit.js
 node scripts\validate_runtime_prototype_smoke.js
+node scripts\validate_runtime_delivery_surface.js
 node scripts\validate_runtime_prototype_suite.js
 ```
 

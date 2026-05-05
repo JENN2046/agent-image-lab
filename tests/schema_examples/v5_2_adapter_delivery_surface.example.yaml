@@ -1,0 +1,55 @@
+record_type: adapter_delivery_surface_validation
+status: completed_validated_project_local_v5_2_adapter_delivery_surface
+version: v5.2
+validation_file: scripts/validate_adapter_delivery_surface.js
+adapter_file_count: 9
+adapter_files_present: true
+manifest_dry_run_only: true
+allowed_command_dry_run_only: true
+forbidden_commands_declared: true
+dry_run_contract_current: true
+lab_accepted_fixture_passed: true
+lab_rejected_fixture_passed: true
+export_accepted_stdio_passed: true
+export_rejected_stdio_passed: true
+no_execution_guard_verified: true
+readme_boundary_current: true
+config_example_secret_free: true
+forbidden_runtime_calls_present: false
+external_network_required: false
+external_service_required: false
+file_write_performed: false
+real_vcpchat_source_read: false
+real_vcpchat_modified: false
+real_vcptoolbox_source_read: false
+real_vcptoolbox_modified: false
+real_manifest_read: false
+api_called: false
+vcp_plugin_called: false
+daily_note_called: false
+vcp_memory_written: false
+image_file_created: false
+commit_tag_push_authorized: false
+checked_surface:
+  - adapter_dry_run_lab/adapter_dry_run.js
+  - adapter_dry_run_lab/README.md
+  - adapter_dry_run_lab/fixtures/accepted_request.json
+  - adapter_dry_run_lab/fixtures/rejected_request.json
+  - adapter_dry_run_lab/fixtures/photo_studio_os_v0_7_rehearsal_request.json
+  - exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js
+  - exports/vcptoolbox/Plugin/AgentImageLabAdapter/plugin-manifest.json
+  - exports/vcptoolbox/Plugin/AgentImageLabAdapter/README.md
+  - exports/vcptoolbox/Plugin/AgentImageLabAdapter/config.env.example
+acceptance_assertions:
+  accepted_fixture_status: accepted_draft
+  rejected_fixture_status: rejected
+  selected_plugin: null
+  max_plugin_calls: 0
+  execution_blocked: true
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  file_write_performed: false
+  image_file_created: false
+  real_execution_allowed: false
+boundary_cn: "v5.2 只验证 Adapter dry-run 交付面，不授权真实插件调用、DailyNote 写入、VCP 记忆写入、图片创建或远端版本动作。"

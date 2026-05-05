@@ -48,6 +48,9 @@ $requiredFiles = @(
   'adapter_dry_run_lab/fixtures/rejected_request.json',
   'adapter_dry_run_lab/fixtures/photo_studio_os_v0_7_rehearsal_request.json',
   'exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js',
+  'exports/vcptoolbox/Plugin/AgentImageLabAdapter/plugin-manifest.json',
+  'exports/vcptoolbox/Plugin/AgentImageLabAdapter/README.md',
+  'exports/vcptoolbox/Plugin/AgentImageLabAdapter/config.env.example',
   'scripts/run_v0_7_photo_studio_os_real_execution.ps1',
   'scripts/run_v0_10_gptimagegen_real_execution.ps1',
   'scripts/validate-agent-image-lab-local.ps1',
@@ -59,6 +62,8 @@ $requiredFiles = @(
   'scripts/validate_v4_index_consistency.js',
   'scripts/validate_local_tag_push_readiness.js',
   'scripts/validate_v5_delivery_readiness.js',
+  'scripts/validate_runtime_delivery_surface.js',
+  'scripts/validate_adapter_delivery_surface.js',
   'scripts/validate_runtime_guard_unit.js',
   'scripts/validate_runtime_prototype_smoke.js',
   'scripts/validate_runtime_prototype_suite.js',
@@ -84,6 +89,8 @@ $requiredFiles = @(
   'docs/125_v4_8_v4_index_consistency_validation.md',
   'docs/126_v4_9_local_tag_push_readiness.md',
   'docs/127_v5_0_delivery_readiness_index.md',
+  'docs/128_v5_1_runtime_delivery_surface.md',
+  'docs/129_v5_2_adapter_delivery_surface.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
@@ -157,6 +164,8 @@ $requiredFiles = @(
   'tests/schema_examples/v4_8_v4_index_consistency_validation.example.yaml',
   'tests/schema_examples/v4_9_local_tag_push_readiness.example.yaml',
   'tests/schema_examples/v5_0_delivery_readiness.example.yaml',
+  'tests/schema_examples/v5_1_runtime_delivery_surface.example.yaml',
+  'tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -1869,15 +1878,23 @@ $allowedV46ModifiedFiles = @(
   '.agent_board/RUN_STATE.md',
   '.agent_board/TASK_QUEUE.md',
   '.agent_board/VALIDATION_LOG.md',
+  'adapter_dry_run_lab/adapter_dry_run.js',
+  'adapter_dry_run_lab/README.md',
   'docs/00_project_roadmap.md',
   'docs/125_v4_8_v4_index_consistency_validation.md',
+  'exports/vcptoolbox/Plugin/AgentImageLabAdapter/README.md',
   'review_console/runtime_prototype/README.md',
   'scripts/validate_local_commit_scope.js',
   'scripts/validate_mvp.ps1',
   'scripts/validate_v4_index_consistency.js',
   'scripts/validate_v5_delivery_readiness.js',
+  'scripts/validate_adapter_delivery_surface.js',
+  'scripts/validate_runtime_delivery_surface.js',
+  'scripts/validate_runtime_prototype_suite.js',
   'scripts/validate_runtime_prototype_smoke.js',
   'tests/schema_examples/v4_8_v4_index_consistency_validation.example.yaml',
+  'tests/schema_examples/v5_1_runtime_delivery_surface.example.yaml',
+  'tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml',
   'tests/validation_checklist.md'
 )
 
@@ -1904,6 +1921,8 @@ $allowedV46UntrackedFiles = @(
   'docs/125_v4_8_v4_index_consistency_validation.md',
   'docs/126_v4_9_local_tag_push_readiness.md',
   'docs/127_v5_0_delivery_readiness_index.md',
+  'docs/128_v5_1_runtime_delivery_surface.md',
+  'docs/129_v5_2_adapter_delivery_surface.md',
   'scripts/validate-agent-image-lab-local.ps1',
   'scripts/validate-agent-image-lab-local.sh',
   'scripts/validate_agent_board_state.js',
@@ -1912,6 +1931,8 @@ $allowedV46UntrackedFiles = @(
   'scripts/validate_v4_index_consistency.js',
   'scripts/validate_local_tag_push_readiness.js',
   'scripts/validate_v5_delivery_readiness.js',
+  'scripts/validate_adapter_delivery_surface.js',
+  'scripts/validate_runtime_delivery_surface.js',
   'scripts/validate_runtime_guard_unit.js',
   'scripts/validate_runtime_prototype_suite.js',
   'tests/schema_examples/v4_0_runtime_contract_smoke_hardening.example.yaml',
@@ -1924,7 +1945,9 @@ $allowedV46UntrackedFiles = @(
   'tests/schema_examples/v4_7_post_push_state_reconciliation.example.yaml',
   'tests/schema_examples/v4_8_v4_index_consistency_validation.example.yaml',
   'tests/schema_examples/v4_9_local_tag_push_readiness.example.yaml',
-  'tests/schema_examples/v5_0_delivery_readiness.example.yaml'
+  'tests/schema_examples/v5_0_delivery_readiness.example.yaml',
+  'tests/schema_examples/v5_1_runtime_delivery_surface.example.yaml',
+  'tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml'
 )
 
 foreach ($path in $v46LocalCommitScopeManifestFiles) {
@@ -2239,6 +2262,170 @@ foreach ($path in $v50DeliveryReadinessFiles) {
   }
 }
 
+$v51RuntimeDeliverySurfaceFiles = @(
+  'docs/128_v5_1_runtime_delivery_surface.md',
+  'tests/schema_examples/v5_1_runtime_delivery_surface.example.yaml'
+)
+
+$requiredV51RuntimeDeliverySurfacePatterns = @(
+  'status:\s+completed_validated_project_local_v5_1_runtime_delivery_surface',
+  'version:\s+v5\.1',
+  'validation_file:\s+scripts/validate_runtime_delivery_surface\.js',
+  'runtime_file_count:\s+7',
+  'runtime_files_present:\s+true',
+  'script_order_verified:\s+true',
+  'stylesheet_present:\s+true',
+  'dom_surface_id_count:\s+14',
+  'dom_surface_present:\s+true',
+  'host_ack_surface_present:\s+true',
+  'field_mapping_current:\s+true',
+  'readme_boundary_current:\s+true',
+  'validation_command_current:\s+true',
+  'suite_integrated:\s+true',
+  'validate_mvp_current:\s+true',
+  'external_assets_loaded:\s+false',
+  'forbidden_runtime_calls_present:\s+false',
+  'external_network_required:\s+false',
+  'external_service_required:\s+false',
+  'file_write_performed:\s+false',
+  'real_vcpchat_source_read:\s+false',
+  'real_vcpchat_modified:\s+false',
+  'real_vcptoolbox_source_read:\s+false',
+  'real_vcptoolbox_modified:\s+false',
+  'api_called:\s+false',
+  'vcp_plugin_called:\s+false',
+  'daily_note_called:\s+false',
+  'vcp_memory_written:\s+false',
+  'image_file_created:\s+false',
+  'commit_tag_push_authorized:\s+false'
+)
+
+$forbiddenV51RuntimeDeliverySurfacePatterns = @(
+  'external_assets_loaded:\s+true',
+  'forbidden_runtime_calls_present:\s+true',
+  'external_network_required:\s+true',
+  'external_service_required:\s+true',
+  'file_write_performed:\s+true',
+  'real_vcpchat_source_read:\s+true',
+  'real_vcpchat_modified:\s+true',
+  'real_vcptoolbox_source_read:\s+true',
+  'real_vcptoolbox_modified:\s+true',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'vcp_memory_written:\s+true',
+  'image_file_created:\s+true',
+  'commit_tag_push_authorized:\s+true',
+  'https?://'
+)
+
+foreach ($path in $v51RuntimeDeliverySurfaceFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v5.1 runtime delivery surface file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV51RuntimeDeliverySurfacePatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v5.1 runtime delivery surface missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV51RuntimeDeliverySurfacePatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v5.1 runtime delivery surface boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$v52AdapterDeliverySurfaceFiles = @(
+  'docs/129_v5_2_adapter_delivery_surface.md',
+  'tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml'
+)
+
+$requiredV52AdapterDeliverySurfacePatterns = @(
+  'status:\s+completed_validated_project_local_v5_2_adapter_delivery_surface',
+  'version:\s+v5\.2',
+  'validation_file:\s+scripts/validate_adapter_delivery_surface\.js',
+  'adapter_file_count:\s+9',
+  'adapter_files_present:\s+true',
+  'manifest_dry_run_only:\s+true',
+  'allowed_command_dry_run_only:\s+true',
+  'forbidden_commands_declared:\s+true',
+  'dry_run_contract_current:\s+true',
+  'lab_accepted_fixture_passed:\s+true',
+  'lab_rejected_fixture_passed:\s+true',
+  'export_accepted_stdio_passed:\s+true',
+  'export_rejected_stdio_passed:\s+true',
+  'no_execution_guard_verified:\s+true',
+  'readme_boundary_current:\s+true',
+  'config_example_secret_free:\s+true',
+  'forbidden_runtime_calls_present:\s+false',
+  'external_network_required:\s+false',
+  'external_service_required:\s+false',
+  'file_write_performed:\s+false',
+  'real_vcpchat_source_read:\s+false',
+  'real_vcpchat_modified:\s+false',
+  'real_vcptoolbox_source_read:\s+false',
+  'real_vcptoolbox_modified:\s+false',
+  'real_manifest_read:\s+false',
+  'api_called:\s+false',
+  'vcp_plugin_called:\s+false',
+  'daily_note_called:\s+false',
+  'vcp_memory_written:\s+false',
+  'image_file_created:\s+false',
+  'commit_tag_push_authorized:\s+false'
+)
+
+$forbiddenV52AdapterDeliverySurfacePatterns = @(
+  'manifest_dry_run_only:\s+false',
+  'allowed_command_dry_run_only:\s+false',
+  'dry_run_contract_current:\s+false',
+  'lab_accepted_fixture_passed:\s+false',
+  'lab_rejected_fixture_passed:\s+false',
+  'export_accepted_stdio_passed:\s+false',
+  'export_rejected_stdio_passed:\s+false',
+  'no_execution_guard_verified:\s+false',
+  'config_example_secret_free:\s+false',
+  'forbidden_runtime_calls_present:\s+true',
+  'external_network_required:\s+true',
+  'external_service_required:\s+true',
+  'file_write_performed:\s+true',
+  'real_vcpchat_source_read:\s+true',
+  'real_vcpchat_modified:\s+true',
+  'real_vcptoolbox_source_read:\s+true',
+  'real_vcptoolbox_modified:\s+true',
+  'real_manifest_read:\s+true',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'vcp_memory_written:\s+true',
+  'image_file_created:\s+true',
+  'commit_tag_push_authorized:\s+true',
+  'https?://'
+)
+
+foreach ($path in $v52AdapterDeliverySurfaceFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v5.2 adapter delivery surface file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV52AdapterDeliverySurfacePatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v5.2 adapter delivery surface missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV52AdapterDeliverySurfacePatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v5.2 adapter delivery surface boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
 $node = Get-Command node -ErrorAction SilentlyContinue
 if (-not $node) {
   Add-Failure "Node.js is required to validate adapter_dry_run_lab"
@@ -2404,6 +2591,16 @@ if (-not $node) {
   & node --check (Join-Path $Root 'scripts/validate_runtime_prototype_suite.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_runtime_prototype_suite.js failed node --check"
+  }
+
+  & node --check (Join-Path $Root 'scripts/validate_runtime_delivery_surface.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_runtime_delivery_surface.js failed node --check"
+  }
+
+  & node --check (Join-Path $Root 'scripts/validate_adapter_delivery_surface.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_adapter_delivery_surface.js failed node --check"
   }
 
   & node --check (Join-Path $Root 'scripts/validate_agent_board_state.js') | Out-Null
@@ -2645,6 +2842,86 @@ if (-not $node) {
     }
   }
 
+  $runtimeDeliverySurfaceOutput = & node (Join-Path $Root 'scripts/validate_runtime_delivery_surface.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "runtime delivery surface validation exited with failure"
+  } else {
+    $runtimeDeliverySurface = ($runtimeDeliverySurfaceOutput -join "`n") | ConvertFrom-Json
+    if ($runtimeDeliverySurface.passed -ne $true) {
+      Add-Failure "runtime delivery surface validation must report passed true"
+    }
+    if ($runtimeDeliverySurface.runtime_delivery_surface.runtime_files_present -ne $true) {
+      Add-Failure "runtime delivery surface must verify runtime files"
+    }
+    if ($runtimeDeliverySurface.runtime_delivery_surface.script_order_verified -ne $true) {
+      Add-Failure "runtime delivery surface must verify script order"
+    }
+    if ($runtimeDeliverySurface.runtime_delivery_surface.dom_surface_present -ne $true) {
+      Add-Failure "runtime delivery surface must verify DOM surface"
+    }
+    if ($runtimeDeliverySurface.runtime_delivery_surface.host_ack_surface_present -ne $true) {
+      Add-Failure "runtime delivery surface must verify host ack surface"
+    }
+    if ($runtimeDeliverySurface.runtime_delivery_surface.field_mapping_current -ne $true) {
+      Add-Failure "runtime delivery surface must verify field mapping"
+    }
+    if ($runtimeDeliverySurface.runtime_delivery_surface.readme_boundary_current -ne $true) {
+      Add-Failure "runtime delivery surface must verify README boundary"
+    }
+    if ($runtimeDeliverySurface.runtime_delivery_surface.validation_command_current -ne $true) {
+      Add-Failure "runtime delivery surface must verify validation command"
+    }
+    if ($runtimeDeliverySurface.runtime_delivery_surface.external_assets_loaded -ne $false) {
+      Add-Failure "runtime delivery surface must not load external assets"
+    }
+    if ($runtimeDeliverySurface.runtime_delivery_surface.forbidden_runtime_calls_present -ne $false) {
+      Add-Failure "runtime delivery surface must not include forbidden runtime calls"
+    }
+    if ($runtimeDeliverySurface.runtime_delivery_surface.file_write_performed -ne $false) {
+      Add-Failure "runtime delivery surface validation must not write files"
+    }
+  }
+
+  $adapterDeliverySurfaceOutput = & node (Join-Path $Root 'scripts/validate_adapter_delivery_surface.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "adapter delivery surface validation exited with failure"
+  } else {
+    $adapterDeliverySurface = ($adapterDeliverySurfaceOutput -join "`n") | ConvertFrom-Json
+    if ($adapterDeliverySurface.passed -ne $true) {
+      Add-Failure "adapter delivery surface validation must report passed true"
+    }
+    if ($adapterDeliverySurface.adapter_delivery_surface.adapter_files_present -ne $true) {
+      Add-Failure "adapter delivery surface must verify adapter files"
+    }
+    if ($adapterDeliverySurface.adapter_delivery_surface.manifest_dry_run_only -ne $true) {
+      Add-Failure "adapter delivery surface must verify manifest dry-run only"
+    }
+    if ($adapterDeliverySurface.adapter_delivery_surface.allowed_command_dry_run_only -ne $true) {
+      Add-Failure "adapter delivery surface must verify dry_run as the only allowed command"
+    }
+    if ($adapterDeliverySurface.adapter_delivery_surface.lab_accepted_fixture_passed -ne $true) {
+      Add-Failure "adapter delivery surface must verify lab accepted fixture"
+    }
+    if ($adapterDeliverySurface.adapter_delivery_surface.lab_rejected_fixture_passed -ne $true) {
+      Add-Failure "adapter delivery surface must verify lab rejected fixture"
+    }
+    if ($adapterDeliverySurface.adapter_delivery_surface.export_accepted_stdio_passed -ne $true) {
+      Add-Failure "adapter delivery surface must verify export accepted stdio"
+    }
+    if ($adapterDeliverySurface.adapter_delivery_surface.export_rejected_stdio_passed -ne $true) {
+      Add-Failure "adapter delivery surface must verify export rejected stdio"
+    }
+    if ($adapterDeliverySurface.adapter_delivery_surface.no_execution_guard_verified -ne $true) {
+      Add-Failure "adapter delivery surface must verify no-execution guard"
+    }
+    if ($adapterDeliverySurface.adapter_delivery_surface.forbidden_runtime_calls_present -ne $false) {
+      Add-Failure "adapter delivery surface must not include forbidden runtime calls"
+    }
+    if ($adapterDeliverySurface.adapter_delivery_surface.file_write_performed -ne $false) {
+      Add-Failure "adapter delivery surface validation must not write files"
+    }
+  }
+
   $v5DeliveryReadinessOutput = & node (Join-Path $Root 'scripts/validate_v5_delivery_readiness.js')
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "v5.0 delivery readiness validation exited with failure"
@@ -2763,6 +3040,12 @@ if (-not $node) {
     }
     if ($runtimeSuite.runtime_validation_suite.runtime_smoke_output_passed -ne $true) {
       Add-Failure "runtime prototype validation suite must verify runtime smoke output"
+    }
+    if ($runtimeSuite.runtime_validation_suite.runtime_delivery_surface -ne $true) {
+      Add-Failure "runtime prototype validation suite must pass runtime delivery surface"
+    }
+    if ($runtimeSuite.runtime_validation_suite.runtime_delivery_surface_output_passed -ne $true) {
+      Add-Failure "runtime prototype validation suite must verify runtime delivery surface output"
     }
     if ($runtimeSuite.runtime_validation_suite.external_network_required -ne $false) {
       Add-Failure "runtime prototype validation suite must not require external network"

@@ -9,13 +9,21 @@ const allowedModifiedFiles = [
   ".agent_board/RUN_STATE.md",
   ".agent_board/TASK_QUEUE.md",
   ".agent_board/VALIDATION_LOG.md",
+  "adapter_dry_run_lab/adapter_dry_run.js",
+  "adapter_dry_run_lab/README.md",
   "docs/00_project_roadmap.md",
+  "exports/vcptoolbox/Plugin/AgentImageLabAdapter/README.md",
   "review_console/runtime_prototype/README.md",
   "scripts/validate_local_commit_scope.js",
   "scripts/validate_mvp.ps1",
   "scripts/validate_v4_index_consistency.js",
   "scripts/validate_v5_delivery_readiness.js",
+  "scripts/validate_adapter_delivery_surface.js",
+  "scripts/validate_runtime_delivery_surface.js",
+  "scripts/validate_runtime_prototype_suite.js",
   "scripts/validate_runtime_prototype_smoke.js",
+  "tests/schema_examples/v5_1_runtime_delivery_surface.example.yaml",
+  "tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml",
   "tests/validation_checklist.md"
 ];
 
@@ -42,6 +50,8 @@ const allowedUntrackedFiles = [
   "docs/125_v4_8_v4_index_consistency_validation.md",
   "docs/126_v4_9_local_tag_push_readiness.md",
   "docs/127_v5_0_delivery_readiness_index.md",
+  "docs/128_v5_1_runtime_delivery_surface.md",
+  "docs/129_v5_2_adapter_delivery_surface.md",
   "scripts/validate-agent-image-lab-local.ps1",
   "scripts/validate-agent-image-lab-local.sh",
   "scripts/validate_agent_board_state.js",
@@ -50,6 +60,8 @@ const allowedUntrackedFiles = [
   "scripts/validate_v4_index_consistency.js",
   "scripts/validate_local_tag_push_readiness.js",
   "scripts/validate_v5_delivery_readiness.js",
+  "scripts/validate_adapter_delivery_surface.js",
+  "scripts/validate_runtime_delivery_surface.js",
   "scripts/validate_runtime_guard_unit.js",
   "scripts/validate_runtime_prototype_suite.js",
   "tests/schema_examples/v4_0_runtime_contract_smoke_hardening.example.yaml",
@@ -62,7 +74,9 @@ const allowedUntrackedFiles = [
   "tests/schema_examples/v4_7_post_push_state_reconciliation.example.yaml",
   "tests/schema_examples/v4_8_v4_index_consistency_validation.example.yaml",
   "tests/schema_examples/v4_9_local_tag_push_readiness.example.yaml",
-  "tests/schema_examples/v5_0_delivery_readiness.example.yaml"
+  "tests/schema_examples/v5_0_delivery_readiness.example.yaml",
+  "tests/schema_examples/v5_1_runtime_delivery_surface.example.yaml",
+  "tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml"
 ];
 
 function assert(condition, message) {
@@ -116,6 +130,30 @@ function main() {
   assert(
     allowedUntrackedFiles.includes("scripts/validate_v5_delivery_readiness.js"),
     "v5.0 validation script must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("docs/128_v5_1_runtime_delivery_surface.md"),
+    "v5.1 docs must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("tests/schema_examples/v5_1_runtime_delivery_surface.example.yaml"),
+    "v5.1 schema example must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("scripts/validate_runtime_delivery_surface.js"),
+    "v5.1 validation script must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("docs/129_v5_2_adapter_delivery_surface.md"),
+    "v5.2 docs must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml"),
+    "v5.2 schema example must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("scripts/validate_adapter_delivery_surface.js"),
+    "v5.2 validation script must be included in the untracked allowlist."
   );
 
   const result = {

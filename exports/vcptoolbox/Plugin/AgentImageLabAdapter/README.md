@@ -65,6 +65,14 @@ image_file_created: false
 real_execution_allowed: false
 ```
 
+## Local Delivery Surface Validation
+
+```powershell
+node scripts\validate_adapter_delivery_surface.js
+```
+
+The validation reads only repository-local adapter files and fixtures. It checks that the manifest remains dry-run only, the exported stdio adapter returns accepted and rejected guarded responses, and no real plugin/API/DailyNote/image/file-write path is present.
+
 ## Forbidden
 
 - Do not add real plugin execution logic.

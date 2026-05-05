@@ -108,7 +108,9 @@ function main() {
     validationLog.includes("git diff --check");
   const taskQueueCurrent =
     taskQueue.includes("Completed v5.0 post-merge delivery readiness validation.") &&
-    taskQueue.includes("If user authorizes v5.0 version movement");
+    (taskQueue.includes("If user authorizes v5.0 version movement") ||
+      taskQueue.includes("If user authorizes v5.1 version movement") ||
+      taskQueue.includes("If user authorizes v5.2 version movement"));
   const releaseNotesCurrent = releaseNotes.includes("Added v5.0 post-merge delivery readiness index.");
   const recordBoundaryClean = [record, schema].every((content) => {
     return (

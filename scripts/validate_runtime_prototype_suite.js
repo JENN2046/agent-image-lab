@@ -117,6 +117,16 @@ function main() {
       id: "runtime_smoke",
       kind: "run",
       filePath: path.join(root, "scripts", "validate_runtime_prototype_smoke.js")
+    },
+    {
+      id: "runtime_delivery_surface_syntax",
+      kind: "syntax",
+      filePath: path.join(root, "scripts", "validate_runtime_delivery_surface.js")
+    },
+    {
+      id: "runtime_delivery_surface",
+      kind: "run",
+      filePath: path.join(root, "scripts", "validate_runtime_delivery_surface.js")
     }
   ];
   const results = checks.map(runCheck);
@@ -136,6 +146,9 @@ function main() {
       runtime_smoke_syntax: resultById.runtime_smoke_syntax.passed,
       runtime_smoke: resultById.runtime_smoke.passed,
       runtime_smoke_output_passed: resultById.runtime_smoke.parsed_output_passed === true,
+      runtime_delivery_surface_syntax: resultById.runtime_delivery_surface_syntax.passed,
+      runtime_delivery_surface: resultById.runtime_delivery_surface.passed,
+      runtime_delivery_surface_output_passed: resultById.runtime_delivery_surface.parsed_output_passed === true,
       external_network_required: false,
       external_service_required: false,
       file_write_performed: false
