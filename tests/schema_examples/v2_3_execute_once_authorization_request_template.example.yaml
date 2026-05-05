@@ -1,0 +1,172 @@
+phase: v2.3_execute_once_authorization_request_template
+record_id: v2-3-execute-once-authorization-request-template-001
+project: Agent Image Lab
+status: execute_once_authorization_request_template_only
+
+execute_once_authorization_request:
+  request_id: v2-3-execute-once-authorization-request-placeholder-001
+  based_on_preplan_packet_id: v2-3-execute-once-preplan-placeholder-001
+  execute_once_authorization_required: true
+  execute_once_authorization_requested: false
+  execute_once_authorization_granted: false
+  source_read_authorized: false
+  authorization_status: pending_execute_once_authorization_request
+  authorized_by: null
+  authorized_at: null
+  read_scope_ref: redacted_allowlist_reference_placeholder
+  read_command_ref: redacted_read_command_reference_placeholder
+  read_attempt_limit: 1
+  read_attempt_used: 0
+  read_command_bound: false
+  read_command_executed: false
+  exact_real_paths_stored_in_git: false
+
+preplan_state:
+  execute_once_authorization_preplan_exists: true
+  execute_once_authorization_requested: false
+  execute_once_authorization_granted: false
+  one_time_read_authorized: false
+  execution_preflight_passed: false
+  read_scope_ref_confirmed: false
+  read_command_ref_confirmed: false
+  stop_conditions_confirmed: false
+  post_read_boundaries_confirmed: false
+
+future_human_authorization_fields:
+  authorized_by: required_later
+  authorized_at: required_later
+  execute_once_authorization_granted: required_later
+  read_scope_ref_confirmed: required_later
+  read_command_ref_confirmed: required_later
+  stop_conditions_confirmed: required_later
+
+request_constraints:
+  read_attempt_limit: 1
+  read_attempt_used: 0
+  read_scope_held_outside_git: true
+  read_command_held_outside_git: true
+  read_only_required: true
+  allowlist_only_required: true
+  recursive_scan_allowed: false
+  config_read_allowed: false
+  log_read_allowed: false
+  credential_read_allowed: false
+  customer_data_read_allowed: false
+  raw_source_output_allowed: false
+  real_path_output_allowed: false
+  file_write_allowed: false
+  vcpchat_launch_allowed: false
+  vcpchat_modification_allowed: false
+  plugin_call_allowed: false
+  api_call_allowed: false
+  daily_note_call_allowed: false
+  vcp_memory_write_allowed: false
+
+result_boundary:
+  result_route: pending_command_binding_preflight
+  direct_implementation_allowed: false
+  daily_note_write_allowed: false
+  vcp_memory_write_allowed: false
+  asset_write_allowed: false
+  chinese_boundary_summary_cn: "授权请求模板获批也不能直接读取源码，只能进入下一独立命令绑定预检。"
+
+forbidden_request_content:
+  - real_local_path
+  - raw_read_command
+  - shell_command_text
+  - raw_source_code
+  - complete_function_body
+  - endpoint_raw_value
+  - env_value
+  - secret_raw_value
+  - private_path_raw_value
+  - customer_private_data
+  - raw_runtime_log
+  - raw_ipc_payload
+  - raw_plugin_output
+  - image_binary
+
+source_read_state:
+  source_read_performed: false
+  real_vcpchat_source_read: false
+  real_vcpchat_modified: false
+  real_vcptoolbox_source_read: false
+  real_vcptoolbox_modified: false
+  raw_source_copy_allowed: false
+  raw_source_copied: false
+
+safety_gate:
+  contains_real_local_path: false
+  contains_raw_read_command: false
+  contains_raw_source_code: false
+  contains_complete_function_body: false
+  contains_endpoint_raw_value: false
+  contains_env_value: false
+  contains_secret_raw_value: false
+  contains_private_path_raw_value: false
+  contains_customer_private_data: false
+  contains_raw_runtime_log: false
+  contains_raw_ipc_payload: false
+  contains_raw_plugin_output: false
+  contains_image_binary: false
+  sensitive_summary_cn: "本授权请求模板样例不包含真实路径、读取命令或源码原文，只定义未来一次性读取执行授权请求门槛。"
+
+no_execution_guard:
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  renderer_runtime_code_created: false
+  execution_entry_created: false
+  read_command_executed: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  file_write_performed: false
+  disk_write_performed: false
+  image_file_created: false
+  selected_plugin: null
+  max_plugin_calls: 0
+  real_manifest_read: false
+  real_execution_allowed: false
+
+memory_delta_draft:
+  write_mode: audit_only
+  approval_status: not_required
+  chinese_audit_summary_cn: "真实 VCPChat 一次性读取执行授权请求仍是模板，未读取源码，也未写入记忆。"
+  preserved_original_allowed: false
+  final_decision:
+    should_write_to_vcp: false
+
+next_state_rules:
+  current_state: waiting_for_execute_once_authorization_request_template
+  next_allowed_state: waiting_for_execute_once_command_binding_preflight
+  blocked_states:
+    - read_command_executed
+    - source_read_performed
+    - real_vcpchat_source_read
+    - raw_source_copied
+    - vcpchat_modified
+    - ipc_handler_created
+    - preload_runtime_code_created
+    - renderer_runtime_code_created
+    - real_execution_ready
+
+audit_summary_cn: "v2.3 Plan 02 只补齐真实 VCPChat 一次性读取执行授权请求模板，不保存真实路径，不读取外部源码。"
+
+acceptance_assertions:
+  - "execute_once_authorization_requested=false。"
+  - "execute_once_authorization_granted=false。"
+  - "authorized_by=null。"
+  - "authorized_at=null。"
+  - "read_command_bound=false。"
+  - "read_command_executed=false。"
+  - "read_attempt_limit=1。"
+  - "read_attempt_used=0。"
+  - "exact_real_paths_stored_in_git=false。"
+  - "source_read_performed=false。"
+  - "real_vcpchat_source_read=false。"
+  - "raw_source_copy_allowed=false。"
+  - "api_called=false。"
+  - "vcp_plugin_called=false。"
+  - "daily_note_called=false。"
+  - "real_execution_allowed=false。"
