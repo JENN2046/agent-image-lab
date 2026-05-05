@@ -1302,3 +1302,36 @@
 - [ ] 样例保持 `selected_plugin=null`、`max_plugin_calls=0`、`real_manifest_read=false`。
 - [ ] 样例不包含真实本地路径、真实读取命令、shell 命令文本、真实源码片段、完整函数体、endpoint 原文、环境变量值、secret、token、cookie、密码、客户隐私、raw runtime log、raw IPC payload、raw plugin output 或图片二进制。
 - [ ] runtime handoff authorization gate 完成也只允许进入下一独立 closeout 或 v2.7 runtime implementation planning gate，不得自动触发实现、DailyNote、VCP 记忆或资产写入。
+
+## v2.7 Runtime Implementation Planning Gate 检查
+
+- [ ] `docs/104_v2_7_runtime_implementation_planning_gate.md` 存在。
+- [ ] `review_console/embed_contract/runtime_implementation_planning_gate.md` 存在。
+- [ ] `tests/schema_examples/v2_7_runtime_implementation_planning_gate.example.yaml` 存在。
+- [ ] runtime implementation planning gate 只定义实现规划门，不读取真实 VCPChat 源码。
+- [ ] runtime implementation planning gate 不读取真实 VCPToolBox。
+- [ ] runtime implementation planning gate 不保存真实根目录、真实 allowlist 路径、真实读取命令或 raw source。
+- [ ] runtime implementation planning gate 不保存 raw evidence、raw runtime log、raw IPC payload 或 raw plugin output。
+- [ ] runtime implementation planning gate 不修改真实 VCPChat 或 VCPToolBox。
+- [ ] runtime implementation planning gate 不创建真实 IPC handler、preload、renderer runtime、Adapter 执行入口或其他执行代码。
+- [ ] runtime implementation planning gate 不调用插件、API、DailyNote、VCP 记忆或文件系统写入。
+- [ ] 样例保持 `runtime_implementation_planning_required=true`、`runtime_implementation_planning_requested=false`。
+- [ ] 样例保持 `runtime_implementation_planning_approved=false`。
+- [ ] 样例保持 `runtime_handoff_authorization_granted=false`。
+- [ ] 样例保持 `implementation_file_scope_declared=false`、`rollback_plan_declared=false`、`validation_plan_declared=false`。
+- [ ] 样例保持 `electron_boundary_review_completed=false`。
+- [ ] 样例保持 `allowed_modify_files=[]`、`allowed_create_files=[]`、`allowed_ipc_channels=[]`。
+- [ ] 样例保持 `implementation_planning_authorized=false`。
+- [ ] 样例保持 `ipc_handler_creation_authorized=false`、`preload_runtime_creation_authorized=false`、`renderer_runtime_creation_authorized=false`。
+- [ ] 样例保持 `real_vcpchat_modification_authorized=false`。
+- [ ] 样例保持 `daily_note_write_authorized=false`、`vcp_memory_write_authorized=false`、`asset_write_authorized=false`。
+- [ ] 样例保持 `implementation_planning_is_code_authorization=false`、`implementation_planning_writes_code=false`。
+- [ ] 样例保持 `file_scope_declaration_writes_files=false`、`validation_plan_runs_commands=false`。
+- [ ] 样例保持 `real_vcpchat_source_read=false`、`real_vcpchat_modified=false`。
+- [ ] 样例保持 `real_vcptoolbox_source_read=false`、`real_vcptoolbox_modified=false`。
+- [ ] 样例保持 `implementation_code_created=false`、`ipc_handler_created=false`、`preload_runtime_code_created=false`、`renderer_runtime_code_created=false`、`execution_entry_created=false`。
+- [ ] 样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`real_execution_allowed=false`。
+- [ ] 样例保持 `image_file_created=false`、`file_write_performed=false`、`disk_write_performed=false`。
+- [ ] 样例保持 `selected_plugin=null`、`max_plugin_calls=0`、`real_manifest_read=false`。
+- [ ] 样例不包含真实本地路径、真实读取命令、shell 命令文本、真实源码片段、完整函数体、endpoint 原文、环境变量值、secret、token、cookie、密码、客户隐私、raw runtime log、raw IPC payload、raw plugin output 或图片二进制。
+- [ ] runtime implementation planning gate 完成也只允许进入下一独立 closeout 或 v2.8 runtime implementation task authorization，不得自动触发实现、DailyNote、VCP 记忆或资产写入。
