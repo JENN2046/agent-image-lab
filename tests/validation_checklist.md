@@ -773,3 +773,32 @@
 - [ ] 人工复核必须确认路径已脱敏、allowlist 已脱敏、审查人已确认、停止条件已确认、读取后边界已确认。
 - [ ] 人工复核通过也只允许进入真实读取最终授权 preflight，不得自动触发真实 VCPChat 源码读取。
 - [ ] 真实读取最终授权仍必须单独请求，且不得自动授权 VCPChat 修改、IPC handler、preload、插件、API、DailyNote 或记忆写入。
+
+## v2.2 Real VCPChat Read Final Authorization Preflight 检查
+
+- [ ] `docs/87_v2_2_real_vcpchat_read_final_authorization_preflight.md` 存在。
+- [ ] `review_console/embed_contract/real_vcpchat_read_final_authorization_preflight.md` 存在。
+- [ ] `tests/schema_examples/v2_2_real_vcpchat_read_final_authorization_preflight.example.yaml` 存在。
+- [ ] final authorization preflight 只定义真实读取前最后授权检查，不读取真实 VCPChat 源码。
+- [ ] final authorization preflight 不读取真实 VCPToolBox。
+- [ ] final authorization preflight 不保存真实 VCPChat 根目录、真实 allowlist 路径或 raw source。
+- [ ] final authorization preflight 不修改真实 VCPChat 或 VCPToolBox。
+- [ ] final authorization preflight 不创建真实 IPC handler、preload、renderer、Adapter 执行入口或其他执行代码。
+- [ ] final authorization preflight 不调用插件、API、DailyNote、VCP 记忆或文件系统写入。
+- [ ] 样例保持 `final_authorization_requested=false`、`final_authorization_granted=false`、`authorization_status=pending_final_authorization`。
+- [ ] 样例保持 `source_read_authorized=false`、`authorized_by=null`、`authorized_at=null`。
+- [ ] 样例保持 `filled_request_reviewed=false`、`filled_request_approved=false`。
+- [ ] 样例保持 `root_path_redaction_confirmed=false`、`exact_allowlist_redaction_confirmed=false`。
+- [ ] 样例保持 `read_command_permission_confirmed=false`、`reviewer_confirmed=false`、`stop_conditions_confirmed=false`、`post_read_boundaries_confirmed=false`。
+- [ ] 样例保持 `read_command_ready=false`、`read_only_required=true`、`allowlist_only_required=true`。
+- [ ] 样例保持 `recursive_scan_allowed=false`、`config_read_allowed=false`、`log_read_allowed=false`、`credential_read_allowed=false`、`customer_data_read_allowed=false`。
+- [ ] 样例保持 `raw_source_output_allowed=false`、`file_write_allowed=false`、`vcpchat_launch_allowed=false`。
+- [ ] 样例保持 `exact_real_paths_stored_in_git=false`、`target_repository_root_stored_in_git=false`。
+- [ ] 样例保持 `source_read_performed=false`、`real_vcpchat_source_read=false`、`real_vcpchat_modified=false`。
+- [ ] 样例保持 `real_vcptoolbox_source_read=false`、`real_vcptoolbox_modified=false`。
+- [ ] 样例保持 `raw_source_copy_allowed=false`、`raw_source_copied=false`。
+- [ ] 样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`real_execution_allowed=false`。
+- [ ] 样例保持 `ipc_handler_created=false`、`preload_runtime_code_created=false`、`renderer_runtime_code_created=false`、`execution_entry_created=false`。
+- [ ] 样例不包含真实本地路径、真实源码片段、完整函数体、endpoint 原文、环境变量值、secret、token、cookie、密码、客户隐私、raw runtime log、raw IPC payload、raw plugin output 或图片二进制。
+- [ ] 最终授权 preflight 通过也只允许进入一次性真实读取授权请求，不得自动触发真实 VCPChat 源码读取。
+- [ ] 一次性真实读取仍必须单独请求，且不得自动授权 VCPChat 修改、IPC handler、preload、插件、API、DailyNote 或记忆写入。
