@@ -1,5 +1,45 @@
-const bridge = window.ImageLabHostBridge;
-const session = bridge.loadSession();
+const PROTOTYPE_GUARD = Object.freeze({
+  api_called: false,
+  daily_note_called: false,
+  vcp_plugin_called: false,
+  disk_write_performed: false,
+  image_file_created: false
+});
+
+function clone(value) {
+  return JSON.parse(JSON.stringify(value));
+}
+
+function requireBridge(hostBridge) {
+  if (!hostBridge || typeof hostBridge.loadSession !== "function" || typeof hostBridge.submitDraft !== "function") {
+    throw new Error("ImageLabHostBridge is unavailable or incomplete.");
+  }
+  return hostBridge;
+}
+
+function requireArray(value, fallback = []) {
+  return Array.isArray(value) ? value : fallback;
+}
+
+function normalizeSession(rawSession) {
+  const nextSession = clone(rawSession);
+  nextSession.image_versions = requireArray(nextSession.image_versions);
+  nextSession.comments = requireArray(nextSession.comments);
+  nextSession.annotation_notes = requireArray(nextSession.annotation_notes);
+  nextSession.memory_preview = nextSession.memory_preview || {};
+  nextSession.memory_preview.tags = requireArray(nextSession.memory_preview.tags);
+  nextSession.memory_preview.safety = nextSession.memory_preview.safety || {};
+  nextSession.image_case_seed = nextSession.image_case_seed || {};
+  nextSession.image_case_seed.input_assets = requireArray(nextSession.image_case_seed.input_assets);
+  nextSession.image_case_seed.review_ids = requireArray(nextSession.image_case_seed.review_ids);
+  nextSession.image_case_seed.strengths_cn = requireArray(nextSession.image_case_seed.strengths_cn);
+  nextSession.image_case_seed.weaknesses_cn = requireArray(nextSession.image_case_seed.weaknesses_cn);
+  nextSession.image_case_seed.reusable_rules_cn = requireArray(nextSession.image_case_seed.reusable_rules_cn);
+  return nextSession;
+}
+
+const bridge = requireBridge(window.ImageLabHostBridge);
+const session = normalizeSession(bridge.loadSession());
 
 const els = {
   taskId: document.getElementById("taskId"),
@@ -13,6 +53,8 @@ const els = {
   humanApproved: document.getElementById("humanApproved"),
   memoryContent: document.getElementById("memoryContent"),
   memoryApproval: document.getElementById("memoryApproval"),
+  hostStatus: document.getElementById("hostStatus"),
+  hostSubmittedAt: document.getElementById("hostSubmittedAt"),
   draftOutput: document.getElementById("draftOutput")
 };
 
@@ -21,7 +63,7 @@ function nowIso() {
 }
 
 function currentVersion() {
-  return session.image_versions.find((version) => version.version_id === session.current_version_id);
+  return session.image_versions.find((version) => version.version_id === session.current_version_id) || session.image_versions[0];
 }
 
 function memoryWriteMode(status) {
@@ -142,13 +184,7 @@ function buildDraft() {
           actor: "Review_Console_Runtime_Prototype",
           created_at: createdAt,
           note_cn: "runtime prototype 只生成草案，没有调用外部系统。",
-          prototype_guard: {
-            api_called: false,
-            daily_note_called: false,
-            vcp_plugin_called: false,
-            disk_write_performed: false,
-            image_file_created: false
-          }
+          prototype_guard: clone(PROTOTYPE_GUARD)
         }
       ]
     },
@@ -214,19 +250,60 @@ function buildDraft() {
         rejection_reason_cn: memoryApproval.rejection_reason_cn
       }
     },
-    prototype_guard: {
-      api_called: false,
-      daily_note_called: false,
-      vcp_plugin_called: false,
-      disk_write_performed: false,
-      image_file_created: false
-    }
+    prototype_guard: clone(PROTOTYPE_GUARD)
   };
 }
 
+function guardIsClean(guard) {
+  return Boolean(
+    guard &&
+      Object.entries(PROTOTYPE_GUARD).every(([key, value]) => guard[key] === value)
+  );
+}
+
+function assertDraftSafe(draft) {
+  if (!draft.review_session_draft || !draft.image_case_draft || !draft.memory_delta_draft) {
+    throw new Error("Draft is missing required sections.");
+  }
+  if (!guardIsClean(draft.prototype_guard)) {
+    throw new Error("Draft prototype_guard indicates a side effect.");
+  }
+  const auditGuard = draft.review_session_draft.audit_log?.[0]?.prototype_guard;
+  if (!guardIsClean(auditGuard)) {
+    throw new Error("Draft audit guard indicates a side effect.");
+  }
+  if (draft.image_case_draft.asset_status === "accepted" && draft.image_case_draft.human_approval.approved !== true) {
+    throw new Error("Accepted asset requires explicit human approval.");
+  }
+  if (
+    draft.memory_delta_draft.final_decision.should_write_to_vcp === true &&
+    draft.memory_delta_draft.approval_status !== "approved"
+  ) {
+    throw new Error("Memory write request requires approved memory status.");
+  }
+}
+
+function submitDraftToHost(draft) {
+  assertDraftSafe(draft);
+  const ack = bridge.submitDraft(clone(draft));
+  if (!ack || ack.side_effects_performed !== false || ack.accepted_by_host_mock !== true) {
+    throw new Error("Host bridge rejected the draft or reported a side effect.");
+  }
+  return ack;
+}
+
 function render() {
+  const draft = buildDraft();
   els.humanScoreOut.textContent = els.humanScore.value;
-  els.draftOutput.textContent = JSON.stringify(buildDraft(), null, 2);
+  els.draftOutput.textContent = JSON.stringify(draft, null, 2);
+  try {
+    const ack = submitDraftToHost(draft);
+    els.hostStatus.textContent = ack.status_cn;
+    els.hostSubmittedAt.textContent = ack.received_at;
+  } catch (error) {
+    els.hostStatus.textContent = error.message;
+    els.hostSubmittedAt.textContent = "-";
+  }
 }
 
 function init() {
@@ -240,7 +317,6 @@ function init() {
     el.addEventListener("change", render);
   });
   render();
-  bridge.submitDraft(buildDraft());
 }
 
 init();

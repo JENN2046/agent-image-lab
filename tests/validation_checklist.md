@@ -1640,3 +1640,33 @@
 - [ ] 样例保持 `selected_plugin=null`、`max_plugin_calls=0`、`real_manifest_read=false`。
 - [ ] 样例不包含真实本地路径、真实读取命令、shell 命令文本、真实源码片段、完整函数体、endpoint 原文、环境变量值、secret、token、cookie、密码、客户隐私、raw runtime log、raw IPC payload、raw plugin output 或图片二进制。
 - [ ] first runtime patch final preflight 完成也只允许进入下一独立 closeout 或 v3.6 first runtime code patch authorization，不得自动触发实现、DailyNote、VCP 记忆或资产写入。
+
+## v3.6 First Runtime Code Patch Authorization 检查
+
+- [ ] `docs/113_v3_6_first_runtime_code_patch_authorization.md` 存在。
+- [ ] `review_console/embed_contract/first_runtime_code_patch_authorization.md` 存在。
+- [ ] `tests/schema_examples/v3_6_first_runtime_code_patch_authorization.example.yaml` 存在。
+- [ ] first runtime code patch authorization 只定义第一次 runtime code patch 的授权模板，不读取真实 VCPChat 源码。
+- [ ] 样例保持 `final_preflight_passed=false`。
+- [ ] 样例保持 `code_patch_authorization_requested=false`、`code_patch_authorization_completed=false`。
+- [ ] 样例保持 `code_patch_authorization_granted=false`、`code_patch_execution_authorized=false`。
+- [ ] 样例保持 `implementation_code_creation_authorized=false`。
+- [ ] 样例保持 `planned_commands=[]`、`planned_validation_commands=[]`、`rollback_commands=[]`。
+- [ ] 样例保持 `allowed_modify_files=[]`、`allowed_create_files=[]`。
+- [ ] 样例保持 `allowed_ipc_channels=[]`、`allowed_preload_api_names=[]`、`allowed_renderer_entry_points=[]`。
+- [ ] 样例保持 `electron_boundary_confirmed=false`、`real_execution_allowed=false`。
+- [ ] 样例不包含真实本地路径、真实读取命令、shell 命令文本、真实源码片段、完整函数体、endpoint 原文、环境变量值、secret、token、cookie、密码、客户隐私、raw runtime log、raw IPC payload、raw plugin output 或图片二进制。
+
+## v3.7 First Runtime Patch Execution Record 检查
+
+- [ ] `docs/114_v3_7_first_runtime_patch_execution_record.md` 存在。
+- [ ] `tests/schema_examples/v3_7_first_runtime_patch_execution_record.example.yaml` 存在。
+- [ ] first runtime patch 只修改项目内 `review_console/runtime_prototype/`，不修改真实 VCPChat 或 VCPToolBox。
+- [ ] runtime prototype 增加 host bridge ack 展示。
+- [ ] runtime prototype 增加 draft guard 校验，保持 `prototype_guard` 无外部副作用。
+- [ ] `node --check review_console/runtime_prototype/host_bridge_mock.js` 通过。
+- [ ] `node --check review_console/runtime_prototype/app.js` 通过。
+- [ ] 记录保持 `real_vcpchat_modified=false`、`real_vcptoolbox_modified=false`。
+- [ ] 记录保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`。
+- [ ] 记录保持 `runtime_disk_write_performed=false`、`image_file_created=false`。
+- [ ] 记录保持 `commit_tag_push_authorized=false`。

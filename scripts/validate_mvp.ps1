@@ -46,6 +46,8 @@ $requiredFiles = @(
   'docs/32_final_acceptance_report.md',
   'docs/33_post_execution_checkpoint.md',
   'docs/34_v1_0_true_loop_closeout.md',
+  'docs/113_v3_6_first_runtime_code_patch_authorization.md',
+  'docs/114_v3_7_first_runtime_patch_execution_record.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
@@ -104,11 +106,20 @@ $requiredFiles = @(
   'tests/schema_examples/v0_10_gptimagegen_gpt55_real_execution_record.example.yaml',
   'tests/schema_examples/v0_10_doubaogen_retry_real_execution_record.example.yaml',
   'tests/schema_examples/v1_0_true_loop_closeout.example.yaml',
+  'tests/schema_examples/v3_6_first_runtime_code_patch_authorization.example.yaml',
+  'tests/schema_examples/v3_7_first_runtime_patch_execution_record.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
   'review_console/static_prototype/styles.css',
-  'review_console/static_prototype/FIELD_MAPPING.md'
+  'review_console/static_prototype/FIELD_MAPPING.md',
+  'review_console/runtime_prototype/index.html',
+  'review_console/runtime_prototype/app.js',
+  'review_console/runtime_prototype/host_bridge_mock.js',
+  'review_console/runtime_prototype/styles.css',
+  'review_console/runtime_prototype/README.md',
+  'review_console/runtime_prototype/FIELD_MAPPING.md',
+  'review_console/embed_contract/first_runtime_code_patch_authorization.md'
 )
 
 $requiredDirectories = @(
@@ -167,6 +178,20 @@ foreach ($path in $staticPrototypeFiles) {
     $content = Get-Content -Raw -Encoding UTF8 $fullPath
     if ($content -match 'fetch\(|XMLHttpRequest|writeFile|fs\.|eval\(|Function\(') {
       Add-Failure "Static prototype contains forbidden runtime pattern: $path"
+    }
+  }
+}
+
+$runtimePrototypeFiles = @(
+  'review_console/runtime_prototype/app.js',
+  'review_console/runtime_prototype/host_bridge_mock.js'
+)
+foreach ($path in $runtimePrototypeFiles) {
+  $fullPath = Join-Path $Root $path
+  if (Test-Path -LiteralPath $fullPath) {
+    $content = Get-Content -Raw -Encoding UTF8 $fullPath
+    if ($content -match 'fetch\(|XMLHttpRequest|localStorage|sessionStorage|writeFile|appendFile|child_process|exec\(|spawn\(|require\(|fs\.|https\.|http\.|navigator\.clipboard|eval\(|Function\(') {
+      Add-Failure "Runtime prototype contains forbidden runtime pattern: $path"
     }
   }
 }
@@ -1046,6 +1071,142 @@ foreach ($path in $v10TrueLoopCloseoutFiles) {
   }
 }
 
+$v36RuntimeCodePatchAuthorizationFiles = @(
+  'docs/113_v3_6_first_runtime_code_patch_authorization.md',
+  'review_console/embed_contract/first_runtime_code_patch_authorization.md',
+  'tests/schema_examples/v3_6_first_runtime_code_patch_authorization.example.yaml'
+)
+
+$requiredV36RuntimeCodePatchAuthorizationPatterns = @(
+  'status:\s+first_runtime_code_patch_authorization_template_only',
+  'final_preflight_passed:\s+false',
+  'code_patch_authorization_requested:\s+false',
+  'code_patch_authorization_completed:\s+false',
+  'code_patch_authorization_granted:\s+false',
+  'code_patch_execution_authorized:\s+false',
+  'implementation_code_creation_authorized:\s+false',
+  'planned_commands:\s+\[\]',
+  'planned_validation_commands:\s+\[\]',
+  'rollback_commands:\s+\[\]',
+  'allowed_modify_files:\s+\[\]',
+  'allowed_create_files:\s+\[\]',
+  'allowed_ipc_channels:\s+\[\]',
+  'allowed_preload_api_names:\s+\[\]',
+  'allowed_renderer_entry_points:\s+\[\]',
+  'electron_boundary_confirmed:\s+false',
+  'real_execution_allowed:\s+false',
+  'api_called:\s+false',
+  'vcp_plugin_called:\s+false',
+  'daily_note_called:\s+false'
+)
+
+$forbiddenV36RuntimeCodePatchAuthorizationPatterns = @(
+  'final_preflight_passed:\s+true',
+  'code_patch_authorization_requested:\s+true',
+  'code_patch_authorization_completed:\s+true',
+  'code_patch_authorization_granted:\s+true',
+  'code_patch_execution_authorized:\s+true',
+  'implementation_code_creation_authorized:\s+true',
+  'real_vcpchat_modified:\s+true',
+  'real_vcptoolbox_modified:\s+true',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'vcp_memory_written:\s+true',
+  'image_file_created:\s+true',
+  '[A-Za-z]:\\',
+  'https?://'
+)
+
+foreach ($path in $v36RuntimeCodePatchAuthorizationFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v3.6 runtime code patch authorization file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV36RuntimeCodePatchAuthorizationPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v3.6 runtime code patch authorization missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV36RuntimeCodePatchAuthorizationPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v3.6 runtime code patch authorization boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$v37RuntimePatchExecutionFiles = @(
+  'docs/114_v3_7_first_runtime_patch_execution_record.md',
+  'tests/schema_examples/v3_7_first_runtime_patch_execution_record.example.yaml'
+)
+
+$requiredV37RuntimePatchExecutionPatterns = @(
+  'status:\s+completed_validated_project_runtime_patch',
+  'user_runtime_code_authorization_received:\s+true',
+  'scope_limited_by_codex:\s+true',
+  'real_vcpchat_source_read:\s+false',
+  'real_vcpchat_modified:\s+false',
+  'real_vcptoolbox_source_read:\s+false',
+  'real_vcptoolbox_modified:\s+false',
+  'project_runtime_prototype_modified:\s+true',
+  'project_runtime_guard_added:\s+true',
+  'host_bridge_ack_added:\s+true',
+  'api_called:\s+false',
+  'vcp_plugin_called:\s+false',
+  'daily_note_called:\s+false',
+  'vcp_memory_written:\s+false',
+  'runtime_disk_write_performed:\s+false',
+  'image_file_created:\s+false',
+  'raw_source_copied_from_external_repo:\s+false',
+  'secret_value_saved:\s+false',
+  'endpoint_raw_saved:\s+false',
+  'runtime_log_saved:\s+false',
+  'commit_tag_push_authorized:\s+false'
+)
+
+$forbiddenV37RuntimePatchExecutionPatterns = @(
+  'real_vcpchat_source_read:\s+true',
+  'real_vcpchat_modified:\s+true',
+  'real_vcptoolbox_source_read:\s+true',
+  'real_vcptoolbox_modified:\s+true',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'vcp_memory_written:\s+true',
+  'runtime_disk_write_performed:\s+true',
+  'image_file_created:\s+true',
+  'raw_source_copied_from_external_repo:\s+true',
+  'secret_value_saved:\s+true',
+  'endpoint_raw_saved:\s+true',
+  'runtime_log_saved:\s+true',
+  'commit_tag_push_authorized:\s+true',
+  '[A-Za-z]:\\',
+  'https?://'
+)
+
+foreach ($path in $v37RuntimePatchExecutionFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v3.7 runtime patch execution record file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV37RuntimePatchExecutionPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v3.7 runtime patch execution record missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV37RuntimePatchExecutionPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v3.7 runtime patch execution record boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
 $node = Get-Command node -ErrorAction SilentlyContinue
 if (-not $node) {
   Add-Failure "Node.js is required to validate adapter_dry_run_lab"
@@ -1098,6 +1259,16 @@ if (-not $node) {
   & node --check (Join-Path $Root 'exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js failed node --check"
+  }
+
+  & node --check (Join-Path $Root 'review_console/runtime_prototype/app.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "review_console/runtime_prototype/app.js failed node --check"
+  }
+
+  & node --check (Join-Path $Root 'review_console/runtime_prototype/host_bridge_mock.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "review_console/runtime_prototype/host_bridge_mock.js failed node --check"
   }
 
   $exportCheckScript = @"

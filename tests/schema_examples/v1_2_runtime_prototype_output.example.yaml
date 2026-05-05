@@ -116,6 +116,13 @@ prototype_guard:
   disk_write_performed: false
   image_file_created: false
 
+host_submit_ack:
+  accepted_by_host_mock: true
+  draft_received: true
+  validation_passed: true
+  side_effects_performed: false
+  status_cn: host mock 已接收安全草案，无外部副作用。
+
 acceptance_assertions:
   no_real_vcpchat_modified: true
   no_real_vcptoolbox_modified: true
@@ -124,6 +131,7 @@ acceptance_assertions:
   no_vcp_plugin_call: true
   no_disk_write: true
   image_file_creation_blocked: true
+  host_ack_validated: true
   human_review_overrides_ai_review: true
   accepted_requires_human_approval: true
   pending_memory_keeps_write_mode_draft: true

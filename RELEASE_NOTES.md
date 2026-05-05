@@ -29,7 +29,10 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 
 ## Unreleased
 
-- No new runtime capability is authorized by this section.
+- Added v3.6 first runtime code patch authorization template.
+- Added the first project-local runtime code patch for the Review Console runtime prototype.
+- Added host bridge mock draft validation and sanitized submit ack display.
+- Added v3.7 first runtime patch execution record with no external side effects.
 
 ## Safety Status
 

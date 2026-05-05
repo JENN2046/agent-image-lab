@@ -74,3 +74,18 @@ prototype_guard:
 ```
 
 该 guard 是验收证据，不是运行时权限授予。
+
+## Host Submit Ack
+
+v3.7 runtime patch 增加 host bridge mock 回执。该回执不是核心 schema 字段，只用于证明浏览器原型把草案交给受控 host mock 前后都保持无副作用。
+
+| ack 字段 | 来源 | 说明 |
+| --- | --- | --- |
+| `accepted_by_host_mock` | `host_bridge_mock.submitDraft()` | 只有草案包含三份 draft、guard 清洁、accepted 有人工审批、memory write 有审批时才为 true |
+| `draft_received` | `host_bridge_mock.submitDraft()` | 只表示 mock 收到了草案对象 |
+| `validation_passed` | `host_bridge_mock.draftIsSafe()` | host mock 的二次安全检查 |
+| `side_effects_performed` | 固定 false | mock 不写磁盘、不调用外部系统 |
+| `received_at` | host mock 当前时间 | 仅用于 UI 状态展示 |
+| `status_cn` | host mock 中文摘要 | 脱敏中文回执，不包含路径、源码或敏感信息 |
+
+Host ack 不代表真实 VCPChat 接入、不代表 IPC handler 已创建、不代表 DailyNote 已写入。

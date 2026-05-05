@@ -28,9 +28,22 @@ prototype_guard:
   vcp_plugin_called: false
   disk_write_performed: false
   image_file_created: false
+host_submit_ack:
+  accepted_by_host_mock: true
+  validation_passed: true
+  side_effects_performed: false
 ```
 
 `FIELD_MAPPING.md` 记录 runtime 输出到 `review_session`、`image_case` 和 `memory_delta` schema 的映射关系。`tests/schema_examples/v1_2_runtime_prototype_output.example.yaml` 是验收用的无外部副作用草案样例。
+
+## First Runtime Patch
+
+v3.7 为 runtime prototype 增加了项目内 host bridge 草案提交回执：
+
+- renderer 在每次草案重算后先校验 `prototype_guard`。
+- host mock 再次校验草案结构、人工 accepted 条件和 memory write 条件。
+- UI 展示 host ack 和提交时间。
+- host mock 永远保持 `side_effects_performed=false`，不写磁盘、不调用外部系统。
 
 ## Validation
 
@@ -42,6 +55,7 @@ node --check review_console\runtime_prototype\app.js
 人工验收时还应确认：
 
 - 页面输出包含 `review_session_draft`、`image_case_draft`、`memory_delta_draft` 和 `prototype_guard`。
+- 页面展示 host ack，且 ack 保持 `accepted_by_host_mock=true`、`side_effects_performed=false`。
 - `human_review` 覆盖 `ai_review`，`final_review.source=human_review`。
 - 未勾选人工批准时，`image_case_draft.asset_status` 不得为 `accepted`。
 - `memory_delta_draft.chinese_diary_content` 为中文。
