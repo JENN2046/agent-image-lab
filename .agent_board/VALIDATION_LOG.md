@@ -2,6 +2,264 @@
 
 ## Entries
 
+## VALIDATION-20260506-V5-9
+
+Task:
+
+```text
+Expand v5 index consistency validation coverage to v5.0-v5.9.
+```
+
+Commands run:
+
+```text
+scripts/validate_mvp.ps1
+scripts/validate-agent-image-lab-local.ps1
+node scripts/validate_v5_index_consistency.js
+node scripts/validate_v5_handoff_freshness.js
+node scripts/validate_v5_local_batch_commit_readiness.js
+node scripts/validate_agent_board_state.js
+node scripts/validate_local_commit_scope.js
+git diff --check
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+The v5 index consistency validation now covers v5.0-v5.9 records, including local batch commit-readiness, handoff freshness, and the expanded index record itself.
+```
+
+Warnings:
+
+```text
+Manual-review warnings may remain for forbidden strings such as token, cookie, password, image extensions, and script extensions because the project intentionally contains negative checklist references.
+```
+
+Not validated:
+
+```text
+No git add, commit, push, remote tag, PR, merge, release, real VCPChat read, real VCPToolBox read, real manifest read, plugin call, API call, DailyNote call, VCP memory write, or image creation is performed in this v5.9 local batch.
+```
+
+Notes:
+
+```text
+All current v5.9 work stays project-local and reversible.
+The v5.9 local batch is not a version-action authorization.
+```
+
+## VALIDATION-20260506-V5-8
+
+Task:
+
+```text
+Add handoff freshness validation for current agent board resume materials.
+```
+
+Commands run:
+
+```text
+scripts/validate_mvp.ps1
+scripts/validate-agent-image-lab-local.ps1
+node scripts/validate_v5_handoff_freshness.js
+node scripts/validate_v5_local_batch_commit_readiness.js
+node scripts/validate_v5_index_consistency.js
+node scripts/validate_agent_board_state.js
+node scripts/validate_local_commit_scope.js
+git diff --check
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+The handoff freshness validation checks RUN_STATE, HANDOFF, TASK_QUEUE, CHECKPOINT, VALIDATION_LOG, resume prompt, hard stop gates, remote action gates, external read gates, no-execution boundary, and clear blocked state.
+```
+
+Warnings:
+
+```text
+Manual-review warnings may remain for forbidden strings such as token, cookie, password, image extensions, and script extensions because the project intentionally contains negative checklist references.
+```
+
+Not validated:
+
+```text
+No git add, commit, push, remote tag, PR, merge, release, real VCPChat read, real VCPToolBox read, real manifest read, plugin call, API call, DailyNote call, VCP memory write, or image creation is performed in this v5.8 local batch.
+```
+
+Notes:
+
+```text
+All current v5.8 work stays project-local and reversible.
+The v5.8 local batch is not a version-action authorization.
+```
+
+## VALIDATION-20260506-V5-7
+
+Task:
+
+```text
+Add local batch commit-readiness preflight for the current v5.5-v5.7 uncommitted scope.
+```
+
+Commands run:
+
+```text
+scripts/validate_mvp.ps1
+scripts/validate-agent-image-lab-local.ps1
+node scripts/validate_v5_local_batch_commit_readiness.js
+node scripts/validate_v5_index_consistency.js
+node scripts/validate_v5_post_commit_reconciliation.js
+node scripts/validate_agent_board_state.js
+node scripts/validate_local_commit_scope.js
+git diff --check
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+The local batch commit-readiness preflight checks the current base head a2ae539, expected tracked modifications, expected new files, absence of staged changes, and preservation of commit/push/tag/PR/release authorization gates.
+```
+
+Warnings:
+
+```text
+Manual-review warnings may remain for forbidden strings such as token, cookie, password, image extensions, and script extensions because the project intentionally contains negative checklist references.
+```
+
+Not validated:
+
+```text
+No git add, commit, push, remote tag, PR, merge, release, real VCPChat read, real VCPToolBox read, real manifest read, plugin call, API call, DailyNote call, VCP memory write, or image creation is performed in this v5.7 local batch.
+```
+
+Notes:
+
+```text
+All current v5.7 work stays project-local and reversible.
+The v5.7 local batch is not a version-action authorization.
+```
+
+## VALIDATION-20260506-V5-6
+
+Task:
+
+```text
+Add v5 index consistency validation for v5.0-v5.6 local delivery records.
+```
+
+Commands run:
+
+```text
+scripts/validate_mvp.ps1
+scripts/validate-agent-image-lab-local.ps1
+node scripts/validate_v5_index_consistency.js
+node scripts/validate_v5_post_commit_reconciliation.js
+node scripts/validate_agent_board_state.js
+node scripts/validate_local_commit_scope.js
+git diff --check
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+The v5 index consistency validation checks v5.0-v5.6 docs, schema examples, validation scripts, README, MANIFEST, roadmap, release notes, validation checklist, validate_mvp, local commit scope allowlist, and agent board state.
+```
+
+Warnings:
+
+```text
+Manual-review warnings may remain for forbidden strings such as token, cookie, password, image extensions, and script extensions because the project intentionally contains negative checklist references.
+```
+
+Not validated:
+
+```text
+No push, remote tag, PR, merge, release, real VCPChat read, real VCPToolBox read, real manifest read, plugin call, API call, DailyNote call, VCP memory write, or image creation is performed in this v5.6 local batch.
+```
+
+Notes:
+
+```text
+All current v5.6 work stays project-local and reversible.
+The v5.6 local batch is not a version-action authorization.
+```
+
+## VALIDATION-20260506-V5-5
+
+Task:
+
+```text
+Record the post-v5.4-commit reconciliation checkpoint and update the local ahead-of-origin commit chain.
+```
+
+Commands run:
+
+```text
+scripts/validate_mvp.ps1
+scripts/validate-agent-image-lab-local.ps1
+node scripts/validate_v5_post_commit_reconciliation.js
+node scripts/validate_v5_local_sync_readiness.js
+node scripts/validate_agent_board_state.js
+node scripts/validate_local_commit_scope.js
+git diff --check
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+The post-commit reconciliation checkpoint records v5.4 as local commit a2ae539 and updates the local ahead-of-origin chain to 4 commits: 6bd255d -> 876d335 -> b04e253 -> a2ae539. It keeps push_authorized=false, tag_authorized=false, pr_authorized=false, and release_authorized=false.
+```
+
+Warnings:
+
+```text
+Manual-review warnings may remain for forbidden strings such as token, cookie, password, image extensions, and script extensions because the project intentionally contains negative checklist references.
+```
+
+Not validated:
+
+```text
+No push, remote tag, PR, merge, release, real VCPChat read, real VCPToolBox read, real manifest read, plugin call, API call, DailyNote call, VCP memory write, or image creation is performed in this v5.5 local batch.
+```
+
+Notes:
+
+```text
+All current v5.5 work stays project-local and reversible.
+The v5.5 local batch is not a version-action authorization.
+```
+
 ## VALIDATION-20260506-V5-4
 
 Task:

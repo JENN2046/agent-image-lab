@@ -18,7 +18,7 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v5.4 local sync readiness preflight
+v1.0 true-loop closeout candidate + v5.9 expanded v5 index consistency validation
 ```
 
 已经完成：
@@ -57,6 +57,11 @@ v1.0 true-loop closeout candidate + v5.4 local sync readiness preflight
 - v5.2 adapter delivery surface validation：机器检查 Adapter dry-run lab 和 VCPToolBox 导出级 dry-run 包的 manifest、stdio、fixture、README 边界和 no-execution guard。
 - v5.3 review console adapter handoff validation：机器检查 Adapter dry-run accepted fixture 能以 no-execution handoff 草案进入 Review Console static prototype。
 - v5.4 local sync readiness preflight：机器检查本地 `master` 相对 `origin/master` 的领先提交链，并保留 push/tag/PR/release 独立授权门。
+- v5.5 post-commit reconciliation checkpoint：记录 v5.4 已落成本地 commit `a2ae539`，并把当前本地领先提交链更新为 4 个提交。
+- v5.6 v5 index consistency validation：机器检查 v5.0-v5.6 阶段文档、schema、脚本、顶层索引和 `.agent_board` 一致性。
+- v5.7 local batch commit-readiness preflight：只读检查当前本地未提交批次的 tracked 修改、新文件、staged 状态和版本动作授权门。
+- v5.8 handoff freshness validation：机器检查 `.agent_board` 续跑材料是否共同指向当前阶段，并保留硬停止门、远端动作授权门和 no-execution 边界。
+- v5.9 expanded v5 index consistency validation：把 v5 index consistency validation 覆盖范围扩展到 v5.0-v5.9。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：

@@ -66,6 +66,10 @@ $requiredFiles = @(
   'scripts/validate_adapter_delivery_surface.js',
   'scripts/validate_review_console_adapter_handoff.js',
   'scripts/validate_v5_local_sync_readiness.js',
+  'scripts/validate_v5_post_commit_reconciliation.js',
+  'scripts/validate_v5_index_consistency.js',
+  'scripts/validate_v5_local_batch_commit_readiness.js',
+  'scripts/validate_v5_handoff_freshness.js',
   'scripts/validate_runtime_guard_unit.js',
   'scripts/validate_runtime_prototype_smoke.js',
   'scripts/validate_runtime_prototype_suite.js',
@@ -95,6 +99,11 @@ $requiredFiles = @(
   'docs/129_v5_2_adapter_delivery_surface.md',
   'docs/130_v5_3_review_console_adapter_handoff.md',
   'docs/131_v5_4_local_sync_readiness.md',
+  'docs/132_v5_5_post_commit_reconciliation.md',
+  'docs/133_v5_6_v5_index_consistency_validation.md',
+  'docs/134_v5_7_local_batch_commit_readiness.md',
+  'docs/135_v5_8_handoff_freshness_validation.md',
+  'docs/136_v5_9_expanded_v5_index_consistency.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
@@ -172,6 +181,11 @@ $requiredFiles = @(
   'tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml',
   'tests/schema_examples/v5_3_review_console_adapter_handoff.example.yaml',
   'tests/schema_examples/v5_4_local_sync_readiness.example.yaml',
+  'tests/schema_examples/v5_5_post_commit_reconciliation.example.yaml',
+  'tests/schema_examples/v5_6_v5_index_consistency_validation.example.yaml',
+  'tests/schema_examples/v5_7_local_batch_commit_readiness.example.yaml',
+  'tests/schema_examples/v5_8_handoff_freshness_validation.example.yaml',
+  'tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -1900,6 +1914,10 @@ $allowedV46ModifiedFiles = @(
   'scripts/validate_adapter_delivery_surface.js',
   'scripts/validate_review_console_adapter_handoff.js',
   'scripts/validate_v5_local_sync_readiness.js',
+  'scripts/validate_v5_post_commit_reconciliation.js',
+  'scripts/validate_v5_index_consistency.js',
+  'scripts/validate_v5_local_batch_commit_readiness.js',
+  'scripts/validate_v5_handoff_freshness.js',
   'scripts/validate_runtime_delivery_surface.js',
   'scripts/validate_runtime_prototype_suite.js',
   'scripts/validate_runtime_prototype_smoke.js',
@@ -1908,6 +1926,16 @@ $allowedV46ModifiedFiles = @(
   'tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml',
   'tests/schema_examples/v5_3_review_console_adapter_handoff.example.yaml',
   'tests/schema_examples/v5_4_local_sync_readiness.example.yaml',
+  'tests/schema_examples/v5_5_post_commit_reconciliation.example.yaml',
+  'docs/132_v5_5_post_commit_reconciliation.md',
+  'tests/schema_examples/v5_6_v5_index_consistency_validation.example.yaml',
+  'docs/133_v5_6_v5_index_consistency_validation.md',
+  'tests/schema_examples/v5_7_local_batch_commit_readiness.example.yaml',
+  'docs/134_v5_7_local_batch_commit_readiness.md',
+  'tests/schema_examples/v5_8_handoff_freshness_validation.example.yaml',
+  'docs/135_v5_8_handoff_freshness_validation.md',
+  'tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml',
+  'docs/136_v5_9_expanded_v5_index_consistency.md',
   'tests/validation_checklist.md'
 )
 
@@ -1938,6 +1966,11 @@ $allowedV46UntrackedFiles = @(
   'docs/129_v5_2_adapter_delivery_surface.md',
   'docs/130_v5_3_review_console_adapter_handoff.md',
   'docs/131_v5_4_local_sync_readiness.md',
+  'docs/132_v5_5_post_commit_reconciliation.md',
+  'docs/133_v5_6_v5_index_consistency_validation.md',
+  'docs/134_v5_7_local_batch_commit_readiness.md',
+  'docs/135_v5_8_handoff_freshness_validation.md',
+  'docs/136_v5_9_expanded_v5_index_consistency.md',
   'scripts/validate-agent-image-lab-local.ps1',
   'scripts/validate-agent-image-lab-local.sh',
   'scripts/validate_agent_board_state.js',
@@ -1949,6 +1982,10 @@ $allowedV46UntrackedFiles = @(
   'scripts/validate_adapter_delivery_surface.js',
   'scripts/validate_review_console_adapter_handoff.js',
   'scripts/validate_v5_local_sync_readiness.js',
+  'scripts/validate_v5_post_commit_reconciliation.js',
+  'scripts/validate_v5_index_consistency.js',
+  'scripts/validate_v5_local_batch_commit_readiness.js',
+  'scripts/validate_v5_handoff_freshness.js',
   'scripts/validate_runtime_delivery_surface.js',
   'scripts/validate_runtime_guard_unit.js',
   'scripts/validate_runtime_prototype_suite.js',
@@ -1966,7 +2003,12 @@ $allowedV46UntrackedFiles = @(
   'tests/schema_examples/v5_1_runtime_delivery_surface.example.yaml',
   'tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml',
   'tests/schema_examples/v5_3_review_console_adapter_handoff.example.yaml',
-  'tests/schema_examples/v5_4_local_sync_readiness.example.yaml'
+  'tests/schema_examples/v5_4_local_sync_readiness.example.yaml',
+  'tests/schema_examples/v5_5_post_commit_reconciliation.example.yaml',
+  'tests/schema_examples/v5_6_v5_index_consistency_validation.example.yaml',
+  'tests/schema_examples/v5_7_local_batch_commit_readiness.example.yaml',
+  'tests/schema_examples/v5_8_handoff_freshness_validation.example.yaml',
+  'tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml'
 )
 
 foreach ($path in $v46LocalCommitScopeManifestFiles) {
@@ -2618,6 +2660,481 @@ foreach ($path in $v54LocalSyncReadinessFiles) {
   }
 }
 
+$v55PostCommitReconciliationFiles = @(
+  'docs/132_v5_5_post_commit_reconciliation.md',
+  'tests/schema_examples/v5_5_post_commit_reconciliation.example.yaml'
+)
+
+$requiredV55PostCommitReconciliationPatterns = @(
+  'status:\s+completed_validated_project_local_v5_5_post_commit_reconciliation',
+  'version:\s+v5\.5',
+  'validation_file:\s+scripts/validate_v5_post_commit_reconciliation\.js',
+  'origin_master_short:\s+367d3c9',
+  'committed_checkpoint_short:\s+a2ae539',
+  'committed_checkpoint_message:\s+"chore: add v5\.4 local sync readiness preflight"',
+  'pending_local_commit_count:\s+4',
+  'local_commit_chain_ordered:\s+true',
+  'v5_4_commit_recorded:\s+true',
+  'post_commit_board_reconciled:\s+true',
+  'top_indexes_updated:\s+true',
+  'validation_surface_current:\s+true',
+  'current_local_batch_open:\s+true',
+  'current_batch_uncommitted_changes_expected:\s+true',
+  'push_authorized:\s+false',
+  'tag_authorized:\s+false',
+  'pr_authorized:\s+false',
+  'release_authorized:\s+false',
+  'remote_write_performed:\s+false',
+  'external_network_required:\s+false',
+  'external_service_required:\s+false',
+  'file_write_performed:\s+false',
+  'real_vcpchat_source_read:\s+false',
+  'real_vcpchat_modified:\s+false',
+  'real_vcptoolbox_source_read:\s+false',
+  'real_vcptoolbox_modified:\s+false',
+  'real_manifest_read:\s+false',
+  'api_called:\s+false',
+  'vcp_plugin_called:\s+false',
+  'daily_note_called:\s+false',
+  'vcp_memory_written:\s+false',
+  'image_file_created:\s+false',
+  'commit_tag_push_authorized:\s+false'
+)
+
+$forbiddenV55PostCommitReconciliationPatterns = @(
+  'local_commit_chain_ordered:\s+false',
+  'v5_4_commit_recorded:\s+false',
+  'post_commit_board_reconciled:\s+false',
+  'top_indexes_updated:\s+false',
+  'validation_surface_current:\s+false',
+  'current_local_batch_open:\s+false',
+  'current_batch_uncommitted_changes_expected:\s+false',
+  'push_authorized:\s+true',
+  'tag_authorized:\s+true',
+  'pr_authorized:\s+true',
+  'release_authorized:\s+true',
+  'remote_write_performed:\s+true',
+  'external_network_required:\s+true',
+  'external_service_required:\s+true',
+  'file_write_performed:\s+true',
+  'real_vcpchat_source_read:\s+true',
+  'real_vcpchat_modified:\s+true',
+  'real_vcptoolbox_source_read:\s+true',
+  'real_vcptoolbox_modified:\s+true',
+  'real_manifest_read:\s+true',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'vcp_memory_written:\s+true',
+  'image_file_created:\s+true',
+  'commit_tag_push_authorized:\s+true',
+  'https?://'
+)
+
+foreach ($path in $v55PostCommitReconciliationFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v5.5 post-commit reconciliation file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV55PostCommitReconciliationPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v5.5 post-commit reconciliation missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV55PostCommitReconciliationPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v5.5 post-commit reconciliation boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$v56V5IndexConsistencyFiles = @(
+  'docs/133_v5_6_v5_index_consistency_validation.md',
+  'tests/schema_examples/v5_6_v5_index_consistency_validation.example.yaml'
+)
+
+$requiredV56V5IndexConsistencyPatterns = @(
+  'status:\s+completed_validated_project_local_v5_6_v5_index_consistency',
+  'version:\s+v5\.6',
+  'validation_file:\s+scripts/validate_v5_index_consistency\.js',
+  'v5_record_count:\s+7',
+  'docs_present:\s+true',
+  'schema_examples_present:\s+true',
+  'validation_scripts_present:\s+true',
+  'readme_index_current:\s+true',
+  'manifest_index_current:\s+true',
+  'release_notes_current:\s+true',
+  'roadmap_current:\s+true',
+  'checklist_current:\s+true',
+  'validate_mvp_current:\s+true',
+  'agent_board_current:\s+true',
+  'push_authorized:\s+false',
+  'tag_authorized:\s+false',
+  'pr_authorized:\s+false',
+  'release_authorized:\s+false',
+  'remote_write_performed:\s+false',
+  'external_network_required:\s+false',
+  'external_service_required:\s+false',
+  'file_write_performed:\s+false',
+  'real_vcpchat_source_read:\s+false',
+  'real_vcpchat_modified:\s+false',
+  'real_vcptoolbox_source_read:\s+false',
+  'real_vcptoolbox_modified:\s+false',
+  'real_manifest_read:\s+false',
+  'api_called:\s+false',
+  'vcp_plugin_called:\s+false',
+  'daily_note_called:\s+false',
+  'vcp_memory_written:\s+false',
+  'image_file_created:\s+false',
+  'commit_tag_push_authorized:\s+false'
+)
+
+$forbiddenV56V5IndexConsistencyPatterns = @(
+  'docs_present:\s+false',
+  'schema_examples_present:\s+false',
+  'validation_scripts_present:\s+false',
+  'readme_index_current:\s+false',
+  'manifest_index_current:\s+false',
+  'release_notes_current:\s+false',
+  'roadmap_current:\s+false',
+  'checklist_current:\s+false',
+  'validate_mvp_current:\s+false',
+  'agent_board_current:\s+false',
+  'push_authorized:\s+true',
+  'tag_authorized:\s+true',
+  'pr_authorized:\s+true',
+  'release_authorized:\s+true',
+  'remote_write_performed:\s+true',
+  'external_network_required:\s+true',
+  'external_service_required:\s+true',
+  'file_write_performed:\s+true',
+  'real_vcpchat_source_read:\s+true',
+  'real_vcpchat_modified:\s+true',
+  'real_vcptoolbox_source_read:\s+true',
+  'real_vcptoolbox_modified:\s+true',
+  'real_manifest_read:\s+true',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'vcp_memory_written:\s+true',
+  'image_file_created:\s+true',
+  'commit_tag_push_authorized:\s+true',
+  'https?://'
+)
+
+foreach ($path in $v56V5IndexConsistencyFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v5.6 v5 index consistency file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV56V5IndexConsistencyPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v5.6 v5 index consistency missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV56V5IndexConsistencyPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v5.6 v5 index consistency boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$v57LocalBatchCommitReadinessFiles = @(
+  'docs/134_v5_7_local_batch_commit_readiness.md',
+  'tests/schema_examples/v5_7_local_batch_commit_readiness.example.yaml'
+)
+
+$requiredV57LocalBatchCommitReadinessPatterns = @(
+  'status:\s+completed_validated_project_local_v5_7_local_batch_commit_readiness',
+  'version:\s+v5\.7',
+  'validation_file:\s+scripts/validate_v5_local_batch_commit_readiness\.js',
+  'base_head_short:\s+a2ae539',
+  'expected_modified_count:\s+13',
+  'expected_untracked_count:\s+9',
+  'actual_modified_count:\s+null',
+  'actual_untracked_count:\s+null',
+  'unexpected_modified_count:\s+0',
+  'unexpected_untracked_count:\s+0',
+  'staged_changes_present:\s+false',
+  'tracked_changes_allowed:\s+true',
+  'untracked_changes_allowed:\s+true',
+  'live_git_status_checked:\s+false',
+  'live_git_status_validator:\s+scripts/validate_mvp\.ps1',
+  'commit_authorized:\s+false',
+  'push_authorized:\s+false',
+  'tag_authorized:\s+false',
+  'pr_authorized:\s+false',
+  'release_authorized:\s+false',
+  'remote_write_performed:\s+false',
+  'external_network_required:\s+false',
+  'external_service_required:\s+false',
+  'file_write_performed:\s+false',
+  'real_vcpchat_source_read:\s+false',
+  'real_vcpchat_modified:\s+false',
+  'real_vcptoolbox_source_read:\s+false',
+  'real_vcptoolbox_modified:\s+false',
+  'real_manifest_read:\s+false',
+  'api_called:\s+false',
+  'vcp_plugin_called:\s+false',
+  'daily_note_called:\s+false',
+  'vcp_memory_written:\s+false',
+  'image_file_created:\s+false',
+  'commit_tag_push_authorized:\s+false'
+)
+
+$forbiddenV57LocalBatchCommitReadinessPatterns = @(
+  'unexpected_modified_count:\s+[1-9]',
+  'unexpected_untracked_count:\s+[1-9]',
+  'staged_changes_present:\s+true',
+  'tracked_changes_allowed:\s+false',
+  'untracked_changes_allowed:\s+false',
+  'commit_authorized:\s+true',
+  'push_authorized:\s+true',
+  'tag_authorized:\s+true',
+  'pr_authorized:\s+true',
+  'release_authorized:\s+true',
+  'remote_write_performed:\s+true',
+  'external_network_required:\s+true',
+  'external_service_required:\s+true',
+  'file_write_performed:\s+true',
+  'real_vcpchat_source_read:\s+true',
+  'real_vcpchat_modified:\s+true',
+  'real_vcptoolbox_source_read:\s+true',
+  'real_vcptoolbox_modified:\s+true',
+  'real_manifest_read:\s+true',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'vcp_memory_written:\s+true',
+  'image_file_created:\s+true',
+  'commit_tag_push_authorized:\s+true',
+  'https?://'
+)
+
+foreach ($path in $v57LocalBatchCommitReadinessFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v5.7 local batch commit-readiness file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV57LocalBatchCommitReadinessPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v5.7 local batch commit-readiness missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV57LocalBatchCommitReadinessPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v5.7 local batch commit-readiness boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$v58HandoffFreshnessFiles = @(
+  'docs/135_v5_8_handoff_freshness_validation.md',
+  'tests/schema_examples/v5_8_handoff_freshness_validation.example.yaml'
+)
+
+$requiredV58HandoffFreshnessPatterns = @(
+  'status:\s+completed_validated_project_local_v5_8_handoff_freshness',
+  'version:\s+v5\.8',
+  'validation_file:\s+scripts/validate_v5_handoff_freshness\.js',
+  'current_phase:\s+"v5\.8 handoff freshness validation"',
+  'agent_board_files_present:\s+true',
+  'run_state_current:\s+true',
+  'handoff_current:\s+true',
+  'task_queue_current:\s+true',
+  'checkpoint_current:\s+true',
+  'validation_log_current:\s+true',
+  'resume_prompt_present:\s+true',
+  'hard_stop_gates_present:\s+true',
+  'no_execution_boundary_present:\s+true',
+  'remote_action_gate_present:\s+true',
+  'external_read_gate_present:\s+true',
+  'blocked_state_clear:\s+true',
+  'commit_authorized:\s+false',
+  'push_authorized:\s+false',
+  'tag_authorized:\s+false',
+  'pr_authorized:\s+false',
+  'release_authorized:\s+false',
+  'remote_write_performed:\s+false',
+  'external_network_required:\s+false',
+  'external_service_required:\s+false',
+  'file_write_performed:\s+false',
+  'real_vcpchat_source_read:\s+false',
+  'real_vcpchat_modified:\s+false',
+  'real_vcptoolbox_source_read:\s+false',
+  'real_vcptoolbox_modified:\s+false',
+  'real_manifest_read:\s+false',
+  'api_called:\s+false',
+  'vcp_plugin_called:\s+false',
+  'daily_note_called:\s+false',
+  'vcp_memory_written:\s+false',
+  'image_file_created:\s+false',
+  'commit_tag_push_authorized:\s+false'
+)
+
+$forbiddenV58HandoffFreshnessPatterns = @(
+  'agent_board_files_present:\s+false',
+  'run_state_current:\s+false',
+  'handoff_current:\s+false',
+  'task_queue_current:\s+false',
+  'checkpoint_current:\s+false',
+  'validation_log_current:\s+false',
+  'resume_prompt_present:\s+false',
+  'hard_stop_gates_present:\s+false',
+  'no_execution_boundary_present:\s+false',
+  'remote_action_gate_present:\s+false',
+  'external_read_gate_present:\s+false',
+  'blocked_state_clear:\s+false',
+  'commit_authorized:\s+true',
+  'push_authorized:\s+true',
+  'tag_authorized:\s+true',
+  'pr_authorized:\s+true',
+  'release_authorized:\s+true',
+  'remote_write_performed:\s+true',
+  'external_network_required:\s+true',
+  'external_service_required:\s+true',
+  'file_write_performed:\s+true',
+  'real_vcpchat_source_read:\s+true',
+  'real_vcpchat_modified:\s+true',
+  'real_vcptoolbox_source_read:\s+true',
+  'real_vcptoolbox_modified:\s+true',
+  'real_manifest_read:\s+true',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'vcp_memory_written:\s+true',
+  'image_file_created:\s+true',
+  'commit_tag_push_authorized:\s+true',
+  'https?://'
+)
+
+foreach ($path in $v58HandoffFreshnessFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v5.8 handoff freshness file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV58HandoffFreshnessPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v5.8 handoff freshness missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV58HandoffFreshnessPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v5.8 handoff freshness boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$v59ExpandedV5IndexConsistencyFiles = @(
+  'docs/136_v5_9_expanded_v5_index_consistency.md',
+  'tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml'
+)
+
+$requiredV59ExpandedV5IndexConsistencyPatterns = @(
+  'status:\s+completed_validated_project_local_v5_9_expanded_v5_index_consistency',
+  'version:\s+v5\.9',
+  'validation_file:\s+scripts/validate_v5_index_consistency\.js',
+  'v5_record_count:\s+10',
+  'docs_present:\s+true',
+  'schema_examples_present:\s+true',
+  'validation_scripts_present:\s+true',
+  'readme_index_current:\s+true',
+  'manifest_index_current:\s+true',
+  'release_notes_current:\s+true',
+  'roadmap_current:\s+true',
+  'checklist_current:\s+true',
+  'validate_mvp_current:\s+true',
+  'local_commit_scope_current:\s+true',
+  'agent_board_current:\s+true',
+  'commit_authorized:\s+false',
+  'push_authorized:\s+false',
+  'tag_authorized:\s+false',
+  'pr_authorized:\s+false',
+  'release_authorized:\s+false',
+  'remote_write_performed:\s+false',
+  'external_network_required:\s+false',
+  'external_service_required:\s+false',
+  'file_write_performed:\s+false',
+  'real_vcpchat_source_read:\s+false',
+  'real_vcpchat_modified:\s+false',
+  'real_vcptoolbox_source_read:\s+false',
+  'real_vcptoolbox_modified:\s+false',
+  'real_manifest_read:\s+false',
+  'api_called:\s+false',
+  'vcp_plugin_called:\s+false',
+  'daily_note_called:\s+false',
+  'vcp_memory_written:\s+false',
+  'image_file_created:\s+false',
+  'commit_tag_push_authorized:\s+false'
+)
+
+$forbiddenV59ExpandedV5IndexConsistencyPatterns = @(
+  'docs_present:\s+false',
+  'schema_examples_present:\s+false',
+  'validation_scripts_present:\s+false',
+  'readme_index_current:\s+false',
+  'manifest_index_current:\s+false',
+  'release_notes_current:\s+false',
+  'roadmap_current:\s+false',
+  'checklist_current:\s+false',
+  'validate_mvp_current:\s+false',
+  'local_commit_scope_current:\s+false',
+  'agent_board_current:\s+false',
+  'commit_authorized:\s+true',
+  'push_authorized:\s+true',
+  'tag_authorized:\s+true',
+  'pr_authorized:\s+true',
+  'release_authorized:\s+true',
+  'remote_write_performed:\s+true',
+  'external_network_required:\s+true',
+  'external_service_required:\s+true',
+  'file_write_performed:\s+true',
+  'real_vcpchat_source_read:\s+true',
+  'real_vcpchat_modified:\s+true',
+  'real_vcptoolbox_source_read:\s+true',
+  'real_vcptoolbox_modified:\s+true',
+  'real_manifest_read:\s+true',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'vcp_memory_written:\s+true',
+  'image_file_created:\s+true',
+  'commit_tag_push_authorized:\s+true',
+  'https?://'
+)
+
+foreach ($path in $v59ExpandedV5IndexConsistencyFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v5.9 expanded v5 index consistency file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV59ExpandedV5IndexConsistencyPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v5.9 expanded v5 index consistency missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV59ExpandedV5IndexConsistencyPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v5.9 expanded v5 index consistency boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
 $node = Get-Command node -ErrorAction SilentlyContinue
 if (-not $node) {
   Add-Failure "Node.js is required to validate adapter_dry_run_lab"
@@ -2803,6 +3320,26 @@ if (-not $node) {
   & node --check (Join-Path $Root 'scripts/validate_v5_local_sync_readiness.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_v5_local_sync_readiness.js failed node --check"
+  }
+
+  & node --check (Join-Path $Root 'scripts/validate_v5_post_commit_reconciliation.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_v5_post_commit_reconciliation.js failed node --check"
+  }
+
+  & node --check (Join-Path $Root 'scripts/validate_v5_index_consistency.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_v5_index_consistency.js failed node --check"
+  }
+
+  & node --check (Join-Path $Root 'scripts/validate_v5_local_batch_commit_readiness.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_v5_local_batch_commit_readiness.js failed node --check"
+  }
+
+  & node --check (Join-Path $Root 'scripts/validate_v5_handoff_freshness.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_v5_handoff_freshness.js failed node --check"
   }
 
   & node --check (Join-Path $Root 'scripts/validate_agent_board_state.js') | Out-Null
@@ -3201,6 +3738,247 @@ if (-not $node) {
     }
     if ($v5LocalSyncReadiness.local_sync_readiness.file_write_performed -ne $false) {
       Add-Failure "v5.4 local sync readiness validation must not write files"
+    }
+  }
+
+  $v5PostCommitReconciliationOutput = & node (Join-Path $Root 'scripts/validate_v5_post_commit_reconciliation.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v5.5 post-commit reconciliation validation exited with failure"
+  } else {
+    $v5PostCommitReconciliation = ($v5PostCommitReconciliationOutput -join "`n") | ConvertFrom-Json
+    if ($v5PostCommitReconciliation.passed -ne $true) {
+      Add-Failure "v5.5 post-commit reconciliation validation must report passed true"
+    }
+    if ($v5PostCommitReconciliation.post_commit_reconciliation.origin_master_short -ne '367d3c9') {
+      Add-Failure "v5.5 post-commit reconciliation must record origin master baseline 367d3c9"
+    }
+    if ($v5PostCommitReconciliation.post_commit_reconciliation.committed_checkpoint_short -ne 'a2ae539') {
+      Add-Failure "v5.5 post-commit reconciliation must record committed checkpoint a2ae539"
+    }
+    if ($v5PostCommitReconciliation.post_commit_reconciliation.pending_local_commit_count -ne 4) {
+      Add-Failure "v5.5 post-commit reconciliation must record 4 pending local commits"
+    }
+    if ($v5PostCommitReconciliation.post_commit_reconciliation.local_commit_chain_ordered -ne $true) {
+      Add-Failure "v5.5 post-commit reconciliation must verify ordered commit chain"
+    }
+    if ($v5PostCommitReconciliation.post_commit_reconciliation.v5_4_commit_recorded -ne $true) {
+      Add-Failure "v5.5 post-commit reconciliation must record v5.4 commit"
+    }
+    if ($v5PostCommitReconciliation.post_commit_reconciliation.post_commit_board_reconciled -ne $true) {
+      Add-Failure "v5.5 post-commit reconciliation must verify agent board state"
+    }
+    if ($v5PostCommitReconciliation.post_commit_reconciliation.current_batch_uncommitted_changes_expected -ne $true) {
+      Add-Failure "v5.5 post-commit reconciliation must declare current local uncommitted batch"
+    }
+    if ($v5PostCommitReconciliation.post_commit_reconciliation.push_authorized -ne $false) {
+      Add-Failure "v5.5 post-commit reconciliation must not authorize push"
+    }
+    if ($v5PostCommitReconciliation.post_commit_reconciliation.tag_authorized -ne $false) {
+      Add-Failure "v5.5 post-commit reconciliation must not authorize tag"
+    }
+    if ($v5PostCommitReconciliation.post_commit_reconciliation.pr_authorized -ne $false) {
+      Add-Failure "v5.5 post-commit reconciliation must not authorize PR"
+    }
+    if ($v5PostCommitReconciliation.post_commit_reconciliation.release_authorized -ne $false) {
+      Add-Failure "v5.5 post-commit reconciliation must not authorize release"
+    }
+    if ($v5PostCommitReconciliation.post_commit_reconciliation.remote_write_performed -ne $false) {
+      Add-Failure "v5.5 post-commit reconciliation must not perform remote write"
+    }
+    if ($v5PostCommitReconciliation.post_commit_reconciliation.file_write_performed -ne $false) {
+      Add-Failure "v5.5 post-commit reconciliation validation must not write files"
+    }
+  }
+
+  $v5IndexConsistencyOutput = & node (Join-Path $Root 'scripts/validate_v5_index_consistency.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v5.9 expanded v5 index consistency validation exited with failure"
+  } else {
+    $v5IndexConsistency = ($v5IndexConsistencyOutput -join "`n") | ConvertFrom-Json
+    if ($v5IndexConsistency.passed -ne $true) {
+      Add-Failure "v5.9 expanded v5 index consistency validation must report passed true"
+    }
+    if ($v5IndexConsistency.v5_index_consistency.v5_record_count -ne 10) {
+      Add-Failure "v5.9 expanded v5 index consistency must cover 10 v5 records"
+    }
+    if ($v5IndexConsistency.v5_index_consistency.docs_present -ne $true) {
+      Add-Failure "v5.6 v5 index consistency must verify docs"
+    }
+    if ($v5IndexConsistency.v5_index_consistency.schema_examples_present -ne $true) {
+      Add-Failure "v5.6 v5 index consistency must verify schema examples"
+    }
+    if ($v5IndexConsistency.v5_index_consistency.validation_scripts_present -ne $true) {
+      Add-Failure "v5.6 v5 index consistency must verify validation scripts"
+    }
+    if ($v5IndexConsistency.v5_index_consistency.readme_index_current -ne $true) {
+      Add-Failure "v5.6 v5 index consistency must verify README"
+    }
+    if ($v5IndexConsistency.v5_index_consistency.manifest_index_current -ne $true) {
+      Add-Failure "v5.6 v5 index consistency must verify MANIFEST"
+    }
+    if ($v5IndexConsistency.v5_index_consistency.release_notes_current -ne $true) {
+      Add-Failure "v5.6 v5 index consistency must verify release notes"
+    }
+    if ($v5IndexConsistency.v5_index_consistency.roadmap_current -ne $true) {
+      Add-Failure "v5.6 v5 index consistency must verify roadmap"
+    }
+    if ($v5IndexConsistency.v5_index_consistency.checklist_current -ne $true) {
+      Add-Failure "v5.6 v5 index consistency must verify validation checklist"
+    }
+    if ($v5IndexConsistency.v5_index_consistency.validate_mvp_current -ne $true) {
+      Add-Failure "v5.6 v5 index consistency must verify validate_mvp"
+    }
+    if ($v5IndexConsistency.v5_index_consistency.local_commit_scope_current -ne $true) {
+      Add-Failure "v5.6 v5 index consistency must verify local commit scope"
+    }
+    if ($v5IndexConsistency.v5_index_consistency.agent_board_current -ne $true) {
+      Add-Failure "v5.6 v5 index consistency must verify agent board"
+    }
+    if ($v5IndexConsistency.v5_index_consistency.push_authorized -ne $false) {
+      Add-Failure "v5.6 v5 index consistency must not authorize push"
+    }
+    if ($v5IndexConsistency.v5_index_consistency.tag_authorized -ne $false) {
+      Add-Failure "v5.6 v5 index consistency must not authorize tag"
+    }
+    if ($v5IndexConsistency.v5_index_consistency.pr_authorized -ne $false) {
+      Add-Failure "v5.6 v5 index consistency must not authorize PR"
+    }
+    if ($v5IndexConsistency.v5_index_consistency.release_authorized -ne $false) {
+      Add-Failure "v5.6 v5 index consistency must not authorize release"
+    }
+    if ($v5IndexConsistency.v5_index_consistency.remote_write_performed -ne $false) {
+      Add-Failure "v5.6 v5 index consistency must not perform remote write"
+    }
+    if ($v5IndexConsistency.v5_index_consistency.file_write_performed -ne $false) {
+      Add-Failure "v5.6 v5 index consistency validation must not write files"
+    }
+  }
+
+  $v5LocalBatchCommitReadinessOutput = & node (Join-Path $Root 'scripts/validate_v5_local_batch_commit_readiness.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v5.7 local batch commit-readiness validation exited with failure"
+  } else {
+    $v5LocalBatchCommitReadiness = ($v5LocalBatchCommitReadinessOutput -join "`n") | ConvertFrom-Json
+    if ($v5LocalBatchCommitReadiness.passed -ne $true) {
+      Add-Failure "v5.7 local batch commit-readiness validation must report passed true"
+    }
+    if ($v5LocalBatchCommitReadiness.local_batch_commit_readiness.base_head_short -ne 'a2ae539') {
+      Add-Failure "v5.7 local batch commit-readiness must record base head a2ae539"
+    }
+    if ($v5LocalBatchCommitReadiness.local_batch_commit_readiness.expected_modified_count -ne 13) {
+      Add-Failure "v5.7 local batch commit-readiness must expect 13 modified files"
+    }
+    if ($v5LocalBatchCommitReadiness.local_batch_commit_readiness.expected_untracked_count -ne 9) {
+      Add-Failure "v5.7 local batch commit-readiness must expect 9 untracked files"
+    }
+    if ($v5LocalBatchCommitReadiness.local_batch_commit_readiness.unexpected_modified_count -ne 0) {
+      Add-Failure "v5.7 local batch commit-readiness must not find unexpected modified files"
+    }
+    if ($v5LocalBatchCommitReadiness.local_batch_commit_readiness.unexpected_untracked_count -ne 0) {
+      Add-Failure "v5.7 local batch commit-readiness must not find unexpected untracked files"
+    }
+    if ($v5LocalBatchCommitReadiness.local_batch_commit_readiness.staged_changes_present -ne $false) {
+      Add-Failure "v5.7 local batch commit-readiness must verify no staged changes"
+    }
+    if ($v5LocalBatchCommitReadiness.local_batch_commit_readiness.top_indexes_updated -ne $true) {
+      Add-Failure "v5.7 local batch commit-readiness must verify top indexes"
+    }
+    if ($v5LocalBatchCommitReadiness.local_batch_commit_readiness.validation_surface_current -ne $true) {
+      Add-Failure "v5.7 local batch commit-readiness must verify validation surface"
+    }
+    if ($v5LocalBatchCommitReadiness.local_batch_commit_readiness.agent_board_current -ne $true) {
+      Add-Failure "v5.7 local batch commit-readiness must verify agent board"
+    }
+    if ($v5LocalBatchCommitReadiness.local_batch_commit_readiness.commit_authorized -ne $false) {
+      Add-Failure "v5.7 local batch commit-readiness must not authorize commit"
+    }
+    if ($v5LocalBatchCommitReadiness.local_batch_commit_readiness.push_authorized -ne $false) {
+      Add-Failure "v5.7 local batch commit-readiness must not authorize push"
+    }
+    if ($v5LocalBatchCommitReadiness.local_batch_commit_readiness.tag_authorized -ne $false) {
+      Add-Failure "v5.7 local batch commit-readiness must not authorize tag"
+    }
+    if ($v5LocalBatchCommitReadiness.local_batch_commit_readiness.pr_authorized -ne $false) {
+      Add-Failure "v5.7 local batch commit-readiness must not authorize PR"
+    }
+    if ($v5LocalBatchCommitReadiness.local_batch_commit_readiness.release_authorized -ne $false) {
+      Add-Failure "v5.7 local batch commit-readiness must not authorize release"
+    }
+    if ($v5LocalBatchCommitReadiness.local_batch_commit_readiness.remote_write_performed -ne $false) {
+      Add-Failure "v5.7 local batch commit-readiness must not perform remote write"
+    }
+    if ($v5LocalBatchCommitReadiness.local_batch_commit_readiness.file_write_performed -ne $false) {
+      Add-Failure "v5.7 local batch commit-readiness validation must not write files"
+    }
+  }
+
+  $v5HandoffFreshnessOutput = & node (Join-Path $Root 'scripts/validate_v5_handoff_freshness.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v5.8 handoff freshness validation exited with failure"
+  } else {
+    $v5HandoffFreshness = ($v5HandoffFreshnessOutput -join "`n") | ConvertFrom-Json
+    if ($v5HandoffFreshness.passed -ne $true) {
+      Add-Failure "v5.8 handoff freshness validation must report passed true"
+    }
+    if ($v5HandoffFreshness.handoff_freshness.current_phase -ne 'v5.8 handoff freshness validation') {
+      Add-Failure "v5.8 handoff freshness must record current phase"
+    }
+    if ($v5HandoffFreshness.handoff_freshness.agent_board_files_present -ne $true) {
+      Add-Failure "v5.8 handoff freshness must verify agent board files"
+    }
+    if ($v5HandoffFreshness.handoff_freshness.run_state_current -ne $true) {
+      Add-Failure "v5.8 handoff freshness must verify RUN_STATE"
+    }
+    if ($v5HandoffFreshness.handoff_freshness.handoff_current -ne $true) {
+      Add-Failure "v5.8 handoff freshness must verify HANDOFF"
+    }
+    if ($v5HandoffFreshness.handoff_freshness.task_queue_current -ne $true) {
+      Add-Failure "v5.8 handoff freshness must verify TASK_QUEUE"
+    }
+    if ($v5HandoffFreshness.handoff_freshness.checkpoint_current -ne $true) {
+      Add-Failure "v5.8 handoff freshness must verify CHECKPOINT"
+    }
+    if ($v5HandoffFreshness.handoff_freshness.validation_log_current -ne $true) {
+      Add-Failure "v5.8 handoff freshness must verify VALIDATION_LOG"
+    }
+    if ($v5HandoffFreshness.handoff_freshness.resume_prompt_present -ne $true) {
+      Add-Failure "v5.8 handoff freshness must preserve resume prompt"
+    }
+    if ($v5HandoffFreshness.handoff_freshness.hard_stop_gates_present -ne $true) {
+      Add-Failure "v5.8 handoff freshness must preserve hard stop gates"
+    }
+    if ($v5HandoffFreshness.handoff_freshness.no_execution_boundary_present -ne $true) {
+      Add-Failure "v5.8 handoff freshness must preserve no-execution boundary"
+    }
+    if ($v5HandoffFreshness.handoff_freshness.remote_action_gate_present -ne $true) {
+      Add-Failure "v5.8 handoff freshness must preserve remote action gate"
+    }
+    if ($v5HandoffFreshness.handoff_freshness.external_read_gate_present -ne $true) {
+      Add-Failure "v5.8 handoff freshness must preserve external read gate"
+    }
+    if ($v5HandoffFreshness.handoff_freshness.blocked_state_clear -ne $true) {
+      Add-Failure "v5.8 handoff freshness must verify clear blocked state"
+    }
+    if ($v5HandoffFreshness.handoff_freshness.commit_authorized -ne $false) {
+      Add-Failure "v5.8 handoff freshness must not authorize commit"
+    }
+    if ($v5HandoffFreshness.handoff_freshness.push_authorized -ne $false) {
+      Add-Failure "v5.8 handoff freshness must not authorize push"
+    }
+    if ($v5HandoffFreshness.handoff_freshness.tag_authorized -ne $false) {
+      Add-Failure "v5.8 handoff freshness must not authorize tag"
+    }
+    if ($v5HandoffFreshness.handoff_freshness.pr_authorized -ne $false) {
+      Add-Failure "v5.8 handoff freshness must not authorize PR"
+    }
+    if ($v5HandoffFreshness.handoff_freshness.release_authorized -ne $false) {
+      Add-Failure "v5.8 handoff freshness must not authorize release"
+    }
+    if ($v5HandoffFreshness.handoff_freshness.remote_write_performed -ne $false) {
+      Add-Failure "v5.8 handoff freshness must not perform remote write"
+    }
+    if ($v5HandoffFreshness.handoff_freshness.file_write_performed -ne $false) {
+      Add-Failure "v5.8 handoff freshness validation must not write files"
     }
   }
 

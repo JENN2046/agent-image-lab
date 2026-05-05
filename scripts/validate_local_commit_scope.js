@@ -24,6 +24,10 @@ const allowedModifiedFiles = [
   "scripts/validate_adapter_delivery_surface.js",
   "scripts/validate_review_console_adapter_handoff.js",
   "scripts/validate_v5_local_sync_readiness.js",
+  "scripts/validate_v5_post_commit_reconciliation.js",
+  "scripts/validate_v5_index_consistency.js",
+  "scripts/validate_v5_local_batch_commit_readiness.js",
+  "scripts/validate_v5_handoff_freshness.js",
   "scripts/validate_runtime_delivery_surface.js",
   "scripts/validate_runtime_prototype_suite.js",
   "scripts/validate_runtime_prototype_smoke.js",
@@ -31,6 +35,16 @@ const allowedModifiedFiles = [
   "tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml",
   "tests/schema_examples/v5_3_review_console_adapter_handoff.example.yaml",
   "tests/schema_examples/v5_4_local_sync_readiness.example.yaml",
+  "tests/schema_examples/v5_5_post_commit_reconciliation.example.yaml",
+  "docs/132_v5_5_post_commit_reconciliation.md",
+  "tests/schema_examples/v5_6_v5_index_consistency_validation.example.yaml",
+  "docs/133_v5_6_v5_index_consistency_validation.md",
+  "tests/schema_examples/v5_7_local_batch_commit_readiness.example.yaml",
+  "docs/134_v5_7_local_batch_commit_readiness.md",
+  "tests/schema_examples/v5_8_handoff_freshness_validation.example.yaml",
+  "docs/135_v5_8_handoff_freshness_validation.md",
+  "tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml",
+  "docs/136_v5_9_expanded_v5_index_consistency.md",
   "tests/validation_checklist.md"
 ];
 
@@ -61,6 +75,11 @@ const allowedUntrackedFiles = [
   "docs/129_v5_2_adapter_delivery_surface.md",
   "docs/130_v5_3_review_console_adapter_handoff.md",
   "docs/131_v5_4_local_sync_readiness.md",
+  "docs/132_v5_5_post_commit_reconciliation.md",
+  "docs/133_v5_6_v5_index_consistency_validation.md",
+  "docs/134_v5_7_local_batch_commit_readiness.md",
+  "docs/135_v5_8_handoff_freshness_validation.md",
+  "docs/136_v5_9_expanded_v5_index_consistency.md",
   "scripts/validate-agent-image-lab-local.ps1",
   "scripts/validate-agent-image-lab-local.sh",
   "scripts/validate_agent_board_state.js",
@@ -72,6 +91,10 @@ const allowedUntrackedFiles = [
   "scripts/validate_adapter_delivery_surface.js",
   "scripts/validate_review_console_adapter_handoff.js",
   "scripts/validate_v5_local_sync_readiness.js",
+  "scripts/validate_v5_post_commit_reconciliation.js",
+  "scripts/validate_v5_index_consistency.js",
+  "scripts/validate_v5_local_batch_commit_readiness.js",
+  "scripts/validate_v5_handoff_freshness.js",
   "scripts/validate_runtime_delivery_surface.js",
   "scripts/validate_runtime_guard_unit.js",
   "scripts/validate_runtime_prototype_suite.js",
@@ -89,7 +112,12 @@ const allowedUntrackedFiles = [
   "tests/schema_examples/v5_1_runtime_delivery_surface.example.yaml",
   "tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml",
   "tests/schema_examples/v5_3_review_console_adapter_handoff.example.yaml",
-  "tests/schema_examples/v5_4_local_sync_readiness.example.yaml"
+  "tests/schema_examples/v5_4_local_sync_readiness.example.yaml",
+  "tests/schema_examples/v5_5_post_commit_reconciliation.example.yaml",
+  "tests/schema_examples/v5_6_v5_index_consistency_validation.example.yaml",
+  "tests/schema_examples/v5_7_local_batch_commit_readiness.example.yaml",
+  "tests/schema_examples/v5_8_handoff_freshness_validation.example.yaml",
+  "tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml"
 ];
 
 function assert(condition, message) {
@@ -191,6 +219,62 @@ function main() {
   assert(
     allowedUntrackedFiles.includes("scripts/validate_v5_local_sync_readiness.js"),
     "v5.4 validation script must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("docs/132_v5_5_post_commit_reconciliation.md"),
+    "v5.5 docs must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("tests/schema_examples/v5_5_post_commit_reconciliation.example.yaml"),
+    "v5.5 schema example must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("scripts/validate_v5_post_commit_reconciliation.js"),
+    "v5.5 validation script must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("docs/133_v5_6_v5_index_consistency_validation.md"),
+    "v5.6 docs must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("tests/schema_examples/v5_6_v5_index_consistency_validation.example.yaml"),
+    "v5.6 schema example must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("scripts/validate_v5_index_consistency.js"),
+    "v5.6 validation script must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("docs/134_v5_7_local_batch_commit_readiness.md"),
+    "v5.7 docs must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("tests/schema_examples/v5_7_local_batch_commit_readiness.example.yaml"),
+    "v5.7 schema example must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("scripts/validate_v5_local_batch_commit_readiness.js"),
+    "v5.7 validation script must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("docs/135_v5_8_handoff_freshness_validation.md"),
+    "v5.8 docs must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("tests/schema_examples/v5_8_handoff_freshness_validation.example.yaml"),
+    "v5.8 schema example must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("scripts/validate_v5_handoff_freshness.js"),
+    "v5.8 validation script must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("docs/136_v5_9_expanded_v5_index_consistency.md"),
+    "v5.9 docs must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml"),
+    "v5.9 schema example must be included in the untracked allowlist."
   );
 
   const result = {

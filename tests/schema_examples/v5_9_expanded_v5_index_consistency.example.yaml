@@ -1,0 +1,68 @@
+record_type: expanded_v5_index_consistency_validation
+status: completed_validated_project_local_v5_9_expanded_v5_index_consistency
+version: v5.9
+validation_file: scripts/validate_v5_index_consistency.js
+v5_record_count: 10
+docs_present: true
+schema_examples_present: true
+validation_scripts_present: true
+readme_index_current: true
+manifest_index_current: true
+release_notes_current: true
+roadmap_current: true
+checklist_current: true
+validate_mvp_current: true
+local_commit_scope_current: true
+agent_board_current: true
+commit_authorized: false
+push_authorized: false
+tag_authorized: false
+pr_authorized: false
+release_authorized: false
+remote_write_performed: false
+external_network_required: false
+external_service_required: false
+file_write_performed: false
+real_vcpchat_source_read: false
+real_vcpchat_modified: false
+real_vcptoolbox_source_read: false
+real_vcptoolbox_modified: false
+real_manifest_read: false
+api_called: false
+vcp_plugin_called: false
+daily_note_called: false
+vcp_memory_written: false
+image_file_created: false
+commit_tag_push_authorized: false
+covered_records:
+  - version: v5.0
+    doc: docs/127_v5_0_delivery_readiness_index.md
+    schema: tests/schema_examples/v5_0_delivery_readiness.example.yaml
+  - version: v5.1
+    doc: docs/128_v5_1_runtime_delivery_surface.md
+    schema: tests/schema_examples/v5_1_runtime_delivery_surface.example.yaml
+  - version: v5.2
+    doc: docs/129_v5_2_adapter_delivery_surface.md
+    schema: tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml
+  - version: v5.3
+    doc: docs/130_v5_3_review_console_adapter_handoff.md
+    schema: tests/schema_examples/v5_3_review_console_adapter_handoff.example.yaml
+  - version: v5.4
+    doc: docs/131_v5_4_local_sync_readiness.md
+    schema: tests/schema_examples/v5_4_local_sync_readiness.example.yaml
+  - version: v5.5
+    doc: docs/132_v5_5_post_commit_reconciliation.md
+    schema: tests/schema_examples/v5_5_post_commit_reconciliation.example.yaml
+  - version: v5.6
+    doc: docs/133_v5_6_v5_index_consistency_validation.md
+    schema: tests/schema_examples/v5_6_v5_index_consistency_validation.example.yaml
+  - version: v5.7
+    doc: docs/134_v5_7_local_batch_commit_readiness.md
+    schema: tests/schema_examples/v5_7_local_batch_commit_readiness.example.yaml
+  - version: v5.8
+    doc: docs/135_v5_8_handoff_freshness_validation.md
+    schema: tests/schema_examples/v5_8_handoff_freshness_validation.example.yaml
+  - version: v5.9
+    doc: docs/136_v5_9_expanded_v5_index_consistency.md
+    schema: tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml
+boundary_cn: "v5.9 只扩展 v5 阶段索引一致性校验范围；不执行 git add、commit、push、远端 tag、PR、merge、release、真实插件调用、DailyNote 写入、VCP 记忆写入或图片创建。"

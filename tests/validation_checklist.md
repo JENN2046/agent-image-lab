@@ -1905,3 +1905,71 @@
 - [ ] `validate_mvp.ps1` 执行 v5.4 local sync readiness validation 并检查输出字段。
 - [ ] v5.4 不执行 push、远端 tag、PR、merge 或 release。
 - [ ] v5.4 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.5 Post-Commit Reconciliation Checkpoint 检查
+
+- [ ] `scripts/validate_v5_post_commit_reconciliation.js` 存在。
+- [ ] `docs/132_v5_5_post_commit_reconciliation.md` 存在。
+- [ ] `tests/schema_examples/v5_5_post_commit_reconciliation.example.yaml` 存在。
+- [ ] post-commit reconciliation 记录 `origin/master` baseline `367d3c9`。
+- [ ] post-commit reconciliation 记录 v5.4 本地提交 `a2ae539`。
+- [ ] post-commit reconciliation 记录 pending local commits 数量为 `4`。
+- [ ] post-commit reconciliation 记录本地提交链 `6bd255d -> 876d335 -> b04e253 -> a2ae539`。
+- [ ] post-commit reconciliation 保持 `push_authorized=false`、`tag_authorized=false`、`pr_authorized=false`、`release_authorized=false`。
+- [ ] `validate_mvp.ps1` 执行 v5.5 post-commit reconciliation validation 并检查输出字段。
+- [ ] v5.5 不执行 push、远端 tag、PR、merge 或 release。
+- [ ] v5.5 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.6 V5 Index Consistency Validation 检查
+
+- [ ] `scripts/validate_v5_index_consistency.js` 存在。
+- [ ] `docs/133_v5_6_v5_index_consistency_validation.md` 存在。
+- [ ] `tests/schema_examples/v5_6_v5_index_consistency_validation.example.yaml` 存在。
+- [ ] v5 index consistency validation 覆盖 v5.0-v5.6 阶段文档。
+- [ ] v5 index consistency validation 覆盖 v5.0-v5.6 schema 示例。
+- [ ] v5 index consistency validation 覆盖 v5 阶段验证脚本。
+- [ ] v5 index consistency validation 检查 README、MANIFEST、roadmap、release notes、validation checklist、validate_mvp、local commit scope 和 `.agent_board` 索引一致。
+- [ ] `validate_mvp.ps1` 执行 v5.6 v5 index consistency validation 并检查输出字段。
+- [ ] v5.6 不执行 push、远端 tag、PR、merge 或 release。
+- [ ] v5.6 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.7 Local Batch Commit-Readiness Preflight 检查
+
+- [ ] `scripts/validate_v5_local_batch_commit_readiness.js` 存在。
+- [ ] `docs/134_v5_7_local_batch_commit_readiness.md` 存在。
+- [ ] `tests/schema_examples/v5_7_local_batch_commit_readiness.example.yaml` 存在。
+- [ ] local batch commit-readiness 记录 base head `a2ae539`。
+- [ ] local batch commit-readiness 记录 expected modified files 数量为 `13`。
+- [ ] local batch commit-readiness 记录 expected untracked files 数量为 `9`。
+- [ ] local batch commit-readiness 检查当前没有 staged changes。
+- [ ] local batch commit-readiness 保持 `commit_authorized=false`、`push_authorized=false`、`tag_authorized=false`、`pr_authorized=false`、`release_authorized=false`。
+- [ ] `validate_mvp.ps1` 执行 v5.7 local batch commit-readiness validation 并检查输出字段。
+- [ ] v5.7 不执行 `git add`、commit、push、远端 tag、PR、merge 或 release。
+- [ ] v5.7 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.8 Handoff Freshness Validation 检查
+
+- [ ] `scripts/validate_v5_handoff_freshness.js` 存在。
+- [ ] `docs/135_v5_8_handoff_freshness_validation.md` 存在。
+- [ ] `tests/schema_examples/v5_8_handoff_freshness_validation.example.yaml` 存在。
+- [ ] handoff freshness validation 检查 `.agent_board` 必需文件存在。
+- [ ] handoff freshness validation 检查 RUN_STATE、HANDOFF、TASK_QUEUE、CHECKPOINT 和 VALIDATION_LOG 指向当前阶段。
+- [ ] handoff freshness validation 检查 resume prompt 保持存在。
+- [ ] handoff freshness validation 检查 hard stop gates、remote action gate、external read gate 和 no-execution boundary。
+- [ ] handoff freshness validation 检查 blocked state clear。
+- [ ] `validate_mvp.ps1` 执行 v5.8 handoff freshness validation 并检查输出字段。
+- [ ] v5.8 不执行 `git add`、commit、push、远端 tag、PR、merge 或 release。
+- [ ] v5.8 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.9 Expanded V5 Index Consistency Validation 检查
+
+- [ ] `scripts/validate_v5_index_consistency.js` 覆盖 v5.0-v5.9。
+- [ ] `docs/136_v5_9_expanded_v5_index_consistency.md` 存在。
+- [ ] `tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml` 存在。
+- [ ] expanded v5 index consistency validation 记录 `v5_record_count=10`。
+- [ ] expanded v5 index consistency validation 覆盖 v5.7 local batch commit-readiness。
+- [ ] expanded v5 index consistency validation 覆盖 v5.8 handoff freshness。
+- [ ] expanded v5 index consistency validation 覆盖 v5.9 自身记录。
+- [ ] `validate_mvp.ps1` 执行 v5.9 expanded v5 index consistency validation 并检查输出字段。
+- [ ] v5.9 不执行 `git add`、commit、push、远端 tag、PR、merge 或 release。
+- [ ] v5.9 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。

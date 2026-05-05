@@ -1,0 +1,63 @@
+record_type: local_batch_commit_readiness_preflight
+status: completed_validated_project_local_v5_7_local_batch_commit_readiness
+version: v5.7
+validation_file: scripts/validate_v5_local_batch_commit_readiness.js
+base_head_short: a2ae539
+expected_modified_count: 13
+expected_untracked_count: 9
+actual_modified_count: null
+actual_untracked_count: null
+unexpected_modified_count: 0
+unexpected_untracked_count: 0
+staged_changes_present: false
+tracked_changes_allowed: true
+untracked_changes_allowed: true
+live_git_status_checked: false
+live_git_status_validator: scripts/validate_mvp.ps1
+commit_message_recommended: "chore: add v5.7 local batch commit-readiness preflight"
+commit_authorized: false
+push_authorized: false
+tag_authorized: false
+pr_authorized: false
+release_authorized: false
+remote_write_performed: false
+external_network_required: false
+external_service_required: false
+file_write_performed: false
+real_vcpchat_source_read: false
+real_vcpchat_modified: false
+real_vcptoolbox_source_read: false
+real_vcptoolbox_modified: false
+real_manifest_read: false
+api_called: false
+vcp_plugin_called: false
+daily_note_called: false
+vcp_memory_written: false
+image_file_created: false
+commit_tag_push_authorized: false
+expected_local_batch_scope:
+  modified_files:
+    - .agent_board/CHECKPOINT.md
+    - .agent_board/HANDOFF.md
+    - .agent_board/RUN_STATE.md
+    - .agent_board/TASK_QUEUE.md
+    - .agent_board/VALIDATION_LOG.md
+    - MANIFEST.md
+    - README.md
+    - RELEASE_NOTES.md
+    - docs/00_project_roadmap.md
+    - scripts/validate_local_commit_scope.js
+    - scripts/validate_mvp.ps1
+    - scripts/validate_v5_delivery_readiness.js
+    - tests/validation_checklist.md
+  untracked_files:
+    - docs/132_v5_5_post_commit_reconciliation.md
+    - docs/133_v5_6_v5_index_consistency_validation.md
+    - docs/134_v5_7_local_batch_commit_readiness.md
+    - scripts/validate_v5_index_consistency.js
+    - scripts/validate_v5_local_batch_commit_readiness.js
+    - scripts/validate_v5_post_commit_reconciliation.js
+    - tests/schema_examples/v5_5_post_commit_reconciliation.example.yaml
+    - tests/schema_examples/v5_6_v5_index_consistency_validation.example.yaml
+    - tests/schema_examples/v5_7_local_batch_commit_readiness.example.yaml
+boundary_cn: "v5.7 只验证当前本地批次提交范围；不执行 git add、commit、push、远端 tag、PR、merge、release、真实插件调用、DailyNote 写入、VCP 记忆写入或图片创建。"
