@@ -27,10 +27,21 @@ function Test-RequiredDirectory {
 $requiredFiles = @(
   'README.md',
   'AGENTS.md',
+  'AGENTS.autopilot-overlay.md',
+  'README_AGENT_IMAGE_LAB_AUTOPILOT.md',
+  'AUTOPILOT_REFACTOR_REPORT.md',
   '00_project_skeleton.md',
   'DECISIONS.md',
   'MANIFEST.md',
   'RELEASE_NOTES.md',
+  '.agent_board/BLOCKERS.md',
+  '.agent_board/CHECKPOINT.md',
+  '.agent_board/DECISIONS.md',
+  '.agent_board/HANDOFF.md',
+  '.agent_board/RUN_STATE.md',
+  '.agent_board/TASK_QUEUE.md',
+  '.agent_board/VALIDATION_LOG.md',
+  'codex/AGENT_IMAGE_LAB_AUTOPILOT_PROMPT.md',
   'adapter_dry_run_lab/README.md',
   'adapter_dry_run_lab/adapter_dry_run.js',
   'adapter_dry_run_lab/fixtures/accepted_request.json',
@@ -39,7 +50,14 @@ $requiredFiles = @(
   'exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js',
   'scripts/run_v0_7_photo_studio_os_real_execution.ps1',
   'scripts/run_v0_10_gptimagegen_real_execution.ps1',
+  'scripts/validate-agent-image-lab-local.ps1',
+  'scripts/validate-agent-image-lab-local.sh',
+  'scripts/validate_agent_board_state.js',
+  'scripts/validate_local_checkpoint_manifest.js',
+  'scripts/validate_local_commit_scope.js',
+  'scripts/validate_runtime_guard_unit.js',
   'scripts/validate_runtime_prototype_smoke.js',
+  'scripts/validate_runtime_prototype_suite.js',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -51,6 +69,13 @@ $requiredFiles = @(
   'docs/114_v3_7_first_runtime_patch_execution_record.md',
   'docs/115_v3_8_runtime_prototype_smoke_test.md',
   'docs/116_v3_9_runtime_guard_extraction.md',
+  'docs/117_v4_0_runtime_contract_smoke_hardening.md',
+  'docs/118_v4_1_runtime_guard_unit_validation.md',
+  'docs/119_v4_2_runtime_validation_suite.md',
+  'docs/120_v4_3_autopilot_overlay_installation.md',
+  'docs/121_v4_4_agent_board_state_validation.md',
+  'docs/122_v4_5_local_checkpoint_readiness.md',
+  'docs/123_v4_6_local_commit_scope_manifest.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
@@ -113,6 +138,13 @@ $requiredFiles = @(
   'tests/schema_examples/v3_7_first_runtime_patch_execution_record.example.yaml',
   'tests/schema_examples/v3_8_runtime_prototype_smoke_test.example.yaml',
   'tests/schema_examples/v3_9_runtime_guard_extraction.example.yaml',
+  'tests/schema_examples/v4_0_runtime_contract_smoke_hardening.example.yaml',
+  'tests/schema_examples/v4_1_runtime_guard_unit_validation.example.yaml',
+  'tests/schema_examples/v4_2_runtime_validation_suite.example.yaml',
+  'tests/schema_examples/v4_3_autopilot_overlay_installation.example.yaml',
+  'tests/schema_examples/v4_4_agent_board_state_validation.example.yaml',
+  'tests/schema_examples/v4_5_local_checkpoint_readiness.example.yaml',
+  'tests/schema_examples/v4_6_local_commit_scope_manifest.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -1341,6 +1373,545 @@ foreach ($path in $v39RuntimeGuardExtractionFiles) {
   }
 }
 
+$v40RuntimeContractSmokeHardeningFiles = @(
+  'docs/117_v4_0_runtime_contract_smoke_hardening.md',
+  'tests/schema_examples/v4_0_runtime_contract_smoke_hardening.example.yaml'
+)
+
+$requiredV40RuntimeContractSmokeHardeningPatterns = @(
+  'status:\s+completed_validated_project_local_runtime_contract_smoke_hardening',
+  'index_script_order_smoke_added:\s+true',
+  'runtime_guard_api_smoke_added:\s+true',
+  'smoke_test_uses_index_script_order:\s+true',
+  'real_vcpchat_source_read:\s+false',
+  'real_vcpchat_modified:\s+false',
+  'real_vcptoolbox_source_read:\s+false',
+  'real_vcptoolbox_modified:\s+false',
+  'api_called:\s+false',
+  'vcp_plugin_called:\s+false',
+  'daily_note_called:\s+false',
+  'vcp_memory_written:\s+false',
+  'runtime_disk_write_performed:\s+false',
+  'image_file_created:\s+false',
+  'script_order_verified:\s+true',
+  'runtime_guard_api_verified:\s+true',
+  'dirty_guard_rejected:\s+true',
+  'dirty_audit_guard_rejected:\s+true',
+  'accepted_without_approval_rejected:\s+true',
+  'node_smoke_test:\s+passed',
+  'commit_tag_push_authorized:\s+false'
+)
+
+$forbiddenV40RuntimeContractSmokeHardeningPatterns = @(
+  'real_vcpchat_source_read:\s+true',
+  'real_vcpchat_modified:\s+true',
+  'real_vcptoolbox_source_read:\s+true',
+  'real_vcptoolbox_modified:\s+true',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'vcp_memory_written:\s+true',
+  'runtime_disk_write_performed:\s+true',
+  'image_file_created:\s+true',
+  'commit_tag_push_authorized:\s+true',
+  '[A-Za-z]:\\',
+  'https?://'
+)
+
+foreach ($path in $v40RuntimeContractSmokeHardeningFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v4.0 runtime contract smoke hardening file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV40RuntimeContractSmokeHardeningPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v4.0 runtime contract smoke hardening missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV40RuntimeContractSmokeHardeningPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v4.0 runtime contract smoke hardening boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$v41RuntimeGuardUnitValidationFiles = @(
+  'docs/118_v4_1_runtime_guard_unit_validation.md',
+  'tests/schema_examples/v4_1_runtime_guard_unit_validation.example.yaml'
+)
+
+$requiredV41RuntimeGuardUnitValidationPatterns = @(
+  'status:\s+completed_validated_project_local_runtime_guard_unit_validation',
+  'runtime_guard_unit_harness_added:\s+true',
+  'clean_guard_passed:\s+true',
+  'dirty_guard_rejected:\s+true',
+  'extra_key_guard_rejected:\s+true',
+  'clone_deep_copy_verified:\s+true',
+  'normalize_session_defaults_verified:\s+true',
+  'accepted_without_approval_rejected:\s+true',
+  'memory_write_without_approval_rejected:\s+true',
+  'memory_write_with_approval_allowed_as_request:\s+true',
+  'dirty_audit_guard_rejected:\s+true',
+  'missing_required_section_rejected:\s+true',
+  'real_vcpchat_source_read:\s+false',
+  'real_vcpchat_modified:\s+false',
+  'real_vcptoolbox_source_read:\s+false',
+  'real_vcptoolbox_modified:\s+false',
+  'api_called:\s+false',
+  'vcp_plugin_called:\s+false',
+  'daily_note_called:\s+false',
+  'vcp_memory_written:\s+false',
+  'runtime_disk_write_performed:\s+false',
+  'image_file_created:\s+false',
+  'node_runtime_guard_unit:\s+passed',
+  'commit_tag_push_authorized:\s+false'
+)
+
+$forbiddenV41RuntimeGuardUnitValidationPatterns = @(
+  'real_vcpchat_source_read:\s+true',
+  'real_vcpchat_modified:\s+true',
+  'real_vcptoolbox_source_read:\s+true',
+  'real_vcptoolbox_modified:\s+true',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'vcp_memory_written:\s+true',
+  'runtime_disk_write_performed:\s+true',
+  'image_file_created:\s+true',
+  'commit_tag_push_authorized:\s+true',
+  '[A-Za-z]:\\',
+  'https?://'
+)
+
+foreach ($path in $v41RuntimeGuardUnitValidationFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v4.1 runtime guard unit validation file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV41RuntimeGuardUnitValidationPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v4.1 runtime guard unit validation missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV41RuntimeGuardUnitValidationPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v4.1 runtime guard unit validation boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$v42RuntimeValidationSuiteFiles = @(
+  'docs/119_v4_2_runtime_validation_suite.md',
+  'tests/schema_examples/v4_2_runtime_validation_suite.example.yaml'
+)
+
+$requiredV42RuntimeValidationSuitePatterns = @(
+  'status:\s+completed_validated_project_local_runtime_validation_suite',
+  'runtime_validation_suite_added:\s+true',
+  'runtime_guard_syntax:\s+true',
+  'host_bridge_mock_syntax:\s+true',
+  'runtime_app_syntax:\s+true',
+  'runtime_guard_unit_syntax:\s+true',
+  'runtime_guard_unit:\s+true',
+  'runtime_guard_unit_output_passed:\s+true',
+  'runtime_smoke_syntax:\s+true',
+  'runtime_smoke:\s+true',
+  'runtime_smoke_output_passed:\s+true',
+  'external_network_required:\s+false',
+  'external_service_required:\s+false',
+  'file_write_performed:\s+false',
+  'real_vcpchat_source_read:\s+false',
+  'real_vcpchat_modified:\s+false',
+  'real_vcptoolbox_source_read:\s+false',
+  'real_vcptoolbox_modified:\s+false',
+  'api_called:\s+false',
+  'vcp_plugin_called:\s+false',
+  'daily_note_called:\s+false',
+  'vcp_memory_written:\s+false',
+  'image_file_created:\s+false',
+  'node_runtime_prototype_suite:\s+passed',
+  'commit_tag_push_authorized:\s+false'
+)
+
+$forbiddenV42RuntimeValidationSuitePatterns = @(
+  'external_network_required:\s+true',
+  'external_service_required:\s+true',
+  'file_write_performed:\s+true',
+  'real_vcpchat_source_read:\s+true',
+  'real_vcpchat_modified:\s+true',
+  'real_vcptoolbox_source_read:\s+true',
+  'real_vcptoolbox_modified:\s+true',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'vcp_memory_written:\s+true',
+  'image_file_created:\s+true',
+  'commit_tag_push_authorized:\s+true',
+  '[A-Za-z]:\\',
+  'https?://'
+)
+
+foreach ($path in $v42RuntimeValidationSuiteFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v4.2 runtime validation suite file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV42RuntimeValidationSuitePatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v4.2 runtime validation suite missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV42RuntimeValidationSuitePatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v4.2 runtime validation suite boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$v43AutopilotOverlayInstallationFiles = @(
+  'docs/120_v4_3_autopilot_overlay_installation.md',
+  'tests/schema_examples/v4_3_autopilot_overlay_installation.example.yaml',
+  '.agent_board/RUN_STATE.md',
+  '.agent_board/CHECKPOINT.md',
+  '.agent_board/HANDOFF.md',
+  '.agent_board/VALIDATION_LOG.md',
+  '.agent_board/TASK_QUEUE.md'
+)
+
+$requiredV43AutopilotOverlayInstallationPatterns = @(
+  'status:\s+completed_validated_project_local_autopilot_overlay_installation',
+  'autopilot_overlay_installed:\s+true',
+  'agent_board_installed:\s+true',
+  'agent_board_synchronized:\s+true',
+  'existing_files_overwritten:\s+false',
+  'root_agents_overwritten:\s+false',
+  'overlay_kept_separate:\s+true',
+  'validation_helper_adjusted_for_historical_records:\s+true',
+  'real_vcpchat_source_read:\s+false',
+  'real_vcpchat_modified:\s+false',
+  'real_vcptoolbox_source_read:\s+false',
+  'real_vcptoolbox_modified:\s+false',
+  'api_called:\s+false',
+  'vcp_plugin_called:\s+false',
+  'daily_note_called:\s+false',
+  'vcp_memory_written:\s+false',
+  'runtime_disk_write_performed:\s+false',
+  'image_file_created:\s+false',
+  'validate_mvp:\s+passed_after_integration',
+  'validate_agent_image_lab_local_ps1:\s+passed_with_manual_review_warnings',
+  'runtime_validation_suite:\s+passed',
+  'git_diff_check:\s+passed',
+  'commit_tag_push_authorized:\s+false'
+)
+
+$forbiddenV43AutopilotOverlayInstallationPatterns = @(
+  'existing_files_overwritten:\s+true',
+  'root_agents_overwritten:\s+true',
+  'real_vcpchat_source_read:\s+true',
+  'real_vcpchat_modified:\s+true',
+  'real_vcptoolbox_source_read:\s+true',
+  'real_vcptoolbox_modified:\s+true',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'vcp_memory_written:\s+true',
+  'runtime_disk_write_performed:\s+true',
+  'image_file_created:\s+true',
+  'commit_tag_push_authorized:\s+true',
+  'https?://'
+)
+
+foreach ($path in $v43AutopilotOverlayInstallationFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v4.3 autopilot overlay installation file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $forbiddenV43AutopilotOverlayInstallationPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v4.3 autopilot overlay installation boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+foreach ($path in @('docs/120_v4_3_autopilot_overlay_installation.md', 'tests/schema_examples/v4_3_autopilot_overlay_installation.example.yaml')) {
+  $fullPath = Join-Path $Root $path
+  if (Test-Path -LiteralPath $fullPath) {
+    $content = Get-Content -Raw -Encoding UTF8 $fullPath
+    foreach ($pattern in $requiredV43AutopilotOverlayInstallationPatterns) {
+      if ($content -notmatch $pattern) {
+        Add-Failure "v4.3 autopilot overlay installation missing required field in ${path}: $pattern"
+      }
+    }
+  }
+}
+
+$v44AgentBoardStateValidationFiles = @(
+  'docs/121_v4_4_agent_board_state_validation.md',
+  'tests/schema_examples/v4_4_agent_board_state_validation.example.yaml'
+)
+
+$requiredV44AgentBoardStateValidationPatterns = @(
+  'status:\s+completed_validated_project_local_agent_board_state_validation',
+  'agent_board_state_validation_added:\s+true',
+  'required_files_present:\s+true',
+  'current_mode_declared:\s+true',
+  'no_external_read_gate_declared:\s+true',
+  'real_execution_gate_declared:\s+true',
+  'remote_action_gate_declared:\s+true',
+  'validation_snapshot_present:\s+true',
+  'handoff_resume_prompt_present:\s+true',
+  'overlay_separation_decision_present:\s+true',
+  'local_uncommitted_state_declared:\s+true',
+  'external_network_required:\s+false',
+  'external_service_required:\s+false',
+  'file_write_performed:\s+false',
+  'real_vcpchat_source_read:\s+false',
+  'real_vcpchat_modified:\s+false',
+  'real_vcptoolbox_source_read:\s+false',
+  'real_vcptoolbox_modified:\s+false',
+  'api_called:\s+false',
+  'vcp_plugin_called:\s+false',
+  'daily_note_called:\s+false',
+  'vcp_memory_written:\s+false',
+  'image_file_created:\s+false',
+  'node_agent_board_state:\s+passed',
+  'commit_tag_push_authorized:\s+false'
+)
+
+$forbiddenV44AgentBoardStateValidationPatterns = @(
+  'external_network_required:\s+true',
+  'external_service_required:\s+true',
+  'file_write_performed:\s+true',
+  'real_vcpchat_source_read:\s+true',
+  'real_vcpchat_modified:\s+true',
+  'real_vcptoolbox_source_read:\s+true',
+  'real_vcptoolbox_modified:\s+true',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'vcp_memory_written:\s+true',
+  'image_file_created:\s+true',
+  'commit_tag_push_authorized:\s+true',
+  'https?://'
+)
+
+foreach ($path in $v44AgentBoardStateValidationFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v4.4 agent board state validation file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV44AgentBoardStateValidationPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v4.4 agent board state validation missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV44AgentBoardStateValidationPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v4.4 agent board state validation boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$v45LocalCheckpointReadinessFiles = @(
+  'docs/122_v4_5_local_checkpoint_readiness.md',
+  'tests/schema_examples/v4_5_local_checkpoint_readiness.example.yaml'
+)
+
+$requiredV45LocalCheckpointReadinessPatterns = @(
+  'status:\s+completed_validated_project_local_checkpoint_readiness',
+  'local_checkpoint_manifest_added:\s+true',
+  'checkpoint_files_present:\s+true',
+  'overlay_files_present:\s+true',
+  'validation_files_present:\s+true',
+  'local_uncommitted_state_declared:\s+true',
+  'commit_tag_push_not_authorized:\s+true',
+  'validation_snapshot_present:\s+true',
+  'roadmap_current_state_updated:\s+true',
+  'external_network_required:\s+false',
+  'external_service_required:\s+false',
+  'file_write_performed:\s+false',
+  'real_vcpchat_source_read:\s+false',
+  'real_vcpchat_modified:\s+false',
+  'real_vcptoolbox_source_read:\s+false',
+  'real_vcptoolbox_modified:\s+false',
+  'api_called:\s+false',
+  'vcp_plugin_called:\s+false',
+  'daily_note_called:\s+false',
+  'vcp_memory_written:\s+false',
+  'image_file_created:\s+false',
+  'node_local_checkpoint_manifest:\s+passed',
+  'commit_tag_push_authorized:\s+false'
+)
+
+$forbiddenV45LocalCheckpointReadinessPatterns = @(
+  'external_network_required:\s+true',
+  'external_service_required:\s+true',
+  'file_write_performed:\s+true',
+  'real_vcpchat_source_read:\s+true',
+  'real_vcpchat_modified:\s+true',
+  'real_vcptoolbox_source_read:\s+true',
+  'real_vcptoolbox_modified:\s+true',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'vcp_memory_written:\s+true',
+  'image_file_created:\s+true',
+  'commit_tag_push_authorized:\s+true',
+  'https?://'
+)
+
+foreach ($path in $v45LocalCheckpointReadinessFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v4.5 local checkpoint readiness file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV45LocalCheckpointReadinessPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v4.5 local checkpoint readiness missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV45LocalCheckpointReadinessPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v4.5 local checkpoint readiness boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$v46LocalCommitScopeManifestFiles = @(
+  'docs/123_v4_6_local_commit_scope_manifest.md',
+  'tests/schema_examples/v4_6_local_commit_scope_manifest.example.yaml'
+)
+
+$requiredV46LocalCommitScopeManifestPatterns = @(
+  'status:\s+completed_validated_project_local_commit_scope_manifest',
+  'local_commit_scope_manifest_added:\s+true',
+  'changed_file_allowlist_added:\s+true',
+  'modified_files_allowed:\s+true',
+  'untracked_files_allowed:\s+true',
+  'staged_changes_present:\s+false',
+  'commit_allowed:\s+false',
+  'tag_allowed:\s+false',
+  'push_allowed:\s+false',
+  'external_network_required:\s+false',
+  'external_service_required:\s+false',
+  'file_write_performed:\s+false',
+  'real_vcpchat_source_read:\s+false',
+  'real_vcpchat_modified:\s+false',
+  'real_vcptoolbox_source_read:\s+false',
+  'real_vcptoolbox_modified:\s+false',
+  'api_called:\s+false',
+  'vcp_plugin_called:\s+false',
+  'daily_note_called:\s+false',
+  'vcp_memory_written:\s+false',
+  'image_file_created:\s+false',
+  'node_local_commit_scope:\s+passed',
+  'commit_tag_push_authorized:\s+false'
+)
+
+$forbiddenV46LocalCommitScopeManifestPatterns = @(
+  'external_network_required:\s+true',
+  'external_service_required:\s+true',
+  'file_write_performed:\s+true',
+  'real_vcpchat_source_read:\s+true',
+  'real_vcpchat_modified:\s+true',
+  'real_vcptoolbox_source_read:\s+true',
+  'real_vcptoolbox_modified:\s+true',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'vcp_memory_written:\s+true',
+  'image_file_created:\s+true',
+  'commit_allowed:\s+true',
+  'tag_allowed:\s+true',
+  'push_allowed:\s+true',
+  'commit_tag_push_authorized:\s+true',
+  'https?://'
+)
+
+$allowedV46ModifiedFiles = @(
+  'MANIFEST.md',
+  'README.md',
+  'RELEASE_NOTES.md',
+  'docs/00_project_roadmap.md',
+  'review_console/runtime_prototype/README.md',
+  'scripts/validate_mvp.ps1',
+  'scripts/validate_runtime_prototype_smoke.js',
+  'tests/validation_checklist.md'
+)
+
+$allowedV46UntrackedFiles = @(
+  '.agent_board/BLOCKERS.md',
+  '.agent_board/CHECKPOINT.md',
+  '.agent_board/DECISIONS.md',
+  '.agent_board/HANDOFF.md',
+  '.agent_board/RUN_STATE.md',
+  '.agent_board/TASK_QUEUE.md',
+  '.agent_board/VALIDATION_LOG.md',
+  'AGENTS.autopilot-overlay.md',
+  'AUTOPILOT_REFACTOR_REPORT.md',
+  'README_AGENT_IMAGE_LAB_AUTOPILOT.md',
+  'codex/AGENT_IMAGE_LAB_AUTOPILOT_PROMPT.md',
+  'docs/117_v4_0_runtime_contract_smoke_hardening.md',
+  'docs/118_v4_1_runtime_guard_unit_validation.md',
+  'docs/119_v4_2_runtime_validation_suite.md',
+  'docs/120_v4_3_autopilot_overlay_installation.md',
+  'docs/121_v4_4_agent_board_state_validation.md',
+  'docs/122_v4_5_local_checkpoint_readiness.md',
+  'docs/123_v4_6_local_commit_scope_manifest.md',
+  'scripts/validate-agent-image-lab-local.ps1',
+  'scripts/validate-agent-image-lab-local.sh',
+  'scripts/validate_agent_board_state.js',
+  'scripts/validate_local_checkpoint_manifest.js',
+  'scripts/validate_local_commit_scope.js',
+  'scripts/validate_runtime_guard_unit.js',
+  'scripts/validate_runtime_prototype_suite.js',
+  'tests/schema_examples/v4_0_runtime_contract_smoke_hardening.example.yaml',
+  'tests/schema_examples/v4_1_runtime_guard_unit_validation.example.yaml',
+  'tests/schema_examples/v4_2_runtime_validation_suite.example.yaml',
+  'tests/schema_examples/v4_3_autopilot_overlay_installation.example.yaml',
+  'tests/schema_examples/v4_4_agent_board_state_validation.example.yaml',
+  'tests/schema_examples/v4_5_local_checkpoint_readiness.example.yaml',
+  'tests/schema_examples/v4_6_local_commit_scope_manifest.example.yaml'
+)
+
+foreach ($path in $v46LocalCommitScopeManifestFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v4.6 local commit scope manifest file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV46LocalCommitScopeManifestPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v4.6 local commit scope manifest missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV46LocalCommitScopeManifestPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v4.6 local commit scope manifest boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
 $node = Get-Command node -ErrorAction SilentlyContinue
 if (-not $node) {
   Add-Failure "Node.js is required to validate adapter_dry_run_lab"
@@ -1410,6 +1981,51 @@ if (-not $node) {
     Add-Failure "review_console/runtime_prototype/host_bridge_mock.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'scripts/validate_runtime_guard_unit.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_runtime_guard_unit.js failed node --check"
+  }
+
+  $runtimeGuardUnitOutput = & node (Join-Path $Root 'scripts/validate_runtime_guard_unit.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "runtime guard unit validation exited with failure"
+  } else {
+    $runtimeGuardUnit = ($runtimeGuardUnitOutput -join "`n") | ConvertFrom-Json
+    if ($runtimeGuardUnit.passed -ne $true) {
+      Add-Failure "runtime guard unit validation must report passed true"
+    }
+    if ($runtimeGuardUnit.runtime_guard_unit.clean_guard_passed -ne $true) {
+      Add-Failure "runtime guard unit validation must pass clean guard"
+    }
+    if ($runtimeGuardUnit.runtime_guard_unit.dirty_guard_rejected -ne $true) {
+      Add-Failure "runtime guard unit validation must reject dirty guard"
+    }
+    if ($runtimeGuardUnit.runtime_guard_unit.extra_key_guard_rejected -ne $true) {
+      Add-Failure "runtime guard unit validation must reject guard with extra keys"
+    }
+    if ($runtimeGuardUnit.runtime_guard_unit.clone_deep_copy_verified -ne $true) {
+      Add-Failure "runtime guard unit validation must verify clone deep copy"
+    }
+    if ($runtimeGuardUnit.runtime_guard_unit.normalize_session_defaults_verified -ne $true) {
+      Add-Failure "runtime guard unit validation must verify normalizeSession defaults"
+    }
+    if ($runtimeGuardUnit.runtime_guard_unit.accepted_without_approval_rejected -ne $true) {
+      Add-Failure "runtime guard unit validation must reject accepted without approval"
+    }
+    if ($runtimeGuardUnit.runtime_guard_unit.memory_write_without_approval_rejected -ne $true) {
+      Add-Failure "runtime guard unit validation must reject memory write without approval"
+    }
+    if ($runtimeGuardUnit.runtime_guard_unit.memory_write_with_approval_allowed_as_request -ne $true) {
+      Add-Failure "runtime guard unit validation must allow approved memory write request"
+    }
+    if ($runtimeGuardUnit.runtime_guard_unit.dirty_audit_guard_rejected -ne $true) {
+      Add-Failure "runtime guard unit validation must reject dirty audit guard"
+    }
+    if ($runtimeGuardUnit.runtime_guard_unit.missing_required_section_rejected -ne $true) {
+      Add-Failure "runtime guard unit validation must reject missing required section"
+    }
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_runtime_prototype_smoke.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_runtime_prototype_smoke.js failed node --check"
@@ -1447,8 +2063,213 @@ if (-not $node) {
     if ($runtimeSmoke.rejection_checks.accepted_without_approval_rejected -ne $true) {
       Add-Failure "runtime prototype smoke test must reject accepted asset without approval"
     }
+    if ($runtimeSmoke.runtime_contract.script_order_verified -ne $true) {
+      Add-Failure "runtime prototype smoke test must verify index.html script order"
+    }
+    if ($runtimeSmoke.runtime_contract.runtime_guard_api_verified -ne $true) {
+      Add-Failure "runtime prototype smoke test must verify runtime guard API"
+    }
     if ($runtimeSmoke.prototype_guard_clean -ne $true) {
       Add-Failure "runtime prototype smoke test final guard must remain clean"
+    }
+  }
+
+  & node --check (Join-Path $Root 'scripts/validate_runtime_prototype_suite.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_runtime_prototype_suite.js failed node --check"
+  }
+
+  & node --check (Join-Path $Root 'scripts/validate_agent_board_state.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_agent_board_state.js failed node --check"
+  }
+
+  & node --check (Join-Path $Root 'scripts/validate_local_checkpoint_manifest.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_local_checkpoint_manifest.js failed node --check"
+  }
+
+  & node --check (Join-Path $Root 'scripts/validate_local_commit_scope.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_local_commit_scope.js failed node --check"
+  }
+
+  $agentBoardStateOutput = & node (Join-Path $Root 'scripts/validate_agent_board_state.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "agent board state validation exited with failure"
+  } else {
+    $agentBoardState = ($agentBoardStateOutput -join "`n") | ConvertFrom-Json
+    if ($agentBoardState.passed -ne $true) {
+      Add-Failure "agent board state validation must report passed true"
+    }
+    if ($agentBoardState.agent_board_state.required_files_present -ne $true) {
+      Add-Failure "agent board state validation must verify required files"
+    }
+    if ($agentBoardState.agent_board_state.no_external_read_gate_declared -ne $true) {
+      Add-Failure "agent board state validation must verify external-read gates"
+    }
+    if ($agentBoardState.agent_board_state.real_execution_gate_declared -ne $true) {
+      Add-Failure "agent board state validation must verify real-execution gates"
+    }
+    if ($agentBoardState.agent_board_state.remote_action_gate_declared -ne $true) {
+      Add-Failure "agent board state validation must verify remote-action gates"
+    }
+    if ($agentBoardState.agent_board_state.validation_snapshot_present -ne $true) {
+      Add-Failure "agent board state validation must verify validation snapshot"
+    }
+    if ($agentBoardState.agent_board_state.handoff_resume_prompt_present -ne $true) {
+      Add-Failure "agent board state validation must verify handoff resume prompt"
+    }
+    if ($agentBoardState.agent_board_state.file_write_performed -ne $false) {
+      Add-Failure "agent board state validation must not write files"
+    }
+  }
+
+  $localCheckpointOutput = & node (Join-Path $Root 'scripts/validate_local_checkpoint_manifest.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "local checkpoint manifest validation exited with failure"
+  } else {
+    $localCheckpoint = ($localCheckpointOutput -join "`n") | ConvertFrom-Json
+    if ($localCheckpoint.passed -ne $true) {
+      Add-Failure "local checkpoint manifest validation must report passed true"
+    }
+    if ($localCheckpoint.local_checkpoint_manifest.checkpoint_files_present -ne $true) {
+      Add-Failure "local checkpoint manifest must verify checkpoint files"
+    }
+    if ($localCheckpoint.local_checkpoint_manifest.overlay_files_present -ne $true) {
+      Add-Failure "local checkpoint manifest must verify overlay files"
+    }
+    if ($localCheckpoint.local_checkpoint_manifest.validation_files_present -ne $true) {
+      Add-Failure "local checkpoint manifest must verify validation files"
+    }
+    if ($localCheckpoint.local_checkpoint_manifest.local_uncommitted_state_declared -ne $true) {
+      Add-Failure "local checkpoint manifest must verify local uncommitted state"
+    }
+    if ($localCheckpoint.local_checkpoint_manifest.commit_tag_push_not_authorized -ne $true) {
+      Add-Failure "local checkpoint manifest must verify commit/tag/push gate"
+    }
+    if ($localCheckpoint.local_checkpoint_manifest.validation_snapshot_present -ne $true) {
+      Add-Failure "local checkpoint manifest must verify validation snapshot"
+    }
+    if ($localCheckpoint.local_checkpoint_manifest.roadmap_current_state_updated -ne $true) {
+      Add-Failure "local checkpoint manifest must verify roadmap current state"
+    }
+    if ($localCheckpoint.local_checkpoint_manifest.file_write_performed -ne $false) {
+      Add-Failure "local checkpoint manifest must not write files"
+    }
+  }
+
+  $localCommitScopeOutput = & node (Join-Path $Root 'scripts/validate_local_commit_scope.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "local commit scope validation exited with failure"
+  } else {
+    $localCommitScope = ($localCommitScopeOutput -join "`n") | ConvertFrom-Json
+    if ($localCommitScope.passed -ne $true) {
+      Add-Failure "local commit scope validation must report passed true"
+    }
+    if ($localCommitScope.local_commit_scope.modified_files_allowed -ne $true) {
+      Add-Failure "local commit scope must verify modified files are allowed"
+    }
+    if ($localCommitScope.local_commit_scope.untracked_files_allowed -ne $true) {
+      Add-Failure "local commit scope must verify untracked files are allowed"
+    }
+    if ($localCommitScope.local_commit_scope.unexpected_modified_count -ne 0) {
+      Add-Failure "local commit scope unexpected_modified_count must be 0"
+    }
+    if ($localCommitScope.local_commit_scope.unexpected_untracked_count -ne 0) {
+      Add-Failure "local commit scope unexpected_untracked_count must be 0"
+    }
+    if ($localCommitScope.local_commit_scope.staged_changes_present -ne $false) {
+      Add-Failure "local commit scope must verify no staged changes"
+    }
+    if ($localCommitScope.local_commit_scope.commit_allowed -ne $false) {
+      Add-Failure "local commit scope must not authorize commit"
+    }
+    if ($localCommitScope.local_commit_scope.tag_allowed -ne $false) {
+      Add-Failure "local commit scope must not authorize tag"
+    }
+    if ($localCommitScope.local_commit_scope.push_allowed -ne $false) {
+      Add-Failure "local commit scope must not authorize push"
+    }
+    if ($localCommitScope.local_commit_scope.file_write_performed -ne $false) {
+      Add-Failure "local commit scope must not write files"
+    }
+  }
+
+  $git = Get-Command git -ErrorAction SilentlyContinue
+  if (-not $git) {
+    Add-Failure "git is required to validate local commit scope against current worktree"
+  } else {
+    $currentBranch = ((& git branch --show-current) -join "`n").Trim()
+    if ($LASTEXITCODE -ne 0) {
+      Add-Failure "git branch --show-current failed during local commit scope validation"
+    } elseif ($currentBranch -ne 'master') {
+      Add-Failure "local commit scope expected branch master, got $currentBranch"
+    }
+
+    $actualModifiedFiles = @(& git diff --name-only | Where-Object { $_.Trim() -ne '' } | ForEach-Object { $_.Trim() })
+    if ($LASTEXITCODE -ne 0) {
+      Add-Failure "git diff --name-only failed during local commit scope validation"
+    }
+    $unexpectedModifiedFiles = @($actualModifiedFiles | Where-Object { $allowedV46ModifiedFiles -notcontains $_ })
+    if ($unexpectedModifiedFiles.Count -gt 0) {
+      Add-Failure "local commit scope found unexpected modified files: $($unexpectedModifiedFiles -join ', ')"
+    }
+
+    $actualUntrackedFiles = @(& git ls-files --others --exclude-standard | Where-Object { $_.Trim() -ne '' } | ForEach-Object { $_.Trim() })
+    if ($LASTEXITCODE -ne 0) {
+      Add-Failure "git ls-files --others --exclude-standard failed during local commit scope validation"
+    }
+    $unexpectedUntrackedFiles = @($actualUntrackedFiles | Where-Object { $allowedV46UntrackedFiles -notcontains $_ })
+    if ($unexpectedUntrackedFiles.Count -gt 0) {
+      Add-Failure "local commit scope found unexpected untracked files: $($unexpectedUntrackedFiles -join ', ')"
+    }
+
+    $actualStagedFiles = @(& git diff --cached --name-only | Where-Object { $_.Trim() -ne '' } | ForEach-Object { $_.Trim() })
+    if ($LASTEXITCODE -ne 0) {
+      Add-Failure "git diff --cached --name-only failed during local commit scope validation"
+    } elseif ($actualStagedFiles.Count -gt 0) {
+      Add-Failure "local commit scope expected no staged files, got: $($actualStagedFiles -join ', ')"
+    }
+  }
+
+  $runtimeSuiteOutput = & node (Join-Path $Root 'scripts/validate_runtime_prototype_suite.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "runtime prototype validation suite exited with failure"
+  } else {
+    $runtimeSuite = ($runtimeSuiteOutput -join "`n") | ConvertFrom-Json
+    if ($runtimeSuite.passed -ne $true) {
+      Add-Failure "runtime prototype validation suite must report passed true"
+    }
+    if ($runtimeSuite.runtime_validation_suite.failed_count -ne 0) {
+      Add-Failure "runtime prototype validation suite failed_count must be 0"
+    }
+    if ($runtimeSuite.runtime_validation_suite.runtime_guard_syntax -ne $true) {
+      Add-Failure "runtime prototype validation suite must pass runtime guard syntax"
+    }
+    if ($runtimeSuite.runtime_validation_suite.host_bridge_mock_syntax -ne $true) {
+      Add-Failure "runtime prototype validation suite must pass host bridge mock syntax"
+    }
+    if ($runtimeSuite.runtime_validation_suite.runtime_app_syntax -ne $true) {
+      Add-Failure "runtime prototype validation suite must pass runtime app syntax"
+    }
+    if ($runtimeSuite.runtime_validation_suite.runtime_guard_unit -ne $true) {
+      Add-Failure "runtime prototype validation suite must pass runtime guard unit"
+    }
+    if ($runtimeSuite.runtime_validation_suite.runtime_guard_unit_output_passed -ne $true) {
+      Add-Failure "runtime prototype validation suite must verify runtime guard unit output"
+    }
+    if ($runtimeSuite.runtime_validation_suite.runtime_smoke -ne $true) {
+      Add-Failure "runtime prototype validation suite must pass runtime smoke"
+    }
+    if ($runtimeSuite.runtime_validation_suite.runtime_smoke_output_passed -ne $true) {
+      Add-Failure "runtime prototype validation suite must verify runtime smoke output"
+    }
+    if ($runtimeSuite.runtime_validation_suite.external_network_required -ne $false) {
+      Add-Failure "runtime prototype validation suite must not require external network"
+    }
+    if ($runtimeSuite.runtime_validation_suite.file_write_performed -ne $false) {
+      Add-Failure "runtime prototype validation suite must not write files"
     }
   }
 

@@ -88,6 +88,29 @@ function runScript(context, fileName) {
   vm.runInContext(source, context, { filename: fileName });
 }
 
+function readIndexScriptOrder() {
+  const html = fs.readFileSync(path.join(runtimeRoot, "index.html"), "utf8");
+  const scriptPattern = /<script\b[^>]*\bsrc=["']\.\/([^"']+)["'][^>]*><\/script>/gi;
+  return Array.from(html.matchAll(scriptPattern), (match) => match[1]);
+}
+
+function assertExpectedScriptOrder(scriptOrder) {
+  const expectedOrder = ["runtime_guard.js", "host_bridge_mock.js", "app.js"];
+  assert(
+    scriptOrder.length === expectedOrder.length &&
+      expectedOrder.every((fileName, index) => scriptOrder[index] === fileName),
+    `Runtime index.html script order must be ${expectedOrder.join(" -> ")}.`
+  );
+}
+
+function assertRuntimeGuardApi(runtimeGuard) {
+  const requiredMethods = ["clone", "normalizeSession", "guardIsClean", "draftIsSafe", "assertDraftSafe"];
+  assert(runtimeGuard && typeof runtimeGuard.cleanGuard === "object", "Runtime guard must expose cleanGuard.");
+  for (const method of requiredMethods) {
+    assert(typeof runtimeGuard[method] === "function", `Runtime guard must expose ${method}().`);
+  }
+}
+
 function parseDraft(elements) {
   return JSON.parse(elements.get("draftOutput").textContent);
 }
@@ -104,10 +127,13 @@ function dispatchChange(elements, id) {
 
 function main() {
   const { context, elements } = createRuntimeContext();
-  runScript(context, "runtime_guard.js");
-  runScript(context, "host_bridge_mock.js");
-  runScript(context, "app.js");
+  const scriptOrder = readIndexScriptOrder();
+  assertExpectedScriptOrder(scriptOrder);
+  for (const fileName of scriptOrder) {
+    runScript(context, fileName);
+  }
   const runtimeGuard = context.window.ImageLabRuntimeGuard;
+  assertRuntimeGuardApi(runtimeGuard);
 
   const initialDraft = parseDraft(elements);
   assert(elements.get("hostStatus").textContent.includes("已接收安全草案"), "Initial host ack must be accepted.");
@@ -162,6 +188,11 @@ function main() {
       dirty_guard_rejected: badGuardAck.accepted_by_host_mock === false,
       dirty_audit_guard_rejected: badAuditGuardAck.accepted_by_host_mock === false,
       accepted_without_approval_rejected: badApprovalAck.accepted_by_host_mock === false
+    },
+    runtime_contract: {
+      script_order: scriptOrder,
+      script_order_verified: true,
+      runtime_guard_api_verified: true
     },
     prototype_guard_clean: runtimeGuard.guardIsClean(approvedDraft.prototype_guard)
   };

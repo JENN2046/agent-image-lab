@@ -1696,3 +1696,98 @@
 - [ ] smoke test 验证脏 audit `prototype_guard` 被拒绝。
 - [ ] smoke test 验证 accepted 但缺少 human approval 被拒绝。
 - [ ] runtime prototype 保持不读真实 VCPChat、不改真实 VCPChat、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v4.0 Runtime Contract Smoke Hardening 检查
+
+- [ ] `docs/117_v4_0_runtime_contract_smoke_hardening.md` 存在。
+- [ ] `tests/schema_examples/v4_0_runtime_contract_smoke_hardening.example.yaml` 存在。
+- [ ] smoke test 从 `review_console/runtime_prototype/index.html` 读取真实 `<script>` 顺序。
+- [ ] `index.html` 脚本顺序保持 `runtime_guard.js`、`host_bridge_mock.js`、`app.js`。
+- [ ] smoke test 验证 `ImageLabRuntimeGuard` 暴露所需 API。
+- [ ] smoke test 输出 `script_order_verified=true`。
+- [ ] smoke test 输出 `runtime_guard_api_verified=true`。
+- [ ] `validate_mvp.ps1` 检查 v4.0 文档、schema 和 smoke 输出。
+- [ ] runtime prototype 仍不读真实 VCPChat、不改真实 VCPChat、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v4.1 Runtime Guard Unit Validation 检查
+
+- [ ] `scripts/validate_runtime_guard_unit.js` 存在。
+- [ ] `docs/118_v4_1_runtime_guard_unit_validation.md` 存在。
+- [ ] `tests/schema_examples/v4_1_runtime_guard_unit_validation.example.yaml` 存在。
+- [ ] unit harness 直接加载 `review_console/runtime_prototype/runtime_guard.js`。
+- [ ] unit harness 验证 clean guard 通过、dirty guard 拒绝、extra key guard 拒绝。
+- [ ] unit harness 验证 `clone()` 深拷贝和 `normalizeSession()` 默认数组字段。
+- [ ] unit harness 验证 accepted 缺少 human approval 时拒绝。
+- [ ] unit harness 验证 memory write request 缺少 memory approval 时拒绝。
+- [ ] unit harness 验证 dirty audit guard 和缺失 required section 时拒绝。
+- [ ] `validate_mvp.ps1` 执行 runtime guard unit harness 并检查输出字段。
+- [ ] runtime guard unit validation 不读真实 VCPChat、不改真实 VCPChat、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v4.2 Runtime Validation Suite 检查
+
+- [ ] `scripts/validate_runtime_prototype_suite.js` 存在。
+- [ ] `docs/119_v4_2_runtime_validation_suite.md` 存在。
+- [ ] `tests/schema_examples/v4_2_runtime_validation_suite.example.yaml` 存在。
+- [ ] suite 聚合 runtime guard、host bridge mock、runtime app、guard unit 和 smoke test 的本地校验。
+- [ ] suite 输出 `passed=true` 和 `failed_count=0`。
+- [ ] suite 输出 `runtime_guard_unit_output_passed=true`。
+- [ ] suite 输出 `runtime_smoke_output_passed=true`。
+- [ ] suite 输出 `external_network_required=false`、`external_service_required=false`、`file_write_performed=false`。
+- [ ] `validate_mvp.ps1` 执行 runtime validation suite 并检查输出字段。
+- [ ] runtime validation suite 不读真实 VCPChat、不改真实 VCPChat、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v4.3 Autopilot Overlay Installation 检查
+
+- [ ] `AGENTS.autopilot-overlay.md` 存在。
+- [ ] `.agent_board/` 存在并包含 BLOCKERS、CHECKPOINT、DECISIONS、HANDOFF、RUN_STATE、TASK_QUEUE、VALIDATION_LOG。
+- [ ] `README_AGENT_IMAGE_LAB_AUTOPILOT.md` 存在。
+- [ ] `AUTOPILOT_REFACTOR_REPORT.md` 存在。
+- [ ] `codex/AGENT_IMAGE_LAB_AUTOPILOT_PROMPT.md` 存在。
+- [ ] `scripts/validate-agent-image-lab-local.ps1` 存在。
+- [ ] `scripts/validate-agent-image-lab-local.sh` 存在。
+- [ ] `docs/120_v4_3_autopilot_overlay_installation.md` 存在。
+- [ ] `tests/schema_examples/v4_3_autopilot_overlay_installation.example.yaml` 存在。
+- [ ] overlay 安装没有覆盖根 `AGENTS.md`。
+- [ ] `.agent_board` 已同步当前本地未提交状态和 validation snapshot。
+- [ ] `validate-agent-image-lab-local.ps1` 通过，允许历史真实执行记录豁免但不放宽普通文件扫描。
+- [ ] v4.3 不读真实 VCPChat、不改真实 VCPChat、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v4.4 Agent Board State Validation 检查
+
+- [ ] `scripts/validate_agent_board_state.js` 存在。
+- [ ] `docs/121_v4_4_agent_board_state_validation.md` 存在。
+- [ ] `tests/schema_examples/v4_4_agent_board_state_validation.example.yaml` 存在。
+- [ ] agent board state validation 验证 `.agent_board` 七个必需文件存在。
+- [ ] agent board state validation 验证 A4 guarded local autopilot mode。
+- [ ] agent board state validation 验证 external-read、real-execution、remote-action gates。
+- [ ] agent board state validation 验证 validation snapshot 和 handoff resume prompt。
+- [ ] agent board state validation 验证 overlay separation decision。
+- [ ] `validate_mvp.ps1` 执行 agent board state validation 并检查输出字段。
+- [ ] v4.4 不读真实 VCPChat、不改真实 VCPChat、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v4.5 Local Checkpoint Readiness 检查
+
+- [ ] `scripts/validate_local_checkpoint_manifest.js` 存在。
+- [ ] `docs/122_v4_5_local_checkpoint_readiness.md` 存在。
+- [ ] `tests/schema_examples/v4_5_local_checkpoint_readiness.example.yaml` 存在。
+- [ ] local checkpoint manifest 验证 v4.0-v4.5 阶段文档和 schema 示例齐全。
+- [ ] local checkpoint manifest 验证 autopilot overlay、`.agent_board` 和验证脚本齐全。
+- [ ] local checkpoint manifest 验证 `.agent_board` 已声明本地未提交状态。
+- [ ] local checkpoint manifest 验证 commit/tag/push 未授权。
+- [ ] local checkpoint manifest 验证 validation snapshot 包含 validate_mvp、local helper、runtime suite、agent board state、local checkpoint manifest 和 git diff check。
+- [ ] `validate_mvp.ps1` 执行 local checkpoint manifest 并检查输出字段。
+- [ ] v4.5 不读真实 VCPChat、不改真实 VCPChat、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v4.6 Local Commit Scope Manifest 检查
+
+- [ ] `scripts/validate_local_commit_scope.js` 存在。
+- [ ] `docs/123_v4_6_local_commit_scope_manifest.md` 存在。
+- [ ] `tests/schema_examples/v4_6_local_commit_scope_manifest.example.yaml` 存在。
+- [ ] local commit scope manifest 验证当前分支为 `master`。
+- [ ] local commit scope manifest 验证 modified files 均在 allowlist 内。
+- [ ] local commit scope manifest 验证 untracked files 均在 allowlist 内。
+- [ ] local commit scope manifest 验证没有 staged changes。
+- [ ] local commit scope manifest 支持提交后的 clean worktree 通过，避免提交后主验证失效。
+- [ ] `validate_mvp.ps1` 执行 local commit scope manifest 并检查输出字段。
+- [ ] v4.6 不执行 `git add`、commit、tag、push 或 release。
+- [ ] v4.6 不读真实 VCPChat、不改真实 VCPChat、不调用插件、API、DailyNote 或 VCP 记忆。

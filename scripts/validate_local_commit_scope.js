@@ -1,0 +1,121 @@
+const allowedModifiedFiles = [
+  "MANIFEST.md",
+  "README.md",
+  "RELEASE_NOTES.md",
+  "docs/00_project_roadmap.md",
+  "review_console/runtime_prototype/README.md",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_runtime_prototype_smoke.js",
+  "tests/validation_checklist.md"
+];
+
+const allowedUntrackedFiles = [
+  ".agent_board/BLOCKERS.md",
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/DECISIONS.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "AGENTS.autopilot-overlay.md",
+  "AUTOPILOT_REFACTOR_REPORT.md",
+  "README_AGENT_IMAGE_LAB_AUTOPILOT.md",
+  "codex/AGENT_IMAGE_LAB_AUTOPILOT_PROMPT.md",
+  "docs/117_v4_0_runtime_contract_smoke_hardening.md",
+  "docs/118_v4_1_runtime_guard_unit_validation.md",
+  "docs/119_v4_2_runtime_validation_suite.md",
+  "docs/120_v4_3_autopilot_overlay_installation.md",
+  "docs/121_v4_4_agent_board_state_validation.md",
+  "docs/122_v4_5_local_checkpoint_readiness.md",
+  "docs/123_v4_6_local_commit_scope_manifest.md",
+  "scripts/validate-agent-image-lab-local.ps1",
+  "scripts/validate-agent-image-lab-local.sh",
+  "scripts/validate_agent_board_state.js",
+  "scripts/validate_local_checkpoint_manifest.js",
+  "scripts/validate_local_commit_scope.js",
+  "scripts/validate_runtime_guard_unit.js",
+  "scripts/validate_runtime_prototype_suite.js",
+  "tests/schema_examples/v4_0_runtime_contract_smoke_hardening.example.yaml",
+  "tests/schema_examples/v4_1_runtime_guard_unit_validation.example.yaml",
+  "tests/schema_examples/v4_2_runtime_validation_suite.example.yaml",
+  "tests/schema_examples/v4_3_autopilot_overlay_installation.example.yaml",
+  "tests/schema_examples/v4_4_agent_board_state_validation.example.yaml",
+  "tests/schema_examples/v4_5_local_checkpoint_readiness.example.yaml",
+  "tests/schema_examples/v4_6_local_commit_scope_manifest.example.yaml"
+];
+
+function assert(condition, message) {
+  if (!condition) {
+    throw new Error(message);
+  }
+}
+
+function hasDuplicates(values) {
+  return new Set(values).size !== values.length;
+}
+
+function hasUnsafePath(values) {
+  return values.some((value) => {
+    return (
+      value.includes("\\") ||
+      value.startsWith("/") ||
+      /^[A-Za-z]:/.test(value) ||
+      value.includes("..") ||
+      value.startsWith("runs/") ||
+      value.includes(".env")
+    );
+  });
+}
+
+function main() {
+  assert(!hasDuplicates(allowedModifiedFiles), "Allowed modified files must not contain duplicates.");
+  assert(!hasDuplicates(allowedUntrackedFiles), "Allowed untracked files must not contain duplicates.");
+  assert(!hasUnsafePath(allowedModifiedFiles), "Allowed modified files must stay relative and project-local.");
+  assert(!hasUnsafePath(allowedUntrackedFiles), "Allowed untracked files must stay relative and project-local.");
+  assert(
+    allowedUntrackedFiles.includes("docs/123_v4_6_local_commit_scope_manifest.md"),
+    "v4.6 docs must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("tests/schema_examples/v4_6_local_commit_scope_manifest.example.yaml"),
+    "v4.6 schema example must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("scripts/validate_local_commit_scope.js"),
+    "v4.6 validation script must be included in the untracked allowlist."
+  );
+
+  const result = {
+    passed: true,
+    local_commit_scope: {
+      expected_branch: "master",
+      allowed_modified_count: allowedModifiedFiles.length,
+      allowed_untracked_count: allowedUntrackedFiles.length,
+      actual_modified_count: null,
+      actual_untracked_count: null,
+      unexpected_modified_count: 0,
+      unexpected_untracked_count: 0,
+      staged_changes_present: false,
+      modified_files_allowed: true,
+      untracked_files_allowed: true,
+      clean_worktree_allowed: true,
+      live_git_status_checked: false,
+      live_git_status_validator: "scripts/validate_mvp.ps1",
+      commit_allowed: false,
+      tag_allowed: false,
+      push_allowed: false,
+      external_network_required: false,
+      external_service_required: false,
+      file_write_performed: false
+    }
+  };
+
+  process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
+}
+
+try {
+  main();
+} catch (error) {
+  process.stderr.write(`${error.stack || error.message}\n`);
+  process.exitCode = 1;
+}

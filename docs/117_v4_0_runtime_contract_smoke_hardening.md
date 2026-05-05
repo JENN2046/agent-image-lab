@@ -1,0 +1,86 @@
+# 117 v4.0 Runtime Contract Smoke Hardening
+
+本文记录 v4.0 项目内 runtime prototype smoke test 加固。该阶段只强化本地校验：smoke test 从 `review_console/runtime_prototype/index.html` 读取真实脚本加载顺序，并确认共享 runtime guard API 可用。它不读取真实 VCPChat，不读取真实 VCPToolBox，不调用插件、API、DailyNote、VCP 记忆或外部文件系统。
+
+## Runtime Contract Status
+
+```yaml
+v4_0_runtime_contract_smoke_hardening:
+  status: completed_validated_project_local_runtime_contract_smoke_hardening
+  index_script_order_smoke_added: true
+  runtime_guard_api_smoke_added: true
+  smoke_test_uses_index_script_order: true
+  real_vcpchat_source_read: false
+  real_vcpchat_modified: false
+  real_vcptoolbox_source_read: false
+  real_vcptoolbox_modified: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  runtime_disk_write_performed: false
+  image_file_created: false
+  commit_tag_push_authorized: false
+```
+
+## Contract Scope
+
+```yaml
+contract_scope:
+  smoke_test_file: scripts/validate_runtime_prototype_smoke.js
+  html_contract_file: review_console/runtime_prototype/index.html
+  required_script_order:
+    - runtime_guard.js
+    - host_bridge_mock.js
+    - app.js
+  required_runtime_guard_api:
+    - cleanGuard
+    - clone
+    - normalizeSession
+    - guardIsClean
+    - draftIsSafe
+    - assertDraftSafe
+  browser_required_for_smoke_test: false
+  network_required: false
+  external_service_required: false
+```
+
+## Assertions
+
+```yaml
+assertions:
+  script_order_verified: true
+  runtime_guard_api_verified: true
+  dirty_guard_rejected: true
+  dirty_audit_guard_rejected: true
+  accepted_without_approval_rejected: true
+  prototype_guard_clean: true
+```
+
+## Validation
+
+```yaml
+validation:
+  node_check_smoke_test: passed
+  node_smoke_test: passed
+  validate_mvp: passed_after_integration
+  git_diff_check: passed
+```
+
+## Boundary
+
+```yaml
+boundary:
+  can_continue_project_runtime_prototype_locally: true
+  can_modify_real_vcpchat: false
+  can_modify_real_vcptoolbox: false
+  can_call_plugin: false
+  can_call_api: false
+  can_write_daily_note: false
+  can_write_vcp_memory: false
+  can_write_disk_from_runtime: false
+  can_create_image_file: false
+  commit_tag_push_authorized: false
+```
+
+v4.0 提升的是 runtime prototype 的本地契约可验证性，不授权真实 VCPChat 集成、外部执行、DailyNote 写入或远程发布。

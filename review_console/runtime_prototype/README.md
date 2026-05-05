@@ -54,13 +54,40 @@ v3.9 将 renderer 与 host mock 的重复 guard 规则收束到 `runtime_guard.j
 - smoke test 加载同一模块，并验证顶层 guard 和 audit guard 被污染时都会被拒绝。
 - 该模块仍只在项目内浏览器原型中运行，不创建 IPC、插件调用、API 调用、DailyNote 写入或文件写入。
 
+## Runtime Contract Smoke Hardening
+
+v4.0 起，smoke test 从 `index.html` 读取实际 `<script>` 顺序执行 runtime prototype，并校验 `ImageLabRuntimeGuard` 的共享 API。页面脚本顺序必须保持：
+
+```text
+runtime_guard.js -> host_bridge_mock.js -> app.js
+```
+
+这保证浏览器实际入口和 Node fake-DOM smoke test 使用同一加载契约。
+
+## Runtime Guard Unit Validation
+
+v4.1 增加 `scripts/validate_runtime_guard_unit.js`，直接在 Node VM 中加载共享 guard 并验证核心规则：
+
+- clean guard 通过，dirty guard 和额外字段 guard 被拒绝。
+- `clone()` 保持 JSON 深拷贝。
+- `normalizeSession()` 为可选列表字段提供数组默认值。
+- accepted 必须有人工审批。
+- memory write request 必须有 memory approval。
+- audit guard 和必需 draft section 缺失会被拒绝。
+
+## Runtime Validation Suite
+
+v4.2 增加 `scripts/validate_runtime_prototype_suite.js`，把 runtime prototype 相关语法检查、guard unit validation 和 fake-DOM smoke test 聚合为一个本地入口。suite 只读取项目内源码并执行本地 Node 校验，不访问网络、不调用外部服务、不写文件。
+
 ## Validation
 
 ```powershell
 node --check review_console\runtime_prototype\runtime_guard.js
 node --check review_console\runtime_prototype\host_bridge_mock.js
 node --check review_console\runtime_prototype\app.js
+node scripts\validate_runtime_guard_unit.js
 node scripts\validate_runtime_prototype_smoke.js
+node scripts\validate_runtime_prototype_suite.js
 ```
 
 人工验收时还应确认：

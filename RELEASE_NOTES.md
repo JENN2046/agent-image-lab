@@ -35,6 +35,13 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Added v3.7 first runtime patch execution record with no external side effects.
 - Added v3.8 project-local runtime prototype smoke test harness.
 - Added v3.9 shared runtime guard extraction for renderer, host mock, and smoke test.
+- Hardened runtime prototype smoke validation to verify `index.html` script order and shared guard API.
+- Added v4.1 runtime guard unit validation harness.
+- Added v4.2 runtime validation suite for local prototype checks.
+- Installed v4.3 guarded autopilot overlay and synchronized `.agent_board` state.
+- Added v4.4 agent board state validation harness.
+- Added v4.5 local checkpoint readiness manifest validation.
+- Added v4.6 local commit scope manifest validation.
 
 ## Safety Status
 

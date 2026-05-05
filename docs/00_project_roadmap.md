@@ -18,7 +18,7 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate
+v1.0 true-loop closeout candidate + v4.6 local commit scope manifest
 ```
 
 已经完成：
@@ -41,6 +41,14 @@ v1.0 true-loop closeout candidate
 - v0.10 GPTImageGen 脱敏失败记录。
 - v0.10 DoubaoGen model-explicit retry 真实执行记录，已由用户人工接受进入下一阶段。
 - v1.0 true-loop closeout 记录和最终验收材料。
+- v3.9 Review Console runtime prototype 共享 guard 抽取，并已形成 baseline tag。
+- v4.0 runtime smoke test 加固：从 `index.html` 读取真实脚本顺序，并验证共享 guard API。
+- v4.1 runtime guard unit harness：直接验证共享 guard 的拒绝策略、默认值和审批规则。
+- v4.2 runtime validation suite：聚合 runtime 原型语法检查、guard unit 和 smoke test。
+- v4.3 guarded autopilot overlay：安装 `.agent_board`、overlay 规则和本地校验 helper，且保持不覆盖根 `AGENTS.md`。
+- v4.4 agent board state validation：机器检查 `.agent_board` 必需文件、硬停止门、handoff 和验证快照。
+- v4.5 local checkpoint readiness：机器检查 v4.0-v4.5 本地 checkpoint、overlay、agent board、验证脚本和 commit/tag/push 门。
+- v4.6 local commit scope manifest：机器检查 v4.0-v4.6 本地 changed-file allowlist、staging 状态和 commit/tag/push 门。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：
@@ -198,9 +206,9 @@ daily_note_called: false
 
 ## 当前优先队列
 
-1. 完成并归档 v1.0 true-loop closeout 本地材料。
-2. 运行完整校验，确保文档、Adapter、Review Console 和执行记录均通过。
-3. 等待用户单独授权 commit、tag、push 或正式 release 发布。
+1. 运行完整校验，确保文档、Adapter、Review Console、agent board 和执行记录均通过。
+2. 等待用户单独授权任何新的 commit、tag、push 或正式 release 发布。
+3. 如继续本地推进，优先做 Review Console runtime prototype 的本地契约、handoff 和文档收束。
 4. 后续任何新增真实生图调用都必须重新确认插件、调用次数、输入引用、输出目录和回滚方案。
 
 ## 永久安全门

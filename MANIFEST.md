@@ -1,6 +1,6 @@
 # Agent Image Lab 打包清单
 
-本包包含 Agent Image Lab v1.0 true-loop closeout 候选所需的文档、schema、角色定义、记忆策略、审片台规格、Adapter dry-run 包、VCP 接入记录、授权门、真实执行脱敏记录和最终验收报告。
+本包包含 Agent Image Lab v1.0 true-loop closeout 候选所需的文档、schema、角色定义、记忆策略、审片台规格、Adapter dry-run 包、VCP 接入记录、授权门、真实执行脱敏记录、最终验收报告、v3.9-v4.2 Review Console runtime prototype 本地验证加固记录，以及 v4.3-v4.6 guarded autopilot overlay / agent board / local checkpoint readiness / commit scope manifest。
 
 ## 重要声明
 
@@ -12,6 +12,7 @@
 - 不包含 VCPToolBox 生产改动；v0.5 仅验证 Adapter-only dry-run 安装。
 - 不修改 VCPChat。
 - 所有记忆正文示例均为中文。
+- 已安装 `AGENTS.autopilot-overlay.md` 和 `.agent_board/` 作为本地续跑辅助；它不覆盖根 `AGENTS.md`。
 - 任何后续真实插件调用、DailyNote 写入、commit、tag、push 或 release 发布都需要单独授权。
 
 ## Release readiness 文件
@@ -21,6 +22,22 @@
 - `docs/32_final_acceptance_report.md`
 - `docs/33_post_execution_checkpoint.md`
 - `docs/34_v1_0_true_loop_closeout.md`
+- `docs/116_v3_9_runtime_guard_extraction.md`
+- `docs/117_v4_0_runtime_contract_smoke_hardening.md`
+- `docs/118_v4_1_runtime_guard_unit_validation.md`
+- `docs/119_v4_2_runtime_validation_suite.md`
+- `docs/120_v4_3_autopilot_overlay_installation.md`
+- `docs/121_v4_4_agent_board_state_validation.md`
+- `docs/122_v4_5_local_checkpoint_readiness.md`
+- `docs/123_v4_6_local_commit_scope_manifest.md`
+- `.agent_board/`
+- `AGENTS.autopilot-overlay.md`
+- `README_AGENT_IMAGE_LAB_AUTOPILOT.md`
+- `scripts/validate-agent-image-lab-local.ps1`
+- `scripts/validate-agent-image-lab-local.sh`
+- `scripts/validate_agent_board_state.js`
+- `scripts/validate_local_checkpoint_manifest.js`
+- `scripts/validate_local_commit_scope.js`
 - `integrations/vcp/v0_7_real_execution_authorization_gate.md`
 - `integrations/vcp/v0_7_photo_studio_os_dry_run_rehearsal.md`
 - `integrations/vcp/v0_7_photo_studio_os_real_execution_record.md`
@@ -37,3 +54,8 @@
 - The first v0.7 real execution produced one image, but the asset was rejected because it violated the no-people visual constraint.
 - v0.9 recorded a retry attempt and candidate plugin scan.
 - v0.10 recorded GPTImageGen credential-blocked attempts and a DoubaoGen retry that was accepted by human override.
+- v3.9-v4.2 records project-local Review Console runtime prototype validation hardening only; they do not represent real VCPChat integration or DailyNote writes.
+- v4.3 records project-local guarded autopilot overlay installation only; it does not authorize external reads, real execution, commits, tags, pushes, or releases.
+- v4.4 records project-local agent board state validation only; it does not authorize external reads, real execution, commits, tags, pushes, or releases.
+- v4.5 records project-local checkpoint readiness validation only; it does not authorize external reads, real execution, commits, tags, pushes, or releases.
+- v4.6 records project-local commit scope validation only; it does not stage files and does not authorize commits, tags, pushes, or releases.
