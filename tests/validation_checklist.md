@@ -1270,3 +1270,35 @@
 - [ ] 样例保持 `selected_plugin=null`、`max_plugin_calls=0`、`real_manifest_read=false`。
 - [ ] 样例不包含真实本地路径、真实读取命令、shell 命令文本、真实源码片段、完整函数体、endpoint 原文、环境变量值、secret、token、cookie、密码、客户隐私、raw runtime log、raw IPC payload、raw plugin output 或图片二进制。
 - [ ] runtime handoff planning 完成也只允许进入下一独立 closeout 或 v2.7 runtime implementation planning，不得自动触发实现、DailyNote、VCP 记忆或资产写入。
+
+## v2.6 Runtime Handoff Authorization Gate 检查
+
+- [ ] `docs/103_v2_6_runtime_handoff_authorization_gate.md` 存在。
+- [ ] `review_console/embed_contract/runtime_handoff_authorization_gate.md` 存在。
+- [ ] `tests/schema_examples/v2_6_runtime_handoff_authorization_gate.example.yaml` 存在。
+- [ ] runtime handoff authorization gate 只定义 handoff 授权门，不读取真实 VCPChat 源码。
+- [ ] runtime handoff authorization gate 不读取真实 VCPToolBox。
+- [ ] runtime handoff authorization gate 不保存真实根目录、真实 allowlist 路径、真实读取命令或 raw source。
+- [ ] runtime handoff authorization gate 不保存 raw evidence、raw runtime log、raw IPC payload 或 raw plugin output。
+- [ ] runtime handoff authorization gate 不修改真实 VCPChat 或 VCPToolBox。
+- [ ] runtime handoff authorization gate 不创建真实 IPC handler、preload、renderer runtime、Adapter 执行入口或其他执行代码。
+- [ ] runtime handoff authorization gate 不调用插件、API、DailyNote、VCP 记忆或文件系统写入。
+- [ ] 样例保持 `runtime_handoff_authorization_required=true`、`runtime_handoff_authorization_requested=false`。
+- [ ] 样例保持 `runtime_handoff_authorization_granted=false`。
+- [ ] 样例保持 `runtime_handoff_planning_completed=false`、`runtime_handoff_authorized=false`。
+- [ ] 样例保持 `route_specific_authorization_granted=false`。
+- [ ] 样例保持 `schema_mapping_review_completed=false`、`electron_boundary_review_completed=false`。
+- [ ] 样例保持 `implementation_planning_authorized=false`。
+- [ ] 样例保持 `ipc_handler_creation_authorized=false`、`preload_runtime_creation_authorized=false`、`renderer_runtime_creation_authorized=false`。
+- [ ] 样例保持 `real_vcpchat_modification_authorized=false`。
+- [ ] 样例保持 `daily_note_write_authorized=false`、`vcp_memory_write_authorized=false`、`asset_write_authorized=false`。
+- [ ] 样例保持 `handoff_planning_is_implementation_authorization=false`、`handoff_authorization_creates_runtime_code=false`。
+- [ ] 样例保持 `handoff_authorization_modifies_vcpchat=false`、`implementation_planning_writes_code=false`。
+- [ ] 样例保持 `real_vcpchat_source_read=false`、`real_vcpchat_modified=false`。
+- [ ] 样例保持 `real_vcptoolbox_source_read=false`、`real_vcptoolbox_modified=false`。
+- [ ] 样例保持 `implementation_code_created=false`、`ipc_handler_created=false`、`preload_runtime_code_created=false`、`renderer_runtime_code_created=false`、`execution_entry_created=false`。
+- [ ] 样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`real_execution_allowed=false`。
+- [ ] 样例保持 `image_file_created=false`、`file_write_performed=false`、`disk_write_performed=false`。
+- [ ] 样例保持 `selected_plugin=null`、`max_plugin_calls=0`、`real_manifest_read=false`。
+- [ ] 样例不包含真实本地路径、真实读取命令、shell 命令文本、真实源码片段、完整函数体、endpoint 原文、环境变量值、secret、token、cookie、密码、客户隐私、raw runtime log、raw IPC payload、raw plugin output 或图片二进制。
+- [ ] runtime handoff authorization gate 完成也只允许进入下一独立 closeout 或 v2.7 runtime implementation planning gate，不得自动触发实现、DailyNote、VCP 记忆或资产写入。

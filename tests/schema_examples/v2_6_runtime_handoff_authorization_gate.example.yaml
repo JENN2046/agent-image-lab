@@ -1,0 +1,142 @@
+phase: v2.6_runtime_handoff_authorization_gate
+record_id: v2-6-runtime-handoff-authorization-gate-001
+project: Agent Image Lab
+status: runtime_handoff_authorization_gate_template_only
+
+runtime_handoff_authorization_gate:
+  gate_id: v2-6-runtime-handoff-authorization-gate-placeholder-001
+  handoff_id: v2-6-review-console-runtime-handoff-placeholder-001
+  runtime_handoff_authorization_required: true
+  runtime_handoff_authorization_requested: false
+  runtime_handoff_authorization_granted: false
+  runtime_handoff_authorizer: null
+  runtime_handoff_authorized_at: null
+  authorization_status: pending_runtime_handoff_authorization_gate
+
+runtime_handoff_state:
+  runtime_handoff_plan_exists: true
+  runtime_handoff_planning_required: true
+  runtime_handoff_planning_completed: false
+  runtime_handoff_authorized: false
+  route_specific_authorization_granted: false
+  schema_mapping_review_completed: false
+  electron_boundary_review_completed: false
+
+authorization_state:
+  implementation_planning_authorized: false
+  ipc_handler_creation_authorized: false
+  preload_runtime_creation_authorized: false
+  renderer_runtime_creation_authorized: false
+  real_vcpchat_modification_authorized: false
+  daily_note_write_authorized: false
+  vcp_memory_write_authorized: false
+  asset_write_authorized: false
+
+authorization_rules:
+  handoff_planning_is_implementation_authorization: false
+  handoff_authorization_creates_runtime_code: false
+  handoff_authorization_modifies_vcpchat: false
+  handoff_authorization_allows_daily_note_write: false
+  handoff_authorization_allows_vcp_memory_write: false
+  handoff_authorization_allows_asset_write: false
+  implementation_planning_writes_code: false
+  direct_runtime_implementation_allowed: false
+
+forbidden_gate_content:
+  - real_local_path
+  - raw_allowlist_path
+  - raw_read_command
+  - shell_command_text
+  - raw_source_code
+  - complete_function_body
+  - endpoint_raw_value
+  - env_value
+  - secret_raw_value
+  - private_path_raw_value
+  - customer_private_data
+  - raw_runtime_log
+  - raw_ipc_payload
+  - raw_plugin_output
+  - image_binary
+
+safety_gate:
+  contains_real_local_path: false
+  contains_raw_allowlist_path: false
+  contains_raw_read_command: false
+  contains_raw_source_code: false
+  contains_complete_function_body: false
+  contains_endpoint_raw_value: false
+  contains_env_value: false
+  contains_secret_raw_value: false
+  contains_private_path_raw_value: false
+  contains_customer_private_data: false
+  contains_raw_runtime_log: false
+  contains_raw_ipc_payload: false
+  contains_raw_plugin_output: false
+  contains_image_binary: false
+  sensitive_summary_cn: "本 runtime handoff authorization gate 样例不包含真实路径、读取命令、源码原文或真实证据，只定义未来 handoff 规划后的授权门槛。"
+
+no_execution_guard:
+  real_vcpchat_source_read: false
+  real_vcpchat_modified: false
+  real_vcptoolbox_source_read: false
+  real_vcptoolbox_modified: false
+  implementation_code_created: false
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  renderer_runtime_code_created: false
+  execution_entry_created: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  file_write_performed: false
+  disk_write_performed: false
+  image_file_created: false
+  selected_plugin: null
+  max_plugin_calls: 0
+  real_manifest_read: false
+  real_execution_allowed: false
+
+memory_delta_draft:
+  write_mode: audit_only
+  approval_status: not_required
+  chinese_audit_summary_cn: "Runtime handoff 授权门仍停留在模板，未请求授权，未进入实现规划，也未写 DailyNote 或 VCP 记忆。"
+  preserved_original_allowed: false
+  final_decision:
+    should_write_to_vcp: false
+
+next_state_rules:
+  current_state: waiting_for_runtime_handoff_authorization_gate
+  next_allowed_state: waiting_for_v2_6_closeout_or_v2_7_runtime_implementation_planning_gate
+  blocked_states:
+    - runtime_handoff_authorization_requested
+    - runtime_handoff_authorization_granted
+    - implementation_planning_authorized
+    - ipc_handler_creation_authorized
+    - preload_runtime_creation_authorized
+    - renderer_runtime_creation_authorized
+    - real_vcpchat_modification_authorized
+    - ipc_handler_created
+    - daily_note_called
+    - vcp_memory_written
+    - real_execution_ready
+
+audit_summary_cn: "v2.6 Plan 02 只补齐 runtime handoff authorization gate，不读取真实 VCPChat，不创建运行时代码。"
+
+acceptance_assertions:
+  - "runtime_handoff_authorization_required=true。"
+  - "runtime_handoff_authorization_requested=false。"
+  - "runtime_handoff_authorization_granted=false。"
+  - "runtime_handoff_planning_completed=false。"
+  - "route_specific_authorization_granted=false。"
+  - "implementation_planning_authorized=false。"
+  - "ipc_handler_creation_authorized=false。"
+  - "preload_runtime_creation_authorized=false。"
+  - "renderer_runtime_creation_authorized=false。"
+  - "real_vcpchat_modification_authorized=false。"
+  - "real_execution_allowed=false。"
+  - "api_called=false。"
+  - "vcp_plugin_called=false。"
+  - "daily_note_called=false。"
+
