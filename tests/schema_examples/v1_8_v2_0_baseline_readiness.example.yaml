@@ -1,0 +1,104 @@
+phase: v1.8_v2_0_productization_baseline_readiness
+record_id: v2-0-baseline-readiness-v1-8-001
+project: Agent Image Lab
+status: conditional_pass
+
+readiness_summary:
+  current_head_ref: current-master-head
+  working_tree_clean_required: true
+  v2_0_entry_recommendation: conditional_pass
+  summary_cn: "v1.1 到 v1.7 的产品化前置模块已补齐，可以进入 v2.0 baseline 规划，但不能自动执行真实插件、写 DailyNote 或发布 release。"
+
+completed_tracks:
+  v1_1_vcpchat_review_console_integration_plan:
+    status: complete
+    evidence_ref: review_console/v1_1_vcpchat_review_console_contract.md
+  v1_2_runtime_prototype:
+    status: complete
+    evidence_ref: review_console/runtime_prototype/
+  v1_3_memory_handoff:
+    status: complete
+    evidence_ref: memory_policy/v1_3_daily_note_handoff_contract.md
+  v1_4_multi_plugin_candidate_evaluation:
+    status: complete
+    evidence_ref: integrations/vcp/v1_4_multi_plugin_candidate_evaluation.md
+  v1_5_task_panel_status_backbone:
+    status: complete
+    evidence_ref: task_panel/task_panel_product_spec.md
+  v1_6_asset_index:
+    status: complete
+    evidence_ref: asset_index/asset_index_policy.md
+  v1_6_review_console_embed_readiness:
+    status: complete
+    evidence_ref: review_console/v1_6_embed_boundary_contract.md
+  v1_7_plugin_performance_score:
+    status: complete
+    evidence_ref: integrations/vcp/plugin_performance_score_policy.md
+  v1_7_release_automation_readiness:
+    status: complete
+    evidence_ref: release_automation/release_preflight_contract.md
+
+v2_0_module_readiness:
+  task_panel:
+    ready_for_baseline: true
+    no_execution_boundary_cn: "只展示状态和下一授权点。"
+  review_console:
+    ready_for_baseline: true
+    no_execution_boundary_cn: "已有 runtime prototype 和嵌入边界，但不修改真实 VCPChat。"
+  asset_index:
+    ready_for_baseline: true
+    no_binary_boundary_cn: "只记录资产引用和验收元数据，不保存图片二进制。"
+  style_memory:
+    ready_for_baseline: true
+    no_write_boundary_cn: "写入申请不等于 DailyNote 已写。"
+  plugin_performance_score:
+    ready_for_baseline: true
+    no_execution_boundary_cn: "tested 不等于真实执行授权。"
+  release_automation:
+    ready_for_baseline: true
+    no_release_boundary_cn: "只做 preflight，不创建 tag、zip、sha256 或 GitHub Release。"
+
+guardrails:
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  file_write_performed: false
+  image_file_created: false
+  real_manifest_read: false
+  real_execution_allowed: false
+  vcpchat_modified: false
+  vcptoolbox_modified: false
+  tag_created: false
+  package_created: false
+  sha256_created: false
+  release_published: false
+  release_assets_uploaded: false
+
+non_goals_preserved:
+  automatic_real_image_generation: false
+  automatic_daily_note_write: false
+  automatic_plugin_selection: false
+  customer_portal: false
+  external_sharing: false
+  complex_permission_system: false
+  unauthorized_vcp_private_config_read: false
+
+next_authorization_point:
+  authorization_name: v2_0_productization_baseline_patch
+  authorization_required: true
+  authorization_reason_cn: "下一步可整理 v2.0 产品化基线总览和验收样例，但仍不执行真实外部动作。"
+  allowed_after_authorization_cn:
+    - "新增 v2.0 baseline 总览文档。"
+    - "新增 v2.0 baseline 样例。"
+    - "更新 validation checklist。"
+  forbidden_without_authorization_cn:
+    - "不得创建 tag。"
+    - "不得生成 zip 或 sha256。"
+    - "不得发布 GitHub Release。"
+    - "不得调用真实插件、API 或 DailyNote。"
+    - "不得修改真实 VCPChat 或 VCPToolBox。"
+
+acceptance_assertions:
+  - "v1.5、v1.6、v1.7 已满足进入 v2.0 baseline 规划的前置条件。"
+  - "v2.0 baseline 仍然需要独立授权。"
+  - "本记录不代表真实执行、真实写入或真实发布已经发生。"

@@ -603,6 +603,17 @@
 - [ ] `release_packages/` 必须保持 Git ignored，发布包不得提交进 Git。
 - [ ] 任何 tag、push、package、GitHub Release 或 asset upload 都必须单独授权。
 
+## v1.8 v2.0 Productization Baseline Readiness 检查
+
+- [ ] `docs/60_v2_0_productization_baseline_readiness.md` 存在。
+- [ ] `tests/schema_examples/v1_8_v2_0_baseline_readiness.example.yaml` 存在。
+- [ ] v1.8 readiness 汇总 v1.1 到 v1.7 的完成轨道。
+- [ ] v1.8 readiness 覆盖 Task Panel、Review Console、Asset Index、Style Memory、Plugin Performance Score 和 Release Automation。
+- [ ] v1.8 readiness 保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`real_execution_allowed=false`。
+- [ ] v1.8 readiness 保持 `tag_created=false`、`package_created=false`、`sha256_created=false`、`release_published=false`、`release_assets_uploaded=false`。
+- [ ] v1.8 readiness 明确 v2.0 baseline 仍需独立授权。
+- [ ] v1.8 readiness 不修改真实 VCPChat / VCPToolBox，不读取真实 manifest，不调用插件、API、DailyNote 或发布 GitHub Release。
+
 ## v2.0 Productization Plan 检查
 
 - [ ] `docs/50_v2_0_productization_plan.md` 存在。
