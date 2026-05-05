@@ -1,0 +1,64 @@
+phase: v1.6_asset_index
+record_id: asset-index-v1-6-001
+project: Agent Image Lab
+status: candidate_metadata_only
+
+asset_index_record:
+  asset_id: asset-index-v1-6-001
+  project: Agent Image Lab
+  asset_ref: runs/photo_studio_os_v0_10_doubao_retry/image/doubaogen/accepted-image.placeholder
+  asset_sha256: null
+  asset_status: candidate
+  source_task_id: ail-v1-2-runtime-prototype-001
+  source_case_id: case-v1-2-runtime-prototype-001
+  review_session_id: session-v1-2-runtime-prototype-001
+  image_type: Photo Studio OS dashboard
+  plugin_used: null
+  prompt_package_id: prompt-package-photo-studio-os-placeholder
+  final_score: 84
+
+  human_approval:
+    approved: false
+    approved_by: null
+    approved_at: null
+    approval_notes_cn: "当前仅作为候选资产索引样例，尚未形成 accepted。"
+
+  review_summary_cn: "本条记录只保留资产引用、评分和人工审批状态，不保存图片二进制。"
+  known_visual_deviation_cn:
+    - "资产引用仍是占位路径，不能代表真实图片文件存在。"
+    - "如需记录真实 SHA256，必须先确认读取范围和授权边界。"
+  reusable_rules_cn:
+    - "资产入库必须有人工作为最终批准来源。"
+    - "Asset Index 不保存 raw 插件输出或图片二进制。"
+  memory_refs:
+    - memory-delta-v1-3-001
+  lineage_refs:
+    input_assets:
+      - references/photo_studio_os/accepted-reference.placeholder
+    output_assets:
+      - runs/photo_studio_os_v0_10_doubao_retry/image/doubaogen/accepted-image.placeholder
+    related_review_ids:
+      - review-v1-2-runtime-prototype-001
+
+  no_binary_guard:
+    image_binary_saved: false
+    raw_plugin_output_saved: false
+    runtime_log_saved: false
+    endpoint_raw_saved: false
+    secret_value_saved: false
+    private_path_saved: false
+    customer_private_data_saved: false
+
+  no_execution_guard:
+    api_called: false
+    vcp_plugin_called: false
+    daily_note_called: false
+    file_write_performed: false
+    image_file_created: false
+
+acceptance_assertions:
+  - "Asset Index 只记录引用和验收元数据。"
+  - "asset_sha256 可为空，不代表验证失败。"
+  - "image_binary_saved=false。"
+  - "raw_plugin_output_saved=false。"
+  - "未人工批准时 asset_status 不能是 accepted。"

@@ -1,0 +1,71 @@
+phase: v1.6_review_console_embed_readiness
+record_id: review-console-embed-readiness-v1-6-001
+project: Agent Image Lab
+status: contract_only
+
+embed_readiness:
+  target_context: future_vcpchat_child_window
+  real_vcpchat_modified: false
+  real_vcptoolbox_modified: false
+  ipc_handler_created: false
+  execution_entry_created: false
+  real_manifest_read: false
+
+electron_boundary:
+  context_isolation_required: true
+  node_integration_allowed: false
+  preload_allowlist_required: true
+  ipc_sender_validation_required: true
+  ipc_channel_allowlist:
+    - imageLabReview.loadSession
+    - imageLabReview.previewDraft
+    - imageLabReview.submitDraft
+    - imageLabReview.cancel
+
+input_output_contract:
+  allowed_input:
+    - review_session_draft
+  allowed_output:
+    - review_session_draft
+    - image_case_draft
+    - memory_delta_draft
+    - asset_index_draft
+    - prototype_guard
+  forbidden_transport:
+    - url_query
+    - url_hash
+    - window_title
+    - local_storage
+    - session_storage
+    - clipboard
+    - renderer_console_log
+    - raw_ipc_sensitive_payload
+
+review_rules:
+  human_review_overrides_ai_review: true
+  final_review_prefers_human_review: true
+  accepted_requires_human_approval: true
+  memory_preview_must_be_chinese: true
+  memory_approval_required_before_daily_note: true
+  asset_index_metadata_only: true
+
+no_execution_guard:
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  file_write_performed: false
+  image_file_created: false
+  image_binary_saved: false
+  raw_plugin_output_saved: false
+
+safety_notes_cn:
+  - "本记录只用于未来嵌入前验收，不代表已经修改真实 VCPChat。"
+  - "renderer 不得直接调用插件、API、DailyNote 或文件系统。"
+  - "不得通过 URL、窗口标题、浏览器存储、剪贴板或 raw IPC 传递敏感信息。"
+
+acceptance_assertions:
+  - "real_vcpchat_modified=false。"
+  - "ipc_handler_created=false。"
+  - "api_called=false。"
+  - "daily_note_called=false。"
+  - "image_file_created=false。"

@@ -570,6 +570,23 @@
 - [ ] `image_binary_saved=false`，不得保存图片二进制。
 - [ ] 下一授权点必须写明授权名称、原因、授权前条件、授权后允许动作和当前禁止动作。
 
+## v1.6 Asset Index + Review Console Embed Readiness 检查
+
+- [ ] `asset_index/asset_index_policy.md` 存在。
+- [ ] `asset_index/asset_index.schema.yaml` 存在。
+- [ ] `tests/schema_examples/v1_6_asset_index.example.yaml` 存在。
+- [ ] `review_console/v1_6_embed_boundary_contract.md` 存在。
+- [ ] `review_console/embed_readiness_checklist.md` 存在。
+- [ ] `tests/schema_examples/v1_6_review_console_embed_readiness.example.yaml` 存在。
+- [ ] Asset Index 只记录资产引用、SHA256、评分、状态、人工审批和已知视觉偏差。
+- [ ] Asset Index 不保存图片二进制、raw 插件输出、runtime log 原文、endpoint 原文、密钥、私密路径或客户隐私。
+- [ ] `asset_status=accepted` 必须有 `human_approval.approved=true`、`approved_by` 和 `approved_at`。
+- [ ] Review Console embed readiness 不修改真实 VCPChat / VCPToolBox。
+- [ ] Review Console embed readiness 不创建真实 IPC handler 或执行入口。
+- [ ] Electron 边界必须包含 `contextIsolation=true`、`nodeIntegration=false`、preload allowlist 和 IPC sender 校验。
+- [ ] 不通过 URL query/hash/window title/localStorage/sessionStorage/clipboard/raw IPC 传递敏感信息。
+- [ ] v1.6 样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`file_write_performed=false`、`image_file_created=false`。
+
 ## v2.0 Productization Plan 检查
 
 - [ ] `docs/50_v2_0_productization_plan.md` 存在。

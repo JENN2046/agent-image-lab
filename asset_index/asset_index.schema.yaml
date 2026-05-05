@@ -1,0 +1,60 @@
+# asset_index.schema.yaml
+# v1.6 资产索引记录：只保存引用、哈希、评分、状态和人工审批，不保存图片二进制
+asset_index_record:
+  asset_id: string                # 资产索引 ID
+  project: string                 # 项目名
+  asset_ref: string               # 资产引用或占位引用
+  asset_sha256: string | null     # 资产 SHA256，可为空
+  asset_status: draft | candidate | accepted | rejected # 资产状态
+  source_task_id: string          # 来源任务 ID
+  source_case_id: string          # 来源案例 ID
+  review_session_id: string | null # 关联审片会话
+  image_type: string              # 图片类型
+  plugin_used: string | null      # 插件名或 null
+  prompt_package_id: string | null # 提示词包 ID
+  final_score: number | null      # 最终人工优先评分
+
+  human_approval:
+    approved: boolean             # 是否人工批准
+    approved_by: string | null    # 审批人
+    approved_at: string | null    # 审批时间
+    approval_notes_cn: string | null # 中文批准备注
+
+  review_summary_cn: string       # 中文评审摘要
+  known_visual_deviation_cn:
+    - string                      # 已知视觉偏差
+  reusable_rules_cn:
+    - string                      # 可复用规则
+  memory_refs:
+    - string                      # 关联 memory_delta 或 VCP 记忆引用
+  lineage_refs:
+    input_assets:
+      - string                    # 输入引用
+    output_assets:
+      - string                    # 输出引用
+    related_review_ids:
+      - string                    # 评审 ID
+
+  no_binary_guard:
+    image_binary_saved: boolean   # 是否保存图片二进制
+    raw_plugin_output_saved: boolean # 是否保存 raw 插件输出
+    runtime_log_saved: boolean    # 是否保存运行日志原文
+    endpoint_raw_saved: boolean   # 是否保存 endpoint 原文
+    secret_value_saved: boolean   # 是否保存密钥值
+    private_path_saved: boolean   # 是否保存私密路径
+    customer_private_data_saved: boolean # 是否保存客户隐私
+
+  no_execution_guard:
+    api_called: boolean
+    vcp_plugin_called: boolean
+    daily_note_called: boolean
+    file_write_performed: boolean
+    image_file_created: boolean
+
+  invariants:
+    - Asset Index 只保存资产引用和验收元数据，不保存图片二进制。
+    - asset_status 为 accepted 时，human_approval.approved 必须为 true。
+    - asset_status 为 accepted 时，approved_by 和 approved_at 必须存在。
+    - AI 建议不能替代人工审批。
+    - no_binary_guard 全部必须保持 false，除非未来另有独立授权和审计记录。
+    - no_execution_guard 全部必须保持 false。
