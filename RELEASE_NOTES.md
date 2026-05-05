@@ -33,6 +33,8 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Added the first project-local runtime code patch for the Review Console runtime prototype.
 - Added host bridge mock draft validation and sanitized submit ack display.
 - Added v3.7 first runtime patch execution record with no external side effects.
+- Added v3.8 project-local runtime prototype smoke test harness.
+- Added v3.9 shared runtime guard extraction for renderer, host mock, and smoke test.
 
 ## Safety Status
 

@@ -75,6 +75,15 @@ prototype_guard:
 
 该 guard 是验收证据，不是运行时权限授予。
 
+v3.9 起，`runtime_guard.js` 是 renderer、host mock 和 smoke test 共用的 guard 规则来源。它统一检查：
+
+- 顶层 `prototype_guard` 必须保持全 false。
+- `review_session_draft.audit_log[0].prototype_guard` 必须保持全 false。
+- `image_case_draft.asset_status=accepted` 时必须有 `human_approval.approved=true`。
+- `memory_delta_draft.final_decision.should_write_to_vcp=true` 时必须有 `approval_status=approved`。
+
+该共享模块不代表真实 VCPChat preload、IPC handler 或 DailyNote 写入已经存在。
+
 ## Host Submit Ack
 
 v3.7 runtime patch 增加 host bridge mock 回执。该回执不是核心 schema 字段，只用于证明浏览器原型把草案交给受控 host mock 前后都保持无副作用。

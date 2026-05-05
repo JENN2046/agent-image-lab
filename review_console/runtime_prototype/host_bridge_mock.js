@@ -1,11 +1,8 @@
 window.ImageLabHostBridge = (() => {
-  const cleanGuard = {
-    api_called: false,
-    daily_note_called: false,
-    vcp_plugin_called: false,
-    disk_write_performed: false,
-    image_file_created: false
-  };
+  const runtimeGuard = window.ImageLabRuntimeGuard;
+  if (!runtimeGuard || typeof runtimeGuard.clone !== "function" || typeof runtimeGuard.draftIsSafe !== "function") {
+    throw new Error("ImageLabRuntimeGuard is unavailable or incomplete.");
+  }
 
   const session = {
     session_id: "session-v1-2-runtime-prototype-001",
@@ -86,47 +83,12 @@ window.ImageLabHostBridge = (() => {
     }
   };
 
-  function clone(value) {
-    return JSON.parse(JSON.stringify(value));
-  }
-
-  function guardIsClean(guard) {
-    return Boolean(
-      guard &&
-        Object.entries(cleanGuard).every(([key, value]) => guard[key] === value)
-    );
-  }
-
-  function draftIsSafe(draft) {
-    if (!draft || typeof draft !== "object") return false;
-    if (!draft.review_session_draft || !draft.image_case_draft || !draft.memory_delta_draft) return false;
-    if (!guardIsClean(draft.prototype_guard)) return false;
-
-    const auditEntry = draft.review_session_draft.audit_log?.[0];
-    if (!guardIsClean(auditEntry?.prototype_guard)) return false;
-
-    const imageCase = draft.image_case_draft;
-    if (imageCase.asset_status === "accepted" && imageCase.human_approval?.approved !== true) {
-      return false;
-    }
-
-    const memoryDelta = draft.memory_delta_draft;
-    if (
-      memoryDelta.final_decision?.should_write_to_vcp === true &&
-      memoryDelta.approval_status !== "approved"
-    ) {
-      return false;
-    }
-
-    return true;
-  }
-
   return {
     loadSession() {
-      return clone(session);
+      return runtimeGuard.clone(session);
     },
     submitDraft(draft) {
-      const validationPassed = draftIsSafe(draft);
+      const validationPassed = runtimeGuard.draftIsSafe(draft);
       return {
         accepted_by_host_mock: validationPassed,
         draft_received: Boolean(draft),

@@ -1,13 +1,13 @@
-const PROTOTYPE_GUARD = Object.freeze({
-  api_called: false,
-  daily_note_called: false,
-  vcp_plugin_called: false,
-  disk_write_performed: false,
-  image_file_created: false
-});
-
-function clone(value) {
-  return JSON.parse(JSON.stringify(value));
+function requireRuntimeGuard(runtimeGuard) {
+  if (
+    !runtimeGuard ||
+    typeof runtimeGuard.clone !== "function" ||
+    typeof runtimeGuard.normalizeSession !== "function" ||
+    typeof runtimeGuard.assertDraftSafe !== "function"
+  ) {
+    throw new Error("ImageLabRuntimeGuard is unavailable or incomplete.");
+  }
+  return runtimeGuard;
 }
 
 function requireBridge(hostBridge) {
@@ -17,29 +17,9 @@ function requireBridge(hostBridge) {
   return hostBridge;
 }
 
-function requireArray(value, fallback = []) {
-  return Array.isArray(value) ? value : fallback;
-}
-
-function normalizeSession(rawSession) {
-  const nextSession = clone(rawSession);
-  nextSession.image_versions = requireArray(nextSession.image_versions);
-  nextSession.comments = requireArray(nextSession.comments);
-  nextSession.annotation_notes = requireArray(nextSession.annotation_notes);
-  nextSession.memory_preview = nextSession.memory_preview || {};
-  nextSession.memory_preview.tags = requireArray(nextSession.memory_preview.tags);
-  nextSession.memory_preview.safety = nextSession.memory_preview.safety || {};
-  nextSession.image_case_seed = nextSession.image_case_seed || {};
-  nextSession.image_case_seed.input_assets = requireArray(nextSession.image_case_seed.input_assets);
-  nextSession.image_case_seed.review_ids = requireArray(nextSession.image_case_seed.review_ids);
-  nextSession.image_case_seed.strengths_cn = requireArray(nextSession.image_case_seed.strengths_cn);
-  nextSession.image_case_seed.weaknesses_cn = requireArray(nextSession.image_case_seed.weaknesses_cn);
-  nextSession.image_case_seed.reusable_rules_cn = requireArray(nextSession.image_case_seed.reusable_rules_cn);
-  return nextSession;
-}
-
+const runtimeGuard = requireRuntimeGuard(window.ImageLabRuntimeGuard);
 const bridge = requireBridge(window.ImageLabHostBridge);
-const session = normalizeSession(bridge.loadSession());
+const session = runtimeGuard.normalizeSession(bridge.loadSession());
 
 const els = {
   taskId: document.getElementById("taskId"),
@@ -184,7 +164,7 @@ function buildDraft() {
           actor: "Review_Console_Runtime_Prototype",
           created_at: createdAt,
           note_cn: "runtime prototype 只生成草案，没有调用外部系统。",
-          prototype_guard: clone(PROTOTYPE_GUARD)
+          prototype_guard: runtimeGuard.clone(runtimeGuard.cleanGuard)
         }
       ]
     },
@@ -250,42 +230,13 @@ function buildDraft() {
         rejection_reason_cn: memoryApproval.rejection_reason_cn
       }
     },
-    prototype_guard: clone(PROTOTYPE_GUARD)
+    prototype_guard: runtimeGuard.clone(runtimeGuard.cleanGuard)
   };
 }
 
-function guardIsClean(guard) {
-  return Boolean(
-    guard &&
-      Object.entries(PROTOTYPE_GUARD).every(([key, value]) => guard[key] === value)
-  );
-}
-
-function assertDraftSafe(draft) {
-  if (!draft.review_session_draft || !draft.image_case_draft || !draft.memory_delta_draft) {
-    throw new Error("Draft is missing required sections.");
-  }
-  if (!guardIsClean(draft.prototype_guard)) {
-    throw new Error("Draft prototype_guard indicates a side effect.");
-  }
-  const auditGuard = draft.review_session_draft.audit_log?.[0]?.prototype_guard;
-  if (!guardIsClean(auditGuard)) {
-    throw new Error("Draft audit guard indicates a side effect.");
-  }
-  if (draft.image_case_draft.asset_status === "accepted" && draft.image_case_draft.human_approval.approved !== true) {
-    throw new Error("Accepted asset requires explicit human approval.");
-  }
-  if (
-    draft.memory_delta_draft.final_decision.should_write_to_vcp === true &&
-    draft.memory_delta_draft.approval_status !== "approved"
-  ) {
-    throw new Error("Memory write request requires approved memory status.");
-  }
-}
-
 function submitDraftToHost(draft) {
-  assertDraftSafe(draft);
-  const ack = bridge.submitDraft(clone(draft));
+  runtimeGuard.assertDraftSafe(draft);
+  const ack = bridge.submitDraft(runtimeGuard.clone(draft));
   if (!ack || ack.side_effects_performed !== false || ack.accepted_by_host_mock !== true) {
     throw new Error("Host bridge rejected the draft or reported a side effect.");
   }

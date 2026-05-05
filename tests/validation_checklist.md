@@ -1670,3 +1670,29 @@
 - [ ] 记录保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`。
 - [ ] 记录保持 `runtime_disk_write_performed=false`、`image_file_created=false`。
 - [ ] 记录保持 `commit_tag_push_authorized=false`。
+
+## v3.8 Runtime Prototype Smoke Test 检查
+
+- [ ] `scripts/validate_runtime_prototype_smoke.js` 存在。
+- [ ] `docs/115_v3_8_runtime_prototype_smoke_test.md` 存在。
+- [ ] `tests/schema_examples/v3_8_runtime_prototype_smoke_test.example.yaml` 存在。
+- [ ] smoke test 使用项目内 fake DOM 执行 runtime prototype，不要求 headless browser。
+- [ ] smoke test 验证初始状态为 `candidate` 和 `draft`。
+- [ ] smoke test 验证人工批准后状态为 `accepted` 和 `confirmed`。
+- [ ] smoke test 验证 `should_write_to_vcp=true` 只在 memory approved 后出现。
+- [ ] smoke test 验证脏 `prototype_guard` 被 host mock 拒绝。
+- [ ] smoke test 验证 accepted 但缺少 human approval 被 host mock 拒绝。
+- [ ] smoke test 保持不读真实 VCPChat、不改真实 VCPChat、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v3.9 Runtime Guard Extraction 检查
+
+- [ ] `review_console/runtime_prototype/runtime_guard.js` 存在。
+- [ ] `docs/116_v3_9_runtime_guard_extraction.md` 存在。
+- [ ] `tests/schema_examples/v3_9_runtime_guard_extraction.example.yaml` 存在。
+- [ ] runtime guard 是 `app.js`、`host_bridge_mock.js` 和 smoke test 的共享 guard 规则来源。
+- [ ] renderer 提交草案前调用共享 `assertDraftSafe()`。
+- [ ] host mock 接收草案后调用共享 `draftIsSafe()`。
+- [ ] smoke test 验证脏顶层 `prototype_guard` 被拒绝。
+- [ ] smoke test 验证脏 audit `prototype_guard` 被拒绝。
+- [ ] smoke test 验证 accepted 但缺少 human approval 被拒绝。
+- [ ] runtime prototype 保持不读真实 VCPChat、不改真实 VCPChat、不调用插件、API、DailyNote 或 VCP 记忆。

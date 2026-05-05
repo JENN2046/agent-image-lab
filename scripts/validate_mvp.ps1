@@ -39,6 +39,7 @@ $requiredFiles = @(
   'exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js',
   'scripts/run_v0_7_photo_studio_os_real_execution.ps1',
   'scripts/run_v0_10_gptimagegen_real_execution.ps1',
+  'scripts/validate_runtime_prototype_smoke.js',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -48,6 +49,8 @@ $requiredFiles = @(
   'docs/34_v1_0_true_loop_closeout.md',
   'docs/113_v3_6_first_runtime_code_patch_authorization.md',
   'docs/114_v3_7_first_runtime_patch_execution_record.md',
+  'docs/115_v3_8_runtime_prototype_smoke_test.md',
+  'docs/116_v3_9_runtime_guard_extraction.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
@@ -108,12 +111,15 @@ $requiredFiles = @(
   'tests/schema_examples/v1_0_true_loop_closeout.example.yaml',
   'tests/schema_examples/v3_6_first_runtime_code_patch_authorization.example.yaml',
   'tests/schema_examples/v3_7_first_runtime_patch_execution_record.example.yaml',
+  'tests/schema_examples/v3_8_runtime_prototype_smoke_test.example.yaml',
+  'tests/schema_examples/v3_9_runtime_guard_extraction.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
   'review_console/static_prototype/styles.css',
   'review_console/static_prototype/FIELD_MAPPING.md',
   'review_console/runtime_prototype/index.html',
+  'review_console/runtime_prototype/runtime_guard.js',
   'review_console/runtime_prototype/app.js',
   'review_console/runtime_prototype/host_bridge_mock.js',
   'review_console/runtime_prototype/styles.css',
@@ -183,6 +189,7 @@ foreach ($path in $staticPrototypeFiles) {
 }
 
 $runtimePrototypeFiles = @(
+  'review_console/runtime_prototype/runtime_guard.js',
   'review_console/runtime_prototype/app.js',
   'review_console/runtime_prototype/host_bridge_mock.js'
 )
@@ -1207,6 +1214,133 @@ foreach ($path in $v37RuntimePatchExecutionFiles) {
   }
 }
 
+$v38RuntimePrototypeSmokeTestFiles = @(
+  'docs/115_v3_8_runtime_prototype_smoke_test.md',
+  'tests/schema_examples/v3_8_runtime_prototype_smoke_test.example.yaml'
+)
+
+$requiredV38RuntimePrototypeSmokeTestPatterns = @(
+  'status:\s+completed_validated_project_local_smoke_test',
+  'project_runtime_smoke_test_added:\s+true',
+  'node_smoke_test_added:\s+true',
+  'headless_browser_required:\s+false',
+  'real_vcpchat_source_read:\s+false',
+  'real_vcpchat_modified:\s+false',
+  'real_vcptoolbox_source_read:\s+false',
+  'real_vcptoolbox_modified:\s+false',
+  'api_called:\s+false',
+  'vcp_plugin_called:\s+false',
+  'daily_note_called:\s+false',
+  'vcp_memory_written:\s+false',
+  'runtime_disk_write_performed:\s+false',
+  'image_file_created:\s+false',
+  'dirty_guard_rejected:\s+true',
+  'accepted_without_approval_rejected:\s+true',
+  'node_smoke_test:\s+passed',
+  'commit_tag_push_authorized:\s+false'
+)
+
+$forbiddenV38RuntimePrototypeSmokeTestPatterns = @(
+  'headless_browser_required:\s+true',
+  'real_vcpchat_source_read:\s+true',
+  'real_vcpchat_modified:\s+true',
+  'real_vcptoolbox_source_read:\s+true',
+  'real_vcptoolbox_modified:\s+true',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'vcp_memory_written:\s+true',
+  'runtime_disk_write_performed:\s+true',
+  'image_file_created:\s+true',
+  'commit_tag_push_authorized:\s+true',
+  '[A-Za-z]:\\',
+  'https?://'
+)
+
+foreach ($path in $v38RuntimePrototypeSmokeTestFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v3.8 runtime prototype smoke test file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV38RuntimePrototypeSmokeTestPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v3.8 runtime prototype smoke test missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV38RuntimePrototypeSmokeTestPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v3.8 runtime prototype smoke test boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$v39RuntimeGuardExtractionFiles = @(
+  'docs/116_v3_9_runtime_guard_extraction.md',
+  'tests/schema_examples/v3_9_runtime_guard_extraction.example.yaml'
+)
+
+$requiredV39RuntimeGuardExtractionPatterns = @(
+  'status:\s+completed_validated_project_local_runtime_guard_extraction',
+  'shared_runtime_guard_added:\s+true',
+  'app_uses_shared_runtime_guard:\s+true',
+  'host_bridge_uses_shared_runtime_guard:\s+true',
+  'smoke_test_uses_shared_runtime_guard:\s+true',
+  'real_vcpchat_source_read:\s+false',
+  'real_vcpchat_modified:\s+false',
+  'real_vcptoolbox_source_read:\s+false',
+  'real_vcptoolbox_modified:\s+false',
+  'api_called:\s+false',
+  'vcp_plugin_called:\s+false',
+  'daily_note_called:\s+false',
+  'vcp_memory_written:\s+false',
+  'runtime_disk_write_performed:\s+false',
+  'image_file_created:\s+false',
+  'dirty_guard_rejected:\s+true',
+  'dirty_audit_guard_rejected:\s+true',
+  'accepted_without_approval_rejected:\s+true',
+  'node_smoke_test:\s+passed',
+  'commit_tag_push_authorized:\s+false'
+)
+
+$forbiddenV39RuntimeGuardExtractionPatterns = @(
+  'real_vcpchat_source_read:\s+true',
+  'real_vcpchat_modified:\s+true',
+  'real_vcptoolbox_source_read:\s+true',
+  'real_vcptoolbox_modified:\s+true',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'vcp_memory_written:\s+true',
+  'runtime_disk_write_performed:\s+true',
+  'image_file_created:\s+true',
+  'commit_tag_push_authorized:\s+true',
+  '[A-Za-z]:\\',
+  'https?://'
+)
+
+foreach ($path in $v39RuntimeGuardExtractionFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v3.9 runtime guard extraction file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV39RuntimeGuardExtractionPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v3.9 runtime guard extraction missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV39RuntimeGuardExtractionPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v3.9 runtime guard extraction boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
 $node = Get-Command node -ErrorAction SilentlyContinue
 if (-not $node) {
   Add-Failure "Node.js is required to validate adapter_dry_run_lab"
@@ -1261,6 +1395,11 @@ if (-not $node) {
     Add-Failure "exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'review_console/runtime_prototype/runtime_guard.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "review_console/runtime_prototype/runtime_guard.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'review_console/runtime_prototype/app.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "review_console/runtime_prototype/app.js failed node --check"
@@ -1269,6 +1408,48 @@ if (-not $node) {
   & node --check (Join-Path $Root 'review_console/runtime_prototype/host_bridge_mock.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "review_console/runtime_prototype/host_bridge_mock.js failed node --check"
+  }
+
+  & node --check (Join-Path $Root 'scripts/validate_runtime_prototype_smoke.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_runtime_prototype_smoke.js failed node --check"
+  }
+
+  $runtimeSmokeOutput = & node (Join-Path $Root 'scripts/validate_runtime_prototype_smoke.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "runtime prototype smoke test exited with failure"
+  } else {
+    $runtimeSmoke = ($runtimeSmokeOutput -join "`n") | ConvertFrom-Json
+    if ($runtimeSmoke.passed -ne $true) {
+      Add-Failure "runtime prototype smoke test must report passed true"
+    }
+    if ($runtimeSmoke.initial.asset_status -ne 'candidate') {
+      Add-Failure "runtime prototype smoke test initial asset_status must be candidate"
+    }
+    if ($runtimeSmoke.initial.memory_write_mode -ne 'draft') {
+      Add-Failure "runtime prototype smoke test initial memory_write_mode must be draft"
+    }
+    if ($runtimeSmoke.approved.asset_status -ne 'accepted') {
+      Add-Failure "runtime prototype smoke test approved asset_status must be accepted"
+    }
+    if ($runtimeSmoke.approved.memory_write_mode -ne 'confirmed') {
+      Add-Failure "runtime prototype smoke test approved memory_write_mode must be confirmed"
+    }
+    if ($runtimeSmoke.approved.should_write_to_vcp -ne $true) {
+      Add-Failure "runtime prototype smoke test approved should_write_to_vcp must be true"
+    }
+    if ($runtimeSmoke.rejection_checks.dirty_guard_rejected -ne $true) {
+      Add-Failure "runtime prototype smoke test must reject dirty guard"
+    }
+    if ($runtimeSmoke.rejection_checks.dirty_audit_guard_rejected -ne $true) {
+      Add-Failure "runtime prototype smoke test must reject dirty audit guard"
+    }
+    if ($runtimeSmoke.rejection_checks.accepted_without_approval_rejected -ne $true) {
+      Add-Failure "runtime prototype smoke test must reject accepted asset without approval"
+    }
+    if ($runtimeSmoke.prototype_guard_clean -ne $true) {
+      Add-Failure "runtime prototype smoke test final guard must remain clean"
+    }
   }
 
   $exportCheckScript = @"

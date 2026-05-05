@@ -16,7 +16,7 @@
 
 ## Runtime Shape
 
-`host_bridge_mock.js` 模拟未来 preload 暴露的最小 bridge。页面只在浏览器内读取 mock session，并输出：
+`runtime_guard.js` 提供 renderer 与 host mock 共用的 no-execution guard、session normalize 和草案安全校验。`host_bridge_mock.js` 模拟未来 preload 暴露的最小 bridge。页面只在浏览器内读取 mock session，并输出：
 
 ```yaml
 review_session_draft: map
@@ -45,11 +45,22 @@ v3.7 为 runtime prototype 增加了项目内 host bridge 草案提交回执：
 - UI 展示 host ack 和提交时间。
 - host mock 永远保持 `side_effects_performed=false`，不写磁盘、不调用外部系统。
 
+## Runtime Guard Extraction
+
+v3.9 将 renderer 与 host mock 的重复 guard 规则收束到 `runtime_guard.js`：
+
+- `app.js` 在提交草案前调用同一套 `assertDraftSafe()`。
+- `host_bridge_mock.js` 在接收草案后调用同一套 `draftIsSafe()`。
+- smoke test 加载同一模块，并验证顶层 guard 和 audit guard 被污染时都会被拒绝。
+- 该模块仍只在项目内浏览器原型中运行，不创建 IPC、插件调用、API 调用、DailyNote 写入或文件写入。
+
 ## Validation
 
 ```powershell
+node --check review_console\runtime_prototype\runtime_guard.js
 node --check review_console\runtime_prototype\host_bridge_mock.js
 node --check review_console\runtime_prototype\app.js
+node scripts\validate_runtime_prototype_smoke.js
 ```
 
 人工验收时还应确认：
