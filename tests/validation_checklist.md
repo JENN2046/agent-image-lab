@@ -747,3 +747,29 @@
 - [ ] `stop_conditions` 覆盖真实路径写入仓库、secret-like 内容、endpoint 原文、私密路径、客户隐私、raw source 超范围、raw runtime log、raw IPC payload、credential/config 原文和未授权文件类别。
 - [ ] 授权填写包获批也只允许进入“读取前最终复核”，不得自动触发真实 VCPChat 源码读取。
 - [ ] 真实 VCPChat 读取仍必须等待下一独立授权点，且授权时必须明确精确 allowlist、读取命令权限和审查人。
+
+## v2.2 Filled Authorization Review Gate 检查
+
+- [ ] `docs/86_v2_2_filled_authorization_review_gate.md` 存在。
+- [ ] `review_console/embed_contract/filled_authorization_review_gate.md` 存在。
+- [ ] `tests/schema_examples/v2_2_filled_authorization_review_gate.example.yaml` 存在。
+- [ ] filled authorization review gate 只定义已填写授权包的人工复核门槛，不读取真实 VCPChat 源码。
+- [ ] filled authorization review gate 不读取真实 VCPToolBox。
+- [ ] filled authorization review gate 不保存真实 VCPChat 根目录、真实 allowlist 路径或 raw source。
+- [ ] filled authorization review gate 不修改真实 VCPChat 或 VCPToolBox。
+- [ ] filled authorization review gate 不创建真实 IPC handler、preload、renderer、Adapter 执行入口或其他执行代码。
+- [ ] filled authorization review gate 不调用插件、API、DailyNote、VCP 记忆或文件系统写入。
+- [ ] 样例保持 `filled_request_received=false`、`filled_request_reviewed=false`、`filled_request_approved=false`。
+- [ ] 样例保持 `source_read_authorized=false`、`authorization_status=pending_review`。
+- [ ] 样例保持 `root_path_presence_confirmed=false`、`root_path_redaction_confirmed=false`。
+- [ ] 样例保持 `exact_allowlist_presence_confirmed=false`、`exact_allowlist_redaction_confirmed=false`。
+- [ ] 样例保持 `exact_real_paths_stored_in_git=false`、`target_repository_root_stored_in_git=false`。
+- [ ] 样例保持 `source_read_performed=false`、`real_vcpchat_source_read=false`、`real_vcpchat_modified=false`。
+- [ ] 样例保持 `real_vcptoolbox_source_read=false`、`real_vcptoolbox_modified=false`。
+- [ ] 样例保持 `raw_source_copy_allowed=false`、`raw_source_copied=false`。
+- [ ] 样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`real_execution_allowed=false`。
+- [ ] 样例保持 `ipc_handler_created=false`、`preload_runtime_code_created=false`、`renderer_runtime_code_created=false`、`execution_entry_created=false`。
+- [ ] 样例不包含真实本地路径、真实源码片段、完整函数体、endpoint 原文、环境变量值、secret、token、cookie、密码、客户隐私、raw runtime log、raw IPC payload、raw plugin output 或图片二进制。
+- [ ] 人工复核必须确认路径已脱敏、allowlist 已脱敏、审查人已确认、停止条件已确认、读取后边界已确认。
+- [ ] 人工复核通过也只允许进入真实读取最终授权 preflight，不得自动触发真实 VCPChat 源码读取。
+- [ ] 真实读取最终授权仍必须单独请求，且不得自动授权 VCPChat 修改、IPC handler、preload、插件、API、DailyNote 或记忆写入。
