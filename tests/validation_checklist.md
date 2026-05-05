@@ -587,6 +587,22 @@
 - [ ] 不通过 URL query/hash/window title/localStorage/sessionStorage/clipboard/raw IPC 传递敏感信息。
 - [ ] v1.6 样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`file_write_performed=false`、`image_file_created=false`。
 
+## v1.7 Plugin Performance + Release Automation Readiness 检查
+
+- [ ] `integrations/vcp/plugin_performance_score.schema.yaml` 存在。
+- [ ] `integrations/vcp/plugin_performance_score_policy.md` 存在。
+- [ ] `tests/schema_examples/v1_7_plugin_performance_score.example.yaml` 存在。
+- [ ] `release_automation/release_preflight_contract.md` 存在。
+- [ ] `release_automation/package_validation_checklist.md` 存在。
+- [ ] `tests/schema_examples/v1_7_release_preflight.example.yaml` 存在。
+- [ ] Plugin Performance Score 不把 `tested`、`dry_run_checked` 或 `accepted_by_human` 解释为真实执行授权。
+- [ ] Plugin Performance Score 不保存 raw 插件输出、endpoint 原文、secret、私密路径、客户隐私、runtime log 原文或图片二进制。
+- [ ] v1.7 插件评分样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`real_execution_allowed=false`。
+- [ ] Release Automation 只停留在 preflight contract，不创建 tag、zip、sha256 或 GitHub Release。
+- [ ] v1.7 发布样例保持 `tag_created=false`、`package_created=false`、`sha256_created=false`、`release_published=false`、`release_assets_uploaded=false`。
+- [ ] `release_packages/` 必须保持 Git ignored，发布包不得提交进 Git。
+- [ ] 任何 tag、push、package、GitHub Release 或 asset upload 都必须单独授权。
+
 ## v2.0 Productization Plan 检查
 
 - [ ] `docs/50_v2_0_productization_plan.md` 存在。

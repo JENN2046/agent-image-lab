@@ -1,0 +1,59 @@
+phase: v1.7_release_automation_readiness
+record_id: release-preflight-v1-7-001
+project: Agent Image Lab
+status: preflight_contract_only
+
+release_preflight:
+  target_release_name: v1.7-plugin-performance-release-readiness-placeholder
+  target_commit_ref: current-head-placeholder
+  git_status_checked: true
+  working_tree_clean_required: true
+  tag_name_planned: v1.7-plugin-performance-release-readiness-placeholder
+  tag_created: false
+  tag_pushed: false
+  package_creation_planned: true
+  package_created: false
+  sha256_planned: true
+  sha256_created: false
+  package_inside_validation_planned: true
+  package_inside_validation_completed: false
+  github_release_planned: true
+  release_published: false
+  release_assets_uploaded: false
+
+authorization_points:
+  tag_creation_requires_explicit_authorization: true
+  tag_push_requires_explicit_authorization: true
+  package_creation_requires_explicit_authorization: true
+  github_release_requires_explicit_authorization: true
+  asset_upload_requires_explicit_authorization: true
+
+package_boundary:
+  output_directory: release_packages/
+  output_directory_gitignored: true
+  package_in_git_allowed: false
+  package_inside_validation_directory_allowed: release_packages/_verify_placeholder
+  forbidden_package_content:
+    - ".git/"
+    - "release_packages/"
+    - "图片二进制"
+    - "raw 插件输出"
+    - "runtime log 原文"
+    - "endpoint 原文"
+    - "密钥、token、cookie、密码"
+    - "私密路径、客户隐私或客户未公开信息"
+
+no_release_action_performed:
+  tag_created: false
+  package_created: false
+  sha256_created: false
+  release_published: false
+  release_assets_uploaded: false
+  github_api_called: false
+
+acceptance_assertions:
+  - "v1.7 只建立发布前检查合同，不创建 tag。"
+  - "v1.7 不生成 zip 或 sha256。"
+  - "v1.7 不发布 GitHub Release。"
+  - "release_packages/ 必须保持 Git ignored。"
+  - "任何发布动作都必须单独授权。"

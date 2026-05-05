@@ -1,0 +1,65 @@
+phase: v1.7_plugin_performance_score
+record_id: plugin-performance-score-v1-7-001
+project: Agent Image Lab
+status: score_template_only
+
+plugin_performance_score:
+  score_id: plugin-performance-score-v1-7-001
+  project: Agent Image Lab
+  candidate_id: candidate-plugin-placeholder-001
+  plugin_display_name_summary_cn: "候选插件甲，显示名已脱敏。"
+  source_review_ref: candidate-decision-packet-v1-4-001
+  capability_state: pending_manifest_review
+  real_execution_authorization_status: not_authorized
+
+  performance_summary:
+    success_rate_status: not_measured
+    success_rate_value: null
+    visual_deviation_types_cn:
+      - "尚未授权真实执行，因此不记录真实视觉偏差。"
+    failure_types_cn:
+      - "尚未授权真实执行，因此不记录真实失败类型。"
+    controllability_cn: "当前仅有评分维度，占位候选不能推断可控性。"
+    stability_cn: "当前未测试，不形成稳定性结论。"
+    recovery_notes_cn: "未来如发生失败，必须保留中文脱敏摘要和回滚记录。"
+
+  risk_summary:
+    permission_risk_level: medium
+    permission_risk_cn: "候选仍处于 pending_manifest_review，需单独授权 manifest 脱敏审查。"
+    gatekeeper_notes_cn: "不得把占位候选标记为可用，也不得自动选择插件。"
+    sensitive_boundary_cn: "不保存 raw 输出、endpoint 原文、密钥、私密路径、客户隐私、运行日志原文或图片二进制。"
+
+  human_acceptance:
+    accepted_by_human: false
+    accepted_by: null
+    accepted_at: null
+    acceptance_notes_cn: "当前没有人工接受真实插件表现。"
+
+  evidence_refs:
+    manifest_review_ref: null
+    dry_run_ref: null
+    real_execution_record_ref: null
+    asset_index_ref: null
+
+  no_sensitive_storage_guard:
+    raw_plugin_output_saved: false
+    endpoint_raw_saved: false
+    secret_value_saved: false
+    private_path_saved: false
+    customer_private_data_saved: false
+    runtime_log_saved: false
+    image_binary_saved_to_memory: false
+
+  no_execution_guard:
+    api_called: false
+    vcp_plugin_called: false
+    daily_note_called: false
+    file_write_performed: false
+    image_file_created: false
+    real_execution_allowed: false
+
+acceptance_assertions:
+  - "tested 不等于真实执行授权。"
+  - "pending_manifest_review 不能推断真实插件能力。"
+  - "没有调用插件、API 或 DailyNote。"
+  - "没有保存 raw 插件输出、endpoint 原文、密钥、私密路径、客户隐私或图片二进制。"

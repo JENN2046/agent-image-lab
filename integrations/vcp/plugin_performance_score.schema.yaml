@@ -1,0 +1,63 @@
+# plugin_performance_score.schema.yaml
+# v1.7 插件表现评分草案：只记录脱敏表现摘要，不授权真实执行
+plugin_performance_score:
+  score_id: string                # 评分记录 ID
+  project: string                 # 项目名
+  candidate_id: string            # 候选插件 ID 或脱敏占位 ID
+  plugin_display_name_summary_cn: string # 插件显示名中文脱敏摘要
+  source_review_ref: string | null # 来源评审记录
+  capability_state: discovered | pending_manifest_review | manifest_reviewed_safe | dry_run_planned | dry_run_checked | tested | rejected # 能力状态
+  real_execution_authorization_status: not_authorized | authorization_required | authorized_for_single_run | completed_under_authorization # 真实执行授权状态
+
+  performance_summary:
+    success_rate_status: unknown | not_measured | measured_with_limits # 成功率状态
+    success_rate_value: number | null # 成功率，可为空
+    visual_deviation_types_cn:
+      - string                    # 中文视觉偏差类型
+    failure_types_cn:
+      - string                    # 中文失败类型
+    controllability_cn: string    # 可控性中文摘要
+    stability_cn: string          # 稳定性中文摘要
+    recovery_notes_cn: string     # 失败恢复中文摘要
+
+  risk_summary:
+    permission_risk_level: low | medium | high | blocked | unknown # 权限风险等级
+    permission_risk_cn: string    # 权限风险中文摘要
+    gatekeeper_notes_cn: string   # Gatekeeper 中文备注
+    sensitive_boundary_cn: string # 敏感信息边界中文摘要
+
+  human_acceptance:
+    accepted_by_human: boolean    # 是否人工接受
+    accepted_by: string | null    # 人工接受人
+    accepted_at: string | null    # 人工接受时间
+    acceptance_notes_cn: string | null # 中文验收备注
+
+  evidence_refs:
+    manifest_review_ref: string | null # 脱敏 manifest 评审引用
+    dry_run_ref: string | null     # dry-run 记录引用
+    real_execution_record_ref: string | null # 真实执行记录引用
+    asset_index_ref: string | null # 资产索引引用
+
+  no_sensitive_storage_guard:
+    raw_plugin_output_saved: boolean
+    endpoint_raw_saved: boolean
+    secret_value_saved: boolean
+    private_path_saved: boolean
+    customer_private_data_saved: boolean
+    runtime_log_saved: boolean
+    image_binary_saved_to_memory: boolean
+
+  no_execution_guard:
+    api_called: boolean
+    vcp_plugin_called: boolean
+    daily_note_called: boolean
+    file_write_performed: boolean
+    image_file_created: boolean
+    real_execution_allowed: boolean
+
+  invariants:
+    - Plugin Performance Score 只记录评分口径和脱敏摘要，不触发插件调用。
+    - tested 不等于真实执行授权。
+    - real_execution_authorization_status 为 not_authorized 或 authorization_required 时，real_execution_allowed 必须为 false。
+    - 不得保存 raw 插件输出、endpoint 原文、secret、私密路径、客户隐私、runtime log 原文或图片二进制。
+    - 失败记录不得被写成长期插件结论，除非经过人工复核和 Gatekeeper 审查。
