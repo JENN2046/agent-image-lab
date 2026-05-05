@@ -952,3 +952,36 @@
 - [ ] 样例保持 `ipc_handler_created=false`、`preload_runtime_code_created=false`、`renderer_runtime_code_created=false`、`execution_entry_created=false`。
 - [ ] 样例不包含真实本地路径、真实读取命令、shell 命令文本、真实源码片段、完整函数体、endpoint 原文、环境变量值、secret、token、cookie、密码、客户隐私、raw runtime log、raw IPC payload、raw plugin output 或图片二进制。
 - [ ] 命令绑定 preflight 通过也只允许进入下一独立最终读取授权门，不得自动触发真实 VCPChat 源码读取。
+
+## v2.3 Execute-once Final Read Authorization Gate 检查
+
+- [ ] `docs/93_v2_3_execute_once_final_read_authorization_gate.md` 存在。
+- [ ] `review_console/embed_contract/execute_once_final_read_authorization_gate.md` 存在。
+- [ ] `tests/schema_examples/v2_3_execute_once_final_read_authorization_gate.example.yaml` 存在。
+- [ ] execute-once final read authorization gate 只定义真实 VCPChat 一次性读取最终授权门，不读取真实 VCPChat 源码。
+- [ ] execute-once final read authorization gate 不读取真实 VCPToolBox。
+- [ ] execute-once final read authorization gate 不保存真实 VCPChat 根目录、真实 allowlist 路径、真实读取命令或 raw source。
+- [ ] execute-once final read authorization gate 不修改真实 VCPChat 或 VCPToolBox。
+- [ ] execute-once final read authorization gate 不创建真实 IPC handler、preload、renderer、Adapter 执行入口或其他执行代码。
+- [ ] execute-once final read authorization gate 不调用插件、API、DailyNote、VCP 记忆或文件系统写入。
+- [ ] 样例保持 `final_read_authorization_gate_requested=false`、`final_read_authorization_gate_passed=false`。
+- [ ] 样例保持 `execute_once_authorization_requested=false`、`execute_once_authorization_granted=false`。
+- [ ] 样例保持 `authorized_by=null`、`authorized_at=null`。
+- [ ] 样例保持 `final_authorizer=null`、`final_authorized_at=null`。
+- [ ] 样例保持 `source_read_authorized=false`、`authorization_status=pending_final_read_authorization_gate`。
+- [ ] 样例保持 `command_binding_preflight_requested=false`、`command_binding_preflight_passed=false`。
+- [ ] 样例保持 `read_command_bound=false`、`read_command_id=null`、`read_command_executed=false`。
+- [ ] 样例保持 `read_attempt_limit=1`、`read_attempt_used=0`。
+- [ ] 样例保持 `read_scope_ref_confirmed=false`、`read_command_ref_confirmed=false`、`stop_conditions_confirmed=false`、`post_read_boundaries_confirmed=false`。
+- [ ] 样例保持 `read_scope_held_outside_git=true`、`read_command_held_outside_git=true`、`read_command_text_stored_in_git=false`。
+- [ ] 样例保持 `recursive_scan_allowed=false`、`config_read_allowed=false`、`log_read_allowed=false`、`credential_read_allowed=false`、`customer_data_read_allowed=false`。
+- [ ] 样例保持 `raw_source_output_allowed=false`、`real_path_output_allowed=false`、`file_write_allowed=false`、`vcpchat_launch_allowed=false`、`vcpchat_modification_allowed=false`。
+- [ ] 样例保持 `plugin_call_allowed=false`、`api_call_allowed=false`、`daily_note_call_allowed=false`、`vcp_memory_write_allowed=false`。
+- [ ] 样例保持 `direct_implementation_allowed=false`、`daily_note_write_allowed=false`、`vcp_memory_write_allowed=false`、`asset_write_allowed=false`。
+- [ ] 样例保持 `exact_real_paths_stored_in_git=false`、`source_read_performed=false`、`real_vcpchat_source_read=false`。
+- [ ] 样例保持 `real_vcpchat_modified=false`、`real_vcptoolbox_source_read=false`、`real_vcptoolbox_modified=false`。
+- [ ] 样例保持 `raw_source_copy_allowed=false`、`raw_source_copied=false`。
+- [ ] 样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`real_execution_allowed=false`。
+- [ ] 样例保持 `ipc_handler_created=false`、`preload_runtime_code_created=false`、`renderer_runtime_code_created=false`、`execution_entry_created=false`。
+- [ ] 样例不包含真实本地路径、真实读取命令、shell 命令文本、真实源码片段、完整函数体、endpoint 原文、环境变量值、secret、token、cookie、密码、客户隐私、raw runtime log、raw IPC payload、raw plugin output 或图片二进制。
+- [ ] 最终读取授权门通过也只允许进入下一独立真实读取执行授权点，不得自动触发真实 VCPChat 源码读取。
