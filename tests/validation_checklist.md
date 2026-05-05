@@ -619,3 +619,14 @@
 - [ ] `docs/50_v2_0_productization_plan.md` 存在。
 - [ ] v2.0 不默认包含自动真实生图、自动 DailyNote 写入或自动插件选择。
 - [ ] v2.0 产品化入口条件包含 v1.1、v1.2、v1.3、v1.4 完成。
+
+## v2.0 Productization Baseline 检查
+
+- [ ] `docs/70_v2_0_productization_baseline.md` 存在。
+- [ ] `tests/schema_examples/v2_0_productization_baseline.example.yaml` 存在。
+- [ ] v2.0 baseline 汇总 v1.1 到 v1.8 的完成轨道。
+- [ ] v2.0 baseline 覆盖 Task Panel、Review Console、Asset Index、Style Memory、Plugin Performance Score 和 Release Automation。
+- [ ] v2.0 baseline 保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`real_execution_allowed=false`。
+- [ ] v2.0 baseline 保持 `vcpchat_modified=false`、`vcptoolbox_modified=false`。
+- [ ] v2.0 baseline 保持 `tag_created=false`、`package_created=false`、`sha256_created=false`、`release_published=false`、`release_assets_uploaded=false`。
+- [ ] v2.0 baseline 不新增真实执行能力、不创建发布资产、不修改真实外部仓库。
