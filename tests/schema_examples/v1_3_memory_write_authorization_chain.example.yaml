@@ -1,0 +1,103 @@
+phase: v1.3_memory_write_authorization_chain
+record_id: memory-write-authorization-chain-v1-3-001
+project: Agent Image Lab
+status: no_write_preflight_only
+
+source:
+  task_id: ail-v1-3-memory-handoff-001
+  case_id: case-v1-3-memory-handoff-001
+  review_session_id: session-v1-3-memory-handoff-001
+  memory_delta_id: memory-delta-v1-3-001
+
+memory_write_request:
+  request_id: memory-write-request-v1-3-001
+  request_status: approved_for_future_preflight
+  requested_target: DailyNote_VCP_Memory
+  request_summary_cn: "本记录只表示记忆写入申请已经进入审批链，不代表已经写入 DailyNote 或 VCP 长期记忆。"
+  chinese_diary_title: "Photo Studio OS v1.0 人工接受经验"
+  chinese_diary_content: "本次记录沉淀人工覆盖 AI 评分的审片经验：资产可作为项目推进候选，但真实记忆写入必须等待独立授权。"
+  final_decision:
+    should_write_to_vcp: true
+    should_show_in_review_console: true
+    decision_notes_cn: "写入申请可继续进入写入前授权检查。"
+
+review_console_approval_record:
+  approval_status: approved
+  approved_by: human_reviewer
+  approved_at: "2026-05-05T10:45:00+08:00"
+  approved_scope_cn: "仅批准中文记忆正文作为写入申请，不批准直接写入 DailyNote。"
+  memory_preview_is_chinese: true
+  daily_note_write_authorized: false
+
+archivist_review_record:
+  review_required: true
+  review_status: pending
+  reviewer: Archivist_Agent
+  review_focus_cn:
+    - "确认正文是否会污染长期风格记忆。"
+    - "确认不包含图片二进制、私密路径或敏感原文。"
+    - "确认 tags 只保留安全中文标签。"
+  approved_for_write_preflight: false
+
+imagelab_master_review_record:
+  review_required: true
+  review_status: pending
+  reviewer: ImageLab_Master
+  review_focus_cn:
+    - "确认该经验是否足够稳定，可以作为项目级记忆候选。"
+    - "确认不把一次性执行结果误写成长期风格铁律。"
+  approved_for_write_preflight: false
+
+daily_note_write_preflight:
+  preflight_required: true
+  preflight_status: blocked_until_explicit_user_authorization
+  daily_note_write_authorized: false
+  allowed_future_action_cn: "未来可在单独授权后生成真实写入执行记录。"
+  forbidden_current_actions_cn:
+    - "不得调用 DailyNote。"
+    - "不得写 VCP 长期记忆。"
+    - "不得保存图片二进制。"
+    - "不得复制密钥、私密路径、endpoint 原文、客户隐私或 raw 插件输出。"
+
+write_execution_audit_stub:
+  audit_status: placeholder_only
+  daily_note_called: false
+  vcp_memory_written: false
+  actual_write_performed: false
+  execution_record_required_after_future_write: true
+  audit_summary_cn: "真实写入尚未发生，本条只保留未来执行审计字段。"
+
+rollback_or_revoke_plan:
+  rollback_required_before_write: true
+  rollback_available_now: false
+  revoke_request_allowed: true
+  revoke_summary_cn: "当前没有真实写入，因此撤销动作只会关闭写入申请。"
+
+rejection_audit_record:
+  rejection_template_only: true
+  write_mode: forbidden
+  approval_status: rejected
+  rejection_reason_cn: "本条记忆因涉及敏感配置风险被拒绝写入，仅保留安全审计摘要。"
+  sensitive_original_copied: false
+  preserved_original_contains_sensitive_text: false
+  tags_contain_sensitive_text: false
+  audit_log_contains_sensitive_text: false
+
+no_write_guard:
+  api_called: false
+  daily_note_called: false
+  vcp_plugin_called: false
+  daily_note_write_authorized: false
+  vcp_memory_written: false
+  actual_write_performed: false
+  image_binary_saved_to_memory: false
+  raw_sensitive_content_saved: false
+  file_write_performed: false
+  image_file_created: false
+
+acceptance_assertions:
+  - "should_write_to_vcp=true 只表示写入申请已批准，不代表已经写入。"
+  - "write_mode=confirmed 只表示 memory_delta 满足审批不变量，不代表 DailyNote 已调用。"
+  - "DailyNote 写入必须等待未来独立授权。"
+  - "Archivist_Agent 和 ImageLab_Master 未复查时不得执行真实写入。"
+  - "敏感内容只能保留中文脱敏拒绝摘要。"

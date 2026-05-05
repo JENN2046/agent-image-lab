@@ -531,9 +531,13 @@
 
 - [ ] `memory_policy/v1_3_daily_note_handoff_contract.md` 存在。
 - [ ] `tests/schema_examples/v1_3_memory_handoff_preflight.example.yaml` 存在。
+- [ ] `tests/schema_examples/v1_3_memory_write_authorization_chain.example.yaml` 存在。
+- [ ] v1.3 记录集覆盖写入申请、Review Console 审批、Archivist_Agent 复查、ImageLab_Master 复核、DailyNote 写入前授权、执行审计占位、撤销计划和拒绝审计。
 - [ ] `should_write_to_vcp=true` 只表示写入申请已批准，不代表已经写入。
 - [ ] `daily_note_called=false` 保持到未来独立写入授权点。
 - [ ] `actual_write_performed=false` 保持到未来独立写入授权点。
+- [ ] `daily_note_write_authorized=false` 保持到未来独立写入授权点。
+- [ ] `vcp_memory_written=false` 保持到未来独立写入授权点。
 - [ ] 所有记忆正文、拒绝原因和审计摘要为中文脱敏内容。
 - [ ] 敏感字段不得进入 `memory_delta`、`preserved_original`、tags、拒绝原因或审计日志。
 
