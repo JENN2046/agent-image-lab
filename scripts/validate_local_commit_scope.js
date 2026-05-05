@@ -2,8 +2,16 @@ const allowedModifiedFiles = [
   "MANIFEST.md",
   "README.md",
   "RELEASE_NOTES.md",
+  ".agent_board/BLOCKERS.md",
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/DECISIONS.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
   "docs/00_project_roadmap.md",
   "review_console/runtime_prototype/README.md",
+  "scripts/validate_local_commit_scope.js",
   "scripts/validate_mvp.ps1",
   "scripts/validate_runtime_prototype_smoke.js",
   "tests/validation_checklist.md"
@@ -28,11 +36,14 @@ const allowedUntrackedFiles = [
   "docs/121_v4_4_agent_board_state_validation.md",
   "docs/122_v4_5_local_checkpoint_readiness.md",
   "docs/123_v4_6_local_commit_scope_manifest.md",
+  "docs/124_v4_7_post_push_state_reconciliation.md",
+  "docs/125_v4_8_v4_index_consistency_validation.md",
   "scripts/validate-agent-image-lab-local.ps1",
   "scripts/validate-agent-image-lab-local.sh",
   "scripts/validate_agent_board_state.js",
   "scripts/validate_local_checkpoint_manifest.js",
-  "scripts/validate_local_commit_scope.js",
+  "scripts/validate_post_push_state.js",
+  "scripts/validate_v4_index_consistency.js",
   "scripts/validate_runtime_guard_unit.js",
   "scripts/validate_runtime_prototype_suite.js",
   "tests/schema_examples/v4_0_runtime_contract_smoke_hardening.example.yaml",
@@ -41,7 +52,9 @@ const allowedUntrackedFiles = [
   "tests/schema_examples/v4_3_autopilot_overlay_installation.example.yaml",
   "tests/schema_examples/v4_4_agent_board_state_validation.example.yaml",
   "tests/schema_examples/v4_5_local_checkpoint_readiness.example.yaml",
-  "tests/schema_examples/v4_6_local_commit_scope_manifest.example.yaml"
+  "tests/schema_examples/v4_6_local_commit_scope_manifest.example.yaml",
+  "tests/schema_examples/v4_7_post_push_state_reconciliation.example.yaml",
+  "tests/schema_examples/v4_8_v4_index_consistency_validation.example.yaml"
 ];
 
 function assert(condition, message) {
@@ -73,16 +86,16 @@ function main() {
   assert(!hasUnsafePath(allowedModifiedFiles), "Allowed modified files must stay relative and project-local.");
   assert(!hasUnsafePath(allowedUntrackedFiles), "Allowed untracked files must stay relative and project-local.");
   assert(
-    allowedUntrackedFiles.includes("docs/123_v4_6_local_commit_scope_manifest.md"),
-    "v4.6 docs must be included in the untracked allowlist."
+    allowedUntrackedFiles.includes("docs/125_v4_8_v4_index_consistency_validation.md"),
+    "v4.8 docs must be included in the untracked allowlist."
   );
   assert(
-    allowedUntrackedFiles.includes("tests/schema_examples/v4_6_local_commit_scope_manifest.example.yaml"),
-    "v4.6 schema example must be included in the untracked allowlist."
+    allowedUntrackedFiles.includes("tests/schema_examples/v4_8_v4_index_consistency_validation.example.yaml"),
+    "v4.8 schema example must be included in the untracked allowlist."
   );
   assert(
-    allowedUntrackedFiles.includes("scripts/validate_local_commit_scope.js"),
-    "v4.6 validation script must be included in the untracked allowlist."
+    allowedUntrackedFiles.includes("scripts/validate_v4_index_consistency.js"),
+    "v4.8 validation script must be included in the untracked allowlist."
   );
 
   const result = {

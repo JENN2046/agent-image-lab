@@ -2,6 +2,109 @@
 
 ## Entries
 
+## VALIDATION-20260506-V4-8
+
+Task:
+
+```text
+Add v4 index consistency validation for v4.0-v4.8 docs, schema examples, validation scripts, top-level indexes, and agent board state.
+```
+
+Commands run:
+
+```text
+scripts/validate_mvp.ps1
+scripts/validate-agent-image-lab-local.ps1
+node scripts/validate_runtime_prototype_suite.js
+node scripts/validate_agent_board_state.js
+node scripts/validate_local_checkpoint_manifest.js
+node scripts/validate_local_commit_scope.js
+node scripts/validate_post_push_state.js
+node scripts/validate_v4_index_consistency.js
+git diff --check
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+The v4.0-v4.8 document, schema, script, README, MANIFEST, roadmap, checklist, release notes, validate_mvp, and agent board indexes are now machine-checked for consistency.
+```
+
+Warnings:
+
+```text
+Manual-review warnings remain for forbidden strings such as token, cookie, password, image extensions, and script extensions because the project intentionally contains negative checklist references.
+```
+
+Not validated:
+
+```text
+No new git add, commit, tag, push, release, real VCPChat read, real VCPToolBox read, plugin call, API call, DailyNote call, VCP memory write, or image creation was performed in this v4.8 batch.
+```
+
+Notes:
+
+```text
+All current v4.8 validation stayed project-local and reversible.
+```
+
+## VALIDATION-20260506-V4-7
+
+Task:
+
+```text
+Record v4.6 pushed baseline and reconcile .agent_board for the new v4.7 local batch.
+```
+
+Commands run:
+
+```text
+scripts/validate_mvp.ps1
+scripts/validate-agent-image-lab-local.ps1
+node scripts/validate_runtime_prototype_suite.js
+node scripts/validate_agent_board_state.js
+node scripts/validate_local_checkpoint_manifest.js
+node scripts/validate_local_commit_scope.js
+node scripts/validate_post_push_state.js
+git diff --check
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+The pushed v4.6 baseline is recorded as commit 7f58408 with tag v4.6-guarded-autopilot-commit-scope. The board now declares a new v4.7 local batch and preserves the separate commit/tag/push authorization gate.
+```
+
+Warnings:
+
+```text
+Manual-review warnings remain for forbidden strings such as token, cookie, password, image extensions, and script extensions because the project intentionally contains negative checklist references.
+```
+
+Not validated:
+
+```text
+No new git add, commit, tag, push, release, real VCPChat read, real VCPToolBox read, plugin call, API call, DailyNote call, VCP memory write, or image creation was performed in this v4.7 batch.
+```
+
+Notes:
+
+```text
+All current v4.7 validation stayed project-local and reversible.
+```
+
 ## VALIDATION-20260505-V4-6
 
 Task:

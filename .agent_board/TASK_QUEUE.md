@@ -69,6 +69,8 @@ none
 5. Added agent board state validation harness and integrated it into the local validation set.
 6. Added local checkpoint readiness manifest validation for the v4.0-v4.5 local batch.
 7. Added local commit scope manifest validation for the v4.0-v4.6 changed-file allowlist.
+8. Recorded v4.6 pushed baseline and reconciled post-push state for the v4.7 local batch.
+9. Added v4 index consistency validation for v4.0-v4.8 docs, schemas, scripts, and board indexes.
 ```
 
 ### blocked

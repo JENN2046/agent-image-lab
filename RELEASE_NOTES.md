@@ -42,6 +42,8 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Added v4.4 agent board state validation harness.
 - Added v4.5 local checkpoint readiness manifest validation.
 - Added v4.6 local commit scope manifest validation.
+- Added v4.7 post-push state reconciliation record and validation.
+- Added v4.8 v4 index consistency validation.
 
 ## Safety Status
 

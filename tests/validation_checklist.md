@@ -1791,3 +1791,29 @@
 - [ ] `validate_mvp.ps1` 执行 local commit scope manifest 并检查输出字段。
 - [ ] v4.6 不执行 `git add`、commit、tag、push 或 release。
 - [ ] v4.6 不读真实 VCPChat、不改真实 VCPChat、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v4.7 Post-Push State Reconciliation 检查
+
+- [ ] `scripts/validate_post_push_state.js` 存在。
+- [ ] `docs/124_v4_7_post_push_state_reconciliation.md` 存在。
+- [ ] `tests/schema_examples/v4_7_post_push_state_reconciliation.example.yaml` 存在。
+- [ ] post-push state reconciliation 记录 v4.6 pushed commit `7f58408`。
+- [ ] post-push state reconciliation 记录 tag `v4.6-guarded-autopilot-commit-scope`。
+- [ ] `.agent_board/RUN_STATE.md` 和 `.agent_board/HANDOFF.md` 进入 v4.7 post-push state reconciliation。
+- [ ] `.agent_board` 明确新本地批次仍未授权 commit/tag/push/release。
+- [ ] `validate_mvp.ps1` 执行 post-push state validation 并检查输出字段。
+- [ ] v4.7 不执行新的 `git add`、commit、tag、push 或 release。
+- [ ] v4.7 不读真实 VCPChat、不改真实 VCPChat、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v4.8 V4 Index Consistency Validation 检查
+
+- [ ] `scripts/validate_v4_index_consistency.js` 存在。
+- [ ] `docs/125_v4_8_v4_index_consistency_validation.md` 存在。
+- [ ] `tests/schema_examples/v4_8_v4_index_consistency_validation.example.yaml` 存在。
+- [ ] v4 index consistency validation 验证 v4.0-v4.8 阶段文档齐全。
+- [ ] v4 index consistency validation 验证 v4.0-v4.8 schema 示例齐全。
+- [ ] v4 index consistency validation 验证 v4 相关验证脚本齐全。
+- [ ] v4 index consistency validation 验证 README、MANIFEST、roadmap、validation checklist、release notes、validate_mvp 和 `.agent_board` 索引一致。
+- [ ] `validate_mvp.ps1` 执行 v4 index consistency validation 并检查输出字段。
+- [ ] v4.8 不执行新的 `git add`、commit、tag、push 或 release。
+- [ ] v4.8 不读真实 VCPChat、不改真实 VCPChat、不调用插件、API、DailyNote 或 VCP 记忆。

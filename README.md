@@ -7,7 +7,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v4.6 local commit scope manifest
+v1.0 true-loop closeout candidate + v4.8 v4 index consistency validation
 ```
 
 已经完成：
@@ -28,6 +28,8 @@ v1.0 true-loop closeout candidate + v4.6 local commit scope manifest
 - v4.4 agent board state validation 机器检查 `.agent_board` 的硬停止门、handoff 和验证快照。
 - v4.5 local checkpoint readiness 机器检查 v4.0-v4.5 本地 checkpoint 文件、看板状态、验证快照和 commit/tag/push 门。
 - v4.6 local commit scope manifest 机器检查 v4.0-v4.6 本地批次的 changed-file allowlist，且不执行 staging。
+- v4.7 post-push state reconciliation 记录 v4.6 已推送基线，并把 `.agent_board` 切换到新的本地续跑批次。
+- v4.8 v4 index consistency validation 机器检查 v4.0-v4.8 阶段文档、schema、脚本和顶层索引一致性。
 
 当前 accepted asset 只以 ignored runtime 路径和哈希归档，不把图片二进制写入 Git、DailyNote 或 VCP 长期记忆。人工接受记录保留了已知视觉偏差：这是 `human_override` 通过，不是完美 prompt compliance。
 
@@ -79,6 +81,8 @@ Photo Studio OS UI 生图生产线，以及 AI 图片评审与修正生产线。
 - `docs/121_v4_4_agent_board_state_validation.md`：agent board state validation 记录。
 - `docs/122_v4_5_local_checkpoint_readiness.md`：local checkpoint readiness 记录。
 - `docs/123_v4_6_local_commit_scope_manifest.md`：local commit scope manifest 记录。
+- `docs/124_v4_7_post_push_state_reconciliation.md`：post-push state reconciliation 记录。
+- `docs/125_v4_8_v4_index_consistency_validation.md`：v4 index consistency validation 记录。
 - `.agent_board/`：本地 guarded autopilot 状态板，用于续跑、校验记录和 handoff。
 - `docs/`：项目定义、SOP、评分表、VCP 记忆适配、审片台设计。
 - `agents/`：ImageLab_Master 和岗位型子 Agent 的规则。
@@ -107,6 +111,8 @@ node scripts\validate_runtime_prototype_suite.js
 node scripts\validate_agent_board_state.js
 node scripts\validate_local_checkpoint_manifest.js
 node scripts\validate_local_commit_scope.js
+node scripts\validate_post_push_state.js
+node scripts\validate_v4_index_consistency.js
 powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
 git diff --check
 ```
