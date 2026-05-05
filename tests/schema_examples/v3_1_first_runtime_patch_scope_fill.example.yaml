@@ -1,0 +1,181 @@
+phase: v3.1_first_runtime_patch_scope_fill
+record_id: v3-1-first-runtime-patch-scope-fill-001
+project: Agent Image Lab
+status: first_runtime_patch_scope_fill_template_only
+
+first_runtime_patch_scope_fill:
+  scope_fill_id: v3-1-first-runtime-patch-scope-fill-placeholder-001
+  authorization_id: v3-0-first-runtime-patch-authorization-placeholder-001
+  first_runtime_patch_authorization_required: true
+  first_runtime_patch_authorization_granted: false
+  scope_fill_required: true
+  scope_fill_requested: false
+  scope_fill_completed: false
+  scope_review_required: true
+  scope_review_passed: false
+  scope_owner: null
+  scope_reviewed_by: null
+  scope_reviewed_at: null
+  authorized_task_id: null
+  patch_objective_cn: null
+  rollback_plan_ref: null
+  validation_plan_ref: null
+  stop_conditions_ref: null
+  scope_status: pending_first_runtime_patch_scope_fill
+
+scope_state:
+  first_runtime_patch_authorization_exists: true
+  first_runtime_patch_authorization_granted: false
+  scope_fill_required: true
+  scope_fill_requested: false
+  scope_fill_completed: false
+  scope_review_required: true
+  scope_review_passed: false
+  file_scope_ready: false
+  ipc_scope_ready: false
+  preload_scope_ready: false
+  renderer_scope_ready: false
+  rollback_plan_ready: false
+  validation_plan_ready: false
+  electron_boundary_ready: false
+  stop_conditions_ready: false
+
+scope_lists:
+  allowed_modify_files: []
+  allowed_create_files: []
+  forbidden_modify_files: []
+  forbidden_create_files: []
+  allowed_ipc_channels: []
+  allowed_preload_api_names: []
+  allowed_renderer_entry_points: []
+
+scope_rules:
+  scope_fill_is_code_authorization: false
+  scope_fill_extends_to_unlisted_files: false
+  scope_fill_extends_to_later_patches: false
+  scope_fill_allows_scope_expansion_by_continue: false
+  scope_fill_calls_plugins: false
+  scope_fill_writes_daily_note: false
+  scope_fill_writes_vcp_memory: false
+  scope_fill_creates_image_file: false
+  direct_runtime_implementation_allowed: false
+
+authorization_state:
+  electron_boundary_confirmed: false
+  implementation_patch_authorized: false
+  ipc_handler_creation_authorized: false
+  preload_runtime_creation_authorized: false
+  renderer_runtime_creation_authorized: false
+  real_vcpchat_source_read_authorized: false
+  real_vcpchat_modification_authorized: false
+  daily_note_write_authorized: false
+  vcp_memory_write_authorized: false
+  asset_write_authorized: false
+
+forbidden_scope_content:
+  - real_local_path
+  - raw_allowlist_path
+  - raw_read_command
+  - shell_command_text
+  - raw_source_code
+  - complete_function_body
+  - endpoint_raw_value
+  - env_value
+  - secret_raw_value
+  - private_path_raw_value
+  - customer_private_data
+  - raw_runtime_log
+  - raw_ipc_payload
+  - raw_plugin_output
+  - image_binary
+
+safety_gate:
+  contains_real_local_path: false
+  contains_raw_allowlist_path: false
+  contains_raw_read_command: false
+  contains_raw_source_code: false
+  contains_complete_function_body: false
+  contains_endpoint_raw_value: false
+  contains_env_value: false
+  contains_secret_raw_value: false
+  contains_private_path_raw_value: false
+  contains_customer_private_data: false
+  contains_raw_runtime_log: false
+  contains_raw_ipc_payload: false
+  contains_raw_plugin_output: false
+  contains_image_binary: false
+  sensitive_summary_cn: "本 first runtime patch scope fill 样例不包含真实路径、真实文件名、读取命令、源码原文或真实证据，只定义未来第一次 runtime patch 的 scope 填写模板。"
+
+no_execution_guard:
+  real_vcpchat_source_read: false
+  real_vcpchat_modified: false
+  real_vcptoolbox_source_read: false
+  real_vcptoolbox_modified: false
+  implementation_code_created: false
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  renderer_runtime_code_created: false
+  execution_entry_created: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  file_write_performed: false
+  disk_write_performed: false
+  image_file_created: false
+  selected_plugin: null
+  max_plugin_calls: 0
+  real_manifest_read: false
+  real_execution_allowed: false
+
+memory_delta_draft:
+  write_mode: audit_only
+  approval_status: not_required
+  chinese_audit_summary_cn: "First runtime patch scope fill 仍停留在模板，未填写真实 scope，未授权写代码，也未写 DailyNote 或 VCP 记忆。"
+  preserved_original_allowed: false
+  final_decision:
+    should_write_to_vcp: false
+
+next_state_rules:
+  current_state: waiting_for_first_runtime_patch_scope_fill
+  next_allowed_state: waiting_for_v3_1_closeout_or_v3_2_first_runtime_patch_scope_review
+  blocked_states:
+    - scope_fill_requested
+    - scope_fill_completed
+    - scope_review_passed
+    - implementation_patch_authorized
+    - ipc_handler_creation_authorized
+    - preload_runtime_creation_authorized
+    - renderer_runtime_creation_authorized
+    - real_vcpchat_source_read_authorized
+    - real_vcpchat_modification_authorized
+    - ipc_handler_created
+    - preload_runtime_code_created
+    - renderer_runtime_code_created
+    - daily_note_called
+    - vcp_memory_written
+    - real_execution_ready
+
+audit_summary_cn: "v3.1 Patch 01 只补齐 first runtime patch scope fill，不读取真实 VCPChat，不创建运行时代码。"
+
+acceptance_assertions:
+  - "scope_fill_required=true。"
+  - "scope_fill_requested=false。"
+  - "scope_fill_completed=false。"
+  - "scope_review_passed=false。"
+  - "authorized_task_id=null。"
+  - "patch_objective_cn=null。"
+  - "allowed_modify_files=[]。"
+  - "allowed_create_files=[]。"
+  - "allowed_ipc_channels=[]。"
+  - "allowed_preload_api_names=[]。"
+  - "allowed_renderer_entry_points=[]。"
+  - "rollback_plan_ref=null。"
+  - "validation_plan_ref=null。"
+  - "stop_conditions_ref=null。"
+  - "electron_boundary_confirmed=false。"
+  - "implementation_patch_authorized=false。"
+  - "real_execution_allowed=false。"
+  - "api_called=false。"
+  - "vcp_plugin_called=false。"
+  - "daily_note_called=false。"
