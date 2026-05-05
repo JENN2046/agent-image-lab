@@ -1973,3 +1973,17 @@
 - [ ] `validate_mvp.ps1` 执行 v5.9 expanded v5 index consistency validation 并检查输出字段。
 - [ ] v5.9 不执行 `git add`、commit、push、远端 tag、PR、merge 或 release。
 - [ ] v5.9 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.10 Local True-Loop Candidate Delivery Closeout 检查
+
+- [ ] 当前阶段字符串为 `v5.10 local true-loop candidate delivery closeout`。
+- [ ] `docs/137_v5_10_local_true_loop_candidate_delivery.md` 存在。
+- [ ] `tests/schema_examples/v5_10_local_true_loop_candidate_delivery.example.yaml` 存在。
+- [ ] `scripts/validate_v5_true_loop_candidate_delivery.js` 存在。
+- [ ] v5.10 记录本地 head `9ac4ca8` 和本地领先提交数 `5`。
+- [ ] v5.10 记录 v1.0 true-loop closeout candidate 本地交付完成。
+- [ ] v5.10 记录 handoff freshness 审查点已修复，validator 解析当前阶段而不是匹配历史文本。
+- [ ] README、MANIFEST、roadmap、release notes、validation checklist 和 `.agent_board` 均指向 v5.10 当前状态。
+- [ ] `validate_mvp.ps1` 执行 v5.10 local true-loop candidate delivery validation 并检查输出字段。
+- [ ] v5.10 不执行 `git add`、commit、push、远端 tag、PR、merge 或 release。
+- [ ] v5.10 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。

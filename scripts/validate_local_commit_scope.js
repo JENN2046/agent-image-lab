@@ -1,4 +1,5 @@
 const allowedModifiedFiles = [
+  "AGENTS.md",
   "MANIFEST.md",
   "README.md",
   "RELEASE_NOTES.md",
@@ -28,6 +29,7 @@ const allowedModifiedFiles = [
   "scripts/validate_v5_index_consistency.js",
   "scripts/validate_v5_local_batch_commit_readiness.js",
   "scripts/validate_v5_handoff_freshness.js",
+  "scripts/validate_v5_true_loop_candidate_delivery.js",
   "scripts/validate_runtime_delivery_surface.js",
   "scripts/validate_runtime_prototype_suite.js",
   "scripts/validate_runtime_prototype_smoke.js",
@@ -45,6 +47,8 @@ const allowedModifiedFiles = [
   "docs/135_v5_8_handoff_freshness_validation.md",
   "tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml",
   "docs/136_v5_9_expanded_v5_index_consistency.md",
+  "tests/schema_examples/v5_10_local_true_loop_candidate_delivery.example.yaml",
+  "docs/137_v5_10_local_true_loop_candidate_delivery.md",
   "tests/validation_checklist.md"
 ];
 
@@ -80,6 +84,7 @@ const allowedUntrackedFiles = [
   "docs/134_v5_7_local_batch_commit_readiness.md",
   "docs/135_v5_8_handoff_freshness_validation.md",
   "docs/136_v5_9_expanded_v5_index_consistency.md",
+  "docs/137_v5_10_local_true_loop_candidate_delivery.md",
   "scripts/validate-agent-image-lab-local.ps1",
   "scripts/validate-agent-image-lab-local.sh",
   "scripts/validate_agent_board_state.js",
@@ -95,6 +100,7 @@ const allowedUntrackedFiles = [
   "scripts/validate_v5_index_consistency.js",
   "scripts/validate_v5_local_batch_commit_readiness.js",
   "scripts/validate_v5_handoff_freshness.js",
+  "scripts/validate_v5_true_loop_candidate_delivery.js",
   "scripts/validate_runtime_delivery_surface.js",
   "scripts/validate_runtime_guard_unit.js",
   "scripts/validate_runtime_prototype_suite.js",
@@ -117,7 +123,8 @@ const allowedUntrackedFiles = [
   "tests/schema_examples/v5_6_v5_index_consistency_validation.example.yaml",
   "tests/schema_examples/v5_7_local_batch_commit_readiness.example.yaml",
   "tests/schema_examples/v5_8_handoff_freshness_validation.example.yaml",
-  "tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml"
+  "tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml",
+  "tests/schema_examples/v5_10_local_true_loop_candidate_delivery.example.yaml"
 ];
 
 function assert(condition, message) {
@@ -275,6 +282,18 @@ function main() {
   assert(
     allowedUntrackedFiles.includes("tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml"),
     "v5.9 schema example must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("docs/137_v5_10_local_true_loop_candidate_delivery.md"),
+    "v5.10 docs must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("tests/schema_examples/v5_10_local_true_loop_candidate_delivery.example.yaml"),
+    "v5.10 schema example must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("scripts/validate_v5_true_loop_candidate_delivery.js"),
+    "v5.10 validation script must be included in the untracked allowlist."
   );
 
   const result = {

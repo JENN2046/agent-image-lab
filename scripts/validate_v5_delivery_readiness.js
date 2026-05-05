@@ -117,7 +117,8 @@ function main() {
       taskQueue.includes("If user authorizes v5.6 version movement") ||
       taskQueue.includes("If user authorizes v5.7 version movement") ||
       taskQueue.includes("If user authorizes v5.8 version movement") ||
-      taskQueue.includes("If user authorizes v5.9 version movement"));
+      taskQueue.includes("If user authorizes v5.9 version movement") ||
+      taskQueue.includes("If user authorizes v5.10 version movement"));
   const releaseNotesCurrent = releaseNotes.includes("Added v5.0 post-merge delivery readiness index.");
   const recordBoundaryClean = [record, schema].every((content) => {
     return (

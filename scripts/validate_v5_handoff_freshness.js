@@ -2,7 +2,8 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
-const currentPhase = "v5.8 handoff freshness validation";
+const recordPhase = "v5.8 handoff freshness validation";
+const expectedCurrentPhase = "v5.10 local true-loop candidate delivery closeout";
 
 const boardFiles = [
   ".agent_board/BLOCKERS.md",
@@ -30,6 +31,20 @@ function assert(condition, message) {
 
 function includesAll(content, values) {
   return values.every((value) => content.includes(value));
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function extractTextBlock(content, heading) {
+  const pattern = new RegExp(
+    `^## ${escapeRegExp(heading)}\\s*\\r?\\n\\s*\\r?\\n\`\`\`text\\r?\\n([\\s\\S]*?)\\r?\\n\`\`\``,
+    "m"
+  );
+  const match = content.match(pattern);
+  assert(match, `Missing text block for heading: ${heading}`);
+  return match[1].trim();
 }
 
 function main() {
@@ -67,20 +82,25 @@ function main() {
   const record = read("docs/135_v5_8_handoff_freshness_validation.md");
   const schema = read("tests/schema_examples/v5_8_handoff_freshness_validation.example.yaml");
 
+  const runStateCurrentPhase = extractTextBlock(runState, "Current Phase");
+  const runStateCurrentStopStatus = extractTextBlock(runState, "Current Stop Status");
+  const handoffSummary = extractTextBlock(handoff, "Handoff Summary");
+  const handoffValidation = extractTextBlock(handoff, "Validation");
+
   const runStateCurrent =
-    runState.includes(currentPhase) &&
+    runStateCurrentPhase === expectedCurrentPhase &&
     runState.includes("node scripts/validate_v5_handoff_freshness.js: passed") &&
-    runState.includes("not blocked");
+    runStateCurrentStopStatus === "not blocked";
   const handoffCurrent =
-    handoff.includes(currentPhase) &&
-    handoff.includes("Added v5.8 handoff freshness validation") &&
-    handoff.includes("node scripts/validate_v5_handoff_freshness.js: passed");
+    handoffSummary.includes(`${expectedCurrentPhase} is active locally`) &&
+    handoffValidation.includes("node scripts/validate_v5_handoff_freshness.js: passed");
   const taskQueueCurrent =
-    (taskQueue.includes("If user authorizes v5.8 version movement") ||
-      taskQueue.includes("If user authorizes v5.9 version movement")) &&
-    taskQueue.includes("Completed v5.8 handoff freshness validation.");
+    taskQueue.includes("If user authorizes v5.10 version movement") &&
+    taskQueue.includes("Completed v5.8 handoff freshness validation.") &&
+    taskQueue.includes("Completed v5.9 expanded v5 index consistency validation.") &&
+    taskQueue.includes("Completed v5.10 local true-loop candidate delivery closeout.");
   const checkpointCurrent =
-    checkpoint.includes("v5.8 local: handoff freshness validation added") &&
+    checkpoint.includes("v5.10 local: true-loop candidate delivery closeout added") &&
     checkpoint.includes("node scripts/validate_v5_handoff_freshness.js: passed");
   const validationLogCurrent =
     validationLog.includes("VALIDATION-20260506-V5-8") &&
@@ -123,19 +143,19 @@ function main() {
     taskQueue.includes("### blocked") &&
     taskQueue.includes("none");
   const topIndexesUpdated =
-    readme.includes(currentPhase) &&
-    manifest.includes(currentPhase) &&
-    roadmap.includes(currentPhase) &&
+    readme.includes(recordPhase) &&
+    manifest.includes(recordPhase) &&
+    roadmap.includes(recordPhase) &&
     releaseNotes.includes("Added v5.8 handoff freshness validation.");
   const validationSurfaceCurrent =
     checklist.includes("## v5.8 Handoff Freshness Validation 检查") &&
     validateMvp.includes("scripts/validate_v5_handoff_freshness.js") &&
     localCommitScope.includes("docs/135_v5_8_handoff_freshness_validation.md");
 
-  assert(runStateCurrent, "RUN_STATE must reflect v5.8 current phase and validation.");
-  assert(handoffCurrent, "HANDOFF must reflect v5.8 current phase and validation.");
-  assert(taskQueueCurrent, "TASK_QUEUE must reflect v5.8 queue state.");
-  assert(checkpointCurrent, "CHECKPOINT must reflect v5.8 checkpoint state.");
+  assert(runStateCurrent, "RUN_STATE must reflect the actual current phase and validation.");
+  assert(handoffCurrent, "HANDOFF must reflect the actual current phase and validation.");
+  assert(taskQueueCurrent, "TASK_QUEUE must reflect the current v5 queue state.");
+  assert(checkpointCurrent, "CHECKPOINT must reflect the current v5.10 checkpoint state.");
   assert(validationLogCurrent, "VALIDATION_LOG must include v5.8 validation entry.");
   assert(resumePromptPresent, "HANDOFF must preserve exact resume prompt.");
   assert(hardStopGatesPresent, "Agent board must preserve hard stop gates.");
@@ -149,7 +169,9 @@ function main() {
   const result = {
     passed: true,
     handoff_freshness: {
-      current_phase: currentPhase,
+      record_phase: recordPhase,
+      current_phase: expectedCurrentPhase,
+      run_state_current_phase: runStateCurrentPhase,
       agent_board_files_present: true,
       run_state_current: runStateCurrent,
       handoff_current: handoffCurrent,

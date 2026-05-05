@@ -70,6 +70,7 @@ $requiredFiles = @(
   'scripts/validate_v5_index_consistency.js',
   'scripts/validate_v5_local_batch_commit_readiness.js',
   'scripts/validate_v5_handoff_freshness.js',
+  'scripts/validate_v5_true_loop_candidate_delivery.js',
   'scripts/validate_runtime_guard_unit.js',
   'scripts/validate_runtime_prototype_smoke.js',
   'scripts/validate_runtime_prototype_suite.js',
@@ -104,6 +105,7 @@ $requiredFiles = @(
   'docs/134_v5_7_local_batch_commit_readiness.md',
   'docs/135_v5_8_handoff_freshness_validation.md',
   'docs/136_v5_9_expanded_v5_index_consistency.md',
+  'docs/137_v5_10_local_true_loop_candidate_delivery.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
@@ -186,6 +188,7 @@ $requiredFiles = @(
   'tests/schema_examples/v5_7_local_batch_commit_readiness.example.yaml',
   'tests/schema_examples/v5_8_handoff_freshness_validation.example.yaml',
   'tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml',
+  'tests/schema_examples/v5_10_local_true_loop_candidate_delivery.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -1888,6 +1891,7 @@ $forbiddenV46LocalCommitScopeManifestPatterns = @(
 )
 
 $allowedV46ModifiedFiles = @(
+  'AGENTS.md',
   'MANIFEST.md',
   'README.md',
   'RELEASE_NOTES.md',
@@ -1918,6 +1922,7 @@ $allowedV46ModifiedFiles = @(
   'scripts/validate_v5_index_consistency.js',
   'scripts/validate_v5_local_batch_commit_readiness.js',
   'scripts/validate_v5_handoff_freshness.js',
+  'scripts/validate_v5_true_loop_candidate_delivery.js',
   'scripts/validate_runtime_delivery_surface.js',
   'scripts/validate_runtime_prototype_suite.js',
   'scripts/validate_runtime_prototype_smoke.js',
@@ -1936,6 +1941,8 @@ $allowedV46ModifiedFiles = @(
   'docs/135_v5_8_handoff_freshness_validation.md',
   'tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml',
   'docs/136_v5_9_expanded_v5_index_consistency.md',
+  'tests/schema_examples/v5_10_local_true_loop_candidate_delivery.example.yaml',
+  'docs/137_v5_10_local_true_loop_candidate_delivery.md',
   'tests/validation_checklist.md'
 )
 
@@ -1971,6 +1978,7 @@ $allowedV46UntrackedFiles = @(
   'docs/134_v5_7_local_batch_commit_readiness.md',
   'docs/135_v5_8_handoff_freshness_validation.md',
   'docs/136_v5_9_expanded_v5_index_consistency.md',
+  'docs/137_v5_10_local_true_loop_candidate_delivery.md',
   'scripts/validate-agent-image-lab-local.ps1',
   'scripts/validate-agent-image-lab-local.sh',
   'scripts/validate_agent_board_state.js',
@@ -1986,6 +1994,7 @@ $allowedV46UntrackedFiles = @(
   'scripts/validate_v5_index_consistency.js',
   'scripts/validate_v5_local_batch_commit_readiness.js',
   'scripts/validate_v5_handoff_freshness.js',
+  'scripts/validate_v5_true_loop_candidate_delivery.js',
   'scripts/validate_runtime_delivery_surface.js',
   'scripts/validate_runtime_guard_unit.js',
   'scripts/validate_runtime_prototype_suite.js',
@@ -2008,7 +2017,8 @@ $allowedV46UntrackedFiles = @(
   'tests/schema_examples/v5_6_v5_index_consistency_validation.example.yaml',
   'tests/schema_examples/v5_7_local_batch_commit_readiness.example.yaml',
   'tests/schema_examples/v5_8_handoff_freshness_validation.example.yaml',
-  'tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml'
+  'tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml',
+  'tests/schema_examples/v5_10_local_true_loop_candidate_delivery.example.yaml'
 )
 
 foreach ($path in $v46LocalCommitScopeManifestFiles) {
@@ -3135,6 +3145,96 @@ foreach ($path in $v59ExpandedV5IndexConsistencyFiles) {
   }
 }
 
+$v510LocalTrueLoopCandidateDeliveryFiles = @(
+  'docs/137_v5_10_local_true_loop_candidate_delivery.md',
+  'tests/schema_examples/v5_10_local_true_loop_candidate_delivery.example.yaml'
+)
+
+$requiredV510LocalTrueLoopCandidateDeliveryPatterns = @(
+  'status:\s+completed_validated_project_local_v5_10_true_loop_candidate_delivery',
+  'version:\s+v5\.10',
+  'current_phase:\s+"v5\.10 local true-loop candidate delivery closeout"',
+  'validation_file:\s+scripts/validate_v5_true_loop_candidate_delivery\.js',
+  'local_head_short:\s+9ac4ca8',
+  'pending_local_commit_count:\s+5',
+  'true_loop_candidate_ready:\s+true',
+  'local_delivery_complete:\s+true',
+  'closeout_docs_ready:\s+true',
+  'review_finding_fixed:\s+true',
+  'handoff_freshness_current_phase_parsed:\s+true',
+  'formal_release_published:\s+false',
+  'commit_authorized:\s+false',
+  'push_authorized:\s+false',
+  'tag_authorized:\s+false',
+  'pr_authorized:\s+false',
+  'release_authorized:\s+false',
+  'remote_write_performed:\s+false',
+  'external_network_required:\s+false',
+  'external_service_required:\s+false',
+  'file_write_performed:\s+false',
+  'real_vcpchat_source_read:\s+false',
+  'real_vcpchat_modified:\s+false',
+  'real_vcptoolbox_source_read:\s+false',
+  'real_vcptoolbox_modified:\s+false',
+  'real_manifest_read:\s+false',
+  'api_called:\s+false',
+  'vcp_plugin_called:\s+false',
+  'daily_note_called:\s+false',
+  'vcp_memory_written:\s+false',
+  'image_file_created:\s+false',
+  'commit_tag_push_authorized:\s+false'
+)
+
+$forbiddenV510LocalTrueLoopCandidateDeliveryPatterns = @(
+  'true_loop_candidate_ready:\s+false',
+  'local_delivery_complete:\s+false',
+  'closeout_docs_ready:\s+false',
+  'review_finding_fixed:\s+false',
+  'handoff_freshness_current_phase_parsed:\s+false',
+  'formal_release_published:\s+true',
+  'commit_authorized:\s+true',
+  'push_authorized:\s+true',
+  'tag_authorized:\s+true',
+  'pr_authorized:\s+true',
+  'release_authorized:\s+true',
+  'remote_write_performed:\s+true',
+  'external_network_required:\s+true',
+  'external_service_required:\s+true',
+  'file_write_performed:\s+true',
+  'real_vcpchat_source_read:\s+true',
+  'real_vcpchat_modified:\s+true',
+  'real_vcptoolbox_source_read:\s+true',
+  'real_vcptoolbox_modified:\s+true',
+  'real_manifest_read:\s+true',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'vcp_memory_written:\s+true',
+  'image_file_created:\s+true',
+  'commit_tag_push_authorized:\s+true',
+  'https?://'
+)
+
+foreach ($path in $v510LocalTrueLoopCandidateDeliveryFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v5.10 local true-loop candidate delivery file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV510LocalTrueLoopCandidateDeliveryPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v5.10 local true-loop candidate delivery missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV510LocalTrueLoopCandidateDeliveryPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v5.10 local true-loop candidate delivery boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
 $node = Get-Command node -ErrorAction SilentlyContinue
 if (-not $node) {
   Add-Failure "Node.js is required to validate adapter_dry_run_lab"
@@ -3340,6 +3440,11 @@ if (-not $node) {
   & node --check (Join-Path $Root 'scripts/validate_v5_handoff_freshness.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_v5_handoff_freshness.js failed node --check"
+  }
+
+  & node --check (Join-Path $Root 'scripts/validate_v5_true_loop_candidate_delivery.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_v5_true_loop_candidate_delivery.js failed node --check"
   }
 
   & node --check (Join-Path $Root 'scripts/validate_agent_board_state.js') | Out-Null
@@ -3798,8 +3903,8 @@ if (-not $node) {
     if ($v5IndexConsistency.passed -ne $true) {
       Add-Failure "v5.9 expanded v5 index consistency validation must report passed true"
     }
-    if ($v5IndexConsistency.v5_index_consistency.v5_record_count -ne 10) {
-      Add-Failure "v5.9 expanded v5 index consistency must cover 10 v5 records"
+    if ($v5IndexConsistency.v5_index_consistency.v5_record_count -ne 11) {
+      Add-Failure "v5 index consistency must cover 11 v5 records"
     }
     if ($v5IndexConsistency.v5_index_consistency.docs_present -ne $true) {
       Add-Failure "v5.6 v5 index consistency must verify docs"
@@ -3920,8 +4025,14 @@ if (-not $node) {
     if ($v5HandoffFreshness.passed -ne $true) {
       Add-Failure "v5.8 handoff freshness validation must report passed true"
     }
-    if ($v5HandoffFreshness.handoff_freshness.current_phase -ne 'v5.8 handoff freshness validation') {
-      Add-Failure "v5.8 handoff freshness must record current phase"
+    if ($v5HandoffFreshness.handoff_freshness.record_phase -ne 'v5.8 handoff freshness validation') {
+      Add-Failure "v5.8 handoff freshness must record its historical record phase"
+    }
+    if ($v5HandoffFreshness.handoff_freshness.current_phase -ne 'v5.10 local true-loop candidate delivery closeout') {
+      Add-Failure "v5.8 handoff freshness must verify the actual current phase"
+    }
+    if ($v5HandoffFreshness.handoff_freshness.run_state_current_phase -ne 'v5.10 local true-loop candidate delivery closeout') {
+      Add-Failure "v5.8 handoff freshness must parse RUN_STATE current phase"
     }
     if ($v5HandoffFreshness.handoff_freshness.agent_board_files_present -ne $true) {
       Add-Failure "v5.8 handoff freshness must verify agent board files"
@@ -3979,6 +4090,55 @@ if (-not $node) {
     }
     if ($v5HandoffFreshness.handoff_freshness.file_write_performed -ne $false) {
       Add-Failure "v5.8 handoff freshness validation must not write files"
+    }
+  }
+
+  $v5TrueLoopCandidateDeliveryOutput = & node (Join-Path $Root 'scripts/validate_v5_true_loop_candidate_delivery.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v5.10 local true-loop candidate delivery validation exited with failure"
+  } else {
+    $v5TrueLoopCandidateDelivery = ($v5TrueLoopCandidateDeliveryOutput -join "`n") | ConvertFrom-Json
+    if ($v5TrueLoopCandidateDelivery.passed -ne $true) {
+      Add-Failure "v5.10 local true-loop candidate delivery validation must report passed true"
+    }
+    if ($v5TrueLoopCandidateDelivery.local_true_loop_candidate_delivery.current_phase -ne 'v5.10 local true-loop candidate delivery closeout') {
+      Add-Failure "v5.10 local true-loop candidate delivery must record current phase"
+    }
+    if ($v5TrueLoopCandidateDelivery.local_true_loop_candidate_delivery.local_head_short -ne '9ac4ca8') {
+      Add-Failure "v5.10 local true-loop candidate delivery must record local head 9ac4ca8"
+    }
+    if ($v5TrueLoopCandidateDelivery.local_true_loop_candidate_delivery.pending_local_commit_count -ne 5) {
+      Add-Failure "v5.10 local true-loop candidate delivery must record 5 pending local commits"
+    }
+    if ($v5TrueLoopCandidateDelivery.local_true_loop_candidate_delivery.true_loop_candidate_ready -ne $true) {
+      Add-Failure "v5.10 local true-loop candidate delivery must mark true-loop candidate ready"
+    }
+    if ($v5TrueLoopCandidateDelivery.local_true_loop_candidate_delivery.local_delivery_complete -ne $true) {
+      Add-Failure "v5.10 local true-loop candidate delivery must mark local delivery complete"
+    }
+    if ($v5TrueLoopCandidateDelivery.local_true_loop_candidate_delivery.closeout_docs_ready -ne $true) {
+      Add-Failure "v5.10 local true-loop candidate delivery must verify closeout docs"
+    }
+    if ($v5TrueLoopCandidateDelivery.local_true_loop_candidate_delivery.review_finding_fixed -ne $true) {
+      Add-Failure "v5.10 local true-loop candidate delivery must verify review finding fix"
+    }
+    if ($v5TrueLoopCandidateDelivery.local_true_loop_candidate_delivery.indexes_current -ne $true) {
+      Add-Failure "v5.10 local true-loop candidate delivery must verify indexes"
+    }
+    if ($v5TrueLoopCandidateDelivery.local_true_loop_candidate_delivery.agent_board_current -ne $true) {
+      Add-Failure "v5.10 local true-loop candidate delivery must verify agent board"
+    }
+    if ($v5TrueLoopCandidateDelivery.local_true_loop_candidate_delivery.push_authorized -ne $false) {
+      Add-Failure "v5.10 local true-loop candidate delivery must not authorize push"
+    }
+    if ($v5TrueLoopCandidateDelivery.local_true_loop_candidate_delivery.release_authorized -ne $false) {
+      Add-Failure "v5.10 local true-loop candidate delivery must not authorize release"
+    }
+    if ($v5TrueLoopCandidateDelivery.local_true_loop_candidate_delivery.remote_write_performed -ne $false) {
+      Add-Failure "v5.10 local true-loop candidate delivery must not perform remote write"
+    }
+    if ($v5TrueLoopCandidateDelivery.local_true_loop_candidate_delivery.file_write_performed -ne $false) {
+      Add-Failure "v5.10 local true-loop candidate delivery validation must not write files"
     }
   }
 

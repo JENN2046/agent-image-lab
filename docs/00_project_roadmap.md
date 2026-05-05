@@ -18,7 +18,7 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v5.9 expanded v5 index consistency validation
+v1.0 true-loop closeout candidate + v5.10 local true-loop candidate delivery closeout
 ```
 
 已经完成：
@@ -62,6 +62,7 @@ v1.0 true-loop closeout candidate + v5.9 expanded v5 index consistency validatio
 - v5.7 local batch commit-readiness preflight：只读检查当前本地未提交批次的 tracked 修改、新文件、staged 状态和版本动作授权门。
 - v5.8 handoff freshness validation：机器检查 `.agent_board` 续跑材料是否共同指向当前阶段，并保留硬停止门、远端动作授权门和 no-execution 边界。
 - v5.9 expanded v5 index consistency validation：把 v5 index consistency validation 覆盖范围扩展到 v5.0-v5.9。
+- v5.10 local true-loop candidate delivery closeout：收束本地 v1.0 真实闭环候选交付，记录 v5.9 本地提交、审查修复和交付授权边界。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：
@@ -219,9 +220,9 @@ daily_note_called: false
 
 ## 当前优先队列
 
-1. 运行完整校验，确保文档、Adapter、Review Console、agent board 和执行记录均通过。
+1. 运行完整校验，确保文档、Adapter、Review Console、agent board、执行记录和 v5.10 本地交付 closeout 均通过。
 2. 等待用户单独授权任何新的 commit、tag、push 或正式 release 发布。
-3. 如继续本地推进，优先做 Review Console runtime prototype 的本地契约、handoff 和文档收束。
+3. 如继续本地推进，优先做远端动作前的本地 commit/tag/push preflight，仍不触发远端动作。
 4. 后续任何新增真实生图调用都必须重新确认插件、调用次数、输入引用、输出目录和回滚方案。
 
 ## 永久安全门

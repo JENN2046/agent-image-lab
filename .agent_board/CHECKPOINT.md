@@ -48,6 +48,9 @@ v5.8 local: handoff freshness validation added for agent board resume materials
 v5.8 validation: handoff freshness validation is validated locally and awaits explicit git add/commit/push/PR/release authorization
 v5.9 local: expanded v5 index consistency validation added for v5.0-v5.9 docs, schemas, scripts, and board indexes
 v5.9 validation: expanded v5 index consistency validation is validated locally and awaits explicit git add/commit/push/PR/release authorization
+v5.9 local commit: commit 9ac4ca8 records expanded v5 index consistency validation
+v5.10 local: true-loop candidate delivery closeout added for local v1.0 delivery completion
+v5.10 validation: true-loop candidate delivery closeout is validated locally and awaits explicit git add/commit/push/PR/release authorization
 ```
 
 ## Current Boundary
@@ -85,6 +88,7 @@ node scripts/validate_v5_post_commit_reconciliation.js: passed
 node scripts/validate_v5_index_consistency.js: passed
 node scripts/validate_v5_local_batch_commit_readiness.js: passed
 node scripts/validate_v5_handoff_freshness.js: passed
+node scripts/validate_v5_true_loop_candidate_delivery.js: passed
 git diff --check: passed
 ```
 

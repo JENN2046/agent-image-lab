@@ -63,6 +63,12 @@ const v5Records = [
     label: "v5.9 expanded v5 index consistency validation",
     doc: "docs/136_v5_9_expanded_v5_index_consistency.md",
     schema: "tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml"
+  },
+  {
+    id: "v5.10",
+    label: "v5.10 local true-loop candidate delivery closeout",
+    doc: "docs/137_v5_10_local_true_loop_candidate_delivery.md",
+    schema: "tests/schema_examples/v5_10_local_true_loop_candidate_delivery.example.yaml"
   }
 ];
 
@@ -75,7 +81,8 @@ const validationScripts = [
   "scripts/validate_v5_post_commit_reconciliation.js",
   "scripts/validate_v5_index_consistency.js",
   "scripts/validate_v5_local_batch_commit_readiness.js",
-  "scripts/validate_v5_handoff_freshness.js"
+  "scripts/validate_v5_handoff_freshness.js",
+  "scripts/validate_v5_true_loop_candidate_delivery.js"
 ];
 
 function exists(relativePath) {
@@ -144,21 +151,22 @@ function main() {
   const taskQueue = read(".agent_board/TASK_QUEUE.md");
 
   const readmeIndexCurrent =
-    readme.includes("v5.9 expanded v5 index consistency validation") &&
+    readme.includes("v5.10 local true-loop candidate delivery closeout") &&
     includesAll(readme, docs) &&
     includesAllPathVariants(readme, validationScripts);
   const manifestIndexCurrent =
-    manifest.includes("v5.9 expanded v5 index consistency validation") &&
+    manifest.includes("v5.10 local true-loop candidate delivery closeout") &&
     includesAll(manifest, docs) &&
     includesAll(manifest, validationScripts);
   const releaseNotesCurrent =
     releaseNotes.includes("Added v5.8 handoff freshness validation.") &&
-    releaseNotes.includes("Added v5.9 expanded v5 index consistency validation.");
+    releaseNotes.includes("Added v5.9 expanded v5 index consistency validation.") &&
+    releaseNotes.includes("Added v5.10 local true-loop candidate delivery closeout.");
   const roadmapCurrent =
-    roadmap.includes("v5.9 expanded v5 index consistency validation") &&
-    includesAll(roadmap, labels.slice(0, 9));
+    roadmap.includes("v5.10 local true-loop candidate delivery closeout") &&
+    includesAll(roadmap, labels);
   const checklistCurrent =
-    checklist.includes("## v5.9 Expanded V5 Index Consistency Validation 检查") &&
+    checklist.includes("## v5.10 Local True-Loop Candidate Delivery Closeout 检查") &&
     checklist.includes("validate_v5_index_consistency.js");
   const validateMvpCurrent =
     includesAll(validateMvp, docs) &&
@@ -168,13 +176,16 @@ function main() {
     includesAll(localCommitScope, [
       "docs/136_v5_9_expanded_v5_index_consistency.md",
       "tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml",
+      "docs/137_v5_10_local_true_loop_candidate_delivery.md",
+      "tests/schema_examples/v5_10_local_true_loop_candidate_delivery.example.yaml",
+      "scripts/validate_v5_true_loop_candidate_delivery.js",
       "scripts/validate_v5_index_consistency.js"
     ]);
   const agentBoardCurrent =
-    runState.includes("v5.9 expanded v5 index consistency validation") &&
-    handoff.includes("v5.9 expanded v5 index consistency validation") &&
+    runState.includes("v5.10 local true-loop candidate delivery closeout") &&
+    handoff.includes("v5.10 local true-loop candidate delivery closeout") &&
     validationLog.includes("node scripts/validate_v5_index_consistency.js") &&
-    taskQueue.includes("Completed v5.9 expanded v5 index consistency validation.");
+    taskQueue.includes("Completed v5.10 local true-loop candidate delivery closeout.");
   const remoteGatePreserved =
     runState.includes("Remote action in current batch: none") &&
     runState.includes("Commit/tag/push authorization: not active") &&
@@ -182,13 +193,13 @@ function main() {
 
   assert(readmeIndexCurrent, "README v5 index is not current.");
   assert(manifestIndexCurrent, "MANIFEST v5 index is not current.");
-  assert(releaseNotesCurrent, "RELEASE_NOTES v5.9 entry is missing.");
-  assert(roadmapCurrent, "Roadmap v5.9 entry is missing.");
-  assert(checklistCurrent, "Validation checklist v5.9 section is missing.");
+  assert(releaseNotesCurrent, "RELEASE_NOTES v5.10 entry is missing.");
+  assert(roadmapCurrent, "Roadmap v5.10 entry is missing.");
+  assert(checklistCurrent, "Validation checklist v5.10 section is missing.");
   assert(validateMvpCurrent, "validate_mvp.ps1 v5 index is not current.");
-  assert(localCommitScopeCurrent, "local commit scope v5.9 allowlist is not current.");
-  assert(agentBoardCurrent, "Agent board v5.9 state is not current.");
-  assert(remoteGatePreserved, "v5.9 must preserve remote action gate.");
+  assert(localCommitScopeCurrent, "local commit scope v5.10 allowlist is not current.");
+  assert(agentBoardCurrent, "Agent board v5.10 state is not current.");
+  assert(remoteGatePreserved, "v5.10 must preserve remote action gate.");
 
   const result = {
     passed: true,
