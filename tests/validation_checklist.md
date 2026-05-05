@@ -1817,3 +1817,16 @@
 - [ ] `validate_mvp.ps1` 执行 v4 index consistency validation 并检查输出字段。
 - [ ] v4.8 不执行新的 `git add`、commit、tag、push 或 release。
 - [ ] v4.8 不读真实 VCPChat、不改真实 VCPChat、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v4.9 Local Tag Push-Readiness Preflight 检查
+
+- [ ] `scripts/validate_local_tag_push_readiness.js` 存在。
+- [ ] `docs/126_v4_9_local_tag_push_readiness.md` 存在。
+- [ ] `tests/schema_examples/v4_9_local_tag_push_readiness.example.yaml` 存在。
+- [ ] local tag push-readiness 记录本地 commit `6d4253f`。
+- [ ] local tag push-readiness 记录本地 tag `v4.8-local-validation-checkpoint`。
+- [ ] local tag push-readiness 保留 last pushed commit `7f58408` 和 tag `v4.6-guarded-autopilot-commit-scope`。
+- [ ] local tag push-readiness 明确 push 仍需单独授权。
+- [ ] `validate_mvp.ps1` 执行 local tag push-readiness validation 并检查输出字段。
+- [ ] v4.9 不执行新的 `git add`、commit、tag、push 或 release。
+- [ ] v4.9 不读真实 VCPChat、不改真实 VCPChat、不调用插件、API、DailyNote 或 VCP 记忆。

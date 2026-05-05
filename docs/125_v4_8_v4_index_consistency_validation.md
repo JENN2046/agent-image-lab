@@ -1,6 +1,6 @@
 # 125 v4.8 V4 Index Consistency Validation
 
-本文记录 v4.8 项目内 v4 index consistency validation。该阶段只新增一个本地只读索引一致性校验入口，用于确认 v4.0-v4.8 阶段文档、schema 示例、验证脚本、README、MANIFEST、roadmap、validation checklist、release notes 和 `.agent_board` 的索引状态一致。它不执行 commit、tag、push 或 release，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote、VCP 记忆或外部服务。
+本文记录 v4.8 项目内 v4 index consistency validation。该阶段新增一个本地只读索引一致性校验入口；当前校验范围已随 v4.9 扩展到 v4.0-v4.9 阶段文档、schema 示例、验证脚本、README、MANIFEST、roadmap、validation checklist、release notes 和 `.agent_board` 的索引状态一致。它不执行 commit、tag、push 或 release，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote、VCP 记忆或外部服务。
 
 ## V4 Index Status
 
@@ -8,7 +8,7 @@
 v4_8_v4_index_consistency_validation:
   status: completed_validated_project_local_v4_index_consistency_validation
   v4_index_consistency_validation_added: true
-  v4_record_count: 9
+  v4_record_count: 10
   docs_present: true
   schema_examples_present: true
   validation_scripts_present: true
@@ -50,6 +50,7 @@ manifest_scope:
     - v4.6 local commit scope manifest
     - v4.7 post-push state reconciliation
     - v4.8 v4 index consistency validation
+    - v4.9 local tag push-readiness preflight
   external_network_required: false
   external_service_required: false
   file_write_performed: false

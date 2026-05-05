@@ -18,7 +18,7 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v4.8 v4 index consistency validation
+v1.0 true-loop closeout candidate + v4.9 local tag push-readiness preflight
 ```
 
 已经完成：
@@ -51,6 +51,7 @@ v1.0 true-loop closeout candidate + v4.8 v4 index consistency validation
 - v4.6 local commit scope manifest：机器检查 v4.0-v4.6 本地 changed-file allowlist、staging 状态和 commit/tag/push 门。
 - v4.7 post-push state reconciliation：记录 v4.6 pushed baseline，并校正 `.agent_board` 续跑状态。
 - v4.8 v4 index consistency validation：机器检查 v4.x 阶段索引一致性，覆盖 README、MANIFEST、roadmap、checklist、release notes、schema、脚本和 `.agent_board`。
+- v4.9 local tag push-readiness preflight：记录本地 v4.8 commit/tag 已就位，远端 push 仍需单独授权。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：

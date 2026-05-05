@@ -48,6 +48,11 @@ const v4Records = [
     id: "v4.8",
     doc: "docs/125_v4_8_v4_index_consistency_validation.md",
     schema: "tests/schema_examples/v4_8_v4_index_consistency_validation.example.yaml"
+  },
+  {
+    id: "v4.9",
+    doc: "docs/126_v4_9_local_tag_push_readiness.md",
+    schema: "tests/schema_examples/v4_9_local_tag_push_readiness.example.yaml"
   }
 ];
 
@@ -59,7 +64,8 @@ const validationScripts = [
   "scripts/validate_local_checkpoint_manifest.js",
   "scripts/validate_local_commit_scope.js",
   "scripts/validate_post_push_state.js",
-  "scripts/validate_v4_index_consistency.js"
+  "scripts/validate_v4_index_consistency.js",
+  "scripts/validate_local_tag_push_readiness.js"
 ];
 
 function exists(relativePath) {
@@ -125,16 +131,18 @@ function main() {
   const validationLog = read(".agent_board/VALIDATION_LOG.md");
 
   const readmeIndexCurrent =
-    readme.includes("v4.8 v4 index consistency validation") &&
+    readme.includes("v4.9 local tag push-readiness preflight") &&
     includesAll(readme, docs) &&
     includesAllPathVariants(readme, validationScripts);
   const manifestIndexCurrent =
-    manifest.includes("v4.3-v4.8") &&
+    manifest.includes("v4.3-v4.9") &&
     includesAll(manifest, docs.slice(1)) &&
     includesAll(manifest, validationScripts.slice(3));
-  const releaseNotesCurrent = releaseNotes.includes("Added v4.8 v4 index consistency validation.");
+  const releaseNotesCurrent =
+    releaseNotes.includes("Added v4.8 v4 index consistency validation.") &&
+    releaseNotes.includes("Added v4.9 local tag push-readiness preflight.");
   const roadmapCurrent =
-    roadmap.includes("v4.8 v4 index consistency validation") &&
+    roadmap.includes("v4.9 local tag push-readiness preflight") &&
     roadmap.includes("v4.x 阶段索引一致性");
   const checklistCurrent =
     checklist.includes("## v4.8 V4 Index Consistency Validation 检查") &&
@@ -144,17 +152,18 @@ function main() {
     includesAll(validateMvp, schemas) &&
     includesAll(validateMvp, validationScripts);
   const agentBoardCurrent =
-    runState.includes("v4.8 v4 index consistency validation") &&
-    handoff.includes("v4.8 v4 index consistency validation") &&
-    validationLog.includes("node scripts/validate_v4_index_consistency.js");
+    runState.includes("v4.9 local tag push-readiness preflight") &&
+    handoff.includes("v4.9 local tag push-readiness preflight") &&
+    validationLog.includes("node scripts/validate_v4_index_consistency.js") &&
+    validationLog.includes("node scripts/validate_local_tag_push_readiness.js");
 
   assert(readmeIndexCurrent, "README v4 index is not current.");
   assert(manifestIndexCurrent, "MANIFEST v4 index is not current.");
-  assert(releaseNotesCurrent, "RELEASE_NOTES v4.8 entry is missing.");
-  assert(roadmapCurrent, "Roadmap v4.8 entry is missing.");
-  assert(checklistCurrent, "Validation checklist v4.8 section is missing.");
+  assert(releaseNotesCurrent, "RELEASE_NOTES v4.9 entry is missing.");
+  assert(roadmapCurrent, "Roadmap v4.9 entry is missing.");
+  assert(checklistCurrent, "Validation checklist v4.9 section is missing.");
   assert(validateMvpCurrent, "validate_mvp.ps1 v4 index is not current.");
-  assert(agentBoardCurrent, "Agent board v4.8 state is not current.");
+  assert(agentBoardCurrent, "Agent board v4.9 state is not current.");
 
   const result = {
     passed: true,

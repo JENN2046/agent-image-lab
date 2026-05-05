@@ -57,6 +57,7 @@ $requiredFiles = @(
   'scripts/validate_local_commit_scope.js',
   'scripts/validate_post_push_state.js',
   'scripts/validate_v4_index_consistency.js',
+  'scripts/validate_local_tag_push_readiness.js',
   'scripts/validate_runtime_guard_unit.js',
   'scripts/validate_runtime_prototype_smoke.js',
   'scripts/validate_runtime_prototype_suite.js',
@@ -80,7 +81,7 @@ $requiredFiles = @(
   'docs/123_v4_6_local_commit_scope_manifest.md',
   'docs/124_v4_7_post_push_state_reconciliation.md',
   'docs/125_v4_8_v4_index_consistency_validation.md',
-  'docs/125_v4_8_v4_index_consistency_validation.md',
+  'docs/126_v4_9_local_tag_push_readiness.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
@@ -152,6 +153,7 @@ $requiredFiles = @(
   'tests/schema_examples/v4_6_local_commit_scope_manifest.example.yaml',
   'tests/schema_examples/v4_7_post_push_state_reconciliation.example.yaml',
   'tests/schema_examples/v4_8_v4_index_consistency_validation.example.yaml',
+  'tests/schema_examples/v4_9_local_tag_push_readiness.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -1865,10 +1867,13 @@ $allowedV46ModifiedFiles = @(
   '.agent_board/TASK_QUEUE.md',
   '.agent_board/VALIDATION_LOG.md',
   'docs/00_project_roadmap.md',
+  'docs/125_v4_8_v4_index_consistency_validation.md',
   'review_console/runtime_prototype/README.md',
   'scripts/validate_local_commit_scope.js',
   'scripts/validate_mvp.ps1',
+  'scripts/validate_v4_index_consistency.js',
   'scripts/validate_runtime_prototype_smoke.js',
+  'tests/schema_examples/v4_8_v4_index_consistency_validation.example.yaml',
   'tests/validation_checklist.md'
 )
 
@@ -1893,12 +1898,14 @@ $allowedV46UntrackedFiles = @(
   'docs/123_v4_6_local_commit_scope_manifest.md',
   'docs/124_v4_7_post_push_state_reconciliation.md',
   'docs/125_v4_8_v4_index_consistency_validation.md',
+  'docs/126_v4_9_local_tag_push_readiness.md',
   'scripts/validate-agent-image-lab-local.ps1',
   'scripts/validate-agent-image-lab-local.sh',
   'scripts/validate_agent_board_state.js',
   'scripts/validate_local_checkpoint_manifest.js',
   'scripts/validate_post_push_state.js',
   'scripts/validate_v4_index_consistency.js',
+  'scripts/validate_local_tag_push_readiness.js',
   'scripts/validate_runtime_guard_unit.js',
   'scripts/validate_runtime_prototype_suite.js',
   'tests/schema_examples/v4_0_runtime_contract_smoke_hardening.example.yaml',
@@ -1909,7 +1916,8 @@ $allowedV46UntrackedFiles = @(
   'tests/schema_examples/v4_5_local_checkpoint_readiness.example.yaml',
   'tests/schema_examples/v4_6_local_commit_scope_manifest.example.yaml',
   'tests/schema_examples/v4_7_post_push_state_reconciliation.example.yaml',
-  'tests/schema_examples/v4_8_v4_index_consistency_validation.example.yaml'
+  'tests/schema_examples/v4_8_v4_index_consistency_validation.example.yaml',
+  'tests/schema_examples/v4_9_local_tag_push_readiness.example.yaml'
 )
 
 foreach ($path in $v46LocalCommitScopeManifestFiles) {
@@ -2008,7 +2016,7 @@ $v48V4IndexConsistencyValidationFiles = @(
 $requiredV48V4IndexConsistencyValidationPatterns = @(
   'status:\s+completed_validated_project_local_v4_index_consistency_validation',
   'v4_index_consistency_validation_added:\s+true',
-  'v4_record_count:\s+9',
+  'v4_record_count:\s+10',
   'docs_present:\s+true',
   'schema_examples_present:\s+true',
   'validation_scripts_present:\s+true',
@@ -2068,6 +2076,79 @@ foreach ($path in $v48V4IndexConsistencyValidationFiles) {
   foreach ($pattern in $forbiddenV48V4IndexConsistencyValidationPatterns) {
     if ($content -match $pattern) {
       Add-Failure "v4.8 v4 index consistency validation boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
+$v49LocalTagPushReadinessFiles = @(
+  'docs/126_v4_9_local_tag_push_readiness.md',
+  'tests/schema_examples/v4_9_local_tag_push_readiness.example.yaml'
+)
+
+$requiredV49LocalTagPushReadinessPatterns = @(
+  'status:\s+completed_validated_project_local_tag_push_readiness',
+  'local_tag_push_readiness_added:\s+true',
+  'local_commit_short:\s+6d4253f',
+  'local_tag:\s+v4\.8-local-validation-checkpoint',
+  'last_pushed_commit_short:\s+7f58408',
+  'last_pushed_tag:\s+v4\.6-guarded-autopilot-commit-scope',
+  'local_tag_recorded:\s+true',
+  'last_pushed_baseline_recorded:\s+true',
+  'push_pending_declared:\s+true',
+  'push_authorized:\s+false',
+  'remote_gate_preserved:\s+true',
+  'validation_snapshot_updated:\s+true',
+  'top_indexes_updated:\s+true',
+  'external_network_required:\s+false',
+  'external_service_required:\s+false',
+  'file_write_performed:\s+false',
+  'real_vcpchat_source_read:\s+false',
+  'real_vcpchat_modified:\s+false',
+  'real_vcptoolbox_source_read:\s+false',
+  'real_vcptoolbox_modified:\s+false',
+  'api_called:\s+false',
+  'vcp_plugin_called:\s+false',
+  'daily_note_called:\s+false',
+  'vcp_memory_written:\s+false',
+  'image_file_created:\s+false',
+  'node_local_tag_push_readiness:\s+passed',
+  'commit_tag_push_authorized:\s+false'
+)
+
+$forbiddenV49LocalTagPushReadinessPatterns = @(
+  'external_network_required:\s+true',
+  'external_service_required:\s+true',
+  'file_write_performed:\s+true',
+  'real_vcpchat_source_read:\s+true',
+  'real_vcpchat_modified:\s+true',
+  'real_vcptoolbox_source_read:\s+true',
+  'real_vcptoolbox_modified:\s+true',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'vcp_memory_written:\s+true',
+  'image_file_created:\s+true',
+  'push_authorized:\s+true',
+  'commit_tag_push_authorized:\s+true',
+  'https?://'
+)
+
+foreach ($path in $v49LocalTagPushReadinessFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v4.9 local tag push-readiness file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV49LocalTagPushReadinessPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v4.9 local tag push-readiness missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV49LocalTagPushReadinessPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v4.9 local tag push-readiness boundary violation in ${path}: $pattern"
     }
   }
 }
@@ -2264,6 +2345,11 @@ if (-not $node) {
     Add-Failure "scripts/validate_v4_index_consistency.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'scripts/validate_local_tag_push_readiness.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_local_tag_push_readiness.js failed node --check"
+  }
+
   $agentBoardStateOutput = & node (Join-Path $Root 'scripts/validate_agent_board_state.js')
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "agent board state validation exited with failure"
@@ -2405,8 +2491,8 @@ if (-not $node) {
     if ($v4Index.passed -ne $true) {
       Add-Failure "v4 index consistency validation must report passed true"
     }
-    if ($v4Index.v4_index_consistency.v4_record_count -ne 9) {
-      Add-Failure "v4 index consistency validation must cover 9 v4 records"
+    if ($v4Index.v4_index_consistency.v4_record_count -ne 10) {
+      Add-Failure "v4 index consistency validation must cover 10 v4 records"
     }
     if ($v4Index.v4_index_consistency.docs_present -ne $true) {
       Add-Failure "v4 index consistency validation must verify docs"
@@ -2434,6 +2520,40 @@ if (-not $node) {
     }
   }
 
+  $localTagPushReadinessOutput = & node (Join-Path $Root 'scripts/validate_local_tag_push_readiness.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "local tag push-readiness validation exited with failure"
+  } else {
+    $localTagPushReadiness = ($localTagPushReadinessOutput -join "`n") | ConvertFrom-Json
+    if ($localTagPushReadiness.passed -ne $true) {
+      Add-Failure "local tag push-readiness validation must report passed true"
+    }
+    if ($localTagPushReadiness.local_tag_push_readiness.local_commit_short -ne '6d4253f') {
+      Add-Failure "local tag push-readiness must record local commit 6d4253f"
+    }
+    if ($localTagPushReadiness.local_tag_push_readiness.local_tag -ne 'v4.8-local-validation-checkpoint') {
+      Add-Failure "local tag push-readiness must record v4.8 local tag"
+    }
+    if ($localTagPushReadiness.local_tag_push_readiness.last_pushed_commit_short -ne '7f58408') {
+      Add-Failure "local tag push-readiness must record last pushed commit 7f58408"
+    }
+    if ($localTagPushReadiness.local_tag_push_readiness.last_pushed_tag -ne 'v4.6-guarded-autopilot-commit-scope') {
+      Add-Failure "local tag push-readiness must record v4.6 pushed tag"
+    }
+    if ($localTagPushReadiness.local_tag_push_readiness.push_pending_declared -ne $true) {
+      Add-Failure "local tag push-readiness must declare push pending"
+    }
+    if ($localTagPushReadiness.local_tag_push_readiness.push_authorized -ne $false) {
+      Add-Failure "local tag push-readiness must not authorize push"
+    }
+    if ($localTagPushReadiness.local_tag_push_readiness.remote_gate_preserved -ne $true) {
+      Add-Failure "local tag push-readiness must preserve remote gate"
+    }
+    if ($localTagPushReadiness.local_tag_push_readiness.file_write_performed -ne $false) {
+      Add-Failure "local tag push-readiness validation must not write files"
+    }
+  }
+
   $git = Get-Command git -ErrorAction SilentlyContinue
   if (-not $git) {
     Add-Failure "git is required to validate local commit scope against current worktree"
@@ -2443,6 +2563,13 @@ if (-not $node) {
       Add-Failure "git branch --show-current failed during local commit scope validation"
     } elseif ($currentBranch -ne 'master') {
       Add-Failure "local commit scope expected branch master, got $currentBranch"
+    }
+
+    $localTagCommit = ((& git rev-parse --short v4.8-local-validation-checkpoint) -join "`n").Trim()
+    if ($LASTEXITCODE -ne 0) {
+      Add-Failure "git rev-parse --short v4.8-local-validation-checkpoint failed during local tag readiness validation"
+    } elseif ($localTagCommit -ne '6d4253f') {
+      Add-Failure "local tag v4.8-local-validation-checkpoint expected commit 6d4253f, got $localTagCommit"
     }
 
     $actualModifiedFiles = @(& git diff --name-only | Where-Object { $_.Trim() -ne '' } | ForEach-Object { $_.Trim() })
