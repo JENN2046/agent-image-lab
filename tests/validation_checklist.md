@@ -651,3 +651,22 @@
 - [ ] v2.1 样例不包含 key、token、cookie、密码、私密路径、客户隐私、endpoint 原文、raw manifest、raw 插件输出或图片二进制。
 - [ ] v2.1 样例中的审计摘要、记忆正文和授权说明为中文脱敏内容。
 - [ ] 进入真实 VCPChat 源码读取、真实 VCPChat 修改或真实 IPC handler 创建前必须另行授权。
+
+## v2.1 VCPChat Source Read Authorization Gate 检查
+
+- [ ] `docs/81_v2_1_vcpchat_source_read_authorization.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_source_read_authorization_gate.md` 存在。
+- [ ] `tests/schema_examples/v2_1_vcpchat_source_read_authorization.example.yaml` 存在。
+- [ ] v2.1 source read authorization 只定义真实 VCPChat 源码读取前授权门槛，不读取真实源码。
+- [ ] v2.1 source read authorization 不修改真实 VCPChat 或 VCPToolBox。
+- [ ] v2.1 source read authorization 不创建真实 IPC handler、preload 执行代码或执行入口。
+- [ ] 授权样例保持 `authorization_required=true`、`user_authorized=false`、`authorization_status=pending`。
+- [ ] 授权样例保持 `source_read_performed=false`、`real_vcpchat_source_read=false`、`real_vcpchat_modified=false`。
+- [ ] 授权样例保持 `real_vcptoolbox_source_read=false`、`real_vcptoolbox_modified=false`。
+- [ ] 授权样例保持 `allowed_source_files=[]`、`allowed_extract_fields=[]`、`raw_source_copy_allowed=false`。
+- [ ] 授权样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`real_execution_allowed=false`。
+- [ ] 授权样例不包含真实 VCPChat 本地路径、真实源码片段、endpoint 原文、环境变量值、secret、token、cookie、密码或客户隐私。
+- [ ] 授权样例只允许未来中文脱敏摘要字段，不允许 raw source、raw runtime log、raw IPC payload、raw manifest 或 raw plugin output。
+- [ ] `allowed_source_files=[]` 时，任何真实 VCPChat 源码读取都必须保持 forbidden。
+- [ ] `user_authorized=true` 也不得自动授权真实 VCPChat 修改、真实 IPC handler 创建、插件执行、API 调用或 DailyNote 写入。
+- [ ] 审计摘要、拒绝原因、memory_delta 草案正文必须为中文脱敏内容。

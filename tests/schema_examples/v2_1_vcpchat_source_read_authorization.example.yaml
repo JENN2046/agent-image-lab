@@ -1,0 +1,133 @@
+phase: v2.1_vcpchat_source_read_authorization
+record_id: v2-1-vcpchat-source-read-authorization-001
+project: Agent Image Lab
+status: authorization_gate_only
+
+authorization_request:
+  authorization_request_id: v2-1-source-read-auth-placeholder-001
+  requested_phase: v2.1_source_read_preflight
+  target_repository_ref: future_vcpchat_repository_placeholder
+  target_source_ref: future_review_console_embed_scope_placeholder
+  authorization_required: true
+  user_authorized: false
+  authorization_status: pending
+  requested_by: ImageLab_Master
+  reviewer_required: true
+  approved_by: null
+  approved_at: null
+
+source_scope_gate:
+  source_read_performed: false
+  real_vcpchat_source_read: false
+  real_vcpchat_modified: false
+  real_vcptoolbox_source_read: false
+  real_vcptoolbox_modified: false
+  external_repo_access_allowed: false
+  allowed_source_files: []
+  forbidden_source_files:
+    - config_files
+    - env_files
+    - credential_files
+    - runtime_logs
+    - customer_private_records
+    - binary_assets
+  allowed_file_types: []
+  exact_real_paths_allowed_in_this_phase: false
+  sensitive_path_redaction_required: true
+  raw_source_copy_allowed: false
+
+extract_policy:
+  allowed_extract_fields: []
+  future_allowed_extract_field_candidates:
+    - sanitized_module_purpose_cn
+    - sanitized_window_lifecycle_summary_cn
+    - sanitized_ipc_channel_summary_cn
+    - sanitized_preload_boundary_summary_cn
+    - sanitized_security_risk_notes_cn
+    - sanitized_review_console_integration_notes_cn
+  forbidden_extract_fields:
+    - api_key
+    - token
+    - cookie
+    - password
+    - private_path
+    - customer_private_data
+    - endpoint_raw_value
+    - raw_source_code
+    - raw_runtime_log
+    - raw_ipc_payload
+    - raw_manifest
+    - raw_plugin_output
+    - image_binary
+
+safety_gate:
+  contains_api_key: false
+  contains_token: false
+  contains_cookie: false
+  contains_password: false
+  contains_private_path: false
+  contains_customer_private_data: false
+  contains_endpoint_raw_value: false
+  contains_raw_source_code: false
+  contains_raw_runtime_log: false
+  contains_raw_ipc_payload: false
+  contains_image_binary: false
+  sensitive_summary_cn: "本授权样例只记录未来源码读取前的门槛，不包含真实路径、源码原文或敏感信息。"
+
+approval_chain:
+  review_console_required: true
+  gatekeeper_required: true
+  imagelab_master_required: true
+  archivist_required_for_memory: true
+  approval_status: pending
+  approved_by: null
+  approved_at: null
+  rejection_reason_cn: null
+
+no_execution_guard:
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  execution_entry_created: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  file_write_performed: false
+  disk_write_performed: false
+  image_file_created: false
+  selected_plugin: null
+  max_plugin_calls: 0
+  real_manifest_read: false
+  real_execution_allowed: false
+
+memory_delta_draft:
+  write_mode: audit_only
+  approval_status: not_required
+  chinese_audit_summary_cn: "真实 VCPChat 源码尚未授权读取，本记录只保留授权门槛审计摘要。"
+  preserved_original_allowed: false
+  final_decision:
+    should_write_to_vcp: false
+
+next_state_rules:
+  current_state: pending_source_read_authorization
+  next_allowed_state: pending_source_read_scope_review
+  blocked_states:
+    - source_read_performed
+    - vcpchat_modified
+    - ipc_handler_created
+    - preload_runtime_code_created
+    - real_execution_ready
+
+audit_summary_cn: "v2.1 Patch 02 只补齐真实 VCPChat 源码读取前授权门槛，未读取真实源码，未修改外部仓库，未创建执行能力。"
+
+acceptance_assertions:
+  - "user_authorized=false。"
+  - "source_read_performed=false。"
+  - "real_vcpchat_source_read=false。"
+  - "real_vcpchat_modified=false。"
+  - "allowed_source_files=[]。"
+  - "allowed_extract_fields=[]。"
+  - "raw_source_copy_allowed=false。"
+  - "api_called=false。"
+  - "vcp_plugin_called=false。"
+  - "daily_note_called=false。"
+  - "real_execution_allowed=false。"
