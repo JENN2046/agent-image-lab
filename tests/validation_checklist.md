@@ -1599,3 +1599,44 @@
 - [ ] 样例保持 `selected_plugin=null`、`max_plugin_calls=0`、`real_manifest_read=false`。
 - [ ] 样例不包含真实本地路径、真实读取命令、shell 命令文本、真实源码片段、完整函数体、endpoint 原文、环境变量值、secret、token、cookie、密码、客户隐私、raw runtime log、raw IPC payload、raw plugin output 或图片二进制。
 - [ ] first runtime patch execution plan 完成也只允许进入下一独立 closeout 或 v3.5 first runtime patch final preflight，不得自动触发实现、DailyNote、VCP 记忆或资产写入。
+
+## v3.5 First Runtime Patch Final Preflight 检查
+
+- [ ] `docs/112_v3_5_first_runtime_patch_final_preflight.md` 存在。
+- [ ] `review_console/embed_contract/first_runtime_patch_final_preflight.md` 存在。
+- [ ] `tests/schema_examples/v3_5_first_runtime_patch_final_preflight.example.yaml` 存在。
+- [ ] first runtime patch final preflight 只定义第一次 runtime patch 的最终检查模板，不读取真实 VCPChat 源码。
+- [ ] first runtime patch final preflight 不读取真实 VCPToolBox。
+- [ ] first runtime patch final preflight 不保存真实根目录、真实 allowlist 路径、真实读取命令或 raw source。
+- [ ] first runtime patch final preflight 不填真实路径，不填真实文件名。
+- [ ] first runtime patch final preflight 不保存 raw evidence、raw runtime log、raw IPC payload 或 raw plugin output。
+- [ ] first runtime patch final preflight 不修改真实 VCPChat 或 VCPToolBox。
+- [ ] first runtime patch final preflight 不创建真实 IPC handler、preload、renderer runtime、Adapter 执行入口或其他执行代码。
+- [ ] first runtime patch final preflight 不调用插件、API、DailyNote、VCP 记忆或文件系统写入。
+- [ ] 样例保持 `execution_plan_approved=false`、`implementation_authorization_granted=false`。
+- [ ] 样例保持 `code_patch_execution_authorized=false`、`implementation_code_creation_authorized=false`。
+- [ ] 样例保持 `final_preflight_required=true`、`final_preflight_requested=false`。
+- [ ] 样例保持 `final_preflight_completed=false`、`final_preflight_passed=false`。
+- [ ] 样例保持 `final_preflight_rejected=false`、`final_preflight_rejection_reason_cn=null`。
+- [ ] 样例保持 `authorized_task_id=null`、`patch_objective_cn=null`。
+- [ ] 样例保持 `final_preflight_owner=null`、`final_preflight_reviewed_by=null`、`final_preflight_reviewed_at=null`。
+- [ ] 样例保持 `rollback_plan_ref=null`、`validation_plan_ref=null`、`stop_conditions_ref=null`。
+- [ ] 样例保持 `allowed_modify_files=[]`、`allowed_create_files=[]`、`forbidden_modify_files=[]`、`forbidden_create_files=[]`。
+- [ ] 样例保持 `allowed_ipc_channels=[]`、`allowed_preload_api_names=[]`、`allowed_renderer_entry_points=[]`。
+- [ ] 样例保持 `planned_commands=[]`、`planned_validation_commands=[]`、`rollback_commands=[]`。
+- [ ] 样例保持 `file_scope_attached=false`、`ipc_scope_attached=false`、`preload_scope_attached=false`、`renderer_scope_attached=false`。
+- [ ] 样例保持 `rollback_plan_attached=false`、`validation_plan_attached=false`、`electron_boundary_attached=false`、`stop_conditions_attached=false`。
+- [ ] 样例保持 `electron_boundary_confirmed=false`。
+- [ ] 样例保持 `ipc_handler_creation_authorized=false`、`preload_runtime_creation_authorized=false`、`renderer_runtime_creation_authorized=false`。
+- [ ] 样例保持 `real_vcpchat_source_read_authorized=false`、`real_vcpchat_modification_authorized=false`。
+- [ ] 样例保持 `final_preflight_is_code_written=false`、`final_preflight_extends_to_unlisted_files=false`、`final_preflight_extends_to_later_patches=false`。
+- [ ] 样例保持 `final_preflight_allows_scope_expansion_by_continue=false`。
+- [ ] 样例保持 `final_preflight_calls_plugins=false`、`final_preflight_writes_daily_note=false`、`final_preflight_writes_vcp_memory=false`。
+- [ ] 样例保持 `real_vcpchat_source_read=false`、`real_vcpchat_modified=false`。
+- [ ] 样例保持 `real_vcptoolbox_source_read=false`、`real_vcptoolbox_modified=false`。
+- [ ] 样例保持 `implementation_code_created=false`、`ipc_handler_created=false`、`preload_runtime_code_created=false`、`renderer_runtime_code_created=false`、`execution_entry_created=false`。
+- [ ] 样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`real_execution_allowed=false`。
+- [ ] 样例保持 `image_file_created=false`、`file_write_performed=false`、`disk_write_performed=false`。
+- [ ] 样例保持 `selected_plugin=null`、`max_plugin_calls=0`、`real_manifest_read=false`。
+- [ ] 样例不包含真实本地路径、真实读取命令、shell 命令文本、真实源码片段、完整函数体、endpoint 原文、环境变量值、secret、token、cookie、密码、客户隐私、raw runtime log、raw IPC payload、raw plugin output 或图片二进制。
+- [ ] first runtime patch final preflight 完成也只允许进入下一独立 closeout 或 v3.6 first runtime code patch authorization，不得自动触发实现、DailyNote、VCP 记忆或资产写入。
