@@ -1155,3 +1155,31 @@
 - [ ] 样例保持 `implementation_code_created=false`、`ipc_handler_created=false`、`preload_runtime_code_created=false`、`renderer_runtime_code_created=false`、`execution_entry_created=false`。
 - [ ] 样例不包含真实本地路径、真实读取命令、shell 命令文本、真实源码片段、完整函数体、endpoint 原文、环境变量值、secret、token、cookie、密码、客户隐私、raw runtime log、raw IPC payload、raw plugin output 或图片二进制。
 - [ ] post-read 脱敏链完成也只允许进入下一独立脱敏证据人工复核门，不得自动触发实现、DailyNote、VCP 记忆或资产写入。
+
+## v2.5 Sanitized Evidence Review Gate 检查
+
+- [ ] `docs/99_v2_5_sanitized_evidence_review_gate.md` 存在。
+- [ ] `review_console/embed_contract/sanitized_evidence_review_gate.md` 存在。
+- [ ] `tests/schema_examples/v2_5_sanitized_evidence_review_gate.example.yaml` 存在。
+- [ ] sanitized evidence review gate 只定义脱敏证据人工复核门，不读取真实 VCPChat 源码。
+- [ ] sanitized evidence review gate 不读取真实 VCPToolBox。
+- [ ] sanitized evidence review gate 不保存真实 VCPChat 根目录、真实 allowlist 路径、真实读取命令或 raw source。
+- [ ] sanitized evidence review gate 不保存 raw evidence、raw runtime log、raw IPC payload 或 raw plugin output。
+- [ ] sanitized evidence review gate 不修改真实 VCPChat 或 VCPToolBox。
+- [ ] sanitized evidence review gate 不创建真实 IPC handler、preload、renderer、Adapter 执行入口或其他执行代码。
+- [ ] sanitized evidence review gate 不调用插件、API、DailyNote、VCP 记忆或文件系统写入。
+- [ ] 样例保持 `sanitized_evidence_review_required=true`、`sanitized_evidence_review_requested=false`。
+- [ ] 样例保持 `sanitized_evidence_review_passed=false`、`sanitized_evidence_summary_exists=false`。
+- [ ] 样例保持 `evidence_packet_created=false`、`raw_evidence_retained=false`、`raw_source_retained=false`。
+- [ ] 样例保持 `review_result=pending`。
+- [ ] 样例保持 `implementation_authorized=false`、`memory_write_authorized=false`、`daily_note_write_authorized=false`、`asset_write_authorized=false`。
+- [ ] 样例保持 `design_discussion_authorized=false`。
+- [ ] 样例保持 `post_read_sanitization_performed=false`、`sanitized_evidence_summary_created=false`。
+- [ ] 样例保持 `raw_evidence_received=false`、`manual_safety_review_completed=false`。
+- [ ] 样例保持 `implementation_from_unsanitized_evidence_allowed=false`、`memory_write_from_unsanitized_evidence_allowed=false`、`asset_write_from_unsanitized_evidence_allowed=false`。
+- [ ] 样例保持 `direct_implementation_allowed=false`、`daily_note_write_allowed=false`、`vcp_memory_write_allowed=false`、`asset_write_allowed=false`。
+- [ ] 样例保持 `preserved_original_allowed=false`。
+- [ ] 样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`real_execution_allowed=false`。
+- [ ] 样例保持 `implementation_code_created=false`、`ipc_handler_created=false`、`preload_runtime_code_created=false`、`renderer_runtime_code_created=false`、`execution_entry_created=false`。
+- [ ] 样例不包含真实本地路径、真实读取命令、shell 命令文本、真实源码片段、完整函数体、endpoint 原文、环境变量值、secret、token、cookie、密码、客户隐私、raw runtime log、raw IPC payload、raw plugin output 或图片二进制。
+- [ ] 脱敏证据人工复核门完成也只允许进入下一独立 post-read decision routing，不得自动触发实现、DailyNote、VCP 记忆或资产写入。
