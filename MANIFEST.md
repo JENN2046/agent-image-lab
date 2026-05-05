@@ -1,6 +1,6 @@
 # Agent Image Lab 打包清单
 
-本包包含 Agent Image Lab v1.0 true-loop closeout 候选所需的文档、schema、角色定义、记忆策略、审片台规格、Adapter dry-run 包、VCP 接入记录、授权门、真实执行脱敏记录、最终验收报告、v3.9-v4.2 Review Console runtime prototype 本地验证加固记录，以及 v4.3-v4.6 guarded autopilot overlay / agent board / local checkpoint readiness / commit scope manifest。
+本包包含 Agent Image Lab v1.0 true-loop closeout 候选所需的文档、schema、角色定义、记忆策略、审片台规格、Adapter dry-run 包、VCP 接入记录、授权门、真实执行脱敏记录、最终验收报告、v3.9-v4.2 Review Console runtime prototype 本地验证加固记录，以及 v4.3-v4.9 guarded autopilot overlay / agent board / local checkpoint readiness / commit scope manifest / post-push state reconciliation / v4 index consistency validation / local tag push-readiness preflight。
 
 ## 重要声明
 
@@ -30,6 +30,9 @@
 - `docs/121_v4_4_agent_board_state_validation.md`
 - `docs/122_v4_5_local_checkpoint_readiness.md`
 - `docs/123_v4_6_local_commit_scope_manifest.md`
+- `docs/124_v4_7_post_push_state_reconciliation.md`
+- `docs/125_v4_8_v4_index_consistency_validation.md`
+- `docs/126_v4_9_local_tag_push_readiness.md`
 - `.agent_board/`
 - `AGENTS.autopilot-overlay.md`
 - `README_AGENT_IMAGE_LAB_AUTOPILOT.md`
@@ -38,6 +41,9 @@
 - `scripts/validate_agent_board_state.js`
 - `scripts/validate_local_checkpoint_manifest.js`
 - `scripts/validate_local_commit_scope.js`
+- `scripts/validate_post_push_state.js`
+- `scripts/validate_v4_index_consistency.js`
+- `scripts/validate_local_tag_push_readiness.js`
 - `integrations/vcp/v0_7_real_execution_authorization_gate.md`
 - `integrations/vcp/v0_7_photo_studio_os_dry_run_rehearsal.md`
 - `integrations/vcp/v0_7_photo_studio_os_real_execution_record.md`
@@ -59,3 +65,6 @@
 - v4.4 records project-local agent board state validation only; it does not authorize external reads, real execution, commits, tags, pushes, or releases.
 - v4.5 records project-local checkpoint readiness validation only; it does not authorize external reads, real execution, commits, tags, pushes, or releases.
 - v4.6 records project-local commit scope validation only; it does not stage files and does not authorize commits, tags, pushes, or releases.
+- v4.7 records project-local post-push state reconciliation only; it does not authorize new commits, tags, pushes, or releases.
+- v4.8 records project-local v4 index consistency validation only; it does not authorize new commits, tags, pushes, or releases.
+- v4.9 records project-local tag push-readiness only; it does not authorize pushes, releases, or remote writes.

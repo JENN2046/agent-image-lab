@@ -18,6 +18,11 @@ v4.3 local: autopilot overlay installed and agent board synchronized
 v4.4 local: agent board state validation added and synchronized
 v4.5 local: local checkpoint readiness manifest added for v4.0-v4.5 pre-commit review
 v4.6 local: commit scope manifest added for v4.0-v4.6 changed-file allowlist review
+v4.6 pushed: commit 7f58408 tagged v4.6-guarded-autopilot-commit-scope and synced to origin/master
+v4.7 local: post-push state reconciliation recorded the pushed baseline and opened a new local batch
+v4.8 local: v4 index consistency validation added for v4.0-v4.8 docs, schemas, scripts, and board indexes
+v4.8 local tag: commit 6d4253f tagged v4.8-local-validation-checkpoint
+v4.9 local: local tag push-readiness preflight recorded push-pending state
 ```
 
 ## Current Boundary
@@ -43,6 +48,9 @@ node scripts/validate_runtime_prototype_suite.js: passed
 node scripts/validate_agent_board_state.js: passed
 node scripts/validate_local_checkpoint_manifest.js: passed
 node scripts/validate_local_commit_scope.js: passed
+node scripts/validate_post_push_state.js: passed
+node scripts/validate_v4_index_consistency.js: passed
+node scripts/validate_local_tag_push_readiness.js: passed
 git diff --check: passed
 ```
 
