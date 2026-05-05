@@ -1,0 +1,182 @@
+phase: v2.4_execute_once_manual_parameter_review_gate
+record_id: v2-4-execute-once-manual-parameter-review-gate-001
+project: Agent Image Lab
+status: manual_parameter_review_gate_template_only
+
+manual_parameter_review_gate:
+  review_gate_id: v2-4-manual-parameter-review-gate-placeholder-001
+  checklist_id: v2-4-manual-parameter-fill-checklist-placeholder-001
+  manual_parameter_fill_required: true
+  manual_parameter_fill_completed: false
+  manual_parameter_review_required: true
+  manual_parameter_review_requested: false
+  manual_parameter_review_passed: false
+  parameter_integrity_confirmed: false
+  source_read_authorized: false
+  authorization_status: pending_manual_parameter_review
+  real_vcpchat_root_ref: redacted_external_root_reference_placeholder
+  allowed_read_paths_ref: redacted_external_allowlist_reference_placeholder
+  read_command_ref: redacted_external_read_command_reference_placeholder
+  read_attempt_limit: 1
+  read_attempt_used: 0
+  exact_real_paths_stored_in_git: false
+  raw_read_command_stored_in_git: false
+
+manual_parameter_fill_state:
+  real_vcpchat_root_supplied_outside_git: false
+  allowed_read_paths_supplied_outside_git: false
+  read_command_supplied_outside_git: false
+  human_parameter_owner: null
+  parameter_filled_at: null
+  git_storage_for_real_root_allowed: false
+  git_storage_for_real_allowlist_allowed: false
+  git_storage_for_raw_command_allowed: false
+
+manual_parameter_review_state:
+  parameter_reviewer: null
+  parameter_reviewed_at: null
+  parameter_integrity_confirmed: false
+  root_ref_matches_authorization_context: false
+  allowlist_ref_matches_authorization_context: false
+  command_ref_matches_authorization_context: false
+  stop_conditions_confirmed: false
+  post_read_boundaries_confirmed: false
+
+manual_review_checks:
+  human_review_required: true
+  same_authorization_context_required: true
+  exact_root_ref_required: true
+  exact_allowlist_ref_required: true
+  exact_read_command_ref_required: true
+  one_time_read_only_required: true
+  allowlist_only_required: true
+  read_attempt_limit_required: 1
+  sanitized_review_route_required: true
+  recursive_scan_allowed: false
+  config_read_allowed: false
+  log_read_allowed: false
+  credential_read_allowed: false
+  customer_data_read_allowed: false
+  raw_source_output_allowed: false
+  real_path_output_allowed: false
+  file_write_allowed: false
+  vcpchat_launch_allowed: false
+  vcpchat_modification_allowed: false
+  plugin_call_allowed: false
+  api_call_allowed: false
+  daily_note_call_allowed: false
+  vcp_memory_write_allowed: false
+
+future_result_route:
+  result_route: pending_execute_once_execution_authorization_gate
+  direct_implementation_allowed: false
+  daily_note_write_allowed: false
+  vcp_memory_write_allowed: false
+  asset_write_allowed: false
+  chinese_route_summary_cn: "人工参数复核门记录完成后也不能直接读取源码，只能进入下一独立执行授权门。"
+
+forbidden_review_content:
+  - real_local_path
+  - raw_allowlist_path
+  - raw_read_command
+  - shell_command_text
+  - raw_source_code
+  - complete_function_body
+  - endpoint_raw_value
+  - env_value
+  - secret_raw_value
+  - private_path_raw_value
+  - customer_private_data
+  - raw_runtime_log
+  - raw_ipc_payload
+  - raw_plugin_output
+  - image_binary
+
+source_read_state:
+  source_read_performed: false
+  real_vcpchat_source_read: false
+  real_vcpchat_modified: false
+  real_vcptoolbox_source_read: false
+  real_vcptoolbox_modified: false
+  raw_source_copy_allowed: false
+  raw_source_copied: false
+
+safety_gate:
+  contains_real_local_path: false
+  contains_raw_allowlist_path: false
+  contains_raw_read_command: false
+  contains_raw_source_code: false
+  contains_complete_function_body: false
+  contains_endpoint_raw_value: false
+  contains_env_value: false
+  contains_secret_raw_value: false
+  contains_private_path_raw_value: false
+  contains_customer_private_data: false
+  contains_raw_runtime_log: false
+  contains_raw_ipc_payload: false
+  contains_raw_plugin_output: false
+  contains_image_binary: false
+  sensitive_summary_cn: "本人工参数复核门样例不包含真实路径、allowlist、读取命令或源码原文，只定义未来人工复核参数的检查门槛。"
+
+no_execution_guard:
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  renderer_runtime_code_created: false
+  execution_entry_created: false
+  read_command_executed: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  file_write_performed: false
+  disk_write_performed: false
+  image_file_created: false
+  selected_plugin: null
+  max_plugin_calls: 0
+  real_manifest_read: false
+  real_execution_allowed: false
+
+memory_delta_draft:
+  write_mode: audit_only
+  approval_status: not_required
+  chinese_audit_summary_cn: "真实 VCPChat 一次性读取仍停留在人工参数复核门模板，未复核真实参数，未读取源码，也未写入记忆。"
+  preserved_original_allowed: false
+  final_decision:
+    should_write_to_vcp: false
+
+next_state_rules:
+  current_state: waiting_for_manual_parameter_review
+  next_allowed_state: waiting_for_execute_once_execution_authorization_gate
+  blocked_states:
+    - parameter_integrity_confirmed
+    - manual_parameter_review_passed
+    - read_command_executed
+    - source_read_performed
+    - real_vcpchat_source_read
+    - raw_source_copied
+    - vcpchat_modified
+    - ipc_handler_created
+    - preload_runtime_code_created
+    - renderer_runtime_code_created
+    - real_execution_ready
+
+audit_summary_cn: "v2.4 Plan 02 只补齐真实 VCPChat 一次性读取执行前人工参数复核门，不保存真实路径，不读取外部源码。"
+
+acceptance_assertions:
+  - "manual_parameter_fill_required=true。"
+  - "manual_parameter_fill_completed=false。"
+  - "manual_parameter_review_required=true。"
+  - "manual_parameter_review_requested=false。"
+  - "manual_parameter_review_passed=false。"
+  - "parameter_integrity_confirmed=false。"
+  - "source_read_authorized=false。"
+  - "source_read_performed=false。"
+  - "read_command_executed=false。"
+  - "real_vcpchat_source_read=false。"
+  - "real_execution_allowed=false。"
+  - "exact_real_paths_stored_in_git=false。"
+  - "raw_read_command_stored_in_git=false。"
+  - "api_called=false。"
+  - "vcp_plugin_called=false。"
+  - "daily_note_called=false。"
+
