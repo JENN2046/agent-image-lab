@@ -141,6 +141,78 @@ window.REVIEW_CONSOLE_MOCK = {
       }
     ]
   },
+  adapter_dry_run_handoff: {
+    request_id: "dry-run-request-lab-accepted-001",
+    status: "accepted_draft",
+    dispatch_plan_draft: {
+      dispatch_id: "dispatch-task-phase-d-lab-accepted-001",
+      task_id: "task-phase-d-lab-accepted-001",
+      mode: "dry_run",
+      selected_plugin: null,
+      fallback_plugins: [],
+      capability_matrix_status: "manifest_reviewed_safe",
+      reason_cn: "仅生成 dry-run 调度草案；未选择真实插件，未调用插件或 API。",
+      dry_run_required: true,
+      approval_required: true,
+      execution_blocked: true,
+      external_api_allowed: false,
+      gatekeeper_required: true,
+      review_console_required: true,
+      allow_file_write: false,
+      allow_image_binary: false,
+      max_plugin_calls: 0,
+      expected_outputs: 0,
+      max_outputs: 0
+    },
+    gatekeeper_handoff: {
+      required: true,
+      display_only: true,
+      risk_level: "medium",
+      risk_summary_cn: "当前仅为 dry-run 草案，不能执行插件、调用 API、写 DailyNote 或保存图片。",
+      blocked_actions: [
+        "execute",
+        "call_plugin",
+        "call_api",
+        "write_daily_note",
+        "write_image_file"
+      ],
+      approval_to_execute_allowed: false
+    },
+    review_console_handoff: {
+      required: true,
+      display_only: true,
+      allowed_actions: [
+        "mark_candidate",
+        "reject_candidate",
+        "request_gatekeeper_review",
+        "request_memory_edit"
+      ],
+      forbidden_actions: [
+        "execute_plugin",
+        "call_api",
+        "write_daily_note",
+        "save_image"
+      ]
+    },
+    audit_record: {
+      audit_summary_cn: "仅完成 Adapter dry-run 草案生成，未调用插件、API、DailyNote 或文件写入。",
+      contains_sensitive_original: false,
+      max_plugin_calls_observed: 0,
+      external_api_observed: false,
+      file_write_observed: false,
+      image_binary_observed: false
+    },
+    no_execution_guard: {
+      selected_plugin: null,
+      max_plugin_calls: 0,
+      api_called: false,
+      vcp_plugin_called: false,
+      daily_note_called: false,
+      file_write_performed: false,
+      image_file_created: false,
+      real_execution_allowed: false
+    }
+  },
   image_case_seed: {
     input_assets: ["asset_archive/references/photo_studio_os_reference.placeholder"],
     prompt_package_id: "prompt-package-photo-studio-os-001",

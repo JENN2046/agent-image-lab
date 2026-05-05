@@ -18,7 +18,7 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v4.9 local tag push-readiness preflight
+v1.0 true-loop closeout candidate + v5.10 local true-loop candidate delivery closeout
 ```
 
 已经完成：
@@ -52,13 +52,24 @@ v1.0 true-loop closeout candidate + v4.9 local tag push-readiness preflight
 - v4.7 post-push state reconciliation：记录 v4.6 pushed baseline，并校正 `.agent_board` 续跑状态。
 - v4.8 v4 index consistency validation：机器检查 v4.x 阶段索引一致性，覆盖 README、MANIFEST、roadmap、checklist、release notes、schema、脚本和 `.agent_board`。
 - v4.9 local tag push-readiness preflight：记录本地 v4.8 commit/tag 已就位，远端 push 仍需单独授权。
+- v5.0 post-merge delivery readiness index：记录 PR #1 已合并、本地 `master` 已同步到 `origin/master`，并把交付验收入口机器可查化。
+- v5.1 runtime delivery surface validation：机器检查 Review Console runtime prototype 的本地交付面、脚本顺序、DOM surface、host ack 和无外部副作用边界。
+- v5.2 adapter delivery surface validation：机器检查 Adapter dry-run lab 和 VCPToolBox 导出级 dry-run 包的 manifest、stdio、fixture、README 边界和 no-execution guard。
+- v5.3 review console adapter handoff validation：机器检查 Adapter dry-run accepted fixture 能以 no-execution handoff 草案进入 Review Console static prototype。
+- v5.4 local sync readiness preflight：机器检查本地 `master` 相对 `origin/master` 的领先提交链，并保留 push/tag/PR/release 独立授权门。
+- v5.5 post-commit reconciliation checkpoint：记录 v5.4 已落成本地 commit `a2ae539`，并把当前本地领先提交链更新为 4 个提交。
+- v5.6 v5 index consistency validation：机器检查 v5.0-v5.6 阶段文档、schema、脚本、顶层索引和 `.agent_board` 一致性。
+- v5.7 local batch commit-readiness preflight：只读检查当前本地未提交批次的 tracked 修改、新文件、staged 状态和版本动作授权门。
+- v5.8 handoff freshness validation：机器检查 `.agent_board` 续跑材料是否共同指向当前阶段，并保留硬停止门、远端动作授权门和 no-execution 边界。
+- v5.9 expanded v5 index consistency validation：把 v5 index consistency validation 覆盖范围扩展到 v5.0-v5.9。
+- v5.10 local true-loop candidate delivery closeout：收束本地 v1.0 真实闭环候选交付，记录 v5.9 本地提交、审查修复和交付授权边界。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：
 
 - VCPChat 子窗口接入。
 - DailyNote / VCP 长期记忆真实写入。
-- commit、tag、push 和正式 release 发布。
+- 正式 release 发布和后续版本 tag 策略。
 - 后续更多真实图片生成、编辑、归档。
 
 ## 阶段路线
@@ -209,9 +220,9 @@ daily_note_called: false
 
 ## 当前优先队列
 
-1. 运行完整校验，确保文档、Adapter、Review Console、agent board 和执行记录均通过。
+1. 运行完整校验，确保文档、Adapter、Review Console、agent board、执行记录和 v5.10 本地交付 closeout 均通过。
 2. 等待用户单独授权任何新的 commit、tag、push 或正式 release 发布。
-3. 如继续本地推进，优先做 Review Console runtime prototype 的本地契约、handoff 和文档收束。
+3. 如继续本地推进，优先做远端动作前的本地 commit/tag/push preflight，仍不触发远端动作。
 4. 后续任何新增真实生图调用都必须重新确认插件、调用次数、输入引用、输出目录和回滚方案。
 
 ## 永久安全门

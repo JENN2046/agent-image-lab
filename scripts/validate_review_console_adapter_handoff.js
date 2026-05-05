@@ -1,0 +1,161 @@
+const fs = require("node:fs");
+const path = require("node:path");
+const vm = require("node:vm");
+
+const root = path.resolve(__dirname, "..");
+
+const requiredFiles = [
+  "review_console/static_prototype/mock_data.js",
+  "review_console/static_prototype/app.js",
+  "review_console/static_prototype/FIELD_MAPPING.md",
+  "adapter_dry_run_lab/fixtures/accepted_request.json",
+  "exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js"
+];
+
+function read(relativePath) {
+  return fs.readFileSync(path.join(root, relativePath), "utf8");
+}
+
+function exists(relativePath) {
+  return fs.existsSync(path.join(root, relativePath));
+}
+
+function assert(condition, message) {
+  if (!condition) {
+    throw new Error(message);
+  }
+}
+
+function parseJson(text, label) {
+  try {
+    return JSON.parse(text);
+  } catch (error) {
+    throw new Error(`${label} must be valid JSON: ${error.message}`);
+  }
+}
+
+function loadStaticMock() {
+  const context = {
+    window: {}
+  };
+  vm.runInNewContext(read("review_console/static_prototype/mock_data.js"), context, {
+    filename: "review_console/static_prototype/mock_data.js"
+  });
+  return context.window.REVIEW_CONSOLE_MOCK;
+}
+
+function assertGuardClean(guard, label) {
+  assert(guard.selected_plugin === null, `${label} must keep selected_plugin null.`);
+  assert(guard.max_plugin_calls === 0, `${label} must keep max_plugin_calls 0.`);
+  assert(guard.api_called === false, `${label} must keep api_called false.`);
+  assert(guard.vcp_plugin_called === false, `${label} must keep vcp_plugin_called false.`);
+  assert(guard.daily_note_called === false, `${label} must keep daily_note_called false.`);
+  assert(guard.file_write_performed === false, `${label} must keep file_write_performed false.`);
+  assert(guard.image_file_created === false, `${label} must keep image_file_created false.`);
+  assert(guard.real_execution_allowed === false, `${label} must keep real_execution_allowed false.`);
+}
+
+function assertDispatchClean(dispatchPlan, label) {
+  assert(dispatchPlan.mode === "dry_run", `${label} must stay dry_run.`);
+  assert(dispatchPlan.selected_plugin === null, `${label} must keep selected_plugin null.`);
+  assert(dispatchPlan.max_plugin_calls === 0, `${label} must keep max_plugin_calls 0.`);
+  assert(dispatchPlan.execution_blocked === true, `${label} must block execution.`);
+  assert(dispatchPlan.external_api_allowed === false, `${label} must not allow external API.`);
+  assert(dispatchPlan.allow_file_write === false, `${label} must not allow file write.`);
+  assert(dispatchPlan.allow_image_binary === false, `${label} must not allow image binary.`);
+  assert(dispatchPlan.expected_outputs === 0, `${label} must keep expected_outputs 0.`);
+  assert(dispatchPlan.max_outputs === 0, `${label} must keep max_outputs 0.`);
+}
+
+function assertActions(handoff) {
+  for (const action of ["mark_candidate", "reject_candidate", "request_gatekeeper_review", "request_memory_edit"]) {
+    assert(handoff.allowed_actions.includes(action), `Review Console handoff must allow ${action}.`);
+  }
+  for (const action of ["execute_plugin", "call_api", "write_daily_note", "save_image"]) {
+    assert(handoff.forbidden_actions.includes(action), `Review Console handoff must forbid ${action}.`);
+  }
+}
+
+function main() {
+  const missingFiles = requiredFiles.filter((relativePath) => !exists(relativePath));
+  assert(missingFiles.length === 0, `Missing Review Console adapter handoff files: ${missingFiles.join(", ")}`);
+
+  const mock = loadStaticMock();
+  const fixtureHandoff = mock.adapter_dry_run_handoff;
+  assert(fixtureHandoff, "Static mock must expose adapter_dry_run_handoff.");
+
+  const acceptedInput = parseJson(read("adapter_dry_run_lab/fixtures/accepted_request.json"), "accepted fixture");
+  const adapter = require(path.join(root, "exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js"));
+  const adapterResponse = adapter.dryRun(acceptedInput).adapter_dry_run_response;
+
+  assert(adapterResponse.status === "accepted_draft", "Adapter accepted fixture must produce accepted_draft.");
+  assert(fixtureHandoff.status === adapterResponse.status, "Static handoff status must match Adapter accepted fixture.");
+  assert(
+    fixtureHandoff.dispatch_plan_draft.task_id === adapterResponse.dispatch_plan_draft.task_id,
+    "Static handoff task_id must match Adapter accepted fixture."
+  );
+  assert(
+    fixtureHandoff.dispatch_plan_draft.dispatch_id === adapterResponse.dispatch_plan_draft.dispatch_id,
+    "Static handoff dispatch_id must match Adapter accepted fixture."
+  );
+
+  assertDispatchClean(fixtureHandoff.dispatch_plan_draft, "static adapter handoff dispatch");
+  assert(fixtureHandoff.gatekeeper_handoff.required === true, "Gatekeeper handoff must be required.");
+  assert(fixtureHandoff.gatekeeper_handoff.display_only === true, "Gatekeeper handoff must be display-only.");
+  assert(fixtureHandoff.gatekeeper_handoff.approval_to_execute_allowed === false, "Gatekeeper handoff must not allow execution approval.");
+  assert(fixtureHandoff.review_console_handoff.required === true, "Review Console handoff must be required.");
+  assert(fixtureHandoff.review_console_handoff.display_only === true, "Review Console handoff must be display-only.");
+  assertActions(fixtureHandoff.review_console_handoff);
+  assert(fixtureHandoff.audit_record.contains_sensitive_original === false, "Audit record must not contain sensitive original.");
+  assert(fixtureHandoff.audit_record.max_plugin_calls_observed === 0, "Audit record must observe zero plugin calls.");
+  assert(fixtureHandoff.audit_record.external_api_observed === false, "Audit record must observe no external API.");
+  assert(fixtureHandoff.audit_record.file_write_observed === false, "Audit record must observe no file write.");
+  assert(fixtureHandoff.audit_record.image_binary_observed === false, "Audit record must observe no image binary.");
+  assertGuardClean(fixtureHandoff.no_execution_guard, "static adapter handoff guard");
+
+  const appSource = read("review_console/static_prototype/app.js");
+  assert(appSource.includes("adapter_dry_run_handoff"), "Static app must carry adapter_dry_run_handoff into draft output.");
+  assert(!/fetch\s*\(|XMLHttpRequest|writeFile|appendFile|fs\.|eval\s*\(|Function\s*\(/.test(appSource), "Static app must not contain forbidden runtime calls.");
+
+  const fieldMapping = read("review_console/static_prototype/FIELD_MAPPING.md");
+  for (const text of [
+    "v5.3 Adapter Dry-Run Handoff",
+    "adapter_dry_run_handoff.status",
+    "adapter_dry_run_handoff.dispatch_plan_draft",
+    "adapter_dry_run_handoff.review_console_handoff.forbidden_actions",
+    "accepted_draft",
+    "不等于真实执行授权"
+  ]) {
+    assert(fieldMapping.includes(text), `FIELD_MAPPING must document ${text}.`);
+  }
+
+  const result = {
+    passed: true,
+    review_console_adapter_handoff: {
+      static_handoff_fixture_present: true,
+      adapter_fixture_compared: true,
+      accepted_draft_status_verified: true,
+      dispatch_plan_mapped: true,
+      gatekeeper_handoff_mapped: true,
+      review_console_handoff_mapped: true,
+      audit_record_mapped: true,
+      no_execution_guard_verified: true,
+      allowed_actions_verified: true,
+      forbidden_actions_verified: true,
+      static_app_draft_output_current: true,
+      field_mapping_current: true,
+      external_network_required: false,
+      external_service_required: false,
+      file_write_performed: false
+    }
+  };
+
+  process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
+}
+
+try {
+  main();
+} catch (error) {
+  process.stderr.write(`${error.stack || error.message}\n`);
+  process.exitCode = 1;
+}

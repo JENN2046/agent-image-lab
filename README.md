@@ -7,7 +7,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v4.9 local tag push-readiness preflight
+v1.0 true-loop closeout candidate + v5.10 local true-loop candidate delivery closeout
 ```
 
 已经完成：
@@ -31,6 +31,17 @@ v1.0 true-loop closeout candidate + v4.9 local tag push-readiness preflight
 - v4.7 post-push state reconciliation 记录 v4.6 已推送基线，并把 `.agent_board` 切换到新的本地续跑批次。
 - v4.8 v4 index consistency validation 机器检查 v4.0-v4.8 阶段文档、schema、脚本和顶层索引一致性。
 - v4.9 local tag push-readiness preflight 记录本地 v4.8 commit/tag 已就位，远端 push 仍需单独授权。
+- v5.0 post-merge delivery readiness index 记录 PR #1 已合并、本地 `master` 已同步到 `origin/master`，并收束交付验收入口。
+- v5.1 runtime delivery surface validation 机器检查 Review Console runtime prototype 的本地交付面、脚本顺序、DOM surface、host ack 和无外部副作用边界。
+- v5.2 adapter delivery surface validation 机器检查 Adapter dry-run lab 和 VCPToolBox 导出级 dry-run 包的 manifest、stdio、fixture 和 no-execution guard。
+- v5.3 review console adapter handoff validation 机器检查 Adapter dry-run accepted fixture 能以 no-execution handoff 草案进入 Review Console static prototype。
+- v5.4 local sync readiness preflight 机器检查本地 `master` 相对 `origin/master` 的领先提交链，并保留 push/tag/PR/release 独立授权门。
+- v5.5 post-commit reconciliation checkpoint 记录 v5.4 已落成本地 commit `a2ae539`，并把当前本地领先提交链更新为 4 个提交。
+- v5.6 v5 index consistency validation 机器检查 v5.0-v5.6 文档、schema、脚本、顶层索引和 `.agent_board` 一致性。
+- v5.7 local batch commit-readiness preflight 只读检查当前本地未提交批次的 tracked 修改、新文件、staged 状态和版本动作授权门。
+- v5.8 handoff freshness validation 机器检查 `.agent_board` 续跑材料是否共同指向当前阶段，并保留硬停止门和 no-execution 边界。
+- v5.9 expanded v5 index consistency validation 把 v5 index consistency validation 覆盖范围扩展到 v5.0-v5.9。
+- v5.10 local true-loop candidate delivery closeout 收束本地 v1.0 真实闭环候选交付，记录 v5.9 本地提交、审查修复和交付授权边界。
 
 当前 accepted asset 只以 ignored runtime 路径和哈希归档，不把图片二进制写入 Git、DailyNote 或 VCP 长期记忆。人工接受记录保留了已知视觉偏差：这是 `human_override` 通过，不是完美 prompt compliance。
 
@@ -85,6 +96,17 @@ Photo Studio OS UI 生图生产线，以及 AI 图片评审与修正生产线。
 - `docs/124_v4_7_post_push_state_reconciliation.md`：post-push state reconciliation 记录。
 - `docs/125_v4_8_v4_index_consistency_validation.md`：v4 index consistency validation 记录。
 - `docs/126_v4_9_local_tag_push_readiness.md`：local tag push-readiness preflight 记录。
+- `docs/127_v5_0_delivery_readiness_index.md`：post-merge delivery readiness index 记录。
+- `docs/128_v5_1_runtime_delivery_surface.md`：runtime delivery surface validation 记录。
+- `docs/129_v5_2_adapter_delivery_surface.md`：adapter delivery surface validation 记录。
+- `docs/130_v5_3_review_console_adapter_handoff.md`：review console adapter handoff validation 记录。
+- `docs/131_v5_4_local_sync_readiness.md`：local sync readiness preflight 记录。
+- `docs/132_v5_5_post_commit_reconciliation.md`：post-commit reconciliation checkpoint 记录。
+- `docs/133_v5_6_v5_index_consistency_validation.md`：v5 index consistency validation 记录。
+- `docs/134_v5_7_local_batch_commit_readiness.md`：local batch commit-readiness preflight 记录。
+- `docs/135_v5_8_handoff_freshness_validation.md`：handoff freshness validation 记录。
+- `docs/136_v5_9_expanded_v5_index_consistency.md`：expanded v5 index consistency validation 记录。
+- `docs/137_v5_10_local_true_loop_candidate_delivery.md`：local true-loop candidate delivery closeout 记录。
 - `.agent_board/`：本地 guarded autopilot 状态板，用于续跑、校验记录和 handoff。
 - `docs/`：项目定义、SOP、评分表、VCP 记忆适配、审片台设计。
 - `agents/`：ImageLab_Master 和岗位型子 Agent 的规则。
@@ -109,6 +131,15 @@ node --check review_console\static_prototype\mock_data.js
 node --check exports\vcptoolbox\Plugin\AgentImageLabAdapter\dry-run-adapter.js
 node scripts\validate_runtime_guard_unit.js
 node scripts\validate_runtime_prototype_smoke.js
+node scripts\validate_runtime_delivery_surface.js
+node scripts\validate_adapter_delivery_surface.js
+node scripts\validate_review_console_adapter_handoff.js
+node scripts\validate_v5_local_sync_readiness.js
+node scripts\validate_v5_post_commit_reconciliation.js
+node scripts\validate_v5_index_consistency.js
+node scripts\validate_v5_local_batch_commit_readiness.js
+node scripts\validate_v5_handoff_freshness.js
+node scripts\validate_v5_true_loop_candidate_delivery.js
 node scripts\validate_runtime_prototype_suite.js
 node scripts\validate_agent_board_state.js
 node scripts\validate_local_checkpoint_manifest.js
@@ -116,6 +147,7 @@ node scripts\validate_local_commit_scope.js
 node scripts\validate_post_push_state.js
 node scripts\validate_v4_index_consistency.js
 node scripts\validate_local_tag_push_readiness.js
+node scripts\validate_v5_delivery_readiness.js
 powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
 git diff --check
 ```

@@ -1830,3 +1830,160 @@
 - [ ] `validate_mvp.ps1` 执行 local tag push-readiness validation 并检查输出字段。
 - [ ] v4.9 不执行新的 `git add`、commit、tag、push 或 release。
 - [ ] v4.9 不读真实 VCPChat、不改真实 VCPChat、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.0 Post-Merge Delivery Readiness 检查
+
+- [ ] `scripts/validate_v5_delivery_readiness.js` 存在。
+- [ ] `docs/127_v5_0_delivery_readiness_index.md` 存在。
+- [ ] `tests/schema_examples/v5_0_delivery_readiness.example.yaml` 存在。
+- [ ] delivery readiness 记录 PR #1 已合并。
+- [ ] delivery readiness 记录 merge commit `367d3c9` 和 PR head `b595851`。
+- [ ] delivery readiness 记录本地 `master` 已同步到 `origin/master`。
+- [ ] delivery readiness 记录远端 tag `v4.8-local-validation-checkpoint` 已推送并指向 `6d4253f`。
+- [ ] README、MANIFEST、roadmap、release notes、validation checklist 和 `.agent_board` 均指向 v5.0 当前状态。
+- [ ] `validate_mvp.ps1` 执行 v5.0 delivery readiness validation 并检查输出字段。
+- [ ] v5.0 不执行新的 commit、tag、push 或 release。
+- [ ] v5.0 不读真实 VCPChat、不改真实 VCPChat、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.1 Runtime Delivery Surface Validation 检查
+
+- [ ] `scripts/validate_runtime_delivery_surface.js` 存在。
+- [ ] `docs/128_v5_1_runtime_delivery_surface.md` 存在。
+- [ ] `tests/schema_examples/v5_1_runtime_delivery_surface.example.yaml` 存在。
+- [ ] runtime delivery surface 验证 `review_console/runtime_prototype/` 入口文件齐全。
+- [ ] runtime delivery surface 验证 `index.html` 本地脚本顺序为 `runtime_guard.js -> host_bridge_mock.js -> app.js`。
+- [ ] runtime delivery surface 验证 DOM surface、host ack 和 draft output 入口存在。
+- [ ] runtime delivery surface 验证 README 和 FIELD_MAPPING 覆盖边界、draft、guard 和 Host Submit Ack。
+- [ ] runtime delivery surface 验证 runtime prototype 不加载外部 URL，不包含 `fetch`、IPC、storage 或文件写入调用。
+- [ ] `validate_runtime_prototype_suite.js` 聚合 runtime delivery surface validation。
+- [ ] `validate_mvp.ps1` 执行 runtime delivery surface validation 并检查输出字段。
+- [ ] v5.1 不执行新的 commit、tag、push 或 release。
+- [ ] v5.1 不读真实 VCPChat、不改真实 VCPChat、不创建 IPC/preload、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.2 Adapter Delivery Surface Validation 检查
+
+- [ ] `scripts/validate_adapter_delivery_surface.js` 存在。
+- [ ] `docs/129_v5_2_adapter_delivery_surface.md` 存在。
+- [ ] `tests/schema_examples/v5_2_adapter_delivery_surface.example.yaml` 存在。
+- [ ] adapter delivery surface 验证 `adapter_dry_run_lab` 和 `exports/vcptoolbox/Plugin/AgentImageLabAdapter` 必需文件齐全。
+- [ ] adapter delivery surface 验证 manifest 只允许 `dry_run`，并声明 forbidden commands。
+- [ ] adapter delivery surface 验证 dry-run contract 保持 `external_api_allowed=false`、`execution_blocked=true`、`max_plugin_calls=0`。
+- [ ] adapter delivery surface 验证 accepted fixture 返回 `accepted_draft`。
+- [ ] adapter delivery surface 验证 rejected fixture 返回 `rejected`。
+- [ ] adapter delivery surface 验证导出级 stdio adapter 的 accepted / rejected 响应都保持 no-execution guard。
+- [ ] adapter delivery surface 验证 README 和 config example 不引入真实凭据、外部调用或写入边界。
+- [ ] `validate_mvp.ps1` 执行 adapter delivery surface validation 并检查输出字段。
+- [ ] v5.2 不执行新的 commit、tag、push 或 release。
+- [ ] v5.2 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.3 Review Console Adapter Handoff Validation 检查
+
+- [ ] `scripts/validate_review_console_adapter_handoff.js` 存在。
+- [ ] `docs/130_v5_3_review_console_adapter_handoff.md` 存在。
+- [ ] `tests/schema_examples/v5_3_review_console_adapter_handoff.example.yaml` 存在。
+- [ ] Review Console static prototype 包含 `adapter_dry_run_handoff` fixture。
+- [ ] static app 草案输出包含 `adapter_dry_run_handoff`，只用于展示 dry-run handoff。
+- [ ] handoff validation 使用项目内 Adapter accepted fixture 交叉校验 static fixture。
+- [ ] handoff validation 验证 `accepted_draft`、`selected_plugin=null`、`max_plugin_calls=0`、`execution_blocked=true`。
+- [ ] handoff validation 验证 Gatekeeper handoff 只展示风险，不允许 execution approval。
+- [ ] handoff validation 验证 Review Console allowed actions 只包含标记、拒绝、Gatekeeper 复查和记忆修改请求。
+- [ ] handoff validation 验证 forbidden actions 包含执行插件、调用 API、写 DailyNote、保存图片。
+- [ ] `validate_mvp.ps1` 执行 Review Console Adapter handoff validation 并检查输出字段。
+- [ ] v5.3 不执行新的 commit、tag、push 或 release。
+- [ ] v5.3 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.4 Local Sync Readiness Preflight 检查
+
+- [ ] `scripts/validate_v5_local_sync_readiness.js` 存在。
+- [ ] `docs/131_v5_4_local_sync_readiness.md` 存在。
+- [ ] `tests/schema_examples/v5_4_local_sync_readiness.example.yaml` 存在。
+- [ ] local sync readiness 记录 `origin/master` baseline `367d3c9`。
+- [ ] local sync readiness 记录本地 head `b04e253`。
+- [ ] local sync readiness 记录 pending local commits 数量为 `3`。
+- [ ] local sync readiness 记录本地提交链 `6bd255d -> 876d335 -> b04e253`。
+- [ ] local sync readiness 保持 `push_authorized=false`、`tag_authorized=false`、`pr_authorized=false`、`release_authorized=false`。
+- [ ] `validate_mvp.ps1` 执行 v5.4 local sync readiness validation 并检查输出字段。
+- [ ] v5.4 不执行 push、远端 tag、PR、merge 或 release。
+- [ ] v5.4 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.5 Post-Commit Reconciliation Checkpoint 检查
+
+- [ ] `scripts/validate_v5_post_commit_reconciliation.js` 存在。
+- [ ] `docs/132_v5_5_post_commit_reconciliation.md` 存在。
+- [ ] `tests/schema_examples/v5_5_post_commit_reconciliation.example.yaml` 存在。
+- [ ] post-commit reconciliation 记录 `origin/master` baseline `367d3c9`。
+- [ ] post-commit reconciliation 记录 v5.4 本地提交 `a2ae539`。
+- [ ] post-commit reconciliation 记录 pending local commits 数量为 `4`。
+- [ ] post-commit reconciliation 记录本地提交链 `6bd255d -> 876d335 -> b04e253 -> a2ae539`。
+- [ ] post-commit reconciliation 保持 `push_authorized=false`、`tag_authorized=false`、`pr_authorized=false`、`release_authorized=false`。
+- [ ] `validate_mvp.ps1` 执行 v5.5 post-commit reconciliation validation 并检查输出字段。
+- [ ] v5.5 不执行 push、远端 tag、PR、merge 或 release。
+- [ ] v5.5 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.6 V5 Index Consistency Validation 检查
+
+- [ ] `scripts/validate_v5_index_consistency.js` 存在。
+- [ ] `docs/133_v5_6_v5_index_consistency_validation.md` 存在。
+- [ ] `tests/schema_examples/v5_6_v5_index_consistency_validation.example.yaml` 存在。
+- [ ] v5 index consistency validation 覆盖 v5.0-v5.6 阶段文档。
+- [ ] v5 index consistency validation 覆盖 v5.0-v5.6 schema 示例。
+- [ ] v5 index consistency validation 覆盖 v5 阶段验证脚本。
+- [ ] v5 index consistency validation 检查 README、MANIFEST、roadmap、release notes、validation checklist、validate_mvp、local commit scope 和 `.agent_board` 索引一致。
+- [ ] `validate_mvp.ps1` 执行 v5.6 v5 index consistency validation 并检查输出字段。
+- [ ] v5.6 不执行 push、远端 tag、PR、merge 或 release。
+- [ ] v5.6 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.7 Local Batch Commit-Readiness Preflight 检查
+
+- [ ] `scripts/validate_v5_local_batch_commit_readiness.js` 存在。
+- [ ] `docs/134_v5_7_local_batch_commit_readiness.md` 存在。
+- [ ] `tests/schema_examples/v5_7_local_batch_commit_readiness.example.yaml` 存在。
+- [ ] local batch commit-readiness 记录 base head `a2ae539`。
+- [ ] local batch commit-readiness 记录 expected modified files 数量为 `13`。
+- [ ] local batch commit-readiness 记录 expected untracked files 数量为 `9`。
+- [ ] local batch commit-readiness 检查当前没有 staged changes。
+- [ ] local batch commit-readiness 保持 `commit_authorized=false`、`push_authorized=false`、`tag_authorized=false`、`pr_authorized=false`、`release_authorized=false`。
+- [ ] `validate_mvp.ps1` 执行 v5.7 local batch commit-readiness validation 并检查输出字段。
+- [ ] v5.7 不执行 `git add`、commit、push、远端 tag、PR、merge 或 release。
+- [ ] v5.7 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.8 Handoff Freshness Validation 检查
+
+- [ ] `scripts/validate_v5_handoff_freshness.js` 存在。
+- [ ] `docs/135_v5_8_handoff_freshness_validation.md` 存在。
+- [ ] `tests/schema_examples/v5_8_handoff_freshness_validation.example.yaml` 存在。
+- [ ] handoff freshness validation 检查 `.agent_board` 必需文件存在。
+- [ ] handoff freshness validation 检查 RUN_STATE、HANDOFF、TASK_QUEUE、CHECKPOINT 和 VALIDATION_LOG 指向当前阶段。
+- [ ] handoff freshness validation 检查 resume prompt 保持存在。
+- [ ] handoff freshness validation 检查 hard stop gates、remote action gate、external read gate 和 no-execution boundary。
+- [ ] handoff freshness validation 检查 blocked state clear。
+- [ ] `validate_mvp.ps1` 执行 v5.8 handoff freshness validation 并检查输出字段。
+- [ ] v5.8 不执行 `git add`、commit、push、远端 tag、PR、merge 或 release。
+- [ ] v5.8 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.9 Expanded V5 Index Consistency Validation 检查
+
+- [ ] `scripts/validate_v5_index_consistency.js` 覆盖 v5.0-v5.9。
+- [ ] `docs/136_v5_9_expanded_v5_index_consistency.md` 存在。
+- [ ] `tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml` 存在。
+- [ ] expanded v5 index consistency validation 记录 `v5_record_count=10`。
+- [ ] expanded v5 index consistency validation 覆盖 v5.7 local batch commit-readiness。
+- [ ] expanded v5 index consistency validation 覆盖 v5.8 handoff freshness。
+- [ ] expanded v5 index consistency validation 覆盖 v5.9 自身记录。
+- [ ] `validate_mvp.ps1` 执行 v5.9 expanded v5 index consistency validation 并检查输出字段。
+- [ ] v5.9 不执行 `git add`、commit、push、远端 tag、PR、merge 或 release。
+- [ ] v5.9 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.10 Local True-Loop Candidate Delivery Closeout 检查
+
+- [ ] 当前阶段字符串为 `v5.10 local true-loop candidate delivery closeout`。
+- [ ] `docs/137_v5_10_local_true_loop_candidate_delivery.md` 存在。
+- [ ] `tests/schema_examples/v5_10_local_true_loop_candidate_delivery.example.yaml` 存在。
+- [ ] `scripts/validate_v5_true_loop_candidate_delivery.js` 存在。
+- [ ] v5.10 记录本地 head `9ac4ca8` 和本地领先提交数 `5`。
+- [ ] v5.10 记录 v1.0 true-loop closeout candidate 本地交付完成。
+- [ ] v5.10 记录 handoff freshness 审查点已修复，validator 解析当前阶段而不是匹配历史文本。
+- [ ] README、MANIFEST、roadmap、release notes、validation checklist 和 `.agent_board` 均指向 v5.10 当前状态。
+- [ ] `validate_mvp.ps1` 执行 v5.10 local true-loop candidate delivery validation 并检查输出字段。
+- [ ] v5.10 不执行 `git add`、commit、push、远端 tag、PR、merge 或 release。
+- [ ] v5.10 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。

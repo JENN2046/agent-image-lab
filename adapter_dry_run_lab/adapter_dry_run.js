@@ -184,5 +184,14 @@ function run(inputPath) {
   return buildAcceptedResponse(request);
 }
 
-const result = run(process.argv[2]);
-process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
+if (require.main === module) {
+  const result = run(process.argv[2]);
+  process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
+}
+
+module.exports = {
+  run,
+  buildAcceptedResponse,
+  buildRejectedResponse,
+  buildViolationList,
+};

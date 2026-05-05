@@ -45,6 +45,17 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Added v4.7 post-push state reconciliation record and validation.
 - Added v4.8 v4 index consistency validation.
 - Added v4.9 local tag push-readiness preflight.
+- Added v5.0 post-merge delivery readiness index.
+- Added v5.1 runtime delivery surface validation.
+- Added v5.2 adapter delivery surface validation.
+- Added v5.3 Review Console Adapter handoff validation.
+- Added v5.4 local sync readiness preflight.
+- Added v5.5 post-commit reconciliation checkpoint.
+- Added v5.6 v5 index consistency validation.
+- Added v5.7 local batch commit-readiness preflight.
+- Added v5.8 handoff freshness validation.
+- Added v5.9 expanded v5 index consistency validation.
+- Added v5.10 local true-loop candidate delivery closeout.
 
 ## Safety Status
 
