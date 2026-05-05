@@ -1,0 +1,151 @@
+phase: v2.6_review_console_runtime_handoff
+record_id: v2-6-review-console-runtime-handoff-001
+project: Agent Image Lab
+status: runtime_handoff_plan_template_only
+
+runtime_handoff:
+  handoff_id: v2-6-review-console-runtime-handoff-placeholder-001
+  route_gate_id: v2-5-route-specific-authorization-gate-placeholder-001
+  runtime_handoff_planning_required: true
+  runtime_handoff_planning_completed: false
+  runtime_handoff_authorized: false
+  route_specific_authorization_granted: false
+  authorization_status: pending_runtime_handoff_planning
+
+allowed_handoff_inputs:
+  review_session_draft:
+    allowed: true
+    raw_source_allowed: false
+    secret_allowed: false
+  image_case_draft:
+    allowed: true
+    image_binary_allowed: false
+    real_path_allowed: false
+  memory_delta_draft:
+    allowed: true
+    preserved_original_allowed: false
+    direct_daily_note_write_allowed: false
+  prototype_guard:
+    allowed: true
+    api_called: false
+    vcp_plugin_called: false
+    daily_note_called: false
+    disk_write_performed: false
+    image_file_created: false
+  route_specific_authorization_gate_ref:
+    allowed: true
+    route_specific_authorization_granted_required: true
+    raw_gate_body_allowed: false
+
+allowed_handoff_outputs:
+  runtime_handoff_plan: pending
+  embed_boundary_notes: pending
+  schema_mapping_notes: pending
+  authorization_gap_list: pending
+  chinese_audit_summary: "Review Console runtime handoff 仍停留在规划模板，未授权真实接入、未创建运行时代码，也未写入记忆。"
+
+schema_mapping_notes:
+  review_session_draft_maps_to: review_session_schema_draft
+  image_case_draft_maps_to: image_case_schema_draft_without_binary
+  memory_delta_draft_maps_to: memory_delta_schema_draft_without_preserved_original
+  prototype_guard_maps_to: no_execution_evidence_fields
+  route_gate_ref_maps_to: route_specific_authorization_gate_reference_only
+
+authorization_gap_list:
+  - runtime_handoff_authorization_missing
+  - route_specific_authorization_not_granted
+  - ipc_handler_creation_not_authorized
+  - preload_runtime_creation_not_authorized
+  - renderer_runtime_creation_not_authorized
+  - real_vcpchat_modification_not_authorized
+
+route_gate_state:
+  route_specific_authorization_required: true
+  route_specific_authorization_requested: false
+  route_specific_authorization_granted: false
+  selected_route: pending
+  implementation_authorized: false
+  memory_handoff_authorized: false
+  daily_note_write_authorized: false
+  asset_write_authorized: false
+
+safety_gate:
+  contains_real_local_path: false
+  contains_raw_allowlist_path: false
+  contains_raw_read_command: false
+  contains_raw_source_code: false
+  contains_complete_function_body: false
+  contains_endpoint_raw_value: false
+  contains_env_value: false
+  contains_secret_raw_value: false
+  contains_private_path_raw_value: false
+  contains_customer_private_data: false
+  contains_raw_runtime_log: false
+  contains_raw_ipc_payload: false
+  contains_raw_plugin_output: false
+  contains_image_binary: false
+  sensitive_summary_cn: "本 handoff 样例只包含脱敏规划字段，不包含真实路径、读取命令、源码原文、客户隐私或真实证据。"
+
+no_execution_guard:
+  real_vcpchat_source_read: false
+  real_vcpchat_modified: false
+  real_vcptoolbox_source_read: false
+  real_vcptoolbox_modified: false
+  implementation_code_created: false
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  renderer_runtime_code_created: false
+  execution_entry_created: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  file_write_performed: false
+  disk_write_performed: false
+  image_file_created: false
+  selected_plugin: null
+  max_plugin_calls: 0
+  real_manifest_read: false
+  real_execution_allowed: false
+
+memory_delta_draft:
+  write_mode: audit_only
+  approval_status: not_required
+  chinese_audit_summary_cn: "Review Console runtime handoff 规划尚未完成，未进入真实接入，也未写 DailyNote 或 VCP 记忆。"
+  preserved_original_allowed: false
+  final_decision:
+    should_write_to_vcp: false
+
+next_state_rules:
+  current_state: waiting_for_runtime_handoff_planning
+  next_allowed_state: waiting_for_v2_6_closeout_or_v2_7_runtime_implementation_planning
+  blocked_states:
+    - runtime_handoff_planning_completed
+    - runtime_handoff_authorized
+    - route_specific_authorization_granted
+    - ipc_handler_created
+    - preload_runtime_code_created
+    - renderer_runtime_code_created
+    - daily_note_called
+    - vcp_memory_written
+    - real_execution_ready
+
+audit_summary_cn: "v2.6 Plan 01 只补齐 Review Console runtime handoff planning，不读取真实 VCPChat，不创建运行时代码。"
+
+acceptance_assertions:
+  - "runtime_handoff_planning_required=true。"
+  - "runtime_handoff_planning_completed=false。"
+  - "runtime_handoff_authorized=false。"
+  - "route_specific_authorization_granted=false。"
+  - "real_vcpchat_source_read=false。"
+  - "real_vcpchat_modified=false。"
+  - "ipc_handler_created=false。"
+  - "preload_runtime_code_created=false。"
+  - "renderer_runtime_code_created=false。"
+  - "api_called=false。"
+  - "vcp_plugin_called=false。"
+  - "daily_note_called=false。"
+  - "vcp_memory_written=false。"
+  - "image_file_created=false。"
+  - "real_execution_allowed=false。"
+
