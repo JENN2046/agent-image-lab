@@ -1,6 +1,12 @@
 # Release Notes
 
-## Unreleased
+## v1.0.0-true-loop-closeout
+
+GitHub `master` has received the v1.0 true-loop closeout baseline, and the tag `v1.0.0-true-loop-closeout` has been observed during post-push intake.
+
+This tag records a controlled Photo Studio OS true loop with a human-accepted asset. The acceptance is explicitly a `human_override`; it does not claim perfect prompt compliance.
+
+This is still not an authorization for new real plugin calls, DailyNote writes, VCP long-term memory writes, or GitHub Release publication.
 
 - Added project-internal Adapter dry-run lab.
 - Added export-level `dry-run-adapter.js` candidate for AgentImageLabAdapter.
@@ -21,6 +27,10 @@
 - Added Phase D dry-run contract and fixtures.
 - Added v0.5-v1.0 completion planning docs for Adapter install, real plugin manifest review, Photo Studio OS first run, and release readiness.
 
+## Unreleased
+
+- No new runtime capability is authorized by this section.
+
 ## Safety Status
 
 - A user-authorized VCPToolBox Adapter-only dry-run installation verification has been performed.
@@ -34,4 +44,4 @@
 - No DailyNote write has been performed.
 - No image binary has been written into Git, DailyNote, or long-term memory.
 - No raw plugin output, secret value, raw endpoint, or runtime log is stored in project docs.
-- Additional real plugin calls, commits, tags, pushes, and releases still require explicit user authorization.
+- Additional real plugin calls, DailyNote writes, VCP long-term memory writes, and GitHub Release publication still require explicit user authorization.

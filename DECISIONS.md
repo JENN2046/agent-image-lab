@@ -27,3 +27,7 @@
 ## D007：v0.2.4-final-baseline 是无执行最终基线
 
 结论：`v0.2.4-final-baseline` 是 Agent Image Lab 的无执行最终基线。该版本只包含项目骨架、角色规则、VCP 记忆策略、Review Console 静态原型、schema、样例、dry-run-only Adapter manifest 草案；不包含真实 VCPToolBox / VCPChat 接入，不读取真实插件 manifest，不调用真实插件，不写 DailyNote，不创建图片文件。
+
+## D008：v1.0.0-true-loop-closeout 是受控真实闭环基线
+
+结论：`v1.0.0-true-loop-closeout` 是 Agent Image Lab 的受控真实闭环基线。该版本记录了一次 Photo Studio OS 真实执行闭环和人工接受资产；接受模式为 `human_override`，不代表 prompt compliance 完美。该基线不授权新的真实插件调用、不授权 DailyNote 写入、不授权 VCP 长期记忆写入、不授权 GitHub Release 发布。
