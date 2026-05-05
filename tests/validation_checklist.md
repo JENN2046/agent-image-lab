@@ -1830,3 +1830,17 @@
 - [ ] `validate_mvp.ps1` 执行 local tag push-readiness validation 并检查输出字段。
 - [ ] v4.9 不执行新的 `git add`、commit、tag、push 或 release。
 - [ ] v4.9 不读真实 VCPChat、不改真实 VCPChat、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.0 Post-Merge Delivery Readiness 检查
+
+- [ ] `scripts/validate_v5_delivery_readiness.js` 存在。
+- [ ] `docs/127_v5_0_delivery_readiness_index.md` 存在。
+- [ ] `tests/schema_examples/v5_0_delivery_readiness.example.yaml` 存在。
+- [ ] delivery readiness 记录 PR #1 已合并。
+- [ ] delivery readiness 记录 merge commit `367d3c9` 和 PR head `b595851`。
+- [ ] delivery readiness 记录本地 `master` 已同步到 `origin/master`。
+- [ ] delivery readiness 记录远端 tag `v4.8-local-validation-checkpoint` 已推送并指向 `6d4253f`。
+- [ ] README、MANIFEST、roadmap、release notes、validation checklist 和 `.agent_board` 均指向 v5.0 当前状态。
+- [ ] `validate_mvp.ps1` 执行 v5.0 delivery readiness validation 并检查输出字段。
+- [ ] v5.0 不执行新的 commit、tag、push 或 release。
+- [ ] v5.0 不读真实 VCPChat、不改真实 VCPChat、不调用插件、API、DailyNote 或 VCP 记忆。

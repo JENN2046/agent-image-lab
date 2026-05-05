@@ -14,6 +14,7 @@ const allowedModifiedFiles = [
   "scripts/validate_local_commit_scope.js",
   "scripts/validate_mvp.ps1",
   "scripts/validate_v4_index_consistency.js",
+  "scripts/validate_v5_delivery_readiness.js",
   "scripts/validate_runtime_prototype_smoke.js",
   "tests/validation_checklist.md"
 ];
@@ -40,6 +41,7 @@ const allowedUntrackedFiles = [
   "docs/124_v4_7_post_push_state_reconciliation.md",
   "docs/125_v4_8_v4_index_consistency_validation.md",
   "docs/126_v4_9_local_tag_push_readiness.md",
+  "docs/127_v5_0_delivery_readiness_index.md",
   "scripts/validate-agent-image-lab-local.ps1",
   "scripts/validate-agent-image-lab-local.sh",
   "scripts/validate_agent_board_state.js",
@@ -47,6 +49,7 @@ const allowedUntrackedFiles = [
   "scripts/validate_post_push_state.js",
   "scripts/validate_v4_index_consistency.js",
   "scripts/validate_local_tag_push_readiness.js",
+  "scripts/validate_v5_delivery_readiness.js",
   "scripts/validate_runtime_guard_unit.js",
   "scripts/validate_runtime_prototype_suite.js",
   "tests/schema_examples/v4_0_runtime_contract_smoke_hardening.example.yaml",
@@ -58,7 +61,8 @@ const allowedUntrackedFiles = [
   "tests/schema_examples/v4_6_local_commit_scope_manifest.example.yaml",
   "tests/schema_examples/v4_7_post_push_state_reconciliation.example.yaml",
   "tests/schema_examples/v4_8_v4_index_consistency_validation.example.yaml",
-  "tests/schema_examples/v4_9_local_tag_push_readiness.example.yaml"
+  "tests/schema_examples/v4_9_local_tag_push_readiness.example.yaml",
+  "tests/schema_examples/v5_0_delivery_readiness.example.yaml"
 ];
 
 function assert(condition, message) {
@@ -100,6 +104,18 @@ function main() {
   assert(
     allowedUntrackedFiles.includes("scripts/validate_local_tag_push_readiness.js"),
     "v4.9 validation script must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("docs/127_v5_0_delivery_readiness_index.md"),
+    "v5.0 docs must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("tests/schema_examples/v5_0_delivery_readiness.example.yaml"),
+    "v5.0 schema example must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("scripts/validate_v5_delivery_readiness.js"),
+    "v5.0 validation script must be included in the untracked allowlist."
   );
 
   const result = {

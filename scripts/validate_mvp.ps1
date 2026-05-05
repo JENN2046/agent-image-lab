@@ -58,6 +58,7 @@ $requiredFiles = @(
   'scripts/validate_post_push_state.js',
   'scripts/validate_v4_index_consistency.js',
   'scripts/validate_local_tag_push_readiness.js',
+  'scripts/validate_v5_delivery_readiness.js',
   'scripts/validate_runtime_guard_unit.js',
   'scripts/validate_runtime_prototype_smoke.js',
   'scripts/validate_runtime_prototype_suite.js',
@@ -82,6 +83,7 @@ $requiredFiles = @(
   'docs/124_v4_7_post_push_state_reconciliation.md',
   'docs/125_v4_8_v4_index_consistency_validation.md',
   'docs/126_v4_9_local_tag_push_readiness.md',
+  'docs/127_v5_0_delivery_readiness_index.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
@@ -154,6 +156,7 @@ $requiredFiles = @(
   'tests/schema_examples/v4_7_post_push_state_reconciliation.example.yaml',
   'tests/schema_examples/v4_8_v4_index_consistency_validation.example.yaml',
   'tests/schema_examples/v4_9_local_tag_push_readiness.example.yaml',
+  'tests/schema_examples/v5_0_delivery_readiness.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -1872,6 +1875,7 @@ $allowedV46ModifiedFiles = @(
   'scripts/validate_local_commit_scope.js',
   'scripts/validate_mvp.ps1',
   'scripts/validate_v4_index_consistency.js',
+  'scripts/validate_v5_delivery_readiness.js',
   'scripts/validate_runtime_prototype_smoke.js',
   'tests/schema_examples/v4_8_v4_index_consistency_validation.example.yaml',
   'tests/validation_checklist.md'
@@ -1899,6 +1903,7 @@ $allowedV46UntrackedFiles = @(
   'docs/124_v4_7_post_push_state_reconciliation.md',
   'docs/125_v4_8_v4_index_consistency_validation.md',
   'docs/126_v4_9_local_tag_push_readiness.md',
+  'docs/127_v5_0_delivery_readiness_index.md',
   'scripts/validate-agent-image-lab-local.ps1',
   'scripts/validate-agent-image-lab-local.sh',
   'scripts/validate_agent_board_state.js',
@@ -1906,6 +1911,7 @@ $allowedV46UntrackedFiles = @(
   'scripts/validate_post_push_state.js',
   'scripts/validate_v4_index_consistency.js',
   'scripts/validate_local_tag_push_readiness.js',
+  'scripts/validate_v5_delivery_readiness.js',
   'scripts/validate_runtime_guard_unit.js',
   'scripts/validate_runtime_prototype_suite.js',
   'tests/schema_examples/v4_0_runtime_contract_smoke_hardening.example.yaml',
@@ -1917,7 +1923,8 @@ $allowedV46UntrackedFiles = @(
   'tests/schema_examples/v4_6_local_commit_scope_manifest.example.yaml',
   'tests/schema_examples/v4_7_post_push_state_reconciliation.example.yaml',
   'tests/schema_examples/v4_8_v4_index_consistency_validation.example.yaml',
-  'tests/schema_examples/v4_9_local_tag_push_readiness.example.yaml'
+  'tests/schema_examples/v4_9_local_tag_push_readiness.example.yaml',
+  'tests/schema_examples/v5_0_delivery_readiness.example.yaml'
 )
 
 foreach ($path in $v46LocalCommitScopeManifestFiles) {
@@ -2153,6 +2160,85 @@ foreach ($path in $v49LocalTagPushReadinessFiles) {
   }
 }
 
+$v50DeliveryReadinessFiles = @(
+  'docs/127_v5_0_delivery_readiness_index.md',
+  'tests/schema_examples/v5_0_delivery_readiness.example.yaml'
+)
+
+$requiredV50DeliveryReadinessPatterns = @(
+  'status:\s+completed_validated_project_local_v5_delivery_readiness_index',
+  'version:\s+v5\.0',
+  'pr_number:\s+1',
+  'pr_merged:\s+true',
+  'merge_commit_short:\s+367d3c9',
+  'merged_head_commit_short:\s+b595851',
+  'base_branch:\s+master',
+  'local_master_synced:\s+true',
+  'remote_master_synced:\s+true',
+  'checkpoint_tag_pushed:\s+true',
+  'checkpoint_tag:\s+v4\.8-local-validation-checkpoint',
+  'checkpoint_commit_short:\s+6d4253f',
+  'delivery_entry_current:\s+true',
+  'validation_command_surface_current:\s+true',
+  'agent_board_post_merge_current:\s+true',
+  'handoff_post_merge_current:\s+true',
+  'task_queue_current:\s+true',
+  'release_notes_current:\s+true',
+  'roadmap_current:\s+true',
+  'checklist_current:\s+true',
+  'validate_mvp_current:\s+true',
+  'external_network_required:\s+false',
+  'external_service_required:\s+false',
+  'file_write_performed:\s+false',
+  'real_vcpchat_source_read:\s+false',
+  'real_vcpchat_modified:\s+false',
+  'real_vcptoolbox_source_read:\s+false',
+  'real_vcptoolbox_modified:\s+false',
+  'api_called:\s+false',
+  'vcp_plugin_called:\s+false',
+  'daily_note_called:\s+false',
+  'vcp_memory_written:\s+false',
+  'image_file_created:\s+false',
+  'commit_tag_push_authorized:\s+false'
+)
+
+$forbiddenV50DeliveryReadinessPatterns = @(
+  'external_network_required:\s+true',
+  'external_service_required:\s+true',
+  'file_write_performed:\s+true',
+  'real_vcpchat_source_read:\s+true',
+  'real_vcpchat_modified:\s+true',
+  'real_vcptoolbox_source_read:\s+true',
+  'real_vcptoolbox_modified:\s+true',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'vcp_memory_written:\s+true',
+  'image_file_created:\s+true',
+  'commit_tag_push_authorized:\s+true',
+  'https?://'
+)
+
+foreach ($path in $v50DeliveryReadinessFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v5.0 delivery readiness file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV50DeliveryReadinessPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v5.0 delivery readiness missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV50DeliveryReadinessPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v5.0 delivery readiness boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
 $node = Get-Command node -ErrorAction SilentlyContinue
 if (-not $node) {
   Add-Failure "Node.js is required to validate adapter_dry_run_lab"
@@ -2348,6 +2434,11 @@ if (-not $node) {
   & node --check (Join-Path $Root 'scripts/validate_local_tag_push_readiness.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_local_tag_push_readiness.js failed node --check"
+  }
+
+  & node --check (Join-Path $Root 'scripts/validate_v5_delivery_readiness.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_v5_delivery_readiness.js failed node --check"
   }
 
   $agentBoardStateOutput = & node (Join-Path $Root 'scripts/validate_agent_board_state.js')
@@ -2551,6 +2642,49 @@ if (-not $node) {
     }
     if ($localTagPushReadiness.local_tag_push_readiness.file_write_performed -ne $false) {
       Add-Failure "local tag push-readiness validation must not write files"
+    }
+  }
+
+  $v5DeliveryReadinessOutput = & node (Join-Path $Root 'scripts/validate_v5_delivery_readiness.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v5.0 delivery readiness validation exited with failure"
+  } else {
+    $v5DeliveryReadiness = ($v5DeliveryReadinessOutput -join "`n") | ConvertFrom-Json
+    if ($v5DeliveryReadiness.passed -ne $true) {
+      Add-Failure "v5.0 delivery readiness validation must report passed true"
+    }
+    if ($v5DeliveryReadiness.delivery_readiness.pr_number -ne 1) {
+      Add-Failure "v5.0 delivery readiness must record PR #1"
+    }
+    if ($v5DeliveryReadiness.delivery_readiness.pr_merged -ne $true) {
+      Add-Failure "v5.0 delivery readiness must record merged PR"
+    }
+    if ($v5DeliveryReadiness.delivery_readiness.merge_commit_short -ne '367d3c9') {
+      Add-Failure "v5.0 delivery readiness must record merge commit 367d3c9"
+    }
+    if ($v5DeliveryReadiness.delivery_readiness.merged_head_commit_short -ne 'b595851') {
+      Add-Failure "v5.0 delivery readiness must record merged head b595851"
+    }
+    if ($v5DeliveryReadiness.delivery_readiness.checkpoint_tag -ne 'v4.8-local-validation-checkpoint') {
+      Add-Failure "v5.0 delivery readiness must record v4.8 checkpoint tag"
+    }
+    if ($v5DeliveryReadiness.delivery_readiness.checkpoint_commit_short -ne '6d4253f') {
+      Add-Failure "v5.0 delivery readiness must record checkpoint commit 6d4253f"
+    }
+    if ($v5DeliveryReadiness.delivery_readiness.local_master_synced -ne $true) {
+      Add-Failure "v5.0 delivery readiness must record local master sync"
+    }
+    if ($v5DeliveryReadiness.delivery_readiness.delivery_entry_current -ne $true) {
+      Add-Failure "v5.0 delivery readiness must verify delivery entry"
+    }
+    if ($v5DeliveryReadiness.delivery_readiness.validation_command_surface_current -ne $true) {
+      Add-Failure "v5.0 delivery readiness must verify validation command surface"
+    }
+    if ($v5DeliveryReadiness.delivery_readiness.task_queue_current -ne $true) {
+      Add-Failure "v5.0 delivery readiness must verify task queue state"
+    }
+    if ($v5DeliveryReadiness.delivery_readiness.file_write_performed -ne $false) {
+      Add-Failure "v5.0 delivery readiness validation must not write files"
     }
   }
 

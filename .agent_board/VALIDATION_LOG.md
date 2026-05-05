@@ -2,6 +2,61 @@
 
 ## Entries
 
+## VALIDATION-20260506-V5-0
+
+Task:
+
+```text
+Record PR #1 post-merge delivery readiness and keep the new v5.0 batch project-local.
+```
+
+Commands run:
+
+```text
+scripts/validate_mvp.ps1
+scripts/validate-agent-image-lab-local.ps1
+node scripts/validate_runtime_prototype_suite.js
+node scripts/validate_agent_board_state.js
+node scripts/validate_local_checkpoint_manifest.js
+node scripts/validate_local_commit_scope.js
+node scripts/validate_post_push_state.js
+node scripts/validate_v4_index_consistency.js
+node scripts/validate_local_tag_push_readiness.js
+node scripts/validate_v5_delivery_readiness.js
+git diff --check
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+PR #1 was merged into master as 367d3c9. The PR head was b595851, the checkpoint tag v4.8-local-validation-checkpoint remains tied to 6d4253f, and local master is synced to origin/master before starting the v5.0 local batch.
+```
+
+Warnings:
+
+```text
+Manual-review warnings may remain for forbidden strings such as token, cookie, password, image extensions, and script extensions because the project intentionally contains negative checklist references.
+```
+
+Not validated:
+
+```text
+No new commit, tag, push, release, real VCPChat read, real VCPToolBox read, plugin call, API call, DailyNote call, VCP memory write, or image creation is performed in this v5.0 local batch.
+```
+
+Notes:
+
+```text
+All current v5.0 work stays project-local and reversible.
+The v5.0 local batch is ready for explicit commit/PR authorization, but this log entry does not grant that authorization.
+```
+
 ## VALIDATION-20260506-V4-9
 
 Task:

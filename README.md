@@ -7,7 +7,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v4.9 local tag push-readiness preflight
+v1.0 true-loop closeout candidate + v5.0 post-merge delivery readiness index
 ```
 
 已经完成：
@@ -31,6 +31,7 @@ v1.0 true-loop closeout candidate + v4.9 local tag push-readiness preflight
 - v4.7 post-push state reconciliation 记录 v4.6 已推送基线，并把 `.agent_board` 切换到新的本地续跑批次。
 - v4.8 v4 index consistency validation 机器检查 v4.0-v4.8 阶段文档、schema、脚本和顶层索引一致性。
 - v4.9 local tag push-readiness preflight 记录本地 v4.8 commit/tag 已就位，远端 push 仍需单独授权。
+- v5.0 post-merge delivery readiness index 记录 PR #1 已合并、本地 `master` 已同步到 `origin/master`，并收束交付验收入口。
 
 当前 accepted asset 只以 ignored runtime 路径和哈希归档，不把图片二进制写入 Git、DailyNote 或 VCP 长期记忆。人工接受记录保留了已知视觉偏差：这是 `human_override` 通过，不是完美 prompt compliance。
 
@@ -85,6 +86,7 @@ Photo Studio OS UI 生图生产线，以及 AI 图片评审与修正生产线。
 - `docs/124_v4_7_post_push_state_reconciliation.md`：post-push state reconciliation 记录。
 - `docs/125_v4_8_v4_index_consistency_validation.md`：v4 index consistency validation 记录。
 - `docs/126_v4_9_local_tag_push_readiness.md`：local tag push-readiness preflight 记录。
+- `docs/127_v5_0_delivery_readiness_index.md`：post-merge delivery readiness index 记录。
 - `.agent_board/`：本地 guarded autopilot 状态板，用于续跑、校验记录和 handoff。
 - `docs/`：项目定义、SOP、评分表、VCP 记忆适配、审片台设计。
 - `agents/`：ImageLab_Master 和岗位型子 Agent 的规则。
@@ -116,6 +118,7 @@ node scripts\validate_local_commit_scope.js
 node scripts\validate_post_push_state.js
 node scripts\validate_v4_index_consistency.js
 node scripts\validate_local_tag_push_readiness.js
+node scripts\validate_v5_delivery_readiness.js
 powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
 git diff --check
 ```
