@@ -1,0 +1,160 @@
+phase: v2.5_post_read_sanitization_evidence_chain
+record_id: v2-5-post-read-sanitization-evidence-chain-001
+project: Agent Image Lab
+status: post_read_sanitization_chain_template_only
+
+post_read_sanitization_evidence_chain:
+  chain_id: v2-5-post-read-sanitization-evidence-chain-placeholder-001
+  read_run_id: null
+  post_read_sanitization_required: true
+  post_read_sanitization_requested: false
+  post_read_sanitization_performed: false
+  evidence_packet_created: false
+  sanitized_evidence_summary_created: false
+  raw_evidence_retained: false
+  raw_source_retained: false
+  source_read_authorized: false
+  source_read_performed: false
+  real_vcpchat_source_read: false
+  authorization_status: pending_post_read_sanitization_chain
+
+read_run_state:
+  real_read_run_record_exists: false
+  real_read_run_authorized: false
+  read_command_executed: false
+  read_attempt_limit: 1
+  read_attempt_used: 0
+  exact_real_paths_stored_in_git: false
+  raw_read_command_stored_in_git: false
+  raw_source_output_allowed: false
+  raw_source_copied: false
+
+sanitization_state:
+  raw_evidence_received: false
+  raw_evidence_retained: false
+  raw_source_retained: false
+  sanitized_evidence_summary_created: false
+  sanitized_evidence_review_requested: false
+  sanitized_evidence_review_passed: false
+  sensitive_content_detected: false
+  rejection_summary_created: false
+  manual_safety_review_required: true
+  manual_safety_review_completed: false
+
+allowed_sanitized_evidence_categories:
+  - sanitized_file_role_summary_cn
+  - sanitized_ipc_surface_summary_cn
+  - sanitized_window_boundary_summary_cn
+  - sanitized_security_note_cn
+  - risk_tag_list
+  - review_required_reason_cn
+  - rejection_summary_cn
+  - manual_review_result_cn
+
+forbidden_evidence_content:
+  - real_local_path
+  - raw_allowlist_path
+  - raw_read_command
+  - shell_command_text
+  - raw_source_code
+  - complete_function_body
+  - endpoint_raw_value
+  - env_value
+  - secret_raw_value
+  - private_path_raw_value
+  - customer_private_data
+  - raw_runtime_log
+  - raw_ipc_payload
+  - raw_plugin_output
+  - image_binary
+
+evidence_handling_rules:
+  git_storage_for_raw_source_allowed: false
+  git_storage_for_raw_evidence_allowed: false
+  memory_delta_raw_source_allowed: false
+  daily_note_raw_source_allowed: false
+  audit_log_raw_source_allowed: false
+  preserved_original_allowed: false
+  implementation_from_unsanitized_evidence_allowed: false
+  memory_write_from_unsanitized_evidence_allowed: false
+  asset_write_from_unsanitized_evidence_allowed: false
+  direct_implementation_allowed: false
+  daily_note_write_allowed: false
+  vcp_memory_write_allowed: false
+  asset_write_allowed: false
+
+safety_gate:
+  contains_real_local_path: false
+  contains_raw_allowlist_path: false
+  contains_raw_read_command: false
+  contains_raw_source_code: false
+  contains_complete_function_body: false
+  contains_endpoint_raw_value: false
+  contains_env_value: false
+  contains_secret_raw_value: false
+  contains_private_path_raw_value: false
+  contains_customer_private_data: false
+  contains_raw_runtime_log: false
+  contains_raw_ipc_payload: false
+  contains_raw_plugin_output: false
+  contains_image_binary: false
+  sensitive_summary_cn: "本 post-read 脱敏链样例不包含真实路径、读取命令、源码原文或真实证据，只定义未来读取后证据处理门槛。"
+
+no_execution_guard:
+  implementation_code_created: false
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  renderer_runtime_code_created: false
+  execution_entry_created: false
+  read_command_executed: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  file_write_performed: false
+  disk_write_performed: false
+  image_file_created: false
+  selected_plugin: null
+  max_plugin_calls: 0
+  real_manifest_read: false
+  real_execution_allowed: false
+
+memory_delta_draft:
+  write_mode: audit_only
+  approval_status: not_required
+  chinese_audit_summary_cn: "真实 VCPChat 一次性读取后处理仍停留在 post-read 脱敏链模板，未接收真实证据，未读取源码，也未写入记忆。"
+  preserved_original_allowed: false
+  final_decision:
+    should_write_to_vcp: false
+
+next_state_rules:
+  current_state: waiting_for_post_read_sanitization_chain
+  next_allowed_state: waiting_for_sanitized_evidence_review_gate
+  blocked_states:
+    - post_read_sanitization_performed
+    - evidence_packet_created
+    - sanitized_evidence_summary_created
+    - raw_evidence_retained
+    - raw_source_retained
+    - implementation_code_created
+    - daily_note_called
+    - vcp_memory_written
+    - real_execution_ready
+
+audit_summary_cn: "v2.5 Plan 01 只补齐 post-read 脱敏与证据处理链，不读取真实 VCPChat，不保存真实证据。"
+
+acceptance_assertions:
+  - "post_read_sanitization_required=true。"
+  - "post_read_sanitization_requested=false。"
+  - "post_read_sanitization_performed=false。"
+  - "evidence_packet_created=false。"
+  - "sanitized_evidence_summary_created=false。"
+  - "raw_evidence_retained=false。"
+  - "raw_source_retained=false。"
+  - "source_read_performed=false。"
+  - "real_vcpchat_source_read=false。"
+  - "real_execution_allowed=false。"
+  - "api_called=false。"
+  - "vcp_plugin_called=false。"
+  - "daily_note_called=false。"
+

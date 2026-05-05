@@ -1124,3 +1124,34 @@
 - [ ] 样例保持 `ipc_handler_created=false`、`preload_runtime_code_created=false`、`renderer_runtime_code_created=false`、`execution_entry_created=false`。
 - [ ] 样例不包含真实本地路径、真实读取命令、shell 命令文本、真实源码片段、完整函数体、endpoint 原文、环境变量值、secret、token、cookie、密码、客户隐私、raw runtime log、raw IPC payload、raw plugin output 或图片二进制。
 - [ ] dry-run readiness 完成也只允许进入下一独立真实读取运行授权点，不得自动触发真实 VCPChat 源码读取。
+
+## v2.5 Post-read Sanitization and Evidence Chain 检查
+
+- [ ] `docs/98_v2_5_post_read_sanitization_evidence_chain.md` 存在。
+- [ ] `review_console/embed_contract/post_read_sanitization_evidence_chain.md` 存在。
+- [ ] `tests/schema_examples/v2_5_post_read_sanitization_evidence_chain.example.yaml` 存在。
+- [ ] post-read sanitization and evidence chain 只定义未来真实读取后的脱敏与证据处理链，不读取真实 VCPChat 源码。
+- [ ] post-read sanitization and evidence chain 不读取真实 VCPToolBox。
+- [ ] post-read sanitization and evidence chain 不保存真实 VCPChat 根目录、真实 allowlist 路径、真实读取命令或 raw source。
+- [ ] post-read sanitization and evidence chain 不保存 raw evidence、raw runtime log、raw IPC payload 或 raw plugin output。
+- [ ] post-read sanitization and evidence chain 不修改真实 VCPChat 或 VCPToolBox。
+- [ ] post-read sanitization and evidence chain 不创建真实 IPC handler、preload、renderer、Adapter 执行入口或其他执行代码。
+- [ ] post-read sanitization and evidence chain 不调用插件、API、DailyNote、VCP 记忆或文件系统写入。
+- [ ] 样例保持 `post_read_sanitization_required=true`、`post_read_sanitization_requested=false`。
+- [ ] 样例保持 `post_read_sanitization_performed=false`、`evidence_packet_created=false`。
+- [ ] 样例保持 `sanitized_evidence_summary_created=false`、`sanitized_evidence_review_requested=false`、`sanitized_evidence_review_passed=false`。
+- [ ] 样例保持 `raw_evidence_received=false`、`raw_evidence_retained=false`、`raw_source_retained=false`。
+- [ ] 样例保持 `real_read_run_record_exists=false`、`real_read_run_authorized=false`。
+- [ ] 样例保持 `source_read_authorized=false`、`authorization_status=pending_post_read_sanitization_chain`。
+- [ ] 样例保持 `read_command_executed=false`、`read_attempt_limit=1`、`read_attempt_used=0`。
+- [ ] 样例保持 `source_read_performed=false`、`real_vcpchat_source_read=false`。
+- [ ] 样例保持 `exact_real_paths_stored_in_git=false`、`raw_read_command_stored_in_git=false`。
+- [ ] 样例保持 `git_storage_for_raw_source_allowed=false`、`git_storage_for_raw_evidence_allowed=false`。
+- [ ] 样例保持 `memory_delta_raw_source_allowed=false`、`daily_note_raw_source_allowed=false`、`audit_log_raw_source_allowed=false`。
+- [ ] 样例保持 `implementation_from_unsanitized_evidence_allowed=false`、`memory_write_from_unsanitized_evidence_allowed=false`、`asset_write_from_unsanitized_evidence_allowed=false`。
+- [ ] 样例保持 `preserved_original_allowed=false`。
+- [ ] 样例保持 `direct_implementation_allowed=false`、`daily_note_write_allowed=false`、`vcp_memory_write_allowed=false`、`asset_write_allowed=false`。
+- [ ] 样例保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`real_execution_allowed=false`。
+- [ ] 样例保持 `implementation_code_created=false`、`ipc_handler_created=false`、`preload_runtime_code_created=false`、`renderer_runtime_code_created=false`、`execution_entry_created=false`。
+- [ ] 样例不包含真实本地路径、真实读取命令、shell 命令文本、真实源码片段、完整函数体、endpoint 原文、环境变量值、secret、token、cookie、密码、客户隐私、raw runtime log、raw IPC payload、raw plugin output 或图片二进制。
+- [ ] post-read 脱敏链完成也只允许进入下一独立脱敏证据人工复核门，不得自动触发实现、DailyNote、VCP 记忆或资产写入。
