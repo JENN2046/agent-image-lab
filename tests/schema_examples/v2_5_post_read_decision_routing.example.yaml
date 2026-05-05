@@ -1,0 +1,151 @@
+phase: v2.5_post_read_decision_routing
+record_id: v2-5-post-read-decision-routing-001
+project: Agent Image Lab
+status: post_read_decision_routing_template_only
+
+post_read_decision_routing:
+  routing_id: v2-5-post-read-decision-routing-placeholder-001
+  review_gate_id: v2-5-sanitized-evidence-review-gate-placeholder-001
+  post_read_decision_routing_required: true
+  post_read_decision_routing_requested: false
+  post_read_decision_routing_performed: false
+  selected_route: pending
+  routing_reviewer: null
+  routed_at: null
+  authorization_status: pending_post_read_decision_routing
+
+sanitized_evidence_review_state:
+  sanitized_evidence_review_gate_exists: true
+  sanitized_evidence_review_required: true
+  sanitized_evidence_review_requested: false
+  sanitized_evidence_review_passed: false
+  sanitized_evidence_summary_exists: false
+  evidence_packet_created: false
+  raw_evidence_retained: false
+  raw_source_retained: false
+  review_result: pending
+
+allowed_routes:
+  - pending
+  - reject_sensitive_content
+  - request_resanitization
+  - approve_for_design_discussion
+  - request_implementation_authorization
+  - request_memory_handoff_authorization
+  - request_archive_rejection_record
+
+route_authorization_state:
+  implementation_authorized: false
+  memory_handoff_authorized: false
+  daily_note_write_authorized: false
+  asset_write_authorized: false
+  design_discussion_authorized: false
+  archive_rejection_record_authorized: false
+  route_specific_authorization_required: true
+  route_specific_authorization_granted: false
+
+routing_rules:
+  reject_sensitive_content_keeps_raw_text: false
+  request_resanitization_keeps_raw_evidence: false
+  design_discussion_creates_implementation: false
+  implementation_request_is_authorization: false
+  memory_handoff_request_is_write: false
+  daily_note_request_is_write: false
+  archive_rejection_keeps_original: false
+  direct_implementation_allowed: false
+  daily_note_write_allowed: false
+  vcp_memory_write_allowed: false
+  asset_write_allowed: false
+
+forbidden_routing_content:
+  - real_local_path
+  - raw_allowlist_path
+  - raw_read_command
+  - shell_command_text
+  - raw_source_code
+  - complete_function_body
+  - endpoint_raw_value
+  - env_value
+  - secret_raw_value
+  - private_path_raw_value
+  - customer_private_data
+  - raw_runtime_log
+  - raw_ipc_payload
+  - raw_plugin_output
+  - image_binary
+
+safety_gate:
+  contains_real_local_path: false
+  contains_raw_allowlist_path: false
+  contains_raw_read_command: false
+  contains_raw_source_code: false
+  contains_complete_function_body: false
+  contains_endpoint_raw_value: false
+  contains_env_value: false
+  contains_secret_raw_value: false
+  contains_private_path_raw_value: false
+  contains_customer_private_data: false
+  contains_raw_runtime_log: false
+  contains_raw_ipc_payload: false
+  contains_raw_plugin_output: false
+  contains_image_binary: false
+  sensitive_summary_cn: "本 post-read decision routing 样例不包含真实路径、读取命令、源码原文或真实证据，只定义未来脱敏复核后的路由门槛。"
+
+no_execution_guard:
+  implementation_code_created: false
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  renderer_runtime_code_created: false
+  execution_entry_created: false
+  read_command_executed: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  file_write_performed: false
+  disk_write_performed: false
+  image_file_created: false
+  selected_plugin: null
+  max_plugin_calls: 0
+  real_manifest_read: false
+  real_execution_allowed: false
+
+memory_delta_draft:
+  write_mode: audit_only
+  approval_status: not_required
+  chinese_audit_summary_cn: "读取后决策路由仍停留在模板，未选择后续路线，未授权实现，也未写入记忆。"
+  preserved_original_allowed: false
+  final_decision:
+    should_write_to_vcp: false
+
+next_state_rules:
+  current_state: waiting_for_post_read_decision_routing
+  next_allowed_state: waiting_for_route_specific_authorization_gate
+  blocked_states:
+    - post_read_decision_routing_performed
+    - implementation_authorized
+    - memory_handoff_authorized
+    - daily_note_write_authorized
+    - implementation_code_created
+    - daily_note_called
+    - vcp_memory_written
+    - real_execution_ready
+
+audit_summary_cn: "v2.5 Plan 03 只补齐 post-read decision routing，不读取真实 VCPChat，不保存真实证据。"
+
+acceptance_assertions:
+  - "post_read_decision_routing_required=true。"
+  - "post_read_decision_routing_requested=false。"
+  - "post_read_decision_routing_performed=false。"
+  - "sanitized_evidence_review_passed=false。"
+  - "selected_route=pending。"
+  - "implementation_authorized=false。"
+  - "memory_handoff_authorized=false。"
+  - "daily_note_write_authorized=false。"
+  - "asset_write_authorized=false。"
+  - "route_specific_authorization_granted=false。"
+  - "real_execution_allowed=false。"
+  - "api_called=false。"
+  - "vcp_plugin_called=false。"
+  - "daily_note_called=false。"
+
