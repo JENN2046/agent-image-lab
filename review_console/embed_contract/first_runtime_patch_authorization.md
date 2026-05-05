@@ -131,4 +131,3 @@ first runtime patch authorization 记录完成后也不得自动进入：
 - 本 contract 不创建 IPC handler、preload 或 renderer runtime 代码。
 - 本 contract 不授权修改真实 VCPChat。
 - 本 contract 不授权插件、API、DailyNote、VCP 记忆或文件系统调用。
-

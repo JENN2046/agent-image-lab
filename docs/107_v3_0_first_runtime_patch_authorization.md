@@ -37,7 +37,6 @@ v3_0_first_runtime_patch_authorization:
   image_file_created: false
   real_execution_allowed: false
 ```
-
 ## Goal
 
 v3.0 的目标是把“runtime patch preflight”推进为“第一次真实 runtime patch 授权填写模板”。它只回答：
@@ -220,4 +219,3 @@ next_authorization_point:
     - write VCP memory
     - write assets
 ```
-

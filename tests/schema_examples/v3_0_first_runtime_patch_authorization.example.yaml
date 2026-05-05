@@ -166,4 +166,3 @@ acceptance_assertions:
   - "api_called=false。"
   - "vcp_plugin_called=false。"
   - "daily_note_called=false。"
-
