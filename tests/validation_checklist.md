@@ -2199,3 +2199,20 @@
 - [ ] v6.8 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
 - [ ] v6.8 默认下一阶段为 `v6.9 VCPChat Embed Implementation Authorization Request`。
 - [ ] `node scripts/validate_v6_8_vcpchat_embed_scope_review_gate.js` 通过。
+
+## v6.9 VCPChat Embed Implementation Authorization Request 检查
+
+- [ ] 当前阶段字符串为 `v6.9 vcpchat embed implementation authorization request`。
+- [ ] `docs/151_v6_9_vcpchat_embed_implementation_authorization_request.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_embed_implementation_authorization_request.md` 存在。
+- [ ] `tests/schema_examples/v6_9_vcpchat_embed_implementation_authorization_request.example.yaml` 存在。
+- [ ] `scripts/validate_v6_9_vcpchat_embed_implementation_authorization_request.js` 存在。
+- [ ] v6.9 记录当前基线 `5e9c03e` 和上一阶段 `v6.8 vcpchat embed scope review gate`。
+- [ ] v6.9 只记录授权请求模板，必须保持 `authorization_template_only=true`、`implementation_authorization_granted=false`、`implementation_allowed=false`。
+- [ ] v6.9 明确 required_before_submission 全部仍未满足：真实源码读取、scope fill、scope review、target path review、rollback plan、validation plan、Electron security review。
+- [ ] v6.9 覆盖 human_authorization_checklist：repository、branch、命名文件、允许命令、禁止命令、验证命令、回退计划、无 secret、无插件/API/DailyNote、无图片创建、用户修改保护。
+- [ ] v6.9 明确 `next_phase_requires_explicit_hard_authorization=true`，v7.0 必须作为独立硬授权点。
+- [ ] v6.9 保持不读取真实 VCPChat / VCPToolBox，不读取真实 manifest，不创建 IPC/preload/renderer 或 Adapter 执行入口。
+- [ ] v6.9 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
+- [ ] v6.9 默认下一阶段为 `v7.0 First VCPChat Embed Runtime Patch Hard Authorization`。
+- [ ] `node scripts/validate_v6_9_vcpchat_embed_implementation_authorization_request.js` 通过。
