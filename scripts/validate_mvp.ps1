@@ -4663,9 +4663,34 @@ if (response.dispatch_plan_draft.execution_blocked !== true) process.exit(4);
     Add-Failure "export dry-run adapter accepted fixture check failed"
   }
 
+  function Invoke-NodeCliWithFixtureStdin {
+    param(
+      [string]$ScriptPath,
+      [string]$FixturePath
+    )
+
+    $runner = @'
+const fs = require("node:fs");
+const { spawnSync } = require("node:child_process");
+
+const scriptPath = process.argv[2];
+const fixturePath = process.argv[3];
+const child = spawnSync(process.execPath, [scriptPath], {
+  input: fs.readFileSync(fixturePath),
+  encoding: "utf8",
+});
+
+if (child.stdout) process.stdout.write(child.stdout);
+if (child.stderr) process.stderr.write(child.stderr);
+process.exit(child.status || 0);
+'@
+
+    $runner | & node - $ScriptPath $FixturePath
+  }
+
   $adapterCliPath = Join-Path $Root 'exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js'
-  $acceptedCliInput = Get-Content -Raw -Encoding UTF8 (Join-Path $Root 'adapter_dry_run_lab/fixtures/accepted_request.json')
-  $acceptedCliOutput = $acceptedCliInput | & node $adapterCliPath
+  $acceptedCliFixture = Join-Path $Root 'adapter_dry_run_lab/fixtures/accepted_request.json'
+  $acceptedCliOutput = Invoke-NodeCliWithFixtureStdin -ScriptPath $adapterCliPath -FixturePath $acceptedCliFixture
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "export dry-run adapter CLI accepted fixture exited with failure"
   } else {
@@ -4697,8 +4722,8 @@ if (response.dispatch_plan_draft.execution_blocked !== true) process.exit(4);
     }
   }
 
-  $rejectedCliInput = Get-Content -Raw -Encoding UTF8 (Join-Path $Root 'adapter_dry_run_lab/fixtures/rejected_request.json')
-  $rejectedCliOutput = $rejectedCliInput | & node $adapterCliPath
+  $rejectedCliFixture = Join-Path $Root 'adapter_dry_run_lab/fixtures/rejected_request.json'
+  $rejectedCliOutput = Invoke-NodeCliWithFixtureStdin -ScriptPath $adapterCliPath -FixturePath $rejectedCliFixture
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "export dry-run adapter CLI rejected fixture exited with failure"
   } else {
