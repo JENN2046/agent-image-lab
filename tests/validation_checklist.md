@@ -2269,3 +2269,21 @@
 - [ ] v7.2 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
 - [ ] v7.2 默认下一阶段为 `v7.3 VCPChat Review Console IPC Handler Design Gate`。
 - [ ] `node scripts/validate_v7_2_vcpchat_review_console_preload_design_gate.js` 通过。
+
+## v7.3 VCPChat Review Console IPC Handler Design Gate 检查
+
+- [ ] 当前阶段字符串为 `v7.3 vcpchat review console ipc handler design gate`。
+- [ ] `docs/155_v7_3_vcpchat_review_console_ipc_handler_design_gate.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_review_console_ipc_handler_design_gate.md` 存在。
+- [ ] `tests/schema_examples/v7_3_vcpchat_review_console_ipc_handler_design_gate.example.yaml` 存在。
+- [ ] `scripts/validate_v7_3_vcpchat_review_console_ipc_handler_design_gate.js` 存在。
+- [ ] v7.3 记录当前基线 `154993d` 和上一阶段 `v7.2 vcpchat review console preload design gate`。
+- [ ] v7.3 只设计专用 `imageLabReview` IPC handler channel allowlist，覆盖 `imageLabReview.loadSession`、`imageLabReview.previewDraft`、`imageLabReview.submitDraft`、`imageLabReview.cancel`。
+- [ ] v7.3 明确 sender 校验：registered review console window、webContents match、session registry match、request correlation id。
+- [ ] v7.3 明确 payload 校验：prototype_guard 必须保持 api/plugin/DailyNote/disk/image false。
+- [ ] v7.3 明确 ack contract：ack_id、request_id、channel、session_id、accepted_by_handler、validation_passed、rejection_reason_cn、audit_summary_cn、side_effects_performed=false。
+- [ ] v7.3 保持 `additional_vcpchat_read_performed=false`，不读取或修改真实 VCPChat / VCPToolBox。
+- [ ] v7.3 保持不创建 `ipcMain.handle`、preload、renderer 或 Adapter 执行入口。
+- [ ] v7.3 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
+- [ ] v7.3 默认下一阶段为 `v7.4 VCPChat Review Console Renderer Mount Design Gate`。
+- [ ] `node scripts/validate_v7_3_vcpchat_review_console_ipc_handler_design_gate.js` 通过。

@@ -1,0 +1,172 @@
+status: completed_validated_project_local_v7_3_vcpchat_review_console_ipc_handler_design_gate
+version: v7.3
+current_phase: "v7.3 vcpchat review console ipc handler design gate"
+validation_file: scripts/validate_v7_3_vcpchat_review_console_ipc_handler_design_gate.js
+
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: 154993d
+  previous_phase: "v7.2 vcpchat review console preload design gate"
+  previous_record: docs/154_v7_2_vcpchat_review_console_preload_design_gate.md
+  previous_validation: scripts/validate_v7_2_vcpchat_review_console_preload_design_gate.js
+  default_next_phase: "v7.4 VCPChat Review Console Renderer Mount Design Gate"
+
+design_goal:
+  summary_cn: "设计未来 Review Console 专用 imageLabReview IPC handler 安全门。"
+  design_gate_only: true
+  implementation_not_authorized_by_this_record: true
+  no_runtime_code_change_required: true
+  no_external_read_required: true
+  no_vcpchat_write_allowed: true
+
+ipc_channel_allowlist:
+  allowed_channels:
+    imageLabReview.loadSession:
+      pattern: invoke_request_response
+      side_effects_allowed: false
+    imageLabReview.previewDraft:
+      pattern: invoke_request_response
+      side_effects_allowed: false
+    imageLabReview.submitDraft:
+      pattern: invoke_request_response
+      side_effects_allowed: false
+    imageLabReview.cancel:
+      pattern: invoke_request_response
+      side_effects_allowed: false
+  wildcard_channel_allowed: false
+  broad_passthrough_allowed: false
+
+sender_validation_design:
+  registered_review_console_window: required
+  sender_webcontents_matches_registered_window: required
+  sender_not_destroyed: required
+  session_id_matches_host_registered_session: required
+  route_context_matches_review_console: required
+  request_correlation_id_present: required
+  unknown_window_allowed: false
+  arbitrary_renderer_allowed: false
+  devtools_console_allowed: false
+  url_query_token_source_allowed: false
+  hash_token_source_allowed: false
+  return_sanitized_ack: true
+  log_raw_payload: false
+
+payload_validation_design:
+  common_required_fields:
+    - request_id
+    - session_id
+    - task_id
+    - case_id
+    - prototype_guard
+  common_guard_invariants:
+    api_called: false
+    vcp_plugin_called: false
+    daily_note_called: false
+    disk_write_performed: false
+    image_file_created: false
+  forbidden_payload_fields:
+    raw_source_code: forbidden
+    raw_private_path: forbidden
+    secret_or_token: forbidden
+    cookie: forbidden
+    password: forbidden
+    endpoint_raw: forbidden
+    image_binary: forbidden
+    plugin_output_raw: forbidden
+  chinese_text_requirements:
+    memory_preview_chinese_diary_content: required_when_present
+    rejection_reason_cn: required_for_rejection
+    audit_summary_cn: required
+
+channel_handler_design:
+  imageLabReview.loadSession:
+    validates:
+      - sender
+      - request_id
+      - session_ref
+      - task_id
+      - case_id
+    side_effects_performed: false
+  imageLabReview.previewDraft:
+    validates:
+      - sender
+      - request_id
+      - review_session_draft
+      - image_case_draft
+      - memory_delta_draft
+      - prototype_guard
+    side_effects_performed: false
+  imageLabReview.submitDraft:
+    validates:
+      - sender
+      - request_id
+      - review_session_draft
+      - image_case_draft
+      - memory_delta_draft
+      - requested_route
+      - prototype_guard
+    side_effects_performed: false
+  imageLabReview.cancel:
+    validates:
+      - sender
+      - request_id
+      - session_id
+      - cancel_reason_cn
+    side_effects_performed: false
+
+ack_contract:
+  required_fields:
+    - ack_id
+    - request_id
+    - channel
+    - session_id
+    - accepted_by_handler
+    - validation_passed
+    - rejection_reason_cn
+    - audit_summary_cn
+    - side_effects_performed
+    - next_authorization_point
+  rejected_ack_rules:
+    accepted_by_handler: false
+    validation_passed: false
+    side_effects_performed: false
+    rejection_reason_cn: required_sanitized_chinese
+  accepted_ack_rules:
+    accepted_by_handler: true
+    validation_passed: true
+    side_effects_performed: false
+    rejection_reason_cn: null
+
+boundary_state:
+  design_gate_added: true
+  implementation_task_authorized: false
+  implementation_allowed: false
+  runtime_code_modified: false
+  vcpchat_code_modified: false
+  vcptoolbox_code_modified: false
+  tag_created: false
+  package_created: false
+  github_release_published: false
+  release_assets_uploaded: false
+  additional_vcpchat_read_performed: false
+  real_vcptoolbox_source_read: false
+  real_manifest_read: false
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  renderer_runtime_code_created: false
+  adapter_execution_entrypoint_created: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  disk_write_runtime_performed: false
+  image_file_created: false
+
+acceptance_assertions:
+  - "v7.3 只设计 imageLabReview 专用 IPC handler 的 sender 校验、payload 校验和 ack contract。"
+  - "v7.3 不读取或修改真实 VCPChat / VCPToolBox。"
+  - "v7.3 不创建 ipcMain.handle、preload 或 renderer 实现代码。"
+  - "v7.3 不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。"
+  - "v7.3 明确拒绝未知 sender、任意 renderer、URL query token、hash token 和 raw payload 日志。"
+  - "默认下一阶段是 v7.4 VCPChat Review Console Renderer Mount Design Gate。"
