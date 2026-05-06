@@ -75,6 +75,7 @@ $requiredFiles = @(
   'scripts/validate_v5_12_release_candidate_readiness.js',
   'scripts/validate_v7_40_local_a4_a5_autonomy_alignment.js',
   'scripts/validate_v7_41_external_remote_debug_verification_script_creation_record.js',
+  'scripts/validate_v7_42_external_remote_debug_verification_script_creation_authorization_package.js',
   'scripts/validate_runtime_guard_unit.js',
   'scripts/validate_runtime_prototype_smoke.js',
   'scripts/validate_runtime_prototype_suite.js',
@@ -114,6 +115,7 @@ $requiredFiles = @(
   'docs/139_v5_12_release_candidate_readiness.md',
   'docs/192_v7_40_local_a4_a5_autonomy_alignment.md',
   'docs/193_v7_41_external_remote_debug_verification_script_creation_record.md',
+  'docs/194_v7_42_external_remote_debug_verification_script_creation_authorization_package.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
@@ -201,6 +203,7 @@ $requiredFiles = @(
   'tests/schema_examples/v5_12_release_candidate_readiness.example.yaml',
   'tests/schema_examples/v7_40_local_a4_a5_autonomy_alignment.example.yaml',
   'tests/schema_examples/v7_41_external_remote_debug_verification_script_creation_record.example.yaml',
+  'tests/schema_examples/v7_42_external_remote_debug_verification_script_creation_authorization_package.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -214,7 +217,8 @@ $requiredFiles = @(
   'review_console/runtime_prototype/README.md',
   'review_console/runtime_prototype/FIELD_MAPPING.md',
   'review_console/embed_contract/first_runtime_code_patch_authorization.md',
-  'review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_record.md'
+  'review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_record.md',
+  'review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_authorization_package.md'
 )
 
 $requiredDirectories = @(
@@ -3710,6 +3714,11 @@ if (-not $node) {
     Add-Failure "scripts/validate_v7_41_external_remote_debug_verification_script_creation_record.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'scripts/validate_v7_42_external_remote_debug_verification_script_creation_authorization_package.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_v7_42_external_remote_debug_verification_script_creation_authorization_package.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_agent_board_state.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_agent_board_state.js failed node --check"
@@ -3817,6 +3826,25 @@ if (-not $node) {
     }
     if ($v741ScriptCreationRecord.v7_41_external_remote_debug_verification_script_creation_record.future_package_recorded -ne $true) {
       Add-Failure "v7.41 must record future script creation authorization package"
+    }
+  }
+
+  $v742AuthorizationPackageOutput = & node (Join-Path $Root 'scripts/validate_v7_42_external_remote_debug_verification_script_creation_authorization_package.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v7.42 external remote-debug verification script creation authorization package validation exited with failure"
+  } else {
+    $v742AuthorizationPackage = ($v742AuthorizationPackageOutput -join "`n") | ConvertFrom-Json
+    if ($v742AuthorizationPackage.passed -ne $true) {
+      Add-Failure "v7.42 external remote-debug verification script creation authorization package validation must report passed true"
+    }
+    if ($v742AuthorizationPackage.v7_42_external_remote_debug_verification_script_creation_authorization_package.package_active -ne $false) {
+      Add-Failure "v7.42 authorization package must remain inactive"
+    }
+    if ($v742AuthorizationPackage.v7_42_external_remote_debug_verification_script_creation_authorization_package.script_creation_authorized_by_this_phase -ne $false) {
+      Add-Failure "v7.42 must not authorize script creation"
+    }
+    if ($v742AuthorizationPackage.v7_42_external_remote_debug_verification_script_creation_authorization_package.remote_debug_script_created -ne $false) {
+      Add-Failure "v7.42 must not create the remote-debug verification script"
     }
   }
 

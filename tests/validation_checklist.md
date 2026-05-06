@@ -2988,3 +2988,23 @@
 - [ ] v7.41 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.41 默认下一安全阶段为 `v7.42 External Remote Debug Verification Script Creation Authorization Package`。
 - [ ] `node scripts/validate_v7_41_external_remote_debug_verification_script_creation_record.js` 通过。
+
+## v7.42 External Remote Debug Verification Script Creation Authorization Package 检查
+
+- [ ] 当前阶段字符串为 `v7.42 external remote-debug verification script creation authorization package`。
+- [ ] `docs/194_v7_42_external_remote_debug_verification_script_creation_authorization_package.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_authorization_package.md` 存在。
+- [ ] `tests/schema_examples/v7_42_external_remote_debug_verification_script_creation_authorization_package.example.yaml` 存在。
+- [ ] `scripts/validate_v7_42_external_remote_debug_verification_script_creation_authorization_package.js` 存在。
+- [ ] v7.42 记录上一阶段为 `v7.41 external remote-debug verification script creation record`。
+- [ ] v7.42 必须记录 `package_record_created=true`、`package_template_only=true`、`package_active=false`。
+- [ ] v7.42 必须保持 `user_approved_script_creation_now=false`、`active_a5_authorization_package_present=false`、`active_script_creation_authorization_package_present=false`。
+- [ ] v7.42 必须保持 `script_creation_authorized_by_this_phase=false`、`remote_debug_script_created=false`、`script_run_by_this_phase=false`。
+- [ ] v7.42 必须记录 required_authorization_package 字段：authorization_id、authorized_by、authorized_at、allowed_file_to_create、forbidden_files、allowed_creation_actions、forbidden_creation_actions、validation_requirements、rollback_path、reviewer、stop_conditions。
+- [ ] v7.42 必须记录未来脚本默认 dry_run=true、execute=false、app_launch=false、cdp_access=false、bridge_method_invocation=false、writes_outside_workspace=false。
+- [ ] v7.42 必须记录最小批准语句，且该语句仍禁止启动 VCPChat、访问 CDP、调用 bridge、读取或修改 VCPChat/VCPToolBox。
+- [ ] v7.42 必须保持 bridge loadSession / previewDraft / submitDraft / cancel 未调用。
+- [ ] v7.42 必须保持插件/API/DailyNote/VCP 记忆/图片/依赖/manifest/lockfile/VCPChat 修改/远端推送均未发生。
+- [ ] v7.42 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.42 默认下一安全阶段为 `BLOCKED until explicit script creation authorization`。
+- [ ] `node scripts/validate_v7_42_external_remote_debug_verification_script_creation_authorization_package.js` 通过。

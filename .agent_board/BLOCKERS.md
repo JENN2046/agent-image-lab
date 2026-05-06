@@ -34,6 +34,7 @@ Without an active A5 authorization package, production actions remain blocked. A
 
 ```text
 The real scripts/run_vcpchat_review_console_remote_debug_smoke.ps1 file remains uncreated. Creating or running that executable remote-debug script requires an active script creation authorization package or active A5 authorization package.
+v7.42 records an inactive authorization package template only; it does not activate script creation approval.
 ```
 
 ## Blocker Template

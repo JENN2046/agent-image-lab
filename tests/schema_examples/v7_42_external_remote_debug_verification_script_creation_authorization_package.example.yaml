@@ -1,0 +1,131 @@
+status: planned_validated_v7_42_external_remote_debug_verification_script_creation_authorization_package
+version: v7.42
+current_phase: "v7.42 external remote-debug verification script creation authorization package"
+validation_file: scripts/validate_v7_42_external_remote_debug_verification_script_creation_authorization_package.js
+
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  origin_master_short: 5a7f5ba
+  local_head_before_batch: 0326150
+  local_pending_commits_before_this_batch:
+    - 8f60ae1
+    - 0326150
+  previous_phase: "v7.41 external remote-debug verification script creation record"
+  previous_record: docs/193_v7_41_external_remote_debug_verification_script_creation_record.md
+  default_next_phase: "BLOCKED until explicit script creation authorization"
+
+authorization_package_state:
+  package_record_created: true
+  package_template_only: true
+  package_active: false
+  user_approved_script_creation_now: false
+  active_a5_authorization_package_present: false
+  active_script_creation_authorization_package_present: false
+  executable_script_creation_allowed_now: false
+  safe_to_create_script_now: false
+  safe_to_run_script_now: false
+  safe_to_start_vcpchat_now: false
+  safe_to_access_cdp_now: false
+  safe_to_modify_vcpchat_now: false
+
+required_authorization_package:
+  authorization_id: "<required-explicit-id>"
+  authorized_by: "<required-human>"
+  authorized_at: "<required-absolute-time>"
+  allowed_file_to_create:
+    - scripts/run_vcpchat_review_console_remote_debug_smoke.ps1
+  forbidden_files:
+    - "任何 VCPChat 文件。"
+    - "任何 VCPToolBox 文件。"
+    - "任何 .env / config.env / secret / token / cookie / password 文件。"
+    - "任何 package manifest 或 lockfile。"
+  allowed_creation_actions:
+    - create_agent_image_lab_local_script_file
+    - create_sanitized_creation_record
+    - add_validator_for_created_script
+    - run_static_syntax_or_policy_checks
+  forbidden_creation_actions:
+    - launch_vcpchat
+    - access_cdp_endpoint
+    - call_bridge_loadSession
+    - call_bridge_previewDraft
+    - call_bridge_submitDraft
+    - call_bridge_cancel
+    - read_vcpchat_source
+    - modify_vcpchat_source
+    - modify_vcptoolbox_source
+    - call_plugin
+    - call_api
+    - call_dailynote
+    - write_vcp_memory
+    - create_image
+    - install_dependency
+    - push_or_tag_or_release
+  required_default_behavior:
+    dry_run: true
+    execute: false
+    app_launch: false
+    cdp_access: false
+    bridge_method_invocation: false
+    writes_outside_workspace: false
+  validation_requirements:
+    - git_status_short_branch
+    - git_diff_check
+    - powershell_syntax_check_if_script_created
+    - no_secret_scan
+    - no_raw_local_path_scan
+    - no_execution_flag_true_scan
+    - v7_42_authorization_package_validator
+  rollback_path:
+    - "删除本次新增的 Agent Image Lab 本地脚本和记录文件。"
+    - "不触碰 VCPChat / VCPToolBox。"
+  reviewer: "<required-human-reviewer>"
+  stop_conditions:
+    - target_file_already_exists_with_unknown_content
+    - script_would_auto_launch_vcpchat
+    - script_would_access_cdp_without_execute_authorization
+    - script_would_call_bridge_methods
+    - script_would_read_or_modify_vcpchat
+    - script_would_read_or_modify_vcptoolbox
+    - script_would_read_env_or_secret
+    - script_would_persist_raw_local_path_or_cdp_endpoint
+    - dependency_change_required
+    - remote_write_required
+
+this_phase_boundary:
+  package_record_created: true
+  package_active: false
+  script_creation_authorized_by_this_phase: false
+  remote_debug_script_created: false
+  script_run_by_this_phase: false
+  app_launch_authorized_by_this_phase: false
+  app_launch_performed_by_this_phase: false
+  remote_debug_authorized_by_this_phase: false
+  remote_debug_used_by_this_phase: false
+  cdp_access_authorized_by_this_phase: false
+  cdp_endpoint_accessed_by_this_phase: false
+  runtime_evaluate_authorized_by_this_phase: false
+  runtime_evaluate_performed_by_this_phase: false
+  bridge_load_session_called: false
+  bridge_preview_draft_called: false
+  bridge_submit_draft_called: false
+  bridge_cancel_called: false
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_created: false
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+  vcpchat_modified_by_this_phase: false
+  vcptoolbox_modified_by_this_phase: false
+  tag_created: false
+  push_performed: false
+  github_release_performed: false
+
+notes_cn:
+  - "v7.42 是未激活授权包模板。"
+  - "真实 remote-debug 脚本仍未创建。"
+  - "下一步真实脚本创建需要用户明确审批。"
