@@ -1,0 +1,58 @@
+status: completed_validated_project_local_v7_8_implementation_authorization_point
+version: v7.8
+current_phase: "v7.8 vcpchat review console implementation authorization point"
+validation_file: scripts/validate_v7_6_to_v7_8_vcpchat_review_console_authorization_chain.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: d7aacb9
+  previous_phase: "v7.7 vcpchat review console first runtime integration scope review gate"
+  default_next_phase: "v7.9 VCPChat Review Console Authorized Source Lookup For Missing Files"
+authorization_status:
+  real_vcpchat_write_authorized: false
+  final_write_authorization_ready: false
+required_user_authorization_template:
+  target_repository: VCPChat
+  target_branch: main
+  target_commit_before_patch: "<confirm_before_patch>"
+  allowed_read_scope:
+    - modules/services/preloadPaths.js
+    - preloads/shared/apiFactory.js
+    - preloads/shared/catalog.js
+    - preloads/shared/roles.js
+    - preloads/chat.js
+    - "<repo_relative_main_process_ipc_handler_candidate>"
+    - "<repo_relative_renderer_mount_candidate>"
+  allowed_write_scope:
+    - preloads/chat.js
+    - preloads/shared/apiFactory.js
+    - preloads/shared/roles.js
+    - "<repo_relative_main_process_ipc_handler_file>"
+    - "<repo_relative_renderer_mount_file>"
+  forbidden_actions:
+    - modify_unlisted_files
+    - read_env_or_secret_files
+    - call_plugin
+    - call_external_api
+    - call_daily_note
+    - write_vcp_memory
+    - create_image_file
+    - push_vcpchat_remote
+missing_fields_that_block_real_write:
+  target_commit_before_patch: "<confirm_before_patch>"
+  repo_relative_main_process_ipc_handler_file: "<missing>"
+  repo_relative_renderer_mount_file: "<missing>"
+  final_allowed_write_scope_confirmed_by_user: false
+boundary_state:
+  implementation_allowed: false
+  final_write_authorization_ready: false
+  vcpchat_code_modified: false
+  additional_vcpchat_read_performed: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  image_file_created: false
+stop_point:
+  stop_here: true
+  next_safe_phase: "v7.9 VCPChat Review Console Authorized Source Lookup For Missing Files"
+  real_write_phase_blocked: true

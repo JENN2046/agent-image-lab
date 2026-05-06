@@ -2323,3 +2323,21 @@
 - [ ] v7.5 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
 - [ ] v7.5 默认下一阶段为 `v7.6 VCPChat Review Console First Runtime Integration Scope Fill Gate`。
 - [ ] `node scripts/validate_v7_5_vcpchat_review_console_runtime_integration_authorization_gate.js` 通过。
+
+## v7.6-v7.8 VCPChat Review Console Authorization Chain 检查
+
+- [ ] `docs/158_v7_6_vcpchat_review_console_first_runtime_integration_scope_fill_gate.md` 存在。
+- [ ] `docs/159_v7_7_vcpchat_review_console_first_runtime_integration_scope_review_gate.md` 存在。
+- [ ] `docs/160_v7_8_vcpchat_review_console_implementation_authorization_point.md` 存在。
+- [ ] v7.6 只填写候选 scope，候选文件必须使用 repo-relative 路径。
+- [ ] v7.6 记录 preload 候选文件：`preloads/chat.js`、`preloads/shared/apiFactory.js`、`preloads/shared/roles.js`。
+- [ ] v7.6 记录缺失文件占位：`<repo_relative_main_process_ipc_handler_candidate>` 和 `<repo_relative_renderer_mount_candidate>`。
+- [ ] v7.7 必须给出 `can_enter_real_vcpchat_write_now=false`。
+- [ ] v7.7 必须说明主进程 IPC handler 文件和 renderer mount 文件尚未精确确认。
+- [ ] v7.8 必须保持 `real_vcpchat_write_authorized=false` 和 `final_write_authorization_ready=false`。
+- [ ] v7.8 必须停在真实文件级写入授权点，不得自动进入真实 VCPChat 写入。
+- [ ] v7.6-v7.8 保持 `additional_vcpchat_read_performed=false`，不重新读取真实 VCPChat / VCPToolBox。
+- [ ] v7.6-v7.8 保持不创建 renderer mount、preload、`ipcMain.handle` 或 Adapter 执行入口。
+- [ ] v7.6-v7.8 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
+- [ ] v7.8 默认下一安全阶段为 `v7.9 VCPChat Review Console Authorized Source Lookup For Missing Files`。
+- [ ] `node scripts/validate_v7_6_to_v7_8_vcpchat_review_console_authorization_chain.js` 通过。

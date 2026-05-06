@@ -1,0 +1,46 @@
+status: completed_validated_project_local_v7_6_scope_fill_gate
+version: v7.6
+current_phase: "v7.6 vcpchat review console first runtime integration scope fill gate"
+validation_file: scripts/validate_v7_6_to_v7_8_vcpchat_review_console_authorization_chain.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: d7aacb9
+  previous_phase: "v7.5 vcpchat review console runtime integration authorization gate"
+  default_next_phase: "v7.7 VCPChat Review Console First Runtime Integration Scope Review Gate"
+scope_basis:
+  source: prior_sanitized_agent_image_lab_records
+  no_new_vcpchat_read_performed: true
+  no_new_vcpchat_write_performed: true
+  raw_local_path_saved: false
+  raw_source_code_copied: false
+candidate_read_scope:
+  repo_relative_files_only: true
+  files_from_prior_sanitized_intake:
+    - modules/services/preloadPaths.js
+    - preloads/shared/apiFactory.js
+    - preloads/shared/catalog.js
+    - preloads/shared/roles.js
+    - preloads/chat.js
+  additional_read_needed_before_real_patch:
+    - "<repo_relative_main_process_ipc_handler_candidate>"
+    - "<repo_relative_renderer_mount_candidate>"
+candidate_write_scope:
+  status: incomplete_until_v7_7_review
+  exact_repo_relative_files_only: true
+  candidate_files_from_prior_sanitized_intake:
+    - preloads/chat.js
+    - preloads/shared/apiFactory.js
+    - preloads/shared/roles.js
+  unresolved_required_files:
+    main_process_ipc_handler_file: "<requires_future_authorized_read_only_source_lookup>"
+    renderer_mount_file: "<requires_future_authorized_read_only_source_lookup>"
+boundary_state:
+  implementation_allowed: false
+  final_write_authorization_ready: false
+  vcpchat_code_modified: false
+  additional_vcpchat_read_performed: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  image_file_created: false

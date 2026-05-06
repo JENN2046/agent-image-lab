@@ -1,0 +1,43 @@
+status: completed_validated_project_local_v7_7_scope_review_gate
+version: v7.7
+current_phase: "v7.7 vcpchat review console first runtime integration scope review gate"
+validation_file: scripts/validate_v7_6_to_v7_8_vcpchat_review_console_authorization_chain.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: d7aacb9
+  previous_phase: "v7.6 vcpchat review console first runtime integration scope fill gate"
+  default_next_phase: "v7.8 VCPChat Review Console Implementation Authorization Point"
+scope_review_verdict:
+  overall_status: blocked_before_real_write_authorization
+  can_enter_real_vcpchat_write_now: false
+  can_prepare_final_authorization_template: true
+  requires_additional_authorized_read_only_lookup: true
+scope_completeness_review:
+  preload_allowlist_slice:
+    status: candidate_scope_available
+  ipc_handler_slice:
+    status: unresolved
+    missing_exact_file: "<repo_relative_main_process_ipc_handler_candidate>"
+  renderer_mount_slice:
+    status: unresolved
+    missing_exact_file: "<repo_relative_renderer_mount_candidate>"
+risk_review:
+  write_scope_is_exact_enough: false
+  directory_or_glob_scope_present: false
+  env_or_secret_scope_present: false
+  remote_write_requested: false
+  dependency_change_requested: false
+  plugin_call_requested: false
+  api_call_requested: false
+  daily_note_call_requested: false
+  image_creation_requested: false
+boundary_state:
+  implementation_allowed: false
+  final_write_authorization_ready: false
+  vcpchat_code_modified: false
+  additional_vcpchat_read_performed: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  image_file_created: false
