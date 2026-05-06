@@ -1,0 +1,148 @@
+status: completed_validated_project_local_v6_6_vcpchat_embed_implementation_preflight
+version: v6.6
+current_phase: "v6.6 vcpchat embed implementation preflight"
+validation_file: scripts/validate_v6_6_vcpchat_embed_implementation_preflight.js
+
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: 392701d
+  previous_phase: "v6.5 memory handoff runtime status"
+  previous_record: docs/147_v6_5_memory_handoff_runtime_status.md
+  previous_validation: scripts/validate_v6_5_memory_handoff_runtime_status.js
+  default_next_phase: "v6.7 VCPChat Embed Minimal Patch Scope"
+
+preflight_goal:
+  summary_cn: "在真实 VCPChat 嵌入实现前，固定实现门槛、范围填写要求、安全条件和停止条件。"
+  preflight_only: true
+  implementation_not_authorized_by_this_record: true
+  no_runtime_code_change_required: true
+  no_external_read_required: true
+
+implementation_preflight_gate:
+  implementation_task_authorized: false
+  real_vcpchat_source_read_required_before_implementation: true
+  real_vcpchat_source_read_authorized: false
+  real_vcpchat_source_read_performed: false
+  real_vcptoolbox_source_read_performed: false
+  source_read_scope_filled: false
+  source_read_scope_reviewed: false
+  target_files_filled: false
+  target_files_reviewed: false
+  final_human_authorization_required: true
+  rollback_plan_required: true
+  validation_plan_required: true
+  user_owned_change_check_required: true
+
+future_minimal_patch_candidate:
+  candidate_name: vcpchat_review_console_embed_minimal_patch
+  candidate_status: planning_only
+  target_files_allowed_now: []
+  target_files_must_be_filled_later:
+    - host_main_process_file_placeholder
+    - preload_bridge_file_placeholder
+    - renderer_mount_file_placeholder
+    - review_console_asset_reference_placeholder
+  code_creation_allowed_now: false
+  ipc_handler_creation_allowed_now: false
+  preload_creation_allowed_now: false
+  renderer_creation_allowed_now: false
+  implementation_patch_must_remain_minimal: true
+
+future_channel_binding:
+  load_session:
+    channel: imageLabReview.loadSession
+    implementation_status_now: not_created
+    allowed_payload: sanitized_review_session_seed
+    current_side_effects_performed: false
+  preview_draft:
+    channel: imageLabReview.previewDraft
+    implementation_status_now: not_created
+    allowed_payload: runtime_draft_bundle
+    current_side_effects_performed: false
+  submit_draft:
+    channel: imageLabReview.submitDraft
+    implementation_status_now: not_created
+    allowed_payload: runtime_draft_bundle
+    current_side_effects_performed: false
+  cancel:
+    channel: imageLabReview.cancel
+    implementation_status_now: not_created
+    allowed_payload: cancel_request
+    current_side_effects_performed: false
+
+electron_security_preflight:
+  contextIsolation_expected: true
+  nodeIntegration_expected: false
+  context_isolation_confirmed: false
+  node_integration_disabled_confirmed: false
+  preload_allowlist_reviewed: false
+  ipc_sender_validation_reviewed: false
+  origin_window_validation_reviewed: false
+  payload_schema_validation_reviewed: false
+  raw_payload_logging_blocked: false
+  url_secret_transfer_blocked: false
+  renderer_direct_side_effects_blocked: false
+  audit_summary_cn: "当前未读取真实 VCPChat，因此只记录未来必须核验的 Electron 安全项。"
+
+runtime_draft_boundary:
+  allowed_input:
+    - sanitized_review_session_seed
+    - image_case_seed
+    - memory_preview_seed
+    - prototype_guard
+  allowed_output:
+    - review_session_draft
+    - image_case_draft
+    - memory_delta_draft
+    - prototype_guard
+    - host_submit_ack
+  required_invariants:
+    human_review_overrides_ai_review: true
+    accepted_requires_human_approval: true
+    memory_approval_not_approved_keeps_draft: true
+    should_write_to_vcp_is_request_not_execution: true
+    prototype_guard_blocks_side_effects: true
+
+stop_conditions:
+  real_vcpchat_source_path_missing:
+    action_cn: "停止，不读取源码，不猜测文件位置。"
+  user_owned_changes_detected_in_future_target:
+    action_cn: "停止，先报告冲突，不覆盖用户修改。"
+  ipc_or_preload_file_unclear:
+    action_cn: "停止，只补范围审查，不创建代码。"
+  secret_or_private_path_detected:
+    action_cn: "停止，只报告脱敏摘要。"
+  requested_action_can_call_plugin_api_or_daily_note:
+    action_cn: "停止，要求独立授权。"
+
+boundary_state:
+  preflight_file_added: true
+  implementation_task_authorized: false
+  runtime_code_modified: false
+  adapter_code_modified: false
+  tag_created: false
+  package_created: false
+  github_release_published: false
+  release_assets_uploaded: false
+  real_vcpchat_source_read: false
+  real_vcptoolbox_source_read: false
+  real_manifest_read: false
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  renderer_runtime_code_created: false
+  adapter_execution_entrypoint_created: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  disk_write_runtime_performed: false
+  image_file_created: false
+
+acceptance_assertions:
+  - "v6.6 只补 VCPChat 嵌入实现前 preflight。"
+  - "v6.6 不读取真实 VCPChat 或 VCPToolBox。"
+  - "v6.6 不创建 IPC、preload 或 renderer 实现代码。"
+  - "v6.6 不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。"
+  - "未来实现 patch 必须先完成真实源码读取授权、范围填写、范围审查、回退计划和最终人工授权。"
+  - "默认下一阶段是 v6.7 VCPChat Embed Minimal Patch Scope。"

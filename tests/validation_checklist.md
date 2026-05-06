@@ -2147,3 +2147,21 @@
 - [ ] v6.5 默认下一阶段为 `v6.6 VCPChat Embed Implementation Preflight`。
 - [ ] v6.5 不修改 runtime 代码，不读取真实 VCPChat / VCPToolBox，不读取真实 manifest，不创建 IPC/preload/renderer 或 Adapter 执行入口。
 - [ ] `node scripts/validate_v6_5_memory_handoff_runtime_status.js` 通过。
+
+## v6.6 VCPChat Embed Implementation Preflight 检查
+
+- [ ] 当前阶段字符串为 `v6.6 vcpchat embed implementation preflight`。
+- [ ] `docs/148_v6_6_vcpchat_embed_implementation_preflight.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_embed_implementation_preflight.md` 存在。
+- [ ] `tests/schema_examples/v6_6_vcpchat_embed_implementation_preflight.example.yaml` 存在。
+- [ ] `scripts/validate_v6_6_vcpchat_embed_implementation_preflight.js` 存在。
+- [ ] v6.6 记录当前基线 `392701d` 和上一阶段 `v6.5 memory handoff runtime status`。
+- [ ] v6.6 只记录 preflight，必须保持 `implementation_task_authorized=false`。
+- [ ] v6.6 必须保持 `target_files_allowed_now=[]`，真实目标文件只能在未来授权范围填写阶段补齐。
+- [ ] v6.6 明确未来实现前必须完成真实源码读取授权、scope fill、scope review、rollback plan、validation plan 和最终人工授权。
+- [ ] v6.6 覆盖 Electron 边界：`contextIsolation=true`、`nodeIntegration=false`、preload 最小 allowlist、IPC sender 校验、origin window 校验和 payload schema 校验。
+- [ ] v6.6 覆盖 host bridge channel：`imageLabReview.loadSession`、`imageLabReview.previewDraft`、`imageLabReview.submitDraft`、`imageLabReview.cancel`。
+- [ ] v6.6 保持不读取真实 VCPChat / VCPToolBox，不读取真实 manifest，不创建 IPC/preload/renderer 或 Adapter 执行入口。
+- [ ] v6.6 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
+- [ ] v6.6 默认下一阶段为 `v6.7 VCPChat Embed Minimal Patch Scope`。
+- [ ] `node scripts/validate_v6_6_vcpchat_embed_implementation_preflight.js` 通过。
