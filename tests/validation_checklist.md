@@ -2502,3 +2502,22 @@
 - [ ] v7.16 必须明确 draft PR 转 ready-for-review、review、merge、release 都需要后续单独授权或用户在 GitHub 完成。
 - [ ] v7.16 默认下一安全阶段为 `v7.17 VCPChat Review Console PR Review Follow-up`。
 - [ ] `node scripts/validate_v7_16_vcpchat_review_console_post_pr_handoff.js` 通过。
+
+## v7.17 VCPChat Review Console PR Review Follow-up 检查
+
+- [ ] 当前阶段字符串为 `v7.17 vcpchat review console pr review follow-up`。
+- [ ] `docs/169_v7_17_vcpchat_review_console_pr_review_follow_up.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_review_console_pr_review_follow_up.md` 存在。
+- [ ] `tests/schema_examples/v7_17_vcpchat_review_console_pr_review_follow_up.example.yaml` 存在。
+- [ ] `scripts/validate_v7_17_vcpchat_review_console_pr_review_follow_up.js` 存在。
+- [ ] v7.17 记录当前基线 `702104a` 和上一阶段 `v7.16 vcpchat review console post-pr handoff`。
+- [ ] v7.17 必须记录 VCPChat PR `pr_number=34`、`pr_is_draft=true`、`mergeable_state=MERGEABLE`。
+- [ ] v7.17 必须记录 observed checks：`status_checks_total=2`、`status_checks_success=2`、`status_checks_failed=0`、`status_checks_pending=0`。
+- [ ] v7.17 必须记录 `ready_for_review_candidate=true`，但保持 `pr_ready_for_review_performed=false`。
+- [ ] v7.17 必须保持 `pr_state_changed_by_this_phase=false`、`pr_merge_performed=false`、`vcpchat_main_updated_by_this_phase=false`。
+- [ ] v7.17 必须保持 `plugin_called=false`、`api_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_created=false`。
+- [ ] v7.17 必须保持 `dependency_changed=false`、`package_manifest_changed=false`、`lockfile_changed=false`。
+- [ ] v7.17 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.17 必须明确转 ready-for-review、merge、release、继续修改 VCPChat 都不在本阶段执行。
+- [ ] v7.17 默认下一安全阶段为 `v7.18 VCPChat Review Console Ready-for-review Authorization Gate`。
+- [ ] `node scripts/validate_v7_17_vcpchat_review_console_pr_review_follow_up.js` 通过。
