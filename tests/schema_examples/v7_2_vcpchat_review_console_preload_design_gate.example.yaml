@@ -1,0 +1,141 @@
+status: completed_validated_project_local_v7_2_vcpchat_review_console_preload_design_gate
+version: v7.2
+current_phase: "v7.2 vcpchat review console preload design gate"
+validation_file: scripts/validate_v7_2_vcpchat_review_console_preload_design_gate.js
+
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: cfffec3
+  previous_phase: "v7.1 vcpchat preload surface read-only intake"
+  previous_record: docs/153_v7_1_vcpchat_preload_surface_read_only_intake.md
+  previous_validation: scripts/validate_v7_1_vcpchat_preload_surface_read_only_intake.js
+  default_next_phase: "v7.3 VCPChat Review Console IPC Handler Design Gate"
+
+design_goal:
+  summary_cn: "设计未来 Review Console 专用 imageLabReview preload allowlist。"
+  design_gate_only: true
+  implementation_not_authorized_by_this_record: true
+  no_runtime_code_change_required: true
+  no_external_read_required: true
+  no_vcpchat_write_allowed: true
+
+dedicated_preload_allowlist:
+  api_name: imageLabReview
+  must_not_reuse_broad_electronAPI: true
+  must_not_expose_chatAPI_wholesale: true
+  allowed_methods:
+    loadSession:
+      channel: imageLabReview.loadSession
+      direction: host_to_renderer
+      side_effects_allowed: false
+    previewDraft:
+      channel: imageLabReview.previewDraft
+      direction: renderer_to_host
+      side_effects_allowed: false
+    submitDraft:
+      channel: imageLabReview.submitDraft
+      direction: renderer_to_host
+      side_effects_allowed: false
+    cancel:
+      channel: imageLabReview.cancel
+      direction: renderer_to_host
+      side_effects_allowed: false
+
+channel_payload_contract:
+  load_session:
+    channel: imageLabReview.loadSession
+    request_allowed:
+      - session_ref
+      - task_id
+      - case_id
+    response_allowed:
+      - review_session_seed
+      - image_case_seed
+      - memory_preview_seed
+      - prototype_guard
+    raw_source_code_allowed: false
+    raw_private_path_allowed: false
+    secret_or_token_allowed: false
+    image_binary_allowed: false
+  preview_draft:
+    channel: imageLabReview.previewDraft
+    request_allowed:
+      - review_session_draft
+      - image_case_draft
+      - memory_delta_draft
+      - prototype_guard
+    side_effects_performed: false
+  submit_draft:
+    channel: imageLabReview.submitDraft
+    request_allowed:
+      - review_session_draft
+      - image_case_draft
+      - memory_delta_draft
+      - prototype_guard
+      - requested_route
+    side_effects_performed: false
+  cancel:
+    channel: imageLabReview.cancel
+    request_allowed:
+      - session_id
+      - cancel_reason_cn
+    side_effects_performed: false
+
+explicitly_forbidden_bindings:
+  sendToVCP: forbidden
+  getFileAsBase64: forbidden
+  getTextContent: forbidden
+  saveChatHistory: forbidden
+  saveGroupChatHistory: forbidden
+  writeTxtNote: forbidden
+  savePastedImageToFile: forbidden
+  desktopGetCredentials: forbidden
+  desktopSaveWidgetFile: forbidden
+  executePythonCode: forbidden
+  readImageFromClipboard: forbidden
+
+future_implementation_shape:
+  renderer_global_name: imageLabReview
+  global_object_methods:
+    - loadSession
+    - previewDraft
+    - submitDraft
+    - cancel
+  implementation_allowed_now: false
+  ipc_handler_creation_allowed_now: false
+  preload_code_creation_allowed_now: false
+  renderer_mount_creation_allowed_now: false
+
+boundary_state:
+  design_gate_added: true
+  implementation_task_authorized: false
+  implementation_allowed: false
+  runtime_code_modified: false
+  vcpchat_code_modified: false
+  vcptoolbox_code_modified: false
+  tag_created: false
+  package_created: false
+  github_release_published: false
+  release_assets_uploaded: false
+  additional_vcpchat_read_performed: false
+  real_vcptoolbox_source_read: false
+  real_manifest_read: false
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  renderer_runtime_code_created: false
+  adapter_execution_entrypoint_created: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  disk_write_runtime_performed: false
+  image_file_created: false
+
+acceptance_assertions:
+  - "v7.2 只设计 imageLabReview 专用 preload allowlist。"
+  - "v7.2 不读取或修改真实 VCPChat / VCPToolBox。"
+  - "v7.2 不创建 IPC、preload 或 renderer 实现代码。"
+  - "v7.2 不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。"
+  - "v7.2 明确不复用 broad electronAPI，也不整体暴露 chatAPI。"
+  - "默认下一阶段是 v7.3 VCPChat Review Console IPC Handler Design Gate。"

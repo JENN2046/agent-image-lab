@@ -2252,3 +2252,20 @@
 - [ ] v7.1 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
 - [ ] v7.1 默认下一阶段为 `v7.2 VCPChat Review Console Preload Design Gate`。
 - [ ] `node scripts/validate_v7_1_vcpchat_preload_surface_read_only_intake.js` 通过。
+
+## v7.2 VCPChat Review Console Preload Design Gate 检查
+
+- [ ] 当前阶段字符串为 `v7.2 vcpchat review console preload design gate`。
+- [ ] `docs/154_v7_2_vcpchat_review_console_preload_design_gate.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_review_console_preload_design_gate.md` 存在。
+- [ ] `tests/schema_examples/v7_2_vcpchat_review_console_preload_design_gate.example.yaml` 存在。
+- [ ] `scripts/validate_v7_2_vcpchat_review_console_preload_design_gate.js` 存在。
+- [ ] v7.2 记录当前基线 `cfffec3` 和上一阶段 `v7.1 vcpchat preload surface read-only intake`。
+- [ ] v7.2 只设计专用 `imageLabReview` preload allowlist，必须保持 `must_not_reuse_broad_electronAPI=true`。
+- [ ] v7.2 覆盖 channel：`imageLabReview.loadSession`、`imageLabReview.previewDraft`、`imageLabReview.submitDraft`、`imageLabReview.cancel`。
+- [ ] v7.2 明确禁止绑定 broad preload 能力：sendToVCP、getFileAsBase64、getTextContent、writeTxtNote、savePastedImageToFile、desktopGetCredentials、executePythonCode、readImageFromClipboard。
+- [ ] v7.2 保持 `additional_vcpchat_read_performed=false`，不读取或修改真实 VCPChat / VCPToolBox。
+- [ ] v7.2 保持不创建 IPC/preload/renderer 或 Adapter 执行入口。
+- [ ] v7.2 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
+- [ ] v7.2 默认下一阶段为 `v7.3 VCPChat Review Console IPC Handler Design Gate`。
+- [ ] `node scripts/validate_v7_2_vcpchat_review_console_preload_design_gate.js` 通过。
