@@ -2733,3 +2733,22 @@
 - [ ] v7.28 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.28 默认下一安全阶段为 `v7.29 VCPChat Runtime Smoke Test Execution Record`。
 - [ ] `node scripts/validate_v7_28_vcpchat_runtime_smoke_test_execution_preflight.js` 通过。
+
+## v7.29 VCPChat Runtime Smoke Test Execution Record 检查
+
+- [ ] 当前阶段字符串为 `v7.29 vcpchat runtime smoke test execution record`。
+- [ ] `docs/181_v7_29_vcpchat_runtime_smoke_test_execution_record.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_runtime_smoke_test_execution_record.md` 存在。
+- [ ] `tests/schema_examples/v7_29_vcpchat_runtime_smoke_test_execution_record.example.yaml` 存在。
+- [ ] `scripts/validate_v7_29_vcpchat_runtime_smoke_test_execution_record.js` 存在。
+- [ ] v7.29 记录 `current_head: 193c2b4` 和上一阶段 `v7.28 vcpchat runtime smoke test execution preflight`。
+- [ ] v7.29 必须记录用户授权过 `npm run start:desktop:utf8`，目标为 VCPChat `main@b320e39`。
+- [ ] v7.29 必须记录 pre-launch checks 通过：branch/head/origin/worktree/dependency/bridge files。
+- [ ] v7.29 必须记录静态检查通过：`main.js`、`modules/ipc/imageLabReviewHandlers.js`、`preloads/chat.js`、`modules/renderer/imageLabReviewMount.js`。
+- [ ] v7.29 必须记录 `status=blocked_before_app_launch`，原因是启动路径可能触发模型拉取、WebSocket 或设置读取。
+- [ ] v7.29 必须保持 `app_launch_performed=false`、`runtime_smoke_test_performed=false`、`renderer_devtools_used=false`。
+- [ ] v7.29 必须保持 `plugin_called=false`、`api_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`disk_write_performed=false`、`image_created=false`。
+- [ ] v7.29 必须记录 runtime checks 未执行：`window.imageLabReview`、`imageLabReviewMount`、`window.imageLabReviewRuntime`、`review_session_draft`、`image_case_draft`、`memory_delta_draft`、`prototype_guard`。
+- [ ] v7.29 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.29 默认下一安全阶段为 `v7.30 VCPChat Runtime Smoke Test Revised Authorization Gate`。
+- [ ] `node scripts/validate_v7_29_vcpchat_runtime_smoke_test_execution_record.js` 通过。

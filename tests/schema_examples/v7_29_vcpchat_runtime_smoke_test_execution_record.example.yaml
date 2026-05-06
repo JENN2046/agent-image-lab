@@ -1,0 +1,66 @@
+status: blocked_before_app_launch
+version: v7.29
+current_phase: "v7.29 vcpchat runtime smoke test execution record"
+validation_file: scripts/validate_v7_29_vcpchat_runtime_smoke_test_execution_record.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: 193c2b4
+  previous_phase: "v7.28 vcpchat runtime smoke test execution preflight"
+  previous_record: docs/180_v7_28_vcpchat_runtime_smoke_test_execution_preflight.md
+  default_next_phase: "v7.30 VCPChat Runtime Smoke Test Revised Authorization Gate"
+authorization_received:
+  app_launch_authorized_by_user: true
+  requested_launch_command: npm run start:desktop:utf8
+  target_repository_name: VCPChat
+  target_branch: main
+  target_head_short: b320e39
+pre_launch_checks:
+  target_branch_is_main: true
+  target_head_is_b320e39: true
+  origin_main_head_is_b320e39: true
+  vcpchat_worktree_clean: true
+  electron_dependency_present: true
+  required_bridge_files_present: true
+  dependency_install_performed: false
+  env_or_secret_file_read: false
+static_checks_performed:
+  node_check_main_js: passed
+  node_check_image_lab_review_handlers: passed
+  node_check_chat_preload: passed
+  node_check_image_lab_review_mount: passed
+hard_stop:
+  app_launch_performed: false
+  runtime_smoke_test_performed: false
+  stop_reason_cn: "VCPChat 常规启动路径可能触发模型拉取、WebSocket 或设置读取；本次授权禁止 API 调用和敏感配置读取，因此在启动前安全停止。"
+runtime_checks_not_performed:
+  window_image_lab_review_checked: false
+  image_lab_review_mount_checked: false
+  window_image_lab_review_runtime_checked: false
+  review_session_draft_checked: false
+  image_case_draft_checked: false
+  memory_delta_draft_checked: false
+  prototype_guard_checked: false
+side_effect_guard:
+  app_launch_performed: false
+  runtime_smoke_test_performed: false
+  renderer_devtools_used: false
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  disk_write_performed: false
+  image_created: false
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+  env_or_secret_file_read: false
+  secret_value_copied: false
+  raw_local_path_saved: false
+  vcpchat_pushed: false
+  branch_deleted: false
+  github_release_performed: false
+revised_authorization_needed:
+  needed: true
+  next_safe_phase: "v7.30 VCPChat Runtime Smoke Test Revised Authorization Gate"
+  audit_summary_cn: "本次执行在启动前安全停止；未启动应用、未执行 runtime smoke test、未触发插件/API/DailyNote/VCP 记忆/图片创建。"
