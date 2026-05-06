@@ -1,0 +1,68 @@
+status: completed_validated_runtime_verification_closeout
+version: v7.34
+current_phase: "v7.34 vcpchat review console runtime verification closeout"
+validation_file: scripts/validate_v7_34_vcpchat_review_console_runtime_verification_closeout.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: c3e191b
+  previous_phase: "v7.33 vcpchat one-time remote-debug runtime verification record"
+  previous_record: docs/185_v7_33_vcpchat_one_time_remote_debug_runtime_verification_record.md
+  default_next_phase: "v7.35 VCPChat Review Console Runtime Follow-up Planning"
+evidence_summary:
+  target_repository_name: VCPChat
+  target_branch: main
+  target_head_short: b320e39
+  v7_30_window_level_smoke: passed
+  v7_33_renderer_global_smoke: passed
+  v7_33_prototype_guard_smoke: passed
+verified_runtime_surface:
+  window_image_lab_review_exists: true
+  image_lab_review_allowlist_methods:
+    - loadSession
+    - previewDraft
+    - submitDraft
+    - cancel
+  image_lab_review_extra_keys: []
+  image_lab_review_mount_exists: true
+  image_lab_review_mount_runtime_status: ready
+  window_image_lab_review_runtime_exists: true
+  create_draft_bundle_available: true
+  review_session_draft_available: true
+  image_case_draft_available: true
+  memory_delta_draft_available: true
+prototype_guard_result:
+  api_called: false
+  daily_note_called: false
+  vcp_plugin_called: false
+  disk_write_performed: false
+  image_file_created: false
+bridge_invocation_boundary:
+  bridge_load_session_called: false
+  bridge_preview_draft_called: false
+  bridge_submit_draft_called: false
+  bridge_cancel_called: false
+known_runtime_side_effect:
+  side_effect_path: .vcp_ready
+  observed_in:
+    - v7.30
+    - v7.33
+  restored_after_each_test: true
+  vcpchat_worktree_clean_after_restore: true
+closeout_decision:
+  review_console_bridge_runtime_verified: true
+  verification_method: one_time_remote_debug_runtime_evaluate
+  safe_to_mark_bridge_runtime_verified: true
+  safe_to_claim_production_e2e: false
+repository_and_process_state:
+  agent_image_lab_current_head_before_v7_34: c3e191b
+  vcpchat_head_after_verification: b320e39
+  vcpchat_worktree_clean_after_verification: true
+  remote_debug_port_left_open: false
+  launched_process_tree_left_running: false
+  vcpchat_pushed: false
+  vcpchat_modified_by_v7_34: false
+  dependency_changed: false
+next_gate:
+  next_safe_phase: "v7.35 VCPChat Review Console Runtime Follow-up Planning"
+  audit_summary_cn: "Review Console bridge 已完成一次性 runtime verification closeout；不声明生产 E2E 完成。"

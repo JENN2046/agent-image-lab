@@ -2829,3 +2829,23 @@
 - [ ] v7.33 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.33 默认下一安全阶段为 `v7.34 VCPChat Review Console Runtime Verification Closeout`。
 - [ ] `node scripts/validate_v7_33_vcpchat_one_time_remote_debug_runtime_verification_record.js` 通过。
+
+## v7.34 VCPChat Review Console Runtime Verification Closeout 检查
+
+- [ ] 当前阶段字符串为 `v7.34 vcpchat review console runtime verification closeout`。
+- [ ] `docs/186_v7_34_vcpchat_review_console_runtime_verification_closeout.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_review_console_runtime_verification_closeout.md` 存在。
+- [ ] `tests/schema_examples/v7_34_vcpchat_review_console_runtime_verification_closeout.example.yaml` 存在。
+- [ ] `scripts/validate_v7_34_vcpchat_review_console_runtime_verification_closeout.js` 存在。
+- [ ] v7.34 记录 `current_head: c3e191b` 和上一阶段 `v7.33 vcpchat one-time remote-debug runtime verification record`。
+- [ ] v7.34 必须汇总 v7.30 window-level smoke、v7.33 renderer global smoke 和 prototype_guard smoke。
+- [ ] v7.34 必须记录 `review_console_bridge_runtime_verified=true`，验证方法为一次性 remote-debug Runtime.evaluate。
+- [ ] v7.34 必须记录 `safe_to_claim_production_e2e=false`，不得声称生产端到端验收完成。
+- [ ] v7.34 必须记录 verified runtime surface：preload allowlist、mount、runtime、三类 draft。
+- [ ] v7.34 必须记录 prototype_guard 全 false，bridge loadSession / previewDraft / submitDraft / cancel 未调用。
+- [ ] v7.34 必须记录 `.vcp_ready` 是已知普通启动副作用，且每次测试后已恢复。
+- [ ] v7.34 必须记录 VCPChat 工作树干净、remote-debug port 未留下、启动进程树未留下。
+- [ ] v7.34 必须保持 `vcpchat_modified_by_v7_34=false`、`dependency_changed=false`、`vcpchat_pushed=false`。
+- [ ] v7.34 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.34 默认下一安全阶段为 `v7.35 VCPChat Review Console Runtime Follow-up Planning`。
+- [ ] `node scripts/validate_v7_34_vcpchat_review_console_runtime_verification_closeout.js` 通过。
