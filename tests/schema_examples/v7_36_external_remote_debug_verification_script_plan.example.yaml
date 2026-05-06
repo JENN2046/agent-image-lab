@@ -1,0 +1,85 @@
+status: planned_validated_v7_36_external_remote_debug_verification_script_plan
+version: v7.36
+current_phase: "v7.36 external remote-debug verification script plan"
+validation_file: scripts/validate_v7_36_external_remote_debug_verification_script_plan.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: a2fb6cb
+  previous_phase: "v7.35 vcpchat review console runtime followup planning"
+  previous_record: docs/187_v7_35_vcpchat_review_console_runtime_followup_planning.md
+  default_next_phase: "v7.37 External Remote Debug Verification Script Authorization Gate"
+planning_goal:
+  recommended_script_candidate: scripts/run_vcpchat_review_console_remote_debug_smoke.ps1
+  script_created_by_this_phase: false
+  target_repository_name: VCPChat
+  target_branch: main
+  target_head_short: b320e39
+  purpose_cn: "规划未来外部脚本如何重复验证 Review Console bridge runtime surface。"
+future_script_responsibilities:
+  preflight_required: true
+  launch_requires_future_authorization: true
+  cdp_read_only_checks_planned: true
+  cleanup_required: true
+  output_style: sanitized_json
+allowed_runtime_read_scope:
+  - window.imageLabReview_allowlist_names
+  - imageLabReviewMount_presence
+  - window_imageLabReviewRuntime_status
+  - review_session_draft_presence
+  - image_case_draft_presence
+  - memory_delta_draft_presence
+  - prototype_guard_boolean_summary
+forbidden_output_fields:
+  - raw_local_root
+  - raw_cdp_endpoint
+  - raw_source_code
+  - raw_config_content
+  - secret
+  - token
+  - cookie
+  - password
+  - private_key
+  - customer_private_data
+future_script_forbidden_actions:
+  bridge_load_session_called: false
+  bridge_preview_draft_called: false
+  bridge_submit_draft_called: false
+  bridge_cancel_called: false
+  dom_mutation_allowed: false
+  navigation_allowed: false
+  user_input_simulation_allowed: false
+  plugin_call_allowed: false
+  api_call_allowed: false
+  daily_note_call_allowed: false
+  vcp_memory_write_allowed: false
+  image_creation_allowed: false
+  dependency_change_allowed: false
+  package_manifest_change_allowed: false
+  lockfile_change_allowed: false
+  vcpchat_remote_push_allowed: false
+this_phase_boundary:
+  app_launch_performed_by_this_phase: false
+  remote_debug_used_by_this_phase: false
+  cdp_endpoint_accessed_by_this_phase: false
+  runtime_evaluate_performed_by_this_phase: false
+  external_script_created_by_this_phase: false
+  vcpchat_modified_by_this_phase: false
+  vcpchat_formal_smoke_test_created_by_this_phase: false
+  bridge_load_session_called: false
+  bridge_preview_draft_called: false
+  bridge_submit_draft_called: false
+  bridge_cancel_called: false
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_created: false
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+  vcpchat_pushed: false
+  github_release_performed: false
+next_gate:
+  next_safe_phase: "v7.37 External Remote Debug Verification Script Authorization Gate"
+  audit_summary_cn: "v7.36 只完成外部 remote-debug 验证脚本规划；本阶段没有创建脚本、没有启动 VCPChat、没有访问 CDP，也没有修改 VCPChat。"

@@ -2869,3 +2869,23 @@
 - [ ] v7.35 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.35 默认下一安全阶段为 `v7.36 External Remote Debug Verification Script Plan`。
 - [ ] `node scripts/validate_v7_35_vcpchat_review_console_runtime_followup_planning.js` 通过。
+
+## v7.36 External Remote Debug Verification Script Plan 检查
+
+- [ ] 当前阶段字符串为 `v7.36 external remote-debug verification script plan`。
+- [ ] `docs/188_v7_36_external_remote_debug_verification_script_plan.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_plan.md` 存在。
+- [ ] `tests/schema_examples/v7_36_external_remote_debug_verification_script_plan.example.yaml` 存在。
+- [ ] `scripts/validate_v7_36_external_remote_debug_verification_script_plan.js` 存在。
+- [ ] v7.36 记录 `current_head: a2fb6cb` 和上一阶段 `v7.35 vcpchat review console runtime followup planning`。
+- [ ] v7.36 必须记录未来脚本候选路径 `scripts/run_vcpchat_review_console_remote_debug_smoke.ps1`，但 `script_created_by_this_phase=false`。
+- [ ] v7.36 必须记录未来脚本职责：preflight、一次性启动、CDP 只读 Runtime.evaluate、清理进程树、输出脱敏 JSON。
+- [ ] v7.36 必须记录未来脚本不得调用 bridge loadSession / previewDraft / submitDraft / cancel。
+- [ ] v7.36 必须记录输出字段只允许脱敏摘要，不允许 raw local root、raw CDP endpoint、raw source code、raw config content、secret、token、cookie、password、private key 或客户隐私。
+- [ ] v7.36 必须保持 `app_launch_performed_by_this_phase=false`、`remote_debug_used_by_this_phase=false`、`cdp_endpoint_accessed_by_this_phase=false`、`runtime_evaluate_performed_by_this_phase=false`。
+- [ ] v7.36 必须保持 `external_script_created_by_this_phase=false`、`vcpchat_modified_by_this_phase=false`、`vcpchat_formal_smoke_test_created_by_this_phase=false`。
+- [ ] v7.36 必须保持 bridge loadSession / previewDraft / submitDraft / cancel 未调用。
+- [ ] v7.36 必须保持插件/API/DailyNote/VCP 记忆/图片/依赖/manifest/lockfile/远端推送均未发生。
+- [ ] v7.36 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.36 默认下一安全阶段为 `v7.37 External Remote Debug Verification Script Authorization Gate`。
+- [ ] `node scripts/validate_v7_36_external_remote_debug_verification_script_plan.js` 通过。
