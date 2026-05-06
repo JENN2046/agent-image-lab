@@ -1,0 +1,80 @@
+status: completed_validated_project_local_v7_11_exact_patch_authorization_request
+version: v7.11
+current_phase: "v7.11 vcpchat review console exact patch authorization request"
+validation_file: scripts/validate_v7_11_vcpchat_review_console_exact_patch_authorization_request.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: 76c27eb
+  previous_phase: "v7.10 vcpchat review console file-level write authorization review"
+  default_next_phase: "v7.12 VCPChat Review Console Exact Patch Execution Preflight"
+authorization_request_status:
+  exact_patch_authorization_request_ready: true
+  awaiting_user_explicit_approval: true
+  real_vcpchat_write_authorized: false
+  implementation_allowed: false
+  vcpchat_code_modified: false
+  additional_vcpchat_read_performed: false
+exact_target:
+  target_repository_name: VCPChat
+  target_local_root_redacted: "<VCPCHAT_LOCAL_ROOT_REDACTED>"
+  target_branch_required: main
+  target_head_before_patch_required: c97ff0c
+  remote_write_allowed: false
+  vcpchat_worktree_must_be_clean_before_patch: true
+exact_allowed_write_scope:
+  exact_repo_relative_files_only: true
+  directories_allowed_as_write_scope: false
+  glob_patterns_allowed: false
+  implicit_adjacent_files_allowed: false
+  files:
+    - path: main.js
+      file_state: existing
+    - path: modules/ipc/imageLabReviewHandlers.js
+      file_state: new_file_expected
+    - path: preloads/chat.js
+      file_state: existing
+    - path: main.html
+      file_state: existing
+    - path: modules/renderer/imageLabReviewMount.js
+      file_state: new_file_expected
+explicitly_excluded_files:
+  require_new_authorization_before_write:
+    - preloads/shared/apiFactory.js
+    - preloads/shared/catalog.js
+    - preloads/shared/roles.js
+    - renderer.js
+    - package.json
+    - package-lock.json
+    - config.env
+    - .env
+required_user_approval_phrase:
+  approval_is_required_before_real_write: true
+  ambiguous_continue_is_not_enough: true
+rollback_plan:
+  preferred_method: manual_reverse_patch_before_commit
+  after_commit_method: git_revert_normal_commit_only
+  destructive_rollback_allowed: false
+  force_push_allowed: false
+boundary_state:
+  exact_patch_authorization_request_created: true
+  exact_allowed_write_scope_confirmed_as_request: true
+  real_vcpchat_write_authorized: false
+  implementation_task_authorized: false
+  implementation_allowed: false
+  final_write_authorization_ready: false
+  runtime_code_modified: false
+  vcpchat_code_modified: false
+  vcptoolbox_code_modified: false
+  additional_vcpchat_read_performed: false
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  renderer_runtime_code_created: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  image_file_created: false
+stop_point:
+  stop_here: true
+  next_safe_phase: "v7.12 VCPChat Review Console Exact Patch Execution Preflight"
+  real_write_phase_blocked: true

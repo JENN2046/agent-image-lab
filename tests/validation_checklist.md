@@ -2381,3 +2381,25 @@
 - [ ] v7.10 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
 - [ ] v7.10 默认下一安全阶段为 `v7.11 VCPChat Review Console Exact Patch Authorization Request`。
 - [ ] `node scripts/validate_v7_10_vcpchat_review_console_file_level_write_authorization_review.js` 通过。
+
+## v7.11 VCPChat Review Console Exact Patch Authorization Request 检查
+
+- [ ] 当前阶段字符串为 `v7.11 vcpchat review console exact patch authorization request`。
+- [ ] `docs/163_v7_11_vcpchat_review_console_exact_patch_authorization_request.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_review_console_exact_patch_authorization_request.md` 存在。
+- [ ] `tests/schema_examples/v7_11_vcpchat_review_console_exact_patch_authorization_request.example.yaml` 存在。
+- [ ] `scripts/validate_v7_11_vcpchat_review_console_exact_patch_authorization_request.js` 存在。
+- [ ] v7.11 记录当前基线 `76c27eb` 和上一阶段 `v7.10 vcpchat review console file-level write authorization review`。
+- [ ] v7.11 必须保持 `exact_patch_authorization_request_ready=true` 和 `awaiting_user_explicit_approval=true`。
+- [ ] v7.11 必须保持 `real_vcpchat_write_authorized=false`、`implementation_allowed=false`、`vcpchat_code_modified=false`。
+- [ ] v7.11 必须保持 `additional_vcpchat_read_performed=false`，不重新读取真实 VCPChat / VCPToolBox。
+- [ ] v7.11 必须要求 target branch 为 `main`，target head before patch 为 `c97ff0c`，且 VCPChat 工作树必须干净。
+- [ ] v7.11 精确写入范围只能包含 `main.js`、`modules/ipc/imageLabReviewHandlers.js`、`preloads/chat.js`、`main.html`、`modules/renderer/imageLabReviewMount.js`。
+- [ ] v7.11 必须把 `preloads/shared/apiFactory.js`、`preloads/shared/catalog.js`、`preloads/shared/roles.js`、`renderer.js`、依赖文件和 env 文件列为 excluded 或需重新授权。
+- [ ] v7.11 必须明确允许命令、禁止命令、停止条件和 rollback plan。
+- [ ] v7.11 必须说明模糊的“继续/ok/去吧”不足以授权真实 VCPChat 写入。
+- [ ] v7.11 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.11 保持不创建 renderer mount、preload、`ipcMain.handle` 或 Adapter 执行入口。
+- [ ] v7.11 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
+- [ ] v7.11 默认下一安全阶段为 `v7.12 VCPChat Review Console Exact Patch Execution Preflight`。
+- [ ] `node scripts/validate_v7_11_vcpchat_review_console_exact_patch_authorization_request.js` 通过。
