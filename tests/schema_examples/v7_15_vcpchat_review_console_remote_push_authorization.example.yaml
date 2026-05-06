@@ -1,0 +1,61 @@
+status: completed_validated_v7_15_vcpchat_remote_push_authorization_request
+version: v7.15
+current_phase: "v7.15 vcpchat review console remote push authorization"
+validation_file: scripts/validate_v7_15_vcpchat_review_console_remote_push_authorization.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: b09b815
+  previous_phase: "v7.14 vcpchat review console post-commit record"
+  default_next_phase: "v7.16 VCPChat Review Console Remote Push Execution Record"
+push_readiness_check:
+  target_repository_name: VCPChat
+  target_local_root_redacted: "<VCPCHAT_LOCAL_ROOT_REDACTED>"
+  observed_branch: main
+  observed_head_short: 426a2a9
+  observed_head_subject: "feat: add image lab review console bridge"
+  observed_origin_main_short: c97ff0c
+  observed_status: "main...origin/main [ahead 1]"
+  local_remote_divergence: "1 0"
+  remote_has_unpulled_commits: false
+  vcpchat_worktree_clean: true
+  push_candidate_ready: true
+  vcpchat_remote_push_performed: false
+candidate_commit:
+  commit_short: 426a2a9
+  commit_subject: "feat: add image lab review console bridge"
+  previous_remote_head_short: c97ff0c
+  committed_files_only_inside_allowed_scope: true
+push_authorization_request:
+  approval_required_before_push: true
+  allowed_command_after_approval:
+    - git push origin main
+  target_repository_name: VCPChat
+  target_branch: main
+  commit_to_push: 426a2a9
+  expected_remote_before_push: c97ff0c
+  required_user_approval_phrase_cn: "我明确授权推送 VCPChat commit 426a2a9 到 origin/main。"
+  ambiguous_continue_is_not_enough: true
+side_effect_guard:
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_created: false
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+  env_or_secret_file_read: false
+  secret_value_copied: false
+  raw_local_path_saved: false
+  vcpchat_remote_push_performed: false
+  github_release_performed: false
+boundary_meaning:
+  this_record_does_not_push_vcpchat: true
+  vcpchat_commit_is_still_local_only: true
+  vcpchat_remote_push_requires_separate_user_authorization: true
+  runtime_smoke_test_not_performed: true
+stop_point:
+  stop_here: true
+  next_safe_phase: "v7.16 VCPChat Review Console Remote Push Execution Record"
+  vcpchat_remote_push_blocked_until_user_approval: true

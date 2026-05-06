@@ -2463,3 +2463,23 @@
 - [ ] v7.14 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.14 默认下一安全阶段为 `v7.15 VCPChat Review Console Remote Push Authorization`。
 - [ ] `node scripts/validate_v7_14_vcpchat_review_console_post_commit_record.js` 通过。
+
+## v7.15 VCPChat Review Console Remote Push Authorization 检查
+
+- [ ] 当前阶段字符串为 `v7.15 vcpchat review console remote push authorization`。
+- [ ] `docs/167_v7_15_vcpchat_review_console_remote_push_authorization.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_review_console_remote_push_authorization.md` 存在。
+- [ ] `tests/schema_examples/v7_15_vcpchat_review_console_remote_push_authorization.example.yaml` 存在。
+- [ ] `scripts/validate_v7_15_vcpchat_review_console_remote_push_authorization.js` 存在。
+- [ ] v7.15 记录当前基线 `b09b815` 和上一阶段 `v7.14 vcpchat review console post-commit record`。
+- [ ] v7.15 必须记录 `observed_head_short=426a2a9` 和 `observed_origin_main_short=c97ff0c`。
+- [ ] v7.15 必须记录 `local_remote_divergence=1 0`，表示本地领先 1 个 commit、远端无未拉取提交。
+- [ ] v7.15 必须记录 `vcpchat_worktree_clean=true` 和 `push_candidate_ready=true`。
+- [ ] v7.15 必须保持 `vcpchat_remote_push_performed=false`。
+- [ ] v7.15 必须明确唯一允许的未来 push 命令是 `git push origin main`，且需要用户明确授权。
+- [ ] v7.15 必须明确禁止 force push、reset、clean、release、tag、依赖安装或更新。
+- [ ] v7.15 必须保持 `plugin_called=false`、`api_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_created=false`。
+- [ ] v7.15 必须保持 `dependency_changed=false`、`package_manifest_changed=false`、`lockfile_changed=false`。
+- [ ] v7.15 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.15 默认下一安全阶段为 `v7.16 VCPChat Review Console Remote Push Execution Record`。
+- [ ] `node scripts/validate_v7_15_vcpchat_review_console_remote_push_authorization.js` 通过。
