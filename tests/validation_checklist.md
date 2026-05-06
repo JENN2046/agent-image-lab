@@ -2617,3 +2617,22 @@
 - [ ] v7.22 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.22 默认下一安全阶段为 `v7.23 VCPChat Review Console Post-merge Record`。
 - [ ] `node scripts/validate_v7_22_vcpchat_review_console_merge_pr_execution_record.js` 通过。
+
+## v7.23 VCPChat Review Console Post-merge Record 检查
+
+- [ ] 当前阶段字符串为 `v7.23 vcpchat review console post-merge record`。
+- [ ] `docs/175_v7_23_vcpchat_review_console_post_merge_record.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_review_console_post_merge_record.md` 存在。
+- [ ] `tests/schema_examples/v7_23_vcpchat_review_console_post_merge_record.example.yaml` 存在。
+- [ ] `scripts/validate_v7_23_vcpchat_review_console_post_merge_record.js` 存在。
+- [ ] v7.23 记录当前基线 `534704f` 和上一阶段 `v7.22 vcpchat review console merge pr execution record`。
+- [ ] v7.23 必须记录 PR #34 已 merge，`remote_main_head_short=b320e39`。
+- [ ] v7.23 必须记录 feature branch 仍存在，head 为 `426a2a9`。
+- [ ] v7.23 必须记录本地 VCPChat 仍在 `codex/image-lab-review-console-bridge`，本地 `main` 仍为 `426a2a9`。
+- [ ] v7.23 必须记录 `local_origin_main_head_short_before_fetch=c97ff0c`，且 local tracking main 已 stale。
+- [ ] v7.23 必须保持 `local_main_sync_performed=false`、`git_fetch_performed=false`、`git_pull_performed=false`。
+- [ ] v7.23 必须保持 `branch_deleted=false`、`github_release_performed=false`、`tag_created_by_this_phase=false`。
+- [ ] v7.23 必须保持 `plugin_called=false`、`api_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_created=false`。
+- [ ] v7.23 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.23 默认下一安全阶段为 `v7.24 VCPChat Local Main Sync Plan`。
+- [ ] `node scripts/validate_v7_23_vcpchat_review_console_post_merge_record.js` 通过。

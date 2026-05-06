@@ -1,0 +1,59 @@
+status: completed_validated_v7_23_vcpchat_post_merge_record
+version: v7.23
+current_phase: "v7.23 vcpchat review console post-merge record"
+validation_file: scripts/validate_v7_23_vcpchat_review_console_post_merge_record.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: 534704f
+  previous_phase: "v7.22 vcpchat review console merge pr execution record"
+  default_next_phase: "v7.24 VCPChat Local Main Sync Plan"
+remote_merge_state:
+  target_repository_name: VCPChat
+  target_repository_ref: JENN2046/VCPChat
+  pr_number: 34
+  pr_state: MERGED
+  pr_url: "https://github.com/JENN2046/VCPChat/pull/34"
+  merged_at_utc: "2026-05-06T06:32:52Z"
+  merge_method: squash
+  merge_commit_short: b320e39
+  remote_main_head_short: b320e39
+  source_branch: codex/image-lab-review-console-bridge
+  source_branch_head_short: 426a2a9
+  remote_feature_branch_still_exists: true
+local_vcpchat_state:
+  current_local_branch: codex/image-lab-review-console-bridge
+  current_local_head_short: 426a2a9
+  local_main_head_short: 426a2a9
+  local_origin_main_head_short_before_fetch: c97ff0c
+  remote_main_observed_via_ls_remote_short: b320e39
+  local_remote_tracking_main_is_stale: true
+  local_main_is_not_synced_to_remote_squash_merge: true
+  fetch_performed_by_this_phase: false
+  switch_main_performed_by_this_phase: false
+  pull_performed_by_this_phase: false
+  branch_cleanup_performed_by_this_phase: false
+side_effect_guard:
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_created: false
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+  env_or_secret_file_read: false
+  secret_value_copied: false
+  raw_local_path_saved: false
+  local_main_sync_performed: false
+  git_fetch_performed: false
+  git_pull_performed: false
+  branch_deleted: false
+  github_release_performed: false
+  tag_created_by_this_phase: false
+remaining_work:
+  local_main_sync_required: true
+  sync_plan_required: true
+  runtime_smoke_test_required_later: true
+  release_decision_required_later: true
+  recommended_next_phase: "v7.24 VCPChat Local Main Sync Plan"
