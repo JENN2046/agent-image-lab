@@ -2361,3 +2361,23 @@
 - [ ] v7.9 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
 - [ ] v7.9 默认下一安全阶段为 `v7.10 VCPChat Review Console File-level Write Authorization Review`。
 - [ ] `node scripts/validate_v7_9_vcpchat_review_console_authorized_source_lookup_for_missing_files.js` 通过。
+
+## v7.10 VCPChat Review Console File-level Write Authorization Review 检查
+
+- [ ] 当前阶段字符串为 `v7.10 vcpchat review console file-level write authorization review`。
+- [ ] `docs/162_v7_10_vcpchat_review_console_file_level_write_authorization_review.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_review_console_file_level_write_authorization_review.md` 存在。
+- [ ] `tests/schema_examples/v7_10_vcpchat_review_console_file_level_write_authorization_review.example.yaml` 存在。
+- [ ] `scripts/validate_v7_10_vcpchat_review_console_file_level_write_authorization_review.js` 存在。
+- [ ] v7.10 记录当前基线 `1298fef` 和上一阶段 `v7.9 vcpchat review console authorized source lookup for missing files`。
+- [ ] v7.10 必须保持 `additional_vcpchat_read_performed=false`，不重新读取真实 VCPChat / VCPToolBox。
+- [ ] v7.10 必须保持 `real_vcpchat_write_authorized=false`、`source_write_performed=false`、`vcpchat_code_modified=false`。
+- [ ] v7.10 必须明确 `final_allowed_write_scope_ready_for_user_authorization=true`，但这不等于真实写入授权。
+- [ ] v7.10 最终默认写入范围只能包含 `main.js`、`modules/ipc/imageLabReviewHandlers.js`、`preloads/chat.js`、`main.html`、`modules/renderer/imageLabReviewMount.js`。
+- [ ] v7.10 必须禁止目录级写入范围、glob 范围和隐式邻近文件。
+- [ ] v7.10 必须把 `preloads/shared/apiFactory.js`、`preloads/shared/catalog.js`、`preloads/shared/roles.js`、`renderer.js` 标为条件候选，不得默认纳入写入范围。
+- [ ] v7.10 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.10 保持不创建 renderer mount、preload、`ipcMain.handle` 或 Adapter 执行入口。
+- [ ] v7.10 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
+- [ ] v7.10 默认下一安全阶段为 `v7.11 VCPChat Review Console Exact Patch Authorization Request`。
+- [ ] `node scripts/validate_v7_10_vcpchat_review_console_file_level_write_authorization_review.js` 通过。

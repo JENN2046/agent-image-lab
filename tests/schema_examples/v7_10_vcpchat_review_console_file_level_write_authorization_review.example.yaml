@@ -1,0 +1,75 @@
+status: completed_validated_project_local_v7_10_file_level_write_authorization_review
+version: v7.10
+current_phase: "v7.10 vcpchat review console file-level write authorization review"
+validation_file: scripts/validate_v7_10_vcpchat_review_console_file_level_write_authorization_review.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: 1298fef
+  previous_phase: "v7.9 vcpchat review console authorized source lookup for missing files"
+  default_next_phase: "v7.11 VCPChat Review Console Exact Patch Authorization Request"
+scope_decision:
+  decision_status: final_allowed_write_scope_candidate_ready
+  source_record: docs/161_v7_9_vcpchat_review_console_authorized_source_lookup_for_missing_files.md
+  source_lookup_reused_from_v7_9: true
+  additional_vcpchat_read_performed: false
+  source_write_performed: false
+  vcpchat_code_modified: false
+  final_allowed_write_scope_ready_for_user_authorization: true
+  real_vcpchat_write_authorized: false
+  implementation_allowed: false
+final_allowed_write_scope_candidate:
+  exact_repo_relative_files_only: true
+  directories_allowed_as_write_scope: false
+  glob_patterns_allowed: false
+  implicit_adjacent_files_allowed: false
+  files:
+    - path: main.js
+      file_state: existing
+    - path: modules/ipc/imageLabReviewHandlers.js
+      file_state: new_file_expected
+    - path: preloads/chat.js
+      file_state: existing
+    - path: main.html
+      file_state: existing
+    - path: modules/renderer/imageLabReviewMount.js
+      file_state: new_file_expected
+excluded_from_default_write_scope:
+  conditional_files_require_separate_authorization:
+    - preloads/shared/apiFactory.js
+    - preloads/shared/catalog.js
+    - preloads/shared/roles.js
+    - renderer.js
+required_user_authorization_template:
+  target_repository: VCPChat
+  target_branch: main
+  target_commit_before_patch: c97ff0c
+  allowed_write_scope:
+    - main.js
+    - modules/ipc/imageLabReviewHandlers.js
+    - preloads/chat.js
+    - main.html
+    - modules/renderer/imageLabReviewMount.js
+  explicit_user_approval_required_before_real_write: true
+boundary_state:
+  file_level_write_scope_review_completed: true
+  final_allowed_write_scope_candidate_ready: true
+  real_vcpchat_write_authorized: false
+  implementation_task_authorized: false
+  implementation_allowed: false
+  final_write_authorization_ready: false
+  runtime_code_modified: false
+  vcpchat_code_modified: false
+  vcptoolbox_code_modified: false
+  additional_vcpchat_read_performed: false
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  renderer_runtime_code_created: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  image_file_created: false
+stop_point:
+  stop_here: true
+  next_safe_phase: "v7.11 VCPChat Review Console Exact Patch Authorization Request"
+  real_write_phase_blocked: true
