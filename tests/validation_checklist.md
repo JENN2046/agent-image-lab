@@ -2182,3 +2182,20 @@
 - [ ] v6.7 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
 - [ ] v6.7 默认下一阶段为 `v6.8 VCPChat Embed Scope Review Gate`。
 - [ ] `node scripts/validate_v6_7_vcpchat_embed_minimal_patch_scope.js` 通过。
+
+## v6.8 VCPChat Embed Scope Review Gate 检查
+
+- [ ] 当前阶段字符串为 `v6.8 vcpchat embed scope review gate`。
+- [ ] `docs/150_v6_8_vcpchat_embed_scope_review_gate.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_embed_scope_review_gate.md` 存在。
+- [ ] `tests/schema_examples/v6_8_vcpchat_embed_scope_review_gate.example.yaml` 存在。
+- [ ] `scripts/validate_v6_8_vcpchat_embed_scope_review_gate.js` 存在。
+- [ ] v6.8 记录当前基线 `be4ea6e` 和上一阶段 `v6.7 vcpchat embed minimal patch scope`。
+- [ ] v6.8 只记录范围审查门槛，必须保持 `implementation_authorization_granted=false`、`approval_to_implement=false`、`source_read_authorized=false`。
+- [ ] v6.8 覆盖 required_review_checks：scope_is_minimal、target_category_valid、raw_private_path_absent、no_secret_or_customer_data、no_execution_path_added、electron_boundary_preserved、rollback_plan_present、validation_plan_present、user_owned_change_check_planned。
+- [ ] v6.8 覆盖 decision_routes：approve_for_implementation_authorization_request、request_scope_revision、reject_scope。
+- [ ] v6.8 明确 approved_for_authorization_request 只允许进入下一阶段授权请求，不允许当前创建代码。
+- [ ] v6.8 保持不读取真实 VCPChat / VCPToolBox，不读取真实 manifest，不创建 IPC/preload/renderer 或 Adapter 执行入口。
+- [ ] v6.8 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
+- [ ] v6.8 默认下一阶段为 `v6.9 VCPChat Embed Implementation Authorization Request`。
+- [ ] `node scripts/validate_v6_8_vcpchat_embed_scope_review_gate.js` 通过。

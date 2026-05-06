@@ -1,0 +1,122 @@
+status: completed_validated_project_local_v6_8_vcpchat_embed_scope_review_gate
+version: v6.8
+current_phase: "v6.8 vcpchat embed scope review gate"
+validation_file: scripts/validate_v6_8_vcpchat_embed_scope_review_gate.js
+
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: be4ea6e
+  previous_phase: "v6.7 vcpchat embed minimal patch scope"
+  previous_record: docs/149_v6_7_vcpchat_embed_minimal_patch_scope.md
+  previous_validation: scripts/validate_v6_7_vcpchat_embed_minimal_patch_scope.js
+  default_next_phase: "v6.9 VCPChat Embed Implementation Authorization Request"
+
+review_gate_goal:
+  summary_cn: "审查未来最小 VCPChat 嵌入 patch 的范围是否可以进入实现授权请求。"
+  review_gate_only: true
+  implementation_not_authorized_by_this_record: true
+  no_runtime_code_change_required: true
+  no_external_read_required: true
+  no_real_target_path_filled: true
+
+scope_review_input:
+  scope_request_id: scope-v6-8-placeholder-001
+  scope_request_status: placeholder_only
+  source_read_authorized: false
+  source_read_performed: false
+  real_target_path_submitted: false
+  raw_real_path_stored: false
+  candidate_target_categories:
+    - host_main_process
+    - preload_bridge
+    - renderer_mount
+    - static_asset_reference
+  implementation_allowed_before_review: false
+
+required_review_checks:
+  scope_is_minimal:
+    required: true
+    current_status: pending
+  target_category_valid:
+    required: true
+    current_status: pending
+  raw_private_path_absent:
+    required: true
+    current_status: passed_for_placeholder
+  no_secret_or_customer_data:
+    required: true
+    current_status: passed_for_placeholder
+  no_execution_path_added:
+    required: true
+    current_status: passed_for_placeholder
+  electron_boundary_preserved:
+    required: true
+    current_status: pending_real_source_review
+  rollback_plan_present:
+    required: true
+    current_status: pending
+  validation_plan_present:
+    required: true
+    current_status: pending
+  user_owned_change_check_planned:
+    required: true
+    current_status: pending
+
+decision_routes:
+  approve_for_implementation_authorization_request:
+    allowed_now: false
+    approval_to_implement: false
+    approval_to_read_source: false
+    next_state: implementation_authorization_request
+    audit_summary_cn: "当前只是占位审查，不能批准真实实现。"
+  request_scope_revision:
+    allowed_now: true
+    approval_to_implement: false
+    approval_to_read_source: false
+    next_state: scope_revision_required
+    audit_summary_cn: "当前可要求补齐或缩小未来范围。"
+  reject_scope:
+    allowed_now: true
+    approval_to_implement: false
+    approval_to_read_source: false
+    next_state: scope_rejected
+    audit_summary_cn: "如果未来范围包含越权风险，应拒绝。"
+
+rejection_conditions:
+  - raw_private_path_or_secret_present
+  - broad_vcpchat_refactor_requested
+  - plugin_execution_or_daily_note_write_in_scope
+  - external_api_or_image_save_in_scope
+  - target_files_unclear
+  - rollback_plan_missing
+  - validation_plan_missing
+  - user_owned_change_check_missing
+
+scope_review_guard:
+  implementation_authorization_granted: false
+  implementation_allowed: false
+  source_read_authorized: false
+  source_read_performed: false
+  real_target_paths_filled: false
+  raw_private_path_stored: false
+  real_vcpchat_source_read: false
+  real_vcptoolbox_source_read: false
+  real_manifest_read: false
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  renderer_runtime_code_created: false
+  adapter_execution_entrypoint_created: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_file_created: false
+
+acceptance_assertions:
+  - "v6.8 只定义未来最小 VCPChat 嵌入 patch 的范围审查门槛。"
+  - "v6.8 不读取真实 VCPChat 或 VCPToolBox。"
+  - "v6.8 不填写真实私密路径或真实目标文件。"
+  - "v6.8 不创建 IPC、preload 或 renderer 实现代码。"
+  - "v6.8 不批准真实实现；只允许未来进入实现授权请求模板。"
+  - "默认下一阶段是 v6.9 VCPChat Embed Implementation Authorization Request。"
