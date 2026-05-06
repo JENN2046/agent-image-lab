@@ -2305,3 +2305,21 @@
 - [ ] v7.4 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
 - [ ] v7.4 默认下一阶段为 `v7.5 VCPChat Review Console Runtime Integration Authorization Gate`。
 - [ ] `node scripts/validate_v7_4_vcpchat_review_console_renderer_mount_design_gate.js` 通过。
+
+## v7.5 VCPChat Review Console Runtime Integration Authorization Gate 检查
+
+- [ ] 当前阶段字符串为 `v7.5 vcpchat review console runtime integration authorization gate`。
+- [ ] `docs/157_v7_5_vcpchat_review_console_runtime_integration_authorization_gate.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_review_console_runtime_integration_authorization_gate.md` 存在。
+- [ ] `tests/schema_examples/v7_5_vcpchat_review_console_runtime_integration_authorization_gate.example.yaml` 存在。
+- [ ] `scripts/validate_v7_5_vcpchat_review_console_runtime_integration_authorization_gate.js` 存在。
+- [ ] v7.5 记录当前基线 `2fa9ab3` 和上一阶段 `v7.4 vcpchat review console renderer mount design gate`。
+- [ ] v7.5 只整理首次真实实现前的精确授权门槛，不读取或修改真实 VCPChat / VCPToolBox。
+- [ ] v7.5 要求未来授权必须填写 target repository、branch、commit、allowed_read_scope、allowed_write_scope、exact_commands_allowed、validation_commands 和 rollback_plan。
+- [ ] v7.5 要求 `allowed_write_scope` 必须精确到 repo-relative 文件，不允许目录、glob 或隐式邻近文件。
+- [ ] v7.5 明确 required_stop_conditions：未列出文件、secret/env、依赖变更、插件/API/DailyNote、图片创建、用户未提交改动。
+- [ ] v7.5 保持 `additional_vcpchat_read_performed=false`，不读取或修改真实 VCPChat / VCPToolBox。
+- [ ] v7.5 保持不创建 renderer mount、preload、`ipcMain.handle` 或 Adapter 执行入口。
+- [ ] v7.5 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
+- [ ] v7.5 默认下一阶段为 `v7.6 VCPChat Review Console First Runtime Integration Scope Fill Gate`。
+- [ ] `node scripts/validate_v7_5_vcpchat_review_console_runtime_integration_authorization_gate.js` 通过。
