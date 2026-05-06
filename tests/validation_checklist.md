@@ -2165,3 +2165,20 @@
 - [ ] v6.6 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
 - [ ] v6.6 默认下一阶段为 `v6.7 VCPChat Embed Minimal Patch Scope`。
 - [ ] `node scripts/validate_v6_6_vcpchat_embed_implementation_preflight.js` 通过。
+
+## v6.7 VCPChat Embed Minimal Patch Scope 检查
+
+- [ ] 当前阶段字符串为 `v6.7 vcpchat embed minimal patch scope`。
+- [ ] `docs/149_v6_7_vcpchat_embed_minimal_patch_scope.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_embed_minimal_patch_scope.md` 存在。
+- [ ] `tests/schema_examples/v6_7_vcpchat_embed_minimal_patch_scope.example.yaml` 存在。
+- [ ] `scripts/validate_v6_7_vcpchat_embed_minimal_patch_scope.js` 存在。
+- [ ] v6.7 记录当前基线 `01859d3` 和上一阶段 `v6.6 vcpchat embed implementation preflight`。
+- [ ] v6.7 只记录范围模板，必须保持 `source_read_authorized=false`、`source_read_performed=false`、`real_target_paths_filled=false`。
+- [ ] v6.7 必须保持 `target_files_allowed_now=[]`，不得填写真实 VCPChat 私密路径或真实目标文件。
+- [ ] v6.7 覆盖未来候选目标类别：host_main_process、preload_bridge、renderer_mount、static_asset_reference。
+- [ ] v6.7 明确未来允许变更形态只限 minimal_embed_wiring，不包含插件执行、DailyNote 写入、外部 API、图片保存或大范围 VCPChat 重构。
+- [ ] v6.7 保持不读取真实 VCPChat / VCPToolBox，不读取真实 manifest，不创建 IPC/preload/renderer 或 Adapter 执行入口。
+- [ ] v6.7 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
+- [ ] v6.7 默认下一阶段为 `v6.8 VCPChat Embed Scope Review Gate`。
+- [ ] `node scripts/validate_v6_7_vcpchat_embed_minimal_patch_scope.js` 通过。
