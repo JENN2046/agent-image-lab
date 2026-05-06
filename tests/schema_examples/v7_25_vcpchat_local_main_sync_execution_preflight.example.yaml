@@ -1,0 +1,61 @@
+status: completed_validated_v7_25_vcpchat_local_main_sync_execution_preflight
+version: v7.25
+current_phase: "v7.25 vcpchat local main sync execution preflight"
+validation_file: scripts/validate_v7_25_vcpchat_local_main_sync_execution_preflight.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: 3e9edfb
+  previous_phase: "v7.24 vcpchat local main sync plan"
+  default_next_phase: "v7.26 VCPChat Local Main Sync Execution Record"
+preflight_observations:
+  target_repository_name: VCPChat
+  worktree_clean: true
+  current_local_branch: codex/image-lab-review-console-bridge
+  current_local_head_short: 426a2a9
+  current_branch_is_main: false
+  backup_branch_name: backup/vcpchat-main-before-review-console-sync-20260506
+  backup_branch_exists: false
+  local_main_head_short: 426a2a9
+  local_origin_main_head_short_before_fetch: c97ff0c
+  remote_main_head_short_observed_via_ls_remote: b320e39
+  remote_feature_branch_head_short_observed_via_ls_remote: 426a2a9
+  pr_34_state: MERGED
+  pr_34_merge_commit_short: b320e39
+preflight_decision:
+  sync_execution_candidate: true
+  sync_execution_ready: true
+  reason_cn: "VCPChat 工作树干净，当前不在 main，本地 main 仍保留 direct commit 426a2a9，备份分支尚不存在，远端 main 已为 squash merge commit b320e39；可以进入一次性同步执行授权点。"
+candidate_commands_after_explicit_authorization:
+  allowed_commands_in_order:
+    - git branch backup/vcpchat-main-before-review-console-sync-20260506 main
+    - git fetch origin main codex/image-lab-review-console-bridge
+    - git rev-parse --short origin/main
+    - git branch -f main origin/main
+    - git switch main
+    - git status --short --branch
+    - git rev-parse --short HEAD
+side_effect_guard:
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_created: false
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+  env_or_secret_file_read: false
+  secret_value_copied: false
+  raw_local_path_saved: false
+  local_main_sync_performed: false
+  git_fetch_performed: false
+  git_switch_performed: false
+  git_pull_performed: false
+  branch_pointer_changed_by_this_phase: false
+  backup_branch_created_by_this_phase: false
+  branch_deleted: false
+  github_release_performed: false
+stop_point:
+  stop_here: true
+  next_safe_phase: "v7.26 VCPChat Local Main Sync Execution Record"
+  local_main_sync_blocked_until_explicit_execution_authorization: true

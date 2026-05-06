@@ -2656,3 +2656,22 @@
 - [ ] v7.24 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.24 默认下一安全阶段为 `v7.25 VCPChat Local Main Sync Execution Preflight`。
 - [ ] `node scripts/validate_v7_24_vcpchat_local_main_sync_plan.js` 通过。
+
+## v7.25 VCPChat Local Main Sync Execution Preflight 检查
+
+- [ ] 当前阶段字符串为 `v7.25 vcpchat local main sync execution preflight`。
+- [ ] `docs/177_v7_25_vcpchat_local_main_sync_execution_preflight.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_local_main_sync_execution_preflight.md` 存在。
+- [ ] `tests/schema_examples/v7_25_vcpchat_local_main_sync_execution_preflight.example.yaml` 存在。
+- [ ] `scripts/validate_v7_25_vcpchat_local_main_sync_execution_preflight.js` 存在。
+- [ ] v7.25 记录当前基线 `3e9edfb` 和上一阶段 `v7.24 vcpchat local main sync plan`。
+- [ ] v7.25 必须记录 VCPChat 工作树干净、当前分支不是 main、`backup_branch_exists=false`。
+- [ ] v7.25 必须记录本地 `main=426a2a9`、本地 `origin/main=c97ff0c`、远端 `main=b320e39`。
+- [ ] v7.25 必须记录 `sync_execution_ready=true` 和候选命令顺序。
+- [ ] v7.25 必须保持 `local_main_sync_performed=false`、`git_fetch_performed=false`、`git_switch_performed=false`、`git_pull_performed=false`。
+- [ ] v7.25 必须保持 `branch_pointer_changed_by_this_phase=false`、`backup_branch_created_by_this_phase=false`、`branch_deleted=false`。
+- [ ] v7.25 必须禁止删除分支、reset hard、clean、force push、依赖安装或更新、runtime smoke test、release。
+- [ ] v7.25 必须保持 `plugin_called=false`、`api_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_created=false`。
+- [ ] v7.25 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.25 默认下一安全阶段为 `v7.26 VCPChat Local Main Sync Execution Record`。
+- [ ] `node scripts/validate_v7_25_vcpchat_local_main_sync_execution_preflight.js` 通过。
