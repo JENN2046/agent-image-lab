@@ -19,6 +19,7 @@ const allowedModifiedFiles = [
   "review_console/static_prototype/mock_data.js",
   "review_console/runtime_prototype/README.md",
   "scripts/validate_local_commit_scope.js",
+  "scripts/validate-agent-image-lab-local.ps1",
   "scripts/validate_mvp.ps1",
   "scripts/validate_v4_index_consistency.js",
   "scripts/validate_v5_delivery_readiness.js",

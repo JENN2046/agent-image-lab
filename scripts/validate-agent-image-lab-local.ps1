@@ -96,8 +96,37 @@ $allowedHistoricalTrueFlagSet = @{}
 foreach ($p in $allowedHistoricalTrueFlagFiles) {
   $allowedHistoricalTrueFlagSet[[System.IO.Path]::GetFullPath((Join-Path (Get-Location) $p))] = $true
 }
-$files = Get-ChildItem -Recurse -File -Include *.md,*.yaml,*.yml,*.json,*.html,*.css,*.js -ErrorAction SilentlyContinue | Where-Object {
-  $_.FullName -notmatch "\\.git\\" -and -not $allowedHistoricalTrueFlagSet.ContainsKey($_.FullName)
+
+Write-Host "Scan scope: git tracked plus untracked non-ignored project files"
+Write-Host "Ignored directories such as release_packages/ and runs/ are excluded by git."
+
+$scanExtensions = @(".md", ".yaml", ".yml", ".json", ".html", ".css", ".js")
+$scanPaths = @()
+try {
+  $scanPaths = @(git ls-files --cached --others --exclude-standard)
+  if ($LASTEXITCODE -ne 0) { throw "git ls-files failed with exit code $LASTEXITCODE" }
+} catch {
+  Add-Warn "git ls-files unavailable; falling back to recursive scan excluding known ignored output directories"
+  $scanPaths = @(Get-ChildItem -Recurse -File -ErrorAction SilentlyContinue | Where-Object {
+    $_.FullName -notmatch "\\.git\\" -and
+    $_.FullName -notmatch "\\release_packages\\" -and
+    $_.FullName -notmatch "\\runs\\"
+  } | ForEach-Object { $_.FullName })
+}
+
+$files = @()
+foreach ($path in $scanPaths) {
+  if ([string]::IsNullOrWhiteSpace($path)) { continue }
+  if ([System.IO.Path]::IsPathRooted($path)) {
+    $fullPath = [System.IO.Path]::GetFullPath($path)
+  } else {
+    $fullPath = [System.IO.Path]::GetFullPath((Join-Path (Get-Location) $path))
+  }
+  if (-not (Test-Path -LiteralPath $fullPath -PathType Leaf)) { continue }
+  $extension = [System.IO.Path]::GetExtension($fullPath).ToLowerInvariant()
+  if ($scanExtensions -notcontains $extension) { continue }
+  if ($allowedHistoricalTrueFlagSet.ContainsKey($fullPath)) { continue }
+  $files += Get-Item -LiteralPath $fullPath
 }
 foreach ($pat in $strictPatterns) {
   $hits = $files | Select-String -Pattern $pat -CaseSensitive:$false
