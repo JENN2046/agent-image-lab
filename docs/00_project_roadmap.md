@@ -18,7 +18,7 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v7.45 cdp read-only attempt record
+v1.0 true-loop closeout candidate + v7.46 remote-debug relaunch runtime verification record
 ```
 
 已经完成：
@@ -71,6 +71,7 @@ v1.0 true-loop closeout candidate + v7.45 cdp read-only attempt record
 - v7.43 external remote-debug verification script creation execution record：在明确授权下创建 dry-run-only remote-debug smoke 脚本，并记录脚本未运行、VCPChat 未启动、CDP 未访问。
 - v7.44 remote-debug script run and VCPChat launch record：在明确授权下运行 dry-run-only 脚本并启动 VCPChat，同时记录 CDP 未访问、bridge 未调用。
 - v7.45 CDP read-only attempt record：在明确授权下尝试本机 CDP 只读访问；当前 VCPChat 未暴露可用 CDP endpoint，Runtime.evaluate 未执行。
+- v7.46 remote-debug relaunch runtime verification record：在明确授权下关闭旧 VCPChat/Electron 进程，以 remote-debug 端口重启 VCPChat，读取 CDP targets，并执行一次只读 Runtime.evaluate surface 检查；bridge 方法未调用。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：

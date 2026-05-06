@@ -28,12 +28,13 @@ Plugin calls, API calls, DailyNote writes, VCP memory writes, image creation, an
 
 ```text
 Without an active A5 authorization package, production actions remain blocked. A5 authorization must name exact target systems, allowed paths or objects, allowed commands or operations, forbidden operations, write boundaries, validation requirements, rollback path, reviewer, and stop conditions.
+Historical v7.42/v7.43 status: execution remains blocked for the inactive authorization package template and dry-run-only script creation phases.
 ```
 
 ## Standing Remote-Debug Relaunch Gate
 
 ```text
-The real scripts/run_vcpchat_review_console_remote_debug_smoke.ps1 file exists as a dry-run-only local script. v7.44 ran it in default dry-run blocked mode and launched VCPChat after explicit user authorization. v7.45 attempted authorized CDP read-only access, but no available endpoint was exposed. Restarting or relaunching VCPChat with a remote-debug port, running Runtime.evaluate, calling bridge methods, reading source, or enabling deeper remote-debug verification requires explicit VCPChat remote-debug relaunch authorization or active A5 authorization package. CDP access remains blocked unless that authorization is active.
+The real scripts/run_vcpchat_review_console_remote_debug_smoke.ps1 file exists as a dry-run-only local script. v7.44 ran it in default dry-run blocked mode and launched VCPChat after explicit user authorization. v7.45 attempted authorized CDP read-only access, but no available endpoint was exposed. Historical v7.45 status: CDP access remains blocked for that attempt. v7.46 received explicit remote-debug relaunch authorization, stopped the old VCPChat/Electron processes, relaunched VCPChat with remote-debug enabled, read CDP targets, and ran one read-only Runtime.evaluate surface check. Any bridge method invocation, VCPChat/VCPToolBox source read or modification, plugin/API/DailyNote/VCP memory/image action, push/tag/release, or deeper remote-debug verification still requires a new explicit authorization scope or active A5 authorization package.
 ```
 
 ## Blocker Template

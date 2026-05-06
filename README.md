@@ -7,7 +7,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v7.45 cdp read-only attempt record
+v1.0 true-loop closeout candidate + v7.46 remote-debug relaunch runtime verification record
 ```
 
 已经完成：
@@ -50,6 +50,7 @@ v1.0 true-loop closeout candidate + v7.45 cdp read-only attempt record
 - v7.43 external remote-debug verification script creation execution record 在明确授权下创建 `scripts/run_vcpchat_review_console_remote_debug_smoke.ps1`，但脚本未运行，VCPChat 未启动，CDP 未访问。
 - v7.44 remote-debug script run and VCPChat launch record 在明确授权下运行 dry-run-only 脚本并启动 VCPChat，但 CDP 未访问、bridge 未调用。
 - v7.45 CDP read-only attempt record 在明确授权下尝试本机 CDP 只读访问；当前 VCPChat 未暴露可用 CDP endpoint，`Runtime.evaluate` 未执行。
+- v7.46 remote-debug relaunch runtime verification record 在明确授权下关闭旧 VCPChat/Electron 进程，以 remote-debug 端口重启 VCPChat，并完成一次 CDP 只读 `Runtime.evaluate` surface 检查；bridge 方法只确认存在性，没有调用。
 
 当前 accepted asset 只以 ignored runtime 路径和哈希归档，不把图片二进制写入 Git、DailyNote 或 VCP 长期记忆。人工接受记录保留了已知视觉偏差：这是 `human_override` 通过，不是完美 prompt compliance。
 
@@ -118,6 +119,7 @@ Photo Studio OS UI 生图生产线，以及 AI 图片评审与修正生产线。
 - `docs/138_v5_11_post_merge_reconciliation.md`：post-merge reconciliation 记录。
 - `docs/139_v5_12_release_candidate_readiness.md`：release candidate readiness 记录。
 - `docs/192_v7_40_local_a4_a5_autonomy_alignment.md`：local A4/A5 autonomy mode alignment 记录。
+- `docs/198_v7_46_remote_debug_relaunch_runtime_verification_record.md`：remote-debug relaunch runtime verification 脱敏记录。
 - `.agent_board/`：本地 guarded autopilot 状态板，用于续跑、校验记录和 handoff。
 - `docs/`：项目定义、SOP、评分表、VCP 记忆适配、审片台设计。
 - `agents/`：ImageLab_Master 和岗位型子 Agent 的规则。
@@ -154,6 +156,7 @@ node scripts\validate_v5_true_loop_candidate_delivery.js
 node scripts\validate_v5_post_merge_reconciliation.js
 node scripts\validate_v5_12_release_candidate_readiness.js
 node scripts\validate_v7_40_local_a4_a5_autonomy_alignment.js
+node scripts\validate_v7_46_remote_debug_relaunch_runtime_verification_record.js
 node scripts\validate_runtime_prototype_suite.js
 node scripts\validate_agent_board_state.js
 node scripts\validate_local_checkpoint_manifest.js

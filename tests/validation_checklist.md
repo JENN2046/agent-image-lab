@@ -3061,3 +3061,19 @@
 - [ ] v7.45 不保存真实本机路径、CDP endpoint、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.45 默认下一安全阶段为 `BLOCKED until explicit VCPChat remote-debug relaunch authorization`。
 - [ ] `node scripts/validate_v7_45_cdp_read_only_attempt_record.js` 通过。
+
+## v7.46 Remote-debug Relaunch Runtime Verification Record 检查
+
+- [ ] 当前阶段字符串为 `v7.46 remote-debug relaunch runtime verification record`。
+- [ ] `docs/198_v7_46_remote_debug_relaunch_runtime_verification_record.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_remote_debug_relaunch_runtime_verification_record.md` 存在。
+- [ ] `tests/schema_examples/v7_46_remote_debug_relaunch_runtime_verification_record.example.yaml` 存在。
+- [ ] `scripts/validate_v7_46_remote_debug_relaunch_runtime_verification_record.js` 存在。
+- [ ] v7.46 记录上一阶段为 `v7.45 cdp read-only attempt record`。
+- [ ] v7.46 必须记录 `authorization_received=true`、`process_stop_authorized=true`、`remote_debug_relaunch_authorized=true`、`runtime_evaluate_authorized=true`。
+- [ ] v7.46 必须记录 `remote_debug_relaunch_performed_by_this_phase=true`、`cdp_endpoint_access_succeeded_by_this_phase=true`、`cdp_targets_list_read_by_this_phase=true`。
+- [ ] v7.46 必须记录 `runtime_evaluate_performed_by_this_phase=true`、`bridge_method_presence_checked_by_this_phase=true`、`bridge_method_invocation_performed=false`。
+- [ ] v7.46 只允许记录 Runtime surface 的类型、键名和 bridge 方法存在性，不得保存 raw endpoint、raw websocket URL、真实本机路径或源码原文。
+- [ ] v7.46 必须保持 bridge 方法、插件/API/DailyNote/VCP 记忆/图片/依赖/manifest/lockfile/VCPChat 源码修改/远端推送均未发生。
+- [ ] v7.46 默认下一安全阶段为 `BLOCKED before bridge invocation, source read, plugin/API/DailyNote/VCP memory/image, push/tag/release`。
+- [ ] `node scripts/validate_v7_46_remote_debug_relaunch_runtime_verification_record.js` 通过。

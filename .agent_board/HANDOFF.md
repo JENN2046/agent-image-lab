@@ -4,7 +4,7 @@
 
 ```text
 Status: ready for guarded local continuation
-Result: v7.45 CDP read-only access was attempted against the current VCPChat, but no available CDP endpoint was exposed; Runtime.evaluate and bridge runtime verification remain unperformed
+Result: v7.46 remote-debug relaunch and CDP Runtime.evaluate read-only surface verification completed; bridge methods were not called
 ```
 
 ## Current Repo
@@ -18,7 +18,7 @@ A:/agent-image-lab/agent-image-lab-v0.2
 ```text
 Branch: master
 Remote tracking: origin/master
-State: local v7.45 cdp read-only attempt record changes present
+State: local v7.46 remote-debug relaunch runtime verification changes present
 PR #1 status: merged
 PR #1 merge commit: 367d3c9
 PR #1 merged head: b595851
@@ -65,6 +65,11 @@ Local head before v7.45 batch: b83ccd5
 pending local commits before v7.45: 5
 Local pending commit chain before v7.45: 8f60ae1 -> 0326150 -> 975da9a -> d728a89 -> b83ccd5
 master...origin/master before v7.45: 5 0
+Local v7.45 CDP attempt record commit: 3fdd966
+Local head before v7.46 batch: 3fdd966
+pending local commits before v7.46: 6
+Local pending commit chain before v7.46: 8f60ae1 -> 0326150 -> 975da9a -> d728a89 -> b83ccd5 -> 3fdd966
+master...origin/master before v7.46: 6 0
 Local A4 default commit: 2450f85
 Local A5 production execution commit: da18330
 Local post-v5.4 commit checkpoint: a2ae539
@@ -105,6 +110,7 @@ Historical v7.41 phase: v7.41 external remote-debug verification script creation
 Historical v7.42 phase: v7.42 external remote-debug verification script creation authorization package
 Historical v7.43 phase: v7.43 external remote-debug verification script creation execution record
 Historical v7.44 phase: v7.44 remote-debug script run and vcpchat launch record
+Historical v7.45 phase: v7.45 cdp read-only attempt record
 ```
 
 ## What Was Done
@@ -163,6 +169,12 @@ Confirmed no CDP 9222 listener output and did not access CDP or call bridge meth
 Committed v7.44 VCPChat launch record as b83ccd5.
 Attempted authorized local CDP read-only access against redacted_local_cdp_9222.
 Observed no available CDP endpoint or electron-owned listening connection, so Runtime.evaluate and bridge checks were not performed.
+Committed v7.45 CDP read-only attempt record as 3fdd966.
+Stopped the previously running VCPChat/Electron processes after explicit user authorization and accepted unsaved-state risk.
+Relaunched VCPChat with remote-debug enabled using a sanitized external root reference.
+Read CDP targets and selected the VCPChat page target without saving raw endpoint, websocket URL, or source path.
+Executed one Runtime.evaluate read-only surface check for imageLabReview, imageLabReviewMount, imageLabReviewRuntime, and prototype_guard.
+Confirmed bridge method presence only; bridge method invocation performed: no.
 ```
 
 ## Validation
@@ -198,9 +210,10 @@ node scripts/validate_v7_42_external_remote_debug_verification_script_creation_a
 node scripts/validate_v7_43_external_remote_debug_verification_script_creation_execution_record.js: passed
 node scripts/validate_v7_44_remote_debug_script_run_and_vcpchat_launch_record.js: passed
 node scripts/validate_v7_45_cdp_read_only_attempt_record.js: passed
+node scripts/validate_v7_46_remote_debug_relaunch_runtime_verification_record.js: passed
 node scripts/validate_agent_board_state.js: passed
 scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings
-scripts/validate_mvp.ps1: passed after v7.45 validation routing maintenance
+scripts/validate_mvp.ps1: passed after v7.46 validation routing maintenance
 git diff --check: passed
 ```
 
@@ -210,18 +223,19 @@ git diff --check: passed
 No active local blocker.
 Real external VCPChat/VCPToolBox source reads require explicit separate authorization.
 Without an active A5 authorization package, production actions remain blocked.
-CDP read-only access was attempted, but no available CDP endpoint was exposed.
-Next VCPChat remote-debug relaunch is BLOCKED until explicit authorization.
+Historical v7.45: CDP access remains blocked because no available endpoint was exposed.
+v7.46 Runtime.evaluate performed by this phase: yes, read-only surface checks only.
+Bridge method invocation, source read, plugin/API/DailyNote/VCP memory/image actions, push/tag/release, and deeper remote-debug verification are blocked until a new explicit authorization scope is active.
 Push/tag/release require explicit separate authorization.
-Full MVP validation suite now routes historical v4/v5 current-state validators as snapshots and uses v7.45 / agent-board validators for current state.
+Full MVP validation suite now routes historical v4/v5 current-state validators as snapshots and uses v7.46 / agent-board validators for current state.
 ```
 
 ## Human Decisions Needed
 
 ```text
 Local commit approval is no longer required for future guarded local commits that satisfy all project auto-commit conditions.
-Whether to authorize VCPChat remote-debug relaunch in a future local batch.
-Whether to push the local autonomy / v7.45 commits after explicit remote authorization.
+Whether to authorize bridge method invocation or source read in a future local batch.
+Whether to push the local autonomy / v7.46 commits after explicit remote authorization.
 Whether to open a follow-up PR after explicit remote authorization.
 Whether to create a formal release tag after final release approval.
 ```

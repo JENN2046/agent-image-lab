@@ -15,7 +15,7 @@ Advance Agent Image Lab safely under local A4 autonomy while keeping A5 producti
 ## Current Phase
 
 ```text
-v7.45 cdp read-only attempt record
+v7.46 remote-debug relaunch runtime verification record
 ```
 
 ## Current Task
@@ -27,7 +27,7 @@ none
 ## Last Completed Task
 
 ```text
-Completed v7.45 CDP read-only attempt record; CDP access was attempted against the current VCPChat, no available endpoint was exposed, and Runtime.evaluate / bridge checks were not performed.
+Completed v7.46 remote-debug relaunch runtime verification record; VCPChat was stopped and relaunched under explicit authorization, CDP targets were read, and one Runtime.evaluate read-only surface check completed without bridge method invocation.
 ```
 
 ## Last Validation
@@ -63,22 +63,24 @@ node scripts/validate_v7_42_external_remote_debug_verification_script_creation_a
 node scripts/validate_v7_43_external_remote_debug_verification_script_creation_execution_record.js: passed
 node scripts/validate_v7_44_remote_debug_script_run_and_vcpchat_launch_record.js: passed
 node scripts/validate_v7_45_cdp_read_only_attempt_record.js: passed
+node scripts/validate_v7_46_remote_debug_relaunch_runtime_verification_record.js: passed
 node scripts/validate_agent_board_state.js: passed
 scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings
-scripts/validate_mvp.ps1: passed after v7.45 validation routing maintenance
+scripts/validate_mvp.ps1: passed after v7.46 validation routing maintenance
 git diff --check: passed
 ```
 
 ## External Read State
 
 ```text
-VCPChat read: no
+VCPChat source read: no
 VCPToolBox read: no
 Real manifest read: no
 Config/env/log/secret read: no
 VCPChat app launch: yes, process launch only
-CDP access: attempted, no endpoint available
-CDP targets list read: no
+CDP access: yes, read-only after explicit authorization
+CDP targets list read: yes, sanitized target metadata only
+Runtime surface read: yes, type/key/method-presence checks only
 ```
 
 ## Execution State
@@ -91,9 +93,10 @@ VCP memory write: no
 Image creation: no
 Executable Adapter entrypoint: no
 Remote-debug script: run in dry-run blocked mode
-VCPChat launch: yes
-Bridge runtime verification: no
-Runtime.evaluate: no
+VCPChat launch: yes, relaunched with remote-debug after explicit authorization
+Runtime.evaluate performed by this phase: yes, read-only surface checks only
+Bridge runtime verification: surface presence only
+bridge method invocation performed: no
 ```
 
 ## Git State
@@ -146,7 +149,12 @@ Local head before v7.45 batch: b83ccd5
 pending local commits before v7.45: 5
 Local pending commit chain before v7.45: 8f60ae1 -> 0326150 -> 975da9a -> d728a89 -> b83ccd5
 master...origin/master before v7.45: 5 0
-Worktree: local v7.45 cdp read-only attempt record changes present
+Local v7.45 CDP attempt record commit: 3fdd966
+Local head before v7.46 batch: 3fdd966
+pending local commits before v7.46: 6
+Local pending commit chain before v7.46: 8f60ae1 -> 0326150 -> 975da9a -> d728a89 -> b83ccd5 -> 3fdd966
+master...origin/master before v7.46: 6 0
+Worktree: local v7.46 remote-debug relaunch runtime verification changes present
 Local A4 default commit: 2450f85
 Local A5 production execution commit: da18330
 Remote action in current batch: none
@@ -190,16 +198,17 @@ Historical v7.41 phase: v7.41 external remote-debug verification script creation
 Historical v7.42 phase: v7.42 external remote-debug verification script creation authorization package
 Historical v7.43 phase: v7.43 external remote-debug verification script creation execution record
 Historical v7.44 phase: v7.44 remote-debug script run and vcpchat launch record
+Historical v7.45 phase: v7.45 cdp read-only attempt record
 ```
 
 ## Current Stop Status
 
 ```text
-CDP read-only access attempted but no endpoint was available; next VCPChat remote-debug relaunch is BLOCKED until explicit authorization; A5 production execution remains blocked without an active authorization package
+v7.46 read-only Runtime.evaluate surface verification completed; bridge invocation, source read, plugin/API/DailyNote/VCP memory/image, push/tag/release remain blocked without explicit authorization. Without an active A5 authorization package, production actions remain blocked.
 ```
 
 ## Next Action
 
 ```text
-Stop before restarting or relaunching VCPChat with a remote-debug port. Without explicit VCPChat remote-debug relaunch authorization or active A5 authorization package, do not restart/relaunch VCPChat, run Runtime.evaluate, call bridge methods, or read/modify VCPChat/VCPToolBox source.
+Stop before bridge method invocation, VCPChat/VCPToolBox source read or modification, plugin/API/DailyNote call, VCP memory write, image creation, push/tag/release, or any A5 production action unless a new explicit authorization scope is active.
 ```

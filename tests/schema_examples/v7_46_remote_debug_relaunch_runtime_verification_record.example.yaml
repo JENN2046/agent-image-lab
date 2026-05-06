@@ -1,0 +1,127 @@
+status: completed_validated_v7_46_remote_debug_relaunch_runtime_verification_record
+version: v7.46
+current_phase: "v7.46 remote-debug relaunch runtime verification record"
+validation_file: scripts/validate_v7_46_remote_debug_relaunch_runtime_verification_record.js
+
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  origin_master_short: 5a7f5ba
+  local_head_before_batch: 3fdd966
+  local_pending_commits_before_this_batch:
+    - 8f60ae1
+    - 0326150
+    - 975da9a
+    - d728a89
+    - b83ccd5
+    - 3fdd966
+  previous_phase: "v7.45 cdp read-only attempt record"
+  previous_record: docs/197_v7_45_cdp_read_only_attempt_record.md
+  default_next_phase: "BLOCKED before bridge invocation, source read, plugin/API/DailyNote/VCP memory/image, push/tag/release"
+
+authorization_applied:
+  authorization_received: true
+  authorized_by: current_user
+  authorized_at: "2026-05-06"
+  process_stop_authorized: true
+  remote_debug_relaunch_authorized: true
+  unsaved_window_state_loss_risk_accepted_by_user: true
+  cdp_read_only_access_authorized: true
+  targets_list_read_authorized: true
+  runtime_evaluate_authorized: true
+  bridge_method_invocation_authorized: false
+  source_read_authorized: false
+  source_modification_authorized: false
+
+relaunch_result:
+  previous_electron_process_stop_performed: true
+  previous_electron_process_count_stopped: 6
+  relaunch_performed: true
+  relaunch_command_summary: electron_remote_debugging_port_9222_desktop_only
+  launch_root_recorded_in_git: false
+  launch_root_ref: redacted_external_vcpchat_root
+  electron_processes_observed_after_relaunch: true
+  cdp_endpoint_ref: redacted_local_cdp_9222
+  cdp_endpoint_accessed_by_this_phase: true
+  cdp_endpoint_access_succeeded_by_this_phase: true
+  cdp_targets_list_read_by_this_phase: true
+  cdp_target_count: 3
+  selected_target_title: VCPChat
+  selected_target_type: page
+  selected_target_url_kind: file
+
+runtime_evaluate_result:
+  runtime_evaluate_attempted: true
+  runtime_evaluate_performed_by_this_phase: true
+  runtime_evaluate_returned_by_value: true
+  runtime_evaluate_expression_sanitized: true
+  evaluated_operations:
+    - typeof_checks
+    - object_keys_checks
+    - bridge_method_presence_boolean_checks
+  document_title: VCPChat
+  image_lab_review_type: object
+  image_lab_review_keys:
+    - cancel
+    - loadSession
+    - previewDraft
+    - submitDraft
+  image_lab_review_mount_type: object
+  image_lab_review_runtime_type: object
+  image_lab_review_runtime_keys:
+    - cancel
+    - createDraftBundle
+    - loadSession
+    - previewDraft
+    - submitDraft
+  prototype_guard_type: undefined
+  prototype_guard_value_kind: undefined
+  allowlist_methods_present:
+    loadSession: true
+    previewDraft: true
+    submitDraft: true
+    cancel: true
+  bridge_method_presence_checked: true
+  bridge_method_invocation_performed: false
+
+this_phase_boundary:
+  process_stop_authorized_by_this_phase: true
+  process_stop_performed_by_this_phase: true
+  remote_debug_relaunch_authorized_by_this_phase: true
+  remote_debug_relaunch_performed_by_this_phase: true
+  cdp_read_only_access_authorized_by_this_phase: true
+  cdp_endpoint_accessed_by_this_phase: true
+  cdp_endpoint_access_succeeded_by_this_phase: true
+  cdp_targets_list_read_by_this_phase: true
+  runtime_evaluate_authorized_by_this_phase: true
+  runtime_evaluate_attempted_by_this_phase: true
+  runtime_evaluate_performed_by_this_phase: true
+  bridge_method_presence_checked_by_this_phase: true
+  bridge_method_invocation_authorized_by_this_phase: false
+  bridge_method_invocation_performed: false
+  bridge_load_session_called: false
+  bridge_preview_draft_called: false
+  bridge_submit_draft_called: false
+  bridge_cancel_called: false
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_created: false
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+  vcpchat_source_read: false
+  vcpchat_modified_by_this_phase: false
+  vcptoolbox_source_read: false
+  vcptoolbox_modified_by_this_phase: false
+  output_file_written: false
+  tag_created: false
+  push_performed: false
+  github_release_performed: false
+
+notes_cn:
+  - "VCPChat 已在明确授权下关闭旧进程并以 remote-debug 模式重新启动。"
+  - "CDP targets 列表读取成功，Runtime.evaluate 只读 surface 检查完成。"
+  - "bridge 方法只检查存在性，没有调用。"
+  - "未读取或修改 VCPChat/VCPToolBox 源码，未调用插件/API/DailyNote，未写 VCP memory，未创建图片。"

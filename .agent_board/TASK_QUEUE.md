@@ -56,7 +56,7 @@ none
 ```text
 1. Keep Adapter and Review Console work in no-execution / no-external-read mode unless an active A5 authorization package exists.
 2. If user authorizes remote or release movement, request exact target and run preflight before any push/tag/release.
-3. BLOCKED until explicit VCPChat remote-debug relaunch authorization before restarting or relaunching VCPChat with a remote-debug port.
+3. Stop before bridge invocation, source read, plugin/API/DailyNote/VCP memory/image, push/tag/release unless a new explicit authorization scope is active.
 4. Update CHECKPOINT.md, RUN_STATE.md, VALIDATION_LOG.md, and HANDOFF.md after each meaningful batch.
 ```
 
@@ -96,12 +96,13 @@ none
 31. Completed v7.43 remote-debug smoke script creation without running it.
 32. Completed v7.44 remote-debug smoke script run and VCPChat launch without CDP or bridge access.
 33. Completed v7.45 CDP read-only attempt; no available CDP endpoint, so Runtime.evaluate was not performed.
+34. Completed v7.46 remote-debug relaunch and CDP Runtime.evaluate read-only surface verification; bridge methods were not called.
 ```
 
 ### blocked
 
 ```text
-1. VCPChat remote-debug relaunch is blocked until the user explicitly authorizes restart/relaunch with a remote-debug port and exact allowed runtime checks.
+1. Bridge method invocation, VCPChat/VCPToolBox source read or modification, plugin/API/DailyNote/VCP memory/image actions, push/tag/release, and A5 production execution remain blocked without a new explicit authorization scope.
 ```
 
 ### skipped

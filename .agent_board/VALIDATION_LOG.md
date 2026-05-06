@@ -2,6 +2,59 @@
 
 ## Entries
 
+## VALIDATION-20260506-V7-46
+
+Task:
+
+```text
+Stop and relaunch VCPChat with remote-debug enabled under explicit user authorization, then run one CDP read-only Runtime.evaluate surface verification.
+```
+
+Commands run:
+
+```text
+previous VCPChat/Electron process stop: performed after explicit user authorization and accepted unsaved-state risk
+remote-debug relaunch: performed with sanitized external root reference
+CDP targets list read from redacted_local_cdp_9222: passed
+Runtime.evaluate read-only surface check: passed
+bridge method invocation performed: no
+node scripts/validate_v7_46_remote_debug_relaunch_runtime_verification_record.js: passed
+node scripts/validate_agent_board_state.js: passed
+scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings
+scripts/validate_mvp.ps1: passed after v7.46 validation routing maintenance
+git diff --check: passed
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+The VCPChat target was visible through CDP after relaunch. Runtime.evaluate confirmed imageLabReview, imageLabReviewMount, and imageLabReviewRuntime are objects; loadSession, previewDraft, submitDraft, and cancel are present as bridge methods. The check recorded only type, key, and boolean presence data.
+```
+
+Warnings:
+
+```text
+Local warning scan still reports known negative checklist terms such as token, cookie, password, image extensions, and script extensions. No blocking warning was produced by v7.46 validator, validate_mvp, or git diff check.
+```
+
+Not validated:
+
+```text
+No bridge method invocation, VCPChat/VCPToolBox source read or modification, plugin call, API call, DailyNote call, VCP memory write, image creation, dependency change, push, tag, release, or A5 production execution was performed.
+```
+
+Notes:
+
+```text
+Next action is blocked before bridge invocation, source read, plugin/API/DailyNote/VCP memory/image, push/tag/release, or deeper remote-debug verification unless a new explicit authorization scope is active.
+```
+
 ## VALIDATION-20260506-V7-45
 
 Task:

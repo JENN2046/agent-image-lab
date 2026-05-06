@@ -82,7 +82,7 @@ function main() {
   ]);
   const localWorkStateDeclared = hasAll(runState + handoff, [
     "Worktree:",
-    "v7.45 cdp read-only attempt record",
+    "v7.46 remote-debug relaunch runtime verification record",
     "Push/tag/release"
   ]);
 
