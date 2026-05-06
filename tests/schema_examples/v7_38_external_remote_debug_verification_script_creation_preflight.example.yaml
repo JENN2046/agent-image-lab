@@ -1,0 +1,90 @@
+status: planned_validated_v7_38_external_remote_debug_verification_script_creation_preflight
+version: v7.38
+current_phase: "v7.38 external remote-debug verification script creation preflight"
+validation_file: scripts/validate_v7_38_external_remote_debug_verification_script_creation_preflight.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: da18330
+  previous_phase: "v7.37 external remote-debug verification script authorization gate"
+  previous_record: docs/189_v7_37_external_remote_debug_verification_script_authorization_gate.md
+  default_next_phase: "v7.39 External Remote Debug Verification Script Creation Authorization Point"
+preflight_scope:
+  script_path_under_review: scripts/run_vcpchat_review_console_remote_debug_smoke.ps1
+  script_exists_before_creation: false
+  script_created_by_this_phase: false
+  allowed_future_creation_scope:
+    - scripts/run_vcpchat_review_console_remote_debug_smoke.ps1
+script_creation_requirements:
+  must_be_agent_image_lab_local_only: true
+  must_not_modify_vcpchat: true
+  must_not_modify_vcptoolbox: true
+  must_not_auto_launch_vcpchat_on_creation: true
+  must_not_access_cdp_on_creation: true
+  must_not_call_bridge_methods_on_creation: true
+  must_not_call_plugin_or_api_or_dailynote: true
+  must_not_write_vcp_memory: true
+  must_not_create_images: true
+  must_not_install_dependencies: true
+  must_not_embed_raw_local_paths: true
+  must_not_embed_raw_cdp_endpoint: true
+  must_not_embed_secret_or_config_content: true
+  must_emit_sanitized_json_when_eventually_executed: true
+  must_default_to_preflight_or_help_only: true
+proposed_future_script_interface:
+  command_name: scripts/run_vcpchat_review_console_remote_debug_smoke.ps1
+  parameters:
+    - name: VcpChatRoot
+      required_for_execution: true
+      storage_policy_cn: "只作为运行时参数使用，不写入仓库记录。"
+    - name: ExpectedHead
+      required_for_execution: true
+      storage_policy_cn: "只保存短 hash 摘要，不保存外部路径。"
+    - name: RemoteDebugPort
+      default: 9222
+      storage_policy_cn: "端口号可记录，CDP endpoint 原文不得记录。"
+    - name: DryRun
+      default: true
+      meaning_cn: "只做静态 preflight，不启动应用，不访问 CDP。"
+    - name: Execute
+      default: false
+      meaning_cn: "只有未来单独授权后才允许启动 VCPChat 和访问 CDP。"
+creation_preflight_decision:
+  preflight_result: pass
+  safe_to_request_script_creation_authorization: true
+  safe_to_create_script_without_next_authorization: false
+  safe_to_run_script_without_execution_authorization: false
+  safe_to_start_vcpchat_now: false
+  safe_to_access_cdp_now: false
+  safe_to_modify_vcpchat_now: false
+this_phase_boundary:
+  script_creation_preflight_performed: true
+  script_creation_authorized_by_this_phase: false
+  script_created_by_this_phase: false
+  script_run_by_this_phase: false
+  app_launch_authorized_by_this_phase: false
+  app_launch_performed_by_this_phase: false
+  remote_debug_authorized_by_this_phase: false
+  remote_debug_used_by_this_phase: false
+  cdp_access_authorized_by_this_phase: false
+  cdp_endpoint_accessed_by_this_phase: false
+  runtime_evaluate_authorized_by_this_phase: false
+  runtime_evaluate_performed_by_this_phase: false
+  bridge_load_session_called: false
+  bridge_preview_draft_called: false
+  bridge_submit_draft_called: false
+  bridge_cancel_called: false
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_created: false
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+  vcpchat_modified_by_this_phase: false
+  vcpchat_pushed: false
+  github_release_performed: false
+next_gate:
+  next_safe_phase: "v7.39 External Remote Debug Verification Script Creation Authorization Point"
+  audit_summary_cn: "v7.38 只完成外部 remote-debug 验证脚本创建前 preflight；本阶段没有创建脚本、没有启动 VCPChat、没有访问 CDP，也没有修改 VCPChat。"

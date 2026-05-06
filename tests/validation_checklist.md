@@ -2909,3 +2909,24 @@
 - [ ] v7.37 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.37 默认下一安全阶段为 `v7.38 External Remote Debug Verification Script Creation Preflight`。
 - [ ] `node scripts/validate_v7_37_external_remote_debug_verification_script_authorization_gate.js` 通过。
+
+## v7.38 External Remote Debug Verification Script Creation Preflight 检查
+
+- [ ] 当前阶段字符串为 `v7.38 external remote-debug verification script creation preflight`。
+- [ ] `docs/190_v7_38_external_remote_debug_verification_script_creation_preflight.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_preflight.md` 存在。
+- [ ] `tests/schema_examples/v7_38_external_remote_debug_verification_script_creation_preflight.example.yaml` 存在。
+- [ ] `scripts/validate_v7_38_external_remote_debug_verification_script_creation_preflight.js` 存在。
+- [ ] v7.38 记录 `current_head: da18330` 和上一阶段 `v7.37 external remote-debug verification script authorization gate`。
+- [ ] v7.38 必须记录未来脚本候选路径 `scripts/run_vcpchat_review_console_remote_debug_smoke.ps1`，但该脚本在本阶段不得存在，且 `script_created_by_this_phase=false`。
+- [ ] v7.38 必须记录未来创建范围只允许 Agent Image Lab 内脚本和记录文件，不允许修改任何 VCPChat / VCPToolBox 文件、依赖 manifest、lockfile 或图片文件。
+- [ ] v7.38 必须记录脚本创建要求：创建时不得自动启动 VCPChat、不得访问 CDP、不得调用 bridge 方法、不得调用插件/API/DailyNote、不得写 VCP 记忆、不得创建图片、不得安装依赖。
+- [ ] v7.38 必须记录未来脚本默认 `DryRun=true`、`Execute=false`，默认不启动应用、不访问 CDP、不调用 bridge。
+- [ ] v7.38 必须记录 `safe_to_request_script_creation_authorization=true`，但 `safe_to_create_script_without_next_authorization=false`。
+- [ ] v7.38 必须记录 `safe_to_run_script_without_execution_authorization=false`、`safe_to_start_vcpchat_now=false`、`safe_to_access_cdp_now=false`、`safe_to_modify_vcpchat_now=false`。
+- [ ] v7.38 必须保持 `script_creation_authorized_by_this_phase=false`、`script_created_by_this_phase=false`、`script_run_by_this_phase=false`。
+- [ ] v7.38 必须保持 bridge loadSession / previewDraft / submitDraft / cancel 未调用。
+- [ ] v7.38 必须保持插件/API/DailyNote/VCP 记忆/图片/依赖/manifest/lockfile/远端推送均未发生。
+- [ ] v7.38 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.38 默认下一安全阶段为 `v7.39 External Remote Debug Verification Script Creation Authorization Point`。
+- [ ] `node scripts/validate_v7_38_external_remote_debug_verification_script_creation_preflight.js` 通过。
