@@ -1,0 +1,60 @@
+status: partial_pass_window_smoke_only
+version: v7.30
+current_phase: "v7.30 vcpchat runtime smoke test partial execution record"
+validation_file: scripts/validate_v7_30_vcpchat_runtime_smoke_test_partial_execution_record.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: 3a23e51
+  previous_phase: "v7.29 vcpchat runtime smoke test execution record"
+  previous_record: docs/181_v7_29_vcpchat_runtime_smoke_test_execution_record.md
+  default_next_phase: "v7.31 VCPChat Renderer Global Verification Gate"
+runtime_window_smoke:
+  launch_command_executed: npm run start:desktop:utf8
+  app_launch_performed: true
+  electron_process_observed: true
+  main_window_observed: true
+  observed_window_titles:
+    - VCPdesktop
+    - VCPChat
+  launcher_process_tree_closed_after_observation: true
+renderer_global_verification:
+  automatic_verification_performed: false
+  window_image_lab_review_checked: false
+  image_lab_review_mount_checked: false
+  window_image_lab_review_runtime_checked: false
+  review_session_draft_checked: false
+  image_case_draft_checked: false
+  memory_delta_draft_checked: false
+  prototype_guard_checked: false
+startup_side_effect_observed:
+  vcpchat_worktree_dirty_after_launch: true
+  changed_path: .vcp_ready
+  restored_by_codex: true
+  vcpchat_worktree_clean_after_restore: true
+review_console_bridge_side_effect_guard:
+  bridge_load_session_called: false
+  bridge_preview_draft_called: false
+  bridge_submit_draft_called: false
+  bridge_cancel_called: false
+  review_console_bridge_plugin_called: false
+  review_console_bridge_api_called: false
+  review_console_bridge_daily_note_called: false
+  review_console_bridge_vcp_memory_written: false
+  review_console_bridge_disk_write_performed: false
+  review_console_bridge_image_created: false
+general_guard:
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+  secret_value_copied: false
+  raw_local_path_saved: false
+  vcpchat_pushed: false
+  branch_deleted: false
+  github_release_performed: false
+result:
+  window_level_smoke: passed
+  renderer_global_smoke: not_completed
+  repository_cleanliness_restored: true
+  overall_runtime_smoke_result: partial
+  audit_summary_cn: "VCPChat 已启动并显示窗口；renderer global 未自动验证；普通启动删除 .vcp_ready 后已恢复。"

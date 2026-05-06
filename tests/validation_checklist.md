@@ -2752,3 +2752,22 @@
 - [ ] v7.29 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.29 默认下一安全阶段为 `v7.30 VCPChat Runtime Smoke Test Revised Authorization Gate`。
 - [ ] `node scripts/validate_v7_29_vcpchat_runtime_smoke_test_execution_record.js` 通过。
+
+## v7.30 VCPChat Runtime Smoke Test Partial Execution Record 检查
+
+- [ ] 当前阶段字符串为 `v7.30 vcpchat runtime smoke test partial execution record`。
+- [ ] `docs/182_v7_30_vcpchat_runtime_smoke_test_partial_execution_record.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_runtime_smoke_test_partial_execution_record.md` 存在。
+- [ ] `tests/schema_examples/v7_30_vcpchat_runtime_smoke_test_partial_execution_record.example.yaml` 存在。
+- [ ] `scripts/validate_v7_30_vcpchat_runtime_smoke_test_partial_execution_record.js` 存在。
+- [ ] v7.30 记录 `status=partial_pass_window_smoke_only` 和上一阶段 `v7.29 vcpchat runtime smoke test execution record`。
+- [ ] v7.30 必须记录已允许 VCPChat 普通启动流程读取既有本地设置并尝试既有启动连接。
+- [ ] v7.30 必须记录 `app_launch_performed=true`、Electron 进程出现、主窗口出现，窗口标题包含 `VCPdesktop` / `VCPChat`。
+- [ ] v7.30 必须记录 renderer global 自动验证未完成，不得声称 `window.imageLabReview` 已 runtime 验证通过。
+- [ ] v7.30 必须记录普通启动曾删除 `.vcp_ready`，且已恢复 VCPChat 工作树干净。
+- [ ] v7.30 必须保持 Review Console bridge 未调用：loadSession / previewDraft / submitDraft / cancel 全为 false。
+- [ ] v7.30 必须保持 Review Console bridge 未触发插件/API/DailyNote/VCP 记忆/磁盘写入/图片创建。
+- [ ] v7.30 必须保持 `dependency_changed=false`、`package_manifest_changed=false`、`lockfile_changed=false`、`vcpchat_pushed=false`、`branch_deleted=false`。
+- [ ] v7.30 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.30 默认下一安全阶段为 `v7.31 VCPChat Renderer Global Verification Gate`。
+- [ ] `node scripts/validate_v7_30_vcpchat_runtime_smoke_test_partial_execution_record.js` 通过。
