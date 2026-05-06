@@ -1,0 +1,81 @@
+status: completed_validated_project_local_v7_9_authorized_source_lookup_for_missing_files
+version: v7.9
+current_phase: "v7.9 vcpchat review console authorized source lookup for missing files"
+validation_file: scripts/validate_v7_9_vcpchat_review_console_authorized_source_lookup_for_missing_files.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: 6cd5bbd
+  previous_phase: "v7.8 vcpchat review console implementation authorization point"
+  default_next_phase: "v7.10 VCPChat Review Console File-level Write Authorization Review"
+authorized_lookup_scope:
+  target_repository_name: VCPChat
+  target_local_root_redacted: "<VCPCHAT_LOCAL_ROOT_REDACTED>"
+  target_branch_observed: main
+  target_head_short: c97ff0c
+  source_lookup_authorized_by_user: true
+  source_lookup_performed: true
+  source_lookup_read_only: true
+  source_write_performed: false
+  raw_source_code_copied: false
+  raw_local_path_saved: false
+resolved_missing_files:
+  main_process_ipc_handler_file: modules/ipc/imageLabReviewHandlers.js
+  main_process_ipc_handler_file_exists_now: false
+  renderer_mount_file: modules/renderer/imageLabReviewMount.js
+  renderer_mount_file_exists_now: false
+resolved_candidate_files:
+  future_allowed_write_scope_candidate:
+    - main.js
+    - modules/ipc/imageLabReviewHandlers.js
+    - preloads/chat.js
+    - main.html
+    - modules/renderer/imageLabReviewMount.js
+  conditional_write_scope_candidate:
+    - preloads/shared/apiFactory.js
+    - preloads/shared/catalog.js
+    - preloads/shared/roles.js
+    - renderer.js
+  read_only_reference_scope:
+    - modules/ipc/chatHandlers.js
+    - modules/services/preloadPaths.js
+    - renderer.js
+sanitization_guard:
+  authorized_source_lookup_only: true
+  additional_vcpchat_read_performed: true
+  real_vcpchat_source_lookup_performed: true
+  real_vcpchat_source_write_performed: false
+  vcpchat_code_modified: false
+  vcptoolbox_code_modified: false
+  raw_local_path_saved: false
+  raw_source_code_copied: false
+  env_file_read: false
+  config_env_read: false
+  secret_file_read: false
+  token_or_cookie_read: false
+  package_scripts_executed: false
+  npm_install_executed: false
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_file_created: false
+boundary_state:
+  missing_main_process_ipc_handler_file_resolved: true
+  missing_renderer_mount_file_resolved: true
+  implementation_allowed: false
+  final_write_authorization_ready: false
+  runtime_code_modified: false
+  vcpchat_code_modified: false
+  vcptoolbox_code_modified: false
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  renderer_runtime_code_created: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  image_file_created: false
+stop_point:
+  stop_here: true
+  next_safe_phase: "v7.10 VCPChat Review Console File-level Write Authorization Review"
+  real_write_phase_blocked: true

@@ -2341,3 +2341,23 @@
 - [ ] v7.6-v7.8 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
 - [ ] v7.8 默认下一安全阶段为 `v7.9 VCPChat Review Console Authorized Source Lookup For Missing Files`。
 - [ ] `node scripts/validate_v7_6_to_v7_8_vcpchat_review_console_authorization_chain.js` 通过。
+
+## v7.9 VCPChat Review Console Authorized Source Lookup For Missing Files 检查
+
+- [ ] 当前阶段字符串为 `v7.9 vcpchat review console authorized source lookup for missing files`。
+- [ ] `docs/161_v7_9_vcpchat_review_console_authorized_source_lookup_for_missing_files.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_review_console_authorized_source_lookup_for_missing_files.md` 存在。
+- [ ] `tests/schema_examples/v7_9_vcpchat_review_console_authorized_source_lookup_for_missing_files.example.yaml` 存在。
+- [ ] `scripts/validate_v7_9_vcpchat_review_console_authorized_source_lookup_for_missing_files.js` 存在。
+- [ ] v7.9 记录当前基线 `6cd5bbd` 和上一阶段 `v7.8 vcpchat review console implementation authorization point`。
+- [ ] v7.9 是已授权 source lookup 记录，必须保持 `additional_vcpchat_read_performed=true` 和 `real_vcpchat_source_lookup_performed=true`。
+- [ ] v7.9 必须保持只读：`source_write_performed=false`、`vcpchat_code_modified=false`、`vcptoolbox_code_modified=false`。
+- [ ] v7.9 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.9 必须确认缺失主进程 IPC handler 文件为 `modules/ipc/imageLabReviewHandlers.js`，且当前不存在。
+- [ ] v7.9 必须确认缺失 renderer mount 文件为 `modules/renderer/imageLabReviewMount.js`，且当前不存在。
+- [ ] v7.9 必须记录未来默认候选写入范围：`main.js`、`modules/ipc/imageLabReviewHandlers.js`、`preloads/chat.js`、`main.html`、`modules/renderer/imageLabReviewMount.js`。
+- [ ] v7.9 必须把 `preloads/shared/apiFactory.js`、`preloads/shared/catalog.js`、`preloads/shared/roles.js`、`renderer.js` 标为条件候选，不得默认纳入写入。
+- [ ] v7.9 保持不创建 renderer mount、preload、`ipcMain.handle` 或 Adapter 执行入口。
+- [ ] v7.9 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
+- [ ] v7.9 默认下一安全阶段为 `v7.10 VCPChat Review Console File-level Write Authorization Review`。
+- [ ] `node scripts/validate_v7_9_vcpchat_review_console_authorized_source_lookup_for_missing_files.js` 通过。
