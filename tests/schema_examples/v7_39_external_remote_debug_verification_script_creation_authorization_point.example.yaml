@@ -1,0 +1,96 @@
+status: planned_validated_v7_39_external_remote_debug_verification_script_creation_authorization_point
+version: v7.39
+current_phase: "v7.39 external remote-debug verification script creation authorization point"
+validation_file: scripts/validate_v7_39_external_remote_debug_verification_script_creation_authorization_point.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: 374294b
+  previous_phase: "v7.38 external remote-debug verification script creation preflight"
+  previous_record: docs/190_v7_38_external_remote_debug_verification_script_creation_preflight.md
+  default_next_phase: "v7.40 External Remote Debug Verification Script Creation Record"
+creation_decision:
+  script_path_under_review: scripts/run_vcpchat_review_console_remote_debug_smoke.ps1
+  should_create_script: true
+  create_in_this_phase: false
+  script_created_by_this_phase: false
+  decision_scope: "authorize_next_creation_phase_only"
+  requires_next_phase_creation_record: true
+  safe_to_create_in_next_phase_after_boundary_check: true
+  safe_to_run_after_creation: false
+  safe_to_start_vcpchat_after_creation: false
+  safe_to_access_cdp_after_creation: false
+authorized_next_creation_scope:
+  allowed_file_to_create:
+    - scripts/run_vcpchat_review_console_remote_debug_smoke.ps1
+  allowed_record_files:
+    - docs/192_v7_40_external_remote_debug_verification_script_creation_record.md
+    - review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_record.md
+    - tests/schema_examples/v7_40_external_remote_debug_verification_script_creation_record.example.yaml
+    - scripts/validate_v7_40_external_remote_debug_verification_script_creation_record.js
+    - tests/validation_checklist.md
+required_script_creation_properties:
+  script_must_default_to_dry_run: true
+  script_must_require_explicit_execute_switch_for_future_runtime: true
+  script_must_not_launch_vcpchat_without_execute_authorization: true
+  script_must_not_access_cdp_without_execute_authorization: true
+  script_must_not_call_bridge_methods: true
+  script_must_not_modify_vcpchat: true
+  script_must_not_modify_vcptoolbox: true
+  script_must_not_install_dependencies: true
+  script_must_not_call_plugin_or_api_or_dailynote: true
+  script_must_not_write_vcp_memory: true
+  script_must_not_create_images: true
+  script_must_not_embed_raw_local_paths: true
+  script_must_not_persist_raw_cdp_endpoint: true
+  script_must_emit_sanitized_json: true
+future_script_allowed_interface:
+  script_path: scripts/run_vcpchat_review_console_remote_debug_smoke.ps1
+  allowed_parameters:
+    - VcpChatRoot
+    - ExpectedHead
+    - RemoteDebugPort
+    - DryRun
+    - Execute
+    - OutputJson
+  default_parameter_values:
+    DryRun: true
+    Execute: false
+    RemoteDebugPort: 9222
+  safe_creation_behavior:
+    help_or_dry_run_only: true
+    app_launch_on_creation: false
+    cdp_access_on_creation: false
+    bridge_method_invocation_on_creation: false
+this_phase_boundary:
+  creation_authorization_point_recorded: true
+  should_create_script: true
+  create_in_this_phase: false
+  script_created_by_this_phase: false
+  script_run_by_this_phase: false
+  app_launch_authorized_by_this_phase: false
+  app_launch_performed_by_this_phase: false
+  remote_debug_authorized_by_this_phase: false
+  remote_debug_used_by_this_phase: false
+  cdp_access_authorized_by_this_phase: false
+  cdp_endpoint_accessed_by_this_phase: false
+  runtime_evaluate_authorized_by_this_phase: false
+  runtime_evaluate_performed_by_this_phase: false
+  bridge_load_session_called: false
+  bridge_preview_draft_called: false
+  bridge_submit_draft_called: false
+  bridge_cancel_called: false
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_created: false
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+  vcpchat_modified_by_this_phase: false
+  vcpchat_pushed: false
+  github_release_performed: false
+next_gate:
+  next_safe_phase: "v7.40 External Remote Debug Verification Script Creation Record"
+  audit_summary_cn: "v7.39 只明确建议创建外部 remote-debug 验证脚本；本阶段没有创建脚本、没有启动 VCPChat、没有访问 CDP，也没有修改 VCPChat。"
