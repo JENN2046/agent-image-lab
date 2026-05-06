@@ -56,7 +56,7 @@ none
 ```text
 1. Keep Adapter and Review Console work in no-execution / no-external-read mode unless an active A5 authorization package exists.
 2. If user authorizes remote or release movement, request exact target and run preflight before any push/tag/release.
-3. BLOCKED until explicit CDP access and bridge runtime verification authorization before opening any CDP endpoint or running Runtime.evaluate.
+3. BLOCKED until explicit VCPChat remote-debug relaunch authorization before restarting or relaunching VCPChat with a remote-debug port.
 4. Update CHECKPOINT.md, RUN_STATE.md, VALIDATION_LOG.md, and HANDOFF.md after each meaningful batch.
 ```
 
@@ -95,12 +95,13 @@ none
 30. Completed v7.42 external remote-debug verification script creation authorization package template without activating approval.
 31. Completed v7.43 remote-debug smoke script creation without running it.
 32. Completed v7.44 remote-debug smoke script run and VCPChat launch without CDP or bridge access.
+33. Completed v7.45 CDP read-only attempt; no available CDP endpoint, so Runtime.evaluate was not performed.
 ```
 
 ### blocked
 
 ```text
-1. CDP access remains blocked, and bridge runtime verification is blocked until the user explicitly authorizes CDP endpoint access and exact allowed runtime checks.
+1. VCPChat remote-debug relaunch is blocked until the user explicitly authorizes restart/relaunch with a remote-debug port and exact allowed runtime checks.
 ```
 
 ### skipped

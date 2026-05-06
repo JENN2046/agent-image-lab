@@ -3045,3 +3045,19 @@
 - [ ] v7.44 不保存真实本机路径、CDP endpoint、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.44 默认下一安全阶段为 `BLOCKED until explicit CDP access and bridge runtime verification authorization`。
 - [ ] `node scripts/validate_v7_44_remote_debug_script_run_and_vcpchat_launch_record.js` 通过。
+
+## v7.45 CDP Read-only Attempt Record 检查
+
+- [ ] 当前阶段字符串为 `v7.45 cdp read-only attempt record`。
+- [ ] `docs/197_v7_45_cdp_read_only_attempt_record.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_cdp_read_only_attempt_record.md` 存在。
+- [ ] `tests/schema_examples/v7_45_cdp_read_only_attempt_record.example.yaml` 存在。
+- [ ] `scripts/validate_v7_45_cdp_read_only_attempt_record.js` 存在。
+- [ ] v7.45 记录上一阶段为 `v7.44 remote-debug script run and vcpchat launch record`。
+- [ ] v7.45 必须记录 `authorization_received=true`、`cdp_read_only_access_authorized=true`、`runtime_evaluate_authorized=true`。
+- [ ] v7.45 必须记录 `cdp_endpoint_access_attempted_by_this_phase=true`、`cdp_endpoint_access_succeeded_by_this_phase=false`。
+- [ ] v7.45 必须记录 `cdp_targets_list_read_by_this_phase=false`、`runtime_evaluate_performed_by_this_phase=false`。
+- [ ] v7.45 必须保持 bridge 方法、插件/API/DailyNote/VCP 记忆/图片/依赖/manifest/lockfile/VCPChat 修改/远端推送均未发生。
+- [ ] v7.45 不保存真实本机路径、CDP endpoint、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.45 默认下一安全阶段为 `BLOCKED until explicit VCPChat remote-debug relaunch authorization`。
+- [ ] `node scripts/validate_v7_45_cdp_read_only_attempt_record.js` 通过。

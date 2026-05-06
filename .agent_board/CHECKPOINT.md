@@ -73,6 +73,9 @@ v7.43 validation: script creation execution validator passed and confirms the sc
 v7.43 local commit: commit d728a89 records dry-run-only remote-debug smoke script creation
 v7.44 local: remote-debug smoke script ran in dry-run blocked mode and VCPChat launched
 v7.44 validation: script run and launch record validator passed and confirms CDP/bridge were not used
+v7.44 local commit: commit b83ccd5 records VCPChat launch after dry-run script run
+v7.45 local: CDP read-only access attempted but no available CDP endpoint
+v7.45 validation: CDP attempt validator passed and confirms Runtime.evaluate / bridge checks were not performed
 ```
 
 ## Current Boundary
@@ -90,7 +93,8 @@ No active A5 authorization package.
 No A5 production execution in this batch.
 Remote-debug script run in this batch.
 VCPChat launched in this batch.
-No CDP access in this batch.
+CDP endpoint access attempted in this batch.
+No successful CDP target read in this batch.
 No bridge runtime verification in this batch.
 No push/tag/release in this batch.
 ```
@@ -127,9 +131,10 @@ node scripts/validate_v7_41_external_remote_debug_verification_script_creation_r
 node scripts/validate_v7_42_external_remote_debug_verification_script_creation_authorization_package.js: passed
 node scripts/validate_v7_43_external_remote_debug_verification_script_creation_execution_record.js: passed
 node scripts/validate_v7_44_remote_debug_script_run_and_vcpchat_launch_record.js: passed
+node scripts/validate_v7_45_cdp_read_only_attempt_record.js: passed
 node scripts/validate_agent_board_state.js: passed
 scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings
-scripts/validate_mvp.ps1: passed after v7.44 validation routing maintenance
+scripts/validate_mvp.ps1: passed after v7.45 validation routing maintenance
 git diff --check: passed
 ```
 
@@ -137,8 +142,8 @@ git diff --check: passed
 
 ```text
 Continue only local A4 docs/schema/checklist/prototype/validation work inside the project root unless the user explicitly provides an active A5 authorization package.
-Legacy MVP validation routing now treats old v4/v5 current-state validators as historical snapshots and validates the current project state through v7.44 / agent-board checks.
-The remote-debug script ran in dry-run blocked mode and VCPChat launched. Next CDP access or bridge runtime verification is BLOCKED until explicit authorization.
+Legacy MVP validation routing now treats old v4/v5 current-state validators as historical snapshots and validates the current project state through v7.45 / agent-board checks.
+The CDP read-only attempt found no available endpoint, so Runtime.evaluate and bridge checks were not performed. Next safe action is BLOCKED until explicit VCPChat remote-debug relaunch authorization.
 ```
 
 ## Resume Instruction

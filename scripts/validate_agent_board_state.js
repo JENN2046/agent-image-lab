@@ -82,7 +82,7 @@ function main() {
   ]);
   const localWorkStateDeclared = hasAll(runState + handoff, [
     "Worktree:",
-    "v7.44 remote-debug script run and vcpchat launch record",
+    "v7.45 cdp read-only attempt record",
     "Push/tag/release"
   ]);
 

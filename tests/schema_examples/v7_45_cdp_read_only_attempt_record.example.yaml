@@ -1,0 +1,81 @@
+status: blocked_validated_v7_45_cdp_read_only_attempt_record
+version: v7.45
+current_phase: "v7.45 cdp read-only attempt record"
+validation_file: scripts/validate_v7_45_cdp_read_only_attempt_record.js
+
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  origin_master_short: 5a7f5ba
+  local_head_before_batch: b83ccd5
+  local_pending_commits_before_this_batch:
+    - 8f60ae1
+    - 0326150
+    - 975da9a
+    - d728a89
+    - b83ccd5
+  previous_phase: "v7.44 remote-debug script run and vcpchat launch record"
+  previous_record: docs/196_v7_44_remote_debug_script_run_and_vcpchat_launch_record.md
+  default_next_phase: "BLOCKED until explicit VCPChat remote-debug relaunch authorization"
+
+authorization_applied:
+  authorization_received: true
+  authorized_by: current_user
+  authorized_at: "2026-05-06"
+  cdp_read_only_access_authorized: true
+  targets_list_read_authorized: true
+  runtime_evaluate_authorized: true
+  bridge_method_invocation_authorized: false
+  source_read_authorized: false
+  source_modification_authorized: false
+
+cdp_attempt:
+  endpoint_ref: redacted_local_cdp_9222
+  endpoint_http_request_attempted: true
+  endpoint_http_request_succeeded: false
+  endpoint_failure_kind: HttpRequestException
+  cdp_targets_list_read: false
+  cdp_target_count: 0
+  electron_processes_observed: true
+  electron_process_count: 6
+  electron_owned_listening_connection_count: 0
+  runtime_evaluate_attempted: false
+  runtime_evaluate_performed: false
+  reason_runtime_evaluate_not_performed: no_available_cdp_target
+
+this_phase_boundary:
+  cdp_read_only_access_authorized_by_this_phase: true
+  cdp_endpoint_access_attempted_by_this_phase: true
+  cdp_endpoint_access_succeeded_by_this_phase: false
+  cdp_targets_list_read_by_this_phase: false
+  runtime_evaluate_authorized_by_this_phase: true
+  runtime_evaluate_attempted_by_this_phase: false
+  runtime_evaluate_performed_by_this_phase: false
+  bridge_method_invocation_authorized_by_this_phase: false
+  bridge_method_invocation_performed: false
+  bridge_load_session_called: false
+  bridge_preview_draft_called: false
+  bridge_submit_draft_called: false
+  bridge_cancel_called: false
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_created: false
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+  vcpchat_source_read: false
+  vcpchat_modified_by_this_phase: false
+  vcptoolbox_source_read: false
+  vcptoolbox_modified_by_this_phase: false
+  output_file_written: false
+  tag_created: false
+  push_performed: false
+  github_release_performed: false
+
+notes_cn:
+  - "CDP 只读访问已按授权尝试。"
+  - "当前 VCPChat 没有可用 CDP target。"
+  - "Runtime.evaluate 没有执行，bridge 方法没有调用。"
+  - "下一步需要明确授权以 remote-debug 端口重新启动或重启 VCPChat。"

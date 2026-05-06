@@ -63,6 +63,7 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Added v7.42 inactive external remote-debug verification script creation authorization package template.
 - Added v7.43 external remote-debug verification script creation execution record and dry-run-only script.
 - Added v7.44 remote-debug script run and VCPChat launch record.
+- Added v7.45 CDP read-only attempt record.
 
 ## Safety Status
 
@@ -83,3 +84,4 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - The v7.42 authorization package is a template only and does not approve script creation.
 - The v7.43 script creation batch created the script but did not execute it.
 - The v7.44 batch ran the dry-run-only script and launched VCPChat; CDP access and bridge runtime verification still require new explicit authorization.
+- The v7.45 batch attempted authorized local CDP read-only access, but no available CDP endpoint was exposed; `Runtime.evaluate` and bridge verification were not performed.
