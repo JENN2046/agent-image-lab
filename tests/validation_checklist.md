@@ -2808,3 +2808,24 @@
 - [ ] v7.32 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.32 默认下一安全阶段为 `v7.33 VCPChat One-time Remote Debug Runtime Verification Execution`。
 - [ ] `node scripts/validate_v7_32_vcpchat_one_time_remote_debug_runtime_verification_preflight.js` 通过。
+
+## v7.33 VCPChat One-time Remote Debug Runtime Verification Record 检查
+
+- [ ] 当前阶段字符串为 `v7.33 vcpchat one-time remote-debug runtime verification record`。
+- [ ] `docs/185_v7_33_vcpchat_one_time_remote_debug_runtime_verification_record.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_one_time_remote_debug_runtime_verification_record.md` 存在。
+- [ ] `tests/schema_examples/v7_33_vcpchat_one_time_remote_debug_runtime_verification_record.example.yaml` 存在。
+- [ ] `scripts/validate_v7_33_vcpchat_one_time_remote_debug_runtime_verification_record.js` 存在。
+- [ ] v7.33 记录 `current_head: fe62ef1` 和上一阶段 `v7.32 vcpchat one-time remote-debug runtime verification preflight`。
+- [ ] v7.33 必须记录 app launch、remote-debug、CDP endpoint access、Runtime.evaluate 均已执行。
+- [ ] v7.33 必须记录 `window.imageLabReview` 存在，且只暴露 loadSession / previewDraft / submitDraft / cancel 四个方法。
+- [ ] v7.33 必须记录 `imageLabReviewMount` 存在、runtime status 为 ready、`window.imageLabReviewRuntime` 存在。
+- [ ] v7.33 必须记录 `review_session_draft`、`image_case_draft`、`memory_delta_draft` 均存在。
+- [ ] v7.33 必须记录 `prototype_guard` 中 api_called / daily_note_called / vcp_plugin_called / disk_write_performed / image_file_created 全为 false。
+- [ ] v7.33 必须保持 bridge loadSession / previewDraft / submitDraft / cancel 未调用。
+- [ ] v7.33 必须记录普通启动删除 `.vcp_ready`，且已恢复 VCPChat 工作树干净。
+- [ ] v7.33 必须记录 `renderer_global_smoke=passed` 和 `prototype_guard_smoke=passed`。
+- [ ] v7.33 必须保持 `dependency_changed=false`、`vcpchat_pushed=false`、`branch_deleted=false`、`github_release_performed=false`。
+- [ ] v7.33 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.33 默认下一安全阶段为 `v7.34 VCPChat Review Console Runtime Verification Closeout`。
+- [ ] `node scripts/validate_v7_33_vcpchat_one_time_remote_debug_runtime_verification_record.js` 通过。
