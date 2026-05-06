@@ -1,0 +1,66 @@
+status: completed_validated_v7_24_vcpchat_local_main_sync_plan
+version: v7.24
+current_phase: "v7.24 vcpchat local main sync plan"
+validation_file: scripts/validate_v7_24_vcpchat_local_main_sync_plan.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: ae7e5d6
+  previous_phase: "v7.23 vcpchat review console post-merge record"
+  default_next_phase: "v7.25 VCPChat Local Main Sync Execution Preflight"
+current_sync_problem:
+  target_repository_name: VCPChat
+  current_local_branch: codex/image-lab-review-console-bridge
+  current_local_head_short: 426a2a9
+  local_main_head_short: 426a2a9
+  local_origin_main_head_short_before_fetch: c97ff0c
+  remote_main_head_short_observed_via_ls_remote: b320e39
+  remote_feature_branch_head_short_observed_via_ls_remote: 426a2a9
+  pr_34_state: MERGED
+  merge_method: squash
+recommended_safe_sync_strategy:
+  strategy_name: backup_then_realign_local_main_to_origin_main
+  destructive_sync_allowed_by_this_phase: false
+  future_execution_requires_explicit_authorization: true
+  preserve_direct_commit_before_realignment: true
+  preserve_feature_branch: true
+future_commands_for_explicit_authorization:
+  candidate_sync_commands_after_authorization:
+    - git branch backup/vcpchat-main-before-review-console-sync-20260506 main
+    - git fetch origin main codex/image-lab-review-console-bridge
+    - git branch -f main origin/main
+    - git switch main
+  commands_not_recommended:
+    - git pull --ff-only
+stop_conditions:
+  stop_if_worktree_dirty: true
+  stop_if_current_branch_is_main_before_backup: true
+  stop_if_backup_branch_already_exists: true
+  stop_if_remote_main_not_b320e39: true
+  stop_if_feature_branch_missing: true
+  stop_if_origin_main_after_fetch_not_b320e39: true
+rollback_and_recovery_plan:
+  backup_branch_required_before_main_realign: true
+  backup_branch_name_example: backup/vcpchat-main-before-review-console-sync-20260506
+  destructive_rollback_allowed: false
+  force_push_allowed: false
+  delete_branch_allowed_by_this_phase: false
+side_effect_guard:
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_created: false
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+  env_or_secret_file_read: false
+  secret_value_copied: false
+  raw_local_path_saved: false
+  local_main_sync_performed: false
+  git_fetch_performed: false
+  git_switch_performed: false
+  git_pull_performed: false
+  branch_pointer_changed_by_this_phase: false
+  branch_deleted: false
+  github_release_performed: false
