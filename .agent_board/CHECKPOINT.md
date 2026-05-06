@@ -61,6 +61,9 @@ v5.12 local: final delivery candidate package readiness recorded
 v5.12 validation: release candidate readiness is validated locally and awaits explicit git add/commit/push/PR/release authorization
 v7.40 local: local A4/A5 autonomy mode alignment opened after v7.39 remote-debug script creation authorization point
 v7.40 validation: local autonomy alignment validator passed and project indexes / agent board now reflect A4/A5 semantics
+v7.40 local commit: commit 8f60ae1 records local autonomy validation and MVP validation routing
+v7.41 local: external remote-debug verification script creation record deferred real script creation pending an active authorization package
+v7.41 validation: script creation record validator passed and confirms the remote-debug script remains uncreated
 ```
 
 ## Current Boundary
@@ -76,6 +79,7 @@ No image creation.
 No VCPChat/VCPToolBox modification.
 No active A5 authorization package.
 No A5 production execution in this batch.
+No remote-debug script creation in this batch.
 No push/tag/release in this batch.
 ```
 
@@ -107,9 +111,10 @@ node scripts/validate_v7_40_local_a4_a5_autonomy_alignment.js: passed
 node scripts/validate_v7_37_external_remote_debug_verification_script_authorization_gate.js: passed
 node scripts/validate_v7_38_external_remote_debug_verification_script_creation_preflight.js: passed
 node scripts/validate_v7_39_external_remote_debug_verification_script_creation_authorization_point.js: passed
+node scripts/validate_v7_41_external_remote_debug_verification_script_creation_record.js: passed
 node scripts/validate_agent_board_state.js: passed
 scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings
-scripts/validate_mvp.ps1: passed after v7.40 validation routing maintenance
+scripts/validate_mvp.ps1: passed after v7.41 validation routing maintenance
 git diff --check: passed
 ```
 
@@ -117,7 +122,8 @@ git diff --check: passed
 
 ```text
 Continue only local A4 docs/schema/checklist/prototype/validation work inside the project root unless the user explicitly provides an active A5 authorization package.
-Legacy MVP validation routing now treats old v4/v5 current-state validators as historical snapshots and validates the current project state through v7.40 / agent-board checks.
+Legacy MVP validation routing now treats old v4/v5 current-state validators as historical snapshots and validates the current project state through v7.41 / agent-board checks.
+The remote-debug script remains uncreated until an active script creation authorization package or active A5 authorization package exists.
 ```
 
 ## Resume Instruction

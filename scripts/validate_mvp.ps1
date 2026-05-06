@@ -74,6 +74,7 @@ $requiredFiles = @(
   'scripts/validate_v5_post_merge_reconciliation.js',
   'scripts/validate_v5_12_release_candidate_readiness.js',
   'scripts/validate_v7_40_local_a4_a5_autonomy_alignment.js',
+  'scripts/validate_v7_41_external_remote_debug_verification_script_creation_record.js',
   'scripts/validate_runtime_guard_unit.js',
   'scripts/validate_runtime_prototype_smoke.js',
   'scripts/validate_runtime_prototype_suite.js',
@@ -112,6 +113,7 @@ $requiredFiles = @(
   'docs/138_v5_11_post_merge_reconciliation.md',
   'docs/139_v5_12_release_candidate_readiness.md',
   'docs/192_v7_40_local_a4_a5_autonomy_alignment.md',
+  'docs/193_v7_41_external_remote_debug_verification_script_creation_record.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
@@ -198,6 +200,7 @@ $requiredFiles = @(
   'tests/schema_examples/v5_11_post_merge_reconciliation.example.yaml',
   'tests/schema_examples/v5_12_release_candidate_readiness.example.yaml',
   'tests/schema_examples/v7_40_local_a4_a5_autonomy_alignment.example.yaml',
+  'tests/schema_examples/v7_41_external_remote_debug_verification_script_creation_record.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -210,7 +213,8 @@ $requiredFiles = @(
   'review_console/runtime_prototype/styles.css',
   'review_console/runtime_prototype/README.md',
   'review_console/runtime_prototype/FIELD_MAPPING.md',
-  'review_console/embed_contract/first_runtime_code_patch_authorization.md'
+  'review_console/embed_contract/first_runtime_code_patch_authorization.md',
+  'review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_record.md'
 )
 
 $requiredDirectories = @(
@@ -3701,6 +3705,11 @@ if (-not $node) {
     Add-Failure "scripts/validate_v7_40_local_a4_a5_autonomy_alignment.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'scripts/validate_v7_41_external_remote_debug_verification_script_creation_record.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_v7_41_external_remote_debug_verification_script_creation_record.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_agent_board_state.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_agent_board_state.js failed node --check"
@@ -3789,6 +3798,25 @@ if (-not $node) {
     }
     if ($v740AutonomyAlignment.v7_40_local_a4_a5_autonomy_alignment.a5_actions_authorized_now -ne $false) {
       Add-Failure "v7.40 local A4/A5 autonomy alignment must not authorize A5 actions"
+    }
+  }
+
+  $v741ScriptCreationRecordOutput = & node (Join-Path $Root 'scripts/validate_v7_41_external_remote_debug_verification_script_creation_record.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v7.41 external remote-debug verification script creation record validation exited with failure"
+  } else {
+    $v741ScriptCreationRecord = ($v741ScriptCreationRecordOutput -join "`n") | ConvertFrom-Json
+    if ($v741ScriptCreationRecord.passed -ne $true) {
+      Add-Failure "v7.41 external remote-debug verification script creation record validation must report passed true"
+    }
+    if ($v741ScriptCreationRecord.v7_41_external_remote_debug_verification_script_creation_record.remote_debug_script_created -ne $false) {
+      Add-Failure "v7.41 must not create the remote-debug verification script"
+    }
+    if ($v741ScriptCreationRecord.v7_41_external_remote_debug_verification_script_creation_record.script_creation_deferred -ne $true) {
+      Add-Failure "v7.41 must record script creation deferral"
+    }
+    if ($v741ScriptCreationRecord.v7_41_external_remote_debug_verification_script_creation_record.future_package_recorded -ne $true) {
+      Add-Failure "v7.41 must record future script creation authorization package"
     }
   }
 
@@ -4618,6 +4646,7 @@ if (-not $node) {
     $allowedCurrentA4ChangePrefixes = @(
       '.agent_board/',
       'docs/',
+      'review_console/embed_contract/',
       'scripts/',
       'tests/schema_examples/'
     )

@@ -1,6 +1,6 @@
 # Agent Image Lab 打包清单
 
-本包包含 Agent Image Lab v1.0 true-loop closeout 候选所需的文档、schema、角色定义、记忆策略、审片台规格、Adapter dry-run 包、VCP 接入记录、授权门、真实执行脱敏记录、最终验收报告、v3.9-v4.2 Review Console runtime prototype 本地验证加固记录，v4.3-v4.9 guarded autopilot overlay / agent board / local checkpoint readiness / commit scope manifest / post-push state reconciliation / v4 index consistency validation / local tag push-readiness preflight，v5.0 post-merge delivery readiness index，v5.1 runtime delivery surface validation，v5.2 adapter delivery surface validation，v5.3 review console adapter handoff validation，v5.4 local sync readiness preflight，v5.5 post-commit reconciliation checkpoint，v5.6 v5 index consistency validation，v5.7 local batch commit-readiness preflight，v5.8 handoff freshness validation，v5.9 expanded v5 index consistency validation，v5.10 local true-loop candidate delivery closeout，v5.11 post-merge reconciliation，v5.12 release candidate readiness，以及 v7.40 local A4/A5 autonomy mode alignment。
+本包包含 Agent Image Lab v1.0 true-loop closeout 候选所需的文档、schema、角色定义、记忆策略、审片台规格、Adapter dry-run 包、VCP 接入记录、授权门、真实执行脱敏记录、最终验收报告、v3.9-v4.2 Review Console runtime prototype 本地验证加固记录，v4.3-v4.9 guarded autopilot overlay / agent board / local checkpoint readiness / commit scope manifest / post-push state reconciliation / v4 index consistency validation / local tag push-readiness preflight，v5.0 post-merge delivery readiness index，v5.1 runtime delivery surface validation，v5.2 adapter delivery surface validation，v5.3 review console adapter handoff validation，v5.4 local sync readiness preflight，v5.5 post-commit reconciliation checkpoint，v5.6 v5 index consistency validation，v5.7 local batch commit-readiness preflight，v5.8 handoff freshness validation，v5.9 expanded v5 index consistency validation，v5.10 local true-loop candidate delivery closeout，v5.11 post-merge reconciliation，v5.12 release candidate readiness，v7.40 local A4/A5 autonomy mode alignment，以及 v7.41 external remote-debug verification script creation record。
 
 ## 重要声明
 
@@ -47,7 +47,10 @@
 - `docs/138_v5_11_post_merge_reconciliation.md`
 - `docs/139_v5_12_release_candidate_readiness.md`
 - `docs/192_v7_40_local_a4_a5_autonomy_alignment.md`
+- `docs/193_v7_41_external_remote_debug_verification_script_creation_record.md`
+- `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_record.md`
 - `tests/schema_examples/v7_40_local_a4_a5_autonomy_alignment.example.yaml`
+- `tests/schema_examples/v7_41_external_remote_debug_verification_script_creation_record.example.yaml`
 - `.agent_board/`
 - `AGENTS.autopilot-overlay.md`
 - `README_AGENT_IMAGE_LAB_AUTOPILOT.md`
@@ -72,6 +75,7 @@
 - `scripts/validate_v5_post_merge_reconciliation.js`
 - `scripts/validate_v5_12_release_candidate_readiness.js`
 - `scripts/validate_v7_40_local_a4_a5_autonomy_alignment.js`
+- `scripts/validate_v7_41_external_remote_debug_verification_script_creation_record.js`
 - `integrations/vcp/v0_7_real_execution_authorization_gate.md`
 - `integrations/vcp/v0_7_photo_studio_os_dry_run_rehearsal.md`
 - `integrations/vcp/v0_7_photo_studio_os_real_execution_record.md`
@@ -110,3 +114,4 @@
 - v5.11 records post-merge reconciliation only; it does not authorize git add, commit, push, remote tag, PR, merge, release, real execution, or external reads.
 - v5.12 records release candidate readiness only; it does not authorize git add, commit, push, remote tag, PR, merge, GitHub Release publication, real execution, or external reads.
 - v7.40 records local A4/A5 autonomy mode alignment only; it does not activate an A5 authorization package and does not authorize real external reads, real production execution, remote writes, tags, pushes, releases, DailyNote writes, VCP memory writes, plugin calls, API calls, or image creation.
+- v7.41 records remote-debug verification script creation deferral only; it does not create the real script, launch VCPChat, access CDP, call bridge methods, modify VCPChat/VCPToolBox, or authorize A5 production execution.

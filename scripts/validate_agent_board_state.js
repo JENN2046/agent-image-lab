@@ -82,7 +82,7 @@ function main() {
   ]);
   const localWorkStateDeclared = hasAll(runState + handoff, [
     "Worktree:",
-    "v7.40 local A4/A5 autonomy mode alignment",
+    "v7.41 external remote-debug verification script creation record",
     "Push/tag/release"
   ]);
 

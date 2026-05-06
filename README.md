@@ -7,7 +7,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v7.40 local A4/A5 autonomy mode alignment
+v1.0 true-loop closeout candidate + v7.41 external remote-debug verification script creation record
 ```
 
 已经完成：
@@ -45,6 +45,7 @@ v1.0 true-loop closeout candidate + v7.40 local A4/A5 autonomy mode alignment
 - v5.11 post-merge reconciliation 记录 PR #2 已合并、本地 `master` 已同步到 `origin/master`、v5.10 交付 tag 已推送，并把 `.agent_board` 切换到合并后状态。
 - v5.12 release candidate readiness 把真实闭环候选整理成最终交付候选包，并机器检查 release readiness、final acceptance、true-loop closeout、GitHub intake 和安全边界。
 - v7.40 local A4/A5 autonomy mode alignment 把项目默认本地自动化提升为 `A4 — Sustained Local Autopilot`，并把 `A5 — Autonomous Production Execution` 固化为必须依赖独立授权包的真实生产执行模式。
+- v7.41 external remote-debug verification script creation record 把原 v7.39 指向的脚本创建记录重新落位，并明确真实 remote-debug 脚本仍未创建，后续创建需要 active A5 authorization package 或独立脚本创建授权包。
 
 当前 accepted asset 只以 ignored runtime 路径和哈希归档，不把图片二进制写入 Git、DailyNote 或 VCP 长期记忆。人工接受记录保留了已知视觉偏差：这是 `human_override` 通过，不是完美 prompt compliance。
 

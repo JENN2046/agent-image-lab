@@ -2968,3 +2968,23 @@
 - [ ] v7.39 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.39 默认下一安全阶段为 `v7.40 External Remote Debug Verification Script Creation Record`。
 - [ ] `node scripts/validate_v7_39_external_remote_debug_verification_script_creation_authorization_point.js` 通过。
+
+## v7.41 External Remote Debug Verification Script Creation Record 检查
+
+- [ ] 当前阶段字符串为 `v7.41 external remote-debug verification script creation record`。
+- [ ] `docs/193_v7_41_external_remote_debug_verification_script_creation_record.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_record.md` 存在。
+- [ ] `tests/schema_examples/v7_41_external_remote_debug_verification_script_creation_record.example.yaml` 存在。
+- [ ] `scripts/validate_v7_41_external_remote_debug_verification_script_creation_record.js` 存在。
+- [ ] v7.41 记录上一阶段为 `v7.40 local A4/A5 autonomy mode alignment`，并引用 v7.39 的脚本创建授权点。
+- [ ] v7.41 记录原 v7.39 指向的 `v7.40 External Remote Debug Verification Script Creation Record` 已因 v7.40 A4/A5 对齐而顺延。
+- [ ] v7.41 必须记录 `creation_record_created=true`、`script_creation_deferred=true`。
+- [ ] v7.41 必须保持 `remote_debug_script_created=false`、`script_run_by_this_phase=false`。
+- [ ] v7.41 必须保持 `active_a5_authorization_package_present=false`、`active_script_creation_authorization_package_present=false`、`executable_script_creation_allowed_now=false`。
+- [ ] v7.41 必须记录未来创建授权包字段：authorization_id、authorized_by、allowed_file_to_create、required_default_behavior、validation_requirements、rollback_path、reviewer、stop_conditions。
+- [ ] v7.41 必须保持未来脚本默认 dry_run=true、execute=false、app_launch=false、cdp_access=false、bridge_method_invocation=false。
+- [ ] v7.41 必须保持 bridge loadSession / previewDraft / submitDraft / cancel 未调用。
+- [ ] v7.41 必须保持插件/API/DailyNote/VCP 记忆/图片/依赖/manifest/lockfile/VCPChat 修改/远端推送均未发生。
+- [ ] v7.41 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.41 默认下一安全阶段为 `v7.42 External Remote Debug Verification Script Creation Authorization Package`。
+- [ ] `node scripts/validate_v7_41_external_remote_debug_verification_script_creation_record.js` 通过。

@@ -2,6 +2,55 @@
 
 ## Entries
 
+## VALIDATION-20260506-V7-41
+
+Task:
+
+```text
+Record v7.41 external remote-debug verification script creation deferral under A4/A5 boundaries.
+```
+
+Commands run:
+
+```text
+node scripts/validate_v7_41_external_remote_debug_verification_script_creation_record.js: passed
+node scripts/validate_v7_40_local_a4_a5_autonomy_alignment.js: passed
+node scripts/validate_agent_board_state.js: passed
+scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings
+scripts/validate_mvp.ps1: passed after v7.41 validation routing maintenance
+git diff --check: passed
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+v7.41 records that the external remote-debug verification script creation record moved after v7.40 A4/A5 autonomy alignment and that the real script remains uncreated.
+```
+
+Warnings:
+
+```text
+No blocking warnings from v7.41 validator or git diff check. Local validation warning scan may still surface negative checklist terms.
+```
+
+Not validated:
+
+```text
+No real remote-debug script creation, VCPChat launch, CDP access, bridge call, plugin call, API call, DailyNote call, VCP memory write, image creation, push, tag, release, or A5 production execution was performed.
+```
+
+Notes:
+
+```text
+Future script creation requires an active script creation authorization package or active A5 authorization package.
+```
+
 ## VALIDATION-20260506-V7-40
 
 Task:

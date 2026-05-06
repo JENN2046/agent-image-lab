@@ -15,7 +15,7 @@ Real VCPChat / VCPToolBox reads are blocked until the user provides explicit aut
 ## Standing Remote-Action Gate
 
 ```text
-Commit, tag, push, release, PR, merge, or remote issue changes require explicit separate authorization.
+Guarded local commits are authorized by standing user instruction when all project auto-commit conditions pass. Tag, push, release, PR, merge, or remote issue changes still require explicit separate authorization.
 ```
 
 ## Standing Real-Execution Gate
@@ -28,6 +28,12 @@ Plugin calls, API calls, DailyNote writes, VCP memory writes, image creation, an
 
 ```text
 Without an active A5 authorization package, production actions remain blocked. A5 authorization must name exact target systems, allowed paths or objects, allowed commands or operations, forbidden operations, write boundaries, validation requirements, rollback path, reviewer, and stop conditions.
+```
+
+## Standing Remote-Debug Script Creation Gate
+
+```text
+The real scripts/run_vcpchat_review_console_remote_debug_smoke.ps1 file remains uncreated. Creating or running that executable remote-debug script requires an active script creation authorization package or active A5 authorization package.
 ```
 
 ## Blocker Template

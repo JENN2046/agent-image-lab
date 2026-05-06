@@ -59,6 +59,7 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Added v5.11 post-merge reconciliation.
 - Added v5.12 release candidate readiness.
 - Added v7.40 local A4/A5 autonomy mode alignment.
+- Added v7.41 external remote-debug verification script creation record deferral.
 
 ## Safety Status
 
@@ -75,3 +76,4 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - No raw plugin output, secret value, raw endpoint, or runtime log is stored in project docs.
 - Additional real plugin calls, DailyNote writes, VCP long-term memory writes, and GitHub Release publication still require explicit user authorization.
 - A5 Autonomous Production Execution requires a separate active authorization package before any real production action.
+- The external remote-debug verification script remains uncreated until a separate script creation authorization package is active.
