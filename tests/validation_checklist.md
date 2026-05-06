@@ -2001,3 +2001,18 @@
 - [ ] `validate_mvp.ps1` 执行 v5.11 post-merge reconciliation validation 并检查输出字段。
 - [ ] v5.11 不执行 `git add`、commit、push、远端 tag、PR、merge 或 release。
 - [ ] v5.11 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.12 Release Candidate Readiness 检查
+
+- [ ] 当前阶段字符串为 `v5.12 release candidate readiness`。
+- [ ] `docs/139_v5_12_release_candidate_readiness.md` 存在。
+- [ ] `tests/schema_examples/v5_12_release_candidate_readiness.example.yaml` 存在。
+- [ ] `scripts/validate_v5_12_release_candidate_readiness.js` 存在。
+- [ ] v5.12 记录 PR #3 已合并，merge commit 为 `b3731bf`，PR head 为 `46bf42b`。
+- [ ] v5.12 记录 `v5.11-post-merge-reconciliation` tag 已推送，本地 `master...origin/master` 为 `0 0`。
+- [ ] v5.12 检查 `docs/30_release_readiness_report.md`、`docs/32_final_acceptance_report.md`、`docs/34_v1_0_true_loop_closeout.md` 和 `docs/35_v1_0_github_intake_review.md`。
+- [ ] v5.12 保留 Photo Studio OS accepted asset 只用 ignored runtime 相对路径和 sha256 归档。
+- [ ] README、MANIFEST、roadmap、release notes、validation checklist 和 `.agent_board` 均指向 v5.12 当前状态。
+- [ ] `validate_mvp.ps1` 执行 v5.12 release candidate readiness validation 并检查输出字段。
+- [ ] v5.12 不执行 `git add`、commit、push、远端 tag、PR、merge、GitHub Release 发布或新的真实执行。
+- [ ] v5.12 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。

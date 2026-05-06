@@ -53,7 +53,7 @@ none
 ### todo
 
 ```text
-1. If user authorizes v5.11 version movement, run commit/push/PR/release preflight with exact scope.
+1. If user authorizes v5.12 version movement, run commit/push/PR/release preflight with exact scope.
 2. If user asks for release movement, request explicit commit/tag/push scope and run preflight.
 3. Keep Adapter and Review Console work in no-execution / no-external-read mode.
 4. Update CHECKPOINT.md, RUN_STATE.md, VALIDATION_LOG.md, and HANDOFF.md after each meaningful batch.
@@ -85,6 +85,7 @@ none
 21. Completed v5.9 expanded v5 index consistency validation.
 22. Completed v5.10 local true-loop candidate delivery closeout.
 23. Completed v5.11 post-merge reconciliation.
+24. Completed v5.12 release candidate readiness.
 ```
 
 ### blocked

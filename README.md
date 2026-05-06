@@ -7,7 +7,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v5.11 post-merge reconciliation
+v1.0 true-loop closeout candidate + v5.12 release candidate readiness
 ```
 
 已经完成：
@@ -43,6 +43,7 @@ v1.0 true-loop closeout candidate + v5.11 post-merge reconciliation
 - v5.9 expanded v5 index consistency validation 把 v5 index consistency validation 覆盖范围扩展到 v5.0-v5.9。
 - v5.10 local true-loop candidate delivery closeout 收束本地 v1.0 真实闭环候选交付，记录 v5.9 本地提交、审查修复和交付授权边界。
 - v5.11 post-merge reconciliation 记录 PR #2 已合并、本地 `master` 已同步到 `origin/master`、v5.10 交付 tag 已推送，并把 `.agent_board` 切换到合并后状态。
+- v5.12 release candidate readiness 把真实闭环候选整理成最终交付候选包，并机器检查 release readiness、final acceptance、true-loop closeout、GitHub intake 和安全边界。
 
 当前 accepted asset 只以 ignored runtime 路径和哈希归档，不把图片二进制写入 Git、DailyNote 或 VCP 长期记忆。人工接受记录保留了已知视觉偏差：这是 `human_override` 通过，不是完美 prompt compliance。
 
@@ -109,6 +110,7 @@ Photo Studio OS UI 生图生产线，以及 AI 图片评审与修正生产线。
 - `docs/136_v5_9_expanded_v5_index_consistency.md`：expanded v5 index consistency validation 记录。
 - `docs/137_v5_10_local_true_loop_candidate_delivery.md`：local true-loop candidate delivery closeout 记录。
 - `docs/138_v5_11_post_merge_reconciliation.md`：post-merge reconciliation 记录。
+- `docs/139_v5_12_release_candidate_readiness.md`：release candidate readiness 记录。
 - `.agent_board/`：本地 guarded autopilot 状态板，用于续跑、校验记录和 handoff。
 - `docs/`：项目定义、SOP、评分表、VCP 记忆适配、审片台设计。
 - `agents/`：ImageLab_Master 和岗位型子 Agent 的规则。
@@ -143,6 +145,7 @@ node scripts\validate_v5_local_batch_commit_readiness.js
 node scripts\validate_v5_handoff_freshness.js
 node scripts\validate_v5_true_loop_candidate_delivery.js
 node scripts\validate_v5_post_merge_reconciliation.js
+node scripts\validate_v5_12_release_candidate_readiness.js
 node scripts\validate_runtime_prototype_suite.js
 node scripts\validate_agent_board_state.js
 node scripts\validate_local_checkpoint_manifest.js

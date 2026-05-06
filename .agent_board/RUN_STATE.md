@@ -15,7 +15,7 @@ Advance Agent Image Lab safely within project-local no-execution / no-external-r
 ## Current Phase
 
 ```text
-v5.11 post-merge reconciliation
+v5.12 release candidate readiness
 ```
 
 ## Current Task
@@ -27,7 +27,7 @@ none
 ## Last Completed Task
 
 ```text
-Completed PR #2 post-merge reconciliation after v5.10 local delivery and AGENTS merge landed on master.
+Completed v5.12 release candidate readiness after PR #3 landed v5.11 on master.
 ```
 
 ## Last Validation
@@ -53,6 +53,7 @@ node scripts/validate_v5_local_batch_commit_readiness.js: passed
 node scripts/validate_v5_handoff_freshness.js: passed
 node scripts/validate_v5_true_loop_candidate_delivery.js: passed
 node scripts/validate_v5_post_merge_reconciliation.js: passed
+node scripts/validate_v5_12_release_candidate_readiness.js: passed
 git diff --check: passed
 ```
 
@@ -87,23 +88,27 @@ PR #1 merged head: b595851
 PR #2 status: merged
 PR #2 merge commit: 3e3405e
 PR #2 head: 5ccf059
-Last pushed commit: 5ccf059
-Last pushed tag: v5.10-local-delivery-agents-merge
+PR #3 status: merged
+PR #3 merge commit: b3731bf
+PR #3 head: 46bf42b
+Last pushed commit: 46bf42b
+Last pushed tag: v5.11-post-merge-reconciliation
 Local checkpoint commit: 6d4253f
 Local checkpoint tag: v4.8-local-validation-checkpoint
 Remote checkpoint tag: v4.8-local-validation-checkpoint
 Master sync: local master synced to origin/master
-Origin master baseline: 3e3405e
-Local head: 3e3405e
+Origin master baseline: b3731bf
+Local head: b3731bf
 pending local commits: 0
 Local pending commit chain: none
 master...origin/master: 0 0
-Worktree: local v5.11 reconciliation changes present
+Worktree: local v5.12 release candidate readiness changes present
 Remote action in current batch: none
 Commit/tag/push authorization: not active
 Local post-v5.4 commit checkpoint: a2ae539
 Local post-v5.9 commit checkpoint: 9ac4ca8
 Local post-v5.10 delivery commit: 5ccf059
+Local post-v5.11 reconciliation commit: 46bf42b
 Historical v4.6 Last pushed commit: 7f58408
 Historical v4.6 Last pushed tag: v4.6-guarded-autopilot-commit-scope
 Historical v4.7 Worktree: local uncommitted changes present
@@ -113,6 +118,10 @@ Historical v5.5 pending local commits: 4
 Historical v5.10 local head: 9ac4ca8
 Historical v5.10 pending local commits: 5
 Historical v5.10 local pending commit chain: 6bd255d -> 876d335 -> b04e253 -> a2ae539 -> 9ac4ca8
+Historical v5.10 delivery tag: v5.10-local-delivery-agents-merge
+Historical v5.11 local head: 3e3405e
+Historical v5.11 pending local commits: 0
+Historical v5.11 local pending commit chain: none
 Historical v4.9 Push readiness: local tag present, push not authorized
 Historical v4.9 phase: v4.9 local tag push-readiness preflight
 Historical v5.0 phase: v5.0 post-merge delivery readiness index
@@ -126,6 +135,7 @@ Historical v5.7 phase: v5.7 local batch commit-readiness preflight
 Historical v5.8 phase: v5.8 handoff freshness validation
 Historical v5.9 phase: v5.9 expanded v5 index consistency validation
 Historical v5.10 phase: v5.10 local true-loop candidate delivery closeout
+Historical v5.11 phase: v5.11 post-merge reconciliation
 ```
 
 ## Current Stop Status
@@ -137,5 +147,5 @@ not blocked
 ## Next Action
 
 ```text
-Request explicit authorization before any git add/commit/push/tag/PR/release, or continue safe local docs/schema/prototype validation work from the v5.11 post-merge reconciliation checkpoint.
+Request explicit authorization before any git add/commit/push/tag/PR/release, or continue safe local docs/schema/prototype validation work from the v5.12 release candidate readiness checkpoint.
 ```

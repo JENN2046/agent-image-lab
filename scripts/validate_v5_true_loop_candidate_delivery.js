@@ -3,7 +3,7 @@ const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
 const recordPhase = "v5.10 local true-loop candidate delivery closeout";
-const currentPhase = "v5.11 post-merge reconciliation";
+const currentPhase = "v5.12 release candidate readiness";
 const localHeadShort = "9ac4ca8";
 const pendingLocalCommitCount = 5;
 const localCommitChain = "6bd255d -> 876d335 -> b04e253 -> a2ae539 -> 9ac4ca8";
@@ -48,11 +48,14 @@ function main() {
     "docs/34_v1_0_true_loop_closeout.md",
     "docs/137_v5_10_local_true_loop_candidate_delivery.md",
     "docs/138_v5_11_post_merge_reconciliation.md",
+    "docs/139_v5_12_release_candidate_readiness.md",
     "tests/schema_examples/v1_0_true_loop_closeout.example.yaml",
     "tests/schema_examples/v5_10_local_true_loop_candidate_delivery.example.yaml",
     "tests/schema_examples/v5_11_post_merge_reconciliation.example.yaml",
+    "tests/schema_examples/v5_12_release_candidate_readiness.example.yaml",
     "scripts/validate_v5_true_loop_candidate_delivery.js",
     "scripts/validate_v5_post_merge_reconciliation.js",
+    "scripts/validate_v5_12_release_candidate_readiness.js",
     "scripts/validate_v5_handoff_freshness.js",
     "scripts/validate_v5_index_consistency.js",
     "scripts/validate_mvp.ps1",
@@ -157,7 +160,7 @@ function main() {
     runState.includes("Commit/tag/push authorization: not active") &&
     handoff.includes("Commit/tag/push/release require explicit separate authorization");
 
-  assert(currentPhaseRecorded, "Current phase must be v5.11 post-merge reconciliation.");
+  assert(currentPhaseRecorded, "Current phase must be v5.12 release candidate readiness.");
   assert(localGitStateRecorded, "Historical v5.10 git state must record v5.9 committed head and five pending commits.");
   assert(closeoutDocsReady, "v1.0 closeout, final acceptance, and release readiness docs must be ready.");
   assert(reviewFindingFixed, "Handoff freshness review finding must be fixed and covered by validate_mvp.");

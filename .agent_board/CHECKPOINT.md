@@ -55,6 +55,10 @@ PR #2 merged: merge commit 3e3405e includes v5.10 local delivery and AGENTS merg
 PR #2 head: 5ccf059; tag v5.10-local-delivery-agents-merge points to the v5.10 delivery commit
 v5.11 local: PR #2 post-merge reconciliation recorded
 v5.11 validation: post-merge reconciliation is validated locally and awaits explicit git add/commit/push/PR/release authorization
+PR #3 merged: merge commit b3731bf includes v5.11 post-merge reconciliation
+PR #3 head: 46bf42b; tag v5.11-post-merge-reconciliation points to the v5.11 reconciliation commit
+v5.12 local: final delivery candidate package readiness recorded
+v5.12 validation: release candidate readiness is validated locally and awaits explicit git add/commit/push/PR/release authorization
 ```
 
 ## Current Boundary
@@ -94,6 +98,7 @@ node scripts/validate_v5_local_batch_commit_readiness.js: passed
 node scripts/validate_v5_handoff_freshness.js: passed
 node scripts/validate_v5_true_loop_candidate_delivery.js: passed
 node scripts/validate_v5_post_merge_reconciliation.js: passed
+node scripts/validate_v5_12_release_candidate_readiness.js: passed
 git diff --check: passed
 ```
 

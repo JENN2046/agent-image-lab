@@ -18,7 +18,7 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v5.11 post-merge reconciliation
+v1.0 true-loop closeout candidate + v5.12 release candidate readiness
 ```
 
 已经完成：
@@ -64,6 +64,7 @@ v1.0 true-loop closeout candidate + v5.11 post-merge reconciliation
 - v5.9 expanded v5 index consistency validation：把 v5 index consistency validation 覆盖范围扩展到 v5.0-v5.9。
 - v5.10 local true-loop candidate delivery closeout：收束本地 v1.0 真实闭环候选交付，记录 v5.9 本地提交、审查修复和交付授权边界。
 - v5.11 post-merge reconciliation：记录 PR #2 已合并、本地 `master` 已同步到 `origin/master`、v5.10 交付 tag 已推送，并把 `.agent_board` 切换到合并后状态。
+- v5.12 release candidate readiness：把真实闭环候选整理成最终交付候选包，并机器检查 release readiness、final acceptance、true-loop closeout、GitHub intake 和安全边界。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：
@@ -221,9 +222,9 @@ daily_note_called: false
 
 ## 当前优先队列
 
-1. 运行完整校验，确保文档、Adapter、Review Console、agent board、执行记录和 v5.11 post-merge reconciliation 均通过。
+1. 运行完整校验，确保文档、Adapter、Review Console、agent board、执行记录和 v5.12 release candidate readiness 均通过。
 2. 等待用户单独授权任何新的 commit、tag、push 或正式 release 发布。
-3. 如继续本地推进，优先做 v5.11 本地批次的 commit/tag/push preflight，仍不触发远端动作。
+3. 如继续本地推进，优先做 v5.12 本地批次的 commit/tag/push/release preflight，仍不触发远端动作。
 4. 后续任何新增真实生图调用都必须重新确认插件、调用次数、输入引用、输出目录和回滚方案。
 
 ## 永久安全门

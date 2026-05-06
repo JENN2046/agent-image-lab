@@ -52,6 +52,9 @@ const allowedModifiedFiles = [
   "tests/schema_examples/v5_11_post_merge_reconciliation.example.yaml",
   "docs/138_v5_11_post_merge_reconciliation.md",
   "scripts/validate_v5_post_merge_reconciliation.js",
+  "tests/schema_examples/v5_12_release_candidate_readiness.example.yaml",
+  "docs/139_v5_12_release_candidate_readiness.md",
+  "scripts/validate_v5_12_release_candidate_readiness.js",
   "tests/validation_checklist.md"
 ];
 
@@ -89,6 +92,7 @@ const allowedUntrackedFiles = [
   "docs/136_v5_9_expanded_v5_index_consistency.md",
   "docs/137_v5_10_local_true_loop_candidate_delivery.md",
   "docs/138_v5_11_post_merge_reconciliation.md",
+  "docs/139_v5_12_release_candidate_readiness.md",
   "scripts/validate-agent-image-lab-local.ps1",
   "scripts/validate-agent-image-lab-local.sh",
   "scripts/validate_agent_board_state.js",
@@ -106,6 +110,7 @@ const allowedUntrackedFiles = [
   "scripts/validate_v5_handoff_freshness.js",
   "scripts/validate_v5_true_loop_candidate_delivery.js",
   "scripts/validate_v5_post_merge_reconciliation.js",
+  "scripts/validate_v5_12_release_candidate_readiness.js",
   "scripts/validate_runtime_delivery_surface.js",
   "scripts/validate_runtime_guard_unit.js",
   "scripts/validate_runtime_prototype_suite.js",
@@ -130,10 +135,15 @@ const allowedUntrackedFiles = [
   "tests/schema_examples/v5_8_handoff_freshness_validation.example.yaml",
   "tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml",
   "tests/schema_examples/v5_10_local_true_loop_candidate_delivery.example.yaml",
-  "tests/schema_examples/v5_11_post_merge_reconciliation.example.yaml"
+  "tests/schema_examples/v5_11_post_merge_reconciliation.example.yaml",
+  "tests/schema_examples/v5_12_release_candidate_readiness.example.yaml"
 ];
 
-const allowedBranches = ["master", "codex/v5.11-post-merge-reconciliation"];
+const allowedBranches = [
+  "master",
+  "codex/v5.11-post-merge-reconciliation",
+  "codex/v5.12-release-candidate-readiness"
+];
 
 function assert(condition, message) {
   if (!condition) {
@@ -314,6 +324,18 @@ function main() {
   assert(
     allowedUntrackedFiles.includes("scripts/validate_v5_post_merge_reconciliation.js"),
     "v5.11 validation script must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("docs/139_v5_12_release_candidate_readiness.md"),
+    "v5.12 docs must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("tests/schema_examples/v5_12_release_candidate_readiness.example.yaml"),
+    "v5.12 schema example must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("scripts/validate_v5_12_release_candidate_readiness.js"),
+    "v5.12 validation script must be included in the untracked allowlist."
   );
 
   const result = {
