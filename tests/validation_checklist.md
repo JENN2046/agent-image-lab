@@ -2597,3 +2597,23 @@
 - [ ] v7.21 必须停在 merge 硬授权点，不得执行 merge / release / branch deletion。
 - [ ] v7.21 默认下一安全阶段为 `v7.22 VCPChat Review Console Merge PR Execution`。
 - [ ] `node scripts/validate_v7_21_vcpchat_review_console_merge_authorization_preflight.js` 通过。
+
+## v7.22 VCPChat Review Console Merge PR Execution Record 检查
+
+- [ ] 当前阶段字符串为 `v7.22 vcpchat review console merge pr execution record`。
+- [ ] `docs/174_v7_22_vcpchat_review_console_merge_pr_execution_record.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_review_console_merge_pr_execution_record.md` 存在。
+- [ ] `tests/schema_examples/v7_22_vcpchat_review_console_merge_pr_execution_record.example.yaml` 存在。
+- [ ] `scripts/validate_v7_22_vcpchat_review_console_merge_pr_execution_record.js` 存在。
+- [ ] v7.22 记录当前基线 `0a06036` 和上一阶段 `v7.21 vcpchat review console merge authorization preflight`。
+- [ ] v7.22 必须记录用户明确授权和执行命令 `gh pr merge 34 --squash --delete-branch=false`，并记录 `command_result=success`。
+- [ ] v7.22 必须记录 `pr_state_after=MERGED`、`merge_method=squash`、`remote_main_after_merge_short=b320e39`。
+- [ ] v7.22 必须记录 source commit `426a2a9` 和 feature branch 仍存在。
+- [ ] v7.22 必须保持 `feature_branch_deleted=false`。
+- [ ] v7.22 必须记录本阶段未同步本地 VCPChat main：`local_main_sync_performed_by_this_phase=false`。
+- [ ] v7.22 必须保持 `vcpchat_code_modified_by_this_phase=false`、`github_release_performed=false`、`tag_created_by_this_phase=false`。
+- [ ] v7.22 必须保持 `plugin_called=false`、`api_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_created=false`。
+- [ ] v7.22 必须保持 `dependency_changed=false`、`package_manifest_changed=false`、`lockfile_changed=false`。
+- [ ] v7.22 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.22 默认下一安全阶段为 `v7.23 VCPChat Review Console Post-merge Record`。
+- [ ] `node scripts/validate_v7_22_vcpchat_review_console_merge_pr_execution_record.js` 通过。

@@ -1,0 +1,66 @@
+status: completed_validated_v7_22_vcpchat_merge_pr_execution_record
+version: v7.22
+current_phase: "v7.22 vcpchat review console merge pr execution record"
+validation_file: scripts/validate_v7_22_vcpchat_review_console_merge_pr_execution_record.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: 0a06036
+  previous_phase: "v7.21 vcpchat review console merge authorization preflight"
+  default_next_phase: "v7.23 VCPChat Review Console Post-merge Record"
+authorization_and_command:
+  explicit_user_authorization_received: true
+  authorization_phrase_cn: "我明确授权以 squash 方式 merge VCPChat PR #34，且不删除 feature branch。"
+  target_repository_name: VCPChat
+  target_repository_ref: JENN2046/VCPChat
+  target_pr_number: 34
+  command_executed:
+    - gh pr merge 34 --squash --delete-branch=false
+  command_result: success
+  merge_method: squash
+  feature_branch_delete_requested: false
+  feature_branch_deleted: false
+merge_result:
+  pr_number: 34
+  pr_state_after: MERGED
+  pr_is_draft_after: false
+  pr_url: "https://github.com/JENN2046/VCPChat/pull/34"
+  merged_at_utc: "2026-05-06T06:32:52Z"
+  source_head_branch: codex/image-lab-review-console-bridge
+  source_head_commit_short: 426a2a9
+  source_head_commit_oid: 426a2a9204b52d5434ac005c716738c713aaa7ae
+  target_base_branch: main
+  previous_remote_main_short: c97ff0c
+  remote_main_after_merge_short: b320e39
+  remote_main_after_merge_oid: b320e39ffa527a81aca65c9228c20936a04f5ed8
+  feature_branch_remote_still_exists: true
+local_repository_state_after_merge:
+  vcpchat_current_local_branch: codex/image-lab-review-console-bridge
+  vcpchat_current_local_head_short: 426a2a9
+  local_main_sync_performed_by_this_phase: false
+  local_origin_main_fetch_performed_by_this_phase: false
+  local_branch_cleanup_performed_by_this_phase: false
+side_effect_guard:
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_created: false
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+  env_or_secret_file_read: false
+  secret_value_copied: false
+  raw_local_path_saved: false
+  pr_merge_performed: true
+  feature_branch_deleted: false
+  vcpchat_code_modified_by_this_phase: false
+  github_release_performed: false
+  tag_created_by_this_phase: false
+next_gate:
+  merge_complete: true
+  post_merge_record_required: true
+  local_vcpchat_main_sync_required: true
+  runtime_smoke_test_not_performed: true
+  release_requires_separate_authorization: true
+  next_safe_phase: "v7.23 VCPChat Review Console Post-merge Record"
