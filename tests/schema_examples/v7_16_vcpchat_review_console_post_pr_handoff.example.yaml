@@ -1,0 +1,74 @@
+status: completed_validated_v7_16_vcpchat_post_pr_handoff
+version: v7.16
+current_phase: "v7.16 vcpchat review console post-pr handoff"
+validation_file: scripts/validate_v7_16_vcpchat_review_console_post_pr_handoff.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: 5edd7dc
+  previous_phase: "v7.15 vcpchat review console remote push authorization"
+  default_next_phase: "v7.17 VCPChat Review Console PR Review Follow-up"
+pr_status:
+  target_repository_name: VCPChat
+  target_repository_ref: JENN2046/VCPChat
+  pr_number: 34
+  pr_title: "[codex] add Image Lab Review Console bridge"
+  pr_url: "https://github.com/JENN2046/VCPChat/pull/34"
+  pr_state: OPEN
+  pr_is_draft: true
+  base_branch: main
+  base_head_short: c97ff0c
+  head_branch: codex/image-lab-review-console-bridge
+  head_commit_short: 426a2a9
+  pr_created: true
+  pr_ready_for_review: false
+  pr_merge_performed: false
+  vcpchat_main_updated_by_this_phase: false
+branch_protection_outcome:
+  direct_push_to_main_attempted_after_explicit_authorization: true
+  direct_push_to_main_succeeded: false
+  direct_push_rejected_by_remote_protection: true
+  rejection_reason_cn: "VCPChat main 是受保护分支，远端要求通过 pull request 修改。"
+  fallback_branch_created_after_user_authorization: true
+  fallback_branch_name: codex/image-lab-review-console-bridge
+  fallback_branch_pushed: true
+  draft_pr_opened: true
+pr_scope_carried_forward:
+  candidate_commit: 426a2a9
+  changed_files_only_inside_allowed_scope: true
+  changed_files:
+    - main.js
+    - modules/ipc/imageLabReviewHandlers.js
+    - preloads/chat.js
+    - main.html
+    - modules/renderer/imageLabReviewMount.js
+side_effect_guard:
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_created: false
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+  env_or_secret_file_read: false
+  secret_value_copied: false
+  raw_local_path_saved: false
+  vcpchat_main_direct_push_performed: false
+  vcpchat_pr_merge_performed: false
+  github_release_performed: false
+handoff_state:
+  pr_exists: true
+  pr_is_draft: true
+  pr_waiting_for_review: true
+  pr_waiting_for_merge: true
+  merge_requires_github_review_or_user_action: true
+  ready_for_review_conversion_requires_separate_authorization: true
+  merge_requires_separate_authorization: true
+  post_merge_record_required_if_merged: true
+  runtime_smoke_test_not_performed: true
+stop_point:
+  stop_here: true
+  next_safe_phase: "v7.17 VCPChat Review Console PR Review Follow-up"
+  pr_ready_for_review_blocked_until_user_approval: true
+  pr_merge_blocked_until_user_approval: true

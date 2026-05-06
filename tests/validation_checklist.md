@@ -2483,3 +2483,22 @@
 - [ ] v7.15 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.15 默认下一安全阶段为 `v7.16 VCPChat Review Console Remote Push Execution Record`。
 - [ ] `node scripts/validate_v7_15_vcpchat_review_console_remote_push_authorization.js` 通过。
+
+## v7.16 VCPChat Review Console Post-PR Handoff 检查
+
+- [ ] 当前阶段字符串为 `v7.16 vcpchat review console post-pr handoff`。
+- [ ] `docs/168_v7_16_vcpchat_review_console_post_pr_handoff.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_review_console_post_pr_handoff.md` 存在。
+- [ ] `tests/schema_examples/v7_16_vcpchat_review_console_post_pr_handoff.example.yaml` 存在。
+- [ ] `scripts/validate_v7_16_vcpchat_review_console_post_pr_handoff.js` 存在。
+- [ ] v7.16 记录当前基线 `5edd7dc` 和上一阶段 `v7.15 vcpchat review console remote push authorization`。
+- [ ] v7.16 必须记录 VCPChat PR `pr_number=34`、标题 `[codex] add Image Lab Review Console bridge`、目标分支 `main`、head branch `codex/image-lab-review-console-bridge`。
+- [ ] v7.16 必须记录 `pr_is_draft=true`、`pr_merge_performed=false`、`vcpchat_main_updated_by_this_phase=false`。
+- [ ] v7.16 必须记录直接推送 `main` 被保护分支拒绝，并通过授权 fallback branch 创建 draft PR。
+- [ ] v7.16 必须记录 PR scope 仍只包含 `main.js`、`modules/ipc/imageLabReviewHandlers.js`、`preloads/chat.js`、`main.html`、`modules/renderer/imageLabReviewMount.js`。
+- [ ] v7.16 必须保持 `plugin_called=false`、`api_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_created=false`。
+- [ ] v7.16 必须保持 `dependency_changed=false`、`package_manifest_changed=false`、`lockfile_changed=false`。
+- [ ] v7.16 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.16 必须明确 draft PR 转 ready-for-review、review、merge、release 都需要后续单独授权或用户在 GitHub 完成。
+- [ ] v7.16 默认下一安全阶段为 `v7.17 VCPChat Review Console PR Review Follow-up`。
+- [ ] `node scripts/validate_v7_16_vcpchat_review_console_post_pr_handoff.js` 通过。
