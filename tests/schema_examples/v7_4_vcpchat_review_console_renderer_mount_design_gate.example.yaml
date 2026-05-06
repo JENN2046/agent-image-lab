@@ -1,0 +1,165 @@
+status: completed_validated_project_local_v7_4_vcpchat_review_console_renderer_mount_design_gate
+version: v7.4
+current_phase: "v7.4 vcpchat review console renderer mount design gate"
+validation_file: scripts/validate_v7_4_vcpchat_review_console_renderer_mount_design_gate.js
+
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: 856e7a8
+  previous_phase: "v7.3 vcpchat review console ipc handler design gate"
+  previous_record: docs/155_v7_3_vcpchat_review_console_ipc_handler_design_gate.md
+  previous_validation: scripts/validate_v7_3_vcpchat_review_console_ipc_handler_design_gate.js
+  default_next_phase: "v7.5 VCPChat Review Console Runtime Integration Authorization Gate"
+
+design_goal:
+  summary_cn: "设计未来 Review Console runtime 的 renderer mount、host bridge mock 和挂载边界。"
+  design_gate_only: true
+  implementation_not_authorized_by_this_record: true
+  no_runtime_code_change_required: true
+  no_external_read_required: true
+  no_vcpchat_write_allowed: true
+
+renderer_mount_boundary:
+  future_renderer_global_dependency: imageLabReview
+  future_mount_root_id: image-lab-review-root
+  future_mount_mode: isolated_review_console_surface
+  mount_must_be_explicit: true
+  auto_mount_into_chat_surface_allowed: false
+  broad_dom_scraping_allowed: false
+  chat_history_access_allowed: false
+  direct_vcpchat_state_mutation_allowed: false
+  direct_file_system_access_allowed: false
+  direct_daily_note_access_allowed: false
+  direct_plugin_access_allowed: false
+
+host_bridge_mock_boundary:
+  mock_contract_source: review_console/runtime_prototype/host_bridge_mock.js
+  future_real_bridge_global_name: imageLabReview
+  mock_purpose_cn: "在 Agent Image Lab 内模拟未来 host bridge 输入输出，不代表真实 VCPChat 已接入。"
+  allowed_mock_methods:
+    loadSession: imageLabReview.loadSession
+    previewDraft: imageLabReview.previewDraft
+    submitDraft: imageLabReview.submitDraft
+    cancel: imageLabReview.cancel
+  mock_side_effects_allowed: false
+  real_bridge_side_effects_allowed: false
+  mock_must_not_call_fetch: true
+  mock_must_not_call_daily_note: true
+  mock_must_not_call_vcp_plugin: true
+  mock_must_not_write_disk: true
+  mock_must_not_create_image: true
+
+runtime_input_contract:
+  source: imageLabReview.loadSession
+  required_seed_fields:
+    - review_session_seed
+    - image_case_seed
+    - memory_preview_seed
+    - prototype_guard
+  prototype_guard_required_values:
+    api_called: false
+    vcp_plugin_called: false
+    daily_note_called: false
+    disk_write_performed: false
+    image_file_created: false
+  forbidden_input_content:
+    raw_source_code: forbidden
+    raw_private_path: forbidden
+    secret_or_token: forbidden
+    cookie: forbidden
+    password: forbidden
+    endpoint_raw: forbidden
+    image_binary: forbidden
+    plugin_output_raw: forbidden
+
+runtime_output_contract:
+  preview_route:
+    method: imageLabReview.previewDraft
+    output:
+      - review_session_draft
+      - image_case_draft
+      - memory_delta_draft
+      - prototype_guard
+    side_effects_performed: false
+  submit_route:
+    method: imageLabReview.submitDraft
+    output:
+      - review_session_draft
+      - image_case_draft
+      - memory_delta_draft
+      - prototype_guard
+      - requested_route
+    side_effects_performed: false
+  cancel_route:
+    method: imageLabReview.cancel
+    output:
+      - session_id
+      - cancel_reason_cn
+    side_effects_performed: false
+
+runtime_guard_boundary:
+  guard_source: review_console/runtime_prototype/runtime_guard.js
+  required_guard_values:
+    api_called: false
+    daily_note_called: false
+    vcp_plugin_called: false
+    disk_write_performed: false
+    image_file_created: false
+  human_review_overrides_ai_review: true
+  accepted_requires_human_approval: true
+  memory_approval_not_approved_keeps_draft: true
+  memory_preview_chinese_required: true
+
+mount_lifecycle_design:
+  initialize:
+    requires_registered_session: true
+    requires_imageLabReview_global: true
+    requires_prototype_guard: true
+    failure_mode: render_sanitized_error_state
+  preview:
+    validates_field_mapping: true
+    returns_drafts_only: true
+    writes_daily_note: false
+    writes_files: false
+  submit:
+    creates_authorization_request_only: true
+    performs_actual_write: false
+    performs_plugin_call: false
+    performs_api_call: false
+  cancel:
+    records_sanitized_cancel_reason_cn: true
+    performs_actual_write: false
+
+boundary_state:
+  design_gate_added: true
+  implementation_task_authorized: false
+  implementation_allowed: false
+  runtime_code_modified: false
+  vcpchat_code_modified: false
+  vcptoolbox_code_modified: false
+  tag_created: false
+  package_created: false
+  github_release_published: false
+  release_assets_uploaded: false
+  additional_vcpchat_read_performed: false
+  real_vcptoolbox_source_read: false
+  real_manifest_read: false
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  renderer_runtime_code_created: false
+  adapter_execution_entrypoint_created: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  disk_write_runtime_performed: false
+  image_file_created: false
+
+acceptance_assertions:
+  - "v7.4 只设计 renderer mount、host bridge mock 和 Review Console runtime 挂载边界。"
+  - "v7.4 不读取或修改真实 VCPChat / VCPToolBox。"
+  - "v7.4 不创建 renderer mount、preload 或 ipcMain.handle 实现代码。"
+  - "v7.4 不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。"
+  - "v7.4 明确 renderer 不得直接触达 broad electronAPI、chatAPI、文件系统、DailyNote 或插件。"
+  - "默认下一阶段是 v7.5 VCPChat Review Console Runtime Integration Authorization Gate。"

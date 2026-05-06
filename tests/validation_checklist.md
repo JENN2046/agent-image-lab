@@ -2287,3 +2287,21 @@
 - [ ] v7.3 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
 - [ ] v7.3 默认下一阶段为 `v7.4 VCPChat Review Console Renderer Mount Design Gate`。
 - [ ] `node scripts/validate_v7_3_vcpchat_review_console_ipc_handler_design_gate.js` 通过。
+
+## v7.4 VCPChat Review Console Renderer Mount Design Gate 检查
+
+- [ ] 当前阶段字符串为 `v7.4 vcpchat review console renderer mount design gate`。
+- [ ] `docs/156_v7_4_vcpchat_review_console_renderer_mount_design_gate.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_review_console_renderer_mount_design_gate.md` 存在。
+- [ ] `tests/schema_examples/v7_4_vcpchat_review_console_renderer_mount_design_gate.example.yaml` 存在。
+- [ ] `scripts/validate_v7_4_vcpchat_review_console_renderer_mount_design_gate.js` 存在。
+- [ ] v7.4 记录当前基线 `856e7a8` 和上一阶段 `v7.3 vcpchat review console ipc handler design gate`。
+- [ ] v7.4 只设计 renderer mount、host bridge mock 和 Review Console runtime 挂载边界。
+- [ ] v7.4 明确未来 renderer 只依赖专用 `imageLabReview`，不得直接触达 broad electronAPI、chatAPI、插件、API、DailyNote 或文件系统。
+- [ ] v7.4 明确 runtime input 只来自 `imageLabReview.loadSession` seed，runtime output 只走 `previewDraft`、`submitDraft`、`cancel` 草案通道。
+- [ ] v7.4 明确 runtime guard 必须保持 api/plugin/DailyNote/disk/image false。
+- [ ] v7.4 保持 `additional_vcpchat_read_performed=false`，不读取或修改真实 VCPChat / VCPToolBox。
+- [ ] v7.4 保持不创建 renderer mount、preload、`ipcMain.handle` 或 Adapter 执行入口。
+- [ ] v7.4 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
+- [ ] v7.4 默认下一阶段为 `v7.5 VCPChat Review Console Runtime Integration Authorization Gate`。
+- [ ] `node scripts/validate_v7_4_vcpchat_review_console_renderer_mount_design_gate.js` 通过。
