@@ -1,0 +1,113 @@
+status: planned_validated_v7_40_local_a4_a5_autonomy_alignment
+version: v7.40
+current_phase: "v7.40 local A4/A5 autonomy mode alignment"
+validation_file: scripts/validate_v7_40_local_a4_a5_autonomy_alignment.js
+
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  origin_master_short: 5a7f5ba
+  local_head_short: 5a7f5ba
+  local_pending_commits_before_this_batch: []
+  previous_phase: "v7.39 external remote-debug verification script creation authorization point"
+  previous_record: docs/191_v7_39_external_remote_debug_verification_script_creation_authorization_point.md
+  default_next_phase: "v7.41 External Remote Debug Verification Script Creation Record"
+
+alignment_state:
+  root_agents_default_local_mode: "A4 — Sustained Local Autopilot"
+  production_mode_name: "A5 — Autonomous Production Execution"
+  a4_default_local_autopilot: true
+  a5_real_production_execution: true
+  a5_active_authorization_package_present: false
+  a5_actions_authorized_now: false
+
+a4_allowed_project_surfaces:
+  - documentation
+  - schema
+  - dry_run_contract
+  - authorization_template
+  - validation_checklist
+  - static_prototype
+  - agent_board
+
+a4_forbidden_actions:
+  - read_real_vcpchat
+  - read_real_vcptoolbox
+  - read_real_plugin_manifest
+  - call_plugins
+  - call_apis
+  - call_dailynote
+  - write_vcp_memory
+  - create_images
+  - create_real_adapter_execution_entrypoints
+  - create_real_ipc_preload_renderer
+  - modify_external_repositories
+  - perform_remote_writes
+
+a5_examples:
+  - read_real_vcpchat
+  - read_real_vcptoolbox
+  - analyze_real_source_code
+  - modify_real_integration_code
+  - create_real_ipc_preload_renderer
+  - create_real_adapter_execution_entrypoint
+  - read_real_plugin_manifest
+  - call_real_vcp_plugin
+  - generate_real_image
+  - write_daily_note
+  - write_vcp_memory
+  - commit_production_changes
+  - create_tags
+  - push
+  - generate_release_packages
+
+required_a5_authorization_package:
+  authorization_id: "<required>"
+  authorized_by: "<required>"
+  authorized_at: "<required>"
+  target_systems:
+    - "<required>"
+  exact_allowed_paths_or_objects:
+    - "<required>"
+  exact_allowed_commands_or_operations:
+    - "<required>"
+  forbidden_paths_or_operations:
+    - "<required>"
+  write_boundaries:
+    - "<required>"
+  validation_requirements:
+    - "<required>"
+  rollback_path: "<required>"
+  reviewer: "<required>"
+  stop_conditions:
+    - "<required>"
+
+this_phase_boundary:
+  a5_authorization_package_created: false
+  a5_authorization_package_active: false
+  real_vcpchat_read: false
+  real_vcptoolbox_read: false
+  real_manifest_read: false
+  real_source_analyzed: false
+  vcpchat_modified: false
+  vcptoolbox_modified: false
+  real_ipc_preload_renderer_created: false
+  real_adapter_execution_entrypoint_created: false
+  remote_debug_script_created: false
+  app_launch_performed: false
+  cdp_access_performed: false
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_created: false
+  production_commit_performed: false
+  tag_created: false
+  push_performed: false
+  release_package_generated: false
+  github_release_performed: false
+
+notes_cn:
+  - "A4 是默认本地持续自动化。"
+  - "A5 是真实生产级自动执行。"
+  - "没有 active A5 authorization package 时，所有 A5 动作仍然是 Hard Stop。"

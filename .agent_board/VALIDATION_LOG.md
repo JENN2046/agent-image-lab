@@ -2,6 +2,58 @@
 
 ## Entries
 
+## VALIDATION-20260506-V7-40
+
+Task:
+
+```text
+Align project indexes and agent board with local A4 default autonomy and A5 production execution semantics.
+```
+
+Commands run:
+
+```text
+node scripts/validate_v7_40_local_a4_a5_autonomy_alignment.js: passed
+node scripts/validate_v7_37_external_remote_debug_verification_script_authorization_gate.js: passed
+node scripts/validate_v7_38_external_remote_debug_verification_script_creation_preflight.js: passed
+node scripts/validate_v7_39_external_remote_debug_verification_script_creation_authorization_point.js: passed
+node scripts/validate_agent_board_state.js: passed
+scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings
+scripts/validate_mvp.ps1: passed after v7.40 validation routing maintenance
+git diff --check: passed
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+AGENTS.md now defines A4 as the default local sustained autopilot mode and A5 as Autonomous Production Execution gated by an active authorization package.
+```
+
+Warnings:
+
+```text
+No blocking warnings from v7.40 validator or git diff check.
+```
+
+Not validated:
+
+```text
+No real VCPChat read, real VCPToolBox read, plugin call, API call, DailyNote call, VCP memory write, image creation, push, tag, release, or A5 production execution was performed.
+```
+
+Notes:
+
+```text
+v7.40 validator confirmed A4/A5 semantics, indexes, checklist, and agent board are aligned.
+MVP validation routing was updated so historical validators stay syntax/record checked while current state is validated through v7.40 and agent-board validators.
+```
+
 ## VALIDATION-20260506-V5-12
 
 Task:

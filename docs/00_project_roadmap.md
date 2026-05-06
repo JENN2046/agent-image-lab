@@ -18,7 +18,7 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v5.12 release candidate readiness
+v1.0 true-loop closeout candidate + v7.40 local A4/A5 autonomy mode alignment
 ```
 
 已经完成：
@@ -65,6 +65,7 @@ v1.0 true-loop closeout candidate + v5.12 release candidate readiness
 - v5.10 local true-loop candidate delivery closeout：收束本地 v1.0 真实闭环候选交付，记录 v5.9 本地提交、审查修复和交付授权边界。
 - v5.11 post-merge reconciliation：记录 PR #2 已合并、本地 `master` 已同步到 `origin/master`、v5.10 交付 tag 已推送，并把 `.agent_board` 切换到合并后状态。
 - v5.12 release candidate readiness：把真实闭环候选整理成最终交付候选包，并机器检查 release readiness、final acceptance、true-loop closeout、GitHub intake 和安全边界。
+- v7.40 local A4/A5 autonomy mode alignment：把项目默认本地自动化提升为 `A4 — Sustained Local Autopilot`，并把 `A5 — Autonomous Production Execution` 固化为必须依赖独立授权包的真实生产执行模式。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：
@@ -223,9 +224,10 @@ daily_note_called: false
 ## 当前优先队列
 
 1. 运行完整校验，确保文档、Adapter、Review Console、agent board、执行记录和 v5.12 release candidate readiness 均通过。
-2. 等待用户单独授权任何新的 commit、tag、push 或正式 release 发布。
-3. 如继续本地推进，优先做 v5.12 本地批次的 commit/tag/push/release preflight，仍不触发远端动作。
-4. 后续任何新增真实生图调用都必须重新确认插件、调用次数、输入引用、输出目录和回滚方案。
+2. 保持本地默认 `A4 — Sustained Local Autopilot`，继续推进 docs/schema/dry-run/authorization/static prototype/validation 安全面。
+3. 等待用户单独授权任何新的 A5 真实生产动作、tag、push 或正式 release 发布。
+4. 如继续本地推进，优先做 v7.40 之后的外部 remote-debug 验证脚本创建记录或 preflight，仍不启动 VCPChat、不访问 CDP，且不进入 A5 真实生产执行。
+5. 后续任何新增真实生图调用都必须重新确认插件、调用次数、输入引用、输出目录和回滚方案，并形成 active A5 authorization package。
 
 ## 永久安全门
 

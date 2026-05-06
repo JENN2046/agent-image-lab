@@ -24,6 +24,12 @@ Commit, tag, push, release, PR, merge, or remote issue changes require explicit 
 Plugin calls, API calls, DailyNote writes, VCP memory writes, image creation, and executable Adapter entrypoints require explicit separate authorization.
 ```
 
+## Standing A5 Production-Execution Gate
+
+```text
+Without an active A5 authorization package, production actions remain blocked. A5 authorization must name exact target systems, allowed paths or objects, allowed commands or operations, forbidden operations, write boundaries, validation requirements, rollback path, reviewer, and stop conditions.
+```
+
 ## Blocker Template
 
 ```text

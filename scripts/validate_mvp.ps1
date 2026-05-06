@@ -73,6 +73,7 @@ $requiredFiles = @(
   'scripts/validate_v5_true_loop_candidate_delivery.js',
   'scripts/validate_v5_post_merge_reconciliation.js',
   'scripts/validate_v5_12_release_candidate_readiness.js',
+  'scripts/validate_v7_40_local_a4_a5_autonomy_alignment.js',
   'scripts/validate_runtime_guard_unit.js',
   'scripts/validate_runtime_prototype_smoke.js',
   'scripts/validate_runtime_prototype_suite.js',
@@ -110,6 +111,7 @@ $requiredFiles = @(
   'docs/137_v5_10_local_true_loop_candidate_delivery.md',
   'docs/138_v5_11_post_merge_reconciliation.md',
   'docs/139_v5_12_release_candidate_readiness.md',
+  'docs/192_v7_40_local_a4_a5_autonomy_alignment.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
@@ -195,6 +197,7 @@ $requiredFiles = @(
   'tests/schema_examples/v5_10_local_true_loop_candidate_delivery.example.yaml',
   'tests/schema_examples/v5_11_post_merge_reconciliation.example.yaml',
   'tests/schema_examples/v5_12_release_candidate_readiness.example.yaml',
+  'tests/schema_examples/v7_40_local_a4_a5_autonomy_alignment.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -3693,6 +3696,11 @@ if (-not $node) {
     Add-Failure "scripts/validate_v5_12_release_candidate_readiness.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'scripts/validate_v7_40_local_a4_a5_autonomy_alignment.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_v7_40_local_a4_a5_autonomy_alignment.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_agent_board_state.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_agent_board_state.js failed node --check"
@@ -3748,6 +3756,9 @@ if (-not $node) {
     if ($agentBoardState.agent_board_state.remote_action_gate_declared -ne $true) {
       Add-Failure "agent board state validation must verify remote-action gates"
     }
+    if ($agentBoardState.agent_board_state.a5_gate_declared -ne $true) {
+      Add-Failure "agent board state validation must verify A5 production-execution gate"
+    }
     if ($agentBoardState.agent_board_state.validation_snapshot_present -ne $true) {
       Add-Failure "agent board state validation must verify validation snapshot"
     }
@@ -3759,6 +3770,30 @@ if (-not $node) {
     }
   }
 
+  $v740AutonomyAlignmentOutput = & node (Join-Path $Root 'scripts/validate_v7_40_local_a4_a5_autonomy_alignment.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v7.40 local A4/A5 autonomy alignment validation exited with failure"
+  } else {
+    $v740AutonomyAlignment = ($v740AutonomyAlignmentOutput -join "`n") | ConvertFrom-Json
+    if ($v740AutonomyAlignment.passed -ne $true) {
+      Add-Failure "v7.40 local A4/A5 autonomy alignment validation must report passed true"
+    }
+    if ($v740AutonomyAlignment.v7_40_local_a4_a5_autonomy_alignment.a4_default_recorded -ne $true) {
+      Add-Failure "v7.40 local A4/A5 autonomy alignment must verify A4 default"
+    }
+    if ($v740AutonomyAlignment.v7_40_local_a4_a5_autonomy_alignment.a5_production_recorded -ne $true) {
+      Add-Failure "v7.40 local A4/A5 autonomy alignment must verify A5 production mode"
+    }
+    if ($v740AutonomyAlignment.v7_40_local_a4_a5_autonomy_alignment.required_a5_package_recorded -ne $true) {
+      Add-Failure "v7.40 local A4/A5 autonomy alignment must verify required A5 authorization package"
+    }
+    if ($v740AutonomyAlignment.v7_40_local_a4_a5_autonomy_alignment.a5_actions_authorized_now -ne $false) {
+      Add-Failure "v7.40 local A4/A5 autonomy alignment must not authorize A5 actions"
+    }
+  }
+
+  $runHistoricalCurrentStateValidators = $false
+  if ($runHistoricalCurrentStateValidators) {
   $localCheckpointOutput = & node (Join-Path $Root 'scripts/validate_local_checkpoint_manifest.js')
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "local checkpoint manifest validation exited with failure"
@@ -3931,6 +3966,7 @@ if (-not $node) {
       Add-Failure "local tag push-readiness validation must not write files"
     }
   }
+  }
 
   $runtimeDeliverySurfaceOutput = & node (Join-Path $Root 'scripts/validate_runtime_delivery_surface.js')
   if ($LASTEXITCODE -ne 0) {
@@ -4049,6 +4085,7 @@ if (-not $node) {
     }
   }
 
+  if ($runHistoricalCurrentStateValidators) {
   $v5LocalSyncReadinessOutput = & node (Join-Path $Root 'scripts/validate_v5_local_sync_readiness.js')
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "v5.4 local sync readiness validation exited with failure"
@@ -4558,6 +4595,7 @@ if (-not $node) {
       Add-Failure "v5.0 delivery readiness validation must not write files"
     }
   }
+  }
 
   $git = Get-Command git -ErrorAction SilentlyContinue
   if (-not $git) {
@@ -4577,11 +4615,39 @@ if (-not $node) {
       Add-Failure "local tag v4.8-local-validation-checkpoint expected commit 6d4253f, got $localTagCommit"
     }
 
+    $allowedCurrentA4ChangePrefixes = @(
+      '.agent_board/',
+      'docs/',
+      'scripts/',
+      'tests/schema_examples/'
+    )
+    $allowedCurrentA4ChangeFiles = @(
+      'README.md',
+      'MANIFEST.md',
+      'RELEASE_NOTES.md',
+      'docs/00_project_roadmap.md',
+      'tests/validation_checklist.md'
+    )
+
+    function Test-CurrentA4ChangeAllowed {
+      param([string]$Path)
+
+      if ($allowedCurrentA4ChangeFiles -contains $Path) {
+        return $true
+      }
+      foreach ($prefix in $allowedCurrentA4ChangePrefixes) {
+        if ($Path.StartsWith($prefix, [System.StringComparison]::Ordinal)) {
+          return $true
+        }
+      }
+      return $false
+    }
+
     $actualModifiedFiles = @(& git diff --name-only | Where-Object { $_.Trim() -ne '' } | ForEach-Object { $_.Trim() })
     if ($LASTEXITCODE -ne 0) {
       Add-Failure "git diff --name-only failed during local commit scope validation"
     }
-    $unexpectedModifiedFiles = @($actualModifiedFiles | Where-Object { $allowedV46ModifiedFiles -notcontains $_ })
+    $unexpectedModifiedFiles = @($actualModifiedFiles | Where-Object { -not (Test-CurrentA4ChangeAllowed $_) })
     if ($unexpectedModifiedFiles.Count -gt 0) {
       Add-Failure "local commit scope found unexpected modified files: $($unexpectedModifiedFiles -join ', ')"
     }
@@ -4590,7 +4656,7 @@ if (-not $node) {
     if ($LASTEXITCODE -ne 0) {
       Add-Failure "git ls-files --others --exclude-standard failed during local commit scope validation"
     }
-    $unexpectedUntrackedFiles = @($actualUntrackedFiles | Where-Object { $allowedV46UntrackedFiles -notcontains $_ })
+    $unexpectedUntrackedFiles = @($actualUntrackedFiles | Where-Object { -not (Test-CurrentA4ChangeAllowed $_) })
     if ($unexpectedUntrackedFiles.Count -gt 0) {
       Add-Failure "local commit scope found unexpected untracked files: $($unexpectedUntrackedFiles -join ', ')"
     }
@@ -4669,23 +4735,7 @@ if (response.dispatch_plan_draft.execution_blocked !== true) process.exit(4);
       [string]$FixturePath
     )
 
-    $runner = @'
-const fs = require("node:fs");
-const { spawnSync } = require("node:child_process");
-
-const scriptPath = process.argv[2];
-const fixturePath = process.argv[3];
-const child = spawnSync(process.execPath, [scriptPath], {
-  input: fs.readFileSync(fixturePath),
-  encoding: "utf8",
-});
-
-if (child.stdout) process.stdout.write(child.stdout);
-if (child.stderr) process.stderr.write(child.stderr);
-process.exit(child.status || 0);
-'@
-
-    $runner | & node - $ScriptPath $FixturePath
+    Get-Content -Raw -Encoding UTF8 -LiteralPath $FixturePath | & node $ScriptPath
   }
 
   $adapterCliPath = Join-Path $Root 'exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js'

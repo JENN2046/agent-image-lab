@@ -17,7 +17,7 @@ Maintain and advance Agent Image Lab as a VCP-native visual production orchestra
 ## Current Mode
 
 ```text
-A4-Guarded Sustained Local Autopilot
+A4 — Sustained Local Autopilot
 ```
 
 ---
@@ -39,6 +39,7 @@ Stop before:
 - push / PR / merge / tag / release
 - dependency change
 - write outside workspace root
+- A5 — Autonomous Production Execution without an active explicit authorization package
 
 ---
 
@@ -53,9 +54,9 @@ none
 ### todo
 
 ```text
-1. If user authorizes v5.12 version movement, run commit/push/PR/release preflight with exact scope.
-2. If user asks for release movement, request explicit commit/tag/push scope and run preflight.
-3. Keep Adapter and Review Console work in no-execution / no-external-read mode.
+1. Keep Adapter and Review Console work in no-execution / no-external-read mode unless an active A5 authorization package exists.
+2. If user authorizes remote or release movement, request exact target and run preflight before any push/tag/release.
+3. If continuing local work, proceed to v7.41 External Remote Debug Verification Script Creation Record only within the local no-execution boundaries.
 4. Update CHECKPOINT.md, RUN_STATE.md, VALIDATION_LOG.md, and HANDOFF.md after each meaningful batch.
 ```
 
@@ -86,6 +87,10 @@ none
 22. Completed v5.10 local true-loop candidate delivery closeout.
 23. Completed v5.11 post-merge reconciliation.
 24. Completed v5.12 release candidate readiness.
+25. Defined local A4 default autonomy in AGENTS.md.
+26. Defined A5 Autonomous Production Execution as production-only mode gated by an active authorization package.
+27. Completed v7.40 local A4/A5 autonomy mode alignment.
+28. Updated MVP validation routing so full local validation passes at v7.40.
 ```
 
 ### blocked

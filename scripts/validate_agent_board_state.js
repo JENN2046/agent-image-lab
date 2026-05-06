@@ -41,7 +41,12 @@ function main() {
   const decisions = read(".agent_board/DECISIONS.md");
   const checkpoint = read(".agent_board/CHECKPOINT.md");
 
-  const currentModeDeclared = hasAll(runState + taskQueue, ["A4-Guarded Sustained Local Autopilot"]);
+  const currentModeDeclared = hasAll(runState + taskQueue, ["A4 — Sustained Local Autopilot"]);
+  const a5GateDeclared = hasAll(blockers + taskQueue + runState + handoff, [
+    "A5",
+    "active authorization package",
+    "production actions remain blocked"
+  ]);
   const noExternalReadGateDeclared = hasAll(blockers + taskQueue + checkpoint, [
     "real VCPChat",
     "real VCPToolBox",
@@ -75,32 +80,35 @@ function main() {
     "Overlay, not overwrite",
     "Keep overlay separate from root AGENTS.md"
   ]);
-  const localUncommittedStateDeclared = hasAll(runState + handoff, [
-    "local uncommitted changes present",
-    "Commit/tag/push"
+  const localWorkStateDeclared = hasAll(runState + handoff, [
+    "Worktree:",
+    "v7.40 local A4/A5 autonomy mode alignment",
+    "Push/tag/release"
   ]);
 
-  assert(currentModeDeclared, "Agent board must declare A4 guarded local autopilot mode.");
+  assert(currentModeDeclared, "Agent board must declare A4 sustained local autopilot mode.");
+  assert(a5GateDeclared, "Agent board must declare A5 production-execution gate.");
   assert(noExternalReadGateDeclared, "Agent board must declare external-read gates.");
   assert(realExecutionGateDeclared, "Agent board must declare real-execution gates.");
   assert(remoteActionGateDeclared, "Agent board must declare remote-action gates.");
   assert(validationSnapshotPresent, "Agent board must include current validation snapshot.");
   assert(handoffResumePromptPresent, "Agent board handoff must include guarded resume prompt.");
   assert(overlaySeparationDecisionPresent, "Agent board decisions must keep overlay separate from root AGENTS.md.");
-  assert(localUncommittedStateDeclared, "Agent board must declare current local uncommitted state.");
+  assert(localWorkStateDeclared, "Agent board must declare current local work state.");
 
   const result = {
     passed: true,
     agent_board_state: {
       required_files_present: true,
       current_mode_declared: currentModeDeclared,
+      a5_gate_declared: a5GateDeclared,
       no_external_read_gate_declared: noExternalReadGateDeclared,
       real_execution_gate_declared: realExecutionGateDeclared,
       remote_action_gate_declared: remoteActionGateDeclared,
       validation_snapshot_present: validationSnapshotPresent,
       handoff_resume_prompt_present: handoffResumePromptPresent,
       overlay_separation_decision_present: overlaySeparationDecisionPresent,
-      local_uncommitted_state_declared: localUncommittedStateDeclared,
+      local_work_state_declared: localWorkStateDeclared,
       external_network_required: false,
       external_service_required: false,
       file_write_performed: false

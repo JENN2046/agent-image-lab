@@ -3,19 +3,19 @@
 ## Current Mode
 
 ```text
-A4-Guarded Sustained Local Autopilot
+A4 — Sustained Local Autopilot
 ```
 
 ## Current Mission
 
 ```text
-Advance Agent Image Lab safely within project-local no-execution / no-external-read boundaries.
+Advance Agent Image Lab safely under local A4 autonomy while keeping A5 production execution blocked unless an explicit authorization package is active.
 ```
 
 ## Current Phase
 
 ```text
-v5.12 release candidate readiness
+v7.40 local A4/A5 autonomy mode alignment
 ```
 
 ## Current Task
@@ -27,7 +27,7 @@ none
 ## Last Completed Task
 
 ```text
-Completed v5.12 release candidate readiness after PR #3 landed v5.11 on master.
+Completed v7.40 local A4/A5 autonomy mode alignment.
 ```
 
 ## Last Validation
@@ -54,6 +54,13 @@ node scripts/validate_v5_handoff_freshness.js: passed
 node scripts/validate_v5_true_loop_candidate_delivery.js: passed
 node scripts/validate_v5_post_merge_reconciliation.js: passed
 node scripts/validate_v5_12_release_candidate_readiness.js: passed
+node scripts/validate_v7_40_local_a4_a5_autonomy_alignment.js: passed
+node scripts/validate_v7_37_external_remote_debug_verification_script_authorization_gate.js: passed
+node scripts/validate_v7_38_external_remote_debug_verification_script_creation_preflight.js: passed
+node scripts/validate_v7_39_external_remote_debug_verification_script_creation_authorization_point.js: passed
+node scripts/validate_agent_board_state.js: passed
+scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings
+scripts/validate_mvp.ps1: passed after v7.40 validation routing maintenance
 git diff --check: passed
 ```
 
@@ -91,20 +98,23 @@ PR #2 head: 5ccf059
 PR #3 status: merged
 PR #3 merge commit: b3731bf
 PR #3 head: 46bf42b
-Last pushed commit: 46bf42b
+Last pushed commit: 5a7f5ba
 Last pushed tag: v5.11-post-merge-reconciliation
 Local checkpoint commit: 6d4253f
 Local checkpoint tag: v4.8-local-validation-checkpoint
 Remote checkpoint tag: v4.8-local-validation-checkpoint
 Master sync: local master synced to origin/master
-Origin master baseline: b3731bf
-Local head: b3731bf
-pending local commits: 0
-Local pending commit chain: none
-master...origin/master: 0 0
-Worktree: local v5.12 release candidate readiness changes present
+Origin master baseline: 5a7f5ba
+Local head before v7.40 batch: 5a7f5ba
+pending local commits before v7.40: 0
+Local pending commit chain before v7.40: none
+master...origin/master before v7.40: 0 0
+Worktree: local v7.40 autonomy mode alignment changes present
+Local A4 default commit: 2450f85
+Local A5 production execution commit: da18330
 Remote action in current batch: none
-Commit/tag/push authorization: not active
+Local commit authorization: active by standing user instruction on 2026-05-06
+Tag/push/release authorization: not active
 Local post-v5.4 commit checkpoint: a2ae539
 Local post-v5.9 commit checkpoint: 9ac4ca8
 Local post-v5.10 delivery commit: 5ccf059
@@ -136,16 +146,18 @@ Historical v5.8 phase: v5.8 handoff freshness validation
 Historical v5.9 phase: v5.9 expanded v5 index consistency validation
 Historical v5.10 phase: v5.10 local true-loop candidate delivery closeout
 Historical v5.11 phase: v5.11 post-merge reconciliation
+Historical v5.12 phase: v5.12 release candidate readiness
+Historical v7.39 phase: v7.39 external remote-debug verification script creation authorization point
 ```
 
 ## Current Stop Status
 
 ```text
-not blocked
+not blocked for local A4 work; A5 production execution remains blocked without an active authorization package
 ```
 
 ## Next Action
 
 ```text
-Request explicit authorization before any git add/commit/push/tag/PR/release, or continue safe local docs/schema/prototype validation work from the v5.12 release candidate readiness checkpoint.
+Continue v7.40 local A4/A5 autonomy alignment validation. Without an active A5 authorization package, production actions remain blocked.
 ```

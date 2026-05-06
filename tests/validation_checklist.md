@@ -2910,23 +2910,23 @@
 - [ ] v7.37 默认下一安全阶段为 `v7.38 External Remote Debug Verification Script Creation Preflight`。
 - [ ] `node scripts/validate_v7_37_external_remote_debug_verification_script_authorization_gate.js` 通过。
 
-## v7.38 Local A4/A5 Autonomy Mode Alignment 检查
+## v7.40 Local A4/A5 Autonomy Mode Alignment 检查
 
-- [ ] 当前阶段字符串为 `v7.38 local A4/A5 autonomy mode alignment`。
-- [ ] `docs/190_v7_38_local_a4_a5_autonomy_alignment.md` 存在。
-- [ ] `tests/schema_examples/v7_38_local_a4_a5_autonomy_alignment.example.yaml` 存在。
-- [ ] `scripts/validate_v7_38_local_a4_a5_autonomy_alignment.js` 存在。
+- [ ] 当前阶段字符串为 `v7.40 local A4/A5 autonomy mode alignment`。
+- [ ] `docs/192_v7_40_local_a4_a5_autonomy_alignment.md` 存在。
+- [ ] `tests/schema_examples/v7_40_local_a4_a5_autonomy_alignment.example.yaml` 存在。
+- [ ] `scripts/validate_v7_40_local_a4_a5_autonomy_alignment.js` 存在。
 - [ ] `AGENTS.md` 默认本地自动化模式为 `A4 — Sustained Local Autopilot`。
 - [ ] `AGENTS.md` 包含 `A5 — Autonomous Production Execution`。
 - [ ] A4 明确只覆盖项目内 safe/local/reversible 的 docs/schema/dry-run/authorization/static prototype/validation/agent_board 工作。
 - [ ] A4 明确不授权真实 VCPChat / VCPToolBox 读取、真实 manifest 读取、插件/API/DailyNote、VCP memory、图片创建、真实执行入口或 remote write。
 - [ ] A5 明确是真实生产级自动执行，包含读取真实源、修改真实集成、创建真实 IPC/preload/renderer/Adapter、调用插件/API、生成图片、写 DailyNote/VCP memory、commit/tag/push/release package。
 - [ ] A5 必须依赖 active authorization package，且授权包必须包含 target systems、allowed paths/objects、allowed operations、forbidden operations、write boundaries、validation、rollback、reviewer、stop conditions。
-- [ ] v7.38 记录 `a5_active_authorization_package_present=false` 和 `a5_actions_authorized_now=false`。
-- [ ] v7.38 记录 `Without an active A5 authorization package` 时所有 A5 生产动作仍为 Hard Stop。
-- [ ] v7.38 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
-- [ ] v7.38 不读取真实 VCPChat / VCPToolBox，不创建 remote-debug 脚本，不启动 VCPChat，不访问 CDP，不调用插件/API/DailyNote，不创建图片，不写 VCP 记忆，不 push/tag/release。
-- [ ] `node scripts/validate_v7_38_local_a4_a5_autonomy_alignment.js` 通过。
+- [ ] v7.40 记录 `a5_active_authorization_package_present=false` 和 `a5_actions_authorized_now=false`。
+- [ ] v7.40 记录 `Without an active A5 authorization package` 时所有 A5 生产动作仍为 Hard Stop。
+- [ ] v7.40 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.40 不读取真实 VCPChat / VCPToolBox，不创建 remote-debug 脚本，不启动 VCPChat，不访问 CDP，不调用插件/API/DailyNote，不创建图片，不写 VCP 记忆，不 push/tag/release。
+- [ ] `node scripts/validate_v7_40_local_a4_a5_autonomy_alignment.js` 通过。
 
 ## v7.38 External Remote Debug Verification Script Creation Preflight 检查
 
