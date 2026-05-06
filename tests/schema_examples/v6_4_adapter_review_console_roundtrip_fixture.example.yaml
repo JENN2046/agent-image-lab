@@ -1,0 +1,216 @@
+status: completed_validated_project_local_v6_4_adapter_review_console_roundtrip_fixture
+version: v6.4
+current_phase: "v6.4 adapter review console runtime roundtrip fixture"
+validation_file: scripts/validate_v6_4_adapter_review_console_roundtrip_fixture.js
+
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: 43dc358
+  previous_phase: "v6.3 host bridge contract v2"
+  previous_record: docs/145_v6_3_host_bridge_contract_v2.md
+  previous_validation: scripts/validate_v6_3_host_bridge_contract_v2.js
+  default_next_phase: "v6.5 Memory Handoff Runtime Status"
+
+fixture_goal:
+  summary_cn: "用占位 dry-run 数据验证 Adapter 输出如何进入 Review Console runtime 状态流。"
+  fixture_only: true
+  implementation_not_authorized_by_this_record: true
+  no_runtime_code_change_required: true
+  no_external_read_required: true
+
+adapter_dry_run_source:
+  task_id: task-v6-4-roundtrip-001
+  mode: dry_run
+  command: dry_run
+  dispatch_plan_draft:
+    dispatch_id: dispatch-v6-4-roundtrip-001
+    task_id: task-v6-4-roundtrip-001
+    mode: dry_run
+    selected_plugin: null
+    capability_matrix_status: pending_manifest_review
+    reason_cn: "仅使用占位能力状态生成 dry-run dispatch 草案。"
+    dry_run_required: true
+    approval_required: true
+    execution_blocked: true
+    external_api_allowed: false
+    gatekeeper_required: true
+    review_console_required: true
+    allow_file_write: false
+    allow_image_binary: false
+    max_plugin_calls: 0
+    expected_outputs: 0
+    max_outputs: 0
+    audit_record:
+      audit_id: audit-v6-4-roundtrip-001
+      audit_summary_cn: "仅生成 Adapter dry-run dispatch 草案，未调用插件、API、DailyNote 或文件写入。"
+      contains_sensitive_original: false
+
+gatekeeper_handoff:
+  required: true
+  display_only: true
+  risk_level: medium
+  risk_summary_cn: "当前仅为 Adapter dry-run handoff；真实执行、外部 API、文件写入和图片创建均被阻止。"
+  blocked_actions:
+    - execute
+    - generate
+    - call_plugin
+    - external_api
+    - write_daily_note
+    - write_image_file
+  approval_to_execute_allowed: false
+
+review_console_handoff:
+  required: true
+  display_only: true
+  purpose_cn: "展示 Adapter dry-run 风险摘要、Gatekeeper 阻止动作和人工复查入口。"
+  allowed_actions:
+    - mark_candidate
+    - reject_candidate
+    - request_gatekeeper_review
+    - request_memory_edit
+  forbidden_actions:
+    - execute_plugin
+    - call_api
+    - write_daily_note
+    - save_image
+  handoff_summary_cn: "Review Console 只能展示草案和人工意见，不能触发真实执行。"
+
+host_bridge_contract_v2:
+  load_session_channel: imageLabReview.loadSession
+  preview_draft_channel: imageLabReview.previewDraft
+  submit_draft_channel: imageLabReview.submitDraft
+  cancel_channel: imageLabReview.cancel
+  channels_are_contract_only: true
+  real_ipc_registered: false
+
+runtime_draft_bundle:
+  review_session_draft:
+    session_id: session-v6-4-roundtrip-001
+    task_id: task-v6-4-roundtrip-001
+    case_id: case-v6-4-roundtrip-001
+    project: Agent Image Lab
+    status: human_reviewing
+    final_review:
+      source: human_review
+      note_cn: "人工评审优先，AI 评分只作为建议。"
+    archive_decision:
+      asset_status: candidate
+      ai_archive_recommendation_is_final: false
+    memory_preview:
+      chinese_diary_title: "v6.4 Adapter 到 Review Console roundtrip 草案"
+      chinese_diary_content: "本记录说明 Adapter dry-run dispatch 已映射到 Review Console runtime 草案。当前未选择真实插件，未调用插件、API、DailyNote 或文件写入。"
+      target_notebook: Runtime_Roundtrip_Audit
+      safety:
+        contains_secret: false
+        contains_private_path: false
+        contains_customer_private_data: false
+        contains_image_binary: false
+    memory_approval:
+      status: pending
+      approved_by: null
+      approved_at: null
+    next_iteration:
+      note_cn: "如需进入真实执行或真实 VCPChat 集成，必须另行授权。"
+
+  image_case_draft:
+    case_id: case-v6-4-roundtrip-001
+    task_id: task-v6-4-roundtrip-001
+    plugin_used: null
+    final_score: null
+    asset_status: candidate
+    human_approval:
+      approved: false
+      approved_by: null
+      approved_at: null
+    output_assets:
+      - runtime-roundtrip-output-placeholder
+
+  memory_delta_draft:
+    delta_id: memory-delta-v6-4-roundtrip-001
+    task_id: task-v6-4-roundtrip-001
+    case_id: case-v6-4-roundtrip-001
+    agent_name: Review_Console_Runtime_Prototype
+    target_notebook: Runtime_Roundtrip_Audit
+    write_mode: draft
+    approval_required: true
+    approval_status: pending
+    chinese_diary_title: "v6.4 Adapter 到 Review Console roundtrip 草案"
+    chinese_diary_content: "本记录说明 Adapter dry-run dispatch 已映射到 Review Console runtime 草案。当前未选择真实插件，未调用插件、API、DailyNote 或文件写入。"
+    memory_safety:
+      contains_secret: false
+      contains_private_path: false
+      contains_customer_private_data: false
+      contains_image_binary: false
+    final_decision:
+      should_write_to_vcp: false
+      should_show_in_review_console: true
+      rejection_reason_cn: null
+
+  prototype_guard:
+    api_called: false
+    daily_note_called: false
+    vcp_plugin_called: false
+    disk_write_performed: false
+    image_file_created: false
+
+validation_preview_ack:
+  validation_passed: true
+  validation_summary_cn: "草案字段满足 no-execution roundtrip fixture 要求。"
+  side_effects_performed: false
+
+host_submit_ack:
+  accepted_by_host: true
+  draft_received: true
+  validation_passed: true
+  side_effects_performed: false
+  status_cn: "host bridge contract v2 接收草案；无外部副作用。"
+
+task_panel_projection:
+  status: review_ready
+  dispatch_status:
+    selected_plugin: null
+    max_plugin_calls: 0
+    execution_blocked: true
+    external_api_allowed: false
+  review_status:
+    final_review_source: human_review
+    accepted_requires_human_approval: true
+  memory_status:
+    write_mode: draft
+    approval_status: pending
+    should_write_to_vcp: false
+    daily_note_called: false
+  gatekeeper_status:
+    execution_blocked: true
+    review_required: true
+  next_authorization_point:
+    authorization_required: true
+    authorization_name: v6_5_memory_handoff_runtime_status
+
+roundtrip_guard:
+  selected_plugin: null
+  max_plugin_calls: 0
+  execution_blocked: true
+  external_api_allowed: false
+  allow_file_write: false
+  allow_image_binary: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  disk_write_performed: false
+  image_file_created: false
+  side_effects_performed: false
+  real_execution_allowed: false
+  real_vcpchat_source_read: false
+  real_vcptoolbox_source_read: false
+  real_manifest_read: false
+
+acceptance_assertions:
+  - "v6.4 只补 Adapter 到 Review Console runtime 的 roundtrip fixture。"
+  - "dispatch_plan_draft 必须保持 dry-run。"
+  - "Gatekeeper handoff 和 Review Console handoff 必须保持 display-only。"
+  - "host_submit_ack 只表示草案被 contract 接收，不代表外部副作用。"
+  - "memory_delta_draft 保持 draft，DailyNote 未调用。"
+  - "默认下一阶段是 v6.5 Memory Handoff Runtime Status。"

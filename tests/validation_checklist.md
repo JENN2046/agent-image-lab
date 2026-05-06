@@ -2114,3 +2114,19 @@
 - [ ] v6.3 不修改 runtime 代码，不读取真实 VCPChat / VCPToolBox，不读取真实 manifest，不创建 IPC/preload/renderer 或 Adapter 执行入口。
 - [ ] v6.3 保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_file_created=false`。
 - [ ] `node scripts/validate_v6_3_host_bridge_contract_v2.js` 通过。
+
+## v6.4 Adapter -> Review Console Runtime Roundtrip Fixture 检查
+
+- [ ] 当前阶段字符串为 `v6.4 adapter review console runtime roundtrip fixture`。
+- [ ] `docs/146_v6_4_adapter_review_console_roundtrip_fixture.md` 存在。
+- [ ] `review_console/embed_contract/adapter_review_console_roundtrip_fixture.md` 存在。
+- [ ] `tests/schema_examples/v6_4_adapter_review_console_roundtrip_fixture.example.yaml` 存在。
+- [ ] `scripts/validate_v6_4_adapter_review_console_roundtrip_fixture.js` 存在。
+- [ ] v6.4 记录当前基线 `43dc358` 和上一阶段 `v6.3 host bridge contract v2`。
+- [ ] v6.4 状态流覆盖 `Adapter dry-run dispatch -> Gatekeeper handoff -> Review Console handoff -> Host Bridge Contract v2 -> runtime draft bundle -> Task Panel 状态`。
+- [ ] v6.4 映射规则覆盖 adapter_to_review_session、adapter_to_image_case、adapter_to_memory_delta、gatekeeper_to_task_panel 和 host_ack_to_task_panel。
+- [ ] v6.4 保持 `selected_plugin=null`、`max_plugin_calls=0`、`execution_blocked=true`、`external_api_allowed=false`。
+- [ ] v6.4 保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_file_created=false`、`side_effects_performed=false`。
+- [ ] v6.4 默认下一阶段为 `v6.5 Memory Handoff Runtime Status`。
+- [ ] v6.4 不修改 runtime 或 Adapter 代码，不读取真实 VCPChat / VCPToolBox，不读取真实 manifest，不创建 IPC/preload/renderer 或 Adapter 执行入口。
+- [ ] `node scripts/validate_v6_4_adapter_review_console_roundtrip_fixture.js` 通过。
