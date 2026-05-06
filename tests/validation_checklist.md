@@ -3028,3 +3028,20 @@
 - [ ] v7.43 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.43 默认下一安全阶段为 `BLOCKED until explicit remote-debug script execution authorization`。
 - [ ] `node scripts/validate_v7_43_external_remote_debug_verification_script_creation_execution_record.js` 通过。
+
+## v7.44 Remote Debug Script Run And VCPChat Launch Record 检查
+
+- [ ] 当前阶段字符串为 `v7.44 remote-debug script run and vcpchat launch record`。
+- [ ] `docs/196_v7_44_remote_debug_script_run_and_vcpchat_launch_record.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_remote_debug_script_run_and_launch_record.md` 存在。
+- [ ] `tests/schema_examples/v7_44_remote_debug_script_run_and_vcpchat_launch_record.example.yaml` 存在。
+- [ ] `scripts/validate_v7_44_remote_debug_script_run_and_vcpchat_launch_record.js` 存在。
+- [ ] v7.44 记录上一阶段为 `v7.43 external remote-debug verification script creation execution record`。
+- [ ] v7.44 必须记录 `authorization_received=true`、`run_remote_debug_script_authorized=true`、`launch_vcpchat_authorized=true`。
+- [ ] v7.44 必须记录 `script_run_by_this_phase=true`、`script_dry_run_result_only=true`、`app_launch_performed_by_this_phase=true`。
+- [ ] v7.44 必须记录脚本返回 `dry_run=true`、`execute_requested=false`、`execution_blocked=true`。
+- [ ] v7.44 必须保持 `remote_debug_used_by_this_phase=false`、`cdp_endpoint_accessed_by_this_phase=false`、`runtime_evaluate_performed_by_this_phase=false`。
+- [ ] v7.44 必须保持 bridge 方法、插件/API/DailyNote/VCP 记忆/图片/依赖/manifest/lockfile/VCPChat 修改/远端推送均未发生。
+- [ ] v7.44 不保存真实本机路径、CDP endpoint、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.44 默认下一安全阶段为 `BLOCKED until explicit CDP access and bridge runtime verification authorization`。
+- [ ] `node scripts/validate_v7_44_remote_debug_script_run_and_vcpchat_launch_record.js` 通过。

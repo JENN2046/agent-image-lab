@@ -18,7 +18,7 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v7.43 external remote-debug verification script creation execution record
+v1.0 true-loop closeout candidate + v7.44 remote-debug script run and vcpchat launch record
 ```
 
 已经完成：
@@ -69,6 +69,7 @@ v1.0 true-loop closeout candidate + v7.43 external remote-debug verification scr
 - v7.41 external remote-debug verification script creation record：把原 v7.39 指向的脚本创建记录重新落位，确认真实 remote-debug 脚本仍未创建，并把后续创建授权包要求机器化。
 - v7.42 external remote-debug verification script creation authorization package：把未来创建真实 remote-debug 脚本所需的未激活授权包模板、禁止动作、验证要求、回滚路径和停止条件固化下来。
 - v7.43 external remote-debug verification script creation execution record：在明确授权下创建 dry-run-only remote-debug smoke 脚本，并记录脚本未运行、VCPChat 未启动、CDP 未访问。
+- v7.44 remote-debug script run and VCPChat launch record：在明确授权下运行 dry-run-only 脚本并启动 VCPChat，同时记录 CDP 未访问、bridge 未调用。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：
@@ -229,8 +230,8 @@ daily_note_called: false
 1. 运行完整校验，确保文档、Adapter、Review Console、agent board、执行记录和 v5.12 release candidate readiness 均通过。
 2. 保持本地默认 `A4 — Sustained Local Autopilot`，继续推进 docs/schema/dry-run/authorization/static prototype/validation 安全面。
 3. 等待用户单独授权任何新的 A5 真实生产动作、tag、push 或正式 release 发布。
-4. 下一步 remote-debug 脚本执行、VCPChat 启动或 CDP 访问已经到达明确审批边界；没有用户批准时继续停在 no-execution / no-external-read 轨道。
-5. 后续任何新增真实生图调用或真实 remote-debug 脚本创建都必须重新确认目标、允许文件、禁止动作、验证要求和回滚方案，并形成 active authorization package。
+4. 下一步 CDP 访问、Runtime.evaluate 或 bridge runtime verification 已经到达明确审批边界；没有用户批准时继续停在 no-CDP / no-bridge 轨道。
+5. 后续任何新增真实生图调用、CDP 检查、bridge 验证或 VCPChat/VCPToolBox 源码读写都必须重新确认目标、允许操作、禁止动作、验证要求和回滚方案，并形成 active authorization package。
 
 ## 永久安全门
 

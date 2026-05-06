@@ -226,7 +226,7 @@ function main() {
     "pending local commits before v7.41: 1",
     "Local pending commit chain before v7.41: 8f60ae1",
     "node scripts/validate_v7_41_external_remote_debug_verification_script_creation_record.js: passed",
-    "remote-debug script exists but was not run",
+    "v7.41 local commit: commit 0326150 records remote-debug script creation deferral",
     "Without an active A5 authorization package, production actions remain blocked"
   ]);
 

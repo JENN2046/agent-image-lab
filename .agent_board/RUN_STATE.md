@@ -15,7 +15,7 @@ Advance Agent Image Lab safely under local A4 autonomy while keeping A5 producti
 ## Current Phase
 
 ```text
-v7.43 external remote-debug verification script creation execution record
+v7.44 remote-debug script run and vcpchat launch record
 ```
 
 ## Current Task
@@ -27,7 +27,7 @@ none
 ## Last Completed Task
 
 ```text
-Completed v7.43 external remote-debug verification script creation execution record; remote-debug script exists as dry-run-only local script and was not run.
+Completed v7.44 remote-debug script run and VCPChat launch record; the script ran in dry-run blocked mode, VCPChat launched, and CDP/bridge were not used.
 ```
 
 ## Last Validation
@@ -61,9 +61,10 @@ node scripts/validate_v7_39_external_remote_debug_verification_script_creation_a
 node scripts/validate_v7_41_external_remote_debug_verification_script_creation_record.js: passed
 node scripts/validate_v7_42_external_remote_debug_verification_script_creation_authorization_package.js: passed
 node scripts/validate_v7_43_external_remote_debug_verification_script_creation_execution_record.js: passed
+node scripts/validate_v7_44_remote_debug_script_run_and_vcpchat_launch_record.js: passed
 node scripts/validate_agent_board_state.js: passed
 scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings
-scripts/validate_mvp.ps1: passed after v7.43 validation routing maintenance
+scripts/validate_mvp.ps1: passed after v7.44 validation routing maintenance
 git diff --check: passed
 ```
 
@@ -74,6 +75,8 @@ VCPChat read: no
 VCPToolBox read: no
 Real manifest read: no
 Config/env/log/secret read: no
+VCPChat app launch: yes, process launch only
+CDP access: no
 ```
 
 ## Execution State
@@ -85,7 +88,9 @@ DailyNote call: no
 VCP memory write: no
 Image creation: no
 Executable Adapter entrypoint: no
-Remote-debug script: created, not run
+Remote-debug script: run in dry-run blocked mode
+VCPChat launch: yes
+Bridge runtime verification: no
 ```
 
 ## Git State
@@ -128,7 +133,12 @@ Local head before v7.43 batch: 975da9a
 pending local commits before v7.43: 3
 Local pending commit chain before v7.43: 8f60ae1 -> 0326150 -> 975da9a
 master...origin/master before v7.43: 3 0
-Worktree: local v7.43 external remote-debug verification script creation execution record changes present
+Local v7.43 script creation execution record commit: d728a89
+Local head before v7.44 batch: d728a89
+pending local commits before v7.44: 4
+Local pending commit chain before v7.44: 8f60ae1 -> 0326150 -> 975da9a -> d728a89
+master...origin/master before v7.44: 4 0
+Worktree: local v7.44 remote-debug script run and vcpchat launch record changes present
 Local A4 default commit: 2450f85
 Local A5 production execution commit: da18330
 Remote action in current batch: none
@@ -170,16 +180,17 @@ Historical v7.39 phase: v7.39 external remote-debug verification script creation
 Historical v7.40 phase: v7.40 local A4/A5 autonomy mode alignment
 Historical v7.41 phase: v7.41 external remote-debug verification script creation record
 Historical v7.42 phase: v7.42 external remote-debug verification script creation authorization package
+Historical v7.43 phase: v7.43 external remote-debug verification script creation execution record
 ```
 
 ## Current Stop Status
 
 ```text
-local script creation completed; next remote-debug script execution, VCPChat launch, or CDP access is BLOCKED until explicit execution authorization; A5 production execution remains blocked without an active authorization package
+script run and VCPChat launch completed; next CDP access, Runtime.evaluate, or bridge runtime verification is BLOCKED until explicit authorization; A5 production execution remains blocked without an active authorization package
 ```
 
 ## Next Action
 
 ```text
-Stop before running the script. Without explicit remote-debug script execution authorization or active A5 authorization package, do not execute scripts/run_vcpchat_review_console_remote_debug_smoke.ps1.
+Stop before CDP access or bridge runtime verification. Without explicit CDP/bridge authorization or active A5 authorization package, do not open CDP endpoints, run Runtime.evaluate, call bridge methods, or read/modify VCPChat/VCPToolBox source.
 ```

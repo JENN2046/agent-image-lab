@@ -77,6 +77,7 @@ $requiredFiles = @(
   'scripts/validate_v7_41_external_remote_debug_verification_script_creation_record.js',
   'scripts/validate_v7_42_external_remote_debug_verification_script_creation_authorization_package.js',
   'scripts/validate_v7_43_external_remote_debug_verification_script_creation_execution_record.js',
+  'scripts/validate_v7_44_remote_debug_script_run_and_vcpchat_launch_record.js',
   'scripts/run_vcpchat_review_console_remote_debug_smoke.ps1',
   'scripts/validate_runtime_guard_unit.js',
   'scripts/validate_runtime_prototype_smoke.js',
@@ -119,6 +120,7 @@ $requiredFiles = @(
   'docs/193_v7_41_external_remote_debug_verification_script_creation_record.md',
   'docs/194_v7_42_external_remote_debug_verification_script_creation_authorization_package.md',
   'docs/195_v7_43_external_remote_debug_verification_script_creation_execution_record.md',
+  'docs/196_v7_44_remote_debug_script_run_and_vcpchat_launch_record.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
@@ -208,6 +210,7 @@ $requiredFiles = @(
   'tests/schema_examples/v7_41_external_remote_debug_verification_script_creation_record.example.yaml',
   'tests/schema_examples/v7_42_external_remote_debug_verification_script_creation_authorization_package.example.yaml',
   'tests/schema_examples/v7_43_external_remote_debug_verification_script_creation_execution_record.example.yaml',
+  'tests/schema_examples/v7_44_remote_debug_script_run_and_vcpchat_launch_record.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -223,7 +226,8 @@ $requiredFiles = @(
   'review_console/embed_contract/first_runtime_code_patch_authorization.md',
   'review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_record.md',
   'review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_authorization_package.md',
-  'review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_execution_record.md'
+  'review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_execution_record.md',
+  'review_console/embed_contract/vcpchat_remote_debug_script_run_and_launch_record.md'
 )
 
 $requiredDirectories = @(
@@ -3765,6 +3769,11 @@ if (-not $node) {
     Add-Failure "scripts/validate_v7_43_external_remote_debug_verification_script_creation_execution_record.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'scripts/validate_v7_44_remote_debug_script_run_and_vcpchat_launch_record.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_v7_44_remote_debug_script_run_and_vcpchat_launch_record.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_agent_board_state.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_agent_board_state.js failed node --check"
@@ -3910,6 +3919,28 @@ if (-not $node) {
     }
     if ($v743ScriptCreationExecution.v7_43_external_remote_debug_verification_script_creation_execution_record.script_has_no_forbidden_runtime -ne $true) {
       Add-Failure "v7.43 script must not include forbidden runtime operations"
+    }
+  }
+
+  $v744ScriptRunAndLaunchOutput = & node (Join-Path $Root 'scripts/validate_v7_44_remote_debug_script_run_and_vcpchat_launch_record.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v7.44 remote-debug script run and VCPChat launch record validation exited with failure"
+  } else {
+    $v744ScriptRunAndLaunch = ($v744ScriptRunAndLaunchOutput -join "`n") | ConvertFrom-Json
+    if ($v744ScriptRunAndLaunch.passed -ne $true) {
+      Add-Failure "v7.44 remote-debug script run and VCPChat launch record validation must report passed true"
+    }
+    if ($v744ScriptRunAndLaunch.v7_44_remote_debug_script_run_and_vcpchat_launch_record.script_run_by_this_phase -ne $true) {
+      Add-Failure "v7.44 must record that the remote-debug smoke script was run"
+    }
+    if ($v744ScriptRunAndLaunch.v7_44_remote_debug_script_run_and_vcpchat_launch_record.app_launch_performed_by_this_phase -ne $true) {
+      Add-Failure "v7.44 must record that VCPChat launch was performed"
+    }
+    if ($v744ScriptRunAndLaunch.v7_44_remote_debug_script_run_and_vcpchat_launch_record.cdp_endpoint_accessed_by_this_phase -ne $false) {
+      Add-Failure "v7.44 must not access CDP"
+    }
+    if ($v744ScriptRunAndLaunch.v7_44_remote_debug_script_run_and_vcpchat_launch_record.bridge_method_invocation_performed -ne $false) {
+      Add-Failure "v7.44 must not invoke bridge methods"
     }
   }
 

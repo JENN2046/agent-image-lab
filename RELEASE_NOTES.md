@@ -62,6 +62,7 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Added v7.41 external remote-debug verification script creation record deferral.
 - Added v7.42 inactive external remote-debug verification script creation authorization package template.
 - Added v7.43 external remote-debug verification script creation execution record and dry-run-only script.
+- Added v7.44 remote-debug script run and VCPChat launch record.
 
 ## Safety Status
 
@@ -78,6 +79,7 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - No raw plugin output, secret value, raw endpoint, or runtime log is stored in project docs.
 - Additional real plugin calls, DailyNote writes, VCP long-term memory writes, and GitHub Release publication still require explicit user authorization.
 - A5 Autonomous Production Execution requires a separate active authorization package before any real production action.
-- The external remote-debug verification script remains uncreated until a separate script creation authorization package is active.
+- The external remote-debug verification script now exists as a dry-run-only local script.
 - The v7.42 authorization package is a template only and does not approve script creation.
-- The v7.43 script is created but not executed; script execution, VCPChat launch, and CDP access still require new explicit authorization.
+- The v7.43 script creation batch created the script but did not execute it.
+- The v7.44 batch ran the dry-run-only script and launched VCPChat; CDP access and bridge runtime verification still require new explicit authorization.

@@ -30,10 +30,10 @@ Plugin calls, API calls, DailyNote writes, VCP memory writes, image creation, an
 Without an active A5 authorization package, production actions remain blocked. A5 authorization must name exact target systems, allowed paths or objects, allowed commands or operations, forbidden operations, write boundaries, validation requirements, rollback path, reviewer, and stop conditions.
 ```
 
-## Standing Remote-Debug Script Execution Gate
+## Standing CDP And Bridge Verification Gate
 
 ```text
-The real scripts/run_vcpchat_review_console_remote_debug_smoke.ps1 file exists as a dry-run-only local script. Running it for real remote-debug verification, launching VCPChat, accessing CDP, or enabling execution behavior requires explicit remote-debug script execution authorization or active A5 authorization package.
+The real scripts/run_vcpchat_review_console_remote_debug_smoke.ps1 file exists as a dry-run-only local script. v7.44 ran it in default dry-run blocked mode and launched VCPChat after explicit user authorization. Accessing CDP, running Runtime.evaluate, calling bridge methods, reading source, or enabling deeper remote-debug verification requires explicit CDP/bridge runtime verification authorization or active A5 authorization package.
 ```
 
 ## Blocker Template

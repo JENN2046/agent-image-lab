@@ -70,6 +70,9 @@ v7.42 validation: inactive authorization package validator passed and confirms s
 v7.42 local commit: commit 975da9a records inactive script creation authorization package template
 v7.43 local: remote-debug smoke script created as dry-run-only local script after explicit user authorization
 v7.43 validation: script creation execution validator passed and confirms the script was not run
+v7.43 local commit: commit d728a89 records dry-run-only remote-debug smoke script creation
+v7.44 local: remote-debug smoke script ran in dry-run blocked mode and VCPChat launched
+v7.44 validation: script run and launch record validator passed and confirms CDP/bridge were not used
 ```
 
 ## Current Boundary
@@ -85,9 +88,10 @@ No image creation.
 No VCPChat/VCPToolBox modification.
 No active A5 authorization package.
 No A5 production execution in this batch.
-Remote-debug script created in this batch.
-No remote-debug script execution in this batch.
-No active script execution authorization package.
+Remote-debug script run in this batch.
+VCPChat launched in this batch.
+No CDP access in this batch.
+No bridge runtime verification in this batch.
 No push/tag/release in this batch.
 ```
 
@@ -122,9 +126,10 @@ node scripts/validate_v7_39_external_remote_debug_verification_script_creation_a
 node scripts/validate_v7_41_external_remote_debug_verification_script_creation_record.js: passed
 node scripts/validate_v7_42_external_remote_debug_verification_script_creation_authorization_package.js: passed
 node scripts/validate_v7_43_external_remote_debug_verification_script_creation_execution_record.js: passed
+node scripts/validate_v7_44_remote_debug_script_run_and_vcpchat_launch_record.js: passed
 node scripts/validate_agent_board_state.js: passed
 scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings
-scripts/validate_mvp.ps1: passed after v7.43 validation routing maintenance
+scripts/validate_mvp.ps1: passed after v7.44 validation routing maintenance
 git diff --check: passed
 ```
 
@@ -132,8 +137,8 @@ git diff --check: passed
 
 ```text
 Continue only local A4 docs/schema/checklist/prototype/validation work inside the project root unless the user explicitly provides an active A5 authorization package.
-Legacy MVP validation routing now treats old v4/v5 current-state validators as historical snapshots and validates the current project state through v7.43 / agent-board checks.
-The remote-debug script exists but was not run. Next real script execution is BLOCKED until explicit remote-debug script execution authorization.
+Legacy MVP validation routing now treats old v4/v5 current-state validators as historical snapshots and validates the current project state through v7.44 / agent-board checks.
+The remote-debug script ran in dry-run blocked mode and VCPChat launched. Next CDP access or bridge runtime verification is BLOCKED until explicit authorization.
 ```
 
 ## Resume Instruction

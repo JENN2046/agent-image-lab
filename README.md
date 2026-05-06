@@ -7,7 +7,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v7.43 external remote-debug verification script creation execution record
+v1.0 true-loop closeout candidate + v7.44 remote-debug script run and vcpchat launch record
 ```
 
 已经完成：
@@ -48,6 +48,7 @@ v1.0 true-loop closeout candidate + v7.43 external remote-debug verification scr
 - v7.41 external remote-debug verification script creation record 把原 v7.39 指向的脚本创建记录重新落位，并明确真实 remote-debug 脚本仍未创建，后续创建需要 active A5 authorization package 或独立脚本创建授权包。
 - v7.42 external remote-debug verification script creation authorization package 固化未来创建真实 remote-debug 脚本所需的未激活授权包模板，并把下一步真实脚本创建标记为需要明确审批。
 - v7.43 external remote-debug verification script creation execution record 在明确授权下创建 `scripts/run_vcpchat_review_console_remote_debug_smoke.ps1`，但脚本未运行，VCPChat 未启动，CDP 未访问。
+- v7.44 remote-debug script run and VCPChat launch record 在明确授权下运行 dry-run-only 脚本并启动 VCPChat，但 CDP 未访问、bridge 未调用。
 
 当前 accepted asset 只以 ignored runtime 路径和哈希归档，不把图片二进制写入 Git、DailyNote 或 VCP 长期记忆。人工接受记录保留了已知视觉偏差：这是 `human_override` 通过，不是完美 prompt compliance。
 

@@ -82,7 +82,7 @@ function main() {
   ]);
   const localWorkStateDeclared = hasAll(runState + handoff, [
     "Worktree:",
-    "v7.43 external remote-debug verification script creation execution record",
+    "v7.44 remote-debug script run and vcpchat launch record",
     "Push/tag/release"
   ]);
 

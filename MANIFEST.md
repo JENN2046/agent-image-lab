@@ -1,6 +1,6 @@
 # Agent Image Lab 打包清单
 
-本包包含 Agent Image Lab v1.0 true-loop closeout 候选所需的文档、schema、角色定义、记忆策略、审片台规格、Adapter dry-run 包、VCP 接入记录、授权门、真实执行脱敏记录、最终验收报告、v3.9-v4.2 Review Console runtime prototype 本地验证加固记录，v4.3-v4.9 guarded autopilot overlay / agent board / local checkpoint readiness / commit scope manifest / post-push state reconciliation / v4 index consistency validation / local tag push-readiness preflight，v5.0 post-merge delivery readiness index，v5.1 runtime delivery surface validation，v5.2 adapter delivery surface validation，v5.3 review console adapter handoff validation，v5.4 local sync readiness preflight，v5.5 post-commit reconciliation checkpoint，v5.6 v5 index consistency validation，v5.7 local batch commit-readiness preflight，v5.8 handoff freshness validation，v5.9 expanded v5 index consistency validation，v5.10 local true-loop candidate delivery closeout，v5.11 post-merge reconciliation，v5.12 release candidate readiness，v7.40 local A4/A5 autonomy mode alignment，v7.41 external remote-debug verification script creation record，v7.42 external remote-debug verification script creation authorization package，以及 v7.43 external remote-debug verification script creation execution record。
+本包包含 Agent Image Lab v1.0 true-loop closeout 候选所需的文档、schema、角色定义、记忆策略、审片台规格、Adapter dry-run 包、VCP 接入记录、授权门、真实执行脱敏记录、最终验收报告、v3.9-v4.2 Review Console runtime prototype 本地验证加固记录，v4.3-v4.9 guarded autopilot overlay / agent board / local checkpoint readiness / commit scope manifest / post-push state reconciliation / v4 index consistency validation / local tag push-readiness preflight，v5.0 post-merge delivery readiness index，v5.1 runtime delivery surface validation，v5.2 adapter delivery surface validation，v5.3 review console adapter handoff validation，v5.4 local sync readiness preflight，v5.5 post-commit reconciliation checkpoint，v5.6 v5 index consistency validation，v5.7 local batch commit-readiness preflight，v5.8 handoff freshness validation，v5.9 expanded v5 index consistency validation，v5.10 local true-loop candidate delivery closeout，v5.11 post-merge reconciliation，v5.12 release candidate readiness，v7.40 local A4/A5 autonomy mode alignment，v7.41 external remote-debug verification script creation record，v7.42 external remote-debug verification script creation authorization package，v7.43 external remote-debug verification script creation execution record，以及 v7.44 remote-debug script run and VCPChat launch record。
 
 ## 重要声明
 
@@ -50,13 +50,16 @@
 - `docs/193_v7_41_external_remote_debug_verification_script_creation_record.md`
 - `docs/194_v7_42_external_remote_debug_verification_script_creation_authorization_package.md`
 - `docs/195_v7_43_external_remote_debug_verification_script_creation_execution_record.md`
+- `docs/196_v7_44_remote_debug_script_run_and_vcpchat_launch_record.md`
 - `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_record.md`
 - `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_authorization_package.md`
 - `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_execution_record.md`
+- `review_console/embed_contract/vcpchat_remote_debug_script_run_and_launch_record.md`
 - `tests/schema_examples/v7_40_local_a4_a5_autonomy_alignment.example.yaml`
 - `tests/schema_examples/v7_41_external_remote_debug_verification_script_creation_record.example.yaml`
 - `tests/schema_examples/v7_42_external_remote_debug_verification_script_creation_authorization_package.example.yaml`
 - `tests/schema_examples/v7_43_external_remote_debug_verification_script_creation_execution_record.example.yaml`
+- `tests/schema_examples/v7_44_remote_debug_script_run_and_vcpchat_launch_record.example.yaml`
 - `.agent_board/`
 - `AGENTS.autopilot-overlay.md`
 - `README_AGENT_IMAGE_LAB_AUTOPILOT.md`
@@ -84,6 +87,7 @@
 - `scripts/validate_v7_41_external_remote_debug_verification_script_creation_record.js`
 - `scripts/validate_v7_42_external_remote_debug_verification_script_creation_authorization_package.js`
 - `scripts/validate_v7_43_external_remote_debug_verification_script_creation_execution_record.js`
+- `scripts/validate_v7_44_remote_debug_script_run_and_vcpchat_launch_record.js`
 - `scripts/run_vcpchat_review_console_remote_debug_smoke.ps1`
 - `integrations/vcp/v0_7_real_execution_authorization_gate.md`
 - `integrations/vcp/v0_7_photo_studio_os_dry_run_rehearsal.md`

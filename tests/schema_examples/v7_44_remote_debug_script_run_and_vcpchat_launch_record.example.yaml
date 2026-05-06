@@ -1,0 +1,92 @@
+status: planned_validated_v7_44_remote_debug_script_run_and_vcpchat_launch_record
+version: v7.44
+current_phase: "v7.44 remote-debug script run and vcpchat launch record"
+validation_file: scripts/validate_v7_44_remote_debug_script_run_and_vcpchat_launch_record.js
+
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  origin_master_short: 5a7f5ba
+  local_head_before_batch: d728a89
+  local_pending_commits_before_this_batch:
+    - 8f60ae1
+    - 0326150
+    - 975da9a
+    - d728a89
+  previous_phase: "v7.43 external remote-debug verification script creation execution record"
+  previous_record: docs/195_v7_43_external_remote_debug_verification_script_creation_execution_record.md
+  default_next_phase: "BLOCKED until explicit CDP access and bridge runtime verification authorization"
+
+execution_authorization:
+  authorization_received: true
+  authorized_by: current_user
+  authorized_at: "2026-05-06"
+  run_remote_debug_script_authorized: true
+  launch_vcpchat_authorized: true
+  cdp_access_authorized: false
+  bridge_method_invocation_authorized: false
+  source_read_authorized: false
+  source_modification_authorized: false
+
+script_run:
+  path: scripts/run_vcpchat_review_console_remote_debug_smoke.ps1
+  command_mode: default
+  exit_code: 0
+  dry_run: true
+  execute_requested: false
+  execution_blocked: true
+  app_launch_performed_by_script: false
+  remote_debug_used_by_script: false
+  cdp_access_performed_by_script: false
+  bridge_method_invocation_performed_by_script: false
+  output_file_written_by_script: false
+  vcpchat_root_supplied: false
+
+vcpchat_launch:
+  launch_attempted: true
+  launch_command: npm run start:desktop:utf8
+  launch_root_recorded_in_git: false
+  launch_root_ref: redacted_external_vcpchat_root
+  start_process_returned: true
+  electron_processes_observed_after_launch: true
+  cdp_port_9222_listening_observed: false
+  app_launch_performed_by_this_phase: true
+
+this_phase_boundary:
+  script_run_by_this_phase: true
+  script_dry_run_result_only: true
+  app_launch_authorized_by_this_phase: true
+  app_launch_performed_by_this_phase: true
+  remote_debug_authorized_by_this_phase: false
+  remote_debug_used_by_this_phase: false
+  cdp_access_authorized_by_this_phase: false
+  cdp_endpoint_accessed_by_this_phase: false
+  runtime_evaluate_authorized_by_this_phase: false
+  runtime_evaluate_performed_by_this_phase: false
+  bridge_method_invocation_performed: false
+  bridge_load_session_called: false
+  bridge_preview_draft_called: false
+  bridge_submit_draft_called: false
+  bridge_cancel_called: false
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_created: false
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+  vcpchat_source_read: false
+  vcpchat_modified_by_this_phase: false
+  vcptoolbox_source_read: false
+  vcptoolbox_modified_by_this_phase: false
+  output_file_written: false
+  tag_created: false
+  push_performed: false
+  github_release_performed: false
+
+notes_cn:
+  - "remote-debug smoke 脚本已运行，但脚本仍只返回 dry-run blocked 摘要。"
+  - "VCPChat 已启动。"
+  - "CDP 没有访问，bridge 没有调用。"
+  - "下一步 CDP/bridge runtime verification 需要新的明确授权。"
