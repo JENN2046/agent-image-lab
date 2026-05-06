@@ -2423,3 +2423,23 @@
 - [ ] v7.12 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
 - [ ] v7.12 默认下一安全阶段为 `v7.13 VCPChat Review Console First Runtime Patch Implementation Authorization`。
 - [ ] `node scripts/validate_v7_12_vcpchat_review_console_exact_patch_execution_preflight.js` 通过。
+
+## v7.13 VCPChat Review Console First Runtime Patch Implementation Record 检查
+
+- [ ] 当前阶段字符串为 `v7.13 vcpchat review console first runtime patch implementation record`。
+- [ ] `docs/165_v7_13_vcpchat_review_console_first_runtime_patch_implementation_record.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_review_console_first_runtime_patch_implementation_record.md` 存在。
+- [ ] `tests/schema_examples/v7_13_vcpchat_review_console_first_runtime_patch_implementation_record.example.yaml` 存在。
+- [ ] `scripts/validate_v7_13_vcpchat_review_console_first_runtime_patch_implementation_record.js` 存在。
+- [ ] v7.13 记录当前基线 `eb7819d` 和上一阶段 `v7.12 vcpchat review console exact patch execution preflight`。
+- [ ] v7.13 必须记录用户已明确授权，并且 VCPChat patch 限定在五个 repo-relative 文件。
+- [ ] v7.13 必须保持 `vcpchat_worktree_has_authorized_local_changes=true` 和 `changed_files_only_inside_allowed_scope=true`。
+- [ ] v7.13 必须记录 changed files 仅为 `main.js`、`modules/ipc/imageLabReviewHandlers.js`、`preloads/chat.js`、`main.html`、`modules/renderer/imageLabReviewMount.js`。
+- [ ] v7.13 必须记录 `renderer.js`、`preloads/shared/*`、依赖文件和 env 文件未修改。
+- [ ] v7.13 必须记录 syntax check、boundary check、added-line forbidden-call scan 均通过。
+- [ ] v7.13 必须保持 `plugin_called=false`、`api_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_created=false`。
+- [ ] v7.13 必须保持 `dependency_changed=false`、`package_manifest_changed=false`、`lockfile_changed=false`。
+- [ ] v7.13 必须保持 `vcpchat_commit_performed=false` 和 `vcpchat_remote_push_performed=false`。
+- [ ] v7.13 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.13 默认下一安全阶段为 `v7.14 VCPChat Review Console Commit Authorization`。
+- [ ] `node scripts/validate_v7_13_vcpchat_review_console_first_runtime_patch_implementation_record.js` 通过。
