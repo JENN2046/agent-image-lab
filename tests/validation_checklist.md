@@ -2577,3 +2577,23 @@
 - [ ] v7.20 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.20 默认下一安全阶段为 `v7.21 VCPChat Review Console Merge Authorization Preflight`。
 - [ ] `node scripts/validate_v7_20_vcpchat_review_console_review_ci_response_loop.js` 通过。
+
+## v7.21 VCPChat Review Console Merge Authorization Preflight 检查
+
+- [ ] 当前阶段字符串为 `v7.21 vcpchat review console merge authorization preflight`。
+- [ ] `docs/173_v7_21_vcpchat_review_console_merge_authorization_preflight.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_review_console_merge_authorization_preflight.md` 存在。
+- [ ] `tests/schema_examples/v7_21_vcpchat_review_console_merge_authorization_preflight.example.yaml` 存在。
+- [ ] `scripts/validate_v7_21_vcpchat_review_console_merge_authorization_preflight.js` 存在。
+- [ ] v7.21 记录当前基线 `b3dd2be` 和上一阶段 `v7.20 vcpchat review console review and ci response loop`。
+- [ ] v7.21 必须记录 PR #34 当前为 `OPEN`、`pr_is_draft=false`、`mergeable_state=MERGEABLE`。
+- [ ] v7.21 必须记录 `status_checks_success=2`、`status_checks_failed=0`、`status_checks_pending=0`。
+- [ ] v7.21 必须记录 `merge_preflight_passed=true`、`merge_candidate=true`、`merge_authorization_ready=true`。
+- [ ] v7.21 必须记录推荐命令 `gh pr merge 34 --squash --delete-branch=false`，但保持 `pr_merge_performed=false`。
+- [ ] v7.21 必须保持 `pr_state_changed_by_this_phase=false`、`feature_branch_deleted=false`、`vcpchat_code_modified_by_this_phase=false`。
+- [ ] v7.21 必须保持 `plugin_called=false`、`api_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_created=false`。
+- [ ] v7.21 必须保持 `dependency_changed=false`、`package_manifest_changed=false`、`lockfile_changed=false`。
+- [ ] v7.21 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.21 必须停在 merge 硬授权点，不得执行 merge / release / branch deletion。
+- [ ] v7.21 默认下一安全阶段为 `v7.22 VCPChat Review Console Merge PR Execution`。
+- [ ] `node scripts/validate_v7_21_vcpchat_review_console_merge_authorization_preflight.js` 通过。
