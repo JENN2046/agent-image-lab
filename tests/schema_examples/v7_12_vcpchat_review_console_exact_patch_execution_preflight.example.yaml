@@ -1,0 +1,83 @@
+status: completed_validated_project_local_v7_12_exact_patch_execution_preflight
+version: v7.12
+current_phase: "v7.12 vcpchat review console exact patch execution preflight"
+validation_file: scripts/validate_v7_12_vcpchat_review_console_exact_patch_execution_preflight.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: 2837828
+  previous_phase: "v7.11 vcpchat review console exact patch authorization request"
+  default_next_phase: "v7.13 VCPChat Review Console First Runtime Patch Implementation Authorization"
+preflight_status:
+  exact_patch_execution_preflight_completed: true
+  preflight_passed: true
+  awaiting_final_real_write_approval: true
+  real_vcpchat_write_authorized_by_this_record: false
+  real_vcpchat_write_performed: false
+  implementation_allowed: false
+  vcpchat_code_modified: false
+target_repository_check:
+  target_repository_name: VCPChat
+  target_local_root_redacted: "<VCPCHAT_LOCAL_ROOT_REDACTED>"
+  expected_branch: main
+  observed_branch: main
+  expected_head_short: c97ff0c
+  observed_head_short: c97ff0c
+  branch_matches_expected: true
+  head_matches_expected: true
+  worktree_clean: true
+  remote_write_allowed: false
+exact_file_boundary_check:
+  exact_repo_relative_files_only: true
+  allowed_write_scope:
+    - path: main.js
+      expected_state: existing
+      observed_exists: true
+      preflight_result: pass
+    - path: modules/ipc/imageLabReviewHandlers.js
+      expected_state: new_file_expected
+      observed_exists: false
+      preflight_result: pass
+    - path: preloads/chat.js
+      expected_state: existing
+      observed_exists: true
+      preflight_result: pass
+    - path: main.html
+      expected_state: existing
+      observed_exists: true
+      preflight_result: pass
+    - path: modules/renderer/imageLabReviewMount.js
+      expected_state: new_file_expected
+      observed_exists: false
+      preflight_result: pass
+read_boundary:
+  vcpchat_git_status_checked: true
+  vcpchat_branch_and_head_checked: true
+  exact_file_existence_checked: true
+  source_code_body_read_performed: false
+  env_or_secret_file_read: false
+  raw_source_code_copied: false
+  raw_local_path_saved: false
+boundary_state:
+  exact_patch_execution_preflight_completed: true
+  preflight_passed: true
+  exact_patch_authorization_request_ready: true
+  real_vcpchat_write_authorized: false
+  real_vcpchat_write_performed: false
+  implementation_task_authorized: false
+  implementation_allowed: false
+  final_write_authorization_ready: false
+  runtime_code_modified: false
+  vcpchat_code_modified: false
+  source_code_body_read_performed: false
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  renderer_runtime_code_created: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  image_file_created: false
+stop_point:
+  stop_here: true
+  next_safe_phase: "v7.13 VCPChat Review Console First Runtime Patch Implementation Authorization"
+  real_write_phase_blocked: true

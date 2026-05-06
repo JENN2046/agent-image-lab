@@ -2403,3 +2403,23 @@
 - [ ] v7.11 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
 - [ ] v7.11 默认下一安全阶段为 `v7.12 VCPChat Review Console Exact Patch Execution Preflight`。
 - [ ] `node scripts/validate_v7_11_vcpchat_review_console_exact_patch_authorization_request.js` 通过。
+
+## v7.12 VCPChat Review Console Exact Patch Execution Preflight 检查
+
+- [ ] 当前阶段字符串为 `v7.12 vcpchat review console exact patch execution preflight`。
+- [ ] `docs/164_v7_12_vcpchat_review_console_exact_patch_execution_preflight.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_review_console_exact_patch_execution_preflight.md` 存在。
+- [ ] `tests/schema_examples/v7_12_vcpchat_review_console_exact_patch_execution_preflight.example.yaml` 存在。
+- [ ] `scripts/validate_v7_12_vcpchat_review_console_exact_patch_execution_preflight.js` 存在。
+- [ ] v7.12 记录当前基线 `2837828` 和上一阶段 `v7.11 vcpchat review console exact patch authorization request`。
+- [ ] v7.12 允许只做 VCPChat 状态与文件存在性 preflight，不读取源码正文。
+- [ ] v7.12 必须记录 `preflight_passed=true`、`observed_branch=main`、`observed_head_short=c97ff0c`、`worktree_clean=true`。
+- [ ] v7.12 必须确认既有文件 `main.js`、`preloads/chat.js`、`main.html` 存在。
+- [ ] v7.12 必须确认新文件 `modules/ipc/imageLabReviewHandlers.js` 和 `modules/renderer/imageLabReviewMount.js` 当前不存在且符合 `new_file_expected`。
+- [ ] v7.12 必须保持 `real_vcpchat_write_performed=false`、`real_vcpchat_write_authorized_by_this_record=false`、`implementation_allowed=false`。
+- [ ] v7.12 必须保持 `source_code_body_read_performed=false`、`raw_source_code_copied=false`、`raw_local_path_saved=false`。
+- [ ] v7.12 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.12 保持不创建 renderer mount、preload、`ipcMain.handle` 或 Adapter 执行入口。
+- [ ] v7.12 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
+- [ ] v7.12 默认下一安全阶段为 `v7.13 VCPChat Review Console First Runtime Patch Implementation Authorization`。
+- [ ] `node scripts/validate_v7_12_vcpchat_review_console_exact_patch_execution_preflight.js` 通过。
