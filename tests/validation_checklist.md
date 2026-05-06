@@ -2234,3 +2234,21 @@
 - [ ] v7.0 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
 - [ ] v7.0 默认下一阶段为 `v7.1 VCPChat Preload Surface Read-only Intake`。
 - [ ] `node scripts/validate_v7_0_vcpchat_read_only_intake_sanitized_record.js` 通过。
+
+## v7.1 VCPChat Preload Surface Read-only Intake 检查
+
+- [ ] 当前阶段字符串为 `v7.1 vcpchat preload surface read-only intake`。
+- [ ] `docs/153_v7_1_vcpchat_preload_surface_read_only_intake.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_preload_surface_read_only_intake.md` 存在。
+- [ ] `tests/schema_examples/v7_1_vcpchat_preload_surface_read_only_intake.example.yaml` 存在。
+- [ ] `scripts/validate_v7_1_vcpchat_preload_surface_read_only_intake.js` 存在。
+- [ ] v7.1 记录当前基线 `d1bcf01` 和上一阶段 `v7.0 vcpchat read-only intake sanitized record`。
+- [ ] v7.1 只记录脱敏 preload surface 摘要，必须保持 `authorized_preload_surface_observation_completed=true`、`source_write_performed=false`。
+- [ ] v7.1 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.1 记录只读范围：modules/services/preloadPaths.js、preloads/shared/apiFactory.js、preloads/shared/catalog.js、preloads/shared/roles.js、preloads/chat.js。
+- [ ] v7.1 记录当前未发现 imageLabReview.loadSession / previewDraft / submitDraft / cancel。
+- [ ] v7.1 建议未来使用 dedicated_review_console_allowlist，不直接复用 broad electronAPI。
+- [ ] v7.1 保持不修改真实 VCPChat / VCPToolBox，不创建 IPC/preload/renderer 或 Adapter 执行入口。
+- [ ] v7.1 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
+- [ ] v7.1 默认下一阶段为 `v7.2 VCPChat Review Console Preload Design Gate`。
+- [ ] `node scripts/validate_v7_1_vcpchat_preload_surface_read_only_intake.js` 通过。

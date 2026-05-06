@@ -1,0 +1,127 @@
+status: completed_validated_project_local_v7_1_vcpchat_preload_surface_read_only_intake
+version: v7.1
+current_phase: "v7.1 vcpchat preload surface read-only intake"
+validation_file: scripts/validate_v7_1_vcpchat_preload_surface_read_only_intake.js
+
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: d1bcf01
+  previous_phase: "v7.0 vcpchat read-only intake sanitized record"
+  previous_record: docs/152_v7_0_vcpchat_read_only_intake_sanitized_record.md
+  previous_validation: scripts/validate_v7_0_vcpchat_read_only_intake_sanitized_record.js
+  default_next_phase: "v7.2 VCPChat Review Console Preload Design Gate"
+
+authorized_read_scope:
+  target_repository_name: VCPChat
+  target_local_root_redacted: "<VCPCHAT_LOCAL_ROOT_REDACTED>"
+  target_branch_observed: main
+  target_head_short: c97ff0c
+  files_observed:
+    - modules/services/preloadPaths.js
+    - preloads/shared/apiFactory.js
+    - preloads/shared/catalog.js
+    - preloads/shared/roles.js
+    - preloads/chat.js
+  source_read_authorized: true
+  authorized_preload_surface_observation_completed: true
+  source_read_only: true
+  source_write_performed: false
+
+sanitized_preload_surface_findings:
+  preload_role_resolver:
+    roles_observed:
+      - CHAT
+      - DESKTOP
+      - UTILITY
+    mapping_summary_cn: "role 会映射到 preloads/{role}.js。"
+  api_factory:
+    exposed_helpers:
+      - command
+      - query
+      - subscription
+      - createOps
+      - materializeApi
+      - createCompatApi
+      - exposeRoleApis
+    bridge_summary_cn: "apiFactory 集中封装 ipcRenderer invoke/send/subscribe，并通过 contextBridge 暴露 role API、compat electronAPI 和 path API。"
+  shared_roles:
+    role_key_groups:
+      - SHARED_KEYS
+      - CHAT_KEYS
+      - DESKTOP_KEYS
+      - UTILITY_KEYS
+    chat_role_is_broad: true
+    chat_role_contains_vcp_transport_keys: true
+    utility_role_contains_note_and_image_keys: true
+  chat_preload:
+    exposed_role_api_name: chatAPI
+    exposed_compat_api_name: electronAPI
+    exposes_path_api: true
+    has_local_allowed_keys: true
+    appears_standalone_or_legacy_copy_of_shared_pattern: true
+  image_lab_channels_found:
+    imageLabReview_loadSession: false
+    imageLabReview_previewDraft: false
+    imageLabReview_submitDraft: false
+    imageLabReview_cancel: false
+
+design_implications:
+  review_console_should_not_reuse_broad_electron_api: true
+  recommended_future_shape: dedicated_review_console_allowlist
+  recommended_future_api_name: imageLabReview
+  recommended_future_channel_group:
+    - imageLabReview.loadSession
+    - imageLabReview.previewDraft
+    - imageLabReview.submitDraft
+    - imageLabReview.cancel
+  recommended_gate_cn: "下一阶段先设计专用 Review Console preload allowlist，不直接接入 sendToVCP、文件读取、DailyNote 或图片保存能力。"
+
+sanitization_guard:
+  raw_local_path_saved: false
+  raw_source_code_copied: false
+  env_file_read: false
+  config_env_read: false
+  secret_file_read: false
+  token_or_cookie_read: false
+  package_scripts_executed: false
+  npm_install_executed: false
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_file_created: false
+
+boundary_state:
+  sanitized_record_added: true
+  implementation_task_authorized: false
+  implementation_allowed: false
+  runtime_code_modified: false
+  vcpchat_code_modified: false
+  vcptoolbox_code_modified: false
+  tag_created: false
+  package_created: false
+  github_release_published: false
+  release_assets_uploaded: false
+  vcpchat_preload_surface_intake_completed: true
+  vcpchat_preload_surface_intake_limited_to_authorized_scope: true
+  real_vcptoolbox_source_read: false
+  real_manifest_read: false
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  renderer_runtime_code_created: false
+  adapter_execution_entrypoint_created: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  disk_write_runtime_performed: false
+  image_file_created: false
+
+acceptance_assertions:
+  - "v7.1 只记录 VCPChat preload surface 只读 intake 的脱敏摘要。"
+  - "v7.1 不保存真实本机路径，不复制源码大段内容。"
+  - "v7.1 不修改真实 VCPChat 或 VCPToolBox。"
+  - "v7.1 不创建 IPC、preload 或 renderer 实现代码。"
+  - "v7.1 不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。"
+  - "默认下一阶段是 v7.2 VCPChat Review Console Preload Design Gate。"
