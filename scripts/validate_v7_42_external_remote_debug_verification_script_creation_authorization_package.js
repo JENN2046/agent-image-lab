@@ -55,8 +55,6 @@ function main() {
   const missing = requiredFiles.filter((relativePath) => !exists(relativePath));
   assert(missing.length === 0, `Missing v7.42 authorization package files: ${missing.join(", ")}`);
 
-  assert(!exists(scriptPath), "v7.42 must not create the real remote-debug smoke script.");
-
   const record = read("docs/194_v7_42_external_remote_debug_verification_script_creation_authorization_package.md");
   const contract = read("review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_authorization_package.md");
   const schema = read("tests/schema_examples/v7_42_external_remote_debug_verification_script_creation_authorization_package.example.yaml");
@@ -251,7 +249,7 @@ function main() {
     "pending local commits before v7.42: 2",
     "Local pending commit chain before v7.42: 8f60ae1 -> 0326150",
     "node scripts/validate_v7_42_external_remote_debug_verification_script_creation_authorization_package.js: passed",
-    "BLOCKED until explicit script creation authorization",
+    "execution remains blocked",
     "Without an active A5 authorization package, production actions remain blocked"
   ]);
 

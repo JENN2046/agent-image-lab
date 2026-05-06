@@ -82,7 +82,7 @@ function main() {
   ]);
   const localWorkStateDeclared = hasAll(runState + handoff, [
     "Worktree:",
-    "v7.42 external remote-debug verification script creation authorization package",
+    "v7.43 external remote-debug verification script creation execution record",
     "Push/tag/release"
   ]);
 

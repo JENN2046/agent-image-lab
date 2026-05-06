@@ -3008,3 +3008,23 @@
 - [ ] v7.42 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.42 默认下一安全阶段为 `BLOCKED until explicit script creation authorization`。
 - [ ] `node scripts/validate_v7_42_external_remote_debug_verification_script_creation_authorization_package.js` 通过。
+
+## v7.43 External Remote Debug Verification Script Creation Execution Record 检查
+
+- [ ] 当前阶段字符串为 `v7.43 external remote-debug verification script creation execution record`。
+- [ ] `scripts/run_vcpchat_review_console_remote_debug_smoke.ps1` 存在。
+- [ ] `docs/195_v7_43_external_remote_debug_verification_script_creation_execution_record.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_execution_record.md` 存在。
+- [ ] `tests/schema_examples/v7_43_external_remote_debug_verification_script_creation_execution_record.example.yaml` 存在。
+- [ ] `scripts/validate_v7_43_external_remote_debug_verification_script_creation_execution_record.js` 存在。
+- [ ] v7.43 记录上一阶段为 `v7.42 external remote-debug verification script creation authorization package`。
+- [ ] v7.43 必须记录 `authorization_received=true`、`authorized_by=current_user`、`script_creation_only=true`、`execution_authorized=false`。
+- [ ] v7.43 必须记录 `script_creation_authorized_by_this_phase=true`、`remote_debug_script_created=true`、`script_run_by_this_phase=false`。
+- [ ] 脚本默认参数必须包含 `DryRun=true`、`Execute=false`、`RemoteDebugPort=9222`。
+- [ ] 脚本只能输出脱敏 JSON 到 stdout，不得写 OutputJson 文件。
+- [ ] 脚本不得包含 Start-Process、Invoke-WebRequest、Invoke-RestMethod、TcpClient、WebSocket、Set-Content、Out-File、New-Item、Remove-Item、localhost、127.0.0.1、http/https/ws endpoint 或 bridge 方法名。
+- [ ] v7.43 必须保持 VCPChat 未启动、CDP 未访问、Runtime.evaluate 未执行、bridge 未调用。
+- [ ] v7.43 必须保持插件/API/DailyNote/VCP 记忆/图片/依赖/manifest/lockfile/VCPChat 修改/远端推送均未发生。
+- [ ] v7.43 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.43 默认下一安全阶段为 `BLOCKED until explicit remote-debug script execution authorization`。
+- [ ] `node scripts/validate_v7_43_external_remote_debug_verification_script_creation_execution_record.js` 通过。

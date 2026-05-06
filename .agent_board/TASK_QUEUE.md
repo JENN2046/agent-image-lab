@@ -56,7 +56,7 @@ none
 ```text
 1. Keep Adapter and Review Console work in no-execution / no-external-read mode unless an active A5 authorization package exists.
 2. If user authorizes remote or release movement, request exact target and run preflight before any push/tag/release.
-3. BLOCKED until explicit script creation authorization before creating scripts/run_vcpchat_review_console_remote_debug_smoke.ps1.
+3. BLOCKED until explicit remote-debug script execution authorization before running scripts/run_vcpchat_review_console_remote_debug_smoke.ps1.
 4. Update CHECKPOINT.md, RUN_STATE.md, VALIDATION_LOG.md, and HANDOFF.md after each meaningful batch.
 ```
 
@@ -93,12 +93,13 @@ none
 28. Updated MVP validation routing so full local validation passes at v7.40.
 29. Completed v7.41 external remote-debug verification script creation record without creating the real script.
 30. Completed v7.42 external remote-debug verification script creation authorization package template without activating approval.
+31. Completed v7.43 remote-debug smoke script creation without running it.
 ```
 
 ### blocked
 
 ```text
-1. Real remote-debug script creation is blocked until the user explicitly authorizes scripts/run_vcpchat_review_console_remote_debug_smoke.ps1 creation scope.
+1. Real remote-debug script execution is blocked until the user explicitly authorizes running scripts/run_vcpchat_review_console_remote_debug_smoke.ps1.
 ```
 
 ### skipped

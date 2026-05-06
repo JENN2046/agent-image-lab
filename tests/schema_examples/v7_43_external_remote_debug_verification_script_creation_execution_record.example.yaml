@@ -1,0 +1,93 @@
+status: planned_validated_v7_43_external_remote_debug_verification_script_creation_execution_record
+version: v7.43
+current_phase: "v7.43 external remote-debug verification script creation execution record"
+validation_file: scripts/validate_v7_43_external_remote_debug_verification_script_creation_execution_record.js
+
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  origin_master_short: 5a7f5ba
+  local_head_before_batch: 975da9a
+  local_pending_commits_before_this_batch:
+    - 8f60ae1
+    - 0326150
+    - 975da9a
+  previous_phase: "v7.42 external remote-debug verification script creation authorization package"
+  previous_record: docs/194_v7_42_external_remote_debug_verification_script_creation_authorization_package.md
+  default_next_phase: "BLOCKED until explicit remote-debug script execution authorization"
+
+creation_authorization:
+  authorization_received: true
+  authorized_by: current_user
+  authorized_at: "2026-05-06"
+  script_creation_only: true
+  execution_authorized: false
+
+created_script:
+  path: scripts/run_vcpchat_review_console_remote_debug_smoke.ps1
+  created_by_this_phase: true
+  default_dry_run: true
+  default_execute: false
+  preflight_only_in_this_version: true
+  emits_sanitized_json_to_stdout: true
+  writes_output_file: false
+  launches_vcpchat: false
+  accesses_cdp: false
+  calls_bridge_methods: false
+  reads_vcpchat_source: false
+  modifies_vcpchat_source: false
+  reads_vcptoolbox_source: false
+  modifies_vcptoolbox_source: false
+
+script_interface:
+  parameters:
+    - VcpChatRoot
+    - ExpectedHead
+    - RemoteDebugPort
+    - DryRun
+    - Execute
+    - OutputJson
+  default_values:
+    RemoteDebugPort: 9222
+    DryRun: true
+    Execute: false
+
+this_phase_boundary:
+  script_creation_authorized_by_this_phase: true
+  remote_debug_script_created: true
+  script_run_by_this_phase: false
+  app_launch_authorized_by_this_phase: false
+  app_launch_performed_by_this_phase: false
+  remote_debug_authorized_by_this_phase: false
+  remote_debug_used_by_this_phase: false
+  cdp_access_authorized_by_this_phase: false
+  cdp_endpoint_accessed_by_this_phase: false
+  runtime_evaluate_authorized_by_this_phase: false
+  runtime_evaluate_performed_by_this_phase: false
+  bridge_method_invocation_performed: false
+  bridge_load_session_called: false
+  bridge_preview_draft_called: false
+  bridge_submit_draft_called: false
+  bridge_cancel_called: false
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_created: false
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+  vcpchat_source_read: false
+  vcpchat_modified_by_this_phase: false
+  vcptoolbox_source_read: false
+  vcptoolbox_modified_by_this_phase: false
+  output_file_written: false
+  tag_created: false
+  push_performed: false
+  github_release_performed: false
+
+notes_cn:
+  - "真实 remote-debug 脚本文件已创建。"
+  - "脚本没有运行。"
+  - "VCPChat 没有启动，CDP 没有访问，bridge 没有调用。"
+  - "下一步运行脚本需要新的明确授权。"
