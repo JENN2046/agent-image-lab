@@ -2789,3 +2789,22 @@
 - [ ] v7.31 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.31 默认下一安全阶段为 `v7.32 VCPChat One-time Remote Debug Runtime Verification Preflight`。
 - [ ] `node scripts/validate_v7_31_vcpchat_renderer_global_verification_gate.js` 通过。
+
+## v7.32 VCPChat One-time Remote Debug Runtime Verification Preflight 检查
+
+- [ ] 当前阶段字符串为 `v7.32 vcpchat one-time remote-debug runtime verification preflight`。
+- [ ] `docs/184_v7_32_vcpchat_one_time_remote_debug_runtime_verification_preflight.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_one_time_remote_debug_runtime_verification_preflight.md` 存在。
+- [ ] `tests/schema_examples/v7_32_vcpchat_one_time_remote_debug_runtime_verification_preflight.example.yaml` 存在。
+- [ ] `scripts/validate_v7_32_vcpchat_one_time_remote_debug_runtime_verification_preflight.js` 存在。
+- [ ] v7.32 记录 `current_head: 49ffae2` 和上一阶段 `v7.31 vcpchat renderer global verification gate`。
+- [ ] v7.32 必须记录候选一次性启动命令包含 `--remote-debugging-port=9222` 和 `--desktop-only`。
+- [ ] v7.32 必须记录 pre-launch port gate：端口占用、已有 debug target、非目标应用均停止。
+- [ ] v7.32 必须记录 CDP 只读策略：只允许 `Runtime.evaluate`，禁止导航、输入、DOM mutation 和 side-effectful calls。
+- [ ] v7.32 必须记录不得调用 bridge loadSession / previewDraft / submitDraft / cancel。
+- [ ] v7.32 必须记录目标验证范围：`window.imageLabReview`、四个 allowlist 方法、`imageLabReviewMount`、`window.imageLabReviewRuntime`、三类 draft 和 `prototype_guard`。
+- [ ] v7.32 必须保持 `app_launch_performed_by_this_phase=false`、`remote_debug_used_by_this_phase=false`、`cdp_endpoint_accessed_by_this_phase=false`、`runtime_evaluate_performed_by_this_phase=false`。
+- [ ] v7.32 必须保持 `vcpchat_modified_by_this_phase=false`、`test_harness_created_by_this_phase=false`、`dependency_changed=false`、`vcpchat_pushed=false`。
+- [ ] v7.32 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.32 默认下一安全阶段为 `v7.33 VCPChat One-time Remote Debug Runtime Verification Execution`。
+- [ ] `node scripts/validate_v7_32_vcpchat_one_time_remote_debug_runtime_verification_preflight.js` 通过。

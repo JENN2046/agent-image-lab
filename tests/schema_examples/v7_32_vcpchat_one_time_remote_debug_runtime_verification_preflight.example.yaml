@@ -1,0 +1,81 @@
+status: completed_validated_v7_32_one_time_remote_debug_runtime_verification_preflight
+version: v7.32
+current_phase: "v7.32 vcpchat one-time remote-debug runtime verification preflight"
+validation_file: scripts/validate_v7_32_vcpchat_one_time_remote_debug_runtime_verification_preflight.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: 49ffae2
+  previous_phase: "v7.31 vcpchat renderer global verification gate"
+  previous_record: docs/183_v7_31_vcpchat_renderer_global_verification_gate.md
+  default_next_phase: "v7.33 VCPChat One-time Remote Debug Runtime Verification Execution"
+target_baseline:
+  target_repository_name: VCPChat
+  target_branch: main
+  target_head_short: b320e39
+  require_vcpchat_worktree_clean: true
+candidate_launch_command:
+  command: cmd /d /s /c "chcp 65001 >nul && .\node_modules\electron\dist\electron.exe --remote-debugging-port=9222 . --desktop-only"
+  remote_debug_port: 9222
+  command_execution_performed_by_this_phase: false
+  remote_debug_port_opened_by_this_phase: false
+proposed_cdp_read_only_probe:
+  local_debug_endpoint: http://127.0.0.1:9222/json
+  endpoint_access_performed_by_this_phase: false
+  allowed_cdp_methods_next_phase:
+    - Runtime.evaluate
+  forbidden_cdp_methods_next_phase:
+    - Page.navigate
+    - DOM.setAttributeValue
+    - Input.dispatchKeyEvent
+    - Input.dispatchMouseEvent
+verification_assertions:
+  host_bridge:
+    - window.imageLabReview
+    - window.imageLabReview.loadSession
+    - window.imageLabReview.previewDraft
+    - window.imageLabReview.submitDraft
+    - window.imageLabReview.cancel
+  renderer_mount:
+    - imageLabReviewMount
+    - window.imageLabReviewRuntime
+  draft_bundle:
+    - review_session_draft
+    - image_case_draft
+    - memory_delta_draft
+  prototype_guard:
+    - api_called=false
+    - daily_note_called=false
+    - vcp_plugin_called=false
+    - disk_write_performed=false
+    - image_file_created=false
+side_effect_guard:
+  app_launch_performed_by_this_phase: false
+  remote_debug_used_by_this_phase: false
+  cdp_endpoint_accessed_by_this_phase: false
+  runtime_evaluate_performed_by_this_phase: false
+  vcpchat_modified_by_this_phase: false
+  test_harness_created_by_this_phase: false
+  review_console_bridge_load_session_called: false
+  review_console_bridge_preview_draft_called: false
+  review_console_bridge_submit_draft_called: false
+  review_console_bridge_cancel_called: false
+  review_console_bridge_plugin_called: false
+  review_console_bridge_api_called: false
+  review_console_bridge_daily_note_called: false
+  review_console_bridge_vcp_memory_written: false
+  review_console_bridge_disk_write_performed: false
+  review_console_bridge_image_created: false
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+  vcpchat_pushed: false
+  branch_deleted: false
+  github_release_performed: false
+cleanup_requirements_next_phase:
+  close_launched_process_tree: true
+  restore_vcpchat_worktree_if_startup_touches_known_readiness_file: true
+  verify_vcpchat_worktree_clean_after_cleanup: true
+next_gate:
+  next_safe_phase: "v7.33 VCPChat One-time Remote Debug Runtime Verification Execution"
+  audit_summary_cn: "v7.32 只完成一次性 remote-debug runtime verification 的执行前门槛；未启动应用、未使用 CDP。"
