@@ -2081,3 +2081,19 @@
 - [ ] v6.1 不读取真实 VCPChat / VCPToolBox，不读取真实 manifest，不创建 IPC/preload/renderer 或 Adapter 执行入口。
 - [ ] v6.1 保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_file_created=false`。
 - [ ] `node scripts/validate_v6_1_runtime_product_surface_audit.js` 通过。
+
+## v6.2 Runtime State Model Alignment 检查
+
+- [ ] 当前阶段字符串为 `v6.2 runtime state model alignment`。
+- [ ] `docs/144_v6_2_runtime_state_model_alignment.md` 存在。
+- [ ] `tests/schema_examples/v6_2_runtime_state_model_alignment.example.yaml` 存在。
+- [ ] `scripts/validate_v6_2_runtime_state_model_alignment.js` 存在。
+- [ ] v6.2 记录当前基线 `b2ab526` 和上一阶段 `v6.1 runtime product surface audit`。
+- [ ] v6.2 状态流覆盖 `review_session_draft -> image_case_draft -> memory_delta_draft -> task_panel_state -> prototype_guard -> host_submit_ack`。
+- [ ] v6.2 明确 human_review 覆盖 ai_review、accepted 必须人工批准、memory_approval 未 approved 时保持 draft。
+- [ ] v6.2 明确 confirmed 只是写入申请，不代表 DailyNote 已执行。
+- [ ] v6.2 明确 Task Panel 只展示状态和下一授权点，不触发真实执行。
+- [ ] v6.2 默认下一阶段为 `v6.3 Host Bridge Contract v2`。
+- [ ] v6.2 不修改 runtime 代码，不读取真实 VCPChat / VCPToolBox，不读取真实 manifest，不创建 IPC/preload/renderer 或 Adapter 执行入口。
+- [ ] v6.2 保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_file_created=false`。
+- [ ] `node scripts/validate_v6_2_runtime_state_model_alignment.js` 通过。

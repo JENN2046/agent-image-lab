@@ -1,0 +1,118 @@
+status: completed_validated_project_local_v6_2_runtime_state_model_alignment
+version: v6.2
+current_phase: "v6.2 runtime state model alignment"
+validation_file: scripts/validate_v6_2_runtime_state_model_alignment.js
+
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: b2ab526
+  previous_phase: "v6.1 runtime product surface audit"
+  previous_record: docs/143_v6_1_runtime_product_surface_audit.md
+  previous_validation: scripts/validate_v6_1_runtime_product_surface_audit.js
+  default_next_phase: "v6.3 Host Bridge Contract v2"
+
+alignment_goal:
+  summary_cn: "把 runtime 草案输出、schema 边界、Task Panel 状态和 no-execution guard 对齐成一条可验收状态流。"
+  implementation_not_authorized_by_this_record: true
+  no_runtime_code_change_required: true
+  no_external_read_required: true
+
+source_evidence:
+  runtime_field_mapping: review_console/runtime_prototype/FIELD_MAPPING.md
+  runtime_output_example: tests/schema_examples/v1_2_runtime_prototype_output.example.yaml
+  task_panel_state_example: tests/schema_examples/v1_5_task_panel_state.example.yaml
+  review_session_schema: schemas/review_session.schema.yaml
+  image_case_schema: schemas/image_case.schema.yaml
+  memory_delta_schema: schemas/memory_delta.schema.yaml
+  task_panel_state_schema: task_panel/task_panel_state.schema.yaml
+  runtime_product_surface_audit: docs/143_v6_1_runtime_product_surface_audit.md
+
+runtime_state_flow:
+  host_input_normalized:
+    owner: host_bridge_mock
+    output_state: normalized_session
+    audit_summary_cn: "受控占位 session 被规范化，不读取真实 VCPChat。"
+  review_session_draft_built:
+    owner: runtime_app
+    output_state: review_session_draft
+    audit_summary_cn: "human_review 覆盖 ai_review，memory_preview 只是中文预览。"
+  image_case_draft_built:
+    owner: runtime_app
+    output_state: image_case_draft
+    audit_summary_cn: "accepted 必须有人工作为批准来源，资产仍是占位引用。"
+  memory_delta_draft_built:
+    owner: runtime_app
+    output_state: memory_delta_draft
+    audit_summary_cn: "write_mode 来自 memory_approval，confirmed 也只是写入申请。"
+  prototype_guard_checked:
+    owner: runtime_guard
+    output_state: guard_result
+    audit_summary_cn: "检查 no-execution flag、accepted 人工审批和 memory write 审批不变量。"
+  host_submit_ack_generated:
+    owner: host_bridge_mock
+    output_state: host_submit_ack
+    audit_summary_cn: "host mock 只生成回执，side_effects_performed=false。"
+  task_panel_state_projected:
+    owner: task_panel_status_backbone
+    output_state: task_panel_state
+    audit_summary_cn: "Task Panel 只展示状态和下一授权点，不触发真实执行。"
+
+state_alignment_rules:
+  review_to_final:
+    ai_review_is_suggestion: true
+    human_review_overrides_ai: true
+    final_review_source_required: human_review
+    no_human_review_prevents_accepted: true
+  review_to_image_case:
+    task_id_must_match: true
+    case_id_must_match: true
+    final_score_uses_human_review: true
+    accepted_requires_human_approval: true
+    ai_archive_recommendation_is_final: false
+  review_to_memory_delta:
+    memory_preview_is_preview_only: true
+    chinese_diary_content_required: true
+    memory_approval_pending_maps_to_write_mode: draft
+    memory_approval_rejected_maps_to_write_mode: forbidden
+    memory_approval_approved_maps_to_write_mode: confirmed
+    confirmed_is_write_request_not_daily_note_execution: true
+    daily_note_called_by_runtime: false
+  drafts_to_task_panel:
+    review_status_source: review_session_draft
+    asset_status_source: image_case_draft
+    memory_status_source: memory_delta_draft
+    no_execution_guard_source: prototype_guard
+    next_authorization_point_required: true
+  guard_to_host_ack:
+    guard_must_pass_before_host_ack: true
+    host_ack_is_not_external_write: true
+    side_effects_performed_must_be_false: true
+
+boundary_state:
+  runtime_code_modified: false
+  tag_created: false
+  package_created: false
+  github_release_published: false
+  release_assets_uploaded: false
+  real_vcpchat_source_read: false
+  real_vcptoolbox_source_read: false
+  real_manifest_read: false
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  renderer_runtime_code_created: false
+  adapter_execution_entrypoint_created: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  disk_write_runtime_performed: false
+  image_file_created: false
+
+acceptance_assertions:
+  - "v6.2 只对齐状态模型，不修改 runtime 代码。"
+  - "review_session_draft、image_case_draft、memory_delta_draft、task_panel_state、prototype_guard 和 host_submit_ack 已形成一条状态流。"
+  - "accepted 必须有人工作为批准来源。"
+  - "memory_approval 未 approved 时，memory_delta.write_mode 保持 draft。"
+  - "confirmed 只表示写入申请，不表示 DailyNote 已执行。"
+  - "默认下一阶段是 v6.3 Host Bridge Contract v2。"
