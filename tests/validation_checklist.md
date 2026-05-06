@@ -2066,3 +2066,18 @@
 - [ ] v6.0 不读取真实 VCPChat / VCPToolBox，不读取真实 manifest，不创建 IPC/preload/renderer 或 Adapter 执行入口。
 - [ ] v6.0 保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_file_created=false`。
 - [ ] `node scripts/validate_v6_0_next_milestone_planning.js` 通过。
+
+## v6.1 Runtime Product Surface Audit 检查
+
+- [ ] 当前阶段字符串为 `v6.1 runtime product surface audit`。
+- [ ] `docs/143_v6_1_runtime_product_surface_audit.md` 存在。
+- [ ] `tests/schema_examples/v6_1_runtime_product_surface_audit.example.yaml` 存在。
+- [ ] `scripts/validate_v6_1_runtime_product_surface_audit.js` 存在。
+- [ ] v6.1 记录当前基线 `926b2eb` 和上一阶段 `v6.0 next milestone planning`。
+- [ ] v6.1 审计范围覆盖 `review_console/runtime_prototype/`、runtime validation suite、Task Panel、核心 schema 和 v2.0 产品化基线。
+- [ ] v6.1 明确 `browser_runtime_shell`、`shared_runtime_guard`、`host_bridge_mock`、`draft_field_mapping`、`runtime_validation_suite`、`task_panel_status_backbone`、`schema_contract_surface` 和 `embed_contract_preflight_surface`。
+- [ ] v6.1 明确真实 VCPChat window、真实 IPC/preload/renderer 集成、DailyNote executor、plugin executor、图片二进制资产库和 GitHub Release 发布自动化尚不是当前产品 runtime。
+- [ ] v6.1 默认下一阶段为 `v6.2 Runtime State Model Alignment`。
+- [ ] v6.1 不读取真实 VCPChat / VCPToolBox，不读取真实 manifest，不创建 IPC/preload/renderer 或 Adapter 执行入口。
+- [ ] v6.1 保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_file_created=false`。
+- [ ] `node scripts/validate_v6_1_runtime_product_surface_audit.js` 通过。
