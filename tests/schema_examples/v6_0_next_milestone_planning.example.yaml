@@ -1,0 +1,124 @@
+status: completed_validated_project_local_v6_0_next_milestone_planning
+version: v6.0
+current_phase: "v6.0 next milestone planning"
+validation_file: scripts/validate_v6_0_next_milestone_planning.js
+
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: e31e57e
+  previous_phase: "v5.16 release publication preflight"
+  previous_record: docs/141_v5_16_release_publication_preflight.md
+  previous_validation: scripts/validate_v5_16_release_publication_preflight.js
+  release_candidate_tag: v5.14-release-candidate-validation-baseline
+  release_package_sha256: 2fa0204a855ea9b74a36c5f8bf701356dd35414d3b35d3e85e1bf367492197db
+  release_publication_preflight_ready: true
+  github_release_published: false
+  release_assets_uploaded: false
+
+planning_goal:
+  summary_cn: "v6.0 只记录下一轮里程碑规划，把 release 发布、runtime 产品面、Adapter 回合、记忆交接和 VCPChat 嵌入前置检查拆开。"
+  current_action_cn: "本记录不执行发布、不读取真实源码、不创建运行时代码。"
+  implementation_not_authorized_by_this_record: true
+
+work_tracks:
+  release_track:
+    name: "v5.17 GitHub Release Publication Authorization"
+    allowed_now: false
+    explicit_authorization_required: true
+    reason_cn: "发布 GitHub Release 和上传资产是远端写入，必须单独授权。"
+  runtime_product_track:
+    name: "v6.1 Runtime Product Surface Audit"
+    allowed_now: true
+    explicit_authorization_required: false
+    reason_cn: "只读盘点和本地文档记录可以作为默认下一步。"
+  runtime_state_track:
+    name: "v6.2 Runtime State Model Alignment"
+    allowed_now: true
+    explicit_authorization_required: false
+    reason_cn: "只补齐状态模型文档、schema 映射和样例。"
+  host_bridge_track:
+    name: "v6.3 Host Bridge Contract v2"
+    allowed_now: true
+    explicit_authorization_required: false
+    reason_cn: "只写 contract 草案，不读取真实 VCPChat，不创建 preload 或 IPC handler。"
+  adapter_review_console_track:
+    name: "v6.4 Adapter -> Review Console Runtime Roundtrip Fixture"
+    allowed_now: true
+    explicit_authorization_required: false
+    reason_cn: "只使用占位 dry-run 数据，不选择或调用真实插件。"
+  memory_handoff_track:
+    name: "v6.5 Memory Handoff Runtime Status"
+    allowed_now: true
+    explicit_authorization_required: false
+    reason_cn: "只记录 no-write 状态，不调用 DailyNote，不写 VCP 记忆。"
+  vcpchat_integration_track:
+    name: "v6.6 VCPChat Embed Implementation Preflight"
+    allowed_now: true
+    explicit_authorization_required: false
+    reason_cn: "只做实现前 preflight，不读取真实 VCPChat，不创建实现代码。"
+
+recommended_sequence:
+  - phase: v6.1
+    title: "Runtime Product Surface Audit"
+    default_next_step: true
+  - phase: v6.2
+    title: "Runtime State Model Alignment"
+    default_next_step: false
+  - phase: v6.3
+    title: "Host Bridge Contract v2"
+    default_next_step: false
+  - phase: v6.4
+    title: "Adapter -> Review Console Runtime Roundtrip Fixture"
+    default_next_step: false
+  - phase: v6.5
+    title: "Memory Handoff Runtime Status"
+    default_next_step: false
+  - phase: v6.6
+    title: "VCPChat Embed Implementation Preflight"
+    default_next_step: false
+  - phase: v6.7
+    title: "Release or Integration Decision Gate"
+    default_next_step: false
+
+boundary_state:
+  tag_creation_required_now: false
+  package_creation_required_now: false
+  github_release_created: false
+  github_release_published: false
+  release_assets_uploaded: false
+  release_publish_authorized: false
+  real_vcpchat_source_read: false
+  real_vcptoolbox_source_read: false
+  real_manifest_read: false
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  renderer_runtime_code_created: false
+  adapter_execution_entrypoint_created: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_file_created: false
+
+authorization_stop_gates:
+  github_release_publication:
+    allowed_without_new_authorization: false
+    audit_summary_cn: "发布 GitHub Release 或上传资产必须另行明确授权。"
+  real_vcpchat_read:
+    allowed_without_new_authorization: false
+    audit_summary_cn: "读取真实 VCPChat 必须另行填写根目录、读取范围、命令和脱敏规则。"
+  runtime_implementation:
+    allowed_without_new_authorization: false
+    audit_summary_cn: "创建 IPC/preload/renderer 或其他运行时代码必须另行明确授权。"
+  plugin_or_api_execution:
+    allowed_without_new_authorization: false
+    audit_summary_cn: "插件、API 或真实生图调用必须另行限定对象、次数、输入输出和回滚方案。"
+  dailynote_or_vcp_memory_write:
+    allowed_without_new_authorization: false
+    audit_summary_cn: "DailyNote 或 VCP 记忆写入必须另行明确授权，并保留撤销记录。"
+
+notes_cn:
+  - "v6.0 是下一轮路线记录，不是发布动作。"
+  - "v6.0 是下一轮路线记录，不是 runtime 实现授权。"
+  - "默认推荐进入 v6.1 Runtime Product Surface Audit。"

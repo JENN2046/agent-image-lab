@@ -2050,3 +2050,19 @@
 - [ ] v5.16 不创建新 tag、不重新打包、不调用 GitHub API、不发布 GitHub Release。
 - [ ] v5.16 保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_file_created=false`。
 - [ ] `node scripts/validate_v5_16_release_publication_preflight.js` 通过。
+
+## v6.0 Next Milestone Planning 检查
+
+- [ ] 当前阶段字符串为 `v6.0 next milestone planning`。
+- [ ] `docs/142_v6_0_next_milestone_planning.md` 存在。
+- [ ] `tests/schema_examples/v6_0_next_milestone_planning.example.yaml` 存在。
+- [ ] `scripts/validate_v6_0_next_milestone_planning.js` 存在。
+- [ ] v6.0 记录当前基线 `e31e57e`、上一阶段 `v5.16 release publication preflight` 和 release candidate tag `v5.14-release-candidate-validation-baseline`。
+- [ ] v6.0 记录 release track、runtime product track、runtime state track、host bridge track、Adapter handoff track、memory handoff track 和 VCPChat integration track。
+- [ ] v6.0 默认下一阶段为 `v6.1 Runtime Product Surface Audit`。
+- [ ] v6.0 推荐序列包含 `v6.2 Runtime State Model Alignment`、`v6.3 Host Bridge Contract v2`、`v6.4 Adapter -> Review Console Runtime Roundtrip Fixture`、`v6.5 Memory Handoff Runtime Status`、`v6.6 VCPChat Embed Implementation Preflight` 和 `v6.7 Release or Integration Decision Gate`。
+- [ ] v6.0 明确 GitHub Release 发布、真实 VCPChat 读取、runtime 实现、插件/API 执行、DailyNote/VCP 记忆写入均需单独授权。
+- [ ] v6.0 不创建 tag、不重新打包、不发布 GitHub Release、不上传资产。
+- [ ] v6.0 不读取真实 VCPChat / VCPToolBox，不读取真实 manifest，不创建 IPC/preload/renderer 或 Adapter 执行入口。
+- [ ] v6.0 保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_file_created=false`。
+- [ ] `node scripts/validate_v6_0_next_milestone_planning.js` 通过。
