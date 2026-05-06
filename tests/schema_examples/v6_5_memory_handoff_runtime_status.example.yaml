@@ -1,0 +1,196 @@
+status: completed_validated_project_local_v6_5_memory_handoff_runtime_status
+version: v6.5
+current_phase: "v6.5 memory handoff runtime status"
+validation_file: scripts/validate_v6_5_memory_handoff_runtime_status.js
+
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: 8ac78c7
+  previous_phase: "v6.4 adapter review console runtime roundtrip fixture"
+  previous_record: docs/146_v6_4_adapter_review_console_roundtrip_fixture.md
+  previous_validation: scripts/validate_v6_4_adapter_review_console_roundtrip_fixture.js
+  default_next_phase: "v6.6 VCPChat Embed Implementation Preflight"
+
+status_goal:
+  summary_cn: "展示 runtime 记忆预览、记忆审批、memory_delta 草案和 DailyNote no-write 状态。"
+  status_only: true
+  implementation_not_authorized_by_this_record: true
+  no_runtime_code_change_required: true
+  no_daily_note_write_allowed: true
+
+runtime_memory_status_flow:
+  memory_preview_displayed:
+    output_state: memory_preview_status
+    audit_summary_cn: "展示中文记忆预览，不写入 DailyNote。"
+  memory_approval_reviewed:
+    output_state: memory_approval_status
+    audit_summary_cn: "人工审批只决定状态路线，不触发写入。"
+  memory_delta_draft_built:
+    output_state: memory_delta_draft
+    audit_summary_cn: "根据审批状态生成 memory_delta 草案。"
+  write_request_status_projected:
+    output_state: memory_write_request_status
+    audit_summary_cn: "should_write_to_vcp 只表示写入申请状态。"
+  archivist_review_pending:
+    output_state: archivist_review_status
+    audit_summary_cn: "Archivist_Agent 仍需复查记忆污染和安全风险。"
+  imagelab_master_review_pending:
+    output_state: imagelab_master_review_status
+    audit_summary_cn: "ImageLab_Master 仍需项目级复核。"
+  daily_note_preflight_blocked:
+    output_state: daily_note_preflight_status
+    audit_summary_cn: "DailyNote 写入前授权仍为 blocked。"
+  execution_audit_stub_no_write:
+    output_state: no_write_execution_audit_stub
+    audit_summary_cn: "只保留 no-write 审计占位。"
+  task_panel_memory_status_projected:
+    output_state: task_panel_memory_status
+    audit_summary_cn: "Task Panel 展示记忆状态和下一授权点。"
+
+pending_memory_request:
+  memory_preview:
+    chinese_diary_title: "v6.5 pending 记忆草案"
+    chinese_diary_content: "本记录展示 pending 状态下的中文记忆预览。当前只是草案，不调用 DailyNote，不写 VCP 长期记忆。"
+    target_notebook: Runtime_Memory_Handoff_Audit
+    safety:
+      contains_secret: false
+      contains_private_path: false
+      contains_customer_private_data: false
+      contains_image_binary: false
+  memory_approval:
+    status: pending
+    approved_by: null
+    approved_at: null
+    rejection_reason_cn: null
+  memory_delta_draft:
+    delta_id: memory-delta-v6-5-pending-001
+    task_id: task-v6-5-memory-status-001
+    case_id: case-v6-5-memory-status-001
+    write_mode: draft
+    approval_status: pending
+    chinese_diary_title: "v6.5 pending 记忆草案"
+    chinese_diary_content: "本记录展示 pending 状态下的中文记忆预览。当前只是草案，不调用 DailyNote，不写 VCP 长期记忆。"
+    final_decision:
+      should_write_to_vcp: false
+      should_show_in_review_console: true
+      rejection_reason_cn: null
+  runtime_status_cn: "记忆仍是草案，不进入 DailyNote 写入链。"
+
+approved_request_no_write:
+  memory_approval:
+    status: approved
+    approved_by: human_reviewer_placeholder
+    approved_at: "2026-05-06T10:20:00+08:00"
+    note_cn: "人工只批准写入申请进入未来受控流程，不批准当前执行 DailyNote 写入。"
+  memory_delta_draft:
+    delta_id: memory-delta-v6-5-approved-no-write-001
+    task_id: task-v6-5-memory-status-001
+    case_id: case-v6-5-memory-status-001
+    write_mode: confirmed
+    approval_required: true
+    approval_status: approved
+    approved_by: human_reviewer_placeholder
+    approved_at: "2026-05-06T10:20:00+08:00"
+    chinese_diary_title: "v6.5 已批准申请但未写入"
+    chinese_diary_content: "本记录说明：人工批准的只是记忆写入申请，不是 DailyNote 写入回执。当前没有调用 DailyNote，也没有写入 VCP 长期记忆。"
+    memory_safety:
+      contains_secret: false
+      contains_private_path: false
+      contains_customer_private_data: false
+      contains_image_binary: false
+    final_decision:
+      should_write_to_vcp: true
+      should_show_in_review_console: true
+      rejection_reason_cn: null
+  daily_note_preflight_status:
+    preflight_required: true
+    preflight_status: blocked_until_explicit_user_authorization
+    daily_note_write_authorized: false
+    daily_note_called: false
+    vcp_memory_written: false
+    actual_write_performed: false
+  execution_audit_stub:
+    audit_type: no_write_handoff
+    daily_note_called: false
+    vcp_memory_written: false
+    actual_write_performed: false
+    audit_summary_cn: "写入申请已获批但真实写入仍未发生。"
+
+forbidden_sensitive_rejection:
+  safety_gate:
+    source_type: runtime_memory_safety_gate
+    raw_sensitive_text_copied: false
+    contains_sensitive_marker: true
+    rejection_required: true
+    allowed_record_cn: "仅允许记录中文脱敏拒绝摘要和安全标记。"
+  memory_delta_draft:
+    delta_id: memory-delta-v6-5-forbidden-001
+    task_id: task-v6-5-memory-status-001
+    case_id: case-v6-5-memory-status-forbidden-001
+    write_mode: forbidden
+    approval_status: rejected
+    chinese_diary_title: "v6.5 敏感内容拒绝写入"
+    chinese_diary_content: "本记录仅保留中文脱敏拒绝摘要：候选内容被标记为可能涉及敏感配置风险，因此不得写入长期记忆，不得复制原文，不得调用 DailyNote。"
+    preserved_original:
+      prompt_en: null
+      plugin_name: null
+      model_name: null
+      file_ref: null
+    tags:
+      - v6.5
+      - 安全审计
+      - 拒绝写入
+      - no-write
+    memory_safety:
+      contains_secret: true
+      contains_private_path: true
+      contains_customer_private_data: true
+      contains_image_binary: false
+      safety_notes_cn: "只保留安全标记和中文脱敏说明，不复制敏感原文。"
+    final_decision:
+      should_write_to_vcp: false
+      should_show_in_review_console: true
+      rejection_reason_cn: "本条记忆因被标记为可能包含敏感配置风险，被拒绝写入长期记忆。"
+
+task_panel_memory_status:
+  write_mode: draft
+  approval_status: pending
+  should_write_to_vcp: false
+  daily_note_write_authorized: false
+  daily_note_called: false
+  vcp_memory_written: false
+  actual_write_performed: false
+  archivist_review_required: true
+  imagelab_master_review_required: true
+  memory_summary_cn: "Runtime 只展示记忆申请状态；DailyNote 写入仍未授权。"
+  next_authorization_point:
+    authorization_required: true
+    authorization_name: v6_6_vcpchat_embed_implementation_preflight
+
+no_write_guard:
+  daily_note_write_authorized: false
+  daily_note_called: false
+  vcp_memory_written: false
+  actual_write_performed: false
+  daily_note_write_proof_present: false
+  disk_write_performed: false
+  image_file_created: false
+  image_binary_saved_to_memory: false
+  raw_sensitive_content_saved: false
+  preserved_original_contains_sensitive_text: false
+  tags_contain_sensitive_text: false
+  audit_log_contains_sensitive_text: false
+  api_called: false
+  vcp_plugin_called: false
+  real_vcpchat_source_read: false
+  real_vcptoolbox_source_read: false
+  real_manifest_read: false
+
+acceptance_assertions:
+  - "v6.5 只展示 memory handoff runtime status。"
+  - "should_write_to_vcp=true 只表示写入申请获批，不表示 DailyNote 已写入。"
+  - "write_mode=confirmed 只表示审批不变量满足，不代表真实写入。"
+  - "DailyNote 写入、VCP 长期记忆写入和实际写入证明必须保持 false。"
+  - "敏感内容拒绝路径不得复制敏感原文。"
+  - "默认下一阶段是 v6.6 VCPChat Embed Implementation Preflight。"

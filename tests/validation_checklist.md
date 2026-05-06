@@ -2130,3 +2130,20 @@
 - [ ] v6.4 默认下一阶段为 `v6.5 Memory Handoff Runtime Status`。
 - [ ] v6.4 不修改 runtime 或 Adapter 代码，不读取真实 VCPChat / VCPToolBox，不读取真实 manifest，不创建 IPC/preload/renderer 或 Adapter 执行入口。
 - [ ] `node scripts/validate_v6_4_adapter_review_console_roundtrip_fixture.js` 通过。
+
+## v6.5 Memory Handoff Runtime Status 检查
+
+- [ ] 当前阶段字符串为 `v6.5 memory handoff runtime status`。
+- [ ] `docs/147_v6_5_memory_handoff_runtime_status.md` 存在。
+- [ ] `review_console/embed_contract/memory_handoff_runtime_status.md` 存在。
+- [ ] `tests/schema_examples/v6_5_memory_handoff_runtime_status.example.yaml` 存在。
+- [ ] `scripts/validate_v6_5_memory_handoff_runtime_status.js` 存在。
+- [ ] v6.5 记录当前基线 `8ac78c7` 和上一阶段 `v6.4 adapter review console runtime roundtrip fixture`。
+- [ ] v6.5 状态流覆盖 memory_preview_displayed、memory_approval_reviewed、memory_delta_draft_built、daily_note_preflight_blocked、execution_audit_stub_no_write 和 task_panel_memory_status_projected。
+- [ ] v6.5 路线覆盖 `pending_memory_request`、`approved_request_no_write` 和 `forbidden_sensitive_rejection`。
+- [ ] v6.5 明确 `should_write_to_vcp=true` 只表示写入申请获批，不表示 DailyNote 已写入。
+- [ ] v6.5 明确 `write_mode=confirmed` 只表示审批不变量满足，不代表真实写入。
+- [ ] v6.5 保持 `daily_note_called=false`、`vcp_memory_written=false`、`actual_write_performed=false`、`image_file_created=false`。
+- [ ] v6.5 默认下一阶段为 `v6.6 VCPChat Embed Implementation Preflight`。
+- [ ] v6.5 不修改 runtime 代码，不读取真实 VCPChat / VCPToolBox，不读取真实 manifest，不创建 IPC/preload/renderer 或 Adapter 执行入口。
+- [ ] `node scripts/validate_v6_5_memory_handoff_runtime_status.js` 通过。
