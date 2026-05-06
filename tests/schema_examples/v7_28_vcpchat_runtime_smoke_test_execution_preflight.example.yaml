@@ -1,0 +1,74 @@
+status: completed_validated_v7_28_vcpchat_runtime_smoke_test_execution_preflight
+version: v7.28
+current_phase: "v7.28 vcpchat runtime smoke test execution preflight"
+validation_file: scripts/validate_v7_28_vcpchat_runtime_smoke_test_execution_preflight.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: 683ff22
+  previous_phase: "v7.27 vcpchat runtime smoke test preflight"
+  previous_record: docs/179_v7_27_vcpchat_runtime_smoke_test_preflight.md
+  default_next_phase: "v7.29 VCPChat Runtime Smoke Test Execution Record"
+target_runtime:
+  target_repository_name: VCPChat
+  target_branch: main
+  target_head_short: b320e39
+  expected_worktree_clean: true
+  expected_origin_main_synced: true
+authorization_gate:
+  hard_authorization_required_before_launch: true
+  hard_authorization_granted_by_this_phase: false
+  app_launch_authorized_by_this_phase: false
+  runtime_smoke_test_authorized_by_this_phase: false
+  allowed_launch_command_after_authorization: null
+candidate_commands_after_explicit_authorization:
+  static_checks:
+    - node --check main.js
+    - node --check modules\ipc\imageLabReviewHandlers.js
+    - node --check preloads\chat.js
+    - node --check modules\renderer\imageLabReviewMount.js
+  launch_command_candidate: npm run start:desktop:utf8
+  command_execution_performed_by_this_phase: false
+runtime_assertions_to_verify_after_authorization:
+  host_bridge:
+    - window.imageLabReview
+    - window.imageLabReview.loadSession
+    - window.imageLabReview.previewDraft
+    - window.imageLabReview.submitDraft
+    - window.imageLabReview.cancel
+  renderer_mount:
+    - imageLabReviewMount
+    - window.imageLabReviewRuntime
+  draft_guard:
+    - review_session_draft
+    - image_case_draft
+    - memory_delta_draft
+    - prototype_guard.api_called=false
+    - prototype_guard.daily_note_called=false
+    - prototype_guard.vcp_plugin_called=false
+    - prototype_guard.disk_write_performed=false
+    - prototype_guard.image_file_created=false
+side_effect_guard:
+  hard_authorization_granted_by_this_phase: false
+  app_launch_performed: false
+  runtime_smoke_test_performed: false
+  renderer_devtools_used: false
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  disk_write_performed: false
+  image_created: false
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+  env_or_secret_file_read: false
+  secret_value_copied: false
+  raw_local_path_saved: false
+  vcpchat_pushed: false
+  github_release_performed: false
+stop_point:
+  stop_here: true
+  next_safe_phase: "v7.29 VCPChat Runtime Smoke Test Execution Record"
+  requires_explicit_app_launch_authorization: true
+  audit_summary_cn: "本记录只完成 VCPChat runtime smoke test 执行前授权门槛，不启动应用，不执行 smoke test。"

@@ -2714,3 +2714,22 @@
 - [ ] v7.27 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.27 默认下一安全阶段为 `v7.28 VCPChat Runtime Smoke Test Execution Record`。
 - [ ] `node scripts/validate_v7_27_vcpchat_runtime_smoke_test_preflight.js` 通过。
+
+## v7.28 VCPChat Runtime Smoke Test Execution Preflight 检查
+
+- [ ] 当前阶段字符串为 `v7.28 vcpchat runtime smoke test execution preflight`。
+- [ ] `docs/180_v7_28_vcpchat_runtime_smoke_test_execution_preflight.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_runtime_smoke_test_execution_preflight.md` 存在。
+- [ ] `tests/schema_examples/v7_28_vcpchat_runtime_smoke_test_execution_preflight.example.yaml` 存在。
+- [ ] `scripts/validate_v7_28_vcpchat_runtime_smoke_test_execution_preflight.js` 存在。
+- [ ] v7.28 记录 `current_head: 683ff22` 和上一阶段 `v7.27 vcpchat runtime smoke test preflight`。
+- [ ] v7.28 必须记录 target branch 为 `main`，`target_head_short=b320e39`，并要求 VCPChat 工作树干净。
+- [ ] v7.28 必须记录硬授权门槛：启动应用、DevTools 观察和 runtime interaction 都需要明确授权。
+- [ ] v7.28 必须记录未来授权后的候选命令 `npm run start:desktop:utf8`，但本阶段不执行。
+- [ ] v7.28 必须记录 runtime 断言包括 `window.imageLabReview`、`imageLabReviewMount`、`window.imageLabReviewRuntime`、`review_session_draft`、`image_case_draft`、`memory_delta_draft`。
+- [ ] v7.28 必须保持 `app_launch_performed=false`、`runtime_smoke_test_performed=false`、`renderer_devtools_used=false`。
+- [ ] v7.28 必须保持 `plugin_called=false`、`api_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`disk_write_performed=false`、`image_created=false`。
+- [ ] v7.28 必须保持 `dependency_changed=false`、`package_manifest_changed=false`、`lockfile_changed=false`、`vcpchat_pushed=false`。
+- [ ] v7.28 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.28 默认下一安全阶段为 `v7.29 VCPChat Runtime Smoke Test Execution Record`。
+- [ ] `node scripts/validate_v7_28_vcpchat_runtime_smoke_test_execution_preflight.js` 通过。
