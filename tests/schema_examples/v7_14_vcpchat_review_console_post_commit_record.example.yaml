@@ -1,0 +1,52 @@
+status: completed_validated_v7_14_vcpchat_post_commit_record
+version: v7.14
+current_phase: "v7.14 vcpchat review console post-commit record"
+validation_file: scripts/validate_v7_14_vcpchat_review_console_post_commit_record.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: a1959d3
+  previous_phase: "v7.13 vcpchat review console first runtime patch implementation record"
+  default_next_phase: "v7.15 VCPChat Review Console Remote Push Authorization"
+vcpchat_commit_status:
+  target_repository_name: VCPChat
+  target_local_root_redacted: "<VCPCHAT_LOCAL_ROOT_REDACTED>"
+  target_branch_observed: main
+  previous_head_short: c97ff0c
+  post_commit_head_short: 426a2a9
+  post_commit_subject: "feat: add image lab review console bridge"
+  vcpchat_local_commit_performed: true
+  vcpchat_status_after_commit: "main...origin/main [ahead 1]"
+  vcpchat_remote_push_performed: false
+  vcpchat_remote_push_allowed: false
+committed_scope:
+  committed_files_only_inside_allowed_scope: true
+  committed_files:
+    - main.js
+    - modules/ipc/imageLabReviewHandlers.js
+    - preloads/chat.js
+    - main.html
+    - modules/renderer/imageLabReviewMount.js
+side_effect_guard:
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_created: false
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+  env_or_secret_file_read: false
+  secret_value_copied: false
+  raw_local_path_saved: false
+  vcpchat_remote_push_performed: false
+  vcpchat_release_performed: false
+boundary_meaning:
+  vcpchat_commit_is_local_only: true
+  vcpchat_remote_still_at_previous_head: c97ff0c
+  vcpchat_remote_push_requires_separate_user_authorization: true
+  runtime_smoke_test_not_performed: true
+stop_point:
+  stop_here: true
+  next_safe_phase: "v7.15 VCPChat Review Console Remote Push Authorization"
+  vcpchat_remote_push_blocked_until_user_approval: true

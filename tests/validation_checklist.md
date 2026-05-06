@@ -2443,3 +2443,23 @@
 - [ ] v7.13 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.13 默认下一安全阶段为 `v7.14 VCPChat Review Console Commit Authorization`。
 - [ ] `node scripts/validate_v7_13_vcpchat_review_console_first_runtime_patch_implementation_record.js` 通过。
+
+## v7.14 VCPChat Review Console Post-commit Record 检查
+
+- [ ] 当前阶段字符串为 `v7.14 vcpchat review console post-commit record`。
+- [ ] `docs/166_v7_14_vcpchat_review_console_post_commit_record.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_review_console_post_commit_record.md` 存在。
+- [ ] `tests/schema_examples/v7_14_vcpchat_review_console_post_commit_record.example.yaml` 存在。
+- [ ] `scripts/validate_v7_14_vcpchat_review_console_post_commit_record.js` 存在。
+- [ ] v7.14 记录当前基线 `a1959d3` 和上一阶段 `v7.13 vcpchat review console first runtime patch implementation record`。
+- [ ] v7.14 必须记录 `post_commit_head_short=426a2a9` 和 commit subject `feat: add image lab review console bridge`。
+- [ ] v7.14 必须记录 `vcpchat_local_commit_performed=true`，并说明这是本地 commit。
+- [ ] v7.14 必须记录 VCPChat 状态为 `main...origin/main [ahead 1]`。
+- [ ] v7.14 必须保持 `vcpchat_remote_push_performed=false` 和 `vcpchat_remote_push_allowed=false`。
+- [ ] v7.14 必须记录提交文件仍只在五个 allowed scope 文件内。
+- [ ] v7.14 必须记录 `renderer.js`、`preloads/shared/*`、依赖文件和 env 文件未修改。
+- [ ] v7.14 必须保持 `plugin_called=false`、`api_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_created=false`。
+- [ ] v7.14 必须保持 `dependency_changed=false`、`package_manifest_changed=false`、`lockfile_changed=false`。
+- [ ] v7.14 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.14 默认下一安全阶段为 `v7.15 VCPChat Review Console Remote Push Authorization`。
+- [ ] `node scripts/validate_v7_14_vcpchat_review_console_post_commit_record.js` 通过。
