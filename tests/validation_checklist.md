@@ -2097,3 +2097,20 @@
 - [ ] v6.2 不修改 runtime 代码，不读取真实 VCPChat / VCPToolBox，不读取真实 manifest，不创建 IPC/preload/renderer 或 Adapter 执行入口。
 - [ ] v6.2 保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_file_created=false`。
 - [ ] `node scripts/validate_v6_2_runtime_state_model_alignment.js` 通过。
+
+## v6.3 Host Bridge Contract v2 检查
+
+- [ ] 当前阶段字符串为 `v6.3 host bridge contract v2`。
+- [ ] `docs/145_v6_3_host_bridge_contract_v2.md` 存在。
+- [ ] `review_console/embed_contract/host_bridge_contract_v2.md` 存在。
+- [ ] `tests/schema_examples/v6_3_host_bridge_contract_v2.example.yaml` 存在。
+- [ ] `scripts/validate_v6_3_host_bridge_contract_v2.js` 存在。
+- [ ] v6.3 记录当前基线 `abf0c1d` 和上一阶段 `v6.2 runtime state model alignment`。
+- [ ] v6.3 channel allowlist 覆盖 `imageLabReview.loadSession`、`imageLabReview.previewDraft`、`imageLabReview.submitDraft` 和 `imageLabReview.cancel`。
+- [ ] v6.3 明确 `loadSession` 只返回脱敏 seed，`previewDraft` 和 `submitDraft` 只返回无副作用 ack，`cancel` 不删除远端或本地资产。
+- [ ] v6.3 明确 renderer 输出只能包含 `review_session_draft`、`image_case_draft`、`memory_delta_draft`、`prototype_guard`、`host_submit_ack` 和下一授权点。
+- [ ] v6.3 明确 Electron 边界：`contextIsolation=true`、`nodeIntegration=false`、最小 preload allowlist、IPC sender 校验和来源窗口校验。
+- [ ] v6.3 默认下一阶段为 `v6.4 Adapter -> Review Console Runtime Roundtrip Fixture`。
+- [ ] v6.3 不修改 runtime 代码，不读取真实 VCPChat / VCPToolBox，不读取真实 manifest，不创建 IPC/preload/renderer 或 Adapter 执行入口。
+- [ ] v6.3 保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_file_created=false`。
+- [ ] `node scripts/validate_v6_3_host_bridge_contract_v2.js` 通过。

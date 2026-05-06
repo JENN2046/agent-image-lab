@@ -1,0 +1,160 @@
+status: completed_validated_project_local_v6_3_host_bridge_contract_v2
+version: v6.3
+current_phase: "v6.3 host bridge contract v2"
+validation_file: scripts/validate_v6_3_host_bridge_contract_v2.js
+
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: abf0c1d
+  previous_phase: "v6.2 runtime state model alignment"
+  previous_record: docs/144_v6_2_runtime_state_model_alignment.md
+  previous_validation: scripts/validate_v6_2_runtime_state_model_alignment.js
+  default_next_phase: "v6.4 Adapter -> Review Console Runtime Roundtrip Fixture"
+
+contract_goal:
+  summary_cn: "固化未来 host bridge v2 的 channel、payload、ack 和 Electron 安全边界。"
+  contract_only: true
+  implementation_not_authorized_by_this_record: true
+  no_runtime_code_change_required: true
+  no_external_read_required: true
+  no_ipc_or_preload_creation: true
+
+channel_allowlist_v2:
+  - channel: imageLabReview.loadSession
+    direction: host_to_renderer
+    implementation_exists_now: false
+  - channel: imageLabReview.previewDraft
+    direction: renderer_to_host
+    implementation_exists_now: false
+  - channel: imageLabReview.submitDraft
+    direction: renderer_to_host
+    implementation_exists_now: false
+  - channel: imageLabReview.cancel
+    direction: renderer_to_host
+    implementation_exists_now: false
+
+method_contracts:
+  loadSession:
+    allowed_request_fields:
+      - session_ref
+      - task_id
+      - case_id
+      - project
+    allowed_response_sections:
+      - review_session_seed
+      - image_case_seed
+      - memory_preview_seed
+      - prototype_guard
+      - host_context
+    forbidden_payload:
+      - secret_raw_value
+      - endpoint_raw_value
+      - private_path_raw_value
+      - raw_source_code
+      - raw_manifest
+      - raw_plugin_output
+      - image_binary
+  previewDraft:
+    allowed_request_sections:
+      - review_session_draft
+      - image_case_draft
+      - memory_delta_draft
+      - prototype_guard
+    allowed_response_sections:
+      - validation_passed
+      - validation_summary_cn
+      - field_mapping_warnings_cn
+      - safety_gate
+      - side_effects_performed
+    side_effects_performed: false
+  submitDraft:
+    allowed_request_sections:
+      - review_session_draft
+      - image_case_draft
+      - memory_delta_draft
+      - prototype_guard
+      - requested_route
+    allowed_response_sections:
+      - host_submit_ack
+      - next_authorization_point
+    side_effects_performed: false
+  cancel:
+    allowed_request_fields:
+      - session_id
+      - cancel_reason_cn
+    allowed_response_sections:
+      - cancelled
+      - side_effects_performed
+      - status_cn
+    side_effects_performed: false
+
+draft_bundle_v2:
+  required_sections:
+    - review_session_draft
+    - image_case_draft
+    - memory_delta_draft
+    - prototype_guard
+  invariant_summary_cn:
+    - "human_review 覆盖 ai_review。"
+    - "accepted 必须有人工作为批准来源。"
+    - "memory_approval 未 approved 时 memory_delta.write_mode 保持 draft。"
+    - "confirmed 只表示写入申请，不表示 DailyNote 已执行。"
+    - "prototype_guard 必须保持无插件、无 API、无 DailyNote、无磁盘写入、无图片创建。"
+
+electron_security_boundary_v2:
+  context_isolation_required: true
+  context_isolation_expected_value: true
+  node_integration_allowed: false
+  node_integration_expected_value: false
+  preload_allowlist_required: true
+  ipc_sender_validation_required: true
+  origin_window_validation_required: true
+  ipc_channel_allowlist_required: true
+  payload_schema_validation_required: true
+  sanitized_error_required: true
+  url_query_secret_transfer_allowed: false
+  url_hash_secret_transfer_allowed: false
+  renderer_storage_secret_transfer_allowed: false
+  raw_ipc_payload_logging_allowed: false
+
+ack_semantics:
+  preview_ack:
+    validation_passed: boolean
+    side_effects_performed: false
+  host_submit_ack:
+    accepted_by_host: boolean
+    draft_received: boolean
+    validation_passed: boolean
+    side_effects_performed: false
+  cancel_ack:
+    cancelled: boolean
+    side_effects_performed: false
+
+boundary_state:
+  contract_file_added: true
+  runtime_code_modified: false
+  tag_created: false
+  package_created: false
+  github_release_published: false
+  release_assets_uploaded: false
+  real_vcpchat_source_read: false
+  real_vcptoolbox_source_read: false
+  real_manifest_read: false
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  renderer_runtime_code_created: false
+  adapter_execution_entrypoint_created: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  disk_write_runtime_performed: false
+  image_file_created: false
+
+acceptance_assertions:
+  - "v6.3 只补 host bridge contract v2。"
+  - "四个 channel 只作为 allowlist，不代表真实 IPC 已注册。"
+  - "previewDraft、submitDraft 和 cancel 的 ack 必须保持 side_effects_performed=false。"
+  - "renderer 输出只能是草案和 no-execution guard。"
+  - "真实 VCPChat 集成、IPC handler、preload 和 renderer 实现仍需独立授权。"
