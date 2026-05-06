@@ -2849,3 +2849,23 @@
 - [ ] v7.34 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.34 默认下一安全阶段为 `v7.35 VCPChat Review Console Runtime Follow-up Planning`。
 - [ ] `node scripts/validate_v7_34_vcpchat_review_console_runtime_verification_closeout.js` 通过。
+
+## v7.35 VCPChat Review Console Runtime Follow-up Planning 检查
+
+- [ ] 当前阶段字符串为 `v7.35 vcpchat review console runtime followup planning`。
+- [ ] `docs/187_v7_35_vcpchat_review_console_runtime_followup_planning.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_review_console_runtime_followup_planning.md` 存在。
+- [ ] `tests/schema_examples/v7_35_vcpchat_review_console_runtime_followup_planning.example.yaml` 存在。
+- [ ] `scripts/validate_v7_35_vcpchat_review_console_runtime_followup_planning.js` 存在。
+- [ ] v7.35 记录 `current_head: 4264a47` 和上一阶段 `v7.34 vcpchat review console runtime verification closeout`。
+- [ ] v7.35 必须记录当前 bridge 已 runtime verified，但 `safe_to_claim_production_e2e=false`。
+- [ ] v7.35 必须比较 Agent Image Lab 外部 remote-debug 脚本和 VCPChat 正式 smoke test 两条路线。
+- [ ] v7.35 必须记录 `recommended_first_step=external_agent_image_lab_remote_debug_script`。
+- [ ] v7.35 必须记录 `vcpchat_formal_smoke_test_allowed_now=false`，正式 VCPChat smoke test 需要未来单独文件级写入授权。
+- [ ] v7.35 必须记录外部脚本候选路径 `scripts/run_vcpchat_review_console_remote_debug_smoke.ps1`。
+- [ ] v7.35 必须保持本阶段不启动 VCPChat、不使用 remote-debug、不访问 CDP、不创建脚本、不修改 VCPChat。
+- [ ] v7.35 必须保持 bridge loadSession / previewDraft / submitDraft / cancel 未调用。
+- [ ] v7.35 必须保持插件/API/DailyNote/VCP 记忆/图片/依赖/manifest/lockfile/远端推送均未发生。
+- [ ] v7.35 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.35 默认下一安全阶段为 `v7.36 External Remote Debug Verification Script Plan`。
+- [ ] `node scripts/validate_v7_35_vcpchat_review_console_runtime_followup_planning.js` 通过。

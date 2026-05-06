@@ -1,0 +1,64 @@
+status: completed_validated_v7_35_runtime_followup_planning
+version: v7.35
+current_phase: "v7.35 vcpchat review console runtime followup planning"
+validation_file: scripts/validate_v7_35_vcpchat_review_console_runtime_followup_planning.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: 4264a47
+  previous_phase: "v7.34 vcpchat review console runtime verification closeout"
+  previous_record: docs/186_v7_34_vcpchat_review_console_runtime_verification_closeout.md
+  default_next_phase: "v7.36 External Remote Debug Verification Script Plan"
+current_verified_baseline:
+  target_repository_name: VCPChat
+  target_branch: main
+  target_head_short: b320e39
+  review_console_bridge_runtime_verified: true
+  renderer_global_smoke: passed
+  prototype_guard_smoke: passed
+  safe_to_claim_production_e2e: false
+followup_options:
+  external_agent_image_lab_remote_debug_script:
+    modifies_vcpchat: false
+    repeatability: high
+    risk_level: medium
+  vcpchat_formal_smoke_test:
+    modifies_vcpchat: true
+    repeatability: high
+    risk_level: high
+recommendation:
+  recommended_first_step: external_agent_image_lab_remote_debug_script
+  defer_vcpchat_formal_smoke_test_until:
+    - external_script_repeated_pass
+    - startup_side_effect_strategy_clear
+    - explicit_vcpchat_file_write_authorization
+proposed_external_script_scope:
+  script_location_candidate: scripts/run_vcpchat_review_console_remote_debug_smoke.ps1
+  output_style: sanitized_json
+future_vcpchat_formal_smoke_test_gate:
+  allowed_now: false
+  requires_separate_authorization: true
+side_effect_guard:
+  app_launch_performed_by_this_phase: false
+  remote_debug_used_by_this_phase: false
+  cdp_endpoint_accessed_by_this_phase: false
+  vcpchat_modified_by_this_phase: false
+  external_script_created_by_this_phase: false
+  vcpchat_formal_smoke_test_created_by_this_phase: false
+  bridge_load_session_called: false
+  bridge_preview_draft_called: false
+  bridge_submit_draft_called: false
+  bridge_cancel_called: false
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_created: false
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+  vcpchat_pushed: false
+  github_release_performed: false
+next_gate:
+  next_safe_phase: "v7.36 External Remote Debug Verification Script Plan"
+  audit_summary_cn: "v7.35 只完成后续路线规划；推荐先规划 Agent Image Lab 外部 remote-debug 验证脚本，再考虑 VCPChat 内置 smoke test。"
