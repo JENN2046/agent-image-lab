@@ -2033,3 +2033,20 @@
 - [ ] v5.15 保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_file_created=false`。
 - [ ] v5.15 明确下一步如需发布 GitHub Release，必须进入独立 release preflight 并获得明确授权。
 - [ ] `node scripts/validate_v5_15_release_candidate_handoff.js` 通过。
+
+## v5.16 Release Publication Preflight 检查
+
+- [ ] 当前阶段字符串为 `v5.16 release publication preflight`。
+- [ ] `docs/141_v5_16_release_publication_preflight.md` 存在。
+- [ ] `tests/schema_examples/v5_16_release_publication_preflight.example.yaml` 存在。
+- [ ] `scripts/validate_v5_16_release_publication_preflight.js` 存在。
+- [ ] v5.16 记录 release target tag 为 `v5.14-release-candidate-validation-baseline`。
+- [ ] v5.16 记录 release title 为 `Agent Image Lab v5.14 Release Candidate Validation Baseline`。
+- [ ] v5.16 记录计划上传资产 `agent-image-lab-v5.14-release-candidate-validation-baseline.zip`。
+- [ ] v5.16 记录计划上传资产 `agent-image-lab-v5.14-release-candidate-validation-baseline.zip.sha256`。
+- [ ] v5.16 记录 zip SHA256 为 `2fa0204a855ea9b74a36c5f8bf701356dd35414d3b35d3e85e1bf367492197db`。
+- [ ] v5.16 记录 GitHub Release 尚未创建、尚未发布、assets 尚未上传。
+- [ ] v5.16 明确 release publish 和 asset upload 必须单独授权。
+- [ ] v5.16 不创建新 tag、不重新打包、不调用 GitHub API、不发布 GitHub Release。
+- [ ] v5.16 保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_file_created=false`。
+- [ ] `node scripts/validate_v5_16_release_publication_preflight.js` 通过。

@@ -1,0 +1,88 @@
+status: completed_validated_project_local_v5_16_release_publication_preflight
+version: v5.16
+current_phase: "v5.16 release publication preflight"
+validation_file: scripts/validate_v5_16_release_publication_preflight.js
+
+release_preflight_state:
+  release_publication_preflight_ready: true
+  github_release_created: false
+  github_release_published: false
+  release_assets_uploaded: false
+  release_publish_authorized: false
+
+release_target:
+  repository: JENN2046/agent-image-lab
+  target_tag: v5.14-release-candidate-validation-baseline
+  target_commit: 6fc0c401e739e93986e32d1797b80d7296e2d1c6
+  target_commit_short: 6fc0c40
+  release_title: "Agent Image Lab v5.14 Release Candidate Validation Baseline"
+  release_prerelease: true
+  release_latest: false
+
+release_notes_draft:
+  summary_cn: "v5.14 是 Agent Image Lab 的 release candidate validation baseline，记录 v5.12 真实闭环候选、v5.13 本地验证扫描范围修正，以及 v5.14 tag/package/SHA256/包内验收状态。"
+  included_cn:
+    - "v5.12 release candidate readiness。"
+    - "v5.13 local validation scan scope reconciliation。"
+    - "v5.14 baseline tag。"
+    - "v5.14 zip、SHA256 和包内验收。"
+    - "v5.15 release candidate handoff 记录。"
+  safety_cn:
+    - "本 release 不授权新的真实插件调用。"
+    - "本 release 不授权 DailyNote 写入或 VCP 长期记忆写入。"
+    - "本 release 不包含图片二进制、raw 插件输出、密钥、endpoint 原文或运行日志。"
+    - "后续任何真实 VCPChat / VCPToolBox 读取或集成实现仍需独立授权。"
+
+asset_upload_plan:
+  release_packages_directory: release_packages/
+  release_packages_git_ignored: true
+  assets_planned:
+    - name: agent-image-lab-v5.14-release-candidate-validation-baseline.zip
+      path: release_packages/agent-image-lab-v5.14-release-candidate-validation-baseline.zip
+      sha256: 2fa0204a855ea9b74a36c5f8bf701356dd35414d3b35d3e85e1bf367492197db
+      upload_required: true
+    - name: agent-image-lab-v5.14-release-candidate-validation-baseline.zip.sha256
+      path: release_packages/agent-image-lab-v5.14-release-candidate-validation-baseline.zip.sha256
+      upload_required: true
+  release_assets_uploaded: false
+  upload_authorized: false
+
+preflight_checks:
+  git_worktree_clean_required: true
+  target_tag_exists_required: true
+  target_tag_pushed_required: true
+  zip_exists_required: true
+  sha256_exists_required: true
+  sha256_match_required: true
+  package_inside_validation_required: true
+  release_notes_review_required: true
+  explicit_publish_authorization_required: true
+
+boundary_state:
+  tag_creation_required_now: false
+  package_creation_required_now: false
+  github_release_created: false
+  github_release_published: false
+  release_assets_uploaded: false
+  release_publish_authorized: false
+  external_network_required_for_this_record: false
+  external_service_required_for_this_record: false
+  real_vcpchat_source_read: false
+  real_vcptoolbox_source_read: false
+  real_manifest_read: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_file_created: false
+
+publication_stop_gate:
+  can_publish_without_new_authorization: false
+  required_next_authorization: "publish GitHub Release v5.14-release-candidate-validation-baseline and upload zip + sha256"
+  publish_command_allowed_now: false
+  asset_upload_allowed_now: false
+
+notes_cn:
+  - "本记录只准备 GitHub Release 发布前材料。"
+  - "本记录不创建 GitHub Release，不上传资产，不调用 GitHub API。"
+  - "发布前必须单独确认 release 标题、notes 和上传资产清单。"
