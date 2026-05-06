@@ -1,0 +1,88 @@
+status: planned_validated_v7_37_external_remote_debug_verification_script_authorization_gate
+version: v7.37
+current_phase: "v7.37 external remote-debug verification script authorization gate"
+validation_file: scripts/validate_v7_37_external_remote_debug_verification_script_authorization_gate.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: dcf35ce
+  previous_phase: "v7.36 external remote-debug verification script plan"
+  previous_record: docs/188_v7_36_external_remote_debug_verification_script_plan.md
+  default_next_phase: "v7.38 External Remote Debug Verification Script Creation Preflight"
+authorization_principle:
+  gate_name: external_remote_debug_verification_script_authorization_gate
+  recommended_script_candidate: scripts/run_vcpchat_review_console_remote_debug_smoke.ps1
+  script_creation_authorized_by_this_phase: false
+  script_created_by_this_phase: false
+  app_launch_authorized_by_this_phase: false
+  cdp_access_authorized_by_this_phase: false
+  runtime_evaluate_authorized_by_this_phase: false
+  vcpchat_modification_authorized_by_this_phase: false
+required_future_authorization_fields:
+  authorization_id: "<required>"
+  authorized_by: "<required>"
+  authorized_at: "<required>"
+  target_repository_name: VCPChat
+  target_branch: main
+  target_head_short: "<required before execution>"
+  target_root_ref: "<sanitized-placeholder-only-before-execution>"
+  script_path_to_create: scripts/run_vcpchat_review_console_remote_debug_smoke.ps1
+  allowed_script_actions:
+    - preflight_target_branch_head_worktree
+    - check_remote_debug_port
+    - launch_one_time_remote_debug_after_execution_authorization
+    - read_cdp_runtime_evaluate_only
+    - verify_review_console_renderer_globals
+    - close_launched_process_tree
+    - restore_known_vcp_ready_side_effect_if_authorized
+    - emit_sanitized_json_result
+  forbidden_script_actions:
+    - call_bridge_loadSession
+    - call_bridge_previewDraft
+    - call_bridge_submitDraft
+    - call_bridge_cancel
+    - call_plugin
+    - call_api
+    - call_DailyNote
+    - write_vcp_memory
+    - create_image
+    - modify_vcpchat_source
+    - modify_dependencies
+    - modify_package_manifest
+    - modify_lockfile
+    - push_vcpchat_remote
+creation_gate_decision:
+  can_create_script_now: false
+  can_run_script_now: false
+  can_start_vcpchat_now: false
+  can_access_cdp_now: false
+  can_modify_vcpchat_now: false
+this_phase_boundary:
+  script_creation_authorized_by_this_phase: false
+  script_created_by_this_phase: false
+  app_launch_authorized_by_this_phase: false
+  app_launch_performed_by_this_phase: false
+  remote_debug_authorized_by_this_phase: false
+  remote_debug_used_by_this_phase: false
+  cdp_access_authorized_by_this_phase: false
+  cdp_endpoint_accessed_by_this_phase: false
+  runtime_evaluate_authorized_by_this_phase: false
+  runtime_evaluate_performed_by_this_phase: false
+  bridge_load_session_called: false
+  bridge_preview_draft_called: false
+  bridge_submit_draft_called: false
+  bridge_cancel_called: false
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_created: false
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+  vcpchat_modified_by_this_phase: false
+  vcpchat_pushed: false
+  github_release_performed: false
+next_gate:
+  next_safe_phase: "v7.38 External Remote Debug Verification Script Creation Preflight"
+  audit_summary_cn: "v7.37 只固化外部 remote-debug 验证脚本创建前的硬授权门槛；本阶段没有创建脚本、没有启动 VCPChat、没有访问 CDP，也没有修改 VCPChat。"

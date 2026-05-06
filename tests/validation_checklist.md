@@ -2889,3 +2889,23 @@
 - [ ] v7.36 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.36 默认下一安全阶段为 `v7.37 External Remote Debug Verification Script Authorization Gate`。
 - [ ] `node scripts/validate_v7_36_external_remote_debug_verification_script_plan.js` 通过。
+
+## v7.37 External Remote Debug Verification Script Authorization Gate 检查
+
+- [ ] 当前阶段字符串为 `v7.37 external remote-debug verification script authorization gate`。
+- [ ] `docs/189_v7_37_external_remote_debug_verification_script_authorization_gate.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_authorization_gate.md` 存在。
+- [ ] `tests/schema_examples/v7_37_external_remote_debug_verification_script_authorization_gate.example.yaml` 存在。
+- [ ] `scripts/validate_v7_37_external_remote_debug_verification_script_authorization_gate.js` 存在。
+- [ ] v7.37 记录 `current_head: dcf35ce` 和上一阶段 `v7.36 external remote-debug verification script plan`。
+- [ ] v7.37 必须记录未来脚本候选路径 `scripts/run_vcpchat_review_console_remote_debug_smoke.ps1`，但 `script_creation_authorized_by_this_phase=false` 且 `script_created_by_this_phase=false`。
+- [ ] v7.37 必须记录未来授权必填字段：authorization_id、authorized_by、authorized_at、target_head_short、target_root_ref、script_path_to_create、allowed_script_actions、forbidden_script_actions、allowed_output_fields、forbidden_output_fields。
+- [ ] v7.37 必须记录 stop conditions：VCPChat 工作树 dirty、分支不符、remote-debug 端口占用、需要安装依赖、需要读取 env/secret、出现登录或凭据提示、需要调用 bridge 方法、需要修改 VCPChat 源码时停止。
+- [ ] v7.37 必须记录 `can_create_script_now=false`、`can_run_script_now=false`、`can_start_vcpchat_now=false`、`can_access_cdp_now=false`、`can_modify_vcpchat_now=false`。
+- [ ] v7.37 必须保持 `app_launch_authorized_by_this_phase=false`、`app_launch_performed_by_this_phase=false`、`remote_debug_authorized_by_this_phase=false`、`remote_debug_used_by_this_phase=false`。
+- [ ] v7.37 必须保持 `cdp_access_authorized_by_this_phase=false`、`cdp_endpoint_accessed_by_this_phase=false`、`runtime_evaluate_authorized_by_this_phase=false`、`runtime_evaluate_performed_by_this_phase=false`。
+- [ ] v7.37 必须保持 bridge loadSession / previewDraft / submitDraft / cancel 未调用。
+- [ ] v7.37 必须保持插件/API/DailyNote/VCP 记忆/图片/依赖/manifest/lockfile/远端推送均未发生。
+- [ ] v7.37 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.37 默认下一安全阶段为 `v7.38 External Remote Debug Verification Script Creation Preflight`。
+- [ ] `node scripts/validate_v7_37_external_remote_debug_verification_script_authorization_gate.js` 通过。
