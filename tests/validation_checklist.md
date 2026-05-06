@@ -1987,3 +1987,17 @@
 - [ ] `validate_mvp.ps1` 执行 v5.10 local true-loop candidate delivery validation 并检查输出字段。
 - [ ] v5.10 不执行 `git add`、commit、push、远端 tag、PR、merge 或 release。
 - [ ] v5.10 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.11 Post-Merge Reconciliation 检查
+
+- [ ] 当前阶段字符串为 `v5.11 post-merge reconciliation`。
+- [ ] `docs/138_v5_11_post_merge_reconciliation.md` 存在。
+- [ ] `tests/schema_examples/v5_11_post_merge_reconciliation.example.yaml` 存在。
+- [ ] `scripts/validate_v5_post_merge_reconciliation.js` 存在。
+- [ ] v5.11 记录 PR #2 已合并，merge commit 为 `3e3405e`。
+- [ ] v5.11 记录 PR head 为 `5ccf059`，tag 为 `v5.10-local-delivery-agents-merge`。
+- [ ] v5.11 记录本地 `master...origin/master` 为 `0 0`。
+- [ ] README、MANIFEST、roadmap、release notes、validation checklist 和 `.agent_board` 均指向 v5.11 当前状态。
+- [ ] `validate_mvp.ps1` 执行 v5.11 post-merge reconciliation validation 并检查输出字段。
+- [ ] v5.11 不执行 `git add`、commit、push、远端 tag、PR、merge 或 release。
+- [ ] v5.11 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。

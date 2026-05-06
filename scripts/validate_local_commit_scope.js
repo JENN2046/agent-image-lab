@@ -49,6 +49,9 @@ const allowedModifiedFiles = [
   "docs/136_v5_9_expanded_v5_index_consistency.md",
   "tests/schema_examples/v5_10_local_true_loop_candidate_delivery.example.yaml",
   "docs/137_v5_10_local_true_loop_candidate_delivery.md",
+  "tests/schema_examples/v5_11_post_merge_reconciliation.example.yaml",
+  "docs/138_v5_11_post_merge_reconciliation.md",
+  "scripts/validate_v5_post_merge_reconciliation.js",
   "tests/validation_checklist.md"
 ];
 
@@ -85,6 +88,7 @@ const allowedUntrackedFiles = [
   "docs/135_v5_8_handoff_freshness_validation.md",
   "docs/136_v5_9_expanded_v5_index_consistency.md",
   "docs/137_v5_10_local_true_loop_candidate_delivery.md",
+  "docs/138_v5_11_post_merge_reconciliation.md",
   "scripts/validate-agent-image-lab-local.ps1",
   "scripts/validate-agent-image-lab-local.sh",
   "scripts/validate_agent_board_state.js",
@@ -101,6 +105,7 @@ const allowedUntrackedFiles = [
   "scripts/validate_v5_local_batch_commit_readiness.js",
   "scripts/validate_v5_handoff_freshness.js",
   "scripts/validate_v5_true_loop_candidate_delivery.js",
+  "scripts/validate_v5_post_merge_reconciliation.js",
   "scripts/validate_runtime_delivery_surface.js",
   "scripts/validate_runtime_guard_unit.js",
   "scripts/validate_runtime_prototype_suite.js",
@@ -124,8 +129,11 @@ const allowedUntrackedFiles = [
   "tests/schema_examples/v5_7_local_batch_commit_readiness.example.yaml",
   "tests/schema_examples/v5_8_handoff_freshness_validation.example.yaml",
   "tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml",
-  "tests/schema_examples/v5_10_local_true_loop_candidate_delivery.example.yaml"
+  "tests/schema_examples/v5_10_local_true_loop_candidate_delivery.example.yaml",
+  "tests/schema_examples/v5_11_post_merge_reconciliation.example.yaml"
 ];
+
+const allowedBranches = ["master", "codex/v5.11-post-merge-reconciliation"];
 
 function assert(condition, message) {
   if (!condition) {
@@ -295,11 +303,23 @@ function main() {
     allowedUntrackedFiles.includes("scripts/validate_v5_true_loop_candidate_delivery.js"),
     "v5.10 validation script must be included in the untracked allowlist."
   );
+  assert(
+    allowedUntrackedFiles.includes("docs/138_v5_11_post_merge_reconciliation.md"),
+    "v5.11 docs must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("tests/schema_examples/v5_11_post_merge_reconciliation.example.yaml"),
+    "v5.11 schema example must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("scripts/validate_v5_post_merge_reconciliation.js"),
+    "v5.11 validation script must be included in the untracked allowlist."
+  );
 
   const result = {
     passed: true,
     local_commit_scope: {
-      expected_branch: "master",
+      allowed_branches: allowedBranches,
       allowed_modified_count: allowedModifiedFiles.length,
       allowed_untracked_count: allowedUntrackedFiles.length,
       actual_modified_count: null,

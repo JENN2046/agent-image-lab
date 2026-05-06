@@ -71,6 +71,7 @@ $requiredFiles = @(
   'scripts/validate_v5_local_batch_commit_readiness.js',
   'scripts/validate_v5_handoff_freshness.js',
   'scripts/validate_v5_true_loop_candidate_delivery.js',
+  'scripts/validate_v5_post_merge_reconciliation.js',
   'scripts/validate_runtime_guard_unit.js',
   'scripts/validate_runtime_prototype_smoke.js',
   'scripts/validate_runtime_prototype_suite.js',
@@ -106,6 +107,7 @@ $requiredFiles = @(
   'docs/135_v5_8_handoff_freshness_validation.md',
   'docs/136_v5_9_expanded_v5_index_consistency.md',
   'docs/137_v5_10_local_true_loop_candidate_delivery.md',
+  'docs/138_v5_11_post_merge_reconciliation.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
@@ -189,6 +191,7 @@ $requiredFiles = @(
   'tests/schema_examples/v5_8_handoff_freshness_validation.example.yaml',
   'tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml',
   'tests/schema_examples/v5_10_local_true_loop_candidate_delivery.example.yaml',
+  'tests/schema_examples/v5_11_post_merge_reconciliation.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -1923,6 +1926,7 @@ $allowedV46ModifiedFiles = @(
   'scripts/validate_v5_local_batch_commit_readiness.js',
   'scripts/validate_v5_handoff_freshness.js',
   'scripts/validate_v5_true_loop_candidate_delivery.js',
+  'scripts/validate_v5_post_merge_reconciliation.js',
   'scripts/validate_runtime_delivery_surface.js',
   'scripts/validate_runtime_prototype_suite.js',
   'scripts/validate_runtime_prototype_smoke.js',
@@ -1943,6 +1947,8 @@ $allowedV46ModifiedFiles = @(
   'docs/136_v5_9_expanded_v5_index_consistency.md',
   'tests/schema_examples/v5_10_local_true_loop_candidate_delivery.example.yaml',
   'docs/137_v5_10_local_true_loop_candidate_delivery.md',
+  'tests/schema_examples/v5_11_post_merge_reconciliation.example.yaml',
+  'docs/138_v5_11_post_merge_reconciliation.md',
   'tests/validation_checklist.md'
 )
 
@@ -1979,6 +1985,7 @@ $allowedV46UntrackedFiles = @(
   'docs/135_v5_8_handoff_freshness_validation.md',
   'docs/136_v5_9_expanded_v5_index_consistency.md',
   'docs/137_v5_10_local_true_loop_candidate_delivery.md',
+  'docs/138_v5_11_post_merge_reconciliation.md',
   'scripts/validate-agent-image-lab-local.ps1',
   'scripts/validate-agent-image-lab-local.sh',
   'scripts/validate_agent_board_state.js',
@@ -1995,6 +2002,7 @@ $allowedV46UntrackedFiles = @(
   'scripts/validate_v5_local_batch_commit_readiness.js',
   'scripts/validate_v5_handoff_freshness.js',
   'scripts/validate_v5_true_loop_candidate_delivery.js',
+  'scripts/validate_v5_post_merge_reconciliation.js',
   'scripts/validate_runtime_delivery_surface.js',
   'scripts/validate_runtime_guard_unit.js',
   'scripts/validate_runtime_prototype_suite.js',
@@ -2018,7 +2026,8 @@ $allowedV46UntrackedFiles = @(
   'tests/schema_examples/v5_7_local_batch_commit_readiness.example.yaml',
   'tests/schema_examples/v5_8_handoff_freshness_validation.example.yaml',
   'tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml',
-  'tests/schema_examples/v5_10_local_true_loop_candidate_delivery.example.yaml'
+  'tests/schema_examples/v5_10_local_true_loop_candidate_delivery.example.yaml',
+  'tests/schema_examples/v5_11_post_merge_reconciliation.example.yaml'
 )
 
 foreach ($path in $v46LocalCommitScopeManifestFiles) {
@@ -3235,6 +3244,97 @@ foreach ($path in $v510LocalTrueLoopCandidateDeliveryFiles) {
   }
 }
 
+$v511PostMergeReconciliationFiles = @(
+  'docs/138_v5_11_post_merge_reconciliation.md',
+  'tests/schema_examples/v5_11_post_merge_reconciliation.example.yaml'
+)
+
+$requiredV511PostMergeReconciliationPatterns = @(
+  'status:\s+completed_validated_project_local_v5_11_post_merge_reconciliation',
+  'version:\s+v5\.11',
+  'current_phase:\s+"v5\.11 post-merge reconciliation"',
+  'validation_file:\s+scripts/validate_v5_post_merge_reconciliation\.js',
+  'pr_number:\s+2',
+  'pr_merged:\s+true',
+  'pr_merge_commit_short:\s+3e3405e',
+  'pr_head_commit_short:\s+5ccf059',
+  'tag_name:\s+v5\.10-local-delivery-agents-merge',
+  'tag_pushed:\s+true',
+  'local_master_synced:\s+true',
+  'origin_master_short:\s+3e3405e',
+  'local_head_short:\s+3e3405e',
+  'master_origin_divergence:\s+"0 0"',
+  'post_merge_reconciled:\s+true',
+  'commit_authorized:\s+false',
+  'push_authorized:\s+false',
+  'tag_authorized:\s+false',
+  'pr_authorized:\s+false',
+  'release_authorized:\s+false',
+  'remote_write_performed_in_this_batch:\s+false',
+  'external_network_required:\s+false',
+  'external_service_required:\s+false',
+  'file_write_performed:\s+false',
+  'real_vcpchat_source_read:\s+false',
+  'real_vcpchat_modified:\s+false',
+  'real_vcptoolbox_source_read:\s+false',
+  'real_vcptoolbox_modified:\s+false',
+  'real_manifest_read:\s+false',
+  'api_called:\s+false',
+  'vcp_plugin_called:\s+false',
+  'daily_note_called:\s+false',
+  'vcp_memory_written:\s+false',
+  'image_file_created:\s+false',
+  'commit_tag_push_authorized:\s+false'
+)
+
+$forbiddenV511PostMergeReconciliationPatterns = @(
+  'pr_merged:\s+false',
+  'tag_pushed:\s+false',
+  'local_master_synced:\s+false',
+  'post_merge_reconciled:\s+false',
+  'commit_authorized:\s+true',
+  'push_authorized:\s+true',
+  'tag_authorized:\s+true',
+  'pr_authorized:\s+true',
+  'release_authorized:\s+true',
+  'remote_write_performed_in_this_batch:\s+true',
+  'external_network_required:\s+true',
+  'external_service_required:\s+true',
+  'file_write_performed:\s+true',
+  'real_vcpchat_source_read:\s+true',
+  'real_vcpchat_modified:\s+true',
+  'real_vcptoolbox_source_read:\s+true',
+  'real_vcptoolbox_modified:\s+true',
+  'real_manifest_read:\s+true',
+  'api_called:\s+true',
+  'vcp_plugin_called:\s+true',
+  'daily_note_called:\s+true',
+  'vcp_memory_written:\s+true',
+  'image_file_created:\s+true',
+  'commit_tag_push_authorized:\s+true',
+  'https?://'
+)
+
+foreach ($path in $v511PostMergeReconciliationFiles) {
+  $fullPath = Join-Path $Root $path
+  if (-not (Test-Path -LiteralPath $fullPath)) {
+    Add-Failure "Missing v5.11 post-merge reconciliation file: $path"
+    continue
+  }
+
+  $content = Get-Content -Raw -Encoding UTF8 $fullPath
+  foreach ($pattern in $requiredV511PostMergeReconciliationPatterns) {
+    if ($content -notmatch $pattern) {
+      Add-Failure "v5.11 post-merge reconciliation missing required field in ${path}: $pattern"
+    }
+  }
+  foreach ($pattern in $forbiddenV511PostMergeReconciliationPatterns) {
+    if ($content -match $pattern) {
+      Add-Failure "v5.11 post-merge reconciliation boundary violation in ${path}: $pattern"
+    }
+  }
+}
+
 $node = Get-Command node -ErrorAction SilentlyContinue
 if (-not $node) {
   Add-Failure "Node.js is required to validate adapter_dry_run_lab"
@@ -3445,6 +3545,11 @@ if (-not $node) {
   & node --check (Join-Path $Root 'scripts/validate_v5_true_loop_candidate_delivery.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_v5_true_loop_candidate_delivery.js failed node --check"
+  }
+
+  & node --check (Join-Path $Root 'scripts/validate_v5_post_merge_reconciliation.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_v5_post_merge_reconciliation.js failed node --check"
   }
 
   & node --check (Join-Path $Root 'scripts/validate_agent_board_state.js') | Out-Null
@@ -3903,8 +4008,8 @@ if (-not $node) {
     if ($v5IndexConsistency.passed -ne $true) {
       Add-Failure "v5.9 expanded v5 index consistency validation must report passed true"
     }
-    if ($v5IndexConsistency.v5_index_consistency.v5_record_count -ne 11) {
-      Add-Failure "v5 index consistency must cover 11 v5 records"
+    if ($v5IndexConsistency.v5_index_consistency.v5_record_count -ne 12) {
+      Add-Failure "v5 index consistency must cover 12 v5 records"
     }
     if ($v5IndexConsistency.v5_index_consistency.docs_present -ne $true) {
       Add-Failure "v5.6 v5 index consistency must verify docs"
@@ -4028,10 +4133,10 @@ if (-not $node) {
     if ($v5HandoffFreshness.handoff_freshness.record_phase -ne 'v5.8 handoff freshness validation') {
       Add-Failure "v5.8 handoff freshness must record its historical record phase"
     }
-    if ($v5HandoffFreshness.handoff_freshness.current_phase -ne 'v5.10 local true-loop candidate delivery closeout') {
+    if ($v5HandoffFreshness.handoff_freshness.current_phase -ne 'v5.11 post-merge reconciliation') {
       Add-Failure "v5.8 handoff freshness must verify the actual current phase"
     }
-    if ($v5HandoffFreshness.handoff_freshness.run_state_current_phase -ne 'v5.10 local true-loop candidate delivery closeout') {
+    if ($v5HandoffFreshness.handoff_freshness.run_state_current_phase -ne 'v5.11 post-merge reconciliation') {
       Add-Failure "v5.8 handoff freshness must parse RUN_STATE current phase"
     }
     if ($v5HandoffFreshness.handoff_freshness.agent_board_files_present -ne $true) {
@@ -4104,6 +4209,9 @@ if (-not $node) {
     if ($v5TrueLoopCandidateDelivery.local_true_loop_candidate_delivery.current_phase -ne 'v5.10 local true-loop candidate delivery closeout') {
       Add-Failure "v5.10 local true-loop candidate delivery must record current phase"
     }
+    if ($v5TrueLoopCandidateDelivery.local_true_loop_candidate_delivery.run_state_current_phase -ne 'v5.11 post-merge reconciliation') {
+      Add-Failure "v5.10 local true-loop candidate delivery must verify v5.11 as current RUN_STATE phase"
+    }
     if ($v5TrueLoopCandidateDelivery.local_true_loop_candidate_delivery.local_head_short -ne '9ac4ca8') {
       Add-Failure "v5.10 local true-loop candidate delivery must record local head 9ac4ca8"
     }
@@ -4139,6 +4247,61 @@ if (-not $node) {
     }
     if ($v5TrueLoopCandidateDelivery.local_true_loop_candidate_delivery.file_write_performed -ne $false) {
       Add-Failure "v5.10 local true-loop candidate delivery validation must not write files"
+    }
+  }
+
+  $v5PostMergeReconciliationOutput = & node (Join-Path $Root 'scripts/validate_v5_post_merge_reconciliation.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v5.11 post-merge reconciliation validation exited with failure"
+  } else {
+    $v5PostMergeReconciliation = ($v5PostMergeReconciliationOutput -join "`n") | ConvertFrom-Json
+    if ($v5PostMergeReconciliation.passed -ne $true) {
+      Add-Failure "v5.11 post-merge reconciliation validation must report passed true"
+    }
+    if ($v5PostMergeReconciliation.post_merge_reconciliation.current_phase -ne 'v5.11 post-merge reconciliation') {
+      Add-Failure "v5.11 post-merge reconciliation must record current phase"
+    }
+    if ($v5PostMergeReconciliation.post_merge_reconciliation.pr_number -ne 2) {
+      Add-Failure "v5.11 post-merge reconciliation must record PR #2"
+    }
+    if ($v5PostMergeReconciliation.post_merge_reconciliation.pr_merged -ne $true) {
+      Add-Failure "v5.11 post-merge reconciliation must record PR merged"
+    }
+    if ($v5PostMergeReconciliation.post_merge_reconciliation.pr_merge_commit_short -ne '3e3405e') {
+      Add-Failure "v5.11 post-merge reconciliation must record merge commit 3e3405e"
+    }
+    if ($v5PostMergeReconciliation.post_merge_reconciliation.pr_head_commit_short -ne '5ccf059') {
+      Add-Failure "v5.11 post-merge reconciliation must record PR head 5ccf059"
+    }
+    if ($v5PostMergeReconciliation.post_merge_reconciliation.tag_name -ne 'v5.10-local-delivery-agents-merge') {
+      Add-Failure "v5.11 post-merge reconciliation must record v5.10 tag"
+    }
+    if ($v5PostMergeReconciliation.post_merge_reconciliation.local_master_synced -ne $true) {
+      Add-Failure "v5.11 post-merge reconciliation must record local master synced"
+    }
+    if ($v5PostMergeReconciliation.post_merge_reconciliation.master_origin_divergence -ne '0 0') {
+      Add-Failure "v5.11 post-merge reconciliation must record master...origin/master 0 0"
+    }
+    if ($v5PostMergeReconciliation.post_merge_reconciliation.indexes_current -ne $true) {
+      Add-Failure "v5.11 post-merge reconciliation must verify indexes"
+    }
+    if ($v5PostMergeReconciliation.post_merge_reconciliation.validators_current -ne $true) {
+      Add-Failure "v5.11 post-merge reconciliation must verify validators"
+    }
+    if ($v5PostMergeReconciliation.post_merge_reconciliation.agent_board_current -ne $true) {
+      Add-Failure "v5.11 post-merge reconciliation must verify agent board"
+    }
+    if ($v5PostMergeReconciliation.post_merge_reconciliation.push_authorized -ne $false) {
+      Add-Failure "v5.11 post-merge reconciliation must not authorize push"
+    }
+    if ($v5PostMergeReconciliation.post_merge_reconciliation.release_authorized -ne $false) {
+      Add-Failure "v5.11 post-merge reconciliation must not authorize release"
+    }
+    if ($v5PostMergeReconciliation.post_merge_reconciliation.remote_write_performed_in_this_batch -ne $false) {
+      Add-Failure "v5.11 post-merge reconciliation must not perform remote write in this batch"
+    }
+    if ($v5PostMergeReconciliation.post_merge_reconciliation.file_write_performed -ne $false) {
+      Add-Failure "v5.11 post-merge reconciliation validation must not write files"
     }
   }
 
@@ -4192,8 +4355,8 @@ if (-not $node) {
     $currentBranch = ((& git branch --show-current) -join "`n").Trim()
     if ($LASTEXITCODE -ne 0) {
       Add-Failure "git branch --show-current failed during local commit scope validation"
-    } elseif ($currentBranch -ne 'master') {
-      Add-Failure "local commit scope expected branch master, got $currentBranch"
+    } elseif ($currentBranch -notin @('master', 'codex/v5.11-post-merge-reconciliation')) {
+      Add-Failure "local commit scope expected branch master or codex/v5.11-post-merge-reconciliation, got $currentBranch"
     }
 
     $localTagCommit = ((& git rev-parse --short v4.8-local-validation-checkpoint) -join "`n").Trim()

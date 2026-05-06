@@ -1,0 +1,65 @@
+status: completed_validated_project_local_v5_11_post_merge_reconciliation
+version: v5.11
+current_phase: "v5.11 post-merge reconciliation"
+validation_file: scripts/validate_v5_post_merge_reconciliation.js
+
+post_merge_state:
+  pr_number: 2
+  pr_merged: true
+  pr_merge_commit_short: 3e3405e
+  pr_head_commit_short: 5ccf059
+  merged_branch: codex/v5.10-local-delivery-agents-merge
+  base_branch: master
+  tag_name: v5.10-local-delivery-agents-merge
+  tag_pushed: true
+  local_master_synced: true
+  origin_master_short: 3e3405e
+  local_head_short: 3e3405e
+  master_origin_divergence: "0 0"
+  post_merge_reconciled: true
+
+reconciled_records:
+  post_merge_record: docs/138_v5_11_post_merge_reconciliation.md
+  post_merge_schema: tests/schema_examples/v5_11_post_merge_reconciliation.example.yaml
+  post_merge_validator: scripts/validate_v5_post_merge_reconciliation.js
+  previous_delivery_record: docs/137_v5_10_local_true_loop_candidate_delivery.md
+  previous_delivery_validator: scripts/validate_v5_true_loop_candidate_delivery.js
+
+agent_board_state:
+  current_phase: "v5.11 post-merge reconciliation"
+  current_stop_status: not_blocked
+  branch: master
+  remote_tracking: origin/master
+  worktree_state: local_v5_11_reconciliation_changes_present
+  pr_2_status: merged
+  pr_2_merge_commit_short: 3e3405e
+  pr_2_head_commit_short: 5ccf059
+  pending_local_commits: 0
+  current_batch_remote_action: none
+
+boundary_state:
+  commit_authorized: false
+  push_authorized: false
+  tag_authorized: false
+  pr_authorized: false
+  release_authorized: false
+  remote_write_performed_in_this_batch: false
+  external_network_required: false
+  external_service_required: false
+  file_write_performed: false
+  real_vcpchat_source_read: false
+  real_vcpchat_modified: false
+  real_vcptoolbox_source_read: false
+  real_vcptoolbox_modified: false
+  real_manifest_read: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_file_created: false
+  commit_tag_push_authorized: false
+
+notes_cn:
+  - "本记录只证明 PR #2 合并后的本地仓库事实已重新对齐。"
+  - "本记录不授权新的 commit、push、tag、PR、merge 或 release。"
+  - "本记录不包含图片二进制、raw 插件输出、密钥、endpoint、运行日志或私密路径。"
