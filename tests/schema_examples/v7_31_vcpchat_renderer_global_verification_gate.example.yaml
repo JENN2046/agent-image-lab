@@ -1,0 +1,68 @@
+status: completed_validated_v7_31_renderer_global_verification_gate
+version: v7.31
+current_phase: "v7.31 vcpchat renderer global verification gate"
+validation_file: scripts/validate_v7_31_vcpchat_renderer_global_verification_gate.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: 241965b
+  previous_phase: "v7.30 vcpchat runtime smoke test partial execution record"
+  previous_record: docs/182_v7_30_vcpchat_runtime_smoke_test_partial_execution_record.md
+  default_next_phase: "v7.32 VCPChat One-time Remote Debug Runtime Verification Preflight"
+current_evidence:
+  target_repository_name: VCPChat
+  target_branch: main
+  target_head_short: b320e39
+  v7_30_window_level_smoke: passed
+  v7_30_renderer_global_smoke: not_completed
+options_considered:
+  manual_devtools:
+    risk_level: medium
+    reproducibility: low
+    modifies_vcpchat: false
+  one_time_remote_debug:
+    risk_level: medium
+    reproducibility: high
+    modifies_vcpchat: false
+  reversible_local_test_harness:
+    risk_level: high
+    reproducibility: high
+    modifies_vcpchat: true
+recommended_choice:
+  selected_strategy: one_time_remote_debug
+  reason_cn: "不修改 VCPChat，且比人工 DevTools 更可复现。"
+proposed_verification_scope:
+  target_globals:
+    - window.imageLabReview
+    - window.imageLabReview.loadSession
+    - window.imageLabReview.previewDraft
+    - window.imageLabReview.submitDraft
+    - window.imageLabReview.cancel
+    - imageLabReviewMount
+    - window.imageLabReviewRuntime
+  draft_checks:
+    - review_session_draft
+    - image_case_draft
+    - memory_delta_draft
+    - prototype_guard.api_called=false
+    - prototype_guard.daily_note_called=false
+    - prototype_guard.vcp_plugin_called=false
+    - prototype_guard.disk_write_performed=false
+    - prototype_guard.image_file_created=false
+side_effect_guard:
+  app_launch_performed_by_this_phase: false
+  remote_debug_used_by_this_phase: false
+  devtools_used_by_this_phase: false
+  vcpchat_modified_by_this_phase: false
+  test_harness_created_by_this_phase: false
+  review_console_bridge_plugin_called: false
+  review_console_bridge_api_called: false
+  review_console_bridge_daily_note_called: false
+  review_console_bridge_vcp_memory_written: false
+  review_console_bridge_disk_write_performed: false
+  review_console_bridge_image_created: false
+  dependency_changed: false
+  vcpchat_pushed: false
+next_gate:
+  next_safe_phase: "v7.32 VCPChat One-time Remote Debug Runtime Verification Preflight"
+  audit_summary_cn: "v7.31 只完成 renderer global 验证方案选择，推荐一次性 remote-debug；未启动应用、未修改 VCPChat。"

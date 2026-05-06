@@ -2771,3 +2771,21 @@
 - [ ] v7.30 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.30 默认下一安全阶段为 `v7.31 VCPChat Renderer Global Verification Gate`。
 - [ ] `node scripts/validate_v7_30_vcpchat_runtime_smoke_test_partial_execution_record.js` 通过。
+
+## v7.31 VCPChat Renderer Global Verification Gate 检查
+
+- [ ] 当前阶段字符串为 `v7.31 vcpchat renderer global verification gate`。
+- [ ] `docs/183_v7_31_vcpchat_renderer_global_verification_gate.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_renderer_global_verification_gate.md` 存在。
+- [ ] `tests/schema_examples/v7_31_vcpchat_renderer_global_verification_gate.example.yaml` 存在。
+- [ ] `scripts/validate_v7_31_vcpchat_renderer_global_verification_gate.js` 存在。
+- [ ] v7.31 记录 `current_head: 241965b` 和上一阶段 `v7.30 vcpchat runtime smoke test partial execution record`。
+- [ ] v7.31 必须比较人工 DevTools、一次性 remote-debug、可回滚 local test harness 三种方案。
+- [ ] v7.31 必须选择 `selected_strategy=one_time_remote_debug`，并说明不修改 VCPChat、比人工 DevTools 更可复现、风险低于新增 test harness。
+- [ ] v7.31 必须记录目标验证范围：`window.imageLabReview`、四个 allowlist 方法、`imageLabReviewMount`、`window.imageLabReviewRuntime`、三类 draft 和 `prototype_guard`。
+- [ ] v7.31 必须保持 `app_launch_performed_by_this_phase=false`、`remote_debug_used_by_this_phase=false`、`devtools_used_by_this_phase=false`。
+- [ ] v7.31 必须保持 `vcpchat_modified_by_this_phase=false`、`test_harness_created_by_this_phase=false`、`dependency_changed=false`、`vcpchat_pushed=false`。
+- [ ] v7.31 必须保持 Review Console bridge 未触发插件/API/DailyNote/VCP 记忆/磁盘写入/图片创建。
+- [ ] v7.31 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.31 默认下一安全阶段为 `v7.32 VCPChat One-time Remote Debug Runtime Verification Preflight`。
+- [ ] `node scripts/validate_v7_31_vcpchat_renderer_global_verification_gate.js` 通过。
