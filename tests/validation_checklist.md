@@ -2675,3 +2675,23 @@
 - [ ] v7.25 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.25 默认下一安全阶段为 `v7.26 VCPChat Local Main Sync Execution Record`。
 - [ ] `node scripts/validate_v7_25_vcpchat_local_main_sync_execution_preflight.js` 通过。
+
+## v7.26 VCPChat Local Main Sync Execution Record 检查
+
+- [ ] 当前阶段字符串为 `v7.26 vcpchat local main sync execution record`。
+- [ ] `docs/178_v7_26_vcpchat_local_main_sync_execution_record.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_local_main_sync_execution_record.md` 存在。
+- [ ] `tests/schema_examples/v7_26_vcpchat_local_main_sync_execution_record.example.yaml` 存在。
+- [ ] `scripts/validate_v7_26_vcpchat_local_main_sync_execution_record.js` 存在。
+- [ ] v7.26 记录当前基线 `e5df41d` 和上一阶段 `v7.25 vcpchat local main sync execution preflight`。
+- [ ] v7.26 必须记录已创建 backup branch、已 fetch、已将本地 main 对齐 origin/main、已切换到 main。
+- [ ] v7.26 必须记录 `local_main_head_short=b320e39`、`local_origin_main_head_short_after_fetch=b320e39`。
+- [ ] v7.26 必须记录 `backup_branch_created=true`，backup branch 和 feature branch 均保留 `426a2a9`。
+- [ ] v7.26 必须记录 `git_fetch_performed=true`、`git_switch_performed=true`、`local_main_sync_performed=true`。
+- [ ] v7.26 必须保持 `feature_branch_deleted=false`、`backup_branch_deleted=false`、`branch_deleted=false`。
+- [ ] v7.26 必须保持 `github_release_performed=false`、`tag_created_by_this_phase=false`。
+- [ ] v7.26 必须保持 `plugin_called=false`、`api_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_created=false`。
+- [ ] v7.26 必须保持 `dependency_changed=false`、`package_manifest_changed=false`、`lockfile_changed=false`。
+- [ ] v7.26 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.26 默认下一安全阶段为 `v7.27 VCPChat Runtime Smoke Test Preflight`。
+- [ ] `node scripts/validate_v7_26_vcpchat_local_main_sync_execution_record.js` 通过。

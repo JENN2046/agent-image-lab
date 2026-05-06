@@ -1,0 +1,67 @@
+status: completed_validated_v7_26_vcpchat_local_main_sync_execution_record
+version: v7.26
+current_phase: "v7.26 vcpchat local main sync execution record"
+validation_file: scripts/validate_v7_26_vcpchat_local_main_sync_execution_record.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: e5df41d
+  previous_phase: "v7.25 vcpchat local main sync execution preflight"
+  default_next_phase: "v7.27 VCPChat Runtime Smoke Test Preflight"
+authorization_and_commands:
+  explicit_user_authorization_received: true
+  authorization_summary_cn: "用户明确授权执行本地 VCPChat 同步命令：创建 backup branch、fetch、将本地 main 对齐 origin/main、切换到 main。"
+  target_repository_name: VCPChat
+  command_result: success
+before_sync:
+  current_local_branch: codex/image-lab-review-console-bridge
+  current_local_head_short: 426a2a9
+  local_main_head_short: 426a2a9
+  local_origin_main_head_short_before_fetch: c97ff0c
+  remote_main_head_short_observed_via_ls_remote: b320e39
+  backup_branch_existed_before_sync: false
+after_sync:
+  current_local_branch: main
+  current_local_head_short: b320e39
+  local_main_head_short: b320e39
+  local_origin_main_head_short_after_fetch: b320e39
+  local_main_tracks_origin_main: true
+  backup_branch_name: backup/vcpchat-main-before-review-console-sync-20260506
+  backup_branch_head_short: 426a2a9
+  feature_branch_name: codex/image-lab-review-console-bridge
+  feature_branch_head_short: 426a2a9
+  remote_feature_branch_head_short: 426a2a9
+  worktree_clean_after_sync: true
+preservation_guarantees:
+  backup_branch_created: true
+  feature_branch_preserved: true
+  backup_branch_deleted: false
+  feature_branch_deleted: false
+  local_direct_commit_preserved_in_backup_branch: true
+  local_direct_commit_preserved_in_feature_branch: true
+side_effect_guard:
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_created: false
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+  env_or_secret_file_read: false
+  secret_value_copied: false
+  raw_local_path_saved: false
+  git_fetch_performed: true
+  git_switch_performed: true
+  local_main_sync_performed: true
+  branch_pointer_changed_by_this_phase: true
+  backup_branch_created_by_this_phase: true
+  branch_deleted: false
+  github_release_performed: false
+next_gate:
+  local_main_sync_complete: true
+  current_local_branch_is_main: true
+  runtime_smoke_test_preflight_required: true
+  release_requires_separate_authorization: true
+  branch_cleanup_requires_separate_authorization: true
+  next_safe_phase: "v7.27 VCPChat Runtime Smoke Test Preflight"
