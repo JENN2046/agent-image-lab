@@ -1,0 +1,68 @@
+status: completed_validated_v7_27_vcpchat_runtime_smoke_test_preflight
+version: v7.27
+current_phase: "v7.27 vcpchat runtime smoke test preflight"
+validation_file: scripts/validate_v7_27_vcpchat_runtime_smoke_test_preflight.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: 5bdde3a
+  previous_phase: "v7.26 vcpchat local main sync execution record"
+  default_next_phase: "v7.28 VCPChat Runtime Smoke Test Execution Record"
+current_vcpchat_baseline:
+  target_repository_name: VCPChat
+  current_local_branch: main
+  current_local_head_short: b320e39
+  local_main_head_short: b320e39
+  local_origin_main_head_short: b320e39
+  worktree_clean: true
+  bridge_files_present: true
+available_launch_scripts_observed:
+  package_name: vcp-chat-desktop
+  package_scripts_read_only_inspected: true
+  candidate_launch_scripts:
+    - npm run start:desktop:utf8
+    - npm run start:desktop
+    - npm run start:utf8
+    - npm start
+  recommended_future_launch_script: npm run start:desktop:utf8
+  script_execution_performed_by_this_phase: false
+smoke_test_scope:
+  goal_cn: "验证 VCPChat main 上的 Review Console bridge 是否能在运行时暴露最小 host bridge，并保持无插件、无 API、无 DailyNote、无图片创建边界。"
+  smoke_test_layers:
+    - static_syntax_check
+    - app_launch_check
+    - preload_bridge_presence_check
+    - renderer_mount_presence_check
+    - draft_generation_guard_check
+    - ipc_ack_contract_check
+candidate_commands_after_explicit_authorization:
+  pre_launch_validation_commands:
+    - node --check main.js
+    - node --check modules\ipc\imageLabReviewHandlers.js
+    - node --check preloads\chat.js
+    - node --check modules\renderer\imageLabReviewMount.js
+  launch_command_candidates:
+    - npm run start:desktop:utf8
+  app_launch_requires_explicit_authorization: true
+side_effect_guard:
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_created: false
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+  env_or_secret_file_read: false
+  secret_value_copied: false
+  raw_local_path_saved: false
+  app_launch_performed: false
+  runtime_smoke_test_performed: false
+  renderer_devtools_used: false
+  branch_deleted: false
+  github_release_performed: false
+stop_point:
+  stop_here: true
+  next_safe_phase: "v7.28 VCPChat Runtime Smoke Test Execution Record"
+  app_launch_blocked_until_explicit_authorization: true
+  runtime_smoke_test_blocked_until_explicit_authorization: true

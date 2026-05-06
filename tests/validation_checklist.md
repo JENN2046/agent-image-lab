@@ -2695,3 +2695,22 @@
 - [ ] v7.26 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.26 默认下一安全阶段为 `v7.27 VCPChat Runtime Smoke Test Preflight`。
 - [ ] `node scripts/validate_v7_26_vcpchat_local_main_sync_execution_record.js` 通过。
+
+## v7.27 VCPChat Runtime Smoke Test Preflight 检查
+
+- [ ] 当前阶段字符串为 `v7.27 vcpchat runtime smoke test preflight`。
+- [ ] `docs/179_v7_27_vcpchat_runtime_smoke_test_preflight.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_runtime_smoke_test_preflight.md` 存在。
+- [ ] `tests/schema_examples/v7_27_vcpchat_runtime_smoke_test_preflight.example.yaml` 存在。
+- [ ] `scripts/validate_v7_27_vcpchat_runtime_smoke_test_preflight.js` 存在。
+- [ ] v7.27 记录当前基线 `5bdde3a` 和上一阶段 `v7.26 vcpchat local main sync execution record`。
+- [ ] v7.27 必须记录 VCPChat 当前为 `main`，`current_local_head_short=b320e39`，工作树干净。
+- [ ] v7.27 必须记录 bridge 文件存在：`main.js`、`modules/ipc/imageLabReviewHandlers.js`、`preloads/chat.js`、`main.html`、`modules/renderer/imageLabReviewMount.js`。
+- [ ] v7.27 必须记录只读检查过 package scripts，且 `recommended_future_launch_script=npm run start:desktop:utf8`。
+- [ ] v7.27 必须记录 smoke test 断言包括 `window.imageLabReview`、`imageLabReviewMount`、`window.imageLabReviewRuntime`、`prototype_guard`。
+- [ ] v7.27 必须保持 `app_launch_performed=false`、`runtime_smoke_test_performed=false`、`renderer_devtools_used=false`。
+- [ ] v7.27 必须保持 `plugin_called=false`、`api_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_created=false`。
+- [ ] v7.27 必须保持 `dependency_changed=false`、`package_manifest_changed=false`、`lockfile_changed=false`。
+- [ ] v7.27 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.27 默认下一安全阶段为 `v7.28 VCPChat Runtime Smoke Test Execution Record`。
+- [ ] `node scripts/validate_v7_27_vcpchat_runtime_smoke_test_preflight.js` 通过。
