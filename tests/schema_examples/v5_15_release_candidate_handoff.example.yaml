@@ -1,0 +1,76 @@
+status: completed_validated_project_local_v5_15_release_candidate_handoff
+version: v5.15
+current_phase: "v5.15 release candidate handoff"
+validation_file: scripts/validate_v5_15_release_candidate_handoff.js
+
+handoff_state:
+  handoff_ready: true
+  baseline_tag: v5.14-release-candidate-validation-baseline
+  baseline_commit: 6fc0c401e739e93986e32d1797b80d7296e2d1c6
+  baseline_commit_short: 6fc0c40
+  tag_created: true
+  tag_pushed: true
+  master_origin_synced: true
+
+package_evidence:
+  package_directory: release_packages/
+  package_directory_git_ignored: true
+  zip_name: agent-image-lab-v5.14-release-candidate-validation-baseline.zip
+  sha256_name: agent-image-lab-v5.14-release-candidate-validation-baseline.zip.sha256
+  zip_sha256: 2fa0204a855ea9b74a36c5f8bf701356dd35414d3b35d3e85e1bf367492197db
+  verify_directory: release_packages/_verify_v5.14-release-candidate-validation-baseline/
+  package_created: true
+  sha256_created: true
+  package_inside_validation_passed: true
+  package_contains_git_directory: false
+  package_contains_release_packages_directory: false
+  package_contains_runs_directory: false
+  package_contains_media_binary: false
+  package_contains_secret_file: false
+
+validation_evidence:
+  git_diff_check_passed: true
+  validate_mvp_passed: true
+  local_validation_passed_with_manual_review_warnings: true
+  v5_12_release_candidate_readiness_passed: true
+  sha256_match: true
+  package_inside_required_files_present: true
+  package_inside_boundary_passed: true
+
+release_boundary:
+  github_release_published: false
+  github_release_publish_authorized: false
+  release_assets_uploaded: false
+  release_notes_finalized_for_public_release: false
+  release_upload_allowed_now: false
+  release_publish_next_requires_explicit_authorization: true
+
+execution_boundary:
+  real_vcpchat_source_read: false
+  real_vcptoolbox_source_read: false
+  real_manifest_read: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_file_created: false
+  additional_real_generation_authorized: false
+
+next_milestone_options:
+  - name: "GitHub Release preflight"
+    phase_hint: "v5.16 release publication preflight"
+    allowed_now: false
+    requires_explicit_authorization: true
+  - name: "continue local product/runtime planning"
+    phase_hint: "v6.0 next milestone planning"
+    allowed_now: true
+    requires_explicit_authorization: false
+  - name: "pause at handoff baseline"
+    phase_hint: "no further action"
+    allowed_now: true
+    requires_explicit_authorization: false
+
+notes_cn:
+  - "本记录说明 v5.14 tag、zip、SHA256 和包内验收结果已经可交接。"
+  - "本记录不发布 GitHub Release，也不授权上传 release assets。"
+  - "本记录不授权新的真实插件调用、DailyNote 写入、VCP 记忆写入或真实 VCPChat / VCPToolBox 读取。"

@@ -2016,3 +2016,20 @@
 - [ ] `validate_mvp.ps1` 执行 v5.12 release candidate readiness validation 并检查输出字段。
 - [ ] v5.12 不执行 `git add`、commit、push、远端 tag、PR、merge、GitHub Release 发布或新的真实执行。
 - [ ] v5.12 不读真实 VCPChat、不改真实 VCPChat、不改真实 VCPToolBox、不调用插件、API、DailyNote 或 VCP 记忆。
+
+## v5.15 Release Candidate Handoff 检查
+
+- [ ] 当前阶段字符串为 `v5.15 release candidate handoff`。
+- [ ] `docs/140_v5_15_release_candidate_handoff.md` 存在。
+- [ ] `tests/schema_examples/v5_15_release_candidate_handoff.example.yaml` 存在。
+- [ ] `scripts/validate_v5_15_release_candidate_handoff.js` 存在。
+- [ ] v5.15 记录 baseline tag 为 `v5.14-release-candidate-validation-baseline`。
+- [ ] v5.15 记录 baseline commit 为 `6fc0c401e739e93986e32d1797b80d7296e2d1c6`。
+- [ ] v5.15 记录 zip SHA256 为 `2fa0204a855ea9b74a36c5f8bf701356dd35414d3b35d3e85e1bf367492197db`。
+- [ ] v5.15 记录 `release_packages/` 保持 Git ignored。
+- [ ] v5.15 记录 package-inside validation 已通过，包内不包含 `.git/`、`release_packages/`、`runs/`、图片二进制或 secret 文件。
+- [ ] v5.15 记录 GitHub Release 尚未发布，release assets 尚未上传。
+- [ ] v5.15 保持 `real_vcpchat_source_read=false`、`real_vcptoolbox_source_read=false`、`real_manifest_read=false`。
+- [ ] v5.15 保持 `api_called=false`、`vcp_plugin_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_file_created=false`。
+- [ ] v5.15 明确下一步如需发布 GitHub Release，必须进入独立 release preflight 并获得明确授权。
+- [ ] `node scripts/validate_v5_15_release_candidate_handoff.js` 通过。
