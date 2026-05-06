@@ -2558,3 +2558,22 @@
 - [ ] v7.19 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
 - [ ] v7.19 默认下一安全阶段为 `v7.20 VCPChat Review Console Review and CI Response Loop`。
 - [ ] `node scripts/validate_v7_19_vcpchat_review_console_ready_for_review_execution_record.js` 通过。
+
+## v7.20 VCPChat Review Console Review and CI Response Loop 检查
+
+- [ ] 当前阶段字符串为 `v7.20 vcpchat review console review and ci response loop`。
+- [ ] `docs/172_v7_20_vcpchat_review_console_review_ci_response_loop.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_review_console_review_ci_response_loop.md` 存在。
+- [ ] `tests/schema_examples/v7_20_vcpchat_review_console_review_ci_response_loop.example.yaml` 存在。
+- [ ] `scripts/validate_v7_20_vcpchat_review_console_review_ci_response_loop.js` 存在。
+- [ ] v7.20 记录当前基线 `1af484c` 和上一阶段 `v7.19 vcpchat review console ready-for-review execution record`。
+- [ ] v7.20 必须记录 PR #34 当前为 `OPEN`、`pr_is_draft=false`、`mergeable_state=MERGEABLE`。
+- [ ] v7.20 必须记录 `reviews_total=0`、`latest_reviews_total=0`、`blocking_review_observed=false`。
+- [ ] v7.20 必须记录 `status_checks_success=2`、`status_checks_failed=0`、`status_checks_pending=0`。
+- [ ] v7.20 必须记录 `merge_preflight_candidate=true` 和 `merge_preflight_recommended=true`。
+- [ ] v7.20 必须保持 `pr_state_changed_by_this_phase=false`、`pr_merge_performed=false`、`vcpchat_code_modified_by_this_phase=false`。
+- [ ] v7.20 必须保持 `plugin_called=false`、`api_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_created=false`。
+- [ ] v7.20 必须保持 `dependency_changed=false`、`package_manifest_changed=false`、`lockfile_changed=false`。
+- [ ] v7.20 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.20 默认下一安全阶段为 `v7.21 VCPChat Review Console Merge Authorization Preflight`。
+- [ ] `node scripts/validate_v7_20_vcpchat_review_console_review_ci_response_loop.js` 通过。
