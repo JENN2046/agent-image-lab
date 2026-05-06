@@ -2521,3 +2521,21 @@
 - [ ] v7.17 必须明确转 ready-for-review、merge、release、继续修改 VCPChat 都不在本阶段执行。
 - [ ] v7.17 默认下一安全阶段为 `v7.18 VCPChat Review Console Ready-for-review Authorization Gate`。
 - [ ] `node scripts/validate_v7_17_vcpchat_review_console_pr_review_follow_up.js` 通过。
+
+## v7.18 VCPChat Review Console Ready-for-review Authorization Gate 检查
+
+- [ ] 当前阶段字符串为 `v7.18 vcpchat review console ready-for-review authorization gate`。
+- [ ] `docs/170_v7_18_vcpchat_review_console_ready_for_review_authorization_gate.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_review_console_ready_for_review_authorization_gate.md` 存在。
+- [ ] `tests/schema_examples/v7_18_vcpchat_review_console_ready_for_review_authorization_gate.example.yaml` 存在。
+- [ ] `scripts/validate_v7_18_vcpchat_review_console_ready_for_review_authorization_gate.js` 存在。
+- [ ] v7.18 记录当前基线 `2aea837` 和上一阶段 `v7.17 vcpchat review console pr review follow-up`。
+- [ ] v7.18 必须记录 PR #34 当前仍为 `OPEN` + draft，且 `mergeable_state=MERGEABLE`。
+- [ ] v7.18 必须记录 `ready_for_review_authorization_request_ready=true`，唯一允许的后续状态切换命令是 `gh pr ready 34`。
+- [ ] v7.18 必须记录 `pr_ready_for_review_performed=false`、`pr_state_changed_by_this_phase=false`、`pr_merge_performed=false`。
+- [ ] v7.18 必须禁止 merge、close、force push、继续修改 VCPChat、release、tag、依赖安装或更新。
+- [ ] v7.18 必须保持 `plugin_called=false`、`api_called=false`、`daily_note_called=false`、`vcp_memory_written=false`、`image_created=false`。
+- [ ] v7.18 必须保持 `dependency_changed=false`、`package_manifest_changed=false`、`lockfile_changed=false`。
+- [ ] v7.18 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.18 默认下一安全阶段为 `v7.19 VCPChat Review Console Ready-for-review Execution Record`。
+- [ ] `node scripts/validate_v7_18_vcpchat_review_console_ready_for_review_authorization_gate.js` 通过。

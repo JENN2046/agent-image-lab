@@ -1,0 +1,62 @@
+status: completed_validated_v7_18_vcpchat_ready_for_review_authorization_gate
+version: v7.18
+current_phase: "v7.18 vcpchat review console ready-for-review authorization gate"
+validation_file: scripts/validate_v7_18_vcpchat_review_console_ready_for_review_authorization_gate.js
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  head_commit_short: 2aea837
+  previous_phase: "v7.17 vcpchat review console pr review follow-up"
+  default_next_phase: "v7.19 VCPChat Review Console Ready-for-review Execution Record"
+current_pr_gate_inputs:
+  target_repository_name: VCPChat
+  target_repository_ref: JENN2046/VCPChat
+  pr_number: 34
+  pr_title: "[codex] add Image Lab Review Console bridge"
+  pr_url: "https://github.com/JENN2046/VCPChat/pull/34"
+  pr_state: OPEN
+  pr_is_draft: true
+  review_decision: none_recorded
+  mergeable_state: MERGEABLE
+  base_branch: main
+  base_head_short: c97ff0c
+  head_branch: codex/image-lab-review-console-bridge
+  head_commit_short: 426a2a9
+  status_checks_total: 2
+  status_checks_success: 2
+  status_checks_failed: 0
+  status_checks_pending: 0
+  all_observed_checks_success: true
+ready_for_review_authorization_request:
+  approval_required_before_remote_pr_state_change: true
+  target_action: mark_pr_ready_for_review
+  target_pr_number: 34
+  allowed_command_after_approval:
+    - gh pr ready 34
+  expected_after_action:
+    pr_state: OPEN
+    pr_is_draft: false
+    pr_merge_performed: false
+  required_user_approval_phrase_cn: "我明确授权将 VCPChat PR #34 转为 ready-for-review。"
+  broad_no_approval_preference_is_not_merge_authorization: true
+side_effect_guard:
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_created: false
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+  env_or_secret_file_read: false
+  secret_value_copied: false
+  raw_local_path_saved: false
+  pr_state_changed_by_this_phase: false
+  pr_ready_for_review_performed: false
+  pr_merge_performed: false
+  github_release_performed: false
+stop_point:
+  stop_here: true
+  next_safe_phase: "v7.19 VCPChat Review Console Ready-for-review Execution Record"
+  pr_ready_for_review_blocked_until_action: true
+  pr_merge_blocked_until_separate_authorization: true
