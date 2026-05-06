@@ -3,7 +3,7 @@ const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
 const recordPhase = "v5.8 handoff freshness validation";
-const expectedCurrentPhase = "v5.11 post-merge reconciliation";
+const expectedCurrentPhase = "v5.12 release candidate readiness";
 
 const boardFiles = [
   ".agent_board/BLOCKERS.md",
@@ -95,13 +95,14 @@ function main() {
     handoffSummary.includes(`${expectedCurrentPhase} is active locally`) &&
     handoffValidation.includes("node scripts/validate_v5_handoff_freshness.js: passed");
   const taskQueueCurrent =
-    taskQueue.includes("If user authorizes v5.11 version movement") &&
+    taskQueue.includes("If user authorizes v5.12 version movement") &&
     taskQueue.includes("Completed v5.8 handoff freshness validation.") &&
     taskQueue.includes("Completed v5.9 expanded v5 index consistency validation.") &&
     taskQueue.includes("Completed v5.10 local true-loop candidate delivery closeout.") &&
-    taskQueue.includes("Completed v5.11 post-merge reconciliation.");
+    taskQueue.includes("Completed v5.11 post-merge reconciliation.") &&
+    taskQueue.includes("Completed v5.12 release candidate readiness.");
   const checkpointCurrent =
-    checkpoint.includes("v5.11 local: PR #2 post-merge reconciliation recorded") &&
+    checkpoint.includes("v5.12 local: final delivery candidate package readiness recorded") &&
     checkpoint.includes("node scripts/validate_v5_handoff_freshness.js: passed");
   const validationLogCurrent =
     validationLog.includes("VALIDATION-20260506-V5-8") &&
@@ -156,7 +157,7 @@ function main() {
   assert(runStateCurrent, "RUN_STATE must reflect the actual current phase and validation.");
   assert(handoffCurrent, "HANDOFF must reflect the actual current phase and validation.");
   assert(taskQueueCurrent, "TASK_QUEUE must reflect the current v5 queue state.");
-  assert(checkpointCurrent, "CHECKPOINT must reflect the current v5.11 checkpoint state.");
+  assert(checkpointCurrent, "CHECKPOINT must reflect the current v5.12 checkpoint state.");
   assert(validationLogCurrent, "VALIDATION_LOG must include v5.8 validation entry.");
   assert(resumePromptPresent, "HANDOFF must preserve exact resume prompt.");
   assert(hardStopGatesPresent, "Agent board must preserve hard stop gates.");

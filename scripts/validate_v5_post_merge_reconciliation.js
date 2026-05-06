@@ -2,7 +2,8 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
-const currentPhase = "v5.11 post-merge reconciliation";
+const recordPhase = "v5.11 post-merge reconciliation";
+const currentPhase = "v5.12 release candidate readiness";
 const mergeCommitShort = "3e3405e";
 const headCommitShort = "5ccf059";
 const tagName = "v5.10-local-delivery-agents-merge";
@@ -43,10 +44,13 @@ function main() {
   const requiredFiles = [
     "docs/137_v5_10_local_true_loop_candidate_delivery.md",
     "docs/138_v5_11_post_merge_reconciliation.md",
+    "docs/139_v5_12_release_candidate_readiness.md",
     "tests/schema_examples/v5_10_local_true_loop_candidate_delivery.example.yaml",
     "tests/schema_examples/v5_11_post_merge_reconciliation.example.yaml",
+    "tests/schema_examples/v5_12_release_candidate_readiness.example.yaml",
     "scripts/validate_v5_true_loop_candidate_delivery.js",
     "scripts/validate_v5_post_merge_reconciliation.js",
+    "scripts/validate_v5_12_release_candidate_readiness.js",
     "scripts/validate_v5_handoff_freshness.js",
     "scripts/validate_v5_index_consistency.js",
     "scripts/validate_mvp.ps1",
@@ -88,8 +92,8 @@ function main() {
       "PR #2 status: merged",
       `PR #2 merge commit: ${mergeCommitShort}`,
       `PR #2 head: ${headCommitShort}`,
-      `Local head: ${mergeCommitShort}`,
-      "pending local commits: 0"
+      `Historical v5.11 local head: ${mergeCommitShort}`,
+      "Historical v5.11 pending local commits: 0"
     ]) ||
     includesAll(content, [
       "pr_number: 2",
@@ -124,7 +128,7 @@ function main() {
     record.includes("tag_pushed: true") &&
     schema.includes("tag_pushed: true");
   const indexesCurrent =
-    [readme, manifest, roadmap, releaseNotes, checklist].every((content) => content.includes(currentPhase)) &&
+    [readme, manifest, roadmap, releaseNotes, checklist].every((content) => content.includes(recordPhase)) &&
     readme.includes("docs/138_v5_11_post_merge_reconciliation.md") &&
     manifest.includes("docs/138_v5_11_post_merge_reconciliation.md") &&
     checklist.includes("## v5.11 Post-Merge Reconciliation 检查");
@@ -164,7 +168,7 @@ function main() {
     runState.includes("Commit/tag/push authorization: not active") &&
     handoff.includes("Commit/tag/push/release require explicit separate authorization");
 
-  assert(currentPhaseRecorded, "Current phase must be v5.11 post-merge reconciliation.");
+  assert(currentPhaseRecorded, "Current phase must be v5.12 release candidate readiness.");
   assert(mergeStateRecorded, "PR #2 merge state must be recorded.");
   assert(syncStateRecorded, "Local master and origin/master sync state must be recorded.");
   assert(tagRecorded, "v5.10 delivery tag state must be recorded.");
@@ -178,7 +182,9 @@ function main() {
     passed: true,
     post_merge_reconciliation: {
       version: "v5.11",
-      current_phase: currentPhase,
+      record_phase: recordPhase,
+      current_phase: recordPhase,
+      run_state_current_phase: currentPhase,
       pr_number: 2,
       pr_merged: true,
       pr_merge_commit_short: mergeCommitShort,

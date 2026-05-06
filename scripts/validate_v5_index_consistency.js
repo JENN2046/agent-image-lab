@@ -75,6 +75,12 @@ const v5Records = [
     label: "v5.11 post-merge reconciliation",
     doc: "docs/138_v5_11_post_merge_reconciliation.md",
     schema: "tests/schema_examples/v5_11_post_merge_reconciliation.example.yaml"
+  },
+  {
+    id: "v5.12",
+    label: "v5.12 release candidate readiness",
+    doc: "docs/139_v5_12_release_candidate_readiness.md",
+    schema: "tests/schema_examples/v5_12_release_candidate_readiness.example.yaml"
   }
 ];
 
@@ -89,7 +95,8 @@ const validationScripts = [
   "scripts/validate_v5_local_batch_commit_readiness.js",
   "scripts/validate_v5_handoff_freshness.js",
   "scripts/validate_v5_true_loop_candidate_delivery.js",
-  "scripts/validate_v5_post_merge_reconciliation.js"
+  "scripts/validate_v5_post_merge_reconciliation.js",
+  "scripts/validate_v5_12_release_candidate_readiness.js"
 ];
 
 function exists(relativePath) {
@@ -158,23 +165,24 @@ function main() {
   const taskQueue = read(".agent_board/TASK_QUEUE.md");
 
   const readmeIndexCurrent =
-    readme.includes("v5.11 post-merge reconciliation") &&
+    readme.includes("v5.12 release candidate readiness") &&
     includesAll(readme, docs) &&
     includesAllPathVariants(readme, validationScripts);
   const manifestIndexCurrent =
-    manifest.includes("v5.11 post-merge reconciliation") &&
+    manifest.includes("v5.12 release candidate readiness") &&
     includesAll(manifest, docs) &&
     includesAll(manifest, validationScripts);
   const releaseNotesCurrent =
     releaseNotes.includes("Added v5.8 handoff freshness validation.") &&
     releaseNotes.includes("Added v5.9 expanded v5 index consistency validation.") &&
     releaseNotes.includes("Added v5.10 local true-loop candidate delivery closeout.") &&
-    releaseNotes.includes("Added v5.11 post-merge reconciliation.");
+    releaseNotes.includes("Added v5.11 post-merge reconciliation.") &&
+    releaseNotes.includes("Added v5.12 release candidate readiness.");
   const roadmapCurrent =
-    roadmap.includes("v5.11 post-merge reconciliation") &&
+    roadmap.includes("v5.12 release candidate readiness") &&
     includesAll(roadmap, labels);
   const checklistCurrent =
-    checklist.includes("## v5.11 Post-Merge Reconciliation 检查") &&
+    checklist.includes("## v5.12 Release Candidate Readiness 检查") &&
     checklist.includes("validate_v5_index_consistency.js");
   const validateMvpCurrent =
     includesAll(validateMvp, docs) &&
@@ -190,13 +198,16 @@ function main() {
       "docs/138_v5_11_post_merge_reconciliation.md",
       "tests/schema_examples/v5_11_post_merge_reconciliation.example.yaml",
       "scripts/validate_v5_post_merge_reconciliation.js",
+      "docs/139_v5_12_release_candidate_readiness.md",
+      "tests/schema_examples/v5_12_release_candidate_readiness.example.yaml",
+      "scripts/validate_v5_12_release_candidate_readiness.js",
       "scripts/validate_v5_index_consistency.js"
     ]);
   const agentBoardCurrent =
-    runState.includes("v5.11 post-merge reconciliation") &&
-    handoff.includes("v5.11 post-merge reconciliation") &&
+    runState.includes("v5.12 release candidate readiness") &&
+    handoff.includes("v5.12 release candidate readiness") &&
     validationLog.includes("node scripts/validate_v5_index_consistency.js") &&
-    taskQueue.includes("Completed v5.11 post-merge reconciliation.");
+    taskQueue.includes("Completed v5.12 release candidate readiness.");
   const remoteGatePreserved =
     runState.includes("Remote action in current batch: none") &&
     runState.includes("Commit/tag/push authorization: not active") &&
@@ -204,13 +215,13 @@ function main() {
 
   assert(readmeIndexCurrent, "README v5 index is not current.");
   assert(manifestIndexCurrent, "MANIFEST v5 index is not current.");
-  assert(releaseNotesCurrent, "RELEASE_NOTES v5.11 entry is missing.");
-  assert(roadmapCurrent, "Roadmap v5.11 entry is missing.");
-  assert(checklistCurrent, "Validation checklist v5.11 section is missing.");
+  assert(releaseNotesCurrent, "RELEASE_NOTES v5.12 entry is missing.");
+  assert(roadmapCurrent, "Roadmap v5.12 entry is missing.");
+  assert(checklistCurrent, "Validation checklist v5.12 section is missing.");
   assert(validateMvpCurrent, "validate_mvp.ps1 v5 index is not current.");
-  assert(localCommitScopeCurrent, "local commit scope v5.11 allowlist is not current.");
-  assert(agentBoardCurrent, "Agent board v5.11 state is not current.");
-  assert(remoteGatePreserved, "v5.11 must preserve remote action gate.");
+  assert(localCommitScopeCurrent, "local commit scope v5.12 allowlist is not current.");
+  assert(agentBoardCurrent, "Agent board v5.12 state is not current.");
+  assert(remoteGatePreserved, "v5.12 must preserve remote action gate.");
 
   const result = {
     passed: true,

@@ -2,6 +2,47 @@
 
 ## Entries
 
+## VALIDATION-20260506-V5-12
+
+Task:
+
+```text
+Open v5.12 release candidate readiness and package the true-loop candidate as a final delivery candidate.
+```
+
+Validation:
+
+```text
+scripts/validate_mvp.ps1
+scripts/validate-agent-image-lab-local.ps1
+node scripts/validate_v5_12_release_candidate_readiness.js
+node scripts/validate_v5_post_merge_reconciliation.js
+node scripts/validate_v5_true_loop_candidate_delivery.js
+node scripts/validate_v5_index_consistency.js
+node scripts/validate_v5_handoff_freshness.js
+node scripts/validate_agent_board_state.js
+node scripts/validate_local_commit_scope.js
+git diff --check
+```
+
+Result:
+
+```text
+The true-loop closeout candidate is now packaged as a final delivery candidate: release readiness, final acceptance, true-loop closeout, GitHub intake review, v5.10 delivery closeout, v5.11 post-merge reconciliation, v5.12 record, schema example, validator, top-level indexes, and agent board handoff state are aligned.
+```
+
+Boundary:
+
+```text
+No git add, commit, push, remote tag, PR, merge, GitHub Release publication, real VCPChat read, real VCPToolBox read, real manifest read, plugin call, API call, DailyNote call, VCP memory write, or image creation is performed in this v5.12 local batch.
+```
+
+Next:
+
+```text
+The v5.12 release candidate readiness batch is ready for explicit commit/tag/push/PR/release authorization, but this log entry does not grant that authorization.
+```
+
 ## VALIDATION-20260506-V5-11
 
 Task:
