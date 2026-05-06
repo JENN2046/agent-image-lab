@@ -2216,3 +2216,21 @@
 - [ ] v6.9 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
 - [ ] v6.9 默认下一阶段为 `v7.0 First VCPChat Embed Runtime Patch Hard Authorization`。
 - [ ] `node scripts/validate_v6_9_vcpchat_embed_implementation_authorization_request.js` 通过。
+
+## v7.0 VCPChat Read-only Intake Sanitized Record 检查
+
+- [ ] 当前阶段字符串为 `v7.0 vcpchat read-only intake sanitized record`。
+- [ ] `docs/152_v7_0_vcpchat_read_only_intake_sanitized_record.md` 存在。
+- [ ] `review_console/embed_contract/vcpchat_read_only_intake_sanitized_record.md` 存在。
+- [ ] `tests/schema_examples/v7_0_vcpchat_read_only_intake_sanitized_record.example.yaml` 存在。
+- [ ] `scripts/validate_v7_0_vcpchat_read_only_intake_sanitized_record.js` 存在。
+- [ ] v7.0 记录当前基线 `a8b1619` 和上一阶段 `v6.9 vcpchat embed implementation authorization request`。
+- [ ] v7.0 只记录脱敏 intake 摘要，必须保持 `raw_local_path_saved=false`、`raw_source_code_copied=false`、`source_write_performed=false`。
+- [ ] v7.0 不保存真实本机路径、secret、token、cookie、密码、config.env 内容或源码大段原文。
+- [ ] v7.0 记录结构发现：main.js、main.html、preload.js、preloads/、renderer.js。
+- [ ] v7.0 记录 Electron 观察：main window `contextIsolation=true`、`nodeIntegration=false`。
+- [ ] v7.0 记录 v7.1 只读范围：modules/services/preloadPaths*、preloads/shared/*、preloads/chat.js。
+- [ ] v7.0 保持不修改真实 VCPChat / VCPToolBox，不创建 IPC/preload/renderer 或 Adapter 执行入口。
+- [ ] v7.0 保持不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片。
+- [ ] v7.0 默认下一阶段为 `v7.1 VCPChat Preload Surface Read-only Intake`。
+- [ ] `node scripts/validate_v7_0_vcpchat_read_only_intake_sanitized_record.js` 通过。

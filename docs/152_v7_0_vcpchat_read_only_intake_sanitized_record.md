@@ -1,0 +1,140 @@
+# v7.0 VCPChat Read-only Intake Sanitized Record
+
+本文记录 v7.0 VCPChat read-only intake 的脱敏结果。该阶段只把一次已授权的真实 VCPChat 只读结构观察转写为本仓库内脱敏记录；不保存真实本机路径，不复制源码大段内容，不修改真实 VCPChat / VCPToolBox，不创建 IPC/preload/renderer 实现代码，不调用插件、API、DailyNote，不写 VCP 记忆，不创建图片，也不发布 GitHub Release。
+
+```yaml
+status: completed_validated_project_local_v7_0_vcpchat_read_only_intake_sanitized_record
+version: v7.0
+current_phase: "v7.0 vcpchat read-only intake sanitized record"
+validation_file: scripts/validate_v7_0_vcpchat_read_only_intake_sanitized_record.js
+current_head: a8b1619
+previous_phase: "v6.9 vcpchat embed implementation authorization request"
+previous_record: docs/151_v6_9_vcpchat_embed_implementation_authorization_request.md
+default_next_phase: "v7.1 VCPChat Preload Surface Read-only Intake"
+sanitized_record_only: true
+implementation_not_authorized_by_this_record: true
+```
+
+## Intake Scope
+
+```yaml
+intake_scope:
+  target_repository_name: VCPChat
+  target_local_root_redacted: "<VCPCHAT_LOCAL_ROOT_REDACTED>"
+  target_branch_observed: main
+  target_remote_branch_alignment:
+    origin_main_same_head: true
+    origin_prod_stable_same_head: true
+    local_prod_stable_same_head: true
+  target_head_short: c97ff0c
+  source_read_authorized: true
+  authorized_source_observation_completed: true
+  source_read_only: true
+  source_write_performed: false
+```
+
+## Sanitized Structure Findings
+
+```yaml
+sanitized_structure_findings:
+  electron_shape_cn: "VCPChat 当前是根目录直放的 Electron 结构。"
+  main_process_entry: main.js
+  main_window_html: main.html
+  legacy_preload_shim: preload.js
+  active_preload_directory: preloads/
+  renderer_entry: renderer.js
+  missing_expected_directories:
+    - src/
+    - electron/
+    - main/
+    - renderer/
+  observed_support_directories:
+    - preloads/
+    - public/
+```
+
+## Electron Boundary Observed
+
+```yaml
+electron_boundary_observed:
+  main_window_context_isolation: true
+  main_window_node_integration: false
+  utility_window_context_isolation: true
+  utility_window_node_integration: false
+  voice_window_context_isolation: true
+  voice_window_node_integration: false
+  preload_resolution_pattern_cn: "主窗口通过项目内 preload role resolver 选择 chat preload。"
+  preload_shim_meaning_cn: "根目录 preload.js 是兼容 shim，真实实现转入 preloads/ 体系。"
+```
+
+## Preload Surface Candidates
+
+```yaml
+preload_surface_candidates:
+  resolver_candidate: modules/services/preloadPaths
+  chat_preload_candidate: preloads/chat.js
+  utility_preload_candidate: preloads/utility.js
+  desktop_preload_candidate: preloads/desktop.js
+  shared_preload_catalog_candidate: preloads/shared/catalog.js
+  shared_preload_roles_candidate: preloads/shared/roles.js
+  shared_api_factory_candidate: preloads/shared/apiFactory.js
+  v7_1_requested_read_scope:
+    - modules/services/preloadPaths*
+    - preloads/shared/*
+    - preloads/chat.js
+```
+
+## Sanitization Guard
+
+```yaml
+sanitization_guard:
+  raw_local_path_saved: false
+  raw_source_code_copied: false
+  env_file_read: false
+  config_env_read: false
+  secret_file_read: false
+  token_or_cookie_read: false
+  package_scripts_executed: false
+  npm_install_executed: false
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_file_created: false
+```
+
+## Boundary State
+
+```yaml
+boundary_state:
+  sanitized_record_added: true
+  implementation_task_authorized: false
+  implementation_allowed: false
+  runtime_code_modified: false
+  vcpchat_code_modified: false
+  vcptoolbox_code_modified: false
+  tag_created: false
+  package_created: false
+  github_release_published: false
+  release_assets_uploaded: false
+  vcpchat_read_only_intake_completed: true
+  vcpchat_read_only_intake_limited_to_authorized_scope: true
+  real_vcptoolbox_source_read: false
+  real_manifest_read: false
+  ipc_handler_created: false
+  preload_runtime_code_created: false
+  renderer_runtime_code_created: false
+  adapter_execution_entrypoint_created: false
+  api_called: false
+  vcp_plugin_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  disk_write_runtime_performed: false
+  image_file_created: false
+```
+
+## Acceptance Meaning
+
+v7.0 表示已授权的 VCPChat 只读 intake 结果已被脱敏记录。它不代表真实 VCPChat 被修改，不代表 IPC/preload/renderer 已创建，也不代表插件、API、DailyNote 或图片流程被触发。
+
+默认下一步是 `v7.1 VCPChat Preload Surface Read-only Intake`，只读取 `modules/services/preloadPaths*`、`preloads/shared/*`、`preloads/chat.js`，继续不写真实 VCPChat。
