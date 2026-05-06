@@ -261,25 +261,41 @@ Use for:
 
 ---
 
-### A5 — Real External Access
+### A5 — Autonomous Production Execution
 
 Default: forbidden.
 
-Any of the following belongs to A5 and requires explicit user authorization:
+A5 is real production-grade autonomous execution.
+
+It is not just permission to read real VCPChat / VCPToolBox. It allows Codex, within an explicit authorization scope, to perform real production actions instead of only preparing dry-run plans or authorization templates.
+
+Examples of A5 actions:
 
 - Read real VCPChat
 - Read real VCPToolBox
 - Read real `plugin-manifest.json`
 - Read source entry files
+- Analyze real source code
 - Modify VCPChat
 - Modify VCPToolBox
+- Modify real integration code
+- Create real IPC / preload / renderer integration code
+- Create real Adapter execution entrypoints
 - Call plugins
 - Call APIs
+- Generate real images
 - Call DailyNote
 - Write VCP memory
-- Create images
-- Create real Adapter execution code
-- Create real IPC / preload / renderer integration code
+- Commit production changes
+- Create tags
+- Push
+- Generate release packages
+
+A5 requires a separate explicit authorization package before any production action begins. The authorization must name the real target systems, exact allowed paths or objects, allowed commands or operations, forbidden paths or operations, write boundaries, validation requirements, rollback path, reviewer, and stop conditions.
+
+A4 is the pre-production authorization gate. A5 is autonomous operation after that gate has been explicitly opened.
+
+Without an active A5 authorization package, every A5 action remains a Hard Stop.
 
 Without explicit user authorization, do not enter A5.
 
@@ -288,6 +304,8 @@ Without explicit user authorization, do not enter A5.
 ## 5. Permanent Hard Stops
 
 Stop immediately and do not continue automatically if any of the following is required or discovered:
+
+Exception: an action listed below may proceed only when an active A5 authorization package explicitly covers that exact action, target, path or object, command or operation, validation requirement, rollback path, reviewer, and stop condition. If any part of the authorization is missing, ambiguous, expired, or broader than the current task, stop.
 
 ```text
 need to read real VCPChat
@@ -667,7 +685,7 @@ test example update
 read-only validation report
 ```
 
-Codex must stop before:
+Codex must stop before the following actions unless an active A5 authorization package explicitly covers the exact action:
 
 ```text
 real VCPChat read
@@ -695,7 +713,7 @@ v0.3 adapter recon authorization gates
 v2.1 real-read authorization chain baseline
 ```
 
-Any future stage involving real external source reading, real source analysis, real integration, or real execution must be separately authorized.
+Any future stage involving real external source reading, real source analysis, real integration, or real execution must be separately authorized through A5.
 
 Default allowed continuation:
 
