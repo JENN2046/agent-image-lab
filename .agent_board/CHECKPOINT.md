@@ -51,6 +51,10 @@ v5.9 validation: expanded v5 index consistency validation is validated locally a
 v5.9 local commit: commit 9ac4ca8 records expanded v5 index consistency validation
 v5.10 local: true-loop candidate delivery closeout added for local v1.0 delivery completion
 v5.10 validation: true-loop candidate delivery closeout is validated locally and awaits explicit git add/commit/push/PR/release authorization
+PR #2 merged: merge commit 3e3405e includes v5.10 local delivery and AGENTS merge
+PR #2 head: 5ccf059; tag v5.10-local-delivery-agents-merge points to the v5.10 delivery commit
+v5.11 local: PR #2 post-merge reconciliation recorded
+v5.11 validation: post-merge reconciliation is validated locally and awaits explicit git add/commit/push/PR/release authorization
 ```
 
 ## Current Boundary
@@ -89,6 +93,7 @@ node scripts/validate_v5_index_consistency.js: passed
 node scripts/validate_v5_local_batch_commit_readiness.js: passed
 node scripts/validate_v5_handoff_freshness.js: passed
 node scripts/validate_v5_true_loop_candidate_delivery.js: passed
+node scripts/validate_v5_post_merge_reconciliation.js: passed
 git diff --check: passed
 ```
 

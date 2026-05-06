@@ -56,6 +56,7 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Added v5.8 handoff freshness validation.
 - Added v5.9 expanded v5 index consistency validation.
 - Added v5.10 local true-loop candidate delivery closeout.
+- Added v5.11 post-merge reconciliation.
 
 ## Safety Status
 
