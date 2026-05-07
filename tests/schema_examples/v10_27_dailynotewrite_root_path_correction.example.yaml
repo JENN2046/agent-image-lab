@@ -1,0 +1,45 @@
+status: completed_root_path_corrected
+version: v10.27
+current_phase: "v10.27 DailyNoteWrite root path correction"
+validation_file: scripts/validate_v10_27_dailynotewrite_root_path_correction.js
+
+root_path_correction:
+  affected_writer: DailyNoteWrite
+  affected_key: KNOWLEDGEBASE_ROOT_PATH
+  previous_root_class: plugin_dir_dailynote
+  corrected_root_class: vcp_root_dailynote
+  correction_scope: single root-path config key
+  raw_config_value_printed: false
+  secret_value_printed: false
+  endpoint_printed: false
+  runtime_log_recorded: false
+
+verification:
+  no_write_recomputation_before_correction: plugin_dir_dailynote
+  no_write_recomputation_after_correction: vcp_root_dailynote
+  knowledgebase_key_present_after_correction: true
+  project_base_key_required: false
+  canonical_target_directory_exists: true
+  future_write_root_expected: vcp_root_dailynote
+
+boundary_confirmation:
+  dailynotewrite_rerun_performed: false
+  daily_note_write_performed_in_v10_27: false
+  vcp_memory_write_performed_in_v10_27: false
+  plugin_or_api_generation_called: false
+  image_created_in_this_phase: false
+  submitDraft_called: false
+  existing_file_overwritten: false
+  raw_config_value_recorded: false
+  raw_external_path_recorded: false
+  secret_value_recorded: false
+  commit_performed: false
+  tag_performed: false
+  push_performed: false
+  pr_created: false
+  release_created: false
+
+acceptance_assertions:
+  - "v10.27 records that future DailyNoteWrite root resolution is corrected to vcp_root_dailynote."
+  - "v10.27 does not rerun DailyNoteWrite and does not create another memory write."
+  - "v10.27 does not record raw config values, raw external paths, secrets, endpoints, or runtime logs."

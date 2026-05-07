@@ -1,0 +1,70 @@
+status: completed_validated_v10_11_a5_prompt_handoff_diagnostic_result
+version: v10.11
+current_phase: "v10.11 A5 prompt handoff diagnostic result"
+validation_file: scripts/validate_v10_11_a5_prompt_handoff_diagnostic_result.js
+
+current_baseline:
+  previous_phase: "v10.10 A5 prompt handoff diagnostic preflight"
+  previous_record: docs/209_v10_10_a5_prompt_handoff_diagnostic_preflight.md
+  default_next_phase: "BLOCKED for provider-side echo, alternate plugin, prompt redesign, or real generation authorization"
+
+authorization_applied:
+  approval_phrase: "批准 v10.10 传参诊断"
+  diagnostic_type: sanitized_request_preflight
+  prompt_id: a5_positive_still_life_prompt_v1
+  expected_prompt_sha256_utf8: f9967d3348a24db6a55652a4c7661f4385aa85c4287b45cba420c9495dece9b6
+  selected_plugin_id: DoubaoGen
+  selected_plugin_command: generate
+  selected_plugin_model: doubao-seedream-5-0-260128
+  max_plugin_calls_authorized: 0
+  api_call_allowed: false
+  vcp_plugin_call_allowed: false
+  image_creation_allowed: false
+  config_env_value_read_allowed: false
+
+diagnostic_result:
+  diagnostic_performed: true
+  prompt_source_record_checked: docs/207_v10_8_a5_positive_still_life_generation_preflight_gate.md
+  prompt_text_recorded_here: false
+  prompt_chars_observed: 100
+  prompt_sha256_utf8: f9967d3348a24db6a55652a4c7661f4385aa85c4287b45cba420c9495dece9b6
+  prompt_hash_matches_expected: true
+  prompt_id_matches_v10_9: true
+  prompt_auto_edited_in_v10_9: false
+  local_runner_file_checked: scripts/run_v0_7_photo_studio_os_real_execution.ps1
+  local_runner_payload_prompt_source: InputReference
+  local_runner_payload_model_source: ModelOverride
+  local_runner_prompt_rewrite_detected: false
+  private_binding_file_exists: true
+  private_binding_file_content_read: false
+  real_plugin_dir_read: false
+  config_env_value_read: false
+
+boundary_record:
+  actual_plugin_calls: 0
+  api_called: false
+  vcp_plugin_called: false
+  image_created: false
+  output_directory_written: false
+  raw_request_body_saved: false
+  raw_plugin_output_saved: false
+  raw_endpoint_saved: false
+  raw_runtime_log_saved: false
+  secret_value_saved: false
+  daily_note_called: false
+  vcp_memory_written: false
+  submitDraft_called: false
+  commit_performed: false
+  tag_performed: false
+  push_performed: false
+  pr_created: false
+  github_release_created: false
+
+interpretation:
+  prompt_text_wrong_in_repo: false
+  local_prompt_hash_mismatch: false
+  local_runner_handoff_mismatch_detected: false
+  provider_side_request_observed: false
+  root_cause_fully_known: false
+  model_adherence_failure_still_possible: true
+  provider_or_plugin_side_handoff_failure_not_ruled_out: true

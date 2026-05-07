@@ -89,6 +89,15 @@ $requiredFiles = @(
   'scripts/validate_v10_6_a5_prompt_failure_analysis_and_safer_strategy.js',
   'scripts/validate_v10_7_a5_safer_prompt_review_package.js',
   'scripts/validate_v10_8_a5_positive_still_life_generation_preflight_gate.js',
+  'scripts/validate_v10_9_a5_positive_still_life_generation_rejected_asset_record.js',
+  'scripts/validate_v10_10_a5_prompt_handoff_diagnostic_preflight.js',
+  'scripts/validate_v10_11_a5_prompt_handoff_diagnostic_result.js',
+  'scripts/validate_v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.js',
+  'scripts/validate_v10_15_runner_utf8_no_bom_transport.js',
+  'scripts/validate_v10_20_plugin_reported_model_recording.js',
+  'scripts/validate_v10_26_real_dailynote_write_closeout.js',
+  'scripts/validate_v10_27_dailynotewrite_root_path_correction.js',
+  'scripts/validate_v10_28_dailynote_canonical_location_guard.js',
   'scripts/run_vcpchat_review_console_remote_debug_smoke.ps1',
   'scripts/validate_runtime_guard_unit.js',
   'scripts/validate_runtime_prototype_smoke.js',
@@ -143,6 +152,13 @@ $requiredFiles = @(
   'docs/205_v10_6_a5_prompt_failure_analysis_and_safer_strategy.md',
   'docs/206_v10_7_a5_safer_prompt_review_package.md',
   'docs/207_v10_8_a5_positive_still_life_generation_preflight_gate.md',
+  'docs/208_v10_9_a5_positive_still_life_generation_rejected_asset_record.md',
+  'docs/209_v10_10_a5_prompt_handoff_diagnostic_preflight.md',
+  'docs/210_v10_11_a5_prompt_handoff_diagnostic_result.md',
+  'docs/211_v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.md',
+  'docs/212_v10_26_real_dailynote_write_closeout.md',
+  'docs/213_v10_27_dailynotewrite_root_path_correction.md',
+  'docs/214_v10_28_dailynote_canonical_location_guard.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
@@ -161,6 +177,8 @@ $requiredFiles = @(
   'integrations/vcp/v0_10_gptimagegen_retry2_real_execution_record.md',
   'integrations/vcp/v0_10_gptimagegen_gpt55_real_execution_record.md',
   'integrations/vcp/v0_10_doubaogen_retry_real_execution_record.md',
+  'integrations/vcp/v10_10_prompt_handoff_diagnostic_authorization_template.md',
+  'integrations/vcp/v10_12_provider_side_prompt_fingerprint_capture_authorization_package.md',
   'review_console/v0_7_human_approval_preflight.md',
   'workflows/photo_studio_os_real_loop_runbook.md',
   'workflows/v0_7_real_execution_preflight_confirmation.md',
@@ -244,6 +262,13 @@ $requiredFiles = @(
   'tests/schema_examples/v10_6_a5_prompt_failure_analysis_and_safer_strategy.example.yaml',
   'tests/schema_examples/v10_7_a5_safer_prompt_review_package.example.yaml',
   'tests/schema_examples/v10_8_a5_positive_still_life_generation_preflight_gate.example.yaml',
+  'tests/schema_examples/v10_9_a5_positive_still_life_generation_rejected_asset_record.example.yaml',
+  'tests/schema_examples/v10_10_a5_prompt_handoff_diagnostic_preflight.example.yaml',
+  'tests/schema_examples/v10_11_a5_prompt_handoff_diagnostic_result.example.yaml',
+  'tests/schema_examples/v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.example.yaml',
+  'tests/schema_examples/v10_26_real_dailynote_write_closeout.example.yaml',
+  'tests/schema_examples/v10_27_dailynotewrite_root_path_correction.example.yaml',
+  'tests/schema_examples/v10_28_dailynote_canonical_location_guard.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -271,7 +296,14 @@ $requiredFiles = @(
   'review_console/embed_contract/v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.md',
   'review_console/embed_contract/v10_6_a5_prompt_failure_analysis_and_safer_strategy.md',
   'review_console/embed_contract/v10_7_a5_safer_prompt_review_package.md',
-  'review_console/embed_contract/v10_8_a5_positive_still_life_generation_preflight_gate.md'
+  'review_console/embed_contract/v10_8_a5_positive_still_life_generation_preflight_gate.md',
+  'review_console/embed_contract/v10_9_a5_positive_still_life_generation_rejected_asset_record.md',
+  'review_console/embed_contract/v10_10_a5_prompt_handoff_diagnostic_preflight.md',
+  'review_console/embed_contract/v10_11_a5_prompt_handoff_diagnostic_result.md',
+  'review_console/embed_contract/v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.md',
+  'review_console/embed_contract/v10_26_real_dailynote_write_closeout.md',
+  'review_console/embed_contract/v10_27_dailynotewrite_root_path_correction.md',
+  'review_console/embed_contract/v10_28_dailynote_canonical_location_guard.md'
 )
 
 $requiredDirectories = @(
@@ -4273,6 +4305,216 @@ if (-not $node) {
     }
   }
 
+  $v109A5RejectedAssetOutput = & node (Join-Path $Root 'scripts/validate_v10_9_a5_positive_still_life_generation_rejected_asset_record.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v10.9 A5 positive still-life rejected asset validation exited with failure"
+  } else {
+    $v109A5RejectedAsset = ($v109A5RejectedAssetOutput -join "`n") | ConvertFrom-Json
+    if ($v109A5RejectedAsset.passed -ne $true) {
+      Add-Failure "v10.9 A5 rejected asset validation must report passed true"
+    }
+    if ($v109A5RejectedAsset.v10_9_a5_positive_still_life_generation_rejected_asset_record.actual_plugin_calls -ne 1) {
+      Add-Failure "v10.9 must record exactly one plugin call"
+    }
+    if ($v109A5RejectedAsset.v10_9_a5_positive_still_life_generation_rejected_asset_record.asset_status -ne 'rejected') {
+      Add-Failure "v10.9 must record rejected asset status"
+    }
+    if ($v109A5RejectedAsset.v10_9_a5_positive_still_life_generation_rejected_asset_record.person_or_face_detected -ne $true) {
+      Add-Failure "v10.9 must record person/face detection"
+    }
+    if ($v109A5RejectedAsset.v10_9_a5_positive_still_life_generation_rejected_asset_record.prompt_subject_match -ne $false) {
+      Add-Failure "v10.9 must record prompt subject mismatch"
+    }
+    if ($v109A5RejectedAsset.v10_9_a5_positive_still_life_generation_rejected_asset_record.daily_note_write_performed -ne $false) {
+      Add-Failure "v10.9 must not perform DailyNote write"
+    }
+    if ($v109A5RejectedAsset.v10_9_a5_positive_still_life_generation_rejected_asset_record.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v10.9 must not perform VCP memory write"
+    }
+  }
+
+  $v1010A5DiagnosticPreflightOutput = & node (Join-Path $Root 'scripts/validate_v10_10_a5_prompt_handoff_diagnostic_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v10.10 A5 prompt handoff diagnostic preflight validation exited with failure"
+  } else {
+    $v1010A5DiagnosticPreflight = ($v1010A5DiagnosticPreflightOutput -join "`n") | ConvertFrom-Json
+    if ($v1010A5DiagnosticPreflight.passed -ne $true) {
+      Add-Failure "v10.10 A5 diagnostic preflight validation must report passed true"
+    }
+    if ($v1010A5DiagnosticPreflight.v10_10_a5_prompt_handoff_diagnostic_preflight.prompt_sha256_matches_expected -ne $true) {
+      Add-Failure "v10.10 must record the expected prompt fingerprint"
+    }
+    if ($v1010A5DiagnosticPreflight.v10_10_a5_prompt_handoff_diagnostic_preflight.diagnostic_authorization_active -ne $false) {
+      Add-Failure "v10.10 diagnostic authorization must remain inactive"
+    }
+    if ($v1010A5DiagnosticPreflight.v10_10_a5_prompt_handoff_diagnostic_preflight.max_plugin_calls_allowed -ne 0) {
+      Add-Failure "v10.10 must keep max plugin calls at 0"
+    }
+    if ($v1010A5DiagnosticPreflight.v10_10_a5_prompt_handoff_diagnostic_preflight.api_call_allowed -ne $false) {
+      Add-Failure "v10.10 must not allow API calls"
+    }
+    if ($v1010A5DiagnosticPreflight.v10_10_a5_prompt_handoff_diagnostic_preflight.image_creation_allowed -ne $false) {
+      Add-Failure "v10.10 must not allow image creation"
+    }
+    if ($v1010A5DiagnosticPreflight.v10_10_a5_prompt_handoff_diagnostic_preflight.no_forbidden_true_execution -ne $true) {
+      Add-Failure "v10.10 must not record real execution or version action"
+    }
+  }
+
+  $v1011A5DiagnosticResultOutput = & node (Join-Path $Root 'scripts/validate_v10_11_a5_prompt_handoff_diagnostic_result.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v10.11 A5 prompt handoff diagnostic result validation exited with failure"
+  } else {
+    $v1011A5DiagnosticResult = ($v1011A5DiagnosticResultOutput -join "`n") | ConvertFrom-Json
+    if ($v1011A5DiagnosticResult.passed -ne $true) {
+      Add-Failure "v10.11 A5 diagnostic result validation must report passed true"
+    }
+    if ($v1011A5DiagnosticResult.v10_11_a5_prompt_handoff_diagnostic_result.prompt_hash_matches_expected -ne $true) {
+      Add-Failure "v10.11 must verify prompt hash"
+    }
+    if ($v1011A5DiagnosticResult.v10_11_a5_prompt_handoff_diagnostic_result.local_runner_prompt_rewrite_detected -ne $false) {
+      Add-Failure "v10.11 must not detect local runner prompt rewrite"
+    }
+    if ($v1011A5DiagnosticResult.v10_11_a5_prompt_handoff_diagnostic_result.actual_plugin_calls -ne 0) {
+      Add-Failure "v10.11 must keep actual plugin calls at 0"
+    }
+    if ($v1011A5DiagnosticResult.v10_11_a5_prompt_handoff_diagnostic_result.api_called -ne $false) {
+      Add-Failure "v10.11 must not call API"
+    }
+    if ($v1011A5DiagnosticResult.v10_11_a5_prompt_handoff_diagnostic_result.image_created -ne $false) {
+      Add-Failure "v10.11 must not create image"
+    }
+    if ($v1011A5DiagnosticResult.v10_11_a5_prompt_handoff_diagnostic_result.provider_side_request_observed -ne $false) {
+      Add-Failure "v10.11 must record provider-side request as unobserved"
+    }
+  }
+
+  $v1012A5ProviderSideCaptureOutput = & node (Join-Path $Root 'scripts/validate_v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v10.12 A5 provider-side prompt fingerprint capture authorization package validation exited with failure"
+  } else {
+    $v1012A5ProviderSideCapture = ($v1012A5ProviderSideCaptureOutput -join "`n") | ConvertFrom-Json
+    if ($v1012A5ProviderSideCapture.passed -ne $true) {
+      Add-Failure "v10.12 provider-side prompt fingerprint capture validation must report passed true"
+    }
+    if ($v1012A5ProviderSideCapture.v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.authorization_status -ne 'inactive_package') {
+      Add-Failure "v10.12 provider-side prompt fingerprint capture authorization package must remain inactive"
+    }
+    if ($v1012A5ProviderSideCapture.v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.execution_authorized_by_this_record -ne $false) {
+      Add-Failure "v10.12 provider-side prompt fingerprint capture package must not authorize execution by itself"
+    }
+    if ($v1012A5ProviderSideCapture.v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.max_generation_calls_allowed -ne 0) {
+      Add-Failure "v10.12 provider-side prompt fingerprint capture package must keep generation calls at 0"
+    }
+    if ($v1012A5ProviderSideCapture.v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.provider_side_capture_performed -ne $false) {
+      Add-Failure "v10.12 provider-side prompt fingerprint capture package must not perform provider-side capture before activation"
+    }
+    if ($v1012A5ProviderSideCapture.v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.no_forbidden_current_execution -ne $true) {
+      Add-Failure "v10.12 provider-side prompt fingerprint capture package must not record active execution or version action"
+    }
+  }
+
+  $v1015RunnerUtf8Output = & node (Join-Path $Root 'scripts/validate_v10_15_runner_utf8_no_bom_transport.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v10.15 runner UTF-8 no BOM transport validation exited with failure"
+  } else {
+    $v1015RunnerUtf8 = ($v1015RunnerUtf8Output -join "`n") | ConvertFrom-Json
+    if ($v1015RunnerUtf8.passed -ne $true) {
+      Add-Failure "v10.15 runner UTF-8 no BOM transport validation must report passed true"
+    }
+    if ($v1015RunnerUtf8.v10_15_runner_utf8_no_bom_transport.generation_performed -ne $false) {
+      Add-Failure "v10.15 runner transport validation must not perform generation"
+    }
+    if ($v1015RunnerUtf8.v10_15_runner_utf8_no_bom_transport.api_called -ne $false) {
+      Add-Failure "v10.15 runner transport validation must not call API"
+    }
+    if ($v1015RunnerUtf8.v10_15_runner_utf8_no_bom_transport.image_created -ne $false) {
+      Add-Failure "v10.15 runner transport validation must not create images"
+    }
+  }
+
+  $v1020PluginReportedModelOutput = & node (Join-Path $Root 'scripts/validate_v10_20_plugin_reported_model_recording.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v10.20 plugin reported model recording validation exited with failure"
+  } else {
+    $v1020PluginReportedModel = ($v1020PluginReportedModelOutput -join "`n") | ConvertFrom-Json
+    if ($v1020PluginReportedModel.passed -ne $true) {
+      Add-Failure "v10.20 plugin reported model recording validation must report passed true"
+    }
+    if ($v1020PluginReportedModel.v10_20_plugin_reported_model_recording.records_plugin_reported_model_ref -ne $true) {
+      Add-Failure "v10.20 runner must record plugin reported model ref"
+    }
+    if ($v1020PluginReportedModel.v10_20_plugin_reported_model_recording.records_model_match_boolean -ne $true) {
+      Add-Failure "v10.20 runner must record reported/requested model match boolean"
+    }
+    if ($v1020PluginReportedModel.v10_20_plugin_reported_model_recording.generation_performed -ne $false) {
+      Add-Failure "v10.20 validation must not perform generation"
+    }
+  }
+
+  $v1026RealWriteCloseoutOutput = & node (Join-Path $Root 'scripts/validate_v10_26_real_dailynote_write_closeout.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v10.26 real DailyNote/VCP memory write closeout validation exited with failure"
+  } else {
+    $v1026RealWriteCloseout = ($v1026RealWriteCloseoutOutput -join "`n") | ConvertFrom-Json
+    if ($v1026RealWriteCloseout.passed -ne $true) {
+      Add-Failure "v10.26 real write closeout validation must report passed true"
+    }
+    if ($v1026RealWriteCloseout.v10_26_real_dailynote_write_closeout.actual_write_calls -ne 1) {
+      Add-Failure "v10.26 closeout must record exactly one actual write call"
+    }
+    if ($v1026RealWriteCloseout.v10_26_real_dailynote_write_closeout.raw_path_recorded -ne $false) {
+      Add-Failure "v10.26 closeout must not record raw saved path"
+    }
+    if ($v1026RealWriteCloseout.v10_26_real_dailynote_write_closeout.second_write_performed -ne $false) {
+      Add-Failure "v10.26 closeout must not record a second write"
+    }
+  }
+
+  $v1027RootPathCorrectionOutput = & node (Join-Path $Root 'scripts/validate_v10_27_dailynotewrite_root_path_correction.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v10.27 DailyNoteWrite root path correction validation exited with failure"
+  } else {
+    $v1027RootPathCorrection = ($v1027RootPathCorrectionOutput -join "`n") | ConvertFrom-Json
+    if ($v1027RootPathCorrection.passed -ne $true) {
+      Add-Failure "v10.27 root path correction validation must report passed true"
+    }
+    if ($v1027RootPathCorrection.v10_27_dailynotewrite_root_path_correction.corrected_root_class -ne 'vcp_root_dailynote') {
+      Add-Failure "v10.27 correction must record vcp_root_dailynote"
+    }
+    if ($v1027RootPathCorrection.v10_27_dailynotewrite_root_path_correction.dailynotewrite_rerun_performed -ne $false) {
+      Add-Failure "v10.27 correction must not rerun DailyNoteWrite"
+    }
+    if ($v1027RootPathCorrection.v10_27_dailynotewrite_root_path_correction.daily_note_write_performed_in_v10_27 -ne $false) {
+      Add-Failure "v10.27 correction must not perform another DailyNote write"
+    }
+    if ($v1027RootPathCorrection.v10_27_dailynotewrite_root_path_correction.raw_config_value_recorded -ne $false) {
+      Add-Failure "v10.27 correction must not record raw config values"
+    }
+  }
+
+  $v1028CanonicalLocationGuardOutput = & node (Join-Path $Root 'scripts/validate_v10_28_dailynote_canonical_location_guard.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v10.28 DailyNote canonical location guard validation exited with failure"
+  } else {
+    $v1028CanonicalLocationGuard = ($v1028CanonicalLocationGuardOutput -join "`n") | ConvertFrom-Json
+    if ($v1028CanonicalLocationGuard.passed -ne $true) {
+      Add-Failure "v10.28 canonical location guard validation must report passed true"
+    }
+    if ($v1028CanonicalLocationGuard.v10_28_dailynote_canonical_location_guard.plugin_success_sufficient -ne $false) {
+      Add-Failure "v10.28 guard must record plugin success as insufficient"
+    }
+    if ($v1028CanonicalLocationGuard.v10_28_dailynote_canonical_location_guard.writer_root_class_required_before_write -ne 'vcp_root_dailynote') {
+      Add-Failure "v10.28 guard must require vcp_root_dailynote before write"
+    }
+    if ($v1028CanonicalLocationGuard.v10_28_dailynote_canonical_location_guard.canonical_target_hash_match_required -ne $true) {
+      Add-Failure "v10.28 guard must require canonical target hash match"
+    }
+    if ($v1028CanonicalLocationGuard.v10_28_dailynote_canonical_location_guard.daily_note_write_performed_in_v10_28 -ne $false) {
+      Add-Failure "v10.28 guard must not perform another DailyNote write"
+    }
+  }
+
   $runHistoricalCurrentStateValidators = $false
   if ($runHistoricalCurrentStateValidators) {
   $localCheckpointOutput = & node (Join-Path $Root 'scripts/validate_local_checkpoint_manifest.js')
@@ -5099,11 +5341,13 @@ if (-not $node) {
     $allowedCurrentA4ChangePrefixes = @(
       '.agent_board/',
       'docs/',
+      'integrations/vcp/',
       'review_console/embed_contract/',
       'scripts/',
       'tests/schema_examples/'
     )
     $allowedCurrentA4ChangeFiles = @(
+      '.gitignore',
       'AGENTS.md',
       'README.md',
       'MANIFEST.md',

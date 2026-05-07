@@ -191,13 +191,21 @@ function main() {
     "next_real_generation_allowed_by_this_record=false"
   ]);
 
-  const boardCurrent = includesAll(board, [
+  const boardCurrentSnapshot = includesAll(board, [
     currentPhase,
     "v10.8 local: positive still-life generation preflight gate ready",
     "prompt locked for future authorization",
     "real generation still blocked",
     "separate generation authorization required"
   ]);
+  const boardSupersededByV10_9 = includesAll(board, [
+    "v10.9 A5 positive still-life generation rejected asset record",
+    "v10.9 local: positive still-life generation completed and asset rejected by safety review",
+    "actual plugin calls observed in v10.9: 1",
+    "generated asset status in v10.9: rejected",
+    "person/face and prompt mismatch detected"
+  ]);
+  const boardCurrent = boardCurrentSnapshot || boardSupersededByV10_9;
 
   const checklistCurrent = includesAll(checklist, [
     "## v10.8 A5 Positive Still-life Generation Preflight Gate 检查",
@@ -220,7 +228,7 @@ function main() {
   assert(noForbiddenTrueExecution, "v10.8 must not record real execution or version action.");
   assert(noRawSensitiveValues, "v10.8 must not save raw paths, endpoints, websocket URLs, or runtime logs.");
   assert(indexesCurrent, "Top-level indexes must reference v10.8 preflight gate.");
-  assert(boardCurrent, "Agent board must be synchronized to v10.8 preflight gate.");
+  assert(boardCurrent, "Agent board must be synchronized to v10.8 preflight gate or record a later v10.9 superseding state.");
   assert(checklistCurrent, "Validation checklist must include v10.8 preflight gate checks.");
 
   process.stdout.write(`${JSON.stringify({
@@ -237,6 +245,8 @@ function main() {
       no_raw_sensitive_values: noRawSensitiveValues,
       indexes_current: indexesCurrent,
       agent_board_current: boardCurrent,
+      agent_board_current_snapshot: boardCurrentSnapshot,
+      agent_board_superseded_by_v10_9: boardSupersededByV10_9,
       checklist_current: checklistCurrent,
       prompt_locked_for_future_authorization: true,
       next_real_generation_allowed_by_this_record: false,

@@ -229,7 +229,9 @@ $psi.Environment['DebugMode'] = 'false'
 $psi.Environment['PYTHONIOENCODING'] = 'utf-8'
 
 $process = [System.Diagnostics.Process]::Start($psi)
-$process.StandardInput.Write($payload)
+$payloadBytes = [System.Text.UTF8Encoding]::new($false).GetBytes($payload)
+$process.StandardInput.BaseStream.Write($payloadBytes, 0, $payloadBytes.Length)
+$process.StandardInput.BaseStream.Flush()
 $process.StandardInput.Close()
 
 $stdoutTask = $process.StandardOutput.ReadToEndAsync()

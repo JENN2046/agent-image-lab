@@ -7,7 +7,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v10.8 A5 positive still-life generation preflight gate
+v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard
 ```
 
 已经完成：
@@ -66,9 +66,20 @@ v1.0 true-loop closeout candidate + v10.8 A5 positive still-life generation pref
 - v10.7 gate: `user_prompt_approval_required=true`、`next_real_generation_allowed_by_this_record=false`。
 - v10.8 A5 positive still-life generation preflight gate 锁定 `a5_positive_still_life_prompt_v1` 的下一次授权前检查项；`prompt_locked_for_future_authorization=true`，且仍保持 `next_real_generation_allowed_by_this_record=false`。
 - v10.8 gate: 必须先由用户批准 prompt，再单独给出真实生成授权字段；本阶段不执行插件、API、图片、记忆或版本动作。
+- v10.9 A5 positive still-life generation rejected asset record 在短批准模板和私有 ignored PluginDir 绑定通过 preflight 后执行一次 DoubaoGen 真实生成；`actual_plugin_calls: 1`，生成资产 1 个，但审片发现人物/脸和 prompt 主题完全偏离，`prompt_subject_match: false`、`asset_status: rejected`。
+- v10.9 gate: DailyNote / VCP memory 写入、追加生图、commit/tag/push/PR/release 均继续阻断。
+- v10.10 A5 prompt handoff diagnostic preflight 把 v10.9 失败拆成“模型遵循失败”和“插件请求传递失败”两个待诊断方向，并准备无生图、0 插件调用的脱敏传参诊断门；`max_plugin_calls_allowed: 0`、`diagnostic_authorization_active: false`。
+- v10.10 gate: 本阶段不读取 PluginDir / `config.env`，不调用插件/API，不创建图片，不写 DailyNote/VCP memory。
+- v10.11 A5 prompt handoff diagnostic result 在用户批准 `批准 v10.10 传参诊断` 后执行无生图诊断；prompt hash 与锁定记录一致，项目内 runner 层未发现 prompt 改写，`actual_plugin_calls: 0`，但 provider 侧请求仍未观测。
+- v10.11 result: `prompt_hash_matches_expected: true`、`provider_side_request_observed: false`，因此本地 prompt 写错基本排除，模型遵循失败或 provider/plugin 侧 handoff 问题仍需后续单独授权定位。
+- v10.12 A5 provider-side prompt fingerprint capture authorization package 准备 provider-side echo / sanitized request capture 授权包，专门验证 provider 侧收到的 prompt 指纹。
+- v10.12 gate: `authorization_status: inactive_package`、`execution_authorized_by_this_record: false`；激活口令为 `批准 v10.12 provider侧指纹捕获`，且仍禁止真实生成、图片输出、raw request/response/endpoint/log/secret 记录、DailyNote / VCP memory 和版本动作。
+- v10.26 real DailyNote/VCP memory write closeout 记录 v10.25 单次真实写入已完成：actual_write_calls=1、writer 为 DailyNoteWrite、保存文件名和 sha256 已脱敏记录；单次授权已消耗，不授权第二次写入或版本动作。
+- v10.27 DailyNoteWrite root path correction 修正未来 DailyNoteWrite 写入根目录分类：从 `plugin_dir_dailynote` 改为 `vcp_root_dailynote`；本阶段不重跑 writer、不再次写 DailyNote/VCP memory。
+- v10.28 DailyNote canonical location guard 固化后续写入成功判定：`plugin_success_sufficient=false`，必须通过 canonical file 存在和 hash 匹配后才能标记 memory write complete。
 
 当前 accepted asset 只以 ignored runtime 路径和哈希归档，不把图片二进制写入 Git、DailyNote 或 VCP 长期记忆。人工接受记录保留了已知视觉偏差：这是 `human_override` 通过，不是完美 prompt compliance。
-当前 A5 v10.4 / v10.5 新资产均被拒收，只保留 ignored runtime ref、哈希、评分和规则摘要；未把图片二进制写入 Git、DailyNote 或 VCP memory。
+当前 A5 v10.4 / v10.5 / v10.9 新资产均被拒收，只保留 ignored runtime ref、哈希、评分和规则摘要；未把图片二进制写入 Git、DailyNote 或 VCP memory。
 
 ## 一句话定义
 
@@ -141,6 +152,20 @@ Photo Studio OS UI 生图生产线，以及 AI 图片评审与修正生产线。
 - `docs/201_v10_2_a5_bridge_smoke_blocked_record.md`：A5 clean preflight 后 bridge surface 缺失的脱敏阻断记录。
 - `docs/202_v10_3_a5_bridge_integration_smoke_record.md`：VCPChat no-write bridge 集成与严格 allowlist smoke 脱敏记录。
 - `docs/207_v10_8_a5_positive_still_life_generation_preflight_gate.md`：下一次 DoubaoGen 正向静物生成前的 prompt 锁定与授权门记录。
+- `docs/208_v10_9_a5_positive_still_life_generation_rejected_asset_record.md`：短批准模板触发的 DoubaoGen 正向静物单次生成拒收记录。
+- `docs/209_v10_10_a5_prompt_handoff_diagnostic_preflight.md`：无生图 prompt handoff diagnostic preflight，区分模型遵循失败和插件请求传递失败。
+- `docs/210_v10_11_a5_prompt_handoff_diagnostic_result.md`：无生图 prompt handoff diagnostic 结果，记录本地 prompt hash 与 runner handoff 结论。
+- `docs/211_v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.md`：provider-side prompt fingerprint capture 的未激活 A5 授权包记录。
+- `docs/212_v10_26_real_dailynote_write_closeout.md`：v10.25 单次 DailyNoteWrite 真实写入后的脱敏 closeout 记录，记录 `actual_write_calls=1` 和单次授权已消耗。
+- `docs/213_v10_27_dailynotewrite_root_path_correction.md`：DailyNoteWrite 后续写入根目录修复记录，确认 no-write 复算已指向 `vcp_root_dailynote`。
+- `docs/214_v10_28_dailynote_canonical_location_guard.md`：DailyNote 后续写入 canonical location guard，要求写后 canonical 位置存在和 hash 匹配。
+- `integrations/vcp/v10_8_positive_still_life_real_generation_authorization_draft.md`：下一次正向静物真实生成的未激活 A5 授权草案；仅供人工审查，不构成执行授权。
+- `integrations/vcp/v10_8_positive_still_life_short_approval_template.md`：短批准模板；允许在私有 ignored 插件路径绑定存在时用 `批准 v10.8 静物单次生成` 进入 preflight。
+- `integrations/vcp/v10_10_prompt_handoff_diagnostic_authorization_template.md`：未来无生图传参诊断的未激活授权模板；`max_plugin_calls=0`。
+- `integrations/vcp/v10_12_provider_side_prompt_fingerprint_capture_authorization_package.md`：未来 provider-side echo / sanitized request capture 的未激活授权包；`max_generation_calls_allowed=0`。
+- `review_console/embed_contract/v10_26_real_dailynote_write_closeout.md`：v10.26 post-write handoff，供 Review Console 只读展示真实写入已完成和后续阻断边界。
+- `review_console/embed_contract/v10_27_dailynotewrite_root_path_correction.md`：v10.27 root path correction handoff，供 Review Console 只读展示后续写入根目录已修正。
+- `review_console/embed_contract/v10_28_dailynote_canonical_location_guard.md`：v10.28 canonical location guard handoff，供 Review Console 展示 success / wrong-location / hash-mismatch 判定。
 - `.agent_board/`：本地 guarded autopilot 状态板，用于续跑、校验记录和 handoff。
 - `docs/`：项目定义、SOP、评分表、VCP 记忆适配、审片台设计。
 - `agents/`：ImageLab_Master 和岗位型子 Agent 的规则。
@@ -183,6 +208,15 @@ node scripts\validate_v10_1_a5_resume_after_external_worktree_reconciliation.js
 node scripts\validate_v10_2_a5_bridge_smoke_blocked_record.js
 node scripts\validate_v10_3_a5_bridge_integration_smoke_record.js
 node scripts\validate_v10_8_a5_positive_still_life_generation_preflight_gate.js
+node scripts\validate_v10_9_a5_positive_still_life_generation_rejected_asset_record.js
+node scripts\validate_v10_10_a5_prompt_handoff_diagnostic_preflight.js
+node scripts\validate_v10_11_a5_prompt_handoff_diagnostic_result.js
+node scripts\validate_v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.js
+node scripts\validate_v10_15_runner_utf8_no_bom_transport.js
+node scripts\validate_v10_20_plugin_reported_model_recording.js
+node scripts\validate_v10_26_real_dailynote_write_closeout.js
+node scripts\validate_v10_27_dailynotewrite_root_path_correction.js
+node scripts\validate_v10_28_dailynote_canonical_location_guard.js
 node scripts\validate_runtime_prototype_suite.js
 node scripts\validate_agent_board_state.js
 node scripts\validate_local_checkpoint_manifest.js
@@ -212,9 +246,23 @@ git diff --check
 - `docs/205_v10_6_a5_prompt_failure_analysis_and_safer_strategy.md`
 - `docs/206_v10_7_a5_safer_prompt_review_package.md`
 - `docs/207_v10_8_a5_positive_still_life_generation_preflight_gate.md`
+- `docs/208_v10_9_a5_positive_still_life_generation_rejected_asset_record.md`
+- `docs/209_v10_10_a5_prompt_handoff_diagnostic_preflight.md`
+- `docs/210_v10_11_a5_prompt_handoff_diagnostic_result.md`
+- `docs/211_v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.md`
+- `docs/212_v10_26_real_dailynote_write_closeout.md`
+- `docs/213_v10_27_dailynotewrite_root_path_correction.md`
+- `docs/214_v10_28_dailynote_canonical_location_guard.md`
+- `integrations/vcp/v10_8_positive_still_life_real_generation_authorization_draft.md`
+- `integrations/vcp/v10_8_positive_still_life_short_approval_template.md`
+- `integrations/vcp/v10_10_prompt_handoff_diagnostic_authorization_template.md`
+- `integrations/vcp/v10_12_provider_side_prompt_fingerprint_capture_authorization_package.md`
+- `review_console/embed_contract/v10_26_real_dailynote_write_closeout.md`
+- `review_console/embed_contract/v10_27_dailynotewrite_root_path_correction.md`
+- `review_console/embed_contract/v10_28_dailynote_canonical_location_guard.md`
 
 仅说“继续”不构成新的真实执行授权。即使存在 A5 授权包，如果外部目标工作树不干净、tag/分支冲突、输出目录冲突或会泄露 raw 敏感值，也必须停止。
 
 ## 不做什么
 
-本包不包含密钥、不包含 raw 插件输出、不包含 raw endpoint、不包含运行日志、不把图片大文件纳入 Git。v0.5 曾在用户授权下把 Adapter-only dry-run 包安装到 VCPToolBox 预发布候选工作线；该安装不代表真实生图插件长期启用。v10.8 已把下一版 prompt 锁定为生成前授权门；DailyNote、VCP memory、commit、push、tag 和 PR 仍需后续单独授权和通过审片。
+本包不包含密钥、不包含 raw 插件输出、不包含 raw endpoint、不包含运行日志、不把图片大文件纳入 Git。v0.5 曾在用户授权下把 Adapter-only dry-run 包安装到 VCPToolBox 预发布候选工作线；该安装不代表真实生图插件长期启用。v10.26 记录 v10.25 已完成一次 DailyNote/VCP memory 真实写入；v10.27 记录未来 DailyNoteWrite 写入根目录已修正为 `vcp_root_dailynote`；v10.28 记录插件 `success` 不再足以判定写入完成，必须通过 canonical location 和 hash 校验。该单次授权已消耗，第二次写入、追加生图、submitDraft、commit、push、tag、PR 和 release 仍需后续单独授权和通过对应安全门。

@@ -1,0 +1,58 @@
+status: completed_validated_v10_26_real_dailynote_write_closeout
+version: v10.26
+current_phase: "v10.26 real DailyNote/VCP memory write closeout"
+validation_file: scripts/validate_v10_26_real_dailynote_write_closeout.js
+
+current_baseline:
+  previous_phase: "v10.25 real DailyNote/VCP memory write"
+  source_execution_result: runs/v10_25_real_dailynote_write/execution_result.sanitized.json
+  source_write_audit: runs/v10_25_real_dailynote_write/write_execution_audit.sanitized.yaml
+  default_next_phase: "BLOCKED before any second write or version action without new explicit authorization"
+
+sanitized_write_result:
+  selected_plugin_id: DailyNoteWrite
+  selected_entry_ref: Plugin/DailyNoteWrite/daily-note-write.js
+  target_notebook: Image_Case_Archive
+  authorized_write_calls: 1
+  actual_write_calls: 1
+  plugin_exit_code: 0
+  plugin_reported_status: success
+  saved_file_name: 2026-05-07-14_58_55-v10-25-run-1-memory-write.txt
+  saved_file_sha256: 16669cd5cc1a03188e89a62dd0298ea6175dbed7cad162430484ec1ee1af171c
+  saved_file_length: 1439
+  read_only_existence_check_match_count: 1
+  daily_note_call_performed: true
+  vcp_memory_write_performed: true
+  actual_write_performed: true
+
+post_write_guard:
+  v10_25_single_real_write_authorization_consumed: true
+  retry_performed: false
+  second_write_performed: false
+  additional_daily_note_write_authorized: false
+  additional_vcp_memory_write_authorized: false
+  submitDraft_called: false
+  plugin_or_api_generation_called: false
+  image_created_in_this_phase: false
+  commit_performed: false
+  tag_performed: false
+  push_performed: false
+  pr_created: false
+  release_created: false
+
+sanitization:
+  raw_saved_path_printed: false
+  raw_saved_path_recorded: false
+  raw_stdout_recorded: false
+  raw_stderr_recorded: false
+  runtime_log_recorded: false
+  secret_value_recorded: false
+  private_plugin_path_recorded: false
+  endpoint_recorded: false
+  image_binary_embedded_in_memory: false
+
+acceptance_assertions:
+  - "v10.26 records exactly one successful DailyNoteWrite execution from v10.25."
+  - "The saved file name and sha256 are recorded, but the raw full path is not recorded."
+  - "The v10.25 single write authorization is consumed."
+  - "No retry, second write, submitDraft, generation, image creation, commit, tag, push, PR, or release is authorized by this closeout."

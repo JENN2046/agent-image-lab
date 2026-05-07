@@ -57,6 +57,13 @@ function ConvertTo-SafeText {
   return $safe
 }
 
+function Get-Sha256Utf8 {
+  param([AllowNull()][string]$Text)
+  if ([string]::IsNullOrWhiteSpace($Text)) { return $null }
+  $sha = [System.Security.Cryptography.SHA256]::Create()
+  return ([BitConverter]::ToString($sha.ComputeHash([System.Text.Encoding]::UTF8.GetBytes($Text))).Replace('-', '').ToLowerInvariant())
+}
+
 function Write-SanitizedJson {
   param(
     [string]$Path,
@@ -235,7 +242,9 @@ $psi.EnvironmentVariables['DebugMode'] = 'false'
 $psi.EnvironmentVariables['PYTHONIOENCODING'] = 'utf-8'
 
 $process = [System.Diagnostics.Process]::Start($psi)
-$process.StandardInput.Write($payload)
+$payloadBytes = [System.Text.UTF8Encoding]::new($false).GetBytes($payload)
+$process.StandardInput.BaseStream.Write($payloadBytes, 0, $payloadBytes.Length)
+$process.StandardInput.BaseStream.Flush()
 $process.StandardInput.Close()
 
 $stdoutTask = $process.StandardOutput.ReadToEndAsync()
@@ -325,7 +334,11 @@ $success.image_count = $imageSummaries.Count
 $success.generated_images = $imageSummaries
 $success.plugin_reported_image_count = $details.image_count
 $success.plugin_reported_response_format = ConvertTo-SafeText ([string]$details.response_format)
-$success.plugin_reported_model_ref = if ($details.model) { '<model-ref-present>' } else { '<model-ref-not-reported>' }
+$pluginReportedModelRef = if ($details.model) { ConvertTo-SafeText ([string]$details.model) } else { '<model-ref-not-reported>' }
+$success.plugin_reported_model_ref = $pluginReportedModelRef
+$success.plugin_reported_model_sha256_utf8 = if ($details.model) { Get-Sha256Utf8 ([string]$details.model) } else { $null }
+$success.requested_model_sha256_utf8 = if ([string]::IsNullOrWhiteSpace($ModelOverride)) { $null } else { Get-Sha256Utf8 $ModelOverride }
+$success.plugin_reported_model_matches_requested = if ($details.model -and -not [string]::IsNullOrWhiteSpace($ModelOverride)) { ([string]$details.model) -eq $ModelOverride } else { $null }
 $success.audit_record = 'raw plugin stdout/stderr intentionally discarded after sanitization'
 $success.memory_delta_request_ref = 'memory_delta_request.sanitized.yaml'
 

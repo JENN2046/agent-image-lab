@@ -1,0 +1,61 @@
+status: completed_validated_v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package
+version: v10.12
+current_phase: "v10.12 A5 provider-side prompt fingerprint capture authorization package"
+validation_file: scripts/validate_v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.js
+
+current_baseline:
+  previous_phase: "v10.11 A5 prompt handoff diagnostic result"
+  previous_record: docs/210_v10_11_a5_prompt_handoff_diagnostic_result.md
+  default_next_phase: "BLOCKED for explicit v10.12 provider-side fingerprint capture activation"
+
+authorization_package:
+  authorization_status: inactive_package
+  execution_authorized_by_this_record: false
+  activation_phrase: "批准 v10.12 provider侧指纹捕获"
+  selected_plugin_id: DoubaoGen
+  selected_plugin_command: provider_side_prompt_fingerprint_capture
+  selected_plugin_model: doubao-seedream-5-0-260128
+  prompt_id: a5_positive_still_life_prompt_v1
+  expected_prompt_sha256_utf8: f9967d3348a24db6a55652a4c7661f4385aa85c4287b45cba420c9495dece9b6
+  max_generation_calls_allowed: 0
+  max_image_outputs_allowed: 0
+  max_provider_echo_calls_allowed_after_activation: 1
+  output_directory_ref: runs/v10_12_provider_side_prompt_fingerprint_capture
+  overwrite_existing_files_allowed: false
+  daily_note_direct_write_allowed: false
+  memory_delta_only: true
+
+allowed_operations_after_activation:
+  read_ignored_private_binding_file_for_plugin_dir: true
+  record_raw_plugin_dir_path: false
+  use_config_env_values_as_runtime_environment_only: true
+  record_config_env_values: false
+  compute_local_payload_prompt_sha256: true
+  perform_provider_echo_if_no_image_generation: true
+  perform_sanitized_outbound_request_capture_if_no_image_generation: true
+  record_provider_observed_prompt_sha256: true
+  record_provider_observed_prompt_text: false
+  record_raw_request_body: false
+  record_raw_response_body: false
+  record_endpoint: false
+  record_runtime_log: false
+  create_image: false
+  call_daily_note: false
+  write_vcp_memory: false
+
+no_execution_current_record:
+  execution_authorized_by_this_record: false
+  provider_echo_performed: false
+  sanitized_request_capture_performed: false
+  actual_plugin_calls: 0
+  api_called: false
+  vcp_plugin_called: false
+  image_created: false
+  daily_note_called: false
+  vcp_memory_written: false
+  submitDraft_called: false
+  commit_performed: false
+  tag_performed: false
+  push_performed: false
+  pr_created: false
+  github_release_created: false

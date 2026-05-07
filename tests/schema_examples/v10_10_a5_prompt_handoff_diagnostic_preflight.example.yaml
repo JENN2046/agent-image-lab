@@ -1,0 +1,75 @@
+status: completed_validated_v10_10_a5_prompt_handoff_diagnostic_preflight
+version: v10.10
+current_phase: "v10.10 A5 prompt handoff diagnostic preflight"
+validation_file: scripts/validate_v10_10_a5_prompt_handoff_diagnostic_preflight.js
+
+current_baseline:
+  previous_phase: "v10.9 A5 positive still-life generation rejected asset record"
+  previous_record: docs/208_v10_9_a5_positive_still_life_generation_rejected_asset_record.md
+  default_next_phase: "BLOCKED for explicit no-generation prompt handoff diagnostic authorization"
+
+diagnostic_question:
+  root_cause_known: false
+  prompt_text_wrong_in_repo: false
+  prompt_auto_edited_in_v10_9: false
+  model_adherence_failure_possible: true
+  plugin_request_handoff_failure_possible: true
+  next_diagnostic_goal: "verify sanitized final request intent before any new generation"
+
+locked_prompt_fingerprint:
+  prompt_id: a5_positive_still_life_prompt_v1
+  prompt_source_record: docs/207_v10_8_a5_positive_still_life_generation_preflight_gate.md
+  prompt_cn_sha256_utf8: f9967d3348a24db6a55652a4c7661f4385aa85c4287b45cba420c9495dece9b6
+  prompt_text_recorded_here: false
+  prompt_auto_edit_allowed: false
+
+proposed_no_generation_diagnostic_gate:
+  diagnostic_authorization_active: false
+  diagnostic_type: sanitized_request_preflight
+  selected_plugin_id: DoubaoGen
+  selected_plugin_command: generate
+  selected_plugin_model: doubao-seedream-5-0-260128
+  max_plugin_calls_allowed: 0
+  api_call_allowed: false
+  vcp_plugin_call_allowed: false
+  image_creation_allowed: false
+  output_directory_write_allowed: false
+  config_env_value_read_allowed: false
+  config_env_existence_check_allowed_after_authorization: true
+  raw_plugin_dir_path_recording_allowed: false
+  raw_request_body_recording_allowed: false
+  raw_response_recording_allowed: false
+  endpoint_recording_allowed: false
+  runtime_log_recording_allowed: false
+
+allowed_diagnostic_output:
+  prompt_id_allowed: true
+  prompt_sha256_allowed: true
+  prompt_source_record_allowed: true
+  selected_plugin_id_allowed: true
+  selected_plugin_command_allowed: true
+  selected_plugin_model_allowed: true
+  max_plugin_calls_zero_allowed: true
+  sanitized_request_intent_summary_cn_allowed: true
+  raw_prompt_text_allowed: false
+  raw_plugin_dir_path_allowed: false
+  secret_value_allowed: false
+  endpoint_allowed: false
+  runtime_log_allowed: false
+  raw_request_body_allowed: false
+
+no_execution_guard:
+  real_plugin_dir_read: false
+  config_env_read: false
+  plugin_called: false
+  api_called: false
+  vcp_plugin_called: false
+  image_created: false
+  daily_note_called: false
+  vcp_memory_written: false
+  submitDraft_called: false
+  commit_performed: false
+  tag_performed: false
+  push_performed: false
+  pr_created: false
+  github_release_created: false

@@ -1,0 +1,67 @@
+status: completed_validated_local_guard
+version: v10.28
+current_phase: "v10.28 DailyNote canonical location guard"
+validation_file: scripts/validate_v10_28_dailynote_canonical_location_guard.js
+
+success_definition:
+  plugin_success_required: true
+  plugin_success_sufficient: false
+  writer_root_class_required_before_write: vcp_root_dailynote
+  canonical_target_file_exists_required: true
+  canonical_target_hash_match_required: true
+  wrong_location_file_is_success: false
+  wrong_location_requires_status: plugin_success_wrong_location
+  wrong_location_repair_requires_new_authorization: true
+
+pre_write_guard:
+  root_recomputation_required: true
+  expected_root_class: vcp_root_dailynote
+  expected_notebook: Image_Case_Archive
+  output_location_must_be_canonical: true
+  output_directory_must_exist_or_be_authorized_to_create: true
+  overwrite_existing_files_allowed_default: false
+  raw_config_value_recording_allowed: false
+  raw_external_path_recording_allowed_in_git: false
+
+post_write_guard:
+  canonical_location_check_required: true
+  canonical_file_hash_required: true
+  source_payload_or_expected_content_hash_required: true
+  wrong_plugin_local_location_check_required: true
+  success_record_requires_canonical_location: true
+  success_record_requires_hash_match: true
+  success_record_requires_no_retry_unless_authorized: true
+
+failure_handling:
+  if_plugin_success_but_wrong_location:
+    status: plugin_success_wrong_location
+    declare_vcp_memory_write_complete: false
+    copy_or_move_allowed_without_authorization: false
+    retry_allowed_without_authorization: false
+    required_next_action: human-approved repair or new write authorization
+  if_hash_mismatch:
+    status: rejected_integrity_mismatch
+    declare_vcp_memory_write_complete: false
+    retry_allowed_without_authorization: false
+
+boundary_confirmation:
+  external_config_read_performed: false
+  dailynotewrite_rerun_performed: false
+  daily_note_write_performed_in_v10_28: false
+  vcp_memory_write_performed_in_v10_28: false
+  plugin_or_api_generation_called: false
+  image_created_in_this_phase: false
+  submitDraft_called: false
+  raw_config_value_recorded: false
+  raw_external_path_recorded: false
+  secret_value_recorded: false
+  commit_performed: false
+  tag_performed: false
+  push_performed: false
+  pr_created: false
+  release_created: false
+
+acceptance_assertions:
+  - "Plugin success alone cannot mark VCP memory write complete."
+  - "Canonical location existence and hash match are required for success."
+  - "Wrong-location output must be labeled plugin_success_wrong_location and repaired only after explicit authorization."

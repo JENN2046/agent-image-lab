@@ -2,6 +2,1158 @@
 
 ## Entries
 
+## VALIDATION-20260507-V10-28-DAILYNOTE-CANONICAL-LOCATION-GUARD
+
+Task:
+
+```text
+Add a local guard so future DailyNote/VCP memory writes cannot be marked complete from plugin success alone.
+```
+
+Commands run:
+
+```text
+created docs/214_v10_28_dailynote_canonical_location_guard.md
+created review_console/embed_contract/v10_28_dailynote_canonical_location_guard.md
+created tests/schema_examples/v10_28_dailynote_canonical_location_guard.example.yaml
+created scripts/validate_v10_28_dailynote_canonical_location_guard.js
+updated README/MANIFEST/RELEASE_NOTES/roadmap/checklist indexes
+updated scripts/validate_mvp.ps1 routing
+node --check scripts\validate_v10_28_dailynote_canonical_location_guard.js
+node scripts\validate_v10_28_dailynote_canonical_location_guard.js
+node scripts\validate_v10_27_dailynotewrite_root_path_correction.js
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+node scripts\validate_agent_board_state.js
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+git diff --check
+git status --short --branch
+```
+
+Result:
+
+```text
+completed_validated_local_guard
+```
+
+Findings:
+
+```text
+plugin_success_sufficient=false is now recorded for future DailyNote writes.
+canonical_target_hash_match_required=true is now recorded for future DailyNote writes.
+wrong-location output must be labeled plugin_success_wrong_location and cannot declare memory write complete.
+```
+
+Warnings:
+
+```text
+No external config read, DailyNoteWrite rerun, additional DailyNote/VCP memory write, plugin/API generation, image creation, submitDraft, commit, tag, push, PR, or release was performed by v10.28.
+```
+
+Not validated:
+
+```text
+scripts/validate-agent-image-lab-local.ps1 passed with manual-review warnings only.
+```
+
+Notes:
+
+```text
+This is a local prevention guard, not a new production write authorization.
+```
+
+## VALIDATION-20260507-V10-27-DAILYNOTEWRITE-ROOT-PATH-CORRECTION
+
+Task:
+
+```text
+Correct future DailyNoteWrite output location after detecting that the v10.25 writer used plugin_dir_dailynote instead of the canonical VCP dailynote root.
+```
+
+Commands run:
+
+```text
+sanitized config key classification for KNOWLEDGEBASE_ROOT_PATH / PROJECT_BASE_PATH
+no-write DailyNoteWrite root recomputation before correction
+single-key root-path correction
+no-write DailyNoteWrite root recomputation after correction
+node --check scripts\validate_v10_27_dailynotewrite_root_path_correction.js
+node scripts\validate_v10_27_dailynotewrite_root_path_correction.js
+PowerShell parser check for scripts\validate_mvp.ps1
+node scripts\validate_agent_board_state.js
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+git diff --check
+git status --short --branch
+```
+
+Result:
+
+```text
+completed_root_path_corrected
+```
+
+Findings:
+
+```text
+Before correction, the loaded KNOWLEDGEBASE_ROOT_PATH classified as plugin_dir_dailynote.
+After correction, the loaded KNOWLEDGEBASE_ROOT_PATH classifies as vcp_root_dailynote.
+DailyNoteWrite no-write recomputation now reports computedRootClass=vcp_root_dailynote.
+Git-visible v10.27 docs, Review Console handoff, schema example, validator, indexes, and validation routing were added.
+```
+
+Warnings:
+
+```text
+No raw config value was printed.
+No secret was printed.
+No DailyNoteWrite rerun was performed.
+No existing file was overwritten.
+```
+
+Not validated:
+
+```text
+No new real DailyNote write was performed after the config correction.
+```
+
+Notes:
+
+```text
+The already written v10.25 text file was previously copied to the canonical VCP dailynote location with matching sha256. v10.27 addresses future writes.
+```
+
+## VALIDATION-20260507-V10-26-REAL-DAILYNOTE-WRITE-CLOSEOUT
+
+Task:
+
+```text
+Record the completed v10.25 DailyNoteWrite memory write in Git-visible v10.26 closeout docs, schema example, validator, indexes, and agent board without performing any new real action.
+```
+
+Commands run:
+
+```text
+node --check scripts\validate_v10_26_real_dailynote_write_closeout.js
+node scripts\validate_v10_26_real_dailynote_write_closeout.js
+PowerShell parser check for scripts\validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+node scripts\validate_agent_board_state.js
+git diff --check
+```
+
+Result:
+
+```text
+completed_validated_local_closeout
+```
+
+Findings:
+
+```text
+v10.26 records actual_write_calls=1 through DailyNoteWrite, saved file name/hash, and consumed v10.25 single-write authorization.
+Top-level indexes now reference docs/212, the Review Console handoff, the schema example, and the v10.26 validator.
+```
+
+Warnings:
+
+```text
+scripts/validate-agent-image-lab-local.ps1 passed with manual-review warnings only.
+Git reported LF-to-CRLF working-copy warnings only.
+No second write, retry, submitDraft, generation, image creation, commit, tag, push, PR, or release is authorized by v10.26.
+```
+
+Not validated:
+
+```text
+No external saved-file path was reopened during v10.26 closeout.
+No new DailyNote/VCP memory write was attempted.
+```
+
+Notes:
+
+```text
+v10.26 is local closeout only. The source execution artifacts remain under ignored runs/ records.
+```
+
+## VALIDATION-20260507-V10-25-REAL-DAILYNOTE-WRITE
+
+Task:
+
+```text
+Execute one real DailyNote/VCP memory write for the v10.24 approved request using DailyNoteWrite.
+```
+
+Commands run:
+
+```text
+read DailyNoteWrite manifest and entry schema
+prepared runs/v10_25_real_dailynote_write/payload.dailynotewrite.json
+executed DailyNoteWrite once with the prepared payload
+performed one read-only sanitized existence check for the saved file name suffix
+created runs/v10_25_real_dailynote_write/execution_result.sanitized.json
+created runs/v10_25_real_dailynote_write/write_execution_audit.sanitized.yaml
+updated agent board
+execution result JSON parse
+single write and no-retry field check
+v10.25 records raw external path/config marker scan
+node scripts/validate_agent_board_state.js
+scripts/validate_mvp.ps1
+scripts/validate-agent-image-lab-local.ps1
+git diff --check
+RUN_STATE legacy no-write pattern check
+git status --short --branch
+```
+
+Result:
+
+```text
+completed_validated_real_write
+```
+
+Findings:
+
+```text
+DailyNoteWrite exited with code 0 and reported success.
+Read-only sanitized existence check found one matching saved file.
+The saved file name, length, and sha256 were recorded; the raw full saved path was not printed or recorded.
+```
+
+Warnings:
+
+```text
+The single authorized write call has been consumed.
+Do not retry, write a second time, call DailyNote again, write VCP memory again, or run submitDraft unless the user gives a new explicit authorization.
+scripts/validate_mvp.ps1 initially flagged YAML-like true fields in RUN_STATE; RUN_STATE wording was changed to natural-language performed/not-performed text while the detailed boolean execution evidence remains in ignored sanitized run records.
+scripts/validate-agent-image-lab-local.ps1 passed with manual-review warnings only.
+```
+
+Not validated:
+
+```text
+No second write, no retry, no plugin/API generation call, no image creation, no submitDraft, no commit, no tag, no push, no PR, and no release was performed.
+```
+
+Notes:
+
+```text
+execution result: runs/v10_25_real_dailynote_write/execution_result.sanitized.json
+write audit: runs/v10_25_real_dailynote_write/write_execution_audit.sanitized.yaml
+```
+
+## VALIDATION-20260507-V10-24-APPROVE-MEMORY-WRITE-NO-WRITE-PREFLIGHT
+
+Task:
+
+```text
+Apply approve_memory_write to the v10.23 human review package and create a no-write DailyNote/VCP memory write preflight package.
+```
+
+Commands run:
+
+```text
+read v10.23 human review package
+read v10.23 approval decision template
+read v1.3 DailyNote / VCP Memory Handoff Contract
+created runs/v10_24_approve_memory_write_no_write_preflight/review_decision.approved.yaml
+created runs/v10_24_approve_memory_write_no_write_preflight/approved_memory_request.no_write.yaml
+created runs/v10_24_approve_memory_write_no_write_preflight/daily_note_write_preflight.sanitized.json
+created runs/v10_24_approve_memory_write_no_write_preflight/write_execution_audit_stub.no_write.yaml
+updated agent board
+daily note write preflight JSON parse
+no-write guard and confirmed candidate field check
+node scripts/validate_agent_board_state.js
+scripts/validate_mvp.ps1
+scripts/validate-agent-image-lab-local.ps1
+git diff --check
+git status --short --branch
+```
+
+Result:
+
+```text
+completed_validated_no_write_preflight
+```
+
+Findings:
+
+```text
+approve_memory_write was applied as an approved request only.
+The package includes a confirmed memory_delta candidate and should_write_to_vcp_candidate=true, but this is not an execution receipt.
+daily_note_write_authorized=false, daily_note_called=false, vcp_memory_written=false, and actual_write_performed=false remain required hard boundaries.
+```
+
+Warnings:
+
+```text
+This phase does not authorize DailyNote/VCP memory write, submitDraft, final archive promotion, another generation, or any version action.
+Future real write requires a separate explicit DailyNote/VCP memory-write authorization plus execution audit.
+scripts/validate-agent-image-lab-local.ps1 passed with manual-review warnings only.
+```
+
+Not validated:
+
+```text
+No real DoubaoGen/config read, plugin/API call, image creation, DailyNote call, VCP memory write, submitDraft, commit, tag, push, PR, or release was performed.
+```
+
+Notes:
+
+```text
+review decision: runs/v10_24_approve_memory_write_no_write_preflight/review_decision.approved.yaml
+approved memory request: runs/v10_24_approve_memory_write_no_write_preflight/approved_memory_request.no_write.yaml
+daily note write preflight: runs/v10_24_approve_memory_write_no_write_preflight/daily_note_write_preflight.sanitized.json
+write execution audit stub: runs/v10_24_approve_memory_write_no_write_preflight/write_execution_audit_stub.no_write.yaml
+```
+
+## VALIDATION-20260507-V10-23-MEMORY-DRAFT-HUMAN-REVIEW-PACKAGE
+
+Task:
+
+```text
+Create a local no-write human review package for the v10.22 run_1 memory_delta draft.
+```
+
+Commands run:
+
+```text
+read v10.22 memory_delta draft
+read v10.22 sanitized memory review summary
+created runs/v10_23_memory_draft_human_review_package/human_review_package.sanitized.json
+created runs/v10_23_memory_draft_human_review_package/human_review_checklist.md
+created runs/v10_23_memory_draft_human_review_package/approval_decision_template.yaml
+updated agent board
+human review package JSON parse
+no-write guard field check
+node scripts/validate_agent_board_state.js
+scripts/validate_mvp.ps1
+scripts/validate-agent-image-lab-local.ps1
+git diff --check
+git status --short --branch
+```
+
+Result:
+
+```text
+completed_validated_human_review_package
+```
+
+Findings:
+
+```text
+The package exposes only three no-write human decisions: approve_memory_write, request_memory_edit, reject_memory_write.
+approve_memory_write in this package only means entering a future separately authorized write preflight; it does not perform DailyNote/VCP memory write.
+```
+
+Warnings:
+
+```text
+This phase does not authorize DailyNote/VCP memory write, final archive promotion, another generation, or any version action.
+The selected asset is referenced by relative path and sha256 only; image binary is not embedded in the review package.
+scripts/validate-agent-image-lab-local.ps1 passed with manual-review warnings only.
+```
+
+Not validated:
+
+```text
+No real DoubaoGen/config read, plugin/API call, image creation, DailyNote call, VCP memory write, submitDraft, commit, tag, push, PR, or release was performed.
+```
+
+Notes:
+
+```text
+human review package: runs/v10_23_memory_draft_human_review_package/human_review_package.sanitized.json
+human review checklist: runs/v10_23_memory_draft_human_review_package/human_review_checklist.md
+approval decision template: runs/v10_23_memory_draft_human_review_package/approval_decision_template.yaml
+```
+
+## VALIDATION-20260507-V10-22-RUN-1-MEMORY-DRAFT
+
+Task:
+
+```text
+Create a local Chinese memory_delta draft for the selected v10.19 run_1 accepted candidate.
+```
+
+Commands run:
+
+```text
+read v10.21 sanitized selection summary
+read v10.19 run_1 sanitized review result
+created runs/v10_22_run_1_memory_draft/memory_delta_draft.yaml
+created runs/v10_22_run_1_memory_draft/memory_review_summary.sanitized.json
+updated agent board
+node scripts/validate_agent_board_state.js
+scripts/validate_mvp.ps1
+scripts/validate-agent-image-lab-local.ps1
+git diff --check
+memory draft field check
+git status --short --branch
+```
+
+Result:
+
+```text
+completed_validated_memory_delta_draft
+```
+
+Findings:
+
+```text
+v10.19 run_1 is represented as an accepted visual case draft.
+The draft remains write_mode=draft, approval_status=pending, and final_decision.should_write_to_vcp=false.
+```
+
+Warnings:
+
+```text
+This phase does not authorize DailyNote/VCP memory write, final archive promotion, another generation, or any version action.
+The selected asset is referenced by relative path and sha256 only; image binary is not embedded in memory_delta.
+scripts/validate-agent-image-lab-local.ps1 passed with manual-review warnings only.
+```
+
+Not validated:
+
+```text
+No real DoubaoGen/config read, plugin/API call, image creation, DailyNote call, VCP memory write, submitDraft, commit, tag, push, PR, or release was performed.
+```
+
+Notes:
+
+```text
+memory draft: runs/v10_22_run_1_memory_draft/memory_delta_draft.yaml
+review summary: runs/v10_22_run_1_memory_draft/memory_review_summary.sanitized.json
+```
+
+## VALIDATION-20260507-V10-21-ASSET-SELECTION-REVIEW
+
+Task:
+
+```text
+Continue with the next local step after v10.19/v10.20 by producing a no-execution asset selection review.
+```
+
+Commands run:
+
+```text
+read v10.19 sanitized batch summary
+created runs/v10_21_asset_selection_review/selection_summary.sanitized.json
+updated agent board
+node scripts/validate_agent_board_state.js
+scripts/validate_mvp.ps1
+scripts/validate-agent-image-lab-local.ps1
+git diff --check
+git status --short --branch
+```
+
+Result:
+
+```text
+completed_validated_local_selection_review
+```
+
+Findings:
+
+```text
+v10.19 run_1 is recommended as the selected accepted candidate.
+v10.19 run_2 remains needs_human_review because small lens markings/text-like details are visible under the strict blank-surface rule.
+```
+
+Warnings:
+
+```text
+This local review does not authorize DailyNote/VCP memory write, final archive promotion, another generation, or any version action.
+scripts/validate-agent-image-lab-local.ps1 passed with manual-review warnings only.
+```
+
+Not validated:
+
+```text
+No real DoubaoGen/config read, plugin/API call, image creation, DailyNote call, VCP memory write, submitDraft, commit, tag, push, PR, or release was performed.
+```
+
+Notes:
+
+```text
+selection summary: runs/v10_21_asset_selection_review/selection_summary.sanitized.json
+```
+
+## VALIDATION-20260507-V10-20-PLUGIN-REPORTED-MODEL-RECORDING
+
+Task:
+
+```text
+Patch the DoubaoGen real-execution runner so future sanitized summaries record the plugin-reported model value and requested/reported match status.
+```
+
+Commands run:
+
+```text
+patched scripts/run_v0_7_photo_studio_os_real_execution.ps1
+added scripts/validate_v10_20_plugin_reported_model_recording.js
+updated scripts/validate_mvp.ps1 routing for v10.20 validator
+updated README, MANIFEST, and validation checklist indexes
+PowerShell parse check for scripts/run_v0_7_photo_studio_os_real_execution.ps1: passed
+node --check scripts/validate_v10_20_plugin_reported_model_recording.js: passed
+node scripts/validate_v10_20_plugin_reported_model_recording.js: passed
+PowerShell parse check for scripts/validate_mvp.ps1: passed
+node scripts/validate_agent_board_state.js: passed
+scripts/validate_mvp.ps1: passed
+git diff --check: passed
+```
+
+Result:
+
+```text
+completed_validated_local_model_recording_patch
+```
+
+Findings:
+
+```text
+Future DoubaoGen summaries will record sanitized plugin_reported_model_ref, plugin_reported_model_sha256_utf8, requested_model_sha256_utf8, and plugin_reported_model_matches_requested.
+The runner no longer collapses plugin-reported model to a presence-only marker.
+```
+
+Warnings:
+
+```text
+This patch does not recover the exact plugin-reported model from v10.19 because raw plugin output was intentionally discarded after sanitization.
+```
+
+Not validated:
+
+```text
+No plugin/API call, image creation, DailyNote call, VCP memory write, submitDraft, commit, tag, push, PR, or release was performed.
+```
+
+Notes:
+
+```text
+actual generation calls: 0
+image created: false
+```
+
+## VALIDATION-20260507-V10-19-COMPATIBLE-BYTE-WRITE-RUNNER-TWO-REAL-GENERATIONS
+
+Task:
+
+```text
+Execute the approved v10.19 compatible byte-write runner two real generations using the locked a5_positive_still_life_prompt_v1 prompt.
+```
+
+Commands run:
+
+```text
+git status --short --branch: inspected
+locked prompt hash preflight: passed
+output directory collision check for run_1/run_2: passed
+private binding and required plugin/config existence check without raw path/value recording: passed
+run_1 DoubaoGen real generation: success
+run_2 DoubaoGen real generation: success
+visual review of generated images: completed
+sanitized review records written
+image dimensions check: 1024x1024 for both images
+runtime output ignore check: passed
+sanitized output sensitive scan: passed; only false-valued secret field names matched the word secret
+```
+
+Result:
+
+```text
+completed_two_generations_reviewed_memory_blocked
+```
+
+Findings:
+
+```text
+actual_plugin_calls_total=2, generated_image_count=2.
+Both runs reported model_ref=doubao-seedream-5-0-260128.
+run_1 generated asset sha256=0c50cd864982520c44bf0cbabd013c4e9d45d5e52c7059c9c9743408d0eaf61a and is an accepted candidate.
+run_2 generated asset sha256=298bf00375ac49a48657e88b03033b1f356629031e60962d64688130ed437e03 and needs human review because small lens markings/text-like details are visible.
+Both reviewed assets are tabletop studio still-life camera lens images with no person/face detected.
+```
+
+Warnings:
+
+```text
+Run 2 should not be promoted to memory or final archive without human review because of the blank-surface/text-marking constraint.
+```
+
+Not validated:
+
+```text
+No third generation, no retry beyond the two authorized calls, no DailyNote call, no VCP memory write, no submitDraft, no commit, no tag, no push, no PR, and no release was performed.
+No raw prompt text, raw request body, raw response body, endpoint, runtime log, PluginDir path, or secret value was saved.
+```
+
+Notes:
+
+```text
+Sanitized batch summary: runs/v10_19_compatible_byte_write_real_generation/batch_summary.sanitized.json
+```
+
+## VALIDATION-20260507-V10-18-COMPATIBLE-RUNNER-BYTE-WRITE-TRANSPORT
+
+Task:
+
+```text
+Patch runner stdin transport to a Windows PowerShell 5.1 compatible UTF-8 no BOM byte-write path after v10.17 failed before plugin start.
+```
+
+Commands run:
+
+```text
+patched scripts/run_v0_7_photo_studio_os_real_execution.ps1
+patched scripts/run_v0_10_gptimagegen_real_execution.ps1
+updated scripts/validate_v10_15_runner_utf8_no_bom_transport.js
+PowerShell parse check for both runners: passed
+node --check scripts/validate_v10_15_runner_utf8_no_bom_transport.js: passed
+node scripts/validate_v10_15_runner_utf8_no_bom_transport.js: passed
+compatible byte-write dummy preflight: passed, 3 iterations
+node scripts/validate_agent_board_state.js: passed
+scripts/validate_mvp.ps1: passed
+scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings
+git diff --check: passed
+```
+
+Result:
+
+```text
+completed_validated_compatible_byte_write_transport_patch
+```
+
+Findings:
+
+```text
+Windows PowerShell 5.1 does not expose ProcessStartInfo.StandardInputEncoding, so the v10.15 property-based patch failed before plugin start in v10.17.
+The compatible patch encodes JSON payload with UTF8Encoding(false).GetBytes($payload), writes bytes to StandardInput.BaseStream, flushes, then closes stdin.
+The dummy receiver preflight confirmed JSON parse, no BOM, model hash match, prompt hash match, and stable stdin hash across three iterations.
+```
+
+Warnings:
+
+```text
+This validates local runner transport only. The v10.17 real generation authorization is consumed and no retry was performed.
+```
+
+Not validated:
+
+```text
+No plugin/API call, image creation, DailyNote call, VCP memory write, submitDraft, commit, tag, push, PR, or release was performed after the v10.17 failed pre-plugin attempt.
+```
+
+Notes:
+
+```text
+actual generation calls after patch: 0
+image created after patch: false
+```
+
+## VALIDATION-20260507-V10-17-PATCHED-RUNNER-REAL-GENERATION-FAILED-BEFORE-PLUGIN
+
+Task:
+
+```text
+Execute the approved v10.17 patched runner single real generation.
+```
+
+Commands run:
+
+```text
+prompt hash preflight: passed
+output directory collision check: passed
+private binding existence check without raw path recording: passed
+runner invocation: failed before plugin process start
+sanitized failure record written
+```
+
+Result:
+
+```text
+failed_before_plugin_start_no_retry
+```
+
+Findings:
+
+```text
+The runner failed because the active PowerShell runtime did not expose ProcessStartInfo.StandardInputEncoding.
+The failure occurred before plugin process start.
+actual_plugin_calls=0, api_called=false, image_created=false.
+No retry was performed under the v10.17 authorization.
+```
+
+Warnings:
+
+```text
+The output directory is non-empty with a sanitized failure record, so it must not be reused for a later generation.
+```
+
+Not validated:
+
+```text
+No provider-side request, image review, DailyNote call, VCP memory write, submitDraft, commit, tag, push, PR, or release was performed.
+No raw prompt text, raw request body, raw response body, endpoint, runtime log, PluginDir path, or secret value was saved.
+```
+
+Notes:
+
+```text
+Sanitized failure record: runs/v10_17_patched_runner_real_generation/run_summary.sanitized.json
+```
+
+## VALIDATION-20260507-V10-16-NO-GENERATION-REQUEST-PREFLIGHT
+
+Task:
+
+```text
+Run one no-generation request preflight to confirm the patched runner transport produces stable request fingerprints.
+```
+
+Commands run:
+
+```text
+local dummy Node stdin receiver preflight: passed
+iterations: 3
+```
+
+Result:
+
+```text
+completed_validated_no_generation_request_preflight
+```
+
+Findings:
+
+```text
+The preflight used a local dummy receiver and did not read real DoubaoGen.js or config.env.
+All three request payload writes parsed as JSON.
+All three stdin payloads had no UTF-8 BOM.
+All three model hashes matched doubao-seedream-5-0-260128.
+All three locked prompt hashes matched a5_positive_still_life_prompt_v1.
+stdin sha256, prompt sha256, model sha256, and top-level key shape were stable across all three iterations.
+```
+
+Warnings:
+
+```text
+This validates local request transport and fingerprint stability only; it does not contact the provider and does not prove image quality.
+```
+
+Not validated:
+
+```text
+No real DoubaoGen/config read, provider-side echo, sanitized outbound capture, plugin/API call, image creation, DailyNote call, VCP memory write, submitDraft, commit, tag, push, PR, or release was performed.
+No raw prompt text, raw request body, raw response body, endpoint, runtime log, PluginDir path, or secret value was saved.
+```
+
+Notes:
+
+```text
+actual generation calls: 0
+api called: false
+image created: false
+```
+
+## VALIDATION-20260507-V10-15-RUNNER-UTF8-NO-BOM-TRANSPORT
+
+Task:
+
+```text
+Patch local real-execution runners so JSON payload stdin is written as UTF-8 no BOM before any future Chinese prompt generation.
+```
+
+Commands run:
+
+```text
+patched scripts/run_v0_7_photo_studio_os_real_execution.ps1
+patched scripts/run_v0_10_gptimagegen_real_execution.ps1
+added scripts/validate_v10_15_runner_utf8_no_bom_transport.js
+updated scripts/validate_mvp.ps1 routing for the v10.15 validator
+PowerShell parse check for scripts/run_v0_7_photo_studio_os_real_execution.ps1: passed
+PowerShell parse check for scripts/run_v0_10_gptimagegen_real_execution.ps1: passed
+node --check scripts/validate_v10_15_runner_utf8_no_bom_transport.js: passed
+node scripts/validate_v10_15_runner_utf8_no_bom_transport.js: passed
+PowerShell parse check for scripts/validate_mvp.ps1: passed
+node scripts/validate_agent_board_state.js: passed
+scripts/validate_mvp.ps1: passed
+scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings
+git diff --check: passed
+```
+
+Result:
+
+```text
+completed_validated_local_runner_transport_patch
+```
+
+Findings:
+
+```text
+Both local real-execution runners now set $psi.StandardInputEncoding = [System.Text.UTF8Encoding]::new($false) before starting the plugin process.
+This directly addresses the v10.14 finding where default PowerShell stdin corrupted the locked Chinese prompt hash.
+```
+
+Warnings:
+
+```text
+This patch does not itself prove provider-side image quality. A future no-generation request preflight or separately authorized real generation is still required.
+```
+
+Not validated:
+
+```text
+No plugin/API call, image creation, DailyNote call, VCP memory write, submitDraft, commit, tag, push, PR, or release was performed.
+```
+
+Notes:
+
+```text
+actual generation calls: 0
+image created: false
+```
+
+## VALIDATION-20260507-V10-14-DOUBAOGEN-MODEL-LOCK-DIAGNOSTIC
+
+Task:
+
+```text
+Execute the approved v10.14 no-generation DoubaoGen 5.0 model lock diagnostic and verify the current request model / prompt transport before network send.
+```
+
+Commands run:
+
+```text
+current DoubaoGen.js/config.env static model scan: completed after user reported recent edits
+sanitized request capture with default PowerShell stdin encoding: completed, network blocked before send
+PowerShell-to-Node stdin encoding probe: completed
+sanitized request capture with UTF-8 no BOM stdin encoding: completed, network blocked before send
+node scripts/validate_agent_board_state.js: passed
+git diff --check: passed
+v10.14 sanitized output raw locator/sensitive scan: passed; only false-valued flag field names matched the word secret
+git check-ignore for v10.14 runtime summaries and capture helper: passed
+```
+
+Result:
+
+```text
+completed_model_lock_confirmed_prompt_transport_issue_found
+```
+
+Findings:
+
+```text
+The current request body model matched doubao-seedream-5-0-260128.
+Because the user had just changed DoubaoGen.js/config.env before the static scan, the current static 5.0 presence is not historical proof for v10.13.
+With the current runner-style default PowerShell stdin path, the captured request model matched but the prompt hash did not match the locked prompt.
+The local encoding probe reproduced the prompt mismatch: default stdin mismatched; Encoding.UTF8 included BOM and mismatched; UTF8Encoding(false) matched.
+With UTF-8 no BOM stdin, the captured request model and prompt hash both matched the locked expected fingerprints.
+```
+
+Warnings:
+
+```text
+Before another real DoubaoGen generation, the runner transport should be patched or preflighted so plugin stdin is written as UTF-8 no BOM.
+```
+
+Not validated:
+
+```text
+No provider request was sent, no image was created, no second real generation was attempted, no DailyNote call, VCP memory write, submitDraft, commit, tag, push, PR, or release was performed.
+No raw PluginDir path, config.env value, endpoint, runtime log, raw request body, raw prompt text, raw plugin output, or secret value was recorded.
+```
+
+Notes:
+
+```text
+Sanitized runtime summaries live under runs/v10_14_doubaogen_model_lock_diagnostic and are ignored by Git.
+```
+
+## VALIDATION-20260507-V10-13-REAL-GENERATION-FULL-VALIDATION
+
+Task:
+
+```text
+Execute one approved v10.13 DoubaoGen real generation full validation using the locked a5_positive_still_life_prompt_v1 prompt.
+```
+
+Commands run:
+
+```text
+prompt hash preflight: passed
+output directory collision check: passed
+private DoubaoGen binding preflight without raw path recording: passed
+DoubaoGen real generation runner: passed
+image file check: passed
+image dimensions check: passed 1024x1024
+v10.13 output raw locator scan: passed
+v10.13 summary flags: passed
+visual review: failed asset acceptance because person/face and prompt-subject mismatch were visible
+```
+
+Result:
+
+```text
+generation_completed_asset_rejected_memory_blocked
+```
+
+Findings:
+
+```text
+DoubaoGen was called exactly once and produced one image.
+The generated asset hash is f1a30785bf232cb82e0b09426ef24eeb55718940899f2befd00223014b4e8ba3.
+The image is 1024x1024 and 345436 bytes.
+The visual result is a woman in an outdoor mountain/lake scene, not a studio tabletop still-life with an unbranded camera lens.
+person_or_face_detected=true, prompt_subject_match=false, readable_text_or_logo_detected=false.
+The asset is rejected and memory writes remain blocked.
+```
+
+Warnings:
+
+```text
+This is now repeated evidence that the current DoubaoGen path is not honoring the locked still-life prompt for this workflow.
+```
+
+Not validated:
+
+```text
+No second generation attempt, DailyNote call, VCP memory write, submitDraft, commit, tag, push, PR, or release was performed.
+No raw PluginDir path, config.env value, endpoint, runtime log, raw plugin output, or secret value was recorded.
+```
+
+Notes:
+
+```text
+The generated asset and sanitized review result live under runs/v10_13_real_generation_full_validation and are ignored by Git.
+```
+
+## VALIDATION-20260507-V10-12-ACTIVATION
+
+Task:
+
+```text
+Execute one approved v10.12 provider-side prompt fingerprint capture activation without image generation or raw request recording.
+```
+
+Commands run:
+
+```text
+v10.12 activation phrase check: passed
+output directory collision check: passed
+private PluginDir binding existence check without raw path recording: passed
+DoubaoGen.js existence check without raw path recording: passed
+config.env existence check without value recording: passed
+locked prompt hash preflight: passed
+sanitized request capture with network blocked before send: completed
+v10.12 output raw locator scan: passed
+v10.12 output sensitive flags: passed
+v10.12 image check: passed count=0
+git status --short --branch: inspected
+```
+
+Result:
+
+```text
+completed_sanitized_request_capture_prompt_hash_not_matched
+```
+
+Findings:
+
+```text
+Local payload prompt sha256 matched the locked expected hash.
+Provider echo was not supported by the current DoubaoGen diagnostic surface.
+One sanitized outbound request capture was performed with network blocked before send.
+The captured first outbound request was valid JSON with four string leaves and zero prompt-like string leaves.
+The expected prompt hash was not found in the captured first outbound request.
+Provider observed prompt hash remains not observed because the provider was not contacted.
+Inference: the first outbound request was likely not the final image prompt payload, or the plugin packages the prompt after an earlier provider/auth step. This is inference from sanitized counts, not provider confirmation.
+```
+
+Warnings:
+
+```text
+The single v10.12 capture attempt has been consumed. Do not retry automatically.
+```
+
+Not validated:
+
+```text
+No second request was captured, no provider-side echo was completed, and no provider-side received prompt was confirmed.
+No API call, image generation, raw prompt text save, raw request/response save, endpoint save, runtime log save, secret save, raw PluginDir path save, DailyNote call, VCP memory write, submitDraft, commit, tag, push, PR, or release was performed.
+```
+
+Notes:
+
+```text
+The sanitized result lives under runs/v10_12_provider_side_prompt_fingerprint_capture. The next deeper diagnostic would need a new explicit authorization because the current max_sanitized_request_capture_attempts_after_activation was one.
+```
+
+## VALIDATION-20260507-V10-12
+
+Task:
+
+```text
+Prepare an inactive A5 provider-side prompt fingerprint capture authorization package for provider-side echo / sanitized request capture.
+```
+
+Commands run:
+
+```text
+node --check scripts/validate_v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.js: passed
+node --check scripts/validate_v10_11_a5_prompt_handoff_diagnostic_result.js: passed
+node --check scripts/validate_local_commit_scope.js: passed
+powershell parse check for scripts/validate_mvp.ps1: passed
+node scripts/validate_v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.js: passed
+node scripts/validate_v10_11_a5_prompt_handoff_diagnostic_result.js: passed with v10.12 superseding board state
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: passed with manual-review warnings
+node scripts/validate_local_commit_scope.js: passed
+git diff --check: passed
+raw-sensitive-scan: passed
+git status --short --branch: inspected
+```
+
+Result:
+
+```text
+completed_validated_inactive_provider_side_prompt_fingerprint_capture_authorization_package
+```
+
+Findings:
+
+```text
+v10.12 records authorization_status: inactive_package, execution_authorized_by_this_record: false, max_generation_calls_allowed: 0, max_provider_echo_calls_allowed_after_activation: 1, and provider-side capture not performed.
+The package is scoped to validating the provider-observed prompt sha256 only, without storing raw prompt text, raw request/response body, endpoint, runtime log, secret value, or raw PluginDir path.
+```
+
+Warnings:
+
+```text
+scripts/validate-agent-image-lab-local.ps1 retained expected manual-review warnings for negative checklist terms such as token, cookie, password, image extensions, and script extensions.
+Git reported LF-to-CRLF working-copy warnings only.
+```
+
+Not validated:
+
+```text
+No provider-side echo, sanitized request capture, PluginDir content read, config.env value read, plugin/API call, image creation, DailyNote call, VCP memory write, submitDraft, commit, tag, push, PR, or release was performed.
+```
+
+Notes:
+
+```text
+The activation phrase `批准 v10.12 provider侧指纹捕获` remains unused. If activated later, execution must stop if provider echo requires image generation or if the diagnostic would need to save raw request, endpoint, secret, or runtime log material.
+```
+
+## VALIDATION-20260507-SHORT-APPROVAL-TEMPLATE
+
+Task:
+
+```text
+Add a short approval template for v10.8 positive still-life single generation while keeping PluginDir private, ignored, and preflight-gated.
+```
+
+Commands run:
+
+```text
+node --check scripts/validate_local_commit_scope.js: passed
+powershell parse check for scripts/validate_mvp.ps1: passed
+node scripts/validate_local_commit_scope.js: passed
+node scripts/validate_v10_8_a5_positive_still_life_generation_preflight_gate.js: passed
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: passed with manual-review warnings
+git diff --check: passed
+```
+
+Result:
+
+```text
+completed_validated_short_approval_template
+```
+
+Findings:
+
+```text
+The new short approval phrase is `批准 v10.8 静物单次生成`. It only applies to the current presented capsule and still requires `.agent_private/doubaogen_plugin_dir.txt` to exist, be ignored by Git, and pass preflight.
+```
+
+Warnings:
+
+```text
+scripts/validate-agent-image-lab-local.ps1 retained expected manual-review warnings for negative checklist terms such as token, cookie, password, image extensions, and script extensions.
+```
+
+Not validated:
+
+```text
+No private PluginDir binding was created, no real VCPChat or VCPToolBox source was read, no config.env was read, no plugin/API call was made, no image was created, no DailyNote/VCP memory write was performed, and no commit/tag/push/PR/release was performed.
+```
+
+Notes:
+
+```text
+The template reduces repeated approval text but does not make bare continuation words such as ok or continue sufficient. A bare `批准` applies only when Codex has just presented exactly one matching current approval capsule.
+```
+
+## VALIDATION-20260507-STATE-CALIBRATION-AUTH-DRAFT
+
+Task:
+
+```text
+Calibrate current post-v10.8 local state on master and prepare an inactive real generation authorization draft for a5_positive_still_life_prompt_v1.
+```
+
+Commands run:
+
+```text
+node --check scripts/validate_local_commit_scope.js: passed
+powershell parse check for scripts/validate_mvp.ps1: passed
+node scripts/validate_local_commit_scope.js: passed
+node scripts/validate_v7_40_local_a4_a5_autonomy_alignment.js: passed
+node scripts/validate_v10_3_a5_bridge_integration_smoke_record.js: passed
+node scripts/validate_v10_4_a5_doubaogen_single_generation_rejected_asset_record.js: passed
+node scripts/validate_v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.js: passed
+node scripts/validate_v10_6_a5_prompt_failure_analysis_and_safer_strategy.js: passed
+node scripts/validate_v10_8_a5_positive_still_life_generation_preflight_gate.js: passed
+node scripts/validate_agent_board_state.js: passed
+authorization draft raw locator scan: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: passed with manual-review warnings
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+git diff --check: passed
+```
+
+Result:
+
+```text
+completed_validated_local_state_calibration_and_inactive_authorization_draft
+```
+
+Findings:
+
+```text
+The repository reality is master ahead of origin/master by one commit before this documentation batch. The new authorization draft is inactive and keeps real generation blocked until explicit prompt approval plus separate generation authorization.
+```
+
+Warnings:
+
+```text
+scripts/validate-agent-image-lab-local.ps1 retained its expected manual-review warnings for negative checklist terms such as token, cookie, password, image extensions, and script extensions.
+```
+
+Not validated:
+
+```text
+No real VCPChat read, real VCPToolBox read, real manifest read, plugin call, API call, DailyNote write, VCP memory write, image creation, submitDraft call, commit, tag, push, PR, or GitHub Release was performed.
+```
+
+Notes:
+
+```text
+The v10.8 authorization draft is review material only. It does not activate A5 and does not authorize a DoubaoGen call.
+```
+
 ## VALIDATION-20260507-V10-08-A5-POSITIVE-STILL-LIFE-PREFLIGHT-GATE
 
 Task:
@@ -1778,6 +2930,170 @@ Notes:
 
 ```text
 All current validation stayed project-local and reversible.
+```
+
+## VALIDATION-20260507-V10-9
+
+Task:
+
+```text
+Record v10.9 A5 positive still-life rejected asset result after one short-approval DoubaoGen generation.
+```
+
+Commands run:
+
+```text
+node --check scripts/validate_v10_9_a5_positive_still_life_generation_rejected_asset_record.js
+node --check scripts/validate_v10_8_a5_positive_still_life_generation_preflight_gate.js
+node --check scripts/validate_local_commit_scope.js
+powershell parse check for scripts/validate_mvp.ps1
+powershell parse check for scripts/validate-agent-image-lab-local.ps1
+node scripts/validate_v10_9_a5_positive_still_life_generation_rejected_asset_record.js
+node scripts/validate_v10_8_a5_positive_still_life_generation_preflight_gate.js
+node scripts/validate_local_commit_scope.js
+node scripts/validate_agent_board_state.js
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+git diff --check
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+v10.9 records actual_plugin_calls=1, generated_asset_count=1, asset_status=rejected, person_or_face_detected=true, prompt_subject_match=false, DailyNote write=false, and VCP memory write=false.
+The local hard false flag scanner was updated to treat v10.9 as an allowed historical true-call record so it can preserve factual api/plugin call fields without weakening ordinary no-execution scans.
+```
+
+Warnings:
+
+```text
+scripts/validate-agent-image-lab-local.ps1 still reports manual-review warnings for known negative/checklist strings such as token, cookie, password, image extensions, and script extensions.
+Git reported LF-to-CRLF working-copy warnings only.
+```
+
+Not validated:
+
+```text
+No retry plugin call, DailyNote call, VCP memory write, submitDraft, commit, tag, push, PR, or release was performed after v10.9 asset rejection.
+No raw PluginDir path, secret value, endpoint, runtime log, or raw plugin output was recorded.
+```
+
+Notes:
+
+```text
+All closeout updates stayed inside the project repository except the already ignored runtime output asset created by the authorized v10.9 call.
+```
+
+## VALIDATION-20260507-V10-10
+
+Task:
+
+```text
+Record v10.10 A5 prompt handoff diagnostic preflight after v10.9 prompt mismatch.
+```
+
+Commands run:
+
+```text
+node --check scripts/validate_v10_10_a5_prompt_handoff_diagnostic_preflight.js
+powershell parse check for scripts/validate_mvp.ps1
+node scripts/validate_v10_10_a5_prompt_handoff_diagnostic_preflight.js
+node scripts/validate_v10_9_a5_positive_still_life_generation_rejected_asset_record.js
+node scripts/validate_local_commit_scope.js
+node scripts/validate_agent_board_state.js
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+v10.10 records root_cause_known=false, model_adherence_failure_possible=true, plugin_request_handoff_failure_possible=true, prompt_sha256_matches_expected=true, max_plugin_calls_allowed=0, diagnostic_authorization_active=false, api_call_allowed=false, and image_creation_allowed=false.
+v10.9 validator now accepts the v10.10 superseding board state while preserving the v10.9 rejected-asset record checks.
+```
+
+Warnings:
+
+```text
+Git reported LF-to-CRLF working-copy warnings only.
+```
+
+Not validated:
+
+```text
+No diagnostic execution, PluginDir read, config.env value read, plugin call, API call, image creation, DailyNote call, VCP memory write, submitDraft, commit, tag, push, PR, or release was performed in v10.10.
+```
+
+Notes:
+
+```text
+The v10.10 authorization template is inactive; the short approval phrase `批准 v10.10 传参诊断` is not usable unless Codex presents the matching capsule and the user explicitly approves it.
+```
+
+## VALIDATION-20260507-V10-11
+
+Task:
+
+```text
+Execute and record the approved no-generation prompt handoff diagnostic.
+```
+
+Commands run:
+
+```text
+prompt fingerprint extraction from docs/207_v10_8_a5_positive_still_life_generation_preflight_gate.md
+static runner handoff inspection for scripts/run_v0_7_photo_studio_os_real_execution.ps1
+v10.9 record cross-check for prompt id and prompt_auto_edited=false
+private binding existence check without reading binding content
+node --check scripts/validate_v10_11_a5_prompt_handoff_diagnostic_result.js
+node scripts/validate_v10_11_a5_prompt_handoff_diagnostic_result.js
+node scripts/validate_v10_10_a5_prompt_handoff_diagnostic_preflight.js
+powershell parse check for scripts/validate_mvp.ps1
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+Prompt sha256 matched the v10.10 expected fingerprint.
+The project-local runner payload assembly uses InputReference as the prompt source and ModelOverride as the model source.
+No local runner prompt rewrite was detected.
+Provider-side request remains unobserved because this diagnostic performed zero plugin/API calls and saved no raw request.
+```
+
+Warnings:
+
+```text
+Root cause remains not fully known: model adherence failure is still possible, and provider/plugin-side handoff failure is not ruled out.
+```
+
+Not validated:
+
+```text
+No provider-side echo, plugin call, API call, image creation, DailyNote call, VCP memory write, submitDraft, commit, tag, push, PR, or release was performed.
+No raw PluginDir path, binding content, config.env value, endpoint, runtime log, raw request body, raw plugin output, or secret value was recorded.
+```
+
+Notes:
+
+```text
+The next deeper diagnostic would require a new explicit provider-side echo or sanitized request capture authorization.
 ```
 
 ## Recommended Commands

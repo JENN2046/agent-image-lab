@@ -18,7 +18,7 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v10.8 A5 positive still-life generation preflight gate
+v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard
 ```
 
 已经完成：
@@ -81,12 +81,19 @@ v1.0 true-loop closeout candidate + v10.8 A5 positive still-life generation pref
 - v10.6 A5 prompt failure analysis and safer strategy：归档 v10.4 / v10.5 prompt 失败原因，明确 v10.5 prompt 模板由 agent 给出且设计失败；下一次真实调用前必须先展示更安全的正向静物 prompt 草案。
 - v10.7 A5 safer prompt review package：把候选 prompt 收束为 `a5_positive_still_life_prompt_v1` 并执行触发词扫描；本阶段不真实生图，下一步必须由用户确认 prompt 并单独授权。
 - v10.8 A5 positive still-life generation preflight gate：把 `a5_positive_still_life_prompt_v1` 锁定为下一次真实生成前的候选 prompt，并把 prompt approval、单独授权字段、输出目录、回滚和 no-execution guard 机器化；本阶段不真实生图。
+- v10.9 A5 positive still-life generation rejected asset record：在短批准模板和私有 ignored PluginDir 绑定通过 preflight 后执行一次 DoubaoGen 真实生成；实际调用 1 次并生成 1 个资产，但本地审片发现人物/脸和 prompt 主题偏离，资产拒收，记忆写入继续阻断。
+- v10.10 A5 prompt handoff diagnostic preflight：把 v10.9 失败原因拆成模型遵循失败和插件请求传递失败两个待诊断方向，准备无生图、0 插件调用的脱敏传参诊断门；本阶段不读取 PluginDir / `config.env`，不调用插件/API，不创建图片。
+- v10.11 A5 prompt handoff diagnostic result：在用户批准无生图传参诊断后，确认锁定 prompt hash 匹配、本地 runner payload prompt 来源为 InputReference，且没有执行插件/API/图片；provider 侧请求仍未观测。
+- v10.12 A5 provider-side prompt fingerprint capture authorization package：准备 provider-side echo / sanitized request capture 授权包，目标是只验证 provider 侧收到的 prompt 指纹；当前为未激活授权包，不执行 provider echo、不调用插件/API、不创建图片。
+- v10.26 real DailyNote/VCP memory write closeout：记录 v10.25 使用 DailyNoteWrite 完成一次真实写入，actual_write_calls=1，保存文件名/sha256 已脱敏记录，单次授权已消耗。
+- v10.27 DailyNoteWrite root path correction：修正未来 DailyNoteWrite 写入根目录分类，从 `plugin_dir_dailynote` 改为 `vcp_root_dailynote`，并通过 no-write recomputation 验证。
+- v10.28 DailyNote canonical location guard：固化后续 DailyNote 写入成功判定，要求 canonical file 存在和 hash 匹配，插件 `success` 不能单独判定完成。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：
 
 - VCPChat 子窗口接入。
-- DailyNote / VCP 长期记忆真实写入。
+- 后续更多 DailyNote / VCP 长期记忆写入仍需单独授权。
 - 正式 release 发布和后续版本 tag 策略。
 - 后续更多真实图片生成、编辑、归档。
 
@@ -243,7 +250,7 @@ daily_note_called: false
 3. 等待用户单独授权任何新的 A5 真实生产动作、tag、push 或正式 release 发布。
 4. 下一步以 remote-debug 端口重新启动或重启 VCPChat 已经到达明确审批边界；没有用户批准时继续停在 no-relaunch / no-runtime-evaluate 轨道。
 5. 后续任何新增真实生图调用、remote-debug relaunch、CDP 检查、bridge 验证或 VCPChat/VCPToolBox 源码读写都必须重新确认目标、允许操作、禁止动作、验证要求和回滚方案，并形成 active authorization package。
-6. v10.8 已把候选 prompt 固化为生成前授权门；下一步必须由用户批准该 prompt，并单独授权真实调用参数。
+6. v10.28 已固化 DailyNote canonical location guard；下一步若继续写入、追加生图、submitDraft、commit/tag/push/PR/release，需要新的明确授权，否则只能继续本地文档、验证和授权包规划。
 
 ## 永久安全门
 

@@ -17,7 +17,7 @@ Maintain and advance Agent Image Lab as a VCP-native visual production orchestra
 ## Current Mode
 
 ```text
-A4 — Sustained Local Autopilot
+A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ```
 
 ---
@@ -48,7 +48,7 @@ Stop before:
 ### in_progress
 
 ```text
-Blocked after v10.7 safer prompt review package pending user prompt approval and separate real generation authorization.
+none
 ```
 
 ### todo
@@ -56,8 +56,10 @@ Blocked after v10.7 safer prompt review package pending user prompt approval and
 ```text
 1. Keep Adapter and Review Console work in no-execution / no-external-read mode unless an active A5 authorization package exists and preflight passes.
 2. If user authorizes remote or release movement, request exact target and run preflight before any push/tag/release.
-3. Stop before any additional generation retry, DailyNote, VCP memory/image, push/tag/release until user approves the v10.7 prompt and authorizes real generation parameters or version action.
+3. Stop before any real DoubaoGen/config read, provider-side echo, sanitized request capture, additional generation retry, DailyNote, VCP memory/image, push/tag/release until user explicitly authorizes real generation parameters, memory action, or version action.
 4. Update CHECKPOINT.md, RUN_STATE.md, VALIDATION_LOG.md, and HANDOFF.md after each meaningful batch.
+5. If the user wants deeper diagnosis, activate the v10.12 provider-side prompt fingerprint capture package only after explicit approval, or switch to alternate plugin/strategy planning.
+6. If the user wants to reuse a short approval flow, present a new current capsule first; bare `批准` only applies when Codex has just presented that exact capsule.
 ```
 
 ### done
@@ -104,14 +106,37 @@ Blocked after v10.7 safer prompt review package pending user prompt approval and
 39. Recorded v10.4 DoubaoGen single generation; actual plugin calls observed: 1, generated asset status: rejected, and memory writes blocked by asset review.
 40. Recorded v10.5 DoubaoGen no-text retry; actual plugin calls observed in v10.5: 1, generated asset status in v10.5: rejected, and person/text/logo risks detected.
 41. Recorded v10.6 prompt failure analysis; v10.5 prompt design failure acknowledged, safer positive-only strategy recorded, and no real generation in v10.6.
-42. Recorded v10.7 safer prompt review package; prompt risky terms absent, real generation still blocked, and user prompt approval required.
+42. Recorded v10.7 A5 safer prompt review package; prompt risky terms absent, real generation still blocked, and user prompt approval required.
 43. Recorded v10.8 positive still-life generation preflight gate; prompt locked for future authorization, real generation still blocked, and separate generation authorization required.
+44. Calibrated post-v10.8 local state on master and drafted the inactive positive still-life real generation authorization package for future human review.
+45. Added v10.8 short approval template and ignored private PluginDir binding pattern; no real path, secret, plugin call, API call, image, or memory write was performed.
+46. Recorded v10.9 positive still-life generation; actual plugin calls observed in v10.9: 1, generated asset status in v10.9: rejected, and person/face and prompt mismatch detected.
+47. Recorded v10.10 prompt handoff diagnostic preflight; max plugin calls allowed in v10.10: 0, no generation in v10.10, and diagnostic authorization still inactive.
+48. Recorded v10.11 prompt handoff diagnostic result; prompt hash matches expected, actual plugin calls observed in v10.11: 0, and provider-side request remains unobserved.
+49. Recorded v10.12 A5 provider-side prompt fingerprint capture authorization package; v10.12 local: provider-side prompt fingerprint capture authorization package ready, authorization status: inactive package, execution authorized by v10.12: false, and provider-side capture not performed.
+50. Executed v10.12 provider-side prompt fingerprint capture activation once; sanitized request capture performed, provider echo unsupported, local payload prompt hash matched expected, outbound request prompt hash did not match expected, provider observed prompt hash remains unobserved, network was blocked before send, and no image/API/raw sensitive recording occurred.
+51. Executed v10.13 real generation full validation once; actual plugin calls: 1, generated asset count: 1, asset status: rejected, prompt_subject_match: false, person_or_face_detected: true, readable_text_or_logo_detected: false, and memory writes remained blocked.
+52. Executed v10.14 DoubaoGen 5.0 model lock diagnostic; current request model matched doubao-seedream-5-0-260128, default PowerShell stdin corrupted the Chinese prompt hash, UTF-8 no BOM stdin matched the locked prompt hash, network was blocked before send, and no image/API/raw sensitive recording occurred.
+53. Patched v10.15 runner UTF-8 no BOM transport; both local real-execution runners now set StandardInputEncoding to UTF8Encoding(false), the validator was added, and no plugin/API/image/DailyNote/VCP memory action occurred.
+54. Completed v10.16 no-generation request preflight; local dummy receiver confirmed three stable patched-transport payload writes with matching model and locked prompt hashes, no BOM, no real DoubaoGen/config read, and no plugin/API/image/DailyNote/VCP memory action.
+55. Consumed v10.17 patched runner single real generation authorization, but the runner failed before plugin start because Windows PowerShell 5.1 lacks ProcessStartInfo.StandardInputEncoding; actual plugin calls: 0, image created: false, retry performed: false.
+56. Completed v10.18 compatible runner byte-write transport patch; runners now write UTF-8 no BOM bytes to StandardInput.BaseStream, validator updated, and a 3-iteration dummy preflight passed without plugin/API/image/DailyNote/VCP memory action.
+57. Executed v10.19 compatible byte-write runner two real generations; actual plugin calls total: 2, generated images: 2, run_1 asset_status=accepted_candidate, run_2 asset_status=needs_human_review, and DailyNote/VCP memory writes remained false.
+58. Completed v10.20 plugin reported model recording patch; future DoubaoGen summaries record sanitized plugin_reported_model_ref, model sha256 fields, and requested/reported match boolean without plugin/API/image/DailyNote/VCP memory action.
+59. Completed v10.21 local asset selection review; recommended v10.19 run_1 as accepted_candidate, kept run_2 as needs_human_review, and performed no plugin/API/image/DailyNote/VCP memory action.
+60. Completed v10.22 local memory_delta draft for v10.19 run_1 accepted_candidate; draft remains approval_status=pending and should_write_to_vcp=false, with no plugin/API/image/DailyNote/VCP memory action.
+61. Completed v10.23 local human review package for the v10.22 memory_delta draft; package includes sanitized summary, checklist, and approval decision template, with no plugin/API/image/DailyNote/VCP memory action.
+62. Completed v10.24 approve_memory_write no-write preflight package; approved request and confirmed candidate were recorded, while daily_note_write_authorized=false and actual_write_performed=false remain enforced.
+63. Completed v10.25 single real DailyNote/VCP memory write using DailyNoteWrite; actual_write_calls=1, plugin_status=success, saved file existence verified by sanitized read-only check, no retry or second write.
+64. Completed v10.26 real DailyNote/VCP memory write closeout records, indexes, validator routing, and local validation; no additional write or version action was performed.
+65. Completed v10.27 DailyNoteWrite root path correction; KNOWLEDGEBASE_ROOT_PATH now classifies as vcp_root_dailynote and no-write recomputation passed.
+66. Completed v10.28 DailyNote canonical location guard; plugin_success_sufficient=false and canonical_target_hash_match_required=true, with local validation passed.
 ```
 
 ### blocked
 
 ```text
-1. Additional plugin/API/DailyNote/VCP memory/image actions, push/tag/release, and A5 production execution remain blocked until prompt approval plus separate real generation authorization, or version-action authorization, is explicitly provided.
+1. Additional real DoubaoGen/config read, provider-side echo, sanitized request capture, plugin/API/DailyNote/VCP memory/image actions, generation retry, second DailyNote/VCP memory write, push/tag/release, and A5 production execution remain blocked until a new explicit authorization is provided. v10.25 consumed the single real write authorization.
 ```
 
 ### skipped

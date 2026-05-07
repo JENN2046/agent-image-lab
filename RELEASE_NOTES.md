@@ -74,6 +74,15 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Added v10.6 A5 prompt failure analysis and safer strategy with prompt accountability and a positive-only unbranded still-life draft.
 - Added v10.7 A5 safer prompt review package with trigger-term scanning and no real generation.
 - Added v10.8 A5 positive still-life generation preflight gate with prompt lock, required authorization fields, and no-execution guard.
+- Added an inactive v10.8 positive still-life real generation authorization draft for human review before any future A5 call.
+- Added a v10.8 short approval template so the future approval phrase can be shortened without storing raw PluginDir or secrets in Git.
+- Added v10.9 A5 positive still-life generation rejected asset record for one short-approval DoubaoGen generation and blocked memory writes after person/face plus prompt-mismatch review rejection.
+- Added v10.10 A5 prompt handoff diagnostic preflight with a no-generation, zero-plugin-call request-intent diagnostic gate.
+- Added v10.11 A5 prompt handoff diagnostic result with prompt hash verification and local runner handoff findings.
+- Added v10.12 A5 provider-side prompt fingerprint capture authorization package with inactive provider echo / sanitized request capture boundaries.
+- Added v10.26 real DailyNote/VCP memory write closeout for one DailyNoteWrite execution, recording actual_write_calls=1, saved file name/hash, and consumed single-write authorization.
+- Added v10.27 DailyNoteWrite root path correction record for future writes, documenting corrected_root_class=vcp_root_dailynote with no writer rerun or second memory write.
+- Added v10.28 DailyNote canonical location guard so plugin success alone is insufficient; future writes require canonical file existence and hash match before completion.
 
 ## Safety Status
 
@@ -85,7 +94,7 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - The first generated asset was rejected for prompt mismatch because it included a human subject despite the no-people constraint.
 - A later DoubaoGen retry was accepted by human override for project progress while retaining known deviation notes.
 - Current release recommendation is v1.0 true-loop closeout candidate, not an already-published release.
-- No DailyNote write has been performed.
+- One user-authorized DailyNote/VCP memory write has been performed in v10.25 through DailyNoteWrite; actual_write_calls=1 and no second write or retry is authorized.
 - No image binary has been written into Git, DailyNote, or long-term memory.
 - No raw plugin output, secret value, raw endpoint, or runtime log is stored in project docs.
 - Additional real plugin calls, DailyNote writes, VCP long-term memory writes, and GitHub Release publication still require explicit user authorization.
@@ -105,3 +114,12 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - The v10.6 A5 prompt strategy records that the v10.5 agent-authored prompt template failed and that the next real generation must show a safer prompt to the user before any plugin call.
 - The v10.7 A5 prompt review package validates the safer prompt draft and still performs no plugin call, API call, DailyNote write, VCP memory write, image creation, commit, tag, push, PR, or GitHub Release.
 - The v10.8 A5 preflight gate locks the reviewed prompt for future authorization and still performs no plugin call, API call, DailyNote write, VCP memory write, image creation, commit, tag, push, PR, or GitHub Release.
+- The v10.8 authorization draft is not active and still requires explicit prompt approval plus separate real generation authorization before any A5 preflight or plugin call.
+- The short approval template is inactive unless a current capsule is presented and an ignored private PluginDir binding exists.
+- The v10.9 A5 positive still-life generation ran exactly one authorized DoubaoGen call and produced one image, but local review rejected it for person/face and complete prompt mismatch; DailyNote, VCP memory, retry, commit, tag, push, PR, and GitHub Release remain blocked.
+- The v10.10 prompt handoff diagnostic preflight is template-only and keeps `max_plugin_calls_allowed: 0`, `diagnostic_authorization_active: false`, no PluginDir/config value read, no plugin/API call, no image creation, and no memory write.
+- The v10.11 prompt handoff diagnostic ran with zero plugin calls and no image creation; it verified the locked prompt hash and local runner prompt source, while provider-side request remains unobserved.
+- The v10.12 provider-side prompt fingerprint capture package is inactive: `authorization_status: inactive_package`, `execution_authorized_by_this_record: false`; it performs no provider echo, sanitized request capture, plugin/API call, image creation, DailyNote/VCP memory write, commit, tag, push, PR, or release.
+- The v10.26 closeout records the completed v10.25 DailyNoteWrite memory write with actual_write_calls=1, saved file name/hash only, no raw full path, and no authorization for additional write, generation, submitDraft, commit, tag, push, PR, or release.
+- The v10.27 correction records that future DailyNoteWrite root resolution now classifies as vcp_root_dailynote; it does not rerun the writer, perform another memory write, record raw config values, or authorize version actions.
+- The v10.28 guard records plugin_success_sufficient=false and canonical_target_hash_match_required=true; it performs no external config read, writer rerun, memory write, or version action.

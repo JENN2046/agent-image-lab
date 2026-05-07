@@ -86,8 +86,10 @@ $allowedHistoricalTrueFlagFiles = @(
   "integrations/vcp/v0_10_gptimagegen_retry2_real_execution_record.md",
   "docs/203_v10_4_a5_doubaogen_single_generation_rejected_asset_record.md",
   "docs/204_v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.md",
+  "docs/208_v10_9_a5_positive_still_life_generation_rejected_asset_record.md",
   "scripts/validate_v10_4_a5_doubaogen_single_generation_rejected_asset_record.js",
   "scripts/validate_v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.js",
+  "scripts/validate_v10_9_a5_positive_still_life_generation_rejected_asset_record.js",
   "tests/schema_examples/v0_7_photo_studio_os_real_execution_record.example.yaml",
   "tests/schema_examples/v0_9_photo_studio_os_retry_real_execution_record.example.yaml",
   "tests/schema_examples/v0_9_post_execution_checkpoint.example.yaml",
@@ -96,7 +98,8 @@ $allowedHistoricalTrueFlagFiles = @(
   "tests/schema_examples/v0_10_gptimagegen_real_execution_record.example.yaml",
   "tests/schema_examples/v0_10_gptimagegen_retry2_real_execution_record.example.yaml",
   "tests/schema_examples/v10_4_a5_doubaogen_single_generation_rejected_asset_record.example.yaml",
-  "tests/schema_examples/v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.example.yaml"
+  "tests/schema_examples/v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.example.yaml",
+  "tests/schema_examples/v10_9_a5_positive_still_life_generation_rejected_asset_record.example.yaml"
 )
 $allowedHistoricalTrueFlagSet = @{}
 foreach ($p in $allowedHistoricalTrueFlagFiles) {

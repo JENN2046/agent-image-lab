@@ -3,7 +3,7 @@
 ## Current Mode
 
 ```text
-A4 — Sustained Local Autopilot
+A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ```
 
 ## Current Mission
@@ -15,24 +15,412 @@ Advance Agent Image Lab safely under local A4 autonomy while keeping A5 producti
 ## Current Phase
 
 ```text
-v10.8 A5 positive still-life generation preflight gate
+v10.28 DailyNote canonical location guard
 ```
 
 ## Current Task
 
 ```text
-A5 positive still-life generation preflight gate closeout
+Post-v10.25 DailyNote success-definition hardening
 ```
 
 ## Last Completed Task
 
 ```text
-Recorded v10.8 A5 positive still-life generation preflight gate: prompt id a5_positive_still_life_prompt_v1 is locked for future authorization, real generation still blocked, and separate generation authorization required.
+Added v10.28 DailyNote canonical location guard so future DailyNote/VCP memory writes cannot be marked complete from plugin success alone. Completion now requires writer root class vcp_root_dailynote before write, canonical target existence after write, and canonical hash match.
 ```
 
 ## Last Validation
 
 ```text
+2026-05-07 v10.28 DailyNote canonical location guard:
+status: completed_validated_local_guard
+guard reason: plugin success alone is insufficient for memory write completion
+plugin_success_sufficient=false
+writer_root_class_required_before_write=vcp_root_dailynote
+canonical_target_hash_match_required=true
+wrong location status: plugin_success_wrong_location
+wrong location declares memory complete: false
+external config read in v10.28: false
+DailyNoteWrite rerun in v10.28: false
+DailyNote/VCP memory write in v10.28: false
+docs/214_v10_28_dailynote_canonical_location_guard.md: added
+review_console/embed_contract/v10_28_dailynote_canonical_location_guard.md: added
+tests/schema_examples/v10_28_dailynote_canonical_location_guard.example.yaml: added
+scripts/validate_v10_28_dailynote_canonical_location_guard.js: added
+README/MANIFEST/RELEASE_NOTES/roadmap/checklist indexes: updated
+scripts/validate_mvp.ps1 routing: updated for v10.28 guard
+node --check scripts/validate_v10_28_dailynote_canonical_location_guard.js: passed
+node scripts/validate_v10_28_dailynote_canonical_location_guard.js: passed
+node scripts/validate_v10_27_dailynotewrite_root_path_correction.js: passed after compatibility phrase restoration
+scripts/validate_mvp.ps1: passed
+node scripts/validate_agent_board_state.js: passed
+scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed
+git status --short --branch: inspected after v10.28 guard patch
+
+2026-05-07 v10.27 DailyNoteWrite root path correction:
+problem detected: DailyNoteWrite wrote the v10.25 file under plugin_dir_dailynote instead of vcp_root_dailynote
+corrective action: updated the root-path config key only
+updated key: KNOWLEDGEBASE_ROOT_PATH
+old value class: plugin_dir_dailynote
+new value class: vcp_root_dailynote
+raw config value printed: false
+secret printed: false
+plugin/API/DailyNote write rerun: false
+file overwrite performed: false
+no-write DailyNoteWrite root recomputation: passed
+docs/213_v10_27_dailynotewrite_root_path_correction.md: added
+review_console/embed_contract/v10_27_dailynotewrite_root_path_correction.md: added
+tests/schema_examples/v10_27_dailynotewrite_root_path_correction.example.yaml: added
+scripts/validate_v10_27_dailynotewrite_root_path_correction.js: added
+README/MANIFEST/RELEASE_NOTES/roadmap/checklist indexes: updated
+scripts/validate_mvp.ps1 routing: updated for v10.27 correction
+node --check scripts/validate_v10_27_dailynotewrite_root_path_correction.js: passed
+node scripts/validate_v10_27_dailynotewrite_root_path_correction.js: passed
+PowerShell parse for scripts/validate_mvp.ps1: passed
+node scripts/validate_agent_board_state.js: passed
+scripts/validate_mvp.ps1: passed
+scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed
+git status --short --branch: inspected after v10.27 docs patch
+
+2026-05-07 v10.26 real DailyNote/VCP memory write closeout:
+docs/212_v10_26_real_dailynote_write_closeout.md: added
+review_console/embed_contract/v10_26_real_dailynote_write_closeout.md: added
+tests/schema_examples/v10_26_real_dailynote_write_closeout.example.yaml: added
+scripts/validate_v10_26_real_dailynote_write_closeout.js: added
+README/MANIFEST/RELEASE_NOTES/roadmap/checklist indexes: updated
+scripts/validate_mvp.ps1 routing: updated for v10.26 closeout
+actual_write_calls recorded: 1
+writer recorded: DailyNoteWrite
+v10.25 single real write authorization was consumed
+additional write/generation/version action authorized by this closeout: no
+node --check scripts/validate_v10_26_real_dailynote_write_closeout.js: passed
+node scripts/validate_v10_26_real_dailynote_write_closeout.js: passed
+PowerShell parse for scripts/validate_mvp.ps1: passed
+scripts/validate_mvp.ps1: passed
+scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+node scripts/validate_agent_board_state.js: passed
+git diff --check: passed
+git status --short --branch: inspected after closeout patch
+
+2026-05-07 v10.25 real DailyNote/VCP memory write:
+approval phrase `批准 v10.25 单次真实写入 DailyNote/VCP memory`: consumed
+resolved write plugin: DailyNoteWrite
+selected entry: Plugin/DailyNoteWrite/daily-note-write.js
+source payload: runs/v10_25_real_dailynote_write/payload.dailynotewrite.json
+execution result: runs/v10_25_real_dailynote_write/execution_result.sanitized.json
+write audit: runs/v10_25_real_dailynote_write/write_execution_audit.sanitized.yaml
+target_notebook: Image_Case_Archive
+authorized_write_calls: 1
+actual_write_calls: 1
+plugin_exit_code: 0
+plugin_reported_status: success
+saved_file_name: 2026-05-07-14_58_55-v10-25-run-1-memory-write.txt
+saved_file_sha256: 16669cd5cc1a03188e89a62dd0298ea6175dbed7cad162430484ec1ee1af171c
+saved_file_length: 1439
+DailyNote call performed: yes
+VCP memory write performed: yes
+Actual write performed: yes
+retry_performed: false
+second_write_performed: false
+raw saved path printed or recorded: false
+plugin/API generation calls in this phase: false
+image created in this phase: false
+execution result JSON parse: passed
+single write and no-retry field check: passed
+v10.25 records raw external path/config marker scan: passed
+node scripts/validate_agent_board_state.js: passed
+scripts/validate_mvp.ps1: passed after RUN_STATE legacy no-write pattern wording fix
+scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed
+git status --short --branch: inspected
+
+2026-05-07 v10.24 approve_memory_write no-write preflight:
+approval phrase `批准 v10.24 采用 approve_memory_write 生成 no-write 写入前预检包`: consumed
+source review package: runs/v10_23_memory_draft_human_review_package/human_review_package.sanitized.json
+review decision: runs/v10_24_approve_memory_write_no_write_preflight/review_decision.approved.yaml
+approved memory request: runs/v10_24_approve_memory_write_no_write_preflight/approved_memory_request.no_write.yaml
+daily note write preflight: runs/v10_24_approve_memory_write_no_write_preflight/daily_note_write_preflight.sanitized.json
+write execution audit stub: runs/v10_24_approve_memory_write_no_write_preflight/write_execution_audit_stub.no_write.yaml
+selected_decision: approve_memory_write
+decision_status: approved_request_no_write
+write_mode_candidate: confirmed
+approval_status_candidate: approved
+should_write_to_vcp_candidate: true
+daily_note_write_authorized: false
+daily_note_called: false
+vcp_memory_written: false
+actual_write_performed: false
+real generation performed in this phase: false
+plugin/API calls in this phase: false
+image created in this phase: false
+daily note write preflight JSON parse: passed
+no-write guard and confirmed candidate field check: passed
+node scripts/validate_agent_board_state.js: passed
+scripts/validate_mvp.ps1: passed
+scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed
+git status --short --branch: inspected
+
+2026-05-07 v10.23 memory draft human review package:
+approval phrase `批准 v10.23 memory draft 人工复核包`: consumed
+source memory draft: runs/v10_22_run_1_memory_draft/memory_delta_draft.yaml
+human review package: runs/v10_23_memory_draft_human_review_package/human_review_package.sanitized.json
+human review checklist: runs/v10_23_memory_draft_human_review_package/human_review_checklist.md
+approval decision template: runs/v10_23_memory_draft_human_review_package/approval_decision_template.yaml
+allowed decisions: approve_memory_write, request_memory_edit, reject_memory_write
+daily_note_write_authorized: false
+actual_write_performed: false
+real generation performed in this phase: false
+plugin/API calls in this phase: false
+image created in this phase: false
+DailyNote/VCP memory writes: false
+human review package JSON parse: passed
+no-write guard field check: passed
+node scripts/validate_agent_board_state.js: passed
+scripts/validate_mvp.ps1: passed
+scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed
+git status --short --branch: inspected
+
+2026-05-07 v10.22 run_1 memory draft:
+approval phrase `批准 v10.22 选择 run_1 生成 memory draft`: consumed
+selected source: v10.19 run_1 accepted_candidate
+memory draft: runs/v10_22_run_1_memory_draft/memory_delta_draft.yaml
+review summary: runs/v10_22_run_1_memory_draft/memory_review_summary.sanitized.json
+write_mode: draft
+approval_status: pending
+should_write_to_vcp: false
+real generation performed in this phase: false
+plugin/API calls in this phase: false
+image created in this phase: false
+DailyNote/VCP memory writes: false
+node scripts/validate_agent_board_state.js: passed
+scripts/validate_mvp.ps1: passed
+scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed
+memory draft field check: passed
+git status --short --branch: inspected
+
+2026-05-07 v10.21 asset selection review:
+source batch: runs/v10_19_compatible_byte_write_real_generation/batch_summary.sanitized.json
+selection summary: runs/v10_21_asset_selection_review/selection_summary.sanitized.json
+recommended selected asset: v10.19 run_1 accepted_candidate
+recommended selected asset sha256: 0c50cd864982520c44bf0cbabd013c4e9d45d5e52c7059c9c9743408d0eaf61a
+secondary asset: v10.19 run_2 needs_human_review
+secondary asset sha256: 298bf00375ac49a48657e88b03033b1f356629031e60962d64688130ed437e03
+real generation performed in this phase: false
+plugin/API calls in this phase: false
+image created in this phase: false
+DailyNote/VCP memory writes: false
+node scripts/validate_agent_board_state.js: passed
+scripts/validate_mvp.ps1: passed
+scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed
+git status --short --branch: inspected
+
+2026-05-07 v10.20 plugin reported model recording patch:
+patched scripts/run_v0_7_photo_studio_os_real_execution.ps1 to record sanitized plugin_reported_model_ref
+added plugin_reported_model_sha256_utf8, requested_model_sha256_utf8, and plugin_reported_model_matches_requested fields
+added scripts/validate_v10_20_plugin_reported_model_recording.js
+validate_mvp routing updated for v10.20 validator
+PowerShell parse check for scripts/run_v0_7_photo_studio_os_real_execution.ps1: passed
+node --check scripts/validate_v10_20_plugin_reported_model_recording.js: passed
+node scripts/validate_v10_20_plugin_reported_model_recording.js: passed
+PowerShell parse check for scripts/validate_mvp.ps1: passed
+node scripts/validate_agent_board_state.js: passed
+scripts/validate_mvp.ps1: passed
+git diff --check: passed
+actual generation calls: 0
+api called: false
+image created: false
+DailyNote/VCP memory writes: false
+
+2026-05-07 v10.19 compatible byte-write runner two real generations:
+approval phrase `批准 v10.19 compatible byte-write runner 2次真生图`: consumed
+authorized generation calls: 2
+actual plugin calls total: 2
+api called: true
+generated image count total: 2
+model ref: doubao-seedream-5-0-260128
+prompt hash matched locked a5_positive_still_life_prompt_v1: true
+run_1: success, image 1024x1024, asset_status=accepted_candidate, sha256=0c50cd864982520c44bf0cbabd013c4e9d45d5e52c7059c9c9743408d0eaf61a
+run_2: success, image 1024x1024, asset_status=needs_human_review, sha256=298bf00375ac49a48657e88b03033b1f356629031e60962d64688130ed437e03
+person_or_face_detected: false for both reviewed assets
+studio_tabletop_still_life_detected: true for both reviewed assets
+run_2 text_or_logo_risk: visible small lens markings/text-like details need human decision
+raw plugin output/request/prompt/endpoint/runtime log/secret/path saved: false
+DailyNote/VCP memory writes: false
+retry beyond authorized calls performed: false
+
+2026-05-07 v10.17 patched runner single real generation:
+approval phrase `批准 v10.17 patched runner 单次真生图`: consumed
+status: failed_before_plugin_start_runner_stdin_encoding_property_missing
+failure point: runner compatibility before plugin process start
+actual plugin calls: 0
+api called: false
+image created: false
+DailyNote/VCP memory writes: false
+retry performed: false
+sanitized failure record: runs/v10_17_patched_runner_real_generation/run_summary.sanitized.json
+raw request/prompt/response/endpoint/runtime log/secret/path saved: false
+
+2026-05-07 v10.18 compatible runner byte-write transport patch:
+patched scripts/run_v0_7_photo_studio_os_real_execution.ps1: UTF8Encoding(false).GetBytes(payload) then StandardInput.BaseStream.Write/Flush
+patched scripts/run_v0_10_gptimagegen_real_execution.ps1: UTF8Encoding(false).GetBytes(payload) then StandardInput.BaseStream.Write/Flush
+updated scripts/validate_v10_15_runner_utf8_no_bom_transport.js for Windows PowerShell 5.1 compatible byte-write validation
+PowerShell parse check for both runners: passed
+node --check scripts/validate_v10_15_runner_utf8_no_bom_transport.js: passed
+node scripts/validate_v10_15_runner_utf8_no_bom_transport.js: passed
+compatible byte-write dummy preflight: passed, 3 iterations
+all model hash matched doubao-seedream-5-0-260128: true
+all prompt hash matched locked a5_positive_still_life_prompt_v1: true
+actual generation calls: 0
+api called: false
+image created: false
+DailyNote/VCP memory writes: false
+
+2026-05-07 v10.16 no-generation request preflight:
+dummy receiver used: true
+real DoubaoGen read: false
+config.env read: false
+iterations: 3
+runner transport: PowerShell ProcessStartInfo stdin UTF-8 no BOM
+all JSON parse ok: true
+all stdin no UTF-8 BOM: true
+all model hash matched doubao-seedream-5-0-260128: true
+all prompt hash matched locked a5_positive_still_life_prompt_v1: true
+stable stdin sha256 across iterations: true
+stable prompt sha256 across iterations: true
+stable model sha256 across iterations: true
+stable top-level key shape: true
+actual generation calls: 0
+api called: false
+image created: false
+DailyNote/VCP memory writes: false
+
+2026-05-07 v10.15 runner UTF-8 no BOM transport patch:
+approval phrase `批准 v10.15 修 runner UTF-8 no BOM`: consumed
+patched scripts/run_v0_7_photo_studio_os_real_execution.ps1: StandardInputEncoding set to UTF8Encoding(false)
+patched scripts/run_v0_10_gptimagegen_real_execution.ps1: StandardInputEncoding set to UTF8Encoding(false)
+validator added: scripts/validate_v10_15_runner_utf8_no_bom_transport.js
+validate_mvp routing updated for v10.15 validator
+PowerShell parse check for scripts/run_v0_7_photo_studio_os_real_execution.ps1: passed
+PowerShell parse check for scripts/run_v0_10_gptimagegen_real_execution.ps1: passed
+node --check scripts/validate_v10_15_runner_utf8_no_bom_transport.js: passed
+node scripts/validate_v10_15_runner_utf8_no_bom_transport.js: passed
+PowerShell parse check for scripts/validate_mvp.ps1: passed
+node scripts/validate_agent_board_state.js: passed
+scripts/validate_mvp.ps1: passed
+scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings
+git diff --check: passed
+actual generation calls: 0
+api called: false
+image created: false
+DailyNote/VCP memory writes: false
+
+2026-05-07 v10.14 DoubaoGen 5.0 model lock diagnostic:
+approval phrase `批准 v10.14 DoubaoGen 5.0 模型锁定诊断`: consumed
+user reported DoubaoGen.js/config.env had just been changed before the static scan: noted; static 5.0 presence is current-state evidence only, not historical proof for v10.13
+current plugin/config static scan: 5.0 model ref present
+default stdin sanitized capture: model_match_boolean=true, prompt_hash_match_boolean=false
+PowerShell stdin encoding probe: default stdin hash mismatched locked prompt; Encoding.UTF8 adds BOM and still mismatches; UTF8Encoding(false) matches locked prompt
+UTF-8 no BOM sanitized capture: model_match_boolean=true, prompt_hash_match_boolean=true
+actual generation calls: 0
+image created: false
+network request blocked before send: true
+raw request/prompt/response/endpoint/runtime log/secret/path saved: false
+plugin/config modified: false
+DailyNote/VCP memory writes: false
+
+2026-05-07 v10.12 provider-side prompt fingerprint capture authorization package:
+activation phrase `批准 v10.12 provider侧指纹捕获`: consumed
+sanitized request capture: performed once
+provider echo supported: false
+local payload prompt hash matched expected: true
+outbound request prompt hash matched expected: false
+provider observed prompt hash: not observed
+network request blocked before send: true
+actual generation calls: 0
+image created: false
+raw request/response/endpoint/runtime log/secret/path saved: false
+v10.12 output raw locator scan: passed
+v10.12 output sensitive flags: passed
+node --check scripts/validate_v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.js: passed
+node --check scripts/validate_v10_11_a5_prompt_handoff_diagnostic_result.js: passed
+node --check scripts/validate_local_commit_scope.js: passed
+powershell parse check for scripts/validate_mvp.ps1: passed
+node scripts/validate_v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.js: passed
+node scripts/validate_v10_11_a5_prompt_handoff_diagnostic_result.js: passed with v10.12 superseding board state
+node scripts/validate_agent_board_state.js: passed
+scripts/validate_mvp.ps1: passed
+scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings
+node scripts/validate_local_commit_scope.js: passed
+git diff --check: passed
+raw-sensitive-scan: passed
+
+2026-05-07 v10.13 real generation full validation:
+approval phrase `批准 v10.13 真生图完整验证`: consumed
+prompt hash preflight: passed
+output directory collision check: passed
+private DoubaoGen binding preflight without raw path recording: passed
+actual plugin calls: 1
+generated asset count: 1
+image dimensions: 1024x1024
+asset sha256: f1a30785bf232cb82e0b09426ef24eeb55718940899f2befd00223014b4e8ba3
+asset status: rejected
+prompt subject match: false
+person or face detected: true
+readable text or logo detected: false
+DailyNote/VCP memory writes: blocked
+raw plugin output/endpoint/runtime log/secret/path saved: false
+commit/tag/push/PR/release: false
+
+2026-05-07 v10.11 prompt handoff diagnostic result:
+node --check scripts/validate_v10_11_a5_prompt_handoff_diagnostic_result.js: passed
+node scripts/validate_v10_11_a5_prompt_handoff_diagnostic_result.js: passed
+node scripts/validate_v10_10_a5_prompt_handoff_diagnostic_preflight.js: passed with v10.11 superseding board state
+powershell parse check for scripts/validate_mvp.ps1: passed
+
+2026-05-07 v10.10 prompt handoff diagnostic preflight:
+node --check scripts/validate_v10_10_a5_prompt_handoff_diagnostic_preflight.js: passed
+powershell parse check for scripts/validate_mvp.ps1: passed
+node scripts/validate_v10_10_a5_prompt_handoff_diagnostic_preflight.js: passed
+node scripts/validate_v10_9_a5_positive_still_life_generation_rejected_asset_record.js: passed with v10.10 superseding board state
+scripts/validate_mvp.ps1: passed
+
+2026-05-07 v10.9 rejected asset closeout:
+node --check scripts/validate_v10_9_a5_positive_still_life_generation_rejected_asset_record.js: passed
+node --check scripts/validate_v10_8_a5_positive_still_life_generation_preflight_gate.js: passed
+node --check scripts/validate_local_commit_scope.js: passed
+powershell parse check for scripts/validate_mvp.ps1: passed
+powershell parse check for scripts/validate-agent-image-lab-local.ps1: passed
+node scripts/validate_v10_9_a5_positive_still_life_generation_rejected_asset_record.js: passed
+node scripts/validate_v10_8_a5_positive_still_life_generation_preflight_gate.js: passed
+node scripts/validate_local_commit_scope.js: passed
+node scripts/validate_agent_board_state.js: passed
+scripts/validate_mvp.ps1: passed
+scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings
+git diff --check: passed
+
+2026-05-07 state calibration and inactive authorization draft batch:
+node --check scripts/validate_local_commit_scope.js: passed
+powershell parse check for scripts/validate_mvp.ps1: passed
+node scripts/validate_local_commit_scope.js: passed
+node scripts/validate_v7_40_local_a4_a5_autonomy_alignment.js: passed
+node scripts/validate_v10_3_a5_bridge_integration_smoke_record.js: passed
+node scripts/validate_v10_4_a5_doubaogen_single_generation_rejected_asset_record.js: passed
+node scripts/validate_v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.js: passed
+node scripts/validate_v10_6_a5_prompt_failure_analysis_and_safer_strategy.js: passed
+node scripts/validate_v10_8_a5_positive_still_life_generation_preflight_gate.js: passed
+node scripts/validate_agent_board_state.js: passed
+authorization draft raw locator scan: passed
+scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings
+scripts/validate_mvp.ps1: passed
+git diff --check: passed
+
 scripts/validate_mvp.ps1: passed
 scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings
 node scripts/validate_runtime_prototype_suite.js: passed
@@ -110,11 +498,11 @@ Runtime surface read: yes, type/key/method-presence checks only
 ## Execution State
 
 ```text
-Plugin call: yes, DoubaoGen single authorized generation plus one authorized no-text retry
-API call: yes, through DoubaoGen single authorized generation plus one authorized no-text retry
+Plugin call: yes, DoubaoGen single authorized generation, one authorized no-text retry, and one authorized v10.9 positive still-life generation
+API call: yes, through DoubaoGen single authorized generation, one authorized no-text retry, and one authorized v10.9 positive still-life generation
 DailyNote call: no
 VCP memory write: no
-Image creation: yes, two rejected assets under ignored runtime output refs
+Image creation: yes, three rejected assets under ignored runtime output refs
 Executable Adapter entrypoint: no
 Remote-debug script: run in dry-run blocked mode
 VCPChat launch: yes, relaunched with remote-debug after explicit authorization
@@ -148,16 +536,96 @@ v10.8 local: positive still-life generation preflight gate ready
 prompt locked for future authorization
 separate generation authorization required
 no real generation in v10.8
+v10.8 short approval template: prepared
+private PluginDir binding required: .agent_private/doubaogen_plugin_dir.txt
+short approval phrase: 批准 v10.8 静物单次生成
+v10.9 local: positive still-life generation completed and asset rejected by safety review
+actual plugin calls observed in v10.9: 1
+generated asset status in v10.9: rejected
+person/face and prompt mismatch detected
+prompt_subject_match: false
+v10.10 local: prompt handoff diagnostic preflight ready
+max plugin calls allowed in v10.10: 0
+no generation in v10.10
+diagnostic authorization still inactive
+prompt handoff diagnostic approval phrase: 批准 v10.10 传参诊断
+v10.11 local: prompt handoff diagnostic completed
+prompt hash matches expected
+actual plugin calls observed in v10.11: 0
+provider-side request remains unobserved
+local runner prompt rewrite detected: false
+v10.12 local: provider-side prompt fingerprint capture authorization package ready
+authorization status: inactive package
+execution authorized by v10.12: false
+provider-side capture not performed
+provider-side capture activation phrase: 批准 v10.12 provider侧指纹捕获
+v10.12 execution: provider-side prompt fingerprint capture activation consumed
+v10.12 capture result: sanitized request capture performed once
+v10.12 provider echo supported: false
+v10.12 local payload prompt hash matched expected: true
+v10.12 outbound request prompt hash matched expected: false
+v10.12 provider observed prompt hash: not observed
+v10.12 network request blocked before send: true
+v10.12 actual generation calls: 0
+v10.12 image created: false
+v10.13 local: real generation full validation completed and asset rejected by safety review
+v10.13 actual plugin calls: 1
+v10.13 generated asset count: 1
+v10.13 generated asset status: rejected
+v10.13 prompt_subject_match: false
+v10.13 person_or_face_detected: true
+v10.13 readable_text_or_logo_detected: false
+v10.13 memory writes blocked by asset review
+v10.14 local: DoubaoGen 5.0 model lock diagnostic completed
+v10.14 current-state model request match: true
+v10.14 default stdin prompt hash match: false
+v10.14 UTF-8 no BOM stdin prompt hash match: true
+v10.14 inferred local transport issue: PowerShell StandardInput default encoding corrupts Chinese prompt for Node plugin stdin
+v10.14 actual generation calls: 0
+v10.14 image created: false
+v10.14 network request blocked before send: true
+v10.15 local: runner UTF-8 no BOM transport patch completed
+v10.15 patched runner files: scripts/run_v0_7_photo_studio_os_real_execution.ps1, scripts/run_v0_10_gptimagegen_real_execution.ps1
+v10.15 actual generation calls: 0
+v10.15 image created: false
+v10.15 DailyNote/VCP memory writes: false
+v10.16 local: no-generation request preflight completed
+v10.16 iterations: 3
+v10.16 prompt_hash_match: true across all iterations
+v10.16 model_hash_match: true across all iterations
+v10.16 stdin_has_utf8_bom: false across all iterations
+v10.16 actual generation calls: 0
+v10.16 image created: false
+v10.16 DailyNote/VCP memory writes: false
+v10.17 local: patched runner single real generation failed before plugin start
+v10.17 actual plugin calls: 0
+v10.17 image created: false
+v10.17 retry performed: false
+v10.18 local: compatible runner byte-write transport patch completed
+v10.18 no-generation dummy preflight passed: true
+v10.19 local: compatible byte-write runner two real generations completed
+v10.19 actual plugin calls total: 2
+v10.19 generated image count: 2
+v10.19 run_1 asset_status: accepted_candidate
+v10.19 run_2 asset_status: needs_human_review
+v10.19 DailyNote/VCP memory writes: false
+v10.20 local: plugin reported model recording patch completed
+v10.20 actual plugin calls: 0
+v10.20 image created: false
+v10.21 local: asset selection review completed
+v10.21 recommended asset: v10.19 run_1 accepted_candidate
+v10.21 secondary asset: v10.19 run_2 needs_human_review
+v10.21 DailyNote/VCP memory writes: false
 DailyNote write performed: no
 VCP memory write performed: no
-No additional DoubaoGen retry after v10.5, DailyNote, VCP memory, image creation, commit, tag, push, PR, or release in v10.8
+No additional DoubaoGen retry after v10.9, DailyNote, VCP memory, image creation, commit, tag, push, PR, or release in v10.11
 ```
 
 ## Git State
 
 ```text
-Branch: codex/a5-complete-delivery-20260507
-Remote tracking: master...origin/master
+Branch: master
+Remote tracking: master...origin/master [ahead 1 before this local documentation batch]
 PR #1 status: merged
 PR #1 merge commit: 367d3c9
 PR #1 merged head: b595851
@@ -167,13 +635,14 @@ PR #2 head: 5ccf059
 PR #3 status: merged
 PR #3 merge commit: b3731bf
 PR #3 head: 46bf42b
-Last pushed commit: 5a7f5ba
-Last pushed tag: v5.11-post-merge-reconciliation
+Last pushed commit: 9088b71
+Last pushed tag: v10.8-a5-guarded-delivery-baseline
 Local checkpoint commit: 6d4253f
 Local checkpoint tag: v4.8-local-validation-checkpoint
 Remote checkpoint tag: v4.8-local-validation-checkpoint
 Master sync: local master synced to origin/master
-Origin master baseline: 5a7f5ba
+Origin master baseline: 9088b71
+Historical v7.40 Origin master baseline: 5a7f5ba
 Local head before v7.40 batch: 5a7f5ba
 pending local commits before v7.40: 0
 Local pending commit chain before v7.40: none
@@ -208,7 +677,7 @@ Local head before v7.46 batch: 3fdd966
 pending local commits before v7.46: 6
 Local pending commit chain before v7.46: 8f60ae1 -> 0326150 -> 975da9a -> d728a89 -> b83ccd5 -> 3fdd966
 master...origin/master before v7.46: 6 0
-Worktree: local v10.8 A5 positive still-life generation preflight gate changes present
+Worktree: clean before 2026-05-07 state calibration; v10.8 A5 positive still-life generation preflight gate remains the current production gate
 Local A4 default commit: 2450f85
 Local A5 production execution commit: da18330
 Remote action in current batch: none
@@ -258,11 +727,12 @@ Historical v7.45 phase: v7.45 cdp read-only attempt record
 ## Current Stop Status
 
 ```text
-v10.8 positive still-life generation preflight gate completed locally pending validation. Further plugin/API/DailyNote/VCP memory/image actions, commit/tag/push/PR, and GitHub Release remain blocked pending user approval of the prompt plus separate real generation authorization.
+v10.21 local selection review was completed. v10.19 run_1 is recommended as the accepted candidate; run_2 remains needs_human_review. Further real DoubaoGen/config reads, plugin/API/DailyNote/VCP memory/image actions, retry generation, commit/tag/push/PR, DailyNote/VCP memory write, and GitHub Release remain blocked until a new explicit real generation, memory action, or version action authorization is provided.
 ```
 
 ## Next Action
 
 ```text
-Stop before any additional generation retry, DailyNote write, VCP memory write, image creation, commit/tag/push/PR, or release until the user approves the v10.8 locked prompt and explicitly authorizes real generation parameters or version action.
+Stop before any real DoubaoGen/config read, provider-side echo, sanitized request capture, generation retry, DailyNote write, VCP memory write, image creation, commit/tag/push/PR, or release until the user explicitly authorizes real generation parameters, memory action, or version action.
+Next safe action is user confirmation to select v10.19 run_1, or explicit memory/version authorization for the selected accepted candidate.
 ```

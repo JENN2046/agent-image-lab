@@ -3234,3 +3234,131 @@
 - [ ] v10.8 必须记录 DoubaoGen / generate / `doubao-seedream-5-0-260128` / `max_plugin_calls=1` 的下一次授权前锁定值。
 - [ ] v10.8 必须保持插件/API/DailyNote/VCP memory/图片/bridge/submitDraft/commit/tag/push/PR/GitHub Release 均未发生。
 - [ ] `node scripts/validate_v10_8_a5_positive_still_life_generation_preflight_gate.js` 通过。
+
+## v10.9 A5 Positive Still-life Generation Rejected Asset Record 检查
+
+- [ ] 当前阶段字符串为 `v10.9 A5 positive still-life generation rejected asset record`。
+- [ ] `docs/208_v10_9_a5_positive_still_life_generation_rejected_asset_record.md` 存在。
+- [ ] `review_console/embed_contract/v10_9_a5_positive_still_life_generation_rejected_asset_record.md` 存在。
+- [ ] `tests/schema_examples/v10_9_a5_positive_still_life_generation_rejected_asset_record.example.yaml` 存在。
+- [ ] `scripts/validate_v10_9_a5_positive_still_life_generation_rejected_asset_record.js` 存在。
+- [ ] v10.9 必须记录短批准模板和 ignored 私有 PluginDir 绑定已用于 preflight。
+- [ ] v10.9 必须记录 prompt id 为 `a5_positive_still_life_prompt_v1` 且 `prompt_auto_edited=false`。
+- [ ] v10.9 必须记录 `actual_plugin_calls=1`。
+- [ ] v10.9 必须记录 `generated_asset_count=1`。
+- [ ] v10.9 必须记录 `person_or_face_detected=true`。
+- [ ] v10.9 必须记录 `prompt_subject_match=false`。
+- [ ] v10.9 必须记录 `asset_status=rejected`。
+- [ ] v10.9 必须记录 DailyNote / VCP memory 写入被资产拒收阻断。
+- [ ] v10.9 必须保持追加插件调用、submitDraft、commit、tag、push、PR、GitHub Release 均未发生。
+- [ ] `node scripts/validate_v10_9_a5_positive_still_life_generation_rejected_asset_record.js` 通过。
+
+## v10.10 A5 Prompt Handoff Diagnostic Preflight 检查
+
+- [ ] 当前阶段字符串为 `v10.10 A5 prompt handoff diagnostic preflight`。
+- [ ] `docs/209_v10_10_a5_prompt_handoff_diagnostic_preflight.md` 存在。
+- [ ] `review_console/embed_contract/v10_10_a5_prompt_handoff_diagnostic_preflight.md` 存在。
+- [ ] `integrations/vcp/v10_10_prompt_handoff_diagnostic_authorization_template.md` 存在。
+- [ ] `tests/schema_examples/v10_10_a5_prompt_handoff_diagnostic_preflight.example.yaml` 存在。
+- [ ] `scripts/validate_v10_10_a5_prompt_handoff_diagnostic_preflight.js` 存在。
+- [ ] v10.10 必须记录 v10.9 根因未知，且模型遵循失败 / 插件请求传递失败均可能。
+- [ ] v10.10 必须记录 prompt id 为 `a5_positive_still_life_prompt_v1`。
+- [ ] v10.10 必须记录 prompt fingerprint，且不在本记录重复保存 raw prompt 文本。
+- [ ] v10.10 必须记录 `max_plugin_calls_allowed=0`。
+- [ ] v10.10 必须记录 `diagnostic_authorization_active=false`。
+- [ ] v10.10 必须保持 PluginDir/config 值读取、插件/API、图片、DailyNote、VCP memory、submitDraft、commit/tag/push/PR/GitHub Release 均未发生。
+- [ ] `node scripts/validate_v10_10_a5_prompt_handoff_diagnostic_preflight.js` 通过。
+
+## v10.11 A5 Prompt Handoff Diagnostic Result 检查
+
+- [ ] 当前阶段字符串为 `v10.11 A5 prompt handoff diagnostic result`。
+- [ ] `docs/210_v10_11_a5_prompt_handoff_diagnostic_result.md` 存在。
+- [ ] `review_console/embed_contract/v10_11_a5_prompt_handoff_diagnostic_result.md` 存在。
+- [ ] `tests/schema_examples/v10_11_a5_prompt_handoff_diagnostic_result.example.yaml` 存在。
+- [ ] `scripts/validate_v10_11_a5_prompt_handoff_diagnostic_result.js` 存在。
+- [ ] v10.11 必须记录 `approval_phrase="批准 v10.10 传参诊断"`。
+- [ ] v10.11 必须记录 `prompt_hash_matches_expected=true`。
+- [ ] v10.11 必须记录 `local_runner_prompt_rewrite_detected=false`。
+- [ ] v10.11 必须记录 `actual_plugin_calls=0`。
+- [ ] v10.11 必须记录 `provider_side_request_observed=false`。
+- [ ] v10.11 必须保持 PluginDir 内容读取、config 值读取、插件/API、图片、DailyNote、VCP memory、submitDraft、commit/tag/push/PR/GitHub Release 均未发生。
+- [ ] `node scripts/validate_v10_11_a5_prompt_handoff_diagnostic_result.js` 通过。
+
+## v10.12 A5 Provider-side Prompt Fingerprint Capture Authorization Package 检查
+
+- [ ] 当前阶段字符串为 `v10.12 A5 provider-side prompt fingerprint capture authorization package`。
+- [ ] `docs/211_v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.md` 存在。
+- [ ] `integrations/vcp/v10_12_provider_side_prompt_fingerprint_capture_authorization_package.md` 存在。
+- [ ] `review_console/embed_contract/v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.md` 存在。
+- [ ] `tests/schema_examples/v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.example.yaml` 存在。
+- [ ] `scripts/validate_v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.js` 存在。
+- [ ] v10.12 必须记录 `authorization_status=inactive_package`。
+- [ ] v10.12 必须记录 `execution_authorized_by_this_record=false`。
+- [ ] v10.12 必须记录 `max_generation_calls_allowed=0`。
+- [ ] v10.12 必须记录 `max_provider_echo_calls_allowed_after_activation=1`。
+- [ ] v10.12 必须记录激活口令 `批准 v10.12 provider侧指纹捕获`。
+- [ ] v10.12 必须禁止 raw prompt/request/response/endpoint/runtime log/secret/plugin dir path 记录。
+- [ ] v10.12 必须保持 provider echo、sanitized request capture、插件/API、图片、DailyNote、VCP memory、submitDraft、commit/tag/push/PR/GitHub Release 均未发生。
+- [ ] `node scripts/validate_v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.js` 通过。
+
+## v10.15/v10.18 Runner UTF-8 No BOM Transport Patch 检查
+
+- [ ] `scripts/run_v0_7_photo_studio_os_real_execution.ps1` 必须使用 `[System.Text.UTF8Encoding]::new($false).GetBytes($payload)`。
+- [ ] `scripts/run_v0_10_gptimagegen_real_execution.ps1` 必须使用 `[System.Text.UTF8Encoding]::new($false).GetBytes($payload)`。
+- [ ] runner 不得使用 `[System.Text.Encoding]::UTF8` 或 `ProcessStartInfo.StandardInputEncoding` 作为 stdin 传输修复。
+- [ ] JSON payload 必须通过 `StandardInput.BaseStream.Write($payloadBytes, 0, $payloadBytes.Length)` 写入并 flush。
+- [ ] JSON payload 写入后必须关闭 stdin。
+- [ ] v10.15 只修本地传输编码，不调用插件/API、不创建图片、不写 DailyNote/VCP memory。
+- [ ] `node scripts/validate_v10_15_runner_utf8_no_bom_transport.js` 通过。
+
+## v10.20 Plugin Reported Model Recording 检查
+
+- [ ] `scripts/run_v0_7_photo_studio_os_real_execution.ps1` 必须记录 `plugin_reported_model_ref` 的 sanitized 实际值。
+- [ ] `scripts/run_v0_7_photo_studio_os_real_execution.ps1` 必须记录 `plugin_reported_model_sha256_utf8`。
+- [ ] `scripts/run_v0_7_photo_studio_os_real_execution.ps1` 必须记录 `requested_model_sha256_utf8`。
+- [ ] `scripts/run_v0_7_photo_studio_os_real_execution.ps1` 必须记录 `plugin_reported_model_matches_requested`。
+- [ ] runner 不得再把 reported model 折叠为 `<model-ref-present>`。
+- [ ] v10.20 只修本地记录逻辑，不调用插件/API、不创建图片、不写 DailyNote/VCP memory。
+- [ ] `node scripts/validate_v10_20_plugin_reported_model_recording.js` 通过。
+
+## v10.26 Real DailyNote/VCP Memory Write Closeout 检查
+
+- [ ] 当前阶段字符串为 `v10.26 real DailyNote/VCP memory write closeout`。
+- [ ] `docs/212_v10_26_real_dailynote_write_closeout.md` 存在。
+- [ ] `review_console/embed_contract/v10_26_real_dailynote_write_closeout.md` 存在。
+- [ ] `tests/schema_examples/v10_26_real_dailynote_write_closeout.example.yaml` 存在。
+- [ ] `scripts/validate_v10_26_real_dailynote_write_closeout.js` 存在。
+- [ ] v10.26 必须记录 `actual_write_calls=1`。
+- [ ] v10.26 必须记录 writer `DailyNoteWrite`。
+- [ ] v10.26 必须记录保存文件名和 sha256，且不得记录 raw full path。
+- [ ] v10.26 必须记录 v10.25 单次真实写入授权已消耗。
+- [ ] v10.26 必须记录 no retry、no second write、no submitDraft、no generation、no image、no commit/tag/push/PR/release。
+- [ ] `node scripts/validate_v10_26_real_dailynote_write_closeout.js` 通过。
+
+## v10.27 DailyNoteWrite Root Path Correction 检查
+
+- [ ] 当前阶段字符串为 `v10.27 DailyNoteWrite root path correction`。
+- [ ] `docs/213_v10_27_dailynotewrite_root_path_correction.md` 存在。
+- [ ] `review_console/embed_contract/v10_27_dailynotewrite_root_path_correction.md` 存在。
+- [ ] `tests/schema_examples/v10_27_dailynotewrite_root_path_correction.example.yaml` 存在。
+- [ ] `scripts/validate_v10_27_dailynotewrite_root_path_correction.js` 存在。
+- [ ] v10.27 必须记录 previous_root_class=`plugin_dir_dailynote`。
+- [ ] v10.27 必须记录 corrected_root_class=`vcp_root_dailynote`。
+- [ ] v10.27 必须记录 no-write recomputation 后 future_write_root_expected=`vcp_root_dailynote`。
+- [ ] v10.27 必须记录不重跑 DailyNoteWrite、不再次写 DailyNote/VCP memory。
+- [ ] v10.27 必须禁止 raw config value、raw external path、secret、endpoint、runtime log 进入记录。
+- [ ] `node scripts/validate_v10_27_dailynotewrite_root_path_correction.js` 通过。
+
+## v10.28 DailyNote Canonical Location Guard 检查
+
+- [ ] 当前阶段字符串为 `v10.28 DailyNote canonical location guard`。
+- [ ] `docs/214_v10_28_dailynote_canonical_location_guard.md` 存在。
+- [ ] `review_console/embed_contract/v10_28_dailynote_canonical_location_guard.md` 存在。
+- [ ] `tests/schema_examples/v10_28_dailynote_canonical_location_guard.example.yaml` 存在。
+- [ ] `scripts/validate_v10_28_dailynote_canonical_location_guard.js` 存在。
+- [ ] v10.28 必须记录 `plugin_success_sufficient=false`。
+- [ ] v10.28 必须记录 `writer_root_class_required_before_write=vcp_root_dailynote`。
+- [ ] v10.28 必须记录 `canonical_target_hash_match_required=true`。
+- [ ] v10.28 必须把 wrong-location 输出标记为 `plugin_success_wrong_location`，且不得声明 memory write complete。
+- [ ] v10.28 必须记录不读取外部配置、不重跑 writer、不再次写 DailyNote/VCP memory。
+- [ ] `node scripts/validate_v10_28_dailynote_canonical_location_guard.js` 通过。

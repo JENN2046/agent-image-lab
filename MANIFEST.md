@@ -1,6 +1,6 @@
 # Agent Image Lab 打包清单
 
-本包包含 Agent Image Lab v1.0 true-loop closeout 候选所需的文档、schema、角色定义、记忆策略、审片台规格、Adapter dry-run 包、VCP 接入记录、授权门、真实执行脱敏记录、最终验收报告、v3.9-v4.2 Review Console runtime prototype 本地验证加固记录，v4.3-v4.9 guarded autopilot overlay / agent board / local checkpoint readiness / commit scope manifest / post-push state reconciliation / v4 index consistency validation / local tag push-readiness preflight，v5.0 post-merge delivery readiness index，v5.1 runtime delivery surface validation，v5.2 adapter delivery surface validation，v5.3 review console adapter handoff validation，v5.4 local sync readiness preflight，v5.5 post-commit reconciliation checkpoint，v5.6 v5 index consistency validation，v5.7 local batch commit-readiness preflight，v5.8 handoff freshness validation，v5.9 expanded v5 index consistency validation，v5.10 local true-loop candidate delivery closeout，v5.11 post-merge reconciliation，v5.12 release candidate readiness，v7.40 local A4/A5 autonomy mode alignment，v7.41 external remote-debug verification script creation record，v7.42 external remote-debug verification script creation authorization package，v7.43 external remote-debug verification script creation execution record，v7.44 remote-debug script run and VCPChat launch record，v7.45 CDP read-only attempt record，v7.46 remote-debug relaunch runtime verification record，v10.0 A5 end-to-end activation package readiness / preflight-blocked 记录，v10.1 A5 resume after external worktree reconciliation 接续记录，v10.2 A5 bridge smoke blocked 记录，v10.3 A5 bridge integration smoke 记录，v10.4 A5 DoubaoGen single generation rejected asset 记录，v10.5 A5 DoubaoGen no-text retry rejected asset 记录，v10.6 A5 prompt failure analysis and safer strategy 记录，v10.7 A5 safer prompt review package 记录，以及 v10.8 A5 positive still-life generation preflight gate 记录。
+本包包含 Agent Image Lab v1.0 true-loop closeout 候选所需的文档、schema、角色定义、记忆策略、审片台规格、Adapter dry-run 包、VCP 接入记录、授权门、真实执行脱敏记录、最终验收报告、v3.9-v4.2 Review Console runtime prototype 本地验证加固记录，v4.3-v4.9 guarded autopilot overlay / agent board / local checkpoint readiness / commit scope manifest / post-push state reconciliation / v4 index consistency validation / local tag push-readiness preflight，v5.0 post-merge delivery readiness index，v5.1 runtime delivery surface validation，v5.2 adapter delivery surface validation，v5.3 review console adapter handoff validation，v5.4 local sync readiness preflight，v5.5 post-commit reconciliation checkpoint，v5.6 v5 index consistency validation，v5.7 local batch commit-readiness preflight，v5.8 handoff freshness validation，v5.9 expanded v5 index consistency validation，v5.10 local true-loop candidate delivery closeout，v5.11 post-merge reconciliation，v5.12 release candidate readiness，v7.40 local A4/A5 autonomy mode alignment，v7.41 external remote-debug verification script creation record，v7.42 external remote-debug verification script creation authorization package，v7.43 external remote-debug verification script creation execution record，v7.44 remote-debug script run and VCPChat launch record，v7.45 CDP read-only attempt record，v7.46 remote-debug relaunch runtime verification record，v10.0 A5 end-to-end activation package readiness / preflight-blocked 记录，v10.1 A5 resume after external worktree reconciliation 接续记录，v10.2 A5 bridge smoke blocked 记录，v10.3 A5 bridge integration smoke 记录，v10.4 A5 DoubaoGen single generation rejected asset 记录，v10.5 A5 DoubaoGen no-text retry rejected asset 记录，v10.6 A5 prompt failure analysis and safer strategy 记录，v10.7 A5 safer prompt review package 记录，v10.8 A5 positive still-life generation preflight gate 记录，v10.8 下一次真实生成的未激活授权草案，v10.9 A5 positive still-life generation rejected asset 记录，v10.10 A5 prompt handoff diagnostic preflight 记录，v10.11 A5 prompt handoff diagnostic result 记录，v10.12 A5 provider-side prompt fingerprint capture authorization package 记录，v10.26 real DailyNote/VCP memory write closeout 记录，v10.27 DailyNoteWrite root path correction 记录，以及 v10.28 DailyNote canonical location guard 记录。
 
 ## 重要声明
 
@@ -23,6 +23,15 @@
 - v10.6 记录 v10.4 / v10.5 prompt 失败分析和下一版更安全策略；本阶段不执行真实生图，且要求下一次真实调用前先展示候选 prompt 给用户确认。
 - v10.7 记录 safer prompt review package；候选 prompt 已通过触发词扫描，真实生图仍需用户确认 prompt 并单独授权。
 - v10.8 记录 positive still-life generation preflight gate；`prompt_locked_for_future_authorization=true`，下一次真实生图仍需 prompt approval 和单独授权。
+- v10.8 的真实生成授权草案是 template-only / inactive，不批准插件调用、API 调用、图片创建、DailyNote/VCP memory 写入或版本动作。
+- v10.8 的短批准模板只缩短用户批准口令；真实插件路径必须来自 ignored 私有绑定，不写入 Git。
+- v10.9 记录短批准模板下的一次 DoubaoGen 正向静物真实生成；`actual_plugin_calls: 1`、`generated_asset_count: 1`，但资产因人物/脸和 prompt 主题偏离被拒收，DailyNote / VCP memory 写入继续阻断。
+- v10.10 记录 prompt handoff diagnostic preflight；`max_plugin_calls_allowed: 0`、`diagnostic_authorization_active: false`，不读取 PluginDir/config 值、不调用插件/API、不创建图片。
+- v10.11 记录无生图 prompt handoff diagnostic result；`prompt_hash_matches_expected: true`、`actual_plugin_calls: 0`、`provider_side_request_observed: false`，本地 runner 层未发现 prompt 改写。
+- v10.12 记录 provider-side prompt fingerprint capture 的未激活授权包；`authorization_status: inactive_package`、`execution_authorized_by_this_record: false`，不执行 provider echo、不捕获请求、不调用插件/API、不创建图片。
+- v10.26 记录 v10.25 已通过 DailyNoteWrite 完成一次真实 DailyNote/VCP memory 写入；actual_write_calls=1，保存文件名和 sha256 已脱敏记录，不记录 raw full path，且单次授权已消耗。
+- v10.27 记录 DailyNoteWrite 后续写入根目录修复：从 `plugin_dir_dailynote` 修正为 `vcp_root_dailynote`；本阶段不重跑 writer、不再次写 DailyNote/VCP memory。
+- v10.28 记录 DailyNote canonical location guard：插件 `success` 不是充分条件，后续写入必须通过 canonical file 存在和 hash 匹配才能标记完成。
 
 ## Release readiness 文件
 
@@ -71,6 +80,13 @@
 - `docs/205_v10_6_a5_prompt_failure_analysis_and_safer_strategy.md`
 - `docs/206_v10_7_a5_safer_prompt_review_package.md`
 - `docs/207_v10_8_a5_positive_still_life_generation_preflight_gate.md`
+- `docs/208_v10_9_a5_positive_still_life_generation_rejected_asset_record.md`
+- `docs/209_v10_10_a5_prompt_handoff_diagnostic_preflight.md`
+- `docs/210_v10_11_a5_prompt_handoff_diagnostic_result.md`
+- `docs/211_v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.md`
+- `docs/212_v10_26_real_dailynote_write_closeout.md`
+- `docs/213_v10_27_dailynotewrite_root_path_correction.md`
+- `docs/214_v10_28_dailynote_canonical_location_guard.md`
 - `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_record.md`
 - `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_authorization_package.md`
 - `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_execution_record.md`
@@ -86,6 +102,13 @@
 - `review_console/embed_contract/v10_6_a5_prompt_failure_analysis_and_safer_strategy.md`
 - `review_console/embed_contract/v10_7_a5_safer_prompt_review_package.md`
 - `review_console/embed_contract/v10_8_a5_positive_still_life_generation_preflight_gate.md`
+- `review_console/embed_contract/v10_9_a5_positive_still_life_generation_rejected_asset_record.md`
+- `review_console/embed_contract/v10_10_a5_prompt_handoff_diagnostic_preflight.md`
+- `review_console/embed_contract/v10_11_a5_prompt_handoff_diagnostic_result.md`
+- `review_console/embed_contract/v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.md`
+- `review_console/embed_contract/v10_26_real_dailynote_write_closeout.md`
+- `review_console/embed_contract/v10_27_dailynotewrite_root_path_correction.md`
+- `review_console/embed_contract/v10_28_dailynote_canonical_location_guard.md`
 - `tests/schema_examples/v7_40_local_a4_a5_autonomy_alignment.example.yaml`
 - `tests/schema_examples/v7_41_external_remote_debug_verification_script_creation_record.example.yaml`
 - `tests/schema_examples/v7_42_external_remote_debug_verification_script_creation_authorization_package.example.yaml`
@@ -102,6 +125,13 @@
 - `tests/schema_examples/v10_6_a5_prompt_failure_analysis_and_safer_strategy.example.yaml`
 - `tests/schema_examples/v10_7_a5_safer_prompt_review_package.example.yaml`
 - `tests/schema_examples/v10_8_a5_positive_still_life_generation_preflight_gate.example.yaml`
+- `tests/schema_examples/v10_9_a5_positive_still_life_generation_rejected_asset_record.example.yaml`
+- `tests/schema_examples/v10_10_a5_prompt_handoff_diagnostic_preflight.example.yaml`
+- `tests/schema_examples/v10_11_a5_prompt_handoff_diagnostic_result.example.yaml`
+- `tests/schema_examples/v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.example.yaml`
+- `tests/schema_examples/v10_26_real_dailynote_write_closeout.example.yaml`
+- `tests/schema_examples/v10_27_dailynotewrite_root_path_correction.example.yaml`
+- `tests/schema_examples/v10_28_dailynote_canonical_location_guard.example.yaml`
 - `.agent_board/`
 - `AGENTS.autopilot-overlay.md`
 - `README_AGENT_IMAGE_LAB_AUTOPILOT.md`
@@ -141,12 +171,25 @@
 - `scripts/validate_v10_6_a5_prompt_failure_analysis_and_safer_strategy.js`
 - `scripts/validate_v10_7_a5_safer_prompt_review_package.js`
 - `scripts/validate_v10_8_a5_positive_still_life_generation_preflight_gate.js`
+- `scripts/validate_v10_9_a5_positive_still_life_generation_rejected_asset_record.js`
+- `scripts/validate_v10_10_a5_prompt_handoff_diagnostic_preflight.js`
+- `scripts/validate_v10_11_a5_prompt_handoff_diagnostic_result.js`
+- `scripts/validate_v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.js`
+- `scripts/validate_v10_15_runner_utf8_no_bom_transport.js`
+- `scripts/validate_v10_20_plugin_reported_model_recording.js`
+- `scripts/validate_v10_26_real_dailynote_write_closeout.js`
+- `scripts/validate_v10_27_dailynotewrite_root_path_correction.js`
+- `scripts/validate_v10_28_dailynote_canonical_location_guard.js`
 - `scripts/run_vcpchat_review_console_remote_debug_smoke.ps1`
 - `integrations/vcp/v0_7_real_execution_authorization_gate.md`
 - `integrations/vcp/v0_7_photo_studio_os_dry_run_rehearsal.md`
 - `integrations/vcp/v0_7_photo_studio_os_real_execution_record.md`
 - `integrations/vcp/v0_9_photo_studio_os_retry_real_execution_record.md`
 - `integrations/vcp/v0_10_doubaogen_retry_real_execution_record.md`
+- `integrations/vcp/v10_8_positive_still_life_real_generation_authorization_draft.md`
+- `integrations/vcp/v10_8_positive_still_life_short_approval_template.md`
+- `integrations/vcp/v10_10_prompt_handoff_diagnostic_authorization_template.md`
+- `integrations/vcp/v10_12_provider_side_prompt_fingerprint_capture_authorization_package.md`
 - `workflows/v0_9_photo_studio_os_retry_authorization_gate.md`
 - `scripts/run_v0_7_photo_studio_os_real_execution.ps1`
 - `scripts/run_v0_10_gptimagegen_real_execution.ps1`
@@ -195,3 +238,12 @@
 - v10.6 records prompt failure accountability and a positive-only unbranded still-life strategy; it performs no generation and requires prompt preview plus new authorization before any next real call.
 - v10.7 records a safer prompt review package with trigger-term scanning; it performs no generation and keeps real calls blocked until user prompt approval plus a separate authorization package.
 - v10.8 records a positive still-life generation preflight gate with prompt_locked_for_future_authorization and required authorization fields; it performs no generation and keeps real calls blocked.
+- v10.8 also includes an inactive real generation authorization draft for `a5_positive_still_life_prompt_v1`; the draft does not activate A5 or permit plugin/API/image/memory/version actions.
+- v10.8 includes a short approval template that still requires an ignored private PluginDir binding and preflight before any real call.
+- v10.9 records one authorized DoubaoGen positive still-life generation through the short approval template; actual plugin calls were exactly 1 and one asset was produced, but the asset was rejected for person/face and prompt mismatch, so DailyNote/VCP memory writes and version actions remain blocked.
+- v10.10 records a no-generation prompt handoff diagnostic preflight with max_plugin_calls_allowed: 0 and diagnostic_authorization_active: false; it prepares a future sanitized request preflight but performs no plugin/API/image/config-read action.
+- v10.11 records the approved no-generation prompt handoff diagnostic result; prompt hash matches the locked prompt and the local runner payload source is InputReference, but provider-side request remains unobserved.
+- v10.12 records an inactive provider-side prompt fingerprint capture authorization package; authorization_status: inactive_package and execution_authorized_by_this_record: false, so no provider echo, sanitized request capture, plugin/API/image/memory, or version action is performed by the record.
+- v10.26 records the v10.25 real DailyNote/VCP memory write closeout: actual_write_calls=1 through DailyNoteWrite, saved file name and sha256 are recorded without raw full path, and no second write, generation, submitDraft, commit, tag, push, PR, or release is authorized.
+- v10.27 records DailyNoteWrite root path correction for future writes: corrected_root_class=vcp_root_dailynote, no writer rerun, no second write, no raw config value, no raw external path, and no version action.
+- v10.28 records DailyNote canonical location guard for future writes: plugin_success_sufficient=false, canonical_target_hash_match_required=true, wrong-location output must be labeled plugin_success_wrong_location, and no real write is performed by the record.
