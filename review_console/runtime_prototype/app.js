@@ -30,6 +30,11 @@ const els = {
   versionPicker: document.getElementById("versionPicker"),
   comparePicker: document.getElementById("comparePicker"),
   comparisonSummary: document.getElementById("comparisonSummary"),
+  queueFilter: document.getElementById("queueFilter"),
+  queueTotal: document.getElementById("queueTotal"),
+  queueVisible: document.getElementById("queueVisible"),
+  queueSelected: document.getElementById("queueSelected"),
+  queueList: document.getElementById("queueList"),
   diffStrengths: document.getElementById("diffStrengths"),
   diffIssues: document.getElementById("diffIssues"),
   diffNext: document.getElementById("diffNext"),
@@ -95,6 +100,29 @@ const els = {
 };
 
 let activeDraftView = "readable";
+let queueState = session.review_queue.length > 0 ? runtimeGuard.clone(session.review_queue) : buildDefaultQueueFromVersions();
+let selectedQueueId = (queueState.find((item) => item.version_id === session.current_version_id) || queueState[0] || {}).queue_id || null;
+
+function buildDefaultQueueFromVersions() {
+  return session.image_versions.map((version, index) => ({
+    queue_id: `queue-${version.version_id}`,
+    version_id: version.version_id,
+    compare_version_id: index > 0 ? session.image_versions[0]?.version_id || "" : "",
+    title_cn: version.label,
+    priority_cn: index === 0 ? "参考样例" : "待评审",
+    asset_status: "candidate",
+    review_status: "human_reviewing",
+    score: version.score || 80,
+    human_approved: false,
+    memory_approval_status: "pending",
+    human_note_cn: "等待人工评审。",
+    annotation_note_cn: "",
+    strengths_cn: "暂无新增改进点。",
+    issues_cn: "暂无新增风险点。",
+    next_step_cn: "继续人工评审。",
+    memory_content_cn: session.memory_preview.chinese_diary_content || ""
+  }));
+}
 
 function nowIso() {
   return new Date().toISOString();
@@ -159,6 +187,97 @@ function scoreBandLabel(score) {
   if (score >= 80) return "可推进候选";
   if (score >= 60) return "需要修改";
   return "建议拒收";
+}
+
+function activeQueueItem() {
+  return queueState.find((item) => item.queue_id === selectedQueueId) || queueState[0] || null;
+}
+
+function queueStatusLabel(item) {
+  if (item.review_status === "human_reviewing") return "待评审";
+  return reviewStatusLabel(item.review_status) || assetStatusLabel(item.asset_status);
+}
+
+function queueMatchesFilter(item, filter) {
+  if (filter === "all") return true;
+  if (filter === "human_reviewing") return item.review_status === "human_reviewing";
+  return item.asset_status === filter;
+}
+
+function loadQueueItemIntoForm(item) {
+  if (!item) return;
+  els.versionPicker.value = item.version_id;
+  els.comparePicker.value = item.compare_version_id || "";
+  els.diffStrengths.value = item.strengths_cn || "暂无新增改进点。";
+  els.diffIssues.value = item.issues_cn || "暂无新增风险点。";
+  els.diffNext.value = item.next_step_cn || "继续人工评审。";
+  els.humanScore.value = String(item.score || 80);
+  els.humanComment.value = item.human_note_cn || "等待人工评审。";
+  els.annotationNote.value = item.annotation_note_cn || "";
+  els.assetStatus.value = item.asset_status === "accepted" ? "candidate" : item.asset_status || "candidate";
+  els.humanApproved.checked = item.asset_status === "accepted" || item.human_approved === true;
+  els.memoryApproval.value = item.memory_approval_status || "pending";
+  els.memoryContent.value = item.memory_content_cn || session.memory_preview.chinese_diary_content || "";
+}
+
+function syncActiveQueueItemFromForm() {
+  const item = activeQueueItem();
+  if (!item) return;
+  const assetStatus = finalAssetStatus();
+  item.version_id = els.versionPicker.value || item.version_id;
+  item.compare_version_id = els.comparePicker.value || "";
+  item.asset_status = assetStatus;
+  item.review_status = reviewSessionStatus(assetStatus);
+  item.score = Number(els.humanScore.value);
+  item.human_approved = els.humanApproved.checked;
+  item.memory_approval_status = els.memoryApproval.value;
+  item.human_note_cn = els.humanComment.value.trim();
+  item.annotation_note_cn = els.annotationNote.value.trim();
+  item.strengths_cn = safeText(els.diffStrengths.value, "暂无新增改进点。");
+  item.issues_cn = safeText(els.diffIssues.value, "暂无新增风险点。");
+  item.next_step_cn = safeText(els.diffNext.value, "继续人工评审。");
+  item.memory_content_cn = els.memoryContent.value.trim();
+}
+
+function selectQueueItem(queueId) {
+  syncActiveQueueItemFromForm();
+  selectedQueueId = queueId;
+  loadQueueItemIntoForm(activeQueueItem());
+  render();
+}
+
+function buildQueueDraft({
+  version,
+  comparisonVersion,
+  score,
+  assetStatus,
+  memoryApproval,
+  humanReview,
+  annotationText,
+  strengthsText,
+  issuesText,
+  nextStepText,
+  memoryContent
+}) {
+  return queueState.map((item) => {
+    if (item.queue_id !== selectedQueueId) return runtimeGuard.clone(item);
+    return {
+      ...runtimeGuard.clone(item),
+      version_id: version.version_id,
+      compare_version_id: comparisonVersion?.version_id || "",
+      asset_status: assetStatus,
+      review_status: reviewSessionStatus(assetStatus),
+      score,
+      human_approved: els.humanApproved.checked,
+      memory_approval_status: memoryApproval.status,
+      human_note_cn: humanReview.note_cn,
+      annotation_note_cn: annotationText,
+      strengths_cn: strengthsText,
+      issues_cn: issuesText,
+      next_step_cn: nextStepText,
+      memory_content_cn: memoryContent
+    };
+  });
 }
 
 function nextActionLabel({ assetStatus, memoryStatus, guardClean }) {
@@ -392,6 +511,19 @@ function buildDraft() {
       ? `人工正在对比 ${version.label} 与 ${comparisonVersion.label}。${annotationText}`
       : `人工正在单独评审 ${version.label}。${annotationText}`
   };
+  const reviewQueueDraft = buildQueueDraft({
+    version,
+    comparisonVersion,
+    score,
+    assetStatus,
+    memoryApproval,
+    humanReview,
+    annotationText,
+    strengthsText,
+    issuesText,
+    nextStepText,
+    memoryContent
+  });
 
   return {
     review_session_draft: {
@@ -400,6 +532,8 @@ function buildDraft() {
       case_id: session.case_id,
       project: session.project,
       status: reviewSessionStatus(assetStatus),
+      selected_queue_id: selectedQueueId,
+      review_queue: reviewQueueDraft,
       image_versions: session.image_versions,
       current_version_id: version.version_id,
       compare_version_id: comparisonVersion?.version_id || null,
@@ -544,6 +678,34 @@ function renderList(el, items) {
   }
 }
 
+function renderQueueList(queueDraft) {
+  const filter = els.queueFilter.value || "all";
+  const filteredItems = queueDraft.filter((item) => queueMatchesFilter(item, filter));
+  const activeItem = queueDraft.find((item) => item.queue_id === selectedQueueId) || queueDraft[0] || null;
+  els.queueTotal.textContent = String(queueDraft.length);
+  els.queueVisible.textContent = String(filteredItems.length);
+  els.queueSelected.textContent = activeItem ? activeItem.title_cn : "-";
+  els.queueList.innerHTML = "";
+  if (filteredItems.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "queue-empty";
+    empty.textContent = "没有符合筛选条件的候选。";
+    els.queueList.appendChild(empty);
+    return;
+  }
+  for (const item of filteredItems) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "queue-item";
+    button.dataset.queueId = item.queue_id;
+    button.dataset.active = String(item.queue_id === selectedQueueId);
+    button.dataset.status = item.asset_status;
+    button.textContent = `${item.title_cn}\n${queueStatusLabel(item)} · ${assetStatusLabel(item.asset_status)} · ${item.score} 分 · ${item.priority_cn}\n${item.issues_cn}`;
+    button.addEventListener("click", () => selectQueueItem(item.queue_id));
+    els.queueList.appendChild(button);
+  }
+}
+
 function render() {
   const draft = buildDraft();
   const version = currentVersion();
@@ -552,6 +714,8 @@ function render() {
   const imageCaseDraft = draft.image_case_draft;
   const memoryDeltaDraft = draft.memory_delta_draft;
   const handoffDraft = draft.adapter_dry_run_handoff_draft;
+  queueState = runtimeGuard.clone(reviewDraft.review_queue);
+  renderQueueList(reviewDraft.review_queue);
   els.humanScoreOut.textContent = els.humanScore.value;
   els.assetRef.textContent = version.asset_ref;
   els.assetBox.textContent = comparisonVersion
@@ -638,12 +802,13 @@ function render() {
 }
 
 function init() {
+  loadQueueItemIntoForm(activeQueueItem());
   const version = currentVersion();
   els.taskId.textContent = session.task_id;
   els.caseId.textContent = session.case_id;
   els.assetRef.textContent = version.asset_ref;
   els.assetBox.textContent = version.label;
-  [els.versionPicker, els.comparePicker, els.diffStrengths, els.diffIssues, els.diffNext, els.humanScore, els.humanComment, els.annotationNote, els.assetStatus, els.humanApproved, els.memoryContent, els.memoryApproval].forEach((el) => {
+  [els.versionPicker, els.comparePicker, els.queueFilter, els.diffStrengths, els.diffIssues, els.diffNext, els.humanScore, els.humanComment, els.annotationNote, els.assetStatus, els.humanApproved, els.memoryContent, els.memoryApproval].forEach((el) => {
     el.addEventListener("input", render);
     el.addEventListener("change", render);
   });

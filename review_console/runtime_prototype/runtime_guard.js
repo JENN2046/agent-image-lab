@@ -21,6 +21,7 @@ window.ImageLabRuntimeGuard = (() => {
   function normalizeSession(rawSession) {
     const nextSession = clone(rawSession || {});
     nextSession.image_versions = requireArray(nextSession.image_versions);
+    nextSession.review_queue = requireArray(nextSession.review_queue);
     nextSession.comments = requireArray(nextSession.comments);
     nextSession.annotation_notes = requireArray(nextSession.annotation_notes);
     nextSession.memory_preview = nextSession.memory_preview || {};

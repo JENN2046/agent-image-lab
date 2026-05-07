@@ -93,6 +93,7 @@ function main() {
     image_case_seed: {}
   });
   assert(Array.isArray(normalized.image_versions), "normalizeSession() must default image_versions to an array.");
+  assert(Array.isArray(normalized.review_queue), "normalizeSession() must default review_queue to an array.");
   assert(Array.isArray(normalized.comments), "normalizeSession() must default comments to an array.");
   assert(Array.isArray(normalized.annotation_notes), "normalizeSession() must default annotation_notes to an array.");
   assert(Array.isArray(normalized.memory_preview.tags), "normalizeSession() must default memory_preview.tags to an array.");

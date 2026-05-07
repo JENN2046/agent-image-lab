@@ -13,7 +13,20 @@ class FakeElement {
     this.checked = Boolean(initial.checked);
     this.dataset = {};
     this.children = [];
+    this._innerHTML = "";
     this.listeners = new Map();
+  }
+
+  set innerHTML(value) {
+    this._innerHTML = String(value);
+    if (value === "") {
+      this.children = [];
+      this.textContent = "";
+    }
+  }
+
+  get innerHTML() {
+    return this._innerHTML;
   }
 
   appendChild(child) {
@@ -52,6 +65,11 @@ function createRuntimeContext() {
   add("versionPicker", { value: "v2" });
   add("comparePicker", { value: "v1" });
   add("comparisonSummary");
+  add("queueFilter", { value: "all" });
+  add("queueTotal");
+  add("queueVisible");
+  add("queueSelected");
+  add("queueList");
   add("diffStrengths", { value: "主体构图更稳定，整体可读性更好。" });
   add("diffIssues", { value: "细节噪点仍需保留人工判断。" });
   add("diffNext", { value: "若进入正式归档，需要确认记忆写入申请。" });
@@ -196,6 +214,10 @@ function dispatchClick(elements, id) {
   elements.get(id).dispatchEvent({ type: "click" });
 }
 
+function dispatchElementClick(element) {
+  element.dispatchEvent({ type: "click" });
+}
+
 function main() {
   const { context, elements } = createRuntimeContext();
   const scriptOrder = readIndexScriptOrder();
@@ -242,6 +264,12 @@ function main() {
   assert(elements.get("checkWriteBoundary").dataset.state === "ok", "Write boundary checklist must pass initially.");
   assert(initialDraft.review_session_draft.current_version_id === "v2", "Initial current version must be v2.");
   assert(initialDraft.review_session_draft.compare_version_id === "v1", "Initial compare version must be v1.");
+  assert(initialDraft.review_session_draft.selected_queue_id === "queue-v2", "Initial selected queue id must be queue-v2.");
+  assert(initialDraft.review_session_draft.review_queue.length === 4, "Initial review queue must contain four candidates.");
+  assert(elements.get("queueTotal").textContent === "4", "Queue total must render.");
+  assert(elements.get("queueVisible").textContent === "4", "Queue visible count must render all candidates initially.");
+  assert(elements.get("queueSelected").textContent === "v1.1 修订候选图", "Queue selected label must render.");
+  assert(elements.get("queueList").children.length === 4, "Queue list must render four candidate buttons.");
   assert(initialDraft.review_session_draft.annotation_notes.length === 1, "Initial annotation note must be included.");
   assert(
     initialDraft.review_session_draft.version_comparison.summary_cn.includes("v1.1 修订候选图"),
@@ -251,6 +279,27 @@ function main() {
   assert(initialDraft.memory_delta_draft.write_mode === "draft", "Initial memory write mode must be draft.");
   assert(initialDraft.memory_delta_draft.final_decision.should_write_to_vcp === false, "Initial memory write request must be false.");
   assert(runtimeGuard.guardIsClean(initialDraft.prototype_guard), "Initial prototype guard must be clean.");
+
+  elements.get("queueFilter").value = "rejected";
+  dispatchChange(elements, "queueFilter");
+  const rejectedQueueButtons = elements.get("queueList").children;
+  assert(elements.get("queueVisible").textContent === "1", "Rejected queue filter must show one candidate.");
+  assert(rejectedQueueButtons.length === 1, "Rejected queue filter must render one candidate button.");
+  assert(rejectedQueueButtons[0].textContent.includes("已拒收"), "Rejected queue button must show rejected status.");
+  dispatchElementClick(rejectedQueueButtons[0]);
+  const rejectedSelectionDraft = parseDraft(elements);
+  assert(rejectedSelectionDraft.review_session_draft.selected_queue_id === "queue-v3", "Queue click must select queue-v3.");
+  assert(rejectedSelectionDraft.review_session_draft.current_version_id === "v3", "Queue click must switch current version to v3.");
+  assert(rejectedSelectionDraft.image_case_draft.asset_status === "rejected", "Rejected queue item must load rejected asset status.");
+  assert(elements.get("queueSelected").textContent === "v1.2 风险复查图", "Queue selected label must update after click.");
+  elements.get("queueFilter").value = "all";
+  dispatchChange(elements, "queueFilter");
+  const queueV2Button = elements.get("queueList").children.find((child) => child.dataset.queueId === "queue-v2");
+  assert(queueV2Button, "All queue filter must include queue-v2.");
+  dispatchElementClick(queueV2Button);
+  const returnedQueueDraft = parseDraft(elements);
+  assert(returnedQueueDraft.review_session_draft.selected_queue_id === "queue-v2", "Queue click must return to queue-v2.");
+  assert(returnedQueueDraft.review_session_draft.current_version_id === "v2", "Queue click must restore current version v2.");
 
   dispatchClick(elements, "tplTextArtifact");
   const templatedDraft = parseDraft(elements);
@@ -341,6 +390,13 @@ function main() {
     draft_view_switch: {
       technical_view_available: elements.get("draftOutput").textContent.includes("review_session_draft"),
       readable_view_cn: ["人工评审中", "已批准", "已拒收"].includes(elements.get("reviewCardStatus").textContent)
+    },
+    review_queue: {
+      queue_count: initialDraft.review_session_draft.review_queue.length,
+      filter_rejected_count: 1,
+      queue_click_updates_selected_id: rejectedSelectionDraft.review_session_draft.selected_queue_id === "queue-v3",
+      queue_click_updates_current_version: rejectedSelectionDraft.review_session_draft.current_version_id === "v3",
+      queue_return_restores_current_version: returnedQueueDraft.review_session_draft.current_version_id === "v2"
     },
     adapter_handoff: {
       execution_blocked: initialDraft.adapter_dry_run_handoff_draft.execution_blocked,

@@ -25,6 +25,8 @@
             <select id="versionPicker">
               <option value="v2">v1.1 修订候选图</option>
               <option value="v1">v1.0 参考候选图</option>
+              <option value="v3">v1.2 风险复查图</option>
+              <option value="v4">v1.3 草稿探索图</option>
             </select>
           </label>
           <label class="field">
@@ -33,6 +35,8 @@
               <option value="v1">v1.0 参考候选图</option>
               <option value="">不对比</option>
               <option value="v2">v1.1 修订候选图</option>
+              <option value="v3">v1.2 风险复查图</option>
+              <option value="v4">v1.3 草稿探索图</option>
             </select>
           </label>
         </div>
@@ -52,6 +56,29 @@
             <textarea id="diffNext" rows="3">若进入正式归档，需要确认记忆写入申请。</textarea>
           </label>
         </div>
+      </section>
+
+      <section class="panel queue-panel">
+        <div class="panel-title-row">
+          <h2>候选队列</h2>
+          <label class="compact-field">
+            <span>状态筛选</span>
+            <select id="queueFilter">
+              <option value="all">全部</option>
+              <option value="human_reviewing">待评审</option>
+              <option value="candidate">候选</option>
+              <option value="accepted">可接受</option>
+              <option value="rejected">已拒收</option>
+              <option value="draft">草稿</option>
+            </select>
+          </label>
+        </div>
+        <dl class="meta queue-stats">
+          <div><dt>总数</dt><dd id="queueTotal">-</dd></div>
+          <div><dt>当前显示</dt><dd id="queueVisible">-</dd></div>
+          <div><dt>正在评审</dt><dd id="queueSelected">-</dd></div>
+        </dl>
+        <div class="queue-list" id="queueList"></div>
       </section>
 
       <section class="panel">
