@@ -5343,6 +5343,7 @@ if (-not $node) {
       'docs/',
       'integrations/vcp/',
       'review_console/embed_contract/',
+      'review_console/runtime_prototype/',
       'scripts/',
       'tests/schema_examples/'
     )

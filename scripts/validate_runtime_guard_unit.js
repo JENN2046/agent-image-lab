@@ -46,6 +46,26 @@ function makeBaseDraft(runtimeGuard) {
         should_write_to_vcp: false
       }
     },
+    batch_review_summary_draft: {
+      no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard)
+    },
+    batch_decision_draft: {
+      no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard)
+    },
+    risk_review_summary_draft: {
+      no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard)
+    },
+    a5_preauthorization_review_package_draft: {
+      no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard)
+    },
+    human_inspection_checklist_draft: {
+      no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard)
+    },
+    runtime_session_export_draft: {
+      package_status: "draft_only",
+      side_effects_performed: false,
+      prototype_guard: runtimeGuard.clone(runtimeGuard.cleanGuard)
+    },
     prototype_guard: runtimeGuard.clone(runtimeGuard.cleanGuard)
   };
 }
@@ -65,6 +85,11 @@ function main() {
   assert(typeof runtimeGuard.clone === "function", "Runtime guard must expose clone().");
   assert(typeof runtimeGuard.normalizeSession === "function", "Runtime guard must expose normalizeSession().");
   assert(typeof runtimeGuard.guardIsClean === "function", "Runtime guard must expose guardIsClean().");
+  assert(typeof runtimeGuard.guardsAreClean === "function", "Runtime guard must expose guardsAreClean().");
+  assert(
+    typeof runtimeGuard.draftSideSurfacesAreSafe === "function",
+    "Runtime guard must expose draftSideSurfacesAreSafe()."
+  );
   assert(typeof runtimeGuard.draftIsSafe === "function", "Runtime guard must expose draftIsSafe().");
   assert(typeof runtimeGuard.assertDraftSafe === "function", "Runtime guard must expose assertDraftSafe().");
 
@@ -93,6 +118,7 @@ function main() {
     image_case_seed: {}
   });
   assert(Array.isArray(normalized.image_versions), "normalizeSession() must default image_versions to an array.");
+  assert(Array.isArray(normalized.review_queue), "normalizeSession() must default review_queue to an array.");
   assert(Array.isArray(normalized.comments), "normalizeSession() must default comments to an array.");
   assert(Array.isArray(normalized.annotation_notes), "normalizeSession() must default annotation_notes to an array.");
   assert(Array.isArray(normalized.memory_preview.tags), "normalizeSession() must default memory_preview.tags to an array.");
@@ -132,6 +158,22 @@ function main() {
   dirtyAuditDraft.review_session_draft.audit_log[0].prototype_guard.api_called = true;
   assert(runtimeGuard.draftIsSafe(dirtyAuditDraft) === false, "Dirty audit guard must fail.");
 
+  const dirtyBatchDraft = runtimeGuard.clone(safeDraft);
+  dirtyBatchDraft.batch_decision_draft.no_execution_guard.api_called = true;
+  assert(runtimeGuard.draftIsSafe(dirtyBatchDraft) === false, "Dirty batch side-surface guard must fail.");
+  assertThrows(
+    () => runtimeGuard.assertDraftSafe(dirtyBatchDraft),
+    "assertDraftSafe() must reject dirty batch side-surface guard."
+  );
+
+  const dirtyExportDraft = runtimeGuard.clone(safeDraft);
+  dirtyExportDraft.runtime_session_export_draft.side_effects_performed = true;
+  assert(runtimeGuard.draftIsSafe(dirtyExportDraft) === false, "Runtime export with side effects must fail.");
+  assertThrows(
+    () => runtimeGuard.assertDraftSafe(dirtyExportDraft),
+    "assertDraftSafe() must reject runtime export with side effects."
+  );
+
   const missingSectionDraft = runtimeGuard.clone(safeDraft);
   delete missingSectionDraft.memory_delta_draft;
   assert(runtimeGuard.draftIsSafe(missingSectionDraft) === false, "Draft missing required sections must fail.");
@@ -149,6 +191,8 @@ function main() {
       memory_write_without_approval_rejected: true,
       memory_write_with_approval_allowed_as_request: true,
       dirty_audit_guard_rejected: true,
+      dirty_batch_side_surface_guard_rejected: true,
+      runtime_export_side_effects_rejected: true,
       missing_required_section_rejected: true
     }
   };

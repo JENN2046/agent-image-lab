@@ -2,6 +2,117 @@
 
 ## Entries
 
+## VALIDATION-20260507-RUNTIME-SESSION-CONTINUITY-QUALITY-CONTROL
+
+Task:
+
+```text
+Implement the next ordered Runtime Review Console batch: session export/import continuity, batch review actions, candidate risk tags, risk-grouped preauthorization output, and Chinese inspection checklist.
+```
+
+Commands run:
+
+```text
+node --check review_console\runtime_prototype\app.js
+node --check scripts\validate_runtime_prototype_smoke.js
+node --check scripts\validate_runtime_delivery_surface.js
+node scripts\validate_runtime_prototype_smoke.js
+node scripts\validate_runtime_delivery_surface.js
+node scripts\validate_runtime_prototype_suite.js
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+git diff --check
+```
+
+Result:
+
+```text
+completed_validated_local_runtime_prototype
+```
+
+Findings:
+
+```text
+runtime_session_export_draft exports runtime_review_session_v1 as draft_only with side_effects_performed=false.
+Import validation rejects dirty prototype_guard payloads and restores exported queue comments/state.
+Batch actions operate on selected candidates, append notes, and preserve existing human comments.
+High-risk tags prevent candidates from entering write_request / preauthorization eligibility.
+human_inspection_checklist_draft renders a Chinese inspection report and risk checklist.
+```
+
+Warnings:
+
+```text
+Git reported LF-to-CRLF working-copy warnings only.
+```
+
+Not validated:
+
+```text
+No real VCPChat read, real VCPToolBox read, real manifest read, plugin call, API call, DailyNote call, VCP memory write, image creation, submitDraft, push, tag, release, or PR was performed.
+```
+
+Notes:
+
+```text
+This is a local A4.5 runtime prototype batch, not an A5 authorization or production integration.
+```
+
+## VALIDATION-20260507-RUNTIME-BATCH-PREAUTHORIZATION-REVIEW
+
+Task:
+
+```text
+Strengthen the Runtime Review Console so multi-candidate human review behaves like a real review desk: candidate-level preauthorization state, batch decision draft, batch filter shortcuts, and a draft-only A5 preauthorization review package.
+```
+
+Commands run:
+
+```text
+node --check review_console\runtime_prototype\app.js
+node --check scripts\validate_runtime_prototype_smoke.js
+node --check scripts\validate_runtime_delivery_surface.js
+node scripts\validate_runtime_prototype_smoke.js
+node scripts\validate_runtime_delivery_surface.js
+git diff --check
+node scripts\validate_runtime_prototype_suite.js
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+```
+
+Result:
+
+```text
+completed_validated_local_runtime_prototype
+```
+
+Findings:
+
+```text
+Every review_queue item now exposes candidate_review_state and preauthorization_status.
+batch_decision_draft is draft_only and initially reports partial_authorizable for the mixed queue.
+a5_preauthorization_review_package_draft is draft_only, includes forbidden_operations_cn, and states that it does not constitute authorization.
+Runtime smoke confirms authorizable / blocked / next-attention shortcuts and independent candidate draft state after edits.
+```
+
+Warnings:
+
+```text
+scripts/validate-agent-image-lab-local.ps1 passed with manual-review warnings only for known repository scan terms.
+Git reported LF-to-CRLF working-copy warnings only.
+```
+
+Not validated:
+
+```text
+No real VCPChat read, real VCPToolBox read, real manifest read, plugin call, API call, DailyNote call, VCP memory write, image creation, submitDraft, push, tag, release, or PR was performed.
+```
+
+Notes:
+
+```text
+This is a local A4.5 runtime prototype batch, not an A5 authorization.
+```
+
 ## VALIDATION-20260507-V10-28-DAILYNOTE-CANONICAL-LOCATION-GUARD
 
 Task:
@@ -3094,6 +3205,57 @@ Notes:
 
 ```text
 The next deeper diagnostic would require a new explicit provider-side echo or sanitized request capture authorization.
+```
+
+## VALIDATION-20260507-runtime-usability-controls
+
+Task:
+
+```text
+Validate Runtime Review Console queue search/sort, undo history, session fingerprint, import preview, status glossary, compact queue cards, and stronger side-surface guards.
+```
+
+Commands run:
+
+```text
+node --check review_console\runtime_prototype\app.js
+node --check review_console\runtime_prototype\runtime_guard.js
+node --check scripts\validate_runtime_guard_unit.js
+node --check scripts\validate_runtime_prototype_smoke.js
+node --check scripts\validate_runtime_delivery_surface.js
+node scripts\validate_runtime_guard_unit.js
+node scripts\validate_runtime_prototype_smoke.js
+node scripts\validate_runtime_delivery_surface.js
+node scripts\validate_runtime_prototype_suite.js
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+git diff --check
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+Runtime smoke verifies search/sort, undo restore, import preview, fingerprint rejection, session restore, batch actions, and guard-clean host acceptance.
+Runtime guard unit rejects dirty batch side-surface guard and runtime export side-effect markers.
+Runtime delivery surface exposes the new DOM IDs.
+```
+
+Warnings:
+
+```text
+validate-agent-image-lab-local.ps1 passed with manual-review warnings only for existing negative/checklist terms such as API key, .png, .jpg, .ps1, and token.
+```
+
+Not validated:
+
+```text
+No real VCPChat/VCPToolBox read, plugin/API/DailyNote/VCP memory/image action, executable adapter entrypoint, push, tag, release, PR, or external write was performed.
 ```
 
 ## Recommended Commands

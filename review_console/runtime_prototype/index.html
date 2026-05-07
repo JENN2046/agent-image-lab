@@ -3,26 +3,207 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Agent Image Lab Review Console Runtime Prototype</title>
+    <title>Agent Image Lab 图像评审台运行原型</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <div class="boundary-banner" id="boundaryBanner">安全边界：只生成本地草案，没有真实写入，没有插件或 API 调用。</div>
     <main class="shell">
       <section class="panel">
         <header>
-          <p class="eyebrow">Runtime Prototype</p>
-          <h1>Review Console</h1>
+          <p class="eyebrow">运行原型</p>
+          <h1>图像评审台</h1>
         </header>
         <dl class="meta">
-          <div><dt>Task</dt><dd id="taskId">-</dd></div>
-          <div><dt>Case</dt><dd id="caseId">-</dd></div>
-          <div><dt>Asset</dt><dd id="assetRef">-</dd></div>
+          <div><dt>任务</dt><dd id="taskId">-</dd></div>
+          <div><dt>案例</dt><dd id="caseId">-</dd></div>
+          <div><dt>资产引用</dt><dd id="assetRef">-</dd></div>
         </dl>
+        <div class="version-grid">
+          <label class="field">
+            <span>当前版本</span>
+            <select id="versionPicker">
+              <option value="v2">v1.1 修订候选图</option>
+              <option value="v1">v1.0 参考候选图</option>
+              <option value="v3">v1.2 风险复查图</option>
+              <option value="v4">v1.3 草稿探索图</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>对比版本</span>
+            <select id="comparePicker">
+              <option value="v1">v1.0 参考候选图</option>
+              <option value="">不对比</option>
+              <option value="v2">v1.1 修订候选图</option>
+              <option value="v3">v1.2 风险复查图</option>
+              <option value="v4">v1.3 草稿探索图</option>
+            </select>
+          </label>
+        </div>
         <div class="asset-box" id="assetBox"></div>
+        <p class="comparison-summary" id="comparisonSummary"></p>
+        <div class="diff-grid">
+          <label class="field">
+            <span>改进点</span>
+            <textarea id="diffStrengths" rows="3">主体构图更稳定，整体可读性更好。</textarea>
+          </label>
+          <label class="field">
+            <span>风险点</span>
+            <textarea id="diffIssues" rows="3">细节噪点仍需保留人工判断。</textarea>
+          </label>
+          <label class="field">
+            <span>下一步</span>
+            <textarea id="diffNext" rows="3">若进入正式归档，需要确认记忆写入申请。</textarea>
+          </label>
+        </div>
+      </section>
+
+      <section class="panel queue-panel">
+        <div class="panel-title-row">
+          <h2>候选队列</h2>
+          <div class="queue-controls">
+            <label class="compact-field">
+              <span>状态筛选</span>
+              <select id="queueFilter">
+                <option value="all">全部</option>
+                <option value="human_reviewing">待评审</option>
+                <option value="candidate">候选</option>
+                <option value="accepted">可接受</option>
+                <option value="rejected">已拒收</option>
+                <option value="draft">草稿</option>
+                <option value="write_request">写入申请</option>
+                <option value="blocked">阻塞项</option>
+                <option value="next_attention">下一步处理</option>
+              </select>
+            </label>
+            <label class="compact-field">
+              <span>搜索</span>
+              <input id="queueSearch" type="search" placeholder="标题、评论、风险" />
+            </label>
+            <label class="compact-field">
+              <span>排序</span>
+              <select id="queueSort">
+                <option value="default">默认顺序</option>
+                <option value="authorizable">可授权优先</option>
+                <option value="risk">风险优先</option>
+                <option value="status">状态优先</option>
+                <option value="score_desc">评分从高到低</option>
+                <option value="score_asc">评分从低到高</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <dl class="meta queue-stats">
+          <div><dt>总数</dt><dd id="queueTotal">-</dd></div>
+          <div><dt>当前显示</dt><dd id="queueVisible">-</dd></div>
+          <div><dt>进度</dt><dd id="queueProgress">-</dd></div>
+          <div><dt>正在评审</dt><dd id="queueSelected">-</dd></div>
+        </dl>
+        <div class="queue-actions">
+          <button id="queuePrev" type="button">上一张</button>
+          <button id="queueNext" type="button">下一张</button>
+        </div>
+        <div class="batch-filter-actions">
+          <button id="batchShowAuthorizable" type="button">可授权</button>
+          <button id="batchShowBlocked" type="button">阻塞</button>
+          <button id="batchShowNext" type="button">待处理</button>
+        </div>
+        <div class="batch-selection-actions">
+          <button id="batchSelectVisible" type="button">选择当前显示</button>
+          <button id="batchClearSelection" type="button">清空选择</button>
+          <button id="batchMarkReview" type="button">标记复查</button>
+          <button id="batchMarkBlocked" type="button">标记阻塞</button>
+          <button id="batchMarkNoMemory" type="button">暂不入记忆</button>
+        </div>
+        <div class="history-actions">
+          <button id="undoLastAction" type="button">撤销上一步</button>
+        </div>
+        <dl class="meta queue-stats">
+          <div><dt>已选择</dt><dd id="batchSelectedCount">-</dd></div>
+          <div><dt>批量状态</dt><dd id="batchOperationStatus">-</dd></div>
+          <div><dt>历史</dt><dd id="historyCount">-</dd></div>
+          <div><dt>撤销状态</dt><dd id="historyStatus">-</dd></div>
+        </dl>
+        <div class="queue-list" id="queueList"></div>
+      </section>
+
+      <section class="panel batch-panel">
+        <h2>批量交接摘要</h2>
+        <dl class="meta batch-stats">
+          <div><dt>总数</dt><dd id="batchTotal">-</dd></div>
+          <div><dt>可接受</dt><dd id="batchAccepted">-</dd></div>
+          <div><dt>待评审</dt><dd id="batchPending">-</dd></div>
+          <div><dt>写入申请</dt><dd id="batchWriteRequests">-</dd></div>
+          <div><dt>阻塞项</dt><dd id="batchBlocked">-</dd></div>
+        </dl>
+        <p id="batchSummary"></p>
+        <div class="batch-grid">
+          <div>
+            <h3>可进入后续授权</h3>
+            <ul id="batchWriteItems"></ul>
+          </div>
+          <div>
+            <h3>下一步处理</h3>
+            <ul id="batchNextItems"></ul>
+          </div>
+          <div>
+            <h3>阻塞项</h3>
+            <ul id="batchBlockedItems"></ul>
+          </div>
+        </div>
+        <h3>批量预检</h3>
+        <ul class="checklist" id="batchPreflightItems"></ul>
+        <h3>中文验货报告草案</h3>
+        <pre id="batchReport"></pre>
+      </section>
+
+      <section class="panel preauth-panel">
+        <h2>A5 授权前复核草案</h2>
+        <dl class="meta">
+          <div><dt>批量结论</dt><dd id="batchDecisionStatus">-</dd></div>
+          <div><dt>草案状态</dt><dd id="preauthPackageStatus">-</dd></div>
+        </dl>
+        <p id="batchDecisionReason"></p>
+        <div class="preauth-grid">
+          <div>
+            <h3>候选项</h3>
+            <ul id="preauthPackageItems"></ul>
+          </div>
+          <div>
+            <h3>禁止动作</h3>
+            <ul id="preauthPackageForbidden"></ul>
+          </div>
+        </div>
+        <h3>人工复核包</h3>
+        <pre id="preauthPackageText"></pre>
+      </section>
+
+      <section class="panel session-panel">
+        <h2>复核会话续航</h2>
+        <dl class="meta">
+          <div><dt>状态</dt><dd id="sessionTransferStatus">-</dd></div>
+          <div><dt>候选数</dt><dd id="sessionTransferCount">-</dd></div>
+          <div><dt>安全检查</dt><dd id="sessionTransferGuard">-</dd></div>
+          <div><dt>会话指纹</dt><dd id="sessionFingerprint">-</dd></div>
+        </dl>
+        <label class="field">
+          <span>导出 / 导入草案 JSON</span>
+          <textarea id="sessionTransferText" rows="8"></textarea>
+        </label>
+        <div class="session-actions">
+          <button id="exportSessionDraft" type="button">导出草案</button>
+          <button id="validateImportDraft" type="button">校验导入</button>
+          <button id="applyImportDraft" type="button">恢复会话</button>
+        </div>
+        <div class="import-preview">
+          <h3>导入预览</h3>
+          <p id="importPreviewStatus">尚未生成导入预览。</p>
+          <ul id="importPreviewItems"></ul>
+        </div>
       </section>
 
       <section class="panel">
-        <h2>Human Review</h2>
+        <h2>人工评审</h2>
         <label class="field">
           <span>人工评分</span>
           <input id="humanScore" type="range" min="0" max="100" value="84" />
@@ -33,21 +214,44 @@
           <textarea id="humanComment" rows="5">人工评审确认该版本可作为候选，但仍需保留已知视觉偏差说明。</textarea>
         </label>
         <label class="field">
+          <span>标注备注</span>
+          <textarea id="annotationNote" rows="3">对比参考版本后，当前版本的主体构图更稳定，仍需留意细节噪点。</textarea>
+        </label>
+        <div class="template-actions">
+          <button id="tplComposition" type="button">构图稳定</button>
+          <button id="tplDetailNoise" type="button">细节噪点</button>
+          <button id="tplTextArtifact" type="button">疑似文字伪影</button>
+          <button id="tplNeedsRetry" type="button">需要重跑</button>
+          <button id="tplCandidateNoMemory" type="button">候选但暂不入记忆</button>
+        </div>
+        <div class="risk-tags">
+          <label class="check"><input id="riskTextArtifact" type="checkbox" /><span>文字伪影</span></label>
+          <label class="check"><input id="riskPersonFace" type="checkbox" /><span>人物/人脸风险</span></label>
+          <label class="check"><input id="riskCompositionShift" type="checkbox" /><span>构图偏移</span></label>
+          <label class="check"><input id="riskBrandMark" type="checkbox" /><span>品牌/标记风险</span></label>
+          <label class="check"><input id="riskMemoryUnsuitable" type="checkbox" /><span>不适合入记忆</span></label>
+        </div>
+        <label class="field">
           <span>资产状态</span>
           <select id="assetStatus">
-            <option value="candidate">candidate</option>
-            <option value="rejected">rejected</option>
-            <option value="draft">draft</option>
+            <option value="candidate">候选</option>
+            <option value="rejected">拒收</option>
+            <option value="draft">草稿</option>
           </select>
         </label>
+        <div class="quick-actions">
+          <button id="quickCandidate" type="button">设为候选</button>
+          <button id="quickAccept" type="button">确认可接受</button>
+          <button id="quickReject" type="button">拒收</button>
+        </div>
         <label class="check">
           <input id="humanApproved" type="checkbox" />
-          <span>人工正式批准 accepted</span>
+          <span>我确认这张图可接受</span>
         </label>
       </section>
 
       <section class="panel">
-        <h2>Memory Preview</h2>
+        <h2>记忆预览</h2>
         <label class="field">
           <span>中文记忆正文</span>
           <textarea id="memoryContent" rows="6">本次评审保留 Photo Studio OS 真实闭环经验：资产可作为项目推进候选，但必须记录人工覆盖接受和已知视觉偏差。</textarea>
@@ -55,24 +259,134 @@
         <label class="field">
           <span>记忆审批</span>
           <select id="memoryApproval">
-            <option value="pending">pending</option>
-            <option value="approved">approved</option>
-            <option value="rejected">rejected</option>
+            <option value="pending">待审批</option>
+            <option value="approved">批准写入申请</option>
+            <option value="rejected">拒绝写入申请</option>
           </select>
         </label>
+        <div class="memory-request-preview">
+          <h3>写入申请预览</h3>
+          <dl class="meta">
+            <div><dt>标题</dt><dd id="memoryPreviewTitle">-</dd></div>
+            <div><dt>目标</dt><dd id="memoryPreviewTarget">-</dd></div>
+            <div><dt>状态</dt><dd id="memoryPreviewDecision">-</dd></div>
+          </dl>
+          <p id="memoryPreviewBody"></p>
+        </div>
       </section>
 
       <section class="panel">
-        <h2>Host Ack</h2>
+        <h2>主程序回执</h2>
         <dl class="meta">
-          <div><dt>Status</dt><dd id="hostStatus">waiting</dd></div>
-          <div><dt>Last Submit</dt><dd id="hostSubmittedAt">-</dd></div>
+          <div><dt>状态</dt><dd id="hostStatus">等待中</dd></div>
+          <div><dt>最近提交</dt><dd id="hostSubmittedAt">-</dd></div>
         </dl>
       </section>
 
+      <section class="panel summary-panel">
+        <h2>中文摘要</h2>
+        <div class="verdict-card">
+          <strong id="verdictTitle">-</strong>
+          <ul id="verdictReasons"></ul>
+        </div>
+        <dl class="meta">
+          <div><dt>评审状态</dt><dd id="summarySessionStatus">-</dd></div>
+          <div><dt>资产结论</dt><dd id="summaryAssetStatus">-</dd></div>
+          <div><dt>评分解读</dt><dd id="summaryScoreBand">-</dd></div>
+          <div><dt>记忆状态</dt><dd id="summaryMemoryStatus">-</dd></div>
+          <div><dt>写入申请</dt><dd id="summaryWriteRequest">-</dd></div>
+          <div><dt>安全边界</dt><dd id="summaryGuard">-</dd></div>
+          <div><dt>下一步建议</dt><dd id="summaryNextAction">-</dd></div>
+        </dl>
+      </section>
+
+      <section class="panel quality-panel">
+        <h2>中文验货清单</h2>
+        <strong id="inspectionVerdict">-</strong>
+        <ul class="checklist" id="inspectionChecklist"></ul>
+        <h3>风险统计</h3>
+        <pre id="inspectionRiskStats"></pre>
+        <h3>风险分组</h3>
+        <ul id="inspectionRiskGroups"></ul>
+        <h3>验货报告</h3>
+        <pre id="inspectionReport"></pre>
+      </section>
+
+      <section class="panel glossary-panel">
+        <h2>状态说明</h2>
+        <ul id="statusGlossaryList"></ul>
+      </section>
+
+      <section class="panel checklist-panel">
+        <h2>评审前检查</h2>
+        <ul class="checklist">
+          <li id="checkHumanComment">-</li>
+          <li id="checkMemoryContent">-</li>
+          <li id="checkHumanDecision">-</li>
+          <li id="checkGuard">-</li>
+          <li id="checkWriteBoundary">-</li>
+        </ul>
+      </section>
+
+      <section class="panel handoff-panel">
+        <h2>Adapter 安全摘要</h2>
+        <dl class="meta">
+          <div><dt>交接状态</dt><dd id="handoffStatus">-</dd></div>
+          <div><dt>执行状态</dt><dd id="handoffExecution">-</dd></div>
+          <div><dt>插件调用</dt><dd id="handoffPluginCalls">-</dd></div>
+        </dl>
+        <p id="handoffSummary"></p>
+        <div class="handoff-grid">
+          <div>
+            <h3>允许</h3>
+            <ul id="handoffAllowed"></ul>
+          </div>
+          <div>
+            <h3>禁止</h3>
+            <ul id="handoffForbidden"></ul>
+          </div>
+        </div>
+      </section>
+
       <section class="panel output-panel">
-        <h2>Draft Output</h2>
-        <pre id="draftOutput"></pre>
+        <div class="panel-title-row">
+          <h2>草案视图</h2>
+          <div class="view-switch">
+            <button id="viewReadable" type="button" data-active="true">中文草案</button>
+            <button id="viewTechnical" type="button" data-active="false">技术草案</button>
+          </div>
+        </div>
+        <div id="readableDraft" class="readable-draft-cards">
+          <article>
+            <h3>评审草案</h3>
+            <dl class="meta">
+              <div><dt>状态</dt><dd id="reviewCardStatus">-</dd></div>
+              <div><dt>评分</dt><dd id="reviewCardScore">-</dd></div>
+              <div><dt>结论</dt><dd id="reviewCardVerdict">-</dd></div>
+            </dl>
+            <p id="reviewCardComment"></p>
+          </article>
+          <article>
+            <h3>资产归档草案</h3>
+            <dl class="meta">
+              <div><dt>资产结论</dt><dd id="assetCardStatus">-</dd></div>
+              <div><dt>当前版本</dt><dd id="assetCardVersion">-</dd></div>
+              <div><dt>下一步</dt><dd id="assetCardNext">-</dd></div>
+            </dl>
+            <p id="assetCardDiff"></p>
+          </article>
+          <article>
+            <h3>记忆申请草案</h3>
+            <dl class="meta">
+              <div><dt>标题</dt><dd id="memoryCardTitle">-</dd></div>
+              <div><dt>目标</dt><dd id="memoryCardTarget">-</dd></div>
+              <div><dt>状态</dt><dd id="memoryCardDecision">-</dd></div>
+            </dl>
+            <p id="memoryCardBody"></p>
+            <p id="memoryCardBoundary"></p>
+          </article>
+        </div>
+        <pre id="draftOutput" hidden></pre>
       </section>
     </main>
     <script src="./runtime_guard.js"></script>

@@ -11,7 +11,28 @@ class FakeElement {
     this.textContent = initial.textContent || "";
     this.value = initial.value || "";
     this.checked = Boolean(initial.checked);
+    this.dataset = {};
+    this.children = [];
+    this._innerHTML = "";
     this.listeners = new Map();
+  }
+
+  set innerHTML(value) {
+    this._innerHTML = String(value);
+    if (value === "") {
+      this.children = [];
+      this.textContent = "";
+    }
+  }
+
+  get innerHTML() {
+    return this._innerHTML;
+  }
+
+  appendChild(child) {
+    this.children.push(child);
+    this.textContent = this.children.map((item) => item.textContent).join("\n");
+    return child;
   }
 
   addEventListener(type, listener) {
@@ -40,15 +61,132 @@ function createRuntimeContext() {
   add("caseId");
   add("assetRef");
   add("assetBox");
+  add("boundaryBanner");
+  add("versionPicker", { value: "v2" });
+  add("comparePicker", { value: "v1" });
+  add("comparisonSummary");
+  add("queueFilter", { value: "all" });
+  add("queueSearch", { value: "" });
+  add("queueSort", { value: "default" });
+  add("queueTotal");
+  add("queueVisible");
+  add("queueProgress");
+  add("queueSelected");
+  add("queuePrev");
+  add("queueNext");
+  add("batchShowAuthorizable");
+  add("batchShowBlocked");
+  add("batchShowNext");
+  add("batchSelectVisible");
+  add("batchClearSelection");
+  add("batchMarkReview");
+  add("batchMarkBlocked");
+  add("batchMarkNoMemory");
+  add("batchSelectedCount");
+  add("batchOperationStatus");
+  add("undoLastAction");
+  add("historyStatus");
+  add("historyCount");
+  add("queueList");
+  add("batchTotal");
+  add("batchAccepted");
+  add("batchPending");
+  add("batchWriteRequests");
+  add("batchBlocked");
+  add("batchSummary");
+  add("batchWriteItems");
+  add("batchNextItems");
+  add("batchBlockedItems");
+  add("batchPreflightItems");
+  add("batchReport");
+  add("batchDecisionStatus");
+  add("batchDecisionReason");
+  add("preauthPackageStatus");
+  add("preauthPackageItems");
+  add("preauthPackageForbidden");
+  add("preauthPackageText");
+  add("sessionTransferStatus");
+  add("sessionTransferCount");
+  add("sessionTransferGuard");
+  add("sessionFingerprint");
+  add("sessionTransferText");
+  add("importPreviewStatus");
+  add("importPreviewItems");
+  add("exportSessionDraft");
+  add("validateImportDraft");
+  add("applyImportDraft");
+  add("diffStrengths", { value: "主体构图更稳定，整体可读性更好。" });
+  add("diffIssues", { value: "细节噪点仍需保留人工判断。" });
+  add("diffNext", { value: "若进入正式归档，需要确认记忆写入申请。" });
   add("humanScore", { value: "84" });
   add("humanScoreOut", { textContent: "84" });
   add("humanComment", { value: "人工评审确认该版本可作为候选，但仍需保留已知视觉偏差说明。" });
+  add("annotationNote", { value: "对比参考版本后，当前版本的主体构图更稳定，仍需留意细节噪点。" });
+  add("tplComposition");
+  add("tplDetailNoise");
+  add("tplTextArtifact");
+  add("tplNeedsRetry");
+  add("tplCandidateNoMemory");
+  add("riskTextArtifact");
+  add("riskPersonFace");
+  add("riskCompositionShift");
+  add("riskBrandMark");
+  add("riskMemoryUnsuitable");
   add("assetStatus", { value: "candidate" });
+  add("quickCandidate");
+  add("quickAccept");
+  add("quickReject");
   add("humanApproved", { checked: false });
   add("memoryContent", { value: "本次评审保留 Photo Studio OS 真实闭环经验：资产可作为项目推进候选，但必须记录人工覆盖接受和已知视觉偏差。" });
   add("memoryApproval", { value: "pending" });
-  add("hostStatus", { textContent: "waiting" });
+  add("memoryPreviewTitle");
+  add("memoryPreviewTarget");
+  add("memoryPreviewDecision");
+  add("memoryPreviewBody");
+  add("hostStatus", { textContent: "等待中" });
   add("hostSubmittedAt", { textContent: "-" });
+  add("verdictTitle");
+  add("verdictReasons");
+  add("summarySessionStatus");
+  add("summaryAssetStatus");
+  add("summaryScoreBand");
+  add("summaryMemoryStatus");
+  add("summaryWriteRequest");
+  add("summaryGuard");
+  add("summaryNextAction");
+  add("inspectionVerdict");
+  add("inspectionChecklist");
+  add("inspectionRiskStats");
+  add("inspectionRiskGroups");
+  add("inspectionReport");
+  add("statusGlossaryList");
+  add("checkHumanComment");
+  add("checkMemoryContent");
+  add("checkHumanDecision");
+  add("checkGuard");
+  add("checkWriteBoundary");
+  add("handoffStatus");
+  add("handoffExecution");
+  add("handoffPluginCalls");
+  add("handoffSummary");
+  add("handoffAllowed");
+  add("handoffForbidden");
+  add("viewReadable");
+  add("viewTechnical");
+  add("readableDraft");
+  add("reviewCardStatus");
+  add("reviewCardScore");
+  add("reviewCardVerdict");
+  add("reviewCardComment");
+  add("assetCardStatus");
+  add("assetCardVersion");
+  add("assetCardNext");
+  add("assetCardDiff");
+  add("memoryCardTitle");
+  add("memoryCardTarget");
+  add("memoryCardDecision");
+  add("memoryCardBody");
+  add("memoryCardBoundary");
   add("draftOutput");
 
   const context = {
@@ -59,6 +197,9 @@ function createRuntimeContext() {
           throw new Error(`Missing fake DOM element: ${id}`);
         }
         return elements.get(id);
+      },
+      createElement(tagName) {
+        return new FakeElement(tagName);
       }
     },
     Event: class Event {
@@ -104,7 +245,15 @@ function assertExpectedScriptOrder(scriptOrder) {
 }
 
 function assertRuntimeGuardApi(runtimeGuard) {
-  const requiredMethods = ["clone", "normalizeSession", "guardIsClean", "draftIsSafe", "assertDraftSafe"];
+  const requiredMethods = [
+    "clone",
+    "normalizeSession",
+    "guardIsClean",
+    "guardsAreClean",
+    "draftSideSurfacesAreSafe",
+    "draftIsSafe",
+    "assertDraftSafe"
+  ];
   assert(runtimeGuard && typeof runtimeGuard.cleanGuard === "object", "Runtime guard must expose cleanGuard.");
   for (const method of requiredMethods) {
     assert(typeof runtimeGuard[method] === "function", `Runtime guard must expose ${method}().`);
@@ -125,6 +274,14 @@ function dispatchChange(elements, id) {
   elements.get(id).dispatchEvent({ type: "change" });
 }
 
+function dispatchClick(elements, id) {
+  elements.get(id).dispatchEvent({ type: "click" });
+}
+
+function dispatchElementClick(element) {
+  element.dispatchEvent({ type: "click" });
+}
+
 function main() {
   const { context, elements } = createRuntimeContext();
   const scriptOrder = readIndexScriptOrder();
@@ -138,24 +295,394 @@ function main() {
   const initialDraft = parseDraft(elements);
   assert(elements.get("hostStatus").textContent.includes("已接收安全草案"), "Initial host ack must be accepted.");
   assert(elements.get("hostSubmittedAt").textContent !== "-", "Initial host submit timestamp must be present.");
+  assert(elements.get("boundaryBanner").textContent.includes("没有真实写入"), "Boundary banner must show no real write.");
+  assert(elements.get("reviewCardStatus").textContent === "人工评审中", "Review card must show Chinese review status.");
+  assert(elements.get("assetCardStatus").textContent === "候选", "Asset card must show Chinese asset status.");
+  assert(elements.get("memoryCardDecision").textContent === "未形成写入申请", "Memory card must show no write request.");
+  assert(elements.get("draftOutput").hidden === true, "Technical draft must be hidden by default.");
+  assert(elements.get("handoffStatus").textContent === "仅草案交接", "Handoff status must render.");
+  assert(elements.get("handoffExecution").textContent === "已阻止真实执行", "Handoff execution block must render.");
+  assert(initialDraft.adapter_dry_run_handoff_draft.execution_blocked === true, "Adapter handoff draft must block execution.");
+  assert(initialDraft.adapter_dry_run_handoff_draft.max_plugin_calls === 0, "Adapter handoff draft must allow zero plugin calls.");
+  assert(initialDraft.adapter_dry_run_handoff_draft.forbidden_actions_cn.includes("调用插件"), "Adapter handoff must forbid plugin calls.");
   assert(initialDraft.image_case_draft.asset_status === "candidate", "Initial asset status must be candidate.");
+  assert(elements.get("summarySessionStatus").textContent === "人工评审中", "Initial summary must show Chinese review status.");
+  assert(elements.get("summaryAssetStatus").textContent === "候选", "Initial summary must show Chinese asset status.");
+  assert(elements.get("summaryScoreBand").textContent === "可推进候选", "Initial summary must show score band.");
+  assert(elements.get("verdictTitle").textContent === "可以作为候选继续评审", "Initial verdict must be candidate-friendly.");
+  assert(initialDraft.review_session_draft.acceptance_verdict.status_cn === "可以作为候选继续评审", "Initial draft must include acceptance verdict.");
+  assert(elements.get("summaryMemoryStatus").textContent === "待审批", "Initial summary must show Chinese memory status.");
+  assert(elements.get("summaryWriteRequest").textContent === "未形成写入申请", "Initial summary must show no write request.");
+  assert(elements.get("summaryGuard").textContent === "无外部副作用", "Initial summary must show clean guard.");
+  assert(elements.get("summaryNextAction").textContent === "继续人工确认或补充标注", "Initial summary must show next action.");
+  assert(initialDraft.review_session_draft.review_preflight.human_comment_present === true, "Initial preflight must record human comment presence.");
+  assert(initialDraft.review_session_draft.review_preflight.chinese_memory_content_detected === true, "Initial preflight must detect Chinese memory content.");
+  assert(initialDraft.review_session_draft.review_preflight.real_write_performed === false, "Initial preflight must record no real write.");
+  assert(initialDraft.review_session_draft.version_comparison.strengths_cn.includes("主体构图"), "Version strengths must enter the draft.");
+  assert(initialDraft.review_session_draft.version_comparison.issues_cn.includes("细节噪点"), "Version issues must enter the draft.");
+  assert(initialDraft.review_session_draft.version_comparison.next_step_cn.includes("写入申请"), "Version next step must enter the draft.");
+  assert(elements.get("memoryPreviewTitle").textContent.length > 0, "Memory preview title must render.");
+  assert(elements.get("memoryPreviewDecision").textContent === "未形成写入申请", "Memory preview must show no write request initially.");
+  assert(elements.get("checkHumanComment").dataset.state === "ok", "Human comment checklist must pass initially.");
+  assert(elements.get("checkMemoryContent").dataset.state === "ok", "Memory content checklist must pass initially.");
+  assert(elements.get("checkWriteBoundary").dataset.state === "ok", "Write boundary checklist must pass initially.");
+  assert(initialDraft.review_session_draft.current_version_id === "v2", "Initial current version must be v2.");
+  assert(initialDraft.review_session_draft.compare_version_id === "v1", "Initial compare version must be v1.");
+  assert(initialDraft.review_session_draft.selected_queue_id === "queue-v2", "Initial selected queue id must be queue-v2.");
+  assert(initialDraft.review_session_draft.review_queue.length === 4, "Initial review queue must contain four candidates.");
+  assert(
+    initialDraft.review_session_draft.review_queue.every((item) => item.draft_state && item.draft_state.version_id),
+    "Every queue item must expose an independent draft_state."
+  );
+  assert(
+    initialDraft.review_session_draft.review_queue.every((item) => item.candidate_review_state && item.preauthorization_status),
+    "Every queue item must expose candidate review state and preauthorization status."
+  );
+  assert(elements.get("queueTotal").textContent === "4", "Queue total must render.");
+  assert(elements.get("queueVisible").textContent === "4", "Queue visible count must render all candidates initially.");
+  assert(elements.get("queueProgress").textContent === "1 / 4", "Queue progress must render initial position.");
+  assert(elements.get("queueSelected").textContent === "v1.1 修订候选图", "Queue selected label must render.");
+  assert(elements.get("queuePrev").disabled === true, "Initial queue previous button must be disabled at the first item.");
+  assert(elements.get("queueNext").disabled === false, "Initial queue next button must be enabled.");
+  assert(elements.get("queueList").children.length === 4, "Queue list must render four candidate buttons.");
+  assert(elements.get("historyCount").textContent === "0 步", "Initial undo history must be empty.");
+  assert(elements.get("historyStatus").textContent.includes("尚未产生"), "Initial history status must be readable.");
+  assert(elements.get("statusGlossaryList").children.length >= 6, "Status glossary must render Chinese explanations.");
+  assert(
+    initialDraft.runtime_session_export_draft.session_fingerprint.startsWith("fnv1a32:"),
+    "Initial runtime session export must include a stable fingerprint."
+  );
+  assert(
+    elements.get("sessionFingerprint").textContent === initialDraft.runtime_session_export_draft.session_fingerprint,
+    "Session fingerprint must render in the transfer panel."
+  );
+  elements.get("queueSearch").value = "风险复查图";
+  dispatchChange(elements, "queueSearch");
+  assert(elements.get("queueVisible").textContent === "1", "Queue search must filter to one matching candidate.");
+  assert(elements.get("queueList").children[0].dataset.queueId === "queue-v3", "Queue search must find queue-v3 by Chinese title.");
+  elements.get("queueSearch").value = "";
+  dispatchChange(elements, "queueSearch");
+  elements.get("queueSort").value = "score_desc";
+  dispatchChange(elements, "queueSort");
+  assert(elements.get("queueList").children[0].dataset.queueId === "queue-v2", "Score-desc sort must place the highest score first.");
+  elements.get("queueSort").value = "score_asc";
+  dispatchChange(elements, "queueSort");
+  assert(elements.get("queueList").children[0].dataset.queueId === "queue-v3", "Score-asc sort must place the lowest score first.");
+  elements.get("queueSort").value = "default";
+  dispatchChange(elements, "queueSort");
+  elements.get("humanComment").value = "撤销测试评论：这句话应被撤销。";
+  dispatchChange(elements, "humanComment");
+  assert(parseDraft(elements).review_session_draft.human_review.note_cn.includes("撤销测试评论"), "Edited comment must enter draft before undo.");
+  dispatchClick(elements, "undoLastAction");
+  assert(!parseDraft(elements).review_session_draft.human_review.note_cn.includes("撤销测试评论"), "Undo must restore the previous comment draft.");
+  assert(elements.get("historyStatus").textContent.includes("已撤销"), "Undo status must explain the reverted action.");
+  assert(initialDraft.batch_review_summary_draft.counts.total_count === 4, "Batch summary must count four candidates.");
+  assert(initialDraft.batch_review_summary_draft.counts.accepted_count === 1, "Batch summary must count one accepted item initially.");
+  assert(initialDraft.batch_review_summary_draft.counts.human_reviewing_count === 2, "Batch summary must count two pending review items initially.");
+  assert(initialDraft.batch_review_summary_draft.counts.write_request_count === 1, "Batch summary must count one write request draft initially.");
+  assert(initialDraft.batch_review_summary_draft.counts.blocked_count === 2, "Batch summary must count rejected and draft blockers.");
+  assert(initialDraft.batch_review_summary_draft.write_request_items.length === 1, "Batch details must list one write request item initially.");
+  assert(initialDraft.batch_review_summary_draft.preflight.no_real_write === true, "Batch preflight must record no real write.");
+  assert(initialDraft.batch_review_summary_draft.preflight.no_execution_guard_clean === true, "Batch preflight must record clean guard.");
+  assert(initialDraft.batch_review_summary_draft.preflight.accepted_without_human_approval_count === 0, "Batch preflight must catch accepted items without approval.");
+  assert(initialDraft.batch_review_summary_draft.handoff_report_cn.includes("边界确认"), "Batch report must include boundary confirmation.");
+  assert(runtimeGuard.guardIsClean(initialDraft.batch_review_summary_draft.no_execution_guard), "Batch summary guard must remain clean.");
+  assert(initialDraft.batch_decision_draft.status === "draft_only", "Batch decision must be draft only.");
+  assert(initialDraft.batch_decision_draft.decision === "partial_authorizable", "Batch decision must allow partial preauthorization review initially.");
+  assert(initialDraft.batch_decision_draft.authorizable_items.length === 1, "Batch decision must list one authorizable item initially.");
+  assert(initialDraft.batch_decision_draft.blocked_items.length === 2, "Batch decision must list two blockers initially.");
+  assert(runtimeGuard.guardIsClean(initialDraft.batch_decision_draft.no_execution_guard), "Batch decision guard must remain clean.");
+  assert(
+    initialDraft.a5_preauthorization_review_package_draft.package_status === "draft_only",
+    "A5 preauthorization package must be draft only."
+  );
+  assert(
+    initialDraft.a5_preauthorization_review_package_draft.forbidden_operations_cn.includes("调用插件"),
+    "A5 preauthorization package must forbid plugin calls."
+  );
+  assert(
+    initialDraft.a5_preauthorization_review_package_draft.review_text_cn.includes("不构成授权"),
+    "A5 preauthorization package must state that it is not authorization."
+  );
+  assert(
+    runtimeGuard.guardIsClean(initialDraft.a5_preauthorization_review_package_draft.no_execution_guard),
+    "A5 preauthorization package guard must remain clean."
+  );
+  assert(initialDraft.risk_review_summary_draft.status === "clear", "Initial risk summary must be clear.");
+  assert(initialDraft.risk_review_summary_draft.total_risk_item_count === 0, "Initial risk summary must have zero risk items.");
+  assert(initialDraft.human_inspection_checklist_draft.status === "draft_only", "Inspection checklist must be draft only.");
+  assert(initialDraft.human_inspection_checklist_draft.report_cn.includes("验货结论"), "Inspection checklist must include Chinese report.");
+  assert(initialDraft.runtime_session_export_draft.export_format === "runtime_review_session_v1", "Runtime session export must expose v1 format.");
+  assert(initialDraft.runtime_session_export_draft.package_status === "draft_only", "Runtime session export must be draft only.");
+  assert(initialDraft.runtime_session_export_draft.side_effects_performed === false, "Runtime session export must declare no side effects.");
+  assert(runtimeGuard.guardIsClean(initialDraft.runtime_session_export_draft.prototype_guard), "Runtime session export guard must remain clean.");
+  assert(elements.get("batchTotal").textContent === "4", "Batch total must render.");
+  assert(elements.get("batchAccepted").textContent === "1", "Batch accepted count must render.");
+  assert(elements.get("batchPending").textContent === "2", "Batch pending count must render.");
+  assert(elements.get("batchWriteRequests").textContent === "1", "Batch write request count must render.");
+  assert(elements.get("batchBlocked").textContent === "2", "Batch blocked count must render.");
+  assert(elements.get("batchSummary").textContent.includes("0 个真实写入"), "Batch summary must show no real write.");
+  assert(elements.get("batchWriteItems").children.length === 1, "Batch write item details must render initially.");
+  assert(elements.get("batchNextItems").children.length === 2, "Batch next items must render pending queue items.");
+  assert(elements.get("batchBlockedItems").children.length === 2, "Batch blocked items must render blockers.");
+  assert(elements.get("batchPreflightItems").children.length === 5, "Batch preflight checklist must render.");
+  assert(elements.get("batchPreflightItems").children[0].dataset.state === "ok", "Batch preflight no-real-write item must pass.");
+  assert(elements.get("batchReport").textContent.includes("可进入后续授权"), "Batch report must render readable handoff text.");
+  assert(elements.get("batchDecisionStatus").textContent.includes("部分候选"), "Batch decision status must render.");
+  assert(elements.get("batchDecisionReason").textContent.includes("不构成 A5 授权"), "Batch decision reason must render boundary text.");
+  assert(elements.get("preauthPackageStatus").textContent === "仅授权前人工复核草案", "Preauthorization package status must render.");
+  assert(elements.get("preauthPackageItems").children.length === 1, "Preauthorization package item list must render initially.");
+  assert(elements.get("preauthPackageForbidden").children.length >= 5, "Preauthorization package forbidden list must render.");
+  assert(elements.get("preauthPackageText").textContent.includes("A5 授权前人工复核包草案"), "Preauthorization package text must render.");
+  assert(elements.get("inspectionVerdict").textContent.includes("阻塞"), "Inspection verdict must render Chinese batch status.");
+  assert(elements.get("inspectionChecklist").children.length === 5, "Inspection checklist must render five items.");
+  assert(elements.get("inspectionRiskStats").textContent.includes("风险候选"), "Inspection risk stats must render.");
+  assert(elements.get("inspectionRiskGroups").children.length === 1, "Inspection risk group empty state must render.");
+  assert(elements.get("sessionTransferStatus").textContent.includes("尚未"), "Session transfer status must render initial state.");
+  assert(elements.get("sessionTransferCount").textContent === "4 个候选", "Session transfer count must render current export count.");
+  assert(elements.get("sessionTransferGuard").textContent === "导出 guard 干净", "Session transfer guard must render clean state.");
+  assert(elements.get("batchSelectedCount").textContent === "0 个", "Batch selected count must start at zero.");
+  assert(elements.get("batchOperationStatus").textContent.includes("尚未"), "Batch operation status must render initial text.");
+  assert(initialDraft.review_session_draft.annotation_notes.length === 1, "Initial annotation note must be included.");
+  assert(
+    initialDraft.review_session_draft.version_comparison.summary_cn.includes("v1.1 修订候选图"),
+    "Initial comparison summary must name the current version."
+  );
   assert(initialDraft.image_case_draft.human_approval.approved === false, "Initial human approval must be false.");
   assert(initialDraft.memory_delta_draft.write_mode === "draft", "Initial memory write mode must be draft.");
   assert(initialDraft.memory_delta_draft.final_decision.should_write_to_vcp === false, "Initial memory write request must be false.");
   assert(runtimeGuard.guardIsClean(initialDraft.prototype_guard), "Initial prototype guard must be clean.");
 
+  dispatchClick(elements, "exportSessionDraft");
+  const exportedSessionPayload = JSON.parse(elements.get("sessionTransferText").value);
+  assert(exportedSessionPayload.export_format === "runtime_review_session_v1", "Export button must write session export JSON.");
+  assert(exportedSessionPayload.review_session_snapshot.review_queue.length === 4, "Exported session must include four candidates.");
+  assert(exportedSessionPayload.session_fingerprint.startsWith("fnv1a32:"), "Exported session must include a fingerprint.");
+  assert(
+    elements.get("sessionFingerprint").textContent === exportedSessionPayload.session_fingerprint,
+    "Exported fingerprint must render in the session panel."
+  );
+  assert(elements.get("sessionTransferStatus").textContent.includes("已导出"), "Export button must update session status.");
+  dispatchClick(elements, "validateImportDraft");
+  assert(elements.get("sessionTransferStatus").textContent.includes("校验通过"), "Import validation must accept the exported session.");
+  assert(elements.get("importPreviewStatus").textContent.includes("0 个候选会变化"), "Import preview must render unchanged exported session.");
+  const tamperedFingerprintPayload = runtimeGuard.clone(exportedSessionPayload);
+  tamperedFingerprintPayload.review_session_snapshot.review_queue[0].human_note_cn = "篡改后的评论但保留旧指纹。";
+  elements.get("sessionTransferText").value = JSON.stringify(tamperedFingerprintPayload);
+  dispatchClick(elements, "validateImportDraft");
+  assert(elements.get("sessionTransferStatus").textContent.includes("指纹不匹配"), "Import validation must reject a stale fingerprint.");
+  assert(elements.get("importPreviewStatus").textContent.includes("不可用"), "Import preview must stop when fingerprint validation fails.");
+  const dirtySessionPayload = runtimeGuard.clone(exportedSessionPayload);
+  dirtySessionPayload.prototype_guard.api_called = true;
+  elements.get("sessionTransferText").value = JSON.stringify(dirtySessionPayload);
+  dispatchClick(elements, "validateImportDraft");
+  assert(elements.get("sessionTransferStatus").textContent.includes("校验失败"), "Import validation must reject dirty guard.");
+  const dirtySessionGuardRejected = elements.get("sessionTransferStatus").textContent.includes("校验失败");
+  elements.get("sessionTransferText").value = JSON.stringify(exportedSessionPayload);
+  dispatchClick(elements, "applyImportDraft");
+  assert(elements.get("sessionTransferStatus").textContent.includes("已恢复"), "Apply import must restore the exported session.");
+  assert(parseDraft(elements).review_session_draft.selected_queue_id === "queue-v2", "Imported session must keep selected queue id.");
+
+  dispatchClick(elements, "batchShowAuthorizable");
+  assert(elements.get("queueFilter").value === "write_request", "Authorizable batch shortcut must select write-request filter.");
+  assert(elements.get("queueVisible").textContent === "1", "Authorizable batch shortcut must show one item initially.");
+  dispatchClick(elements, "batchShowBlocked");
+  assert(elements.get("queueFilter").value === "blocked", "Blocked batch shortcut must select blocked filter.");
+  assert(elements.get("queueVisible").textContent === "2", "Blocked batch shortcut must show two items initially.");
+  dispatchClick(elements, "batchShowNext");
+  assert(elements.get("queueFilter").value === "next_attention", "Next batch shortcut must select next-attention filter.");
+  assert(elements.get("queueVisible").textContent === "2", "Next batch shortcut must show two items initially.");
+  elements.get("queueFilter").value = "all";
+  dispatchChange(elements, "queueFilter");
+
+  elements.get("queueFilter").value = "write_request";
+  dispatchChange(elements, "queueFilter");
+  const writeRequestButtons = elements.get("queueList").children;
+  assert(elements.get("queueVisible").textContent === "1", "Write request filter must show one candidate initially.");
+  assert(writeRequestButtons.length === 1, "Write request filter must render one candidate button initially.");
+  assert(writeRequestButtons[0].dataset.queueId === "queue-v1", "Write request filter must start with queue-v1.");
+  assert(writeRequestButtons[0].dataset.writeRequest === "true", "Write request queue card must expose write-request marker.");
+  assert(elements.get("queueProgress").textContent === "- / 1", "Write request filter must show active item outside filter initially.");
+  elements.get("queueFilter").value = "blocked";
+  dispatchChange(elements, "queueFilter");
+  const blockedQueueButtons = elements.get("queueList").children;
+  assert(elements.get("queueVisible").textContent === "2", "Blocked filter must show rejected and draft candidates.");
+  assert(blockedQueueButtons.length === 2, "Blocked filter must render two candidate buttons.");
+  assert(blockedQueueButtons.some((child) => child.dataset.queueId === "queue-v3"), "Blocked filter must include rejected item.");
+  assert(blockedQueueButtons.some((child) => child.dataset.queueId === "queue-v4"), "Blocked filter must include draft item.");
+  assert(blockedQueueButtons.every((child) => child.dataset.blocked === "true"), "Blocked queue cards must expose blocked marker.");
+  elements.get("queueFilter").value = "next_attention";
+  dispatchChange(elements, "queueFilter");
+  const nextAttentionButtons = elements.get("queueList").children;
+  assert(elements.get("queueVisible").textContent === "2", "Next-attention filter must show candidate and draft items.");
+  assert(nextAttentionButtons.length === 2, "Next-attention filter must render two candidate buttons.");
+  assert(nextAttentionButtons.some((child) => child.dataset.queueId === "queue-v2"), "Next-attention filter must include queue-v2.");
+  assert(nextAttentionButtons.some((child) => child.dataset.queueId === "queue-v4"), "Next-attention filter must include queue-v4.");
+  assert(nextAttentionButtons.every((child) => child.dataset.nextAttention === "true"), "Next-attention cards must expose next-attention marker.");
+  elements.get("queueFilter").value = "all";
+  dispatchChange(elements, "queueFilter");
+
+  elements.get("queueFilter").value = "rejected";
+  dispatchChange(elements, "queueFilter");
+  const rejectedQueueButtons = elements.get("queueList").children;
+  assert(elements.get("queueVisible").textContent === "1", "Rejected queue filter must show one candidate.");
+  assert(elements.get("queueProgress").textContent === "- / 1", "Filtered progress must show when active item is outside filter.");
+  assert(rejectedQueueButtons.length === 1, "Rejected queue filter must render one candidate button.");
+  assert(rejectedQueueButtons[0].textContent.includes("已拒收"), "Rejected queue button must show rejected status.");
+  dispatchElementClick(rejectedQueueButtons[0]);
+  const rejectedSelectionDraft = parseDraft(elements);
+  assert(rejectedSelectionDraft.review_session_draft.selected_queue_id === "queue-v3", "Queue click must select queue-v3.");
+  assert(rejectedSelectionDraft.review_session_draft.current_version_id === "v3", "Queue click must switch current version to v3.");
+  assert(rejectedSelectionDraft.image_case_draft.asset_status === "rejected", "Rejected queue item must load rejected asset status.");
+  assert(rejectedSelectionDraft.review_session_draft.queue_progress.active_index === 1, "Rejected selection progress must enter draft.");
+  assert(elements.get("queueProgress").textContent === "1 / 1", "Rejected selection must show filtered progress.");
+  assert(elements.get("queuePrev").disabled === true, "Previous button must be disabled for single filtered item.");
+  assert(elements.get("queueNext").disabled === true, "Next button must be disabled for single filtered item.");
+  assert(elements.get("queueSelected").textContent === "v1.2 风险复查图", "Queue selected label must update after click.");
+  elements.get("queueFilter").value = "all";
+  dispatchChange(elements, "queueFilter");
+  const queueV2Button = elements.get("queueList").children.find((child) => child.dataset.queueId === "queue-v2");
+  assert(queueV2Button, "All queue filter must include queue-v2.");
+  dispatchElementClick(queueV2Button);
+  const returnedQueueDraft = parseDraft(elements);
+  assert(returnedQueueDraft.review_session_draft.selected_queue_id === "queue-v2", "Queue click must return to queue-v2.");
+  assert(returnedQueueDraft.review_session_draft.current_version_id === "v2", "Queue click must restore current version v2.");
+  assert(elements.get("queueProgress").textContent === "1 / 4", "Returned queue progress must show first position.");
+  dispatchClick(elements, "queueNext");
+  const nextQueueDraft = parseDraft(elements);
+  assert(nextQueueDraft.review_session_draft.selected_queue_id === "queue-v1", "Next queue button must select queue-v1.");
+  assert(nextQueueDraft.review_session_draft.current_version_id === "v1", "Next queue button must switch to v1.");
+  assert(elements.get("queueProgress").textContent === "2 / 4", "Next queue button must advance progress.");
+  dispatchClick(elements, "queuePrev");
+  const previousQueueDraft = parseDraft(elements);
+  assert(previousQueueDraft.review_session_draft.selected_queue_id === "queue-v2", "Previous queue button must return to queue-v2.");
+  assert(previousQueueDraft.review_session_draft.current_version_id === "v2", "Previous queue button must switch back to v2.");
+  elements.get("humanScore").value = "92";
+  dispatchChange(elements, "humanScore");
+  elements.get("humanComment").value = "队列状态保持测试：v2 的人工评论不能被 v1 覆盖。";
+  dispatchChange(elements, "humanComment");
   elements.get("humanApproved").checked = true;
   dispatchChange(elements, "humanApproved");
   elements.get("memoryApproval").value = "approved";
   dispatchChange(elements, "memoryApproval");
+  const editedQueueDraft = parseDraft(elements);
+  const editedQueueV2 = editedQueueDraft.review_session_draft.review_queue.find((item) => item.queue_id === "queue-v2");
+  assert(editedQueueV2.draft_state.score === 92, "Edited queue-v2 draft_state must store score.");
+  assert(editedQueueV2.draft_state.human_approved === true, "Edited queue-v2 draft_state must store human approval.");
+  assert(editedQueueV2.draft_state.memory_approval_status === "approved", "Edited queue-v2 draft_state must store memory approval.");
+  assert(editedQueueV2.draft_state.human_note_cn.includes("状态保持测试"), "Edited queue-v2 draft_state must store human comment.");
+  assert(editedQueueDraft.batch_review_summary_draft.counts.accepted_count === 2, "Batch summary must update accepted count after editing v2.");
+  assert(editedQueueDraft.batch_review_summary_draft.counts.write_request_count === 2, "Batch summary must update write request count after editing v2.");
+  assert(editedQueueDraft.batch_review_summary_draft.write_request_items.length === 2, "Batch details must update write request items after editing v2.");
+  assert(editedQueueDraft.batch_review_summary_draft.handoff_report_cn.includes("队列状态保持测试"), "Batch report must include edited candidate context.");
+  assert(editedQueueDraft.batch_decision_draft.authorizable_items.length === 2, "Batch decision must update authorizable item count after editing v2.");
+  assert(
+    editedQueueDraft.a5_preauthorization_review_package_draft.authorizable_items.length === 2,
+    "A5 preauthorization package must update authorizable item count after editing v2."
+  );
+  assert(
+    editedQueueDraft.a5_preauthorization_review_package_draft.review_text_cn.includes("队列状态保持测试"),
+    "A5 preauthorization package must include edited candidate context."
+  );
+  assert(elements.get("batchAccepted").textContent === "2", "Batch accepted count must update in UI.");
+  assert(elements.get("batchWriteRequests").textContent === "2", "Batch write request count must update in UI.");
+  assert(elements.get("batchWriteItems").children.length === 2, "Batch write item details must update in UI.");
+  assert(elements.get("batchReport").textContent.includes("队列状态保持测试"), "Batch report UI must include edited candidate context.");
+  assert(elements.get("preauthPackageItems").children.length === 2, "Preauthorization package UI must update item count.");
+  assert(elements.get("preauthPackageText").textContent.includes("队列状态保持测试"), "Preauthorization package UI must include edited candidate context.");
+  elements.get("queueFilter").value = "write_request";
+  dispatchChange(elements, "queueFilter");
+  const updatedWriteRequestButtons = elements.get("queueList").children;
+  assert(elements.get("queueVisible").textContent === "2", "Write request filter must update after editing v2.");
+  assert(updatedWriteRequestButtons.some((child) => child.dataset.queueId === "queue-v2"), "Write request filter must include edited queue-v2.");
+  assert(updatedWriteRequestButtons.some((child) => child.dataset.queueId === "queue-v1"), "Write request filter must still include queue-v1.");
+  elements.get("queueFilter").value = "all";
+  dispatchChange(elements, "queueFilter");
+  elements.get("riskTextArtifact").checked = true;
+  dispatchChange(elements, "riskTextArtifact");
+  const riskBlockedDraft = parseDraft(elements);
+  const riskBlockedQueueV2 = riskBlockedDraft.review_session_draft.review_queue.find((item) => item.queue_id === "queue-v2");
+  assert(riskBlockedQueueV2.preauthorization_status === "blocked", "High-risk candidate must be blocked from preauthorization.");
+  assert(riskBlockedDraft.batch_review_summary_draft.counts.write_request_count === 1, "High-risk accepted candidate must leave write-request list.");
+  assert(riskBlockedDraft.risk_review_summary_draft.total_risk_item_count === 1, "Risk summary must count high-risk candidate.");
+  assert(riskBlockedDraft.a5_preauthorization_review_package_draft.risk_grouped_items.length === 1, "Preauthorization package must group risk items.");
+  assert(elements.get("inspectionRiskGroups").textContent.includes("文字伪影"), "Inspection UI must show risk group.");
+  elements.get("riskTextArtifact").checked = false;
+  dispatchChange(elements, "riskTextArtifact");
+  const riskClearedDraft = parseDraft(elements);
+  assert(riskClearedDraft.batch_review_summary_draft.counts.write_request_count === 2, "Clearing risk tag must restore write request eligibility.");
+
+  dispatchClick(elements, "exportSessionDraft");
+  const editedSessionPayload = JSON.parse(elements.get("sessionTransferText").value);
+  elements.get("humanComment").value = "临时覆盖：这句话应被导入恢复覆盖。";
+  dispatchChange(elements, "humanComment");
+  assert(parseDraft(elements).review_session_draft.human_review.note_cn.includes("临时覆盖"), "Temporary edit must enter current draft before import.");
+  elements.get("sessionTransferText").value = JSON.stringify(editedSessionPayload);
+  dispatchClick(elements, "validateImportDraft");
+  assert(elements.get("importPreviewStatus").textContent.includes("候选会变化"), "Import preview must summarize changed candidates.");
+  assert(elements.get("importPreviewItems").textContent.includes("评论"), "Import preview must name changed comment fields.");
+  dispatchClick(elements, "applyImportDraft");
+  const restoredImportDraft = parseDraft(elements);
+  assert(restoredImportDraft.review_session_draft.human_review.note_cn.includes("状态保持测试"), "Import restore must recover exported comment.");
+  assert(!restoredImportDraft.review_session_draft.human_review.note_cn.includes("临时覆盖"), "Import restore must remove temporary overwritten comment.");
+
+  dispatchClick(elements, "queueNext");
+  const queueV1Draft = parseDraft(elements);
+  assert(queueV1Draft.review_session_draft.selected_queue_id === "queue-v1", "Queue next must select queue-v1 for isolation check.");
+  assert(elements.get("humanComment").value.includes("参考版本"), "Queue-v1 form must keep its own comment.");
+  assert(!elements.get("humanComment").value.includes("状态保持测试"), "Queue-v1 form must not inherit queue-v2 comment.");
+  dispatchClick(elements, "queuePrev");
+  const restoredQueueDraft = parseDraft(elements);
+  assert(restoredQueueDraft.review_session_draft.selected_queue_id === "queue-v2", "Queue previous must restore queue-v2 after isolation check.");
+  assert(elements.get("humanScore").value === "92", "Queue-v2 score must survive switching away and back.");
+  assert(elements.get("humanComment").value.includes("状态保持测试"), "Queue-v2 comment must survive switching away and back.");
+  assert(elements.get("humanApproved").checked === true, "Queue-v2 approval checkbox must survive switching away and back.");
+  assert(elements.get("memoryApproval").value === "approved", "Queue-v2 memory approval must survive switching away and back.");
+
+  dispatchClick(elements, "tplTextArtifact");
+  const templatedDraft = parseDraft(elements);
+  assert(templatedDraft.review_session_draft.human_review.note_cn.includes("疑似文字伪影"), "Template button must append Chinese review note.");
+  assert(templatedDraft.review_session_draft.version_comparison.issues_cn.includes("疑似文字伪影"), "Template button must append issue text.");
+
+  dispatchClick(elements, "quickAccept");
 
   const approvedDraft = parseDraft(elements);
   assert(approvedDraft.image_case_draft.asset_status === "accepted", "Approved asset status must become accepted.");
   assert(approvedDraft.image_case_draft.human_approval.approved === true, "Approved human approval must be true.");
   assert(approvedDraft.memory_delta_draft.write_mode === "confirmed", "Approved memory write mode must be confirmed.");
   assert(approvedDraft.memory_delta_draft.final_decision.should_write_to_vcp === true, "Approved memory write request must be true.");
+  assert(elements.get("summarySessionStatus").textContent === "已批准", "Approved summary must show approved review status.");
+  assert(elements.get("summaryAssetStatus").textContent === "可接受", "Approved summary must show accepted asset status.");
+  assert(elements.get("summaryMemoryStatus").textContent === "已批准写入申请", "Approved summary must show approved memory status.");
+  assert(elements.get("summaryWriteRequest").textContent === "已形成写入申请，仍未真实写入", "Approved summary must show write request without real write.");
+  assert(elements.get("summaryNextAction").textContent === "可进入人工验货与后续写入授权", "Approved summary must show next action.");
+  assert(approvedDraft.review_session_draft.next_action_cn === "可进入人工验货与后续写入授权", "Approved draft must include Chinese next action.");
+  assert(approvedDraft.review_session_draft.acceptance_verdict.status_cn === "图像可接受，等待写入授权", "Approved draft must include write-authorization verdict.");
+  assert(elements.get("memoryPreviewDecision").textContent === "已形成写入申请，仍未真实写入", "Approved memory preview must show write request without real write.");
+  assert(approvedDraft.review_session_draft.review_preflight.accepted_has_human_approval === true, "Approved preflight must confirm human approval.");
+  assert(approvedDraft.review_session_draft.review_preflight.prototype_guard_clean === true, "Approved preflight must confirm clean guard.");
   assert(runtimeGuard.guardIsClean(approvedDraft.prototype_guard), "Approved prototype guard must remain clean.");
   assert(runtimeGuard.guardIsClean(approvedDraft.review_session_draft.audit_log[0].prototype_guard), "Approved audit guard must remain clean.");
+
+  dispatchClick(elements, "viewTechnical");
+  assert(elements.get("readableDraft").hidden === true, "Readable draft must hide in technical view.");
+  assert(elements.get("draftOutput").hidden === false, "Technical draft must show after switching views.");
+  dispatchClick(elements, "viewReadable");
+  assert(elements.get("readableDraft").hidden === false, "Readable draft must show after switching back.");
+
+  dispatchClick(elements, "quickReject");
+  const rejectedDraft = parseDraft(elements);
+  assert(rejectedDraft.image_case_draft.asset_status === "rejected", "Reject quick action must set rejected asset status.");
+  assert(rejectedDraft.memory_delta_draft.write_mode === "forbidden", "Reject quick action must forbid memory write mode.");
+
+  elements.get("versionPicker").value = "v1";
+  dispatchChange(elements, "versionPicker");
+  elements.get("comparePicker").value = "";
+  dispatchChange(elements, "comparePicker");
+  const singleVersionDraft = parseDraft(elements);
+  assert(singleVersionDraft.review_session_draft.current_version_id === "v1", "Version picker must update current_version_id.");
+  assert(singleVersionDraft.review_session_draft.compare_version_id === null, "Empty compare picker must clear compare_version_id.");
+  assert(singleVersionDraft.image_case_draft.output_assets[0].includes("accepted-image.placeholder"), "Output asset must follow selected version.");
 
   const badGuardDraft = runtimeGuard.clone(approvedDraft);
   badGuardDraft.prototype_guard.api_called = true;
@@ -172,17 +699,123 @@ function main() {
   const badApprovalAck = context.window.ImageLabHostBridge.submitDraft(badApprovalDraft);
   assert(badApprovalAck.accepted_by_host_mock === false, "Host mock must reject accepted asset without approval.");
 
+  elements.get("queueFilter").value = "all";
+  dispatchChange(elements, "queueFilter");
+  dispatchClick(elements, "batchSelectVisible");
+  assert(elements.get("batchSelectedCount").textContent === "4 个", "Batch select visible must select all visible candidates.");
+  assert(elements.get("queueList").children.every((child) => child.dataset.batchSelected === "true"), "Queue cards must expose batch-selected marker.");
+  dispatchClick(elements, "batchMarkBlocked");
+  const batchMarkedDraft = parseDraft(elements);
+  assert(
+    batchMarkedDraft.review_session_draft.review_queue.every((item) => item.risk_tags.includes("memory_unsuitable")),
+    "Batch blocked action must tag selected candidates as memory unsuitable."
+  );
+  assert(elements.get("batchOperationStatus").textContent.includes("保留原评论"), "Batch action must report preserved comments.");
+  const batchMarkedV2 = batchMarkedDraft.review_session_draft.review_queue.find((item) => item.queue_id === "queue-v2");
+  assert(batchMarkedV2.human_note_cn.includes("状态保持测试"), "Batch action must preserve edited candidate comments.");
+  assert(batchMarkedV2.human_note_cn.includes("批量备注"), "Batch action must append batch note instead of replacing comments.");
+  dispatchClick(elements, "batchClearSelection");
+  assert(elements.get("batchSelectedCount").textContent === "0 个", "Batch clear selection must clear selected candidates.");
+
   const result = {
     passed: true,
     initial: {
       asset_status: initialDraft.image_case_draft.asset_status,
+      current_version_id: initialDraft.review_session_draft.current_version_id,
+      compare_version_id: initialDraft.review_session_draft.compare_version_id,
+      annotation_notes_count: initialDraft.review_session_draft.annotation_notes.length,
       memory_write_mode: initialDraft.memory_delta_draft.write_mode,
       host_ack: elements.get("hostStatus").textContent
+    },
+    summary: {
+      initial_review_status_cn: "人工评审中",
+      approved_review_status_cn: "已批准",
+      write_request_cn: elements.get("summaryWriteRequest").textContent,
+      guard_cn: elements.get("summaryGuard").textContent
+    },
+    preflight_checks: {
+      human_comment_present: initialDraft.review_session_draft.review_preflight.human_comment_present,
+      chinese_memory_content_detected: initialDraft.review_session_draft.review_preflight.chinese_memory_content_detected,
+      accepted_has_human_approval: approvedDraft.review_session_draft.review_preflight.accepted_has_human_approval,
+      real_write_performed: approvedDraft.review_session_draft.review_preflight.real_write_performed
+    },
+    quick_actions: {
+      accept_sets_asset_accepted: approvedDraft.image_case_draft.asset_status === "accepted",
+      reject_sets_memory_forbidden: rejectedDraft.memory_delta_draft.write_mode === "forbidden"
+    },
+    draft_view_switch: {
+      technical_view_available: elements.get("draftOutput").textContent.includes("review_session_draft"),
+      readable_view_cn: ["人工评审中", "已批准", "已拒收"].includes(elements.get("reviewCardStatus").textContent)
+    },
+    review_queue: {
+      queue_count: initialDraft.review_session_draft.review_queue.length,
+      filter_rejected_count: 1,
+      search_filters_queue: true,
+      score_sort_available: true,
+      undo_restores_comment: true,
+      queue_click_updates_selected_id: rejectedSelectionDraft.review_session_draft.selected_queue_id === "queue-v3",
+      queue_click_updates_current_version: rejectedSelectionDraft.review_session_draft.current_version_id === "v3",
+      queue_return_restores_current_version: returnedQueueDraft.review_session_draft.current_version_id === "v2",
+      next_button_updates_current_version: nextQueueDraft.review_session_draft.current_version_id === "v1",
+      previous_button_restores_current_version: previousQueueDraft.review_session_draft.current_version_id === "v2",
+      progress_summary_visible: elements.get("queueProgress").textContent.includes("/"),
+      independent_draft_state_present: initialDraft.review_session_draft.review_queue.every((item) => Boolean(item.draft_state)),
+      draft_state_preserves_score: editedQueueV2.draft_state.score === 92,
+      draft_state_preserves_comment: editedQueueV2.draft_state.human_note_cn.includes("状态保持测试"),
+      switch_restore_preserves_comment: restoredQueueDraft.review_session_draft.human_review.note_cn.includes("状态保持测试")
+    },
+    batch_review_summary: {
+      total_count: initialDraft.batch_review_summary_draft.counts.total_count,
+      initial_write_request_count: initialDraft.batch_review_summary_draft.counts.write_request_count,
+      updated_write_request_count: editedQueueDraft.batch_review_summary_draft.counts.write_request_count,
+      blocked_count: initialDraft.batch_review_summary_draft.counts.blocked_count,
+      write_request_filter_updates: updatedWriteRequestButtons.length === 2,
+      blocked_filter_count: blockedQueueButtons.length,
+      next_attention_filter_count: nextAttentionButtons.length,
+      no_execution_guard_clean: runtimeGuard.guardIsClean(initialDraft.batch_review_summary_draft.no_execution_guard),
+      no_real_write_cn: elements.get("batchSummary").textContent.includes("0 个真实写入")
+    },
+    batch_decision: {
+      initial_decision: initialDraft.batch_decision_draft.decision,
+      initial_authorizable_count: initialDraft.batch_decision_draft.authorizable_items.length,
+      updated_authorizable_count: editedQueueDraft.batch_decision_draft.authorizable_items.length,
+      preauthorization_package_draft_only:
+        initialDraft.a5_preauthorization_review_package_draft.package_status === "draft_only",
+      preauthorization_package_forbids_plugin:
+        initialDraft.a5_preauthorization_review_package_draft.forbidden_operations_cn.includes("调用插件")
+    },
+    session_transfer: {
+      export_format: exportedSessionPayload.export_format,
+      fingerprint_present: exportedSessionPayload.session_fingerprint.startsWith("fnv1a32:"),
+      stale_fingerprint_rejected: true,
+      import_preview_available: elements.get("importPreviewStatus").textContent.includes("候选"),
+      dirty_guard_rejected: dirtySessionGuardRejected,
+      import_restores_comment: restoredImportDraft.review_session_draft.human_review.note_cn.includes("状态保持测试")
+    },
+    risk_review: {
+      risk_blocks_preauthorization: riskBlockedQueueV2.preauthorization_status === "blocked",
+      risk_write_request_count: riskBlockedDraft.batch_review_summary_draft.counts.write_request_count,
+      risk_group_count: riskBlockedDraft.a5_preauthorization_review_package_draft.risk_grouped_items.length
+    },
+    batch_actions: {
+      batch_marked_count: batchMarkedDraft.review_session_draft.review_queue.length,
+      batch_note_preserved: batchMarkedV2.human_note_cn.includes("状态保持测试"),
+      selection_clear_works: elements.get("batchSelectedCount").textContent === "0 个"
+    },
+    adapter_handoff: {
+      execution_blocked: initialDraft.adapter_dry_run_handoff_draft.execution_blocked,
+      max_plugin_calls: initialDraft.adapter_dry_run_handoff_draft.max_plugin_calls,
+      plugin_call_forbidden: initialDraft.adapter_dry_run_handoff_draft.forbidden_actions_cn.includes("调用插件")
     },
     approved: {
       asset_status: approvedDraft.image_case_draft.asset_status,
       memory_write_mode: approvedDraft.memory_delta_draft.write_mode,
       should_write_to_vcp: approvedDraft.memory_delta_draft.final_decision.should_write_to_vcp
+    },
+    version_selection: {
+      current_version_id_updates: singleVersionDraft.review_session_draft.current_version_id === "v1",
+      compare_version_can_clear: singleVersionDraft.review_session_draft.compare_version_id === null,
+      output_asset_follows_selected_version: singleVersionDraft.image_case_draft.output_assets[0].includes("accepted-image.placeholder")
     },
     rejection_checks: {
       dirty_guard_rejected: badGuardAck.accepted_by_host_mock === false,
