@@ -62,6 +62,10 @@ body {
   border-color: #596b55;
 }
 
+.glossary-panel {
+  border-color: #4f5f65;
+}
+
 .verdict-card {
   display: grid;
   gap: 8px;
@@ -182,6 +186,7 @@ dd {
 .template-actions,
 .batch-filter-actions,
 .batch-selection-actions,
+.history-actions,
 .session-actions,
 .view-switch {
   display: flex;
@@ -194,6 +199,7 @@ dd {
 .template-actions button,
 .batch-filter-actions button,
 .batch-selection-actions button,
+.history-actions button,
 .session-actions button,
 .view-switch button {
   border: 1px solid #45505c;
@@ -207,6 +213,7 @@ dd {
 .template-actions button:hover,
 .batch-filter-actions button:hover,
 .batch-selection-actions button:hover,
+.history-actions button:hover,
 .session-actions button:hover,
 .view-switch button:hover,
 .view-switch button[data-active="true"] {
@@ -254,6 +261,33 @@ dd {
 .quality-panel p {
   color: #cfd7df;
   line-height: 1.6;
+}
+
+.import-preview {
+  border-top: 1px solid #303842;
+  padding-top: 14px;
+}
+
+.import-preview h3,
+.glossary-panel h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.import-preview p {
+  margin: 0 0 10px;
+  color: #cfd7df;
+  line-height: 1.5;
+}
+
+.import-preview ul,
+.glossary-panel ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding-left: 18px;
+  color: #cfd7df;
+  line-height: 1.5;
 }
 
 .quality-panel strong {
@@ -337,6 +371,13 @@ dd {
   font-size: 13px;
 }
 
+.queue-controls {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(3, minmax(150px, 1fr));
+  width: min(620px, 100%);
+}
+
 input,
 textarea,
 select {
@@ -373,6 +414,10 @@ select {
   margin-bottom: 12px;
 }
 
+.history-actions {
+  margin-bottom: 12px;
+}
+
 .risk-tags {
   display: grid;
   gap: 8px;
@@ -400,7 +445,7 @@ select {
 
 .queue-list {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .queue-item {
@@ -409,10 +454,11 @@ select {
   border-radius: 8px;
   background: #12171d;
   color: #f3f5f7;
-  padding: 10px 12px;
+  padding: 9px 10px;
   text-align: left;
   white-space: pre-wrap;
-  line-height: 1.45;
+  line-height: 1.35;
+  font-size: 13px;
 }
 
 .queue-item:hover,
@@ -489,6 +535,10 @@ pre {
   .panel-title-row {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .queue-controls {
+    grid-template-columns: 1fr;
   }
 
   .risk-tags {

@@ -66,6 +66,8 @@ function createRuntimeContext() {
   add("comparePicker", { value: "v1" });
   add("comparisonSummary");
   add("queueFilter", { value: "all" });
+  add("queueSearch", { value: "" });
+  add("queueSort", { value: "default" });
   add("queueTotal");
   add("queueVisible");
   add("queueProgress");
@@ -82,6 +84,9 @@ function createRuntimeContext() {
   add("batchMarkNoMemory");
   add("batchSelectedCount");
   add("batchOperationStatus");
+  add("undoLastAction");
+  add("historyStatus");
+  add("historyCount");
   add("queueList");
   add("batchTotal");
   add("batchAccepted");
@@ -103,7 +108,10 @@ function createRuntimeContext() {
   add("sessionTransferStatus");
   add("sessionTransferCount");
   add("sessionTransferGuard");
+  add("sessionFingerprint");
   add("sessionTransferText");
+  add("importPreviewStatus");
+  add("importPreviewItems");
   add("exportSessionDraft");
   add("validateImportDraft");
   add("applyImportDraft");
@@ -151,6 +159,7 @@ function createRuntimeContext() {
   add("inspectionRiskStats");
   add("inspectionRiskGroups");
   add("inspectionReport");
+  add("statusGlossaryList");
   add("checkHumanComment");
   add("checkMemoryContent");
   add("checkHumanDecision");
@@ -236,7 +245,15 @@ function assertExpectedScriptOrder(scriptOrder) {
 }
 
 function assertRuntimeGuardApi(runtimeGuard) {
-  const requiredMethods = ["clone", "normalizeSession", "guardIsClean", "draftIsSafe", "assertDraftSafe"];
+  const requiredMethods = [
+    "clone",
+    "normalizeSession",
+    "guardIsClean",
+    "guardsAreClean",
+    "draftSideSurfacesAreSafe",
+    "draftIsSafe",
+    "assertDraftSafe"
+  ];
   assert(runtimeGuard && typeof runtimeGuard.cleanGuard === "object", "Runtime guard must expose cleanGuard.");
   for (const method of requiredMethods) {
     assert(typeof runtimeGuard[method] === "function", `Runtime guard must expose ${method}().`);
@@ -328,6 +345,37 @@ function main() {
   assert(elements.get("queuePrev").disabled === true, "Initial queue previous button must be disabled at the first item.");
   assert(elements.get("queueNext").disabled === false, "Initial queue next button must be enabled.");
   assert(elements.get("queueList").children.length === 4, "Queue list must render four candidate buttons.");
+  assert(elements.get("historyCount").textContent === "0 步", "Initial undo history must be empty.");
+  assert(elements.get("historyStatus").textContent.includes("尚未产生"), "Initial history status must be readable.");
+  assert(elements.get("statusGlossaryList").children.length >= 6, "Status glossary must render Chinese explanations.");
+  assert(
+    initialDraft.runtime_session_export_draft.session_fingerprint.startsWith("fnv1a32:"),
+    "Initial runtime session export must include a stable fingerprint."
+  );
+  assert(
+    elements.get("sessionFingerprint").textContent === initialDraft.runtime_session_export_draft.session_fingerprint,
+    "Session fingerprint must render in the transfer panel."
+  );
+  elements.get("queueSearch").value = "风险复查图";
+  dispatchChange(elements, "queueSearch");
+  assert(elements.get("queueVisible").textContent === "1", "Queue search must filter to one matching candidate.");
+  assert(elements.get("queueList").children[0].dataset.queueId === "queue-v3", "Queue search must find queue-v3 by Chinese title.");
+  elements.get("queueSearch").value = "";
+  dispatchChange(elements, "queueSearch");
+  elements.get("queueSort").value = "score_desc";
+  dispatchChange(elements, "queueSort");
+  assert(elements.get("queueList").children[0].dataset.queueId === "queue-v2", "Score-desc sort must place the highest score first.");
+  elements.get("queueSort").value = "score_asc";
+  dispatchChange(elements, "queueSort");
+  assert(elements.get("queueList").children[0].dataset.queueId === "queue-v3", "Score-asc sort must place the lowest score first.");
+  elements.get("queueSort").value = "default";
+  dispatchChange(elements, "queueSort");
+  elements.get("humanComment").value = "撤销测试评论：这句话应被撤销。";
+  dispatchChange(elements, "humanComment");
+  assert(parseDraft(elements).review_session_draft.human_review.note_cn.includes("撤销测试评论"), "Edited comment must enter draft before undo.");
+  dispatchClick(elements, "undoLastAction");
+  assert(!parseDraft(elements).review_session_draft.human_review.note_cn.includes("撤销测试评论"), "Undo must restore the previous comment draft.");
+  assert(elements.get("historyStatus").textContent.includes("已撤销"), "Undo status must explain the reverted action.");
   assert(initialDraft.batch_review_summary_draft.counts.total_count === 4, "Batch summary must count four candidates.");
   assert(initialDraft.batch_review_summary_draft.counts.accepted_count === 1, "Batch summary must count one accepted item initially.");
   assert(initialDraft.batch_review_summary_draft.counts.human_reviewing_count === 2, "Batch summary must count two pending review items initially.");
@@ -409,9 +457,21 @@ function main() {
   const exportedSessionPayload = JSON.parse(elements.get("sessionTransferText").value);
   assert(exportedSessionPayload.export_format === "runtime_review_session_v1", "Export button must write session export JSON.");
   assert(exportedSessionPayload.review_session_snapshot.review_queue.length === 4, "Exported session must include four candidates.");
+  assert(exportedSessionPayload.session_fingerprint.startsWith("fnv1a32:"), "Exported session must include a fingerprint.");
+  assert(
+    elements.get("sessionFingerprint").textContent === exportedSessionPayload.session_fingerprint,
+    "Exported fingerprint must render in the session panel."
+  );
   assert(elements.get("sessionTransferStatus").textContent.includes("已导出"), "Export button must update session status.");
   dispatchClick(elements, "validateImportDraft");
   assert(elements.get("sessionTransferStatus").textContent.includes("校验通过"), "Import validation must accept the exported session.");
+  assert(elements.get("importPreviewStatus").textContent.includes("0 个候选会变化"), "Import preview must render unchanged exported session.");
+  const tamperedFingerprintPayload = runtimeGuard.clone(exportedSessionPayload);
+  tamperedFingerprintPayload.review_session_snapshot.review_queue[0].human_note_cn = "篡改后的评论但保留旧指纹。";
+  elements.get("sessionTransferText").value = JSON.stringify(tamperedFingerprintPayload);
+  dispatchClick(elements, "validateImportDraft");
+  assert(elements.get("sessionTransferStatus").textContent.includes("指纹不匹配"), "Import validation must reject a stale fingerprint.");
+  assert(elements.get("importPreviewStatus").textContent.includes("不可用"), "Import preview must stop when fingerprint validation fails.");
   const dirtySessionPayload = runtimeGuard.clone(exportedSessionPayload);
   dirtySessionPayload.prototype_guard.api_called = true;
   elements.get("sessionTransferText").value = JSON.stringify(dirtySessionPayload);
@@ -558,6 +618,9 @@ function main() {
   dispatchChange(elements, "humanComment");
   assert(parseDraft(elements).review_session_draft.human_review.note_cn.includes("临时覆盖"), "Temporary edit must enter current draft before import.");
   elements.get("sessionTransferText").value = JSON.stringify(editedSessionPayload);
+  dispatchClick(elements, "validateImportDraft");
+  assert(elements.get("importPreviewStatus").textContent.includes("候选会变化"), "Import preview must summarize changed candidates.");
+  assert(elements.get("importPreviewItems").textContent.includes("评论"), "Import preview must name changed comment fields.");
   dispatchClick(elements, "applyImportDraft");
   const restoredImportDraft = parseDraft(elements);
   assert(restoredImportDraft.review_session_draft.human_review.note_cn.includes("状态保持测试"), "Import restore must recover exported comment.");
@@ -687,6 +750,9 @@ function main() {
     review_queue: {
       queue_count: initialDraft.review_session_draft.review_queue.length,
       filter_rejected_count: 1,
+      search_filters_queue: true,
+      score_sort_available: true,
+      undo_restores_comment: true,
       queue_click_updates_selected_id: rejectedSelectionDraft.review_session_draft.selected_queue_id === "queue-v3",
       queue_click_updates_current_version: rejectedSelectionDraft.review_session_draft.current_version_id === "v3",
       queue_return_restores_current_version: returnedQueueDraft.review_session_draft.current_version_id === "v2",
@@ -720,6 +786,9 @@ function main() {
     },
     session_transfer: {
       export_format: exportedSessionPayload.export_format,
+      fingerprint_present: exportedSessionPayload.session_fingerprint.startsWith("fnv1a32:"),
+      stale_fingerprint_rejected: true,
+      import_preview_available: elements.get("importPreviewStatus").textContent.includes("候选"),
       dirty_guard_rejected: dirtySessionGuardRejected,
       import_restores_comment: restoredImportDraft.review_session_draft.human_review.note_cn.includes("状态保持测试")
     },

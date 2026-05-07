@@ -3207,6 +3207,57 @@ Notes:
 The next deeper diagnostic would require a new explicit provider-side echo or sanitized request capture authorization.
 ```
 
+## VALIDATION-20260507-runtime-usability-controls
+
+Task:
+
+```text
+Validate Runtime Review Console queue search/sort, undo history, session fingerprint, import preview, status glossary, compact queue cards, and stronger side-surface guards.
+```
+
+Commands run:
+
+```text
+node --check review_console\runtime_prototype\app.js
+node --check review_console\runtime_prototype\runtime_guard.js
+node --check scripts\validate_runtime_guard_unit.js
+node --check scripts\validate_runtime_prototype_smoke.js
+node --check scripts\validate_runtime_delivery_surface.js
+node scripts\validate_runtime_guard_unit.js
+node scripts\validate_runtime_prototype_smoke.js
+node scripts\validate_runtime_delivery_surface.js
+node scripts\validate_runtime_prototype_suite.js
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+git diff --check
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+Runtime smoke verifies search/sort, undo restore, import preview, fingerprint rejection, session restore, batch actions, and guard-clean host acceptance.
+Runtime guard unit rejects dirty batch side-surface guard and runtime export side-effect markers.
+Runtime delivery surface exposes the new DOM IDs.
+```
+
+Warnings:
+
+```text
+validate-agent-image-lab-local.ps1 passed with manual-review warnings only for existing negative/checklist terms such as API key, .png, .jpg, .ps1, and token.
+```
+
+Not validated:
+
+```text
+No real VCPChat/VCPToolBox read, plugin/API/DailyNote/VCP memory/image action, executable adapter entrypoint, push, tag, release, PR, or external write was performed.
+```
+
 ## Recommended Commands
 
 PowerShell:

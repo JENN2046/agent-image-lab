@@ -61,20 +61,37 @@
       <section class="panel queue-panel">
         <div class="panel-title-row">
           <h2>候选队列</h2>
-          <label class="compact-field">
-            <span>状态筛选</span>
-            <select id="queueFilter">
-              <option value="all">全部</option>
-              <option value="human_reviewing">待评审</option>
-              <option value="candidate">候选</option>
-              <option value="accepted">可接受</option>
-              <option value="rejected">已拒收</option>
-              <option value="draft">草稿</option>
-              <option value="write_request">写入申请</option>
-              <option value="blocked">阻塞项</option>
-              <option value="next_attention">下一步处理</option>
-            </select>
-          </label>
+          <div class="queue-controls">
+            <label class="compact-field">
+              <span>状态筛选</span>
+              <select id="queueFilter">
+                <option value="all">全部</option>
+                <option value="human_reviewing">待评审</option>
+                <option value="candidate">候选</option>
+                <option value="accepted">可接受</option>
+                <option value="rejected">已拒收</option>
+                <option value="draft">草稿</option>
+                <option value="write_request">写入申请</option>
+                <option value="blocked">阻塞项</option>
+                <option value="next_attention">下一步处理</option>
+              </select>
+            </label>
+            <label class="compact-field">
+              <span>搜索</span>
+              <input id="queueSearch" type="search" placeholder="标题、评论、风险" />
+            </label>
+            <label class="compact-field">
+              <span>排序</span>
+              <select id="queueSort">
+                <option value="default">默认顺序</option>
+                <option value="authorizable">可授权优先</option>
+                <option value="risk">风险优先</option>
+                <option value="status">状态优先</option>
+                <option value="score_desc">评分从高到低</option>
+                <option value="score_asc">评分从低到高</option>
+              </select>
+            </label>
+          </div>
         </div>
         <dl class="meta queue-stats">
           <div><dt>总数</dt><dd id="queueTotal">-</dd></div>
@@ -98,9 +115,14 @@
           <button id="batchMarkBlocked" type="button">标记阻塞</button>
           <button id="batchMarkNoMemory" type="button">暂不入记忆</button>
         </div>
+        <div class="history-actions">
+          <button id="undoLastAction" type="button">撤销上一步</button>
+        </div>
         <dl class="meta queue-stats">
           <div><dt>已选择</dt><dd id="batchSelectedCount">-</dd></div>
           <div><dt>批量状态</dt><dd id="batchOperationStatus">-</dd></div>
+          <div><dt>历史</dt><dd id="historyCount">-</dd></div>
+          <div><dt>撤销状态</dt><dd id="historyStatus">-</dd></div>
         </dl>
         <div class="queue-list" id="queueList"></div>
       </section>
@@ -162,6 +184,7 @@
           <div><dt>状态</dt><dd id="sessionTransferStatus">-</dd></div>
           <div><dt>候选数</dt><dd id="sessionTransferCount">-</dd></div>
           <div><dt>安全检查</dt><dd id="sessionTransferGuard">-</dd></div>
+          <div><dt>会话指纹</dt><dd id="sessionFingerprint">-</dd></div>
         </dl>
         <label class="field">
           <span>导出 / 导入草案 JSON</span>
@@ -171,6 +194,11 @@
           <button id="exportSessionDraft" type="button">导出草案</button>
           <button id="validateImportDraft" type="button">校验导入</button>
           <button id="applyImportDraft" type="button">恢复会话</button>
+        </div>
+        <div class="import-preview">
+          <h3>导入预览</h3>
+          <p id="importPreviewStatus">尚未生成导入预览。</p>
+          <ul id="importPreviewItems"></ul>
         </div>
       </section>
 
@@ -282,6 +310,11 @@
         <ul id="inspectionRiskGroups"></ul>
         <h3>验货报告</h3>
         <pre id="inspectionReport"></pre>
+      </section>
+
+      <section class="panel glossary-panel">
+        <h2>状态说明</h2>
+        <ul id="statusGlossaryList"></ul>
       </section>
 
       <section class="panel checklist-panel">

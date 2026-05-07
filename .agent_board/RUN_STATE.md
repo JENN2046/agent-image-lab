@@ -15,24 +15,49 @@ Advance Agent Image Lab safely under local A4 autonomy while keeping A5 producti
 ## Current Phase
 
 ```text
-Runtime Review Console session continuity and quality control
+Runtime Review Console usability controls
 ```
 
 ## Current Task
 
 ```text
-Runtime Review Console session export/import, batch operations, risk tags, and Chinese inspection checklist
+Runtime Review Console queue search/sort, undo history, import preview, session fingerprint, status glossary, and stronger side-surface guards
 ```
 
 ## Last Completed Task
 
 ```text
-Added runtime session continuity and quality-control surfaces: local JSON export/import with guard validation, multi-candidate batch selection and batch review actions, high-risk candidate tags that block preauthorization, risk-grouped A5 preauthorization draft details, and a Chinese human inspection checklist.
+Added runtime usability controls: queue search/sort, compact queue cards, undo history, session export fingerprinting, import preview, Chinese status glossary, and stricter guard coverage for batch/session side surfaces.
 ```
 
 ## Last Validation
 
 ```text
+2026-05-07 runtime usability controls:
+status: completed_validated_local_runtime_prototype
+changed files: review_console/runtime_prototype/app.js, review_console/runtime_prototype/index.html, review_console/runtime_prototype/styles.css, review_console/runtime_prototype/runtime_guard.js, scripts/validate_runtime_delivery_surface.js, scripts/validate_runtime_guard_unit.js, scripts/validate_runtime_prototype_smoke.js
+queue usability: search, sort, and compact candidate cards added
+history: undo stack records local form, queue, batch, quick-decision, template, and import actions
+session transfer: runtime_session_export_draft includes session_fingerprint and import preview rejects stale/tampered fingerprints
+status glossary: Chinese state explanations render in the runtime prototype
+guard hardening: runtime_guard now checks batch/review/preauthorization/inspection/export side-surface guards
+node --check review_console/runtime_prototype/app.js: passed
+node --check review_console/runtime_prototype/runtime_guard.js: passed
+node --check scripts/validate_runtime_guard_unit.js: passed
+node --check scripts/validate_runtime_prototype_smoke.js: passed
+node --check scripts/validate_runtime_delivery_surface.js: passed
+node scripts/validate_runtime_guard_unit.js: passed
+node scripts/validate_runtime_prototype_smoke.js: passed
+node scripts/validate_runtime_delivery_surface.js: passed
+node scripts/validate_runtime_prototype_suite.js: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed
+real VCPChat read: no
+real VCPToolBox read: no
+plugin/API/DailyNote/VCP memory/image action: no
+push/tag/release/PR: no
+
 2026-05-07 runtime session continuity and quality control:
 status: completed_validated_local_runtime_prototype
 changed files: review_console/runtime_prototype/app.js, review_console/runtime_prototype/index.html, review_console/runtime_prototype/styles.css, scripts/validate_runtime_delivery_surface.js, scripts/validate_runtime_prototype_smoke.js
@@ -768,12 +793,11 @@ Historical v7.45 phase: v7.45 cdp read-only attempt record
 ## Current Stop Status
 
 ```text
-v10.21 local selection review was completed. v10.19 run_1 is recommended as the accepted candidate; run_2 remains needs_human_review. Further real DoubaoGen/config reads, plugin/API/DailyNote/VCP memory/image actions, retry generation, commit/tag/push/PR, DailyNote/VCP memory write, and GitHub Release remain blocked until a new explicit real generation, memory action, or version action authorization is provided.
+Runtime Review Console usability controls are completed and validated locally. Further real VCPChat/VCPToolBox reads, plugin/API/DailyNote/VCP memory/image actions, retry generation, tag/push/PR/release, and A5 production execution remain blocked until a new explicit authorization package is provided.
 ```
 
 ## Next Action
 
 ```text
-Stop before any real DoubaoGen/config read, provider-side echo, sanitized request capture, generation retry, DailyNote write, VCP memory write, image creation, commit/tag/push/PR, or release until the user explicitly authorizes real generation parameters, memory action, or version action.
-Next safe action is user confirmation to select v10.19 run_1, or explicit memory/version authorization for the selected accepted candidate.
+Next safe action is another local Runtime Review Console usability/validation batch, or a user-scoped A5 authorization package if production execution is requested.
 ```

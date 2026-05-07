@@ -31,6 +31,8 @@ const els = {
   comparePicker: document.getElementById("comparePicker"),
   comparisonSummary: document.getElementById("comparisonSummary"),
   queueFilter: document.getElementById("queueFilter"),
+  queueSearch: document.getElementById("queueSearch"),
+  queueSort: document.getElementById("queueSort"),
   queueTotal: document.getElementById("queueTotal"),
   queueVisible: document.getElementById("queueVisible"),
   queueProgress: document.getElementById("queueProgress"),
@@ -47,6 +49,9 @@ const els = {
   batchMarkNoMemory: document.getElementById("batchMarkNoMemory"),
   batchSelectedCount: document.getElementById("batchSelectedCount"),
   batchOperationStatus: document.getElementById("batchOperationStatus"),
+  undoLastAction: document.getElementById("undoLastAction"),
+  historyStatus: document.getElementById("historyStatus"),
+  historyCount: document.getElementById("historyCount"),
   queueList: document.getElementById("queueList"),
   batchTotal: document.getElementById("batchTotal"),
   batchAccepted: document.getElementById("batchAccepted"),
@@ -68,7 +73,10 @@ const els = {
   sessionTransferStatus: document.getElementById("sessionTransferStatus"),
   sessionTransferCount: document.getElementById("sessionTransferCount"),
   sessionTransferGuard: document.getElementById("sessionTransferGuard"),
+  sessionFingerprint: document.getElementById("sessionFingerprint"),
   sessionTransferText: document.getElementById("sessionTransferText"),
+  importPreviewStatus: document.getElementById("importPreviewStatus"),
+  importPreviewItems: document.getElementById("importPreviewItems"),
   exportSessionDraft: document.getElementById("exportSessionDraft"),
   validateImportDraft: document.getElementById("validateImportDraft"),
   applyImportDraft: document.getElementById("applyImportDraft"),
@@ -116,6 +124,7 @@ const els = {
   inspectionRiskStats: document.getElementById("inspectionRiskStats"),
   inspectionRiskGroups: document.getElementById("inspectionRiskGroups"),
   inspectionReport: document.getElementById("inspectionReport"),
+  statusGlossaryList: document.getElementById("statusGlossaryList"),
   checkHumanComment: document.getElementById("checkHumanComment"),
   checkMemoryContent: document.getElementById("checkMemoryContent"),
   checkHumanDecision: document.getElementById("checkHumanDecision"),
@@ -150,6 +159,11 @@ let activeDraftView = "readable";
 let selectedBatchQueueIds = new Set();
 let batchOperationStatusText = "尚未执行批量操作。";
 let sessionTransferStatusText = "尚未导出或导入复核会话。";
+let historyStatusText = "尚未产生可撤销操作。";
+let historyStack = [];
+let lastRenderedSnapshot = null;
+let isRestoringSnapshot = false;
+let sessionImportPreviewState = null;
 
 const riskTagDefinitions = [
   {
@@ -182,6 +196,15 @@ const riskTagDefinitions = [
     reason_cn: "当前候选不适合进入记忆写入申请。",
     high_risk: true
   }
+];
+
+const statusGlossary = [
+  { key: "draft_only", label_cn: "仅草案", explanation_cn: "只在本地生成可复核内容，不构成授权，也不触发真实执行。" },
+  { key: "authorizable", label_cn: "可授权前复核", explanation_cn: "候选已满足本地草案条件，可放入下一份 A5 授权前人工复核包。" },
+  { key: "partial_authorizable", label_cn: "部分可授权", explanation_cn: "本批有候选可进入授权前复核，但还有阻塞或风险项需要处理。" },
+  { key: "blocked", label_cn: "阻塞", explanation_cn: "候选不能进入归档或授权前复核，必须先处理原因。" },
+  { key: "needs_review", label_cn: "待继续评审", explanation_cn: "候选尚未完成全部人工判断或审批。" },
+  { key: "write_request", label_cn: "写入申请草案", explanation_cn: "已形成写入申请草案，但没有真实写入 DailyNote/VCP memory。" }
 ];
 
 let queueState = normalizeQueueItems(
@@ -224,6 +247,35 @@ function riskTagLabel(tagId) {
 function riskTagsLabel(riskTags) {
   const tags = normalizeRiskTags(riskTags);
   return tags.length > 0 ? tags.map(riskTagLabel).join("、") : "无风险标签";
+}
+
+function statusExplanationCn(status) {
+  return statusGlossary.find((item) => item.key === status)?.explanation_cn || "该状态需要人工结合上下文判断。";
+}
+
+function stableStringify(value) {
+  if (value === undefined) return "null";
+  if (value === null || typeof value !== "object") return JSON.stringify(value);
+  if (Array.isArray(value)) return `[${value.map(stableStringify).join(",")}]`;
+  const keys = Object.keys(value).sort();
+  return `{${keys.map((key) => `${JSON.stringify(key)}:${stableStringify(value[key])}`).join(",")}}`;
+}
+
+function sessionPayloadForFingerprint(payload) {
+  const nextPayload = runtimeGuard.clone(payload || {});
+  delete nextPayload.session_fingerprint;
+  delete nextPayload.session_fingerprint_cn;
+  return nextPayload;
+}
+
+function fingerprintString(value) {
+  const text = stableStringify(value);
+  let hash = 2166136261;
+  for (let index = 0; index < text.length; index += 1) {
+    hash ^= text.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return `fnv1a32:${(hash >>> 0).toString(16).padStart(8, "0")}`;
 }
 
 function queueDraftStateFromItem(item) {
@@ -484,9 +536,53 @@ function queueMatchesFilter(item, filter) {
   return item.asset_status === filter;
 }
 
+function queueMatchesSearch(item, searchText) {
+  const needle = (searchText || "").trim().toLowerCase();
+  if (!needle) return true;
+  return [
+    item.title_cn,
+    item.version_id,
+    item.priority_cn,
+    item.human_note_cn,
+    item.issues_cn,
+    item.next_step_cn,
+    item.preauthorization_status_cn,
+    riskTagsLabel(item.risk_tags)
+  ]
+    .join("\n")
+    .toLowerCase()
+    .includes(needle);
+}
+
+function queueSortRank(item, sortMode) {
+  if (sortMode === "authorizable") return itemHasWriteRequest(item) ? 0 : itemIsBlocked(item) ? 2 : 1;
+  if (sortMode === "risk") return itemHasBlockingRisk(item) ? 0 : itemIsBlocked(item) ? 1 : 2;
+  if (sortMode === "status") return { accepted: 0, candidate: 1, draft: 2, rejected: 3 }[item.asset_status] ?? 9;
+  return 0;
+}
+
+function sortQueueItems(items, sortMode) {
+  const nextItems = [...items];
+  if (sortMode === "score_desc") {
+    return nextItems.sort((a, b) => b.score - a.score || a.title_cn.localeCompare(b.title_cn, "zh-CN"));
+  }
+  if (sortMode === "score_asc") {
+    return nextItems.sort((a, b) => a.score - b.score || a.title_cn.localeCompare(b.title_cn, "zh-CN"));
+  }
+  if (["authorizable", "risk", "status"].includes(sortMode)) {
+    return nextItems.sort((a, b) => queueSortRank(a, sortMode) - queueSortRank(b, sortMode) || b.score - a.score);
+  }
+  return nextItems;
+}
+
 function filteredQueueItems(queueDraft = queueState) {
   const filter = els.queueFilter.value || "all";
-  return queueDraft.filter((item) => queueMatchesFilter(item, filter));
+  const searchText = els.queueSearch.value || "";
+  const sortMode = els.queueSort.value || "default";
+  return sortQueueItems(
+    queueDraft.filter((item) => queueMatchesFilter(item, filter) && queueMatchesSearch(item, searchText)),
+    sortMode
+  );
 }
 
 function buildQueueProgress(queueDraft) {
@@ -498,6 +594,8 @@ function buildQueueProgress(queueDraft) {
     total_count: queueDraft.length,
     visible_count: filteredItems.length,
     active_index: activeIndex >= 0 ? activeIndex + 1 : null,
+    search_text: els.queueSearch.value || "",
+    sort_mode: els.queueSort.value || "default",
     selected_queue_id: selectedQueueId
   };
 }
@@ -519,6 +617,97 @@ function readRiskTagsFromForm() {
   if (els.riskBrandMark.checked) tags.push("brand_mark");
   if (els.riskMemoryUnsuitable.checked) tags.push("memory_unsuitable");
   return tags;
+}
+
+function captureRuntimeSnapshot() {
+  return {
+    queue_state: runtimeGuard.clone(queueState),
+    selected_queue_id: selectedQueueId,
+    selected_batch_queue_ids: Array.from(selectedBatchQueueIds),
+    queue_filter: els.queueFilter.value || "all",
+    queue_search: els.queueSearch.value || "",
+    queue_sort: els.queueSort.value || "default",
+    form_state: {
+      version_id: els.versionPicker.value,
+      compare_version_id: els.comparePicker.value || "",
+      strengths_cn: els.diffStrengths.value,
+      issues_cn: els.diffIssues.value,
+      next_step_cn: els.diffNext.value,
+      score: els.humanScore.value,
+      human_note_cn: els.humanComment.value,
+      annotation_note_cn: els.annotationNote.value,
+      asset_status: els.assetStatus.value,
+      human_approved: els.humanApproved.checked,
+      memory_content_cn: els.memoryContent.value,
+      memory_approval_status: els.memoryApproval.value,
+      risk_tags: readRiskTagsFromForm()
+    },
+    batch_operation_status_text: batchOperationStatusText,
+    session_transfer_status_text: sessionTransferStatusText
+  };
+}
+
+function restoreRuntimeSnapshot(snapshot) {
+  if (!snapshot) return;
+  isRestoringSnapshot = true;
+  queueState = normalizeQueueItems(snapshot.queue_state || []);
+  selectedQueueId = queueState.some((item) => item.queue_id === snapshot.selected_queue_id)
+    ? snapshot.selected_queue_id
+    : queueState[0]?.queue_id || null;
+  selectedBatchQueueIds = new Set(
+    (snapshot.selected_batch_queue_ids || []).filter((queueId) => queueState.some((item) => item.queue_id === queueId))
+  );
+  els.queueFilter.value = snapshot.queue_filter || "all";
+  els.queueSearch.value = snapshot.queue_search || "";
+  els.queueSort.value = snapshot.queue_sort || "default";
+  if (snapshot.form_state) {
+    els.versionPicker.value = snapshot.form_state.version_id || queueState[0]?.version_id || "";
+    els.comparePicker.value = snapshot.form_state.compare_version_id || "";
+    els.diffStrengths.value = snapshot.form_state.strengths_cn || "";
+    els.diffIssues.value = snapshot.form_state.issues_cn || "";
+    els.diffNext.value = snapshot.form_state.next_step_cn || "";
+    els.humanScore.value = snapshot.form_state.score || "80";
+    els.humanComment.value = snapshot.form_state.human_note_cn || "";
+    els.annotationNote.value = snapshot.form_state.annotation_note_cn || "";
+    els.assetStatus.value = snapshot.form_state.asset_status || "candidate";
+    els.humanApproved.checked = snapshot.form_state.human_approved === true;
+    els.memoryContent.value = snapshot.form_state.memory_content_cn || "";
+    els.memoryApproval.value = snapshot.form_state.memory_approval_status || "pending";
+    writeRiskTagsToForm(snapshot.form_state.risk_tags || []);
+  } else {
+    loadQueueItemIntoForm(activeQueueItem());
+  }
+  batchOperationStatusText = snapshot.batch_operation_status_text || "已恢复历史状态。";
+  sessionTransferStatusText = snapshot.session_transfer_status_text || sessionTransferStatusText;
+  isRestoringSnapshot = false;
+}
+
+function pushHistorySnapshot(actionCn) {
+  if (isRestoringSnapshot || !lastRenderedSnapshot) return;
+  historyStack.push({
+    action_cn: actionCn,
+    created_at: nowIso(),
+    snapshot: runtimeGuard.clone(lastRenderedSnapshot)
+  });
+  if (historyStack.length > 25) historyStack.shift();
+  historyStatusText = `已记录：${actionCn}`;
+}
+
+function undoLastHistoryAction() {
+  const entry = historyStack.pop();
+  if (!entry) {
+    historyStatusText = "没有可撤销操作。";
+    render();
+    return;
+  }
+  restoreRuntimeSnapshot(entry.snapshot);
+  historyStatusText = `已撤销：${entry.action_cn}`;
+  render();
+}
+
+function trackedRender(actionCn) {
+  pushHistorySnapshot(actionCn);
+  render();
 }
 
 function loadQueueItemIntoForm(item) {
@@ -564,6 +753,7 @@ function syncActiveQueueItemFromForm() {
 }
 
 function selectQueueItem(queueId) {
+  pushHistorySnapshot(`切换候选：${queueId}`);
   syncActiveQueueItemFromForm();
   selectedQueueId = queueId;
   loadQueueItemIntoForm(activeQueueItem());
@@ -571,6 +761,7 @@ function selectQueueItem(queueId) {
 }
 
 function selectAdjacentQueueItem(direction) {
+  pushHistorySnapshot(direction > 0 ? "切换到下一张候选" : "切换到上一张候选");
   syncActiveQueueItemFromForm();
   const filteredItems = filteredQueueItems(queueState);
   if (filteredItems.length === 0) return;
@@ -585,6 +776,7 @@ function selectAdjacentQueueItem(direction) {
 }
 
 function applyQueueFilter(filter) {
+  pushHistorySnapshot(`切换筛选：${filter}`);
   syncActiveQueueItemFromForm();
   els.queueFilter.value = filter;
   render();
@@ -598,6 +790,7 @@ function appendUniqueLine(value, line) {
 }
 
 function selectVisibleQueueItemsForBatch() {
+  pushHistorySnapshot("选择当前显示候选");
   syncActiveQueueItemFromForm();
   for (const item of filteredQueueItems(queueState)) {
     selectedBatchQueueIds.add(item.queue_id);
@@ -607,12 +800,14 @@ function selectVisibleQueueItemsForBatch() {
 }
 
 function clearBatchSelection() {
+  pushHistorySnapshot("清空批量选择");
   selectedBatchQueueIds = new Set();
   batchOperationStatusText = "已清空批量选择。";
   render();
 }
 
 function applyBatchReviewAction(action) {
+  pushHistorySnapshot(`批量操作：${action}`);
   syncActiveQueueItemFromForm();
   const selectedIds = Array.from(selectedBatchQueueIds);
   if (selectedIds.length === 0) {
@@ -1078,7 +1273,7 @@ function buildRuntimeSessionExportDraft({
   a5PreauthorizationReviewPackageDraft,
   humanInspectionChecklistDraft
 }) {
-  return {
+  const exportDraft = {
     package_status: "draft_only",
     export_format: "runtime_review_session_v1",
     exported_at: createdAt,
@@ -1088,6 +1283,8 @@ function buildRuntimeSessionExportDraft({
     review_session_snapshot: {
       selected_queue_id: selectedQueueId,
       queue_filter: els.queueFilter.value || "all",
+      queue_search: els.queueSearch.value || "",
+      queue_sort: els.queueSort.value || "default",
       selected_batch_queue_ids: Array.from(selectedBatchQueueIds),
       review_queue: reviewQueueDraft
     },
@@ -1100,6 +1297,9 @@ function buildRuntimeSessionExportDraft({
     side_effects_performed: false,
     boundary_cn: "这是 Review Console runtime 本地会话导出草案，不写磁盘，不调用插件/API/DailyNote，不写 VCP memory。"
   };
+  exportDraft.session_fingerprint = fingerprintString(sessionPayloadForFingerprint(exportDraft));
+  exportDraft.session_fingerprint_cn = `会话指纹：${exportDraft.session_fingerprint}`;
+  return exportDraft;
 }
 
 function validateSessionImportPayload(payload) {
@@ -1109,6 +1309,10 @@ function validateSessionImportPayload(payload) {
   } else {
     if (payload.package_status !== "draft_only") errors.push("只允许导入 draft_only 会话草案。");
     if (payload.export_format !== "runtime_review_session_v1") errors.push("导入格式必须是 runtime_review_session_v1。");
+    const expectedFingerprint = fingerprintString(sessionPayloadForFingerprint(payload));
+    if (payload.session_fingerprint !== expectedFingerprint) {
+      errors.push("会话指纹不匹配。");
+    }
     if (payload.side_effects_performed !== false) errors.push("导入草案必须声明 side_effects_performed=false。");
     if (!runtimeGuard.guardIsClean(payload.prototype_guard)) errors.push("prototype_guard 不干净。");
     if (!runtimeGuard.guardIsClean(payload.batch_decision_draft?.no_execution_guard)) {
@@ -1141,10 +1345,64 @@ function validateSessionImportPayload(payload) {
   };
 }
 
+function buildSessionImportPreview(payload) {
+  const validation = validateSessionImportPayload(payload);
+  if (!validation.passed) {
+    return {
+      passed: false,
+      status_cn: "导入预览不可用：草案校验失败。",
+      changed_items: [],
+      errors: validation.errors
+    };
+  }
+  const incomingQueue = normalizeQueueItems(payload.review_session_snapshot.review_queue);
+  const changedItems = [];
+  for (const incomingItem of incomingQueue) {
+    const currentItem = queueState.find((item) => item.queue_id === incomingItem.queue_id);
+    if (!currentItem) {
+      changedItems.push({
+        queue_id: incomingItem.queue_id,
+        title_cn: incomingItem.title_cn,
+        changes_cn: ["新增候选"]
+      });
+      continue;
+    }
+    const changes = [];
+    if (currentItem.human_note_cn !== incomingItem.human_note_cn) changes.push("评论");
+    if (currentItem.score !== incomingItem.score) changes.push("评分");
+    if (currentItem.asset_status !== incomingItem.asset_status) changes.push("资产状态");
+    if (currentItem.memory_approval_status !== incomingItem.memory_approval_status) changes.push("记忆审批");
+    if (normalizeRiskTags(currentItem.risk_tags).join("|") !== normalizeRiskTags(incomingItem.risk_tags).join("|")) {
+      changes.push("风险标签");
+    }
+    if (changes.length > 0) {
+      changedItems.push({
+        queue_id: incomingItem.queue_id,
+        title_cn: incomingItem.title_cn,
+        changes_cn: changes
+      });
+    }
+  }
+  const removedItems = queueState
+    .filter((item) => !incomingQueue.some((incomingItem) => incomingItem.queue_id === item.queue_id))
+    .map((item) => ({
+      queue_id: item.queue_id,
+      title_cn: item.title_cn,
+      changes_cn: ["导入后不再出现"]
+    }));
+  return {
+    passed: true,
+    status_cn: `导入预览：${changedItems.length + removedItems.length} 个候选会变化。`,
+    changed_items: [...changedItems, ...removedItems],
+    errors: []
+  };
+}
+
 function exportCurrentSessionDraft() {
   syncActiveQueueItemFromForm();
   const draft = buildDraft();
   els.sessionTransferText.value = JSON.stringify(draft.runtime_session_export_draft, null, 2);
+  sessionImportPreviewState = buildSessionImportPreview(draft.runtime_session_export_draft);
   sessionTransferStatusText = `已导出本地复核会话草案，包含 ${draft.runtime_session_export_draft.review_session_snapshot.review_queue.length} 个候选。`;
   renderSessionTransfer(draft.runtime_session_export_draft);
 }
@@ -1171,6 +1429,7 @@ function validateSessionTransferText() {
     return { passed: false, errors: [parsed.parse_error] };
   }
   const validation = validateSessionImportPayload(parsed.payload);
+  sessionImportPreviewState = buildSessionImportPreview(parsed.payload);
   sessionTransferStatusText = validation.status_cn;
   renderSessionTransfer(parsed.payload);
   return validation;
@@ -1189,6 +1448,8 @@ function applySessionImportDraft() {
     render();
     return;
   }
+  pushHistorySnapshot("恢复导入会话草案");
+  sessionImportPreviewState = buildSessionImportPreview(parsed.payload);
   const snapshot = parsed.payload.review_session_snapshot;
   queueState = normalizeQueueItems(snapshot.review_queue);
   selectedBatchQueueIds = new Set(
@@ -1198,6 +1459,8 @@ function applySessionImportDraft() {
     ? snapshot.selected_queue_id
     : queueState[0].queue_id;
   els.queueFilter.value = snapshot.queue_filter || "all";
+  els.queueSearch.value = snapshot.queue_search || "";
+  els.queueSort.value = snapshot.queue_sort || "default";
   loadQueueItemIntoForm(activeQueueItem());
   sessionTransferStatusText = `已恢复本地复核会话：${validation.queue_count} 个候选，未执行任何外部动作。`;
   render();
@@ -1301,6 +1564,7 @@ function setDraftView(view) {
 }
 
 function applyQuickDecision(decision) {
+  pushHistorySnapshot(`快捷结论：${decision}`);
   if (decision === "accept") {
     els.humanApproved.checked = true;
     els.assetStatus.value = "candidate";
@@ -1323,6 +1587,7 @@ function appendTextareaText(textarea, text) {
 }
 
 function applyTemplate(templateId) {
+  pushHistorySnapshot(`套用模板：${templateId}`);
   if (templateId === "composition") {
     appendTextareaText(els.diffStrengths, "构图稳定，主体关系清楚。");
     appendTextareaText(els.annotationNote, "构图稳定，可作为候选优势记录。");
@@ -1674,7 +1939,7 @@ function renderQueueList(queueDraft) {
     button.dataset.riskBlocked = String(itemHasBlockingRisk(item));
     const reviewState = item.candidate_review_state || candidateReviewState(item);
     const selectedText = selectedBatchQueueIds.has(item.queue_id) ? "已批量选择 · " : "";
-    button.textContent = `${item.title_cn}\n${selectedText}${queueBadgeText(item)} · ${reviewState.status_cn} · ${queueStatusLabel(item)} · ${assetStatusLabel(item.asset_status)} · ${item.score} 分 · ${item.priority_cn}\n风险标签：${riskTagsLabel(item.risk_tags)}\n${item.issues_cn}`;
+    button.textContent = `${item.title_cn}\n${selectedText}${reviewState.status_cn} · ${assetStatusLabel(item.asset_status)} · ${item.score} 分 · ${riskTagsLabel(item.risk_tags)}\n${queueBadgeText(item)} · ${statusExplanationCn(reviewState.status)}\n${item.issues_cn}`;
     button.addEventListener("click", () => selectQueueItem(item.queue_id));
     els.queueList.appendChild(button);
   }
@@ -1748,6 +2013,9 @@ function renderSessionTransfer(sessionExportDraft) {
   if (!sessionExportDraft) {
     els.sessionTransferCount.textContent = "-";
     els.sessionTransferGuard.textContent = "-";
+    els.sessionFingerprint.textContent = "-";
+    els.importPreviewStatus.textContent = sessionImportPreviewState?.status_cn || "尚未生成导入预览。";
+    renderList(els.importPreviewItems, sessionImportPreviewState?.errors?.length ? sessionImportPreviewState.errors : ["暂无导入预览。"]);
     return;
   }
   const queueCount = sessionExportDraft.review_session_snapshot?.review_queue?.length || 0;
@@ -1755,6 +2023,17 @@ function renderSessionTransfer(sessionExportDraft) {
   els.sessionTransferGuard.textContent = runtimeGuard.guardIsClean(sessionExportDraft.prototype_guard)
     ? "导出 guard 干净"
     : "导出 guard 存在风险";
+  els.sessionFingerprint.textContent = sessionExportDraft.session_fingerprint || "-";
+  els.importPreviewStatus.textContent = sessionImportPreviewState?.status_cn || "尚未生成导入预览。";
+  const previewItems = sessionImportPreviewState?.changed_items || [];
+  renderList(
+    els.importPreviewItems,
+    previewItems.length > 0
+      ? previewItems.map((item) => `${item.title_cn}：${item.changes_cn.join("、")}`)
+      : sessionImportPreviewState?.errors?.length
+        ? sessionImportPreviewState.errors
+        : ["暂无候选变化。"]
+  );
 }
 
 function renderInspectionSummary(inspectionDraft) {
@@ -1791,6 +2070,8 @@ function render() {
   renderSessionTransfer(sessionExportDraft);
   els.batchSelectedCount.textContent = `${selectedBatchQueueIds.size} 个`;
   els.batchOperationStatus.textContent = batchOperationStatusText;
+  els.historyStatus.textContent = historyStatusText;
+  els.historyCount.textContent = `${historyStack.length} 步`;
   els.humanScoreOut.textContent = els.humanScore.value;
   els.assetRef.textContent = version.asset_ref;
   els.assetBox.textContent = comparisonVersion
@@ -1822,6 +2103,10 @@ function render() {
   els.handoffSummary.textContent = handoffDraft.gatekeeper_summary_cn;
   renderList(els.handoffAllowed, handoffDraft.allowed_actions_cn);
   renderList(els.handoffForbidden, handoffDraft.forbidden_actions_cn);
+  renderList(
+    els.statusGlossaryList,
+    statusGlossary.map((item) => `${item.label_cn}（${item.key}）：${item.explanation_cn}`)
+  );
   els.checkHumanComment && setChecklistItem(
     els.checkHumanComment,
     reviewDraft.review_preflight.human_comment_present,
@@ -1874,6 +2159,7 @@ function render() {
     els.hostStatus.textContent = error.message;
     els.hostSubmittedAt.textContent = "-";
   }
+  lastRenderedSnapshot = captureRuntimeSnapshot();
 }
 
 function init() {
@@ -1883,9 +2169,13 @@ function init() {
   els.caseId.textContent = session.case_id;
   els.assetRef.textContent = version.asset_ref;
   els.assetBox.textContent = version.label;
-  [els.versionPicker, els.comparePicker, els.queueFilter, els.diffStrengths, els.diffIssues, els.diffNext, els.humanScore, els.humanComment, els.annotationNote, els.assetStatus, els.humanApproved, els.memoryContent, els.memoryApproval, els.riskTextArtifact, els.riskPersonFace, els.riskCompositionShift, els.riskBrandMark, els.riskMemoryUnsuitable].forEach((el) => {
-    el.addEventListener("input", render);
-    el.addEventListener("change", render);
+  [els.versionPicker, els.comparePicker, els.diffStrengths, els.diffIssues, els.diffNext, els.humanScore, els.humanComment, els.annotationNote, els.assetStatus, els.humanApproved, els.memoryContent, els.memoryApproval, els.riskTextArtifact, els.riskPersonFace, els.riskCompositionShift, els.riskBrandMark, els.riskMemoryUnsuitable].forEach((el) => {
+    el.addEventListener("input", () => trackedRender("编辑评审字段"));
+    el.addEventListener("change", () => trackedRender("编辑评审字段"));
+  });
+  [els.queueFilter, els.queueSearch, els.queueSort].forEach((el) => {
+    el.addEventListener("input", () => trackedRender("调整队列检索排序"));
+    el.addEventListener("change", () => trackedRender("调整队列检索排序"));
   });
   els.quickCandidate.addEventListener("click", () => applyQuickDecision("candidate"));
   els.quickAccept.addEventListener("click", () => applyQuickDecision("accept"));
@@ -1900,6 +2190,7 @@ function init() {
   els.batchMarkReview.addEventListener("click", () => applyBatchReviewAction("review"));
   els.batchMarkBlocked.addEventListener("click", () => applyBatchReviewAction("blocked"));
   els.batchMarkNoMemory.addEventListener("click", () => applyBatchReviewAction("no_memory"));
+  els.undoLastAction.addEventListener("click", undoLastHistoryAction);
   els.exportSessionDraft.addEventListener("click", exportCurrentSessionDraft);
   els.validateImportDraft.addEventListener("click", validateSessionTransferText);
   els.applyImportDraft.addEventListener("click", applySessionImportDraft);

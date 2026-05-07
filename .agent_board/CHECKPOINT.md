@@ -224,6 +224,8 @@ runtime batch execution: no real VCPChat/VCPToolBox read, plugin/API/DailyNote/V
 runtime continuity local: runtime_session_export_draft exports draft-only runtime_review_session_v1 JSON and guarded import restores queue state without file writes
 runtime quality local: high-risk tags block preauthorization, risk groups feed the A5 preauthorization draft, batch operations append notes without replacing existing comments, and a Chinese inspection checklist is generated
 runtime quality validation: smoke, delivery surface, runtime suite, MVP validation, and git diff --check passed
+runtime usability local: queue search/sort, undo history, compact queue cards, session fingerprinting, import preview, Chinese status glossary, and side-surface guard checks are implemented
+runtime usability validation: runtime guard unit, runtime smoke, delivery surface, runtime suite, MVP validation, local validation, and git diff --check passed
 ```
 
 ## Current Boundary
@@ -233,11 +235,11 @@ No real VCPChat read.
 No real VCPToolBox read.
 No real manifest read.
 No raw source copy from external repos.
-Plugin/API call: one DoubaoGen call performed under A5 authorization, one additional authorized no-text retry performed under v10.5 authorization, and one authorized v10.9 positive still-life generation call.
-No VCP memory write.
-Image creation: three rejected assets under ignored runtime output refs.
+Plugin/API call: historical authorized DoubaoGen calls are recorded; no plugin/API call in the current runtime usability batch.
+DailyNote/VCP memory write: one v10.25 authorized write is recorded; no DailyNote/VCP memory write in the current runtime usability batch.
+Image creation: historical authorized image outputs are recorded under ignored runtime output refs; no image creation in the current runtime usability batch.
 No VCPChat/VCPToolBox modification.
-Active A5 authorization package present for v10.0/v10.1 single batch.
+Active A5 authorization package for current runtime usability batch: no.
 A5 production execution reached one DoubaoGen call after human review cleared the initial submitDraft rejected-probe deviation.
 Further production execution blocked until alternate strategy authorization, alternate plugin authorization, or human override.
 v10.6 strategy does not authorize execution; alternate strategy blocked pending user review.

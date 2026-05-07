@@ -3,9 +3,9 @@
 ## Handoff Summary
 
 ```text
-Status: Runtime Review Console session continuity and quality-control batch completed and validated locally; production actions remain blocked.
-Result: guarded runtime_session_export_draft export/import, batch selection/actions, high-risk tags, risk_review_summary_draft, human_inspection_checklist_draft, and risk-grouped A5 preauthorization draft details are now available in the local runtime prototype.
-Compatibility note: v10.27 DailyNoteWrite root path correction remains recorded: previous root class plugin_dir_dailynote, corrected root class vcp_root_dailynote, completed_root_path_corrected, without rerunning DailyNoteWrite. v10.28 DailyNote canonical location guard remains active. This batch changed only local runtime prototype surfaces and validation scripts.
+Status: Runtime Review Console usability-controls batch completed and validated locally; production actions remain blocked.
+Result: queue search/sort, compact queue cards, undo history, session fingerprinting, import preview, Chinese status glossary, and stronger side-surface guard checks are now available in the local runtime prototype.
+Compatibility note: v10.27 DailyNoteWrite root path correction remains recorded: previous root class plugin_dir_dailynote, corrected root class vcp_root_dailynote, completed_root_path_corrected, without rerunning DailyNoteWrite. v10.28 DailyNote canonical location guard remains active. This batch changed only local runtime prototype surfaces, runtime guard logic, validation scripts, and agent-board state.
 ```
 
 ## Current Repo

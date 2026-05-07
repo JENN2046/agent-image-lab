@@ -45,6 +45,30 @@ window.ImageLabRuntimeGuard = (() => {
     );
   }
 
+  function guardsAreClean(values) {
+    return values.every((guard) => guard === undefined || guardIsClean(guard));
+  }
+
+  function draftSideSurfacesAreSafe(draft) {
+    const exportDraft = draft.runtime_session_export_draft;
+    if (
+      exportDraft &&
+      (exportDraft.package_status !== "draft_only" ||
+        exportDraft.side_effects_performed !== false ||
+        !guardIsClean(exportDraft.prototype_guard))
+    ) {
+      return false;
+    }
+    return guardsAreClean([
+      draft.batch_review_summary_draft?.no_execution_guard,
+      draft.batch_decision_draft?.no_execution_guard,
+      draft.risk_review_summary_draft?.no_execution_guard,
+      draft.a5_preauthorization_review_package_draft?.no_execution_guard,
+      draft.human_inspection_checklist_draft?.no_execution_guard,
+      exportDraft?.prototype_guard
+    ]);
+  }
+
   function draftIsSafe(draft) {
     if (!draft || typeof draft !== "object") return false;
     if (!draft.review_session_draft || !draft.image_case_draft || !draft.memory_delta_draft) return false;
@@ -52,6 +76,7 @@ window.ImageLabRuntimeGuard = (() => {
 
     const auditEntry = requireArray(draft.review_session_draft.audit_log)[0];
     if (!guardIsClean(auditEntry?.prototype_guard)) return false;
+    if (!draftSideSurfacesAreSafe(draft)) return false;
 
     const imageCase = draft.image_case_draft;
     if (imageCase.asset_status === "accepted" && imageCase.human_approval?.approved !== true) {
@@ -83,6 +108,9 @@ window.ImageLabRuntimeGuard = (() => {
     if (!guardIsClean(auditEntry?.prototype_guard)) {
       throw new Error("草案审计 guard 显示存在外部副作用。");
     }
+    if (!draftSideSurfacesAreSafe(draft)) {
+      throw new Error("草案附属区块 guard 或 runtime session export 状态不满足本地草案边界。");
+    }
     if (draft.image_case_draft.asset_status === "accepted" && draft.image_case_draft.human_approval?.approved !== true) {
       throw new Error("资产标记为 accepted 前必须先获得人工明确批准。");
     }
@@ -100,6 +128,8 @@ window.ImageLabRuntimeGuard = (() => {
     requireArray,
     normalizeSession,
     guardIsClean,
+    guardsAreClean,
+    draftSideSurfacesAreSafe,
     draftIsSafe,
     assertDraftSafe
   };
