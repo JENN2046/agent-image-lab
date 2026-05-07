@@ -105,6 +105,40 @@ function createRuntimeContext() {
   add("preauthPackageItems");
   add("preauthPackageForbidden");
   add("preauthPackageText");
+  add("authCapsuleStatus");
+  add("authCapsuleCount");
+  add("authCapsuleBoundary");
+  add("authCapsuleTypes");
+  add("authCapsuleForbidden");
+  add("authCapsuleSanitization");
+  add("authCapsuleRollback");
+  add("authCapsuleText");
+  add("deliveryPackageStatus");
+  add("deliveryPackageCandidate");
+  add("deliveryPackageHash");
+  add("deliveryPackageScoreBand");
+  add("deliveryPackageRisk");
+  add("deliveryPackageHumanApproval");
+  add("deliveryPackageMemoryPreview");
+  add("deliveryPackageRules");
+  add("deliveryPackageBoundary");
+  add("overrideDecisionSource");
+  add("overrideReason");
+  add("overrideDeviation");
+  add("overridePromptCompliance");
+  add("overrideMemorySuitability");
+  add("overrideBoundary");
+  add("traceabilityTotal");
+  add("traceabilityAccepted");
+  add("traceabilityAcceptedCandidate");
+  add("traceabilityHumanOverride");
+  add("traceabilityRejected");
+  add("traceabilityNeedsHumanReview");
+  add("traceabilityPromptComplete");
+  add("traceabilityMemorySuitable");
+  add("traceabilitySummary");
+  add("traceabilityBoundary");
+  add("traceabilityList");
   add("sessionTransferStatus");
   add("sessionTransferCount");
   add("sessionTransferGuard");
@@ -143,6 +177,13 @@ function createRuntimeContext() {
   add("memoryPreviewTarget");
   add("memoryPreviewDecision");
   add("memoryPreviewBody");
+  add("memoryCompletionRequested");
+  add("memoryCompletionAuthorized");
+  add("memoryCompletionPerformed");
+  add("memoryCompletionLocationVerified");
+  add("memoryCompletionHashMatched");
+  add("memoryCompletionPluginSufficient");
+  add("memoryCompletionBoundary");
   add("hostStatus", { textContent: "等待中" });
   add("hostSubmittedAt", { textContent: "-" });
   add("verdictTitle");
@@ -154,6 +195,13 @@ function createRuntimeContext() {
   add("summaryWriteRequest");
   add("summaryGuard");
   add("summaryNextAction");
+  add("runtimeStateUnified");
+  add("runtimeStateAsset");
+  add("runtimeStateMemory");
+  add("runtimeStateDelivery");
+  add("runtimeStateOverride");
+  add("runtimeStateMismatches");
+  add("runtimeStateBoundary");
   add("inspectionVerdict");
   add("inspectionChecklist");
   add("inspectionRiskStats");
@@ -187,6 +235,52 @@ function createRuntimeContext() {
   add("memoryCardDecision");
   add("memoryCardBody");
   add("memoryCardBoundary");
+  add("commitScopeStatus");
+  add("commitScopeBranch");
+  add("commitScopeStaged");
+  add("commitScopeRemote");
+  add("commitScopeRuntime");
+  add("commitScopeValidators");
+  add("commitScopeDocs");
+  add("commitScopeAgentBoard");
+  add("commitScopeUntracked");
+  add("commitScopeRollback");
+  add("bridgeRoundtripStatus");
+  add("bridgeRoundtripMethods");
+  add("bridgeRoundtripCalls");
+  add("bridgeRoundtripAck");
+  add("bridgeRoundtripGuards");
+  add("bridgeRoundtripBoundary");
+  add("realBridgeAuthStatus");
+  add("realBridgeAuthMethods");
+  add("realBridgeAuthRequired");
+  add("realBridgeAuthForbidden");
+  add("realBridgeAuthBoundary");
+  add("promptReliabilityStatus");
+  add("promptReliabilityHash");
+  add("promptReliabilityRules");
+  add("promptReliabilityFailures");
+  add("promptReliabilityBoundary");
+  add("memoryCompletionCandidateStatus");
+  add("memoryCompletionCandidateCriteria");
+  add("memoryCompletionCandidateObserved");
+  add("memoryCompletionCandidateFailures");
+  add("memoryCompletionCandidateBoundary");
+  add("generationRetryGateStatus");
+  add("generationRetryGatePlugin");
+  add("generationRetryGatePrompt");
+  add("generationRetryGateGuards");
+  add("generationRetryGateAuthorization");
+  add("generationRetryGateBoundary");
+  add("memoryWriteAuthStatus");
+  add("memoryWriteAuthCounts");
+  add("memoryWriteAuthRules");
+  add("memoryWriteAuthReject");
+  add("memoryWriteAuthBoundary");
+  add("assetArchiveCandidateStatus");
+  add("assetArchiveCandidateFields");
+  add("assetArchiveCandidateCloseouts");
+  add("assetArchiveCandidateBoundary");
   add("draftOutput");
 
   const context = {
@@ -250,6 +344,17 @@ function assertRuntimeGuardApi(runtimeGuard) {
     "normalizeSession",
     "guardIsClean",
     "guardsAreClean",
+    "executionFlagsAreFalse",
+    "inactiveAuthorizationCapsulesAreSafe",
+    "runtimeReviewStateIsSafe",
+    "localCommitScopePlanIsSafe",
+    "bridgeMockRoundtripCandidateIsSafe",
+    "realBridgeAuthorizationPackageIsSafe",
+    "pluginReliabilityPromptDisciplineIsSafe",
+    "memoryWriteCompletionCandidateIsSafe",
+    "singleRealGenerationRetryGateIsSafe",
+    "realMemoryWriteAuthorizationPackageIsSafe",
+    "assetArchiveCandidateIsSafe",
     "draftSideSurfacesAreSafe",
     "draftIsSafe",
     "assertDraftSafe"
@@ -293,12 +398,12 @@ function main() {
   assertRuntimeGuardApi(runtimeGuard);
 
   const initialDraft = parseDraft(elements);
-  assert(elements.get("hostStatus").textContent.includes("已接收安全草案"), "Initial host ack must be accepted.");
+  assert(elements.get("hostStatus").textContent.includes("previewDraft 安全预览"), "Initial host preview ack must be accepted.");
   assert(elements.get("hostSubmittedAt").textContent !== "-", "Initial host submit timestamp must be present.");
   assert(elements.get("boundaryBanner").textContent.includes("没有真实写入"), "Boundary banner must show no real write.");
   assert(elements.get("reviewCardStatus").textContent === "人工评审中", "Review card must show Chinese review status.");
   assert(elements.get("assetCardStatus").textContent === "候选", "Asset card must show Chinese asset status.");
-  assert(elements.get("memoryCardDecision").textContent === "未形成写入申请", "Memory card must show no write request.");
+  assert(elements.get("memoryCardDecision").textContent === "已形成写入申请，仍未真实写入", "Memory card must show write request state.");
   assert(elements.get("draftOutput").hidden === true, "Technical draft must be hidden by default.");
   assert(elements.get("handoffStatus").textContent === "仅草案交接", "Handoff status must render.");
   assert(elements.get("handoffExecution").textContent === "已阻止真实执行", "Handoff execution block must render.");
@@ -312,7 +417,7 @@ function main() {
   assert(elements.get("verdictTitle").textContent === "可以作为候选继续评审", "Initial verdict must be candidate-friendly.");
   assert(initialDraft.review_session_draft.acceptance_verdict.status_cn === "可以作为候选继续评审", "Initial draft must include acceptance verdict.");
   assert(elements.get("summaryMemoryStatus").textContent === "待审批", "Initial summary must show Chinese memory status.");
-  assert(elements.get("summaryWriteRequest").textContent === "未形成写入申请", "Initial summary must show no write request.");
+  assert(elements.get("summaryWriteRequest").textContent === "已形成写入申请，仍未真实写入", "Initial summary must show write request state.");
   assert(elements.get("summaryGuard").textContent === "无外部副作用", "Initial summary must show clean guard.");
   assert(elements.get("summaryNextAction").textContent === "继续人工确认或补充标注", "Initial summary must show next action.");
   assert(initialDraft.review_session_draft.review_preflight.human_comment_present === true, "Initial preflight must record human comment presence.");
@@ -322,7 +427,34 @@ function main() {
   assert(initialDraft.review_session_draft.version_comparison.issues_cn.includes("细节噪点"), "Version issues must enter the draft.");
   assert(initialDraft.review_session_draft.version_comparison.next_step_cn.includes("写入申请"), "Version next step must enter the draft.");
   assert(elements.get("memoryPreviewTitle").textContent.length > 0, "Memory preview title must render.");
-  assert(elements.get("memoryPreviewDecision").textContent === "未形成写入申请", "Memory preview must show no write request initially.");
+  assert(elements.get("memoryPreviewDecision").textContent === "已形成写入申请，仍未真实写入", "Memory preview must show write request state initially.");
+  assert(initialDraft.memory_completion_state_draft.write_requested === true, "Initial memory completion state must record write requested.");
+  assert(initialDraft.memory_completion_state_draft.write_authorized === false, "Initial memory completion state must record no authorization.");
+  assert(initialDraft.memory_completion_state_draft.write_performed === false, "Initial memory completion state must record no write performed.");
+  assert(initialDraft.memory_completion_state_draft.canonical_location_verified === false, "Initial memory completion state must record no location verification.");
+  assert(initialDraft.memory_completion_state_draft.canonical_hash_matched === false, "Initial memory completion state must record no hash match.");
+  assert(initialDraft.memory_completion_state_draft.plugin_success_sufficient === false, "Initial memory completion state must record plugin success insufficiency.");
+  assert(elements.get("memoryCompletionRequested").textContent === "已形成写入请求", "Initial memory completion requested state must render.");
+  assert(elements.get("memoryCompletionAuthorized").textContent === "尚未获得写入授权", "Initial memory completion authorization must render.");
+  assert(elements.get("memoryCompletionPerformed").textContent === "尚未真实写入", "Initial memory completion performed state must render.");
+  assert(elements.get("memoryCompletionLocationVerified").textContent === "目标位置未验证", "Initial memory completion location state must render.");
+  assert(elements.get("memoryCompletionHashMatched").textContent === "写入哈希未匹配", "Initial memory completion hash state must render.");
+  assert(
+    elements.get("memoryCompletionPluginSufficient").textContent === "false（插件 success 不足以代表完成）",
+    "Initial memory completion plugin sufficiency must render."
+  );
+  assert(
+    elements.get("memoryCompletionBoundary").textContent === "当前只拆分写入请求、授权、执行与校验，不执行真实写入。",
+    "Initial memory completion boundary must render."
+  );
+  assert(
+    elements.get("deliveryPackageMemoryPreview").textContent.includes("已形成写入申请"),
+    "Delivery package memory preview must show write request state."
+  );
+  assert(
+    initialDraft.accepted_candidate_delivery_package_draft.memory_delta_preview.completion_state.write_requested === true,
+    "Delivery package memory preview must include the completion state."
+  );
   assert(elements.get("checkHumanComment").dataset.state === "ok", "Human comment checklist must pass initially.");
   assert(elements.get("checkMemoryContent").dataset.state === "ok", "Memory content checklist must pass initially.");
   assert(elements.get("checkWriteBoundary").dataset.state === "ok", "Write boundary checklist must pass initially.");
@@ -408,6 +540,100 @@ function main() {
     runtimeGuard.guardIsClean(initialDraft.a5_preauthorization_review_package_draft.no_execution_guard),
     "A5 preauthorization package guard must remain clean."
   );
+  assert(
+    initialDraft.inactive_authorization_capsules_draft.authorization_status === "inactive_package",
+    "Inactive authorization capsules must remain inactive."
+  );
+  assert(
+    initialDraft.inactive_authorization_capsules_draft.capsules.length === 5,
+    "Inactive authorization capsules must include five capsule types."
+  );
+  assert(
+    initialDraft.inactive_authorization_capsules_draft.capsules.every((capsule) => capsule.activation_required === true),
+    "Every inactive authorization capsule must require explicit activation."
+  );
+  assert(
+    initialDraft.inactive_authorization_capsules_draft.capsules.every((capsule) => capsule.execution_flags.plugin_called === false),
+    "Inactive authorization capsules must not mark plugin calls."
+  );
+  assert(
+    runtimeGuard.guardIsClean(initialDraft.inactive_authorization_capsules_draft.no_execution_guard),
+    "Inactive authorization capsule package guard must remain clean."
+  );
+  assert(elements.get("authCapsuleStatus").textContent === "inactive_package", "Authorization capsule status must render inactive.");
+  assert(elements.get("authCapsuleCount").textContent === "5 个", "Authorization capsule count must render.");
+  assert(elements.get("authCapsuleTypes").children.length === 5, "Authorization capsule type list must render.");
+  assert(elements.get("authCapsuleForbidden").textContent.includes("raw endpoint"), "Authorization capsule forbidden outputs must render.");
+  assert(elements.get("authCapsuleBoundary").textContent.includes("未激活授权胶囊"), "Authorization capsule boundary must render.");
+  assert(
+    initialDraft.accepted_candidate_delivery_package_draft.package_status === "draft_only",
+    "Accepted candidate delivery package must be draft only."
+  );
+  assert(
+    initialDraft.accepted_candidate_delivery_package_draft.submitDraft_called === false,
+    "Accepted candidate delivery package must declare submitDraft_called=false."
+  );
+  assert(
+    initialDraft.accepted_candidate_delivery_package_draft.side_effects_performed === false,
+    "Accepted candidate delivery package must declare no side effects."
+  );
+  assert(
+    runtimeGuard.guardIsClean(initialDraft.accepted_candidate_delivery_package_draft.no_execution_guard),
+    "Accepted candidate delivery package guard must remain clean."
+  );
+  assert(
+    initialDraft.accepted_candidate_delivery_package_draft.sanitized_asset_hash.startsWith("fnv1a32:"),
+    "Accepted candidate delivery package must include a sanitized asset hash."
+  );
+  assert(
+    initialDraft.accepted_candidate_delivery_package_draft.memory_delta_preview.body_cn.includes("Photo Studio OS"),
+    "Accepted candidate delivery package must include memory delta preview."
+  );
+  assert(
+    initialDraft.human_override_traceability_draft.package_status === "draft_only",
+    "Human override traceability must be draft only."
+  );
+  assert(
+    initialDraft.human_override_traceability_draft.prompt_compliance_complete === false,
+    "Human override traceability must not claim complete prompt compliance for known deviations."
+  );
+  assert(
+    initialDraft.human_override_traceability_draft.memory_suitable === false,
+    "Initial human override traceability must not mark memory suitable before approval."
+  );
+  assert(
+    runtimeGuard.guardIsClean(initialDraft.human_override_traceability_draft.no_execution_guard),
+    "Human override traceability guard must remain clean."
+  );
+  assert(
+    elements.get("traceabilityTotal").textContent === String(initialDraft.human_override_traceability_draft.traceability_counts.total),
+    "Traceability total must render."
+  );
+  assert(
+    elements.get("traceabilityList").children.length === initialDraft.human_override_traceability_draft.traceability_items.length,
+    "Traceability list must render every row."
+  );
+  assert(
+    elements.get("traceabilityList").children[0].dataset.deliveryPackage === "true",
+    "Traceability list must begin with the delivery package row."
+  );
+  assert(
+    elements.get("traceabilityList").textContent.includes("已接受候选"),
+    "Traceability list must show the delivery package as accepted candidate."
+  );
+  assert(
+    elements.get("traceabilitySummary").textContent.includes("追踪记录"),
+    "Traceability summary must render."
+  );
+  assert(
+    elements.get("traceabilityBoundary").textContent.includes("不触发真实执行"),
+    "Traceability boundary must render."
+  );
+  assert(elements.get("deliveryPackageStatus").textContent.includes("交付包草案"), "Delivery package status must render.");
+  assert(elements.get("deliveryPackageHash").textContent.startsWith("fnv1a32:"), "Delivery package sanitized hash must render.");
+  assert(elements.get("deliveryPackageBoundary").textContent.includes("submitDraft_called=false"), "Delivery package boundary must render.");
+  assert(elements.get("overrideDecisionSource").textContent.includes("人工评审表单"), "Override decision source must render.");
+  assert(elements.get("overridePromptCompliance").textContent.includes("不能声明"), "Override prompt compliance summary must render.");
   assert(initialDraft.risk_review_summary_draft.status === "clear", "Initial risk summary must be clear.");
   assert(initialDraft.risk_review_summary_draft.total_risk_item_count === 0, "Initial risk summary must have zero risk items.");
   assert(initialDraft.human_inspection_checklist_draft.status === "draft_only", "Inspection checklist must be draft only.");
@@ -416,6 +642,197 @@ function main() {
   assert(initialDraft.runtime_session_export_draft.package_status === "draft_only", "Runtime session export must be draft only.");
   assert(initialDraft.runtime_session_export_draft.side_effects_performed === false, "Runtime session export must declare no side effects.");
   assert(runtimeGuard.guardIsClean(initialDraft.runtime_session_export_draft.prototype_guard), "Runtime session export guard must remain clean.");
+  assert(
+    initialDraft.runtime_review_state_draft.convergence_status === "converged",
+    "Initial runtime review state must be converged."
+  );
+  assert(
+    initialDraft.runtime_review_state_draft.normalized_state.asset_state_key === "candidate",
+    "Initial runtime review state must keep candidate separate from memory status."
+  );
+  assert(
+    initialDraft.runtime_review_state_draft.mismatch_items_cn.length === 0,
+    "Initial runtime review state must have no mismatches."
+  );
+  assert(
+    elements.get("runtimeStateUnified").textContent.includes("候选"),
+    "Runtime state unified summary must render candidate state."
+  );
+  assert(
+    elements.get("runtimeStateMismatches").textContent.includes("未发现状态矛盾"),
+    "Runtime state mismatch list must render clean state."
+  );
+  assert(
+    initialDraft.local_commit_scope_plan_draft.plan_status === "local_commit_scope_candidate",
+    "Local commit scope plan must be a local candidate only."
+  );
+  assert(initialDraft.local_commit_scope_plan_draft.staged_changes_present === false, "Local commit scope must not mark staged changes.");
+  assert(initialDraft.local_commit_scope_plan_draft.commit_allowed === false, "Local commit scope must not authorize commit.");
+  assert(initialDraft.local_commit_scope_plan_draft.push_allowed === false, "Local commit scope must not authorize push.");
+  assert(
+    elements.get("commitScopeStatus").textContent.includes("本地提交范围"),
+    "Commit scope status must render."
+  );
+  assert(elements.get("commitScopeStaged").textContent === "无 staged changes", "Commit scope staged state must render.");
+  assert(elements.get("commitScopeRemote").textContent === "远端/版本动作未授权", "Commit scope remote boundary must render.");
+  assert(elements.get("commitScopeRuntime").children.length >= 4, "Commit scope runtime group must render.");
+  assert(elements.get("commitScopeRollback").textContent.includes("不要使用破坏性历史回滚"), "Commit scope rollback guidance must render.");
+  assert(
+    initialDraft.bridge_mock_roundtrip_candidate_draft.roundtrip_status === "mock_roundtrip_candidate",
+    "Bridge mock roundtrip must be a local candidate only."
+  );
+  assert(
+    initialDraft.bridge_mock_roundtrip_candidate_draft.bridge_mode === "project_local_mock",
+    "Bridge mock roundtrip must stay project-local mock."
+  );
+  assert(
+    initialDraft.bridge_mock_roundtrip_candidate_draft.bridge_calls_observed.mock_only === true,
+    "Bridge mock roundtrip must mark calls mock-only."
+  );
+  assert(
+    initialDraft.bridge_mock_roundtrip_candidate_draft.bridge_calls_observed.loadSession === 1,
+    "Bridge mock roundtrip must record one loadSession fixture."
+  );
+  assert(
+    initialDraft.bridge_mock_roundtrip_candidate_draft.bridge_calls_observed.previewDraft === 1,
+    "Bridge mock roundtrip must record one previewDraft fixture."
+  );
+  assert(
+    initialDraft.bridge_mock_roundtrip_candidate_draft.bridge_calls_observed.submitDraft === 0,
+    "Bridge mock roundtrip must not call submitDraft."
+  );
+  assert(
+    initialDraft.bridge_mock_roundtrip_candidate_draft.plugin_called === false &&
+      initialDraft.bridge_mock_roundtrip_candidate_draft.api_called === false &&
+      initialDraft.bridge_mock_roundtrip_candidate_draft.daily_note_called === false &&
+      initialDraft.bridge_mock_roundtrip_candidate_draft.vcp_memory_written === false &&
+      initialDraft.bridge_mock_roundtrip_candidate_draft.image_created === false,
+    "Bridge mock roundtrip must keep all write/real execution flags false."
+  );
+  assert(elements.get("bridgeRoundtripStatus").textContent.includes("项目内 mock 回环候选"), "Bridge roundtrip status must render.");
+  assert(elements.get("bridgeRoundtripMethods").textContent.includes("loadSession -> previewDraft"), "Bridge methods must render.");
+  assert(elements.get("bridgeRoundtripCalls").textContent.includes("submitDraft=0"), "Bridge call counts must render submitDraft=0.");
+  assert(elements.get("bridgeRoundtripAck").textContent.includes("previewDraft"), "Bridge ack summary must render previewDraft.");
+  assert(elements.get("bridgeRoundtripBoundary").textContent.includes("不连接 CDP"), "Bridge roundtrip boundary must render no-CDP state.");
+  assert(
+    initialDraft.real_bridge_authorization_package_draft.authorization_status === "inactive_package",
+    "Real bridge authorization package must stay inactive."
+  );
+  assert(
+    initialDraft.real_bridge_authorization_package_draft.allowed_methods.join("|") === "cancel|loadSession|previewDraft",
+    "Real bridge authorization package must allow only cancel/loadSession/previewDraft."
+  );
+  assert(
+    initialDraft.real_bridge_authorization_package_draft.forbidden_methods.includes("submitDraft"),
+    "Real bridge authorization package must forbid submitDraft."
+  );
+  assert(
+    initialDraft.real_bridge_authorization_package_draft.production_bridge_invocation_performed === false &&
+      initialDraft.real_bridge_authorization_package_draft.real_cdp_called === false,
+    "Real bridge authorization package must not mark real bridge or CDP calls."
+  );
+  assert(elements.get("realBridgeAuthStatus").textContent.includes("inactive_package"), "Real bridge auth status must render.");
+  assert(elements.get("realBridgeAuthMethods").textContent.includes("previewDraft"), "Real bridge methods must render.");
+  assert(elements.get("realBridgeAuthForbidden").textContent.includes("raw CDP target"), "Real bridge forbidden outputs must render.");
+  assert(elements.get("realBridgeAuthBoundary").textContent.includes("不启动 VCPChat"), "Real bridge boundary must render no-launch state.");
+  assert(
+    initialDraft.plugin_reliability_prompt_discipline_draft.reliability_status === "local_prompt_reliability_candidate",
+    "Plugin reliability prompt discipline must be a local candidate."
+  );
+  assert(
+    initialDraft.plugin_reliability_prompt_discipline_draft.prompt_hash.startsWith("fnv1a32:"),
+    "Plugin reliability prompt discipline must include prompt hash."
+  );
+  assert(
+    initialDraft.plugin_reliability_prompt_discipline_draft.max_plugin_calls_allowed === 0,
+    "Plugin reliability prompt discipline must allow zero plugin calls."
+  );
+  assert(
+    initialDraft.plugin_reliability_prompt_discipline_draft.provider_side_capture.authorization_status === "inactive_package",
+    "Provider-side capture must stay inactive."
+  );
+  assert(elements.get("promptReliabilityStatus").textContent.includes("prompt discipline"), "Prompt reliability status must render.");
+  assert(elements.get("promptReliabilityHash").textContent.includes("doubao-seedream"), "Prompt reliability hash/model must render.");
+  assert(elements.get("promptReliabilityFailures").textContent.includes("模型遵循失败"), "Prompt reliability failure taxonomy must render.");
+  assert(elements.get("promptReliabilityBoundary").textContent.includes("不调用 DoubaoGen"), "Prompt reliability boundary must render no-plugin state.");
+  assert(
+    initialDraft.memory_write_completion_candidate_draft.candidate_status === "memory_write_completion_preflight_candidate",
+    "Memory write completion candidate must be a local preflight candidate."
+  );
+  assert(
+    initialDraft.memory_write_completion_candidate_draft.completion_criteria.plugin_success_sufficient === false,
+    "Memory write completion candidate must keep plugin success insufficient."
+  );
+  assert(
+    initialDraft.memory_write_completion_candidate_draft.observed_state.writer_executed === false &&
+      initialDraft.memory_write_completion_candidate_draft.observed_state.canonical_target_exists === false &&
+      initialDraft.memory_write_completion_candidate_draft.observed_state.canonical_target_hash_matches === false,
+    "Memory write completion candidate must keep observed completion false."
+  );
+  assert(elements.get("memoryCompletionCandidateStatus").textContent.includes("记忆写入完成候选"), "Memory completion candidate status must render.");
+  assert(elements.get("memoryCompletionCandidateCriteria").textContent.includes("plugin success 充分：false"), "Memory completion criteria must render plugin insufficiency.");
+  assert(elements.get("memoryCompletionCandidateObserved").textContent.includes("writer_executed=false"), "Memory completion observed state must render.");
+  assert(elements.get("memoryCompletionCandidateBoundary").textContent.includes("不调用 DailyNote"), "Memory completion boundary must render no-write state.");
+  assert(
+    initialDraft.single_real_generation_retry_gate_draft.gate_status === "single_real_generation_retry_gate_inactive",
+    "Single real generation retry gate must stay inactive."
+  );
+  assert(
+    initialDraft.single_real_generation_retry_gate_draft.selected_plugin_id === "DoubaoGen" &&
+      initialDraft.single_real_generation_retry_gate_draft.max_plugin_calls_per_run === 1 &&
+      initialDraft.single_real_generation_retry_gate_draft.plugin_calls_observed === 0,
+    "Single real generation retry gate must define one future call but observe zero current calls."
+  );
+  assert(
+    initialDraft.single_real_generation_retry_gate_draft.real_generation_performed === false &&
+      initialDraft.single_real_generation_retry_gate_draft.image_created === false &&
+      initialDraft.single_real_generation_retry_gate_draft.memory_write_block.memory_write_allowed_by_this_record === false,
+    "Single real generation retry gate must keep generation/image/memory false."
+  );
+  assert(elements.get("generationRetryGateStatus").textContent.includes("inactive_package"), "Generation retry gate status must render.");
+  assert(elements.get("generationRetryGatePlugin").textContent.includes("DoubaoGen"), "Generation retry gate plugin/model must render.");
+  assert(elements.get("generationRetryGatePrompt").textContent.includes("prompt hash"), "Generation retry gate prompt hash must render.");
+  assert(elements.get("generationRetryGateGuards").textContent.includes("image_created=false"), "Generation retry gate guards must render no-image state.");
+  assert(elements.get("generationRetryGateBoundary").textContent.includes("不调用 DoubaoGen"), "Generation retry gate boundary must render no-plugin state.");
+  assert(
+    initialDraft.real_memory_write_authorization_package_draft.authorization_status === "inactive_package",
+    "Real memory write authorization package must stay inactive."
+  );
+  assert(
+    initialDraft.real_memory_write_authorization_package_draft.max_daily_note_writes === 1 &&
+      initialDraft.real_memory_write_authorization_package_draft.max_vcp_memory_writes === 1 &&
+      initialDraft.real_memory_write_authorization_package_draft.no_success_fabrication_rule === true,
+    "Real memory write authorization package must define single-write limits and no-success-fabrication rule."
+  );
+  assert(
+    initialDraft.real_memory_write_authorization_package_draft.daily_note_called === false &&
+      initialDraft.real_memory_write_authorization_package_draft.vcp_memory_written === false,
+    "Real memory write authorization package must keep write flags false."
+  );
+  assert(elements.get("memoryWriteAuthStatus").textContent.includes("inactive_package"), "Memory write auth status must render.");
+  assert(elements.get("memoryWriteAuthCounts").textContent.includes("max_daily_note_writes=1"), "Memory write auth counts must render.");
+  assert(elements.get("memoryWriteAuthRules").textContent.includes("中文脱敏摘要"), "Memory write auth rules must render.");
+  assert(elements.get("memoryWriteAuthReject").textContent.includes("no_success_fabrication_rule=true"), "Memory write auth reject path must render.");
+  assert(elements.get("memoryWriteAuthBoundary").textContent.includes("不调用 DailyNote"), "Memory write auth boundary must render no-write state.");
+  assert(
+    initialDraft.asset_archive_candidate_draft.archive_status === "asset_archive_candidate_no_binary",
+    "Asset archive candidate must be metadata-only no-binary."
+  );
+  assert(
+    initialDraft.asset_archive_candidate_draft.binary_storage_allowed === false &&
+      initialDraft.asset_archive_candidate_draft.git_binary_stored === false &&
+      initialDraft.asset_archive_candidate_draft.memory_binary_stored === false,
+    "Asset archive candidate must keep binary storage false."
+  );
+  assert(
+    initialDraft.asset_archive_candidate_draft.closeout_templates.length === 3 &&
+      initialDraft.asset_archive_candidate_draft.archived_fields.includes("asset_hash"),
+    "Asset archive candidate must include closeout templates and archive fields."
+  );
+  assert(elements.get("assetArchiveCandidateStatus").textContent.includes("资产归档候选"), "Asset archive candidate status must render.");
+  assert(elements.get("assetArchiveCandidateFields").textContent.includes("binary_storage_allowed=false"), "Asset archive fields must render no-binary state.");
+  assert(elements.get("assetArchiveCandidateCloseouts").textContent.includes("rejected"), "Asset archive closeout templates must render.");
+  assert(elements.get("assetArchiveCandidateBoundary").textContent.includes("不保存图片二进制"), "Asset archive boundary must render no-binary state.");
   assert(elements.get("batchTotal").textContent === "4", "Batch total must render.");
   assert(elements.get("batchAccepted").textContent === "1", "Batch accepted count must render.");
   assert(elements.get("batchPending").textContent === "2", "Batch pending count must render.");
@@ -466,6 +883,35 @@ function main() {
   dispatchClick(elements, "validateImportDraft");
   assert(elements.get("sessionTransferStatus").textContent.includes("校验通过"), "Import validation must accept the exported session.");
   assert(elements.get("importPreviewStatus").textContent.includes("0 个候选会变化"), "Import preview must render unchanged exported session.");
+  const legacyV1Payload = runtimeGuard.clone(exportedSessionPayload);
+  [
+    "batch_decision_draft",
+    "a5_preauthorization_review_package_draft",
+    "human_override_traceability_draft",
+    "accepted_candidate_delivery_package_draft",
+    "inactive_authorization_capsules_draft",
+    "runtime_review_state_draft",
+    "local_commit_scope_plan_draft",
+    "bridge_mock_roundtrip_candidate_draft",
+    "real_bridge_authorization_package_draft",
+    "plugin_reliability_prompt_discipline_draft",
+    "memory_write_completion_candidate_draft",
+    "single_real_generation_retry_gate_draft",
+    "real_memory_write_authorization_package_draft",
+    "asset_archive_candidate_draft"
+  ].forEach((fieldName) => {
+    delete legacyV1Payload[fieldName];
+  });
+  legacyV1Payload.session_fingerprint = context.fingerprintString(
+    context.sessionPayloadForFingerprint(legacyV1Payload)
+  );
+  legacyV1Payload.session_fingerprint_cn = `会话指纹：${legacyV1Payload.session_fingerprint}`;
+  elements.get("sessionTransferText").value = JSON.stringify(legacyV1Payload);
+  dispatchClick(elements, "validateImportDraft");
+  assert(
+    elements.get("sessionTransferStatus").textContent.includes("校验通过"),
+    "Import validation must accept legacy v1 exports without newly added draft blocks."
+  );
   const tamperedFingerprintPayload = runtimeGuard.clone(exportedSessionPayload);
   tamperedFingerprintPayload.review_session_snapshot.review_queue[0].human_note_cn = "篡改后的评论但保留旧指纹。";
   elements.get("sessionTransferText").value = JSON.stringify(tamperedFingerprintPayload);
@@ -584,6 +1030,62 @@ function main() {
     editedQueueDraft.a5_preauthorization_review_package_draft.review_text_cn.includes("队列状态保持测试"),
     "A5 preauthorization package must include edited candidate context."
   );
+  assert(
+    editedQueueDraft.accepted_candidate_delivery_package_draft.delivery_readiness === "accepted_candidate_ready",
+    "Accepted delivery package must become ready after human and memory approval."
+  );
+  assert(
+    editedQueueDraft.accepted_candidate_delivery_package_draft.human_approval_summary.approved === true,
+    "Accepted delivery package must carry human approval summary."
+  );
+  assert(
+    editedQueueDraft.accepted_candidate_delivery_package_draft.memory_delta_preview.approval_status === "approved",
+    "Accepted delivery package must carry memory approval preview."
+  );
+  assert(
+    editedQueueDraft.human_override_traceability_draft.override_performed === true,
+    "Human override traceability must record accepted-with-deviation override."
+  );
+  assert(
+    editedQueueDraft.human_override_traceability_draft.memory_suitable === true,
+    "Human override traceability must mark memory suitable after approval and clean risk."
+  );
+  assert(
+    editedQueueDraft.runtime_review_state_draft.normalized_state.asset_state_key === "accepted_by_human_override",
+    "Runtime review state must classify approved-with-deviation as accepted_by_human_override."
+  );
+  assert(
+    editedQueueDraft.runtime_review_state_draft.normalized_state.memory_status === "approved",
+    "Runtime review state must keep memory approval as a separate status."
+  );
+  assert(
+    editedQueueDraft.runtime_review_state_draft.normalized_state.write_performed === false,
+    "Runtime review state must not mark real write performed after approval."
+  );
+  assert(
+    elements.get("deliveryPackageStatus").textContent.includes("accepted 候选"),
+    "Delivery package UI must show readiness after approval."
+  );
+  assert(
+    elements.get("overrideMemorySuitability").textContent.includes("满足写入申请草案条件"),
+    "Override traceability UI must show memory suitability after approval."
+  );
+  assert(
+    elements.get("traceabilityHumanOverride").textContent === String(editedQueueDraft.human_override_traceability_draft.traceability_counts.human_override),
+    "Traceability human override count must update after approval."
+  );
+  assert(
+    elements.get("traceabilityList").textContent.includes("人工覆盖接受"),
+    "Traceability matrix must show human override wording after approval."
+  );
+  assert(
+    elements.get("traceabilityList").children.length === editedQueueDraft.human_override_traceability_draft.traceability_items.length,
+    "Traceability list row count must stay in sync after approval."
+  );
+  assert(
+    elements.get("runtimeStateUnified").textContent.includes("人工覆盖接受"),
+    "Runtime state UI must render accepted-by-human-override after approval with deviation."
+  );
   assert(elements.get("batchAccepted").textContent === "2", "Batch accepted count must update in UI.");
   assert(elements.get("batchWriteRequests").textContent === "2", "Batch write request count must update in UI.");
   assert(elements.get("batchWriteItems").children.length === 2, "Batch write item details must update in UI.");
@@ -651,6 +1153,9 @@ function main() {
   assert(approvedDraft.image_case_draft.human_approval.approved === true, "Approved human approval must be true.");
   assert(approvedDraft.memory_delta_draft.write_mode === "confirmed", "Approved memory write mode must be confirmed.");
   assert(approvedDraft.memory_delta_draft.final_decision.should_write_to_vcp === true, "Approved memory write request must be true.");
+  assert(approvedDraft.memory_completion_state_draft.write_requested === true, "Approved memory completion state must keep write requested true.");
+  assert(approvedDraft.memory_completion_state_draft.write_authorized === true, "Approved memory completion state must record authorization.");
+  assert(approvedDraft.memory_completion_state_draft.write_performed === false, "Approved memory completion state must stay no-write.");
   assert(elements.get("summarySessionStatus").textContent === "已批准", "Approved summary must show approved review status.");
   assert(elements.get("summaryAssetStatus").textContent === "可接受", "Approved summary must show accepted asset status.");
   assert(elements.get("summaryMemoryStatus").textContent === "已批准写入申请", "Approved summary must show approved memory status.");
@@ -659,6 +1164,15 @@ function main() {
   assert(approvedDraft.review_session_draft.next_action_cn === "可进入人工验货与后续写入授权", "Approved draft must include Chinese next action.");
   assert(approvedDraft.review_session_draft.acceptance_verdict.status_cn === "图像可接受，等待写入授权", "Approved draft must include write-authorization verdict.");
   assert(elements.get("memoryPreviewDecision").textContent === "已形成写入申请，仍未真实写入", "Approved memory preview must show write request without real write.");
+  assert(elements.get("memoryCompletionRequested").textContent === "已形成写入请求", "Approved memory completion requested state must render.");
+  assert(elements.get("memoryCompletionAuthorized").textContent === "已获得写入授权", "Approved memory completion authorization must render.");
+  assert(elements.get("memoryCompletionPerformed").textContent === "尚未真实写入", "Approved memory completion performed state must stay false.");
+  assert(elements.get("memoryCompletionLocationVerified").textContent === "目标位置未验证", "Approved memory completion location state must stay false.");
+  assert(elements.get("memoryCompletionHashMatched").textContent === "写入哈希未匹配", "Approved memory completion hash state must stay false.");
+  assert(
+    elements.get("memoryCompletionPluginSufficient").textContent === "false（插件 success 不足以代表完成）",
+    "Approved memory completion plugin sufficiency must stay false."
+  );
   assert(approvedDraft.review_session_draft.review_preflight.accepted_has_human_approval === true, "Approved preflight must confirm human approval.");
   assert(approvedDraft.review_session_draft.review_preflight.prototype_guard_clean === true, "Approved preflight must confirm clean guard.");
   assert(runtimeGuard.guardIsClean(approvedDraft.prototype_guard), "Approved prototype guard must remain clean.");
@@ -699,6 +1213,64 @@ function main() {
   const badApprovalAck = context.window.ImageLabHostBridge.submitDraft(badApprovalDraft);
   assert(badApprovalAck.accepted_by_host_mock === false, "Host mock must reject accepted asset without approval.");
 
+  const badDeliveryPackageDraft = runtimeGuard.clone(approvedDraft);
+  badDeliveryPackageDraft.accepted_candidate_delivery_package_draft.submitDraft_called = true;
+  const badDeliveryPackageAck = context.window.ImageLabHostBridge.submitDraft(badDeliveryPackageDraft);
+  assert(badDeliveryPackageAck.accepted_by_host_mock === false, "Host mock must reject dirty delivery package draft.");
+
+  const activeCapsuleDraft = runtimeGuard.clone(approvedDraft);
+  activeCapsuleDraft.inactive_authorization_capsules_draft.capsules[0].authorization_status = "active";
+  const activeCapsuleAck = context.window.ImageLabHostBridge.submitDraft(activeCapsuleDraft);
+  assert(activeCapsuleAck.accepted_by_host_mock === false, "Host mock must reject activated authorization capsule draft.");
+
+  const stateMismatchDraft = runtimeGuard.clone(approvedDraft);
+  stateMismatchDraft.runtime_review_state_draft.mismatch_items_cn.push("测试矛盾。");
+  const stateMismatchAck = context.window.ImageLabHostBridge.submitDraft(stateMismatchDraft);
+  assert(stateMismatchAck.accepted_by_host_mock === false, "Host mock must reject runtime state mismatch draft.");
+
+  const stagedCommitScopeDraft = runtimeGuard.clone(approvedDraft);
+  stagedCommitScopeDraft.local_commit_scope_plan_draft.staged_changes_present = true;
+  const stagedCommitScopeAck = context.window.ImageLabHostBridge.submitDraft(stagedCommitScopeDraft);
+  assert(stagedCommitScopeAck.accepted_by_host_mock === false, "Host mock must reject staged commit-scope draft.");
+
+  const dirtyBridgeRoundtripDraft = runtimeGuard.clone(approvedDraft);
+  dirtyBridgeRoundtripDraft.bridge_mock_roundtrip_candidate_draft.bridge_calls_observed.submitDraft = 1;
+  const dirtyBridgeRoundtripAck = context.window.ImageLabHostBridge.previewDraft(dirtyBridgeRoundtripDraft);
+  assert(dirtyBridgeRoundtripAck.accepted_by_host_mock === false, "Host mock previewDraft must reject dirty bridge roundtrip draft.");
+
+  const activeRealBridgeDraft = runtimeGuard.clone(approvedDraft);
+  activeRealBridgeDraft.real_bridge_authorization_package_draft.authorization_status = "active";
+  const activeRealBridgeAck = context.window.ImageLabHostBridge.previewDraft(activeRealBridgeDraft);
+  assert(activeRealBridgeAck.accepted_by_host_mock === false, "Host mock previewDraft must reject active real bridge package.");
+
+  const dirtyPromptReliabilityDraft = runtimeGuard.clone(approvedDraft);
+  dirtyPromptReliabilityDraft.plugin_reliability_prompt_discipline_draft.max_plugin_calls_allowed = 1;
+  const dirtyPromptReliabilityAck = context.window.ImageLabHostBridge.previewDraft(dirtyPromptReliabilityDraft);
+  assert(dirtyPromptReliabilityAck.accepted_by_host_mock === false, "Host mock previewDraft must reject prompt reliability with plugin calls.");
+
+  const dirtyMemoryCompletionCandidateDraft = runtimeGuard.clone(approvedDraft);
+  dirtyMemoryCompletionCandidateDraft.memory_write_completion_candidate_draft.write_complete_declared = true;
+  const dirtyMemoryCompletionCandidateAck = context.window.ImageLabHostBridge.previewDraft(dirtyMemoryCompletionCandidateDraft);
+  assert(
+    dirtyMemoryCompletionCandidateAck.accepted_by_host_mock === false,
+    "Host mock previewDraft must reject memory completion candidate with completed write."
+  );
+
+  const dirtyGenerationRetryGateDraft = runtimeGuard.clone(approvedDraft);
+  dirtyGenerationRetryGateDraft.single_real_generation_retry_gate_draft.plugin_calls_observed = 1;
+  const dirtyGenerationRetryGateAck = context.window.ImageLabHostBridge.previewDraft(dirtyGenerationRetryGateDraft);
+  assert(dirtyGenerationRetryGateAck.accepted_by_host_mock === false, "Host mock previewDraft must reject retry gate with observed plugin call.");
+
+  const dirtyMemoryWriteAuthDraft = runtimeGuard.clone(approvedDraft);
+  dirtyMemoryWriteAuthDraft.real_memory_write_authorization_package_draft.daily_note_called = true;
+  const dirtyMemoryWriteAuthAck = context.window.ImageLabHostBridge.previewDraft(dirtyMemoryWriteAuthDraft);
+  assert(dirtyMemoryWriteAuthAck.accepted_by_host_mock === false, "Host mock previewDraft must reject memory authorization with write call.");
+
+  const dirtyAssetArchiveDraft = runtimeGuard.clone(approvedDraft);
+  dirtyAssetArchiveDraft.asset_archive_candidate_draft.binary_storage_allowed = true;
+  const dirtyAssetArchiveAck = context.window.ImageLabHostBridge.previewDraft(dirtyAssetArchiveDraft);
+  assert(dirtyAssetArchiveAck.accepted_by_host_mock === false, "Host mock previewDraft must reject asset archive with binary storage.");
+
   elements.get("queueFilter").value = "all";
   dispatchChange(elements, "queueFilter");
   dispatchClick(elements, "batchSelectVisible");
@@ -725,6 +1297,8 @@ function main() {
       compare_version_id: initialDraft.review_session_draft.compare_version_id,
       annotation_notes_count: initialDraft.review_session_draft.annotation_notes.length,
       memory_write_mode: initialDraft.memory_delta_draft.write_mode,
+      memory_completion_requested: initialDraft.memory_completion_state_draft.write_requested,
+      memory_completion_authorized: initialDraft.memory_completion_state_draft.write_authorized,
       host_ack: elements.get("hostStatus").textContent
     },
     summary: {
@@ -784,6 +1358,100 @@ function main() {
       preauthorization_package_forbids_plugin:
         initialDraft.a5_preauthorization_review_package_draft.forbidden_operations_cn.includes("调用插件")
     },
+    inactive_authorization_capsules: {
+      authorization_status: initialDraft.inactive_authorization_capsules_draft.authorization_status,
+      capsule_count: initialDraft.inactive_authorization_capsules_draft.capsule_count,
+      activation_required: initialDraft.inactive_authorization_capsules_draft.capsules.every(
+        (capsule) => capsule.activation_required === true
+      ),
+      no_execution_guard_clean: runtimeGuard.guardIsClean(initialDraft.inactive_authorization_capsules_draft.no_execution_guard)
+    },
+    runtime_review_state: {
+      initial_convergence_status: initialDraft.runtime_review_state_draft.convergence_status,
+      initial_asset_state_key: initialDraft.runtime_review_state_draft.normalized_state.asset_state_key,
+      approved_asset_state_key: editedQueueDraft.runtime_review_state_draft.normalized_state.asset_state_key,
+      mismatch_count: initialDraft.runtime_review_state_draft.mismatch_items_cn.length,
+      memory_status_separate: editedQueueDraft.runtime_review_state_draft.normalized_state.memory_status === "approved"
+    },
+    local_commit_scope_plan: {
+      plan_status: initialDraft.local_commit_scope_plan_draft.plan_status,
+      staged_changes_present: initialDraft.local_commit_scope_plan_draft.staged_changes_present,
+      commit_allowed: initialDraft.local_commit_scope_plan_draft.commit_allowed,
+      push_allowed: initialDraft.local_commit_scope_plan_draft.push_allowed,
+      scope_group_count: initialDraft.local_commit_scope_plan_draft.scope_groups.length
+    },
+    bridge_mock_roundtrip_candidate: {
+      roundtrip_status: initialDraft.bridge_mock_roundtrip_candidate_draft.roundtrip_status,
+      bridge_mode: initialDraft.bridge_mock_roundtrip_candidate_draft.bridge_mode,
+      mock_only: initialDraft.bridge_mock_roundtrip_candidate_draft.bridge_calls_observed.mock_only,
+      load_session_calls: initialDraft.bridge_mock_roundtrip_candidate_draft.bridge_calls_observed.loadSession,
+      preview_draft_calls: initialDraft.bridge_mock_roundtrip_candidate_draft.bridge_calls_observed.previewDraft,
+      submit_draft_calls: initialDraft.bridge_mock_roundtrip_candidate_draft.bridge_calls_observed.submitDraft,
+      no_execution_guard_clean: runtimeGuard.guardIsClean(initialDraft.bridge_mock_roundtrip_candidate_draft.no_execution_guard)
+    },
+    real_bridge_authorization_package: {
+      authorization_status: initialDraft.real_bridge_authorization_package_draft.authorization_status,
+      allowed_methods: initialDraft.real_bridge_authorization_package_draft.allowed_methods,
+      submitDraft_forbidden: initialDraft.real_bridge_authorization_package_draft.forbidden_methods.includes("submitDraft"),
+      real_cdp_called: initialDraft.real_bridge_authorization_package_draft.real_cdp_called,
+      production_bridge_invocation_performed:
+        initialDraft.real_bridge_authorization_package_draft.production_bridge_invocation_performed
+    },
+    plugin_reliability_prompt_discipline: {
+      reliability_status: initialDraft.plugin_reliability_prompt_discipline_draft.reliability_status,
+      prompt_hash_present: initialDraft.plugin_reliability_prompt_discipline_draft.prompt_hash.startsWith("fnv1a32:"),
+      max_plugin_calls_allowed: initialDraft.plugin_reliability_prompt_discipline_draft.max_plugin_calls_allowed,
+      provider_capture_inactive:
+        initialDraft.plugin_reliability_prompt_discipline_draft.provider_side_capture.authorization_status === "inactive_package",
+      failure_taxonomy_count: initialDraft.plugin_reliability_prompt_discipline_draft.failure_taxonomy.length
+    },
+    memory_write_completion_candidate: {
+      candidate_status: initialDraft.memory_write_completion_candidate_draft.candidate_status,
+      plugin_success_sufficient:
+        initialDraft.memory_write_completion_candidate_draft.completion_criteria.plugin_success_sufficient,
+      writer_executed: initialDraft.memory_write_completion_candidate_draft.observed_state.writer_executed,
+      canonical_target_exists: initialDraft.memory_write_completion_candidate_draft.observed_state.canonical_target_exists,
+      write_complete_declared: initialDraft.memory_write_completion_candidate_draft.write_complete_declared
+    },
+    single_real_generation_retry_gate: {
+      gate_status: initialDraft.single_real_generation_retry_gate_draft.gate_status,
+      selected_plugin_id: initialDraft.single_real_generation_retry_gate_draft.selected_plugin_id,
+      max_plugin_calls_per_run: initialDraft.single_real_generation_retry_gate_draft.max_plugin_calls_per_run,
+      plugin_calls_observed: initialDraft.single_real_generation_retry_gate_draft.plugin_calls_observed,
+      real_generation_performed: initialDraft.single_real_generation_retry_gate_draft.real_generation_performed
+    },
+    real_memory_write_authorization_package: {
+      authorization_status: initialDraft.real_memory_write_authorization_package_draft.authorization_status,
+      max_daily_note_writes: initialDraft.real_memory_write_authorization_package_draft.max_daily_note_writes,
+      max_vcp_memory_writes: initialDraft.real_memory_write_authorization_package_draft.max_vcp_memory_writes,
+      daily_note_called: initialDraft.real_memory_write_authorization_package_draft.daily_note_called,
+      no_success_fabrication_rule: initialDraft.real_memory_write_authorization_package_draft.no_success_fabrication_rule
+    },
+    asset_archive_candidate: {
+      archive_status: initialDraft.asset_archive_candidate_draft.archive_status,
+      asset_status_classification: initialDraft.asset_archive_candidate_draft.asset_status_classification,
+      binary_storage_allowed: initialDraft.asset_archive_candidate_draft.binary_storage_allowed,
+      closeout_template_count: initialDraft.asset_archive_candidate_draft.closeout_templates.length
+    },
+    accepted_candidate_delivery_package: {
+      package_status: initialDraft.accepted_candidate_delivery_package_draft.package_status,
+      submitDraft_called: initialDraft.accepted_candidate_delivery_package_draft.submitDraft_called,
+      sanitized_asset_hash_present:
+        initialDraft.accepted_candidate_delivery_package_draft.sanitized_asset_hash.startsWith("fnv1a32:"),
+      memory_delta_preview_present: Boolean(initialDraft.accepted_candidate_delivery_package_draft.memory_delta_preview.body_cn),
+      approved_readiness: editedQueueDraft.accepted_candidate_delivery_package_draft.delivery_readiness,
+      no_execution_guard_clean:
+        runtimeGuard.guardIsClean(initialDraft.accepted_candidate_delivery_package_draft.no_execution_guard)
+    },
+    human_override_traceability: {
+      package_status: initialDraft.human_override_traceability_draft.package_status,
+      prompt_compliance_complete: initialDraft.human_override_traceability_draft.prompt_compliance_complete,
+      override_recorded_after_approval: editedQueueDraft.human_override_traceability_draft.override_performed,
+      memory_suitable_after_approval: editedQueueDraft.human_override_traceability_draft.memory_suitable,
+      traceability_item_count: editedQueueDraft.human_override_traceability_draft.traceability_items.length,
+      traceability_counts: editedQueueDraft.human_override_traceability_draft.traceability_counts,
+      no_execution_guard_clean: runtimeGuard.guardIsClean(initialDraft.human_override_traceability_draft.no_execution_guard)
+    },
     session_transfer: {
       export_format: exportedSessionPayload.export_format,
       fingerprint_present: exportedSessionPayload.session_fingerprint.startsWith("fnv1a32:"),
@@ -810,7 +1478,10 @@ function main() {
     approved: {
       asset_status: approvedDraft.image_case_draft.asset_status,
       memory_write_mode: approvedDraft.memory_delta_draft.write_mode,
-      should_write_to_vcp: approvedDraft.memory_delta_draft.final_decision.should_write_to_vcp
+      should_write_to_vcp: approvedDraft.memory_delta_draft.final_decision.should_write_to_vcp,
+      memory_completion_requested: approvedDraft.memory_completion_state_draft.write_requested,
+      memory_completion_authorized: approvedDraft.memory_completion_state_draft.write_authorized,
+      memory_completion_performed: approvedDraft.memory_completion_state_draft.write_performed
     },
     version_selection: {
       current_version_id_updates: singleVersionDraft.review_session_draft.current_version_id === "v1",
@@ -820,7 +1491,15 @@ function main() {
     rejection_checks: {
       dirty_guard_rejected: badGuardAck.accepted_by_host_mock === false,
       dirty_audit_guard_rejected: badAuditGuardAck.accepted_by_host_mock === false,
-      accepted_without_approval_rejected: badApprovalAck.accepted_by_host_mock === false
+      accepted_without_approval_rejected: badApprovalAck.accepted_by_host_mock === false,
+      delivery_package_submit_rejected: badDeliveryPackageAck.accepted_by_host_mock === false,
+      active_authorization_capsule_rejected: activeCapsuleAck.accepted_by_host_mock === false,
+      runtime_state_mismatch_rejected: stateMismatchAck.accepted_by_host_mock === false,
+      staged_commit_scope_rejected: stagedCommitScopeAck.accepted_by_host_mock === false,
+      dirty_bridge_roundtrip_rejected: dirtyBridgeRoundtripAck.accepted_by_host_mock === false,
+      active_real_bridge_package_rejected: activeRealBridgeAck.accepted_by_host_mock === false,
+      dirty_prompt_reliability_rejected: dirtyPromptReliabilityAck.accepted_by_host_mock === false,
+      dirty_memory_completion_candidate_rejected: dirtyMemoryCompletionCandidateAck.accepted_by_host_mock === false
     },
     runtime_contract: {
       script_order: scriptOrder,

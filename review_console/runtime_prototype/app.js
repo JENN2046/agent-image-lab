@@ -11,7 +11,12 @@ function requireRuntimeGuard(runtimeGuard) {
 }
 
 function requireBridge(hostBridge) {
-  if (!hostBridge || typeof hostBridge.loadSession !== "function" || typeof hostBridge.submitDraft !== "function") {
+  if (
+    !hostBridge ||
+    typeof hostBridge.loadSession !== "function" ||
+    typeof hostBridge.previewDraft !== "function" ||
+    typeof hostBridge.submitDraft !== "function"
+  ) {
     throw new Error("主程序桥接模块不可用或不完整。");
   }
   return hostBridge;
@@ -70,6 +75,40 @@ const els = {
   preauthPackageItems: document.getElementById("preauthPackageItems"),
   preauthPackageForbidden: document.getElementById("preauthPackageForbidden"),
   preauthPackageText: document.getElementById("preauthPackageText"),
+  authCapsuleStatus: document.getElementById("authCapsuleStatus"),
+  authCapsuleCount: document.getElementById("authCapsuleCount"),
+  authCapsuleBoundary: document.getElementById("authCapsuleBoundary"),
+  authCapsuleTypes: document.getElementById("authCapsuleTypes"),
+  authCapsuleForbidden: document.getElementById("authCapsuleForbidden"),
+  authCapsuleSanitization: document.getElementById("authCapsuleSanitization"),
+  authCapsuleRollback: document.getElementById("authCapsuleRollback"),
+  authCapsuleText: document.getElementById("authCapsuleText"),
+  deliveryPackageStatus: document.getElementById("deliveryPackageStatus"),
+  deliveryPackageCandidate: document.getElementById("deliveryPackageCandidate"),
+  deliveryPackageHash: document.getElementById("deliveryPackageHash"),
+  deliveryPackageScoreBand: document.getElementById("deliveryPackageScoreBand"),
+  deliveryPackageRisk: document.getElementById("deliveryPackageRisk"),
+  deliveryPackageHumanApproval: document.getElementById("deliveryPackageHumanApproval"),
+  deliveryPackageMemoryPreview: document.getElementById("deliveryPackageMemoryPreview"),
+  deliveryPackageRules: document.getElementById("deliveryPackageRules"),
+  deliveryPackageBoundary: document.getElementById("deliveryPackageBoundary"),
+  overrideDecisionSource: document.getElementById("overrideDecisionSource"),
+  overrideReason: document.getElementById("overrideReason"),
+  overrideDeviation: document.getElementById("overrideDeviation"),
+  overridePromptCompliance: document.getElementById("overridePromptCompliance"),
+  overrideMemorySuitability: document.getElementById("overrideMemorySuitability"),
+  overrideBoundary: document.getElementById("overrideBoundary"),
+  traceabilityTotal: document.getElementById("traceabilityTotal"),
+  traceabilityAccepted: document.getElementById("traceabilityAccepted"),
+  traceabilityAcceptedCandidate: document.getElementById("traceabilityAcceptedCandidate"),
+  traceabilityHumanOverride: document.getElementById("traceabilityHumanOverride"),
+  traceabilityRejected: document.getElementById("traceabilityRejected"),
+  traceabilityNeedsHumanReview: document.getElementById("traceabilityNeedsHumanReview"),
+  traceabilityPromptComplete: document.getElementById("traceabilityPromptComplete"),
+  traceabilityMemorySuitable: document.getElementById("traceabilityMemorySuitable"),
+  traceabilitySummary: document.getElementById("traceabilitySummary"),
+  traceabilityBoundary: document.getElementById("traceabilityBoundary"),
+  traceabilityList: document.getElementById("traceabilityList"),
   sessionTransferStatus: document.getElementById("sessionTransferStatus"),
   sessionTransferCount: document.getElementById("sessionTransferCount"),
   sessionTransferGuard: document.getElementById("sessionTransferGuard"),
@@ -108,6 +147,13 @@ const els = {
   memoryPreviewTarget: document.getElementById("memoryPreviewTarget"),
   memoryPreviewDecision: document.getElementById("memoryPreviewDecision"),
   memoryPreviewBody: document.getElementById("memoryPreviewBody"),
+  memoryCompletionRequested: document.getElementById("memoryCompletionRequested"),
+  memoryCompletionAuthorized: document.getElementById("memoryCompletionAuthorized"),
+  memoryCompletionPerformed: document.getElementById("memoryCompletionPerformed"),
+  memoryCompletionLocationVerified: document.getElementById("memoryCompletionLocationVerified"),
+  memoryCompletionHashMatched: document.getElementById("memoryCompletionHashMatched"),
+  memoryCompletionPluginSufficient: document.getElementById("memoryCompletionPluginSufficient"),
+  memoryCompletionBoundary: document.getElementById("memoryCompletionBoundary"),
   hostStatus: document.getElementById("hostStatus"),
   hostSubmittedAt: document.getElementById("hostSubmittedAt"),
   verdictTitle: document.getElementById("verdictTitle"),
@@ -119,6 +165,13 @@ const els = {
   summaryWriteRequest: document.getElementById("summaryWriteRequest"),
   summaryGuard: document.getElementById("summaryGuard"),
   summaryNextAction: document.getElementById("summaryNextAction"),
+  runtimeStateUnified: document.getElementById("runtimeStateUnified"),
+  runtimeStateAsset: document.getElementById("runtimeStateAsset"),
+  runtimeStateMemory: document.getElementById("runtimeStateMemory"),
+  runtimeStateDelivery: document.getElementById("runtimeStateDelivery"),
+  runtimeStateOverride: document.getElementById("runtimeStateOverride"),
+  runtimeStateMismatches: document.getElementById("runtimeStateMismatches"),
+  runtimeStateBoundary: document.getElementById("runtimeStateBoundary"),
   inspectionVerdict: document.getElementById("inspectionVerdict"),
   inspectionChecklist: document.getElementById("inspectionChecklist"),
   inspectionRiskStats: document.getElementById("inspectionRiskStats"),
@@ -152,6 +205,52 @@ const els = {
   memoryCardDecision: document.getElementById("memoryCardDecision"),
   memoryCardBody: document.getElementById("memoryCardBody"),
   memoryCardBoundary: document.getElementById("memoryCardBoundary"),
+  commitScopeStatus: document.getElementById("commitScopeStatus"),
+  commitScopeBranch: document.getElementById("commitScopeBranch"),
+  commitScopeStaged: document.getElementById("commitScopeStaged"),
+  commitScopeRemote: document.getElementById("commitScopeRemote"),
+  commitScopeRuntime: document.getElementById("commitScopeRuntime"),
+  commitScopeValidators: document.getElementById("commitScopeValidators"),
+  commitScopeDocs: document.getElementById("commitScopeDocs"),
+  commitScopeAgentBoard: document.getElementById("commitScopeAgentBoard"),
+  commitScopeUntracked: document.getElementById("commitScopeUntracked"),
+  commitScopeRollback: document.getElementById("commitScopeRollback"),
+  bridgeRoundtripStatus: document.getElementById("bridgeRoundtripStatus"),
+  bridgeRoundtripMethods: document.getElementById("bridgeRoundtripMethods"),
+  bridgeRoundtripCalls: document.getElementById("bridgeRoundtripCalls"),
+  bridgeRoundtripAck: document.getElementById("bridgeRoundtripAck"),
+  bridgeRoundtripGuards: document.getElementById("bridgeRoundtripGuards"),
+  bridgeRoundtripBoundary: document.getElementById("bridgeRoundtripBoundary"),
+  realBridgeAuthStatus: document.getElementById("realBridgeAuthStatus"),
+  realBridgeAuthMethods: document.getElementById("realBridgeAuthMethods"),
+  realBridgeAuthRequired: document.getElementById("realBridgeAuthRequired"),
+  realBridgeAuthForbidden: document.getElementById("realBridgeAuthForbidden"),
+  realBridgeAuthBoundary: document.getElementById("realBridgeAuthBoundary"),
+  promptReliabilityStatus: document.getElementById("promptReliabilityStatus"),
+  promptReliabilityHash: document.getElementById("promptReliabilityHash"),
+  promptReliabilityRules: document.getElementById("promptReliabilityRules"),
+  promptReliabilityFailures: document.getElementById("promptReliabilityFailures"),
+  promptReliabilityBoundary: document.getElementById("promptReliabilityBoundary"),
+  memoryCompletionCandidateStatus: document.getElementById("memoryCompletionCandidateStatus"),
+  memoryCompletionCandidateCriteria: document.getElementById("memoryCompletionCandidateCriteria"),
+  memoryCompletionCandidateObserved: document.getElementById("memoryCompletionCandidateObserved"),
+  memoryCompletionCandidateFailures: document.getElementById("memoryCompletionCandidateFailures"),
+  memoryCompletionCandidateBoundary: document.getElementById("memoryCompletionCandidateBoundary"),
+  generationRetryGateStatus: document.getElementById("generationRetryGateStatus"),
+  generationRetryGatePlugin: document.getElementById("generationRetryGatePlugin"),
+  generationRetryGatePrompt: document.getElementById("generationRetryGatePrompt"),
+  generationRetryGateGuards: document.getElementById("generationRetryGateGuards"),
+  generationRetryGateAuthorization: document.getElementById("generationRetryGateAuthorization"),
+  generationRetryGateBoundary: document.getElementById("generationRetryGateBoundary"),
+  memoryWriteAuthStatus: document.getElementById("memoryWriteAuthStatus"),
+  memoryWriteAuthCounts: document.getElementById("memoryWriteAuthCounts"),
+  memoryWriteAuthRules: document.getElementById("memoryWriteAuthRules"),
+  memoryWriteAuthReject: document.getElementById("memoryWriteAuthReject"),
+  memoryWriteAuthBoundary: document.getElementById("memoryWriteAuthBoundary"),
+  assetArchiveCandidateStatus: document.getElementById("assetArchiveCandidateStatus"),
+  assetArchiveCandidateFields: document.getElementById("assetArchiveCandidateFields"),
+  assetArchiveCandidateCloseouts: document.getElementById("assetArchiveCandidateCloseouts"),
+  assetArchiveCandidateBoundary: document.getElementById("assetArchiveCandidateBoundary"),
   draftOutput: document.getElementById("draftOutput")
 };
 
@@ -204,8 +303,72 @@ const statusGlossary = [
   { key: "partial_authorizable", label_cn: "部分可授权", explanation_cn: "本批有候选可进入授权前复核，但还有阻塞或风险项需要处理。" },
   { key: "blocked", label_cn: "阻塞", explanation_cn: "候选不能进入归档或授权前复核，必须先处理原因。" },
   { key: "needs_review", label_cn: "待继续评审", explanation_cn: "候选尚未完成全部人工判断或审批。" },
-  { key: "write_request", label_cn: "写入申请草案", explanation_cn: "已形成写入申请草案，但没有真实写入 DailyNote/VCP memory。" }
+  { key: "write_request", label_cn: "写入申请草案", explanation_cn: "已形成写入申请草案，但没有真实写入 DailyNote/VCP memory。" },
+  { key: "accepted_candidate", label_cn: "已接受候选", explanation_cn: "候选已进入可接受的交付草案，但仍保持 no-write 和可追踪状态。" },
+  { key: "delivery_package", label_cn: "交付包草案", explanation_cn: "汇总候选引用、脱敏哈希、评分、风险、人工批准和记忆预览，仍不执行写入。" },
+  { key: "human_override", label_cn: "人工覆盖轨迹", explanation_cn: "记录人工接受来源、覆盖理由、已知偏差、prompt 符合度和是否适合进入记忆。" },
+  { key: "inactive_package", label_cn: "未激活授权包", explanation_cn: "未来真实动作的可复核模板；没有用户单独激活前不能执行。" },
+  { key: "runtime_state_converged", label_cn: "运行状态已收敛", explanation_cn: "资产、记忆、交付和人工覆盖状态被拆分展示，且没有互相矛盾。" },
+  { key: "commit_scope_plan", label_cn: "提交范围计划", explanation_cn: "只描述本地待提交范围，不 stage、不 commit、不 tag、不 push。" },
+  { key: "bridge_mock_roundtrip", label_cn: "Bridge mock 回环", explanation_cn: "只用项目内 mock 证明 loadSession 到 previewDraft 的无写入回执，不调用真实 VCPChat/CDP。" },
+  { key: "real_bridge_authorization", label_cn: "真实 Bridge 授权包", explanation_cn: "只准备未来真实 bridge 调用授权模板，未激活前不能启动 VCPChat、CDP 或 bridge。" },
+  { key: "prompt_reliability", label_cn: "Prompt 可靠性", explanation_cn: "把 prompt registry、lint、模型锁和失败分类变成可验证本地草案，不调用插件。" },
+  { key: "memory_completion_candidate", label_cn: "记忆完成候选", explanation_cn: "把真实记忆写入完成判定拆成请求、授权、执行、canonical 位置和哈希匹配，不真实写入。" },
+  { key: "generation_retry_gate", label_cn: "真实重试授权门", explanation_cn: "只准备未来单插件单次真实生成重试的授权模板，当前不调用插件、不创建图片。" },
+  { key: "memory_write_authorization", label_cn: "真实记忆写入授权包", explanation_cn: "只准备未来 DailyNote/VCP memory 单写授权模板，当前不执行写入。" },
+  { key: "asset_archive_candidate", label_cn: "资产归档候选", explanation_cn: "只归档资产 ref、hash、评分、摘要和规则，不保存图片二进制。" }
 ];
+
+const inactiveAuthorizationCapsuleDefinitions = Object.freeze([
+  {
+    type: "real_generation_retry",
+    title_cn: "真实生图重试授权胶囊",
+    allowed_actions_cn: ["单插件单次真实生成", "受控输出目录 ref", "失败时仅删除本次新建输出文件"],
+    forbidden_actions_cn: ["多次插件调用", "覆盖既有文件", "未审片直接写记忆"],
+    max_call_counts: { plugin_calls: 1, bridge_calls: 0, daily_note_writes: 0, vcp_memory_writes: 0 }
+  },
+  {
+    type: "memory_write",
+    title_cn: "DailyNote / VCP memory 写入授权胶囊",
+    allowed_actions_cn: ["中文脱敏正文写入申请", "最多一次 DailyNote 写入", "最多一次 VCP memory 写入"],
+    forbidden_actions_cn: ["图片二进制写入记忆", "raw plugin output 写入记忆", "未验证 canonical 位置就标记完成"],
+    max_call_counts: { plugin_calls: 0, bridge_calls: 0, daily_note_writes: 1, vcp_memory_writes: 1 }
+  },
+  {
+    type: "vcpchat_bridge_call",
+    title_cn: "VCPChat bridge 调用授权胶囊",
+    allowed_actions_cn: ["cancel", "loadSession", "previewDraft"],
+    forbidden_actions_cn: ["submitDraft", "保存 raw CDP endpoint", "保存 raw IPC payload"],
+    max_call_counts: { plugin_calls: 0, bridge_calls: 3, daily_note_writes: 0, vcp_memory_writes: 0 }
+  },
+  {
+    type: "provider_prompt_fingerprint_capture",
+    title_cn: "Provider-side prompt fingerprint 捕获授权胶囊",
+    allowed_actions_cn: ["脱敏 prompt 指纹", "脱敏模型匹配摘要", "零插件调用诊断"],
+    forbidden_actions_cn: ["保存 raw request body", "保存 endpoint", "保存 token/cookie/password"],
+    max_call_counts: { plugin_calls: 0, bridge_calls: 0, daily_note_writes: 0, vcp_memory_writes: 0 }
+  },
+  {
+    type: "version_action",
+    title_cn: "commit / tag / push / PR 版本动作授权胶囊",
+    allowed_actions_cn: ["按文件组 stage", "本地 commit", "显式授权后 tag/push/PR"],
+    forbidden_actions_cn: ["git add .", "force push", "release 发布"],
+    max_call_counts: { plugin_calls: 0, bridge_calls: 0, daily_note_writes: 0, vcp_memory_writes: 0 }
+  }
+]);
+
+const sharedForbiddenOutputsCn = Object.freeze([
+  "raw local path",
+  "raw endpoint",
+  "raw websocket url",
+  "raw runtime log",
+  "raw IPC payload",
+  "raw plugin output",
+  "raw source code",
+  "secret / token / cookie / password",
+  "customer private data",
+  "image binary in Git or memory"
+]);
 
 let queueState = normalizeQueueItems(
   session.review_queue.length > 0 ? runtimeGuard.clone(session.review_queue) : buildDefaultQueueFromVersions()
@@ -385,6 +548,47 @@ function memoryStatusLabel(status) {
 
 function writeRequestLabel(shouldWrite) {
   return shouldWrite ? "已形成写入申请，仍未真实写入" : "未形成写入申请";
+}
+
+function memoryCompletionStateLabel(shouldWrite) {
+  return shouldWrite ? "已形成写入请求" : "尚未形成写入请求";
+}
+
+function memoryAuthorizationStateLabel(isAuthorized) {
+  return isAuthorized ? "已获得写入授权" : "尚未获得写入授权";
+}
+
+function memoryExecutionStateLabel(isPerformed) {
+  return isPerformed ? "已真实写入" : "尚未真实写入";
+}
+
+function pluginSuccessSufficientLabel(isSufficient) {
+  return isSufficient ? "true（错误）" : "false（插件 success 不足以代表完成）";
+}
+
+function buildMemoryCompletionState(memoryContent, memoryApproval) {
+  const writeRequested = memoryContent.trim().length > 0;
+  const writeAuthorized = memoryApproval.status === "approved";
+  return {
+    write_requested: writeRequested,
+    write_authorized: writeAuthorized,
+    write_performed: false,
+    canonical_location_verified: false,
+    canonical_hash_matched: false,
+    plugin_success_sufficient: false,
+    write_requested_cn: memoryCompletionStateLabel(writeRequested),
+    write_authorized_cn:
+      writeAuthorized
+        ? memoryAuthorizationStateLabel(true)
+        : memoryApproval.status === "rejected"
+          ? "写入授权已拒绝"
+          : memoryAuthorizationStateLabel(false),
+    write_performed_cn: memoryExecutionStateLabel(false),
+    canonical_location_verified_cn: "目标位置未验证",
+    canonical_hash_matched_cn: "写入哈希未匹配",
+    plugin_success_sufficient_cn: pluginSuccessSufficientLabel(false),
+    boundary_cn: "当前只拆分写入请求、授权、执行与校验，不执行真实写入。"
+  };
 }
 
 function scoreBandLabel(score) {
@@ -1215,6 +1419,1159 @@ function buildA5PreauthorizationReviewPackage(batchDecision, batchSummary, riskS
   };
 }
 
+function buildInactiveAuthorizationCapsulesDraft({ createdAt, batchDecision, batchSummary, riskSummary }) {
+  const candidateLinks = batchDecision.authorizable_items.map((item) => ({
+    queue_id: item.queue_id,
+    version_id: item.version_id,
+    title_cn: item.title_cn,
+    status_cn: item.status_cn
+  }));
+  const capsules = inactiveAuthorizationCapsuleDefinitions.map((definition, index) => {
+    const capsuleId = `inactive-auth-${definition.type}-${String(index + 1).padStart(2, "0")}`;
+    return {
+      capsule_id: capsuleId,
+      capsule_type: definition.type,
+      title_cn: definition.title_cn,
+      authorization_status: "inactive_package",
+      activation_required: true,
+      activation_rule_cn: "必须由用户在新消息中明确激活；本地草案不能自动升级为真实授权。",
+      candidate_refs: candidateLinks,
+      allowed_actions_cn: definition.allowed_actions_cn,
+      forbidden_actions_cn: [...definition.forbidden_actions_cn, ...sharedForbiddenOutputsCn],
+      max_call_counts: definition.max_call_counts,
+      rollback_plan_cn:
+        "只允许回滚本次胶囊对应的新建本地草案或本次运行新建输出；禁止破坏用户已有工作，禁止跨目录删除。",
+      sanitization_rules_cn: [
+        "仓库、记忆、PR 文本和交接文档只保存脱敏 ref。",
+        "不得保存 raw 路径、endpoint、websocket、runtime log、IPC payload、插件输出、源码片段或密钥。",
+        "不得把图片二进制写入 Git、DailyNote 或 VCP memory。"
+      ],
+      execution_flags: {
+        bridge_called: false,
+        plugin_called: false,
+        api_called: false,
+        daily_note_called: false,
+        vcp_memory_written: false,
+        image_created: false,
+        commit_performed: false,
+        tag_performed: false,
+        push_performed: false,
+        pr_created: false,
+        release_created: false
+      },
+      no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard)
+    };
+  });
+  return {
+    package_status: "draft_only",
+    authorization_status: "inactive_package",
+    created_at: createdAt,
+    capsule_count: capsules.length,
+    candidate_count: candidateLinks.length,
+    batch_decision_cn: batchDecision.decision_cn,
+    risk_summary_cn: riskSummary.report_cn,
+    preflight_result_cn: batchSummary.preflight.result_cn,
+    capsules,
+    forbidden_outputs_cn: sharedForbiddenOutputsCn,
+    activation_boundary_cn:
+      "这些只是未激活授权胶囊。它们把未来真实动作变成可审查模板，但不会调用 bridge、插件、API、DailyNote、VCP memory、图片生成或远端版本动作。",
+    side_effects_performed: false,
+    no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard)
+  };
+}
+
+function humanDecisionSourceForItem(item) {
+  if (item.asset_status === "accepted" && item.human_approved === true) return "human_review_override";
+  if (item.asset_status === "candidate" && item.human_approved === true) return "human_review_candidate_accept";
+  if (item.asset_status === "rejected") return "human_review_reject";
+  return "human_review_pending";
+}
+
+function traceabilityClassForItem(item, riskSummary) {
+  const hasDeviation =
+    Boolean((item.issues_cn || "").trim()) ||
+    Boolean((item.annotation_note_cn || "").trim()) ||
+    riskSummary.high_risk_tags.length > 0;
+  if (item.asset_status === "rejected") {
+    return {
+      key: "rejected",
+      label_cn: "已拒收",
+      reason_cn: "已拒收候选，不能进入交付或记忆写入。"
+    };
+  }
+  if (item.asset_status === "accepted" && item.human_approved === true) {
+    if (hasDeviation) {
+      return {
+        key: "human_override",
+        label_cn: "人工覆盖接受",
+        reason_cn: "人工接受覆盖了已知偏差或 AI 建议差异。"
+      };
+    }
+    return {
+      key: "accepted",
+      label_cn: "已接受",
+      reason_cn: "已接受且未记录额外覆盖偏差。"
+    };
+  }
+  if (item.asset_status === "candidate" && item.human_approved === true) {
+    return {
+      key: "accepted_candidate",
+      label_cn: "已接受候选",
+      reason_cn: "候选已获得人工接受，但尚未形成最终 accepted 记忆写入状态。"
+    };
+  }
+  return {
+    key: "needs_human_review",
+    label_cn: "待人工复核",
+    reason_cn: "候选仍需人工继续判断或审批。"
+  };
+}
+
+function buildTraceabilityEntryFromItem(item, { createdAt, isDeliveryPackage = false } = {}) {
+  const riskSummary = riskSummaryForItem(item);
+  const traceabilityClass = traceabilityClassForItem(item, riskSummary);
+  const promptComplianceComplete = traceabilityClass.key === "accepted" && riskSummary.blocking === false;
+  const memorySuitable = itemHasWriteRequest(item);
+  const knownDeviationSummaryCn =
+    [
+      (item.issues_cn || "").trim(),
+      (item.annotation_note_cn || "").trim(),
+      riskSummary.high_risk_labels_cn.length > 0 ? `风险标签：${riskSummary.high_risk_labels_cn.join("、")}` : ""
+    ]
+      .filter(Boolean)
+      .join("；") || "未记录已知偏差。";
+  const overrideReasonCn =
+    traceabilityClass.key === "human_override"
+      ? "人工接受覆盖了已知偏差或与 AI 建议不一致的判断。"
+      : traceabilityClass.key === "accepted"
+        ? "人工接受与已知风险和偏差记录一致。"
+        : traceabilityClass.key === "accepted_candidate"
+          ? "候选已获得人工接受，仍需后续记忆或归档确认。"
+          : traceabilityClass.key === "rejected"
+            ? "候选已拒收，需要下一轮修正。"
+            : "候选仍需人工复核。";
+  return {
+    queue_id: item.queue_id || "delivery-package",
+    title_cn: item.title_cn || item.selected_candidate_title_cn || "交付包草案",
+    traceability_class_key: traceabilityClass.key,
+    traceability_class_cn: traceabilityClass.label_cn,
+    human_decision_source: humanDecisionSourceForItem(item),
+    human_decision_source_cn:
+      item.asset_status === "accepted" && item.human_approved === true
+        ? "人工接受"
+        : item.asset_status === "rejected"
+          ? "人工拒收"
+          : "待人工复核",
+    human_decision_at: createdAt || nowIso(),
+    override_reason_cn: overrideReasonCn,
+    known_deviation_summary_cn: knownDeviationSummaryCn,
+    prompt_compliance_complete: promptComplianceComplete,
+    prompt_compliance_summary_cn: promptComplianceComplete
+      ? "prompt compliance 完整。"
+      : "仍存在已知偏差或未达到完整 prompt compliance。",
+    memory_suitable: memorySuitable,
+    memory_suitability_summary_cn: memorySuitable
+      ? "适合进入记忆写入申请草案。"
+      : "不适合进入真实记忆写入。",
+    review_status_cn: item.candidate_review_state?.status_cn || candidateReviewState(item).status_cn,
+    asset_status_cn: assetStatusLabel(item.asset_status),
+    risk_summary_cn: riskSummary.reason_cn,
+    is_delivery_package_row: isDeliveryPackage
+  };
+}
+
+function buildHumanOverrideTraceabilityMatrix(queueDraft, createdAt, deliveryPackageDraft, selectedItem = null) {
+  const deliverySeed = deliveryPackageDraft || selectedItem || queueDraft[0] || {};
+  const deliveryRow = buildTraceabilityEntryFromItem(
+    {
+      queue_id: "delivery-package",
+      title_cn: deliverySeed.selected_candidate_title_cn || deliverySeed.title_cn || "交付包草案",
+      asset_status: deliverySeed.selected_candidate_asset_status || deliverySeed.asset_status || "candidate",
+      human_approved: deliverySeed.human_approval_summary?.approved ?? deliverySeed.human_approved ?? false,
+      memory_approval_status: deliverySeed.memory_delta_preview?.approval_status || deliverySeed.memory_approval_status || "draft",
+      issues_cn: deliverySeed.risk_summary_cn || deliverySeed.issues_cn || "",
+      annotation_note_cn: deliverySeed.human_override_summary_cn || deliverySeed.annotation_note_cn || "",
+      candidate_review_state: {
+        status_cn: deliverySeed.candidate_review_state?.status_cn || "已接受候选草案"
+      }
+    },
+    { createdAt, isDeliveryPackage: true }
+  );
+  deliveryRow.traceability_class_key = "accepted_candidate";
+  deliveryRow.traceability_class_cn = "已接受候选";
+  deliveryRow.human_decision_source = "delivery_package_draft";
+  deliveryRow.human_decision_source_cn = "交付包草案";
+  deliveryRow.override_reason_cn = "已接受候选交付包草案，保持 no-write 和可追踪状态。";
+  deliveryRow.known_deviation_summary_cn = deliverySeed.human_override_summary_cn || "未记录已知偏差。";
+  deliveryRow.prompt_compliance_complete =
+    deliverySeed.delivery_readiness === "accepted_candidate_ready" ||
+    (deliverySeed.asset_status === "accepted" && deliverySeed.human_approved === true);
+  deliveryRow.prompt_compliance_summary_cn = deliveryRow.prompt_compliance_complete
+    ? "交付包草案满足当前可追踪条件。"
+    : "交付包草案尚未满足完成条件。";
+  deliveryRow.memory_suitable =
+    deliverySeed.memory_delta_preview?.approval_status === "approved" ||
+    deliverySeed.memory_approval_status === "approved";
+  deliveryRow.memory_suitability_summary_cn = deliveryRow.memory_suitable
+    ? "交付包草案对应记忆预览已获批准。"
+    : "交付包草案对应记忆预览尚未获批准。";
+
+  const queueRows = queueDraft.map((item) => buildTraceabilityEntryFromItem(item, { createdAt }));
+  const traceabilityItems = [deliveryRow, ...queueRows];
+  const counts = traceabilityItems.reduce(
+    (acc, item) => {
+      acc.total += 1;
+      acc[item.traceability_class_key] = (acc[item.traceability_class_key] || 0) + 1;
+      if (item.prompt_compliance_complete) acc.prompt_complete += 1;
+      if (item.memory_suitable) acc.memory_suitable += 1;
+      return acc;
+    },
+    {
+      total: 0,
+      accepted: 0,
+      accepted_candidate: 0,
+      human_override: 0,
+      rejected: 0,
+      needs_human_review: 0,
+      prompt_complete: 0,
+      memory_suitable: 0
+    }
+  );
+  const summaryParts = [
+    `共 ${counts.total} 条追踪记录，${counts.accepted} 条已接受，${counts.accepted_candidate} 条已接受候选，${counts.human_override} 条人工覆盖接受，${counts.rejected} 条已拒收，${counts.needs_human_review} 条待人工复核。`,
+    `prompt compliance 完整 ${counts.prompt_complete} 条，适合进入记忆 ${counts.memory_suitable} 条。`
+  ];
+  return {
+    status: "draft_only",
+    traceability_items: traceabilityItems,
+    traceability_counts: counts,
+    traceability_summary_cn: summaryParts.join(" "),
+    traceability_boundary_cn: "该矩阵只提供本地审片可读、可导出、可验证摘要，不触发真实执行。",
+    no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard)
+  };
+}
+
+function buildHumanOverrideTraceabilityDraft({
+  createdAt,
+  queueDraft,
+  selectedItem,
+  version,
+  score,
+  assetStatus,
+  memoryApproval,
+  humanApproval,
+  humanReview,
+  annotationText,
+  issuesText,
+  riskSummary,
+  deliveryPackageDraft
+}) {
+  const matrixDraft = buildHumanOverrideTraceabilityMatrix(queueDraft, createdAt, deliveryPackageDraft, selectedItem);
+  const knownDeviationParts = [
+    issuesText,
+    annotationText,
+    riskSummary.tag_labels_cn.length > 0 ? `风险标签：${riskSummary.tag_labels_cn.join("、")}` : ""
+  ].filter(Boolean);
+  const knownDeviationSummary = knownDeviationParts.length > 0 ? knownDeviationParts.join("；") : "未记录已知偏差。";
+  const promptComplianceComplete =
+    assetStatus === "accepted" &&
+    riskSummary.blocking === false &&
+    knownDeviationParts.length === 0 &&
+    score >= 90;
+  const memorySuitable = itemHasWriteRequest(selectedItem);
+  const humanOverridePerformed = assetStatus === "accepted" && humanApproval.approved === true && promptComplianceComplete === false;
+  const overrideReason = humanOverridePerformed
+    ? "人工接受该候选，但保留已知视觉偏差说明；这是人工覆盖接受，不是完美 prompt compliance。"
+    : assetStatus === "accepted"
+      ? "人工接受候选，未发现需要覆盖记录的偏差。"
+      : "尚未形成 accepted 级人工覆盖接受。";
+
+  return {
+    package_status: "draft_only",
+    traceability_id: `human-override-${selectedItem.queue_id}`,
+    traceability_matrix_status: matrixDraft.status,
+    selected_queue_id: selectedItem.queue_id,
+    selected_version_id: version.version_id,
+    human_decision_source: "review_console_human_form",
+    human_decision_source_cn: "Review Console 人工评审表单",
+    human_decision_at: humanApproval.approved_at || createdAt,
+    human_approved: humanApproval.approved,
+    memory_approval_status: memoryApproval.status,
+    score,
+    review_score_band: scoreBandLabel(score),
+    override_performed: humanOverridePerformed,
+    override_reason_cn: overrideReason,
+    known_deviation_summary_cn: knownDeviationSummary,
+    prompt_compliance_complete: promptComplianceComplete,
+    prompt_compliance_summary_cn: promptComplianceComplete
+      ? "当前未记录阻塞风险或已知偏差，可视为 prompt compliance 完整。"
+      : "当前仍记录已知偏差或未进入 accepted 状态，不能声明 prompt compliance 完整。",
+    memory_suitable: memorySuitable,
+    memory_suitability_summary_cn: memorySuitable
+      ? "人工接受、记忆审批和风险预检均满足写入申请草案条件。"
+      : "尚未满足写入申请草案条件，不适合进入真实记忆写入。",
+    human_note_cn: humanReview.note_cn,
+    summary_cn: `${selectedItem.title_cn}：${overrideReason}`,
+    traceability_items: matrixDraft.traceability_items,
+    traceability_counts: matrixDraft.traceability_counts,
+    traceability_summary_cn: matrixDraft.traceability_summary_cn,
+    traceability_boundary_cn: matrixDraft.traceability_boundary_cn,
+    side_effects_performed: false,
+    plugin_called: false,
+    api_called: false,
+    daily_note_called: false,
+    vcp_memory_written: false,
+    image_created: false,
+    no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard)
+  };
+}
+
+function buildAcceptedCandidateDeliveryPackageDraft({
+  createdAt,
+  selectedItem,
+  version,
+  score,
+  assetStatus,
+  memoryApproval,
+  humanApproval,
+  memoryContent,
+  memoryDeltaId,
+  riskSummary,
+  humanOverrideTraceabilityDraft
+}) {
+  const candidateReady =
+    assetStatus === "accepted" &&
+    humanApproval.approved === true &&
+    memoryApproval.status === "approved" &&
+    riskSummary.blocking === false;
+  const reusableRules = runtimeGuard.requireArray(session.image_case_seed.reusable_rules_cn);
+  const riskSummaryCn = riskSummary.tag_labels_cn.length > 0
+    ? `${riskSummary.reason_cn} 风险标签：${riskSummary.tag_labels_cn.join("、")}。`
+    : "未标记高风险标签。";
+  const memoryCompletionState = buildMemoryCompletionState(memoryContent, memoryApproval);
+  const memoryPreview = {
+    delta_id: memoryDeltaId,
+    title_cn: session.memory_preview.chinese_diary_title,
+    target_notebook: session.memory_preview.target_notebook,
+    write_mode: memoryWriteMode(memoryApproval.status),
+    approval_status: memoryApproval.status,
+    should_write_to_vcp: memoryApproval.status === "approved",
+    body_cn: memoryContent,
+    source_ids: [session.session_id, session.task_id, session.case_id],
+    completion_state: memoryCompletionState
+  };
+  const packageText = [
+    "Accepted candidate delivery package draft",
+    `候选：${selectedItem.title_cn}`,
+    `候选引用：${version.asset_ref}`,
+    `脱敏哈希：${fingerprintString({ asset_ref: version.asset_ref, version_id: version.version_id })}`,
+    `评分：${score}（${scoreBandLabel(score)}）`,
+    `风险：${riskSummaryCn}`,
+    `人工批准：${humanApproval.approved ? "已批准" : "未批准"}`,
+    `记忆预览：${memoryPreview.write_mode} / ${memoryPreview.approval_status}`,
+    `记忆完成：${memoryPreview.completion_state.write_requested_cn} / ${memoryPreview.completion_state.write_authorized_cn} / ${memoryPreview.completion_state.write_performed_cn}`,
+    `完成边界：${memoryPreview.completion_state.plugin_success_sufficient_cn}`,
+    `可复用规则：${reusableRules.length > 0 ? reusableRules.join("；") : "暂无"}`,
+    "边界：draft_only=true，submitDraft_called=false，不调用插件/API/DailyNote/VCP memory，不创建图片。"
+  ].join("\n");
+
+  return {
+    package_status: "draft_only",
+    package_status_cn: "accepted candidate 交付包草案",
+    delivery_readiness: candidateReady ? "accepted_candidate_ready" : "not_ready",
+    delivery_readiness_cn: candidateReady ? "accepted 候选可进入后续交付复核" : "尚未满足 accepted 交付条件",
+    created_at: createdAt,
+    selected_queue_id: selectedItem.queue_id,
+    selected_candidate_ref: version.asset_ref,
+    selected_candidate_version_id: version.version_id,
+    selected_candidate_title_cn: selectedItem.title_cn,
+    sanitized_asset_hash: fingerprintString({ asset_ref: version.asset_ref, version_id: version.version_id }),
+    review_score: score,
+    review_score_band: scoreBandLabel(score),
+    risk_summary_cn: riskSummaryCn,
+    human_approval_summary: {
+      approved: humanApproval.approved,
+      approved_by: humanApproval.approved_by,
+      approved_at: humanApproval.approved_at,
+      approval_notes_cn: humanApproval.approval_notes_cn
+    },
+    human_approval_summary_cn: humanApproval.approved ? "人工已明确批准 accepted。" : "尚未获得人工 accepted 批准。",
+    memory_delta_preview: memoryPreview,
+    reusable_rule_summary_cn: reusableRules.length > 0 ? reusableRules.join("；") : "暂无可复用规则。",
+    human_override_traceability_ref: humanOverrideTraceabilityDraft.traceability_id,
+    human_override_summary_cn: humanOverrideTraceabilityDraft.summary_cn,
+    review_text_cn: packageText,
+    draft_only: true,
+    submitDraft_called: false,
+    side_effects_performed: false,
+    plugin_called: false,
+    api_called: false,
+    daily_note_called: false,
+    vcp_memory_written: false,
+    image_created: false,
+    no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard)
+  };
+}
+
+function unifiedAssetStateKey({
+  assetStatus,
+  selectedRiskSummary,
+  humanApproval,
+  humanOverrideTraceabilityDraft,
+  acceptedCandidateDeliveryPackageDraft
+}) {
+  if (selectedRiskSummary.blocking) return "blocked";
+  if (assetStatus === "rejected") return "rejected";
+  if (humanOverrideTraceabilityDraft.override_performed) return "accepted_by_human_override";
+  if (acceptedCandidateDeliveryPackageDraft.delivery_readiness === "accepted_candidate_ready") {
+    return "accepted_candidate";
+  }
+  if (assetStatus === "accepted" && humanApproval.approved === true) return "accepted_candidate";
+  return "candidate";
+}
+
+function unifiedAssetStateLabel(stateKey) {
+  const labels = {
+    candidate: "候选",
+    accepted_candidate: "已接受候选",
+    accepted_by_human_override: "人工覆盖接受",
+    rejected: "已拒收",
+    blocked: "阻塞"
+  };
+  return labels[stateKey] || stateKey;
+}
+
+function buildRuntimeReviewStateDraft({
+  createdAt,
+  reviewQueueDraft,
+  selectedItem,
+  assetStatus,
+  memoryApproval,
+  memoryCompletionState,
+  humanApproval,
+  selectedRiskSummary,
+  acceptedCandidateDeliveryPackageDraft,
+  humanOverrideTraceabilityDraft
+}) {
+  const stateKey = unifiedAssetStateKey({
+    assetStatus,
+    selectedRiskSummary,
+    humanApproval,
+    humanOverrideTraceabilityDraft,
+    acceptedCandidateDeliveryPackageDraft
+  });
+  const mismatchItems = [];
+  if (memoryCompletionState.write_authorized === true && memoryCompletionState.write_requested !== true) {
+    mismatchItems.push("记忆已授权但没有写入请求。");
+  }
+  if (memoryCompletionState.write_authorized === true && memoryCompletionState.write_performed === true) {
+    mismatchItems.push("no-write prototype 中不能同时声明已授权且已真实写入。");
+  }
+  if (humanOverrideTraceabilityDraft.override_performed === true && humanOverrideTraceabilityDraft.prompt_compliance_complete === true) {
+    mismatchItems.push("人工覆盖接受不能被当作 prompt compliance 完成。");
+  }
+  if (assetStatus === "accepted" && humanApproval.approved !== true) {
+    mismatchItems.push("资产 accepted 必须有人工批准。");
+  }
+  if (memoryApproval.status !== "approved" && acceptedCandidateDeliveryPackageDraft.delivery_readiness === "accepted_candidate_ready") {
+    mismatchItems.push("交付包 ready 不能缺少记忆审批。");
+  }
+  if (selectedRiskSummary.blocking && acceptedCandidateDeliveryPackageDraft.delivery_readiness === "accepted_candidate_ready") {
+    mismatchItems.push("存在阻塞风险时不能声明交付包 ready。");
+  }
+
+  return {
+    package_status: "draft_only",
+    convergence_status: mismatchItems.length === 0 ? "converged" : "mismatch_detected",
+    convergence_status_cn: mismatchItems.length === 0 ? "运行状态已收敛" : "运行状态存在矛盾",
+    created_at: createdAt,
+    selected_queue_id: selectedItem.queue_id,
+    selected_title_cn: selectedItem.title_cn,
+    normalized_state: {
+      asset_state_key: stateKey,
+      asset_state_cn: unifiedAssetStateLabel(stateKey),
+      review_status: reviewSessionStatus(assetStatus),
+      review_status_cn: reviewStatusLabel(reviewSessionStatus(assetStatus)),
+      memory_status: memoryApproval.status,
+      memory_status_cn: memoryStatusLabel(memoryApproval.status),
+      write_requested: memoryCompletionState.write_requested,
+      write_authorized: memoryCompletionState.write_authorized,
+      write_performed: memoryCompletionState.write_performed,
+      delivery_readiness: acceptedCandidateDeliveryPackageDraft.delivery_readiness,
+      delivery_readiness_cn: acceptedCandidateDeliveryPackageDraft.delivery_readiness_cn,
+      human_override_performed: humanOverrideTraceabilityDraft.override_performed,
+      prompt_compliance_complete: humanOverrideTraceabilityDraft.prompt_compliance_complete
+    },
+    queue_state_counts: {
+      total: reviewQueueDraft.length,
+      candidate: reviewQueueDraft.filter((item) => item.asset_status === "candidate").length,
+      accepted: reviewQueueDraft.filter((item) => item.asset_status === "accepted").length,
+      rejected: reviewQueueDraft.filter((item) => item.asset_status === "rejected").length,
+      blocked: reviewQueueDraft.filter(itemIsBlocked).length
+    },
+    mismatch_items_cn: mismatchItems,
+    summary_cn:
+      mismatchItems.length === 0
+        ? `${selectedItem.title_cn} 当前为${unifiedAssetStateLabel(stateKey)}；资产状态、记忆状态、交付包和人工覆盖轨迹已分离展示。`
+        : `检测到 ${mismatchItems.length} 个状态矛盾，需要先修正本地草案。`,
+    boundary_cn: "状态收敛只解释本地 Review Console 草案，不代表真实执行、真实写入或 submitDraft 生产调用。",
+    side_effects_performed: false,
+    no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard)
+  };
+}
+
+function buildLocalCommitScopePlanDraft({ createdAt, runtimeReviewStateDraft }) {
+  return {
+    package_status: "draft_only",
+    plan_status: "local_commit_scope_candidate",
+    plan_status_cn: "本地提交范围候选计划",
+    created_at: createdAt,
+    branch_ref: "codex/runtime-review-followup",
+    staged_changes_present: false,
+    commit_allowed: false,
+    tag_allowed: false,
+    push_allowed: false,
+    pr_allowed: false,
+    release_allowed: false,
+    scope_groups: [
+      {
+        group_id: "runtime_prototype",
+        title_cn: "Runtime Review Console prototype",
+        files_cn: [
+          "review_console/runtime_prototype/app.js",
+          "review_console/runtime_prototype/index.html",
+          "review_console/runtime_prototype/host_bridge_mock.js",
+          "review_console/runtime_prototype/runtime_guard.js",
+          "review_console/runtime_prototype/styles.css",
+          "review_console/runtime_prototype/FIELD_MAPPING.md",
+          "review_console/runtime_prototype/README.md"
+        ]
+      },
+      {
+        group_id: "validators",
+        title_cn: "Runtime and local scope validators",
+        files_cn: [
+          "scripts/validate_runtime_guard_unit.js",
+          "scripts/validate_runtime_prototype_smoke.js",
+          "scripts/validate_runtime_delivery_surface.js",
+          "scripts/validate_runtime_prototype_suite.js",
+          "scripts/validate_local_commit_scope.js",
+          "scripts/validate_mvp.ps1"
+        ]
+      },
+      {
+        group_id: "docs_indexes",
+        title_cn: "Docs, indexes, roadmap and checklist",
+        files_cn: [
+          "README.md",
+          "MANIFEST.md",
+          "RELEASE_NOTES.md",
+          "docs/00_project_roadmap.md",
+          "docs/215_runtime_review_followup_requirements_audit.md",
+          "docs/216_runtime_review_long_task_delivery_plan.md",
+          "docs/217_runtime_review_batch_3a_3b_3c_local_stabilization.md",
+          "docs/218_runtime_review_batch_4a_bridge_mock_roundtrip.md",
+          "docs/219_runtime_review_batch_4b_5a_6a_local_readiness.md",
+          "docs/220_runtime_review_batch_5b_6b_7a_local_gate_archive.md",
+          "tests/validation_checklist.md"
+        ]
+      },
+      {
+        group_id: "agent_board",
+        title_cn: "Agent board handoff state",
+        files_cn: [
+          ".agent_board/RUN_STATE.md",
+          ".agent_board/TASK_QUEUE.md",
+          ".agent_board/CHECKPOINT.md",
+          ".agent_board/HANDOFF.md",
+          ".agent_board/VALIDATION_LOG.md"
+        ]
+      }
+    ],
+    intentionally_untracked_refs: [
+      "docs/215_runtime_review_followup_requirements_audit.md",
+      "docs/216_runtime_review_long_task_delivery_plan.md",
+      "docs/217_runtime_review_batch_3a_3b_3c_local_stabilization.md",
+      "docs/218_runtime_review_batch_4a_bridge_mock_roundtrip.md",
+      "docs/219_runtime_review_batch_4b_5a_6a_local_readiness.md",
+      "docs/220_runtime_review_batch_5b_6b_7a_local_gate_archive.md"
+    ],
+    rollback_guidance_cn: [
+      "按文件组审查 diff 后再决定是否 stage。",
+      "若某一组不进入本次提交，只从 stage 范围排除该组；不要使用破坏性历史回滚或清理命令。",
+      "任何 commit、tag、push、PR 都必须等待新的显式版本动作授权。"
+    ],
+    validation_required_cn: [
+      "git diff --check",
+      "node scripts/validate_local_commit_scope.js",
+      "node scripts/validate_runtime_prototype_suite.js",
+      "powershell -ExecutionPolicy Bypass -File scripts\\validate_mvp.ps1",
+      "powershell -ExecutionPolicy Bypass -File scripts\\validate-agent-image-lab-local.ps1"
+    ],
+    runtime_state_ref: {
+      convergence_status: runtimeReviewStateDraft.convergence_status,
+      selected_queue_id: runtimeReviewStateDraft.selected_queue_id,
+      asset_state_key: runtimeReviewStateDraft.normalized_state.asset_state_key
+    },
+    boundary_cn: "该计划只整理本地提交范围；没有执行 git add、commit、tag、push、PR 或 release。",
+    side_effects_performed: false,
+    no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard)
+  };
+}
+
+function noWriteFlags() {
+  return {
+    side_effects_performed: false,
+    plugin_called: false,
+    api_called: false,
+    daily_note_called: false,
+    vcp_memory_written: false,
+    image_created: false
+  };
+}
+
+function buildBridgeAckSummary({ method, ackKeys, acceptedByHostMock = true, validationPassed = true }) {
+  return {
+    selected_method: method,
+    mock_only: true,
+    accepted_by_host_mock: acceptedByHostMock,
+    validation_passed: validationPassed,
+    ack_keys: ackKeys,
+    bridge_calls_observed: {
+      mock_only: true,
+      total: 1,
+      cancel: 0,
+      loadSession: method === "loadSession" ? 1 : 0,
+      previewDraft: method === "previewDraft" ? 1 : 0,
+      submitDraft: 0,
+      production_submitDraft: 0
+    },
+    ...noWriteFlags()
+  };
+}
+
+function buildBridgeMockRoundtripCandidateDraft({
+  createdAt,
+  adapterHandoffDraft,
+  reviewQueueDraft,
+  runtimeReviewStateDraft,
+  acceptedCandidateDeliveryPackageDraft
+}) {
+  const loadSessionFixture = {
+    fixture_id: "bridge-mock-load-session-seed",
+    source: "host_bridge_mock.loadSession",
+    session_ref: session.session_id,
+    task_ref: session.task_id,
+    case_ref: session.case_id,
+    queue_count: reviewQueueDraft.length,
+    current_version_id: session.current_version_id,
+    compare_version_id: session.compare_version_id,
+    guard_clean: true
+  };
+  const previewDraftFixture = {
+    fixture_id: "bridge-mock-preview-draft-seed",
+    source: "review_console_runtime_draft",
+    selected_queue_id: runtimeReviewStateDraft.selected_queue_id,
+    asset_state_key: runtimeReviewStateDraft.normalized_state.asset_state_key,
+    delivery_readiness: acceptedCandidateDeliveryPackageDraft.delivery_readiness,
+    memory_write_performed: false,
+    submitDraft_called: false,
+    guard_clean: true
+  };
+  const ackSummaries = [
+    buildBridgeAckSummary({
+      method: "loadSession",
+      ackKeys: ["session_id", "task_id", "case_id", "image_versions", "review_queue", "adapter_dry_run_handoff"]
+    }),
+    buildBridgeAckSummary({
+      method: "previewDraft",
+      ackKeys: [
+        "selected_method",
+        "accepted_by_host_mock",
+        "draft_received",
+        "validation_passed",
+        "bridge_calls_observed",
+        "side_effects_performed",
+        "plugin_called",
+        "api_called",
+        "daily_note_called",
+        "vcp_memory_written",
+        "image_created",
+        "received_at",
+        "status_cn"
+      ]
+    })
+  ];
+
+  return {
+    package_status: "draft_only",
+    package_status_cn: "Bridge mock roundtrip 候选草案",
+    roundtrip_status: "mock_roundtrip_candidate",
+    roundtrip_status_cn: "项目内 mock 回环候选",
+    created_at: createdAt,
+    bridge_mode: "project_local_mock",
+    source_fixture_policy: "project_local_fixtures_only",
+    flow_cn: "Adapter dry-run handoff -> Review Console runtime draft -> host bridge mock previewDraft。",
+    selected_methods: ["loadSession", "previewDraft"],
+    forbidden_methods: ["submitDraft"],
+    max_bridge_calls_per_method: 1,
+    bridge_calls_observed: {
+      mock_only: true,
+      total: 2,
+      cancel: 0,
+      loadSession: 1,
+      previewDraft: 1,
+      submitDraft: 0,
+      production_submitDraft: 0
+    },
+    adapter_handoff_ref: {
+      status_cn: adapterHandoffDraft.status_cn,
+      selected_plugin: adapterHandoffDraft.selected_plugin,
+      max_plugin_calls: adapterHandoffDraft.max_plugin_calls,
+      execution_blocked: adapterHandoffDraft.execution_blocked
+    },
+    load_session_fixture: loadSessionFixture,
+    preview_draft_fixture: previewDraftFixture,
+    ack_summaries: ackSummaries,
+    production_bridge_invocation_performed: false,
+    real_cdp_called: false,
+    submitDraft_called: false,
+    ...noWriteFlags(),
+    boundary_cn:
+      "Batch 4A 只验证项目内 mock roundtrip，不读取真实 VCPChat/VCPToolBox，不连接 CDP，不调用真实 bridge，不调用 production submitDraft。",
+    no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard)
+  };
+}
+
+function buildRealBridgeAuthorizationPackageDraft({ createdAt, bridgeMockRoundtripCandidateDraft }) {
+  return {
+    package_status: "draft_only",
+    authorization_status: "inactive_package",
+    package_status_cn: "真实 bridge 授权包草案",
+    target_stage: "real_bridge_authorization_package",
+    created_at: createdAt,
+    activation_required: true,
+    activation_rule_cn: "必须由用户另行提供完整真实 bridge 授权消息；本草案不能自动激活。",
+    target_root_refs: {
+      vcpchat_root_ref_policy: "user_supplied_at_activation_only",
+      vcptoolbox_root_ref_policy: "not_required_for_bridge_smoke",
+      raw_path_stored: false
+    },
+    allowed_methods: ["cancel", "loadSession", "previewDraft"],
+    forbidden_methods: ["submitDraft"],
+    max_bridge_calls_per_method: 1,
+    required_authorization_fields: [
+      "mode",
+      "real_vcpchat_root_ref",
+      "allowed_methods",
+      "forbidden_methods",
+      "max_bridge_calls_per_method",
+      "sanitization_rules",
+      "rollback_plan",
+      "no_execution_guard"
+    ],
+    forbidden_outputs_cn: [
+      ...sharedForbiddenOutputsCn,
+      "raw CDP target",
+      "raw websocket url",
+      "raw IPC payload",
+      "raw source snippet"
+    ],
+    preflight_checks_cn: [
+      "真实 VCPChat root 只能在执行授权消息中提供，仓库只保存脱敏 ref。",
+      "调用前必须确认 allowlist 只包含 cancel、loadSession、previewDraft。",
+      "submitDraft 必须保持禁止，直到另行授权提交语义。",
+      "调用记录只能保存中文脱敏 ack 摘要和 no-write flags。"
+    ],
+    rollback_plan_cn: [
+      "若真实 bridge smoke 失败，只保留脱敏失败记录。",
+      "若本次运行启动了本地进程，只清理本次启动的进程句柄记录，不修改配置。",
+      "不删除用户文件，不改 VCPChat/VCPToolBox 源码，不写 DailyNote/VCP memory。"
+    ],
+    bridge_mock_roundtrip_ref: {
+      roundtrip_status: bridgeMockRoundtripCandidateDraft.roundtrip_status,
+      bridge_mode: bridgeMockRoundtripCandidateDraft.bridge_mode,
+      previewDraft_calls: bridgeMockRoundtripCandidateDraft.bridge_calls_observed.previewDraft,
+      submitDraft_calls: bridgeMockRoundtripCandidateDraft.bridge_calls_observed.submitDraft
+    },
+    execution_authorized_by_this_record: false,
+    production_bridge_invocation_performed: false,
+    real_cdp_called: false,
+    source_read_performed: false,
+    submitDraft_allowed: false,
+    submitDraft_called: false,
+    ...noWriteFlags(),
+    no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard),
+    boundary_cn:
+      "Batch 4B 只准备真实 bridge 授权包草案，不启动 VCPChat，不连接 CDP，不调用真实 bridge，不读取外部源码。"
+  };
+}
+
+function buildPluginReliabilityPromptDisciplineDraft({ createdAt, selectedRiskSummary }) {
+  const promptFamily = {
+    prompt_family_id: "photo_studio_os_positive_still_life_no_text",
+    title_cn: "Photo Studio OS 正向静物无文字 prompt 家族",
+    selected_plugin_id: "DoubaoGen",
+    requested_model: "doubao-seedream-5-0-260128",
+    allowed_subjects_cn: ["真实相机镜头", "摄影灯", "色卡", "干净桌面", "抽象几何界面形状", "柔和光影"],
+    banned_subjects_cn: ["人物", "脸", "人体", "文字", "字母", "数字", "logo", "品牌标识", "水印", "屏幕文字"],
+    prompt_lint_rules_cn: [
+      "必须用正向静物主体开头，避免把禁止项写成主要画面描述。",
+      "禁止人物、脸、人体、肖像或屏幕里的人。",
+      "禁止任何文字、字母、数字、logo、品牌标识、水印和标签。",
+      "必须声明纯产品静物摄影，且不出现可读或不可读文字形状。",
+      "必须记录 prompt hash，后续真实调用前复核 hash 是否一致。"
+    ]
+  };
+  const promptHash = fingerprintString({
+    prompt_family_id: promptFamily.prompt_family_id,
+    allowed_subjects_cn: promptFamily.allowed_subjects_cn,
+    banned_subjects_cn: promptFamily.banned_subjects_cn,
+    requested_model: promptFamily.requested_model
+  });
+  return {
+    package_status: "draft_only",
+    reliability_status: "local_prompt_reliability_candidate",
+    package_status_cn: "插件可靠性与 prompt discipline 草案",
+    created_at: createdAt,
+    prompt_registry_status: "local_registry_candidate",
+    prompt_families: [promptFamily],
+    prompt_hash: promptHash,
+    model_lock: {
+      selected_plugin_id: promptFamily.selected_plugin_id,
+      requested_model: promptFamily.requested_model,
+      sanitized_plugin_reported_model: null,
+      model_match_status: "not_observed_no_plugin_call",
+      model_lock_required_before_real_retry: true
+    },
+    lint_result: {
+      status: "lint_rules_defined_no_prompt_execution",
+      banned_subject_count: promptFamily.banned_subjects_cn.length,
+      rule_count: promptFamily.prompt_lint_rules_cn.length,
+      current_selected_risk_summary_cn: selectedRiskSummary.reason_cn
+    },
+    failure_taxonomy: [
+      { key: "prompt_design_failure", label_cn: "prompt 设计失败", rule_cn: "禁止项写法诱发模型补全或主体漂移。" },
+      { key: "model_compliance_failure", label_cn: "模型遵循失败", rule_cn: "handoff 正确但模型仍生成禁止内容。" },
+      { key: "plugin_handoff_failure", label_cn: "插件传参失败", rule_cn: "runner 层 prompt hash 正确但 provider 侧未知。" },
+      { key: "provider_side_unknown", label_cn: "provider 侧未知", rule_cn: "未获得 provider-side 指纹捕获授权时保持未知。" }
+    ],
+    provider_side_capture: {
+      authorization_status: "inactive_package",
+      execution_authorized_by_this_record: false,
+      raw_request_capture_allowed: false,
+      sanitized_fingerprint_only: true
+    },
+    max_plugin_calls_allowed: 0,
+    plugin_called: false,
+    api_called: false,
+    image_created: false,
+    side_effects_performed: false,
+    no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard),
+    boundary_cn:
+      "Batch 5A 只建立 prompt registry、lint、模型锁和失败分类；不调用 DoubaoGen，不调用 API，不创建图片。"
+  };
+}
+
+function buildMemoryWriteCompletionCandidateDraft({ createdAt, memoryCompletionState, memoryDeltaDraft }) {
+  const observedState = {
+    write_requested: memoryCompletionState.write_requested,
+    write_authorized: memoryCompletionState.write_authorized,
+    writer_executed: false,
+    canonical_target_exists: false,
+    canonical_target_hash_matches: false,
+    write_complete_declared: false
+  };
+  return {
+    package_status: "draft_only",
+    candidate_status: "memory_write_completion_preflight_candidate",
+    package_status_cn: "记忆写入完成候选草案",
+    created_at: createdAt,
+    target_notebook_ref: memoryDeltaDraft.target_notebook || "memory_target_ref_pending",
+    completion_required_sequence: [
+      "write_requested",
+      "write_authorized",
+      "writer_executed",
+      "canonical_target_exists",
+      "canonical_target_hash_matches"
+    ],
+    observed_state: observedState,
+    completion_criteria: {
+      write_requested_required: true,
+      write_authorized_required: true,
+      writer_executed_required: true,
+      canonical_target_exists_required: true,
+      canonical_target_hash_matches_required: true,
+      plugin_success_sufficient: false
+    },
+    wrong_location_classification: {
+      class_key: "plugin_success_wrong_location",
+      applies_when_cn: "插件返回 success 但 canonical 位置不存在或 hash 不匹配。",
+      completion_allowed: false
+    },
+    failure_closeout_template_cn: [
+      "若 writer 未执行，记录 memory_write_not_performed。",
+      "若 canonical 位置不存在，记录 plugin_success_wrong_location。",
+      "若 hash 不匹配，记录 canonical_hash_mismatch。",
+      "任一失败都不得伪造 memory write complete。"
+    ],
+    sensitive_storage_policy_cn: [
+      "只保存 notebook/category ref，不保存 raw 私密路径。",
+      "不保存 raw plugin output、endpoint、runtime log、secret 或图片二进制。",
+      "中文正文必须先通过脱敏检查。"
+    ],
+    daily_note_called: false,
+    vcp_memory_written: false,
+    write_complete_declared: false,
+    side_effects_performed: false,
+    no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard),
+    boundary_cn:
+      "Batch 6A 只准备记忆写入完成判定候选，不调用 DailyNote，不写 VCP memory，不读取外部配置。"
+  };
+}
+
+function buildSingleRealGenerationRetryGateDraft({
+  createdAt,
+  pluginReliabilityPromptDisciplineDraft,
+  acceptedCandidateDeliveryPackageDraft,
+  runtimeReviewStateDraft
+}) {
+  const modelLock = pluginReliabilityPromptDisciplineDraft.model_lock || {};
+  const promptFamily = pluginReliabilityPromptDisciplineDraft.prompt_families[0] || {};
+  return {
+    package_status: "draft_only",
+    gate_status: "single_real_generation_retry_gate_inactive",
+    package_status_cn: "单次真实生图重试授权门草案",
+    authorization_status: "inactive_package",
+    target_stage: "single_real_generation_retry_gate",
+    created_at: createdAt,
+    selected_plugin_id: "DoubaoGen",
+    selected_plugin_command: "generate",
+    requested_model: modelLock.requested_model || "doubao-seedream-5-0-260128",
+    prompt_family_ref: promptFamily.prompt_family_id || "photo_studio_os_positive_still_life_no_text",
+    prompt_hash: pluginReliabilityPromptDisciplineDraft.prompt_hash,
+    max_plugin_calls_per_run: 1,
+    plugin_calls_observed: 0,
+    output_directory_policy: {
+      output_directory_ref: "runs/photo_studio_os_single_retry_gate",
+      raw_path_stored: false,
+      overwrite_existing_files_allowed: false
+    },
+    required_authorization_fields: [
+      "phase",
+      "selected_plugin_id",
+      "selected_plugin_command",
+      "selected_plugin_model",
+      "max_plugin_calls",
+      "input_reference",
+      "output_directory_ref",
+      "overwrite_existing_files_allowed",
+      "rollback_plan",
+      "gatekeeper_approved",
+      "review_console_human_approved",
+      "no_execution_guard"
+    ],
+    prompt_policy_cn: [
+      "必须复用已登记 prompt_family_ref 和 prompt_hash，真实调用前再次确认 hash。",
+      "只允许 Photo Studio OS 产品静物安全任务。",
+      "禁止人物、脸、人体、品牌、logo、文字、水印、隐私信息。",
+      "真实输出只能进入受控 output_directory_ref，不覆盖既有文件。"
+    ],
+    future_run_summary_schema: {
+      plugin_call_count_observed_required: true,
+      output_asset_ref_required: true,
+      output_hash_required: true,
+      sanitized_plugin_summary_required: true,
+      raw_plugin_output_allowed: false,
+      image_binary_in_git_or_memory_allowed: false
+    },
+    future_review_intake: {
+      review_console_can_receive_summary: true,
+      allowed_asset_statuses: ["accepted_candidate", "needs_human_review", "rejected"],
+      current_delivery_readiness: acceptedCandidateDeliveryPackageDraft.delivery_readiness,
+      current_runtime_asset_state: runtimeReviewStateDraft.normalized_state.asset_state_key
+    },
+    memory_write_block: {
+      memory_write_allowed_by_this_record: false,
+      requires_accepted_candidate: true,
+      requires_memory_approval: true,
+      requires_safety_review_passed: true,
+      direct_daily_note_write_allowed: false,
+      direct_vcp_memory_write_allowed: false
+    },
+    rollback_plan_cn: [
+      "失败时只删除本次 output_directory_ref 下新建的输出文件。",
+      "保留脱敏失败记录和 prompt hash。",
+      "不改配置，不写 DailyNote，不写 VCP memory。"
+    ],
+    forbidden_outputs_cn: sharedForbiddenOutputsCn,
+    execution_authorized_by_this_record: false,
+    real_generation_performed: false,
+    api_called: false,
+    plugin_called: false,
+    image_created: false,
+    daily_note_called: false,
+    vcp_memory_written: false,
+    side_effects_performed: false,
+    no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard),
+    boundary_cn:
+      "Batch 5B 只准备单次真实生图重试授权门，不调用 DoubaoGen，不调用 API，不创建图片，不写记忆。"
+  };
+}
+
+function buildRealMemoryWriteAuthorizationPackageDraft({
+  createdAt,
+  memoryWriteCompletionCandidateDraft,
+  memoryCompletionState,
+  memoryDeltaDraft
+}) {
+  return {
+    package_status: "draft_only",
+    package_status_cn: "真实记忆写入授权包草案",
+    authorization_status: "inactive_package",
+    target_stage: "real_memory_write_authorization_package",
+    created_at: createdAt,
+    max_daily_note_writes: 1,
+    max_vcp_memory_writes: 1,
+    max_retry_attempts: 1,
+    target_refs: {
+      notebook_ref: memoryDeltaDraft.target_notebook || "memory_target_ref_pending",
+      category_ref: memoryDeltaDraft.memory_type || "style_review_handoff",
+      raw_path_stored: false
+    },
+    required_authorization_fields: [
+      "phase",
+      "daily_note_write_allowed",
+      "vcp_memory_write_allowed",
+      "max_daily_note_writes",
+      "max_vcp_memory_writes",
+      "chinese_desensitized_body",
+      "canonical_target_ref",
+      "rollback_plan",
+      "no_success_fabrication_rule",
+      "no_execution_guard"
+    ],
+    content_rules_cn: [
+      "正文必须是中文脱敏摘要。",
+      "不得包含 raw local path、endpoint、runtime log、plugin output、secret、token、cookie、password。",
+      "不得包含图片二进制、客户隐私或未脱敏原文。",
+      "写入失败不得伪造成功；最多一次安全重试，超过需另行授权。"
+    ],
+    reject_path_cn: [
+      "正文非中文或疑似未脱敏时拒绝写入。",
+      "缺少 canonical target ref 时拒绝写入。",
+      "DailyNote 或 VCP memory 任一写入失败时记录失败，不伪造完成。",
+      "canonical target 不存在或 hash 不匹配时标记为 plugin_success_wrong_location。"
+    ],
+    no_success_fabrication_rule: true,
+    completion_preflight_ref: {
+      candidate_status: memoryWriteCompletionCandidateDraft.candidate_status,
+      plugin_success_sufficient: memoryWriteCompletionCandidateDraft.completion_criteria.plugin_success_sufficient,
+      write_requested: memoryCompletionState.write_requested,
+      write_authorized: memoryCompletionState.write_authorized,
+      writer_executed: false,
+      canonical_target_exists: false,
+      canonical_target_hash_matches: false
+    },
+    execution_authorized_by_this_record: false,
+    daily_note_write_authorized_by_this_record: false,
+    vcp_memory_write_authorized_by_this_record: false,
+    plugin_called: false,
+    api_called: false,
+    image_created: false,
+    daily_note_called: false,
+    vcp_memory_written: false,
+    write_complete_declared: false,
+    side_effects_performed: false,
+    no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard),
+    boundary_cn:
+      "Batch 6B 只准备下一次真实记忆单写授权包，不调用 DailyNote，不写 VCP memory，不读取外部配置。"
+  };
+}
+
+function archiveClassificationForAsset({ assetStatus, humanApproval, acceptedCandidateDeliveryPackageDraft, riskSummary }) {
+  if (assetStatus === "rejected") return "rejected";
+  if (acceptedCandidateDeliveryPackageDraft.delivery_readiness === "accepted_candidate_ready") return "accepted_candidate";
+  if (assetStatus === "accepted" && humanApproval.approved === true && riskSummary.blocking === false) return "accepted_candidate";
+  return "needs_human_review";
+}
+
+function buildAssetArchiveCandidateDraft({
+  createdAt,
+  selectedItem,
+  version,
+  score,
+  assetStatus,
+  humanApproval,
+  selectedRiskSummary,
+  acceptedCandidateDeliveryPackageDraft,
+  humanOverrideTraceabilityDraft
+}) {
+  const classification = archiveClassificationForAsset({
+    assetStatus,
+    humanApproval,
+    acceptedCandidateDeliveryPackageDraft,
+    riskSummary: selectedRiskSummary
+  });
+  return {
+    package_status: "draft_only",
+    archive_status: "asset_archive_candidate_no_binary",
+    package_status_cn: "资产归档候选草案",
+    created_at: createdAt,
+    archive_policy: "metadata_only_no_binary",
+    selected_queue_id: selectedItem.queue_id,
+    output_path_ref: version.asset_ref,
+    raw_output_path_stored: false,
+    asset_hash: acceptedCandidateDeliveryPackageDraft.sanitized_asset_hash,
+    review_score: score,
+    review_score_band: scoreBandLabel(score),
+    asset_status_classification: classification,
+    sanitized_review_summary_cn: `${selectedItem.title_cn}：${selectedRiskSummary.reason_cn}`,
+    reusable_rules_cn: runtimeGuard.requireArray(session.image_case_seed.reusable_rules_cn),
+    human_override_reason_cn: humanOverrideTraceabilityDraft.override_reason_cn,
+    archived_fields: [
+      "output_path_ref",
+      "asset_hash",
+      "review_score",
+      "sanitized_review_summary_cn",
+      "reusable_rules_cn",
+      "human_override_reason_cn"
+    ],
+    closeout_templates: [
+      {
+        asset_status: "accepted_candidate",
+        template_cn: "记录 ref、hash、评分、通过规则和人工批准摘要；允许进入后续交付候选，但不写图片二进制。"
+      },
+      {
+        asset_status: "needs_human_review",
+        template_cn: "记录 ref、hash、待复核原因和下一步；不得进入记忆写入。"
+      },
+      {
+        asset_status: "rejected",
+        template_cn: "记录 ref、hash、拒收原因和可复用规避规则；不得进入记忆写入或交付候选。"
+      }
+    ],
+    current_closeout: {
+      asset_status: classification,
+      memory_write_allowed: classification === "accepted_candidate" && acceptedCandidateDeliveryPackageDraft.memory_delta_preview.approval_status === "approved",
+      image_binary_in_git_allowed: false,
+      image_binary_in_memory_allowed: false
+    },
+    binary_storage_allowed: false,
+    git_binary_stored: false,
+    memory_binary_stored: false,
+    side_effects_performed: false,
+    plugin_called: false,
+    api_called: false,
+    daily_note_called: false,
+    vcp_memory_written: false,
+    image_created: false,
+    no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard),
+    boundary_cn:
+      "Batch 7A 只准备资产归档候选模板；只保存 ref、hash、评分、摘要和规则，不保存图片二进制，不写记忆。"
+  };
+}
+
 function buildHumanInspectionChecklistDraft(queueDraft, batchSummary, batchDecision, riskSummary) {
   const checklistItems = [
     {
@@ -1271,7 +2628,19 @@ function buildRuntimeSessionExportDraft({
   batchDecisionDraft,
   riskReviewSummaryDraft,
   a5PreauthorizationReviewPackageDraft,
-  humanInspectionChecklistDraft
+  humanInspectionChecklistDraft,
+  humanOverrideTraceabilityDraft,
+  acceptedCandidateDeliveryPackageDraft,
+  inactiveAuthorizationCapsulesDraft,
+  runtimeReviewStateDraft,
+  localCommitScopePlanDraft,
+  bridgeMockRoundtripCandidateDraft,
+  realBridgeAuthorizationPackageDraft,
+  pluginReliabilityPromptDisciplineDraft,
+  memoryWriteCompletionCandidateDraft,
+  singleRealGenerationRetryGateDraft,
+  realMemoryWriteAuthorizationPackageDraft,
+  assetArchiveCandidateDraft
 }) {
   const exportDraft = {
     package_status: "draft_only",
@@ -1293,6 +2662,18 @@ function buildRuntimeSessionExportDraft({
     risk_review_summary_draft: riskReviewSummaryDraft,
     a5_preauthorization_review_package_draft: a5PreauthorizationReviewPackageDraft,
     human_inspection_checklist_draft: humanInspectionChecklistDraft,
+    human_override_traceability_draft: humanOverrideTraceabilityDraft,
+    accepted_candidate_delivery_package_draft: acceptedCandidateDeliveryPackageDraft,
+    inactive_authorization_capsules_draft: inactiveAuthorizationCapsulesDraft,
+    runtime_review_state_draft: runtimeReviewStateDraft,
+    local_commit_scope_plan_draft: localCommitScopePlanDraft,
+    bridge_mock_roundtrip_candidate_draft: bridgeMockRoundtripCandidateDraft,
+    real_bridge_authorization_package_draft: realBridgeAuthorizationPackageDraft,
+    plugin_reliability_prompt_discipline_draft: pluginReliabilityPromptDisciplineDraft,
+    memory_write_completion_candidate_draft: memoryWriteCompletionCandidateDraft,
+    single_real_generation_retry_gate_draft: singleRealGenerationRetryGateDraft,
+    real_memory_write_authorization_package_draft: realMemoryWriteAuthorizationPackageDraft,
+    asset_archive_candidate_draft: assetArchiveCandidateDraft,
     prototype_guard: runtimeGuard.clone(runtimeGuard.cleanGuard),
     side_effects_performed: false,
     boundary_cn: "这是 Review Console runtime 本地会话导出草案，不写磁盘，不调用插件/API/DailyNote，不写 VCP memory。"
@@ -1300,6 +2681,30 @@ function buildRuntimeSessionExportDraft({
   exportDraft.session_fingerprint = fingerprintString(sessionPayloadForFingerprint(exportDraft));
   exportDraft.session_fingerprint_cn = `会话指纹：${exportDraft.session_fingerprint}`;
   return exportDraft;
+}
+
+const optionalImportGuardFields = [
+  ["batch_decision_draft", "batch_decision_draft guard 不干净。"],
+  ["a5_preauthorization_review_package_draft", "A5 授权前复核包 guard 不干净。"],
+  ["human_override_traceability_draft", "人工覆盖轨迹 guard 不干净。"],
+  ["accepted_candidate_delivery_package_draft", "accepted candidate 交付包 guard 不干净。"],
+  ["inactive_authorization_capsules_draft", "未激活授权胶囊 guard 不干净。"],
+  ["runtime_review_state_draft", "runtime review state guard 不干净。"],
+  ["local_commit_scope_plan_draft", "local commit scope plan guard 不干净。"],
+  ["bridge_mock_roundtrip_candidate_draft", "bridge mock roundtrip candidate guard 不干净。"],
+  ["real_bridge_authorization_package_draft", "real bridge authorization package guard 不干净。"],
+  ["plugin_reliability_prompt_discipline_draft", "plugin reliability prompt discipline guard 不干净。"],
+  ["memory_write_completion_candidate_draft", "memory write completion candidate guard 不干净。"],
+  ["single_real_generation_retry_gate_draft", "single real generation retry gate guard 不干净。"],
+  ["real_memory_write_authorization_package_draft", "real memory write authorization package guard 不干净。"],
+  ["asset_archive_candidate_draft", "asset archive candidate guard 不干净。"]
+];
+
+function optionalImportGuardIsClean(payload, fieldName) {
+  const draft = payload?.[fieldName];
+  if (draft === undefined) return true;
+  if (!Object.prototype.hasOwnProperty.call(draft, "no_execution_guard")) return true;
+  return runtimeGuard.guardIsClean(draft.no_execution_guard);
 }
 
 function validateSessionImportPayload(payload) {
@@ -1315,11 +2720,10 @@ function validateSessionImportPayload(payload) {
     }
     if (payload.side_effects_performed !== false) errors.push("导入草案必须声明 side_effects_performed=false。");
     if (!runtimeGuard.guardIsClean(payload.prototype_guard)) errors.push("prototype_guard 不干净。");
-    if (!runtimeGuard.guardIsClean(payload.batch_decision_draft?.no_execution_guard)) {
-      errors.push("batch_decision_draft guard 不干净。");
-    }
-    if (!runtimeGuard.guardIsClean(payload.a5_preauthorization_review_package_draft?.no_execution_guard)) {
-      errors.push("A5 授权前复核包 guard 不干净。");
+    for (const [fieldName, errorMessage] of optionalImportGuardFields) {
+      if (!optionalImportGuardIsClean(payload, fieldName)) {
+        errors.push(errorMessage);
+      }
     }
     if (!Array.isArray(payload.review_session_snapshot?.review_queue) || payload.review_session_snapshot.review_queue.length === 0) {
       errors.push("缺少 review_queue。");
@@ -1660,6 +3064,7 @@ function buildDraft() {
     note_cn: els.humanComment.value.trim()
   };
   const memoryContent = els.memoryContent.value.trim();
+  const memoryCompletionState = buildMemoryCompletionState(memoryContent, memoryApproval);
   const annotationText = els.annotationNote.value.trim();
   const strengthsText = safeText(els.diffStrengths.value, "暂无新增改进点。");
   const issuesText = safeText(els.diffIssues.value, "暂无新增风险点。");
@@ -1713,6 +3118,8 @@ function buildDraft() {
     nextStepText,
     memoryContent
   });
+  const selectedDraftItem = reviewQueueDraft.find((item) => item.queue_id === selectedQueueId) || reviewQueueDraft[0];
+  const selectedRiskSummary = riskSummaryForItem(selectedDraftItem);
   const batchReviewSummaryDraft = buildBatchReviewSummary(reviewQueueDraft);
   const riskReviewSummaryDraft = buildRiskReviewSummary(reviewQueueDraft);
   const batchDecisionDraft = buildBatchDecisionDraft(reviewQueueDraft, batchReviewSummaryDraft);
@@ -1721,12 +3128,110 @@ function buildDraft() {
     batchReviewSummaryDraft,
     riskReviewSummaryDraft
   );
+  const inactiveAuthorizationCapsulesDraft = buildInactiveAuthorizationCapsulesDraft({
+    createdAt,
+    batchDecision: batchDecisionDraft,
+    batchSummary: batchReviewSummaryDraft,
+    riskSummary: riskReviewSummaryDraft
+  });
   const humanInspectionChecklistDraft = buildHumanInspectionChecklistDraft(
     reviewQueueDraft,
     batchReviewSummaryDraft,
     batchDecisionDraft,
     riskReviewSummaryDraft
   );
+  const humanOverrideTraceabilityDraft = buildHumanOverrideTraceabilityDraft({
+    createdAt,
+    queueDraft: reviewQueueDraft,
+    selectedItem: selectedDraftItem,
+    version,
+    score,
+    assetStatus,
+    memoryApproval,
+    humanApproval,
+    humanReview,
+    annotationText,
+    issuesText,
+    riskSummary: selectedRiskSummary
+  });
+  const acceptedCandidateDeliveryPackageDraft = buildAcceptedCandidateDeliveryPackageDraft({
+    createdAt,
+    selectedItem: selectedDraftItem,
+    version,
+    score,
+    assetStatus,
+    memoryApproval,
+    humanApproval,
+    memoryContent,
+    memoryDeltaId,
+    riskSummary: selectedRiskSummary,
+    humanOverrideTraceabilityDraft
+  });
+  const runtimeReviewStateDraft = buildRuntimeReviewStateDraft({
+    createdAt,
+    reviewQueueDraft,
+    selectedItem: selectedDraftItem,
+    assetStatus,
+    memoryApproval,
+    memoryCompletionState,
+    humanApproval,
+    selectedRiskSummary,
+    acceptedCandidateDeliveryPackageDraft,
+    humanOverrideTraceabilityDraft
+  });
+  const localCommitScopePlanDraft = buildLocalCommitScopePlanDraft({
+    createdAt,
+    runtimeReviewStateDraft
+  });
+  const adapterDryRunHandoffDraft = runtimeGuard.clone(session.adapter_dry_run_handoff);
+  const bridgeMockRoundtripCandidateDraft = buildBridgeMockRoundtripCandidateDraft({
+    createdAt,
+    adapterHandoffDraft: adapterDryRunHandoffDraft,
+    reviewQueueDraft,
+    runtimeReviewStateDraft,
+    acceptedCandidateDeliveryPackageDraft
+  });
+  const realBridgeAuthorizationPackageDraft = buildRealBridgeAuthorizationPackageDraft({
+    createdAt,
+    bridgeMockRoundtripCandidateDraft
+  });
+  const pluginReliabilityPromptDisciplineDraft = buildPluginReliabilityPromptDisciplineDraft({
+    createdAt,
+    selectedRiskSummary
+  });
+  const memoryWriteCompletionCandidateDraft = buildMemoryWriteCompletionCandidateDraft({
+    createdAt,
+    memoryCompletionState,
+    memoryDeltaDraft: {
+      target_notebook: session.memory_preview.target_notebook
+    }
+  });
+  const singleRealGenerationRetryGateDraft = buildSingleRealGenerationRetryGateDraft({
+    createdAt,
+    pluginReliabilityPromptDisciplineDraft,
+    acceptedCandidateDeliveryPackageDraft,
+    runtimeReviewStateDraft
+  });
+  const realMemoryWriteAuthorizationPackageDraft = buildRealMemoryWriteAuthorizationPackageDraft({
+    createdAt,
+    memoryWriteCompletionCandidateDraft,
+    memoryCompletionState,
+    memoryDeltaDraft: {
+      target_notebook: session.memory_preview.target_notebook,
+      memory_type: "style_review_handoff"
+    }
+  });
+  const assetArchiveCandidateDraft = buildAssetArchiveCandidateDraft({
+    createdAt,
+    selectedItem: selectedDraftItem,
+    version,
+    score,
+    assetStatus,
+    humanApproval,
+    selectedRiskSummary,
+    acceptedCandidateDeliveryPackageDraft,
+    humanOverrideTraceabilityDraft
+  });
   const runtimeSessionExportDraft = buildRuntimeSessionExportDraft({
     createdAt,
     reviewQueueDraft,
@@ -1734,7 +3239,19 @@ function buildDraft() {
     batchDecisionDraft,
     riskReviewSummaryDraft,
     a5PreauthorizationReviewPackageDraft,
-    humanInspectionChecklistDraft
+    humanInspectionChecklistDraft,
+    humanOverrideTraceabilityDraft,
+    acceptedCandidateDeliveryPackageDraft,
+    inactiveAuthorizationCapsulesDraft,
+    runtimeReviewStateDraft,
+    localCommitScopePlanDraft,
+    bridgeMockRoundtripCandidateDraft,
+    realBridgeAuthorizationPackageDraft,
+    pluginReliabilityPromptDisciplineDraft,
+    memoryWriteCompletionCandidateDraft,
+    singleRealGenerationRetryGateDraft,
+    realMemoryWriteAuthorizationPackageDraft,
+    assetArchiveCandidateDraft
   });
 
   return {
@@ -1810,7 +3327,19 @@ function buildDraft() {
     batch_decision_draft: batchDecisionDraft,
     risk_review_summary_draft: riskReviewSummaryDraft,
     a5_preauthorization_review_package_draft: a5PreauthorizationReviewPackageDraft,
+    inactive_authorization_capsules_draft: inactiveAuthorizationCapsulesDraft,
     human_inspection_checklist_draft: humanInspectionChecklistDraft,
+    human_override_traceability_draft: humanOverrideTraceabilityDraft,
+    accepted_candidate_delivery_package_draft: acceptedCandidateDeliveryPackageDraft,
+    runtime_review_state_draft: runtimeReviewStateDraft,
+    local_commit_scope_plan_draft: localCommitScopePlanDraft,
+    bridge_mock_roundtrip_candidate_draft: bridgeMockRoundtripCandidateDraft,
+    real_bridge_authorization_package_draft: realBridgeAuthorizationPackageDraft,
+    plugin_reliability_prompt_discipline_draft: pluginReliabilityPromptDisciplineDraft,
+    memory_write_completion_candidate_draft: memoryWriteCompletionCandidateDraft,
+    single_real_generation_retry_gate_draft: singleRealGenerationRetryGateDraft,
+    real_memory_write_authorization_package_draft: realMemoryWriteAuthorizationPackageDraft,
+    asset_archive_candidate_draft: assetArchiveCandidateDraft,
     runtime_session_export_draft: runtimeSessionExportDraft,
     image_case_draft: {
       case_id: session.case_id,
@@ -1874,14 +3403,15 @@ function buildDraft() {
         rejection_reason_cn: memoryApproval.rejection_reason_cn
       }
     },
-    adapter_dry_run_handoff_draft: runtimeGuard.clone(session.adapter_dry_run_handoff),
+    memory_completion_state_draft: memoryCompletionState,
+    adapter_dry_run_handoff_draft: adapterDryRunHandoffDraft,
     prototype_guard: runtimeGuard.clone(draftGuard)
   };
 }
 
-function submitDraftToHost(draft) {
+function previewDraftWithHost(draft) {
   runtimeGuard.assertDraftSafe(draft);
-  const ack = bridge.submitDraft(runtimeGuard.clone(draft));
+  const ack = bridge.previewDraft(runtimeGuard.clone(draft));
   if (!ack || ack.side_effects_performed !== false || ack.accepted_by_host_mock !== true) {
     throw new Error("主程序桥接拒绝草案，或报告了外部副作用。");
   }
@@ -1903,6 +3433,39 @@ function renderStateList(el, items) {
     const listItem = document.createElement("li");
     listItem.dataset.state = item.state;
     listItem.textContent = item.text_cn;
+    el.appendChild(listItem);
+  }
+}
+
+function traceabilityRowText(row) {
+  const scopeLabel = row.is_delivery_package_row ? "交付包草案" : "队列追踪项";
+  return [
+    `${scopeLabel} · ${row.traceability_class_cn} · ${row.title_cn} (${row.queue_id})`,
+    `资产：${row.asset_status_cn} · 评审：${row.review_status_cn}`,
+    `来源：${row.human_decision_source_cn} · 时间：${row.human_decision_at}`,
+    `原因：${row.override_reason_cn}`,
+    `偏差：${row.known_deviation_summary_cn}`,
+    `prompt：${row.prompt_compliance_summary_cn}`,
+    `记忆：${row.memory_suitability_summary_cn}`
+  ].join("\n");
+}
+
+function renderTraceabilityList(el, items) {
+  el.innerHTML = "";
+  if (!Array.isArray(items) || items.length === 0) {
+    const empty = document.createElement("li");
+    empty.className = "traceability-empty";
+    empty.textContent = "暂无可追踪条目。";
+    el.appendChild(empty);
+    return;
+  }
+  for (const row of items) {
+    const listItem = document.createElement("li");
+    listItem.dataset.traceabilityClass = row.traceability_class_key;
+    listItem.dataset.promptComplete = String(row.prompt_compliance_complete);
+    listItem.dataset.memorySuitable = String(row.memory_suitable);
+    listItem.dataset.deliveryPackage = String(row.is_delivery_package_row);
+    listItem.textContent = traceabilityRowText(row);
     el.appendChild(listItem);
   }
 }
@@ -2008,6 +3571,226 @@ function renderPreauthorizationPackage(batchDecision, preauthPackage) {
   els.preauthPackageText.textContent = preauthPackage.review_text_cn;
 }
 
+function renderInactiveAuthorizationCapsules(capsulePackage) {
+  els.authCapsuleStatus.textContent = capsulePackage.authorization_status;
+  els.authCapsuleCount.textContent = `${capsulePackage.capsule_count} 个`;
+  els.authCapsuleBoundary.textContent = capsulePackage.activation_boundary_cn;
+  renderList(
+    els.authCapsuleTypes,
+    capsulePackage.capsules.map(
+      (capsule) => `${capsule.title_cn}：${capsule.authorization_status}，候选 ${capsule["candidate_refs"].length} 个`
+    )
+  );
+  renderList(els.authCapsuleForbidden, capsulePackage.forbidden_outputs_cn);
+  renderList(els.authCapsuleSanitization, capsulePackage.capsules[0]?.sanitization_rules_cn || []);
+  renderList(
+    els.authCapsuleRollback,
+    Array.from(new Set(capsulePackage.capsules.map((capsule) => capsule.rollback_plan_cn)))
+  );
+  els.authCapsuleText.textContent = JSON.stringify(capsulePackage, null, 2);
+}
+
+function renderDeliveryPackage(deliveryPackage) {
+  els.deliveryPackageStatus.textContent = `${deliveryPackage.package_status_cn} / ${deliveryPackage.delivery_readiness_cn}`;
+  els.deliveryPackageCandidate.textContent = `${deliveryPackage.selected_candidate_title_cn} (${deliveryPackage.selected_candidate_version_id})`;
+  els.deliveryPackageHash.textContent = deliveryPackage.sanitized_asset_hash;
+  els.deliveryPackageScoreBand.textContent = `${deliveryPackage.review_score} / 100，${deliveryPackage.review_score_band}`;
+  els.deliveryPackageRisk.textContent = deliveryPackage.risk_summary_cn;
+  els.deliveryPackageHumanApproval.textContent = deliveryPackage.human_approval_summary_cn;
+  const deliveryMemoryCompletionState = deliveryPackage.memory_delta_preview.completion_state || {};
+  els.deliveryPackageMemoryPreview.textContent = `${deliveryPackage.memory_delta_preview.title_cn}；${writeRequestLabel(
+    deliveryMemoryCompletionState.write_requested ?? deliveryPackage.memory_delta_preview.should_write_to_vcp
+  )}`;
+  els.deliveryPackageRules.textContent = deliveryPackage.reusable_rule_summary_cn;
+  els.deliveryPackageBoundary.textContent = "draft_only=true；submitDraft_called=false；没有真实插件/API/DailyNote/VCP memory/图片动作。";
+}
+
+function renderRuntimeReviewState(runtimeReviewState) {
+  const state = runtimeReviewState.normalized_state;
+  els.runtimeStateUnified.textContent = `${state.asset_state_cn} / ${runtimeReviewState.convergence_status_cn}`;
+  els.runtimeStateAsset.textContent = `${state.review_status_cn} / ${state.asset_state_key}`;
+  els.runtimeStateMemory.textContent = `${state.memory_status_cn}；${writeRequestLabel(state.write_requested)}；真实写入=${state.write_performed}`;
+  els.runtimeStateDelivery.textContent = `${state.delivery_readiness_cn}`;
+  els.runtimeStateOverride.textContent = state.human_override_performed
+    ? "已记录人工覆盖接受，不能声明 prompt compliance 完整"
+    : "未记录人工覆盖接受";
+  renderList(
+    els.runtimeStateMismatches,
+    runtimeReviewState.mismatch_items_cn.length > 0 ? runtimeReviewState.mismatch_items_cn : ["未发现状态矛盾。"]
+  );
+  els.runtimeStateBoundary.textContent = `${runtimeReviewState.summary_cn} ${runtimeReviewState.boundary_cn}`;
+}
+
+function renderHumanOverrideTraceability(traceability) {
+  const counts = traceability.traceability_counts || {};
+  els.overrideDecisionSource.textContent = traceability.human_decision_source_cn;
+  els.overrideReason.textContent = traceability.override_reason_cn;
+  els.overrideDeviation.textContent = traceability.known_deviation_summary_cn;
+  els.overridePromptCompliance.textContent = traceability.prompt_compliance_summary_cn;
+  els.overrideMemorySuitability.textContent = traceability.memory_suitability_summary_cn;
+  els.overrideBoundary.textContent = "人工覆盖轨迹只用于本地审计，不触发真实 submitDraft、DailyNote 或 VCP memory 写入。";
+  els.traceabilityTotal.textContent = String(counts.total || 0);
+  els.traceabilityAccepted.textContent = String(counts.accepted || 0);
+  els.traceabilityAcceptedCandidate.textContent = String(counts.accepted_candidate || 0);
+  els.traceabilityHumanOverride.textContent = String(counts.human_override || 0);
+  els.traceabilityRejected.textContent = String(counts.rejected || 0);
+  els.traceabilityNeedsHumanReview.textContent = String(counts.needs_human_review || 0);
+  els.traceabilityPromptComplete.textContent = String(counts.prompt_complete || 0);
+  els.traceabilityMemorySuitable.textContent = String(counts.memory_suitable || 0);
+  els.traceabilitySummary.textContent = traceability.traceability_summary_cn;
+  els.traceabilityBoundary.textContent = traceability.traceability_boundary_cn;
+  renderTraceabilityList(els.traceabilityList, traceability.traceability_items);
+}
+
+function renderLocalCommitScopePlan(commitScopePlan) {
+  const scopeById = Object.fromEntries(commitScopePlan.scope_groups.map((group) => [group.group_id, group]));
+  els.commitScopeStatus.textContent = commitScopePlan.plan_status_cn;
+  els.commitScopeBranch.textContent = commitScopePlan.branch_ref;
+  els.commitScopeStaged.textContent = commitScopePlan.staged_changes_present ? "存在 staged changes" : "无 staged changes";
+  els.commitScopeRemote.textContent =
+    commitScopePlan.tag_allowed || commitScopePlan.push_allowed || commitScopePlan.pr_allowed || commitScopePlan.release_allowed
+      ? "存在远端/版本动作风险"
+      : "远端/版本动作未授权";
+  renderList(els.commitScopeRuntime, scopeById.runtime_prototype?.files_cn || []);
+  renderList(els.commitScopeValidators, scopeById.validators?.files_cn || []);
+  renderList(els.commitScopeDocs, scopeById.docs_indexes?.files_cn || []);
+  renderList(els.commitScopeAgentBoard, scopeById.agent_board?.files_cn || []);
+  renderList(els.commitScopeUntracked, commitScopePlan.intentionally_untracked_refs);
+  renderList(els.commitScopeRollback, commitScopePlan.rollback_guidance_cn);
+}
+
+function renderBridgeMockRoundtrip(roundtripDraft) {
+  els.bridgeRoundtripStatus.textContent = `${roundtripDraft.roundtrip_status_cn} / ${roundtripDraft.bridge_mode}`;
+  renderList(els.bridgeRoundtripMethods, [
+    `允许：${roundtripDraft.selected_methods.join(" -> ")}`,
+    `禁止：${roundtripDraft.forbidden_methods.join("、")}`
+  ]);
+  const calls = roundtripDraft.bridge_calls_observed;
+  renderList(els.bridgeRoundtripCalls, [
+    `mock_only=${calls.mock_only}`,
+    `loadSession=${calls.loadSession}`,
+    `previewDraft=${calls.previewDraft}`,
+    `submitDraft=${calls.submitDraft}`,
+    `production_submitDraft=${calls.production_submitDraft}`
+  ]);
+  renderList(
+    els.bridgeRoundtripAck,
+    roundtripDraft.ack_summaries.map(
+      (ack) => `${ack.selected_method}：keys=${ack.ack_keys.join(", ")}；side_effects=${ack.side_effects_performed}`
+    )
+  );
+  renderList(els.bridgeRoundtripGuards, [
+    `plugin_called=${roundtripDraft.plugin_called}`,
+    `api_called=${roundtripDraft.api_called}`,
+    `daily_note_called=${roundtripDraft.daily_note_called}`,
+    `vcp_memory_written=${roundtripDraft.vcp_memory_written}`,
+    `image_created=${roundtripDraft.image_created}`,
+    `guard_clean=${runtimeGuard.guardIsClean(roundtripDraft.no_execution_guard)}`
+  ]);
+  els.bridgeRoundtripBoundary.textContent = roundtripDraft.boundary_cn;
+}
+
+function renderRealBridgeAuthorizationPackage(packageDraft) {
+  els.realBridgeAuthStatus.textContent = `${packageDraft.package_status_cn} / ${packageDraft.authorization_status}`;
+  renderList(els.realBridgeAuthMethods, [
+    `允许方法：${packageDraft.allowed_methods.join("、")}`,
+    `禁止方法：${packageDraft.forbidden_methods.join("、")}`,
+    `每方法最大调用：${packageDraft.max_bridge_calls_per_method}`
+  ]);
+  renderList(els.realBridgeAuthRequired, packageDraft.required_authorization_fields);
+  renderList(els.realBridgeAuthForbidden, packageDraft.forbidden_outputs_cn);
+  els.realBridgeAuthBoundary.textContent = packageDraft.boundary_cn;
+}
+
+function renderPluginReliabilityPromptDiscipline(draft) {
+  const family = draft.prompt_families[0] || {};
+  els.promptReliabilityStatus.textContent = `${draft.package_status_cn} / ${draft.reliability_status}`;
+  els.promptReliabilityHash.textContent = `${draft.prompt_hash} / ${draft.model_lock.requested_model}`;
+  renderList(
+    els.promptReliabilityRules,
+    [...(family.prompt_lint_rules_cn || []), `禁止项数量：${draft.lint_result.banned_subject_count}`]
+  );
+  renderList(els.promptReliabilityFailures, draft.failure_taxonomy.map((item) => `${item.label_cn}：${item.rule_cn}`));
+  els.promptReliabilityBoundary.textContent = draft.boundary_cn;
+}
+
+function renderMemoryWriteCompletionCandidate(draft) {
+  els.memoryCompletionCandidateStatus.textContent = `${draft.package_status_cn} / ${draft.candidate_status}`;
+  renderList(els.memoryCompletionCandidateCriteria, [
+    `请求必须存在：${draft.completion_criteria.write_requested_required}`,
+    `授权必须存在：${draft.completion_criteria.write_authorized_required}`,
+    `writer 必须执行：${draft.completion_criteria.writer_executed_required}`,
+    `canonical 位置必须存在：${draft.completion_criteria.canonical_target_exists_required}`,
+    `canonical hash 必须匹配：${draft.completion_criteria.canonical_target_hash_matches_required}`,
+    `plugin success 充分：${draft.completion_criteria.plugin_success_sufficient}`
+  ]);
+  renderList(
+    els.memoryCompletionCandidateObserved,
+    Object.entries(draft.observed_state).map(([key, value]) => `${key}=${value}`)
+  );
+  renderList(els.memoryCompletionCandidateFailures, draft.failure_closeout_template_cn);
+  els.memoryCompletionCandidateBoundary.textContent = draft.boundary_cn;
+}
+
+function renderSingleRealGenerationRetryGate(draft) {
+  els.generationRetryGateStatus.textContent = `${draft.package_status_cn} / ${draft.authorization_status}`;
+  renderList(els.generationRetryGatePlugin, [
+    `插件：${draft.selected_plugin_id}`,
+    `命令：${draft.selected_plugin_command}`,
+    `模型：${draft.requested_model}`,
+    `未来最大调用：${draft.max_plugin_calls_per_run}`,
+    `已观察调用：${draft.plugin_calls_observed}`
+  ]);
+  renderList(els.generationRetryGatePrompt, [
+    `prompt family：${draft.prompt_family_ref}`,
+    `prompt hash：${draft.prompt_hash}`,
+    ...draft.prompt_policy_cn
+  ]);
+  renderList(els.generationRetryGateGuards, [
+    `overwrite_existing_files_allowed=${draft.output_directory_policy.overwrite_existing_files_allowed}`,
+    `raw_path_stored=${draft.output_directory_policy.raw_path_stored}`,
+    `real_generation_performed=${draft.real_generation_performed}`,
+    `image_created=${draft.image_created}`,
+    `memory_write_allowed_by_this_record=${draft.memory_write_block.memory_write_allowed_by_this_record}`
+  ]);
+  renderList(els.generationRetryGateAuthorization, draft.required_authorization_fields);
+  els.generationRetryGateBoundary.textContent = draft.boundary_cn;
+}
+
+function renderRealMemoryWriteAuthorizationPackage(draft) {
+  els.memoryWriteAuthStatus.textContent = `${draft.package_status_cn} / ${draft.authorization_status}`;
+  renderList(els.memoryWriteAuthCounts, [
+    `max_daily_note_writes=${draft.max_daily_note_writes}`,
+    `max_vcp_memory_writes=${draft.max_vcp_memory_writes}`,
+    `max_retry_attempts=${draft.max_retry_attempts}`,
+    `raw_path_stored=${draft.target_refs["raw_path_stored"]}`
+  ]);
+  renderList(els.memoryWriteAuthRules, draft.content_rules_cn);
+  renderList(els.memoryWriteAuthReject, [
+    ...draft.reject_path_cn,
+    `no_success_fabrication_rule=${draft.no_success_fabrication_rule}`,
+    `plugin_success_sufficient=${draft.completion_preflight_ref.plugin_success_sufficient}`
+  ]);
+  els.memoryWriteAuthBoundary.textContent = draft.boundary_cn;
+}
+
+function renderAssetArchiveCandidate(draft) {
+  els.assetArchiveCandidateStatus.textContent = `${draft.package_status_cn} / ${draft.asset_status_classification}`;
+  renderList(els.assetArchiveCandidateFields, [
+    `archive_policy=${draft.archive_policy}`,
+    `output_path_ref=${draft.output_path_ref}`,
+    `asset_hash=${draft.asset_hash}`,
+    `score=${draft.review_score} / ${draft.review_score_band}`,
+    `raw_output_path_stored=${draft.raw_output_path_stored}`,
+    `binary_storage_allowed=${draft.binary_storage_allowed}`
+  ]);
+  renderList(
+    els.assetArchiveCandidateCloseouts,
+    draft.closeout_templates.map((item) => `${item.asset_status}：${item.template_cn}`)
+  );
+  els.assetArchiveCandidateBoundary.textContent = `${draft.sanitized_review_summary_cn} ${draft.boundary_cn}`;
+}
+
 function renderSessionTransfer(sessionExportDraft) {
   els.sessionTransferStatus.textContent = sessionTransferStatusText;
   if (!sessionExportDraft) {
@@ -2056,17 +3839,42 @@ function render() {
   const reviewDraft = draft.review_session_draft;
   const imageCaseDraft = draft.image_case_draft;
   const memoryDeltaDraft = draft.memory_delta_draft;
+  const memoryCompletionState = draft.memory_completion_state_draft;
   const handoffDraft = draft.adapter_dry_run_handoff_draft;
   const batchSummaryDraft = draft.batch_review_summary_draft;
   const batchDecisionDraft = draft.batch_decision_draft;
   const preauthPackageDraft = draft.a5_preauthorization_review_package_draft;
+  const inactiveAuthorizationCapsulesDraft = draft.inactive_authorization_capsules_draft;
   const inspectionDraft = draft.human_inspection_checklist_draft;
+  const humanOverrideTraceabilityDraft = draft.human_override_traceability_draft;
+  const acceptedCandidateDeliveryPackageDraft = draft.accepted_candidate_delivery_package_draft;
+  const runtimeReviewStateDraft = draft.runtime_review_state_draft;
+  const localCommitScopePlanDraft = draft.local_commit_scope_plan_draft;
+  const bridgeMockRoundtripCandidateDraft = draft.bridge_mock_roundtrip_candidate_draft;
+  const realBridgeAuthorizationPackageDraft = draft.real_bridge_authorization_package_draft;
+  const pluginReliabilityPromptDisciplineDraft = draft.plugin_reliability_prompt_discipline_draft;
+  const memoryWriteCompletionCandidateDraft = draft.memory_write_completion_candidate_draft;
+  const singleRealGenerationRetryGateDraft = draft.single_real_generation_retry_gate_draft;
+  const realMemoryWriteAuthorizationPackageDraft = draft.real_memory_write_authorization_package_draft;
+  const assetArchiveCandidateDraft = draft.asset_archive_candidate_draft;
   const sessionExportDraft = draft.runtime_session_export_draft;
   queueState = normalizeQueueItems(reviewDraft.review_queue);
   renderQueueList(reviewDraft.review_queue);
   renderBatchSummary(batchSummaryDraft);
   renderPreauthorizationPackage(batchDecisionDraft, preauthPackageDraft);
+  renderInactiveAuthorizationCapsules(inactiveAuthorizationCapsulesDraft);
   renderInspectionSummary(inspectionDraft);
+  renderHumanOverrideTraceability(humanOverrideTraceabilityDraft);
+  renderDeliveryPackage(acceptedCandidateDeliveryPackageDraft);
+  renderRuntimeReviewState(runtimeReviewStateDraft);
+  renderLocalCommitScopePlan(localCommitScopePlanDraft);
+  renderBridgeMockRoundtrip(bridgeMockRoundtripCandidateDraft);
+  renderRealBridgeAuthorizationPackage(realBridgeAuthorizationPackageDraft);
+  renderPluginReliabilityPromptDiscipline(pluginReliabilityPromptDisciplineDraft);
+  renderMemoryWriteCompletionCandidate(memoryWriteCompletionCandidateDraft);
+  renderSingleRealGenerationRetryGate(singleRealGenerationRetryGateDraft);
+  renderRealMemoryWriteAuthorizationPackage(realMemoryWriteAuthorizationPackageDraft);
+  renderAssetArchiveCandidate(assetArchiveCandidateDraft);
   renderSessionTransfer(sessionExportDraft);
   els.batchSelectedCount.textContent = `${selectedBatchQueueIds.size} 个`;
   els.batchOperationStatus.textContent = batchOperationStatusText;
@@ -2082,7 +3890,7 @@ function render() {
   els.summaryAssetStatus.textContent = assetStatusLabel(imageCaseDraft.asset_status);
   els.summaryScoreBand.textContent = scoreBandLabel(reviewDraft.final_review.total_score);
   els.summaryMemoryStatus.textContent = memoryStatusLabel(memoryDeltaDraft.approval_status);
-  els.summaryWriteRequest.textContent = writeRequestLabel(memoryDeltaDraft.final_decision.should_write_to_vcp);
+  els.summaryWriteRequest.textContent = writeRequestLabel(memoryCompletionState.write_requested);
   els.summaryGuard.textContent = runtimeGuard.guardIsClean(draft.prototype_guard) ? "无外部副作用" : "存在风险";
   els.summaryNextAction.textContent = reviewDraft.next_action_cn;
   els.verdictTitle.textContent = reviewDraft.acceptance_verdict.status_cn;
@@ -2095,8 +3903,15 @@ function render() {
   els.boundaryBanner.textContent = "安全边界：只生成本地草案，没有真实写入，没有插件或 API 调用。";
   els.memoryPreviewTitle.textContent = memoryDeltaDraft.chinese_diary_title || "-";
   els.memoryPreviewTarget.textContent = memoryDeltaDraft.target_notebook || "-";
-  els.memoryPreviewDecision.textContent = writeRequestLabel(memoryDeltaDraft.final_decision.should_write_to_vcp);
+  els.memoryPreviewDecision.textContent = writeRequestLabel(memoryCompletionState.write_requested);
   els.memoryPreviewBody.textContent = memoryDeltaDraft.chinese_diary_content || "未填写中文记忆正文。";
+  els.memoryCompletionRequested.textContent = memoryCompletionState.write_requested_cn;
+  els.memoryCompletionAuthorized.textContent = memoryCompletionState.write_authorized_cn;
+  els.memoryCompletionPerformed.textContent = memoryCompletionState.write_performed_cn;
+  els.memoryCompletionLocationVerified.textContent = memoryCompletionState.canonical_location_verified_cn;
+  els.memoryCompletionHashMatched.textContent = memoryCompletionState.canonical_hash_matched_cn;
+  els.memoryCompletionPluginSufficient.textContent = memoryCompletionState.plugin_success_sufficient_cn;
+  els.memoryCompletionBoundary.textContent = memoryCompletionState.boundary_cn;
   els.handoffStatus.textContent = handoffDraft.status_cn;
   els.handoffExecution.textContent = handoffDraft.execution_blocked ? "已阻止真实执行" : "存在执行风险";
   els.handoffPluginCalls.textContent = `${handoffDraft.max_plugin_calls} 次`;
@@ -2147,12 +3962,12 @@ function render() {
   els.assetCardDiff.textContent = `改进点：${reviewDraft.version_comparison.strengths_cn}\n风险点：${reviewDraft.version_comparison.issues_cn}`;
   els.memoryCardTitle.textContent = memoryDeltaDraft.chinese_diary_title || "-";
   els.memoryCardTarget.textContent = memoryDeltaDraft.target_notebook || "-";
-  els.memoryCardDecision.textContent = writeRequestLabel(memoryDeltaDraft.final_decision.should_write_to_vcp);
+  els.memoryCardDecision.textContent = writeRequestLabel(memoryCompletionState.write_requested);
   els.memoryCardBody.textContent = memoryDeltaDraft.chinese_diary_content || "未填写中文记忆正文。";
   els.memoryCardBoundary.textContent = "当前只是写入申请草案，没有真实写入。";
   els.draftOutput.textContent = JSON.stringify(draft, null, 2);
   try {
-    const ack = submitDraftToHost(draft);
+    const ack = previewDraftWithHost(draft);
     els.hostStatus.textContent = ack.status_cn;
     els.hostSubmittedAt.textContent = ack.received_at;
   } catch (error) {

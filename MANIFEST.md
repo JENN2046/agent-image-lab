@@ -1,6 +1,6 @@
 # Agent Image Lab 打包清单
 
-本包包含 Agent Image Lab v1.0 true-loop closeout 候选所需的文档、schema、角色定义、记忆策略、审片台规格、Adapter dry-run 包、VCP 接入记录、授权门、真实执行脱敏记录、最终验收报告、v3.9-v4.2 Review Console runtime prototype 本地验证加固记录，v4.3-v4.9 guarded autopilot overlay / agent board / local checkpoint readiness / commit scope manifest / post-push state reconciliation / v4 index consistency validation / local tag push-readiness preflight，v5.0 post-merge delivery readiness index，v5.1 runtime delivery surface validation，v5.2 adapter delivery surface validation，v5.3 review console adapter handoff validation，v5.4 local sync readiness preflight，v5.5 post-commit reconciliation checkpoint，v5.6 v5 index consistency validation，v5.7 local batch commit-readiness preflight，v5.8 handoff freshness validation，v5.9 expanded v5 index consistency validation，v5.10 local true-loop candidate delivery closeout，v5.11 post-merge reconciliation，v5.12 release candidate readiness，v7.40 local A4/A5 autonomy mode alignment，v7.41 external remote-debug verification script creation record，v7.42 external remote-debug verification script creation authorization package，v7.43 external remote-debug verification script creation execution record，v7.44 remote-debug script run and VCPChat launch record，v7.45 CDP read-only attempt record，v7.46 remote-debug relaunch runtime verification record，v10.0 A5 end-to-end activation package readiness / preflight-blocked 记录，v10.1 A5 resume after external worktree reconciliation 接续记录，v10.2 A5 bridge smoke blocked 记录，v10.3 A5 bridge integration smoke 记录，v10.4 A5 DoubaoGen single generation rejected asset 记录，v10.5 A5 DoubaoGen no-text retry rejected asset 记录，v10.6 A5 prompt failure analysis and safer strategy 记录，v10.7 A5 safer prompt review package 记录，v10.8 A5 positive still-life generation preflight gate 记录，v10.8 下一次真实生成的未激活授权草案，v10.9 A5 positive still-life generation rejected asset 记录，v10.10 A5 prompt handoff diagnostic preflight 记录，v10.11 A5 prompt handoff diagnostic result 记录，v10.12 A5 provider-side prompt fingerprint capture authorization package 记录，v10.26 real DailyNote/VCP memory write closeout 记录，v10.27 DailyNoteWrite root path correction 记录，以及 v10.28 DailyNote canonical location guard 记录。
+本包包含 Agent Image Lab v1.0 true-loop closeout 候选所需的文档、schema、角色定义、记忆策略、审片台规格、Adapter dry-run 包、VCP 接入记录、授权门、真实执行脱敏记录、最终验收报告、v3.9-v4.2 Review Console runtime prototype 本地验证加固记录，v4.3-v4.9 guarded autopilot overlay / agent board / local checkpoint readiness / commit scope manifest / post-push state reconciliation / v4 index consistency validation / local tag push-readiness preflight，v5.0 post-merge delivery readiness index，v5.1 runtime delivery surface validation，v5.2 adapter delivery surface validation，v5.3 review console adapter handoff validation，v5.4 local sync readiness preflight，v5.5 post-commit reconciliation checkpoint，v5.6 v5 index consistency validation，v5.7 local batch commit-readiness preflight，v5.8 handoff freshness validation，v5.9 expanded v5 index consistency validation，v5.10 local true-loop candidate delivery closeout，v5.11 post-merge reconciliation，v5.12 release candidate readiness，v7.40 local A4/A5 autonomy mode alignment，v7.41 external remote-debug verification script creation record，v7.42 external remote-debug verification script creation authorization package，v7.43 external remote-debug verification script creation execution record，v7.44 remote-debug script run and VCPChat launch record，v7.45 CDP read-only attempt record，v7.46 remote-debug relaunch runtime verification record，v10.0 A5 end-to-end activation package readiness / preflight-blocked 记录，v10.1 A5 resume after external worktree reconciliation 接续记录，v10.2 A5 bridge smoke blocked 记录，v10.3 A5 bridge integration smoke 记录，v10.4 A5 DoubaoGen single generation rejected asset 记录，v10.5 A5 DoubaoGen no-text retry rejected asset 记录，v10.6 A5 prompt failure analysis and safer strategy 记录，v10.7 A5 safer prompt review package 记录，v10.8 A5 positive still-life generation preflight gate 记录，v10.8 下一次真实生成的未激活授权草案，v10.9 A5 positive still-life generation rejected asset 记录，v10.10 A5 prompt handoff diagnostic preflight 记录，v10.11 A5 prompt handoff diagnostic result 记录，v10.12 A5 provider-side prompt fingerprint capture authorization package 记录，v10.26 real DailyNote/VCP memory write closeout 记录，v10.27 DailyNoteWrite root path correction 记录，v10.28 DailyNote canonical location guard 记录，Runtime Review follow-up requirements audit，Runtime Review follow-up Batch 2A/2B/2C local draft surfaces，Runtime Review long task delivery plan，以及 Runtime Review Batch 8A local release-candidate proposal。
 
 ## 重要声明
 
@@ -32,6 +32,15 @@
 - v10.26 记录 v10.25 已通过 DailyNoteWrite 完成一次真实 DailyNote/VCP memory 写入；actual_write_calls=1，保存文件名和 sha256 已脱敏记录，不记录 raw full path，且单次授权已消耗。
 - v10.27 记录 DailyNoteWrite 后续写入根目录修复：从 `plugin_dir_dailynote` 修正为 `vcp_root_dailynote`；本阶段不重跑 writer、不再次写 DailyNote/VCP memory。
 - v10.28 记录 DailyNote canonical location guard：插件 `success` 不是充分条件，后续写入必须通过 canonical file 存在和 hash 匹配才能标记完成。
+- Runtime Review follow-up requirements audit 记录下一步本地审片台交付需求，不授权真实执行或外部读取。
+- Runtime Review follow-up Batch 2A/2C 只新增本地 accepted candidate 交付包草案和人工覆盖轨迹草案；`submitDraft_called=false`，不授权真实执行或外部读取。
+- Runtime Review follow-up Batch 2B 新增本地 memory completion state split；`write_performed=false`、`canonical_location_verified=false`、`canonical_hash_matched=false`、`plugin_success_sufficient=false`，不授权真实写入。
+- Runtime Review long task delivery plan 只规划 Batch 3A 到 Batch 8A；其中真实 bridge、插件调用、DailyNote/VCP memory 写入和版本动作都保留独立授权门。
+- Runtime Review Batch 3A/3B/3C 已新增本地 inactive authorization capsules、runtime review state convergence 和 local commit scope plan；`authorization_status=inactive_package`、`staged_changes_present=false`、commit/tag/push/PR/release 均未授权。
+- Runtime Review Batch 4A 已新增本地 `bridge_mock_roundtrip_candidate_draft`；`bridge_mode=project_local_mock`、`loadSession=1`、`previewDraft=1`、`submitDraft=0`、真实 CDP/bridge/插件/API/DailyNote/VCP memory/image 均未执行。
+- Runtime Review Batch 4B/5A/6A 已新增本地 `real_bridge_authorization_package_draft`、`plugin_reliability_prompt_discipline_draft` 和 `memory_write_completion_candidate_draft`；真实 bridge/CDP/source read、插件/API、DailyNote/VCP memory、图片和版本动作均未执行。
+- Runtime Review Batch 5B/6B/7A 已新增本地 `single_real_generation_retry_gate_draft`、`real_memory_write_authorization_package_draft` 和 `asset_archive_candidate_draft`；真实插件调用、DailyNote/VCP memory 写入、图片创建和版本动作均未执行。
+- Runtime Review Batch 8A 已新增本地 release-candidate proposal 和提交范围清单；它只收束 Runtime Review follow-up 的本地文件集，不执行 commit、tag、push、PR 或 release。
 
 ## Release readiness 文件
 
@@ -87,6 +96,13 @@
 - `docs/212_v10_26_real_dailynote_write_closeout.md`
 - `docs/213_v10_27_dailynotewrite_root_path_correction.md`
 - `docs/214_v10_28_dailynote_canonical_location_guard.md`
+- `docs/215_runtime_review_followup_requirements_audit.md`
+- `docs/216_runtime_review_long_task_delivery_plan.md`
+- `docs/217_runtime_review_batch_3a_3b_3c_local_stabilization.md`
+- `docs/218_runtime_review_batch_4a_bridge_mock_roundtrip.md`
+- `docs/219_runtime_review_batch_4b_5a_6a_local_readiness.md`
+- `docs/220_runtime_review_batch_5b_6b_7a_local_gate_archive.md`
+- `docs/221_runtime_review_batch_8a_release_candidate_readiness_local_proposal.md`
 - `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_record.md`
 - `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_authorization_package.md`
 - `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_execution_record.md`

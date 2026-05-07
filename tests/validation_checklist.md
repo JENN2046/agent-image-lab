@@ -3362,3 +3362,155 @@
 - [ ] v10.28 必须把 wrong-location 输出标记为 `plugin_success_wrong_location`，且不得声明 memory write complete。
 - [ ] v10.28 必须记录不读取外部配置、不重跑 writer、不再次写 DailyNote/VCP memory。
 - [ ] `node scripts/validate_v10_28_dailynote_canonical_location_guard.js` 通过。
+
+## Runtime Review Follow-up Requirements Audit 检查
+
+- [ ] `docs/215_runtime_review_followup_requirements_audit.md` 存在。
+- [ ] 审计必须记录当前分支为 `codex/runtime-review-followup`。
+- [ ] 审计必须列出 accepted candidate delivery package draft。
+- [ ] 审计必须列出 memory completion state split。
+- [ ] 审计必须列出 human override traceability。
+- [ ] 审计必须列出 inactive authorization capsule generator。
+- [ ] 审计必须保持 `real_execution_authorized=false` 和 `external_source_read_authorized=false`。
+- [ ] 审计不得授权真实 VCPChat/VCPToolBox 读取、插件/API 调用、DailyNote/VCP memory 写入、图片创建、submitDraft 或版本动作。
+
+## Runtime Review Follow-up Batch 2A + 2C 检查
+
+- [ ] runtime prototype 必须输出 `accepted_candidate_delivery_package_draft`。
+- [ ] 交付包草案必须包含 selected candidate ref、sanitized asset hash、review score band、risk summary、human approval summary、memory_delta preview 和 reusable rule summary。
+- [ ] 交付包草案必须保持 `draft_only=true`、`submitDraft_called=false`、`side_effects_performed=false`。
+- [ ] runtime prototype 必须输出 `human_override_traceability_draft`。
+- [ ] 人工覆盖轨迹必须包含 human decision source、override reason、known deviation summary、prompt compliance complete 和 memory suitability。
+- [ ] 两个草案面的插件/API/DailyNote/VCP memory/图片动作标记必须全 false。
+- [ ] dirty delivery package / dirty override traceability guard 必须被 `runtime_guard.js` 或 host mock 拒绝。
+- [ ] `node scripts/validate_runtime_guard_unit.js` 通过。
+- [ ] `node scripts/validate_runtime_prototype_smoke.js` 通过。
+- [ ] `node scripts/validate_runtime_delivery_surface.js` 通过。
+- [ ] `node scripts/validate_runtime_prototype_suite.js` 通过。
+
+## Runtime Review Follow-up Batch 2B 检查
+
+- [ ] runtime prototype 必须输出 `memory_completion_state_draft`。
+- [ ] `memory_completion_state_draft` 必须包含 `write_requested`、`write_authorized`、`write_performed`、`canonical_location_verified`、`canonical_hash_matched` 和 `plugin_success_sufficient`。
+- [ ] `write_authorized=true` 不得自动代表 `write_performed=true`。
+- [ ] `write_performed`、`canonical_location_verified`、`canonical_hash_matched` 必须在本地 no-write prototype 中保持 `false`。
+- [ ] `plugin_success_sufficient` 必须保持 `false`。
+- [ ] runtime guard 必须拒绝 requested / authorized 不一致、真实写入完成态越界、canonical 校验越界和 plugin success sufficiency 越界。
+- [ ] `node scripts/validate_runtime_guard_unit.js` 通过。
+- [ ] `node scripts/validate_runtime_prototype_smoke.js` 通过。
+- [ ] `node scripts/validate_runtime_delivery_surface.js` 通过。
+- [ ] `node scripts/validate_runtime_prototype_suite.js` 通过。
+
+## Runtime Review Long Task Delivery Plan 检查
+
+- [ ] `docs/216_runtime_review_long_task_delivery_plan.md` 存在。
+- [ ] 长任务计划必须列出 LT-1 到 LT-8 的 workstream。
+- [ ] 长任务计划必须列出 Batch 3A 到 Batch 8A 的执行顺序。
+- [ ] 长任务计划必须把 A4 本地工作和 A5 / 真实写入 / 远端版本动作授权门分开。
+- [ ] 长任务计划必须包含 standing validation matrix。
+- [ ] 长任务计划必须包含 stop conditions。
+- [ ] 长任务计划不得授权真实 VCPChat/VCPToolBox 读取、插件/API 调用、DailyNote/VCP memory 写入、图片创建、submitDraft 或版本动作。
+
+## Runtime Review Batch 3A + 3B + 3C 检查
+
+- [ ] `docs/217_runtime_review_batch_3a_3b_3c_local_stabilization.md` 存在。
+- [ ] runtime prototype 必须输出 `inactive_authorization_capsules_draft`。
+- [ ] 所有授权胶囊必须保持 `authorization_status=inactive_package` 和 `activation_required=true`。
+- [ ] 授权胶囊必须覆盖 real generation retry、memory write、VCPChat bridge call、provider prompt fingerprint capture 和 version action。
+- [ ] runtime guard 必须拒绝已激活授权胶囊或任何真实执行 flag。
+- [ ] runtime prototype 必须输出 `runtime_review_state_draft`。
+- [ ] runtime review state 必须把 asset state、memory status、write request / authorization / performed、delivery readiness 和 human override 分开。
+- [ ] runtime guard 必须拒绝状态矛盾：write authorized without request、write performed in no-write prototype、human override implying prompt compliance complete。
+- [ ] runtime prototype 必须输出 `local_commit_scope_plan_draft`。
+- [ ] local commit scope plan 必须分组 runtime prototype、validators、docs/indexes 和 agent board。
+- [ ] local commit scope plan 必须保持 `staged_changes_present=false`，且 commit/tag/push/PR/release 均为 false。
+- [ ] `node scripts/validate_runtime_guard_unit.js` 通过。
+- [ ] `node scripts/validate_runtime_prototype_smoke.js` 通过。
+- [ ] `node scripts/validate_runtime_delivery_surface.js` 通过。
+- [ ] `node scripts/validate_runtime_prototype_suite.js` 通过。
+- [ ] `node scripts/validate_local_commit_scope.js` 通过。
+
+## Runtime Review Batch 5B + 6B + 7A 检查
+
+- [ ] `docs/220_runtime_review_batch_5b_6b_7a_local_gate_archive.md` 存在。
+- [ ] runtime prototype 必须输出 `single_real_generation_retry_gate_draft`。
+- [ ] single real generation retry gate 必须保持 `gate_status=single_real_generation_retry_gate_inactive` 和 `authorization_status=inactive_package`。
+- [ ] retry gate 必须固定 `selected_plugin_id=DoubaoGen`、`selected_plugin_command=generate`、`requested_model=doubao-seedream-5-0-260128`。
+- [ ] retry gate 当前必须保持 `plugin_calls_observed=0`、`real_generation_performed=false`、`image_created=false`。
+- [ ] runtime prototype 必须输出 `real_memory_write_authorization_package_draft`。
+- [ ] real memory write auth 必须保持 `authorization_status=inactive_package`、`max_daily_note_writes=1`、`max_vcp_memory_writes=1`、`max_retry_attempts=1`。
+- [ ] real memory write auth 必须保持 `no_success_fabrication_rule=true`。
+- [ ] real memory write auth 当前必须保持 `daily_note_called=false`、`vcp_memory_written=false`、`write_complete_declared=false`。
+- [ ] runtime prototype 必须输出 `asset_archive_candidate_draft`。
+- [ ] asset archive candidate 必须保持 `archive_status=asset_archive_candidate_no_binary` 和 `archive_policy=metadata_only_no_binary`。
+- [ ] asset archive candidate 只能保存 ref、hash、score、中文摘要、rules 和 human override reason。
+- [ ] asset archive candidate 必须保持 `binary_storage_allowed=false`、`git_binary_stored=false`、`memory_binary_stored=false`。
+- [ ] runtime guard 必须拒绝 retry gate 已观察插件调用、real memory auth 写入调用、asset archive 二进制保存。
+- [ ] `node scripts/validate_runtime_guard_unit.js` 通过。
+- [ ] `node scripts/validate_runtime_prototype_smoke.js` 通过。
+- [ ] `node scripts/validate_runtime_delivery_surface.js` 通过。
+- [ ] `node scripts/validate_runtime_prototype_suite.js` 通过。
+- [ ] `node scripts/validate_local_commit_scope.js` 通过。
+
+## Runtime Review Batch 8A Release Candidate Readiness 检查
+
+- [ ] `docs/221_runtime_review_batch_8a_release_candidate_readiness_local_proposal.md` 存在。
+- [ ] Batch 8A 必须把 Runtime Review follow-up 累积文件集收束为本地 RC proposal。
+- [ ] Batch 8A 提交范围必须覆盖 runtime prototype、runtime validators、docs/indexes、validation checklist 和 `.agent_board`。
+- [ ] Batch 8A 不得 stage 文件，不得 commit、tag、push、开 PR 或 release。
+- [ ] Batch 8A 不得读取真实 VCPChat/VCPToolBox source、manifest、env、config、log、endpoint、secret 或 private path。
+- [ ] Batch 8A 不得调用插件/API/DailyNote/VCP memory，不得创建图片，不得调用 production `submitDraft`。
+- [ ] `docs/216_runtime_review_long_task_delivery_plan.md` baseline 必须指向 Batch 8A 本地 RC proposal 状态。
+- [ ] `README.md`、`MANIFEST.md`、`RELEASE_NOTES.md`、`docs/00_project_roadmap.md` 必须包含 Batch 8A 本地 RC proposal 索引。
+- [ ] `.agent_board/RUN_STATE.md`、`.agent_board/HANDOFF.md`、`.agent_board/CHECKPOINT.md`、`.agent_board/TASK_QUEUE.md`、`.agent_board/VALIDATION_LOG.md` 必须记录 Batch 8A 边界。
+- [ ] `node scripts/validate_runtime_guard_unit.js` 通过。
+- [ ] `node scripts/validate_runtime_prototype_smoke.js` 通过。
+- [ ] `node scripts/validate_runtime_delivery_surface.js` 通过。
+- [ ] `node scripts/validate_runtime_prototype_suite.js` 通过。
+- [ ] `node scripts/validate_agent_board_state.js` 通过。
+- [ ] `node scripts/validate_local_commit_scope.js` 通过。
+- [ ] `powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1` 通过。
+- [ ] `powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1` 通过或只剩已知 manual-review warnings。
+- [ ] `git diff --check` 通过。
+
+## Runtime Review Batch 4A Bridge Mock Roundtrip 检查
+
+- [ ] `docs/218_runtime_review_batch_4a_bridge_mock_roundtrip.md` 存在。
+- [ ] runtime prototype 必须输出 `bridge_mock_roundtrip_candidate_draft`。
+- [ ] `bridge_mock_roundtrip_candidate_draft.roundtrip_status` 必须为 `mock_roundtrip_candidate`。
+- [ ] `bridge_mock_roundtrip_candidate_draft.bridge_mode` 必须为 `project_local_mock`。
+- [ ] `source_fixture_policy` 必须为 `project_local_fixtures_only`。
+- [ ] `selected_methods` 必须只包含 `loadSession` 和 `previewDraft`。
+- [ ] `forbidden_methods` 必须包含 `submitDraft`。
+- [ ] `bridge_calls_observed` 必须保持 `mock_only=true`、`loadSession=1`、`previewDraft=1`、`submitDraft=0`、`production_submitDraft=0`。
+- [ ] `adapter_handoff_ref` 必须保持 `selected_plugin=null`、`max_plugin_calls=0`、`execution_blocked=true`。
+- [ ] `ack_summaries` 只能记录方法名、ack keys 和 no-write flags。
+- [ ] 插件/API/DailyNote/VCP memory/image/CDP/production bridge 标记必须全 false。
+- [ ] runtime guard 必须拒绝 submitDraft 调用计数、production bridge 标记或 dirty no-write flags。
+- [ ] `node scripts/validate_runtime_guard_unit.js` 通过。
+- [ ] `node scripts/validate_runtime_prototype_smoke.js` 通过。
+- [ ] `node scripts/validate_runtime_delivery_surface.js` 通过。
+- [ ] `node scripts/validate_runtime_prototype_suite.js` 通过。
+- [ ] `node scripts/validate_local_commit_scope.js` 通过。
+
+## Runtime Review Batch 4B + 5A + 6A 检查
+
+- [ ] `docs/219_runtime_review_batch_4b_5a_6a_local_readiness.md` 存在。
+- [ ] runtime prototype 必须输出 `real_bridge_authorization_package_draft`。
+- [ ] real bridge 授权包必须保持 `authorization_status=inactive_package`。
+- [ ] real bridge 授权包 allowed methods 只能包含 `cancel`、`loadSession`、`previewDraft`。
+- [ ] real bridge 授权包 forbidden methods 必须包含 `submitDraft`。
+- [ ] real bridge 授权包必须保持 `production_bridge_invocation_performed=false`、`real_cdp_called=false`、`source_read_performed=false`。
+- [ ] runtime prototype 必须输出 `plugin_reliability_prompt_discipline_draft`。
+- [ ] prompt reliability 必须包含 prompt registry、prompt hash、requested model lock、banned subjects、lint rules 和 failure taxonomy。
+- [ ] prompt reliability 必须保持 `max_plugin_calls_allowed=0`，provider-side capture 必须保持 `authorization_status=inactive_package`。
+- [ ] runtime prototype 必须输出 `memory_write_completion_candidate_draft`。
+- [ ] memory completion candidate 必须要求 write requested、write authorized、writer executed、canonical target exists、canonical hash matches。
+- [ ] memory completion candidate 必须保持 `plugin_success_sufficient=false`。
+- [ ] memory completion candidate 当前观察必须保持 writer/canonical/hash complete 全 false。
+- [ ] runtime guard 必须拒绝激活 bridge 授权包、真实 CDP 标记、prompt plugin call 额度、provider capture 激活和 memory complete 越界。
+- [ ] `node scripts/validate_runtime_guard_unit.js` 通过。
+- [ ] `node scripts/validate_runtime_prototype_smoke.js` 通过。
+- [ ] `node scripts/validate_runtime_delivery_surface.js` 通过。
+- [ ] `node scripts/validate_runtime_prototype_suite.js` 通过。
+- [ ] `node scripts/validate_local_commit_scope.js` 通过。

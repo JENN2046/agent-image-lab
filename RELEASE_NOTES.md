@@ -83,6 +83,15 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Added v10.26 real DailyNote/VCP memory write closeout for one DailyNoteWrite execution, recording actual_write_calls=1, saved file name/hash, and consumed single-write authorization.
 - Added v10.27 DailyNoteWrite root path correction record for future writes, documenting corrected_root_class=vcp_root_dailynote with no writer rerun or second memory write.
 - Added v10.28 DailyNote canonical location guard so plugin success alone is insufficient; future writes require canonical file existence and hash match before completion.
+- Added Runtime Review follow-up requirements audit for accepted candidate delivery packages, memory completion state split, human override traceability, and inactive authorization capsule planning.
+- Added Runtime Review follow-up Batch 2A/2C accepted candidate delivery package draft and human override traceability draft, with no-write runtime guard and smoke validation.
+- Added Runtime Review follow-up Batch 2B memory completion state split, separating write requested, write authorized, write performed, canonical location verified, canonical hash matched, and plugin success sufficiency.
+- Added Runtime Review long task delivery plan covering Batch 3A through Batch 8A, with local A4 tasks separated from A5 / real write / remote version authorization gates.
+- Added Runtime Review Batch 3A/3B/3C local stabilization with inactive authorization capsules, runtime review state convergence, and a local commit-scope plan.
+- Added Runtime Review Batch 4A bridge mock roundtrip candidate with local `loadSession` / `previewDraft` mock flow, submitDraft forbidden state, and no-write guard validation.
+- Added Runtime Review Batch 4B/5A/6A local readiness surfaces for inactive real bridge authorization, prompt reliability/model lock discipline, and memory write completion preflight criteria.
+- Added Runtime Review Batch 5B/6B/7A local gate/archive surfaces for inactive single real generation retry authorization, inactive real memory write authorization, and metadata-only asset archive candidates.
+- Added Runtime Review Batch 8A local release-candidate proposal, including final follow-up commit scope, validation matrix, and no-version-action gate.
 
 ## Safety Status
 
@@ -123,3 +132,8 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - The v10.26 closeout records the completed v10.25 DailyNoteWrite memory write with actual_write_calls=1, saved file name/hash only, no raw full path, and no authorization for additional write, generation, submitDraft, commit, tag, push, PR, or release.
 - The v10.27 correction records that future DailyNoteWrite root resolution now classifies as vcp_root_dailynote; it does not rerun the writer, perform another memory write, record raw config values, or authorize version actions.
 - The v10.28 guard records plugin_success_sufficient=false and canonical_target_hash_match_required=true; it performs no external config read, writer rerun, memory write, or version action.
+- The Runtime Review follow-up requirements audit is local planning only; it does not authorize real VCPChat/VCPToolBox reads, plugin/API calls, DailyNote/VCP memory writes, image creation, submitDraft, or version actions.
+- The Runtime Review follow-up Batch 2A/2C runtime draft surfaces are local-only; they keep `submitDraft_called=false`, all side-effect flags false, and do not authorize real VCPChat/VCPToolBox reads, plugin/API calls, DailyNote/VCP memory writes, image creation, or version actions.
+- The Runtime Review follow-up Batch 2B memory completion split is local-only; it keeps `write_performed=false`, `canonical_location_verified=false`, `canonical_hash_matched=false`, and `plugin_success_sufficient=false`.
+- The Runtime Review long task delivery plan is local planning only; it does not activate any future capsule or authorize bridge calls, plugin calls, memory writes, image creation, commit, tag, push, PR, or release.
+- Runtime Review Batch 8A is a local RC proposal only; it does not stage files, commit, tag, push, open a PR, publish a release, call plugins/APIs, write DailyNote/VCP memory, or create images.

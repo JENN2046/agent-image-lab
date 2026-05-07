@@ -197,20 +197,58 @@ window.ImageLabHostBridge = (() => {
     }
   };
 
+  function ackKeysFor(ack) {
+    return Object.keys(ack).sort();
+  }
+
+  function buildAck(method, draft, acceptedMessage, rejectedMessage) {
+    const validationPassed = runtimeGuard.draftIsSafe(draft);
+    const ack = {
+      selected_method: method,
+      accepted_by_host_mock: validationPassed,
+      draft_received: Boolean(draft),
+      validation_passed: validationPassed,
+      bridge_calls_observed: {
+        mock_only: true,
+        total: 1,
+        cancel: 0,
+        loadSession: 0,
+        previewDraft: method === "previewDraft" ? 1 : 0,
+        submitDraft: method === "submitDraft" ? 1 : 0,
+        production_submitDraft: 0
+      },
+      side_effects_performed: false,
+      plugin_called: false,
+      api_called: false,
+      daily_note_called: false,
+      vcp_memory_written: false,
+      image_created: false,
+      received_at: new Date().toISOString(),
+      status_cn: validationPassed ? acceptedMessage : rejectedMessage
+    };
+    ack.ack_keys = ackKeysFor(ack);
+    return ack;
+  }
+
   return {
     loadSession() {
       return runtimeGuard.clone(session);
     },
+    previewDraft(draft) {
+      return buildAck(
+        "previewDraft",
+        draft,
+        "host mock 已生成 previewDraft 安全预览，无外部副作用。",
+        "host mock 拒绝 previewDraft：guard 或审批状态不满足要求。"
+      );
+    },
     submitDraft(draft) {
-      const validationPassed = runtimeGuard.draftIsSafe(draft);
-      return {
-        accepted_by_host_mock: validationPassed,
-        draft_received: Boolean(draft),
-        validation_passed: validationPassed,
-        side_effects_performed: false,
-        received_at: new Date().toISOString(),
-        status_cn: validationPassed ? "host mock 已接收安全草案，无外部副作用。" : "host mock 拒绝草案：guard 或审批状态不满足要求。"
-      };
+      return buildAck(
+        "submitDraft",
+        draft,
+        "host mock 已接收安全草案，无外部副作用。",
+        "host mock 拒绝草案：guard 或审批状态不满足要求。"
+      );
     }
   };
 })();

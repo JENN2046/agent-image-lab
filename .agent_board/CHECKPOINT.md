@@ -79,6 +79,16 @@ v7.45 validation: CDP attempt validator passed and confirms Runtime.evaluate / b
 v7.46 phase: v7.46 remote-debug relaunch runtime verification record
 v7.46 local: remote-debug relaunch completed and CDP Runtime.evaluate surface verification passed
 v7.46 validation: Runtime.evaluate checked only types, object keys, and bridge method presence; bridge methods were not called
+v7.47 local: Runtime Review Console memory completion state split added for request, authorization, execution, canonical verification, hash match, and plugin sufficiency
+v7.47 validation: runtime guard unit, smoke, delivery surface, runtime suite, agent board, commit scope, MVP, and local validation passed
+v7.48 local: Runtime Review long task delivery plan added for Batch 3A through Batch 8A
+v7.48 validation: plan remains local-only and does not authorize bridge calls, plugin/API calls, memory writes, image creation, or version actions
+v7.49 local: Runtime Review Batch 3A/3B/3C added inactive authorization capsules, runtime state convergence, and local commit scope planning
+v7.49 validation: runtime guard unit, smoke, delivery surface, and runtime prototype suite passed; no real VCP/VCPToolBox read, bridge/plugin/API/DailyNote/VCP memory/image action, or version action occurred
+Runtime Review Batch 8A local: release-candidate readiness proposal prepared for the Runtime Review follow-up accumulated batch
+Runtime Review Batch 8A proposal: proposed commit scope covers runtime prototype, validators, docs/indexes, validation checklist, and agent-board state
+Runtime Review Batch 8A boundary: no staging, no commit, no tag, no push, no PR, no release, no real VCPChat/VCPToolBox read, no plugin/API/DailyNote/VCP memory/image action
+Runtime Review Batch 8A validation: runtime guard/smoke/delivery suite, agent board, local commit scope, MVP validation, local validation, and git diff --check passed
 v10.0 local: A5 end-to-end activation package readiness recorded and preflight blocked
 v10.0 preflight: active A5 authorization package present: yes
 v10.0 preflight: real_vcpchat_root provided: yes
@@ -226,6 +236,11 @@ runtime quality local: high-risk tags block preauthorization, risk groups feed t
 runtime quality validation: smoke, delivery surface, runtime suite, MVP validation, and git diff --check passed
 runtime usability local: queue search/sort, undo history, compact queue cards, session fingerprinting, import preview, Chinese status glossary, and side-surface guard checks are implemented
 runtime usability validation: runtime guard unit, runtime smoke, delivery surface, runtime suite, MVP validation, local validation, and git diff --check passed
+runtime branch sync: codex/runtime-review-followup now tracks origin/master for follow-up local work
+runtime branch sync validation: RUN_STATE and HANDOFF were aligned to the current branch and git diff --check passed
+runtime branch sync validator: local commit scope and MVP validation now accept codex/runtime-review-followup
+runtime follow-up audit local: docs/215_runtime_review_followup_requirements_audit.md defines P0/P1 Runtime Review Console follow-up requirements
+runtime follow-up audit validation: docs/index/checklist/agent-board updates remain local and no real execution is authorized
 ```
 
 ## Current Boundary
@@ -374,6 +389,10 @@ v10.25 completed one real DailyNote/VCP memory write. Next safe action is local 
 v10.26 local closeout records the v10.25 DailyNoteWrite result in Git-visible docs/schema/validator indexes. Next safe action is broader local validation; no additional write or version action is authorized.
 v10.27 local closeout records the DailyNoteWrite root path correction in Git-visible docs/schema/validator indexes. Future root classification is vcp_root_dailynote; no writer rerun or second write was performed.
 v10.28 local guard records that plugin success alone is insufficient for future DailyNote/VCP memory completion. Canonical location existence and hash match are required; wrong-location output must be labeled plugin_success_wrong_location.
+Runtime Review Batch 3A/3B/3C records inactive_authorization_capsules_draft, runtime_review_state_draft, and local_commit_scope_plan_draft as local no-write/no-stage runtime surfaces. Next safe local action is Batch 4A bridge mock roundtrip candidate.
+Runtime Review Batch 4A records bridge_mock_roundtrip_candidate_draft as a local Adapter dry-run -> Review Console -> previewDraft mock roundtrip surface. It keeps loadSession=1, previewDraft=1, submitDraft=0, production_submitDraft=0, and no real CDP/bridge/plugin/API/DailyNote/VCP memory/image/version actions. Next safe local action is Batch 4B real bridge authorization package.
+Runtime Review Batch 4B/5A/6A records real_bridge_authorization_package_draft, plugin_reliability_prompt_discipline_draft, and memory_write_completion_candidate_draft as local no-execution readiness surfaces. Next safe local action is Batch 5B + 6B + 7A.
+Runtime Review Batch 5B/6B/7A records single_real_generation_retry_gate_draft, real_memory_write_authorization_package_draft, and asset_archive_candidate_draft as local no-execution/no-binary readiness surfaces. Next safe local action is Batch 8A release candidate readiness.
 The prepared v10.8 authorization draft may be reviewed by the user, but it remains non-executable until explicitly approved with all required fields.
 The prior short approval phrase `批准 v10.8 静物单次生成` has been consumed for v10.9 and does not authorize another call.
 The v10.10 diagnostic approval phrase `批准 v10.10 传参诊断` has been consumed for v10.11 and does not authorize further diagnostics.
