@@ -9,6 +9,17 @@ body {
   margin: 0;
 }
 
+.boundary-banner {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 10px 20px;
+  background: #14322d;
+  border-bottom: 1px solid #37665f;
+  color: #d9fff7;
+  font-size: 14px;
+}
+
 .shell {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -29,6 +40,10 @@ body {
 
 .summary-panel {
   border-color: #3f615b;
+}
+
+.checklist-panel {
+  border-color: #4b5f7a;
 }
 
 .eyebrow {
@@ -84,11 +99,88 @@ dd {
   margin-top: 12px;
 }
 
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
 .comparison-summary {
   min-height: 22px;
   margin: 12px 0 0;
   color: #a9b3bd;
   line-height: 1.5;
+}
+
+.checklist {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 18px;
+  color: #cfd7df;
+  line-height: 1.5;
+}
+
+.checklist li[data-state="ok"] {
+  color: #7fd7c4;
+}
+
+.checklist li[data-state="warn"] {
+  color: #f3c969;
+}
+
+.quick-actions,
+.view-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.quick-actions button,
+.view-switch button {
+  border: 1px solid #45505c;
+  border-radius: 6px;
+  background: #11151a;
+  color: #f3f5f7;
+  padding: 8px 10px;
+}
+
+.quick-actions button:hover,
+.view-switch button:hover,
+.view-switch button[data-active="true"] {
+  border-color: #7fd7c4;
+  color: #d9fff7;
+}
+
+.memory-request-preview {
+  border-top: 1px solid #303842;
+  padding-top: 14px;
+}
+
+.memory-request-preview h3 {
+  margin: 0 0 12px;
+  font-size: 16px;
+}
+
+.memory-request-preview p {
+  margin: 12px 0 0;
+  color: #cfd7df;
+  line-height: 1.6;
+}
+
+.panel-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.panel-title-row h2,
+.panel-title-row .view-switch {
+  margin-bottom: 0;
 }
 
 .field {
@@ -126,13 +218,23 @@ pre {
   white-space: pre-wrap;
 }
 
+[hidden] {
+  display: none;
+}
+
 @media (max-width: 760px) {
   .shell {
     grid-template-columns: 1fr;
   }
 
-  .version-grid {
+  .version-grid,
+  .diff-grid {
     grid-template-columns: 1fr;
+  }
+
+  .panel-title-row {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
 

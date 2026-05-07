@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <div class="boundary-banner" id="boundaryBanner">安全边界：只生成本地草案，没有真实写入，没有插件或 API 调用。</div>
     <main class="shell">
       <section class="panel">
         <header>
@@ -37,6 +38,20 @@
         </div>
         <div class="asset-box" id="assetBox"></div>
         <p class="comparison-summary" id="comparisonSummary"></p>
+        <div class="diff-grid">
+          <label class="field">
+            <span>改进点</span>
+            <textarea id="diffStrengths" rows="3">主体构图更稳定，整体可读性更好。</textarea>
+          </label>
+          <label class="field">
+            <span>风险点</span>
+            <textarea id="diffIssues" rows="3">细节噪点仍需保留人工判断。</textarea>
+          </label>
+          <label class="field">
+            <span>下一步</span>
+            <textarea id="diffNext" rows="3">若进入正式归档，需要确认记忆写入申请。</textarea>
+          </label>
+        </div>
       </section>
 
       <section class="panel">
@@ -62,6 +77,11 @@
             <option value="draft">草稿</option>
           </select>
         </label>
+        <div class="quick-actions">
+          <button id="quickCandidate" type="button">设为候选</button>
+          <button id="quickAccept" type="button">确认可接受</button>
+          <button id="quickReject" type="button">拒收</button>
+        </div>
         <label class="check">
           <input id="humanApproved" type="checkbox" />
           <span>我确认这张图可接受</span>
@@ -82,6 +102,15 @@
             <option value="rejected">拒绝写入申请</option>
           </select>
         </label>
+        <div class="memory-request-preview">
+          <h3>写入申请预览</h3>
+          <dl class="meta">
+            <div><dt>标题</dt><dd id="memoryPreviewTitle">-</dd></div>
+            <div><dt>目标</dt><dd id="memoryPreviewTarget">-</dd></div>
+            <div><dt>状态</dt><dd id="memoryPreviewDecision">-</dd></div>
+          </dl>
+          <p id="memoryPreviewBody"></p>
+        </div>
       </section>
 
       <section class="panel">
@@ -103,9 +132,27 @@
         </dl>
       </section>
 
+      <section class="panel checklist-panel">
+        <h2>评审前检查</h2>
+        <ul class="checklist">
+          <li id="checkHumanComment">-</li>
+          <li id="checkMemoryContent">-</li>
+          <li id="checkHumanDecision">-</li>
+          <li id="checkGuard">-</li>
+          <li id="checkWriteBoundary">-</li>
+        </ul>
+      </section>
+
       <section class="panel output-panel">
-        <h2>技术草案</h2>
-        <pre id="draftOutput"></pre>
+        <div class="panel-title-row">
+          <h2>草案视图</h2>
+          <div class="view-switch">
+            <button id="viewReadable" type="button" data-active="true">中文草案</button>
+            <button id="viewTechnical" type="button" data-active="false">技术草案</button>
+          </div>
+        </div>
+        <pre id="readableDraft"></pre>
+        <pre id="draftOutput" hidden></pre>
       </section>
     </main>
     <script src="./runtime_guard.js"></script>

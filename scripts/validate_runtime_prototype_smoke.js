@@ -11,6 +11,7 @@ class FakeElement {
     this.textContent = initial.textContent || "";
     this.value = initial.value || "";
     this.checked = Boolean(initial.checked);
+    this.dataset = {};
     this.listeners = new Map();
   }
 
@@ -40,17 +41,28 @@ function createRuntimeContext() {
   add("caseId");
   add("assetRef");
   add("assetBox");
+  add("boundaryBanner");
   add("versionPicker", { value: "v2" });
   add("comparePicker", { value: "v1" });
   add("comparisonSummary");
+  add("diffStrengths", { value: "主体构图更稳定，整体可读性更好。" });
+  add("diffIssues", { value: "细节噪点仍需保留人工判断。" });
+  add("diffNext", { value: "若进入正式归档，需要确认记忆写入申请。" });
   add("humanScore", { value: "84" });
   add("humanScoreOut", { textContent: "84" });
   add("humanComment", { value: "人工评审确认该版本可作为候选，但仍需保留已知视觉偏差说明。" });
   add("annotationNote", { value: "对比参考版本后，当前版本的主体构图更稳定，仍需留意细节噪点。" });
   add("assetStatus", { value: "candidate" });
+  add("quickCandidate");
+  add("quickAccept");
+  add("quickReject");
   add("humanApproved", { checked: false });
   add("memoryContent", { value: "本次评审保留 Photo Studio OS 真实闭环经验：资产可作为项目推进候选，但必须记录人工覆盖接受和已知视觉偏差。" });
   add("memoryApproval", { value: "pending" });
+  add("memoryPreviewTitle");
+  add("memoryPreviewTarget");
+  add("memoryPreviewDecision");
+  add("memoryPreviewBody");
   add("hostStatus", { textContent: "等待中" });
   add("hostSubmittedAt", { textContent: "-" });
   add("summarySessionStatus");
@@ -58,6 +70,14 @@ function createRuntimeContext() {
   add("summaryMemoryStatus");
   add("summaryWriteRequest");
   add("summaryGuard");
+  add("checkHumanComment");
+  add("checkMemoryContent");
+  add("checkHumanDecision");
+  add("checkGuard");
+  add("checkWriteBoundary");
+  add("viewReadable");
+  add("viewTechnical");
+  add("readableDraft");
   add("draftOutput");
 
   const context = {
@@ -134,6 +154,10 @@ function dispatchChange(elements, id) {
   elements.get(id).dispatchEvent({ type: "change" });
 }
 
+function dispatchClick(elements, id) {
+  elements.get(id).dispatchEvent({ type: "click" });
+}
+
 function main() {
   const { context, elements } = createRuntimeContext();
   const scriptOrder = readIndexScriptOrder();
@@ -147,12 +171,26 @@ function main() {
   const initialDraft = parseDraft(elements);
   assert(elements.get("hostStatus").textContent.includes("已接收安全草案"), "Initial host ack must be accepted.");
   assert(elements.get("hostSubmittedAt").textContent !== "-", "Initial host submit timestamp must be present.");
+  assert(elements.get("boundaryBanner").textContent.includes("没有真实写入"), "Boundary banner must show no real write.");
+  assert(elements.get("readableDraft").textContent.includes("评审状态：人工评审中"), "Readable draft must be visible and Chinese.");
+  assert(elements.get("draftOutput").hidden === true, "Technical draft must be hidden by default.");
   assert(initialDraft.image_case_draft.asset_status === "candidate", "Initial asset status must be candidate.");
   assert(elements.get("summarySessionStatus").textContent === "人工评审中", "Initial summary must show Chinese review status.");
   assert(elements.get("summaryAssetStatus").textContent === "候选", "Initial summary must show Chinese asset status.");
   assert(elements.get("summaryMemoryStatus").textContent === "待审批", "Initial summary must show Chinese memory status.");
   assert(elements.get("summaryWriteRequest").textContent === "未形成写入申请", "Initial summary must show no write request.");
   assert(elements.get("summaryGuard").textContent === "无外部副作用", "Initial summary must show clean guard.");
+  assert(initialDraft.review_session_draft.review_preflight.human_comment_present === true, "Initial preflight must record human comment presence.");
+  assert(initialDraft.review_session_draft.review_preflight.chinese_memory_content_detected === true, "Initial preflight must detect Chinese memory content.");
+  assert(initialDraft.review_session_draft.review_preflight.real_write_performed === false, "Initial preflight must record no real write.");
+  assert(initialDraft.review_session_draft.version_comparison.strengths_cn.includes("主体构图"), "Version strengths must enter the draft.");
+  assert(initialDraft.review_session_draft.version_comparison.issues_cn.includes("细节噪点"), "Version issues must enter the draft.");
+  assert(initialDraft.review_session_draft.version_comparison.next_step_cn.includes("写入申请"), "Version next step must enter the draft.");
+  assert(elements.get("memoryPreviewTitle").textContent.length > 0, "Memory preview title must render.");
+  assert(elements.get("memoryPreviewDecision").textContent === "未形成写入申请", "Memory preview must show no write request initially.");
+  assert(elements.get("checkHumanComment").dataset.state === "ok", "Human comment checklist must pass initially.");
+  assert(elements.get("checkMemoryContent").dataset.state === "ok", "Memory content checklist must pass initially.");
+  assert(elements.get("checkWriteBoundary").dataset.state === "ok", "Write boundary checklist must pass initially.");
   assert(initialDraft.review_session_draft.current_version_id === "v2", "Initial current version must be v2.");
   assert(initialDraft.review_session_draft.compare_version_id === "v1", "Initial compare version must be v1.");
   assert(initialDraft.review_session_draft.annotation_notes.length === 1, "Initial annotation note must be included.");
@@ -165,10 +203,7 @@ function main() {
   assert(initialDraft.memory_delta_draft.final_decision.should_write_to_vcp === false, "Initial memory write request must be false.");
   assert(runtimeGuard.guardIsClean(initialDraft.prototype_guard), "Initial prototype guard must be clean.");
 
-  elements.get("humanApproved").checked = true;
-  dispatchChange(elements, "humanApproved");
-  elements.get("memoryApproval").value = "approved";
-  dispatchChange(elements, "memoryApproval");
+  dispatchClick(elements, "quickAccept");
 
   const approvedDraft = parseDraft(elements);
   assert(approvedDraft.image_case_draft.asset_status === "accepted", "Approved asset status must become accepted.");
@@ -179,8 +214,22 @@ function main() {
   assert(elements.get("summaryAssetStatus").textContent === "可接受", "Approved summary must show accepted asset status.");
   assert(elements.get("summaryMemoryStatus").textContent === "已批准写入申请", "Approved summary must show approved memory status.");
   assert(elements.get("summaryWriteRequest").textContent === "已形成写入申请，仍未真实写入", "Approved summary must show write request without real write.");
+  assert(elements.get("memoryPreviewDecision").textContent === "已形成写入申请，仍未真实写入", "Approved memory preview must show write request without real write.");
+  assert(approvedDraft.review_session_draft.review_preflight.accepted_has_human_approval === true, "Approved preflight must confirm human approval.");
+  assert(approvedDraft.review_session_draft.review_preflight.prototype_guard_clean === true, "Approved preflight must confirm clean guard.");
   assert(runtimeGuard.guardIsClean(approvedDraft.prototype_guard), "Approved prototype guard must remain clean.");
   assert(runtimeGuard.guardIsClean(approvedDraft.review_session_draft.audit_log[0].prototype_guard), "Approved audit guard must remain clean.");
+
+  dispatchClick(elements, "viewTechnical");
+  assert(elements.get("readableDraft").hidden === true, "Readable draft must hide in technical view.");
+  assert(elements.get("draftOutput").hidden === false, "Technical draft must show after switching views.");
+  dispatchClick(elements, "viewReadable");
+  assert(elements.get("readableDraft").hidden === false, "Readable draft must show after switching back.");
+
+  dispatchClick(elements, "quickReject");
+  const rejectedDraft = parseDraft(elements);
+  assert(rejectedDraft.image_case_draft.asset_status === "rejected", "Reject quick action must set rejected asset status.");
+  assert(rejectedDraft.memory_delta_draft.write_mode === "forbidden", "Reject quick action must forbid memory write mode.");
 
   elements.get("versionPicker").value = "v1";
   dispatchChange(elements, "versionPicker");
@@ -221,6 +270,20 @@ function main() {
       approved_review_status_cn: "已批准",
       write_request_cn: elements.get("summaryWriteRequest").textContent,
       guard_cn: elements.get("summaryGuard").textContent
+    },
+    preflight_checks: {
+      human_comment_present: initialDraft.review_session_draft.review_preflight.human_comment_present,
+      chinese_memory_content_detected: initialDraft.review_session_draft.review_preflight.chinese_memory_content_detected,
+      accepted_has_human_approval: approvedDraft.review_session_draft.review_preflight.accepted_has_human_approval,
+      real_write_performed: approvedDraft.review_session_draft.review_preflight.real_write_performed
+    },
+    quick_actions: {
+      accept_sets_asset_accepted: approvedDraft.image_case_draft.asset_status === "accepted",
+      reject_sets_memory_forbidden: rejectedDraft.memory_delta_draft.write_mode === "forbidden"
+    },
+    draft_view_switch: {
+      technical_view_available: elements.get("draftOutput").textContent.includes("review_session_draft"),
+      readable_view_cn: elements.get("readableDraft").textContent.includes("评审状态")
     },
     approved: {
       asset_status: approvedDraft.image_case_draft.asset_status,
