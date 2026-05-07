@@ -256,9 +256,28 @@ function queueStatusLabel(item) {
   return reviewStatusLabel(item.review_status) || assetStatusLabel(item.asset_status);
 }
 
+function itemHasWriteRequest(item) {
+  return item.asset_status === "accepted" && item.human_approved === true && item.memory_approval_status === "approved";
+}
+
+function itemIsBlocked(item) {
+  return (
+    item.asset_status === "rejected" ||
+    item.asset_status === "draft" ||
+    (item.asset_status === "accepted" && item.human_approved !== true)
+  );
+}
+
+function itemNeedsAttention(item) {
+  return item.asset_status === "candidate" || item.asset_status === "draft" || item.review_status === "human_reviewing";
+}
+
 function queueMatchesFilter(item, filter) {
   if (filter === "all") return true;
   if (filter === "human_reviewing") return item.review_status === "human_reviewing";
+  if (filter === "write_request") return itemHasWriteRequest(item);
+  if (filter === "blocked") return itemIsBlocked(item);
+  if (filter === "next_attention") return itemNeedsAttention(item);
   return item.asset_status === filter;
 }
 
@@ -400,7 +419,7 @@ function buildBatchReviewSummary(queueDraft) {
     if (item.asset_status === "rejected") counts.rejected_count += 1;
     if (item.asset_status === "draft") counts.draft_count += 1;
     if (item.review_status === "human_reviewing") counts.human_reviewing_count += 1;
-    if (item.asset_status === "accepted" && item.human_approved === true && item.memory_approval_status === "approved") {
+    if (itemHasWriteRequest(item)) {
       counts.write_request_count += 1;
     }
     if (item.asset_status === "rejected") {
@@ -422,7 +441,7 @@ function buildBatchReviewSummary(queueDraft) {
         reason_cn: "标记可接受但缺少人工确认。"
       });
     }
-    if (item.asset_status === "candidate" || item.asset_status === "draft" || item.review_status === "human_reviewing") {
+    if (itemNeedsAttention(item)) {
       nextAttentionItems.push({
         queue_id: item.queue_id,
         title_cn: item.title_cn,

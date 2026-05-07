@@ -312,6 +312,30 @@ function main() {
   assert(initialDraft.memory_delta_draft.final_decision.should_write_to_vcp === false, "Initial memory write request must be false.");
   assert(runtimeGuard.guardIsClean(initialDraft.prototype_guard), "Initial prototype guard must be clean.");
 
+  elements.get("queueFilter").value = "write_request";
+  dispatchChange(elements, "queueFilter");
+  const writeRequestButtons = elements.get("queueList").children;
+  assert(elements.get("queueVisible").textContent === "1", "Write request filter must show one candidate initially.");
+  assert(writeRequestButtons.length === 1, "Write request filter must render one candidate button initially.");
+  assert(writeRequestButtons[0].dataset.queueId === "queue-v1", "Write request filter must start with queue-v1.");
+  assert(elements.get("queueProgress").textContent === "- / 1", "Write request filter must show active item outside filter initially.");
+  elements.get("queueFilter").value = "blocked";
+  dispatchChange(elements, "queueFilter");
+  const blockedQueueButtons = elements.get("queueList").children;
+  assert(elements.get("queueVisible").textContent === "2", "Blocked filter must show rejected and draft candidates.");
+  assert(blockedQueueButtons.length === 2, "Blocked filter must render two candidate buttons.");
+  assert(blockedQueueButtons.some((child) => child.dataset.queueId === "queue-v3"), "Blocked filter must include rejected item.");
+  assert(blockedQueueButtons.some((child) => child.dataset.queueId === "queue-v4"), "Blocked filter must include draft item.");
+  elements.get("queueFilter").value = "next_attention";
+  dispatchChange(elements, "queueFilter");
+  const nextAttentionButtons = elements.get("queueList").children;
+  assert(elements.get("queueVisible").textContent === "2", "Next-attention filter must show candidate and draft items.");
+  assert(nextAttentionButtons.length === 2, "Next-attention filter must render two candidate buttons.");
+  assert(nextAttentionButtons.some((child) => child.dataset.queueId === "queue-v2"), "Next-attention filter must include queue-v2.");
+  assert(nextAttentionButtons.some((child) => child.dataset.queueId === "queue-v4"), "Next-attention filter must include queue-v4.");
+  elements.get("queueFilter").value = "all";
+  dispatchChange(elements, "queueFilter");
+
   elements.get("queueFilter").value = "rejected";
   dispatchChange(elements, "queueFilter");
   const rejectedQueueButtons = elements.get("queueList").children;
@@ -365,6 +389,14 @@ function main() {
   assert(editedQueueDraft.batch_review_summary_draft.counts.write_request_count === 2, "Batch summary must update write request count after editing v2.");
   assert(elements.get("batchAccepted").textContent === "2", "Batch accepted count must update in UI.");
   assert(elements.get("batchWriteRequests").textContent === "2", "Batch write request count must update in UI.");
+  elements.get("queueFilter").value = "write_request";
+  dispatchChange(elements, "queueFilter");
+  const updatedWriteRequestButtons = elements.get("queueList").children;
+  assert(elements.get("queueVisible").textContent === "2", "Write request filter must update after editing v2.");
+  assert(updatedWriteRequestButtons.some((child) => child.dataset.queueId === "queue-v2"), "Write request filter must include edited queue-v2.");
+  assert(updatedWriteRequestButtons.some((child) => child.dataset.queueId === "queue-v1"), "Write request filter must still include queue-v1.");
+  elements.get("queueFilter").value = "all";
+  dispatchChange(elements, "queueFilter");
   dispatchClick(elements, "queueNext");
   const queueV1Draft = parseDraft(elements);
   assert(queueV1Draft.review_session_draft.selected_queue_id === "queue-v1", "Queue next must select queue-v1 for isolation check.");
@@ -487,6 +519,9 @@ function main() {
       initial_write_request_count: initialDraft.batch_review_summary_draft.counts.write_request_count,
       updated_write_request_count: editedQueueDraft.batch_review_summary_draft.counts.write_request_count,
       blocked_count: initialDraft.batch_review_summary_draft.counts.blocked_count,
+      write_request_filter_updates: updatedWriteRequestButtons.length === 2,
+      blocked_filter_count: blockedQueueButtons.length,
+      next_attention_filter_count: nextAttentionButtons.length,
       no_execution_guard_clean: runtimeGuard.guardIsClean(initialDraft.batch_review_summary_draft.no_execution_guard),
       no_real_write_cn: elements.get("batchSummary").textContent.includes("0 个真实写入")
     },
