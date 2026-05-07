@@ -37,6 +37,9 @@ const els = {
   queueSelected: document.getElementById("queueSelected"),
   queuePrev: document.getElementById("queuePrev"),
   queueNext: document.getElementById("queueNext"),
+  batchShowAuthorizable: document.getElementById("batchShowAuthorizable"),
+  batchShowBlocked: document.getElementById("batchShowBlocked"),
+  batchShowNext: document.getElementById("batchShowNext"),
   queueList: document.getElementById("queueList"),
   batchTotal: document.getElementById("batchTotal"),
   batchAccepted: document.getElementById("batchAccepted"),
@@ -49,6 +52,12 @@ const els = {
   batchBlockedItems: document.getElementById("batchBlockedItems"),
   batchPreflightItems: document.getElementById("batchPreflightItems"),
   batchReport: document.getElementById("batchReport"),
+  batchDecisionStatus: document.getElementById("batchDecisionStatus"),
+  batchDecisionReason: document.getElementById("batchDecisionReason"),
+  preauthPackageStatus: document.getElementById("preauthPackageStatus"),
+  preauthPackageItems: document.getElementById("preauthPackageItems"),
+  preauthPackageForbidden: document.getElementById("preauthPackageForbidden"),
+  preauthPackageText: document.getElementById("preauthPackageText"),
   diffStrengths: document.getElementById("diffStrengths"),
   diffIssues: document.getElementById("diffIssues"),
   diffNext: document.getElementById("diffNext"),
@@ -178,6 +187,10 @@ function normalizeQueueItem(item) {
   nextItem.issues_cn = draftState.issues_cn;
   nextItem.next_step_cn = draftState.next_step_cn;
   nextItem.memory_content_cn = draftState.memory_content_cn;
+  const reviewState = candidateReviewState(nextItem);
+  nextItem.candidate_review_state = reviewState;
+  nextItem.preauthorization_status = reviewState.status;
+  nextItem.preauthorization_status_cn = reviewState.status_cn;
   return nextItem;
 }
 
@@ -267,12 +280,75 @@ function itemIsBlocked(item) {
   return (
     item.asset_status === "rejected" ||
     item.asset_status === "draft" ||
-    (item.asset_status === "accepted" && item.human_approved !== true)
+    (item.asset_status === "accepted" && item.human_approved !== true) ||
+    (item.asset_status === "accepted" && item.human_approved === true && item.memory_approval_status !== "approved")
   );
 }
 
 function itemNeedsAttention(item) {
-  return item.asset_status === "candidate" || item.asset_status === "draft" || item.review_status === "human_reviewing";
+  return (
+    item.asset_status === "candidate" ||
+    item.asset_status === "draft" ||
+    item.review_status === "human_reviewing" ||
+    (item.asset_status === "accepted" && item.human_approved === true && item.memory_approval_status !== "approved")
+  );
+}
+
+function candidateReviewState(item) {
+  if (itemHasWriteRequest(item)) {
+    return {
+      status: "authorizable",
+      status_cn: "可进入 A5 授权前复核",
+      reason_cn: "已人工确认，记忆审批通过，并形成写入申请草案。",
+      next_action_cn: "纳入 A5 授权前人工复核包草案。"
+    };
+  }
+  if (item.asset_status === "accepted" && item.human_approved !== true) {
+    return {
+      status: "blocked",
+      status_cn: "阻塞：缺少人工批准",
+      reason_cn: "资产标记为 accepted，但没有人工明确批准。",
+      next_action_cn: "先补齐人工批准，或退回候选状态。"
+    };
+  }
+  if (item.asset_status === "accepted" && item.memory_approval_status !== "approved") {
+    return {
+      status: "blocked",
+      status_cn: "阻塞：缺少记忆审批",
+      reason_cn: "资产已人工接受，但记忆审批尚未通过。",
+      next_action_cn: "先完成记忆审批，不能直接进入 A5 写入授权。"
+    };
+  }
+  if (item.asset_status === "rejected") {
+    return {
+      status: "blocked",
+      status_cn: "阻塞：已拒收",
+      reason_cn: "候选已拒收，不能进入归档或写入授权。",
+      next_action_cn: item.next_step_cn || "准备下一轮修正。"
+    };
+  }
+  if (item.asset_status === "draft") {
+    return {
+      status: "blocked",
+      status_cn: "阻塞：仍是草稿",
+      reason_cn: "候选仍是草稿，不能进入归档或写入授权。",
+      next_action_cn: item.next_step_cn || "继续完善草稿。"
+    };
+  }
+  if (item.asset_status === "candidate" || item.review_status === "human_reviewing") {
+    return {
+      status: "needs_review",
+      status_cn: "待人工继续评审",
+      reason_cn: "候选尚未获得完整人工接受和记忆审批。",
+      next_action_cn: item.next_step_cn || "继续人工评审。"
+    };
+  }
+  return {
+    status: "reviewed",
+    status_cn: "已处理",
+    reason_cn: "当前没有可执行后续动作。",
+    next_action_cn: item.next_step_cn || "保持记录。"
+  };
 }
 
 function queueBadgeText(item) {
@@ -371,6 +447,12 @@ function selectAdjacentQueueItem(direction) {
   render();
 }
 
+function applyQueueFilter(filter) {
+  syncActiveQueueItemFromForm();
+  els.queueFilter.value = filter;
+  render();
+}
+
 function buildQueueDraft({
   version,
   comparisonVersion,
@@ -458,6 +540,12 @@ function buildBatchReviewSummary(queueDraft) {
         title_cn: item.title_cn,
         reason_cn: "标记可接受但缺少人工确认。"
       });
+    } else if (item.asset_status === "accepted" && item.human_approved === true && item.memory_approval_status !== "approved") {
+      blockedItems.push({
+        queue_id: item.queue_id,
+        title_cn: item.title_cn,
+        reason_cn: "已人工接受但缺少记忆审批。"
+      });
     }
     if (itemNeedsAttention(item)) {
       nextAttentionItems.push({
@@ -509,6 +597,126 @@ function buildBatchReviewSummary(queueDraft) {
     handoff_report_cn: reportLines.join("\n"),
     boundary_cn: "当前只生成批量评审交接草案，没有调用插件、API、DailyNote，也没有写入 VCP memory。",
     no_execution_guard: noExecutionGuard
+  };
+}
+
+function buildBatchDecisionDraft(queueDraft, batchSummary) {
+  const authorizableItems = queueDraft.filter(itemHasWriteRequest).map((item) => ({
+    queue_id: item.queue_id,
+    version_id: item.version_id,
+    title_cn: item.title_cn,
+    score: item.score,
+    human_note_cn: item.human_note_cn || "",
+    status_cn: item.candidate_review_state?.status_cn || candidateReviewState(item).status_cn,
+    reason_cn: item.candidate_review_state?.reason_cn || candidateReviewState(item).reason_cn
+  }));
+  const approvalChainProblemCount =
+    batchSummary.preflight.accepted_without_human_approval_count +
+    batchSummary.preflight.write_request_without_memory_approval_count;
+  const boundaryBlocked =
+    batchSummary.preflight.no_real_write !== true ||
+    batchSummary.preflight.no_execution_guard_clean !== true ||
+    approvalChainProblemCount > 0;
+  let decision = "needs_local_review";
+  let decisionCn = "需要继续本地评审";
+  let reasonCn = "当前还没有足够候选进入授权前人工复核。";
+
+  if (boundaryBlocked) {
+    decision = "blocked";
+    decisionCn = "阻塞，不能进入 A5 授权前复核";
+    reasonCn = "批量预检发现审批链或安全边界问题。";
+  } else if (authorizableItems.length > 0 && batchSummary.blocked_items.length > 0) {
+    decision = "partial_authorizable";
+    decisionCn = "部分候选可进入 A5 授权前复核";
+    reasonCn = "已有候选形成写入申请草案，但队列中仍存在阻塞项。";
+  } else if (authorizableItems.length > 0) {
+    decision = "ready_for_preauthorization_review";
+    decisionCn = "可进入 A5 授权前人工复核";
+    reasonCn = "所有可授权候选均通过本地草案预检。";
+  } else if (batchSummary.next_attention_items.length === 0) {
+    decision = "no_authorizable_items";
+    decisionCn = "暂无可授权候选";
+    reasonCn = "队列没有写入申请草案，也没有待处理候选。";
+  }
+
+  return {
+    status: "draft_only",
+    decision,
+    decision_cn: decisionCn,
+    reason_cn: reasonCn,
+    authorizable_count: authorizableItems.length,
+    blocked_count: batchSummary.blocked_items.length,
+    next_attention_count: batchSummary.next_attention_items.length,
+    approval_chain_problem_count: approvalChainProblemCount,
+    authorizable_items: authorizableItems,
+    blocked_items: batchSummary.blocked_items,
+    next_attention_items: batchSummary.next_attention_items,
+    preflight: batchSummary.preflight,
+    boundary_cn: "当前只是本地批量决策草案，不构成 A5 授权，也不会触发插件、API、DailyNote 或 VCP memory 写入。",
+    no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard)
+  };
+}
+
+function buildA5PreauthorizationReviewPackage(batchDecision, batchSummary) {
+  const forbiddenOperations = [
+    "调用插件",
+    "调用 API",
+    "写入 DailyNote",
+    "写入 VCP memory",
+    "创建或保存图片",
+    "读取真实 VCPChat / VCPToolBox",
+    "push / tag / release / PR"
+  ];
+  const authorizableText =
+    batchDecision.authorizable_items.length > 0
+      ? batchDecision.authorizable_items
+          .map((item) => `${item.title_cn}：${item.status_cn}，${item.human_note_cn || item.reason_cn}`)
+          .join("\n")
+      : "暂无可进入授权前复核的候选。";
+  const blockedText =
+    batchDecision.blocked_items.length > 0
+      ? batchDecision.blocked_items.map((item) => `${item.title_cn}：${item.reason_cn}`).join("\n")
+      : "暂无阻塞项。";
+  const nextText =
+    batchDecision.next_attention_items.length > 0
+      ? batchDecision.next_attention_items.map((item) => `${item.title_cn}：${item.reason_cn}`).join("\n")
+      : "暂无待处理项。";
+  const reviewText = [
+    "A5 授权前人工复核包草案",
+    `批量结论：${batchDecision.decision_cn}`,
+    `结论原因：${batchDecision.reason_cn}`,
+    `可授权候选：\n${authorizableText}`,
+    `阻塞项：\n${blockedText}`,
+    `待处理项：\n${nextText}`,
+    `预检结论：${batchSummary.preflight.result_cn}`,
+    "人工需要确认：是否允许另行发起 A5 授权包；本草案本身不构成授权。",
+    `禁止动作：${forbiddenOperations.join("、")}。`,
+    batchDecision.boundary_cn
+  ].join("\n\n");
+
+  return {
+    package_status: "draft_only",
+    package_status_cn: "仅授权前人工复核草案",
+    target_stage: "a5_preauthorization_human_review",
+    target_stage_cn: "A5 授权前人工复核",
+    batch_decision: {
+      decision: batchDecision.decision,
+      decision_cn: batchDecision.decision_cn,
+      reason_cn: batchDecision.reason_cn
+    },
+    authorizable_items: batchDecision.authorizable_items,
+    blocked_items: batchDecision.blocked_items,
+    next_attention_items: batchDecision.next_attention_items,
+    required_human_action_cn: [
+      "人工复核可授权候选是否确实可以进入下一份 A5 授权包。",
+      "人工确认阻塞项是否需要先修正或排除。",
+      "如需真实执行，必须另行给出完整 A5 授权包。"
+    ],
+    forbidden_operations_cn: forbiddenOperations,
+    preflight: batchSummary.preflight,
+    review_text_cn: reviewText,
+    boundary_cn: "这只是本地草案，不读取真实 VCP，不调用插件，不写 DailyNote，不写 VCP memory，也不创建图片。",
+    no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard)
   };
 }
 
@@ -757,6 +965,11 @@ function buildDraft() {
     memoryContent
   });
   const batchReviewSummaryDraft = buildBatchReviewSummary(reviewQueueDraft);
+  const batchDecisionDraft = buildBatchDecisionDraft(reviewQueueDraft, batchReviewSummaryDraft);
+  const a5PreauthorizationReviewPackageDraft = buildA5PreauthorizationReviewPackage(
+    batchDecisionDraft,
+    batchReviewSummaryDraft
+  );
 
   return {
     review_session_draft: {
@@ -828,6 +1041,8 @@ function buildDraft() {
       ]
     },
     batch_review_summary_draft: batchReviewSummaryDraft,
+    batch_decision_draft: batchDecisionDraft,
+    a5_preauthorization_review_package_draft: a5PreauthorizationReviewPackageDraft,
     image_case_draft: {
       case_id: session.case_id,
       task_id: session.task_id,
@@ -951,7 +1166,8 @@ function renderQueueList(queueDraft) {
     button.dataset.writeRequest = String(itemHasWriteRequest(item));
     button.dataset.blocked = String(itemIsBlocked(item));
     button.dataset.nextAttention = String(itemNeedsAttention(item));
-    button.textContent = `${item.title_cn}\n${queueBadgeText(item)} · ${queueStatusLabel(item)} · ${assetStatusLabel(item.asset_status)} · ${item.score} 分 · ${item.priority_cn}\n${item.issues_cn}`;
+    const reviewState = item.candidate_review_state || candidateReviewState(item);
+    button.textContent = `${item.title_cn}\n${queueBadgeText(item)} · ${reviewState.status_cn} · ${queueStatusLabel(item)} · ${assetStatusLabel(item.asset_status)} · ${item.score} 分 · ${item.priority_cn}\n${item.issues_cn}`;
     button.addEventListener("click", () => selectQueueItem(item.queue_id));
     els.queueList.appendChild(button);
   }
@@ -1006,6 +1222,20 @@ function renderBatchSummary(batchSummary) {
   els.batchReport.textContent = batchSummary.handoff_report_cn;
 }
 
+function renderPreauthorizationPackage(batchDecision, preauthPackage) {
+  els.batchDecisionStatus.textContent = batchDecision.decision_cn;
+  els.batchDecisionReason.textContent = `${batchDecision.reason_cn} ${batchDecision.boundary_cn}`;
+  els.preauthPackageStatus.textContent = preauthPackage.package_status_cn;
+  renderList(
+    els.preauthPackageItems,
+    preauthPackage.authorizable_items.length > 0
+      ? preauthPackage.authorizable_items.map((item) => `${item.title_cn}：${item.status_cn}`)
+      : ["暂无可授权候选。"]
+  );
+  renderList(els.preauthPackageForbidden, preauthPackage.forbidden_operations_cn);
+  els.preauthPackageText.textContent = preauthPackage.review_text_cn;
+}
+
 function render() {
   const draft = buildDraft();
   const version = currentVersion();
@@ -1015,9 +1245,12 @@ function render() {
   const memoryDeltaDraft = draft.memory_delta_draft;
   const handoffDraft = draft.adapter_dry_run_handoff_draft;
   const batchSummaryDraft = draft.batch_review_summary_draft;
+  const batchDecisionDraft = draft.batch_decision_draft;
+  const preauthPackageDraft = draft.a5_preauthorization_review_package_draft;
   queueState = normalizeQueueItems(reviewDraft.review_queue);
   renderQueueList(reviewDraft.review_queue);
   renderBatchSummary(batchSummaryDraft);
+  renderPreauthorizationPackage(batchDecisionDraft, preauthPackageDraft);
   els.humanScoreOut.textContent = els.humanScore.value;
   els.assetRef.textContent = version.asset_ref;
   els.assetBox.textContent = comparisonVersion
@@ -1119,6 +1352,9 @@ function init() {
   els.quickReject.addEventListener("click", () => applyQuickDecision("reject"));
   els.queuePrev.addEventListener("click", () => selectAdjacentQueueItem(-1));
   els.queueNext.addEventListener("click", () => selectAdjacentQueueItem(1));
+  els.batchShowAuthorizable.addEventListener("click", () => applyQueueFilter("write_request"));
+  els.batchShowBlocked.addEventListener("click", () => applyQueueFilter("blocked"));
+  els.batchShowNext.addEventListener("click", () => applyQueueFilter("next_attention"));
   els.tplComposition.addEventListener("click", () => applyTemplate("composition"));
   els.tplDetailNoise.addEventListener("click", () => applyTemplate("detail_noise"));
   els.tplTextArtifact.addEventListener("click", () => applyTemplate("text_artifact"));

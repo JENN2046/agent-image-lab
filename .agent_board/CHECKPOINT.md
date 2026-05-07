@@ -217,6 +217,10 @@ v10.25 result: actual_write_calls=1, plugin_exit_code=0, plugin_reported_status=
 v10.25 saved file: 2026-05-07-14_58_55-v10-25-run-1-memory-write.txt, sha256=16669cd5cc1a03188e89a62dd0298ea6175dbed7cad162430484ec1ee1af171c
 v10.25 raw path: not printed or recorded
 v10.25 execution: no retry, no second write, no image creation, no submitDraft
+runtime batch local: Review Console runtime prototype now keeps candidate_review_state and preauthorization_status per queue item
+runtime batch local: batch_decision_draft and a5_preauthorization_review_package_draft are generated as draft-only no-execution surfaces
+runtime batch validation: runtime smoke, runtime suite, delivery surface, MVP validation, local validation, and git diff --check passed
+runtime batch execution: no real VCPChat/VCPToolBox read, plugin/API/DailyNote/VCP memory/image action, push, tag, release, or PR
 ```
 
 ## Current Boundary

@@ -72,6 +72,9 @@ function createRuntimeContext() {
   add("queueSelected");
   add("queuePrev");
   add("queueNext");
+  add("batchShowAuthorizable");
+  add("batchShowBlocked");
+  add("batchShowNext");
   add("queueList");
   add("batchTotal");
   add("batchAccepted");
@@ -84,6 +87,12 @@ function createRuntimeContext() {
   add("batchBlockedItems");
   add("batchPreflightItems");
   add("batchReport");
+  add("batchDecisionStatus");
+  add("batchDecisionReason");
+  add("preauthPackageStatus");
+  add("preauthPackageItems");
+  add("preauthPackageForbidden");
+  add("preauthPackageText");
   add("diffStrengths", { value: "主体构图更稳定，整体可读性更好。" });
   add("diffIssues", { value: "细节噪点仍需保留人工判断。" });
   add("diffNext", { value: "若进入正式归档，需要确认记忆写入申请。" });
@@ -284,6 +293,10 @@ function main() {
     initialDraft.review_session_draft.review_queue.every((item) => item.draft_state && item.draft_state.version_id),
     "Every queue item must expose an independent draft_state."
   );
+  assert(
+    initialDraft.review_session_draft.review_queue.every((item) => item.candidate_review_state && item.preauthorization_status),
+    "Every queue item must expose candidate review state and preauthorization status."
+  );
   assert(elements.get("queueTotal").textContent === "4", "Queue total must render.");
   assert(elements.get("queueVisible").textContent === "4", "Queue visible count must render all candidates initially.");
   assert(elements.get("queueProgress").textContent === "1 / 4", "Queue progress must render initial position.");
@@ -302,6 +315,27 @@ function main() {
   assert(initialDraft.batch_review_summary_draft.preflight.accepted_without_human_approval_count === 0, "Batch preflight must catch accepted items without approval.");
   assert(initialDraft.batch_review_summary_draft.handoff_report_cn.includes("边界确认"), "Batch report must include boundary confirmation.");
   assert(runtimeGuard.guardIsClean(initialDraft.batch_review_summary_draft.no_execution_guard), "Batch summary guard must remain clean.");
+  assert(initialDraft.batch_decision_draft.status === "draft_only", "Batch decision must be draft only.");
+  assert(initialDraft.batch_decision_draft.decision === "partial_authorizable", "Batch decision must allow partial preauthorization review initially.");
+  assert(initialDraft.batch_decision_draft.authorizable_items.length === 1, "Batch decision must list one authorizable item initially.");
+  assert(initialDraft.batch_decision_draft.blocked_items.length === 2, "Batch decision must list two blockers initially.");
+  assert(runtimeGuard.guardIsClean(initialDraft.batch_decision_draft.no_execution_guard), "Batch decision guard must remain clean.");
+  assert(
+    initialDraft.a5_preauthorization_review_package_draft.package_status === "draft_only",
+    "A5 preauthorization package must be draft only."
+  );
+  assert(
+    initialDraft.a5_preauthorization_review_package_draft.forbidden_operations_cn.includes("调用插件"),
+    "A5 preauthorization package must forbid plugin calls."
+  );
+  assert(
+    initialDraft.a5_preauthorization_review_package_draft.review_text_cn.includes("不构成授权"),
+    "A5 preauthorization package must state that it is not authorization."
+  );
+  assert(
+    runtimeGuard.guardIsClean(initialDraft.a5_preauthorization_review_package_draft.no_execution_guard),
+    "A5 preauthorization package guard must remain clean."
+  );
   assert(elements.get("batchTotal").textContent === "4", "Batch total must render.");
   assert(elements.get("batchAccepted").textContent === "1", "Batch accepted count must render.");
   assert(elements.get("batchPending").textContent === "2", "Batch pending count must render.");
@@ -314,6 +348,12 @@ function main() {
   assert(elements.get("batchPreflightItems").children.length === 5, "Batch preflight checklist must render.");
   assert(elements.get("batchPreflightItems").children[0].dataset.state === "ok", "Batch preflight no-real-write item must pass.");
   assert(elements.get("batchReport").textContent.includes("可进入后续授权"), "Batch report must render readable handoff text.");
+  assert(elements.get("batchDecisionStatus").textContent.includes("部分候选"), "Batch decision status must render.");
+  assert(elements.get("batchDecisionReason").textContent.includes("不构成 A5 授权"), "Batch decision reason must render boundary text.");
+  assert(elements.get("preauthPackageStatus").textContent === "仅授权前人工复核草案", "Preauthorization package status must render.");
+  assert(elements.get("preauthPackageItems").children.length === 1, "Preauthorization package item list must render initially.");
+  assert(elements.get("preauthPackageForbidden").children.length >= 5, "Preauthorization package forbidden list must render.");
+  assert(elements.get("preauthPackageText").textContent.includes("A5 授权前人工复核包草案"), "Preauthorization package text must render.");
   assert(initialDraft.review_session_draft.annotation_notes.length === 1, "Initial annotation note must be included.");
   assert(
     initialDraft.review_session_draft.version_comparison.summary_cn.includes("v1.1 修订候选图"),
@@ -323,6 +363,18 @@ function main() {
   assert(initialDraft.memory_delta_draft.write_mode === "draft", "Initial memory write mode must be draft.");
   assert(initialDraft.memory_delta_draft.final_decision.should_write_to_vcp === false, "Initial memory write request must be false.");
   assert(runtimeGuard.guardIsClean(initialDraft.prototype_guard), "Initial prototype guard must be clean.");
+
+  dispatchClick(elements, "batchShowAuthorizable");
+  assert(elements.get("queueFilter").value === "write_request", "Authorizable batch shortcut must select write-request filter.");
+  assert(elements.get("queueVisible").textContent === "1", "Authorizable batch shortcut must show one item initially.");
+  dispatchClick(elements, "batchShowBlocked");
+  assert(elements.get("queueFilter").value === "blocked", "Blocked batch shortcut must select blocked filter.");
+  assert(elements.get("queueVisible").textContent === "2", "Blocked batch shortcut must show two items initially.");
+  dispatchClick(elements, "batchShowNext");
+  assert(elements.get("queueFilter").value === "next_attention", "Next batch shortcut must select next-attention filter.");
+  assert(elements.get("queueVisible").textContent === "2", "Next batch shortcut must show two items initially.");
+  elements.get("queueFilter").value = "all";
+  dispatchChange(elements, "queueFilter");
 
   elements.get("queueFilter").value = "write_request";
   dispatchChange(elements, "queueFilter");
@@ -404,10 +456,21 @@ function main() {
   assert(editedQueueDraft.batch_review_summary_draft.counts.write_request_count === 2, "Batch summary must update write request count after editing v2.");
   assert(editedQueueDraft.batch_review_summary_draft.write_request_items.length === 2, "Batch details must update write request items after editing v2.");
   assert(editedQueueDraft.batch_review_summary_draft.handoff_report_cn.includes("队列状态保持测试"), "Batch report must include edited candidate context.");
+  assert(editedQueueDraft.batch_decision_draft.authorizable_items.length === 2, "Batch decision must update authorizable item count after editing v2.");
+  assert(
+    editedQueueDraft.a5_preauthorization_review_package_draft.authorizable_items.length === 2,
+    "A5 preauthorization package must update authorizable item count after editing v2."
+  );
+  assert(
+    editedQueueDraft.a5_preauthorization_review_package_draft.review_text_cn.includes("队列状态保持测试"),
+    "A5 preauthorization package must include edited candidate context."
+  );
   assert(elements.get("batchAccepted").textContent === "2", "Batch accepted count must update in UI.");
   assert(elements.get("batchWriteRequests").textContent === "2", "Batch write request count must update in UI.");
   assert(elements.get("batchWriteItems").children.length === 2, "Batch write item details must update in UI.");
   assert(elements.get("batchReport").textContent.includes("队列状态保持测试"), "Batch report UI must include edited candidate context.");
+  assert(elements.get("preauthPackageItems").children.length === 2, "Preauthorization package UI must update item count.");
+  assert(elements.get("preauthPackageText").textContent.includes("队列状态保持测试"), "Preauthorization package UI must include edited candidate context.");
   elements.get("queueFilter").value = "write_request";
   dispatchChange(elements, "queueFilter");
   const updatedWriteRequestButtons = elements.get("queueList").children;
@@ -543,6 +606,15 @@ function main() {
       next_attention_filter_count: nextAttentionButtons.length,
       no_execution_guard_clean: runtimeGuard.guardIsClean(initialDraft.batch_review_summary_draft.no_execution_guard),
       no_real_write_cn: elements.get("batchSummary").textContent.includes("0 个真实写入")
+    },
+    batch_decision: {
+      initial_decision: initialDraft.batch_decision_draft.decision,
+      initial_authorizable_count: initialDraft.batch_decision_draft.authorizable_items.length,
+      updated_authorizable_count: editedQueueDraft.batch_decision_draft.authorizable_items.length,
+      preauthorization_package_draft_only:
+        initialDraft.a5_preauthorization_review_package_draft.package_status === "draft_only",
+      preauthorization_package_forbids_plugin:
+        initialDraft.a5_preauthorization_review_package_draft.forbidden_operations_cn.includes("调用插件")
     },
     adapter_handoff: {
       execution_blocked: initialDraft.adapter_dry_run_handoff_draft.execution_blocked,

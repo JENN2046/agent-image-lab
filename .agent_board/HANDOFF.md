@@ -3,9 +3,9 @@
 ## Handoff Summary
 
 ```text
-Status: v10.28 DailyNote canonical location guard completed and validated; blocked before any additional real DailyNote/VCP memory write or version action
-Result: v10.25 completed one real DailyNote/VCP memory write through DailyNoteWrite; v10.26 records actual_write_calls=1; v10.27 corrected future root classification to vcp_root_dailynote; v10.28 hardens success definition so plugin_success_sufficient=false and canonical_target_hash_match_required=true
-Compatibility note: v10.27 completed root path correction without rerunning DailyNoteWrite.
+Status: Runtime Review Console batch preauthorization review completed and validated locally; production actions remain blocked.
+Result: queue candidates now keep candidate_review_state / preauthorization_status, batch_decision_draft is exported, and a5_preauthorization_review_package_draft is generated as a draft-only human review surface.
+Compatibility note: v10.27 DailyNoteWrite root path correction remains recorded: previous root class plugin_dir_dailynote, corrected root class vcp_root_dailynote, completed_root_path_corrected, without rerunning DailyNoteWrite. v10.28 DailyNote canonical location guard remains active. This batch changed only local runtime prototype surfaces and validation scripts.
 ```
 
 ## Current Repo

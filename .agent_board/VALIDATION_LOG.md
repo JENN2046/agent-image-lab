@@ -2,6 +2,62 @@
 
 ## Entries
 
+## VALIDATION-20260507-RUNTIME-BATCH-PREAUTHORIZATION-REVIEW
+
+Task:
+
+```text
+Strengthen the Runtime Review Console so multi-candidate human review behaves like a real review desk: candidate-level preauthorization state, batch decision draft, batch filter shortcuts, and a draft-only A5 preauthorization review package.
+```
+
+Commands run:
+
+```text
+node --check review_console\runtime_prototype\app.js
+node --check scripts\validate_runtime_prototype_smoke.js
+node --check scripts\validate_runtime_delivery_surface.js
+node scripts\validate_runtime_prototype_smoke.js
+node scripts\validate_runtime_delivery_surface.js
+git diff --check
+node scripts\validate_runtime_prototype_suite.js
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+```
+
+Result:
+
+```text
+completed_validated_local_runtime_prototype
+```
+
+Findings:
+
+```text
+Every review_queue item now exposes candidate_review_state and preauthorization_status.
+batch_decision_draft is draft_only and initially reports partial_authorizable for the mixed queue.
+a5_preauthorization_review_package_draft is draft_only, includes forbidden_operations_cn, and states that it does not constitute authorization.
+Runtime smoke confirms authorizable / blocked / next-attention shortcuts and independent candidate draft state after edits.
+```
+
+Warnings:
+
+```text
+scripts/validate-agent-image-lab-local.ps1 passed with manual-review warnings only for known repository scan terms.
+Git reported LF-to-CRLF working-copy warnings only.
+```
+
+Not validated:
+
+```text
+No real VCPChat read, real VCPToolBox read, real manifest read, plugin call, API call, DailyNote call, VCP memory write, image creation, submitDraft, push, tag, release, or PR was performed.
+```
+
+Notes:
+
+```text
+This is a local A4.5 runtime prototype batch, not an A5 authorization.
+```
+
 ## VALIDATION-20260507-V10-28-DAILYNOTE-CANONICAL-LOCATION-GUARD
 
 Task:

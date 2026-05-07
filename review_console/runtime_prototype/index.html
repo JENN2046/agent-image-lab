@@ -86,6 +86,11 @@
           <button id="queuePrev" type="button">上一张</button>
           <button id="queueNext" type="button">下一张</button>
         </div>
+        <div class="batch-filter-actions">
+          <button id="batchShowAuthorizable" type="button">可授权</button>
+          <button id="batchShowBlocked" type="button">阻塞</button>
+          <button id="batchShowNext" type="button">待处理</button>
+        </div>
         <div class="queue-list" id="queueList"></div>
       </section>
 
@@ -117,6 +122,27 @@
         <ul class="checklist" id="batchPreflightItems"></ul>
         <h3>中文验货报告草案</h3>
         <pre id="batchReport"></pre>
+      </section>
+
+      <section class="panel preauth-panel">
+        <h2>A5 授权前复核草案</h2>
+        <dl class="meta">
+          <div><dt>批量结论</dt><dd id="batchDecisionStatus">-</dd></div>
+          <div><dt>草案状态</dt><dd id="preauthPackageStatus">-</dd></div>
+        </dl>
+        <p id="batchDecisionReason"></p>
+        <div class="preauth-grid">
+          <div>
+            <h3>候选项</h3>
+            <ul id="preauthPackageItems"></ul>
+          </div>
+          <div>
+            <h3>禁止动作</h3>
+            <ul id="preauthPackageForbidden"></ul>
+          </div>
+        </div>
+        <h3>人工复核包</h3>
+        <pre id="preauthPackageText"></pre>
       </section>
 
       <section class="panel">

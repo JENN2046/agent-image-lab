@@ -15,24 +15,45 @@ Advance Agent Image Lab safely under local A4 autonomy while keeping A5 producti
 ## Current Phase
 
 ```text
-v10.28 DailyNote canonical location guard
+Runtime Review Console batch preauthorization review
 ```
 
 ## Current Task
 
 ```text
-Post-v10.25 DailyNote success-definition hardening
+Runtime Review Console batch human-review queue hardening
 ```
 
 ## Last Completed Task
 
 ```text
-Added v10.28 DailyNote canonical location guard so future DailyNote/VCP memory writes cannot be marked complete from plugin success alone. Completion now requires writer root class vcp_root_dailynote before write, canonical target existence after write, and canonical hash match.
+Added runtime batch decision and A5 preauthorization review draft surfaces. Each queue candidate now keeps candidate_review_state / preauthorization_status, batch shortcuts can filter authorizable / blocked / next-attention items, and the runtime draft exports batch_decision_draft plus a5_preauthorization_review_package_draft as no-execution local drafts.
 ```
 
 ## Last Validation
 
 ```text
+2026-05-07 runtime batch preauthorization review:
+status: completed_validated_local_runtime_prototype
+changed files: review_console/runtime_prototype/app.js, review_console/runtime_prototype/index.html, review_console/runtime_prototype/styles.css, scripts/validate_runtime_delivery_surface.js, scripts/validate_runtime_prototype_smoke.js
+candidate-level state: candidate_review_state and preauthorization_status added to each review_queue item
+batch decision: batch_decision_draft added with draft_only status
+A5 preauthorization package: a5_preauthorization_review_package_draft added with draft_only status and forbidden_operations_cn
+quick filters: authorizable, blocked, and next-attention shortcuts added
+node --check review_console/runtime_prototype/app.js: passed
+node --check scripts/validate_runtime_prototype_smoke.js: passed
+node --check scripts/validate_runtime_delivery_surface.js: passed
+node scripts/validate_runtime_prototype_smoke.js: passed
+node scripts/validate_runtime_delivery_surface.js: passed
+node scripts/validate_runtime_prototype_suite.js: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed
+real VCPChat read: no
+real VCPToolBox read: no
+plugin/API/DailyNote/VCP memory/image action: no
+push/tag/release/PR: no
+
 2026-05-07 v10.28 DailyNote canonical location guard:
 status: completed_validated_local_guard
 guard reason: plugin success alone is insufficient for memory write completion
