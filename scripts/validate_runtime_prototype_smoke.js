@@ -12,7 +12,14 @@ class FakeElement {
     this.value = initial.value || "";
     this.checked = Boolean(initial.checked);
     this.dataset = {};
+    this.children = [];
     this.listeners = new Map();
+  }
+
+  appendChild(child) {
+    this.children.push(child);
+    this.textContent = this.children.map((item) => item.textContent).join("\n");
+    return child;
   }
 
   addEventListener(type, listener) {
@@ -65,11 +72,15 @@ function createRuntimeContext() {
   add("memoryPreviewBody");
   add("hostStatus", { textContent: "等待中" });
   add("hostSubmittedAt", { textContent: "-" });
+  add("verdictTitle");
+  add("verdictReasons");
   add("summarySessionStatus");
   add("summaryAssetStatus");
+  add("summaryScoreBand");
   add("summaryMemoryStatus");
   add("summaryWriteRequest");
   add("summaryGuard");
+  add("summaryNextAction");
   add("checkHumanComment");
   add("checkMemoryContent");
   add("checkHumanDecision");
@@ -88,6 +99,9 @@ function createRuntimeContext() {
           throw new Error(`Missing fake DOM element: ${id}`);
         }
         return elements.get(id);
+      },
+      createElement(tagName) {
+        return new FakeElement(tagName);
       }
     },
     Event: class Event {
@@ -177,9 +191,13 @@ function main() {
   assert(initialDraft.image_case_draft.asset_status === "candidate", "Initial asset status must be candidate.");
   assert(elements.get("summarySessionStatus").textContent === "人工评审中", "Initial summary must show Chinese review status.");
   assert(elements.get("summaryAssetStatus").textContent === "候选", "Initial summary must show Chinese asset status.");
+  assert(elements.get("summaryScoreBand").textContent === "可推进候选", "Initial summary must show score band.");
+  assert(elements.get("verdictTitle").textContent === "可以作为候选继续评审", "Initial verdict must be candidate-friendly.");
+  assert(initialDraft.review_session_draft.acceptance_verdict.status_cn === "可以作为候选继续评审", "Initial draft must include acceptance verdict.");
   assert(elements.get("summaryMemoryStatus").textContent === "待审批", "Initial summary must show Chinese memory status.");
   assert(elements.get("summaryWriteRequest").textContent === "未形成写入申请", "Initial summary must show no write request.");
   assert(elements.get("summaryGuard").textContent === "无外部副作用", "Initial summary must show clean guard.");
+  assert(elements.get("summaryNextAction").textContent === "继续人工确认或补充标注", "Initial summary must show next action.");
   assert(initialDraft.review_session_draft.review_preflight.human_comment_present === true, "Initial preflight must record human comment presence.");
   assert(initialDraft.review_session_draft.review_preflight.chinese_memory_content_detected === true, "Initial preflight must detect Chinese memory content.");
   assert(initialDraft.review_session_draft.review_preflight.real_write_performed === false, "Initial preflight must record no real write.");
@@ -214,6 +232,9 @@ function main() {
   assert(elements.get("summaryAssetStatus").textContent === "可接受", "Approved summary must show accepted asset status.");
   assert(elements.get("summaryMemoryStatus").textContent === "已批准写入申请", "Approved summary must show approved memory status.");
   assert(elements.get("summaryWriteRequest").textContent === "已形成写入申请，仍未真实写入", "Approved summary must show write request without real write.");
+  assert(elements.get("summaryNextAction").textContent === "可进入人工验货与后续写入授权", "Approved summary must show next action.");
+  assert(approvedDraft.review_session_draft.next_action_cn === "可进入人工验货与后续写入授权", "Approved draft must include Chinese next action.");
+  assert(approvedDraft.review_session_draft.acceptance_verdict.status_cn === "图像可接受，等待写入授权", "Approved draft must include write-authorization verdict.");
   assert(elements.get("memoryPreviewDecision").textContent === "已形成写入申请，仍未真实写入", "Approved memory preview must show write request without real write.");
   assert(approvedDraft.review_session_draft.review_preflight.accepted_has_human_approval === true, "Approved preflight must confirm human approval.");
   assert(approvedDraft.review_session_draft.review_preflight.prototype_guard_clean === true, "Approved preflight must confirm clean guard.");

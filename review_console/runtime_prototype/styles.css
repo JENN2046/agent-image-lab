@@ -42,6 +42,30 @@ body {
   border-color: #3f615b;
 }
 
+.verdict-card {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 12px;
+  border: 1px solid #37665f;
+  border-radius: 8px;
+  background: #132420;
+}
+
+.verdict-card strong {
+  color: #d9fff7;
+  font-size: 18px;
+}
+
+.verdict-card ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding-left: 18px;
+  color: #cfd7df;
+  line-height: 1.5;
+}
+
 .checklist-panel {
   border-color: #4b5f7a;
 }

@@ -50,11 +50,15 @@ const els = {
   memoryPreviewBody: document.getElementById("memoryPreviewBody"),
   hostStatus: document.getElementById("hostStatus"),
   hostSubmittedAt: document.getElementById("hostSubmittedAt"),
+  verdictTitle: document.getElementById("verdictTitle"),
+  verdictReasons: document.getElementById("verdictReasons"),
   summarySessionStatus: document.getElementById("summarySessionStatus"),
   summaryAssetStatus: document.getElementById("summaryAssetStatus"),
+  summaryScoreBand: document.getElementById("summaryScoreBand"),
   summaryMemoryStatus: document.getElementById("summaryMemoryStatus"),
   summaryWriteRequest: document.getElementById("summaryWriteRequest"),
   summaryGuard: document.getElementById("summaryGuard"),
+  summaryNextAction: document.getElementById("summaryNextAction"),
   checkHumanComment: document.getElementById("checkHumanComment"),
   checkMemoryContent: document.getElementById("checkMemoryContent"),
   checkHumanDecision: document.getElementById("checkHumanDecision"),
@@ -124,6 +128,76 @@ function memoryStatusLabel(status) {
 
 function writeRequestLabel(shouldWrite) {
   return shouldWrite ? "已形成写入申请，仍未真实写入" : "未形成写入申请";
+}
+
+function scoreBandLabel(score) {
+  if (score >= 90) return "强候选";
+  if (score >= 80) return "可推进候选";
+  if (score >= 60) return "需要修改";
+  return "建议拒收";
+}
+
+function nextActionLabel({ assetStatus, memoryStatus, guardClean }) {
+  if (!guardClean) return "先处理安全边界风险";
+  if (assetStatus === "rejected") return "记录拒收原因，准备下一轮修改";
+  if (assetStatus === "accepted" && memoryStatus === "approved") return "可进入人工验货与后续写入授权";
+  if (assetStatus === "accepted") return "补齐记忆审批，再进入写入授权";
+  if (assetStatus === "candidate") return "继续人工确认或补充标注";
+  return "继续评审草稿";
+}
+
+function buildAcceptanceVerdict({ assetStatus, memoryStatus, score, preflightChecks }) {
+  const reasons = [];
+  if (!preflightChecks.prototype_guard_clean) {
+    reasons.push("安全边界存在风险，不能继续验收。");
+  }
+  if (!preflightChecks.human_comment_present) {
+    reasons.push("还缺人工评论。");
+  }
+  if (!preflightChecks.memory_content_present || !preflightChecks.chinese_memory_content_detected) {
+    reasons.push("还缺中文记忆正文。");
+  }
+  if (!preflightChecks.accepted_has_human_approval) {
+    reasons.push("标记可接受前必须先人工确认。");
+  }
+  if (memoryStatus === "approved") {
+    reasons.push("只形成写入申请，当前没有真实写入。");
+  }
+
+  if (reasons.some((reason) => reason.includes("不能继续") || reason.includes("还缺") || reason.includes("必须"))) {
+    return {
+      status_cn: "暂不通过验货",
+      reasons_cn: reasons
+    };
+  }
+  if (assetStatus === "rejected") {
+    return {
+      status_cn: "不能接受",
+      reasons_cn: ["当前资产已被人工拒收。"]
+    };
+  }
+  if (assetStatus === "accepted" && memoryStatus === "approved") {
+    return {
+      status_cn: "图像可接受，等待写入授权",
+      reasons_cn: reasons
+    };
+  }
+  if (assetStatus === "accepted") {
+    return {
+      status_cn: "图像可接受，记忆待审批",
+      reasons_cn: ["人工已确认图像可接受，但记忆写入申请尚未批准。"]
+    };
+  }
+  if (score >= 80) {
+    return {
+      status_cn: "可以作为候选继续评审",
+      reasons_cn: ["评分达到可推进候选区间。"]
+    };
+  }
+  return {
+    status_cn: "需要继续修改",
+    reasons_cn: ["评分尚未达到可推进候选区间。"]
+  };
 }
 
 function safeText(value, fallback) {
@@ -240,6 +314,12 @@ function buildDraft() {
     humanApproval,
     draftGuard
   });
+  const acceptanceVerdict = buildAcceptanceVerdict({
+    assetStatus,
+    memoryStatus: memoryApproval.status,
+    score,
+    preflightChecks
+  });
   const annotationNotes = annotationText
     ? [
         ...session.annotation_notes,
@@ -292,6 +372,12 @@ function buildDraft() {
       annotation_notes: annotationNotes,
       version_comparison: versionComparison,
       review_preflight: preflightChecks,
+      acceptance_verdict: acceptanceVerdict,
+      next_action_cn: nextActionLabel({
+        assetStatus,
+        memoryStatus: memoryApproval.status,
+        guardClean: preflightChecks.prototype_guard_clean
+      }),
       approval: {
         status: humanApproval.approved ? "approved" : "pending",
         approved_by: humanApproval.approved_by,
@@ -436,9 +522,18 @@ function render() {
   els.comparisonSummary.textContent = reviewDraft.version_comparison.summary_cn;
   els.summarySessionStatus.textContent = reviewStatusLabel(reviewDraft.status);
   els.summaryAssetStatus.textContent = assetStatusLabel(imageCaseDraft.asset_status);
+  els.summaryScoreBand.textContent = scoreBandLabel(reviewDraft.final_review.total_score);
   els.summaryMemoryStatus.textContent = memoryStatusLabel(memoryDeltaDraft.approval_status);
   els.summaryWriteRequest.textContent = writeRequestLabel(memoryDeltaDraft.final_decision.should_write_to_vcp);
   els.summaryGuard.textContent = runtimeGuard.guardIsClean(draft.prototype_guard) ? "无外部副作用" : "存在风险";
+  els.summaryNextAction.textContent = reviewDraft.next_action_cn;
+  els.verdictTitle.textContent = reviewDraft.acceptance_verdict.status_cn;
+  els.verdictReasons.innerHTML = "";
+  for (const reason of reviewDraft.acceptance_verdict.reasons_cn) {
+    const item = document.createElement("li");
+    item.textContent = reason;
+    els.verdictReasons.appendChild(item);
+  }
   els.boundaryBanner.textContent = "安全边界：只生成本地草案，没有真实写入，没有插件或 API 调用。";
   els.memoryPreviewTitle.textContent = memoryDeltaDraft.chinese_diary_title || "-";
   els.memoryPreviewTarget.textContent = memoryDeltaDraft.target_notebook || "-";
