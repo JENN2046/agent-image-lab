@@ -79,8 +79,11 @@ function createRuntimeContext() {
   add("batchWriteRequests");
   add("batchBlocked");
   add("batchSummary");
+  add("batchWriteItems");
   add("batchNextItems");
   add("batchBlockedItems");
+  add("batchPreflightItems");
+  add("batchReport");
   add("diffStrengths", { value: "主体构图更稳定，整体可读性更好。" });
   add("diffIssues", { value: "细节噪点仍需保留人工判断。" });
   add("diffNext", { value: "若进入正式归档，需要确认记忆写入申请。" });
@@ -293,6 +296,11 @@ function main() {
   assert(initialDraft.batch_review_summary_draft.counts.human_reviewing_count === 2, "Batch summary must count two pending review items initially.");
   assert(initialDraft.batch_review_summary_draft.counts.write_request_count === 1, "Batch summary must count one write request draft initially.");
   assert(initialDraft.batch_review_summary_draft.counts.blocked_count === 2, "Batch summary must count rejected and draft blockers.");
+  assert(initialDraft.batch_review_summary_draft.write_request_items.length === 1, "Batch details must list one write request item initially.");
+  assert(initialDraft.batch_review_summary_draft.preflight.no_real_write === true, "Batch preflight must record no real write.");
+  assert(initialDraft.batch_review_summary_draft.preflight.no_execution_guard_clean === true, "Batch preflight must record clean guard.");
+  assert(initialDraft.batch_review_summary_draft.preflight.accepted_without_human_approval_count === 0, "Batch preflight must catch accepted items without approval.");
+  assert(initialDraft.batch_review_summary_draft.handoff_report_cn.includes("边界确认"), "Batch report must include boundary confirmation.");
   assert(runtimeGuard.guardIsClean(initialDraft.batch_review_summary_draft.no_execution_guard), "Batch summary guard must remain clean.");
   assert(elements.get("batchTotal").textContent === "4", "Batch total must render.");
   assert(elements.get("batchAccepted").textContent === "1", "Batch accepted count must render.");
@@ -300,8 +308,12 @@ function main() {
   assert(elements.get("batchWriteRequests").textContent === "1", "Batch write request count must render.");
   assert(elements.get("batchBlocked").textContent === "2", "Batch blocked count must render.");
   assert(elements.get("batchSummary").textContent.includes("0 个真实写入"), "Batch summary must show no real write.");
+  assert(elements.get("batchWriteItems").children.length === 1, "Batch write item details must render initially.");
   assert(elements.get("batchNextItems").children.length === 2, "Batch next items must render pending queue items.");
   assert(elements.get("batchBlockedItems").children.length === 2, "Batch blocked items must render blockers.");
+  assert(elements.get("batchPreflightItems").children.length === 5, "Batch preflight checklist must render.");
+  assert(elements.get("batchPreflightItems").children[0].dataset.state === "ok", "Batch preflight no-real-write item must pass.");
+  assert(elements.get("batchReport").textContent.includes("可进入后续授权"), "Batch report must render readable handoff text.");
   assert(initialDraft.review_session_draft.annotation_notes.length === 1, "Initial annotation note must be included.");
   assert(
     initialDraft.review_session_draft.version_comparison.summary_cn.includes("v1.1 修订候选图"),
@@ -318,6 +330,7 @@ function main() {
   assert(elements.get("queueVisible").textContent === "1", "Write request filter must show one candidate initially.");
   assert(writeRequestButtons.length === 1, "Write request filter must render one candidate button initially.");
   assert(writeRequestButtons[0].dataset.queueId === "queue-v1", "Write request filter must start with queue-v1.");
+  assert(writeRequestButtons[0].dataset.writeRequest === "true", "Write request queue card must expose write-request marker.");
   assert(elements.get("queueProgress").textContent === "- / 1", "Write request filter must show active item outside filter initially.");
   elements.get("queueFilter").value = "blocked";
   dispatchChange(elements, "queueFilter");
@@ -326,6 +339,7 @@ function main() {
   assert(blockedQueueButtons.length === 2, "Blocked filter must render two candidate buttons.");
   assert(blockedQueueButtons.some((child) => child.dataset.queueId === "queue-v3"), "Blocked filter must include rejected item.");
   assert(blockedQueueButtons.some((child) => child.dataset.queueId === "queue-v4"), "Blocked filter must include draft item.");
+  assert(blockedQueueButtons.every((child) => child.dataset.blocked === "true"), "Blocked queue cards must expose blocked marker.");
   elements.get("queueFilter").value = "next_attention";
   dispatchChange(elements, "queueFilter");
   const nextAttentionButtons = elements.get("queueList").children;
@@ -333,6 +347,7 @@ function main() {
   assert(nextAttentionButtons.length === 2, "Next-attention filter must render two candidate buttons.");
   assert(nextAttentionButtons.some((child) => child.dataset.queueId === "queue-v2"), "Next-attention filter must include queue-v2.");
   assert(nextAttentionButtons.some((child) => child.dataset.queueId === "queue-v4"), "Next-attention filter must include queue-v4.");
+  assert(nextAttentionButtons.every((child) => child.dataset.nextAttention === "true"), "Next-attention cards must expose next-attention marker.");
   elements.get("queueFilter").value = "all";
   dispatchChange(elements, "queueFilter");
 
@@ -387,8 +402,12 @@ function main() {
   assert(editedQueueV2.draft_state.human_note_cn.includes("状态保持测试"), "Edited queue-v2 draft_state must store human comment.");
   assert(editedQueueDraft.batch_review_summary_draft.counts.accepted_count === 2, "Batch summary must update accepted count after editing v2.");
   assert(editedQueueDraft.batch_review_summary_draft.counts.write_request_count === 2, "Batch summary must update write request count after editing v2.");
+  assert(editedQueueDraft.batch_review_summary_draft.write_request_items.length === 2, "Batch details must update write request items after editing v2.");
+  assert(editedQueueDraft.batch_review_summary_draft.handoff_report_cn.includes("队列状态保持测试"), "Batch report must include edited candidate context.");
   assert(elements.get("batchAccepted").textContent === "2", "Batch accepted count must update in UI.");
   assert(elements.get("batchWriteRequests").textContent === "2", "Batch write request count must update in UI.");
+  assert(elements.get("batchWriteItems").children.length === 2, "Batch write item details must update in UI.");
+  assert(elements.get("batchReport").textContent.includes("队列状态保持测试"), "Batch report UI must include edited candidate context.");
   elements.get("queueFilter").value = "write_request";
   dispatchChange(elements, "queueFilter");
   const updatedWriteRequestButtons = elements.get("queueList").children;

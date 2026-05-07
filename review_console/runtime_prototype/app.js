@@ -44,8 +44,11 @@ const els = {
   batchWriteRequests: document.getElementById("batchWriteRequests"),
   batchBlocked: document.getElementById("batchBlocked"),
   batchSummary: document.getElementById("batchSummary"),
+  batchWriteItems: document.getElementById("batchWriteItems"),
   batchNextItems: document.getElementById("batchNextItems"),
   batchBlockedItems: document.getElementById("batchBlockedItems"),
+  batchPreflightItems: document.getElementById("batchPreflightItems"),
+  batchReport: document.getElementById("batchReport"),
   diffStrengths: document.getElementById("diffStrengths"),
   diffIssues: document.getElementById("diffIssues"),
   diffNext: document.getElementById("diffNext"),
@@ -272,6 +275,14 @@ function itemNeedsAttention(item) {
   return item.asset_status === "candidate" || item.asset_status === "draft" || item.review_status === "human_reviewing";
 }
 
+function queueBadgeText(item) {
+  const badges = [];
+  if (itemHasWriteRequest(item)) badges.push("写入申请");
+  if (itemIsBlocked(item)) badges.push("阻塞");
+  if (itemNeedsAttention(item)) badges.push("下一步");
+  return badges.length > 0 ? badges.join(" / ") : "已处理";
+}
+
 function queueMatchesFilter(item, filter) {
   if (filter === "all") return true;
   if (filter === "human_reviewing") return item.review_status === "human_reviewing";
@@ -412,6 +423,7 @@ function buildBatchReviewSummary(queueDraft) {
   };
   const nextAttentionItems = [];
   const blockedItems = [];
+  const writeRequestItems = [];
 
   for (const item of queueDraft) {
     if (item.asset_status === "accepted") counts.accepted_count += 1;
@@ -421,6 +433,12 @@ function buildBatchReviewSummary(queueDraft) {
     if (item.review_status === "human_reviewing") counts.human_reviewing_count += 1;
     if (itemHasWriteRequest(item)) {
       counts.write_request_count += 1;
+      writeRequestItems.push({
+        queue_id: item.queue_id,
+        title_cn: item.title_cn,
+        reason_cn: "已人工确认，并形成记忆写入申请草案。",
+        note_cn: item.human_note_cn || ""
+      });
     }
     if (item.asset_status === "rejected") {
       blockedItems.push({
@@ -451,14 +469,46 @@ function buildBatchReviewSummary(queueDraft) {
   }
 
   counts.blocked_count = blockedItems.length;
+  const acceptedWithoutHumanApprovalCount = queueDraft.filter(
+    (item) => item.asset_status === "accepted" && item.human_approved !== true
+  ).length;
+  const writeRequestWithoutApprovalCount = queueDraft.filter(
+    (item) => item.asset_status === "accepted" && item.human_approved === true && item.memory_approval_status !== "approved"
+  ).length;
+  const noExecutionGuard = runtimeGuard.clone(runtimeGuard.cleanGuard);
+  const preflight = {
+    no_real_write: true,
+    no_execution_guard_clean: runtimeGuard.guardIsClean(noExecutionGuard),
+    accepted_without_human_approval_count: acceptedWithoutHumanApprovalCount,
+    write_request_without_memory_approval_count: writeRequestWithoutApprovalCount,
+    blocked_count: blockedItems.length,
+    pending_review_count: counts.human_reviewing_count,
+    result_cn:
+      acceptedWithoutHumanApprovalCount > 0 || writeRequestWithoutApprovalCount > 0
+        ? "存在审批链问题，不能进入后续授权。"
+        : blockedItems.length > 0
+          ? "可交接，但需要先处理阻塞项。"
+          : "批量草案可进入人工复核。"
+  };
+  const reportLines = [
+    `本批共有 ${counts.total_count} 个候选，${counts.accepted_count} 个可接受，${counts.write_request_count} 个形成写入申请草案。`,
+    `可进入后续授权：${writeRequestItems.length > 0 ? writeRequestItems.map((item) => `${item.title_cn}（${item.note_cn || item.reason_cn}）`).join("、") : "暂无"}`,
+    `阻塞项：${blockedItems.length > 0 ? blockedItems.map((item) => `${item.title_cn}（${item.reason_cn}）`).join("；") : "暂无"}`,
+    `下一步处理：${nextAttentionItems.length > 0 ? nextAttentionItems.map((item) => `${item.title_cn}（${item.reason_cn}）`).join("；") : "暂无"}`,
+    `预检结论：${preflight.result_cn}`,
+    "边界确认：当前没有真实写入，没有插件/API/DailyNote 调用，也没有 VCP memory 写入。"
+  ];
   return {
     status_cn: "批量草案可交接",
     counts,
     summary_cn: `共 ${counts.total_count} 个候选：${counts.accepted_count} 个可接受，${counts.candidate_count} 个候选，${counts.rejected_count} 个已拒收，${counts.draft_count} 个草稿；${counts.write_request_count} 个写入申请草案，0 个真实写入。`,
+    write_request_items: writeRequestItems,
     next_attention_items: nextAttentionItems,
     blocked_items: blockedItems,
+    preflight,
+    handoff_report_cn: reportLines.join("\n"),
     boundary_cn: "当前只生成批量评审交接草案，没有调用插件、API、DailyNote，也没有写入 VCP memory。",
-    no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard)
+    no_execution_guard: noExecutionGuard
   };
 }
 
@@ -863,6 +913,16 @@ function renderList(el, items) {
   }
 }
 
+function renderStateList(el, items) {
+  el.innerHTML = "";
+  for (const item of items) {
+    const listItem = document.createElement("li");
+    listItem.dataset.state = item.state;
+    listItem.textContent = item.text_cn;
+    el.appendChild(listItem);
+  }
+}
+
 function renderQueueList(queueDraft) {
   const filteredItems = filteredQueueItems(queueDraft);
   const activeItem = queueDraft.find((item) => item.queue_id === selectedQueueId) || queueDraft[0] || null;
@@ -888,7 +948,10 @@ function renderQueueList(queueDraft) {
     button.dataset.queueId = item.queue_id;
     button.dataset.active = String(item.queue_id === selectedQueueId);
     button.dataset.status = item.asset_status;
-    button.textContent = `${item.title_cn}\n${queueStatusLabel(item)} · ${assetStatusLabel(item.asset_status)} · ${item.score} 分 · ${item.priority_cn}\n${item.issues_cn}`;
+    button.dataset.writeRequest = String(itemHasWriteRequest(item));
+    button.dataset.blocked = String(itemIsBlocked(item));
+    button.dataset.nextAttention = String(itemNeedsAttention(item));
+    button.textContent = `${item.title_cn}\n${queueBadgeText(item)} · ${queueStatusLabel(item)} · ${assetStatusLabel(item.asset_status)} · ${item.score} 分 · ${item.priority_cn}\n${item.issues_cn}`;
     button.addEventListener("click", () => selectQueueItem(item.queue_id));
     els.queueList.appendChild(button);
   }
@@ -903,6 +966,12 @@ function renderBatchSummary(batchSummary) {
   els.batchBlocked.textContent = String(counts.blocked_count);
   els.batchSummary.textContent = `${batchSummary.summary_cn} ${batchSummary.boundary_cn}`;
   renderList(
+    els.batchWriteItems,
+    batchSummary.write_request_items.length > 0
+      ? batchSummary.write_request_items.map((item) => `${item.title_cn}：${item.reason_cn}`)
+      : ["暂无可进入后续授权的写入申请草案。"]
+  );
+  renderList(
     els.batchNextItems,
     batchSummary.next_attention_items.map((item) => `${item.title_cn}：${item.reason_cn}`)
   );
@@ -912,6 +981,29 @@ function renderBatchSummary(batchSummary) {
       ? batchSummary.blocked_items.map((item) => `${item.title_cn}：${item.reason_cn}`)
       : ["没有阻塞项。"]
   );
+  renderStateList(els.batchPreflightItems, [
+    {
+      state: batchSummary.preflight.no_real_write ? "ok" : "warn",
+      text_cn: batchSummary.preflight.no_real_write ? "没有真实写入" : "检测到真实写入风险"
+    },
+    {
+      state: batchSummary.preflight.no_execution_guard_clean ? "ok" : "warn",
+      text_cn: batchSummary.preflight.no_execution_guard_clean ? "no-execution guard 干净" : "no-execution guard 存在风险"
+    },
+    {
+      state: batchSummary.preflight.accepted_without_human_approval_count === 0 ? "ok" : "warn",
+      text_cn: `可接受但缺少人工确认：${batchSummary.preflight.accepted_without_human_approval_count} 个`
+    },
+    {
+      state: batchSummary.preflight.write_request_without_memory_approval_count === 0 ? "ok" : "warn",
+      text_cn: `写入申请缺少记忆审批：${batchSummary.preflight.write_request_without_memory_approval_count} 个`
+    },
+    {
+      state: batchSummary.preflight.blocked_count === 0 ? "ok" : "warn",
+      text_cn: `阻塞项：${batchSummary.preflight.blocked_count} 个`
+    }
+  ]);
+  els.batchReport.textContent = batchSummary.handoff_report_cn;
 }
 
 function render() {

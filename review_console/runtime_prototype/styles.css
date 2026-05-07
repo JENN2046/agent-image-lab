@@ -218,6 +218,11 @@ dd {
   line-height: 1.5;
 }
 
+.batch-panel h3 {
+  margin: 14px 0 10px;
+  font-size: 16px;
+}
+
 .handoff-panel p,
 .batch-panel p {
   color: #cfd7df;
@@ -363,6 +368,18 @@ select {
 
 .queue-item[data-status="draft"] {
   border-color: #665b3d;
+}
+
+.queue-item[data-write-request="true"] {
+  box-shadow: inset 4px 0 0 #7fd7c4;
+}
+
+.queue-item[data-blocked="true"] {
+  box-shadow: inset 4px 0 0 #d17a70;
+}
+
+.queue-item[data-next-attention="true"] {
+  background: #141b23;
 }
 
 .queue-empty {
