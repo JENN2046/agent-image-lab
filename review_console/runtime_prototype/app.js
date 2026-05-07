@@ -103,7 +103,9 @@ const els = {
 };
 
 let activeDraftView = "readable";
-let queueState = session.review_queue.length > 0 ? runtimeGuard.clone(session.review_queue) : buildDefaultQueueFromVersions();
+let queueState = normalizeQueueItems(
+  session.review_queue.length > 0 ? runtimeGuard.clone(session.review_queue) : buildDefaultQueueFromVersions()
+);
 let selectedQueueId = (queueState.find((item) => item.version_id === session.current_version_id) || queueState[0] || {}).queue_id || null;
 
 function buildDefaultQueueFromVersions() {
@@ -125,6 +127,51 @@ function buildDefaultQueueFromVersions() {
     next_step_cn: "继续人工评审。",
     memory_content_cn: session.memory_preview.chinese_diary_content || ""
   }));
+}
+
+function queueDraftStateFromItem(item) {
+  return {
+    version_id: item.version_id,
+    compare_version_id: item.compare_version_id || "",
+    asset_status: item.asset_status || "candidate",
+    review_status: item.review_status || reviewSessionStatus(item.asset_status || "candidate"),
+    score: Number(item.score || 80),
+    human_approved: item.human_approved === true,
+    memory_approval_status: item.memory_approval_status || "pending",
+    human_note_cn: item.human_note_cn || "等待人工评审。",
+    annotation_note_cn: item.annotation_note_cn || "",
+    strengths_cn: item.strengths_cn || "暂无新增改进点。",
+    issues_cn: item.issues_cn || "暂无新增风险点。",
+    next_step_cn: item.next_step_cn || "继续人工评审。",
+    memory_content_cn: item.memory_content_cn || session.memory_preview.chinese_diary_content || ""
+  };
+}
+
+function normalizeQueueItem(item) {
+  const nextItem = runtimeGuard.clone(item);
+  const draftState = {
+    ...queueDraftStateFromItem(nextItem),
+    ...(nextItem.draft_state || {})
+  };
+  nextItem.draft_state = draftState;
+  nextItem.version_id = draftState.version_id;
+  nextItem.compare_version_id = draftState.compare_version_id;
+  nextItem.asset_status = draftState.asset_status;
+  nextItem.review_status = draftState.review_status;
+  nextItem.score = draftState.score;
+  nextItem.human_approved = draftState.human_approved;
+  nextItem.memory_approval_status = draftState.memory_approval_status;
+  nextItem.human_note_cn = draftState.human_note_cn;
+  nextItem.annotation_note_cn = draftState.annotation_note_cn;
+  nextItem.strengths_cn = draftState.strengths_cn;
+  nextItem.issues_cn = draftState.issues_cn;
+  nextItem.next_step_cn = draftState.next_step_cn;
+  nextItem.memory_content_cn = draftState.memory_content_cn;
+  return nextItem;
+}
+
+function normalizeQueueItems(items) {
+  return items.map(normalizeQueueItem);
 }
 
 function nowIso() {
@@ -227,37 +274,42 @@ function buildQueueProgress(queueDraft) {
 
 function loadQueueItemIntoForm(item) {
   if (!item) return;
-  els.versionPicker.value = item.version_id;
-  els.comparePicker.value = item.compare_version_id || "";
-  els.diffStrengths.value = item.strengths_cn || "暂无新增改进点。";
-  els.diffIssues.value = item.issues_cn || "暂无新增风险点。";
-  els.diffNext.value = item.next_step_cn || "继续人工评审。";
-  els.humanScore.value = String(item.score || 80);
-  els.humanComment.value = item.human_note_cn || "等待人工评审。";
-  els.annotationNote.value = item.annotation_note_cn || "";
-  els.assetStatus.value = item.asset_status === "accepted" ? "candidate" : item.asset_status || "candidate";
-  els.humanApproved.checked = item.asset_status === "accepted" || item.human_approved === true;
-  els.memoryApproval.value = item.memory_approval_status || "pending";
-  els.memoryContent.value = item.memory_content_cn || session.memory_preview.chinese_diary_content || "";
+  const draftState = item.draft_state || queueDraftStateFromItem(item);
+  els.versionPicker.value = draftState.version_id;
+  els.comparePicker.value = draftState.compare_version_id || "";
+  els.diffStrengths.value = draftState.strengths_cn || "暂无新增改进点。";
+  els.diffIssues.value = draftState.issues_cn || "暂无新增风险点。";
+  els.diffNext.value = draftState.next_step_cn || "继续人工评审。";
+  els.humanScore.value = String(draftState.score || 80);
+  els.humanComment.value = draftState.human_note_cn || "等待人工评审。";
+  els.annotationNote.value = draftState.annotation_note_cn || "";
+  els.assetStatus.value = draftState.asset_status === "accepted" ? "candidate" : draftState.asset_status || "candidate";
+  els.humanApproved.checked = draftState.asset_status === "accepted" || draftState.human_approved === true;
+  els.memoryApproval.value = draftState.memory_approval_status || "pending";
+  els.memoryContent.value = draftState.memory_content_cn || session.memory_preview.chinese_diary_content || "";
 }
 
 function syncActiveQueueItemFromForm() {
   const item = activeQueueItem();
   if (!item) return;
   const assetStatus = finalAssetStatus();
-  item.version_id = els.versionPicker.value || item.version_id;
-  item.compare_version_id = els.comparePicker.value || "";
-  item.asset_status = assetStatus;
-  item.review_status = reviewSessionStatus(assetStatus);
-  item.score = Number(els.humanScore.value);
-  item.human_approved = els.humanApproved.checked;
-  item.memory_approval_status = els.memoryApproval.value;
-  item.human_note_cn = els.humanComment.value.trim();
-  item.annotation_note_cn = els.annotationNote.value.trim();
-  item.strengths_cn = safeText(els.diffStrengths.value, "暂无新增改进点。");
-  item.issues_cn = safeText(els.diffIssues.value, "暂无新增风险点。");
-  item.next_step_cn = safeText(els.diffNext.value, "继续人工评审。");
-  item.memory_content_cn = els.memoryContent.value.trim();
+  const draftState = {
+    version_id: els.versionPicker.value || item.version_id,
+    compare_version_id: els.comparePicker.value || "",
+    asset_status: assetStatus,
+    review_status: reviewSessionStatus(assetStatus),
+    score: Number(els.humanScore.value),
+    human_approved: els.humanApproved.checked,
+    memory_approval_status: els.memoryApproval.value,
+    human_note_cn: els.humanComment.value.trim(),
+    annotation_note_cn: els.annotationNote.value.trim(),
+    strengths_cn: safeText(els.diffStrengths.value, "暂无新增改进点。"),
+    issues_cn: safeText(els.diffIssues.value, "暂无新增风险点。"),
+    next_step_cn: safeText(els.diffNext.value, "继续人工评审。"),
+    memory_content_cn: els.memoryContent.value.trim()
+  };
+  item.draft_state = draftState;
+  Object.assign(item, draftState);
 }
 
 function selectQueueItem(queueId) {
@@ -295,9 +347,8 @@ function buildQueueDraft({
   memoryContent
 }) {
   return queueState.map((item) => {
-    if (item.queue_id !== selectedQueueId) return runtimeGuard.clone(item);
-    return {
-      ...runtimeGuard.clone(item),
+    if (item.queue_id !== selectedQueueId) return normalizeQueueItem(item);
+    const draftState = {
       version_id: version.version_id,
       compare_version_id: comparisonVersion?.version_id || "",
       asset_status: assetStatus,
@@ -312,6 +363,12 @@ function buildQueueDraft({
       next_step_cn: nextStepText,
       memory_content_cn: memoryContent
     };
+    const nextItem = {
+      ...runtimeGuard.clone(item),
+      ...draftState,
+      draft_state: draftState
+    };
+    return normalizeQueueItem(nextItem);
   });
 }
 
@@ -753,7 +810,7 @@ function render() {
   const imageCaseDraft = draft.image_case_draft;
   const memoryDeltaDraft = draft.memory_delta_draft;
   const handoffDraft = draft.adapter_dry_run_handoff_draft;
-  queueState = runtimeGuard.clone(reviewDraft.review_queue);
+  queueState = normalizeQueueItems(reviewDraft.review_queue);
   renderQueueList(reviewDraft.review_queue);
   els.humanScoreOut.textContent = els.humanScore.value;
   els.assetRef.textContent = version.asset_ref;

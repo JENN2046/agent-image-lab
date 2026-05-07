@@ -269,6 +269,10 @@ function main() {
   assert(initialDraft.review_session_draft.compare_version_id === "v1", "Initial compare version must be v1.");
   assert(initialDraft.review_session_draft.selected_queue_id === "queue-v2", "Initial selected queue id must be queue-v2.");
   assert(initialDraft.review_session_draft.review_queue.length === 4, "Initial review queue must contain four candidates.");
+  assert(
+    initialDraft.review_session_draft.review_queue.every((item) => item.draft_state && item.draft_state.version_id),
+    "Every queue item must expose an independent draft_state."
+  );
   assert(elements.get("queueTotal").textContent === "4", "Queue total must render.");
   assert(elements.get("queueVisible").textContent === "4", "Queue visible count must render all candidates initially.");
   assert(elements.get("queueProgress").textContent === "1 / 4", "Queue progress must render initial position.");
@@ -321,6 +325,32 @@ function main() {
   const previousQueueDraft = parseDraft(elements);
   assert(previousQueueDraft.review_session_draft.selected_queue_id === "queue-v2", "Previous queue button must return to queue-v2.");
   assert(previousQueueDraft.review_session_draft.current_version_id === "v2", "Previous queue button must switch back to v2.");
+  elements.get("humanScore").value = "92";
+  dispatchChange(elements, "humanScore");
+  elements.get("humanComment").value = "队列状态保持测试：v2 的人工评论不能被 v1 覆盖。";
+  dispatchChange(elements, "humanComment");
+  elements.get("humanApproved").checked = true;
+  dispatchChange(elements, "humanApproved");
+  elements.get("memoryApproval").value = "approved";
+  dispatchChange(elements, "memoryApproval");
+  const editedQueueDraft = parseDraft(elements);
+  const editedQueueV2 = editedQueueDraft.review_session_draft.review_queue.find((item) => item.queue_id === "queue-v2");
+  assert(editedQueueV2.draft_state.score === 92, "Edited queue-v2 draft_state must store score.");
+  assert(editedQueueV2.draft_state.human_approved === true, "Edited queue-v2 draft_state must store human approval.");
+  assert(editedQueueV2.draft_state.memory_approval_status === "approved", "Edited queue-v2 draft_state must store memory approval.");
+  assert(editedQueueV2.draft_state.human_note_cn.includes("状态保持测试"), "Edited queue-v2 draft_state must store human comment.");
+  dispatchClick(elements, "queueNext");
+  const queueV1Draft = parseDraft(elements);
+  assert(queueV1Draft.review_session_draft.selected_queue_id === "queue-v1", "Queue next must select queue-v1 for isolation check.");
+  assert(elements.get("humanComment").value.includes("参考版本"), "Queue-v1 form must keep its own comment.");
+  assert(!elements.get("humanComment").value.includes("状态保持测试"), "Queue-v1 form must not inherit queue-v2 comment.");
+  dispatchClick(elements, "queuePrev");
+  const restoredQueueDraft = parseDraft(elements);
+  assert(restoredQueueDraft.review_session_draft.selected_queue_id === "queue-v2", "Queue previous must restore queue-v2 after isolation check.");
+  assert(elements.get("humanScore").value === "92", "Queue-v2 score must survive switching away and back.");
+  assert(elements.get("humanComment").value.includes("状态保持测试"), "Queue-v2 comment must survive switching away and back.");
+  assert(elements.get("humanApproved").checked === true, "Queue-v2 approval checkbox must survive switching away and back.");
+  assert(elements.get("memoryApproval").value === "approved", "Queue-v2 memory approval must survive switching away and back.");
 
   dispatchClick(elements, "tplTextArtifact");
   const templatedDraft = parseDraft(elements);
@@ -420,7 +450,11 @@ function main() {
       queue_return_restores_current_version: returnedQueueDraft.review_session_draft.current_version_id === "v2",
       next_button_updates_current_version: nextQueueDraft.review_session_draft.current_version_id === "v1",
       previous_button_restores_current_version: previousQueueDraft.review_session_draft.current_version_id === "v2",
-      progress_summary_visible: elements.get("queueProgress").textContent.includes("/")
+      progress_summary_visible: elements.get("queueProgress").textContent.includes("/"),
+      independent_draft_state_present: initialDraft.review_session_draft.review_queue.every((item) => Boolean(item.draft_state)),
+      draft_state_preserves_score: editedQueueV2.draft_state.score === 92,
+      draft_state_preserves_comment: editedQueueV2.draft_state.human_note_cn.includes("状态保持测试"),
+      switch_restore_preserves_comment: restoredQueueDraft.review_session_draft.human_review.note_cn.includes("状态保持测试")
     },
     adapter_handoff: {
       execution_blocked: initialDraft.adapter_dry_run_handoff_draft.execution_blocked,
