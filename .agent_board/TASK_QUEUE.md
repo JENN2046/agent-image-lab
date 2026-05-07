@@ -60,7 +60,7 @@ none
 4. Update CHECKPOINT.md, RUN_STATE.md, VALIDATION_LOG.md, and HANDOFF.md after each meaningful batch.
 5. If the user wants deeper diagnosis, activate the v10.12 provider-side prompt fingerprint capture package only after explicit approval, or switch to alternate plugin/strategy planning.
 6. If the user wants to reuse a short approval flow, present a new current capsule first; bare `批准` only applies when Codex has just presented that exact capsule.
-7. After Batch 8A post-merge checkpoint validation passes, stop before staging/commit/tag/push/PR until explicit version-action authorization is given.
+7. After Batch 8C final acceptance summary validation passes, stop before staging/commit/tag/push/PR until explicit version-action authorization is given.
 ```
 
 ### done
@@ -146,6 +146,8 @@ none
 78. Completed Runtime Review Batch 5B/6B/7A local gate/archive readiness; single_real_generation_retry_gate_draft, real_memory_write_authorization_package_draft, and asset_archive_candidate_draft are rendered, exported, guarded, and validated locally.
 79. Completed Runtime Review Batch 8A local release-candidate proposal; proposed commit scope now covers the Runtime Review follow-up accumulated runtime prototype, validators, docs/indexes, validation checklist, and agent-board files. Local validation passed, and version actions remain unauthorized.
 80. Synced local master to origin/master after PR #6 merge at 563ccc4 and opened the Runtime Review Batch 8A post-merge checkpoint; no new remote write, plugin/API call, DailyNote/VCP memory write, or image creation was performed.
+81. Completed Runtime Review Batch 8B vNext RC acceptance; current local master on top of PR #6 merge baseline is accepted as the next release-candidate baseline, with docs, indexes, checklist, and agent-board state synchronized locally.
+82. Completed Runtime Review Batch 8C final acceptance summary; 8A / 8B are consolidated into the final readable acceptance summary, with docs, indexes, checklist, and agent-board state synchronized locally.
 ```
 
 ### blocked

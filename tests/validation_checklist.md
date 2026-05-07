@@ -4,6 +4,8 @@
 
 - [ ] `docs/00_project_roadmap.md` 存在，并明确当前已完成层级、未完成层级和后续授权点。
 - [ ] `docs/222_runtime_review_batch_8a_post_merge_checkpoint.md` 存在，并记录 PR #6 合并后本地 `master` 与 `origin/master` 的同步事实。
+- [ ] `docs/223_runtime_review_batch_8b_vnext_rc_acceptance.md` 存在，并记录 vNext RC acceptance 本地收束基线。
+- [ ] `docs/224_runtime_review_batch_8c_final_acceptance_summary.md` 存在，并记录最终 acceptance 汇总。
 - [ ] 所有任务书要求的 MVP 文件存在。
 - [ ] 文件直接位于项目根目录下，没有创建第二套 `agent-image-lab/` 嵌套目录。
 - [ ] 可运行 `scripts/validate_mvp.ps1` 完成只读自动检查；该脚本不是 Adapter、VCP 插件或真实执行入口。

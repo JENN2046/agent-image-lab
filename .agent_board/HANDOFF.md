@@ -3,8 +3,8 @@
 ## Handoff Summary
 
 ```text
-Status: Runtime Review Console follow-up Batch 2A/2B/2C, long task delivery planning, Batch 3A/3B/3C, Batch 4A, Batch 4B/5A/6A, Batch 5B/6B/7A local gate/archive readiness, Batch 8A local RC proposal, and PR #6 post-merge checkpoint completed locally; production actions remain blocked.
-Result: runtime prototype now emits accepted_candidate_delivery_package_draft, memory_completion_state_draft, human_override_traceability_draft, inactive_authorization_capsules_draft, runtime_review_state_draft, local_commit_scope_plan_draft, bridge_mock_roundtrip_candidate_draft, real_bridge_authorization_package_draft, plugin_reliability_prompt_discipline_draft, memory_write_completion_candidate_draft, single_real_generation_retry_gate_draft, real_memory_write_authorization_package_draft, and asset_archive_candidate_draft; renders them in the UI; exports them in the guarded session payload; and validates them through runtime guard / smoke / delivery surface checks. `docs/221_runtime_review_batch_8a_release_candidate_readiness_local_proposal.md` now records the proposed local RC commit scope without staging or version actions.
+Status: Runtime Review Console follow-up Batch 2A/2B/2C, long task delivery planning, Batch 3A/3B/3C, Batch 4A, Batch 4B/5A/6A, Batch 5B/6B/7A local gate/archive readiness, Batch 8A local RC proposal, PR #6 post-merge checkpoint, Batch 8B vNext RC acceptance, and Batch 8C final acceptance summary completed locally; production actions remain blocked.
+Result: runtime prototype now emits accepted_candidate_delivery_package_draft, memory_completion_state_draft, human_override_traceability_draft, inactive_authorization_capsules_draft, runtime_review_state_draft, local_commit_scope_plan_draft, bridge_mock_roundtrip_candidate_draft, real_bridge_authorization_package_draft, plugin_reliability_prompt_discipline_draft, memory_write_completion_candidate_draft, single_real_generation_retry_gate_draft, real_memory_write_authorization_package_draft, and asset_archive_candidate_draft; renders them in the UI; exports them in the guarded session payload; and validates them through runtime guard / smoke / delivery surface checks. `docs/224_runtime_review_batch_8c_final_acceptance_summary.md` now records the final readable acceptance summary without staging or version actions.
 Compatibility note: v10.27 DailyNoteWrite root path correction remains recorded: previous root class plugin_dir_dailynote, corrected root class vcp_root_dailynote, completed_root_path_corrected, without rerunning DailyNoteWrite. v10.28 DailyNote canonical location guard remains active. This batch changed only project-local runtime prototype, validators, docs, indexes, validation checklist, and agent-board state.
 ```
 
@@ -19,7 +19,10 @@ A:/agent-image-lab/agent-image-lab-v0.2
 ```text
 Branch: master
 Remote tracking: master...origin/master
-State: local post-merge checkpoint changes present after PR #6 merge sync
+State: local vNext RC acceptance + final summary changes present after checkpoint commit
+Local head: f6cf1d7
+Origin/master: 563ccc4
+master...origin/master: 1 0
 PR #6 status: merged
 PR #6 merge commit: 563ccc4
 PR #6 head: 4b34894
@@ -284,6 +287,18 @@ No retry, second write, plugin/API generation call, image creation, submitDraft,
 ## Validation
 
 ```text
+2026-05-08 Runtime Review Batch 8B vNext RC acceptance:
+status: completed_validated_local_vnext_rc_acceptance
+acceptance: docs/223_runtime_review_batch_8b_vnext_rc_acceptance.md
+validation: node --check scripts/validate_local_commit_scope.js passed; node scripts/validate_local_commit_scope.js passed; node scripts/validate_agent_board_state.js passed; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1 passed; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1 passed with manual-review warnings only; git diff --check passed with LF/CRLF warnings only
+version actions: not performed
+
+2026-05-08 Runtime Review Batch 8C final acceptance summary:
+status: completed_validated_local_final_acceptance_summary
+acceptance: docs/224_runtime_review_batch_8c_final_acceptance_summary.md
+validation: node --check scripts/validate_local_commit_scope.js passed; node scripts/validate_local_commit_scope.js passed; node scripts/validate_agent_board_state.js passed; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1 passed; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1 passed with manual-review warnings only; git diff --check passed with LF/CRLF warnings only
+version actions: not performed
+
 2026-05-08 Runtime Review Batch 8A local RC proposal:
 status: completed_validated_local_rc_proposal
 proposal: docs/221_runtime_review_batch_8a_release_candidate_readiness_local_proposal.md

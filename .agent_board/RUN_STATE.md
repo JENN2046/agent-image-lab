@@ -21,24 +21,70 @@ master tracking origin/master
 ## Current Phase
 
 ```text
-Runtime Review Batch 8A post-merge checkpoint
+Runtime Review Batch 8C final acceptance summary
 ```
 
 ## Current Task
 
 ```text
-Record PR #6 merge, local master sync, and post-merge checkpoint without new version actions
+Finalize Runtime Review final acceptance summary local batch without version actions
 ```
 
 ## Last Completed Task
 
 ```text
-Synced local master with origin/master at PR #6 merge commit 563ccc4 and opened the Runtime Review Batch 8A post-merge checkpoint.
+Prepared Runtime Review Batch 8C final acceptance summary across docs, indexes, validation checklist, and agent board; commit/tag/push/PR/release remain unauthorized.
 ```
 
 ## Last Validation
 
 ```text
+2026-05-08 runtime review Batch 8C final acceptance summary:
+status: completed_validated_local_final_acceptance_summary
+changed files: docs/224_runtime_review_batch_8c_final_acceptance_summary.md, README.md, MANIFEST.md, RELEASE_NOTES.md, docs/00_project_roadmap.md, tests/validation_checklist.md, scripts/validate_local_commit_scope.js, .agent_board files
+scope: final acceptance summary and index/board sync only
+local branch: master
+local head: f6cf1d7
+origin/master: 563ccc4
+master...origin/master: 1 0
+PR #6 status: merged
+PR #6 merge commit: 563ccc4
+PR #6 head commit: 4b34894
+real VCPChat read: no
+real VCPToolBox read: no
+real bridge/CDP/source read: no
+plugin/API/DailyNote/VCP memory/image action: no
+commit/tag/push/PR/release: no
+node --check scripts/validate_local_commit_scope.js: passed
+node scripts/validate_local_commit_scope.js: passed
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed with LF/CRLF warnings only
+
+2026-05-08 runtime review Batch 8B vNext RC acceptance:
+status: completed_validated_local_vnext_rc_acceptance
+changed files: docs/223_runtime_review_batch_8b_vnext_rc_acceptance.md, README.md, MANIFEST.md, RELEASE_NOTES.md, docs/00_project_roadmap.md, tests/validation_checklist.md, scripts/validate_local_commit_scope.js, .agent_board files
+scope: local acceptance baseline and index/board sync only
+local branch: master
+local head: f6cf1d7
+origin/master: 563ccc4
+master...origin/master: 1 0
+PR #6 status: merged
+PR #6 merge commit: 563ccc4
+PR #6 head commit: 4b34894
+real VCPChat read: no
+real VCPToolBox read: no
+real bridge/CDP/source read: no
+plugin/API/DailyNote/VCP memory/image action: no
+commit/tag/push/PR/release: no
+node --check scripts/validate_local_commit_scope.js: passed
+node scripts/validate_local_commit_scope.js: passed
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed with LF/CRLF warnings only
+
 2026-05-08 runtime review Batch 8A post-merge checkpoint:
 status: completed_validated_local_post_merge_checkpoint
 changed files: docs/222_runtime_review_batch_8a_post_merge_checkpoint.md, README.md, MANIFEST.md, RELEASE_NOTES.md, docs/00_project_roadmap.md, tests/validation_checklist.md, scripts/validate_local_commit_scope.js, .agent_board files
@@ -938,7 +984,7 @@ No additional DoubaoGen retry after v10.9, DailyNote, VCP memory, image creation
 
 ```text
 Branch: master
-Remote tracking: master...origin/master [0 0 after PR #6 merge sync]
+Remote tracking: master...origin/master [1 0 after vNext RC acceptance baseline]
 PR #6 status: merged
 PR #6 merge commit: 563ccc4
 PR #6 head: 4b34894
@@ -1043,11 +1089,11 @@ Historical v7.45 phase: v7.45 cdp read-only attempt record
 ## Current Stop Status
 
 ```text
-Runtime Review Batch 8A is merged through PR #6 and local master is synced to origin/master. The current post-merge checkpoint is local-only. Further real VCPChat/VCPToolBox reads, plugin/API/DailyNote/VCP memory/image actions, retry generation, commit/tag/push/PR/release, and A5 production execution remain blocked until a new explicit authorization package is provided.
+Runtime Review Batch 8C final acceptance summary is recorded on top of the PR #6 / Batch 8B acceptance chain and the current local master remains ahead of origin/master by one acceptance commit. Further real VCPChat/VCPToolBox reads, plugin/API/DailyNote/VCP memory/image actions, retry generation, commit/tag/push/PR/release, and A5 production execution remain blocked until a new explicit authorization package is provided.
 ```
 
 ## Next Action
 
 ```text
-Next safe action is to optionally commit the validated local post-merge checkpoint if explicitly authorized. Production execution still requires a new explicit authorization package.
+Next safe action is to optionally commit the validated local final acceptance summary batch if explicitly authorized. Production execution still requires a new explicit authorization package.
 ```

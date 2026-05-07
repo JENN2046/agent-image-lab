@@ -91,6 +91,10 @@ Runtime Review Batch 8A boundary: no staging, no commit, no tag, no push, no PR,
 Runtime Review Batch 8A validation: runtime guard/smoke/delivery suite, agent board, local commit scope, MVP validation, local validation, and git diff --check passed
 Runtime Review Batch 8A post-merge checkpoint: PR #6 merged at 563ccc4, local master synced to origin/master with master...origin/master = 0 0
 Runtime Review Batch 8A post-merge boundary: no new remote write, no commit, no tag, no push, no PR, no release, no real VCPChat/VCPToolBox read, no plugin/API/DailyNote/VCP memory/image action
+Runtime Review Batch 8B vNext RC acceptance: current local master on top of the PR #6 merge baseline is accepted as the next release-candidate baseline
+Runtime Review Batch 8B validation: acceptance evidence chain, docs/indexes, checklist, and board sync are validated locally; no version actions or real execution performed
+Runtime Review Batch 8C final acceptance summary: 8A / 8B are consolidated into the final readable acceptance summary and remain local-only
+Runtime Review Batch 8C validation: summary, docs/indexes, checklist, and board sync are validated locally; no version actions or real execution performed
 v10.0 local: A5 end-to-end activation package readiness recorded and preflight blocked
 v10.0 preflight: active A5 authorization package present: yes
 v10.0 preflight: real_vcpchat_root provided: yes

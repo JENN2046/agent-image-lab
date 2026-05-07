@@ -18,7 +18,7 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review Batch 8A post-merge checkpoint
+v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review Batch 8C final acceptance summary
 ```
 
 当前工作分支：
@@ -104,6 +104,8 @@ master tracking origin/master
 - Runtime Review Batch 5B/6B/7A：在 runtime prototype 中实现真实重试授权门、真实记忆写入授权包和 no-binary 资产归档候选；所有新增面仍保持 no-execution、no-plugin-call、no-memory-write、no-image-create。
 - Runtime Review Batch 8A：把 Runtime Review follow-up 累积工作收束为本地 release-candidate proposal 和提交范围清单；仍不执行 commit/tag/push/PR/release。
 - Runtime Review Batch 8A post-merge checkpoint：记录 PR #6 已合并，本地 `master` 已同步到 `origin/master` 的 `563ccc4`，并确认 legacy `runtime_review_session_v1` import compatibility fix 已进入主线。
+- Runtime Review Batch 8B vNext RC acceptance：把 post-merge checkpoint 上的当前本地 master 收束成下一轮 release-candidate 接受基线；不触发版本动作。
+- Runtime Review Batch 8C final acceptance summary：把 8A / 8B 的收束结果归并为最终可读 acceptance 摘要；不触发版本动作。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：
@@ -112,7 +114,7 @@ master tracking origin/master
 - 后续更多 DailyNote / VCP 长期记忆写入仍需单独授权。
 - 正式 release 发布和后续版本 tag 策略。
 - 后续更多真实图片生成、编辑、归档。
-- Batch 8A post-merge 后的下一轮 release-candidate acceptance / final handoff 更新仍需本地规划；任何 commit、tag、push、PR 仍需单独授权。
+- Batch 8C final acceptance summary 后的下一轮版本动作仍需单独授权；任何 commit、tag、push、PR 仍需单独授权。
 
 ## 阶段路线
 

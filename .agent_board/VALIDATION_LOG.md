@@ -2,6 +2,94 @@
 
 ## Entries
 
+## VALIDATION-20260508-RUNTIME-REVIEW-BATCH-8C-FINAL-ACCEPTANCE-SUMMARY
+
+Task:
+
+```text
+Consolidate the 8A / 8B local acceptance chain into a final readable acceptance summary and keep the board synchronized.
+```
+
+Status:
+
+```text
+completed_validated_local_final_acceptance_summary
+```
+
+Validation:
+
+```text
+git diff --check: passed with LF/CRLF warnings only
+node --check scripts/validate_local_commit_scope.js: passed
+node scripts/validate_local_commit_scope.js: passed
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+```
+
+Boundary:
+
+```text
+local acceptance chain consolidated: true
+master...origin/master: 1 0
+real VCPChat read: no
+real VCPToolBox read: no
+real bridge/CDP/source read: no
+plugin/API/DailyNote/VCP memory/image action: no
+git commit/tag/push/PR/release: no
+```
+
+Findings:
+
+```text
+Batch 8C is a presentation-layer consolidation only; it does not add new runtime behavior or remote side effects.
+The acceptance chain now has separate records for post-merge checkpoint, RC acceptance, and final acceptance summary.
+```
+
+## VALIDATION-20260508-RUNTIME-REVIEW-BATCH-8B-VNEXT-RC-ACCEPTANCE
+
+Task:
+
+```text
+Record the vNext RC acceptance baseline after the PR #6 post-merge checkpoint and synchronize the local acceptance documents and board.
+```
+
+Status:
+
+```text
+completed_validated_local_vnext_rc_acceptance
+```
+
+Validation:
+
+```text
+git diff --check: passed with LF/CRLF warnings only
+node --check scripts/validate_local_commit_scope.js: passed
+node scripts/validate_local_commit_scope.js: passed
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+```
+
+Boundary:
+
+```text
+local master accepted as next RC baseline: true
+master...origin/master: 1 0
+real VCPChat read: no
+real VCPToolBox read: no
+real bridge/CDP/source read: no
+plugin/API/DailyNote/VCP memory/image action: no
+git commit/tag/push/PR/release: no
+```
+
+Findings:
+
+```text
+vNext RC acceptance captures the current local master on top of the PR #6 merge baseline and keeps all remote/version actions blocked.
+The acceptance document is project-local and references the existing post-merge checkpoint and RC proposal evidence chain.
+```
+
 ## VALIDATION-20260508-RUNTIME-REVIEW-BATCH-8A-POST-MERGE
 
 Task:

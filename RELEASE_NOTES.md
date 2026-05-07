@@ -93,6 +93,8 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Added Runtime Review Batch 5B/6B/7A local gate/archive surfaces for inactive single real generation retry authorization, inactive real memory write authorization, and metadata-only asset archive candidates.
 - Added Runtime Review Batch 8A local release-candidate proposal, including final follow-up commit scope, validation matrix, and no-version-action gate.
 - Added Runtime Review Batch 8A post-merge checkpoint after PR #6 merged into `master`, including local `master` / `origin/master` synchronization facts and legacy runtime session import compatibility closeout.
+- Added Runtime Review Batch 8B vNext RC acceptance after the post-merge checkpoint, including the acceptance baseline, evidence chain, and explicit no-version-action boundary.
+- Added Runtime Review Batch 8C final acceptance summary after the vNext RC acceptance, consolidating the 8A / 8B acceptance chain into a single final readable summary.
 
 ## Safety Status
 
@@ -139,3 +141,5 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - The Runtime Review long task delivery plan is local planning only; it does not activate any future capsule or authorize bridge calls, plugin calls, memory writes, image creation, commit, tag, push, PR, or release.
 - Runtime Review Batch 8A is a local RC proposal only; it does not stage files, commit, tag, push, open a PR, publish a release, call plugins/APIs, write DailyNote/VCP memory, or create images.
 - Runtime Review Batch 8A post-merge checkpoint only records the already-merged PR #6 baseline and local sync facts; it performs no new remote write, plugin/API call, DailyNote/VCP memory write, or image creation.
+- Runtime Review Batch 8B vNext RC acceptance records the local acceptance baseline only; it does not authorize commit/tag/push/PR/release or any real execution action.
+- Runtime Review Batch 8C final acceptance summary consolidates the local acceptance chain only; it does not authorize commit/tag/push/PR/release or any real execution action.
