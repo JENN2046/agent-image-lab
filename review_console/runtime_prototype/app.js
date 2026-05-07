@@ -38,6 +38,14 @@ const els = {
   queuePrev: document.getElementById("queuePrev"),
   queueNext: document.getElementById("queueNext"),
   queueList: document.getElementById("queueList"),
+  batchTotal: document.getElementById("batchTotal"),
+  batchAccepted: document.getElementById("batchAccepted"),
+  batchPending: document.getElementById("batchPending"),
+  batchWriteRequests: document.getElementById("batchWriteRequests"),
+  batchBlocked: document.getElementById("batchBlocked"),
+  batchSummary: document.getElementById("batchSummary"),
+  batchNextItems: document.getElementById("batchNextItems"),
+  batchBlockedItems: document.getElementById("batchBlockedItems"),
   diffStrengths: document.getElementById("diffStrengths"),
   diffIssues: document.getElementById("diffIssues"),
   diffNext: document.getElementById("diffNext"),
@@ -372,6 +380,69 @@ function buildQueueDraft({
   });
 }
 
+function buildBatchReviewSummary(queueDraft) {
+  const counts = {
+    total_count: queueDraft.length,
+    accepted_count: 0,
+    candidate_count: 0,
+    rejected_count: 0,
+    draft_count: 0,
+    human_reviewing_count: 0,
+    write_request_count: 0,
+    blocked_count: 0
+  };
+  const nextAttentionItems = [];
+  const blockedItems = [];
+
+  for (const item of queueDraft) {
+    if (item.asset_status === "accepted") counts.accepted_count += 1;
+    if (item.asset_status === "candidate") counts.candidate_count += 1;
+    if (item.asset_status === "rejected") counts.rejected_count += 1;
+    if (item.asset_status === "draft") counts.draft_count += 1;
+    if (item.review_status === "human_reviewing") counts.human_reviewing_count += 1;
+    if (item.asset_status === "accepted" && item.human_approved === true && item.memory_approval_status === "approved") {
+      counts.write_request_count += 1;
+    }
+    if (item.asset_status === "rejected") {
+      blockedItems.push({
+        queue_id: item.queue_id,
+        title_cn: item.title_cn,
+        reason_cn: "已拒收，需要下一轮修正。"
+      });
+    } else if (item.asset_status === "draft") {
+      blockedItems.push({
+        queue_id: item.queue_id,
+        title_cn: item.title_cn,
+        reason_cn: "仍是草稿，不能进入归档。"
+      });
+    } else if (item.asset_status === "accepted" && item.human_approved !== true) {
+      blockedItems.push({
+        queue_id: item.queue_id,
+        title_cn: item.title_cn,
+        reason_cn: "标记可接受但缺少人工确认。"
+      });
+    }
+    if (item.asset_status === "candidate" || item.asset_status === "draft" || item.review_status === "human_reviewing") {
+      nextAttentionItems.push({
+        queue_id: item.queue_id,
+        title_cn: item.title_cn,
+        reason_cn: item.next_step_cn || "继续人工评审。"
+      });
+    }
+  }
+
+  counts.blocked_count = blockedItems.length;
+  return {
+    status_cn: "批量草案可交接",
+    counts,
+    summary_cn: `共 ${counts.total_count} 个候选：${counts.accepted_count} 个可接受，${counts.candidate_count} 个候选，${counts.rejected_count} 个已拒收，${counts.draft_count} 个草稿；${counts.write_request_count} 个写入申请草案，0 个真实写入。`,
+    next_attention_items: nextAttentionItems,
+    blocked_items: blockedItems,
+    boundary_cn: "当前只生成批量评审交接草案，没有调用插件、API、DailyNote，也没有写入 VCP memory。",
+    no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard)
+  };
+}
+
 function nextActionLabel({ assetStatus, memoryStatus, guardClean }) {
   if (!guardClean) return "先处理安全边界风险";
   if (assetStatus === "rejected") return "记录拒收原因，准备下一轮修改";
@@ -616,6 +687,7 @@ function buildDraft() {
     nextStepText,
     memoryContent
   });
+  const batchReviewSummaryDraft = buildBatchReviewSummary(reviewQueueDraft);
 
   return {
     review_session_draft: {
@@ -686,6 +758,7 @@ function buildDraft() {
         }
       ]
     },
+    batch_review_summary_draft: batchReviewSummaryDraft,
     image_case_draft: {
       case_id: session.case_id,
       task_id: session.task_id,
@@ -802,6 +875,26 @@ function renderQueueList(queueDraft) {
   }
 }
 
+function renderBatchSummary(batchSummary) {
+  const counts = batchSummary.counts;
+  els.batchTotal.textContent = String(counts.total_count);
+  els.batchAccepted.textContent = String(counts.accepted_count);
+  els.batchPending.textContent = String(counts.human_reviewing_count);
+  els.batchWriteRequests.textContent = String(counts.write_request_count);
+  els.batchBlocked.textContent = String(counts.blocked_count);
+  els.batchSummary.textContent = `${batchSummary.summary_cn} ${batchSummary.boundary_cn}`;
+  renderList(
+    els.batchNextItems,
+    batchSummary.next_attention_items.map((item) => `${item.title_cn}：${item.reason_cn}`)
+  );
+  renderList(
+    els.batchBlockedItems,
+    batchSummary.blocked_items.length > 0
+      ? batchSummary.blocked_items.map((item) => `${item.title_cn}：${item.reason_cn}`)
+      : ["没有阻塞项。"]
+  );
+}
+
 function render() {
   const draft = buildDraft();
   const version = currentVersion();
@@ -810,8 +903,10 @@ function render() {
   const imageCaseDraft = draft.image_case_draft;
   const memoryDeltaDraft = draft.memory_delta_draft;
   const handoffDraft = draft.adapter_dry_run_handoff_draft;
+  const batchSummaryDraft = draft.batch_review_summary_draft;
   queueState = normalizeQueueItems(reviewDraft.review_queue);
   renderQueueList(reviewDraft.review_queue);
+  renderBatchSummary(batchSummaryDraft);
   els.humanScoreOut.textContent = els.humanScore.value;
   els.assetRef.textContent = version.asset_ref;
   els.assetBox.textContent = comparisonVersion

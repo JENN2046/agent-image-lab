@@ -73,6 +73,14 @@ function createRuntimeContext() {
   add("queuePrev");
   add("queueNext");
   add("queueList");
+  add("batchTotal");
+  add("batchAccepted");
+  add("batchPending");
+  add("batchWriteRequests");
+  add("batchBlocked");
+  add("batchSummary");
+  add("batchNextItems");
+  add("batchBlockedItems");
   add("diffStrengths", { value: "主体构图更稳定，整体可读性更好。" });
   add("diffIssues", { value: "细节噪点仍需保留人工判断。" });
   add("diffNext", { value: "若进入正式归档，需要确认记忆写入申请。" });
@@ -280,6 +288,20 @@ function main() {
   assert(elements.get("queuePrev").disabled === true, "Initial queue previous button must be disabled at the first item.");
   assert(elements.get("queueNext").disabled === false, "Initial queue next button must be enabled.");
   assert(elements.get("queueList").children.length === 4, "Queue list must render four candidate buttons.");
+  assert(initialDraft.batch_review_summary_draft.counts.total_count === 4, "Batch summary must count four candidates.");
+  assert(initialDraft.batch_review_summary_draft.counts.accepted_count === 1, "Batch summary must count one accepted item initially.");
+  assert(initialDraft.batch_review_summary_draft.counts.human_reviewing_count === 2, "Batch summary must count two pending review items initially.");
+  assert(initialDraft.batch_review_summary_draft.counts.write_request_count === 1, "Batch summary must count one write request draft initially.");
+  assert(initialDraft.batch_review_summary_draft.counts.blocked_count === 2, "Batch summary must count rejected and draft blockers.");
+  assert(runtimeGuard.guardIsClean(initialDraft.batch_review_summary_draft.no_execution_guard), "Batch summary guard must remain clean.");
+  assert(elements.get("batchTotal").textContent === "4", "Batch total must render.");
+  assert(elements.get("batchAccepted").textContent === "1", "Batch accepted count must render.");
+  assert(elements.get("batchPending").textContent === "2", "Batch pending count must render.");
+  assert(elements.get("batchWriteRequests").textContent === "1", "Batch write request count must render.");
+  assert(elements.get("batchBlocked").textContent === "2", "Batch blocked count must render.");
+  assert(elements.get("batchSummary").textContent.includes("0 个真实写入"), "Batch summary must show no real write.");
+  assert(elements.get("batchNextItems").children.length === 2, "Batch next items must render pending queue items.");
+  assert(elements.get("batchBlockedItems").children.length === 2, "Batch blocked items must render blockers.");
   assert(initialDraft.review_session_draft.annotation_notes.length === 1, "Initial annotation note must be included.");
   assert(
     initialDraft.review_session_draft.version_comparison.summary_cn.includes("v1.1 修订候选图"),
@@ -339,6 +361,10 @@ function main() {
   assert(editedQueueV2.draft_state.human_approved === true, "Edited queue-v2 draft_state must store human approval.");
   assert(editedQueueV2.draft_state.memory_approval_status === "approved", "Edited queue-v2 draft_state must store memory approval.");
   assert(editedQueueV2.draft_state.human_note_cn.includes("状态保持测试"), "Edited queue-v2 draft_state must store human comment.");
+  assert(editedQueueDraft.batch_review_summary_draft.counts.accepted_count === 2, "Batch summary must update accepted count after editing v2.");
+  assert(editedQueueDraft.batch_review_summary_draft.counts.write_request_count === 2, "Batch summary must update write request count after editing v2.");
+  assert(elements.get("batchAccepted").textContent === "2", "Batch accepted count must update in UI.");
+  assert(elements.get("batchWriteRequests").textContent === "2", "Batch write request count must update in UI.");
   dispatchClick(elements, "queueNext");
   const queueV1Draft = parseDraft(elements);
   assert(queueV1Draft.review_session_draft.selected_queue_id === "queue-v1", "Queue next must select queue-v1 for isolation check.");
@@ -455,6 +481,14 @@ function main() {
       draft_state_preserves_score: editedQueueV2.draft_state.score === 92,
       draft_state_preserves_comment: editedQueueV2.draft_state.human_note_cn.includes("状态保持测试"),
       switch_restore_preserves_comment: restoredQueueDraft.review_session_draft.human_review.note_cn.includes("状态保持测试")
+    },
+    batch_review_summary: {
+      total_count: initialDraft.batch_review_summary_draft.counts.total_count,
+      initial_write_request_count: initialDraft.batch_review_summary_draft.counts.write_request_count,
+      updated_write_request_count: editedQueueDraft.batch_review_summary_draft.counts.write_request_count,
+      blocked_count: initialDraft.batch_review_summary_draft.counts.blocked_count,
+      no_execution_guard_clean: runtimeGuard.guardIsClean(initialDraft.batch_review_summary_draft.no_execution_guard),
+      no_real_write_cn: elements.get("batchSummary").textContent.includes("0 个真实写入")
     },
     adapter_handoff: {
       execution_blocked: initialDraft.adapter_dry_run_handoff_draft.execution_blocked,

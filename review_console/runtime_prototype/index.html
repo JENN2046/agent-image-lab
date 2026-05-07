@@ -86,6 +86,28 @@
         <div class="queue-list" id="queueList"></div>
       </section>
 
+      <section class="panel batch-panel">
+        <h2>批量交接摘要</h2>
+        <dl class="meta batch-stats">
+          <div><dt>总数</dt><dd id="batchTotal">-</dd></div>
+          <div><dt>可接受</dt><dd id="batchAccepted">-</dd></div>
+          <div><dt>待评审</dt><dd id="batchPending">-</dd></div>
+          <div><dt>写入申请</dt><dd id="batchWriteRequests">-</dd></div>
+          <div><dt>阻塞项</dt><dd id="batchBlocked">-</dd></div>
+        </dl>
+        <p id="batchSummary"></p>
+        <div class="batch-grid">
+          <div>
+            <h3>下一步处理</h3>
+            <ul id="batchNextItems"></ul>
+          </div>
+          <div>
+            <h3>阻塞项</h3>
+            <ul id="batchBlockedItems"></ul>
+          </div>
+        </div>
+      </section>
+
       <section class="panel">
         <h2>人工评审</h2>
         <label class="field">

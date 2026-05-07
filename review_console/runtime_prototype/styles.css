@@ -46,6 +46,10 @@ body {
   border-color: #4b5f7a;
 }
 
+.batch-panel {
+  border-color: #5d6551;
+}
+
 .verdict-card {
   display: grid;
   gap: 8px;
@@ -190,6 +194,7 @@ dd {
 }
 
 .handoff-grid,
+.batch-grid,
 .readable-draft-cards {
   display: grid;
   gap: 12px;
@@ -197,12 +202,14 @@ dd {
 }
 
 .handoff-grid h3,
+.batch-grid h3,
 .readable-draft-cards h3 {
   margin: 0 0 10px;
   font-size: 16px;
 }
 
-.handoff-grid ul {
+.handoff-grid ul,
+.batch-grid ul {
   display: grid;
   gap: 6px;
   margin: 0;
@@ -211,7 +218,8 @@ dd {
   line-height: 1.5;
 }
 
-.handoff-panel p {
+.handoff-panel p,
+.batch-panel p {
   color: #cfd7df;
   line-height: 1.6;
 }
@@ -290,6 +298,11 @@ select {
 
 .queue-stats {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: 12px;
+}
+
+.batch-stats {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   margin-bottom: 12px;
 }
 
@@ -387,6 +400,7 @@ pre {
   .version-grid,
   .diff-grid,
   .handoff-grid,
+  .batch-grid,
   .readable-draft-cards {
     grid-template-columns: 1fr;
   }
