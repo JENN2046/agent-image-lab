@@ -5104,6 +5104,7 @@ if (-not $node) {
       'tests/schema_examples/'
     )
     $allowedCurrentA4ChangeFiles = @(
+      'AGENTS.md',
       'README.md',
       'MANIFEST.md',
       'RELEASE_NOTES.md',

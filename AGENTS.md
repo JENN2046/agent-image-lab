@@ -1,9 +1,51 @@
 # AGENTS.md
 
 Project: Agent Image Lab
-Version: Controlled Autopilot Constitution v1.0
+Version: Controlled Autopilot Constitution v1.1 — Smart Local Autopilot
 Language: Default to English for this file. Keep code, paths, commands, logs, field names, and errors in their original form.
-Purpose: Enable Codex to continue working autonomously within safe boundaries, without contaminating the VCP core repositories, the VCP memory system, or any real external source.
+Purpose: Enable Codex to work faster and more intelligently inside safe local boundaries, while keeping real VCP production actions behind explicit authorization.
+
+---
+
+## 0. Quick Operating Contract
+
+Default mode:
+
+```text
+A4.5 — Smart Local Autopilot
+```
+
+Codex should move automatically when the next action is all of:
+
+```text
+local
+inside this repository
+reversible
+non-destructive
+non-secret-bearing
+non-production
+non-external
+validated by existing project checks
+inside the current task or project maintenance scope
+```
+
+Codex may be proactive about local project maintenance: detect stale status, repair docs/schema/index drift, add or update validation scripts, update `.agent_board`, run local validation, and make one narrow obvious fix after a validation failure.
+
+Codex must not infer authorization for any of the following from vague words such as `continue`, `ok`, `go ahead`, `可以`, `继续`, or `去吧`:
+
+```text
+real VCPChat read or write
+real VCPToolBox read or write
+real manifest read
+plugin/API/DailyNote calls
+VCP memory writes
+image generation
+executable production integration
+remote push / tag push / release
+destructive Git or filesystem operations
+```
+
+When the next useful step requires A5, Codex should stop and prepare the smallest explicit A5 authorization package instead of executing.
 
 ---
 
@@ -61,18 +103,18 @@ Photo Studio OS
 The default current stage is:
 
 ```text
-docs / schema / dry-run / authorization / static prototype
+v10.8 A5 guarded delivery baseline
 ```
 
 The default local automation mode is:
 
 ```text
-A4 — Sustained Local Autopilot
+A4.5 — Smart Local Autopilot
 ```
 
-This means Codex may continue safe, local, reversible project work across the allowed documentation, schema, dry-run, authorization-template, validation, and static-prototype surfaces without asking for step-by-step confirmation.
+This means Codex may continue safe, local, reversible project work across the allowed documentation, schema, dry-run, authorization-template, validation, `.agent_board`, and static-prototype surfaces without asking for step-by-step confirmation.
 
-The default state must remain:
+The default next action must remain:
 
 ```text
 no-execution
@@ -86,6 +128,14 @@ no DailyNote call
 no VCP memory write
 no image creation
 no executable adapter entrypoint
+```
+
+Historical records may describe previously authorized A5 actions. Those records do not authorize any new A5 action.
+
+Current next production gate:
+
+```text
+BLOCKED until explicit prompt approval plus a separate real generation authorization package
 ```
 
 ---
@@ -138,9 +188,9 @@ Allowed automatically:
 - Modify `tests/`
 - Modify `codex/`
 - Run local validation
-- Commit
-- Push
-- Create tags when the task explicitly requires baseline / release sealing
+- Create guarded local commits only under Section 6 / A4.7 conditions or explicit user request
+- Create local tags only when the task explicitly requires baseline / release sealing
+- Push commits or tags only with separate explicit remote authorization
 
 Forbidden:
 
@@ -171,7 +221,8 @@ Allowed automatically:
 - Modify Review Console specification files
 - Modify review session schema
 - Run `node --check`
-- Commit / push
+- Create guarded local commits only under Section 6 / A4.7 conditions or explicit user request
+- Push only with separate explicit remote authorization
 
 Forbidden:
 
@@ -202,7 +253,9 @@ Allowed automatically:
 - Modify authorization templates
 - Modify dry-run contracts
 - Modify validation checklists
-- Commit / push / tag
+- Create guarded local commits only under Section 6 / A4.7 conditions or explicit user request
+- Create local tags only when explicitly requested for a baseline / release / closeout
+- Push commits or tags only with separate explicit remote authorization
 
 Forbidden:
 
@@ -261,6 +314,85 @@ Use for:
 
 ---
 
+### A4.5 — Smart Local Autopilot
+
+Default smart local mode.
+
+A4.5 is designed for speed and quality. It expands Codex's local initiative without expanding production authority.
+
+Allowed automatically:
+
+- Inspect repository state, docs, schemas, scripts, tests, and `.agent_board`
+- Detect stale baseline, roadmap, manifest, release notes, validation log, checkpoint, or handoff state
+- Repair local documentation, schema examples, validation checklist, manifest, release notes, roadmap, and `.agent_board` drift
+- Add or update validation scripts for existing project records
+- Add or update authorization package templates
+- Run local validation commands already defined by this repository
+- Run syntax checks for changed JavaScript or PowerShell validation helpers
+- Apply one narrow obvious fix after a validation failure when the fix remains local and inside scope
+- Draft the smallest A5 authorization package when the next useful step requires real production execution
+- Report a checkpoint with validation status, boundary confirmation, and one recommended next step
+
+Forbidden automatically:
+
+- Read or modify real VCPChat / VCPToolBox
+- Read real `plugin-manifest.json`
+- Call plugins, APIs, or DailyNote
+- Write VCP memory
+- Create images
+- Create executable production integration code
+- Modify external repositories
+- Push, tag-push, release, deploy, or perform any remote write without explicit remote authorization
+- Use destructive Git or filesystem operations
+
+Task selection priority:
+
+```text
+1. failed validation
+2. dirty or unsafe worktree state
+3. stale baseline / roadmap / manifest / release notes / handoff
+4. missing validation for existing records
+5. schema / example / checklist mismatch
+6. authorization template gaps
+7. static prototype consistency
+8. next-stage planning
+9. A5 preflight package drafting
+```
+
+Execution budget:
+
+```text
+one main goal per loop
+one narrow automatic fix after a validation failure
+one relevant validation set before checkpoint
+stop when scope expands beyond local safe work
+recommend only one next step at closeout
+```
+
+---
+
+### A4.7 — Guarded Local Commit Autopilot
+
+A4.7 allows faster local checkpoints after A4.5 work, but it does not authorize any remote write.
+
+Codex may create a local commit automatically only when all Section 6 conditions are met and the commit is a coherent local checkpoint for the current task.
+
+A4.7 does not authorize:
+
+```text
+git push
+tag push
+release publication
+force push
+history rewrite
+external repository modification
+production execution
+```
+
+If any user-owned or unrelated change is present, Codex must not include it in an automatic commit.
+
+---
+
 ### A5 — Autonomous Production Execution
 
 Default: forbidden.
@@ -293,7 +425,47 @@ Examples of A5 actions:
 
 A5 requires a separate explicit authorization package before any production action begins. The authorization must name the real target systems, exact allowed paths or objects, allowed commands or operations, forbidden paths or operations, write boundaries, validation requirements, rollback path, reviewer, and stop conditions.
 
-A4 is the pre-production authorization gate. A5 is autonomous operation after that gate has been explicitly opened.
+Minimum A5 authorization package:
+
+```yaml
+a5_authorization_package:
+  target_systems: []
+  exact_allowed_paths: []
+  forbidden_paths: []
+  allowed_commands: []
+  forbidden_commands: []
+  allowed_operations: []
+  selected_plugin_id: null
+  selected_plugin_command: null
+  selected_plugin_model: null
+  max_plugin_calls: 0
+  input_reference: null
+  output_directory_ref: null
+  overwrite_existing_files_allowed: false
+  daily_note_direct_write_allowed: false
+  memory_delta_only: true
+  rollback_plan: null
+  reviewer: null
+  validation_required: []
+  stop_conditions: []
+```
+
+Missing, ambiguous, stale, or overly broad fields invalidate the package.
+
+For the current v10.8 gate, the next real image generation additionally requires:
+
+```text
+prompt_approved=true
+selected_plugin_id=DoubaoGen
+selected_plugin_command=generate
+selected_plugin_model=doubao-seedream-5-0-260128
+max_plugin_calls=1
+overwrite_existing_files_allowed=false
+daily_note_direct_write_allowed=false
+memory_delta_only=true
+```
+
+A4 / A4.5 are the pre-production authorization gate. A5 is autonomous operation after that gate has been explicitly opened.
 
 Without an active A5 authorization package, every A5 action remains a Hard Stop.
 
@@ -318,7 +490,7 @@ need to call an API
 need to call DailyNote
 need to write VCP memory
 need to create an image
-need to create executable code
+need to create production executable code or a real executable adapter entrypoint
 need to modify an external repository
 need to force push / reset / rebase
 suspected secret found
@@ -343,15 +515,20 @@ Do not continue modifying files.
 
 ---
 
-## 6. Automatic Commit Rules
+## 6. Guarded Local Commit Rules
 
-Codex may commit automatically only if all conditions are met:
+Codex may create a local commit automatically only in A4.7 or when the user explicitly requested a commit.
+
+All conditions must be met:
 
 ```text
 changes are limited to the current project repository
 changes are limited to the task-authorized scope
+changes are coherent and related
+no user-owned or unrelated changes are included
 no P0 / P1 finding
 git diff --check passes
+relevant project validation passes or validation gap is explicitly documented
 no real secret found
 no image file found
 no real plugin execution code found
@@ -365,6 +542,8 @@ schema boundaries are not loosened
 memory_delta / DailyNote Chinese rules are not broken
 Review Console remains isolated
 dispatch_plan / Adapter remains no-execution / dry-run only
+diff was inspected
+worktree status was inspected before commit
 ```
 
 Recommended commit message format:
@@ -386,9 +565,11 @@ changes
 
 ---
 
-## 7. Automatic Tag Rules
+## 7. Guarded Tag Rules
 
-Codex may create a tag only when the task explicitly requires sealing a baseline, release, or closeout.
+Codex may create a local tag only when the task explicitly requires sealing a baseline, release, or closeout.
+
+Tag push always requires separate explicit remote authorization.
 
 Allowed tag patterns:
 
@@ -422,9 +603,18 @@ force pushing a tag
 
 ---
 
-## 8. Automatic Push Rules
+## 8. Explicit Remote Push Rules
 
-Codex may push commits and tags only if:
+Codex may push commits and tags only after explicit remote authorization.
+
+The authorization must name the exact command or target, such as:
+
+```text
+git push origin master
+git push origin <tag-name>
+```
+
+Codex may push only if:
 
 ```text
 the current branch tracks origin
@@ -455,6 +645,32 @@ After every modification, Codex must run or equivalently complete:
 ```bash
 git status --short --branch
 git diff --check
+```
+
+Use the narrowest validation set that proves the change:
+
+```text
+docs only:
+  git status --short --branch
+  git diff --check
+
+JavaScript changed:
+  node --check <changed-js-file>
+
+PowerShell validation helper changed:
+  parse / run the changed helper when safe
+
+README / MANIFEST / RELEASE_NOTES / roadmap / AGENTS changed:
+  scripts/validate-agent-image-lab-local.ps1
+  scripts/validate_mvp.ps1
+
+v10.x record or schema example changed:
+  corresponding scripts/validate_v10_*.js
+  scripts/validate_mvp.ps1 when project gates or indexes changed
+
+.agent_board changed:
+  scripts/validate_agent_board_state.js when applicable
+  scripts/validate-agent-image-lab-local.ps1
 ```
 
 If any JavaScript file is added or modified, Codex must run:
@@ -711,14 +927,28 @@ v0.2 final baseline
 Review Console static prototype
 v0.3 adapter recon authorization gates
 v2.1 real-read authorization chain baseline
+v7.46 remote-debug relaunch runtime verification
+v10.8 A5 guarded delivery baseline
 ```
 
-Any future stage involving real external source reading, real source analysis, real integration, or real execution must be separately authorized through A5.
+Current remote baseline tag:
+
+```text
+v10.8-a5-guarded-delivery-baseline
+```
+
+Current next safe production gate:
+
+```text
+BLOCKED until explicit prompt approval plus separate real generation authorization
+```
+
+Any future stage involving real external source reading, real source analysis, real integration, real plugin execution, real image generation, DailyNote write, VCP memory write, release publication, or external repository modification must be separately authorized through A5.
 
 Default allowed continuation:
 
 ```text
-local A4 sustained autopilot inside approved project surfaces
+local A4.5 smart autopilot inside approved project surfaces
 documentation
 schema
 static prototype
@@ -726,4 +956,6 @@ authorization templates
 closeout
 validation
 no-execution / no-external-read gate hardening
+.agent_board maintenance
+guarded local commits under A4.7 conditions
 ```
