@@ -69,6 +69,13 @@
           <span>标注备注</span>
           <textarea id="annotationNote" rows="3">对比参考版本后，当前版本的主体构图更稳定，仍需留意细节噪点。</textarea>
         </label>
+        <div class="template-actions">
+          <button id="tplComposition" type="button">构图稳定</button>
+          <button id="tplDetailNoise" type="button">细节噪点</button>
+          <button id="tplTextArtifact" type="button">疑似文字伪影</button>
+          <button id="tplNeedsRetry" type="button">需要重跑</button>
+          <button id="tplCandidateNoMemory" type="button">候选但暂不入记忆</button>
+        </div>
         <label class="field">
           <span>资产状态</span>
           <select id="assetStatus">
@@ -149,6 +156,26 @@
         </ul>
       </section>
 
+      <section class="panel handoff-panel">
+        <h2>Adapter 安全摘要</h2>
+        <dl class="meta">
+          <div><dt>交接状态</dt><dd id="handoffStatus">-</dd></div>
+          <div><dt>执行状态</dt><dd id="handoffExecution">-</dd></div>
+          <div><dt>插件调用</dt><dd id="handoffPluginCalls">-</dd></div>
+        </dl>
+        <p id="handoffSummary"></p>
+        <div class="handoff-grid">
+          <div>
+            <h3>允许</h3>
+            <ul id="handoffAllowed"></ul>
+          </div>
+          <div>
+            <h3>禁止</h3>
+            <ul id="handoffForbidden"></ul>
+          </div>
+        </div>
+      </section>
+
       <section class="panel output-panel">
         <div class="panel-title-row">
           <h2>草案视图</h2>
@@ -157,7 +184,36 @@
             <button id="viewTechnical" type="button" data-active="false">技术草案</button>
           </div>
         </div>
-        <pre id="readableDraft"></pre>
+        <div id="readableDraft" class="readable-draft-cards">
+          <article>
+            <h3>评审草案</h3>
+            <dl class="meta">
+              <div><dt>状态</dt><dd id="reviewCardStatus">-</dd></div>
+              <div><dt>评分</dt><dd id="reviewCardScore">-</dd></div>
+              <div><dt>结论</dt><dd id="reviewCardVerdict">-</dd></div>
+            </dl>
+            <p id="reviewCardComment"></p>
+          </article>
+          <article>
+            <h3>资产归档草案</h3>
+            <dl class="meta">
+              <div><dt>资产结论</dt><dd id="assetCardStatus">-</dd></div>
+              <div><dt>当前版本</dt><dd id="assetCardVersion">-</dd></div>
+              <div><dt>下一步</dt><dd id="assetCardNext">-</dd></div>
+            </dl>
+            <p id="assetCardDiff"></p>
+          </article>
+          <article>
+            <h3>记忆申请草案</h3>
+            <dl class="meta">
+              <div><dt>标题</dt><dd id="memoryCardTitle">-</dd></div>
+              <div><dt>目标</dt><dd id="memoryCardTarget">-</dd></div>
+              <div><dt>状态</dt><dd id="memoryCardDecision">-</dd></div>
+            </dl>
+            <p id="memoryCardBody"></p>
+            <p id="memoryCardBoundary"></p>
+          </article>
+        </div>
         <pre id="draftOutput" hidden></pre>
       </section>
     </main>

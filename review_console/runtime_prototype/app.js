@@ -37,6 +37,11 @@ const els = {
   humanScoreOut: document.getElementById("humanScoreOut"),
   humanComment: document.getElementById("humanComment"),
   annotationNote: document.getElementById("annotationNote"),
+  tplComposition: document.getElementById("tplComposition"),
+  tplDetailNoise: document.getElementById("tplDetailNoise"),
+  tplTextArtifact: document.getElementById("tplTextArtifact"),
+  tplNeedsRetry: document.getElementById("tplNeedsRetry"),
+  tplCandidateNoMemory: document.getElementById("tplCandidateNoMemory"),
   assetStatus: document.getElementById("assetStatus"),
   quickCandidate: document.getElementById("quickCandidate"),
   quickAccept: document.getElementById("quickAccept"),
@@ -64,9 +69,28 @@ const els = {
   checkHumanDecision: document.getElementById("checkHumanDecision"),
   checkGuard: document.getElementById("checkGuard"),
   checkWriteBoundary: document.getElementById("checkWriteBoundary"),
+  handoffStatus: document.getElementById("handoffStatus"),
+  handoffExecution: document.getElementById("handoffExecution"),
+  handoffPluginCalls: document.getElementById("handoffPluginCalls"),
+  handoffSummary: document.getElementById("handoffSummary"),
+  handoffAllowed: document.getElementById("handoffAllowed"),
+  handoffForbidden: document.getElementById("handoffForbidden"),
   viewReadable: document.getElementById("viewReadable"),
   viewTechnical: document.getElementById("viewTechnical"),
   readableDraft: document.getElementById("readableDraft"),
+  reviewCardStatus: document.getElementById("reviewCardStatus"),
+  reviewCardScore: document.getElementById("reviewCardScore"),
+  reviewCardVerdict: document.getElementById("reviewCardVerdict"),
+  reviewCardComment: document.getElementById("reviewCardComment"),
+  assetCardStatus: document.getElementById("assetCardStatus"),
+  assetCardVersion: document.getElementById("assetCardVersion"),
+  assetCardNext: document.getElementById("assetCardNext"),
+  assetCardDiff: document.getElementById("assetCardDiff"),
+  memoryCardTitle: document.getElementById("memoryCardTitle"),
+  memoryCardTarget: document.getElementById("memoryCardTarget"),
+  memoryCardDecision: document.getElementById("memoryCardDecision"),
+  memoryCardBody: document.getElementById("memoryCardBody"),
+  memoryCardBoundary: document.getElementById("memoryCardBoundary"),
   draftOutput: document.getElementById("draftOutput")
 };
 
@@ -246,6 +270,32 @@ function applyQuickDecision(decision) {
   } else {
     els.humanApproved.checked = false;
     els.assetStatus.value = "candidate";
+    els.memoryApproval.value = "pending";
+  }
+  render();
+}
+
+function appendTextareaText(textarea, text) {
+  const current = textarea.value.trim();
+  textarea.value = current ? `${current}\n${text}` : text;
+}
+
+function applyTemplate(templateId) {
+  if (templateId === "composition") {
+    appendTextareaText(els.diffStrengths, "构图稳定，主体关系清楚。");
+    appendTextareaText(els.annotationNote, "构图稳定，可作为候选优势记录。");
+  } else if (templateId === "detail_noise") {
+    appendTextareaText(els.diffIssues, "细节噪点需要人工复核。");
+    appendTextareaText(els.annotationNote, "局部细节仍有噪点风险。");
+  } else if (templateId === "text_artifact") {
+    appendTextareaText(els.diffIssues, "存在疑似文字伪影，需要谨慎处理。");
+    appendTextareaText(els.humanComment, "注意：疑似文字伪影不能自动忽略。");
+  } else if (templateId === "needs_retry") {
+    appendTextareaText(els.diffNext, "建议进入下一轮重跑或修 prompt。");
+    els.assetStatus.value = "draft";
+    els.humanApproved.checked = false;
+  } else if (templateId === "candidate_no_memory") {
+    appendTextareaText(els.diffNext, "可作为候选继续评审，但暂不提交记忆写入申请。");
     els.memoryApproval.value = "pending";
   }
   render();
@@ -471,31 +521,9 @@ function buildDraft() {
         rejection_reason_cn: memoryApproval.rejection_reason_cn
       }
     },
+    adapter_dry_run_handoff_draft: runtimeGuard.clone(session.adapter_dry_run_handoff),
     prototype_guard: runtimeGuard.clone(draftGuard)
   };
-}
-
-function buildReadableDraft(draft) {
-  const reviewDraft = draft.review_session_draft;
-  const imageCaseDraft = draft.image_case_draft;
-  const memoryDeltaDraft = draft.memory_delta_draft;
-  const lines = [
-    `评审状态：${reviewStatusLabel(reviewDraft.status)}`,
-    `资产结论：${assetStatusLabel(imageCaseDraft.asset_status)}`,
-    `当前版本：${reviewDraft.current_version_id}`,
-    `对比版本：${reviewDraft.compare_version_id || "不对比"}`,
-    `人工评分：${reviewDraft.final_review.total_score}`,
-    `人工评论：${reviewDraft.final_review.note_cn || "未填写"}`,
-    `改进点：${reviewDraft.version_comparison.strengths_cn}`,
-    `风险点：${reviewDraft.version_comparison.issues_cn}`,
-    `下一步：${reviewDraft.version_comparison.next_step_cn}`,
-    `记忆标题：${memoryDeltaDraft.chinese_diary_title}`,
-    `记忆正文：${memoryDeltaDraft.chinese_diary_content || "未填写"}`,
-    `记忆状态：${memoryStatusLabel(memoryDeltaDraft.approval_status)}`,
-    `写入申请：${writeRequestLabel(memoryDeltaDraft.final_decision.should_write_to_vcp)}`,
-    `安全边界：${runtimeGuard.guardIsClean(draft.prototype_guard) ? "无外部副作用" : "存在风险"}`
-  ];
-  return lines.join("\n");
 }
 
 function submitDraftToHost(draft) {
@@ -507,6 +535,15 @@ function submitDraftToHost(draft) {
   return ack;
 }
 
+function renderList(el, items) {
+  el.innerHTML = "";
+  for (const text of items) {
+    const item = document.createElement("li");
+    item.textContent = text;
+    el.appendChild(item);
+  }
+}
+
 function render() {
   const draft = buildDraft();
   const version = currentVersion();
@@ -514,6 +551,7 @@ function render() {
   const reviewDraft = draft.review_session_draft;
   const imageCaseDraft = draft.image_case_draft;
   const memoryDeltaDraft = draft.memory_delta_draft;
+  const handoffDraft = draft.adapter_dry_run_handoff_draft;
   els.humanScoreOut.textContent = els.humanScore.value;
   els.assetRef.textContent = version.asset_ref;
   els.assetBox.textContent = comparisonVersion
@@ -539,6 +577,12 @@ function render() {
   els.memoryPreviewTarget.textContent = memoryDeltaDraft.target_notebook || "-";
   els.memoryPreviewDecision.textContent = writeRequestLabel(memoryDeltaDraft.final_decision.should_write_to_vcp);
   els.memoryPreviewBody.textContent = memoryDeltaDraft.chinese_diary_content || "未填写中文记忆正文。";
+  els.handoffStatus.textContent = handoffDraft.status_cn;
+  els.handoffExecution.textContent = handoffDraft.execution_blocked ? "已阻止真实执行" : "存在执行风险";
+  els.handoffPluginCalls.textContent = `${handoffDraft.max_plugin_calls} 次`;
+  els.handoffSummary.textContent = handoffDraft.gatekeeper_summary_cn;
+  renderList(els.handoffAllowed, handoffDraft.allowed_actions_cn);
+  renderList(els.handoffForbidden, handoffDraft.forbidden_actions_cn);
   els.checkHumanComment && setChecklistItem(
     els.checkHumanComment,
     reviewDraft.review_preflight.human_comment_present,
@@ -569,7 +613,19 @@ function render() {
     "没有真实写入 DailyNote/VCP memory",
     "检测到真实写入风险"
   );
-  els.readableDraft.textContent = buildReadableDraft(draft);
+  els.reviewCardStatus.textContent = reviewStatusLabel(reviewDraft.status);
+  els.reviewCardScore.textContent = `${reviewDraft.final_review.total_score} / 100`;
+  els.reviewCardVerdict.textContent = reviewDraft.acceptance_verdict.status_cn;
+  els.reviewCardComment.textContent = reviewDraft.final_review.note_cn || "未填写人工评论。";
+  els.assetCardStatus.textContent = assetStatusLabel(imageCaseDraft.asset_status);
+  els.assetCardVersion.textContent = reviewDraft.current_version_id;
+  els.assetCardNext.textContent = reviewDraft.version_comparison.next_step_cn;
+  els.assetCardDiff.textContent = `改进点：${reviewDraft.version_comparison.strengths_cn}\n风险点：${reviewDraft.version_comparison.issues_cn}`;
+  els.memoryCardTitle.textContent = memoryDeltaDraft.chinese_diary_title || "-";
+  els.memoryCardTarget.textContent = memoryDeltaDraft.target_notebook || "-";
+  els.memoryCardDecision.textContent = writeRequestLabel(memoryDeltaDraft.final_decision.should_write_to_vcp);
+  els.memoryCardBody.textContent = memoryDeltaDraft.chinese_diary_content || "未填写中文记忆正文。";
+  els.memoryCardBoundary.textContent = "当前只是写入申请草案，没有真实写入。";
   els.draftOutput.textContent = JSON.stringify(draft, null, 2);
   try {
     const ack = submitDraftToHost(draft);
@@ -594,6 +650,11 @@ function init() {
   els.quickCandidate.addEventListener("click", () => applyQuickDecision("candidate"));
   els.quickAccept.addEventListener("click", () => applyQuickDecision("accept"));
   els.quickReject.addEventListener("click", () => applyQuickDecision("reject"));
+  els.tplComposition.addEventListener("click", () => applyTemplate("composition"));
+  els.tplDetailNoise.addEventListener("click", () => applyTemplate("detail_noise"));
+  els.tplTextArtifact.addEventListener("click", () => applyTemplate("text_artifact"));
+  els.tplNeedsRetry.addEventListener("click", () => applyTemplate("needs_retry"));
+  els.tplCandidateNoMemory.addEventListener("click", () => applyTemplate("candidate_no_memory"));
   els.viewReadable.addEventListener("click", () => {
     setDraftView("readable");
     render();

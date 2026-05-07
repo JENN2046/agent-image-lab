@@ -70,6 +70,10 @@ body {
   border-color: #4b5f7a;
 }
 
+.handoff-panel {
+  border-color: #665b3d;
+}
+
 .eyebrow {
   margin: 0 0 6px;
   color: #7fd7c4;
@@ -155,6 +159,7 @@ dd {
 }
 
 .quick-actions,
+.template-actions,
 .view-switch {
   display: flex;
   flex-wrap: wrap;
@@ -163,6 +168,7 @@ dd {
 }
 
 .quick-actions button,
+.template-actions button,
 .view-switch button {
   border: 1px solid #45505c;
   border-radius: 6px;
@@ -172,10 +178,55 @@ dd {
 }
 
 .quick-actions button:hover,
+.template-actions button:hover,
 .view-switch button:hover,
 .view-switch button[data-active="true"] {
   border-color: #7fd7c4;
   color: #d9fff7;
+}
+
+.handoff-grid,
+.readable-draft-cards {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.handoff-grid h3,
+.readable-draft-cards h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.handoff-grid ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding-left: 18px;
+  color: #cfd7df;
+  line-height: 1.5;
+}
+
+.handoff-panel p {
+  color: #cfd7df;
+  line-height: 1.6;
+}
+
+.readable-draft-cards {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.readable-draft-cards article {
+  border: 1px solid #303842;
+  border-radius: 8px;
+  padding: 12px;
+  background: #151a20;
+}
+
+.readable-draft-cards p {
+  margin: 12px 0 0;
+  color: #cfd7df;
+  line-height: 1.6;
 }
 
 .memory-request-preview {
@@ -252,7 +303,9 @@ pre {
   }
 
   .version-grid,
-  .diff-grid {
+  .diff-grid,
+  .handoff-grid,
+  .readable-draft-cards {
     grid-template-columns: 1fr;
   }
 

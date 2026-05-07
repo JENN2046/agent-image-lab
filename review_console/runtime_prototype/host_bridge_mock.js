@@ -78,6 +78,22 @@ window.ImageLabHostBridge = (() => {
       action: "keep_candidate",
       note_cn: "如需进入真实 VCPChat 子窗口或 DailyNote 写入，必须走独立授权。"
     },
+    adapter_dry_run_handoff: {
+      status_cn: "仅草案交接",
+      gatekeeper_summary_cn: "当前 runtime prototype 只能生成评审草案，不能执行插件、API、DailyNote、图片保存或记忆写入。",
+      selected_plugin: null,
+      max_plugin_calls: 0,
+      execution_blocked: true,
+      allowed_actions_cn: ["标记候选", "拒收", "请求复查", "生成本地草案"],
+      forbidden_actions_cn: ["调用插件", "调用 API", "写入 DailyNote", "写入 VCP memory", "保存或创建图片"],
+      no_execution_guard: {
+        api_called: false,
+        daily_note_called: false,
+        vcp_plugin_called: false,
+        disk_write_performed: false,
+        image_file_created: false
+      }
+    },
     image_case_seed: {
       image_type: "Photo Studio OS dashboard",
       input_assets: ["references/photo_studio_os/accepted-reference.placeholder"],

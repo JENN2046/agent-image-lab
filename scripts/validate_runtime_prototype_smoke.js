@@ -59,6 +59,11 @@ function createRuntimeContext() {
   add("humanScoreOut", { textContent: "84" });
   add("humanComment", { value: "人工评审确认该版本可作为候选，但仍需保留已知视觉偏差说明。" });
   add("annotationNote", { value: "对比参考版本后，当前版本的主体构图更稳定，仍需留意细节噪点。" });
+  add("tplComposition");
+  add("tplDetailNoise");
+  add("tplTextArtifact");
+  add("tplNeedsRetry");
+  add("tplCandidateNoMemory");
   add("assetStatus", { value: "candidate" });
   add("quickCandidate");
   add("quickAccept");
@@ -86,9 +91,28 @@ function createRuntimeContext() {
   add("checkHumanDecision");
   add("checkGuard");
   add("checkWriteBoundary");
+  add("handoffStatus");
+  add("handoffExecution");
+  add("handoffPluginCalls");
+  add("handoffSummary");
+  add("handoffAllowed");
+  add("handoffForbidden");
   add("viewReadable");
   add("viewTechnical");
   add("readableDraft");
+  add("reviewCardStatus");
+  add("reviewCardScore");
+  add("reviewCardVerdict");
+  add("reviewCardComment");
+  add("assetCardStatus");
+  add("assetCardVersion");
+  add("assetCardNext");
+  add("assetCardDiff");
+  add("memoryCardTitle");
+  add("memoryCardTarget");
+  add("memoryCardDecision");
+  add("memoryCardBody");
+  add("memoryCardBoundary");
   add("draftOutput");
 
   const context = {
@@ -186,8 +210,15 @@ function main() {
   assert(elements.get("hostStatus").textContent.includes("已接收安全草案"), "Initial host ack must be accepted.");
   assert(elements.get("hostSubmittedAt").textContent !== "-", "Initial host submit timestamp must be present.");
   assert(elements.get("boundaryBanner").textContent.includes("没有真实写入"), "Boundary banner must show no real write.");
-  assert(elements.get("readableDraft").textContent.includes("评审状态：人工评审中"), "Readable draft must be visible and Chinese.");
+  assert(elements.get("reviewCardStatus").textContent === "人工评审中", "Review card must show Chinese review status.");
+  assert(elements.get("assetCardStatus").textContent === "候选", "Asset card must show Chinese asset status.");
+  assert(elements.get("memoryCardDecision").textContent === "未形成写入申请", "Memory card must show no write request.");
   assert(elements.get("draftOutput").hidden === true, "Technical draft must be hidden by default.");
+  assert(elements.get("handoffStatus").textContent === "仅草案交接", "Handoff status must render.");
+  assert(elements.get("handoffExecution").textContent === "已阻止真实执行", "Handoff execution block must render.");
+  assert(initialDraft.adapter_dry_run_handoff_draft.execution_blocked === true, "Adapter handoff draft must block execution.");
+  assert(initialDraft.adapter_dry_run_handoff_draft.max_plugin_calls === 0, "Adapter handoff draft must allow zero plugin calls.");
+  assert(initialDraft.adapter_dry_run_handoff_draft.forbidden_actions_cn.includes("调用插件"), "Adapter handoff must forbid plugin calls.");
   assert(initialDraft.image_case_draft.asset_status === "candidate", "Initial asset status must be candidate.");
   assert(elements.get("summarySessionStatus").textContent === "人工评审中", "Initial summary must show Chinese review status.");
   assert(elements.get("summaryAssetStatus").textContent === "候选", "Initial summary must show Chinese asset status.");
@@ -220,6 +251,11 @@ function main() {
   assert(initialDraft.memory_delta_draft.write_mode === "draft", "Initial memory write mode must be draft.");
   assert(initialDraft.memory_delta_draft.final_decision.should_write_to_vcp === false, "Initial memory write request must be false.");
   assert(runtimeGuard.guardIsClean(initialDraft.prototype_guard), "Initial prototype guard must be clean.");
+
+  dispatchClick(elements, "tplTextArtifact");
+  const templatedDraft = parseDraft(elements);
+  assert(templatedDraft.review_session_draft.human_review.note_cn.includes("疑似文字伪影"), "Template button must append Chinese review note.");
+  assert(templatedDraft.review_session_draft.version_comparison.issues_cn.includes("疑似文字伪影"), "Template button must append issue text.");
 
   dispatchClick(elements, "quickAccept");
 
@@ -304,7 +340,12 @@ function main() {
     },
     draft_view_switch: {
       technical_view_available: elements.get("draftOutput").textContent.includes("review_session_draft"),
-      readable_view_cn: elements.get("readableDraft").textContent.includes("评审状态")
+      readable_view_cn: ["人工评审中", "已批准", "已拒收"].includes(elements.get("reviewCardStatus").textContent)
+    },
+    adapter_handoff: {
+      execution_blocked: initialDraft.adapter_dry_run_handoff_draft.execution_blocked,
+      max_plugin_calls: initialDraft.adapter_dry_run_handoff_draft.max_plugin_calls,
+      plugin_call_forbidden: initialDraft.adapter_dry_run_handoff_draft.forbidden_actions_cn.includes("调用插件")
     },
     approved: {
       asset_status: approvedDraft.image_case_draft.asset_status,
