@@ -49,8 +49,309 @@ window.ImageLabRuntimeGuard = (() => {
     return values.every((guard) => guard === undefined || guardIsClean(guard));
   }
 
+  function executionFlagsAreFalse(flags) {
+    if (!flags || typeof flags !== "object") return false;
+    return [
+      "bridge_called",
+      "plugin_called",
+      "api_called",
+      "daily_note_called",
+      "vcp_memory_written",
+      "image_created",
+      "commit_performed",
+      "tag_performed",
+      "push_performed",
+      "pr_created",
+      "release_created"
+    ].every((key) => flags[key] === false);
+  }
+
+  function inactiveAuthorizationCapsulesAreSafe(draft) {
+    const packageDraft = draft.inactive_authorization_capsules_draft;
+    if (!packageDraft || typeof packageDraft !== "object") return false;
+    if (packageDraft.package_status !== "draft_only") return false;
+    if (packageDraft.authorization_status !== "inactive_package") return false;
+    if (packageDraft.side_effects_performed !== false) return false;
+    if (!guardIsClean(packageDraft.no_execution_guard)) return false;
+    const capsules = requireArray(packageDraft.capsules);
+    if (capsules.length === 0 || packageDraft.capsule_count !== capsules.length) return false;
+    for (const capsule of capsules) {
+      if (capsule.authorization_status !== "inactive_package") return false;
+      if (capsule.activation_required !== true) return false;
+      if (!executionFlagsAreFalse(capsule.execution_flags)) return false;
+      if (!guardIsClean(capsule.no_execution_guard)) return false;
+      if (!capsule.rollback_plan_cn || !capsule.activation_rule_cn) return false;
+      if (!Array.isArray(capsule.forbidden_actions_cn) || capsule.forbidden_actions_cn.length === 0) return false;
+      if (!Array.isArray(capsule.sanitization_rules_cn) || capsule.sanitization_rules_cn.length === 0) return false;
+      if (!capsule.max_call_counts || typeof capsule.max_call_counts !== "object") return false;
+    }
+    return true;
+  }
+
+  function runtimeReviewStateIsSafe(draft) {
+    const runtimeState = draft.runtime_review_state_draft;
+    if (!runtimeState || typeof runtimeState !== "object") return false;
+    if (runtimeState.package_status !== "draft_only") return false;
+    if (runtimeState.side_effects_performed !== false) return false;
+    if (!guardIsClean(runtimeState.no_execution_guard)) return false;
+    if (!Array.isArray(runtimeState.mismatch_items_cn)) return false;
+    if (runtimeState.mismatch_items_cn.length !== 0) return false;
+    const state = runtimeState.normalized_state || {};
+    if (state.write_authorized === true && state.write_requested !== true) return false;
+    if (state.write_authorized === true && state.write_performed === true) return false;
+    if (state.human_override_performed === true && state.prompt_compliance_complete === true) return false;
+    if (["candidate", "accepted_candidate", "accepted_by_human_override", "rejected", "blocked"].includes(state.asset_state_key) === false) {
+      return false;
+    }
+    return true;
+  }
+
+  function localCommitScopePlanIsSafe(draft) {
+    const plan = draft.local_commit_scope_plan_draft;
+    if (!plan || typeof plan !== "object") return false;
+    if (plan.package_status !== "draft_only") return false;
+    if (plan.staged_changes_present !== false) return false;
+    if (plan.commit_allowed !== false) return false;
+    if (plan.tag_allowed !== false) return false;
+    if (plan.push_allowed !== false) return false;
+    if (plan.pr_allowed !== false) return false;
+    if (plan.release_allowed !== false) return false;
+    if (plan.side_effects_performed !== false) return false;
+    if (!guardIsClean(plan.no_execution_guard)) return false;
+    if (!Array.isArray(plan.scope_groups) || plan.scope_groups.length < 4) return false;
+    if (!Array.isArray(plan.rollback_guidance_cn) || plan.rollback_guidance_cn.length === 0) return false;
+    const combinedRollback = plan.rollback_guidance_cn.join("\n").toLowerCase();
+    if (combinedRollback.includes("reset --hard") || combinedRollback.includes("git clean")) return false;
+    return true;
+  }
+
+  function bridgeMockRoundtripCandidateIsSafe(draft) {
+    const roundtrip = draft.bridge_mock_roundtrip_candidate_draft;
+    if (!roundtrip || typeof roundtrip !== "object") return false;
+    if (roundtrip.package_status !== "draft_only") return false;
+    if (roundtrip.roundtrip_status !== "mock_roundtrip_candidate") return false;
+    if (roundtrip.bridge_mode !== "project_local_mock") return false;
+    if (roundtrip.source_fixture_policy !== "project_local_fixtures_only") return false;
+    if (roundtrip.production_bridge_invocation_performed !== false) return false;
+    if (roundtrip.real_cdp_called !== false) return false;
+    if (roundtrip.submitDraft_called !== false) return false;
+    if (roundtrip.side_effects_performed !== false) return false;
+    if (roundtrip.plugin_called !== false) return false;
+    if (roundtrip.api_called !== false) return false;
+    if (roundtrip.daily_note_called !== false) return false;
+    if (roundtrip.vcp_memory_written !== false) return false;
+    if (roundtrip.image_created !== false) return false;
+    if (!guardIsClean(roundtrip.no_execution_guard)) return false;
+    const methods = requireArray(roundtrip.selected_methods);
+    if (methods.length !== 2 || methods[0] !== "loadSession" || methods[1] !== "previewDraft") return false;
+    const calls = roundtrip.bridge_calls_observed || {};
+    if (calls.mock_only !== true) return false;
+    if (calls.total !== 2) return false;
+    if (calls.loadSession !== 1) return false;
+    if (calls.previewDraft !== 1) return false;
+    if (calls.cancel !== 0) return false;
+    if (calls.submitDraft !== 0) return false;
+    if (calls.production_submitDraft !== 0) return false;
+    const adapterRef = roundtrip.adapter_handoff_ref || {};
+    if (adapterRef.execution_blocked !== true || adapterRef.max_plugin_calls !== 0 || adapterRef.selected_plugin !== null) {
+      return false;
+    }
+    const acknowledgements = requireArray(roundtrip.ack_summaries);
+    if (acknowledgements.length !== 2) return false;
+    return acknowledgements.every(
+      (ack) =>
+        ack &&
+        ack.mock_only === true &&
+        ack.side_effects_performed === false &&
+        ack.plugin_called === false &&
+        ack.api_called === false &&
+        ack.daily_note_called === false &&
+        ack.vcp_memory_written === false &&
+        ack.image_created === false &&
+        Array.isArray(ack.ack_keys) &&
+        ack.ack_keys.length > 0
+    );
+  }
+
+  function realBridgeAuthorizationPackageIsSafe(draft) {
+    const packageDraft = draft.real_bridge_authorization_package_draft;
+    if (!packageDraft || typeof packageDraft !== "object") return false;
+    if (packageDraft.package_status !== "draft_only") return false;
+    if (packageDraft.authorization_status !== "inactive_package") return false;
+    if (packageDraft.activation_required !== true) return false;
+    if (packageDraft.execution_authorized_by_this_record !== false) return false;
+    if (packageDraft.production_bridge_invocation_performed !== false) return false;
+    if (packageDraft.real_cdp_called !== false) return false;
+    if (packageDraft.source_read_performed !== false) return false;
+    if (packageDraft.submitDraft_allowed !== false) return false;
+    if (packageDraft.submitDraft_called !== false) return false;
+    if (packageDraft.side_effects_performed !== false) return false;
+    if (packageDraft.plugin_called !== false) return false;
+    if (packageDraft.api_called !== false) return false;
+    if (packageDraft.daily_note_called !== false) return false;
+    if (packageDraft.vcp_memory_written !== false) return false;
+    if (packageDraft.image_created !== false) return false;
+    if (!guardIsClean(packageDraft.no_execution_guard)) return false;
+    const allowedMethods = requireArray(packageDraft.allowed_methods);
+    const forbiddenMethods = requireArray(packageDraft.forbidden_methods);
+    if (allowedMethods.join("|") !== "cancel|loadSession|previewDraft") return false;
+    if (!forbiddenMethods.includes("submitDraft")) return false;
+    if (packageDraft.max_bridge_calls_per_method !== 1) return false;
+    if (packageDraft.target_root_refs?.raw_path_stored !== false) return false;
+    const bridgeRef = packageDraft.bridge_mock_roundtrip_ref || {};
+    if (bridgeRef.submitDraft_calls !== 0) return false;
+    return Array.isArray(packageDraft.required_authorization_fields) && packageDraft.required_authorization_fields.length > 0;
+  }
+
+  function pluginReliabilityPromptDisciplineIsSafe(draft) {
+    const packageDraft = draft.plugin_reliability_prompt_discipline_draft;
+    if (!packageDraft || typeof packageDraft !== "object") return false;
+    if (packageDraft.package_status !== "draft_only") return false;
+    if (packageDraft.reliability_status !== "local_prompt_reliability_candidate") return false;
+    if (packageDraft.prompt_registry_status !== "local_registry_candidate") return false;
+    if (typeof packageDraft.prompt_hash !== "string" || !packageDraft.prompt_hash.startsWith("fnv1a32:")) return false;
+    if (packageDraft.max_plugin_calls_allowed !== 0) return false;
+    if (packageDraft.plugin_called !== false) return false;
+    if (packageDraft.api_called !== false) return false;
+    if (packageDraft.image_created !== false) return false;
+    if (packageDraft.side_effects_performed !== false) return false;
+    if (!guardIsClean(packageDraft.no_execution_guard)) return false;
+    const families = requireArray(packageDraft.prompt_families);
+    if (families.length === 0) return false;
+    const family = families[0];
+    if (family.selected_plugin_id !== "DoubaoGen") return false;
+    if (family.requested_model !== "doubao-seedream-5-0-260128") return false;
+    if (!Array.isArray(family.banned_subjects_cn) || family.banned_subjects_cn.length === 0) return false;
+    if (!Array.isArray(family.prompt_lint_rules_cn) || family.prompt_lint_rules_cn.length === 0) return false;
+    if (packageDraft.provider_side_capture?.authorization_status !== "inactive_package") return false;
+    if (packageDraft.provider_side_capture?.execution_authorized_by_this_record !== false) return false;
+    if (packageDraft.provider_side_capture?.raw_request_capture_allowed !== false) return false;
+    return requireArray(packageDraft.failure_taxonomy).length >= 4;
+  }
+
+  function memoryWriteCompletionCandidateIsSafe(draft) {
+    const packageDraft = draft.memory_write_completion_candidate_draft;
+    if (!packageDraft || typeof packageDraft !== "object") return false;
+    if (packageDraft.package_status !== "draft_only") return false;
+    if (packageDraft.candidate_status !== "memory_write_completion_preflight_candidate") return false;
+    if (packageDraft.daily_note_called !== false) return false;
+    if (packageDraft.vcp_memory_written !== false) return false;
+    if (packageDraft.write_complete_declared !== false) return false;
+    if (packageDraft.side_effects_performed !== false) return false;
+    if (!guardIsClean(packageDraft.no_execution_guard)) return false;
+    const criteria = packageDraft.completion_criteria || {};
+    if (criteria.plugin_success_sufficient !== false) return false;
+    if (criteria.write_requested_required !== true) return false;
+    if (criteria.write_authorized_required !== true) return false;
+    if (criteria.writer_executed_required !== true) return false;
+    if (criteria.canonical_target_exists_required !== true) return false;
+    if (criteria.canonical_target_hash_matches_required !== true) return false;
+    const observed = packageDraft.observed_state || {};
+    if (observed.writer_executed !== false) return false;
+    if (observed.canonical_target_exists !== false) return false;
+    if (observed.canonical_target_hash_matches !== false) return false;
+    if (observed.write_complete_declared !== false) return false;
+    if (packageDraft.wrong_location_classification?.completion_allowed !== false) return false;
+    return requireArray(packageDraft.completion_required_sequence).length === 5;
+  }
+
+  function singleRealGenerationRetryGateIsSafe(draft) {
+    const packageDraft = draft.single_real_generation_retry_gate_draft;
+    if (!packageDraft || typeof packageDraft !== "object") return false;
+    if (packageDraft.package_status !== "draft_only") return false;
+    if (packageDraft.gate_status !== "single_real_generation_retry_gate_inactive") return false;
+    if (packageDraft.authorization_status !== "inactive_package") return false;
+    if (packageDraft.selected_plugin_id !== "DoubaoGen") return false;
+    if (packageDraft.selected_plugin_command !== "generate") return false;
+    if (packageDraft.requested_model !== "doubao-seedream-5-0-260128") return false;
+    if (typeof packageDraft.prompt_hash !== "string" || !packageDraft.prompt_hash.startsWith("fnv1a32:")) return false;
+    if (packageDraft.max_plugin_calls_per_run !== 1) return false;
+    if (packageDraft.plugin_calls_observed !== 0) return false;
+    if (packageDraft.execution_authorized_by_this_record !== false) return false;
+    if (packageDraft.real_generation_performed !== false) return false;
+    if (packageDraft.plugin_called !== false) return false;
+    if (packageDraft.api_called !== false) return false;
+    if (packageDraft.image_created !== false) return false;
+    if (packageDraft.daily_note_called !== false) return false;
+    if (packageDraft.vcp_memory_written !== false) return false;
+    if (packageDraft.side_effects_performed !== false) return false;
+    if (!guardIsClean(packageDraft.no_execution_guard)) return false;
+    if (packageDraft.output_directory_policy?.raw_path_stored !== false) return false;
+    if (packageDraft.output_directory_policy?.overwrite_existing_files_allowed !== false) return false;
+    if (packageDraft.future_run_summary_schema?.raw_plugin_output_allowed !== false) return false;
+    if (packageDraft.future_run_summary_schema?.image_binary_in_git_or_memory_allowed !== false) return false;
+    const memoryBlock = packageDraft.memory_write_block || {};
+    if (memoryBlock.memory_write_allowed_by_this_record !== false) return false;
+    if (memoryBlock.requires_accepted_candidate !== true) return false;
+    if (memoryBlock.requires_memory_approval !== true) return false;
+    if (memoryBlock.requires_safety_review_passed !== true) return false;
+    return Array.isArray(packageDraft.required_authorization_fields) && packageDraft.required_authorization_fields.length >= 8;
+  }
+
+  function realMemoryWriteAuthorizationPackageIsSafe(draft) {
+    const packageDraft = draft.real_memory_write_authorization_package_draft;
+    if (!packageDraft || typeof packageDraft !== "object") return false;
+    if (packageDraft.package_status !== "draft_only") return false;
+    if (packageDraft.authorization_status !== "inactive_package") return false;
+    if (packageDraft.max_daily_note_writes !== 1) return false;
+    if (packageDraft.max_vcp_memory_writes !== 1) return false;
+    if (packageDraft.max_retry_attempts !== 1) return false;
+    if (packageDraft.target_refs?.raw_path_stored !== false) return false;
+    if (packageDraft.no_success_fabrication_rule !== true) return false;
+    if (packageDraft.execution_authorized_by_this_record !== false) return false;
+    if (packageDraft.daily_note_write_authorized_by_this_record !== false) return false;
+    if (packageDraft.vcp_memory_write_authorized_by_this_record !== false) return false;
+    if (packageDraft.plugin_called !== false) return false;
+    if (packageDraft.api_called !== false) return false;
+    if (packageDraft.image_created !== false) return false;
+    if (packageDraft.daily_note_called !== false) return false;
+    if (packageDraft.vcp_memory_written !== false) return false;
+    if (packageDraft.write_complete_declared !== false) return false;
+    if (packageDraft.side_effects_performed !== false) return false;
+    if (!guardIsClean(packageDraft.no_execution_guard)) return false;
+    if (packageDraft.completion_preflight_ref?.plugin_success_sufficient !== false) return false;
+    if (packageDraft.completion_preflight_ref?.writer_executed !== false) return false;
+    if (packageDraft.completion_preflight_ref?.canonical_target_exists !== false) return false;
+    if (packageDraft.completion_preflight_ref?.canonical_target_hash_matches !== false) return false;
+    if (!Array.isArray(packageDraft.content_rules_cn) || packageDraft.content_rules_cn.length === 0) return false;
+    if (!Array.isArray(packageDraft.reject_path_cn) || packageDraft.reject_path_cn.length === 0) return false;
+    return Array.isArray(packageDraft.required_authorization_fields) && packageDraft.required_authorization_fields.length >= 8;
+  }
+
+  function assetArchiveCandidateIsSafe(draft) {
+    const packageDraft = draft.asset_archive_candidate_draft;
+    if (!packageDraft || typeof packageDraft !== "object") return false;
+    if (packageDraft.package_status !== "draft_only") return false;
+    if (packageDraft.archive_status !== "asset_archive_candidate_no_binary") return false;
+    if (packageDraft.archive_policy !== "metadata_only_no_binary") return false;
+    if (typeof packageDraft.asset_hash !== "string" || !packageDraft.asset_hash.startsWith("fnv1a32:")) return false;
+    if (packageDraft.raw_output_path_stored !== false) return false;
+    if (packageDraft.binary_storage_allowed !== false) return false;
+    if (packageDraft.git_binary_stored !== false) return false;
+    if (packageDraft.memory_binary_stored !== false) return false;
+    if (packageDraft.side_effects_performed !== false) return false;
+    if (packageDraft.plugin_called !== false) return false;
+    if (packageDraft.api_called !== false) return false;
+    if (packageDraft.daily_note_called !== false) return false;
+    if (packageDraft.vcp_memory_written !== false) return false;
+    if (packageDraft.image_created !== false) return false;
+    if (!guardIsClean(packageDraft.no_execution_guard)) return false;
+    if (["accepted_candidate", "needs_human_review", "rejected"].includes(packageDraft.asset_status_classification) === false) {
+      return false;
+    }
+    const fields = requireArray(packageDraft.archived_fields);
+    for (const requiredField of ["output_path_ref", "asset_hash", "review_score", "sanitized_review_summary_cn", "reusable_rules_cn", "human_override_reason_cn"]) {
+      if (!fields.includes(requiredField)) return false;
+    }
+    const closeouts = requireArray(packageDraft.closeout_templates);
+    const statuses = closeouts.map((item) => item.asset_status).sort().join("|");
+    return statuses === "accepted_candidate|needs_human_review|rejected";
+  }
+
   function draftSideSurfacesAreSafe(draft) {
     const exportDraft = draft.runtime_session_export_draft;
+    const deliveryPackage = draft.accepted_candidate_delivery_package_draft;
+    const humanOverrideTraceability = draft.human_override_traceability_draft;
     if (
       exportDraft &&
       (exportDraft.package_status !== "draft_only" ||
@@ -59,24 +360,96 @@ window.ImageLabRuntimeGuard = (() => {
     ) {
       return false;
     }
+    if (
+      deliveryPackage &&
+      (deliveryPackage.package_status !== "draft_only" ||
+        deliveryPackage.draft_only !== true ||
+        deliveryPackage.submitDraft_called !== false ||
+        deliveryPackage.side_effects_performed !== false ||
+        deliveryPackage.plugin_called !== false ||
+        deliveryPackage.api_called !== false ||
+        deliveryPackage.daily_note_called !== false ||
+        deliveryPackage.vcp_memory_written !== false ||
+        deliveryPackage.image_created !== false ||
+        !guardIsClean(deliveryPackage.no_execution_guard))
+    ) {
+      return false;
+    }
+    if (
+      humanOverrideTraceability &&
+      (humanOverrideTraceability.package_status !== "draft_only" ||
+        humanOverrideTraceability.side_effects_performed !== false ||
+        humanOverrideTraceability.plugin_called !== false ||
+        humanOverrideTraceability.api_called !== false ||
+        humanOverrideTraceability.daily_note_called !== false ||
+        humanOverrideTraceability.vcp_memory_written !== false ||
+        humanOverrideTraceability.image_created !== false ||
+        !guardIsClean(humanOverrideTraceability.no_execution_guard))
+    ) {
+      return false;
+    }
     return guardsAreClean([
       draft.batch_review_summary_draft?.no_execution_guard,
       draft.batch_decision_draft?.no_execution_guard,
       draft.risk_review_summary_draft?.no_execution_guard,
       draft.a5_preauthorization_review_package_draft?.no_execution_guard,
+      draft.inactive_authorization_capsules_draft?.no_execution_guard,
       draft.human_inspection_checklist_draft?.no_execution_guard,
+      draft.human_override_traceability_draft?.no_execution_guard,
+      draft.accepted_candidate_delivery_package_draft?.no_execution_guard,
+      draft.runtime_review_state_draft?.no_execution_guard,
+      draft.local_commit_scope_plan_draft?.no_execution_guard,
+      draft.bridge_mock_roundtrip_candidate_draft?.no_execution_guard,
+      draft.real_bridge_authorization_package_draft?.no_execution_guard,
+      draft.plugin_reliability_prompt_discipline_draft?.no_execution_guard,
+      draft.memory_write_completion_candidate_draft?.no_execution_guard,
+      draft.single_real_generation_retry_gate_draft?.no_execution_guard,
+      draft.real_memory_write_authorization_package_draft?.no_execution_guard,
+      draft.asset_archive_candidate_draft?.no_execution_guard,
       exportDraft?.prototype_guard
     ]);
   }
 
+  function memoryCompletionStateIsSafe(draft) {
+    const memoryDelta = draft.memory_delta_draft;
+    const memoryCompletion = draft.memory_completion_state_draft;
+    if (!memoryCompletion || typeof memoryCompletion !== "object") return false;
+    const hasMemoryContent = Boolean(memoryDelta.chinese_diary_content && memoryDelta.chinese_diary_content.trim());
+    if (memoryCompletion.write_requested !== hasMemoryContent) return false;
+    if (memoryCompletion.write_authorized !== (memoryDelta.approval_status === "approved")) return false;
+    if (memoryCompletion.write_performed !== false) return false;
+    if (memoryCompletion.canonical_location_verified !== false) return false;
+    if (memoryCompletion.canonical_hash_matched !== false) return false;
+    if (memoryCompletion.plugin_success_sufficient !== false) return false;
+    if (memoryCompletion.write_authorized === true && memoryCompletion.write_requested !== true) return false;
+    if (memoryDelta.final_decision?.should_write_to_vcp === true && memoryCompletion.write_authorized !== true) {
+      return false;
+    }
+    if (memoryDelta.final_decision?.should_write_to_vcp === true && memoryCompletion.write_requested !== true) {
+      return false;
+    }
+    return true;
+  }
+
   function draftIsSafe(draft) {
     if (!draft || typeof draft !== "object") return false;
-    if (!draft.review_session_draft || !draft.image_case_draft || !draft.memory_delta_draft) return false;
+    if (!draft.review_session_draft || !draft.image_case_draft || !draft.memory_delta_draft || !draft.memory_completion_state_draft) return false;
     if (!guardIsClean(draft.prototype_guard)) return false;
 
     const auditEntry = requireArray(draft.review_session_draft.audit_log)[0];
     if (!guardIsClean(auditEntry?.prototype_guard)) return false;
     if (!draftSideSurfacesAreSafe(draft)) return false;
+    if (!memoryCompletionStateIsSafe(draft)) return false;
+    if (!inactiveAuthorizationCapsulesAreSafe(draft)) return false;
+    if (!runtimeReviewStateIsSafe(draft)) return false;
+    if (!localCommitScopePlanIsSafe(draft)) return false;
+    if (!bridgeMockRoundtripCandidateIsSafe(draft)) return false;
+    if (!realBridgeAuthorizationPackageIsSafe(draft)) return false;
+    if (!pluginReliabilityPromptDisciplineIsSafe(draft)) return false;
+    if (!memoryWriteCompletionCandidateIsSafe(draft)) return false;
+    if (!singleRealGenerationRetryGateIsSafe(draft)) return false;
+    if (!realMemoryWriteAuthorizationPackageIsSafe(draft)) return false;
+    if (!assetArchiveCandidateIsSafe(draft)) return false;
 
     const imageCase = draft.image_case_draft;
     if (imageCase.asset_status === "accepted" && imageCase.human_approval?.approved !== true) {
@@ -98,7 +471,7 @@ window.ImageLabRuntimeGuard = (() => {
     if (!draft || typeof draft !== "object") {
       throw new Error("草案必须是对象。");
     }
-    if (!draft.review_session_draft || !draft.image_case_draft || !draft.memory_delta_draft) {
+    if (!draft.review_session_draft || !draft.image_case_draft || !draft.memory_delta_draft || !draft.memory_completion_state_draft) {
       throw new Error("草案缺少必需区块。");
     }
     if (!guardIsClean(draft.prototype_guard)) {
@@ -110,6 +483,39 @@ window.ImageLabRuntimeGuard = (() => {
     }
     if (!draftSideSurfacesAreSafe(draft)) {
       throw new Error("草案附属区块 guard 或 runtime session export 状态不满足本地草案边界。");
+    }
+    if (!memoryCompletionStateIsSafe(draft)) {
+      throw new Error("记忆完成状态拆分与 memory_delta_draft 不一致，或存在越界完成标记。");
+    }
+    if (!inactiveAuthorizationCapsulesAreSafe(draft)) {
+      throw new Error("未激活授权胶囊必须保持 inactive_package，且不能包含真实执行标记。");
+    }
+    if (!runtimeReviewStateIsSafe(draft)) {
+      throw new Error("runtime review 状态收敛草案存在矛盾或越界执行标记。");
+    }
+    if (!localCommitScopePlanIsSafe(draft)) {
+      throw new Error("本地 commit scope 计划不能包含 staged changes、版本动作授权或破坏性回滚。");
+    }
+    if (!bridgeMockRoundtripCandidateIsSafe(draft)) {
+      throw new Error("bridge mock roundtrip 候选必须保持项目内 mock-only、previewDraft no-write 和 submitDraft 禁止状态。");
+    }
+    if (!realBridgeAuthorizationPackageIsSafe(draft)) {
+      throw new Error("真实 bridge 授权包草案必须保持 inactive_package，且不能包含真实 CDP、bridge 或 submitDraft 执行标记。");
+    }
+    if (!pluginReliabilityPromptDisciplineIsSafe(draft)) {
+      throw new Error("插件可靠性与 prompt discipline 草案不能包含插件调用、图片创建或 provider-side 捕获激活标记。");
+    }
+    if (!memoryWriteCompletionCandidateIsSafe(draft)) {
+      throw new Error("记忆写入完成候选不能声明真实写入、canonical 校验完成或 plugin success 充分。");
+    }
+    if (!singleRealGenerationRetryGateIsSafe(draft)) {
+      throw new Error("单次真实生图重试授权门必须保持 inactive_package，且不能包含插件调用、API 调用或图片创建标记。");
+    }
+    if (!realMemoryWriteAuthorizationPackageIsSafe(draft)) {
+      throw new Error("真实记忆写入授权包必须保持 inactive_package，且不能包含 DailyNote/VCP memory 写入或完成标记。");
+    }
+    if (!assetArchiveCandidateIsSafe(draft)) {
+      throw new Error("资产归档候选必须保持 metadata-only/no-binary，且不能包含真实写入标记。");
     }
     if (draft.image_case_draft.asset_status === "accepted" && draft.image_case_draft.human_approval?.approved !== true) {
       throw new Error("资产标记为 accepted 前必须先获得人工明确批准。");
@@ -129,6 +535,17 @@ window.ImageLabRuntimeGuard = (() => {
     normalizeSession,
     guardIsClean,
     guardsAreClean,
+    executionFlagsAreFalse,
+    inactiveAuthorizationCapsulesAreSafe,
+    runtimeReviewStateIsSafe,
+    localCommitScopePlanIsSafe,
+    bridgeMockRoundtripCandidateIsSafe,
+    realBridgeAuthorizationPackageIsSafe,
+    pluginReliabilityPromptDisciplineIsSafe,
+    memoryWriteCompletionCandidateIsSafe,
+    singleRealGenerationRetryGateIsSafe,
+    realMemoryWriteAuthorizationPackageIsSafe,
+    assetArchiveCandidateIsSafe,
     draftSideSurfacesAreSafe,
     draftIsSafe,
     assertDraftSafe

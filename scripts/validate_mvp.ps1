@@ -5327,8 +5327,8 @@ if (-not $node) {
     $currentBranch = ((& git branch --show-current) -join "`n").Trim()
     if ($LASTEXITCODE -ne 0) {
       Add-Failure "git branch --show-current failed during local commit scope validation"
-    } elseif ($currentBranch -notin @('master', 'codex/v5.11-post-merge-reconciliation', 'codex/v5.12-release-candidate-readiness', 'codex/a5-complete-delivery-20260507')) {
-      Add-Failure "local commit scope expected branch master, codex/v5.11-post-merge-reconciliation, codex/v5.12-release-candidate-readiness, or codex/a5-complete-delivery-20260507, got $currentBranch"
+    } elseif ($currentBranch -notin @('master', 'codex/v5.11-post-merge-reconciliation', 'codex/v5.12-release-candidate-readiness', 'codex/a5-complete-delivery-20260507', 'codex/runtime-review-followup')) {
+      Add-Failure "local commit scope expected branch master, codex/v5.11-post-merge-reconciliation, codex/v5.12-release-candidate-readiness, codex/a5-complete-delivery-20260507, or codex/runtime-review-followup, got $currentBranch"
     }
 
     $localTagCommit = ((& git rev-parse --short v4.8-local-validation-checkpoint) -join "`n").Trim()

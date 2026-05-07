@@ -178,6 +178,82 @@
         <pre id="preauthPackageText"></pre>
       </section>
 
+      <section class="panel auth-capsule-panel">
+        <h2>未激活授权胶囊</h2>
+        <dl class="meta">
+          <div><dt>状态</dt><dd id="authCapsuleStatus">-</dd></div>
+          <div><dt>胶囊数</dt><dd id="authCapsuleCount">-</dd></div>
+        </dl>
+        <p id="authCapsuleBoundary">-</p>
+        <div class="auth-capsule-grid">
+          <div>
+            <h3>胶囊类型</h3>
+            <ul id="authCapsuleTypes"></ul>
+          </div>
+          <div>
+            <h3>禁止输出</h3>
+            <ul id="authCapsuleForbidden"></ul>
+          </div>
+          <div>
+            <h3>脱敏规则</h3>
+            <ul id="authCapsuleSanitization"></ul>
+          </div>
+          <div>
+            <h3>回滚边界</h3>
+            <ul id="authCapsuleRollback"></ul>
+          </div>
+        </div>
+        <h3>胶囊草案 JSON</h3>
+        <pre id="authCapsuleText"></pre>
+      </section>
+
+      <section class="panel delivery-panel">
+        <h2>Accepted Candidate 交付包草案</h2>
+        <dl class="meta">
+          <div><dt>状态</dt><dd id="deliveryPackageStatus">-</dd></div>
+          <div><dt>候选</dt><dd id="deliveryPackageCandidate">-</dd></div>
+          <div><dt>脱敏哈希</dt><dd id="deliveryPackageHash">-</dd></div>
+          <div><dt>评分</dt><dd id="deliveryPackageScoreBand">-</dd></div>
+        </dl>
+        <div class="delivery-grid">
+          <div>
+            <h3>交付摘要</h3>
+            <p id="deliveryPackageRisk">-</p>
+            <p id="deliveryPackageHumanApproval">-</p>
+            <p id="deliveryPackageMemoryPreview">-</p>
+            <p id="deliveryPackageRules">-</p>
+            <p id="deliveryPackageBoundary">-</p>
+          </div>
+          <div>
+            <h3>人工覆盖轨迹</h3>
+            <p id="overrideDecisionSource">-</p>
+            <p id="overrideReason">-</p>
+            <p id="overrideDeviation">-</p>
+            <p id="overridePromptCompliance">-</p>
+            <p id="overrideMemorySuitability">-</p>
+            <p id="overrideBoundary">-</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel traceability-panel">
+        <h2>Human Override 可追踪性矩阵</h2>
+        <dl class="meta queue-stats">
+          <div><dt>总数</dt><dd id="traceabilityTotal">-</dd></div>
+          <div><dt>已接受</dt><dd id="traceabilityAccepted">-</dd></div>
+          <div><dt>已接受候选</dt><dd id="traceabilityAcceptedCandidate">-</dd></div>
+          <div><dt>人工覆盖</dt><dd id="traceabilityHumanOverride">-</dd></div>
+          <div><dt>已拒收</dt><dd id="traceabilityRejected">-</dd></div>
+          <div><dt>待复核</dt><dd id="traceabilityNeedsHumanReview">-</dd></div>
+          <div><dt>Prompt 完整</dt><dd id="traceabilityPromptComplete">-</dd></div>
+          <div><dt>适合入记忆</dt><dd id="traceabilityMemorySuitable">-</dd></div>
+        </dl>
+        <p id="traceabilitySummary">-</p>
+        <p id="traceabilityBoundary">-</p>
+        <h3>矩阵明细</h3>
+        <ul id="traceabilityList" class="traceability-list"></ul>
+      </section>
+
       <section class="panel session-panel">
         <h2>复核会话续航</h2>
         <dl class="meta">
@@ -275,6 +351,19 @@
         </div>
       </section>
 
+      <section class="panel memory-completion-panel">
+        <h2>记忆完成状态拆分</h2>
+        <dl class="meta">
+          <div><dt>写入请求</dt><dd id="memoryCompletionRequested">-</dd></div>
+          <div><dt>写入授权</dt><dd id="memoryCompletionAuthorized">-</dd></div>
+          <div><dt>写入执行</dt><dd id="memoryCompletionPerformed">-</dd></div>
+          <div><dt>位置校验</dt><dd id="memoryCompletionLocationVerified">-</dd></div>
+          <div><dt>哈希校验</dt><dd id="memoryCompletionHashMatched">-</dd></div>
+          <div><dt>插件 success 充分性</dt><dd id="memoryCompletionPluginSufficient">-</dd></div>
+        </dl>
+        <p id="memoryCompletionBoundary"></p>
+      </section>
+
       <section class="panel">
         <h2>主程序回执</h2>
         <dl class="meta">
@@ -298,6 +387,20 @@
           <div><dt>安全边界</dt><dd id="summaryGuard">-</dd></div>
           <div><dt>下一步建议</dt><dd id="summaryNextAction">-</dd></div>
         </dl>
+      </section>
+
+      <section class="panel runtime-state-panel">
+        <h2>Runtime 状态收敛</h2>
+        <dl class="meta">
+          <div><dt>统一结论</dt><dd id="runtimeStateUnified">-</dd></div>
+          <div><dt>资产状态</dt><dd id="runtimeStateAsset">-</dd></div>
+          <div><dt>记忆状态</dt><dd id="runtimeStateMemory">-</dd></div>
+          <div><dt>交付状态</dt><dd id="runtimeStateDelivery">-</dd></div>
+          <div><dt>人工覆盖</dt><dd id="runtimeStateOverride">-</dd></div>
+        </dl>
+        <h3>矛盾检测</h3>
+        <ul id="runtimeStateMismatches"></ul>
+        <p id="runtimeStateBoundary">-</p>
       </section>
 
       <section class="panel quality-panel">
@@ -346,6 +449,193 @@
             <ul id="handoffForbidden"></ul>
           </div>
         </div>
+      </section>
+
+      <section class="panel bridge-roundtrip-panel">
+        <h2>Bridge Mock 回环候选</h2>
+        <dl class="meta">
+          <div><dt>状态</dt><dd id="bridgeRoundtripStatus">-</dd></div>
+        </dl>
+        <div class="bridge-roundtrip-grid">
+          <div>
+            <h3>方法</h3>
+            <ul id="bridgeRoundtripMethods"></ul>
+          </div>
+          <div>
+            <h3>调用计数</h3>
+            <ul id="bridgeRoundtripCalls"></ul>
+          </div>
+          <div>
+            <h3>脱敏回执</h3>
+            <ul id="bridgeRoundtripAck"></ul>
+          </div>
+          <div>
+            <h3>Guard</h3>
+            <ul id="bridgeRoundtripGuards"></ul>
+          </div>
+        </div>
+        <p id="bridgeRoundtripBoundary">-</p>
+      </section>
+
+      <section class="panel real-bridge-auth-panel">
+        <h2>真实 Bridge 授权包草案</h2>
+        <dl class="meta">
+          <div><dt>状态</dt><dd id="realBridgeAuthStatus">-</dd></div>
+        </dl>
+        <div class="real-bridge-auth-grid">
+          <div>
+            <h3>方法边界</h3>
+            <ul id="realBridgeAuthMethods"></ul>
+          </div>
+          <div>
+            <h3>必填授权字段</h3>
+            <ul id="realBridgeAuthRequired"></ul>
+          </div>
+          <div>
+            <h3>禁止输出</h3>
+            <ul id="realBridgeAuthForbidden"></ul>
+          </div>
+        </div>
+        <p id="realBridgeAuthBoundary">-</p>
+      </section>
+
+      <section class="panel prompt-reliability-panel">
+        <h2>Prompt 可靠性草案</h2>
+        <dl class="meta">
+          <div><dt>状态</dt><dd id="promptReliabilityStatus">-</dd></div>
+          <div><dt>Hash / 模型</dt><dd id="promptReliabilityHash">-</dd></div>
+        </dl>
+        <div class="prompt-reliability-grid">
+          <div>
+            <h3>Lint 规则</h3>
+            <ul id="promptReliabilityRules"></ul>
+          </div>
+          <div>
+            <h3>失败分类</h3>
+            <ul id="promptReliabilityFailures"></ul>
+          </div>
+        </div>
+        <p id="promptReliabilityBoundary">-</p>
+      </section>
+
+      <section class="panel memory-completion-candidate-panel">
+        <h2>记忆完成候选草案</h2>
+        <dl class="meta">
+          <div><dt>状态</dt><dd id="memoryCompletionCandidateStatus">-</dd></div>
+        </dl>
+        <div class="memory-completion-candidate-grid">
+          <div>
+            <h3>完成条件</h3>
+            <ul id="memoryCompletionCandidateCriteria"></ul>
+          </div>
+          <div>
+            <h3>当前观察</h3>
+            <ul id="memoryCompletionCandidateObserved"></ul>
+          </div>
+          <div>
+            <h3>失败收束</h3>
+            <ul id="memoryCompletionCandidateFailures"></ul>
+          </div>
+        </div>
+        <p id="memoryCompletionCandidateBoundary">-</p>
+      </section>
+
+      <section class="panel generation-retry-gate-panel">
+        <h2>真实重试授权门草案</h2>
+        <dl class="meta">
+          <div><dt>状态</dt><dd id="generationRetryGateStatus">-</dd></div>
+        </dl>
+        <div class="generation-retry-gate-grid">
+          <div>
+            <h3>插件与模型</h3>
+            <ul id="generationRetryGatePlugin"></ul>
+          </div>
+          <div>
+            <h3>Prompt 约束</h3>
+            <ul id="generationRetryGatePrompt"></ul>
+          </div>
+          <div>
+            <h3>Guard</h3>
+            <ul id="generationRetryGateGuards"></ul>
+          </div>
+          <div>
+            <h3>必填授权</h3>
+            <ul id="generationRetryGateAuthorization"></ul>
+          </div>
+        </div>
+        <p id="generationRetryGateBoundary">-</p>
+      </section>
+
+      <section class="panel memory-write-auth-panel">
+        <h2>真实记忆写入授权包草案</h2>
+        <dl class="meta">
+          <div><dt>状态</dt><dd id="memoryWriteAuthStatus">-</dd></div>
+        </dl>
+        <div class="memory-write-auth-grid">
+          <div>
+            <h3>写入上限</h3>
+            <ul id="memoryWriteAuthCounts"></ul>
+          </div>
+          <div>
+            <h3>正文规则</h3>
+            <ul id="memoryWriteAuthRules"></ul>
+          </div>
+          <div>
+            <h3>拒绝路径</h3>
+            <ul id="memoryWriteAuthReject"></ul>
+          </div>
+        </div>
+        <p id="memoryWriteAuthBoundary">-</p>
+      </section>
+
+      <section class="panel asset-archive-candidate-panel">
+        <h2>资产归档候选草案</h2>
+        <dl class="meta">
+          <div><dt>状态</dt><dd id="assetArchiveCandidateStatus">-</dd></div>
+        </dl>
+        <div class="asset-archive-candidate-grid">
+          <div>
+            <h3>归档字段</h3>
+            <ul id="assetArchiveCandidateFields"></ul>
+          </div>
+          <div>
+            <h3>Closeout 模板</h3>
+            <ul id="assetArchiveCandidateCloseouts"></ul>
+          </div>
+        </div>
+        <p id="assetArchiveCandidateBoundary">-</p>
+      </section>
+
+      <section class="panel commit-scope-panel">
+        <h2>本地提交范围计划</h2>
+        <dl class="meta">
+          <div><dt>状态</dt><dd id="commitScopeStatus">-</dd></div>
+          <div><dt>分支</dt><dd id="commitScopeBranch">-</dd></div>
+          <div><dt>暂存区</dt><dd id="commitScopeStaged">-</dd></div>
+          <div><dt>远端动作</dt><dd id="commitScopeRemote">-</dd></div>
+        </dl>
+        <div class="commit-scope-grid">
+          <div>
+            <h3>Runtime prototype</h3>
+            <ul id="commitScopeRuntime"></ul>
+          </div>
+          <div>
+            <h3>Validators</h3>
+            <ul id="commitScopeValidators"></ul>
+          </div>
+          <div>
+            <h3>Docs / indexes</h3>
+            <ul id="commitScopeDocs"></ul>
+          </div>
+          <div>
+            <h3>Agent board</h3>
+            <ul id="commitScopeAgentBoard"></ul>
+          </div>
+        </div>
+        <h3>预期未跟踪文件</h3>
+        <ul id="commitScopeUntracked"></ul>
+        <h3>回滚指导</h3>
+        <ul id="commitScopeRollback"></ul>
       </section>
 
       <section class="panel output-panel">

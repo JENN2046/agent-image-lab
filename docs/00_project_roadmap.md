@@ -18,7 +18,13 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard
+v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review follow-up Batch 8A local RC proposal
+```
+
+当前工作分支：
+
+```text
+codex/runtime-review-followup tracking origin/master
 ```
 
 已经完成：
@@ -88,6 +94,15 @@ v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard
 - v10.26 real DailyNote/VCP memory write closeout：记录 v10.25 使用 DailyNoteWrite 完成一次真实写入，actual_write_calls=1，保存文件名/sha256 已脱敏记录，单次授权已消耗。
 - v10.27 DailyNoteWrite root path correction：修正未来 DailyNoteWrite 写入根目录分类，从 `plugin_dir_dailynote` 改为 `vcp_root_dailynote`，并通过 no-write recomputation 验证。
 - v10.28 DailyNote canonical location guard：固化后续 DailyNote 写入成功判定，要求 canonical file 存在和 hash 匹配，插件 `success` 不能单独判定完成。
+- Runtime Review follow-up requirements audit：梳理审片台下一步本地交付需求，优先处理 accepted candidate delivery package draft 和 memory completion state split。
+- Runtime Review follow-up Batch 2A/2C：在 runtime prototype 中实现 accepted candidate delivery package draft 和 human override traceability draft，并把 no-write guard、UI、session export、smoke 和 delivery surface validation 同步。
+- Runtime Review follow-up Batch 2B：在 runtime prototype 中实现 memory completion state split，把写入请求、写入授权、真实执行、canonical location 校验、hash 匹配和 `plugin_success_sufficient=false` 拆开。
+- Runtime Review long task delivery plan：把后续长任务拆成 Batch 3A 到 Batch 8A，并明确 A4 本地任务、A5/真实写入/远端版本动作授权门、验收标准和停止条件。
+- Runtime Review Batch 3A/3B/3C：在 runtime prototype 中实现 inactive authorization capsules、runtime review state convergence 和 local commit scope plan；所有新增面仍保持 no-execution、no-stage、no-version-action。
+- Runtime Review Batch 4A：在 runtime prototype 中实现 bridge mock roundtrip candidate，用项目内 `loadSession` / `previewDraft` mock 证明 no-write 交接，`submitDraft` 和真实 CDP/bridge 仍禁止。
+- Runtime Review Batch 4B/5A/6A：在 runtime prototype 中实现真实 bridge 授权包草案、prompt reliability/model lock 草案和 memory write completion candidate；所有新增面仍保持 no-execution、no-plugin、no-memory-write。
+- Runtime Review Batch 5B/6B/7A：在 runtime prototype 中实现真实重试授权门、真实记忆写入授权包和 no-binary 资产归档候选；所有新增面仍保持 no-execution、no-plugin-call、no-memory-write、no-image-create。
+- Runtime Review Batch 8A：把 Runtime Review follow-up 累积工作收束为本地 release-candidate proposal 和提交范围清单；仍不执行 commit/tag/push/PR/release。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：
@@ -96,6 +111,7 @@ v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard
 - 后续更多 DailyNote / VCP 长期记忆写入仍需单独授权。
 - 正式 release 发布和后续版本 tag 策略。
 - 后续更多真实图片生成、编辑、归档。
+- Batch 8A proposal 的版本动作落地：commit、tag、push、PR 仍需单独授权。
 
 ## 阶段路线
 
@@ -250,7 +266,7 @@ daily_note_called: false
 3. 等待用户单独授权任何新的 A5 真实生产动作、tag、push 或正式 release 发布。
 4. 下一步以 remote-debug 端口重新启动或重启 VCPChat 已经到达明确审批边界；没有用户批准时继续停在 no-relaunch / no-runtime-evaluate 轨道。
 5. 后续任何新增真实生图调用、remote-debug relaunch、CDP 检查、bridge 验证或 VCPChat/VCPToolBox 源码读写都必须重新确认目标、允许操作、禁止动作、验证要求和回滚方案，并形成 active authorization package。
-6. v10.28 已固化 DailyNote canonical location guard；下一步若继续写入、追加生图、submitDraft、commit/tag/push/PR/release，需要新的明确授权，否则只能继续本地文档、验证和授权包规划。
+6. v10.28 已固化 DailyNote canonical location guard；Runtime Review Batch 8A 已形成本地 RC proposal。下一步若继续写入、追加生图、submitDraft、commit/tag/push/PR/release，需要新的明确授权，否则只能继续本地文档、验证和授权包规划。
 
 ## 永久安全门
 

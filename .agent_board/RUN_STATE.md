@@ -12,27 +12,251 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 Advance Agent Image Lab safely under local A4 autonomy while keeping A5 production execution blocked unless an explicit authorization package is active.
 ```
 
+## Current Branch
+
+```text
+codex/runtime-review-followup tracking origin/master
+```
+
 ## Current Phase
 
 ```text
-Runtime Review Console usability controls
+Runtime Review Batch 8A release candidate readiness local proposal
 ```
 
 ## Current Task
 
 ```text
-Runtime Review Console queue search/sort, undo history, import preview, session fingerprint, status glossary, and stronger side-surface guards
+Finalize Runtime Review follow-up local RC proposal and proposed commit scope without version actions
 ```
 
 ## Last Completed Task
 
 ```text
-Added runtime usability controls: queue search/sort, compact queue cards, undo history, session export fingerprinting, import preview, Chinese status glossary, and stricter guard coverage for batch/session side surfaces.
+Prepared Runtime Review Batch 8A local release-candidate proposal across docs, indexes, validation checklist, and agent board; commit/tag/push/PR/release remain unauthorized.
 ```
 
 ## Last Validation
 
 ```text
+2026-05-08 runtime review Batch 8A local release candidate proposal:
+status: completed_validated_local_rc_proposal
+changed files: docs/221_runtime_review_batch_8a_release_candidate_readiness_local_proposal.md, docs/216_runtime_review_long_task_delivery_plan.md, README.md, MANIFEST.md, RELEASE_NOTES.md, docs/00_project_roadmap.md, tests/validation_checklist.md, .agent_board files
+scope: local docs/indexes/agent-board closeout and proposed commit scope only
+node --check review_console/runtime_prototype/app.js: passed
+node --check review_console/runtime_prototype/runtime_guard.js: passed
+node --check scripts/validate_runtime_guard_unit.js: passed
+node --check scripts/validate_runtime_prototype_smoke.js: passed
+node --check scripts/validate_runtime_delivery_surface.js: passed
+node scripts/validate_runtime_guard_unit.js: passed
+node scripts/validate_runtime_prototype_smoke.js: passed
+node scripts/validate_runtime_delivery_surface.js: passed
+node scripts/validate_runtime_prototype_suite.js: passed
+node scripts/validate_agent_board_state.js: passed
+node scripts/validate_local_commit_scope.js: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed
+commit/tag/push/PR/release: no
+real VCPChat read: no
+real VCPToolBox read: no
+real bridge/CDP/source read: no
+plugin/API/DailyNote/VCP memory/image action: no
+
+2026-05-07 runtime review Batch 5B/6B/7A local gate and archive:
+status: completed_validated_local_runtime_prototype
+changed files: review_console/runtime_prototype/app.js, review_console/runtime_prototype/index.html, review_console/runtime_prototype/styles.css, review_console/runtime_prototype/runtime_guard.js, review_console/runtime_prototype/FIELD_MAPPING.md, review_console/runtime_prototype/README.md, scripts/validate_runtime_guard_unit.js, scripts/validate_runtime_prototype_smoke.js, scripts/validate_runtime_delivery_surface.js, scripts/validate_local_commit_scope.js, docs/220_runtime_review_batch_5b_6b_7a_local_gate_archive.md, docs/216_runtime_review_long_task_delivery_plan.md, README.md, MANIFEST.md, docs/00_project_roadmap.md, RELEASE_NOTES.md, tests/validation_checklist.md, .agent_board files
+Batch 5B: single_real_generation_retry_gate_draft remains inactive_package with DoubaoGen/generate/model lock, future max_plugin_calls_per_run=1, and plugin_calls_observed=0
+Batch 6B: real_memory_write_authorization_package_draft remains inactive_package with max_daily_note_writes=1, max_vcp_memory_writes=1, max_retry_attempts=1, and no_success_fabrication_rule=true
+Batch 7A: asset_archive_candidate_draft records metadata_only_no_binary archive policy with accepted_candidate/needs_human_review/rejected closeout templates
+node --check review_console/runtime_prototype/host_bridge_mock.js: passed
+node --check review_console/runtime_prototype/runtime_guard.js: passed
+node --check review_console/runtime_prototype/app.js: passed
+node --check scripts/validate_runtime_guard_unit.js: passed
+node --check scripts/validate_runtime_prototype_smoke.js: passed
+node --check scripts/validate_runtime_delivery_surface.js: passed
+node scripts/validate_runtime_guard_unit.js: passed
+node scripts/validate_runtime_prototype_smoke.js: passed
+node scripts/validate_runtime_delivery_surface.js: passed
+node scripts/validate_runtime_prototype_suite.js: passed
+node scripts/validate_agent_board_state.js: passed
+node scripts/validate_local_commit_scope.js: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed
+real VCPChat read: no
+real VCPToolBox read: no
+real bridge/CDP/source read: no
+plugin/API/DailyNote/VCP memory/image action: no
+git add/commit/tag/push/PR/release: no
+
+2026-05-07 runtime review Batch 4B/5A/6A local readiness:
+status: completed_validated_local_runtime_prototype
+changed files: review_console/runtime_prototype/app.js, review_console/runtime_prototype/index.html, review_console/runtime_prototype/styles.css, review_console/runtime_prototype/runtime_guard.js, review_console/runtime_prototype/FIELD_MAPPING.md, review_console/runtime_prototype/README.md, scripts/validate_runtime_guard_unit.js, scripts/validate_runtime_prototype_smoke.js, scripts/validate_runtime_delivery_surface.js, scripts/validate_local_commit_scope.js, docs/219_runtime_review_batch_4b_5a_6a_local_readiness.md, docs/216_runtime_review_long_task_delivery_plan.md, README.md, MANIFEST.md, docs/00_project_roadmap.md, RELEASE_NOTES.md, tests/validation_checklist.md, .agent_board files
+Batch 4B: real_bridge_authorization_package_draft remains inactive_package with allowed_methods cancel/loadSession/previewDraft and submitDraft forbidden
+Batch 5A: plugin_reliability_prompt_discipline_draft records DoubaoGen prompt registry, prompt hash, requested model lock, lint rules, and failure taxonomy with max_plugin_calls_allowed=0
+Batch 6A: memory_write_completion_candidate_draft records completion sequence and keeps writer/canonical/hash observed states false with plugin_success_sufficient=false
+node --check review_console/runtime_prototype/host_bridge_mock.js: passed
+node --check review_console/runtime_prototype/runtime_guard.js: passed
+node --check review_console/runtime_prototype/app.js: passed
+node --check scripts/validate_runtime_guard_unit.js: passed
+node --check scripts/validate_runtime_prototype_smoke.js: passed
+node --check scripts/validate_runtime_delivery_surface.js: passed
+node scripts/validate_runtime_guard_unit.js: passed
+node scripts/validate_runtime_prototype_smoke.js: passed
+node scripts/validate_runtime_delivery_surface.js: passed
+node scripts/validate_runtime_prototype_suite.js: passed
+node scripts/validate_agent_board_state.js: passed
+node scripts/validate_local_commit_scope.js: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed
+real VCPChat read: no
+real VCPToolBox read: no
+real bridge/CDP/source read: no
+plugin/API/DailyNote/VCP memory/image action: no
+git add/commit/tag/push/PR/release: no
+
+2026-05-07 runtime review Batch 4A bridge mock roundtrip candidate:
+status: completed_validated_local_runtime_prototype
+changed files: review_console/runtime_prototype/app.js, review_console/runtime_prototype/index.html, review_console/runtime_prototype/styles.css, review_console/runtime_prototype/host_bridge_mock.js, review_console/runtime_prototype/runtime_guard.js, review_console/runtime_prototype/FIELD_MAPPING.md, review_console/runtime_prototype/README.md, scripts/validate_runtime_guard_unit.js, scripts/validate_runtime_prototype_smoke.js, scripts/validate_runtime_delivery_surface.js, scripts/validate_local_commit_scope.js, docs/218_runtime_review_batch_4a_bridge_mock_roundtrip.md, docs/216_runtime_review_long_task_delivery_plan.md, README.md, MANIFEST.md, docs/00_project_roadmap.md, RELEASE_NOTES.md, tests/validation_checklist.md, .agent_board files
+Batch 4A: bridge_mock_roundtrip_candidate_draft records project-local mock loadSession=1 and previewDraft=1, with submitDraft=0 and production_submitDraft=0
+host_bridge_mock: previewDraft(draft) now returns sanitized no-write ack summaries; submitDraft remains a mock negative-validation entry only
+runtime guard: bridgeMockRoundtripCandidateIsSafe rejects production bridge, CDP, submitDraft counts, dirty adapter handoff refs, and real execution/write flags
+node --check review_console/runtime_prototype/host_bridge_mock.js: passed
+node --check review_console/runtime_prototype/runtime_guard.js: passed
+node --check review_console/runtime_prototype/app.js: passed
+node --check scripts/validate_runtime_guard_unit.js: passed
+node --check scripts/validate_runtime_prototype_smoke.js: passed
+node --check scripts/validate_runtime_delivery_surface.js: passed
+node scripts/validate_runtime_guard_unit.js: passed
+node scripts/validate_runtime_prototype_smoke.js: passed
+node scripts/validate_runtime_delivery_surface.js: passed
+node scripts/validate_runtime_prototype_suite.js: passed
+node scripts/validate_agent_board_state.js: passed
+node scripts/validate_local_commit_scope.js: passed
+node --check review_console/static_prototype/app.js: passed
+node --check review_console/static_prototype/mock_data.js: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed with line-ending warnings only
+real VCPChat read: no
+real VCPToolBox read: no
+real bridge/CDP call: no
+plugin/API/DailyNote/VCP memory/image action: no
+git add/commit/tag/push/PR/release: no
+
+2026-05-07 runtime review Batch 3A/3B/3C local stabilization:
+status: completed_validated_local_runtime_prototype
+changed files: review_console/runtime_prototype/app.js, review_console/runtime_prototype/index.html, review_console/runtime_prototype/styles.css, review_console/runtime_prototype/runtime_guard.js, review_console/runtime_prototype/FIELD_MAPPING.md, review_console/runtime_prototype/README.md, scripts/validate_runtime_guard_unit.js, scripts/validate_runtime_prototype_smoke.js, scripts/validate_runtime_delivery_surface.js, scripts/validate_local_commit_scope.js, docs/217_runtime_review_batch_3a_3b_3c_local_stabilization.md, docs/216_runtime_review_long_task_delivery_plan.md, README.md, MANIFEST.md, docs/00_project_roadmap.md, RELEASE_NOTES.md, tests/validation_checklist.md, .agent_board files
+Batch 3A: inactive_authorization_capsules_draft now produces five inactive packages for real generation retry, memory write, bridge call, provider prompt fingerprint capture, and version actions
+Batch 3B: runtime_review_state_draft now separates asset state, memory status, write request/authorization/performed state, delivery readiness, and human override status
+Batch 3C: local_commit_scope_plan_draft now groups runtime prototype, validators, docs/indexes, and agent-board files while keeping staged_changes_present=false and version actions unauthorized
+node --check review_console/runtime_prototype/app.js: passed
+node --check review_console/runtime_prototype/runtime_guard.js: passed
+node --check scripts/validate_runtime_guard_unit.js: passed
+node --check scripts/validate_runtime_prototype_smoke.js: passed
+node --check scripts/validate_runtime_delivery_surface.js: passed
+node scripts/validate_runtime_guard_unit.js: passed
+node scripts/validate_runtime_prototype_smoke.js: passed
+node scripts/validate_runtime_delivery_surface.js: passed
+node scripts/validate_runtime_prototype_suite.js: passed
+node scripts/validate_agent_board_state.js: passed
+node scripts/validate_local_commit_scope.js: passed
+node --check review_console/static_prototype/app.js: passed
+node --check review_console/static_prototype/mock_data.js: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed with line-ending warnings only
+real VCPChat read: no
+real VCPToolBox read: no
+plugin/API/DailyNote/VCP memory/image action: no
+git add/commit/tag/push/PR/release: no
+
+2026-05-07 runtime review long task delivery plan:
+status: completed_validated_local_docs_sync
+changed files: docs/216_runtime_review_long_task_delivery_plan.md, README.md, MANIFEST.md, docs/00_project_roadmap.md, RELEASE_NOTES.md, tests/validation_checklist.md, .agent_board files
+scope: local docs, indexes, validation checklist, and agent-board sync only
+plan coverage: Batch 3A inactive authorization capsule generator, Batch 3B runtime state convergence, Batch 3C commit scope stabilization, Batch 4A/4B bridge readiness, Batch 5A/5B plugin reliability and real retry gate, Batch 6A/6B memory write lifecycle, Batch 7A asset archive, Batch 8A release candidate readiness
+node scripts/validate_agent_board_state.js: passed
+node scripts/validate_local_commit_scope.js: passed
+node scripts/validate_runtime_prototype_suite.js: passed
+node --check review_console/static_prototype/app.js: passed
+node --check review_console/static_prototype/mock_data.js: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed with line-ending warnings only
+real VCPChat read: no
+real VCPToolBox read: no
+plugin/API/DailyNote/VCP memory/image action: no
+push/tag/release/PR: no
+
+2026-05-07 runtime follow-up Batch 2B memory completion split:
+status: completed_validated_local_runtime_prototype
+changed files: review_console/runtime_prototype/app.js, review_console/runtime_prototype/index.html, review_console/runtime_prototype/styles.css, review_console/runtime_prototype/runtime_guard.js, review_console/runtime_prototype/FIELD_MAPPING.md, review_console/runtime_prototype/README.md, scripts/validate_runtime_guard_unit.js, scripts/validate_runtime_prototype_smoke.js, scripts/validate_runtime_delivery_surface.js
+memory completion split: memory_delta_draft now carries a separate memory_completion_state_draft with request / authorization / execution / canonical verification / hash-match / plugin_success_sufficient fields
+delivery preview: deliveryPackageMemoryPreview now follows the completion-state request flag instead of the older single approval flag
+node --check review_console/runtime_prototype/app.js: passed
+node --check review_console/runtime_prototype/runtime_guard.js: passed
+node --check scripts/validate_runtime_guard_unit.js: passed
+node --check scripts/validate_runtime_prototype_smoke.js: passed
+node --check scripts/validate_runtime_delivery_surface.js: passed
+node scripts/validate_runtime_guard_unit.js: passed
+node scripts/validate_runtime_prototype_smoke.js: passed
+node scripts/validate_runtime_delivery_surface.js: passed
+node scripts/validate_runtime_prototype_suite.js: passed
+node scripts/validate_agent_board_state.js: passed
+node scripts/validate_local_commit_scope.js: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed
+real VCPChat read: no
+real VCPToolBox read: no
+plugin/API/DailyNote/VCP memory/image action: no
+push/tag/release/PR: no
+
+2026-05-07 runtime follow-up Batch 2A + 2C matrix expansion:
+status: completed_validated_local_runtime_prototype
+changed files: review_console/runtime_prototype/app.js, review_console/runtime_prototype/index.html, review_console/runtime_prototype/styles.css, review_console/runtime_prototype/runtime_guard.js, review_console/runtime_prototype/FIELD_MAPPING.md, review_console/runtime_prototype/README.md, scripts/validate_runtime_guard_unit.js, scripts/validate_runtime_prototype_smoke.js, scripts/validate_runtime_delivery_surface.js, docs/215_runtime_review_followup_requirements_audit.md, README.md, MANIFEST.md, docs/00_project_roadmap.md, RELEASE_NOTES.md, tests/validation_checklist.md, .agent_board files
+Batch 2A: accepted_candidate_delivery_package_draft added with selected candidate ref, sanitized asset hash, score band, risk summary, human approval summary, memory_delta preview, reusable rules, draft_only=true, submitDraft_called=false
+Batch 2C: human_override_traceability_draft added with decision source, override reason, known deviation summary, prompt compliance status, memory suitability, and queue-level traceability matrix fields
+guard hardening: runtime_guard rejects dirty delivery package / override traceability side surfaces
+node --check review_console/runtime_prototype/app.js: passed
+node --check review_console/runtime_prototype/runtime_guard.js: passed
+node --check scripts/validate_runtime_guard_unit.js: passed
+node --check scripts/validate_runtime_prototype_smoke.js: passed
+node --check scripts/validate_runtime_delivery_surface.js: passed
+node scripts/validate_runtime_guard_unit.js: passed
+node scripts/validate_runtime_prototype_smoke.js: passed
+node scripts/validate_runtime_delivery_surface.js: passed
+node scripts/validate_runtime_prototype_suite.js: passed
+node scripts/validate_agent_board_state.js: passed
+node scripts/validate_local_commit_scope.js: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed
+real VCPChat read: no
+real VCPToolBox read: no
+plugin/API/DailyNote/VCP memory/image action: no
+submitDraft real production call: no
+push/tag/release/PR: no
+
+2026-05-07 runtime follow-up requirements audit:
+status: completed_validated_local_docs_sync
+changed files: docs/215_runtime_review_followup_requirements_audit.md, README.md, MANIFEST.md, docs/00_project_roadmap.md, RELEASE_NOTES.md, tests/validation_checklist.md, .agent_board files
+scope: local docs and planning only
+next P0: accepted candidate delivery package draft
+next P0: memory completion state split
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1: passed
+node scripts/validate_local_commit_scope.js: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed
+real VCPChat read: no
+real VCPToolBox read: no
+plugin/API/DailyNote/VCP memory/image action: no
+push/tag/release/PR: no
+
 2026-05-07 runtime usability controls:
 status: completed_validated_local_runtime_prototype
 changed files: review_console/runtime_prototype/app.js, review_console/runtime_prototype/index.html, review_console/runtime_prototype/styles.css, review_console/runtime_prototype/runtime_guard.js, scripts/validate_runtime_delivery_surface.js, scripts/validate_runtime_guard_unit.js, scripts/validate_runtime_prototype_smoke.js
@@ -793,11 +1017,11 @@ Historical v7.45 phase: v7.45 cdp read-only attempt record
 ## Current Stop Status
 
 ```text
-Runtime Review Console usability controls are completed and validated locally. Further real VCPChat/VCPToolBox reads, plugin/API/DailyNote/VCP memory/image actions, retry generation, tag/push/PR/release, and A5 production execution remain blocked until a new explicit authorization package is provided.
+Runtime Review Batch 8A local RC proposal is prepared as a local closeout and proposed commit scope. Further real VCPChat/VCPToolBox reads, plugin/API/DailyNote/VCP memory/image actions, retry generation, commit/tag/push/PR/release, and A5 production execution remain blocked until a new explicit authorization package is provided.
 ```
 
 ## Next Action
 
 ```text
-Next safe action is another local Runtime Review Console usability/validation batch, or a user-scoped A5 authorization package if production execution is requested.
+Next safe action is validation refresh for the Batch 8A local RC proposal, or a separately authorized version-action sequence. Production execution still requires a new explicit authorization package.
 ```

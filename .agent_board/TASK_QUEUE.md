@@ -60,6 +60,7 @@ none
 4. Update CHECKPOINT.md, RUN_STATE.md, VALIDATION_LOG.md, and HANDOFF.md after each meaningful batch.
 5. If the user wants deeper diagnosis, activate the v10.12 provider-side prompt fingerprint capture package only after explicit approval, or switch to alternate plugin/strategy planning.
 6. If the user wants to reuse a short approval flow, present a new current capsule first; bare `批准` only applies when Codex has just presented that exact capsule.
+7. After Batch 8A validation passes, stop before staging/commit/tag/push/PR until explicit version-action authorization is given.
 ```
 
 ### done
@@ -134,6 +135,16 @@ none
 67. Completed Runtime Review Console batch preauthorization review; candidate_review_state / preauthorization_status, batch_decision_draft, a5_preauthorization_review_package_draft, and authorizable / blocked / next-attention shortcuts validated locally.
 68. Completed Runtime Review Console session continuity and quality control; guarded export/import, batch selection/actions, risk tags, risk-grouped preauthorization, and Chinese inspection checklist validated locally.
 69. Completed Runtime Review Console usability controls; queue search/sort, undo history, session fingerprint, import preview, status glossary, compact queue cards, and stronger side-surface guards validated locally.
+70. Completed branch sync validator compatibility; codex/runtime-review-followup is now accepted by local commit scope and MVP validation, and the current board state tracks the new follow-up branch.
+71. Completed Runtime Review Console follow-up requirements audit; P0 delivery package draft and memory completion state split are now defined as next local implementation targets.
+72. Completed Runtime Review Console Batch 2A/2C local draft surfaces; accepted_candidate_delivery_package_draft and human_override_traceability_draft are now rendered, exported, guarded, and smoke-validated without real execution.
+73. Completed Runtime Review Console Batch 2B memory completion state split; memory_delta_draft now carries a separate memory_completion_state_draft, and the runtime prototype / guard / smoke / delivery surface validations passed locally.
+74. Completed Runtime Review long task delivery plan; Batch 3A through Batch 8A are documented with A4 local scope, A5/real-write/remote authorization gates, validation matrix, and stop conditions.
+75. Completed Runtime Review Batch 3A/3B/3C local stabilization; inactive_authorization_capsules_draft, runtime_review_state_draft, and local_commit_scope_plan_draft are rendered, exported, guarded, and runtime-validated locally.
+76. Completed Runtime Review Batch 4A bridge mock roundtrip candidate; bridge_mock_roundtrip_candidate_draft records project-local loadSession / previewDraft mock flow with submitDraft=0 and no real CDP/bridge/plugin/API/memory/image actions.
+77. Completed Runtime Review Batch 4B/5A/6A local readiness; real_bridge_authorization_package_draft, plugin_reliability_prompt_discipline_draft, and memory_write_completion_candidate_draft are rendered, exported, guarded, and ready for local validation.
+78. Completed Runtime Review Batch 5B/6B/7A local gate/archive readiness; single_real_generation_retry_gate_draft, real_memory_write_authorization_package_draft, and asset_archive_candidate_draft are rendered, exported, guarded, and validated locally.
+79. Completed Runtime Review Batch 8A local release-candidate proposal; proposed commit scope now covers the Runtime Review follow-up accumulated runtime prototype, validators, docs/indexes, validation checklist, and agent-board files. Local validation passed, and version actions remain unauthorized.
 ```
 
 ### blocked

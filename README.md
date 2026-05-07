@@ -7,7 +7,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard
+v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review follow-up Batch 8A local RC proposal
 ```
 
 已经完成：
@@ -77,6 +77,15 @@ v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard
 - v10.26 real DailyNote/VCP memory write closeout 记录 v10.25 单次真实写入已完成：actual_write_calls=1、writer 为 DailyNoteWrite、保存文件名和 sha256 已脱敏记录；单次授权已消耗，不授权第二次写入或版本动作。
 - v10.27 DailyNoteWrite root path correction 修正未来 DailyNoteWrite 写入根目录分类：从 `plugin_dir_dailynote` 改为 `vcp_root_dailynote`；本阶段不重跑 writer、不再次写 DailyNote/VCP memory。
 - v10.28 DailyNote canonical location guard 固化后续写入成功判定：`plugin_success_sufficient=false`，必须通过 canonical file 存在和 hash 匹配后才能标记 memory write complete。
+- Runtime Review follow-up requirements audit 梳理下一步本地审片台交付需求：accepted candidate delivery package、memory completion state split、human override traceability 和 inactive authorization capsule generator。
+- Runtime Review follow-up Batch 2A/2C 在 runtime prototype 中增加 accepted candidate delivery package draft 和 human override traceability draft，并用 guard / smoke / delivery surface 校验保持 no-write。
+- Runtime Review follow-up Batch 2B 在 runtime prototype 中增加 `memory_completion_state_draft`，把写入请求、写入授权、真实执行、canonical location 校验、hash 匹配和 `plugin_success_sufficient=false` 拆开。
+- Runtime Review long task delivery plan 把后续长任务拆成 Batch 3A 到 Batch 8A，明确哪些能本地 A4 推进，哪些必须等待 A5 / 真实写入 / 远端版本动作授权。
+- Runtime Review Batch 3A/3B/3C 在 runtime prototype 中落地未激活授权胶囊、Runtime 状态收敛和本地提交范围计划；所有新增面仍由 guard/smoke/delivery surface 校验为 no-execution 草案。
+- Runtime Review Batch 4A 在 runtime prototype 中落地 `bridge_mock_roundtrip_candidate_draft`，用项目内 mock 证明 Adapter dry-run handoff -> Review Console -> `previewDraft` 的 no-write 回环；`submitDraft`、真实 CDP/bridge、插件/API/记忆/图片动作仍禁止。
+- Runtime Review Batch 4B/5A/6A 在 runtime prototype 中落地真实 bridge 未激活授权包、DoubaoGen prompt 可靠性草案和 memory write completion candidate；真实 bridge/CDP、插件/API、DailyNote/VCP memory、图片和版本动作仍禁止。
+- Runtime Review Batch 5B/6B/7A 在 runtime prototype 中落地单次真实生图重试授权门、真实记忆写入授权包和 no-binary 资产归档候选；当前仍只允许本地草案，不调用 DoubaoGen、DailyNote/VCP memory 或创建图片。
+- Runtime Review Batch 8A 把 Runtime Review follow-up 累积工作收束为本地 release-candidate proposal 和提交范围清单；当前不 stage、不 commit、不 tag、不 push、不开 PR。
 
 当前 accepted asset 只以 ignored runtime 路径和哈希归档，不把图片二进制写入 Git、DailyNote 或 VCP 长期记忆。人工接受记录保留了已知视觉偏差：这是 `human_override` 通过，不是完美 prompt compliance。
 当前 A5 v10.4 / v10.5 / v10.9 新资产均被拒收，只保留 ignored runtime ref、哈希、评分和规则摘要；未把图片二进制写入 Git、DailyNote 或 VCP memory。
@@ -159,6 +168,13 @@ Photo Studio OS UI 生图生产线，以及 AI 图片评审与修正生产线。
 - `docs/212_v10_26_real_dailynote_write_closeout.md`：v10.25 单次 DailyNoteWrite 真实写入后的脱敏 closeout 记录，记录 `actual_write_calls=1` 和单次授权已消耗。
 - `docs/213_v10_27_dailynotewrite_root_path_correction.md`：DailyNoteWrite 后续写入根目录修复记录，确认 no-write 复算已指向 `vcp_root_dailynote`。
 - `docs/214_v10_28_dailynote_canonical_location_guard.md`：DailyNote 后续写入 canonical location guard，要求写后 canonical 位置存在和 hash 匹配。
+- `docs/215_runtime_review_followup_requirements_audit.md`：Runtime Review Console 后续交付需求审计和 Batch 2A/2B/2C 本地实现记录，定义剩余 P0/P1 顺序和验证边界。
+- `docs/216_runtime_review_long_task_delivery_plan.md`：Runtime Review 后续长任务总计划，覆盖 inactive authorization capsule generator、runtime state convergence、commit scope stabilization、bridge readiness、plugin reliability、memory lifecycle、asset archive 和 release candidate readiness。
+- `docs/217_runtime_review_batch_3a_3b_3c_local_stabilization.md`：Runtime Review Batch 3A/3B/3C 本地稳定化记录，覆盖未激活授权胶囊、状态收敛和本地提交范围分组计划。
+- `docs/218_runtime_review_batch_4a_bridge_mock_roundtrip.md`：Runtime Review Batch 4A 本地 bridge mock 回环记录，覆盖 loadSession / previewDraft mock、submitDraft 禁止和 no-write guard。
+- `docs/219_runtime_review_batch_4b_5a_6a_local_readiness.md`：Runtime Review Batch 4B/5A/6A 本地 readiness 记录，覆盖真实 bridge 授权包、prompt 可靠性和记忆完成候选。
+- `docs/220_runtime_review_batch_5b_6b_7a_local_gate_archive.md`：Runtime Review Batch 5B/6B/7A 本地 gate/archive 记录，覆盖真实重试授权门、真实记忆写入授权包和 no-binary 资产归档候选。
+- `docs/221_runtime_review_batch_8a_release_candidate_readiness_local_proposal.md`：Runtime Review Batch 8A 本地 release-candidate proposal，固定提交范围、验证矩阵和版本动作阻断边界。
 - `integrations/vcp/v10_8_positive_still_life_real_generation_authorization_draft.md`：下一次正向静物真实生成的未激活 A5 授权草案；仅供人工审查，不构成执行授权。
 - `integrations/vcp/v10_8_positive_still_life_short_approval_template.md`：短批准模板；允许在私有 ignored 插件路径绑定存在时用 `批准 v10.8 静物单次生成` 进入 preflight。
 - `integrations/vcp/v10_10_prompt_handoff_diagnostic_authorization_template.md`：未来无生图传参诊断的未激活授权模板；`max_plugin_calls=0`。
@@ -253,6 +269,7 @@ git diff --check
 - `docs/212_v10_26_real_dailynote_write_closeout.md`
 - `docs/213_v10_27_dailynotewrite_root_path_correction.md`
 - `docs/214_v10_28_dailynote_canonical_location_guard.md`
+- `docs/215_runtime_review_followup_requirements_audit.md`
 - `integrations/vcp/v10_8_positive_still_life_real_generation_authorization_draft.md`
 - `integrations/vcp/v10_8_positive_still_life_short_approval_template.md`
 - `integrations/vcp/v10_10_prompt_handoff_diagnostic_authorization_template.md`

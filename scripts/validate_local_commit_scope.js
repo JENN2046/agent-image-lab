@@ -20,8 +20,10 @@ const allowedModifiedFiles = [
   "review_console/static_prototype/mock_data.js",
   "review_console/runtime_prototype/README.md",
   "review_console/runtime_prototype/app.js",
+  "review_console/runtime_prototype/FIELD_MAPPING.md",
   "review_console/runtime_prototype/host_bridge_mock.js",
   "review_console/runtime_prototype/index.html",
+  "review_console/runtime_prototype/runtime_guard.js",
   "review_console/runtime_prototype/styles.css",
   "scripts/validate_local_commit_scope.js",
   "scripts/validate-agent-image-lab-local.ps1",
@@ -42,6 +44,7 @@ const allowedModifiedFiles = [
   "scripts/validate_v5_handoff_freshness.js",
   "scripts/validate_v5_true_loop_candidate_delivery.js",
   "scripts/validate_runtime_delivery_surface.js",
+  "scripts/validate_runtime_guard_unit.js",
   "scripts/validate_runtime_prototype_suite.js",
   "scripts/validate_runtime_prototype_smoke.js",
   "tests/schema_examples/v5_1_runtime_delivery_surface.example.yaml",
@@ -142,6 +145,13 @@ const allowedUntrackedFiles = [
   "review_console/embed_contract/v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.md",
   "tests/schema_examples/v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.example.yaml",
   "scripts/validate_v10_12_a5_provider_side_prompt_fingerprint_capture_authorization_package.js",
+  "docs/215_runtime_review_followup_requirements_audit.md",
+  "docs/216_runtime_review_long_task_delivery_plan.md",
+  "docs/217_runtime_review_batch_3a_3b_3c_local_stabilization.md",
+  "docs/218_runtime_review_batch_4a_bridge_mock_roundtrip.md",
+  "docs/219_runtime_review_batch_4b_5a_6a_local_readiness.md",
+  "docs/220_runtime_review_batch_5b_6b_7a_local_gate_archive.md",
+  "docs/221_runtime_review_batch_8a_release_candidate_readiness_local_proposal.md",
   "scripts/validate_runtime_delivery_surface.js",
   "scripts/validate_runtime_guard_unit.js",
   "scripts/validate_runtime_prototype_suite.js",
@@ -173,7 +183,8 @@ const allowedUntrackedFiles = [
 const allowedBranches = [
   "master",
   "codex/v5.11-post-merge-reconciliation",
-  "codex/v5.12-release-candidate-readiness"
+  "codex/v5.12-release-candidate-readiness",
+  "codex/runtime-review-followup"
 ];
 
 function assert(condition, message) {
@@ -367,6 +378,42 @@ function main() {
   assert(
     allowedUntrackedFiles.includes("scripts/validate_v5_12_release_candidate_readiness.js"),
     "v5.12 validation script must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("docs/215_runtime_review_followup_requirements_audit.md"),
+    "Runtime Review follow-up requirements audit must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("docs/216_runtime_review_long_task_delivery_plan.md"),
+    "Runtime Review long task delivery plan must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("docs/217_runtime_review_batch_3a_3b_3c_local_stabilization.md"),
+    "Runtime Review Batch 3A/3B/3C stabilization doc must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("docs/218_runtime_review_batch_4a_bridge_mock_roundtrip.md"),
+    "Runtime Review Batch 4A bridge mock roundtrip doc must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("docs/219_runtime_review_batch_4b_5a_6a_local_readiness.md"),
+    "Runtime Review Batch 4B/5A/6A local readiness doc must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("docs/220_runtime_review_batch_5b_6b_7a_local_gate_archive.md"),
+    "Runtime Review Batch 5B/6B/7A gate/archive doc must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("docs/221_runtime_review_batch_8a_release_candidate_readiness_local_proposal.md"),
+    "Runtime Review Batch 8A local RC proposal doc must be included in the untracked allowlist."
+  );
+  assert(
+    allowedModifiedFiles.includes("review_console/runtime_prototype/runtime_guard.js"),
+    "Runtime guard must be included in the modified allowlist."
+  );
+  assert(
+    allowedModifiedFiles.includes("scripts/validate_runtime_guard_unit.js"),
+    "Runtime guard unit validator must be included in the modified allowlist."
   );
 
   const result = {

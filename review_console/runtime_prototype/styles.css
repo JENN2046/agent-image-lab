@@ -54,6 +54,22 @@ body {
   border-color: #66516a;
 }
 
+.auth-capsule-panel {
+  border-color: #6a514e;
+}
+
+.delivery-panel {
+  border-color: #5c6650;
+}
+
+.runtime-state-panel {
+  border-color: #4f6a68;
+}
+
+.traceability-panel {
+  border-color: #6a5869;
+}
+
 .session-panel {
   border-color: #4f6171;
 }
@@ -96,6 +112,42 @@ body {
 
 .handoff-panel {
   border-color: #665b3d;
+}
+
+.bridge-roundtrip-panel {
+  border-color: #4e6656;
+}
+
+.real-bridge-auth-panel {
+  border-color: #52664e;
+}
+
+.prompt-reliability-panel {
+  border-color: #66524e;
+}
+
+.memory-completion-candidate-panel {
+  border-color: #4e5f66;
+}
+
+.generation-retry-gate-panel {
+  border-color: #665c4e;
+}
+
+.memory-write-auth-panel {
+  border-color: #5c4e66;
+}
+
+.asset-archive-candidate-panel {
+  border-color: #4e6661;
+}
+
+.commit-scope-panel {
+  border-color: #655f4b;
+}
+
+.memory-completion-panel {
+  border-color: #5c6a49;
 }
 
 .eyebrow {
@@ -224,6 +276,16 @@ dd {
 .handoff-grid,
 .batch-grid,
 .preauth-grid,
+.auth-capsule-grid,
+.delivery-grid,
+.bridge-roundtrip-grid,
+.real-bridge-auth-grid,
+.prompt-reliability-grid,
+.memory-completion-candidate-grid,
+.generation-retry-gate-grid,
+.memory-write-auth-grid,
+.asset-archive-candidate-grid,
+.commit-scope-grid,
 .readable-draft-cards {
   display: grid;
   gap: 12px;
@@ -233,6 +295,16 @@ dd {
 .handoff-grid h3,
 .batch-grid h3,
 .preauth-grid h3,
+.auth-capsule-grid h3,
+.delivery-grid h3,
+.bridge-roundtrip-grid h3,
+.real-bridge-auth-grid h3,
+.prompt-reliability-grid h3,
+.memory-completion-candidate-grid h3,
+.generation-retry-gate-grid h3,
+.memory-write-auth-grid h3,
+.asset-archive-candidate-grid h3,
+.commit-scope-grid h3,
 .readable-draft-cards h3 {
   margin: 0 0 10px;
   font-size: 16px;
@@ -240,7 +312,16 @@ dd {
 
 .handoff-grid ul,
 .batch-grid ul,
-.preauth-grid ul {
+.preauth-grid ul,
+.auth-capsule-grid ul,
+.bridge-roundtrip-grid ul,
+.real-bridge-auth-grid ul,
+.prompt-reliability-grid ul,
+.memory-completion-candidate-grid ul,
+.generation-retry-gate-grid ul,
+.memory-write-auth-grid ul,
+.asset-archive-candidate-grid ul,
+.commit-scope-grid ul {
   display: grid;
   gap: 6px;
   margin: 0;
@@ -257,7 +338,19 @@ dd {
 .handoff-panel p,
 .batch-panel p,
 .preauth-panel p,
+.auth-capsule-panel p,
+.delivery-panel p,
+.runtime-state-panel p,
+.traceability-panel p,
 .session-panel p,
+.bridge-roundtrip-panel p,
+.real-bridge-auth-panel p,
+.prompt-reliability-panel p,
+.memory-completion-candidate-panel p,
+.generation-retry-gate-panel p,
+.memory-write-auth-panel p,
+.asset-archive-candidate-panel p,
+.commit-scope-panel p,
 .quality-panel p {
   color: #cfd7df;
   line-height: 1.6;
@@ -448,6 +541,14 @@ select {
   gap: 8px;
 }
 
+.traceability-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .queue-item {
   width: 100%;
   border: 1px solid #45505c;
@@ -491,6 +592,48 @@ select {
   background: #141b23;
 }
 
+.traceability-list li {
+  border: 1px solid #45505c;
+  border-radius: 8px;
+  background: #12171d;
+  color: #f3f5f7;
+  padding: 9px 10px;
+  white-space: pre-wrap;
+  line-height: 1.45;
+  font-size: 13px;
+}
+
+.traceability-list li[data-traceability-class="accepted"] {
+  border-color: #3f615b;
+}
+
+.traceability-list li[data-traceability-class="accepted_candidate"] {
+  border-color: #5c6650;
+}
+
+.traceability-list li[data-traceability-class="human_override"] {
+  border-color: #7f5f31;
+  background: #1a1812;
+}
+
+.traceability-list li[data-traceability-class="rejected"] {
+  border-color: #74484a;
+}
+
+.traceability-list li[data-traceability-class="needs_human_review"] {
+  border-color: #665b3d;
+}
+
+.traceability-list li[data-delivery-package="true"] {
+  box-shadow: inset 4px 0 0 #7fd7c4;
+}
+
+.traceability-empty {
+  margin: 0;
+  color: #a9b3bd;
+  line-height: 1.5;
+}
+
 .queue-empty {
   margin: 0;
   color: #a9b3bd;
@@ -524,11 +667,19 @@ pre {
   }
 
   .version-grid,
-  .diff-grid,
-  .handoff-grid,
-  .batch-grid,
-  .preauth-grid,
-  .readable-draft-cards {
+    .diff-grid,
+    .handoff-grid,
+    .bridge-roundtrip-grid,
+    .real-bridge-auth-grid,
+    .prompt-reliability-grid,
+    .memory-completion-candidate-grid,
+    .generation-retry-gate-grid,
+    .memory-write-auth-grid,
+    .asset-archive-candidate-grid,
+    .batch-grid,
+    .preauth-grid,
+    .delivery-grid,
+    .readable-draft-cards {
     grid-template-columns: 1fr;
   }
 
