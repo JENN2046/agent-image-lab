@@ -1,0 +1,41 @@
+status: completed_validated_v10_7_a5_safer_prompt_review_package
+version: v10.7
+current_phase: "v10.7 A5 safer prompt review package"
+validation_file: scripts/validate_v10_7_a5_safer_prompt_review_package.js
+
+current_baseline:
+  previous_phase: "v10.6 A5 prompt failure analysis and safer strategy"
+  previous_record: docs/205_v10_6_a5_prompt_failure_analysis_and_safer_strategy.md
+  default_next_phase: "BLOCKED for user approval of prompt plus separate real generation authorization"
+
+prompt_preview:
+  prompt_id: a5_positive_still_life_prompt_v1
+  language: zh-CN
+  execution_authorized: false
+  prompt_cn: "明亮摄影棚桌面静物摄影。画面中心是一枚无标识相机镜头，周围摆放柔光灯板、空白色块卡、纯色亚克力几何片和干净浅灰桌面。所有物体表面保持空白、干净、无标记。真实产品摄影，高级柔光，简洁构图，留出干净背景。"
+
+prompt_scan_result:
+  prompt_preview_performed: true
+  prompt_string_scanned: true
+  risky_english_terms_absent: true
+  uses_photo_studio_os_name: false
+  uses_software_or_ui_terms: false
+  uses_cover_or_brand_terms: false
+  uses_people_terms: false
+  uses_screen_or_monitor_terms: false
+  positive_subjects_only: true
+  negative_prompt_overload: false
+  prompt_length_reasonable: true
+
+approval_gate:
+  user_prompt_approval_required: true
+  next_real_generation_allowed_by_this_record: false
+  next_real_generation_requires_new_authorization: true
+  selected_plugin_default: DoubaoGen
+  max_plugin_calls_default: 1
+  output_directory_must_be_new: true
+  memory_write_allowed_before_accepted_asset: false
+  daily_note_write_allowed_before_accepted_asset: false
+  vcp_memory_write_allowed_before_accepted_asset: false
+  submitDraft_allowed: false
+  commit_tag_push_pr_release_allowed_by_this_record: false

@@ -1,0 +1,88 @@
+status: local_validated_v10_1_a5_resume_after_external_worktree_reconciliation
+version: v10.1
+current_phase: "v10.1 A5 resume after external worktree reconciliation"
+validation_file: scripts/validate_v10_1_a5_resume_after_external_worktree_reconciliation.js
+
+current_baseline:
+  previous_phase: "v10.0 A5 end-to-end activation package readiness"
+  previous_record: docs/199_v10_0_a5_end_to_end_activation_package_readiness.md
+  resume_record: docs/200_v10_1_a5_resume_after_external_worktree_reconciliation.md
+  default_next_phase: "rerun A5 preflight after external worktree reconciliation"
+
+a5_resume_state:
+  active_a5_authorization_package_present: true
+  user_will_reconcile_external_worktrees: true
+  user_reported_external_worktrees_clean: true
+  external_worktree_reconciliation_performed_by_this_phase: false
+  external_worktree_recheck_performed_by_this_phase: false
+  a5_resume_ready: false
+  a5_execution_started: false
+  a5_preflight_rerun_required: true
+  previous_a5_preflight_blocked: true
+  real_vcpchat_root_provided: true
+  real_vcptoolbox_root_provided: true
+  raw_real_paths_recorded_in_git: false
+  external_target_worktrees_clean_last_observed: false
+  external_target_worktrees_clean_current: not_rechecked_by_this_phase
+  vcpchat_worktree_clean_current: not_rechecked_by_this_phase
+  vcptoolbox_worktree_clean_current: not_rechecked_by_this_phase
+  production_actions_blocked: true
+
+required_recheck_before_resume:
+  - confirm_agent_image_lab_branch_and_worktree
+  - fetch_remote_and_check_target_branch
+  - confirm_working_branch_still_valid
+  - confirm_tag_absent_locally_and_remotely
+  - confirm_output_directory_has_no_collision
+  - confirm_vcpchat_target_worktree_clean
+  - confirm_vcptoolbox_target_worktree_clean
+  - confirm_no_raw_sensitive_values_would_be_recorded
+  - confirm_bridge_allowlist_unchanged
+  - confirm_submitDraft_still_forbidden
+  - confirm_github_release_still_forbidden
+
+carry_forward_a5_package:
+  mode: single_batch_a5_end_to_end
+  selected_plugin_id: DoubaoGen
+  selected_plugin_command: generate
+  selected_plugin_model: doubao-seedream-5-0-260128
+  max_plugin_calls: 1
+  output_directory_ref: runs/a5_complete_delivery_photo_studio_os
+  overwrite_existing_files_allowed: false
+  bridge_methods_allowed:
+    - cancel
+    - loadSession
+    - previewDraft
+  bridge_methods_forbidden:
+    - submitDraft
+  max_bridge_calls_per_method: 1
+  daily_note_write_allowed: true
+  vcp_memory_write_allowed: true
+  max_daily_note_writes: 1
+  max_vcp_memory_writes: 1
+  github_release_allowed: false
+
+this_phase_boundary:
+  external_worktree_recheck_performed_by_this_phase: false
+  bridge_method_invocation_performed: false
+  bridge_cancel_called: false
+  bridge_load_session_called: false
+  bridge_preview_draft_called: false
+  bridge_submit_draft_called: false
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  daily_note_written: false
+  vcp_memory_written: false
+  image_created: false
+  output_file_written: false
+  commit_performed: false
+  tag_created: false
+  push_performed: false
+  pr_created: false
+  github_release_performed: false
+
+notes_cn:
+  - "v10.1 只准备外部工作树清理后的 A5 恢复预检材料。"
+  - "本阶段未重新检查外部工作树，未读取源码，未调用 bridge、插件、API、DailyNote 或 VCP memory。"
+  - "恢复真实执行前必须重新跑 A5 preflight。"

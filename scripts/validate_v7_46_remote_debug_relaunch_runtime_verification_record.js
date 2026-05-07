@@ -231,15 +231,12 @@ function main() {
     "scripts/validate_v7_46_remote_debug_relaunch_runtime_verification_record.js"
   ]);
 
-  const boardCurrent = includesAll(board, [
+  const boardHistorical = includesAll(board, [
     currentPhase,
-    "v7.46 local: remote-debug relaunch completed and CDP Runtime.evaluate surface verification passed",
-    "Local head before v7.46 batch: 3fdd966",
-    "pending local commits before v7.46: 6",
-    "Local pending commit chain before v7.46: 8f60ae1 -> 0326150 -> 975da9a -> d728a89 -> b83ccd5 -> 3fdd966",
     "Runtime.evaluate performed by this phase: yes, read-only surface checks only",
     "bridge method invocation performed: no",
-    "Without an active A5 authorization package, production actions remain blocked"
+    "v7.46 remote-debug relaunch",
+    "bridge methods were not called"
   ]);
 
   const checklistCurrent = includesAll(checklist, [
@@ -264,7 +261,7 @@ function main() {
   assert(noForbiddenTrue, "v7.46 must not set forbidden side-effect flags to true.");
   assert(noRawLocalPathOrEndpoint, "v7.46 must not save raw local paths or endpoints.");
   assert(indexesCurrent, "Top-level indexes must reference v7.46 runtime verification record.");
-  assert(boardCurrent, "Agent board must be synchronized to v7.46 runtime verification record.");
+  assert(boardHistorical, "Agent board must preserve v7.46 runtime verification history.");
   assert(checklistCurrent, "Validation checklist must include v7.46 checks.");
 
   process.stdout.write(`${JSON.stringify({
@@ -279,7 +276,7 @@ function main() {
       no_forbidden_true_flags: noForbiddenTrue,
       no_raw_local_path_or_endpoint: noRawLocalPathOrEndpoint,
       indexes_current: indexesCurrent,
-      agent_board_current: boardCurrent,
+      agent_board_current: boardHistorical,
       checklist_current: checklistCurrent,
       remote_debug_relaunch_performed_by_this_phase: true,
       cdp_endpoint_access_succeeded_by_this_phase: true,

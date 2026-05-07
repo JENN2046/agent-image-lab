@@ -80,6 +80,15 @@ $requiredFiles = @(
   'scripts/validate_v7_44_remote_debug_script_run_and_vcpchat_launch_record.js',
   'scripts/validate_v7_45_cdp_read_only_attempt_record.js',
   'scripts/validate_v7_46_remote_debug_relaunch_runtime_verification_record.js',
+  'scripts/validate_v10_0_a5_end_to_end_activation_package.js',
+  'scripts/validate_v10_1_a5_resume_after_external_worktree_reconciliation.js',
+  'scripts/validate_v10_2_a5_bridge_smoke_blocked_record.js',
+  'scripts/validate_v10_3_a5_bridge_integration_smoke_record.js',
+  'scripts/validate_v10_4_a5_doubaogen_single_generation_rejected_asset_record.js',
+  'scripts/validate_v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.js',
+  'scripts/validate_v10_6_a5_prompt_failure_analysis_and_safer_strategy.js',
+  'scripts/validate_v10_7_a5_safer_prompt_review_package.js',
+  'scripts/validate_v10_8_a5_positive_still_life_generation_preflight_gate.js',
   'scripts/run_vcpchat_review_console_remote_debug_smoke.ps1',
   'scripts/validate_runtime_guard_unit.js',
   'scripts/validate_runtime_prototype_smoke.js',
@@ -125,6 +134,15 @@ $requiredFiles = @(
   'docs/196_v7_44_remote_debug_script_run_and_vcpchat_launch_record.md',
   'docs/197_v7_45_cdp_read_only_attempt_record.md',
   'docs/198_v7_46_remote_debug_relaunch_runtime_verification_record.md',
+  'docs/199_v10_0_a5_end_to_end_activation_package_readiness.md',
+  'docs/200_v10_1_a5_resume_after_external_worktree_reconciliation.md',
+  'docs/201_v10_2_a5_bridge_smoke_blocked_record.md',
+  'docs/202_v10_3_a5_bridge_integration_smoke_record.md',
+  'docs/203_v10_4_a5_doubaogen_single_generation_rejected_asset_record.md',
+  'docs/204_v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.md',
+  'docs/205_v10_6_a5_prompt_failure_analysis_and_safer_strategy.md',
+  'docs/206_v10_7_a5_safer_prompt_review_package.md',
+  'docs/207_v10_8_a5_positive_still_life_generation_preflight_gate.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
@@ -217,6 +235,15 @@ $requiredFiles = @(
   'tests/schema_examples/v7_44_remote_debug_script_run_and_vcpchat_launch_record.example.yaml',
   'tests/schema_examples/v7_45_cdp_read_only_attempt_record.example.yaml',
   'tests/schema_examples/v7_46_remote_debug_relaunch_runtime_verification_record.example.yaml',
+  'tests/schema_examples/v10_0_a5_end_to_end_activation_package.example.yaml',
+  'tests/schema_examples/v10_1_a5_resume_after_external_worktree_reconciliation.example.yaml',
+  'tests/schema_examples/v10_2_a5_bridge_smoke_blocked_record.example.yaml',
+  'tests/schema_examples/v10_3_a5_bridge_integration_smoke_record.example.yaml',
+  'tests/schema_examples/v10_4_a5_doubaogen_single_generation_rejected_asset_record.example.yaml',
+  'tests/schema_examples/v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.example.yaml',
+  'tests/schema_examples/v10_6_a5_prompt_failure_analysis_and_safer_strategy.example.yaml',
+  'tests/schema_examples/v10_7_a5_safer_prompt_review_package.example.yaml',
+  'tests/schema_examples/v10_8_a5_positive_still_life_generation_preflight_gate.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -235,7 +262,16 @@ $requiredFiles = @(
   'review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_execution_record.md',
   'review_console/embed_contract/vcpchat_remote_debug_script_run_and_launch_record.md',
   'review_console/embed_contract/vcpchat_cdp_read_only_attempt_record.md',
-  'review_console/embed_contract/vcpchat_remote_debug_relaunch_runtime_verification_record.md'
+  'review_console/embed_contract/vcpchat_remote_debug_relaunch_runtime_verification_record.md',
+  'review_console/embed_contract/v10_0_a5_end_to_end_activation_package.md',
+  'review_console/embed_contract/v10_1_a5_resume_after_external_worktree_reconciliation.md',
+  'review_console/embed_contract/v10_2_a5_bridge_smoke_blocked_record.md',
+  'review_console/embed_contract/v10_3_a5_bridge_integration_smoke_record.md',
+  'review_console/embed_contract/v10_4_a5_doubaogen_single_generation_rejected_asset_record.md',
+  'review_console/embed_contract/v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.md',
+  'review_console/embed_contract/v10_6_a5_prompt_failure_analysis_and_safer_strategy.md',
+  'review_console/embed_contract/v10_7_a5_safer_prompt_review_package.md',
+  'review_console/embed_contract/v10_8_a5_positive_still_life_generation_preflight_gate.md'
 )
 
 $requiredDirectories = @(
@@ -4006,6 +4042,237 @@ if (-not $node) {
     }
   }
 
+  $v100A5ActivationOutput = & node (Join-Path $Root 'scripts/validate_v10_0_a5_end_to_end_activation_package.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v10.0 A5 end-to-end activation package validation exited with failure"
+  } else {
+    $v100A5Activation = ($v100A5ActivationOutput -join "`n") | ConvertFrom-Json
+    if ($v100A5Activation.passed -ne $true) {
+      Add-Failure "v10.0 A5 end-to-end activation package validation must report passed true"
+    }
+    if ($v100A5Activation.v10_0_a5_end_to_end_activation_package.active_a5_authorization_package_present -ne $true) {
+      Add-Failure "v10.0 must record active A5 authorization package presence"
+    }
+    if ($v100A5Activation.v10_0_a5_end_to_end_activation_package.activation_ready -ne $false) {
+      Add-Failure "v10.0 must keep activation_ready false after blocked preflight"
+    }
+    if ($v100A5Activation.v10_0_a5_end_to_end_activation_package.a5_preflight_blocked -ne $true) {
+      Add-Failure "v10.0 must record blocked A5 preflight"
+    }
+    if ($v100A5Activation.v10_0_a5_end_to_end_activation_package.a5_execution_started -ne $false) {
+      Add-Failure "v10.0 must not start A5 production execution"
+    }
+    if ($v100A5Activation.v10_0_a5_end_to_end_activation_package.github_release_allowed -ne $false) {
+      Add-Failure "v10.0 must keep GitHub Release disallowed"
+    }
+  }
+
+  $v101A5ResumeOutput = & node (Join-Path $Root 'scripts/validate_v10_1_a5_resume_after_external_worktree_reconciliation.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v10.1 A5 resume after external worktree reconciliation validation exited with failure"
+  } else {
+    $v101A5Resume = ($v101A5ResumeOutput -join "`n") | ConvertFrom-Json
+    if ($v101A5Resume.passed -ne $true) {
+      Add-Failure "v10.1 A5 resume after external worktree reconciliation validation must report passed true"
+    }
+    if ($v101A5Resume.v10_1_a5_resume_after_external_worktree_reconciliation.user_reported_external_worktrees_clean -ne $true) {
+      Add-Failure "v10.1 must record user-reported external worktree reconciliation"
+    }
+    if ($v101A5Resume.v10_1_a5_resume_after_external_worktree_reconciliation.a5_preflight_rerun_required -ne $true) {
+      Add-Failure "v10.1 must require A5 preflight rerun"
+    }
+    if ($v101A5Resume.v10_1_a5_resume_after_external_worktree_reconciliation.a5_resume_ready -ne $false) {
+      Add-Failure "v10.1 must keep a5_resume_ready false before machine recheck"
+    }
+    if ($v101A5Resume.v10_1_a5_resume_after_external_worktree_reconciliation.a5_execution_started -ne $false) {
+      Add-Failure "v10.1 must not start A5 production execution"
+    }
+    if ($v101A5Resume.v10_1_a5_resume_after_external_worktree_reconciliation.github_release_allowed -ne $false) {
+      Add-Failure "v10.1 must keep GitHub Release disallowed"
+    }
+  }
+
+  $v102A5BridgeSmokeOutput = & node (Join-Path $Root 'scripts/validate_v10_2_a5_bridge_smoke_blocked_record.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v10.2 A5 bridge smoke blocked record validation exited with failure"
+  } else {
+    $v102A5BridgeSmoke = ($v102A5BridgeSmokeOutput -join "`n") | ConvertFrom-Json
+    if ($v102A5BridgeSmoke.passed -ne $true) {
+      Add-Failure "v10.2 A5 bridge smoke blocked record validation must report passed true"
+    }
+    if ($v102A5BridgeSmoke.v10_2_a5_bridge_smoke_blocked_record.preflight_recheck_performed -ne $true) {
+      Add-Failure "v10.2 must record A5 preflight recheck"
+    }
+    if ($v102A5BridgeSmoke.v10_2_a5_bridge_smoke_blocked_record.external_target_worktrees_clean_current -ne $true) {
+      Add-Failure "v10.2 must record clean external target worktrees"
+    }
+    if ($v102A5BridgeSmoke.v10_2_a5_bridge_smoke_blocked_record.bridge_calls_observed -ne 0) {
+      Add-Failure "v10.2 must keep bridge call count at zero when surface is missing"
+    }
+    if ($v102A5BridgeSmoke.v10_2_a5_bridge_smoke_blocked_record.bridge_surface_missing -ne $true) {
+      Add-Failure "v10.2 must record missing bridge surface"
+    }
+    if ($v102A5BridgeSmoke.v10_2_a5_bridge_smoke_blocked_record.plugin_called -ne $false) {
+      Add-Failure "v10.2 must not call plugins after bridge smoke block"
+    }
+    if ($v102A5BridgeSmoke.v10_2_a5_bridge_smoke_blocked_record.github_release_allowed -ne $false) {
+      Add-Failure "v10.2 must keep GitHub Release disallowed"
+    }
+  }
+
+  $v103A5BridgeIntegrationOutput = & node (Join-Path $Root 'scripts/validate_v10_3_a5_bridge_integration_smoke_record.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v10.3 A5 bridge integration smoke record validation exited with failure"
+  } else {
+    $v103A5BridgeIntegration = ($v103A5BridgeIntegrationOutput -join "`n") | ConvertFrom-Json
+    if ($v103A5BridgeIntegration.passed -ne $true) {
+      Add-Failure "v10.3 A5 bridge integration smoke record validation must report passed true"
+    }
+    if ($v103A5BridgeIntegration.v10_3_a5_bridge_integration_smoke_record.no_write_bridge_exposed -ne $true) {
+      Add-Failure "v10.3 must record no-write bridge exposure"
+    }
+    if ($v103A5BridgeIntegration.v10_3_a5_bridge_integration_smoke_record.strict_allowlist_smoke_performed -ne $true) {
+      Add-Failure "v10.3 must record strict allowlist smoke"
+    }
+    if ($v103A5BridgeIntegration.v10_3_a5_bridge_integration_smoke_record.bridge_calls_observed -ne 3) {
+      Add-Failure "v10.3 must record three allowlist bridge calls"
+    }
+    if ($v103A5BridgeIntegration.v10_3_a5_bridge_integration_smoke_record.submitDraft_called -ne $false) {
+      Add-Failure "v10.3 strict allowlist smoke must not call submitDraft"
+    }
+    if ($v103A5BridgeIntegration.v10_3_a5_bridge_integration_smoke_record.human_review_required_before_production_continuation -ne $true) {
+      Add-Failure "v10.3 must require human review before production continuation"
+    }
+    if ($v103A5BridgeIntegration.v10_3_a5_bridge_integration_smoke_record.doubaogen_continuation_blocked -ne $true) {
+      Add-Failure "v10.3 must block DoubaoGen continuation pending human review"
+    }
+  }
+
+  $v104A5DoubaoGenOutput = & node (Join-Path $Root 'scripts/validate_v10_4_a5_doubaogen_single_generation_rejected_asset_record.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v10.4 A5 DoubaoGen single generation rejected asset record validation exited with failure"
+  } else {
+    $v104A5DoubaoGen = ($v104A5DoubaoGenOutput -join "`n") | ConvertFrom-Json
+    if ($v104A5DoubaoGen.passed -ne $true) {
+      Add-Failure "v10.4 A5 DoubaoGen rejected asset validation must report passed true"
+    }
+    if ($v104A5DoubaoGen.v10_4_a5_doubaogen_single_generation_rejected_asset_record.actual_plugin_calls -ne 1) {
+      Add-Failure "v10.4 must record exactly one DoubaoGen plugin call"
+    }
+    if ($v104A5DoubaoGen.v10_4_a5_doubaogen_single_generation_rejected_asset_record.generated_asset_count -ne 1) {
+      Add-Failure "v10.4 must record exactly one generated asset"
+    }
+    if ($v104A5DoubaoGen.v10_4_a5_doubaogen_single_generation_rejected_asset_record.asset_status -ne "rejected") {
+      Add-Failure "v10.4 generated asset must be rejected by safety review"
+    }
+    if ($v104A5DoubaoGen.v10_4_a5_doubaogen_single_generation_rejected_asset_record.memory_write_blocked_by_asset_review -ne $true) {
+      Add-Failure "v10.4 must block memory writes after rejected asset review"
+    }
+    if ($v104A5DoubaoGen.v10_4_a5_doubaogen_single_generation_rejected_asset_record.daily_note_write_performed -ne $false) {
+      Add-Failure "v10.4 must not write DailyNote after rejected asset review"
+    }
+    if ($v104A5DoubaoGen.v10_4_a5_doubaogen_single_generation_rejected_asset_record.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v10.4 must not write VCP memory after rejected asset review"
+    }
+  }
+
+  $v105A5DoubaoGenRetryOutput = & node (Join-Path $Root 'scripts/validate_v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v10.5 A5 DoubaoGen no-text retry rejected asset record validation exited with failure"
+  } else {
+    $v105A5DoubaoGenRetry = ($v105A5DoubaoGenRetryOutput -join "`n") | ConvertFrom-Json
+    if ($v105A5DoubaoGenRetry.passed -ne $true) {
+      Add-Failure "v10.5 A5 DoubaoGen retry validation must report passed true"
+    }
+    if ($v105A5DoubaoGenRetry.v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.actual_plugin_calls -ne 1) {
+      Add-Failure "v10.5 must record exactly one DoubaoGen retry plugin call"
+    }
+    if ($v105A5DoubaoGenRetry.v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.generated_asset_count -ne 1) {
+      Add-Failure "v10.5 must record exactly one generated retry asset"
+    }
+    if ($v105A5DoubaoGenRetry.v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.asset_status -ne "rejected") {
+      Add-Failure "v10.5 generated asset must be rejected by safety review"
+    }
+    if ($v105A5DoubaoGenRetry.v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.person_or_face_detected -ne $true) {
+      Add-Failure "v10.5 must record person or face risk"
+    }
+    if ($v105A5DoubaoGenRetry.v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.readable_text_or_logo_detected -ne $true) {
+      Add-Failure "v10.5 must record readable text or logo risk"
+    }
+    if ($v105A5DoubaoGenRetry.v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.daily_note_write_performed -ne $false) {
+      Add-Failure "v10.5 must not write DailyNote after rejected retry asset review"
+    }
+    if ($v105A5DoubaoGenRetry.v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v10.5 must not write VCP memory after rejected retry asset review"
+    }
+  }
+
+  $v106A5PromptStrategyOutput = & node (Join-Path $Root 'scripts/validate_v10_6_a5_prompt_failure_analysis_and_safer_strategy.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v10.6 A5 prompt failure analysis and safer strategy validation exited with failure"
+  } else {
+    $v106A5PromptStrategy = ($v106A5PromptStrategyOutput -join "`n") | ConvertFrom-Json
+    if ($v106A5PromptStrategy.passed -ne $true) {
+      Add-Failure "v10.6 A5 prompt strategy validation must report passed true"
+    }
+    if ($v106A5PromptStrategy.v10_6_a5_prompt_failure_analysis_and_safer_strategy.prompt_design_failure_acknowledged -ne $true) {
+      Add-Failure "v10.6 must acknowledge prompt design failure"
+    }
+    if ($v106A5PromptStrategy.v10_6_a5_prompt_failure_analysis_and_safer_strategy.next_real_generation_allowed_by_this_record -ne $false) {
+      Add-Failure "v10.6 must not authorize a new real generation"
+    }
+    if ($v106A5PromptStrategy.v10_6_a5_prompt_failure_analysis_and_safer_strategy.next_prompt_preview_required_before_execution -ne $true) {
+      Add-Failure "v10.6 must require prompt preview before execution"
+    }
+    if ($v106A5PromptStrategy.v10_6_a5_prompt_failure_analysis_and_safer_strategy.no_forbidden_true_execution -ne $true) {
+      Add-Failure "v10.6 must not record new real execution or version action"
+    }
+  }
+
+  $v107A5PromptReviewOutput = & node (Join-Path $Root 'scripts/validate_v10_7_a5_safer_prompt_review_package.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v10.7 A5 safer prompt review package validation exited with failure"
+  } else {
+    $v107A5PromptReview = ($v107A5PromptReviewOutput -join "`n") | ConvertFrom-Json
+    if ($v107A5PromptReview.passed -ne $true) {
+      Add-Failure "v10.7 A5 prompt review validation must report passed true"
+    }
+    if ($v107A5PromptReview.v10_7_a5_safer_prompt_review_package.prompt_risky_terms_absent -ne $true) {
+      Add-Failure "v10.7 prompt must not include risky trigger terms"
+    }
+    if ($v107A5PromptReview.v10_7_a5_safer_prompt_review_package.next_real_generation_allowed_by_this_record -ne $false) {
+      Add-Failure "v10.7 must not authorize a new real generation"
+    }
+    if ($v107A5PromptReview.v10_7_a5_safer_prompt_review_package.user_prompt_approval_required -ne $true) {
+      Add-Failure "v10.7 must require user prompt approval"
+    }
+    if ($v107A5PromptReview.v10_7_a5_safer_prompt_review_package.no_forbidden_true_execution -ne $true) {
+      Add-Failure "v10.7 must not record new real execution or version action"
+    }
+  }
+
+  $v108A5PreflightGateOutput = & node (Join-Path $Root 'scripts/validate_v10_8_a5_positive_still_life_generation_preflight_gate.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v10.8 A5 positive still-life generation preflight gate validation exited with failure"
+  } else {
+    $v108A5PreflightGate = ($v108A5PreflightGateOutput -join "`n") | ConvertFrom-Json
+    if ($v108A5PreflightGate.passed -ne $true) {
+      Add-Failure "v10.8 A5 preflight gate validation must report passed true"
+    }
+    if ($v108A5PreflightGate.v10_8_a5_positive_still_life_generation_preflight_gate.prompt_locked_for_future_authorization -ne $true) {
+      Add-Failure "v10.8 must lock the reviewed prompt for future authorization"
+    }
+    if ($v108A5PreflightGate.v10_8_a5_positive_still_life_generation_preflight_gate.next_real_generation_allowed_by_this_record -ne $false) {
+      Add-Failure "v10.8 must not authorize a new real generation"
+    }
+    if ($v108A5PreflightGate.v10_8_a5_positive_still_life_generation_preflight_gate.separate_real_generation_authorization_required -ne $true) {
+      Add-Failure "v10.8 must require separate real generation authorization"
+    }
+    if ($v108A5PreflightGate.v10_8_a5_positive_still_life_generation_preflight_gate.no_forbidden_true_execution -ne $true) {
+      Add-Failure "v10.8 must not record real execution or version action"
+    }
+  }
+
   $runHistoricalCurrentStateValidators = $false
   if ($runHistoricalCurrentStateValidators) {
   $localCheckpointOutput = & node (Join-Path $Root 'scripts/validate_local_checkpoint_manifest.js')
@@ -4818,8 +5085,8 @@ if (-not $node) {
     $currentBranch = ((& git branch --show-current) -join "`n").Trim()
     if ($LASTEXITCODE -ne 0) {
       Add-Failure "git branch --show-current failed during local commit scope validation"
-    } elseif ($currentBranch -notin @('master', 'codex/v5.11-post-merge-reconciliation', 'codex/v5.12-release-candidate-readiness')) {
-      Add-Failure "local commit scope expected branch master, codex/v5.11-post-merge-reconciliation, or codex/v5.12-release-candidate-readiness, got $currentBranch"
+    } elseif ($currentBranch -notin @('master', 'codex/v5.11-post-merge-reconciliation', 'codex/v5.12-release-candidate-readiness', 'codex/a5-complete-delivery-20260507')) {
+      Add-Failure "local commit scope expected branch master, codex/v5.11-post-merge-reconciliation, codex/v5.12-release-candidate-readiness, or codex/a5-complete-delivery-20260507, got $currentBranch"
     }
 
     $localTagCommit = ((& git rev-parse --short v4.8-local-validation-checkpoint) -join "`n").Trim()

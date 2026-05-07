@@ -3077,3 +3077,160 @@
 - [ ] v7.46 必须保持 bridge 方法、插件/API/DailyNote/VCP 记忆/图片/依赖/manifest/lockfile/VCPChat 源码修改/远端推送均未发生。
 - [ ] v7.46 默认下一安全阶段为 `BLOCKED before bridge invocation, source read, plugin/API/DailyNote/VCP memory/image, push/tag/release`。
 - [ ] `node scripts/validate_v7_46_remote_debug_relaunch_runtime_verification_record.js` 通过。
+
+## v10.0 A5 End-to-end Activation Package Readiness 检查
+
+- [ ] 当前阶段字符串为 `v10.0 A5 end-to-end activation package readiness`。
+- [ ] `docs/199_v10_0_a5_end_to_end_activation_package_readiness.md` 存在。
+- [ ] `review_console/embed_contract/v10_0_a5_end_to_end_activation_package.md` 存在。
+- [ ] `tests/schema_examples/v10_0_a5_end_to_end_activation_package.example.yaml` 存在。
+- [ ] `scripts/validate_v10_0_a5_end_to_end_activation_package.js` 存在。
+- [ ] v10.0 记录上一阶段为 `v7.46 remote-debug relaunch runtime verification record`。
+- [ ] v10.0 必须记录 `active_a5_authorization_package_present=true`。
+- [ ] v10.0 必须记录 `activation_ready=false`、`a5_preflight_blocked=true`、`a5_execution_started=false`。
+- [ ] v10.0 必须记录 `real_vcpchat_root_provided=true` 和 `real_vcptoolbox_root_provided=true`，但不得保存 raw 真实路径。
+- [ ] v10.0 必须记录 `external_target_worktrees_clean=false`、`vcpchat_worktree_clean=false`、`vcptoolbox_worktree_clean=false`。
+- [ ] v10.0 必须记录 DoubaoGen、`max_plugin_calls=1`、`max_daily_note_writes=1`、`max_vcp_memory_writes=1`。
+- [ ] v10.0 必须记录 bridge allowlist 为 cancel / loadSession / previewDraft，并保持 submitDraft forbidden。
+- [ ] v10.0 必须记录 `github_release_allowed=false`。
+- [ ] v10.0 必须保持 bridge 调用、插件/API/DailyNote/VCP 记忆/图片/VCPChat 修改/VCPToolBox 修改/commit/tag/push/PR/GitHub Release 均未发生。
+- [ ] `node scripts/validate_v10_0_a5_end_to_end_activation_package.js` 通过。
+
+## v10.1 A5 Resume After External Worktree Reconciliation 检查
+
+- [ ] 当前阶段字符串为 `v10.1 A5 resume after external worktree reconciliation`。
+- [ ] `docs/200_v10_1_a5_resume_after_external_worktree_reconciliation.md` 存在。
+- [ ] `review_console/embed_contract/v10_1_a5_resume_after_external_worktree_reconciliation.md` 存在。
+- [ ] `tests/schema_examples/v10_1_a5_resume_after_external_worktree_reconciliation.example.yaml` 存在。
+- [ ] `scripts/validate_v10_1_a5_resume_after_external_worktree_reconciliation.js` 存在。
+- [ ] v10.1 记录上一阶段为 `v10.0 A5 end-to-end activation package readiness`。
+- [ ] v10.1 必须记录 `user_reported_external_worktrees_clean=true`。
+- [ ] v10.1 必须记录 `a5_preflight_rerun_required=true`。
+- [ ] v10.1 必须记录 `a5_resume_ready=false`。
+- [ ] v10.1 必须记录 `external_worktree_recheck_performed_by_this_phase=false`。
+- [ ] v10.1 必须记录恢复前重新确认分支、tag、输出目录、外部目标工作树和禁止项。
+- [ ] v10.1 必须记录 DoubaoGen、`max_plugin_calls=1`、bridge allowlist、submitDraft forbidden、`github_release_allowed=false`。
+- [ ] v10.1 必须保持 bridge 调用、插件/API/DailyNote/VCP 记忆/图片/VCPChat 修改/VCPToolBox 修改/commit/tag/push/PR/GitHub Release 均未发生。
+- [ ] `node scripts/validate_v10_1_a5_resume_after_external_worktree_reconciliation.js` 通过。
+
+## v10.2 A5 Bridge Smoke Blocked Record 检查
+
+- [ ] 当前阶段字符串为 `v10.2 A5 bridge smoke blocked record`。
+- [ ] `docs/201_v10_2_a5_bridge_smoke_blocked_record.md` 存在。
+- [ ] `review_console/embed_contract/v10_2_a5_bridge_smoke_blocked_record.md` 存在。
+- [ ] `tests/schema_examples/v10_2_a5_bridge_smoke_blocked_record.example.yaml` 存在。
+- [ ] `scripts/validate_v10_2_a5_bridge_smoke_blocked_record.js` 存在。
+- [ ] v10.2 记录上一阶段为 `v10.1 A5 resume after external worktree reconciliation`。
+- [ ] v10.2 必须记录 `preflight_recheck_performed=true`。
+- [ ] v10.2 必须记录外部目标工作树复查 clean、目标 tag 不存在、输出目录无碰撞。
+- [ ] v10.2 必须记录 CDP 可用、targets list 已读、runtime cleanup 已执行。
+- [ ] v10.2 必须记录 `bridge_calls_observed=0`。
+- [ ] v10.2 必须记录 `bridge_surface_missing=true`。
+- [ ] v10.2 必须记录 `github_release_allowed=false`。
+- [ ] v10.2 必须保持插件/API/DailyNote/VCP 记忆/图片/VCPChat 修改/VCPToolBox 修改/commit/tag/push/PR/GitHub Release 均未发生。
+- [ ] `node scripts/validate_v10_2_a5_bridge_smoke_blocked_record.js` 通过。
+
+## v10.3 A5 Bridge Integration Smoke Record 检查
+
+- [ ] 当前阶段字符串为 `v10.3 A5 bridge integration smoke record`。
+- [ ] `docs/202_v10_3_a5_bridge_integration_smoke_record.md` 存在。
+- [ ] `review_console/embed_contract/v10_3_a5_bridge_integration_smoke_record.md` 存在。
+- [ ] `tests/schema_examples/v10_3_a5_bridge_integration_smoke_record.example.yaml` 存在。
+- [ ] `scripts/validate_v10_3_a5_bridge_integration_smoke_record.js` 存在。
+- [ ] v10.3 记录上一阶段为 `v10.2 A5 bridge smoke blocked record`。
+- [ ] v10.3 必须记录 `vcpchat_bridge_file_set_authorized=true`。
+- [ ] v10.3 必须记录只修改 VCPChat 一个 renderer 文件，且不得记录 raw 路径。
+- [ ] v10.3 必须记录 `no_write_bridge_exposed=true`。
+- [ ] v10.3 必须记录 `strict_allowlist_smoke_performed=true`。
+- [ ] v10.3 必须记录 `bridge_calls_observed=3`。
+- [ ] v10.3 必须记录 `submitDraft_called=false` 于严格 allowlist smoke。
+- [ ] v10.3 必须记录 `initial_submitDraft_rejection_probe_performed=true` 并要求人工复核后才能继续 DoubaoGen。
+- [ ] v10.3 必须记录 `human_review_required_before_production_continuation=true`。
+- [ ] v10.3 必须保持插件/API/DailyNote/VCP 记忆/图片/依赖/lockfile/commit/tag/push/PR/GitHub Release 均未发生。
+- [ ] `node scripts/validate_v10_3_a5_bridge_integration_smoke_record.js` 通过。
+
+## v10.4 A5 DoubaoGen Single Generation Rejected Asset Record 检查
+
+- [ ] 当前阶段字符串为 `v10.4 A5 DoubaoGen single generation rejected asset record`。
+- [ ] `docs/203_v10_4_a5_doubaogen_single_generation_rejected_asset_record.md` 存在。
+- [ ] `review_console/embed_contract/v10_4_a5_doubaogen_single_generation_rejected_asset_record.md` 存在。
+- [ ] `tests/schema_examples/v10_4_a5_doubaogen_single_generation_rejected_asset_record.example.yaml` 存在。
+- [ ] `scripts/validate_v10_4_a5_doubaogen_single_generation_rejected_asset_record.js` 存在。
+- [ ] v10.4 必须记录人工复核后继续 A5 生产链路。
+- [ ] v10.4 必须记录 `selected_plugin_id=DoubaoGen`。
+- [ ] v10.4 必须记录 `actual_plugin_calls=1`。
+- [ ] v10.4 必须记录 `generated_asset_count=1`。
+- [ ] v10.4 必须记录 `asset_status=rejected`。
+- [ ] v10.4 必须记录 `readable_text_or_logo_detected=true`。
+- [ ] v10.4 必须记录 `memory_write_blocked_by_asset_review=true`。
+- [ ] v10.4 必须记录 DailyNote / VCP memory 写入均未执行。
+- [ ] v10.4 必须记录 commit/tag/push/PR/GitHub Release 均未执行。
+- [ ] `node scripts/validate_v10_4_a5_doubaogen_single_generation_rejected_asset_record.js` 通过。
+
+## v10.5 A5 DoubaoGen No-text Retry Rejected Asset Record 检查
+
+- [ ] 当前阶段字符串为 `v10.5 A5 DoubaoGen no-text retry rejected asset record`。
+- [ ] `docs/204_v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.md` 存在。
+- [ ] `review_console/embed_contract/v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.md` 存在。
+- [ ] `tests/schema_examples/v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.example.yaml` 存在。
+- [ ] `scripts/validate_v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.js` 存在。
+- [ ] v10.5 必须记录新的 A5 no-text retry 授权。
+- [ ] v10.5 必须记录 `selected_plugin_id=DoubaoGen`。
+- [ ] v10.5 必须记录 `actual_plugin_calls=1`。
+- [ ] v10.5 必须记录 `generated_asset_count=1`。
+- [ ] v10.5 必须记录 `asset_status=rejected`。
+- [ ] v10.5 必须记录 `person_or_face_detected=true`。
+- [ ] v10.5 必须记录 `readable_text_or_logo_detected=true`。
+- [ ] v10.5 必须记录 DailyNote / VCP memory 写入均未执行。
+- [ ] v10.5 必须记录 commit/tag/push/PR/GitHub Release 均未执行。
+- [ ] `node scripts/validate_v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.js` 通过。
+
+## v10.6 A5 Prompt Failure Analysis And Safer Strategy 检查
+
+- [ ] 当前阶段字符串为 `v10.6 A5 prompt failure analysis and safer strategy`。
+- [ ] `docs/205_v10_6_a5_prompt_failure_analysis_and_safer_strategy.md` 存在。
+- [ ] `review_console/embed_contract/v10_6_a5_prompt_failure_analysis_and_safer_strategy.md` 存在。
+- [ ] `tests/schema_examples/v10_6_a5_prompt_failure_analysis_and_safer_strategy.example.yaml` 存在。
+- [ ] `scripts/validate_v10_6_a5_prompt_failure_analysis_and_safer_strategy.js` 存在。
+- [ ] v10.6 必须记录 `prompt_design_failure_acknowledged=true`。
+- [ ] v10.6 必须记录 v10.5 prompt 模板由 agent 给出。
+- [ ] v10.6 必须记录 v10.4 / v10.5 失败分析。
+- [ ] v10.6 必须记录 safer strategy 为 `positive_only_unbranded_still_life`。
+- [ ] v10.6 必须记录候选 prompt 是草案，`execution_authorized=false`。
+- [ ] v10.6 必须记录 `next_real_generation_allowed_by_this_record=false`。
+- [ ] v10.6 必须记录 `prompt_preview_required_before_real_call=true`。
+- [ ] v10.6 必须保持插件/API/DailyNote/VCP memory/图片/commit/tag/push/PR/GitHub Release 均未发生。
+- [ ] `node scripts/validate_v10_6_a5_prompt_failure_analysis_and_safer_strategy.js` 通过。
+
+## v10.7 A5 Safer Prompt Review Package 检查
+
+- [ ] 当前阶段字符串为 `v10.7 A5 safer prompt review package`。
+- [ ] `docs/206_v10_7_a5_safer_prompt_review_package.md` 存在。
+- [ ] `review_console/embed_contract/v10_7_a5_safer_prompt_review_package.md` 存在。
+- [ ] `tests/schema_examples/v10_7_a5_safer_prompt_review_package.example.yaml` 存在。
+- [ ] `scripts/validate_v10_7_a5_safer_prompt_review_package.js` 存在。
+- [ ] v10.7 必须记录 prompt id 为 `a5_positive_still_life_prompt_v1`。
+- [ ] v10.7 必须记录 `prompt_preview_performed=true`。
+- [ ] v10.7 必须记录 `prompt_risky_terms_absent=true`。
+- [ ] v10.7 必须记录 `execution_authorized=false`。
+- [ ] v10.7 必须记录 `next_real_generation_allowed_by_this_record=false`。
+- [ ] v10.7 必须记录 `user_prompt_approval_required=true`。
+- [ ] v10.7 必须保持插件/API/DailyNote/VCP memory/图片/commit/tag/push/PR/GitHub Release 均未发生。
+- [ ] `node scripts/validate_v10_7_a5_safer_prompt_review_package.js` 通过。
+
+## v10.8 A5 Positive Still-life Generation Preflight Gate 检查
+
+- [ ] 当前阶段字符串为 `v10.8 A5 positive still-life generation preflight gate`。
+- [ ] `docs/207_v10_8_a5_positive_still_life_generation_preflight_gate.md` 存在。
+- [ ] `review_console/embed_contract/v10_8_a5_positive_still_life_generation_preflight_gate.md` 存在。
+- [ ] `tests/schema_examples/v10_8_a5_positive_still_life_generation_preflight_gate.example.yaml` 存在。
+- [ ] `scripts/validate_v10_8_a5_positive_still_life_generation_preflight_gate.js` 存在。
+- [ ] v10.8 必须记录 prompt id 为 `a5_positive_still_life_prompt_v1`。
+- [ ] v10.8 必须记录 `prompt_locked_for_future_authorization=true`。
+- [ ] v10.8 必须记录 `prompt_must_not_be_auto_edited=true`。
+- [ ] v10.8 必须记录 `user_prompt_approval_required=true`。
+- [ ] v10.8 必须记录 `separate_real_generation_authorization_required=true`。
+- [ ] v10.8 必须记录 `next_real_generation_allowed_by_this_record=false`。
+- [ ] v10.8 必须记录 DoubaoGen / generate / `doubao-seedream-5-0-260128` / `max_plugin_calls=1` 的下一次授权前锁定值。
+- [ ] v10.8 必须保持插件/API/DailyNote/VCP memory/图片/bridge/submitDraft/commit/tag/push/PR/GitHub Release 均未发生。
+- [ ] `node scripts/validate_v10_8_a5_positive_still_life_generation_preflight_gate.js` 通过。

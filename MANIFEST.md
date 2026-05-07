@@ -1,6 +1,6 @@
 # Agent Image Lab 打包清单
 
-本包包含 Agent Image Lab v1.0 true-loop closeout 候选所需的文档、schema、角色定义、记忆策略、审片台规格、Adapter dry-run 包、VCP 接入记录、授权门、真实执行脱敏记录、最终验收报告、v3.9-v4.2 Review Console runtime prototype 本地验证加固记录，v4.3-v4.9 guarded autopilot overlay / agent board / local checkpoint readiness / commit scope manifest / post-push state reconciliation / v4 index consistency validation / local tag push-readiness preflight，v5.0 post-merge delivery readiness index，v5.1 runtime delivery surface validation，v5.2 adapter delivery surface validation，v5.3 review console adapter handoff validation，v5.4 local sync readiness preflight，v5.5 post-commit reconciliation checkpoint，v5.6 v5 index consistency validation，v5.7 local batch commit-readiness preflight，v5.8 handoff freshness validation，v5.9 expanded v5 index consistency validation，v5.10 local true-loop candidate delivery closeout，v5.11 post-merge reconciliation，v5.12 release candidate readiness，v7.40 local A4/A5 autonomy mode alignment，v7.41 external remote-debug verification script creation record，v7.42 external remote-debug verification script creation authorization package，v7.43 external remote-debug verification script creation execution record，v7.44 remote-debug script run and VCPChat launch record，v7.45 CDP read-only attempt record，以及 v7.46 remote-debug relaunch runtime verification record。
+本包包含 Agent Image Lab v1.0 true-loop closeout 候选所需的文档、schema、角色定义、记忆策略、审片台规格、Adapter dry-run 包、VCP 接入记录、授权门、真实执行脱敏记录、最终验收报告、v3.9-v4.2 Review Console runtime prototype 本地验证加固记录，v4.3-v4.9 guarded autopilot overlay / agent board / local checkpoint readiness / commit scope manifest / post-push state reconciliation / v4 index consistency validation / local tag push-readiness preflight，v5.0 post-merge delivery readiness index，v5.1 runtime delivery surface validation，v5.2 adapter delivery surface validation，v5.3 review console adapter handoff validation，v5.4 local sync readiness preflight，v5.5 post-commit reconciliation checkpoint，v5.6 v5 index consistency validation，v5.7 local batch commit-readiness preflight，v5.8 handoff freshness validation，v5.9 expanded v5 index consistency validation，v5.10 local true-loop candidate delivery closeout，v5.11 post-merge reconciliation，v5.12 release candidate readiness，v7.40 local A4/A5 autonomy mode alignment，v7.41 external remote-debug verification script creation record，v7.42 external remote-debug verification script creation authorization package，v7.43 external remote-debug verification script creation execution record，v7.44 remote-debug script run and VCPChat launch record，v7.45 CDP read-only attempt record，v7.46 remote-debug relaunch runtime verification record，v10.0 A5 end-to-end activation package readiness / preflight-blocked 记录，v10.1 A5 resume after external worktree reconciliation 接续记录，v10.2 A5 bridge smoke blocked 记录，v10.3 A5 bridge integration smoke 记录，v10.4 A5 DoubaoGen single generation rejected asset 记录，v10.5 A5 DoubaoGen no-text retry rejected asset 记录，v10.6 A5 prompt failure analysis and safer strategy 记录，v10.7 A5 safer prompt review package 记录，以及 v10.8 A5 positive still-life generation preflight gate 记录。
 
 ## 重要声明
 
@@ -14,6 +14,15 @@
 - 所有记忆正文示例均为中文。
 - 已安装 `AGENTS.autopilot-overlay.md` 和 `.agent_board/` 作为本地续跑辅助；它不覆盖根 `AGENTS.md`。
 - 任何后续真实插件调用、DailyNote 写入、commit、tag、push 或 release 发布都需要单独授权。
+- v10.0 A5 授权包已接收，但 preflight 因外部目标工作树不干净而停止；真实生产步骤未启动。
+- v10.1 记录用户已报告外部目标工作树干净，但本阶段仍要求恢复前重新执行 A5 preflight。
+- v10.2 记录 A5 preflight 已 clean，但 VCPChat runtime 未暴露 Image Lab bridge，`bridge_calls_observed: 0`。
+- v10.3 记录 VCPChat no-write bridge 已集成且严格 allowlist smoke 通过；继续 DoubaoGen 前需人工复核一次初始 `submitDraft` rejected probe 偏差。
+- v10.4 记录人工复核后执行一次 DoubaoGen 真实生图；`actual_plugin_calls: 1`、`generated_asset_count: 1`，但资产因可读文字和类似 logo/标记被拒收，DailyNote / VCP memory 写入被阻断。
+- v10.5 记录更强无文字约束下的 DoubaoGen 单次重试；`actual_plugin_calls: 1`、`generated_asset_count: 1`，但资产因人物/脸、可读文字、logo/品牌标识和设备品牌标记被拒收，DailyNote / VCP memory 写入继续阻断。
+- v10.6 记录 v10.4 / v10.5 prompt 失败分析和下一版更安全策略；本阶段不执行真实生图，且要求下一次真实调用前先展示候选 prompt 给用户确认。
+- v10.7 记录 safer prompt review package；候选 prompt 已通过触发词扫描，真实生图仍需用户确认 prompt 并单独授权。
+- v10.8 记录 positive still-life generation preflight gate；`prompt_locked_for_future_authorization=true`，下一次真实生图仍需 prompt approval 和单独授权。
 
 ## Release readiness 文件
 
@@ -53,12 +62,30 @@
 - `docs/196_v7_44_remote_debug_script_run_and_vcpchat_launch_record.md`
 - `docs/197_v7_45_cdp_read_only_attempt_record.md`
 - `docs/198_v7_46_remote_debug_relaunch_runtime_verification_record.md`
+- `docs/199_v10_0_a5_end_to_end_activation_package_readiness.md`
+- `docs/200_v10_1_a5_resume_after_external_worktree_reconciliation.md`
+- `docs/201_v10_2_a5_bridge_smoke_blocked_record.md`
+- `docs/202_v10_3_a5_bridge_integration_smoke_record.md`
+- `docs/203_v10_4_a5_doubaogen_single_generation_rejected_asset_record.md`
+- `docs/204_v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.md`
+- `docs/205_v10_6_a5_prompt_failure_analysis_and_safer_strategy.md`
+- `docs/206_v10_7_a5_safer_prompt_review_package.md`
+- `docs/207_v10_8_a5_positive_still_life_generation_preflight_gate.md`
 - `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_record.md`
 - `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_authorization_package.md`
 - `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_execution_record.md`
 - `review_console/embed_contract/vcpchat_remote_debug_script_run_and_launch_record.md`
 - `review_console/embed_contract/vcpchat_cdp_read_only_attempt_record.md`
 - `review_console/embed_contract/vcpchat_remote_debug_relaunch_runtime_verification_record.md`
+- `review_console/embed_contract/v10_0_a5_end_to_end_activation_package.md`
+- `review_console/embed_contract/v10_1_a5_resume_after_external_worktree_reconciliation.md`
+- `review_console/embed_contract/v10_2_a5_bridge_smoke_blocked_record.md`
+- `review_console/embed_contract/v10_3_a5_bridge_integration_smoke_record.md`
+- `review_console/embed_contract/v10_4_a5_doubaogen_single_generation_rejected_asset_record.md`
+- `review_console/embed_contract/v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.md`
+- `review_console/embed_contract/v10_6_a5_prompt_failure_analysis_and_safer_strategy.md`
+- `review_console/embed_contract/v10_7_a5_safer_prompt_review_package.md`
+- `review_console/embed_contract/v10_8_a5_positive_still_life_generation_preflight_gate.md`
 - `tests/schema_examples/v7_40_local_a4_a5_autonomy_alignment.example.yaml`
 - `tests/schema_examples/v7_41_external_remote_debug_verification_script_creation_record.example.yaml`
 - `tests/schema_examples/v7_42_external_remote_debug_verification_script_creation_authorization_package.example.yaml`
@@ -66,6 +93,15 @@
 - `tests/schema_examples/v7_44_remote_debug_script_run_and_vcpchat_launch_record.example.yaml`
 - `tests/schema_examples/v7_45_cdp_read_only_attempt_record.example.yaml`
 - `tests/schema_examples/v7_46_remote_debug_relaunch_runtime_verification_record.example.yaml`
+- `tests/schema_examples/v10_0_a5_end_to_end_activation_package.example.yaml`
+- `tests/schema_examples/v10_1_a5_resume_after_external_worktree_reconciliation.example.yaml`
+- `tests/schema_examples/v10_2_a5_bridge_smoke_blocked_record.example.yaml`
+- `tests/schema_examples/v10_3_a5_bridge_integration_smoke_record.example.yaml`
+- `tests/schema_examples/v10_4_a5_doubaogen_single_generation_rejected_asset_record.example.yaml`
+- `tests/schema_examples/v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.example.yaml`
+- `tests/schema_examples/v10_6_a5_prompt_failure_analysis_and_safer_strategy.example.yaml`
+- `tests/schema_examples/v10_7_a5_safer_prompt_review_package.example.yaml`
+- `tests/schema_examples/v10_8_a5_positive_still_life_generation_preflight_gate.example.yaml`
 - `.agent_board/`
 - `AGENTS.autopilot-overlay.md`
 - `README_AGENT_IMAGE_LAB_AUTOPILOT.md`
@@ -96,6 +132,15 @@
 - `scripts/validate_v7_44_remote_debug_script_run_and_vcpchat_launch_record.js`
 - `scripts/validate_v7_45_cdp_read_only_attempt_record.js`
 - `scripts/validate_v7_46_remote_debug_relaunch_runtime_verification_record.js`
+- `scripts/validate_v10_0_a5_end_to_end_activation_package.js`
+- `scripts/validate_v10_1_a5_resume_after_external_worktree_reconciliation.js`
+- `scripts/validate_v10_2_a5_bridge_smoke_blocked_record.js`
+- `scripts/validate_v10_3_a5_bridge_integration_smoke_record.js`
+- `scripts/validate_v10_4_a5_doubaogen_single_generation_rejected_asset_record.js`
+- `scripts/validate_v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.js`
+- `scripts/validate_v10_6_a5_prompt_failure_analysis_and_safer_strategy.js`
+- `scripts/validate_v10_7_a5_safer_prompt_review_package.js`
+- `scripts/validate_v10_8_a5_positive_still_life_generation_preflight_gate.js`
 - `scripts/run_vcpchat_review_console_remote_debug_smoke.ps1`
 - `integrations/vcp/v0_7_real_execution_authorization_gate.md`
 - `integrations/vcp/v0_7_photo_studio_os_dry_run_rehearsal.md`
@@ -141,3 +186,12 @@
 - v7.44 runs the dry-run-only remote-debug smoke script and launches VCPChat only; it does not access CDP, call bridge methods, read or modify VCPChat/VCPToolBox, or authorize A5 production execution.
 - v7.45 records an authorized CDP read-only attempt only; no endpoint was available, so Runtime.evaluate and bridge verification were not performed.
 - v7.46 records authorized VCPChat remote-debug relaunch and CDP read-only Runtime.evaluate surface verification only; it does not call bridge methods, read or modify VCPChat/VCPToolBox source, call plugins/API/DailyNote, write VCP memory, create images, push, tag, or release.
+- v10.0 records an active A5 authorization package and preflight-blocked result only; external target worktrees were not clean, so bridge calls, source reads/modifications, plugin/API/DailyNote/VCP memory/image actions, commit, tag, push, PR, and GitHub Release were not performed.
+- v10.1 records the resume-after-clean package after the user reported external target worktrees clean; it still requires a fresh A5 preflight and performs no bridge call, plugin/API/DailyNote/VCP memory/image action, commit, tag, push, PR, or GitHub Release.
+- v10.2 records clean A5 preflight and a blocked bridge smoke: CDP was available, but the runtime did not expose Image Lab bridge, so bridge calls remained 0 and no plugin/API/DailyNote/VCP memory/image or version action occurred.
+- v10.3 records the authorized VCPChat no-write bridge integration and strict allowlist smoke; cancel/loadSession/previewDraft passed with no writes, while production continuation remains blocked for human review because an initial rejected submitDraft probe occurred.
+- v10.4 records one authorized DoubaoGen generation after human review; actual plugin calls were exactly 1 and one asset was produced, but the asset was rejected for readable text/logo risk, so DailyNote/VCP memory writes and version actions remain blocked.
+- v10.5 records one authorized stronger no-text DoubaoGen retry; actual plugin calls were exactly 1 and one asset was produced, but the asset was rejected for person/face, readable text, logo, and brand risk, so DailyNote/VCP memory writes and version actions remain blocked.
+- v10.6 records prompt failure accountability and a positive-only unbranded still-life strategy; it performs no generation and requires prompt preview plus new authorization before any next real call.
+- v10.7 records a safer prompt review package with trigger-term scanning; it performs no generation and keeps real calls blocked until user prompt approval plus a separate authorization package.
+- v10.8 records a positive still-life generation preflight gate with prompt_locked_for_future_authorization and required authorization fields; it performs no generation and keeps real calls blocked.

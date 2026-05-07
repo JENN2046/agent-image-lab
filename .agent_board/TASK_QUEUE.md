@@ -48,15 +48,15 @@ Stop before:
 ### in_progress
 
 ```text
-none
+Blocked after v10.7 safer prompt review package pending user prompt approval and separate real generation authorization.
 ```
 
 ### todo
 
 ```text
-1. Keep Adapter and Review Console work in no-execution / no-external-read mode unless an active A5 authorization package exists.
+1. Keep Adapter and Review Console work in no-execution / no-external-read mode unless an active A5 authorization package exists and preflight passes.
 2. If user authorizes remote or release movement, request exact target and run preflight before any push/tag/release.
-3. Stop before bridge invocation, source read, plugin/API/DailyNote/VCP memory/image, push/tag/release unless a new explicit authorization scope is active.
+3. Stop before any additional generation retry, DailyNote, VCP memory/image, push/tag/release until user approves the v10.7 prompt and authorizes real generation parameters or version action.
 4. Update CHECKPOINT.md, RUN_STATE.md, VALIDATION_LOG.md, and HANDOFF.md after each meaningful batch.
 ```
 
@@ -97,12 +97,21 @@ none
 32. Completed v7.44 remote-debug smoke script run and VCPChat launch without CDP or bridge access.
 33. Completed v7.45 CDP read-only attempt; no available CDP endpoint, so Runtime.evaluate was not performed.
 34. Completed v7.46 remote-debug relaunch and CDP Runtime.evaluate read-only surface verification; bridge methods were not called.
+35. Recorded v10.0 A5 end-to-end activation package readiness and stopped at preflight because external target worktrees were not clean.
+36. Recorded v10.1 A5 resume-after-clean package after the user reported external target worktrees clean; A5 preflight rerun is required before production execution.
+37. Recorded v10.2 A5 clean preflight and bridge smoke block; imageLabReview was missing, bridge_calls_observed stayed 0, and the remote-debug runtime was closed after the failed smoke.
+38. Recorded v10.3 VCPChat no-write bridge integration smoke; strict allowlist calls observed=3 and DoubaoGen continuation remains blocked pending human review.
+39. Recorded v10.4 DoubaoGen single generation; actual plugin calls observed: 1, generated asset status: rejected, and memory writes blocked by asset review.
+40. Recorded v10.5 DoubaoGen no-text retry; actual plugin calls observed in v10.5: 1, generated asset status in v10.5: rejected, and person/text/logo risks detected.
+41. Recorded v10.6 prompt failure analysis; v10.5 prompt design failure acknowledged, safer positive-only strategy recorded, and no real generation in v10.6.
+42. Recorded v10.7 safer prompt review package; prompt risky terms absent, real generation still blocked, and user prompt approval required.
+43. Recorded v10.8 positive still-life generation preflight gate; prompt locked for future authorization, real generation still blocked, and separate generation authorization required.
 ```
 
 ### blocked
 
 ```text
-1. Bridge method invocation, VCPChat/VCPToolBox source read or modification, plugin/API/DailyNote/VCP memory/image actions, push/tag/release, and A5 production execution remain blocked without a new explicit authorization scope.
+1. Additional plugin/API/DailyNote/VCP memory/image actions, push/tag/release, and A5 production execution remain blocked until prompt approval plus separate real generation authorization, or version-action authorization, is explicitly provided.
 ```
 
 ### skipped

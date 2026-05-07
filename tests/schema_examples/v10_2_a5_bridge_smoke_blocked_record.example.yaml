@@ -1,0 +1,72 @@
+status: blocked_validated_v10_2_a5_bridge_smoke_blocked_record
+version: v10.2
+current_phase: "v10.2 A5 bridge smoke blocked record"
+validation_file: scripts/validate_v10_2_a5_bridge_smoke_blocked_record.js
+
+current_baseline:
+  previous_phase: "v10.1 A5 resume after external worktree reconciliation"
+  previous_record: docs/200_v10_1_a5_resume_after_external_worktree_reconciliation.md
+  default_next_phase: "BLOCKED until VCPChat exposes imageLabReview bridge or an explicit VCPChat bridge integration file-set authorization is provided"
+
+a5_preflight_recheck_result:
+  preflight_recheck_performed: true
+  agent_image_lab_branch_valid: true
+  origin_master_sync_count: "0 0"
+  target_tag_absent: true
+  output_directory_collision: false
+  external_target_worktrees_rechecked: true
+  vcpchat_worktree_clean_current: true
+  vcptoolbox_worktree_clean_current: true
+  raw_real_paths_recorded_in_git: false
+  github_release_allowed: false
+
+runtime_launch_and_cleanup:
+  vcpchat_remote_debug_launch_attempted: true
+  vcpchat_remote_debug_launch_succeeded: true
+  cdp_endpoint_access_succeeded: true
+  cdp_targets_list_read: true
+  cdp_target_count: 3
+  raw_cdp_endpoint_recorded_in_git: false
+  raw_websocket_url_recorded_in_git: false
+  raw_runtime_log_recorded_in_git: false
+  runtime_cleanup_required: true
+  runtime_cleanup_attempted: true
+  cdp_port_still_listening_after_cleanup: false
+
+bridge_smoke_result:
+  selected_method: cancel
+  max_bridge_calls: 1
+  bridge_calls_observed: 0
+  bridge_surface_checked: true
+  bridge_surface_missing: true
+  checked_page_targets: 3
+  imageLabReview_present: false
+  imageLabReviewRuntime_present: false
+  imageLabReviewMount_present: false
+  bridge_method_invocation_performed: false
+  bridge_cancel_called: false
+  bridge_load_session_called: false
+  bridge_preview_draft_called: false
+  bridge_submit_draft_called: false
+  ack_summary_recorded: false
+
+production_guard_state:
+  a5_execution_started: false
+  side_effects_performed: false
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  daily_note_written: false
+  vcp_memory_written: false
+  image_created: false
+  output_file_written: false
+  commit_performed: false
+  tag_created: false
+  push_performed: false
+  pr_created: false
+  github_release_performed: false
+
+notes_cn:
+  - "v10.2 已重新执行 A5 preflight，外部目标工作树 clean 阻断解除。"
+  - "当前 VCPChat 运行时未暴露 imageLabReview bridge，cancel 调用次数保持 0。"
+  - "未调用插件、API、DailyNote、VCP memory，未创建图片，未执行版本动作。"

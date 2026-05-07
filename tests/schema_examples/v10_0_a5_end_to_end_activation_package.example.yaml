@@ -1,0 +1,124 @@
+status: blocked_validated_v10_0_a5_end_to_end_activation_package_preflight
+version: v10.0
+current_phase: "v10.0 A5 end-to-end activation package readiness"
+validation_file: scripts/validate_v10_0_a5_end_to_end_activation_package.js
+
+current_baseline:
+  repository: JENN2046/agent-image-lab
+  branch: master
+  previous_phase: "v7.46 remote-debug relaunch runtime verification record"
+  previous_record: docs/198_v7_46_remote_debug_relaunch_runtime_verification_record.md
+  default_next_phase: "BLOCKED until external target worktrees are clean or explicitly reconciled"
+
+a5_activation_state:
+  activation_package_recorded: true
+  active_a5_authorization_package_present: true
+  activation_ready: false
+  a5_execution_started: false
+  a5_preflight_started: true
+  a5_preflight_blocked: true
+  missing_required_fields: []
+  real_vcpchat_root_provided: true
+  real_vcptoolbox_root_provided: true
+  raw_real_paths_recorded_in_git: false
+  external_target_worktrees_clean: false
+  vcpchat_worktree_clean: false
+  vcptoolbox_worktree_clean: false
+  blocker_reason_cn: "外部目标工作树存在未提交或未跟踪变更；A5 真实执行停止。"
+  production_actions_blocked: true
+
+a5_authorization_required:
+  mode: single_batch_a5_end_to_end
+  target_repo: agent_image_lab
+  target_branch: master
+  working_branch: codex/a5-complete-delivery-20260507
+  pr_target_branch: master
+  real_vcpchat_root: required_external_value_not_recorded_in_git
+  real_vcptoolbox_root: required_external_value_not_recorded_in_git
+  selected_plugin_id: DoubaoGen
+  selected_plugin_command: generate
+  selected_plugin_model: doubao-seedream-5-0-260128
+  max_plugin_calls: 1
+  output_directory_ref: runs/a5_complete_delivery_photo_studio_os
+  overwrite_existing_files_allowed: false
+  bridge_methods_allowed:
+    - cancel
+    - loadSession
+    - previewDraft
+  bridge_methods_forbidden:
+    - submitDraft
+  max_bridge_calls_per_method: 1
+  daily_note_write_allowed: true
+  vcp_memory_write_allowed: true
+  max_daily_note_writes: 1
+  max_vcp_memory_writes: 1
+  git_commit_allowed: true
+  git_tag_allowed: true
+  git_push_allowed: true
+  github_pr_allowed: true
+  github_release_allowed: false
+  tag: v10.0.0-a5-complete-delivery-rc1
+  commit_message: "feat: complete a5 end-to-end delivery candidate"
+
+a5_execution_plan:
+  stages:
+    - a5_preflight
+    - vcpchat_runtime_bridge_verification
+    - review_console_runtime_handoff
+    - doubaogen_single_real_generation
+    - review_and_archive_decision
+    - daily_note_and_vcp_memory_write
+    - delivery_candidate_closeout
+    - version_actions
+
+forbidden_outputs:
+  - raw_local_path
+  - raw_endpoint
+  - raw_websocket_url
+  - raw_runtime_log
+  - raw_ipc_payload
+  - raw_plugin_output
+  - raw_source_code
+  - secret
+  - token
+  - cookie
+  - password
+  - customer_private_data
+  - image_binary_in_git_or_memory
+
+this_phase_boundary:
+  active_a5_authorization_package_present: true
+  a5_execution_started: false
+  a5_preflight_started: true
+  a5_preflight_blocked: true
+  real_vcpchat_root_provided: true
+  real_vcptoolbox_root_provided: true
+  external_target_worktrees_clean: false
+  vcpchat_worktree_clean: false
+  vcptoolbox_worktree_clean: false
+  vcpchat_source_read: false
+  vcpchat_modified_by_this_phase: false
+  vcptoolbox_source_read: false
+  vcptoolbox_modified_by_this_phase: false
+  bridge_method_invocation_performed: false
+  bridge_cancel_called: false
+  bridge_load_session_called: false
+  bridge_preview_draft_called: false
+  bridge_submit_draft_called: false
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  daily_note_written: false
+  vcp_memory_written: false
+  image_created: false
+  output_file_written: false
+  commit_performed: false
+  tag_created: false
+  push_performed: false
+  pr_created: false
+  github_release_performed: false
+
+notes_cn:
+  - "v10.0 接收 A5 端到端授权包，并在 preflight 因外部目标工作树不干净而停止。"
+  - "真实生产步骤未启动。"
+  - "仓库只保存脱敏 ref，不保存真实路径、endpoint、runtime log、raw plugin output、源码或图片二进制。"

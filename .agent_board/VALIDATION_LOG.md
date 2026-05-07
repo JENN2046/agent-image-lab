@@ -2,6 +2,441 @@
 
 ## Entries
 
+## VALIDATION-20260507-V10-08-A5-POSITIVE-STILL-LIFE-PREFLIGHT-GATE
+
+Task:
+
+```text
+Record a positive still-life generation preflight gate for a5_positive_still_life_prompt_v1 and keep real generation blocked until prompt approval plus separate authorization.
+```
+
+Commands run:
+
+```text
+node --check scripts/validate_v10_8_a5_positive_still_life_generation_preflight_gate.js: passed
+node scripts/validate_v10_8_a5_positive_still_life_generation_preflight_gate.js: passed
+node scripts/validate_v10_7_a5_safer_prompt_review_package.js: passed with v10.8 superseding board state
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: passed with manual-review warnings
+node --check review_console\static_prototype\app.js: passed
+node --check review_console\static_prototype\mock_data.js: passed
+git diff --check: passed
+```
+
+Result:
+
+```text
+preflight_gate_ready_real_generation_blocked
+```
+
+Findings:
+
+```text
+The v10.8 preflight gate locks the reviewed prompt for future authorization, lists all required real-generation authorization fields, and keeps plugin/API/image/memory/version actions blocked.
+```
+
+Not validated:
+
+```text
+No new generation, plugin call, API call, DailyNote write, VCP memory write, submitDraft call, commit, tag, push, PR, or GitHub Release was performed.
+```
+
+Notes:
+
+```text
+Next safe action is explicit user approval of the locked prompt plus a separate real generation authorization package, or continued local docs/validation work only.
+```
+
+## VALIDATION-20260507-V10-07-A5-SAFER-PROMPT-REVIEW
+
+Task:
+
+```text
+Record a safer prompt review package for a5_positive_still_life_prompt_v1 and keep real generation blocked until user prompt approval plus separate authorization.
+```
+
+Commands run:
+
+```text
+node scripts/validate_v10_7_a5_safer_prompt_review_package.js: passed
+node scripts/validate_v10_6_a5_prompt_failure_analysis_and_safer_strategy.js: passed with v10.7 superseding board state
+node scripts/validate_v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.js: passed with v10.7 superseding board state
+node scripts/validate_v10_4_a5_doubaogen_single_generation_rejected_asset_record.js: passed with v10.7 superseding board state
+node scripts/validate_v10_3_a5_bridge_integration_smoke_record.js: passed with v10.7 superseding board state
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: passed with manual-review warnings
+node --check review_console\static_prototype\app.js: passed
+node --check review_console\static_prototype\mock_data.js: passed
+git diff --check: passed
+```
+
+Result:
+
+```text
+prompt_review_ready_real_generation_blocked
+```
+
+Findings:
+
+```text
+The safer prompt review package is ready for user approval. The prompt string is positive-only, unbranded, and does not include the known English trigger terms that previously pushed DoubaoGen toward software UI, titles, brands, screens, or people. This record does not authorize generation.
+```
+
+Not validated:
+
+```text
+No new generation, plugin call, API call, DailyNote write, VCP memory write, submitDraft call, commit, tag, push, PR, or GitHub Release was performed.
+```
+
+Notes:
+
+```text
+Next safe action is user prompt approval plus a separate real generation authorization package.
+```
+
+## VALIDATION-20260507-V10-06-A5-PROMPT-FAILURE-ANALYSIS
+
+Task:
+
+```text
+Record prompt failure accountability for v10.4/v10.5 DoubaoGen rejected assets and define a safer positive-only prompt strategy without new real execution.
+```
+
+Commands run:
+
+```text
+node scripts/validate_v10_6_a5_prompt_failure_analysis_and_safer_strategy.js: passed
+node scripts/validate_v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.js: passed with v10.6 superseding board state
+node scripts/validate_v10_4_a5_doubaogen_single_generation_rejected_asset_record.js: passed with v10.6 superseding board state
+node scripts/validate_v10_3_a5_bridge_integration_smoke_record.js: passed with v10.6 superseding board state
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: passed with manual-review warnings
+node --check review_console\static_prototype\app.js: passed
+node --check review_console\static_prototype\mock_data.js: passed
+git diff --check: passed
+```
+
+Result:
+
+```text
+prompt_failure_analyzed_real_generation_blocked
+```
+
+Findings:
+
+```text
+The v10.5 prompt template was authored by the agent and failed. The safer next strategy removes software, UI, cover, brand, and people concepts from the generation prompt and uses a positive-only unbranded still-life draft. The candidate prompt is not execution authorization.
+```
+
+Not validated:
+
+```text
+No new generation, plugin call, API call, DailyNote write, VCP memory write, submitDraft call, commit, tag, push, PR, or GitHub Release was performed.
+```
+
+Notes:
+
+```text
+Next safe action is user review of the safer prompt draft. Any real generation still requires a separate authorization package.
+```
+
+## VALIDATION-20260507-V10-05-A5-DOUBAOGEN-NO-TEXT-RETRY
+
+Task:
+
+```text
+Execute the authorized v10.5 DoubaoGen no-text retry, review the generated asset, and record the rejected asset without memory writes.
+```
+
+Commands run:
+
+```text
+Agent Image Lab branch and output collision preflight: passed
+external VCPChat git status: authorized renderer change only
+external VCPToolBox git status: clean
+DoubaoGen no-text retry runner: passed, actual_plugin_calls=1, generated_asset_count=1
+Automated visual review: failed asset acceptance because person/face, readable text, logo-like marks, and brand/device marks were visible
+node scripts/validate_v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.js: passed
+node scripts/validate_v10_4_a5_doubaogen_single_generation_rejected_asset_record.js: passed with v10.5 superseding board state
+node scripts/validate_v10_3_a5_bridge_integration_smoke_record.js: passed with v10.5 superseding board state
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: passed with manual-review warnings
+node --check review_console\static_prototype\app.js: passed
+node --check review_console\static_prototype\mock_data.js: passed
+git diff --check: passed
+```
+
+Result:
+
+```text
+retry_generation_completed_asset_rejected_memory_blocked
+```
+
+Findings:
+
+```text
+DoubaoGen was called exactly once under the v10.5 no-text retry authorization and produced one image. The asset was rejected because visible person/face, text, logo-like marks, and brand/device marks violate the Photo Studio OS pure product still-life rule. DailyNote and VCP memory writes were not performed.
+```
+
+Not validated:
+
+```text
+No second retry, no DailyNote write, no VCP memory write, no submitDraft call, no commit, no tag, no push, no PR, and no GitHub Release was performed.
+```
+
+Notes:
+
+```text
+Next safe action should switch strategy or plugin, or request a human override. Repeating the same prompt style with DoubaoGen has failed twice on text/logo constraints.
+```
+
+## VALIDATION-20260507-V10-04-A5-DOUBAOGEN-REJECTED-ASSET
+
+Task:
+
+```text
+Execute the authorized A5 DoubaoGen single generation after human review, review the generated asset, and record the rejected asset without memory writes.
+```
+
+Commands run:
+
+```text
+Agent Image Lab branch and output collision preflight: passed
+external VCPChat git status: authorized renderer change only
+external VCPToolBox git status: clean
+DoubaoGen plugin entry existence check: passed with sanitized ref
+Initial runner attempt with unsupported command parameter: failed before plugin binding, no output directory and no plugin call
+DoubaoGen single generation runner: passed, actual_plugin_calls=1, generated_asset_count=1
+Automated visual review: failed asset acceptance because readable text/logo-like marks were visible
+node --check scripts/validate_v10_4_a5_doubaogen_single_generation_rejected_asset_record.js: passed
+node scripts/validate_v10_4_a5_doubaogen_single_generation_rejected_asset_record.js: passed
+node scripts/validate_v10_3_a5_bridge_integration_smoke_record.js: passed with v10.4 superseding board state
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: passed with manual-review warnings
+node --check review_console\static_prototype\app.js: passed
+node --check review_console\static_prototype\mock_data.js: passed
+git diff --check: passed
+```
+
+Result:
+
+```text
+generation_completed_asset_rejected_memory_blocked
+```
+
+Findings:
+
+```text
+DoubaoGen was called exactly once under the active A5 authorization and produced one image. The asset was rejected because visible text/logo-like marks violate the Photo Studio OS no-text/no-logo rule. DailyNote and VCP memory writes were not performed.
+```
+
+Not validated:
+
+```text
+No second generation attempt, no DailyNote write, no VCP memory write, no submitDraft call, no commit, no tag, no push, no PR, and no GitHub Release was performed.
+```
+
+Notes:
+
+```text
+Next safe action requires a new generation retry authorization, human override, or explicit version-action authorization. The rejected image remains only under ignored runtime output ref for local review.
+```
+
+## VALIDATION-20260507-V10-03-A5-BRIDGE-INTEGRATION
+
+Task:
+
+```text
+Apply authorized minimal VCPChat no-write bridge integration and validate strict allowlist-only bridge smoke.
+```
+
+Commands run:
+
+```text
+VCPChat renderer syntax check: passed
+VCPChat renderer diff check: passed
+VCPChat remote-debug launch for bridge smoke: passed
+Initial smoke: bridge exposed, rejected submitDraft probe performed with no external side effects
+Strict allowlist-only smoke: cancel/loadSession/previewDraft passed, bridge_calls_observed=3, submitDraft_called=false
+Runtime cleanup: remote-debug listener closed and startup marker side effect restored
+node scripts/validate_v10_3_a5_bridge_integration_smoke_record.js: passed
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: passed with manual-review warnings
+node --check review_console\static_prototype\app.js: passed
+node --check review_console\static_prototype\mock_data.js: passed
+git diff --check: passed
+```
+
+Result:
+
+```text
+bridge_smoke_passed_human_review_required
+```
+
+Findings:
+
+```text
+VCPChat now exposes a no-write imageLabReview bridge in the authorized renderer surface. Strict allowlist smoke passed with cancel, loadSession, and previewDraft only. Because an earlier smoke included a rejected submitDraft probe, DoubaoGen continuation is intentionally blocked for human review.
+```
+
+Not validated:
+
+```text
+No DoubaoGen call, plugin/API call, DailyNote write, VCP memory write, image creation, commit, tag, push, PR, or GitHub Release was performed.
+```
+
+Notes:
+
+```text
+Next safe action is user review of the rejected submitDraft probe deviation and explicit production-continuation authorization.
+```
+
+## VALIDATION-20260507-V10-02-A5-BRIDGE-SMOKE
+
+Task:
+
+```text
+Rerun A5 preflight after user-reported external worktree reconciliation, start remote-debug runtime, and attempt the first allowlisted bridge smoke only if imageLabReview is present.
+```
+
+Commands run:
+
+```text
+A5 branch/origin/tag/output directory preflight: passed with sanitized output
+external VCPChat git status: clean
+external VCPToolBox git status: clean
+VCPChat remote-debug launch: CDP targets visible
+bridge surface probe: imageLabReview missing
+cancel bridge invocation: skipped, bridge_calls_observed=0
+runtime cleanup: remote-debug listener closed
+node scripts/validate_v10_2_a5_bridge_smoke_blocked_record.js: passed
+node scripts/validate_v10_1_a5_resume_after_external_worktree_reconciliation.js: passed
+node scripts/validate_v10_0_a5_end_to_end_activation_package.js: passed
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: passed with manual-review warnings
+node --check review_console\static_prototype\app.js: passed
+node --check review_console\static_prototype\mock_data.js: passed
+git diff --check: passed
+```
+
+Result:
+
+```text
+blocked_bridge_surface_missing
+```
+
+Findings:
+
+```text
+The previous external-worktree blocker is cleared, but current VCPChat runtime does not expose imageLabReview, imageLabReviewRuntime, or imageLabReviewMount. No bridge method was called, and the A5 chain stopped before DoubaoGen, DailyNote, VCP memory, image creation, or version actions.
+```
+
+Not validated:
+
+```text
+No loadSession, previewDraft, submitDraft, DoubaoGen call, DailyNote write, VCP memory write, image creation, commit, tag, push, PR, or GitHub Release was performed.
+```
+
+Notes:
+
+```text
+Next safe action requires a VCPChat runtime that exposes imageLabReview or explicit VCPChat bridge integration file-set authorization.
+```
+
+## VALIDATION-20260507-V10-01-A5-RESUME
+
+Task:
+
+```text
+Record A5 resume-after-clean package after the user reported external target worktrees clean, while keeping fresh preflight recheck required before production execution.
+```
+
+Commands run:
+
+```text
+node scripts/validate_v10_1_a5_resume_after_external_worktree_reconciliation.js: passed
+node scripts/validate_v10_0_a5_end_to_end_activation_package.js: pending after v10.1 local updates
+scripts/validate_mvp.ps1: pending after v10.1 local updates
+scripts/validate-agent-image-lab-local.ps1: pending after v10.1 local updates
+git diff --check: pending after v10.1 local updates
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+The user reported external target worktrees clean. This v10.1 record does not treat that as machine verification; it requires a fresh A5 preflight recheck before bridge, plugin, memory, image, commit, tag, push, PR, or release actions.
+```
+
+Not validated:
+
+```text
+No external worktree recheck, bridge call, VCPChat/VCPToolBox source read or modification, DoubaoGen call, DailyNote write, VCP memory write, image creation, commit, tag, push, PR, or GitHub Release was performed by this v10.1 record.
+```
+
+Notes:
+
+```text
+Next safe action is sanitized A5 preflight recheck only.
+```
+
+## VALIDATION-20260507-V10-00-A5-PREFLIGHT
+
+Task:
+
+```text
+Record active A5 end-to-end authorization package and run initial preflight without starting production execution.
+```
+
+Commands run:
+
+```text
+Agent Image Lab branch/status/log preflight: passed with known current-task local files
+origin fetch and branch/tag conflict checks: passed
+target output directory collision check: passed
+external VCPChat git status: blocked, worktree not clean
+external VCPToolBox git status: blocked, worktree not clean
+bridge method invocation performed: no
+plugin/API/DailyNote/VCP memory/image actions performed: no
+commit/tag/push/PR/GitHub Release performed: no
+```
+
+Result:
+
+```text
+blocked_validated_preflight
+```
+
+Findings:
+
+```text
+The active A5 authorization package is present, but both external target worktrees require human reconciliation before production execution can proceed. Raw paths, raw status details, endpoints, source, runtime logs, plugin output, secrets, and image binaries are not recorded in this repository.
+```
+
+Not validated:
+
+```text
+No bridge call, VCPChat/VCPToolBox source read or modification, DoubaoGen call, DailyNote write, VCP memory write, image creation, commit, tag, push, PR, or GitHub Release was performed.
+```
+
+Notes:
+
+```text
+A5 production execution remains blocked until the external target worktrees are clean or explicitly reconciled.
+```
+
 ## VALIDATION-20260506-V7-46
 
 Task:

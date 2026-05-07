@@ -1,0 +1,73 @@
+status: completed_validated_v10_3_a5_bridge_integration_smoke_record_with_human_review_gate
+version: v10.3
+current_phase: "v10.3 A5 bridge integration smoke record"
+validation_file: scripts/validate_v10_3_a5_bridge_integration_smoke_record.js
+
+current_baseline:
+  previous_phase: "v10.2 A5 bridge smoke blocked record"
+  previous_record: docs/201_v10_2_a5_bridge_smoke_blocked_record.md
+  default_next_phase: "BLOCKED for human review before DoubaoGen because an initial rejected submitDraft probe occurred"
+
+authorization_applied:
+  vcpchat_bridge_file_set_authorized: true
+  authorization_mode: read_and_modify_minimal_bridge_file_set
+  raw_vcpchat_root_recorded_in_git: false
+  modified_vcpchat_file_count: 1
+  modified_vcpchat_file_ref: redacted_vcpchat_renderer_file
+  dependency_changed: false
+  package_manifest_changed: false
+  lockfile_changed: false
+
+bridge_patch_result:
+  no_write_bridge_exposed: true
+  imageLabReview_present_after_patch: true
+  imageLabReviewRuntime_present_after_patch: true
+  imageLabReviewMount_present_after_patch: true
+  bridge_methods_present:
+    cancel: true
+    loadSession: true
+    previewDraft: true
+    submitDraft: true
+  submitDraft_behavior: rejected_no_write
+  plugin_call_capability_added: false
+  api_call_capability_added: false
+  daily_note_write_capability_added: false
+  vcp_memory_write_capability_added: false
+  image_creation_capability_added: false
+
+strict_allowlist_smoke_result:
+  strict_allowlist_smoke_performed: true
+  selected_methods:
+    - cancel
+    - loadSession
+    - previewDraft
+  bridge_calls_observed: 3
+  submitDraft_called: false
+  cancel_ack_status: accepted
+  loadSession_ack_status: accepted
+  previewDraft_ack_status: accepted
+  side_effects_performed: false
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  daily_note_written: false
+  vcp_memory_written: false
+  image_created: false
+  output_file_written: false
+
+protocol_deviation_record:
+  initial_submitDraft_rejection_probe_performed: true
+  initial_submitDraft_probe_result: rejected_no_write
+  initial_submitDraft_external_side_effects: false
+  strict_allowlist_smoke_reran_after_deviation: true
+  human_review_required_before_production_continuation: true
+  doubaogen_continuation_blocked: true
+
+runtime_cleanup:
+  remote_debug_runtime_started_for_smoke: true
+  remote_debug_runtime_closed_after_smoke: true
+  cdp_port_still_listening_after_cleanup: false
+  startup_marker_side_effect_restored: true
+  raw_endpoint_recorded_in_git: false
+  raw_websocket_url_recorded_in_git: false
+  raw_runtime_log_recorded_in_git: false

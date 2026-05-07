@@ -1,0 +1,65 @@
+status: completed_validated_v10_8_a5_positive_still_life_generation_preflight_gate
+version: v10.8
+current_phase: "v10.8 A5 positive still-life generation preflight gate"
+validation_file: scripts/validate_v10_8_a5_positive_still_life_generation_preflight_gate.js
+
+current_baseline:
+  previous_phase: "v10.7 A5 safer prompt review package"
+  previous_record: docs/206_v10_7_a5_safer_prompt_review_package.md
+  default_next_phase: "BLOCKED for explicit prompt approval plus separate real generation authorization"
+
+prompt_lock:
+  prompt_id: a5_positive_still_life_prompt_v1
+  prompt_source_record: docs/206_v10_7_a5_safer_prompt_review_package.md
+  prompt_approved_by_user: false
+  prompt_locked_for_future_authorization: true
+  prompt_must_not_be_auto_edited: true
+  prompt_cn: "明亮摄影棚桌面静物摄影。画面中心是一枚无标识相机镜头，周围摆放柔光灯板、空白色块卡、纯色亚克力几何片和干净浅灰桌面。所有物体表面保持空白、干净、无标记。真实产品摄影，高级柔光，简洁构图，留出干净背景。"
+
+required_authorization_gate:
+  real_generation_authorization_present: false
+  next_real_generation_allowed_by_this_record: false
+  user_prompt_approval_required: true
+  separate_real_generation_authorization_required: true
+  required_fields:
+    - prompt_approved
+    - selected_plugin_id
+    - selected_plugin_command
+    - selected_plugin_model
+    - max_plugin_calls
+    - input_reference
+    - output_directory_ref
+    - overwrite_existing_files_allowed
+    - rollback_plan
+    - gatekeeper_approved
+    - review_console_human_approved
+    - daily_note_direct_write_allowed
+    - memory_delta_only
+
+preflight_lock:
+  selected_plugin_id_required: DoubaoGen
+  selected_plugin_command_required: generate
+  selected_plugin_model_required: doubao-seedream-5-0-260128
+  max_plugin_calls_required: 1
+  output_directory_ref_recommended: runs/a5_positive_still_life_prompt_v1
+  overwrite_existing_files_allowed_required: false
+  rollback_plan_required: true
+  gatekeeper_approved_required: true
+  review_console_human_approved_required: true
+  daily_note_direct_write_allowed_required: false
+  memory_delta_only_required: true
+  output_directory_must_be_empty_or_new: true
+
+no_execution_guard:
+  plugin_called: false
+  api_called: false
+  daily_note_called: false
+  vcp_memory_written: false
+  image_created: false
+  bridge_called: false
+  submitDraft_called: false
+  commit_performed: false
+  tag_performed: false
+  push_performed: false
+  pr_created: false
+  github_release_created: false

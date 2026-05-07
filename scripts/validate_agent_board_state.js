@@ -82,7 +82,7 @@ function main() {
   ]);
   const localWorkStateDeclared = hasAll(runState + handoff, [
     "Worktree:",
-    "v7.46 remote-debug relaunch runtime verification record",
+    "v10.8 A5 positive still-life generation preflight gate",
     "Push/tag/release"
   ]);
 

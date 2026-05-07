@@ -3,8 +3,8 @@
 ## Handoff Summary
 
 ```text
-Status: ready for guarded local continuation
-Result: v7.46 remote-debug relaunch and CDP Runtime.evaluate read-only surface verification completed; bridge methods were not called
+Status: blocked on user approval of v10.7 safer prompt plus separate real generation authorization
+Result: v10.7 safer prompt review package completed; prompt risky terms absent; real generation still blocked
 ```
 
 ## Current Repo
@@ -16,9 +16,9 @@ A:/agent-image-lab/agent-image-lab-v0.2
 ## Worktree State
 
 ```text
-Branch: master
+Branch: codex/a5-complete-delivery-20260507
 Remote tracking: origin/master
-State: local v7.46 remote-debug relaunch runtime verification changes present
+State: local v10.7 A5 safer prompt review package changes present
 PR #1 status: merged
 PR #1 merge commit: 367d3c9
 PR #1 merged head: b595851
@@ -175,6 +175,37 @@ Relaunched VCPChat with remote-debug enabled using a sanitized external root ref
 Read CDP targets and selected the VCPChat page target without saving raw endpoint, websocket URL, or source path.
 Executed one Runtime.evaluate read-only surface check for imageLabReview, imageLabReviewMount, imageLabReviewRuntime, and prototype_guard.
 Confirmed bridge method presence only; bridge method invocation performed: no.
+Recorded active A5 authorization package with sanitized external target references only.
+Started A5 preflight and stopped before production execution because external target worktrees were not clean.
+Did not call bridge methods, plugins, APIs, DailyNote, VCP memory, image generation, commit, tag, push, PR, or GitHub Release.
+Recorded v10.1 A5 resume-after-clean package after the user reported external target worktrees clean.
+Marked A5 preflight rerun as required before bridge, plugin, memory, image, commit, tag, push, PR, or release actions.
+Reran A5 preflight with sanitized output; branch/origin/tag/output directory and external target worktree checks passed.
+Launched VCPChat remote-debug runtime and confirmed CDP targets were visible.
+Confirmed current runtime does not expose imageLabReview, imageLabReviewRuntime, or imageLabReviewMount.
+Kept bridge_calls_observed at 0 and did not call cancel, loadSession, previewDraft, submitDraft, DoubaoGen, DailyNote, VCP memory, or image generation.
+Closed the remote-debug runtime started for this smoke after the blocked result.
+Added no-write imageLabReview bridge surface in the authorized VCPChat renderer file.
+Validated VCPChat renderer syntax and strict allowlist-only bridge smoke.
+Strict smoke called cancel/loadSession/previewDraft only and kept submitDraft_called=false.
+Recorded that an earlier initial submitDraft rejected probe occurred, with no external side effects, and blocked DoubaoGen continuation pending human review.
+Received explicit human review authorization to continue A5 production after the initial rejected submitDraft probe.
+Located DoubaoGen through a sanitized plugin ref and executed one authorized DoubaoGen generation.
+Recorded actual plugin calls observed: 1, generated asset count: 1, and generated asset status: rejected.
+Rejected the generated asset because the image contains readable text and logo-like marks.
+Blocked DailyNote and VCP memory writes because the generated asset failed review.
+Received explicit v10.5 no-text retry authorization.
+Executed one additional DoubaoGen no-text retry with actual plugin calls observed in v10.5: 1.
+Rejected the v10.5 generated asset because the image contains a person/face, readable text, logo-like marks, and brand/device marks.
+Kept DailyNote and VCP memory writes blocked because the v10.5 generated asset failed review.
+Recorded v10.6 prompt accountability: the v10.5 prompt template was authored by the agent and failed.
+Recorded safer prompt strategy: positive-only unbranded still-life, no software/UI/cover concepts.
+Recorded candidate prompt draft as non-executable and requiring user preview before any next real call.
+Recorded v10.7 safer prompt review package and local trigger-term scan.
+Marked prompt id a5_positive_still_life_prompt_v1 as ready for user review, not execution authorization.
+Recorded v10.8 positive still-life generation preflight gate.
+Locked prompt id a5_positive_still_life_prompt_v1 for future authorization without allowing execution.
+Marked separate generation authorization required before any next DoubaoGen call.
 ```
 
 ## Validation
@@ -211,9 +242,18 @@ node scripts/validate_v7_43_external_remote_debug_verification_script_creation_e
 node scripts/validate_v7_44_remote_debug_script_run_and_vcpchat_launch_record.js: passed
 node scripts/validate_v7_45_cdp_read_only_attempt_record.js: passed
 node scripts/validate_v7_46_remote_debug_relaunch_runtime_verification_record.js: passed
+node scripts/validate_v10_0_a5_end_to_end_activation_package.js: passed
+node scripts/validate_v10_1_a5_resume_after_external_worktree_reconciliation.js: passed
+node scripts/validate_v10_2_a5_bridge_smoke_blocked_record.js: passed
+node scripts/validate_v10_3_a5_bridge_integration_smoke_record.js: passed
+node scripts/validate_v10_4_a5_doubaogen_single_generation_rejected_asset_record.js: passed
+node scripts/validate_v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.js: passed
+node scripts/validate_v10_6_a5_prompt_failure_analysis_and_safer_strategy.js: passed
+node scripts/validate_v10_7_a5_safer_prompt_review_package.js: passed
+node scripts/validate_v10_8_a5_positive_still_life_generation_preflight_gate.js: passed
 node scripts/validate_agent_board_state.js: passed
 scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings
-scripts/validate_mvp.ps1: passed after v7.46 validation routing maintenance
+scripts/validate_mvp.ps1: passed
 git diff --check: passed
 ```
 
@@ -222,10 +262,11 @@ git diff --check: passed
 ```text
 No active local blocker.
 Real external VCPChat/VCPToolBox source reads require explicit separate authorization.
-Without an active A5 authorization package, production actions remain blocked.
+Active A5 authorization package was provided for a single batch, but production actions remain blocked by dirty external target worktrees.
+v10.8 records the positive still-life generation preflight gate but does not authorize execution. Production actions remain blocked until the user approves the locked prompt and provides separate real generation authorization.
 Historical v7.45: CDP access remains blocked because no available endpoint was exposed.
 v7.46 Runtime.evaluate performed by this phase: yes, read-only surface checks only.
-Bridge method invocation, source read, plugin/API/DailyNote/VCP memory/image actions, push/tag/release, and deeper remote-debug verification are blocked until a new explicit authorization scope is active.
+Additional plugin/API/DailyNote/VCP memory/image actions, commit/tag/push/PR/release, and deeper production continuation are blocked until prompt approval plus separate real generation authorization, or version-action authorization, is provided.
 Push/tag/release require explicit separate authorization.
 Full MVP validation suite now routes historical v4/v5 current-state validators as snapshots and uses v7.46 / agent-board validators for current state.
 ```
@@ -234,8 +275,11 @@ Full MVP validation suite now routes historical v4/v5 current-state validators a
 
 ```text
 Local commit approval is no longer required for future guarded local commits that satisfy all project auto-commit conditions.
-Whether to authorize bridge method invocation or source read in a future local batch.
-Whether to push the local autonomy / v7.46 commits after explicit remote authorization.
+Whether to accept the v10.7 prompt id a5_positive_still_life_prompt_v1 for a future separately authorized run.
+Whether to approve the v10.8 locked prompt id a5_positive_still_life_prompt_v1 and provide separate real generation parameters.
+Whether to switch to an alternate generation strategy or alternate plugin after v10.5 rejected asset.
+Whether to apply a human override despite the readable text/logo risk.
+Whether to push the local v10.3 A5 bridge integration smoke branch after validation.
 Whether to open a follow-up PR after explicit remote authorization.
 Whether to create a formal release tag after final release approval.
 ```
@@ -247,7 +291,7 @@ Whether to create a formal release tag after final release approval.
 读取 AGENTS.md、AGENTS.autopilot-overlay.md 和 .agent_board/*。
 使用 A4 — Sustained Local Autopilot。
 先检查 repo reality，再从 .agent_board/TASK_QUEUE.md 的下一个安全任务继续。
-不要读取真实 VCPChat/VCPToolBox，不要调用插件/API/DailyNote，不要创建图片，不要写出 workspace root。
-没有 active A5 authorization package 时，不要进入真实生产执行。
+不要读取真实 VCPChat/VCPToolBox 源码，不要调用插件/API/DailyNote，不要创建图片，不要写出 workspace root。
+已有 A5 授权包处于 v10.8 positive still-life generation preflight gate 状态；VCPChat no-write bridge 可用且严格 allowlist smoke 通过，DoubaoGen 已完成 v10.4 与 v10.5 两次单独授权调用，两个资产均被拒收。v10.8 只记录了锁定 prompt 和生成前授权门，不授权执行。不要继续 DoubaoGen、DailyNote、VCP memory、图片或版本动作，除非用户先批准 prompt，再显式授权真实生成参数或版本动作。
 用中文汇报。
 ```

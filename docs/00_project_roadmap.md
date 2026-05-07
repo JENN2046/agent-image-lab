@@ -18,7 +18,7 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v7.46 remote-debug relaunch runtime verification record
+v1.0 true-loop closeout candidate + v10.8 A5 positive still-life generation preflight gate
 ```
 
 已经完成：
@@ -72,6 +72,15 @@ v1.0 true-loop closeout candidate + v7.46 remote-debug relaunch runtime verifica
 - v7.44 remote-debug script run and VCPChat launch record：在明确授权下运行 dry-run-only 脚本并启动 VCPChat，同时记录 CDP 未访问、bridge 未调用。
 - v7.45 CDP read-only attempt record：在明确授权下尝试本机 CDP 只读访问；当前 VCPChat 未暴露可用 CDP endpoint，Runtime.evaluate 未执行。
 - v7.46 remote-debug relaunch runtime verification record：在明确授权下关闭旧 VCPChat/Electron 进程，以 remote-debug 端口重启 VCPChat，读取 CDP targets，并执行一次只读 Runtime.evaluate surface 检查；bridge 方法未调用。
+- v10.0 A5 end-to-end activation package readiness：接收单批 A5 授权包并执行 preflight；因外部 VCPChat / VCPToolBox 工作树不干净而停止，真实生产步骤未启动。
+- v10.1 A5 resume after external worktree reconciliation：记录用户已报告外部目标工作树干净，并固化恢复前必须重新执行 A5 preflight 的接续条件；本阶段未执行真实生产步骤。
+- v10.2 A5 bridge smoke blocked record：重新执行 A5 preflight 并启动 remote-debug 运行时；preflight clean，但当前 VCPChat 未暴露 `imageLabReview` bridge，`cancel` 未调用，真实生产链路停止。
+- v10.3 A5 bridge integration smoke record：在授权 VCPChat 文件集中添加 no-write `imageLabReview` bridge，严格 allowlist-only smoke 中 `cancel/loadSession/previewDraft` 通过；因初始 `submitDraft` rejected probe 偏差，DoubaoGen 继续执行前需要人工复核。
+- v10.4 A5 DoubaoGen single generation rejected asset record：人工复核后继续 A5 生产链路，DoubaoGen 实际调用 1 次并生成 1 个资产；自动审片发现可读文字和类似 logo/标记，资产拒收，DailyNote / VCP memory 写入被阻断。
+- v10.5 A5 DoubaoGen no-text retry rejected asset record：更强无文字约束下执行一次 DoubaoGen 重试，实际调用 1 次并生成 1 个资产；自动审片发现人物/脸、可读文字、logo/品牌标识和设备品牌标记，资产拒收，记忆写入继续阻断。
+- v10.6 A5 prompt failure analysis and safer strategy：归档 v10.4 / v10.5 prompt 失败原因，明确 v10.5 prompt 模板由 agent 给出且设计失败；下一次真实调用前必须先展示更安全的正向静物 prompt 草案。
+- v10.7 A5 safer prompt review package：把候选 prompt 收束为 `a5_positive_still_life_prompt_v1` 并执行触发词扫描；本阶段不真实生图，下一步必须由用户确认 prompt 并单独授权。
+- v10.8 A5 positive still-life generation preflight gate：把 `a5_positive_still_life_prompt_v1` 锁定为下一次真实生成前的候选 prompt，并把 prompt approval、单独授权字段、输出目录、回滚和 no-execution guard 机器化；本阶段不真实生图。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：
@@ -234,6 +243,7 @@ daily_note_called: false
 3. 等待用户单独授权任何新的 A5 真实生产动作、tag、push 或正式 release 发布。
 4. 下一步以 remote-debug 端口重新启动或重启 VCPChat 已经到达明确审批边界；没有用户批准时继续停在 no-relaunch / no-runtime-evaluate 轨道。
 5. 后续任何新增真实生图调用、remote-debug relaunch、CDP 检查、bridge 验证或 VCPChat/VCPToolBox 源码读写都必须重新确认目标、允许操作、禁止动作、验证要求和回滚方案，并形成 active authorization package。
+6. v10.8 已把候选 prompt 固化为生成前授权门；下一步必须由用户批准该 prompt，并单独授权真实调用参数。
 
 ## 永久安全门
 

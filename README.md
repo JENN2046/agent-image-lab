@@ -7,7 +7,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v7.46 remote-debug relaunch runtime verification record
+v1.0 true-loop closeout candidate + v10.8 A5 positive still-life generation preflight gate
 ```
 
 已经完成：
@@ -51,8 +51,24 @@ v1.0 true-loop closeout candidate + v7.46 remote-debug relaunch runtime verifica
 - v7.44 remote-debug script run and VCPChat launch record 在明确授权下运行 dry-run-only 脚本并启动 VCPChat，但 CDP 未访问、bridge 未调用。
 - v7.45 CDP read-only attempt record 在明确授权下尝试本机 CDP 只读访问；当前 VCPChat 未暴露可用 CDP endpoint，`Runtime.evaluate` 未执行。
 - v7.46 remote-debug relaunch runtime verification record 在明确授权下关闭旧 VCPChat/Electron 进程，以 remote-debug 端口重启 VCPChat，并完成一次 CDP 只读 `Runtime.evaluate` surface 检查；bridge 方法只确认存在性，没有调用。
+- v10.0 A5 end-to-end activation package readiness 接收单批 A5 授权包并执行 preflight；因外部 VCPChat / VCPToolBox 工作树不干净而安全停止，真实生产步骤未启动，`github_release_allowed: false`。
+- v10.1 A5 resume after external worktree reconciliation 记录用户已报告外部目标工作树干净，并把恢复真实 A5 前必须重新执行 preflight 的条件机器化；本阶段仍未调用 bridge、插件、API、DailyNote、VCP memory 或图片生成。
+- v10.2 A5 bridge smoke blocked record 重新执行 A5 preflight 并启动 remote-debug 运行时；preflight clean，但当前 VCPChat 未暴露 `imageLabReview` bridge，`bridge_calls_observed: 0`，因此未继续 DoubaoGen、DailyNote、VCP memory、图片或版本动作。
+- v10.3 A5 bridge integration smoke record 在授权 VCPChat 文件集内添加 no-write bridge surface；严格 allowlist-only smoke 中 `cancel/loadSession/previewDraft` 通过，`bridge_calls_observed: 3`，但因初始 smoke 曾做一次 `submitDraft` rejected probe，继续 DoubaoGen 前需要人工复核。
+- v10.3 gate: `human_review_required_before_production_continuation=true`。
+- v10.4 A5 DoubaoGen single generation rejected asset record 在人工复核后继续 A5 生产链路；DoubaoGen 实际调用 1 次，生成资产 1 个，但审片发现可读文字和类似 logo/标记，`asset_status: rejected`，因此 DailyNote / VCP memory 写入被阻断。
+- v10.4 gate: `memory_write_blocked_by_asset_review=true`。
+- v10.5 A5 DoubaoGen no-text retry rejected asset record 在更强无文字约束下重试；DoubaoGen 实际调用 1 次，生成资产 1 个，但审片发现人物/脸、可读文字、logo/品牌标识和设备品牌标记，`asset_status: rejected`，因此继续阻断记忆写入和版本动作。
+- v10.5 gate: `person_or_face_detected=true`、`readable_text_or_logo_detected=true`。
+- v10.6 A5 prompt failure analysis and safer strategy 归档 v10.4 / v10.5 失败原因，确认 v10.5 prompt 模板由 agent 给出且设计失败；下一次真实调用前必须先展示候选 prompt 给用户确认，本阶段不执行真实生图。
+- v10.6 gate: `next_real_generation_allowed_by_this_record=false`、`prompt_preview_required_before_real_call=true`。
+- v10.7 A5 safer prompt review package 把候选 prompt 收束为 `a5_positive_still_life_prompt_v1`，并用 validator 扫描确认 prompt 不含 OS/app/software/interface/UI/cover/logo/brand/screen/monitor/person/portrait 等英文触发词；本阶段仍不执行真实生图。
+- v10.7 gate: `user_prompt_approval_required=true`、`next_real_generation_allowed_by_this_record=false`。
+- v10.8 A5 positive still-life generation preflight gate 锁定 `a5_positive_still_life_prompt_v1` 的下一次授权前检查项；`prompt_locked_for_future_authorization=true`，且仍保持 `next_real_generation_allowed_by_this_record=false`。
+- v10.8 gate: 必须先由用户批准 prompt，再单独给出真实生成授权字段；本阶段不执行插件、API、图片、记忆或版本动作。
 
 当前 accepted asset 只以 ignored runtime 路径和哈希归档，不把图片二进制写入 Git、DailyNote 或 VCP 长期记忆。人工接受记录保留了已知视觉偏差：这是 `human_override` 通过，不是完美 prompt compliance。
+当前 A5 v10.4 / v10.5 新资产均被拒收，只保留 ignored runtime ref、哈希、评分和规则摘要；未把图片二进制写入 Git、DailyNote 或 VCP memory。
 
 ## 一句话定义
 
@@ -120,6 +136,11 @@ Photo Studio OS UI 生图生产线，以及 AI 图片评审与修正生产线。
 - `docs/139_v5_12_release_candidate_readiness.md`：release candidate readiness 记录。
 - `docs/192_v7_40_local_a4_a5_autonomy_alignment.md`：local A4/A5 autonomy mode alignment 记录。
 - `docs/198_v7_46_remote_debug_relaunch_runtime_verification_record.md`：remote-debug relaunch runtime verification 脱敏记录。
+- `docs/199_v10_0_a5_end_to_end_activation_package_readiness.md`：A5 end-to-end activation package readiness 与 preflight-blocked 脱敏记录。
+- `docs/200_v10_1_a5_resume_after_external_worktree_reconciliation.md`：A5 外部工作树清理后恢复 preflight 的脱敏接续记录。
+- `docs/201_v10_2_a5_bridge_smoke_blocked_record.md`：A5 clean preflight 后 bridge surface 缺失的脱敏阻断记录。
+- `docs/202_v10_3_a5_bridge_integration_smoke_record.md`：VCPChat no-write bridge 集成与严格 allowlist smoke 脱敏记录。
+- `docs/207_v10_8_a5_positive_still_life_generation_preflight_gate.md`：下一次 DoubaoGen 正向静物生成前的 prompt 锁定与授权门记录。
 - `.agent_board/`：本地 guarded autopilot 状态板，用于续跑、校验记录和 handoff。
 - `docs/`：项目定义、SOP、评分表、VCP 记忆适配、审片台设计。
 - `agents/`：ImageLab_Master 和岗位型子 Agent 的规则。
@@ -157,6 +178,11 @@ node scripts\validate_v5_post_merge_reconciliation.js
 node scripts\validate_v5_12_release_candidate_readiness.js
 node scripts\validate_v7_40_local_a4_a5_autonomy_alignment.js
 node scripts\validate_v7_46_remote_debug_relaunch_runtime_verification_record.js
+node scripts\validate_v10_0_a5_end_to_end_activation_package.js
+node scripts\validate_v10_1_a5_resume_after_external_worktree_reconciliation.js
+node scripts\validate_v10_2_a5_bridge_smoke_blocked_record.js
+node scripts\validate_v10_3_a5_bridge_integration_smoke_record.js
+node scripts\validate_v10_8_a5_positive_still_life_generation_preflight_gate.js
 node scripts\validate_runtime_prototype_suite.js
 node scripts\validate_agent_board_state.js
 node scripts\validate_local_checkpoint_manifest.js
@@ -177,9 +203,18 @@ git diff --check
 - `integrations/vcp/v0_7_gatekeeper_risk_boundary.md`
 - `review_console/v0_7_human_approval_preflight.md`
 - `workflows/v0_7_real_execution_preflight_confirmation.md`
+- `docs/199_v10_0_a5_end_to_end_activation_package_readiness.md`
+- `docs/200_v10_1_a5_resume_after_external_worktree_reconciliation.md`
+- `docs/201_v10_2_a5_bridge_smoke_blocked_record.md`
+- `docs/202_v10_3_a5_bridge_integration_smoke_record.md`
+- `docs/203_v10_4_a5_doubaogen_single_generation_rejected_asset_record.md`
+- `docs/204_v10_5_a5_doubaogen_no_text_retry_rejected_asset_record.md`
+- `docs/205_v10_6_a5_prompt_failure_analysis_and_safer_strategy.md`
+- `docs/206_v10_7_a5_safer_prompt_review_package.md`
+- `docs/207_v10_8_a5_positive_still_life_generation_preflight_gate.md`
 
-仅说“继续”不构成新的真实执行授权。
+仅说“继续”不构成新的真实执行授权。即使存在 A5 授权包，如果外部目标工作树不干净、tag/分支冲突、输出目录冲突或会泄露 raw 敏感值，也必须停止。
 
 ## 不做什么
 
-本包不包含密钥、不包含 raw 插件输出、不包含 raw endpoint、不包含运行日志、不把图片大文件纳入 Git。v0.5 曾在用户授权下把 Adapter-only dry-run 包安装到 VCPToolBox 预发布候选工作线；该安装不代表真实生图插件长期启用。v1.0 closeout 本身也不授权发布 release、再次生图或写 DailyNote；后续 commit、push、tag 均需独立授权记录。
+本包不包含密钥、不包含 raw 插件输出、不包含 raw endpoint、不包含运行日志、不把图片大文件纳入 Git。v0.5 曾在用户授权下把 Adapter-only dry-run 包安装到 VCPToolBox 预发布候选工作线；该安装不代表真实生图插件长期启用。v10.8 已把下一版 prompt 锁定为生成前授权门；DailyNote、VCP memory、commit、push、tag 和 PR 仍需后续单独授权和通过审片。

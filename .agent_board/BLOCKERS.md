@@ -29,6 +29,7 @@ Plugin calls, API calls, DailyNote writes, VCP memory writes, image creation, an
 ```text
 Without an active A5 authorization package, production actions remain blocked. A5 authorization must name exact target systems, allowed paths or objects, allowed commands or operations, forbidden operations, write boundaries, validation requirements, rollback path, reviewer, and stop conditions.
 Historical v7.42/v7.43 status: execution remains blocked for the inactive authorization package template and dry-run-only script creation phases.
+Current v10.8 status: active single-batch A5 authorization package was provided, VCPChat no-write bridge smoke passed, human review authorized production continuation, one DoubaoGen generation was performed in v10.4, and one stronger no-text retry was performed in v10.5. Both generated assets were rejected. v10.8 records a positive still-life generation preflight gate, but does not authorize execution. Do not call plugin/API/DailyNote again, write VCP memory, create additional images, commit, tag, push, PR, or release until the user approves the locked prompt and explicitly authorizes real generation parameters or version action.
 ```
 
 ## Standing Remote-Debug Relaunch Gate
