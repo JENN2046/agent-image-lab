@@ -13,15 +13,23 @@ window.ImageLabHostBridge = (() => {
     image_versions: [
       {
         version_id: "v1",
-        label: "v1.0 accepted reference",
+        label: "v1.0 参考候选图",
         asset_ref: "runs/photo_studio_os_v0_10_doubao_retry/image/doubaogen/accepted-image.placeholder",
         thumbnail_ref: null,
         source: "placeholder",
         score: 84
+      },
+      {
+        version_id: "v2",
+        label: "v1.1 修订候选图",
+        asset_ref: "runs/v10_19_compatible_byte_write_real_generation/run_1/accepted-candidate.placeholder",
+        thumbnail_ref: null,
+        source: "placeholder",
+        score: 88
       }
     ],
-    current_version_id: "v1",
-    compare_version_id: null,
+    current_version_id: "v2",
+    compare_version_id: "v1",
     ai_review: {
       reviewer_type: "ai",
       reviewer_name: "Critic_Agent",
@@ -38,9 +46,9 @@ window.ImageLabHostBridge = (() => {
     ],
     annotation_notes: [],
     version_comparison: {
-      current_version_id: "v1",
-      compare_version_id: null,
-      summary_cn: "当前 runtime prototype 只展示单版本占位资产引用，不加载图片二进制。"
+      current_version_id: "v2",
+      compare_version_id: "v1",
+      summary_cn: "当前 runtime prototype 展示多版本占位资产引用，不加载图片二进制。"
     },
     approval: {
       status: "pending",

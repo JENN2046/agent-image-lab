@@ -70,26 +70,26 @@ window.ImageLabRuntimeGuard = (() => {
 
   function assertDraftSafe(draft) {
     if (!draft || typeof draft !== "object") {
-      throw new Error("Draft must be an object.");
+      throw new Error("草案必须是对象。");
     }
     if (!draft.review_session_draft || !draft.image_case_draft || !draft.memory_delta_draft) {
-      throw new Error("Draft is missing required sections.");
+      throw new Error("草案缺少必需区块。");
     }
     if (!guardIsClean(draft.prototype_guard)) {
-      throw new Error("Draft prototype_guard indicates a side effect.");
+      throw new Error("草案的 prototype_guard 显示存在外部副作用。");
     }
     const auditEntry = requireArray(draft.review_session_draft.audit_log)[0];
     if (!guardIsClean(auditEntry?.prototype_guard)) {
-      throw new Error("Draft audit guard indicates a side effect.");
+      throw new Error("草案审计 guard 显示存在外部副作用。");
     }
     if (draft.image_case_draft.asset_status === "accepted" && draft.image_case_draft.human_approval?.approved !== true) {
-      throw new Error("Accepted asset requires explicit human approval.");
+      throw new Error("资产标记为 accepted 前必须先获得人工明确批准。");
     }
     if (
       draft.memory_delta_draft.final_decision?.should_write_to_vcp === true &&
       draft.memory_delta_draft.approval_status !== "approved"
     ) {
-      throw new Error("Memory write request requires approved memory status.");
+      throw new Error("记忆写入申请必须先通过记忆审批。");
     }
   }
 

@@ -27,6 +27,10 @@ body {
   grid-column: 1 / -1;
 }
 
+.summary-panel {
+  border-color: #3f615b;
+}
+
 .eyebrow {
   margin: 0 0 6px;
   color: #7fd7c4;
@@ -68,6 +72,23 @@ dd {
   place-items: center;
   border: 1px dashed #4a5662;
   color: #cfd7df;
+  white-space: pre-wrap;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.version-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.comparison-summary {
+  min-height: 22px;
+  margin: 12px 0 0;
+  color: #a9b3bd;
+  line-height: 1.5;
 }
 
 .field {
@@ -107,6 +128,10 @@ pre {
 
 @media (max-width: 760px) {
   .shell {
+    grid-template-columns: 1fr;
+  }
+
+  .version-grid {
     grid-template-columns: 1fr;
   }
 }
