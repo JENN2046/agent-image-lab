@@ -21,24 +21,47 @@ master tracking origin/master
 ## Current Phase
 
 ```text
-Runtime Review Batch 8C final acceptance summary
+Runtime Review Batch 8D sustained autopilot task plan
 ```
 
 ## Current Task
 
 ```text
-Finalize Runtime Review final acceptance summary local batch without version actions
+Document default and conditional auto-execution queues for sustained follow-up work
 ```
 
 ## Last Completed Task
 
 ```text
-Prepared Runtime Review Batch 8C final acceptance summary across docs, indexes, validation checklist, and agent board; commit/tag/push/PR/release remain unauthorized.
+Prepared Runtime Review Batch 8D sustained autopilot task plan across docs, indexes, validation checklist, and agent board; A4/A4.5 local work is default-auto, while real execution, external writes, and version actions are conditional-auto only with a concrete active authorization package and passing preflight.
 ```
 
 ## Last Validation
 
 ```text
+2026-05-08 runtime review Batch 8D sustained autopilot task plan:
+status: completed_validated_local_sustained_autopilot_task_plan
+changed files: docs/225_runtime_review_batch_8d_sustained_autopilot_task_plan.md, README.md, MANIFEST.md, RELEASE_NOTES.md, docs/00_project_roadmap.md, tests/validation_checklist.md, scripts/validate_local_commit_scope.js, .gitignore, .agent_board files
+scope: follow-up task planning, default auto queue, conditional auto queue, index/board sync only
+local branch: master
+local head: 178529e
+origin/master: 178529e
+master...origin/master: 0 0
+default auto queue: A4/A4.5 local reversible validated work
+conditional auto queue: real execution / external writes / commit/tag/push/PR/release only with concrete active authorization package and passing preflight
+real VCPChat read: no
+real VCPToolBox read: no
+real bridge/CDP/source read: no
+plugin/API/DailyNote/VCP memory/image action: no
+commit/tag/push/PR/release: no
+.omc handling: ignored as local tooling state, not deleted and not staged
+git diff --check: passed with LF/CRLF warnings only
+node --check scripts/validate_local_commit_scope.js: passed
+node scripts/validate_local_commit_scope.js: passed
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+
 2026-05-08 runtime review Batch 8C final acceptance summary:
 status: completed_validated_local_final_acceptance_summary
 changed files: docs/224_runtime_review_batch_8c_final_acceptance_summary.md, README.md, MANIFEST.md, RELEASE_NOTES.md, docs/00_project_roadmap.md, tests/validation_checklist.md, scripts/validate_local_commit_scope.js, .agent_board files
@@ -1089,11 +1112,11 @@ Historical v7.45 phase: v7.45 cdp read-only attempt record
 ## Current Stop Status
 
 ```text
-Runtime Review Batch 8C final acceptance summary is recorded on top of the PR #6 / Batch 8B acceptance chain and the current local master remains ahead of origin/master by one acceptance commit. Further real VCPChat/VCPToolBox reads, plugin/API/DailyNote/VCP memory/image actions, retry generation, commit/tag/push/PR/release, and A5 production execution remain blocked until a new explicit authorization package is provided.
+Runtime Review Batch 8D sustained autopilot task plan is being recorded on top of the pushed v5.17 / Batch 8C baseline. Current local master and origin/master both point to 178529e before this local docs batch. A4/A4.5 local tasks are default-auto when reversible and validated. Real VCPChat/VCPToolBox reads, plugin/API/DailyNote/VCP memory/image actions, retry generation, commit/tag/push/PR/release, and A5 production execution are conditional-auto only when a concrete active authorization package exists and preflight passes.
 ```
 
 ## Next Action
 
 ```text
-Next safe action is to optionally commit the validated local final acceptance summary batch if explicitly authorized. Production execution still requires a new explicit authorization package.
+Next safe action is to validate the Batch 8D sustained autopilot task plan and then continue with Batch 9A if requested. Version actions or real production actions can auto-run only when their concrete active authorization package is present and preflight passes.
 ```

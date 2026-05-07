@@ -9,7 +9,7 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
-Maintain and advance Agent Image Lab as a VCP-native visual production orchestration project while preserving no-execution / no-external-read gates until explicit user authorization is given.
+Maintain and advance Agent Image Lab as a VCP-native visual production orchestration project with default-auto A4/A4.5 local work and conditional-auto real/remote/external write work when a concrete active authorization package and passing preflight exist.
 ```
 
 ---
@@ -26,20 +26,20 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 
 Stop before:
 
-- real VCPChat read
-- real VCPToolBox read
-- real manifest read
+- real VCPChat read without a concrete active authorization package and passing preflight
+- real VCPToolBox read without a concrete active authorization package and passing preflight
+- real manifest read without a concrete active authorization package and passing preflight
 - config/env/log/secret read
 - raw source copy from external repos
 - IPC / preload / renderer implementation in VCPChat
 - executable Adapter implementation
-- plugin/API/DailyNote call
-- image file creation
-- VCP memory write
-- push / PR / merge / tag / release
-- dependency change
-- write outside workspace root
-- A5 — Autonomous Production Execution without an active explicit authorization package
+- plugin/API/DailyNote call without a concrete active authorization package and passing preflight
+- image file creation without a concrete active authorization package and passing preflight
+- VCP memory write without a concrete active authorization package and passing preflight
+- push / PR / merge / tag / release without a concrete active version-action package and passing preflight
+- dependency change without a concrete active dependency-change package and passing preflight
+- write outside workspace root without a concrete active external-write package and passing preflight
+- A5 — Autonomous Production Execution without an active explicit authorization package and passing preflight
 
 ---
 
@@ -60,7 +60,9 @@ none
 4. Update CHECKPOINT.md, RUN_STATE.md, VALIDATION_LOG.md, and HANDOFF.md after each meaningful batch.
 5. If the user wants deeper diagnosis, activate the v10.12 provider-side prompt fingerprint capture package only after explicit approval, or switch to alternate plugin/strategy planning.
 6. If the user wants to reuse a short approval flow, present a new current capsule first; bare `批准` only applies when Codex has just presented that exact capsule.
-7. After Batch 8C final acceptance summary validation passes, stop before staging/commit/tag/push/PR until explicit version-action authorization is given.
+7. After Batch 8D validation passes, continue with Batch 9A by default if the next step remains local, reversible, and validated.
+8. Commit/tag/push/PR/release may proceed automatically only when a concrete active version-action package exists and preflight passes.
+9. Real execution, external reads, memory writes, image creation, and external writes may proceed automatically only when a concrete active package exists and preflight passes.
 ```
 
 ### done
@@ -148,6 +150,7 @@ none
 80. Synced local master to origin/master after PR #6 merge at 563ccc4 and opened the Runtime Review Batch 8A post-merge checkpoint; no new remote write, plugin/API call, DailyNote/VCP memory write, or image creation was performed.
 81. Completed Runtime Review Batch 8B vNext RC acceptance; current local master on top of PR #6 merge baseline is accepted as the next release-candidate baseline, with docs, indexes, checklist, and agent-board state synchronized locally.
 82. Completed Runtime Review Batch 8C final acceptance summary; 8A / 8B are consolidated into the final readable acceptance summary, with docs, indexes, checklist, and agent-board state synchronized locally.
+83. Completed Runtime Review Batch 8D sustained autopilot task plan; follow-up work is split into default-auto local batches and conditional-auto real/remote/external write batches requiring concrete active authorization packages and passing preflight.
 ```
 
 ### blocked

@@ -18,7 +18,7 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review Batch 8C final acceptance summary
+v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review Batch 8D sustained autopilot task plan
 ```
 
 当前工作分支：
@@ -106,6 +106,7 @@ master tracking origin/master
 - Runtime Review Batch 8A post-merge checkpoint：记录 PR #6 已合并，本地 `master` 已同步到 `origin/master` 的 `563ccc4`，并确认 legacy `runtime_review_session_v1` import compatibility fix 已进入主线。
 - Runtime Review Batch 8B vNext RC acceptance：把 post-merge checkpoint 上的当前本地 master 收束成下一轮 release-candidate 接受基线；不触发版本动作。
 - Runtime Review Batch 8C final acceptance summary：把 8A / 8B 的收束结果归并为最终可读 acceptance 摘要；不触发版本动作。
+- Runtime Review Batch 8D sustained autopilot task plan：把后续任务拆成默认自动队列和条件自动队列；A4/A4.5 本地任务满足条件自动执行，真实执行、外部读取、记忆写入和版本动作只有在具体 active authorization package 与 preflight 通过后自动执行到授权上限。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：
@@ -114,7 +115,7 @@ master tracking origin/master
 - 后续更多 DailyNote / VCP 长期记忆写入仍需单独授权。
 - 正式 release 发布和后续版本 tag 策略。
 - 后续更多真实图片生成、编辑、归档。
-- Batch 8C final acceptance summary 后的下一轮版本动作仍需单独授权；任何 commit、tag、push、PR 仍需单独授权。
+- Batch 8D 后，commit、tag、push、PR 可进入条件自动队列；前提是当前任务提供具体版本动作 active authorization package，且远端分叉、提交范围、tag/branch/PR 目标和 rollback/preflight 全部通过。
 
 ## 阶段路线
 
@@ -269,7 +270,7 @@ daily_note_called: false
 3. 等待用户单独授权任何新的 A5 真实生产动作、tag、push 或正式 release 发布。
 4. 下一步以 remote-debug 端口重新启动或重启 VCPChat 已经到达明确审批边界；没有用户批准时继续停在 no-relaunch / no-runtime-evaluate 轨道。
 5. 后续任何新增真实生图调用、remote-debug relaunch、CDP 检查、bridge 验证或 VCPChat/VCPToolBox 源码读写都必须重新确认目标、允许操作、禁止动作、验证要求和回滚方案，并形成 active authorization package。
-6. v10.28 已固化 DailyNote canonical location guard；Runtime Review Batch 8A 已形成本地 RC proposal。下一步若继续写入、追加生图、submitDraft、commit/tag/push/PR/release，需要新的明确授权，否则只能继续本地文档、验证和授权包规划。
+6. v10.28 已固化 DailyNote canonical location guard；Runtime Review Batch 8D 已把后续任务拆成默认自动队列和条件自动队列。下一步若继续写入、追加生图、submitDraft、commit/tag/push/PR/release，必须先匹配具体 active authorization package；满足条件后自动执行到授权上限，否则继续本地文档、验证和授权包规划。
 
 ## 永久安全门
 

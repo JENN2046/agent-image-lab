@@ -2,6 +2,50 @@
 
 ## Entries
 
+## VALIDATION-20260508-RUNTIME-REVIEW-BATCH-8D-SUSTAINED-AUTOPILOT-TASK-PLAN
+
+Task:
+
+```text
+Record the post-8C sustained autopilot task plan, including default-auto local work and conditional-auto real/remote/external write work.
+```
+
+Status:
+
+```text
+completed_validated_local_sustained_autopilot_task_plan
+```
+
+Validation:
+
+```text
+git diff --check: passed with LF/CRLF warnings only
+node --check scripts/validate_local_commit_scope.js: passed
+node scripts/validate_local_commit_scope.js: passed
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+```
+
+Boundary:
+
+```text
+default auto queue: A4/A4.5 local reversible validated work
+conditional auto queue: real execution / external writes / commit/tag/push/PR/release only with concrete active authorization package and passing preflight
+real VCPChat read: no
+real VCPToolBox read: no
+real bridge/CDP/source read: no
+plugin/API/DailyNote/VCP memory/image action: no
+git commit/tag/push/PR/release: no
+.omc local tooling state: ignored through .gitignore, not deleted
+```
+
+Findings:
+
+```text
+Batch 8D changes planning and execution policy documentation only. It does not perform real execution or remote action by itself.
+```
+
 ## VALIDATION-20260508-RUNTIME-REVIEW-BATCH-8C-FINAL-ACCEPTANCE-SUMMARY
 
 Task:

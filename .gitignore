@@ -1,4 +1,5 @@
 /runs/
 /release_packages/
 /.agent_private/
+/.omc/
 

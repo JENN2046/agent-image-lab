@@ -6,6 +6,8 @@
 - [ ] `docs/222_runtime_review_batch_8a_post_merge_checkpoint.md` 存在，并记录 PR #6 合并后本地 `master` 与 `origin/master` 的同步事实。
 - [ ] `docs/223_runtime_review_batch_8b_vnext_rc_acceptance.md` 存在，并记录 vNext RC acceptance 本地收束基线。
 - [ ] `docs/224_runtime_review_batch_8c_final_acceptance_summary.md` 存在，并记录最终 acceptance 汇总。
+- [ ] `docs/225_runtime_review_batch_8d_sustained_autopilot_task_plan.md` 存在，并把后续任务拆成默认自动队列和条件自动队列。
+- [ ] 条件自动队列必须要求具体 active authorization package、preflight、最大调用/写入/版本动作次数、回滚方案、禁止输出和停止条件。
 - [ ] 所有任务书要求的 MVP 文件存在。
 - [ ] 文件直接位于项目根目录下，没有创建第二套 `agent-image-lab/` 嵌套目录。
 - [ ] 可运行 `scripts/validate_mvp.ps1` 完成只读自动检查；该脚本不是 Adapter、VCP 插件或真实执行入口。

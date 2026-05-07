@@ -155,6 +155,7 @@ const allowedUntrackedFiles = [
   "docs/222_runtime_review_batch_8a_post_merge_checkpoint.md",
   "docs/223_runtime_review_batch_8b_vnext_rc_acceptance.md",
   "docs/224_runtime_review_batch_8c_final_acceptance_summary.md",
+  "docs/225_runtime_review_batch_8d_sustained_autopilot_task_plan.md",
   "scripts/validate_runtime_delivery_surface.js",
   "scripts/validate_runtime_guard_unit.js",
   "scripts/validate_runtime_prototype_suite.js",
@@ -421,6 +422,10 @@ function main() {
   assert(
     allowedUntrackedFiles.includes("docs/224_runtime_review_batch_8c_final_acceptance_summary.md"),
     "Runtime Review Batch 8C final acceptance summary doc must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("docs/225_runtime_review_batch_8d_sustained_autopilot_task_plan.md"),
+    "Runtime Review Batch 8D sustained autopilot task plan doc must be included in the untracked allowlist."
   );
   assert(
     allowedModifiedFiles.includes("review_console/runtime_prototype/runtime_guard.js"),

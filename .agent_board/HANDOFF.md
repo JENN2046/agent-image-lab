@@ -3,8 +3,8 @@
 ## Handoff Summary
 
 ```text
-Status: Runtime Review Console follow-up Batch 2A/2B/2C, long task delivery planning, Batch 3A/3B/3C, Batch 4A, Batch 4B/5A/6A, Batch 5B/6B/7A local gate/archive readiness, Batch 8A local RC proposal, PR #6 post-merge checkpoint, Batch 8B vNext RC acceptance, and Batch 8C final acceptance summary completed locally; production actions remain blocked.
-Result: runtime prototype now emits accepted_candidate_delivery_package_draft, memory_completion_state_draft, human_override_traceability_draft, inactive_authorization_capsules_draft, runtime_review_state_draft, local_commit_scope_plan_draft, bridge_mock_roundtrip_candidate_draft, real_bridge_authorization_package_draft, plugin_reliability_prompt_discipline_draft, memory_write_completion_candidate_draft, single_real_generation_retry_gate_draft, real_memory_write_authorization_package_draft, and asset_archive_candidate_draft; renders them in the UI; exports them in the guarded session payload; and validates them through runtime guard / smoke / delivery surface checks. `docs/224_runtime_review_batch_8c_final_acceptance_summary.md` now records the final readable acceptance summary without staging or version actions.
+Status: Runtime Review Console follow-up Batch 2A/2B/2C, long task delivery planning, Batch 3A/3B/3C, Batch 4A, Batch 4B/5A/6A, Batch 5B/6B/7A local gate/archive readiness, Batch 8A local RC proposal, PR #6 post-merge checkpoint, Batch 8B vNext RC acceptance, Batch 8C final acceptance summary, and Batch 8D sustained autopilot task planning completed locally; production actions remain blocked unless covered by a concrete active authorization package and passing preflight.
+Result: runtime prototype now emits accepted_candidate_delivery_package_draft, memory_completion_state_draft, human_override_traceability_draft, inactive_authorization_capsules_draft, runtime_review_state_draft, local_commit_scope_plan_draft, bridge_mock_roundtrip_candidate_draft, real_bridge_authorization_package_draft, plugin_reliability_prompt_discipline_draft, memory_write_completion_candidate_draft, single_real_generation_retry_gate_draft, real_memory_write_authorization_package_draft, and asset_archive_candidate_draft; renders them in the UI; exports them in the guarded session payload; and validates them through runtime guard / smoke / delivery surface checks. `docs/225_runtime_review_batch_8d_sustained_autopilot_task_plan.md` now defines default-auto local batches and conditional-auto real/remote/external write batches that require a concrete active authorization package and passing preflight.
 Compatibility note: v10.27 DailyNoteWrite root path correction remains recorded: previous root class plugin_dir_dailynote, corrected root class vcp_root_dailynote, completed_root_path_corrected, without rerunning DailyNoteWrite. v10.28 DailyNote canonical location guard remains active. This batch changed only project-local runtime prototype, validators, docs, indexes, validation checklist, and agent-board state.
 ```
 
@@ -19,10 +19,10 @@ A:/agent-image-lab/agent-image-lab-v0.2
 ```text
 Branch: master
 Remote tracking: master...origin/master
-State: local vNext RC acceptance + final summary changes present after checkpoint commit
-Local head: f6cf1d7
-Origin/master: 563ccc4
-master...origin/master: 1 0
+State: Batch 8D sustained autopilot task plan local docs batch completed and validated, not committed
+Local head: 178529e
+Origin/master: 178529e
+master...origin/master: 0 0
 PR #6 status: merged
 PR #6 merge commit: 563ccc4
 PR #6 head: 4b34894
@@ -299,6 +299,13 @@ acceptance: docs/224_runtime_review_batch_8c_final_acceptance_summary.md
 validation: node --check scripts/validate_local_commit_scope.js passed; node scripts/validate_local_commit_scope.js passed; node scripts/validate_agent_board_state.js passed; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1 passed; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1 passed with manual-review warnings only; git diff --check passed with LF/CRLF warnings only
 version actions: not performed
 
+2026-05-08 Runtime Review Batch 8D sustained autopilot task plan:
+status: completed_validated_local_sustained_autopilot_task_plan
+plan: docs/225_runtime_review_batch_8d_sustained_autopilot_task_plan.md
+automation: default-auto for A4/A4.5 local validated tasks; conditional-auto for real execution, external writes, and version actions only with concrete active authorization package and passing preflight
+validation: git diff --check passed with LF/CRLF warnings only; node --check scripts/validate_local_commit_scope.js passed; node scripts/validate_local_commit_scope.js passed; node scripts/validate_agent_board_state.js passed; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1 passed; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1 passed with manual-review warnings only
+version actions: not performed
+
 2026-05-08 Runtime Review Batch 8A local RC proposal:
 status: completed_validated_local_rc_proposal
 proposal: docs/221_runtime_review_batch_8a_release_candidate_readiness_local_proposal.md
@@ -521,7 +528,7 @@ No active local blocker.
 Real external VCPChat/VCPToolBox source reads require explicit separate authorization.
 Historical v10.0 dirty external target worktree blocker was later rechecked clean in v10.2; current production actions are blocked by new strategy, request preflight, real generation, memory, or version-action authorization.
 v10.25 consumed the single real DailyNote/VCP memory write authorization for the run_1 memory draft. Additional real DoubaoGen/config read, provider-side echo, sanitized request capture, production actions, memory writes, and deeper diagnostic actions remain blocked until the user explicitly authorizes fresh real generation, memory-write action, or version action.
-Runtime Review Batch 8A is merged through PR #6 and local master is synced. The post-merge checkpoint is locally validated. Next safe work is a separately authorized local commit or version-action preflight.
+Runtime Review Batch 8D is the current planning layer. Default A4/A4.5 local tasks may continue automatically when reversible and validated. Real execution, external writes, and version actions may auto-run only when a concrete active authorization package exists and preflight passes.
 The v10.12 activation phrase has been consumed. A second provider-side echo or second sanitized request capture requires a new explicit authorization.
 The v10.13 real generation approval phrase has been consumed. A second generation attempt requires a new explicit authorization.
 The v10.14 diagnostic approval phrase has been consumed.
@@ -556,6 +563,6 @@ Whether to create a formal release tag after final release approval.
 先检查 repo reality，再从 .agent_board/TASK_QUEUE.md 的下一个安全任务继续。
 不要读取真实 VCPChat/VCPToolBox 源码，不要调用插件/API/DailyNote，不要创建图片，不要写出 workspace root。
 已有 A5 授权链路完成到 v10.25 real DailyNote/VCP memory write；VCPChat no-write bridge 可用且严格 allowlist smoke 通过。v10.19 实际调用 DoubaoGen 2 次，生成 2 张 1024x1024 JPG；v10.21 推荐选择 run_1，v10.22 已为 run_1 生成本地中文 memory_delta 草案，v10.23 已生成本地人工复核包，v10.24 已生成 no-write 写入前预检包，v10.25 已通过 DailyNoteWrite 完成一次真实写入。不要继续 DoubaoGen、DailyNote、VCP memory、图片或版本动作，除非用户显式授权新的真实生成参数、记忆写入动作或版本动作。
-Runtime Review Batch 8A 已通过 PR #6 合并；本地 master 已同步到 origin/master。不要 stage/commit/tag/push/PR，除非用户显式授权版本动作。
+Runtime Review Batch 8D 是当前规划层；A4/A4.5 本地任务满足条件自动推进。真实执行、外部写入和版本动作只有在具体 active authorization package 与 preflight 通过后才自动执行到授权上限。
 用中文汇报。
 ```

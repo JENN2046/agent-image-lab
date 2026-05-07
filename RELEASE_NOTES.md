@@ -95,6 +95,7 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Added Runtime Review Batch 8A post-merge checkpoint after PR #6 merged into `master`, including local `master` / `origin/master` synchronization facts and legacy runtime session import compatibility closeout.
 - Added Runtime Review Batch 8B vNext RC acceptance after the post-merge checkpoint, including the acceptance baseline, evidence chain, and explicit no-version-action boundary.
 - Added Runtime Review Batch 8C final acceptance summary after the vNext RC acceptance, consolidating the 8A / 8B acceptance chain into a single final readable summary.
+- Added Runtime Review Batch 8D sustained autopilot task plan, separating default local auto execution from conditional auto execution for real actions, external writes, and version actions when a concrete active authorization package and preflight are present.
 
 ## Safety Status
 
@@ -143,3 +144,4 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Runtime Review Batch 8A post-merge checkpoint only records the already-merged PR #6 baseline and local sync facts; it performs no new remote write, plugin/API call, DailyNote/VCP memory write, or image creation.
 - Runtime Review Batch 8B vNext RC acceptance records the local acceptance baseline only; it does not authorize commit/tag/push/PR/release or any real execution action.
 - Runtime Review Batch 8C final acceptance summary consolidates the local acceptance chain only; it does not authorize commit/tag/push/PR/release or any real execution action.
+- Runtime Review Batch 8D sustained autopilot task plan does not execute real actions by itself; it defines that real execution, external writes, and version actions can auto-run only inside a concrete active authorization package with passing preflight and explicit limits.

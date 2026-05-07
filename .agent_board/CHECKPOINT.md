@@ -95,6 +95,9 @@ Runtime Review Batch 8B vNext RC acceptance: current local master on top of the 
 Runtime Review Batch 8B validation: acceptance evidence chain, docs/indexes, checklist, and board sync are validated locally; no version actions or real execution performed
 Runtime Review Batch 8C final acceptance summary: 8A / 8B are consolidated into the final readable acceptance summary and remain local-only
 Runtime Review Batch 8C validation: summary, docs/indexes, checklist, and board sync are validated locally; no version actions or real execution performed
+Runtime Review Batch 8D sustained autopilot task plan: follow-up work is split into default-auto A4/A4.5 local batches and conditional-auto real/remote/external write batches
+Runtime Review Batch 8D conditional automation: real execution, external reads/writes, memory writes, image creation, dependency changes, and commit/tag/push/PR/release require a concrete active authorization package and passing preflight, then may auto-run within package limits
+Runtime Review Batch 8D validation: local commit scope, agent board state, MVP validation, local validation, and git diff --check passed; .omc is ignored as local tooling state
 v10.0 local: A5 end-to-end activation package readiness recorded and preflight blocked
 v10.0 preflight: active A5 authorization package present: yes
 v10.0 preflight: real_vcpchat_root provided: yes
