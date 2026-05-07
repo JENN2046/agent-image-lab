@@ -152,6 +152,7 @@ const allowedUntrackedFiles = [
   "docs/219_runtime_review_batch_4b_5a_6a_local_readiness.md",
   "docs/220_runtime_review_batch_5b_6b_7a_local_gate_archive.md",
   "docs/221_runtime_review_batch_8a_release_candidate_readiness_local_proposal.md",
+  "docs/222_runtime_review_batch_8a_post_merge_checkpoint.md",
   "scripts/validate_runtime_delivery_surface.js",
   "scripts/validate_runtime_guard_unit.js",
   "scripts/validate_runtime_prototype_suite.js",
@@ -406,6 +407,10 @@ function main() {
   assert(
     allowedUntrackedFiles.includes("docs/221_runtime_review_batch_8a_release_candidate_readiness_local_proposal.md"),
     "Runtime Review Batch 8A local RC proposal doc must be included in the untracked allowlist."
+  );
+  assert(
+    allowedUntrackedFiles.includes("docs/222_runtime_review_batch_8a_post_merge_checkpoint.md"),
+    "Runtime Review Batch 8A post-merge checkpoint doc must be included in the untracked allowlist."
   );
   assert(
     allowedModifiedFiles.includes("review_console/runtime_prototype/runtime_guard.js"),

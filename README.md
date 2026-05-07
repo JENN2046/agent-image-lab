@@ -7,7 +7,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review follow-up Batch 8A local RC proposal
+v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review Batch 8A post-merge checkpoint
 ```
 
 已经完成：
@@ -86,6 +86,7 @@ v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + 
 - Runtime Review Batch 4B/5A/6A 在 runtime prototype 中落地真实 bridge 未激活授权包、DoubaoGen prompt 可靠性草案和 memory write completion candidate；真实 bridge/CDP、插件/API、DailyNote/VCP memory、图片和版本动作仍禁止。
 - Runtime Review Batch 5B/6B/7A 在 runtime prototype 中落地单次真实生图重试授权门、真实记忆写入授权包和 no-binary 资产归档候选；当前仍只允许本地草案，不调用 DoubaoGen、DailyNote/VCP memory 或创建图片。
 - Runtime Review Batch 8A 把 Runtime Review follow-up 累积工作收束为本地 release-candidate proposal 和提交范围清单；当前不 stage、不 commit、不 tag、不 push、不开 PR。
+- Runtime Review Batch 8A post-merge checkpoint 记录 PR #6 已合并，本地 `master` 已同步到 `origin/master` 的 `563ccc4`，并确认 legacy `runtime_review_session_v1` import compatibility fix 已进入主线。
 
 当前 accepted asset 只以 ignored runtime 路径和哈希归档，不把图片二进制写入 Git、DailyNote 或 VCP 长期记忆。人工接受记录保留了已知视觉偏差：这是 `human_override` 通过，不是完美 prompt compliance。
 当前 A5 v10.4 / v10.5 / v10.9 新资产均被拒收，只保留 ignored runtime ref、哈希、评分和规则摘要；未把图片二进制写入 Git、DailyNote 或 VCP memory。
@@ -175,6 +176,7 @@ Photo Studio OS UI 生图生产线，以及 AI 图片评审与修正生产线。
 - `docs/219_runtime_review_batch_4b_5a_6a_local_readiness.md`：Runtime Review Batch 4B/5A/6A 本地 readiness 记录，覆盖真实 bridge 授权包、prompt 可靠性和记忆完成候选。
 - `docs/220_runtime_review_batch_5b_6b_7a_local_gate_archive.md`：Runtime Review Batch 5B/6B/7A 本地 gate/archive 记录，覆盖真实重试授权门、真实记忆写入授权包和 no-binary 资产归档候选。
 - `docs/221_runtime_review_batch_8a_release_candidate_readiness_local_proposal.md`：Runtime Review Batch 8A 本地 release-candidate proposal，固定提交范围、验证矩阵和版本动作阻断边界。
+- `docs/222_runtime_review_batch_8a_post_merge_checkpoint.md`：PR #6 合并后的本地 `master` 同步和 post-merge checkpoint。
 - `integrations/vcp/v10_8_positive_still_life_real_generation_authorization_draft.md`：下一次正向静物真实生成的未激活 A5 授权草案；仅供人工审查，不构成执行授权。
 - `integrations/vcp/v10_8_positive_still_life_short_approval_template.md`：短批准模板；允许在私有 ignored 插件路径绑定存在时用 `批准 v10.8 静物单次生成` 进入 preflight。
 - `integrations/vcp/v10_10_prompt_handoff_diagnostic_authorization_template.md`：未来无生图传参诊断的未激活授权模板；`max_plugin_calls=0`。

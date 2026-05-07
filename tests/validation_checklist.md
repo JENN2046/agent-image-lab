@@ -3,6 +3,7 @@
 ## 结构检查
 
 - [ ] `docs/00_project_roadmap.md` 存在，并明确当前已完成层级、未完成层级和后续授权点。
+- [ ] `docs/222_runtime_review_batch_8a_post_merge_checkpoint.md` 存在，并记录 PR #6 合并后本地 `master` 与 `origin/master` 的同步事实。
 - [ ] 所有任务书要求的 MVP 文件存在。
 - [ ] 文件直接位于项目根目录下，没有创建第二套 `agent-image-lab/` 嵌套目录。
 - [ ] 可运行 `scripts/validate_mvp.ps1` 完成只读自动检查；该脚本不是 Adapter、VCP 插件或真实执行入口。
@@ -13,6 +14,7 @@
 ## 安全检查
 
 - [ ] 没有 API key、token、cookie、密码、私密路径或客户隐私。
+- [ ] post-merge checkpoint 不保存 raw endpoint、raw runtime log、raw IPC payload、raw plugin output 或 raw 私有路径。
 - [ ] 没有真实插件执行代码。
 - [ ] 没有真实 VCP 生图 API 调用。
 - [ ] 没有真实图片文件。

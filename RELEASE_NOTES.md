@@ -92,6 +92,7 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Added Runtime Review Batch 4B/5A/6A local readiness surfaces for inactive real bridge authorization, prompt reliability/model lock discipline, and memory write completion preflight criteria.
 - Added Runtime Review Batch 5B/6B/7A local gate/archive surfaces for inactive single real generation retry authorization, inactive real memory write authorization, and metadata-only asset archive candidates.
 - Added Runtime Review Batch 8A local release-candidate proposal, including final follow-up commit scope, validation matrix, and no-version-action gate.
+- Added Runtime Review Batch 8A post-merge checkpoint after PR #6 merged into `master`, including local `master` / `origin/master` synchronization facts and legacy runtime session import compatibility closeout.
 
 ## Safety Status
 
@@ -137,3 +138,4 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - The Runtime Review follow-up Batch 2B memory completion split is local-only; it keeps `write_performed=false`, `canonical_location_verified=false`, `canonical_hash_matched=false`, and `plugin_success_sufficient=false`.
 - The Runtime Review long task delivery plan is local planning only; it does not activate any future capsule or authorize bridge calls, plugin calls, memory writes, image creation, commit, tag, push, PR, or release.
 - Runtime Review Batch 8A is a local RC proposal only; it does not stage files, commit, tag, push, open a PR, publish a release, call plugins/APIs, write DailyNote/VCP memory, or create images.
+- Runtime Review Batch 8A post-merge checkpoint only records the already-merged PR #6 baseline and local sync facts; it performs no new remote write, plugin/API call, DailyNote/VCP memory write, or image creation.
