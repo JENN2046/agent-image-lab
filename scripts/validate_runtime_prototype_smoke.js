@@ -68,7 +68,10 @@ function createRuntimeContext() {
   add("queueFilter", { value: "all" });
   add("queueTotal");
   add("queueVisible");
+  add("queueProgress");
   add("queueSelected");
+  add("queuePrev");
+  add("queueNext");
   add("queueList");
   add("diffStrengths", { value: "主体构图更稳定，整体可读性更好。" });
   add("diffIssues", { value: "细节噪点仍需保留人工判断。" });
@@ -268,7 +271,10 @@ function main() {
   assert(initialDraft.review_session_draft.review_queue.length === 4, "Initial review queue must contain four candidates.");
   assert(elements.get("queueTotal").textContent === "4", "Queue total must render.");
   assert(elements.get("queueVisible").textContent === "4", "Queue visible count must render all candidates initially.");
+  assert(elements.get("queueProgress").textContent === "1 / 4", "Queue progress must render initial position.");
   assert(elements.get("queueSelected").textContent === "v1.1 修订候选图", "Queue selected label must render.");
+  assert(elements.get("queuePrev").disabled === true, "Initial queue previous button must be disabled at the first item.");
+  assert(elements.get("queueNext").disabled === false, "Initial queue next button must be enabled.");
   assert(elements.get("queueList").children.length === 4, "Queue list must render four candidate buttons.");
   assert(initialDraft.review_session_draft.annotation_notes.length === 1, "Initial annotation note must be included.");
   assert(
@@ -284,6 +290,7 @@ function main() {
   dispatchChange(elements, "queueFilter");
   const rejectedQueueButtons = elements.get("queueList").children;
   assert(elements.get("queueVisible").textContent === "1", "Rejected queue filter must show one candidate.");
+  assert(elements.get("queueProgress").textContent === "- / 1", "Filtered progress must show when active item is outside filter.");
   assert(rejectedQueueButtons.length === 1, "Rejected queue filter must render one candidate button.");
   assert(rejectedQueueButtons[0].textContent.includes("已拒收"), "Rejected queue button must show rejected status.");
   dispatchElementClick(rejectedQueueButtons[0]);
@@ -291,6 +298,10 @@ function main() {
   assert(rejectedSelectionDraft.review_session_draft.selected_queue_id === "queue-v3", "Queue click must select queue-v3.");
   assert(rejectedSelectionDraft.review_session_draft.current_version_id === "v3", "Queue click must switch current version to v3.");
   assert(rejectedSelectionDraft.image_case_draft.asset_status === "rejected", "Rejected queue item must load rejected asset status.");
+  assert(rejectedSelectionDraft.review_session_draft.queue_progress.active_index === 1, "Rejected selection progress must enter draft.");
+  assert(elements.get("queueProgress").textContent === "1 / 1", "Rejected selection must show filtered progress.");
+  assert(elements.get("queuePrev").disabled === true, "Previous button must be disabled for single filtered item.");
+  assert(elements.get("queueNext").disabled === true, "Next button must be disabled for single filtered item.");
   assert(elements.get("queueSelected").textContent === "v1.2 风险复查图", "Queue selected label must update after click.");
   elements.get("queueFilter").value = "all";
   dispatchChange(elements, "queueFilter");
@@ -300,6 +311,16 @@ function main() {
   const returnedQueueDraft = parseDraft(elements);
   assert(returnedQueueDraft.review_session_draft.selected_queue_id === "queue-v2", "Queue click must return to queue-v2.");
   assert(returnedQueueDraft.review_session_draft.current_version_id === "v2", "Queue click must restore current version v2.");
+  assert(elements.get("queueProgress").textContent === "1 / 4", "Returned queue progress must show first position.");
+  dispatchClick(elements, "queueNext");
+  const nextQueueDraft = parseDraft(elements);
+  assert(nextQueueDraft.review_session_draft.selected_queue_id === "queue-v1", "Next queue button must select queue-v1.");
+  assert(nextQueueDraft.review_session_draft.current_version_id === "v1", "Next queue button must switch to v1.");
+  assert(elements.get("queueProgress").textContent === "2 / 4", "Next queue button must advance progress.");
+  dispatchClick(elements, "queuePrev");
+  const previousQueueDraft = parseDraft(elements);
+  assert(previousQueueDraft.review_session_draft.selected_queue_id === "queue-v2", "Previous queue button must return to queue-v2.");
+  assert(previousQueueDraft.review_session_draft.current_version_id === "v2", "Previous queue button must switch back to v2.");
 
   dispatchClick(elements, "tplTextArtifact");
   const templatedDraft = parseDraft(elements);
@@ -396,7 +417,10 @@ function main() {
       filter_rejected_count: 1,
       queue_click_updates_selected_id: rejectedSelectionDraft.review_session_draft.selected_queue_id === "queue-v3",
       queue_click_updates_current_version: rejectedSelectionDraft.review_session_draft.current_version_id === "v3",
-      queue_return_restores_current_version: returnedQueueDraft.review_session_draft.current_version_id === "v2"
+      queue_return_restores_current_version: returnedQueueDraft.review_session_draft.current_version_id === "v2",
+      next_button_updates_current_version: nextQueueDraft.review_session_draft.current_version_id === "v1",
+      previous_button_restores_current_version: previousQueueDraft.review_session_draft.current_version_id === "v2",
+      progress_summary_visible: elements.get("queueProgress").textContent.includes("/")
     },
     adapter_handoff: {
       execution_blocked: initialDraft.adapter_dry_run_handoff_draft.execution_blocked,

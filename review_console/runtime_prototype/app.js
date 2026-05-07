@@ -33,7 +33,10 @@ const els = {
   queueFilter: document.getElementById("queueFilter"),
   queueTotal: document.getElementById("queueTotal"),
   queueVisible: document.getElementById("queueVisible"),
+  queueProgress: document.getElementById("queueProgress"),
   queueSelected: document.getElementById("queueSelected"),
+  queuePrev: document.getElementById("queuePrev"),
+  queueNext: document.getElementById("queueNext"),
   queueList: document.getElementById("queueList"),
   diffStrengths: document.getElementById("diffStrengths"),
   diffIssues: document.getElementById("diffIssues"),
@@ -204,6 +207,24 @@ function queueMatchesFilter(item, filter) {
   return item.asset_status === filter;
 }
 
+function filteredQueueItems(queueDraft = queueState) {
+  const filter = els.queueFilter.value || "all";
+  return queueDraft.filter((item) => queueMatchesFilter(item, filter));
+}
+
+function buildQueueProgress(queueDraft) {
+  const filter = els.queueFilter.value || "all";
+  const filteredItems = filteredQueueItems(queueDraft);
+  const activeIndex = filteredItems.findIndex((item) => item.queue_id === selectedQueueId);
+  return {
+    filter,
+    total_count: queueDraft.length,
+    visible_count: filteredItems.length,
+    active_index: activeIndex >= 0 ? activeIndex + 1 : null,
+    selected_queue_id: selectedQueueId
+  };
+}
+
 function loadQueueItemIntoForm(item) {
   if (!item) return;
   els.versionPicker.value = item.version_id;
@@ -242,6 +263,20 @@ function syncActiveQueueItemFromForm() {
 function selectQueueItem(queueId) {
   syncActiveQueueItemFromForm();
   selectedQueueId = queueId;
+  loadQueueItemIntoForm(activeQueueItem());
+  render();
+}
+
+function selectAdjacentQueueItem(direction) {
+  syncActiveQueueItemFromForm();
+  const filteredItems = filteredQueueItems(queueState);
+  if (filteredItems.length === 0) return;
+  const currentIndex = filteredItems.findIndex((item) => item.queue_id === selectedQueueId);
+  const nextIndex =
+    currentIndex < 0
+      ? 0
+      : Math.max(0, Math.min(filteredItems.length - 1, currentIndex + direction));
+  selectedQueueId = filteredItems[nextIndex].queue_id;
   loadQueueItemIntoForm(activeQueueItem());
   render();
 }
@@ -534,6 +569,7 @@ function buildDraft() {
       status: reviewSessionStatus(assetStatus),
       selected_queue_id: selectedQueueId,
       review_queue: reviewQueueDraft,
+      queue_progress: buildQueueProgress(reviewQueueDraft),
       image_versions: session.image_versions,
       current_version_id: version.version_id,
       compare_version_id: comparisonVersion?.version_id || null,
@@ -679,12 +715,15 @@ function renderList(el, items) {
 }
 
 function renderQueueList(queueDraft) {
-  const filter = els.queueFilter.value || "all";
-  const filteredItems = queueDraft.filter((item) => queueMatchesFilter(item, filter));
+  const filteredItems = filteredQueueItems(queueDraft);
   const activeItem = queueDraft.find((item) => item.queue_id === selectedQueueId) || queueDraft[0] || null;
+  const activeIndex = filteredItems.findIndex((item) => item.queue_id === selectedQueueId);
   els.queueTotal.textContent = String(queueDraft.length);
   els.queueVisible.textContent = String(filteredItems.length);
+  els.queueProgress.textContent = activeIndex >= 0 ? `${activeIndex + 1} / ${filteredItems.length}` : `- / ${filteredItems.length}`;
   els.queueSelected.textContent = activeItem ? activeItem.title_cn : "-";
+  els.queuePrev.disabled = activeIndex <= 0;
+  els.queueNext.disabled = activeIndex < 0 || activeIndex >= filteredItems.length - 1;
   els.queueList.innerHTML = "";
   if (filteredItems.length === 0) {
     const empty = document.createElement("p");
@@ -815,6 +854,8 @@ function init() {
   els.quickCandidate.addEventListener("click", () => applyQuickDecision("candidate"));
   els.quickAccept.addEventListener("click", () => applyQuickDecision("accept"));
   els.quickReject.addEventListener("click", () => applyQuickDecision("reject"));
+  els.queuePrev.addEventListener("click", () => selectAdjacentQueueItem(-1));
+  els.queueNext.addEventListener("click", () => selectAdjacentQueueItem(1));
   els.tplComposition.addEventListener("click", () => applyTemplate("composition"));
   els.tplDetailNoise.addEventListener("click", () => applyTemplate("detail_noise"));
   els.tplTextArtifact.addEventListener("click", () => applyTemplate("text_artifact"));

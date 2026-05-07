@@ -289,8 +289,32 @@ select {
 }
 
 .queue-stats {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   margin-bottom: 12px;
+}
+
+.queue-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.queue-actions button {
+  border: 1px solid #45505c;
+  border-radius: 6px;
+  background: #11151a;
+  color: #f3f5f7;
+  padding: 8px 10px;
+}
+
+.queue-actions button:hover:not(:disabled) {
+  border-color: #7fd7c4;
+  color: #d9fff7;
+}
+
+.queue-actions button:disabled {
+  color: #697480;
+  cursor: not-allowed;
 }
 
 .queue-list {
