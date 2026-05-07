@@ -883,6 +883,35 @@ function main() {
   dispatchClick(elements, "validateImportDraft");
   assert(elements.get("sessionTransferStatus").textContent.includes("校验通过"), "Import validation must accept the exported session.");
   assert(elements.get("importPreviewStatus").textContent.includes("0 个候选会变化"), "Import preview must render unchanged exported session.");
+  const legacyV1Payload = runtimeGuard.clone(exportedSessionPayload);
+  [
+    "batch_decision_draft",
+    "a5_preauthorization_review_package_draft",
+    "human_override_traceability_draft",
+    "accepted_candidate_delivery_package_draft",
+    "inactive_authorization_capsules_draft",
+    "runtime_review_state_draft",
+    "local_commit_scope_plan_draft",
+    "bridge_mock_roundtrip_candidate_draft",
+    "real_bridge_authorization_package_draft",
+    "plugin_reliability_prompt_discipline_draft",
+    "memory_write_completion_candidate_draft",
+    "single_real_generation_retry_gate_draft",
+    "real_memory_write_authorization_package_draft",
+    "asset_archive_candidate_draft"
+  ].forEach((fieldName) => {
+    delete legacyV1Payload[fieldName];
+  });
+  legacyV1Payload.session_fingerprint = context.fingerprintString(
+    context.sessionPayloadForFingerprint(legacyV1Payload)
+  );
+  legacyV1Payload.session_fingerprint_cn = `会话指纹：${legacyV1Payload.session_fingerprint}`;
+  elements.get("sessionTransferText").value = JSON.stringify(legacyV1Payload);
+  dispatchClick(elements, "validateImportDraft");
+  assert(
+    elements.get("sessionTransferStatus").textContent.includes("校验通过"),
+    "Import validation must accept legacy v1 exports without newly added draft blocks."
+  );
   const tamperedFingerprintPayload = runtimeGuard.clone(exportedSessionPayload);
   tamperedFingerprintPayload.review_session_snapshot.review_queue[0].human_note_cn = "篡改后的评论但保留旧指纹。";
   elements.get("sessionTransferText").value = JSON.stringify(tamperedFingerprintPayload);

@@ -2683,6 +2683,30 @@ function buildRuntimeSessionExportDraft({
   return exportDraft;
 }
 
+const optionalImportGuardFields = [
+  ["batch_decision_draft", "batch_decision_draft guard 不干净。"],
+  ["a5_preauthorization_review_package_draft", "A5 授权前复核包 guard 不干净。"],
+  ["human_override_traceability_draft", "人工覆盖轨迹 guard 不干净。"],
+  ["accepted_candidate_delivery_package_draft", "accepted candidate 交付包 guard 不干净。"],
+  ["inactive_authorization_capsules_draft", "未激活授权胶囊 guard 不干净。"],
+  ["runtime_review_state_draft", "runtime review state guard 不干净。"],
+  ["local_commit_scope_plan_draft", "local commit scope plan guard 不干净。"],
+  ["bridge_mock_roundtrip_candidate_draft", "bridge mock roundtrip candidate guard 不干净。"],
+  ["real_bridge_authorization_package_draft", "real bridge authorization package guard 不干净。"],
+  ["plugin_reliability_prompt_discipline_draft", "plugin reliability prompt discipline guard 不干净。"],
+  ["memory_write_completion_candidate_draft", "memory write completion candidate guard 不干净。"],
+  ["single_real_generation_retry_gate_draft", "single real generation retry gate guard 不干净。"],
+  ["real_memory_write_authorization_package_draft", "real memory write authorization package guard 不干净。"],
+  ["asset_archive_candidate_draft", "asset archive candidate guard 不干净。"]
+];
+
+function optionalImportGuardIsClean(payload, fieldName) {
+  const draft = payload?.[fieldName];
+  if (draft === undefined) return true;
+  if (!Object.prototype.hasOwnProperty.call(draft, "no_execution_guard")) return true;
+  return runtimeGuard.guardIsClean(draft.no_execution_guard);
+}
+
 function validateSessionImportPayload(payload) {
   const errors = [];
   if (!payload || typeof payload !== "object") {
@@ -2696,47 +2720,10 @@ function validateSessionImportPayload(payload) {
     }
     if (payload.side_effects_performed !== false) errors.push("导入草案必须声明 side_effects_performed=false。");
     if (!runtimeGuard.guardIsClean(payload.prototype_guard)) errors.push("prototype_guard 不干净。");
-    if (!runtimeGuard.guardIsClean(payload.batch_decision_draft?.no_execution_guard)) {
-      errors.push("batch_decision_draft guard 不干净。");
-    }
-    if (!runtimeGuard.guardIsClean(payload.a5_preauthorization_review_package_draft?.no_execution_guard)) {
-      errors.push("A5 授权前复核包 guard 不干净。");
-    }
-    if (!runtimeGuard.guardIsClean(payload.human_override_traceability_draft?.no_execution_guard)) {
-      errors.push("人工覆盖轨迹 guard 不干净。");
-    }
-    if (!runtimeGuard.guardIsClean(payload.accepted_candidate_delivery_package_draft?.no_execution_guard)) {
-      errors.push("accepted candidate 交付包 guard 不干净。");
-    }
-    if (!runtimeGuard.guardIsClean(payload.inactive_authorization_capsules_draft?.no_execution_guard)) {
-      errors.push("未激活授权胶囊 guard 不干净。");
-    }
-    if (!runtimeGuard.guardIsClean(payload.runtime_review_state_draft?.no_execution_guard)) {
-      errors.push("runtime review state guard 不干净。");
-    }
-    if (!runtimeGuard.guardIsClean(payload.local_commit_scope_plan_draft?.no_execution_guard)) {
-      errors.push("local commit scope plan guard 不干净。");
-    }
-    if (!runtimeGuard.guardIsClean(payload.bridge_mock_roundtrip_candidate_draft?.no_execution_guard)) {
-      errors.push("bridge mock roundtrip candidate guard 不干净。");
-    }
-    if (!runtimeGuard.guardIsClean(payload.real_bridge_authorization_package_draft?.no_execution_guard)) {
-      errors.push("real bridge authorization package guard 不干净。");
-    }
-    if (!runtimeGuard.guardIsClean(payload.plugin_reliability_prompt_discipline_draft?.no_execution_guard)) {
-      errors.push("plugin reliability prompt discipline guard 不干净。");
-    }
-    if (!runtimeGuard.guardIsClean(payload.memory_write_completion_candidate_draft?.no_execution_guard)) {
-      errors.push("memory write completion candidate guard 不干净。");
-    }
-    if (!runtimeGuard.guardIsClean(payload.single_real_generation_retry_gate_draft?.no_execution_guard)) {
-      errors.push("single real generation retry gate guard 不干净。");
-    }
-    if (!runtimeGuard.guardIsClean(payload.real_memory_write_authorization_package_draft?.no_execution_guard)) {
-      errors.push("real memory write authorization package guard 不干净。");
-    }
-    if (!runtimeGuard.guardIsClean(payload.asset_archive_candidate_draft?.no_execution_guard)) {
-      errors.push("asset archive candidate guard 不干净。");
+    for (const [fieldName, errorMessage] of optionalImportGuardFields) {
+      if (!optionalImportGuardIsClean(payload, fieldName)) {
+        errors.push(errorMessage);
+      }
     }
     if (!Array.isArray(payload.review_session_snapshot?.review_queue) || payload.review_session_snapshot.review_queue.length === 0) {
       errors.push("缺少 review_queue。");
