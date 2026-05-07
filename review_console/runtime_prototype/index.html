@@ -91,6 +91,17 @@
           <button id="batchShowBlocked" type="button">阻塞</button>
           <button id="batchShowNext" type="button">待处理</button>
         </div>
+        <div class="batch-selection-actions">
+          <button id="batchSelectVisible" type="button">选择当前显示</button>
+          <button id="batchClearSelection" type="button">清空选择</button>
+          <button id="batchMarkReview" type="button">标记复查</button>
+          <button id="batchMarkBlocked" type="button">标记阻塞</button>
+          <button id="batchMarkNoMemory" type="button">暂不入记忆</button>
+        </div>
+        <dl class="meta queue-stats">
+          <div><dt>已选择</dt><dd id="batchSelectedCount">-</dd></div>
+          <div><dt>批量状态</dt><dd id="batchOperationStatus">-</dd></div>
+        </dl>
         <div class="queue-list" id="queueList"></div>
       </section>
 
@@ -145,6 +156,24 @@
         <pre id="preauthPackageText"></pre>
       </section>
 
+      <section class="panel session-panel">
+        <h2>复核会话续航</h2>
+        <dl class="meta">
+          <div><dt>状态</dt><dd id="sessionTransferStatus">-</dd></div>
+          <div><dt>候选数</dt><dd id="sessionTransferCount">-</dd></div>
+          <div><dt>安全检查</dt><dd id="sessionTransferGuard">-</dd></div>
+        </dl>
+        <label class="field">
+          <span>导出 / 导入草案 JSON</span>
+          <textarea id="sessionTransferText" rows="8"></textarea>
+        </label>
+        <div class="session-actions">
+          <button id="exportSessionDraft" type="button">导出草案</button>
+          <button id="validateImportDraft" type="button">校验导入</button>
+          <button id="applyImportDraft" type="button">恢复会话</button>
+        </div>
+      </section>
+
       <section class="panel">
         <h2>人工评审</h2>
         <label class="field">
@@ -166,6 +195,13 @@
           <button id="tplTextArtifact" type="button">疑似文字伪影</button>
           <button id="tplNeedsRetry" type="button">需要重跑</button>
           <button id="tplCandidateNoMemory" type="button">候选但暂不入记忆</button>
+        </div>
+        <div class="risk-tags">
+          <label class="check"><input id="riskTextArtifact" type="checkbox" /><span>文字伪影</span></label>
+          <label class="check"><input id="riskPersonFace" type="checkbox" /><span>人物/人脸风险</span></label>
+          <label class="check"><input id="riskCompositionShift" type="checkbox" /><span>构图偏移</span></label>
+          <label class="check"><input id="riskBrandMark" type="checkbox" /><span>品牌/标记风险</span></label>
+          <label class="check"><input id="riskMemoryUnsuitable" type="checkbox" /><span>不适合入记忆</span></label>
         </div>
         <label class="field">
           <span>资产状态</span>
@@ -234,6 +270,18 @@
           <div><dt>安全边界</dt><dd id="summaryGuard">-</dd></div>
           <div><dt>下一步建议</dt><dd id="summaryNextAction">-</dd></div>
         </dl>
+      </section>
+
+      <section class="panel quality-panel">
+        <h2>中文验货清单</h2>
+        <strong id="inspectionVerdict">-</strong>
+        <ul class="checklist" id="inspectionChecklist"></ul>
+        <h3>风险统计</h3>
+        <pre id="inspectionRiskStats"></pre>
+        <h3>风险分组</h3>
+        <ul id="inspectionRiskGroups"></ul>
+        <h3>验货报告</h3>
+        <pre id="inspectionReport"></pre>
       </section>
 
       <section class="panel checklist-panel">

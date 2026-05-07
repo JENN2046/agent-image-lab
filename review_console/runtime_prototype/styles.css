@@ -54,6 +54,14 @@ body {
   border-color: #66516a;
 }
 
+.session-panel {
+  border-color: #4f6171;
+}
+
+.quality-panel {
+  border-color: #596b55;
+}
+
 .verdict-card {
   display: grid;
   gap: 8px;
@@ -173,6 +181,8 @@ dd {
 .quick-actions,
 .template-actions,
 .batch-filter-actions,
+.batch-selection-actions,
+.session-actions,
 .view-switch {
   display: flex;
   flex-wrap: wrap;
@@ -183,6 +193,8 @@ dd {
 .quick-actions button,
 .template-actions button,
 .batch-filter-actions button,
+.batch-selection-actions button,
+.session-actions button,
 .view-switch button {
   border: 1px solid #45505c;
   border-radius: 6px;
@@ -194,6 +206,8 @@ dd {
 .quick-actions button:hover,
 .template-actions button:hover,
 .batch-filter-actions button:hover,
+.batch-selection-actions button:hover,
+.session-actions button:hover,
 .view-switch button:hover,
 .view-switch button[data-active="true"] {
   border-color: #7fd7c4;
@@ -235,9 +249,32 @@ dd {
 
 .handoff-panel p,
 .batch-panel p,
-.preauth-panel p {
+.preauth-panel p,
+.session-panel p,
+.quality-panel p {
   color: #cfd7df;
   line-height: 1.6;
+}
+
+.quality-panel strong {
+  display: block;
+  margin-bottom: 12px;
+  color: #d9fff7;
+  font-size: 18px;
+}
+
+.quality-panel h3 {
+  margin: 14px 0 10px;
+  font-size: 16px;
+}
+
+.quality-panel ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding-left: 18px;
+  color: #cfd7df;
+  line-height: 1.5;
 }
 
 .readable-draft-cards {
@@ -330,6 +367,17 @@ select {
 
 .batch-filter-actions {
   margin-bottom: 12px;
+}
+
+.batch-selection-actions {
+  margin-bottom: 12px;
+}
+
+.risk-tags {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 14px;
 }
 
 .queue-actions button {
@@ -441,6 +489,10 @@ pre {
   .panel-title-row {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .risk-tags {
+    grid-template-columns: 1fr;
   }
 }
 

@@ -40,6 +40,13 @@ const els = {
   batchShowAuthorizable: document.getElementById("batchShowAuthorizable"),
   batchShowBlocked: document.getElementById("batchShowBlocked"),
   batchShowNext: document.getElementById("batchShowNext"),
+  batchSelectVisible: document.getElementById("batchSelectVisible"),
+  batchClearSelection: document.getElementById("batchClearSelection"),
+  batchMarkReview: document.getElementById("batchMarkReview"),
+  batchMarkBlocked: document.getElementById("batchMarkBlocked"),
+  batchMarkNoMemory: document.getElementById("batchMarkNoMemory"),
+  batchSelectedCount: document.getElementById("batchSelectedCount"),
+  batchOperationStatus: document.getElementById("batchOperationStatus"),
   queueList: document.getElementById("queueList"),
   batchTotal: document.getElementById("batchTotal"),
   batchAccepted: document.getElementById("batchAccepted"),
@@ -58,6 +65,13 @@ const els = {
   preauthPackageItems: document.getElementById("preauthPackageItems"),
   preauthPackageForbidden: document.getElementById("preauthPackageForbidden"),
   preauthPackageText: document.getElementById("preauthPackageText"),
+  sessionTransferStatus: document.getElementById("sessionTransferStatus"),
+  sessionTransferCount: document.getElementById("sessionTransferCount"),
+  sessionTransferGuard: document.getElementById("sessionTransferGuard"),
+  sessionTransferText: document.getElementById("sessionTransferText"),
+  exportSessionDraft: document.getElementById("exportSessionDraft"),
+  validateImportDraft: document.getElementById("validateImportDraft"),
+  applyImportDraft: document.getElementById("applyImportDraft"),
   diffStrengths: document.getElementById("diffStrengths"),
   diffIssues: document.getElementById("diffIssues"),
   diffNext: document.getElementById("diffNext"),
@@ -70,6 +84,11 @@ const els = {
   tplTextArtifact: document.getElementById("tplTextArtifact"),
   tplNeedsRetry: document.getElementById("tplNeedsRetry"),
   tplCandidateNoMemory: document.getElementById("tplCandidateNoMemory"),
+  riskTextArtifact: document.getElementById("riskTextArtifact"),
+  riskPersonFace: document.getElementById("riskPersonFace"),
+  riskCompositionShift: document.getElementById("riskCompositionShift"),
+  riskBrandMark: document.getElementById("riskBrandMark"),
+  riskMemoryUnsuitable: document.getElementById("riskMemoryUnsuitable"),
   assetStatus: document.getElementById("assetStatus"),
   quickCandidate: document.getElementById("quickCandidate"),
   quickAccept: document.getElementById("quickAccept"),
@@ -92,6 +111,11 @@ const els = {
   summaryWriteRequest: document.getElementById("summaryWriteRequest"),
   summaryGuard: document.getElementById("summaryGuard"),
   summaryNextAction: document.getElementById("summaryNextAction"),
+  inspectionVerdict: document.getElementById("inspectionVerdict"),
+  inspectionChecklist: document.getElementById("inspectionChecklist"),
+  inspectionRiskStats: document.getElementById("inspectionRiskStats"),
+  inspectionRiskGroups: document.getElementById("inspectionRiskGroups"),
+  inspectionReport: document.getElementById("inspectionReport"),
   checkHumanComment: document.getElementById("checkHumanComment"),
   checkMemoryContent: document.getElementById("checkMemoryContent"),
   checkHumanDecision: document.getElementById("checkHumanDecision"),
@@ -123,6 +147,43 @@ const els = {
 };
 
 let activeDraftView = "readable";
+let selectedBatchQueueIds = new Set();
+let batchOperationStatusText = "尚未执行批量操作。";
+let sessionTransferStatusText = "尚未导出或导入复核会话。";
+
+const riskTagDefinitions = [
+  {
+    id: "text_artifact",
+    label_cn: "文字伪影",
+    reason_cn: "存在文字伪影风险，不能进入授权前复核。",
+    high_risk: true
+  },
+  {
+    id: "person_or_face",
+    label_cn: "人物/人脸风险",
+    reason_cn: "存在人物或人脸风险，不能进入授权前复核。",
+    high_risk: true
+  },
+  {
+    id: "composition_shift",
+    label_cn: "构图偏移",
+    reason_cn: "核心构图偏离目标，需要人工复查。",
+    high_risk: true
+  },
+  {
+    id: "brand_mark",
+    label_cn: "品牌/标记风险",
+    reason_cn: "存在品牌、标记或可识别符号风险，不能进入授权前复核。",
+    high_risk: true
+  },
+  {
+    id: "memory_unsuitable",
+    label_cn: "不适合入记忆",
+    reason_cn: "当前候选不适合进入记忆写入申请。",
+    high_risk: true
+  }
+];
+
 let queueState = normalizeQueueItems(
   session.review_queue.length > 0 ? runtimeGuard.clone(session.review_queue) : buildDefaultQueueFromVersions()
 );
@@ -145,8 +206,24 @@ function buildDefaultQueueFromVersions() {
     strengths_cn: "暂无新增改进点。",
     issues_cn: "暂无新增风险点。",
     next_step_cn: "继续人工评审。",
-    memory_content_cn: session.memory_preview.chinese_diary_content || ""
+    memory_content_cn: session.memory_preview.chinese_diary_content || "",
+    risk_tags: []
   }));
+}
+
+function normalizeRiskTags(value) {
+  const allowed = new Set(riskTagDefinitions.map((tag) => tag.id));
+  const rawTags = Array.isArray(value) ? value : [];
+  return Array.from(new Set(rawTags.filter((tag) => allowed.has(tag))));
+}
+
+function riskTagLabel(tagId) {
+  return riskTagDefinitions.find((tag) => tag.id === tagId)?.label_cn || tagId;
+}
+
+function riskTagsLabel(riskTags) {
+  const tags = normalizeRiskTags(riskTags);
+  return tags.length > 0 ? tags.map(riskTagLabel).join("、") : "无风险标签";
 }
 
 function queueDraftStateFromItem(item) {
@@ -163,7 +240,8 @@ function queueDraftStateFromItem(item) {
     strengths_cn: item.strengths_cn || "暂无新增改进点。",
     issues_cn: item.issues_cn || "暂无新增风险点。",
     next_step_cn: item.next_step_cn || "继续人工评审。",
-    memory_content_cn: item.memory_content_cn || session.memory_preview.chinese_diary_content || ""
+    memory_content_cn: item.memory_content_cn || session.memory_preview.chinese_diary_content || "",
+    risk_tags: normalizeRiskTags(item.risk_tags || item.draft_state?.risk_tags)
   };
 }
 
@@ -187,6 +265,7 @@ function normalizeQueueItem(item) {
   nextItem.issues_cn = draftState.issues_cn;
   nextItem.next_step_cn = draftState.next_step_cn;
   nextItem.memory_content_cn = draftState.memory_content_cn;
+  nextItem.risk_tags = normalizeRiskTags(draftState.risk_tags);
   const reviewState = candidateReviewState(nextItem);
   nextItem.candidate_review_state = reviewState;
   nextItem.preauthorization_status = reviewState.status;
@@ -272,8 +351,33 @@ function queueStatusLabel(item) {
   return reviewStatusLabel(item.review_status) || assetStatusLabel(item.asset_status);
 }
 
+function riskSummaryForItem(item) {
+  const tags = normalizeRiskTags(item.risk_tags);
+  const highRiskTags = tags.filter((tagId) => riskTagDefinitions.find((tag) => tag.id === tagId)?.high_risk);
+  return {
+    tags,
+    tag_labels_cn: tags.map(riskTagLabel),
+    high_risk_tags: highRiskTags,
+    high_risk_labels_cn: highRiskTags.map(riskTagLabel),
+    blocking: highRiskTags.length > 0,
+    reason_cn:
+      highRiskTags.length > 0
+        ? `存在高风险标签：${highRiskTags.map(riskTagLabel).join("、")}。`
+        : "没有高风险标签。"
+  };
+}
+
+function itemHasBlockingRisk(item) {
+  return riskSummaryForItem(item).blocking;
+}
+
 function itemHasWriteRequest(item) {
-  return item.asset_status === "accepted" && item.human_approved === true && item.memory_approval_status === "approved";
+  return (
+    item.asset_status === "accepted" &&
+    item.human_approved === true &&
+    item.memory_approval_status === "approved" &&
+    !itemHasBlockingRisk(item)
+  );
 }
 
 function itemIsBlocked(item) {
@@ -281,7 +385,8 @@ function itemIsBlocked(item) {
     item.asset_status === "rejected" ||
     item.asset_status === "draft" ||
     (item.asset_status === "accepted" && item.human_approved !== true) ||
-    (item.asset_status === "accepted" && item.human_approved === true && item.memory_approval_status !== "approved")
+    (item.asset_status === "accepted" && item.human_approved === true && item.memory_approval_status !== "approved") ||
+    itemHasBlockingRisk(item)
   );
 }
 
@@ -290,11 +395,21 @@ function itemNeedsAttention(item) {
     item.asset_status === "candidate" ||
     item.asset_status === "draft" ||
     item.review_status === "human_reviewing" ||
-    (item.asset_status === "accepted" && item.human_approved === true && item.memory_approval_status !== "approved")
+    (item.asset_status === "accepted" && item.human_approved === true && item.memory_approval_status !== "approved") ||
+    itemHasBlockingRisk(item)
   );
 }
 
 function candidateReviewState(item) {
+  const riskSummary = riskSummaryForItem(item);
+  if (riskSummary.blocking) {
+    return {
+      status: "blocked",
+      status_cn: "阻塞：存在高风险标签",
+      reason_cn: riskSummary.reason_cn,
+      next_action_cn: "先处理风险标签，不能直接进入 A5 授权前复核。"
+    };
+  }
   if (itemHasWriteRequest(item)) {
     return {
       status: "authorizable",
@@ -356,6 +471,7 @@ function queueBadgeText(item) {
   if (itemHasWriteRequest(item)) badges.push("写入申请");
   if (itemIsBlocked(item)) badges.push("阻塞");
   if (itemNeedsAttention(item)) badges.push("下一步");
+  if (itemHasBlockingRisk(item)) badges.push("风险");
   return badges.length > 0 ? badges.join(" / ") : "已处理";
 }
 
@@ -386,6 +502,25 @@ function buildQueueProgress(queueDraft) {
   };
 }
 
+function writeRiskTagsToForm(riskTags) {
+  const tags = new Set(normalizeRiskTags(riskTags));
+  els.riskTextArtifact.checked = tags.has("text_artifact");
+  els.riskPersonFace.checked = tags.has("person_or_face");
+  els.riskCompositionShift.checked = tags.has("composition_shift");
+  els.riskBrandMark.checked = tags.has("brand_mark");
+  els.riskMemoryUnsuitable.checked = tags.has("memory_unsuitable");
+}
+
+function readRiskTagsFromForm() {
+  const tags = [];
+  if (els.riskTextArtifact.checked) tags.push("text_artifact");
+  if (els.riskPersonFace.checked) tags.push("person_or_face");
+  if (els.riskCompositionShift.checked) tags.push("composition_shift");
+  if (els.riskBrandMark.checked) tags.push("brand_mark");
+  if (els.riskMemoryUnsuitable.checked) tags.push("memory_unsuitable");
+  return tags;
+}
+
 function loadQueueItemIntoForm(item) {
   if (!item) return;
   const draftState = item.draft_state || queueDraftStateFromItem(item);
@@ -401,6 +536,7 @@ function loadQueueItemIntoForm(item) {
   els.humanApproved.checked = draftState.asset_status === "accepted" || draftState.human_approved === true;
   els.memoryApproval.value = draftState.memory_approval_status || "pending";
   els.memoryContent.value = draftState.memory_content_cn || session.memory_preview.chinese_diary_content || "";
+  writeRiskTagsToForm(draftState.risk_tags);
 }
 
 function syncActiveQueueItemFromForm() {
@@ -420,7 +556,8 @@ function syncActiveQueueItemFromForm() {
     strengths_cn: safeText(els.diffStrengths.value, "暂无新增改进点。"),
     issues_cn: safeText(els.diffIssues.value, "暂无新增风险点。"),
     next_step_cn: safeText(els.diffNext.value, "继续人工评审。"),
-    memory_content_cn: els.memoryContent.value.trim()
+    memory_content_cn: els.memoryContent.value.trim(),
+    risk_tags: readRiskTagsFromForm()
   };
   item.draft_state = draftState;
   Object.assign(item, draftState);
@@ -453,6 +590,101 @@ function applyQueueFilter(filter) {
   render();
 }
 
+function appendUniqueLine(value, line) {
+  const current = (value || "").trim();
+  if (!current) return line;
+  if (current.includes(line)) return current;
+  return `${current}\n${line}`;
+}
+
+function selectVisibleQueueItemsForBatch() {
+  syncActiveQueueItemFromForm();
+  for (const item of filteredQueueItems(queueState)) {
+    selectedBatchQueueIds.add(item.queue_id);
+  }
+  batchOperationStatusText = `已选择当前显示的 ${selectedBatchQueueIds.size} 个候选。`;
+  render();
+}
+
+function clearBatchSelection() {
+  selectedBatchQueueIds = new Set();
+  batchOperationStatusText = "已清空批量选择。";
+  render();
+}
+
+function applyBatchReviewAction(action) {
+  syncActiveQueueItemFromForm();
+  const selectedIds = Array.from(selectedBatchQueueIds);
+  if (selectedIds.length === 0) {
+    batchOperationStatusText = "请先选择候选，再执行批量操作。";
+    render();
+    return;
+  }
+  const actionMap = {
+    review: {
+      action_cn: "需要复查",
+      next_step_cn: "批量标记：需要人工继续复查。",
+      note_cn: "批量备注：进入人工复查队列。"
+    },
+    blocked: {
+      action_cn: "阻塞",
+      next_step_cn: "批量标记：阻塞，先处理风险或缺失信息。",
+      note_cn: "批量备注：阻塞项，不能进入授权前复核。"
+    },
+    no_memory: {
+      action_cn: "暂不入记忆",
+      next_step_cn: "批量标记：候选可继续观察，但暂不提交记忆写入申请。",
+      note_cn: "批量备注：暂不入记忆。"
+    }
+  };
+  const actionConfig = actionMap[action];
+  if (!actionConfig) return;
+
+  let changedCount = 0;
+  let preservedCommentCount = 0;
+  queueState = queueState.map((item) => {
+    if (!selectedBatchQueueIds.has(item.queue_id)) return item;
+    const nextItem = runtimeGuard.clone(item);
+    const existingComment = nextItem.human_note_cn || "";
+    if (existingComment.trim().length > 0) preservedCommentCount += 1;
+    nextItem.human_note_cn = appendUniqueLine(existingComment, actionConfig.note_cn);
+    nextItem.next_step_cn = appendUniqueLine(nextItem.next_step_cn || "", actionConfig.next_step_cn);
+    if (action === "blocked") {
+      nextItem.asset_status = "draft";
+      nextItem.review_status = "human_reviewing";
+      nextItem.human_approved = false;
+      nextItem.memory_approval_status = "pending";
+      nextItem.risk_tags = normalizeRiskTags([...(nextItem.risk_tags || []), "memory_unsuitable"]);
+    } else if (action === "no_memory") {
+      nextItem.asset_status = "candidate";
+      nextItem.review_status = "human_reviewing";
+      nextItem.human_approved = false;
+      nextItem.memory_approval_status = "pending";
+      nextItem.risk_tags = normalizeRiskTags([...(nextItem.risk_tags || []), "memory_unsuitable"]);
+    } else {
+      nextItem.asset_status = nextItem.asset_status === "accepted" ? "candidate" : nextItem.asset_status;
+      nextItem.review_status = "human_reviewing";
+      nextItem.human_approved = false;
+      nextItem.memory_approval_status = "pending";
+    }
+    nextItem.draft_state = {
+      ...queueDraftStateFromItem(nextItem),
+      human_note_cn: nextItem.human_note_cn,
+      next_step_cn: nextItem.next_step_cn,
+      asset_status: nextItem.asset_status,
+      review_status: nextItem.review_status,
+      human_approved: nextItem.human_approved,
+      memory_approval_status: nextItem.memory_approval_status,
+      risk_tags: normalizeRiskTags(nextItem.risk_tags)
+    };
+    changedCount += 1;
+    return normalizeQueueItem(nextItem);
+  });
+  loadQueueItemIntoForm(activeQueueItem());
+  batchOperationStatusText = `批量标记${actionConfig.action_cn}：处理 ${changedCount} 个候选，保留原评论 ${preservedCommentCount} 条，只追加备注。`;
+  render();
+}
+
 function buildQueueDraft({
   version,
   comparisonVersion,
@@ -481,7 +713,8 @@ function buildQueueDraft({
       strengths_cn: strengthsText,
       issues_cn: issuesText,
       next_step_cn: nextStepText,
-      memory_content_cn: memoryContent
+      memory_content_cn: memoryContent,
+      risk_tags: readRiskTagsFromForm()
     };
     const nextItem = {
       ...runtimeGuard.clone(item),
@@ -547,6 +780,13 @@ function buildBatchReviewSummary(queueDraft) {
         reason_cn: "已人工接受但缺少记忆审批。"
       });
     }
+    if (itemHasBlockingRisk(item) && !blockedItems.some((blockedItem) => blockedItem.queue_id === item.queue_id)) {
+      blockedItems.push({
+        queue_id: item.queue_id,
+        title_cn: item.title_cn,
+        reason_cn: riskSummaryForItem(item).reason_cn
+      });
+    }
     if (itemNeedsAttention(item)) {
       nextAttentionItems.push({
         queue_id: item.queue_id,
@@ -600,6 +840,57 @@ function buildBatchReviewSummary(queueDraft) {
   };
 }
 
+function buildRiskReviewSummary(queueDraft) {
+  const countsByTag = {};
+  const groupedItems = [];
+  for (const definition of riskTagDefinitions) {
+    const items = queueDraft
+      .filter((item) => normalizeRiskTags(item.risk_tags).includes(definition.id))
+      .map((item) => ({
+        queue_id: item.queue_id,
+        title_cn: item.title_cn,
+        asset_status: item.asset_status,
+        reason_cn: definition.reason_cn
+      }));
+    countsByTag[definition.id] = items.length;
+    if (items.length > 0) {
+      groupedItems.push({
+        tag: definition.id,
+        tag_cn: definition.label_cn,
+        high_risk: definition.high_risk,
+        count: items.length,
+        items
+      });
+    }
+  }
+  const blockedByRiskItems = queueDraft
+    .filter(itemHasBlockingRisk)
+    .map((item) => ({
+      queue_id: item.queue_id,
+      title_cn: item.title_cn,
+      risk_tags: normalizeRiskTags(item.risk_tags),
+      risk_tags_cn: normalizeRiskTags(item.risk_tags).map(riskTagLabel),
+      reason_cn: riskSummaryForItem(item).reason_cn
+    }));
+  const reportLines = [
+    `风险候选：${blockedByRiskItems.length} 个。`,
+    `风险分组：${groupedItems.length > 0 ? groupedItems.map((group) => `${group.tag_cn} ${group.count} 个`).join("；") : "暂无"}`,
+    "规则：带高风险标签的候选不能进入可授权列表，必须先人工复查或移除风险标签。",
+    "边界：风险标签只影响本地草案，不调用插件、API、DailyNote，也不写 VCP memory。"
+  ];
+  return {
+    status: blockedByRiskItems.length > 0 ? "risk_review_required" : "clear",
+    status_cn: blockedByRiskItems.length > 0 ? "存在风险候选，需要人工复查" : "未发现风险标签阻塞",
+    total_risk_item_count: blockedByRiskItems.length,
+    counts_by_tag: countsByTag,
+    grouped_items: groupedItems,
+    blocked_by_risk_items: blockedByRiskItems,
+    report_cn: reportLines.join("\n"),
+    boundary_cn: "当前只是本地风险复核草案，没有外部副作用。",
+    no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard)
+  };
+}
+
 function buildBatchDecisionDraft(queueDraft, batchSummary) {
   const authorizableItems = queueDraft.filter(itemHasWriteRequest).map((item) => ({
     queue_id: item.queue_id,
@@ -607,6 +898,7 @@ function buildBatchDecisionDraft(queueDraft, batchSummary) {
     title_cn: item.title_cn,
     score: item.score,
     human_note_cn: item.human_note_cn || "",
+    risk_tags_cn: normalizeRiskTags(item.risk_tags).map(riskTagLabel),
     status_cn: item.candidate_review_state?.status_cn || candidateReviewState(item).status_cn,
     reason_cn: item.candidate_review_state?.reason_cn || candidateReviewState(item).reason_cn
   }));
@@ -657,7 +949,7 @@ function buildBatchDecisionDraft(queueDraft, batchSummary) {
   };
 }
 
-function buildA5PreauthorizationReviewPackage(batchDecision, batchSummary) {
+function buildA5PreauthorizationReviewPackage(batchDecision, batchSummary, riskSummary) {
   const forbiddenOperations = [
     "调用插件",
     "调用 API",
@@ -681,6 +973,12 @@ function buildA5PreauthorizationReviewPackage(batchDecision, batchSummary) {
     batchDecision.next_attention_items.length > 0
       ? batchDecision.next_attention_items.map((item) => `${item.title_cn}：${item.reason_cn}`).join("\n")
       : "暂无待处理项。";
+  const riskText =
+    riskSummary.grouped_items.length > 0
+      ? riskSummary.grouped_items
+          .map((group) => `${group.tag_cn}：${group.items.map((item) => item.title_cn).join("、")}`)
+          .join("\n")
+      : "暂无风险分组。";
   const reviewText = [
     "A5 授权前人工复核包草案",
     `批量结论：${batchDecision.decision_cn}`,
@@ -688,6 +986,7 @@ function buildA5PreauthorizationReviewPackage(batchDecision, batchSummary) {
     `可授权候选：\n${authorizableText}`,
     `阻塞项：\n${blockedText}`,
     `待处理项：\n${nextText}`,
+    `风险分组：\n${riskText}`,
     `预检结论：${batchSummary.preflight.result_cn}`,
     "人工需要确认：是否允许另行发起 A5 授权包；本草案本身不构成授权。",
     `禁止动作：${forbiddenOperations.join("、")}。`,
@@ -707,6 +1006,7 @@ function buildA5PreauthorizationReviewPackage(batchDecision, batchSummary) {
     authorizable_items: batchDecision.authorizable_items,
     blocked_items: batchDecision.blocked_items,
     next_attention_items: batchDecision.next_attention_items,
+    risk_grouped_items: riskSummary.grouped_items,
     required_human_action_cn: [
       "人工复核可授权候选是否确实可以进入下一份 A5 授权包。",
       "人工确认阻塞项是否需要先修正或排除。",
@@ -718,6 +1018,189 @@ function buildA5PreauthorizationReviewPackage(batchDecision, batchSummary) {
     boundary_cn: "这只是本地草案，不读取真实 VCP，不调用插件，不写 DailyNote，不写 VCP memory，也不创建图片。",
     no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard)
   };
+}
+
+function buildHumanInspectionChecklistDraft(queueDraft, batchSummary, batchDecision, riskSummary) {
+  const checklistItems = [
+    {
+      state: batchSummary.preflight.no_real_write ? "ok" : "warn",
+      text_cn: "未发生真实写入"
+    },
+    {
+      state: batchSummary.preflight.no_execution_guard_clean ? "ok" : "warn",
+      text_cn: "no-execution guard 干净"
+    },
+    {
+      state: batchDecision.authorizable_count > 0 ? "ok" : "warn",
+      text_cn: `可授权候选：${batchDecision.authorizable_count} 个`
+    },
+    {
+      state: batchDecision.blocked_count === 0 ? "ok" : "warn",
+      text_cn: `阻塞项：${batchDecision.blocked_count} 个`
+    },
+    {
+      state: riskSummary.total_risk_item_count === 0 ? "ok" : "warn",
+      text_cn: `风险候选：${riskSummary.total_risk_item_count} 个`
+    }
+  ];
+  const verdictCn =
+    riskSummary.total_risk_item_count > 0 || batchDecision.blocked_count > 0
+      ? "本批可局部推进，但需要先处理阻塞和风险候选。"
+      : batchDecision.authorizable_count > 0
+        ? "本批可进入授权前人工复核。"
+        : "本批还没有可进入授权前复核的候选。";
+  const reportLines = [
+    `验货结论：${verdictCn}`,
+    `候选总数：${queueDraft.length}`,
+    `可授权候选：${batchDecision.authorizable_count} 个`,
+    `阻塞项：${batchDecision.blocked_count} 个`,
+    `风险候选：${riskSummary.total_risk_item_count} 个`,
+    `下一步：${batchDecision.reason_cn}`,
+    "边界：这份清单只是中文验货草案，不构成 A5 授权。"
+  ];
+  return {
+    status: "draft_only",
+    verdict_cn: verdictCn,
+    checklist_items: checklistItems,
+    risk_summary: riskSummary,
+    report_cn: reportLines.join("\n"),
+    boundary_cn: "当前只是本地中文验货清单草案，没有真实写入或外部调用。",
+    no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard)
+  };
+}
+
+function buildRuntimeSessionExportDraft({
+  createdAt,
+  reviewQueueDraft,
+  batchReviewSummaryDraft,
+  batchDecisionDraft,
+  riskReviewSummaryDraft,
+  a5PreauthorizationReviewPackageDraft,
+  humanInspectionChecklistDraft
+}) {
+  return {
+    package_status: "draft_only",
+    export_format: "runtime_review_session_v1",
+    exported_at: createdAt,
+    session_id: session.session_id,
+    task_id: session.task_id,
+    case_id: session.case_id,
+    review_session_snapshot: {
+      selected_queue_id: selectedQueueId,
+      queue_filter: els.queueFilter.value || "all",
+      selected_batch_queue_ids: Array.from(selectedBatchQueueIds),
+      review_queue: reviewQueueDraft
+    },
+    batch_review_summary_draft: batchReviewSummaryDraft,
+    batch_decision_draft: batchDecisionDraft,
+    risk_review_summary_draft: riskReviewSummaryDraft,
+    a5_preauthorization_review_package_draft: a5PreauthorizationReviewPackageDraft,
+    human_inspection_checklist_draft: humanInspectionChecklistDraft,
+    prototype_guard: runtimeGuard.clone(runtimeGuard.cleanGuard),
+    side_effects_performed: false,
+    boundary_cn: "这是 Review Console runtime 本地会话导出草案，不写磁盘，不调用插件/API/DailyNote，不写 VCP memory。"
+  };
+}
+
+function validateSessionImportPayload(payload) {
+  const errors = [];
+  if (!payload || typeof payload !== "object") {
+    errors.push("导入内容必须是 JSON 对象。");
+  } else {
+    if (payload.package_status !== "draft_only") errors.push("只允许导入 draft_only 会话草案。");
+    if (payload.export_format !== "runtime_review_session_v1") errors.push("导入格式必须是 runtime_review_session_v1。");
+    if (payload.side_effects_performed !== false) errors.push("导入草案必须声明 side_effects_performed=false。");
+    if (!runtimeGuard.guardIsClean(payload.prototype_guard)) errors.push("prototype_guard 不干净。");
+    if (!runtimeGuard.guardIsClean(payload.batch_decision_draft?.no_execution_guard)) {
+      errors.push("batch_decision_draft guard 不干净。");
+    }
+    if (!runtimeGuard.guardIsClean(payload.a5_preauthorization_review_package_draft?.no_execution_guard)) {
+      errors.push("A5 授权前复核包 guard 不干净。");
+    }
+    if (!Array.isArray(payload.review_session_snapshot?.review_queue) || payload.review_session_snapshot.review_queue.length === 0) {
+      errors.push("缺少 review_queue。");
+    }
+    if (
+      payload.plugin_called === true ||
+      payload.api_called === true ||
+      payload.daily_note_called === true ||
+      payload.vcp_memory_written === true ||
+      payload.image_created === true
+    ) {
+      errors.push("导入草案包含真实执行标记。");
+    }
+  }
+  const queueCount = Array.isArray(payload?.review_session_snapshot?.review_queue)
+    ? payload.review_session_snapshot.review_queue.length
+    : 0;
+  return {
+    passed: errors.length === 0,
+    errors,
+    queue_count: queueCount,
+    status_cn: errors.length === 0 ? `导入草案校验通过，包含 ${queueCount} 个候选。` : `导入草案校验失败：${errors.join("；")}`
+  };
+}
+
+function exportCurrentSessionDraft() {
+  syncActiveQueueItemFromForm();
+  const draft = buildDraft();
+  els.sessionTransferText.value = JSON.stringify(draft.runtime_session_export_draft, null, 2);
+  sessionTransferStatusText = `已导出本地复核会话草案，包含 ${draft.runtime_session_export_draft.review_session_snapshot.review_queue.length} 个候选。`;
+  renderSessionTransfer(draft.runtime_session_export_draft);
+}
+
+function parseSessionTransferText() {
+  try {
+    return {
+      payload: JSON.parse(els.sessionTransferText.value || "{}"),
+      parse_error: null
+    };
+  } catch (error) {
+    return {
+      payload: null,
+      parse_error: error.message
+    };
+  }
+}
+
+function validateSessionTransferText() {
+  const parsed = parseSessionTransferText();
+  if (parsed.parse_error) {
+    sessionTransferStatusText = `导入草案校验失败：JSON 无法解析。${parsed.parse_error}`;
+    renderSessionTransfer(null);
+    return { passed: false, errors: [parsed.parse_error] };
+  }
+  const validation = validateSessionImportPayload(parsed.payload);
+  sessionTransferStatusText = validation.status_cn;
+  renderSessionTransfer(parsed.payload);
+  return validation;
+}
+
+function applySessionImportDraft() {
+  const parsed = parseSessionTransferText();
+  if (parsed.parse_error) {
+    sessionTransferStatusText = `导入失败：JSON 无法解析。${parsed.parse_error}`;
+    render();
+    return;
+  }
+  const validation = validateSessionImportPayload(parsed.payload);
+  if (!validation.passed) {
+    sessionTransferStatusText = validation.status_cn;
+    render();
+    return;
+  }
+  const snapshot = parsed.payload.review_session_snapshot;
+  queueState = normalizeQueueItems(snapshot.review_queue);
+  selectedBatchQueueIds = new Set(
+    (snapshot.selected_batch_queue_ids || []).filter((queueId) => queueState.some((item) => item.queue_id === queueId))
+  );
+  selectedQueueId = queueState.some((item) => item.queue_id === snapshot.selected_queue_id)
+    ? snapshot.selected_queue_id
+    : queueState[0].queue_id;
+  els.queueFilter.value = snapshot.queue_filter || "all";
+  loadQueueItemIntoForm(activeQueueItem());
+  sessionTransferStatusText = `已恢复本地复核会话：${validation.queue_count} 个候选，未执行任何外部动作。`;
+  render();
 }
 
 function nextActionLabel({ assetStatus, memoryStatus, guardClean }) {
@@ -849,6 +1332,7 @@ function applyTemplate(templateId) {
   } else if (templateId === "text_artifact") {
     appendTextareaText(els.diffIssues, "存在疑似文字伪影，需要谨慎处理。");
     appendTextareaText(els.humanComment, "注意：疑似文字伪影不能自动忽略。");
+    els.riskTextArtifact.checked = true;
   } else if (templateId === "needs_retry") {
     appendTextareaText(els.diffNext, "建议进入下一轮重跑或修 prompt。");
     els.assetStatus.value = "draft";
@@ -965,11 +1449,28 @@ function buildDraft() {
     memoryContent
   });
   const batchReviewSummaryDraft = buildBatchReviewSummary(reviewQueueDraft);
+  const riskReviewSummaryDraft = buildRiskReviewSummary(reviewQueueDraft);
   const batchDecisionDraft = buildBatchDecisionDraft(reviewQueueDraft, batchReviewSummaryDraft);
   const a5PreauthorizationReviewPackageDraft = buildA5PreauthorizationReviewPackage(
     batchDecisionDraft,
-    batchReviewSummaryDraft
+    batchReviewSummaryDraft,
+    riskReviewSummaryDraft
   );
+  const humanInspectionChecklistDraft = buildHumanInspectionChecklistDraft(
+    reviewQueueDraft,
+    batchReviewSummaryDraft,
+    batchDecisionDraft,
+    riskReviewSummaryDraft
+  );
+  const runtimeSessionExportDraft = buildRuntimeSessionExportDraft({
+    createdAt,
+    reviewQueueDraft,
+    batchReviewSummaryDraft,
+    batchDecisionDraft,
+    riskReviewSummaryDraft,
+    a5PreauthorizationReviewPackageDraft,
+    humanInspectionChecklistDraft
+  });
 
   return {
     review_session_draft: {
@@ -1042,7 +1543,10 @@ function buildDraft() {
     },
     batch_review_summary_draft: batchReviewSummaryDraft,
     batch_decision_draft: batchDecisionDraft,
+    risk_review_summary_draft: riskReviewSummaryDraft,
     a5_preauthorization_review_package_draft: a5PreauthorizationReviewPackageDraft,
+    human_inspection_checklist_draft: humanInspectionChecklistDraft,
+    runtime_session_export_draft: runtimeSessionExportDraft,
     image_case_draft: {
       case_id: session.case_id,
       task_id: session.task_id,
@@ -1166,8 +1670,11 @@ function renderQueueList(queueDraft) {
     button.dataset.writeRequest = String(itemHasWriteRequest(item));
     button.dataset.blocked = String(itemIsBlocked(item));
     button.dataset.nextAttention = String(itemNeedsAttention(item));
+    button.dataset.batchSelected = String(selectedBatchQueueIds.has(item.queue_id));
+    button.dataset.riskBlocked = String(itemHasBlockingRisk(item));
     const reviewState = item.candidate_review_state || candidateReviewState(item);
-    button.textContent = `${item.title_cn}\n${queueBadgeText(item)} · ${reviewState.status_cn} · ${queueStatusLabel(item)} · ${assetStatusLabel(item.asset_status)} · ${item.score} 分 · ${item.priority_cn}\n${item.issues_cn}`;
+    const selectedText = selectedBatchQueueIds.has(item.queue_id) ? "已批量选择 · " : "";
+    button.textContent = `${item.title_cn}\n${selectedText}${queueBadgeText(item)} · ${reviewState.status_cn} · ${queueStatusLabel(item)} · ${assetStatusLabel(item.asset_status)} · ${item.score} 分 · ${item.priority_cn}\n风险标签：${riskTagsLabel(item.risk_tags)}\n${item.issues_cn}`;
     button.addEventListener("click", () => selectQueueItem(item.queue_id));
     els.queueList.appendChild(button);
   }
@@ -1236,6 +1743,33 @@ function renderPreauthorizationPackage(batchDecision, preauthPackage) {
   els.preauthPackageText.textContent = preauthPackage.review_text_cn;
 }
 
+function renderSessionTransfer(sessionExportDraft) {
+  els.sessionTransferStatus.textContent = sessionTransferStatusText;
+  if (!sessionExportDraft) {
+    els.sessionTransferCount.textContent = "-";
+    els.sessionTransferGuard.textContent = "-";
+    return;
+  }
+  const queueCount = sessionExportDraft.review_session_snapshot?.review_queue?.length || 0;
+  els.sessionTransferCount.textContent = `${queueCount} 个候选`;
+  els.sessionTransferGuard.textContent = runtimeGuard.guardIsClean(sessionExportDraft.prototype_guard)
+    ? "导出 guard 干净"
+    : "导出 guard 存在风险";
+}
+
+function renderInspectionSummary(inspectionDraft) {
+  els.inspectionVerdict.textContent = inspectionDraft.verdict_cn;
+  renderStateList(els.inspectionChecklist, inspectionDraft.checklist_items);
+  els.inspectionRiskStats.textContent = inspectionDraft.risk_summary.report_cn;
+  renderList(
+    els.inspectionRiskGroups,
+    inspectionDraft.risk_summary.grouped_items.length > 0
+      ? inspectionDraft.risk_summary.grouped_items.map((group) => `${group.tag_cn}：${group.count} 个`)
+      : ["暂无风险分组。"]
+  );
+  els.inspectionReport.textContent = inspectionDraft.report_cn;
+}
+
 function render() {
   const draft = buildDraft();
   const version = currentVersion();
@@ -1247,10 +1781,16 @@ function render() {
   const batchSummaryDraft = draft.batch_review_summary_draft;
   const batchDecisionDraft = draft.batch_decision_draft;
   const preauthPackageDraft = draft.a5_preauthorization_review_package_draft;
+  const inspectionDraft = draft.human_inspection_checklist_draft;
+  const sessionExportDraft = draft.runtime_session_export_draft;
   queueState = normalizeQueueItems(reviewDraft.review_queue);
   renderQueueList(reviewDraft.review_queue);
   renderBatchSummary(batchSummaryDraft);
   renderPreauthorizationPackage(batchDecisionDraft, preauthPackageDraft);
+  renderInspectionSummary(inspectionDraft);
+  renderSessionTransfer(sessionExportDraft);
+  els.batchSelectedCount.textContent = `${selectedBatchQueueIds.size} 个`;
+  els.batchOperationStatus.textContent = batchOperationStatusText;
   els.humanScoreOut.textContent = els.humanScore.value;
   els.assetRef.textContent = version.asset_ref;
   els.assetBox.textContent = comparisonVersion
@@ -1343,7 +1883,7 @@ function init() {
   els.caseId.textContent = session.case_id;
   els.assetRef.textContent = version.asset_ref;
   els.assetBox.textContent = version.label;
-  [els.versionPicker, els.comparePicker, els.queueFilter, els.diffStrengths, els.diffIssues, els.diffNext, els.humanScore, els.humanComment, els.annotationNote, els.assetStatus, els.humanApproved, els.memoryContent, els.memoryApproval].forEach((el) => {
+  [els.versionPicker, els.comparePicker, els.queueFilter, els.diffStrengths, els.diffIssues, els.diffNext, els.humanScore, els.humanComment, els.annotationNote, els.assetStatus, els.humanApproved, els.memoryContent, els.memoryApproval, els.riskTextArtifact, els.riskPersonFace, els.riskCompositionShift, els.riskBrandMark, els.riskMemoryUnsuitable].forEach((el) => {
     el.addEventListener("input", render);
     el.addEventListener("change", render);
   });
@@ -1355,6 +1895,14 @@ function init() {
   els.batchShowAuthorizable.addEventListener("click", () => applyQueueFilter("write_request"));
   els.batchShowBlocked.addEventListener("click", () => applyQueueFilter("blocked"));
   els.batchShowNext.addEventListener("click", () => applyQueueFilter("next_attention"));
+  els.batchSelectVisible.addEventListener("click", selectVisibleQueueItemsForBatch);
+  els.batchClearSelection.addEventListener("click", clearBatchSelection);
+  els.batchMarkReview.addEventListener("click", () => applyBatchReviewAction("review"));
+  els.batchMarkBlocked.addEventListener("click", () => applyBatchReviewAction("blocked"));
+  els.batchMarkNoMemory.addEventListener("click", () => applyBatchReviewAction("no_memory"));
+  els.exportSessionDraft.addEventListener("click", exportCurrentSessionDraft);
+  els.validateImportDraft.addEventListener("click", validateSessionTransferText);
+  els.applyImportDraft.addEventListener("click", applySessionImportDraft);
   els.tplComposition.addEventListener("click", () => applyTemplate("composition"));
   els.tplDetailNoise.addEventListener("click", () => applyTemplate("detail_noise"));
   els.tplTextArtifact.addEventListener("click", () => applyTemplate("text_artifact"));

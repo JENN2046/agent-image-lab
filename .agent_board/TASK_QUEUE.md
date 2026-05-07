@@ -132,6 +132,7 @@ none
 65. Completed v10.27 DailyNoteWrite root path correction; KNOWLEDGEBASE_ROOT_PATH now classifies as vcp_root_dailynote and no-write recomputation passed.
 66. Completed v10.28 DailyNote canonical location guard; plugin_success_sufficient=false and canonical_target_hash_match_required=true, with local validation passed.
 67. Completed Runtime Review Console batch preauthorization review; candidate_review_state / preauthorization_status, batch_decision_draft, a5_preauthorization_review_package_draft, and authorizable / blocked / next-attention shortcuts validated locally.
+68. Completed Runtime Review Console session continuity and quality control; guarded export/import, batch selection/actions, risk tags, risk-grouped preauthorization, and Chinese inspection checklist validated locally.
 ```
 
 ### blocked

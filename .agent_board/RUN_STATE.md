@@ -15,24 +15,44 @@ Advance Agent Image Lab safely under local A4 autonomy while keeping A5 producti
 ## Current Phase
 
 ```text
-Runtime Review Console batch preauthorization review
+Runtime Review Console session continuity and quality control
 ```
 
 ## Current Task
 
 ```text
-Runtime Review Console batch human-review queue hardening
+Runtime Review Console session export/import, batch operations, risk tags, and Chinese inspection checklist
 ```
 
 ## Last Completed Task
 
 ```text
-Added runtime batch decision and A5 preauthorization review draft surfaces. Each queue candidate now keeps candidate_review_state / preauthorization_status, batch shortcuts can filter authorizable / blocked / next-attention items, and the runtime draft exports batch_decision_draft plus a5_preauthorization_review_package_draft as no-execution local drafts.
+Added runtime session continuity and quality-control surfaces: local JSON export/import with guard validation, multi-candidate batch selection and batch review actions, high-risk candidate tags that block preauthorization, risk-grouped A5 preauthorization draft details, and a Chinese human inspection checklist.
 ```
 
 ## Last Validation
 
 ```text
+2026-05-07 runtime session continuity and quality control:
+status: completed_validated_local_runtime_prototype
+changed files: review_console/runtime_prototype/app.js, review_console/runtime_prototype/index.html, review_console/runtime_prototype/styles.css, scripts/validate_runtime_delivery_surface.js, scripts/validate_runtime_prototype_smoke.js
+session continuity: runtime_session_export_draft added with runtime_review_session_v1, draft_only, side_effects_performed=false, and guarded import validation
+batch operations: select visible, clear selection, mark review, mark blocked, and mark no-memory added without replacing existing comments
+risk control: high-risk tags block preauthorization and are grouped in risk_review_summary_draft / a5_preauthorization_review_package_draft
+Chinese inspection: human_inspection_checklist_draft and UI report added
+node --check review_console/runtime_prototype/app.js: passed
+node --check scripts/validate_runtime_prototype_smoke.js: passed
+node --check scripts/validate_runtime_delivery_surface.js: passed
+node scripts/validate_runtime_prototype_smoke.js: passed
+node scripts/validate_runtime_delivery_surface.js: passed
+node scripts/validate_runtime_prototype_suite.js: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1: passed
+git diff --check: passed
+real VCPChat read: no
+real VCPToolBox read: no
+plugin/API/DailyNote/VCP memory/image action: no
+push/tag/release/PR: no
+
 2026-05-07 runtime batch preauthorization review:
 status: completed_validated_local_runtime_prototype
 changed files: review_console/runtime_prototype/app.js, review_console/runtime_prototype/index.html, review_console/runtime_prototype/styles.css, scripts/validate_runtime_delivery_surface.js, scripts/validate_runtime_prototype_smoke.js

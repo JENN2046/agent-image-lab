@@ -221,6 +221,9 @@ runtime batch local: Review Console runtime prototype now keeps candidate_review
 runtime batch local: batch_decision_draft and a5_preauthorization_review_package_draft are generated as draft-only no-execution surfaces
 runtime batch validation: runtime smoke, runtime suite, delivery surface, MVP validation, local validation, and git diff --check passed
 runtime batch execution: no real VCPChat/VCPToolBox read, plugin/API/DailyNote/VCP memory/image action, push, tag, release, or PR
+runtime continuity local: runtime_session_export_draft exports draft-only runtime_review_session_v1 JSON and guarded import restores queue state without file writes
+runtime quality local: high-risk tags block preauthorization, risk groups feed the A5 preauthorization draft, batch operations append notes without replacing existing comments, and a Chinese inspection checklist is generated
+runtime quality validation: smoke, delivery surface, runtime suite, MVP validation, and git diff --check passed
 ```
 
 ## Current Boundary
