@@ -18,7 +18,7 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review Batch 9B runtime session compatibility matrix
+v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7)
 ```
 
 当前工作分支：
@@ -110,6 +110,10 @@ master tracking origin/master
 - Runtime Review Batch 9A state freshness index：把当前阶段统一到 `docs/226_runtime_review_batch_9a_state_freshness_index.md`，并通过 `scripts/validate_runtime_review_batch_9a_state_freshness.js` 检查 README、roadmap、manifest、release notes、validation checklist 和 `.agent_board` 是否一致。
 - Runtime Review Batch 9C operator runbook and resume capsule：新增 `docs/227_runtime_review_batch_9c_operator_runbook_and_resume_capsule.md`，把当前阶段、安全下一步、硬停止门、验证命令和版本动作状态收束成五分钟续跑入口。
 - Runtime Review Batch 9B runtime session compatibility matrix：新增 `docs/228_runtime_review_batch_9b_runtime_session_compatibility_matrix.md`、legacy/current 两个 `runtime_review_session_v1` fixture 和 validator，固定旧版缺省字段与当前 draft-rich guard 的兼容规则。
+- Runtime Review Batch 10B end-to-end dry-run replay index：新增 `docs/229_runtime_review_batch_10b_end_to_end_dry_run_replay_index.md` 和 `scripts/validate_runtime_review_batch_10b_dry_run_replay_index.js`，把 Adapter dry-run → Review Console → mock bridge → session export 的完整回放路径做成可索引、可校验链。
+- Runtime Review Batch 10A release-candidate acceptance matrix：新增 `docs/230_runtime_review_batch_10a_release_candidate_acceptance_matrix.md`，把 bridge、plugin、asset archive、memory lifecycle、runtime prototype、validator suite、operator docs 和 release readiness 八个领域收束成结构化验收矩阵。
+- Runtime Review Batch 10C future A5 authorization package consolidation：新增 `docs/231_runtime_review_batch_10c_future_a5_authorization_package_consolidation.md`，把 bridge、plugin、asset review、DailyNote/VCP memory、rollback、forbidden outputs 和 version actions 七个领域的 preflight 字段合并到一个可填入模板。
+- Runtime Review final local checkpoint — sustained autopilot chain closeout：新增 `docs/232_runtime_review_final_local_checkpoint_sustained_autopilot_chain_closeout.md`，汇总 7 个 batch 的完整交付物、worktree 状态和 commit/push 就绪条件。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：
@@ -268,12 +272,12 @@ daily_note_called: false
 
 ## 当前优先队列
 
-1. 运行完整校验，确保文档、Adapter、Review Console、agent board、执行记录和 v5.12 release candidate readiness 均通过。
-2. 保持本地默认 `A4 — Sustained Local Autopilot`，继续推进 docs/schema/dry-run/authorization/static prototype/validation 安全面。
-3. 等待用户单独授权任何新的 A5 真实生产动作、tag、push 或正式 release 发布。
-4. 下一步以 remote-debug 端口重新启动或重启 VCPChat 已经到达明确审批边界；没有用户批准时继续停在 no-relaunch / no-runtime-evaluate 轨道。
-5. 后续任何新增真实生图调用、remote-debug relaunch、CDP 检查、bridge 验证或 VCPChat/VCPToolBox 源码读写都必须重新确认目标、允许操作、禁止动作、验证要求和回滚方案，并形成 active authorization package。
-6. v10.28 已固化 DailyNote canonical location guard；Runtime Review Batch 9B runtime session compatibility matrix 已把 legacy `runtime_review_session_v1` 与当前 draft-rich 会话包的兼容规则收束到 `docs/228_runtime_review_batch_9b_runtime_session_compatibility_matrix.md`。下一步若继续写入、追加生图、submitDraft、commit/tag/push/PR/release，必须先匹配具体 active authorization package；满足条件后自动执行到授权上限，否则继续本地文档、验证和授权包规划。
+1. 运行完整校验，确保文档、Adapter、Review Console、agent board、execution records 和 sustained autopilot chain 均通过。
+2. Sustained autopilot chain（9A→10C→final checkpoint, 7/7）已全部完成，10 个文件已落成本地 commit `bfbdc25`。Push 待用户统一执行。
+3. 保持本地默认 `A4 — Sustained Local Autopilot`；不再有已定义且未完成的 default-auto local batch。
+4. 等待用户单独授权任何新的 A5 真实生产动作、tag、push 或正式 release 发布。
+5. 后续任何新增真实生图调用、DailyNote/VCP memory 写入、bridge 验证或 VCPChat/VCPToolBox 源码读写都必须匹配 `docs/231` consolidation template 形成 active authorization package。
+6. A5 条件自动队列：commit/tag/push/PR 在 active version-action package 与 preflight 通过后可自动执行到授权上限。
 
 ## 永久安全门
 
