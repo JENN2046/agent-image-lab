@@ -53,8 +53,8 @@ a5_authorization_package:
     output_directory_ref: "runs/phase_f_f4_portrait_generation"
     overwrite_existing_files_allowed: false
     prompt_id: "a5_portrait_prompt_v1"
-    prompt_hash_utf8: null
-    prompt_safety_scan_passed: false
+    prompt_hash_utf8: "bb5928fe9d3f0d8c90ad5db401eba5336a789dc1cc028e6553a10167ab6befe7"
+    prompt_safety_scan_passed: true
     model_lock_verified: true
     runner_transport: "UTF-8 no BOM byte-write"
     provider_side_capture_allowed: false
@@ -170,7 +170,7 @@ a5_authorization_package:
     external_worktrees_clean: required
     bridge_smoke_passed: false
     plugin_model_verified: true
-    prompt_created_and_scanned: false
+    prompt_created_and_scanned: true
     runner_transport_verified: true
     forbidden_outputs_absent: true
     rollback_plan_present: true
@@ -205,6 +205,6 @@ a5_authorization_package:
 
 ## 激活前仍缺失
 
-- [ ] **人像 prompt 未创建** — 需要写一个中文人像 prompt 并通过安全扫描
+- [x] **人像 prompt** — `prompt_templates/phase_f/a5_portrait_prompt_v1.txt`，安全扫描通过，SHA256 `bb5928fe`
 - [ ] **外部工作树未确认** — VCPChat/VCPToolBox worktrees 需确认干净
 - [ ] **用户未激活** — 需说出 `批准 Phase F 2次人像生图` 激活

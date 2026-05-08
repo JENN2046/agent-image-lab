@@ -1,0 +1,5 @@
+# a5_portrait_prompt_v1
+# Phase F 人像生图 prompt，用于 DoubaoGen (doubao-seedream-5-0-260128)
+# UTF-8 no BOM，通过 byte-write runner transport 传入
+
+一位亚洲年轻女性的专业半身人像摄影，正面面向镜头，面部五官清晰自然，皮肤质感真实细腻，柔和均匀的摄影棚自然光照明，浅灰色纯色背景，无文字无水印无logo无品牌标识，构图简洁专业，发丝细节清晰，眼神温和有神，适合作为职业形象照使用。
