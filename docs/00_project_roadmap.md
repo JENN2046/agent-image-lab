@@ -114,15 +114,17 @@ master tracking origin/master
 - Runtime Review Batch 10A release-candidate acceptance matrix：新增 `docs/230_runtime_review_batch_10a_release_candidate_acceptance_matrix.md`，把 bridge、plugin、asset archive、memory lifecycle、runtime prototype、validator suite、operator docs 和 release readiness 八个领域收束成结构化验收矩阵。
 - Runtime Review Batch 10C future A5 authorization package consolidation：新增 `docs/231_runtime_review_batch_10c_future_a5_authorization_package_consolidation.md`，把 bridge、plugin、asset review、DailyNote/VCP memory、rollback、forbidden outputs 和 version actions 七个领域的 preflight 字段合并到一个可填入模板。
 - Runtime Review final local checkpoint — sustained autopilot chain closeout：新增 `docs/232_runtime_review_final_local_checkpoint_sustained_autopilot_chain_closeout.md`，汇总 7 个 batch 的完整交付物、worktree 状态和 commit/push 就绪条件。
+- Phase E VCPChat subwindow integration preparation：新增 `review_console/phase_e_vcpchat_subwindow_integration_task_plan.md`、`review_console/phase_e_ipc_contract_draft.md`、`review_console/phase_e_security_acceptance_checklist.md`（77 项检查），完成子窗口接入任务书、IPC 契约和安全验收清单。
+- Phase F MVP-B controlled real execution task plan：新增 `review_console/phase_f_mvp_b_controlled_real_execution_task_plan.md`，定义 8 阶段执行计划和进入条件，不授权真实执行。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：
 
-- VCPChat 子窗口接入。
-- 后续更多 DailyNote / VCP 长期记忆写入仍需单独授权。
+- VCPChat 子窗口接入（Phase E 任务书已完成，Phase F 实施需 A5 授权）。
+- 后续更多 DailyNote / VCP 长期记忆写入仍需单独授权（Phase F 任务书已定义 max=1）。
 - 正式 release 发布和后续版本 tag 策略。
-- 后续更多真实图片生成、编辑、归档。
-- Batch 8D 后，commit、tag、push、PR 可进入条件自动队列；前提是当前任务提供具体版本动作 active authorization package，且远端分叉、提交范围、tag/branch/PR 目标和 rollback/preflight 全部通过。
+- 后续更多真实图片生成、编辑、归档（Phase F 任务书已定义 max_plugin_calls=1）。
+- commit/tag 可自动执行；push/PR/release 需 active version-action package。
 
 ## 阶段路线
 
@@ -257,16 +259,22 @@ daily_note_called: false
 
 目标：在人工审批和回滚策略完整后，接入单一真实插件的最小执行闭环。
 
+任务书：`review_console/phase_f_mvp_b_controlled_real_execution_task_plan.md`（8 阶段执行计划、回滚策略、历史教训整合）
+
 进入条件：
 
-- Phase C 已完成单一 manifest 脱敏审查。
-- Phase D dry-run 已完成并通过验收。
+- Phase C/D/E 已完成。
 - 用户单独授权真实插件、真实输入、真实输出目录和最大调用次数。
-- 有备份、回滚、日志脱敏和失败停止条件。
+- `docs/231` consolidation template 已填充并激活。
+- A5 preflight 全部通过。
 
 完成标准：
 
-- 单一插件可在审批后执行一次最小任务。
+- 单一插件可在审批后执行一次最小任务（8 阶段 F1→F8）。
+- Review Console 可人工评分和审批。
+- 资产只保存路径引用和摘要，不把图片二进制写入长期记忆。
+- memory_delta 只生成写入申请，不绕过审批写 DailyNote。
+- 不满足进入条件时，任务书仅为本地规划文档，不授权任何真实执行。
 - Review Console 可人工评分和审批。
 - 资产只保存路径引用和摘要，不把图片二进制写入长期记忆。
 - memory_delta 只生成写入申请，不绕过审批写 DailyNote。
