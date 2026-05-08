@@ -513,10 +513,11 @@ git status --short --branch: inspected after v10.28 guard patch
 
 2026-05-07 v10.27 DailyNoteWrite root path correction:
 problem detected: DailyNoteWrite wrote the v10.25 file under plugin_dir_dailynote instead of vcp_root_dailynote
-corrective action: updated the root-path config key only
+corrective action: updated the root-path config key only, without rerunning DailyNoteWrite
 updated key: KNOWLEDGEBASE_ROOT_PATH
 old value class: plugin_dir_dailynote
 new value class: vcp_root_dailynote
+result: completed_root_path_corrected
 raw config value printed: false
 secret printed: false
 plugin/API/DailyNote write rerun: false

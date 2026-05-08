@@ -5,7 +5,7 @@
 ```text
 Status: Runtime Review sustained autopilot chain FULLY COMPLETE (7/7: 9A freshness → 9C runbook → 9B compatibility → 10B replay index → 10A acceptance matrix → 10C authorization consolidation → final checkpoint closeout). 9 commits + 5 tags landed locally, working tree clean. Push scheduled for end of workday.
 Result: runtime prototype emits 16 draft surfaces; full sustained autopilot chain (9A freshness → 9C runbook → 9B compatibility → 10B replay index → 10A acceptance matrix → 10C authorization consolidation) completed. `docs/225_runtime_review_batch_8d_sustained_autopilot_task_plan.md` through `docs/231_runtime_review_batch_10c_future_a5_authorization_package_consolidation.md` form a complete local documentation chain. All validators pass. Production actions remain conditional-auto only.
-Compatibility note: v10.27 DailyNoteWrite root path correction remains recorded. v10.28 DailyNote canonical location guard remains active. Batch 10B changed only project-local docs, validator, and agent-board state.
+Compatibility note: v10.27 DailyNoteWrite root path correction from plugin_dir_dailynote to vcp_root_dailynote remains recorded, without rerunning DailyNoteWrite, completed_root_path_corrected. v10.28 DailyNote canonical location guard remains active. Batch 10B changed only project-local docs, validator, and agent-board state.
 ```
 
 ## Current Repo

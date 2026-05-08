@@ -132,7 +132,7 @@ none
 62. Completed v10.24 approve_memory_write no-write preflight package; approved request and confirmed candidate were recorded, while daily_note_write_authorized=false and actual_write_performed=false remain enforced.
 63. Completed v10.25 single real DailyNote/VCP memory write using DailyNoteWrite; actual_write_calls=1, plugin_status=success, saved file existence verified by sanitized read-only check, no retry or second write.
 64. Completed v10.26 real DailyNote/VCP memory write closeout records, indexes, validator routing, and local validation; no additional write or version action was performed.
-65. Completed v10.27 DailyNoteWrite root path correction; KNOWLEDGEBASE_ROOT_PATH now classifies as vcp_root_dailynote and no-write recomputation passed.
+65. Completed v10.27 DailyNoteWrite root path correction from plugin_dir_dailynote to vcp_root_dailynote, without rerunning DailyNoteWrite, completed_root_path_corrected; no-write recomputation passed.
 66. Completed v10.28 DailyNote canonical location guard; plugin_success_sufficient=false and canonical_target_hash_match_required=true, with local validation passed.
 67. Completed Runtime Review Console batch preauthorization review; candidate_review_state / preauthorization_status, batch_decision_draft, a5_preauthorization_review_package_draft, and authorizable / blocked / next-attention shortcuts validated locally.
 68. Completed Runtime Review Console session continuity and quality control; guarded export/import, batch selection/actions, risk tags, risk-grouped preauthorization, and Chinese inspection checklist validated locally.

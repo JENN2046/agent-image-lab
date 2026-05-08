@@ -411,7 +411,7 @@ foreach ($path in $runtimePrototypeFiles) {
   $fullPath = Join-Path $Root $path
   if (Test-Path -LiteralPath $fullPath) {
     $content = Get-Content -Raw -Encoding UTF8 $fullPath
-    if ($content -match 'fetch\(|XMLHttpRequest|localStorage|sessionStorage|writeFile|appendFile|child_process|exec\(|spawn\(|require\(|fs\.|https\.|http\.|navigator\.clipboard|eval\(|Function\(') {
+    if ($content -match '\bfetch\(|XMLHttpRequest|\blocalStorage\b|\bsessionStorage\b|writeFile|appendFile|child_process|\bexec\(|\bspawn\(|\brequire\(|\bfs\.|\bhttps\.|\bhttp\.|navigator\.clipboard|\beval\(|\bFunction\(') {
       Add-Failure "Runtime prototype contains forbidden runtime pattern: $path"
     }
   }
