@@ -1,14 +1,15 @@
 # CHECKPOINT.md — Agent Image Lab
 
-## v6.1 Task Panel Interaction
+## v6.2 Asset Index Interaction
 
 ```text
-Status: v6.1 completed — interactive Task Panel (6 form inputs) layered on Review Console
+Status: v6.2 completed — interactive Asset Index with editable fields, status toggles, and local filtering
 v6.0 validator: scripts/validate_v6_0_product_runtime_kickoff.js (10 checks)
 v6.1 validator: scripts/validate_v6_1_task_panel_interaction.js (9 checks)
-Runtime suite: 9/9 passed
+v6.2 validator: scripts/validate_v6_2_asset_index_interaction.js (16 checks)
+Runtime suite: all passed
 Push/tag/release: blocked pending separate authorization
-Next: v6.2 Asset Index interaction or user direction
+Next: v6.3 Session Store interaction or user direction
 ```
 
 ## v6.0 Product Runtime Kickoff

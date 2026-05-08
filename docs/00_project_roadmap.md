@@ -117,6 +117,9 @@ master tracking origin/master
 - Phase E VCPChat subwindow integration preparation：新增 `review_console/phase_e_vcpchat_subwindow_integration_task_plan.md`、`review_console/phase_e_ipc_contract_draft.md`、`review_console/phase_e_security_acceptance_checklist.md`（77 项检查），完成子窗口接入任务书、IPC 契约和安全验收清单。
 - Phase F MVP-B controlled real execution：已完成 F1→F8 全流程。2 次 DoubaoGen 人像生图（双图 accepted_candidate），Bridge smoke 通过（VCPChat v4.4.2，4 通道 0 side effects）。收束记录：`review_console/phase_f_f8_closeout_record.md`
 - Tag and version strategy：新增 `docs/233_tag_and_version_strategy.md`，定义 tag 命名规范、版本号策略和 release 发布条件。
+- v6.0 Product Runtime Kickoff：Task Panel、Asset Index、Session Store 三层叠加到 Review Console。`docs/236_v6_0_product_runtime_kickoff.md`
+- v6.1 Task Panel Interaction：Task Panel 实现可交互表单（6 inputs/selects），runtime_guard 校验，smoke test 覆盖。`docs/237_v6_1_task_panel_interaction.md`
+- v6.2 Asset Index Interaction：Asset Index 从只读展示变成可本地编辑、筛选、索引的 draft-only 资产索引面板。`docs/238_v6_2_asset_index_interaction.md`
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：

@@ -286,8 +286,17 @@ function createRuntimeContext() {
   add("v6TaskId"); add("v6TaskGoalInput"); add("v6TaskStageSelect"); add("v6TaskOwnerSelect");
   add("v6TaskNextInput"); add("v6TaskBlockedInput"); add("v6TaskSessionInput");
   add("v6TaskStage"); add("v6TaskOwner"); add("v6TaskGuard");
+  // v6.0 — legacy readout IDs (keep for backward compat)
   add("v6AssetRef"); add("v6AssetHash"); add("v6AssetStatus"); add("v6AssetScore");
   add("v6AssetDecision"); add("v6AssetMemorySuitability"); add("v6AssetCaseId"); add("v6AssetCount");
+  // v6.2 — interactive Asset Index controls
+  add("v6AssetFilterSelect"); add("v6AssetFilterCount");
+  add("v6AssetEntryId"); add("v6AssetRefInput"); add("v6AssetHashInput");
+  add("v6AssetStatusSelect"); add("v6AssetScoreInput");
+  add("v6AssetDecisionSelect"); add("v6AssetMemorySelect"); add("v6AssetCaseInput");
+  add("v6AssetRefRead"); add("v6AssetHashRead"); add("v6AssetStatusRead");
+  add("v6AssetScoreRead"); add("v6AssetDecisionRead"); add("v6AssetMemoryRead");
+  add("v6AssetCaseRead"); add("v6AssetVisibleCount");
   add("v6SessionId"); add("v6SessionFingerprint"); add("v6SessionDraftOnly");
   add("v6SessionSideEffects"); add("v6SessionExportable"); add("v6SessionImportCompatible");
   add("v6SessionTaskId"); add("v6SessionAssetRefs");
@@ -299,6 +308,16 @@ function createRuntimeContext() {
   elements.get("v6TaskNextInput").value = "";
   elements.get("v6TaskBlockedInput").value = "";
   elements.get("v6TaskSessionInput").value = "";
+
+  // Initialize v6.2 Asset Index defaults
+  elements.get("v6AssetFilterSelect").value = "all";
+  elements.get("v6AssetRefInput").value = "";
+  elements.get("v6AssetHashInput").value = "";
+  elements.get("v6AssetStatusSelect").value = "draft";
+  elements.get("v6AssetScoreInput").value = "";
+  elements.get("v6AssetDecisionSelect").value = "pending";
+  elements.get("v6AssetMemorySelect").value = "not_evaluated";
+  elements.get("v6AssetCaseInput").value = "";
 
   const context = {
     window: {},
@@ -854,7 +873,7 @@ function main() {
   assert(elements.get("v6TaskStage").textContent === "draft", "v6 Task Panel stage must render draft.");
   assert(elements.get("v6TaskOwner").textContent === "ImageLab_Master", "v6 Task Panel owner must render.");
   assert(elements.get("v6TaskGuard").textContent === "clean", "v6 Task Panel guard must be clean.");
-  assert(elements.get("v6AssetStatus").textContent === "draft", "v6 Asset Index status must render draft.");
+  assert(elements.get("v6AssetStatusRead").textContent === "draft", "v6 Asset Index status must render draft.");
   assert(elements.get("v6SessionDraftOnly").textContent === "是", "v6 Session Store draft_only must be true.");
   assert(elements.get("v6SessionSideEffects").textContent === "无", "v6 Session Store side_effects must be false.");
   assert(elements.get("v6SessionExportable").textContent === "是", "v6 Session Store export_ready must be true.");
@@ -884,6 +903,43 @@ function main() {
   elements.get("v6TaskBlockedInput").value = "";
   assert(elements.get("v6TaskStageSelect").value === "draft", "v6 stage must reset to draft.");
   assert(elements.get("v6TaskBlockedInput").value === "", "v6 blocked reason must clear.");
+
+  // v6.2 Asset Index interaction — form inputs and readout sync
+  elements.get("v6AssetRefInput").value = "asset-smoke-001";
+  elements.get("v6AssetHashInput").value = "fnv1a32:smoke123";
+  elements.get("v6AssetStatusSelect").value = "accepted_candidate";
+  elements.get("v6AssetScoreInput").value = "85";
+  elements.get("v6AssetDecisionSelect").value = "accepted";
+  elements.get("v6AssetMemorySelect").value = "suitable";
+  elements.get("v6AssetCaseInput").value = "case-smoke-001";
+  elements.get("v6AssetFilterSelect").value = "accepted_candidate";
+
+  assert(elements.get("v6AssetRefInput").value === "asset-smoke-001", "v6 Asset Index asset_ref input must hold value.");
+  assert(elements.get("v6AssetStatusSelect").value === "accepted_candidate", "v6 Asset Index asset_status select must hold value.");
+  assert(elements.get("v6AssetDecisionSelect").value === "accepted", "v6 Asset Index human_decision select must hold value.");
+  assert(elements.get("v6AssetMemorySelect").value === "suitable", "v6 Asset Index memory_suitability select must hold value.");
+  assert(elements.get("v6AssetFilterSelect").value === "accepted_candidate", "v6 Asset Index filter must hold value.");
+
+  // Reset Asset Index controls
+  elements.get("v6AssetRefInput").value = "";
+  elements.get("v6AssetHashInput").value = "";
+  elements.get("v6AssetStatusSelect").value = "draft";
+  elements.get("v6AssetScoreInput").value = "";
+  elements.get("v6AssetDecisionSelect").value = "pending";
+  elements.get("v6AssetMemorySelect").value = "not_evaluated";
+  elements.get("v6AssetCaseInput").value = "";
+  elements.get("v6AssetFilterSelect").value = "all";
+
+  assert(elements.get("v6AssetStatusSelect").value === "draft", "v6 Asset Index asset_status must reset to draft.");
+  assert(elements.get("v6AssetFilterSelect").value === "all", "v6 Asset Index filter must reset to all.");
+
+  // v6.2 Asset Index draft boundary checks
+  assert(initialDraft.v6_product_runtime_draft.asset_index.draft_only === true, "v6 asset_index draft_only must be true.");
+  assert(initialDraft.v6_product_runtime_draft.asset_index.side_effects_performed === false, "v6 asset_index side_effects must be false.");
+  assert(initialDraft.v6_product_runtime_draft.asset_index.no_execution_guard.api_called === false, "v6 asset_index guard api_called must be false.");
+  assert(initialDraft.v6_product_runtime_draft.asset_index.entries[0].binary_stored === false, "v6 asset_index entry binary_stored must be false.");
+  assert(initialDraft.v6_product_runtime_draft.asset_index.entries[0].raw_path_stored === false, "v6 asset_index entry raw_path_stored must be false.");
+
   assert(elements.get("batchTotal").textContent === "4", "Batch total must render.");
   assert(elements.get("batchAccepted").textContent === "1", "Batch accepted count must render.");
   assert(elements.get("batchPending").textContent === "2", "Batch pending count must render.");

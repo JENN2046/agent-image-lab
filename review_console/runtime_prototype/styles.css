@@ -730,3 +730,54 @@ pre {
   border-top: 1px solid var(--border, #444);
 }
 
+
+/* v6.2 Asset Index interaction */
+.v6-asset-index-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: #2a4a3a;
+  color: #b0f0d0;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+.v6-asset-index-filter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  border: 1px solid #3a4a4a;
+  border-radius: 6px;
+  background: #141e22;
+}
+.v6-asset-index-filter legend {
+  font-size: 0.8rem;
+  color: #8aa;
+  padding: 0 4px;
+}
+.v6-asset-index-filter select {
+  width: auto;
+  min-width: 180px;
+}
+.v6-asset-filter-count {
+  font-size: 0.85rem;
+  color: #9bb;
+}
+.v6-draft-boundary-text {
+  margin-top: 10px;
+  padding: 8px 10px;
+  border: 1px dashed #3a5a4a;
+  border-radius: 4px;
+  background: #0e1a16;
+  color: #8ab;
+  font-size: 0.8rem;
+  text-align: center;
+}
+.panel-boundary {
+  margin: 0 0 12px;
+  color: #8ab;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}

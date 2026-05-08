@@ -1,0 +1,82 @@
+# v6.2 Asset Index Interaction — Schema Example
+# This example shows the asset_index draft structure for v6 Product Runtime.
+# All data is local draft-only, no side effects, no binary storage.
+
+v6_product_runtime_draft:
+  layer_name: v6_product_runtime
+  layer_status: draft_only
+  created_at: "2026-05-08T12:00:00.000Z"
+  no_execution_guard:
+    api_called: false
+    daily_note_called: false
+    vcp_plugin_called: false
+    disk_write_performed: false
+    image_file_created: false
+
+  task_panel:
+    # ... (existing task_panel fields)
+
+  asset_index:
+    draft_only: true
+    side_effects_performed: false
+    no_execution_guard:
+      api_called: false
+      daily_note_called: false
+      vcp_plugin_called: false
+      disk_write_performed: false
+      image_file_created: false
+
+    filter_status: "all"  # all | accepted_candidate | needs_human_review | rejected | memory_suitable
+
+    entries:
+      - asset_id: "draft-001"
+        asset_ref: "asset-draft-001"
+        asset_hash: null
+        asset_status: "draft"
+        review_score: null
+        human_decision: "pending"
+        memory_suitability: "not_evaluated"
+        linked_case_id: null
+        linked_task_id: "task-001"
+        source: "manual_draft"
+        binary_stored: false
+        raw_path_stored: false
+        created_at: "2026-05-08T12:00:00.000Z"
+        updated_at: "2026-05-08T12:00:00.000Z"
+
+    total_entries: 1
+    indexed_count: 0
+    searchable: true
+
+  # Example with filled-in values
+  asset_index_filled:
+    draft_only: true
+    side_effects_performed: false
+    no_execution_guard:
+      api_called: false
+      daily_note_called: false
+      vcp_plugin_called: false
+      disk_write_performed: false
+      image_file_created: false
+
+    filter_status: "accepted_candidate"
+
+    entries:
+      - asset_id: "draft-001"
+        asset_ref: "asset-photo-studio-001"
+        asset_hash: "fnv1a32:a1b2c3d4e5"
+        asset_status: "accepted_candidate"
+        review_score: 85
+        human_decision: "accepted"
+        memory_suitability: "suitable"
+        linked_case_id: "case-photo-001"
+        linked_task_id: "task-v6-001"
+        source: "manual_draft"
+        binary_stored: false
+        raw_path_stored: false
+        created_at: "2026-05-08T12:00:00.000Z"
+        updated_at: "2026-05-08T12:00:00.000Z"
+
+    total_entries: 1
+    indexed_count: 0
+    searchable: true

@@ -56,6 +56,7 @@
 - Phase F MVP-B controlled real execution 已完成：F1→F8，2 次 DoubaoGen 人像生图（双图 accepted），Bridge smoke 通过。记录：`review_console/phase_f_f8_closeout_record.md`，复盘：`review_console/phase_f_retrospective.md`
 - v6.0 Product Runtime Kickoff：Task Panel、Asset Index、Session Store 叠加到 Review Console。`docs/236_v6_0_product_runtime_kickoff.md`，validator `scripts/validate_v6_0_product_runtime_kickoff.js`（10 checks）
 - v6.1 Task Panel Interaction：Task Panel 交互表单实现。`docs/237_v6_1_task_panel_interaction.md`，validator `scripts/validate_v6_1_task_panel_interaction.js`（9 checks）
+- v6.2 Asset Index Interaction：Asset Index 交互编辑与筛选实现。`docs/238_v6_2_asset_index_interaction.md`，validator `scripts/validate_v6_2_asset_index_interaction.js`（16 checks）
 - Tag and version strategy 提供 `docs/233_tag_and_version_strategy.md`；tag 命名规范、版本号策略、release 条件。
 
 ## Release readiness 文件
@@ -134,6 +135,7 @@
 - `docs/235_final_program_closeout_after_phase_i.md`
 - `docs/236_v6_0_product_runtime_kickoff.md`
 - `docs/237_v6_1_task_panel_interaction.md`
+- `docs/238_v6_2_asset_index_interaction.md`
 - `review_console/phase_e_vcpchat_subwindow_integration_task_plan.md`
 - `review_console/phase_e_ipc_contract_draft.md`
 - `review_console/phase_e_security_acceptance_checklist.md`
@@ -246,6 +248,8 @@
 - `scripts/validate_runtime_review_full_chain.js`
 - `scripts/validate_v6_0_product_runtime_kickoff.js`
 - `scripts/validate_v6_1_task_panel_interaction.js`
+- `scripts/validate_v6_2_asset_index_interaction.js`
+- `tests/schema_examples/v6_2_asset_index_interaction.example.yaml`
 - `scripts/run_vcpchat_review_console_remote_debug_smoke.ps1`
 - `integrations/vcp/v0_7_real_execution_authorization_gate.md`
 - `integrations/vcp/v0_7_photo_studio_os_dry_run_rehearsal.md`

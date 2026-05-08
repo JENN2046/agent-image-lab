@@ -278,7 +278,26 @@ const els = {
   v6SessionExportable: document.getElementById("v6SessionExportable"),
   v6SessionImportCompatible: document.getElementById("v6SessionImportCompatible"),
   v6SessionTaskId: document.getElementById("v6SessionTaskId"),
-  v6SessionAssetRefs: document.getElementById("v6SessionAssetRefs")
+  v6SessionAssetRefs: document.getElementById("v6SessionAssetRefs"),
+  // v6.2 Asset Index Interaction
+  v6AssetFilterSelect: document.getElementById("v6AssetFilterSelect"),
+  v6AssetFilterCount: document.getElementById("v6AssetFilterCount"),
+  v6AssetEntryId: document.getElementById("v6AssetEntryId"),
+  v6AssetRefInput: document.getElementById("v6AssetRefInput"),
+  v6AssetHashInput: document.getElementById("v6AssetHashInput"),
+  v6AssetStatusSelect: document.getElementById("v6AssetStatusSelect"),
+  v6AssetScoreInput: document.getElementById("v6AssetScoreInput"),
+  v6AssetDecisionSelect: document.getElementById("v6AssetDecisionSelect"),
+  v6AssetMemorySelect: document.getElementById("v6AssetMemorySelect"),
+  v6AssetCaseInput: document.getElementById("v6AssetCaseInput"),
+  v6AssetRefRead: document.getElementById("v6AssetRefRead"),
+  v6AssetHashRead: document.getElementById("v6AssetHashRead"),
+  v6AssetStatusRead: document.getElementById("v6AssetStatusRead"),
+  v6AssetScoreRead: document.getElementById("v6AssetScoreRead"),
+  v6AssetDecisionRead: document.getElementById("v6AssetDecisionRead"),
+  v6AssetMemoryRead: document.getElementById("v6AssetMemoryRead"),
+  v6AssetCaseRead: document.getElementById("v6AssetCaseRead"),
+  v6AssetVisibleCount: document.getElementById("v6AssetVisibleCount")
 };
 
 let activeDraftView = "readable";
@@ -3102,20 +3121,45 @@ function buildV6ProductRuntimeDraft(createdAt) {
       side_effects_performed: false
     },
 
-    asset_index: {
-      entries: selectedItem ? [{
-        asset_ref: `asset-${caseId || "draft"}-001`,
-        asset_hash: null,
-        asset_status: "draft",
-        review_score: null,
-        human_decision: "pending",
-        memory_suitability: "not_evaluated",
-        linked_case_id: caseId
-      }] : [],
-      total_entries: selectedItem ? 1 : 0,
-      indexed_count: 0,
-      searchable: true
-    },
+    asset_index: function () {
+      var ref = els.v6AssetRefInput.value.trim() || "asset-draft-001";
+      var hash = els.v6AssetHashInput.value.trim() || null;
+      var status = els.v6AssetStatusSelect.value;
+      var scoreRaw = els.v6AssetScoreInput.value.trim();
+      var score = scoreRaw !== "" ? Number(scoreRaw) : null;
+      if (score !== null && (isNaN(score) || score < 0 || score > 100)) { score = null; }
+      var decision = els.v6AssetDecisionSelect.value;
+      var memory = els.v6AssetMemorySelect.value;
+      var caseId = els.v6AssetCaseInput.value.trim() || null;
+      var filterVal = els.v6AssetFilterSelect.value;
+
+      var entries = [{
+        asset_id: "draft-001",
+        asset_ref: ref,
+        asset_hash: hash,
+        asset_status: status,
+        review_score: score,
+        human_decision: decision,
+        memory_suitability: memory,
+        linked_case_id: caseId,
+        linked_task_id: selectedItem ? (selectedItem.task_id || null) : null,
+        source: "manual_draft",
+        binary_stored: false,
+        raw_path_stored: false,
+        created_at: createdAt,
+        updated_at: createdAt
+      }];
+      return {
+        draft_only: true,
+        side_effects_performed: false,
+        no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard),
+        filter_status: filterVal,
+        entries: entries,
+        total_entries: entries.length,
+        indexed_count: 0,
+        searchable: true
+      };
+    }(),
 
     session_store: {
       session_id: sessionId,
@@ -3906,16 +3950,48 @@ function renderV6ProductRuntime(draft) {
   els.v6TaskOwner.textContent = tp.owner_role;
   els.v6TaskGuard.textContent = (tp.draft_only && !tp.side_effects_performed) ? "clean" : "dirty";
 
-  // Asset Index
+  // Asset Index — sync form readout from draft
   const assetEntry = v6.asset_index.entries[0] || {};
-  els.v6AssetRef.textContent = assetEntry.asset_ref || "-";
-  els.v6AssetHash.textContent = assetEntry.asset_hash || "待生成";
-  els.v6AssetStatus.textContent = assetEntry.asset_status || "-";
-  els.v6AssetScore.textContent = assetEntry.review_score != null ? String(assetEntry.review_score) : "-";
-  els.v6AssetDecision.textContent = assetEntry.human_decision || "-";
-  els.v6AssetMemorySuitability.textContent = assetEntry.memory_suitability || "-";
-  els.v6AssetCaseId.textContent = assetEntry.linked_case_id || "-";
-  els.v6AssetCount.textContent = `${v6.asset_index.indexed_count}/${v6.asset_index.total_entries}`;
+  const filterStatus = v6.asset_index.filter_status || "all";
+  els.v6AssetRefRead.textContent = assetEntry.asset_ref || "-";
+  els.v6AssetHashRead.textContent = assetEntry.asset_hash || "未设置";
+  els.v6AssetStatusRead.textContent = assetEntry.asset_status || "-";
+  els.v6AssetScoreRead.textContent = assetEntry.review_score != null ? String(assetEntry.review_score) : "null";
+  els.v6AssetDecisionRead.textContent = assetEntry.human_decision || "-";
+  els.v6AssetMemoryRead.textContent = assetEntry.memory_suitability || "-";
+  els.v6AssetCaseRead.textContent = assetEntry.linked_case_id || "-";
+
+  // Filter visible count
+  var visibleCount = 0;
+  var allEntries = v6.asset_index.entries || [];
+  for (var ei = 0; ei < allEntries.length; ei++) {
+    var e = allEntries[ei];
+    var match = false;
+    if (filterStatus === "all") { match = true; }
+    else if (filterStatus === "memory_suitable") { match = e.memory_suitability === "suitable"; }
+    else { match = e.asset_status === filterStatus; }
+    if (match) { visibleCount++; }
+  }
+  els.v6AssetVisibleCount.textContent = visibleCount + "/" + allEntries.length;
+  els.v6AssetFilterCount.textContent = allEntries.length + " total, " + visibleCount + " visible (filter: " + filterStatus + ")";
+
+  // Sync backward: if the entry's field differs from form, update form (draft -> input)
+  if (els.v6AssetRefInput.value !== assetEntry.asset_ref && assetEntry.asset_ref && assetEntry.asset_ref !== "asset-draft-001") {
+    els.v6AssetRefInput.value = assetEntry.asset_ref;
+  }
+  if (assetEntry.asset_hash && els.v6AssetHashInput.value !== assetEntry.asset_hash) {
+    els.v6AssetHashInput.value = assetEntry.asset_hash;
+  }
+  els.v6AssetStatusSelect.value = assetEntry.asset_status || "draft";
+  if (assetEntry.review_score != null) {
+    els.v6AssetScoreInput.value = assetEntry.review_score;
+  }
+  els.v6AssetDecisionSelect.value = assetEntry.human_decision || "pending";
+  els.v6AssetMemorySelect.value = assetEntry.memory_suitability || "not_evaluated";
+  if (assetEntry.linked_case_id && els.v6AssetCaseInput.value !== assetEntry.linked_case_id) {
+    els.v6AssetCaseInput.value = assetEntry.linked_case_id;
+  }
+  els.v6AssetFilterSelect.value = filterStatus;
 
   // Session Store
   els.v6SessionId.textContent = v6.session_store.session_id || "-";
@@ -4152,6 +4228,14 @@ function init() {
   els.tplTextArtifact.addEventListener("click", () => applyTemplate("text_artifact"));
   els.tplNeedsRetry.addEventListener("click", () => applyTemplate("needs_retry"));
   els.tplCandidateNoMemory.addEventListener("click", () => applyTemplate("candidate_no_memory"));
+  // v6.2 Asset Index interaction listeners
+  [els.v6AssetRefInput, els.v6AssetHashInput, els.v6AssetScoreInput, els.v6AssetCaseInput, els.v6AssetStatusSelect, els.v6AssetDecisionSelect, els.v6AssetMemorySelect, els.v6AssetFilterSelect].forEach(el => {
+    if (el) {
+      el.addEventListener("input", () => { trackedRender("编辑 Asset Index"); });
+      el.addEventListener("change", () => { trackedRender("编辑 Asset Index"); });
+    }
+  });
+
   els.viewReadable.addEventListener("click", () => {
     setDraftView("readable");
     render();

@@ -54,6 +54,12 @@ none
 ### todo
 
 ```text
+1. v6.3: next incremental layer (Session Store interaction or other user direction).
+```
+
+### done
+
+```text
 1. Keep Adapter and Review Console work in no-execution / no-external-read mode unless an active A5 authorization package exists and preflight passes.
 2. If user authorizes remote or release movement, request exact target and run preflight before any push/tag/release.
 3. Stop before any real DoubaoGen/config read, provider-side echo, sanitized request capture, additional generation retry, DailyNote, VCP memory/image, push/tag/release until user explicitly authorizes real generation parameters, memory action, or version action.

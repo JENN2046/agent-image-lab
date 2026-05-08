@@ -19,7 +19,7 @@ A:/agent-image-lab/agent-image-lab-v0.2
 ```text
 Branch: master
 Remote tracking: master...origin/master
-State: v6.1 Task Panel Interaction — interactive Task Panel (6 form inputs) on Review Console. v6.0+v6.1 validators pass. draft_only, no-execution. Push/tag/release require separate authorization.
+State: v6.2 Asset Index Interaction — interactive Asset Index with editable fields, status toggles, and local filtering on v6 Product Runtime. v6.0+v6.1+v6.2 validators pass. draft_only, no-execution. Push/tag/release require separate authorization.
 Local head before batch: ec60cff
 Origin/master before batch: ec60cff
 master...origin/master before batch: 0 0
@@ -132,6 +132,8 @@ Historical v7.45 phase: v7.45 cdp read-only attempt record
 ## What Was Done
 
 ```text
+Added v6.2 Asset Index Interaction: asset_ref/hash/status/score/decision/memory_suitability/case_id interactive form controls with local filtering (all/accepted_candidate/needs_human_review/rejected/memory_suitable). runtime_guard now validates v6AssetIndexIsSafe with strict enum and boundary checks. FIELD_MAPPING, smoke test, v6.2 validator, schema example, and agent-board files synced.
+
 Added runtime contract smoke hardening.
 Added runtime guard unit validation.
 Added runtime validation suite.

@@ -21,7 +21,7 @@ master tracking origin/master
 ## Current Phase
 
 ```text
-v6.1 — Task Panel Interaction. Interactive Task Panel with goal/stage/owner/next/blocked inputs layered on Review Console. draft_only, no-execution.
+v6.2 — Asset Index Interaction. Interactive Asset Index with editable fields, status toggles, and local filtering layered on v6 Product Runtime. draft_only, no-execution.
 ```
 
 ## Current Task
@@ -33,7 +33,7 @@ No defined default-auto local batch remaining. Await user direction or A5 author
 ## Last Completed Task
 
 ```text
-v6.0 Product Runtime Kickoff: Task Panel, Asset Index, Session Store layered on existing Review Console runtime prototype. v6_product_runtime_draft added to buildDraft() + session export + UI + smoke test. All validators pass.
+v6.2 Asset Index Interaction: Asset Index from read-only display to interactive draft-only panel with editable asset metadata fields, status toggles, and local filtering. v6AssetIndexIsSafe guard added. All validators pass.
 ```
 
 ## Last Validation
@@ -1189,5 +1189,5 @@ Runtime Review sustained autopilot chain is fully complete (9A → 9C → 9B →
 ## Next Action
 
 ```text
-Phase F complete, all pushed to origin/master (31 commits, 9 tags). Next: Phase G baseline hygiene or user direction.
+v6.2 done. Next: v6.3 feature or user direction.
 ```

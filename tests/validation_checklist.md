@@ -3559,3 +3559,16 @@
 - [ ] `node scripts/validate_runtime_delivery_surface.js` 通过。
 - [ ] `node scripts/validate_runtime_prototype_suite.js` 通过。
 - [ ] `node scripts/validate_local_commit_scope.js` 通过。
+
+## v6.2 Asset Index Interaction 检查
+
+- [ ] `docs/238_v6_2_asset_index_interaction.md` 存在，并声明 draft_only / no-execution 边界。
+- [ ] `review_console/runtime_prototype/index.html` 包含 Asset Index 交互控件（`v6AssetRefInput`、`v6AssetHashInput`、`v6AssetStatusSelect`、`v6AssetScoreInput`、`v6AssetDecisionSelect`、`v6AssetMemorySelect`、`v6AssetCaseInput`、`v6AssetFilterSelect`）。
+- [ ] `review_console/runtime_prototype/app.js` 包含 v6.2 Asset Index 交互 builder / renderer / state update / event listeners。
+- [ ] `review_console/runtime_prototype/runtime_guard.js` 包含 `v6AssetIndexIsSafe()`，校验 asset_index 结构安全、枚举字段合法、binary_stored/raw_path_stored/side_effects_performed 均为 false、no absolute path in asset_ref。
+- [ ] `review_console/runtime_prototype/FIELD_MAPPING.md` 包含 asset_index 字段映射。
+- [ ] `scripts/validate_v6_2_asset_index_interaction.js` 存在且 16 项检查全部通过。
+- [ ] `tests/schema_examples/v6_2_asset_index_interaction.example.yaml` 存在，包含 asset_index draft 样例。
+- [ ] `scripts/validate_runtime_prototype_smoke.js` 覆盖 asset_status、human_decision、memory_suitability 切换和 filter status。
+- [ ] `scripts/validate_v6_0_product_runtime_kickoff.js` 和 `scripts/validate_v6_1_task_panel_interaction.js` 保持通过。
+- [ ] v6.2 不读真实 VCPChat/VCPToolBox、不读真实图片文件、不调用插件/API/DailyNote/VCP memory、不创建图片、不写磁盘、不 push/tag/release。

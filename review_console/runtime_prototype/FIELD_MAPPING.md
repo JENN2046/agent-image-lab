@@ -320,3 +320,27 @@ Host ack 不代表真实 VCPChat 接入、不代表 IPC handler 已创建、不�
 | `no_execution_guard` | `runtimeGuard.clone(cleanGuard)` | 5 个 flag 全部 false |
 
 v6 Task Panel 保持在 no-execution 边界内，不触发真实插件、API、DailyNote 或 VCP memory。
+
+## v6_product_runtime_draft.asset_index
+
+| 字段 | 来源 | 说明 |
+| --- | --- | --- |
+| `draft_only` | 固定 `true` | 所有 asset index 操作保持 draft_only |
+| `side_effects_performed` | 固定 `false` | 不触发真实副作用 |
+| `no_execution_guard` | `runtimeGuard.clone(cleanGuard)` | 5 个 flag 全部 false |
+| `filter_status` | `v6AssetFilterSelect` | all / accepted_candidate / needs_human_review / rejected / memory_suitable |
+| `entries[].asset_id` | 固定 `draft-001` | 当前只支持 1 个 primary entry |
+| `entries[].asset_ref` | `v6AssetRefInput` | 手写资产引用，不允许 raw local absolute path |
+| `entries[].asset_hash` | `v6AssetHashInput` | 脱敏字符串或 null，不能读取真实图片生成 |
+| `entries[].asset_status` | `v6AssetStatusSelect` | draft / accepted_candidate / needs_human_review / rejected |
+| `entries[].review_score` | `v6AssetScoreInput` | 0-100 或 null |
+| `entries[].human_decision` | `v6AssetDecisionSelect` | pending / accepted / rejected / needs_review |
+| `entries[].memory_suitability` | `v6AssetMemorySelect` | not_evaluated / suitable / unsuitable |
+| `entries[].linked_case_id` | `v6AssetCaseInput` | 关联 case ID |
+| `entries[].linked_task_id` | session task_id | 自动关联当前 task |
+| `entries[].source` | 固定 `manual_draft` | 当前只支持手动草案 |
+| `entries[].binary_stored` | 固定 `false` | 不存储图片二进制 |
+| `entries[].raw_path_stored` | 固定 `false` | 不存储原始路径 |
+| `entries[].created_at` / `updated_at` | `buildV6ProductRuntimeDraft()` | ISO 时间 |
+
+筛选交互：`filter_status` 改变后，UI 显示匹配条目数和可见计数。当前 1 个 primary entry，代码为未来多 entry 扩展保留了 entries 数组结构。

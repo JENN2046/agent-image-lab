@@ -101,6 +101,7 @@ v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + 
 - Phase F MVP-B controlled real execution task plan（1 deliverable）：`review_console/phase_f_mvp_b_controlled_real_execution_task_plan.md`（8 阶段执行计划、回滚策略、历史教训整合），已完成 2 次 DoubaoGen 人像生图（双图 accepted）。
 - v6.0 Product Runtime Kickoff：Task Panel、Asset Index、Session Store 三层叠加到 Review Console。`docs/236_v6_0_product_runtime_kickoff.md`
 - v6.1 Task Panel Interaction：Task Panel 实现可交互表单（6 inputs/selects），runtime_guard 校验，smoke test 覆盖。`docs/237_v6_1_task_panel_interaction.md`
+- v6.2 Asset Index Interaction：Asset Index 从只读展示变成可本地编辑、筛选、索引的 draft-only 资产索引面板。`docs/238_v6_2_asset_index_interaction.md`
 
 当前 accepted asset 只以 ignored runtime 路径和哈希归档，不把图片二进制写入 Git、DailyNote 或 VCP 长期记忆。人工接受记录保留了已知视觉偏差：这是 `human_override` 通过，不是完美 prompt compliance。
 当前 A5 v10.4 / v10.5 / v10.9 新资产均被拒收，只保留 ignored runtime ref、哈希、评分和规则摘要；未把图片二进制写入 Git、DailyNote 或 VCP memory。
@@ -207,8 +208,10 @@ Photo Studio OS UI 生图生产线，以及 AI 图片评审与修正生产线。
 - `scripts/validate_runtime_review_full_chain.js`：全链 validator aggregator，一次运行全部 6 个 batch validator（12 项检查），自动识别 phase superseded 的历史批次。
 - `scripts/validate_v6_0_product_runtime_kickoff.js`：v6.0 validator，10 项检查覆盖 kickoff doc、v6 draft surface、UI section、smoke test 扩展。
 - `scripts/validate_v6_1_task_panel_interaction.js`：v6.1 validator，9 项检查覆盖 Task Panel 表单交互、guard、smoke test。
+- `scripts/validate_v6_2_asset_index_interaction.js`：v6.2 validator，16 项检查覆盖 Asset Index 交互表单、guard、field mapping、smoke test 扩展和禁止输出。
 - `docs/236_v6_0_product_runtime_kickoff.md`：v6.0 Product Runtime Kickoff。
 - `docs/237_v6_1_task_panel_interaction.md`：v6.1 Task Panel Interaction。
+- `docs/238_v6_2_asset_index_interaction.md`：v6.2 Asset Index Interaction。
 - `review_console/phase_e_vcpchat_subwindow_integration_task_plan.md`：Phase E VCPChat 子窗口接入任务书。
 - `review_console/phase_e_ipc_contract_draft.md`：Phase E IPC 契约草案，4 通道 + sender 校验 + 错误处理。
 - `review_console/phase_e_security_acceptance_checklist.md`：Phase E 安全验收清单，77 项 8 域。

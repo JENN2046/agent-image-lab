@@ -729,17 +729,89 @@
           </article>
 
           <article id="v6AssetIndex">
-            <h3>Asset Index</h3>
-            <dl class="meta">
-              <div><dt>资产引用</dt><dd id="v6AssetRef">-</dd></div>
-              <div><dt>资产哈希</dt><dd id="v6AssetHash">-</dd></div>
-              <div><dt>资产状态</dt><dd id="v6AssetStatus">-</dd></div>
-              <div><dt>评分</dt><dd id="v6AssetScore">-</dd></div>
-              <div><dt>人工判定</dt><dd id="v6AssetDecision">-</dd></div>
-              <div><dt>记忆适配</dt><dd id="v6AssetMemorySuitability">-</dd></div>
-              <div><dt>关联 Case</dt><dd id="v6AssetCaseId">-</dd></div>
-              <div><dt>索引条目数</dt><dd id="v6AssetCount">-</dd></div>
+            <h3>Asset Index <span class="v6-asset-index-badge">draft-only</span></h3>
+            <p class="panel-boundary">只读草案条目标注。本地编辑与筛选，不写入磁盘。</p>
+
+            <fieldset class="v6-asset-index-filter">
+              <legend>筛选</legend>
+              <select id="v6AssetFilterSelect">
+                <option value="all">All</option>
+                <option value="accepted_candidate">Accepted Candidate</option>
+                <option value="needs_human_review">Needs Human Review</option>
+                <option value="rejected">Rejected</option>
+                <option value="memory_suitable">Memory Suitable</option>
+              </select>
+              <span class="v6-asset-filter-count" id="v6AssetFilterCount">-</span>
+            </fieldset>
+
+            <fieldset class="v6-form-group">
+              <legend>条目编辑 — asset_id: <span id="v6AssetEntryId">draft-001</span></legend>
+
+              <div class="v6-form-row">
+                <div class="v6-form-group">
+                  <label for="v6AssetRefInput">asset_ref</label>
+                  <input type="text" id="v6AssetRefInput" placeholder="asset-draft-001" maxlength="120" />
+                </div>
+                <div class="v6-form-group">
+                  <label for="v6AssetHashInput">asset_hash (脱敏或 null)</label>
+                  <input type="text" id="v6AssetHashInput" placeholder="fnv1a32:abc123… 或留空" maxlength="64" />
+                </div>
+              </div>
+
+              <div class="v6-form-row">
+                <div class="v6-form-group">
+                  <label for="v6AssetStatusSelect">asset_status</label>
+                  <select id="v6AssetStatusSelect">
+                    <option value="draft">draft</option>
+                    <option value="accepted_candidate">accepted_candidate</option>
+                    <option value="needs_human_review">needs_human_review</option>
+                    <option value="rejected">rejected</option>
+                  </select>
+                </div>
+                <div class="v6-form-group">
+                  <label for="v6AssetScoreInput">review_score (0–100 或 null)</label>
+                  <input type="number" id="v6AssetScoreInput" min="0" max="100" placeholder="留空=null" />
+                </div>
+              </div>
+
+              <div class="v6-form-row">
+                <div class="v6-form-group">
+                  <label for="v6AssetDecisionSelect">human_decision</label>
+                  <select id="v6AssetDecisionSelect">
+                    <option value="pending">pending</option>
+                    <option value="accepted">accepted</option>
+                    <option value="rejected">rejected</option>
+                    <option value="needs_review">needs_review</option>
+                  </select>
+                </div>
+                <div class="v6-form-group">
+                  <label for="v6AssetMemorySelect">memory_suitability</label>
+                  <select id="v6AssetMemorySelect">
+                    <option value="not_evaluated">not_evaluated</option>
+                    <option value="suitable">suitable</option>
+                    <option value="unsuitable">unsuitable</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="v6-form-group">
+                <label for="v6AssetCaseInput">linked_case_id</label>
+                <input type="text" id="v6AssetCaseInput" placeholder="关联 Case ID" maxlength="64" />
+              </div>
+            </fieldset>
+
+            <dl class="meta v6-readout">
+              <div><dt>asset_ref</dt><dd id="v6AssetRefRead">-</dd></div>
+              <div><dt>asset_hash</dt><dd id="v6AssetHashRead">-</dd></div>
+              <div><dt>asset_status</dt><dd id="v6AssetStatusRead">-</dd></div>
+              <div><dt>review_score</dt><dd id="v6AssetScoreRead">-</dd></div>
+              <div><dt>human_decision</dt><dd id="v6AssetDecisionRead">-</dd></div>
+              <div><dt>memory_suitability</dt><dd id="v6AssetMemoryRead">-</dd></div>
+              <div><dt>linked_case_id</dt><dd id="v6AssetCaseRead">-</dd></div>
+              <div><dt>筛选后可见数</dt><dd id="v6AssetVisibleCount">0/0</dd></div>
             </dl>
+
+            <p class="v6-draft-boundary-text">所有变更保持 draft_only。binary_stored=false, raw_path_stored=false, 无磁盘写入。</p>
           </article>
 
           <article id="v6SessionStore">
