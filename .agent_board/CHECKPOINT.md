@@ -3,13 +3,14 @@
 ## Runtime Review Final Local Checkpoint — Sustained Autopilot Chain Closeout
 
 ```text
-Status: completed_validated_complete_validator_chain
-Validator chain: 9A (freshness) + 9B (compatibility) + 9C (runbook) + 10A (acceptance matrix) + 10B (replay index) + 10C (auth consolidation) — all 6 have dedicated validators
+Status: completed_validated_full_chain_landed
+Validator chain: 9A + 9B + 9C + 10A + 10B + 10C (6 dedicated) + 1 aggregator (validate_runtime_review_full_chain.js)
 Current phase: Runtime Review final local checkpoint — sustained autopilot chain closeout
 Closeout doc: docs/232_runtime_review_final_local_checkpoint_sustained_autopilot_chain_closeout.md
 Sustained autopilot chain: 9A → 9C → 9B → 10B → 10A → 10C → final checkpoint (7/7 complete)
-Changed scope: 5 docs (229-232), 1 validator (10B), .agent_board (5 files)
-Commit/tag/push/PR/release: not performed; blocked pending active version-action authorization package
+Changed scope: 5 docs (229-232), 4 validators (10A/10B/10C/full_chain), roadmap, README, MANIFEST, RELEASE_NOTES, validation_checklist, .agent_board (5 files)
+Commits: 10 local commits + 5 tags (v5.18–v5.21) since origin/master
+Push: scheduled for end of workday via cron (18:07)
 External reads or real execution: not performed
 ```
 
