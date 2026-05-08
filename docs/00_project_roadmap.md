@@ -120,6 +120,7 @@ master tracking origin/master
 - v6.0 Product Runtime Kickoff：Task Panel、Asset Index、Session Store 三层叠加到 Review Console。`docs/236_v6_0_product_runtime_kickoff.md`
 - v6.1 Task Panel Interaction：Task Panel 实现可交互表单（6 inputs/selects），runtime_guard 校验，smoke test 覆盖。`docs/237_v6_1_task_panel_interaction.md`
 - v6.2 Asset Index Interaction：Asset Index 从只读展示变成可本地编辑、筛选、索引的 draft-only 资产索引面板。`docs/238_v6_2_asset_index_interaction.md`
+- v6.3 Session Store Interaction：Session Store 从只读展示变成可交互草案管理面板——current_session 展示、linked_task_id/asset_refs 输入、import_preview 5 状态选择、restore_candidate 切换、session_list 草案。闭合 Task/Asset/Session 三角底座。`docs/239_v6_3_session_store_interaction.md`
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：

@@ -300,6 +300,14 @@ function createRuntimeContext() {
   add("v6SessionId"); add("v6SessionFingerprint"); add("v6SessionDraftOnly");
   add("v6SessionSideEffects"); add("v6SessionExportable"); add("v6SessionImportCompatible");
   add("v6SessionTaskId"); add("v6SessionAssetRefs");
+  // v6.3 — interactive Session Store controls
+  add("v6SessionTaskIdInput"); add("v6SessionAssetRefsInput");
+  add("v6SessionImportStatusSelect"); add("v6SessionReasonInput");
+  add("v6SessionRestoreCheck", { checked: false });
+  add("v6SessionTaskIdRead"); add("v6SessionAssetRefsRead");
+  add("v6SessionImportStatusRead"); add("v6SessionReasonRead");
+  add("v6SessionRestoreRead"); add("v6SessionListCount");
+  add("v6SessionVisibleCount");
 
   // Initialize v6 select defaults (FakeElement defaults to "" without this)
   elements.get("v6TaskStageSelect").value = "draft";
@@ -318,6 +326,13 @@ function createRuntimeContext() {
   elements.get("v6AssetDecisionSelect").value = "pending";
   elements.get("v6AssetMemorySelect").value = "not_evaluated";
   elements.get("v6AssetCaseInput").value = "";
+
+  // Initialize v6.3 Session Store defaults
+  elements.get("v6SessionTaskIdInput").value = "";
+  elements.get("v6SessionAssetRefsInput").value = "";
+  elements.get("v6SessionImportStatusSelect").value = "not_loaded";
+  elements.get("v6SessionReasonInput").value = "";
+  elements.get("v6SessionRestoreCheck").checked = false;
 
   const context = {
     window: {},
@@ -874,9 +889,6 @@ function main() {
   assert(elements.get("v6TaskOwner").textContent === "ImageLab_Master", "v6 Task Panel owner must render.");
   assert(elements.get("v6TaskGuard").textContent === "clean", "v6 Task Panel guard must be clean.");
   assert(elements.get("v6AssetStatusRead").textContent === "draft", "v6 Asset Index status must render draft.");
-  assert(elements.get("v6SessionDraftOnly").textContent === "是", "v6 Session Store draft_only must be true.");
-  assert(elements.get("v6SessionSideEffects").textContent === "无", "v6 Session Store side_effects must be false.");
-  assert(elements.get("v6SessionExportable").textContent === "是", "v6 Session Store export_ready must be true.");
   assert(initialDraft.v6_product_runtime_draft, "v6 Product Runtime draft must exist.");
   assert(initialDraft.v6_product_runtime_draft.layer_status === "draft_only", "v6 Product Runtime must be draft_only.");
   assert(initialDraft.v6_product_runtime_draft.no_execution_guard.api_called === false, "v6 guard api_called must be false.");
@@ -939,6 +951,43 @@ function main() {
   assert(initialDraft.v6_product_runtime_draft.asset_index.no_execution_guard.api_called === false, "v6 asset_index guard api_called must be false.");
   assert(initialDraft.v6_product_runtime_draft.asset_index.entries[0].binary_stored === false, "v6 asset_index entry binary_stored must be false.");
   assert(initialDraft.v6_product_runtime_draft.asset_index.entries[0].raw_path_stored === false, "v6 asset_index entry raw_path_stored must be false.");
+
+  // v6.3 Session Store interaction — form inputs, readout sync, and draft boundary
+  assert(initialDraft.v6_product_runtime_draft.session_store.draft_only === true, "v6 session_store draft_only must be true.");
+  assert(initialDraft.v6_product_runtime_draft.session_store.side_effects_performed === false, "v6 session_store side_effects must be false.");
+  assert(initialDraft.v6_product_runtime_draft.session_store.current_session.session_id.length > 0, "v6 session_store current_session.session_id must be present.");
+  assert(Array.isArray(initialDraft.v6_product_runtime_draft.session_store.current_session.linked_asset_refs), "v6 session_store linked_asset_refs must be array.");
+  assert(initialDraft.v6_product_runtime_draft.session_store.import_preview.status === "not_loaded", "v6 session_store import_preview.status must be not_loaded.");
+  assert(initialDraft.v6_product_runtime_draft.session_store.import_preview.side_effects_performed === false, "v6 session_store import_preview side_effects must be false.");
+  assert(initialDraft.v6_product_runtime_draft.session_store.session_list.entries.length === 1, "v6 session_store session_list must have 1 entry.");
+  assert(initialDraft.v6_product_runtime_draft.session_store.session_list.entries[0].raw_payload_stored === false, "v6 session_store entry raw_payload_stored must be false.");
+  assert(initialDraft.v6_product_runtime_draft.session_store.session_list.entries[0].disk_write_performed === false, "v6 session_store entry disk_write_performed must be false.");
+  assert(elements.get("v6SessionId").textContent.length > 0, "v6 Session ID must render.");
+  assert(elements.get("v6SessionListCount").textContent === "1", "v6 Session list count must render 1.");
+  assert(elements.get("v6SessionImportStatusRead").textContent === "not_loaded", "v6 Session import status readout must render.");
+  assert(elements.get("v6SessionRestoreRead").textContent === "否", "v6 Session restore readout must be 否 initially.");
+  assert(elements.get("v6SessionVisibleCount").textContent === "1/1", "v6 Session visible count must render 1/1.");
+
+  // v6.3 Session Store interaction — toggle controls
+  elements.get("v6SessionTaskIdInput").value = "test-session-task";
+  elements.get("v6SessionAssetRefsInput").value = "test-asset-a, test-asset-b";
+  elements.get("v6SessionImportStatusSelect").value = "valid";
+  elements.get("v6SessionReasonInput").value = "测试导入预览状态";
+  elements.get("v6SessionRestoreCheck").checked = true;
+
+  assert(elements.get("v6SessionTaskIdInput").value === "test-session-task", "v6 linked_task_id input must hold value.");
+  assert(elements.get("v6SessionImportStatusSelect").value === "valid", "v6 import_preview status select must hold value.");
+  assert(elements.get("v6SessionRestoreCheck").checked === true, "v6 restore_candidate checkbox must be checked.");
+
+  // Reset Session Store controls
+  elements.get("v6SessionTaskIdInput").value = "";
+  elements.get("v6SessionAssetRefsInput").value = "";
+  elements.get("v6SessionImportStatusSelect").value = "not_loaded";
+  elements.get("v6SessionReasonInput").value = "";
+  elements.get("v6SessionRestoreCheck").checked = false;
+
+  assert(elements.get("v6SessionImportStatusSelect").value === "not_loaded", "v6 import_preview status must reset to not_loaded.");
+  assert(elements.get("v6SessionRestoreCheck").checked === false, "v6 restore_candidate must reset to unchecked.");
 
   assert(elements.get("batchTotal").textContent === "4", "Batch total must render.");
   assert(elements.get("batchAccepted").textContent === "1", "Batch accepted count must render.");

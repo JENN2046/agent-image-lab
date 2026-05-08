@@ -1,0 +1,107 @@
+# v6.3 Session Store Interaction — Schema Example
+
+## Default State
+
+```yaml
+session_store:
+  session_id: v6-session-1712345678901
+  fingerprint: null
+  draft_only: true
+  side_effects_performed: false
+  no_execution_guard:
+    api_called: false
+    daily_note_called: false
+    vcp_plugin_called: false
+    disk_write_performed: false
+    image_file_created: false
+  current_session:
+    session_id: v6-session-1712345678901
+    fingerprint: null
+    linked_task_id: task-1712345678901
+    linked_asset_refs:
+      - asset-001
+    export_ready: true
+    import_compatible: true
+    restore_candidate: false
+    created_at: "2026-05-08T00:00:00.000Z"
+    updated_at: "2026-05-08T00:00:00.000Z"
+  import_preview:
+    status: not_loaded
+    reason_cn: null
+    candidate_session_id: null
+    candidate_fingerprint: null
+    side_effects_performed: false
+  session_list:
+    entries:
+      - session_id: v6-session-1712345678901
+        fingerprint: null
+        linked_task_id: task-1712345678901
+        linked_asset_refs:
+          - asset-001
+        source: current_runtime
+        restore_candidate: false
+        stale: false
+        tampered: false
+        incompatible: false
+        raw_payload_stored: false
+        disk_write_performed: false
+        created_at: "2026-05-08T00:00:00.000Z"
+        updated_at: "2026-05-08T00:00:00.000Z"
+    total_entries: 1
+    visible_count: 1
+  boundary_cn: "所有变更保持 draft_only。raw_payload_stored=false, disk_write_performed=false, 无磁盘写入。"
+```
+
+## Filled State
+
+```yaml
+session_store:
+  session_id: v6-session-1712345678901
+  fingerprint: null
+  draft_only: true
+  side_effects_performed: false
+  no_execution_guard:
+    api_called: false
+    daily_note_called: false
+    vcp_plugin_called: false
+    disk_write_performed: false
+    image_file_created: false
+  current_session:
+    session_id: v6-session-1712345678901
+    fingerprint: null
+    linked_task_id: task-review-042
+    linked_asset_refs:
+      - asset-042-001
+      - asset-042-002
+    export_ready: true
+    import_compatible: true
+    restore_candidate: true
+    created_at: "2026-05-08T00:00:00.000Z"
+    updated_at: "2026-05-08T00:00:00.000Z"
+  import_preview:
+    status: valid
+    reason_cn: 导入预览校验通过，会话指纹匹配，队列无变化。
+    candidate_session_id: null
+    candidate_fingerprint: null
+    side_effects_performed: false
+  session_list:
+    entries:
+      - session_id: v6-session-1712345678901
+        fingerprint: null
+        linked_task_id: task-review-042
+        linked_asset_refs:
+          - asset-042-001
+          - asset-042-002
+        source: current_runtime
+        restore_candidate: true
+        stale: false
+        tampered: false
+        incompatible: false
+        raw_payload_stored: false
+        disk_write_performed: false
+        created_at: "2026-05-08T00:00:00.000Z"
+        updated_at: "2026-05-08T00:00:00.000Z"
+    total_entries: 1
+    visible_count: 1
+  boundary_cn: "所有变更保持 draft_only。raw_payload_stored=false, disk_write_performed=false, 无磁盘写入。"
+```

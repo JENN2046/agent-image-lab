@@ -9,7 +9,7 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
-Maintain and advance Agent Image Lab as a VCP-native visual production orchestration project with default-auto A4/A4.5 local work and conditional-auto real/remote/external write work when a concrete active authorization package and passing preflight exist.
+v6.3 Session Store Interaction — implement interactive draft-only session management panel on v6 Product Runtime. closes Task/Asset/Session triangle foundation.
 ```
 
 ---

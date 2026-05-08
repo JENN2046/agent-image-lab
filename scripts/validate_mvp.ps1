@@ -105,6 +105,7 @@ $requiredFiles = @(
   'scripts/validate_v6_0_product_runtime_kickoff.js',
   'scripts/validate_v6_1_task_panel_interaction.js',
   'scripts/validate_v6_2_asset_index_interaction.js',
+  'scripts/validate_v6_3_session_store_interaction.js',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',

@@ -158,3 +158,4 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - v6.0 Product Runtime Kickoff: Task Panel, Asset Index, Session Store layered on Review Console. `docs/236_v6_0_product_runtime_kickoff.md`
 - v6.1 Task Panel Interaction: Interactive Task Panel (6 form inputs) on Review Console. `docs/237_v6_1_task_panel_interaction.md`
 - v6.2 Asset Index Interaction: Interactive Asset Index with editable fields, status toggles, and local filtering. `docs/238_v6_2_asset_index_interaction.md`
+- v6.3 Session Store Interaction: Interactive Session Store with current_session display, linked_task_id/asset_refs inputs, import_preview 5-state status, restore_candidate toggle, session_list draft. `docs/239_v6_3_session_store_interaction.md`

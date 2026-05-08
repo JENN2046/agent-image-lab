@@ -344,3 +344,36 @@ v6 Task Panel 保持在 no-execution 边界内，不触发真实插件、API、D
 | `entries[].created_at` / `updated_at` | `buildV6ProductRuntimeDraft()` | ISO 时间 |
 
 筛选交互：`filter_status` 改变后，UI 显示匹配条目数和可见计数。当前 1 个 primary entry，代码为未来多 entry 扩展保留了 entries 数组结构。
+
+## v6_product_runtime_draft.session_store
+
+| 字段 | 来源 | 说明 |
+| --- | --- | --- |
+| `session_id` | `buildV6ProductRuntimeDraft()` | 自动生成或关联 review session |
+| `fingerprint` | 固定 `null` | 当前草案阶段无真实指纹 |
+| `draft_only` | 固定 `true` | 所有 session store 操作保持 draft_only |
+| `side_effects_performed` | 固定 `false` | 不触发真实副作用 |
+| `no_execution_guard` | `runtimeGuard.clone(cleanGuard)` | 5 个 flag 全部 false |
+| `current_session.session_id` | 自动生成 | 当前会话 ID |
+| `current_session.fingerprint` | 固定 `null` | 指纹待计算 |
+| `current_session.linked_task_id` | `v6SessionTaskIdInput` | 关联任务 ID，默认自动匹配 |
+| `current_session.linked_asset_refs` | `v6SessionAssetRefsInput` | 逗号分隔的资产引用列表 |
+| `current_session.export_ready` | 固定 `true` | 当前草案可导出 |
+| `current_session.import_compatible` | 固定 `true` | 当前草案兼容导入 |
+| `current_session.restore_candidate` | `v6SessionRestoreCheck` | 是否标记为恢复候选 |
+| `current_session.created_at` / `updated_at` | `buildV6ProductRuntimeDraft()` | ISO 时间 |
+| `import_preview.status` | `v6SessionImportStatusSelect` | not_loaded / valid / stale / tampered / incompatible |
+| `import_preview.reason_cn` | `v6SessionReasonInput` | 导入预览状态中文说明 |
+| `import_preview.candidate_session_id` | 固定 `null` | 当前草案无候选会话 |
+| `import_preview.candidate_fingerprint` | 固定 `null` | 当前草案无候选指纹 |
+| `import_preview.side_effects_performed` | 固定 `false` | 导入预览不触发副作用 |
+| `session_list.entries[].session_id` | 当前会话 ID | 1 个 primary entry，数组结构为未来扩展保留 |
+| `session_list.entries[].linked_task_id` | linked_task_id | 关联任务 ID |
+| `session_list.entries[].linked_asset_refs` | linked_asset_refs | 关联资产引用列表 |
+| `session_list.entries[].source` | 固定 `current_runtime` | 当前只支持 current_runtime |
+| `session_list.entries[].restore_candidate` | restore_candidate | 恢复候选标记 |
+| `session_list.entries[].stale` / `tampered` / `incompatible` | 固定 `false` | 当前草案无篡改或过期标记 |
+| `session_list.entries[].raw_payload_stored` | 固定 `false` | 不存储原始载荷 |
+| `session_list.entries[].disk_write_performed` | 固定 `false` | 不写入磁盘 |
+| `session_list.total_entries` / `visible_count` | 固定 `1` / `1` | 当前 1 个 primary entry |
+| `boundary_cn` | 固定中文说明 | 所有变更保持 draft_only，raw_payload_stored=false，disk_write_performed=false |

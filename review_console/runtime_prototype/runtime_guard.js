@@ -353,6 +353,7 @@ var VALID_HUMAN_DECISIONS = Object.freeze(["pending", "accepted", "rejected", "n
 var VALID_MEMORY_SUITABILITIES = Object.freeze(["not_evaluated", "suitable", "unsuitable"]);
 var VALID_FILTER_STATUSES = Object.freeze(["all", "accepted_candidate", "needs_human_review", "rejected", "memory_suitable"]);
 var VALID_TASK_STAGES = Object.freeze(["draft", "planning", "in_review", "blocked", "completed"]);
+var VALID_IMPORT_PREVIEW_STATUSES = Object.freeze(["not_loaded", "valid", "stale", "tampered", "incompatible"]);
 
   function v6AssetIndexIsSafe(draft) {
     var v6 = draft && draft.v6_product_runtime_draft;
@@ -375,6 +376,31 @@ var VALID_TASK_STAGES = Object.freeze(["draft", "planning", "in_review", "blocke
       if (typeof entry.asset_ref === "string" && /^[A-Za-z]:\\|\//.test(entry.asset_ref)) {
         return false;
       }
+    }
+    return true;
+  }
+
+  function v6SessionStoreIsSafe(draft) {
+    var v6 = draft && draft.v6_product_runtime_draft;
+    if (!v6) { return true; }
+    var ss = v6.session_store;
+    if (!ss || typeof ss !== "object") { return false; }
+    if (ss.draft_only !== true) { return false; }
+    if (ss.side_effects_performed !== false) { return false; }
+    if (!guardIsClean(ss.no_execution_guard)) { return false; }
+    if (!ss.current_session || typeof ss.current_session !== "object") { return false; }
+    if (typeof ss.current_session.session_id !== "string") { return false; }
+    if (!Array.isArray(ss.current_session.linked_asset_refs)) { return false; }
+    if (!ss.import_preview || typeof ss.import_preview !== "object") { return false; }
+    if (VALID_IMPORT_PREVIEW_STATUSES.indexOf(ss.import_preview.status) === -1) { return false; }
+    if (ss.import_preview.side_effects_performed !== false) { return false; }
+    if (!Array.isArray(ss.session_list.entries)) { return false; }
+    for (var i = 0; i < ss.session_list.entries.length; i++) {
+      var entry = ss.session_list.entries[i];
+      if (!entry || typeof entry !== "object") { return false; }
+      if (entry.raw_payload_stored !== false) { return false; }
+      if (entry.disk_write_performed !== false) { return false; }
+      if (!Array.isArray(entry.linked_asset_refs)) { return false; }
     }
     return true;
   }
@@ -498,6 +524,7 @@ var VALID_TASK_STAGES = Object.freeze(["draft", "planning", "in_review", "blocke
     if (!assetArchiveCandidateIsSafe(draft)) return false;
     if (!v6ProductRuntimeIsSafe(draft)) return false;
     if (!v6AssetIndexIsSafe(draft)) return false;
+    if (!v6SessionStoreIsSafe(draft)) return false;
 
     const imageCase = draft.image_case_draft;
     if (imageCase.asset_status === "accepted" && imageCase.human_approval?.approved !== true) {
@@ -571,6 +598,9 @@ var VALID_TASK_STAGES = Object.freeze(["draft", "planning", "in_review", "blocke
     if (!v6AssetIndexIsSafe(draft)) {
       throw new Error("v6 Asset Index 必须保持 draft_only、side_effects_performed=false、guard clean，entry 字段必须来自允许枚举，binary_stored 和 raw_path_stored 必须为 false，asset_ref 不得包含 raw absolute path。");
     }
+    if (!v6SessionStoreIsSafe(draft)) {
+      throw new Error("v6 Session Store 必须保持 draft_only、side_effects_performed=false、guard clean，current_session 必须有 session_id 和 linked_asset_refs 数组，import_preview 状态必须来自允许枚举，session_list entries 必须保持 raw_payload_stored=false、disk_write_performed=false、linked_asset_refs 为数组。");
+    }
     if (draft.image_case_draft.asset_status === "accepted" && draft.image_case_draft.human_approval?.approved !== true) {
       throw new Error("资产标记为 accepted 前必须先获得人工明确批准。");
     }
@@ -601,6 +631,8 @@ var VALID_TASK_STAGES = Object.freeze(["draft", "planning", "in_review", "blocke
     realMemoryWriteAuthorizationPackageIsSafe,
     assetArchiveCandidateIsSafe,
     v6AssetIndexIsSafe,
+    v6SessionStoreIsSafe,
+    VALID_IMPORT_PREVIEW_STATUSES,
     VALID_ASSET_STATUSES,
     VALID_HUMAN_DECISIONS,
     VALID_MEMORY_SUITABILITIES,

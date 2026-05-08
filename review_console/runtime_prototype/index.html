@@ -815,17 +815,66 @@
           </article>
 
           <article id="v6SessionStore">
-            <h3>Session Store</h3>
-            <dl class="meta">
-              <div><dt>Session ID</dt><dd id="v6SessionId">-</dd></div>
-              <div><dt>指纹</dt><dd id="v6SessionFingerprint">-</dd></div>
-              <div><dt>Draft Only</dt><dd id="v6SessionDraftOnly">-</dd></div>
-              <div><dt>副作用</dt><dd id="v6SessionSideEffects">-</dd></div>
-              <div><dt>可导出</dt><dd id="v6SessionExportable">-</dd></div>
-              <div><dt>兼容导入</dt><dd id="v6SessionImportCompatible">-</dd></div>
-              <div><dt>关联任务</dt><dd id="v6SessionTaskId">-</dd></div>
-              <div><dt>关联资产</dt><dd id="v6SessionAssetRefs">-</dd></div>
+            <h3>Session Store <span class="v6-asset-index-badge">draft-only</span></h3>
+            <p class="panel-boundary">本地草案会话管理。不写入磁盘，不调用外部系统。</p>
+
+            <fieldset class="v6-session-readonly">
+              <legend>当前会话（只读）</legend>
+              <dl class="meta v6-readout">
+                <div><dt>Session ID</dt><dd id="v6SessionId">-</dd></div>
+                <div><dt>指纹</dt><dd id="v6SessionFingerprint">-</dd></div>
+                <div><dt>export_ready</dt><dd id="v6SessionExportable">-</dd></div>
+                <div><dt>import_compatible</dt><dd id="v6SessionImportCompatible">-</dd></div>
+                <div><dt>会话列表</dt><dd id="v6SessionListCount">-</dd></div>
+              </dl>
+            </fieldset>
+
+            <fieldset class="v6-form-group">
+              <legend>会话编辑（仅草案）</legend>
+
+              <div class="v6-form-group">
+                <label for="v6SessionTaskIdInput">linked_task_id</label>
+                <input type="text" id="v6SessionTaskIdInput" placeholder="关联 Task ID" maxlength="64" />
+              </div>
+
+              <div class="v6-form-group">
+                <label for="v6SessionAssetRefsInput">linked_asset_refs (逗号分隔)</label>
+                <input type="text" id="v6SessionAssetRefsInput" placeholder="asset-001, asset-002" maxlength="200" />
+              </div>
+
+              <div class="v6-form-row">
+                <div class="v6-form-group">
+                  <label for="v6SessionImportStatusSelect">import_preview.status</label>
+                  <select id="v6SessionImportStatusSelect">
+                    <option value="not_loaded">not_loaded</option>
+                    <option value="valid">valid</option>
+                    <option value="stale">stale</option>
+                    <option value="tampered">tampered</option>
+                    <option value="incompatible">incompatible</option>
+                  </select>
+                </div>
+                <div class="v6-form-group">
+                  <label for="v6SessionRestoreCheck">restore_candidate</label>
+                  <label class="check"><input type="checkbox" id="v6SessionRestoreCheck" /><span>标记为恢复候选</span></label>
+                </div>
+              </div>
+
+              <div class="v6-form-group">
+                <label for="v6SessionReasonInput">import_preview_reason_cn</label>
+                <input type="text" id="v6SessionReasonInput" placeholder="导入预览状态说明…" maxlength="200" />
+              </div>
+            </fieldset>
+
+            <dl class="meta v6-readout">
+              <div><dt>linked_task_id</dt><dd id="v6SessionTaskIdRead">-</dd></div>
+              <div><dt>linked_asset_refs</dt><dd id="v6SessionAssetRefsRead">-</dd></div>
+              <div><dt>import_preview.status</dt><dd id="v6SessionImportStatusRead">not_loaded</dd></div>
+              <div><dt>import_preview.reason_cn</dt><dd id="v6SessionReasonRead">-</dd></div>
+              <div><dt>restore_candidate</dt><dd id="v6SessionRestoreRead">否</dd></div>
+              <div><dt>可见会话数</dt><dd id="v6SessionVisibleCount">0/0</dd></div>
             </dl>
+
+            <p class="v6-draft-boundary-text">所有变更保持 draft_only。raw_payload_stored=false, disk_write_performed=false, 无磁盘写入。</p>
           </article>
         </section>
         <pre id="draftOutput" hidden></pre>

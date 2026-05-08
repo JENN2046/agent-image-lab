@@ -1,5 +1,18 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v6.3 Session Store Interaction
+
+```text
+Status: v6.3 completed — interactive Session Store with current_session display, linked_task_id/asset_refs inputs, import_preview 5-state status, restore_candidate toggle, session_list draft
+v6.0 validator: scripts/validate_v6_0_product_runtime_kickoff.js (10 checks)
+v6.1 validator: scripts/validate_v6_1_task_panel_interaction.js (9 checks)
+v6.2 validator: scripts/validate_v6_2_asset_index_interaction.js (16 checks)
+v6.3 validator: scripts/validate_v6_3_session_store_interaction.js (16 checks)
+Runtime suite: all passed
+Push/tag/release: blocked pending separate authorization
+Next: pending user direction
+```
+
 ## v6.2 Asset Index Interaction
 
 ```text

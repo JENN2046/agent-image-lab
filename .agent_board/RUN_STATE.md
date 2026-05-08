@@ -9,7 +9,7 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Advance Agent Image Lab safely under local A4 autonomy while keeping A5 production execution blocked unless an explicit authorization package is active.
+v6.3 Session Store Interaction — implement interactive draft-only session management panel on v6 Product Runtime. closes Task/Asset/Session triangle foundation.
 ```
 
 ## Current Branch

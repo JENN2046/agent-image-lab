@@ -1,17 +1,18 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
-## v6.2 Asset Index Interaction
+## v6.3 Session Store Interaction
 
 ```text
-Current phase: v6.2 Asset Index Interaction
-Scope: Asset Index interactive form controls, filter, draft-only guard, smoke test, validator
+Current phase: v6.3 Session Store Interaction
+Scope: Session Store interactive form controls (linked_task_id/asset_refs/import_preview/restore_candidate), draft-only guard (v6SessionStoreIsSafe, 13 checks), smoke test, v6.3 validator (16 checks)
 No real VCPChat/VCPToolBox read.
 No real file read.
 No plugin/API/DailyNote/VCP memory/image action.
 No commit/tag/push/PR/release.
 node --check review_console/runtime_prototype/app.js: passed
 node --check review_console/runtime_prototype/runtime_guard.js: passed
-node --check scripts/validate_v6_2_asset_index_interaction.js: passed
+node --check scripts/validate_v6_3_session_store_interaction.js: passed
+node scripts/validate_v6_3_session_store_interaction.js: passed
 node scripts/validate_v6_2_asset_index_interaction.js: passed
 node scripts/validate_v6_1_task_panel_interaction.js: passed
 node scripts/validate_v6_0_product_runtime_kickoff.js: passed

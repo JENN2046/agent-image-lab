@@ -279,6 +279,19 @@ const els = {
   v6SessionImportCompatible: document.getElementById("v6SessionImportCompatible"),
   v6SessionTaskId: document.getElementById("v6SessionTaskId"),
   v6SessionAssetRefs: document.getElementById("v6SessionAssetRefs"),
+  // v6.3 Session Store Interaction
+  v6SessionTaskIdInput: document.getElementById("v6SessionTaskIdInput"),
+  v6SessionAssetRefsInput: document.getElementById("v6SessionAssetRefsInput"),
+  v6SessionImportStatusSelect: document.getElementById("v6SessionImportStatusSelect"),
+  v6SessionReasonInput: document.getElementById("v6SessionReasonInput"),
+  v6SessionRestoreCheck: document.getElementById("v6SessionRestoreCheck"),
+  v6SessionTaskIdRead: document.getElementById("v6SessionTaskIdRead"),
+  v6SessionAssetRefsRead: document.getElementById("v6SessionAssetRefsRead"),
+  v6SessionImportStatusRead: document.getElementById("v6SessionImportStatusRead"),
+  v6SessionReasonRead: document.getElementById("v6SessionReasonRead"),
+  v6SessionRestoreRead: document.getElementById("v6SessionRestoreRead"),
+  v6SessionListCount: document.getElementById("v6SessionListCount"),
+  v6SessionVisibleCount: document.getElementById("v6SessionVisibleCount"),
   // v6.2 Asset Index Interaction
   v6AssetFilterSelect: document.getElementById("v6AssetFilterSelect"),
   v6AssetFilterCount: document.getElementById("v6AssetFilterCount"),
@@ -3161,16 +3174,60 @@ function buildV6ProductRuntimeDraft(createdAt) {
       };
     }(),
 
-    session_store: {
-      session_id: sessionId,
-      fingerprint: null,
-      draft_only: true,
-      side_effects_performed: false,
-      export_ready: true,
-      import_compatible: true,
-      linked_task_id: taskId,
-      linked_asset_refs: caseId ? [`asset-${caseId}-001`] : []
-    }
+    session_store: function () {
+      var rawRefs = els.v6SessionAssetRefsInput.value.trim();
+      var assetRefs = rawRefs ? rawRefs.split(",").map(function (s) { return s.trim(); }).filter(function (s) { return s; }) : (caseId ? ["asset-" + caseId + "-001"] : []);
+      var taskIdVal = els.v6SessionTaskIdInput.value.trim() || taskId;
+      var importStatus = els.v6SessionImportStatusSelect.value;
+      var reasonCn = els.v6SessionReasonInput.value.trim() || null;
+      var restoreCand = els.v6SessionRestoreCheck.checked;
+      var now = createdAt;
+      return {
+        session_id: sessionId,
+        fingerprint: null,
+        draft_only: true,
+        side_effects_performed: false,
+        no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard),
+        current_session: {
+          session_id: sessionId,
+          fingerprint: null,
+          linked_task_id: taskIdVal,
+          linked_asset_refs: assetRefs,
+          export_ready: true,
+          import_compatible: true,
+          restore_candidate: restoreCand,
+          created_at: now,
+          updated_at: now
+        },
+        import_preview: {
+          status: importStatus,
+          reason_cn: reasonCn,
+          candidate_session_id: null,
+          candidate_fingerprint: null,
+          side_effects_performed: false
+        },
+        session_list: {
+          entries: [{
+            session_id: sessionId,
+            fingerprint: null,
+            linked_task_id: taskIdVal,
+            linked_asset_refs: assetRefs,
+            source: "current_runtime",
+            restore_candidate: restoreCand,
+            stale: false,
+            tampered: false,
+            incompatible: false,
+            raw_payload_stored: false,
+            disk_write_performed: false,
+            created_at: now,
+            updated_at: now
+          }],
+          total_entries: 1,
+          visible_count: 1
+        },
+        boundary_cn: "所有变更保持 draft_only。raw_payload_stored=false, disk_write_performed=false, 无磁盘写入。"
+      };
+    }()
   };
 }
 
@@ -3993,15 +4050,23 @@ function renderV6ProductRuntime(draft) {
   }
   els.v6AssetFilterSelect.value = filterStatus;
 
-  // Session Store
-  els.v6SessionId.textContent = v6.session_store.session_id || "-";
-  els.v6SessionFingerprint.textContent = v6.session_store.fingerprint || "待计算";
-  els.v6SessionDraftOnly.textContent = v6.session_store.draft_only ? "是" : "否";
-  els.v6SessionSideEffects.textContent = v6.session_store.side_effects_performed ? "有" : "无";
-  els.v6SessionExportable.textContent = v6.session_store.export_ready ? "是" : "否";
-  els.v6SessionImportCompatible.textContent = v6.session_store.import_compatible ? "是" : "否";
-  els.v6SessionTaskId.textContent = v6.session_store.linked_task_id || "-";
-  els.v6SessionAssetRefs.textContent = v6.session_store.linked_asset_refs.join(", ") || "-";
+  // Session Store — readout only (form→builder sync happens via draft→render)
+  var ss = v6.session_store;
+  var cs = ss.current_session || {};
+  var ip = ss.import_preview || {};
+  var sl = ss.session_list || {};
+
+  els.v6SessionId.textContent = cs.session_id || "-";
+  els.v6SessionFingerprint.textContent = cs.fingerprint || "待计算";
+  els.v6SessionExportable.textContent = cs.export_ready ? "是" : "否";
+  els.v6SessionImportCompatible.textContent = cs.import_compatible ? "是" : "否";
+  els.v6SessionListCount.textContent = String(sl.total_entries != null ? sl.total_entries : 0);
+  els.v6SessionTaskIdRead.textContent = cs.linked_task_id || "-";
+  els.v6SessionAssetRefsRead.textContent = Array.isArray(cs.linked_asset_refs) ? cs.linked_asset_refs.join(", ") : "-";
+  els.v6SessionImportStatusRead.textContent = ip.status || "not_loaded";
+  els.v6SessionReasonRead.textContent = ip.reason_cn || "-";
+  els.v6SessionRestoreRead.textContent = cs.restore_candidate ? "是" : "否";
+  els.v6SessionVisibleCount.textContent = (sl.visible_count != null ? sl.visible_count : 0) + "/" + (sl.total_entries != null ? sl.total_entries : 0);
 }
 
 function renderSessionTransfer(sessionExportDraft) {
@@ -4233,6 +4298,14 @@ function init() {
     if (el) {
       el.addEventListener("input", () => { trackedRender("编辑 Asset Index"); });
       el.addEventListener("change", () => { trackedRender("编辑 Asset Index"); });
+    }
+  });
+
+  // v6.3 Session Store interaction listeners
+  [els.v6SessionTaskIdInput, els.v6SessionAssetRefsInput, els.v6SessionImportStatusSelect, els.v6SessionReasonInput, els.v6SessionRestoreCheck].forEach(el => {
+    if (el) {
+      el.addEventListener("input", () => { trackedRender("编辑 Session Store"); });
+      el.addEventListener("change", () => { trackedRender("编辑 Session Store"); });
     }
   });
 

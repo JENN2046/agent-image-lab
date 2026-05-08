@@ -57,6 +57,7 @@
 - v6.0 Product Runtime Kickoff：Task Panel、Asset Index、Session Store 叠加到 Review Console。`docs/236_v6_0_product_runtime_kickoff.md`，validator `scripts/validate_v6_0_product_runtime_kickoff.js`（10 checks）
 - v6.1 Task Panel Interaction：Task Panel 交互表单实现。`docs/237_v6_1_task_panel_interaction.md`，validator `scripts/validate_v6_1_task_panel_interaction.js`（9 checks）
 - v6.2 Asset Index Interaction：Asset Index 交互编辑与筛选实现。`docs/238_v6_2_asset_index_interaction.md`，validator `scripts/validate_v6_2_asset_index_interaction.js`（16 checks）
+- v6.3 Session Store Interaction：Session Store 交互草案层实现——current_session 展示、linked_task_id 输入、linked_asset_refs 输入、import_preview 5 状态选择、restore_candidate 切换、session_list 草案。`docs/239_v6_3_session_store_interaction.md`，validator `scripts/validate_v6_3_session_store_interaction.js`（16 checks）
 - Tag and version strategy 提供 `docs/233_tag_and_version_strategy.md`；tag 命名规范、版本号策略、release 条件。
 
 ## Release readiness 文件
@@ -136,6 +137,7 @@
 - `docs/236_v6_0_product_runtime_kickoff.md`
 - `docs/237_v6_1_task_panel_interaction.md`
 - `docs/238_v6_2_asset_index_interaction.md`
+- `docs/239_v6_3_session_store_interaction.md`
 - `review_console/phase_e_vcpchat_subwindow_integration_task_plan.md`
 - `review_console/phase_e_ipc_contract_draft.md`
 - `review_console/phase_e_security_acceptance_checklist.md`
@@ -249,7 +251,9 @@
 - `scripts/validate_v6_0_product_runtime_kickoff.js`
 - `scripts/validate_v6_1_task_panel_interaction.js`
 - `scripts/validate_v6_2_asset_index_interaction.js`
+- `scripts/validate_v6_3_session_store_interaction.js`
 - `tests/schema_examples/v6_2_asset_index_interaction.example.yaml`
+- `tests/schema_examples/v6_3_session_store_interaction.example.yaml`
 - `scripts/run_vcpchat_review_console_remote_debug_smoke.ps1`
 - `integrations/vcp/v0_7_real_execution_authorization_gate.md`
 - `integrations/vcp/v0_7_photo_studio_os_dry_run_rehearsal.md`
