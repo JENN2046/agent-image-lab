@@ -48,6 +48,10 @@
 - Runtime Review Batch 9A state freshness index 把当前阶段统一到 `docs/226_runtime_review_batch_9a_state_freshness_index.md`，并通过本地 validator 检查 README、roadmap、manifest、release notes、validation checklist 和 `.agent_board` 的状态一致性；不执行版本动作。
 - Runtime Review Batch 9C operator runbook and resume capsule 提供 `docs/227_runtime_review_batch_9c_operator_runbook_and_resume_capsule.md` 作为五分钟续跑入口；它不授权 A5 生产动作，只指向条件自动化激活契约。
 - Runtime Review Batch 9B runtime session compatibility matrix 提供 `docs/228_runtime_review_batch_9b_runtime_session_compatibility_matrix.md`、legacy/current 两个 `runtime_review_session_v1` fixture 和 validator；旧版 v1 可以缺少新增 draft-rich 区块，当前 draft-rich 包必须带干净 guard。
+- Runtime Review Batch 10B end-to-end dry-run replay index 提供 `docs/229_runtime_review_batch_10b_end_to_end_dry_run_replay_index.md` 和 validator；Adapter dry-run → Review Console → session export 回放路径可索引、可校验。
+- Runtime Review Batch 10A release-candidate acceptance matrix 提供 `docs/230_runtime_review_batch_10a_release_candidate_acceptance_matrix.md`；八领域 25 行结构化验收矩阵。
+- Runtime Review Batch 10C future A5 authorization package consolidation 提供 `docs/231_runtime_review_batch_10c_future_a5_authorization_package_consolidation.md`；七领域 preflight 合并模板。
+- Runtime Review final local checkpoint 提供 `docs/232_runtime_review_final_local_checkpoint_sustained_autopilot_chain_closeout.md`；sustained autopilot chain 收束。
 
 ## Release readiness 文件
 
@@ -117,6 +121,10 @@
 - `docs/226_runtime_review_batch_9a_state_freshness_index.md`
 - `docs/227_runtime_review_batch_9c_operator_runbook_and_resume_capsule.md`
 - `docs/228_runtime_review_batch_9b_runtime_session_compatibility_matrix.md`
+- `docs/229_runtime_review_batch_10b_end_to_end_dry_run_replay_index.md`
+- `docs/230_runtime_review_batch_10a_release_candidate_acceptance_matrix.md`
+- `docs/231_runtime_review_batch_10c_future_a5_authorization_package_consolidation.md`
+- `docs/232_runtime_review_final_local_checkpoint_sustained_autopilot_chain_closeout.md`
 - `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_record.md`
 - `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_authorization_package.md`
 - `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_execution_record.md`
@@ -210,6 +218,10 @@
 - `scripts/validate_v10_26_real_dailynote_write_closeout.js`
 - `scripts/validate_v10_27_dailynotewrite_root_path_correction.js`
 - `scripts/validate_v10_28_dailynote_canonical_location_guard.js`
+- `scripts/validate_runtime_review_batch_9a_state_freshness.js`
+- `scripts/validate_runtime_review_batch_9b_session_compatibility.js`
+- `scripts/validate_runtime_review_batch_9c_operator_runbook.js`
+- `scripts/validate_runtime_review_batch_10b_dry_run_replay_index.js`
 - `scripts/run_vcpchat_review_console_remote_debug_smoke.ps1`
 - `integrations/vcp/v0_7_real_execution_authorization_gate.md`
 - `integrations/vcp/v0_7_photo_studio_os_dry_run_rehearsal.md`

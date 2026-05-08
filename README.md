@@ -7,7 +7,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review Batch 9B runtime session compatibility matrix
+v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7)
 ```
 
 已经完成：
@@ -93,6 +93,10 @@ v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + 
 - Runtime Review Batch 9A state freshness index 把当前阶段统一到 `docs/226_runtime_review_batch_9a_state_freshness_index.md`，并用 validator 交叉检查 README、roadmap、manifest、release notes、validation checklist 和 `.agent_board` 的当前状态。
 - Runtime Review Batch 9C operator runbook and resume capsule 提供五分钟续跑入口、安全下一步、硬停止门、验证命令和版本动作状态；它只指向条件自动化契约，不授权 A5 生产动作。
 - Runtime Review Batch 9B runtime session compatibility matrix 固化 `runtime_review_session_v1` legacy minimal / current draft-rich 兼容规则，新增本地 fixture 和 validator，防止新增 draft surface 后误拒历史 v1 会话草案。
+- Runtime Review Batch 10B end-to-end dry-run replay index 把 Adapter dry-run → Review Console → mock bridge → session export 的完整回放路径做成可索引、可校验链，新增本地 validator（11 项检查）。
+- Runtime Review Batch 10A release-candidate acceptance matrix 把 bridge、plugin、asset archive、memory lifecycle、runtime prototype、validator suite、operator docs 和 release readiness 八个领域收束成结构化验收矩阵（25 行）。
+- Runtime Review Batch 10C future A5 authorization package consolidation 把 bridge、plugin、asset review、DailyNote/VCP memory、rollback、forbidden outputs 和 version actions 七个领域的 preflight 字段合并到一个可填入模板。
+- Runtime Review final local checkpoint 汇总 sustained autopilot chain（7/7）的完整交付物、worktree 状态和 commit/push 就绪条件；10 个文件已落成本地 commit，push 待用户统一执行。
 
 当前 accepted asset 只以 ignored runtime 路径和哈希归档，不把图片二进制写入 Git、DailyNote 或 VCP 长期记忆。人工接受记录保留了已知视觉偏差：这是 `human_override` 通过，不是完美 prompt compliance。
 当前 A5 v10.4 / v10.5 / v10.9 新资产均被拒收，只保留 ignored runtime ref、哈希、评分和规则摘要；未把图片二进制写入 Git、DailyNote 或 VCP memory。
@@ -189,6 +193,11 @@ Photo Studio OS UI 生图生产线，以及 AI 图片评审与修正生产线。
 - `docs/226_runtime_review_batch_9a_state_freshness_index.md`：Runtime Review Batch 9A state freshness index，当前状态 freshness 入口与交叉校验说明。
 - `docs/227_runtime_review_batch_9c_operator_runbook_and_resume_capsule.md`：Runtime Review Batch 9C operator runbook and resume capsule，五分钟续跑入口和 operator runbook。
 - `docs/228_runtime_review_batch_9b_runtime_session_compatibility_matrix.md`：Runtime Review Batch 9B runtime session compatibility matrix，`runtime_review_session_v1` legacy/current 兼容规则、fixture 和 validator 入口。
+- `docs/229_runtime_review_batch_10b_end_to_end_dry_run_replay_index.md`：Runtime Review Batch 10B end-to-end dry-run replay index，Adapter → Review Console → session export 回放路径。
+- `docs/230_runtime_review_batch_10a_release_candidate_acceptance_matrix.md`：Runtime Review Batch 10A release-candidate acceptance matrix，八领域验收矩阵。
+- `docs/231_runtime_review_batch_10c_future_a5_authorization_package_consolidation.md`：Runtime Review Batch 10C future A5 authorization package consolidation，七领域 preflight 模板。
+- `docs/232_runtime_review_final_local_checkpoint_sustained_autopilot_chain_closeout.md`：Runtime Review final local checkpoint，sustained autopilot chain 收束。
+- `scripts/validate_runtime_review_batch_10b_dry_run_replay_index.js`：Batch 10B dry-run replay index validator，11 项检查覆盖 fixture 链、脚本顺序、adapter 输出不变量和禁止外部访问。
 - `integrations/vcp/v10_8_positive_still_life_real_generation_authorization_draft.md`：下一次正向静物真实生成的未激活 A5 授权草案；仅供人工审查，不构成执行授权。
 - `integrations/vcp/v10_8_positive_still_life_short_approval_template.md`：短批准模板；允许在私有 ignored 插件路径绑定存在时用 `批准 v10.8 静物单次生成` 进入 preflight。
 - `integrations/vcp/v10_10_prompt_handoff_diagnostic_authorization_template.md`：未来无生图传参诊断的未激活授权模板；`max_plugin_calls=0`。

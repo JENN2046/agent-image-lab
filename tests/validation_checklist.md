@@ -15,6 +15,15 @@
 - [ ] `scripts/validate_runtime_review_batch_9c_operator_runbook.js` 存在，并检查 runbook、resume capsule、硬停止门、验证命令、禁止输出和索引链接。
 - [ ] Batch 9C runbook 必须链接到 README、MANIFEST、roadmap 和 `.agent_board/HANDOFF.md`。
 - [ ] Batch 9C 不授权 A5 生产动作，不执行 commit、tag、push、PR、release，不读取真实 VCPChat/VCPToolBox，不调用插件/API/DailyNote/VCP memory，不创建图片。
+- [ ] `docs/229_runtime_review_batch_10b_end_to_end_dry_run_replay_index.md` 存在，并把 Adapter dry-run → Review Console → session export 回放路径做成可索引链。
+- [ ] `scripts/validate_runtime_review_batch_10b_dry_run_replay_index.js` 存在，并通过全部 11 项检查。
+- [ ] Batch 10B replay path 不接触真实 VCPChat/VCPToolBox/DoubaoGen/DailyNote/VCP memory，submitDraft 保持 blocked，max_plugin_calls=0。
+- [ ] `docs/230_runtime_review_batch_10a_release_candidate_acceptance_matrix.md` 存在，并把八领域收束成结构化验收矩阵（complete 15，local_only 5，blocked 2）。
+- [ ] Batch 10A acceptance matrix 每行有状态、证据和阻断原因，release readiness 无需翻阅数十份历史文档即可评审。
+- [ ] `docs/231_runtime_review_batch_10c_future_a5_authorization_package_consolidation.md` 存在，并把七领域 preflight 字段合并到一个可填入模板。
+- [ ] Batch 10C consolidation template 包含 field dependency map、activation flow、historical alignment 和 missing-field block rules。
+- [ ] `docs/232_runtime_review_final_local_checkpoint_sustained_autopilot_chain_closeout.md` 存在，并汇总 7/7 batch 的完整交付物和 worktree 状态。
+- [ ] Sustained autopilot chain（9A→10C→final, 7/7）全部完成，10 个文件已落成本地 commit `bfbdc25` 和 tag `v5.18-runtime-review-sustained-autopilot-chain-complete`。
 - [ ] 条件自动队列必须要求具体 active authorization package、preflight、最大调用/写入/版本动作次数、回滚方案、禁止输出和停止条件。
 - [ ] 所有任务书要求的 MVP 文件存在。
 - [ ] 文件直接位于项目根目录下，没有创建第二套 `agent-image-lab/` 嵌套目录。
