@@ -23,7 +23,9 @@
 - [ ] `docs/231_runtime_review_batch_10c_future_a5_authorization_package_consolidation.md` 存在，并把七领域 preflight 字段合并到一个可填入模板。
 - [ ] Batch 10C consolidation template 包含 field dependency map、activation flow、historical alignment 和 missing-field block rules。
 - [ ] `docs/232_runtime_review_final_local_checkpoint_sustained_autopilot_chain_closeout.md` 存在，并汇总 7/7 batch 的完整交付物和 worktree 状态。
-- [ ] Sustained autopilot chain（9A→10C→final, 7/7）全部完成，10 个文件已落成本地 commit `bfbdc25` 和 tag `v5.18-runtime-review-sustained-autopilot-chain-complete`。
+- [ ] Sustained autopilot chain（9A→10C→final, 7/7）全部完成，已落成本地 commits 和 tags `v5.18`/`v5.19`/`v5.20`。
+- [ ] `scripts/validate_runtime_review_batch_10a_acceptance_matrix.js` 存在并通过，机器验证八领域覆盖、状态分布。
+- [ ] `scripts/validate_runtime_review_batch_10c_auth_consolidation.js` 存在并通过，机器验证七领域模板、占位符根路径。
 - [ ] 条件自动队列必须要求具体 active authorization package、preflight、最大调用/写入/版本动作次数、回滚方案、禁止输出和停止条件。
 - [ ] 所有任务书要求的 MVP 文件存在。
 - [ ] 文件直接位于项目根目录下，没有创建第二套 `agent-image-lab/` 嵌套目录。

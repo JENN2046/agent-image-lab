@@ -198,6 +198,8 @@ Photo Studio OS UI 生图生产线，以及 AI 图片评审与修正生产线。
 - `docs/231_runtime_review_batch_10c_future_a5_authorization_package_consolidation.md`：Runtime Review Batch 10C future A5 authorization package consolidation，七领域 preflight 模板。
 - `docs/232_runtime_review_final_local_checkpoint_sustained_autopilot_chain_closeout.md`：Runtime Review final local checkpoint，sustained autopilot chain 收束。
 - `scripts/validate_runtime_review_batch_10b_dry_run_replay_index.js`：Batch 10B dry-run replay index validator，11 项检查覆盖 fixture 链、脚本顺序、adapter 输出不变量和禁止外部访问。
+- `scripts/validate_runtime_review_batch_10a_acceptance_matrix.js`：Batch 10A acceptance matrix validator，机器验证八领域覆盖、状态分布和禁止输出。
+- `scripts/validate_runtime_review_batch_10c_auth_consolidation.js`：Batch 10C auth consolidation validator，机器验证七领域模板、占位符根路径、字段依赖图。
 - `integrations/vcp/v10_8_positive_still_life_real_generation_authorization_draft.md`：下一次正向静物真实生成的未激活 A5 授权草案；仅供人工审查，不构成执行授权。
 - `integrations/vcp/v10_8_positive_still_life_short_approval_template.md`：短批准模板；允许在私有 ignored 插件路径绑定存在时用 `批准 v10.8 静物单次生成` 进入 preflight。
 - `integrations/vcp/v10_10_prompt_handoff_diagnostic_authorization_template.md`：未来无生图传参诊断的未激活授权模板；`max_plugin_calls=0`。
