@@ -248,9 +248,10 @@ daily_note_called: false
 
 完成标准：
 
-- 形成 VCPChat 子窗口接入任务书。
-- 形成 IPC 契约草案。
-- 形成安全验收清单。
+- 形成 VCPChat 子窗口接入任务书。`review_console/phase_e_vcpchat_subwindow_integration_task_plan.md`
+- 形成 IPC 契约草案。`review_console/phase_e_ipc_contract_draft.md`
+- 形成安全验收清单。`review_console/phase_e_security_acceptance_checklist.md`（77 项检查）
+- 三项交付物已在本 Phase E 完成；不修改真实 VCPChat，不创建真实 IPC handler。
 
 ### Phase F：MVP-B 受控真实执行
 
