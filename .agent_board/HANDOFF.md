@@ -558,14 +558,12 @@ Full MVP validation suite now routes historical v4/v5 current-state validators a
 ## Human Decisions Needed
 
 ```text
-Local commit approval is no longer required for future guarded local commits that satisfy all project auto-commit conditions.
-Whether to perform local post-write version/closeout work or explicitly authorize any further memory/version action.
+Whether to push the 7 local commits and 5 tags to origin/master (下班统一 push)。
 Whether to design a new prompt, switch strategy, or use an alternate generation plugin after the repeated rejected assets.
-Whether to create a new short approval capsule for any future generation.
-Whether to apply a human override despite the readable text/logo risk.
-Whether to push the local v10.3 A5 bridge integration smoke branch after validation.
-Whether to open a follow-up PR after explicit remote authorization.
+Whether to create a new short approval capsule for any future A5 generation/write action.
 Whether to create a formal release tag after final release approval.
+Local commit/tag: auto-authorized within A4 boundaries (already performed, 7 commits + 5 tags).
+Push/PR/release: still require explicit authorization or active version-action package.
 ```
 
 ## Exact Resume Prompt
@@ -574,9 +572,15 @@ Whether to create a formal release tag after final release approval.
 你现在在 Agent Image Lab 项目根目录。
 读取 AGENTS.md、AGENTS.autopilot-overlay.md 和 .agent_board/*。
 使用 A4 — Sustained Local Autopilot。
-先检查 repo reality，再从 .agent_board/TASK_QUEUE.md 的下一个安全任务继续。
+先检查 repo reality。Sustained autopilot chain（9A→10C→final checkpoint, 7/7）已全部完成，不再有已定义且未完成的 default-auto local batch。
+运行 node scripts/validate_runtime_review_full_chain.js 确认全链状态。
 不要读取真实 VCPChat/VCPToolBox 源码，不要调用插件/API/DailyNote，不要创建图片，不要写出 workspace root。
-已有 A5 授权链路完成到 v10.25 real DailyNote/VCP memory write；VCPChat no-write bridge 可用且严格 allowlist smoke 通过。v10.19 实际调用 DoubaoGen 2 次，生成 2 张 1024x1024 JPG；v10.21 推荐选择 run_1，v10.22 已为 run_1 生成本地中文 memory_delta 草案，v10.23 已生成本地人工复核包，v10.24 已生成 no-write 写入前预检包，v10.25 已通过 DailyNoteWrite 完成一次真实写入。不要继续 DoubaoGen、DailyNote、VCP memory、图片或版本动作，除非用户显式授权新的真实生成参数、记忆写入动作或版本动作。
-Runtime Review Batch 8D 是当前规划层；A4/A4.5 本地任务满足条件自动推进。真实执行、外部写入和版本动作只有在具体 active authorization package 与 preflight 通过后才自动执行到授权上限。
+
+当前 Git 状态：master ahead of origin/master by 7 commits，5 tags（v5.18～v5.21+v5.20），push 待用户统一执行。
+
+A5 历史：v10.0–v10.28 完成；DoubaoGen 6 次调用（1 accepted_candidate），DailyNoteWrite 1 次，CDP Runtime.evaluate 1 次 read-only。
+A5 未来：新 DoubaoGen/DailyNote/VCP memory/image 需要显式授权并匹配 docs/231 consolidation template。
+版本动作：commit/tag 可在条件自动队列中执行；push/PR/release 仍需要 active version-action package。
+
 用中文汇报。
 ```
