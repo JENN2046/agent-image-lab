@@ -123,6 +123,24 @@ v5.1 增加 `scripts/validate_runtime_delivery_surface.js`，把 runtime prototy
 - runtime prototype 不加载外部 URL，不包含 `fetch`、IPC、storage 或文件写入调用。
 - 该校验仍只证明项目内浏览器原型可交付，不代表真实 VCPChat 子窗口、preload、IPC、DailyNote 或 VCP 记忆写入已经实现。
 
+## Runtime Session Compatibility Matrix
+
+Runtime Review Batch 9B 增加 `docs/228_runtime_review_batch_9b_runtime_session_compatibility_matrix.md`，把本地会话导入 / 导出的 `runtime_review_session_v1` 兼容规则固定下来：
+
+- legacy minimal v1 包只要满足 `draft_only`、`runtime_review_session_v1`、干净 `prototype_guard`、有效 `session_fingerprint` 和非空 `review_session_snapshot.review_queue`，即可在缺少新增 draft-rich 区块时作为本地草案导入。
+- 当前 draft-rich v1 包应包含当前所有 draft surface，并为每个 draft-rich 区块保留干净 `no_execution_guard`。
+- 如果可选 draft-rich 区块存在且 guard 不干净，导入必须拒绝；如果区块缺省，则不能推断任何真实执行。
+- 未来格式升级必须先补 migration plan、fixture、validator 和 release note，不得隐式替换 v1。
+
+验收 fixture：
+
+```text
+tests/schema_examples/runtime_review_session_v1_legacy_minimal.example.json
+tests/schema_examples/runtime_review_session_v1_current_draft_rich.example.json
+```
+
+本规则只约束项目内 runtime 草案，不授权真实 VCPChat bridge / CDP、插件、API、DailyNote、VCP memory、图片或文件写入。
+
 ## Runtime Review Follow-up Batch 2A + 2C
 
 Batch 2A/2C 增加两个本地草案面和一个队列级追踪矩阵：
@@ -231,6 +249,7 @@ node --check review_console\runtime_prototype\app.js
 node scripts\validate_runtime_guard_unit.js
 node scripts\validate_runtime_prototype_smoke.js
 node scripts\validate_runtime_delivery_surface.js
+node scripts\validate_runtime_review_batch_9b_session_compatibility.js
 node scripts\validate_runtime_prototype_suite.js
 ```
 

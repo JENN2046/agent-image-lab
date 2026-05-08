@@ -1,5 +1,48 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## Runtime Review Batch 9B Runtime Session Compatibility Matrix
+
+```text
+Status: completed_validated_runtime_session_compatibility_matrix
+Current phase: Runtime Review Batch 9B runtime session compatibility matrix
+Compatibility doc: docs/228_runtime_review_batch_9b_runtime_session_compatibility_matrix.md
+Legacy fixture: tests/schema_examples/runtime_review_session_v1_legacy_minimal.example.json
+Current fixture: tests/schema_examples/runtime_review_session_v1_current_draft_rich.example.json
+Validator: scripts/validate_runtime_review_batch_9b_session_compatibility.js
+Changed scope: runtime compatibility docs, fixtures, validator, runtime README, indexes, validation checklist, and .agent_board only
+Commit/tag/push/PR/release: not performed
+External reads or real execution: not performed
+Next safe local task: Runtime Review Batch 10B end-to-end dry-run replay index
+```
+
+## Runtime Review Batch 9C Operator Runbook And Resume Capsule
+
+```text
+Status: completed_validated_operator_resume_capsule
+Current phase: Runtime Review Batch 9C operator runbook and resume capsule
+Runbook doc: docs/227_runtime_review_batch_9c_operator_runbook_and_resume_capsule.md
+Freshness doc: docs/226_runtime_review_batch_9a_state_freshness_index.md
+Validator: scripts/validate_runtime_review_batch_9c_operator_runbook.js
+Changed scope: docs, top-level indexes, validation checklist, and .agent_board only
+Commit/tag/push/PR/release: not performed
+External reads or real execution: not performed
+Next safe local task: Runtime Review Batch 9B runtime session compatibility matrix
+```
+
+## Runtime Review Batch 9A State Freshness Index
+
+```text
+Status: completed_validated_state_freshness_index
+Current phase: Runtime Review Batch 9A state freshness index
+Freshness doc: docs/226_runtime_review_batch_9a_state_freshness_index.md
+Validator: scripts/validate_runtime_review_batch_9a_state_freshness.js
+Changed scope: docs, top-level indexes, validation checklist, and .agent_board only
+.omc policy: unrelated local tooling state; do not stage or delete it automatically
+Commit/tag/push/PR/release: not performed
+External reads or real execution: not performed
+Next safe local task: Runtime Review Batch 9C operator runbook and resume capsule
+```
+
 ## Last Known Safe Baselines
 
 ```text

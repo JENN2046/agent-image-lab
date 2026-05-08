@@ -18,7 +18,7 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review Batch 8D sustained autopilot task plan
+v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review Batch 9B runtime session compatibility matrix
 ```
 
 当前工作分支：
@@ -107,6 +107,9 @@ master tracking origin/master
 - Runtime Review Batch 8B vNext RC acceptance：把 post-merge checkpoint 上的当前本地 master 收束成下一轮 release-candidate 接受基线；不触发版本动作。
 - Runtime Review Batch 8C final acceptance summary：把 8A / 8B 的收束结果归并为最终可读 acceptance 摘要；不触发版本动作。
 - Runtime Review Batch 8D sustained autopilot task plan：把后续任务拆成默认自动队列和条件自动队列；A4/A4.5 本地任务满足条件自动执行，真实执行、外部读取、记忆写入和版本动作只有在具体 active authorization package 与 preflight 通过后自动执行到授权上限。
+- Runtime Review Batch 9A state freshness index：把当前阶段统一到 `docs/226_runtime_review_batch_9a_state_freshness_index.md`，并通过 `scripts/validate_runtime_review_batch_9a_state_freshness.js` 检查 README、roadmap、manifest、release notes、validation checklist 和 `.agent_board` 是否一致。
+- Runtime Review Batch 9C operator runbook and resume capsule：新增 `docs/227_runtime_review_batch_9c_operator_runbook_and_resume_capsule.md`，把当前阶段、安全下一步、硬停止门、验证命令和版本动作状态收束成五分钟续跑入口。
+- Runtime Review Batch 9B runtime session compatibility matrix：新增 `docs/228_runtime_review_batch_9b_runtime_session_compatibility_matrix.md`、legacy/current 两个 `runtime_review_session_v1` fixture 和 validator，固定旧版缺省字段与当前 draft-rich guard 的兼容规则。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：
@@ -270,7 +273,7 @@ daily_note_called: false
 3. 等待用户单独授权任何新的 A5 真实生产动作、tag、push 或正式 release 发布。
 4. 下一步以 remote-debug 端口重新启动或重启 VCPChat 已经到达明确审批边界；没有用户批准时继续停在 no-relaunch / no-runtime-evaluate 轨道。
 5. 后续任何新增真实生图调用、remote-debug relaunch、CDP 检查、bridge 验证或 VCPChat/VCPToolBox 源码读写都必须重新确认目标、允许操作、禁止动作、验证要求和回滚方案，并形成 active authorization package。
-6. v10.28 已固化 DailyNote canonical location guard；Runtime Review Batch 8D 已把后续任务拆成默认自动队列和条件自动队列。下一步若继续写入、追加生图、submitDraft、commit/tag/push/PR/release，必须先匹配具体 active authorization package；满足条件后自动执行到授权上限，否则继续本地文档、验证和授权包规划。
+6. v10.28 已固化 DailyNote canonical location guard；Runtime Review Batch 9B runtime session compatibility matrix 已把 legacy `runtime_review_session_v1` 与当前 draft-rich 会话包的兼容规则收束到 `docs/228_runtime_review_batch_9b_runtime_session_compatibility_matrix.md`。下一步若继续写入、追加生图、submitDraft、commit/tag/push/PR/release，必须先匹配具体 active authorization package；满足条件后自动执行到授权上限，否则继续本地文档、验证和授权包规划。
 
 ## 永久安全门
 

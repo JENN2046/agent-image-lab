@@ -60,7 +60,7 @@ none
 4. Update CHECKPOINT.md, RUN_STATE.md, VALIDATION_LOG.md, and HANDOFF.md after each meaningful batch.
 5. If the user wants deeper diagnosis, activate the v10.12 provider-side prompt fingerprint capture package only after explicit approval, or switch to alternate plugin/strategy planning.
 6. If the user wants to reuse a short approval flow, present a new current capsule first; bare `批准` only applies when Codex has just presented that exact capsule.
-7. After Batch 8D validation passes, continue with Batch 9A by default if the next step remains local, reversible, and validated.
+7. After Batch 9B validation passes, continue with Batch 10B by default if the next step remains local, reversible, and validated.
 8. Commit/tag/push/PR/release may proceed automatically only when a concrete active version-action package exists and preflight passes.
 9. Real execution, external reads, memory writes, image creation, and external writes may proceed automatically only when a concrete active package exists and preflight passes.
 ```
@@ -151,6 +151,9 @@ none
 81. Completed Runtime Review Batch 8B vNext RC acceptance; current local master on top of PR #6 merge baseline is accepted as the next release-candidate baseline, with docs, indexes, checklist, and agent-board state synchronized locally.
 82. Completed Runtime Review Batch 8C final acceptance summary; 8A / 8B are consolidated into the final readable acceptance summary, with docs, indexes, checklist, and agent-board state synchronized locally.
 83. Completed Runtime Review Batch 8D sustained autopilot task plan; follow-up work is split into default-auto local batches and conditional-auto real/remote/external write batches requiring concrete active authorization packages and passing preflight.
+84. Completed Runtime Review Batch 9A state freshness index; current phase is now discoverable from docs/226_runtime_review_batch_9a_state_freshness_index.md and cross-checked across README, roadmap, manifest, release notes, validation checklist, and .agent_board.
+85. Completed Runtime Review Batch 9C operator runbook and resume capsule; future agents can resume from docs/227_runtime_review_batch_9c_operator_runbook_and_resume_capsule.md and continue to Batch 9B without rereading the full history.
+86. Completed Runtime Review Batch 9B runtime session compatibility matrix; legacy runtime_review_session_v1 minimal fixture and current draft-rich fixture are now documented and validator-checked without real execution.
 ```
 
 ### blocked

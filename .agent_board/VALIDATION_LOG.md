@@ -1,5 +1,73 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## Runtime Review Batch 9B Runtime Session Compatibility Matrix
+
+```text
+Current phase: Runtime Review Batch 9B runtime session compatibility matrix
+Compatibility doc: docs/228_runtime_review_batch_9b_runtime_session_compatibility_matrix.md
+Legacy fixture: tests/schema_examples/runtime_review_session_v1_legacy_minimal.example.json
+Current fixture: tests/schema_examples/runtime_review_session_v1_current_draft_rich.example.json
+Validator: scripts/validate_runtime_review_batch_9b_session_compatibility.js
+Scope: local runtime session compatibility docs/fixtures/validator/runtime README/index/checklist/agent-board freshness only
+No real VCPChat/VCPToolBox read.
+No bridge/CDP/source read.
+No plugin/API/DailyNote/VCP memory/image action.
+No commit/tag/push/PR/release.
+node --check scripts/validate_runtime_review_batch_9b_session_compatibility.js: passed
+node scripts/validate_runtime_review_batch_9b_session_compatibility.js: passed
+node --check review_console/runtime_prototype/app.js: passed
+node --check review_console/runtime_prototype/runtime_guard.js: passed
+node scripts/validate_runtime_prototype_suite.js: passed
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed with LF/CRLF warnings only
+```
+
+## Runtime Review Batch 9C Operator Runbook And Resume Capsule
+
+```text
+Current phase: Runtime Review Batch 9C operator runbook and resume capsule
+Runbook doc: docs/227_runtime_review_batch_9c_operator_runbook_and_resume_capsule.md
+Freshness doc: docs/226_runtime_review_batch_9a_state_freshness_index.md
+Plan doc: docs/225_runtime_review_batch_8d_sustained_autopilot_task_plan.md
+Validator: scripts/validate_runtime_review_batch_9c_operator_runbook.js
+Scope: local operator runbook/resume capsule/index/checklist/agent-board freshness only
+No real VCPChat/VCPToolBox read.
+No bridge/CDP/source read.
+No plugin/API/DailyNote/VCP memory/image action.
+No commit/tag/push/PR/release.
+node --check scripts/validate_runtime_review_batch_9c_operator_runbook.js: passed
+node scripts/validate_runtime_review_batch_9c_operator_runbook.js: passed
+node scripts/validate_runtime_review_batch_9a_state_freshness.js: passed
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed with LF/CRLF warnings only
+```
+
+## Runtime Review Batch 9A State Freshness Index
+
+```text
+Current phase: Runtime Review Batch 9A state freshness index
+Freshness doc: docs/226_runtime_review_batch_9a_state_freshness_index.md
+Validator: scripts/validate_runtime_review_batch_9a_state_freshness.js
+Scope: local docs/index/checklist/agent-board freshness only
+.omc policy: unrelated local tooling state, not staged automatically
+No real VCPChat/VCPToolBox read.
+No bridge/CDP/source read.
+No plugin/API/DailyNote/VCP memory/image action.
+No commit/tag/push/PR/release.
+node --check scripts/validate_runtime_review_batch_9a_state_freshness.js: passed
+node scripts/validate_runtime_review_batch_9a_state_freshness.js: passed
+node --check scripts/validate_local_commit_scope.js: passed
+node scripts/validate_local_commit_scope.js: passed
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed with LF/CRLF warnings only
+```
+
 ## Entries
 
 ## VALIDATION-20260508-RUNTIME-REVIEW-BATCH-8D-SUSTAINED-AUTOPILOT-TASK-PLAN

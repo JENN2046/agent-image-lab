@@ -1,0 +1,275 @@
+{
+  "package_status": "draft_only",
+  "export_format": "runtime_review_session_v1",
+  "compatibility_profile": "current_draft_rich",
+  "compatibility_status": "accepted_current_draft_rich",
+  "exported_at": "2026-05-08T00:00:00.000Z",
+  "session_id": "runtime-review-session-current-draft-rich-fixture",
+  "task_id": "task-runtime-session-compatibility",
+  "case_id": "case-runtime-session-compatibility",
+  "review_session_snapshot": {
+    "selected_queue_id": "queue-current-v1",
+    "queue_filter": "all",
+    "queue_search": "",
+    "queue_sort": "default",
+    "selected_batch_queue_ids": [
+      "queue-current-v1"
+    ],
+    "review_queue": [
+      {
+        "queue_id": "queue-current-v1",
+        "version_id": "v2",
+        "title_cn": "当前 draft-rich 会话候选",
+        "human_note_cn": "当前会话携带完整本地草案面和干净 guard，仍然只用于本地复核。",
+        "score": 88,
+        "asset_status": "candidate",
+        "memory_approval_status": "pending",
+        "risk_tags": [],
+        "draft_state": {
+          "score": 88,
+          "human_note_cn": "当前会话携带完整本地草案面和干净 guard，仍然只用于本地复核。",
+          "asset_status": "candidate",
+          "memory_approval_status": "pending"
+        }
+      }
+    ]
+  },
+  "batch_review_summary_draft": {
+    "package_status": "draft_only",
+    "summary_cn": "本地批次评审摘要草案。",
+    "no_execution_guard": {
+      "api_called": false,
+      "daily_note_called": false,
+      "vcp_plugin_called": false,
+      "disk_write_performed": false,
+      "image_file_created": false
+    }
+  },
+  "batch_decision_draft": {
+    "package_status": "draft_only",
+    "decision": "needs_human_review",
+    "reason_cn": "当前候选仍需人工继续确认。",
+    "no_execution_guard": {
+      "api_called": false,
+      "daily_note_called": false,
+      "vcp_plugin_called": false,
+      "disk_write_performed": false,
+      "image_file_created": false
+    }
+  },
+  "risk_review_summary_draft": {
+    "package_status": "draft_only",
+    "risk_summary_cn": "未记录高风险标签。",
+    "no_execution_guard": {
+      "api_called": false,
+      "daily_note_called": false,
+      "vcp_plugin_called": false,
+      "disk_write_performed": false,
+      "image_file_created": false
+    }
+  },
+  "a5_preauthorization_review_package_draft": {
+    "package_status": "draft_only",
+    "authorization_status": "not_authorized",
+    "summary_cn": "仅生成授权前复核草案，不激活 A5。",
+    "no_execution_guard": {
+      "api_called": false,
+      "daily_note_called": false,
+      "vcp_plugin_called": false,
+      "disk_write_performed": false,
+      "image_file_created": false
+    }
+  },
+  "human_inspection_checklist_draft": {
+    "package_status": "draft_only",
+    "verdict_cn": "继续人工确认。",
+    "no_execution_guard": {
+      "api_called": false,
+      "daily_note_called": false,
+      "vcp_plugin_called": false,
+      "disk_write_performed": false,
+      "image_file_created": false
+    }
+  },
+  "human_override_traceability_draft": {
+    "package_status": "draft_only",
+    "override_performed": false,
+    "summary_cn": "尚未发生人工覆盖接受。",
+    "no_execution_guard": {
+      "api_called": false,
+      "daily_note_called": false,
+      "vcp_plugin_called": false,
+      "disk_write_performed": false,
+      "image_file_created": false
+    }
+  },
+  "accepted_candidate_delivery_package_draft": {
+    "package_status": "draft_only",
+    "draft_only": true,
+    "submitDraft_called": false,
+    "summary_cn": "当前只是交付候选草案。",
+    "no_execution_guard": {
+      "api_called": false,
+      "daily_note_called": false,
+      "vcp_plugin_called": false,
+      "disk_write_performed": false,
+      "image_file_created": false
+    }
+  },
+  "inactive_authorization_capsules_draft": {
+    "package_status": "draft_only",
+    "authorization_status": "inactive_package",
+    "summary_cn": "所有授权胶囊保持未激活。",
+    "no_execution_guard": {
+      "api_called": false,
+      "daily_note_called": false,
+      "vcp_plugin_called": false,
+      "disk_write_performed": false,
+      "image_file_created": false
+    }
+  },
+  "runtime_review_state_draft": {
+    "package_status": "draft_only",
+    "convergence_status": "local_draft_converged",
+    "summary_cn": "资产状态与记忆状态保持分离。",
+    "no_execution_guard": {
+      "api_called": false,
+      "daily_note_called": false,
+      "vcp_plugin_called": false,
+      "disk_write_performed": false,
+      "image_file_created": false
+    }
+  },
+  "local_commit_scope_plan_draft": {
+    "package_status": "draft_only",
+    "staged_changes_present": false,
+    "commit_allowed": false,
+    "push_allowed": false,
+    "summary_cn": "本地提交范围只作为草案，不执行版本动作。",
+    "no_execution_guard": {
+      "api_called": false,
+      "daily_note_called": false,
+      "vcp_plugin_called": false,
+      "disk_write_performed": false,
+      "image_file_created": false
+    }
+  },
+  "bridge_mock_roundtrip_candidate_draft": {
+    "package_status": "draft_only",
+    "roundtrip_status": "mock_roundtrip_candidate",
+    "bridge_mode": "project_local_mock",
+    "submitDraft_called": false,
+    "summary_cn": "只记录项目内 mock 回环候选。",
+    "no_execution_guard": {
+      "api_called": false,
+      "daily_note_called": false,
+      "vcp_plugin_called": false,
+      "disk_write_performed": false,
+      "image_file_created": false
+    }
+  },
+  "real_bridge_authorization_package_draft": {
+    "package_status": "draft_only",
+    "authorization_status": "inactive_package",
+    "production_bridge_invocation_performed": false,
+    "real_cdp_called": false,
+    "summary_cn": "真实 bridge 授权包未激活。",
+    "no_execution_guard": {
+      "api_called": false,
+      "daily_note_called": false,
+      "vcp_plugin_called": false,
+      "disk_write_performed": false,
+      "image_file_created": false
+    }
+  },
+  "plugin_reliability_prompt_discipline_draft": {
+    "package_status": "draft_only",
+    "reliability_status": "local_prompt_reliability_candidate",
+    "max_plugin_calls_allowed": 0,
+    "summary_cn": "插件可靠性仅作本地草案记录。",
+    "no_execution_guard": {
+      "api_called": false,
+      "daily_note_called": false,
+      "vcp_plugin_called": false,
+      "disk_write_performed": false,
+      "image_file_created": false
+    }
+  },
+  "memory_write_completion_candidate_draft": {
+    "package_status": "draft_only",
+    "candidate_status": "memory_write_completion_preflight_candidate",
+    "write_complete_declared": false,
+    "summary_cn": "记忆写入完成候选尚未完成。",
+    "no_execution_guard": {
+      "api_called": false,
+      "daily_note_called": false,
+      "vcp_plugin_called": false,
+      "disk_write_performed": false,
+      "image_file_created": false
+    }
+  },
+  "single_real_generation_retry_gate_draft": {
+    "package_status": "draft_only",
+    "gate_status": "single_real_generation_retry_gate_inactive",
+    "plugin_calls_observed": 0,
+    "real_generation_performed": false,
+    "summary_cn": "单次真实生图重试门未激活。",
+    "no_execution_guard": {
+      "api_called": false,
+      "daily_note_called": false,
+      "vcp_plugin_called": false,
+      "disk_write_performed": false,
+      "image_file_created": false
+    }
+  },
+  "real_memory_write_authorization_package_draft": {
+    "package_status": "draft_only",
+    "authorization_status": "inactive_package",
+    "daily_note_called": false,
+    "vcp_memory_written": false,
+    "summary_cn": "真实记忆写入授权包未激活。",
+    "no_execution_guard": {
+      "api_called": false,
+      "daily_note_called": false,
+      "vcp_plugin_called": false,
+      "disk_write_performed": false,
+      "image_file_created": false
+    }
+  },
+  "asset_archive_candidate_draft": {
+    "package_status": "draft_only",
+    "archive_status": "asset_archive_candidate_no_binary",
+    "archive_policy": "metadata_only_no_binary",
+    "binary_storage_allowed": false,
+    "summary_cn": "资产归档候选只保存元数据，不保存图片二进制。",
+    "no_execution_guard": {
+      "api_called": false,
+      "daily_note_called": false,
+      "vcp_plugin_called": false,
+      "disk_write_performed": false,
+      "image_file_created": false
+    }
+  },
+  "compatibility_notes_cn": [
+    "本 fixture 模拟当前 draft-rich runtime_review_session_v1 导出包。",
+    "所有当前草案面都必须保持 draft_only 或 inactive_package，且 guard 干净。",
+    "它仍然只用于本地复核，不代表真实 bridge、插件、API、DailyNote、VCP memory 或图片动作。"
+  ],
+  "prototype_guard": {
+    "api_called": false,
+    "daily_note_called": false,
+    "vcp_plugin_called": false,
+    "disk_write_performed": false,
+    "image_file_created": false
+  },
+  "side_effects_performed": false,
+  "plugin_called": false,
+  "api_called": false,
+  "daily_note_called": false,
+  "vcp_memory_written": false,
+  "image_created": false,
+  "new_draft_blocks_present": true,
+  "boundary_cn": "这是 current draft-rich 本地会话兼容 fixture，不写磁盘，不调用插件/API/DailyNote，不写 VCP memory，不创建图片。",
+  "session_fingerprint": "fnv1a32:797d7dfa",
+  "session_fingerprint_cn": "会话指纹：fnv1a32:797d7dfa"
+}

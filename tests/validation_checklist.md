@@ -7,6 +7,14 @@
 - [ ] `docs/223_runtime_review_batch_8b_vnext_rc_acceptance.md` 存在，并记录 vNext RC acceptance 本地收束基线。
 - [ ] `docs/224_runtime_review_batch_8c_final_acceptance_summary.md` 存在，并记录最终 acceptance 汇总。
 - [ ] `docs/225_runtime_review_batch_8d_sustained_autopilot_task_plan.md` 存在，并把后续任务拆成默认自动队列和条件自动队列。
+- [ ] `docs/226_runtime_review_batch_9a_state_freshness_index.md` 存在，并把当前阶段统一为 `Runtime Review Batch 9A state freshness index`。
+- [ ] `scripts/validate_runtime_review_batch_9a_state_freshness.js` 存在，并交叉检查 README、roadmap、manifest、release notes、validation checklist 和 `.agent_board` 当前状态。
+- [ ] Batch 9A freshness index 记录 `.omc/` 是 unrelated local tooling state，不得自动 staged 或删除。
+- [ ] Batch 9A 不执行 commit、tag、push、PR、release，不读取真实 VCPChat/VCPToolBox，不调用插件/API/DailyNote/VCP memory，不创建图片。
+- [ ] `docs/227_runtime_review_batch_9c_operator_runbook_and_resume_capsule.md` 存在，并把当前阶段统一为 `Runtime Review Batch 9C operator runbook and resume capsule`。
+- [ ] `scripts/validate_runtime_review_batch_9c_operator_runbook.js` 存在，并检查 runbook、resume capsule、硬停止门、验证命令、禁止输出和索引链接。
+- [ ] Batch 9C runbook 必须链接到 README、MANIFEST、roadmap 和 `.agent_board/HANDOFF.md`。
+- [ ] Batch 9C 不授权 A5 生产动作，不执行 commit、tag、push、PR、release，不读取真实 VCPChat/VCPToolBox，不调用插件/API/DailyNote/VCP memory，不创建图片。
 - [ ] 条件自动队列必须要求具体 active authorization package、preflight、最大调用/写入/版本动作次数、回滚方案、禁止输出和停止条件。
 - [ ] 所有任务书要求的 MVP 文件存在。
 - [ ] 文件直接位于项目根目录下，没有创建第二套 `agent-image-lab/` 嵌套目录。
@@ -3478,6 +3486,21 @@
 - [ ] `powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1` 通过。
 - [ ] `powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1` 通过或只剩已知 manual-review warnings。
 - [ ] `git diff --check` 通过。
+
+## Runtime Review Batch 9B Runtime Session Compatibility Matrix 检查
+
+- [ ] `docs/228_runtime_review_batch_9b_runtime_session_compatibility_matrix.md` 存在。
+- [ ] `tests/schema_examples/runtime_review_session_v1_legacy_minimal.example.json` 存在。
+- [ ] `tests/schema_examples/runtime_review_session_v1_current_draft_rich.example.json` 存在。
+- [ ] `scripts/validate_runtime_review_batch_9b_session_compatibility.js` 存在。
+- [ ] legacy minimal fixture 必须保持 `runtime_review_session_v1`、`draft_only`、干净 `prototype_guard`、有效 `session_fingerprint` 和非空 `review_session_snapshot.review_queue`。
+- [ ] legacy minimal fixture 允许缺少当前新增 draft-rich 区块，但不得包含真实执行标记。
+- [ ] current draft-rich fixture 必须包含当前 draft surface，并为每个 draft-rich 区块保留干净 `no_execution_guard`。
+- [ ] 可选 draft-rich 区块如果存在且 guard 不干净，导入规则必须拒绝。
+- [ ] 未来格式升级必须先补 migration plan、fixture、validator 和 release note，不得隐式替换 v1。
+- [ ] `node --check scripts\validate_runtime_review_batch_9b_session_compatibility.js` 通过。
+- [ ] `node scripts\validate_runtime_review_batch_9b_session_compatibility.js` 通过。
+- [ ] `node scripts\validate_runtime_prototype_suite.js` 通过。
 
 ## Runtime Review Batch 4A Bridge Mock Roundtrip 检查
 

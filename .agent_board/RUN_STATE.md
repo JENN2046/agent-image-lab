@@ -21,24 +21,95 @@ master tracking origin/master
 ## Current Phase
 
 ```text
-Runtime Review Batch 8D sustained autopilot task plan
+Runtime Review Batch 9B runtime session compatibility matrix
 ```
 
 ## Current Task
 
 ```text
-Document default and conditional auto-execution queues for sustained follow-up work
+Document and validate runtime_review_session_v1 legacy/current compatibility rules for runtime session transfer
 ```
 
 ## Last Completed Task
 
 ```text
-Prepared Runtime Review Batch 8D sustained autopilot task plan across docs, indexes, validation checklist, and agent board; A4/A4.5 local work is default-auto, while real execution, external writes, and version actions are conditional-auto only with a concrete active authorization package and passing preflight.
+Prepared Runtime Review Batch 9B runtime session compatibility matrix across docs, runtime README, JSON fixtures, validator, indexes, validation checklist, and agent board; legacy runtime_review_session_v1 packages can omit newer draft-rich blocks, while current draft-rich packages must keep clean guards.
 ```
 
 ## Last Validation
 
 ```text
+2026-05-08 runtime review Batch 9B runtime session compatibility matrix:
+status: completed_validated_runtime_session_compatibility_matrix
+changed files: docs/228_runtime_review_batch_9b_runtime_session_compatibility_matrix.md, tests/schema_examples/runtime_review_session_v1_legacy_minimal.example.json, tests/schema_examples/runtime_review_session_v1_current_draft_rich.example.json, scripts/validate_runtime_review_batch_9b_session_compatibility.js, review_console/runtime_prototype/README.md, README.md, MANIFEST.md, RELEASE_NOTES.md, docs/00_project_roadmap.md, tests/validation_checklist.md, .agent_board files
+scope: runtime session compatibility documentation, local fixtures, validator, runtime README and index sync only
+current phase: Runtime Review Batch 9B runtime session compatibility matrix
+previous phase: Runtime Review Batch 9C operator runbook and resume capsule
+compatibility doc: docs/228_runtime_review_batch_9b_runtime_session_compatibility_matrix.md
+legacy fixture: tests/schema_examples/runtime_review_session_v1_legacy_minimal.example.json
+current fixture: tests/schema_examples/runtime_review_session_v1_current_draft_rich.example.json
+real VCPChat read: no
+real VCPToolBox read: no
+real bridge/CDP/source read: no
+plugin/API/DailyNote/VCP memory/image action: no
+commit/tag/push/PR/release: no
+node --check scripts/validate_runtime_review_batch_9b_session_compatibility.js: passed
+node scripts/validate_runtime_review_batch_9b_session_compatibility.js: passed
+node --check review_console/runtime_prototype/app.js: passed
+node --check review_console/runtime_prototype/runtime_guard.js: passed
+node scripts/validate_runtime_prototype_suite.js: passed
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed with LF/CRLF warnings only
+
+2026-05-08 runtime review Batch 9C operator runbook and resume capsule:
+status: completed_validated_operator_resume_capsule
+changed files: docs/227_runtime_review_batch_9c_operator_runbook_and_resume_capsule.md, scripts/validate_runtime_review_batch_9c_operator_runbook.js, README.md, MANIFEST.md, RELEASE_NOTES.md, docs/00_project_roadmap.md, tests/validation_checklist.md, .agent_board files
+scope: operator runbook, resume capsule, hard gates, validation command index, top-level link sync, agent-board sync only
+local branch: master
+local head before batch: 2d34eb0
+origin/master before batch: 2d34eb0
+current phase: Runtime Review Batch 9C operator runbook and resume capsule
+previous phase: Runtime Review Batch 9A state freshness index
+runbook doc: docs/227_runtime_review_batch_9c_operator_runbook_and_resume_capsule.md
+real VCPChat read: no
+real VCPToolBox read: no
+real bridge/CDP/source read: no
+plugin/API/DailyNote/VCP memory/image action: no
+commit/tag/push/PR/release: no
+node --check scripts/validate_runtime_review_batch_9c_operator_runbook.js: passed
+node scripts/validate_runtime_review_batch_9c_operator_runbook.js: passed
+node scripts/validate_runtime_review_batch_9a_state_freshness.js: passed
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed with LF/CRLF warnings only
+
+2026-05-08 runtime review Batch 9A state freshness index:
+status: completed_validated_state_freshness_index
+changed files: docs/226_runtime_review_batch_9a_state_freshness_index.md, scripts/validate_runtime_review_batch_9a_state_freshness.js, README.md, MANIFEST.md, RELEASE_NOTES.md, docs/00_project_roadmap.md, tests/validation_checklist.md, .agent_board files
+scope: current phase freshness index, local validator, top-level index sync, agent-board sync only
+local branch: master
+local head before batch: 2d34eb0
+origin/master before batch: 2d34eb0
+current phase: Runtime Review Batch 9A state freshness index
+previous phase: Runtime Review Batch 8D sustained autopilot task plan
+.omc handling: unrelated local tooling state, not deleted and not staged automatically
+real VCPChat read: no
+real VCPToolBox read: no
+real bridge/CDP/source read: no
+plugin/API/DailyNote/VCP memory/image action: no
+commit/tag/push/PR/release: no
+node --check scripts/validate_runtime_review_batch_9a_state_freshness.js: passed
+node scripts/validate_runtime_review_batch_9a_state_freshness.js: passed
+node --check scripts/validate_local_commit_scope.js: passed
+node scripts/validate_local_commit_scope.js: passed
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+git diff --check: passed with LF/CRLF warnings only
+
 2026-05-08 runtime review Batch 8D sustained autopilot task plan:
 status: completed_validated_local_sustained_autopilot_task_plan
 changed files: docs/225_runtime_review_batch_8d_sustained_autopilot_task_plan.md, README.md, MANIFEST.md, RELEASE_NOTES.md, docs/00_project_roadmap.md, tests/validation_checklist.md, scripts/validate_local_commit_scope.js, .gitignore, .agent_board files
@@ -1112,11 +1183,11 @@ Historical v7.45 phase: v7.45 cdp read-only attempt record
 ## Current Stop Status
 
 ```text
-Runtime Review Batch 8D sustained autopilot task plan is being recorded on top of the pushed v5.17 / Batch 8C baseline. Current local master and origin/master both point to 178529e before this local docs batch. A4/A4.5 local tasks are default-auto when reversible and validated. Real VCPChat/VCPToolBox reads, plugin/API/DailyNote/VCP memory/image actions, retry generation, commit/tag/push/PR/release, and A5 production execution are conditional-auto only when a concrete active authorization package exists and preflight passes.
+Runtime Review Batch 9B runtime session compatibility matrix is being recorded on top of the Batch 9A/9C local docs batch. A4/A4.5 local tasks are default-auto when reversible and validated. Legacy runtime_review_session_v1 compatibility is now fixture-backed. Real VCPChat/VCPToolBox reads, plugin/API/DailyNote/VCP memory/image actions, retry generation, commit/tag/push/PR/release, and A5 production execution are conditional-auto only when a concrete active authorization package exists and preflight passes.
 ```
 
 ## Next Action
 
 ```text
-Next safe action is to validate the Batch 8D sustained autopilot task plan and then continue with Batch 9A if requested. Version actions or real production actions can auto-run only when their concrete active authorization package is present and preflight passes.
+Next safe action is Batch 10B End-To-End Dry-Run Replay Index if the user wants to continue local runtime fixture work. Version actions or real production actions can auto-run only when their concrete active authorization package is present and preflight passes.
 ```

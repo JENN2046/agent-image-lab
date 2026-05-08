@@ -7,7 +7,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review Batch 8D sustained autopilot task plan
+v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review Batch 9B runtime session compatibility matrix
 ```
 
 已经完成：
@@ -90,6 +90,9 @@ v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + 
 - Runtime Review Batch 8B vNext RC acceptance 把 post-merge checkpoint 上的本地 master 收束成下一轮 release-candidate 接受基线，记录接受证据链，但不触发版本动作。
 - Runtime Review Batch 8C final acceptance summary 把 8A / 8B 收束成最终可读 acceptance 摘要，便于交付前审阅和索引检查。
 - Runtime Review Batch 8D sustained autopilot task plan 把后续工作拆成默认自动队列和条件自动队列：A4/A4.5 本地任务满足条件即自动执行；真实执行、外部读取、记忆写入和版本动作在具体 active authorization package 与 preflight 通过后自动执行到授权上限。
+- Runtime Review Batch 9A state freshness index 把当前阶段统一到 `docs/226_runtime_review_batch_9a_state_freshness_index.md`，并用 validator 交叉检查 README、roadmap、manifest、release notes、validation checklist 和 `.agent_board` 的当前状态。
+- Runtime Review Batch 9C operator runbook and resume capsule 提供五分钟续跑入口、安全下一步、硬停止门、验证命令和版本动作状态；它只指向条件自动化契约，不授权 A5 生产动作。
+- Runtime Review Batch 9B runtime session compatibility matrix 固化 `runtime_review_session_v1` legacy minimal / current draft-rich 兼容规则，新增本地 fixture 和 validator，防止新增 draft surface 后误拒历史 v1 会话草案。
 
 当前 accepted asset 只以 ignored runtime 路径和哈希归档，不把图片二进制写入 Git、DailyNote 或 VCP 长期记忆。人工接受记录保留了已知视觉偏差：这是 `human_override` 通过，不是完美 prompt compliance。
 当前 A5 v10.4 / v10.5 / v10.9 新资产均被拒收，只保留 ignored runtime ref、哈希、评分和规则摘要；未把图片二进制写入 Git、DailyNote 或 VCP memory。
@@ -183,6 +186,9 @@ Photo Studio OS UI 生图生产线，以及 AI 图片评审与修正生产线。
 - `docs/223_runtime_review_batch_8b_vnext_rc_acceptance.md`：Runtime Review Batch 8B vNext RC acceptance，本地接受基线收束文档。
 - `docs/224_runtime_review_batch_8c_final_acceptance_summary.md`：Runtime Review Batch 8C final acceptance summary，最终可读 acceptance 摘要。
 - `docs/225_runtime_review_batch_8d_sustained_autopilot_task_plan.md`：Runtime Review Batch 8D sustained autopilot task plan，默认自动队列与条件自动队列的后续任务安排。
+- `docs/226_runtime_review_batch_9a_state_freshness_index.md`：Runtime Review Batch 9A state freshness index，当前状态 freshness 入口与交叉校验说明。
+- `docs/227_runtime_review_batch_9c_operator_runbook_and_resume_capsule.md`：Runtime Review Batch 9C operator runbook and resume capsule，五分钟续跑入口和 operator runbook。
+- `docs/228_runtime_review_batch_9b_runtime_session_compatibility_matrix.md`：Runtime Review Batch 9B runtime session compatibility matrix，`runtime_review_session_v1` legacy/current 兼容规则、fixture 和 validator 入口。
 - `integrations/vcp/v10_8_positive_still_life_real_generation_authorization_draft.md`：下一次正向静物真实生成的未激活 A5 授权草案；仅供人工审查，不构成执行授权。
 - `integrations/vcp/v10_8_positive_still_life_short_approval_template.md`：短批准模板；允许在私有 ignored 插件路径绑定存在时用 `批准 v10.8 静物单次生成` 进入 preflight。
 - `integrations/vcp/v10_10_prompt_handoff_diagnostic_authorization_template.md`：未来无生图传参诊断的未激活授权模板；`max_plugin_calls=0`。

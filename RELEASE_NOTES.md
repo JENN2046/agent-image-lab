@@ -96,6 +96,8 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Added Runtime Review Batch 8B vNext RC acceptance after the post-merge checkpoint, including the acceptance baseline, evidence chain, and explicit no-version-action boundary.
 - Added Runtime Review Batch 8C final acceptance summary after the vNext RC acceptance, consolidating the 8A / 8B acceptance chain into a single final readable summary.
 - Added Runtime Review Batch 8D sustained autopilot task plan, separating default local auto execution from conditional auto execution for real actions, external writes, and version actions when a concrete active authorization package and preflight are present.
+- Added Runtime Review Batch 9A state freshness index, making the current phase discoverable from `docs/226_runtime_review_batch_9a_state_freshness_index.md` and machine-checkable across top-level indexes, validation checklist, and `.agent_board`.
+- Added Runtime Review Batch 9C operator runbook and resume capsule, giving future agents a five-minute local resume entrypoint without authorizing A5 production actions.
 
 ## Safety Status
 
@@ -145,3 +147,6 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Runtime Review Batch 8B vNext RC acceptance records the local acceptance baseline only; it does not authorize commit/tag/push/PR/release or any real execution action.
 - Runtime Review Batch 8C final acceptance summary consolidates the local acceptance chain only; it does not authorize commit/tag/push/PR/release or any real execution action.
 - Runtime Review Batch 8D sustained autopilot task plan does not execute real actions by itself; it defines that real execution, external writes, and version actions can auto-run only inside a concrete active authorization package with passing preflight and explicit limits.
+- Runtime Review Batch 9A state freshness index is local documentation and validation only; it does not authorize commit/tag/push/PR/release, external reads, plugin/API calls, DailyNote/VCP memory writes, or image creation.
+- Runtime Review Batch 9C operator runbook and resume capsule is local documentation and validation only; it does not authorize real VCPChat/VCPToolBox reads, bridge/CDP calls, plugin/API calls, DailyNote/VCP memory writes, image creation, or version actions.
+- Runtime Review Batch 9B runtime session compatibility matrix records `runtime_review_session_v1` legacy minimal and current draft-rich compatibility rules with local fixtures and validator coverage; it does not modify runtime execution behavior or authorize external actions.
