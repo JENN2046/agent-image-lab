@@ -224,6 +224,7 @@
 - `scripts/validate_runtime_review_batch_10b_dry_run_replay_index.js`
 - `scripts/validate_runtime_review_batch_10a_acceptance_matrix.js`
 - `scripts/validate_runtime_review_batch_10c_auth_consolidation.js`
+- `scripts/validate_runtime_review_full_chain.js`
 - `scripts/run_vcpchat_review_console_remote_debug_smoke.ps1`
 - `integrations/vcp/v0_7_real_execution_authorization_gate.md`
 - `integrations/vcp/v0_7_photo_studio_os_dry_run_rehearsal.md`

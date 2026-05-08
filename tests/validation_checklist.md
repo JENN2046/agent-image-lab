@@ -26,6 +26,7 @@
 - [ ] Sustained autopilot chain（9A→10C→final, 7/7）全部完成，已落成本地 commits 和 tags `v5.18`/`v5.19`/`v5.20`。
 - [ ] `scripts/validate_runtime_review_batch_10a_acceptance_matrix.js` 存在并通过，机器验证八领域覆盖、状态分布。
 - [ ] `scripts/validate_runtime_review_batch_10c_auth_consolidation.js` 存在并通过，机器验证七领域模板、占位符根路径。
+- [ ] `scripts/validate_runtime_review_full_chain.js` 存在并通过，一次运行全部 6 个 batch validator，chain_complete=true。
 - [ ] 条件自动队列必须要求具体 active authorization package、preflight、最大调用/写入/版本动作次数、回滚方案、禁止输出和停止条件。
 - [ ] 所有任务书要求的 MVP 文件存在。
 - [ ] 文件直接位于项目根目录下，没有创建第二套 `agent-image-lab/` 嵌套目录。
