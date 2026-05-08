@@ -116,13 +116,14 @@ master tracking origin/master
 - Runtime Review final local checkpoint — sustained autopilot chain closeout：新增 `docs/232_runtime_review_final_local_checkpoint_sustained_autopilot_chain_closeout.md`，汇总 7 个 batch 的完整交付物、worktree 状态和 commit/push 就绪条件。
 - Phase E VCPChat subwindow integration preparation：新增 `review_console/phase_e_vcpchat_subwindow_integration_task_plan.md`、`review_console/phase_e_ipc_contract_draft.md`、`review_console/phase_e_security_acceptance_checklist.md`（77 项检查），完成子窗口接入任务书、IPC 契约和安全验收清单。
 - Phase F MVP-B controlled real execution task plan：新增 `review_console/phase_f_mvp_b_controlled_real_execution_task_plan.md`，定义 8 阶段执行计划和进入条件，不授权真实执行。
+- Tag and version strategy：新增 `docs/233_tag_and_version_strategy.md`，定义 tag 命名规范、版本号策略和 release 发布条件。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：
 
 - VCPChat 子窗口接入（Phase E 任务书已完成，Phase F 实施需 A5 授权）。
 - 后续更多 DailyNote / VCP 长期记忆写入仍需单独授权（Phase F 任务书已定义 max=1）。
-- 正式 release 发布和后续版本 tag 策略。
+- 正式 release 发布仍需单独授权（tag 策略已定义：`docs/233_tag_and_version_strategy.md`）。
 - 后续更多真实图片生成、编辑、归档（Phase F 任务书已定义 max_plugin_calls=1）。
 - commit/tag 可自动执行；push/PR/release 需 active version-action package。
 
