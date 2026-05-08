@@ -273,7 +273,7 @@ daily_note_called: false
 ## 当前优先队列
 
 1. 运行完整校验，确保文档、Adapter、Review Console、agent board、execution records 和 sustained autopilot chain 均通过。
-2. Sustained autopilot chain（9A→10C→final checkpoint, 7/7）已全部完成，10 个文件已落成本地 commit `bfbdc25`。Push 待用户统一执行。
+2. Sustained autopilot chain（9A→10C→final checkpoint, 7/7）已全部完成，已落成本地 9 个 commits + 5 个 tags。Push 待用户统一执行（已安排下班提醒）。
 3. 保持本地默认 `A4 — Sustained Local Autopilot`；不再有已定义且未完成的 default-auto local batch。
 4. 等待用户单独授权任何新的 A5 真实生产动作、tag、push 或正式 release 发布。
 5. 后续任何新增真实生图调用、DailyNote/VCP memory 写入、bridge 验证或 VCPChat/VCPToolBox 源码读写都必须匹配 `docs/231` consolidation template 形成 active authorization package。

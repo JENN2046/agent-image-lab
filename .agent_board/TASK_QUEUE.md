@@ -157,7 +157,7 @@ none
 87. Completed Runtime Review Batch 10B end-to-end dry-run replay index; Adapter dry-run → Review Console → mock bridge → memory_delta draft replay path is now indexed and validator-checked without real VCPChat/VCPToolBox/DoubaoGen/DailyNote/VCP memory access.
 88. Completed Runtime Review Batch 10A release-candidate acceptance matrix; bridge, plugin, asset archive, memory lifecycle, runtime prototype, validator suite, operator docs, and release readiness are now structured into a reviewable matrix without real execution.
 89. Completed Runtime Review Batch 10C future A5 authorization package consolidation; bridge, plugin, asset review, DailyNote/VCP memory, rollback, forbidden outputs, and version actions are now consolidated into a single preflight template with field dependency map and activation flow.
-90. Completed Runtime Review final local checkpoint — sustained autopilot chain closeout; all 7 batches (9A→10C→final) are documented, validated, and agent-board synced; 10 files pending commit blocked only by version-action authorization.
+90. Completed Runtime Review final local checkpoint — sustained autopilot chain closeout; all 7 batches (9A→10C→final) are documented, validated, committed (9 commits + 5 tags), and agent-board synced; push pending user authorization at end of workday.
 ```
 
 ### blocked

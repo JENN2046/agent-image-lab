@@ -96,7 +96,7 @@ v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + 
 - Runtime Review Batch 10B end-to-end dry-run replay index 把 Adapter dry-run → Review Console → mock bridge → session export 的完整回放路径做成可索引、可校验链，新增本地 validator（11 项检查）。
 - Runtime Review Batch 10A release-candidate acceptance matrix 把 bridge、plugin、asset archive、memory lifecycle、runtime prototype、validator suite、operator docs 和 release readiness 八个领域收束成结构化验收矩阵（25 行）。
 - Runtime Review Batch 10C future A5 authorization package consolidation 把 bridge、plugin、asset review、DailyNote/VCP memory、rollback、forbidden outputs 和 version actions 七个领域的 preflight 字段合并到一个可填入模板。
-- Runtime Review final local checkpoint 汇总 sustained autopilot chain（7/7）的完整交付物、worktree 状态和 commit/push 就绪条件；10 个文件已落成本地 commit，push 待用户统一执行。
+- Runtime Review final local checkpoint 汇总 sustained autopilot chain（7/7）的完整交付物和 worktree 状态；9 个 commits + 5 个 tags 已落成本地，push 待用户统一执行。
 
 当前 accepted asset 只以 ignored runtime 路径和哈希归档，不把图片二进制写入 Git、DailyNote 或 VCP 长期记忆。人工接受记录保留了已知视觉偏差：这是 `human_override` 通过，不是完美 prompt compliance。
 当前 A5 v10.4 / v10.5 / v10.9 新资产均被拒收，只保留 ignored runtime ref、哈希、评分和规则摘要；未把图片二进制写入 Git、DailyNote 或 VCP memory。
