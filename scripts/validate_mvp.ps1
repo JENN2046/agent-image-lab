@@ -3607,16 +3607,45 @@ foreach ($path in $v512ReleaseCandidateReadinessFiles) {
   }
 }
 
+function Invoke-NodeScriptWithFileArg {
+  param(
+    [string]$ScriptPath,
+    [string]$FixturePath
+  )
+  $tempOut = [System.IO.Path]::GetTempFileName()
+  try {
+    $runner = @'
+const fs = require("node:fs");
+const { spawnSync } = require("node:child_process");
+const scriptPath = process.argv[2];
+const fixturePath = process.argv[3];
+const outPath = process.argv[4];
+const child = spawnSync(process.execPath, [scriptPath, fixturePath], {
+  encoding: "utf8",
+});
+fs.writeFileSync(outPath, child.stdout, "utf8");
+if (child.stderr) process.stderr.write(child.stderr);
+process.exit(child.status || 0);
+'@
+    $runner | & node - $ScriptPath $FixturePath $tempOut | Out-Null
+    Get-Content -Path $tempOut -Raw -Encoding UTF8
+  } finally {
+    Remove-Item -Path $tempOut -ErrorAction SilentlyContinue
+  }
+}
+
 $node = Get-Command node -ErrorAction SilentlyContinue
 if (-not $node) {
   Add-Failure "Node.js is required to validate adapter_dry_run_lab"
 } else {
+  $prevOutputEncoding = [Console]::OutputEncoding
+  [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new()
   & node --check (Join-Path $Root 'adapter_dry_run_lab/adapter_dry_run.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "adapter_dry_run_lab/adapter_dry_run.js failed node --check"
   }
 
-  $acceptedOutput = & node (Join-Path $Root 'adapter_dry_run_lab/adapter_dry_run.js') (Join-Path $Root 'adapter_dry_run_lab/fixtures/accepted_request.json')
+  $acceptedOutput = Invoke-NodeScriptWithFileArg -ScriptPath (Join-Path $Root 'adapter_dry_run_lab/adapter_dry_run.js') -FixturePath (Join-Path $Root 'adapter_dry_run_lab/fixtures/accepted_request.json')
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "adapter dry-run lab accepted fixture exited with failure"
   } else {
@@ -3636,7 +3665,7 @@ if (-not $node) {
     }
   }
 
-  $rejectedOutput = & node (Join-Path $Root 'adapter_dry_run_lab/adapter_dry_run.js') (Join-Path $Root 'adapter_dry_run_lab/fixtures/rejected_request.json')
+  $rejectedOutput = Invoke-NodeScriptWithFileArg -ScriptPath (Join-Path $Root 'adapter_dry_run_lab/adapter_dry_run.js') -FixturePath (Join-Path $Root 'adapter_dry_run_lab/fixtures/rejected_request.json')
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "adapter dry-run lab rejected fixture exited with failure"
   } else {
@@ -5552,7 +5581,7 @@ process.exit(child.status || 0);
   }
 
   $v07RehearsalPath = Join-Path $Root 'adapter_dry_run_lab/fixtures/photo_studio_os_v0_7_rehearsal_request.json'
-  $v07RehearsalOutput = & node (Join-Path $Root 'adapter_dry_run_lab/adapter_dry_run.js') $v07RehearsalPath
+  $v07RehearsalOutput = Invoke-NodeScriptWithFileArg -ScriptPath (Join-Path $Root 'adapter_dry_run_lab/adapter_dry_run.js') -FixturePath $v07RehearsalPath
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "v0.7 Photo Studio OS dry-run rehearsal fixture exited with failure"
   } else {
@@ -5571,6 +5600,7 @@ process.exit(child.status || 0);
       Add-Failure "v0.7 Photo Studio OS dry-run rehearsal must not allow real execution"
     }
   }
+  [Console]::OutputEncoding = $prevOutputEncoding
 }
 
 if ($failures.Count -gt 0) {

@@ -13,6 +13,16 @@ Push/tag/release: blocked pending separate authorization
 Next: pending user direction
 ```
 
+## v6.3 Patch 01 — PS5.1 Pipe Encoding Fix
+
+```text
+Status: committed — validate_mvp.ps1 PS5.1 pipe encoding corruption fixed
+Fix: [Console]::OutputEncoding = UTF8 before Node.js block, restore afterward
+Validation: validate_mvp.ps1 passed completely (no failures, no deviations)
+Patch commit: "fix: v6.3 Patch 01 — repair remaining MVP UTF-8 validation path"
+Push/tag/release: blocked pending separate authorization
+```
+
 ## v6.2 Asset Index Interaction
 
 ```text

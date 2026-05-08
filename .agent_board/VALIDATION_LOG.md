@@ -23,6 +23,26 @@ powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1: passed
 git diff --check: passed
 ```
 
+## v6.3 Patch 01 — PS5.1 Pipe Encoding Fix
+
+```text
+Current phase: v6.3 Patch 01 — PS5.1 pipe encoding corruption fix
+Fix: Set [Console]::OutputEncoding = UTF8 before the Node.js validation block, restore afterward
+Scope: validate_mvp.ps1 — all ~27 & node stdout capture call sites now decode Chinese UTF-8 correctly
+No accepted deviation recorded.
+No check intensity lowered.
+No failure skipped.
+No failure converted to warning.
+validate_mvp.ps1: passed (complete, no failures)
+validate-agent-image-lab-local.ps1: passed
+validate_v6_3_session_store_interaction.js: passed
+validate_v6_2_asset_index_interaction.js: passed
+validate_v6_1_task_panel_interaction.js: passed
+validate_v6_0_product_runtime_kickoff.js: passed
+validate_runtime_prototype_suite.js: passed
+validate_agent_board_state.js: passed
+```
+
 ## Runtime Review Final Local Checkpoint — Sustained Autopilot Chain Closeout
 
 ```text
