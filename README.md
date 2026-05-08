@@ -98,7 +98,9 @@ v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + 
 - Runtime Review Batch 10C future A5 authorization package consolidation 把 bridge、plugin、asset review、DailyNote/VCP memory、rollback、forbidden outputs 和 version actions 七个领域的 preflight 字段合并到一个可填入模板。
 - Runtime Review final local checkpoint 汇总 sustained autopilot chain（7/7）的完整交付物和 worktree 状态；commits 和 tags 已落成本地，push 待用户统一执行。
 - Phase E VCPChat subwindow integration preparation（3 deliverables）：`review_console/phase_e_vcpchat_subwindow_integration_task_plan.md`、`review_console/phase_e_ipc_contract_draft.md`（4 IPC 通道、sender 校验、错误处理）、`review_console/phase_e_security_acceptance_checklist.md`（77 项检查，8 个域）。
-- Phase F MVP-B controlled real execution task plan（1 deliverable）：`review_console/phase_f_mvp_b_controlled_real_execution_task_plan.md`（8 阶段执行计划、回滚策略、历史教训整合）。
+- Phase F MVP-B controlled real execution task plan（1 deliverable）：`review_console/phase_f_mvp_b_controlled_real_execution_task_plan.md`（8 阶段执行计划、回滚策略、历史教训整合），已完成 2 次 DoubaoGen 人像生图（双图 accepted）。
+- v6.0 Product Runtime Kickoff：Task Panel、Asset Index、Session Store 三层叠加到 Review Console。`docs/236_v6_0_product_runtime_kickoff.md`
+- v6.1 Task Panel Interaction：Task Panel 实现可交互表单（6 inputs/selects），runtime_guard 校验，smoke test 覆盖。`docs/237_v6_1_task_panel_interaction.md`
 
 当前 accepted asset 只以 ignored runtime 路径和哈希归档，不把图片二进制写入 Git、DailyNote 或 VCP 长期记忆。人工接受记录保留了已知视觉偏差：这是 `human_override` 通过，不是完美 prompt compliance。
 当前 A5 v10.4 / v10.5 / v10.9 新资产均被拒收，只保留 ignored runtime ref、哈希、评分和规则摘要；未把图片二进制写入 Git、DailyNote 或 VCP memory。
@@ -203,6 +205,10 @@ Photo Studio OS UI 生图生产线，以及 AI 图片评审与修正生产线。
 - `scripts/validate_runtime_review_batch_10a_acceptance_matrix.js`：Batch 10A acceptance matrix validator，机器验证八领域覆盖、状态分布和禁止输出。
 - `scripts/validate_runtime_review_batch_10c_auth_consolidation.js`：Batch 10C auth consolidation validator，机器验证七领域模板、占位符根路径、字段依赖图。
 - `scripts/validate_runtime_review_full_chain.js`：全链 validator aggregator，一次运行全部 6 个 batch validator（12 项检查），自动识别 phase superseded 的历史批次。
+- `scripts/validate_v6_0_product_runtime_kickoff.js`：v6.0 validator，10 项检查覆盖 kickoff doc、v6 draft surface、UI section、smoke test 扩展。
+- `scripts/validate_v6_1_task_panel_interaction.js`：v6.1 validator，9 项检查覆盖 Task Panel 表单交互、guard、smoke test。
+- `docs/236_v6_0_product_runtime_kickoff.md`：v6.0 Product Runtime Kickoff。
+- `docs/237_v6_1_task_panel_interaction.md`：v6.1 Task Panel Interaction。
 - `review_console/phase_e_vcpchat_subwindow_integration_task_plan.md`：Phase E VCPChat 子窗口接入任务书。
 - `review_console/phase_e_ipc_contract_draft.md`：Phase E IPC 契约草案，4 通道 + sender 校验 + 错误处理。
 - `review_console/phase_e_security_acceptance_checklist.md`：Phase E 安全验收清单，77 项 8 域。

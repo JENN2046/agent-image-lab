@@ -1,13 +1,20 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v6.1 Task Panel Interaction
+
+```text
+Status: v6.1 completed — interactive Task Panel (6 form inputs) layered on Review Console
+v6.0 validator: scripts/validate_v6_0_product_runtime_kickoff.js (10 checks)
+v6.1 validator: scripts/validate_v6_1_task_panel_interaction.js (9 checks)
+Runtime suite: 9/9 passed
+Push/tag/release: blocked pending separate authorization
+Next: v6.2 Asset Index interaction or user direction
+```
+
 ## v6.0 Product Runtime Kickoff
 
 ```text
 Status: v6.0 kicked_off — Task Panel, Asset Index, Session Store layered on existing Review Console
-v6 validator: scripts/validate_v6_0_product_runtime_kickoff.js (10 checks)
-Runtime suite: 9/9 passed
-Push/tag/release: blocked pending separate authorization
-Next: v6.1 Task Panel interaction or user direction
 ```
 
 ## Runtime Review Final Local Checkpoint — Sustained Autopilot Chain Closeout

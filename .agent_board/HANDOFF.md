@@ -19,7 +19,7 @@ A:/agent-image-lab/agent-image-lab-v0.2
 ```text
 Branch: master
 Remote tracking: master...origin/master
-State: v6.0 Product Runtime Kickoff — Task Panel, Asset Index, Session Store layered on Review Console. draft_only, no-execution. Push/tag/release require separate authorization.
+State: v6.1 Task Panel Interaction — interactive Task Panel (6 form inputs) on Review Console. v6.0+v6.1 validators pass. draft_only, no-execution. Push/tag/release require separate authorization.
 Local head before batch: ec60cff
 Origin/master before batch: ec60cff
 master...origin/master before batch: 0 0
