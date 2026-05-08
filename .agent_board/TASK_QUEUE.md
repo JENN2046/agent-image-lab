@@ -60,7 +60,7 @@ none
 4. Update CHECKPOINT.md, RUN_STATE.md, VALIDATION_LOG.md, and HANDOFF.md after each meaningful batch.
 5. If the user wants deeper diagnosis, activate the v10.12 provider-side prompt fingerprint capture package only after explicit approval, or switch to alternate plugin/strategy planning.
 6. If the user wants to reuse a short approval flow, present a new current capsule first; bare `批准` only applies when Codex has just presented that exact capsule.
-7. After Batch 9B validation passes, continue with Batch 10B by default if the next step remains local, reversible, and validated.
+7. Sustained autopilot chain (9A→10C) complete. Commit/tag/push/PR/release may proceed only when a concrete active version-action package exists and preflight passes.
 8. Commit/tag/push/PR/release may proceed automatically only when a concrete active version-action package exists and preflight passes.
 9. Real execution, external reads, memory writes, image creation, and external writes may proceed automatically only when a concrete active package exists and preflight passes.
 ```
@@ -154,6 +154,10 @@ none
 84. Completed Runtime Review Batch 9A state freshness index; current phase is now discoverable from docs/226_runtime_review_batch_9a_state_freshness_index.md and cross-checked across README, roadmap, manifest, release notes, validation checklist, and .agent_board.
 85. Completed Runtime Review Batch 9C operator runbook and resume capsule; future agents can resume from docs/227_runtime_review_batch_9c_operator_runbook_and_resume_capsule.md and continue to Batch 9B without rereading the full history.
 86. Completed Runtime Review Batch 9B runtime session compatibility matrix; legacy runtime_review_session_v1 minimal fixture and current draft-rich fixture are now documented and validator-checked without real execution.
+87. Completed Runtime Review Batch 10B end-to-end dry-run replay index; Adapter dry-run → Review Console → mock bridge → memory_delta draft replay path is now indexed and validator-checked without real VCPChat/VCPToolBox/DoubaoGen/DailyNote/VCP memory access.
+88. Completed Runtime Review Batch 10A release-candidate acceptance matrix; bridge, plugin, asset archive, memory lifecycle, runtime prototype, validator suite, operator docs, and release readiness are now structured into a reviewable matrix without real execution.
+89. Completed Runtime Review Batch 10C future A5 authorization package consolidation; bridge, plugin, asset review, DailyNote/VCP memory, rollback, forbidden outputs, and version actions are now consolidated into a single preflight template with field dependency map and activation flow.
+90. Completed Runtime Review final local checkpoint — sustained autopilot chain closeout; all 7 batches (9A→10C→final) are documented, validated, and agent-board synced; 10 files pending commit blocked only by version-action authorization.
 ```
 
 ### blocked

@@ -1,5 +1,54 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## Runtime Review Final Local Checkpoint — Sustained Autopilot Chain Closeout
+
+```text
+Status: completed_validated_final_local_checkpoint
+Current phase: Runtime Review final local checkpoint — sustained autopilot chain closeout
+Closeout doc: docs/232_runtime_review_final_local_checkpoint_sustained_autopilot_chain_closeout.md
+Sustained autopilot chain: 9A → 9C → 9B → 10B → 10A → 10C → final checkpoint (7/7 complete)
+Changed scope: 5 docs (229-232), 1 validator (10B), .agent_board (5 files)
+Commit/tag/push/PR/release: not performed; blocked pending active version-action authorization package
+External reads or real execution: not performed
+```
+
+## Runtime Review Batch 10C Future A5 Authorization Package Consolidation
+
+```text
+Status: completed_validated_a5_authorization_package_consolidation
+Current phase: Runtime Review Batch 10C future A5 authorization package consolidation
+Consolidation doc: docs/231_runtime_review_batch_10c_future_a5_authorization_package_consolidation.md
+Changed scope: docs and .agent_board only
+Commit/tag/push/PR/release: not performed
+External reads or real execution: not performed
+Next safe local task: final checkpoint
+```
+
+## Runtime Review Batch 10A Release-Candidate Acceptance Matrix
+
+```text
+Status: completed_validated_acceptance_matrix
+Current phase: Runtime Review Batch 10A release-candidate acceptance matrix
+Matrix doc: docs/230_runtime_review_batch_10a_release_candidate_acceptance_matrix.md
+Changed scope: docs and .agent_board only
+Commit/tag/push/PR/release: not performed
+External reads or real execution: not performed
+Next safe local task: Runtime Review Batch 10C
+```
+
+## Runtime Review Batch 10B End-To-End Dry-Run Replay Index
+
+```text
+Status: completed_validated_dry_run_replay_index
+Current phase: Runtime Review Batch 10B end-to-end dry-run replay index
+Replay doc: docs/229_runtime_review_batch_10b_end_to_end_dry_run_replay_index.md
+Validator: scripts/validate_runtime_review_batch_10b_dry_run_replay_index.js
+Changed scope: docs, validator, and .agent_board only
+Commit/tag/push/PR/release: not performed
+External reads or real execution: not performed
+Next safe local task: Runtime Review Batch 10A
+```
+
 ## Runtime Review Batch 9B Runtime Session Compatibility Matrix
 
 ```text
