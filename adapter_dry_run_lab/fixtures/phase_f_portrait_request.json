@@ -1,0 +1,37 @@
+{
+  "adapter_dry_run_request": {
+    "command": "dry_run",
+    "request_id": "phase-f-f3-portrait-001",
+    "task_envelope": {
+      "task_id": "task-phase-f-portrait-001",
+      "task_type": "photo_studio_os_portrait_review",
+      "mode": "dry_run",
+      "user_request_cn": "为 Phase F 人像生图任务生成 dry-run 调度草案。DoubaoGen 2 次调用，模型 doubao-seedream-5-0-260128。",
+      "prompt_package_ref": "a5_portrait_prompt_v1",
+      "dry_run_controls": {
+        "max_plugin_calls": 0,
+        "allow_external_api": false,
+        "allow_file_write": false,
+        "allow_image_binary": false
+      },
+      "approval_context": {
+        "gatekeeper_required": true,
+        "review_console_required": true,
+        "daily_note_direct_write_allowed": false
+      },
+      "candidate_context": {
+        "candidate_id": "DoubaoGen",
+        "manifest_review_status": "manifest_reviewed_safe",
+        "real_execution_authorized": true,
+        "selected_plugin_for_execution": "DoubaoGen",
+        "max_plugin_calls_authorized": 2
+      },
+      "safety": {
+        "contains_secret": false,
+        "contains_private_path": false,
+        "contains_customer_private_data": false,
+        "contains_image_binary": false
+      }
+    }
+  }
+}
