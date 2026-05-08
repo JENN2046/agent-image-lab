@@ -1,0 +1,59 @@
+memory_delta:
+  delta_id: "memory_delta_phase_f_f4_run_1"
+  task_id: "task-phase-f-portrait-001"
+  case_id: "case-phase-f-portrait-run-1"
+  project: "agent-image-lab-phase-f"
+  created_at: "2026-05-08T12:00:00+08:00"
+  agent_name: "ImageLab Agent"
+  agent_role: "视觉生产调度"
+
+  memory_type: "视觉审片记录"
+  target_notebook: "ImageLab Review Log"
+
+  write_mode: "draft"
+  approval_status: "pending"
+  approved_by: null
+  approved_at: null
+  rejection_reason_cn: null
+
+  source:
+    session_id: "phase-f-f4-run-1"
+    task_id: "task-phase-f-portrait-001"
+    output_directory_ref: "runs/phase_f_f4_portrait_generation/run_1"
+
+  chinese_diary_title: "Phase F 人像生图 Run 1 — 已接受候选"
+
+  chinese_diary_content: |
+    本次为 Phase F MVP-B 受控真实执行的第一次 DoubaoGen 人像生图。
+
+    生成结果：
+    - 图片：9745d771-d47b-45f4-8f0c-fe2dddf69fa7.jpg (212 KB)
+    - 主题：亚洲年轻女性专业半身人像
+    - 评分：prompt_subject_match=true, person_or_face_detected=true（人像预期）, 无文字/logo/品牌标识
+    - 面部质量：五官清晰自然，无扭曲，皮肤质感真实
+    - 背景：浅灰色纯色，符合 prompt 要求
+    - 构图：专业半身像，正面面向镜头
+
+    审片结论：accepted_candidate。推荐作为本次 Phase F 的可用资产。
+
+    模型备注：插件实际使用 doubao-seedream-3-0-t2i-250415（请求为 5.0），图片质量满足人像需求。
+
+    本记录仅作为本地审片草案，尚未写入 DailyNote 或 VCP 长期记忆。
+
+  preserved_original: null
+  tags:
+    - "phase-f"
+    - "portrait"
+    - "doubaogen"
+    - "accepted-candidate"
+    - "run-1"
+  visibility: "audit"
+  memory_safety:
+    contains_secret: false
+    contains_private_path: false
+    contains_customer_private_data: false
+    contains_image_binary: false
+  promotion: false
+  final_decision:
+    should_write_to_vcp: false
+    reason_cn: "daily_note_write_allowed=false；Phase F 授权包不包含记忆写入权限"
