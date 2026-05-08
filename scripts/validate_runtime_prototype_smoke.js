@@ -282,6 +282,14 @@ function createRuntimeContext() {
   add("assetArchiveCandidateCloseouts");
   add("assetArchiveCandidateBoundary");
   add("draftOutput");
+  // v6 Product Runtime
+  add("v6TaskId"); add("v6TaskGoal"); add("v6TaskStage"); add("v6TaskOwner");
+  add("v6TaskNext"); add("v6TaskBlocked"); add("v6TaskLinkedSession");
+  add("v6AssetRef"); add("v6AssetHash"); add("v6AssetStatus"); add("v6AssetScore");
+  add("v6AssetDecision"); add("v6AssetMemorySuitability"); add("v6AssetCaseId"); add("v6AssetCount");
+  add("v6SessionId"); add("v6SessionFingerprint"); add("v6SessionDraftOnly");
+  add("v6SessionSideEffects"); add("v6SessionExportable"); add("v6SessionImportCompatible");
+  add("v6SessionTaskId"); add("v6SessionAssetRefs");
 
   const context = {
     window: {},
@@ -833,6 +841,16 @@ function main() {
   assert(elements.get("assetArchiveCandidateFields").textContent.includes("binary_storage_allowed=false"), "Asset archive fields must render no-binary state.");
   assert(elements.get("assetArchiveCandidateCloseouts").textContent.includes("rejected"), "Asset archive closeout templates must render.");
   assert(elements.get("assetArchiveCandidateBoundary").textContent.includes("不保存图片二进制"), "Asset archive boundary must render no-binary state.");
+  // v6 Product Runtime assertions
+  assert(elements.get("v6TaskStage").textContent === "draft", "v6 Task Panel stage must render draft.");
+  assert(elements.get("v6TaskOwner").textContent === "ImageLab_Master", "v6 Task Panel owner must render.");
+  assert(elements.get("v6AssetStatus").textContent === "draft", "v6 Asset Index status must render draft.");
+  assert(elements.get("v6SessionDraftOnly").textContent === "是", "v6 Session Store draft_only must be true.");
+  assert(elements.get("v6SessionSideEffects").textContent === "无", "v6 Session Store side_effects must be false.");
+  assert(elements.get("v6SessionExportable").textContent === "是", "v6 Session Store export_ready must be true.");
+  assert(initialDraft.v6_product_runtime_draft, "v6 Product Runtime draft must exist.");
+  assert(initialDraft.v6_product_runtime_draft.layer_status === "draft_only", "v6 Product Runtime must be draft_only.");
+  assert(initialDraft.v6_product_runtime_draft.no_execution_guard.api_called === false, "v6 guard api_called must be false.");
   assert(elements.get("batchTotal").textContent === "4", "Batch total must render.");
   assert(elements.get("batchAccepted").textContent === "1", "Batch accepted count must render.");
   assert(elements.get("batchPending").textContent === "2", "Batch pending count must render.");

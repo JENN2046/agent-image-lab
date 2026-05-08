@@ -676,6 +676,51 @@
             <p id="memoryCardBoundary"></p>
           </article>
         </div>
+        <section id="v6ProductRuntime" class="panel">
+          <h2>v6 Product Runtime</h2>
+          <p class="panel-boundary">生产运行层（叠加在审片台之上）。所有内容保持 draft_only / no-execution。</p>
+
+          <article id="v6TaskPanel">
+            <h3>Task Panel</h3>
+            <dl class="meta">
+              <div><dt>任务 ID</dt><dd id="v6TaskId">-</dd></div>
+              <div><dt>视觉目标</dt><dd id="v6TaskGoal">-</dd></div>
+              <div><dt>当前阶段</dt><dd id="v6TaskStage">-</dd></div>
+              <div><dt>负责人</dt><dd id="v6TaskOwner">-</dd></div>
+              <div><dt>下一步</dt><dd id="v6TaskNext">-</dd></div>
+              <div><dt>阻断原因</dt><dd id="v6TaskBlocked">-</dd></div>
+              <div><dt>关联 Session</dt><dd id="v6TaskLinkedSession">-</dd></div>
+            </dl>
+          </article>
+
+          <article id="v6AssetIndex">
+            <h3>Asset Index</h3>
+            <dl class="meta">
+              <div><dt>资产引用</dt><dd id="v6AssetRef">-</dd></div>
+              <div><dt>资产哈希</dt><dd id="v6AssetHash">-</dd></div>
+              <div><dt>资产状态</dt><dd id="v6AssetStatus">-</dd></div>
+              <div><dt>评分</dt><dd id="v6AssetScore">-</dd></div>
+              <div><dt>人工判定</dt><dd id="v6AssetDecision">-</dd></div>
+              <div><dt>记忆适配</dt><dd id="v6AssetMemorySuitability">-</dd></div>
+              <div><dt>关联 Case</dt><dd id="v6AssetCaseId">-</dd></div>
+              <div><dt>索引条目数</dt><dd id="v6AssetCount">-</dd></div>
+            </dl>
+          </article>
+
+          <article id="v6SessionStore">
+            <h3>Session Store</h3>
+            <dl class="meta">
+              <div><dt>Session ID</dt><dd id="v6SessionId">-</dd></div>
+              <div><dt>指纹</dt><dd id="v6SessionFingerprint">-</dd></div>
+              <div><dt>Draft Only</dt><dd id="v6SessionDraftOnly">-</dd></div>
+              <div><dt>副作用</dt><dd id="v6SessionSideEffects">-</dd></div>
+              <div><dt>可导出</dt><dd id="v6SessionExportable">-</dd></div>
+              <div><dt>兼容导入</dt><dd id="v6SessionImportCompatible">-</dd></div>
+              <div><dt>关联任务</dt><dd id="v6SessionTaskId">-</dd></div>
+              <div><dt>关联资产</dt><dd id="v6SessionAssetRefs">-</dd></div>
+            </dl>
+          </article>
+        </section>
         <pre id="draftOutput" hidden></pre>
       </section>
     </main>

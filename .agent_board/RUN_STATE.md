@@ -21,7 +21,7 @@ master tracking origin/master
 ## Current Phase
 
 ```text
-v5.34 — Final Program Closeout. All 13 phases (A→M) + Phase I complete. All 7 batches (9A→10C) complete. 65 tags, 221 commits, origin synced.
+v6.0 — Product Runtime Kickoff. Task Panel + Asset Index + Session Store layered on existing Review Console. draft_only, no-execution.
 ```
 
 ## Current Task
@@ -33,7 +33,7 @@ No defined default-auto local batch remaining. Await user direction or A5 author
 ## Last Completed Task
 
 ```text
-Final Program Closeout (v5.35): G→M + Phase I all complete. All 13 phases + 7 batches documented in docs/235_final_program_closeout_after_phase_i.md. Agent-board and all indexes synced.
+v6.0 Product Runtime Kickoff: Task Panel, Asset Index, Session Store layered on existing Review Console runtime prototype. v6_product_runtime_draft added to buildDraft() + session export + UI + smoke test. All validators pass.
 ```
 
 ## Last Validation

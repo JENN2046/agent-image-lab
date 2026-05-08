@@ -251,7 +251,31 @@ const els = {
   assetArchiveCandidateFields: document.getElementById("assetArchiveCandidateFields"),
   assetArchiveCandidateCloseouts: document.getElementById("assetArchiveCandidateCloseouts"),
   assetArchiveCandidateBoundary: document.getElementById("assetArchiveCandidateBoundary"),
-  draftOutput: document.getElementById("draftOutput")
+  draftOutput: document.getElementById("draftOutput"),
+  // v6 Product Runtime
+  v6TaskId: document.getElementById("v6TaskId"),
+  v6TaskGoal: document.getElementById("v6TaskGoal"),
+  v6TaskStage: document.getElementById("v6TaskStage"),
+  v6TaskOwner: document.getElementById("v6TaskOwner"),
+  v6TaskNext: document.getElementById("v6TaskNext"),
+  v6TaskBlocked: document.getElementById("v6TaskBlocked"),
+  v6TaskLinkedSession: document.getElementById("v6TaskLinkedSession"),
+  v6AssetRef: document.getElementById("v6AssetRef"),
+  v6AssetHash: document.getElementById("v6AssetHash"),
+  v6AssetStatus: document.getElementById("v6AssetStatus"),
+  v6AssetScore: document.getElementById("v6AssetScore"),
+  v6AssetDecision: document.getElementById("v6AssetDecision"),
+  v6AssetMemorySuitability: document.getElementById("v6AssetMemorySuitability"),
+  v6AssetCaseId: document.getElementById("v6AssetCaseId"),
+  v6AssetCount: document.getElementById("v6AssetCount"),
+  v6SessionId: document.getElementById("v6SessionId"),
+  v6SessionFingerprint: document.getElementById("v6SessionFingerprint"),
+  v6SessionDraftOnly: document.getElementById("v6SessionDraftOnly"),
+  v6SessionSideEffects: document.getElementById("v6SessionSideEffects"),
+  v6SessionExportable: document.getElementById("v6SessionExportable"),
+  v6SessionImportCompatible: document.getElementById("v6SessionImportCompatible"),
+  v6SessionTaskId: document.getElementById("v6SessionTaskId"),
+  v6SessionAssetRefs: document.getElementById("v6SessionAssetRefs")
 };
 
 let activeDraftView = "readable";
@@ -2640,7 +2664,8 @@ function buildRuntimeSessionExportDraft({
   memoryWriteCompletionCandidateDraft,
   singleRealGenerationRetryGateDraft,
   realMemoryWriteAuthorizationPackageDraft,
-  assetArchiveCandidateDraft
+  assetArchiveCandidateDraft,
+  v6ProductRuntimeDraft
 }) {
   const exportDraft = {
     package_status: "draft_only",
@@ -2674,6 +2699,7 @@ function buildRuntimeSessionExportDraft({
     single_real_generation_retry_gate_draft: singleRealGenerationRetryGateDraft,
     real_memory_write_authorization_package_draft: realMemoryWriteAuthorizationPackageDraft,
     asset_archive_candidate_draft: assetArchiveCandidateDraft,
+    v6_product_runtime_draft: v6ProductRuntimeDraft,
     prototype_guard: runtimeGuard.clone(runtimeGuard.cleanGuard),
     side_effects_performed: false,
     boundary_cn: "这是 Review Console runtime 本地会话导出草案，不写磁盘，不调用插件/API/DailyNote，不写 VCP memory。"
@@ -3043,6 +3069,56 @@ function approvalPayload() {
   };
 }
 
+function buildV6ProductRuntimeDraft(createdAt) {
+  const selectedItem = activeQueueItem();
+  const sessionId = selectedItem?.session_id || `v6-session-${Date.now()}`;
+  const taskId = selectedItem?.task_id || null;
+  const caseId = selectedItem?.case_id || null;
+
+  return {
+    layer_name: "v6_product_runtime",
+    layer_status: "draft_only",
+    created_at: createdAt,
+    no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard),
+
+    task_panel: {
+      task_id: taskId,
+      visual_goal_cn: "人像/静物视觉生产任务",
+      current_stage: "draft",
+      owner_role: "ImageLab_Master",
+      next_action: "人工填写任务描述和目标 prompt",
+      blocked_reason_cn: null,
+      linked_review_session_id: sessionId
+    },
+
+    asset_index: {
+      entries: selectedItem ? [{
+        asset_ref: `asset-${caseId || "draft"}-001`,
+        asset_hash: null,
+        asset_status: "draft",
+        review_score: null,
+        human_decision: "pending",
+        memory_suitability: "not_evaluated",
+        linked_case_id: caseId
+      }] : [],
+      total_entries: selectedItem ? 1 : 0,
+      indexed_count: 0,
+      searchable: true
+    },
+
+    session_store: {
+      session_id: sessionId,
+      fingerprint: null,
+      draft_only: true,
+      side_effects_performed: false,
+      export_ready: true,
+      import_compatible: true,
+      linked_task_id: taskId,
+      linked_asset_refs: caseId ? [`asset-${caseId}-001`] : []
+    }
+  };
+}
+
 function buildDraft() {
   const createdAt = nowIso();
   const score = Number(els.humanScore.value);
@@ -3251,7 +3327,8 @@ function buildDraft() {
     memoryWriteCompletionCandidateDraft,
     singleRealGenerationRetryGateDraft,
     realMemoryWriteAuthorizationPackageDraft,
-    assetArchiveCandidateDraft
+    assetArchiveCandidateDraft,
+    v6ProductRuntimeDraft: buildV6ProductRuntimeDraft(createdAt)
   });
 
   return {
@@ -3405,6 +3482,7 @@ function buildDraft() {
     },
     memory_completion_state_draft: memoryCompletionState,
     adapter_dry_run_handoff_draft: adapterDryRunHandoffDraft,
+    v6_product_runtime_draft: buildV6ProductRuntimeDraft(createdAt),
     prototype_guard: runtimeGuard.clone(draftGuard)
   };
 }
@@ -3791,6 +3869,41 @@ function renderAssetArchiveCandidate(draft) {
   els.assetArchiveCandidateBoundary.textContent = `${draft.sanitized_review_summary_cn} ${draft.boundary_cn}`;
 }
 
+function renderV6ProductRuntime(draft) {
+  const v6 = draft.v6_product_runtime_draft;
+  if (!v6) { return; }
+
+  // Task Panel
+  els.v6TaskId.textContent = v6.task_panel.task_id || "-";
+  els.v6TaskGoal.textContent = v6.task_panel.visual_goal_cn;
+  els.v6TaskStage.textContent = v6.task_panel.current_stage;
+  els.v6TaskOwner.textContent = v6.task_panel.owner_role;
+  els.v6TaskNext.textContent = v6.task_panel.next_action;
+  els.v6TaskBlocked.textContent = v6.task_panel.blocked_reason_cn || "无";
+  els.v6TaskLinkedSession.textContent = v6.task_panel.linked_review_session_id || "-";
+
+  // Asset Index
+  const assetEntry = v6.asset_index.entries[0] || {};
+  els.v6AssetRef.textContent = assetEntry.asset_ref || "-";
+  els.v6AssetHash.textContent = assetEntry.asset_hash || "待生成";
+  els.v6AssetStatus.textContent = assetEntry.asset_status || "-";
+  els.v6AssetScore.textContent = assetEntry.review_score != null ? String(assetEntry.review_score) : "-";
+  els.v6AssetDecision.textContent = assetEntry.human_decision || "-";
+  els.v6AssetMemorySuitability.textContent = assetEntry.memory_suitability || "-";
+  els.v6AssetCaseId.textContent = assetEntry.linked_case_id || "-";
+  els.v6AssetCount.textContent = `${v6.asset_index.indexed_count}/${v6.asset_index.total_entries}`;
+
+  // Session Store
+  els.v6SessionId.textContent = v6.session_store.session_id || "-";
+  els.v6SessionFingerprint.textContent = v6.session_store.fingerprint || "待计算";
+  els.v6SessionDraftOnly.textContent = v6.session_store.draft_only ? "是" : "否";
+  els.v6SessionSideEffects.textContent = v6.session_store.side_effects_performed ? "有" : "无";
+  els.v6SessionExportable.textContent = v6.session_store.export_ready ? "是" : "否";
+  els.v6SessionImportCompatible.textContent = v6.session_store.import_compatible ? "是" : "否";
+  els.v6SessionTaskId.textContent = v6.session_store.linked_task_id || "-";
+  els.v6SessionAssetRefs.textContent = v6.session_store.linked_asset_refs.join(", ") || "-";
+}
+
 function renderSessionTransfer(sessionExportDraft) {
   els.sessionTransferStatus.textContent = sessionTransferStatusText;
   if (!sessionExportDraft) {
@@ -3876,6 +3989,7 @@ function render() {
   renderRealMemoryWriteAuthorizationPackage(realMemoryWriteAuthorizationPackageDraft);
   renderAssetArchiveCandidate(assetArchiveCandidateDraft);
   renderSessionTransfer(sessionExportDraft);
+  renderV6ProductRuntime(draft);
   els.batchSelectedCount.textContent = `${selectedBatchQueueIds.size} 个`;
   els.batchOperationStatus.textContent = batchOperationStatusText;
   els.historyStatus.textContent = historyStatusText;
