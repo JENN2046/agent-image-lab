@@ -96,7 +96,9 @@ v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + 
 - Runtime Review Batch 10B end-to-end dry-run replay index 把 Adapter dry-run → Review Console → mock bridge → session export 的完整回放路径做成可索引、可校验链，新增本地 validator（11 项检查）。
 - Runtime Review Batch 10A release-candidate acceptance matrix 把 bridge、plugin、asset archive、memory lifecycle、runtime prototype、validator suite、operator docs 和 release readiness 八个领域收束成结构化验收矩阵（25 行）。
 - Runtime Review Batch 10C future A5 authorization package consolidation 把 bridge、plugin、asset review、DailyNote/VCP memory、rollback、forbidden outputs 和 version actions 七个领域的 preflight 字段合并到一个可填入模板。
-- Runtime Review final local checkpoint 汇总 sustained autopilot chain（7/7）的完整交付物和 worktree 状态；9 个 commits + 5 个 tags 已落成本地，push 待用户统一执行。
+- Runtime Review final local checkpoint 汇总 sustained autopilot chain（7/7）的完整交付物和 worktree 状态；commits 和 tags 已落成本地，push 待用户统一执行。
+- Phase E VCPChat subwindow integration preparation（3 deliverables）：`review_console/phase_e_vcpchat_subwindow_integration_task_plan.md`、`review_console/phase_e_ipc_contract_draft.md`（4 IPC 通道、sender 校验、错误处理）、`review_console/phase_e_security_acceptance_checklist.md`（77 项检查，8 个域）。
+- Phase F MVP-B controlled real execution task plan（1 deliverable）：`review_console/phase_f_mvp_b_controlled_real_execution_task_plan.md`（8 阶段执行计划、回滚策略、历史教训整合）。
 
 当前 accepted asset 只以 ignored runtime 路径和哈希归档，不把图片二进制写入 Git、DailyNote 或 VCP 长期记忆。人工接受记录保留了已知视觉偏差：这是 `human_override` 通过，不是完美 prompt compliance。
 当前 A5 v10.4 / v10.5 / v10.9 新资产均被拒收，只保留 ignored runtime ref、哈希、评分和规则摘要；未把图片二进制写入 Git、DailyNote 或 VCP memory。
@@ -201,6 +203,10 @@ Photo Studio OS UI 生图生产线，以及 AI 图片评审与修正生产线。
 - `scripts/validate_runtime_review_batch_10a_acceptance_matrix.js`：Batch 10A acceptance matrix validator，机器验证八领域覆盖、状态分布和禁止输出。
 - `scripts/validate_runtime_review_batch_10c_auth_consolidation.js`：Batch 10C auth consolidation validator，机器验证七领域模板、占位符根路径、字段依赖图。
 - `scripts/validate_runtime_review_full_chain.js`：全链 validator aggregator，一次运行全部 6 个 batch validator（12 项检查），自动识别 phase superseded 的历史批次。
+- `review_console/phase_e_vcpchat_subwindow_integration_task_plan.md`：Phase E VCPChat 子窗口接入任务书。
+- `review_console/phase_e_ipc_contract_draft.md`：Phase E IPC 契约草案，4 通道 + sender 校验 + 错误处理。
+- `review_console/phase_e_security_acceptance_checklist.md`：Phase E 安全验收清单，77 项 8 域。
+- `review_console/phase_f_mvp_b_controlled_real_execution_task_plan.md`：Phase F MVP-B 受控真实执行任务书，8 阶段执行计划。
 - `integrations/vcp/v10_8_positive_still_life_real_generation_authorization_draft.md`：下一次正向静物真实生成的未激活 A5 授权草案；仅供人工审查，不构成执行授权。
 - `integrations/vcp/v10_8_positive_still_life_short_approval_template.md`：短批准模板；允许在私有 ignored 插件路径绑定存在时用 `批准 v10.8 静物单次生成` 进入 preflight。
 - `integrations/vcp/v10_10_prompt_handoff_diagnostic_authorization_template.md`：未来无生图传参诊断的未激活授权模板；`max_plugin_calls=0`。
