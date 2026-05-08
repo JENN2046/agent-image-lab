@@ -21,7 +21,7 @@ master tracking origin/master
 ## Current Phase
 
 ```text
-Phase F — MVP-B controlled real execution COMPLETE (2 DoubaoGen portraits, both accepted_candidate) + sustained autopilot chain (7/7)
+v5.34 — Final Program Closeout. All 13 phases (A→M) + Phase I complete. All 7 batches (9A→10C) complete. 65 tags, 221 commits, origin synced.
 ```
 
 ## Current Task
@@ -33,7 +33,7 @@ No defined default-auto local batch remaining. Await user direction or A5 author
 ## Last Completed Task
 
 ```text
-Phase F MVP-B controlled real execution: F1→F8 complete. 2 DoubaoGen portrait generations (both accepted_candidate), bridge smoke verified (VCPChat v4.4.2, 4 channels 0 side effects), memory draft created. Auth package consumed (2/2 calls).
+Final Program Closeout (v5.35): G→M + Phase I all complete. All 13 phases + 7 batches documented in docs/235_final_program_closeout_after_phase_i.md. Agent-board and all indexes synced.
 ```
 
 ## Last Validation
