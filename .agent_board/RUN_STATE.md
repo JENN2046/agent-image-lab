@@ -21,7 +21,7 @@ master tracking origin/master
 ## Current Phase
 
 ```text
-Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + full validator chain (6 dedicated validators + 1 aggregator)
+Phase E — VCPChat subwindow integration preparation (3 deliverables complete) + Runtime Review sustained autopilot chain complete (9A→10C→final, 7/7)
 ```
 
 ## Current Task
@@ -33,20 +33,18 @@ No defined default-auto local batch remaining. Await user direction or A5 author
 ## Last Completed Task
 
 ```text
-Created full chain validator aggregator (scripts/validate_runtime_review_full_chain.js) and synced all indexes; sustained autopilot chain fully closed with 7 commits + 5 tags pending push.
+Completed Phase E deliverables: VCPChat subwindow integration task plan, IPC contract draft (4 channels, sender validation, error handling), and security acceptance checklist (77 checks across 8 domains).
 ```
 
 ## Last Validation
 
 ```text
-2026-05-08 runtime review full chain validation (9A → 10C):
-status: completed_validated_full_chain
-chain: 9A (freshness) → 9C (runbook) → 9B (compatibility) → 10B (replay index) → 10A (acceptance matrix) → 10C (auth consolidation) → final checkpoint
-validators: 6 dedicated + 1 aggregator (validate_runtime_review_full_chain.js)
-full chain result: 6/6 batches passed, chain_complete=true (9A/9B/9C phase_superseded, 10A/10B/10C active)
-runtime prototype suite: 9/9 passed
-git status: 7 commits ahead of origin/master, 5 tags (v5.18-v5.21), working tree clean
-push: pending user authorization
+2026-05-08 Phase E deliverables + full chain validation:
+status: completed_validated_phase_e
+phase_e: 3 deliverables (task plan, IPC contract, security checklist — 77 checks)
+full chain validator: 6/6 batches passed, chain_complete=true
+git status: 14 commits ahead of origin/master, working tree clean
+push: pending user authorization (reminder at 18:07)
 real VCPChat read: no
 real VCPToolBox read: no
 real bridge/CDP/source read: no
