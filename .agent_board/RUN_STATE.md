@@ -21,7 +21,7 @@ master tracking origin/master
 ## Current Phase
 
 ```text
-Phase E — VCPChat subwindow integration preparation (3 deliverables complete) + Runtime Review sustained autopilot chain complete (9A→10C→final, 7/7)
+Phase F — MVP-B controlled real execution COMPLETE (2 DoubaoGen portraits, both accepted_candidate) + sustained autopilot chain (7/7)
 ```
 
 ## Current Task
@@ -33,18 +33,20 @@ No defined default-auto local batch remaining. Await user direction or A5 author
 ## Last Completed Task
 
 ```text
-Completed Phase E deliverables: VCPChat subwindow integration task plan, IPC contract draft (4 channels, sender validation, error handling), and security acceptance checklist (77 checks across 8 domains).
+Phase F MVP-B controlled real execution: F1→F8 complete. 2 DoubaoGen portrait generations (both accepted_candidate), bridge smoke verified (VCPChat v4.4.2, 4 channels 0 side effects), memory draft created. Auth package consumed (2/2 calls).
 ```
 
 ## Last Validation
 
 ```text
-2026-05-08 Phase E deliverables + full chain validation:
-status: completed_validated_phase_e
-phase_e: 3 deliverables (task plan, IPC contract, security checklist — 77 checks)
-full chain validator: 6/6 batches passed, chain_complete=true
-git status: 14 commits ahead of origin/master, working tree clean
-push: pending user authorization (reminder at 18:07)
+2026-05-08 Phase F complete + all validators:
+status: completed_validated_phase_f
+phase_f: 8 stages (F1 preflight, F2 bridge smoke, F3 adapter, F4 2x generation, F5 review, F6 memory draft, F7 skipped, F8 closeout)
+generation: 2 DoubaoGen portraits, both accepted_candidate
+bridge: VCPChat v4.4.2, 4 channels verified, 0 side effects
+full chain validator: 6/6 batches passed
+git status: 28 commits ahead, working tree clean
+push: pending (reminder at 18:07)
 real VCPChat read: no
 real VCPToolBox read: no
 real bridge/CDP/source read: no
@@ -1186,5 +1188,5 @@ Runtime Review sustained autopilot chain is fully complete (9A → 9C → 9B →
 ## Next Action
 
 ```text
-Sustained autopilot chain fully complete (7/7 batches). 7 commits + 5 tags pending push. Push待用户下班统一执行。 No further default-auto local batches defined.
+Phase F complete. 28 commits + 8 tags pending push. Push scheduled 18:07. Next: user direction or new A5 authorization.
 ```

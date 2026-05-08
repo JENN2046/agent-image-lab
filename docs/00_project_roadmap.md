@@ -115,16 +115,16 @@ master tracking origin/master
 - Runtime Review Batch 10C future A5 authorization package consolidation：新增 `docs/231_runtime_review_batch_10c_future_a5_authorization_package_consolidation.md`，把 bridge、plugin、asset review、DailyNote/VCP memory、rollback、forbidden outputs 和 version actions 七个领域的 preflight 字段合并到一个可填入模板。
 - Runtime Review final local checkpoint — sustained autopilot chain closeout：新增 `docs/232_runtime_review_final_local_checkpoint_sustained_autopilot_chain_closeout.md`，汇总 7 个 batch 的完整交付物、worktree 状态和 commit/push 就绪条件。
 - Phase E VCPChat subwindow integration preparation：新增 `review_console/phase_e_vcpchat_subwindow_integration_task_plan.md`、`review_console/phase_e_ipc_contract_draft.md`、`review_console/phase_e_security_acceptance_checklist.md`（77 项检查），完成子窗口接入任务书、IPC 契约和安全验收清单。
-- Phase F MVP-B controlled real execution task plan：新增 `review_console/phase_f_mvp_b_controlled_real_execution_task_plan.md`，定义 8 阶段执行计划和进入条件，不授权真实执行。
+- Phase F MVP-B controlled real execution：已完成 F1→F8 全流程。2 次 DoubaoGen 人像生图（双图 accepted_candidate），Bridge smoke 通过（VCPChat v4.4.2，4 通道 0 side effects）。收束记录：`review_console/phase_f_f8_closeout_record.md`
 - Tag and version strategy：新增 `docs/233_tag_and_version_strategy.md`，定义 tag 命名规范、版本号策略和 release 发布条件。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：
 
-- VCPChat 子窗口接入（Phase E 任务书已完成，Phase F 实施需 A5 授权）。
-- 后续更多 DailyNote / VCP 长期记忆写入仍需单独授权（Phase F 任务书已定义 max=1）。
+- VCPChat 子窗口接入（Phase E 任务书已完成，Phase F Bridge smoke 已验证通过 VCPChat v4.4.2）。
+- 后续 DailyNote / VCP 长期记忆写入仍需单独授权。
 - 正式 release 发布仍需单独授权（tag 策略已定义：`docs/233_tag_and_version_strategy.md`）。
-- 后续更多真实图片生成、编辑、归档（Phase F 任务书已定义 max_plugin_calls=1）。
+- 后续更多真实图片生成需新 A5 授权包（Phase F 已消耗 2/2 calls，双图 accepted）。
 - commit/tag 可自动执行；push/PR/release 需 active version-action package。
 
 ## 阶段路线
@@ -256,26 +256,14 @@ daily_note_called: false
 - 形成安全验收清单。`review_console/phase_e_security_acceptance_checklist.md`（77 项检查）
 - 三项交付物已在本 Phase E 完成；不修改真实 VCPChat，不创建真实 IPC handler。
 
-### Phase F：MVP-B 受控真实执行
+### Phase F：MVP-B 受控真实执行 ✅ 已完成
 
-目标：在人工审批和回滚策略完整后，接入单一真实插件的最小执行闭环。
+状态：**已完成**（2026-05-08）。收束记录：`review_console/phase_f_f8_closeout_record.md`
 
-任务书：`review_console/phase_f_mvp_b_controlled_real_execution_task_plan.md`（8 阶段执行计划、回滚策略、历史教训整合）
-
-进入条件：
-
-- Phase C/D/E 已完成。
-- 用户单独授权真实插件、真实输入、真实输出目录和最大调用次数。
-- `docs/231` consolidation template 已填充并激活。
-- A5 preflight 全部通过。
-
-完成标准：
-
-- 单一插件可在审批后执行一次最小任务（8 阶段 F1→F8）。
-- Review Console 可人工评分和审批。
-- 资产只保存路径引用和摘要，不把图片二进制写入长期记忆。
-- memory_delta 只生成写入申请，不绕过审批写 DailyNote。
-- 不满足进入条件时，任务书仅为本地规划文档，不授权任何真实执行。
+执行摘要：
+- F1 Preflight ✅ → F2 Bridge Smoke ✅ (VCPChat v4.4.2, 4 通道) → F3 Adapter ✅ → F4 生图 x2 ✅ (DoubaoGen, both success) → F5 审片 ✅ (双图 accepted) → F6 Memory Draft ✅ → F7 ⏭️ (memory write not authorized) → F8 Closeout ✅
+- 2 张人像均 accepted_candidate，run_1 为首选。
+- 授权包已消耗（2/2 calls），再次生图需新 A5 授权。
 - Review Console 可人工评分和审批。
 - 资产只保存路径引用和摘要，不把图片二进制写入长期记忆。
 - memory_delta 只生成写入申请，不绕过审批写 DailyNote。
