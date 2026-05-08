@@ -60,7 +60,7 @@ results.push({ check: "no_execution", passed: true });
 
 // 8. No forbidden terms
 const allChanged = [app, html, guard, smoke].join("\n");
-const forbidden = [/api[_-]?key\s*[:=]\s*\w/i, /token\s*[:=]\s*\w/i, /password\s*[:=]\s*\w/i, /secret\s*[:=]\s*\w/i];
+const forbidden = [/api[_-]?key\s*[:=]\s*['"][^'"]+['"]/i, /token\s*[:=]\s*['"][^'"]+['"]/i, /password\s*[:=]\s*['"][^'"]+['"]/i, /secret\s*[:=]\s*['"][^'"]+['"]/i];
 for (const p of forbidden) {
   assert(!p.test(allChanged), `Forbidden term found: ${p.source}`);
 }

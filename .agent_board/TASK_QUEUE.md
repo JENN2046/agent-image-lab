@@ -9,7 +9,7 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
-v6.3 Session Store Interaction — implement interactive draft-only session management panel on v6 Product Runtime. closes Task/Asset/Session triangle foundation.
+v6.4 Memory Queue Interaction — implement draft-only memory queue with approval/rejection/blocking/tracking on v6 Product Runtime. draft_only, no-execution.
 ```
 
 ---
@@ -54,7 +54,7 @@ none
 ### todo
 
 ```text
-1. v6.3: next incremental layer (Session Store interaction or other user direction).
+1. Next: user direction or v6.5 incremental layer. v6.0/v6.1/v6.2/v6.3/v6.4 all completed.
 ```
 
 ### done

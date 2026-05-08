@@ -1,5 +1,19 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v6.4 Memory Queue Interaction
+
+```text
+Status: v6.4 — Memory Queue draft-only interaction layer implemented. approval_status toggle (pending/approved/rejected/blocked), reviewer_role, should_write_to_vcp intent, block_reason_cn, reject_reason_cn, queue counts. All behaviors keep draft_only/no-execution.
+v6.0 validator: scripts/validate_v6_0_product_runtime_kickoff.js
+v6.1 validator: scripts/validate_v6_1_task_panel_interaction.js
+v6.2 validator: scripts/validate_v6_2_asset_index_interaction.js
+v6.3 validator: scripts/validate_v6_3_session_store_interaction.js
+v6.4 validator: scripts/validate_v6_4_memory_queue_interaction.js
+Runtime suite: all passed
+Push/tag/release: blocked pending separate authorization
+Next: pending user direction
+```
+
 ## v6.3 Session Store Interaction
 
 ```text

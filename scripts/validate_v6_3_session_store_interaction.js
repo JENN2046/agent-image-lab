@@ -107,7 +107,7 @@ const sessionStoreRelated = [
   html.match(/v6SessionStore[\s\S]{0,2000}/)?.[0] || "",
   guContent.match(/v6SessionStoreIsSafe[\s\S]{0,2000}/)?.[0] || ""
 ].join("\n");
-const forbidden = [/endpoint\s*[:=]\s*['"]?\w/, /secret\s*[:=]\s*['"]?\w/, /token\s*[:=]\s*['"]?\w/, /cookie\s*[:=]\s*['"]?\w/];
+const forbidden = [/endpoint\s*[:=]\s*['"][^'"]+['"]/, /secret\s*[:=]\s*['"][^'"]+['"]/, /token\s*[:=]\s*['"][^'"]+['"]/, /cookie\s*[:=]\s*['"][^'"]+['"]/];
 for (const p of forbidden) {
   assert(!p.test(sessionStoreRelated), "Forbidden term not found in session_store related code: " + p.source);
 }

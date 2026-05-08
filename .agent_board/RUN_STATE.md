@@ -9,7 +9,7 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-v6.3 Session Store Interaction — implement interactive draft-only session management panel on v6 Product Runtime. closes Task/Asset/Session triangle foundation.
+v6.4 Memory Queue Interaction — implement draft-only memory queue with approval/rejection/blocking/tracking on v6 Product Runtime. draft_only, no-execution.
 ```
 
 ## Current Branch
@@ -21,7 +21,7 @@ master tracking origin/master
 ## Current Phase
 
 ```text
-v6.2 — Asset Index Interaction. Interactive Asset Index with editable fields, status toggles, and local filtering layered on v6 Product Runtime. draft_only, no-execution.
+v6.4 — Memory Queue Interaction. Draft-only memory queue with approval_status toggle, reviewer_role, should_write_to_vcp intent, and queue counts. All behaviors keep draft_only/no-execution.
 ```
 
 ## Current Task

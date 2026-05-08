@@ -308,6 +308,34 @@ function createRuntimeContext() {
   add("v6SessionImportStatusRead"); add("v6SessionReasonRead");
   add("v6SessionRestoreRead"); add("v6SessionListCount");
   add("v6SessionVisibleCount");
+  // v6.4 — interactive Memory Queue controls
+  add("v6MQMemoryItemId", { value: "mem-item-001" });
+  add("v6MQLinkedTaskId");
+  add("v6MQLinkedAssetRef");
+  add("v6MQLinkedSessionId");
+  add("v6MQDiaryTitle");
+  add("v6MQDiaryPreview");
+  add("v6MQApprovalSelect");
+  add("v6MQReviewerRoleSelect");
+  add("v6MQShouldWriteCheck", { checked: false });
+  add("v6MQBlockReasonInput");
+  add("v6MQRejectReasonInput");
+  add("v6MQMemoryItemIdRead");
+  add("v6MQLinkedTaskIdRead");
+  add("v6MQLinkedAssetRefRead");
+  add("v6MQLinkedSessionIdRead");
+  add("v6MQApprovalRead");
+  add("v6MQReviewerRoleRead");
+  add("v6MQShouldWriteRead");
+  add("v6MQWriteAuthorizedRead");
+  add("v6MQWritePerformedRead");
+  add("v6MQCanonicalLocationRead");
+  add("v6MQCountTotal");
+  add("v6MQCountPending");
+  add("v6MQCountApproved");
+  add("v6MQCountRejected");
+  add("v6MQCountBlocked");
+  add("v6MQBoundaryText");
 
   // Initialize v6 select defaults (FakeElement defaults to "" without this)
   elements.get("v6TaskStageSelect").value = "draft";
@@ -333,6 +361,19 @@ function createRuntimeContext() {
   elements.get("v6SessionImportStatusSelect").value = "not_loaded";
   elements.get("v6SessionReasonInput").value = "";
   elements.get("v6SessionRestoreCheck").checked = false;
+
+  // Initialize v6.4 Memory Queue defaults
+  elements.get("v6MQMemoryItemId").value = "mem-item-001";
+  elements.get("v6MQLinkedTaskId").value = "";
+  elements.get("v6MQLinkedAssetRef").value = "";
+  elements.get("v6MQLinkedSessionId").value = "";
+  elements.get("v6MQDiaryTitle").value = "";
+  elements.get("v6MQDiaryPreview").value = "";
+  elements.get("v6MQApprovalSelect").value = "pending";
+  elements.get("v6MQReviewerRoleSelect").value = "ImageLab_Master";
+  elements.get("v6MQShouldWriteCheck").checked = false;
+  elements.get("v6MQBlockReasonInput").value = "";
+  elements.get("v6MQRejectReasonInput").value = "";
 
   const context = {
     window: {},
@@ -406,6 +447,7 @@ function assertRuntimeGuardApi(runtimeGuard) {
     "singleRealGenerationRetryGateIsSafe",
     "realMemoryWriteAuthorizationPackageIsSafe",
     "assetArchiveCandidateIsSafe",
+    "v6MemoryQueueIsSafe",
     "draftSideSurfacesAreSafe",
     "draftIsSafe",
     "assertDraftSafe"
@@ -988,6 +1030,67 @@ function main() {
 
   assert(elements.get("v6SessionImportStatusSelect").value === "not_loaded", "v6 import_preview status must reset to not_loaded.");
   assert(elements.get("v6SessionRestoreCheck").checked === false, "v6 restore_candidate must reset to unchecked.");
+
+  // v6.4 Memory Queue interaction — form inputs, readout sync, and draft boundary
+  assert(initialDraft.v6_product_runtime_draft.memory_queue.draft_only === true, "v6 memory_queue draft_only must be true.");
+  assert(initialDraft.v6_product_runtime_draft.memory_queue.side_effects_performed === false, "v6 memory_queue side_effects must be false.");
+  assert(initialDraft.v6_product_runtime_draft.memory_queue.queue_status === "draft_queue", "v6 memory_queue queue_status must be draft_queue.");
+  assert(initialDraft.v6_product_runtime_draft.memory_queue.entries.length === 1, "v6 memory_queue must have 1 entry.");
+  assert(initialDraft.v6_product_runtime_draft.memory_queue.entries[0].write_authorized === false, "v6 memory_queue entry write_authorized must be false.");
+  assert(initialDraft.v6_product_runtime_draft.memory_queue.entries[0].write_performed === false, "v6 memory_queue entry write_performed must be false.");
+  assert(initialDraft.v6_product_runtime_draft.memory_queue.entries[0].canonical_location_verified === false, "v6 memory_queue entry canonical_location_verified must be false.");
+  assert(initialDraft.v6_product_runtime_draft.memory_queue.entries[0].canonical_hash_matched === false, "v6 memory_queue entry canonical_hash_matched must be false.");
+  assert(initialDraft.v6_product_runtime_draft.memory_queue.entries[0].contains_secret === false, "v6 memory_queue entry contains_secret must be false.");
+  assert(initialDraft.v6_product_runtime_draft.memory_queue.entries[0].contains_private_path === false, "v6 memory_queue entry contains_private_path must be false.");
+  assert(initialDraft.v6_product_runtime_draft.memory_queue.entries[0].contains_customer_private_data === false, "v6 memory_queue entry contains_customer_private_data must be false.");
+  assert(initialDraft.v6_product_runtime_draft.memory_queue.entries[0].image_binary_included === false, "v6 memory_queue entry image_binary_included must be false.");
+  assert(initialDraft.v6_product_runtime_draft.memory_queue.entries[0].raw_payload_stored === false, "v6 memory_queue entry raw_payload_stored must be false.");
+  assert(initialDraft.v6_product_runtime_draft.memory_queue.counts.total === 1, "v6 memory_queue counts.total must be 1.");
+  assert(initialDraft.v6_product_runtime_draft.memory_queue.counts.pending === 1, "v6 memory_queue counts.pending must be 1.");
+  assert(initialDraft.v6_product_runtime_draft.memory_queue.no_execution_guard.api_called === false, "v6 memory_queue guard api_called must be false.");
+  assert(elements.get("v6MQMemoryItemId").value.length > 0, "v6 Memory Queue memory_item_id must render.");
+  assert(elements.get("v6MQApprovalRead").textContent === "pending", "v6 Memory Queue approval status readout must render pending.");
+  assert(elements.get("v6MQReviewerRoleRead").textContent === "ImageLab_Master", "v6 Memory Queue reviewer role readout must render.");
+  assert(elements.get("v6MQShouldWriteRead").textContent === "false", "v6 Memory Queue should_write_to_vcp readout must render false.");
+  assert(elements.get("v6MQWriteAuthorizedRead").textContent === "false", "v6 Memory Queue write_authorized must render false.");
+  assert(elements.get("v6MQWritePerformedRead").textContent === "false", "v6 Memory Queue write_performed must render false.");
+  assert(elements.get("v6MQCanonicalLocationRead").textContent === "false", "v6 Memory Queue canonical_location_verified must render false.");
+  assert(elements.get("v6MQCountTotal").textContent === "1", "v6 Memory Queue count total must render 1.");
+  assert(elements.get("v6MQCountPending").textContent === "1", "v6 Memory Queue count pending must render 1.");
+  assert(elements.get("v6MQBoundaryText").textContent.includes("draft_only"), "v6 Memory Queue boundary must render draft_only.");
+
+  // v6.4 interaction — approval_status toggle
+  elements.get("v6MQApprovalSelect").value = "approved";
+  assert(elements.get("v6MQApprovalSelect").value === "approved", "v6 approval_status select must hold approved.");
+
+  // v6.4 interaction — reviewer_role toggle
+  elements.get("v6MQReviewerRoleSelect").value = "Gatekeeper";
+  assert(elements.get("v6MQReviewerRoleSelect").value === "Gatekeeper", "v6 reviewer_role select must hold Gatekeeper.");
+
+  // v6.4 interaction — should_write_to_vcp toggle
+  elements.get("v6MQShouldWriteCheck").checked = true;
+  assert(elements.get("v6MQShouldWriteCheck").checked === true, "v6 should_write_to_vcp checkbox must be checked.");
+
+  // v6.4 interaction — blocked + block_reason_cn
+  elements.get("v6MQApprovalSelect").value = "blocked";
+  elements.get("v6MQBlockReasonInput").value = "测试阻断原因";
+  assert(elements.get("v6MQApprovalSelect").value === "blocked", "v6 approval_status must be blocked.");
+  assert(elements.get("v6MQBlockReasonInput").value === "测试阻断原因", "v6 block_reason_cn must hold value.");
+
+  // v6.4 interaction — rejected + reject_reason_cn
+  elements.get("v6MQApprovalSelect").value = "rejected";
+  elements.get("v6MQRejectReasonInput").value = "测试拒绝原因";
+  assert(elements.get("v6MQApprovalSelect").value === "rejected", "v6 approval_status must be rejected.");
+  assert(elements.get("v6MQRejectReasonInput").value === "测试拒绝原因", "v6 reject_reason_cn must hold value.");
+
+  // Reset Memory Queue controls
+  elements.get("v6MQApprovalSelect").value = "pending";
+  elements.get("v6MQReviewerRoleSelect").value = "ImageLab_Master";
+  elements.get("v6MQShouldWriteCheck").checked = false;
+  elements.get("v6MQBlockReasonInput").value = "";
+  elements.get("v6MQRejectReasonInput").value = "";
+  assert(elements.get("v6MQApprovalSelect").value === "pending", "v6 approval_status must reset to pending.");
+  assert(elements.get("v6MQShouldWriteCheck").checked === false, "v6 should_write_to_vcp must reset to unchecked.");
 
   assert(elements.get("batchTotal").textContent === "4", "Batch total must render.");
   assert(elements.get("batchAccepted").textContent === "1", "Batch accepted count must render.");

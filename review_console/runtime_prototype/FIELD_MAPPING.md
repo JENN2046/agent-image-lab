@@ -377,3 +377,44 @@ v6 Task Panel 保持在 no-execution 边界内，不触发真实插件、API、D
 | `session_list.entries[].disk_write_performed` | 固定 `false` | 不写入磁盘 |
 | `session_list.total_entries` / `visible_count` | 固定 `1` / `1` | 当前 1 个 primary entry |
 | `boundary_cn` | 固定中文说明 | 所有变更保持 draft_only，raw_payload_stored=false，disk_write_performed=false |
+
+## v6_product_runtime_draft.memory_queue
+
+| 字段 | 来源 | 说明 |
+| --- | --- | --- |
+| `draft_only` | 固定 `true` | 所有 memory queue 操作保持 draft_only |
+| `side_effects_performed` | 固定 `false` | 不触发真实副作用 |
+| `no_execution_guard` | `runtimeGuard.clone(cleanGuard)` | 5 个 flag 全部 false |
+| `queue_status` | 固定 `draft_queue` | 草案队列状态 |
+| `entries[].memory_item_id` | `v6MQMemoryItemId` | 自动生成或只读 |
+| `entries[].linked_task_id` | `v6MQLinkedTaskId` | 关联 Task ID |
+| `entries[].linked_asset_ref` | `v6MQLinkedAssetRef` | 关联资产引用 |
+| `entries[].linked_session_id` | `v6MQLinkedSessionId` | 关联 Session ID |
+| `entries[].chinese_diary_title` | `v6MQDiaryTitle` | 中文日记标题 |
+| `entries[].chinese_diary_content_preview` | `v6MQDiaryPreview` | 中文日记正文预览 |
+| `entries[].approval_status` | `v6MQApprovalSelect` | pending / approved / rejected / blocked |
+| `entries[].reviewer_role` | `v6MQReviewerRoleSelect` | ImageLab_Master / Archivist_Agent / Gatekeeper / Human |
+| `entries[].should_write_to_vcp` | `v6MQShouldWriteCheck` | 未来写入申请意图，不代表已写入 |
+| `entries[].write_authorized` | 固定 `false` | 不授予写入授权 |
+| `entries[].write_performed` | 固定 `false` | 不执行写入 |
+| `entries[].canonical_location_verified` | 固定 `false` | 不校验 canonical 位置 |
+| `entries[].canonical_hash_matched` | 固定 `false` | 不匹配 hash |
+| `entries[].block_reason_cn` | `v6MQBlockReasonInput` | blocked 状态时必填 |
+| `entries[].reject_reason_cn` | `v6MQRejectReasonInput` | rejected 状态时必填 |
+| `entries[].contains_secret` | 固定 `false` | 不包含 secret |
+| `entries[].contains_private_path` | 固定 `false` | 不包含私密路径 |
+| `entries[].contains_customer_private_data` | 固定 `false` | 不包含客户隐私数据 |
+| `entries[].image_binary_included` | 固定 `false` | 不包含图片二进制 |
+| `entries[].raw_payload_stored` | 固定 `false` | 不存储原始载荷 |
+| `entries[].created_at` / `updated_at` | `buildV6ProductRuntimeDraft()` | ISO 时间 |
+| `counts.total` / `pending` / `approved` / `rejected` / `blocked` | approval_status 派生 | 当前 1 个 primary entry |
+| `boundary_cn` | 固定中文说明 | 所有行为保持 draft_only / no-execution |
+
+交互要求：
+1. 修改 approval_status 后，draft 输出同步变化
+2. 修改 reviewer_role 后，draft 输出同步变化
+3. 修改 should_write_to_vcp 后，draft 输出同步变化，但 write_authorized/write_performed 仍必须 false
+4. blocked 状态必须有 block_reason_cn
+5. rejected 状态必须有 reject_reason_cn
+6. approved 状态可以 should_write_to_vcp=true，但仍不代表真实写入
+7. queue counts 至少能反映 primary item 当前状态

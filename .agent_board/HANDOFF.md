@@ -19,10 +19,9 @@ A:/agent-image-lab/agent-image-lab-v0.2
 ```text
 Branch: master
 Remote tracking: master...origin/master
-State: v6.3 Session Store Interaction — interactive Session Store with current_session display, linked_task_id/asset_refs inputs, import_preview 5-state status, restore_candidate toggle, session_list draft on v6 Product Runtime. v6.0+v6.1+v6.2+v6.3 validators pass. draft_only, no-execution. Task/Asset/Session triangle foundation closed. Push/tag/release require separate authorization.
-Local head before batch: ec60cff
-Origin/master before batch: ec60cff
-master...origin/master before batch: 0 0
+State: v6.4 Memory Queue Interaction — draft-only memory queue with approval/rejection/blocking/tracking on v6 Product Runtime. v6.0+v6.1+v6.2+v6.3+v6.4 validators pass. draft_only, no-execution. Push/tag/release require separate authorization.
+Local head: 823c122
+Origin/master: 823c122
 Current freshness doc: docs/226_runtime_review_batch_9a_state_freshness_index.md
 Current operator runbook: docs/227_runtime_review_batch_9c_operator_runbook_and_resume_capsule.md
 Current compatibility matrix: docs/228_runtime_review_batch_9b_runtime_session_compatibility_matrix.md

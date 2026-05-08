@@ -781,3 +781,20 @@ pre {
   font-size: 0.85rem;
   line-height: 1.4;
 }
+
+/* v6.4 Memory Queue */
+#v6MemoryQueue fieldset {
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  border: 1px solid #3a4a4a;
+  border-radius: 6px;
+  background: #141e22;
+}
+#v6MemoryQueue legend {
+  font-size: 0.8rem;
+  color: #8aa;
+  padding: 0 4px;
+}
+#v6MQShouldWriteCheck {
+  margin-right: 6px;
+}

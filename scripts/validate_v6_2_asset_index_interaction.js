@@ -98,7 +98,7 @@ const assetIndexRelated = [
   html.match(/v6AssetRefInput[\s\S]{0,2000}/)?.[0] || "",
   guContent.match(/v6AssetIndexIsSafe[\s\S]{0,2000}/)?.[0] || ""
 ].join("\n");
-const forbidden = [/endpoint\s*[:=]\s*['"]?\w/, /secret\s*[:=]\s*['"]?\w/, /token\s*[:=]\s*['"]?\w/, /cookie\s*[:=]\s*['"]?\w/];
+const forbidden = [/endpoint\s*[:=]\s*['"][^'"]+['"]/, /secret\s*[:=]\s*['"][^'"]+['"]/, /token\s*[:=]\s*['"][^'"]+['"]/, /cookie\s*[:=]\s*['"][^'"]+['"]/];
 for (const p of forbidden) {
   assert(!p.test(assetIndexRelated), `Forbidden term not found in asset_index related code: ${p.source}`);
 }

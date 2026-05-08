@@ -1,0 +1,45 @@
+# v6.4 Memory Queue Interaction Example
+# This file is a schema example only. All values are dummy placeholders.
+# No real VCP memory, DailyNote, plugin, API, or file write is performed.
+
+v6_product_runtime_draft:
+  memory_queue:
+    draft_only: true
+    side_effects_performed: false
+    no_execution_guard:
+      api_called: false
+      daily_note_called: false
+      vcp_plugin_called: false
+      disk_write_performed: false
+      image_file_created: false
+    queue_status: draft_queue
+    entries:
+      - memory_item_id: "mem-item-001"
+        linked_task_id: "task-001"
+        linked_asset_ref: "asset-draft-001"
+        linked_session_id: "session-001"
+        chinese_diary_title: "评审记录：Photo Studio OS 风格一致性"
+        chinese_diary_content_preview: "本次评审确认构图稳定，细节噪点仍需人工判断。建议后续写入记忆前完成审片。"
+        approval_status: "pending"
+        reviewer_role: "ImageLab_Master"
+        should_write_to_vcp: false
+        write_authorized: false
+        write_performed: false
+        canonical_location_verified: false
+        canonical_hash_matched: false
+        block_reason_cn: null
+        reject_reason_cn: null
+        contains_secret: false
+        contains_private_path: false
+        contains_customer_private_data: false
+        image_binary_included: false
+        raw_payload_stored: false
+        created_at: "2026-05-09T00:00:00.000Z"
+        updated_at: "2026-05-09T00:00:00.000Z"
+    counts:
+      total: 1
+      pending: 1
+      approved: 0
+      rejected: 0
+      blocked: 0
+    boundary_cn: "所有行为保持 draft_only / no-execution。write_authorized=false, write_performed=false, canonical_location_verified=false。should_write_to_vcp 只代表未来写入申请意图，不代表已写入。"

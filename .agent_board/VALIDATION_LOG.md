@@ -1,5 +1,29 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## v6.4 Memory Queue Interaction
+
+```text
+Current phase: v6.4 Memory Queue Interaction
+Scope: Memory Queue draft-only interaction layer (approval_status toggle, reviewer_role, should_write_to_vcp intent, block_reason_cn, reject_reason_cn, queue counts), draft-only guard (v6MemoryQueueIsSafe, 27 checks), smoke test, v6.4 validator (25 checks)
+No real VCPChat/VCPToolBox read.
+No real file read.
+No plugin/API/DailyNote/VCP memory/image action.
+No commit/tag/push/PR/release.
+node --check review_console/runtime_prototype/app.js: passed
+node --check review_console/runtime_prototype/runtime_guard.js: passed
+node --check scripts/validate_v6_4_memory_queue_interaction.js: passed
+node scripts/validate_v6_4_memory_queue_interaction.js: passed
+node scripts/validate_v6_3_session_store_interaction.js: passed
+node scripts/validate_v6_2_asset_index_interaction.js: passed
+node scripts/validate_v6_1_task_panel_interaction.js: passed
+node scripts/validate_v6_0_product_runtime_kickoff.js: passed
+node scripts/validate_runtime_prototype_smoke.js: passed
+node scripts/validate_runtime_prototype_suite.js: passed
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1: passed
+git diff --check: passed
+```
+
 ## v6.3 Session Store Interaction
 
 ```text

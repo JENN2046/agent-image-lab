@@ -876,6 +876,113 @@
 
             <p class="v6-draft-boundary-text">所有变更保持 draft_only。raw_payload_stored=false, disk_write_performed=false, 无磁盘写入。</p>
           </article>
+
+          <article id="v6MemoryQueue">
+            <h3>Memory Queue <span class="v6-asset-index-badge">draft-only</span></h3>
+            <p class="panel-boundary">记忆草案队列。只排队不写入，所有行为保持 draft_only / no-execution。</p>
+
+            <fieldset class="v6-form-group">
+              <legend>Primary Memory Entry 编辑</legend>
+
+              <div class="v6-form-row">
+                <div class="v6-form-group">
+                  <label for="v6MQMemoryItemId">memory_item_id</label>
+                  <input type="text" id="v6MQMemoryItemId" placeholder="mem-item-001" maxlength="64" readonly />
+                </div>
+                <div class="v6-form-group">
+                  <label for="v6MQLinkedTaskId">linked_task_id</label>
+                  <input type="text" id="v6MQLinkedTaskId" placeholder="关联 Task ID" maxlength="64" />
+                </div>
+              </div>
+
+              <div class="v6-form-row">
+                <div class="v6-form-group">
+                  <label for="v6MQLinkedAssetRef">linked_asset_ref</label>
+                  <input type="text" id="v6MQLinkedAssetRef" placeholder="关联资产引用" maxlength="120" />
+                </div>
+                <div class="v6-form-group">
+                  <label for="v6MQLinkedSessionId">linked_session_id</label>
+                  <input type="text" id="v6MQLinkedSessionId" placeholder="关联 Session ID" maxlength="64" />
+                </div>
+              </div>
+
+              <div class="v6-form-group">
+                <label for="v6MQDiaryTitle">chinese_diary_title</label>
+                <input type="text" id="v6MQDiaryTitle" placeholder="中文日记标题…" maxlength="200" />
+              </div>
+
+              <div class="v6-form-group">
+                <label for="v6MQDiaryPreview">chinese_diary_content_preview</label>
+                <textarea id="v6MQDiaryPreview" rows="4" placeholder="中文日记正文预览…" maxlength="1000"></textarea>
+              </div>
+
+              <div class="v6-form-row">
+                <div class="v6-form-group">
+                  <label for="v6MQApprovalSelect">approval_status</label>
+                  <select id="v6MQApprovalSelect">
+                    <option value="pending">pending</option>
+                    <option value="approved">approved</option>
+                    <option value="rejected">rejected</option>
+                    <option value="blocked">blocked</option>
+                  </select>
+                </div>
+                <div class="v6-form-group">
+                  <label for="v6MQReviewerRoleSelect">reviewer_role</label>
+                  <select id="v6MQReviewerRoleSelect">
+                    <option value="ImageLab_Master">ImageLab_Master</option>
+                    <option value="Archivist_Agent">Archivist_Agent</option>
+                    <option value="Gatekeeper">Gatekeeper</option>
+                    <option value="Human">Human</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="v6-form-row">
+                <div class="v6-form-group">
+                  <label for="v6MQShouldWriteCheck">
+                    <input type="checkbox" id="v6MQShouldWriteCheck" />
+                    should_write_to_vcp（未来写入申请意图）
+                  </label>
+                </div>
+              </div>
+
+              <div class="v6-form-group">
+                <label for="v6MQBlockReasonInput">block_reason_cn（blocked 时必填）</label>
+                <input type="text" id="v6MQBlockReasonInput" placeholder="阻断原因…" maxlength="200" />
+              </div>
+
+              <div class="v6-form-group">
+                <label for="v6MQRejectReasonInput">reject_reason_cn（rejected 时必填）</label>
+                <input type="text" id="v6MQRejectReasonInput" placeholder="拒绝原因…" maxlength="200" />
+              </div>
+            </fieldset>
+
+            <dl class="meta v6-readout">
+              <div><dt>memory_item_id</dt><dd id="v6MQMemoryItemIdRead">-</dd></div>
+              <div><dt>linked_task_id</dt><dd id="v6MQLinkedTaskIdRead">-</dd></div>
+              <div><dt>linked_asset_ref</dt><dd id="v6MQLinkedAssetRefRead">-</dd></div>
+              <div><dt>linked_session_id</dt><dd id="v6MQLinkedSessionIdRead">-</dd></div>
+              <div><dt>approval_status</dt><dd id="v6MQApprovalRead">pending</dd></div>
+              <div><dt>reviewer_role</dt><dd id="v6MQReviewerRoleRead">ImageLab_Master</dd></div>
+              <div><dt>should_write_to_vcp</dt><dd id="v6MQShouldWriteRead">false</dd></div>
+              <div><dt>write_authorized</dt><dd id="v6MQWriteAuthorizedRead">false</dd></div>
+              <div><dt>write_performed</dt><dd id="v6MQWritePerformedRead">false</dd></div>
+              <div><dt>canonical_location_verified</dt><dd id="v6MQCanonicalLocationRead">false</dd></div>
+            </dl>
+
+            <fieldset class="v6-form-group">
+              <legend>队列计数</legend>
+              <dl class="meta v6-readout">
+                <div><dt>total</dt><dd id="v6MQCountTotal">-</dd></div>
+                <div><dt>pending</dt><dd id="v6MQCountPending">-</dd></div>
+                <div><dt>approved</dt><dd id="v6MQCountApproved">-</dd></div>
+                <div><dt>rejected</dt><dd id="v6MQCountRejected">-</dd></div>
+                <div><dt>blocked</dt><dd id="v6MQCountBlocked">-</dd></div>
+              </dl>
+            </fieldset>
+
+            <p class="v6-draft-boundary-text" id="v6MQBoundaryText">所有行为保持 draft_only / no-execution。write_authorized=false, write_performed=false, 无真实写入。</p>
+          </article>
         </section>
         <pre id="draftOutput" hidden></pre>
       </section>

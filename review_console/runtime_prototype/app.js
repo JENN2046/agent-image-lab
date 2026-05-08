@@ -310,7 +310,35 @@ const els = {
   v6AssetDecisionRead: document.getElementById("v6AssetDecisionRead"),
   v6AssetMemoryRead: document.getElementById("v6AssetMemoryRead"),
   v6AssetCaseRead: document.getElementById("v6AssetCaseRead"),
-  v6AssetVisibleCount: document.getElementById("v6AssetVisibleCount")
+  v6AssetVisibleCount: document.getElementById("v6AssetVisibleCount"),
+  // v6.4 Memory Queue Interaction
+  v6MQMemoryItemId: document.getElementById("v6MQMemoryItemId"),
+  v6MQLinkedTaskId: document.getElementById("v6MQLinkedTaskId"),
+  v6MQLinkedAssetRef: document.getElementById("v6MQLinkedAssetRef"),
+  v6MQLinkedSessionId: document.getElementById("v6MQLinkedSessionId"),
+  v6MQDiaryTitle: document.getElementById("v6MQDiaryTitle"),
+  v6MQDiaryPreview: document.getElementById("v6MQDiaryPreview"),
+  v6MQApprovalSelect: document.getElementById("v6MQApprovalSelect"),
+  v6MQReviewerRoleSelect: document.getElementById("v6MQReviewerRoleSelect"),
+  v6MQShouldWriteCheck: document.getElementById("v6MQShouldWriteCheck"),
+  v6MQBlockReasonInput: document.getElementById("v6MQBlockReasonInput"),
+  v6MQRejectReasonInput: document.getElementById("v6MQRejectReasonInput"),
+  v6MQMemoryItemIdRead: document.getElementById("v6MQMemoryItemIdRead"),
+  v6MQLinkedTaskIdRead: document.getElementById("v6MQLinkedTaskIdRead"),
+  v6MQLinkedAssetRefRead: document.getElementById("v6MQLinkedAssetRefRead"),
+  v6MQLinkedSessionIdRead: document.getElementById("v6MQLinkedSessionIdRead"),
+  v6MQApprovalRead: document.getElementById("v6MQApprovalRead"),
+  v6MQReviewerRoleRead: document.getElementById("v6MQReviewerRoleRead"),
+  v6MQShouldWriteRead: document.getElementById("v6MQShouldWriteRead"),
+  v6MQWriteAuthorizedRead: document.getElementById("v6MQWriteAuthorizedRead"),
+  v6MQWritePerformedRead: document.getElementById("v6MQWritePerformedRead"),
+  v6MQCanonicalLocationRead: document.getElementById("v6MQCanonicalLocationRead"),
+  v6MQCountTotal: document.getElementById("v6MQCountTotal"),
+  v6MQCountPending: document.getElementById("v6MQCountPending"),
+  v6MQCountApproved: document.getElementById("v6MQCountApproved"),
+  v6MQCountRejected: document.getElementById("v6MQCountRejected"),
+  v6MQCountBlocked: document.getElementById("v6MQCountBlocked"),
+  v6MQBoundaryText: document.getElementById("v6MQBoundaryText")
 };
 
 let activeDraftView = "readable";
@@ -3227,9 +3255,74 @@ function buildV6ProductRuntimeDraft(createdAt) {
         },
         boundary_cn: "所有变更保持 draft_only。raw_payload_stored=false, disk_write_performed=false, 无磁盘写入。"
       };
-    }()
-  };
-}
+    }(),
+
+    memory_queue: function () {
+        var memItemId = els.v6MQMemoryItemId.value.trim() || "mem-item-" + Date.now();
+        var linkedTaskId = els.v6MQLinkedTaskId.value.trim() || taskId;
+        var linkedAssetRef = els.v6MQLinkedAssetRef.value.trim() || null;
+        var linkedSessionId = els.v6MQLinkedSessionId.value.trim() || sessionId;
+        var diaryTitle = els.v6MQDiaryTitle.value.trim() || "记忆草案条目";
+        var diaryPreview = els.v6MQDiaryPreview.value.trim() || "未填写中文记忆正文预览。";
+        var approvalStatus = els.v6MQApprovalSelect.value;
+        var reviewerRole = els.v6MQReviewerRoleSelect.value;
+        var shouldWriteToVcp = els.v6MQShouldWriteCheck.checked;
+        var blockReasonCn = els.v6MQBlockReasonInput.value.trim() || null;
+        var rejectReasonCn = els.v6MQRejectReasonInput.value.trim() || null;
+        var now = createdAt;
+
+        var entries = [{
+          memory_item_id: memItemId,
+          linked_task_id: linkedTaskId,
+          linked_asset_ref: linkedAssetRef,
+          linked_session_id: linkedSessionId,
+          chinese_diary_title: diaryTitle,
+          chinese_diary_content_preview: diaryPreview,
+          approval_status: approvalStatus,
+          reviewer_role: reviewerRole,
+          should_write_to_vcp: shouldWriteToVcp,
+          write_authorized: false,
+          write_performed: false,
+          canonical_location_verified: false,
+          canonical_hash_matched: false,
+          block_reason_cn: blockReasonCn,
+          reject_reason_cn: rejectReasonCn,
+          contains_secret: false,
+          contains_private_path: false,
+          contains_customer_private_data: false,
+          image_binary_included: false,
+          raw_payload_stored: false,
+          created_at: now,
+          updated_at: now
+        }];
+
+        var pendCount = 0, apprCount = 0, rejCount = 0, blkCount = 0;
+        for (var i2 = 0; i2 < entries.length; i2++) {
+          var s = entries[i2].approval_status;
+          if (s === "pending") { pendCount++; }
+          else if (s === "approved") { apprCount++; }
+          else if (s === "rejected") { rejCount++; }
+          else if (s === "blocked") { blkCount++; }
+        }
+
+        return {
+          draft_only: true,
+          side_effects_performed: false,
+          no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard),
+          queue_status: "draft_queue",
+          entries: entries,
+          counts: {
+            total: entries.length,
+            pending: pendCount,
+            approved: apprCount,
+            rejected: rejCount,
+            blocked: blkCount
+          },
+          boundary_cn: "所有行为保持 draft_only / no-execution。write_authorized=false, write_performed=false, canonical_location_verified=false。should_write_to_vcp 只代表未来写入申请意图，不代表已写入。"
+        };
+      }()
+    };
+  }
 
 function buildDraft() {
   const createdAt = nowIso();
@@ -4067,6 +4160,42 @@ function renderV6ProductRuntime(draft) {
   els.v6SessionReasonRead.textContent = ip.reason_cn || "-";
   els.v6SessionRestoreRead.textContent = cs.restore_candidate ? "是" : "否";
   els.v6SessionVisibleCount.textContent = (sl.visible_count != null ? sl.visible_count : 0) + "/" + (sl.total_entries != null ? sl.total_entries : 0);
+
+  // v6.4 Memory Queue — sync form inputs and readout from draft
+  var mq = v6.memory_queue;
+  if (mq) {
+    var mqEntry = (mq.entries && mq.entries[0]) || {};
+    els.v6MQMemoryItemId.value = mqEntry.memory_item_id || "mem-item-" + Date.now();
+    if (mqEntry.linked_task_id) els.v6MQLinkedTaskId.value = mqEntry.linked_task_id;
+    if (mqEntry.linked_asset_ref) els.v6MQLinkedAssetRef.value = mqEntry.linked_asset_ref;
+    if (mqEntry.linked_session_id) els.v6MQLinkedSessionId.value = mqEntry.linked_session_id;
+    if (mqEntry.chinese_diary_title) els.v6MQDiaryTitle.value = mqEntry.chinese_diary_title;
+    if (mqEntry.chinese_diary_content_preview) els.v6MQDiaryPreview.value = mqEntry.chinese_diary_content_preview;
+    els.v6MQApprovalSelect.value = mqEntry.approval_status || "pending";
+    els.v6MQReviewerRoleSelect.value = mqEntry.reviewer_role || "ImageLab_Master";
+    els.v6MQShouldWriteCheck.checked = mqEntry.should_write_to_vcp === true;
+    if (mqEntry.block_reason_cn) els.v6MQBlockReasonInput.value = mqEntry.block_reason_cn;
+    if (mqEntry.reject_reason_cn) els.v6MQRejectReasonInput.value = mqEntry.reject_reason_cn;
+
+    els.v6MQMemoryItemIdRead.textContent = mqEntry.memory_item_id || "-";
+    els.v6MQLinkedTaskIdRead.textContent = mqEntry.linked_task_id || "-";
+    els.v6MQLinkedAssetRefRead.textContent = mqEntry.linked_asset_ref || "-";
+    els.v6MQLinkedSessionIdRead.textContent = mqEntry.linked_session_id || "-";
+    els.v6MQApprovalRead.textContent = mqEntry.approval_status || "pending";
+    els.v6MQReviewerRoleRead.textContent = mqEntry.reviewer_role || "ImageLab_Master";
+    els.v6MQShouldWriteRead.textContent = mqEntry.should_write_to_vcp ? "true（未来写入申请意图）" : "false";
+    els.v6MQWriteAuthorizedRead.textContent = "false";
+    els.v6MQWritePerformedRead.textContent = "false";
+    els.v6MQCanonicalLocationRead.textContent = "false";
+
+    var cnts = mq.counts || {};
+    els.v6MQCountTotal.textContent = String(cnts.total != null ? cnts.total : 0);
+    els.v6MQCountPending.textContent = String(cnts.pending != null ? cnts.pending : 0);
+    els.v6MQCountApproved.textContent = String(cnts.approved != null ? cnts.approved : 0);
+    els.v6MQCountRejected.textContent = String(cnts.rejected != null ? cnts.rejected : 0);
+    els.v6MQCountBlocked.textContent = String(cnts.blocked != null ? cnts.blocked : 0);
+    els.v6MQBoundaryText.textContent = mq.boundary_cn || "所有行为保持 draft_only / no-execution。";
+  }
 }
 
 function renderSessionTransfer(sessionExportDraft) {
@@ -4306,6 +4435,14 @@ function init() {
     if (el) {
       el.addEventListener("input", () => { trackedRender("编辑 Session Store"); });
       el.addEventListener("change", () => { trackedRender("编辑 Session Store"); });
+    }
+  });
+
+  // v6.4 Memory Queue interaction listeners
+  [els.v6MQLinkedTaskId, els.v6MQLinkedAssetRef, els.v6MQLinkedSessionId, els.v6MQDiaryTitle, els.v6MQDiaryPreview, els.v6MQApprovalSelect, els.v6MQReviewerRoleSelect, els.v6MQShouldWriteCheck, els.v6MQBlockReasonInput, els.v6MQRejectReasonInput].forEach(el => {
+    if (el) {
+      el.addEventListener("input", () => { trackedRender("编辑 Memory Queue"); });
+      el.addEventListener("change", () => { trackedRender("编辑 Memory Queue"); });
     }
   });
 
