@@ -8,10 +8,10 @@ a5_authorization_package:
   # ── Metadata ──
   metadata:
     package_id: "a5-package-20260508-phase-f-portrait"
-    activation_status: inactive_package
+    activation_status: active_package
     activation_phrase: "批准 Phase F 2次人像生图"
     authorized_by: "user"
-    authorized_at: null
+    authorized_at: "2026-05-08T12:00:00+08:00"
     expires_after: null
     mode: single_batch_a5_end_to_end
 
@@ -179,8 +179,8 @@ a5_authorization_package:
 
   # ── Boundary ──
   this_record_boundary:
-    activation_status: inactive_package
-    execution_authorized_by_this_record: false
+    activation_status: active_package
+    execution_authorized_by_this_record: true
     real_vcpchat_read: false
     real_vcptoolbox_read: false
     bridge_calls_observed: 0
