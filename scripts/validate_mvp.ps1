@@ -5466,7 +5466,21 @@ if (response.dispatch_plan_draft.execution_blocked !== true) process.exit(4);
       [string]$FixturePath
     )
 
-    Get-Content -Raw -Encoding UTF8 -LiteralPath $FixturePath | & node $ScriptPath
+    $runner = @'
+const fs = require("node:fs");
+const { spawnSync } = require("node:child_process");
+const scriptPath = process.argv[2];
+const fixturePath = process.argv[3];
+const child = spawnSync(process.execPath, [scriptPath], {
+  input: fs.readFileSync(fixturePath),
+  encoding: "utf8",
+});
+if (child.stdout) process.stdout.write(child.stdout);
+if (child.stderr) process.stderr.write(child.stderr);
+process.exit(child.status || 0);
+'@
+
+    $runner | & node - $ScriptPath $FixturePath
   }
 
   $adapterCliPath = Join-Path $Root 'exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js'
