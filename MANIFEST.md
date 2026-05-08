@@ -53,7 +53,7 @@
 - Runtime Review Batch 10C future A5 authorization package consolidation 提供 `docs/231_runtime_review_batch_10c_future_a5_authorization_package_consolidation.md`；七领域 preflight 合并模板。
 - Runtime Review final local checkpoint 提供 `docs/232_runtime_review_final_local_checkpoint_sustained_autopilot_chain_closeout.md`；sustained autopilot chain 收束。
 - Phase E VCPChat subwindow integration preparation 提供 `review_console/phase_e_vcpchat_subwindow_integration_task_plan.md`、`review_console/phase_e_ipc_contract_draft.md`、`review_console/phase_e_security_acceptance_checklist.md`；子窗口接入任务书、IPC 契约（4 通道）、安全验收清单（77 项检查）。
-- Phase F MVP-B controlled real execution task plan 提供 `review_console/phase_f_mvp_b_controlled_real_execution_task_plan.md`；8 阶段执行计划、回滚策略、历史教训整合，不授权真实执行。
+- Phase F MVP-B controlled real execution 已完成：F1→F8，2 次 DoubaoGen 人像生图（双图 accepted），Bridge smoke 通过。记录：`review_console/phase_f_f8_closeout_record.md`，复盘：`review_console/phase_f_retrospective.md`
 - Tag and version strategy 提供 `docs/233_tag_and_version_strategy.md`；tag 命名规范、版本号策略、release 条件。
 
 ## Release readiness 文件
@@ -133,6 +133,12 @@
 - `review_console/phase_e_ipc_contract_draft.md`
 - `review_console/phase_e_security_acceptance_checklist.md`
 - `review_console/phase_f_mvp_b_controlled_real_execution_task_plan.md`
+- `review_console/phase_f_f1_preflight_record.md`
+- `review_console/phase_f_f2_bridge_smoke_record.md`
+- `review_console/phase_f_f8_closeout_record.md`
+- `review_console/phase_f_retrospective.md`
+- `integrations/vcp/phase_f_a5_authorization_package.md`
+- `prompt_templates/phase_f/a5_portrait_prompt_v1.txt`
 - `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_record.md`
 - `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_authorization_package.md`
 - `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_execution_record.md`
