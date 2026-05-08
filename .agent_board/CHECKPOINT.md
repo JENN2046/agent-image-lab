@@ -3,7 +3,8 @@
 ## Runtime Review Final Local Checkpoint — Sustained Autopilot Chain Closeout
 
 ```text
-Status: completed_validated_final_local_checkpoint
+Status: completed_validated_complete_validator_chain
+Validator chain: 9A (freshness) + 9B (compatibility) + 9C (runbook) + 10A (acceptance matrix) + 10B (replay index) + 10C (auth consolidation) — all 6 have dedicated validators
 Current phase: Runtime Review final local checkpoint — sustained autopilot chain closeout
 Closeout doc: docs/232_runtime_review_final_local_checkpoint_sustained_autopilot_chain_closeout.md
 Sustained autopilot chain: 9A → 9C → 9B → 10B → 10A → 10C → final checkpoint (7/7 complete)
