@@ -1,5 +1,15 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v6.5 Review Console Product Shell
+
+```text
+Status: v6.5 — Product Shell layout upgrade. Left nav + top workflow + main review workspace + right decision rail + bottom operations grid. All existing draft surfaces preserved. No guard relaxation. All v6.0-v6.5 validators pass.
+v6.0-v6.5 all validators pass
+Runtime suite: all passed
+Push/push/PR/release: blocked pending separate authorization
+Next: pending user direction
+```
+
 ## v6.4 Memory Queue Interaction
 
 ```text

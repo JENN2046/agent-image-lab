@@ -9,7 +9,7 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-v6.4 Memory Queue Interaction — implement draft-only memory queue with approval/rejection/blocking/tracking on v6 Product Runtime. draft_only, no-execution.
+v6.5 Review Console Product Shell — upgrade from long-page prototype to product-grade review cockpit. Left nav + top workflow + main workspace + right decision rail + bottom grid. draft_only, no-execution.
 ```
 
 ## Current Branch
