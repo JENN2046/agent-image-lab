@@ -19,7 +19,7 @@ A:/agent-image-lab/agent-image-lab-v0.2
 ```text
 Branch: master
 Remote tracking: master...origin/master
-State: Fully landed — Runtime Review chain + Phase E + Phase F COMPLETE (2 portraits accepted). 28 commits + 8 tags ahead of origin/master, clean tree, push at 18:07.
+State: Fully landed — Runtime Review chain + Phase E + Phase F COMPLETE (2 portraits accepted). All pushed to origin/master (31 commits, 9 tags), working tree clean.
 Local head before batch: ec60cff
 Origin/master before batch: ec60cff
 master...origin/master before batch: 0 0
@@ -576,7 +576,7 @@ Push/PR/release: still require explicit authorization or active version-action p
 运行 node scripts/validate_runtime_review_full_chain.js 确认全链状态。
 不要读取真实 VCPChat/VCPToolBox 源码，不要调用插件/API/DailyNote，不要创建图片，不要写出 workspace root。
 
-当前 Git 状态：master ahead of origin/master by 7 commits，5 tags（v5.18～v5.21+v5.20），push 待用户统一执行。
+当前 Git 状态：master 已与 origin/master 同步（31 commits, 9 tags），working tree clean。
 
 A5 历史：v10.0–v10.28 完成；DoubaoGen 6 次调用（1 accepted_candidate），DailyNoteWrite 1 次，CDP Runtime.evaluate 1 次 read-only。
 A5 未来：新 DoubaoGen/DailyNote/VCP memory/image 需要显式授权并匹配 docs/231 consolidation template。
