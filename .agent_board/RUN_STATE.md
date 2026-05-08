@@ -21,7 +21,7 @@ master tracking origin/master
 ## Current Phase
 
 ```text
-v6.0 — Product Runtime Kickoff. Task Panel + Asset Index + Session Store layered on existing Review Console. draft_only, no-execution.
+v6.1 — Task Panel Interaction. Interactive Task Panel with goal/stage/owner/next/blocked inputs layered on Review Console. draft_only, no-execution.
 ```
 
 ## Current Task

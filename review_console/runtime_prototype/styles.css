@@ -697,3 +697,36 @@ pre {
   }
 }
 
+/* v6 Product Runtime form elements */
+.v6-form-group {
+  margin-bottom: 0.6rem;
+}
+.v6-form-group label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-secondary, #888);
+  margin-bottom: 0.2rem;
+}
+.v6-form-group input,
+.v6-form-group select {
+  width: 100%;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--border, #444);
+  border-radius: 4px;
+  background: var(--bg-input, #1a1a2e);
+  color: var(--text, #eee);
+  font-size: 0.85rem;
+}
+.v6-form-row {
+  display: flex;
+  gap: 0.6rem;
+}
+.v6-form-row .v6-form-group {
+  flex: 1;
+}
+.v6-readout {
+  margin-top: 0.8rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--border, #444);
+}
+

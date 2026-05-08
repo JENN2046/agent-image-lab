@@ -303,3 +303,20 @@ v3.7 runtime patch 增加 host bridge mock 回执。Batch 4A 后页面默认通�
 | `status_cn` | host mock 中文摘要 | 脱敏中文回执，不包含路径、源码或敏感信息 |
 
 Host ack 不代表真实 VCPChat 接入、不代表 IPC handler 已创建、不代表 DailyNote 已写入。
+
+## v6_product_runtime_draft.task_panel
+
+| 字段 | 来源 | 说明 |
+| --- | --- | --- |
+| `task_id` | `buildV6ProductRuntimeDraft()` | 自动生成或关联 review session |
+| `visual_goal_cn` | `v6TaskGoalInput` | 用户输入，中文视觉目标，max 200 字 |
+| `current_stage` | `v6TaskStageSelect` | draft / planning / in_review / blocked / completed |
+| `owner_role` | `v6TaskOwnerSelect` | ImageLab_Master / Prompt_Designer / Gatekeeper / Archivist_Agent / Human |
+| `next_action` | `v6TaskNextInput` | 用户输入，下一步动作描述 |
+| `blocked_reason_cn` | `v6TaskBlockedInput` | blocked 状态时必填，否则可为 null |
+| `linked_review_session_id` | `v6TaskSessionInput` | 关联 Review Session，默认自动匹配 |
+| `draft_only` | 固定 true | 所有 v6 draft 保持 draft_only |
+| `side_effects_performed` | 固定 false | 不写磁盘、不调用外部系统 |
+| `no_execution_guard` | `runtimeGuard.clone(cleanGuard)` | 5 个 flag 全部 false |
+
+v6 Task Panel 保持在 no-execution 边界内，不触发真实插件、API、DailyNote 或 VCP memory。

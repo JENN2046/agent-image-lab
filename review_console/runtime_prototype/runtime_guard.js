@@ -348,6 +348,23 @@ window.ImageLabRuntimeGuard = (() => {
     return statuses === "accepted_candidate|needs_human_review|rejected";
   }
 
+  var VALID_TASK_STAGES = Object.freeze(["draft", "planning", "in_review", "blocked", "completed"]);
+
+  function v6ProductRuntimeIsSafe(draft) {
+    var v6 = draft && draft.v6_product_runtime_draft;
+    if (!v6) { return true; }
+    if (v6.layer_status !== "draft_only") { return false; }
+    var tp = v6.task_panel;
+    if (!tp) { return false; }
+    if (tp.draft_only !== true) { return false; }
+    if (tp.side_effects_performed !== false) { return false; }
+    if (!guardIsClean(v6.no_execution_guard)) { return false; }
+    if (VALID_TASK_STAGES.indexOf(tp.current_stage) === -1) { return false; }
+    if (typeof tp.visual_goal_cn !== "string") { return false; }
+    if (tp.current_stage === "blocked" && !tp.blocked_reason_cn) { return false; }
+    return true;
+  }
+
   function draftSideSurfacesAreSafe(draft) {
     const exportDraft = draft.runtime_session_export_draft;
     const deliveryPackage = draft.accepted_candidate_delivery_package_draft;
@@ -450,6 +467,7 @@ window.ImageLabRuntimeGuard = (() => {
     if (!singleRealGenerationRetryGateIsSafe(draft)) return false;
     if (!realMemoryWriteAuthorizationPackageIsSafe(draft)) return false;
     if (!assetArchiveCandidateIsSafe(draft)) return false;
+    if (!v6ProductRuntimeIsSafe(draft)) return false;
 
     const imageCase = draft.image_case_draft;
     if (imageCase.asset_status === "accepted" && imageCase.human_approval?.approved !== true) {
@@ -517,6 +535,9 @@ window.ImageLabRuntimeGuard = (() => {
     if (!assetArchiveCandidateIsSafe(draft)) {
       throw new Error("资产归档候选必须保持 metadata-only/no-binary，且不能包含真实写入标记。");
     }
+    if (!v6ProductRuntimeIsSafe(draft)) {
+      throw new Error("v6 Product Runtime 必须保持 draft_only，Task Panel stage 必须来自允许枚举，blocked 状态必须有 blocked_reason_cn，guard 必须 clean。");
+    }
     if (draft.image_case_draft.asset_status === "accepted" && draft.image_case_draft.human_approval?.approved !== true) {
       throw new Error("资产标记为 accepted 前必须先获得人工明确批准。");
     }
@@ -546,6 +567,8 @@ window.ImageLabRuntimeGuard = (() => {
     singleRealGenerationRetryGateIsSafe,
     realMemoryWriteAuthorizationPackageIsSafe,
     assetArchiveCandidateIsSafe,
+    v6ProductRuntimeIsSafe,
+    VALID_TASK_STAGES,
     draftSideSurfacesAreSafe,
     draftIsSafe,
     assertDraftSafe

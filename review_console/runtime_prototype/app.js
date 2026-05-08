@@ -254,12 +254,15 @@ const els = {
   draftOutput: document.getElementById("draftOutput"),
   // v6 Product Runtime
   v6TaskId: document.getElementById("v6TaskId"),
-  v6TaskGoal: document.getElementById("v6TaskGoal"),
+  v6TaskGoalInput: document.getElementById("v6TaskGoalInput"),
+  v6TaskStageSelect: document.getElementById("v6TaskStageSelect"),
+  v6TaskOwnerSelect: document.getElementById("v6TaskOwnerSelect"),
+  v6TaskNextInput: document.getElementById("v6TaskNextInput"),
+  v6TaskBlockedInput: document.getElementById("v6TaskBlockedInput"),
+  v6TaskSessionInput: document.getElementById("v6TaskSessionInput"),
+  v6TaskGuard: document.getElementById("v6TaskGuard"),
   v6TaskStage: document.getElementById("v6TaskStage"),
   v6TaskOwner: document.getElementById("v6TaskOwner"),
-  v6TaskNext: document.getElementById("v6TaskNext"),
-  v6TaskBlocked: document.getElementById("v6TaskBlocked"),
-  v6TaskLinkedSession: document.getElementById("v6TaskLinkedSession"),
   v6AssetRef: document.getElementById("v6AssetRef"),
   v6AssetHash: document.getElementById("v6AssetHash"),
   v6AssetStatus: document.getElementById("v6AssetStatus"),
@@ -3072,8 +3075,14 @@ function approvalPayload() {
 function buildV6ProductRuntimeDraft(createdAt) {
   const selectedItem = activeQueueItem();
   const sessionId = selectedItem?.session_id || `v6-session-${Date.now()}`;
-  const taskId = selectedItem?.task_id || null;
+  const taskId = selectedItem?.task_id || `task-${Date.now()}`;
   const caseId = selectedItem?.case_id || null;
+  const visualGoal = els.v6TaskGoalInput.value.trim() || "未填写视觉目标";
+  const stage = els.v6TaskStageSelect.value;
+  const owner = els.v6TaskOwnerSelect.value;
+  const nextAction = els.v6TaskNextInput.value.trim() || "未指定下一步";
+  const blockedReason = els.v6TaskBlockedInput.value.trim() || null;
+  const linkedSession = els.v6TaskSessionInput.value.trim() || sessionId;
 
   return {
     layer_name: "v6_product_runtime",
@@ -3083,12 +3092,14 @@ function buildV6ProductRuntimeDraft(createdAt) {
 
     task_panel: {
       task_id: taskId,
-      visual_goal_cn: "人像/静物视觉生产任务",
-      current_stage: "draft",
-      owner_role: "ImageLab_Master",
-      next_action: "人工填写任务描述和目标 prompt",
-      blocked_reason_cn: null,
-      linked_review_session_id: sessionId
+      visual_goal_cn: visualGoal,
+      current_stage: stage,
+      owner_role: owner,
+      next_action: nextAction,
+      blocked_reason_cn: blockedReason,
+      linked_review_session_id: linkedSession,
+      draft_only: true,
+      side_effects_performed: false
     },
 
     asset_index: {
@@ -3876,14 +3887,24 @@ function renderV6ProductRuntime(draft) {
   const v6 = draft.v6_product_runtime_draft;
   if (!v6) { return; }
 
-  // Task Panel
-  els.v6TaskId.textContent = v6.task_panel.task_id || "-";
-  els.v6TaskGoal.textContent = v6.task_panel.visual_goal_cn;
-  els.v6TaskStage.textContent = v6.task_panel.current_stage;
-  els.v6TaskOwner.textContent = v6.task_panel.owner_role;
-  els.v6TaskNext.textContent = v6.task_panel.next_action;
-  els.v6TaskBlocked.textContent = v6.task_panel.blocked_reason_cn || "无";
-  els.v6TaskLinkedSession.textContent = v6.task_panel.linked_review_session_id || "-";
+  // Task Panel — sync form inputs with draft
+  const tp = v6.task_panel;
+  if (els.v6TaskGoalInput.value !== tp.visual_goal_cn && tp.visual_goal_cn !== "未填写视觉目标") {
+    els.v6TaskGoalInput.value = tp.visual_goal_cn;
+  }
+  els.v6TaskStageSelect.value = tp.current_stage;
+  els.v6TaskOwnerSelect.value = tp.owner_role;
+  if (els.v6TaskNextInput.value !== tp.next_action && tp.next_action !== "未指定下一步") {
+    els.v6TaskNextInput.value = tp.next_action;
+  }
+  if (tp.blocked_reason_cn) els.v6TaskBlockedInput.value = tp.blocked_reason_cn;
+  if (tp.linked_review_session_id) els.v6TaskSessionInput.value = tp.linked_review_session_id;
+
+  // Readout
+  els.v6TaskId.textContent = tp.task_id || "-";
+  els.v6TaskStage.textContent = tp.current_stage;
+  els.v6TaskOwner.textContent = tp.owner_role;
+  els.v6TaskGuard.textContent = (tp.draft_only && !tp.side_effects_performed) ? "clean" : "dirty";
 
   // Asset Index
   const assetEntry = v6.asset_index.entries[0] || {};

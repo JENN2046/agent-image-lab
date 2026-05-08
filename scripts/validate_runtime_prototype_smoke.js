@@ -283,13 +283,22 @@ function createRuntimeContext() {
   add("assetArchiveCandidateBoundary");
   add("draftOutput");
   // v6 Product Runtime
-  add("v6TaskId"); add("v6TaskGoal"); add("v6TaskStage"); add("v6TaskOwner");
-  add("v6TaskNext"); add("v6TaskBlocked"); add("v6TaskLinkedSession");
+  add("v6TaskId"); add("v6TaskGoalInput"); add("v6TaskStageSelect"); add("v6TaskOwnerSelect");
+  add("v6TaskNextInput"); add("v6TaskBlockedInput"); add("v6TaskSessionInput");
+  add("v6TaskStage"); add("v6TaskOwner"); add("v6TaskGuard");
   add("v6AssetRef"); add("v6AssetHash"); add("v6AssetStatus"); add("v6AssetScore");
   add("v6AssetDecision"); add("v6AssetMemorySuitability"); add("v6AssetCaseId"); add("v6AssetCount");
   add("v6SessionId"); add("v6SessionFingerprint"); add("v6SessionDraftOnly");
   add("v6SessionSideEffects"); add("v6SessionExportable"); add("v6SessionImportCompatible");
   add("v6SessionTaskId"); add("v6SessionAssetRefs");
+
+  // Initialize v6 select defaults (FakeElement defaults to "" without this)
+  elements.get("v6TaskStageSelect").value = "draft";
+  elements.get("v6TaskOwnerSelect").value = "ImageLab_Master";
+  elements.get("v6TaskGoalInput").value = "";
+  elements.get("v6TaskNextInput").value = "";
+  elements.get("v6TaskBlockedInput").value = "";
+  elements.get("v6TaskSessionInput").value = "";
 
   const context = {
     window: {},
@@ -844,6 +853,7 @@ function main() {
   // v6 Product Runtime assertions
   assert(elements.get("v6TaskStage").textContent === "draft", "v6 Task Panel stage must render draft.");
   assert(elements.get("v6TaskOwner").textContent === "ImageLab_Master", "v6 Task Panel owner must render.");
+  assert(elements.get("v6TaskGuard").textContent === "clean", "v6 Task Panel guard must be clean.");
   assert(elements.get("v6AssetStatus").textContent === "draft", "v6 Asset Index status must render draft.");
   assert(elements.get("v6SessionDraftOnly").textContent === "是", "v6 Session Store draft_only must be true.");
   assert(elements.get("v6SessionSideEffects").textContent === "无", "v6 Session Store side_effects must be false.");
@@ -851,6 +861,29 @@ function main() {
   assert(initialDraft.v6_product_runtime_draft, "v6 Product Runtime draft must exist.");
   assert(initialDraft.v6_product_runtime_draft.layer_status === "draft_only", "v6 Product Runtime must be draft_only.");
   assert(initialDraft.v6_product_runtime_draft.no_execution_guard.api_called === false, "v6 guard api_called must be false.");
+  assert(initialDraft.v6_product_runtime_draft.task_panel.draft_only === true, "v6 task_panel draft_only must be true.");
+  assert(initialDraft.v6_product_runtime_draft.task_panel.side_effects_performed === false, "v6 task_panel side_effects must be false.");
+
+  // v6.1 Task Panel interaction — form inputs hold values correctly
+  elements.get("v6TaskGoalInput").value = "测试人像任务";
+  elements.get("v6TaskStageSelect").value = "blocked";
+  elements.get("v6TaskOwnerSelect").value = "Prompt_Designer";
+  elements.get("v6TaskNextInput").value = "写新 prompt";
+  elements.get("v6TaskBlockedInput").value = "等待 prompt 审批";
+  elements.get("v6TaskSessionInput").value = "test-session-001";
+
+  assert(elements.get("v6TaskGoalInput").value === "测试人像任务", "v6 visual_goal_cn input must hold value.");
+  assert(elements.get("v6TaskStageSelect").value === "blocked", "v6 current_stage select must hold value.");
+  assert(elements.get("v6TaskOwnerSelect").value === "Prompt_Designer", "v6 owner_role select must hold value.");
+  assert(elements.get("v6TaskNextInput").value === "写新 prompt", "v6 next_action input must hold value.");
+  assert(elements.get("v6TaskBlockedInput").value === "等待 prompt 审批", "v6 blocked_reason_cn input must hold value.");
+  assert(elements.get("v6TaskSessionInput").value === "test-session-001", "v6 session input must hold value.");
+
+  // Reset blocked state
+  elements.get("v6TaskStageSelect").value = "draft";
+  elements.get("v6TaskBlockedInput").value = "";
+  assert(elements.get("v6TaskStageSelect").value === "draft", "v6 stage must reset to draft.");
+  assert(elements.get("v6TaskBlockedInput").value === "", "v6 blocked reason must clear.");
   assert(elements.get("batchTotal").textContent === "4", "Batch total must render.");
   assert(elements.get("batchAccepted").textContent === "1", "Batch accepted count must render.");
   assert(elements.get("batchPending").textContent === "2", "Batch pending count must render.");

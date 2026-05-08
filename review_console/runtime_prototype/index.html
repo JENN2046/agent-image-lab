@@ -682,14 +682,49 @@
 
           <article id="v6TaskPanel">
             <h3>Task Panel</h3>
-            <dl class="meta">
+            <div class="v6-form-group">
+              <label for="v6TaskGoalInput">视觉目标</label>
+              <input type="text" id="v6TaskGoalInput" placeholder="描述本次视觉生产目标…" maxlength="200">
+            </div>
+            <div class="v6-form-row">
+              <div class="v6-form-group">
+                <label for="v6TaskStageSelect">当前阶段</label>
+                <select id="v6TaskStageSelect">
+                  <option value="draft">draft</option>
+                  <option value="planning">planning</option>
+                  <option value="in_review">in_review</option>
+                  <option value="blocked">blocked</option>
+                  <option value="completed">completed</option>
+                </select>
+              </div>
+              <div class="v6-form-group">
+                <label for="v6TaskOwnerSelect">负责人</label>
+                <select id="v6TaskOwnerSelect">
+                  <option value="ImageLab_Master">ImageLab_Master</option>
+                  <option value="Prompt_Designer">Prompt_Designer</option>
+                  <option value="Gatekeeper">Gatekeeper</option>
+                  <option value="Archivist_Agent">Archivist_Agent</option>
+                  <option value="Human">Human</option>
+                </select>
+              </div>
+            </div>
+            <div class="v6-form-group">
+              <label for="v6TaskNextInput">下一步动作</label>
+              <input type="text" id="v6TaskNextInput" placeholder="下一步做什么…" maxlength="200">
+            </div>
+            <div class="v6-form-group">
+              <label for="v6TaskBlockedInput">阻断原因（blocked 状态时必填）</label>
+              <input type="text" id="v6TaskBlockedInput" placeholder="当前被什么阻断…" maxlength="200">
+            </div>
+            <div class="v6-form-group">
+              <label for="v6TaskSessionInput">关联 Review Session ID</label>
+              <input type="text" id="v6TaskSessionInput" placeholder="留空自动使用当前 session…" maxlength="64">
+            </div>
+            <dl class="meta v6-readout">
               <div><dt>任务 ID</dt><dd id="v6TaskId">-</dd></div>
-              <div><dt>视觉目标</dt><dd id="v6TaskGoal">-</dd></div>
               <div><dt>当前阶段</dt><dd id="v6TaskStage">-</dd></div>
               <div><dt>负责人</dt><dd id="v6TaskOwner">-</dd></div>
-              <div><dt>下一步</dt><dd id="v6TaskNext">-</dd></div>
-              <div><dt>阻断原因</dt><dd id="v6TaskBlocked">-</dd></div>
-              <div><dt>关联 Session</dt><dd id="v6TaskLinkedSession">-</dd></div>
+              <div><dt>Guard</dt><dd id="v6TaskGuard">-</dd></div>
             </dl>
           </article>
 
