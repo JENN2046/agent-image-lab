@@ -60,7 +60,7 @@ none
 4. Update CHECKPOINT.md, RUN_STATE.md, VALIDATION_LOG.md, and HANDOFF.md after each meaningful batch.
 5. If the user wants deeper diagnosis, activate the v10.12 provider-side prompt fingerprint capture package only after explicit approval, or switch to alternate plugin/strategy planning.
 6. If the user wants to reuse a short approval flow, present a new current capsule first; bare `批准` only applies when Codex has just presented that exact capsule.
-7. Sustained autopilot chain (9A→10C) complete. Commit/tag/push/PR/release may proceed only when a concrete active version-action package exists and preflight passes.
+7. v6.0 Product Runtime Kickoff active. Push/tag/release blocked — require explicit separate authorization.
 8. Commit/tag/push/PR/release may proceed automatically only when a concrete active version-action package exists and preflight passes.
 9. Real execution, external reads, memory writes, image creation, and external writes may proceed automatically only when a concrete active package exists and preflight passes.
 ```

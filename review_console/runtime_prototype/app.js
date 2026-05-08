@@ -3308,6 +3308,9 @@ function buildDraft() {
     acceptedCandidateDeliveryPackageDraft,
     humanOverrideTraceabilityDraft
   });
+
+  const v6Draft = buildV6ProductRuntimeDraft(createdAt);
+
   const runtimeSessionExportDraft = buildRuntimeSessionExportDraft({
     createdAt,
     reviewQueueDraft,
@@ -3328,7 +3331,7 @@ function buildDraft() {
     singleRealGenerationRetryGateDraft,
     realMemoryWriteAuthorizationPackageDraft,
     assetArchiveCandidateDraft,
-    v6ProductRuntimeDraft: buildV6ProductRuntimeDraft(createdAt)
+    v6ProductRuntimeDraft: v6Draft
   });
 
   return {
@@ -3482,7 +3485,7 @@ function buildDraft() {
     },
     memory_completion_state_draft: memoryCompletionState,
     adapter_dry_run_handoff_draft: adapterDryRunHandoffDraft,
-    v6_product_runtime_draft: buildV6ProductRuntimeDraft(createdAt),
+    v6_product_runtime_draft: v6Draft,
     prototype_guard: runtimeGuard.clone(draftGuard)
   };
 }

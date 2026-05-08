@@ -1,5 +1,15 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v6.0 Product Runtime Kickoff
+
+```text
+Status: v6.0 kicked_off — Task Panel, Asset Index, Session Store layered on existing Review Console
+v6 validator: scripts/validate_v6_0_product_runtime_kickoff.js (10 checks)
+Runtime suite: 9/9 passed
+Push/tag/release: blocked pending separate authorization
+Next: v6.1 Task Panel interaction or user direction
+```
+
 ## Runtime Review Final Local Checkpoint — Sustained Autopilot Chain Closeout
 
 ```text
