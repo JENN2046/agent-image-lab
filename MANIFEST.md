@@ -52,6 +52,9 @@
 - Runtime Review Batch 10A release-candidate acceptance matrix 提供 `docs/230_runtime_review_batch_10a_release_candidate_acceptance_matrix.md`；八领域 25 行结构化验收矩阵。
 - Runtime Review Batch 10C future A5 authorization package consolidation 提供 `docs/231_runtime_review_batch_10c_future_a5_authorization_package_consolidation.md`；七领域 preflight 合并模板。
 - Runtime Review final local checkpoint 提供 `docs/232_runtime_review_final_local_checkpoint_sustained_autopilot_chain_closeout.md`；sustained autopilot chain 收束。
+- Phase E VCPChat subwindow integration preparation 提供 `review_console/phase_e_vcpchat_subwindow_integration_task_plan.md`、`review_console/phase_e_ipc_contract_draft.md`、`review_console/phase_e_security_acceptance_checklist.md`；子窗口接入任务书、IPC 契约（4 通道）、安全验收清单（77 项检查）。
+- Phase F MVP-B controlled real execution task plan 提供 `review_console/phase_f_mvp_b_controlled_real_execution_task_plan.md`；8 阶段执行计划、回滚策略、历史教训整合，不授权真实执行。
+- Tag and version strategy 提供 `docs/233_tag_and_version_strategy.md`；tag 命名规范、版本号策略、release 条件。
 
 ## Release readiness 文件
 
@@ -125,6 +128,11 @@
 - `docs/230_runtime_review_batch_10a_release_candidate_acceptance_matrix.md`
 - `docs/231_runtime_review_batch_10c_future_a5_authorization_package_consolidation.md`
 - `docs/232_runtime_review_final_local_checkpoint_sustained_autopilot_chain_closeout.md`
+- `docs/233_tag_and_version_strategy.md`
+- `review_console/phase_e_vcpchat_subwindow_integration_task_plan.md`
+- `review_console/phase_e_ipc_contract_draft.md`
+- `review_console/phase_e_security_acceptance_checklist.md`
+- `review_console/phase_f_mvp_b_controlled_real_execution_task_plan.md`
 - `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_record.md`
 - `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_authorization_package.md`
 - `review_console/embed_contract/vcpchat_external_remote_debug_verification_script_creation_execution_record.md`

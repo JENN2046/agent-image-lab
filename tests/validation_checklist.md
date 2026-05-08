@@ -27,7 +27,11 @@
 - [ ] `scripts/validate_runtime_review_batch_10a_acceptance_matrix.js` 存在并通过，机器验证八领域覆盖、状态分布。
 - [ ] `scripts/validate_runtime_review_batch_10c_auth_consolidation.js` 存在并通过，机器验证七领域模板、占位符根路径。
 - [ ] `scripts/validate_runtime_review_full_chain.js` 存在并通过，一次运行全部 6 个 batch validator，chain_complete=true。
-- [ ] 条件自动队列必须要求具体 active authorization package、preflight、最大调用/写入/版本动作次数、回滚方案、禁止输出和停止条件。
+- [ ] `review_console/phase_e_vcpchat_subwindow_integration_task_plan.md` 存在，定义 Phase E VCPChat 子窗口接入任务范围和技术约束。
+- [ ] `review_console/phase_e_ipc_contract_draft.md` 存在，定义 4 IPC 通道、消息 schema、sender 校验和错误处理。
+- [ ] `review_console/phase_e_security_acceptance_checklist.md` 存在，包含 77 项检查覆盖 8 个安全域。
+- [ ] `review_console/phase_f_mvp_b_controlled_real_execution_task_plan.md` 存在，定义 8 阶段执行计划、回滚策略和历史教训。
+- [ ] `docs/233_tag_and_version_strategy.md` 存在，定义 tag 命名规范、版本号策略和 release 条件。
 - [ ] 所有任务书要求的 MVP 文件存在。
 - [ ] 文件直接位于项目根目录下，没有创建第二套 `agent-image-lab/` 嵌套目录。
 - [ ] 可运行 `scripts/validate_mvp.ps1` 完成只读自动检查；该脚本不是 Adapter、VCP 插件或真实执行入口。
