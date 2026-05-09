@@ -1,0 +1,47 @@
+v7_27_watermark_provenance_diagnostic:
+  status: diagnostic_only
+  execution_authorized_by_this_record: false
+
+  source_run:
+    phase: v7_26
+    provider_type: direct_api
+    plugin_id: NativeDoubaoImage
+    command: generate
+    prompt_package_ref: prompts/image_generation/product_still_life_french_summer_rattan_bucket_bag_bicycle_v1.yaml
+    model_requested: doubao-seedream-5-0-260128
+    model_reported: doubao-seedream-5-0-260128
+    model_matches: true
+    api_calls_observed: 1
+    images_created: 1
+    retry_performed: false
+    output_path: runs/real_generation/v7_26_native_doubao_french_summer_rattan_bag_first_run/native_doubao_1778324208801_0.jpg
+
+  asset_acceptance_gate:
+    asset_status: needs_human_review
+    prompt_subject_match: pass
+    style_direction_match: pass
+    rattan_texture_visible: pass
+    bicycle_rear_rack_visible: pass
+    no_person_or_face_unless_expected: pass
+    no_watermark_or_generated_mark: fail
+    commercial_usability: partial_pass
+    memory_suitability: false
+
+  deviations:
+    - watermark_or_generated_mark_present
+    - product_partially_obstructed_by_leaf
+    - readable_page_texture_risk
+
+  watermark_provenance:
+    prompt_watermark_failure: possible
+    provider_watermark_failure: possible
+    downloader_or_runner_overlay_failure: unlikely_if_no_overlay_code_found
+    unknown_watermark_source: true
+    requires_controlled_followup: true
+
+  correction_plan:
+    next_phase: v7_28_french_summer_watermark_control_prompt_correction
+    new_a5_required: true
+    retry_allowed: false
+    memory_write_allowed: false
+    daily_note_write_allowed: false
