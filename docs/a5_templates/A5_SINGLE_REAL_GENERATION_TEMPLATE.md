@@ -1,6 +1,5 @@
-# A5 Single Real Generation — Unified Template
+# A5 单次真实生成 — 统一授权模板
 
-本模板是 A5 单次真实生成的统一授权模板。
 **填写前请阅读 `docs/264_v7_7_single_real_generation_activation_readiness_check.md`**。
 
 提示词通过 `prompt_package_ref` 引用独立 YAML 包，不内嵌完整 prompt。
@@ -11,32 +10,27 @@
 
 ```yaml
 a5_single_real_generation:
-  # ── Metadata ──
-  activation_status: pending
-  execution_authorized_by_this_record: false
+  activation_status: pending          # 激活后改为 active
+  execution_authorized_by_this_record: false  # 激活后改为 true
 
-  # ── Baseline ──
   baseline:
     branch: master
-    commit: 4e987ec
+    commit: 38b154c
     tag: v6.10-rc1-product-runtime
 
-  # ── External Roots（运行期必填，不写入 Git）──
   external_roots:
-    plugin_dir: null              # DoubaoGen 插件在 VCPToolBox 中的路径
-    vcptoolbox_root: null         # VCPToolBox 根目录
+    plugin_dir: null                  # 【必填】DoubaoGen 插件在 VCPToolBox 中的路径，必须由你手动确认
+    vcptoolbox_root: null             # VCPToolBox 根目录
 
-  # ── Generation Scope ──
   generation:
-    selected_plugin_id: DoubaoGen
-    selected_plugin_command: generate
-    prompt_package_ref: null      # 指向 prompts/image_generation/*.yaml
-    output_directory: null        # 仅限 runs/ 下
+    selected_plugin_id: DoubaoGen     # 示例值
+    selected_plugin_command: generate # 示例值
+    prompt_package_ref: null          # 填写完整相对路径，如 prompts/image_generation/product_still_life_outdoor_tennis_v1.yaml
+    output_directory: null            # 仅限 runs/ 下，如 runs/real_generation/run_name/
     max_plugin_calls: 1
     max_images_created: 1
     retry_allowed: false
 
-  # ── Hard Limits ──
   limits:
     memory_write_allowed: false
     daily_note_write_allowed: false
@@ -44,7 +38,6 @@ a5_single_real_generation:
     tag_allowed: false
     release_allowed: false
 
-  # ── Post-Run ──
   post_run:
     asset_review_required: true
     human_review_required: true
@@ -52,19 +45,24 @@ a5_single_real_generation:
     daily_note_write_still_blocked: true
 ```
 
-## 使用方式
+## 填写说明
 
-```text
-1. 填写 prompt_package_ref → 指向 prompts/image_generation/ 下的 YAML 文件
-2. 填写 plugin_dir + vcptoolbox_root（运行期使用，不写 Git）
-3. 填写 output_directory
-4. 将 activation_status 改为 active
-5. 将 execution_authorized_by_this_record 改为 true
-6. 贴入对话执行
-```
+| 字段 | 说明 | 示例 |
+|------|------|------|
+| `plugin_dir` | 必须由**你手动确认**路径，agent 不能猜测 | `C:\VCP\VCPToolBox\Plugin\DoubaoGen` |
+| `prompt_package_ref` | 完整相对路径 | `prompts/image_generation/product_still_life_outdoor_tennis_v1.yaml` |
+| `output_directory` | 仅限 `runs/` 下 | `runs/real_generation/v7_7_first_run/` |
+| `max_plugin_calls` | 固定 1 | `1` |
+| `max_images_created` | 固定 1 | `1` |
+
+## ⚠️ 重要
+
+- **"继续 / 可以 / 去吧" 不是 A5 激活。**
+- 只有填写完整 A5 表并将 `activation_status` 改为 `active`、`execution_authorized_by_this_record` 改为 `true`，才可进入真实生成。
+- memory write / DailyNote write 不在本次授权范围内。
+- push/tag/release 不在本次授权范围内。
 
 ## 提示词包列表
 
-| package_ref | 文件 | 说明 |
-|---|---|---|
-| `product_still_life_outdoor_tennis_v1` | `prompts/image_generation/product_still_life_outdoor_tennis_v1.yaml` | 户外网球静物商业摄影 |
+当前 20 个包可用，详见 `prompts/image_generation/README.md`。
+推荐首发：`prompts/image_generation/product_still_life_outdoor_tennis_v1.yaml`

@@ -78,6 +78,8 @@
 - v7.5 Production Run Dry Run Prep：生产运行 dry-run 准备 + A5 激活清单。`docs/260_v7_5_production_run_dry_run_prep.md` + `docs/261_v7_5_a5_activation_checklist.md`，validator `scripts/validate_v7_5_production_run_dry_run_prep.js`（24 checks）
 - v7.6 Single Real Generation Activation Package：A5 激活包 + 操作员确认清单。`docs/262_v7_6_single_real_generation_activation_package.md` + `docs/263_v7_6_operator_activation_checklist.md`，validator `scripts/validate_v7_6_single_real_generation_activation_package.js`（25 checks）
 - v7.7 Single Real Generation Activation Readiness Check：准备就绪确认。`docs/264_v7_7_single_real_generation_activation_readiness_check.md`，validator `scripts/validate_v7_7_single_real_generation_activation_readiness_check.js`（12 checks）
+- v7.8 A5 Template + Prompt Library Separation：提示词库（20 包）+ A5 统一模板 + schemas + runbooks。
+- v7.9 Prompt Library + A5 Activation UX Polish：选择指南 `docs/266` + 中文 UX 优化 + 激活表 PluginDir 手动确认。validator `scripts/validate_v7_9_prompt_library_activation_ux.js`（16 checks）
 - Tag and version strategy 提供 `docs/233_tag_and_version_strategy.md`；tag 命名规范、版本号策略、release 条件。
 
 ## Release readiness 文件

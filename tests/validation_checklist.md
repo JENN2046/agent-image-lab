@@ -67,6 +67,8 @@
 - [ ] `scripts/validate_v7_6_single_real_generation_activation_package.js` 存在，包含 25 项检查且全部通过。
 - [ ] `docs/264_v7_7_single_real_generation_activation_readiness_check.md` 存在，定义 readiness check。
 - [ ] `scripts/validate_v7_7_single_real_generation_activation_readiness_check.js` 存在，包含 12 项检查且全部通过。
+- [ ] `docs/266_prompt_library_selection_guide.md` 存在，包含 20 份提示词场景分类。
+- [ ] `scripts/validate_v7_9_prompt_library_activation_ux.js` 存在，包含 16 项检查且全部通过。
 - [ ] 所有任务书要求的 MVP 文件存在。
 - [ ] 文件直接位于项目根目录下，没有创建第二套 `agent-image-lab/` 嵌套目录。
 - [ ] 可运行 `scripts/validate_mvp.ps1` 完成只读自动检查；该脚本不是 Adapter、VCP 插件或真实执行入口。

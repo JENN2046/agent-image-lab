@@ -1,7 +1,6 @@
-# A5 单次真实生成激活模板（统一表）
+# A5 单次真实生成 — 激活填写表
 
-填写此表即表示你授权执行一次受控真实生成（single real generation）。
-所有字段必填。提交后先执行 preflight，通过后执行，完成后进入 Asset Acceptance Gate。
+**"继续 / 可以 / 去吧" 不是 A5 激活。只有填写完整此表才可进入真实生成。**
 
 参照模板：`docs/a5_templates/A5_SINGLE_REAL_GENERATION_TEMPLATE.md`
 
@@ -9,44 +8,42 @@
 
 ## 1. 基线确认
 
-| 字段 | 默认值 | 填写 |
-|------|--------|------|
-| branch | `master` | |
-| baseline commit | `4e987ec` | |
-| RC tag | `v6.10-rc1-product-runtime` | |
-| working tree clean | `true` | |
+| 字段 | 默认值 | 你确认 |
+|------|--------|--------|
+| branch | `master` | □ |
+| baseline commit | `38b154c` | □ |
+| RC tag | `v6.10-rc1-product-runtime` | □ |
 
 ## 2. 外部依赖路径（必填）
 
-> ⚠️ 这些路径指向 VCPToolBox 中的真实插件安装位置。
-> 不会被记录到 Git。仅用于运行时调用。
+> **PluginDir 必须由你手动确认，agent 不能猜测路径。**
 
 | 字段 | 说明 | 填写 |
 |------|------|------|
-| `PluginDir` | DoubaoGen 插件在 VCPToolBox 中的安装目录 | |
+| `PluginDir` | DoubaoGen 插件在 VCPToolBox 中的安装目录，如 `C:\VCP\VCPToolBox\Plugin\DoubaoGen` | |
 | `vcptoolbox_root` | VCPToolBox 根目录 | |
 
 ## 3. 生成范围
 
 | 字段 | 说明 | 填写 |
 |------|------|------|
-| `selected_plugin_id` | 插件 ID，例 `DoubaoGen` | |
-| `selected_plugin_command` | 命令，例 `generate` | |
-| `prompt_package_ref` | 提示词包引用，见 `prompts/image_generation/` | |
-| `output_directory` | 输出目录（仅限 `runs/` 下） | |
-| `max_plugin_calls` | 最大插件调用次数 | `1` |
-| `max_images_created` | 最大生成图片数 | `1` |
+| `selected_plugin_id` | 示例：`DoubaoGen` | |
+| `selected_plugin_command` | 示例：`generate` | |
+| `prompt_package_ref` | 完整相对路径，如 `prompts/image_generation/product_still_life_outdoor_tennis_v1.yaml` | |
+| `output_directory` | 仅限 `runs/` 下，如 `runs/real_generation/run_name/` | |
+| `max_plugin_calls` | `1` | |
+| `max_images_created` | `1` | |
 
 ## 4. 硬限制确认
 
 | 限制 | 确认 |
 |------|------|
-| `retry_allowed` | `false` |
-| `memory_write_allowed` | `false` |
-| `daily_note_write_allowed` | `false` |
-| `push_allowed` | `false` |
-| `tag_allowed` | `false` |
-| `release_allowed` | `false` |
+| `retry_allowed` | `false` — 不自动重试 |
+| `memory_write_allowed` | `false` — 不写记忆 |
+| `daily_note_write_allowed` | `false` — 不写 DailyNote |
+| `push_allowed` | `false` — 不推送 |
+| `tag_allowed` | `false` — 不打 tag |
+| `release_allowed` | `false` — 不发版 |
 
 ## 5. 预检确认（操作员逐项签名）
 
@@ -54,16 +51,15 @@
 |--------|------|
 | HEAD == origin/master | |
 | working tree clean | |
-| validate_v7.0~v7.8 全部通过 | |
+| validate_v7.0~v7.9 全部通过 | |
 | validate_mvp.ps1 通过 | |
-| PluginDir 路径有效 | |
+| PluginDir 路径已手动确认（非 agent 猜测） | |
 | selected_plugin_id 已确认 | |
 | prompt_package_ref 已确认 | |
 | output_directory 已创建且位于 `runs/` 下 | |
 | asset acceptance gate ready | |
 | memory write gate blocked | |
-| 理解生成成功不等于可以写记忆 | |
-| 理解本文档不授权后续操作 | |
+| 理解 A5 只授权本次生成，不授权记忆写入 | |
 
 ## 6. 授权声明
 
@@ -77,10 +73,4 @@
 
 ---
 
-## 提交方式
-
-将填写后的内容贴入对话。执行过程：
-
-```text
-填写表 → preflight → 插件调用（1次） → 资产验收 → 回报
-```
+提交方式：将填写后的内容贴入对话。

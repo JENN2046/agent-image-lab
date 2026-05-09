@@ -23,6 +23,8 @@ v7.4 Memory Write Gate Package — Memory write gate requiring separate A5 autho
 v7.5 Production Run Dry Run Prep — Dry-run prep, A5 activation checklist, operator pre-flight checklist.
 v7.6 Single Real Generation Activation Package — A5 activation package, operator activation checklist, pre-flight requirements.
 v7.7 Single Real Generation Activation Readiness Check — Readiness check confirming all prerequisites met for first real A5 generation.
+v7.8 A5 Template + Prompt Library Separation — Prompt library (20 packages), A5 unified template, schemas, runbooks.
+v7.9 Prompt Library + A5 Activation UX Polish — Selection guide, Chinese UX polish, activation form with PluginDir manual confirmation.
 ```
 
 已经完成：

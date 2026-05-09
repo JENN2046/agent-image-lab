@@ -127,6 +127,7 @@ $requiredFiles = @(
   'scripts/validate_v7_6_single_real_generation_activation_package.js',
   'scripts/validate_v7_7_single_real_generation_activation_readiness_check.js',
   'scripts/validate_v7_8_a5_template_prompt_library.js',
+  'scripts/validate_v7_9_prompt_library_activation_ux.js',
   'scripts/validate_prompt_package_library.js',
   'scripts/validate_a5_generation_template.js',
   'docs/00_project_roadmap.md',

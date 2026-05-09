@@ -115,6 +115,8 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Added v7.5 Production Run Dry Run Prep: dry-run prep docs, A5 activation checklist, schema example. `docs/260`, `docs/261`, `validate_v7_5.js` (24 checks). No real execution.
 - Added v7.6 Single Real Generation Activation Package: A5 activation package, operator activation checklist. `docs/262`, `docs/263`, `validate_v7_6.js` (25 checks). No real execution.
 - Added v7.7 Single Real Generation Activation Readiness Check: readiness confirmation. `docs/264`, `validate_v7_7.js` (12 checks). No real execution.
+- Added v7.8 A5 Template + Prompt Library Separation: A5 unified template, 20 prompt packages, schemas, runbooks.
+- Added v7.9 Prompt Library + A5 Activation UX Polish: selection guide `docs/266`, Chinese UX, PluginDir manual confirmation. `validate_v7_9.js` (16 checks). No real execution.
 
 ## Safety Status
 
