@@ -1,0 +1,36 @@
+# a5_activation.schema.yaml
+# A5 单次真实生成激活 schema。
+a5_single_real_generation:
+  activation_status: pending | active | consumed
+  execution_authorized_by_this_record: boolean
+
+  baseline:
+    branch: string
+    commit: string
+    tag: string
+
+  external_roots:
+    plugin_dir: string | null         # 运行期必填，不写入 Git
+    vcptoolbox_root: string | null
+
+  generation:
+    selected_plugin_id: string
+    selected_plugin_command: string
+    prompt_package_ref: string | null
+    output_directory: string | null
+    max_plugin_calls: integer
+    max_images_created: integer
+    retry_allowed: false
+
+  limits:
+    memory_write_allowed: false
+    daily_note_write_allowed: false
+    push_allowed: false
+    tag_allowed: false
+    release_allowed: false
+
+  post_run:
+    asset_review_required: true
+    human_review_required: true
+    memory_write_still_blocked: true
+    daily_note_write_still_blocked: true

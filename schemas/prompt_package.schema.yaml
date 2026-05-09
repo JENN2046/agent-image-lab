@@ -1,14 +1,26 @@
 # prompt_package.schema.yaml
 # 提示词包草案：描述一组可审查、可迭代、可适配插件的提示词
 prompt_package:
+  # ── 元信息 ──
   package_id: string              # 提示词包唯一 ID
+  prompt_package_id: string       # 新格式：唯一标识，用作 prompt_package_ref
+  version: integer                # 新格式：版本号
+  created_at: string              # ISO 日期
+  author: string                  # 作者角色
+
   task_id: string                 # 关联任务 ID
   agent_name: Prompt_Agent        # 生成者
   target_plugin: string | null    # 目标插件，MVP 可为空
+
+  # ── 提示词 ──
   main_prompt_cn: string          # 中文主提示词
-  main_prompt_en: string          # 英文执行提示词，必须有中文解释
+  main_prompt_en: string          # 英文执行提示词，必须有中文解释（旧格式）
+  prompt: string                  # 正向提示词（新格式）
   negative_prompt_cn: string      # 中文负面提示词
-  negative_prompt_en: string      # 英文负面提示词，必须有中文解释
+  negative_prompt_en: string      # 英文负面提示词，必须有中文解释（旧格式）
+  negative_prompt: string         # 负向提示词（新格式）
+
+  # ── 控制项 ──
   preserve_cn:
     - string                      # 保留项
   change_cn:
@@ -16,5 +28,21 @@ prompt_package:
   avoid_cn:
     - string                      # 避免项
   short_control_cn: string        # 短控制词中文说明
+
+  # ── 安全 ──
+  safety:
+    person_or_face_allowed: boolean
+    readable_text_or_logo_allowed: boolean
+    unsafe_content_scan_pass: required | optional
+
+  # ── 执行 ──
+  execution:
+    model: string                 # 模型引用（新格式）
+    size: string                  # 输出尺寸（新格式）
+    max_images: integer           # 单次最大生成数（新格式）
+
+  reference_policy: text_only_no_image_input  # 新格式：纯文本输入
+  no_image_to_image: true         # 新格式：禁止 img2img
+
   plugin_parameters: map          # 插件参数占位，不写真实执行参数
   risk_notes_cn: string           # 风险说明中文文本

@@ -3,6 +3,8 @@
 填写此表即表示你授权执行一次受控真实生成（single real generation）。
 所有字段必填。提交后先执行 preflight，通过后执行，完成后进入 Asset Acceptance Gate。
 
+参照模板：`docs/a5_templates/A5_SINGLE_REAL_GENERATION_TEMPLATE.md`
+
 ---
 
 ## 1. 基线确认
@@ -30,7 +32,7 @@
 |------|------|------|
 | `selected_plugin_id` | 插件 ID，例 `DoubaoGen` | |
 | `selected_plugin_command` | 命令，例 `generate` | |
-| `prompt_package_ref` | 提示词包引用 | |
+| `prompt_package_ref` | 提示词包引用，见 `prompts/image_generation/` | |
 | `output_directory` | 输出目录（仅限 `runs/` 下） | |
 | `max_plugin_calls` | 最大插件调用次数 | `1` |
 | `max_images_created` | 最大生成图片数 | `1` |
@@ -52,7 +54,7 @@
 |--------|------|
 | HEAD == origin/master | |
 | working tree clean | |
-| validate_v7.0~v7.7 全部通过 | |
+| validate_v7.0~v7.8 全部通过 | |
 | validate_mvp.ps1 通过 | |
 | PluginDir 路径有效 | |
 | selected_plugin_id 已确认 | |
