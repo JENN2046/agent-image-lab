@@ -902,6 +902,36 @@ hard_stops:
 - do_not_reopen_closed_no_memory_write_case
 ```
 
+## v7.50b VCP Read-only Bridge Mock Payload Validation Execution
+
+```text
+Phase: v7.50b
+Status: mock_payload_validation_executed_pass
+mock_execution_performed: true
+local_schema_validator_execution_performed_in_this_phase: false
+VCP call performed: false
+VCPChat bridge call performed: false
+DailyNote write performed: false
+VCP memory write performed: false
+image generation performed: false
+image binary read: false
+runs path read: false
+
+current_allowed_next_steps:
+- v7.50c read-only bridge dry-run planning, only if explicitly authorized
+- new production candidate only with new explicit plan and A5
+
+hard_stops:
+- do_not_call_vcp_without_independent_authorization
+- do_not_call_vcpchat_bridge_without_independent_authorization
+- do_not_write_dailynote_without_independent_a5
+- do_not_write_vcp_memory_without_independent_a5
+- do_not_generate_image_without_independent_a5
+- do_not_read_image_binary
+- do_not_reopen_closed_no_memory_write_case
+- do_not_enter_real_bridge_dry_run_without_explicit_authorization
+```
+
 ## Resume Instruction
 
 ```text

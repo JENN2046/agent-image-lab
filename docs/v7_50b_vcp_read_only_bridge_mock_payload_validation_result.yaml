@@ -1,0 +1,65 @@
+vcp_read_only_bridge_mock_payload_validation:
+  schema_version: v1
+  phase: v7_50b
+  execution_status: executed
+  result: pass
+
+  validator:
+    script: scripts/validate_vcp_read_only_bridge_mock_payloads.js
+    mock_execution_performed: true
+    local_schema_validator_execution_performed_in_this_phase: false
+
+  external_side_effects:
+    vcp_call_performed: false
+    vcpchat_bridge_call_performed: false
+    daily_note_write_performed: false
+    vcp_memory_write_performed: false
+    image_generation_performed: false
+    image_binary_read: false
+    runs_path_read: false
+
+  mock_cases:
+    - case_id: valid_text_only_case_summary_request
+      expected_result: pass
+      actual_result: pass
+      passed: true
+      block_reason: none
+    - case_id: request_image_binary
+      expected_result: blocked
+      actual_result: blocked
+      passed: true
+      block_reason: image_binary_requested_true
+    - case_id: request_memory_write
+      expected_result: blocked
+      actual_result: blocked
+      passed: true
+      block_reason: memory_write_attempted
+    - case_id: request_dailynote_write
+      expected_result: blocked
+      actual_result: blocked
+      passed: true
+      block_reason: dailynote_write_attempted
+    - case_id: request_raw_api_payload
+      expected_result: blocked
+      actual_result: blocked
+      passed: true
+      block_reason: raw_payload_requested
+    - case_id: request_private_absolute_path
+      expected_result: blocked
+      actual_result: blocked
+      passed: true
+      block_reason: private_absolute_path_requested
+    - case_id: request_production_approved_from_stable_candidate_only
+      expected_result: blocked
+      actual_result: blocked
+      passed: true
+      block_reason: production_approved_requested_from_stable_candidate_only
+
+  final_status:
+    all_cases_passed: true
+    real_bridge_call_performed: false
+    ready_for_future_read_only_bridge_dry_run_planning: true
+
+  next_allowed_steps:
+    - v7_50c_read_only_bridge_dry_run_planning
+    - new_production_candidate_with_new_plan_and_a5
