@@ -1,10 +1,16 @@
 v3_dry_run_stability_plan:
   plan_id: french_summer_rattan_bag_v3_support_logic_dry_run
-  status: in_progress
+  status: completed
+  final_stability_status: stable_candidate
   created_by_phase: v7_40
   execution_authorized_by_this_record: false
   real_api_call_performed: true
   image_created: true
+  shots_completed: 3
+  accepted_clean_count: 3
+  support_logic_pass_count: 3
+  warning_count: 0
+  next_phase: batch_dry_run_protocol
   memory_write_allowed: false
   daily_note_write_allowed: false
 
@@ -64,9 +70,20 @@ v3_dry_run_stability_plan:
 
     - shot_id: french_summer_rattan_bag_v3_dry_run_shot_3
       future_phase: v7_43
-      status: planned
-      requires_independent_a5: true
+      status: completed
+      asset_status: accepted_candidate
+      a5_activation_ref: A5-20260509-NATIVE-RATTAN-V3-DRYRUN-003
+      a5_executed_at: "2026-05-09"
       output_directory: runs/real_generation/v7_43_french_summer_rattan_bag_v3_dry_run_shot_3/
+      image_path: runs/real_generation/v7_43_french_summer_rattan_bag_v3_dry_run_shot_3/native_doubao_1778339914744_0.jpg
+      review_ref: stability_tests/reviews/v7_43_v3_dry_run_shot_3_post_run_review.md
+      requires_independent_a5: true
+      api_calls_observed: 1
+      images_created: 1
+      retry_performed: false
+      model_matches: true
+      watermark_parameter_sent: true
+      v3_support_logic_result: pass
 
   core_acceptance_gates:
     prompt_subject_match: required_pass
