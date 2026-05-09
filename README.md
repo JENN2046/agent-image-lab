@@ -26,7 +26,19 @@ v7.7 Single Real Generation Activation Readiness Check — Readiness check confi
 v7.8 A5 Template + Prompt Library Separation — Prompt library (20 packages), A5 unified template, schemas, runbooks.
 v7.9 Prompt Library + A5 Activation UX Polish — Selection guide, Chinese UX polish, activation form with PluginDir manual confirmation.
 v7.34 3-shot Stability Test Plan — First 3-shot stability test plan targeting French Summer Rattan Bag v2 watermark-off prompt. Plan only, no execution.
+v7.44 Production Closeout — v3 production readiness closeout completed. 3/3 accepted_candidate, support-logic stable_pass. stable_candidate. No further stability testing.
+v7.45 Production Usage SOP — one-image production policy defined. Allowed use: single_image_production_candidate, controlled_product_still_life_generation, human_reviewed_delivery_candidate.
+v7.46 One-Shot A5 Template — reusable single-image A5 authorization template added. Fields: model, watermark, api_calls, retry, batch, output, review, commit, push, memory.
+v7.47 Human Review Checklist — production human review gates added. 10 core gates + 6 v3 support-logic gates + 4 asset statuses.
+v7.48 Project State Sync Pack — repository entry state aligned with v3 production candidate readiness.
 ```
+
+current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3
+production_readiness: candidate_ready_with_manual_visual_review
+stability_status: stable_candidate
+batch_dry_run_required_now: false
+further_stability_testing_required_now: false
+next_real_generation_requires_independent_a5: true
 
 已经完成：
 
