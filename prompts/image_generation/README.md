@@ -26,3 +26,4 @@
 | `product_perfume_glass_transparency_v1` | — | 香水玻璃透明图 |
 | `product_jewelry_dark_velvet_v1` | — | 珠宝暗色天鹅绒图 |
 | `product_minimal_business_desk_v1` | — | 极简办公桌图 |
+| `product_still_life_outdoor_tennis_wallet_hero_no_text_v3` | outdoor_sport_product_closeup | 无文字无遮挡户外网球皮具 V3 |

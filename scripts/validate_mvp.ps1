@@ -140,6 +140,7 @@ $requiredFiles = @(
   'scripts/validate_v7_19_native_doubao_a5_runner_preflight.js',
   'scripts/validate_v7_20_native_doubao_real_runner_implementation.js',
   'scripts/validate_v7_21_native_doubao_first_real_generation_post_run_review.js',
+  'scripts/validate_v7_22_prompt_correction_no_watermark_unobstructed_product_v3.js',
   'scripts/validate_prompt_package_library.js',
   'scripts/validate_a5_generation_template.js',
   'docs/00_project_roadmap.md',

@@ -1,0 +1,20 @@
+v7_22_prompt_correction:
+  status: prompt_only
+  execution_authorized_by_this_record: false
+  source_review: docs/278_v7_21_native_doubao_first_real_generation_post_run_review.md
+
+  previous_asset_status: needs_human_review
+
+  deviations_addressed:
+    - watermark_or_generation_mark_risk
+    - foreground_tennis_balls_too_large
+    - background_material_direction_drift
+
+  next_prompt_package_ref: prompts/image_generation/product_still_life_outdoor_tennis_wallet_hero_no_text_v3.yaml
+
+  next_a5_required: true
+  retry_allowed: false
+  memory_write_allowed: false
+  daily_note_write_allowed: false
+  real_api_call_performed: false
+  image_created: false

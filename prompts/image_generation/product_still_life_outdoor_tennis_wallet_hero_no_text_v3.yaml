@@ -1,0 +1,41 @@
+prompt_package_id: product_still_life_outdoor_tennis_wallet_hero_no_text_v3
+version: v3
+language: en
+mode: text_to_image
+reference_policy: text_only_no_image_input
+
+title_cn: "户外网球皮具特写 V3 — 无文字无遮挡产品英雄图"
+purpose_cn: "修复水印/伪文字/网球遮挡/背景材质偏移问题"
+scene_type: outdoor_sport_product_closeup
+product_category: leather_accessory
+aspect_ratio: "4:5"
+style_direction: premium commercial still-life product photography
+
+prompt: |
+  Create a premium commercial still-life product photograph with a clean unbranded beige leather wallet as the clear hero subject.
+
+  The wallet must be fully visible and unobstructed, occupying about 45% to 60% of the frame. It sits neatly on the strings of a real tennis racket. The tennis racket strings must look like authentic racket strings, not grill mesh, not carbon fiber mesh, not metal grate, not barbecue grid.
+
+  Two tennis balls may appear only as small supporting props, placed away from the wallet edges. They must not cover, touch, or visually dominate the wallet.
+
+  Use a close-up top-down composition on a sunlit concrete tennis court surface. Natural direct sunlight, crisp but tasteful shadows, realistic leather grain, clean stitching, refined product texture, premium editorial commercial photography.
+
+  The product must be plain and unbranded. No logo. No text. No letters. No readable marks. No watermark. No generated mark. No overlay. No signature. No label. No printed typography on the wallet, tennis balls, racket, or background.
+
+  The final image should feel like a high-end product campaign: clean, controlled, tactile, realistic, product-first, commercially usable.
+
+negative_prompt: |
+  watermark, generated mark, signature, logo, brand mark, readable text, letters, typography, label, printed words, fake text, fake logo, text on tennis ball, logo on wallet, people, hands, faces, product obstruction, tennis ball covering wallet, oversized tennis ball, clutter, grill mesh, barbecue grid, metal grate, cyberpunk, cartoon, CGI plastic look
+
+acceptance_gate:
+  prompt_subject_match: true
+  style_direction_match: true
+  product_fully_visible: true
+  product_unobstructed: true
+  no_person_or_face_unless_expected: true
+  no_readable_text_or_logo_unless_expected: true
+  no_watermark_or_generated_mark: true
+  commercial_usability: true
+
+memory_write_allowed: false
+daily_note_write_allowed: false
