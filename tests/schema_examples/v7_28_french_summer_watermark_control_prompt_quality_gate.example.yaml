@@ -1,0 +1,46 @@
+prompt_quality_gate:
+  prompt_package_ref: prompts/image_generation/product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v2.yaml
+  prompt_package_id: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v2
+  version: v2
+
+  score:
+    subject_clarity:
+      points: 24
+      max: 25
+    composition_control:
+      points: 19
+      max: 20
+    material_lighting_control:
+      points: 14
+      max: 15
+    failure_mode_coverage:
+      points: 20
+      max: 20
+    commercial_usability:
+      points: 18
+      max: 20
+    total: 95
+    rating: production_ready
+
+  required_checks:
+    has_hero_subject: true
+    has_product_scale: true
+    has_composition_control: true
+    has_material_constraints: true
+    has_negative_prompt: true
+    has_no_text_no_logo: true
+    has_no_watermark: true
+    has_clean_image_corners: true
+    has_no_leaf_obstruction: true
+    has_no_readable_book_text: true
+    has_acceptance_gate: true
+    memory_write_allowed_false: true
+    daily_note_write_allowed_false: true
+
+  decision:
+    a5_single_test_allowed: true
+    batch_generation_allowed: true
+    needs_revision: false
+    rejected: false
+
+  note_cn: "评分只代表 prompt 质量达标，不代表授权真实生成；下一次真实生成仍需独立 A5。"
