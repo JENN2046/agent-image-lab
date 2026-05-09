@@ -1,0 +1,42 @@
+# prompt_quality_gate.schema.yaml
+prompt_quality_gate:
+  prompt_package_ref: string
+  prompt_package_id: string
+  version: string
+
+  score:
+    subject_clarity:
+      points: integer
+      max: 25
+    composition_control:
+      points: integer
+      max: 20
+    material_lighting_control:
+      points: integer
+      max: 15
+    failure_mode_coverage:
+      points: integer
+      max: 20
+    commercial_usability:
+      points: integer
+      max: 20
+    total: integer
+    rating: production_ready | a5_single_test_allowed | needs_prompt_revision | rejected
+
+  required_checks:
+    has_hero_subject: boolean
+    has_product_scale: boolean
+    has_composition_control: boolean
+    has_material_constraints: boolean
+    has_negative_prompt: boolean
+    has_no_text_no_logo: boolean
+    has_no_watermark: boolean
+    has_acceptance_gate: boolean
+    memory_write_allowed_false: boolean
+    daily_note_write_allowed_false: boolean
+
+  decision:
+    a5_single_test_allowed: boolean
+    batch_generation_allowed: boolean
+    needs_revision: boolean
+    rejected: boolean
