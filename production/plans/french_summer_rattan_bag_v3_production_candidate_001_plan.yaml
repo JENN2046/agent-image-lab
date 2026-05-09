@@ -53,6 +53,18 @@ production_candidate_plan:
     memory_delta_candidate_allowed_now: false
     requires_v7_54_memory_delta_draft_before_any_memory_write: true
 
+  memory_delta:
+    draft_phase: v7_54
+    candidate_status: draft_only
+    candidate_ref: production/memory_delta_candidates/french_summer_rattan_bag_v3_production_candidate_001_memory_delta_candidate.yaml
+    candidate_doc_ref: production/memory_delta_candidates/v7_54_french_summer_rattan_bag_v3_production_candidate_001_memory_delta_candidate.md
+    write_authorized: false
+    daily_note_write_authorized: false
+    vcp_memory_write_authorized: false
+    current_write_decision: do_not_write
+    reason: v7.53 review marked memory_suitability=false; draft prepared for future human review only.
+    next_possible_step: v7_55_memory_write_authorization_package
+
   forbidden:
     - image_generation_without_independent_a5
     - retry_without_new_a5

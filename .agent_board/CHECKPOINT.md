@@ -748,6 +748,35 @@ hard_stops:
 - do_not_treat_planned_candidate_as_generated_asset
 ```
 
+## v7.54 Memory Delta Candidate Draft
+
+```text
+Phase: v7.54
+Status: memory_delta_candidate_drafted
+source_production_candidate_id: french_summer_rattan_bag_v3_production_candidate_001
+asset_status: accepted_with_minor_warning
+memory_suitability_from_review: false
+current_write_decision: do_not_write
+DailyNote write performed: false
+VCP memory write performed: false
+VCP call performed: false
+image generation performed: false
+
+current_allowed_next_steps:
+- v7.55 DailyNote / VCP memory write authorization package
+- v7.50a local schema validation planning
+- v7.50b mock bridge payload validation planning
+
+hard_stops:
+- do_not_write_dailynote_without_independent_a5
+- do_not_write_vcp_memory_without_independent_a5
+- do_not_call_vcp_without_independent_a5
+- do_not_generate_image_without_independent_a5
+- do_not_store_image_binary_in_git_or_memory
+- do_not_treat_memory_delta_candidate_as_memory_write
+- do_not_override_memory_suitability_false_without_human_authorization
+```
+
 ## Resume Instruction
 
 ```text

@@ -1,0 +1,69 @@
+memory_delta_candidate:
+  schema_version: v1
+  phase: v7_54
+  candidate_id: french_summer_rattan_bag_v3_production_candidate_001_memory_delta_candidate
+  source_production_candidate_id: french_summer_rattan_bag_v3_production_candidate_001
+  status: draft_only
+
+  authorization:
+    memory_write_authorized: false
+    daily_note_write_authorized: false
+    vcp_memory_write_authorized: false
+    requires_v7_55_authorization_package_before_write: true
+    requires_independent_a5_before_any_write: true
+
+  source_refs:
+    production_plan_ref: production/plans/french_summer_rattan_bag_v3_production_candidate_001_plan.yaml
+    review_ref: production/reviews/v7_53_french_summer_rattan_bag_v3_production_candidate_001_review.md
+    prompt_package_ref: prompts/image_generation/product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3.yaml
+    image_path_reference: runs/real_generation/v7_52_french_summer_rattan_bag_v3_production_candidate_001/native_doubao_1778345704865_0.jpg
+    image_binary_included: false
+    image_sha256_if_available: not_available
+
+  review_result:
+    generated_phase: v7_52
+    review_phase: v7_53
+    asset_status: accepted_with_minor_warning
+    commercial_usability: pass
+    retry_required: false
+    new_a5_required: false
+    memory_suitability_from_review: false
+    daily_note_write_allowed_from_review: false
+    vcp_memory_write_allowed_from_review: false
+
+  allowed_memory_fields:
+    case_title: "French Summer Rattan Bag v3 production candidate 001"
+    prompt_package_id: "product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3"
+    production_readiness: "candidate_ready_with_manual_visual_review"
+    final_asset_status: "accepted_with_minor_warning"
+    human_review_summary_cn: "French Summer Rattan Bag v3 的第一张真实生产候选图已在 v7.52 通过单次 A5 生成，并在 v7.53 完成人工审图。图像主体为藤编水桶包，搭配自行车后架、橙色玫瑰、红色针织物、橙子、钥匙、书本和青葡萄。主体完整、藤编纹理清晰、无水印、无可读书本文字，左下角道具支撑逻辑通过。审图结论为 accepted_with_minor_warning：画面具备商业可用性，但红色针织物偏强、葡萄靠右边缘略显摆拍、玫瑰塑料包装略偏棚拍，道具密度偏高但可接受。"
+    known_minor_issues:
+      - red_knit_area_is_visually_strong
+      - grapes_sit_close_to_right_edge_and_feel_slightly_staged
+      - rose_plastic_wrap_remains_somewhat_studio_styled
+      - prop_density_is_high_but_acceptable
+    image_path_reference: runs/real_generation/v7_52_french_summer_rattan_bag_v3_production_candidate_001/native_doubao_1778345704865_0.jpg
+    image_sha256_if_available: not_available
+    review_doc_ref: production/reviews/v7_53_french_summer_rattan_bag_v3_production_candidate_001_review.md
+    prompt_doc_ref: prompts/image_generation/product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3.yaml
+    created_phase: v7_54
+    reviewer_decision: accepted_with_minor_warning
+
+  forbidden_payloads:
+    - image_binary
+    - raw_image_file
+    - api_key
+    - token
+    - cookie
+    - raw_request_payload
+    - raw_response_payload
+    - provider_endpoint
+    - private_local_absolute_path
+    - customer_private_data
+    - unreviewed_generation_output
+    - rejected_asset_as_success_memory
+
+  current_write_decision:
+    write_now: false
+    reason: v7.53 review marked memory_suitability=false; draft only.
+    next_possible_step: v7_55_memory_write_authorization_package
