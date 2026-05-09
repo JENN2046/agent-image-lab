@@ -101,7 +101,7 @@ scripts/validate_v6_3_session_store_interaction.js      — 16 checks
 scripts/validate_v6_4_memory_queue_interaction.js       — 25 checks
 scripts/validate_v6_5_review_console_product_shell.js   — 18 checks
 scripts/validate_v6_6_product_shell_qa.js               — 25 checks
-scripts/validate_v6_7_product_runtime_final_acceptance.js — 30 checks
+scripts/validate_v6_7_product_runtime_final_acceptance.js — 33 checks
 ```
 
 ## 当前仍禁止的动作

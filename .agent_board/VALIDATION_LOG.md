@@ -1,5 +1,25 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## v6.7 Patch 01b — repair empty checks in validator
+
+```text
+Current phase: v6.7 Patch 01b — 4 empty checks (task_queue_no_auto_v7, no_forbidden_apis_added, no_push_tag_release_authorization, no_a5_production_authorization) replaced with real checks. 2 new checks added (validate_mvp_ps1_includes_v6_7, agent_board_files_contain_v6_7). All 33/33 checks pass.
+No real VCPChat/VCPToolBox read.
+No plugin/API/DailyNote/VCP memory/image action.
+No commit/tag/push/PR/release.
+node scripts/validate_v6_7_product_runtime_final_acceptance.js: passed (33/33)
+node scripts/validate_v6_6_product_shell_qa.js: passed
+node scripts/validate_v6_5_review_console_product_shell.js: passed
+node scripts/validate_v6_4_memory_queue_interaction.js: passed
+node scripts/validate_v6_3_session_store_interaction.js: passed
+node scripts/validate_v6_2_asset_index_interaction.js: passed
+node scripts/validate_v6_1_task_panel_interaction.js: passed
+node scripts/validate_v6_0_product_runtime_kickoff.js: passed
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+git diff --check: passed
+```
+
 ## v6.7 Patch 01 — resolve untracked CLAUDE.md validation blocker
 
 ```text

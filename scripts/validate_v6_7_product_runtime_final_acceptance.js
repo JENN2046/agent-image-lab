@@ -2,7 +2,6 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
-const checks = [];
 let passed = true;
 const results = [];
 
@@ -26,6 +25,12 @@ function fileContains(p, substr) {
   if (!fs.existsSync(fullPath)) return false;
   const content = fs.readFileSync(fullPath, "utf8");
   return content.includes(substr);
+}
+
+function fileContent(p) {
+  const fullPath = path.join(root, p);
+  if (!fs.existsSync(fullPath)) return "";
+  return fs.readFileSync(fullPath, "utf8");
 }
 
 // === acceptance doc checks ===
@@ -110,13 +115,39 @@ check("run_state_current_phase_v6_7", () =>
   fileContains(".agent_board/RUN_STATE.md", "v6.7 acceptance")
 );
 
-// === task queue ===
+// === task queue — real check ===
 
 check("task_queue_no_auto_v7", () => {
-  const fullPath = path.join(root, ".agent_board/TASK_QUEUE.md");
-  if (!fs.existsSync(fullPath)) return false;
-  const content = fs.readFileSync(fullPath, "utf8");
-  // Must NOT contain a line starting v7 in todo that would auto-proceed
+  const content = fileContent(".agent_board/TASK_QUEUE.md");
+  if (!content) return false;
+
+  // Extract the "### todo" section (text between ### todo and next ### heading)
+  const todoMatch = content.match(/### todo[\r\n]+```text[\r\n]+([\s\S]*?)```/);
+  if (!todoMatch) return false;
+  const todoText = todoMatch[1];
+
+  // Patterns that would indicate automatic progression to forbidden phases
+  const autoPatterns = [
+    /auto.*v7/i,
+    /auto.*production/i,
+    /auto.*real[\s.]*exec/i,
+    /auto.*a5/i,
+    /v7\s+is\s+next/i,
+  ];
+
+  for (const pat of autoPatterns) {
+    if (pat.test(todoText)) return false;
+  }
+
+  // Check in_progress section too
+  const inProgressMatch = content.match(/### in_progress\n+```text\n([\s\S]*?)```/);
+  if (inProgressMatch) {
+    const inProgressText = inProgressMatch[1];
+    for (const pat of autoPatterns) {
+      if (pat.test(inProgressText)) return false;
+    }
+  }
+
   return true;
 });
 
@@ -131,20 +162,181 @@ check("v6_5_validator_exists", () => fileExists("scripts/validate_v6_5_review_co
 check("v6_6_validator_exists", () => fileExists("scripts/validate_v6_6_product_shell_qa.js"));
 check("v6_7_validator_exists", () => fileExists("scripts/validate_v6_7_product_runtime_final_acceptance.js"));
 
-// === no forbidden additions ===
+// === no forbidden APIs in v6 runtime files — real check ===
+
+const v6RuntimeFiles = [
+  "review_console/runtime_prototype/app.js",
+  "review_console/runtime_prototype/index.html",
+  "review_console/runtime_prototype/styles.css",
+  "review_console/runtime_prototype/runtime_guard.js",
+  "review_console/runtime_prototype/host_bridge_mock.js",
+];
+
+const forbiddenApiPatterns = [
+  "localStorage",
+  "sessionStorage",
+  "IndexedDB",
+  "fetch(",
+  "XMLHttpRequest",
+  "child_process",
+  "require(",
+  "fs.",
+  "http.",
+  "https.",
+  "navigator.clipboard",
+  "eval(",
+  "Function(",
+];
 
 check("no_forbidden_apis_added", () => {
-  const forbidden = ["localStorage", "sessionStorage", "IndexedDB", "fs.", "fetch(", "XMLHttpRequest", "child_process"];
-  return true;
+  let clean = true;
+
+  // Specific fs. patterns that indicate Node.js filesystem access (not method calls on variables)
+  const fsFilePatterns = [
+    "fs.readFile",
+    "fs.writeFile",
+    "fs.existsSync",
+    "fs.appendFile",
+    "fs.mkdir",
+    "fs.readdir",
+    "fs.unlink",
+    "fs.stat",
+    "fs.watch",
+    "fs.createRead",
+    "fs.createWrite",
+    "fs.copyFile",
+    "fs.rename",
+    "fs.chmod",
+    "fs.open",
+    "fs.close",
+    "fs.access",
+    "fs.realpath",
+    "fs.promises",
+  ];
+
+  // General forbidden patterns (not including fs. which is checked specifically)
+  const generalForbidden = [
+    "localStorage",
+    "sessionStorage",
+    "IndexedDB",
+    "fetch(",
+    "XMLHttpRequest",
+    "child_process",
+    "require(",
+    "http.",
+    "https.",
+    "navigator.clipboard",
+    "eval(",
+    "Function(",
+  ];
+
+  for (const filePath of v6RuntimeFiles) {
+    const content = fileContent(filePath);
+    if (!content) continue;
+
+    // Check general forbidden patterns
+    for (const pattern of generalForbidden) {
+      if (content.includes(pattern)) {
+        clean = false;
+      }
+    }
+
+    // Check specific fs. patterns
+    for (const pattern of fsFilePatterns) {
+      if (content.includes(pattern)) {
+        clean = false;
+      }
+    }
+  }
+  return clean;
 });
 
-// === boundary checks ===
+// === no push/tag/release authorization — real check ===
+
+const authScanFiles = [
+  "README.md",
+  "RELEASE_NOTES.md",
+  "docs/00_project_roadmap.md",
+  "docs/243_v6_7_product_runtime_final_acceptance.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/CHECKPOINT.md",
+];
+
+const pushTagReleasePatterns = [
+  "push_allowed: true",
+  "tag_allowed: true",
+  "release_allowed: true",
+  "github_release_allowed: true",
+  "version_action_authorized: true",
+];
 
 check("no_push_tag_release_authorization", () => {
-  return true;
+  let clean = true;
+  for (const filePath of authScanFiles) {
+    const content = fileContent(filePath);
+    if (!content) continue;
+    for (const pattern of pushTagReleasePatterns) {
+      if (content.includes(pattern)) {
+        clean = false;
+      }
+    }
+  }
+  return clean;
 });
 
+// === no A5 production authorization — real check ===
+
+const a5AuthPatterns = [
+  "A5 production execution: true",
+  "a5_authorized: true",
+  "real_execution_allowed: true",
+  "plugin_called: true",
+  "api_called: true",
+  "daily_note_called: true",
+  "vcp_memory_written: true",
+  "image_created: true",
+];
+
 check("no_a5_production_authorization", () => {
+  let clean = true;
+  for (const filePath of authScanFiles) {
+    const content = fileContent(filePath);
+    if (!content) continue;
+    for (const pattern of a5AuthPatterns) {
+      if (content.includes(pattern)) {
+        clean = false;
+      }
+    }
+  }
+  return clean;
+});
+
+// === validate_mvp.ps1 includes v6.7 validator — new check ===
+
+check("validate_mvp_ps1_includes_v6_7", () => {
+  const content = fileContent("scripts/validate_mvp.ps1");
+  if (!content) return false;
+  return content.includes("validate_v6_7_product_runtime_final_acceptance.js");
+});
+
+// === agent board files contain v6.7 — new check ===
+
+const agentBoardFiles = [
+  ".agent_board/HANDOFF.md",
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/VALIDATION_LOG.md",
+];
+
+check("agent_board_files_contain_v6_7", () => {
+  for (const filePath of agentBoardFiles) {
+    const content = fileContent(filePath);
+    if (!content) return false;
+    if (!content.includes("v6.7") && !content.includes("Product Runtime Baseline")) {
+      return false;
+    }
+  }
   return true;
 });
 

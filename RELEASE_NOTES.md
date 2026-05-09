@@ -98,7 +98,7 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Added Runtime Review Batch 8D sustained autopilot task plan, separating default local auto execution from conditional auto execution for real actions, external writes, and version actions when a concrete active authorization package and preflight are present.
 - Added Runtime Review Batch 9A state freshness index, making the current phase discoverable from `docs/226_runtime_review_batch_9a_state_freshness_index.md` and machine-checkable across top-level indexes, validation checklist, and `.agent_board`.
 - Added Runtime Review Batch 9C operator runbook and resume capsule, giving future agents a five-minute local resume entrypoint without authorizing A5 production actions.
-- Added v6.7 Product Runtime Final Acceptance Baseline: v6.1～v6.6 consolidated into v6 Product Runtime Baseline. `docs/243_v6_7_product_runtime_final_acceptance.md`, validator `scripts/validate_v6_7_product_runtime_final_acceptance.js` (30 checks). draft_only, no-execution.
+- Added v6.7 Product Runtime Final Acceptance Baseline: v6.1～v6.6 consolidated into v6 Product Runtime Baseline. `docs/243_v6_7_product_runtime_final_acceptance.md`, validator `scripts/validate_v6_7_product_runtime_final_acceptance.js` (33 checks). draft_only, no-execution.
 
 ## Safety Status
 
