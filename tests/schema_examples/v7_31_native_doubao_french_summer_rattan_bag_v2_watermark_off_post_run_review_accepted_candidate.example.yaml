@@ -1,0 +1,46 @@
+v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_post_run_review:
+  status: completed_generated
+  asset_status: accepted_candidate
+  execution_authorized_by_this_record: false
+
+  source_run:
+    phase: v7_31
+    provider_type: direct_api
+    plugin_id: NativeDoubaoImage
+    command: generate
+    prompt_package_ref: prompts/image_generation/product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v2.yaml
+    model_requested: doubao-seedream-5-0-260128
+    model_reported: doubao-seedream-5-0-260128
+    model_matches: true
+    watermark_requested: false
+    watermark_parameter_sent: true
+    watermark_policy: disabled_by_request_payload
+    api_calls_observed: 1
+    images_created: 1
+    retry_performed: false
+    output_path: runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg
+
+  asset_acceptance_gate:
+    prompt_subject_match: pass
+    style_direction_match: pass
+    product_fully_visible: pass
+    product_unobstructed: pass
+    rattan_texture_visible: pass
+    bicycle_rear_rack_visible: pass
+    partial_rear_wheel_visible: pass
+    no_leaf_obstruction: pass
+    no_readable_book_text: pass
+    no_person_or_face_unless_expected: pass
+    no_readable_text_or_logo_unless_expected: pass
+    no_watermark_or_generated_mark: pass
+    clean_image_corners: pass
+    commercial_usability: pass
+    memory_suitability: false
+
+  accepted_candidate_record:
+    qualifies_as_french_summer_rattan_bag_first_accepted_candidate: true
+    validates_watermark_false_parameter: true
+    write_to_memory_allowed: false
+    daily_note_write_allowed: false
+    batch_generation_authorized: false
+    next_phase: v7_32_accepted_sample_registry_update
