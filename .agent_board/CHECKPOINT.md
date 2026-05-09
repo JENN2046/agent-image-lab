@@ -991,6 +991,41 @@ hard_stops:
 - do_not_reopen_closed_no_memory_write_case
 ```
 
+## v7.50d VCPChat Review Console Surface Planning
+
+```text
+Phase: v7.50d
+Status: vcpchat_review_console_surface_planning_defined
+surface_execution_performed: false
+VCP call performed: false
+VCPChat bridge call performed: false
+Electron started: false
+remote-debug started: false
+CDP call performed: false
+DailyNote write performed: false
+VCP memory write performed: false
+image generation performed: false
+image binary read: false
+runs path read: false
+
+current_allowed_next_steps:
+- v7.50d VCPChat review console surface static fixture execution, only if explicitly authorized
+- v7.50e real VCPChat surface check planning, only if explicitly authorized
+- new production candidate only with new explicit plan and A5
+
+hard_stops:
+- do_not_execute_surface_check_without_explicit_instruction
+- do_not_call_vcp_without_independent_authorization
+- do_not_call_vcpchat_bridge_without_independent_authorization
+- do_not_start_electron_without_explicit_authorization
+- do_not_start_remote_debug_without_explicit_authorization
+- do_not_write_dailynote_without_independent_a5
+- do_not_write_vcp_memory_without_independent_a5
+- do_not_generate_image_without_independent_a5
+- do_not_read_image_binary
+- do_not_reopen_closed_no_memory_write_case
+```
+
 ## Resume Instruction
 
 ```text

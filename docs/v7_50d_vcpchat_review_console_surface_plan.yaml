@@ -1,0 +1,55 @@
+vcpchat_review_console_surface_plan:
+  schema_version: v1
+  phase: v7_50d
+  status: planning_only
+  surface_execution_performed: false
+  vcp_call_performed: false
+  vcpchat_bridge_call_performed: false
+  electron_started: false
+  remote_debug_started: false
+  cdp_call_performed: false
+  memory_write_performed: false
+  dailynote_write_performed: false
+  image_binary_read: false
+
+  prerequisites:
+    v7_50a_local_schema_validation_result: pass
+    v7_50b_mock_payload_validation_result: pass
+    v7_50c_read_only_bridge_dry_run_result: pass
+
+  surface:
+    surface_id: v7_50d_vcpchat_review_console_surface_001
+    mode: read_only_surface
+    bridge_mode: read_only
+    payload_type: text_only_refs
+    returned_refs_only: true
+    case_id: french_summer_rattan_bag_v3_production_candidate_001
+    current_case_state: closed_no_memory_write
+
+  planned_sections:
+    - header_status_bar
+    - bridge_dry_run_summary
+    - returned_text_only_refs_panel
+    - safety_gates_panel
+    - closed_case_status_panel
+    - forbidden_payloads_panel
+    - next_allowed_steps_panel
+    - hard_stops_panel
+
+  forbidden_actions:
+    - approve_memory_write
+    - write_dailynote
+    - write_vcp_memory
+    - generate_image
+    - retry_generation
+    - reopen_closed_case
+    - render_image_binary
+    - render_private_absolute_path
+    - render_raw_payload
+    - render_secrets
+    - render_production_approved_claim
+
+  next_allowed_steps:
+    - v7_50d_vcpchat_review_console_surface_static_fixture_execution_only_if_explicitly_authorized
+    - v7_50e_real_vcpchat_surface_check_planning_only_if_explicitly_authorized
+    - new_production_candidate_with_new_plan_and_a5

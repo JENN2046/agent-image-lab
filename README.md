@@ -42,6 +42,7 @@ v7.50a VCP Read-only Bridge Local Schema Validation Execution — local schema v
 v7.50b VCP Read-only Bridge Mock Payload Validation Execution — mock payload validator executed and passed. No VCP call. No bridge call. No memory write. No image binary read.
 v7.50c VCP Read-only Bridge Dry-run Planning — future read-only bridge dry-run request/response contract, safety gates, and planning YAML defined. Docs-only. No dry-run execution. No VCP call. No bridge call. No memory write.
 v7.50c VCP Read-only Bridge Dry-run Execution — repository-local text-only refs dry-run executed and passed. No real VCP call. No VCPChat bridge call. No memory write. No image binary read.
+v7.50d VCPChat Review Console Surface Planning — future VCPChat review console read-only surface layout, contract, visibility policy, and security gates defined. Docs-only. No VCP call. No VCPChat bridge call. No UI execution.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3
