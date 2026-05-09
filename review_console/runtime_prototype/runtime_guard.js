@@ -356,6 +356,9 @@ var VALID_TASK_STAGES = Object.freeze(["draft", "planning", "in_review", "blocke
 var VALID_IMPORT_PREVIEW_STATUSES = Object.freeze(["not_loaded", "valid", "stale", "tampered", "incompatible"]);
 var VALID_APPROVAL_STATUSES = Object.freeze(["pending", "approved", "rejected", "blocked"]);
 var VALID_REVIEWER_ROLES = Object.freeze(["ImageLab_Master", "Archivist_Agent", "Gatekeeper", "Human"]);
+var VALID_DISPATCH_STATUSES = Object.freeze(["draft", "mapped", "blocked", "ready_for_human_review"]);
+var VALID_GATEKEEPER_STATUSES = Object.freeze(["required", "pending", "reviewed", "blocked"]);
+var VALID_TRACE_STATES = Object.freeze(["dispatch_draft", "plan_draft", "review_draft"]);
 
   function v6MemoryQueueIsSafe(draft) {
     var v6 = draft && draft.v6_product_runtime_draft;
@@ -456,6 +459,41 @@ var VALID_REVIEWER_ROLES = Object.freeze(["ImageLab_Master", "Archivist_Agent", 
     return true;
   }
 
+  function v6DispatchPlanIsSafe(draft) {
+    var dpd = draft && draft.v6_product_runtime_draft && draft.v6_product_runtime_draft.dispatch_plan_draft;
+    if (!dpd) { return true; }
+    if (dpd.draft_only !== true) { return false; }
+    if (dpd.side_effects_performed !== false) { return false; }
+    if (!guardIsClean(dpd.no_execution_guard)) { return false; }
+    if (dpd.dry_run_required !== true) { return false; }
+    if (dpd.execution_blocked !== true) { return false; }
+    if (dpd.max_plugin_calls !== 0) { return false; }
+    if (dpd.allow_file_write !== false) { return false; }
+    if (dpd.allow_image_binary !== false) { return false; }
+
+    var sp = dpd.selected_plugin;
+    if (!sp || typeof sp !== "object") { return false; }
+    if (sp.source !== "local_draft_fixture") { return false; }
+    if (sp.real_manifest_loaded !== false) { return false; }
+    if (sp.real_plugin_available_confirmed !== false) { return false; }
+
+    if (!Array.isArray(dpd.parameters)) { return false; }
+    for (var pi = 0; pi < dpd.parameters.length; pi++) {
+      var p = dpd.parameters[pi];
+      if (!p || typeof p !== "object") { return false; }
+      if (p.raw_secret_stored !== false) { return false; }
+      if (p.raw_endpoint_stored !== false) { return false; }
+      if (p.raw_path_stored !== false) { return false; }
+    }
+
+    if (dpd.gatekeeper_required !== true) { return false; }
+    if (!Array.isArray(dpd.forbidden_actions) || dpd.forbidden_actions.length === 0) { return false; }
+    if (VALID_DISPATCH_STATUSES.indexOf(dpd.dispatch_status) === -1) { return false; }
+    if (VALID_GATEKEEPER_STATUSES.indexOf(dpd.gatekeeper_status) === -1) { return false; }
+    if (VALID_TRACE_STATES.indexOf(dpd.trace_state) === -1) { return false; }
+    return true;
+  }
+
   function v6ProductRuntimeIsSafe(draft) {
     var v6 = draft && draft.v6_product_runtime_draft;
     if (!v6) { return true; }
@@ -468,6 +506,7 @@ var VALID_REVIEWER_ROLES = Object.freeze(["ImageLab_Master", "Archivist_Agent", 
     if (VALID_TASK_STAGES.indexOf(tp.current_stage) === -1) { return false; }
     if (typeof tp.visual_goal_cn !== "string") { return false; }
     if (tp.current_stage === "blocked" && !tp.blocked_reason_cn) { return false; }
+    if (!v6DispatchPlanIsSafe(draft)) { return false; }
     return true;
   }
 
@@ -688,6 +727,10 @@ var VALID_REVIEWER_ROLES = Object.freeze(["ImageLab_Master", "Archivist_Agent", 
     v6AssetIndexIsSafe,
     v6SessionStoreIsSafe,
     v6MemoryQueueIsSafe,
+    v6DispatchPlanIsSafe,
+    VALID_DISPATCH_STATUSES,
+    VALID_GATEKEEPER_STATUSES,
+    VALID_TRACE_STATES,
     VALID_IMPORT_PREVIEW_STATUSES,
     VALID_APPROVAL_STATUSES,
     VALID_REVIEWER_ROLES,
