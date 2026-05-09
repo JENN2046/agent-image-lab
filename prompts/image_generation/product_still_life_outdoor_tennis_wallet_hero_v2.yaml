@@ -1,0 +1,42 @@
+prompt_package_id: product_still_life_outdoor_tennis_wallet_hero_v2
+version: v2
+language: en
+mode: text_to_image
+reference_policy: text_only_no_image_input
+
+title_cn: "户外网球皮具特写 V2 — 钱包英雄"
+purpose_cn: "修复 V1 主体不明确的问题，钱包占画面主导"
+scene_type: outdoor_sport_product_closeup
+product_category: leather_accessory
+aspect_ratio: "4:5"
+style_direction: "close-up commercial product photography, hero product"
+
+prompt: |
+  Close-up commercial product photography of a single beige leather wallet or small leather accessory as the clear hero subject, occupying 45% to 60% of the frame.
+
+  The wallet sits on the strings of a dark tennis racket (supporting prop only, cropped edge). Two bright yellow tennis balls are placed at the lower edge of the frame as secondary props, not competing with the wallet.
+
+  Top-down close-up composition. Direct natural sunlight, crisp shadows, warm highlights. The wallet shows clean stitching, structured flap, tactile leather grain. The racket string grid provides subtle background texture.
+
+  Premium editorial product catalog style. Wallet must be sharp, centered, clearly the main subject. Tennis court concrete texture visible only at extreme edges. No wide court scene. No distant net. No empty background.
+
+  Vertical 4:5 frame, product-photography lighting, rich shadows, realistic materials, high-end commercial quality.
+
+negative_prompt: >
+  people, hands, faces, readable brand logos, fake text, watermark, clutter,
+  distorted objects, warped geometry, extra products, cyberpunk style, cartoon
+  style, CGI plastic look, low resolution, overexposed highlights, messy
+  background, wide-angle tennis court, distant net, empty court, empty sky,
+  landscape composition, subject too small, wallet not dominant, wallet
+  smaller than racket, racket as main subject, tennis court as main subject,
+  background dominating frame.
+
+acceptance_gate:
+  prompt_subject_match: true
+  style_direction_match: true
+  no_person_or_face_unless_expected: true
+  no_readable_text_or_logo_unless_expected: true
+  commercial_usability: true
+
+memory_write_allowed: false
+daily_note_write_allowed: false
