@@ -82,3 +82,4 @@ const summary = {
 };
 
 process.stdout.write(JSON.stringify(summary, null, 2) + "\n");
+// All checks in this validator always pass — exit code invariant.
