@@ -1,5 +1,16 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## v6.7 Patch 01c — prevent validator forbidden-flag self-match
+
+```text
+Current phase: v6.7 Patch 01c — a5AuthPatterns now uses build-time string concatenation (forbiddenFlag helper) to avoid literal forbidden flag in validator source. All 33/33 checks pass. Local validation clean.
+No real VCPChat/VCPToolBox read.
+No plugin/API/DailyNote/VCP memory/image action.
+No commit/tag/push/PR/release.
+node scripts/validate_v6_7_product_runtime_final_acceptance.js: passed (33/33)
+powershell validate-agent-image-lab-local.ps1: PASSED_WITH_WARNINGS_OK_FOR_MANUAL_REVIEW
+```
+
 ## v6.7 Patch 01b — repair empty checks in validator
 
 ```text
