@@ -1,0 +1,78 @@
+vcp_read_only_bridge_validation_cases:
+  schema_version: v1
+  phase: v7_50ab
+  execution_status: planning_only
+  real_validation_performed: false
+  mock_execution_performed: false
+  vcp_call_performed: false
+  bridge_call_performed: false
+
+  local_schema_validation:
+    required_request_fields:
+      - schema_version
+      - request_id
+      - requested_by
+      - bridge_mode
+      - case_id
+      - requested_resources
+      - write_intent
+      - image_binary_requested
+      - secrets_requested
+    required_response_fields:
+      - schema_version
+      - request_id
+      - bridge_mode
+      - source_repo
+      - case_id
+      - status
+      - returned_resources
+      - payload_type
+      - image_binary_included
+      - secrets_included
+      - write_performed
+      - memory_write_performed
+      - daily_note_write_performed
+    blockers:
+      - missing_required_field
+      - bridge_mode_not_read_only
+      - write_intent_true
+      - image_binary_requested_true
+      - secrets_requested_true
+      - payload_type_not_text_only_refs
+      - write_performed_true
+      - memory_write_performed_true
+      - daily_note_write_performed_true
+      - source_repo_mismatch
+
+  mock_payload_cases:
+    - case_id: valid_text_only_case_summary_request
+      expected_result: pass
+      reason: valid read-only request with text-only refs
+    - case_id: request_image_binary
+      expected_result: blocked
+      reason: image binary is forbidden
+    - case_id: request_memory_write
+      expected_result: blocked
+      reason: memory write is forbidden in read-only bridge
+    - case_id: request_dailynote_write
+      expected_result: blocked
+      reason: DailyNote write is forbidden in read-only bridge
+    - case_id: request_raw_api_payload
+      expected_result: blocked
+      reason: raw request/response payloads are forbidden
+    - case_id: request_private_absolute_path
+      expected_result: blocked
+      reason: private absolute paths are forbidden
+    - case_id: request_production_approved_from_stable_candidate_only
+      expected_result: blocked
+      reason: stable_candidate is not production_approved
+
+  stop_line:
+    - no_validator_execution
+    - no_mock_execution
+    - no_vcp_call
+    - no_bridge_call
+    - no_memory_write
+    - no_dailynote_write
+    - no_image_generation
+    - no_image_binary_read

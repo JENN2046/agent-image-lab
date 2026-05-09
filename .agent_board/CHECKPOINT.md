@@ -840,6 +840,38 @@ hard_stops:
 - do_not_override_memory_suitability_false_without_human_authorization
 ```
 
+## v7.50a-v7.50b VCP Read-only Bridge Validation Planning Pack
+
+```text
+Phase: v7.50a-v7.50b
+Status: read_only_bridge_validation_planning_defined
+local_schema_validation_planned: true
+mock_payload_validation_planned: true
+validator_execution_performed: false
+mock_execution_performed: false
+VCP call performed: false
+VCPChat bridge call performed: false
+DailyNote write performed: false
+VCP memory write performed: false
+image generation performed: false
+
+current_allowed_next_steps:
+- v7.50a local schema validation execution, only if explicitly authorized
+- v7.50b mock payload validation execution, only if explicitly authorized
+- new production candidate only with new explicit plan and A5
+
+hard_stops:
+- do_not_run_validator_without_explicit_instruction
+- do_not_run_mock_without_explicit_instruction
+- do_not_call_vcp_without_independent_authorization
+- do_not_call_vcpchat_bridge_without_independent_authorization
+- do_not_write_dailynote_without_independent_a5
+- do_not_write_vcp_memory_without_independent_a5
+- do_not_generate_image_without_independent_a5
+- do_not_read_image_binary
+- do_not_reopen_closed_no_memory_write_case
+```
+
 ## Resume Instruction
 
 ```text
