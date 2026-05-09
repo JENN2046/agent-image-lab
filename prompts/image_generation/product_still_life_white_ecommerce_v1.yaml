@@ -1,0 +1,30 @@
+prompt_package_id: "product_still_life_white_ecommerce_v1"
+version: 1
+created_at: "2026-05-09"
+author: "Human"
+reference_policy: text_only_no_image_input
+no_image_to_image: true
+
+prompt: >
+  Create a clean white-background e-commerce product photography scene.
+  Overhead composition on a pure white seamless surface with soft gradient
+  shadow. A minimalist ceramic vase in matte white sits center, containing
+  a single dried eucalyptus stem. To its left, a small beige linen coaster,
+  to its right a minimalist brass spoon laid parallel. Lighting is bright
+  even studio lighting, no harsh shadows, pure white background, clean
+  commercial catalog style. Vertical 4:5 frame. High key, crisp details.
+
+negative_prompt: >
+  people, hands, faces, readable brand logos, fake text, extra objects,
+  clutter, dark background, colored background, image-to-image, uploaded
+  image, texture, pattern, noisy background.
+
+safety:
+  person_or_face_allowed: false
+  readable_text_or_logo_allowed: false
+  unsafe_content_scan_pass: required
+
+execution:
+  model: doubao-seedream-5-0-260128
+  size: "1024x1024"
+  max_images: 1

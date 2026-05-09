@@ -1,0 +1,15 @@
+# memory_write_gate.schema.yaml
+# 记忆写入闸门 schema
+memory_write_gate:
+  status: inactive_gate
+  memory_write_authorized: false
+  daily_note_write_authorized: false
+  actual_write_performed: false
+
+  requires_asset_status: accepted_candidate
+  requires_human_review: true
+  requires_separate_a5_authorization: true
+
+  rejected_asset_blocks_memory: true
+  needs_human_review_blocks_memory: true
+  blocked_asset_blocks_memory: true

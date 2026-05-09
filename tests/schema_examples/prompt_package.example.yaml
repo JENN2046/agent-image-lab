@@ -1,0 +1,17 @@
+prompt_package:
+  prompt_package_id: "product_still_life_example_v1"
+  version: 1
+  created_at: "2026-05-09"
+  author: "Human"
+  reference_policy: text_only_no_image_input
+  no_image_to_image: true
+  prompt: "Example prompt text."
+  negative_prompt: "Example negative prompt text."
+  safety:
+    person_or_face_allowed: false
+    readable_text_or_logo_allowed: false
+    unsafe_content_scan_pass: required
+  execution:
+    model: doubao-seedream-5-0-260128
+    size: "1024x1024"
+    max_images: 1

@@ -1,0 +1,17 @@
+# asset_acceptance_gate.schema.yaml
+# 资产验收门 schema
+asset_acceptance_gate:
+  asset_status: accepted_candidate | needs_human_review | rejected | blocked
+
+  gate_checklist:
+    prompt_subject_match: boolean
+    style_direction_match: boolean
+    no_person_or_face_unless_expected: boolean
+    no_readable_text_or_logo_unless_expected: boolean
+    composition_acceptable: boolean
+    commercial_usability: boolean
+    memory_suitability: boolean
+    archive_suitability: boolean
+
+  memory_write_allowed: false
+  daily_note_write_allowed: false

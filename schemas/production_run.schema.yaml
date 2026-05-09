@@ -1,0 +1,21 @@
+# production_run.schema.yaml
+# 生产运行方案：描述一次真实生成运行的元信息
+production_run:
+  run_id: string
+  baseline_commit: string
+  baseline_tag: string
+  activation_ref: string
+
+  generation:
+    selected_plugin_id: string
+    selected_plugin_command: string
+    prompt_package_ref: string
+    output_directory: string
+    max_plugin_calls: integer
+    max_images_created: integer
+
+  post_run:
+    asset_review_required: true
+    human_review_required: true
+    memory_write_blocked: true
+    daily_note_write_blocked: true

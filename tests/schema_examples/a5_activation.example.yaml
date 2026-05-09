@@ -1,0 +1,29 @@
+a5_single_real_generation:
+  activation_status: pending
+  execution_authorized_by_this_record: false
+  baseline:
+    branch: master
+    commit: "4e987ec"
+    tag: v6.10-rc1-product-runtime
+  external_roots:
+    plugin_dir: null
+    vcptoolbox_root: null
+  generation:
+    selected_plugin_id: DoubaoGen
+    selected_plugin_command: generate
+    prompt_package_ref: null
+    output_directory: null
+    max_plugin_calls: 1
+    max_images_created: 1
+    retry_allowed: false
+  limits:
+    memory_write_allowed: false
+    daily_note_write_allowed: false
+    push_allowed: false
+    tag_allowed: false
+    release_allowed: false
+  post_run:
+    asset_review_required: true
+    human_review_required: true
+    memory_write_still_blocked: true
+    daily_note_write_still_blocked: true
