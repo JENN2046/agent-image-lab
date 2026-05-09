@@ -465,3 +465,36 @@ v6 Task Panel 保持在 no-execution 边界内，不触发真实插件、API、D
 3. 所有安全字段（dry_run_required / execution_blocked / max_plugin_calls 等）只读，不可被用户解除
 4. 不读取真实 PluginDir / plugin-manifest.json
 5. `ready_for_human_review` 不代表可执行，只代表可进入人工复核
+
+## release_readiness_draft
+
+该区块是 v6.9A Release Panel 的发布准备状态草案。所有字段保持 draft_only / no-execution。
+
+| 字段 | runtime prototype 来源 | 说明 |
+| --- | --- | --- |
+| `draft_only` | 固定 true | 本区块不授权发布 |
+| `side_effects_performed` | 固定 false | 无副作用 |
+| `current_commit` | `els.v6ReleaseCurrentCommit` | 当前 commit 草案输入 |
+| `baseline_commit` | `els.v6ReleaseBaselineCommit` | 基线 commit 草案输入 |
+| `candidate_label` | `els.v6ReleaseCandidateLabel` | 候选标签草案 |
+| `validator_status.v6_9` | `els.v6ReleaseV6_9` | pending/passed/failed |
+| `validator_status.v6_8` | `els.v6ReleaseV6_8` | pending/passed/failed |
+| `validator_status.v6_7` | `els.v6ReleaseV6_7` | pending/passed/failed |
+| `validator_status.runtime_suite` | `els.v6ReleaseRuntimeSuite` | pending/passed/failed |
+| `validator_status.validate_mvp` | `els.v6ReleaseValidateMvp` | pending/passed/failed |
+| `dirty_tree_status` | `els.v6ReleaseDirtyTree` | clean/dirty/unknown |
+| `release_notes_status` | `els.v6ReleaseNotesStatus` | draft/ready/missing |
+| `tag_candidate` | `els.v6ReleaseTagCandidate` | 候选 tag 草案 |
+| `push_allowed` | 固定 false | 不可更改 |
+| `tag_allowed` | 固定 false | 不可更改 |
+| `release_allowed` | 固定 false | 不可更改 |
+| `github_release_allowed` | 固定 false | 不可更改 |
+| `deploy_allowed` | 固定 false | 不可更改 |
+| `a5_production_execution_allowed` | 固定 false | 不可更改 |
+| `boundary_cn` | 固定中文描述 | push/tag/release/deploy/A5 均被禁止 |
+
+交互要求：
+1. 所有安全字段（push/tag/release/github_release/deploy/A5）只读，不可被用户解除
+2. 不运行真实 git 命令
+3. 不调用 GitHub API
+4. 不创建 tag/release

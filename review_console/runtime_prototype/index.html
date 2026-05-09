@@ -630,6 +630,116 @@
               </fieldset>
               <p class="v6-draft-boundary-text" id="v6DispatchBoundaryText">所有行为保持 draft_only / no-execution。dry_run_required=true, execution_blocked=true, max_plugin_calls=0, 无真实插件调用。</p>
             </article>
+
+            <article id="v6ReleasePanel">
+              <h3>Release Panel <span class="v6-asset-index-badge">draft-only</span></h3>
+              <p class="panel-boundary">发布准备状态面板。仅展示草案数据，不创建 tag，不创建 release，不触发 deploy。</p>
+
+              <fieldset class="v6-form-group">
+                <legend>版本信息（草案输入）</legend>
+                <div class="v6-form-row">
+                  <div class="v6-form-group">
+                    <label for="v6ReleaseCurrentCommit">current_commit</label>
+                    <input type="text" id="v6ReleaseCurrentCommit" placeholder="299a513" maxlength="40" />
+                  </div>
+                  <div class="v6-form-group">
+                    <label for="v6ReleaseBaselineCommit">baseline_commit</label>
+                    <input type="text" id="v6ReleaseBaselineCommit" placeholder="eb4fade" maxlength="40" />
+                  </div>
+                </div>
+                <div class="v6-form-group">
+                  <label for="v6ReleaseCandidateLabel">candidate_label</label>
+                  <input type="text" id="v6ReleaseCandidateLabel" placeholder="v6 Product Runtime RC" maxlength="120" />
+                </div>
+              </fieldset>
+
+              <fieldset class="v6-form-group">
+                <legend>Validator 状态</legend>
+                <div class="v6-form-row">
+                  <div class="v6-form-group">
+                    <label for="v6ReleaseV6_9">v6.9</label>
+                    <select id="v6ReleaseV6_9">
+                      <option value="pending">pending</option>
+                      <option value="passed">passed</option>
+                      <option value="failed">failed</option>
+                    </select>
+                  </div>
+                  <div class="v6-form-group">
+                    <label for="v6ReleaseV6_8">v6.8</label>
+                    <select id="v6ReleaseV6_8">
+                      <option value="pending">pending</option>
+                      <option value="passed">passed</option>
+                      <option value="failed">failed</option>
+                    </select>
+                  </div>
+                  <div class="v6-form-group">
+                    <label for="v6ReleaseV6_7">v6.7</label>
+                    <select id="v6ReleaseV6_7">
+                      <option value="pending">pending</option>
+                      <option value="passed">passed</option>
+                      <option value="failed">failed</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="v6-form-row">
+                  <div class="v6-form-group">
+                    <label for="v6ReleaseRuntimeSuite">runtime_suite</label>
+                    <select id="v6ReleaseRuntimeSuite">
+                      <option value="pending">pending</option>
+                      <option value="passed">passed</option>
+                      <option value="failed">failed</option>
+                    </select>
+                  </div>
+                  <div class="v6-form-group">
+                    <label for="v6ReleaseValidateMvp">validate_mvp</label>
+                    <select id="v6ReleaseValidateMvp">
+                      <option value="pending">pending</option>
+                      <option value="passed">passed</option>
+                      <option value="failed">failed</option>
+                    </select>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="v6-form-group">
+                <legend>Readiness 状态</legend>
+                <div class="v6-form-row">
+                  <div class="v6-form-group">
+                    <label for="v6ReleaseDirtyTree">dirty_tree_status</label>
+                    <select id="v6ReleaseDirtyTree">
+                      <option value="clean">clean</option>
+                      <option value="dirty">dirty</option>
+                      <option value="unknown">unknown</option>
+                    </select>
+                  </div>
+                  <div class="v6-form-group">
+                    <label for="v6ReleaseNotesStatus">release_notes_status</label>
+                    <select id="v6ReleaseNotesStatus">
+                      <option value="draft">draft</option>
+                      <option value="ready">ready</option>
+                      <option value="missing">missing</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="v6-form-group">
+                  <label for="v6ReleaseTagCandidate">tag_candidate</label>
+                  <input type="text" id="v6ReleaseTagCandidate" placeholder="v6.10-rc" maxlength="64" />
+                </div>
+              </fieldset>
+
+              <fieldset class="v6-form-group">
+                <legend>安全字段（只读）</legend>
+                <dl class="meta v6-readout">
+                  <div><dt>push_allowed</dt><dd id="v6ReleasePushAllowed">false</dd></div>
+                  <div><dt>tag_allowed</dt><dd id="v6ReleaseTagAllowed">false</dd></div>
+                  <div><dt>release_allowed</dt><dd id="v6ReleaseReleaseAllowed">false</dd></div>
+                  <div><dt>github_release_allowed</dt><dd id="v6ReleaseGithubReleaseAllowed">false</dd></div>
+                  <div><dt>deploy_allowed</dt><dd id="v6ReleaseDeployAllowed">false</dd></div>
+                  <div><dt>A5 production execution</dt><dd id="v6ReleaseA5Allowed">false</dd></div>
+                </dl>
+              </fieldset>
+              <p class="v6-draft-boundary-text" id="v6ReleaseBoundaryText">发布面板仅展示准备状态。push/tag/release/deploy/A5 均被禁止。</p>
+            </article>
           </section>
         </div>
 

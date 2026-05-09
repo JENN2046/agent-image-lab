@@ -361,6 +361,24 @@ function createRuntimeContext() {
   add("v6DispatchStatus");
   add("v6DispatchTraceState");
   add("v6DispatchBoundaryText");
+  add("v6ReleaseCurrentCommit");
+  add("v6ReleaseBaselineCommit");
+  add("v6ReleaseCandidateLabel");
+  add("v6ReleaseV6_9");
+  add("v6ReleaseV6_8");
+  add("v6ReleaseV6_7");
+  add("v6ReleaseRuntimeSuite");
+  add("v6ReleaseValidateMvp");
+  add("v6ReleaseDirtyTree");
+  add("v6ReleaseNotesStatus");
+  add("v6ReleaseTagCandidate");
+  add("v6ReleasePushAllowed");
+  add("v6ReleaseTagAllowed");
+  add("v6ReleaseReleaseAllowed");
+  add("v6ReleaseGithubReleaseAllowed");
+  add("v6ReleaseDeployAllowed");
+  add("v6ReleaseA5Allowed");
+  add("v6ReleaseBoundaryText");
 
   // Initialize v6 select defaults (FakeElement defaults to "" without this)
   elements.get("v6TaskStageSelect").value = "draft";
@@ -412,6 +430,19 @@ function createRuntimeContext() {
   elements.get("v6DispatchGatekeeperStatus").value = "required";
   elements.get("v6DispatchStatus").value = "draft";
   elements.get("v6DispatchTraceState").value = "dispatch_draft";
+
+  // Initialize v6.9A Release Panel defaults
+  elements.get("v6ReleaseCurrentCommit").value = "";
+  elements.get("v6ReleaseBaselineCommit").value = "";
+  elements.get("v6ReleaseCandidateLabel").value = "";
+  elements.get("v6ReleaseV6_9").value = "pending";
+  elements.get("v6ReleaseV6_8").value = "pending";
+  elements.get("v6ReleaseV6_7").value = "pending";
+  elements.get("v6ReleaseRuntimeSuite").value = "pending";
+  elements.get("v6ReleaseValidateMvp").value = "pending";
+  elements.get("v6ReleaseDirtyTree").value = "unknown";
+  elements.get("v6ReleaseNotesStatus").value = "draft";
+  elements.get("v6ReleaseTagCandidate").value = "";
 
   const context = {
     window: {},

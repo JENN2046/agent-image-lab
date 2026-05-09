@@ -363,7 +363,25 @@ const els = {
   v6DispatchGatekeeperStatus: document.getElementById("v6DispatchGatekeeperStatus"),
   v6DispatchStatus: document.getElementById("v6DispatchStatus"),
   v6DispatchTraceState: document.getElementById("v6DispatchTraceState"),
-  v6DispatchBoundaryText: document.getElementById("v6DispatchBoundaryText")
+  v6DispatchBoundaryText: document.getElementById("v6DispatchBoundaryText"),
+  v6ReleaseCurrentCommit: document.getElementById("v6ReleaseCurrentCommit"),
+  v6ReleaseBaselineCommit: document.getElementById("v6ReleaseBaselineCommit"),
+  v6ReleaseCandidateLabel: document.getElementById("v6ReleaseCandidateLabel"),
+  v6ReleaseV6_9: document.getElementById("v6ReleaseV6_9"),
+  v6ReleaseV6_8: document.getElementById("v6ReleaseV6_8"),
+  v6ReleaseV6_7: document.getElementById("v6ReleaseV6_7"),
+  v6ReleaseRuntimeSuite: document.getElementById("v6ReleaseRuntimeSuite"),
+  v6ReleaseValidateMvp: document.getElementById("v6ReleaseValidateMvp"),
+  v6ReleaseDirtyTree: document.getElementById("v6ReleaseDirtyTree"),
+  v6ReleaseNotesStatus: document.getElementById("v6ReleaseNotesStatus"),
+  v6ReleaseTagCandidate: document.getElementById("v6ReleaseTagCandidate"),
+  v6ReleasePushAllowed: document.getElementById("v6ReleasePushAllowed"),
+  v6ReleaseTagAllowed: document.getElementById("v6ReleaseTagAllowed"),
+  v6ReleaseReleaseAllowed: document.getElementById("v6ReleaseReleaseAllowed"),
+  v6ReleaseGithubReleaseAllowed: document.getElementById("v6ReleaseGithubReleaseAllowed"),
+  v6ReleaseDeployAllowed: document.getElementById("v6ReleaseDeployAllowed"),
+  v6ReleaseA5Allowed: document.getElementById("v6ReleaseA5Allowed"),
+  v6ReleaseBoundaryText: document.getElementById("v6ReleaseBoundaryText")
 };
 
 let activeDraftView = "readable";
@@ -3413,6 +3431,34 @@ function buildV6ProductRuntimeDraft(createdAt) {
 
           boundary_cn: "所有行为保持 draft_only / no-execution。dry_run_required=true, execution_blocked=true, max_plugin_calls=0, real_manifest_loaded=false, raw_secret/endpoint/path stored=false。"
         };
+      }(),
+
+    release_readiness_draft: function () {
+        return {
+          draft_only: true,
+          side_effects_performed: false,
+          no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard),
+          current_commit: els.v6ReleaseCurrentCommit.value.trim() || "299a513",
+          baseline_commit: els.v6ReleaseBaselineCommit.value.trim() || "eb4fade",
+          candidate_label: els.v6ReleaseCandidateLabel.value.trim() || "v6 Product Runtime RC",
+          validator_status: {
+            v6_9: els.v6ReleaseV6_9.value || "pending",
+            v6_8: els.v6ReleaseV6_8.value || "passed",
+            v6_7: els.v6ReleaseV6_7.value || "passed",
+            runtime_suite: els.v6ReleaseRuntimeSuite.value || "pending",
+            validate_mvp: els.v6ReleaseValidateMvp.value || "pending"
+          },
+          dirty_tree_status: els.v6ReleaseDirtyTree.value || "clean",
+          release_notes_status: els.v6ReleaseNotesStatus.value || "draft",
+          tag_candidate: els.v6ReleaseTagCandidate.value.trim() || null,
+          push_allowed: false,
+          tag_allowed: false,
+          release_allowed: false,
+          github_release_allowed: false,
+          deploy_allowed: false,
+          a5_production_execution_allowed: false,
+          boundary_cn: "发布面板仅展示准备状态。push/tag/release/deploy/A5 均被禁止。不创建真实 tag/release。"
+        };
       }()
     };
   }
@@ -4324,6 +4370,31 @@ function renderV6ProductRuntime(draft) {
     els.v6DispatchStatus.value = dpd.dispatch_status || "draft";
     els.v6DispatchTraceState.value = dpd.trace_state || "dispatch_draft";
     els.v6DispatchBoundaryText.textContent = dpd.boundary_cn || "所有行为保持 draft_only / no-execution。";
+  }
+
+  // v6.9A Release Panel — sync release_readiness_draft readout
+  var rrd = v6.release_readiness_draft;
+  if (rrd) {
+    els.v6ReleaseCurrentCommit.value = rrd.current_commit || "";
+    els.v6ReleaseBaselineCommit.value = rrd.baseline_commit || "";
+    els.v6ReleaseCandidateLabel.value = rrd.candidate_label || "";
+    if (rrd.validator_status) {
+      els.v6ReleaseV6_9.value = rrd.validator_status.v6_9 || "pending";
+      els.v6ReleaseV6_8.value = rrd.validator_status.v6_8 || "pending";
+      els.v6ReleaseV6_7.value = rrd.validator_status.v6_7 || "pending";
+      els.v6ReleaseRuntimeSuite.value = rrd.validator_status.runtime_suite || "pending";
+      els.v6ReleaseValidateMvp.value = rrd.validator_status.validate_mvp || "pending";
+    }
+    els.v6ReleaseDirtyTree.value = rrd.dirty_tree_status || "unknown";
+    els.v6ReleaseNotesStatus.value = rrd.release_notes_status || "draft";
+    els.v6ReleaseTagCandidate.value = rrd.tag_candidate || "";
+    els.v6ReleasePushAllowed.textContent = rrd.push_allowed !== false ? "true" : "false";
+    els.v6ReleaseTagAllowed.textContent = rrd.tag_allowed !== false ? "true" : "false";
+    els.v6ReleaseReleaseAllowed.textContent = rrd.release_allowed !== false ? "true" : "false";
+    els.v6ReleaseGithubReleaseAllowed.textContent = rrd.github_release_allowed !== false ? "true" : "false";
+    els.v6ReleaseDeployAllowed.textContent = rrd.deploy_allowed !== false ? "true" : "false";
+    els.v6ReleaseA5Allowed.textContent = rrd.a5_production_execution_allowed !== false ? "true" : "false";
+    els.v6ReleaseBoundaryText.textContent = rrd.boundary_cn || "发布面板仅展示准备状态。push/tag/release/deploy/A5 均被禁止。";
   }
 }
 
