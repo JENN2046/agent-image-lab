@@ -1,4 +1,4 @@
-# v7.14 Native Doubao Image Plugin
+# v7.15 Native Doubao Image Plugin
 
 ## 为什么做
 

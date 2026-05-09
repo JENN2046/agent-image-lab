@@ -133,7 +133,7 @@ $requiredFiles = @(
   'scripts/validate_v7_12_runner_model_override_preflight.js',
   'scripts/validate_v7_13_post_run_review_correction_loop.js',
   'scripts/validate_v7_14_doubaogen_model_lock_enforcement.js',
-  'scripts/validate_v7_14_native_doubao_image_plugin.js',
+  'scripts/validate_v7_15_native_doubao_image_plugin.js',
   'scripts/validate_prompt_package_library.js',
   'scripts/validate_a5_generation_template.js',
   'docs/00_project_roadmap.md',

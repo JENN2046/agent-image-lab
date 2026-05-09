@@ -12,7 +12,7 @@ check("config_exists", () => fileExists("plugins/image_generation/native_doubao_
 check("plugin_js_exists", () => fileExists("plugins/image_generation/native_doubao_image/native_doubao_image.js"));
 check("adapter_js_exists", () => fileExists("adapters/image_generation/native_doubao_adapter.js"));
 check("dry_run_fixture_exists", () => fileExists("plugins/image_generation/native_doubao_image/dry_run_fixture.json"));
-check("doc_272_exists", () => fileExists("docs/272_v7_14_native_doubao_image_plugin.md"));
+check("doc_272_exists", () => fileExists("docs/272_v7_15_native_doubao_image_plugin.md"));
 check("schema_exists", () => fileExists("schemas/native_doubao_image_plugin.schema.yaml"));
 
 const profile = fs.readFileSync(path.join(root, "plugins/image_generation/native_doubao_image/plugin.profile.yaml"), "utf8");
@@ -43,8 +43,12 @@ const fixture = JSON.parse(fs.readFileSync(path.join(root, "plugins/image_genera
 check("fixture_api_call_false", () => fixture.api_call_performed === false);
 check("fixture_image_false", () => fixture.image_created === false);
 
-check("validate_mvp_includes_native", () => fileContains("scripts/validate_mvp.ps1", "validate_v7_14_native_doubao_image_plugin"));
+check("validate_mvp_includes_native", () => {
+  const fp = path.join(root, "scripts/validate_mvp.ps1");
+  if (!fs.existsSync(fp)) return false;
+  return fs.readFileSync(fp, "utf8").includes("validate_v7_15_native_doubao_image_plugin");
+});
 
-const summary = { passed, phase: "v7.14 Native Doubao Image Plugin", check_count: results.length, failed_count: results.filter(r => !r.passed).length, draft_only: true, no_execution: true, real_execution: false, external_network_required: false, file_write_performed: false, results };
+const summary = { passed, phase: "v7.15 Native Doubao Image Plugin", check_count: results.length, failed_count: results.filter(r => !r.passed).length, draft_only: true, no_execution: true, real_execution: false, external_network_required: false, file_write_performed: false, results };
 process.stdout.write(JSON.stringify(summary, null, 2) + "\n");
 if (!passed) process.exitCode = 1;
