@@ -1,0 +1,26 @@
+three_shot_stability_plan_registry:
+  version: v1
+  updated_by_phase: v7_34
+  registry_only: true
+  execution_authorized_by_this_record: false
+  real_api_call_performed: false
+  image_created: false
+  memory_write_allowed: false
+  daily_note_write_allowed: false
+
+  plans:
+    - plan_id: french_summer_rattan_bag_v2_3shot
+      status: planned
+      target_prompt_package_ref: prompts/image_generation/product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v2.yaml
+      target_accepted_sample_id: accepted_french_summer_rattan_bucket_bag_001
+      provider_type: direct_api
+      plugin_id: NativeDoubaoImage
+      model: doubao-seedream-5-0-260128
+      watermark_required: false
+      shot_count: 3
+      execution_mode: sequential_independent_a5_single_runs
+      one_api_call_per_shot: true
+      one_image_per_shot: true
+      retry_allowed: false
+      batch_generation_authorized: false
+      next_phase: v7_35_french_summer_rattan_bag_v2_3shot_shot_1_a5

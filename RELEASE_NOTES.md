@@ -29,6 +29,7 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 
 ## Unreleased
 
+- Added v7.34 3-shot Stability Test Plan: registry, plan (French Summer Rattan Bag v2 watermark-off), doc, schema example, validator (51 checks). Plan only, no execution.
 - Added v3.6 first runtime code patch authorization template.
 - Added the first project-local runtime code patch for the Review Console runtime prototype.
 - Added host bridge mock draft validation and sanitized submit ack display.

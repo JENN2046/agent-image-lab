@@ -1,5 +1,27 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.34 3-shot Stability Test Plan
+
+```text
+Status: completed_validated_stability_test_plan
+Target: French Summer Rattan Bag v2 (product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v2)
+Plan: stability_tests/plans/french_summer_rattan_bag_v2_3shot_plan.yaml
+Registry: stability_tests/three_shot_stability_plan_registry.yaml
+Validator: scripts/validate_v7_34_3_shot_stability_test_plan.js (51 checks)
+Schema example: tests/schema_examples/v7_34_3_shot_stability_test_plan.example.yaml
+Doc: docs/289_v7_34_3_shot_stability_test_plan.md
+Shot count: 3 independent A5 single shots
+Per-shot gate: 15 acceptance checks, 10 hard blockers
+Stability scoring: 3/3 = stable_candidate, 2/3 = conditional_stable_needs_review, 0-1/3 = unstable
+Doubao API call: no
+image generation: no
+API key output: no
+A5 execution: no
+image/runs files committed: no
+Push: no
+Next: v7.35 French Summer Rattan Bag v2 3-shot Shot 1 A5
+```
+
 ## Extended Long Task — v6.9A + v6.9B + v6.10 + QC + Runbook
 
 ```text

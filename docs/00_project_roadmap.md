@@ -143,6 +143,7 @@ master tracking origin/master
 - v7.7 Single Real Generation Activation Readiness Check：准备就绪确认。`docs/264`，validator `validate_v7_7.js`（12 checks）
 - v7.8 A5 Template + Prompt Library Separation：提示词库（20 包）+ A5 统一模板。
 - v7.9 Prompt Library + A5 Activation UX Polish：选择指南 `docs/266` + 中文 UX 优化。validator `validate_v7_9.js`（16 checks）
+- v7.34 3-shot Stability Test Plan：3-shot 稳定性测试计划。`stability_tests/` + `docs/289` + validator `validate_v7_34.js`（51 checks）。plan_only, no-execution。
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：

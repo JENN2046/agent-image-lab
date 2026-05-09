@@ -1,0 +1,39 @@
+v7_34_3_shot_stability_test_plan:
+  status: plan_only
+  execution_authorized_by_this_record: false
+  target_prompt_package_ref: prompts/image_generation/product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v2.yaml
+  target_accepted_sample_id: accepted_french_summer_rattan_bucket_bag_001
+  failure_registry_ref: failure_samples/failure_registry.yaml
+  accepted_registry_ref: accepted_samples/accepted_sample_registry.yaml
+
+  plan:
+    shot_count: 3
+    execution_mode: sequential_independent_a5_single_runs
+    one_api_call_per_shot: true
+    one_image_per_shot: true
+    retry_allowed: false
+    batch_generation_authorized: false
+
+  planned_shots:
+    - shot_id: french_summer_rattan_bag_v2_shot_1
+      future_phase: v7_35
+      requires_independent_a5: true
+    - shot_id: french_summer_rattan_bag_v2_shot_2
+      future_phase: v7_36
+      requires_independent_a5: true
+    - shot_id: french_summer_rattan_bag_v2_shot_3
+      future_phase: v7_37
+      requires_independent_a5: true
+
+  stability_thresholds:
+    accepted_3_of_3: stable_candidate
+    accepted_2_of_3: conditional_stable_needs_review
+    accepted_0_or_1_of_3: unstable
+
+  safety:
+    real_api_call_performed: false
+    image_created: false
+    api_key_output: false
+    memory_write_allowed: false
+    daily_note_write_allowed: false
+    a5_required_for_each_shot: true

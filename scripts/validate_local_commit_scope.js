@@ -181,7 +181,13 @@ const allowedUntrackedFiles = [
   "tests/schema_examples/v5_9_expanded_v5_index_consistency.example.yaml",
   "tests/schema_examples/v5_10_local_true_loop_candidate_delivery.example.yaml",
   "tests/schema_examples/v5_11_post_merge_reconciliation.example.yaml",
-  "tests/schema_examples/v5_12_release_candidate_readiness.example.yaml"
+  "tests/schema_examples/v5_12_release_candidate_readiness.example.yaml",
+  "docs/289_v7_34_3_shot_stability_test_plan.md",
+  "scripts/validate_v7_34_3_shot_stability_test_plan.js",
+  "stability_tests/README.md",
+  "stability_tests/three_shot_stability_plan_registry.yaml",
+  "stability_tests/plans/french_summer_rattan_bag_v2_3shot_plan.yaml",
+  "tests/schema_examples/v7_34_3_shot_stability_test_plan.example.yaml"
 ];
 
 const allowedBranches = [

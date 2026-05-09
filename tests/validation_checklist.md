@@ -3609,3 +3609,28 @@
 - [ ] `scripts/validate_runtime_prototype_smoke.js` 覆盖 asset_status、human_decision、memory_suitability 切换和 filter status。
 - [ ] `scripts/validate_v6_0_product_runtime_kickoff.js` 和 `scripts/validate_v6_1_task_panel_interaction.js` 保持通过。
 - [ ] v6.2 不读真实 VCPChat/VCPToolBox、不读真实图片文件、不调用插件/API/DailyNote/VCP memory、不创建图片、不写磁盘、不 push/tag/release。
+
+## v7.34 3-shot Stability Test Plan 检查
+
+- [ ] stability_tests/README.md 存在。
+- [ ] stability_tests/three_shot_stability_plan_registry.yaml 存在，版本为 v1，由 v7.34 更新。
+- [ ] stability_tests/plans/french_summer_rattan_bag_v2_3shot_plan.yaml 存在，包含 3 个 shot 条目。
+- [ ] docs/289_v7_34_3_shot_stability_test_plan.md 存在，声明不授权真实生成。
+- [ ] 	ests/schema_examples/v7_34_3_shot_stability_test_plan.example.yaml 存在，声明 plan_only。
+- [ ] scripts/validate_v7_34_3_shot_stability_test_plan.js 存在，51 项检查全部通过。
+- [ ] registry 包含 french_summer_rattan_bag_v2_3shot，shot_count 为 3。
+- [ ] 每枪需独立 A5。
+- [ ] 每枪 max_plugin_calls 为 1、max_images_created 为 1、retry_allowed 为 false。
+- [ ] plan 包含 watermark_required: false 和 watermark_parameter_must_be_sent: true。
+- [ ] per_shot_acceptance_gate 包含 no_watermark_or_generated_mark: required_pass 和 clean_image_corners: required_pass。
+- [ ] stability_scoring 定义 accepted_3_of_3 -> stable_candidate、accepted_2_of_3 -> conditional_stable_needs_review、accepted_0_or_1_of_3 -> unstable。
+- [ ] node scripts/validate_v7_34_3_shot_stability_test_plan.js 通过。
+- [ ] node scripts/validate_v7_33_failure_registry.js 保持通过。
+- [ ] node scripts/validate_v7_32_accepted_sample_registry_update.js 保持通过。
+- [ ] node scripts/validate_v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_post_run_review_accepted_candidate.js 保持通过。
+- [ ] node scripts/validate_v7_30_native_doubao_watermark_parameter_enforcement.js 保持通过。
+- [ ] 不调用 Doubao API。
+- [ ] 不生成图片。
+- [ ] 不提交 jpg/png/webp 文件。
+- [ ] 不提交 runs/ 下文件。
+- [ ] v7.34 默认下一安全阶段为 v7.35 French Summer Rattan Bag v2 3-shot Shot 1 A5。

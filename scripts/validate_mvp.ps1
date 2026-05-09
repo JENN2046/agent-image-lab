@@ -150,6 +150,7 @@ $requiredFiles = @(
   'scripts/validate_v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_post_run_review_accepted_candidate.js',
   'scripts/validate_v7_32_accepted_sample_registry_update.js',
   'scripts/validate_v7_33_failure_registry.js',
+  'scripts/validate_v7_34_3_shot_stability_test_plan.js',
   'scripts/validate_prompt_package_library.js',
   'scripts/validate_a5_generation_template.js',
   'docs/00_project_roadmap.md',
@@ -5432,6 +5433,7 @@ if (-not $node) {
       'review_console/runtime_prototype/',
       'schemas/',
       'scripts/',
+      'stability_tests/',
       'tests/schema_examples/'
     )
     $allowedCurrentA4ChangeFiles = @(

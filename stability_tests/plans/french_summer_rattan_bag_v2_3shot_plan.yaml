@@ -1,0 +1,95 @@
+three_shot_stability_plan:
+  plan_id: french_summer_rattan_bag_v2_3shot
+  status: planned
+  created_by_phase: v7_34
+  execution_authorized_by_this_record: false
+
+  target:
+    prompt_package_ref: prompts/image_generation/product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v2.yaml
+    accepted_sample_ref: accepted_french_summer_rattan_bucket_bag_001
+    accepted_review_ref: docs/286_v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_post_run_review_accepted_candidate.md
+    failure_registry_ref: failure_samples/failure_registry.yaml
+    accepted_registry_ref: accepted_samples/accepted_sample_registry.yaml
+
+  provider:
+    plugin_id: NativeDoubaoImage
+    provider_type: direct_api
+    model: doubao-seedream-5-0-260128
+    watermark_required: false
+    watermark_parameter_must_be_sent: true
+
+  shots:
+    - shot_id: french_summer_rattan_bag_v2_shot_1
+      future_phase: v7_35
+      a5_activation_ref: A5-20260509-NATIVE-RATTAN-V2-3SHOT-001
+      output_directory: runs/real_generation/v7_35_french_summer_rattan_bag_v2_3shot_shot_1/
+      max_plugin_calls: 1
+      max_images_created: 1
+      retry_allowed: false
+      requires_independent_a5: true
+
+    - shot_id: french_summer_rattan_bag_v2_shot_2
+      future_phase: v7_36
+      a5_activation_ref: A5-20260509-NATIVE-RATTAN-V2-3SHOT-002
+      output_directory: runs/real_generation/v7_36_french_summer_rattan_bag_v2_3shot_shot_2/
+      max_plugin_calls: 1
+      max_images_created: 1
+      retry_allowed: false
+      requires_independent_a5: true
+
+    - shot_id: french_summer_rattan_bag_v2_shot_3
+      future_phase: v7_37
+      a5_activation_ref: A5-20260509-NATIVE-RATTAN-V2-3SHOT-003
+      output_directory: runs/real_generation/v7_37_french_summer_rattan_bag_v2_3shot_shot_3/
+      max_plugin_calls: 1
+      max_images_created: 1
+      retry_allowed: false
+      requires_independent_a5: true
+
+  per_shot_acceptance_gate:
+    prompt_subject_match: required_pass
+    style_direction_match: required_pass
+    product_fully_visible: required_pass
+    product_unobstructed: required_pass
+    rattan_texture_visible: required_pass
+    bicycle_rear_rack_visible: required_pass
+    partial_rear_wheel_visible: required_pass
+    no_leaf_obstruction: required_pass
+    no_readable_book_text: required_pass
+    no_person_or_face_unless_expected: required_pass
+    no_readable_text_or_logo_unless_expected: required_pass
+    no_watermark_or_generated_mark: required_pass
+    clean_image_corners: required_pass
+    commercial_usability: required_pass
+    memory_suitability: false
+
+  hard_blockers:
+    - model_mismatch
+    - watermark_parameter_missing
+    - watermark_parameter_not_false
+    - api_calls_more_than_one
+    - images_created_more_than_one
+    - retry_performed
+    - visible_watermark_or_generated_mark
+    - readable_logo_or_brand_monogram
+    - product_missing_or_heavily_obstructed
+    - severe_bicycle_structure_distortion
+    - api_key_output
+
+  stability_scoring:
+    accepted_3_of_3:
+      rating: stable_candidate
+      next_allowed_phase: batch_4_dry_run_protocol
+    accepted_2_of_3:
+      rating: conditional_stable_needs_review
+      next_allowed_phase: prompt_correction_or_repeat_3shot
+    accepted_0_or_1_of_3:
+      rating: unstable
+      next_allowed_phase: failure_analysis
+
+  safety:
+    batch_generation_authorized: false
+    real_api_call_performed: false
+    image_created: false
+    memory_write_allowed: false
+    daily_note_write_allowed: false

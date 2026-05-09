@@ -25,6 +25,7 @@ v7.6 Single Real Generation Activation Package — A5 activation package, operat
 v7.7 Single Real Generation Activation Readiness Check — Readiness check confirming all prerequisites met for first real A5 generation.
 v7.8 A5 Template + Prompt Library Separation — Prompt library (20 packages), A5 unified template, schemas, runbooks.
 v7.9 Prompt Library + A5 Activation UX Polish — Selection guide, Chinese UX polish, activation form with PluginDir manual confirmation.
+v7.34 3-shot Stability Test Plan — First 3-shot stability test plan targeting French Summer Rattan Bag v2 watermark-off prompt. Plan only, no execution.
 ```
 
 已经完成：
@@ -161,6 +162,7 @@ Photo Studio OS UI 生图生产线，以及 AI 图片评审与修正生产线。
 
 ## 目录导读
 
+- `stability_tests/`：3-shot Stability Test Plan 目录，包含 registry、plan 和协议定义。
 - `docs/00_project_roadmap.md`：从 v0.2 基线到 v1.0 true-loop closeout 的总路线图。
 - `docs/20_real_loop_completion_plan.md`：从 v0.4 到 v1.0 的真实闭环完成计划。
 - `docs/30_release_readiness_report.md`：当前 release readiness 结论。

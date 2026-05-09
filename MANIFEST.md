@@ -80,6 +80,7 @@
 - v7.7 Single Real Generation Activation Readiness Check：准备就绪确认。`docs/264_v7_7_single_real_generation_activation_readiness_check.md`，validator `scripts/validate_v7_7_single_real_generation_activation_readiness_check.js`（12 checks）
 - v7.8 A5 Template + Prompt Library Separation：提示词库（20 包）+ A5 统一模板 + schemas + runbooks。
 - v7.9 Prompt Library + A5 Activation UX Polish：选择指南 `docs/266` + 中文 UX 优化 + 激活表 PluginDir 手动确认。validator `scripts/validate_v7_9_prompt_library_activation_ux.js`（16 checks）
+- v7.34 3-shot Stability Test Plan：3-shot 稳定性测试计划。`stability_tests/README.md` + `stability_tests/three_shot_stability_plan_registry.yaml` + `stability_tests/plans/french_summer_rattan_bag_v2_3shot_plan.yaml` + `docs/289_v7_34_3_shot_stability_test_plan.md` + `tests/schema_examples/v7_34_3_shot_stability_test_plan.example.yaml` + validator `scripts/validate_v7_34_3_shot_stability_test_plan.js`（51 checks）。plan_only, no-execution。
 - Tag and version strategy 提供 `docs/233_tag_and_version_strategy.md`；tag 命名规范、版本号策略、release 条件。
 
 ## Release readiness 文件
