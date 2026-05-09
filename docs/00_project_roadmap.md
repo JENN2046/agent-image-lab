@@ -138,6 +138,7 @@ master tracking origin/master
 - v7.2 Generation Failure Taxonomy + Retry Policy：失败分类（11 类）+ 重试策略。`docs/257`，validator `validate_v7_2.js`（16 checks）
 - v7.3 Asset Acceptance Gate：资产验收门 + gate checklist。`docs/258`，validator `validate_v7_3.js`（17 checks）
 - v7.4 Memory Write Gate Package：记忆写入闸门（需独立 A5 授权）。`docs/259`，validator `validate_v7_4.js`（9 checks）
+- v7.5 Production Run Dry Run Prep：生产运行 dry-run 准备 + A5 激活清单。`docs/260` + `docs/261`，validator `validate_v7_5.js`（25 checks）
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：

@@ -1,0 +1,11 @@
+production_run_dry_run_prep:
+  status: draft_only
+  baseline_commit: f13c6c3
+  execution_authorized_by_this_record: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_created: false
+  daily_note_written: false
+  vcp_memory_written: false
+  a5_activation_required: true
+  next_step: v7.6_single_real_generation_activation_package

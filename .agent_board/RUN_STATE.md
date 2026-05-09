@@ -9,7 +9,13 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-v7.1~v7.4 Production Landing Preparation — controlled run package, failure taxonomy, asset acceptance gate, memory write gate. No real execution.
+v7.5 Production Run Dry Run Prep — dry-run prep, A5 activation checklist, operator pre-flight checklist. No real execution.
+```
+
+## Current Phase
+
+```text
+v7.5 — docs/260-261 + schema example + validator (24 checks). All v7 validators pass. No real execution.
 ```
 
 ## Current Branch
@@ -1191,5 +1197,5 @@ v6.7 Product Runtime Final Acceptance Baseline completed and pushed to origin/ma
 ## Next Action
 
 ```text
-v7.1-v7.4 completed. Next: user direction — push closeout or v7.5 Production Run Dry Run (still requires active A5).
+v7.5 completed. Next: user direction — push or v7.6 Single Real Generation Activation Package (requires active A5).
 ```

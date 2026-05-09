@@ -123,6 +123,7 @@ $requiredFiles = @(
   'scripts/validate_v7_2_generation_failure_taxonomy_and_retry_policy.js',
   'scripts/validate_v7_3_asset_acceptance_gate.js',
   'scripts/validate_v7_4_memory_write_gate_package.js',
+  'scripts/validate_v7_5_production_run_dry_run_prep.js',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
