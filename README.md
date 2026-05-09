@@ -40,6 +40,7 @@ v7.56 Memory Write Skip / Closeout Note — production candidate 001 closed with
 v7.50a-v7.50b VCP Read-only Bridge Validation Planning Pack — local schema validation planning and mock bridge payload validation planning defined. Docs-only. No validator execution. No mock run. No VCP call. No bridge call.
 v7.50a VCP Read-only Bridge Local Schema Validation Execution — local schema validator executed and passed. No mock run. No VCP call. No bridge call. No memory write. No image binary read.
 v7.50b VCP Read-only Bridge Mock Payload Validation Execution — mock payload validator executed and passed. No VCP call. No bridge call. No memory write. No image binary read.
+v7.50c VCP Read-only Bridge Dry-run Planning — future read-only bridge dry-run request/response contract, safety gates, and planning YAML defined. Docs-only. No dry-run execution. No VCP call. No bridge call. No memory write.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3

@@ -1,0 +1,63 @@
+vcp_read_only_bridge_dry_run_plan:
+  schema_version: v1
+  phase: v7_50c
+  status: planning_only
+  dry_run_execution_performed: false
+  vcp_call_performed: false
+  vcpchat_bridge_call_performed: false
+  memory_write_performed: false
+  dailynote_write_performed: false
+  image_binary_read: false
+
+  prerequisites:
+    v7_50a_local_schema_validation_result: pass
+    v7_50b_mock_payload_validation_result: pass
+
+  dry_run_id: v7_50c_read_only_bridge_dry_run_001
+  bridge_mode: read_only
+  case_id: french_summer_rattan_bag_v3_production_candidate_001
+
+  planned_request:
+    requested_by: human_operator
+    requested_resources:
+      - project_state
+      - production_candidate_review
+      - memory_write_skip_closeout
+      - bridge_contract
+      - bridge_security_gates
+      - memory_boundary
+    write_intent: false
+    image_binary_requested: false
+    secrets_requested: false
+    raw_payload_requested: false
+    private_absolute_path_requested: false
+
+  expected_response:
+    status: ok
+    payload_type: text_only_refs
+    returned_refs_only: true
+    image_binary_included: false
+    secrets_included: false
+    raw_payload_included: false
+    private_absolute_path_included: false
+    write_performed: false
+    memory_write_performed: false
+    daily_note_write_performed: false
+
+  hard_blockers:
+    - bridge_mode_not_read_only
+    - write_intent_detected
+    - image_binary_requested
+    - secret_requested
+    - raw_payload_requested
+    - private_absolute_path_requested
+    - dailynote_write_attempted
+    - vcp_memory_write_attempted
+    - closed_no_memory_write_reopen_attempted
+    - production_approved_claim_detected
+    - vcp_call_without_authorization
+    - vcpchat_bridge_call_without_authorization
+
+  next_allowed_steps:
+    - v7_50c_read_only_bridge_dry_run_execution_only_if_explicitly_authorized
+    - new_production_candidate_with_new_plan_and_a5

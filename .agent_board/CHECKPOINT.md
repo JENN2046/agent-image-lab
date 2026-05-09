@@ -932,6 +932,35 @@ hard_stops:
 - do_not_enter_real_bridge_dry_run_without_explicit_authorization
 ```
 
+## v7.50c VCP Read-only Bridge Dry-run Planning
+
+```text
+Phase: v7.50c
+Status: read_only_bridge_dry_run_planning_defined
+dry_run_execution_performed: false
+VCP call performed: false
+VCPChat bridge call performed: false
+DailyNote write performed: false
+VCP memory write performed: false
+image generation performed: false
+image binary read: false
+runs path read: false
+
+current_allowed_next_steps:
+- v7.50c read-only bridge dry-run execution, only if explicitly authorized
+- new production candidate only with new explicit plan and A5
+
+hard_stops:
+- do_not_execute_dry_run_without_explicit_instruction
+- do_not_call_vcp_without_independent_authorization
+- do_not_call_vcpchat_bridge_without_independent_authorization
+- do_not_write_dailynote_without_independent_a5
+- do_not_write_vcp_memory_without_independent_a5
+- do_not_generate_image_without_independent_a5
+- do_not_read_image_binary
+- do_not_reopen_closed_no_memory_write_case
+```
+
 ## Resume Instruction
 
 ```text
