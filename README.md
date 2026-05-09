@@ -11,6 +11,10 @@ v6.7 Product Runtime Final Acceptance Baseline — v6.1~v6.6 consolidated into v
 v6.8 Plugin Dashboard — Plugin Selector, Parameter Mapper, Dry-run Toggle, Dispatch Status added as draft-only surfaces. No real plugin execution.
 v6.8B Plugin Dashboard Guard Hardening — v6DispatchPlanIsSafe() added to runtime_guard.js. Safety fields verified (dry_run_required, execution_blocked, max_plugin_calls, etc).
 v6.9 Release Panel Planning — release_readiness_draft spec and implementation roadmap defined.
+v6.9A Release Panel Draft Surface — Release Panel with commit/validator/readiness status, all safety fields locked.
+v6.9B Release Panel Guard Hardening — v6ReleaseReadinessIsSafe() added to runtime_guard.js.
+v6.10 Product Runtime RC Readiness Matrix — Full module matrix with status/validator/guard/boundary.
+Validator Quality Gate — Meta-validator checks all v6 validators for quality.
 ```
 
 已经完成：

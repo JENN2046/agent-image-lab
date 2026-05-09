@@ -1,14 +1,14 @@
 # CHECKPOINT.md — Agent Image Lab
 
-## v6.8B Plugin Dashboard Guard Hardening + v6.9 Release Panel Planning
+## Extended Long Task — v6.9A + v6.9B + v6.10 + QC + Runbook
 
 ```text
-Status: Long Task completed — v6.8B (runtime_guard v6DispatchPlanIsSafe, docs/246, validator 18 checks) + v6.9 Release Panel Planning (docs/247, validator 15 checks). All v6.0-v6.9 validators pass. draft_only, no-execution. No push/tag/release.
+Status: Extended Long Task completed — v6.9A Release Panel UI (17 checks), v6.9B Guard (12 checks), v6.10 RC Matrix (8 checks), Validator Quality Gate (8 checks), Operator Runbook + Resume Capsule (14 checks). All v6 validators pass. draft_only, no-execution.
 
-All v6.0-v6.9 validators pass
+All v6 validators pass
 Runtime suite: all passed
 Push/tag/release: blocked pending separate authorization
-Next: pending user direction — v6.9A Release Panel Draft Surface or v6.10 Product Runtime RC
+Next: pending user direction — push
 ```
 
 ## v6.7 Product Runtime Final Acceptance Baseline

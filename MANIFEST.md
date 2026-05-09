@@ -65,6 +65,11 @@
 - v6.8 Plugin Dashboard Draft Surface：Plugin Selector、Parameter Mapper、Dry-run Toggle、Dispatch Status 四个区块和 dispatch_plan_draft 数据结构。`docs/245_v6_8a_plugin_dashboard_draft_surface.md`，validator `scripts/validate_v6_8_plugin_dashboard.js`（30 checks）
 - v6.8B Plugin Dashboard Guard Hardening：runtime_guard 新增 `v6DispatchPlanIsSafe()`，对 dispatch_plan_draft 进行 18 项安全校验。`docs/246_v6_8b_plugin_dashboard_guard_hardening.md`，validator `scripts/validate_v6_8b_plugin_dashboard_guard_hardening.js`（18 checks）
 - v6.9 Release Panel Planning：发布面板规划书，定义 release_readiness_draft 数据结构和实现路线。`docs/247_v6_9_release_panel_plan.md`，validator `scripts/validate_v6_9_release_panel_plan.js`（15 checks）
+- v6.9A Release Panel Draft Surface：Release Panel 面板实现。`docs/248_v6_9a_release_panel_draft_surface.md`，validator `scripts/validate_v6_9a_release_panel_draft_surface.js`（17 checks）
+- v6.9B Release Panel Guard Hardening：runtime_guard 新增 `v6ReleaseReadinessIsSafe()`。`docs/249_v6_9b_release_panel_guard_hardening.md`，validator `scripts/validate_v6_9b_release_panel_guard_hardening.js`（12 checks）
+- v6.10 Product Runtime RC Readiness Matrix：全模块验收矩阵。`docs/250_v6_10_product_runtime_rc_readiness_matrix.md`，validator `scripts/validate_v6_10_product_runtime_rc_readiness_matrix.js`（8 checks）
+- Validator Quality Gate：v6 validators 质量 meta 检查。`docs/251_v6_validator_quality_gate.md`，validator `scripts/validate_v6_validator_quality_gate.js`（8 checks）
+- v6 Operator Runbook + Resume Capsule：运维手册与续跑胶囊。`docs/252_v6_product_runtime_operator_runbook.md` + `docs/253_v6_10_resume_capsule.md`，validator `scripts/validate_v6_operator_runbook_and_resume_capsule.js`（14 checks）
 - Tag and version strategy 提供 `docs/233_tag_and_version_strategy.md`；tag 命名规范、版本号策略、release 条件。
 
 ## Release readiness 文件

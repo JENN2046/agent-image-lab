@@ -9,7 +9,7 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-v6.8B Plugin Dashboard Guard Hardening + v6.9 Release Panel Planning — runtime_guard v6DispatchPlanIsSafe() added. Release Panel roadmap defined. draft_only, no-execution.
+Extended Long Task — v6.9A Release Panel + v6.9B Guard + v6.10 RC Matrix + Validator Quality Gate + Runbook/Capsule. draft_only, no-execution.
 ```
 
 ## Current Branch
@@ -21,19 +21,19 @@ master tracking origin/master
 ## Current Phase
 
 ```text
-v6.8B + v6.9 Planning — runtime_guard v6DispatchPlanIsSafe() with 18 checks. v6.9 Release Panel planning complete. All v6.0-v6.9 validators pass. draft_only, no-execution.
+v6.9A + v6.9B + v6.10 + Quality Gate + Runbook — Extended Long Task complete. Release Panel UI/Guard, RC Matrix, Validator Quality, Operator Runbook, Resume Capsule all done. All v6.0-v6.operator validators pass.
 ```
 
 ## Current Task
 
 ```text
-Long Task — v6.8B Plugin Dashboard Guard Hardening + v6.9 Release Panel Planning. Guard v6DispatchPlanIsSafe() in runtime_guard.js. Release Panel roadmap in docs/247.
+Extended Long Task — v6.9A Release Panel Draft Surface + v6.9B Guard + v6.10 RC Matrix + Validator Quality Gate + Operator Runbook + Resume Capsule.
 ```
 
 ## Last Completed Task
 
 ```text
-Long Task completed — v6.8B (runtime_guard v6DispatchPlanIsSafe, docs/246, validator 18 checks) + v6.9 planning (docs/247, validator 15 checks). All v6.0-v6.9 validators pass. draft_only, no-execution.
+Extended Long Task completed — v6.9A (Release Panel UI + docs/248 + 17-check validator), v6.9B (runtime_guard v6ReleaseReadinessIsSafe + docs/249 + 12-check validator), v6.10 RC Matrix (docs/250 + 8-check validator), Validator Quality Gate (docs/251 + 8-check meta-validator), Operator Runbook (docs/252) + Resume Capsule (docs/253) + 14-check validator. All v6.0-v6.runbook validators pass. draft_only, no-execution.
 ```
 
 ## Last Validation
@@ -1191,5 +1191,5 @@ v6.7 Product Runtime Final Acceptance Baseline completed and pushed to origin/ma
 ## Next Action
 
 ```text
-Long Task completed (v6.8B + v6.9 planning). Next: user direction — v6.9A Release Panel Draft Surface or v6.10 Product Runtime RC.
+Extended Long Task completed. Next: user direction — push to origin/master.
 ```

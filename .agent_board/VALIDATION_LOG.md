@@ -1,5 +1,14 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## Extended Long Task Final Closeout
+
+```text
+Current phase: Extended Long Task closeout — v6.9A Release Panel + v6.9B Guard + v6.10 RC Matrix + QC + Runbook
+All v6 validators pass. Runtime suite passes. MVP passes. draft_only, no-execution.
+No push/tag/release.
+All 7 commits local, awaiting push.
+```
+
 ## v6.8B Plugin Dashboard Guard Hardening + v6.9 Release Panel Planning
 
 ```text

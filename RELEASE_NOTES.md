@@ -102,6 +102,11 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Added v6.8 Plugin Dashboard Draft Surface: Plugin Selector, Parameter Mapper, Dry-run Toggle, Dispatch Status with dispatch_plan_draft data structure. `docs/245_v6_8a_plugin_dashboard_draft_surface.md`, validator `scripts/validate_v6_8_plugin_dashboard.js` (30 checks). draft_only, no-execution.
 - Added v6.8B Plugin Dashboard Guard Hardening: v6DispatchPlanIsSafe() added to runtime_guard.js with 18 safety checks. `docs/246_v6_8b_plugin_dashboard_guard_hardening.md`, validator `scripts/validate_v6_8b_plugin_dashboard_guard_hardening.js` (18 checks). runtime_guard not relaxed.
 - Added v6.9 Release Panel Planning: release_readiness_draft spec and implementation roadmap. `docs/247_v6_9_release_panel_plan.md`, validator `scripts/validate_v6_9_release_panel_plan.js` (15 checks). Plan only, no UI, no release.
+- Added v6.9A Release Panel Draft Surface: Release Panel with commit/validator/readiness fields. `docs/248_v6_9a_release_panel_draft_surface.md`, validator `scripts/validate_v6_9a_release_panel_draft_surface.js` (17 checks). draft_only, no-execution.
+- Added v6.9B Release Panel Guard Hardening: v6ReleaseReadinessIsSafe() in runtime_guard.js. `docs/249_v6_9b_release_panel_guard_hardening.md`, validator `scripts/validate_v6_9b_release_panel_guard_hardening.js` (12 checks).
+- Added v6.10 Product Runtime RC Readiness Matrix: full module matrix. `docs/250_v6_10_product_runtime_rc_readiness_matrix.md`, validator `scripts/validate_v6_10_product_runtime_rc_readiness_matrix.js` (8 checks).
+- Added v6 Validator Quality Gate: meta-validator checking all v6 validators. `docs/251_v6_validator_quality_gate.md`, `scripts/validate_v6_validator_quality_gate.js` (8 checks).
+- Added v6 Operator Runbook + Resume Capsule: `docs/252_v6_product_runtime_operator_runbook.md`, `docs/253_v6_10_resume_capsule.md`, `scripts/validate_v6_operator_runbook_and_resume_capsule.js` (14 checks).
 
 ## Safety Status
 

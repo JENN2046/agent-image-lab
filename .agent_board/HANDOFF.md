@@ -3,9 +3,9 @@
 ## Handoff Summary
 
 ```text
-Status: Long Task COMPLETED — v6.8B Plugin Dashboard Guard Hardening + v6.9 Release Panel Planning. v6DispatchPlanIsSafe() added to runtime_guard.js (18 safety checks). Release Panel roadmap defined (release_readiness_draft spec). All v6.0-v6.9 validators pass. draft_only, no-execution. No push/tag/release.
-v6.8B builds on v6.8A Plugin Dashboard Draft Surface. v6.9 planning builds on v6.7 Baseline.
-Result: runtime_guard now validates dispatch_plan_draft safety fields (dry_run_required, execution_blocked, max_plugin_calls, selected_plugin.source, parameter security flags, dispatch/gatekeeper/trace states). Release Panel planning defines release_readiness_draft, no-action boundaries, and implementation roadmap (v6.9A→v6.10). Next: user direction — v6.9A Release Panel Draft Surface or v6.10 Product Runtime RC.
+Status: Extended Long Task COMPLETED — v6.9A Release Panel Draft Surface + v6.9B Guard + v6.10 RC Matrix + Validator Quality Gate + Operator Runbook + Resume Capsule. All v6 validators pass. draft_only, no-execution.
+Extends v6.7 Product Runtime Final Acceptance Baseline and v6.8A Plugin Dashboard Draft Surface.
+Result: Release Panel UI (docs/248, 17 checks), v6ReleaseReadinessIsSafe guard (docs/249, 12 checks), v6.10 RC Matrix (docs/250), Validator Quality Gate (docs/251, 8 checks), Operator Runbook (docs/252), Resume Capsule (docs/253, 14 checks). 7 local commits awaiting push.
 ```
 
 ## Current Repo
@@ -18,9 +18,9 @@ A:/agent-image-lab/agent-image-lab-v0.2
 
 ```text
 Branch: master
-Remote tracking: master...origin/master [ahead 3 — v6.8A + v6.8B + v6.9 planning]
-State: v6.8B + v6.9 planning complete. runtime_guard v6DispatchPlanIsSafe() added. Release Panel roadmap defined. draft_only, no-execution.
-Local head: ff6b251
+Remote tracking: master...origin/master [ahead 7 — v6.9A + v6.9B + v6.10 + QC + Runbook]
+State: Extended Long Task complete. Release Panel UI + Guard + RC Matrix + Quality Gate + Runbook + Capsule.
+Local head: a93cc9e
 Origin/master: eb4fade
 Current freshness doc: docs/226_runtime_review_batch_9a_state_freshness_index.md
 Current operator runbook: docs/227_runtime_review_batch_9c_operator_runbook_and_resume_capsule.md

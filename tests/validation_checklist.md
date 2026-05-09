@@ -40,6 +40,14 @@
 - [ ] `scripts/validate_v6_8b_plugin_dashboard_guard_hardening.js` 存在，包含 18 项检查且全部通过。
 - [ ] `docs/247_v6_9_release_panel_plan.md` 存在，定义 release_readiness_draft。
 - [ ] `scripts/validate_v6_9_release_panel_plan.js` 存在，包含 15 项检查且全部通过。
+- [ ] `docs/248_v6_9a_release_panel_draft_surface.md` 存在，包含 Release Panel DOM 和数据定义。
+- [ ] `scripts/validate_v6_9a_release_panel_draft_surface.js` 存在，包含 17 项检查且全部通过。
+- [ ] `scripts/validate_v6_9b_release_panel_guard_hardening.js` 存在，包含 12 项检查且全部通过。
+- [ ] `docs/250_v6_10_product_runtime_rc_readiness_matrix.md` 存在，包含 v6 全模块矩阵。
+- [ ] `scripts/validate_v6_10_product_runtime_rc_readiness_matrix.js` 存在，包含 8 项检查且全部通过。
+- [ ] `scripts/validate_v6_validator_quality_gate.js` 存在，包含 8 项 meta 检查且全部通过。
+- [ ] `docs/252_v6_product_runtime_operator_runbook.md` + `docs/253_v6_10_resume_capsule.md` 存在。
+- [ ] `scripts/validate_v6_operator_runbook_and_resume_capsule.js` 存在，包含 14 项检查且全部通过。
 - [ ] 所有任务书要求的 MVP 文件存在。
 - [ ] 文件直接位于项目根目录下，没有创建第二套 `agent-image-lab/` 嵌套目录。
 - [ ] 可运行 `scripts/validate_mvp.ps1` 完成只读自动检查；该脚本不是 Adapter、VCP 插件或真实执行入口。
