@@ -1,0 +1,4 @@
+category: material_direction_drift
+sample_count: 1
+failures:
+  - failure_tennis_wallet_v7_21_001

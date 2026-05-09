@@ -1,0 +1,27 @@
+v7_33_failure_registry:
+  status: registry_update_only
+  execution_authorized_by_this_record: false
+  image_files_committed_to_git: false
+
+  registry:
+    path: failure_samples/failure_registry.yaml
+    failure_count: 3
+
+  taxonomy:
+    path: failure_samples/failure_taxonomy.yaml
+    required_failure_types:
+      - watermark_or_generated_mark_present
+      - foreground_tennis_balls_too_large
+      - product_partially_obstructed_by_leaf
+      - readable_page_texture_risk
+      - background_material_direction_drift
+      - api_payload_missing_watermark_false
+      - prompt_watermark_control_insufficient
+
+  safety:
+    real_api_call_performed: false
+    image_created: false
+    api_key_output: false
+    memory_write_allowed: false
+    daily_note_write_allowed: false
+    a5_required_for_next_generation: true

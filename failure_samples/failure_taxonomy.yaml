@@ -1,0 +1,66 @@
+failure_taxonomy:
+  version: v1
+  updated_by_phase: v7_33
+
+  failure_types:
+    watermark_or_generated_mark_present:
+      severity: high
+      blocks_accepted_candidate: true
+      correction_strategy:
+        - enforce_watermark_false_in_api_payload
+        - verify_clean_image_corners_in_acceptance_gate
+
+    watermark_or_generation_mark_risk:
+      severity: medium
+      blocks_accepted_candidate: false
+      correction_strategy:
+        - add_no_watermark_no_generated_mark_prompt_constraints
+        - require_human_visual_review
+
+    foreground_tennis_balls_too_large:
+      severity: medium
+      blocks_accepted_candidate: false
+      correction_strategy:
+        - reduce_prop_dominance
+        - keep_product_unobstructed
+
+    product_partially_obstructed_by_leaf:
+      severity: medium
+      blocks_accepted_candidate: false
+      correction_strategy:
+        - add_no_leaf_obstruction_acceptance_gate
+        - keep_leaf_behind_or_at_edge
+
+    readable_page_texture_risk:
+      severity: medium
+      blocks_accepted_candidate: false
+      correction_strategy:
+        - require_blank_or_unreadable_book_pages
+        - add_no_readable_book_text_acceptance_gate
+
+    background_material_direction_drift:
+      severity: medium
+      blocks_accepted_candidate: false
+      correction_strategy:
+        - strengthen_material_direction
+        - add_negative_prompt_for_wrong_surface
+
+    clean_image_corners_failed:
+      severity: high
+      blocks_accepted_candidate: true
+      correction_strategy:
+        - enforce_watermark_false_in_api_payload
+        - validate_clean_image_corners
+
+    api_payload_missing_watermark_false:
+      severity: high
+      blocks_accepted_candidate: true
+      correction_strategy:
+        - require_watermark_false
+        - block_if_watermark_missing_or_invalid
+
+    prompt_watermark_control_insufficient:
+      severity: high
+      blocks_accepted_candidate: true
+      correction_strategy:
+        - move_watermark_control_to_api_parameter
