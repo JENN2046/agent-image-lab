@@ -76,6 +76,20 @@ production_candidate_plan:
     requires_human_override_for_memory_suitability_false: true
     next_possible_step: v7_56
 
+  memory_write_skip_closeout:
+    phase: v7_56
+    closeout_status: completed
+    closeout_ref: production/closeouts/french_summer_rattan_bag_v3_production_candidate_001_memory_write_skip_closeout.yaml
+    closeout_doc_ref: production/closeouts/v7_56_french_summer_rattan_bag_v3_production_candidate_001_memory_write_skip_closeout.md
+    final_decision: skip_memory_write
+    daily_note_write_final: false
+    vcp_memory_write_final: false
+    vcp_call_performed: false
+    daily_note_write_performed: false
+    vcp_memory_write_performed: false
+    current_case_state: closed_no_memory_write
+    reason: v7.53 review marked memory_suitability=false; v7.55 package_status=prepared_not_granted.
+
   forbidden:
     - image_generation_without_independent_a5
     - retry_without_new_a5

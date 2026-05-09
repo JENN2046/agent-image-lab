@@ -1,0 +1,75 @@
+memory_write_skip_closeout:
+  schema_version: v1
+  phase: v7_56
+  closeout_id: french_summer_rattan_bag_v3_production_candidate_001_memory_write_skip_closeout
+  source_production_candidate_id: french_summer_rattan_bag_v3_production_candidate_001
+  closeout_status: completed
+  final_decision: skip_memory_write
+
+  source_chain:
+    production_plan_ref: production/plans/french_summer_rattan_bag_v3_production_candidate_001_plan.yaml
+    review_ref: production/reviews/v7_53_french_summer_rattan_bag_v3_production_candidate_001_review.md
+    memory_delta_candidate_ref: production/memory_delta_candidates/french_summer_rattan_bag_v3_production_candidate_001_memory_delta_candidate.yaml
+    memory_write_authorization_package_ref: production/memory_write_authorizations/french_summer_rattan_bag_v3_production_candidate_001_memory_write_authorization_package.yaml
+    prompt_package_ref: prompts/image_generation/product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3.yaml
+    image_path_reference: runs/real_generation/v7_52_french_summer_rattan_bag_v3_production_candidate_001/native_doubao_1778345704865_0.jpg
+    image_binary_included: false
+    image_sha256_if_available: not_available
+
+  source_decisions:
+    asset_status: accepted_with_minor_warning
+    commercial_usability: pass
+    memory_suitability_from_review: false
+    memory_delta_candidate_status: draft_only
+    memory_write_authorization_package_status: prepared_not_granted
+    previous_write_decision: do_not_write_now
+
+  final_memory_write_decision:
+    daily_note_write_final: false
+    vcp_memory_write_final: false
+    vcp_call_performed: false
+    daily_note_write_performed: false
+    vcp_memory_write_performed: false
+    decision: skip_memory_write
+    reason: v7.53 review marked memory_suitability=false; v7.55 package_status=prepared_not_granted.
+
+  preserved_repository_evidence:
+    - production_plan
+    - production_review
+    - memory_delta_candidate_draft
+    - memory_write_authorization_package
+    - skip_closeout_note
+
+  forbidden_payloads:
+    - image_binary
+    - raw_image_file
+    - api_key
+    - token
+    - cookie
+    - raw_request_payload
+    - raw_response_payload
+    - provider_endpoint
+    - private_local_absolute_path
+    - customer_private_data
+    - unreviewed_generation_output
+    - memory_write_without_A5
+    - memory_write_despite_memory_suitability_false_without_override
+
+  future_reopen_policy:
+    reopen_allowed: true
+    reopen_requires:
+      - explicit_user_instruction
+      - explicit_human_override_for_memory_suitability_false
+      - new_authorization_package
+      - independent_A5_for_any_real_vcp_write
+      - canonical_location_verification_plan
+    default_future_state: closed_no_memory_write
+
+  final_status:
+    production_candidate_chain_closed: true
+    memory_write_skipped: true
+    daily_note_write_skipped: true
+    vcp_memory_write_skipped: true
+    repository_evidence_preserved: true
+    image_binary_committed: false
+    current_case_state: closed_no_memory_write

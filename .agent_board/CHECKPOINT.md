@@ -809,6 +809,37 @@ hard_stops:
 - do_not_push
 ```
 
+## v7.56 Memory Write Skip / Closeout Note
+
+```text
+Phase: v7.56
+Status: memory_write_skip_closeout_completed
+source_production_candidate_id: french_summer_rattan_bag_v3_production_candidate_001
+asset_status: accepted_with_minor_warning
+memory_suitability_from_review: false
+previous_package_status: prepared_not_granted
+final_decision: skip_memory_write
+current_case_state: closed_no_memory_write
+DailyNote write performed: false
+VCP memory write performed: false
+VCP call performed: false
+image generation performed: false
+
+current_allowed_next_steps:
+- v7.50a local schema validation planning
+- v7.50b mock bridge payload validation planning
+- new production candidate only with new explicit plan and A5
+
+hard_stops:
+- do_not_write_dailynote_for_this_candidate
+- do_not_write_vcp_memory_for_this_candidate
+- do_not_call_vcp_for_this_candidate
+- do_not_generate_image_without_new_independent_a5
+- do_not_store_image_binary_in_git_or_memory
+- do_not_reopen_memory_write_without_explicit_user_instruction
+- do_not_override_memory_suitability_false_without_human_authorization
+```
+
 ## Resume Instruction
 
 ```text
