@@ -1,0 +1,52 @@
+production_candidate_plan:
+  schema_version: v1
+  phase: v7_51
+  plan_id: french_summer_rattan_bag_v3_production_candidate_001
+  status: planned
+  product_line: French Summer Rattan Bag
+
+  prompt_package_id: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3
+  prompt_package_ref: prompts/image_generation/product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3.yaml
+  prompt_stability_status: stable_candidate
+  production_readiness: candidate_ready_with_manual_visual_review
+
+  planned_execution:
+    phase: v7_52
+    requires_independent_a5: true
+    execution_authorized_by_this_record: false
+    model: doubao-seedream-5-0-260128
+    output_directory: runs/real_generation/v7_52_french_summer_rattan_bag_v3_production_candidate_001/
+    api_calls_allowed: 1
+    images_allowed: 1
+    retry_allowed: false
+    batch_generation_authorized: false
+    watermark_requested: false
+    watermark_parameter_must_be_sent: true
+
+  review:
+    planned_review_phase: v7_53
+    human_review_required: true
+    review_checklist_ref: docs/v7_47_french_summer_rattan_bag_v3_human_review_checklist.md
+    allowed_asset_status:
+      - accepted_candidate
+      - accepted_with_minor_warning
+      - rejected
+      - needs_retry_new_a5_required
+
+  vcp_memory_boundary:
+    memory_write_allowed_by_this_record: false
+    daily_note_write_allowed_by_this_record: false
+    memory_delta_allowed_before_review: false
+    requires_accepted_human_review_before_memory_delta: true
+    memory_boundary_ref: docs/v7_49_vcp_memory_write_boundary_spec.md
+
+  forbidden:
+    - image_generation_without_independent_a5
+    - retry_without_new_a5
+    - batch_generation
+    - prompt_yaml_modification
+    - stability_plan_modification
+    - image_binary_commit
+    - vcp_call
+    - dailynote_write
+    - vcp_memory_write

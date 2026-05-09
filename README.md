@@ -33,6 +33,7 @@ v7.47 Human Review Checklist — production human review gates added. 10 core ga
 v7.48 Project State Sync Pack — repository entry state aligned with v3 production candidate readiness.
 v7.49 VCP Integration Readiness Pack — VCP integration layers, memory-write boundary, case_summary schema, and execution roadmap defined. Docs-only. No VCP call. No memory write.
 v7.50 VCP Read-only Bridge Planning — read-only bridge planning, contract, security gates, and validation plan defined. Docs-only. No VCP call. No memory write. No bridge execution.
+v7.51 Production Candidate Plan — first French Summer Rattan Bag v3 production candidate plan created. Docs-only. No image generation. No API call. v7.52 requires independent A5.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3

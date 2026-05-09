@@ -717,6 +717,37 @@ hard_stops:
 - do_not_treat_stable_candidate_as_production_approved
 ```
 
+## v7.51 Production Candidate Plan
+
+```text
+Phase: v7.51
+Status: production_candidate_001_planned
+production_candidate_id: french_summer_rattan_bag_v3_production_candidate_001
+planned_execution_phase: v7.52
+image generation performed: false
+image API call performed: false
+VCP call performed: false
+VCPChat bridge call performed: false
+DailyNote write performed: false
+VCP memory write performed: false
+
+current_allowed_next_steps:
+- v7.52 one-shot production candidate A5
+- v7.50a local schema validation planning
+- v7.50b mock bridge payload validation planning
+
+hard_stops:
+- do_not_generate_image_without_independent_a5
+- do_not_call_image_api_without_independent_a5
+- do_not_retry_without_new_a5
+- do_not_batch_generate
+- do_not_call_vcp_without_independent_a5
+- do_not_write_dailynote_without_independent_a5
+- do_not_write_vcp_memory_without_independent_a5
+- do_not_commit_image_binary
+- do_not_treat_planned_candidate_as_generated_asset
+```
+
 ## Resume Instruction
 
 ```text
