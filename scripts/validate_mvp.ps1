@@ -136,6 +136,7 @@ $requiredFiles = @(
   'scripts/validate_v7_15_native_doubao_image_plugin.js',
   'scripts/validate_v7_16_native_doubao_real_api_activation_preflight.js',
   'scripts/validate_v7_17_native_doubao_real_api_implementation_draft.js',
+  'scripts/validate_v7_18_local_native_doubao_env_setup.js',
   'scripts/validate_prompt_package_library.js',
   'scripts/validate_a5_generation_template.js',
   'docs/00_project_roadmap.md',
@@ -5419,6 +5420,8 @@ if (-not $node) {
       'tests/schema_examples/'
     )
     $allowedCurrentA4ChangeFiles = @(
+      '.env.example',
+      '.env.local.example',
       '.gitignore',
       'AGENTS.md',
       'CLAUDE.md',

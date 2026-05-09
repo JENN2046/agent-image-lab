@@ -4,5 +4,9 @@
 /.omc/
 /.claude/
 /CLAUDE.md
+.env
+.env.local
+.env.*.local
+configs/local_secrets/
 loudness_cache.db
 
