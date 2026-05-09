@@ -339,6 +339,19 @@ $success.plugin_reported_model_ref = $pluginReportedModelRef
 $success.plugin_reported_model_sha256_utf8 = if ($details.model) { Get-Sha256Utf8 ([string]$details.model) } else { $null }
 $success.requested_model_sha256_utf8 = if ([string]::IsNullOrWhiteSpace($ModelOverride)) { $null } else { Get-Sha256Utf8 $ModelOverride }
 $success.plugin_reported_model_matches_requested = if ($details.model -and -not [string]::IsNullOrWhiteSpace($ModelOverride)) { ([string]$details.model) -eq $ModelOverride } else { $null }
+
+# Model mismatch guard: if ModelOverride was specified but plugin used a different model,
+# downgrade status to blocked_model_mismatch and block asset acceptance / memory write.
+$modelMismatch = $success.plugin_reported_model_matches_requested -eq $false
+if ($modelMismatch) {
+  $success.status = 'blocked_model_mismatch'
+  $success.asset_status = 'blocked'
+  $success.memory_write_allowed = $false
+  $success.daily_note_write_allowed = $false
+  $success.model_mismatch_guard_triggered = $true
+  $success.model_mismatch_detail = "Requested: $ModelOverride, Plugin reported: $pluginReportedModelRef"
+}
+
 $success.audit_record = 'raw plugin stdout/stderr intentionally discarded after sanitization'
 $success.memory_delta_request_ref = 'memory_delta_request.sanitized.yaml'
 
