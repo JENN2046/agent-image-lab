@@ -112,6 +112,7 @@ $requiredFiles = @(
   'scripts/validate_v6_7_product_runtime_final_acceptance.js',
   'scripts/validate_v6_8_plugin_dashboard.js',
   'scripts/validate_v6_8b_plugin_dashboard_guard_hardening.js',
+  'scripts/validate_v6_9_release_panel_plan.js',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
