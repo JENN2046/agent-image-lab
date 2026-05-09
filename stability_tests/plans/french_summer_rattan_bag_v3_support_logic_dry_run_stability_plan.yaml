@@ -1,0 +1,113 @@
+v3_dry_run_stability_plan:
+  plan_id: french_summer_rattan_bag_v3_support_logic_dry_run
+  status: planned
+  created_by_phase: v7_40
+  execution_authorized_by_this_record: false
+  real_api_call_performed: false
+  image_created: false
+  memory_write_allowed: false
+  daily_note_write_allowed: false
+
+  source:
+    source_prompt_package_ref: prompts/image_generation/product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3.yaml
+    source_repair_note_ref: stability_tests/reviews/v7_38_prompt_repair_note_french_summer_rattan_bag_v2_support_logic.md
+    source_v2_stability_plan_ref: stability_tests/plans/french_summer_rattan_bag_v2_3shot_plan.yaml
+    source_v2_final_status: stable_candidate_needs_manual_review
+    source_v2_issue: lower_left_prop_support_logic_warning
+
+  provider:
+    provider_type: direct_api
+    plugin_id: NativeDoubaoImage
+    model: doubao-seedream-5-0-260128
+    watermark_required: false
+    watermark_parameter_must_be_sent: true
+    max_plugin_calls_per_shot: 1
+    max_images_per_shot: 1
+    retry_allowed: false
+    batch_generation_authorized: false
+    independent_a5_required_per_shot: true
+
+  shots:
+    - shot_id: french_summer_rattan_bag_v3_dry_run_shot_1
+      future_phase: v7_41
+      status: planned
+      requires_independent_a5: true
+      output_directory: runs/real_generation/v7_41_french_summer_rattan_bag_v3_dry_run_shot_1/
+
+    - shot_id: french_summer_rattan_bag_v3_dry_run_shot_2
+      future_phase: v7_42
+      status: planned
+      requires_independent_a5: true
+      output_directory: runs/real_generation/v7_42_french_summer_rattan_bag_v3_dry_run_shot_2/
+
+    - shot_id: french_summer_rattan_bag_v3_dry_run_shot_3
+      future_phase: v7_43
+      status: planned
+      requires_independent_a5: true
+      output_directory: runs/real_generation/v7_43_french_summer_rattan_bag_v3_dry_run_shot_3/
+
+  core_acceptance_gates:
+    prompt_subject_match: required_pass
+    style_direction_match: required_pass
+    product_fully_visible: required_pass
+    product_unobstructed: required_pass
+    rattan_texture_visible: required_pass
+    bicycle_rear_rack_visible: required_pass
+    partial_rear_wheel_visible: required_pass
+    no_leaf_obstruction: required_pass
+    no_readable_book_text: required_pass
+    no_person_or_face_unless_expected: required_pass
+    no_readable_text_or_logo_unless_expected: required_pass
+    no_watermark_or_generated_mark: required_pass
+    clean_image_corners: required_pass
+    commercial_usability: required_pass
+
+  v3_support_logic_gates:
+    lower_left_props_physically_supported: required_pass
+    orange_has_visible_support_surface: required_pass
+    keys_have_clear_anchor_point: required_pass
+    red_knit_has_contact_shadow: required_pass
+    no_floating_or_edge_stuck_props: required_pass
+    lower_left_prop_cluster_not_overpowering: required_pass
+    support_logic_believable_under_real_gravity: required_pass
+
+  hard_blockers:
+    - model_mismatch
+    - watermark_parameter_missing
+    - watermark_parameter_not_false
+    - api_calls_more_than_one
+    - images_created_more_than_one
+    - retry_performed
+    - visible_watermark_or_generated_mark
+    - readable_logo_or_brand_monogram
+    - product_missing_or_heavily_obstructed
+    - severe_bicycle_structure_distortion
+    - unsupported_or_floating_lower_left_props
+    - orange_without_visible_support_surface
+    - keys_without_clear_anchor_point
+    - red_knit_without_contact_shadow
+    - lower_left_props_edge_stuck_or_artificial_cluster
+    - api_key_output
+
+  stability_scoring:
+    3_of_3_clean_accepted_with_all_v3_gates_pass:
+      rating: stable_candidate
+      next_allowed_phase: batch_dry_run_protocol
+    2_of_3_clean_accepted_no_hard_blocker:
+      rating: stable_candidate_needs_manual_review
+      next_allowed_phase: prompt_repair_required
+    any_support_logic_hard_blocker:
+      rating: prompt_repair_required
+      next_allowed_phase: failure_analysis_and_prompt_correction
+    0_or_1_of_3_clean_accepted:
+      rating: unstable
+      next_allowed_phase: failure_analysis
+
+  safety:
+    this_plan_does_not_authorize_execution: true
+    every_shot_needs_independent_a5: true
+    batch_generation_authorized: false
+    retry_authorized: false
+    memory_write_authorized: false
+    daily_note_write_authorized: false
+    push_tag_release_authorized: false
