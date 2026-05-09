@@ -961,6 +961,36 @@ hard_stops:
 - do_not_reopen_closed_no_memory_write_case
 ```
 
+## v7.50c VCP Read-only Bridge Dry-run Execution
+
+```text
+Phase: v7.50c
+Status: read_only_bridge_dry_run_executed_pass
+dry_run_execution_performed: true
+dry_run_type: repository_local_text_only_refs
+VCP call performed: false
+VCPChat bridge call performed: false
+DailyNote write performed: false
+VCP memory write performed: false
+image generation performed: false
+image binary read: false
+runs path read: false
+production candidate closeout modified: false
+
+current_allowed_next_steps:
+- v7.50d VCPChat review console surface planning, only if explicitly authorized
+- new production candidate only with new explicit plan and A5
+
+hard_stops:
+- do_not_call_real_vcp_bridge_without_explicit_authorization
+- do_not_call_vcpchat_bridge_without_independent_authorization
+- do_not_write_dailynote_without_independent_a5
+- do_not_write_vcp_memory_without_independent_a5
+- do_not_generate_image_without_independent_a5
+- do_not_read_image_binary
+- do_not_reopen_closed_no_memory_write_case
+```
+
 ## Resume Instruction
 
 ```text
