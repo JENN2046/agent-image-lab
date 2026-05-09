@@ -1,0 +1,46 @@
+prompt_package_id: product_still_life_french_summer_rattan_bucket_bag_bicycle_v1
+version: v1
+language: zh_en_mixed
+mode: text_to_image
+reference_policy: text_only_no_image_input
+
+title_cn: "法式夏日藤编水桶包自行车静物 V1"
+purpose_cn: "生成高端法式夏日度假感藤编水桶包生活方式静物广告图"
+scene_type: french_summer_lifestyle_product_still_life
+product_category: fashion_bag
+aspect_ratio: "4:5"
+style_direction: premium fashion magazine still-life lifestyle advertising
+
+prompt: |
+  生成一张竖构图的高端时尚静物摄影作品，整体接近奢侈品牌夏日生活方式广告大片，具有法式度假感、南法街头气息、轻复古胶片质感和真实商业摄影质感。
+
+  画面主体是一只米黄色藤编水桶包，放置在复古自行车的后货架上。包包位于画面中央偏上位置，是绝对视觉焦点，占画面约 40% 到 55%，必须完整可见，不被花束、水果、书本、钥匙或自行车结构遮挡。包身为温暖浅米色，藤编纹理细密清晰，材质真实自然。包身可以带有棕红色抽象复古花卉刺绣装饰，但不能出现真实品牌 logo，不能出现可读字母，不能出现商标、老花品牌图案或任何可识别品牌标识。
+
+  包口微微敞开，顶部插着几支橙色玫瑰，花朵包裹着透明塑料纸，一根绿色花枝自然向上伸出，包包右侧自然垂下一片较大的深绿色叶子。包包正面有两根棕色皮革抽绳自然垂落，顶部有金色金属孔扣，皮革和金属都要有真实细节和微妙反光。包包整体略微向右倾斜，姿态自然，像一个真实发生过的夏日下午生活片段。
+
+  包包下方是复古自行车的后货架，货架上垫着一层牛皮纸包装物，一本微微打开的书自然放在旁边，书页边缘有轻微生活痕迹。右下方放着一小串青绿色葡萄，葡萄颗粒饱满但不能遮挡包包。画面左下角有一颗橙子，橙子靠近货架边缘，表面有自然果皮质感。橙子旁边搭着一小块红色针织物或编织布料，红色织物自然下垂在货架边缘。左下角可以有一串金属钥匙自然垂落，作为生活化细节，但不能抢走主视觉。
+
+  画面底部清晰露出自行车后轮的一部分，包括轮胎、银色轮圈、钢丝辐条、黑色挡泥板和金属货架支架，形成稳定的底部结构。自行车只露出后部局部，不要完整出现整辆车。
+
+  背景简洁干净，使用柔和的浅灰蓝色到淡薄荷蓝色过渡，像自然光下的简洁墙面或空气感背景，不要复杂街景，不要明显室内布景感。光线为强烈但自然的夏日下午阳光，从侧前方照射，形成清晰但优雅的阴影和温暖高光。整体色调有暖橙、米色、棕色与冷蓝绿色背景之间的高级对比，带来清爽、安静、轻电影感的夏日氛围。
+
+  English style anchor: premium commercial still-life photography, luxury fashion lifestyle advertising, French Riviera summer mood, vintage bicycle detail, woven rattan bucket bag as hero subject, realistic woven texture, brown leather drawstrings, gold metal eyelets, orange roses, green grapes, open book, natural afternoon sunlight, soft film grain, refined editorial composition, product-first composition, clean elegant background, tactile material detail, real photography.
+
+negative_prompt: >
+  人物, 手, 脸, 模特, 可读文字, 字母, logo, 品牌标识, 商标, 水印, 生成标记, 假文字, 假 logo, 过于清晰的老花图案, 真实品牌图案, 可识别品牌 monogram, 多个包, 包包被遮挡, 花束遮挡包包, 葡萄遮挡包包, 道具抢主体, 完整自行车, 复杂街景, 杂乱背景, 明显室内布景, 电商白底, 低质感, 塑料感, CGI, 卡通, 插画, 过曝, 过度锐化, 变形自行车轮, 扭曲辐条, 错乱金属结构, dirty background, fake text, readable letters, watermark, generated mark, logo, brand mark, product obstruction, clutter, full bicycle, distorted wheel, broken spokes, plastic look, cartoon, illustration
+
+acceptance_gate:
+  prompt_subject_match: true
+  style_direction_match: true
+  product_fully_visible: true
+  product_unobstructed: true
+  rattan_texture_visible: true
+  bicycle_rear_rack_visible: true
+  partial_rear_wheel_visible: true
+  no_person_or_face_unless_expected: true
+  no_readable_text_or_logo_unless_expected: true
+  no_watermark_or_generated_mark: true
+  commercial_usability: true
+
+memory_write_allowed: false
+daily_note_write_allowed: false
