@@ -1,0 +1,76 @@
+accepted_sample_registry:
+  version: v1
+  updated_by_phase: v7_32
+  image_files_committed_to_git: false
+  registry_only: true
+  memory_write_allowed: false
+  daily_note_write_allowed: false
+
+  samples:
+    - sample_id: accepted_product_still_life_tennis_wallet_001
+      source_phase: v7_24
+      asset_status: accepted_candidate
+      provider_type: direct_api
+      plugin_id: NativeDoubaoImage
+      model: doubao-seedream-5-0-260128
+      prompt_package_ref: prompts/image_generation/product_still_life_outdoor_tennis_wallet_hero_no_text_v3.yaml
+      review_doc_ref: docs/281_v7_24_native_doubao_v3_post_run_review_accepted_candidate.md
+      image_path: runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg
+      category: product_still_life
+      style_tags:
+        - outdoor_tennis
+        - leather_accessory
+        - commercial_product_photography
+        - accepted_candidate
+      acceptance_summary:
+        prompt_subject_match: pass
+        product_fully_visible: pass
+        product_unobstructed: pass
+        no_watermark_or_generated_mark: pass
+        commercial_usability: pass
+        memory_suitability: false
+      known_minor_issues:
+        - wallet_shape_can_be_more_specific
+        - sunlight_and_surface_texture_can_be_more_refined
+      commercial_use_level: accepted_candidate
+      write_to_memory_allowed: false
+      daily_note_write_allowed: false
+
+    - sample_id: accepted_french_summer_rattan_bucket_bag_001
+      source_phase: v7_31
+      asset_status: accepted_candidate
+      provider_type: direct_api
+      plugin_id: NativeDoubaoImage
+      model: doubao-seedream-5-0-260128
+      watermark_requested: false
+      watermark_parameter_sent: true
+      watermark_policy: disabled_by_request_payload
+      prompt_package_ref: prompts/image_generation/product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v2.yaml
+      review_doc_ref: docs/286_v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_post_run_review_accepted_candidate.md
+      image_path: runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg
+      category: fashion_lifestyle_still_life
+      style_tags:
+        - french_summer
+        - rattan_bag
+        - vintage_bicycle
+        - fashion_lifestyle
+        - watermark_off
+        - accepted_candidate
+      acceptance_summary:
+        prompt_subject_match: pass
+        product_fully_visible: pass
+        product_unobstructed: pass
+        no_leaf_obstruction: pass
+        no_readable_book_text: pass
+        no_watermark_or_generated_mark: pass
+        clean_image_corners: pass
+        commercial_usability: pass
+        memory_suitability: false
+      known_minor_issues:
+        - bag_shape_can_be_more_bucket_like
+        - french_riviera_street_air_can_be_stronger
+        - left_side_props_slightly_dense
+      commercial_use_level: accepted_candidate
+      validates_watermark_false_parameter: true
+      write_to_memory_allowed: false
+      daily_note_write_allowed: false

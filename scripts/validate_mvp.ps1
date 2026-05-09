@@ -148,6 +148,7 @@ $requiredFiles = @(
   'scripts/validate_v7_28_french_summer_watermark_control_prompt_correction.js',
   'scripts/validate_v7_30_native_doubao_watermark_parameter_enforcement.js',
   'scripts/validate_v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_post_run_review_accepted_candidate.js',
+  'scripts/validate_v7_32_accepted_sample_registry_update.js',
   'scripts/validate_prompt_package_library.js',
   'scripts/validate_a5_generation_template.js',
   'docs/00_project_roadmap.md',
@@ -5417,6 +5418,7 @@ if (-not $node) {
 
     $allowedCurrentA4ChangePrefixes = @(
       '.agent_board/',
+      'accepted_samples/',
       'adapters/',
       'configs/local_paths/',
       'docs/',
