@@ -23,4 +23,4 @@ three_shot_stability_plan_registry:
       one_image_per_shot: true
       retry_allowed: false
       batch_generation_authorized: false
-      next_phase: v7_36_french_summer_rattan_bag_v2_3shot_shot_2_a5
+      next_phase: v7_37_french_summer_rattan_bag_v2_3shot_shot_3_a5

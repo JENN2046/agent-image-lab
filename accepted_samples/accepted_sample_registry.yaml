@@ -113,3 +113,43 @@ accepted_sample_registry:
       validates_watermark_false_parameter: true
       write_to_memory_allowed: false
       daily_note_write_allowed: false
+
+    - sample_id: accepted_french_summer_rattan_bucket_bag_003_shot_2
+      source_phase: v7_36
+      source_plan: french_summer_rattan_bag_v2_3shot
+      asset_status: accepted_candidate
+      provider_type: direct_api
+      plugin_id: NativeDoubaoImage
+      model: doubao-seedream-5-0-260128
+      watermark_requested: false
+      watermark_parameter_sent: true
+      watermark_policy: disabled_by_request_payload
+      prompt_package_ref: prompts/image_generation/product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v2.yaml
+      review_doc_ref: stability_tests/reviews/v7_36_shot_2_post_run_review.md
+      image_path: runs/real_generation/v7_36_french_summer_rattan_bag_v2_3shot_shot_2/native_doubao_1778335907390_0.jpg
+      category: fashion_lifestyle_still_life
+      style_tags:
+        - french_summer
+        - rattan_bag
+        - vintage_bicycle
+        - fashion_lifestyle
+        - watermark_off
+        - accepted_candidate
+      acceptance_summary:
+        prompt_subject_match: pass
+        product_fully_visible: pass
+        product_unobstructed: pass
+        no_leaf_obstruction: pass
+        no_readable_book_text: pass
+        no_watermark_or_generated_mark: pass
+        clean_image_corners: pass
+        commercial_usability: pass
+        memory_suitability: false
+      known_minor_issues:
+        - embroidered_floral_detail_slightly_more_decorative_than_plain_rattan_reference
+        - flower_plastic_wrap_feels_somewhat_studio_styled
+        - red_knit_and_keys_are_visually_strong_but_not_blocking_product
+      commercial_use_level: accepted_candidate
+      validates_watermark_false_parameter: true
+      write_to_memory_allowed: false
+      daily_note_write_allowed: false
