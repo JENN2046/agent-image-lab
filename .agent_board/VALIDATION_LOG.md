@@ -1,5 +1,16 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## v6.7 Patch 01 — resolve untracked CLAUDE.md validation blocker
+
+```text
+Current phase: v6.7 Patch 01 — CLAUDE.md added to .gitignore, local validation now passes clean.
+No real VCPChat/VCPToolBox read.
+No plugin/API/DailyNote/VCP memory/image action.
+No commit/tag/push/PR/release.
+node scripts/validate_v6_7_product_runtime_final_acceptance.js: passed (31/31)
+powershell validate-agent-image-lab-local.ps1: PASSED_WITH_WARNINGS_OK_FOR_MANUAL_REVIEW
+```
+
 ## v6.7 Product Runtime Final Acceptance Baseline
 
 ```text

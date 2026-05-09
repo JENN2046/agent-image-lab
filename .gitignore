@@ -3,5 +3,6 @@
 /.agent_private/
 /.omc/
 /.claude/
+/CLAUDE.md
 loudness_cache.db
 
