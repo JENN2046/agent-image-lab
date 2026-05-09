@@ -1,0 +1,62 @@
+read_only_bridge_adapter_security_gate_validation:
+  schema_version: v1
+  phase: v7_51f
+  status: executed_pass
+  security_gate_validator_file: scripts/validate_agent_image_lab_read_only_adapter_security_gates.js
+  security_gate_validation_executed: true
+  result: pass
+  cases_total: 11
+  cases_passed: 11
+  cases_failed: 0
+  all_hard_blockers_enforced: true
+
+  gates:
+    - name: bridge_mode_not_read_only
+      trigger: bridge_mode='read_write'
+      blocked_reason: bridge_mode_not_read_only
+    - name: payload_type_not_text_only_refs
+      trigger: payload_type='image_binary'
+      blocked_reason: payload_type_not_text_only_refs
+    - name: write_intent_detected
+      trigger: write_intent=true
+      blocked_reason: write_intent_detected
+    - name: image_binary_requested
+      trigger: image_binary_requested=true
+      blocked_reason: image_binary_requested
+    - name: secret_requested
+      trigger: secrets_requested=true
+      blocked_reason: secret_requested
+    - name: raw_payload_requested
+      trigger: raw_payload_requested=true
+      blocked_reason: raw_payload_requested
+    - name: private_absolute_path_requested
+      trigger: private_absolute_path_requested=true
+      blocked_reason: private_absolute_path_requested
+    - name: memory_write_attempted
+      trigger: memory_write_requested=true
+      blocked_reason: memory_write_attempted
+    - name: dailynote_write_attempted
+      trigger: dailynote_write_requested=true
+      blocked_reason: dailynote_write_attempted
+    - name: production_approved_claim_detected
+      trigger: production_approved_claim_requested=true
+      blocked_reason: production_approved_claim_detected
+    - name: closed_case_reopen_attempted
+      trigger: reopen_closed_case_requested=true
+      blocked_reason: closed_case_reopen_attempted
+
+  external_side_effects:
+    vcp_call_performed: false
+    vcpchat_bridge_call_performed: false
+    electron_started: false
+    remote_debug_started: false
+    cdp_call_performed: false
+    daily_note_write_performed: false
+    vcp_memory_write_performed: false
+    image_generation_performed: false
+    image_binary_read: false
+    runs_path_read: false
+
+  next_allowed_steps:
+    - v7_51g_read_only_adapter_fixture_regression_execution
+    - v7_51h_read_only_adapter_validation_closeout

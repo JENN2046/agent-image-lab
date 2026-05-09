@@ -1102,17 +1102,35 @@ hard_stops:
 - do_not_reopen_closed_no_memory_write_case
 ```
 
-## v7.51d Local Read-only Bridge Adapter Runtime Implementation
+## v7.51e-v7.51h Adapter Validation Closeout
 
 ```text
-Phase: v7.51d
-Status: local_read_only_adapter_runtime_implemented
-adapter_runtime_implemented: true
-adapter_runtime_file: scripts/agent_image_lab_read_only_adapter.js
-canonical_smoke_result: pass
-schema_validator_implemented: false
-security_gate_validator_implemented: false
-fixture_regression_implemented: false
+Phase: v7.51e-v7.51h
+Status: adapter_validation_closeout_completed
+schema_validation: pass (6 cases, 13 checks, 0 failed)
+security_gate_validation: pass (11 gates, 11 checks, 0 failed)
+fixture_regression: pass (9 cases, 24 checks, 0 failed)
+all_hard_blockers_enforced: true
+all_side_effects_false: true
+
+validators_implemented:
+  schema_validator: true
+  security_gate_validator: true
+  fixture_regression_validator: true
+  adapter_runtime_file: scripts/agent_image_lab_read_only_adapter.js
+  schema_validator_file: scripts/validate_agent_image_lab_read_only_adapter_schema.js
+  security_gate_validator_file: scripts/validate_agent_image_lab_read_only_adapter_security_gates.js
+  fixture_regression_file: scripts/validate_agent_image_lab_read_only_adapter_fixtures.js
+
+closeout_docs:
+  - docs/v7_51e_read_only_bridge_adapter_schema_validation_report.md
+  - docs/v7_51e_read_only_bridge_adapter_schema_validation_result.yaml
+  - docs/v7_51f_read_only_bridge_adapter_security_gate_validation_report.md
+  - docs/v7_51f_read_only_bridge_adapter_security_gate_validation_result.yaml
+  - docs/v7_51g_read_only_bridge_adapter_fixture_regression_report.md
+  - docs/v7_51g_read_only_bridge_adapter_fixture_regression_result.yaml
+  - docs/v7_51h_read_only_bridge_adapter_validation_closeout.md
+
 VCP call performed: false
 VCPChat bridge call performed: false
 Electron started: false
@@ -1125,8 +1143,10 @@ image binary read: false
 runs path read: false
 
 current_allowed_next_steps:
-- v7.51e read-only adapter schema validation execution, only if explicitly authorized
-- v7.51f read-only adapter security gate validation execution, only if explicitly authorized
+- LT-05 VCPToolBox ingestion
+- LT-07 E2E fixture
+- v7.50e real VCPChat surface check planning
+- new production candidate with independent A5
 
 hard_stops:
 - do_not_call_vcp_without_independent_authorization
@@ -1137,6 +1157,7 @@ hard_stops:
 - do_not_generate_image_without_independent_a5
 - do_not_read_image_binary
 - do_not_reopen_closed_no_memory_write_case
+- do_not_push_without_authorization
 ```
 
 ## Resume Instruction

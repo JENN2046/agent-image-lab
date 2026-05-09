@@ -132,7 +132,7 @@ function processRequest(req) {
     };
   }
 
-  if (req.case_id && req.case_id !== 'french_summer_rattan_bag_v3_production_candidate_001') {
+  if (!req.case_id || req.case_id !== 'french_summer_rattan_bag_v3_production_candidate_001') {
     return {
       schema_version: 'v1',
       adapter_phase: 'v7_51d',

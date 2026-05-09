@@ -1,0 +1,59 @@
+read_only_bridge_adapter_fixture_regression:
+  schema_version: v1
+  phase: v7_51g
+  status: executed_pass
+  fixture_regression_file: scripts/validate_agent_image_lab_read_only_adapter_fixtures.js
+  fixture_regression_executed: true
+  result: pass
+  cases_total: 9
+  cases_passed: 24
+  cases_failed: 0
+  duplicate_refs_detected: false
+  absolute_paths_detected: false
+  file_content_returned: false
+  image_binary_returned: false
+
+  fixtures:
+    canonical_smoke_request:
+      checks: 7
+      result: pass
+    all_known_resource_categories:
+      checks: 3
+      result: pass
+      refs_returned: 12
+    duplicate_requested_resources:
+      checks: 2
+      result: pass
+      no_duplicates: true
+    mixed_known_and_unknown_resources:
+      checks: 3
+      result: pass
+    unknown_resource_only:
+      status: not_found
+    unknown_case_id:
+      status: not_found
+    blocked_image_binary_request:
+      status: blocked
+      reason: image_binary_requested
+      empty_refs: true
+    blocked_memory_write_request:
+      status: blocked
+      reason: memory_write_attempted
+    blocked_closed_case_reopen_request:
+      status: blocked
+      reason: closed_case_reopen_attempted
+
+  external_side_effects:
+    vcp_call_performed: false
+    vcpchat_bridge_call_performed: false
+    electron_started: false
+    remote_debug_started: false
+    cdp_call_performed: false
+    daily_note_write_performed: false
+    vcp_memory_write_performed: false
+    image_generation_performed: false
+    image_binary_read: false
+    runs_path_read: false
+
+  next_allowed_steps:
+    - v7_51h_read_only_adapter_validation_closeout
