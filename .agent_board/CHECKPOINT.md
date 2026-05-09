@@ -7,7 +7,7 @@ Status: v6.7 — v6.1~v6.6 consolidated into v6 Product Runtime Baseline. 6 modu
 
 All v6.0-v6.7 validators pass
 Runtime suite: all passed
-Push/tag/release: blocked pending separate authorization
+Push: completed (4 commits, no tag)
 Next: pending user direction — v6.8 Plugin Dashboard or v7 Real Production Expansion
 ```
 

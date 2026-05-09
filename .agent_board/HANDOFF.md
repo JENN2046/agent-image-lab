@@ -17,10 +17,10 @@ A:/agent-image-lab/agent-image-lab-v0.2
 
 ```text
 Branch: master
-Remote tracking: master...origin/master
-State: v6.6 Product Shell QA + Visual Polish — v6.5 product shell quality review, visual polish, decision rail QA, and acceptance reinforcement. All v6.0-v6.6 validators pass. draft_only, no-execution. Push/tag/release require separate authorization.
-Local head: 1453664
-Origin/master: 1453664
+Remote tracking: master...origin/master [0 0 — synced]
+State: v6.7 Product Runtime Final Acceptance Baseline — v6.1~v6.6 consolidated into v6 Product Runtime Baseline. Pushed to origin/master at 2b75fcb. 4 commits. No tag, no release. draft_only, no-execution.
+Local head: 2b75fcb
+Origin/master: 2b75fcb
 Current freshness doc: docs/226_runtime_review_batch_9a_state_freshness_index.md
 Current operator runbook: docs/227_runtime_review_batch_9c_operator_runbook_and_resume_capsule.md
 Current compatibility matrix: docs/228_runtime_review_batch_9b_runtime_session_compatibility_matrix.md
