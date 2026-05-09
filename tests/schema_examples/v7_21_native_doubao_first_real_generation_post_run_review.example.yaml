@@ -1,0 +1,41 @@
+native_doubao_first_real_generation_post_run_review:
+  status: completed_generated
+  asset_status: needs_human_review
+
+  run:
+    provider_type: direct_api
+    plugin_id: NativeDoubaoImage
+    command: generate
+    model_requested: doubao-seedream-5-0-260128
+    model_reported: doubao-seedream-5-0-260128
+    model_matches: true
+    api_calls_observed: 1
+    images_created: 1
+    retry_performed: false
+    output_path: runs/real_generation/v7_21_native_doubao_first_real_run/native_doubao_1778320041596_0.jpg
+
+  asset_acceptance_gate:
+    prompt_subject_match: pass
+    style_direction_match: pass
+    no_person_or_face_unless_expected: pass
+    no_readable_text_or_logo_unless_expected: pass_with_risk
+    commercial_usability: partial_pass
+    memory_suitability: false
+
+  deviations:
+    - watermark_or_generation_mark_risk
+    - foreground_tennis_balls_too_large
+    - background_material_direction_drift
+
+  correction_plan:
+    next_phase: v7.22_prompt_correction_no_watermark_unobstructed_product_v3
+    next_prompt_goal:
+      - remove watermark / generated mark risk
+      - keep wallet unobstructed
+      - reduce tennis ball dominance
+      - force racket strings / tennis surface material
+      - preserve no text / no logo / no readable letters
+    new_a5_required: true
+    retry_allowed: false
+    memory_write_allowed: false
+    daily_note_write_allowed: false
