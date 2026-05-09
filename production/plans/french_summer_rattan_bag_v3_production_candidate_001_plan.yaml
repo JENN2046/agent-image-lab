@@ -65,6 +65,17 @@ production_candidate_plan:
     reason: v7.53 review marked memory_suitability=false; draft prepared for future human review only.
     next_possible_step: v7_55_memory_write_authorization_package
 
+  memory_write_authorization:
+    package_phase: v7_55
+    package_status: prepared_not_granted
+    package_ref: production/memory_write_authorizations/french_summer_rattan_bag_v3_production_candidate_001_memory_write_authorization_package.yaml
+    package_doc_ref: production/memory_write_authorizations/v7_55_french_summer_rattan_bag_v3_production_candidate_001_memory_write_authorization_package.md
+    daily_note_write_authorized: false
+    vcp_memory_write_authorized: false
+    current_decision: do_not_write_now
+    requires_human_override_for_memory_suitability_false: true
+    next_possible_step: v7_56
+
   forbidden:
     - image_generation_without_independent_a5
     - retry_without_new_a5

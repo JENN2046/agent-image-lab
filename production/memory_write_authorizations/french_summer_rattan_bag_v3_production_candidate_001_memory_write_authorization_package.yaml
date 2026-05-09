@@ -1,0 +1,48 @@
+memory_write_authorization_package:
+  schema_version: v1
+  phase: v7_55
+  package_id: french_summer_rattan_bag_v3_production_candidate_001_memory_write_authorization_package
+  status: prepared_not_granted
+
+  source_refs:
+    production_plan_ref: production/plans/french_summer_rattan_bag_v3_production_candidate_001_plan.yaml
+    review_ref: production/reviews/v7_53_french_summer_rattan_bag_v3_production_candidate_001_review.md
+    memory_delta_candidate_yaml_ref: production/memory_delta_candidates/french_summer_rattan_bag_v3_production_candidate_001_memory_delta_candidate.yaml
+    memory_delta_candidate_doc_ref: production/memory_delta_candidates/v7_54_french_summer_rattan_bag_v3_production_candidate_001_memory_delta_candidate.md
+    prompt_package_ref: prompts/image_generation/product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3.yaml
+
+  authorization_decision:
+    daily_note_write_authorized: false
+    vcp_memory_write_authorized: false
+    current_decision: do_not_write_now
+    reason: "v7.53 review marked memory_suitability=false and v7.54 current_write_decision=do_not_write."
+
+  source_review_result:
+    asset_status: accepted_with_minor_warning
+    memory_suitability_from_review: false
+    daily_note_write_allowed_from_review: false
+    vcp_memory_write_allowed_from_review: false
+
+  memory_delta_candidate_status:
+    candidate_status: draft_only
+    write_now: false
+
+  constraints:
+    requires_independent_a5_before_any_write: true
+    requires_human_authorization_to_override_memory_suitability_false: true
+    image_binary_included: false
+    image_sha256_if_available: not_available
+
+  next_possible_step: v7_56
+  next_possible_step_conditions:
+    - human_override_for_memory_suitability_false
+    - independent_a5_for_memory_write
+
+  stop_conditions:
+    - do_not_write_dailynote
+    - do_not_write_vcp_memory
+    - do_not_call_vcp
+    - do_not_generate_image
+    - do_not_commit_image_binary
+    - do_not_push
+    - do_not_enter_v7_56_without_explicit_instruction
