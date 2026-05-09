@@ -1,18 +1,18 @@
-prompt_package_id: product_still_life_white_ecommerce_v1
+prompt_package_id: product_lifestyle_soft_cream_v1
 version: v1
 language: en
 mode: text_to_image
 reference_policy: text_only_no_image_input
 
-title_cn: "白底电商主图"
-purpose_cn: "生成干净高级的白底电商产品主图"
-scene_type: clean_ecommerce
-product_category: leather_goods
+title_cn: "奶油风生活方式小物图"
+purpose_cn: "生成柔和奶油风皮具与生活小物图"
+scene_type: soft_cream_lifestyle
+product_category: small_accessory
 aspect_ratio: "4:5"
-style_direction: "premium clean e-commerce product photography"
+style_direction: "soft cream lifestyle product photography"
 
 prompt: |
-  Clean premium e-commerce product photo on an off-white background. A beige leather wallet is placed slightly angled, with soft shadow underneath. Minimal composition, accurate shape, realistic leather texture, clear stitching, premium but practical product presentation. Soft studio lighting, high-end catalog style, no props, no text, no logo, vertical 4:5.
+  Soft cream lifestyle product photography. A beige wallet, ivory ceramic tray, folded linen fabric, and a small dried flower branch arranged on a cream tabletop. Soft diffused daylight, warm highlights, gentle shadows, clean feminine premium mood. Realistic materials, calm composition, subtle negative space, modern editorial style, vertical 4:5.
 
 negative_prompt: |
   people, hands, faces, readable brand logos, fake text, watermark, clutter, distorted objects, warped geometry, extra products, cyberpunk style, cartoon style, CGI plastic look, low resolution, overexposed highlights, messy background

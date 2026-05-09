@@ -1,18 +1,18 @@
-prompt_package_id: product_still_life_white_ecommerce_v1
+prompt_package_id: product_packaging_gift_box_v1
 version: v1
 language: en
 mode: text_to_image
 reference_policy: text_only_no_image_input
 
-title_cn: "白底电商主图"
-purpose_cn: "生成干净高级的白底电商产品主图"
-scene_type: clean_ecommerce
-product_category: leather_goods
+title_cn: "高级礼盒包装静物图"
+purpose_cn: "生成皮具礼盒与丝带包装商业静物图"
+scene_type: premium_gift_packaging
+product_category: gift_packaging
 aspect_ratio: "4:5"
-style_direction: "premium clean e-commerce product photography"
+style_direction: "premium gift packaging still-life photography"
 
 prompt: |
-  Clean premium e-commerce product photo on an off-white background. A beige leather wallet is placed slightly angled, with soft shadow underneath. Minimal composition, accurate shape, realistic leather texture, clear stitching, premium but practical product presentation. Soft studio lighting, high-end catalog style, no props, no text, no logo, vertical 4:5.
+  Premium gift packaging still-life. A beige leather wallet rests beside an opened matte ivory gift box, tissue paper, silk ribbon, and a small envelope on a warm neutral surface. Soft studio lighting, elegant shadows, luxury gifting mood, refined composition, tactile paper and leather texture. Clean background, no readable text, vertical 4:5.
 
 negative_prompt: |
   people, hands, faces, readable brand logos, fake text, watermark, clutter, distorted objects, warped geometry, extra products, cyberpunk style, cartoon style, CGI plastic look, low resolution, overexposed highlights, messy background

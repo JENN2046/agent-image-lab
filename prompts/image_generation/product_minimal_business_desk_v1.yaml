@@ -1,18 +1,18 @@
-prompt_package_id: product_still_life_white_ecommerce_v1
+prompt_package_id: product_minimal_business_desk_v1
 version: v1
 language: en
 mode: text_to_image
 reference_policy: text_only_no_image_input
 
-title_cn: "白底电商主图"
-purpose_cn: "生成干净高级的白底电商产品主图"
-scene_type: clean_ecommerce
-product_category: leather_goods
+title_cn: "极简商务办公桌皮具静物图"
+purpose_cn: "生成办公桌场景下的商务皮具与文具静物图"
+scene_type: minimal_business_desk
+product_category: business_accessory
 aspect_ratio: "4:5"
-style_direction: "premium clean e-commerce product photography"
+style_direction: "premium minimal desk still-life photography"
 
 prompt: |
-  Clean premium e-commerce product photo on an off-white background. A beige leather wallet is placed slightly angled, with soft shadow underneath. Minimal composition, accurate shape, realistic leather texture, clear stitching, premium but practical product presentation. Soft studio lighting, high-end catalog style, no props, no text, no logo, vertical 4:5.
+  Premium minimal desk still-life. A tan leather wallet, matte black pen, slim notebook, and small metal paperclip arranged on a clean stone-gray desk surface. Soft window light, subtle shadows, refined business lifestyle mood. Realistic leather grain, precise composition, calm professional atmosphere, vertical 4:5.
 
 negative_prompt: |
   people, hands, faces, readable brand logos, fake text, watermark, clutter, distorted objects, warped geometry, extra products, cyberpunk style, cartoon style, CGI plastic look, low resolution, overexposed highlights, messy background

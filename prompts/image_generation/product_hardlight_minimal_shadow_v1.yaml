@@ -1,18 +1,18 @@
-prompt_package_id: product_still_life_white_ecommerce_v1
+prompt_package_id: product_hardlight_minimal_shadow_v1
 version: v1
 language: en
 mode: text_to_image
 reference_policy: text_only_no_image_input
 
-title_cn: "白底电商主图"
-purpose_cn: "生成干净高级的白底电商产品主图"
-scene_type: clean_ecommerce
+title_cn: "硬光极简阴影构图产品图"
+purpose_cn: "生成硬光几何阴影下的极简产品静物图"
+scene_type: hardlight_minimal_studio
 product_category: leather_goods
 aspect_ratio: "4:5"
-style_direction: "premium clean e-commerce product photography"
+style_direction: "minimal hard-light studio product photography"
 
 prompt: |
-  Clean premium e-commerce product photo on an off-white background. A beige leather wallet is placed slightly angled, with soft shadow underneath. Minimal composition, accurate shape, realistic leather texture, clear stitching, premium but practical product presentation. Soft studio lighting, high-end catalog style, no props, no text, no logo, vertical 4:5.
+  Minimal studio product photography with strong hard light. A beige leather wallet placed on a smooth warm gray surface, casting a long geometric shadow. One tennis ball or simple round prop nearby for contrast. Clean composition, strong editorial mood, precise shadows, premium material texture, modern commercial still-life, vertical 4:5.
 
 negative_prompt: |
   people, hands, faces, readable brand logos, fake text, watermark, clutter, distorted objects, warped geometry, extra products, cyberpunk style, cartoon style, CGI plastic look, low resolution, overexposed highlights, messy background

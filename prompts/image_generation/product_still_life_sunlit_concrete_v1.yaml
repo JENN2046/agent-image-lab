@@ -1,0 +1,28 @@
+prompt_package_id: product_still_life_sunlit_concrete_v1
+version: v1
+language: en
+mode: text_to_image
+reference_policy: text_only_no_image_input
+
+title_cn: "阳光水泥地运动配件平铺图"
+purpose_cn: "生成水泥地硬光运动生活方式静物图"
+scene_type: sunlit_concrete_flatlay
+product_category: sport_accessory
+aspect_ratio: "4:5"
+style_direction: "sunlit premium sport flatlay photography"
+
+prompt: |
+  High-end commercial flatlay on warm sunlit concrete. A pair of minimal sunglasses, a cream fabric pouch, a small leather card holder, and two tennis balls arranged with precise spacing. Strong natural sunlight, sharp but elegant shadows, summer outdoor sports mood. Premium editorial product photography, realistic material texture, concrete grain, clean negative space, top-down composition, vertical 4:5.
+
+negative_prompt: |
+  people, hands, faces, readable brand logos, fake text, watermark, clutter, distorted objects, warped geometry, extra products, cyberpunk style, cartoon style, CGI plastic look, low resolution, overexposed highlights, messy background
+
+acceptance_gate:
+  prompt_subject_match: true
+  style_direction_match: true
+  no_person_or_face_unless_expected: true
+  no_readable_text_or_logo_unless_expected: true
+  commercial_usability: true
+
+memory_write_allowed: false
+daily_note_write_allowed: false

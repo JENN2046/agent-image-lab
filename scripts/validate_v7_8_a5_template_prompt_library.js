@@ -16,8 +16,9 @@ check("prompt_package_id_exists", () => pkg.includes("prompt_package_id:"));
 check("prompt_exists", () => pkg.includes("prompt:"));
 check("negative_prompt_exists", () => pkg.includes("negative_prompt:"));
 check("reference_policy_is_text_only", () => pkg.includes("text_only_no_image_input"));
-check("safety_person_face_not_allowed", () => pkg.includes("person_or_face_allowed: false"));
-check("safety_text_logo_not_allowed", () => pkg.includes("readable_text_or_logo_allowed: false"));
+check("format_has_acceptance_gate", () => pkg.includes("acceptance_gate:"));
+check("safety_person_face_not_allowed", () => pkg.includes("no_person_or_face_unless_expected: true"));
+check("safety_text_logo_not_allowed", () => pkg.includes("no_readable_text_or_logo_unless_expected: true"));
 
 // ── A5 template ──
 check("a5_template_exists", () => fileExists("docs/a5_templates/A5_SINGLE_REAL_GENERATION_TEMPLATE.md"));

@@ -1,36 +1,34 @@
-prompt_package_id: "product_still_life_outdoor_tennis_v1"
-version: 1
-created_at: "2026-05-09"
-author: "Human"
+prompt_package_id: product_still_life_outdoor_tennis_v1
+version: v1
+language: en
+mode: text_to_image
 reference_policy: text_only_no_image_input
-no_image_to_image: true
 
-prompt: >
-  Create a premium commercial still-life product photography scene inspired by
-  an outdoor tennis lifestyle mood. Top-down composition on a sunlit concrete
-  tennis court surface. A dark tennis racket lies diagonally across the frame,
-  used as the base surface. On the racket strings sits a refined beige leather
-  wallet or small leather accessory, rectangular, elegant, with clean stitching
-  and a structured flap. Two bright yellow tennis balls are placed naturally
-  around it, one near the upper-left side and one near the lower area, creating
-  a balanced triangular composition. Lighting is direct natural sunlight, crisp
-  summer shadows, warm highlights, realistic outdoor texture, premium editorial
-  product photography. The image should feel like a luxury fashion accessory
-  campaign with a quiet sporty atmosphere. Composition: vertical 4:5 frame,
-  overhead view, clean negative space, strong but tasteful shadows, realistic
-  materials, tactile leather, tennis racket grid texture, concrete grain visible.
+title_cn: "户外网球静物商业图"
+purpose_cn: "生成户外网球生活方式氛围的高级商业静物图"
+scene_type: outdoor_sport_still_life
+product_category: leather_accessory
+aspect_ratio: "4:5"
+style_direction: "premium commercial still-life product photography"
 
-negative_prompt: >
-  people, hands, faces, readable brand logos, fake text, extra objects,
-  distorted racket, warped tennis balls, clutter, cyberpunk style, studio
-  backdrop, image-to-image, input image, uploaded image.
+prompt: |
+  Create a premium commercial still-life product photography scene inspired by an outdoor tennis lifestyle mood.
 
-safety:
-  person_or_face_allowed: false
-  readable_text_or_logo_allowed: false
-  unsafe_content_scan_pass: required
+  Top-down composition on a sunlit concrete tennis court surface. A dark tennis racket lies diagonally across the frame, used as the base surface. On the racket strings sits a refined beige leather wallet or small leather accessory, rectangular, elegant, with clean stitching and a structured flap. Two bright yellow tennis balls are placed naturally around it, one near the upper-left side and one near the lower area, creating a balanced triangular composition.
 
-execution:
-  model: doubao-seedream-5-0-260128
-  size: "1024x1024"
-  max_images: 1
+  Lighting is direct natural sunlight, crisp summer shadows, warm highlights, realistic outdoor texture, premium editorial product photography. The image should feel like a luxury fashion accessory campaign with a quiet sporty atmosphere.
+
+  Composition: vertical 4:5 frame, overhead view, clean negative space, strong but tasteful shadows, realistic materials, tactile leather, tennis racket grid texture, concrete grain visible.
+
+negative_prompt: |
+  people, hands, faces, readable brand logos, fake text, watermark, clutter, distorted objects, warped geometry, extra products, cyberpunk style, cartoon style, CGI plastic look, low resolution, overexposed highlights, messy background
+
+acceptance_gate:
+  prompt_subject_match: true
+  style_direction_match: true
+  no_person_or_face_unless_expected: true
+  no_readable_text_or_logo_unless_expected: true
+  commercial_usability: true
+
+memory_write_allowed: false
+daily_note_write_allowed: false

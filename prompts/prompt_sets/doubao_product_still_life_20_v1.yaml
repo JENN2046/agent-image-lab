@@ -1,0 +1,30 @@
+prompt_set_id: doubao_product_still_life_20_v1
+version: v1
+title_cn: "豆包产品静物提示词库 20 发"
+purpose_cn: "用于产品/电商/商业静物图的第一批文生图弹药库"
+reference_policy: text_only_no_image_input
+
+prompt_package_refs:
+  - prompts/image_generation/product_still_life_outdoor_tennis_v1.yaml
+  - prompts/image_generation/product_still_life_outdoor_hiking_v1.yaml
+  - prompts/image_generation/product_still_life_sunlit_concrete_v1.yaml
+  - prompts/image_generation/product_still_life_wood_table_leather_v1.yaml
+  - prompts/image_generation/product_still_life_dark_luxury_v1.yaml
+  - prompts/image_generation/product_still_life_white_ecommerce_v1.yaml
+  - prompts/image_generation/product_lifestyle_soft_cream_v1.yaml
+  - prompts/image_generation/product_still_life_metal_tech_v1.yaml
+  - prompts/image_generation/product_flatlay_sport_accessory_v1.yaml
+  - prompts/image_generation/product_lifestyle_summer_hat_v1.yaml
+  - prompts/image_generation/product_packaging_gift_box_v1.yaml
+  - prompts/image_generation/product_macro_editorial_detail_v1.yaml
+  - prompts/image_generation/product_skincare_stone_bathroom_v1.yaml
+  - prompts/image_generation/product_lifestyle_coffee_table_v1.yaml
+  - prompts/image_generation/product_resort_coastal_accessory_v1.yaml
+  - prompts/image_generation/product_camping_outdoor_canvas_v1.yaml
+  - prompts/image_generation/product_hardlight_minimal_shadow_v1.yaml
+  - prompts/image_generation/product_perfume_glass_transparency_v1.yaml
+  - prompts/image_generation/product_jewelry_dark_velvet_v1.yaml
+  - prompts/image_generation/product_minimal_business_desk_v1.yaml
+
+memory_write_allowed: false
+daily_note_write_allowed: false
