@@ -3,9 +3,56 @@
 // API key 只从 process.env.DOUBAO_IMAGE_API_KEY 读取，不硬编码。
 
 function loadPromptPackage(promptPackageRef) {
-  // Stub: 读取 prompts/image_generation/ 下的 YAML
-  // 返回 { prompt, negative_prompt, safety, execution }
-  return { prompt: "", negative_prompt: "", safety: {}, execution: {} };
+  // 读取 prompts/image_generation/ 下的 YAML
+  var fs = require("node:fs");
+  var path = require("node:path");
+  var root = path.resolve(__dirname, "..", "..", "..");
+  var fullPath = path.join(root, promptPackageRef);
+
+  if (!fs.existsSync(fullPath)) {
+    return { prompt: "", negative_prompt: "", error: "prompt package not found: " + promptPackageRef };
+  }
+
+  var content = fs.readFileSync(fullPath, "utf8");
+  var lines = content.split("\n");
+
+  var promptLines = [];
+  var negativeLines = [];
+  var inPrompt = false;
+  var inNeg = false;
+  var safety = {};
+  var execution = {};
+
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i];
+    if (line.trim() === "prompt: |" || line.trim() === "prompt: >") {
+      inPrompt = true; inNeg = false; continue;
+    }
+    if (line.trim() === "negative_prompt: |" || line.trim() === "negative_prompt: >") {
+      inNeg = true; inPrompt = false; continue;
+    }
+    if (line.match(/^\w+:/) || line.trim().startsWith("---")) {
+      if (inPrompt && !inNeg && line.trim().length > 0) { inPrompt = false; }
+      if (inNeg && !inPrompt && line.trim().length > 0) { inNeg = false; }
+      if (line.includes(":")) {
+        var key = line.split(":")[0].trim();
+        var val = line.split(":")[1]?.trim() || "";
+        if (key === "person_or_face_allowed") safety.person_or_face_allowed = val === "false" ? false : true;
+        if (key === "model") execution.model = val;
+        if (key === "size") execution.size = val;
+      }
+      continue;
+    }
+    if (inPrompt) promptLines.push(line.replace(/^(\s{2}|\s{4}|\t)/, ""));
+    if (inNeg) negativeLines.push(line.replace(/^(\s{2}|\s{4}|\t)/, ""));
+  }
+
+  return {
+    prompt: promptLines.join(" ").trim(),
+    negative_prompt: negativeLines.join(" ").trim(),
+    safety: safety,
+    execution: execution,
+  };
 }
 
 function validateA5Limits(options) {
@@ -71,9 +118,8 @@ function buildDoubaoRequest(options) {
     model: options.modelOverride || "doubao-seedream-5-0-260128",
     prompt: options.prompt || "",
     negative_prompt: options.negativePrompt || "",
-    size: options.size || "1024x1024",
+    size: options.size || "1920x1920",
     n: 1,
-    response_format: "b64_json",
   };
 }
 
@@ -92,10 +138,24 @@ async function realGenerate(options) {
 
   var apiKey = process.env.DOUBAO_IMAGE_API_KEY;
   var baseUrl = process.env.DOUBAO_IMAGE_API_BASE_URL;
-  var requestBody = buildDoubaoRequest(options);
+
+  // Load prompt from package
+  var pkgRef = options.promptPackageRef || "";
+  var pkg = loadPromptPackage(pkgRef);
+  var promptText = pkg.prompt || options.prompt || "";
+  var negPrompt = pkg.negative_prompt || options.negativePrompt || "";
+
+  // Append endpoint path for image generation API
+  var apiUrl = baseUrl.replace(/\/+$/, "") + "/images/generations";
+  var requestBody = buildDoubaoRequest({
+    modelOverride: options.modelOverride || "doubao-seedream-5-0-260128",
+    prompt: promptText,
+    negativePrompt: negPrompt,
+    size: options.size || pkg.execution.size || "1920x1920",
+  });
 
   try {
-    var response = await fetch(baseUrl, {
+    var response = await fetch(apiUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -133,8 +193,8 @@ async function realGenerate(options) {
         var item = responseData.data[i];
         generatedImages.push({
           index: i,
-          b64_json: item.b64_json ? "(present, " + item.b64_json.length + " chars)" : null,
-          url: item.url ? "(present)" : null,
+          b64_json: item.b64_json || null,
+          url: item.url || null,
         });
       }
     }
@@ -183,7 +243,7 @@ async function realGenerate(options) {
   }
 }
 
-function writeImageOutput(result, outputDirectory) {
+async function writeImageOutput(result, outputDirectory) {
   if (outputDirectory.indexOf("runs/real_generation/") !== 0) {
     return { success: false, error: "outputDirectory must be under runs/real_generation/" };
   }
@@ -212,11 +272,19 @@ function writeImageOutput(result, outputDirectory) {
       fs.writeFileSync(filepath, buffer);
       written.push({ index: i, file: filename, bytes: buffer.length, source: "b64_json" });
     } else if (img.url) {
-      written.push({ index: i, url: img.url, note: "url_output_not_downloaded" });
+      // Download from URL and save
+      try {
+        var imageResponse = await fetch(img.url);
+        var imageBuffer = Buffer.from(await imageResponse.arrayBuffer());
+        fs.writeFileSync(filepath, imageBuffer);
+        written.push({ index: i, file: filename, bytes: imageBuffer.length, source: "url_download" });
+      } catch (downloadErr) {
+        written.push({ index: i, url: img.url, note: "download_failed: " + downloadErr.message });
+      }
     }
   }
 
-  return { success: true, files: written, output_directory: outputDirectory };
+  return { success: written.length > 0, files: written, output_directory: outputDirectory };
 }
 
 function normalizeResult(result) {

@@ -117,7 +117,7 @@ async function run(options) {
     apiKeyEnv: "DOUBAO_IMAGE_API_KEY",
   };
 
-  const result = adapter.run(adapterOptions);
+  const result = await adapter.run(adapterOptions);
 
   return {
     status: result.status,

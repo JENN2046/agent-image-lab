@@ -62,7 +62,7 @@ async function run(options) {
 
   // 图片写入
   if (result.images && result.images.length > 0) {
-    var writeResult = plugin.writeImageOutput(result, options.outputDirectory);
+    var writeResult = await plugin.writeImageOutput(result, options.outputDirectory);
     if (!writeResult.success) {
       return {
         status: "BLOCKED_WRITE_FAILED",
