@@ -3,8 +3,8 @@
 ## Handoff Summary
 
 ```text
-Status: v6.6 Product Shell QA + Visual Polish COMPLETED. v6.5 product shell layout QA, visual polish (CSS), decision rail data projection verification, validator (25 checks), doc, and agent board sync. All v6.0-v6.6 validators pass. No guard relaxation. draft_only, no-execution.
-Result: 5 product shell regions confirmed structurally sound. 7 nav entries, 7 workflow steps, all central review fields preserved. Right decision rail projects from draft data (write_authorized=false, write_performed=false hardcoded). CSS visual polish applied: right rail readability, nav active state, workflow stepper states (completed/risk/blocked), panel hierarchy, title hierarchy, color semantics, responsive breakpoints. v6.6 validator (25 checks) validates DOM IDs, CSS layout, guard integrity, all v6 validators compatibility, and forbidden API/pattern absence.
+Status: v6.7 Product Runtime Final Acceptance Baseline COMPLETED. v6.1~v6.6 all 6 modules consolidated into v6 Product Runtime Baseline. docs/243, validator (30 checks), README/MANIFEST/RELEASE_NOTES/roadmap/checklist/agent-board sync. All v6.0-v6.7 validators pass. No guard relaxation. draft_only, no-execution.
+Result: Task Panel, Asset Index, Session Store, Memory Queue, Product Shell, Product Shell QA — 6 modules + 7 validators = 119 checks all passed. Runtime suite passed. MVP validation passed. v6 Product Runtime Baseline accepted. Next: user direction — v6.8 Plugin Dashboard or v7 Real Production Expansion.
 ```
 
 ## Current Repo

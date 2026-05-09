@@ -1,5 +1,16 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v6.7 Product Runtime Final Acceptance Baseline
+
+```text
+Status: v6.7 — v6.1~v6.6 consolidated into v6 Product Runtime Baseline. 6 modules + 7 validators = 119 checks all passed. Runtime suite passed. MVP validation passed. All modules keep draft_only/no-execution. v6 Product Runtime Baseline accepted.
+
+All v6.0-v6.7 validators pass
+Runtime suite: all passed
+Push/tag/release: blocked pending separate authorization
+Next: pending user direction — v6.8 Plugin Dashboard or v7 Real Production Expansion
+```
+
 ## v6.6 Product Shell QA + Visual Polish
 
 ```text

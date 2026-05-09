@@ -9,7 +9,7 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-v6.6 Product Shell QA + Visual Polish — v6.5 product shell quality review, layout trimming, readability optimization, visual consistency, and decision rail acceptance reinforcement. draft_only, no-execution.
+v6.7 Product Runtime Final Acceptance Baseline — v6.1~v6.6 consolidated into v6 Product Runtime Baseline. Final acceptance, state closeout, baseline stamp. draft_only, no-execution.
 ```
 
 ## Current Branch
@@ -21,19 +21,19 @@ master tracking origin/master
 ## Current Phase
 
 ```text
-v6.6 — Product Shell QA + Visual Polish. Phase 1 Layout QA (5 regions confirmed), Phase 2 Visual Polish (CSS refinements), Phase 3 Decision Rail QA (draft data projection verified), Phase 4 Validator added, Phase 5 Documentation complete. All behaviors keep draft_only/no-execution.
+v6.7 — Product Runtime Final Acceptance / Baseline. v6.1~v6.6 all 6 modules accepted. 7 validators = 119 checks all passed. Runtime suite passed. MVP validation passed. All modules keep draft_only/no-execution.
 ```
 
 ## Current Task
 
 ```text
-v6.6 Product Shell QA + Visual Polish —擦清刻度，理顺线束。确认 v6.5 产品壳结构完整、旧功能未丢、DOM ID 未断、右侧裁决栏投射正确、所有 validator 通过、no-execution 边界干净。
+v6.7 Product Runtime Final Acceptance Baseline — 把 v6.1～v6.6 收束成 v6 Product Runtime Baseline，封印为可交付基线。
 ```
 
 ## Last Completed Task
 
 ```text
-v6.6 Product Shell QA + Visual Polish — completed. 5 structural regions confirmed, CSS visual polish applied, decision rail data projection verified, v6.6 validator (25 checks) added, doc + agent board synced. All v6.0-v6.6 validators pass. draft_only, no-execution.
+v6.7 Product Runtime Final Acceptance Baseline — completed. docs/243, validator (30 checks), README/MANIFEST/RELEASE_NOTES/roadmap/checklist/agent_board sync. All v6.0-v6.7 validators pass. draft_only, no-execution. No push/tag/release.
 ```
 
 ## Last Validation

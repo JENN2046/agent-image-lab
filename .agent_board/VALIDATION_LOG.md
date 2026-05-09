@@ -1,5 +1,32 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## v6.7 Product Runtime Final Acceptance Baseline
+
+```text
+Current phase: v6.7 Product Runtime Final Acceptance Baseline
+Scope: v6.1~v6.6 consolidated into v6 Product Runtime Baseline. docs/243, validator (30 checks), README/MANIFEST/RELEASE_NOTES/roadmap/checklist/agent-board sync.
+No real VCPChat/VCPToolBox read.
+No real file read.
+No plugin/API/DailyNote/VCP memory/image action.
+No commit/tag/push/PR/release.
+node --check scripts/validate_v6_7_product_runtime_final_acceptance.js: passed
+node scripts/validate_v6_7_product_runtime_final_acceptance.js: passed
+node scripts/validate_v6_6_product_shell_qa.js: passed
+node scripts/validate_v6_5_review_console_product_shell.js: passed
+node scripts/validate_v6_4_memory_queue_interaction.js: passed
+node scripts/validate_v6_3_session_store_interaction.js: passed
+node scripts/validate_v6_2_asset_index_interaction.js: passed
+node scripts/validate_v6_1_task_panel_interaction.js: passed
+node scripts/validate_v6_0_product_runtime_kickoff.js: passed
+node scripts/validate_runtime_prototype_smoke.js: passed
+node scripts/validate_runtime_prototype_suite.js: passed
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: passed
+git diff --check: passed
+git status: committed
+```
+
 ## v6.6 Product Shell QA + Visual Polish
 
 ```text

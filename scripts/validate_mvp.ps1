@@ -109,6 +109,7 @@ $requiredFiles = @(
   'scripts/validate_v6_4_memory_queue_interaction.js',
   'scripts/validate_v6_5_review_console_product_shell.js',
   'scripts/validate_v6_6_product_shell_qa.js',
+  'scripts/validate_v6_7_product_runtime_final_acceptance.js',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -5386,6 +5387,7 @@ if (-not $node) {
     $allowedCurrentA4ChangeFiles = @(
       '.gitignore',
       'AGENTS.md',
+      'CLAUDE.md',
       'README.md',
       'MANIFEST.md',
       'RELEASE_NOTES.md',

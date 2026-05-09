@@ -9,7 +9,7 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
-v6.6 Product Shell QA + Visual Polish — v6.5 product shell quality review, layout trimming, readability optimization, visual consistency, and decision rail acceptance reinforcement. draft_only, no-execution.
+v6.7 Product Runtime Final Acceptance Baseline — v6.1~v6.6 consolidated into v6 Product Runtime Baseline. Final acceptance, state closeout, baseline stamp. draft_only, no-execution.
 ```
 
 ---
@@ -54,13 +54,14 @@ none
 ### todo
 
 ```text
-1. Next: user direction or v6.5 incremental layer. v6.0/v6.1/v6.2/v6.3/v6.4 all completed.
+1. Next: user direction. v6.7 Product Runtime Final Acceptance Baseline completed. v6.1~v6.6 consolidated into v6 Product Runtime Baseline. Next: v6.8 Plugin Dashboard or v7 Real Production Expansion.
 ```
 
 ### done
 
 ```text
-1. Keep Adapter and Review Console work in no-execution / no-external-read mode unless an active A5 authorization package exists and preflight passes.
+1. v6.7 Product Runtime Final Acceptance Baseline — v6.1~v6.6 consolidated, docs/243, validator (30 checks), indexes synced, agent-board synced. No push/tag/release.
+2. Keep Adapter and Review Console work in no-execution / no-external-read mode unless an active A5 authorization package exists and preflight passes.
 2. If user authorizes remote or release movement, request exact target and run preflight before any push/tag/release.
 3. Stop before any real DoubaoGen/config read, provider-side echo, sanitized request capture, additional generation retry, DailyNote, VCP memory/image, push/tag/release until user explicitly authorizes real generation parameters, memory action, or version action.
 4. Update CHECKPOINT.md, RUN_STATE.md, VALIDATION_LOG.md, and HANDOFF.md after each meaningful batch.
