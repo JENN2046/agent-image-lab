@@ -125,6 +125,7 @@ $requiredFiles = @(
   'scripts/validate_v7_4_memory_write_gate_package.js',
   'scripts/validate_v7_5_production_run_dry_run_prep.js',
   'scripts/validate_v7_6_single_real_generation_activation_package.js',
+  'scripts/validate_v7_7_single_real_generation_activation_readiness_check.js',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',

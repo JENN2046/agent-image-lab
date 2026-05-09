@@ -22,6 +22,7 @@ v7.3 Asset Acceptance Gate — Asset statuses, gate checklist, memory/DailyNote 
 v7.4 Memory Write Gate Package — Memory write gate requiring separate A5 authorization.
 v7.5 Production Run Dry Run Prep — Dry-run prep, A5 activation checklist, operator pre-flight checklist.
 v7.6 Single Real Generation Activation Package — A5 activation package, operator activation checklist, pre-flight requirements.
+v7.7 Single Real Generation Activation Readiness Check — Readiness check confirming all prerequisites met for first real A5 generation.
 ```
 
 已经完成：

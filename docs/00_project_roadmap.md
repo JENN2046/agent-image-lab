@@ -139,7 +139,8 @@ master tracking origin/master
 - v7.3 Asset Acceptance Gate：资产验收门 + gate checklist。`docs/258`，validator `validate_v7_3.js`（17 checks）
 - v7.4 Memory Write Gate Package：记忆写入闸门（需独立 A5 授权）。`docs/259`，validator `validate_v7_4.js`（9 checks）
 - v7.5 Production Run Dry Run Prep：生产运行 dry-run 准备 + A5 激活清单。`docs/260` + `docs/261`，validator `validate_v7_5.js`（24 checks）
-- v7.6 Single Real Generation Activation Package：A5 激活包 + 操作员确认清单。`docs/262` + `docs/263`，validator `validate_v7_6.js`（26 checks）
+- v7.6 Single Real Generation Activation Package：A5 激活包 + 操作员确认清单。`docs/262` + `docs/263`，validator `validate_v7_6.js`（25 checks）
+- v7.7 Single Real Generation Activation Readiness Check：准备就绪确认。`docs/264`，validator `validate_v7_7.js`（12 checks）
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：

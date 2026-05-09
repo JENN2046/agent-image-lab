@@ -1,0 +1,11 @@
+v7_7_activation_readiness:
+  status: readiness_only
+  execution_authorized_by_this_record: false
+  baseline_commit: 1577777
+  rc_tag: v6.10-rc1-product-runtime
+  ready_for_user_a5_decision: true
+  plugin_call_performed: false
+  api_call_performed: false
+  image_created: false
+  daily_note_written: false
+  vcp_memory_written: false
