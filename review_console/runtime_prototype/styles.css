@@ -1081,3 +1081,13 @@ pre {
 #v6MQShouldWriteCheck {
   margin-right: 6px;
 }
+
+/* v6.8 Plugin Dashboard */
+#v6PluginDashboard .v6-readout-text {
+  margin: 0;
+  padding: 6px 10px;
+  background: #f5f5f5;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: #556;
+}

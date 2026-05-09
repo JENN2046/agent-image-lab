@@ -8,6 +8,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 
 ```text
 v6.7 Product Runtime Final Acceptance Baseline — v6.1~v6.6 consolidated into v6 Product Runtime Baseline. Accepted and pushed to origin/master (2b75fcb).
+v6.8 Plugin Dashboard — Plugin Selector, Parameter Mapper, Dry-run Toggle, Dispatch Status added as draft-only surfaces. No real plugin execution.
 ```
 
 已经完成：

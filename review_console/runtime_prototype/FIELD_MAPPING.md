@@ -418,3 +418,50 @@ v6 Task Panel 保持在 no-execution 边界内，不触发真实插件、API、D
 5. rejected 状态必须有 reject_reason_cn
 6. approved 状态可以 should_write_to_vcp=true，但仍不代表真实写入
 7. queue counts 至少能反映 primary item 当前状态
+
+## dispatch_plan_draft
+
+该区块是 v6.8 Plugin Dashboard 的调度计划草案。所有字段保持 draft_only / no-execution。
+
+| 字段 | runtime prototype 来源 | 说明 |
+| --- | --- | --- |
+| `draft_only` | 固定 true | 本区块不授权执行 |
+| `side_effects_performed` | 固定 false | 本区块无副作用 |
+| `dispatch_id` | `buildV6ProductRuntimeDraft()` | 自动生成 `dispatch-{timestamp}` |
+| `linked_task_id` | `els.v6DispatchLinkedTaskId` | 关联 Task Panel task_id |
+| `selected_plugin.plugin_id` | `els.v6DispatchSelectPlugin` | 从本地草案候选选择 |
+| `selected_plugin.display_name` | `els.v6DispatchPluginName` | 插件显示名 |
+| `selected_plugin.input_mode` | 固定 fixture 值 | 不读真实 plugin-manifest |
+| `selected_plugin.output_mode` | 固定 fixture 值 | 不读真实 plugin-manifest |
+| `selected_plugin.source` | 固定 `local_draft_fixture` | 非真实 PluginDir |
+| `selected_plugin.real_manifest_loaded` | 固定 false | 不加载真实 manifest |
+| `selected_plugin.real_plugin_available_confirmed` | 固定 false | 不确认真实插件可用性 |
+| `fallback_plugins[]` | `pluginCandidates` 过滤当前选中 | 所有来源固定 `local_draft_fixture` |
+| `reason_cn` | `els.v6DispatchReasonCn` | 中文选择理由 |
+| `parameters[].key` | `els.v6DispatchParamKey` | 参数键 |
+| `parameters[].value_preview` | `els.v6DispatchParamValue` | 参数值草案（非真实参数） |
+| `parameters[].value_source` | 固定 `manual_draft` | 非真实配置 |
+| `parameters[].raw_secret_stored` | 固定 false | 不存秘密 |
+| `parameters[].raw_endpoint_stored` | 固定 false | 不存端点 |
+| `parameters[].raw_path_stored` | 固定 false | 不存路径 |
+| `expected_outputs` | `els.v6DispatchExpectedOutputs` | 预期输出数量 |
+| `max_outputs` | `els.v6DispatchMaxOutputs` | 最大输出数量 |
+| `dry_run_required` | 固定 true | 不可更改 |
+| `execution_blocked` | 固定 true | 不可更改 |
+| `max_plugin_calls` | 固定 0 | 不可更改 |
+| `allow_file_write` | 固定 false | 不可更改 |
+| `allow_image_binary` | 固定 false | 不可更改 |
+| `risk_level` | 固定 `low` | 可扩展 |
+| `gatekeeper_required` | 固定 true | Gatekeeper 必须审查 |
+| `gatekeeper_status` | `els.v6DispatchGatekeeperStatus` | required / pending / reviewed / blocked |
+| `dispatch_status` | `els.v6DispatchStatus` | draft / mapped / blocked / ready_for_human_review |
+| `trace_state` | `els.v6DispatchTraceState` | dispatch_draft / plan_draft / review_draft |
+| `forbidden_actions` | 固定清单 | execute / generate / run / call_plugin / write_memory / write_image_file |
+| `boundary_cn` | 固定中文描述 | 说明 no-execution 边界 |
+
+交互要求：
+1. 修改 selected_plugin 后，fallback_plugins 自动过滤
+2. 修改 param key/value 后，preview 同步更新
+3. 所有安全字段（dry_run_required / execution_blocked / max_plugin_calls 等）只读，不可被用户解除
+4. 不读取真实 PluginDir / plugin-manifest.json
+5. `ready_for_human_review` 不代表可执行，只代表可进入人工复核

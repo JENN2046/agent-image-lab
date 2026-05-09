@@ -490,6 +490,146 @@
               </fieldset>
               <p class="v6-draft-boundary-text" id="v6MQBoundaryText">所有行为保持 draft_only / no-execution。write_authorized=false, write_performed=false, 无真实写入。</p>
             </article>
+
+            <article id="v6PluginDashboard">
+              <h3>Plugin Dashboard <span class="v6-asset-index-badge">draft-only</span></h3>
+              <p class="panel-boundary">插件调度草案面板。所有操作保持 draft_only / no-execution，不读取真实 PluginDir，不调用真实插件。</p>
+
+              <!-- Plugin Selector -->
+              <fieldset class="v6-form-group">
+                <legend>插件选择</legend>
+                <div class="v6-form-row">
+                  <div class="v6-form-group">
+                    <label for="v6DispatchSelectPlugin">选中插件</label>
+                    <select id="v6DispatchSelectPlugin">
+                      <option value="DoubaoGen">DoubaoGen</option>
+                      <option value="GPTImageGen">GPTImageGen</option>
+                      <option value="AgentImageLabAdapter">Agent Image Lab Adapter</option>
+                    </select>
+                  </div>
+                  <div class="v6-form-group">
+                    <label for="v6DispatchPluginName">插件显示名</label>
+                    <input type="text" id="v6DispatchPluginName" placeholder="DoubaoGen" maxlength="120" />
+                  </div>
+                </div>
+                <div class="v6-form-row">
+                  <div class="v6-form-group">
+                    <label for="v6DispatchInputMode">输入模式</label>
+                    <select id="v6DispatchInputMode">
+                      <option value="text_image">text_image</option>
+                      <option value="text">text</option>
+                      <option value="image">image</option>
+                      <option value="plan">plan</option>
+                      <option value="review">review</option>
+                      <option value="none">none</option>
+                    </select>
+                  </div>
+                  <div class="v6-form-group">
+                    <label for="v6DispatchOutputMode">输出模式</label>
+                    <select id="v6DispatchOutputMode">
+                      <option value="image">image</option>
+                      <option value="plan">plan</option>
+                      <option value="review">review</option>
+                      <option value="none">none</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="v6-form-group">
+                  <label for="v6DispatchFallbackDisplay">备选插件</label>
+                  <input type="text" id="v6DispatchFallbackDisplay" placeholder="备选自动填充" readonly />
+                </div>
+                <div class="v6-form-group">
+                  <label for="v6DispatchReasonCn">选择理由（中文）</label>
+                  <textarea id="v6DispatchReasonCn" rows="2" placeholder="选择该插件的理由…" maxlength="500"></textarea>
+                </div>
+              </fieldset>
+
+              <!-- Parameter Mapper -->
+              <fieldset class="v6-form-group">
+                <legend>参数映射</legend>
+                <div class="v6-form-row">
+                  <div class="v6-form-group">
+                    <label for="v6DispatchParamKey">参数键</label>
+                    <input type="text" id="v6DispatchParamKey" placeholder="prompt" maxlength="64" />
+                  </div>
+                  <div class="v6-form-group">
+                    <label for="v6DispatchParamValue">参数值预览</label>
+                    <input type="text" id="v6DispatchParamValue" placeholder="参数值草案（非真实参数）" maxlength="200" />
+                  </div>
+                </div>
+                <div class="v6-form-row">
+                  <div class="v6-form-group">
+                    <label for="v6DispatchExpectedOutputs">预期输出数</label>
+                    <input type="number" id="v6DispatchExpectedOutputs" min="1" max="10" value="1" />
+                  </div>
+                  <div class="v6-form-group">
+                    <label for="v6DispatchMaxOutputs">最大输出数</label>
+                    <input type="number" id="v6DispatchMaxOutputs" min="1" max="10" value="1" />
+                  </div>
+                </div>
+                <dl class="meta v6-readout">
+                  <div><dt>参数预览</dt><dd id="v6DispatchPreview">-</dd></div>
+                </dl>
+              </fieldset>
+
+              <!-- Dry-run Toggle (read-only) -->
+              <fieldset class="v6-form-group">
+                <legend>安全字段（只读，不可修改）</legend>
+                <div class="v6-form-row">
+                  <dl class="meta v6-readout">
+                    <div><dt>dry_run_required</dt><dd id="v6DispatchDryRunRequired">true</dd></div>
+                    <div><dt>execution_blocked</dt><dd id="v6DispatchExecBlocked">true</dd></div>
+                    <div><dt>max_plugin_calls</dt><dd id="v6DispatchMaxCalls">0</dd></div>
+                    <div><dt>allow_file_write</dt><dd id="v6DispatchAllowWrite">false</dd></div>
+                    <div><dt>allow_image_binary</dt><dd id="v6DispatchAllowBinary">false</dd></div>
+                    <div><dt>risk_level</dt><dd id="v6DispatchRiskLevel">low</dd></div>
+                  </dl>
+                </div>
+                <div class="v6-form-group">
+                  <label>禁止动作</label>
+                  <p id="v6DispatchForbiddenDisplay" class="v6-readout-text"></p>
+                </div>
+              </fieldset>
+
+              <!-- Dispatch Status -->
+              <fieldset class="v6-form-group">
+                <legend>调度状态</legend>
+                <dl class="meta v6-readout">
+                  <div><dt>dispatch_id</dt><dd id="v6DispatchId">-</dd></div>
+                  <div><dt>linked_task_id</dt><dd id="v6DispatchLinkedTaskId">-</dd></div>
+                  <div><dt>gatekeeper_required</dt><dd id="v6DispatchGatekeeperRequired">true</dd></div>
+                </dl>
+                <div class="v6-form-row">
+                  <div class="v6-form-group">
+                    <label for="v6DispatchGatekeeperStatus">gatekeeper_status</label>
+                    <select id="v6DispatchGatekeeperStatus">
+                      <option value="required">required</option>
+                      <option value="pending">pending</option>
+                      <option value="reviewed">reviewed</option>
+                      <option value="blocked">blocked</option>
+                    </select>
+                  </div>
+                  <div class="v6-form-group">
+                    <label for="v6DispatchStatus">dispatch_status</label>
+                    <select id="v6DispatchStatus">
+                      <option value="draft">draft</option>
+                      <option value="mapped">mapped</option>
+                      <option value="blocked">blocked</option>
+                      <option value="ready_for_human_review">ready_for_human_review</option>
+                    </select>
+                  </div>
+                  <div class="v6-form-group">
+                    <label for="v6DispatchTraceState">trace_state</label>
+                    <select id="v6DispatchTraceState">
+                      <option value="dispatch_draft">dispatch_draft</option>
+                      <option value="plan_draft">plan_draft</option>
+                      <option value="review_draft">review_draft</option>
+                    </select>
+                  </div>
+                </div>
+              </fieldset>
+              <p class="v6-draft-boundary-text" id="v6DispatchBoundaryText">所有行为保持 draft_only / no-execution。dry_run_required=true, execution_blocked=true, max_plugin_calls=0, 无真实插件调用。</p>
+            </article>
           </section>
         </div>
 

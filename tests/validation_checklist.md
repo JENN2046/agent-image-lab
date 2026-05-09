@@ -33,7 +33,9 @@
 - [ ] `review_console/phase_f_mvp_b_controlled_real_execution_task_plan.md` 存在，定义 8 阶段执行计划、回滚策略和历史教训。
 - [ ] `docs/233_tag_and_version_strategy.md` 存在，定义 tag 命名规范、版本号策略和 release 条件。
 - [ ] `docs/243_v6_7_product_runtime_final_acceptance.md` 存在，定义 v6 Product Runtime Baseline 验收结论。
-- [ ] `scripts/validate_v6_7_product_runtime_final_acceptance.js` 存在，包含 30 项验收检查且全部通过。
+- [ ] `scripts/validate_v6_7_product_runtime_final_acceptance.js` 存在，包含 33 项验收检查且全部通过。
+- [ ] `docs/245_v6_8a_plugin_dashboard_draft_surface.md` 存在，定义 Plugin Dashboard 四个区域和 dispatch_plan_draft。
+- [ ] `scripts/validate_v6_8_plugin_dashboard.js` 存在，包含 30 项检查且全部通过。
 - [ ] 所有任务书要求的 MVP 文件存在。
 - [ ] 文件直接位于项目根目录下，没有创建第二套 `agent-image-lab/` 嵌套目录。
 - [ ] 可运行 `scripts/validate_mvp.ps1` 完成只读自动检查；该脚本不是 Adapter、VCP 插件或真实执行入口。

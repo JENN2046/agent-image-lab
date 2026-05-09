@@ -99,6 +99,7 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Added Runtime Review Batch 9A state freshness index, making the current phase discoverable from `docs/226_runtime_review_batch_9a_state_freshness_index.md` and machine-checkable across top-level indexes, validation checklist, and `.agent_board`.
 - Added Runtime Review Batch 9C operator runbook and resume capsule, giving future agents a five-minute local resume entrypoint without authorizing A5 production actions.
 - Added v6.7 Product Runtime Final Acceptance Baseline: v6.1～v6.6 consolidated into v6 Product Runtime Baseline. `docs/243_v6_7_product_runtime_final_acceptance.md`, validator `scripts/validate_v6_7_product_runtime_final_acceptance.js` (33 checks). draft_only, no-execution.
+- Added v6.8 Plugin Dashboard Draft Surface: Plugin Selector, Parameter Mapper, Dry-run Toggle, Dispatch Status with dispatch_plan_draft data structure. `docs/245_v6_8a_plugin_dashboard_draft_surface.md`, validator `scripts/validate_v6_8_plugin_dashboard.js` (30 checks). draft_only, no-execution.
 
 ## Safety Status
 

@@ -9,7 +9,7 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-v6.7 Product Runtime Final Acceptance Baseline — v6.1~v6.6 consolidated into v6 Product Runtime Baseline. Final acceptance, state closeout, baseline stamp. draft_only, no-execution.
+v6.8A Plugin Dashboard Draft Surface — Plugin Selector, Parameter Mapper, Dry-run Toggle, Dispatch Status with dispatch_plan_draft. draft_only, no-execution.
 ```
 
 ## Current Branch
@@ -21,19 +21,19 @@ master tracking origin/master
 ## Current Phase
 
 ```text
-v6.7 — Product Runtime Final Acceptance / Baseline. v6.1~v6.6 all 6 modules accepted. 7 validators = 119 checks all passed. Runtime suite passed. MVP validation passed. All modules keep draft_only/no-execution.
+v6.8A — Plugin Dashboard Draft Surface. Plugin Selector, Parameter Mapper, Dry-run Toggle, Dispatch Status implemented. dispatch_plan_draft with safety fields (dry_run_required=true, execution_blocked=true, max_plugin_calls=0). runtime_guard not modified.
 ```
 
 ## Current Task
 
 ```text
-v6.7 Product Runtime Final Acceptance Baseline — 把 v6.1～v6.6 收束成 v6 Product Runtime Baseline，封印为可交付基线。
+v6.8A Plugin Dashboard Draft Surface — 在 v6 Product Runtime Baseline 上增加插件调度草案面板，保持 draft_only / no-execution。
 ```
 
 ## Last Completed Task
 
 ```text
-v6.7 Product Runtime Final Acceptance Baseline — completed and pushed to origin/master. 4 commits (baseline + 3 patches). remote latest: 2b75fcb. local master == origin/master, ahead/behind: 0/0. No tag, no release, no A5 production execution.
+v6.8A Plugin Dashboard Draft Surface — completed. Plugin Selector, Parameter Mapper, Dry-run Toggle, Dispatch Status all implemented. dispatch_plan_draft with full safety field set. Added docs/245, validate_v6_8_plugin_dashboard.js (30 checks), FIELD_MAPPING update. Runtime guard not modified. All v6.0-v6.8 validators pass. draft_only, no-execution.
 ```
 
 ## Last Validation
@@ -1191,5 +1191,5 @@ v6.7 Product Runtime Final Acceptance Baseline completed and pushed to origin/ma
 ## Next Action
 
 ```text
-v6.7 completed and pushed. Next: user direction — v6.8 Plugin Dashboard or v7 Real Production Expansion.
+v6.8A completed. Next: user direction — v6.8B guard hardening or v6.9 Release Panel planning.
 ```

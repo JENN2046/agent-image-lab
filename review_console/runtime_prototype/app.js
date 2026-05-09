@@ -338,7 +338,32 @@ const els = {
   v6MQCountApproved: document.getElementById("v6MQCountApproved"),
   v6MQCountRejected: document.getElementById("v6MQCountRejected"),
   v6MQCountBlocked: document.getElementById("v6MQCountBlocked"),
-  v6MQBoundaryText: document.getElementById("v6MQBoundaryText")
+  v6MQBoundaryText: document.getElementById("v6MQBoundaryText"),
+  v6DispatchId: document.getElementById("v6DispatchId"),
+  v6DispatchSelectPlugin: document.getElementById("v6DispatchSelectPlugin"),
+  v6DispatchPluginName: document.getElementById("v6DispatchPluginName"),
+  v6DispatchInputMode: document.getElementById("v6DispatchInputMode"),
+  v6DispatchOutputMode: document.getElementById("v6DispatchOutputMode"),
+  v6DispatchFallbackDisplay: document.getElementById("v6DispatchFallbackDisplay"),
+  v6DispatchReasonCn: document.getElementById("v6DispatchReasonCn"),
+  v6DispatchParamKey: document.getElementById("v6DispatchParamKey"),
+  v6DispatchParamValue: document.getElementById("v6DispatchParamValue"),
+  v6DispatchExpectedOutputs: document.getElementById("v6DispatchExpectedOutputs"),
+  v6DispatchMaxOutputs: document.getElementById("v6DispatchMaxOutputs"),
+  v6DispatchPreview: document.getElementById("v6DispatchPreview"),
+  v6DispatchDryRunRequired: document.getElementById("v6DispatchDryRunRequired"),
+  v6DispatchExecBlocked: document.getElementById("v6DispatchExecBlocked"),
+  v6DispatchMaxCalls: document.getElementById("v6DispatchMaxCalls"),
+  v6DispatchAllowWrite: document.getElementById("v6DispatchAllowWrite"),
+  v6DispatchAllowBinary: document.getElementById("v6DispatchAllowBinary"),
+  v6DispatchRiskLevel: document.getElementById("v6DispatchRiskLevel"),
+  v6DispatchForbiddenDisplay: document.getElementById("v6DispatchForbiddenDisplay"),
+  v6DispatchLinkedTaskId: document.getElementById("v6DispatchLinkedTaskId"),
+  v6DispatchGatekeeperRequired: document.getElementById("v6DispatchGatekeeperRequired"),
+  v6DispatchGatekeeperStatus: document.getElementById("v6DispatchGatekeeperStatus"),
+  v6DispatchStatus: document.getElementById("v6DispatchStatus"),
+  v6DispatchTraceState: document.getElementById("v6DispatchTraceState"),
+  v6DispatchBoundaryText: document.getElementById("v6DispatchBoundaryText")
 };
 
 let activeDraftView = "readable";
@@ -347,6 +372,13 @@ let batchOperationStatusText = "尚未执行批量操作。";
 let sessionTransferStatusText = "尚未导出或导入复核会话。";
 let historyStatusText = "尚未产生可撤销操作。";
 let historyStack = [];
+
+// Plugin Dashboard — local draft-only plugin candidates (not real directory scan)
+const pluginCandidates = [
+  { plugin_id: "DoubaoGen", display_name: "DoubaoGen", input_mode: "text_image", output_mode: "image" },
+  { plugin_id: "GPTImageGen", display_name: "GPTImageGen", input_mode: "text_image", output_mode: "image" },
+  { plugin_id: "AgentImageLabAdapter", display_name: "Agent Image Lab Adapter", input_mode: "plan", output_mode: "review" }
+];
 let lastRenderedSnapshot = null;
 let isRestoringSnapshot = false;
 let sessionImportPreviewState = null;
@@ -3320,6 +3352,67 @@ function buildV6ProductRuntimeDraft(createdAt) {
           },
           boundary_cn: "所有行为保持 draft_only / no-execution。write_authorized=false, write_performed=false, canonical_location_verified=false。should_write_to_vcp 只代表未来写入申请意图，不代表已写入。"
         };
+      }(),
+
+    dispatch_plan_draft: function () {
+        var selPluginId = els.v6DispatchSelectPlugin.value;
+        var selPlugin = pluginCandidates.find(function (p) { return p.plugin_id === selPluginId; }) || pluginCandidates[0];
+        var paramKey = els.v6DispatchParamKey.value.trim() || "prompt";
+        var paramVal = els.v6DispatchParamValue.value.trim() || "";
+        var expectedOut = parseInt(els.v6DispatchExpectedOutputs.value, 10) || 1;
+        var maxOut = parseInt(els.v6DispatchMaxOutputs.value, 10) || 1;
+
+        return {
+          draft_only: true,
+          side_effects_performed: false,
+          no_execution_guard: runtimeGuard.clone(runtimeGuard.cleanGuard),
+
+          dispatch_id: "dispatch-" + Date.now(),
+          linked_task_id: els.v6DispatchLinkedTaskId.value.trim() || taskId,
+
+          selected_plugin: {
+            plugin_id: selPlugin.plugin_id,
+            display_name: els.v6DispatchPluginName.value.trim() || selPlugin.display_name,
+            input_mode: selPlugin.input_mode,
+            output_mode: selPlugin.output_mode,
+            source: "local_draft_fixture",
+            real_manifest_loaded: false,
+            real_plugin_available_confirmed: false
+          },
+
+          fallback_plugins: pluginCandidates
+            .filter(function (p) { return p.plugin_id !== selPluginId; })
+            .map(function (p) { return { plugin_id: p.plugin_id, display_name: p.display_name, reason_cn: "", source: "local_draft_fixture" }; }),
+
+          reason_cn: els.v6DispatchReasonCn.value.trim() || "",
+
+          parameters: [{
+            key: paramKey,
+            value_preview: paramVal,
+            value_source: "manual_draft",
+            raw_secret_stored: false,
+            raw_endpoint_stored: false,
+            raw_path_stored: false
+          }],
+
+          expected_outputs: expectedOut,
+          max_outputs: maxOut,
+
+          dry_run_required: true,
+          execution_blocked: true,
+          max_plugin_calls: 0,
+          allow_file_write: false,
+          allow_image_binary: false,
+          risk_level: "low",
+          gatekeeper_required: true,
+          gatekeeper_status: "required",
+          dispatch_status: "draft",
+          trace_state: "dispatch_draft",
+
+          forbidden_actions: ["execute", "generate", "run", "call_plugin", "write_memory", "write_image_file"],
+
+          boundary_cn: "所有行为保持 draft_only / no-execution。dry_run_required=true, execution_blocked=true, max_plugin_calls=0, real_manifest_loaded=false, raw_secret/endpoint/path stored=false。"
+        };
       }()
     };
   }
@@ -4195,6 +4288,42 @@ function renderV6ProductRuntime(draft) {
     els.v6MQCountRejected.textContent = String(cnts.rejected != null ? cnts.rejected : 0);
     els.v6MQCountBlocked.textContent = String(cnts.blocked != null ? cnts.blocked : 0);
     els.v6MQBoundaryText.textContent = mq.boundary_cn || "所有行为保持 draft_only / no-execution。";
+  }
+
+  // v6.8 Plugin Dashboard — sync dispatch_plan_draft readout
+  var dpd = v6.dispatch_plan_draft;
+  if (dpd) {
+    els.v6DispatchId.textContent = dpd.dispatch_id || "-";
+    els.v6DispatchLinkedTaskId.textContent = dpd.linked_task_id || "-";
+    els.v6DispatchSelectPlugin.value = dpd.selected_plugin.plugin_id || "";
+    els.v6DispatchPluginName.value = dpd.selected_plugin.display_name || "";
+    els.v6DispatchInputMode.value = dpd.selected_plugin.input_mode || "";
+    els.v6DispatchOutputMode.value = dpd.selected_plugin.output_mode || "";
+    if (dpd.fallback_plugins && dpd.fallback_plugins.length > 0) {
+      els.v6DispatchFallbackDisplay.textContent = dpd.fallback_plugins.map(function (f) { return f.plugin_id; }).join(", ");
+    }
+    els.v6DispatchReasonCn.value = dpd.reason_cn || "";
+    if (dpd.parameters && dpd.parameters[0]) {
+      els.v6DispatchParamKey.value = dpd.parameters[0].key || "";
+      els.v6DispatchParamValue.value = dpd.parameters[0].value_preview || "";
+      els.v6DispatchPreview.textContent = dpd.parameters[0].key + ": " + dpd.parameters[0].value_preview;
+    }
+    els.v6DispatchExpectedOutputs.value = String(dpd.expected_outputs || 1);
+    els.v6DispatchMaxOutputs.value = String(dpd.max_outputs || 1);
+    els.v6DispatchDryRunRequired.textContent = dpd.dry_run_required ? "true" : "false";
+    els.v6DispatchExecBlocked.textContent = dpd.execution_blocked ? "true" : "false";
+    els.v6DispatchMaxCalls.textContent = String(dpd.max_plugin_calls);
+    els.v6DispatchAllowWrite.textContent = dpd.allow_file_write ? "true" : "false";
+    els.v6DispatchAllowBinary.textContent = dpd.allow_image_binary ? "true" : "false";
+    els.v6DispatchRiskLevel.textContent = dpd.risk_level || "low";
+    if (dpd.forbidden_actions && dpd.forbidden_actions.length > 0) {
+      els.v6DispatchForbiddenDisplay.textContent = dpd.forbidden_actions.join(", ");
+    }
+    els.v6DispatchGatekeeperRequired.textContent = dpd.gatekeeper_required ? "true" : "false";
+    els.v6DispatchGatekeeperStatus.value = dpd.gatekeeper_status || "required";
+    els.v6DispatchStatus.value = dpd.dispatch_status || "draft";
+    els.v6DispatchTraceState.value = dpd.trace_state || "dispatch_draft";
+    els.v6DispatchBoundaryText.textContent = dpd.boundary_cn || "所有行为保持 draft_only / no-execution。";
   }
 }
 

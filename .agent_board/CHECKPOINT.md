@@ -1,5 +1,16 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v6.8A Plugin Dashboard Draft Surface
+
+```text
+Status: v6.8A — Plugin Dashboard Draft Surface completed. Plugin Selector, Parameter Mapper, Dry-run Toggle, Dispatch Status implemented. dispatch_plan_draft with safety fields (dry_run_required=true, execution_blocked=true, max_plugin_calls=0). runtime_guard not modified. All v6.0-v6.8 validators pass. No push/tag/release.
+
+All v6.0-v6.8 validators pass
+Runtime suite: all passed
+Push/tag/release: blocked pending separate authorization
+Next: pending user direction — v6.8B guard hardening or v6.9 Release Panel planning
+```
+
 ## v6.7 Product Runtime Final Acceptance Baseline
 
 ```text

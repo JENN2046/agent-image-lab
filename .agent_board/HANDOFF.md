@@ -3,8 +3,8 @@
 ## Handoff Summary
 
 ```text
-Status: v6.7 Product Runtime Final Acceptance Baseline COMPLETED. v6.1~v6.6 all 6 modules consolidated into v6 Product Runtime Baseline. docs/243, validator (30 checks), README/MANIFEST/RELEASE_NOTES/roadmap/checklist/agent-board sync. All v6.0-v6.7 validators pass. No guard relaxation. draft_only, no-execution.
-Result: Task Panel, Asset Index, Session Store, Memory Queue, Product Shell, Product Shell QA — 6 modules + 7 validators = 119 checks all passed. Runtime suite passed. MVP validation passed. v6 Product Runtime Baseline accepted. Next: user direction — v6.8 Plugin Dashboard or v7 Real Production Expansion.
+Status: v6.8A Plugin Dashboard Draft Surface COMPLETED. Plugin Selector, Parameter Mapper, Dry-run Toggle, Dispatch Status implemented with dispatch_plan_draft. docs/245, validator (30 checks), FIELD_MAPPING, indexes synced. All v6.0-v6.8 validators pass. Runtime guard not modified. draft_only, no-execution. No push/tag/release.
+Result: Plugin Dashboard added as v6 Product Runtime module. Plugin Selector with 3 local candidates, Parameter Mapper with key-value + preview, Dry-run Toggle with read-only safety fields, Dispatch Status with gatekeeper/dispatch/trace state. dispatch_plan_draft builder and renderer in app.js. All 30 v6.8 validator checks pass. Next: user direction — v6.8B guard hardening or v6.9 Release Panel planning.
 ```
 
 ## Current Repo
@@ -17,10 +17,10 @@ A:/agent-image-lab/agent-image-lab-v0.2
 
 ```text
 Branch: master
-Remote tracking: master...origin/master [0 0 — synced]
-State: v6.7 Product Runtime Final Acceptance Baseline — v6.1~v6.6 consolidated into v6 Product Runtime Baseline. Pushed to origin/master at 2b75fcb. 4 commits. No tag, no release. draft_only, no-execution.
-Local head: 2b75fcb
-Origin/master: 2b75fcb
+Remote tracking: master...origin/master [ahead — pending v6.8A commit]
+State: v6.8A Plugin Dashboard Draft Surface — Plugin Selector, Parameter Mapper, Dry-run Toggle, Dispatch Status implemented. draft_only, no-execution.
+Local head: pending v6.8A commit
+Origin/master: e481696
 Current freshness doc: docs/226_runtime_review_batch_9a_state_freshness_index.md
 Current operator runbook: docs/227_runtime_review_batch_9c_operator_runbook_and_resume_capsule.md
 Current compatibility matrix: docs/228_runtime_review_batch_9b_runtime_session_compatibility_matrix.md

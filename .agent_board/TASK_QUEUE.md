@@ -9,7 +9,7 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
-v6.7 Product Runtime Final Acceptance Baseline — v6.1~v6.6 consolidated into v6 Product Runtime Baseline. Final acceptance, state closeout, baseline stamp. draft_only, no-execution.
+v6.8A Plugin Dashboard Draft Surface — Plugin Selector, Parameter Mapper, Dry-run Toggle, Dispatch Status with dispatch_plan_draft. draft_only, no-execution.
 ```
 
 ---
@@ -54,13 +54,14 @@ none
 ### todo
 
 ```text
-1. Next: user direction. v6.7 Product Runtime Final Acceptance Baseline completed. v6.1~v6.6 consolidated into v6 Product Runtime Baseline. Next: v6.8 Plugin Dashboard or v7 Real Production Expansion.
+1. Next: user direction. v6.8A Plugin Dashboard Draft Surface completed. Next: v6.8B guard hardening or v6.9 Release Panel planning.
 ```
 
 ### done
 
 ```text
-1. v6.7 Product Runtime Final Acceptance Baseline — v6.1~v6.6 consolidated, docs/243, validator (33 checks), indexes synced, agent-board synced. Pushed to origin/master at 2b75fcb (4 commits). No tag, no release.
+1. v6.8A Plugin Dashboard Draft Surface — Plugin Selector, Parameter Mapper, Dry-run Toggle, Dispatch Status with dispatch_plan_draft. docs/245, validator (30 checks), FIELD_MAPPING, indexes synced, agent-board synced. Runtime guard not modified. All v6.0-v6.8 validators pass. No push/tag/release.
+2. v6.7 Product Runtime Final Acceptance Baseline — v6.1~v6.6 consolidated, docs/243, validator (33 checks), indexes synced, agent-board synced. Pushed to origin/master at 2b75fcb (4 commits). No tag, no release.
 2. Keep Adapter and Review Console work in no-execution / no-external-read mode unless an active A5 authorization package exists and preflight passes.
 2. If user authorizes remote or release movement, request exact target and run preflight before any push/tag/release.
 3. Stop before any real DoubaoGen/config read, provider-side echo, sanitized request capture, additional generation retry, DailyNote, VCP memory/image, push/tag/release until user explicitly authorizes real generation parameters, memory action, or version action.

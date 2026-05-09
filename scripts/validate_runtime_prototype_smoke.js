@@ -336,6 +336,31 @@ function createRuntimeContext() {
   add("v6MQCountRejected");
   add("v6MQCountBlocked");
   add("v6MQBoundaryText");
+  add("v6DispatchId");
+  add("v6DispatchSelectPlugin");
+  add("v6DispatchPluginName");
+  add("v6DispatchInputMode");
+  add("v6DispatchOutputMode");
+  add("v6DispatchFallbackDisplay");
+  add("v6DispatchReasonCn");
+  add("v6DispatchParamKey");
+  add("v6DispatchParamValue");
+  add("v6DispatchExpectedOutputs");
+  add("v6DispatchMaxOutputs");
+  add("v6DispatchPreview");
+  add("v6DispatchDryRunRequired");
+  add("v6DispatchExecBlocked");
+  add("v6DispatchMaxCalls");
+  add("v6DispatchAllowWrite");
+  add("v6DispatchAllowBinary");
+  add("v6DispatchRiskLevel");
+  add("v6DispatchForbiddenDisplay");
+  add("v6DispatchLinkedTaskId");
+  add("v6DispatchGatekeeperRequired");
+  add("v6DispatchGatekeeperStatus");
+  add("v6DispatchStatus");
+  add("v6DispatchTraceState");
+  add("v6DispatchBoundaryText");
 
   // Initialize v6 select defaults (FakeElement defaults to "" without this)
   elements.get("v6TaskStageSelect").value = "draft";
@@ -374,6 +399,19 @@ function createRuntimeContext() {
   elements.get("v6MQShouldWriteCheck").checked = false;
   elements.get("v6MQBlockReasonInput").value = "";
   elements.get("v6MQRejectReasonInput").value = "";
+
+  // Initialize v6.8 Plugin Dashboard defaults
+  elements.get("v6DispatchSelectPlugin").value = "DoubaoGen";
+  elements.get("v6DispatchPluginName").value = "DoubaoGen";
+  elements.get("v6DispatchInputMode").value = "text_image";
+  elements.get("v6DispatchOutputMode").value = "image";
+  elements.get("v6DispatchParamKey").value = "prompt";
+  elements.get("v6DispatchParamValue").value = "";
+  elements.get("v6DispatchExpectedOutputs").value = "1";
+  elements.get("v6DispatchMaxOutputs").value = "1";
+  elements.get("v6DispatchGatekeeperStatus").value = "required";
+  elements.get("v6DispatchStatus").value = "draft";
+  elements.get("v6DispatchTraceState").value = "dispatch_draft";
 
   const context = {
     window: {},
