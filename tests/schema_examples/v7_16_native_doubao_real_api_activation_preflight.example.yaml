@@ -1,0 +1,41 @@
+native_doubao_real_api_activation_preflight:
+  status: preflight_only
+  execution_authorized_by_this_record: false
+
+  baseline_commit: 6528d6d
+
+  plugin:
+    plugin_id: NativeDoubaoImage
+    command: generate
+    provider_type: direct_api
+    profile_ref: plugins/image_generation/native_doubao_image/plugin.profile.yaml
+    adapter_ref: adapters/image_generation/native_doubao_adapter.js
+
+  api_config:
+    api_key_env: DOUBAO_IMAGE_API_KEY
+    api_key_value_stored_in_repo: false
+    base_url_stored_secret: false
+
+  model_policy:
+    requested_model: doubao-seedream-5-0-260128
+    block_on_model_mismatch: true
+
+  limits:
+    max_plugin_calls: 1
+    max_images_created: 1
+    retry_allowed: false
+
+  output_policy:
+    root: runs/real_generation/
+    allow_outside_repo: false
+
+  safety:
+    memory_write_allowed: false
+    daily_note_write_allowed: false
+    push_allowed: false
+    tag_allowed: false
+    release_allowed: false
+
+  execution:
+    real_api_call_performed: false
+    image_created: false
