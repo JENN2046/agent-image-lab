@@ -45,6 +45,7 @@ v7.50c VCP Read-only Bridge Dry-run Execution — repository-local text-only ref
 v7.50d VCPChat Review Console Surface Planning — future VCPChat review console read-only surface layout, contract, visibility policy, and security gates defined. Docs-only. No VCP call. No VCPChat bridge call. No UI execution.
 v7.50d-v7.51b Read-only VCP Integration Long Task — static surface fixture executed, real VCPChat surface check planned, read-only evidence index defined, and read-only bridge adapter skeleton planned. No VCP call. No VCPChat bridge call. No Electron launch. No memory write. No image binary read.
 v7.51c Read-only Bridge Adapter Implementation Planning — adapter file layout, error codes, test plan, security gate plan, and implementation plan YAML defined. Docs-only. No adapter runtime code. No VCP call. No VCPChat bridge call. No memory write. No image binary read.
+v7.51d Local Read-only Bridge Adapter Runtime Implementation — local adapter runtime implemented with canonical smoke pass. Returns text-only repository-relative refs only. No VCP call. No VCPChat bridge call. No memory write. No image binary read.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3

@@ -1102,6 +1102,43 @@ hard_stops:
 - do_not_reopen_closed_no_memory_write_case
 ```
 
+## v7.51d Local Read-only Bridge Adapter Runtime Implementation
+
+```text
+Phase: v7.51d
+Status: local_read_only_adapter_runtime_implemented
+adapter_runtime_implemented: true
+adapter_runtime_file: scripts/agent_image_lab_read_only_adapter.js
+canonical_smoke_result: pass
+schema_validator_implemented: false
+security_gate_validator_implemented: false
+fixture_regression_implemented: false
+VCP call performed: false
+VCPChat bridge call performed: false
+Electron started: false
+remote-debug started: false
+CDP call performed: false
+DailyNote write performed: false
+VCP memory write performed: false
+image generation performed: false
+image binary read: false
+runs path read: false
+
+current_allowed_next_steps:
+- v7.51e read-only adapter schema validation execution, only if explicitly authorized
+- v7.51f read-only adapter security gate validation execution, only if explicitly authorized
+
+hard_stops:
+- do_not_call_vcp_without_independent_authorization
+- do_not_call_vcpchat_bridge_without_independent_authorization
+- do_not_start_electron_without_explicit_authorization
+- do_not_write_dailynote_without_independent_a5
+- do_not_write_vcp_memory_without_independent_a5
+- do_not_generate_image_without_independent_a5
+- do_not_read_image_binary
+- do_not_reopen_closed_no_memory_write_case
+```
+
 ## Resume Instruction
 
 ```text

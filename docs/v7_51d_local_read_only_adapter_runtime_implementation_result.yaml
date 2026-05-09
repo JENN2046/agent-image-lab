@@ -1,0 +1,35 @@
+local_read_only_adapter_runtime_implementation:
+  schema_version: v1
+  phase: v7_51d
+  status: implemented
+  adapter_runtime_implemented: true
+  adapter_runtime_file: scripts/agent_image_lab_read_only_adapter.js
+
+  validators:
+    schema_validator_implemented: false
+    security_gate_validator_implemented: false
+    fixture_regression_implemented: false
+
+  canonical_smoke:
+    executed: true
+    result: pass
+    status: ok
+    payload_type: text_only_refs
+    returned_refs_only: true
+    current_case_state: closed_no_memory_write
+
+  external_side_effects:
+    vcp_call_performed: false
+    vcpchat_bridge_call_performed: false
+    electron_started: false
+    remote_debug_started: false
+    cdp_call_performed: false
+    daily_note_write_performed: false
+    vcp_memory_write_performed: false
+    image_generation_performed: false
+    image_binary_read: false
+    runs_path_read: false
+
+  next_allowed_steps:
+    - v7_51e_read_only_adapter_schema_validation_execution
+    - v7_51f_read_only_adapter_security_gate_validation_execution
