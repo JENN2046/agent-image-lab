@@ -9,7 +9,7 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Extended Long Task — v6.9A Release Panel + v6.9B Guard + v6.10 RC Matrix + Validator Quality Gate + Runbook/Capsule. draft_only, no-execution.
+v7.0 Real Production Landing Preflight — preflight plan, A5 authorization template, failure taxonomy, rollback strategy. No real execution.
 ```
 
 ## Current Branch
@@ -21,7 +21,7 @@ master tracking origin/master
 ## Current Phase
 
 ```text
-v6.9A + v6.9B + v6.10 + Quality Gate + Runbook — Extended Long Task complete. Release Panel UI/Guard, RC Matrix, Validator Quality, Operator Runbook, Resume Capsule all done. All v6.0-v6.operator validators pass.
+v7.0 — Real Production Landing Preflight. docs/254 (preflight plan) + docs/255 (A5 authorization template) + validate_v7_0 (20 checks). No real execution.
 ```
 
 ## Current Task
@@ -1191,5 +1191,5 @@ v6.7 Product Runtime Final Acceptance Baseline completed and pushed to origin/ma
 ## Next Action
 
 ```text
-Extended Long Task completed. Next: user direction — push to origin/master.
+v7.0 preflight completed. Next: user direction — v7.1 Single Real Generation Controlled Run (requires active A5 authorization).
 ```

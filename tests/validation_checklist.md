@@ -48,6 +48,9 @@
 - [ ] `scripts/validate_v6_validator_quality_gate.js` 存在，包含 8 项 meta 检查且全部通过。
 - [ ] `docs/252_v6_product_runtime_operator_runbook.md` + `docs/253_v6_10_resume_capsule.md` 存在。
 - [ ] `scripts/validate_v6_operator_runbook_and_resume_capsule.js` 存在，包含 14 项检查且全部通过。
+- [ ] `docs/254_v7_0_real_production_landing_preflight.md` 存在，定义生产落地预案。
+- [ ] `docs/255_v7_0_a5_single_generation_authorization_template.md` 存在，定义 A5 授权模板。
+- [ ] `scripts/validate_v7_0_real_production_landing_preflight.js` 存在，包含 20 项检查且全部通过。
 - [ ] 所有任务书要求的 MVP 文件存在。
 - [ ] 文件直接位于项目根目录下，没有创建第二套 `agent-image-lab/` 嵌套目录。
 - [ ] 可运行 `scripts/validate_mvp.ps1` 完成只读自动检查；该脚本不是 Adapter、VCP 插件或真实执行入口。

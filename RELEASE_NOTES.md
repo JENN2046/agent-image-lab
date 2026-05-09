@@ -107,6 +107,7 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Added v6.10 Product Runtime RC Readiness Matrix: full module matrix. `docs/250_v6_10_product_runtime_rc_readiness_matrix.md`, validator `scripts/validate_v6_10_product_runtime_rc_readiness_matrix.js` (8 checks).
 - Added v6 Validator Quality Gate: meta-validator checking all v6 validators. `docs/251_v6_validator_quality_gate.md`, `scripts/validate_v6_validator_quality_gate.js` (8 checks).
 - Added v6 Operator Runbook + Resume Capsule: `docs/252_v6_product_runtime_operator_runbook.md`, `docs/253_v6_10_resume_capsule.md`, `scripts/validate_v6_operator_runbook_and_resume_capsule.js` (14 checks).
+- Added v7.0 Real Production Landing Preflight: preflight plan, A5 authorization template, failure taxonomy, rollback strategy. `docs/254_v7_0_real_production_landing_preflight.md`, `docs/255_v7_0_a5_single_generation_authorization_template.md`, `scripts/validate_v7_0_real_production_landing_preflight.js` (20 checks). No real execution.
 
 ## Safety Status
 

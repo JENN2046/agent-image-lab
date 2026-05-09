@@ -15,6 +15,7 @@ v6.9A Release Panel Draft Surface — Release Panel with commit/validator/readin
 v6.9B Release Panel Guard Hardening — v6ReleaseReadinessIsSafe() added to runtime_guard.js.
 v6.10 Product Runtime RC Readiness Matrix — Full module matrix with status/validator/guard/boundary.
 Validator Quality Gate — Meta-validator checks all v6 validators for quality.
+v7.0 Real Production Landing Preflight — Preflight plan, A5 authorization template, failure taxonomy, rollback strategy defined. No real execution.
 ```
 
 已经完成：
