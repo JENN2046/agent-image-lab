@@ -1,0 +1,20 @@
+post_run_review:
+  run_id: "v7_first_run"
+  source_output_dir: "runs/real_generation/v7_first_run/"
+  plugin_calls_observed: 1
+  images_created: 1
+  model_used: "doubao-seedream-3-0-t2i-250415"
+  prompt_package_ref: "product_still_life_outdoor_tennis_v1"
+  asset_status: needs_human_review
+  deviations:
+    - output_directory_deviation
+    - prompt_subject_mismatch
+    - model_mismatch
+    - commercial_usability_low
+  correction_plan:
+    next_prompt_package_ref: "product_still_life_outdoor_tennis_wallet_hero_v2"
+    model_override: "doubao-seedream-5-0-260128"
+    retry_allowed: false
+    new_a5_required: true
+    memory_write_allowed: false
+    daily_note_write_allowed: false

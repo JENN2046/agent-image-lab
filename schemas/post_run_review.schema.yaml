@@ -1,0 +1,24 @@
+# post_run_review.schema.yaml
+# 真实生成后复查与纠错记录 schema
+post_run_review:
+  run_id: string
+  source_output_dir: string
+  plugin_calls_observed: integer
+  images_created: integer
+  model_used: string
+  prompt_package_ref: string
+  asset_status: accepted_candidate | needs_human_review | rejected | blocked
+
+  deviations:
+    - output_directory_deviation
+    - prompt_subject_mismatch
+    - model_mismatch
+    - commercial_usability_low
+
+  correction_plan:
+    next_prompt_package_ref: string | null
+    model_override: string | null
+    retry_allowed: false
+    new_a5_required: true
+    memory_write_allowed: false
+    daily_note_write_allowed: false
