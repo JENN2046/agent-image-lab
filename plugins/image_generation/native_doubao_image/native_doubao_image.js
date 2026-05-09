@@ -120,7 +120,21 @@ function buildDoubaoRequest(options) {
     negative_prompt: options.negativePrompt || "",
     size: options.size || "1920x1920",
     n: 1,
+    watermark: false,
   };
+}
+
+function validateWatermarkParameter(requestBody) {
+  if (!requestBody || typeof requestBody !== "object") {
+    return { valid: false, error: "BLOCKED_WATERMARK_PARAMETER_MISSING", detail: "request body is missing" };
+  }
+  if (!("watermark" in requestBody)) {
+    return { valid: false, error: "BLOCKED_WATERMARK_PARAMETER_MISSING", detail: "watermark field is missing from request" };
+  }
+  if (requestBody.watermark !== false) {
+    return { valid: false, error: "BLOCKED_WATERMARK_PARAMETER_INVALID", detail: "watermark must be boolean false, got: " + typeof requestBody.watermark + " " + JSON.stringify(requestBody.watermark) };
+  }
+  return { valid: true, error: null };
 }
 
 async function realGenerate(options) {
@@ -153,6 +167,21 @@ async function realGenerate(options) {
     negativePrompt: negPrompt,
     size: options.size || pkg.execution.size || "1920x1920",
   });
+
+  // Watermark parameter enforcement
+  var wmCheck = validateWatermarkParameter(requestBody);
+  if (!wmCheck.valid) {
+    return {
+      status: wmCheck.error,
+      plugin_id: "NativeDoubaoImage",
+      command: "generate",
+      api_call_performed: false,
+      image_created: false,
+      watermark_requested: false,
+      watermark_parameter_sent: "watermark" in requestBody,
+      watermark_validation_error: wmCheck.detail,
+    };
+  }
 
   try {
     var response = await fetch(apiUrl, {
@@ -227,6 +256,9 @@ async function realGenerate(options) {
       images: generatedImages,
       http_status: response.status,
       retry_performed: false,
+      watermark_requested: false,
+      watermark_parameter_sent: true,
+      watermark_policy: "disabled_by_request_payload",
     };
   } catch (err) {
     return {
@@ -310,6 +342,7 @@ module.exports = {
   validateA5Limits: validateA5Limits,
   validateRealExecutionGate: validateRealExecutionGate,
   buildDoubaoRequest: buildDoubaoRequest,
+  validateWatermarkParameter: validateWatermarkParameter,
   realGenerate: realGenerate,
   writeImageOutput: writeImageOutput,
   dryRunGenerate: dryRunGenerate,

@@ -146,6 +146,7 @@ $requiredFiles = @(
   'scripts/validate_v7_25_french_summer_rattan_bucket_bag_prompt_package.js',
   'scripts/validate_v7_27_watermark_provenance_diagnostic.js',
   'scripts/validate_v7_28_french_summer_watermark_control_prompt_correction.js',
+  'scripts/validate_v7_30_native_doubao_watermark_parameter_enforcement.js',
   'scripts/validate_prompt_package_library.js',
   'scripts/validate_a5_generation_template.js',
   'docs/00_project_roadmap.md',

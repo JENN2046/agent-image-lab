@@ -1,0 +1,29 @@
+v7_30_native_doubao_watermark_parameter_enforcement:
+  status: implementation_only
+  execution_authorized_by_this_record: false
+
+  source_findings:
+    v7_26_watermark_observed: true
+    v7_29_watermark_observed: true
+    runner_overlay_code_found: false
+    provider_side_watermark_risk: high
+
+  official_parameter_policy:
+    watermark_parameter_supported: true
+    default_watermark_value: true
+    required_project_value: false
+
+  request_payload_contract:
+    watermark_parameter_sent: true
+    watermark_requested: false
+    watermark_value_type: boolean
+    block_if_missing: true
+    block_if_not_false: true
+
+  safety:
+    real_api_call_performed: false
+    image_created: false
+    api_key_output: false
+    memory_write_allowed: false
+    daily_note_write_allowed: false
+    a5_required_for_next_generation: true
