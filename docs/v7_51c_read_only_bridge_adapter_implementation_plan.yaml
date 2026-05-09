@@ -1,0 +1,71 @@
+read_only_bridge_adapter_implementation_plan:
+  schema_version: v1
+  phase: v7_51c
+  status: planning_only
+  adapter_runtime_implemented: false
+  adapter_call_performed: false
+
+  prerequisites:
+    v7_50d_vcpchat_surface_planning: completed
+    v7_50d_static_fixture_pass: true
+    v7_51a_evidence_index_defined: true
+    v7_51b_adapter_skeleton_planned: true
+
+  file_layout:
+    adapter_runtime:
+      path: scripts/agent_image_lab_read_only_adapter.js
+      purpose: Main adapter runtime
+      language: javascript
+      dependencies: none
+    validators:
+      - path: scripts/validate_agent_image_lab_read_only_adapter_schema.js
+        purpose: Schema compliance validation
+      - path: scripts/validate_agent_image_lab_read_only_adapter_security_gates.js
+        purpose: Security gate validation
+      - path: scripts/validate_agent_image_lab_read_only_adapter_fixtures.js
+        purpose: Fixture regression tests
+
+  status_codes:
+    - code: 0
+      name: ok
+      meaning: Request processed successfully
+    - code: 1
+      name: blocked
+      meaning: Request blocked by safety gate
+    - code: 2
+      name: not_found
+      meaning: Resource not found
+    - code: 3
+      name: failed
+      meaning: Adapter internal error
+
+  hard_blockers:
+    - bridge_mode_not_read_only
+    - write_intent_detected
+    - image_binary_requested
+    - secret_requested
+    - raw_payload_requested
+    - private_absolute_path_requested
+    - memory_write_attempted
+    - dailynote_write_attempted
+    - production_approved_claim_detected
+    - closed_case_reopen_attempted
+
+  test_categories:
+    - schema_validation
+    - security_gate_validation
+    - fixture_regression
+
+  completion_gates:
+    adapter_runtime_implemented: false
+    schema_validator_implemented: false
+    security_gate_validator_implemented: false
+    fixture_regression_implemented: false
+    closeout_completed: false
+    vcp_call_performed: false
+    vcpchat_bridge_call_performed: false
+    memory_write_performed: false
+    image_binary_read: false
+
+  next_allowed_steps:
+    - v7_51d_local_read_only_adapter_runtime_implementation_only_if_explicitly_authorized
