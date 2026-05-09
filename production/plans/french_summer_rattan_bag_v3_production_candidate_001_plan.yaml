@@ -2,7 +2,12 @@ production_candidate_plan:
   schema_version: v1
   phase: v7_51
   plan_id: french_summer_rattan_bag_v3_production_candidate_001
-  status: planned
+  status: reviewed
+  generated_phase: v7_52
+  review_phase: v7_53
+  asset_status: accepted_with_minor_warning
+  review_ref: production/reviews/v7_53_french_summer_rattan_bag_v3_production_candidate_001_review.md
+  output_path: runs/real_generation/v7_52_french_summer_rattan_bag_v3_production_candidate_001/native_doubao_1778345704865_0.jpg
   product_line: French Summer Rattan Bag
 
   prompt_package_id: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3
@@ -22,6 +27,12 @@ production_candidate_plan:
     batch_generation_authorized: false
     watermark_requested: false
     watermark_parameter_must_be_sent: true
+    api_calls_observed: 1
+    images_created: 1
+    retry_performed: false
+    batch_generation_performed: false
+    model_matches: true
+    watermark_parameter_sent: true
 
   review:
     planned_review_phase: v7_53
@@ -39,6 +50,8 @@ production_candidate_plan:
     memory_delta_allowed_before_review: false
     requires_accepted_human_review_before_memory_delta: true
     memory_boundary_ref: docs/v7_49_vcp_memory_write_boundary_spec.md
+    memory_delta_candidate_allowed_now: false
+    requires_v7_54_memory_delta_draft_before_any_memory_write: true
 
   forbidden:
     - image_generation_without_independent_a5
