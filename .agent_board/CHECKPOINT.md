@@ -689,6 +689,34 @@ hard_stops:
 - do_not_treat_stable_prompt_as_final_production_asset
 ```
 
+## v7.50 VCP Read-only Bridge Planning
+
+```text
+Phase: v7.50
+Status: vcp_read_only_bridge_planning_defined
+VCP call performed: false
+VCPChat bridge call performed: false
+DailyNote write performed: false
+VCP memory write performed: false
+image generation performed: false
+bridge_execution_performed: false
+
+current_allowed_next_steps:
+- v7.51 production candidate plan
+- v7.50a local schema validation planning
+- v7.50b mock bridge payload validation planning
+
+hard_stops:
+- do_not_call_vcp_without_independent_a5
+- do_not_call_vcpchat_bridge_without_independent_authorization
+- do_not_write_dailynote_without_independent_a5
+- do_not_write_vcp_memory_without_independent_a5
+- do_not_generate_image_without_independent_a5
+- do_not_return_image_binary_through_read_only_bridge
+- do_not_return_secrets_or_private_paths
+- do_not_treat_stable_candidate_as_production_approved
+```
+
 ## Resume Instruction
 
 ```text
