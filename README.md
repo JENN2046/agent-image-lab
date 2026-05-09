@@ -31,6 +31,7 @@ v7.45 Production Usage SOP — one-image production policy defined. Allowed use:
 v7.46 One-Shot A5 Template — reusable single-image A5 authorization template added. Fields: model, watermark, api_calls, retry, batch, output, review, commit, push, memory.
 v7.47 Human Review Checklist — production human review gates added. 10 core gates + 6 v3 support-logic gates + 4 asset statuses.
 v7.48 Project State Sync Pack — repository entry state aligned with v3 production candidate readiness.
+v7.49 VCP Integration Readiness Pack — VCP integration layers, memory-write boundary, case_summary schema, and execution roadmap defined. Docs-only. No VCP call. No memory write.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3

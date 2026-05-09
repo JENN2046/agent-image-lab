@@ -666,6 +666,29 @@ Hard stops:
 - do_not_push_without_authorization
 ```
 
+## v7.49 VCP Integration Readiness Pack
+
+```text
+Phase: v7.49
+Status: vcp_integration_readiness_defined
+VCP call performed: false
+DailyNote write performed: false
+VCP memory write performed: false
+image generation performed: false
+
+current_allowed_next_steps:
+- v7.50 VCP read-only bridge planning
+- v7.51 production candidate plan
+
+hard_stops:
+- do_not_call_vcp_without_independent_a5
+- do_not_write_dailynote_without_independent_a5
+- do_not_write_vcp_memory_without_independent_a5
+- do_not_generate_image_without_independent_a5
+- do_not_store_image_binary_in_git_or_memory
+- do_not_treat_stable_prompt_as_final_production_asset
+```
+
 ## Resume Instruction
 
 ```text
