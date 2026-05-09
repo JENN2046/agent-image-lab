@@ -61,7 +61,10 @@
 - [ ] `scripts/validate_v7_4_memory_write_gate_package.js` 存在，包含 9 项检查且全部通过。
 - [ ] `docs/260_v7_5_production_run_dry_run_prep.md` 存在，定义 dry-run 准备流程。
 - [ ] `docs/261_v7_5_a5_activation_checklist.md` 存在，定义 A5 激活清单。
-- [ ] `scripts/validate_v7_5_production_run_dry_run_prep.js` 存在，包含 25 项检查且全部通过。
+- [ ] `scripts/validate_v7_5_production_run_dry_run_prep.js` 存在，包含 24 项检查且全部通过。
+- [ ] `docs/262_v7_6_single_real_generation_activation_package.md` 存在，定义 A5 激活包。
+- [ ] `docs/263_v7_6_operator_activation_checklist.md` 存在，定义操作员确认清单。
+- [ ] `scripts/validate_v7_6_single_real_generation_activation_package.js` 存在，包含 26 项检查且全部通过。
 - [ ] 所有任务书要求的 MVP 文件存在。
 - [ ] 文件直接位于项目根目录下，没有创建第二套 `agent-image-lab/` 嵌套目录。
 - [ ] 可运行 `scripts/validate_mvp.ps1` 完成只读自动检查；该脚本不是 Adapter、VCP 插件或真实执行入口。

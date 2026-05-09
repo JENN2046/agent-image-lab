@@ -1,0 +1,15 @@
+v7_6_activation_package:
+  status: inactive_package
+  execution_authorized_by_this_record: false
+  baseline_commit: 9fd0931
+  baseline_tag: v6.10-rc1-product-runtime
+  max_plugin_calls: 1
+  max_images_created: 1
+  plugin_call_performed: false
+  api_call_performed: false
+  image_created: false
+  daily_note_written: false
+  vcp_memory_written: false
+  a5_activation_required: true
+  human_review_required: true
+  memory_write_blocked: true

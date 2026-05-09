@@ -9,13 +9,13 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-v7.5 Production Run Dry Run Prep — dry-run prep, A5 activation checklist, operator pre-flight checklist. No real execution.
+v7.6 Single Real Generation Activation Package — A5 activation package, operator activation checklist. No real execution.
 ```
 
 ## Current Phase
 
 ```text
-v7.5 — docs/260-261 + schema example + validator (24 checks). All v7 validators pass. No real execution.
+v7.6 — docs/262-263 + schema example + validator (25 checks). All v7 validators pass. No real execution.
 ```
 
 ## Current Branch

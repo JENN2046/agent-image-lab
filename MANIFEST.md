@@ -75,7 +75,8 @@
 - v7.2 Generation Failure Taxonomy + Retry Policy：失败分类（11 类）+ 重试策略。`docs/257_v7_2_generation_failure_taxonomy_and_retry_policy.md`，validator `scripts/validate_v7_2_generation_failure_taxonomy_and_retry_policy.js`（16 checks）
 - v7.3 Asset Acceptance Gate：资产验收门 + gate checklist。`docs/258_v7_3_asset_acceptance_gate.md`，validator `scripts/validate_v7_3_asset_acceptance_gate.js`（17 checks）
 - v7.4 Memory Write Gate Package：记忆写入闸门（需独立 A5 授权）。`docs/259_v7_4_memory_write_gate_package.md`，validator `scripts/validate_v7_4_memory_write_gate_package.js`（9 checks）
-- v7.5 Production Run Dry Run Prep：生产运行 dry-run 准备 + A5 激活清单。`docs/260_v7_5_production_run_dry_run_prep.md` + `docs/261_v7_5_a5_activation_checklist.md`，validator `scripts/validate_v7_5_production_run_dry_run_prep.js`（25 checks）
+- v7.5 Production Run Dry Run Prep：生产运行 dry-run 准备 + A5 激活清单。`docs/260_v7_5_production_run_dry_run_prep.md` + `docs/261_v7_5_a5_activation_checklist.md`，validator `scripts/validate_v7_5_production_run_dry_run_prep.js`（24 checks）
+- v7.6 Single Real Generation Activation Package：A5 激活包 + 操作员确认清单。`docs/262_v7_6_single_real_generation_activation_package.md` + `docs/263_v7_6_operator_activation_checklist.md`，validator `scripts/validate_v7_6_single_real_generation_activation_package.js`（26 checks）
 - Tag and version strategy 提供 `docs/233_tag_and_version_strategy.md`；tag 命名规范、版本号策略、release 条件。
 
 ## Release readiness 文件

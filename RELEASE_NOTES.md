@@ -112,7 +112,8 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Added v7.2 Generation Failure Taxonomy + Retry Policy: 11 failure categories, no automatic retry. `docs/257`, `validate_v7_2.js` (16 checks).
 - Added v7.3 Asset Acceptance Gate: 4 asset statuses, 8 gate checklist items, memory/DailyNote write blocked. `docs/258`, `validate_v7_3.js` (17 checks).
 - Added v7.4 Memory Write Gate Package: inactive gate, requires separate A5 authorization. `docs/259`, `validate_v7_4.js` (9 checks).
-- Added v7.5 Production Run Dry Run Prep: dry-run prep docs, A5 activation checklist, schema example. `docs/260`, `docs/261`, `validate_v7_5.js` (25 checks). No real execution.
+- Added v7.5 Production Run Dry Run Prep: dry-run prep docs, A5 activation checklist, schema example. `docs/260`, `docs/261`, `validate_v7_5.js` (24 checks). No real execution.
+- Added v7.6 Single Real Generation Activation Package: A5 activation package, operator activation checklist. `docs/262`, `docs/263`, `validate_v7_6.js` (26 checks). No real execution.
 
 ## Safety Status
 

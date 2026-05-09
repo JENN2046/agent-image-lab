@@ -21,6 +21,7 @@ v7.2 Generation Failure Taxonomy + Retry Policy — 11 failure categories, stric
 v7.3 Asset Acceptance Gate — Asset statuses, gate checklist, memory/DailyNote write boundaries.
 v7.4 Memory Write Gate Package — Memory write gate requiring separate A5 authorization.
 v7.5 Production Run Dry Run Prep — Dry-run prep, A5 activation checklist, operator pre-flight checklist.
+v7.6 Single Real Generation Activation Package — A5 activation package, operator activation checklist, pre-flight requirements.
 ```
 
 已经完成：
