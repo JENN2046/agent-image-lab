@@ -8,16 +8,6 @@ function loadPromptPackage(promptPackageRef) {
   return { prompt: "", negative_prompt: "", safety: {}, execution: {} };
 }
 
-function buildRequestPayload(promptPackage, options) {
-  return {
-    model: options.modelOverride || "doubao-seedream-5-0-260128",
-    prompt: promptPackage.prompt,
-    negative_prompt: promptPackage.negative_prompt,
-    size: "1024x1024",
-    count: Math.min(options.maxImagesCreated || 1, 1),
-  };
-}
-
 function validateA5Limits(options) {
   var errors = [];
   if (options.maxPluginCalls > 1) errors.push("max_plugin_calls must be 1");
@@ -104,7 +94,11 @@ function realGenerate(options) {
   // 本轮实现 contract 但不执行真实请求。
   // var apiKey = process.env.DOUBAO_IMAGE_API_KEY;
   // var requestBody = buildDoubaoRequest(options);
-  // TODO: fetch(options.apiBaseUrl, { method: 'POST', headers: {...}, body: JSON.stringify(requestBody) })
+  // var response = await fetch(options.apiBaseUrl, {
+  //   method: 'POST',
+  //   headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + apiKey },
+  //   body: JSON.stringify(requestBody)
+  // });
 
   return {
     status: "REAL_API_CONTRACT_READY",
@@ -150,7 +144,6 @@ function detectModelMismatch(requestedModel, reportedModel) {
 
 module.exports = {
   loadPromptPackage: loadPromptPackage,
-  buildRequestPayload: buildRequestPayload,
   validateA5Limits: validateA5Limits,
   validateRealExecutionGate: validateRealExecutionGate,
   buildDoubaoRequest: buildDoubaoRequest,
