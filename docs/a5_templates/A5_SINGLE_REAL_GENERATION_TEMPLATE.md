@@ -18,9 +18,7 @@ a5_single_real_generation:
     commit: 38b154c
     tag: v6.10-rc1-product-runtime
 
-  external_roots:
-    plugin_dir: null                  # 【必填】DoubaoGen 插件在 VCPToolBox 中的路径，必须由你手动确认
-    vcptoolbox_root: null             # VCPToolBox 根目录
+  plugin_call_profile_ref: plugin_calls/image_generation/doubaogen_generate_v1.yaml
 
   generation:
     selected_plugin_id: DoubaoGen     # 示例值

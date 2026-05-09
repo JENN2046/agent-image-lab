@@ -1,0 +1,45 @@
+plugin_call_profile_id: doubaogen_generate_v1
+plugin_id: DoubaoGen
+plugin_command: generate
+
+plugin_dir_ref: configs/local_paths/doubaogen_plugin_dir.local.yaml#DoubaoGen
+
+mode: text_to_image
+runner_type: powershell_runner
+
+prompt_input:
+  source: prompt_package_ref
+  required: true
+  allowed_prompt_root: prompts/image_generation/
+
+output_policy:
+  root: runs/real_generation/
+  single_run_subdir_required: true
+  allow_outside_repo: false
+  max_images_created: 1
+
+limits:
+  max_plugin_calls: 1
+  retry_allowed: false
+  max_images_created: 1
+
+safety:
+  real_execution_requires_a5: true
+  memory_write_allowed: false
+  daily_note_write_allowed: false
+  push_allowed: false
+  tag_allowed: false
+  release_allowed: false
+  allow_read_other_plugins: false
+  allow_scan_parent_dir: false
+
+result_contract:
+  expected_status:
+    - COMPLETED_GENERATED
+    - BLOCKED
+    - FAILED
+  required_fields:
+    - output_path
+    - images_created
+    - retry_performed
+    - asset_status

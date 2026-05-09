@@ -14,14 +14,14 @@
 | baseline commit | `38b154c` | □ |
 | RC tag | `v6.10-rc1-product-runtime` | □ |
 
-## 2. 外部依赖路径（必填）
+## 2. 插件调用配置（优先使用）
 
-> **PluginDir 必须由你手动确认，agent 不能猜测路径。**
+> `plugin_dir_ref` 已注册到 `configs/local_paths/doubaogen_plugin_dir.local.yaml`，不再要求每次手填 PluginDir。
+> 如要修改 plugin_dir_ref，必须单独授权。
 
-| 字段 | 说明 | 填写 |
-|------|------|------|
-| `PluginDir` | DoubaoGen 插件在 VCPToolBox 中的安装目录，如 `C:\VCP\VCPToolBox\Plugin\DoubaoGen` | |
-| `vcptoolbox_root` | VCPToolBox 根目录 | |
+| 字段 | 值 |
+|------|-----|
+| `plugin_call_profile_ref` | `plugin_calls/image_generation/doubaogen_generate_v1.yaml` |
 
 ## 3. 生成范围
 

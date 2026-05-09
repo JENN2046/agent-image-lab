@@ -1,0 +1,11 @@
+# 插件路径注册 — 仅用于运行期引用，不用于执行授权。
+# 不得读取该目录，不得验证真实文件系统，不得扫描父目录。
+
+plugin_path_registry:
+  DoubaoGen:
+    plugin_dir: "A:\\VCP\\VCPToolBox-prod-stable\\Plugin\\DoubaoGen"
+    scope: single_plugin_dir_only
+    allowed_commands:
+      - generate
+    allow_scan_parent_dir: false
+    allow_read_other_plugins: false

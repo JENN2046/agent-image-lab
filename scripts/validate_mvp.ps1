@@ -128,6 +128,7 @@ $requiredFiles = @(
   'scripts/validate_v7_7_single_real_generation_activation_readiness_check.js',
   'scripts/validate_v7_8_a5_template_prompt_library.js',
   'scripts/validate_v7_9_prompt_library_activation_ux.js',
+  'scripts/validate_v7_10_image_generation_plugin_call_library.js',
   'scripts/validate_prompt_package_library.js',
   'scripts/validate_a5_generation_template.js',
   'docs/00_project_roadmap.md',
@@ -5397,10 +5398,14 @@ if (-not $node) {
 
     $allowedCurrentA4ChangePrefixes = @(
       '.agent_board/',
+      'configs/local_paths/',
       'docs/',
       'integrations/vcp/',
+      'plugin_calls/',
+      'prompts/',
       'review_console/embed_contract/',
       'review_console/runtime_prototype/',
+      'schemas/',
       'scripts/',
       'tests/schema_examples/'
     )

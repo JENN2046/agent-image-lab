@@ -1,0 +1,42 @@
+# plugin_call_profile.schema.yaml
+# 插件调用配置 profile schema
+plugin_call_profile:
+  plugin_call_profile_id: string
+  plugin_id: string
+  plugin_command: string
+  plugin_dir_ref: string
+
+  mode: text_to_image | text_only | image_to_image
+  runner_type: string
+
+  prompt_input:
+    source: prompt_package_ref
+    required: true
+    allowed_prompt_root: string
+
+  output_policy:
+    root: string
+    single_run_subdir_required: true
+    allow_outside_repo: false
+    max_images_created: integer
+
+  limits:
+    max_plugin_calls: integer
+    retry_allowed: false
+    max_images_created: integer
+
+  safety:
+    real_execution_requires_a5: true
+    memory_write_allowed: false
+    daily_note_write_allowed: false
+    push_allowed: false
+    tag_allowed: false
+    release_allowed: false
+    allow_read_other_plugins: false
+    allow_scan_parent_dir: false
+
+  result_contract:
+    expected_status:
+      - string
+    required_fields:
+      - string
