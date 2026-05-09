@@ -4,6 +4,7 @@
 
 ```text
 Status: v6.8A Plugin Dashboard Draft Surface COMPLETED. Plugin Selector, Parameter Mapper, Dry-run Toggle, Dispatch Status implemented with dispatch_plan_draft. docs/245, validator (30 checks), FIELD_MAPPING, indexes synced. All v6.0-v6.8 validators pass. Runtime guard not modified. draft_only, no-execution. No push/tag/release.
+v6.8A builds on v6.7 Product Runtime Final Acceptance Baseline.
 Result: Plugin Dashboard added as v6 Product Runtime module. Plugin Selector with 3 local candidates, Parameter Mapper with key-value + preview, Dry-run Toggle with read-only safety fields, Dispatch Status with gatekeeper/dispatch/trace state. dispatch_plan_draft builder and renderer in app.js. All 30 v6.8 validator checks pass. Next: user direction — v6.8B guard hardening or v6.9 Release Panel planning.
 ```
 
