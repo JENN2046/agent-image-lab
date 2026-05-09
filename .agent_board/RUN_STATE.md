@@ -9,7 +9,7 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-v7.0 Real Production Landing Preflight — preflight plan, A5 authorization template, failure taxonomy, rollback strategy. No real execution.
+v7.1~v7.4 Production Landing Preparation — controlled run package, failure taxonomy, asset acceptance gate, memory write gate. No real execution.
 ```
 
 ## Current Branch
@@ -27,13 +27,13 @@ v7.0 — Real Production Landing Preflight. docs/254 (preflight plan) + docs/255
 ## Current Task
 
 ```text
-Extended Long Task — v6.9A Release Panel Draft Surface + v6.9B Guard + v6.10 RC Matrix + Validator Quality Gate + Operator Runbook + Resume Capsule.
+v7.1~v7.4 Production Landing Preparation — controlled run package, failure taxonomy, asset acceptance gate, memory write gate.
 ```
 
 ## Last Completed Task
 
 ```text
-Extended Long Task completed — v6.9A (Release Panel UI + docs/248 + 17-check validator), v6.9B (runtime_guard v6ReleaseReadinessIsSafe + docs/249 + 12-check validator), v6.10 RC Matrix (docs/250 + 8-check validator), Validator Quality Gate (docs/251 + 8-check meta-validator), Operator Runbook (docs/252) + Resume Capsule (docs/253) + 14-check validator. All v6.0-v6.runbook validators pass. draft_only, no-execution.
+v7.1-v7.4 completed — docs/256-259, 4 validators (55 checks total). All v7 validators pass. No real execution. draft_only, no-execution.
 ```
 
 ## Last Validation
@@ -1191,5 +1191,5 @@ v6.7 Product Runtime Final Acceptance Baseline completed and pushed to origin/ma
 ## Next Action
 
 ```text
-v7.0 preflight completed. Next: user direction — v7.1 Single Real Generation Controlled Run (requires active A5 authorization).
+v7.1-v7.4 completed. Next: user direction — push closeout or v7.5 Production Run Dry Run (still requires active A5).
 ```

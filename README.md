@@ -16,6 +16,10 @@ v6.9B Release Panel Guard Hardening — v6ReleaseReadinessIsSafe() added to runt
 v6.10 Product Runtime RC Readiness Matrix — Full module matrix with status/validator/guard/boundary.
 Validator Quality Gate — Meta-validator checks all v6 validators for quality.
 v7.0 Real Production Landing Preflight — Preflight plan, A5 authorization template, failure taxonomy, rollback strategy defined. No real execution.
+v7.1 Single Real Generation Controlled Run Package — Controlled run package with inactive authorization.
+v7.2 Generation Failure Taxonomy + Retry Policy — 11 failure categories, strict retry policy (no auto retry).
+v7.3 Asset Acceptance Gate — Asset statuses, gate checklist, memory/DailyNote write boundaries.
+v7.4 Memory Write Gate Package — Memory write gate requiring separate A5 authorization.
 ```
 
 已经完成：

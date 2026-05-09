@@ -51,6 +51,14 @@
 - [ ] `docs/254_v7_0_real_production_landing_preflight.md` 存在，定义生产落地预案。
 - [ ] `docs/255_v7_0_a5_single_generation_authorization_template.md` 存在，定义 A5 授权模板。
 - [ ] `scripts/validate_v7_0_real_production_landing_preflight.js` 存在，包含 20 项检查且全部通过。
+- [ ] `docs/256_v7_1_single_real_generation_controlled_run_package.md` 存在，定义受控运行包。
+- [ ] `scripts/validate_v7_1_single_real_generation_controlled_run_package.js` 存在，包含 13 项检查且全部通过。
+- [ ] `docs/257_v7_2_generation_failure_taxonomy_and_retry_policy.md` 存在，定义 11 类失败和重试策略。
+- [ ] `scripts/validate_v7_2_generation_failure_taxonomy_and_retry_policy.js` 存在，包含 16 项检查且全部通过。
+- [ ] `docs/258_v7_3_asset_acceptance_gate.md` 存在，定义资产验收门。
+- [ ] `scripts/validate_v7_3_asset_acceptance_gate.js` 存在，包含 17 项检查且全部通过。
+- [ ] `docs/259_v7_4_memory_write_gate_package.md` 存在，定义记忆写入闸门。
+- [ ] `scripts/validate_v7_4_memory_write_gate_package.js` 存在，包含 9 项检查且全部通过。
 - [ ] 所有任务书要求的 MVP 文件存在。
 - [ ] 文件直接位于项目根目录下，没有创建第二套 `agent-image-lab/` 嵌套目录。
 - [ ] 可运行 `scripts/validate_mvp.ps1` 完成只读自动检查；该脚本不是 Adapter、VCP 插件或真实执行入口。

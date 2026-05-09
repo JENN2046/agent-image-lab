@@ -71,6 +71,10 @@
 - Validator Quality Gate：v6 validators 质量 meta 检查。`docs/251_v6_validator_quality_gate.md`，validator `scripts/validate_v6_validator_quality_gate.js`（8 checks）
 - v6 Operator Runbook + Resume Capsule：运维手册与续跑胶囊。`docs/252_v6_product_runtime_operator_runbook.md` + `docs/253_v6_10_resume_capsule.md`，validator `scripts/validate_v6_operator_runbook_and_resume_capsule.js`（14 checks）
 - v7.0 Real Production Landing Preflight：真实生产落地预案 + A5 授权包模板。`docs/254_v7_0_real_production_landing_preflight.md` + `docs/255_v7_0_a5_single_generation_authorization_template.md`，validator `scripts/validate_v7_0_real_production_landing_preflight.js`（20 checks）
+- v7.1 Single Real Generation Controlled Run Package：单次真实生成受控运行包。`docs/256_v7_1_single_real_generation_controlled_run_package.md`，validator `scripts/validate_v7_1_single_real_generation_controlled_run_package.js`（13 checks）
+- v7.2 Generation Failure Taxonomy + Retry Policy：失败分类（11 类）+ 重试策略。`docs/257_v7_2_generation_failure_taxonomy_and_retry_policy.md`，validator `scripts/validate_v7_2_generation_failure_taxonomy_and_retry_policy.js`（16 checks）
+- v7.3 Asset Acceptance Gate：资产验收门 + gate checklist。`docs/258_v7_3_asset_acceptance_gate.md`，validator `scripts/validate_v7_3_asset_acceptance_gate.js`（17 checks）
+- v7.4 Memory Write Gate Package：记忆写入闸门（需独立 A5 授权）。`docs/259_v7_4_memory_write_gate_package.md`，validator `scripts/validate_v7_4_memory_write_gate_package.js`（9 checks）
 - Tag and version strategy 提供 `docs/233_tag_and_version_strategy.md`；tag 命名规范、版本号策略、release 条件。
 
 ## Release readiness 文件

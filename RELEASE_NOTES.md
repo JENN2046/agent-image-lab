@@ -108,6 +108,10 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Added v6 Validator Quality Gate: meta-validator checking all v6 validators. `docs/251_v6_validator_quality_gate.md`, `scripts/validate_v6_validator_quality_gate.js` (8 checks).
 - Added v6 Operator Runbook + Resume Capsule: `docs/252_v6_product_runtime_operator_runbook.md`, `docs/253_v6_10_resume_capsule.md`, `scripts/validate_v6_operator_runbook_and_resume_capsule.js` (14 checks).
 - Added v7.0 Real Production Landing Preflight: preflight plan, A5 authorization template, failure taxonomy, rollback strategy. `docs/254_v7_0_real_production_landing_preflight.md`, `docs/255_v7_0_a5_single_generation_authorization_template.md`, `scripts/validate_v7_0_real_production_landing_preflight.js` (20 checks). No real execution.
+- Added v7.1 Single Real Generation Controlled Run Package: inactive controlled run package, max_plugin_calls=1, no auto retry, no auto memory/DailyNote. `docs/256`, `validate_v7_1.js` (13 checks).
+- Added v7.2 Generation Failure Taxonomy + Retry Policy: 11 failure categories, no automatic retry. `docs/257`, `validate_v7_2.js` (16 checks).
+- Added v7.3 Asset Acceptance Gate: 4 asset statuses, 8 gate checklist items, memory/DailyNote write blocked. `docs/258`, `validate_v7_3.js` (17 checks).
+- Added v7.4 Memory Write Gate Package: inactive gate, requires separate A5 authorization. `docs/259`, `validate_v7_4.js` (9 checks).
 
 ## Safety Status
 
