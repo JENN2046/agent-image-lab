@@ -1,0 +1,42 @@
+read_only_evidence_index:
+  schema_version: v1
+  phase: v7_51a
+  status: planning_only
+  index_type: repository_local_text_only_refs
+
+  allowed_evidence_refs:
+    project_state:
+      - README.md
+      - .agent_board/CHECKPOINT.md
+    bridge_contracts:
+      - docs/v7_50_vcp_read_only_bridge_contract.md
+      - docs/v7_50_vcp_read_only_bridge_security_gates.md
+      - docs/v7_49_vcp_memory_write_boundary_spec.md
+    dry_run_results:
+      - docs/v7_50a_vcp_read_only_bridge_local_schema_validation_result.yaml
+      - docs/v7_50b_vcp_read_only_bridge_mock_payload_validation_result.yaml
+      - docs/v7_50c_vcp_read_only_bridge_dry_run_execution_result.yaml
+    production_candidate_001:
+      - production/reviews/v7_53_french_summer_rattan_bag_v3_production_candidate_001_review.md
+      - production/closeouts/v7_56_french_summer_rattan_bag_v3_production_candidate_001_memory_write_skip_closeout.md
+
+  forbidden_evidence_refs:
+    - runs/
+    - jpg
+    - jpeg
+    - png
+    - webp
+    - raw_api_payload
+    - secrets
+    - private_absolute_paths
+    - dailynote_files
+    - vcp_memory_files
+    - unreviewed_generation_outputs
+    - production_approved_claims
+
+  access_rules:
+    return_repository_relative_refs_only: true
+    default_no_full_file_content: true
+    default_no_image_binary: true
+    default_no_write_trigger: true
+    default_no_vcp_or_bridge_trigger: true

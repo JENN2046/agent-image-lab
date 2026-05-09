@@ -1,0 +1,69 @@
+surface_static_fixture:
+  schema_version: v1
+  phase: v7_50d
+  fixture_execution_performed: true
+  fixture_type: local_static_surface_payload
+  result: pass
+
+  surface_fixture:
+    schema_version: v1
+    phase: v7_50d
+    surface_id: v7_50d_vcpchat_review_console_surface_001
+    render_mode: read_only
+    payload_type: text_only_refs
+    returned_refs_only: true
+    case_id: french_summer_rattan_bag_v3_production_candidate_001
+    current_case_state: closed_no_memory_write
+    visible_sections:
+      - header_status_bar
+      - bridge_dry_run_summary
+      - returned_text_only_refs_panel
+      - safety_gates_panel
+      - closed_case_status_panel
+      - forbidden_payloads_panel
+      - next_allowed_steps_panel
+      - hard_stops_panel
+    user_actions_enabled:
+      approve_memory_write: false
+      write_dailynote: false
+      write_vcp_memory: false
+      generate_image: false
+      retry_generation: false
+      reopen_closed_case: false
+    image_binary_rendered: false
+    secrets_rendered: false
+    raw_payload_rendered: false
+    private_absolute_path_rendered: false
+    production_approved_claim_rendered: false
+
+  surface_gates:
+    total: 12
+    passed: 12
+    failed: 0
+    gates:
+      render_mode_must_be_read_only: pass
+      payload_type_must_be_text_only_refs: pass
+      returned_refs_only_must_be_true: pass
+      image_binary_must_not_render: pass
+      secrets_must_not_render: pass
+      raw_payload_must_not_render: pass
+      private_absolute_path_must_not_render: pass
+      memory_write_action_must_not_render: pass
+      dailynote_write_action_must_not_render: pass
+      generate_image_action_must_not_render: pass
+      closed_no_memory_write_case_must_not_reopen: pass
+      production_approved_claim_must_not_render: pass
+    all_pass: true
+
+  external_side_effects:
+    vcp_call_performed: false
+    vcpchat_bridge_call_performed: false
+    electron_started: false
+    remote_debug_started: false
+    cdp_call_performed: false
+    daily_note_write_performed: false
+    vcp_memory_write_performed: false
+    image_generation_performed: false
+    image_binary_read: false
+    runs_path_read: false
+    production_candidate_closeout_modified: false

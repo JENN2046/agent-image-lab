@@ -1,0 +1,43 @@
+read_only_bridge_adapter_contract:
+  schema_version: v1
+  phase: v7_51b
+  status: planning_only
+  adapter_runtime_implemented: false
+  adapter_call_performed: false
+
+  request:
+    bridge_mode: read_only
+    payload_type: text_only_refs
+    write_intent: false
+    image_binary_requested: false
+    secrets_requested: false
+    raw_payload_requested: false
+    private_absolute_path_requested: false
+
+  response:
+    status_allowed:
+      - ok
+      - blocked
+      - not_found
+      - failed
+    payload_type: text_only_refs
+    returned_refs_only: true
+    image_binary_included: false
+    secrets_included: false
+    write_performed: false
+    memory_write_performed: false
+    daily_note_write_performed: false
+
+  hard_blockers:
+    - bridge_mode_not_read_only
+    - write_intent_detected
+    - image_binary_requested
+    - secret_requested
+    - raw_payload_requested
+    - private_absolute_path_requested
+    - memory_write_attempted
+    - dailynote_write_attempted
+    - production_approved_claim_detected
+    - closed_case_reopen_attempted
+
+  future_runtime_files_not_created_in_this_phase: true

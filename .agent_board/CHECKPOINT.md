@@ -1026,6 +1026,46 @@ hard_stops:
 - do_not_reopen_closed_no_memory_write_case
 ```
 
+## v7.50d-v7.51b Read-only VCP Integration Long Task
+
+```text
+Phase: v7.50d-v7.51b
+Status: read_only_vcp_integration_long_task_completed
+surface_static_fixture_execution_performed: true
+surface_static_fixture_result: pass
+real_vcpchat_surface_check_planned: true
+read_only_evidence_index_defined: true
+read_only_adapter_skeleton_planned: true
+adapter_runtime_implemented: false
+VCP call performed: false
+VCPChat bridge call performed: false
+Electron started: false
+remote-debug started: false
+CDP call performed: false
+DailyNote write performed: false
+VCP memory write performed: false
+image generation performed: false
+image binary read: false
+runs path read: false
+
+current_allowed_next_steps:
+- v7.51c read-only bridge adapter implementation planning, only if explicitly authorized
+- v7.50e real VCPChat surface check planning/execution, only if explicitly authorized
+- new production candidate only with new explicit plan and A5
+
+hard_stops:
+- do_not_implement_adapter_runtime_without_explicit_instruction
+- do_not_call_vcp_without_independent_authorization
+- do_not_call_vcpchat_bridge_without_independent_authorization
+- do_not_start_electron_without_explicit_authorization
+- do_not_start_remote_debug_without_explicit_authorization
+- do_not_write_dailynote_without_independent_a5
+- do_not_write_vcp_memory_without_independent_a5
+- do_not_generate_image_without_independent_a5
+- do_not_read_image_binary
+- do_not_reopen_closed_no_memory_write_case
+```
+
 ## Resume Instruction
 
 ```text
