@@ -359,6 +359,9 @@ var VALID_REVIEWER_ROLES = Object.freeze(["ImageLab_Master", "Archivist_Agent", 
 var VALID_DISPATCH_STATUSES = Object.freeze(["draft", "mapped", "blocked", "ready_for_human_review"]);
 var VALID_GATEKEEPER_STATUSES = Object.freeze(["required", "pending", "reviewed", "blocked"]);
 var VALID_TRACE_STATES = Object.freeze(["dispatch_draft", "plan_draft", "review_draft"]);
+var VALID_VALIDATOR_STATUSES = Object.freeze(["pending", "passed", "failed"]);
+var VALID_DIRTY_TREE_STATUSES = Object.freeze(["clean", "dirty", "unknown"]);
+var VALID_RELEASE_NOTES_STATUSES = Object.freeze(["draft", "ready", "missing"]);
 
   function v6MemoryQueueIsSafe(draft) {
     var v6 = draft && draft.v6_product_runtime_draft;
@@ -459,6 +462,30 @@ var VALID_TRACE_STATES = Object.freeze(["dispatch_draft", "plan_draft", "review_
     return true;
   }
 
+  function v6ReleaseReadinessIsSafe(draft) {
+    var rrd = draft && draft.v6_product_runtime_draft && draft.v6_product_runtime_draft.release_readiness_draft;
+    if (!rrd) { return true; }
+    if (rrd.draft_only !== true) { return false; }
+    if (rrd.side_effects_performed !== false) { return false; }
+    if (!guardIsClean(rrd.no_execution_guard)) { return false; }
+    if (rrd.push_allowed !== false) { return false; }
+    if (rrd.tag_allowed !== false) { return false; }
+    if (rrd.release_allowed !== false) { return false; }
+    if (rrd.github_release_allowed !== false) { return false; }
+    if (rrd.deploy_allowed !== false) { return false; }
+    if (rrd.a5_production_execution_allowed !== false) { return false; }
+    if (rrd.validator_status) {
+      var vs = rrd.validator_status;
+      var vsKeys = ["v6_9", "v6_8", "v6_7", "runtime_suite", "validate_mvp"];
+      for (var vi = 0; vi < vsKeys.length; vi++) {
+        if (vs[vsKeys[vi]] && VALID_VALIDATOR_STATUSES.indexOf(vs[vsKeys[vi]]) === -1) { return false; }
+      }
+    }
+    if (rrd.dirty_tree_status && VALID_DIRTY_TREE_STATUSES.indexOf(rrd.dirty_tree_status) === -1) { return false; }
+    if (rrd.release_notes_status && VALID_RELEASE_NOTES_STATUSES.indexOf(rrd.release_notes_status) === -1) { return false; }
+    return true;
+  }
+
   function v6DispatchPlanIsSafe(draft) {
     var dpd = draft && draft.v6_product_runtime_draft && draft.v6_product_runtime_draft.dispatch_plan_draft;
     if (!dpd) { return true; }
@@ -507,6 +534,7 @@ var VALID_TRACE_STATES = Object.freeze(["dispatch_draft", "plan_draft", "review_
     if (typeof tp.visual_goal_cn !== "string") { return false; }
     if (tp.current_stage === "blocked" && !tp.blocked_reason_cn) { return false; }
     if (!v6DispatchPlanIsSafe(draft)) { return false; }
+    if (!v6ReleaseReadinessIsSafe(draft)) { return false; }
     return true;
   }
 
@@ -728,6 +756,10 @@ var VALID_TRACE_STATES = Object.freeze(["dispatch_draft", "plan_draft", "review_
     v6SessionStoreIsSafe,
     v6MemoryQueueIsSafe,
     v6DispatchPlanIsSafe,
+    v6ReleaseReadinessIsSafe,
+    VALID_VALIDATOR_STATUSES,
+    VALID_DIRTY_TREE_STATUSES,
+    VALID_RELEASE_NOTES_STATUSES,
     VALID_DISPATCH_STATUSES,
     VALID_GATEKEEPER_STATUSES,
     VALID_TRACE_STATES,
