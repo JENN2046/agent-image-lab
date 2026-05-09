@@ -37,7 +37,10 @@ check("config_uses_env_var", () => config.includes("api_key_env") && !config.inc
 const js = fs.readFileSync(path.join(root, "plugins/image_generation/native_doubao_image/native_doubao_image.js"), "utf8");
 check("has_dry_run_generate", () => js.includes("function dryRunGenerate"));
 check("has_detect_mismatch", () => js.includes("function detectModelMismatch"));
-check("no_real_api_call", () => !js.includes("fetch(") && !js.includes("http.") && !js.includes("https."));
+check("no_real_api_call", () => {
+  var code = js.split("\n").filter(function(l) { return !l.trim().startsWith("//"); }).join("\n");
+  return !code.includes("fetch(") && !code.includes("http.") && !code.includes("https.");
+});
 
 const fixture = JSON.parse(fs.readFileSync(path.join(root, "plugins/image_generation/native_doubao_image/dry_run_fixture.json"), "utf8"));
 check("fixture_api_call_false", () => fixture.api_call_performed === false);
