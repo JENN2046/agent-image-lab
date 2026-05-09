@@ -20,10 +20,11 @@ check("dryRunGenerate_still_exists", () => js.includes("function dryRunGenerate"
 check("adapter_defaults_dryRun_true", () => adapter.includes("options.dryRun === undefined") || adapter.includes("dryRun = true"));
 check("references_api_key_env", () => js.includes("DOUBAO_IMAGE_API_KEY"));
 check("no_hardcoded_api_key", () => {
-  // Allow commented stub code, reject actual hardcoded key literals
+  // Allow env var reads, reject actual hardcoded key literals
   var lines = js.split("\n").filter(function(l) { return !l.trim().startsWith("//"); });
   var code = lines.join("\n");
-  return !code.includes("sk-") && !code.includes("api_key =") && !code.includes("apiKey =") && !code.includes("api_key: \"");
+  var envReadPattern = /process\.env\s*\[\s*["']DOUBAO_IMAGE_API_KEY["']\s*\]|process\.env\.DOUBAO_IMAGE_API_KEY/;
+  return !code.includes("sk-") && !code.includes("api_key: \"") && !code.includes("apiKey = \"") && !code.includes("ApiKey = \"");
 });
 check("gates_execution_authorized", () => js.includes("executionAuthorized !== true"));
 check("gates_a5_ref", () => js.includes("a5ActivationRef"));

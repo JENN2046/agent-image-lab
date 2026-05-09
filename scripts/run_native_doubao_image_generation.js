@@ -27,6 +27,15 @@ function loadDotEnv(filePath) {
   return env;
 }
 
+function loadEnvLocal() {
+  if (!fs.existsSync(ENV_LOCAL_PATH)) return { loaded: false, error: ".env.local not found" };
+  const env = loadDotEnv(ENV_LOCAL_PATH);
+  if (!env.DOUBAO_IMAGE_API_KEY) return { loaded: false, error: "DOUBAO_IMAGE_API_KEY missing in .env.local" };
+  if (!env.DOUBAO_IMAGE_API_BASE_URL) return { loaded: false, error: "DOUBAO_IMAGE_API_BASE_URL missing in .env.local" };
+  for (const key of Object.keys(env)) process.env[key] = env[key];
+  return { loaded: true, fields: Object.keys(env).length };
+}
+
 function preflightCheck(options) {
   const issues = [];
 
@@ -62,7 +71,7 @@ function preflightCheck(options) {
   };
 }
 
-function run(options) {
+async function run(options) {
   // Default dry-run mode
   if (options.dryRun === undefined) options.dryRun = true;
 
@@ -76,6 +85,21 @@ function run(options) {
       api_call_performed: false,
       image_created: false,
     };
+  }
+
+  // Load .env.local into process.env for real execution path
+  if (options.dryRun === false && options.execution_authorized === true) {
+    const envLoad = loadEnvLocal();
+    if (!envLoad.loaded) {
+      return {
+        status: "BLOCKED_CONFIG_MISSING",
+        runner: "run_native_doubao_image_generation",
+        plugin_id: "NativeDoubaoImage",
+        env_error: envLoad.error,
+        api_call_performed: false,
+        image_created: false,
+      };
+    }
   }
 
   // Delegate to adapter
@@ -115,7 +139,7 @@ if (require.main === module) {
     if (parts.length === 2) args[parts[0]] = parts[1];
   }
 
-  const output = run({
+  run({
     prompt_package_ref: args["--prompt-package-ref"] || "prompts/image_generation/product_still_life_outdoor_tennis_wallet_hero_v2.yaml",
     plugin_profile_ref: args["--plugin-profile-ref"] || "plugins/image_generation/native_doubao_image/plugin.profile.yaml",
     output_directory: args["--output-directory"] || "runs/real_generation/v7_19_native_doubao_first_run/",
@@ -126,9 +150,9 @@ if (require.main === module) {
     dryRun: args["--dry-run"] !== "false",
     execution_authorized: args["--execution-authorized"] === "true",
     a5_activation_ref: args["--a5-activation-ref"] || null,
+  }).then(function(output) {
+    process.stdout.write(JSON.stringify(output, null, 2) + "\n");
   });
-
-  process.stdout.write(JSON.stringify(output, null, 2) + "\n");
 }
 
 module.exports = { run: run, preflightCheck: preflightCheck };

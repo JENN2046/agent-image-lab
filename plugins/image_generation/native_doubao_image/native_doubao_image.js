@@ -77,7 +77,7 @@ function buildDoubaoRequest(options) {
   };
 }
 
-function realGenerate(options) {
+async function realGenerate(options) {
   var gate = validateRealExecutionGate(options);
   if (!gate.gate_passed) {
     return {
@@ -90,38 +90,133 @@ function realGenerate(options) {
     };
   }
 
-  // Stub: 真实 HTTP 请求入口。预留 fetch/node:https 调用位置。
-  // 本轮实现 contract 但不执行真实请求。
-  // var apiKey = process.env.DOUBAO_IMAGE_API_KEY;
-  // var requestBody = buildDoubaoRequest(options);
-  // var response = await fetch(options.apiBaseUrl, {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + apiKey },
-  //   body: JSON.stringify(requestBody)
-  // });
+  var apiKey = process.env.DOUBAO_IMAGE_API_KEY;
+  var baseUrl = process.env.DOUBAO_IMAGE_API_BASE_URL;
+  var requestBody = buildDoubaoRequest(options);
 
-  return {
-    status: "REAL_API_CONTRACT_READY",
-    plugin_id: "NativeDoubaoImage",
-    command: "generate",
-    api_call_performed: false,
-    image_created: false,
-    model_requested: options.modelOverride || "doubao-seedream-5-0-260128",
-    model_reported: null,
-    max_plugin_calls: 1,
-    max_images_created: 1,
-    retry_performed: false,
-    note: "Real API call stub — actual HTTP not executed. A5 activation required.",
-  };
+  try {
+    var response = await fetch(baseUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + apiKey,
+      },
+      body: JSON.stringify(requestBody),
+    });
+
+    var responseData = await response.json();
+
+    if (!response.ok) {
+      return {
+        status: "FAILED",
+        plugin_id: "NativeDoubaoImage",
+        command: "generate",
+        api_call_performed: true,
+        image_created: false,
+        http_status: response.status,
+        error: "API returned error",
+        model_requested: options.modelOverride || "doubao-seedream-5-0-260128",
+        model_reported: null,
+        retry_performed: false,
+      };
+    }
+
+    var reportedModel = responseData.model || responseData.model_id || null;
+    var modelMismatch = detectModelMismatch(
+      options.modelOverride || "doubao-seedream-5-0-260128",
+      reportedModel
+    );
+
+    var generatedImages = [];
+    if (responseData.data && Array.isArray(responseData.data)) {
+      for (var i = 0; i < responseData.data.length; i++) {
+        var item = responseData.data[i];
+        generatedImages.push({
+          index: i,
+          b64_json: item.b64_json ? "(present, " + item.b64_json.length + " chars)" : null,
+          url: item.url ? "(present)" : null,
+        });
+      }
+    }
+
+    if (modelMismatch.mismatch) {
+      return {
+        status: "BLOCKED_MODEL_MISMATCH",
+        plugin_id: "NativeDoubaoImage",
+        command: "generate",
+        api_call_performed: true,
+        image_created: generatedImages.length > 0,
+        model_requested: options.modelOverride || "doubao-seedream-5-0-260128",
+        model_reported: reportedModel,
+        model_matches: false,
+        images: generatedImages,
+        http_status: response.status,
+        retry_performed: false,
+      };
+    }
+
+    return {
+      status: "COMPLETED_GENERATED",
+      plugin_id: "NativeDoubaoImage",
+      command: "generate",
+      api_call_performed: true,
+      image_created: generatedImages.length > 0,
+      model_requested: options.modelOverride || "doubao-seedream-5-0-260128",
+      model_reported: reportedModel,
+      model_matches: true,
+      images: generatedImages,
+      http_status: response.status,
+      retry_performed: false,
+    };
+  } catch (err) {
+    return {
+      status: "FAILED",
+      plugin_id: "NativeDoubaoImage",
+      command: "generate",
+      api_call_performed: true,
+      image_created: false,
+      error: "HTTP request failed: " + (err.message || String(err)),
+      model_requested: options.modelOverride || "doubao-seedream-5-0-260128",
+      model_reported: null,
+      retry_performed: false,
+    };
+  }
 }
 
 function writeImageOutput(result, outputDirectory) {
-  // Stub: 将 API 返回的图片写入 runs/real_generation/ 下
-  // outputDirectory 必须以 runs/real_generation/ 开头
   if (outputDirectory.indexOf("runs/real_generation/") !== 0) {
     return { success: false, error: "outputDirectory must be under runs/real_generation/" };
   }
-  return { success: false, reason: "write_image_not_enabled_in_dry_run", output_directory: outputDirectory };
+  if (!result.images || result.images.length === 0) {
+    return { success: false, reason: "no_images_to_write" };
+  }
+
+  var fs = require("node:fs");
+  var path = require("node:path");
+  var root = path.resolve(__dirname, "..", "..", "..");
+  var outDir = path.join(root, outputDirectory);
+
+  if (!fs.existsSync(outDir)) {
+    fs.mkdirSync(outDir, { recursive: true });
+  }
+
+  var written = [];
+  for (var i = 0; i < result.images.length; i++) {
+    var img = result.images[i];
+    var ext = ".jpg";
+    var filename = "native_doubao_" + Date.now() + "_" + i + ext;
+    var filepath = path.join(outDir, filename);
+
+    if (img.b64_json) {
+      var buffer = Buffer.from(img.b64_json, "base64");
+      fs.writeFileSync(filepath, buffer);
+      written.push({ index: i, file: filename, bytes: buffer.length, source: "b64_json" });
+    } else if (img.url) {
+      written.push({ index: i, url: img.url, note: "url_output_not_downloaded" });
+    }
+  }
+
+  return { success: true, files: written, output_directory: outputDirectory };
 }
 
 function normalizeResult(result) {

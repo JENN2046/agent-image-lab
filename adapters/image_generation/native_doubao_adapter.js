@@ -3,7 +3,7 @@
 
 var plugin = require("../../plugins/image_generation/native_doubao_image/native_doubao_image.js");
 
-function run(options) {
+async function run(options) {
   // 默认 dryRun=true
   if (options.dryRun === undefined) options.dryRun = true;
 
@@ -40,13 +40,13 @@ function run(options) {
     };
   }
 
-  // 调用 realGenerate（本轮为 contract stub，不执行真实 HTTP）
-  var result = plugin.realGenerate(options);
-  if (result.status === "BLOCKED_A5_REQUIRED" || result.status === "BLOCKED") {
+  // 调用 realGenerate（async）
+  var result = await plugin.realGenerate(options);
+  if (result.status === "BLOCKED_A5_REQUIRED" || result.status.indexOf("BLOCKED") === 0 || result.status === "FAILED") {
     return result;
   }
 
-  // 模型 mismatch 检测
+  // 模型 mismatch 检测（冗余检查）
   var modelCheck = plugin.detectModelMismatch(
     options.modelOverride || "doubao-seedream-5-0-260128",
     result.model_reported
@@ -60,14 +60,16 @@ function run(options) {
     };
   }
 
-  // 图片写入（dry-run 模式不执行）
-  var writeResult = plugin.writeImageOutput(result, options.outputDirectory);
-  if (!writeResult.success && writeResult.reason !== "write_image_not_enabled_in_dry_run") {
-    return {
-      status: "BLOCKED_WRITE_FAILED",
-      plugin_id: "NativeDoubaoImage",
-      error: writeResult.error,
-    };
+  // 图片写入
+  if (result.images && result.images.length > 0) {
+    var writeResult = plugin.writeImageOutput(result, options.outputDirectory);
+    if (!writeResult.success) {
+      return {
+        status: "BLOCKED_WRITE_FAILED",
+        plugin_id: "NativeDoubaoImage",
+        error: writeResult.error,
+      };
+    }
   }
 
   return result;
