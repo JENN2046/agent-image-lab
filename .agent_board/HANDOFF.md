@@ -3,9 +3,9 @@
 ## Handoff Summary
 
 ```text
-Status: v6.8A Plugin Dashboard Draft Surface COMPLETED. Plugin Selector, Parameter Mapper, Dry-run Toggle, Dispatch Status implemented with dispatch_plan_draft. docs/245, validator (30 checks), FIELD_MAPPING, indexes synced. All v6.0-v6.8 validators pass. Runtime guard not modified. draft_only, no-execution. No push/tag/release.
-v6.8A builds on v6.7 Product Runtime Final Acceptance Baseline.
-Result: Plugin Dashboard added as v6 Product Runtime module. Plugin Selector with 3 local candidates, Parameter Mapper with key-value + preview, Dry-run Toggle with read-only safety fields, Dispatch Status with gatekeeper/dispatch/trace state. dispatch_plan_draft builder and renderer in app.js. All 30 v6.8 validator checks pass. Next: user direction — v6.8B guard hardening or v6.9 Release Panel planning.
+Status: Long Task COMPLETED — v6.8B Plugin Dashboard Guard Hardening + v6.9 Release Panel Planning. v6DispatchPlanIsSafe() added to runtime_guard.js (18 safety checks). Release Panel roadmap defined (release_readiness_draft spec). All v6.0-v6.9 validators pass. draft_only, no-execution. No push/tag/release.
+v6.8B builds on v6.8A Plugin Dashboard Draft Surface. v6.9 planning builds on v6.7 Baseline.
+Result: runtime_guard now validates dispatch_plan_draft safety fields (dry_run_required, execution_blocked, max_plugin_calls, selected_plugin.source, parameter security flags, dispatch/gatekeeper/trace states). Release Panel planning defines release_readiness_draft, no-action boundaries, and implementation roadmap (v6.9A→v6.10). Next: user direction — v6.9A Release Panel Draft Surface or v6.10 Product Runtime RC.
 ```
 
 ## Current Repo
@@ -18,10 +18,10 @@ A:/agent-image-lab/agent-image-lab-v0.2
 
 ```text
 Branch: master
-Remote tracking: master...origin/master [ahead — pending v6.8A commit]
-State: v6.8A Plugin Dashboard Draft Surface — Plugin Selector, Parameter Mapper, Dry-run Toggle, Dispatch Status implemented. draft_only, no-execution.
-Local head: pending v6.8A commit
-Origin/master: e481696
+Remote tracking: master...origin/master [ahead 3 — v6.8A + v6.8B + v6.9 planning]
+State: v6.8B + v6.9 planning complete. runtime_guard v6DispatchPlanIsSafe() added. Release Panel roadmap defined. draft_only, no-execution.
+Local head: ff6b251
+Origin/master: eb4fade
 Current freshness doc: docs/226_runtime_review_batch_9a_state_freshness_index.md
 Current operator runbook: docs/227_runtime_review_batch_9c_operator_runbook_and_resume_capsule.md
 Current compatibility matrix: docs/228_runtime_review_batch_9b_runtime_session_compatibility_matrix.md

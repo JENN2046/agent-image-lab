@@ -126,6 +126,8 @@ master tracking origin/master
 - v6.6 Product Shell QA + Visual Polish：v6.5 产品壳质量复查、布局修整、可读性优化、视觉一致性、裁决栏验收加固。`docs/242_v6_6_product_shell_qa_visual_polish.md`
 - v6.7 Product Runtime Final Acceptance Baseline：把 v6.1～v6.6 收束成 v6 Product Runtime Baseline。`docs/243_v6_7_product_runtime_final_acceptance.md`，validator `scripts/validate_v6_7_product_runtime_final_acceptance.js`（33 checks）
 - v6.8 Plugin Dashboard Draft Surface：Plugin Selector、Parameter Mapper、Dry-run Toggle、Dispatch Status 四个区块和 dispatch_plan_draft 数据结构。`docs/245_v6_8a_plugin_dashboard_draft_surface.md`，validator `scripts/validate_v6_8_plugin_dashboard.js`（30 checks）
+- v6.8B Plugin Dashboard Guard Hardening：runtime_guard 新增 `v6DispatchPlanIsSafe()`。`docs/246_v6_8b_plugin_dashboard_guard_hardening.md`，validator `scripts/validate_v6_8b_plugin_dashboard_guard_hardening.js`（18 checks）
+- v6.9 Release Panel Planning：发布面板规划书。`docs/247_v6_9_release_panel_plan.md`，validator `scripts/validate_v6_9_release_panel_plan.js`（15 checks）
 - 只读校验脚本 `scripts/validate_mvp.ps1`。
 
 仍未完成：

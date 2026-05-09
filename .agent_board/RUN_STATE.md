@@ -9,7 +9,7 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-v6.8A Plugin Dashboard Draft Surface — Plugin Selector, Parameter Mapper, Dry-run Toggle, Dispatch Status with dispatch_plan_draft. draft_only, no-execution.
+v6.8B Plugin Dashboard Guard Hardening + v6.9 Release Panel Planning — runtime_guard v6DispatchPlanIsSafe() added. Release Panel roadmap defined. draft_only, no-execution.
 ```
 
 ## Current Branch
@@ -21,19 +21,19 @@ master tracking origin/master
 ## Current Phase
 
 ```text
-v6.8A — Plugin Dashboard Draft Surface. Plugin Selector, Parameter Mapper, Dry-run Toggle, Dispatch Status implemented. dispatch_plan_draft with safety fields (dry_run_required=true, execution_blocked=true, max_plugin_calls=0). runtime_guard not modified.
+v6.8B + v6.9 Planning — runtime_guard v6DispatchPlanIsSafe() with 18 checks. v6.9 Release Panel planning complete. All v6.0-v6.9 validators pass. draft_only, no-execution.
 ```
 
 ## Current Task
 
 ```text
-v6.8A Plugin Dashboard Draft Surface — 在 v6 Product Runtime Baseline 上增加插件调度草案面板，保持 draft_only / no-execution。
+Long Task — v6.8B Plugin Dashboard Guard Hardening + v6.9 Release Panel Planning. Guard v6DispatchPlanIsSafe() in runtime_guard.js. Release Panel roadmap in docs/247.
 ```
 
 ## Last Completed Task
 
 ```text
-v6.8A Plugin Dashboard Draft Surface — completed. Plugin Selector, Parameter Mapper, Dry-run Toggle, Dispatch Status all implemented. dispatch_plan_draft with full safety field set. Added docs/245, validate_v6_8_plugin_dashboard.js (30 checks), FIELD_MAPPING update. Runtime guard not modified. All v6.0-v6.8 validators pass. draft_only, no-execution.
+Long Task completed — v6.8B (runtime_guard v6DispatchPlanIsSafe, docs/246, validator 18 checks) + v6.9 planning (docs/247, validator 15 checks). All v6.0-v6.9 validators pass. draft_only, no-execution.
 ```
 
 ## Last Validation
@@ -1191,5 +1191,5 @@ v6.7 Product Runtime Final Acceptance Baseline completed and pushed to origin/ma
 ## Next Action
 
 ```text
-v6.8A completed. Next: user direction — v6.8B guard hardening or v6.9 Release Panel planning.
+Long Task completed (v6.8B + v6.9 planning). Next: user direction — v6.9A Release Panel Draft Surface or v6.10 Product Runtime RC.
 ```

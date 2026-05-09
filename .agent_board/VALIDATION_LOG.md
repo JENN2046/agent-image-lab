@@ -1,5 +1,35 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## v6.8B Plugin Dashboard Guard Hardening + v6.9 Release Panel Planning
+
+```text
+Current phase: v6.8B + v6.9 planning — Long Task closeout
+Scope: v6DispatchPlanIsSafe() in runtime_guard (18 checks), Release Panel planning docs/247 (15 checks). v6.0-v6.9 all pass.
+No real VCPChat/VCPToolBox read.
+No real PluginDir read.
+No plugin/API/DailyNote/VCP memory/image action.
+No push/tag/release.
+node --check review_console/runtime_prototype/app.js: passed
+node --check review_console/runtime_prototype/runtime_guard.js: passed
+node scripts/validate_v6_9_release_panel_plan.js: passed (15/15)
+node scripts/validate_v6_8b_plugin_dashboard_guard_hardening.js: passed (18/18)
+node scripts/validate_v6_8_plugin_dashboard.js: passed (30/30)
+node scripts/validate_v6_7_product_runtime_final_acceptance.js: passed
+node scripts/validate_v6_6_product_shell_qa.js: passed
+node scripts/validate_v6_5_review_console_product_shell.js: passed
+node scripts/validate_v6_4_memory_queue_interaction.js: passed
+node scripts/validate_v6_3_session_store_interaction.js: passed
+node scripts/validate_v6_2_asset_index_interaction.js: passed
+node scripts/validate_v6_1_task_panel_interaction.js: passed
+node scripts/validate_v6_0_product_runtime_kickoff.js: passed
+node scripts/validate_runtime_prototype_smoke.js: passed
+node scripts/validate_runtime_prototype_suite.js: passed
+node scripts/validate_agent_board_state.js: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: PASSED_WITH_WARNINGS_OK_FOR_MANUAL_REVIEW
+git diff --check: passed
+```
+
 ## v6.8A Plugin Dashboard Draft Surface
 
 ```text

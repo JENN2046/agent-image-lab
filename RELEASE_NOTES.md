@@ -100,6 +100,8 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - Added Runtime Review Batch 9C operator runbook and resume capsule, giving future agents a five-minute local resume entrypoint without authorizing A5 production actions.
 - Added v6.7 Product Runtime Final Acceptance Baseline: v6.1～v6.6 consolidated into v6 Product Runtime Baseline. `docs/243_v6_7_product_runtime_final_acceptance.md`, validator `scripts/validate_v6_7_product_runtime_final_acceptance.js` (33 checks). draft_only, no-execution.
 - Added v6.8 Plugin Dashboard Draft Surface: Plugin Selector, Parameter Mapper, Dry-run Toggle, Dispatch Status with dispatch_plan_draft data structure. `docs/245_v6_8a_plugin_dashboard_draft_surface.md`, validator `scripts/validate_v6_8_plugin_dashboard.js` (30 checks). draft_only, no-execution.
+- Added v6.8B Plugin Dashboard Guard Hardening: v6DispatchPlanIsSafe() added to runtime_guard.js with 18 safety checks. `docs/246_v6_8b_plugin_dashboard_guard_hardening.md`, validator `scripts/validate_v6_8b_plugin_dashboard_guard_hardening.js` (18 checks). runtime_guard not relaxed.
+- Added v6.9 Release Panel Planning: release_readiness_draft spec and implementation roadmap. `docs/247_v6_9_release_panel_plan.md`, validator `scripts/validate_v6_9_release_panel_plan.js` (15 checks). Plan only, no UI, no release.
 
 ## Safety Status
 

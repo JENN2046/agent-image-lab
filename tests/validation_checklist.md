@@ -36,6 +36,10 @@
 - [ ] `scripts/validate_v6_7_product_runtime_final_acceptance.js` 存在，包含 33 项验收检查且全部通过。
 - [ ] `docs/245_v6_8a_plugin_dashboard_draft_surface.md` 存在，定义 Plugin Dashboard 四个区域和 dispatch_plan_draft。
 - [ ] `scripts/validate_v6_8_plugin_dashboard.js` 存在，包含 30 项检查且全部通过。
+- [ ] `docs/246_v6_8b_plugin_dashboard_guard_hardening.md` 存在，记录 runtime_guard 加固。
+- [ ] `scripts/validate_v6_8b_plugin_dashboard_guard_hardening.js` 存在，包含 18 项检查且全部通过。
+- [ ] `docs/247_v6_9_release_panel_plan.md` 存在，定义 release_readiness_draft。
+- [ ] `scripts/validate_v6_9_release_panel_plan.js` 存在，包含 15 项检查且全部通过。
 - [ ] 所有任务书要求的 MVP 文件存在。
 - [ ] 文件直接位于项目根目录下，没有创建第二套 `agent-image-lab/` 嵌套目录。
 - [ ] 可运行 `scripts/validate_mvp.ps1` 完成只读自动检查；该脚本不是 Adapter、VCP 插件或真实执行入口。

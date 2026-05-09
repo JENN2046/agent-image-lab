@@ -9,6 +9,8 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 ```text
 v6.7 Product Runtime Final Acceptance Baseline — v6.1~v6.6 consolidated into v6 Product Runtime Baseline. Accepted and pushed to origin/master (2b75fcb).
 v6.8 Plugin Dashboard — Plugin Selector, Parameter Mapper, Dry-run Toggle, Dispatch Status added as draft-only surfaces. No real plugin execution.
+v6.8B Plugin Dashboard Guard Hardening — v6DispatchPlanIsSafe() added to runtime_guard.js. Safety fields verified (dry_run_required, execution_blocked, max_plugin_calls, etc).
+v6.9 Release Panel Planning — release_readiness_draft spec and implementation roadmap defined.
 ```
 
 已经完成：
