@@ -1,0 +1,9 @@
+doubao_api:
+  base_url: "<DOUBAO_IMAGE_API_BASE_URL>"
+  api_key_env: "DOUBAO_IMAGE_API_KEY"
+  model: "doubao-seedream-5-0-260128"
+  timeout_seconds: 120
+
+execution:
+  dry_run_default: true
+  real_execution_requires_a5: true

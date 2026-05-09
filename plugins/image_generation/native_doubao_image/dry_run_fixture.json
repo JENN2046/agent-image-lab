@@ -1,0 +1,12 @@
+{
+  "status": "DRY_RUN_ONLY",
+  "plugin_id": "NativeDoubaoImage",
+  "command": "generate",
+  "api_call_performed": false,
+  "image_created": false,
+  "model_requested": "doubao-seedream-5-0-260128",
+  "model_reported": null,
+  "max_plugin_calls": 1,
+  "max_images_created": 1,
+  "retry_performed": false
+}

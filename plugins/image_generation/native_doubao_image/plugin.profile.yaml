@@ -1,0 +1,32 @@
+plugin_id: NativeDoubaoImage
+plugin_name: Native Doubao Image Plugin
+provider_type: direct_api
+command: generate
+mode: text_to_image
+
+model_policy:
+  required_model: doubao-seedream-5-0-260128
+  allow_model_override: true
+  block_on_model_mismatch: true
+
+prompt_input:
+  source: prompt_package_ref
+  allowed_prompt_root: prompts/image_generation/
+  reference_policy_required: text_only_no_image_input
+
+output_policy:
+  root: runs/real_generation/
+  allow_outside_repo: false
+  max_images_created: 1
+
+limits:
+  max_plugin_calls: 1
+  retry_allowed: false
+
+safety:
+  real_execution_requires_a5: true
+  memory_write_allowed: false
+  daily_note_write_allowed: false
+  push_allowed: false
+  tag_allowed: false
+  release_allowed: false
