@@ -70,13 +70,48 @@ function checkHardBlockers(req) {
   return reasons;
 }
 
+function externalSideEffects() {
+  return {
+    vcp_call_performed: false,
+    vcpchat_bridge_call_performed: false,
+    electron_started: false,
+    remote_debug_started: false,
+    cdp_call_performed: false,
+    daily_note_write_performed: false,
+    vcp_memory_write_performed: false,
+    image_generation_performed: false,
+    image_binary_read: false,
+    runs_path_read: false
+  };
+}
+
+function failedResponse(message) {
+  return {
+    schema_version: 'v1',
+    adapter_phase: 'v7_51i',
+    adapter_runtime: 'agent_image_lab_read_only_adapter',
+    status: 'failed',
+    payload_type: 'text_only_refs',
+    returned_refs_only: true,
+    current_case_state: 'closed_no_memory_write',
+    blocked_reasons: [],
+    error_message: message || 'Adapter internal error.',
+    returned_resource_refs: [],
+    external_side_effects: externalSideEffects()
+  };
+}
+
 function isSafeRepoRelativeRef(ref) {
   if (typeof ref !== 'string') return false;
   if (path.isAbsolute(ref)) return false;
-  if (ref.startsWith('/') || /^[A-Za-z]:/.test(ref)) return false;
-  if (ref.includes('..')) return false;
-  if (/\.(jpg|jpeg|png|webp|gif|bmp)$/i.test(ref)) return false;
-  return true;
+  if (ref.startsWith('/')) return false;
+  if (/^[A-Za-z]:[\\/]/.test(ref)) return false;
+  if (ref.split(/[\\/]/).includes('..')) return false;
+  if (ref === 'runs' || ref.startsWith('runs/') || ref.startsWith('runs\\')) return false;
+  if (/\.(jpg|jpeg|png|webp)$/i.test(ref)) return false;
+
+  const resolved = path.resolve(REPO_ROOT, ref);
+  return resolved.startsWith(REPO_ROOT + path.sep);
 }
 
 function resolveRefs(requestedResources) {
@@ -118,7 +153,7 @@ function processRequest(req) {
   if (blockedReasons.length > 0) {
     return {
       schema_version: 'v1',
-      adapter_phase: 'v7_51d',
+      adapter_phase: 'v7_51i',
       adapter_runtime: 'agent_image_lab_read_only_adapter',
       status: 'blocked',
       payload_type: 'text_only_refs',
@@ -127,25 +162,14 @@ function processRequest(req) {
       current_case_state: 'closed_no_memory_write',
       blocked_reasons: blockedReasons,
       returned_resource_refs: [],
-      external_side_effects: {
-        vcp_call_performed: false,
-        vcpchat_bridge_call_performed: false,
-        electron_started: false,
-        remote_debug_started: false,
-        cdp_call_performed: false,
-        daily_note_write_performed: false,
-        vcp_memory_write_performed: false,
-        image_generation_performed: false,
-        image_binary_read: false,
-        runs_path_read: false
-      }
+      external_side_effects: externalSideEffects()
     };
   }
 
   if (!req.case_id || req.case_id !== 'french_summer_rattan_bag_v3_production_candidate_001') {
     return {
       schema_version: 'v1',
-      adapter_phase: 'v7_51d',
+      adapter_phase: 'v7_51i',
       adapter_runtime: 'agent_image_lab_read_only_adapter',
       status: 'not_found',
       payload_type: 'text_only_refs',
@@ -155,18 +179,7 @@ function processRequest(req) {
       blocked_reasons: [],
       error_message: 'Requested case_id is not available in read-only evidence index.',
       returned_resource_refs: [],
-      external_side_effects: {
-        vcp_call_performed: false,
-        vcpchat_bridge_call_performed: false,
-        electron_started: false,
-        remote_debug_started: false,
-        cdp_call_performed: false,
-        daily_note_write_performed: false,
-        vcp_memory_write_performed: false,
-        image_generation_performed: false,
-        image_binary_read: false,
-        runs_path_read: false
-      }
+      external_side_effects: externalSideEffects()
     };
   }
 
@@ -175,7 +188,7 @@ function processRequest(req) {
 
   return {
     schema_version: 'v1',
-    adapter_phase: 'v7_51d',
+    adapter_phase: 'v7_51i',
     adapter_runtime: 'agent_image_lab_read_only_adapter',
     status: existingRefs.length > 0 ? 'ok' : 'not_found',
     payload_type: 'text_only_refs',
@@ -183,18 +196,7 @@ function processRequest(req) {
     case_id: req.case_id || '',
     current_case_state: 'closed_no_memory_write',
     returned_resource_refs: existingRefs,
-    external_side_effects: {
-      vcp_call_performed: false,
-      vcpchat_bridge_call_performed: false,
-      electron_started: false,
-      remote_debug_started: false,
-      cdp_call_performed: false,
-      daily_note_write_performed: false,
-      vcp_memory_write_performed: false,
-      image_generation_performed: false,
-      image_binary_read: false,
-      runs_path_read: false
-    }
+    external_side_effects: externalSideEffects()
   };
 }
 
@@ -206,7 +208,8 @@ function main() {
     try {
       request = JSON.parse(args[1]);
     } catch (e) {
-      console.error('Invalid JSON in --request-json argument');
+      const errResp = failedResponse('Invalid request JSON format.');
+      console.log(JSON.stringify(errResp, null, 2));
       process.exit(1);
     }
   } else {
@@ -225,6 +228,7 @@ module.exports = {
   processRequest,
   checkHardBlockers,
   resolveRefs,
+  fileExistsOnDisk,
   isSafeRepoRelativeRef,
   EVIDENCE_MAP
 };

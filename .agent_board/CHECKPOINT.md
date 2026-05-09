@@ -1164,24 +1164,18 @@ hard_stops:
 
 ```text
 Phase: v7.51i
-Status: adapter_quality_hardening_completed
-
-fixes:
-  - path_safety_guard: isSafeRepoRelativeRef() blocks ../, absolute paths, image extensions, drive letters
-  - module_exports: processRequest/checkHardBlockers/resolveRefs/isSafeRepoRelativeRef exported
-  - robust_run_adapter: timeout=5000ms, maxBuffer=1MB, error handling in all validators
-  - cases_checks_naming: checks_total/checks_passed/checks_fixed added; cases_passed is now case-level
-  - exactly_one_blocker: verifyBlocked checks blocked_reasons.length === 1
-  - blocked_empty_refs: verifyBlocked checks returned_resource_refs is empty array
-
-code_quality_score_before: 7.4
-code_quality_score_after: 8.5
-
-validation:
-  schema: { cases: 6, checks: 13, result: pass }
-  security_gates: { cases: 11, checks: 11, result: pass }
-  fixtures: { cases: 9, checks: 24, result: pass }
-
+Status: adapter_quality_hardening_patch_completed
+feature_expansion_performed: false
+centralized_external_side_effects_helper: true
+safe_repo_relative_ref_guard: true
+structured_failed_response: true
+validator_run_adapter_hardened: true
+validator_counters_split_cases_checks: true
+blocked_response_empty_refs_enforced: true
+exactly_one_blocker_enforced: true
+post_patch_schema_validation: pass
+post_patch_security_gate_validation: pass
+post_patch_fixture_regression: pass
 VCP call performed: false
 VCPChat bridge call performed: false
 Electron started: false
@@ -1194,12 +1188,12 @@ image binary read: false
 runs path read: false
 
 current_allowed_next_steps:
-- LT-05 VCPToolBox ingestion
-- LT-07 E2E fixture
-- v7.50e real VCPChat surface check planning
-- new production candidate with independent A5
+- LT-05 VCPToolBox read-only ingestion planning and mock, only if explicitly authorized
+- LT-07 E2E read-only integration fixture and audit, only if explicitly authorized
+- v7.50e real VCPChat surface check planning, only if explicitly authorized
 
 hard_stops:
+- do_not_expand_adapter_features_without_explicit_instruction
 - do_not_call_vcp_without_independent_authorization
 - do_not_call_vcpchat_bridge_without_independent_authorization
 - do_not_start_electron_without_explicit_authorization
@@ -1208,7 +1202,6 @@ hard_stops:
 - do_not_generate_image_without_independent_a5
 - do_not_read_image_binary
 - do_not_reopen_closed_no_memory_write_case
-- do_not_push_without_authorization
 ```
 
 ## Resume Instruction
