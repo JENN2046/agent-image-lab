@@ -1,0 +1,56 @@
+adapter_quality_hardening_patch:
+  schema_version: v1
+  phase: v7_51i
+  status: completed
+
+  fixes:
+    - id: path_safety_guard
+      file: scripts/agent_image_lab_read_only_adapter.js
+      description: Added isSafeRepoRelativeRef() blocking absolute paths, .. traversal, image extensions, drive letter prefixes
+    - id: module_exports
+      file: scripts/agent_image_lab_read_only_adapter.js
+      description: Added module.exports for processRequest, checkHardBlockers, resolveRefs, isSafeRepoRelativeRef, EVIDENCE_MAP
+    - id: robust_run_adapter
+      files:
+        - scripts/validate_agent_image_lab_read_only_adapter_schema.js
+        - scripts/validate_agent_image_lab_read_only_adapter_security_gates.js
+        - scripts/validate_agent_image_lab_read_only_adapter_fixtures.js
+      description: Added timeout=5000ms, maxBuffer=1MB, spawnSync error handling, JSON parse fallback
+    - id: cases_checks_naming
+      files:
+        - scripts/validate_agent_image_lab_read_only_adapter_schema.js
+        - scripts/validate_agent_image_lab_read_only_adapter_security_gates.js
+        - scripts/validate_agent_image_lab_read_only_adapter_fixtures.js
+      description: Added checks_total/checks_passed/checks_failed; cases_passed now counts by case not sub-check
+    - id: exactly_one_blocker
+      file: scripts/validate_agent_image_lab_read_only_adapter_security_gates.js
+      description: verifyBlocked now checks blocked_reasons.length === 1
+    - id: blocked_empty_refs
+      file: scripts/validate_agent_image_lab_read_only_adapter_security_gates.js
+      description: verifyBlocked now checks returned_resource_refs is empty array
+
+  validation:
+    schema: { cases: 6, checks: 13, result: pass }
+    security_gates: { cases: 11, checks: 11, result: pass }
+    fixtures: { cases: 9, checks: 24, result: pass }
+
+  code_quality_score_before: 7.4
+  code_quality_score_after: 8.5
+
+  external_side_effects:
+    vcp_call_performed: false
+    vcpchat_bridge_call_performed: false
+    electron_started: false
+    remote_debug_started: false
+    cdp_call_performed: false
+    daily_note_write_performed: false
+    vcp_memory_write_performed: false
+    image_generation_performed: false
+    image_binary_read: false
+    runs_path_read: false
+
+  next_allowed_steps:
+    - LT-05 VCPToolBox ingestion
+    - LT-07 E2E fixture
+    - v7.50e real VCPChat surface check planning
+    - new production candidate with independent A5

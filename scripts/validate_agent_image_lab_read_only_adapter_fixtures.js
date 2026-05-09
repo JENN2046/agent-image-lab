@@ -14,8 +14,21 @@ function check(name, pass, detail) {
 
 function runAdapter(requestJson) {
   const arg = JSON.stringify(requestJson);
-  const result = spawnSync('node', [ADAPTER_SCRIPT, '--request-json', arg], { encoding: 'utf-8' });
-  return JSON.parse(result.stdout);
+  const result = spawnSync('node', [ADAPTER_SCRIPT, '--request-json', arg], {
+    encoding: 'utf-8',
+    timeout: 5000,
+    maxBuffer: 1024 * 1024
+  });
+
+  if (result.error) {
+    return { status: 'failed', error_message: `execution error: ${result.error.message}` };
+  }
+
+  try {
+    return JSON.parse(result.stdout);
+  } catch (e) {
+    return { status: 'failed', error_message: 'invalid JSON from adapter', stderr: (result.stderr || '').trim() };
+  }
 }
 
 function refsAreRepositoryRelative(refs) {
@@ -165,19 +178,41 @@ const baseValid = {
     `reasons=${JSON.stringify(resp.blocked_reasons)}`);
 }
 
-const fixtureNames = Object.keys(results).filter(k => k.startsWith('fixture_'));
-const passed = fixtureNames.filter(k => results[k] && results[k].pass).length;
-const failed = fixtureNames.filter(k => results[k] && !results[k].pass).length;
+const cases = [
+  { id: 'fixture_canonical_smoke' },
+  { id: 'fixture_all_known' },
+  { id: 'fixture_duplicate' },
+  { id: 'fixture_mixed' },
+  { id: 'fixture_unknown_only' },
+  { id: 'fixture_unknown_case_id' },
+  { id: 'fixture_blocked_image_binary' },
+  { id: 'fixture_blocked_memory_write' },
+  { id: 'fixture_blocked_reopen' }
+];
 
-const duplicateFound = fixtureNames.some(k => k === 'fixture_duplicate_no_dup' && results[k] && !results[k].pass);
-const absPathsFound = fixtureNames.some(k => k.includes('refs_relative') && results[k] && !results[k].pass);
+const checksTotal = Object.keys(results).length;
+const checksPassed = Object.values(results).filter(r => r.pass).length;
+const checksFailed = checksTotal - checksPassed;
+
+const casesFailed = cases.filter(c => {
+  const caseChecks = Object.keys(results).filter(k => k.startsWith(c.id));
+  return caseChecks.length > 0 && caseChecks.some(k => results[k] && !results[k].pass);
+}).length;
+const casesPassed = cases.length - casesFailed;
+
+const duplicateFound = cases.some(c => c.id === 'fixture_duplicate' &&
+  results['fixture_duplicate_no_dup'] && !results['fixture_duplicate_no_dup'].pass);
+const absPathsFound = Object.keys(results).some(k => k.includes('refs_relative') && results[k] && !results[k].pass);
 
 const output = {
   fixture_regression_executed: true,
   result: allPass ? 'pass' : 'fail',
-  cases_total: 9,
-  cases_passed: passed,
-  cases_failed: failed,
+  cases_total: cases.length,
+  cases_passed: casesPassed,
+  cases_failed: casesFailed,
+  checks_total: checksTotal,
+  checks_passed: checksPassed,
+  checks_failed: checksFailed,
   duplicate_refs_detected: duplicateFound,
   absolute_paths_detected: absPathsFound,
   file_content_returned: false,

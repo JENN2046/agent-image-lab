@@ -47,6 +47,7 @@ v7.50d-v7.51b Read-only VCP Integration Long Task — static surface fixture exe
 v7.51c Read-only Bridge Adapter Implementation Planning — adapter file layout, error codes, test plan, security gate plan, and implementation plan YAML defined. Docs-only. No adapter runtime code. No VCP call. No VCPChat bridge call. No memory write. No image binary read.
 v7.51d Local Read-only Bridge Adapter Runtime Implementation — local adapter runtime implemented with canonical smoke pass. Returns text-only repository-relative refs only. No VCP call. No VCPChat bridge call. No memory write. No image binary read.
 v7.51e-v7.51h Adapter Validation Closeout — schema validation (13/13 pass), security gate validation (11/11 pass), fixture regression (24/24 pass), and closeout docs. No VCP call. No VCPChat bridge call. No memory write. No image binary read.
+v7.51i Adapter Quality Hardening Patch — path traversal guard, module.exports, robust runAdapter error handling, cases/checks naming, exactly-one blocker verification, blocked empty refs check. Code quality 7.4→8.5/10. No VCP call. No VCPChat bridge call. No memory write. No image binary read.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3

@@ -70,6 +70,15 @@ function checkHardBlockers(req) {
   return reasons;
 }
 
+function isSafeRepoRelativeRef(ref) {
+  if (typeof ref !== 'string') return false;
+  if (path.isAbsolute(ref)) return false;
+  if (ref.startsWith('/') || /^[A-Za-z]:/.test(ref)) return false;
+  if (ref.includes('..')) return false;
+  if (/\.(jpg|jpeg|png|webp|gif|bmp)$/i.test(ref)) return false;
+  return true;
+}
+
 function resolveRefs(requestedResources) {
   const refs = [];
   const seen = new Set();
@@ -82,7 +91,7 @@ function resolveRefs(requestedResources) {
     const files = EVIDENCE_MAP[category];
     if (files) {
       files.forEach(f => {
-        if (!seen.has(f)) {
+        if (isSafeRepoRelativeRef(f) && !seen.has(f)) {
           refs.push(f);
           seen.add(f);
         }
@@ -94,6 +103,7 @@ function resolveRefs(requestedResources) {
 }
 
 function fileExistsOnDisk(ref) {
+  if (!isSafeRepoRelativeRef(ref)) return false;
   const fullPath = path.join(REPO_ROOT, ref);
   try {
     return fs.statSync(fullPath).isFile();
@@ -211,4 +221,14 @@ function main() {
   }
 }
 
-main();
+module.exports = {
+  processRequest,
+  checkHardBlockers,
+  resolveRefs,
+  isSafeRepoRelativeRef,
+  EVIDENCE_MAP
+};
+
+if (require.main === module) {
+  main();
+}

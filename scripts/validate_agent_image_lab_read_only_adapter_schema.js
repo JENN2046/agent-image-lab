@@ -14,8 +14,21 @@ function check(name, pass, detail) {
 
 function runAdapter(requestJson) {
   const arg = JSON.stringify(requestJson);
-  const result = spawnSync('node', [ADAPTER_SCRIPT, '--request-json', arg], { encoding: 'utf-8' });
-  return JSON.parse(result.stdout);
+  const result = spawnSync('node', [ADAPTER_SCRIPT, '--request-json', arg], {
+    encoding: 'utf-8',
+    timeout: 5000,
+    maxBuffer: 1024 * 1024
+  });
+
+  if (result.error) {
+    return { status: 'failed', error_message: `execution error: ${result.error.message}` };
+  }
+
+  try {
+    return JSON.parse(result.stdout);
+  } catch (e) {
+    return { status: 'failed', error_message: 'invalid JSON from adapter', stderr: (result.stderr || '').trim() };
+  }
 }
 
 function refsAreRepositoryRelative(refs) {
@@ -115,25 +128,34 @@ function refsAreRepositoryRelative(refs) {
 }
 
 // Summary
-const caseNames = [
-  'valid_text_only_request_status', 'valid_text_only_request_payload_type',
-  'valid_text_only_request_returned_refs_only', 'valid_text_only_request_refs_are_array',
-  'valid_text_only_request_case_state', 'valid_text_only_request_refs_relative',
-  'valid_text_only_request_no_abs_paths',
-  'missing_case_id_status', 'unknown_case_id_status',
-  'invalid_payload_type_status', 'invalid_payload_type_reason',
-  'empty_request_status', 'unknown_requested_resource_status'
+const cases = [
+  { id: 'valid_text_only_request' },
+  { id: 'missing_case_id' },
+  { id: 'unknown_case_id' },
+  { id: 'invalid_payload_type' },
+  { id: 'empty_request' },
+  { id: 'unknown_requested_resource' }
 ];
 
-const passed = caseNames.filter(k => results[k] && results[k].pass).length;
-const failed = caseNames.filter(k => results[k] && !results[k].pass).length;
+const checksTotal = Object.keys(results).length;
+const checksPassed = Object.values(results).filter(r => r.pass).length;
+const checksFailed = checksTotal - checksPassed;
+
+const casesFailed = cases.filter(c => {
+  const caseChecks = Object.keys(results).filter(k => k.startsWith(c.id));
+  return caseChecks.length > 0 && caseChecks.some(k => results[k] && !results[k].pass);
+}).length;
+const casesPassed = cases.length - casesFailed;
 
 const output = {
   schema_validation_executed: true,
   result: allPass ? 'pass' : 'fail',
-  cases_total: 6,
-  cases_passed: 6,
-  cases_failed: 0,
+  cases_total: cases.length,
+  cases_passed: casesPassed,
+  cases_failed: casesFailed,
+  checks_total: checksTotal,
+  checks_passed: checksPassed,
+  checks_failed: checksFailed,
   details: results,
   external_side_effects: {
     vcp_call_performed: false,
@@ -145,10 +167,6 @@ const output = {
     runs_path_read: false
   }
 };
-
-// Recalculate from individual checks
-output.cases_passed = passed;
-output.cases_failed = failed;
 
 console.log(JSON.stringify(output, null, 2));
 

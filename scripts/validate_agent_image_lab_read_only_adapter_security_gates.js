@@ -14,13 +14,29 @@ function check(name, pass, detail) {
 
 function runAdapter(requestJson) {
   const arg = JSON.stringify(requestJson);
-  const result = spawnSync('node', [ADAPTER_SCRIPT, '--request-json', arg], { encoding: 'utf-8' });
-  return JSON.parse(result.stdout);
+  const result = spawnSync('node', [ADAPTER_SCRIPT, '--request-json', arg], {
+    encoding: 'utf-8',
+    timeout: 5000,
+    maxBuffer: 1024 * 1024
+  });
+
+  if (result.error) {
+    return { status: 'failed', error_message: `execution error: ${result.error.message}` };
+  }
+
+  try {
+    return JSON.parse(result.stdout);
+  } catch (e) {
+    return { status: 'failed', error_message: 'invalid JSON from adapter', stderr: (result.stderr || '').trim() };
+  }
 }
 
 function verifyBlocked(resp, expectedReason) {
   if (resp.status !== 'blocked') return `expected blocked, got ${resp.status}`;
   if (!resp.blocked_reasons.includes(expectedReason)) return `missing reason ${expectedReason}, got ${JSON.stringify(resp.blocked_reasons)}`;
+  if (resp.blocked_reasons.length !== 1) return `expected exactly one blocked reason, got ${resp.blocked_reasons.length}: ${JSON.stringify(resp.blocked_reasons)}`;
+  if (!Array.isArray(resp.returned_resource_refs)) return 'returned_resource_refs not an array';
+  if (resp.returned_resource_refs.length !== 0) return `blocked response returned refs: ${JSON.stringify(resp.returned_resource_refs)}`;
   const se = resp.external_side_effects || {};
   if (se.vcp_call_performed !== false) return 'vcp_call_performed not false';
   if (se.vcpchat_bridge_call_performed !== false) return 'vcpchat_bridge_call_performed not false';
@@ -136,24 +152,39 @@ const baseValid = {
   check('gate_closed_case_reopen_attempted', !err, err || 'pass');
 }
 
-const gateNames = [
-  'gate_bridge_mode_not_read_only', 'gate_payload_type_not_text_only_refs',
-  'gate_write_intent_detected', 'gate_image_binary_requested',
-  'gate_secret_requested', 'gate_raw_payload_requested',
-  'gate_private_absolute_path_requested', 'gate_memory_write_attempted',
-  'gate_dailynote_write_attempted', 'gate_production_approved_claim_detected',
-  'gate_closed_case_reopen_attempted'
+const cases = [
+  { id: 'gate_bridge_mode_not_read_only' },
+  { id: 'gate_payload_type_not_text_only_refs' },
+  { id: 'gate_write_intent_detected' },
+  { id: 'gate_image_binary_requested' },
+  { id: 'gate_secret_requested' },
+  { id: 'gate_raw_payload_requested' },
+  { id: 'gate_private_absolute_path_requested' },
+  { id: 'gate_memory_write_attempted' },
+  { id: 'gate_dailynote_write_attempted' },
+  { id: 'gate_production_approved_claim_detected' },
+  { id: 'gate_closed_case_reopen_attempted' }
 ];
 
-const passed = gateNames.filter(k => results[k] && results[k].pass).length;
-const failed = gateNames.filter(k => results[k] && !results[k].pass).length;
+const checksTotal = Object.keys(results).length;
+const checksPassed = Object.values(results).filter(r => r.pass).length;
+const checksFailed = checksTotal - checksPassed;
+
+const casesFailed = cases.filter(c => {
+  const caseChecks = Object.keys(results).filter(k => k.startsWith(c.id));
+  return caseChecks.length > 0 && caseChecks.some(k => results[k] && !results[k].pass);
+}).length;
+const casesPassed = cases.length - casesFailed;
 
 const output = {
   security_gate_validation_executed: true,
   result: allPass ? 'pass' : 'fail',
-  cases_total: 11,
-  cases_passed: passed,
-  cases_failed: failed,
+  cases_total: cases.length,
+  cases_passed: casesPassed,
+  cases_failed: casesFailed,
+  checks_total: checksTotal,
+  checks_passed: checksPassed,
+  checks_failed: checksFailed,
   all_hard_blockers_enforced: allPass,
   details: results,
   external_side_effects: {
