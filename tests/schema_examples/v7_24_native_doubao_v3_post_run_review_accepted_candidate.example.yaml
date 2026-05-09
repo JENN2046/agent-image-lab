@@ -1,0 +1,34 @@
+v7_24_native_doubao_v3_post_run_review:
+  status: completed_generated
+  asset_status: accepted_candidate
+
+  run:
+    provider_type: direct_api
+    plugin_id: NativeDoubaoImage
+    command: generate
+    prompt_package_ref: prompts/image_generation/product_still_life_outdoor_tennis_wallet_hero_no_text_v3.yaml
+    model_requested: doubao-seedream-5-0-260128
+    model_reported: doubao-seedream-5-0-260128
+    model_matches: true
+    api_calls_observed: 1
+    images_created: 1
+    retry_performed: false
+    output_path: runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg
+
+  asset_acceptance_gate:
+    prompt_subject_match: pass
+    style_direction_match: pass
+    product_fully_visible: pass
+    product_unobstructed: pass
+    no_person_or_face_unless_expected: pass
+    no_readable_text_or_logo_unless_expected: pass
+    no_watermark_or_generated_mark: pass
+    commercial_usability: pass
+    memory_suitability: false
+
+  accepted_candidate_record:
+    qualifies_as_first_native_doubao_accepted_candidate: true
+    write_to_memory_allowed: false
+    daily_note_write_allowed: false
+    batch_generation_authorized: false
+    next_phase: v7_25_accepted_sample_registry

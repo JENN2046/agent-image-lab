@@ -61,6 +61,16 @@ v3 prompt 修正方向（无文字 / 无遮挡 / 真实材质）首次验证有�
 | second API call | no ✅ |
 | API key printed | no ✅ |
 
+## Accepted Candidate Record
+
+```yaml
+qualifies_as_first_native_doubao_accepted_candidate: true
+write_to_memory_allowed: false
+daily_note_write_allowed: false
+batch_generation_authorized: false
+next_phase: v7_25_accepted_sample_registry
+```
+
 ## 后续
 
 - 这张图作为 Native Doubao v3 prompt 成功样本
