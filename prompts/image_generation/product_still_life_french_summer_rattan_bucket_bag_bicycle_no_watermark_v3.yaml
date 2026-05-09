@@ -1,0 +1,58 @@
+prompt_package_id: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3
+version: v3
+language: zh_en_mixed
+mode: text_to_image
+reference_policy: text_only_no_image_input
+
+title_cn: "法式夏日藤编水桶包自行车静物 V3 — 左下角道具支撑逻辑修复"
+purpose_cn: "基于 v7.38 repair note 修复左下角红色织物、橙子、钥匙的物理支撑逻辑，保留 v2 的无水印、无遮挡主体、书页不可读和商业静物方向"
+scene_type: french_summer_lifestyle_product_still_life
+product_category: fashion_bag
+aspect_ratio: "4:5"
+style_direction: premium fashion magazine still-life lifestyle advertising
+
+prompt: |
+  生成一张竖构图的高端时尚静物摄影作品，整体接近奢侈品牌夏日生活方式广告大片，具有法式度假感、南法街头气息、轻复古胶片质感和真实商业摄影质感。
+
+  画面主体是一只米黄色藤编水桶包，放置在复古自行车的后货架上。包包位于画面中央偏上位置，是绝对视觉焦点，占画面约 45% 到 60%。包包必须完整可见，不能被花束、水果、书本、绿叶、钥匙、自行车结构或任何道具遮挡。包身为温暖浅米色，藤编纹理细密清晰，材质真实自然。包身可以带有少量抽象复古花卉刺绣装饰，但不能出现真实品牌 logo，不能出现可读字母，不能出现商标、老花品牌图案、monogram 或任何可识别品牌标识。
+
+  包口微微敞开，顶部插着几支橙色玫瑰，花朵包裹着透明塑料纸，一根绿色花枝自然向上伸出。绿色叶子只能位于包包侧后方或边缘，不能覆盖包身正面，不能遮挡藤编纹理，不能压住包包轮廓。包包正面有两根棕色皮革抽绳自然垂落，顶部有金色金属孔扣，皮革和金属都要有真实细节和微妙反光。包包整体略微向右倾斜，姿态自然，像一个真实发生过的夏日下午生活片段。
+
+  包包下方是复古自行车的后货架，货架上垫着一层牛皮纸包装物。一本微微打开的书自然放在旁边，但书页必须是空白、模糊或无可读文字的纸张质感，不能出现清晰文字、字母、印刷段落或可读排版。右下方可以放一小串青绿色葡萄，葡萄颗粒饱满但必须远离包包主体，不能遮挡包包。
+
+  画面左下角可以有一小块红色针织物或编织布料，但它必须清楚地搭在自行车后货架、牛皮纸包装物或可见金属支架上，并与承托面产生真实接触阴影。可以有一颗橙子，但橙子必须稳定地放在牛皮纸、后货架或织物形成的明确承托面上，不能悬空，不能贴在画面边缘。可以有一串金属钥匙，但钥匙必须有清晰可信的挂点，例如挂在货架边缘、皮革抽绳附近或织物折边上，并自然下垂，不能无支撑漂浮。左下角道具必须低调、少量、物理关系清晰，不能形成抢主体的杂乱道具堆。
+
+  画面底部清晰露出自行车后轮的一部分，包括轮胎、银色轮圈、钢丝辐条、黑色挡泥板和金属货架支架，形成稳定的底部结构。自行车只露出后部局部，不要完整出现整辆车。自行车结构必须真实，不要扭曲辐条，不要变形车轮，不要错乱金属结构。
+
+  背景简洁干净，使用柔和的浅灰蓝色到淡薄荷蓝色过渡，像自然光下的简洁墙面或空气感背景。背景必须干净，不要复杂街景，不要明显室内布景感，不要任何墙面文字、标识、海报、水印、二维码或图形标记。光线为强烈但自然的夏日下午阳光，从侧前方照射，形成清晰但优雅的阴影和温暖高光。整体色调有暖橙、米色、棕色与冷蓝绿色背景之间的高级对比，带来清爽、安静、轻电影感的夏日氛围。
+
+  整个画面必须像真实相机拍摄的高端时尚杂志静物大片。画面中不得出现任何水印、生成标记、AI生成字样、半透明文字、签名、角标、logo、品牌标识、可读文字、可读字母、二维码、印刷商标或平台标记。图片四角和边缘必须保持干净，尤其右下角不能出现任何文字、标识或半透明生成痕迹。
+
+  English style anchor: premium commercial still-life photography, luxury fashion lifestyle advertising, French Riviera summer mood, vintage bicycle rear rack detail, woven rattan bucket bag as unobstructed hero subject, realistic woven texture, brown leather drawstrings, gold metal eyelets, orange roses, green grapes as small supporting props, open blank book pages, natural afternoon sunlight, soft film grain, refined editorial composition, product-first composition, clean elegant background, tactile material detail, real photography, physically plausible lower-left props, visible support surface for orange, clear anchor point for keys, realistic contact shadows under fabric and fruit, no floating props, realistic gravity and support logic, no watermark, no logo, no readable text, clean image corners.
+
+negative_prompt: >
+  人物, 手, 脸, 模特, 可读文字, 字母, logo, 品牌标识, 商标, 水印, 生成标记, AI生成, 半透明文字, 右下角文字, 角标, 签名, 二维码, 假文字, 假 logo, 过于清晰的老花图案, 真实品牌图案, 可识别品牌 monogram, 多个包, 包包被遮挡, 叶子遮挡包包, 花束遮挡包包, 葡萄遮挡包包, 书本遮挡包包, 道具抢主体, 完整自行车, 复杂街景, 杂乱背景, 墙面文字, 海报, 明显室内布景, 电商白底, 低质感, 塑料感, CGI, 卡通, 插画, 过曝, 过度锐化, 变形自行车轮, 扭曲辐条, 错乱金属结构, 悬空道具, 无支撑的橙子, 无挂点钥匙, 道具贴片感, 物理支撑不清, 道具漂浮, 道具贴边, dirty background, fake text, readable letters, watermark, generated mark, AI generated mark, lower-right watermark, corner text, signature, logo, brand mark, QR code, product obstruction, leaf covering bag, book text, readable book pages, clutter, full bicycle, distorted wheel, broken spokes, plastic look, cartoon, illustration, floating props, unsupported orange, keys without anchor point, unclear physical support, edge-stuck props, artificial prop cluster, props without contact shadow
+
+acceptance_gate:
+  prompt_subject_match: true
+  style_direction_match: true
+  product_fully_visible: true
+  product_unobstructed: true
+  rattan_texture_visible: true
+  bicycle_rear_rack_visible: true
+  partial_rear_wheel_visible: true
+  no_leaf_obstruction: true
+  no_readable_book_text: true
+  no_person_or_face_unless_expected: true
+  no_readable_text_or_logo_unless_expected: true
+  no_watermark_or_generated_mark: true
+  clean_image_corners: true
+  commercial_usability: true
+  lower_left_props_physically_supported: true
+  orange_has_visible_support_surface: true
+  keys_have_clear_anchor_point: true
+  red_knit_has_contact_shadow: true
+  no_floating_or_edge_stuck_props: true
+
+memory_write_allowed: false
+daily_note_write_allowed: false
