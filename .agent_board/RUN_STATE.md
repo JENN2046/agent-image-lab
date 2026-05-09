@@ -9,7 +9,7 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-v6.5 Review Console Product Shell — upgrade from long-page prototype to product-grade review cockpit. Left nav + top workflow + main workspace + right decision rail + bottom grid. draft_only, no-execution.
+v6.6 Product Shell QA + Visual Polish — v6.5 product shell quality review, layout trimming, readability optimization, visual consistency, and decision rail acceptance reinforcement. draft_only, no-execution.
 ```
 
 ## Current Branch
@@ -21,19 +21,19 @@ master tracking origin/master
 ## Current Phase
 
 ```text
-v6.4 — Memory Queue Interaction. Draft-only memory queue with approval_status toggle, reviewer_role, should_write_to_vcp intent, and queue counts. All behaviors keep draft_only/no-execution.
+v6.6 — Product Shell QA + Visual Polish. Phase 1 Layout QA (5 regions confirmed), Phase 2 Visual Polish (CSS refinements), Phase 3 Decision Rail QA (draft data projection verified), Phase 4 Validator added, Phase 5 Documentation complete. All behaviors keep draft_only/no-execution.
 ```
 
 ## Current Task
 
 ```text
-No defined default-auto local batch remaining. Await user direction or A5 authorization for push/PR/release.
+v6.6 Product Shell QA + Visual Polish —擦清刻度，理顺线束。确认 v6.5 产品壳结构完整、旧功能未丢、DOM ID 未断、右侧裁决栏投射正确、所有 validator 通过、no-execution 边界干净。
 ```
 
 ## Last Completed Task
 
 ```text
-v6.2 Asset Index Interaction: Asset Index from read-only display to interactive draft-only panel with editable asset metadata fields, status toggles, and local filtering. v6AssetIndexIsSafe guard added. All validators pass.
+v6.6 Product Shell QA + Visual Polish — completed. 5 structural regions confirmed, CSS visual polish applied, decision rail data projection verified, v6.6 validator (25 checks) added, doc + agent board synced. All v6.0-v6.6 validators pass. draft_only, no-execution.
 ```
 
 ## Last Validation

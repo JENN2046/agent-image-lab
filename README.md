@@ -103,6 +103,9 @@ v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + 
 - v6.1 Task Panel Interaction：Task Panel 实现可交互表单（6 inputs/selects），runtime_guard 校验，smoke test 覆盖。`docs/237_v6_1_task_panel_interaction.md`
 - v6.2 Asset Index Interaction：Asset Index 从只读展示变成可本地编辑、筛选、索引的 draft-only 资产索引面板。`docs/238_v6_2_asset_index_interaction.md`
 - v6.3 Session Store Interaction：Session Store 从只读展示变成可交互草案管理面板——current_session 展示、linked_task_id/asset_refs 输入、import_preview 5 状态选择、restore_candidate 切换、session_list 草案。闭合 Task/Asset/Session 三角底座。`docs/239_v6_3_session_store_interaction.md`
+- v6.4 Memory Queue Interaction：记忆草案队列——approval_status 切换、reviewer_role、should_write_to_vcp 意图、block/reject reason、队列计数。`docs/240_v6_4_memory_queue_interaction.md`
+- v6.5 Review Console Product Shell：左栏→顶栏→工作区→裁决栏→底栏全产品壳升级，审片驾驶舱布局。`docs/241_v6_5_review_console_product_shell.md`
+- v6.6 Product Shell QA + Visual Polish：v6.5 产品壳质量复查、布局修整、可读性优化、视觉一致性、裁决栏验收加固。`docs/242_v6_6_product_shell_qa_visual_polish.md`
 
 当前 accepted asset 只以 ignored runtime 路径和哈希归档，不把图片二进制写入 Git、DailyNote 或 VCP 长期记忆。人工接受记录保留了已知视觉偏差：这是 `human_override` 通过，不是完美 prompt compliance。
 当前 A5 v10.4 / v10.5 / v10.9 新资产均被拒收，只保留 ignored runtime ref、哈希、评分和规则摘要；未把图片二进制写入 Git、DailyNote 或 VCP memory。

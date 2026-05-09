@@ -1,5 +1,16 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v6.6 Product Shell QA + Visual Polish
+
+```text
+Status: v6.6 — v6.5 product shell quality review, visual polish, decision rail QA, and acceptance reinforcement. All 5 shell regions confirmed. 7 nav entries, 7 workflow steps, all central review fields, right rail data projection verified against draft data, no hardcoded conclusions. CSS visual polish: right rail readability, nav active state, workflow stepper states, panel card hierarchy, title hierarchy, color semantics, responsive transitions. All v6.0-v6.6 validators pass. No guard relaxation. draft_only, no-execution.
+
+v6.0-v6.6 all validators pass
+Runtime suite: all passed
+Push/tag/release: blocked pending separate authorization
+Next: pending user direction
+```
+
 ## v6.5 Review Console Product Shell
 
 ```text

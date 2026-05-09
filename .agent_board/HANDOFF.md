@@ -3,9 +3,8 @@
 ## Handoff Summary
 
 ```text
-Status: Runtime Review sustained autopilot chain FULLY COMPLETE (7/7: 9A freshness → 9C runbook → 9B compatibility → 10B replay index → 10A acceptance matrix → 10C authorization consolidation → final checkpoint closeout). 9 commits + 5 tags landed locally, working tree clean. Push scheduled for end of workday.
-Result: runtime prototype emits 16 draft surfaces; full sustained autopilot chain (9A freshness → 9C runbook → 9B compatibility → 10B replay index → 10A acceptance matrix → 10C authorization consolidation) completed. `docs/225_runtime_review_batch_8d_sustained_autopilot_task_plan.md` through `docs/231_runtime_review_batch_10c_future_a5_authorization_package_consolidation.md` form a complete local documentation chain. All validators pass. Production actions remain conditional-auto only.
-Compatibility note: v10.27 DailyNoteWrite root path correction from plugin_dir_dailynote to vcp_root_dailynote remains recorded, without rerunning DailyNoteWrite, completed_root_path_corrected. v10.28 DailyNote canonical location guard remains active. Batch 10B changed only project-local docs, validator, and agent-board state.
+Status: v6.6 Product Shell QA + Visual Polish COMPLETED. v6.5 product shell layout QA, visual polish (CSS), decision rail data projection verification, validator (25 checks), doc, and agent board sync. All v6.0-v6.6 validators pass. No guard relaxation. draft_only, no-execution.
+Result: 5 product shell regions confirmed structurally sound. 7 nav entries, 7 workflow steps, all central review fields preserved. Right decision rail projects from draft data (write_authorized=false, write_performed=false hardcoded). CSS visual polish applied: right rail readability, nav active state, workflow stepper states (completed/risk/blocked), panel hierarchy, title hierarchy, color semantics, responsive breakpoints. v6.6 validator (25 checks) validates DOM IDs, CSS layout, guard integrity, all v6 validators compatibility, and forbidden API/pattern absence.
 ```
 
 ## Current Repo
@@ -19,9 +18,9 @@ A:/agent-image-lab/agent-image-lab-v0.2
 ```text
 Branch: master
 Remote tracking: master...origin/master
-State: v6.4 Memory Queue Interaction — draft-only memory queue with approval/rejection/blocking/tracking on v6 Product Runtime. v6.0+v6.1+v6.2+v6.3+v6.4 validators pass. draft_only, no-execution. Push/tag/release require separate authorization.
-Local head: 823c122
-Origin/master: 823c122
+State: v6.6 Product Shell QA + Visual Polish — v6.5 product shell quality review, visual polish, decision rail QA, and acceptance reinforcement. All v6.0-v6.6 validators pass. draft_only, no-execution. Push/tag/release require separate authorization.
+Local head: 1453664
+Origin/master: 1453664
 Current freshness doc: docs/226_runtime_review_batch_9a_state_freshness_index.md
 Current operator runbook: docs/227_runtime_review_batch_9c_operator_runbook_and_resume_capsule.md
 Current compatibility matrix: docs/228_runtime_review_batch_9b_runtime_session_compatibility_matrix.md

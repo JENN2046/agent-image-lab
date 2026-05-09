@@ -58,6 +58,9 @@
 - v6.1 Task Panel Interaction：Task Panel 交互表单实现。`docs/237_v6_1_task_panel_interaction.md`，validator `scripts/validate_v6_1_task_panel_interaction.js`（9 checks）
 - v6.2 Asset Index Interaction：Asset Index 交互编辑与筛选实现。`docs/238_v6_2_asset_index_interaction.md`，validator `scripts/validate_v6_2_asset_index_interaction.js`（16 checks）
 - v6.3 Session Store Interaction：Session Store 交互草案层实现——current_session 展示、linked_task_id 输入、linked_asset_refs 输入、import_preview 5 状态选择、restore_candidate 切换、session_list 草案。`docs/239_v6_3_session_store_interaction.md`，validator `scripts/validate_v6_3_session_store_interaction.js`（16 checks）
+- v6.4 Memory Queue Interaction：记忆草案队列——approval_status 切换、reviewer_role、should_write_to_vcp 意图、block/reject reason、队列计数。`docs/240_v6_4_memory_queue_interaction.md`，validator `scripts/validate_v6_4_memory_queue_interaction.js`（25 checks）
+- v6.5 Review Console Product Shell：产品壳布局——左栏导航、顶栏流程、中央审片区、右侧裁决栏、底栏操作网格。`docs/241_v6_5_review_console_product_shell.md`，validator `scripts/validate_v6_5_review_console_product_shell.js`
+- v6.6 Product Shell QA + Visual Polish：v6.5 产品壳质量复查、布局修整、可读性优化、视觉一致性、裁决栏验收加固。`docs/242_v6_6_product_shell_qa_visual_polish.md`，validator `scripts/validate_v6_6_product_shell_qa.js`
 - Tag and version strategy 提供 `docs/233_tag_and_version_strategy.md`；tag 命名规范、版本号策略、release 条件。
 
 ## Release readiness 文件

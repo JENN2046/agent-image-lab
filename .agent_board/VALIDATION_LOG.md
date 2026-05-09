@@ -1,5 +1,30 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## v6.6 Product Shell QA + Visual Polish
+
+```text
+Current phase: v6.6 Product Shell QA + Visual Polish
+Scope: v6.5 product shell quality review and visual polish. Phase 1 Layout QA (5 regions: shell-left-nav, top-workflow, main-review-workspace, shell-right-rail, bottom-operations-grid — all confirmed). Phase 2 Visual Polish (right rail readability, nav active state, workflow stepper states, panel hierarchy, title hierarchy, color semantics, responsive breakpoints). Phase 3 Decision Rail QA (data projection verified against draft: verdict from acceptance_verdict, score from humanScore, memory from memory_delta, write_authorized=false, write_performed=false, no hardcoded fake conclusions). Phase 4 v6.6 validator (25 checks). Phase 5 documentation.
+No real VCPChat/VCPToolBox read.
+No real file read.
+No plugin/API/DailyNote/VCP memory/image action.
+No commit/tag/push/PR/release.
+node --check review_console/runtime_prototype/app.js: passed
+node --check review_console/runtime_prototype/runtime_guard.js: passed
+node --check scripts/validate_v6_6_product_shell_qa.js: passed
+node scripts/validate_v6_6_product_shell_qa.js: passed
+node scripts/validate_v6_5_review_console_product_shell.js: passed
+node scripts/validate_v6_4_memory_queue_interaction.js: passed
+node scripts/validate_v6_3_session_store_interaction.js: passed
+node scripts/validate_v6_2_asset_index_interaction.js: passed
+node scripts/validate_v6_1_task_panel_interaction.js: passed
+node scripts/validate_v6_0_product_runtime_kickoff.js: passed
+node scripts/validate_runtime_prototype_smoke.js: passed
+node scripts/validate_runtime_prototype_suite.js: passed
+node scripts/validate_agent_board_state.js: passed
+git diff --check: passed
+```
+
 ## v6.4 Memory Queue Interaction
 
 ```text

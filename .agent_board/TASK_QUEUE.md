@@ -9,7 +9,7 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
-v6.5 Review Console Product Shell — upgrade from long-page prototype to product-grade review cockpit. Left nav + top workflow + main workspace + right decision rail + bottom grid. draft_only, no-execution.
+v6.6 Product Shell QA + Visual Polish — v6.5 product shell quality review, layout trimming, readability optimization, visual consistency, and decision rail acceptance reinforcement. draft_only, no-execution.
 ```
 
 ---

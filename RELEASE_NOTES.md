@@ -159,3 +159,6 @@ This is still not an authorization for new real plugin calls, DailyNote writes, 
 - v6.1 Task Panel Interaction: Interactive Task Panel (6 form inputs) on Review Console. `docs/237_v6_1_task_panel_interaction.md`
 - v6.2 Asset Index Interaction: Interactive Asset Index with editable fields, status toggles, and local filtering. `docs/238_v6_2_asset_index_interaction.md`
 - v6.3 Session Store Interaction: Interactive Session Store with current_session display, linked_task_id/asset_refs inputs, import_preview 5-state status, restore_candidate toggle, session_list draft. `docs/239_v6_3_session_store_interaction.md`
+- v6.4 Memory Queue Interaction: Interactive Memory Queue with approval_status toggle, reviewer_role, should_write_to_vcp intent, block/reject reasons, and queue counts. `docs/240_v6_4_memory_queue_interaction.md`
+- v6.5 Review Console Product Shell: Full product-shell layout upgrade with left nav, top workflow, main workspace, right decision rail, and bottom operations grid. `docs/241_v6_5_review_console_product_shell.md`
+- v6.6 Product Shell QA + Visual Polish: v6.5 product shell quality review, layout trimming, readability optimization, visual consistency, and decision rail acceptance reinforcement. `docs/242_v6_6_product_shell_qa_visual_polish.md`
