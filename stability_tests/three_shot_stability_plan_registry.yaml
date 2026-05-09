@@ -1,16 +1,17 @@
 three_shot_stability_plan_registry:
   version: v1
-  updated_by_phase: v7_34
+  updated_by_phase: v7_37
   registry_only: true
   execution_authorized_by_this_record: false
-  real_api_call_performed: false
-  image_created: false
+  real_api_call_performed: true
+  image_created: true
   memory_write_allowed: false
   daily_note_write_allowed: false
 
   plans:
     - plan_id: french_summer_rattan_bag_v2_3shot
-      status: planned
+      status: completed
+      final_stability_status: stable_candidate_needs_manual_review
       target_prompt_package_ref: prompts/image_generation/product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v2.yaml
       target_accepted_sample_id: accepted_french_summer_rattan_bucket_bag_001
       provider_type: direct_api
@@ -23,4 +24,7 @@ three_shot_stability_plan_registry:
       one_image_per_shot: true
       retry_allowed: false
       batch_generation_authorized: false
-      next_phase: v7_37_french_summer_rattan_bag_v2_3shot_shot_3_a5
+      shots_completed: 3
+      accepted_clean_count: 2
+      warning_count: 1
+      next_phase: none_completed

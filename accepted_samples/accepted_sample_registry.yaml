@@ -153,3 +153,45 @@ accepted_sample_registry:
       validates_watermark_false_parameter: true
       write_to_memory_allowed: false
       daily_note_write_allowed: false
+
+    - sample_id: accepted_french_summer_rattan_bucket_bag_004_shot_3
+      source_phase: v7_37
+      source_plan: french_summer_rattan_bag_v2_3shot
+      asset_status: accepted_with_support_logic_warning
+      provider_type: direct_api
+      plugin_id: NativeDoubaoImage
+      model: doubao-seedream-5-0-260128
+      watermark_requested: false
+      watermark_parameter_sent: true
+      watermark_policy: disabled_by_request_payload
+      prompt_package_ref: prompts/image_generation/product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v2.yaml
+      review_doc_ref: stability_tests/reviews/v7_37_shot_3_post_run_review.md
+      image_path: runs/real_generation/v7_37_french_summer_rattan_bag_v2_3shot_shot_3/native_doubao_1778336695171_0.jpg
+      category: fashion_lifestyle_still_life
+      style_tags:
+        - french_summer
+        - rattan_bag
+        - vintage_bicycle
+        - fashion_lifestyle
+        - watermark_off
+        - accepted_with_support_logic_warning
+      acceptance_summary:
+        prompt_subject_match: pass
+        product_fully_visible: pass
+        product_unobstructed: pass
+        no_leaf_obstruction: pass
+        no_readable_book_text: pass
+        no_watermark_or_generated_mark: pass
+        clean_image_corners: pass
+        commercial_usability: pass_with_warning
+        memory_suitability: false
+      known_minor_issues:
+        - lower_left_props_red_knit_orange_and_keys_have_unclear_physical_support_logic
+        - orange_and_keys_feel_slightly_suspended_or_artificially_staged
+        - lower_left_secondary_prop_cluster_distracts_from_product_and_reduces_scene_believability
+        - right_bicycle_saddle_edge_intrusion_minor
+        - flower_plastic_wrap_feels_somewhat_studio_styled
+      commercial_use_level: accepted_with_support_logic_warning
+      validates_watermark_false_parameter: true
+      write_to_memory_allowed: false
+      daily_note_write_allowed: false

@@ -1,6 +1,7 @@
 three_shot_stability_plan:
   plan_id: french_summer_rattan_bag_v2_3shot
-  status: planned
+  status: completed
+  final_stability_status: stable_candidate_needs_manual_review
   created_by_phase: v7_34
   execution_authorized_by_this_record: false
 
@@ -59,11 +60,21 @@ three_shot_stability_plan:
 
     - shot_id: french_summer_rattan_bag_v2_shot_3
       future_phase: v7_37
+      status: completed
+      asset_status: accepted_with_support_logic_warning
       a5_activation_ref: A5-20260509-NATIVE-RATTAN-V2-3SHOT-003
+      a5_executed_at: "2026-05-09"
       output_directory: runs/real_generation/v7_37_french_summer_rattan_bag_v2_3shot_shot_3/
+      image_path: runs/real_generation/v7_37_french_summer_rattan_bag_v2_3shot_shot_3/native_doubao_1778336695171_0.jpg
+      review_ref: stability_tests/reviews/v7_37_shot_3_post_run_review.md
       max_plugin_calls: 1
       max_images_created: 1
       retry_allowed: false
+      api_calls_observed: 1
+      images_created: 1
+      retry_performed: false
+      model_matches: true
+      watermark_parameter_sent: true
       requires_independent_a5: true
 
   per_shot_acceptance_gate:
@@ -109,7 +120,10 @@ three_shot_stability_plan:
 
   safety:
     batch_generation_authorized: false
-    real_api_call_performed: false
-    image_created: false
+    real_api_call_performed: true
+    image_created: true
+    shots_completed: 3
+    retry_performed: false
+    api_key_output_prevented: true
     memory_write_allowed: false
     daily_note_write_allowed: false
