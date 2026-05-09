@@ -220,6 +220,16 @@ function hasUnsafePath(values) {
   });
 }
 
+const unsafeImageExtensions = [".jpg", ".jpeg", ".png", ".webp"];
+
+function hasImageFile(values) {
+  return values.some((value) => unsafeImageExtensions.some((ext) => value.toLowerCase().endsWith(ext)));
+}
+
+function hasRunsPath(values) {
+  return values.some((value) => value.startsWith("runs/"));
+}
+
 function main() {
   assert(!hasDuplicates(allowedModifiedFiles), "Allowed modified files must not contain duplicates.");
   assert(!hasDuplicates(allowedUntrackedFiles), "Allowed untracked files must not contain duplicates.");
@@ -441,9 +451,29 @@ function main() {
     allowedModifiedFiles.includes("scripts/validate_runtime_guard_unit.js"),
     "Runtime guard unit validator must be included in the modified allowlist."
   );
+  assert(
+    !hasImageFile(allowedModifiedFiles),
+    "Image files must not appear in the modified allowlist."
+  );
+  assert(
+    !hasImageFile(allowedUntrackedFiles),
+    "Image files must not appear in the untracked allowlist."
+  );
+  assert(
+    !hasRunsPath(allowedModifiedFiles),
+    "runs/ paths must not appear in the modified allowlist."
+  );
+  assert(
+    !hasRunsPath(allowedUntrackedFiles),
+    "runs/ paths must not appear in the untracked allowlist."
+  );
 
   const result = {
     passed: true,
+    push_safety_gate: {
+      image_files_in_allowlist: hasImageFile(allowedModifiedFiles) || hasImageFile(allowedUntrackedFiles),
+      runs_path_in_allowlist: hasRunsPath(allowedModifiedFiles) || hasRunsPath(allowedUntrackedFiles)
+    },
     local_commit_scope: {
       allowed_branches: allowedBranches,
       allowed_modified_count: allowedModifiedFiles.length,

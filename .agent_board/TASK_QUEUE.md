@@ -54,7 +54,7 @@ none
 ### todo
 
 ```text
-1. Next: user direction. v7.34 3-shot Stability Test Plan completed and committed. Next: v7.35 French Summer Rattan Bag v2 3-shot Shot 1 A5.
+1. Next: user direction. v7.35 Push Safety Gate Governance Rule completed and committed. Next: v7.36 governance rule automation or user direction.
 ```
 
 ### todo
@@ -175,6 +175,7 @@ none
 89. Completed Runtime Review Batch 10C future A5 authorization package consolidation; bridge, plugin, asset review, DailyNote/VCP memory, rollback, forbidden outputs, and version actions are now consolidated into a single preflight template with field dependency map and activation flow.
 90. Completed Runtime Review final local checkpoint — sustained autopilot chain closeout; all 7 batches (9A→10C→final) are documented, validated, committed (9 commits + 5 tags), and agent-board synced; push pending user authorization at end of workday.
 91. Completed v7.34 3-shot Stability Test Plan for French Summer Rattan Bag v2; 6 new files, 51-check validator, all indexes synced, committed locally. No API call, no image generation, no A5 execution.
+92. Completed v7.35 Push Safety Gate Governance Rule; AGENTS.md Section 17, local_commit_scope image/runs assertions, MVP validation checks. No API call, no image generation, no A5 execution.
 ```
 
 ### blocked

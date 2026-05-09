@@ -3634,3 +3634,20 @@
 - [ ] 不提交 jpg/png/webp 文件。
 - [ ] 不提交 runs/ 下文件。
 - [ ] v7.34 默认下一安全阶段为 v7.35 French Summer Rattan Bag v2 3-shot Shot 1 A5。
+
+## v7.35 Push Safety Gate Governance Rule 检查
+
+- [ ] AGENTS.md Section 17 存在，定义 Push Safety Gate 触发条件、必须检查和硬阻断。
+- [ ] Push Safety Gate 要求任何本地 commit 后如果 ahead > 0，必须自动执行 push 前只读核验。
+- [ ] Push Safety Gate 要求输出 `VALIDATED_PUSH_READY / BLOCKED / FAILED` 三段式状态。
+- [ ] AGENTS.md Section 17 硬阻断包括：behind > 0、working tree dirty、validator failed、git diff --check failed、runs/* staged、*.jpg/jpeg/png/webp staged、API key output、real API call、image generation。
+- [ ] scripts/validate_local_commit_scope.js 在 main() 中 assert 禁止 image 文件和 runs/ 路径出现在 allowlist。
+- [ ] scripts/validate_local_commit_scope.js 输出 push_safety_gate 字段，包含 image_files_in_allowlist 和 runs_path_in_allowlist。
+- [ ] scripts/validate_mvp.ps1 Push Safety Gate 检查 staged/untracked 文件中无 jpg/jpeg/png/webp。
+- [ ] scripts/validate_mvp.ps1 Push Safety Gate 检查 staged/untracked 文件中无 runs/ 路径。
+- [ ] scripts/validate_mvp.ps1 Push Safety Gate 检查 validate_local_commit_scope.js 输出中 push_safety_gate.image_files_in_allowlist 不为 true。
+- [ ] scripts/validate_mvp.ps1 Push Safety Gate 检查 validate_local_commit_scope.js 输出中 push_safety_gate.runs_path_in_allowlist 不为 true。
+- [ ] v7.35 不调用 Doubao API。
+- [ ] v7.35 不生成图片。
+- [ ] v7.35 不 push。
+- [ ] v7.35 默认下一安全阶段为 v7.36 governance rule 自动化或用户方向。

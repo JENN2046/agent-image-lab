@@ -4666,6 +4666,26 @@ if (-not $node) {
     if ($localCommitScope.local_commit_scope.file_write_performed -ne $false) {
       Add-Failure "local commit scope must not write files"
     }
+
+    # Push Safety Gate: image/runs staged check
+    $pushSafetyImageExts = @('.jpg', '.jpeg', '.png', '.webp')
+    $stagedFiles = @(& git diff --cached --name-only | Where-Object { $_.Trim() -ne '' } | ForEach-Object { $_.Trim() })
+    $untrackedFiles = @(& git ls-files --others --exclude-standard | Where-Object { $_.Trim() -ne '' } | ForEach-Object { $_.Trim() })
+    $allCandidateFiles = $stagedFiles + $untrackedFiles
+    $stagedImages = @($allCandidateFiles | Where-Object { $pushSafetyImageExts -contains [System.IO.Path]::GetExtension($_).ToLower() })
+    $stagedRuns = @($allCandidateFiles | Where-Object { $_.StartsWith('runs/') })
+    if ($stagedImages.Count -gt 0) {
+      Add-Failure "Push Safety Gate: image files must not be staged: $($stagedImages -join ', ')"
+    }
+    if ($stagedRuns.Count -gt 0) {
+      Add-Failure "Push Safety Gate: runs/ paths must not be staged: $($stagedRuns -join ', ')"
+    }
+    if ($localCommitScope.push_safety_gate.image_files_in_allowlist -eq $true) {
+      Add-Failure "Push Safety Gate: image files must not appear in commit scope allowlists"
+    }
+    if ($localCommitScope.push_safety_gate.runs_path_in_allowlist -eq $true) {
+      Add-Failure "Push Safety Gate: runs/ paths must not appear in commit scope allowlists"
+    }
   }
 
   $postPushStateOutput = & node (Join-Path $Root 'scripts/validate_post_push_state.js')

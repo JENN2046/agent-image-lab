@@ -4537,6 +4537,33 @@ Notes:
   - Committed locally on master at 9ff761f baseline
   - Not pushed to origin/master
 
+## VALIDATION-20260509-v7.35
+
+Task: v7.35 Push Safety Gate Governance Rule
+Commands run:
+  - node --check scripts/validate_local_commit_scope.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+  - powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+  - git diff --check
+Result: ALL CHECKS PASSED
+Findings:
+  - local_commit_scope syntax: passed
+  - local_commit_scope assertions: passed (no image/runs in allowlists)
+  - validate_mvp.ps1: passed
+  - validate-agent-image-lab-local.ps1: passed with manual-review warnings only
+  - git diff --check: passed
+Warnings:
+  - validate-agent-image-lab-local.ps1: manual-review warnings only (expected)
+Not validated:
+  - No A5 execution (governance only)
+  - No Doubao API call (governance only)
+  - No push performed (governance only)
+Notes:
+  - Push Safety Gate is a governance layer only, not a push authorization
+  - image/runs staged checks integrated into validate_local_commit_scope.js and validate_mvp.ps1
+  - Committed locally on master at 9ff761f baseline
+  - Not pushed to origin/master
+
 ## Recommended Commands
 
 PowerShell:

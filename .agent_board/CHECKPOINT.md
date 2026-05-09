@@ -1,5 +1,24 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.35 Push Safety Gate Governance Rule
+
+```text
+Status: completed_validated_push_safety_gate
+Target: Push Safety Gate governance rule
+Changed files: AGENTS.md, tests/validation_checklist.md, scripts/validate_local_commit_scope.js, scripts/validate_mvp.ps1, .agent_board files
+Scope: AGENTS.md Section 17 (trigger, required checks, hard blockers, output format), local_commit_scope assertions (no image/runs in allowlists, push_safety_gate output), MVP validation (staged image/runs detection)
+AGENTS.md: Section 17 Push Safety Gate added
+validate_local_commit_scope.js: hasImageFile/hasRunsPath helpers, assertions, push_safety_gate output
+validate_mvp.ps1: Push Safety Gate image/runs staged checks
+Doubao API call: no
+image generation: no
+API key output: no
+A5 execution: no
+image/runs files committed: no
+Push: no
+Next: v7.36 governance rule automation or user direction
+```
+
 ## v7.34 3-shot Stability Test Plan
 
 ```text

@@ -959,3 +959,67 @@ no-execution / no-external-read gate hardening
 .agent_board maintenance
 guarded local commits under A4.7 conditions
 ```
+
+---
+
+## 17. Push Safety Gate
+
+Any commit that results in pending commits (ahead > 0) must pass push safety gate validation before push is permitted.
+
+### Trigger
+
+After every local commit, if `git rev-list --count origin/master..HEAD` > 0, the next action must be push safety gate read-only validation.
+
+### Required Checks
+
+```text
+git status --short --branch        # working tree clean, branch tracking correct
+git rev-parse HEAD                  # HEAD is the expected commit
+git rev-parse origin/master         # origin/master is the expected baseline
+git log --oneline origin/master..HEAD  # pending commits are task-authorized only
+git diff --check                    # no whitespace errors
+git status --short                  # no unexpected files
+```
+
+Plus phase-appropriate validators:
+
+```text
+node scripts/validate_v7_XX_*.js
+node scripts/validate_prompt_package_library.js
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+### Hard Blockers
+
+```text
+behind > 0                          # need merge/rebase first
+working tree dirty and unexplained  # uncommitted changes block push
+pending commits contain unknown     # unexpected commits not authorized by current task
+validator failed                    # all relevant validators must pass
+git diff --check failed             # whitespace or formatting errors
+runs/* staged                       # real generation artifacts must not be pushed
+*.jpg / *.jpeg / *.png / *.webp staged  # image files must not be pushed
+API key output detected             # secrets must not leak
+real API call performed unexpectedly   # unauthorized execution must block
+image generation performed unexpectedly # unauthorized generation must block
+```
+
+### Output Format
+
+```text
+Status: VALIDATED_PUSH_READY / BLOCKED / FAILED
+
+HEAD:
+origin/master:
+ahead/behind:
+pending commits:
+validation:
+image/runs staged:
+boundary:
+can push <hash>: yes/no
+```
+
+### Scope
+
+Push Safety Gate is a read-only governance layer. It does not authorize push. Push still requires explicit user authorization under Section 8.

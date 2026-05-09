@@ -9,13 +9,13 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-v7.34 3-shot Stability Test Plan — documentation, plan, registry, validator (51 checks). Plan-only, no execution.
+v7.35 Push Safety Gate Governance Rule — AGENTS.md Section 17, local_commit_scope assertion, validate_mvp.ps1 check. Governance only, no execution.
 ```
 
 ## Current Phase
 
 ```text
-v7.34 — 3-shot Stability Test Plan for French Summer Rattan Bag v2. 6 new files, 6 index updates, validator (51 checks). Plan-only, no execution.
+v7.35 — Push Safety Gate Governance Rule. AGENTS.md, local_commit_scope, MVP validation, validation checklist, agent-board synced. Governance only, no execution.
 ```
 
 ## Current Branch
@@ -45,6 +45,20 @@ v7.1-v7.4 completed — docs/256-259, 4 validators (55 checks total). All v7 val
 ## Last Validation
 
 ```text
+2026-05-09 v7.35 Push Safety Gate Governance Rule:
+status: completed_validated_push_safety_gate
+changed files: AGENTS.md, tests/validation_checklist.md, scripts/validate_local_commit_scope.js, scripts/validate_mvp.ps1, .agent_board files
+scope: Push Safety Gate governance rule — AGENTS.md Section 17, image/runs staged assertions in local_commit_scope, image/runs checks in MVP validation
+local branch: master
+origin/master: 9ff761f
+Doubao API call: no
+image generation: no
+API key output: no
+DailyNote/VCP memory: no
+push/tag/release: no
+A5 execution: no
+image/runs files committed: no
+
 2026-05-09 v7.34 3-shot Stability Test Plan:
 status: completed_validated_stability_test_plan
 changed files: docs/289_v7_34_3_shot_stability_test_plan.md, scripts/validate_v7_34_3_shot_stability_test_plan.js, stability_tests/README.md, stability_tests/three_shot_stability_plan_registry.yaml, stability_tests/plans/french_summer_rattan_bag_v2_3shot_plan.yaml, tests/schema_examples/v7_34_3_shot_stability_test_plan.example.yaml, README.md, MANIFEST.md, RELEASE_NOTES.md, docs/00_project_roadmap.md, tests/validation_checklist.md, scripts/validate_mvp.ps1, .agent_board files
