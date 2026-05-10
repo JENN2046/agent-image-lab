@@ -201,6 +201,7 @@ current_final_decision:
   request_A5_now: false
   execute_LT06_now: false
   real_LT06_execution_ready: false
+```
 
 ## 8. Wording Guard — Safety Boundary
 
