@@ -1,0 +1,34 @@
+v7_68_exact_port_selection_planning_closeout:
+  schema_version: v1
+  phase: v7_68
+  closeout_status: completed
+  scope: exact_port_selection_planning
+  runtime_execution: false
+
+  exact_port_selection_planning_defined: true
+  preferred_port: 9222
+  fallback_port_policy_defined: true
+  port_conflict_check_defined: true
+  port_conflict_check_command_defined: true
+  port_conflict_check_not_run: true
+  electron_launch_command_defined: true
+  electron_launch_not_run: true
+  cdp_endpoint_format_defined: true
+
+  exact_endpoint_fully_locked: false
+  exact_port_selected: false
+  cdp_endpoint_concrete: false
+  execution_authorized: false
+  runtime_execution: false
+  cancel_called: false
+  electron_started: false
+  remote_debug_started: false
+  cdp_used: false
+  bridge_called: false
+  loadSession_called: false
+  previewDraft_called: false
+  submitDraft_called: false
+  mcp_codex_memory_called: false
+  lt06_executed: false
+
+  recommended_next: v7.68a Push Readiness Gate

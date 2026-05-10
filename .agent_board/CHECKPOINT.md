@@ -1993,6 +1993,49 @@ side_effects:
 recommended_next: v7.67a Push Readiness Gate
 ```
 
+## v7.68 Exact Port Selection Planning
+
+```text
+Phase: v7.68
+Status: exact_port_selection_planning_defined
+document_type: planning_only
+runtime_execution: false
+
+port_selection_policy:
+  preferred_port: 9222
+  fallback_port: 9223
+  port_conflict_check_defined: true
+  port_conflict_check_not_run: true
+  electron_launch_command_defined: true
+  electron_launch_not_run: true
+
+cdp_endpoint:
+  format: "http://127.0.0.1:<port>"
+  concrete_endpoint: TBD_AFTER_PORT_SELECTION
+
+lock_status:
+  exact_endpoint_fully_locked: false
+  exact_port_selected: false
+  cdp_endpoint_concrete: false
+  execution_authorized: false
+  runtime_execution: false
+
+side_effects:
+- real_vcpchat_accessed: false
+- electron_started: false
+- remote_debug_started: false
+- cdp_used: false
+- bridge_called: false
+- cancel_called: false
+- loadSession_called: false
+- previewDraft_called: false
+- submitDraft_called: false
+- mcp_codex_memory_called: false
+- lt06_executed: false
+
+recommended_next: v7.68a Push Readiness Gate
+```
+
 ## v7.64 VCPChat Bridge Contract Static Code Review Execution
 
 ```text
