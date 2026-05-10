@@ -1843,6 +1843,49 @@ external_side_effects:
 recommended_next: v7.61 VCPChat Surface Check Authorization Package
 ```
 
+## v7.61 VCPChat Surface Check Authorization Package
+
+```text
+Phase: v7.61
+Status: vcpchat_surface_check_authorization_package_prepared
+package_type: authorization_package_draft
+package_status: prepared_not_granted
+allowed_methods:
+  - imageLabReview.loadSession (max 1)
+  - imageLabReview.previewDraft (max 1)
+permanently_forbidden:
+  - imageLabReview.submitDraft
+  - any memory write method
+  - any image generation method
+  - any retry/fallback method
+A5_requested: false
+A5_granted: false
+execution_authorized: false
+lt06_a5_does_not_cover_vcpchat: true
+prior_lt06_executed: true (v7.59, da3a045)
+lt06_executed_in_this_phase: false
+
+carry_forward:
+- prior_lt06_phase: v7.59
+- prior_lt06_commit: da3a045
+- lt06_a5_consumed: true
+- lt06_a5_remaining: 0
+
+external_side_effects:
+- real_VCPToolBox_called: false
+- mcp_codex_memory_called: false
+- VCPChat_bridge_called: false
+- loadSession_called: false
+- previewDraft_called: false
+- submitDraft_called: false
+- DailyNote_written: false
+- VCP_memory_written: false
+- image_generated: false
+- image_binary_read: false
+
+recommended_next: v7.61a Push Readiness Gate
+```
+
 ## v7.59 LT-06 Execution Closeout Seal
 
 ```text

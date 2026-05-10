@@ -1,0 +1,55 @@
+v7_61_vcpchat_surface_check_authorization_package:
+  schema_version: v1
+  package_type: authorization_package_draft
+  status: prepared_not_granted
+  phase: v7_61
+
+  carry_forward:
+    prior_lt06_executed: true
+    prior_lt06_phase: v7.59
+    prior_lt06_a5_consumed: true
+    lt06_executed_in_this_phase: false
+    lt06_a5_does_not_cover_vcpchat: true
+
+  authorization:
+    A5_requested_by_this_document: false
+    A5_granted: false
+    execution_authorized: false
+
+  exact_scope:
+    allowed_bridge_methods:
+      - imageLabReview.loadSession
+      - imageLabReview.previewDraft
+    permanently_forbidden:
+      - imageLabReview.submitDraft
+    max_calls_per_method: 1
+    total_max_calls: 2
+    retry_allowed: false
+    fallback_allowed: false
+
+  reporting:
+    raw_bridge_response_allowed: false
+    raw_structuredContent_allowed: false
+    redacted_summary_only: true
+
+  side_effects:
+    real_vcpchat_accessed: false
+    electron_started: false
+    remote_debug_started: false
+    cdp_used: false
+    vcpchat_bridge_called: false
+    loadSession_called: false
+    previewDraft_called: false
+    submitDraft_called: false
+    mcp_codex_memory_called: false
+    search_memory_called: false
+    record_memory_called: false
+    native_vcp_routes_called: false
+    dailynote_written: false
+    vcp_memory_written: false
+    image_generated: false
+    lt06_executed: false
+
+  future_authorization_required:
+    requires_new_independent_authorization: true
+    lt06_a5_does_not_cover_vcpchat: true

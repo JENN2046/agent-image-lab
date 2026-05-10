@@ -69,6 +69,7 @@ v7.58k Target Identity + Base URL Lock — docs-only target identity clarificati
 v7.58l memory_overview Base URL Patch — docs-only base URL lock completed. The independent A5 request text now targets the VCPToolBox embedded MCP route at http://127.0.0.1:6005/mcp/codex-memory. Standalone codex-memory 7605 is explicitly not selected for this LT-06 request. A5 not requested. LT-06 not executed.
 v7.59 LT-06 Execution Closeout Seal — LT-06 memory_overview real read-only dry-run executed and sealed. HTTP 200, 1 call, no retry, no fallback, no side effects. A5 single-use authorization consumed. Raw response not recorded; redacted summary only. Second call requires new independent A5.
 v7.60 VCPChat Surface Check Planning — planning-only VCPChat surface check planning. Surface inventory, allowed checks, forbidden paths, authorization gates, and risk matrix defined. No real VCPChat access. No Electron launch. No bridge call. No MCP call.
+v7.61 VCPChat Surface Check Authorization Package — docs-only authorization package draft prepared for future VCPChat read-only surface check. Allowed: imageLabReview.loadSession (max 1), imageLabReview.previewDraft (max 1). Permanently forbidden: submitDraft, any write, any MCP, any native VCP route. LT-06 A5 does not cover VCPChat. Package status: prepared_not_granted. No execution.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3
