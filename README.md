@@ -49,6 +49,7 @@ v7.51d Local Read-only Bridge Adapter Runtime Implementation — local adapter r
 v7.51e-v7.51h Adapter Validation Closeout — schema validation (13/13 pass), security gate validation (11/11 pass), fixture regression (24/24 pass), and closeout docs. No VCP call. No VCPChat bridge call. No memory write. No image binary read.
 v7.51i Adapter Quality Hardening Patch — path traversal guard, module.exports, robust runAdapter error handling, cases/checks naming, exactly-one blocker verification, blocked empty refs check. Code quality 7.4→8.5/10. No VCP call. No VCPChat bridge call. No memory write. No image binary read.
 v7.51j Adapter Pro Review Findings Patch — isPlainRequestObject guard, priority-based single blocker, invalid_request_shape blocker, path guard regex fix, case-insensitive runs blocking, runAdapter structured metadata, crash masking prevention, full side effects validation, 13 path boundary tests, 8 malformed input test cases. All validators pass (14+11+10 cases, 100 checks, 0 failed). No VCP call. No VCPChat bridge call. No memory write. No image binary read.
+v7.52a-v7.52f VCPToolBox Read-only Ingestion Planning + Mock — VCPToolBox read-only ingestion planning, package schema mapping, no-write contract, mock ingestion validation, real dry-run A5 planning, and closeout completed. Adapter refs treated as opaque. No real VCPToolBox call. No VCPChat bridge call. No memory write. No image binary read.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3

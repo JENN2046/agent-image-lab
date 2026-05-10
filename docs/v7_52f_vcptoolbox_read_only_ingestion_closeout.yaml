@@ -1,0 +1,27 @@
+vcptoolbox_read_only_ingestion_closeout:
+  schema_version: v1
+  phase: v7_52f
+  closeout_status: completed
+  planning_completed: true
+  schema_mapping_completed: true
+  no_write_contract_completed: true
+  mock_ingestion_validation_result: pass
+  vcptoolbox_read_only_ingestion_mock_ready: true
+  real_vcptoolbox_call_ready: false
+  real_vcptoolbox_call_requires_independent_A5: true
+  refs_treated_as_opaque: true
+  future_dereference_requires_realpath_containment: true
+  memory_write_ready: false
+  dailynote_write_ready: false
+
+  external_side_effects:
+    real_vcptoolbox_call_performed: false
+    vcpchat_bridge_call_performed: false
+    electron_started: false
+    remote_debug_started: false
+    cdp_call_performed: false
+    daily_note_write_performed: false
+    vcp_memory_write_performed: false
+    image_generation_performed: false
+    image_binary_read: false
+    runs_path_read: false

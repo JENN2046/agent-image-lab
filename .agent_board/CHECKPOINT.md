@@ -1250,6 +1250,45 @@ hard_stops:
 - do_not_reopen_closed_no_memory_write_case
 ```
 
+## v7.52a-v7.52f VCPToolBox Read-only Ingestion Planning + Mock
+
+```text
+Phase: v7.52a-v7.52f
+Status: vcptoolbox_read_only_ingestion_planning_mock_completed
+planning_completed: true
+schema_mapping_completed: true
+no_write_contract_completed: true
+mock_ingestion_validation_result: pass
+refs_treated_as_opaque: true
+dereference_performed: false
+future_dereference_requires_realpath_containment: true
+real_vcptoolbox_call_performed: false
+VCPChat bridge call performed: false
+Electron started: false
+remote-debug started: false
+CDP call performed: false
+DailyNote write performed: false
+VCP memory write performed: false
+image generation performed: false
+image binary read: false
+runs path read: false
+
+current_allowed_next_steps:
+- LT-07 E2E read-only integration fixture and audit, only if explicitly authorized
+- LT-06 real VCPToolBox read-only dry-run A5, only if independently authorized
+
+hard_stops:
+- do_not_call_real_vcptoolbox_without_independent_a5
+- do_not_call_vcpchat_bridge_without_independent_authorization
+- do_not_start_electron_without_explicit_authorization
+- do_not_write_dailynote_without_independent_a5
+- do_not_write_vcp_memory_without_independent_a5
+- do_not_generate_image_without_independent_a5
+- do_not_read_image_binary
+- do_not_dereference_refs_without_realpath_containment
+- do_not_reopen_closed_no_memory_write_case
+```
+
 ## Resume Instruction
 
 ```text

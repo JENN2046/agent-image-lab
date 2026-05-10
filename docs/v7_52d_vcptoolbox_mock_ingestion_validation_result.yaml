@@ -1,0 +1,47 @@
+vcptoolbox_read_only_ingestion_mock_validation:
+  schema_version: v1
+  phase: v7_52d
+  status: executed_pass
+  result: pass
+  cases_total: 14
+  cases_passed: 14
+  cases_failed: 0
+
+  adapter_call:
+    local_adapter_called: true
+    real_vcptoolbox_call_performed: false
+    vcpchat_bridge_call_performed: false
+
+  opaque_refs_policy:
+    refs_treated_as_opaque: true
+    ref_dereference_performed: false
+    fs_read_file_performed: false
+    fs_stat_on_returned_refs_performed: false
+    realpath_containment_required_for_future_dereference: true
+
+  rejected_payloads:
+    payload_type_not_text_only_refs: pass
+    returned_refs_only_false: pass
+    absolute_ref: pass
+    runs_ref: pass
+    image_ref: pass
+    full_file_content_field: pass
+    raw_payload_field: pass
+    secret_field: pass
+    memory_write_requested: pass
+    dailynote_write_requested: pass
+    dereference_without_realpath_containment: pass
+    production_approved_claim: pass
+    closed_case_reopen_attempt: pass
+
+  external_side_effects:
+    real_vcptoolbox_call_performed: false
+    vcpchat_bridge_call_performed: false
+    electron_started: false
+    remote_debug_started: false
+    cdp_call_performed: false
+    daily_note_write_performed: false
+    vcp_memory_write_performed: false
+    image_generation_performed: false
+    image_binary_read: false
+    runs_path_read: false
