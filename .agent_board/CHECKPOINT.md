@@ -1719,6 +1719,35 @@ current_allowed_next_steps:
 - stop and hold
 ```
 
+## v7.58h Zero-write Policy Decision
+
+```text
+Phase: v7.58h
+Status: zero_write_policy_decision_completed
+policy_type: absolute_zero_write
+audit_log_write_allowed: false
+observe_only_exception_granted: false
+allowed_route: MCP tools/call memory_overview
+search_memory_blocked_under_zero_write: true
+record_memory_permanently_excluded: true
+native_vcp_routes_blocked: true
+request_A5_now: false
+execute_LT06_now: false
+real_LT06_execution_ready: false
+A5_request_ready: false
+next_required_step: v7_58i_memory_overview_A5_planning_package
+
+external_side_effects:
+- LT06_executed: false
+- A5_requested: false
+- real_VCPToolBox_called: false
+- VCPChat_bridge_called: false
+- DailyNote_written: false
+- VCP_memory_written: false
+- image_generated: false
+- image_binary_read: false
+```
+
 ## Resume Instruction
 
 ```text

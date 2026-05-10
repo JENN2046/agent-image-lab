@@ -1,0 +1,56 @@
+v7_58h_zero_write_policy_decision:
+  schema_version: v1
+  phase: v7_58h
+  status: completed
+
+  policy:
+    absolute_zero_write_required: true
+    audit_log_write_allowed: false
+    observe_only_exception_granted: false
+
+  allowed_route:
+    name: memory_overview_only
+    transport: MCP_JSON_RPC
+    endpoint: POST /mcp/codex-memory
+    method: tools/call
+    tool_name: memory_overview
+    route_status: planning_only
+    zero_write_classification: true
+
+  blocked_routes:
+    search_memory:
+      zero_write: false
+      reason: recall_audit_write_to_jsonl
+      status: blocked_under_absolute_zero_write
+    record_memory:
+      zero_write: false
+      reason: explicit_write_route
+      status: permanently_excluded
+    native_vcp_routes:
+      status: blocked
+      routes:
+        - POST /v1/human/tool
+        - POST /v1/chat/completions
+        - POST /v1/chatvcp/completions
+        - POST /plugin-callback/:pluginName/:taskId
+
+  execution_decision:
+    request_A5_now: false
+    execute_LT06_now: false
+    real_LT06_execution_ready: false
+    A5_request_ready: false
+
+  next_required_step:
+    name: v7_58i_memory_overview_A5_planning_package
+    type: docs_only_A5_planning_package
+    execution_allowed: false
+
+  external_side_effects:
+    LT06_executed: false
+    A5_requested: false
+    real_VCPToolBox_called: false
+    VCPChat_bridge_called: false
+    DailyNote_written: false
+    VCP_memory_written: false
+    image_generated: false
+    image_binary_read: false
