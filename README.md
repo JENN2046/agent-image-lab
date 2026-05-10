@@ -52,6 +52,7 @@ v7.51j Adapter Pro Review Findings Patch — isPlainRequestObject guard, priorit
 v7.52a-v7.52f VCPToolBox Read-only Ingestion Planning + Mock — VCPToolBox read-only ingestion planning, package schema mapping, no-write contract, mock ingestion validation, real dry-run A5 planning, and closeout completed. Adapter refs treated as opaque. No real VCPToolBox call. No VCPChat bridge call. No memory write. No image binary read.
 v7.52f1 VCPToolBox Mock callAdapter Hardening Patch — callAdapter upgraded to structured {meta, response} wrapper with 5 adapter self-checks, adapter_call_wrapper metadata in output, cases/checks counting split. All 14 ingestion cases + 5 adapter checks pass. No real VCPToolBox call. No VCPChat bridge call. No memory write. No image binary read.
 v7.53a-v7.53e E2E Read-only Integration Fixture and Audit — local E2E chain from adapter to VCPToolBox ingestion mock to safe surface package validated. Fixture validation (16/16), security audit (16/16), failure-mode validation (16/16), and closeout completed. No real VCPToolBox call. No VCPChat bridge call. No memory write. No image binary read.
+v7.53f1 E2E Fixture Quality Hardening Patch — E2E fixture validators hardened before LT-06. Wrapper crash-masking checks made strict, generate/retry surface tests split, failure-mode generate/retry cases added, ingestion blocker drift guard added. No real VCPToolBox call. No VCPChat bridge call. No memory write. No image binary read.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3

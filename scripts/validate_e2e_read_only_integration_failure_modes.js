@@ -35,6 +35,23 @@ function checkIngestionPackage(pkg) {
   return blockers;
 }
 
+// Expected ingestion blocker set — drift guard against LT-05 rule changes
+const EXPECTED_INGESTION_BLOCKERS = [
+  'payload_type_not_text_only_refs',
+  'returned_refs_only_false',
+  'absolute_ref_detected',
+  'runs_ref_detected',
+  'image_ref_detected',
+  'full_file_content_field',
+  'raw_payload_field',
+  'secret_field',
+  'memory_write_requested',
+  'dailynote_write_requested',
+  'dereference_without_realpath_containment',
+  'production_approved_claim',
+  'closed_case_reopen_attempt'
+];
+
 // Copy of buildSafeSurface logic
 const FORBIDDEN_FIELDS = [
   'full_file_content', 'image_binary', 'raw_payload', 'secrets', 'private_absolute_path',
@@ -163,7 +180,7 @@ const baseCaseId = 'french_summer_rattan_bag_v3_production_candidate_001';
     `blockers=${JSON.stringify(b8)}`);
 }
 
-// Cases 9-13: surface rejection by buildSafeSurface
+// Cases 9-15: surface rejection by buildSafeSurface
 {
   const validResp = { status: 'ok', returned_resource_refs: ['README.md'] };
 
@@ -186,24 +203,64 @@ const baseCaseId = 'french_summer_rattan_bag_v3_production_candidate_001';
   // Case 13
   const rejected13 = buildSafeSurface({ ...validResp, reopen_closed_case_action: true }, baseCaseId) === null;
   check('surface_rejects_closed_case_reopen_action', rejected13, `rejected=${rejected13}`);
+
+  // Case 14: generate_image_action
+  const rejected14 = buildSafeSurface({ ...validResp, generate_image_action: true }, baseCaseId) === null;
+  check('surface_rejects_generate_image_action', rejected14, `rejected=${rejected14}`);
+
+  // Case 15: retry_generation_action
+  const rejected15 = buildSafeSurface({ ...validResp, retry_generation_action: true }, baseCaseId) === null;
+  check('surface_rejects_retry_generation_action', rejected15, `rejected=${rejected15}`);
 }
 
-// Cases 14-16: wrapper rejection behavior
+// Cases 16-18: wrapper rejection behavior
 {
-  // Case 14: wrapper_rejects_unparsed_adapter_output
+  // Case 16: wrapper_rejects_unparsed_adapter_output
   const unparsedResponse = parseAdapterStdout('not-valid-json');
   check('wrapper_rejects_unparsed_adapter_output', unparsedResponse === null,
     `response=${unparsedResponse}`);
 
-  // Case 15: wrapper_rejects_empty_stdout
+  // Case 17: wrapper_rejects_empty_stdout
   const emptyMeta = createWrapperMeta({ status: 0, signal: null, stdout: '', stderr: '', error: null });
   check('wrapper_rejects_empty_stdout', emptyMeta.stdout_empty === true,
     `stdout_empty=${emptyMeta.stdout_empty}`);
 
-  // Case 16: wrapper_rejects_stderr_stack
+  // Case 18: wrapper_rejects_stderr_stack
   const stackMeta = createWrapperMeta({ status: 1, signal: null, stdout: '', stderr: 'Error: something failed\n at someFunction (file.js:10:5)', error: null });
   check('wrapper_rejects_stderr_stack', stackMeta.stderr_contains_stack === true,
     `stderr_contains_stack=${stackMeta.stderr_contains_stack}`);
+}
+
+// Ingestion blocker drift guard: verify current checkIngestionPackage produces
+// exactly the expected blocker set when each trigger is activated
+{
+  const observedBlockers = [];
+
+  const testPkg = {
+    payload_type: 'image_binary',
+    returned_refs_only: false,
+    returned_resource_refs: ['/etc/passwd', 'runs/some_file.txt', 'image.jpg'],
+    full_file_content: 'content',
+    raw_payload: { x: 1 },
+    secrets: ['key'],
+    memory_write_requested: true,
+    dailynote_write_requested: true,
+    ref_dereference_performed: true,
+    production_approved_claim_requested: true,
+    reopen_closed_case_requested: true
+  };
+
+  const blockers = checkIngestionPackage(testPkg);
+  for (const expected of EXPECTED_INGESTION_BLOCKERS) {
+    if (blockers.includes(expected)) observedBlockers.push(expected);
+  }
+
+  const allExpectedPresent = EXPECTED_INGESTION_BLOCKERS.every(b => blockers.includes(b));
+  const noUnexpectedBlockers = blockers.every(b => EXPECTED_INGESTION_BLOCKERS.includes(b));
+
+  check('ingestion_blocker_set_matches_expected',
+    allExpectedPresent && noUnexpectedBlockers,
+    `all_expected=${allExpectedPresent}, no_unexpected=${noUnexpectedBlockers}, observed=${JSON.stringify(blockers)}`);
 }
 
 const failureKeys = Object.keys(results);

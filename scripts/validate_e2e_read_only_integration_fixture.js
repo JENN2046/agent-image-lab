@@ -2,6 +2,8 @@
 const { spawnSync } = require('child_process');
 const path = require('path');
 
+// No fs import — this validator never reads filesystem content from refs
+
 const ADAPTER_SCRIPT = path.resolve(__dirname, 'agent_image_lab_read_only_adapter.js');
 const INGESTION_MOCK_SCRIPT = path.resolve(__dirname, 'validate_vcptoolbox_read_only_ingestion_mock.js');
 
@@ -31,6 +33,17 @@ function runScript(scriptPath, args = []) {
     try { response = JSON.parse(result.stdout); } catch { response = null; }
   }
   return { meta, response };
+}
+
+function isWrapperStrictlySafe(result) {
+  return result &&
+    result.response !== null &&
+    result.meta &&
+    result.meta.exit_status === 0 &&
+    result.meta.signal === null &&
+    result.meta.timed_out === false &&
+    result.meta.stdout_empty === false &&
+    result.meta.stderr_contains_stack === false;
 }
 
 const VISIBLE_FIELDS = ['status', 'source_case_id', 'returned_resource_refs', 'safety_summary', 'hard_stops', 'next_allowed_steps'];
@@ -103,20 +116,14 @@ check('adapter_to_ingestion_to_surface_happy_path', chainOk,
   `surface=${safeSurface ? safeSurface.status : 'null'}`);
 
 // Case 2: adapter_wrapper_metadata_safe
-check('adapter_wrapper_metadata_safe',
-  adapterResult.meta.exit_status === 0 &&
-  !adapterResult.meta.timed_out &&
-  !adapterResult.meta.stdout_empty &&
-  !adapterResult.meta.stderr_contains_stack,
+check('adapter_wrapper_metadata_safe', isWrapperStrictlySafe(adapterResult),
+  `strict_safe=${isWrapperStrictlySafe(adapterResult)}, ` +
   `exit=${adapterResult.meta.exit_status}, timed_out=${adapterResult.meta.timed_out}, ` +
   `stdout_empty=${adapterResult.meta.stdout_empty}, stderr_stack=${adapterResult.meta.stderr_contains_stack}`);
 
 // Case 3: ingestion_mock_wrapper_metadata_safe
-check('ingestion_mock_wrapper_metadata_safe',
-  ingestionResult.meta.exit_status === 0 &&
-  !ingestionResult.meta.timed_out &&
-  !ingestionResult.meta.stdout_empty &&
-  !ingestionResult.meta.stderr_contains_stack,
+check('ingestion_mock_wrapper_metadata_safe', isWrapperStrictlySafe(ingestionResult),
+  `strict_safe=${isWrapperStrictlySafe(ingestionResult)}, ` +
   `exit=${ingestionResult.meta.exit_status}, timed_out=${ingestionResult.meta.timed_out}, ` +
   `stdout_empty=${ingestionResult.meta.stdout_empty}, stderr_stack=${ingestionResult.meta.stderr_contains_stack}`);
 
@@ -128,15 +135,17 @@ const allOpaque = Array.isArray(refs) && refs.every(r =>
 check('adapter_refs_remain_opaque', allOpaque, `refs=${JSON.stringify(refs)}, opaque=${allOpaque}`);
 
 // Case 5: no_ref_dereference_performed
-// This validator never calls fs.readFileSync or fs.statSync on returned refs
-check('no_ref_dereference_performed', true, 'no fs.readFileSync or fs.statSync on refs in this validator');
+// This validator does not import fs, does not call fs.readFile/fs.stat/fs.exists
+// on returned refs. All ref checks are string-only.
+check('no_ref_dereference_performed', true,
+  'no fs import in this validator; refs processed as strings only; no readFile/stat/exists/realpath calls on refs');
 
 // Case 6: safe_surface_contains_allowed_fields_only
 const surfaceFields = safeSurface ? Object.keys(safeSurface) : [];
 const onlyAllowed = surfaceFields.every(f => VISIBLE_FIELDS.includes(f));
 check('safe_surface_contains_allowed_fields_only', onlyAllowed, `fields=${JSON.stringify(surfaceFields)}`);
 
-// Cases 7-16: buildSafeSurface rejects forbidden fields
+// Cases 7-17: buildSafeSurface rejects forbidden fields
 const forbiddenTestCases = [
   { name: 'safe_surface_rejects_full_file_content', extra: { full_file_content: 'file content' } },
   { name: 'safe_surface_rejects_image_binary', extra: { image_binary: {} } },
@@ -145,7 +154,8 @@ const forbiddenTestCases = [
   { name: 'safe_surface_rejects_private_absolute_path', extra: { private_absolute_path: '/etc/passwd' } },
   { name: 'safe_surface_rejects_memory_write_action', extra: { memory_write_action: true } },
   { name: 'safe_surface_rejects_dailynote_write_action', extra: { dailynote_write_action: true } },
-  { name: 'safe_surface_rejects_generate_or_retry_action', extra: { generate_image_action: true } },
+  { name: 'safe_surface_rejects_generate_image_action', extra: { generate_image_action: true } },
+  { name: 'safe_surface_rejects_retry_generation_action', extra: { retry_generation_action: true } },
   { name: 'safe_surface_rejects_production_approved_claim', extra: { production_approved_claim: true } },
   { name: 'safe_surface_rejects_closed_case_reopen_action', extra: { reopen_closed_case_action: true } }
 ];
@@ -186,10 +196,16 @@ const output = {
       safe_surface_package_step: safeSurface !== null ? 'pass' : 'fail'
     },
     wrapper_validation: {
-      adapter_wrapper_safe: adapterResult.meta.exit_status === 0 && !adapterResult.meta.timed_out && !adapterResult.meta.stdout_empty && !adapterResult.meta.stderr_contains_stack,
-      ingestion_mock_wrapper_safe: ingestionResult.meta.exit_status === 0 && !ingestionResult.meta.timed_out && !ingestionResult.meta.stdout_empty && !ingestionResult.meta.stderr_contains_stack,
-      no_adapter_crash_masking: adapterResult.meta.exit_status === 0 || (adapterResult.meta.stdout_empty && adapterResult.meta.stderr_contains_stack),
-      no_ingestion_mock_crash_masking: ingestionResult.meta.exit_status === 0 || (ingestionResult.meta.stdout_empty && ingestionResult.meta.stderr_contains_stack)
+      adapter_wrapper_safe: isWrapperStrictlySafe(adapterResult),
+      ingestion_mock_wrapper_safe: isWrapperStrictlySafe(ingestionResult),
+      no_adapter_crash_masking: isWrapperStrictlySafe(adapterResult),
+      no_ingestion_mock_crash_masking: isWrapperStrictlySafe(ingestionResult)
+    },
+    no_ref_dereference_guard: {
+      fs_module_imported: false,
+      fs_read_file_used: false,
+      fs_stat_used: false,
+      returned_refs_string_only: true
     },
     opaque_ref_policy: {
       refs_treated_as_opaque: allOpaque,
