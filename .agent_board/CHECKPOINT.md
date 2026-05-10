@@ -1748,6 +1748,37 @@ external_side_effects:
 - image_binary_read: false
 ```
 
+## v7.58i memory_overview A5 Planning Package
+
+```text
+Phase: v7.58i
+Status: memory_overview_a5_planning_package_prepared
+package_status: prepared_not_requested
+A5_package_prepared: true
+A5_requested: false
+A5_granted: false
+LT06_executed: false
+allowed_route: MCP tools/call memory_overview
+search_memory_allowed: false
+record_memory_allowed: false
+native_vcp_routes_allowed: false
+absolute_zero_write_required: true
+audit_log_write_allowed: false
+observe_only_exception_granted: false
+request_A5_now: false
+execute_LT06_now: false
+real_LT06_execution_ready: false
+
+external_side_effects:
+- real_VCPToolBox_called: false
+- VCPChat_bridge_called: false
+- Electron_started: false
+- DailyNote_written: false
+- VCP_memory_written: false
+- image_generated: false
+- image_binary_read: false
+```
+
 ## Resume Instruction
 
 ```text
