@@ -1,0 +1,51 @@
+vcptoolbox_mock_call_adapter_hardening:
+  schema_version: v1
+  phase: v7_52f1
+  patch_status: completed
+  feature_expansion_performed: false
+
+  code_changes:
+    call_adapter_structured_wrapper: true
+    exit_status_captured: true
+    signal_captured: true
+    timed_out_captured: true
+    stdout_empty_captured: true
+    stderr_contains_stack_captured: true
+    adapter_response_parse_checked: true
+    adapter_crash_masking_prevented: true
+
+  mock_validation:
+    result: pass
+    cases_total: 14
+    cases_passed: 14
+    cases_failed: 0
+
+  adapter_call_wrapper:
+    structured_metadata_present: true
+    response_parsed: true
+    exit_status_checked: true
+    stdout_empty_checked: true
+    stderr_stack_checked: true
+    timed_out_checked: true
+    no_adapter_crash_masking: true
+
+  policy:
+    refs_treated_as_opaque: true
+    dereference_performed: false
+    future_dereference_requires_realpath_containment: true
+
+  external_side_effects:
+    real_vcptoolbox_call_performed: false
+    vcpchat_bridge_call_performed: false
+    electron_started: false
+    remote_debug_started: false
+    cdp_call_performed: false
+    daily_note_write_performed: false
+    vcp_memory_write_performed: false
+    image_generation_performed: false
+    image_binary_read: false
+    runs_path_read: false
+
+  next_allowed_steps:
+    - LT_07_E2E_read_only_integration_fixture_and_audit
+    - LT_06_real_VCPToolBox_read_only_dry_run_A5_only_if_explicitly_authorized

@@ -15,14 +15,29 @@ function check(name, pass, detail) {
 function callAdapter(requestJson) {
   const arg = JSON.stringify(requestJson);
   const result = spawnSync('node', [ADAPTER_SCRIPT, '--request-json', arg], {
-    encoding: 'utf-8', timeout: 5000, maxBuffer: 1024 * 1024
+    encoding: 'utf-8',
+    timeout: 5000,
+    maxBuffer: 1024 * 1024
   });
-  const stdout = (result.stdout || '').trim();
-  try {
-    return JSON.parse(stdout);
-  } catch (e) {
-    return null;
+
+  const meta = {
+    exit_status: result.status,
+    signal: result.signal,
+    timed_out: !!(result.error && result.error.code === 'ETIMEDOUT'),
+    stdout_empty: !result.stdout || result.stdout.trim().length === 0,
+    stderr_contains_stack: (result.stderr || '').includes(' at ') || (result.stderr || '').includes('Error:')
+  };
+
+  let response = null;
+  if (result.stdout && result.stdout.trim().length > 0) {
+    try {
+      response = JSON.parse(result.stdout);
+    } catch {
+      response = null;
+    }
   }
+
+  return { meta, response };
 }
 
 function checkIngestionPackage(pkg) {
@@ -50,7 +65,7 @@ function checkIngestionPackage(pkg) {
 }
 
 // Build valid ingestion package from real adapter call
-const validResp = callAdapter({
+const validAdapterCall = callAdapter({
   schema_version: 'v1',
   request_id: 'mock_ingestion_valid',
   bridge_mode: 'read_only',
@@ -67,6 +82,18 @@ const validResp = callAdapter({
   production_approved_claim_requested: false,
   reopen_closed_case_requested: false
 });
+
+const adapterMeta = validAdapterCall.meta;
+const validResp = validAdapterCall.response;
+
+// Adapter wrapper self-checks
+check('adapter_call_response_present', validResp !== null, validResp === null ? 'null response' : 'ok');
+check('adapter_call_no_timeout', !adapterMeta.timed_out, `timed_out=${adapterMeta.timed_out}`);
+check('adapter_call_stdout_not_empty', !adapterMeta.stdout_empty, `stdout_empty=${adapterMeta.stdout_empty}`);
+check('adapter_call_no_stderr_stack', !adapterMeta.stderr_contains_stack, `stderr_contains_stack=${adapterMeta.stderr_contains_stack}`);
+check('adapter_call_exit_status_ok', adapterMeta.exit_status === 0, `exit_status=${adapterMeta.exit_status}`);
+
+const adapterWrapperOk = validResp !== null && !adapterMeta.timed_out && !adapterMeta.stdout_empty && !adapterMeta.stderr_contains_stack && adapterMeta.exit_status === 0;
 
 const refsTreatedAsOpaque = true;
 
@@ -194,18 +221,27 @@ const baseSafePkg = {
     `blockers=${JSON.stringify(blockers)}`);
 }
 
-const totalChecks = Object.keys(results).length;
-const passedChecks = Object.values(results).filter(r => r.pass).length;
-const failedChecks = totalChecks - passedChecks;
+const ingestionKeys = Object.keys(results).filter(k => k.startsWith('valid_') || k.startsWith('reject_'));
+const ingestionPassed = ingestionKeys.filter(k => results[k].pass).length;
+const ingestionFailed = ingestionKeys.filter(k => !results[k].pass).length;
 
 const output = {
   vcptoolbox_read_only_ingestion_mock: {
     phase: 'v7_52d',
     execution_status: 'executed',
     result: allPass ? 'pass' : 'fail',
-    cases_total: totalChecks,
-    cases_passed: passedChecks,
-    cases_failed: failedChecks,
+    cases_total: ingestionKeys.length,
+    cases_passed: ingestionPassed,
+    cases_failed: ingestionFailed,
+    adapter_call_wrapper: {
+      structured_metadata_present: true,
+      response_parsed: validResp !== null,
+      exit_status_checked: true,
+      stdout_empty_checked: true,
+      stderr_stack_checked: true,
+      timed_out_checked: true,
+      no_adapter_crash_masking: adapterWrapperOk
+    },
     refs_treated_as_opaque: refsTreatedAsOpaque,
     dereference_performed: false,
     realpath_containment_required_for_future_dereference: true,

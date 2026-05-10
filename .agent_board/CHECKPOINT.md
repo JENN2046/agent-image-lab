@@ -1289,6 +1289,46 @@ hard_stops:
 - do_not_reopen_closed_no_memory_write_case
 ```
 
+## v7.52f1 VCPToolBox Mock callAdapter Hardening Patch
+
+```text
+Phase: v7.52f1
+Status: vcptoolbox_mock_call_adapter_hardening_completed
+patch_status: completed
+feature_expansion_performed: false
+call_adapter_structured_wrapper: true
+adapter_call_wrapper_self_checks: 5
+mock_validation_result: pass (14 ingestion cases + 5 adapter checks, 0 failed)
+refs_treated_as_opaque: true
+dereference_performed: false
+future_dereference_requires_realpath_containment: true
+real_vcptoolbox_call_performed: false
+VCPChat bridge call performed: false
+Electron started: false
+remote-debug started: false
+CDP call performed: false
+DailyNote write performed: false
+VCP memory write performed: false
+image generation performed: false
+image binary read: false
+runs path read: false
+
+current_allowed_next_steps:
+- LT-07 E2E read-only integration fixture and audit, only if explicitly authorized
+- LT-06 real VCPToolBox read-only dry-run A5, only if independently authorized
+
+hard_stops:
+- do_not_call_real_vcptoolbox_without_independent_a5
+- do_not_call_vcpchat_bridge_without_independent_authorization
+- do_not_start_electron_without_explicit_authorization
+- do_not_write_dailynote_without_independent_a5
+- do_not_write_vcp_memory_without_independent_a5
+- do_not_generate_image_without_independent_a5
+- do_not_read_image_binary
+- do_not_dereference_refs_without_realpath_containment
+- do_not_reopen_closed_no_memory_write_case
+```
+
 ## Resume Instruction
 
 ```text
