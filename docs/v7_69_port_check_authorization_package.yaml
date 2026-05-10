@@ -1,0 +1,80 @@
+v7_69_port_check_authorization_package:
+  schema_version: v1
+  package_type: authorization_package_draft
+  status: prepared_not_granted
+  phase: v7_69
+  scope: port_check_only
+  runtime_execution: false
+  port_check_executed: false
+
+  carry_forward:
+    prior_v7_68_commit: 44e50e2
+    preferred_port: 9222
+    fallback_port: 9223
+
+  exact_scope:
+    allowed_commands:
+      - id: port_check_primary
+        port: 9222
+        command: "Get-Process -Id (Get-NetTCPConnection -LocalPort 9222 -ErrorAction SilentlyContinue).OwningProcess | Select-Object ProcessName, Id"
+        platform: Windows
+        max_calls: 1
+        classification: read_only
+      - id: port_check_fallback
+        port: 9223
+        command: "Get-Process -Id (Get-NetTCPConnection -LocalPort 9223 -ErrorAction SilentlyContinue).OwningProcess | Select-Object ProcessName, Id"
+        platform: Windows
+        max_calls: 1
+        classification: read_only
+        run_condition: only if 9222 is occupied by a non-VCPChat process
+    total_max_commands: 2
+    total_max_commands_if_9222_free: 1
+    total_max_commands_if_9222_occupied: 2
+
+  permanently_forbidden:
+    - electron_launch
+    - remote_debug_start
+    - cdp_connect
+    - bridge_call
+    - cancel_call
+    - loadSession_call
+    - previewDraft_call
+    - submitDraft_call
+    - any_file_write
+    - any_DailyNote_write
+    - any_VCP_memory_write
+    - any_MCP_call
+    - any_native_vcp_route
+
+  authorization:
+    authorized_by_this_document: false
+    user_explicit_authorization_required: true
+    authorization_phrase: "批准 v7.69 端口检测"
+
+  reporting:
+    raw_port_check_output: false
+    redacted_summary_only: true
+
+  side_effects:
+    port_check_executed: false
+    real_vcpchat_accessed: false
+    electron_started: false
+    remote_debug_started: false
+    cdp_used: false
+    vcpchat_bridge_called: false
+    cancel_called: false
+    loadSession_called: false
+    previewDraft_called: false
+    submitDraft_called: false
+    mcp_codex_memory_called: false
+    search_memory_called: false
+    record_memory_called: false
+    native_vcp_routes_called: false
+    dailynote_written: false
+    vcp_memory_written: false
+    image_generated: false
+    lt06_executed: false
+
+  future_execution_requirement:
+    port_check_requires_explicit_user_authorization: true
+    lt06_a5_does_not_cover_vcpchat: true

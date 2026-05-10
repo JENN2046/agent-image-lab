@@ -2036,6 +2036,55 @@ side_effects:
 recommended_next: v7.68a Push Readiness Gate
 ```
 
+## v7.69 Port Check Authorization Package
+
+```text
+Phase: v7.69
+Status: port_check_authorization_package_prepared_not_granted
+package_type: authorization_package_draft
+scope: port_check_only
+runtime_execution: false
+port_check_executed: false
+
+authorization:
+  authorized_by_this_document: false
+  user_explicit_authorization_required: true
+  authorization_phrase: "批准 v7.69 端口检测"
+
+exact_scope:
+  primary_check_port: 9222
+  fallback_check_port: 9223
+  max_commands: 2 (1 if 9222 free)
+  command:
+    - id: port_check_primary
+      command: "Get-Process -Id (Get-NetTCPConnection -LocalPort 9222 -ErrorAction SilentlyContinue).OwningProcess | Select-Object ProcessName, Id"
+    - id: port_check_fallback
+      command: "Get-Process -Id (Get-NetTCPConnection -LocalPort 9223 -ErrorAction SilentlyContinue).OwningProcess | Select-Object ProcessName, Id"
+      run_condition: only if 9222 occupied by non-VCPChat process
+  permanently_forbidden:
+    - electron_launch
+    - remote_debug_start
+    - cdp_connect
+    - bridge_call
+    - cancel_call
+    - loadSession/previewDraft/submitDraft
+    - any_file_write
+    - any_MCP_call
+    - any_native_vcp_route
+
+side_effects:
+- port_check_executed: false
+- electron_started: false
+- remote_debug_started: false
+- cdp_used: false
+- bridge_called: false
+- cancel_called: false
+- mcp_codex_memory_called: false
+- lt06_executed: false
+
+recommended_next: v7.69a Push Readiness Gate
+```
+
 ## v7.64 VCPChat Bridge Contract Static Code Review Execution
 
 ```text
