@@ -1,0 +1,30 @@
+v7_58k_memory_overview_target_identity_base_url_lock:
+  schema_version: v1
+  phase: v7_58k
+  status: completed
+  document_type: target_identity_base_url_lock
+
+  target_identity_decision:
+    base_url_locked: false
+    A5_request_ready_to_submit: false
+    reason: base URL not yet selected by user
+    candidate_targets:
+      - VCPToolBox_embedded_6005
+      - standalone_codex_memory_7605
+
+  v7_58j_A5_request_text_status:
+    base_url_locked_in_request: false
+    blocked_until_base_url_locked: true
+
+  recommendation:
+    if_goal_is_LT06_VCPToolBox_read_only_dry_run:
+      preferred_target: VCPToolBox_embedded_6005
+      reason: LT-06 名义上是 VCPToolBox real read-only dry-run
+    if_goal_is_Codex_Memory_sidecar_observe_probe:
+      preferred_target: standalone_codex_memory_7605
+      reason: codex-memory 独立仓库默认 HTTP MCP 是 7605
+
+  preflight_non_mcp_verified:
+    port_6005_listening: true
+    port_7605_listening: true
+    mcp_endpoint_not_called: true

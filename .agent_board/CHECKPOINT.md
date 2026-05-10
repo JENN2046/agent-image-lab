@@ -1816,6 +1816,31 @@ external_side_effects:
 - image_binary_read: false
 ```
 
+## v7.58k Target Identity + Base URL Lock
+
+```text
+Phase: v7.58k
+Status: target_identity_base_url_lock_completed
+document_type: docs_only_target_identity_clarification
+base_url_locked: false
+candidate_VCPToolBox_6005: true
+candidate_standalone_codex_memory_7605: true
+A5_request_ready_to_submit: false
+A5_requested: false
+A5_granted: false
+LT06_executed: false
+mcp_endpoint_not_called: true
+
+external_side_effects:
+- real_VCPToolBox_called: false
+- mcp_codex_memory_called: false
+- VCPChat_bridge_called: false
+- DailyNote_written: false
+- VCP_memory_written: false
+- image_generated: false
+- image_binary_read: false
+```
+
 ## v7.58j Prepare Independent A5 Request Text
 
 ```text

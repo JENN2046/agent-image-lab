@@ -65,6 +65,7 @@ v7.58h Zero-write Policy Decision + memory_overview-only Route Planning — docs
 v7.58i memory_overview-only A5 Planning Package — docs-only A5 planning package prepared but not requested. LT-06 route narrowed to MCP tools/call memory_overview only under absolute zero-write policy. search_memory remains blocked under zero-write; record_memory remains permanently excluded. No A5 requested. No LT-06 execution.
 v7.58i1 memory_overview Exact Payload + Response Redaction Patch — docs-only safety hardening patch completed. Exact one-call JSON-RPC payload locked to tools/call memory_overview with empty arguments. initialize/tools_list/resources_list/ping and all fallback calls forbidden. Raw structuredContent and raw response reporting forbidden; response reports must use redacted summary only. No A5 requested. No LT-06 execution.
 v7.58j Prepare Independent A5 Request Text — docs-only A5 request text draft prepared for memory_overview-only LT-06 dry-run. Pro P2 findings handled in the request text: exact payload only, full forbidden JSON-RPC method list, numeric counts-only redacted summary policy. A5 not requested. LT-06 not executed.
+v7.58k Target Identity + Base URL Lock — docs-only target identity clarification for memory_overview A5 request text. Two candidate targets documented: VCPToolBox embedded (6005) and standalone codex-memory (7605). Base URL not locked; A5 request blocked until user selects target. A5 not requested. LT-06 not executed.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3
