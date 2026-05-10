@@ -78,6 +78,7 @@ v7.66 VCPChat cancel-only Preflight Authorization Package — docs-only cancel-o
 v7.67 Cancel Preflight Endpoint Lock and Execution Authorization Gate — docs-only endpoint lock and authorization gate. Bridge access strategy locked to remote-debug CDP: window.imageLabReview.cancel({}) via Runtime.evaluate. Cancel payload locked to {}. Max 1 call, no retry, no fallback. Exact endpoint (port) not fully locked (TBD by operator). loadSession, previewDraft, submitDraft permanently forbidden. Execution not authorized. Authorization phrase: "批准 v7.67 cancel preflight".
 v7.68 Exact Port Selection Planning — docs-only planning for exact remote-debug port. Preferred port 9222, fallback 9223. Port conflict check and Electron launch commands defined but not run. CDP endpoint format locked. All invariants maintained: exact_endpoint_fully_locked=false, execution_authorized=false.
 v7.69 Port Check Authorization Package — docs-only authorization package (prepared_not_granted) for future port conflict check. Primary 9222, fallback 9223. Max 1-2 commands. Exact PowerShell command locked. Not executed. No Electron/remote-debug/CDP/bridge/cancel.
+v7.70 Port Check Execution Authorization Gate — docs-only execution gate (prepared_not_granted) for port conflict check. Primary 9222, fallback 9223. Max 1-2 commands. Redacted summary only. Not executed. Authorization phrase: "批准 v7.70 端口检测".
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3

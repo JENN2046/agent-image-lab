@@ -1,0 +1,79 @@
+v7_70_port_check_execution_authorization_gate:
+  schema_version: v1
+  gate_type: execution_authorization_gate
+  status: prepared_not_granted
+  phase: v7_70
+  scope: port_check_execution
+  runtime_execution: false
+  port_check_executed: false
+
+  carry_forward:
+    prior_v7_69_commit: bc46ec7
+    primary_check_port: 9222
+    fallback_check_port: 9223
+
+  exact_commands:
+    primary:
+      id: port_check_9222
+      port: 9222
+      command: "Get-Process -Id (Get-NetTCPConnection -LocalPort 9222 -ErrorAction SilentlyContinue).OwningProcess | Select-Object ProcessName, Id"
+      platform: Windows
+      max_calls: 1
+      classification: read_only
+    fallback:
+      id: port_check_9223
+      port: 9223
+      command: "Get-Process -Id (Get-NetTCPConnection -LocalPort 9223 -ErrorAction SilentlyContinue).OwningProcess | Select-Object ProcessName, Id"
+      platform: Windows
+      max_calls: 1
+      classification: read_only
+      run_condition: only if 9222 occupied by non-VCPChat process
+    total_max_calls: 2
+    max_calls_if_9222_free: 1
+    max_calls_if_9222_occupied: 2
+
+  authorization:
+    authorized_by_this_document: false
+    user_explicit_authorization_required: true
+    authorization_phrase: "批准 v7.70 端口检测"
+
+  permanently_forbidden:
+    - electron_launch
+    - remote_debug_start
+    - cdp_connect
+    - bridge_call
+    - cancel_call
+    - loadSession_call
+    - previewDraft_call
+    - submitDraft_call
+    - any_file_write
+    - any_DailyNote_write
+    - any_VCP_memory_write
+    - any_MCP_call
+    - any_native_vcp_route
+
+  reporting:
+    raw_command_output: false
+    redacted_summary_only: true
+
+  side_effects:
+    port_check_executed: false
+    real_vcpchat_accessed: false
+    electron_started: false
+    remote_debug_started: false
+    cdp_used: false
+    vcpchat_bridge_called: false
+    cancel_called: false
+    loadSession_called: false
+    previewDraft_called: false
+    submitDraft_called: false
+    mcp_codex_memory_called: false
+    search_memory_called: false
+    record_memory_called: false
+    native_vcp_routes_called: false
+    dailynote_written: false
+    vcp_memory_written: false
+    image_generated: false
+    lt06_executed: false
+
+  recommended_next: v7.70a Push Readiness Gate
