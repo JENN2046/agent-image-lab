@@ -1,0 +1,38 @@
+v7_58l_memory_overview_base_url_patch:
+  schema_version: v1
+  phase: v7_58l
+  status: completed
+  patch_type: docs_only_base_url_lock
+
+  base_url_locked: true
+
+  selected_target:
+    name: VCPToolBox_embedded_6005
+    exact_base_url: http://127.0.0.1:6005
+    exact_endpoint_url: http://127.0.0.1:6005/mcp/codex-memory
+
+  excluded_target:
+    name: standalone_codex_memory_7605
+    exact_base_url: http://127.0.0.1:7605
+    selected: false
+
+  A5_request_text_status:
+    base_url_locked_in_request: true
+    ready_for_user_to_submit_independent_A5_request_later: true
+
+  execution_decision:
+    A5_requested: false
+    A5_granted: false
+    LT06_executed: false
+    request_A5_now: false
+    execute_LT06_now: false
+    real_LT06_execution_ready: false
+
+  side_effects:
+    real_VCPToolBox_called: false
+    mcp_codex_memory_called: false
+    VCPChat_bridge_called: false
+    DailyNote_written: false
+    VCP_memory_written: false
+    image_generated: false
+    image_binary_read: false

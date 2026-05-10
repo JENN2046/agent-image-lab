@@ -4,6 +4,13 @@ v7_58j_memory_overview_independent_A5_request_text:
   status: completed
   document_type: independent_A5_request_text_draft
 
+  target_identity:
+    selected_target: VCPToolBox_embedded_6005
+    exact_base_url: http://127.0.0.1:6005
+    exact_endpoint_url: http://127.0.0.1:6005/mcp/codex-memory
+    standalone_codex_memory_7605_selected: false
+    base_url_locked: true
+
   authorization:
     A5_requested_by_this_document: false
     A5_granted: false

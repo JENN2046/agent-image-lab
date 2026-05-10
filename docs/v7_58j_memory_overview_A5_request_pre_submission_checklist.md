@@ -21,6 +21,9 @@ A5_request_pre_submission_checklist:
     - raw_response_forbidden
     - raw_structuredContent_forbidden
     - second_call_requires_new_independent_A5
+    - base_url_locked_to_VCPToolBox_6005
+    - exact_endpoint_url_matches_6005
+    - standalone_codex_memory_7605_not_selected
 
   still_not_allowed:
     - execute_LT06

@@ -29,6 +29,12 @@ independent_A5_request_text:
 ## 2. Exact Route
 
 ```yaml
+target_identity:
+  selected_target: VCPToolBox_embedded_6005
+  exact_base_url: http://127.0.0.1:6005
+  exact_endpoint_url: http://127.0.0.1:6005/mcp/codex-memory
+  standalone_codex_memory_7605_selected: false
+
 exact_route:
   transport: MCP_JSON_RPC
   http_method: POST
@@ -256,10 +262,15 @@ A5 REQUEST DRAFT — NOT SUBMITTED BY THIS DOCUMENT
 
 I request independent A5 authorization for exactly one real read-only LT-06 dry-run call using only:
 
-POST /mcp/codex-memory
+POST http://127.0.0.1:6005/mcp/codex-memory
 JSON-RPC method: tools/call
 tool: memory_overview
 arguments: {}
+
+This request targets the VCPToolBox embedded MCP route on port 6005.
+It does not target the standalone codex-memory sidecar on port 7605.
+
+本请求目标是 VCPToolBox 后端 6005 内嵌 MCP 路由，不是 7605 独立 codex-memory sidecar。
 
 Exact payload:
 {

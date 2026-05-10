@@ -1816,6 +1816,34 @@ external_side_effects:
 - image_binary_read: false
 ```
 
+## v7.58l memory_overview Base URL Patch
+
+```text
+Phase: v7.58l
+Status: memory_overview_base_url_locked
+patch_type: docs_only_base_url_lock
+selected_target: VCPToolBox_embedded_6005
+exact_base_url: http://127.0.0.1:6005
+exact_endpoint_url: http://127.0.0.1:6005/mcp/codex-memory
+standalone_codex_memory_7605_selected: false
+A5_request_text_patched: true
+A5_requested: false
+A5_granted: false
+LT06_executed: false
+request_A5_now: false
+execute_LT06_now: false
+real_LT06_execution_ready: false
+
+external_side_effects:
+- real_VCPToolBox_called: false
+- mcp_codex_memory_called: false
+- VCPChat_bridge_called: false
+- DailyNote_written: false
+- VCP_memory_written: false
+- image_generated: false
+- image_binary_read: false
+```
+
 ## v7.58k Target Identity + Base URL Lock
 
 ```text
