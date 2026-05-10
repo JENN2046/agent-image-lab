@@ -1,0 +1,34 @@
+evidence_gap_closure_closeout:
+  schema_version: v1
+  phase: v7_55i
+  closeout_status: completed
+
+  source_availability_checked: true
+  vcptoolbox_repo_available: true
+  vcpchat_repo_available: true
+
+  vcptoolbox_gap_closed: true
+  vcpchat_gap_closed: true
+
+  execution_performed: false
+  authorization_requested: false
+  authorization_granted: false
+  real_vcptoolbox_call_performed: false
+  vcpchat_bridge_call_performed: false
+  electron_started: false
+  remote_debug_started: false
+  cdp_call_performed: false
+  daily_note_write_performed: false
+  vcp_memory_write_performed: false
+  image_generation_performed: false
+  image_binary_read: false
+  runs_path_read: false
+
+  real_LT06_execution_ready: false
+  request_A5_now: false
+  production_candidate_002_now: false
+  memory_write_path_now: false
+
+  next_allowed_steps:
+    - v7_56_LT06_A5_execution_package_finalization_only_if_gaps_closed
+    - stop_and_hold
