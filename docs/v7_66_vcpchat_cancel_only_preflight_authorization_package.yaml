@@ -1,0 +1,77 @@
+v7_66_vcpchat_cancel_only_preflight_authorization_package:
+  schema_version: v1
+  package_type: authorization_package_draft
+  status: prepared_not_granted
+  phase: v7_66
+  scope: cancel_only_preflight
+  runtime_execution_authorized: false
+  based_on_static_evidence: v7.64
+
+  carry_forward:
+    prior_v7_65_commit: 5a3b4e4
+    cancel_classification: read_only
+    cancel_role: optional_preflight_probe
+    lt06_a5_does_not_cover_vcpchat: true
+
+  v7_65_post_push_minor_note_resolution:
+    documented_bridge_methods_complete: true
+    no_methods_beyond_v7_64_inventory: true
+    extra_method_cancel_documented: true
+
+  authorization:
+    A5_requested_by_this_document: false
+    A5_granted: false
+    execution_authorized: false
+
+  exact_scope:
+    allowed_method_if_later_authorized:
+      - method: imageLabReview.cancel
+        max_calls: 1
+    total_max_calls: 1
+
+    permanently_forbidden_in_this_package:
+      - method: imageLabReview.loadSession
+      - method: imageLabReview.previewDraft
+      - method: imageLabReview.submitDraft
+
+    constraints:
+      cancel_does_not_replace_loadSession_or_previewDraft: true
+      cancel_only_checks_bridge_availability: true
+
+  endpoint_lock:
+    exact_endpoint_locked: false
+    execution_blocked_if_not_locked: true
+
+  reporting:
+    raw_bridge_response_allowed: false
+    raw_structuredContent_allowed: false
+    redacted_summary_only: true
+
+  method_inventory_clarification:
+    documented_bridge_methods_complete: true
+    no_methods_beyond_v7_64_inventory: true
+    extra_method_cancel_documented: true
+
+  side_effects:
+    real_vcpchat_accessed: false
+    electron_started: false
+    remote_debug_started: false
+    cdp_used: false
+    vcpchat_bridge_called: false
+    cancel_called: false
+    loadSession_called: false
+    previewDraft_called: false
+    submitDraft_called: false
+    mcp_codex_memory_called: false
+    search_memory_called: false
+    record_memory_called: false
+    native_vcp_routes_called: false
+    dailynote_written: false
+    vcp_memory_written: false
+    image_generated: false
+    lt06_executed: false
+
+  future_execution_required:
+    requires_new_independent_authorization: true
+    lt06_a5_does_not_cover_vcpchat: true
+    exact_endpoint_lock_required: true
