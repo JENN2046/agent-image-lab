@@ -6,6 +6,11 @@ v7_70_port_check_execution_authorization_gate_closeout:
   runtime_execution: false
 
   port_check_execution_gate_defined: true
+  port_check_command_hardened: true
+  free_port_case_defined: true
+  occupied_by_vcpchat_case_defined: true
+  occupied_by_other_case_defined: true
+  check_error_case_defined: true
   primary_check_port: 9222
   fallback_check_port: 9223
   exact_port_check_commands_locked: true

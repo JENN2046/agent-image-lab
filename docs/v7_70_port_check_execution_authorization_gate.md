@@ -49,10 +49,19 @@ exact_commands:
   primary_command:
     id: port_check_9222
     port: 9222
+    robust_spec: |
+      Query Get-NetTCPConnection -LocalPort 9222.
+      - No connection found   → "port_9222_status: free"
+      - Owning process name matches "electron" → "port_9222_status: occupied_by_vcpchat"
+      - Owning process name is something else  → "port_9222_status: occupied_by_other"
+      - Get-Process errors on the PID          → "port_9222_status: check_error"
     command: >
-      Get-Process -Id (Get-NetTCPConnection -LocalPort 9222
-      -ErrorAction SilentlyContinue).OwningProcess
-      | Select-Object ProcessName, Id
+      $c=Get-NetTCPConnection -LocalPort 9222 -ErrorAction 0;
+      if(!$c){'port_9222_status: free';exit};
+      $p=Get-Process -Id $c.OwningProcess -ErrorAction 0;
+      if(!$p){'port_9222_status: check_error';exit};
+      if($p.ProcessName-eq'electron'){'port_9222_status: occupied_by_vcpchat'}
+      else{'port_9222_status: occupied_by_other'}
     platform: Windows
     max_calls: 1
     run_condition: always
@@ -61,10 +70,16 @@ exact_commands:
   fallback_command:
     id: port_check_9223
     port: 9223
+    robust_spec: |
+      Query Get-NetTCPConnection -LocalPort 9223.
+      Same 4-case output as primary: free / occupied_by_vcpchat / occupied_by_other / check_error.
     command: >
-      Get-Process -Id (Get-NetTCPConnection -LocalPort 9223
-      -ErrorAction SilentlyContinue).OwningProcess
-      | Select-Object ProcessName, Id
+      $c=Get-NetTCPConnection -LocalPort 9223 -ErrorAction 0;
+      if(!$c){'port_9223_status: free';exit};
+      $p=Get-Process -Id $c.OwningProcess -ErrorAction 0;
+      if(!$p){'port_9223_status: check_error';exit};
+      if($p.ProcessName-eq'electron'){'port_9223_status: occupied_by_vcpchat'}
+      else{'port_9223_status: occupied_by_other'}
     platform: Windows
     max_calls: 1
     run_condition: only if 9222 is occupied by a non-VCPChat process
@@ -121,8 +136,8 @@ reporting:
   redacted_summary_only: true
 
   allowed_report_fields:
-    - port_9222_status (free / occupied_by_vcpchat / occupied_by_other)
-    - port_9223_status (free / occupied_by_vcpchat / occupied_by_other)
+    - port_9222_status (free / occupied_by_vcpchat / occupied_by_other / check_error)
+    - port_9223_status (free / occupied_by_vcpchat / occupied_by_other / check_error)
     - total_commands_executed (1 or 2)
     - selected_port_if_9222_free
     - redacted_owning_process_name

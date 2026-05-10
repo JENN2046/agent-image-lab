@@ -2137,6 +2137,36 @@ side_effects:
 recommended_next: v7.70a Push Readiness Gate
 ```
 
+## v7.70b Port Check Command Robustness Patch
+
+```text
+Phase: v7.70b
+Status: port_check_command_robustness_patch_completed
+patch_type: docs_only_command_hardening
+
+command_hardening:
+  free_port_case_defined: true
+  occupied_by_vcpchat_case_defined: true
+  occupied_by_other_case_defined: true
+  check_error_case_defined: true
+
+robust_command:
+  primary: "$c=Get-NetTCPConnection -LocalPort 9222 -ErrorAction 0;if(!$c){'port_9222_status: free';exit};..."
+  fallback: "$c=Get-NetTCPConnection -LocalPort 9223 -ErrorAction 0;if(!$c){'port_9223_status: free';exit};..."
+
+side_effects:
+- port_check_executed: false
+- electron_started: false
+- remote_debug_started: false
+- cdp_used: false
+- bridge_called: false
+- cancel_called: false
+- mcp_codex_memory_called: false
+- lt06_executed: false
+
+recommended_next: v7.70c Push Readiness Gate
+```
+
 ## v7.64 VCPChat Bridge Contract Static Code Review Execution
 
 ```text

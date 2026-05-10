@@ -2,7 +2,7 @@
 
 ## Summary
 
-Phase v7.70 completed as a docs-only port check execution authorization gate (prepared_not_granted). Primary port 9222, fallback 9223, max 1-2 commands depending on occupancy. Exact commands locked. Redacted summary only. Execution requires user phrase `"批准 v7.70 端口检测"`. Not executed.
+Phase v7.70 completed as a docs-only port check execution authorization gate (prepared_not_granted). Primary port 9222, fallback 9223, max 1-2 commands depending on occupancy. **Port check command hardened: 4-case output (free/occupied_by_vcpchat/occupied_by_other/check_error) with robust null-handling.** Redacted summary only. Execution requires user phrase `"批准 v7.70 端口检测"`. Not executed.
 
 ## v7.69 Post-push Notes
 
@@ -39,6 +39,11 @@ Phase v7.70 completed as a docs-only port check execution authorization gate (pr
 ## Final State
 
 - port_check_execution_gate_defined: true
+- port_check_command_hardened: true
+- free_port_case_defined: true
+- occupied_by_vcpchat_case_defined: true
+- occupied_by_other_case_defined: true
+- check_error_case_defined: true
 - primary_check_port: 9222
 - fallback_check_port: 9223
 - exact_port_check_commands_locked: true

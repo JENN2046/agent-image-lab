@@ -16,14 +16,24 @@ v7_70_port_check_execution_authorization_gate:
     primary:
       id: port_check_9222
       port: 9222
-      command: "Get-Process -Id (Get-NetTCPConnection -LocalPort 9222 -ErrorAction SilentlyContinue).OwningProcess | Select-Object ProcessName, Id"
+      robust_spec:
+        - "no connection:         'port_9222_status: free'"
+        - "owning process=electron: 'port_9222_status: occupied_by_vcpchat'"
+        - "owning process=other:    'port_9222_status: occupied_by_other'"
+        - "Get-Process error:       'port_9222_status: check_error'"
+      command: "$c=Get-NetTCPConnection -LocalPort 9222 -ErrorAction 0;if(!$c){'port_9222_status: free';exit};$p=Get-Process -Id $c.OwningProcess -ErrorAction 0;if(!$p){'port_9222_status: check_error';exit};if($p.ProcessName-eq'electron'){'port_9222_status: occupied_by_vcpchat'}else{'port_9222_status: occupied_by_other'}"
       platform: Windows
       max_calls: 1
       classification: read_only
     fallback:
       id: port_check_9223
       port: 9223
-      command: "Get-Process -Id (Get-NetTCPConnection -LocalPort 9223 -ErrorAction SilentlyContinue).OwningProcess | Select-Object ProcessName, Id"
+      robust_spec:
+        - "no connection:         'port_9223_status: free'"
+        - "owning process=electron: 'port_9223_status: occupied_by_vcpchat'"
+        - "owning process=other:    'port_9223_status: occupied_by_other'"
+        - "Get-Process error:       'port_9223_status: check_error'"
+      command: "$c=Get-NetTCPConnection -LocalPort 9223 -ErrorAction 0;if(!$c){'port_9223_status: free';exit};$p=Get-Process -Id $c.OwningProcess -ErrorAction 0;if(!$p){'port_9223_status: check_error';exit};if($p.ProcessName-eq'electron'){'port_9223_status: occupied_by_vcpchat'}else{'port_9223_status: occupied_by_other'}"
       platform: Windows
       max_calls: 1
       classification: read_only
