@@ -1,0 +1,107 @@
+v7_64_vcpchat_bridge_contract_static_code_review_execution:
+  schema_version: v1
+  phase: v7_64
+  status: completed
+  static_code_review_execution: true
+  runtime_execution: false
+
+  review_source: v7_63_static_code_review_package
+  search_root: VCPChat_workspace_root
+
+  file_inventory:
+    files_found: 4
+    files:
+      - preloads/chat.js
+      - modules/ipc/imageLabReviewHandlers.js
+      - modules/renderer/imageLabReviewMount.js
+      - main.js
+
+  bridge_surface:
+    api_name: imageLabReview
+    contextBridge_exposure_found: true
+    contextBridge_file: preloads/chat.js
+    contextBridge_line: 102
+    methods_exposed:
+      - loadSession
+      - previewDraft
+      - submitDraft
+      - cancel
+    ipc_mechanism: ops.invoke (ipcRenderer.invoke wrapper)
+
+  ipc_handlers:
+    handler_file: modules/ipc/imageLabReviewHandlers.js
+    handler_registration: ipcMain.handle
+    sender_validation: true
+    channels:
+      - imageLabReview.loadSession
+      - imageLabReview.previewDraft
+      - imageLabReview.submitDraft
+      - imageLabReview.cancel
+
+  classification:
+    loadSession:
+      classification: read_only
+      write_operations: false
+      handler_type: in_memory_draft_only
+
+    previewDraft:
+      classification: read_only
+      write_operations: false
+      handler_type: in_memory_draft_bundle_only
+
+    submitDraft:
+      classification: write_capable
+      write_operations: false
+      designated_write_path: true
+      exclusion: permanent
+      response_fields:
+        stored: false
+        submitted_to_daily_note: false
+        submitted_to_vcp_memory: false
+
+    cancel:
+      classification: read_only
+      write_operations: false
+      extra_method_not_previously_documented: true
+
+  extra_methods:
+    - cancel
+    extra_method_count: 1
+    all_extra_methods_read_only: true
+
+  security_gates:
+    bridge_contract_statically_reviewed: true
+    loadSession_read_only_proven: true
+    previewDraft_read_only_proven: true
+    submitDraft_exclusion_documented: true
+    exact_endpoint_locked: false
+    no_other_bridge_methods_found: false
+    cancel_method_documented: true
+
+  redaction_compliance:
+    absolute_paths_recorded: false
+    private_paths_recorded: false
+    full_file_content_included: false
+    tokens_or_secrets_recorded: false
+    redacted_evidence_only: true
+
+  side_effects:
+    real_vcpchat_accessed: false
+    electron_started: false
+    remote_debug_started: false
+    cdp_used: false
+    bridge_called: false
+    ipc_runtime_called: false
+    loadSession_called: false
+    previewDraft_called: false
+    submitDraft_called: false
+    mcp_codex_memory_called: false
+    search_memory_called: false
+    record_memory_called: false
+    native_vcp_routes_called: false
+    dailynote_written: false
+    vcp_memory_written: false
+    image_generated: false
+    lt06_executed: false
+
+  next_recommended_phase: v7.64a Push Readiness Gate
