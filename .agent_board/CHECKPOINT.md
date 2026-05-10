@@ -1939,6 +1939,56 @@ side_effects:
 recommended_next: v7.66a Push Readiness Gate
 ```
 
+## v7.67 Cancel Preflight Endpoint Lock and Execution Authorization Gate
+
+```text
+Phase: v7.67
+Status: cancel_preflight_endpoint_lock_and_authorization_gate_prepared
+gate_type: endpoint_lock_and_execution_authorization_gate
+package_status: prepared_not_granted
+runtime_execution_authorized: false
+
+endpoint_lock:
+  strategy: remote_debug_cdp
+  electron_target: VCPChat
+  remote_debug_port_candidate: 9222
+  cdp_endpoint: http://127.0.0.1:<remote_debug_port>
+  target_discovery: /json
+  bridge_access: Runtime.evaluate("window.imageLabReview.cancel({})")
+
+exact_cancel_payload:
+  payload: {}
+  max_calls: 1
+  retry_allowed: false
+  fallback_allowed: false
+  response: redacted_summary_only
+
+permanently_forbidden:
+  - imageLabReview.loadSession
+  - imageLabReview.previewDraft
+  - imageLabReview.submitDraft
+  - any_other_bridge_method
+  - any_MCP_call
+  - any_native_vcp_route
+
+execution_authorized: false
+user_explicit_authorization_required: true
+authorization_phrase: "批准 v7.67 cancel preflight"
+
+side_effects:
+- real_vcpchat_accessed: false
+- electron_started: false
+- bridge_called: false
+- cancel_called: false
+- loadSession_called: false
+- previewDraft_called: false
+- submitDraft_called: false
+- mcp_codex_memory_called: false
+- lt06_executed: false
+
+recommended_next: v7.67a Push Readiness Gate
+```
+
 ## v7.64 VCPChat Bridge Contract Static Code Review Execution
 
 ```text

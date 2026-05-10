@@ -1,0 +1,100 @@
+v7_67_cancel_preflight_endpoint_lock_and_authorization_gate:
+  schema_version: v1
+  gate_type: endpoint_lock_and_execution_authorization_gate
+  status: prepared_not_granted
+  phase: v7_67
+  scope: cancel_preflight_endpoint_lock
+  runtime_execution_authorized: false
+  based_on_static_evidence: v7.64
+  carry_forward:
+    prior_v7_66_commit: d24c716
+    cancel_classification: read_only
+    cancel_role: optional_preflight_probe
+
+  endpoint_lock:
+    bridge_access_strategy: remote_debug_cdp
+    electron_target: VCPChat
+    remote_debug_port_candidate: 9222
+    remote_debug_port_alternative: 9223
+    cdp_endpoint: http://127.0.0.1:<remote_debug_port>
+    target_discovery_path: /json
+    renderer_target_selector: type == "page" && url contains "index.html"
+    bridge_method: imageLabReview.cancel
+    execution_expression: window.imageLabReview.cancel({})
+    probe_expression: window.imageLabReview !== undefined
+    exact_endpoint_locked: true
+
+  payload:
+    method: imageLabReview.cancel
+    payload: {}
+    expression: window.imageLabReview.cancel({})
+    max_calls: 1
+    retry_allowed: false
+    fallback_allowed: false
+    response_structure:
+      expected: "{ cancelled: true }"
+      raw_response_allowed: false
+      redacted_summary_only: true
+
+  execution_authorization:
+    authorized_by_this_document: false
+    user_explicit_authorization_required: true
+    authorization_blocked_until_all_conditions_met: true
+    all_preconditions_met: false
+    execution_ready: false
+
+  permanently_forbidden_in_this_gate:
+    - method: imageLabReview.loadSession
+    - method: imageLabReview.previewDraft
+    - method: imageLabReview.submitDraft
+    - method: any_other_bridge_method
+    - action: electron_close
+    - action: any_file_write
+    - action: any_DailyNote_write
+    - action: any_VCP_memory_write
+    - action: any_image_generation
+    - action: any_MCP_call
+    - action: any_native_vcp_route_call
+
+  abort_conditions:
+    - method_not_cancel
+    - cancel_called_more_than_once
+    - loadSession_proposed_or_detected
+    - previewDraft_proposed_or_detected
+    - submitDraft_proposed_or_detected
+    - bridge_surface_not_available
+    - cdp_connection_failed_after_max_attempts
+    - electron_launch_failed
+    - any_file_write_detected
+    - any_DailyNote_write_detected
+    - any_VCP_memory_write_detected
+
+  reporting:
+    raw_bridge_response_allowed: false
+    raw_structuredContent_allowed: false
+    redacted_summary_only: true
+    private_path_exposure_forbidden: true
+
+  side_effects:
+    real_vcpchat_accessed: false
+    electron_started: false
+    remote_debug_started: false
+    cdp_used: false
+    vcpchat_bridge_called: false
+    cancel_called: false
+    loadSession_called: false
+    previewDraft_called: false
+    submitDraft_called: false
+    mcp_codex_memory_called: false
+    search_memory_called: false
+    record_memory_called: false
+    native_vcp_routes_called: false
+    dailynote_written: false
+    vcp_memory_written: false
+    image_generated: false
+    lt06_executed: false
+
+  future_execution_requirement:
+    requires_new_independent_authorization: true
+    lt06_a5_does_not_cover_vcpchat: true
+    authorization_phrase: "批准 v7.67 cancel preflight"
