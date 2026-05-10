@@ -1,0 +1,64 @@
+v7_58j_memory_overview_independent_A5_request_text:
+  schema_version: v1
+  phase: v7_58j
+  status: completed
+  document_type: independent_A5_request_text_draft
+
+  authorization:
+    A5_requested_by_this_document: false
+    A5_granted: false
+    LT06_execution_authorized: false
+
+  exact_route:
+    transport: MCP_JSON_RPC
+    endpoint: POST /mcp/codex-memory
+    jsonrpc_method: tools/call
+    tool_name: memory_overview
+
+  exact_payload:
+    jsonrpc: "2.0"
+    id: lt06-memory-overview-001
+    method: tools/call
+    params:
+      name: memory_overview
+      arguments: {}
+
+  forbidden_jsonrpc_methods:
+    - initialize
+    - notifications/initialized
+    - ping
+    - tools/list
+    - resources/list
+    - resources/templates/list
+
+  forbidden_tools:
+    - search_memory
+    - record_memory
+
+  forbidden_routes:
+    - POST /v1/human/tool
+    - POST /v1/chat/completions
+    - POST /v1/chatvcp/completions
+    - POST /plugin-callback/:pluginName/:taskId
+
+  one_call_policy:
+    max_real_calls: 1
+    retry_allowed: false
+    fallback_allowed: false
+    second_call_requires_new_independent_A5: true
+
+  response_reporting:
+    raw_structuredContent_allowed: false
+    raw_response_allowed: false
+    redacted_summary_only: true
+    numeric_counts_only: true
+    sample_values_allowed: false
+    file_basenames_allowed: false
+    path_suffixes_allowed: false
+    memory_id_prefixes_allowed: false
+    raw_recent_item_excerpts_allowed: false
+
+  execution_decision:
+    request_A5_now: false
+    execute_LT06_now: false
+    real_LT06_execution_ready: false
