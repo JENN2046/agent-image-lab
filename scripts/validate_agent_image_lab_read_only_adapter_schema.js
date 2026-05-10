@@ -6,6 +6,7 @@ const ADAPTER_SCRIPT = path.resolve(__dirname, 'agent_image_lab_read_only_adapte
 
 let allPass = true;
 const results = {};
+const runAdapterCalls = [];
 
 function check(name, pass, detail) {
   results[name] = { pass, detail };
@@ -20,15 +21,31 @@ function runAdapter(requestJson) {
     maxBuffer: 1024 * 1024
   });
 
-  if (result.error) {
-    return { status: 'failed', error_message: `execution error: ${result.error.message}` };
+  const parsed = {
+    exit_status: result.status,
+    signal: result.signal,
+    timed_out: !!(result.error && result.error.code === 'ETIMEDOUT'),
+    stdout_empty: !result.stdout || result.stdout.trim().length === 0,
+    stderr_contains_stack: (result.stderr || '').includes(' at ') || (result.stderr || '').includes('Error:'),
+  };
+
+  let response = null;
+  if (result.stdout && result.stdout.trim().length > 0) {
+    try {
+      response = JSON.parse(result.stdout);
+    } catch (e) {
+      // Not valid JSON — caught by crash masking
+    }
   }
 
-  try {
-    return JSON.parse(result.stdout);
-  } catch (e) {
-    return { status: 'failed', error_message: 'invalid JSON from adapter', stderr: (result.stderr || '').trim() };
-  }
+  runAdapterCalls.push({ parsed, response });
+
+  if (response) return response;
+  return {
+    status: 'failed',
+    error_message: 'invalid JSON from adapter',
+    stderr: (result.stderr || '').trim()
+  };
 }
 
 function refsAreRepositoryRelative(refs) {
@@ -127,6 +144,39 @@ function refsAreRepositoryRelative(refs) {
   check('unknown_requested_resource_status', resp.status === 'not_found', `status=${resp.status}`);
 }
 
+// Malformed input test cases (8 cases)
+const malformedGroup = [
+  { input: null, label: 'malformed_null_input' },
+  { input: [], label: 'malformed_array_input' },
+  { input: 'string', label: 'malformed_string_input' },
+  { input: 123, label: 'malformed_number_input' },
+  { input: true, label: 'malformed_boolean_input' },
+  { input: {}, label: 'malformed_empty_object' },
+  { input: { bridge_mode: 'read_only' }, label: 'malformed_partial_no_bridge_mode' },
+  { input: { case_id: 'french_summer_rattan_bag_v3_production_candidate_001' }, label: 'malformed_partial_no_payload_type' }
+];
+
+malformedGroup.forEach(({ input, label }) => {
+  const resp = runAdapter(input);
+  check(`${label}_json_output`, typeof resp === 'object' && resp !== null, typeof resp);
+  check(`${label}_valid_status`, ['blocked', 'failed'].includes(resp.status), `status=${resp.status}`);
+  check(`${label}_blocker_count`, Array.isArray(resp.blocked_reasons) && resp.blocked_reasons.length === 1, JSON.stringify(resp.blocked_reasons));
+  check(`${label}_empty_refs`, Array.isArray(resp.returned_resource_refs) && resp.returned_resource_refs.length === 0, JSON.stringify(resp.returned_resource_refs));
+  const se = resp.external_side_effects || {};
+  check(`${label}_side_effects`,
+    se.vcp_call_performed === false &&
+    se.vcpchat_bridge_call_performed === false &&
+    se.electron_started === false &&
+    se.remote_debug_started === false &&
+    se.cdp_call_performed === false &&
+    se.daily_note_write_performed === false &&
+    se.vcp_memory_write_performed === false &&
+    se.image_generation_performed === false &&
+    se.image_binary_read === false &&
+    se.runs_path_read === false,
+    JSON.stringify(se));
+});
+
 // Summary
 const cases = [
   { id: 'valid_text_only_request' },
@@ -134,7 +184,15 @@ const cases = [
   { id: 'unknown_case_id' },
   { id: 'invalid_payload_type' },
   { id: 'empty_request' },
-  { id: 'unknown_requested_resource' }
+  { id: 'unknown_requested_resource' },
+  { id: 'malformed_null_input' },
+  { id: 'malformed_array_input' },
+  { id: 'malformed_string_input' },
+  { id: 'malformed_number_input' },
+  { id: 'malformed_boolean_input' },
+  { id: 'malformed_empty_object' },
+  { id: 'malformed_partial_no_bridge_mode' },
+  { id: 'malformed_partial_no_payload_type' }
 ];
 
 const checksTotal = Object.keys(results).length;
@@ -157,12 +215,18 @@ const output = {
   checks_passed: checksPassed,
   checks_failed: checksFailed,
   details: results,
+  no_adapter_crash_masking: runAdapterCalls.every(c =>
+    !c.parsed.stderr_contains_stack && !c.parsed.stdout_empty && c.response !== null
+  ),
   external_side_effects: {
     vcp_call_performed: false,
     vcpchat_bridge_call_performed: false,
     electron_started: false,
+    remote_debug_started: false,
+    cdp_call_performed: false,
     daily_note_write_performed: false,
     vcp_memory_write_performed: false,
+    image_generation_performed: false,
     image_binary_read: false,
     runs_path_read: false
   }

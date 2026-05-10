@@ -6,6 +6,7 @@ const ADAPTER_SCRIPT = path.resolve(__dirname, 'agent_image_lab_read_only_adapte
 
 let allPass = true;
 const results = {};
+const runAdapterCalls = [];
 
 function check(name, pass, detail) {
   results[name] = { pass, detail };
@@ -20,15 +21,31 @@ function runAdapter(requestJson) {
     maxBuffer: 1024 * 1024
   });
 
-  if (result.error) {
-    return { status: 'failed', error_message: `execution error: ${result.error.message}` };
+  const parsed = {
+    exit_status: result.status,
+    signal: result.signal,
+    timed_out: !!(result.error && result.error.code === 'ETIMEDOUT'),
+    stdout_empty: !result.stdout || result.stdout.trim().length === 0,
+    stderr_contains_stack: (result.stderr || '').includes(' at ') || (result.stderr || '').includes('Error:'),
+  };
+
+  let response = null;
+  if (result.stdout && result.stdout.trim().length > 0) {
+    try {
+      response = JSON.parse(result.stdout);
+    } catch (e) {
+      // Not valid JSON — caught by crash masking
+    }
   }
 
-  try {
-    return JSON.parse(result.stdout);
-  } catch (e) {
-    return { status: 'failed', error_message: 'invalid JSON from adapter', stderr: (result.stderr || '').trim() };
-  }
+  runAdapterCalls.push({ parsed, response });
+
+  if (response) return response;
+  return {
+    status: 'failed',
+    error_message: 'invalid JSON from adapter',
+    stderr: (result.stderr || '').trim()
+  };
 }
 
 function refsAreRepositoryRelative(refs) {
@@ -72,8 +89,18 @@ const baseValid = {
   check('fixture_canonical_smoke_refs_relative', refsAreRepositoryRelative(resp.returned_resource_refs), 'absolute path found');
   check('fixture_canonical_smoke_no_file_content', !resp.returned_resource_refs.some(r => r.includes('\\') && r.match(/^[A-Za-z]:\\/)), 'absolute path detected');
   const se = resp.external_side_effects || {};
-  check('fixture_canonical_smoke_no_image_binary', se.image_binary_read === false, String(se.image_binary_read));
-  check('fixture_canonical_smoke_no_vcp', se.vcp_call_performed === false, String(se.vcp_call_performed));
+  check('fixture_canonical_smoke_side_effects_all_false',
+    se.vcp_call_performed === false &&
+    se.vcpchat_bridge_call_performed === false &&
+    se.electron_started === false &&
+    se.remote_debug_started === false &&
+    se.cdp_call_performed === false &&
+    se.daily_note_write_performed === false &&
+    se.vcp_memory_write_performed === false &&
+    se.image_generation_performed === false &&
+    se.image_binary_read === false &&
+    se.runs_path_read === false,
+    JSON.stringify(se));
 }
 
 // 2. all_known_resource_categories
@@ -178,6 +205,36 @@ const baseValid = {
     `reasons=${JSON.stringify(resp.blocked_reasons)}`);
 }
 
+// Path boundary tests via direct require (13 checks)
+const { isSafeRepoRelativeRef } = require('./agent_image_lab_read_only_adapter.js');
+
+const dangerousRefs = [
+  { ref: '/absolute/path/file.md', label: 'absolute_path' },
+  { ref: 'C:\\Windows\\file.md', label: 'drive_letter_backslash' },
+  { ref: 'C:file.md', label: 'drive_letter_no_slash' },
+  { ref: '../outside/file.md', label: 'dotdot_prefix' },
+  { ref: 'dir/../../outside/file.md', label: 'dotdot_nested' },
+  { ref: 'runs', label: 'runs_exact' },
+  { ref: 'runs/some_file.txt', label: 'runs_subpath' },
+  { ref: 'Runs/some_file.txt', label: 'runs_case_insensitive' },
+  { ref: 'RUNS/some_file.txt', label: 'runs_uppercase' },
+  { ref: 'image.jpg', label: 'jpg_extension' },
+  { ref: 'photo.PNG', label: 'png_extension' }
+];
+
+const safeRefs = [
+  { ref: 'README.md', label: 'readme_md' },
+  { ref: 'docs/v7_51j_adapter_pro_review_findings_patch_report.md', label: 'docs_subpath' }
+];
+
+dangerousRefs.forEach(({ ref, label }) => {
+  check(`path_guard_rejects_${label}`, isSafeRepoRelativeRef(ref) === false, `${ref} was not rejected`);
+});
+
+safeRefs.forEach(({ ref, label }) => {
+  check(`path_guard_allows_${label}`, isSafeRepoRelativeRef(ref) === true, `${ref} was not allowed`);
+});
+
 const cases = [
   { id: 'fixture_canonical_smoke' },
   { id: 'fixture_all_known' },
@@ -187,7 +244,8 @@ const cases = [
   { id: 'fixture_unknown_case_id' },
   { id: 'fixture_blocked_image_binary' },
   { id: 'fixture_blocked_memory_write' },
-  { id: 'fixture_blocked_reopen' }
+  { id: 'fixture_blocked_reopen' },
+  { id: 'path_guard' }
 ];
 
 const checksTotal = Object.keys(results).length;
@@ -218,12 +276,18 @@ const output = {
   file_content_returned: false,
   image_binary_returned: false,
   details: results,
+  no_adapter_crash_masking: runAdapterCalls.every(c =>
+    !c.parsed.stderr_contains_stack && !c.parsed.stdout_empty && c.response !== null
+  ),
   external_side_effects: {
     vcp_call_performed: false,
     vcpchat_bridge_call_performed: false,
     electron_started: false,
+    remote_debug_started: false,
+    cdp_call_performed: false,
     daily_note_write_performed: false,
     vcp_memory_write_performed: false,
+    image_generation_performed: false,
     image_binary_read: false,
     runs_path_read: false
   }

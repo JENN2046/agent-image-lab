@@ -6,6 +6,7 @@ const ADAPTER_SCRIPT = path.resolve(__dirname, 'agent_image_lab_read_only_adapte
 
 let allPass = true;
 const results = {};
+const runAdapterCalls = [];
 
 function check(name, pass, detail) {
   results[name] = { pass, detail };
@@ -20,15 +21,31 @@ function runAdapter(requestJson) {
     maxBuffer: 1024 * 1024
   });
 
-  if (result.error) {
-    return { status: 'failed', error_message: `execution error: ${result.error.message}` };
+  const parsed = {
+    exit_status: result.status,
+    signal: result.signal,
+    timed_out: !!(result.error && result.error.code === 'ETIMEDOUT'),
+    stdout_empty: !result.stdout || result.stdout.trim().length === 0,
+    stderr_contains_stack: (result.stderr || '').includes(' at ') || (result.stderr || '').includes('Error:'),
+  };
+
+  let response = null;
+  if (result.stdout && result.stdout.trim().length > 0) {
+    try {
+      response = JSON.parse(result.stdout);
+    } catch (e) {
+      // Not valid JSON — caught by crash masking
+    }
   }
 
-  try {
-    return JSON.parse(result.stdout);
-  } catch (e) {
-    return { status: 'failed', error_message: 'invalid JSON from adapter', stderr: (result.stderr || '').trim() };
-  }
+  runAdapterCalls.push({ parsed, response });
+
+  if (response) return response;
+  return {
+    status: 'failed',
+    error_message: 'invalid JSON from adapter',
+    stderr: (result.stderr || '').trim()
+  };
 }
 
 function verifyBlocked(resp, expectedReason) {
@@ -40,9 +57,14 @@ function verifyBlocked(resp, expectedReason) {
   const se = resp.external_side_effects || {};
   if (se.vcp_call_performed !== false) return 'vcp_call_performed not false';
   if (se.vcpchat_bridge_call_performed !== false) return 'vcpchat_bridge_call_performed not false';
+  if (se.electron_started !== false) return 'electron_started not false';
+  if (se.remote_debug_started !== false) return 'remote_debug_started not false';
+  if (se.cdp_call_performed !== false) return 'cdp_call_performed not false';
   if (se.daily_note_write_performed !== false) return 'daily_note_write_performed not false';
   if (se.vcp_memory_write_performed !== false) return 'vcp_memory_write_performed not false';
+  if (se.image_generation_performed !== false) return 'image_generation_performed not false';
   if (se.image_binary_read !== false) return 'image_binary_read not false';
+  if (se.runs_path_read !== false) return 'runs_path_read not false';
   return null;
 }
 
@@ -187,12 +209,18 @@ const output = {
   checks_failed: checksFailed,
   all_hard_blockers_enforced: allPass,
   details: results,
+  no_adapter_crash_masking: runAdapterCalls.every(c =>
+    !c.parsed.stderr_contains_stack && !c.parsed.stdout_empty && c.response !== null
+  ),
   external_side_effects: {
     vcp_call_performed: false,
     vcpchat_bridge_call_performed: false,
     electron_started: false,
+    remote_debug_started: false,
+    cdp_call_performed: false,
     daily_note_write_performed: false,
     vcp_memory_write_performed: false,
+    image_generation_performed: false,
     image_binary_read: false,
     runs_path_read: false
   }

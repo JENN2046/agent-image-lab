@@ -53,21 +53,20 @@ const CANONICAL_SMOKE_REQUEST = {
 };
 
 function checkHardBlockers(req) {
-  const reasons = [];
-
-  if (req.bridge_mode !== 'read_only') reasons.push('bridge_mode_not_read_only');
-  if (req.payload_type !== 'text_only_refs') reasons.push('payload_type_not_text_only_refs');
-  if (req.write_intent === true) reasons.push('write_intent_detected');
-  if (req.image_binary_requested === true) reasons.push('image_binary_requested');
-  if (req.secrets_requested === true) reasons.push('secret_requested');
-  if (req.raw_payload_requested === true) reasons.push('raw_payload_requested');
-  if (req.private_absolute_path_requested === true) reasons.push('private_absolute_path_requested');
-  if (req.memory_write_requested === true) reasons.push('memory_write_attempted');
-  if (req.dailynote_write_requested === true) reasons.push('dailynote_write_attempted');
-  if (req.production_approved_claim_requested === true) reasons.push('production_approved_claim_detected');
-  if (req.reopen_closed_case_requested === true) reasons.push('closed_case_reopen_attempted');
-
-  return reasons;
+  // Priority-based single blocker: return only the highest-priority reason
+  if (!isPlainRequestObject(req)) return ['invalid_request_shape'];
+  if (req.bridge_mode !== 'read_only') return ['bridge_mode_not_read_only'];
+  if (req.payload_type !== 'text_only_refs') return ['payload_type_not_text_only_refs'];
+  if (req.write_intent === true) return ['write_intent_detected'];
+  if (req.image_binary_requested === true) return ['image_binary_requested'];
+  if (req.secrets_requested === true) return ['secret_requested'];
+  if (req.raw_payload_requested === true) return ['raw_payload_requested'];
+  if (req.private_absolute_path_requested === true) return ['private_absolute_path_requested'];
+  if (req.memory_write_requested === true) return ['memory_write_attempted'];
+  if (req.dailynote_write_requested === true) return ['dailynote_write_attempted'];
+  if (req.production_approved_claim_requested === true) return ['production_approved_claim_detected'];
+  if (req.reopen_closed_case_requested === true) return ['closed_case_reopen_attempted'];
+  return [];
 }
 
 function externalSideEffects() {
@@ -85,10 +84,14 @@ function externalSideEffects() {
   };
 }
 
+function isPlainRequestObject(req) {
+  return req !== null && typeof req === 'object' && !Array.isArray(req);
+}
+
 function failedResponse(message) {
   return {
     schema_version: 'v1',
-    adapter_phase: 'v7_51i',
+    adapter_phase: 'v7_51j',
     adapter_runtime: 'agent_image_lab_read_only_adapter',
     status: 'failed',
     payload_type: 'text_only_refs',
@@ -105,9 +108,9 @@ function isSafeRepoRelativeRef(ref) {
   if (typeof ref !== 'string') return false;
   if (path.isAbsolute(ref)) return false;
   if (ref.startsWith('/')) return false;
-  if (/^[A-Za-z]:[\\/]/.test(ref)) return false;
+  if (/^[A-Za-z]:/.test(ref)) return false;
   if (ref.split(/[\\/]/).includes('..')) return false;
-  if (ref === 'runs' || ref.startsWith('runs/') || ref.startsWith('runs\\')) return false;
+  if (/^runs([/\\]|$)/i.test(ref)) return false;
   if (/\.(jpg|jpeg|png|webp)$/i.test(ref)) return false;
 
   const resolved = path.resolve(REPO_ROOT, ref);
@@ -148,12 +151,30 @@ function fileExistsOnDisk(ref) {
 }
 
 function processRequest(req) {
+  // Early guard for null/malformed/non-object input
+  if (!isPlainRequestObject(req)) {
+    return {
+      schema_version: 'v1',
+      adapter_phase: 'v7_51j',
+      adapter_runtime: 'agent_image_lab_read_only_adapter',
+      status: 'failed',
+      payload_type: 'text_only_refs',
+      returned_refs_only: true,
+      case_id: '',
+      current_case_state: 'closed_no_memory_write',
+      blocked_reasons: ['invalid_request_shape'],
+      error_message: 'Request must be a plain object.',
+      returned_resource_refs: [],
+      external_side_effects: externalSideEffects()
+    };
+  }
+
   const blockedReasons = checkHardBlockers(req);
 
   if (blockedReasons.length > 0) {
     return {
       schema_version: 'v1',
-      adapter_phase: 'v7_51i',
+      adapter_phase: 'v7_51j',
       adapter_runtime: 'agent_image_lab_read_only_adapter',
       status: 'blocked',
       payload_type: 'text_only_refs',
@@ -169,12 +190,12 @@ function processRequest(req) {
   if (!req.case_id || req.case_id !== 'french_summer_rattan_bag_v3_production_candidate_001') {
     return {
       schema_version: 'v1',
-      adapter_phase: 'v7_51i',
+      adapter_phase: 'v7_51j',
       adapter_runtime: 'agent_image_lab_read_only_adapter',
       status: 'not_found',
       payload_type: 'text_only_refs',
       returned_refs_only: true,
-      case_id: req.case_id,
+      case_id: req.case_id || '',
       current_case_state: 'closed_no_memory_write',
       blocked_reasons: [],
       error_message: 'Requested case_id is not available in read-only evidence index.',
@@ -188,7 +209,7 @@ function processRequest(req) {
 
   return {
     schema_version: 'v1',
-    adapter_phase: 'v7_51i',
+    adapter_phase: 'v7_51j',
     adapter_runtime: 'agent_image_lab_read_only_adapter',
     status: existingRefs.length > 0 ? 'ok' : 'not_found',
     payload_type: 'text_only_refs',
@@ -230,6 +251,7 @@ module.exports = {
   resolveRefs,
   fileExistsOnDisk,
   isSafeRepoRelativeRef,
+  isPlainRequestObject,
   EVIDENCE_MAP
 };
 
