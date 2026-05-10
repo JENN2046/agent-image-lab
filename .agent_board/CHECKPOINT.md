@@ -1843,55 +1843,52 @@ external_side_effects:
 recommended_next: v7.61 VCPChat Surface Check Authorization Package
 ```
 
-## v7.64 VCPChat Bridge Contract Static Code Review Execution
+## v7.65 VCPChat Surface Check Authorization Package v2
 
 ```text
-Phase: v7.64
-Status: vcpchat_bridge_contract_static_code_review_execution_completed
-static_code_review_execution: true
-runtime_execution: false
-search_root: VCPChat_workspace_root
-files_found: 4
+Phase: v7.65
+Status: vcpchat_surface_check_authorization_package_v2_prepared
+based_on_static_evidence: v7.64
+package_type: authorization_package_draft
+package_status: prepared_not_granted
+runtime_execution_authorized: false
 
-bridge_surface:
-  api_name: imageLabReview
-  exposure_file: preloads/chat.js
-  methods: [loadSession, previewDraft, submitDraft, cancel]
+allowed_by_default:
+  - imageLabReview.loadSession (max 1) [read_only]
+  - imageLabReview.previewDraft (max 1) [read_only]
+total_max_calls_default: 2
 
-classification:
-  loadSession: read_only
-  previewDraft: read_only
-  submitDraft: write_capable (permanently excluded)
-  cancel: read_only (extra method)
+excluded:
+  - imageLabReview.submitDraft [write_capable, permanent]
+  - imageLabReview.cancel [read_only, default_blocked]
 
-extra_methods_found: true
-extra_methods_list: [cancel]
-extra_methods_read_only: true
+cancel_status:
+  discovered_in_static_review: true
+  default_allowed: false
+  requires_explicit_user_decision: true
+  if_authorized_max_calls: 1
+  if_authorized_revised_total: 3
 
-security_gates:
-  bridge_contract_statically_reviewed: true
-  loadSession_read_only_proven: true
-  previewDraft_read_only_proven: true
-  submitDraft_exclusion_documented: true
-  exact_endpoint_locked: false
-  no_other_bridge_methods_found: false
+endpoint_locked: false
+execution_blocked_if_not_locked: true
 
-absolute_paths_recorded: false
-redacted_evidence_only: true
+A5_requested: false
+A5_granted: false
+execution_authorized: false
+lt06_a5_does_not_cover_vcpchat: true
 
 side_effects:
 - real_vcpchat_accessed: false
 - electron_started: false
 - bridge_called: false
-- ipc_runtime_called: false
 - all_methods_uncalled: true
 - mcp_codex_memory_called: false
 - lt06_executed: false
 
-recommended_next: v7.64a Push Readiness Gate
+recommended_next: v7.65a Push Readiness Gate
 ```
 
-## v7.63 VCPChat Bridge Contract Static Code Review Package
+## v7.64 VCPChat Bridge Contract Static Code Review Execution
 
 ```text
 Phase: v7.62

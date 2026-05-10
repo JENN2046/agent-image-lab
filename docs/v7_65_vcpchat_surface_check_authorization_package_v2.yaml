@@ -1,0 +1,102 @@
+v7_65_vcpchat_surface_check_authorization_package_v2:
+  schema_version: v1
+  package_type: authorization_package_draft
+  status: prepared_not_granted
+  phase: v7_65
+  based_on_static_evidence: v7.64
+  runtime_execution_authorized: false
+
+  carry_forward:
+    prior_v7_64_commit: f84a5f1
+    static_code_review_source: v7.64
+    lt06_a5_does_not_cover_vcpchat: true
+
+  authorization:
+    A5_requested_by_this_document: false
+    A5_granted: false
+    execution_authorized: false
+
+  exact_scope:
+    default_allowed_methods:
+      - method: imageLabReview.loadSession
+        max_calls: 1
+        purpose: load review session draft
+      - method: imageLabReview.previewDraft
+        max_calls: 1
+        purpose: preview draft bundle
+    total_max_calls: 2
+    cannot_use_cancel_as_substitute: true
+
+    optional_preflight_method:
+      method: imageLabReview.cancel
+      default_allowed: false
+      requires_explicit_user_decision: true
+      discovered_extra_method: true
+      classification: read_only
+      purpose: bridge heartbeat / sender validation / IPC path check
+      max_calls_if_authorized: 1
+      cannot_substitute_for_loadSession_or_previewDraft: true
+
+    permanently_forbidden_methods:
+      - method: imageLabReview.submitDraft
+        exclusion: permanent
+        can_never_be_added_to_allowlist: true
+
+    cancel_if_authorized:
+      recommended_role: preflight_probe
+      max_calls: 1
+      revised_total_max_calls: 3
+      recommended_execution_order:
+        - 1. imageLabReview.cancel (preflight probe)
+        - 2. imageLabReview.loadSession
+        - 3. imageLabReview.previewDraft
+
+    cancel_if_not_authorized:
+      cancel_must_not_be_called: true
+      total_max_calls: 2
+      execution_order:
+        - 1. imageLabReview.loadSession
+        - 2. imageLabReview.previewDraft
+
+  cancel_future_test_route:
+    - phase: v7.66
+      action: cancel_only_preflight_authorization_package
+      description: docs-only authorization package for cancel-only preflight
+    - phase: v7.67
+      action: execute_exactly_one_cancel_call
+      description: execute one cancel call after explicit authorization
+    cannot_skip_both_phases_require_independent_authorization: true
+    cancel_standalone_authorization_must_precede_v7_65_execution: true
+
+  endpoint_lock:
+    exact_endpoint_locked: false
+    execution_blocked_if_not_locked: true
+
+  reporting:
+    raw_bridge_response_allowed: false
+    raw_structuredContent_allowed: false
+    redacted_summary_only: true
+
+  side_effects:
+    real_vcpchat_accessed: false
+    electron_started: false
+    remote_debug_started: false
+    cdp_used: false
+    vcpchat_bridge_called: false
+    loadSession_called: false
+    previewDraft_called: false
+    submitDraft_called: false
+    cancel_called: false
+    mcp_codex_memory_called: false
+    search_memory_called: false
+    record_memory_called: false
+    native_vcp_routes_called: false
+    dailynote_written: false
+    vcp_memory_written: false
+    image_generated: false
+    lt06_executed: false
+
+  future_authorization_required:
+    requires_new_independent_authorization: true
+    lt06_a5_does_not_cover_vcpchat: true
+    exact_endpoint_lock_required: true

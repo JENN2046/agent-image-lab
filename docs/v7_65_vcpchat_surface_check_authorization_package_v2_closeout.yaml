@@ -1,0 +1,40 @@
+v7_65_vcpchat_surface_check_authorization_package_v2_closeout:
+  schema_version: v1
+  phase: v7_65
+  closeout_status: completed
+  based_on_static_evidence: v7.64
+  runtime_execution: false
+
+  authorization_package_v2_defined: true
+  default_allowed_methods_defined: true
+  loadSession_allowed_by_default: true
+  previewDraft_allowed_by_default: true
+  cancel_preflight_probe_defined: true
+  cancel_allowed_by_default: false
+  cancel_requires_explicit_user_decision: true
+  cancel_future_test_route_defined: true
+  submitDraft_permanently_forbidden: true
+  exact_endpoint_locked: false
+  execution_authorized: false
+
+  side_effects:
+    real_vcpchat_accessed: false
+    electron_started: false
+    remote_debug_started: false
+    cdp_used: false
+    bridge_called: false
+    ipc_runtime_called: false
+    loadSession_called: false
+    previewDraft_called: false
+    submitDraft_called: false
+    cancel_called: false
+    mcp_codex_memory_called: false
+    search_memory_called: false
+    record_memory_called: false
+    native_vcp_routes_called: false
+    dailynote_written: false
+    vcp_memory_written: false
+    image_generated: false
+    lt06_executed: false
+
+  recommended_next: v7.65a Push Readiness Gate
