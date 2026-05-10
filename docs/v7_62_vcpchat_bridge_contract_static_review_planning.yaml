@@ -1,0 +1,51 @@
+v7_62_vcpchat_bridge_contract_static_review_planning:
+  schema_version: v1
+  phase: v7_62
+  status: completed
+  document_type: planning_only
+
+  carry_forward:
+    prior_v7_61_commit: 40ae966
+    prior_v7_61_package_status: prepared_not_granted
+    prior_v7_61_A5_requested: false
+    prior_v7_61_A5_granted: false
+    prior_v7_61_execution_authorized: false
+    v7_61_minor_notes_handled:
+      - exact_endpoint_tbd_must_be_locked
+      - read_only_claim_requires_static_evidence
+    lt06_a5_does_not_cover_vcpchat: true
+
+  planning_defined:
+    bridge_contract_location_strategy: true
+    read_only_evidence_requirements: true
+    submitDraft_exclusion_requirements: true
+    endpoint_lock_requirements: true
+    security_gates: true
+
+  pre_execution_requirements:
+    exact_endpoint_locked: false
+    loadSession_read_only_proven: false
+    previewDraft_read_only_proven: false
+    submitDraft_exclusion_documented: false
+    bridge_contract_statically_reviewed: false
+    no_other_bridge_methods_found: false
+
+  side_effects:
+    real_vcpchat_accessed: false
+    electron_started: false
+    remote_debug_started: false
+    cdp_used: false
+    vcpchat_bridge_called: false
+    loadSession_called: false
+    previewDraft_called: false
+    submitDraft_called: false
+    mcp_codex_memory_called: false
+    search_memory_called: false
+    record_memory_called: false
+    native_vcp_routes_called: false
+    dailynote_written: false
+    vcp_memory_written: false
+    image_generated: false
+    lt06_executed: false
+
+  next_recommended_phase: v7.63 VCPChat Bridge Contract Static Review Execution

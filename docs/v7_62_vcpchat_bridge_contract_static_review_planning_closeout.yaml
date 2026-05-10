@@ -1,0 +1,44 @@
+v7_62_vcpchat_bridge_contract_static_review_planning_closeout:
+  schema_version: v1
+  phase: v7_62
+  closeout_status: completed
+  document_type: planning_only
+
+  carry_forward:
+    prior_v7_61_commit: 40ae966
+    v7_61_minor_notes_handled: true
+    endpoint_lock_requirement_defined: true
+    read_only_evidence_requirements_defined: true
+
+  bridge_contract_static_review_planning_defined: true
+  read_only_evidence_requirements_defined: true
+  submitDraft_exclusion_requirements_defined: true
+  endpoint_lock_requirement_defined: true
+
+  pre_execution_requirements:
+    exact_endpoint_locked: false
+    loadSession_read_only_proven: false
+    previewDraft_read_only_proven: false
+    submitDraft_exclusion_documented: false
+    bridge_contract_statically_reviewed: false
+    no_other_bridge_methods_found: false
+
+  side_effects:
+    real_vcpchat_accessed: false
+    electron_started: false
+    remote_debug_started: false
+    cdp_used: false
+    vcpchat_bridge_called: false
+    loadSession_called: false
+    previewDraft_called: false
+    submitDraft_called: false
+    mcp_codex_memory_called: false
+    search_memory_called: false
+    record_memory_called: false
+    native_vcp_routes_called: false
+    dailynote_written: false
+    vcp_memory_written: false
+    image_generated: false
+    lt06_executed: false
+
+  recommended_next: v7.62a Push Readiness Gate
