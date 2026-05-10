@@ -1545,6 +1545,52 @@ hard_stops:
 - do_not_reopen_closed_no_memory_write_case
 ```
 
+## v7.55j VCP Deep Boundary Probe
+
+```text
+Phase: v7.55j
+Status: vcp_deep_boundary_probe_completed
+read_only_probe_completed: true
+execution_performed: false
+authorization_requested: false
+authorization_granted: false
+A5_requested: false
+exact_endpoint_or_command_locked: false
+no_write_mode_verified: false
+DailyNote_unreachable_proven: false
+CodexMemoryBridge_unreachable_proven: false
+PR35_merged_baseline: true
+request_A5_now: false
+execute_LT06_now: false
+real_LT06_execution_ready: false
+real_vcptoolbox_call_performed: false
+VCPChat bridge call performed: false
+Electron started: false
+DailyNote write performed: false
+VCP memory write performed: false
+image generation performed: false
+image binary read: false
+runs path read: false
+
+current_allowed_next_steps:
+- v7.56 LT-06 Execution Package Finalization docs-only
+- gap closure patch
+- stop and hold
+
+hard_stops:
+- do_not_execute_LT06_without_independent_a5
+- do_not_request_A5_before_closing_blocking_gates
+- do_not_call_real_vcptoolbox_without_independent_a5
+- do_not_call_vcpchat_bridge_without_independent_authorization
+- do_not_start_electron_without_explicit_authorization
+- do_not_write_dailynote_without_independent_a5
+- do_not_write_vcp_memory_without_independent_a5
+- do_not_generate_image_without_independent_a5
+- do_not_read_image_binary
+- do_not_dereference_refs_without_realpath_containment
+- do_not_start_production_candidate_002_now
+```
+
 ## Resume Instruction
 
 ```text
