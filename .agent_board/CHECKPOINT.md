@@ -1669,6 +1669,35 @@ current_allowed_next_steps:
 - stop and hold
 ```
 
+## v7.57j Long-term Evolution Plan Update
+
+```text
+Phase: v7.57j
+Status: long_term_evolution_plan_recorded
+update_type: docs_only_long_term_plan_record
+future_use_full_VCP_memory: true
+phased_activation_required: true
+current_full_memory_write: false
+current_native_VCP_big_road_safe_for_LT06: false
+current_best_path: Codex_Memory_MCP_sidecar_bridge_first
+final_goal: native_VCP_read_only_bridge_then_full_memory_loop
+request_A5_now: false
+execute_LT06_now: false
+real_LT06_execution_ready: false
+memory_write_path_open: false
+next_required_step: v7.58_Codex_Memory_MCP_sidecar_no_write_probe
+
+external_side_effects:
+- LT06_executed: false
+- A5_requested: false
+- real_VCPToolBox_called: false
+- VCPChat_bridge_called: false
+- DailyNote_written: false
+- VCP_memory_written: false
+- image_generated: false
+- image_binary_read: false
+```
+
 ## Resume Instruction
 
 ```text
