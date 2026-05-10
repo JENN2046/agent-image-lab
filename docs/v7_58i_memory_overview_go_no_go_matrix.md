@@ -32,6 +32,26 @@ memory_overview_go_no_go_matrix:
       status: satisfied
       blocks_A5_request: false
 
+    exact_payload_locked:
+      status: satisfied
+      blocks_A5_request: false
+
+    raw_response_reporting_forbidden:
+      status: satisfied
+      blocks_A5_request: false
+
+    response_redaction_policy_defined:
+      status: satisfied
+      blocks_A5_request: false
+
+    private_path_redaction_defined:
+      status: satisfied
+      blocks_A5_request: false
+
+    initialize_tools_list_resources_list_forbidden:
+      status: satisfied
+      blocks_A5_request: false
+
     one_call_no_retry_defined:
       status: satisfied
       blocks_A5_request: false

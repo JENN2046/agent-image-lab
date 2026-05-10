@@ -1779,6 +1779,43 @@ external_side_effects:
 - image_binary_read: false
 ```
 
+## v7.58i1 memory_overview Payload + Redaction Patch
+
+```text
+Phase: v7.58i1
+Status: memory_overview_exact_payload_and_redaction_patch_completed
+patch_type: docs_only_safety_hardening
+exact_payload_locked: true
+exact_payload_id: lt06-memory-overview-001
+exact_tool_name: memory_overview
+exact_arguments: {}
+initialize_call_allowed: false
+tools_list_call_allowed: false
+resources_list_call_allowed: false
+ping_call_allowed: false
+raw_structuredContent_allowed_in_report: false
+raw_response_allowed_in_report: false
+redacted_summary_only: true
+private_path_redaction_required: true
+memory_id_redaction_required: true
+source_file_redaction_required: true
+A5_requested: false
+A5_granted: false
+LT06_executed: false
+request_A5_now: false
+execute_LT06_now: false
+real_LT06_execution_ready: false
+
+external_side_effects:
+- real_VCPToolBox_called: false
+- mcp_codex_memory_called: false
+- VCPChat_bridge_called: false
+- DailyNote_written: false
+- VCP_memory_written: false
+- image_generated: false
+- image_binary_read: false
+```
+
 ## Resume Instruction
 
 ```text

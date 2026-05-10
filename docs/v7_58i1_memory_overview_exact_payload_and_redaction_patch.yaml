@@ -1,0 +1,63 @@
+v7_58i1_memory_overview_exact_payload_and_redaction_patch:
+  schema_version: v1
+  phase: v7_58i1
+  status: completed
+  patch_type: docs_only_safety_hardening
+
+  exact_payload_locked: true
+  exact_payload:
+    jsonrpc: "2.0"
+    id: lt06-memory-overview-001
+    method: tools/call
+    params:
+      name: memory_overview
+      arguments: {}
+
+  forbidden_jsonrpc_methods:
+    - initialize
+    - notifications/initialized
+    - ping
+    - tools/list
+    - resources/list
+    - resources/templates/list
+
+  forbidden_tools:
+    - search_memory
+    - record_memory
+
+  arguments_policy:
+    required_shape: {}
+    auditWindow_allowed_now: false
+    limit_allowed_now: false
+    non_empty_arguments_allowed: false
+
+  response_redaction:
+    raw_structuredContent_allowed_in_report: false
+    raw_response_allowed_in_report: false
+    redacted_summary_only: true
+    private_path_redaction_required: true
+    memory_id_redaction_required: true
+    source_file_redaction_required: true
+
+  findings_addressed:
+    P1_001_response_redaction_gap: true
+    P1_002_exact_payload_not_locked: true
+    P1_003_arguments_should_default_to_empty_object: true
+
+  execution_decision:
+    A5_package_prepared: true
+    A5_requested: false
+    A5_granted: false
+    LT06_executed: false
+    request_A5_now: false
+    execute_LT06_now: false
+    real_LT06_execution_ready: false
+
+  side_effects:
+    real_VCPToolBox_called: false
+    mcp_codex_memory_called: false
+    VCPChat_bridge_called: false
+    DailyNote_written: false
+    VCP_memory_written: false
+    image_generated: false
+    image_binary_read: false
