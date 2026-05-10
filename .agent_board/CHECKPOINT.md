@@ -1413,6 +1413,48 @@ hard_stops:
 - do_not_reopen_closed_no_memory_write_case
 ```
 
+## v7.54a-v7.54g LT-06 Real VCPToolBox Read-only Dry-run A5 Planning
+
+```text
+Phase: v7.54a-v7.54g
+Status: lt06_planning_authorization_closeout_completed
+planning_completed: true
+contract_completed: true
+authorization_package_prepared: true
+package_status: prepared_not_granted
+authorization_granted: false
+preflight_checklist_completed: true
+execution_runbook_completed: true
+safety_gates_completed: true
+current_decision: do_not_execute_now
+execution_performed: false
+real_vcptoolbox_call_performed: false
+VCPChat bridge call performed: false
+Electron started: false
+DailyNote write performed: false
+VCP memory write performed: false
+image generation performed: false
+image binary read: false
+runs path read: false
+
+current_allowed_next_steps:
+- LT-06 real VCPToolBox read-only dry-run execution, only if independent A5 is explicitly granted
+- v7.50e real VCPChat surface check planning, only if explicitly authorized
+
+hard_stops:
+- do_not_execute_LT06_without_independent_a5
+- do_not_call_real_vcptoolbox_without_independent_a5
+- do_not_call_vcpchat_bridge_without_independent_authorization
+- do_not_start_electron_without_explicit_authorization
+- do_not_write_dailynote_without_independent_a5
+- do_not_write_vcp_memory_without_independent_a5
+- do_not_generate_image_without_independent_a5
+- do_not_read_image_binary
+- do_not_dereference_refs_without_realpath_containment
+- do_not_reopen_closed_no_memory_write_case
+- do_not_push_without_authorization
+```
+
 ## Resume Instruction
 
 ```text

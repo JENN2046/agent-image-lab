@@ -1,0 +1,28 @@
+lt06_planning_authorization_closeout:
+  schema_version: v1
+  phase: v7_54g
+  closeout_status: completed
+
+  planning_completed: true
+  contract_completed: true
+  authorization_package_prepared: true
+  preflight_checklist_completed: true
+  execution_runbook_completed: true
+  safety_gates_completed: true
+
+  authorization_granted: false
+  package_status: prepared_not_granted
+  execution_performed: false
+  real_vcptoolbox_call_performed: false
+  vcpchat_bridge_call_performed: false
+  electron_started: false
+  daily_note_write_performed: false
+  vcp_memory_write_performed: false
+  image_binary_read: false
+  runs_path_read: false
+
+  current_decision: do_not_execute_now
+
+  next_allowed_steps:
+    - LT_06_real_VCPToolBox_read_only_dry_run_execution_only_if_independent_A5_granted
+    - v7_50e_real_VCPChat_surface_check_planning_only_if_explicitly_authorized
