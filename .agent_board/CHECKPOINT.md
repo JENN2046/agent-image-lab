@@ -1950,6 +1950,10 @@ runtime_execution_authorized: false
 
 endpoint_lock:
   strategy: remote_debug_cdp
+  bridge_access_strategy_locked: true
+  exact_endpoint_fully_locked: false
+  exact_port_selected: false
+  cdp_endpoint_concrete: false
   electron_target: VCPChat
   remote_debug_port_candidate: 9222
   cdp_endpoint: http://127.0.0.1:<remote_debug_port>

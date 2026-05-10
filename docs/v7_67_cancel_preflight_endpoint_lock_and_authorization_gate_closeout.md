@@ -2,13 +2,13 @@
 
 ## Summary
 
-Phase v7.67 completed as a docs-only endpoint lock and execution authorization gate. The exact endpoint and bridge access surface are locked to VCPChat Electron + remote-debug CDP strategy, accessing `window.imageLabReview.cancel({})` via `Runtime.evaluate`. Cancel payload locked to `{}`. Max calls: 1. No retry. No fallback. loadSession, previewDraft, and submitDraft remain permanently forbidden in this gate. Execution remains unauthorized pending explicit user authorization phrase `"批准 v7.67 cancel preflight"`. No execution performed.
+Phase v7.67 completed as a docs-only endpoint lock and execution authorization gate. The bridge access strategy is locked to VCPChat Electron + remote-debug CDP strategy, accessing `window.imageLabReview.cancel({})` via `Runtime.evaluate`. Cancel payload locked to `{}`. Max calls: 1. No retry. No fallback. **Endpoint precision clarified: strategy locked, exact port not yet locked (TBD by operator).** loadSession, previewDraft, and submitDraft remain permanently forbidden in this gate. Execution remains unauthorized pending explicit user authorization phrase `"批准 v7.67 cancel preflight"`. No execution performed.
 
 ## v7.66 Post-push Notes
 
 | Note | Resolution |
 |------|-----------|
-| `exact_endpoint_locked: false` | Now locked: remote-debug CDP strategy, `Runtime.evaluate("window.imageLabReview.cancel({})")` |
+| `exact_endpoint_locked: false` | bridge_access_strategy locked (remote-debug CDP, `Runtime.evaluate("window.imageLabReview.cancel({})")`); exact endpoint (port) not fully locked |
 | `cancel_execution_not_authorized` | Authorization gate prepared; user phrase required |
 
 ## Deliverables
@@ -38,8 +38,12 @@ Phase v7.67 completed as a docs-only endpoint lock and execution authorization g
 ## Final State
 
 - endpoint_lock_package_defined: true
-- exact_endpoint_locked: true (remote-debug CDP strategy)
-- exact_cancel_payload_locked: true ({})
+- bridge_access_strategy_locked: true (remote-debug CDP)
+- exact_endpoint_fully_locked: false (port TBD)
+- exact_port_selected: false
+- cdp_endpoint_concrete: false
+- cancel_payload_locked: true ({})
+- exact_cancel_payload: {}
 - cancel_max_calls: 1
 - retry_allowed: false
 - fallback_allowed: false
@@ -52,4 +56,4 @@ Phase v7.67 completed as a docs-only endpoint lock and execution authorization g
 - submitDraft_permanently_forbidden: true
 - raw_bridge_response_forbidden: true
 - redacted_summary_only: true
-- next: v7.67a Push Readiness Gate
+- next: v7.67c Push Readiness Gate

@@ -1,8 +1,8 @@
 # v7.67 — Cancel Preflight Endpoint Lock and Execution Authorization Gate
 
-> **This document defines the exact endpoint, payload, and authorization conditions for a future exactly-one cancel preflight call. It does not authorize execution.**
+> **This document defines the bridge access strategy, exact payload, and authorization conditions for a future exactly-one cancel preflight call. The strategy is locked (remote-debug CDP); the exact endpoint (port) is not fully locked yet. This document does not authorize execution.**
 >
-> **本文定义未来恰好一次 cancel preflight 调用的确切 endpoint、payload 和授权条件。本文不授权执行。**
+> **本文定义未来恰好一次 cancel preflight 调用的 bridge 访问策略、确切 payload 和授权条件。策略已锁定（remote-debug CDP）；确切 endpoint（端口）尚未完全锁定。本文不授权执行。**
 
 ---
 
@@ -24,11 +24,35 @@ carry_forward_context:
   lt06_a5_does_not_cover_vcpchat: true
 ```
 
-## 2. Endpoint Lock — Bridge Access Surface
+## 2. Endpoint Lock Precision
 
 ```yaml
-endpoint_lock:
-  bridge_access_strategy: remote_debug_cdp
+endpoint_lock_precision:
+  bridge_access_strategy_locked: true
+  cancel_payload_locked: true
+  exact_cancel_payload: {}
+  cancel_max_calls: 1
+  retry_allowed: false
+  fallback_allowed: false
+  exact_endpoint_fully_locked: false
+  exact_port_selected: false
+  cdp_endpoint_concrete: false
+  execution_authorized: false
+  runtime_execution: false
+  user_explicit_authorization_required: true
+
+  reason: >
+    bridge_access_strategy is locked to remote-debug CDP,
+    but exact port (9222/9223/TBD) is not yet operator-selected.
+    Once port is selected and locked, exact_endpoint_fully_locked becomes true.
+```
+
+## 2a. Bridge Access Strategy
+
+```yaml
+bridge_access_strategy:
+  strategy: remote_debug_cdp
+  strategy_locked: true
 
   electron_launch:
     target: VCPChat
@@ -117,7 +141,8 @@ Execution requires all of the following:
 | 3 | Remote-debug start authorized | required |
 | 4 | CDP connection authorized | required |
 | 5 | Bridge read-only call authorized | required |
-| 6 | Exact endpoint locked | required |
+| 6 | Bridge access strategy locked | required (true) |
+| 6b | Exact endpoint port locked | required (false — TBD by operator) |
 | 7 | Exact payload confirmed ({}) | required |
 | 8 | Max calls confirmed (1) | required |
 | 9 | cancel-only confirmed | required |
@@ -190,7 +215,8 @@ pre_execution_checklist:
   - remote_debug_start_authorized: false
   - cdp_connection_authorized: false
   - bridge_read_only_call_authorized: false
-  - exact_endpoint_locked: true
+  - bridge_access_strategy_locked: true
+  - exact_endpoint_fully_locked: false
   - exact_payload_confirmed: true
   - max_calls_confirmed: true (1)
   - cancel_only_confirmed: true
@@ -241,8 +267,10 @@ future_execution_requirement:
   preconditions_before_execution:
     - condition: user_explicitly_grants_v7_67_cancel_preflight
       status: false
-    - condition: exact_endpoint_locked
+    - condition: bridge_access_strategy_locked
       status: true
+    - condition: exact_endpoint_fully_locked
+      status: false
     - condition: exact_payload_confirmed
       status: true
     - condition: max_calls_confirmed
