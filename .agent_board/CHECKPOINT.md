@@ -1698,6 +1698,27 @@ external_side_effects:
 - image_binary_read: false
 ```
 
+## v7.58 Route Identity + Codex Memory MCP Sidecar Probe
+
+```text
+Phase: v7.58
+Status: route_identity_and_mcp_sidecar_probe_completed
+record_memory_excluded: true
+search_memory_recall_audit_write_found: true
+search_memory_zero_write_blocked: true
+search_memory_observe_only_possible: true
+memory_overview_zero_write_proven: true
+
+request_A5_now: false
+execute_LT06_now: false
+real_LT06_execution_ready: false
+
+current_allowed_next_steps:
+- v7.59 native VCP read-only lane design
+- decide zero-write vs observe-only policy
+- stop and hold
+```
+
 ## Resume Instruction
 
 ```text
