@@ -1,0 +1,73 @@
+v7_59_lt06_execution_closeout_seal:
+  schema_version: v1
+  phase: v7_59
+  closeout_status: completed
+
+  lt06_execution:
+    call_count: 1
+    retry_performed: false
+    fallback_performed: false
+    http_response_code: 200
+    isError: false
+
+    endpoint: POST /mcp/codex-memory
+    jsonrpc_method: tools/call
+    tool_name: memory_overview
+    exact_payload_id: lt06-memory-overview-001
+    arguments: {}
+
+  redacted_summary:
+    response_status: success
+    top_level_keys_present:
+      - paths
+      - summary
+      - recentAudit
+      - recentFiles
+      - memoryLinks
+      - adaptive
+      - recall
+    recentAudit_count: 10
+    recentFiles_process_count: 6
+    recentFiles_knowledge_count: 2
+    memoryLinks_count: 6
+    recall_recent_count: 0
+    sampleSize: 12
+    accepted_count: 6
+    rejected_count: 6
+    processAccepted: 6
+    knowledgeAccepted: 0
+    blockedDirectWrites: 6
+    sensitiveRejected: 0
+
+  data_policy:
+    raw_response_recorded: false
+    raw_structuredContent_recorded: false
+    redacted_summary_only: true
+    numeric_counts_only: true
+
+  side_effects:
+    file_write_detected: false
+    audit_log_write_detected: false
+    DailyNote_write_detected: false
+    VCP_memory_write_detected: false
+    plugin_execution_detected: false
+    image_generation_detected: false
+    VCPChat_bridge_called: false
+
+  a5_authorization:
+    initial_grant: explicit_user_grant
+    calls_authorized: 1
+    calls_executed: 1
+    authorization_remaining: 0
+    second_call_requires_new_independent_A5: true
+
+  hard_stops:
+    - do_not_call_mcp_codex_memory
+    - do_not_call_search_memory
+    - do_not_call_record_memory
+    - do_not_call_vcp_native_routes
+    - do_not_call_vcpchat_bridge
+    - do_not_write_dailynote
+    - do_not_write_vcp_memory
+    - do_not_generate_image
+    - do_not_push_without_authorization
