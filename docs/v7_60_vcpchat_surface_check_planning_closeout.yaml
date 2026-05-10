@@ -1,0 +1,26 @@
+v7_60_vcpchat_surface_check_planning_closeout:
+  schema_version: v1
+  phase: v7_60
+  closeout_status: completed
+  document_type: planning_only
+
+  surface_inventory_defined: true
+  authorization_gates_defined: true
+  risk_matrix_defined: true
+
+  side_effects:
+    real_vcpchat_accessed: false
+    electron_started: false
+    remote_debug_started: false
+    cdp_used: false
+    vcpchat_bridge_called: false
+    mcp_codex_memory_called: false
+    search_memory_called: false
+    record_memory_called: false
+    native_vcp_routes_called: false
+    dailynote_written: false
+    vcp_memory_written: false
+    image_generated: false
+    lt06_executed: false
+
+  next_recommended_phase: v7.61 VCPChat Surface Check Authorization Package
