@@ -1,0 +1,47 @@
+v7_63_vcpchat_bridge_contract_static_code_review_package:
+  schema_version: v1
+  package_type: static_code_review_package
+  status: prepared_not_executed
+  phase: v7_63
+  runtime_execution_authorized: false
+  static_code_review_only: true
+
+  carry_forward:
+    prior_v7_62_commit: b65d46d
+    v7_62_minor_notes_resolved:
+      - search_scope_expanded_beyond_renderer_js: true
+      - static_review_no_runtime: true
+    pre_execution_requirements_all_false: true
+    lt06_a5_does_not_cover_vcpchat: true
+
+  review_package_defined:
+    exact_search_scope: true
+    exact_keywords: true
+    contextBridge_detection: true
+    ipc_channel_trace: true
+    read_only_classification: true
+    submitDraft_exclusion: true
+    redacted_evidence_policy: true
+    execution_blocking_rules: true
+    no_runtime_execution_policy: true
+
+  side_effects:
+    real_vcpchat_accessed: false
+    electron_started: false
+    remote_debug_started: false
+    cdp_used: false
+    bridge_called: false
+    ipc_runtime_called: false
+    loadSession_called: false
+    previewDraft_called: false
+    submitDraft_called: false
+    mcp_codex_memory_called: false
+    search_memory_called: false
+    record_memory_called: false
+    native_vcp_routes_called: false
+    dailynote_written: false
+    vcp_memory_written: false
+    image_generated: false
+    lt06_executed: false
+
+  next_recommended_phase: v7.64 VCPChat Bridge Contract Static Code Review Execution
