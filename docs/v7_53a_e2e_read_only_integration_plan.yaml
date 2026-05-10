@@ -1,0 +1,36 @@
+e2e_read_only_integration_plan:
+  schema_version: v1
+  phase: v7_53a
+  status: planning_only
+
+  chain:
+    step_1_adapter:
+      source: scripts/agent_image_lab_read_only_adapter.js
+      mode: local_read_only
+      output: text_only_refs
+
+    step_2_vcptoolbox_ingestion_mock:
+      source: scripts/validate_vcptoolbox_read_only_ingestion_mock.js
+      mode: local_mock
+      refs_policy: opaque_refs_only
+
+    step_3_safe_surface_package:
+      mode: local_static_package
+      output: safe_summary_and_refs_only
+
+  strict_boundaries:
+    real_vcptoolbox_call_performed: false
+    vcpchat_bridge_call_performed: false
+    electron_started: false
+    remote_debug_started: false
+    cdp_call_performed: false
+    daily_note_write_performed: false
+    vcp_memory_write_performed: false
+    image_generation_performed: false
+    image_binary_read: false
+    runs_path_read: false
+
+  ref_policy:
+    refs_treated_as_opaque: true
+    dereference_performed: false
+    future_dereference_requires_realpath_containment: true

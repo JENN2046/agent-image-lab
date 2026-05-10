@@ -1,0 +1,51 @@
+e2e_read_only_integration_fixture_validation:
+  schema_version: v1
+  phase: v7_53b
+  status: executed_pass
+  result: pass
+  cases_total: 16
+  cases_passed: 16
+  cases_failed: 0
+
+  chain_validation:
+    adapter_step: pass
+    vcptoolbox_ingestion_mock_step: pass
+    safe_surface_package_step: pass
+
+  wrapper_validation:
+    adapter_wrapper_safe: true
+    ingestion_mock_wrapper_safe: true
+    no_adapter_crash_masking: true
+    no_ingestion_mock_crash_masking: true
+
+  opaque_ref_policy:
+    refs_treated_as_opaque: true
+    dereference_performed: false
+    fs_read_file_performed: false
+    fs_stat_on_returned_refs_performed: false
+    future_dereference_requires_realpath_containment: true
+
+  forbidden_fields_rejected:
+    full_file_content: pass
+    image_binary: pass
+    raw_payload: pass
+    secrets: pass
+    private_absolute_path: pass
+    memory_write_action: pass
+    dailynote_write_action: pass
+    generate_image_action: pass
+    retry_generation_action: pass
+    production_approved_claim: pass
+    reopen_closed_case_action: pass
+
+  external_side_effects:
+    real_vcptoolbox_call_performed: false
+    vcpchat_bridge_call_performed: false
+    electron_started: false
+    remote_debug_started: false
+    cdp_call_performed: false
+    daily_note_write_performed: false
+    vcp_memory_write_performed: false
+    image_generation_performed: false
+    image_binary_read: false
+    runs_path_read: false
