@@ -1888,6 +1888,57 @@ side_effects:
 recommended_next: v7.65a Push Readiness Gate
 ```
 
+## v7.66 VCPChat cancel-only Preflight Authorization Package
+
+```text
+Phase: v7.66
+Status: vcpchat_cancel_only_preflight_authorization_package_prepared
+package_type: authorization_package_draft
+package_status: prepared_not_granted
+runtime_execution_authorized: false
+
+allowed_method_if_later_authorized:
+  - imageLabReview.cancel (max 1) [read_only, preflight_probe]
+
+permanently_forbidden_in_this_package:
+  - imageLabReview.loadSession
+  - imageLabReview.previewDraft
+  - imageLabReview.submitDraft
+
+cancel_role: optional_preflight_probe
+cancel_purpose:
+  - bridge heartbeat verification
+  - sender validation check
+  - IPC path health check
+
+endpoint_locked: false
+execution_blocked_if_not_locked: true
+
+A5_requested: false
+A5_granted: false
+execution_authorized: false
+exact_endpoint_locked: false
+lt06_a5_does_not_cover_vcpchat: true
+
+v7_65_post_push_minor_note_resolved: true
+documented_bridge_methods_complete: true
+no_methods_beyond_v7_64_inventory: true
+extra_method_cancel_documented: true
+
+side_effects:
+- real_vcpchat_accessed: false
+- electron_started: false
+- bridge_called: false
+- cancel_called: false
+- loadSession_called: false
+- previewDraft_called: false
+- submitDraft_called: false
+- mcp_codex_memory_called: false
+- lt06_executed: false
+
+recommended_next: v7.66a Push Readiness Gate
+```
+
 ## v7.64 VCPChat Bridge Contract Static Code Review Execution
 
 ```text
