@@ -237,7 +237,7 @@ future_execution_requirement:
   execution_requires_explicit_user_authorization: true
   user_authorization_phrase: "批准 v7.67 cancel preflight"
   recommended_execution_phase: v7.67e (after this gate is pushed and user authorizes)
-  
+
   preconditions_before_execution:
     - condition: user_explicitly_grants_v7_67_cancel_preflight
       status: false
