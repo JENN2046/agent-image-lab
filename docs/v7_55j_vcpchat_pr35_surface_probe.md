@@ -2,48 +2,58 @@
 
 ## 1. Purpose
 
-Review VCPChat PR #35 merged bridge surface and assess no-write evidence.
+Review VCPChat PR #35 draft bridge surface and assess no-write evidence.
 
-## 2. Updated Status
+## 2. Corrected Status
 
-**重要更新**: v7.55i 时 VCPChat HEAD 为 `c97ff0c` (Merge PR #33)，PR #35 当时为 draft。
-v7.55j 探测发现 PR #35 已在 `b320e39` 合并，不再是 draft。
+**重要修正**: v7.55i 时 VCPChat HEAD 为 `c97ff0c` (Merge PR #33)，PR #35 当时为 draft。
+v7.55j 最初误将 `b320e39` 识别为 merged baseline。外部核验确认：
+
+- `b320e39` 是 PR #35 的 **base_sha**，不是 merge commit
+- PR #35 的 feature branch `feature/agent-image-lab-no-write-review-bridge` 的 head_sha 为 `f587bc3eff22654ad894ac4b0095ce20731b5b99`
+- PR #35 状态：**draft、open、not merged**
+
+**renderer.js bridge** 是 local / feature-branch 上的 evidence candidate，不是 merged baseline。可以用于评估 no-write IPC channel 设计，但不能作为 VCPChat 主分支基线。
 
 ```yaml
 vcpchat_current_state:
   repo: A:\VCP\VCPChat
   branch: main
-  head: b320e39
-  head_message: "feat: add image lab review console bridge"
-  prior_head: c97ff0c
-  prior_message: "Merge pull request #33"
+  head: c97ff0c
+  head_message: "Merge pull request #33 from JENN2046/codex/remove-sovits-shutdown-secret"
+  pr35_head_sha: f587bc3eff22654ad894ac4b0095ce20731b5b99
+  pr35_base_sha: b320e39ffa527a81aca65c9228c20936a04f5ed8
   working_tree: dirty (.vcp_ready deleted)
 ```
 
-## 3. PR #35 Merge Details
+## 3. PR #35 Actual Status
 
 ```yaml
 vcpchat_pr35:
   number: 35
-  status: merged
-  merged_at: b320e39 (2026-05-06)
-  draft: false
-  changed_files:
-    - main.html (+2)
-    - main.js (30 ++--, 14 --)
-    - modules/ipc/imageLabReviewHandlers.js (new, +242)
-    - modules/renderer/imageLabReviewMount.js (new, +150)
-    - preloads/chat.js (+10)
+  state: open
+  draft: true
+  merged: false
+  base: main
+  base_sha: b320e39ffa527a81aca65c9228c20936a04f5ed8
+  head: feature/agent-image-lab-no-write-review-bridge
+  head_sha: f587bc3eff22654ad894ac4b0095ce20731b5b99
+  changed_files: 1
+  changed_file: renderer.js
+  note: b320e39 is the base_sha of PR #35, not a merge commit
 ```
 
 ## 4. Bridge Surface Analysis
+
+**注意**: 以下分析基于 feature branch 上的代码。该代码尚未进入 VCPChat main 分支基线。
 
 ```yaml
 vcpchat_pr35_surface_probe:
   PR_35:
     number: 35
-    status: merged
-    draft: false
+    state: open
+    draft: true
+    merged: false
 
   bridge_behavior:
     imageLabReview_present: true
@@ -84,11 +94,15 @@ vcpchat_pr35_surface_probe:
     - createPrototypeGuard() initializes all guard keys to false
     - markMountReady() sets dataset.sideEffects = 'false'
 
-  real_surface_ready: false
+  usable_as_evidence_candidate: true
+  usable_as_merged_baseline: false
   reason: >
-    PR #35 bridge is a proper no-write draft channel with prototype_guard enforcement.
-    However, real VCPChat surface execution (launching Electron, loading the bridge,
-    testing IPC round-trips) is a separate A5 action that requires independent
-    authorization. The bridge is evidence of no-write design, not an authorization
-    to execute.
+    PR #35 bridge code shows a proper no-write draft channel with
+    prototype_guard enforcement. This is usable as an evidence candidate
+    for local review, but PR #35 is draft/open/not-merged and cannot be
+    treated as VCPChat main branch baseline.
+
+  real_surface_ready: false
+  blocks_real_vcpchat_surface_execution: true
+  blocks_backend_only_LT06: false
 ```

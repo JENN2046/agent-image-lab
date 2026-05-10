@@ -26,7 +26,7 @@ Closeout v7.55j VCP Deep Boundary Probe — VCPToolBox / VCPChat read-only evide
 
 ### VCPChat
 
-- **PR #35 merged** at `b320e39` (no longer draft). Bridge has `prototype_guard` enforced no-write design with 4 IPC channels, all returning `side_effects_performed: false`.
+- **PR #35 is draft/open/not-merged** — `b320e39` is base_sha, not merge commit. Feature branch has `prototype_guard` enforced no-write bridge design with 4 IPC channels, all returning `side_effects_performed: false`. Usable as evidence candidate, not as merged baseline.
 - **Electron security**: `contextIsolation: true`, `nodeIntegration: false` verified.
 - **Secret risk**: `vcpApiKey` used in Bearer auth across multiple legacy modules.
 

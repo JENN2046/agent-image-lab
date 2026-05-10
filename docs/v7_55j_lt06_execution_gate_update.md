@@ -33,10 +33,12 @@ lt06_execution_gate_update:
       CodexMemoryBridge plugin is directly reachable via same route.
       Internal agent-context check is not endpoint-level enforcement.
 
-    PR35_merged_baseline: true
+    PR35_merged_baseline: false
     reason: >
-      PR #35 merged at b320e39. Bridge has prototype_guard enforced no-write
-      design. This is a positive finding for VCPChat bridge evidence.
+      PR #35 is still draft/open/not-merged. b320e39 is base_sha of PR #35,
+      not merge commit. Local feature-branch renderer.js bridge has
+      prototype_guard enforced no-write design — usable as evidence candidate,
+      not as merged baseline.
 
     redaction_policy_ready: carried_from_v7_56_plan
     one_call_no_retry_ready: carried_from_v7_56_plan
@@ -46,7 +48,9 @@ lt06_execution_gate_update:
     execute_LT06_now: false
     real_LT06_execution_ready: false
     reason: >
-      Despite PR #35 being merged (positive), the VCPToolBox endpoint
+      PR #35 is draft/open/not-merged — VCPChat surface readiness is
+      blocked. However, PR #35 draft bridge provides usable local evidence
+      candidate for no-write IPC channel design. VCPToolBox endpoint
       (POST /v1/human/tool) has no no-write mode, no dry-run gating, and
       direct reachability to DailyNote and CodexMemoryBridge plugins.
       Real LT-06 execution remains blocked.

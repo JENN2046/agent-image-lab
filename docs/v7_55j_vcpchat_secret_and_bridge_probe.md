@@ -11,7 +11,9 @@ vcpchat_secret_and_bridge_probe:
   schema_version: v1
   phase: v7_55j
   repo: A:\VCP\VCPChat
-  head: b320e39
+  head: c97ff0c
+  pr35_head_sha: f587bc3eff22654ad894ac4b0095ce20731b5b99
+  pr35_base_sha: b320e39ffa527a81aca65c9228c20936a04f5ed8
 
   secret_in_url_or_query_candidate: found
   evidence:

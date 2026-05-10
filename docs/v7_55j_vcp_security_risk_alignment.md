@@ -68,10 +68,11 @@ vcp_security_risk_alignment:
       name: VCPChat renderer dirty / PR draft baseline
       detail: >
         v7.55i recorded renderer.js dirty and PR #35 as draft.
-      status: mitigated
+      status: open
       updated_in_v7_55j: >
-        PR #35 merged at b320e39. renderer.js no longer has PR-related unstaged
-        changes. Bridge is now part of main branch baseline.
+        PR #35 remains draft/open/not-merged. b320e39 is base_sha, not merge
+        commit. Feature branch renderer.js bridge is evidence candidate only.
+        main branch renderer.js baseline unchanged.
 
     - id: R007
       name: VCPToolBox no read-only mode
@@ -92,8 +93,7 @@ vcp_security_risk_alignment:
       discovered_in: v7_55j
 
   current_status:
-    mitigated:
-      - R006 (VCPChat PR #35 merged baseline)
+    mitigated: []
     open:
       - R001 (VCPChat secret in query)
       - R002 (VCPToolBox plugin callback auth boundary)

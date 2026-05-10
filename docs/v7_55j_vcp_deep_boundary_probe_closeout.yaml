@@ -16,7 +16,12 @@ vcp_deep_boundary_probe_closeout:
   no_write_mode_verified: false
   DailyNote_unreachable_proven: false
   CodexMemoryBridge_unreachable_proven: false
-  PR35_merged_baseline: true
+  PR35_merged_baseline: false
+  PR35_draft: true
+  PR35_merged: false
+  PR35_state: open
+  PR35_head_sha: f587bc3eff22654ad894ac4b0095ce20731b5b99
+  PR35_base_sha: b320e39ffa527a81aca65c9228c20936a04f5ed8
 
   real_vcptoolbox_call_performed: false
   vcpchat_bridge_call_performed: false
