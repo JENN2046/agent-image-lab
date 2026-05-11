@@ -129,6 +129,7 @@ v7.117 Scan Loop Correction Implementation — validator.js rewritten with expli
 v7.117a Scan Loop Correction Patch Planning — Patch planning for 3 findings: P1 (list item parsing), P2 (glob rejection order), P3 (unused import). No code changed.
 v7.117b Scan Loop Correction Patch Implementation Gate — Patch gate for 3 fixes in 1 file. 10 requirements. Patch not authorized.
 v7.117c Scan Loop Correction Patch Implementation — 3 patches applied: P1 (list item matrix parse), P2 (glob check before stat), P3 (unused import removed).
+v7.118 Corrected Fixture Dry-run Authorization Gate — Corrected dry-run gate (post-patch). Fixtures-only, max 1 run. Dry-run not authorized.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3
