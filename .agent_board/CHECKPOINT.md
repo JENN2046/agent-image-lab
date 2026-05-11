@@ -4611,6 +4611,38 @@ next_phase_started: false
 recommended_next: v7.128 First Controlled Batch
 ```
 
+## v7.128 First Controlled Batch Execution Gate
+
+```text
+Phase: v7.128
+Status: first_controlled_batch_execution_gate_defined
+gate_type: controlled_batch_execution_gate
+chain_name: Controlled Selected Docs Audit Chain
+batch_id: controlled_selected_docs_batch_001
+batch_authorized_now: false
+runtime_execution: false
+
+source_chain_gate_phase: v7.127
+source_chain_gate_commit: 14ce6ce
+validator_patch_version: v7.117c
+
+selected_files_count: 7
+batch_size_max: 8
+max_validator_runs: 1
+selected_docs_only: true
+
+autofix_allowed: false
+document_mutation_allowed: false
+production_candidate_002_allowed: false
+memory_write_path_allowed: false
+
+batch_executed: false
+known_untracked_file_touched: false
+next_phase_started: false
+
+recommended_next: v7.129 First Controlled Batch Execution
+```
+
 ## Resume Instruction
 
 ```text

@@ -139,6 +139,7 @@ v7.124 Closeout Integrity Correction Implementation — YAML closeout corrected.
 v7.125 Selected Docs Re-scan Authorization Gate — Re-scan gate for corrected closeout. 4 selected docs. Re-scan not authorized.
 v7.126 Selected Docs Re-scan Execution Closeout — Re-scan completed. Exit 0. 0 violations. v7.124 correction confirmed effective. Long task chain not yet allowed.
 v7.127 Controlled Long Task Chain Authorization Gate — Gate for first long task chain. "Controlled Selected Docs Audit Chain". Batch max 8, read-only. Chain not authorized.
+v7.128 First Controlled Batch Execution Gate — Gate for batch 001. 7 selected files. Batch not authorized.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3
