@@ -133,6 +133,7 @@ v7.118 Corrected Fixture Dry-run Authorization Gate — Corrected dry-run gate (
 v7.119 Corrected Fixture Dry-run Execution Closeout — Corrected dry-run completed. Exit 2 (expected). All 4 fail fixtures detected. Pass fixture 0 violations. Validator functional. Real docs scan not yet allowed.
 v7.120 Selected Docs Scan Authorization Gate — Authorization gate for selected docs scan. 4 selected files. No glob, no full repo scan. Scan not authorized.
 v7.121 Selected Docs Scan Execution Closeout — Selected docs scan completed. Exit 2 (7 closeoutIntegrity violations in 1 YAML file). No raw data exposure. No false positives. No remediation.
+v7.122 Selected Doc Closeout Integrity Correction Planning — Planning for YAML closeout fix. 7 missing fields identified. 4 future gates. No remediation yet.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3

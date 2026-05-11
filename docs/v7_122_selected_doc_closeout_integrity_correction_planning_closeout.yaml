@@ -1,0 +1,40 @@
+v7_122_selected_doc_closeout_integrity_correction_planning_closeout:
+  schema_version: v1
+  phase: v7_122
+  closeout_status: completed
+  planning_type: closeout_integrity_correction_planning
+  correction_authorized_now: false
+  validator_execution: false
+  runtime_execution: false
+
+  affected_file: docs/v7_119_corrected_fixture_dry_run_execution_closeout.yaml
+  missing_required_fields:
+    - runtime_execution
+    - redacted_summary_only
+    - raw_payload_recorded
+    - commit_hash
+    - branch
+    - git_status
+    - local_scope_result
+
+  future_correction_scope_defined: true
+  future_gates_defined: true
+
+  affected_file_modified: false
+  validator_executed: false
+  docs_scanned: false
+  full_repo_scan_performed: false
+  code_mutated: false
+  fixtures_mutated: false
+
+  runtime_execution: false
+  cdp_accessed: false
+  runtime_evaluate_called: false
+  bridge_methods_called: false
+  mcp_called: false
+
+  long_task_chain_allowed_now: false
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_123_closeout_integrity_correction_implementation_gate
