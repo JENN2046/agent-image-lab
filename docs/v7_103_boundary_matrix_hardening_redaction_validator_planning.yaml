@@ -1,0 +1,32 @@
+v7_103_boundary_matrix_hardening_redaction_validator_planning:
+  schema_version: v1
+  phase: v7_103
+  document_type: planning_only
+  hardening_type: planning_only
+  runtime_execution: false
+
+  source:
+    phase: v7_102
+    commit: aeaf8e5
+    matrix_source: docs/v7_102_cross_repo_boundary_audit.md
+
+  boundary_matrix_schema_fields_proposed: 15
+  forbidden_raw_fields_identified: 16
+  allowed_summary_fields: 11
+  future_validator_candidates: 5
+
+  validator_script_created: false
+  validator_executed: false
+  cdp_accessed: false
+  runtime_evaluate_called: false
+  bridge_methods_called: false
+  mcp_called: false
+  memory_write_performed: false
+  image_generated: false
+
+  current_non_permissions_maintained: true
+  known_untracked_file_touched: false
+
+  next_phase_started: false
+
+  recommended_next: v7_104_redaction_validator_spec
