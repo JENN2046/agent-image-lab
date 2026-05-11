@@ -65,8 +65,15 @@ function printReport(report) {
 function parseMinimalMatrix(text, filePath) {
   const matrix = { entries: [], non_permissions: {} };
 
-  // Detect if this file looks like a boundary matrix
-  if (!/\bentries\s*:/i.test(text) && !/\bnon_permissions\s*:/i.test(text)) {
+  // Detect if this file looks like a boundary matrix.
+  // Required: boundary_matrix top-level key, OR (entries AND non_permissions) shape.
+  // non_permissions-only declarations (policy docs, planning docs) must not trigger permissionDrift.
+  const hasBoundaryMatrixKey = /\bboundary_matrix\s*:/i.test(text);
+  const hasEntries = /\bentries\s*:/i.test(text);
+  const hasNonPermissions = /\bnon_permissions\s*:/i.test(text);
+  const hasBothEntriesAndNonPermissions = hasEntries && hasNonPermissions;
+
+  if (!hasBoundaryMatrixKey && !hasBothEntriesAndNonPermissions) {
     return null; // Not a matrix file
   }
 

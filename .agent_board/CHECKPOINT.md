@@ -5168,6 +5168,38 @@ next_phase_started: false
 recommended_next: v7.146 Batch 002 Correction Implementation
 ```
 
+## v7.146 Batch 002 Correction Implementation
+
+```text
+Phase: v7.146
+Status: batch_002_correction_implementation_completed
+correction_status: implemented
+
+validator_scope_refined:
+  file: tools/redaction-validator/validator.js
+  change: parseMinimalMatrix now requires boundary_matrix key or (entries + non_permissions) shape
+  non_permissions_only_no_longer_triggers_drift: true
+  behavior_change: false for boundary_matrix docs
+
+docs_modified:
+  count: 7
+  files:
+    - v7_139 closeout .md + .yaml
+    - v7_138 gate .md + .yaml
+    - v7_136 gate .md + .yaml
+    - v7_135 planning .md
+
+historical_facts_rewritten: false
+permissionDrift_js_modified: false
+
+validator_executed: false
+batch_003_allowed_now: false
+known_untracked_file_touched: false
+next_phase_started: false
+
+recommended_next: v7.147 Batch 002 Re-scan Authorization Gate
+```
+
 ## Resume Instruction
 
 ```text

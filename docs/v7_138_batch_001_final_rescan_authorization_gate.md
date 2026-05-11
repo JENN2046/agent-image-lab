@@ -103,3 +103,20 @@ expected_outcomes:
 | max_validator_runs | 1 |
 | batch_002_allowed_now | false |
 | next | v7.139 Batch 001 Final Re-scan Execution |
+
+---
+
+## 8. Closeout Integrity Fields
+
+```yaml
+closeout_integrity_fields:
+  runtime_execution: false
+  redacted_summary_only: true
+  raw_payload_recorded: false
+  commit_hash: 3a5ab13
+  branch: master
+  git_status: synced
+  local_scope_result: passed
+  known_untracked_file_touched: false
+  next_phase_started: false
+```

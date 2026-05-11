@@ -163,3 +163,20 @@ non_permissions:
 | future_gates | 5 |
 | next_batch_allowed_now | false |
 | next | v7.136 Residual Correction Implementation Gate |
+
+---
+
+## 10. Closeout Integrity Fields
+
+```yaml
+closeout_integrity_fields:
+  runtime_execution: false
+  redacted_summary_only: true
+  raw_payload_recorded: false
+  commit_hash: 1c0ec4b
+  branch: master
+  git_status: synced
+  local_scope_result: passed
+  known_untracked_file_touched: false
+  next_phase_started: false
+```

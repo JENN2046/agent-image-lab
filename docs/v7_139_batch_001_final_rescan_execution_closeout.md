@@ -88,3 +88,20 @@ batch_verification:
 | batch_002_allowed_now | false |
 | batch_002_gate_recommended_next | true |
 | next | v7.140 Batch 002 Authorization Gate |
+
+---
+
+## 8. Closeout Integrity Fields
+
+```yaml
+closeout_integrity_fields:
+  runtime_execution: false
+  redacted_summary_only: true
+  raw_payload_recorded: false
+  commit_hash: 43481f4
+  branch: master
+  git_status: synced
+  local_scope_result: passed
+  known_untracked_file_touched: false
+  next_phase_started: false
+```

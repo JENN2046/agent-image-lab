@@ -119,3 +119,20 @@ safety_constraints:
 | total_fields_to_add | 11 |
 | next_batch_allowed_now | false |
 | next | v7.137 Batch 001 Residual Correction Implementation |
+
+---
+
+## 8. Closeout Integrity Fields
+
+```yaml
+closeout_integrity_fields:
+  runtime_execution: false
+  redacted_summary_only: true
+  raw_payload_recorded: false
+  commit_hash: a3c9671
+  branch: master
+  git_status: synced
+  local_scope_result: passed
+  known_untracked_file_touched: false
+  next_phase_started: false
+```
