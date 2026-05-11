@@ -1,0 +1,31 @@
+v7_123_closeout_integrity_correction_implementation_gate:
+  schema_version: v1
+  phase: v7_123
+  gate_type: correction_implementation_gate
+  correction_authorized_now: false
+  validator_execution_authorized_now: false
+  runtime_execution: false
+
+  source:
+    planning_phase: v7_122
+    planning_commit: 8854cf6
+
+  affected_file: docs/v7_119_corrected_fixture_dry_run_execution_closeout.yaml
+  missing_fields_to_add: 7
+
+  affected_file_modified: false
+  validator_executed: false
+  docs_scanned: false
+  full_repo_scan_performed: false
+  code_mutated: false
+  long_task_chain_allowed_now: false
+
+  cdp_accessed: false
+  runtime_evaluate_called: false
+  bridge_methods_called: false
+  mcp_called: false
+
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_124_closeout_integrity_correction_implementation
