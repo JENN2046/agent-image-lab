@@ -3756,6 +3756,42 @@ next_phase_started: false
 recommended_next: v7.105 Redaction Validator Skeleton Planning or Boundary Matrix Schema Spec
 ```
 
+## v7.105 Boundary Matrix Schema Spec
+
+```text
+Phase: v7.105
+Status: boundary_matrix_schema_spec_completed
+spec_type: boundary_matrix_schema_spec
+implementation_status: not_started
+runtime_execution: false
+
+source_phase: v7.103
+source_commit: 72f1d70
+redaction_spec_phase: v7.104
+redaction_spec_commit: b5fda3a
+
+schema_fields_per_entry: 15
+enum_definitions: 5
+enum_values_total: 23
+current_boundary_entries: 16
+validation_rules: 10
+
+validator_script_created: false
+validator_executed: false
+schema_file_generated: false
+filesystem_scan_performed: false
+runtime_execution: false
+permission_changed: false
+
+cdp_accessed: false
+bridge_methods_called: false
+mcp_called: false
+known_untracked_file_touched: false
+next_phase_started: false
+
+recommended_next: v7.106 Boundary Matrix YAML Draft or Redaction Validator Skeleton Planning
+```
+
 ## Resume Instruction
 
 ```text
