@@ -2530,6 +2530,46 @@ runtime_execution: false
 recommended_next: v7.74a Push Readiness Gate
 ```
 
+## v7.75 Electron Launch / Existing Runtime State Closeout
+
+```text
+Phase: v7.75
+Status: electron_runtime_state_closeout_completed
+closeout_type: existing_runtime_state_closeout
+runtime_execution_scope: electron_runtime_observation_only
+
+correction:
+  original_reported_electron_launch_executed: true
+  original_reported_launch_attempts: 1
+  corrected_launch_command_executed_this_phase: false
+  corrected_launch_attempts_this_phase: 0
+  correction_reason: "Electron was already running; launch was not re-executed."
+
+electron_already_running: true
+electron_processes_observed: 5
+launch_command_executed_this_phase: false
+launch_attempts_this_phase: 0
+selected_port: 9222
+concrete_cdp_endpoint: http://127.0.0.1:9222
+remote_debug_port_9222_listening: true
+
+cdp_connected: false
+cdp_used: false
+cdp_json_accessed: false
+bridge_called: false
+cancel_called: false
+mcp_codex_memory_called: false
+lt06_executed: false
+
+raw_process_logs_recorded: false
+redacted_summary_only: true
+
+execution_authorized: false
+next_phase_started: false
+
+recommended_next: v7.75a Push Readiness Gate
+```
+
 ## Resume Instruction
 
 ```text

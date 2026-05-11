@@ -83,6 +83,7 @@ v7.71 Port Check Execution Closeout — Port 9222 checked as free under explicit
 v7.72 Concrete CDP Endpoint Lock Patch — Docs-only endpoint lock based on v7.71 port check result (9222 free). Concrete CDP endpoint locked to http://127.0.0.1:9222. exact_endpoint_fully_locked: true. execution_authorized: false. runtime_execution: false. No Electron launch. No CDP connect. No bridge call. No MCP call.
 v7.73 Electron Launch Authorization Package — Docs-only authorization package (prepared_not_granted) for future single VCPChat Electron launch with remote-debug port 9222. Launch command locked: npm start -- --remote-debugging-port=9222. Max 1 attempt. CDP connection, bridge call, cancel call not authorized by this package. No execution.
 v7.74 Electron Launch Execution Authorization Gate — Docs-only execution gate (prepared_not_granted) for future single VCPChat Electron launch with remote-debug port 9222. Launch command locked, max 1 attempt, no retry, no fallback. CDP connection, bridge call, cancel call explicitly not authorized. No execution.
+v7.75 Electron Launch / Existing Runtime State Closeout — Runtime observation closeout. Electron was already running with remote-debug port 9222 active at time of v7.75 launch authorization. Launch command not re-executed. electron_processes_observed: 5, remote_debug_listening: true. No CDP connect, no bridge call, no cancel.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3
