@@ -1,0 +1,25 @@
+# pass fixture — redacted closeout with all required fields
+# Should pass all validator checks.
+
+closeout:
+  commit_hash: abc1234
+  commit_message: "docs: seal vX.XX example closeout"
+  branch: master
+  git_status: synced
+  changed_files: 4
+  local_scope_result: passed
+
+  runtime_execution: false
+  redacted_summary_only: true
+  raw_payload_recorded: false
+
+  electron_started: false
+  remote_debug_started: false
+  cdp_used: false
+  bridge_called: false
+  cancel_called: false
+
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: vX.XX_next_phase

@@ -1,0 +1,9 @@
+# fail fixture — missing required closeout fields
+# Should trigger closeoutIntegrity violation.
+
+closeout:
+  message: "Execution completed successfully."
+  result: "pass"
+  # Missing: runtime_execution, redacted_summary_only, raw_payload_recorded,
+  # known_untracked_file_touched, next_phase_started, commit_hash, branch,
+  # git_status, local_scope_result

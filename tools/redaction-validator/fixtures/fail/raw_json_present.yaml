@@ -1,0 +1,10 @@
+# fail fixture — contains raw_json: true
+# Should trigger forbiddenRawFields violation.
+
+execution_result:
+  cdp_json_accessed: true
+  raw_json_recorded: true
+  json_response: '{"id": "full-uuid-here", "type": "page", "title": "VCPChat"}'
+  redacted_summary_only: false
+  runtime_execution: true
+  raw_payload_recorded: true

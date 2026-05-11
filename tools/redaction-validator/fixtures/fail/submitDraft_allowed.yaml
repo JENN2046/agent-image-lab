@@ -1,0 +1,19 @@
+# fail fixture — submitDraft incorrectly marked as allowed
+# Should trigger permissionDrift violation.
+
+boundary_matrix:
+  schema_version: v1
+  entries:
+    - action_id: vcpchat_submitDraft
+      repo_scope: VCPChat
+      action_type: write_capable
+      allowed_now: true
+      permission_status: allowed_with_new_authorization
+      evidence_source: v7_64
+      forbidden_reason: ""
+      escalation_level: low
+
+  non_permissions:
+    submitDraft_invocation_allowed: true
+    production_candidate_002_allowed_now: false
+    memory_write_path_allowed_now: false

@@ -1,0 +1,10 @@
+# fail fixture — contains webSocketDebuggerUrl
+# Should trigger forbiddenRawFields violation.
+
+target_discovery:
+  target_count: 2
+  webSocketDebuggerUrl: "ws://127.0.0.1:9222/devtools/page/A83B8623-aaaa-bbbb-cccc-ddddeeee0000"
+  devtoolsFrontendUrl: "https://chrome-devtools-frontend.appspot.com/serve_path/inspector.html?ws=..."
+  raw_target_id: "A83B8623-aaaa-bbbb-cccc-ddddeeee0000"
+  full_url: "file:///C:/Users/example/VCPChat/index.html"
+  full_title: "VCPChat - Full Window Title Exposed"
