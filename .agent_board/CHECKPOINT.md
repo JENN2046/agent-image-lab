@@ -4580,6 +4580,37 @@ next_phase_started: false
 recommended_next: v7.127 Long Task Chain Gate
 ```
 
+## v7.127 Controlled Long Task Chain Authorization Gate
+
+```text
+Phase: v7.127
+Status: controlled_long_task_chain_gate_defined
+gate_type: controlled_long_task_chain_gate
+chain_name: Controlled Selected Docs Audit Chain
+chain_authorized_now: false
+runtime_execution: false
+
+source_rescan_phase: v7.126
+source_rescan_commit: a78d71b
+validator_patch_version: v7.117c
+
+prerequisites_met: true
+batch_size_max: 8
+max_validator_runs: 1
+selected_docs_only: true
+
+production_candidate_002_allowed: false
+memory_write_path_allowed: false
+submitDraft_allowed: false
+cdp_access_allowed: false
+
+chain_executed: false
+known_untracked_file_touched: false
+next_phase_started: false
+
+recommended_next: v7.128 First Controlled Batch
+```
+
 ## Resume Instruction
 
 ```text

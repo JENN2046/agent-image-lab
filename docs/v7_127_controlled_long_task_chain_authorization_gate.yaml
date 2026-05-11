@@ -1,0 +1,48 @@
+v7_127_controlled_long_task_chain_authorization_gate:
+  schema_version: v1
+  phase: v7_127
+  gate_type: controlled_long_task_chain_gate
+  chain_name: Controlled Selected Docs Audit Chain
+  chain_authorized_now: false
+  runtime_execution: false
+
+  source:
+    rescan_closeout_phase: v7_126
+    rescan_closeout_commit: a78d71b
+    validator_patch_version: v7_117c
+
+  prerequisites:
+    fixture_dry_run_passed: true
+    selected_docs_rescan_passed: true
+
+  batch_size_max: 8
+  max_validator_runs: 1
+  selected_docs_only: true
+
+  full_repo_scan_allowed: false
+  docs_glob_allowed: false
+  directory_scan_allowed: false
+  autofix_allowed: false
+  document_mutation_allowed: false
+  code_modification_allowed: false
+
+  production_candidate_002_allowed: false
+  memory_write_path_allowed: false
+  submitDraft_allowed: false
+  cdp_access_allowed: false
+  bridge_call_allowed: false
+  mcp_call_allowed: false
+  image_generation_allowed: false
+
+  chain_executed: false
+  runtime_execution: false
+
+  cdp_accessed: false
+  runtime_evaluate_called: false
+  bridge_methods_called: false
+  mcp_called: false
+
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_128_first_controlled_batch
