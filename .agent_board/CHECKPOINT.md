@@ -5710,6 +5710,41 @@ next_phase_started: false
 recommended_next: v7.164 Batch 004 Re-scan Execution
 ```
 
+## v7.164 Batch 004 Re-scan Execution Closeout
+
+```text
+Phase: v7.164
+Status: batch_004_rescan_execution_closeout_completed
+execution_date: 2026-05-11
+
+chain_name: Controlled Selected Docs Audit Chain
+batch_id: controlled_selected_docs_batch_004
+
+validator_executed: true
+validator_runs: 1
+exit_code: 0
+decision: pass
+violations_total: 0
+
+closeout_integrity_clean: true
+forbidden_raw_fields_clean: true
+permission_drift_clean: true
+batch_004_rescan_passed: true
+
+chain_status:
+  batch_001: clean_closed
+  batch_002: clean_closed
+  batch_003: clean_closed
+  batch_004: clean_closed
+four_batch_chain_clean: true
+
+batch_005_allowed_now: false
+known_untracked_file_touched: false
+next_phase_started: false
+
+recommended_next: v7.165 Validator Governance Chain v1 Closeout Gate
+```
+
 ## Resume Instruction
 
 ```text
