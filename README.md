@@ -126,6 +126,7 @@ v7.114 Validator Fixture Dry-run Execution Closeout — Dry-run completed. Exit 
 v7.115 Validator Scan Loop Correction Planning — Correction planning for scan loop. 11 goals (7 P0), 1-2 files to modify, 4 future gates. No implementation.
 v7.116 Scan Loop Correction Implementation Gate — Implementation gate for scan loop correction. 10 requirements (8 P0), 1-2 files to modify. Implementation not authorized.
 v7.117 Scan Loop Correction Implementation — validator.js rewritten with explicit file handling, UTF-8 read, rule invocation, result aggregation. Glob/directory rejection. permissionDrift.js unchanged.
+v7.117a Scan Loop Correction Patch Planning — Patch planning for 3 findings: P1 (list item parsing), P2 (glob rejection order), P3 (unused import). No code changed.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3

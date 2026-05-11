@@ -1,0 +1,34 @@
+v7_117a_scan_loop_correction_patch_planning:
+  schema_version: v1
+  phase: v7_117a
+  planning_type: patch_planning_only
+  implementation_authorized_now: false
+  validator_execution: false
+  runtime_execution: false
+
+  source:
+    implementation_phase: v7_117
+    implementation_commit: 8594127
+
+  findings:
+    p1_list_item_parsing_gap: true
+    p2_glob_rejection_order: true
+    p3_unused_import: true
+
+  files_allowed_to_modify: 1
+  future_gates_required_before_dry_run: 2
+
+  code_modified: false
+  validator_executed: false
+  fixtures_mutated: false
+  runtime_execution: false
+
+  cdp_accessed: false
+  runtime_evaluate_called: false
+  bridge_methods_called: false
+  mcp_called: false
+
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_117b_scan_loop_correction_patch_implementation_gate

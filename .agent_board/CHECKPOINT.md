@@ -4184,6 +4184,40 @@ next_phase_started: false
 recommended_next: v7.118 Corrected Fixture Dry-run Authorization Gate
 ```
 
+## v7.117a Scan Loop Correction Patch Planning
+
+```text
+Phase: v7.117a
+Status: scan_loop_correction_patch_planning_completed
+planning_type: patch_planning_only
+implementation_authorized_now: false
+validator_execution: false
+runtime_execution: false
+
+source_phase: v7.117
+source_commit: 8594127
+
+findings:
+  p1_list_item_parsing_gap: true
+  p2_glob_rejection_order: true
+  p3_unused_import: true
+
+files_allowed_to_modify: 1
+future_gates_required_before_dry_run: 2
+
+code_modified: false
+validator_executed: false
+runtime_execution: false
+
+cdp_accessed: false
+bridge_methods_called: false
+mcp_called: false
+known_untracked_file_touched: false
+next_phase_started: false
+
+recommended_next: v7.117b Scan Loop Correction Patch Implementation Gate
+```
+
 ## Resume Instruction
 
 ```text
