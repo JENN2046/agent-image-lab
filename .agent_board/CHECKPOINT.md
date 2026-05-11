@@ -3056,6 +3056,47 @@ runtime_execution: false
 recommended_next: v7.87
 ```
 
+## v7.87 CDP WebSocket Connect Execution Closeout
+
+```text
+Phase: v7.87
+Status: cdp_websocket_connect_execution_closeout_completed
+execution_date: 2026-05-11
+
+cdp_websocket_connect_executed: true
+cdp_websocket_connections_opened: 1
+target_fingerprint: A83B8623
+connection_established: true
+connection_closed_after_probe: true
+cdp_commands_sent: false
+runtime_evaluate_called: false
+bridge_called: false
+cancel_called: false
+redacted_summary_only: true
+
+authorization_variance:
+  detected: true
+  variance_type: instrumental_json_access_required_for_websocket_url_resolution
+  cdp_json_accessed: true
+  cdp_json_access_purpose: websocket_url_resolution_only
+  cdp_json_raw_data_recorded: false
+  cdp_json_target_data_recorded: false
+  variance_security_impact: low
+  variance_process_impact: requires_future_authorization_template_update
+
+governance_rule_update:
+  allow_one_instrumental_json_request_for_websocket_url_resolution: true
+  raw_json_recording_forbidden: true
+  target_data_recording_forbidden: true
+  websocket_connect_max: 1
+  runtime_evaluate_remains_forbidden_unless_separately_authorized: true
+
+known_untracked_file_touched: false
+next_phase_started: false
+
+recommended_next: v7.88
+```
+
 ## Resume Instruction
 
 ```text
