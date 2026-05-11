@@ -100,6 +100,7 @@ v7.88 Runtime.evaluate Surface Probe Authorization Package — Docs-only authori
 v7.89 Runtime.evaluate Surface Probe Execution Gate — Docs-only execution gate (prepared_not_granted) for future single Runtime.evaluate surface probe. Target A83B8623. Allowed expressions locked: typeof window.imageLabReview / Object.keys. Max 1 call. Bridge, cancel not authorized.
 v7.90 Runtime.evaluate Surface Probe Execution Closeout — Runtime.evaluate executed. imageLabReview surface confirmed present, 4 methods: loadSession, previewDraft, submitDraft, cancel. Matches v7.64 static review. No bridge methods invoked. submitDraft permanently forbidden, cancel candidate for next preflight.
 v7.91 Cancel-only Preflight Authorization Package — Docs-only authorization package (prepared_not_granted) for future single cancel preflight. Target A83B8623. Cancel max 1, read_only, noop-safe. loadSession/previewDraft/submitDraft not authorized. submitDraft permanently forbidden.
+v7.92 Cancel-only Preflight Execution Gate — Docs-only execution gate (prepared_not_granted) for future single cancel preflight. Target A83B8623. Exact method: window.imageLabReview.cancel({}). Payload: {}. Max 1, no retry/fallback. loadSession/previewDraft/submitDraft not authorized.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3
