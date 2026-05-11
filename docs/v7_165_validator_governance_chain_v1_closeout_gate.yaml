@@ -1,0 +1,44 @@
+v7_165_validator_governance_chain_v1_closeout_gate:
+  schema_version: v1
+  phase: v7_165
+  gate_type: chain_closeout_gate
+  chain_name: Controlled Selected Docs Audit Chain
+  chain_version: v1
+  closeout_authorized_now: false
+  runtime_execution: false
+
+  source:
+    last_batch_closeout_phase: v7_164
+    last_batch_closeout_commit: a495afe
+  validator_patch_version: v7_146
+
+  batches_completed: 4
+  total_initial_violations: 106
+  total_resolved_violations: 106
+  remaining_violations: 0
+
+  batch_001_status: clean_closed
+  batch_002_status: clean_closed
+  batch_003_status: clean_closed
+  batch_004_status: clean_closed
+
+  forbiddenRawFields_final: 0
+  permissionDrift_final: 0
+  closeoutIntegrity_final: 0
+  raw_data_exposure: 0
+
+  cdp_accessed: false
+  bridge_call: false
+  mcp_call: false
+  memory_write: false
+  image_generation: false
+  production_candidate_opened: false
+  memory_write_path_opened: false
+  submitDraft_invoked: false
+  batch_005_allowed: false
+
+  batch_005_allowed_now: false
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_166_validator_governance_chain_v1_final_closeout

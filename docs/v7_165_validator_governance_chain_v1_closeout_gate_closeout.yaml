@@ -1,0 +1,19 @@
+v7_165_validator_governance_chain_v1_closeout_gate_closeout:
+  schema_version: v1
+  phase: v7_165
+  closeout_status: completed
+  gate_type: chain_closeout_gate
+  chain_name: Controlled Selected Docs Audit Chain
+  chain_version: v1
+  closeout_authorized_now: false
+  runtime_execution: false
+
+  batches_completed: 4
+  total_resolved_violations: 106
+  remaining_violations: 0
+
+  batch_005_allowed_now: false
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_166_validator_governance_chain_v1_final_closeout
