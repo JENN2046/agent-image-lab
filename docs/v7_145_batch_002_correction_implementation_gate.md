@@ -111,3 +111,19 @@ safety_constraints:
 | docs_files_to_modify | 7 |
 | batch_003_allowed_now | false |
 | next | v7.146 Batch 002 Correction Implementation |
+
+---
+
+## 8. Closeout Integrity Fields
+
+```yaml
+closeout_integrity_fields:
+  redacted_summary_only: true
+  raw_payload_recorded: false
+  known_untracked_file_touched: false
+  next_phase_started: false
+  commit_hash: ec3d31a
+  branch: master
+  git_status: synced
+  local_scope_result: passed
+```

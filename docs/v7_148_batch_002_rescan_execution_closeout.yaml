@@ -54,5 +54,12 @@ v7_148_batch_002_rescan_execution_closeout:
 
   known_untracked_file_touched: false
   next_phase_started: false
+  runtime_execution: false
+  redacted_summary_only: true
+  raw_payload_recorded: false
+  commit_hash: 1811315
+  branch: master
+  git_status: synced
+  local_scope_result: passed
 
   recommended_next: v7_149_batch_003_authorization_gate
