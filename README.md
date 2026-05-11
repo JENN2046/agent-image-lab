@@ -125,6 +125,7 @@ v7.113 Validator Fixture Dry-run Authorization Gate — Dry-run gate for validat
 v7.114 Validator Fixture Dry-run Execution Closeout — Dry-run completed. Exit 0 (skeleton_limited). Rule modules exist but not wired into scan loop. Functional status: incomplete. Correction required before real docs scan.
 v7.115 Validator Scan Loop Correction Planning — Correction planning for scan loop. 11 goals (7 P0), 1-2 files to modify, 4 future gates. No implementation.
 v7.116 Scan Loop Correction Implementation Gate — Implementation gate for scan loop correction. 10 requirements (8 P0), 1-2 files to modify. Implementation not authorized.
+v7.117 Scan Loop Correction Implementation — validator.js rewritten with explicit file handling, UTF-8 read, rule invocation, result aggregation. Glob/directory rejection. permissionDrift.js unchanged.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3

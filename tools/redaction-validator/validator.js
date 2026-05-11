@@ -1,21 +1,30 @@
 #!/usr/bin/env node
-// Redaction Validator — Skeleton
+// Redaction Validator — v7.117 scan loop correction
 // Read-only. No network. No CDP. No bridge. No MCP.
 // Exit codes: 0=pass, 1=warning, 2=block, 3=internal_error
 
 'use strict';
+
+const fs = require('fs');
+const pathModule = require('path');
 
 const EXIT_PASS = 0;
 const EXIT_WARNING = 1;
 const EXIT_BLOCK = 2;
 const EXIT_ERROR = 3;
 
-const VALIDATOR_VERSION = 'v7.110-skeleton';
+const VALIDATOR_VERSION = 'v7.117-scan-loop';
+const GLOB_PATTERN = /[*?[\]{}]/;
 
 function printUsage() {
   console.error(`Redaction Validator ${VALIDATOR_VERSION}`);
-  console.error('Usage: node validator.js <path1> [path2] ...');
+  console.error('Usage: node validator.js <file1> [file2] ...');
+  console.error('Explicit file paths only. No directories. No glob patterns.');
   console.error('Read-only. Does not modify files, access network, CDP, bridge, or MCP.');
+}
+
+function isGlobPattern(str) {
+  return GLOB_PATTERN.test(str);
 }
 
 function buildSummaryReport(results) {
@@ -51,6 +60,77 @@ function printReport(report) {
   console.log(JSON.stringify(report, null, 2));
 }
 
+// Minimal YAML shape parser for boundary matrix detection.
+// Does NOT require npm yaml parser. Handles only the known matrix shape:
+// entries: / non_permissions: at top level, with action_id / allowed_now / permission_status fields.
+function parseMinimalMatrix(text, filePath) {
+  const matrix = { entries: [], non_permissions: {} };
+
+  // Detect if this file looks like a boundary matrix
+  if (!/\bentries\s*:/i.test(text) && !/\bnon_permissions\s*:/i.test(text)) {
+    return null; // Not a matrix file
+  }
+
+  // Simple line-by-line parse for entries
+  const lines = text.split('\n');
+  let currentEntry = null;
+  let inEntries = false;
+  let inNonPermissions = false;
+
+  for (const rawLine of lines) {
+    const line = rawLine.replace(/#.*$/, '').trim();
+    if (!line) continue;
+
+    if (/^entries\s*:$/i.test(line)) {
+      inEntries = true;
+      inNonPermissions = false;
+      continue;
+    }
+
+    if (/^non_permissions\s*:$/i.test(line)) {
+      inEntries = false;
+      inNonPermissions = true;
+      continue;
+    }
+
+    if (/^[a-zA-Z_]\w*\s*:$/i.test(line) && inEntries) {
+      // Start of a new entry block
+      if (currentEntry) {
+        matrix.entries.push(currentEntry);
+      }
+      currentEntry = {};
+      continue;
+    }
+
+    const keyVal = line.match(/^([a-zA-Z_]\w*)\s*:\s*(.+)$/);
+    if (!keyVal) continue;
+
+    const key = keyVal[1];
+    const valRaw = keyVal[2].trim();
+
+    if (inEntries && currentEntry) {
+      if (valRaw === 'true') currentEntry[key] = true;
+      else if (valRaw === 'false') currentEntry[key] = false;
+      else if (/^\d+$/.test(valRaw)) currentEntry[key] = parseInt(valRaw, 10);
+      else currentEntry[key] = valRaw.replace(/^["']|["']$/g, '');
+    }
+
+    if (inNonPermissions) {
+      if (valRaw === 'true') matrix.non_permissions[key] = true;
+      else if (valRaw === 'false') matrix.non_permissions[key] = false;
+      else if (/^\d+$/.test(valRaw)) matrix.non_permissions[key] = parseInt(valRaw, 10);
+      else matrix.non_permissions[key] = valRaw.replace(/^["']|["']$/g, '');
+    }
+  }
+
+  // Push last entry
+  if (currentEntry) {
+    matrix.entries.push(currentEntry);
+  }
+
+  return matrix;
+}
+
 async function main() {
   const args = process.argv.slice(2);
 
@@ -59,50 +139,89 @@ async function main() {
     process.exit(EXIT_PASS);
   }
 
-  // Skeleton: load rule modules (modules are not auto-executed)
+  // Load rule modules
   const forbiddenRawFields = require('./rules/forbiddenRawFields');
   const allowedSummaryFields = require('./rules/allowedSummaryFields');
   const closeoutIntegrity = require('./rules/closeoutIntegrity');
   const permissionDrift = require('./rules/permissionDrift');
 
-  // Skeleton: results placeholder
-  const results = [];
+  // Separate results per rule
+  const ruleResults = {
+    forbiddenRawFields: { rule: 'forbiddenRawFields', filesScanned: 0, violations: 0, warnings: 0, notes: 0, details: [] },
+    allowedSummaryFields: { rule: 'allowedSummaryFields', filesScanned: 0, violations: 0, warnings: 0, notes: 0, details: [] },
+    closeoutIntegrity: { rule: 'closeoutIntegrity', filesScanned: 0, violations: 0, warnings: 0, notes: 0, details: [] },
+    permissionDrift: { rule: 'permissionDrift', filesScanned: 0, violations: 0, warnings: 0, notes: 0, details: [] },
+  };
 
-  // Skeleton: each rule module defines a run(files) function signature
-  // In this skeleton, we report that no scanning was performed.
-  results.push({
-    rule: 'forbiddenRawFields',
-    filesScanned: 0,
-    violations: 0,
-    warnings: 0,
-    notes: 1,
-    message: 'Skeleton — no scanning performed',
-  });
-  results.push({
-    rule: 'allowedSummaryFields',
-    filesScanned: 0,
-    violations: 0,
-    warnings: 0,
-    notes: 1,
-    message: 'Skeleton — no scanning performed',
-  });
-  results.push({
-    rule: 'closeoutIntegrity',
-    filesScanned: 0,
-    violations: 0,
-    warnings: 0,
-    notes: 1,
-    message: 'Skeleton — no scanning performed',
-  });
-  results.push({
-    rule: 'permissionDrift',
-    filesScanned: 0,
-    violations: 0,
-    warnings: 0,
-    notes: 1,
-    message: 'Skeleton — no scanning performed',
-  });
+  // Process each file
+  for (const filePath of args) {
+    // Reject directory targets
+    try {
+      const stat = fs.statSync(filePath);
+      if (stat.isDirectory()) {
+        ruleResults.forbiddenRawFields.notes++;
+        ruleResults.forbiddenRawFields.details.push({ file: filePath, message: 'Skipped directory target (not allowed)' });
+        continue;
+      }
+    } catch {
+      ruleResults.forbiddenRawFields.warnings++;
+      ruleResults.forbiddenRawFields.details.push({ file: filePath, message: 'Cannot access file' });
+      continue;
+    }
 
+    // Reject glob patterns
+    if (isGlobPattern(filePath)) {
+      ruleResults.forbiddenRawFields.notes++;
+      ruleResults.forbiddenRawFields.details.push({ file: filePath, message: 'Skipped glob pattern (not allowed)' });
+      continue;
+    }
+
+    // Read file
+    let text;
+    try {
+      text = fs.readFileSync(filePath, 'utf-8');
+    } catch (err) {
+      ruleResults.forbiddenRawFields.warnings++;
+      ruleResults.forbiddenRawFields.details.push({ file: filePath, message: `Read error: ${err.message}` });
+      continue;
+    }
+
+    // Count as scanned
+    ruleResults.forbiddenRawFields.filesScanned++;
+    ruleResults.allowedSummaryFields.filesScanned++;
+    ruleResults.closeoutIntegrity.filesScanned++;
+    ruleResults.permissionDrift.filesScanned++;
+
+    // Run forbiddenRawFields scan
+    const rawFieldViolations = forbiddenRawFields.scanForbiddenRawFields(text, filePath);
+    for (const v of rawFieldViolations) {
+      ruleResults.forbiddenRawFields.violations++;
+      ruleResults.forbiddenRawFields.details.push(v);
+    }
+
+    // Run closeoutIntegrity scan
+    const integrityViolations = closeoutIntegrity.checkCloseoutIntegrity(text, filePath);
+    for (const v of integrityViolations) {
+      ruleResults.closeoutIntegrity.violations++;
+      ruleResults.closeoutIntegrity.details.push(v);
+    }
+
+    // Run permissionDrift if file looks like boundary matrix
+    const matrix = parseMinimalMatrix(text, filePath);
+    if (matrix && (matrix.entries.length > 0 || Object.keys(matrix.non_permissions).length > 0)) {
+      const driftViolations = permissionDrift.checkPermissionDrift(matrix);
+      for (const v of driftViolations) {
+        ruleResults.permissionDrift.violations++;
+        ruleResults.permissionDrift.details.push(v);
+      }
+    } else {
+      ruleResults.permissionDrift.notes++;
+      ruleResults.permissionDrift.details.push({ file: filePath, message: 'Not a boundary matrix file — permissionDrift skipped' });
+    }
+  }
+
+  // Build summary
+  const results = Object.values(ruleResults);
   const report = buildSummaryReport(results);
   printReport(report);
   process.exit(report.exit_code);
@@ -115,4 +234,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { buildSummaryReport, EXIT_PASS, EXIT_WARNING, EXIT_BLOCK, EXIT_ERROR, VALIDATOR_VERSION };
+module.exports = { buildSummaryReport, EXIT_PASS, EXIT_WARNING, EXIT_BLOCK, EXIT_ERROR, VALIDATOR_VERSION, parseMinimalMatrix };
