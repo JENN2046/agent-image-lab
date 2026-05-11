@@ -1,0 +1,42 @@
+v7_93_cancel_only_preflight_execution_closeout:
+  schema_version: v1
+  phase: v7_93
+  closeout_status: completed
+  execution_date: 2026-05-11
+
+  cancel_only_preflight_executed: true
+  target_fingerprint: A83B8623
+  cdp_websocket_connections_opened: 1
+  instrumental_json_accessed: true
+  runtime_evaluate_calls: 1
+  exact_bridge_method_called: window.imageLabReview.cancel
+  payload: {}
+  cancel_call_count: 1
+  retry_performed: false
+  fallback_performed: false
+  result_type: object
+  success_boolean: true
+  error_name_redacted: none
+  error_message_redacted: none
+  redacted_summary_only: true
+
+  bridge_available_confirmed: true
+  cancel_noop_preflight_confirmed: true
+
+  loadSession_called: false
+  previewDraft_called: false
+  submitDraft_called: false
+  submitDraft_remains_permanently_forbidden: true
+  second_cancel_call_executed: false
+  arbitrary_user_code_executed: false
+  file_read_performed: false
+  mcp_codex_memory_called: false
+  lt06_executed: false
+  electron_relaunched: false
+
+  known_untracked_file_touched: false
+
+  next_candidate: loadSession_read_only_authorization_package
+  next_phase_started: false
+
+  recommended_next: v7.94
