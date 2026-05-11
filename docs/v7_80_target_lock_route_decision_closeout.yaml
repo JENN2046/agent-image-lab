@@ -1,0 +1,46 @@
+v7_80_target_lock_route_decision_closeout:
+  schema_version: v1
+  phase: v7_80
+  closeout_status: completed
+  document_type: route_decision
+  runtime_execution: false
+
+  target_lock_route_decision_completed: true
+  selected_route: option_a_second_json_for_exact_lock
+  rejected_route_b_reason: target_selection_ambiguity
+  rejected_route_c_reason: broader_scope_than_needed
+
+  second_json_request_required: true
+  second_json_request_authorized_now: false
+  second_json_request_scope: exact_target_lock_only
+
+  raw_json_response_still_forbidden: true
+  full_websocket_debugger_url_forbidden: true
+  full_raw_target_id_forbidden: true
+  full_url_forbidden: true
+  full_title_forbidden: true
+
+  cdp_websocket_connect_authorized: false
+  runtime_evaluate_authorized: false
+  bridge_call_authorized: false
+  cancel_call_authorized: false
+
+  cdp_json_accessed: false
+  cdp_connected: false
+  runtime_evaluate_called: false
+  bridge_called: false
+  cancel_called: false
+  loadSession_called: false
+  previewDraft_called: false
+  submitDraft_called: false
+  mcp_codex_memory_called: false
+  lt06_executed: false
+  electron_relaunched: false
+
+  known_untracked_file_touched: false
+
+  execution_authorized: false
+  runtime_execution: false
+  next_phase_started: false
+
+  recommended_next: v7.80a Push Readiness Gate
