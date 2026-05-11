@@ -1,0 +1,40 @@
+v7_151_batch_003_correction_planning:
+  schema_version: v1
+  phase: v7_151
+  chain_name: Controlled Selected Docs Audit Chain
+  batch_id: controlled_selected_docs_batch_003
+  planning_type: batch_003_correction_planning
+  correction_authorized_now: false
+  validator_execution: false
+  runtime_execution: false
+
+  source:
+    batch_closeout_phase: v7_150
+    batch_closeout_commit: ae5719f
+
+  violations_total: 23
+  closeoutIntegrity_violations: 23
+  permissionDrift_violations: 0
+  forbiddenRawFields_violations: 0
+  raw_data_exposure: 0
+  permission_drift_scope_refinement_effective: true
+
+  count_detail_mismatch_detected: true
+  unitemized_findings_count: 2
+  exact_finding_recovery_required: true
+  future_gates_defined: 7
+
+  remediation_performed: false
+  validator_executed: false
+  docs_scanned: false
+  documents_mutated: false
+
+  batch_004_allowed_now: false
+  cdp_accessed: false
+  bridge_methods_called: false
+  mcp_called: false
+
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_152_batch_003_exact_finding_recovery_gate

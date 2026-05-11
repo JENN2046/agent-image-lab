@@ -5332,6 +5332,36 @@ next_phase_started: false
 recommended_next: v7.151 Batch 003 Correction Planning
 ```
 
+## v7.151 Batch 003 Correction Planning
+
+```text
+Phase: v7.151
+Status: batch_003_correction_planning_completed
+planning_type: batch_003_correction_planning
+correction_authorized_now: false
+validator_execution: false
+runtime_execution: false
+
+source_phase: v7.150
+source_commit: ae5719f
+chain_name: Controlled Selected Docs Audit Chain
+batch_id: controlled_selected_docs_batch_003
+
+violations_total: 23
+closeoutIntegrity: 23
+permissionDrift: 0
+unitemized_findings: 2
+permission_drift_scope_refinement_effective: true
+future_gates_defined: 7
+
+remediation_performed: false
+batch_004_allowed_now: false
+known_untracked_file_touched: false
+next_phase_started: false
+
+recommended_next: v7.152 Batch 003 Exact Finding Recovery Gate
+```
+
 ## Resume Instruction
 
 ```text
