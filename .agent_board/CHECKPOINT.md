@@ -3135,6 +3135,45 @@ runtime_execution: false
 recommended_next: v7.89
 ```
 
+## v7.89 Runtime.evaluate Surface Probe Execution Gate
+
+```text
+Phase: v7.89
+Status: runtime_evaluate_surface_probe_execution_gate_prepared_not_granted
+gate_type: execution_authorization_gate
+package_status: prepared_not_granted
+runtime_execution: false
+
+carry_forward:
+  prior_v7_88_commit: 2bf34c2
+  target_fingerprint: A83B8623
+
+target_fingerprint: A83B8623
+max_cdp_websocket_connections: 1
+max_runtime_evaluate_calls: 1
+evaluate_purpose: detect_imageLabReview_surface_presence_only
+allowed_expression_type: read_only_boolean_or_keys_probe
+selected_expression_policy: one_of_allowed_candidates_only
+
+bridge_call_authorized: false
+cancel_call_authorized: false
+runtime_evaluate_authorized_now: false
+
+cdp_json_accessed: false
+cdp_connected: false
+runtime_evaluate_called: false
+bridge_called: false
+cancel_called: false
+mcp_codex_memory_called: false
+lt06_executed: false
+known_untracked_file_touched: false
+
+execution_authorized: false
+runtime_execution: false
+
+recommended_next: v7.90
+```
+
 ## Resume Instruction
 
 ```text
