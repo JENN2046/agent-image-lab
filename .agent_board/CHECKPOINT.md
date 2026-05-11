@@ -4834,6 +4834,36 @@ next_phase_started: false
 recommended_next: v7.135 Residual Correction Planning
 ```
 
+## v7.135 Batch 001 Residual Correction Planning
+
+```text
+Phase: v7.135
+Status: batch_001_residual_correction_planning_completed
+planning_type: residual_closeout_integrity_correction_planning
+correction_authorized_now: false
+validator_execution: false
+runtime_execution: false
+
+source_phase: v7.134
+source_commit: 54c5f87
+chain_name: Controlled Selected Docs Audit Chain
+batch_id: controlled_selected_docs_batch_001
+
+residual_violations: 11
+  - category_a_markdown_next_phase_started: 4
+  - category_b_yaml_legacy_gaps: 7
+
+correction_strategy_defined: true
+future_gates_defined: 5
+
+remediation_performed: false
+next_batch_allowed_now: false
+known_untracked_file_touched: false
+next_phase_started: false
+
+recommended_next: v7.136 Batch 001 Residual Correction Implementation Gate
+```
+
 ## Resume Instruction
 
 ```text
