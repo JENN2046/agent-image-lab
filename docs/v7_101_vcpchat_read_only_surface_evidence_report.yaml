@@ -1,0 +1,88 @@
+v7_101_vcpchat_read_only_surface_evidence_report:
+  schema_version: v1
+  phase: v7_101
+  document_type: evidence_report
+  report_date: 2026-05-11
+
+  report_scope:
+    target: VCPChat_imageLabReview_bridge
+    target_fingerprint: A83B8623
+    cdp_endpoint: "http://127.0.0.1:9222"
+    coverage_start: v7_64
+    coverage_end: v7_100
+    total_phases: 28
+
+  evidence_chain:
+    static_review:
+      phase: v7_64
+      files_reviewed: 4
+      methods_found: 4
+
+    cdp_target_lock:
+      phases:
+        - v7_71_port_check
+        - v7_72_endpoint_lock
+        - v7_75_runtime_state
+        - v7_78_target_discovery
+        - v7_83_exact_lock
+        - v7_84_fingerprint_lock
+      target_fingerprint: A83B8623
+
+    websocket_connect:
+      phase: v7_87
+      established: true
+      cdp_commands_sent: 0
+
+    surface_probe:
+      phase: v7_90
+      expression: "Object.keys(window.imageLabReview || {})"
+      static_review_match: true
+
+    cancel_probe:
+      phase: v7_93
+      payload: {}
+      success: true
+
+    loadSession_probe:
+      phase: v7_96
+      payload: {}
+      success: true
+
+    previewDraft_probe:
+      phase: v7_99
+      payload: {}
+      success: true
+
+    closeout:
+      phase: v7_100
+      type: comprehensive_runtime_closeout
+
+  confirmed_read_only_methods:
+    - cancel
+    - loadSession
+    - previewDraft
+
+  permanently_forbidden:
+    method: submitDraft
+    reason: write_capable_by_design
+
+  runtime_boundaries:
+    write_path_touched: false
+    raw_payload_recorded: false
+    redacted_summary_only: true
+    memory_write_performed: false
+    dailynote_write_performed: false
+    image_generated: false
+    second_lt06_executed: false
+
+  authorization_variances:
+    - phase: v7_87
+      type: instrumental_json_access_for_websocket_url_resolution
+      security_impact: low
+      resolution: governance_rule_updated
+
+  current_non_permissions:
+    production_candidate_002_allowed_now: false
+    memory_write_path_allowed_now: false
+
+  recommended_next: v7_102_cross_repo_boundary_audit
