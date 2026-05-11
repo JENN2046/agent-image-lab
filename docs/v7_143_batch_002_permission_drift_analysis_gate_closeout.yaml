@@ -1,0 +1,31 @@
+v7_143_batch_002_permission_drift_analysis_gate_closeout:
+  schema_version: v1
+  phase: v7_143
+  closeout_status: completed
+  gate_type: permission_drift_analysis_gate
+  analysis_authorized_now: false
+  correction_authorized_now: false
+  validator_execution_authorized_now: false
+  runtime_execution: false
+
+  chain_name: Controlled Selected Docs Audit Chain
+  batch_id: controlled_selected_docs_batch_002
+
+  drift_findings: 3
+  decision_options: 4
+
+  analysis_executed: false
+  docs_mutated: false
+  validator_code_mutated: false
+  validator_executed: false
+  batch_003_allowed_now: false
+
+  cdp_accessed: false
+  runtime_evaluate_called: false
+  bridge_methods_called: false
+  mcp_called: false
+
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_144_batch_002_permission_drift_analysis
