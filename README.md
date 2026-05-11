@@ -171,6 +171,7 @@ v7.156 Batch 003 Re-scan Authorization Gate — Re-scan gate for corrected Batch
 v7.157 Batch 003 Re-scan Execution Closeout — Re-scan passed. Exit 0. 0 violations. 23 resolved. Batch 004 gate recommended next.
 v7.158 Batch 004 Authorization Gate — Batch 004 gate. 8 selected files. Prior batches 001–003 all clean. Batch not authorized.
 v7.159 Batch 004 Execution Closeout — Batch 004 exit 2. 23 closeoutIntegrity violations (3 docs). permissionDrift 0. Batch 005 blocked.
+v7.160 Batch 004 Correction Planning — Planning for 23 findings. Batch 005 blocked.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3

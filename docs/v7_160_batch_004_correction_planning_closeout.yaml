@@ -1,0 +1,14 @@
+v7_160_batch_004_correction_planning_closeout:
+  schema_version: v1
+  phase: v7_160
+  closeout_status: completed
+  planning_type: batch_004_correction_planning
+  correction_authorized_now: false
+  runtime_execution: false
+
+  violations_total: 23
+  batch_005_allowed_now: false
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_161

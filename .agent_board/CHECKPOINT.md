@@ -5604,6 +5604,32 @@ next_phase_started: false
 recommended_next: v7.160 Batch 004 Correction Planning
 ```
 
+## v7.160 Batch 004 Correction Planning
+
+```text
+Phase: v7.160
+Status: batch_004_correction_planning_completed
+planning_type: batch_004_correction_planning
+correction_authorized_now: false
+runtime_execution: false
+
+source_phase: v7.159
+source_commit: 670b02f
+chain_name: Controlled Selected Docs Audit Chain
+batch_id: controlled_selected_docs_batch_004
+
+violations_total: 23
+closeoutIntegrity: 23
+permissionDrift: 0
+permission_drift_scope_refinement_effective: true
+
+batch_005_allowed_now: false
+known_untracked_file_touched: false
+next_phase_started: false
+
+recommended_next: v7.161
+```
+
 ## Resume Instruction
 
 ```text
