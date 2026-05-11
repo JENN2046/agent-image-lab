@@ -2,7 +2,7 @@
 
 The following files are **historical reference only** and do not represent current active routes:
 
-- `docs/244_v6_8_plugin_dashboard_planning.md` — Historical planning document
+- `docs/244_v6_8_plugin_dashboard_plan.md` — Historical planning document
 - `docs/245_v6_8a_plugin_dashboard_draft_surface.md` — Historical draft surface spec
 - `docs/246_v6_8b_plugin_dashboard_guard_hardening.md` — Historical guard hardening spec
 - `scripts/validate_v6_8_plugin_dashboard.js` — Historical validator (superseded)
