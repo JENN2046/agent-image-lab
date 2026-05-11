@@ -124,6 +124,7 @@ v7.112 Validator Fixture Static Review — Dedicated fixture review. 5 fixtures:
 v7.113 Validator Fixture Dry-run Authorization Gate — Dry-run gate for validator. Fixtures-only scope, max 1 run, read-only. Full repo scan, docs scan, file write, network, CDP, bridge, MCP all forbidden.
 v7.114 Validator Fixture Dry-run Execution Closeout — Dry-run completed. Exit 0 (skeleton_limited). Rule modules exist but not wired into scan loop. Functional status: incomplete. Correction required before real docs scan.
 v7.115 Validator Scan Loop Correction Planning — Correction planning for scan loop. 11 goals (7 P0), 1-2 files to modify, 4 future gates. No implementation.
+v7.116 Scan Loop Correction Implementation Gate — Implementation gate for scan loop correction. 10 requirements (8 P0), 1-2 files to modify. Implementation not authorized.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3
