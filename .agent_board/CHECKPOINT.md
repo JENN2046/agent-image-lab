@@ -3174,6 +3174,43 @@ runtime_execution: false
 recommended_next: v7.90
 ```
 
+## v7.90 Runtime.evaluate Surface Probe Execution Closeout
+
+```text
+Phase: v7.90
+Status: runtime_evaluate_surface_probe_execution_closeout_completed
+execution_date: 2026-05-11
+
+runtime_evaluate_executed: true
+runtime_evaluate_calls: 1
+target_fingerprint: A83B8623
+selected_expression: Object.keys(window.imageLabReview || {})
+surface_present: true
+exposed_methods:
+  - loadSession
+  - previewDraft
+  - submitDraft
+  - cancel
+static_review_match: true
+
+bridge_method_invoked: false
+cancel_called: false
+loadSession_called: false
+previewDraft_called: false
+submitDraft_called: false
+submitDraft_remains_permanently_forbidden: true
+cancel_candidate_for_next_preflight: true
+
+cdp_websocket_connections_opened: 1
+second_websocket_connection_opened: false
+known_untracked_file_touched: false
+
+redacted_summary_only: true
+next_phase_started: false
+
+recommended_next: v7.91
+```
+
 ## Resume Instruction
 
 ```text
