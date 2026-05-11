@@ -79,6 +79,7 @@ v7.67 Cancel Preflight Endpoint Lock and Execution Authorization Gate — docs-o
 v7.68 Exact Port Selection Planning — docs-only planning for exact remote-debug port. Preferred port 9222, fallback 9223. Port conflict check and Electron launch commands defined but not run. CDP endpoint format locked. All invariants maintained: exact_endpoint_fully_locked=false, execution_authorized=false.
 v7.69 Port Check Authorization Package — docs-only authorization package (prepared_not_granted) for future port conflict check. Primary 9222, fallback 9223. Max 1-2 commands. Exact PowerShell command locked. Not executed. No Electron/remote-debug/CDP/bridge/cancel.
 v7.70 Port Check Execution Authorization Gate — docs-only execution gate (prepared_not_granted) for port conflict check. Primary 9222, fallback 9223. Max 1-2 commands. Command hardened: 4-case output (free/occupied_by_vcpchat/occupied_by_other/check_error). Redacted summary only. Not executed. Authorization phrase: "批准 v7.70 端口检测".
+v7.71 Port Check Execution Closeout — Port 9222 checked as free under explicit user authorization "批准 v7.70 端口检测". 1 command executed, no fallback needed. Port 9223 not checked (9222 free skipped fallback). Concrete CDP endpoint candidate: http://127.0.0.1:9222. exact_endpoint_fully_locked: false. execution_authorized: false. runtime_execution: false. No Electron launch. No CDP connect. No bridge call. No MCP call. No file write.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3

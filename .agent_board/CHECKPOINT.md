@@ -2363,6 +2363,45 @@ external_side_effects:
 - image_binary_read: false
 ```
 
+## v7.71 Port Check Execution Closeout
+
+```text
+Phase: v7.71
+Status: port_check_execution_closeout_completed
+scope: port_check_execution
+runtime_execution: false
+
+port_check_executed: true
+total_commands_executed: 1
+port_9222_status: free
+port_9223_checked: false
+port_9223_status: not_checked
+selected_port_candidate: 9222
+concrete_cdp_endpoint_candidate: http://127.0.0.1:9222
+exact_endpoint_fully_locked: false
+raw_command_output_recorded: false
+redacted_summary_only: true
+
+electron_started: false
+remote_debug_started: false
+cdp_used: false
+bridge_called: false
+cancel_called: false
+loadSession_called: false
+previewDraft_called: false
+submitDraft_called: false
+mcp_codex_memory_called: false
+lt06_executed: false
+dailynote_written: false
+vcp_memory_written: false
+image_generated: false
+
+execution_authorized: false
+next_phase_started: false
+
+recommended_next: v7.71a Push Readiness Gate
+```
+
 ## Resume Instruction
 
 ```text
