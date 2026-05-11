@@ -1,0 +1,45 @@
+v7_96_loadSession_read_only_execution_closeout:
+  schema_version: v1
+  phase: v7_96
+  closeout_status: completed
+  execution_date: 2026-05-11
+
+  loadSession_read_only_executed: true
+  target_fingerprint: A83B8623
+  cdp_websocket_connections_opened: 1
+  instrumental_json_accessed: true
+  runtime_evaluate_calls: 1
+  exact_bridge_method_called: window.imageLabReview.loadSession
+  payload: {}
+  loadSession_call_count: 1
+  retry_performed: false
+  fallback_performed: false
+  result_type: object
+  success_boolean: true
+  raw_payload_recorded: false
+  returned_payload_redacted_summary_only: true
+  error_name_redacted: none
+  error_message_redacted: none
+
+  loadSession_empty_payload_supported: true
+  loadSession_read_only_probe_confirmed: true
+
+  previewDraft_called: false
+  submitDraft_called: false
+  cancel_called: false
+  second_loadSession_call_executed: false
+  arbitrary_user_code_executed: false
+  file_read_performed: false
+  file_write_performed: false
+  mcp_codex_memory_called: false
+  lt06_executed: false
+  dailynote_written: false
+  vcp_memory_written: false
+  electron_relaunched: false
+
+  known_untracked_file_touched: false
+
+  next_candidate: previewDraft_read_only_authorization_package
+  next_phase_started: false
+
+  recommended_next: v7.97
