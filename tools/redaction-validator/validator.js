@@ -6,14 +6,13 @@
 'use strict';
 
 const fs = require('fs');
-const pathModule = require('path');
 
 const EXIT_PASS = 0;
 const EXIT_WARNING = 1;
 const EXIT_BLOCK = 2;
 const EXIT_ERROR = 3;
 
-const VALIDATOR_VERSION = 'v7.117-scan-loop';
+const VALIDATOR_VERSION = 'v7.117c-patched';
 const GLOB_PATTERN = /[*?[\]{}]/;
 
 function printUsage() {
@@ -93,13 +92,29 @@ function parseMinimalMatrix(text, filePath) {
       continue;
     }
 
-    if (/^[a-zA-Z_]\w*\s*:$/i.test(line) && inEntries) {
-      // Start of a new entry block
-      if (currentEntry) {
-        matrix.entries.push(currentEntry);
+    if (inEntries) {
+      // Start of a new entry block: key: only (after entries:)
+      const entryStartSimple = line.match(/^([a-zA-Z_]\w*)\s*:\s*$/);
+      // Start of a list entry: - key: value (YAML list format)
+      const entryStartList = line.match(/^- ([a-zA-Z_]\w*)\s*:\s*(.*)$/);
+
+      if (entryStartSimple) {
+        if (currentEntry) matrix.entries.push(currentEntry);
+        currentEntry = {};
+        continue;
       }
-      currentEntry = {};
-      continue;
+
+      if (entryStartList) {
+        if (currentEntry) matrix.entries.push(currentEntry);
+        currentEntry = {};
+        const listKey = entryStartList[1];
+        const listVal = entryStartList[2].trim();
+        if (listVal === 'true') currentEntry[listKey] = true;
+        else if (listVal === 'false') currentEntry[listKey] = false;
+        else if (/^\d+$/.test(listVal)) currentEntry[listKey] = parseInt(listVal, 10);
+        else currentEntry[listKey] = listVal.replace(/^["']|["']$/g, '');
+        continue;
+      }
     }
 
     const keyVal = line.match(/^([a-zA-Z_]\w*)\s*:\s*(.+)$/);
@@ -155,6 +170,13 @@ async function main() {
 
   // Process each file
   for (const filePath of args) {
+    // Reject glob patterns first (before fs.statSync)
+    if (isGlobPattern(filePath)) {
+      ruleResults.forbiddenRawFields.notes++;
+      ruleResults.forbiddenRawFields.details.push({ file: filePath, message: 'Skipped glob pattern (not allowed)' });
+      continue;
+    }
+
     // Reject directory targets
     try {
       const stat = fs.statSync(filePath);
@@ -166,13 +188,6 @@ async function main() {
     } catch {
       ruleResults.forbiddenRawFields.warnings++;
       ruleResults.forbiddenRawFields.details.push({ file: filePath, message: 'Cannot access file' });
-      continue;
-    }
-
-    // Reject glob patterns
-    if (isGlobPattern(filePath)) {
-      ruleResults.forbiddenRawFields.notes++;
-      ruleResults.forbiddenRawFields.details.push({ file: filePath, message: 'Skipped glob pattern (not allowed)' });
       continue;
     }
 
