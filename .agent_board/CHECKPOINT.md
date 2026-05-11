@@ -4799,6 +4799,41 @@ next_phase_started: false
 recommended_next: v7.134 Batch 001 Re-scan Execution
 ```
 
+## v7.134 Batch 001 Re-scan Execution Closeout
+
+```text
+Phase: v7.134
+Status: batch_001_rescan_execution_closeout_completed
+execution_date: 2026-05-11
+
+chain_name: Controlled Selected Docs Audit Chain
+batch_id: controlled_selected_docs_batch_001
+
+validator_executed: true
+validator_runs: 1
+validator_patch_version: v7.117c
+exit_code: 2
+violations_total: 11
+
+forbiddenRawFields: 0
+permissionDrift: 0
+closeoutIntegrity: 11
+
+previous_violations: 32
+resolved: 21
+remaining: 11
+  - 4x next_phase_started in .md
+  - 7x legacy gaps in v7.126 YAML
+
+batch_001_rescan_passed: false
+next_batch_allowed_now: false
+remediation_performed: false
+known_untracked_file_touched: false
+next_phase_started: false
+
+recommended_next: v7.135 Residual Correction Planning
+```
+
 ## Resume Instruction
 
 ```text
