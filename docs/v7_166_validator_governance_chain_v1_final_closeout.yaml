@@ -1,0 +1,43 @@
+v7_166_validator_governance_chain_v1_final_closeout:
+  schema_version: v1
+  phase: v7_166
+  closeout_type: chain_final_closeout
+  closeout_date: 2026-05-11
+  chain_name: Controlled Selected Docs Audit Chain
+  chain_version: v1
+
+  source_gate_phase: v7_165
+  source_gate_commit: c901c59
+  validator_patch_version: v7_146
+
+  batches_completed: 4
+  total_initial_violations: 106
+  total_resolved_violations: 106
+  remaining_violations: 0
+
+  batch_001_status: clean_closed
+  batch_002_status: clean_closed
+  batch_003_status: clean_closed
+  batch_004_status: clean_closed
+
+  full_repo_scan: false
+  glob_scan: false
+  directory_scan: false
+  cdp_access: false
+  bridge_call: false
+  mcp_call: false
+  vcp_memory_write: false
+  dailynote_write: false
+  image_generation: false
+  production_candidate_002: false
+  submitDraft: false
+
+  chain_status: closed
+  chain_reusable: true
+  batch_005_allowed_now: false
+  batch_005_requires_new_gate: true
+
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v1_chain_closed_see_readme_for_next_gates

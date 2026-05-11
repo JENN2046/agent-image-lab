@@ -5777,6 +5777,46 @@ next_phase_started: false
 recommended_next: v7.166 Validator Governance Chain v1 Final Closeout
 ```
 
+## v7.166 Validator Governance Chain v1 Final Closeout
+
+```text
+Phase: v7.166
+Status: validator_governance_chain_v1_final_closeout_completed
+closeout_type: chain_final_closeout
+closeout_date: 2026-05-11
+
+chain_name: Controlled Selected Docs Audit Chain
+chain_version: v1
+
+batches_completed: 4
+total_initial_violations: 106
+total_resolved: 106
+remaining: 0
+
+batch_001: clean_closed
+batch_002: clean_closed
+batch_003: clean_closed
+batch_004: clean_closed
+
+validator_patch_version: v7.146
+chain_status: closed
+chain_reusable: true
+batch_005_allowed_now: false
+batch_005_requires_new_gate: true
+
+full_repo_scan: false
+cdp_access: false
+bridge_call: false
+mcp_call: false
+memory_write: false
+production_candidate: false
+
+known_untracked_file_touched: false
+next_phase_started: false
+
+recommended_next: chain_closed_see_readme
+```
+
 ## Resume Instruction
 
 ```text
