@@ -3500,6 +3500,50 @@ runtime_execution: false
 recommended_next: v7.98
 ```
 
+## v7.98 previewDraft Read-only Execution Gate
+
+```text
+Phase: v7.98
+Status: previewDraft_read_only_execution_gate_prepared_not_granted
+gate_type: execution_authorization_gate
+package_status: prepared_not_granted
+runtime_execution: false
+
+carry_forward:
+  prior_v7_97_commit: 8aac108
+  target_fingerprint: A83B8623
+  method_under_test: previewDraft
+
+target_fingerprint: A83B8623
+exact_bridge_method: window.imageLabReview.previewDraft
+max_previewDraft_calls: 1
+retry_allowed: false
+fallback_allowed: false
+purpose: read_only_preview_draft_surface_validation
+dependency_on_prior_loadSession: true
+
+previewDraft_authorized_now: false
+loadSession_authorized: false
+cancel_authorized: false
+submitDraft_authorized: false
+submitDraft_permanently_forbidden: true
+
+cdp_json_accessed: false
+cdp_connected: false
+previewDraft_called: false
+loadSession_called: false
+submitDraft_called: false
+cancel_called: false
+mcp_codex_memory_called: false
+lt06_executed: false
+known_untracked_file_touched: false
+
+execution_authorized: false
+runtime_execution: false
+
+recommended_next: v7.99
+```
+
 ## Resume Instruction
 
 ```text
