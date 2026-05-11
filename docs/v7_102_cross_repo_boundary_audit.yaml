@@ -1,0 +1,55 @@
+v7_102_cross_repo_boundary_audit:
+  schema_version: v1
+  phase: v7_102
+  document_type: cross_repo_boundary_audit
+  audit_date: 2026-05-11
+
+  audit_scope:
+    repos:
+      - agent-image-lab
+      - VCPChat
+      - VCPToolBox
+
+  boundary_matrix:
+    allowed_now:
+      - VCPChat_cancel
+      - VCPChat_loadSession
+      - VCPChat_previewDraft
+      - CDP_instrumental_json
+      - CDP_websocket_connect
+      - CDP_runtime_evaluate_surface_probe
+
+    forbidden_now:
+      - VCPChat_submitDraft
+      - production_candidate_002
+      - memory_write_path
+      - second_LT06
+      - DailyNote_write
+      - VCP_memory_write
+      - image_generation
+      - MCP_search_memory
+      - MCP_record_memory
+      - VCPToolBox_native_routes
+
+  risk_findings:
+    - risk: VCPChat_read_only_success_must_not_imply_submitDraft_safety
+      status: closed
+    - risk: VCPChat_surface_success_must_not_imply_VCPToolBox_memory_write
+      status: closed
+    - risk: CDP_probe_success_must_not_imply_general_CDP_automation
+      status: closed
+    - risk: evidence_docs_must_not_become_runtime_authority
+      status: closed
+
+  governance_requirements:
+    - every_runtime_action_needs_exact_authorization
+    - every_write_path_needs_separate_A5_authorization
+    - raw_payload_remains_forbidden_unless_separately_authorized
+    - future_reports_must_preserve_public_private_trace_separation
+
+  recommended_next: v7_103_boundary_matrix_hardening_or_redaction_validator_planning
+
+  not_recommended:
+    - production_candidate_002
+    - memory_write_path
+    - submitDraft_probe
