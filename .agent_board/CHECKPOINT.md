@@ -5266,6 +5266,39 @@ next_phase_started: false
 recommended_next: v7.149 Batch 003 Authorization Gate
 ```
 
+## v7.149 Batch 003 Authorization Gate
+
+```text
+Phase: v7.149
+Status: batch_003_authorization_gate_defined
+gate_type: batch_authorization_gate
+chain_name: Controlled Selected Docs Audit Chain
+batch_id: controlled_selected_docs_batch_003
+batch_authorized_now: false
+runtime_execution: false
+
+source_prior_batch: v7.148
+source_commit: 1811315
+validator_patch_version: v7.146
+
+prerequisites_met: true
+batch_002_rescan_passed: true
+
+selected_files_count: 7
+batch_size_max: 8
+max_validator_runs: 1
+selected_docs_only: true
+
+autofix_allowed: false
+document_mutation_allowed: false
+
+batch_executed: false
+known_untracked_file_touched: false
+next_phase_started: false
+
+recommended_next: v7.150 Batch 003 Execution
+```
+
 ## Resume Instruction
 
 ```text
