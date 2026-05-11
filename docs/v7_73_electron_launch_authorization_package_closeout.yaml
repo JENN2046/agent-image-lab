@@ -1,0 +1,34 @@
+v7_73_electron_launch_authorization_package_closeout:
+  schema_version: v1
+  phase: v7_73
+  closeout_status: completed
+  package_type: authorization_package_draft
+  package_status: prepared_not_granted
+  runtime_execution: false
+
+  electron_launch_authorization_package_defined: true
+  selected_port: 9222
+  concrete_cdp_endpoint: "http://127.0.0.1:9222"
+  launch_command_locked: true
+  max_electron_launch_attempts: 1
+  cdp_connection_authorized: false
+  bridge_call_authorized: false
+  cancel_call_authorized: false
+
+  electron_started: false
+  remote_debug_started: false
+  cdp_used: false
+  bridge_called: false
+  cancel_called: false
+  loadSession_called: false
+  previewDraft_called: false
+  submitDraft_called: false
+  mcp_codex_memory_called: false
+  lt06_executed: false
+  port_check_re_executed: false
+
+  execution_authorized: false
+  runtime_execution: false
+  next_phase_started: false
+
+  recommended_next: v7.73a Push Readiness Gate
