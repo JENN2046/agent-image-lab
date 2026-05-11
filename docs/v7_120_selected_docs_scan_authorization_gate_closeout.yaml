@@ -1,0 +1,28 @@
+v7_120_selected_docs_scan_authorization_gate_closeout:
+  schema_version: v1
+  phase: v7_120
+  closeout_status: completed
+  gate_type: selected_docs_scan_authorization_gate
+  scan_authorized_now: false
+  runtime_execution: false
+
+  source_closeout_phase: v7_119
+  source_closeout_commit: 14f23f8
+  validator_patch_version: v7_117c
+
+  selected_files_count: 4
+  selected_docs_only: true
+  max_validator_runs: 1
+
+  validator_executed: false
+  runtime_execution: false
+
+  cdp_accessed: false
+  runtime_evaluate_called: false
+  bridge_methods_called: false
+  mcp_called: false
+
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_121_selected_docs_scan_execution

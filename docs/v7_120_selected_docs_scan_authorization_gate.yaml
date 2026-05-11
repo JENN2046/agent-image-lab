@@ -1,0 +1,47 @@
+v7_120_selected_docs_scan_authorization_gate:
+  schema_version: v1
+  phase: v7_120
+  gate_type: selected_docs_scan_authorization_gate
+  scan_authorized_now: false
+  runtime_execution: false
+
+  source:
+    closeout_phase: v7_119
+    closeout_commit: 14f23f8
+    validator_patch_version: v7_117c
+
+  selected_files_count: 4
+  selected_docs_only: true
+  max_validator_runs: 1
+
+  selected_files:
+    - docs/v7_119_corrected_fixture_dry_run_execution_closeout.md
+    - docs/v7_119_corrected_fixture_dry_run_execution_closeout.yaml
+    - docs/v7_118_corrected_fixture_dry_run_authorization_gate.md
+    - docs/v7_118_corrected_fixture_dry_run_authorization_gate.yaml
+
+  full_repo_scan_allowed: false
+  docs_glob_allowed: false
+  agent_board_directory_scan_allowed: false
+  readme_scan_allowed: false
+  file_write_allowed: false
+  code_modification_allowed: false
+  document_mutation_allowed: false
+  network_access_allowed: false
+  cdp_access_allowed: false
+  bridge_call_allowed: false
+  mcp_call_allowed: false
+  ci_integration_allowed: false
+
+  validator_executed: false
+  runtime_execution: false
+
+  cdp_accessed: false
+  runtime_evaluate_called: false
+  bridge_methods_called: false
+  mcp_called: false
+
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_121_selected_docs_scan_execution

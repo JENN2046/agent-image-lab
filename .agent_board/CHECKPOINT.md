@@ -4366,6 +4366,43 @@ next_phase_started: false
 recommended_next: v7.120 Selected Docs Scan Authorization Gate
 ```
 
+## v7.120 Selected Docs Scan Authorization Gate
+
+```text
+Phase: v7.120
+Status: selected_docs_scan_authorization_gate_defined
+gate_type: selected_docs_scan_authorization_gate
+scan_authorized_now: false
+runtime_execution: false
+
+source_closeout_phase: v7.119
+source_closeout_commit: 14f23f8
+validator_patch_version: v7.117c
+
+selected_files_count: 4
+selected_docs_only: true
+max_validator_runs: 1
+
+full_repo_scan_allowed: false
+docs_glob_allowed: false
+agent_board_scan_allowed: false
+file_write_allowed: false
+document_mutation_allowed: false
+network_access_allowed: false
+cdp_access_allowed: false
+
+validator_executed: false
+runtime_execution: false
+
+cdp_accessed: false
+bridge_methods_called: false
+mcp_called: false
+known_untracked_file_touched: false
+next_phase_started: false
+
+recommended_next: v7.121 Selected Docs Scan Execution
+```
+
 ## Resume Instruction
 
 ```text
