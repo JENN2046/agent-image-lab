@@ -5571,6 +5571,39 @@ next_phase_started: false
 recommended_next: v7.159 Batch 004 Execution
 ```
 
+## v7.159 Batch 004 Execution Closeout
+
+```text
+Phase: v7.159
+Status: batch_004_execution_closeout_completed
+execution_date: 2026-05-11
+
+chain_name: Controlled Selected Docs Audit Chain
+batch_id: controlled_selected_docs_batch_004
+
+validator_executed: true
+validator_runs: 1
+validator_patch_version: v7.146
+exit_code: 2
+violations_total: 23
+
+forbiddenRawFields: 0
+permissionDrift: 0
+closeoutIntegrity: 23
+
+true_positive_count: 23
+raw_data_exposure: 0
+permission_drift_scope_refinement_effective: true
+
+batch_004_passed: false
+batch_005_allowed_now: false
+remediation_performed: false
+known_untracked_file_touched: false
+next_phase_started: false
+
+recommended_next: v7.160 Batch 004 Correction Planning
+```
+
 ## Resume Instruction
 
 ```text
