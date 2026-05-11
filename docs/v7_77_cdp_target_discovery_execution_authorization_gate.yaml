@@ -1,0 +1,45 @@
+v7_77_cdp_target_discovery_execution_authorization_gate:
+  schema_version: v1
+  phase: v7_77
+  gate_type: execution_authorization_gate
+  package_status: prepared_not_granted
+  runtime_execution: false
+
+  carry_forward:
+    prior_v7_76_commit: 957780a
+    electron_already_running: true
+    electron_processes_observed: 5
+    selected_port: 9222
+    concrete_cdp_endpoint: "http://127.0.0.1:9222"
+    remote_debug_port_9222_listening: true
+
+  purpose: "Discover CDP renderer target for future cancel preflight"
+  target_discovery_url: "http://127.0.0.1:9222/json"
+  method: HTTP_GET
+  max_requests: 1
+  retry_allowed: false
+  fallback_allowed: false
+
+  raw_json_response_forbidden: true
+  redacted_summary_only: true
+
+  websocket_cdp_connect_authorized: false
+  runtime_evaluate_authorized: false
+  bridge_call_authorized: false
+  cancel_call_authorized: false
+  loadSession_authorized: false
+  previewDraft_authorized: false
+  submitDraft_authorized: false
+
+  cdp_json_accessed: false
+  cdp_connected: false
+  runtime_evaluate_called: false
+  bridge_called: false
+  cancel_called: false
+  mcp_codex_memory_called: false
+  lt06_executed: false
+
+  execution_authorized: false
+  runtime_execution: false
+
+  recommended_next: v7.77a Push Readiness Gate
