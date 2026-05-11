@@ -1,0 +1,31 @@
+v7_104_redaction_validator_spec:
+  schema_version: v1
+  phase: v7_104
+  spec_type: redaction_validator_spec
+  implementation_status: not_started
+  runtime_execution: false
+
+  source:
+    planning_phase: v7_103
+    planning_commit: 72f1d70
+
+  forbidden_raw_field_rules: 16
+  allowed_summary_field_rules: 11
+  detection_rules: 8
+  violation_severity_levels: 4
+  required_closeout_fields: 9
+
+  validator_script_created: false
+  validator_executed: false
+  filesystem_scan_performed: false
+  cdp_accessed: false
+  runtime_evaluate_called: false
+  bridge_methods_called: false
+  mcp_called: false
+  memory_write_performed: false
+  image_generated: false
+
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_105_redaction_validator_skeleton_planning_or_boundary_matrix_schema_spec

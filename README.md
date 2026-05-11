@@ -112,6 +112,7 @@ v7.100 VCPChat Read-only Surface Runtime Closeout — Comprehensive runtime clos
 v7.101 VCPChat Read-only Surface Evidence Report — Consolidated evidence report covering v7.64–v7.100 validation chain. 3 read-only methods confirmed, submitDraft permanently forbidden, runtime boundaries documented, authorization variance recorded. Recommended next: v7.102 Cross-repo Boundary Audit.
 v7.102 Cross-repo Boundary Audit — Horizontal boundary audit across agent-image-lab / VCPChat / VCPToolBox. Boundary matrix: 7 allowed, 10 forbidden. 4 risk findings closed. 4 governance requirements. No new permissions granted.
 v7.103 Boundary Matrix Hardening / Redaction Validator Planning — Docs-only planning. 15 schema fields proposed, 16 forbidden raw fields identified, 5 future validator candidates. No scripts created, no validators executed.
+v7.104 Redaction Validator Spec — Formal spec for Redaction Validator. 16 forbidden raw field rules, 11 allowed summary field rules, 8 detection rules, 4 severity levels, 9 required closeout fields. No implementation.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3
