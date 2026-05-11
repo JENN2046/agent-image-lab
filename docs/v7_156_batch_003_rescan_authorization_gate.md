@@ -84,3 +84,19 @@ expected_outcomes:
 | validator_patch_version | v7.146 |
 | batch_004_allowed_now | false |
 | next | v7.157 Batch 003 Re-scan Execution |
+
+---
+
+## 8. Closeout Integrity Fields
+
+```yaml
+closeout_integrity_fields:
+  redacted_summary_only: true
+  raw_payload_recorded: false
+  known_untracked_file_touched: false
+  next_phase_started: false
+  commit_hash: 7ab0b33
+  branch: master
+  git_status: synced
+  local_scope_result: passed
+```

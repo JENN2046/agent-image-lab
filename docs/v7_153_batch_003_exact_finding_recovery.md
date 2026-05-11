@@ -125,3 +125,19 @@ correction_scope_exact: true
 | correction_ready | true |
 | batch_004_allowed_now | false |
 | next | v7.154 Batch 003 Correction Implementation Gate |
+
+---
+
+## 8. Closeout Integrity Fields
+
+```yaml
+closeout_integrity_fields:
+  redacted_summary_only: true
+  raw_payload_recorded: false
+  known_untracked_file_touched: false
+  next_phase_started: false
+  commit_hash: 1d9646b
+  branch: master
+  git_status: synced
+  local_scope_result: passed
+```
