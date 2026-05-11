@@ -1,0 +1,56 @@
+v7_157_batch_003_rescan_execution_closeout:
+  schema_version: v1
+  phase: v7_157
+  closeout_status: completed
+  execution_date: 2026-05-11
+
+  chain_name: Controlled Selected Docs Audit Chain
+  batch_id: controlled_selected_docs_batch_003
+
+  validator_executed: true
+  validator_runs: 1
+  validator_patch_version: v7_146
+  target_scope: selected_docs_batch_only
+  files_targeted: 7
+
+  exit_code: 0
+  decision: pass
+  findings_detected: false
+  violations_total: 0
+  warnings_total: 0
+  notes_total: 7
+
+  forbiddenRawFields_violations: 0
+  permissionDrift_violations: 0
+  closeoutIntegrity_violations: 0
+
+  closeout_integrity_clean: true
+  forbidden_raw_fields_clean: true
+  permission_drift_clean: true
+  batch_003_rescan_passed: true
+  all_corrections_confirmed_effective: true
+
+  v7_150_violations_total: 23
+  v7_157_violations_total: 0
+  total_resolved_violations: 23
+
+  batch_boundary_respected: true
+  remediation_performed: false
+  batch_004_allowed_now: false
+  batch_004_gate_recommended_next: true
+
+  second_validator_run_executed: false
+  file_write_performed: false
+  code_mutated: false
+  documents_mutated: false
+  fixtures_mutated: false
+  network_access: false
+  cdp_accessed: false
+  runtime_evaluate_called: false
+  bridge_methods_called: false
+  mcp_called: false
+
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_158_batch_004_authorization_gate

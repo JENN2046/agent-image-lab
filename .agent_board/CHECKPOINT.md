@@ -5500,6 +5500,42 @@ next_phase_started: false
 recommended_next: v7.157 Batch 003 Re-scan Execution
 ```
 
+## v7.157 Batch 003 Re-scan Execution Closeout
+
+```text
+Phase: v7.157
+Status: batch_003_rescan_execution_closeout_completed
+execution_date: 2026-05-11
+
+chain_name: Controlled Selected Docs Audit Chain
+batch_id: controlled_selected_docs_batch_003
+
+validator_executed: true
+validator_runs: 1
+validator_patch_version: v7.146
+exit_code: 0
+decision: pass
+violations_total: 0
+
+closeout_integrity_clean: true
+forbidden_raw_fields_clean: true
+permission_drift_clean: true
+batch_003_rescan_passed: true
+all_corrections_confirmed_effective: true
+
+v7_150_violations: 23
+v7_157_violations: 0
+total_resolved: 23
+
+batch_004_allowed_now: false
+batch_004_gate_recommended_next: true
+
+known_untracked_file_touched: false
+next_phase_started: false
+
+recommended_next: v7.158 Batch 004 Authorization Gate
+```
+
 ## Resume Instruction
 
 ```text
