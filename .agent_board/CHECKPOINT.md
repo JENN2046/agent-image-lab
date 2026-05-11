@@ -3455,6 +3455,51 @@ next_phase_started: false
 recommended_next: v7.97
 ```
 
+## v7.97 previewDraft Read-only Authorization Package
+
+```text
+Phase: v7.97
+Status: previewDraft_read_only_authorization_package_prepared_not_granted
+package_type: authorization_package_draft
+package_status: prepared_not_granted
+runtime_execution: false
+
+carry_forward:
+  prior_v7_96_commit: 6dcf945
+  target_fingerprint: A83B8623
+  loadSession_read_only_executed: true
+
+target_fingerprint: A83B8623
+method_under_test: previewDraft
+exact_bridge_method: window.imageLabReview.previewDraft
+max_previewDraft_calls: 1
+retry_allowed: false
+fallback_allowed: false
+purpose: read_only_preview_draft_surface_validation
+dependency_on_prior_loadSession: true
+
+previewDraft_authorized_now: false
+loadSession_authorized: false
+cancel_authorized: false
+submitDraft_authorized: false
+submitDraft_permanently_forbidden: true
+
+cdp_json_accessed: false
+cdp_connected: false
+previewDraft_called: false
+loadSession_called: false
+submitDraft_called: false
+cancel_called: false
+mcp_codex_memory_called: false
+lt06_executed: false
+known_untracked_file_touched: false
+
+execution_authorized: false
+runtime_execution: false
+
+recommended_next: v7.98
+```
+
 ## Resume Instruction
 
 ```text

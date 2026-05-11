@@ -1,0 +1,47 @@
+v7_97_previewDraft_read_only_authorization_package_closeout:
+  schema_version: v1
+  phase: v7_97
+  closeout_status: completed
+  package_type: authorization_package_draft
+  package_status: prepared_not_granted
+  runtime_execution: false
+
+  previewDraft_read_only_authorization_package_defined: true
+  target_fingerprint: A83B8623
+  method_under_test: previewDraft
+  exact_bridge_method: window.imageLabReview.previewDraft
+  max_previewDraft_calls: 1
+  retry_allowed: false
+  fallback_allowed: false
+  purpose: read_only_preview_draft_surface_validation
+
+  dependency_on_prior_loadSession: true
+  prior_loadSession_commit: 6dcf945
+  prior_loadSession_empty_payload_supported: true
+  payload_policy: use_existing_in_memory_session_state_if_available_or_stop
+  stop_if_previewDraft_requires_unknown_payload: true
+
+  previewDraft_authorized_now: false
+  loadSession_authorized: false
+  cancel_authorized: false
+  submitDraft_authorized: false
+  submitDraft_permanently_forbidden: true
+
+  cdp_json_accessed: false
+  cdp_connected: false
+  cdp_websocket_connected: false
+  runtime_evaluate_called: false
+  previewDraft_called: false
+  loadSession_called: false
+  submitDraft_called: false
+  cancel_called: false
+  mcp_codex_memory_called: false
+  lt06_executed: false
+
+  known_untracked_file_touched: false
+
+  execution_authorized: false
+  runtime_execution: false
+  next_phase_started: false
+
+  recommended_next: v7.98
