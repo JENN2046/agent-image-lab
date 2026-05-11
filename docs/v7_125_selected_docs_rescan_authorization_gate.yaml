@@ -1,0 +1,42 @@
+v7_125_selected_docs_rescan_authorization_gate:
+  schema_version: v1
+  phase: v7_125
+  gate_type: rescan_authorization_gate
+  rescan_authorized_now: false
+  runtime_execution: false
+
+  source:
+    correction_phase: v7_124
+    correction_commit: fa4793e
+    validator_patch_version: v7_117c
+
+  selected_files_count: 4
+  selected_docs_only: true
+  max_validator_runs: 1
+
+  full_repo_scan_allowed: false
+  docs_glob_allowed: false
+  agent_board_scan_allowed: false
+  readme_scan_allowed: false
+  file_write_allowed: false
+  code_modification_allowed: false
+  document_mutation_allowed: false
+  network_access_allowed: false
+  cdp_access_allowed: false
+  bridge_call_allowed: false
+  mcp_call_allowed: false
+  ci_integration_allowed: false
+
+  validator_executed: false
+  long_task_chain_allowed_now: false
+  runtime_execution: false
+
+  cdp_accessed: false
+  runtime_evaluate_called: false
+  bridge_methods_called: false
+  mcp_called: false
+
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_126_selected_docs_rescan_execution

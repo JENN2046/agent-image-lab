@@ -4513,6 +4513,37 @@ next_phase_started: false
 recommended_next: v7.125 Selected Docs Re-scan Authorization Gate
 ```
 
+## v7.125 Selected Docs Re-scan Authorization Gate
+
+```text
+Phase: v7.125
+Status: selected_docs_rescan_authorization_gate_defined
+gate_type: rescan_authorization_gate
+rescan_authorized_now: false
+runtime_execution: false
+
+source_correction_phase: v7.124
+source_correction_commit: fa4793e
+validator_patch_version: v7.117c
+
+selected_files_count: 4
+max_validator_runs: 1
+
+full_repo_scan_allowed: false
+docs_glob_allowed: false
+agent_board_scan_allowed: false
+file_write_allowed: false
+document_mutation_allowed: false
+cdp_access_allowed: false
+
+validator_executed: false
+long_task_chain_allowed_now: false
+known_untracked_file_touched: false
+next_phase_started: false
+
+recommended_next: v7.126 Selected Docs Re-scan Execution
+```
+
 ## Resume Instruction
 
 ```text
