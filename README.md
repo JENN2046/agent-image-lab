@@ -114,6 +114,7 @@ v7.102 Cross-repo Boundary Audit — Horizontal boundary audit across agent-imag
 v7.103 Boundary Matrix Hardening / Redaction Validator Planning — Docs-only planning. 15 schema fields proposed, 16 forbidden raw fields identified, 5 future validator candidates. No scripts created, no validators executed.
 v7.104 Redaction Validator Spec — Formal spec for Redaction Validator. 16 forbidden raw field rules, 11 allowed summary field rules, 8 detection rules, 4 severity levels, 9 required closeout fields. No implementation.
 v7.105 Boundary Matrix Schema Spec — Formal schema spec for Boundary Matrix. 15 fields per entry, 5 enum types (23 values), 16 current entries catalogued, 10 validation rules. No implementation.
+v7.106 Boundary Matrix YAML Draft — YAML draft of Boundary Matrix. 16 action entries, 10 non-permissions, 10 validator requirements. 7/7 critical invariants verified. Draft only.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3

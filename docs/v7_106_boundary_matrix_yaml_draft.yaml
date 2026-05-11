@@ -1,0 +1,297 @@
+# Boundary Matrix YAML Draft — v7.106
+# Schema version: v1
+# Draft only. Not a validator. Not an executor. No new permissions granted.
+# Generated from: v7.105 Boundary Matrix Schema Spec (c0dd61b)
+# Generated date: 2026-05-11
+
+schema_version: v1
+matrix_id: v7_106_boundary_matrix_draft
+generated_from_phase: v7_105
+generated_from_commit: c0dd61b
+generated_date: 2026-05-11
+
+entries:
+  # --- VCPChat Bridge Methods ---
+
+  - action_id: vcpchat_cancel
+    repo_scope: VCPChat
+    action_type: read_only
+    allowed_now: true
+    permission_status: allowed_with_new_authorization
+    evidence_source: v7_93
+    required_future_authorization: New A5-style authorization per invocation
+    raw_data_policy: redacted_summary_only
+    max_calls: 1
+    retry_allowed: false
+    fallback_allowed: false
+    redaction_required: true
+    validator_required: true
+    escalation_level: low
+
+  - action_id: vcpchat_loadSession
+    repo_scope: VCPChat
+    action_type: read_only
+    allowed_now: true
+    permission_status: allowed_with_new_authorization
+    evidence_source: v7_96
+    required_future_authorization: New A5-style authorization per invocation
+    raw_data_policy: redacted_summary_only
+    max_calls: 1
+    retry_allowed: false
+    fallback_allowed: false
+    redaction_required: true
+    validator_required: true
+    escalation_level: low
+
+  - action_id: vcpchat_previewDraft
+    repo_scope: VCPChat
+    action_type: read_only
+    allowed_now: true
+    permission_status: allowed_with_new_authorization
+    evidence_source: v7_99
+    required_future_authorization: New A5-style authorization per invocation
+    raw_data_policy: redacted_summary_only
+    max_calls: 1
+    retry_allowed: false
+    fallback_allowed: false
+    redaction_required: true
+    validator_required: true
+    escalation_level: low
+
+  - action_id: vcpchat_submitDraft
+    repo_scope: VCPChat
+    action_type: write_capable
+    allowed_now: false
+    permission_status: forbidden_permanent
+    evidence_source: v7_64
+    required_future_authorization: N/A
+    raw_data_policy: raw_forbidden
+    max_calls: 0
+    retry_allowed: false
+    fallback_allowed: false
+    redaction_required: true
+    validator_required: true
+    forbidden_reason: "Write-capable by design intent (DailyNote + VCP memory submission path). Permanently excluded from all authorization scopes."
+    escalation_level: critical
+
+  # --- CDP Probe Methods ---
+
+  - action_id: cdp_instrumental_json
+    repo_scope: agent-image-lab
+    action_type: runtime_probe
+    allowed_now: true
+    permission_status: allowed_with_new_authorization
+    evidence_source: v7_87
+    required_future_authorization: Included in WebSocket connect authorization package
+    raw_data_policy: redacted_summary_only
+    max_calls: 1
+    retry_allowed: false
+    fallback_allowed: false
+    redaction_required: true
+    validator_required: true
+    escalation_level: medium
+
+  - action_id: cdp_websocket_connect
+    repo_scope: agent-image-lab
+    action_type: runtime_probe
+    allowed_now: true
+    permission_status: allowed_with_new_authorization
+    evidence_source: v7_87
+    required_future_authorization: New A5-style authorization per invocation
+    raw_data_policy: redacted_summary_only
+    max_calls: 1
+    retry_allowed: false
+    fallback_allowed: false
+    redaction_required: true
+    validator_required: true
+    escalation_level: medium
+
+  - action_id: cdp_runtime_evaluate_surface_probe
+    repo_scope: agent-image-lab
+    action_type: runtime_probe
+    allowed_now: true
+    permission_status: allowed_with_new_authorization
+    evidence_source: v7_90
+    required_future_authorization: New A5-style authorization per invocation
+    raw_data_policy: redacted_summary_only
+    max_calls: 1
+    retry_allowed: false
+    fallback_allowed: false
+    redaction_required: true
+    validator_required: true
+    escalation_level: medium
+
+  # --- VCPToolBox MCP Methods ---
+
+  - action_id: mcp_memory_overview
+    repo_scope: VCPToolBox
+    action_type: read_only
+    allowed_now: false
+    permission_status: forbidden_needs_auth
+    evidence_source: v7_59
+    required_future_authorization: New independent A5 authorization
+    raw_data_policy: redacted_summary_only
+    max_calls: 1
+    retry_allowed: false
+    fallback_allowed: false
+    redaction_required: true
+    validator_required: true
+    escalation_level: high
+
+  - action_id: mcp_search_memory
+    repo_scope: VCPToolBox
+    action_type: write_blocked
+    allowed_now: false
+    permission_status: forbidden_permanent
+    evidence_source: v7_58h
+    required_future_authorization: N/A
+    raw_data_policy: raw_forbidden
+    max_calls: 0
+    retry_allowed: false
+    fallback_allowed: false
+    redaction_required: true
+    validator_required: true
+    forbidden_reason: "Blocked under zero-write policy due to recall audit JSONL append (v7.58h)."
+    escalation_level: high
+
+  - action_id: mcp_record_memory
+    repo_scope: VCPToolBox
+    action_type: write_blocked
+    allowed_now: false
+    permission_status: forbidden_permanent
+    evidence_source: v7_58
+    required_future_authorization: N/A
+    raw_data_policy: raw_forbidden
+    max_calls: 0
+    retry_allowed: false
+    fallback_allowed: false
+    redaction_required: true
+    validator_required: true
+    forbidden_reason: "Permanently excluded from zero-write policy (explicit write via CodexMemoryBridge → writeDiary, v7.58)."
+    escalation_level: high
+
+  # --- VCPToolBox Native Routes ---
+
+  - action_id: vcptoolbox_native_routes
+    repo_scope: VCPToolBox
+    action_type: write_blocked
+    allowed_now: false
+    permission_status: not_scoped
+    evidence_source: v7_55j
+    required_future_authorization: Requires new planning and A5 authorization
+    raw_data_policy: raw_forbidden
+    max_calls: 0
+    retry_allowed: false
+    fallback_allowed: false
+    redaction_required: true
+    validator_required: false
+    escalation_level: critical
+
+  # --- Production and Write Paths ---
+
+  - action_id: production_candidate_002
+    repo_scope: agent-image-lab
+    action_type: write_blocked
+    allowed_now: false
+    permission_status: forbidden_needs_auth
+    evidence_source: v7_100
+    required_future_authorization: New A5-style authorization with preflight
+    raw_data_policy: redacted_summary_only
+    max_calls: 0
+    retry_allowed: false
+    fallback_allowed: false
+    redaction_required: true
+    validator_required: true
+    escalation_level: high
+
+  - action_id: dailynote_write
+    repo_scope: VCPToolBox
+    action_type: write_blocked
+    allowed_now: false
+    permission_status: forbidden_needs_auth
+    evidence_source: global_boundary
+    required_future_authorization: New A5-style authorization
+    raw_data_policy: raw_forbidden
+    max_calls: 0
+    retry_allowed: false
+    fallback_allowed: false
+    redaction_required: true
+    validator_required: true
+    escalation_level: critical
+
+  - action_id: vcp_memory_write
+    repo_scope: VCPToolBox
+    action_type: write_blocked
+    allowed_now: false
+    permission_status: forbidden_needs_auth
+    evidence_source: global_boundary
+    required_future_authorization: New A5-style authorization
+    raw_data_policy: raw_forbidden
+    max_calls: 0
+    retry_allowed: false
+    fallback_allowed: false
+    redaction_required: true
+    validator_required: true
+    escalation_level: critical
+
+  - action_id: image_generation
+    repo_scope: VCPToolBox
+    action_type: write_blocked
+    allowed_now: false
+    permission_status: forbidden_needs_auth
+    evidence_source: global_boundary
+    required_future_authorization: New A5-style authorization
+    raw_data_policy: raw_forbidden
+    max_calls: 0
+    retry_allowed: false
+    fallback_allowed: false
+    redaction_required: true
+    validator_required: true
+    escalation_level: critical
+
+  - action_id: second_LT06
+    repo_scope: VCPToolBox
+    action_type: runtime_probe
+    allowed_now: false
+    permission_status: forbidden_needs_auth
+    evidence_source: v7_59
+    required_future_authorization: New independent A5 authorization
+    raw_data_policy: redacted_summary_only
+    max_calls: 1
+    retry_allowed: false
+    fallback_allowed: false
+    redaction_required: true
+    validator_required: true
+    escalation_level: high
+
+# --- Non-permissions ---
+
+non_permissions:
+  production_candidate_002_allowed_now: false
+  memory_write_path_allowed_now: false
+  submitDraft_invocation_allowed: false
+  second_LT06_allowed_now: false
+  DailyNote_write_allowed_now: false
+  VCP_memory_write_allowed_now: false
+  image_generation_allowed_now: false
+  MCP_search_memory_allowed_now: false
+  MCP_record_memory_allowed_now: false
+  VCPToolBox_native_routes_allowed_now: false
+
+# --- Validator Requirements ---
+
+validator_requirements:
+  unique_action_id_required: true
+  forbidden_reason_required_for_forbidden_permanent: true
+  future_authorization_required_for_allowed_runtime: true
+  runtime_fields_required_for_runtime_probe: true
+  raw_data_policy_required: true
+  submitDraft_must_remain_forbidden: true
+  production_candidate_must_remain_forbidden_needs_auth: true
+  memory_write_must_remain_forbidden_needs_auth: true
+  no_standing_runtime_permission: true
+  evidence_phase_reference_required: true
+
+# --- Recommended Next ---
+
+recommended_next: v7.107_boundary_matrix_yaml_static_review_or_redaction_validator_skeleton_planning
