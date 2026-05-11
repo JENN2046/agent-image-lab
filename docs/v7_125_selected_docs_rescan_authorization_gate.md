@@ -131,4 +131,5 @@ closeout_integrity_fields:
   git_status: synced
   local_scope_result: passed
   known_untracked_file_touched: false
+  next_phase_started: false
 ```

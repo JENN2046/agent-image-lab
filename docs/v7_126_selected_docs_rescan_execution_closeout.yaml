@@ -3,6 +3,13 @@ v7_126_selected_docs_rescan_execution_closeout:
   phase: v7_126
   closeout_status: completed
   execution_date: 2026-05-11
+  runtime_execution: false
+  redacted_summary_only: true
+  raw_payload_recorded: false
+  commit_hash: a78d71b
+  branch: master
+  git_status: synced
+  local_scope_result: passed
 
   validator_executed: true
   validator_runs: 1
