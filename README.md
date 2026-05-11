@@ -179,6 +179,8 @@ v7.164 Batch 004 Re-scan Execution Closeout — Re-scan passed. Exit 0. 0 violat
 v7.165 Validator Governance Chain v1 Closeout Gate — Chain closeout gate. 4 batches, 106 violations → 0. validator v7.146. Batch 005 blocked.
 v7.166 Validator Governance Chain v1 Final Closeout — Chain v1 final closeout. 106 violations resolved to 0. All safety boundaries respected. Chain closed, reusable with new authorization.
 v7.167 Untracked Plugin Dashboard Plan Disposition — Historical v6.8 planning doc marked as reference-only and committed.
+v7.168 Post-Closeout Code Surface Review and Resume Surface Reconciliation — A0 read-only code surface review. 28 files inspected. 3 P1, 4 P2, 2 P3 findings. agent_board surface stale, allowedSummaryFields unwired, permissionDrift invariant gap confirmed.
+v7.169 Agent Board and Validator Patch Gate — Docs-only patch gate for 5 repair scopes: agent-board reconciliation, validator execution closure, fixture patch, legacy v6.8 disposition, board freshness gate. Implementation not authorized. Next: v7.170.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3

@@ -1,0 +1,69 @@
+v7_169_agent_board_and_validator_patch_gate:
+  schema_version: v1
+  phase: v7_169
+  gate_type: patch_gate
+  chain_name: Agent Board and Validator Patch Gate
+  chain_version: v1
+  patch_authorized_now: false
+  implementation_allowed_now: false
+  runtime_execution: false
+
+  source:
+    review_phase: v7_168
+    review_commit: 765b0ac
+  review_result:
+    overall_status: block
+    p1_count: 3
+    p2_count: 4
+    p3_count: 2
+
+  repair_scopes:
+    - scope_1_agent_board_reconciliation:
+        allowed_files:
+          - .agent_board/HANDOFF.md
+          - .agent_board/RUN_STATE.md
+          - .agent_board/TASK_QUEUE.md
+          - .agent_board/CHECKPOINT.md
+        target: sync resume to v7.166/v7.167 reality
+    - scope_2_validator_execution_closure:
+        allowed_files:
+          - tools/redaction-validator/validator.js
+          - tools/redaction-validator/rules/permissionDrift.js
+          - tools/redaction-validator/README.md
+        target: wire allowedSummaryFields + fix invariant gaps
+    - scope_3_fixture_coverage_patch:
+        allowed_files: new fixtures only
+        required_new: 4
+        target: cover allowedSummaryFields, regression, permission_status, standing_permission
+    - scope_4_legacy_v6_8_disposition:
+        allowed_files:
+          - docs/245_v6_8a_plugin_dashboard_draft_surface.md
+          - docs/246_v6_8b_plugin_dashboard_guard_hardening.md
+          - scripts/validate_v6_8_plugin_dashboard.js
+        allowed_new:
+          - docs/v6_8_plugin_dashboard_legacy_index.md
+        target: historical banners + legacy index
+    - scope_5_board_freshness_gate:
+        allowed_files:
+          - scripts/validate_agent_board_state.js
+        target: add phase freshness check, remove v10.8 hardcode
+
+  authorization_state:
+    patch_authorized_now: false
+    implementation_allowed_now: false
+    validator_execution_allowed_now: false
+    script_execution_allowed_now: false
+    batch_005_allowed_now: false
+    production_candidate_002_allowed_now: false
+    memory_write_path_allowed_now: false
+
+  cdp_accessed: false
+  bridge_call: false
+  mcp_call: false
+  memory_write: false
+  image_generation: false
+  submitDraft_invoked: false
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_170_agent_board_and_validator_patch_implementation

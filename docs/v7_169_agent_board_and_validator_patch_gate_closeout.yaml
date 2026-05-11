@@ -1,0 +1,42 @@
+v7_169_agent_board_and_validator_patch_gate_closeout:
+  schema_version: v1
+  phase: v7_169
+  closeout_status: completed
+  gate_type: patch_gate
+  patch_authorized_now: false
+  implementation_allowed_now: false
+  runtime_execution: false
+
+  source_review_phase: v7_168
+  source_review_commit: 765b0ac
+  review_result:
+    overall_status: block
+    p1_count: 3
+    p2_count: 4
+    p3_count: 2
+
+  repair_scopes_defined: 5
+  scope_1_agent_board_reconciliation: defined
+  scope_2_validator_execution_closure: defined
+  scope_3_fixture_coverage_patch: defined
+  scope_4_legacy_v6_8_disposition: defined
+  scope_5_board_freshness_gate: defined
+
+  validator_executed: false
+  script_executed: false
+  batch_005_allowed_now: false
+  production_candidate_002_allowed_now: false
+  memory_write_path_allowed_now: false
+
+  cdp_accessed: false
+  runtime_evaluate_called: false
+  bridge_methods_called: false
+  mcp_called: false
+  daily_note_written: false
+  vcp_memory_written: false
+  image_generated: false
+
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_170_agent_board_and_validator_patch_implementation

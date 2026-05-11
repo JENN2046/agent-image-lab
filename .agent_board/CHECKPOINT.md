@@ -1,5 +1,31 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.169 Agent Board and Validator Patch Gate
+
+```text
+Status: completed — docs-only patch authorization gate
+Target: 5 repair scopes defined for v7.170
+  Scope 1: Agent Board Resume Surface Reconciliation
+  Scope 2: Redaction Validator Execution Closure
+  Scope 3: Fixture Coverage Patch
+  Scope 4: Legacy v6.8 Surface Disposition
+  Scope 5: Umbrella Validation / Board Freshness Gate
+Source: v7.168 review (3 P1, 4 P2, 3 P3 findings)
+Gate docs: docs/v7_169_agent_board_and_validator_patch_gate.md
+            docs/v7_169_agent_board_and_validator_patch_gate.yaml
+            docs/v7_169_agent_board_and_validator_patch_gate_closeout.md
+            docs/v7_169_agent_board_and_validator_patch_gate_closeout.yaml
+patch_authorized_now: false
+implementation_allowed_now: false
+batch_005_allowed_now: false
+production_candidate_002_allowed_now: false
+memory_write_path_allowed_now: false
+Validator executed: no
+Script executed: no
+CDP / bridge / MCP: no
+Next: v7.170 Agent Board and Validator Patch Implementation
+```
+
 ## v7.35 Push Safety Gate Governance Rule
 
 ```text
