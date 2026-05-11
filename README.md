@@ -87,6 +87,7 @@ v7.75 Electron Launch / Existing Runtime State Closeout — Runtime observation 
 v7.76 CDP Target Discovery Authorization Package — Docs-only authorization package (prepared_not_granted) for future single CDP target discovery via http://127.0.0.1:9222/json. Max 1 request, raw JSON response forbidden, redacted summary only. WebSocket CDP connect, Runtime.evaluate, bridge call, cancel call not authorized. No execution.
 v7.77 CDP Target Discovery Execution Authorization Gate — Docs-only execution gate (prepared_not_granted) for future single CDP target discovery via http://127.0.0.1:9222/json. Max 1 request, no retry, no fallback. Raw JSON response forbidden, redacted summary only. WebSocket CDP connect, Runtime.evaluate, bridge call, cancel call explicitly not authorized. No execution.
 v7.78 CDP Target Discovery Execution Closeout — Single HTTP GET to http://127.0.0.1:9222/json executed. 2 targets discovered (2 pages), target kind page, URL kind file, redacted summary only. No WebSocket connect, no Runtime.evaluate, no bridge/cancel. Second request requires new authorization.
+v7.79 CDP Target Candidate Lock Planning — Docs-only planning phase for locking the CDP target candidate identified in v7.78. Planning based on redacted summary only (no raw JSON). Candidate lock status: planning_only, identity not fully locked. Three future action options documented. No execution.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3
