@@ -1,0 +1,39 @@
+v7_112_validator_fixture_static_review:
+  schema_version: v1
+  phase: v7_112
+  review_type: fixture_static_review
+  validator_execution: false
+  runtime_execution: false
+
+  source:
+    implementation_phase: v7_110
+    implementation_commit: 92e922f
+    prior_review_phase: v7_111
+    prior_review_commit: 7298678
+
+  results:
+    fixtures_reviewed: 5
+    pass_checks: 13/13
+    fail_appropriateness: 5/5
+    safety_checks: 7/7
+
+  findings:
+    total: 0
+    blockers: 0
+    warnings: 0
+    notes: 0
+    decision: pass
+
+  validator_executed: false
+  fixtures_mutated: false
+  runtime_execution: false
+
+  cdp_accessed: false
+  runtime_evaluate_called: false
+  bridge_methods_called: false
+  mcp_called: false
+
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_113_validator_fixture_dry_run_authorization_gate
