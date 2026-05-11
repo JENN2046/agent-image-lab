@@ -135,3 +135,19 @@ chain_output:
 | memory_write_path_allowed | false |
 | submitDraft_allowed | false |
 | next | v7.128 First Controlled Batch |
+
+---
+
+## 8. Closeout Integrity Fields
+
+```yaml
+closeout_integrity_fields:
+  runtime_execution: false
+  redacted_summary_only: true
+  raw_payload_recorded: false
+  commit_hash: 14ce6ce
+  branch: master
+  git_status: synced
+  local_scope_result: passed
+  known_untracked_file_touched: false
+```

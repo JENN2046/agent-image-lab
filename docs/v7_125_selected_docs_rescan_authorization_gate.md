@@ -116,3 +116,19 @@ future_execution_constraint:
 | validator_executed | false |
 | long_task_chain_allowed_now | false |
 | next | v7.126 Selected Docs Re-scan Execution |
+
+---
+
+## 8. Closeout Integrity Fields
+
+```yaml
+closeout_integrity_fields:
+  runtime_execution: false
+  redacted_summary_only: true
+  raw_payload_recorded: false
+  commit_hash: b001839
+  branch: master
+  git_status: synced
+  local_scope_result: passed
+  known_untracked_file_touched: false
+```

@@ -71,3 +71,19 @@ The v7.124 closeout integrity correction resolved all 7 previously detected clos
 | long_task_chain_allowed_now | false |
 | long_task_chain_gate_recommended_next | true |
 | next | v7.127 Long Task Chain Gate |
+
+---
+
+## 8. Closeout Integrity Fields
+
+```yaml
+closeout_integrity_fields:
+  runtime_execution: false
+  redacted_summary_only: true
+  raw_payload_recorded: false
+  commit_hash: a78d71b
+  branch: master
+  git_status: synced
+  local_scope_result: passed
+  known_untracked_file_touched: false
+```
