@@ -1,0 +1,31 @@
+v7_72_concrete_cdp_endpoint_lock_patch_closeout:
+  schema_version: v1
+  phase: v7_72
+  closeout_status: completed
+  patch_type: docs_only_endpoint_lock
+  runtime_execution: false
+
+  exact_port_selected: true
+  selected_port: 9222
+  concrete_cdp_endpoint: "http://127.0.0.1:9222"
+  exact_endpoint_fully_locked: true
+  port_9223_checked: false
+  port_9223_not_needed_reason: 9222_free
+
+  electron_started: false
+  remote_debug_started: false
+  cdp_used: false
+  bridge_called: false
+  cancel_called: false
+  loadSession_called: false
+  previewDraft_called: false
+  submitDraft_called: false
+  mcp_codex_memory_called: false
+  lt06_executed: false
+  port_check_re_executed: false
+
+  execution_authorized: false
+  runtime_execution: false
+  next_phase_started: false
+
+  recommended_next: v7.72a Push Readiness Gate
