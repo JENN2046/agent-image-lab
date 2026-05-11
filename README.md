@@ -94,6 +94,7 @@ v7.82 Second JSON Exact Target Lock Execution Gate — Docs-only execution gate 
 v7.83 Second JSON Exact Target Lock Execution Closeout — Second /json executed for exact target lock. 2 targets, short fingerprint A83B8623, WebSocket URL present. Raw JSON not recorded, redacted only. No WebSocket connect, no Runtime.evaluate, no bridge/cancel.
 v7.84 Target Fingerprint Lock Planning — Docs-only planning for target fingerprint lock. Short fingerprint A83B8623 locked, WebSocket URL presence confirmed. Full target identity not locked. Future CDP connect requires new authorization. No execution.
 v7.85 CDP WebSocket Connect Authorization Package — Docs-only authorization package (prepared_not_granted) for future single CDP WebSocket connection. Target locked by short fingerprint A83B8623. Connect purpose: prepare runtime evaluate surface probe only. Runtime.evaluate, bridge, cancel not authorized.
+v7.86 CDP WebSocket Connect Execution Gate — Docs-only execution gate (prepared_not_granted) for future single CDP WebSocket connection. Target fingerprint A83B8623. Max 1 connection, no retry, no fallback. Runtime.evaluate, bridge, cancel not authorized.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3
