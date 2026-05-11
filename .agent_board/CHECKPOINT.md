@@ -4544,6 +4544,42 @@ next_phase_started: false
 recommended_next: v7.126 Selected Docs Re-scan Execution
 ```
 
+## v7.126 Selected Docs Re-scan Execution Closeout
+
+```text
+Phase: v7.126
+Status: selected_docs_rescan_execution_closeout_completed
+execution_date: 2026-05-11
+
+validator_executed: true
+validator_runs: 1
+validator_patch_version: v7.117c
+target_scope: selected_docs_only
+files_targeted: 4
+
+exit_code: 0
+decision: pass
+violations_total: 0
+
+forbiddenRawFields: 0
+permissionDrift: 0
+closeoutIntegrity: 0
+
+closeout_integrity_clean: true
+forbidden_raw_fields_clean: true
+permission_drift_clean: true
+selected_docs_rescan_passed: true
+v7_124_correction_confirmed_effective: true
+
+long_task_chain_allowed_now: false
+long_task_chain_gate_recommended_next: true
+
+known_untracked_file_touched: false
+next_phase_started: false
+
+recommended_next: v7.127 Long Task Chain Gate
+```
+
 ## Resume Instruction
 
 ```text

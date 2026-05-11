@@ -1,0 +1,47 @@
+v7_126_selected_docs_rescan_execution_closeout:
+  schema_version: v1
+  phase: v7_126
+  closeout_status: completed
+  execution_date: 2026-05-11
+
+  validator_executed: true
+  validator_runs: 1
+  validator_patch_version: v7_117c
+  target_scope: selected_docs_only
+  files_targeted: 4
+
+  exit_code: 0
+  decision: pass
+  findings_detected: false
+  violations_total: 0
+  warnings_total: 0
+  notes_total: 4
+
+  forbiddenRawFields_violations: 0
+  permissionDrift_violations: 0
+  closeoutIntegrity_violations: 0
+
+  closeout_integrity_clean: true
+  forbidden_raw_fields_clean: true
+  permission_drift_clean: true
+  selected_docs_rescan_passed: true
+
+  v7_124_correction_confirmed_effective: true
+  long_task_chain_allowed_now: false
+  long_task_chain_gate_recommended_next: true
+
+  second_validator_run_executed: false
+  file_write_performed: false
+  code_mutated: false
+  documents_mutated: false
+  fixtures_mutated: false
+  network_access: false
+  cdp_accessed: false
+  runtime_evaluate_called: false
+  bridge_methods_called: false
+  mcp_called: false
+
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_127_long_task_chain_gate
