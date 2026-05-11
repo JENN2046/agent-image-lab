@@ -1,0 +1,30 @@
+v7_138_batch_001_final_rescan_authorization_gate_closeout:
+  schema_version: v1
+  phase: v7_138
+  closeout_status: completed
+  gate_type: final_rescan_authorization_gate
+  final_rescan_authorized_now: false
+  runtime_execution: false
+
+  source_correction_phase: v7_137
+  source_correction_commit: ac70944
+  chain_name: Controlled Selected Docs Audit Chain
+  batch_id: controlled_selected_docs_batch_001
+  validator_patch_version: v7_117c
+
+  selected_files_count: 7
+  max_validator_runs: 1
+
+  validator_executed: false
+  batch_002_allowed_now: false
+  runtime_execution: false
+
+  cdp_accessed: false
+  runtime_evaluate_called: false
+  bridge_methods_called: false
+  mcp_called: false
+
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_139_batch_001_final_rescan_execution
