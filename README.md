@@ -127,6 +127,7 @@ v7.115 Validator Scan Loop Correction Planning — Correction planning for scan 
 v7.116 Scan Loop Correction Implementation Gate — Implementation gate for scan loop correction. 10 requirements (8 P0), 1-2 files to modify. Implementation not authorized.
 v7.117 Scan Loop Correction Implementation — validator.js rewritten with explicit file handling, UTF-8 read, rule invocation, result aggregation. Glob/directory rejection. permissionDrift.js unchanged.
 v7.117a Scan Loop Correction Patch Planning — Patch planning for 3 findings: P1 (list item parsing), P2 (glob rejection order), P3 (unused import). No code changed.
+v7.117b Scan Loop Correction Patch Implementation Gate — Patch gate for 3 fixes in 1 file. 10 requirements. Patch not authorized.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3
