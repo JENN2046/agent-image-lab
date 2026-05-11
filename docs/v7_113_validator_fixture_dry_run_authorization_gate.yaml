@@ -1,0 +1,37 @@
+v7_113_validator_fixture_dry_run_authorization_gate:
+  schema_version: v1
+  phase: v7_113
+  gate_type: dry_run_authorization_gate
+  dry_run_authorized_now: false
+  runtime_execution: false
+
+  source:
+    fixture_review_phase: v7_112
+    fixture_review_commit: db38da0
+
+  max_validator_runs: 1
+  allowed_target_scope: fixtures_only
+  full_repo_scan_allowed: false
+  docs_scan_allowed: false
+  agent_board_scan_allowed: false
+  readme_scan_allowed: false
+  file_write_allowed: false
+  network_access_allowed: false
+  cdp_access_allowed: false
+  bridge_call_allowed: false
+  mcp_call_allowed: false
+  ci_integration_allowed: false
+  hook_creation_allowed: false
+
+  validator_executed: false
+  runtime_execution: false
+
+  cdp_accessed: false
+  runtime_evaluate_called: false
+  bridge_methods_called: false
+  mcp_called: false
+
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_114_validator_fixture_dry_run_execution
