@@ -1,0 +1,54 @@
+v7_141_batch_002_execution_closeout:
+  schema_version: v1
+  phase: v7_141
+  closeout_status: completed
+  execution_date: 2026-05-11
+
+  chain_name: Controlled Selected Docs Audit Chain
+  batch_id: controlled_selected_docs_batch_002
+
+  validator_executed: true
+  validator_runs: 1
+  validator_patch_version: v7_117c
+  target_scope: selected_docs_batch_only
+  files_targeted: 7
+
+  exit_code: 2
+  decision: block
+  findings_detected: true
+  violations_total: 28
+  warnings_total: 0
+  notes_total: 6
+
+  forbiddenRawFields_violations: 0
+  permissionDrift_violations: 3
+  closeoutIntegrity_violations: 25
+
+  true_positive_count: 28
+  false_positive_count: 0
+  closeout_integrity_gap_count: 25
+  permission_drift_count: 3
+  raw_data_exposure_count: 0
+  blocker_count: 0
+
+  batch_boundary_respected: true
+  remediation_performed: false
+  batch_002_passed: false
+  batch_003_allowed_now: false
+  correction_planning_required_before_next_batch: true
+
+  second_validator_run_executed: false
+  file_write_performed: false
+  code_mutated: false
+  documents_mutated: false
+  fixtures_mutated: false
+  network_access: false
+  cdp_accessed: false
+  runtime_evaluate_called: false
+  bridge_methods_called: false
+  mcp_called: false
+
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_142_batch_002_correction_planning

@@ -5016,6 +5016,37 @@ next_phase_started: false
 recommended_next: v7.141 Batch 002 Execution
 ```
 
+## v7.141 Batch 002 Execution Closeout
+
+```text
+Phase: v7.141
+Status: batch_002_execution_closeout_completed
+execution_date: 2026-05-11
+
+chain_name: Controlled Selected Docs Audit Chain
+batch_id: controlled_selected_docs_batch_002
+
+validator_executed: true
+validator_runs: 1
+exit_code: 2
+violations_total: 28
+
+forbiddenRawFields: 0
+permissionDrift: 3
+closeoutIntegrity: 25
+
+true_positive_count: 28
+raw_data_exposure: 0
+remediation_performed: false
+
+batch_002_passed: false
+batch_003_allowed_now: false
+known_untracked_file_touched: false
+next_phase_started: false
+
+recommended_next: v7.142 Batch 002 Correction Planning
+```
+
 ## Resume Instruction
 
 ```text
