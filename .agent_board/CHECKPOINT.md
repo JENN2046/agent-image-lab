@@ -5536,6 +5536,41 @@ next_phase_started: false
 recommended_next: v7.158 Batch 004 Authorization Gate
 ```
 
+## v7.158 Batch 004 Authorization Gate
+
+```text
+Phase: v7.158
+Status: batch_004_authorization_gate_defined
+gate_type: batch_authorization_gate
+chain_name: Controlled Selected Docs Audit Chain
+batch_id: controlled_selected_docs_batch_004
+batch_authorized_now: false
+runtime_execution: false
+
+source_prior_batch: v7.157
+source_commit: 911aa2c
+validator_patch_version: v7.146
+
+prior_batches_clean:
+  - batch_001
+  - batch_002
+  - batch_003
+
+selected_files_count: 8
+batch_size_max: 8
+max_validator_runs: 1
+selected_docs_only: true
+
+autofix_allowed: false
+document_mutation_allowed: false
+
+batch_executed: false
+known_untracked_file_touched: false
+next_phase_started: false
+
+recommended_next: v7.159 Batch 004 Execution
+```
+
 ## Resume Instruction
 
 ```text
