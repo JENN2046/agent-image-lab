@@ -4643,6 +4643,45 @@ next_phase_started: false
 recommended_next: v7.129 First Controlled Batch Execution
 ```
 
+## v7.129 First Controlled Batch Execution Closeout
+
+```text
+Phase: v7.129
+Status: first_controlled_batch_execution_closeout_completed
+execution_date: 2026-05-11
+
+chain_name: Controlled Selected Docs Audit Chain
+batch_id: controlled_selected_docs_batch_001
+
+validator_executed: true
+validator_runs: 1
+validator_patch_version: v7.117c
+target_scope: selected_docs_batch_only
+files_targeted: 7
+
+exit_code: 2
+decision: block
+violations_total: 32
+
+forbiddenRawFields: 0
+permissionDrift: 0
+closeoutIntegrity: 32
+
+true_positive_count: 32
+false_positive_count: 0
+raw_data_exposure_count: 0
+permission_drift_count: 0
+
+batch_boundary_respected: true
+remediation_performed: false
+next_batch_allowed_now: false
+
+known_untracked_file_touched: false
+next_phase_started: false
+
+recommended_next: v7.130
+```
+
 ## Resume Instruction
 
 ```text
