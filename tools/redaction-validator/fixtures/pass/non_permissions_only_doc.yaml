@@ -1,0 +1,8 @@
+# pass fixture — non_permissions-only document
+# Should NOT trigger permissionDrift (no entries with action_id).
+
+non_permissions:
+  memory_write_path_allowed_now: false
+  submitDraft_invocation_allowed: false
+  runtime_execution_allowed_now: false
+  image_generation_allowed_now: false

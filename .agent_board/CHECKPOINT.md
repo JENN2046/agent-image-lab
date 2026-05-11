@@ -26,6 +26,25 @@ CDP / bridge / MCP: no
 Next: v7.170 Agent Board and Validator Patch Implementation
 ```
 
+## v7.170 Agent Board and Validator Patch Implementation
+
+```text
+Status: completed — controlled patch implementation
+Target: 5 repair scopes from v7.169 gate
+  Scope 1: Agent Board Resume Surface Reconciliation
+  Scope 2: Redaction Validator Execution Closure
+  Scope 3: Fixture Coverage Patch
+  Scope 4: Legacy v6.8 Surface Disposition
+  Scope 5: Umbrella Validation / Board Freshness Gate
+Source: v7.169 Agent Board and Validator Patch Gate (526fed7)
+Validator Governance Chain v1: closed (106→0, 4 batches clean_closed)
+batch_005_allowed_now: false
+production_candidate_002_allowed_now: false
+memory_write_path_allowed_now: false
+CDP / bridge / MCP: no
+Next: v7.171 Patch Static Review and Syntax Validation Gate
+```
+
 ## v7.35 Push Safety Gate Governance Rule
 
 ```text

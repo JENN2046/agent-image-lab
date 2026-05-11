@@ -1,0 +1,14 @@
+# fail fixture — standing runtime permission implied
+# Should trigger no_standing_runtime_permission invariant violation.
+
+boundary_matrix:
+  entries:
+    - action_id: review_console_loadSession
+      allowed_now: true
+      permission_status: read_only
+    - action_id: vcpchat_submitDraft
+      allowed_now: false
+      permission_status: forbidden_permanent
+  non_permissions:
+    memory_write_path_allowed_now: false
+    submitDraft_invocation_allowed: false

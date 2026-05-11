@@ -1,0 +1,14 @@
+# fail fixture — production_candidate_002 permission_status drift
+# Should trigger permissionDrift violation.
+
+boundary_matrix:
+  entries:
+    - action_id: production_candidate_002
+      allowed_now: false
+      permission_status: allowed_by_default
+    - action_id: vcpchat_submitDraft
+      allowed_now: false
+      permission_status: forbidden_permanent
+  non_permissions:
+    memory_write_path_allowed_now: false
+    submitDraft_invocation_allowed: false

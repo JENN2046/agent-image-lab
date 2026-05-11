@@ -1,3 +1,5 @@
+> **Historical / reference-only document.** This document represents a past planning surface (v6.8B) and does not authorize any current execution path. Do not use as basis for new work without passing a v7+ current revalidation gate.
+
 # v6.8B Plugin Dashboard Guard Hardening
 
 ## 目的

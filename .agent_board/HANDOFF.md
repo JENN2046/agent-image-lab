@@ -3,17 +3,17 @@
 ## Handoff Summary
 
 ```text
-Status: v7.35 Push Safety Gate Governance Rule COMPLETED_VALIDATED — AGENTS.md Section 17, local_commit_scope assertions, MVP validation checks. Governance only, no execution. Committed locally, not pushed.
+Status: v7.170 Agent Board and Validator Patch Implementation COMPLETED — 5 repair scopes executed. Agent board synced to v7.166/v7.167/v7.169 state. Redaction validator execution closure: allowedSummaryFields wired, permissionDrift invariants completed, fixtures patched, legacy v6.8 surface disposition, board freshness gate updated.
 
-Next recommended step: v7.36 governance rule automation or user direction.
+Validator Governance Chain v1: CLOSED
+  - Batch 001-004: clean_closed (106 violations → 0)
+  - Batch 005: not allowed
+  - Chain reusable, requires new authorization
 
-Next recommended step: v7.35 French Summer Rattan Bag v2 3-shot Shot 1 A5 (requires explicit A5 authorization).
-```
+Next major route: NOT SELECTED. Do not open Batch 005, production_candidate_002, or memory_write_path without explicit user authorization.
 
-```text
-Status: v7.34 3-shot Stability Test Plan COMPLETED_VALIDATED — documentation, plan, registry, validator (51 checks), schema example, all indexes synced. Plan-only, no execution. Committed locally, not pushed.
-Extends v6.7 Product Runtime Final Acceptance Baseline and v6.8A Plugin Dashboard Draft Surface.
-Result: Release Panel UI (docs/248, 17 checks), v6ReleaseReadinessIsSafe guard (docs/249, 12 checks), v6.10 RC Matrix (docs/250), Validator Quality Gate (docs/251, 8 checks), Operator Runbook (docs/252), Resume Capsule (docs/253, 14 checks). 7 local commits awaiting push.
+Current gate: v7.169 Agent Board and Validator Patch Gate (docs/v7_169_agent_board_and_validator_patch_gate.md)
+Review source: v7.168 Post-Closeout Code Surface Review (28 files inspected, 3 P1 / 4 P2 / 2 P3 findings)
 ```
 
 ## Current Repo
@@ -26,32 +26,22 @@ A:/agent-image-lab/agent-image-lab-v0.2
 
 ```text
 Branch: master
-Remote tracking: master...origin/master [ahead 7 — v6.9A + v6.9B + v6.10 + QC + Runbook]
-State: Extended Long Task complete. Release Panel UI + Guard + RC Matrix + Quality Gate + Runbook + Capsule.
-Local head: a93cc9e
-Origin/master: eb4fade
-Current freshness doc: docs/226_runtime_review_batch_9a_state_freshness_index.md
-Current operator runbook: docs/227_runtime_review_batch_9c_operator_runbook_and_resume_capsule.md
-Current compatibility matrix: docs/228_runtime_review_batch_9b_runtime_session_compatibility_matrix.md
-Current replay index: docs/229_runtime_review_batch_10b_end_to_end_dry_run_replay_index.md
-Current acceptance matrix: docs/230_runtime_review_batch_10a_release_candidate_acceptance_matrix.md
-Current authorization consolidation: docs/231_runtime_review_batch_10c_future_a5_authorization_package_consolidation.md
-Current final checkpoint: docs/232_runtime_review_final_local_checkpoint_sustained_autopilot_chain_closeout.md
-Chain status: 9A → 9C → 9B → 10B → 10A → 10C → final checkpoint (7/7 DONE)
+Remote tracking: master...origin/master [synced]
+State: v7.170 Agent Board and Validator Patch Implementation completed.
+Local head: <local_head_at_closeout>
+Origin/master: <remote_head_at_closeout>
+Current gate doc: docs/v7_169_agent_board_and_validator_patch_gate.md
+Validator Governance Chain v1: CLOSED
+  Batch 001: 32 → 0 clean_closed
+  Batch 002: 28 → 0 clean_closed
+  Batch 003: 23 → 0 clean_closed
+  Batch 004: 23 → 0 clean_closed
+  total: 106 → 0
+  batch_005_allowed_now: false
+  chain_reusable: true (requires new authorization)
+Validator patch: v7.146 (scope: selected-doc-only, glob/directory/full-repo scan rejected)
+Next major route: NOT SELECTED
 PR #6 status: merged
-PR #6 merge commit: 563ccc4
-PR #6 head: 4b34894
-PR #1 status: merged
-PR #1 merge commit: 367d3c9
-PR #1 merged head: b595851
-PR #2 status: merged
-PR #2 merge commit: 3e3405e
-PR #2 head: 5ccf059
-PR #3 status: merged
-PR #3 merge commit: b3731bf
-PR #3 head: 46bf42b
-Master sync: local master synced to origin/master
-Last pushed commit: 9088b71
 Last pushed tag: v10.8-a5-guarded-delivery-baseline
 Local checkpoint commit: 6d4253f
 Local checkpoint tag: v4.8-local-validation-checkpoint
@@ -139,170 +129,17 @@ Historical v7.45 phase: v7.45 cdp read-only attempt record
 ## What Was Done
 
 ```text
-Added v6.2 Asset Index Interaction: asset_ref/hash/status/score/decision/memory_suitability/case_id interactive form controls with local filtering (all/accepted_candidate/needs_human_review/rejected/memory_suitable). runtime_guard now validates v6AssetIndexIsSafe with strict enum and boundary checks. FIELD_MAPPING, smoke test, v6.2 validator, schema example, and agent-board files synced.
+v7.168 Post-Closeout Code Surface Review (A0 read-only): 28 files inspected across agent board, redaction validator, fixtures, governance chain evidence, historical v6.8 surface, and runtime-risk scripts. 3 P1, 4 P2, 2 P3 findings confirmed. Agent board surface stale; allowedSummaryFields unwired; permissionDrift invariants incomplete; v6.8 legacy surface partially unmarked; board freshness validation gap.
 
-Added runtime contract smoke hardening.
-Added runtime guard unit validation.
-Added runtime validation suite.
-Added Runtime Review follow-up Batch 2A/2C accepted candidate delivery package draft and human override traceability draft to the local runtime prototype.
-Installed Agent Image Lab autopilot overlay as new files.
-Adjusted overlay local validation helpers for known historical real-execution records.
-Synchronized .agent_board with current repository reality.
-Added agent board state validation harness.
-Added local checkpoint readiness manifest validation for the current v4.0-v4.5 local batch.
-Added local commit scope manifest validation for the current v4.0-v4.6 changed-file allowlist.
-Recorded v4.6 pushed baseline and reconciled the board for v4.7 post-push state reconciliation.
-Added v4 index consistency validation for v4.0-v4.8 docs, schemas, scripts, and board indexes.
-Recorded local v4.8 commit/tag readiness and kept push pending explicit authorization.
-Merged PR #1 and synced local master to origin/master.
-Opened v5.0 post-merge delivery readiness index as a local validation batch.
-Validated v5.0 post-merge delivery readiness and left the batch uncommitted pending explicit version-action authorization.
-Added runtime delivery surface validation for Review Console runtime prototype.
-Validated v5.1 runtime delivery surface and left the batch uncommitted pending explicit version-action authorization.
-Added adapter delivery surface validation for the dry-run lab and export package.
-Validated v5.2 adapter delivery surface and left the batch uncommitted pending explicit version-action authorization.
-Committed v5.1/v5.2 local delivery surface batch as 876d335.
-Added Review Console Adapter dry-run handoff fixture, static draft output, field mapping, and validator.
-Validated v5.3 Review Console Adapter handoff and left the batch uncommitted pending explicit version-action authorization.
-Committed v5.3 local handoff validation batch as b04e253.
-Added v5.4 local sync readiness preflight for current local commit chain.
-Committed v5.4 local sync readiness preflight as a2ae539.
-Added v5.5 post-commit reconciliation checkpoint for the four-commit local chain.
-Added v5.6 v5 index consistency validation for v5.0-v5.6 local delivery records.
-Added v5.7 local batch commit-readiness preflight for the current v5.5-v5.7 uncommitted batch.
-Added v5.8 handoff freshness validation for current agent board resume materials.
-Expanded v5 index consistency validation coverage to v5.0-v5.9.
-Committed v5.9 expanded v5 index consistency validation as 9ac4ca8.
-Fixed handoff freshness validator so it parses the actual current phase instead of matching historical v5.8 text.
-Added v5.10 local true-loop candidate delivery closeout.
-Merged PR #2 and synced local master to origin/master at 3e3405e.
-Added v5.11 post-merge reconciliation for PR #2, tag state, and agent board current phase.
-Merged PR #3 and synced local master to origin/master at b3731bf.
-Added v5.12 release candidate readiness for final delivery candidate packaging.
-Defined A4 as the default local sustained autopilot mode in AGENTS.md.
-Defined A5 Autonomous Production Execution as the real production mode that requires an active authorization package.
-Opened v7.40 local A4/A5 autonomy mode alignment.
-Committed v7.40 local autonomy validation as 8f60ae1.
-Added v7.41 external remote-debug verification script creation record and deferred real script creation.
-Committed v7.41 script creation deferral as 0326150.
-Added v7.42 external remote-debug verification script creation authorization package template.
-Committed v7.42 authorization package template as 975da9a.
-Created scripts/run_vcpchat_review_console_remote_debug_smoke.ps1 as dry-run-only local script and added v7.43 creation execution record.
-Committed v7.43 script creation execution record as d728a89.
-Ran scripts/run_vcpchat_review_console_remote_debug_smoke.ps1 in default dry-run blocked mode.
-Launched VCPChat with npm run start:desktop:utf8 from the external local VCPChat root.
-Confirmed no CDP 9222 listener output and did not access CDP or call bridge methods.
-Committed v7.44 VCPChat launch record as b83ccd5.
-Attempted authorized local CDP read-only access against redacted_local_cdp_9222.
-Observed no available CDP endpoint or electron-owned listening connection, so Runtime.evaluate and bridge checks were not performed.
-Committed v7.45 CDP read-only attempt record as 3fdd966.
-Stopped the previously running VCPChat/Electron processes after explicit user authorization and accepted unsaved-state risk.
-Relaunched VCPChat with remote-debug enabled using a sanitized external root reference.
-Read CDP targets and selected the VCPChat page target without saving raw endpoint, websocket URL, or source path.
-Executed one Runtime.evaluate read-only surface check for imageLabReview, imageLabReviewMount, imageLabReviewRuntime, and prototype_guard.
-Confirmed bridge method presence only; bridge method invocation performed: no.
-Recorded active A5 authorization package with sanitized external target references only.
-Started A5 preflight and stopped before production execution because external target worktrees were not clean.
-Did not call bridge methods, plugins, APIs, DailyNote, VCP memory, image generation, commit, tag, push, PR, or GitHub Release.
-Recorded v10.1 A5 resume-after-clean package after the user reported external target worktrees clean.
-Marked A5 preflight rerun as required before bridge, plugin, memory, image, commit, tag, push, PR, or release actions.
-Reran A5 preflight with sanitized output; branch/origin/tag/output directory and external target worktree checks passed.
-Launched VCPChat remote-debug runtime and confirmed CDP targets were visible.
-Confirmed current runtime does not expose imageLabReview, imageLabReviewRuntime, or imageLabReviewMount.
-Kept bridge_calls_observed at 0 and did not call cancel, loadSession, previewDraft, submitDraft, DoubaoGen, DailyNote, VCP memory, or image generation.
-Closed the remote-debug runtime started for this smoke after the blocked result.
-Added no-write imageLabReview bridge surface in the authorized VCPChat renderer file.
-Validated VCPChat renderer syntax and strict allowlist-only bridge smoke.
-Strict smoke called cancel/loadSession/previewDraft only and kept submitDraft_called=false.
-Recorded that an earlier initial submitDraft rejected probe occurred, with no external side effects, and blocked DoubaoGen continuation pending human review.
-Received explicit human review authorization to continue A5 production after the initial rejected submitDraft probe.
-Located DoubaoGen through a sanitized plugin ref and executed one authorized DoubaoGen generation.
-Recorded actual plugin calls observed: 1, generated asset count: 1, and generated asset status: rejected.
-Rejected the generated asset because the image contains readable text and logo-like marks.
-Blocked DailyNote and VCP memory writes because the generated asset failed review.
-Received explicit v10.5 no-text retry authorization.
-Executed one additional DoubaoGen no-text retry with actual plugin calls observed in v10.5: 1.
-Rejected the v10.5 generated asset because the image contains a person/face, readable text, logo-like marks, and brand/device marks.
-Kept DailyNote and VCP memory writes blocked because the v10.5 generated asset failed review.
-Recorded v10.6 prompt accountability: the v10.5 prompt template was authored by the agent and failed.
-Recorded safer prompt strategy: positive-only unbranded still-life, no software/UI/cover concepts.
-Recorded candidate prompt draft as non-executable and requiring user preview before any next real call.
-Recorded v10.7 safer prompt review package and local trigger-term scan.
-Marked prompt id a5_positive_still_life_prompt_v1 as ready for user review, not execution authorization.
-Recorded v10.8 positive still-life generation preflight gate.
-Locked prompt id a5_positive_still_life_prompt_v1 for future authorization without allowing execution.
-Marked separate generation authorization required before any next DoubaoGen call.
-Calibrated current local state to master ahead of origin/master by one commit.
-Prepared integrations/vcp/v10_8_positive_still_life_real_generation_authorization_draft.md as an inactive human-review authorization draft.
-Prepared integrations/vcp/v10_8_positive_still_life_short_approval_template.md so the user can approve the current capsule with `批准 v10.8 静物单次生成` after private PluginDir binding setup.
-Added .agent_private/ to .gitignore for private local bindings that must not enter Git.
-Received short approval `批准 v10.8 静物单次生成` for one v10.9 DoubaoGen positive still-life generation.
-Executed exactly one authorized v10.9 DoubaoGen call and created one ignored runtime asset.
-Rejected the v10.9 generated asset because the image contains a person/face and does not match the locked still-life prompt subject.
-Kept DailyNote and VCP memory writes blocked because the v10.9 generated asset failed review.
-Prepared v10.10 prompt handoff diagnostic preflight without reading PluginDir/config, calling plugins/API, or creating images.
-Recorded max plugin calls allowed in v10.10: 0, no generation in v10.10, and diagnostic authorization still inactive.
-Received explicit v10.10 diagnostic authorization with `批准 v10.10 传参诊断`.
-Recorded v10.11 prompt handoff diagnostic result: prompt hash matches expected, local runner prompt rewrite detected: false, actual plugin calls observed in v10.11: 0, and provider-side request remains unobserved.
-Prepared v10.12 A5 provider-side prompt fingerprint capture authorization package.
-v10.12 local: provider-side prompt fingerprint capture authorization package ready.
-authorization status: inactive package.
-execution authorized by v10.12: false.
-provider-side capture not performed.
-Activated v10.12 with `批准 v10.12 provider侧指纹捕获`.
-Performed one sanitized request capture with network blocked before send.
-Observed provider echo supported: false.
-Observed local payload prompt hash matched expected: true.
-Observed outbound request prompt hash matched expected: false.
-Provider observed prompt hash remains not observed.
-No image, API call, raw request/response/endpoint/runtime log/secret/path recording, DailyNote, VCP memory, commit, tag, push, PR, or release occurred.
-Activated v10.13 with `批准 v10.13 真生图完整验证`.
-Executed one DoubaoGen real generation call.
-Generated one 1024x1024 JPG asset under ignored runtime output.
-Rejected the asset because it is a person/face landscape portrait and does not match the locked tabletop still-life prompt.
-DailyNote and VCP memory writes remain blocked by asset review.
-Activated v10.14 with `批准 v10.14 DoubaoGen 5.0 模型锁定诊断`.
-Verified the current request body model can match doubao-seedream-5-0-260128 before network send.
-Recorded that the user had just changed DoubaoGen.js/config.env before the static scan, so current static 5.0 presence is not historical proof for v10.13.
-Reproduced the prompt transport issue: default PowerShell stdin corrupts the locked Chinese prompt; UTF-8 no BOM stdin makes both model and prompt fingerprints match.
-No network request, image creation, DailyNote, VCP memory write, raw request/prompt/endpoint/secret/path recording, commit, tag, push, PR, or release occurred in v10.14.
-Activated v10.15 with `批准 v10.15 修 runner UTF-8 no BOM`.
-Patched scripts/run_v0_7_photo_studio_os_real_execution.ps1 and scripts/run_v0_10_gptimagegen_real_execution.ps1 so ProcessStartInfo.StandardInputEncoding uses UTF8Encoding(false).
-Added scripts/validate_v10_15_runner_utf8_no_bom_transport.js and wired it into validate_mvp.
-No plugin/API call, image creation, DailyNote, VCP memory write, commit, tag, push, PR, or release occurred in v10.15.
-Ran v10.16 no-generation request preflight with a local dummy Node stdin receiver.
-Confirmed three stable patched-transport payload writes: JSON parsed, no UTF-8 BOM, model hash matched doubao-seedream-5-0-260128, and prompt hash matched a5_positive_still_life_prompt_v1.
-No real DoubaoGen/config read, provider contact, plugin/API call, image creation, DailyNote, VCP memory write, raw prompt/request/endpoint/secret/path recording, commit, tag, push, PR, or release occurred in v10.16.
-Activated v10.17 with `批准 v10.17 patched runner 单次真生图`.
-Preflight passed, but runner invocation failed before plugin start because Windows PowerShell 5.1 lacks ProcessStartInfo.StandardInputEncoding.
-Recorded sanitized v10.17 failure under runs/v10_17_patched_runner_real_generation; actual plugin calls: 0, image created: false, retry performed: false.
-Patched v10.18 compatible byte-write transport: payload is encoded with UTF8Encoding(false).GetBytes and written/flushed to StandardInput.BaseStream.
-Validated v10.18 with parser checks, updated validator, and 3-iteration dummy receiver preflight. No retry generation was performed.
-Activated v10.19 with `批准 v10.19 compatible byte-write runner 2次真生图`.
-Executed two authorized DoubaoGen calls with the compatible byte-write runner.
-Generated two 1024x1024 JPG images under ignored runtime output.
-Reviewed run_1 as accepted_candidate and run_2 as needs_human_review due small lens markings/text-like details.
-No third generation, no DailyNote, no VCP memory, no submitDraft, no commit, tag, push, PR, or release occurred in v10.19.
-Patched v10.20 so future DoubaoGen summaries record sanitized plugin_reported_model_ref, model hashes, and reported/requested match boolean.
-Created v10.21 local selection summary recommending v10.19 run_1 as the accepted candidate and keeping run_2 under human review.
-No plugin/API call, image creation, DailyNote, VCP memory, commit, tag, push, PR, or release occurred in v10.21.
-Created v10.22 local memory_delta draft for v10.19 run_1 under runs/v10_22_run_1_memory_draft.
-The draft remains write_mode=draft, approval_status=pending, and should_write_to_vcp=false.
-No plugin/API call, image creation, DailyNote, VCP memory, submitDraft, commit, tag, push, PR, or release occurred in v10.22.
-Created v10.23 local human review package for the v10.22 memory_delta draft under runs/v10_23_memory_draft_human_review_package.
-The package includes a sanitized summary, checklist, and approval decision template. approve_memory_write in this package does not perform a real write.
-No plugin/API call, image creation, DailyNote, VCP memory, submitDraft, commit, tag, push, PR, or release occurred in v10.23.
-Created v10.24 local no-write write preflight package under runs/v10_24_approve_memory_write_no_write_preflight.
-Recorded approve_memory_write as an approved request, generated a confirmed memory_delta candidate, and kept daily_note_write_authorized=false, daily_note_called=false, vcp_memory_written=false, actual_write_performed=false.
-No plugin/API call, image creation, DailyNote, VCP memory, submitDraft, commit, tag, push, PR, or release occurred in v10.24.
-Created Runtime Review final local checkpoint; sustained autopilot chain (9A→10C, 7/7) is fully documented, validated, committed, and agent-board synced; push scheduled for end of workday via cron.
-	Created Runtime Review Batch 10C future A5 authorization package consolidation; bridge, plugin, asset review, DailyNote/VCP memory, rollback, forbidden outputs, and version actions are now consolidated into a single preflight template.
-	Created Runtime Review Batch 10A release-candidate acceptance matrix; bridge, plugin, asset archive, memory lifecycle, runtime prototype, validator suite, operator docs, and release readiness are now structured into a reviewable matrix without real execution.
-	Created Runtime Review Batch 10B end-to-end dry-run replay index doc and validator; indexed the complete Adapter dry-run fixture chain through Review Console runtime prototype to session export without real VCPChat/VCPToolBox/DoubaoGen/DailyNote/VCP memory access.
-	Resolved v10.25 real write entry to DailyNoteWrite.
-Executed DailyNoteWrite once with the prepared payload. Plugin exit code was 0 and plugin reported success.
-Performed a read-only sanitized existence check and found one matching saved file; recorded only file name, length, and sha256, not raw path.
-No retry, second write, plugin/API generation call, image creation, submitDraft, commit, tag, push, PR, or release occurred in v10.25.
+v7.169 Agent Board and Validator Patch Gate (docs-only): 5 repair scopes defined. Patch not authorized.
+
+v7.170 Agent Board and Validator Patch Implementation:
+  - Agent Board synced to v7.166/v7.167/v7.169 state
+  - Validator: allowedSummaryFields wired, permissionDrift invariants completed
+  - 4 new fixtures added
+  - legacy v6.8 surface: 245/246 banners, superseded validator comment, legacy index
+  - validate_agent_board_state.js: phase freshness check added, v10.8 hardcode removed
+  - README/CHECKPOINT updated
 ```
 
 ## Validation
@@ -548,31 +385,20 @@ git diff --check: passed
 
 ```text
 No active local blocker.
-Real external VCPChat/VCPToolBox source reads require explicit separate authorization.
-Historical v10.0 dirty external target worktree blocker was later rechecked clean in v10.2; current production actions are blocked by new strategy, request preflight, real generation, memory, or version-action authorization.
-v10.25 consumed the single real DailyNote/VCP memory write authorization for the run_1 memory draft. Additional real DoubaoGen/config read, provider-side echo, sanitized request capture, production actions, memory writes, and deeper diagnostic actions remain blocked until the user explicitly authorizes fresh real generation, memory-write action, or version action.
-Runtime Review Batch 8D is the current planning layer. Default A4/A4.5 local tasks may continue automatically when reversible and validated. Real execution, external writes, and version actions may auto-run only when a concrete active authorization package exists and preflight passes.
-The v10.12 activation phrase has been consumed. A second provider-side echo or second sanitized request capture requires a new explicit authorization.
-The v10.13 real generation approval phrase has been consumed. A second generation attempt requires a new explicit authorization.
-The v10.14 diagnostic approval phrase has been consumed.
-The v10.15 runner patch approval phrase has been consumed. Generation requires a new explicit authorization/scope.
-The prior short approval template call has been consumed for v10.9 and does not authorize another plugin call.
-Historical v7.45: CDP access remains blocked because no available endpoint was exposed.
-v7.46 Runtime.evaluate performed by this phase: yes, read-only surface checks only.
-Additional plugin/API/DailyNote/VCP memory/image actions, commit/tag/push/PR/release, and deeper production continuation are blocked until real generation, memory, or version-action authorization is provided.
-Push/tag/release require explicit separate authorization.
-Full MVP validation suite now routes historical v4/v5 current-state validators as snapshots and uses v7.46 / agent-board validators for current state.
+Validator Governance Chain v1 is closed. Batch 005 must NOT be opened.
+production_candidate_002 and memory_write_path remain blocked until explicit user authorization with matching authorization package.
+Next major route has not been selected.
+Historical A5 actions (v10.0–v10.28) consumed their respective authorizations. New real execution requires fresh explicit authorization.
+Push/PR/release require explicit separate version-action authorization.
 ```
 
 ## Human Decisions Needed
 
 ```text
-Whether to push the 7 local commits and 5 tags to origin/master (下班统一 push)。
-Whether to design a new prompt, switch strategy, or use an alternate generation plugin after the repeated rejected assets.
-Whether to create a new short approval capsule for any future A5 generation/write action.
-Whether to create a formal release tag after final release approval.
-Local commit/tag: auto-authorized within A4 boundaries (already performed, 7 commits + 5 tags).
-Push/PR/release: still require explicit authorization or active version-action package.
+Select next major route:
+  - v7.171 Patch Static Review and Syntax Validation Gate (recommended)
+  - Or enter A5 production planning (requires new authorization package)
+  - Or open a new governance chain batch (requires new authorization)
 ```
 
 ## Exact Resume Prompt
@@ -581,15 +407,24 @@ Push/PR/release: still require explicit authorization or active version-action p
 你现在在 Agent Image Lab 项目根目录。
 读取 AGENTS.md、AGENTS.autopilot-overlay.md 和 .agent_board/*。
 使用 A4 — Sustained Local Autopilot。
-先检查 repo reality。Sustained autopilot chain（9A→10C→final checkpoint, 7/7）已全部完成，不再有已定义且未完成的 default-auto local batch。
-运行 node scripts/validate_runtime_review_full_chain.js 确认全链状态。
-不要读取真实 VCPChat/VCPToolBox 源码，不要调用插件/API/DailyNote，不要创建图片，不要写出 workspace root。
 
-当前 Git 状态：master 已与 origin/master 同步（31 commits, 9 tags），working tree clean。
+当前仓库状态：
+- Validator Governance Chain v1: CLOSED（Batch 001-004 clean_closed, 106→0）
+- Batch 005: NOT ALLOWED
+- production_candidate_002: NOT ALLOWED
+- memory_write_path: NOT ALLOWED
+- next major route: NOT SELECTED
+- 最近的 gate: v7.169 Agent Board and Validator Patch Gate（docs-only gate，施工未授权）
+- 最近的 implementation: v7.170 Agent Board and Validator Patch Implementation（板面同步 + validator 执行闭合 + fixture 补丁 + v6.8 legacy 处置 + 板面新鲜度门）
+- 推荐的下一步: v7.171 Patch Static Review and Syntax Validation Gate
 
-A5 历史：v10.0–v10.28 完成；DoubaoGen 6 次调用（1 accepted_candidate），DailyNoteWrite 1 次，CDP Runtime.evaluate 1 次 read-only。
-A5 未来：新 DoubaoGen/DailyNote/VCP memory/image 需要显式授权并匹配 docs/231 consolidation template。
-版本动作：commit/tag 可在条件自动队列中执行；push/PR/release 仍需要 active version-action package。
+不要打开 Batch 005。
+不要进入 production_candidate_002。
+不要打开 memory_write_path。
+不要读取真实 VCPChat/VCPToolBox 源码。
+不要调用插件/API/DailyNote/VCP memory。
+不要创建图片。
+不要写出 workspace root。
 
 用中文汇报。
 ```

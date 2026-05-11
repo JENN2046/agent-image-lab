@@ -95,6 +95,15 @@ function checkPermissionDrift(matrixObject) {
         message: 'production_candidate_002 allowed_now drifted from false',
       });
     }
+    if (prodEntry.permission_status !== 'forbidden_needs_auth') {
+      violations.push({
+        invariant: 'production_candidate_permission_status',
+        severity: 'high',
+        actual: prodEntry.permission_status,
+        expected: 'forbidden_needs_auth',
+        message: 'production_candidate_002 permission_status drifted from forbidden_needs_auth',
+      });
+    }
   }
 
   // Check non_permissions block
@@ -116,6 +125,18 @@ function checkPermissionDrift(matrixObject) {
       expected: false,
       message: 'submitDraft_invocation_allowed drifted from false',
     });
+  }
+
+  // Check no_standing_runtime_permission invariant
+  for (const entry of entries) {
+    if (entry.allowed_now === true) {
+      violations.push({
+        invariant: 'no_standing_runtime_permission',
+        severity: 'high',
+        action_id: entry.action_id || '(unnamed)',
+        message: 'Entry with allowed_now=true implies standing runtime permission without authorization',
+      });
+    }
   }
 
   return violations;

@@ -82,8 +82,15 @@ function main() {
   ]);
   const localWorkStateDeclared = hasAll(runState + handoff, [
     "Worktree:",
-    "v10.8 A5 positive still-life generation preflight gate",
+    "Validator Governance Chain v1",
     "Push/tag/release"
+  ]);
+
+  const phaseFreshnessVerified = hasAll(runState + handoff + checkpoint + taskQueue, [
+    "Validator Governance Chain v1: closed",
+    "batch_005_allowed_now: false",
+    "production_candidate_002_allowed_now: false",
+    "memory_write_path_allowed_now: false"
   ]);
 
   assert(currentModeDeclared, "Agent board must declare A4 sustained local autopilot mode.");
@@ -95,6 +102,7 @@ function main() {
   assert(handoffResumePromptPresent, "Agent board handoff must include guarded resume prompt.");
   assert(overlaySeparationDecisionPresent, "Agent board decisions must keep overlay separate from root AGENTS.md.");
   assert(localWorkStateDeclared, "Agent board must declare current local work state.");
+  assert(phaseFreshnessVerified, "Agent board phase freshness check failed: stale board state detected (governance chain / v7.170 state not reflected).");
 
   const result = {
     passed: true,
@@ -109,6 +117,7 @@ function main() {
       handoff_resume_prompt_present: handoffResumePromptPresent,
       overlay_separation_decision_present: overlaySeparationDecisionPresent,
       local_work_state_declared: localWorkStateDeclared,
+      phase_freshness_verified: phaseFreshnessVerified,
       external_network_required: false,
       external_service_required: false,
       file_write_performed: false

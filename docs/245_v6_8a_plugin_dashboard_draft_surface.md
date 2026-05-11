@@ -1,3 +1,5 @@
+> **Historical / reference-only document.** This document represents a past planning surface (v6.8A) and does not authorize any current execution path. Do not use as basis for new work without passing a v7+ current revalidation gate.
+
 # v6.8A Plugin Dashboard Draft Surface
 
 ## 目的

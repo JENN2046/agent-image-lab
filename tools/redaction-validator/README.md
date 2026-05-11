@@ -16,8 +16,10 @@ node tools/redaction-validator/validator.js <path1> [path2] ...
 
 Example (do not run without explicit authorization):
 ```bash
-node tools/redaction-validator/validator.js docs/ .agent_board/CHECKPOINT.md README.md
+node tools/redaction-validator/validator.js .agent_board/CHECKPOINT.md README.md tools/redaction-validator/fixtures/pass/redacted_closeout.yaml
 ```
+
+> **Note:** Directory input (e.g. `docs/`) is a user error, not a shorthand. The validator accepts only explicit file paths. Glob patterns (`*.md`, `**/*.yaml`) are also rejected.
 
 ## Exit Codes
 

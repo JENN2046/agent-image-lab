@@ -3,19 +3,19 @@
 ## Current Mode
 
 ```text
-A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
+A4 — Sustained Local Autopilot
 ```
 
 ## Current Mission
 
 ```text
-v7.35 Push Safety Gate Governance Rule — AGENTS.md Section 17, local_commit_scope assertion, validate_mvp.ps1 check. Governance only, no execution.
+Post-closeout state. Validator Governance Chain v1 closed (106→0, Batch 001-004 clean_closed). v7.170 Agent Board and Validator Patch Implementation completed. Next major route not selected.
 ```
 
 ## Current Phase
 
 ```text
-v7.35 — Push Safety Gate Governance Rule. AGENTS.md, local_commit_scope, MVP validation, validation checklist, agent-board synced. Governance only, no execution.
+v7.170 — Agent Board and Validator Patch Implementation. 5 repair scopes executed: agent-board sync, validator execution closure, fixture patch, legacy v6.8 disposition, board freshness gate.
 ```
 
 ## Current Branch
@@ -24,22 +24,16 @@ v7.35 — Push Safety Gate Governance Rule. AGENTS.md, local_commit_scope, MVP v
 master tracking origin/master
 ```
 
-## Current Phase
-
-```text
-v7.0 — Real Production Landing Preflight. docs/254 (preflight plan) + docs/255 (A5 authorization template) + validate_v7_0 (20 checks). No real execution.
-```
-
 ## Current Task
 
 ```text
-v7.1~v7.4 Production Landing Preparation — controlled run package, failure taxonomy, asset acceptance gate, memory write gate.
+Post-patch state: all known P1 findings from v7.168 resolved. Next: v7.171 Patch Static Review and Syntax Validation Gate (authorization required).
 ```
 
 ## Last Completed Task
 
 ```text
-v7.1-v7.4 completed — docs/256-259, 4 validators (55 checks total). All v7 validators pass. No real execution. draft_only, no-execution.
+v7.170 — Agent Board and Validator Patch Implementation. 5/5 scopes completed. All safety boundaries respected. Node --check syntax passed for modified JS files.
 ```
 
 ## Last Validation
@@ -1219,11 +1213,10 @@ Historical v7.45 phase: v7.45 cdp read-only attempt record
 ## Current Stop Status
 
 ```text
-v6.7 Product Runtime Final Acceptance Baseline completed and pushed to origin/master. All 4 commits synced. No further default-auto local tasks defined. A4/A4.5 local tasks are default-auto when reversible and validated. Real VCPChat/VCPToolBox reads, plugin/API/DailyNote/VCP memory/image actions, and A5 production execution are conditional-auto only when a concrete active authorization package exists and preflight passes.
+v7.170 completed. Validator Governance Chain v1 closed. Batch 005 not allowed. production_candidate_002 not allowed. memory_write_path not allowed. Next major route not selected. Agent board synced to real state.
 ```
 
 ## Next Action
 
 ```text
-v7.5 completed. Next: user direction — push or v7.6 Single Real Generation Activation Package (requires active A5).
-```
+v7.170 completed. Next: v7.171 Patch Static Review and Syntax Validation Gate (requires user authorization) or user direction for next major route.

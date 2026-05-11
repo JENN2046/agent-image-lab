@@ -1,3 +1,9 @@
+// SUPERSEDED / LEGACY VALIDATOR
+// This validator is historical reference for v6.8 Plugin Dashboard surface only.
+// It does not reflect current active routes.
+// Do not use as validation gate for any v7+ or current work.
+// If the Plugin Dashboard is revived, a new v7+ revalidation gate must be created.
+
 const fs = require("node:fs");
 const path = require("node:path");
 
