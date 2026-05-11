@@ -1,0 +1,41 @@
+v7_114_validator_fixture_dry_run_execution_closeout:
+  schema_version: v1
+  phase: v7_114
+  closeout_status: completed
+  execution_date: 2026-05-11
+
+  validator_executed: true
+  validator_runs: 1
+  command_used: exact_authorized_command
+  target_scope: fixtures_only
+  files_targeted: 5
+
+  exit_code: 0
+  decision: skeleton_limited
+  skeleton_limitation_detected: true
+  skeleton_limitation_detail: rules_not_wired_into_scan_loop
+  expected_fail_fixtures_detected: false
+  expected_pass_fixture_passed: unknown
+
+  dry_run_safety_boundary_respected: true
+  functional_validator_status: incomplete
+  correction_required_before_real_docs_scan: true
+
+  second_validator_run_executed: false
+  file_write_performed: false
+  code_mutated: false
+  fixtures_mutated: false
+  dependency_added: false
+  ci_created: false
+  network_access: false
+  cdp_accessed: false
+  runtime_evaluate_called: false
+  bridge_methods_called: false
+  mcp_called: false
+  memory_written: false
+  image_generated: false
+
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_115_validator_scan_loop_correction_planning
