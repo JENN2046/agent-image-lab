@@ -3379,6 +3379,48 @@ runtime_execution: false
 recommended_next: v7.95
 ```
 
+## v7.95 loadSession Read-only Execution Gate
+
+```text
+Phase: v7.95
+Status: loadSession_read_only_execution_gate_prepared_not_granted
+gate_type: execution_authorization_gate
+package_status: prepared_not_granted
+runtime_execution: false
+
+carry_forward:
+  prior_v7_94_commit: 20a85f4
+  target_fingerprint: A83B8623
+
+target_fingerprint: A83B8623
+exact_bridge_method: window.imageLabReview.loadSession
+max_loadSession_calls: 1
+retry_allowed: false
+fallback_allowed: false
+purpose: read_only_session_draft_surface_validation
+
+loadSession_authorized_now: false
+cancel_authorized: false
+previewDraft_authorized: false
+submitDraft_authorized: false
+submitDraft_permanently_forbidden: true
+
+cdp_json_accessed: false
+cdp_connected: false
+loadSession_called: false
+previewDraft_called: false
+submitDraft_called: false
+cancel_called: false
+mcp_codex_memory_called: false
+lt06_executed: false
+known_untracked_file_touched: false
+
+execution_authorized: false
+runtime_execution: false
+
+recommended_next: v7.96
+```
+
 ## Resume Instruction
 
 ```text
