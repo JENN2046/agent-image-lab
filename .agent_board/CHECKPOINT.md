@@ -2974,6 +2974,47 @@ runtime_execution: false
 recommended_next: v7.85
 ```
 
+## v7.85 CDP WebSocket Connect Authorization Package
+
+```text
+Phase: v7.85
+Status: cdp_websocket_connect_authorization_package_prepared_not_granted
+package_type: authorization_package_draft
+package_status: prepared_not_granted
+runtime_execution: false
+
+carry_forward:
+  prior_v7_84_commit: 9bd175d
+  short_fingerprint_locked: true
+  raw_target_id_short_fingerprint_only: A83B8623
+  websocket_debugger_url_presence_boolean: true
+
+connect_purpose: prepare_runtime_evaluate_surface_probe_only
+max_cdp_websocket_connections: 1
+retry_allowed: false
+fallback_allowed: false
+
+cdp_websocket_connect_authorized_now: false
+runtime_evaluate_authorized: false
+bridge_call_authorized: false
+cancel_call_authorized: false
+
+cdp_json_accessed: false
+cdp_connected: false
+cdp_websocket_connected: false
+runtime_evaluate_called: false
+bridge_called: false
+cancel_called: false
+mcp_codex_memory_called: false
+lt06_executed: false
+known_untracked_file_touched: false
+
+execution_authorized: false
+runtime_execution: false
+
+recommended_next: v7.86
+```
+
 ## Resume Instruction
 
 ```text

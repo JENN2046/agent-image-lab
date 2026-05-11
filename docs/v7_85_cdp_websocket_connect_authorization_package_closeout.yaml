@@ -1,0 +1,45 @@
+v7_85_cdp_websocket_connect_authorization_package_closeout:
+  schema_version: v1
+  phase: v7_85
+  closeout_status: completed
+  package_type: authorization_package_draft
+  package_status: prepared_not_granted
+  runtime_execution: false
+
+  cdp_websocket_connect_authorization_package_defined: true
+  candidate_source: v7_84_target_fingerprint_lock_planning
+  raw_target_id_short_fingerprint_only: A83B8623
+  websocket_debugger_url_presence_boolean: true
+
+  connect_purpose: prepare_runtime_evaluate_surface_probe_only
+  max_cdp_websocket_connections: 1
+  retry_allowed: false
+  fallback_allowed: false
+
+  full_websocket_debugger_url_recorded: false
+  full_raw_target_id_recorded: false
+
+  cdp_websocket_connect_authorized_now: false
+  runtime_evaluate_authorized: false
+  bridge_call_authorized: false
+  cancel_call_authorized: false
+
+  cdp_json_accessed: false
+  cdp_connected: false
+  cdp_websocket_connected: false
+  runtime_evaluate_called: false
+  bridge_called: false
+  cancel_called: false
+  loadSession_called: false
+  previewDraft_called: false
+  submitDraft_called: false
+  mcp_codex_memory_called: false
+  lt06_executed: false
+
+  known_untracked_file_touched: false
+
+  execution_authorized: false
+  runtime_execution: false
+  next_phase_started: false
+
+  recommended_next: v7.86
