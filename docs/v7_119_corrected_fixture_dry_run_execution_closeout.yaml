@@ -1,0 +1,57 @@
+v7_119_corrected_fixture_dry_run_execution_closeout:
+  schema_version: v1
+  phase: v7_119
+  closeout_status: completed
+  execution_date: 2026-05-11
+
+  validator_executed: true
+  validator_runs: 1
+  validator_patch_version: v7_117c
+  target_scope: fixtures_only
+  files_targeted: 5
+
+  exit_code: 2
+  decision: block
+  expected_exit_code: 2
+  expected_exit_code_matched: true
+  expected_fail_fixtures_detected: true
+  expected_pass_fixture_passed: true
+  mismatch_detected: false
+
+  corrected_validator_fixture_dry_run_passed: true
+  real_docs_scan_allowed_now: false
+  selected_docs_scan_requires_new_gate: true
+
+  forbiddenRawFields_violations: 6
+  permissionDrift_violations: 3
+  closeoutIntegrity_violations: 9
+
+  raw_json_fixture_detected: true
+  websocket_fixture_detected: true
+  submitDraft_drift_fixture_detected: true
+  missing_fields_fixture_detected: true
+
+  metric_note:
+    scanned_files_reported: 20
+    files_targeted: 5
+    interpretation: rule_file_observations_not_unique_files
+    blocker: false
+
+  second_validator_run_executed: false
+  file_write_performed: false
+  code_mutated: false
+  fixtures_mutated: false
+  dependency_added: false
+  ci_created: false
+  network_access: false
+  cdp_accessed: false
+  runtime_evaluate_called: false
+  bridge_methods_called: false
+  mcp_called: false
+  memory_written: false
+  image_generated: false
+
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_120_selected_docs_scan_authorization_gate
