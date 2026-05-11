@@ -158,6 +158,7 @@ v7.143 Batch 002 Permission Drift Analysis Gate — Analysis gate for 3 drift fi
 v7.144 Batch 002 Permission Drift Analysis — Analysis complete. Rule-scope false positive. No actual permission loosened. Recommended option B: validator scope refinement. No code/docs mutated.
 v7.145 Batch 002 Correction Implementation Gate — Gate for Batch 002 correction. 1 validator file + 7 docs. Correction not authorized.
 v7.146 Batch 002 Correction Implementation — validator.js scope refined (non_permissions-only no longer triggers drift). 7 docs closeout fields added. No validator execution.
+v7.147 Batch 002 Re-scan Authorization Gate — Re-scan gate for corrected Batch 002. 7 files. Re-scan not authorized. Batch 003 blocked.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3

@@ -5200,6 +5200,36 @@ next_phase_started: false
 recommended_next: v7.147 Batch 002 Re-scan Authorization Gate
 ```
 
+## v7.147 Batch 002 Re-scan Authorization Gate
+
+```text
+Phase: v7.147
+Status: batch_002_rescan_authorization_gate_defined
+gate_type: batch_rescan_authorization_gate
+rescan_authorized_now: false
+runtime_execution: false
+
+source_correction_phase: v7.146
+source_correction_commit: 16b36a7
+chain_name: Controlled Selected Docs Audit Chain
+batch_id: controlled_selected_docs_batch_002
+validator_patch_version: v7.146
+
+selected_files_count: 7
+max_validator_runs: 1
+selected_docs_only: true
+
+autofix_allowed: false
+document_mutation_allowed: false
+batch_003_allowed_now: false
+
+validator_executed: false
+known_untracked_file_touched: false
+next_phase_started: false
+
+recommended_next: v7.148 Batch 002 Re-scan Execution
+```
+
 ## Resume Instruction
 
 ```text
