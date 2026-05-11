@@ -1,0 +1,53 @@
+v7_121_selected_docs_scan_execution_closeout:
+  schema_version: v1
+  phase: v7_121
+  closeout_status: completed
+  execution_date: 2026-05-11
+
+  validator_executed: true
+  validator_runs: 1
+  validator_patch_version: v7_117c
+  target_scope: selected_docs_only
+  files_targeted: 4
+
+  exit_code: 2
+  decision: block
+
+  findings_detected: true
+  violations_total: 7
+  warnings_total: 0
+  notes_total: 4
+
+  likely_false_positive_count: 0
+  likely_true_positive_count: 7
+
+  forbiddenRawFields_violations: 0
+  permissionDrift_violations: 0
+  closeoutIntegrity_violations: 7
+  affected_file: docs/v7_119_corrected_fixture_dry_run_execution_closeout.yaml
+
+  real_raw_data_exposure_detected: false
+  planned_field_name_false_positive_detected: false
+
+  selected_docs_scan_boundary_respected: true
+  selected_docs_scan_functional: true
+  remediation_performed: false
+
+  long_task_chain_allowed_now: false
+  correction_required_before_long_task_chain: true
+
+  second_validator_run_executed: false
+  file_write_performed: false
+  code_mutated: false
+  documents_mutated: false
+  fixtures_mutated: false
+  network_access: false
+  cdp_accessed: false
+  runtime_evaluate_called: false
+  bridge_methods_called: false
+  mcp_called: false
+
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_122_deferred
