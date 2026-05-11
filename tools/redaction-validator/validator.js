@@ -241,14 +241,19 @@ async function main() {
       ruleResults.permissionDrift.details.push({ file: filePath, message: 'Not a boundary matrix file — permissionDrift skipped' });
     }
 
-    // Run allowedSummaryFields scan on YAML files
+    // Run allowedSummaryFields scan on YAML files — top-level keys only
     if (filePath.endsWith('.yaml') || filePath.endsWith('.yml')) {
       const yamlKeys = {};
       for (const line of text.split('\n')) {
-        const trimmed = line.trim();
-        if (!trimmed || trimmed.startsWith('#') || trimmed.startsWith('-')) continue;
-        const keyMatch = trimmed.match(/^([\w_]+)\s*:/);
-        if (keyMatch) yamlKeys[keyMatch[1]] = true;
+        // Only match keys at column 0 (top-level YAML keys)
+        const keyMatch = line.match(/^(\w[\w_]*)\s*:/);
+        if (keyMatch) {
+          const key = keyMatch[1];
+          // Skip known structural container keys (entries, non_permissions, boundary_matrix, etc.)
+          if (!allowedSummaryFields.isKnownStructuralKey(key)) {
+            yamlKeys[key] = true;
+          }
+        }
       }
       if (Object.keys(yamlKeys).length > 0) {
         const summaryWarnings = allowedSummaryFields.checkFieldNamesInObject(yamlKeys, filePath);

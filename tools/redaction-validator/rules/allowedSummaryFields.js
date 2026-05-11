@@ -31,6 +31,14 @@ const ALLOWED_SUMMARY_PREFIXES = [
   'known_untracked',
 ];
 
+const KNOWN_STRUCTURAL_KEYS = [
+  'boundary_matrix',
+  'entries',
+  'non_permissions',
+  'permissions',
+  'schema_version',
+];
+
 function isAllowedSummaryField(fieldName) {
   if (!fieldName || typeof fieldName !== 'string') return false;
 
@@ -45,6 +53,10 @@ function isAllowedSummaryField(fieldName) {
   }
 
   return false;
+}
+
+function isKnownStructuralKey(key) {
+  return KNOWN_STRUCTURAL_KEYS.includes(key);
 }
 
 function checkFieldNamesInObject(obj, context) {
@@ -67,6 +79,8 @@ function checkFieldNamesInObject(obj, context) {
 module.exports = {
   ALLOWED_SUMMARY_FIELDS,
   ALLOWED_SUMMARY_PREFIXES,
+  KNOWN_STRUCTURAL_KEYS,
   isAllowedSummaryField,
+  isKnownStructuralKey,
   checkFieldNamesInObject,
 };

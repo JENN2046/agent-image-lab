@@ -1,13 +1,7 @@
-# fail fixture — contains disallowed summary fields
+# fail fixture — contains disallowed summary fields at top level
 # Should trigger allowedSummaryFields warning.
 
-closeout:
-  commit_hash: abc1234
-  commit_message: "docs: seal vX.XX example closeout"
-  branch: master
-  git_status: synced
-  changed_files: 4
-  local_scope_result: passed
-  cdp_json_accessed: true
-  raw_json_recorded: true
-  raw_payload_recorded: true
+closeout: sample_closeout_doc
+cdp_json_accessed: true
+raw_json_recorded: true
+raw_payload_recorded: true
