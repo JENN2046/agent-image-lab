@@ -5047,6 +5047,38 @@ next_phase_started: false
 recommended_next: v7.142 Batch 002 Correction Planning
 ```
 
+## v7.142 Batch 002 Correction Planning
+
+```text
+Phase: v7.142
+Status: batch_002_correction_planning_completed
+planning_type: batch_002_correction_planning
+correction_authorized_now: false
+validator_execution: false
+runtime_execution: false
+
+source_phase: v7.141
+source_commit: 068a7e1
+chain_name: Controlled Selected Docs Audit Chain
+batch_id: controlled_selected_docs_batch_002
+
+findings:
+  total: 28
+  closeoutIntegrity: 25
+  permissionDrift: 3
+  forbiddenRawFields: 0
+
+permission_drift_requires_separate_analysis: true
+future_gates_defined: 7
+
+remediation_performed: false
+batch_003_allowed_now: false
+known_untracked_file_touched: false
+next_phase_started: false
+
+recommended_next: v7.143 Batch 002 Permission Drift Analysis Gate
+```
+
 ## Resume Instruction
 
 ```text

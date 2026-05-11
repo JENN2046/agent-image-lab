@@ -1,0 +1,50 @@
+v7_142_batch_002_correction_planning:
+  schema_version: v1
+  phase: v7_142
+  chain_name: Controlled Selected Docs Audit Chain
+  batch_id: controlled_selected_docs_batch_002
+  planning_type: batch_002_correction_planning
+  correction_authorized_now: false
+  validator_execution: false
+  runtime_execution: false
+
+  source:
+    batch_closeout_phase: v7_141
+    batch_closeout_commit: 068a7e1
+
+  findings:
+    violations_total: 28
+    closeoutIntegrity_violations: 25
+    permissionDrift_violations: 3
+    forbiddenRawFields_violations: 0
+    raw_data_exposure_count: 0
+    false_positive_count: 0
+
+  closeout_integrity_category_defined: true
+  permission_drift_category_defined: true
+  permission_drift_requires_separate_analysis: true
+  future_gates_defined: true
+
+  remediation_performed: false
+  validator_executed: false
+  docs_scanned: false
+  documents_mutated: false
+  code_mutated: false
+
+  batch_003_allowed_now: false
+  correction_authorized_now: false
+  permission_drift_fix_allowed_now: false
+  closeout_integrity_fix_allowed_now: false
+
+  runtime_execution: false
+  cdp_accessed: false
+  runtime_evaluate_called: false
+  bridge_methods_called: false
+  mcp_called: false
+  memory_written: false
+  image_generated: false
+
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_143_batch_002_permission_drift_analysis_gate
