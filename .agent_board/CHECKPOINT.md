@@ -3097,6 +3097,44 @@ next_phase_started: false
 recommended_next: v7.88
 ```
 
+## v7.88 Runtime.evaluate Surface Probe Authorization Package
+
+```text
+Phase: v7.88
+Status: runtime_evaluate_surface_probe_authorization_package_prepared_not_granted
+package_type: authorization_package_draft
+package_status: prepared_not_granted
+runtime_execution: false
+
+carry_forward:
+  prior_v7_87_commit: 830c29c
+  target_fingerprint: A83B8623
+
+target_fingerprint: A83B8623
+max_cdp_websocket_connections: 1
+max_runtime_evaluate_calls: 1
+evaluate_purpose: detect_imageLabReview_surface_presence_only
+allowed_expression_type: read_only_boolean_or_keys_probe
+
+bridge_call_authorized: false
+cancel_call_authorized: false
+runtime_evaluate_authorized_now: false
+
+cdp_json_accessed: false
+cdp_connected: false
+runtime_evaluate_called: false
+bridge_called: false
+cancel_called: false
+mcp_codex_memory_called: false
+lt06_executed: false
+known_untracked_file_touched: false
+
+execution_authorized: false
+runtime_execution: false
+
+recommended_next: v7.89
+```
+
 ## Resume Instruction
 
 ```text
