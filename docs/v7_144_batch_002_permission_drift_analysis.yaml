@@ -1,0 +1,35 @@
+v7_144_batch_002_permission_drift_analysis:
+  schema_version: v1
+  phase: v7_144
+  type: permission_drift_analysis
+  analysis_executed: true
+  correction_authorized_now: false
+  runtime_execution: false
+
+  source:
+    gate_phase: v7_143
+    gate_commit: caf4ea0
+  chain_name: Controlled Selected Docs Audit Chain
+  batch_id: controlled_selected_docs_batch_002
+
+  drift_decision: rule_scope_false_positive
+  actual_permission_loosened: false
+  boundary_affected: false
+  recommended_route: option_b_validator_scope_refinement
+  correction_before_rescan_required: true
+
+  code_mutated: false
+  docs_mutated: false
+  validator_executed: false
+  batch_003_allowed_now: false
+  runtime_execution: false
+
+  cdp_accessed: false
+  runtime_evaluate_called: false
+  bridge_methods_called: false
+  mcp_called: false
+
+  known_untracked_file_touched: false
+  next_phase_started: false
+
+  recommended_next: v7_145_batch_002_correction_implementation_gate
