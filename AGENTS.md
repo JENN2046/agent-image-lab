@@ -1,9 +1,9 @@
 # AGENTS.md
 
 Project: Agent Image Lab
-Version: Controlled Autopilot Constitution v1.1 — Smart Local Autopilot
+Version: Controlled Autopilot Constitution v1.2 — Gate Template Operating Model
 Language: Default to English for this file. Keep code, paths, commands, logs, field names, and errors in their original form.
-Purpose: Enable Codex to work faster and more intelligently inside safe local boundaries, while keeping real VCP production actions behind explicit authorization.
+Purpose: Enable Codex to work faster and more intelligently inside safe local boundaries, keep real VCP production actions behind explicit authorization, and prevent stage documents from restating the full operating constitution.
 
 ---
 
@@ -46,6 +46,8 @@ destructive Git or filesystem operations
 ```
 
 When the next useful step requires A5, Codex should stop and prepare the smallest explicit A5 authorization package instead of executing.
+
+Stage documents should not copy this entire constitution. They should use the fixed gate template in Section 3.5 plus a narrow phase difference patch.
 
 ---
 
@@ -137,6 +139,123 @@ Current next production gate:
 ```text
 BLOCKED until explicit prompt approval plus a separate real generation authorization package
 ```
+
+---
+
+## 3.5 Fixed Gate Template And Phase Difference Patch Model
+
+Agent Image Lab uses a fixed operating constitution plus small phase-specific patches.
+
+The fixed constitution is this `AGENTS.md` file. A phase task document, release gate, blueprint gate, validation gate, or closeout gate must not restate the full project constitution unless the user explicitly asks for a standalone artifact. The default stage document should declare:
+
+```text
+base_contract: AGENTS.md
+phase_diff: only what changes for this gate
+```
+
+This keeps every gate shorter, easier to review, and harder to drift.
+
+### Fixed Gate Template
+
+Every stage gate should follow this compact template:
+
+```yaml
+gate_template:
+  phase: <phase_id>
+  base_contract: AGENTS.md
+  mode: A0 | A1 | A2 | A3 | A4 | A4.5 | A4.7 | A5
+  intent: discussion | planning | review | local_draft | local_implementation | remote_or_side_effectful_action
+  risk_level: R0 | R1 | R2 | R3 | R4
+  allowed_files: []
+  forbidden_files: []
+  allowed_actions: []
+  forbidden_actions: []
+  validation:
+    required: []
+    forbidden: []
+  commit:
+    allowed: false
+    message: null
+  push:
+    allowed: false
+  explicit_non_authorization:
+    generation: false
+    plugin_call: false
+    provider_contact: false
+    runtime: false
+    memory_write: false
+    DailyNote_write: false
+```
+
+### Phase Difference Patch
+
+A phase difference patch may only narrow or specialize the fixed contract unless the user explicitly authorizes a higher mode.
+
+Use a phase patch for:
+
+```text
+one phase id
+one stage purpose
+exact file allowlist
+exact command allowlist
+new schema fields or documentation sections for that phase
+phase-specific validation commands
+phase-specific commit message
+phase-specific pass / block conditions
+one recommended next phase
+```
+
+Do not use a phase patch to silently expand authority into:
+
+```text
+real VCPChat read
+real VCPToolBox read
+real manifest read
+runtime execution
+plugin call
+provider contact
+image generation
+DailyNote write
+VCP memory write
+push / tag push / release
+external repository modification
+dependency changes
+```
+
+### Drift Control
+
+When a stage document conflicts with this file:
+
+```text
+more restrictive rule wins
+hard stops remain active
+current explicit user instruction wins only inside safety boundaries
+phase patches cannot weaken A5 requirements
+phase patches cannot convert vague approval into remote, runtime, generation, or memory authorization
+```
+
+When maintaining stage docs, prefer patching the phase document instead of editing this file. Edit `AGENTS.md` only when the reusable operating model itself changes.
+
+### Authoring Rule
+
+The default stage artifact is:
+
+```text
+fixed gate template
++ phase difference patch
++ closeout template
+```
+
+The default stage artifact is not:
+
+```text
+full copy of AGENTS.md
++ repeated hard-stop list
++ repeated mode definitions
++ repeated push rules
+```
+
+If a phase must repeat a hard stop for local clarity, repeat only the relevant line and cite `AGENTS.md` as the base authority.
 
 ---
 
@@ -900,6 +1019,8 @@ non-executing static prototype UI text / structure refinement
 test example update
 read-only validation report
 ```
+
+For new stage documents, Codex should use the fixed gate template and a phase difference patch instead of creating a new full-stage constitution. A valid phase document should be short enough to review, precise enough to execute, and explicit about what it does not authorize.
 
 Codex must stop before the following actions unless an active A5 authorization package explicitly covers the exact action:
 
