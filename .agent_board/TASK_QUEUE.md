@@ -9,7 +9,7 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
-Complete v7.229 prompt package human review checklist gate and route the next phase to A5 handoff planning without activation.
+Complete v7.230 prompt package A5 authorization handoff gate and route the next phase to review console asset status taxonomy.
 ```
 
 ---
@@ -60,13 +60,13 @@ none
 ### todo
 
 ```text
-1. v7.230_prompt_package_a5_authorization_handoff_gate.
+1. v7.231_review_console_asset_status_taxonomy_gate.
 ```
 
-### recommended_next_after_v7_229
+### recommended_next_after_v7_230
 
 ```text
-v7.230_prompt_package_a5_authorization_handoff_gate — define the handoff from approved prompt package instance to independent A5 authorization package without activating A5.
+v7.231_review_console_asset_status_taxonomy_gate — define generated asset status taxonomy and review surface fields without runtime code or image assets.
 ```
 
 ### done
@@ -97,6 +97,7 @@ v7.230_prompt_package_a5_authorization_handoff_gate — define the handoff from 
 23. v7.227 prompt package builder taskbook gate created the schema, reusable taskbook, human review handoff, A5 authorization handoff, and memory suitability handoff.
 24. v7.228 product image prompt package template instance gate created the fillable non-executing instance template.
 25. v7.229 prompt package human review checklist gate created review checklist, status taxonomy, approval requirements, and rejection reasons.
+26. v7.230 prompt package A5 authorization handoff gate created the non-executing handoff template from approved package to future A5 authorization draft inputs.
 ```
 
 ### blocked
@@ -113,6 +114,7 @@ v7.230_prompt_package_a5_authorization_handoff_gate — define the handoff from 
 9. v7.227 does not authorize A5/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
 10. v7.228 does not authorize A5/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
 11. v7.229 does not authorize A5/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
+12. v7.230 does not authorize A5 activation/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
 ```
 
 ### skipped

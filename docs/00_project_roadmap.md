@@ -18,11 +18,11 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Latest closed baseline before v7.229: cd3414b on master == origin/master.
-Current mainline state: v7.229 prompt package human review checklist gate.
+Latest closed baseline before v7.230: aa6b9eb on master == origin/master.
+Current mainline state: v7.230 prompt package A5 authorization handoff gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
-Current status: Prompt package human review checklist and status taxonomy created; product mainline can now review a prompt package instance before any A5 authorization is drafted.
+Current status: Prompt package A5 authorization handoff template created; product mainline can now carry approved package inputs toward a future A5 draft without activating A5.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)
 ```
@@ -311,8 +311,8 @@ daily_note_called: false
 
 ## 当前优先队列
 
-1. v7.229_prompt_package_human_review_checklist_gate 已完成，实例进入 A5 前的人审 checklist、状态分类和拒绝原因分类已定义。
-2. 下一阶段建议推进 v7.230_prompt_package_a5_authorization_handoff_gate，定义 approved package 到独立 A5 授权包的交接字段，但不激活 A5。
+1. v7.230_prompt_package_a5_authorization_handoff_gate 已完成，approved package 到未来独立 A5 授权草案的交接字段已定义，但未激活 A5。
+2. 下一阶段建议推进 v7.231_review_console_asset_status_taxonomy_gate，定义未来生成资产进入人审 surface 后的状态分类和字段，不创建 runtime 或图片。
 3. A5/provider/runtime/image/memory 仍未授权；如需推进，必须形成独立 active authorization package 并通过 preflight。
 4. tag/release/deploy 仍未授权；任何版本动作都必须匹配当前授权、白名单和 push safety gate。
 5. 若下一步仍为 A4，必须说明新的产品价值、写集、验证方式和 agent_board_freshness 检查。
