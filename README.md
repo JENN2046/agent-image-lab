@@ -7,14 +7,14 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest closed baseline before v7.233: 48d893d on master == origin/master.
-Current mainline state: v7.233 delivery review surface package gate.
+Latest closed baseline before v7.234: b27413e on master == origin/master.
+Current mainline state: v7.234 product image workflow runbook gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
-Current status: Delivery / Review Surface Package created to connect prompt package, future A5 authorization handoff, asset status, human review, and memory suitability records.
+Current status: Product Image Workflow Runbook created to turn the package chain into an operator SOP without entering A5 or runtime.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized: A5, provider contact, runtime, plugin call, image generation, DailyNote write, VCP memory write, real manifest read, tag, release, deploy.
-Recommended next after v7.233: v7.234_product_image_workflow_runbook_gate.
+Recommended next after v7.234: v7.235_product_image_workflow_static_walkthrough_gate.
 ```
 
 历史状态脉络：
@@ -218,6 +218,7 @@ v7.230 Prompt Package A5 Authorization Handoff Gate — Handoff template created
 v7.231 Review Console Asset Status Taxonomy Gate — Asset status taxonomy and review surface fields created for future generated assets. No Review Console runtime, renderer/preload/IPC, image asset, output save, or memory write.
 v7.232 Memory Suitability Decision Matrix Gate — Matrix created for deciding whether future reviewed assets should become memory candidates. No DailyNote write, VCP memory write, runtime, provider, plugin, or image generation.
 v7.233 Delivery Review Surface Package Gate — Delivery / Review Surface Package created to connect prompt package, future A5 authorization handoff, asset status, human review, and memory suitability records. No runtime surface or executable generation request.
+v7.234 Product Image Workflow Runbook Gate — Operator runbook created for the product image workflow chain. It defines step inputs, outputs, stop rules, A5 handoff, future asset review, memory suitability, and delivery package use without execution.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3

@@ -1,5 +1,41 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.234 Product Image Workflow Runbook Gate
+
+```text
+Status: completed_validated — A4 docs-only product runbook planning
+Source baseline: b27413e == origin/master at phase start
+Purpose: convert package chain into an operator runbook without execution
+product_image_workflow_runbook_created: true
+package_chain_operationalized: true
+executable_generation_request_created: false
+runtime_surface_created: false
+recommended_next: v7.235_product_image_workflow_static_walkthrough_gate
+README_updated: true
+roadmap_updated: true
+project_master_plan_updated: true
+handoff_updated: true
+run_state_updated: true
+task_queue_updated: true
+checkpoint_updated: true
+validation_log_updated: true
+agent_board_STATE_json_modified: false
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+VCPChat_runtime: false
+VCPToolBox_runtime: false
+real_manifest_read: false
+CDP_bridge_MCP: false
+production_candidate_002_started: false
+batch_005_started: false
+validation: git diff --check passed; exact diff review passed; node scripts/validate_agent_board_state.js passed
+```
+
 ## v7.233 Delivery Review Surface Package Gate
 
 ```text

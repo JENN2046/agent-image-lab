@@ -1,5 +1,40 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260512-V7-234-PRODUCT-IMAGE-WORKFLOW-RUNBOOK
+
+Task:
+
+```text
+Create the Product Image Workflow Runbook that turns the package chain into an operator SOP without execution.
+```
+
+Commands run:
+
+```text
+git status -sb
+git diff --check
+git diff -- README.md PROJECT_MASTER_PLAN.md docs/00_project_roadmap.md docs/v7_234_product_image_workflow_runbook_gate.md docs/product_image_workflow_runbook.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
+node scripts/validate_agent_board_state.js
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+v7.234 creates an A4 docs-only operator runbook. It does not create an executable generation request, runtime surface, provider payload, plugin request, image asset, DailyNote write, or VCP memory write.
+```
+
+Notes:
+
+```text
+The next recommended phase is v7.235_product_image_workflow_static_walkthrough_gate, with auto execution disabled.
+```
+
 ## VALIDATION-20260512-V7-233-DELIVERY-REVIEW-SURFACE-PACKAGE
 
 Task:
