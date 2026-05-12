@@ -9,7 +9,7 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
-Complete v7.230 prompt package A5 authorization handoff gate and route the next phase to review console asset status taxonomy.
+Complete v7.231 review console asset status taxonomy gate and route the next phase to memory suitability decision planning.
 ```
 
 ---
@@ -60,13 +60,13 @@ none
 ### todo
 
 ```text
-1. v7.231_review_console_asset_status_taxonomy_gate.
+1. v7.232_memory_suitability_decision_matrix_gate.
 ```
 
-### recommended_next_after_v7_230
+### recommended_next_after_v7_231
 
 ```text
-v7.231_review_console_asset_status_taxonomy_gate — define generated asset status taxonomy and review surface fields without runtime code or image assets.
+v7.232_memory_suitability_decision_matrix_gate — define memory suitability decision matrix without DailyNote or VCP memory writes.
 ```
 
 ### done
@@ -98,6 +98,7 @@ v7.231_review_console_asset_status_taxonomy_gate — define generated asset stat
 24. v7.228 product image prompt package template instance gate created the fillable non-executing instance template.
 25. v7.229 prompt package human review checklist gate created review checklist, status taxonomy, approval requirements, and rejection reasons.
 26. v7.230 prompt package A5 authorization handoff gate created the non-executing handoff template from approved package to future A5 authorization draft inputs.
+27. v7.231 review console asset status taxonomy gate created future asset status taxonomy and review surface fields.
 ```
 
 ### blocked
@@ -115,6 +116,7 @@ v7.231_review_console_asset_status_taxonomy_gate — define generated asset stat
 10. v7.228 does not authorize A5/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
 11. v7.229 does not authorize A5/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
 12. v7.230 does not authorize A5 activation/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
+13. v7.231 does not authorize A5/provider/runtime/Review Console runtime/renderer/preload/IPC/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
 ```
 
 ### skipped

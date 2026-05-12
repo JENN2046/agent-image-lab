@@ -9,32 +9,32 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab is in v7.230 prompt package A5 authorization handoff gate. The goal is to define the non-executing handoff from approved prompt package instance to future A5 authorization draft inputs.
+Agent Image Lab is in v7.231 review console asset status taxonomy gate. The goal is to define future generated asset statuses and review surface fields without runtime code or image assets.
 ```
 
 ## Current Phase
 
 ```text
-v7.230 — Prompt Package A5 Authorization Handoff Gate
+v7.231 — Review Console Asset Status Taxonomy Gate
 status: completed_validated
-source_commit: aa6b9eb
-source_message: docs: add prompt package human review checklist
+source_commit: 3936ce7
+source_message: docs: add prompt package A5 authorization handoff
 branch: master tracking origin/master
-Worktree: clean at v7.230 start
+Worktree: clean at v7.231 start
 worktree_start_clean: true
-origin_sync_start: local HEAD equals origin/master at aa6b9eb
+origin_sync_start: local HEAD equals origin/master at 3936ce7
 ```
 
 ## Current Task
 
 ```text
-Create the prompt package A5 authorization handoff without entering A5, runtime, provider contact, plugin call, image generation, or memory write.
+Create the Review Console asset status taxonomy without entering A5, runtime, provider contact, plugin call, image generation, or memory write.
 ```
 
 ## Current Local Work State
 
 ```text
-Worktree: clean at v7.230 start; prompt package A5 authorization handoff completed_validated
+Worktree: clean at v7.231 start; Review Console asset status taxonomy completed_validated
 active_workers: 0
 execution_mode: Single-Window 4-Agent Compact Autopilot
 commander_role: calibrate state and decide whether there is a next valuable task
@@ -61,7 +61,8 @@ Prompt Package Builder taskbook: v7.227 completed_validated
 Prompt Package Instance template: v7.228 completed_validated
 Prompt Package Human Review checklist: v7.229 completed_validated
 Prompt Package A5 authorization handoff: v7.230 completed_validated
-Recommended next product task: v7.231_review_console_asset_status_taxonomy_gate
+Review Console asset status taxonomy: v7.231 completed_validated
+Recommended next product task: v7.232_memory_suitability_decision_matrix_gate
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```
@@ -80,6 +81,7 @@ v7_227_is_prompt_package_builder_taskbook_only: true
 v7_228_is_prompt_package_instance_template_only: true
 v7_229_is_prompt_package_human_review_checklist_only: true
 v7_230_is_prompt_package_A5_authorization_handoff_only: true
+v7_231_is_review_console_asset_status_taxonomy_only: true
 
 Validator Governance Chain v1: closed
 batch_005_allowed_now: false
@@ -94,8 +96,8 @@ tag/release/deploy remain blocked without explicit authorization and preflight
 ## Current Options
 
 ```text
-recommended_next_after_v7_230: v7.231_review_console_asset_status_taxonomy_gate
-purpose: define generated asset status taxonomy and review surface fields without runtime or image assets
+recommended_next_after_v7_231: v7.232_memory_suitability_decision_matrix_gate
+purpose: define memory suitability decision matrix without DailyNote or VCP memory writes
 not_allowed_as_next_by_default: A5, provider contact, runtime, plugin call, image generation, memory write, tag, release
 ```
 
@@ -110,9 +112,10 @@ source baseline for v7.227: dbc5043
 source baseline for v7.228: 5f31426
 source baseline for v7.229: cd3414b
 source baseline for v7.230: aa6b9eb
+source baseline for v7.231: 3936ce7
 git status -sb at phase start: clean
-git rev-parse HEAD at phase start: aa6b9eb
-git rev-parse origin/master at phase start: aa6b9eb
+git rev-parse HEAD at phase start: 3936ce7
+git rev-parse origin/master at phase start: 3936ce7
 agent_board_freshness: passed
 git diff --check: passed
 rule_intake_smoke_test_performed: true
@@ -144,6 +147,6 @@ external repository modification: no
 
 ```text
 Use the calibrated board as the current navigation source.
-v7.230 created the prompt package A5 authorization handoff template. Continue only with v7.231_review_console_asset_status_taxonomy_gate or a user-approved alternative.
-Before continuing after v7.230, verify branch, worktree, and local/remote sync from Git output.
+v7.231 created the Review Console asset status taxonomy. Continue only with v7.232_memory_suitability_decision_matrix_gate or a user-approved alternative.
+Before continuing after v7.231, verify branch, worktree, and local/remote sync from Git output.
 ```

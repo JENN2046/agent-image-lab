@@ -7,14 +7,14 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest closed baseline before v7.230: aa6b9eb on master == origin/master.
-Current mainline state: v7.230 prompt package A5 authorization handoff gate.
+Latest closed baseline before v7.231: 3936ce7 on master == origin/master.
+Current mainline state: v7.231 review console asset status taxonomy gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
-Current status: Prompt package A5 authorization handoff template created; it can carry approved package inputs to a future A5 draft but does not activate A5.
+Current status: Review Console asset status taxonomy created for future generated assets; no runtime console or image asset was created.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized: A5, provider contact, runtime, plugin call, image generation, DailyNote write, VCP memory write, real manifest read, tag, release, deploy.
-Recommended next after v7.230: v7.231_review_console_asset_status_taxonomy_gate.
+Recommended next after v7.231: v7.232_memory_suitability_decision_matrix_gate.
 ```
 
 历史状态脉络：
@@ -215,6 +215,7 @@ v7.227 Prompt Package Builder Taskbook Gate — Product Image Prompt Package Bui
 v7.228 Product Image Prompt Package Template Instance Gate — First fillable non-executing prompt package instance template created. It has brief intake, product identity, shot intent, visual direction, prompt draft, constraints, review checklist, A5 handoff, and memory suitability fields.
 v7.229 Prompt Package Human Review Checklist Gate — Human review checklist, status taxonomy, approval requirements, and rejection reason taxonomy created for prompt package instances before any A5 generation authorization.
 v7.230 Prompt Package A5 Authorization Handoff Gate — Handoff template created for carrying approved prompt package inputs to a future independent A5 authorization draft. No A5 activation, provider selection, plugin call, generation, runtime, or memory write.
+v7.231 Review Console Asset Status Taxonomy Gate — Asset status taxonomy and review surface fields created for future generated assets. No Review Console runtime, renderer/preload/IPC, image asset, output save, or memory write.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3

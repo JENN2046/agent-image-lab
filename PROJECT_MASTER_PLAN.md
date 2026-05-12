@@ -8,10 +8,10 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-source_head_before_v7_230: aa6b9eb
-origin_master_at_v7_230_start: aa6b9eb
-status: v7.230 prompt package A5 authorization handoff gate
-mode: A4 docs-only authorization handoff planning
+source_head_before_v7_231: 3936ce7
+origin_master_at_v7_231_start: 3936ce7
+status: v7.231 review console asset status taxonomy gate
+mode: A4 docs-only product review surface planning
 ```
 
 ## Product Direction
@@ -24,7 +24,8 @@ v7.228 adds the fillable instance template for that package without creating a
 real generation task. v7.229 adds the human review checklist and status taxonomy
 that decide whether a package may be referenced by a future A5 authorization
 draft. v7.230 adds the non-executing handoff template from approved package to
-future A5 authorization draft inputs.
+future A5 authorization draft inputs. v7.231 defines the future generated asset
+status taxonomy and review surface fields.
 
 ## Active Boundaries
 
@@ -48,7 +49,6 @@ validation interpretation, staging, commit decisions, and next-task selection.
 
 ## Recommended Next
 
-Proceed to `v7.231_review_console_asset_status_taxonomy_gate`. Define the
-review-surface asset status taxonomy and fields that will be needed after a
-future A5 generation creates reviewable assets, without creating runtime code or
-image assets.
+Proceed to `v7.232_memory_suitability_decision_matrix_gate`. Define how future
+accepted, rejected, or archived assets become memory suitability candidates,
+without writing DailyNote or VCP memory.
