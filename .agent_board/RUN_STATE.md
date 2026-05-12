@@ -9,14 +9,14 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab executed the approved AUTH-PENDING-20260512-001 DoubaoGen attempt once. The plugin process returned error, no image was generated, retry_limit=0 prevents another call under this authorization, transient secret/runtime artifacts were removed, and desensitized failure analysis is inconclusive at provider/API layer.
+Agent Image Lab executed one newly approved DoubaoGen retry/diagnostic call after the original failed attempt. The plugin process returned error, the sanitized category is quota_or_rate_limit, no image was generated, retry_limit=0 prevents another call under this authorization, and transient secret/runtime artifacts were removed.
 ```
 
 ## Current Phase
 
 ```text
 Active A5 Execution Attempt — Product Image Authorization Draft
-status: failed_no_image_no_retry_failure_analysis_inconclusive
+status: failed_no_image_quota_or_rate_limit
 source_commit: 03fd398
 source_message: docs: add product image generation plan draft
 branch: master tracking origin/master
@@ -28,7 +28,7 @@ origin_sync_start: local HEAD equals origin/master at 03fd398
 ## Current Task
 
 ```text
-Record the approved single DoubaoGen generate attempt and the follow-up desensitized failure analysis, with no retry, no image, no DailyNote, no VCP memory write, no retained secret cache, and no retained runtime plugin copy.
+Record the approved DoubaoGen diagnostic retry result, with sanitized_error_category=quota_or_rate_limit, no image, no DailyNote, no VCP memory write, no retained secret cache, and no retained runtime plugin copy.
 ```
 
 ## Current Local Work State
@@ -75,7 +75,7 @@ MVP Aggregate Validator Calibration: completed_validated
 Product Image Authorization Draft Plan Ref Alignment: v7.241 completed_validated
 Product Image Authorization Activation Gap Review: v7.242 completed_validated
 Product Image Active Authorization Package Skeleton: v7.243 completed_validated
-Recommended next product task: request_new_retry_authorization_with_desensitized_error_capture
+Recommended next product task: resolve_provider_quota_or_rate_limit_before_any_new_generation_attempt
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```
@@ -121,8 +121,8 @@ tag/release/deploy remain blocked without explicit authorization and preflight
 ## Current Options
 
 ```text
-recommended_next_after_active_execution_attempt: request_new_retry_authorization_with_desensitized_error_capture
-purpose: if continuing, request a new explicit retry/diagnostic authorization that allows only one plugin call and captures a sanitized error category; active A5 generation remains blocked until then
+recommended_next_after_active_execution_attempt: resolve_provider_quota_or_rate_limit_before_any_new_generation_attempt
+purpose: do not retry immediately; resolve or explicitly authorize provider quota/rate-limit diagnosis, alternate provider/model/account selection, or a later retry package
 not_allowed_as_next_by_default: A5, provider contact, runtime, plugin call, image generation, memory write, tag, release
 ```
 
@@ -170,14 +170,14 @@ node scripts/validate_runtime_prototype_suite.js: not required; no runtime proto
 
 ```text
 real VCPChat read: no
-real VCPToolBox read: no
+real VCPToolBox read: limited authorized DoubaoGen execution surface only
 real manifest read: no
-plugin call: no
-API call: no
+plugin call: yes, one authorized diagnostic retry
+API/provider contact: yes, via authorized DoubaoGen diagnostic retry
 DailyNote call: no
 VCP memory write: no
-image creation: no
-runtime execution: no
+image file created: no
+runtime execution: yes, authorized child process only
 dependency/config/env change: no
 external repository modification: no
 ```
@@ -186,6 +186,6 @@ external repository modification: no
 
 ```text
 Use the calibrated board as the current navigation source.
-AUTH-PENDING-20260512-001 was consumed by one approved DoubaoGen process attempt. The result is failed_no_image_no_retry_failure_analysis_inconclusive; generation remains blocked unless the user authorizes a new retry/diagnostic package.
-Before continuing, verify branch, worktree, local/remote sync, and whether the user authorized a new retry with desensitized error capture.
+The newly approved DoubaoGen diagnostic retry was consumed by one process attempt. The result is failed_no_image_quota_or_rate_limit; generation remains blocked unless the user resolves provider quota/rate-limit conditions or authorizes a new provider/model/account path.
+Before continuing, verify branch, worktree, local/remote sync, and whether the user authorized provider quota/rate-limit diagnosis or a new generation path.
 ```

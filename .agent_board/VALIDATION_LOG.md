@@ -1,5 +1,48 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260513-A5-DOUBAOGEN-DIAGNOSTIC-RETRY-QUOTA-OR-RATE-LIMIT
+
+Task:
+
+```text
+Execute one newly authorized DoubaoGen generate retry/diagnostic call based on GP-DRAFT-20260512-001. Capture only plugin status and sanitized error category. Do not print, record, copy, or commit config.env secret values or raw secret-related output. Do not write DailyNote or VCP memory. Do not push, tag, or release.
+```
+
+Commands run:
+
+```text
+git status --short --branch
+output directory emptiness check
+authorized DoubaoGen file existence check
+single child-process DoubaoGen generate retry/diagnostic call
+secret cache cleanup
+runtime plugin copy cleanup
+```
+
+Result:
+
+```text
+failed_no_image_quota_or_rate_limit
+```
+
+Findings:
+
+```text
+The retry/diagnostic child process exited with code 1 and plugin_status=error. The sanitized error category is quota_or_rate_limit. No image file was created. The temporary secret cache and runtime plugin copy were removed. Raw stdout/stderr was not printed or retained, and no secret value was recorded.
+```
+
+Not validated:
+
+```text
+No provider console, account quota page, billing page, or external dashboard was read. No second retry was performed.
+```
+
+Notes:
+
+```text
+Next recommended action is resolve_provider_quota_or_rate_limit_before_any_new_generation_attempt.
+```
+
 ## VALIDATION-20260513-A5-DOUBAOGEN-DESENSITIZED-FAILURE-ANALYSIS
 
 Task:
