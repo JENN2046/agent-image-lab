@@ -3,7 +3,7 @@
 ## Handoff Summary
 
 ```text
-Status: Board calibration completed and pending local commit after v7.221 mainline quality stop.
+Status: Board calibration completed, committed, and pushed after v7.221 mainline quality stop.
 Reason: .agent_board still pointed to the old v7.170 validator-governance route and would mislead sustained autopilot.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
@@ -50,6 +50,8 @@ git status --short --branch before board calibration: clean
 git rev-list --left-right --count origin/master...HEAD before board calibration: 0 0
 git diff --check: passed
 node scripts/validate_agent_board_state.js: passed
+guarded push preflight: passed
+remote sync: local master equals origin/master after board calibration push
 scripts/validate_mvp.ps1: not required for board-only calibration unless reviewer escalates
 scripts/validate-agent-image-lab-local.ps1: not required for board-only calibration unless reviewer escalates
 node scripts/validate_runtime_prototype_suite.js: not required; no runtime prototype changed
@@ -74,7 +76,7 @@ dependency/config/env modification: no
 ## Human Decisions Needed
 
 ```text
-No human decision is needed to finish board calibration commit/push preflight if guarded conditions pass.
+No human decision is needed to use the calibrated board as the next local navigation source.
 Human authorization is needed before any A5 provider contact, runtime integration, tag/release, or repetitive low-value A4 gate.
 ```
 

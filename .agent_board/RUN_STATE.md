@@ -33,7 +33,7 @@ origin_sync: local HEAD equals origin/master at c605bd7 before board calibration
 ## Current Local Work State
 
 ```text
-Worktree: board calibration completed, pending commit
+Worktree: board calibration completed and synced after guarded push
 active_workers: 0
 execution_mode: Single-Window 4-Agent Compact Autopilot
 commander_role: calibrate state and decide whether there is a next valuable task
@@ -98,6 +98,8 @@ git status --short --branch: clean before board calibration
 git rev-list --left-right --count origin/master...HEAD: 0 0 before board calibration
 git diff --check: passed
 node scripts/validate_agent_board_state.js: passed
+guarded push preflight: passed
+remote sync after board calibration: passed
 scripts/validate_mvp.ps1: not required for this board-only calibration unless reviewer escalates
 scripts/validate-agent-image-lab-local.ps1: not required for this board-only calibration unless reviewer escalates
 node scripts/validate_runtime_prototype_suite.js: not required; no runtime prototype file changed
@@ -122,6 +124,6 @@ external repository modification: no
 ## Next Action
 
 ```text
-Commit board calibration if clean, then run guarded push preflight only if a new local commit exists and standing push authorization still applies.
+Use the calibrated board as the current navigation source.
 Do not continue into another Smart Commander tuning gate. Continue only to a product-mainline task that passes the value test or to an explicitly authorized A5/runtime/release path.
 ```

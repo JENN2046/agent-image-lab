@@ -9,7 +9,7 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
-Finalize .agent_board calibration after v7.221 mainline quality stop and before any further autopilot progression.
+Use the calibrated .agent_board after v7.221 mainline quality stop to choose the next value-bearing project task.
 ```
 
 ---
@@ -54,14 +54,14 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-1. Commit and, if preflight passes, push .agent_board current-state calibration after v7.221
+none
 ```
 
 ### todo
 
 ```text
-1. Commander: commit board calibration if no unrelated changes are included.
-2. Commander: after commit, perform guarded push preflight and push only if standing authorization remains valid and all push safety gates pass.
+1. Commander: run next-task value test against current README/ROADMAP/docs when continuing.
+2. Commander: stop before A5 provider contact, runtime integration, tag/release, or repetitive A4 work unless explicit authorization or clear new value exists.
 ```
 
 ### next_candidates_after_calibration
@@ -86,6 +86,8 @@ active authorization package required for A5
 8. .agent_board current-state calibration content updated.
 9. git diff --check passed.
 10. node scripts/validate_agent_board_state.js passed.
+11. guarded push preflight passed.
+12. board calibration pushed to origin/master.
 ```
 
 ### blocked
