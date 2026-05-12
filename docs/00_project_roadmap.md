@@ -18,11 +18,11 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Latest closed baseline before v7.232: 476bb01 on master == origin/master.
-Current mainline state: v7.232 memory suitability decision matrix gate.
+Latest closed baseline before v7.233: 48d893d on master == origin/master.
+Current mainline state: v7.233 delivery review surface package gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
-Current status: Memory suitability decision matrix created; product mainline can now prepare future reviewed assets for memory suitability review without writing memory.
+Current status: Delivery / Review Surface Package created; product mainline now has a single package shape linking prompt, authorization handoff, future asset status, human review, and memory suitability.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)
 ```
@@ -311,8 +311,8 @@ daily_note_called: false
 
 ## 当前优先队列
 
-1. v7.232_memory_suitability_decision_matrix_gate 已完成，未来 reviewed asset 如何成为 memory suitability 候选的矩阵已定义，但未写 DailyNote 或 VCP memory。
-2. 下一阶段建议推进 v7.233_delivery_review_surface_package_gate，定义 prompt、authorization、asset status、memory suitability 的 delivery/review package；默认不自动执行，避免继续低价值惯性规划。
+1. v7.233_delivery_review_surface_package_gate 已完成，prompt、authorization handoff、asset status、human review、memory suitability 已串成 Delivery / Review Surface Package。
+2. 下一阶段建议推进 v7.234_product_image_workflow_runbook_gate，把当前链路整理成 operator runbook；默认不自动执行，避免继续低价值惯性规划。
 3. A5/provider/runtime/image/memory 仍未授权；如需推进，必须形成独立 active authorization package 并通过 preflight。
 4. tag/release/deploy 仍未授权；任何版本动作都必须匹配当前授权、白名单和 push safety gate。
 5. 若下一步仍为 A4，必须说明新的产品价值、写集、验证方式和 agent_board_freshness 检查。

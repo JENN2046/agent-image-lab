@@ -9,32 +9,32 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab is in v7.232 memory suitability decision matrix gate. The goal is to define non-writing memory suitability decisions for future reviewed assets.
+Agent Image Lab is in v7.233 delivery review surface package gate. The goal is to link prompt package, future A5 handoff, human review, asset status, and memory suitability into one delivery/review package.
 ```
 
 ## Current Phase
 
 ```text
-v7.232 — Memory Suitability Decision Matrix Gate
+v7.233 — Delivery Review Surface Package Gate
 status: completed_validated
-source_commit: 476bb01
-source_message: docs: add review console asset status taxonomy
+source_commit: 48d893d
+source_message: docs: add memory suitability decision matrix
 branch: master tracking origin/master
-Worktree: clean at v7.232 start
+Worktree: clean at v7.233 start
 worktree_start_clean: true
-origin_sync_start: local HEAD equals origin/master at 476bb01
+origin_sync_start: local HEAD equals origin/master at 48d893d
 ```
 
 ## Current Task
 
 ```text
-Create the memory suitability decision matrix without entering A5, runtime, provider contact, plugin call, image generation, DailyNote write, or VCP memory write.
+Create the delivery/review surface package without entering A5, runtime, provider contact, plugin call, image generation, DailyNote write, or VCP memory write.
 ```
 
 ## Current Local Work State
 
 ```text
-Worktree: clean at v7.232 start; memory suitability decision matrix completed_validated
+Worktree: clean at v7.233 start; delivery/review surface package completed_validated
 active_workers: 0
 execution_mode: Single-Window 4-Agent Compact Autopilot
 commander_role: calibrate state and decide whether there is a next valuable task
@@ -63,7 +63,8 @@ Prompt Package Human Review checklist: v7.229 completed_validated
 Prompt Package A5 authorization handoff: v7.230 completed_validated
 Review Console asset status taxonomy: v7.231 completed_validated
 Memory suitability decision matrix: v7.232 completed_validated
-Recommended next product task: v7.233_delivery_review_surface_package_gate
+Delivery / Review Surface Package: v7.233 completed_validated
+Recommended next product task: v7.234_product_image_workflow_runbook_gate
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```
@@ -84,6 +85,7 @@ v7_229_is_prompt_package_human_review_checklist_only: true
 v7_230_is_prompt_package_A5_authorization_handoff_only: true
 v7_231_is_review_console_asset_status_taxonomy_only: true
 v7_232_is_memory_suitability_decision_matrix_only: true
+v7_233_is_delivery_review_surface_package_only: true
 
 Validator Governance Chain v1: closed
 batch_005_allowed_now: false
@@ -98,8 +100,8 @@ tag/release/deploy remain blocked without explicit authorization and preflight
 ## Current Options
 
 ```text
-recommended_next_after_v7_232: v7.233_delivery_review_surface_package_gate
-purpose: define delivery/review package; auto execution disabled to prevent low-value inertia
+recommended_next_after_v7_233: v7.234_product_image_workflow_runbook_gate
+purpose: convert package chain into an operator runbook; auto execution disabled
 not_allowed_as_next_by_default: A5, provider contact, runtime, plugin call, image generation, memory write, tag, release
 ```
 
@@ -116,9 +118,10 @@ source baseline for v7.229: cd3414b
 source baseline for v7.230: aa6b9eb
 source baseline for v7.231: 3936ce7
 source baseline for v7.232: 476bb01
+source baseline for v7.233: 48d893d
 git status -sb at phase start: clean
-git rev-parse HEAD at phase start: 476bb01
-git rev-parse origin/master at phase start: 476bb01
+git rev-parse HEAD at phase start: 48d893d
+git rev-parse origin/master at phase start: 48d893d
 agent_board_freshness: passed
 git diff --check: passed
 rule_intake_smoke_test_performed: true
@@ -150,6 +153,6 @@ external repository modification: no
 
 ```text
 Use the calibrated board as the current navigation source.
-v7.232 created the memory suitability decision matrix. Continue only with v7.233_delivery_review_surface_package_gate or a user-approved alternative; default auto execution is disabled for the next phase.
-Before continuing after v7.232, verify branch, worktree, and local/remote sync from Git output.
+v7.233 created the Delivery / Review Surface Package. Continue only with v7.234_product_image_workflow_runbook_gate or a user-approved alternative; default auto execution is disabled for the next phase.
+Before continuing after v7.233, verify branch, worktree, and local/remote sync from Git output.
 ```

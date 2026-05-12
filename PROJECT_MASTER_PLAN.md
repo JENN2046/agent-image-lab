@@ -8,10 +8,10 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-source_head_before_v7_232: 476bb01
-origin_master_at_v7_232_start: 476bb01
-status: v7.232 memory suitability decision matrix gate
-mode: A4 docs-only memory suitability planning
+source_head_before_v7_233: 48d893d
+origin_master_at_v7_233_start: 48d893d
+status: v7.233 delivery review surface package gate
+mode: A4 docs-only product package planning
 ```
 
 ## Product Direction
@@ -26,7 +26,8 @@ that decide whether a package may be referenced by a future A5 authorization
 draft. v7.230 adds the non-executing handoff template from approved package to
 future A5 authorization draft inputs. v7.231 defines the future generated asset
 status taxonomy and review surface fields. v7.232 defines the non-writing
-memory suitability decision matrix.
+memory suitability decision matrix. v7.233 links these artifacts into a single
+Delivery / Review Surface Package.
 
 ## Active Boundaries
 
@@ -50,7 +51,6 @@ validation interpretation, staging, commit decisions, and next-task selection.
 
 ## Recommended Next
 
-Proceed to `v7.233_delivery_review_surface_package_gate`. Define a delivery and
-review package that summarizes prompt, authorization, asset status, and memory
-suitability records. Default to stop-and-review before continuing so the product
-track does not become repetitive governance.
+Proceed to `v7.234_product_image_workflow_runbook_gate`. Convert the current
+package chain into a practical operator runbook. Default to stop-and-review
+before continuing so the product track does not become repetitive governance.
