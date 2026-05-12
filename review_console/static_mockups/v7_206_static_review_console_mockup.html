@@ -327,6 +327,25 @@
         line-height: 1.45;
       }
 
+      .state-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .state-card {
+        display: grid;
+        gap: 6px;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--surface-3);
+      }
+
+      .state-card .rail-line {
+        font-size: 11px;
+      }
+
       .action-row {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -518,6 +537,18 @@
                 <h3>Known blockers</h3>
                 <p>Memory write blocked until independent memory authorization exists. Provider contact remains blocked.</p>
               </article>
+              <div class="state-grid" aria-label="Review state coverage">
+                <article class="state-card">
+                  <div class="rail-line"><span>Rejected state</span><strong>visible</strong></div>
+                  <p>Rejected assets block memory write and require a new plan or retry authorization.</p>
+                  <span class="pill red">asset_rejected path shown</span>
+                </article>
+                <article class="state-card">
+                  <div class="rail-line"><span>Closeout state</span><strong>blocked-or-ready</strong></div>
+                  <p>Closeout can summarize review evidence, but cannot trigger provider, plugin, or memory actions.</p>
+                  <span class="pill amber">closeout_ready_or_blocked</span>
+                </article>
+              </div>
             </div>
           </div>
         </section>
@@ -537,14 +568,14 @@
               <span class="pill teal">human override visible</span>
             </article>
             <div class="action-row">
-              <button type="button" disabled>Accept candidate</button>
-              <button type="button" disabled>Reject candidate</button>
-              <button type="button" disabled>Request retry</button>
-              <button type="button" disabled>Write memory</button>
+              <button type="button" disabled>Accept review only</button>
+              <button type="button" disabled>Reject review only</button>
+              <button type="button" disabled>Retry needs auth</button>
+              <button type="button" disabled>Memory needs auth</button>
             </div>
             <article class="decision-box">
-              <h3>Next allowed action</h3>
-              <p>Create a reviewed closeout or prepare a separate authorization package. This mockup cannot execute either path.</p>
+              <h3>Disabled action reasons</h3>
+              <p>Every command above is inert. Review decisions may be drafted here; retry, memory write, and provider contact need separate authorization.</p>
             </article>
           </div>
         </aside>
@@ -569,8 +600,16 @@
               <p>Authorization inactive, call budget 0, provider contact false, plugin call false, memory write false.</p>
             </article>
             <article class="event">
+              <h3>Generation result recorded</h3>
+              <p>Only a summarized asset reference and review status are visible; raw response, endpoint, and binary image data remain absent.</p>
+            </article>
+            <article class="event">
               <h3>Review decision recorded</h3>
               <p>Human decision state is visible; no file save, bridge call, DailyNote write, or memory write occurs.</p>
+            </article>
+            <article class="event">
+              <h3>Closeout ready or blocked</h3>
+              <p>Closeout may summarize evidence. It stays blocked if authorization is expired, asset is rejected, or memory approval is missing.</p>
             </article>
           </div>
         </section>
