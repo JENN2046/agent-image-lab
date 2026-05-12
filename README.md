@@ -182,6 +182,11 @@ v7.167 Untracked Plugin Dashboard Plan Disposition — Historical v6.8 planning 
 v7.168 Post-Closeout Code Surface Review and Resume Surface Reconciliation — A0 read-only code surface review. 28 files inspected. 3 P1, 4 P2, 2 P3 findings. agent_board surface stale, allowedSummaryFields unwired, permissionDrift invariant gap confirmed.
 v7.169 Agent Board and Validator Patch Gate — Docs-only patch gate for 5 repair scopes: agent-board reconciliation, validator execution closure, fixture patch, legacy v6.8 disposition, board freshness gate. Implementation not authorized. Next: v7.170.
 v7.170 Agent Board and Validator Patch Implementation — Controlled patch execution: agent board reconciliation, validator allowedSummaryFields wired, permissionDrift invariants completed, fixture coverage patch (4 new), legacy v6.8 disposition, board freshness gate updated. Node --check passed. Committed and pushed.
+v7.199 AGENTS Smart Commander Slim Hardening — Stable commander/worker operating model consolidated into AGENTS.md. Support-layer governance only; no production authorization.
+v7.200 Smart Commander Portable Protocol Extraction — Project-neutral sustained commander protocol extracted. VCP/image/v7.x-specific assumptions removed.
+v7.201 Smart Commander Reuse Package Index — Reusable artifacts, templates, stop checklist, and adoption order indexed.
+v7.202 Smart Commander External Adoption Readiness — Minimum adoption requirements, suitable profiles, migration steps, rollback plan, and risk checklist defined.
+v7.203 Smart Commander Portable Release Candidate — Portable release candidate manifest completed. Optional export remains non-blocking; Agent Image Lab mainline returns to Review Console/product workflow work.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3
@@ -190,6 +195,10 @@ stability_status: stable_candidate
 batch_dry_run_required_now: false
 further_stability_testing_required_now: false
 next_real_generation_requires_independent_a5: true
+smart_commander_status: portable_release_candidate_complete_support_layer
+smart_commander_next: no_new_training_gate_unless_review_proves_needed
+mainline_next_best_task: static_review_console_mockup_spec_gate
+review_console_mockup_scope: docs_only_surface_app_spec_no_renderer_preload_ipc_runtime
 
 已经完成：
 
@@ -258,6 +267,7 @@ next_real_generation_requires_independent_a5: true
 - v10.26 real DailyNote/VCP memory write closeout 记录 v10.25 单次真实写入已完成：actual_write_calls=1、writer 为 DailyNoteWrite、保存文件名和 sha256 已脱敏记录；单次授权已消耗，不授权第二次写入或版本动作。
 - v10.27 DailyNoteWrite root path correction 修正未来 DailyNoteWrite 写入根目录分类：从 `plugin_dir_dailynote` 改为 `vcp_root_dailynote`；本阶段不重跑 writer、不再次写 DailyNote/VCP memory。
 - v10.28 DailyNote canonical location guard 固化后续写入成功判定：`plugin_success_sufficient=false`，必须通过 canonical file 存在和 hash 匹配后才能标记 memory write complete。
+- v7.199-v7.203 Smart Commander 支持层收束：AGENTS 精简固化、portable protocol、reuse index、external adoption readiness 和 portable release candidate 已完成；这条线不授权 A5、runtime、plugin/provider、image 或 memory，也不阻塞 Agent Image Lab 主线。
 - Runtime Review follow-up requirements audit 梳理下一步本地审片台交付需求：accepted candidate delivery package、memory completion state split、human override traceability 和 inactive authorization capsule generator。
 - Runtime Review follow-up Batch 2A/2C 在 runtime prototype 中增加 accepted candidate delivery package draft 和 human override traceability draft，并用 guard / smoke / delivery surface 校验保持 no-write。
 - Runtime Review follow-up Batch 2B 在 runtime prototype 中增加 `memory_completion_state_draft`，把写入请求、写入授权、真实执行、canonical location 校验、hash 匹配和 `plugin_success_sufficient=false` 拆开。
@@ -357,6 +367,11 @@ Photo Studio OS UI 生图生产线，以及 AI 图片评审与修正生产线。
 - `docs/138_v5_11_post_merge_reconciliation.md`：post-merge reconciliation 记录。
 - `docs/139_v5_12_release_candidate_readiness.md`：release candidate readiness 记录。
 - `docs/192_v7_40_local_a4_a5_autonomy_alignment.md`：local A4/A5 autonomy mode alignment 记录。
+- `docs/v7_199_agents_smart_commander_slim_hardening_gate.md`：Smart Commander operating model 精简固化记录。
+- `docs/v7_200_smart_commander_portable_protocol_extraction_gate.md`：项目无关 Smart Commander portable protocol 抽取记录。
+- `docs/v7_201_smart_commander_reuse_package_index_gate.md`：Smart Commander reuse package index。
+- `docs/v7_202_smart_commander_external_adoption_readiness_gate.md`：Smart Commander 外部项目采用 readiness 评估。
+- `docs/v7_203_smart_commander_portable_release_candidate_gate.md`：Smart Commander portable release candidate manifest；后续 optional export 非主线阻塞项。
 - `docs/198_v7_46_remote_debug_relaunch_runtime_verification_record.md`：remote-debug relaunch runtime verification 脱敏记录。
 - `docs/199_v10_0_a5_end_to_end_activation_package_readiness.md`：A5 end-to-end activation package readiness 与 preflight-blocked 脱敏记录。
 - `docs/200_v10_1_a5_resume_after_external_worktree_reconciliation.md`：A5 外部工作树清理后恢复 preflight 的脱敏接续记录。

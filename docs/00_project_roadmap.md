@@ -18,7 +18,7 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7)
+v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203)
 ```
 
 当前工作分支：
@@ -94,6 +94,7 @@ master tracking origin/master
 - v10.26 real DailyNote/VCP memory write closeout：记录 v10.25 使用 DailyNoteWrite 完成一次真实写入，actual_write_calls=1，保存文件名/sha256 已脱敏记录，单次授权已消耗。
 - v10.27 DailyNoteWrite root path correction：修正未来 DailyNoteWrite 写入根目录分类，从 `plugin_dir_dailynote` 改为 `vcp_root_dailynote`，并通过 no-write recomputation 验证。
 - v10.28 DailyNote canonical location guard：固化后续 DailyNote 写入成功判定，要求 canonical file 存在和 hash 匹配，插件 `success` 不能单独判定完成。
+- v7.199-v7.203 Smart Commander 支持层收束：AGENTS 精简固化、portable protocol、reuse package index、external adoption readiness 和 portable release candidate 已完成；该支线只改善本地 docs-only 指挥/审查/提交模型，不授权 A5、runtime、plugin/provider、image 或 memory，不再作为主线继续调教。
 - Runtime Review follow-up requirements audit：梳理审片台下一步本地交付需求，优先处理 accepted candidate delivery package draft 和 memory completion state split。
 - Runtime Review follow-up Batch 2A/2C：在 runtime prototype 中实现 accepted candidate delivery package draft 和 human override traceability draft，并把 no-write guard、UI、session export、smoke 和 delivery surface validation 同步。
 - Runtime Review follow-up Batch 2B：在 runtime prototype 中实现 memory completion state split，把写入请求、写入授权、真实执行、canonical location 校验、hash 匹配和 `plugin_success_sufficient=false` 拆开。
@@ -153,6 +154,7 @@ master tracking origin/master
 - 正式 release 发布仍需单独授权（tag 策略已定义：`docs/233_tag_and_version_strategy.md`）。
 - 后续更多真实图片生成需新 A5 授权包（Phase F 已消耗 2/2 calls，双图 accepted）。
 - commit/tag 可自动执行；push/PR/release 需 active version-action package。
+- 静态 Review Console mockup spec 尚未完成；下一条 A4 docs-only 主线应基于 v7.184 planning、v7.185 Core Independent / VCP Native ADR 和 v7.186 alignment，定义 surface/app 层规格，不创建 renderer/preload/IPC/runtime 代码。
 
 ## 阶段路线
 
