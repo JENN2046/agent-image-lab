@@ -1,5 +1,40 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260512-V7-236-PRODUCT-IMAGE-WORKFLOW-A5-READINESS-REVIEW
+
+Task:
+
+```text
+Create a docs-only A5 readiness review for the product image workflow chain.
+```
+
+Commands run:
+
+```text
+git status -sb
+git diff --check
+git diff -- README.md PROJECT_MASTER_PLAN.md docs/00_project_roadmap.md docs/v7_236_product_image_workflow_A5_readiness_review_gate.md docs/product_image_workflow_A5_readiness_review.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
+node scripts/validate_agent_board_state.js
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+v7.236 confirms the chain is ready for a non-active A5 authorization draft. It is not ready for active A5 execution because generation plan, provider/plugin target, call budget, output scope, approval phrase, expiry, and pre-execution lock are still missing.
+```
+
+Notes:
+
+```text
+The next recommended phase is v7.237_product_image_generation_authorization_draft_gate.
+```
+
 ## VALIDATION-20260512-V7-235-PRODUCT-IMAGE-WORKFLOW-STATIC-WALKTHROUGH
 
 Task:

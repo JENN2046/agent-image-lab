@@ -7,14 +7,14 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest closed baseline before v7.235: 9283de4 on master == origin/master.
-Current mainline state: v7.235 product image workflow static walkthrough gate.
+Latest closed baseline before v7.236: bd73eb5 on master == origin/master.
+Current mainline state: v7.236 product image workflow A5 readiness review gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
-Current status: Product Image Workflow Static Walkthrough created with a synthetic matte ceramic coffee mug brief. It validates the docs-only workflow path while stopping before A5, runtime, provider, plugin, image generation, and memory write.
+Current status: Product Image Workflow A5 Readiness Review completed. The chain is ready for a non-active A5 authorization draft, but not ready for active A5 execution.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized: A5, provider contact, runtime, plugin call, image generation, DailyNote write, VCP memory write, real manifest read, tag, release, deploy.
-Recommended next after v7.235: v7.236_product_image_workflow_A5_readiness_review_gate.
+Recommended next after v7.236: v7.237_product_image_generation_authorization_draft_gate.
 ```
 
 历史状态脉络：
@@ -220,6 +220,7 @@ v7.232 Memory Suitability Decision Matrix Gate — Matrix created for deciding w
 v7.233 Delivery Review Surface Package Gate — Delivery / Review Surface Package created to connect prompt package, future A5 authorization handoff, asset status, human review, and memory suitability records. No runtime surface or executable generation request.
 v7.234 Product Image Workflow Runbook Gate — Operator runbook created for the product image workflow chain. It defines step inputs, outputs, stop rules, A5 handoff, future asset review, memory suitability, and delivery package use without execution.
 v7.235 Product Image Workflow Static Walkthrough Gate — Synthetic matte ceramic coffee mug walkthrough created to test the docs-only workflow path from brief to delivery package. It stops before future A5 generation and writes no assets or memory.
+v7.236 Product Image Workflow A5 Readiness Review Gate — Docs-only readiness review completed. The workflow is ready for a non-active authorization draft but not for provider contact, plugin call, image generation, output save, runtime, or memory write.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3

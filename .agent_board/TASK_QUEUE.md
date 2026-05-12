@@ -9,7 +9,7 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
-Complete v7.235 product image workflow static walkthrough gate and route the next phase to A5 readiness review planning.
+Complete v7.236 product image workflow A5 readiness review gate and route the next phase to a non-active authorization draft.
 ```
 
 ---
@@ -60,13 +60,13 @@ none
 ### todo
 
 ```text
-1. v7.236_product_image_workflow_A5_readiness_review_gate.
+1. v7.237_product_image_generation_authorization_draft_gate.
 ```
 
-### recommended_next_after_v7_235
+### recommended_next_after_v7_236
 
 ```text
-v7.236_product_image_workflow_A5_readiness_review_gate — review whether the docs-only package chain is sufficient to draft a future A5 authorization package; default auto execution disabled.
+v7.237_product_image_generation_authorization_draft_gate — create a non-active A5 authorization draft from the reviewed chain; active A5 execution remains blocked.
 ```
 
 ### done
@@ -103,6 +103,7 @@ v7.236_product_image_workflow_A5_readiness_review_gate — review whether the do
 29. v7.233 delivery review surface package gate created a package that links prompt package, future A5 handoff, human review, asset status, and memory suitability.
 30. v7.234 product image workflow runbook gate created an operator SOP for the package chain without execution.
 31. v7.235 product image workflow static walkthrough gate created a synthetic matte ceramic coffee mug walkthrough without execution.
+32. v7.236 product image workflow A5 readiness review gate confirmed readiness for a non-active A5 authorization draft, not active execution.
 ```
 
 ### blocked
@@ -125,6 +126,7 @@ v7.236_product_image_workflow_A5_readiness_review_gate — review whether the do
 15. v7.233 does not authorize A5/provider/runtime/plugin/image/DailyNote/VCP memory/output save/Review Console runtime/CDP/bridge/MCP/tag/release/deploy.
 16. v7.234 does not authorize A5/provider/runtime/plugin/image/DailyNote/VCP memory/output save/Review Console runtime/CDP/bridge/MCP/tag/release/deploy.
 17. v7.235 does not authorize A5/provider/runtime/plugin/image/DailyNote/VCP memory/output save/Review Console runtime/CDP/bridge/MCP/tag/release/deploy.
+18. v7.236 does not authorize active A5/provider/runtime/plugin/image/DailyNote/VCP memory/output save/Review Console runtime/real manifest read/CDP/bridge/MCP/tag/release/deploy.
 ```
 
 ### skipped

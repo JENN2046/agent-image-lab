@@ -18,11 +18,11 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Latest closed baseline before v7.235: 9283de4 on master == origin/master.
-Current mainline state: v7.235 product image workflow static walkthrough gate.
+Latest closed baseline before v7.236: bd73eb5 on master == origin/master.
+Current mainline state: v7.236 product image workflow A5 readiness review gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
-Current status: Product Image Workflow Static Walkthrough created; product mainline now has a synthetic brief exercise proving the docs-only chain can move from brief to delivery package while stopping before A5/runtime.
+Current status: Product Image Workflow A5 Readiness Review completed; product mainline is ready to create a non-active A5 authorization draft, but active A5 execution remains blocked.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)
 ```
@@ -311,8 +311,8 @@ daily_note_called: false
 
 ## 当前优先队列
 
-1. v7.235_product_image_workflow_static_walkthrough_gate 已完成，合成 coffee mug brief 已用于非执行 walkthrough。
-2. 下一阶段建议推进 v7.236_product_image_workflow_A5_readiness_review_gate，判断现有包链是否足以起草未来 A5 generation authorization package；默认不自动执行 A5。
+1. v7.236_product_image_workflow_A5_readiness_review_gate 已完成，现有包链足以起草非激活 A5 authorization draft。
+2. 下一阶段建议推进 v7.237_product_image_generation_authorization_draft_gate，创建 non-active authorization draft；仍不得激活 A5 或生成图片。
 3. A5/provider/runtime/image/memory 仍未授权；如需推进，必须形成独立 active authorization package 并通过 preflight。
 4. tag/release/deploy 仍未授权；任何版本动作都必须匹配当前授权、白名单和 push safety gate。
 5. 若下一步仍为 A4，必须说明新的产品价值、写集、验证方式和 agent_board_freshness 检查。
