@@ -9,7 +9,7 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
-Complete v7.224a autopilot rule intake hardening so future sessions must read and prove AGENTS/overlay/agent_board intake before editing files.
+Complete v7.225 balanced codex exec Worker/Verifier contract patch without expanding into a Full Multi-Agent OS.
 ```
 
 ---
@@ -60,13 +60,13 @@ none
 ### todo
 
 ```text
-1. v7.224b_autopilot_rule_smoke_test, only after a new phase starts.
+1. Choose a concrete Agent Image Lab product-mainline task after v7.225 closeout.
 ```
 
 ### recommended_next_after_v7_224a
 
 ```text
-v7.224b_autopilot_rule_smoke_test — A4 read-only smoke test proving the new rule intake is read and restated before edits.
+product_mainline_value_task — choose a concrete Agent Image Lab product-mainline task, not another governance-only gate.
 ```
 
 ### done
@@ -91,6 +91,8 @@ v7.224b_autopilot_rule_smoke_test — A4 read-only smoke test proving the new ru
 17. v7.224a startup rule intake completed before edits.
 18. v7.224a AGENTS / overlay / README autopilot / docs / .agent_board freshness diff inspected.
 19. v7.224a git diff --check passed.
+20. v7.224b read-only smoke test passed; no edits, commit, or push performed.
+21. v7.225 balanced codex exec Worker/Verifier contract patch completed_validated.
 ```
 
 ### blocked
@@ -102,6 +104,7 @@ v7.224b_autopilot_rule_smoke_test — A4 read-only smoke test proving the new ru
 4. Repetitive A4 docs-only gates are blocked unless they create new product value.
 5. A5/provider/runtime/plugin/image/memory remain blocked in v7.224.
 6. v7.224a does not authorize A5/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
+7. v7.225 does not authorize A5/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
 ```
 
 ### skipped

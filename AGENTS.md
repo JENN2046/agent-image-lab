@@ -359,6 +359,46 @@ commander stages and commits only reviewed allowlisted files
 commander produces the final closeout
 ```
 
+### codex exec Worker Contract
+
+A `codex exec` Worker is temporary execution, not a second commander.
+
+Use it only when the commander provides a single task contract with:
+
+```text
+task id
+objective
+exact allowed files
+forbidden files/actions
+validation commands
+stop conditions
+expected worker_closeout
+```
+
+The Worker must not decide the next phase, stage, commit, push, tag, release,
+run A5/runtime/provider/plugin/image/memory actions, or widen scope. If it sees
+dirty tree risk, unclear write set, suspected secret, dependency/config change,
+runtime need, or missing authorization, it must stop and report a blocker.
+
+### codex exec Read-only Verifier Contract
+
+A `codex exec` Verifier is read-only evidence review.
+
+It may inspect:
+
+```text
+git status / branch / HEAD / origin
+git diff / diff --check / changed file list
+validation evidence
+task allowlist compliance
+hard-stop boundary evidence
+commit readiness
+```
+
+It must not edit, stage, commit, push, tag, release, run production actions, or
+repair findings. The Verifier returns `pass`, `pass_with_warnings`, or `block`
+with concise evidence for the commander to review.
+
 Smart Commander may continue after a clean A4 docs-only closeout when all are true:
 
 ```text

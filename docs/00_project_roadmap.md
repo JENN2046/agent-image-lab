@@ -18,11 +18,12 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Current synced baseline before v7.224: 61d7c27 on master == origin/master.
-Current mainline state: v7.221 mainline quality stop reached.
+Current synced baseline: a8f3d70 on master == origin/master.
+Current mainline state: v7.225 balanced codex exec Worker/Verifier contract patch.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
-Current gate: v7.224 A4 docs-only status freshness alignment.
+Current status: v7.224 freshness alignment pushed; v7.224a rule intake hardening pushed; v7.224b read-only smoke test passed.
+Master plan index: PROJECT_MASTER_PLAN.md.
 Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)
 ```
 
@@ -310,8 +311,8 @@ daily_note_called: false
 
 ## 当前优先队列
 
-1. 完成 v7.224 mainline status freshness alignment，确保 README、roadmap 和 `.agent_board` resume surfaces 指向同一个当前主线状态。
-2. v7.224 之后选择一个具备明确产品价值的下一阶段；不得继续惯性新增 Smart Commander 或 freshness-only gate。
+1. 完成 v7.225 balanced codex exec Worker/Verifier contract patch，确保 Commander、temporary Worker 和 read-only Verifier 角色边界清楚。
+2. v7.225 之后选择一个具备明确产品价值的下一阶段；不得继续惯性新增 Smart Commander 或 freshness-only gate。
 3. A5/provider/runtime/image/memory 仍未授权；如需推进，必须形成独立 active authorization package 并通过 preflight。
 4. tag/release/deploy 仍未授权；任何版本动作都必须匹配当前授权、白名单和 push safety gate。
 5. 若下一步仍为 A4，必须说明新的产品价值、写集、验证方式和 agent_board_freshness 检查。

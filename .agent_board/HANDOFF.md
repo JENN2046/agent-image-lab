@@ -3,11 +3,11 @@
 ## Handoff Summary
 
 ```text
-Status: v7.224a autopilot rule intake hardening completed_validated. Verify Git sync before continuing.
-Reason: strengthen project rules so future automatic work must read, restate, and close out instruction intake before editing files.
+Status: v7.225 balanced codex exec Worker/Verifier contract patch completed_validated.
+Reason: apply the minimal Balanced setup from the read-only analysis without expanding into a Full Multi-Agent OS.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
-Source baseline for v7.224a: cdd39c3 == origin/master
+Source baseline for v7.225: a8f3d70 == origin/master
 Current active workers: 0
 Current operating style: Single-Window 4-Agent Compact Autopilot
 ```
@@ -15,9 +15,9 @@ Current operating style: Single-Window 4-Agent Compact Autopilot
 ## Current Mainline Reality
 
 ```text
-latest_completed_remote_baseline_before_v7_224a: cdd39c3
-latest_completed_gate_before_v7_224a: v7.224_mainline_status_freshness_alignment_gate
-current_gate: v7.224a_autopilot_rule_intake_hardening_gate
+latest_completed_remote_baseline_before_v7_225: a8f3d70
+latest_completed_gate_before_v7_225: v7.224b_autopilot_rule_smoke_test
+current_gate: v7.225_balanced_codex_exec_worker_verifier_contract_patch
 current_gate_status: completed_validated
 
 Smart Commander protocol track: stable and consolidated
@@ -27,7 +27,9 @@ release readiness delta: quality stop reached
 board calibration: v7.222 completed and pushed
 value selection: v7.223 selected v7.224
 status freshness alignment: v7.224 completed and pushed
-autopilot rule intake hardening: v7.224a active
+autopilot rule intake hardening: v7.224a pushed
+autopilot rule smoke test: v7.224b passed read-only
+balanced codex exec role contracts: v7.225 completed_validated
 
 continue_A4_docs_only_by_default: false
 next_requires_new_value_or_explicit_authorization: true
@@ -48,17 +50,18 @@ repetitive A4 docs-only gate: blocked unless it creates new product value
 production actions remain blocked without active authorization package
 v7.224 does not authorize A5, provider, runtime, plugin, image, DailyNote, VCP memory, CDP, bridge, MCP, tag, release, deploy, production_candidate_002, or Batch 005
 v7.224a does not authorize A5, provider, runtime, plugin, image, DailyNote, VCP memory, CDP, bridge, MCP, tag, release, deploy, production_candidate_002, or Batch 005
+v7.225 does not authorize A5, provider, runtime, plugin, image, DailyNote, VCP memory, CDP, bridge, MCP, tag, release, deploy, production_candidate_002, or Batch 005
 ```
 
 ## Validation Snapshot
 
 ```text
-git status -sb at v7.224a start: clean
-git rev-parse HEAD at v7.224a start: cdd39c3
-git rev-parse origin/master at v7.224a start: cdd39c3
+git status -sb at v7.225 start: clean
+git rev-parse HEAD at v7.225 start: a8f3d70
+git rev-parse origin/master at v7.225 start: a8f3d70
 agent_board_freshness: manually checked from exact diff
 git diff --check: passed
-rule_intake_smoke_test: not_performed_in_this_phase
+rule_intake_smoke_test: passed in v7.224b read-only smoke test
 scripts/validate_mvp.ps1: not required for board-only calibration unless reviewer escalates
 scripts/validate-agent-image-lab-local.ps1: not required for board-only calibration unless reviewer escalates
 node scripts/validate_runtime_prototype_suite.js: not required; no runtime prototype changed
@@ -83,7 +86,7 @@ dependency/config/env modification: no
 ## Human Decisions Needed
 
 ```text
-No human decision is needed to finish v7.224a commit/push if guarded checks pass.
+No human decision is needed to finish the local v7.225 docs-only patch validation.
 Human authorization is needed before any A5 provider contact, runtime integration, tag/release/deploy, or repetitive low-value A4 gate.
 ```
 
@@ -96,8 +99,8 @@ Human authorization is needed before any A5 provider contact, runtime integratio
 
 当前仓库状态：
 - master should track origin/master.
-- source baseline for v7.224a: cdd39c3.
-- current phase: v7.224a autopilot rule intake hardening.
+- source baseline for v7.225: a8f3d70.
+- current phase: v7.225 balanced codex exec Worker/Verifier contract patch.
 - v7.221 mainline quality stop reached.
 - v7.222 board calibration completed.
 - v7.223 read-only value selection selected v7.224 as the only safe next task.
@@ -107,7 +110,9 @@ Human authorization is needed before any A5 provider contact, runtime integratio
 - production_candidate_002_allowed_now: false.
 - memory_write_path_allowed_now: false.
 - continue_A4_docs_only_by_default: false.
-- recommended_next after v7.224a: v7.224b_autopilot_rule_smoke_test.
+- v7.224a rule intake hardening completed and pushed.
+- v7.224b read-only smoke test passed.
+- recommended_next after v7.225: real product-mainline task.
 - next step must create clear product value or require explicit A5/runtime/version authorization.
 
 不要读取真实 VCPChat/VCPToolBox。

@@ -1,5 +1,40 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260512-V7-225-BALANCED-CODEX-EXEC-CONTRACT-PATCH
+
+Task:
+
+```text
+Apply the minimal Balanced setup: add concise codex exec Worker and read-only Verifier contracts, refresh stale status surfaces against a8f3d70, and add a short PROJECT_MASTER_PLAN.md index.
+```
+
+Commands run:
+
+```text
+git status -sb
+git diff --check
+git diff -- AGENTS.md README.md docs/00_project_roadmap.md .agent_board/RUN_STATE.md .agent_board/HANDOFF.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md PROJECT_MASTER_PLAN.md
+node scripts/validate_agent_board_state.js
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+v7.225 is a governance-minimal docs-only patch. It does not authorize A5, provider contact, runtime, plugin calls, image generation, DailyNote write, VCP memory write, CDP, bridge, MCP, production_candidate_002, Batch 005, tag, release, deploy, or push.
+```
+
+Notes:
+
+```text
+No FILE_LOCKS.md, RISK_REGISTER.md, docs/runbooks, docs/validation, generic validate-local wrapper, source code, package, dependency, env, runtime, or generated artifact changes are authorized by this task.
+```
+
 ## VALIDATION-20260512-V7-224A-RULE-INTAKE-HARDENING
 
 Task:

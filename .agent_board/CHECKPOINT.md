@@ -1,5 +1,39 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.225 Balanced codex exec Worker/Verifier Contract Patch
+
+```text
+Status: completed_validated — A4 docs-only governance-minimal patch
+Source baseline: a8f3d70 == origin/master at phase start
+Purpose: add concise codex exec Worker and read-only Verifier contracts, refresh stale status surfaces, and add a short PROJECT_MASTER_PLAN.md index
+AGENTS_loaded: true
+autopilot_overlay_loaded_or_read: true
+README_autopilot_loaded_or_reviewed: true
+agent_board_loaded: true
+AGENTS_updated: true
+README_updated: true
+roadmap_updated: true
+handoff_updated: true
+run_state_updated: true
+task_queue_updated: true
+checkpoint_updated: true
+validation_log_updated: true
+project_master_plan_added: true
+agent_board_STATE_json_modified: false
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+CDP_bridge_MCP: false
+production_candidate_002_started: false
+batch_005_started: false
+recommended_next: product_mainline_value_task
+validation: git diff --check passed; node scripts/validate_agent_board_state.js passed
+```
+
 ## v7.224a Autopilot Rule Intake Hardening Gate
 
 ```text

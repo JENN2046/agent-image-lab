@@ -7,13 +7,14 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Current synced baseline: 61d7c27 on master == origin/master.
-Current mainline state: v7.221 mainline quality stop reached.
+Current synced baseline: a8f3d70 on master == origin/master.
+Current mainline state: v7.225 balanced codex exec Worker/Verifier contract patch.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
-Current gate: v7.224 A4 docs-only status freshness alignment.
+Current status: v7.224 freshness alignment pushed; v7.224a rule intake hardening pushed; v7.224b read-only smoke test passed.
+Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized: A5, provider contact, runtime, plugin call, image generation, DailyNote write, VCP memory write, real manifest read, tag, release, deploy.
-Recommended next after v7.224: choose a value-bearing product-mainline task; do not continue inertia governance polishing.
+Recommended next after v7.225: return to a value-bearing product-mainline task; do not continue inertia governance polishing.
 ```
 
 历史状态脉络：
