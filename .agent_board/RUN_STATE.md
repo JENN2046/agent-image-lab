@@ -9,25 +9,26 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab mainline has returned from Smart Commander portable protocol work to the product track. Current master is synced with origin/master at c605bd7 after v7.221 mainline quality stop. The board was recalibrated because the previous handoff still pointed at v7.170.
+Agent Image Lab is in v7.224 mainline status freshness alignment after v7.221 quality stop, v7.222 board calibration, and v7.223 read-only value selection. Source baseline for this phase is 61d7c27 on master == origin/master.
 ```
 
 ## Current Phase
 
 ```text
-v7.221 — Mainline Quality Stop
-status: completed
-commit: c605bd7
-message: docs: add v7.221 mainline quality stop
+v7.224 — Mainline Status Freshness Alignment Gate
+status: completed_validated_pending_commit_push_closeout
+source_commit: 61d7c27
+source_message: docs: finalize agent board calibration closeout
 branch: master tracking origin/master
-worktree: clean before board calibration
-origin_sync: local HEAD equals origin/master at c605bd7 before board calibration
+Worktree: clean at v7.224 start
+worktree_start_clean: true
+origin_sync_start: local HEAD equals origin/master at 61d7c27
 ```
 
 ## Current Task
 
 ```text
-.agent_board calibration before any further autopilot progression: completed_validated
+Refresh README, docs/00_project_roadmap.md, v7.224 phase record, and .agent_board resume surfaces so the top-level project entry points match the current mainline state.
 ```
 
 ## Current Local Work State
@@ -49,6 +50,8 @@ Smart Commander protocol track: consolidated and no longer the default next trac
 Static Review Console mockup track: quality stop reached
 v10.12 provider fingerprint preparation: complete but inactive
 Release readiness delta: quality stop reached
+Board calibration: v7.222 completed and pushed
+Value selection: v7.223 selected v7.224 as the only safe next task
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```
@@ -59,6 +62,7 @@ Default continue_A4_docs_only_by_default: false
 mainline_A4_quality_stop_reached: true
 continue_A4_docs_only_by_default: false
 next_requires_new_value_or_explicit_authorization: true
+v7_224_is_freshness_alignment_only: true
 
 Validator Governance Chain v1: closed
 batch_005_allowed_now: false
@@ -66,40 +70,28 @@ production_candidate_002_allowed_now: false
 memory_write_path_allowed_now: false
 
 production actions remain blocked without an active authorization package
-Push/tag/release remain blocked unless a guarded remote/version action is explicitly authorized and preflight passes
+Push/tag/release: blocked unless explicitly authorized and preflight passes
+tag/release/deploy remain blocked without explicit authorization and preflight
 ```
 
 ## Current Options
 
 ```text
-option_a: provider fingerprint A5 activation package
-  requires: exact approval phrase and A5 provider-contact authorization
-  allows_now: false
-
-option_b: Review Console runtime integration package
-  requires: runtime integration authorization
-  allows_now: false
-
-option_c: tag or release readiness action
-  requires: explicit tag/release authorization
-  allows_now: false
-
-option_d: new A4 docs/static task
-  requires: demonstrated non-redundant product value
-  allows_now: only after commander value test passes
+recommended_next_after_v7_224: v7.225_product_mainline_value_task_gate
+purpose: select and define one concrete value-bearing product-mainline task
+not_allowed_as_next_by_default: inertia governance polishing, Smart Commander tuning, A5, provider contact, runtime, plugin call, image generation, memory write, tag, release
 ```
 
 ## Last Validation Snapshot
 
 ```text
-latest synced commit before board calibration: c605bd7
-latest known pushed baseline: c605bd7
-git status --short --branch: clean before board calibration
-git rev-list --left-right --count origin/master...HEAD: 0 0 before board calibration
+source baseline for v7.224: 61d7c27
+git status -sb at phase start: clean
+git rev-parse HEAD at phase start: 61d7c27
+git rev-parse origin/master at phase start: 61d7c27
+agent_board_freshness: passed
 git diff --check: passed
 node scripts/validate_agent_board_state.js: passed
-guarded push preflight: passed
-remote sync after board calibration: passed
 scripts/validate_mvp.ps1: not required for this board-only calibration unless reviewer escalates
 scripts/validate-agent-image-lab-local.ps1: not required for this board-only calibration unless reviewer escalates
 node scripts/validate_runtime_prototype_suite.js: not required; no runtime prototype file changed
@@ -125,5 +117,5 @@ external repository modification: no
 
 ```text
 Use the calibrated board as the current navigation source.
-Do not continue into another Smart Commander tuning gate. Continue only to a product-mainline task that passes the value test or to an explicitly authorized A5/runtime/release path.
+Commit and push v7.224 if the allowlist and guarded push preflight pass, then stop with recommended_next=v7.225_product_mainline_value_task_gate. Do not start v7.225 in the same phase.
 ```

@@ -1,5 +1,44 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260512-V7-224-MAINLINE-FRESHNESS
+
+Task:
+
+```text
+Align README.md, docs/00_project_roadmap.md, docs/v7_224_mainline_status_freshness_alignment_gate.md, and .agent_board resume surfaces after v7.223 selected v7.224 as the only safe next task.
+```
+
+Commands run:
+
+```text
+git status -sb
+git log --oneline -8
+git rev-parse HEAD
+git rev-parse origin/master
+git diff --stat
+git diff -- README.md docs/00_project_roadmap.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md docs/v7_224_mainline_status_freshness_alignment_gate.md
+git diff --check
+node scripts/validate_agent_board_state.js
+```
+
+Result:
+
+```text
+passed after restoring exact legacy board freshness anchors required by scripts/validate_agent_board_state.js
+```
+
+Findings:
+
+```text
+v7.224 is a status freshness alignment gate only. It does not authorize A5, provider contact, runtime, plugin calls, image generation, DailyNote write, VCP memory write, CDP, bridge, MCP, production_candidate_002, Batch 005, tag, release, or deploy.
+```
+
+Notes:
+
+```text
+agent_board_freshness is required before commit. .agent_board/STATE.json is not modified. git add . is forbidden.
+```
+
 ## VALIDATION-20260512-AGENT-BOARD-CALIBRATION
 
 Task:

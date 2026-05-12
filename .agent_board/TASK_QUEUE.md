@@ -9,7 +9,7 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
-Use the calibrated .agent_board after v7.221 mainline quality stop to choose the next value-bearing project task.
+Complete v7.224 mainline status freshness alignment so README, roadmap, latest phase doc, and .agent_board resume surfaces agree on the current product-mainline state.
 ```
 
 ---
@@ -54,23 +54,20 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-none
+1. v7.224 commit/push closeout
 ```
 
 ### todo
 
 ```text
-1. Commander: run next-task value test against current README/ROADMAP/docs when continuing.
-2. Commander: stop before A5 provider contact, runtime integration, tag/release, or repetitive A4 work unless explicit authorization or clear new value exists.
+1. Commander: stage only allowlisted files; do not use git add .
+2. Commander: commit and push only if local scope and guarded push preflight pass.
 ```
 
-### next_candidates_after_calibration
+### recommended_next_after_v7_224
 
 ```text
-1. provider fingerprint A5 activation package — requires explicit A5 provider-contact authorization; not automatic.
-2. Review Console runtime integration package — requires explicit runtime authorization; not automatic.
-3. tag/release readiness action — requires explicit version-action authorization; not automatic.
-4. new A4 docs/static task — allowed only if commander value test proves a non-redundant product gap.
+v7.225_product_mainline_value_task_gate — select and define one concrete value-bearing product-mainline task. It must not be another inertia governance polish gate.
 ```
 
 ### done
@@ -88,6 +85,9 @@ none
 10. node scripts/validate_agent_board_state.js passed.
 11. guarded push preflight passed.
 12. board calibration pushed to origin/master.
+13. v7.223 read-only value selection selected v7.224 as the only safe next task.
+14. v7.224 README / roadmap / .agent_board freshness alignment passed git diff --check.
+15. v7.224 agent_board_freshness passed node scripts/validate_agent_board_state.js.
 ```
 
 ### blocked
@@ -97,6 +97,7 @@ none
 2. Runtime integration is blocked until explicit matching authorization.
 3. Tag/release is blocked until explicit matching authorization and preflight.
 4. Repetitive A4 docs-only gates are blocked unless they create new product value.
+5. A5/provider/runtime/plugin/image/memory remain blocked in v7.224.
 ```
 
 ### skipped

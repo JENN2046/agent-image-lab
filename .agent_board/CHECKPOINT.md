@@ -1,5 +1,35 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.224 Mainline Status Freshness Alignment Gate
+
+```text
+Status: completed_validated — A4 docs-only status freshness alignment
+Source baseline: 61d7c27 == origin/master at phase start
+Source selection: v7.223 read-only value selection report
+Purpose: align README.md, docs/00_project_roadmap.md, v7.224 phase record, and .agent_board resume surfaces with v7.221/v7.222/v7.223 current mainline state
+README_updated: true
+roadmap_updated: true
+handoff_updated: true
+run_state_updated: true
+task_queue_updated: true
+checkpoint_updated: true
+validation_log_updated: true
+agent_board_STATE_json_modified: false
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+CDP_bridge_MCP: false
+production_candidate_002_started: false
+batch_005_started: false
+recommended_next: v7.225_product_mainline_value_task_gate
+validation: git diff --check passed; node scripts/validate_agent_board_state.js passed
+agent_board_freshness: passed
+```
+
 ## v7.222 Agent Board Current-State Calibration
 
 ```text

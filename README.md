@@ -7,6 +7,18 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current synced baseline: 61d7c27 on master == origin/master.
+Current mainline state: v7.221 mainline quality stop reached.
+Board calibration: v7.222 completed and pushed.
+Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
+Current gate: v7.224 A4 docs-only status freshness alignment.
+Not authorized: A5, provider contact, runtime, plugin call, image generation, DailyNote write, VCP memory write, real manifest read, tag, release, deploy.
+Recommended next after v7.224: choose a value-bearing product-mainline task; do not continue inertia governance polishing.
+```
+
+历史状态脉络：
+
+```text
 v6.7 Product Runtime Final Acceptance Baseline — v6.1~v6.6 consolidated into v6 Product Runtime Baseline. Accepted and pushed to origin/master (2b75fcb).
 v6.8 Plugin Dashboard — Plugin Selector, Parameter Mapper, Dry-run Toggle, Dispatch Status added as draft-only surfaces. No real plugin execution.
 v6.8B Plugin Dashboard Guard Hardening — v6DispatchPlanIsSafe() added to runtime_guard.js. Safety fields verified (dry_run_required, execution_blocked, max_plugin_calls, etc).

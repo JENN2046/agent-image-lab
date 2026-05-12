@@ -18,7 +18,12 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)
+Current synced baseline before v7.224: 61d7c27 on master == origin/master.
+Current mainline state: v7.221 mainline quality stop reached.
+Board calibration: v7.222 completed and pushed.
+Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
+Current gate: v7.224 A4 docs-only status freshness alignment.
+Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)
 ```
 
 当前工作分支：
@@ -159,8 +164,8 @@ master tracking origin/master
 - 后续 DailyNote / VCP 长期记忆写入仍需单独授权。
 - 正式 release 发布仍需单独授权（tag 策略已定义：`docs/233_tag_and_version_strategy.md`）。
 - 后续更多真实图片生成需新 A5 授权包（Phase F 已消耗 2/2 calls，双图 accepted）。
-- commit/tag 可自动执行；push/PR/release 需 active version-action package。
-- Smart Commander、静态 Review Console mockup、v10.12 provider fingerprint preparation 和 release readiness delta 均已达到 A4 stop point；下一步应选择 A5 activation request，或另找新的高价值 A4 docs-only track。
+- version actions 需要匹配当前授权和 preflight；v7.224 只允许白名单 docs/status 文件的 commit + push。
+- Smart Commander、静态 Review Console mockup、v10.12 provider fingerprint preparation 和 release readiness delta 均已达到 A4 stop point；v7.224 只做 freshness alignment，下一步必须转向明确产品价值，不得继续惯性治理打磨。
 
 ## 阶段路线
 
@@ -305,12 +310,11 @@ daily_note_called: false
 
 ## 当前优先队列
 
-1. 运行完整校验，确保文档、Adapter、Review Console、agent board、execution records 和 sustained autopilot chain 均通过。
-2. Sustained autopilot chain（9A→10C→final checkpoint, 7/7）已全部完成，已落成本地 9 个 commits + 5 个 tags。Push 待用户统一执行（已安排下班提醒）。
-3. 保持本地默认 `A4 — Sustained Local Autopilot`；不再有已定义且未完成的 default-auto local batch。
-4. 等待用户单独授权任何新的 A5 真实生产动作、tag、push 或正式 release 发布。
-5. 后续任何新增真实生图调用、DailyNote/VCP memory 写入、bridge 验证或 VCPChat/VCPToolBox 源码读写都必须匹配 `docs/231` consolidation template 形成 active authorization package。
-6. A5 条件自动队列：commit/tag/push/PR 在 active version-action package 与 preflight 通过后可自动执行到授权上限。
+1. 完成 v7.224 mainline status freshness alignment，确保 README、roadmap 和 `.agent_board` resume surfaces 指向同一个当前主线状态。
+2. v7.224 之后选择一个具备明确产品价值的下一阶段；不得继续惯性新增 Smart Commander 或 freshness-only gate。
+3. A5/provider/runtime/image/memory 仍未授权；如需推进，必须形成独立 active authorization package 并通过 preflight。
+4. tag/release/deploy 仍未授权；任何版本动作都必须匹配当前授权、白名单和 push safety gate。
+5. 若下一步仍为 A4，必须说明新的产品价值、写集、验证方式和 agent_board_freshness 检查。
 
 ## 永久安全门
 
