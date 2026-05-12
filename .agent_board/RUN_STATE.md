@@ -9,32 +9,32 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab is in v7.234 product image workflow runbook gate. The goal is to convert the package chain into an operator runbook without execution.
+Agent Image Lab is in v7.235 product image workflow static walkthrough gate. The goal is to validate the runbook with a synthetic matte ceramic coffee mug walkthrough without execution.
 ```
 
 ## Current Phase
 
 ```text
-v7.234 — Product Image Workflow Runbook Gate
+v7.235 — Product Image Workflow Static Walkthrough Gate
 status: completed_validated
-source_commit: b27413e
-source_message: docs: add delivery review surface package
+source_commit: 9283de4
+source_message: docs: add product image workflow runbook
 branch: master tracking origin/master
-Worktree: clean at v7.234 start
+Worktree: clean at v7.235 start
 worktree_start_clean: true
-origin_sync_start: local HEAD equals origin/master at b27413e
+origin_sync_start: local HEAD equals origin/master at 9283de4
 ```
 
 ## Current Task
 
 ```text
-Create the product image workflow runbook without entering A5, runtime, provider contact, plugin call, image generation, DailyNote write, or VCP memory write.
+Create the product image workflow static walkthrough without entering A5, runtime, provider contact, plugin call, image generation, DailyNote write, or VCP memory write.
 ```
 
 ## Current Local Work State
 
 ```text
-Worktree: clean at v7.234 start; product image workflow runbook completed_validated
+Worktree: clean at v7.235 start; product image workflow static walkthrough completed_validated
 active_workers: 0
 execution_mode: Single-Window 4-Agent Compact Autopilot
 commander_role: calibrate state and decide whether there is a next valuable task
@@ -65,7 +65,8 @@ Review Console asset status taxonomy: v7.231 completed_validated
 Memory suitability decision matrix: v7.232 completed_validated
 Delivery / Review Surface Package: v7.233 completed_validated
 Product Image Workflow Runbook: v7.234 completed_validated
-Recommended next product task: v7.235_product_image_workflow_static_walkthrough_gate
+Product Image Workflow Static Walkthrough: v7.235 completed_validated
+Recommended next product task: v7.236_product_image_workflow_A5_readiness_review_gate
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```
@@ -88,6 +89,7 @@ v7_231_is_review_console_asset_status_taxonomy_only: true
 v7_232_is_memory_suitability_decision_matrix_only: true
 v7_233_is_delivery_review_surface_package_only: true
 v7_234_is_product_image_workflow_runbook_only: true
+v7_235_is_product_image_workflow_static_walkthrough_only: true
 
 Validator Governance Chain v1: closed
 batch_005_allowed_now: false
@@ -102,8 +104,8 @@ tag/release/deploy remain blocked without explicit authorization and preflight
 ## Current Options
 
 ```text
-recommended_next_after_v7_234: v7.235_product_image_workflow_static_walkthrough_gate
-purpose: validate runbook with one synthetic non-executing walkthrough; auto execution disabled
+recommended_next_after_v7_235: v7.236_product_image_workflow_A5_readiness_review_gate
+purpose: review whether the docs-only package chain is sufficient to draft a future A5 authorization package; auto execution disabled
 not_allowed_as_next_by_default: A5, provider contact, runtime, plugin call, image generation, memory write, tag, release
 ```
 
@@ -122,9 +124,10 @@ source baseline for v7.231: 3936ce7
 source baseline for v7.232: 476bb01
 source baseline for v7.233: 48d893d
 source baseline for v7.234: b27413e
+source baseline for v7.235: 9283de4
 git status -sb at phase start: clean
-git rev-parse HEAD at phase start: b27413e
-git rev-parse origin/master at phase start: b27413e
+git rev-parse HEAD at phase start: 9283de4
+git rev-parse origin/master at phase start: 9283de4
 agent_board_freshness: passed
 git diff --check: passed
 rule_intake_smoke_test_performed: true
@@ -156,6 +159,6 @@ external repository modification: no
 
 ```text
 Use the calibrated board as the current navigation source.
-v7.234 created the Product Image Workflow Runbook. Continue only with v7.235_product_image_workflow_static_walkthrough_gate or a user-approved alternative; default auto execution is disabled for the next phase.
-Before continuing after v7.234, verify branch, worktree, and local/remote sync from Git output.
+v7.235 created the Product Image Workflow Static Walkthrough. Continue only with v7.236_product_image_workflow_A5_readiness_review_gate or a user-approved alternative; default auto execution is disabled for the next phase.
+Before continuing after v7.235, verify branch, worktree, and local/remote sync from Git output.
 ```

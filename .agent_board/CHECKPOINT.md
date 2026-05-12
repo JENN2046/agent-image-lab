@@ -1,5 +1,45 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.235 Product Image Workflow Static Walkthrough Gate
+
+```text
+Status: completed_validated — A4 docs-only static walkthrough
+Source baseline: 9283de4 == origin/master at phase start
+Purpose: validate the product image workflow runbook with a synthetic matte ceramic coffee mug walkthrough
+synthetic_brief_used: synthetic_brief_001_matte_ceramic_coffee_mug
+static_walkthrough_created: true
+runbook_operability_checked: true
+prompt_package_chain_checked: true
+A5_handoff_path_checked: true
+delivery_review_package_path_checked: true
+executable_generation_request_created: false
+runtime_surface_created: false
+recommended_next: v7.236_product_image_workflow_A5_readiness_review_gate
+README_updated: true
+roadmap_updated: true
+project_master_plan_updated: true
+handoff_updated: true
+run_state_updated: true
+task_queue_updated: true
+checkpoint_updated: true
+validation_log_updated: true
+agent_board_STATE_json_modified: false
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+VCPChat_runtime: false
+VCPToolBox_runtime: false
+real_manifest_read: false
+CDP_bridge_MCP: false
+production_candidate_002_started: false
+batch_005_started: false
+validation: git diff --check passed; exact diff review passed; node scripts/validate_agent_board_state.js passed
+```
+
 ## v7.234 Product Image Workflow Runbook Gate
 
 ```text

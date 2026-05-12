@@ -1,5 +1,40 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260512-V7-235-PRODUCT-IMAGE-WORKFLOW-STATIC-WALKTHROUGH
+
+Task:
+
+```text
+Create a synthetic, non-executing product image workflow walkthrough using the matte ceramic coffee mug brief.
+```
+
+Commands run:
+
+```text
+git status -sb
+git diff --check
+git diff -- README.md PROJECT_MASTER_PLAN.md docs/00_project_roadmap.md docs/v7_235_product_image_workflow_static_walkthrough_gate.md docs/product_image_workflow_static_walkthrough.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
+node scripts/validate_agent_board_state.js
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+v7.235 creates an A4 docs-only static walkthrough. It does not create an executable generation request, runtime surface, provider payload, plugin request, image asset, DailyNote write, or VCP memory write.
+```
+
+Notes:
+
+```text
+The next recommended phase is v7.236_product_image_workflow_A5_readiness_review_gate, with auto execution disabled.
+```
+
 ## VALIDATION-20260512-V7-234-PRODUCT-IMAGE-WORKFLOW-RUNBOOK
 
 Task:

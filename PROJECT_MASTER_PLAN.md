@@ -8,10 +8,10 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-source_head_before_v7_234: b27413e
-origin_master_at_v7_234_start: b27413e
-status: v7.234 product image workflow runbook gate
-mode: A4 docs-only product runbook planning
+source_head_before_v7_235: 9283de4
+origin_master_at_v7_235_start: 9283de4
+status: v7.235 product image workflow static walkthrough gate
+mode: A4 docs-only static walkthrough
 ```
 
 ## Product Direction
@@ -28,7 +28,8 @@ future A5 authorization draft inputs. v7.231 defines the future generated asset
 status taxonomy and review surface fields. v7.232 defines the non-writing
 memory suitability decision matrix. v7.233 links these artifacts into a single
 Delivery / Review Surface Package. v7.234 turns the chain into an operator
-runbook.
+runbook. v7.235 validates the chain with a synthetic matte ceramic coffee mug
+walkthrough.
 
 ## Active Boundaries
 
@@ -52,6 +53,6 @@ validation interpretation, staging, commit decisions, and next-task selection.
 
 ## Recommended Next
 
-Proceed to `v7.235_product_image_workflow_static_walkthrough_gate`. Validate
-the runbook with one synthetic, non-executing product brief walkthrough. Default
-to stop-and-review before continuing so the product track does not cross A4.
+Proceed to `v7.236_product_image_workflow_A5_readiness_review_gate`. Review
+whether the docs-only package chain is sufficient to draft a future A5
+generation authorization package. Do not execute A5.

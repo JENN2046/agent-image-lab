@@ -7,14 +7,14 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest closed baseline before v7.234: b27413e on master == origin/master.
-Current mainline state: v7.234 product image workflow runbook gate.
+Latest closed baseline before v7.235: 9283de4 on master == origin/master.
+Current mainline state: v7.235 product image workflow static walkthrough gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
-Current status: Product Image Workflow Runbook created to turn the package chain into an operator SOP without entering A5 or runtime.
+Current status: Product Image Workflow Static Walkthrough created with a synthetic matte ceramic coffee mug brief. It validates the docs-only workflow path while stopping before A5, runtime, provider, plugin, image generation, and memory write.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized: A5, provider contact, runtime, plugin call, image generation, DailyNote write, VCP memory write, real manifest read, tag, release, deploy.
-Recommended next after v7.234: v7.235_product_image_workflow_static_walkthrough_gate.
+Recommended next after v7.235: v7.236_product_image_workflow_A5_readiness_review_gate.
 ```
 
 历史状态脉络：
@@ -219,6 +219,7 @@ v7.231 Review Console Asset Status Taxonomy Gate — Asset status taxonomy and r
 v7.232 Memory Suitability Decision Matrix Gate — Matrix created for deciding whether future reviewed assets should become memory candidates. No DailyNote write, VCP memory write, runtime, provider, plugin, or image generation.
 v7.233 Delivery Review Surface Package Gate — Delivery / Review Surface Package created to connect prompt package, future A5 authorization handoff, asset status, human review, and memory suitability records. No runtime surface or executable generation request.
 v7.234 Product Image Workflow Runbook Gate — Operator runbook created for the product image workflow chain. It defines step inputs, outputs, stop rules, A5 handoff, future asset review, memory suitability, and delivery package use without execution.
+v7.235 Product Image Workflow Static Walkthrough Gate — Synthetic matte ceramic coffee mug walkthrough created to test the docs-only workflow path from brief to delivery package. It stops before future A5 generation and writes no assets or memory.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3
