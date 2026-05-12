@@ -1,5 +1,47 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.239 Product Image Generation Plan Draft Gate
+
+```text
+Status: completed_validated — A4 docs-only non-executing generation plan draft
+Source baseline: c89f00b == origin/master at phase start
+Purpose: create a non-executing generation plan draft that can later provide a plan reference for authorization review
+plan_draft_created: true
+generation_plan_id: GP-DRAFT-20260512-001
+generation_plan_version: v1
+status: draft
+authorization_status: not_requested
+execution_ready: false
+executable_generation_request_created: false
+recommended_next: v7.240_product_image_generation_plan_authorization_match_review_gate
+README_updated: true
+roadmap_updated: true
+project_master_plan_updated: true
+handoff_updated: true
+run_state_updated: true
+task_queue_updated: true
+checkpoint_updated: true
+validation_log_updated: true
+agent_board_STATE_json_modified: false
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+output_save: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+VCPChat_runtime: false
+VCPToolBox_runtime: false
+real_manifest_read: false
+real_output_path_selected: false
+raw_payload_created: false
+CDP_bridge_MCP: false
+production_candidate_002_started: false
+batch_005_started: false
+validation: git diff --check passed; exact diff review passed; node scripts/validate_agent_board_state.js passed
+```
+
 ## v7.238 Product Image Generation Authorization Draft Review Gate
 
 ```text

@@ -9,7 +9,7 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
-Complete v7.238 product image generation authorization draft review gate and route the next phase to a non-executing generation plan draft.
+Complete v7.239 product image generation plan draft gate and route the next phase to paper-level scope match review.
 ```
 
 ---
@@ -60,13 +60,13 @@ none
 ### todo
 
 ```text
-1. v7.239_product_image_generation_plan_draft_gate.
+1. v7.240_product_image_generation_plan_authorization_match_review_gate.
 ```
 
-### recommended_next_after_v7_238
+### recommended_next_after_v7_239
 
 ```text
-v7.239_product_image_generation_plan_draft_gate — create a non-executing generation plan draft to reduce the generation_plan_ref_missing blocker; active A5 execution remains blocked.
+v7.240_product_image_generation_plan_authorization_match_review_gate — review the paper-level match between generation plan draft and authorization draft; active A5 execution remains blocked.
 ```
 
 ### done
@@ -106,6 +106,7 @@ v7.239_product_image_generation_plan_draft_gate — create a non-executing gener
 32. v7.236 product image workflow A5 readiness review gate confirmed readiness for a non-active A5 authorization draft, not active execution.
 33. v7.237 product image generation authorization draft gate created a non-active draft with status=draft and approval_status=not_requested.
 34. v7.238 product image generation authorization draft review gate confirmed the draft is safe-to-keep A4 paperwork, but not active A5-ready.
+35. v7.239 product image generation plan draft gate created GP-DRAFT-20260512-001 as a non-executing plan draft.
 ```
 
 ### blocked
@@ -131,6 +132,7 @@ v7.239_product_image_generation_plan_draft_gate — create a non-executing gener
 18. v7.236 does not authorize active A5/provider/runtime/plugin/image/DailyNote/VCP memory/output save/Review Console runtime/real manifest read/CDP/bridge/MCP/tag/release/deploy.
 19. v7.237 does not authorize active A5/provider/runtime/plugin/image/DailyNote/VCP memory/output save/Review Console runtime/real manifest read/real output path/raw payload/CDP/bridge/MCP/tag/release/deploy.
 20. v7.238 does not authorize active A5/human approval request/provider/runtime/plugin/image/DailyNote/VCP memory/output save/Review Console runtime/real manifest read/real output path/raw payload/CDP/bridge/MCP/tag/release/deploy.
+21. v7.239 does not authorize active A5/provider/model/plugin selection/provider contact/runtime/plugin/image/DailyNote/VCP memory/output save/Review Console runtime/real manifest read/real output path/raw payload/CDP/bridge/MCP/tag/release/deploy.
 ```
 
 ### skipped

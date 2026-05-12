@@ -7,14 +7,14 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest closed baseline before v7.238: da69923 on master == origin/master.
-Current mainline state: v7.238 product image generation authorization draft review gate.
+Latest closed baseline before v7.239: c89f00b on master == origin/master.
+Current mainline state: v7.239 product image generation plan draft gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
-Current status: Product Image Generation Authorization Draft reviewed. The draft is safe to keep for A4 planning, but it is not ready for active A5 execution.
+Current status: Product Image Generation Plan Draft created as a non-executing paper plan. It provides a future plan reference but does not authorize A5 execution.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized: A5, provider contact, runtime, plugin call, image generation, DailyNote write, VCP memory write, real manifest read, tag, release, deploy.
-Recommended next after v7.238: v7.239_product_image_generation_plan_draft_gate.
+Recommended next after v7.239: v7.240_product_image_generation_plan_authorization_match_review_gate.
 ```
 
 历史状态脉络：
@@ -223,6 +223,7 @@ v7.235 Product Image Workflow Static Walkthrough Gate — Synthetic matte cerami
 v7.236 Product Image Workflow A5 Readiness Review Gate — Docs-only readiness review completed. The workflow is ready for a non-active authorization draft but not for provider contact, plugin call, image generation, output save, runtime, or memory write.
 v7.237 Product Image Generation Authorization Draft Gate — Non-active A5 authorization draft created for review. Status remains draft, approval_status remains not_requested, and active A5 execution remains blocked.
 v7.238 Product Image Generation Authorization Draft Review Gate — Non-active draft reviewed for completeness and blockers. It is safe to keep for A4 planning, but active A5 remains blocked until a matching generation plan and preflight exist.
+v7.239 Product Image Generation Plan Draft Gate — Non-executing generation plan draft created with `GP-DRAFT-20260512-001`. It reduces the missing plan reference blocker but keeps provider/plugin/model/output/payload/A5 execution blocked.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3
