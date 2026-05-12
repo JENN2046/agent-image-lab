@@ -1,5 +1,40 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.232 Memory Suitability Decision Matrix Gate
+
+```text
+Status: completed_validated — A4 docs-only memory suitability planning
+Source baseline: 476bb01 == origin/master at phase start
+Purpose: define non-writing memory suitability decision matrix for future reviewed assets
+memory_suitability_decision_matrix_created: true
+memory_write_authorization_created: false
+DailyNote_write_created: false
+recommended_next: v7.233_delivery_review_surface_package_gate
+README_updated: true
+roadmap_updated: true
+project_master_plan_updated: true
+handoff_updated: true
+run_state_updated: true
+task_queue_updated: true
+checkpoint_updated: true
+validation_log_updated: true
+agent_board_STATE_json_modified: false
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+VCPChat_runtime: false
+VCPToolBox_runtime: false
+real_manifest_read: false
+CDP_bridge_MCP: false
+production_candidate_002_started: false
+batch_005_started: false
+validation: git diff --check passed; exact diff review passed; node scripts/validate_agent_board_state.js passed
+```
+
 ## v7.231 Review Console Asset Status Taxonomy Gate
 
 ```text

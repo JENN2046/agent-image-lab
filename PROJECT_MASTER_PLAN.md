@@ -8,10 +8,10 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-source_head_before_v7_231: 3936ce7
-origin_master_at_v7_231_start: 3936ce7
-status: v7.231 review console asset status taxonomy gate
-mode: A4 docs-only product review surface planning
+source_head_before_v7_232: 476bb01
+origin_master_at_v7_232_start: 476bb01
+status: v7.232 memory suitability decision matrix gate
+mode: A4 docs-only memory suitability planning
 ```
 
 ## Product Direction
@@ -25,7 +25,8 @@ real generation task. v7.229 adds the human review checklist and status taxonomy
 that decide whether a package may be referenced by a future A5 authorization
 draft. v7.230 adds the non-executing handoff template from approved package to
 future A5 authorization draft inputs. v7.231 defines the future generated asset
-status taxonomy and review surface fields.
+status taxonomy and review surface fields. v7.232 defines the non-writing
+memory suitability decision matrix.
 
 ## Active Boundaries
 
@@ -49,6 +50,7 @@ validation interpretation, staging, commit decisions, and next-task selection.
 
 ## Recommended Next
 
-Proceed to `v7.232_memory_suitability_decision_matrix_gate`. Define how future
-accepted, rejected, or archived assets become memory suitability candidates,
-without writing DailyNote or VCP memory.
+Proceed to `v7.233_delivery_review_surface_package_gate`. Define a delivery and
+review package that summarizes prompt, authorization, asset status, and memory
+suitability records. Default to stop-and-review before continuing so the product
+track does not become repetitive governance.
