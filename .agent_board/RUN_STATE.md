@@ -16,7 +16,7 @@ Agent Image Lab is in v7.224 mainline status freshness alignment after v7.221 qu
 
 ```text
 v7.224 — Mainline Status Freshness Alignment Gate
-status: completed_validated_pending_commit_push_closeout
+status: completed_validated_synced
 source_commit: 61d7c27
 source_message: docs: finalize agent board calibration closeout
 branch: master tracking origin/master
@@ -92,6 +92,8 @@ git rev-parse origin/master at phase start: 61d7c27
 agent_board_freshness: passed
 git diff --check: passed
 node scripts/validate_agent_board_state.js: passed
+guarded push preflight: passed
+remote sync after v7.224: passed
 scripts/validate_mvp.ps1: not required for this board-only calibration unless reviewer escalates
 scripts/validate-agent-image-lab-local.ps1: not required for this board-only calibration unless reviewer escalates
 node scripts/validate_runtime_prototype_suite.js: not required; no runtime prototype file changed
@@ -117,5 +119,5 @@ external repository modification: no
 
 ```text
 Use the calibrated board as the current navigation source.
-Commit and push v7.224 if the allowlist and guarded push preflight pass, then stop with recommended_next=v7.225_product_mainline_value_task_gate. Do not start v7.225 in the same phase.
+Stop with recommended_next=v7.225_product_mainline_value_task_gate. Do not start v7.225 in the same phase.
 ```

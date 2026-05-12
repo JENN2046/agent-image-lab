@@ -19,6 +19,8 @@ git diff --stat
 git diff -- README.md docs/00_project_roadmap.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md docs/v7_224_mainline_status_freshness_alignment_gate.md
 git diff --check
 node scripts/validate_agent_board_state.js
+guarded push preflight checks
+git push origin master
 ```
 
 Result:
@@ -37,6 +39,7 @@ Notes:
 
 ```text
 agent_board_freshness is required before commit. .agent_board/STATE.json is not modified. git add . is forbidden.
+Post-push board closeout removed pending commit/push wording so resume surfaces remain current.
 ```
 
 ## VALIDATION-20260512-AGENT-BOARD-CALIBRATION

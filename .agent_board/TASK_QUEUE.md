@@ -54,14 +54,13 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-1. v7.224 commit/push closeout
+none
 ```
 
 ### todo
 
 ```text
-1. Commander: stage only allowlisted files; do not use git add .
-2. Commander: commit and push only if local scope and guarded push preflight pass.
+1. v7.225_product_mainline_value_task_gate — only when explicitly started as a new phase.
 ```
 
 ### recommended_next_after_v7_224
@@ -88,6 +87,7 @@ v7.225_product_mainline_value_task_gate — select and define one concrete value
 13. v7.223 read-only value selection selected v7.224 as the only safe next task.
 14. v7.224 README / roadmap / .agent_board freshness alignment passed git diff --check.
 15. v7.224 agent_board_freshness passed node scripts/validate_agent_board_state.js.
+16. v7.224 commit and guarded push completed.
 ```
 
 ### blocked

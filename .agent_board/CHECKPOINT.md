@@ -28,6 +28,8 @@ batch_005_started: false
 recommended_next: v7.225_product_mainline_value_task_gate
 validation: git diff --check passed; node scripts/validate_agent_board_state.js passed
 agent_board_freshness: passed
+push: completed
+remote_sync: passed
 ```
 
 ## v7.222 Agent Board Current-State Calibration
