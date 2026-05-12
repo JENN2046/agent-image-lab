@@ -398,6 +398,10 @@
         margin-top: 12px;
       }
 
+      .contract-panel {
+        margin-top: 12px;
+      }
+
       .table {
         display: grid;
         border: 1px solid var(--line);
@@ -567,13 +571,13 @@
               <p>Candidate may be reviewed as a visual draft. No downstream write path is active.</p>
               <span class="pill teal">human override visible</span>
             </article>
-            <div class="action-row">
-              <button type="button" disabled>Accept review only</button>
-              <button type="button" disabled>Reject review only</button>
-              <button type="button" disabled>Retry needs auth</button>
-              <button type="button" disabled>Memory needs auth</button>
+            <div class="action-row" aria-label="Disabled review actions">
+              <button type="button" disabled aria-describedby="disabledActionReason">Accept review only</button>
+              <button type="button" disabled aria-describedby="disabledActionReason">Reject review only</button>
+              <button type="button" disabled aria-describedby="disabledActionReason">Retry needs auth</button>
+              <button type="button" disabled aria-describedby="disabledActionReason">Memory needs auth</button>
             </div>
-            <article class="decision-box">
+            <article class="decision-box" id="disabledActionReason">
               <h3>Disabled action reasons</h3>
               <p>Every command above is inert. Review decisions may be drafted here; retry, memory write, and provider contact need separate authorization.</p>
             </article>
@@ -652,7 +656,7 @@
         </section>
       </section>
 
-      <section class="panel" style="margin-top: 12px" aria-labelledby="contractTitle">
+      <section class="panel contract-panel" aria-labelledby="contractTitle">
         <div class="panel-head">
           <div>
             <p class="eyebrow">Static Data Contract</p>
@@ -661,10 +665,10 @@
           <span class="pill">display only</span>
         </div>
         <div class="panel-body">
-          <div class="table">
-            <div class="table-row"><strong>Allowed refs</strong><span>generation_plan_ref, prompt_package_ref, authorization_package_ref, review_console_ref, asset_ref, closeout_ref</span><span>visible</span></div>
-            <div class="table-row"><strong>Forbidden raw data</strong><span>raw prompt, payload, endpoint, response, private path, secret, image binary</span><span>hidden</span></div>
-            <div class="table-row"><strong>Execution state</strong><span>runtime imports, network requests, file system access, form submission, bridge calls</span><span>absent</span></div>
+          <div class="table" role="list" aria-label="Static data contract rows">
+            <div class="table-row" role="listitem"><strong>Allowed refs</strong><span>generation_plan_ref, prompt_package_ref, authorization_package_ref, review_console_ref, asset_ref, closeout_ref</span><span>visible</span></div>
+            <div class="table-row" role="listitem"><strong>Forbidden raw data</strong><span>raw prompt, payload, endpoint, response, private path, secret, image binary</span><span>hidden</span></div>
+            <div class="table-row" role="listitem"><strong>Execution state</strong><span>runtime imports, network requests, file system access, form submission, bridge calls</span><span>absent</span></div>
           </div>
         </div>
       </section>
