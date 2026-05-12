@@ -3,8 +3,8 @@
 ## Handoff Summary
 
 ```text
-Status: active A5 preflight only blocked_dirty_worktree.
-Reason: local preflight ran against AUTH-PENDING-20260512-001, but dirty worktree blocks real A5 execution.
+Status: active A5 execution attempt blocked_execution_surface_mismatch.
+Reason: AUTH-PENDING-20260512-001 approval phrase matched, but no safe callable VCPToolBox / DoubaoGen execution surface is available in the current tool surface.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
 Source baseline for v7.243: 03fd398 == origin/master at phase start
@@ -17,8 +17,8 @@ Current operating style: Single-Window 4-Agent Compact Autopilot
 ```text
 latest_completed_remote_baseline_before_v7_243: 03fd398
 latest_completed_gate_before_v7_243: v7.242_product_image_authorization_activation_gap_review_gate
-current_gate: active_a5_preflight_only_product_image_authorization
-current_gate_status: blocked_dirty_worktree
+current_gate: active_a5_execution_attempt_product_image_authorization
+current_gate_status: blocked_execution_surface_mismatch
 
 Smart Commander protocol track: stable and consolidated
 Static Review Console mockup track: quality stop reached
@@ -50,8 +50,9 @@ MVP aggregate validator calibration: completed_validated
 product image authorization draft plan-ref alignment: v7.241 completed_validated
 product image authorization activation gap review: v7.242 completed_validated
 product image active authorization package skeleton: v7.243 completed_validated
-active A5 preflight only: blocked_dirty_worktree
-recommended_next: resolve_dirty_worktree_before_a5_execution
+active A5 preflight only: passed after checkpoint bddcc5e
+active A5 execution attempt: blocked_execution_surface_mismatch
+recommended_next: provide_exact_vcptoolbox_doubaogen_execution_surface
 
 continue_A4_docs_only_by_default: false
 next_requires_human_decision_or_explicit_authorization: true
@@ -96,7 +97,7 @@ v7.243 does not authorize active A5, provider/model/plugin selection, provider c
 ## Validation Snapshot
 
 ```text
-git status -sb at active preflight: dirty from current A4.5 local docs/validator chain
+git status -sb before active execution attempt: clean, ahead 1
 git rev-parse HEAD at v7.243 start: 03fd398
 git rev-parse origin/master at v7.243 start: 03fd398
 agent_board_freshness: manually checked from exact diff
@@ -128,7 +129,7 @@ dependency/config/env modification: no
 ## Human Decisions Needed
 
 ```text
-Next action is resolve_dirty_worktree_before_a5_execution. Human authorization is still needed before provider contact, runtime integration, plugin call, image generation, tag/release/deploy, or repetitive low-value A4 gate.
+Next action is provide_exact_vcptoolbox_doubaogen_execution_surface. Human authorization is still needed before substituting a local runner, reading plugin config/env, reading real plugin source, push/tag/release/deploy, or repetitive low-value A4 gate.
 ```
 
 ## Exact Resume Prompt
@@ -141,7 +142,7 @@ Next action is resolve_dirty_worktree_before_a5_execution. Human authorization i
 当前仓库状态：
 - master should track origin/master.
 - source baseline for v7.243: 03fd398.
-- current phase: active A5 preflight only blocked_dirty_worktree.
+- current phase: active A5 execution attempt blocked_execution_surface_mismatch.
 - v7.221 mainline quality stop reached.
 - v7.222 board calibration completed.
 - v7.223 read-only value selection selected v7.224 as the only safe next task.
@@ -171,9 +172,11 @@ Next action is resolve_dirty_worktree_before_a5_execution. Human authorization i
 - v7.241 patched AUTH-DRAFT-20260512-001 with GP-DRAFT-20260512-001 / v1 without activation.
 - v7.242 classified remaining active A5 activation gaps without activation.
 - v7.243 simplified the authorization draft into a one-page preflight-pending record without execution.
-- active A5 preflight only has been run and is blocked by dirty worktree.
-- recommended_next after active preflight: resolve_dirty_worktree_before_a5_execution.
-- execution still requires safe worktree, passing fresh preflight, and a separate decision after preflight.
+- active A5 preflight passed after local checkpoint bddcc5e.
+- AUTH-PENDING-20260512-001 approval phrase matched.
+- active A5 execution is blocked because no safe callable VCPToolBox / DoubaoGen execution surface is available in the current tool surface.
+- recommended_next after active execution attempt: provide_exact_vcptoolbox_doubaogen_execution_surface.
+- execution still requires either a matching callable VCPToolBox / DoubaoGen tool entry or a separate exact local-runner authorization.
 
 不要读取真实 VCPChat/VCPToolBox。
 不要读取真实 manifest。

@@ -88,6 +88,23 @@ current_boundary:
 
 ```yaml
 latest_preflight:
+  run_id: A5-EXECUTION-ATTEMPT-20260513-001
+  result: blocked
+  result_cn: "授权语有效，但当前没有匹配的安全 VCPToolBox / DoubaoGen 调用入口"
+  blocker: execution_surface_mismatch
+  blocker_cn: "仓库中的 native Doubao runner 不是本次授权的 VCPToolBox / DoubaoGen 调用入口；历史 VCPToolBox runner 需要读取真实插件目录或 config.env，不在本次授权范围内"
+  validation_seen:
+    git_status: clean_ahead_1
+    authorization_phrase_matched: true
+    output_dir_exists: true
+    direct_plugin_call_performed: false
+    image_generated: false
+  execution_allowed_now: false
+  note_cn: "下一步需要补充一个精确的执行面：要么提供可调用的 VCPToolBox / DoubaoGen 工具入口，要么单独授权某个本地 runner 及其读取范围。"
+```
+
+```yaml
+previous_preflight:
   run_id: A5-PREFLIGHT-20260512-001
   result: blocked
   result_cn: "本地预检已执行，但当前不允许进入真实 A5 生成"
@@ -106,7 +123,7 @@ latest_preflight:
 
 ```yaml
 next_step:
-  recommended: resolve_dirty_worktree_before_a5_execution
+  recommended: provide_exact_vcptoolbox_doubaogen_execution_surface
   execute_generation_after_preflight: false
-  note: "预检已跑但被 dirty worktree 阻塞；清理或确认本地变更后需要重新跑 preflight。"
+  note: "授权语已经通过；现在缺的是匹配授权的安全执行入口，不是继续补普通草案字段。"
 ```

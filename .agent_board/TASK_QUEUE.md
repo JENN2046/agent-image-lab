@@ -9,7 +9,7 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
-Active A5 preflight only has been run for the product image authorization draft and is blocked by dirty worktree.
+AUTH-PENDING-20260512-001 approval phrase matched, but active A5 execution is blocked by execution surface mismatch.
 ```
 
 ---
@@ -60,13 +60,13 @@ none
 ### todo
 
 ```text
-1. resolve_dirty_worktree_before_a5_execution.
+1. provide_exact_vcptoolbox_doubaogen_execution_surface.
 ```
 
 ### recommended_next_after_v7_243
 
 ```text
-resolve_dirty_worktree_before_a5_execution — resolve or explicitly checkpoint the current local changes, then rerun preflight; image generation remains blocked until preflight passes and a separate execution decision is made.
+provide_exact_vcptoolbox_doubaogen_execution_surface — provide a callable VCPToolBox / DoubaoGen execution surface or separately authorize the exact local runner and its read/write scope; image generation remains blocked.
 ```
 
 ### done
@@ -113,6 +113,7 @@ resolve_dirty_worktree_before_a5_execution — resolve or explicitly checkpoint 
 39. v7.242 product image authorization activation gap review gate classified the remaining active A5 gaps while preserving all execution blockers.
 40. v7.243 product image active authorization package skeleton gate simplified the authorization draft into a one-page preflight-pending record with execute_now=false.
 41. active A5 preflight only was run and blocked by dirty worktree; no plugin call or image generation occurred.
+42. AUTH-PENDING-20260512-001 approval phrase matched, but execution was blocked because no safe callable VCPToolBox / DoubaoGen execution surface is available in the current tool surface.
 ```
 
 ### blocked

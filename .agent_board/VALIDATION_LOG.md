@@ -1,5 +1,53 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260513-A5-EXECUTION-ATTEMPT-PRODUCT-IMAGE-AUTHORIZATION
+
+Task:
+
+```text
+Attempt to route AUTH-PENDING-20260512-001 to the authorized VCPToolBox / DoubaoGen generate execution surface without substituting unauthorized local runners, reading secrets, reading real plugin source/config, writing DailyNote, writing VCP memory, pushing, tagging, or releasing.
+```
+
+Commands run:
+
+```text
+git status --short --branch
+git rev-parse HEAD
+git rev-parse origin/master
+Get-Content docs/product_image_active_authorization_package_skeleton.md
+Get-Content docs/product_image_generation_plan_draft.md
+rg --files
+Get-Content scripts/run_native_doubao_image_generation.js
+Get-Content adapters/image_generation/native_doubao_adapter.js
+Get-Content plugin_calls/image_generation/doubaogen_generate_v1.yaml
+Select-String docs/product_image_workflow_static_walkthrough.md for prompt fields
+Test-Path A:\agent-image-lab-IMAGE-OUTPUT
+```
+
+Result:
+
+```text
+blocked_execution_surface_mismatch
+```
+
+Findings:
+
+```text
+The approval phrase matches AUTH-PENDING-20260512-001 and the output directory exists. The current tool surface does not expose a safe callable VCPToolBox / DoubaoGen generate entry. The native Doubao runner is not an authorized substitute because it uses local env/config behavior and repo-scoped output assumptions; historical VCPToolBox runner paths require additional exact authorization for real plugin directory/config access. No plugin call or image generation was performed.
+```
+
+Not validated:
+
+```text
+No real VCPToolBox / DoubaoGen call was made. No output file was created. No DailyNote or VCP memory write occurred.
+```
+
+Notes:
+
+```text
+Next recommended action is provide_exact_vcptoolbox_doubaogen_execution_surface: expose a callable VCPToolBox / DoubaoGen tool entry, or separately authorize an exact local runner with explicit allowed paths, config/env handling, output root, validation, and rollback.
+```
+
 ## VALIDATION-20260512-A5-PREFLIGHT-ONLY-PRODUCT-IMAGE-AUTHORIZATION
 
 Task:

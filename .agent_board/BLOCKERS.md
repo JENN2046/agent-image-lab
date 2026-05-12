@@ -5,6 +5,7 @@
 ```text
 1. Default A4 docs-only continuation is blocked unless the next task creates clear non-redundant product value.
 2. Active A5 product image execution is blocked by dirty worktree until current local changes are made safe or explicitly checkpointed and fresh preflight passes.
+3. Active A5 product image execution is blocked by execution surface mismatch: the approval phrase matches AUTH-PENDING-20260512-001, but no safe callable VCPToolBox / DoubaoGen execution entry is available in the current tool surface. Native/local runners require additional scope such as env/config or plugin-dir access and must not be substituted silently.
 ```
 
 ## Current Mainline Quality Stop

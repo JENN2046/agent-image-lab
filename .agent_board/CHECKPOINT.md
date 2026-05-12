@@ -1,5 +1,36 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## Active A5 Execution Attempt — Product Image Authorization Draft
+
+```text
+Status: blocked_execution_surface_mismatch — approval phrase matched, no image generated
+Source baseline: bddcc5e local checkpoint, master ahead origin/master by 1
+Purpose: route AUTH-PENDING-20260512-001 to VCPToolBox / DoubaoGen without substituting unauthorized local runners
+authorization_package: AUTH-PENDING-20260512-001
+approval_phrase_matched: true
+selected_plugin_id: DoubaoGen
+selected_plugin_command: generate
+selected_plugin_model: doubao-seedream-5-0-260128
+max_plugin_calls: 1
+retry_limit: 0
+output_directory_ref: A:\agent-image-lab-IMAGE-OUTPUT
+output_directory_exists: true
+preflight_passed_before_attempt: true
+execution_result: blocked
+execution_blocker: execution_surface_mismatch
+actual_plugin_calls: 0
+image_generation: false
+output_save: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+real_manifest_read: false
+real_VCPToolBox_source_read: false
+real_plugin_config_env_read: false
+local_native_runner_substituted: false
+recommended_next: provide_exact_vcptoolbox_doubaogen_execution_surface
+```
+
 ## Active A5 Preflight Only — Product Image Authorization Draft
 
 ```text
