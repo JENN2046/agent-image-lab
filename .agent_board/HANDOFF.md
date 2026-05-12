@@ -3,8 +3,8 @@
 ## Handoff Summary
 
 ```text
-Status: active A5 diagnostic retry failed_no_image_quota_or_rate_limit.
-Reason: The newly approved DoubaoGen retry/diagnostic call was consumed once; the plugin returned error, sanitized category is quota_or_rate_limit, and no image was generated.
+Status: active A5 diagnostic retry 002 failed_no_image_repeated_quota_or_rate_limit.
+Reason: A second newly approved DoubaoGen retry/diagnostic call was consumed once; the plugin returned error again, sanitized category is still quota_or_rate_limit, and no image was generated.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
 Source baseline for v7.243: 03fd398 == origin/master at phase start
@@ -18,7 +18,7 @@ Current operating style: Single-Window 4-Agent Compact Autopilot
 latest_completed_remote_baseline_before_v7_243: 03fd398
 latest_completed_gate_before_v7_243: v7.242_product_image_authorization_activation_gap_review_gate
 current_gate: active_a5_execution_attempt_product_image_authorization
-current_gate_status: failed_no_image_quota_or_rate_limit
+current_gate_status: failed_no_image_repeated_quota_or_rate_limit
 
 Smart Commander protocol track: stable and consolidated
 Static Review Console mockup track: quality stop reached
@@ -54,7 +54,8 @@ active A5 preflight only: passed after checkpoint bddcc5e
 active A5 execution attempt: failed_no_image_no_retry
 desensitized failure analysis: inconclusive_provider_or_api_layer_failure
 active A5 diagnostic retry: failed_no_image_quota_or_rate_limit
-recommended_next: resolve_provider_quota_or_rate_limit_before_any_new_generation_attempt
+active A5 diagnostic retry 002: failed_no_image_repeated_quota_or_rate_limit
+recommended_next: resolve_provider_quota_or_rate_limit_or_switch_provider_path_before_any_new_generation_attempt
 
 continue_A4_docs_only_by_default: false
 next_requires_human_decision_or_explicit_authorization: true
@@ -118,12 +119,12 @@ node scripts/validate_runtime_prototype_suite.js: not required; no runtime proto
 real VCPChat read: no
 real VCPToolBox read: limited authorized DoubaoGen execution surface only
 real manifest read: no
-plugin call: yes, one authorized diagnostic retry
-API/provider contact: yes, via authorized DoubaoGen diagnostic retry
+plugin call: yes, two authorized diagnostic retries total
+API/provider contact: yes, via authorized DoubaoGen diagnostic retries
 DailyNote call: no
 VCP memory write: no
 image file created: no
-runtime execution: yes, authorized child process only
+runtime execution: yes, authorized child processes only
 external repository modification: no
 dependency/config/env modification: no
 ```
@@ -131,7 +132,7 @@ dependency/config/env modification: no
 ## Human Decisions Needed
 
 ```text
-Next action is resolve_provider_quota_or_rate_limit_before_any_new_generation_attempt. Human authorization is still needed before provider console/account review, any retry, raw plugin stderr/stdout review or capture, secret/config value review, push/tag/release/deploy, or repetitive low-value A4 gate.
+Next action is resolve_provider_quota_or_rate_limit_or_switch_provider_path_before_any_new_generation_attempt. Human authorization is still needed before provider console/account review, any retry, raw plugin stderr/stdout review or capture, secret/config value review, push/tag/release/deploy, or repetitive low-value A4 gate.
 ```
 
 ## Exact Resume Prompt
@@ -144,7 +145,7 @@ Next action is resolve_provider_quota_or_rate_limit_before_any_new_generation_at
 当前仓库状态：
 - master should track origin/master.
 - source baseline for v7.243: 03fd398.
-- current phase: active A5 diagnostic retry failed_no_image_quota_or_rate_limit.
+- current phase: active A5 diagnostic retry 002 failed_no_image_repeated_quota_or_rate_limit.
 - v7.221 mainline quality stop reached.
 - v7.222 board calibration completed.
 - v7.223 read-only value selection selected v7.224 as the only safe next task.
@@ -182,7 +183,8 @@ Next action is resolve_provider_quota_or_rate_limit_before_any_new_generation_at
 - retry_limit=0, so no second generation call is allowed under the consumed authorization.
 - desensitized failure analysis result: inconclusive_provider_or_api_layer_failure; exact provider error is unavailable because raw stdout/stderr was not printed or retained.
 - one newly authorized DoubaoGen retry/diagnostic call ran and returned sanitized_error_category=quota_or_rate_limit; no image was generated.
-- recommended_next after active diagnostic retry: resolve_provider_quota_or_rate_limit_before_any_new_generation_attempt.
+- a second newly authorized DoubaoGen retry/diagnostic call also returned sanitized_error_category=quota_or_rate_limit; no image was generated.
+- recommended_next after active diagnostic retry 002: resolve_provider_quota_or_rate_limit_or_switch_provider_path_before_any_new_generation_attempt.
 
 不要读取真实 VCPChat/VCPToolBox。
 不要读取真实 manifest。

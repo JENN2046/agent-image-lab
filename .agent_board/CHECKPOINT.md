@@ -1,5 +1,35 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## Active A5 DoubaoGen Diagnostic Retry 002 — Repeated Quota Or Rate Limit
+
+```text
+Status: failed_no_image_repeated_quota_or_rate_limit
+Source baseline: 2534564 local checkpoint, master ahead origin/master by 5 before retry
+Purpose: execute one newly authorized DoubaoGen retry/diagnostic call after the prior quota_or_rate_limit result
+authorization_scope: one DoubaoGen generate call, one image request, sanitized error category only, no raw stdout/stderr retention
+selected_plugin_id: DoubaoGen
+selected_plugin_command: generate
+selected_plugin_model: doubao-seedream-5-0-260128
+max_plugin_calls_consumed: 1
+retry_limit: 0
+process_exit_code: 1
+plugin_status: error
+sanitized_error_category: quota_or_rate_limit
+repeated_same_category: true
+image_generation: false
+image_count: 0
+secret_value_printed: false
+raw_stdout_printed: false
+raw_stderr_printed: false
+raw_stdout_or_stderr_retained: false
+secret_cache_removed: true
+runtime_plugin_copy_removed: true
+DailyNote_write: false
+VCP_memory_write: false
+push_tag_release: false
+recommended_next: resolve_provider_quota_or_rate_limit_or_switch_provider_path_before_any_new_generation_attempt
+```
+
 ## Active A5 DoubaoGen Diagnostic Retry — Quota Or Rate Limit
 
 ```text

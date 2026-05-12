@@ -9,7 +9,7 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
-AUTH-PENDING-20260512-001 was consumed by one approved DoubaoGen process attempt, then a separately approved single retry/diagnostic call also failed with no image. The latest sanitized error category is quota_or_rate_limit.
+AUTH-PENDING-20260512-001 was consumed by one approved DoubaoGen process attempt, then two separately approved single retry/diagnostic calls also failed with no image. The latest sanitized error category is still quota_or_rate_limit.
 ```
 
 ---
@@ -60,13 +60,13 @@ none
 ### todo
 
 ```text
-1. resolve_provider_quota_or_rate_limit_before_any_new_generation_attempt.
+1. resolve_provider_quota_or_rate_limit_or_switch_provider_path_before_any_new_generation_attempt.
 ```
 
 ### recommended_next_after_v7_243
 
 ```text
-resolve_provider_quota_or_rate_limit_before_any_new_generation_attempt — do not retry immediately; resolve provider quota/rate-limit conditions or authorize a different provider/model/account path first.
+resolve_provider_quota_or_rate_limit_or_switch_provider_path_before_any_new_generation_attempt — do not retry the same path immediately; resolve provider quota/rate-limit conditions or authorize a different provider/model/account path first.
 ```
 
 ### done
@@ -117,6 +117,7 @@ resolve_provider_quota_or_rate_limit_before_any_new_generation_attempt — do no
 43. AUTH-PENDING-20260512-001 execution surface was supplemented; one DoubaoGen process attempt ran, returned error, generated no image, and left no retained secret cache or runtime plugin copy.
 44. Desensitized failure analysis completed: the failed attempt is inconclusive provider/API-layer failure; exact provider error is unavailable because raw stdout/stderr was not printed or retained.
 45. A newly authorized DoubaoGen retry/diagnostic call ran once, returned plugin_status=error with sanitized_error_category=quota_or_rate_limit, generated no image, and left no retained secret cache or runtime plugin copy.
+46. A second newly authorized DoubaoGen retry/diagnostic call ran once, again returned plugin_status=error with sanitized_error_category=quota_or_rate_limit, generated no image, and left no retained secret cache or runtime plugin copy.
 ```
 
 ### blocked

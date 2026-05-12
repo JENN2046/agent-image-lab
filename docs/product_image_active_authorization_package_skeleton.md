@@ -165,6 +165,37 @@ diagnostic_retry_result:
   next_step_cn: "不要继续立即重试；先处理 provider 配额/限流侧问题，或另行批准切换 provider/模型/账号的诊断方案。"
 ```
 
+```yaml
+diagnostic_retry_result_002:
+  run_id: A5-DIAGNOSTIC-RETRY-20260513-002
+  result: failed_no_image
+  result_cn: "已按新的单次授权再次执行 1 次 DoubaoGen generate 重试/诊断，插件仍返回 error，脱敏错误类别仍为 quota_or_rate_limit，未生成图片。"
+  selected_plugin_id: DoubaoGen
+  selected_plugin_command: generate
+  selected_plugin_model: doubao-seedream-5-0-260128
+  max_plugin_calls_consumed: 1
+  retry_limit: 0
+  process_exit_code: 1
+  plugin_status: error
+  sanitized_error_category: quota_or_rate_limit
+  repeated_same_category: true
+  image_generated: false
+  image_count: 0
+  output_directory_ref: "A:\\agent-image-lab-IMAGE-OUTPUT"
+  overwrite_existing_files: false
+  secret_value_printed: false
+  raw_stdout_printed: false
+  raw_stderr_printed: false
+  raw_stdout_or_stderr_retained: false
+  secret_cache_removed: true
+  runtime_plugin_copy_removed: true
+  DailyNote_written: false
+  VCP_memory_written: false
+  push_tag_release: false
+  no_additional_retry_allowed_under_this_authorization: true
+  next_step_cn: "连续两次诊断均指向 quota_or_rate_limit；不要继续同账号/同模型即时重试，应先处理配额/限流或另行批准切换路径。"
+```
+
 ## 最新预检结果
 
 ```yaml
@@ -206,5 +237,5 @@ previous_preflight:
 next_step:
   recommended: resolve_provider_quota_or_rate_limit_before_any_new_generation_attempt
   execute_generation_after_preflight: false
-  note: "最新单次重试/诊断已将脱敏错误类别定位为 quota_or_rate_limit；不要继续无间隔重试。"
+  note: "连续两次单次重试/诊断均为 quota_or_rate_limit；不要继续同账号/同模型即时重试。"
 ```
