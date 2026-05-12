@@ -8,10 +8,10 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-source_head_before_v7_236: bd73eb5
-origin_master_at_v7_236_start: bd73eb5
-status: v7.236 product image workflow A5 readiness review gate
-mode: A4 docs-only readiness review
+source_head_before_v7_237: c3079d2
+origin_master_at_v7_237_start: c3079d2
+status: v7.237 product image generation authorization draft gate
+mode: A4 docs-only non-active authorization draft
 ```
 
 ## Product Direction
@@ -30,7 +30,7 @@ memory suitability decision matrix. v7.233 links these artifacts into a single
 Delivery / Review Surface Package. v7.234 turns the chain into an operator
 runbook. v7.235 validates the chain with a synthetic matte ceramic coffee mug
 walkthrough. v7.236 confirms the chain is ready for a non-active A5
-authorization draft, not active execution.
+authorization draft, not active execution. v7.237 creates that non-active draft.
 
 ## Active Boundaries
 
@@ -54,7 +54,7 @@ validation interpretation, staging, commit decisions, and next-task selection.
 
 ## Recommended Next
 
-Proceed to `v7.237_product_image_generation_authorization_draft_gate`. Create
-a non-active A5 authorization draft from the reviewed chain. Do not activate
-A5, contact providers, call plugins, generate images, save output, or write
-memory.
+Proceed to `v7.238_product_image_generation_authorization_draft_review_gate`.
+Review the non-active authorization draft for field completeness and activation
+blockers. Do not activate A5, contact providers, call plugins, generate images,
+save output, or write memory.
