@@ -193,6 +193,9 @@ v7.208 Static Mockup Decision — Continue with product copy cleanup and light s
 v7.209 Static Mockup Product Copy Cleanup — Timeline state coverage, rejected state visibility, closeout blocked-or-ready state, and disabled action reasons improved in the standalone HTML mockup.
 v7.211 Static Mockup Accessibility Review — Static accessibility/readability review completed; small patch recommended without opening runtime.
 v7.212 Static Mockup Accessibility Patch — Disabled action reasons linked, static contract grouping semantics improved, inline spacing style removed. Static mockup quality stop is ready.
+v7.214 Mainline Backlog Review — Static mockup track stopped at quality stop; next high-value A4 task selected: v10.12 provider fingerprint activation readiness review.
+v7.215 Provider Fingerprint Readiness Review — v10.12 inactive package reviewed as conditionally ready for activation briefing; no provider contact or A5 execution.
+v7.216 Provider Fingerprint Activation Briefing — Human-facing inactive package briefing created; exact future activation phrase and stop conditions summarized without activation.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3
@@ -203,7 +206,8 @@ further_stability_testing_required_now: false
 next_real_generation_requires_independent_a5: true
 smart_commander_status: portable_release_candidate_complete_support_layer
 smart_commander_next: no_new_training_gate_unless_review_proves_needed
-mainline_next_best_task: mainline_backlog_review_after_static_mockup_gate
+mainline_next_best_task: post_provider_briefing_backlog_review_gate
+provider_fingerprint_status: preparation_complete_inactive_package_stop_before_A5
 review_console_mockup_scope: static_offline_artifact_quality_stop_reached_no_runtime_no_vcp_no_plugin_provider_image_memory
 
 已经完成：
@@ -278,6 +282,7 @@ review_console_mockup_scope: static_offline_artifact_quality_stop_reached_no_run
 - v7.206 Static Review Console mockup file：创建 `review_console/static_mockups/v7_206_static_review_console_mockup.html` 离线单文件 mockup；不引用外部资产或脚本，不导入 runtime，不调用 bridge、plugin/provider、image 或 memory。
 - v7.208-v7.209 Static mockup decision and cleanup：选择 product copy cleanup + light visual polish，补齐 generation result / closeout timeline、rejected state、closeout blocked-or-ready state 和 disabled action reason；仍保持 standalone HTML、无脚本、无外链、无 runtime。
 - v7.211-v7.212 Static mockup accessibility review and patch：完成静态可访问性/可读性审查，关联 disabled action reason，改善 contract grouping 语义，并达到静态 mockup quality stop。
+- v7.214-v7.216 Provider fingerprint preparation：完成 static mockup 后主线 backlog review，选择 v10.12 provider-side prompt fingerprint capture 作为高价值 A4 准备任务；完成 readiness review 和 activation briefing，但保持 inactive，不 contact provider、不调用插件、不生成图片。
 - Runtime Review follow-up requirements audit 梳理下一步本地审片台交付需求：accepted candidate delivery package、memory completion state split、human override traceability 和 inactive authorization capsule generator。
 - Runtime Review follow-up Batch 2A/2C 在 runtime prototype 中增加 accepted candidate delivery package draft 和 human override traceability draft，并用 guard / smoke / delivery surface 校验保持 no-write。
 - Runtime Review follow-up Batch 2B 在 runtime prototype 中增加 `memory_completion_state_draft`，把写入请求、写入授权、真实执行、canonical location 校验、hash 匹配和 `plugin_success_sufficient=false` 拆开。
@@ -388,6 +393,9 @@ Photo Studio OS UI 生图生产线，以及 AI 图片评审与修正生产线。
 - `docs/v7_209_static_mockup_product_copy_cleanup_gate.md`：静态 mockup 产品文案和状态覆盖清理记录。
 - `docs/v7_211_static_mockup_accessibility_review_gate.md`：静态 mockup accessibility/readability 审查记录。
 - `docs/v7_212_static_mockup_accessibility_patch_gate.md`：静态 mockup accessibility patch 记录。
+- `docs/v7_214_mainline_backlog_review_after_static_mockup_gate.md`：static mockup quality stop 后的主线 backlog review。
+- `docs/v7_215_v10_12_provider_fingerprint_activation_readiness_review_gate.md`：v10.12 provider fingerprint inactive package readiness review。
+- `docs/v7_216_v10_12_provider_fingerprint_activation_briefing_gate.md`：v10.12 provider fingerprint future activation briefing。
 - `review_console/static_mockups/v7_206_static_review_console_mockup.html`：离线 standalone HTML mockup，仅用于本地视觉检查。
 - `docs/198_v7_46_remote_debug_relaunch_runtime_verification_record.md`：remote-debug relaunch runtime verification 脱敏记录。
 - `docs/199_v10_0_a5_end_to_end_activation_package_readiness.md`：A5 end-to-end activation package readiness 与 preflight-blocked 脱敏记录。
