@@ -188,6 +188,7 @@ v7.201 Smart Commander Reuse Package Index — Reusable artifacts, templates, st
 v7.202 Smart Commander External Adoption Readiness — Minimum adoption requirements, suitable profiles, migration steps, rollback plan, and risk checklist defined.
 v7.203 Smart Commander Portable Release Candidate — Portable release candidate manifest completed. Optional export remains non-blocking; Agent Image Lab mainline returns to Review Console/product workflow work.
 v7.205 Static Review Console Mockup Spec — Product mainline re-entered after Smart Commander support work. Static Review Console mockup information architecture, panels, states, data contract, and no-execution boundary defined.
+v7.206 Static Review Console Mockup File — Isolated standalone HTML mockup created under review_console/static_mockups/. No external assets, scripts, runtime imports, bridge calls, provider/plugin/image/memory actions.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3
@@ -198,8 +199,8 @@ further_stability_testing_required_now: false
 next_real_generation_requires_independent_a5: true
 smart_commander_status: portable_release_candidate_complete_support_layer
 smart_commander_next: no_new_training_gate_unless_review_proves_needed
-mainline_next_best_task: static_review_console_mockup_file_gate
-review_console_mockup_scope: static_offline_artifact_only_if_separately_authorized_no_runtime_no_vcp_no_plugin_provider_image_memory
+mainline_next_best_task: static_mockup_visual_polish_or_pause_decision_gate
+review_console_mockup_scope: static_offline_artifact_created_no_runtime_no_vcp_no_plugin_provider_image_memory
 
 已经完成：
 
@@ -270,6 +271,7 @@ review_console_mockup_scope: static_offline_artifact_only_if_separately_authoriz
 - v10.28 DailyNote canonical location guard 固化后续写入成功判定：`plugin_success_sufficient=false`，必须通过 canonical file 存在和 hash 匹配后才能标记 memory write complete。
 - v7.199-v7.203 Smart Commander 支持层收束：AGENTS 精简固化、portable protocol、reuse index、external adoption readiness 和 portable release candidate 已完成；这条线不授权 A5、runtime、plugin/provider、image 或 memory，也不阻塞 Agent Image Lab 主线。
 - v7.205 Static Review Console mockup spec：回到产品主线，定义静态 Review Console mockup 的信息架构、区域规格、静态数据契约、交互说明、review states 和 no-execution 边界；不创建 renderer/preload/IPC/runtime 代码。
+- v7.206 Static Review Console mockup file：创建 `review_console/static_mockups/v7_206_static_review_console_mockup.html` 离线单文件 mockup；不引用外部资产或脚本，不导入 runtime，不调用 bridge、plugin/provider、image 或 memory。
 - Runtime Review follow-up requirements audit 梳理下一步本地审片台交付需求：accepted candidate delivery package、memory completion state split、human override traceability 和 inactive authorization capsule generator。
 - Runtime Review follow-up Batch 2A/2C 在 runtime prototype 中增加 accepted candidate delivery package draft 和 human override traceability draft，并用 guard / smoke / delivery surface 校验保持 no-write。
 - Runtime Review follow-up Batch 2B 在 runtime prototype 中增加 `memory_completion_state_draft`，把写入请求、写入授权、真实执行、canonical location 校验、hash 匹配和 `plugin_success_sufficient=false` 拆开。
@@ -375,6 +377,8 @@ Photo Studio OS UI 生图生产线，以及 AI 图片评审与修正生产线。
 - `docs/v7_202_smart_commander_external_adoption_readiness_gate.md`：Smart Commander 外部项目采用 readiness 评估。
 - `docs/v7_203_smart_commander_portable_release_candidate_gate.md`：Smart Commander portable release candidate manifest；后续 optional export 非主线阻塞项。
 - `docs/v7_205_static_review_console_mockup_spec_gate.md`：静态 Review Console mockup 规格门，定义 surface/app 层 mockup 信息架构和禁止执行边界。
+- `docs/v7_206_static_review_console_mockup_file_gate.md`：静态 Review Console mockup 文件创建门。
+- `review_console/static_mockups/v7_206_static_review_console_mockup.html`：离线 standalone HTML mockup，仅用于本地视觉检查。
 - `docs/198_v7_46_remote_debug_relaunch_runtime_verification_record.md`：remote-debug relaunch runtime verification 脱敏记录。
 - `docs/199_v10_0_a5_end_to_end_activation_package_readiness.md`：A5 end-to-end activation package readiness 与 preflight-blocked 脱敏记录。
 - `docs/200_v10_1_a5_resume_after_external_worktree_reconciliation.md`：A5 外部工作树清理后恢复 preflight 的脱敏接续记录。

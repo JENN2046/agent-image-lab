@@ -18,7 +18,7 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup spec complete (v7.205)
+v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup artifact complete (v7.205→v7.206)
 ```
 
 当前工作分支：
@@ -96,6 +96,7 @@ master tracking origin/master
 - v10.28 DailyNote canonical location guard：固化后续 DailyNote 写入成功判定，要求 canonical file 存在和 hash 匹配，插件 `success` 不能单独判定完成。
 - v7.199-v7.203 Smart Commander 支持层收束：AGENTS 精简固化、portable protocol、reuse package index、external adoption readiness 和 portable release candidate 已完成；该支线只改善本地 docs-only 指挥/审查/提交模型，不授权 A5、runtime、plugin/provider、image 或 memory，不再作为主线继续调教。
 - v7.205 Static Review Console mockup spec：回到产品主线，完成静态 Review Console mockup 的 screen inventory、region specification、static data contract、interaction specification、review states 和 no-execution 边界；仍不创建 renderer/preload/IPC/runtime 代码。
+- v7.206 Static Review Console mockup file：创建离线 standalone HTML mockup `review_console/static_mockups/v7_206_static_review_console_mockup.html`；仅供本地视觉检查，不引用外部资产或脚本，不导入 runtime，不接 VCPChat/VCPToolBox。
 - Runtime Review follow-up requirements audit：梳理审片台下一步本地交付需求，优先处理 accepted candidate delivery package draft 和 memory completion state split。
 - Runtime Review follow-up Batch 2A/2C：在 runtime prototype 中实现 accepted candidate delivery package draft 和 human override traceability draft，并把 no-write guard、UI、session export、smoke 和 delivery surface validation 同步。
 - Runtime Review follow-up Batch 2B：在 runtime prototype 中实现 memory completion state split，把写入请求、写入授权、真实执行、canonical location 校验、hash 匹配和 `plugin_success_sufficient=false` 拆开。
@@ -155,7 +156,7 @@ master tracking origin/master
 - 正式 release 发布仍需单独授权（tag 策略已定义：`docs/233_tag_and_version_strategy.md`）。
 - 后续更多真实图片生成需新 A5 授权包（Phase F 已消耗 2/2 calls，双图 accepted）。
 - commit/tag 可自动执行；push/PR/release 需 active version-action package。
-- 静态 Review Console mockup spec 已完成；下一条 A4 docs-only 主线是 v7.206 static mockup file gate，但必须只创建离线静态 artifact，且需保持 no-runtime、no-VCP、no-plugin/provider、no-image-generation、no-memory-write。
+- 静态 Review Console mockup spec 和离线 artifact 已完成；下一条 A4 主线应判断是否进行静态视觉 polish、产品 copy cleanup，或在进入任何 runtime-oriented work 前暂停。
 
 ## 阶段路线
 
