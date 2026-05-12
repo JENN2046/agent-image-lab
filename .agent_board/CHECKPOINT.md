@@ -1,5 +1,28 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## Active A5 DoubaoGen Desensitized Failure Analysis
+
+```text
+Status: completed_inconclusive_provider_or_api_layer_failure
+Source baseline: 4326212 local checkpoint, master ahead origin/master by 3 before analysis
+Purpose: classify the failed DoubaoGen attempt without reading or recording secrets and without another plugin call
+authorization_scope: desensitized failure category and plugin return status only
+authorization_package: AUTH-PENDING-20260512-001 follow-up failure analysis
+plugin_status_retained: error
+image_count_retained: 0
+exact_provider_error_available: false
+exact_provider_error_reason: raw stdout/stderr was not printed or retained
+ruled_out: output_directory_not_empty, missing_prompt, invalid_json_input, image_file_write_failure, retained_secret_cache, retained_runtime_plugin_copy
+possible_causes: credential_auth_failed, quota_or_rate_limit, model_or_parameter_rejected, network_or_provider_error, provider_response_parse_error
+plugin_retried: false
+image_generation: false
+DailyNote_write: false
+VCP_memory_write: false
+secret_value_read_or_recorded: false
+push_tag_release: false
+recommended_next: request_new_retry_authorization_with_desensitized_error_capture
+```
+
 ## Active A5 DoubaoGen Execution Attempt — Failed No Image
 
 ```text

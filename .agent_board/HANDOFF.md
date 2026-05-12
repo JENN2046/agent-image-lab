@@ -3,8 +3,8 @@
 ## Handoff Summary
 
 ```text
-Status: active A5 execution attempt failed_no_image_no_retry.
-Reason: AUTH-PENDING-20260512-001 was consumed by one approved DoubaoGen process attempt; the plugin returned error and no image was generated.
+Status: active A5 execution attempt failed_no_image_no_retry; desensitized failure analysis completed.
+Reason: AUTH-PENDING-20260512-001 was consumed by one approved DoubaoGen process attempt; the plugin returned error and no image was generated. Follow-up analysis can only classify the failure as inconclusive provider/API-layer failure because raw stdout/stderr was not retained.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
 Source baseline for v7.243: 03fd398 == origin/master at phase start
@@ -18,7 +18,7 @@ Current operating style: Single-Window 4-Agent Compact Autopilot
 latest_completed_remote_baseline_before_v7_243: 03fd398
 latest_completed_gate_before_v7_243: v7.242_product_image_authorization_activation_gap_review_gate
 current_gate: active_a5_execution_attempt_product_image_authorization
-current_gate_status: failed_no_image_no_retry
+current_gate_status: failed_no_image_no_retry_failure_analysis_inconclusive
 
 Smart Commander protocol track: stable and consolidated
 Static Review Console mockup track: quality stop reached
@@ -52,7 +52,8 @@ product image authorization activation gap review: v7.242 completed_validated
 product image active authorization package skeleton: v7.243 completed_validated
 active A5 preflight only: passed after checkpoint bddcc5e
 active A5 execution attempt: failed_no_image_no_retry
-recommended_next: analyze_failed_doubaogen_attempt_or_request_new_retry_authorization
+desensitized failure analysis: inconclusive_provider_or_api_layer_failure
+recommended_next: request_new_retry_authorization_with_desensitized_error_capture
 
 continue_A4_docs_only_by_default: false
 next_requires_human_decision_or_explicit_authorization: true
@@ -129,7 +130,7 @@ dependency/config/env modification: no
 ## Human Decisions Needed
 
 ```text
-Next action is analyze_failed_doubaogen_attempt_or_request_new_retry_authorization. Human authorization is still needed before any retry, raw plugin stderr/stdout review, secret/config value review, push/tag/release/deploy, or repetitive low-value A4 gate.
+Next action is request_new_retry_authorization_with_desensitized_error_capture. Human authorization is still needed before any retry, raw plugin stderr/stdout review or capture, secret/config value review, push/tag/release/deploy, or repetitive low-value A4 gate.
 ```
 
 ## Exact Resume Prompt
@@ -142,7 +143,7 @@ Next action is analyze_failed_doubaogen_attempt_or_request_new_retry_authorizati
 当前仓库状态：
 - master should track origin/master.
 - source baseline for v7.243: 03fd398.
-- current phase: active A5 execution attempt failed_no_image_no_retry.
+- current phase: active A5 execution attempt failed_no_image_no_retry_failure_analysis_inconclusive.
 - v7.221 mainline quality stop reached.
 - v7.222 board calibration completed.
 - v7.223 read-only value selection selected v7.224 as the only safe next task.
@@ -178,7 +179,8 @@ Next action is analyze_failed_doubaogen_attempt_or_request_new_retry_authorizati
 - one DoubaoGen process attempt ran and returned error; no image was generated.
 - secret cache and runtime plugin copy were removed after failure.
 - retry_limit=0, so no second generation call is allowed under the consumed authorization.
-- recommended_next after active execution attempt: analyze_failed_doubaogen_attempt_or_request_new_retry_authorization.
+- desensitized failure analysis result: inconclusive_provider_or_api_layer_failure; exact provider error is unavailable because raw stdout/stderr was not printed or retained.
+- recommended_next after active execution attempt: request_new_retry_authorization_with_desensitized_error_capture.
 
 不要读取真实 VCPChat/VCPToolBox。
 不要读取真实 manifest。

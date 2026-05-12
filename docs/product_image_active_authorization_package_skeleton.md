@@ -107,6 +107,32 @@ latest_execution_result:
   note_cn: "retry_limit=0，本授权下不允许再次调用；如果要继续，需要新的失败分析或重试授权。"
 ```
 
+## 脱敏失败分析
+
+```yaml
+failure_analysis:
+  analysis_id: A5-FAILURE-ANALYSIS-20260513-001
+  result: inconclusive_provider_or_api_layer_failure
+  result_cn: "可判断为插件进入 provider/API 调用路径后失败，但无法在不读取原始错误的前提下确认具体原因"
+  ruled_out:
+    - "output_directory_not_empty"
+    - "missing_prompt"
+    - "invalid_json_input"
+    - "image_file_write_failure"
+    - "retained_secret_cache"
+    - "retained_runtime_plugin_copy"
+  possible_causes:
+    - "credential_auth_failed"
+    - "quota_or_rate_limit"
+    - "model_or_parameter_rejected"
+    - "network_or_provider_error"
+    - "provider_response_parse_error"
+  exact_error_available_now: false
+  reason_exact_error_unavailable_cn: "原始 stdout/stderr 未打印也未保留，符合本次安全约束"
+  retry_allowed_under_current_authorization: false
+  next_step_cn: "现有证据分析已结束；如需继续，必须批准新的单次重试/诊断包，并明确允许只采集脱敏错误类别。"
+```
+
 ## 最新预检结果
 
 ```yaml

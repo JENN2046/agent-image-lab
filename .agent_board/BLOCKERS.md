@@ -7,6 +7,7 @@
 2. Active A5 product image execution is blocked by dirty worktree until current local changes are made safe or explicitly checkpointed and fresh preflight passes.
 3. Active A5 product image execution is blocked by execution surface mismatch: the approval phrase matches AUTH-PENDING-20260512-001, but no safe callable VCPToolBox / DoubaoGen execution entry is available in the current tool surface. Native/local runners require additional scope such as env/config or plugin-dir access and must not be substituted silently.
 4. AUTH-PENDING-20260512-001 has been consumed by one DoubaoGen process attempt. It failed with no image, and retry_limit=0 blocks another generation call without a new explicit retry authorization.
+5. Exact DoubaoGen provider root cause is unavailable from retained evidence because raw stdout/stderr was not printed or retained; only an inconclusive provider/API-layer failure category can be recorded.
 ```
 
 ## Current Mainline Quality Stop

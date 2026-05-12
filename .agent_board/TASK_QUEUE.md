@@ -9,7 +9,7 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
-AUTH-PENDING-20260512-001 was consumed by one approved DoubaoGen process attempt. The plugin returned error, no image was generated, and retry_limit=0 blocks another call under this authorization.
+AUTH-PENDING-20260512-001 was consumed by one approved DoubaoGen process attempt. The plugin returned error, no image was generated, retry_limit=0 blocks another call under this authorization, and desensitized failure analysis could only classify the failure as inconclusive provider/API-layer failure.
 ```
 
 ---
@@ -60,13 +60,13 @@ none
 ### todo
 
 ```text
-1. analyze_failed_doubaogen_attempt_or_request_new_retry_authorization.
+1. request_new_retry_authorization_with_desensitized_error_capture.
 ```
 
 ### recommended_next_after_v7_243
 
 ```text
-analyze_failed_doubaogen_attempt_or_request_new_retry_authorization — perform read-only failure analysis without secrets, or request a new explicit retry package; image generation remains blocked.
+request_new_retry_authorization_with_desensitized_error_capture — if continuing, authorize one new retry/diagnostic package that captures only sanitized error category and plugin status; image generation remains blocked until that package exists.
 ```
 
 ### done
@@ -115,6 +115,7 @@ analyze_failed_doubaogen_attempt_or_request_new_retry_authorization — perform 
 41. active A5 preflight only was run and blocked by dirty worktree; no plugin call or image generation occurred.
 42. AUTH-PENDING-20260512-001 approval phrase matched, but execution was blocked because no safe callable VCPToolBox / DoubaoGen execution surface is available in the current tool surface.
 43. AUTH-PENDING-20260512-001 execution surface was supplemented; one DoubaoGen process attempt ran, returned error, generated no image, and left no retained secret cache or runtime plugin copy.
+44. Desensitized failure analysis completed: the failed attempt is inconclusive provider/API-layer failure; exact provider error is unavailable because raw stdout/stderr was not printed or retained.
 ```
 
 ### blocked
