@@ -1,5 +1,42 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.228 Product Image Prompt Package Template Instance Gate
+
+```text
+Status: completed_validated — A4 docs-only product template instance planning
+Source baseline: 5f31426 == origin/master at phase start
+Purpose: create the first fillable non-executing product image prompt package instance template from the v7.227 taskbook
+prompt_package_instance_template_created: true
+executable_generation_request_created: false
+A5_generation_authorization_required_later: true
+human_review_handoff_created: true
+memory_suitability_handoff_created: true
+recommended_next: v7.229_prompt_package_human_review_checklist_gate
+README_updated: true
+roadmap_updated: true
+project_master_plan_updated: true
+handoff_updated: true
+run_state_updated: true
+task_queue_updated: true
+checkpoint_updated: true
+validation_log_updated: true
+agent_board_STATE_json_modified: false
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+VCPChat_runtime: false
+VCPToolBox_runtime: false
+real_manifest_read: false
+CDP_bridge_MCP: false
+production_candidate_002_started: false
+batch_005_started: false
+validation: git diff --check passed; exact diff reviewed; node scripts/validate_agent_board_state.js passed
+```
+
 ## v7.227 Prompt Package Builder Taskbook Gate
 
 ```text

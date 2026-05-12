@@ -1,5 +1,40 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260512-V7-228-PROMPT-PACKAGE-INSTANCE-TEMPLATE
+
+Task:
+
+```text
+Create the first fillable non-executing product image prompt package instance template from the v7.227 taskbook.
+```
+
+Commands run:
+
+```text
+git status -sb
+git diff --check
+git diff -- README.md PROJECT_MASTER_PLAN.md docs/00_project_roadmap.md docs/v7_228_product_image_prompt_package_template_instance_gate.md prompt_templates/product_image_prompt_package_instance_template.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
+node scripts/validate_agent_board_state.js
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+v7.228 creates a fillable prompt package instance template with brief intake, product identity, shot intent, visual direction, positive prompt draft, negative constraints, acceptance criteria, human review checklist, A5 handoff, and memory suitability sections. It does not authorize A5, provider contact, runtime, plugin calls, image generation, DailyNote write, VCP memory write, CDP, bridge, MCP, production_candidate_002, Batch 005, tag, release, or deploy.
+```
+
+Notes:
+
+```text
+The next recommended phase is v7.229_prompt_package_human_review_checklist_gate.
+```
+
 ## VALIDATION-20260512-V7-227-PROMPT-PACKAGE-BUILDER-TASKBOOK
 
 Task:

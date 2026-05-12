@@ -9,7 +9,7 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
-Complete v7.227 prompt package builder taskbook gate and route the next phase to a concrete non-executing prompt package instance task.
+Complete v7.228 product image prompt package template instance gate and route the next phase to human review readiness.
 ```
 
 ---
@@ -60,13 +60,13 @@ none
 ### todo
 
 ```text
-1. v7.228_product_image_prompt_package_template_instance_gate.
+1. v7.229_prompt_package_human_review_checklist_gate.
 ```
 
-### recommended_next_after_v7_227
+### recommended_next_after_v7_228
 
 ```text
-v7.228_product_image_prompt_package_template_instance_gate — create the first non-executing product image prompt package instance template from the v7.227 taskbook.
+v7.229_prompt_package_human_review_checklist_gate — define the human review checklist and status taxonomy for prompt package instances before A5 authorization.
 ```
 
 ### done
@@ -95,6 +95,7 @@ v7.228_product_image_prompt_package_template_instance_gate — create the first 
 21. v7.225 balanced codex exec Worker/Verifier contract patch completed_validated.
 22. v7.226 image workflow product return gate selected Prompt Package Builder as the next unique route.
 23. v7.227 prompt package builder taskbook gate created the schema, reusable taskbook, human review handoff, A5 authorization handoff, and memory suitability handoff.
+24. v7.228 product image prompt package template instance gate created the fillable non-executing instance template.
 ```
 
 ### blocked
@@ -109,6 +110,7 @@ v7.228_product_image_prompt_package_template_instance_gate — create the first 
 7. v7.225 does not authorize A5/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
 8. v7.226 does not authorize A5/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
 9. v7.227 does not authorize A5/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
+10. v7.228 does not authorize A5/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
 ```
 
 ### skipped

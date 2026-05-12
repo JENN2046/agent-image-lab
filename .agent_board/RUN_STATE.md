@@ -9,32 +9,32 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab is in v7.227 prompt package builder taskbook gate. The goal is to define the Product Image Prompt Package Builder schema, reusable taskbook, and handoff surfaces without generation.
+Agent Image Lab is in v7.228 product image prompt package template instance gate. The goal is to create the first fillable non-executing prompt package instance template without generation.
 ```
 
 ## Current Phase
 
 ```text
-v7.227 — Prompt Package Builder Taskbook Gate
+v7.228 — Product Image Prompt Package Template Instance Gate
 status: completed_validated
-source_commit: dbc5043
-source_message: docs: add image workflow product return gate
+source_commit: 5f31426
+source_message: docs: add prompt package builder taskbook
 branch: master tracking origin/master
-Worktree: clean at v7.227 start
+Worktree: clean at v7.228 start
 worktree_start_clean: true
-origin_sync_start: local HEAD equals origin/master at dbc5043
+origin_sync_start: local HEAD equals origin/master at 5f31426
 ```
 
 ## Current Task
 
 ```text
-Create the product image prompt package builder taskbook/schema/handoff without entering A5, runtime, provider contact, plugin call, image generation, or memory write.
+Create the product image prompt package instance template without entering A5, runtime, provider contact, plugin call, image generation, or memory write.
 ```
 
 ## Current Local Work State
 
 ```text
-Worktree: clean at v7.227 start; prompt package builder taskbook completed_validated
+Worktree: clean at v7.228 start; prompt package instance template completed_validated
 active_workers: 0
 execution_mode: Single-Window 4-Agent Compact Autopilot
 commander_role: calibrate state and decide whether there is a next valuable task
@@ -58,7 +58,8 @@ Balanced codex exec role contracts: v7.225 completed_validated
 Image workflow product return: v7.226 completed_validated
 Recommended unique route: prompt_package_builder
 Prompt Package Builder taskbook: v7.227 completed_validated
-Recommended next product task: v7.228_product_image_prompt_package_template_instance_gate
+Prompt Package Instance template: v7.228 completed_validated
+Recommended next product task: v7.229_prompt_package_human_review_checklist_gate
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```
@@ -74,6 +75,7 @@ v7_224a_is_rule_hardening_only: true
 v7_225_is_governance_minimal_patch_only: true
 v7_226_is_product_return_only: true
 v7_227_is_prompt_package_builder_taskbook_only: true
+v7_228_is_prompt_package_instance_template_only: true
 
 Validator Governance Chain v1: closed
 batch_005_allowed_now: false
@@ -88,8 +90,8 @@ tag/release/deploy remain blocked without explicit authorization and preflight
 ## Current Options
 
 ```text
-recommended_next_after_v7_227: v7.228_product_image_prompt_package_template_instance_gate
-purpose: create the first non-executing product image prompt package instance template from the v7.227 taskbook
+recommended_next_after_v7_228: v7.229_prompt_package_human_review_checklist_gate
+purpose: define the human review checklist and status taxonomy for prompt package instances before A5 authorization
 not_allowed_as_next_by_default: A5, provider contact, runtime, plugin call, image generation, memory write, tag, release
 ```
 
@@ -101,9 +103,10 @@ source baseline for v7.224a: cdd39c3
 source baseline for v7.225: a8f3d70
 source baseline for v7.226: cbe3fc6
 source baseline for v7.227: dbc5043
+source baseline for v7.228: 5f31426
 git status -sb at phase start: clean
-git rev-parse HEAD at phase start: dbc5043
-git rev-parse origin/master at phase start: dbc5043
+git rev-parse HEAD at phase start: 5f31426
+git rev-parse origin/master at phase start: 5f31426
 agent_board_freshness: passed
 git diff --check: passed
 rule_intake_smoke_test_performed: true
@@ -135,6 +138,6 @@ external repository modification: no
 
 ```text
 Use the calibrated board as the current navigation source.
-v7.227 created the Prompt Package Builder taskbook/schema/handoff. Continue only with v7.228_product_image_prompt_package_template_instance_gate or a user-approved alternative.
-Before continuing after v7.227, verify branch, worktree, and local/remote sync from Git output.
+v7.228 created the fillable non-executing prompt package instance template. Continue only with v7.229_prompt_package_human_review_checklist_gate or a user-approved alternative.
+Before continuing after v7.228, verify branch, worktree, and local/remote sync from Git output.
 ```

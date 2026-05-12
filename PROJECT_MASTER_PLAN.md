@@ -8,10 +8,10 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-source_head_before_v7_227: dbc5043
-origin_master_at_v7_227_start: dbc5043
-status: v7.227 prompt package builder taskbook gate
-mode: A4 docs-only product taskbook / prompt package schema planning
+source_head_before_v7_228: 5f31426
+origin_master_at_v7_228_start: 5f31426
+status: v7.228 product image prompt package template instance gate
+mode: A4 docs-only product template instance planning
 ```
 
 ## Product Direction
@@ -20,6 +20,8 @@ Agent Image Lab remains a VCP-native visual production orchestration layer.
 The product mainline has returned to image workflow planning. The Prompt Package
 Builder now defines the first controllable artifact before generation
 authorization or provider contact: a reviewable product image prompt package.
+v7.228 adds the fillable instance template for that package without creating a
+real generation task.
 
 ## Active Boundaries
 
@@ -43,7 +45,6 @@ validation interpretation, staging, commit decisions, and next-task selection.
 
 ## Recommended Next
 
-Proceed to `v7.228_product_image_prompt_package_template_instance_gate`. Create
-the first non-executing prompt package instance template from the v7.227
-taskbook. Do not create another governance-only gate unless it resolves a
-concrete blocker discovered during product work.
+Proceed to `v7.229_prompt_package_human_review_checklist_gate`. Define the
+human review checklist and status taxonomy for prompt package instances before
+any A5 generation authorization.
