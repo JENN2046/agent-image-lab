@@ -2,14 +2,14 @@
 
 Persistent task queue for guarded local work.
 
-This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin calls, DailyNote writes, API calls, pushes, tags, releases, dependency changes, destructive commands, or writes outside the workspace root.
+This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin calls, DailyNote writes, API calls, image creation, VCP memory writes, pushes, tags, releases, dependency changes, destructive commands, or writes outside the workspace root.
 
 ---
 
 ## Current Mission
 
 ```text
-Post-closeout state. Validator Governance Chain v1 closed (106→0, 4 batches clean_closed). v7.170 patch implementation completed. Next major route not selected.
+Finalize .agent_board calibration after v7.221 mainline quality stop and before any further autopilot progression.
 ```
 
 ---
@@ -18,6 +18,7 @@ Post-closeout state. Validator Governance Chain v1 closed (106→0, 4 batches cl
 
 ```text
 A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
+Single-Window 4-Agent Compact Autopilot
 ```
 
 ---
@@ -30,16 +31,21 @@ Stop before:
 - real VCPToolBox read without a concrete active authorization package and passing preflight
 - real manifest read without a concrete active authorization package and passing preflight
 - config/env/log/secret read
-- raw source copy from external repos
+- raw source copy from external repositories
 - IPC / preload / renderer implementation in VCPChat
 - executable Adapter implementation
 - plugin/API/DailyNote call without a concrete active authorization package and passing preflight
 - image file creation without a concrete active authorization package and passing preflight
 - VCP memory write without a concrete active authorization package and passing preflight
-- push / PR / merge / tag / release without a concrete active version-action package and passing preflight
+- push / PR / merge / tag / release without a concrete active version-action package, standing authorization, and passing preflight
 - dependency change without a concrete active dependency-change package and passing preflight
 - write outside workspace root without a concrete active external-write package and passing preflight
-- A5 — Autonomous Production Execution without an active explicit authorization package and passing preflight
+- A5 production action without an active authorization package and passing preflight
+
+```text
+production actions remain blocked
+active authorization package required for A5
+```
 
 ---
 
@@ -48,27 +54,47 @@ Stop before:
 ### in_progress
 
 ```text
-none — v7.170 patch implementation completed
+1. Commit and, if preflight passes, push .agent_board current-state calibration after v7.221
 ```
 
 ### todo
 
 ```text
-1. Recommended: authorize v7.171 Patch Static Review and Syntax Validation Gate
+1. Commander: commit board calibration if no unrelated changes are included.
+2. Commander: after commit, perform guarded push preflight and push only if standing authorization remains valid and all push safety gates pass.
+```
+
+### next_candidates_after_calibration
+
+```text
+1. provider fingerprint A5 activation package — requires explicit A5 provider-contact authorization; not automatic.
+2. Review Console runtime integration package — requires explicit runtime authorization; not automatic.
+3. tag/release readiness action — requires explicit version-action authorization; not automatic.
+4. new A4 docs/static task — allowed only if commander value test proves a non-redundant product gap.
 ```
 
 ### done
 
 ```text
-1. v7.168 Post-Closeout Code Surface Review (A0 read-only) — 28 files inspected, 3 P1/4 P2/2 P3 findings.
-2. v7.169 Agent Board and Validator Patch Gate (docs-only) — 5 repair scopes defined, implementation not authorized.
-3. v7.170 Agent Board and Validator Patch Implementation — 5/5 scopes executed, node --check passed, committed and pushed.
+1. v7.187-v7.203 Smart Commander protocol track consolidated and made portable.
+2. v7.205-v7.213 Static Review Console mockup track reached quality stop.
+3. v7.214-v7.221 mainline/provider/release readiness reviews reached quality stop.
+4. Validator Governance Chain v1: closed.
+5. batch_005_allowed_now: false.
+6. production_candidate_002_allowed_now: false.
+7. memory_write_path_allowed_now: false.
+8. .agent_board current-state calibration content updated.
+9. git diff --check passed.
+10. node scripts/validate_agent_board_state.js passed.
 ```
 
 ### blocked
 
 ```text
-1. Next major route not selected. Batch 005 not allowed. production_candidate_002 not allowed. memory_write_path not allowed. Real execution requires fresh explicit authorization.
+1. A5 provider contact is blocked until explicit matching authorization.
+2. Runtime integration is blocked until explicit matching authorization.
+3. Tag/release is blocked until explicit matching authorization and preflight.
+4. Repetitive A4 docs-only gates are blocked unless they create new product value.
 ```
 
 ### skipped

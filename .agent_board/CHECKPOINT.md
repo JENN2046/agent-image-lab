@@ -1,5 +1,31 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.222 Agent Board Current-State Calibration
+
+```text
+Status: completed_validated — board calibration before further autopilot progression
+Reason: .agent_board still reflected v7.170 as the active route even though master had advanced to v7.221.
+Source baseline: c605bd7 == origin/master before board calibration
+Latest completed phase: v7.221 Mainline Quality Stop
+Current board correction:
+  - RUN_STATE reset to current v7.221 mainline quality stop
+  - TASK_QUEUE reset to board calibration and post-calibration decision options
+  - HANDOFF reset to current resume prompt
+  - BLOCKERS reset to current quality stop and authorization gates
+  - DECISIONS updated with board recalibration and quality-stop decisions
+Validator Governance Chain v1: closed
+batch_005_allowed_now: false
+production_candidate_002_allowed_now: false
+memory_write_path_allowed_now: false
+real VCPChat read: no
+real VCPToolBox read: no
+real manifest read: no
+plugin/API/DailyNote/VCP memory/image action: no
+runtime execution: no
+Validation: git diff --check passed; node scripts/validate_agent_board_state.js passed
+Next: commit if clean, then guarded push preflight only if a local commit exists and standing authorization remains valid.
+```
+
 ## v7.169 Agent Board and Validator Patch Gate
 
 ```text

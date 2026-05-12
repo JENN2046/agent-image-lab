@@ -3,39 +3,51 @@
 ## Active Blockers
 
 ```text
-none
+1. Default A4 docs-only continuation is blocked unless the next task creates clear non-redundant product value.
+```
+
+## Current Mainline Quality Stop
+
+```text
+latest_quality_stop: v7.221
+latest_synced_commit_before_board_calibration: c605bd7
+continue_A4_docs_only_by_default: false
+next_requires_new_value_or_explicit_authorization: true
 ```
 
 ## Standing External-Read Gate
 
 ```text
-Real VCPChat / VCPToolBox reads are blocked until the user provides explicit authorization with exact paths, allowed file list, allowed excerpts, forbidden excerpts, reviewer, and stop conditions.
+Real VCPChat, real VCPToolBox, and real manifest reads are blocked until the user provides explicit authorization with exact paths, allowed file list, allowed excerpts, forbidden excerpts, reviewer, and stop conditions.
 ```
 
 ## Standing Remote-Action Gate
 
 ```text
-Guarded local commits are authorized by standing user instruction when all project auto-commit conditions pass. Tag, push, release, PR, merge, or remote issue changes still require explicit separate authorization.
+Guarded local commits are authorized only when all project auto-commit conditions pass. Push, tag, release, PR, merge, or remote issue changes require explicit separate authorization, standing authorization, and passing preflight.
 ```
 
 ## Standing Real-Execution Gate
 
 ```text
-Plugin calls, API calls, DailyNote writes, VCP memory writes, image creation, and executable Adapter entrypoints require explicit separate authorization.
+Plugin calls, API calls, DailyNote writes, VCP memory writes, image creation, runtime execution, and executable Adapter entrypoints require explicit separate authorization.
 ```
 
 ## Standing A5 Production-Execution Gate
 
 ```text
-Without an active A5 authorization package, production actions remain blocked. A5 authorization must name exact target systems, allowed paths or objects, allowed commands or operations, forbidden operations, write boundaries, validation requirements, rollback path, reviewer, and stop conditions.
-Historical v7.42/v7.43 status: execution remains blocked for the inactive authorization package template and dry-run-only script creation phases.
-Current v10.28 status: v10.25 completed one real DailyNote/VCP memory write through DailyNoteWrite; v10.26 completed local closeout; v10.27 corrected the future DailyNoteWrite root classification from plugin_dir_dailynote to vcp_root_dailynote, without rerunning DailyNoteWrite, completed_root_path_corrected; v10.28 records that plugin success alone is insufficient and canonical target hash match is required. The single write authorization is consumed. Do not read real DoubaoGen/config again, execute another capture, call plugin/API/DailyNote again, write VCP memory again, create additional images, commit, tag, push, PR, or release until the user explicitly authorizes a new real generation, memory-write, or version action.
+Without an active authorization package, production actions remain blocked. A5 authorization must name exact target systems, allowed paths or objects, allowed commands or operations, forbidden operations, write boundaries, validation requirements, rollback path, reviewer, and stop conditions.
 ```
 
-## Standing Remote-Debug Relaunch Gate
+## Historical Closed Gates
 
 ```text
-The real scripts/run_vcpchat_review_console_remote_debug_smoke.ps1 file exists as a dry-run-only local script. v7.44 ran it in default dry-run blocked mode and launched VCPChat after explicit user authorization. v7.45 attempted authorized CDP read-only access, but no available endpoint was exposed. Historical v7.45 status: CDP access remains blocked for that attempt. v7.46 received explicit remote-debug relaunch authorization, stopped the old VCPChat/Electron processes, relaunched VCPChat with remote-debug enabled, read CDP targets, and ran one read-only Runtime.evaluate surface check. Any bridge method invocation, VCPChat/VCPToolBox source read or modification, plugin/API/DailyNote/VCP memory/image action, push/tag/release, or deeper remote-debug verification still requires a new explicit authorization scope or active A5 authorization package.
+Validator Governance Chain v1: closed
+batch_005_allowed_now: false
+production_candidate_002_allowed_now: false
+memory_write_path_allowed_now: false
+
+Historical A5 actions consumed their respective authorizations. They do not authorize new provider contact, plugin/API calls, DailyNote writes, VCP memory writes, image creation, runtime integration, tag, push, release, or external repository modification.
 ```
 
 ## Blocker Template

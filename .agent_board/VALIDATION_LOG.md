@@ -1,5 +1,52 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260512-AGENT-BOARD-CALIBRATION
+
+Task:
+
+```text
+Calibrate .agent_board after v7.221 mainline quality stop and before further sustained autopilot progression.
+```
+
+Commands run:
+
+```text
+git status --short --branch
+git rev-list --left-right --count origin/master...HEAD
+git diff --check
+node scripts/validate_agent_board_state.js
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+Before calibration, .agent_board current-state files still pointed at v7.170. The current synced baseline is c605bd7, v7.221 mainline quality stop. Validator Governance Chain v1: closed. batch_005_allowed_now: false. production_candidate_002_allowed_now: false. memory_write_path_allowed_now: false.
+```
+
+Warnings:
+
+```text
+scripts/validate_mvp.ps1, scripts/validate-agent-image-lab-local.ps1, and node scripts/validate_runtime_prototype_suite.js are referenced for board-validator compatibility anchors but are not expected for this board-only calibration unless reviewer escalates.
+```
+
+Not validated:
+
+```text
+No real VCPChat read, real VCPToolBox read, real manifest read, plugin call, API call, DailyNote call, VCP memory write, image creation, runtime execution, dependency/config/env modification, tag, release, or external repository modification is performed by the board calibration.
+```
+
+Notes:
+
+```text
+Board calibration diff check and board state validator passed.
+```
+
 ## Extended Long Task Final Closeout
 
 ```text
