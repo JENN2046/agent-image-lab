@@ -9,32 +9,32 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab is in v7.225 balanced codex exec Worker/Verifier contract patch. The goal is to add minimal execution-role contracts and refresh stale status surfaces without creating a new governance chain.
+Agent Image Lab is in v7.226 image workflow product return gate. The goal is to stop governance polishing and choose the next value-bearing image workflow product task.
 ```
 
 ## Current Phase
 
 ```text
-v7.225 — Balanced codex exec Worker/Verifier Contract Patch
+v7.226 — Image Workflow Product Return Gate
 status: completed_validated
-source_commit: a8f3d70
-source_message: docs: harden autopilot rule intake gate
+source_commit: cbe3fc6
+source_message: docs: add codex worker verifier contract
 branch: master tracking origin/master
-Worktree: clean at v7.225 start
+Worktree: clean at v7.226 start
 worktree_start_clean: true
-origin_sync_start: local HEAD equals origin/master at a8f3d70
+origin_sync_start: local HEAD equals origin/master at cbe3fc6
 ```
 
 ## Current Task
 
 ```text
-Apply the minimal Balanced setup: add concise codex exec Worker and read-only Verifier contracts to AGENTS.md, refresh README/roadmap/board status against a8f3d70, and add a short PROJECT_MASTER_PLAN.md index.
+Evaluate the image workflow chain and select the highest-value next A4 product-mainline task without entering A5, runtime, provider contact, plugin call, image generation, or memory write.
 ```
 
 ## Current Local Work State
 
 ```text
-Worktree: clean at v7.225 start; local docs-only patch completed_validated
+Worktree: clean at v7.226 start; product return plan completed_validated
 active_workers: 0
 execution_mode: Single-Window 4-Agent Compact Autopilot
 commander_role: calibrate state and decide whether there is a next valuable task
@@ -55,6 +55,8 @@ Value selection: v7.223 selected v7.224 as the only safe next task
 Status freshness alignment: v7.224 completed and pushed
 Autopilot intake hardening: v7.224a pushed; v7.224b read-only smoke test passed
 Balanced codex exec role contracts: v7.225 completed_validated
+Image workflow product return: v7.226 completed_validated
+Recommended unique route: prompt_package_builder
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```
@@ -68,6 +70,7 @@ next_requires_new_value_or_explicit_authorization: true
 v7_224_is_freshness_alignment_only: true
 v7_224a_is_rule_hardening_only: true
 v7_225_is_governance_minimal_patch_only: true
+v7_226_is_product_return_only: true
 
 Validator Governance Chain v1: closed
 batch_005_allowed_now: false
@@ -82,8 +85,8 @@ tag/release/deploy remain blocked without explicit authorization and preflight
 ## Current Options
 
 ```text
-recommended_next_after_v7_225: product_mainline_value_task
-purpose: return to a concrete Agent Image Lab product-mainline task after this minimal governance patch
+recommended_next_after_v7_226: v7.227_prompt_package_builder_taskbook_gate
+purpose: define the product image Prompt Package Builder taskbook/schema/handoff before any generation authorization
 not_allowed_as_next_by_default: A5, provider contact, runtime, plugin call, image generation, memory write, tag, release
 ```
 
@@ -93,6 +96,7 @@ not_allowed_as_next_by_default: A5, provider contact, runtime, plugin call, imag
 source baseline for v7.224: 61d7c27
 source baseline for v7.224a: cdd39c3
 source baseline for v7.225: a8f3d70
+source baseline for v7.226: cbe3fc6
 git status -sb at phase start: clean
 git rev-parse HEAD at phase start: cdd39c3
 git rev-parse origin/master at phase start: cdd39c3
@@ -127,6 +131,6 @@ external repository modification: no
 
 ```text
 Use the calibrated board as the current navigation source.
-v7.225 validation passed. Recommended next must be a real product-mainline task, not another governance-only gate.
-Before continuing after v7.225, verify branch, worktree, and local/remote sync from Git output.
+v7.226 selected Prompt Package Builder as the next product-mainline route. Continue only with v7.227_prompt_package_builder_taskbook_gate or a user-approved alternative.
+Before continuing after v7.226, verify branch, worktree, and local/remote sync from Git output.
 ```

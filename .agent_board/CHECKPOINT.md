@@ -1,5 +1,39 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.226 Image Workflow Product Return Gate
+
+```text
+Status: completed_validated — A4 product planning / image workflow return
+Source baseline: cbe3fc6 == origin/master at phase start
+Purpose: stop governance polishing and select the next value-bearing image workflow product task
+candidate_routes_reviewed: prompt_package_builder, human_review_surface, image_workflow_runbook, review_console_product_spec
+recommended_unique_route: prompt_package_builder
+recommended_next: v7.227_prompt_package_builder_taskbook_gate
+README_updated: true
+roadmap_updated: true
+project_master_plan_updated: true
+handoff_updated: true
+run_state_updated: true
+task_queue_updated: true
+checkpoint_updated: true
+validation_log_updated: true
+agent_board_STATE_json_modified: false
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+VCPChat_runtime: false
+VCPToolBox_runtime: false
+real_manifest_read: false
+CDP_bridge_MCP: false
+production_candidate_002_started: false
+batch_005_started: false
+validation: git diff --check passed; exact diff reviewed; node scripts/validate_agent_board_state.js passed
+```
+
 ## v7.225 Balanced codex exec Worker/Verifier Contract Patch
 
 ```text

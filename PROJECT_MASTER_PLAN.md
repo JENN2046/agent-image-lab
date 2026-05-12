@@ -8,18 +8,18 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-synced_head: a8f3d70
-origin_master: a8f3d70
-status: v7.225 balanced codex exec Worker/Verifier contract patch completed_validated
-mode: A4 docs-only governance-minimal patch
+source_head_before_v7_226: cbe3fc6
+origin_master_at_v7_226_start: cbe3fc6
+status: v7.226 image workflow product return gate
+mode: A4 product planning / image workflow return
 ```
 
 ## Product Direction
 
 Agent Image Lab remains a VCP-native visual production orchestration layer.
-The product mainline should return to concrete Review Console, prompt package,
-authorization package, and production-readiness surfaces after this governance
-patch.
+The product mainline has returned to image workflow planning. The next highest
+value A4 product task is the Prompt Package Builder because it improves the
+first controllable artifact before generation authorization or provider contact.
 
 ## Active Boundaries
 
@@ -43,5 +43,6 @@ validation interpretation, staging, commit decisions, and next-task selection.
 
 ## Recommended Next
 
-Return to a real product-mainline task. Do not create another governance-only
-gate unless it resolves a concrete blocker discovered during product work.
+Proceed to `v7.227_prompt_package_builder_taskbook_gate`. Do not create another
+governance-only gate unless it resolves a concrete blocker discovered during
+product work.

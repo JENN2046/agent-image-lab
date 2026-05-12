@@ -9,7 +9,7 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
-Complete v7.225 balanced codex exec Worker/Verifier contract patch without expanding into a Full Multi-Agent OS.
+Complete v7.226 image workflow product return gate and route the next phase to a concrete image workflow product task.
 ```
 
 ---
@@ -60,13 +60,13 @@ none
 ### todo
 
 ```text
-1. Choose a concrete Agent Image Lab product-mainline task after v7.225 closeout.
+1. v7.227_prompt_package_builder_taskbook_gate.
 ```
 
 ### recommended_next_after_v7_224a
 
 ```text
-product_mainline_value_task — choose a concrete Agent Image Lab product-mainline task, not another governance-only gate.
+v7.227_prompt_package_builder_taskbook_gate — define the product image Prompt Package Builder taskbook/schema/handoff before any generation authorization.
 ```
 
 ### done
@@ -93,6 +93,7 @@ product_mainline_value_task — choose a concrete Agent Image Lab product-mainli
 19. v7.224a git diff --check passed.
 20. v7.224b read-only smoke test passed; no edits, commit, or push performed.
 21. v7.225 balanced codex exec Worker/Verifier contract patch completed_validated.
+22. v7.226 image workflow product return gate selected Prompt Package Builder as the next unique route.
 ```
 
 ### blocked
@@ -105,6 +106,7 @@ product_mainline_value_task — choose a concrete Agent Image Lab product-mainli
 5. A5/provider/runtime/plugin/image/memory remain blocked in v7.224.
 6. v7.224a does not authorize A5/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
 7. v7.225 does not authorize A5/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
+8. v7.226 does not authorize A5/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
 ```
 
 ### skipped
