@@ -74,14 +74,37 @@ stop_if:
 
 ```yaml
 current_boundary:
-  A5_execution_started: false
+  A5_execution_started: true
   preflight_passed: false
-  plugin_called: false
+  plugin_called: true
   image_generated: false
   output_saved: false
   DailyNote_written: false
   VCP_memory_written: false
   git_push_or_release_done: false
+```
+
+## 最新执行结果
+
+```yaml
+latest_execution_result:
+  run_id: A5-GENERATION-ATTEMPT-20260513-001
+  result: failed_no_image
+  result_cn: "已按授权启动 1 次 DoubaoGen generate 子进程，但插件返回 error，未生成图片"
+  plugin_process_started: true
+  max_plugin_calls_consumed: 1
+  retry_performed: false
+  retry_allowed: false
+  image_generated: false
+  image_count: 0
+  output_directory_cleaned_after_failure: true
+  secret_value_printed: false
+  secret_cache_removed: true
+  runtime_plugin_copy_removed: true
+  DailyNote_written: false
+  VCP_memory_written: false
+  raw_stdout_or_stderr_retained: false
+  note_cn: "retry_limit=0，本授权下不允许再次调用；如果要继续，需要新的失败分析或重试授权。"
 ```
 
 ## 最新预检结果

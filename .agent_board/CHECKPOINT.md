@@ -1,5 +1,34 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## Active A5 DoubaoGen Execution Attempt — Failed No Image
+
+```text
+Status: failed_no_image_no_retry — one approved DoubaoGen process attempt ran and returned error
+Source baseline: f3a4b39 local checkpoint, master ahead origin/master by 2 before attempt
+Purpose: execute AUTH-PENDING-20260512-001 once with DoubaoGen generate
+authorization_package: AUTH-PENDING-20260512-001
+approval_phrase_matched: true
+secret_subprocess_authorization_received: true
+selected_plugin_id: DoubaoGen
+selected_plugin_command: generate
+selected_plugin_model: doubao-seedream-5-0-260128
+max_plugin_calls: 1
+retry_limit: 0
+plugin_process_started: true
+actual_plugin_process_attempts: 1
+image_generation: false
+image_count: 0
+output_directory_cleaned_after_failure: true
+secret_value_printed: false
+secret_cache_removed: true
+runtime_plugin_copy_removed: true
+DailyNote_write: false
+VCP_memory_write: false
+raw_stdout_or_stderr_retained: false
+retry_available_under_current_authorization: false
+recommended_next: analyze_failed_doubaogen_attempt_or_request_new_retry_authorization
+```
+
 ## Active A5 Execution Attempt — Product Image Authorization Draft
 
 ```text

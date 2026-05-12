@@ -9,7 +9,7 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
-AUTH-PENDING-20260512-001 approval phrase matched, but active A5 execution is blocked by execution surface mismatch.
+AUTH-PENDING-20260512-001 was consumed by one approved DoubaoGen process attempt. The plugin returned error, no image was generated, and retry_limit=0 blocks another call under this authorization.
 ```
 
 ---
@@ -60,13 +60,13 @@ none
 ### todo
 
 ```text
-1. provide_exact_vcptoolbox_doubaogen_execution_surface.
+1. analyze_failed_doubaogen_attempt_or_request_new_retry_authorization.
 ```
 
 ### recommended_next_after_v7_243
 
 ```text
-provide_exact_vcptoolbox_doubaogen_execution_surface — provide a callable VCPToolBox / DoubaoGen execution surface or separately authorize the exact local runner and its read/write scope; image generation remains blocked.
+analyze_failed_doubaogen_attempt_or_request_new_retry_authorization — perform read-only failure analysis without secrets, or request a new explicit retry package; image generation remains blocked.
 ```
 
 ### done
@@ -114,6 +114,7 @@ provide_exact_vcptoolbox_doubaogen_execution_surface — provide a callable VCPT
 40. v7.243 product image active authorization package skeleton gate simplified the authorization draft into a one-page preflight-pending record with execute_now=false.
 41. active A5 preflight only was run and blocked by dirty worktree; no plugin call or image generation occurred.
 42. AUTH-PENDING-20260512-001 approval phrase matched, but execution was blocked because no safe callable VCPToolBox / DoubaoGen execution surface is available in the current tool surface.
+43. AUTH-PENDING-20260512-001 execution surface was supplemented; one DoubaoGen process attempt ran, returned error, generated no image, and left no retained secret cache or runtime plugin copy.
 ```
 
 ### blocked

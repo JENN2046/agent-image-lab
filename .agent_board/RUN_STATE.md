@@ -9,18 +9,18 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab has received a matching AUTH-PENDING-20260512-001 approval phrase, but active A5 execution is blocked by execution surface mismatch. No matching safe VCPToolBox / DoubaoGen call entry is available in the current tool surface.
+Agent Image Lab executed the approved AUTH-PENDING-20260512-001 DoubaoGen attempt once. The plugin process returned error, no image was generated, retry_limit=0 prevents another call under this authorization, and transient secret/runtime artifacts were removed.
 ```
 
 ## Current Phase
 
 ```text
 Active A5 Execution Attempt — Product Image Authorization Draft
-status: blocked_execution_surface_mismatch
+status: failed_no_image_no_retry
 source_commit: 03fd398
 source_message: docs: add product image generation plan draft
 branch: master tracking origin/master
-Worktree: clean before execution attempt; dirty only after local blocker recording
+Worktree: clean before execution attempt; dirty only after local failure recording
 worktree_start_clean: true
 origin_sync_start: local HEAD equals origin/master at 03fd398
 ```
@@ -28,13 +28,13 @@ origin_sync_start: local HEAD equals origin/master at 03fd398
 ## Current Task
 
 ```text
-Attempt to route AUTH-PENDING-20260512-001 to a safe VCPToolBox / DoubaoGen execution surface without substituting unauthorized local runners, reading secrets, or reading real plugin source/config.
+Record the approved single DoubaoGen generate attempt, with no retry, no image, no DailyNote, no VCP memory write, no retained secret cache, and no retained runtime plugin copy.
 ```
 
 ## Current Local Work State
 
 ```text
-Worktree: clean after checkpoint bddcc5e before execution attempt; blocker record now pending validation
+Worktree: clean after checkpoint f3a4b39 before execution attempt; failure record now pending validation
 active_workers: 0
 execution_mode: Single-Window 4-Agent Compact Autopilot
 commander_role: complete docs-only non-active skeleton and stop before human-only activation fields
@@ -75,7 +75,7 @@ MVP Aggregate Validator Calibration: completed_validated
 Product Image Authorization Draft Plan Ref Alignment: v7.241 completed_validated
 Product Image Authorization Activation Gap Review: v7.242 completed_validated
 Product Image Active Authorization Package Skeleton: v7.243 completed_validated
-Recommended next product task: provide_exact_vcptoolbox_doubaogen_execution_surface
+Recommended next product task: analyze_failed_doubaogen_attempt_or_request_new_retry_authorization
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```
@@ -121,8 +121,8 @@ tag/release/deploy remain blocked without explicit authorization and preflight
 ## Current Options
 
 ```text
-recommended_next_after_active_execution_attempt: provide_exact_vcptoolbox_doubaogen_execution_surface
-purpose: provide a callable VCPToolBox / DoubaoGen execution surface or separately authorize the exact local runner and its read/write scope; active A5 generation remains blocked
+recommended_next_after_active_execution_attempt: analyze_failed_doubaogen_attempt_or_request_new_retry_authorization
+purpose: analyze the failed single-call attempt without secrets, or request a new explicit retry authorization; active A5 generation remains blocked
 not_allowed_as_next_by_default: A5, provider contact, runtime, plugin call, image generation, memory write, tag, release
 ```
 
@@ -186,6 +186,6 @@ external repository modification: no
 
 ```text
 Use the calibrated board as the current navigation source.
-AUTH-PENDING-20260512-001 approval phrase matched, but active A5 execution is blocked by execution surface mismatch. Generation remains blocked until a matching callable VCPToolBox / DoubaoGen execution surface is available or a separate exact local-runner authorization is provided.
-Before continuing, verify branch, worktree, local/remote sync, callable execution surface, and explicit authorization scope from Git/user output.
+AUTH-PENDING-20260512-001 was consumed by one approved DoubaoGen process attempt. The result is failed_no_image_no_retry; generation remains blocked unless the user authorizes a new failure analysis or a new retry package.
+Before continuing, verify branch, worktree, local/remote sync, and whether the user authorized read-only failure analysis or a new retry.
 ```

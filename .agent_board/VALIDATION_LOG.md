@@ -1,5 +1,50 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260513-A5-DOUBAOGEN-EXECUTION-ATTEMPT-FAILED-NO-IMAGE
+
+Task:
+
+```text
+Execute the approved AUTH-PENDING-20260512-001 DoubaoGen generate attempt once, with secret value available only to the child process, no stdout/stderr retention, no retry, no DailyNote, no VCP memory write, no push, no tag, and no release.
+```
+
+Commands run:
+
+```text
+git status --short --branch
+Test-Path for authorized DoubaoGen directory, DoubaoGen.js, and config.env
+config.env field-name-only check
+output directory emptiness check
+single child-process DoubaoGen generate attempt
+secret cache cleanup
+runtime plugin copy cleanup
+output directory post-run listing
+```
+
+Result:
+
+```text
+failed_no_image_no_retry
+```
+
+Findings:
+
+```text
+One DoubaoGen child process attempt was started under AUTH-PENDING-20260512-001. The process returned status=error and no image file was created. The secret cache file created by plugin runtime behavior was removed, the temporary runtime plugin copy was removed, and the authorized output directory is empty after cleanup. Raw plugin stdout/stderr was not printed or retained. retry_limit=0 blocks another call under this authorization.
+```
+
+Not validated:
+
+```text
+The raw provider error was intentionally not retained in Git or logs to avoid leaking sensitive runtime output. No second call was made.
+```
+
+Notes:
+
+```text
+Next recommended action is analyze_failed_doubaogen_attempt_or_request_new_retry_authorization.
+```
+
 ## VALIDATION-20260513-A5-EXECUTION-ATTEMPT-PRODUCT-IMAGE-AUTHORIZATION
 
 Task:
