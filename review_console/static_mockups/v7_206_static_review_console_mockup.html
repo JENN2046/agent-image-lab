@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agent Image Lab Review Console Static Mockup v7.206</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #101214;
+        --surface: #171b1e;
+        --surface-2: #1f2528;
+        --surface-3: #252c30;
+        --line: #364247;
+        --text: #eef3f2;
+        --muted: #a7b2b0;
+        --soft: #d7dddb;
+        --teal: #69c6bd;
+        --green: #78c58f;
+        --amber: #e0b45d;
+        --red: #df756b;
+        --violet: #9e8fd3;
+        --blue: #74a8c7;
+        --shadow: 0 18px 52px rgba(0, 0, 0, 0.28);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-width: 320px;
+        background: var(--bg);
+        color: var(--text);
+        font-family:
+          "Microsoft YaHei",
+          "PingFang SC",
+          "Segoe UI",
+          Arial,
+          sans-serif;
+        font-size: 14px;
+        letter-spacing: 0;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        font-size: 22px;
+        line-height: 1.2;
+      }
+
+      h2 {
+        font-size: 15px;
+        line-height: 1.25;
+      }
+
+      h3 {
+        font-size: 13px;
+        color: var(--soft);
+      }
+
+      button {
+        min-height: 34px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--surface-2);
+        color: var(--muted);
+        font: inherit;
+      }
+
+      button[disabled] {
+        cursor: not-allowed;
+        opacity: 0.72;
+      }
+
+      .shell {
+        width: min(1540px, calc(100% - 28px));
+        margin: 0 auto;
+        padding: 16px 0 22px;
+      }
+
+      .topbar,
+      .panel,
+      .rail-item,
+      .metric,
+      .event,
+      .blocker-row {
+        border: 1px solid var(--line);
+        background: var(--surface);
+      }
+
+      .topbar {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 16px;
+        align-items: center;
+        padding: 14px 16px;
+        box-shadow: var(--shadow);
+      }
+
+      .eyebrow {
+        color: var(--muted);
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .status-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: flex-end;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        min-height: 28px;
+        padding: 0 10px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--surface-2);
+        color: var(--soft);
+        white-space: nowrap;
+      }
+
+      .pill.teal {
+        border-color: rgba(105, 198, 189, 0.65);
+        color: var(--teal);
+      }
+
+      .pill.amber {
+        border-color: rgba(224, 180, 93, 0.7);
+        color: var(--amber);
+      }
+
+      .pill.red {
+        border-color: rgba(223, 117, 107, 0.72);
+        color: var(--red);
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 280px minmax(460px, 1fr) 330px;
+        gap: 12px;
+        margin-top: 12px;
+      }
+
+      .panel {
+        border-radius: 8px;
+        min-width: 0;
+        box-shadow: var(--shadow);
+      }
+
+      .panel-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        min-height: 58px;
+        padding: 12px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .panel-body {
+        display: grid;
+        gap: 10px;
+        padding: 12px;
+      }
+
+      .rail-item {
+        display: grid;
+        gap: 8px;
+        padding: 10px;
+        border-radius: 6px;
+        background: var(--surface-2);
+      }
+
+      .rail-line {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .rail-line strong {
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      .stage {
+        min-height: 430px;
+        display: grid;
+        grid-template-rows: auto minmax(260px, 1fr) auto;
+      }
+
+      .asset-frame {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 210px;
+        gap: 12px;
+        padding: 12px;
+      }
+
+      .asset-preview {
+        position: relative;
+        min-height: 292px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background:
+          linear-gradient(135deg, rgba(105, 198, 189, 0.14), transparent 38%),
+          linear-gradient(155deg, rgba(224, 180, 93, 0.12), transparent 42%),
+          #14191b;
+      }
+
+      .tabletop {
+        position: absolute;
+        left: 7%;
+        right: 7%;
+        bottom: 12%;
+        height: 30%;
+        border: 1px solid rgba(238, 243, 242, 0.14);
+        border-radius: 8px;
+        background: rgba(238, 243, 242, 0.05);
+      }
+
+      .lens {
+        position: absolute;
+        left: 32%;
+        top: 29%;
+        width: 25%;
+        aspect-ratio: 1;
+        border: 8px solid #303a3d;
+        border-radius: 50%;
+        background:
+          radial-gradient(circle at 50% 50%, #161b1e 0 32%, #6d7f83 34% 35%, #1d2528 36% 100%);
+        box-shadow: 0 20px 36px rgba(0, 0, 0, 0.38);
+      }
+
+      .color-card {
+        position: absolute;
+        right: 14%;
+        top: 22%;
+        width: 20%;
+        height: 34%;
+        border: 1px solid rgba(238, 243, 242, 0.14);
+        border-radius: 6px;
+        background: linear-gradient(90deg, #d8d4c7 0 50%, #a7c1bd 50% 100%);
+        transform: rotate(4deg);
+      }
+
+      .geometry {
+        position: absolute;
+        left: 17%;
+        bottom: 27%;
+        width: 14%;
+        aspect-ratio: 1;
+        border: 1px solid rgba(238, 243, 242, 0.18);
+        border-radius: 4px;
+        background: rgba(116, 168, 199, 0.22);
+        transform: rotate(-10deg);
+      }
+
+      .asset-note {
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .review-stack {
+        display: grid;
+        gap: 10px;
+      }
+
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .metric {
+        display: grid;
+        gap: 4px;
+        padding: 10px;
+        border-radius: 6px;
+        background: var(--surface-2);
+      }
+
+      .metric span {
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .metric strong {
+        font-size: 20px;
+      }
+
+      .decision-panel .panel-body {
+        gap: 12px;
+      }
+
+      .decision-box {
+        display: grid;
+        gap: 8px;
+        padding: 11px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--surface-2);
+      }
+
+      .decision-box p,
+      .event p,
+      .blocker-row p {
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      .action-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .timeline,
+      .blockers {
+        display: grid;
+        gap: 8px;
+      }
+
+      .event,
+      .blocker-row {
+        display: grid;
+        gap: 5px;
+        padding: 10px;
+        border-radius: 6px;
+        background: var(--surface-2);
+      }
+
+      .blocker-row {
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        align-items: center;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--muted);
+      }
+
+      .dot.red {
+        background: var(--red);
+      }
+
+      .dot.amber {
+        background: var(--amber);
+      }
+
+      .dot.green {
+        background: var(--green);
+      }
+
+      .bottom-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 360px;
+        gap: 12px;
+        margin-top: 12px;
+      }
+
+      .table {
+        display: grid;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        overflow: hidden;
+      }
+
+      .table-row {
+        display: grid;
+        grid-template-columns: 180px minmax(0, 1fr) 140px;
+        gap: 10px;
+        padding: 9px 10px;
+        border-bottom: 1px solid var(--line);
+        background: var(--surface-2);
+      }
+
+      .table-row:last-child {
+        border-bottom: 0;
+      }
+
+      .table-row span {
+        color: var(--muted);
+      }
+
+      @media (max-width: 1180px) {
+        .layout,
+        .bottom-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .asset-frame {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .shell {
+          width: min(100% - 18px, 1540px);
+          padding-top: 10px;
+        }
+
+        .topbar,
+        .table-row {
+          grid-template-columns: 1fr;
+        }
+
+        .status-strip {
+          justify-content: flex-start;
+        }
+
+        .metric-grid,
+        .action-row {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell" aria-label="Agent Image Lab Review Console static mockup">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Agent Image Lab / Review Console</p>
+          <h1>Static Review Workbench</h1>
+        </div>
+        <div class="status-strip" aria-label="Boundary status">
+          <span class="pill teal">A4 static artifact</span>
+          <span class="pill amber">No runtime</span>
+          <span class="pill red">No plugin/provider/image/memory</span>
+        </div>
+      </header>
+
+      <section class="layout">
+        <aside class="panel" aria-labelledby="lineageTitle">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Package Lineage</p>
+              <h2 id="lineageTitle">Display-only refs</h2>
+            </div>
+            <span class="pill teal">matched</span>
+          </div>
+          <div class="panel-body">
+            <article class="rail-item">
+              <div class="rail-line"><span>Generation plan</span><strong>GP-20260512-001</strong></div>
+              <div class="rail-line"><span>Version</span><strong>v1</strong></div>
+              <div class="rail-line"><span>Scope</span><strong>single asset review</strong></div>
+            </article>
+            <article class="rail-item">
+              <div class="rail-line"><span>Prompt package</span><strong>PP-STILL-LIFE-V1</strong></div>
+              <div class="rail-line"><span>Raw prompt</span><strong>hidden</strong></div>
+              <div class="rail-line"><span>Policy</span><strong>summary only</strong></div>
+            </article>
+            <article class="rail-item">
+              <div class="rail-line"><span>Authorization</span><strong>AUTH-draft</strong></div>
+              <div class="rail-line"><span>Status</span><strong>inactive</strong></div>
+              <div class="rail-line"><span>Calls remaining</span><strong>0</strong></div>
+            </article>
+            <article class="rail-item">
+              <div class="rail-line"><span>Review session</span><strong>RC-v7.206</strong></div>
+              <div class="rail-line"><span>Mode</span><strong>static mockup</strong></div>
+              <div class="rail-line"><span>Output</span><strong>not saved</strong></div>
+            </article>
+          </div>
+        </aside>
+
+        <section class="panel stage" aria-labelledby="stageTitle">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Asset Stage</p>
+              <h2 id="stageTitle">Candidate review surface</h2>
+            </div>
+            <span class="pill amber">asset ref only</span>
+          </div>
+          <div class="asset-frame">
+            <div class="asset-preview" role="img" aria-label="Static placeholder for a still-life candidate">
+              <div class="tabletop"></div>
+              <div class="lens"></div>
+              <div class="color-card"></div>
+              <div class="geometry"></div>
+              <div class="asset-note">
+                <span class="pill">runtime ref redacted</span>
+                <span class="pill">binary absent</span>
+                <span class="pill">provider output summarized</span>
+              </div>
+            </div>
+            <div class="review-stack">
+              <div class="metric-grid">
+                <div class="metric"><span>AI score</span><strong>62</strong></div>
+                <div class="metric"><span>Human score</span><strong>78</strong></div>
+                <div class="metric"><span>Final</span><strong>78</strong></div>
+              </div>
+              <article class="decision-box">
+                <h3>Review verdict</h3>
+                <p>Human review can override AI scoring, but cannot authorize memory write or another generation call.</p>
+                <span class="pill amber">accepted candidate pending authorization</span>
+              </article>
+              <article class="decision-box">
+                <h3>Known blockers</h3>
+                <p>Memory write blocked until independent memory authorization exists. Provider contact remains blocked.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <aside class="panel decision-panel" aria-labelledby="decisionTitle">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Human Decision</p>
+              <h2 id="decisionTitle">Actions are inert</h2>
+            </div>
+            <span class="pill red">submit blocked</span>
+          </div>
+          <div class="panel-body">
+            <article class="decision-box">
+              <h3>Current decision</h3>
+              <p>Candidate may be reviewed as a visual draft. No downstream write path is active.</p>
+              <span class="pill teal">human override visible</span>
+            </article>
+            <div class="action-row">
+              <button type="button" disabled>Accept candidate</button>
+              <button type="button" disabled>Reject candidate</button>
+              <button type="button" disabled>Request retry</button>
+              <button type="button" disabled>Write memory</button>
+            </div>
+            <article class="decision-box">
+              <h3>Next allowed action</h3>
+              <p>Create a reviewed closeout or prepare a separate authorization package. This mockup cannot execute either path.</p>
+            </article>
+          </div>
+        </aside>
+      </section>
+
+      <section class="bottom-grid">
+        <section class="panel" aria-labelledby="timelineTitle">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Audit Timeline</p>
+              <h2 id="timelineTitle">Summarized events</h2>
+            </div>
+            <span class="pill">no raw logs</span>
+          </div>
+          <div class="panel-body timeline">
+            <article class="event">
+              <h3>Package loaded</h3>
+              <p>Generation plan, prompt package, authorization draft, and review session refs are visible as summaries.</p>
+            </article>
+            <article class="event">
+              <h3>Preflight checked</h3>
+              <p>Authorization inactive, call budget 0, provider contact false, plugin call false, memory write false.</p>
+            </article>
+            <article class="event">
+              <h3>Review decision recorded</h3>
+              <p>Human decision state is visible; no file save, bridge call, DailyNote write, or memory write occurs.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel" aria-labelledby="blockerTitle">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Boundary Matrix</p>
+              <h2 id="blockerTitle">Hard stops</h2>
+            </div>
+            <span class="pill red">locked</span>
+          </div>
+          <div class="panel-body blockers">
+            <div class="blocker-row">
+              <span class="dot red"></span>
+              <p>Renderer / preload / IPC integration</p>
+              <span class="pill red">false</span>
+            </div>
+            <div class="blocker-row">
+              <span class="dot red"></span>
+              <p>VCPChat / VCPToolBox runtime</p>
+              <span class="pill red">false</span>
+            </div>
+            <div class="blocker-row">
+              <span class="dot red"></span>
+              <p>Plugin, provider, image generation</p>
+              <span class="pill red">false</span>
+            </div>
+            <div class="blocker-row">
+              <span class="dot red"></span>
+              <p>DailyNote / VCP memory write</p>
+              <span class="pill red">false</span>
+            </div>
+            <div class="blocker-row">
+              <span class="dot green"></span>
+              <p>Static visual inspection</p>
+              <span class="pill teal">true</span>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="panel" style="margin-top: 12px" aria-labelledby="contractTitle">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Static Data Contract</p>
+            <h2 id="contractTitle">Allowed summaries</h2>
+          </div>
+          <span class="pill">display only</span>
+        </div>
+        <div class="panel-body">
+          <div class="table">
+            <div class="table-row"><strong>Allowed refs</strong><span>generation_plan_ref, prompt_package_ref, authorization_package_ref, review_console_ref, asset_ref, closeout_ref</span><span>visible</span></div>
+            <div class="table-row"><strong>Forbidden raw data</strong><span>raw prompt, payload, endpoint, response, private path, secret, image binary</span><span>hidden</span></div>
+            <div class="table-row"><strong>Execution state</strong><span>runtime imports, network requests, file system access, form submission, bridge calls</span><span>absent</span></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
