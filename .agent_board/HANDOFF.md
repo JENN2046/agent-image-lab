@@ -3,11 +3,11 @@
 ## Handoff Summary
 
 ```text
-Status: v7.226 image workflow product return gate completed_validated.
-Reason: stop governance polishing and return Agent Image Lab to image workflow product planning.
+Status: v7.227 prompt package builder taskbook gate completed_validated.
+Reason: define the Product Image Prompt Package Builder schema, reusable taskbook, and review/authorization/memory handoffs without generation.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
-Source baseline for v7.226: cbe3fc6 == origin/master at phase start
+Source baseline for v7.227: dbc5043 == origin/master at phase start
 Current active workers: 0
 Current operating style: Single-Window 4-Agent Compact Autopilot
 ```
@@ -15,9 +15,9 @@ Current operating style: Single-Window 4-Agent Compact Autopilot
 ## Current Mainline Reality
 
 ```text
-latest_completed_remote_baseline_before_v7_226: cbe3fc6
-latest_completed_gate_before_v7_226: v7.225_balanced_codex_exec_worker_verifier_contract_patch
-current_gate: v7.226_image_workflow_product_return_gate
+latest_completed_remote_baseline_before_v7_227: dbc5043
+latest_completed_gate_before_v7_227: v7.226_image_workflow_product_return_gate
+current_gate: v7.227_prompt_package_builder_taskbook_gate
 current_gate_status: completed_validated
 
 Smart Commander protocol track: stable and consolidated
@@ -32,6 +32,8 @@ autopilot rule smoke test: v7.224b passed read-only
 balanced codex exec role contracts: v7.225 completed_validated
 image workflow product return: v7.226 completed_validated
 recommended_unique_route: prompt_package_builder
+prompt package builder taskbook: v7.227 completed_validated
+recommended_next: v7.228_product_image_prompt_package_template_instance_gate
 
 continue_A4_docs_only_by_default: false
 next_requires_new_value_or_explicit_authorization: true
@@ -54,14 +56,15 @@ v7.224 does not authorize A5, provider, runtime, plugin, image, DailyNote, VCP m
 v7.224a does not authorize A5, provider, runtime, plugin, image, DailyNote, VCP memory, CDP, bridge, MCP, tag, release, deploy, production_candidate_002, or Batch 005
 v7.225 does not authorize A5, provider, runtime, plugin, image, DailyNote, VCP memory, CDP, bridge, MCP, tag, release, deploy, production_candidate_002, or Batch 005
 v7.226 does not authorize A5, provider, runtime, plugin, image, DailyNote, VCP memory, CDP, bridge, MCP, tag, release, deploy, production_candidate_002, or Batch 005
+v7.227 does not authorize A5, provider, runtime, plugin, image, DailyNote, VCP memory, CDP, bridge, MCP, tag, release, deploy, production_candidate_002, or Batch 005
 ```
 
 ## Validation Snapshot
 
 ```text
-git status -sb at v7.226 start: clean
-git rev-parse HEAD at v7.226 start: cbe3fc6
-git rev-parse origin/master at v7.226 start: cbe3fc6
+git status -sb at v7.227 start: clean
+git rev-parse HEAD at v7.227 start: dbc5043
+git rev-parse origin/master at v7.227 start: dbc5043
 agent_board_freshness: manually checked from exact diff
 git diff --check: passed
 rule_intake_smoke_test: passed in v7.224b read-only smoke test
@@ -89,8 +92,8 @@ dependency/config/env modification: no
 ## Human Decisions Needed
 
 ```text
-No human decision is needed to finish v7.226 commit/push if guarded checks pass.
-Human authorization is needed before any A5 provider contact, runtime integration, tag/release/deploy, or repetitive low-value A4 gate.
+No human decision is needed to finish v7.227 local commit if guarded checks pass.
+Human authorization is needed before any push, A5 provider contact, runtime integration, tag/release/deploy, or repetitive low-value A4 gate.
 ```
 
 ## Exact Resume Prompt
@@ -102,8 +105,8 @@ Human authorization is needed before any A5 provider contact, runtime integratio
 
 当前仓库状态：
 - master should track origin/master.
-- source baseline for v7.226: cbe3fc6.
-- current phase: v7.226 image workflow product return gate.
+- source baseline for v7.227: dbc5043.
+- current phase: v7.227 prompt package builder taskbook gate.
 - v7.221 mainline quality stop reached.
 - v7.222 board calibration completed.
 - v7.223 read-only value selection selected v7.224 as the only safe next task.
@@ -116,7 +119,8 @@ Human authorization is needed before any A5 provider contact, runtime integratio
 - v7.224a rule intake hardening completed and pushed.
 - v7.224b read-only smoke test passed.
 - v7.226 selected Prompt Package Builder as the next product-mainline route.
-- recommended_next after v7.226: v7.227_prompt_package_builder_taskbook_gate.
+- v7.227 created the prompt package builder schema and reusable taskbook.
+- recommended_next after v7.227: v7.228_product_image_prompt_package_template_instance_gate.
 - next step must create clear product value or require explicit A5/runtime/version authorization.
 
 不要读取真实 VCPChat/VCPToolBox。

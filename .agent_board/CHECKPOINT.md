@@ -1,5 +1,40 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.227 Prompt Package Builder Taskbook Gate
+
+```text
+Status: completed_validated — A4 docs-only product taskbook / prompt package schema planning
+Source baseline: dbc5043 == origin/master at phase start
+Purpose: define the Product Image Prompt Package Builder schema, required/optional fields, prompt sections, constraints, shot spec, style lock, product detail fields, acceptance criteria, and review/authorization/memory handoffs
+prompt_package_schema_created: true
+taskbook_created: true
+A5_generation_authorization_required_later: true
+recommended_next: v7.228_product_image_prompt_package_template_instance_gate
+README_updated: true
+roadmap_updated: true
+project_master_plan_updated: true
+handoff_updated: true
+run_state_updated: true
+task_queue_updated: true
+checkpoint_updated: true
+validation_log_updated: true
+agent_board_STATE_json_modified: false
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+VCPChat_runtime: false
+VCPToolBox_runtime: false
+real_manifest_read: false
+CDP_bridge_MCP: false
+production_candidate_002_started: false
+batch_005_started: false
+validation: git diff --check passed; exact diff reviewed; node scripts/validate_agent_board_state.js passed
+```
+
 ## v7.226 Image Workflow Product Return Gate
 
 ```text

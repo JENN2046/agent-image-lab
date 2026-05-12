@@ -9,7 +9,7 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
-Complete v7.226 image workflow product return gate and route the next phase to a concrete image workflow product task.
+Complete v7.227 prompt package builder taskbook gate and route the next phase to a concrete non-executing prompt package instance task.
 ```
 
 ---
@@ -60,13 +60,13 @@ none
 ### todo
 
 ```text
-1. v7.227_prompt_package_builder_taskbook_gate.
+1. v7.228_product_image_prompt_package_template_instance_gate.
 ```
 
-### recommended_next_after_v7_224a
+### recommended_next_after_v7_227
 
 ```text
-v7.227_prompt_package_builder_taskbook_gate — define the product image Prompt Package Builder taskbook/schema/handoff before any generation authorization.
+v7.228_product_image_prompt_package_template_instance_gate — create the first non-executing product image prompt package instance template from the v7.227 taskbook.
 ```
 
 ### done
@@ -94,6 +94,7 @@ v7.227_prompt_package_builder_taskbook_gate — define the product image Prompt 
 20. v7.224b read-only smoke test passed; no edits, commit, or push performed.
 21. v7.225 balanced codex exec Worker/Verifier contract patch completed_validated.
 22. v7.226 image workflow product return gate selected Prompt Package Builder as the next unique route.
+23. v7.227 prompt package builder taskbook gate created the schema, reusable taskbook, human review handoff, A5 authorization handoff, and memory suitability handoff.
 ```
 
 ### blocked
@@ -107,6 +108,7 @@ v7.227_prompt_package_builder_taskbook_gate — define the product image Prompt 
 6. v7.224a does not authorize A5/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
 7. v7.225 does not authorize A5/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
 8. v7.226 does not authorize A5/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
+9. v7.227 does not authorize A5/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
 ```
 
 ### skipped

@@ -8,18 +8,18 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-source_head_before_v7_226: cbe3fc6
-origin_master_at_v7_226_start: cbe3fc6
-status: v7.226 image workflow product return gate
-mode: A4 product planning / image workflow return
+source_head_before_v7_227: dbc5043
+origin_master_at_v7_227_start: dbc5043
+status: v7.227 prompt package builder taskbook gate
+mode: A4 docs-only product taskbook / prompt package schema planning
 ```
 
 ## Product Direction
 
 Agent Image Lab remains a VCP-native visual production orchestration layer.
-The product mainline has returned to image workflow planning. The next highest
-value A4 product task is the Prompt Package Builder because it improves the
-first controllable artifact before generation authorization or provider contact.
+The product mainline has returned to image workflow planning. The Prompt Package
+Builder now defines the first controllable artifact before generation
+authorization or provider contact: a reviewable product image prompt package.
 
 ## Active Boundaries
 
@@ -43,6 +43,7 @@ validation interpretation, staging, commit decisions, and next-task selection.
 
 ## Recommended Next
 
-Proceed to `v7.227_prompt_package_builder_taskbook_gate`. Do not create another
-governance-only gate unless it resolves a concrete blocker discovered during
-product work.
+Proceed to `v7.228_product_image_prompt_package_template_instance_gate`. Create
+the first non-executing prompt package instance template from the v7.227
+taskbook. Do not create another governance-only gate unless it resolves a
+concrete blocker discovered during product work.

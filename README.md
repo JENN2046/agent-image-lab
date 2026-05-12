@@ -7,14 +7,14 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest closed baseline before v7.226: cbe3fc6 on master == origin/master.
-Current mainline state: v7.226 image workflow product return gate.
+Latest closed baseline before v7.227: dbc5043 on master == origin/master.
+Current mainline state: v7.227 prompt package builder taskbook gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
-Current status: governance polishing stopped; product mainline returned to image workflow planning.
+Current status: Product Image Prompt Package Builder taskbook/schema/handoff created; no generation, provider contact, runtime, plugin call, or memory write authorized.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized: A5, provider contact, runtime, plugin call, image generation, DailyNote write, VCP memory write, real manifest read, tag, release, deploy.
-Recommended next after v7.226: v7.227_prompt_package_builder_taskbook_gate.
+Recommended next after v7.227: v7.228_product_image_prompt_package_template_instance_gate.
 ```
 
 历史状态脉络：
@@ -211,6 +211,7 @@ v7.215 Provider Fingerprint Readiness Review — v10.12 inactive package reviewe
 v7.216 Provider Fingerprint Activation Briefing — Human-facing inactive package briefing created; exact future activation phrase and stop conditions summarized without activation.
 v7.219 Release Readiness Delta — Post-v7.217 readiness delta created. It clarifies newer governance/static/provider-prep work without authorizing release, tag, A5, provider contact, image generation, or memory write.
 v7.226 Image Workflow Product Return Gate — Product mainline returned from governance hardening to image workflow planning. Four candidate routes reviewed; Prompt Package Builder selected as the next highest-value A4 docs-only task.
+v7.227 Prompt Package Builder Taskbook Gate — Product Image Prompt Package Builder schema and reusable taskbook created for reviewable prompt packages. No A5, provider contact, runtime, plugin call, image generation, or memory write.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3
