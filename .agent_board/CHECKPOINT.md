@@ -1,5 +1,46 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.238 Product Image Generation Authorization Draft Review Gate
+
+```text
+Status: completed_validated — A4 docs-only draft review
+Source baseline: da69923 == origin/master at phase start
+Purpose: review the non-active A5 authorization draft for field completeness, boundary correctness, and activation blockers
+draft_review_created: true
+authorization_package_id: AUTH-DRAFT-20260512-001
+draft_status_confirmed: draft
+approval_status_confirmed: not_requested
+ready_for_active_A5_execution: false
+next_blocker_to_reduce: generation_plan_ref_missing
+recommended_next: v7.239_product_image_generation_plan_draft_gate
+README_updated: true
+roadmap_updated: true
+project_master_plan_updated: true
+handoff_updated: true
+run_state_updated: true
+task_queue_updated: true
+checkpoint_updated: true
+validation_log_updated: true
+agent_board_STATE_json_modified: false
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+output_save: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+VCPChat_runtime: false
+VCPToolBox_runtime: false
+real_manifest_read: false
+real_output_path_selected: false
+raw_payload_created: false
+CDP_bridge_MCP: false
+production_candidate_002_started: false
+batch_005_started: false
+validation: git diff --check passed; exact diff review passed; node scripts/validate_agent_board_state.js passed
+```
+
 ## v7.237 Product Image Generation Authorization Draft Gate
 
 ```text

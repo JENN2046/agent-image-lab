@@ -9,32 +9,32 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab is in v7.237 product image generation authorization draft gate. The goal is to create a non-active A5 authorization draft without activation or execution.
+Agent Image Lab is in v7.238 product image generation authorization draft review gate. The goal is to review the non-active A5 authorization draft without activation or execution.
 ```
 
 ## Current Phase
 
 ```text
-v7.237 — Product Image Generation Authorization Draft Gate
+v7.238 — Product Image Generation Authorization Draft Review Gate
 status: completed_validated
-source_commit: c3079d2
-source_message: docs: add product image workflow A5 readiness review
+source_commit: da69923
+source_message: docs: add product image generation authorization draft
 branch: master tracking origin/master
-Worktree: clean at v7.237 start
+Worktree: clean at v7.238 start
 worktree_start_clean: true
-origin_sync_start: local HEAD equals origin/master at c3079d2
+origin_sync_start: local HEAD equals origin/master at da69923
 ```
 
 ## Current Task
 
 ```text
-Create the product image generation authorization draft without entering active A5, runtime, provider contact, plugin call, image generation, DailyNote write, output save, or VCP memory write.
+Review the product image generation authorization draft without entering active A5, runtime, provider contact, plugin call, image generation, DailyNote write, output save, or VCP memory write.
 ```
 
 ## Current Local Work State
 
 ```text
-Worktree: clean at v7.237 start; product image generation authorization draft completed_validated
+Worktree: clean at v7.238 start; product image generation authorization draft review completed_validated
 active_workers: 0
 execution_mode: Single-Window 4-Agent Compact Autopilot
 commander_role: calibrate state and decide whether there is a next valuable task
@@ -68,7 +68,8 @@ Product Image Workflow Runbook: v7.234 completed_validated
 Product Image Workflow Static Walkthrough: v7.235 completed_validated
 Product Image Workflow A5 Readiness Review: v7.236 completed_validated
 Product Image Generation Authorization Draft: v7.237 completed_validated
-Recommended next product task: v7.238_product_image_generation_authorization_draft_review_gate
+Product Image Generation Authorization Draft Review: v7.238 completed_validated
+Recommended next product task: v7.239_product_image_generation_plan_draft_gate
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```
@@ -94,6 +95,7 @@ v7_234_is_product_image_workflow_runbook_only: true
 v7_235_is_product_image_workflow_static_walkthrough_only: true
 v7_236_is_product_image_workflow_A5_readiness_review_only: true
 v7_237_is_product_image_generation_authorization_draft_only: true
+v7_238_is_product_image_generation_authorization_draft_review_only: true
 
 Validator Governance Chain v1: closed
 batch_005_allowed_now: false
@@ -108,8 +110,8 @@ tag/release/deploy remain blocked without explicit authorization and preflight
 ## Current Options
 
 ```text
-recommended_next_after_v7_237: v7.238_product_image_generation_authorization_draft_review_gate
-purpose: review the non-active authorization draft for field completeness and activation blockers; active A5 execution remains blocked
+recommended_next_after_v7_238: v7.239_product_image_generation_plan_draft_gate
+purpose: create a non-executing generation plan draft to reduce the generation_plan_ref_missing blocker; active A5 execution remains blocked
 not_allowed_as_next_by_default: A5, provider contact, runtime, plugin call, image generation, memory write, tag, release
 ```
 
@@ -131,9 +133,10 @@ source baseline for v7.234: b27413e
 source baseline for v7.235: 9283de4
 source baseline for v7.236: bd73eb5
 source baseline for v7.237: c3079d2
+source baseline for v7.238: da69923
 git status -sb at phase start: clean
-git rev-parse HEAD at phase start: c3079d2
-git rev-parse origin/master at phase start: c3079d2
+git rev-parse HEAD at phase start: da69923
+git rev-parse origin/master at phase start: da69923
 agent_board_freshness: passed
 git diff --check: passed
 rule_intake_smoke_test_performed: true
@@ -165,6 +168,6 @@ external repository modification: no
 
 ```text
 Use the calibrated board as the current navigation source.
-v7.237 created the Product Image Generation Authorization Draft. Continue only with v7.238_product_image_generation_authorization_draft_review_gate or a user-approved alternative; active A5 execution remains blocked.
-Before continuing after v7.237, verify branch, worktree, and local/remote sync from Git output.
+v7.238 reviewed the Product Image Generation Authorization Draft. Continue only with v7.239_product_image_generation_plan_draft_gate or a user-approved alternative; active A5 execution remains blocked.
+Before continuing after v7.238, verify branch, worktree, and local/remote sync from Git output.
 ```

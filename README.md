@@ -7,14 +7,14 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest closed baseline before v7.237: c3079d2 on master == origin/master.
-Current mainline state: v7.237 product image generation authorization draft gate.
+Latest closed baseline before v7.238: da69923 on master == origin/master.
+Current mainline state: v7.238 product image generation authorization draft review gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
-Current status: Product Image Generation Authorization Draft created as a non-active draft. It is review paperwork only and does not authorize A5 execution.
+Current status: Product Image Generation Authorization Draft reviewed. The draft is safe to keep for A4 planning, but it is not ready for active A5 execution.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized: A5, provider contact, runtime, plugin call, image generation, DailyNote write, VCP memory write, real manifest read, tag, release, deploy.
-Recommended next after v7.237: v7.238_product_image_generation_authorization_draft_review_gate.
+Recommended next after v7.238: v7.239_product_image_generation_plan_draft_gate.
 ```
 
 历史状态脉络：
@@ -222,6 +222,7 @@ v7.234 Product Image Workflow Runbook Gate — Operator runbook created for the 
 v7.235 Product Image Workflow Static Walkthrough Gate — Synthetic matte ceramic coffee mug walkthrough created to test the docs-only workflow path from brief to delivery package. It stops before future A5 generation and writes no assets or memory.
 v7.236 Product Image Workflow A5 Readiness Review Gate — Docs-only readiness review completed. The workflow is ready for a non-active authorization draft but not for provider contact, plugin call, image generation, output save, runtime, or memory write.
 v7.237 Product Image Generation Authorization Draft Gate — Non-active A5 authorization draft created for review. Status remains draft, approval_status remains not_requested, and active A5 execution remains blocked.
+v7.238 Product Image Generation Authorization Draft Review Gate — Non-active draft reviewed for completeness and blockers. It is safe to keep for A4 planning, but active A5 remains blocked until a matching generation plan and preflight exist.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3
