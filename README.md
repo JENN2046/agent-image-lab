@@ -7,14 +7,14 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest closed baseline before v7.228: 5f31426 on master == origin/master.
-Current mainline state: v7.228 product image prompt package template instance gate.
+Latest closed baseline before v7.229: cd3414b on master == origin/master.
+Current mainline state: v7.229 prompt package human review checklist gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
-Current status: Product Image Prompt Package Instance Template created; it is fillable/reviewable only and does not create a real generation task.
+Current status: Prompt package human review checklist and status taxonomy created; review may approve drafting a future A5 package but does not authorize generation.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized: A5, provider contact, runtime, plugin call, image generation, DailyNote write, VCP memory write, real manifest read, tag, release, deploy.
-Recommended next after v7.228: v7.229_prompt_package_human_review_checklist_gate.
+Recommended next after v7.229: v7.230_prompt_package_a5_authorization_handoff_gate.
 ```
 
 历史状态脉络：
@@ -213,6 +213,7 @@ v7.219 Release Readiness Delta — Post-v7.217 readiness delta created. It clari
 v7.226 Image Workflow Product Return Gate — Product mainline returned from governance hardening to image workflow planning. Four candidate routes reviewed; Prompt Package Builder selected as the next highest-value A4 docs-only task.
 v7.227 Prompt Package Builder Taskbook Gate — Product Image Prompt Package Builder schema and reusable taskbook created for reviewable prompt packages. No A5, provider contact, runtime, plugin call, image generation, or memory write.
 v7.228 Product Image Prompt Package Template Instance Gate — First fillable non-executing prompt package instance template created. It has brief intake, product identity, shot intent, visual direction, prompt draft, constraints, review checklist, A5 handoff, and memory suitability fields.
+v7.229 Prompt Package Human Review Checklist Gate — Human review checklist, status taxonomy, approval requirements, and rejection reason taxonomy created for prompt package instances before any A5 generation authorization.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3

@@ -1,5 +1,41 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.229 Prompt Package Human Review Checklist Gate
+
+```text
+Status: completed_validated — A4 docs-only product review planning
+Source baseline: cd3414b == origin/master at phase start
+Purpose: define human review checklist, status taxonomy, approval requirements, and rejection reasons for prompt package instances before A5
+human_review_checklist_created: true
+status_taxonomy_created: true
+rejection_reason_taxonomy_created: true
+A5_generation_authorization_required_later: true
+recommended_next: v7.230_prompt_package_a5_authorization_handoff_gate
+README_updated: true
+roadmap_updated: true
+project_master_plan_updated: true
+handoff_updated: true
+run_state_updated: true
+task_queue_updated: true
+checkpoint_updated: true
+validation_log_updated: true
+agent_board_STATE_json_modified: false
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+VCPChat_runtime: false
+VCPToolBox_runtime: false
+real_manifest_read: false
+CDP_bridge_MCP: false
+production_candidate_002_started: false
+batch_005_started: false
+validation: git diff --check passed; exact diff review passed; node scripts/validate_agent_board_state.js passed
+```
+
 ## v7.228 Product Image Prompt Package Template Instance Gate
 
 ```text

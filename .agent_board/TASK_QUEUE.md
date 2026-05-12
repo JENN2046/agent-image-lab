@@ -9,7 +9,7 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
-Complete v7.228 product image prompt package template instance gate and route the next phase to human review readiness.
+Complete v7.229 prompt package human review checklist gate and route the next phase to A5 handoff planning without activation.
 ```
 
 ---
@@ -60,13 +60,13 @@ none
 ### todo
 
 ```text
-1. v7.229_prompt_package_human_review_checklist_gate.
+1. v7.230_prompt_package_a5_authorization_handoff_gate.
 ```
 
-### recommended_next_after_v7_228
+### recommended_next_after_v7_229
 
 ```text
-v7.229_prompt_package_human_review_checklist_gate — define the human review checklist and status taxonomy for prompt package instances before A5 authorization.
+v7.230_prompt_package_a5_authorization_handoff_gate — define the handoff from approved prompt package instance to independent A5 authorization package without activating A5.
 ```
 
 ### done
@@ -96,6 +96,7 @@ v7.229_prompt_package_human_review_checklist_gate — define the human review ch
 22. v7.226 image workflow product return gate selected Prompt Package Builder as the next unique route.
 23. v7.227 prompt package builder taskbook gate created the schema, reusable taskbook, human review handoff, A5 authorization handoff, and memory suitability handoff.
 24. v7.228 product image prompt package template instance gate created the fillable non-executing instance template.
+25. v7.229 prompt package human review checklist gate created review checklist, status taxonomy, approval requirements, and rejection reasons.
 ```
 
 ### blocked
@@ -111,6 +112,7 @@ v7.229_prompt_package_human_review_checklist_gate — define the human review ch
 8. v7.226 does not authorize A5/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
 9. v7.227 does not authorize A5/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
 10. v7.228 does not authorize A5/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
+11. v7.229 does not authorize A5/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
 ```
 
 ### skipped
