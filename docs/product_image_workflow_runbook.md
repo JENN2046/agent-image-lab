@@ -175,17 +175,17 @@ delivery_review_surface_package:
 
 ```yaml
 stop_before:
-  A5_execution: true
-  provider_contact: true
-  plugin_call: true
-  image_generation: true
-  runtime_execution: true
-  output_save: true
-  DailyNote_write: true
-  VCP_memory_write: true
-  real_manifest_read: true
-  dependency_change: true
-  tag_release_deploy: true
+  A5_execution_requires_stop: true
+  provider_contact_requires_stop: true
+  plugin_call_requires_stop: true
+  image_generation_requires_stop: true
+  runtime_execution_requires_stop: true
+  output_save_requires_stop: true
+  DailyNote_write_requires_stop: true
+  VCP_memory_write_requires_stop: true
+  real_manifest_read_requires_stop: true
+  dependency_change_requires_stop: true
+  tag_release_deploy_requires_stop: true
 ```
 
 ## Minimal Operator Closeout

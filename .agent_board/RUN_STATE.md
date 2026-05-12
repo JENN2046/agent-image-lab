@@ -9,37 +9,37 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab is in v7.239 product image generation plan draft gate. The goal is to create a non-executing generation plan draft without activation or execution.
+Agent Image Lab has run active A5 preflight only for the product image authorization draft. The result is blocked by dirty worktree; no activation or execution is allowed.
 ```
 
 ## Current Phase
 
 ```text
-v7.239 — Product Image Generation Plan Draft Gate
-status: completed_validated
-source_commit: c89f00b
-source_message: docs: add product image generation authorization draft review
+Active A5 Preflight Only — Product Image Authorization Draft
+status: blocked_dirty_worktree
+source_commit: 03fd398
+source_message: docs: add product image generation plan draft
 branch: master tracking origin/master
-Worktree: clean at v7.239 start
+Worktree: dirty from v7.240-v7.243 local A4.5 chain and the active preflight record
 worktree_start_clean: true
-origin_sync_start: local HEAD equals origin/master at c89f00b
+origin_sync_start: local HEAD equals origin/master at 03fd398
 ```
 
 ## Current Task
 
 ```text
-Create the product image generation plan draft without entering active A5, runtime, provider contact, plugin call, image generation, DailyNote write, output save, or VCP memory write.
+Run local preflight against AUTH-PENDING-20260512-001 without entering active A5, runtime, provider contact, plugin call, image generation, DailyNote write, output save, or VCP memory write.
 ```
 
 ## Current Local Work State
 
 ```text
-Worktree: clean at v7.239 start; product image generation plan draft completed_validated
+Worktree: dirty with current A4.5 local docs/validator chain; active A5 preflight is blocked_dirty_worktree
 active_workers: 0
 execution_mode: Single-Window 4-Agent Compact Autopilot
-commander_role: calibrate state and decide whether there is a next valuable task
-architect_role: keep write scope to .agent_board current-state files
-worker_role: apply the board patch only
+commander_role: complete docs-only non-active skeleton and stop before human-only activation fields
+architect_role: keep write scope to docs, indexes, and .agent_board current-state files
+worker_role: apply the skeleton and board patch only
 reviewer_role: inspect diff, run allowed local checks, and close out
 ```
 
@@ -70,7 +70,12 @@ Product Image Workflow A5 Readiness Review: v7.236 completed_validated
 Product Image Generation Authorization Draft: v7.237 completed_validated
 Product Image Generation Authorization Draft Review: v7.238 completed_validated
 Product Image Generation Plan Draft: v7.239 completed_validated
-Recommended next product task: v7.240_product_image_generation_plan_authorization_match_review_gate
+Product Image Generation Plan Authorization Match Review: v7.240 completed_validated
+MVP Aggregate Validator Calibration: completed_validated
+Product Image Authorization Draft Plan Ref Alignment: v7.241 completed_validated
+Product Image Authorization Activation Gap Review: v7.242 completed_validated
+Product Image Active Authorization Package Skeleton: v7.243 completed_validated
+Recommended next product task: resolve_dirty_worktree_before_a5_execution
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```
@@ -98,6 +103,10 @@ v7_236_is_product_image_workflow_A5_readiness_review_only: true
 v7_237_is_product_image_generation_authorization_draft_only: true
 v7_238_is_product_image_generation_authorization_draft_review_only: true
 v7_239_is_product_image_generation_plan_draft_only: true
+v7_240_is_product_image_generation_plan_authorization_match_review_only: true
+v7_241_is_product_image_authorization_draft_plan_ref_alignment_only: true
+v7_242_is_product_image_authorization_activation_gap_review_only: true
+v7_243_is_product_image_active_authorization_package_skeleton_only: true
 
 Validator Governance Chain v1: closed
 batch_005_allowed_now: false
@@ -112,8 +121,8 @@ tag/release/deploy remain blocked without explicit authorization and preflight
 ## Current Options
 
 ```text
-recommended_next_after_v7_239: v7.240_product_image_generation_plan_authorization_match_review_gate
-purpose: review the paper-level match between generation plan draft and authorization draft; active A5 execution remains blocked
+recommended_next_after_active_preflight: resolve_dirty_worktree_before_a5_execution
+purpose: resolve or explicitly checkpoint the current local changes, then rerun preflight; active A5 generation remains blocked
 not_allowed_as_next_by_default: A5, provider contact, runtime, plugin call, image generation, memory write, tag, release
 ```
 
@@ -137,11 +146,17 @@ source baseline for v7.236: bd73eb5
 source baseline for v7.237: c3079d2
 source baseline for v7.238: da69923
 source baseline for v7.239: c89f00b
+source baseline for v7.240: 03fd398
+source baseline for v7.241: 03fd398
+source baseline for v7.242: 03fd398
+source baseline for v7.243: 03fd398
 git status -sb at phase start: clean
-git rev-parse HEAD at phase start: c89f00b
-git rev-parse origin/master at phase start: c89f00b
+git rev-parse HEAD at phase start: 03fd398
+git rev-parse origin/master at phase start: 03fd398
 agent_board_freshness: passed
 git diff --check: passed
+scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings after stop-rule field rename
+scripts/validate_mvp.ps1: passed after aggregate validator calibration
 rule_intake_smoke_test_performed: true
 rule_intake_smoke_test_result: passed in v7.224b read-only smoke test
 guarded push preflight: passed
@@ -171,6 +186,6 @@ external repository modification: no
 
 ```text
 Use the calibrated board as the current navigation source.
-v7.239 created the Product Image Generation Plan Draft. Continue only with v7.240_product_image_generation_plan_authorization_match_review_gate or a user-approved alternative; active A5 execution remains blocked.
-Before continuing after v7.239, verify branch, worktree, and local/remote sync from Git output.
+Active A5 preflight was run locally and is blocked by dirty worktree. Generation remains blocked until the worktree is made safe or explicitly checkpointed, preflight is rerun and passes, and a separate execution decision is made.
+Before continuing, verify branch, worktree, local/remote sync, and explicit authorization scope from Git/user output.
 ```

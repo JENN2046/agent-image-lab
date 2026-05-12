@@ -1,5 +1,239 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## Active A5 Preflight Only — Product Image Authorization Draft
+
+```text
+Status: blocked_dirty_worktree — local preflight ran, real A5 execution remains blocked
+Source baseline: 03fd398 == origin/master
+Purpose: check AUTH-PENDING-20260512-001 before any provider contact, plugin call, image generation, output save, DailyNote write, or VCP memory write
+preflight_run_id: A5-PREFLIGHT-20260512-001
+authorization_package: AUTH-PENDING-20260512-001
+source_generation_plan: GP-DRAFT-20260512-001
+selected_plugin_id: DoubaoGen
+selected_plugin_command: generate
+selected_plugin_model: doubao-seedream-5-0-260128
+max_plugin_calls: 1
+retry_limit: 0
+execute_now: false
+preflight_result: blocked
+preflight_blocker: dirty_worktree
+ready_for_active_A5_execution: false
+recommended_next: resolve_dirty_worktree_before_a5_execution
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+output_save: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+VCPChat_runtime: false
+VCPToolBox_runtime: false
+real_manifest_read: false
+CDP_bridge_MCP: false
+validation: git diff --check passed; node scripts/validate_agent_board_state.js passed; scripts/validate-agent-image-lab-local.ps1 passed with warnings; scripts/validate_mvp.ps1 passed
+```
+
+## v7.243 Product Image Active Authorization Package Skeleton Gate
+
+```text
+Status: completed_validated — A4.5 docs-only simplified preflight-pending authorization draft
+Source baseline: 03fd398 == origin/master at phase start
+Purpose: create a Chinese-readable pending approval A5 authorization draft without activation or execution
+simplified_preflight_pending_draft_created: true
+draft_id: AUTH-PENDING-20260512-001
+source_authorization_package: AUTH-DRAFT-20260512-001
+source_generation_plan: GP-DRAFT-20260512-001
+source_activation_gap_review: PI-AUTH-GAP-20260512-001
+package_status: preflight_pending
+execute_now: false
+preflight_required: true
+selected_plugin_id: DoubaoGen
+selected_plugin_command: generate
+selected_plugin_model: doubao-seedream-5-0-260128
+max_plugin_calls: 1
+retry_limit: 0
+output_directory_ref: A:\agent-image-lab-IMAGE-OUTPUT
+approval_recorded: true
+active_A5_authorization_created: false
+ready_for_active_A5_execution: false
+recommended_next: run_active_a5_preflight_only
+README_updated: true
+roadmap_updated: true
+project_master_plan_updated: true
+handoff_updated: true
+run_state_updated: true
+task_queue_updated: true
+checkpoint_updated: true
+validation_log_updated: true
+agent_board_STATE_json_modified: false
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+output_save: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+VCPChat_runtime: false
+VCPToolBox_runtime: false
+real_manifest_read: false
+real_output_path_selected: false
+raw_payload_created: false
+CDP_bridge_MCP: false
+production_candidate_002_started: false
+batch_005_started: false
+validation: git diff --check passed; node scripts/validate_agent_board_state.js passed; scripts/validate-agent-image-lab-local.ps1 passed with warnings; scripts/validate_mvp.ps1 passed
+```
+
+## v7.242 Product Image Authorization Activation Gap Review Gate
+
+```text
+Status: completed_validated — A4.5 docs-only activation gap review
+Source baseline: 03fd398 == origin/master at phase start
+Purpose: classify remaining active A5 activation gaps after plan-ref alignment without activation or execution
+activation_gap_review_created: true
+review_id: PI-AUTH-GAP-20260512-001
+source_authorization_package: AUTH-DRAFT-20260512-001
+source_generation_plan: GP-DRAFT-20260512-001
+plan_ref_gap_closed: true
+remaining_gaps_classified: true
+A4_can_continue_to_package_skeleton: true
+authorization_package_status: draft
+approval_status: not_requested
+active_A5_authorization_created: false
+ready_for_active_A5_execution: false
+recommended_next: v7.243_product_image_active_authorization_package_skeleton_gate
+README_updated: true
+roadmap_updated: true
+project_master_plan_updated: true
+handoff_updated: true
+run_state_updated: true
+task_queue_updated: true
+checkpoint_updated: true
+validation_log_updated: true
+agent_board_STATE_json_modified: false
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+output_save: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+VCPChat_runtime: false
+VCPToolBox_runtime: false
+real_manifest_read: false
+real_output_path_selected: false
+raw_payload_created: false
+CDP_bridge_MCP: false
+production_candidate_002_started: false
+batch_005_started: false
+validation: git diff --check passed; node scripts/validate_agent_board_state.js passed; scripts/validate-agent-image-lab-local.ps1 passed with warnings; scripts/validate_mvp.ps1 passed
+```
+
+## v7.241 Product Image Authorization Draft Plan Ref Alignment Gate
+
+```text
+Status: completed_validated — A4.5 docs-only non-active authorization draft patch
+Source baseline: 03fd398 == origin/master at phase start
+Purpose: patch AUTH-DRAFT-20260512-001 with GP-DRAFT-20260512-001 / v1 without activation or execution
+authorization_draft_patched: true
+authorization_package_id: AUTH-DRAFT-20260512-001
+generation_plan_ref: GP-DRAFT-20260512-001
+generation_plan_version: v1
+resolved_blockers: generation_plan_ref_missing, generation_plan_version_missing
+authorization_package_status: draft
+approval_status: not_requested
+active_A5_authorization_created: false
+ready_for_active_A5_execution: false
+recommended_next: v7.242_product_image_authorization_activation_gap_review_gate
+README_updated: true
+roadmap_updated: true
+project_master_plan_updated: true
+handoff_updated: true
+run_state_updated: true
+task_queue_updated: true
+checkpoint_updated: true
+validation_log_updated: true
+agent_board_STATE_json_modified: false
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+output_save: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+VCPChat_runtime: false
+VCPToolBox_runtime: false
+real_manifest_read: false
+real_output_path_selected: false
+raw_payload_created: false
+CDP_bridge_MCP: false
+production_candidate_002_started: false
+batch_005_started: false
+validation: git diff --check passed; node scripts/validate_agent_board_state.js passed; scripts/validate-agent-image-lab-local.ps1 passed with warnings; scripts/validate_mvp.ps1 passed
+```
+
+## v7.240 Product Image Generation Plan Authorization Match Review Gate
+
+```text
+Status: completed_validated — A4.5 docs-only paper-level match review
+Source baseline: 03fd398 == origin/master at phase start
+Purpose: review the paper-level match between GP-DRAFT-20260512-001 and AUTH-DRAFT-20260512-001 without activation or execution
+match_review_created: true
+generation_plan_id: GP-DRAFT-20260512-001
+generation_plan_version: v1
+authorization_package_id: AUTH-DRAFT-20260512-001
+authorization_package_version: v1
+prompt_package_scope_matches: true
+generation_plan_ref_available: true
+authorization_draft_references_plan_now: false
+ready_to_patch_authorization_draft_with_plan_ref: true
+ready_for_active_A5_execution: false
+active_A5_authorization_created: false
+recommended_next: v7.241_product_image_authorization_draft_plan_ref_alignment_gate
+README_updated: true
+roadmap_updated: true
+project_master_plan_updated: true
+handoff_updated: true
+run_state_updated: true
+task_queue_updated: true
+checkpoint_updated: true
+validation_log_updated: true
+agent_board_STATE_json_modified: false
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+output_save: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+VCPChat_runtime: false
+VCPToolBox_runtime: false
+real_manifest_read: false
+real_output_path_selected: false
+raw_payload_created: false
+CDP_bridge_MCP: false
+production_candidate_002_started: false
+batch_005_started: false
+validation: git diff --check passed; exact diff review passed; node scripts/validate_agent_board_state.js passed; scripts/validate-agent-image-lab-local.ps1 passed with manual-review warnings; scripts/validate_mvp.ps1 passed after aggregate validator calibration
+```
+
+## validate_mvp Aggregate Calibration
+
+```text
+Status: completed_validated — local aggregate validator calibration
+Purpose: keep validate_mvp.ps1 usable on the current moving mainline without requiring .agent_board to be synchronized to historical phases
+v4_3_current_agent_board_url_false_positive_removed: true
+historical_current_state_validators_skipped_by_default: true
+historical_validator_scripts_syntax_checked: true
+PROJECT_MASTER_PLAN_allowed_in_current_A4_scope: true
+validation: powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1 passed; git diff --check passed
+```
+
 ## v7.239 Product Image Generation Plan Draft Gate
 
 ```text

@@ -9,7 +9,7 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
-Complete v7.239 product image generation plan draft gate and route the next phase to paper-level scope match review.
+Active A5 preflight only has been run for the product image authorization draft and is blocked by dirty worktree.
 ```
 
 ---
@@ -60,13 +60,13 @@ none
 ### todo
 
 ```text
-1. v7.240_product_image_generation_plan_authorization_match_review_gate.
+1. resolve_dirty_worktree_before_a5_execution.
 ```
 
-### recommended_next_after_v7_239
+### recommended_next_after_v7_243
 
 ```text
-v7.240_product_image_generation_plan_authorization_match_review_gate — review the paper-level match between generation plan draft and authorization draft; active A5 execution remains blocked.
+resolve_dirty_worktree_before_a5_execution — resolve or explicitly checkpoint the current local changes, then rerun preflight; image generation remains blocked until preflight passes and a separate execution decision is made.
 ```
 
 ### done
@@ -107,6 +107,12 @@ v7.240_product_image_generation_plan_authorization_match_review_gate — review 
 33. v7.237 product image generation authorization draft gate created a non-active draft with status=draft and approval_status=not_requested.
 34. v7.238 product image generation authorization draft review gate confirmed the draft is safe-to-keep A4 paperwork, but not active A5-ready.
 35. v7.239 product image generation plan draft gate created GP-DRAFT-20260512-001 as a non-executing plan draft.
+36. v7.240 product image generation plan authorization match review gate confirmed paper-level compatibility and identified the smallest non-active plan-ref alignment patch.
+37. validate_mvp aggregate calibration completed; historical current-state validators no longer require current .agent_board to match superseded phases, and scripts/validate_mvp.ps1 passes.
+38. v7.241 product image authorization draft plan-ref alignment gate patched AUTH-DRAFT-20260512-001 with GP-DRAFT-20260512-001 / v1 while preserving all active A5 blockers.
+39. v7.242 product image authorization activation gap review gate classified the remaining active A5 gaps while preserving all execution blockers.
+40. v7.243 product image active authorization package skeleton gate simplified the authorization draft into a one-page preflight-pending record with execute_now=false.
+41. active A5 preflight only was run and blocked by dirty worktree; no plugin call or image generation occurred.
 ```
 
 ### blocked
@@ -133,6 +139,10 @@ v7.240_product_image_generation_plan_authorization_match_review_gate — review 
 19. v7.237 does not authorize active A5/provider/runtime/plugin/image/DailyNote/VCP memory/output save/Review Console runtime/real manifest read/real output path/raw payload/CDP/bridge/MCP/tag/release/deploy.
 20. v7.238 does not authorize active A5/human approval request/provider/runtime/plugin/image/DailyNote/VCP memory/output save/Review Console runtime/real manifest read/real output path/raw payload/CDP/bridge/MCP/tag/release/deploy.
 21. v7.239 does not authorize active A5/provider/model/plugin selection/provider contact/runtime/plugin/image/DailyNote/VCP memory/output save/Review Console runtime/real manifest read/real output path/raw payload/CDP/bridge/MCP/tag/release/deploy.
+22. v7.240 does not authorize active A5/provider/model/plugin selection/provider contact/runtime/plugin/image/DailyNote/VCP memory/output save/Review Console runtime/real manifest read/real output path/raw payload/CDP/bridge/MCP/tag/release/deploy.
+23. v7.241 does not authorize active A5/provider/model/plugin selection/provider contact/runtime/plugin/image/DailyNote/VCP memory/output save/Review Console runtime/real manifest read/real output path/raw payload/CDP/bridge/MCP/tag/release/deploy.
+24. v7.242 does not authorize active A5/provider/model/plugin selection/provider contact/runtime/plugin/image/DailyNote/VCP memory/output save/Review Console runtime/real manifest read/real output path/raw payload/CDP/bridge/MCP/tag/release/deploy.
+25. v7.243 does not authorize active A5/provider/model/plugin selection/provider contact/runtime/plugin/image/DailyNote/VCP memory/output save/Review Console runtime/real manifest read/real output path/raw payload/CDP/bridge/MCP/tag/release/deploy.
 ```
 
 ### skipped

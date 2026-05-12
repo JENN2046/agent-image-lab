@@ -4,6 +4,7 @@
 
 ```text
 1. Default A4 docs-only continuation is blocked unless the next task creates clear non-redundant product value.
+2. Active A5 product image execution is blocked by dirty worktree until current local changes are made safe or explicitly checkpointed and fresh preflight passes.
 ```
 
 ## Current Mainline Quality Stop

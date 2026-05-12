@@ -3,11 +3,11 @@
 ## Handoff Summary
 
 ```text
-Status: v7.239 product image generation plan draft gate completed_validated.
-Reason: create a non-executing generation plan draft without activation or execution.
+Status: active A5 preflight only blocked_dirty_worktree.
+Reason: local preflight ran against AUTH-PENDING-20260512-001, but dirty worktree blocks real A5 execution.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
-Source baseline for v7.239: c89f00b == origin/master at phase start
+Source baseline for v7.243: 03fd398 == origin/master at phase start
 Current active workers: 0
 Current operating style: Single-Window 4-Agent Compact Autopilot
 ```
@@ -15,10 +15,10 @@ Current operating style: Single-Window 4-Agent Compact Autopilot
 ## Current Mainline Reality
 
 ```text
-latest_completed_remote_baseline_before_v7_239: c89f00b
-latest_completed_gate_before_v7_239: v7.238_product_image_generation_authorization_draft_review_gate
-current_gate: v7.239_product_image_generation_plan_draft_gate
-current_gate_status: completed_validated
+latest_completed_remote_baseline_before_v7_243: 03fd398
+latest_completed_gate_before_v7_243: v7.242_product_image_authorization_activation_gap_review_gate
+current_gate: active_a5_preflight_only_product_image_authorization
+current_gate_status: blocked_dirty_worktree
 
 Smart Commander protocol track: stable and consolidated
 Static Review Console mockup track: quality stop reached
@@ -45,10 +45,16 @@ product image workflow A5 readiness review: v7.236 completed_validated
 product image generation authorization draft: v7.237 completed_validated
 product image generation authorization draft review: v7.238 completed_validated
 product image generation plan draft: v7.239 completed_validated
-recommended_next: v7.240_product_image_generation_plan_authorization_match_review_gate
+product image generation plan authorization match review: v7.240 completed_validated
+MVP aggregate validator calibration: completed_validated
+product image authorization draft plan-ref alignment: v7.241 completed_validated
+product image authorization activation gap review: v7.242 completed_validated
+product image active authorization package skeleton: v7.243 completed_validated
+active A5 preflight only: blocked_dirty_worktree
+recommended_next: resolve_dirty_worktree_before_a5_execution
 
 continue_A4_docs_only_by_default: false
-next_requires_new_value_or_explicit_authorization: true
+next_requires_human_decision_or_explicit_authorization: true
 ```
 
 ## Current Stop Gates
@@ -81,16 +87,22 @@ v7.236 does not authorize active A5, provider, runtime, plugin, image, DailyNote
 v7.237 does not authorize active A5, provider, runtime, plugin, image, DailyNote, VCP memory, output save, Review Console runtime, real manifest read, real output path selection, raw payload creation, CDP, bridge, MCP, tag, release, deploy, production_candidate_002, or Batch 005
 v7.238 does not authorize active A5, human approval request, provider, runtime, plugin, image, DailyNote, VCP memory, output save, Review Console runtime, real manifest read, real output path selection, raw payload creation, CDP, bridge, MCP, tag, release, deploy, production_candidate_002, or Batch 005
 v7.239 does not authorize active A5, provider/model/plugin selection, provider contact, runtime, plugin, image, DailyNote, VCP memory, output save, Review Console runtime, real manifest read, real output path selection, raw payload creation, CDP, bridge, MCP, tag, release, deploy, production_candidate_002, or Batch 005
+v7.240 does not authorize active A5, provider/model/plugin selection, provider contact, runtime, plugin, image, DailyNote, VCP memory, output save, Review Console runtime, real manifest read, real output path selection, raw payload creation, CDP, bridge, MCP, tag, release, deploy, production_candidate_002, or Batch 005
+v7.241 does not authorize active A5, provider/model/plugin selection, provider contact, runtime, plugin, image, DailyNote, VCP memory, output save, Review Console runtime, real manifest read, real output path selection, raw payload creation, CDP, bridge, MCP, tag, release, deploy, production_candidate_002, or Batch 005
+v7.242 does not authorize active A5, provider/model/plugin selection, provider contact, runtime, plugin, image, DailyNote, VCP memory, output save, Review Console runtime, real manifest read, real output path selection, raw payload creation, CDP, bridge, MCP, tag, release, deploy, production_candidate_002, or Batch 005
+v7.243 does not authorize active A5, provider/model/plugin selection, provider contact, runtime, plugin, image, DailyNote, VCP memory, output save, Review Console runtime, real manifest read, real output path selection, raw payload creation, CDP, bridge, MCP, tag, release, deploy, production_candidate_002, or Batch 005
 ```
 
 ## Validation Snapshot
 
 ```text
-git status -sb at v7.239 start: clean
-git rev-parse HEAD at v7.239 start: c89f00b
-git rev-parse origin/master at v7.239 start: c89f00b
+git status -sb at active preflight: dirty from current A4.5 local docs/validator chain
+git rev-parse HEAD at v7.243 start: 03fd398
+git rev-parse origin/master at v7.243 start: 03fd398
 agent_board_freshness: manually checked from exact diff
 git diff --check: passed
+scripts/validate-agent-image-lab-local.ps1: passed with manual-review warnings after stop-rule field rename
+scripts/validate_mvp.ps1: passed after aggregate validator calibration and active preflight check
 rule_intake_smoke_test: passed in v7.224b read-only smoke test
 scripts/validate_mvp.ps1: not required for board-only calibration unless reviewer escalates
 scripts/validate-agent-image-lab-local.ps1: not required for board-only calibration unless reviewer escalates
@@ -116,8 +128,7 @@ dependency/config/env modification: no
 ## Human Decisions Needed
 
 ```text
-No human decision is needed to finish v7.239 commit and guarded push because the user authorized safe A4 docs-only autopilot and standing guarded push authorization is active.
-Human authorization is needed before any A5 provider contact, runtime integration, tag/release/deploy, or repetitive low-value A4 gate.
+Next action is resolve_dirty_worktree_before_a5_execution. Human authorization is still needed before provider contact, runtime integration, plugin call, image generation, tag/release/deploy, or repetitive low-value A4 gate.
 ```
 
 ## Exact Resume Prompt
@@ -129,8 +140,8 @@ Human authorization is needed before any A5 provider contact, runtime integratio
 
 当前仓库状态：
 - master should track origin/master.
-- source baseline for v7.239: c89f00b.
-- current phase: v7.239 product image generation plan draft gate.
+- source baseline for v7.243: 03fd398.
+- current phase: active A5 preflight only blocked_dirty_worktree.
 - v7.221 mainline quality stop reached.
 - v7.222 board calibration completed.
 - v7.223 read-only value selection selected v7.224 as the only safe next task.
@@ -156,8 +167,13 @@ Human authorization is needed before any A5 provider contact, runtime integratio
 - v7.237 created a non-active A5 authorization draft with status=draft and approval_status=not_requested.
 - v7.238 reviewed the non-active draft and confirmed it is safe-to-keep A4 paperwork but not active A5-ready.
 - v7.239 created a non-executing generation plan draft with generation_plan_id=GP-DRAFT-20260512-001.
-- recommended_next after v7.239: v7.240_product_image_generation_plan_authorization_match_review_gate.
-- next step must create clear product value or require explicit A5/runtime/version authorization.
+- v7.240 reviewed the paper-level match between GP-DRAFT-20260512-001 and AUTH-DRAFT-20260512-001.
+- v7.241 patched AUTH-DRAFT-20260512-001 with GP-DRAFT-20260512-001 / v1 without activation.
+- v7.242 classified remaining active A5 activation gaps without activation.
+- v7.243 simplified the authorization draft into a one-page preflight-pending record without execution.
+- active A5 preflight only has been run and is blocked by dirty worktree.
+- recommended_next after active preflight: resolve_dirty_worktree_before_a5_execution.
+- execution still requires safe worktree, passing fresh preflight, and a separate decision after preflight.
 
 不要读取真实 VCPChat/VCPToolBox。
 不要读取真实 manifest。

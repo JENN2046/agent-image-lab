@@ -7,14 +7,14 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest closed baseline before v7.239: c89f00b on master == origin/master.
-Current mainline state: v7.239 product image generation plan draft gate.
+Latest closed baseline before v7.243: 03fd398 on master == origin/master.
+Current mainline state: v7.243 product image active authorization package skeleton gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
-Current status: Product Image Generation Plan Draft created as a non-executing paper plan. It provides a future plan reference but does not authorize A5 execution.
+Current status: Product Image A5 Generation Authorization Draft simplified to a one-page preflight-pending record. It does not execute now.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized: A5, provider contact, runtime, plugin call, image generation, DailyNote write, VCP memory write, real manifest read, tag, release, deploy.
-Recommended next after v7.239: v7.240_product_image_generation_plan_authorization_match_review_gate.
+Recommended next after active preflight: resolve_dirty_worktree_before_a5_execution.
 ```
 
 历史状态脉络：
@@ -224,6 +224,10 @@ v7.236 Product Image Workflow A5 Readiness Review Gate — Docs-only readiness r
 v7.237 Product Image Generation Authorization Draft Gate — Non-active A5 authorization draft created for review. Status remains draft, approval_status remains not_requested, and active A5 execution remains blocked.
 v7.238 Product Image Generation Authorization Draft Review Gate — Non-active draft reviewed for completeness and blockers. It is safe to keep for A4 planning, but active A5 remains blocked until a matching generation plan and preflight exist.
 v7.239 Product Image Generation Plan Draft Gate — Non-executing generation plan draft created with `GP-DRAFT-20260512-001`. It reduces the missing plan reference blocker but keeps provider/plugin/model/output/payload/A5 execution blocked.
+v7.240 Product Image Generation Plan Authorization Match Review Gate — Paper-level match review completed. The plan and authorization draft are compatible, but the authorization draft still needs a non-active plan ref/version alignment patch before any later A5 activation package can be considered.
+v7.241 Product Image Authorization Draft Plan Ref Alignment Gate — Non-active authorization draft patched with `GP-DRAFT-20260512-001` / `v1`; all executable A5 blockers remain active.
+v7.242 Product Image Authorization Activation Gap Review Gate — Remaining active A5 activation gaps classified; next safe step is a non-active skeleton package, not execution.
+v7.243 Product Image Active Authorization Package Skeleton Gate — One-page preflight-pending authorization draft created with plugin/model/call-count/output/approval fields recorded; `execute_now=false`, no plugin call, no image generation.
 ```
 
 current_prompt_package: product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3

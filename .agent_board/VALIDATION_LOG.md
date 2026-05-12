@@ -1,5 +1,228 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260512-A5-PREFLIGHT-ONLY-PRODUCT-IMAGE-AUTHORIZATION
+
+Task:
+
+```text
+Run local preflight only against AUTH-PENDING-20260512-001 without plugin call, API call, image generation, output save, DailyNote write, VCP memory write, runtime execution, commit, tag, push, release, or external repository modification.
+```
+
+Commands run:
+
+```text
+git status --short --branch
+git diff --check
+node scripts/validate_agent_board_state.js
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+```
+
+Result:
+
+```text
+blocked_dirty_worktree
+```
+
+Findings:
+
+```text
+AUTH-PENDING-20260512-001 contains the required plugin, command, model, max_calls=1, retry_limit=0, output policy, reviewer/approver, approval timestamp, expiry, and no DailyNote / no VCP memory constraints. However, the current worktree is dirty with local A4.5 changes and untracked docs, so real A5 execution is blocked until the worktree is made safe or explicitly checkpointed and a fresh preflight passes.
+```
+
+Warnings:
+
+```text
+validate-agent-image-lab-local.ps1 passed with manual-review warnings for known negative/checklist references such as token, cookie, password, image extensions, and script extensions. Git reported LF-to-CRLF working-copy warnings only.
+```
+
+Not validated:
+
+```text
+No plugin call, API call, image generation, output save, DailyNote write, VCP memory write, runtime execution, commit, tag, push, release, or external repository modification was performed.
+```
+
+Notes:
+
+```text
+Next recommended action is resolve_dirty_worktree_before_a5_execution. Do not enter real A5 until the worktree is safe, preflight is rerun and passes, and a separate execution decision is made.
+```
+
+## VALIDATION-20260512-V7-243-PRODUCT-IMAGE-ACTIVE-AUTHORIZATION-PACKAGE-SKELETON
+
+Task:
+
+```text
+Simplify the future A5 authorization package skeleton into a one-page preflight-pending authorization draft while preserving execute_now=false and no-execution boundaries.
+```
+
+Commands run:
+
+```text
+git status -sb
+git diff --check
+git diff -- README.md PROJECT_MASTER_PLAN.md docs/00_project_roadmap.md docs/product_image_active_authorization_package_skeleton.md docs/v7_243_product_image_active_authorization_package_skeleton_gate.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
+node scripts/validate_agent_board_state.js
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+v7.243 now records AUTH-PENDING-20260512-001 as a simplified one-page preflight_pending draft. User-filled plugin/model/call-count/output/approval values are recorded, execute_now=false, preflight_required=true, no plugin call or image generation has occurred, and real execution remains blocked until fresh preflight passes and a separate execution decision is made.
+```
+
+Notes:
+
+```text
+The next action is run_active_a5_preflight_only; generation remains blocked until preflight passes and a separate execution decision is made.
+```
+
+## VALIDATION-20260512-V7-242-PRODUCT-IMAGE-AUTHORIZATION-ACTIVATION-GAP-REVIEW
+
+Task:
+
+```text
+Classify remaining active A5 activation gaps after the v7.241 plan-ref alignment while preserving draft/not_requested status and all execution blockers.
+```
+
+Commands run:
+
+```text
+git status -sb
+git diff --check
+git diff -- README.md PROJECT_MASTER_PLAN.md docs/00_project_roadmap.md docs/product_image_authorization_activation_gap_review.md docs/v7_242_product_image_authorization_activation_gap_review_gate.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
+node scripts/validate_agent_board_state.js
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+v7.242 confirms plan-ref alignment is complete, but active A5 execution is still blocked by draft/not_requested status, missing target model/plugin, call budget, retry/output/review/expiry fields, and missing post-approval pre-execution lock.
+```
+
+Notes:
+
+```text
+The next recommended phase is v7.243_product_image_active_authorization_package_skeleton_gate.
+```
+
+## VALIDATION-20260512-V7-241-PRODUCT-IMAGE-AUTHORIZATION-DRAFT-PLAN-REF-ALIGNMENT
+
+Task:
+
+```text
+Patch the non-active authorization draft with GP-DRAFT-20260512-001 / v1 while preserving draft/not_requested status and all active A5 blockers.
+```
+
+Commands run:
+
+```text
+git status -sb
+git diff --check
+git diff -- README.md PROJECT_MASTER_PLAN.md docs/00_project_roadmap.md docs/product_image_generation_authorization_draft.md docs/v7_241_product_image_authorization_draft_plan_ref_alignment_gate.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
+node scripts/validate_agent_board_state.js
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+v7.241 resolves generation_plan_ref_missing and generation_plan_version_missing in AUTH-DRAFT-20260512-001. The authorization draft remains draft/not_requested, and active A5 execution remains blocked.
+```
+
+Notes:
+
+```text
+The next recommended phase is v7.242_product_image_authorization_activation_gap_review_gate.
+```
+
+## VALIDATION-20260512-V7-240-PRODUCT-IMAGE-GENERATION-PLAN-AUTHORIZATION-MATCH-REVIEW
+
+Task:
+
+```text
+Review the paper-level match between the non-executing generation plan draft and the non-active authorization draft.
+```
+
+Commands run:
+
+```text
+git status -sb
+git diff --check
+git diff -- README.md PROJECT_MASTER_PLAN.md docs/00_project_roadmap.md docs/v7_240_product_image_generation_plan_authorization_match_review_gate.md docs/product_image_generation_plan_authorization_match_review.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/BLOCKERS.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
+node scripts/validate_agent_board_state.js
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+```
+
+Result:
+
+```text
+passed after aggregate validator calibration
+```
+
+Findings:
+
+```text
+v7.240 confirms GP-DRAFT-20260512-001 / v1 and AUTH-DRAFT-20260512-001 / v1 are compatible at paper level. The authorization draft still needs a non-active plan-ref alignment patch and remains blocked from active A5 execution. The hard false-flag scan blocker was corrected by renaming stop-rule fields to explicit *_requires_stop names. MVP aggregate validation now passes after calibrating historical current-state validators and current A4 scope allowlist.
+```
+
+Notes:
+
+```text
+The next recommended phase is v7.241_product_image_authorization_draft_plan_ref_alignment_gate.
+```
+
+## VALIDATION-20260512-MVP-AGGREGATE-CALIBRATION
+
+Task:
+
+```text
+Calibrate scripts/validate_mvp.ps1 so the aggregate validator remains valid on the current moving mainline without requiring .agent_board to be synchronized to superseded historical phases.
+```
+
+Commands run:
+
+```text
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+git diff --check
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+The aggregate validator now skips historical current-state validator execution by default while retaining node --check coverage for those scripts. It also avoids scanning current .agent_board files as v4.3 historical overlay artifacts and allows PROJECT_MASTER_PLAN.md in current A4 scope.
+```
+
 ## VALIDATION-20260512-V7-239-PRODUCT-IMAGE-GENERATION-PLAN-DRAFT
 
 Task:
