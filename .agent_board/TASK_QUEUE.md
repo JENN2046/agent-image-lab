@@ -9,7 +9,7 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
-Complete v7.224 mainline status freshness alignment so README, roadmap, latest phase doc, and .agent_board resume surfaces agree on the current product-mainline state.
+Complete v7.224a autopilot rule intake hardening so future sessions must read and prove AGENTS/overlay/agent_board intake before editing files.
 ```
 
 ---
@@ -60,13 +60,13 @@ none
 ### todo
 
 ```text
-1. v7.225_product_mainline_value_task_gate — only when explicitly started as a new phase.
+1. v7.224b_autopilot_rule_smoke_test, only after a new phase starts.
 ```
 
-### recommended_next_after_v7_224
+### recommended_next_after_v7_224a
 
 ```text
-v7.225_product_mainline_value_task_gate — select and define one concrete value-bearing product-mainline task. It must not be another inertia governance polish gate.
+v7.224b_autopilot_rule_smoke_test — A4 read-only smoke test proving the new rule intake is read and restated before edits.
 ```
 
 ### done
@@ -88,6 +88,9 @@ v7.225_product_mainline_value_task_gate — select and define one concrete value
 14. v7.224 README / roadmap / .agent_board freshness alignment passed git diff --check.
 15. v7.224 agent_board_freshness passed node scripts/validate_agent_board_state.js.
 16. v7.224 commit and guarded push completed.
+17. v7.224a startup rule intake completed before edits.
+18. v7.224a AGENTS / overlay / README autopilot / docs / .agent_board freshness diff inspected.
+19. v7.224a git diff --check passed.
 ```
 
 ### blocked
@@ -98,6 +101,7 @@ v7.225_product_mainline_value_task_gate — select and define one concrete value
 3. Tag/release is blocked until explicit matching authorization and preflight.
 4. Repetitive A4 docs-only gates are blocked unless they create new product value.
 5. A5/provider/runtime/plugin/image/memory remain blocked in v7.224.
+6. v7.224a does not authorize A5/provider/runtime/plugin/image/memory/CDP/bridge/MCP/tag/release/deploy.
 ```
 
 ### skipped

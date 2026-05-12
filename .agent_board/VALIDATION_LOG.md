@@ -1,5 +1,44 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260512-V7-224A-RULE-INTAKE-HARDENING
+
+Task:
+
+```text
+Harden mandatory Autopilot Rule Intake in AGENTS.md, overlay, README autopilot prompt, v7.224a docs record, and .agent_board resume surfaces.
+```
+
+Commands run:
+
+```text
+git status -sb
+git log --oneline -8
+git rev-parse HEAD
+git rev-parse origin/master
+git diff --stat
+git diff -- AGENTS.md AGENTS.autopilot-overlay.md README_AGENT_IMAGE_LAB_AUTOPILOT.md docs/v7_224a_autopilot_rule_intake_hardening_gate.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
+git diff --check
+```
+
+Result:
+
+```text
+passed
+```
+
+Findings:
+
+```text
+v7.224a is rule hardening only. It does not authorize A5, provider contact, runtime, plugin calls, image generation, DailyNote write, VCP memory write, CDP, bridge, MCP, production_candidate_002, Batch 005, tag, release, or deploy.
+```
+
+Notes:
+
+```text
+git add . is forbidden. Stage only exact allowlisted files. Rule intake smoke test is recommended as v7.224b and is not performed in v7.224a.
+No validator is run in v7.224a because this phase only hardens the rule text; v7.224b is the dedicated read-only smoke test.
+```
+
 ## VALIDATION-20260512-V7-224-MAINLINE-FRESHNESS
 
 Task:

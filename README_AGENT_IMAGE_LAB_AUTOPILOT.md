@@ -46,9 +46,10 @@ Do **not** overwrite the existing root `AGENTS.md` automatically. Instead, revie
 Use:
 
 ```text
-请读取 AGENTS.md、AGENTS.autopilot-overlay.md 和 .agent_board/*。
+请读取 AGENTS.md、AGENTS.autopilot-overlay.md、.agent_board/HANDOFF.md、.agent_board/RUN_STATE.md、.agent_board/TASK_QUEUE.md 和 .agent_board/CHECKPOINT.md。
 使用 Agent Image Lab A4-Guarded Sustained Autopilot。
-先只做 repo reality 检查和任务队列复核，不修改文件。
+先只做 repo reality 检查和 Autopilot Rule Intake，不修改文件。
+请复述 hard stops、exact-file staging / no git add .、以及本任务是否需要更新 .agent_board resume surfaces。
 如果没有 hard stop，再执行 .agent_board/TASK_QUEUE.md 中的第一个安全本地任务。
 ```
 

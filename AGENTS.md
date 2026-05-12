@@ -51,6 +51,63 @@ Stage documents should not copy this entire constitution. They should use the fi
 
 ---
 
+## 0.5 Mandatory Session Start
+
+Before editing any file, Codex must complete an Autopilot Rule Intake.
+
+The intake must confirm:
+
+```text
+AGENTS.md loaded: true
+AGENTS.autopilot-overlay.md loaded_or_missing: true
+.agent_board/HANDOFF.md loaded: true
+.agent_board/RUN_STATE.md loaded: true
+.agent_board/TASK_QUEUE.md loaded: true
+.agent_board/CHECKPOINT.md loaded: true
+hard stops summarized: true
+exact-file staging / no git add . summarized: true
+.agent_board update rule summarized: true
+```
+
+If `AGENTS.autopilot-overlay.md` exists, it must be read explicitly. If it is
+missing, the closeout must say so.
+
+The intake must summarize the active hard stops before work begins, including
+A5, provider contact, plugin call, image generation, DailyNote write, VCP memory
+write, runtime, real manifest read, CDP / bridge / MCP, production candidates,
+Batch 005, dependency changes, secrets, generated assets, tag, release, deploy,
+and destructive Git or filesystem actions.
+
+The intake must also summarize exact-file staging:
+
+```text
+git add . is forbidden
+stage only task-allowlisted files
+staged_exact_files_only must be proven before commit
+```
+
+If README, roadmap, docs phase records, `recommended_next`, or task status
+surfaces change, Codex must check and update the `.agent_board` resume surfaces:
+
+```text
+.agent_board/HANDOFF.md
+.agent_board/RUN_STATE.md
+.agent_board/TASK_QUEUE.md
+.agent_board/CHECKPOINT.md
+```
+
+If a phase does not allow `.agent_board` edits, the closeout must include:
+
+```yaml
+agent_board_updated: false
+reason: <why_not>
+stale_risk: true | false
+```
+
+No file edit may begin until the intake is complete.
+
+---
+
 ## 1. Project Identity
 
 Agent Image Lab is a VCP-native visual production orchestration system.
@@ -744,6 +801,8 @@ Review Console remains isolated
 dispatch_plan / Adapter remains no-execution / dry-run only
 diff was inspected
 worktree status was inspected before commit
+git add . was not used
+only exact allowlisted files were staged
 ```
 
 Recommended commit message format:
@@ -1081,6 +1140,48 @@ Boundary confirmation:
 Next recommended step:
 - recommend only the next step
 - do not automatically enter the next stage unless the task explicitly allows it
+```
+
+For gate-style work, closeout YAML must also include:
+
+```yaml
+instruction_sources_checked:
+  AGENTS_loaded: true
+  autopilot_overlay_loaded_or_read: true | false
+  agent_board_loaded: true
+  README_autopilot_loaded_or_reviewed: true | false
+
+agent_board:
+  checked: true
+  updated: true | false
+  stale_risk: true | false
+  handoff_current: true | false
+  run_state_current: true | false
+  task_queue_current: true | false
+  checkpoint_current: true | false
+
+staging:
+  used_git_add_dot: false
+  staged_exact_files_only: true
+
+safety:
+  A5_execution: false
+  provider_contact: false
+  plugin_called: false
+  image_generated: false
+  memory_written: false
+  daily_note_written: false
+  runtime_execution: false
+  VCPChat_runtime: false
+  VCPToolBox_runtime: false
+  cdp_accessed: false
+  bridge_methods_called: false
+  mcp_called: false
+  production_candidate_002_started: false
+  batch_005_started: false
+  package_json_modified: false
+  dependency_added: false
+  env_or_secret_touched: false
 ```
 
 ---

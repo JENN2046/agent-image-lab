@@ -1,5 +1,40 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.224a Autopilot Rule Intake Hardening Gate
+
+```text
+Status: completed_validated — A4 docs-only local rule hardening
+Source baseline: cdd39c3 == origin/master at phase start
+Purpose: make Autopilot Rule Intake mandatory before edits and visible in closeout YAML
+AGENTS_loaded: true
+autopilot_overlay_loaded_or_read: true
+README_autopilot_loaded_or_reviewed: true
+agent_board_loaded: true
+AGENTS_updated: true
+overlay_updated: true
+README_autopilot_updated: true
+handoff_updated: true
+run_state_updated: true
+task_queue_updated: true
+checkpoint_updated: true
+validation_log_updated: true
+agent_board_STATE_json_modified: false
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+CDP_bridge_MCP: false
+production_candidate_002_started: false
+batch_005_started: false
+recommended_next: v7.224b_autopilot_rule_smoke_test
+validation: git diff --check passed
+rule_intake_smoke_test_performed: false
+reason_rule_intake_smoke_test_not_performed: 本阶段只加固规则，下一阶段单独做 smoke test
+```
+
 ## v7.224 Mainline Status Freshness Alignment Gate
 
 ```text

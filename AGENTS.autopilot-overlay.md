@@ -23,6 +23,24 @@ stop before external reads, real execution, real memory writes, VCP repo changes
 
 ---
 
+## 0.5 Mandatory Autopilot Rule Intake
+
+Before editing, read `AGENTS.md`, this overlay, and the current `.agent_board`
+resume surfaces:
+
+```text
+.agent_board/HANDOFF.md
+.agent_board/RUN_STATE.md
+.agent_board/TASK_QUEUE.md
+.agent_board/CHECKPOINT.md
+```
+
+Summarize hard stops, exact-file staging, `git add .` prohibition, and whether
+`.agent_board` must be updated for the current task. Do not edit files until
+that intake is complete.
+
+---
+
 ## 1. Project-Specific Hard Stop Gates
 
 Stop and request explicit human authorization before any of the following:
