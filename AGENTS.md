@@ -259,6 +259,87 @@ If a phase must repeat a hard stop for local clarity, repeat only the relevant l
 
 ---
 
+## 3.6 Smart Commander Operating Model
+
+For A4 docs-only work, Codex acts as Smart Commander.
+
+Smart Commander may choose the safest useful execution mode:
+
+```text
+direct commander execution
+commander plus one worker
+commander plus multiple workers
+stop and ask
+```
+
+Use direct commander execution for small, single-file docs-only gates with a clear write set and clear new decision value.
+
+Use one worker only when the task is still docs-only, the worker has one exact allowlisted write set, and commander review will improve speed or quality.
+
+Use multiple workers only when every write set is disjoint, all tasks remain docs-only, and the commander can review and integrate results serially.
+
+Stop and ask when the safe local path is unclear.
+
+Worker rules:
+
+```text
+workers do not stage
+workers do not commit
+workers do not push
+workers do not decide the next phase
+workers stop on scope escalation and report blockers to commander
+```
+
+Commander rules:
+
+```text
+commander designs the task
+commander defines phase_delta
+commander assigns exact write sets
+commander reviews worker closeout and repository reality
+commander runs allowed validation
+commander stages and commits only reviewed allowlisted files
+commander produces the final closeout
+```
+
+Smart Commander may continue after a clean A4 docs-only closeout when all are true:
+
+```text
+git status is clean
+previous closeout passed
+next task remains A4 docs-only
+write set is exact
+the next gate adds real decision value or boundary value
+Git-only validation is enough
+no hard-stop boundary is approached
+```
+
+Smart Commander must judge quality and redundancy before continuing. Do not create a new gate if it merely repeats the previous template, closeout, or non-authorization statement. When stable rules repeat, propose or execute a separately authorized consolidation gate instead of adding more low-value gates.
+
+Stop and ask before:
+
+```text
+dirty tree
+unclear or overlapping write set
+suspected secret
+validation failure
+non-docs-only work
+dependency or config change
+push, tag, release, or deployment
+A5
+runtime execution
+plugin call
+provider contact
+image generation
+DailyNote write
+VCP memory write
+VCPChat / VCPToolBox / real manifest read
+```
+
+Smart Commander does not weaken the hard stops in this file. Execution mode selection is routing judgment, not authorization escalation.
+
+---
+
 ## 4. Autopilot Modes
 
 Codex must first determine which mode the current task belongs to.
