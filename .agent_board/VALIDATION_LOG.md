@@ -1,5 +1,45 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-V7-279-BEST-CANDIDATE-SELECTION
+
+Task:
+
+```text
+Record the best-candidate decision after v7.278: v2 remains the current best candidate, v3 failed due to handle attachment geometry regression, and the human-selected route is one fourth minimal trial focused only on handle geometry and product credibility. Do not generate an image, contact provider, call plugin, retry, write memory, write DailyNote, write VCP memory, write accepted_samples, start production_candidate_002, or start Batch 005.
+```
+
+Result:
+
+```text
+completed_validated
+```
+
+Validation:
+
+```text
+git status --short --branch: passed
+git diff --check: passed
+node scripts/validate_agent_board_state.js: passed
+node scripts/validate_current_state_alignment.js: passed
+node scripts/validate_native_doubao_sandbox.js: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1: passed_with_existing_manual_review_warnings
+provider_contact: false
+plugin_call: false
+image_generation: false
+retry: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+fourth_generation_started: false
+```
+
+Recommended next:
+
+```text
+v7.280_prompt_v4_handle_geometry_refinement_authorization_gate（创建 v4 prompt 并封存第四次最小试跑授权边界，不生成图片）
+```
+
 ## VALIDATION-20260514-V7-278-HUMAN-REVIEW-OF-THIRD-REAL-OUTPUTS
 
 Task:

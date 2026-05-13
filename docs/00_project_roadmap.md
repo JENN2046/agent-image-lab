@@ -18,9 +18,9 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.278: 3de056b on master == origin/master.
-Current mainline state: v7.278 human review of third real outputs（第三次真实输出人工审片）.
-Current phase id: v7.278_human_review_of_third_real_outputs.
+Latest visible remote baseline before v7.279: da879f4 on master == origin/master.
+Current mainline state: v7.279 best candidate selection / fourth trial decision gate（最佳候选选择与第四次最小试跑决策门）.
+Current phase id: v7.279_best_candidate_selection_or_fourth_trial_decision_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
@@ -105,9 +105,13 @@ v7.278_accepted_candidate: false.
 v7.278_commercial_delivery_ready: false.
 v7.278_memory_suitability: deferred.
 current_best_candidate: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg.
-A5_execution_allowed_now: false after v7.278; v7.277 single authorized call has been consumed.
-provider_contact_allowed_now: false after v7.278; no fourth generation is active without a new authorization gate.
-Recommended next: v7.279_best_candidate_selection_or_fourth_trial_decision_gate（人工决定保留 v2 为当前最佳候选，还是针对把手结构问题做第四次最小试跑）.
+v7.279_status: completed_locally_pending_checkpoint_commit.
+v7.279_selected_route: fourth_minimal_generation_trial.
+v7.279_v3_failed_reason: handle attachment geometry regression.
+v7.279_fourth_trial_goal: restore v2 composition while fixing handle geometry and preserving artifact control.
+A5_execution_allowed_now: false in v7.279; v7.277 single authorized call has been consumed and v7.280 authorization is not yet sealed.
+provider_contact_allowed_now: false in v7.279; no fourth generation execution is active before v7.280 authorization and v7.281 bounded execution.
+Recommended next: v7.280_prompt_v4_handle_geometry_refinement_authorization_gate（创建 v4 prompt 并封存第四次最小试跑授权边界，不生成图片）.
 auto_execution_allowed_for_next: false.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)
@@ -412,8 +416,9 @@ daily_note_called: false
 13. v7.276_prompt_v3_minor_refinement_and_third_trial_authorization_gate 已创建 `prompts/image_generation/product_still_life_matte_ceramic_mug_v3.yaml` 并记录第三次最小真实生成试跑授权边界。
 14. v7.277_third_minimal_generation_trial_execution 已成功生成 1 张 v3 输出并停止，图片未加入 Git。
 15. v7.278_human_review_of_third_real_outputs 已记录人工审片：needs_revision、accepted_candidate=false、commercial_delivery_ready=false、memory_suitability=deferred，当前最佳候选仍是 v2。
-16. Batch 005、production_candidate_002、memory_write_path、DailyNote/VCP memory、retry、第四次生成、tag/release/deploy 仍未授权。
-17. recommended next: v7.279_best_candidate_selection_or_fourth_trial_decision_gate（人工决定保留 v2 为当前最佳候选，还是针对把手结构问题做第四次最小试跑）。
+16. v7.279_best_candidate_selection_or_fourth_trial_decision_gate 已记录人工选择方案 B：继续一次第四次最小试跑，目标只修把手结构和产品可信度。
+17. Batch 005、production_candidate_002、memory_write_path、DailyNote/VCP memory、retry、第四次生成执行、tag/release/deploy 仍未授权。
+18. recommended next: v7.280_prompt_v4_handle_geometry_refinement_authorization_gate（创建 v4 prompt 并封存第四次最小试跑授权边界，不生成图片）。
 
 ## 永久安全门
 

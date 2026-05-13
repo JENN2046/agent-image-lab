@@ -7,9 +7,9 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.278: 3de056b on master == origin/master.
-Current mainline state: v7.278 human review of third real outputs（第三次真实输出人工审片）.
-Current phase id: v7.278_human_review_of_third_real_outputs.
+Latest visible remote baseline before v7.279: da879f4 on master == origin/master.
+Current mainline state: v7.279 best candidate selection / fourth trial decision gate（最佳候选选择与第四次最小试跑决策门）.
+Current phase id: v7.279_best_candidate_selection_or_fourth_trial_decision_gate.
 Prior human route selection gate: v7.261_human_product_route_selection_request_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
@@ -95,11 +95,15 @@ v7.278_accepted_candidate: false.
 v7.278_commercial_delivery_ready: false.
 v7.278_memory_suitability: deferred.
 current_best_candidate: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg.
-A5_execution_allowed_now: false after v7.278; v7.277 single authorized call has been consumed.
-provider_contact_allowed_now: false after v7.278; no fourth generation is active without a new authorization gate.
+v7.279_status: completed_locally_pending_checkpoint_commit.
+v7.279_selected_route: fourth_minimal_generation_trial.
+v7.279_v3_failed_reason: handle attachment geometry regression.
+v7.279_fourth_trial_goal: restore v2 composition while fixing handle geometry and preserving artifact control.
+A5_execution_allowed_now: false in v7.279; v7.277 single authorized call has been consumed and v7.280 authorization is not yet sealed.
+provider_contact_allowed_now: false in v7.279; no fourth generation execution is active before v7.280 authorization and v7.281 bounded execution.
 Master plan index: PROJECT_MASTER_PLAN.md.
-Not authorized now: Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, retry, fourth generation, tag, release, deploy.
-Recommended next: v7.279_best_candidate_selection_or_fourth_trial_decision_gate（人工决定保留 v2 为当前最佳候选，还是针对把手结构问题做第四次最小试跑）.
+Not authorized now: Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, retry, fourth generation execution, tag, release, deploy.
+Recommended next: v7.280_prompt_v4_handle_geometry_refinement_authorization_gate（创建 v4 prompt 并封存第四次最小试跑授权边界，不生成图片）.
 auto_execution_allowed_for_next: false.
 ```
 

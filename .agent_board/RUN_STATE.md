@@ -9,24 +9,24 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab completed human review of the bounded v7.277 third real output. The v3 image is needs_revision due to handle geometry regression; the current best candidate remains the v2 output.
+Agent Image Lab recorded the v7.279 best-candidate decision: v2 remains the current best candidate, and the human-selected route is one fourth minimal trial focused only on handle geometry and product credibility.
 ```
 
 ## Current Phase
 
 ```text
-v7.278 Human Review Of Third Real Outputs
-phase_id: v7.278_human_review_of_third_real_outputs
-source_phase: v7.277_third_minimal_generation_trial_execution
+v7.279 Best Candidate Selection Or Fourth Trial Decision Gate
+phase_id: v7.279_best_candidate_selection_or_fourth_trial_decision_gate
+source_phase: v7.278_human_review_of_third_real_outputs
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
-status: third_real_output_reviewed_pending_checkpoint_commit
-source_commit: 3de056b
-source_message: docs: authorize third minimal generation trial
+status: fourth_minimal_trial_selected_pending_checkpoint_commit
+source_commit: da879f4
+source_message: docs: review third real ceramic mug output
 branch: master tracking origin/master
-Worktree: clean before v7.278 documentation patch; generated v7.277 output remains ignored under runs/
+Worktree: clean before v7.279 decision patch; generated v7.277 output remains ignored under runs/
 worktree_start_clean: true
-origin_sync_current: local HEAD equals origin/master at 3de056b
+origin_sync_current: local HEAD equals origin/master at da879f4
 ahead_behind: 0/0
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false; the single authorized v7.277 call has been consumed
@@ -159,7 +159,11 @@ v7.278_accepted_candidate: false
 v7.278_commercial_delivery_ready: false
 v7.278_memory_suitability: deferred
 current_best_candidate: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
-v7.279_recommended_next: v7.279_best_candidate_selection_or_fourth_trial_decision_gate
+v7.279_status: completed_locally_pending_checkpoint_commit
+v7.279_selected_route: fourth_minimal_generation_trial
+v7.279_v3_failed_reason: handle attachment geometry regression
+v7.279_fourth_trial_goal: restore v2 composition while fixing handle geometry and preserving artifact control
+v7.279_recommended_next: v7.280_prompt_v4_handle_geometry_refinement_authorization_gate
 v7.274_stopped_after_generation: true
 human_review_required_now: true
 recommended_next_after_v7_274: v7.275_human_review_of_second_real_outputs
@@ -172,13 +176,13 @@ v7.275_memory_write_allowed_without_separate_authorization: false
 ## Current Task
 
 ```text
-v7.278 human review completed. v3 is a negative feedback sample for handle geometry; next safe phase is v7.279 best-candidate selection or fourth-trial decision gate.
+v7.279 decision gate completed locally. v2 remains the current best candidate; the selected route is a fourth minimal trial, but execution is not allowed until v7.280 prompt v4 authorization is sealed and v7.281 bounded execution starts.
 ```
 
 ## Current Local Work State
 
 ```text
-Worktree: dirty with .agent_board-only post-run reconciliation after v7.274 execution.
+Worktree: dirty with v7.279 decision documentation and state-surface updates.
 active_workers: 0
 execution_mode: Single-Window 4-Agent Compact Autopilot
 commander_role: keep this correction inside .agent_board facts and stop before commit/push
@@ -232,7 +236,7 @@ Prompt revision plan from first real output: v7.271 completed_pending_validation
 Prompt v2 static review: v7.272 passed.
 Second minimal generation authorization: v7.273 completed, committed, pushed, and synced at d1a7ac8.
 Second minimal generation trial: v7.274 completed_success with one output and no retry.
-Recommended next product task: v7.275_human_review_of_second_real_outputs（人工审查第二次真实输出，不生成新图，不写 memory）
+Recommended next product task: v7.280_prompt_v4_handle_geometry_refinement_authorization_gate（创建 v4 prompt 并封存第四次最小试跑授权边界，不生成图片）
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```

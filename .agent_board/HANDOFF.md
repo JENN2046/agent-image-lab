@@ -3,18 +3,18 @@
 ## Handoff Summary
 
 ```text
-Status: v7.278 human review of third real output completed; v2 remains current best candidate.
-Reason: v7.277 generated one v3 output, and v7.278 reviewed it as needs_revision because handle geometry regressed.
+Status: v7.279 best candidate selection / fourth trial decision gate completed locally; v2 remains current best candidate and a fourth minimal trial is selected for prompt-v4 authorization planning.
+Reason: v7.277 generated one v3 output, v7.278 reviewed it as needs_revision because handle geometry regressed, and v7.279 records the human-selected route to run one fourth minimal trial after prompt v4 authorization.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
 Latest visible head before v7.273: 6f95b53 == origin/master
-Current synced HEAD: 3de056b docs: authorize third minimal generation trial
+Current synced HEAD before v7.279 local patch: da879f4 docs: review third real ceramic mug output
 ahead_behind: 0/0
 Worktree: clean before v7.278 documentation patch; v7.277 output remains ignored under runs/
-Current status: third_real_output_reviewed_pending_checkpoint_commit
+Current status: fourth_minimal_trial_selected_pending_checkpoint_commit
 same_provider_retry_allowed_now: false
-A5_execution_allowed_now: false; the single authorized v7.277 call has been consumed
-provider_contact_allowed_now: false; the single authorized v7.277 provider contact has been consumed
+A5_execution_allowed_now: false in v7.279; the single authorized v7.277 call has been consumed and v7.280 authorization is not yet sealed
+provider_contact_allowed_now: false in v7.279; no fourth generation execution is active before v7.280 authorization and v7.281 bounded execution
 Native Doubao static hardening: v7.245 completed_validated
 Diagnostic decision: continue_generation_stop_until_route_selection
 Provider path decision: ROUTE-3-CONTINUED-STOP selected now
@@ -113,6 +113,11 @@ v7.278_accepted_candidate: false
 v7.278_commercial_delivery_ready: false
 v7.278_memory_suitability: deferred
 current_best_candidate: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
+v7.279_status: completed_locally_pending_checkpoint_commit
+v7.279_selected_route: fourth_minimal_generation_trial
+v7.279_v3_failed_reason: handle attachment geometry regression
+v7.279_fourth_trial_goal: restore v2 composition while fixing handle geometry and preserving artifact control
+v7.279_recommended_next: v7.280_prompt_v4_handle_geometry_refinement_authorization_gate
 provider_contact_after_v7_274: false
 image_generation_after_v7_274: false
 human_review_required_now: true
@@ -243,13 +248,13 @@ A5_execution_allowed_now: false; the single authorized v7.274 call has been cons
 provider_contact_allowed_now: false; the single authorized v7.274 provider contact has been consumed
 
 continue_A4_docs_only_by_default: false
-recommended_next: v7.279_best_candidate_selection_or_fourth_trial_decision_gate
-recommended_next_zh: 人工决定保留 v2 为当前最佳候选，还是针对把手结构问题做第四次最小试跑
+recommended_next: v7.280_prompt_v4_handle_geometry_refinement_authorization_gate
+recommended_next_zh: 创建 v4 prompt 并封存第四次最小试跑授权边界，不生成图片
 auto_execution_allowed_for_next: false
-v7.279_purpose: best candidate selection or fourth-trial decision
-v7.279_image_generation_allowed: false
-v7.279_provider_contact_allowed: false
-v7.279_memory_write_allowed_without_separate_authorization: false
+v7.280_purpose: prompt v4 handle geometry refinement and fourth-trial authorization gate
+v7.280_image_generation_allowed: false
+v7.280_provider_contact_allowed: false
+v7.280_memory_write_allowed_without_separate_authorization: false
 ```
 
 ## Current Stop Gates
