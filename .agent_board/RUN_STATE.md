@@ -9,21 +9,22 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab has reached product workflow paper-chain quality stop and is waiting for human product route selection.
+Agent Image Lab is planning the project plugin route after human route selection, with NativeDoubaoImage as the candidate plugin and all execution still blocked.
 ```
 
 ## Current Phase
 
 ```text
-v7.261 Human Product Route Selection Request Gate
-phase_id: v7.261_human_product_route_selection_request_gate
+v7.262 Project Plugin Route Authorization Planning Gate
+phase_id: v7.262_project_plugin_route_authorization_planning_gate
+prior_route_selection_gate: v7.261_human_product_route_selection_request_gate
 status: failed_no_image_repeated_quota_or_rate_limit
-source_commit: 1a6c60d
-source_message: docs: add product workflow paper chain quality stop
+source_commit: f947582
+source_message: docs: add human product route selection gate
 branch: master tracking origin/master
-Worktree: clean at v7.261 start
+Worktree: clean at v7.262 start
 worktree_start_clean: true
-origin_sync_start: local HEAD equals origin/master at 1a6c60d
+origin_sync_start: local HEAD equals origin/master at f947582
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
@@ -56,25 +57,26 @@ product_workflow_fixture_packet_acceptance_passed: true
 product_workflow_paper_chain_quality_stop_reached: true
 ready_for_runtime_implementation: false
 human_route_selection_requested: true
-automatic_artifact_creation_stopped: true
-recommended_low_risk_route: route_3_manual_product_prompt_package_sample
+project_plugin_route_selected_for_planning: true
+candidate_project_plugin: NativeDoubaoImage
+recommended_next: v7.263_project_plugin_A5_authorization_package_draft_gate
 ```
 
 ## Current Task
 
 ```text
-Present product route options and stop until the human chooses the next route.
+Plan the project-local plugin route and stop before any A5 activation, provider contact, plugin call, or image generation.
 ```
 
 ## Current Local Work State
 
 ```text
-Worktree: clean at v7.261 start after v7.260 push
+Worktree: clean at v7.262 start after v7.261 push
 active_workers: 0
 execution_mode: Single-Window 4-Agent Compact Autopilot
-commander_role: stop automatic artifact creation and request human route selection
-architect_role: present route options, risks, value, and authorization needs
-worker_role: apply only the route selection request records, status indexes, and .agent_board patch
+commander_role: keep project plugin route planning inside A4 paperwork
+architect_role: map NativeDoubaoImage authorization needs and blockers
+worker_role: apply only the planning records, status indexes, and .agent_board patch
 reviewer_role: inspect diff, run allowed local checks, confirm no runtime/provider/plugin/image/memory behavior, and close out
 ```
 
@@ -111,7 +113,8 @@ Product Image Authorization Draft Plan Ref Alignment: v7.241 completed_validated
 Product Image Authorization Activation Gap Review: v7.242 completed_validated
 Product Image Active Authorization Package Skeleton: v7.243 completed_validated
 Human product route selection request: v7.261 completed; four routes are presented and no next phase may start automatically.
-Recommended next product task: pending_human_selection（等待人工选择路线）
+Project plugin route authorization planning: v7.262 completed; NativeDoubaoImage is the candidate project plugin path for a future non-active authorization draft.
+Recommended next product task: v7.263_project_plugin_A5_authorization_package_draft_gate（项目内插件 A5 授权包草案门）
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```
@@ -157,8 +160,8 @@ tag/release/deploy remain blocked without explicit authorization and preflight
 ## Current Options
 
 ```text
-recommended_next_after_v7_261: pending_human_selection
-purpose: wait for the human to select Route 1, Route 2, Route 3, or Route 4 before any next phase starts
+recommended_next_after_v7_262: v7.263_project_plugin_A5_authorization_package_draft_gate
+purpose: draft, but not activate, the exact A5 authorization package for the project plugin route
 not_allowed_as_next_by_default: A5, provider contact, runtime, plugin call, image generation, memory write, tag, release
 ```
 
@@ -223,5 +226,5 @@ external repository modification: no
 ```text
 Use the calibrated board as the current navigation source.
 The second newly approved DoubaoGen diagnostic retry was consumed by one process attempt. The result is failed_no_image_repeated_quota_or_rate_limit; generation remains blocked unless the user resolves provider quota/rate-limit conditions or authorizes a new provider/model/account path.
-For Route 3 product-mainline work, stop automatic artifact creation unless the human selects the next product route. The current recommended next is pending_human_selection.
+For the project plugin route, stop before any A5 activation, provider contact, plugin call, image generation, output write, or memory write. The current recommended next is v7.263_project_plugin_A5_authorization_package_draft_gate.
 ```

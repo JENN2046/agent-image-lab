@@ -1,5 +1,33 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.262 Project Plugin Route Authorization Planning Gate
+
+```text
+Status: completed_validated
+Source baseline: f947582 == origin/master
+Purpose: plan the project plugin route without activating A5 or calling the plugin
+project_plugin_route_planned: true
+candidate_project_plugin: NativeDoubaoImage
+candidate_plugin_command: generate
+candidate_model: doubao-seedream-5-0-260128
+same_provider_retry_allowed_now: false
+A5_execution_allowed_now: false
+provider_contact_allowed_now: false
+plugin_call_allowed_now: false
+image_generation_allowed_now: false
+memory_write_allowed_now: false
+recommended_next: v7.263_project_plugin_A5_authorization_package_draft_gate
+recommended_next_zh: 项目内插件 A5 授权包草案门
+auto_execution_allowed_for_next: false
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+runtime_execution: false
+DailyNote_write: false
+VCP_memory_write: false
+```
+
 ## v7.261 Human Product Route Selection Request Gate
 
 ```text

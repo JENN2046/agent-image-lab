@@ -3,11 +3,11 @@
 ## Handoff Summary
 
 ```text
-Status: v7.261 human product route selection requested after product workflow paper-chain quality stop.
-Reason: repeated Doubao quota/rate-limit failure blocks generation, v7.260 reached paper-chain quality stop, and v7.261 presents four routes for human selection before any next phase.
+Status: v7.262 project plugin route authorization planning completed locally.
+Reason: the owner selected the project plugin path for planning; v7.262 identifies NativeDoubaoImage as the candidate project plugin while keeping A5, provider contact, plugin call, and image generation blocked.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
-Latest visible head: 1a6c60d == origin/master
+Latest visible head before v7.262: f947582 == origin/master
 Current status: failed_no_image_repeated_quota_or_rate_limit
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
@@ -17,7 +17,10 @@ Diagnostic decision: continue_generation_stop_until_route_selection
 Provider path decision: ROUTE-3-CONTINUED-STOP selected now
 Human product route selection request: v7.261 completed_validated
 human_route_selection_requested: true
-automatic_artifact_creation_stopped: true
+Project plugin route authorization planning: v7.262 completed_validated
+prior_route_selection_gate: v7.261_human_product_route_selection_request_gate
+project_plugin_route_selected_for_planning: true
+candidate_project_plugin: NativeDoubaoImage
 Current active workers: 0
 Current operating style: Single-Window 4-Agent Compact Autopilot
 ```
@@ -92,14 +95,17 @@ product workflow paper chain quality stop: v7.260 completed_validated
 product_workflow_paper_chain_quality_stop_reached: true
 human product route selection request: v7.261 completed_validated
 human_route_selection_requested: true
-automatic_artifact_creation_stopped: true
+project plugin route authorization planning: v7.262 completed_validated
+project_plugin_route_selected_for_planning: true
+candidate_project_plugin: NativeDoubaoImage
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
 
 continue_A4_docs_only_by_default: false
-recommended_next: pending_human_selection
-recommended_next_zh: 等待人工选择路线
+recommended_next: v7.263_project_plugin_A5_authorization_package_draft_gate
+recommended_next_zh: 项目内插件 A5 授权包草案门
+auto_execution_allowed_for_next: false
 ```
 
 ## Current Stop Gates
@@ -173,7 +179,7 @@ dependency/config/env modification: no
 ## Human Decisions Needed
 
 ```text
-Next action is human route selection. The owner must choose one route: Route 1 quota resolution then A5 retry, Route 2 provider/model/account switch, Route 3 manual product prompt package sample, or Route 4 Review Console runtime integration planning. Human authorization is still needed before provider console/account review, any retry, raw plugin stderr/stdout review or capture, secret/config value review, provider/model/account switch, push/tag/release/deploy, runtime implementation, memory write, or repetitive low-value A4 gate.
+Next action is to draft, but not activate, a project plugin A5 authorization package if the owner wants to keep preparing the NativeDoubaoImage route. Human authorization is still needed before provider console/account review, any retry, raw plugin stderr/stdout review or capture, secret/config value review, provider/model/account switch, push/tag/release/deploy, runtime implementation, memory write, or any plugin call.
 ```
 
 ## Exact Resume Prompt
@@ -186,7 +192,7 @@ Next action is human route selection. The owner must choose one route: Route 1 q
 当前仓库状态：
 - master should track origin/master.
 - source baseline for v7.243: 03fd398.
-- current phase: v7.261_human_product_route_selection_request_gate completed_validated; waiting for human product route selection.
+- current phase: v7.262_project_plugin_route_authorization_planning_gate completed_validated; project plugin path selected for planning only.
 - v7.221 mainline quality stop reached.
 - v7.222 board calibration completed.
 - v7.223 read-only value selection selected v7.224 as the only safe next task.
@@ -227,8 +233,9 @@ Next action is human route selection. The owner must choose one route: Route 1 q
 - a second newly authorized DoubaoGen retry/diagnostic call also returned sanitized_error_category=quota_or_rate_limit; no image was generated.
 - v7.260 product workflow paper chain quality stop reached.
 - v7.261 presented Route 1 quota resolution then A5 retry, Route 2 provider/model/account switch, Route 3 manual product prompt package sample, and Route 4 Review Console runtime integration planning.
-- recommended_next after v7.261: pending_human_selection（等待人工选择路线）.
-- do not enter v7.262 until the human selects a route.
+- v7.262 identified NativeDoubaoImage as the project-local candidate plugin path for future authorization planning.
+- recommended_next after v7.262: v7.263_project_plugin_A5_authorization_package_draft_gate（项目内插件 A5 授权包草案门）.
+- do not activate A5, contact provider, call plugin, or generate an image.
 
 不要读取真实 VCPChat/VCPToolBox。
 不要读取真实 manifest。

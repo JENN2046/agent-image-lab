@@ -7,9 +7,10 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.261: 1a6c60d on master == origin/master.
-Current mainline state: v7.261 human product route selection request gate（人工产品路线选择请求门）.
-Current phase id: v7.261_human_product_route_selection_request_gate.
+Latest visible remote baseline before v7.262: f947582 on master == origin/master.
+Current mainline state: v7.262 project plugin route authorization planning gate（项目内插件路线授权规划门）.
+Current phase id: v7.262_project_plugin_route_authorization_planning_gate.
+Prior route selection gate: v7.261_human_product_route_selection_request_gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
 Current status: failed_no_image_repeated_quota_or_rate_limit.
@@ -22,10 +23,12 @@ Provider path decision: ROUTE-3-CONTINUED-STOP（路线 3：继续停止生成�
 Review Surface mainline: static Review Surface and product image paper workflow have reached A4 quality stop; v7.261 presents human-selectable routes and stops automatic artifact creation.
 route_selection_required_before_new_A5: true.
 human_route_selection_requested: true.
-automatic_artifact_creation_stopped: true.
+project_plugin_route_selected_for_planning: true.
+candidate_project_plugin: NativeDoubaoImage.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized: A5, provider contact, runtime, plugin call, image generation, DailyNote write, VCP memory write, real manifest read, tag, release, deploy.
-Recommended next: pending_human_selection（等待人工选择路线）.
+Recommended next: v7.263_project_plugin_A5_authorization_package_draft_gate（项目内插件 A5 授权包草案门）.
+auto_execution_allowed_for_next: false.
 ```
 
 历史状态脉络：
