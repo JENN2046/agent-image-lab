@@ -36,7 +36,7 @@ Project plugin route authorization planning: v7.262 completed; NativeDoubaoImage
 Project plugin A5 authorization package draft: v7.263 completed; AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 is draft-only with approval_status=not_requested and execute_now=false.
 Project plugin A5 authorization draft review: v7.264 completed; draft result is pass_to_keep_inactive and activation remains blocked.
 True A5 authorization request: v7.265 completed_validated; AUTH-PENDING-PROJECT-PLUGIN-20260513-001 fixes prompt/output/model/budget for preflight-only approval and still blocks provider/plugin/image/env value actions.
-Route B minimal real generation authorization: v7.268b completed; v7.269 succeeded with one matte_ceramic_mug output and no retry; v7.270 records human review as needs_revision, accepted_candidate=false, commercial_delivery_ready=false, memory_suitability=deferred; v7.271 creates a static prompt v2 revision plan without generation; v7.272 static review passed; v7.273 authorized exactly one v7.274 second minimal generation trial using prompt v2 and is completed, committed, pushed, and synced at d1a7ac8; v7.274 completed successfully with one output and no retry; v7.275 reviewed that output as accepted_candidate_with_minor_retouch, accepted_candidate=true, commercial_delivery_ready=false, memory_suitability=deferred; v7.276 creates prompt v3 and authorizes exactly one v7.277 third minimal generation trial after commit and push.
+Route B minimal real generation authorization: v7.268b completed; v7.269 succeeded with one matte_ceramic_mug output and no retry; v7.270 records human review as needs_revision, accepted_candidate=false, commercial_delivery_ready=false, memory_suitability=deferred; v7.271 creates a static prompt v2 revision plan without generation; v7.272 static review passed; v7.273 authorized exactly one v7.274 second minimal generation trial using prompt v2 and is completed, committed, pushed, and synced at d1a7ac8; v7.274 completed successfully with one output and no retry; v7.275 reviewed that output as accepted_candidate_with_minor_retouch, accepted_candidate=true, commercial_delivery_ready=false, memory_suitability=deferred; v7.276 creates prompt v3 and authorizes exactly one v7.277 third minimal generation trial after commit and push; v7.277 completed successfully with one output; v7.278 reviewed v3 as needs_revision and keeps v2 as current best candidate.
 ```
 
 ---
@@ -87,38 +87,36 @@ none
 ### todo
 
 ```text
-v7.277_third_minimal_generation_trial_execution — 使用 v3 prompt 执行一次且仅一次第三次最小真实生成试跑，随后停止等待人工审片。
+v7.279_best_candidate_selection_or_fourth_trial_decision_gate — 人工决定保留 v2 为当前最佳候选，还是针对把手结构问题做第四次最小试跑；不得自动生成。
 ```
 
-### recommended_next_after_v7_276
+### recommended_next_after_v7_278
 
 ```text
-v7.277_third_minimal_generation_trial_execution — 使用 prompt v3 执行一次第三次最小真实生成试跑，验证 v3 是否把 accepted_candidate_with_minor_retouch 推近 commercial_delivery_ready。
-status: authorized_after_v7_276_commit_and_push
-reviewed_output: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
-generated_output: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
-prompt_package: prompts/image_generation/product_still_life_matte_ceramic_mug_v3.yaml
-output_directory: runs/real_generation/v7_277_matte_ceramic_mug_v3_trial/
+v7.279_best_candidate_selection_or_fourth_trial_decision_gate — decide whether to keep v2 as current best candidate or authorize a fourth minimal trial focused on handle geometry.
+status: pending_human_decision
+reviewed_output: runs/real_generation/v7_277_matte_ceramic_mug_v3_trial/native_doubao_1778688750417_0.jpg
+current_best_candidate: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
+prompt_package_reviewed: prompts/image_generation/product_still_life_matte_ceramic_mug_v3.yaml
 output_images_count: 1
 provider_calls_used: 1
 generation_attempts_used: 1
 auto_retry: false
 retry_performed: false
 no_retry: true
-accepted_candidate: true
-asset_status: accepted_candidate_with_minor_retouch
+accepted_candidate: false
+asset_status: needs_revision
 commercial_delivery_ready: false
 memory_suitability: deferred
-third_generation_execution_allowed_after_commit_push: true
+v3_should_be_current_candidate: false
+v2_remains_current_best_candidate: true
 fourth_generation_auto_start: false
+fourth_generation_allowed_now: false
 no_memory_write: true
 no_DailyNote_write: true
 no_VCP_memory_write: true
 no_tag_release_deploy: true
-v7.277_purpose: validate_prompt_v3_minor_refinement
-v7.277_provider_calls_max: 1
-v7.277_generation_attempts_max: 1
-v7.277_output_images_max: 4
+v7.279_purpose: decide best candidate or prepare a separate fourth-trial authorization gate
 ```
 
 ### done
@@ -202,6 +200,8 @@ v7.277_output_images_max: 4
 76. v7_274_post_run_board_reconciliation completed validation and was sealed/pushed in commit 23453cf.
 77. v7.275 human review of second real outputs records accepted_candidate_with_minor_retouch, accepted_candidate=true, commercial_delivery_ready=false, memory_suitability=deferred.
 78. v7.276 prompt v3 minor refinement and third trial authorization gate creates `prompts/image_generation/product_still_life_matte_ceramic_mug_v3.yaml` and authorizes exactly one v7.277 third minimal generation trial after commit and push.
+79. v7.277 third minimal generation trial completed successfully with one output: runs/real_generation/v7_277_matte_ceramic_mug_v3_trial/native_doubao_1778688750417_0.jpg.
+80. v7.278 human review of third real outputs records needs_revision, accepted_candidate=false, commercial_delivery_ready=false, memory_suitability=deferred; v2 remains current best candidate.
 ```
 
 ### blocked

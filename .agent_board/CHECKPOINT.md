@@ -1,5 +1,69 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.278 Human Review Of Third Real Outputs
+
+```text
+phase_id: v7.278_human_review_of_third_real_outputs
+Status: completed_pending_checkpoint_commit
+Source phase: v7.277_third_minimal_generation_trial_execution
+Purpose: record human review of the third real matte_ceramic_mug output
+reviewed_output: runs/real_generation/v7_277_matte_ceramic_mug_v3_trial/native_doubao_1778688750417_0.jpg
+asset_status: needs_revision
+accepted_candidate: false
+commercial_delivery_ready: false
+memory_suitability: deferred
+current_best_candidate: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
+strengths: colored speck control improved; warm-gray background depth improved; product scale appropriate; matte ceramic body still works; rim is cleaner
+blocking_issues: upper handle attachment has blocky/gap-like artifact; lower handle attachment is soft; handle-body junction is not realistic ceramic; background is too dark and dull; handle structure lowers commercial credibility
+v3_should_be_current_candidate: false
+v3_negative_feedback_sample: true
+fourth_generation_started: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+retry: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+image_added_to_git: false
+production_candidate_002_started: false
+Batch_005_started: false
+recommended_next: v7.279_best_candidate_selection_or_fourth_trial_decision_gate
+recommended_next_zh: 人工决定保留 v2 为当前最佳候选，还是针对把手结构问题做第四次最小试跑
+next_phase_started: false
+```
+
+## v7.277 Third Minimal Generation Trial Execution
+
+```text
+phase_id: v7.277_third_minimal_generation_trial_execution
+Status: completed_success
+Source phase: v7.276_prompt_v3_minor_refinement_and_third_trial_authorization_gate
+Purpose: execute exactly one bounded third minimal real generation trial using prompt v3
+approved_product: matte_ceramic_mug
+prompt_package_used: prompts/image_generation/product_still_life_matte_ceramic_mug_v3.yaml
+provider_contact: true
+image_generation: true
+provider_calls_used: 1
+generation_attempts_used: 1
+output_directory: runs/real_generation/v7_277_matte_ceramic_mug_v3_trial/
+output_images_count: 1
+output_file: runs/real_generation/v7_277_matte_ceramic_mug_v3_trial/native_doubao_1778688750417_0.jpg
+auto_retry_used: false
+stopped_after_generation: true
+run_status: success
+human_review_required_now: true
+fourth_generation_started: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+output_added_to_git: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v7.278_human_review_of_third_real_outputs
+next_phase_started: false
+```
+
 ## v7.276 Prompt v3 Minor Refinement And Third Trial Authorization Gate
 
 ```text

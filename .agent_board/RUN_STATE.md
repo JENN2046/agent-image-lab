@@ -9,28 +9,28 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab created prompt v3 and recorded the human authorization boundary for exactly one bounded v7.277 third minimal real generation trial.
+Agent Image Lab completed human review of the bounded v7.277 third real output. The v3 image is needs_revision due to handle geometry regression; the current best candidate remains the v2 output.
 ```
 
 ## Current Phase
 
 ```text
-v7.276 Prompt v3 Minor Refinement And Third Trial Authorization Gate
-phase_id: v7.276_prompt_v3_minor_refinement_and_third_trial_authorization_gate
-source_phase: v7.275_human_review_of_second_real_outputs
+v7.278 Human Review Of Third Real Outputs
+phase_id: v7.278_human_review_of_third_real_outputs
+source_phase: v7.277_third_minimal_generation_trial_execution
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
-status: third_minimal_generation_trial_authorized_pending_checkpoint_commit_and_push
-source_commit: d1a7ac8
-source_message: docs: authorize second minimal generation trial
+status: third_real_output_reviewed_pending_checkpoint_commit
+source_commit: 3de056b
+source_message: docs: authorize third minimal generation trial
 branch: master tracking origin/master
-Worktree: dirty with .agent_board reality correction only
+Worktree: clean before v7.278 documentation patch; generated v7.277 output remains ignored under runs/
 worktree_start_clean: true
-origin_sync_current: local HEAD equals origin/master at d1a7ac8
+origin_sync_current: local HEAD equals origin/master at 3de056b
 ahead_behind: 0/0
 same_provider_retry_allowed_now: false
-A5_execution_allowed_now: false; the single authorized v7.274 call has been consumed
-provider_contact_allowed_now: false; the single authorized v7.274 provider contact has been consumed
+A5_execution_allowed_now: false; the single authorized v7.277 call has been consumed
+provider_contact_allowed_now: false; the single authorized v7.277 provider contact has been consumed
 native_doubao_static_hardening: completed
 diagnostic_decision: continue_generation_stop_until_route_selection
 selected_route_now: ROUTE-3-CONTINUED-STOP
@@ -110,7 +110,7 @@ output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug
 auto_retry_for_second_trial: false
 stop_after_generation_for_second_trial: true
 human_review_required_after_generation: true
-recommended_next: v7.277_third_minimal_generation_trial_execution
+recommended_next: v7.279_best_candidate_selection_or_fourth_trial_decision_gate
 v7.274_status: completed_success
 v7.274_provider_contact: true
 v7.274_image_generation: true
@@ -145,6 +145,21 @@ auto_retry_for_third_trial: false
 stop_after_generation_for_third_trial: true
 human_review_required_after_generation: true
 fourth_generation_auto_start: false
+v7.277_status: completed_success
+v7.277_provider_contact: true
+v7.277_image_generation: true
+v7.277_provider_calls_used: 1
+v7.277_generation_attempts_used: 1
+v7.277_output_images_count: 1
+v7.277_output_file: runs/real_generation/v7_277_matte_ceramic_mug_v3_trial/native_doubao_1778688750417_0.jpg
+v7.277_auto_retry_used: false
+v7.278_human_review_status: completed
+v7.278_asset_status: needs_revision
+v7.278_accepted_candidate: false
+v7.278_commercial_delivery_ready: false
+v7.278_memory_suitability: deferred
+current_best_candidate: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
+v7.279_recommended_next: v7.279_best_candidate_selection_or_fourth_trial_decision_gate
 v7.274_stopped_after_generation: true
 human_review_required_now: true
 recommended_next_after_v7_274: v7.275_human_review_of_second_real_outputs
@@ -157,7 +172,7 @@ v7.275_memory_write_allowed_without_separate_authorization: false
 ## Current Task
 
 ```text
-v7.276 prompt v3 authorization gate prepared. After exact commit and push safety gate, v7.277 may run exactly one bounded third trial and then stop for human review.
+v7.278 human review completed. v3 is a negative feedback sample for handle geometry; next safe phase is v7.279 best-candidate selection or fourth-trial decision gate.
 ```
 
 ## Current Local Work State

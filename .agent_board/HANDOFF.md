@@ -3,18 +3,18 @@
 ## Handoff Summary
 
 ```text
-Status: v7.276 prompt v3 minor refinement and third-trial authorization gate prepared.
-Reason: v7.275 reviewed the v2 output as accepted_candidate_with_minor_retouch, and v7.276 creates prompt v3 plus a one-call third-trial authorization boundary.
+Status: v7.278 human review of third real output completed; v2 remains current best candidate.
+Reason: v7.277 generated one v3 output, and v7.278 reviewed it as needs_revision because handle geometry regressed.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
 Latest visible head before v7.273: 6f95b53 == origin/master
-Current synced HEAD: d1a7ac8 docs: authorize second minimal generation trial
+Current synced HEAD: 3de056b docs: authorize third minimal generation trial
 ahead_behind: 0/0
-Worktree: dirty with .agent_board reality correction only
-Current status: third_minimal_generation_trial_authorized_pending_commit_push
+Worktree: clean before v7.278 documentation patch; v7.277 output remains ignored under runs/
+Current status: third_real_output_reviewed_pending_checkpoint_commit
 same_provider_retry_allowed_now: false
-A5_execution_allowed_now: false; the single authorized v7.274 call has been consumed
-provider_contact_allowed_now: false; the single authorized v7.274 provider contact has been consumed
+A5_execution_allowed_now: false; the single authorized v7.277 call has been consumed
+provider_contact_allowed_now: false; the single authorized v7.277 provider contact has been consumed
 Native Doubao static hardening: v7.245 completed_validated
 Diagnostic decision: continue_generation_stop_until_route_selection
 Provider path decision: ROUTE-3-CONTINUED-STOP selected now
@@ -104,6 +104,15 @@ output_images_max_for_third_trial: 4
 output_directory_for_third_trial: runs/real_generation/v7_277_matte_ceramic_mug_v3_trial/
 auto_retry_for_third_trial: false
 fourth_generation_auto_start: false
+v7.277_status: completed_success
+v7.277_output_images_count: 1
+v7.277_output_file: runs/real_generation/v7_277_matte_ceramic_mug_v3_trial/native_doubao_1778688750417_0.jpg
+v7.278_human_review_status: completed
+v7.278_asset_status: needs_revision
+v7.278_accepted_candidate: false
+v7.278_commercial_delivery_ready: false
+v7.278_memory_suitability: deferred
+current_best_candidate: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
 provider_contact_after_v7_274: false
 image_generation_after_v7_274: false
 human_review_required_now: true
@@ -234,14 +243,13 @@ A5_execution_allowed_now: false; the single authorized v7.274 call has been cons
 provider_contact_allowed_now: false; the single authorized v7.274 provider contact has been consumed
 
 continue_A4_docs_only_by_default: false
-recommended_next: v7.277_third_minimal_generation_trial_execution
-recommended_next_zh: 使用 v3 prompt 执行一次且仅一次第三次最小真实生成试跑，然后停止等待人工审片
-auto_execution_allowed_for_next: true_after_v7_276_commit_and_push
-v7.277_purpose: validate prompt v3 minor refinement
-v7.277_provider_calls_max: 1
-v7.277_generation_attempts_max: 1
-v7.277_output_images_max: 4
-v7.277_memory_write_allowed: false
+recommended_next: v7.279_best_candidate_selection_or_fourth_trial_decision_gate
+recommended_next_zh: 人工决定保留 v2 为当前最佳候选，还是针对把手结构问题做第四次最小试跑
+auto_execution_allowed_for_next: false
+v7.279_purpose: best candidate selection or fourth-trial decision
+v7.279_image_generation_allowed: false
+v7.279_provider_contact_allowed: false
+v7.279_memory_write_allowed_without_separate_authorization: false
 ```
 
 ## Current Stop Gates

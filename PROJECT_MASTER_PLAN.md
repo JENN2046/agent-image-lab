@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_276: 9d8af96
-origin_master_before_v7_276: 23453cf
-status: third_minimal_generation_trial_authorized
-mode: A4 prompt refinement plus A5 bounded authorization gate
-phase_id: v7.276_prompt_v3_minor_refinement_and_third_trial_authorization_gate
+latest_visible_head_before_v7_278: 3de056b
+origin_master_before_v7_278: 3de056b
+status: third_real_output_reviewed
+mode: A4 review documentation only
+phase_id: v7.278_human_review_of_third_real_outputs
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -100,9 +100,18 @@ provider_calls_max_for_third_trial: 1
 generation_attempts_max_for_third_trial: 1
 output_images_max_for_third_trial: 4
 output_directory_for_third_trial: runs/real_generation/v7_277_matte_ceramic_mug_v3_trial/
-A5_execution_allowed_now: true only for v7.277 bounded third minimal trial after v7.276 commit and push
-provider_contact_allowed_now: true only for v7.277 bounded third minimal trial after v7.276 commit and push
-recommended_next: v7.277_third_minimal_generation_trial_execution
+v7.277_status: completed_success
+v7.277_output_images_count: 1
+v7.277_output_file: runs/real_generation/v7_277_matte_ceramic_mug_v3_trial/native_doubao_1778688750417_0.jpg
+v7.278_human_review_status: completed
+v7.278_asset_status: needs_revision
+v7.278_accepted_candidate: false
+v7.278_commercial_delivery_ready: false
+v7.278_memory_suitability: deferred
+current_best_candidate: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
+A5_execution_allowed_now: false after v7.278; v7.277 single authorized call has been consumed
+provider_contact_allowed_now: false after v7.278; no fourth generation is active without a new authorization gate
+recommended_next: v7.279_best_candidate_selection_or_fourth_trial_decision_gate
 ```
 
 ## Product Direction
@@ -222,16 +231,19 @@ generates one output. v7.275 records the human review result:
 `accepted_candidate=true`, `commercial_delivery_ready=false`, and
 `memory_suitability=deferred`. v7.276 creates the v3 prompt package and records
 the human authorization boundary for exactly one third minimal real generation
-trial using prompt v3. The v7.276 gate itself does not generate an image.
+trial using prompt v3. v7.277 consumes that single authorization and generates
+one output. v7.278 records that the v3 output regressed on handle geometry:
+`asset_status=needs_revision`, `accepted_candidate=false`, and current best
+candidate remains the v2 output.
 
 ## Active Boundaries
 
 ```text
-A5: authorized only for v7.277 bounded third minimal generation trial after v7.276 commit and push
-provider contact: authorized only for v7.277 bounded third minimal generation trial after v7.276 commit and push
+A5: not authorized after v7.278; v7.277 single authorized call has been consumed
+provider contact: not authorized after v7.278; no fourth generation is active without a new authorization gate
 runtime execution: not authorized
-plugin call: not authorized outside the v7.277 project-established generation path
-image generation: authorized only for v7.277 bounded third minimal generation trial after v7.276 commit and push
+plugin call: not authorized after v7.278
+image generation: not authorized after v7.278
 DailyNote / VCP memory write: not authorized
 real manifest / VCPChat / VCPToolBox read: not authorized
 tag / release / deploy / push: not authorized by this file
@@ -247,7 +259,6 @@ validation interpretation, staging, commit decisions, and next-task selection.
 ## Recommended Next
 
 Recommended next is
-`v7.277_third_minimal_generation_trial_execution`
-（使用 v3 prompt 执行一次且仅一次第三次最小真实生成试跑）. No retry,
-fourth generation, memory write, Batch 005, or production_candidate_002 may
-start automatically.
+`v7.279_best_candidate_selection_or_fourth_trial_decision_gate`
+（人工决定保留 v2 为当前最佳候选，还是针对把手结构问题做第四次最小试跑）. No retry,
+fourth generation, memory write, Batch 005, or production_candidate_002 may start automatically.
