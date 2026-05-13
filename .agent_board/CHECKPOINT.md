@@ -1,11 +1,61 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.274 Second Minimal Generation Trial Execution
+
+```text
+phase_id: v7.274_second_minimal_generation_trial_execution
+Status: completed_success
+result: succeeded
+Source phase: v7.273_second_minimal_generation_trial_authorization_gate
+Purpose: execute exactly one bounded second minimal real generation trial using prompt v2
+approved_product: matte_ceramic_mug
+prompt_package_used: prompts/image_generation/product_still_life_matte_ceramic_mug_v2.yaml
+provider_contact: true
+image_generation: true
+provider_calls_used: 1
+generation_attempts_used: 1
+output_directory: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/
+output_images_count: 1
+output_file: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
+generated_output: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
+auto_retry_used: false
+auto_retry: false
+retry_performed: false
+stopped_after_generation: true
+run_status: success
+human_review_required_now: true
+accepted_candidate: pending_human_review
+commercial_delivery_ready: pending_human_review
+memory_suitability: pending_human_review
+second_trial_purpose: validate_prompt_v2_revision
+third_generation_started: false
+third_generation_allowed_now: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+output_added_to_git: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v7.275_human_review_of_second_real_outputs
+recommended_next_zh: 人工审查第二次真实输出，不生成新图，不写 memory
+v7.275_purpose: human review of the v7.274 generated output
+v7.275_image_generation_allowed: false
+v7.275_provider_contact_allowed: false
+v7.275_memory_write_allowed_without_separate_authorization: false
+next_phase_started: false
+```
+
 ## v7.273 Second Minimal Generation Trial Authorization Gate
 
 ```text
-Status: completed_validated_pending_commit_push
+Status: completed_validated_committed_pushed_synced
 Source phase: v7.272_prompt_v2_static_review_and_second_trial_authorization_gate
 Purpose: record human authorization for exactly one bounded second minimal real generation trial using prompt v2
+commit: d1a7ac8 docs: authorize second minimal generation trial
+branch: master
+local_remote_sync: 0/0
+worktree_after_push: clean
+v7.274_status: completed_success
 prompt_v2_static_review_result: passed
 second_minimal_generation_trial_authorized: true
 approved_product: matte_ceramic_mug
@@ -17,21 +67,68 @@ output_directory: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/
 auto_retry: false
 stop_after_generation: true
 human_review_required_after_generation: true
-A5_execution_allowed_now: false during v7.273 authorization gate; true only for v7.274 bounded execution after v7.273 commit and push
-provider_contact_allowed_now: false during v7.273 authorization gate; true only for v7.274 bounded execution after v7.273 commit and push
+A5_execution_allowed_now: false; the single authorized v7.274 call has been consumed
+provider_contact_allowed_now: false; the single authorized v7.274 provider contact has been consumed
 generation_in_authorization_gate: false
+generation_in_board_freshness_patch: false
 provider_contact_in_authorization_gate: false
+provider_contact_in_board_freshness_patch: false
 image_generation_in_authorization_gate: false
+image_generation_in_board_freshness_patch: false
 memory_write: false
 DailyNote_write: false
 VCP_memory_write: false
 Batch_005: false
 production_candidate_002: false
-recommended_next: v7.274_second_minimal_generation_trial_execution
-recommended_next_zh: 使用 v2 prompt 执行一次且仅一次第二次最小真实生成试跑，随后停止等待人工审片
-auto_execution_allowed_for_next: true under the v7.273 human authorization boundary only
+recommended_next: v7.275_human_review_of_second_real_outputs
+recommended_next_zh: 人工审查第二次真实输出，不生成新图，不写 memory
+auto_execution_allowed_for_next: false
 next_phase_started: false
 validation: git diff --check passed; agent board state passed; current state alignment passed; native Doubao sandbox passed; validate_mvp passed; local validation passed with existing manual-review warnings only
+```
+
+## v7.274 Post Run Board Reconciliation
+
+```text
+phase: v7_274_post_run_board_reconciliation
+mode: A1/R2 .agent_board-only post-run reconciliation
+Status: completed_validated_pending_guarded_local_commit
+Purpose: correct live .agent_board facts after v7.274 succeeded
+current_HEAD: d1a7ac8 docs: authorize second minimal generation trial
+branch: master
+worktree_before_patch: dirty_with_stale_agent_board_state
+v7.273_status: completed_committed_pushed_synced
+v7.274_status: completed_success
+v7.274_execution_already_performed_before_patch: true
+provider_contact_in_patch: false
+plugin_call_in_patch: false
+model_call_in_patch: false
+image_generation_in_patch: false
+new_generation_in_patch: false
+output_images_count: 1
+output_file: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
+generated_output: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
+provider_calls_used: 1
+generation_attempts_used: 1
+auto_retry: false
+retry_performed: false
+no_retry: true
+no_third_generation: true
+third_generation_allowed_now: false
+no_memory_write: true
+no_DailyNote_write: true
+no_VCP_memory_write: true
+accepted_candidate: pending_human_review
+commercial_delivery_ready: pending_human_review
+memory_suitability: pending_human_review
+no_tag_release_deploy: true
+push_performed: false
+recommended_next: v7.275_human_review_of_second_real_outputs
+v7.275_purpose: human review of the v7.274 generated output
+v7.275_image_generation_allowed: false
+v7.275_provider_contact_allowed: false
+v7.275_memory_write_allowed_without_separate_authorization: false
+validation: git status passed; git diff --name-status confirmed .agent_board-only changes; git diff --check passed; stale pre-run wording scan passed; agent board state passed; current state alignment passed; native Doubao sandbox passed with no provider/plugin/image/env read; validate_mvp passed; local validation passed with existing manual-review warnings
 ```
 
 ## v7.271 Prompt Revision Plan From First Real Output

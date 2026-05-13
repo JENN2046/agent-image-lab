@@ -36,7 +36,7 @@ Project plugin route authorization planning: v7.262 completed; NativeDoubaoImage
 Project plugin A5 authorization package draft: v7.263 completed; AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 is draft-only with approval_status=not_requested and execute_now=false.
 Project plugin A5 authorization draft review: v7.264 completed; draft result is pass_to_keep_inactive and activation remains blocked.
 True A5 authorization request: v7.265 completed_validated; AUTH-PENDING-PROJECT-PLUGIN-20260513-001 fixes prompt/output/model/budget for preflight-only approval and still blocks provider/plugin/image/env value actions.
-Route B minimal real generation authorization: v7.268b completed; v7.269 succeeded with one matte_ceramic_mug output and no retry; v7.270 records human review as needs_revision, accepted_candidate=false, commercial_delivery_ready=false, memory_suitability=deferred; v7.271 creates a static prompt v2 revision plan without generation; v7.272 static review passed; v7.273 authorizes exactly one v7.274 second minimal generation trial using prompt v2 after commit and push.
+Route B minimal real generation authorization: v7.268b completed; v7.269 succeeded with one matte_ceramic_mug output and no retry; v7.270 records human review as needs_revision, accepted_candidate=false, commercial_delivery_ready=false, memory_suitability=deferred; v7.271 creates a static prompt v2 revision plan without generation; v7.272 static review passed; v7.273 authorized exactly one v7.274 second minimal generation trial using prompt v2 and is completed, committed, pushed, and synced at d1a7ac8; v7.274 completed successfully with one output and no retry.
 ```
 
 ---
@@ -81,19 +81,41 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-v7.273_second_minimal_generation_trial_authorization_gate — validation passed; awaiting exact-file checkpoint commit and push before v7.274 execution.
+none
 ```
 
 ### todo
 
 ```text
-none
+v7.275_human_review_of_second_real_outputs — 人工审查第二次真实输出；不生成新图、不 provider contact、不 retry、不写 memory。
 ```
 
-### recommended_next_after_v7_273
+### recommended_next_after_v7_274
 
 ```text
-v7.274_second_minimal_generation_trial_execution — 使用 v2 prompt 执行一次且仅一次第二次最小真实生成试跑，随后停止等待人工审片。No retry, third generation, Batch 005, production_candidate_002, memory write, DailyNote write, tag, release, or deploy.
+v7.275_human_review_of_second_real_outputs — 人工审查第二次真实输出，决定 accepted / needs_revision / rejected / deferred。No retry, third generation, Batch 005, production_candidate_002, memory write, DailyNote write, tag, release, or deploy.
+status: pending_human_review
+reviewed_output: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
+generated_output: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
+output_images_count: 1
+provider_calls_used: 1
+generation_attempts_used: 1
+auto_retry: false
+retry_performed: false
+no_retry: true
+no_third_generation: true
+third_generation_allowed_now: false
+accepted_candidate: pending_human_review
+commercial_delivery_ready: pending_human_review
+memory_suitability: pending_human_review
+no_memory_write: true
+no_DailyNote_write: true
+no_VCP_memory_write: true
+no_tag_release_deploy: true
+v7.275_purpose: human review of the v7.274 generated output
+v7.275_image_generation_allowed: false
+v7.275_provider_contact_allowed: false
+v7.275_memory_write_allowed_without_separate_authorization: false
 ```
 
 ### done
@@ -172,7 +194,9 @@ v7.274_second_minimal_generation_trial_execution — 使用 v2 prompt 执行一�
 71. v7.270 human review of real outputs records needs_revision, accepted_candidate=false, commercial_delivery_ready=false, and memory_suitability=deferred.
 72. v7.271 prompt revision plan from first real output creates prompt v2 without A5/provider/plugin/image/memory execution.
 73. v7.272 prompt v2 static review passed and recommends human authorization for a second minimal trial.
-74. v7.273 second minimal generation authorization gate docs/board validation passed; commit and push are the remaining gate actions before v7.274.
+74. v7.273 second minimal generation authorization gate docs/board validation passed, was committed and pushed as d1a7ac8, and local master is synced with origin/master at 0/0.
+75. v7.274 second minimal generation trial completed successfully with one output and no retry: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg.
+76. v7_274_post_run_board_reconciliation completed validation and is pending guarded local commit.
 ```
 
 ### blocked
@@ -226,7 +250,7 @@ v7.274_second_minimal_generation_trial_execution — 使用 v2 prompt 执行一�
 46. v7.264 does not authorize active A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/output write/real manifest read/real asset read/.env.local value read/raw stdout retention/CDP/bridge/MCP/tag/release/deploy.
 47. v7.265 does not authorize provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/output write/real manifest read/real asset read/.env.local value read/raw stdout retention/CDP/bridge/MCP/tag/release/deploy; it only requests exact approval for preflight.
 48. v7.268b authorizes provider contact and image generation only for the single v7.269 minimal trial; it does not authorize retry, second generation, Batch 005, production_candidate_002, DailyNote, VCP memory, CDP/bridge/MCP, tag, release, or deploy.
-49. v7.273 authorizes only the single v7.274 second minimal generation trial using prompt v2 after v7.273 commit and push; it does not authorize retry, third generation, prompt switch, product switch, Batch 005, production_candidate_002, DailyNote, VCP memory, CDP/bridge/MCP, tag, release, or deploy.
+49. v7.273 authorized only the single v7.274 second minimal generation trial using prompt v2; that authorization gate is completed, committed, pushed, and synced at d1a7ac8. v7.274 has now consumed the single authorized call successfully. No retry, third generation, prompt switch, product switch, Batch 005, production_candidate_002, DailyNote, VCP memory, CDP/bridge/MCP, tag, release, or deploy is authorized.
 ```
 
 ### skipped
