@@ -9,18 +9,18 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab completed human review of the bounded v7.274 second real output. The v2 image is accepted_candidate_with_minor_retouch, but not commercial_delivery_ready; v3 minor refinement planning is the next safe step.
+Agent Image Lab created prompt v3 and recorded the human authorization boundary for exactly one bounded v7.277 third minimal real generation trial.
 ```
 
 ## Current Phase
 
 ```text
-v7.275 Human Review Of Second Real Outputs
-phase_id: v7.275_human_review_of_second_real_outputs
-source_phase: v7.274_second_minimal_generation_trial_execution
+v7.276 Prompt v3 Minor Refinement And Third Trial Authorization Gate
+phase_id: v7.276_prompt_v3_minor_refinement_and_third_trial_authorization_gate
+source_phase: v7.275_human_review_of_second_real_outputs
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
-status: human_review_completed_pending_checkpoint_commit
+status: third_minimal_generation_trial_authorized_pending_checkpoint_commit_and_push
 source_commit: d1a7ac8
 source_message: docs: authorize second minimal generation trial
 branch: master tracking origin/master
@@ -110,7 +110,7 @@ output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug
 auto_retry_for_second_trial: false
 stop_after_generation_for_second_trial: true
 human_review_required_after_generation: true
-recommended_next: v7.276_prompt_v3_minor_refinement_and_third_trial_authorization_gate
+recommended_next: v7.277_third_minimal_generation_trial_execution
 v7.274_status: completed_success
 v7.274_provider_contact: true
 v7.274_image_generation: true
@@ -132,6 +132,19 @@ v7.275_commercial_delivery_ready: false
 v7.275_memory_suitability: deferred
 v7.275_reviewed_output: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
 v7.276_recommended_next: v7.276_prompt_v3_minor_refinement_and_third_trial_authorization_gate
+prompt_v3_created: true
+prompt_v3_ref: prompts/image_generation/product_still_life_matte_ceramic_mug_v3.yaml
+third_minimal_generation_trial_authorized: true
+approved_product_for_third_trial: matte_ceramic_mug
+approved_prompt_package_for_third_trial: prompts/image_generation/product_still_life_matte_ceramic_mug_v3.yaml
+provider_calls_max_for_third_trial: 1
+generation_attempts_max_for_third_trial: 1
+output_images_max_for_third_trial: 4
+output_directory_for_third_trial: runs/real_generation/v7_277_matte_ceramic_mug_v3_trial/
+auto_retry_for_third_trial: false
+stop_after_generation_for_third_trial: true
+human_review_required_after_generation: true
+fourth_generation_auto_start: false
 v7.274_stopped_after_generation: true
 human_review_required_now: true
 recommended_next_after_v7_274: v7.275_human_review_of_second_real_outputs
@@ -144,7 +157,7 @@ v7.275_memory_write_allowed_without_separate_authorization: false
 ## Current Task
 
 ```text
-v7.275 human review completed. The second output is an accepted candidate with minor retouch needs; next safe phase is v7.276 prompt v3 minor refinement and third-trial authorization gate.
+v7.276 prompt v3 authorization gate prepared. After exact commit and push safety gate, v7.277 may run exactly one bounded third trial and then stop for human review.
 ```
 
 ## Current Local Work State

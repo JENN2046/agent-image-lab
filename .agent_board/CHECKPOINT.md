@@ -1,5 +1,38 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.276 Prompt v3 Minor Refinement And Third Trial Authorization Gate
+
+```text
+phase_id: v7.276_prompt_v3_minor_refinement_and_third_trial_authorization_gate
+Status: completed_pending_checkpoint_commit_and_push
+Source phase: v7.275_human_review_of_second_real_outputs
+Purpose: create prompt v3 minor refinement and record human authorization for exactly one third minimal real generation trial
+source_asset_status: accepted_candidate_with_minor_retouch
+prompt_v3_created: true
+prompt_v3_ref: prompts/image_generation/product_still_life_matte_ceramic_mug_v3.yaml
+approved_product: matte_ceramic_mug
+approved_prompt_package: prompts/image_generation/product_still_life_matte_ceramic_mug_v3.yaml
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 4
+output_directory: runs/real_generation/v7_277_matte_ceramic_mug_v3_trial/
+auto_retry: false
+stop_after_generation: true
+human_review_required_after_generation: true
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+fourth_generation_auto_start: false
+generation_in_authorization_gate: false
+provider_contact_in_authorization_gate: false
+image_generation_in_authorization_gate: false
+recommended_next: v7.277_third_minimal_generation_trial_execution
+recommended_next_zh: 使用 v3 prompt 执行一次且仅一次第三次最小真实生成试跑，然后停止等待人工审片
+next_phase_started: false
+```
+
 ## v7.275 Human Review Of Second Real Outputs
 
 ```text

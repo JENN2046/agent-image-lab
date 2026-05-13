@@ -3,15 +3,15 @@
 ## Handoff Summary
 
 ```text
-Status: v7.275 human review of second real output completed; v3 minor refinement gate is next.
-Reason: v7.274 used prompt v2 for exactly one bounded second trial, generated 1 output, stopped with no retry, and v7.275 reviewed it as accepted_candidate_with_minor_retouch.
+Status: v7.276 prompt v3 minor refinement and third-trial authorization gate prepared.
+Reason: v7.275 reviewed the v2 output as accepted_candidate_with_minor_retouch, and v7.276 creates prompt v3 plus a one-call third-trial authorization boundary.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
 Latest visible head before v7.273: 6f95b53 == origin/master
 Current synced HEAD: d1a7ac8 docs: authorize second minimal generation trial
 ahead_behind: 0/0
 Worktree: dirty with .agent_board reality correction only
-Current status: second_real_output_reviewed
+Current status: third_minimal_generation_trial_authorized_pending_commit_push
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false; the single authorized v7.274 call has been consumed
 provider_contact_allowed_now: false; the single authorized v7.274 provider contact has been consumed
@@ -93,6 +93,17 @@ v7.275_asset_status: accepted_candidate_with_minor_retouch
 v7.275_accepted_candidate: true
 v7.275_commercial_delivery_ready: false
 v7.275_memory_suitability: deferred
+prompt_v3_created: true
+prompt_v3_ref: prompts/image_generation/product_still_life_matte_ceramic_mug_v3.yaml
+third_minimal_generation_trial_authorized: true
+approved_product_for_third_trial: matte_ceramic_mug
+approved_prompt_package_for_third_trial: prompts/image_generation/product_still_life_matte_ceramic_mug_v3.yaml
+provider_calls_max_for_third_trial: 1
+generation_attempts_max_for_third_trial: 1
+output_images_max_for_third_trial: 4
+output_directory_for_third_trial: runs/real_generation/v7_277_matte_ceramic_mug_v3_trial/
+auto_retry_for_third_trial: false
+fourth_generation_auto_start: false
 provider_contact_after_v7_274: false
 image_generation_after_v7_274: false
 human_review_required_now: true
@@ -223,13 +234,14 @@ A5_execution_allowed_now: false; the single authorized v7.274 call has been cons
 provider_contact_allowed_now: false; the single authorized v7.274 provider contact has been consumed
 
 continue_A4_docs_only_by_default: false
-recommended_next: v7.276_prompt_v3_minor_refinement_and_third_trial_authorization_gate
-recommended_next_zh: 基于第二张图创建 v3 小幅精修 prompt，并由人工决定是否授权第三次最小真实生成试跑
-auto_execution_allowed_for_next: false
-v7.276_purpose: prompt v3 minor refinement and third-trial authorization boundary
-v7.276_image_generation_allowed: false
-v7.276_provider_contact_allowed: false
-v7.276_memory_write_allowed_without_separate_authorization: false
+recommended_next: v7.277_third_minimal_generation_trial_execution
+recommended_next_zh: 使用 v3 prompt 执行一次且仅一次第三次最小真实生成试跑，然后停止等待人工审片
+auto_execution_allowed_for_next: true_after_v7_276_commit_and_push
+v7.277_purpose: validate prompt v3 minor refinement
+v7.277_provider_calls_max: 1
+v7.277_generation_attempts_max: 1
+v7.277_output_images_max: 4
+v7.277_memory_write_allowed: false
 ```
 
 ## Current Stop Gates

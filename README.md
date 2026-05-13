@@ -7,9 +7,9 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.275: 23453cf on master == origin/master.
-Current mainline state: v7.275 human review of second real outputs（第二次真实输出人工审片）.
-Current phase id: v7.275_human_review_of_second_real_outputs.
+Latest visible remote baseline before v7.276: 9d8af96 on master local ahead of origin/master.
+Current mainline state: v7.276 prompt v3 minor refinement and third trial authorization gate（v3 小幅精修与第三次最小试跑授权门）.
+Current phase id: v7.276_prompt_v3_minor_refinement_and_third_trial_authorization_gate.
 Prior human route selection gate: v7.261_human_product_route_selection_request_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
@@ -79,12 +79,19 @@ v7.275_asset_status: accepted_candidate_with_minor_retouch.
 v7.275_accepted_candidate: true.
 v7.275_commercial_delivery_ready: false.
 v7.275_memory_suitability: deferred.
-A5_execution_allowed_now: false after v7.275; v7.274 single authorized call has been consumed.
-provider_contact_allowed_now: false after v7.275; no retry or third generation is active without a new v7.276 authorization gate.
+prompt_v3_ref: prompts/image_generation/product_still_life_matte_ceramic_mug_v3.yaml.
+third_minimal_generation_trial_authorized: true.
+approved_prompt_package_for_third_trial: prompts/image_generation/product_still_life_matte_ceramic_mug_v3.yaml.
+provider_calls_max_for_third_trial: 1.
+generation_attempts_max_for_third_trial: 1.
+output_images_max_for_third_trial: 4.
+output_directory_for_third_trial: runs/real_generation/v7_277_matte_ceramic_mug_v3_trial/.
+A5_execution_allowed_now: true only for v7.277 bounded third minimal trial after v7.276 commit and push.
+provider_contact_allowed_now: true only for v7.277 bounded third minimal trial after v7.276 commit and push.
 Master plan index: PROJECT_MASTER_PLAN.md.
-Not authorized now: Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, retry, third generation execution, tag, release, deploy.
-Recommended next: v7.276_prompt_v3_minor_refinement_and_third_trial_authorization_gate（创建 v3 小幅精修 prompt，并由人工决定是否授权第三次最小真实生成试跑）.
-auto_execution_allowed_for_next: false until v7.276 authorization gate is completed.
+Not authorized now: Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, retry, fourth generation, tag, release, deploy.
+Recommended next: v7.277_third_minimal_generation_trial_execution（使用 v3 prompt 执行一次且仅一次第三次最小真实生成试跑，随后停止等待人工审片）.
+auto_execution_allowed_for_next: true only under the v7.276 human authorization boundary after commit and push.
 ```
 
 历史状态脉络：
