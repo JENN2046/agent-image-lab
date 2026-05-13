@@ -34,6 +34,7 @@ Product workflow paper chain quality stop: v7.260 completed; automatic paper art
 Human product route selection request: v7.261_human_product_route_selection_request_gate completed; Route 1, Route 2, Route 3, and Route 4 are presented for human selection. No route may start automatically.
 Project plugin route authorization planning: v7.262 completed; NativeDoubaoImage is the candidate project plugin path, but A5/provider/plugin/image remain blocked.
 Project plugin A5 authorization package draft: v7.263 completed; AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 is draft-only with approval_status=not_requested and execute_now=false.
+Project plugin A5 authorization draft review: v7.264 completed; draft result is pass_to_keep_inactive and activation remains blocked.
 ```
 
 ---
@@ -87,10 +88,10 @@ none
 none
 ```
 
-### recommended_next_after_v7_263
+### recommended_next_after_v7_264
 
 ```text
-v7.264_project_plugin_A5_authorization_draft_review_gate — 项目内插件 A5 授权包草案复核门。Review only; no activation, provider contact, plugin call, runtime, memory write, or generation.
+pending_human_decision_for_true_A5_authorization — 等待人工决定是否进入真正 A5 授权。No automatic next phase; no activation, provider contact, plugin call, runtime, memory write, or generation.
 ```
 
 ### done
@@ -162,6 +163,7 @@ v7.264_project_plugin_A5_authorization_draft_review_gate — 项目内插件 A5 
 64. v7.261 human product route selection request gate presented four next-route options and stopped at pending_human_selection.
 65. v7.262 project plugin route authorization planning gate selected NativeDoubaoImage as the project-local candidate for a future non-active authorization draft.
 66. v7.263 project plugin A5 authorization package draft gate created AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 as a draft-only inactive package.
+67. v7.264 project plugin A5 authorization draft review gate found the draft safe to keep inactive, with activation blocked.
 ```
 
 ### blocked
@@ -212,6 +214,7 @@ v7.264_project_plugin_A5_authorization_draft_review_gate — 项目内插件 A5 
 43. v7.261 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/renderer/preload/IPC/real manifest read/real asset read/.env.local value read/CDP/bridge/MCP/tag/release/deploy and requires human route selection before v7.262.
 44. v7.262 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/renderer/preload/IPC/real manifest read/real asset read/.env.local value read/CDP/bridge/MCP/tag/release/deploy.
 45. v7.263 does not authorize active A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/output write/real manifest read/real asset read/.env.local value read/raw stdout retention/CDP/bridge/MCP/tag/release/deploy.
+46. v7.264 does not authorize active A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/output write/real manifest read/real asset read/.env.local value read/raw stdout retention/CDP/bridge/MCP/tag/release/deploy.
 ```
 
 ### skipped

@@ -8,13 +8,13 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_263: ba8dc7e
-origin_master_before_v7_263: ba8dc7e
+latest_visible_head_before_v7_264: 95852dd
+origin_master_before_v7_264: 95852dd
 status: failed_no_image_repeated_quota_or_rate_limit
-mode: A4 project plugin A5 authorization package drafting
-phase_id: v7.263_project_plugin_A5_authorization_package_draft_gate
+mode: A4 project plugin A5 authorization draft review
+phase_id: v7.264_project_plugin_A5_authorization_draft_review_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
-prior_project_plugin_route_planning_gate: v7.262_project_plugin_route_authorization_planning_gate
+prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
@@ -45,7 +45,10 @@ draft_authorization_package_id: AUTH-DRAFT-PROJECT-PLUGIN-20260513-001
 authorization_status: draft
 approval_status: not_requested
 execute_now: false
-recommended_next: v7.264_project_plugin_A5_authorization_draft_review_gate
+project_plugin_A5_authorization_draft_review_completed: true
+draft_review_result: pass_to_keep_inactive
+activation_verdict: blocked
+recommended_next: pending_human_decision_for_true_A5_authorization
 ```
 
 ## Product Direction
@@ -130,8 +133,10 @@ v7.262 identifies `NativeDoubaoImage` as the project-local candidate plugin and
 lists the authorization fields needed before any future plugin call. v7.263
 creates `AUTH-DRAFT-PROJECT-PLUGIN-20260513-001` as a draft-only A5
 authorization package for that route, with `approval_status=not_requested` and
-`execute_now=false`. This does not authorize A5, provider contact, plugin
-execution, output write, image generation, or memory write.
+`execute_now=false`. v7.264 reviews that draft and finds it safe to keep as
+inactive paperwork, but blocked for activation. This does not authorize A5,
+provider contact, plugin execution, output write, image generation, or memory
+write.
 
 ## Active Boundaries
 
@@ -155,6 +160,5 @@ validation interpretation, staging, commit decisions, and next-task selection.
 
 ## Recommended Next
 
-Recommended next is `v7.264_project_plugin_A5_authorization_draft_review_gate`
-（项目内插件 A5 授权包草案复核门）. It may review the draft package for internal
-completeness, but must not activate it or call the plugin automatically.
+Recommended next is `pending_human_decision_for_true_A5_authorization`
+（等待人工决定是否进入真正 A5 授权）. No next A5 route may start automatically.

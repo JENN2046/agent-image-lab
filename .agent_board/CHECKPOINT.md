@@ -1,5 +1,36 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.264 Project Plugin A5 Authorization Draft Review Gate
+
+```text
+Status: completed_validated
+Source baseline: 95852dd == origin/master
+Purpose: review AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 without activating A5
+reviewed_package_id: AUTH-DRAFT-PROJECT-PLUGIN-20260513-001
+draft_review_completed: true
+draft_review_result: pass_to_keep_inactive
+activation_verdict: blocked
+safe_to_keep_as_paperwork: true
+safe_to_use_for_execution_now: false
+activation_blockers: quota_or_rate_limit_resolution_missing, final_generation_plan_ref_missing, final_prompt_package_ref_missing, final_output_directory_ref_missing, exact_human_approval_not_received, A5_preflight_not_run
+same_provider_retry_allowed_now: false
+A5_execution_allowed_now: false
+provider_contact_allowed_now: false
+plugin_call_allowed_now: false
+image_generation_allowed_now: false
+memory_write_allowed_now: false
+recommended_next: pending_human_decision_for_true_A5_authorization
+recommended_next_zh: 等待人工决定是否进入真正 A5 授权
+auto_execution_allowed_for_next: false
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+runtime_execution: false
+DailyNote_write: false
+VCP_memory_write: false
+```
+
 ## v7.263 Project Plugin A5 Authorization Package Draft Gate
 
 ```text
