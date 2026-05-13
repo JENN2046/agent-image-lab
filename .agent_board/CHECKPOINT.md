@@ -1,5 +1,39 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.263 Project Plugin A5 Authorization Package Draft Gate
+
+```text
+Status: completed_validated
+Source baseline: ba8dc7e == origin/master
+Purpose: draft the inactive project plugin A5 authorization package for NativeDoubaoImage
+draft_authorization_package_id: AUTH-DRAFT-PROJECT-PLUGIN-20260513-001
+authorization_status: draft
+approval_status: not_requested
+execute_now: false
+candidate_project_plugin: NativeDoubaoImage
+candidate_plugin_command: generate
+candidate_model: doubao-seedream-5-0-260128
+max_plugin_calls: 1
+max_images_created: 1
+retry_limit: 0
+same_provider_retry_allowed_now: false
+A5_execution_allowed_now: false
+provider_contact_allowed_now: false
+plugin_call_allowed_now: false
+image_generation_allowed_now: false
+memory_write_allowed_now: false
+recommended_next: v7.264_project_plugin_A5_authorization_draft_review_gate
+recommended_next_zh: 项目内插件 A5 授权包草案复核门
+auto_execution_allowed_for_next: false
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+runtime_execution: false
+DailyNote_write: false
+VCP_memory_write: false
+```
+
 ## v7.262 Project Plugin Route Authorization Planning Gate
 
 ```text

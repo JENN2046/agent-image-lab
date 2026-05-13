@@ -7,10 +7,11 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.262: f947582 on master == origin/master.
-Current mainline state: v7.262 project plugin route authorization planning gate（项目内插件路线授权规划门）.
-Current phase id: v7.262_project_plugin_route_authorization_planning_gate.
-Prior route selection gate: v7.261_human_product_route_selection_request_gate.
+Latest visible remote baseline before v7.263: ba8dc7e on master == origin/master.
+Current mainline state: v7.263 project plugin A5 authorization package draft gate（项目内插件 A5 授权包草案门）.
+Current phase id: v7.263_project_plugin_A5_authorization_package_draft_gate.
+Prior human route selection gate: v7.261_human_product_route_selection_request_gate.
+Prior project plugin route planning gate: v7.262_project_plugin_route_authorization_planning_gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
 Current status: failed_no_image_repeated_quota_or_rate_limit.
@@ -25,9 +26,14 @@ route_selection_required_before_new_A5: true.
 human_route_selection_requested: true.
 project_plugin_route_selected_for_planning: true.
 candidate_project_plugin: NativeDoubaoImage.
+project_plugin_A5_authorization_package_draft_created: true.
+draft_authorization_package_id: AUTH-DRAFT-PROJECT-PLUGIN-20260513-001.
+authorization_status: draft.
+approval_status: not_requested.
+execute_now: false.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized: A5, provider contact, runtime, plugin call, image generation, DailyNote write, VCP memory write, real manifest read, tag, release, deploy.
-Recommended next: v7.263_project_plugin_A5_authorization_package_draft_gate（项目内插件 A5 授权包草案门）.
+Recommended next: v7.264_project_plugin_A5_authorization_draft_review_gate（项目内插件 A5 授权包草案复核门）.
 auto_execution_allowed_for_next: false.
 ```
 

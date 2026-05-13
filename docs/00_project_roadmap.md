@@ -18,10 +18,10 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.262: f947582 on master == origin/master.
-Current mainline state: v7.262 project plugin route authorization planning gate（项目内插件路线授权规划门）.
-Current phase id: v7.262_project_plugin_route_authorization_planning_gate.
-Prior route selection gate: v7.261_human_product_route_selection_request_gate.
+Latest visible remote baseline before v7.263: ba8dc7e on master == origin/master.
+Current mainline state: v7.263 project plugin A5 authorization package draft gate（项目内插件 A5 授权包草案门）.
+Current phase id: v7.263_project_plugin_A5_authorization_package_draft_gate.
+Prior project plugin route planning gate: v7.262_project_plugin_route_authorization_planning_gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
 Current status: failed_no_image_repeated_quota_or_rate_limit.
@@ -36,7 +36,12 @@ route_selection_required_before_new_A5: true.
 human_route_selection_requested: true.
 project_plugin_route_selected_for_planning: true.
 candidate_project_plugin: NativeDoubaoImage.
-Recommended next: v7.263_project_plugin_A5_authorization_package_draft_gate（项目内插件 A5 授权包草案门）.
+project_plugin_A5_authorization_package_draft_created: true.
+draft_authorization_package_id: AUTH-DRAFT-PROJECT-PLUGIN-20260513-001.
+authorization_status: draft.
+approval_status: not_requested.
+execute_now: false.
+Recommended next: v7.264_project_plugin_A5_authorization_draft_review_gate（项目内插件 A5 授权包草案复核门）.
 auto_execution_allowed_for_next: false.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)
@@ -181,7 +186,7 @@ master tracking origin/master
 - 正式 release 发布仍需单独授权（tag 策略已定义：`docs/233_tag_and_version_strategy.md`）。
 - 后续更多真实图片生成需新 A5 授权包（Phase F 已消耗 2/2 calls，双图 accepted）。
 - version actions 需要匹配当前授权和 preflight；v7.224 只允许白名单 docs/status 文件的 commit + push。
-- Product image A5 path 已进入 repeated quota/rate-limit stop；Native Doubao static syntax / sandbox 已硬化；v7.260 判断产品图纸面链路已进入 quality stop；v7.261 已提出四条路线；v7.262 已选择“项目内插件路线”进入纸面授权规划。下一步只允许起草项目内插件 A5 授权包，不允许执行插件或生成图片。
+- Product image A5 path 已进入 repeated quota/rate-limit stop；Native Doubao static syntax / sandbox 已硬化；v7.260 判断产品图纸面链路已进入 quality stop；v7.261 已提出四条路线；v7.262 已选择“项目内插件路线”进入纸面授权规划；v7.263 已起草项目内插件 A5 授权包但保持 draft / not_requested / execute_now=false。下一步只允许复核草案，不允许执行插件或生成图片。
 
 ## 阶段路线
 
@@ -328,9 +333,10 @@ daily_note_called: false
 
 1. v7.261_human_product_route_selection_request_gate 已把下一步路线选择交还给项目 owner。
 2. v7.262_project_plugin_route_authorization_planning_gate 已把项目内插件路线规划到 NativeDoubaoImage 候选，但不执行。
-3. A5/provider/plugin/runtime/image/memory 仍未授权；任何真实生成、provider retry 或 runtime integration 都必须先有独立授权包。
-4. tag/release/deploy 仍未授权；任何版本动作都必须匹配当前授权、白名单和 push safety gate。
-5. recommended next: v7.263_project_plugin_A5_authorization_package_draft_gate（项目内插件 A5 授权包草案门）。
+3. v7.263_project_plugin_A5_authorization_package_draft_gate 已创建 AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 草案；它不是 active A5。
+4. A5/provider/plugin/runtime/image/memory 仍未授权；任何真实生成、provider retry 或 runtime integration 都必须先有独立授权包。
+5. tag/release/deploy 仍未授权；任何版本动作都必须匹配当前授权、白名单和 push safety gate。
+6. recommended next: v7.264_project_plugin_A5_authorization_draft_review_gate（项目内插件 A5 授权包草案复核门）。
 
 ## 永久安全门
 

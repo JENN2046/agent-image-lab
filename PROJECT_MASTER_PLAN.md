@@ -8,12 +8,13 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_262: f947582
-origin_master_before_v7_262: f947582
+latest_visible_head_before_v7_263: ba8dc7e
+origin_master_before_v7_263: ba8dc7e
 status: failed_no_image_repeated_quota_or_rate_limit
-mode: A4 project plugin route authorization planning
-phase_id: v7.262_project_plugin_route_authorization_planning_gate
-prior_route_selection_gate: v7.261_human_product_route_selection_request_gate
+mode: A4 project plugin A5 authorization package drafting
+phase_id: v7.263_project_plugin_A5_authorization_package_draft_gate
+prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
+prior_project_plugin_route_planning_gate: v7.262_project_plugin_route_authorization_planning_gate
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
@@ -39,7 +40,12 @@ product_workflow_paper_chain_quality_stop_reached: true
 human_route_selection_requested: true
 project_plugin_route_selected_for_planning: true
 candidate_project_plugin: NativeDoubaoImage
-recommended_next: v7.263_project_plugin_A5_authorization_package_draft_gate
+project_plugin_A5_authorization_package_draft_created: true
+draft_authorization_package_id: AUTH-DRAFT-PROJECT-PLUGIN-20260513-001
+authorization_status: draft
+approval_status: not_requested
+execute_now: false
+recommended_next: v7.264_project_plugin_A5_authorization_draft_review_gate
 ```
 
 ## Product Direction
@@ -121,9 +127,11 @@ Route 3 manual product prompt package sample, or Route 4 Review Console runtime
 integration planning. The low-risk recommendation is Route 3, but no route may
 start automatically. The owner then chose the project plugin path for planning.
 v7.262 identifies `NativeDoubaoImage` as the project-local candidate plugin and
-lists the authorization fields needed before any future plugin call. This does
-not authorize A5, provider contact, plugin execution, output write, image
-generation, or memory write.
+lists the authorization fields needed before any future plugin call. v7.263
+creates `AUTH-DRAFT-PROJECT-PLUGIN-20260513-001` as a draft-only A5
+authorization package for that route, with `approval_status=not_requested` and
+`execute_now=false`. This does not authorize A5, provider contact, plugin
+execution, output write, image generation, or memory write.
 
 ## Active Boundaries
 
@@ -147,6 +155,6 @@ validation interpretation, staging, commit decisions, and next-task selection.
 
 ## Recommended Next
 
-Recommended next is `v7.263_project_plugin_A5_authorization_package_draft_gate`
-（项目内插件 A5 授权包草案门）. It may draft the package, but must not activate it
-or call the plugin automatically.
+Recommended next is `v7.264_project_plugin_A5_authorization_draft_review_gate`
+（项目内插件 A5 授权包草案复核门）. It may review the draft package for internal
+completeness, but must not activate it or call the plugin automatically.
