@@ -8,10 +8,10 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_255: 3342eac
-origin_master_before_v7_255: 3342eac
+latest_visible_head_before_v7_256: 6f3425e
+origin_master_before_v7_256: 6f3425e
 status: failed_no_image_repeated_quota_or_rate_limit
-mode: A4 static Review Surface mockup acceptance review
+mode: A4 static Review Surface acceptance patch
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
@@ -29,6 +29,7 @@ static_review_surface_mockup_spec_created: true
 static_review_surface_mockup_file_created: true
 static_review_surface_mockup_acceptance_review_completed: true
 static_review_surface_mockup_acceptance_result: pass_with_warnings
+accepted_final_explicit_state_patched: true
 ```
 
 ## Product Direction
@@ -91,6 +92,8 @@ runtime imports, provider/plugin calls, image generation, or memory writes.
 v7.255 reviews that HTML against the v7.251 checklist and v7.253 spec. It
 passes the no-execution and core field checks, with one follow-up warning:
 `accepted_final` should become an explicit future/blocked status in the mockup.
+v7.256 patches that gap by adding `accepted_final` as an explicit
+`future_blocked` status in the offline mockup while preserving no-execution.
 
 ## Active Boundaries
 
@@ -114,7 +117,7 @@ validation interpretation, staging, commit decisions, and next-task selection.
 
 ## Recommended Next
 
-Recommended next is `v7.256_static_review_surface_acceptance_patch_gate`
-（静态审片台验收补丁门）. It should patch the static mockup to expose
-`accepted_final` as an explicit future/blocked state while preserving no-runtime
-and no-execution boundaries.
+Recommended next is `v7.257_static_review_surface_quality_stop_or_next_product_decision_gate`
+（静态审片台质量停止或下一产品决策门）. It should decide whether the static
+Review Surface has reached quality stop or whether one more product-mainline
+artifact is worth creating.

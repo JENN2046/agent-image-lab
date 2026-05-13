@@ -1,5 +1,34 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.256 Static Review Surface Acceptance Patch Gate
+
+```text
+Status: completed_validated
+Source baseline: 6f3425e == origin/master
+Purpose: patch v7.254 offline static HTML so accepted_final is explicit and future_blocked
+route_3_meaning_zh: 继续停止生成
+patched_file: review_console/static_mockups/v7_254_static_review_surface_mockup.html
+accepted_final_explicit_state_patched: true
+accepted_final_state: future_blocked
+external_assets_used: false
+scripts_used: false
+runtime_imports_used: false
+provider_plugin_buttons_disabled: true
+memory_write_buttons_disabled: true
+recommended_next: v7.257_static_review_surface_quality_stop_or_next_product_decision_gate
+same_provider_retry_allowed_now: false
+A5_execution_allowed_now: false
+provider_contact_allowed_now: false
+route_selection_required_before_new_A5: true
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+runtime_execution: false
+DailyNote_write: false
+VCP_memory_write: false
+```
+
 ## v7.255 Static Review Surface Mockup Acceptance Review Gate
 
 ```text

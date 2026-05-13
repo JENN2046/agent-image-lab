@@ -23,6 +23,7 @@
 18. v7.253 static Review Surface mockup spec keeps generation stopped and recommends v7.254_static_review_surface_mockup_file_gate; runtime implementation remains blocked.
 19. v7.254 static Review Surface mockup file keeps generation stopped and recommends v7.255_static_review_surface_mockup_acceptance_review_gate; runtime integration remains blocked.
 20. v7.255 static Review Surface mockup acceptance review keeps generation stopped and recommends v7.256_static_review_surface_acceptance_patch_gate; accepted_final should be explicit before broader mockup polish.
+21. v7.256 static Review Surface acceptance patch keeps generation stopped and recommends v7.257_static_review_surface_quality_stop_or_next_product_decision_gate; runtime integration remains blocked.
 ```
 
 ## Current Mainline Quality Stop

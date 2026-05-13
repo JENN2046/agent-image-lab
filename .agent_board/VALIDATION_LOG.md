@@ -1,5 +1,35 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260513-V7-256-STATIC-REVIEW-SURFACE-ACCEPTANCE-PATCH
+
+Task:
+
+```text
+Patch the offline static Review Surface mockup so accepted_final appears as an explicit future_blocked state under Route 3 continued stop（继续停止生成）. Do not run browser/runtime, call providers/plugins, generate images, or write memory.
+```
+
+Result:
+
+```text
+completed_validated
+```
+
+Validation:
+
+```text
+git diff --check: passed
+node --check scripts/validate_current_state_alignment.js: passed
+node scripts/validate_current_state_alignment.js: passed
+node scripts/validate_agent_board_state.js: passed
+static_html_forbidden_surface_grep: passed
+```
+
+Recommended next:
+
+```text
+v7.257_static_review_surface_quality_stop_or_next_product_decision_gate（静态审片台质量停止或下一产品决策门）
+```
+
 ## VALIDATION-20260513-V7-255-STATIC-REVIEW-SURFACE-MOCKUP-ACCEPTANCE-REVIEW
 
 Task:

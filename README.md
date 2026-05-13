@@ -7,8 +7,8 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.255: 3342eac on master == origin/master.
-Current mainline state: v7.255 static Review Surface mockup acceptance review gate（静态审片台 mockup 验收复核门）.
+Latest visible remote baseline before v7.256: 6f3425e on master == origin/master.
+Current mainline state: v7.256 static Review Surface acceptance patch gate（静态审片台验收补丁门）.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
 Current status: failed_no_image_repeated_quota_or_rate_limit.
@@ -18,11 +18,11 @@ provider_contact_allowed_now: false.
 Native Doubao static hardening: syntax/path sandbox/base URL/raw output/env allowlist/validator drift patched.
 Diagnostic decision: continue_generation_stop_until_route_selection.
 Provider path decision: ROUTE-3-CONTINUED-STOP（路线 3：继续停止生成）selected now; Route 1 quota resolution and Route 2 provider/model/account switch remain available only after explicit human selection.
-Review Surface mainline: static HTML mockup has been reviewed against the v7.251 checklist and v7.253 spec. Result is pass_with_warnings: accepted_final should become an explicit blocked/future state in the mockup.
+Review Surface mainline: static HTML mockup now exposes accepted_final as an explicit future_blocked status while preserving no external assets, no scripts, no runtime, no provider/plugin/image/memory behavior.
 route_selection_required_before_new_A5: true.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized: A5, provider contact, runtime, plugin call, image generation, DailyNote write, VCP memory write, real manifest read, tag, release, deploy.
-Recommended next: v7.256_static_review_surface_acceptance_patch_gate（静态审片台验收补丁门）.
+Recommended next: v7.257_static_review_surface_quality_stop_or_next_product_decision_gate（静态审片台质量停止或下一产品决策门）.
 ```
 
 历史状态脉络：

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Agent Image Lab Static Review Surface Mockup v7.254</title>
+    <title>Agent Image Lab Static Review Surface Mockup v7.256</title>
     <style>
       :root {
         color-scheme: dark;
@@ -390,7 +390,7 @@
     </style>
   </head>
   <body>
-    <main class="shell" aria-label="Agent Image Lab static review surface mockup v7.254">
+    <main class="shell" aria-label="Agent Image Lab static review surface mockup v7.256">
       <header class="topbar">
         <div>
           <p class="eyebrow">Agent Image Lab / Static Review Surface</p>
@@ -398,7 +398,7 @@
           <p>current_status: failed_no_image_repeated_quota_or_rate_limit</p>
         </div>
         <div class="status-strip" aria-label="Boundary status">
-          <span class="pill amber">v7.254 offline mockup</span>
+          <span class="pill amber">v7.256 acceptance patch</span>
           <span class="pill red">A5 blocked</span>
           <span class="pill red">provider/plugin/runtime/image/memory blocked</span>
         </div>
@@ -438,6 +438,11 @@
               <div class="line"><span>case_id</span><strong>CASE-ACCEPTED-CANDIDATE</strong></div>
               <div class="line"><span>asset_status</span><strong>accepted_candidate</strong></div>
               <div class="line"><span>delivery</span><strong>not final</strong></div>
+            </article>
+            <article class="queue-card">
+              <div class="line"><span>case_id</span><strong>CASE-ACCEPTED-FINAL-BLOCKED</strong></div>
+              <div class="line"><span>asset_status</span><strong>accepted_final</strong></div>
+              <div class="line"><span>state</span><strong>future_blocked</strong></div>
             </article>
           </div>
         </aside>
@@ -494,7 +499,7 @@
           <div class="panel-body">
             <article class="field-card">
               <h3>review_decision</h3>
-              <p>accepted_candidate / rejected / needs_revision / deferred 只能作为纸面状态记录。</p>
+              <p>accepted_candidate / rejected / needs_revision / deferred 只能作为纸面状态记录；accepted_final 是未来阻断状态。</p>
               <div class="pill-row">
                 <span class="pill green">human review wins</span>
                 <span class="pill amber">AI score advisory</span>
@@ -550,7 +555,7 @@
             </article>
             <article class="timeline-item">
               <h3>5. closeout</h3>
-              <p>下一阶段建议：v7.255_static_review_surface_mockup_acceptance_review_gate。</p>
+              <p>下一阶段建议：v7.257_static_review_surface_quality_stop_or_next_product_decision_gate。</p>
             </article>
           </div>
         </section>
@@ -585,9 +590,9 @@
         <div class="panel-body">
           <div class="contract-table" role="list" aria-label="Static review surface contract">
             <div class="contract-row" role="listitem"><strong>Allowed refs</strong><span>prompt_package_ref, generation_plan_ref, review_record_ref, asset_ref, closeout_ref</span><span>visible</span></div>
-            <div class="contract-row" role="listitem"><strong>Allowed states</strong><span>not_created, generated_pending_review, accepted_candidate, rejected, needs_revision, deferred</span><span>visible</span></div>
+            <div class="contract-row" role="listitem"><strong>Allowed states</strong><span>not_created, generated_pending_review, accepted_candidate, accepted_final, rejected, needs_revision, deferred</span><span>visible</span></div>
             <div class="contract-row" role="listitem"><strong>Forbidden raw data</strong><span>raw_prompt, raw_payload, raw_endpoint, raw_response, private_path, secret, image_binary</span><span>hidden</span></div>
-            <div class="contract-row" role="listitem"><strong>Next phase</strong><span>v7.255_static_review_surface_mockup_acceptance_review_gate</span><span>review only</span></div>
+            <div class="contract-row" role="listitem"><strong>Next phase</strong><span>v7.257_static_review_surface_quality_stop_or_next_product_decision_gate</span><span>review only</span></div>
           </div>
         </div>
       </section>
