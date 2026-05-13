@@ -9,16 +9,16 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab is on Route 3 continued stop（继续停止生成）and has defined the static Review Surface mockup specification.
+Agent Image Lab is on Route 3 continued stop（继续停止生成）and has created an offline static Review Surface mockup file.
 ```
 
 ## Current Phase
 
 ```text
-v7.253 Static Review Surface Mockup Spec Gate
+v7.254 Static Review Surface Mockup File Gate
 status: failed_no_image_repeated_quota_or_rate_limit
-source_commit: 09ab02a
-source_message: docs: add static review surface mockup readiness review
+source_commit: 1d39503
+source_message: docs: add static review surface mockup spec
 branch: master tracking origin/master
 Worktree: clean at v7.247 start
 worktree_start_clean: true
@@ -40,25 +40,29 @@ ready_for_static_mockup_spec_gate: true
 ready_for_runtime_or_html_implementation: false
 static_review_surface_mockup_spec_created: true
 ready_for_offline_static_mockup_file: true
+static_review_surface_mockup_file_created: true
+standalone_offline_html_created: true
+external_assets_used: false
+scripts_used: false
 ready_for_runtime_implementation: false
 ```
 
 ## Current Task
 
 ```text
-Define static Review Surface mockup screen regions and fixture shape without creating HTML, renderer/preload/IPC, or runtime code.
+Create standalone offline static Review Surface mockup HTML without external assets, scripts, renderer/preload/IPC, or runtime code.
 ```
 
 ## Current Local Work State
 
 ```text
-Worktree: clean after checkpoint f3a4b39 before execution attempt; failure record now pending validation
+Worktree: clean at v7.254 start after v7.253 push
 active_workers: 0
 execution_mode: Single-Window 4-Agent Compact Autopilot
-commander_role: complete docs-only non-active skeleton and stop before human-only activation fields
-architect_role: keep write scope to docs, indexes, and .agent_board current-state files
-worker_role: apply the skeleton and board patch only
-reviewer_role: inspect diff, run allowed local checks, and close out
+commander_role: keep Route 3 product-mainline progress inside static Review Surface boundaries
+architect_role: translate v7.253 spec into one standalone offline mockup file
+worker_role: apply only the mockup file, phase record, indexes, validator, and .agent_board patch
+reviewer_role: inspect diff, run allowed local checks, confirm no runtime/provider/plugin/image/memory behavior, and close out
 ```
 
 ## Latest Mainline Status
@@ -93,7 +97,7 @@ MVP Aggregate Validator Calibration: completed_validated
 Product Image Authorization Draft Plan Ref Alignment: v7.241 completed_validated
 Product Image Authorization Activation Gap Review: v7.242 completed_validated
 Product Image Active Authorization Package Skeleton: v7.243 completed_validated
-Recommended next product task: v7.254_static_review_surface_mockup_file_gate（静态审片台 mockup 文件门）
+Recommended next product task: v7.255_static_review_surface_mockup_acceptance_review_gate（静态审片台 mockup 验收复核门）
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```
@@ -139,8 +143,8 @@ tag/release/deploy remain blocked without explicit authorization and preflight
 ## Current Options
 
 ```text
-recommended_next_after_v7_253: v7.254_static_review_surface_mockup_file_gate
-purpose: create a standalone offline static Review Surface mockup file without generation or runtime
+recommended_next_after_v7_254: v7.255_static_review_surface_mockup_acceptance_review_gate
+purpose: review the offline static Review Surface mockup against checklist and spec without generation or runtime
 not_allowed_as_next_by_default: A5, provider contact, runtime, plugin call, image generation, memory write, tag, release
 ```
 
@@ -205,5 +209,5 @@ external repository modification: no
 ```text
 Use the calibrated board as the current navigation source.
 The second newly approved DoubaoGen diagnostic retry was consumed by one process attempt. The result is failed_no_image_repeated_quota_or_rate_limit; generation remains blocked unless the user resolves provider quota/rate-limit conditions or authorizes a new provider/model/account path.
-Before continuing, verify branch, worktree, local/remote sync, and whether the user authorized provider quota/rate-limit diagnosis or a new generation path.
+For Route 3 product-mainline work, continue only with static Review Surface artifacts that do not enter A5, provider contact, plugin call, image generation, runtime, or memory write. The current recommended next is v7.255_static_review_surface_mockup_acceptance_review_gate.
 ```

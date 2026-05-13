@@ -15,12 +15,13 @@
 10. v7.246 diagnostic decision is continue_generation_stop_until_route_selection; next paper-only step is v7.247_provider_path_decision_package_gate.
 11. v7.247 provider path decision selected ROUTE-3-CONTINUED-STOP now.
 12. v7.248 generation stop closeout is complete; any new A5 path now requires explicit human route selection: Route 1 quota resolution, Route 2 provider/model/account switch, or Route 3 continued stop.
-13. recommended_next: human_route_selection_required_before_any_new_A5.
+13. A5_route_next_if_generation_requested: human_route_selection_required_before_any_new_A5.
 14. v7.249 static Review Surface product spec keeps generation stopped and recommends v7.250_review_record_template_and_status_flow_gate.
 15. v7.250 review record template and status flow keeps generation stopped and recommends v7.251_static_review_surface_acceptance_checklist_gate.
 16. v7.251 static Review Surface acceptance checklist keeps generation stopped and recommends v7.252_static_review_surface_mockup_readiness_review_gate.
 17. v7.252 static Review Surface mockup readiness review keeps generation stopped and recommends v7.253_static_review_surface_mockup_spec_gate; direct HTML/runtime implementation is still blocked.
 18. v7.253 static Review Surface mockup spec keeps generation stopped and recommends v7.254_static_review_surface_mockup_file_gate; runtime implementation remains blocked.
+19. v7.254 static Review Surface mockup file keeps generation stopped and recommends v7.255_static_review_surface_mockup_acceptance_review_gate; runtime integration remains blocked.
 ```
 
 ## Current Mainline Quality Stop

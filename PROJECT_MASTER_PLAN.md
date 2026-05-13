@@ -8,10 +8,10 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_253: 09ab02a
-origin_master_before_v7_253: 09ab02a
+latest_visible_head_before_v7_254: 1d39503
+origin_master_before_v7_254: 1d39503
 status: failed_no_image_repeated_quota_or_rate_limit
-mode: A4 docs-only static Review Surface mockup spec
+mode: A4 static Review Surface mockup file
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
@@ -26,6 +26,7 @@ status_flow_defined: true
 static_review_surface_acceptance_checklist_created: true
 static_review_surface_mockup_readiness_review_created: true
 static_review_surface_mockup_spec_created: true
+static_review_surface_mockup_file_created: true
 ```
 
 ## Product Direction
@@ -82,7 +83,9 @@ v7.252 reviews those artifacts and confirms the next safe product step is a
 static mockup specification gate, not runtime implementation.
 v7.253 defines the mockup specification: screen regions, fixture shape, Chinese
 copy rules, disabled action reasons, and checklist mapping before any HTML or
-runtime implementation.
+runtime implementation. v7.254 creates a standalone offline static HTML mockup
+file under `review_console/static_mockups/` with no external assets, scripts,
+runtime imports, provider/plugin calls, image generation, or memory writes.
 
 ## Active Boundaries
 
@@ -106,7 +109,6 @@ validation interpretation, staging, commit decisions, and next-task selection.
 
 ## Recommended Next
 
-Recommended next is `v7.254_static_review_surface_mockup_file_gate`
-（静态审片台 mockup 文件门）. It may create a standalone offline static mockup
-file only if it remains no-runtime, no-provider, no-plugin, no-image-generation,
-and no-memory-write.
+Recommended next is `v7.255_static_review_surface_mockup_acceptance_review_gate`
+（静态审片台 mockup 验收复核门）. It should review the static HTML mockup against
+the v7.251 acceptance checklist and v7.253 mockup spec without entering runtime.

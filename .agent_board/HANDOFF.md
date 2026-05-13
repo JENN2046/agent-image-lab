@@ -7,7 +7,7 @@ Status: generation stop closeout recorded after repeated quota/rate-limit failur
 Reason: A second newly approved DoubaoGen retry/diagnostic call was consumed once; the plugin returned error again, sanitized category is still quota_or_rate_limit, and no image was generated.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
-Latest visible head: 09ab02a == origin/master
+Latest visible head: 1d39503 == origin/master
 Current status: failed_no_image_repeated_quota_or_rate_limit
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
@@ -67,20 +67,21 @@ native Doubao syntax and sandbox hardening: v7.245 completed_validated
 no-generation quota/provider path diagnostic readiness: v7.246 completed_validated
 provider path decision package: v7.247 completed_validated
 generation stop closeout / route selection request: v7.248 completed_validated
-recommended_next: human_route_selection_required_before_any_new_A5
+A5_route_next_if_generation_requested: human_route_selection_required_before_any_new_A5
 route_selection_required_before_new_A5: true
 static Review Surface product spec: v7.249 completed_validated
 review record template and status flow: v7.250 completed_validated
 static Review Surface acceptance checklist: v7.251 completed_validated
 static Review Surface mockup readiness review: v7.252 completed_validated
 static Review Surface mockup spec: v7.253 completed_validated
+static Review Surface mockup file: v7.254 completed_validated
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
 
 continue_A4_docs_only_by_default: false
-recommended_next: v7.254_static_review_surface_mockup_file_gate
-recommended_next_zh: 静态审片台 mockup 文件门
+recommended_next: v7.255_static_review_surface_mockup_acceptance_review_gate
+recommended_next_zh: 静态审片台 mockup 验收复核门
 ```
 
 ## Current Stop Gates
@@ -154,7 +155,7 @@ dependency/config/env modification: no
 ## Human Decisions Needed
 
 ```text
-Next action is human route selection. Human authorization is still needed before provider console/account review, any retry, raw plugin stderr/stdout review or capture, secret/config value review, provider/model/account switch, push/tag/release/deploy, or repetitive low-value A4 gate.
+Next A5 route action is human route selection. Human authorization is still needed before provider console/account review, any retry, raw plugin stderr/stdout review or capture, secret/config value review, provider/model/account switch, push/tag/release/deploy, or repetitive low-value A4 gate. The current product-mainline next task is v7.255_static_review_surface_mockup_acceptance_review_gate.
 ```
 
 ## Exact Resume Prompt

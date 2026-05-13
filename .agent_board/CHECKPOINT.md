@@ -1,5 +1,33 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.254 Static Review Surface Mockup File Gate
+
+```text
+Status: completed_validated
+Source baseline: 1d39503 == origin/master
+Purpose: create standalone offline static Review Surface mockup HTML under Route 3 continued stop
+route_3_meaning_zh: 继续停止生成
+standalone_static_html_created: true
+static_mockup_file: review_console/static_mockups/v7_254_static_review_surface_mockup.html
+external_assets_used: false
+scripts_used: false
+runtime_imports_used: false
+provider_plugin_buttons_disabled: true
+memory_write_buttons_disabled: true
+recommended_next: v7.255_static_review_surface_mockup_acceptance_review_gate
+same_provider_retry_allowed_now: false
+A5_execution_allowed_now: false
+provider_contact_allowed_now: false
+route_selection_required_before_new_A5: true
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+runtime_execution: false
+DailyNote_write: false
+VCP_memory_write: false
+```
+
 ## v7.253 Static Review Surface Mockup Spec Gate
 
 ```text

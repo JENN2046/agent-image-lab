@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agent Image Lab Static Review Surface Mockup v7.254</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0f1212;
+        --panel: #171c1d;
+        --panel-2: #202728;
+        --panel-3: #263031;
+        --line: #394648;
+        --text: #edf3f1;
+        --muted: #aab6b4;
+        --soft: #d6dfdc;
+        --green: #7fcf9a;
+        --amber: #dfbd66;
+        --red: #dc776d;
+        --teal: #67c9be;
+        --blue: #78a7c8;
+        --shadow: 0 20px 56px rgba(0, 0, 0, 0.28);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-width: 320px;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", Arial, sans-serif;
+        font-size: 14px;
+        letter-spacing: 0;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        font-size: 24px;
+        line-height: 1.18;
+      }
+
+      h2 {
+        font-size: 16px;
+        line-height: 1.25;
+      }
+
+      h3 {
+        font-size: 13px;
+        color: var(--soft);
+      }
+
+      button {
+        min-height: 34px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--panel-3);
+        color: var(--muted);
+        font: inherit;
+      }
+
+      button[disabled] {
+        cursor: not-allowed;
+        opacity: 0.72;
+      }
+
+      .shell {
+        width: min(1580px, calc(100% - 28px));
+        margin: 0 auto;
+        padding: 16px 0 22px;
+      }
+
+      .topbar,
+      .panel,
+      .queue-card,
+      .field-card,
+      .timeline-item,
+      .matrix-row {
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+
+      .topbar {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 14px;
+        align-items: center;
+        padding: 14px 16px;
+        box-shadow: var(--shadow);
+      }
+
+      .eyebrow {
+        color: var(--muted);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .status-strip,
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .status-strip {
+        justify-content: flex-end;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        min-height: 27px;
+        padding: 0 10px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--panel-2);
+        color: var(--soft);
+        white-space: nowrap;
+      }
+
+      .pill.green {
+        border-color: rgba(127, 207, 154, 0.7);
+        color: var(--green);
+      }
+
+      .pill.amber {
+        border-color: rgba(223, 189, 102, 0.72);
+        color: var(--amber);
+      }
+
+      .pill.red {
+        border-color: rgba(220, 119, 109, 0.76);
+        color: var(--red);
+      }
+
+      .pill.teal {
+        border-color: rgba(103, 201, 190, 0.68);
+        color: var(--teal);
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 300px minmax(460px, 1fr) 350px;
+        gap: 12px;
+        margin-top: 12px;
+      }
+
+      .panel {
+        min-width: 0;
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+      }
+
+      .panel-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        min-height: 58px;
+        padding: 12px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .panel-body {
+        display: grid;
+        gap: 10px;
+        padding: 12px;
+      }
+
+      .queue-card,
+      .field-card,
+      .timeline-item {
+        display: grid;
+        gap: 7px;
+        padding: 10px;
+        border-radius: 6px;
+        background: var(--panel-2);
+      }
+
+      .line {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .line strong {
+        color: var(--text);
+        font-weight: 600;
+        text-align: right;
+      }
+
+      .asset-stage {
+        display: grid;
+        grid-template-rows: auto minmax(340px, 1fr) auto;
+      }
+
+      .asset-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 245px;
+        gap: 12px;
+        padding: 12px;
+      }
+
+      .asset-placeholder {
+        position: relative;
+        min-height: 332px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background:
+          linear-gradient(135deg, rgba(103, 201, 190, 0.14), transparent 38%),
+          linear-gradient(160deg, rgba(223, 189, 102, 0.12), transparent 43%),
+          #14191a;
+      }
+
+      .plinth {
+        position: absolute;
+        left: 11%;
+        right: 11%;
+        bottom: 15%;
+        height: 20%;
+        border: 1px solid rgba(237, 243, 241, 0.16);
+        border-radius: 8px;
+        background: rgba(237, 243, 241, 0.05);
+      }
+
+      .product-shape {
+        position: absolute;
+        left: 34%;
+        top: 23%;
+        width: 29%;
+        height: 45%;
+        border: 8px solid #e7ded1;
+        border-radius: 42% 42% 36% 36%;
+        background:
+          radial-gradient(circle at 42% 28%, rgba(255, 255, 255, 0.62) 0 9%, transparent 10%),
+          linear-gradient(145deg, #d8cbb9, #f2eadb 55%, #bcae9c);
+        box-shadow: 0 24px 42px rgba(0, 0, 0, 0.36);
+      }
+
+      .handle {
+        position: absolute;
+        right: 27%;
+        top: 34%;
+        width: 12%;
+        height: 19%;
+        border: 7px solid #d8cbb9;
+        border-left: 0;
+        border-radius: 0 999px 999px 0;
+      }
+
+      .light-card {
+        position: absolute;
+        left: 13%;
+        top: 20%;
+        width: 17%;
+        height: 29%;
+        border: 1px solid rgba(237, 243, 241, 0.16);
+        border-radius: 6px;
+        background: rgba(120, 167, 200, 0.2);
+        transform: rotate(-7deg);
+      }
+
+      .asset-note {
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+      }
+
+      .field-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .decision-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .flow-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 370px;
+        gap: 12px;
+        margin-top: 12px;
+      }
+
+      .matrix {
+        display: grid;
+        gap: 8px;
+      }
+
+      .matrix-row {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        gap: 10px;
+        align-items: center;
+        padding: 10px;
+        border-radius: 6px;
+        background: var(--panel-2);
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--muted);
+      }
+
+      .dot.red {
+        background: var(--red);
+      }
+
+      .dot.amber {
+        background: var(--amber);
+      }
+
+      .dot.green {
+        background: var(--green);
+      }
+
+      .contract {
+        margin-top: 12px;
+      }
+
+      .contract-table {
+        display: grid;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        overflow: hidden;
+      }
+
+      .contract-row {
+        display: grid;
+        grid-template-columns: 190px minmax(0, 1fr) 150px;
+        gap: 10px;
+        padding: 9px 10px;
+        border-bottom: 1px solid var(--line);
+        background: var(--panel-2);
+      }
+
+      .contract-row:last-child {
+        border-bottom: 0;
+      }
+
+      p {
+        color: var(--muted);
+        line-height: 1.46;
+      }
+
+      @media (max-width: 1180px) {
+        .layout,
+        .flow-grid,
+        .asset-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .shell {
+          width: min(100% - 18px, 1580px);
+          padding-top: 10px;
+        }
+
+        .topbar,
+        .field-grid,
+        .decision-grid,
+        .contract-row {
+          grid-template-columns: 1fr;
+        }
+
+        .status-strip {
+          justify-content: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell" aria-label="Agent Image Lab static review surface mockup v7.254">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Agent Image Lab / Static Review Surface</p>
+          <h1>路线 3：继续停止生成</h1>
+          <p>current_status: failed_no_image_repeated_quota_or_rate_limit</p>
+        </div>
+        <div class="status-strip" aria-label="Boundary status">
+          <span class="pill amber">v7.254 offline mockup</span>
+          <span class="pill red">A5 blocked</span>
+          <span class="pill red">provider/plugin/runtime/image/memory blocked</span>
+        </div>
+      </header>
+
+      <section class="layout">
+        <aside class="panel" aria-labelledby="queueTitle">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Review Queue</p>
+              <h2 id="queueTitle">静态审片队列</h2>
+            </div>
+            <span class="pill teal">fixture only</span>
+          </div>
+          <div class="panel-body">
+            <article class="queue-card">
+              <div class="line"><span>case_id</span><strong>CASE-NOT-CREATED</strong></div>
+              <div class="line"><span>asset_status</span><strong>not_created</strong></div>
+              <div class="line"><span>memory_suitability</span><strong>deferred</strong></div>
+            </article>
+            <article class="queue-card">
+              <div class="line"><span>case_id</span><strong>CASE-PENDING-REVIEW</strong></div>
+              <div class="line"><span>asset_status</span><strong>generated_pending_review</strong></div>
+              <div class="line"><span>reviewer_state</span><strong>waiting_human</strong></div>
+            </article>
+            <article class="queue-card">
+              <div class="line"><span>case_id</span><strong>CASE-REJECTED</strong></div>
+              <div class="line"><span>asset_status</span><strong>rejected</strong></div>
+              <div class="line"><span>reason</span><strong>composition_mismatch</strong></div>
+            </article>
+            <article class="queue-card">
+              <div class="line"><span>case_id</span><strong>CASE-NEEDS-REVISION</strong></div>
+              <div class="line"><span>asset_status</span><strong>needs_revision</strong></div>
+              <div class="line"><span>next</span><strong>new paper request</strong></div>
+            </article>
+            <article class="queue-card">
+              <div class="line"><span>case_id</span><strong>CASE-ACCEPTED-CANDIDATE</strong></div>
+              <div class="line"><span>asset_status</span><strong>accepted_candidate</strong></div>
+              <div class="line"><span>delivery</span><strong>not final</strong></div>
+            </article>
+          </div>
+        </aside>
+
+        <section class="panel asset-stage" aria-labelledby="assetTitle">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Asset Card</p>
+              <h2 id="assetTitle">商品图候选卡片</h2>
+            </div>
+            <span class="pill amber">placeholder only</span>
+          </div>
+          <div class="asset-grid">
+            <div class="asset-placeholder" role="img" aria-label="静态商品图占位，不是真实生成图片">
+              <div class="light-card"></div>
+              <div class="plinth"></div>
+              <div class="product-shape"></div>
+              <div class="handle"></div>
+              <div class="asset-note pill-row">
+                <span class="pill">asset_ref: static_placeholder</span>
+                <span class="pill">image_binary: absent</span>
+                <span class="pill">provider_output: absent</span>
+              </div>
+            </div>
+            <div class="panel-body">
+              <article class="field-card">
+                <h3>product_identity</h3>
+                <p>matte ceramic coffee mug / synthetic fixture / not a real task</p>
+              </article>
+              <article class="field-card">
+                <h3>shot_intent</h3>
+                <p>product hero still life, paper review only, no generation request</p>
+              </article>
+              <article class="field-card">
+                <h3>style_lock</h3>
+                <p>clean studio tabletop, soft shadow, no logos, no readable text</p>
+              </article>
+              <article class="field-card">
+                <h3>prompt_trace</h3>
+                <p>prompt_package_ref and generation_plan_ref visible as refs only; raw prompt hidden.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <aside class="panel" aria-labelledby="decisionTitle">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Decision</p>
+              <h2 id="decisionTitle">人工裁决优先</h2>
+            </div>
+            <span class="pill red">actions disabled</span>
+          </div>
+          <div class="panel-body">
+            <article class="field-card">
+              <h3>review_decision</h3>
+              <p>accepted_candidate / rejected / needs_revision / deferred 只能作为纸面状态记录。</p>
+              <div class="pill-row">
+                <span class="pill green">human review wins</span>
+                <span class="pill amber">AI score advisory</span>
+              </div>
+            </article>
+            <article class="field-card">
+              <h3>memory_suitability</h3>
+              <p>yes / no / deferred 只表示未来候选，不写 DailyNote，不写 VCP memory。</p>
+              <div class="pill-row">
+                <span class="pill amber">memory_write: false</span>
+                <span class="pill red">independent auth required</span>
+              </div>
+            </article>
+            <div class="decision-grid" aria-label="Disabled action buttons">
+              <button type="button" disabled>生成图片：未授权</button>
+              <button type="button" disabled>重试 provider：未授权</button>
+              <button type="button" disabled>写入记忆：未授权</button>
+              <button type="button" disabled>提交交付：未授权</button>
+            </div>
+            <article class="field-card">
+              <h3>disabled_action_reasons</h3>
+              <p>当前路线是 continued stop（继续停止生成）。任何生成、重试、runtime、memory 或交付写入都需要后续独立授权。</p>
+            </article>
+          </div>
+        </aside>
+      </section>
+
+      <section class="flow-grid">
+        <section class="panel" aria-labelledby="handoffTitle">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Handoff</p>
+              <h2 id="handoffTitle">审片 / 交付路径</h2>
+            </div>
+            <span class="pill teal">display only</span>
+          </div>
+          <div class="panel-body">
+            <article class="timeline-item">
+              <h3>1. prompt package</h3>
+              <p>展示 prompt package reference 和 acceptance criteria 摘要，不展示 raw prompt。</p>
+            </article>
+            <article class="timeline-item">
+              <h3>2. future A5 authorization</h3>
+              <p>入口保持关闭；same_provider_retry_allowed_now: false，A5_execution_allowed_now: false。</p>
+            </article>
+            <article class="timeline-item">
+              <h3>3. human review</h3>
+              <p>人工裁决决定 asset_status；accepted_candidate 不是最终交付。</p>
+            </article>
+            <article class="timeline-item">
+              <h3>4. memory suitability</h3>
+              <p>只做 yes / no / deferred 判断，memory write 始终禁用。</p>
+            </article>
+            <article class="timeline-item">
+              <h3>5. closeout</h3>
+              <p>下一阶段建议：v7.255_static_review_surface_mockup_acceptance_review_gate。</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel" aria-labelledby="boundaryTitle">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Boundary Matrix</p>
+              <h2 id="boundaryTitle">非执行边界</h2>
+            </div>
+            <span class="pill red">locked</span>
+          </div>
+          <div class="panel-body matrix">
+            <div class="matrix-row"><span class="dot red"></span><p>A5 execution</p><span class="pill red">false</span></div>
+            <div class="matrix-row"><span class="dot red"></span><p>provider contact / plugin call</p><span class="pill red">false</span></div>
+            <div class="matrix-row"><span class="dot red"></span><p>runtime / renderer / preload / IPC</p><span class="pill red">false</span></div>
+            <div class="matrix-row"><span class="dot red"></span><p>image generation / real image asset</p><span class="pill red">false</span></div>
+            <div class="matrix-row"><span class="dot red"></span><p>DailyNote / VCP memory write</p><span class="pill red">false</span></div>
+            <div class="matrix-row"><span class="dot green"></span><p>offline static visual review</p><span class="pill green">true</span></div>
+          </div>
+        </section>
+      </section>
+
+      <section class="panel contract" aria-labelledby="contractTitle">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Static Data Contract</p>
+            <h2 id="contractTitle">允许展示的静态字段</h2>
+          </div>
+          <span class="pill">no raw payload</span>
+        </div>
+        <div class="panel-body">
+          <div class="contract-table" role="list" aria-label="Static review surface contract">
+            <div class="contract-row" role="listitem"><strong>Allowed refs</strong><span>prompt_package_ref, generation_plan_ref, review_record_ref, asset_ref, closeout_ref</span><span>visible</span></div>
+            <div class="contract-row" role="listitem"><strong>Allowed states</strong><span>not_created, generated_pending_review, accepted_candidate, rejected, needs_revision, deferred</span><span>visible</span></div>
+            <div class="contract-row" role="listitem"><strong>Forbidden raw data</strong><span>raw_prompt, raw_payload, raw_endpoint, raw_response, private_path, secret, image_binary</span><span>hidden</span></div>
+            <div class="contract-row" role="listitem"><strong>Next phase</strong><span>v7.255_static_review_surface_mockup_acceptance_review_gate</span><span>review only</span></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
