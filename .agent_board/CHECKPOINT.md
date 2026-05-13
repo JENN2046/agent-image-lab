@@ -1,5 +1,31 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.261 Human Product Route Selection Request Gate
+
+```text
+Status: completed_validated
+Source baseline: 1a6c60d == origin/master
+Purpose: present product route options after paper-chain quality stop and stop until human selection
+route_selection_request_created: true
+human_route_selection_requested: true
+automatic_artifact_creation_stopped: true
+routes_presented: quota_resolution_then_A5_retry, provider_or_model_path_switch, manual_product_prompt_package_sample, review_console_runtime_integration_planning
+recommended_low_risk_route: route_3_manual_product_prompt_package_sample
+recommended_next: pending_human_selection
+recommended_next_zh: 等待人工选择路线
+same_provider_retry_allowed_now: false
+A5_execution_allowed_now: false
+provider_contact_allowed_now: false
+route_selection_required_before_new_A5: true
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+runtime_execution: false
+DailyNote_write: false
+VCP_memory_write: false
+```
+
 ## v7.260 Product Workflow Paper Chain Quality Stop Gate
 
 ```text

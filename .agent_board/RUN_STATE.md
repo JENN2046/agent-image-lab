@@ -9,20 +9,21 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab is on Route 3 continued stop（继续停止生成）and has reached product workflow paper-chain quality stop.
+Agent Image Lab has reached product workflow paper-chain quality stop and is waiting for human product route selection.
 ```
 
 ## Current Phase
 
 ```text
-v7.260 Product Workflow Paper Chain Quality Stop Gate
+v7.261 Human Product Route Selection Request Gate
+phase_id: v7.261_human_product_route_selection_request_gate
 status: failed_no_image_repeated_quota_or_rate_limit
-source_commit: b536c93
-source_message: docs: review product workflow fixture packet
+source_commit: 1a6c60d
+source_message: docs: add product workflow paper chain quality stop
 branch: master tracking origin/master
-Worktree: clean at v7.260 start
+Worktree: clean at v7.261 start
 worktree_start_clean: true
-origin_sync_start: local HEAD equals origin/master at b536c93
+origin_sync_start: local HEAD equals origin/master at 1a6c60d
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
@@ -54,23 +55,26 @@ product_workflow_fixture_packet_created: true
 product_workflow_fixture_packet_acceptance_passed: true
 product_workflow_paper_chain_quality_stop_reached: true
 ready_for_runtime_implementation: false
+human_route_selection_requested: true
+automatic_artifact_creation_stopped: true
+recommended_low_risk_route: route_3_manual_product_prompt_package_sample
 ```
 
 ## Current Task
 
 ```text
-Decide whether the product image paper workflow has reached quality stop or needs another non-executing product artifact.
+Present product route options and stop until the human chooses the next route.
 ```
 
 ## Current Local Work State
 
 ```text
-Worktree: clean at v7.260 start after v7.259 push
+Worktree: clean at v7.261 start after v7.260 push
 active_workers: 0
 execution_mode: Single-Window 4-Agent Compact Autopilot
-commander_role: keep Route 3 product-mainline progress inside static Review Surface boundaries
-architect_role: decide whether continued paper artifacts still add value or should stop for human route selection
-worker_role: apply only the quality stop records, indexes, validator, and .agent_board patch
+commander_role: stop automatic artifact creation and request human route selection
+architect_role: present route options, risks, value, and authorization needs
+worker_role: apply only the route selection request records, status indexes, and .agent_board patch
 reviewer_role: inspect diff, run allowed local checks, confirm no runtime/provider/plugin/image/memory behavior, and close out
 ```
 
@@ -106,7 +110,8 @@ MVP Aggregate Validator Calibration: completed_validated
 Product Image Authorization Draft Plan Ref Alignment: v7.241 completed_validated
 Product Image Authorization Activation Gap Review: v7.242 completed_validated
 Product Image Active Authorization Package Skeleton: v7.243 completed_validated
-Recommended next product task: v7.261_human_product_route_selection_request_gate（人工产品路线选择请求门）
+Human product route selection request: v7.261 completed; four routes are presented and no next phase may start automatically.
+Recommended next product task: pending_human_selection（等待人工选择路线）
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```
@@ -152,8 +157,8 @@ tag/release/deploy remain blocked without explicit authorization and preflight
 ## Current Options
 
 ```text
-recommended_next_after_v7_260: v7.261_human_product_route_selection_request_gate
-purpose: ask the human to select the next product route before more product-mainline artifacts are created
+recommended_next_after_v7_261: pending_human_selection
+purpose: wait for the human to select Route 1, Route 2, Route 3, or Route 4 before any next phase starts
 not_allowed_as_next_by_default: A5, provider contact, runtime, plugin call, image generation, memory write, tag, release
 ```
 
@@ -218,5 +223,5 @@ external repository modification: no
 ```text
 Use the calibrated board as the current navigation source.
 The second newly approved DoubaoGen diagnostic retry was consumed by one process attempt. The result is failed_no_image_repeated_quota_or_rate_limit; generation remains blocked unless the user resolves provider quota/rate-limit conditions or authorizes a new provider/model/account path.
-For Route 3 product-mainline work, stop automatic artifact creation unless the human selects the next product route. The current recommended next is v7.261_human_product_route_selection_request_gate.
+For Route 3 product-mainline work, stop automatic artifact creation unless the human selects the next product route. The current recommended next is pending_human_selection.
 ```

@@ -18,8 +18,8 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.260: b536c93 on master == origin/master.
-Current mainline state: v7.260 product workflow paper chain quality stop gate（产品图纸面链路质量停止门）.
+Latest visible remote baseline before v7.261: 1a6c60d on master == origin/master.
+Current mainline state: v7.261 human product route selection request gate（人工产品路线选择请求门）.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
 Current status: failed_no_image_repeated_quota_or_rate_limit.
@@ -29,9 +29,11 @@ provider_contact_allowed_now: false.
 Native Doubao static hardening: syntax/path sandbox/base URL/raw output/env allowlist/validator drift patched.
 Diagnostic decision: continue_generation_stop_until_route_selection.
 Provider path decision: ROUTE-3-CONTINUED-STOP（路线 3：继续停止生成）selected now; Route 1 quota resolution and Route 2 provider/model/account switch remain available only after explicit human selection.
-Review Surface mainline: static Review Surface and product image paper workflow have reached A4 quality stop; human route selection is required before the next track.
+Review Surface mainline: static Review Surface and product image paper workflow have reached A4 quality stop; v7.261 presents human-selectable routes and stops automatic artifact creation.
 route_selection_required_before_new_A5: true.
-Recommended next: v7.261_human_product_route_selection_request_gate（人工产品路线选择请求门）.
+human_route_selection_requested: true.
+automatic_artifact_creation_stopped: true.
+Recommended next: pending_human_selection（等待人工选择路线）.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)
 ```
@@ -175,7 +177,7 @@ master tracking origin/master
 - 正式 release 发布仍需单独授权（tag 策略已定义：`docs/233_tag_and_version_strategy.md`）。
 - 后续更多真实图片生成需新 A5 授权包（Phase F 已消耗 2/2 calls，双图 accepted）。
 - version actions 需要匹配当前授权和 preflight；v7.224 只允许白名单 docs/status 文件的 commit + push。
-- Product image A5 path 已进入 repeated quota/rate-limit stop；Native Doubao static syntax / sandbox 已硬化；v7.260 判断产品图纸面链路已进入 quality stop。下一步需要人工选择产品路线。
+- Product image A5 path 已进入 repeated quota/rate-limit stop；Native Doubao static syntax / sandbox 已硬化；v7.260 判断产品图纸面链路已进入 quality stop；v7.261 已提出四条路线。下一步等待人工选择，不自动进入 v7.262。
 
 ## 阶段路线
 
@@ -320,11 +322,11 @@ daily_note_called: false
 
 ## 当前优先队列
 
-1. v7.243_product_image_active_authorization_package_skeleton_gate 已完成，一页版 preflight-pending 授权草案已整理完成。
-2. 下一步只允许运行 active A5 preflight，不得直接生成图片。
-3. A5/provider/runtime/image/memory 仍未执行；如需推进，必须先让 preflight 通过，再单独确认是否执行。
+1. v7.260_product_workflow_paper_chain_quality_stop_gate 已确认产品图纸面链路进入 quality stop。
+2. v7.261_human_product_route_selection_request_gate 已把下一步路线选择交还给项目 owner。
+3. A5/provider/runtime/image/memory 仍未授权；任何真实生成、provider retry 或 runtime integration 都必须先有独立授权包。
 4. tag/release/deploy 仍未授权；任何版本动作都必须匹配当前授权、白名单和 push safety gate。
-5. 若下一步仍为 A4，必须说明新的产品价值、写集、验证方式和 agent_board_freshness 检查。
+5. recommended next: pending_human_selection（等待人工选择路线）。
 
 ## 永久安全门
 

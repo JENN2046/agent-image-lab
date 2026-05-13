@@ -8,10 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_260: b536c93
-origin_master_before_v7_260: b536c93
+latest_visible_head_before_v7_261: 1a6c60d
+origin_master_before_v7_261: 1a6c60d
 status: failed_no_image_repeated_quota_or_rate_limit
-mode: A4 product workflow paper chain quality stop
+mode: A4 human product route selection request
+phase_id: v7.261_human_product_route_selection_request_gate
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
@@ -34,6 +35,9 @@ static_review_surface_quality_stop_reached: true
 product_workflow_fixture_packet_created: true
 product_workflow_fixture_packet_acceptance_passed: true
 product_workflow_paper_chain_quality_stop_reached: true
+human_route_selection_requested: true
+automatic_artifact_creation_stopped: true
+recommended_next: pending_human_selection
 ```
 
 ## Product Direction
@@ -109,7 +113,11 @@ v7.259 reviews that fixture packet and accepts it as a synthetic non-executing
 paper-chain reference.
 v7.260 decides that the product image paper workflow has reached quality stop.
 Further automatic paper artifacts are blocked by default until a human selects
-the next product route.
+the next product route. v7.261 presents the route selection request: Route 1
+quota resolution then A5 retry, Route 2 provider/model/account path switch,
+Route 3 manual product prompt package sample, or Route 4 Review Console runtime
+integration planning. The low-risk recommendation is Route 3, but no route may
+start automatically.
 
 ## Active Boundaries
 
@@ -133,6 +141,5 @@ validation interpretation, staging, commit decisions, and next-task selection.
 
 ## Recommended Next
 
-Recommended next is `v7.261_human_product_route_selection_request_gate`
-（人工产品路线选择请求门）. It should ask the human to choose the next route:
-continue A4 product artifacts, prepare a new A5 path, plan runtime, or pause.
+Recommended next is `pending_human_selection`（等待人工选择路线）. The commander
+must not enter v7.262 or choose a route automatically.

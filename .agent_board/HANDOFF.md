@@ -3,11 +3,11 @@
 ## Handoff Summary
 
 ```text
-Status: generation stop closeout recorded after repeated quota/rate-limit failure.
-Reason: A second newly approved DoubaoGen retry/diagnostic call was consumed once; the plugin returned error again, sanitized category is still quota_or_rate_limit, and no image was generated.
+Status: v7.261 human product route selection requested after product workflow paper-chain quality stop.
+Reason: repeated Doubao quota/rate-limit failure blocks generation, v7.260 reached paper-chain quality stop, and v7.261 presents four routes for human selection before any next phase.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
-Latest visible head: b536c93 == origin/master
+Latest visible head: 1a6c60d == origin/master
 Current status: failed_no_image_repeated_quota_or_rate_limit
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
@@ -15,6 +15,9 @@ provider_contact_allowed_now: false
 Native Doubao static hardening: v7.245 completed_validated
 Diagnostic decision: continue_generation_stop_until_route_selection
 Provider path decision: ROUTE-3-CONTINUED-STOP selected now
+Human product route selection request: v7.261 completed_validated
+human_route_selection_requested: true
+automatic_artifact_creation_stopped: true
 Current active workers: 0
 Current operating style: Single-Window 4-Agent Compact Autopilot
 ```
@@ -87,13 +90,16 @@ product workflow fixture packet acceptance review: v7.259 completed_validated
 product_workflow_fixture_packet_acceptance_passed: true
 product workflow paper chain quality stop: v7.260 completed_validated
 product_workflow_paper_chain_quality_stop_reached: true
+human product route selection request: v7.261 completed_validated
+human_route_selection_requested: true
+automatic_artifact_creation_stopped: true
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
 
 continue_A4_docs_only_by_default: false
-recommended_next: v7.261_human_product_route_selection_request_gate
-recommended_next_zh: 人工产品路线选择请求门
+recommended_next: pending_human_selection
+recommended_next_zh: 等待人工选择路线
 ```
 
 ## Current Stop Gates
@@ -167,7 +173,7 @@ dependency/config/env modification: no
 ## Human Decisions Needed
 
 ```text
-Next A5 route action is human route selection. Human authorization is still needed before provider console/account review, any retry, raw plugin stderr/stdout review or capture, secret/config value review, provider/model/account switch, push/tag/release/deploy, or repetitive low-value A4 gate. The current product-mainline next task is v7.261_human_product_route_selection_request_gate.
+Next action is human route selection. The owner must choose one route: Route 1 quota resolution then A5 retry, Route 2 provider/model/account switch, Route 3 manual product prompt package sample, or Route 4 Review Console runtime integration planning. Human authorization is still needed before provider console/account review, any retry, raw plugin stderr/stdout review or capture, secret/config value review, provider/model/account switch, push/tag/release/deploy, runtime implementation, memory write, or repetitive low-value A4 gate.
 ```
 
 ## Exact Resume Prompt
@@ -180,7 +186,7 @@ Next A5 route action is human route selection. Human authorization is still need
 当前仓库状态：
 - master should track origin/master.
 - source baseline for v7.243: 03fd398.
-- current phase: active A5 diagnostic retry 002 failed_no_image_repeated_quota_or_rate_limit.
+- current phase: v7.261_human_product_route_selection_request_gate completed_validated; waiting for human product route selection.
 - v7.221 mainline quality stop reached.
 - v7.222 board calibration completed.
 - v7.223 read-only value selection selected v7.224 as the only safe next task.
@@ -219,7 +225,10 @@ Next A5 route action is human route selection. Human authorization is still need
 - desensitized failure analysis result: inconclusive_provider_or_api_layer_failure; exact provider error is unavailable because raw stdout/stderr was not printed or retained.
 - one newly authorized DoubaoGen retry/diagnostic call ran and returned sanitized_error_category=quota_or_rate_limit; no image was generated.
 - a second newly authorized DoubaoGen retry/diagnostic call also returned sanitized_error_category=quota_or_rate_limit; no image was generated.
-- recommended_next after active diagnostic retry 002: resolve_provider_quota_or_rate_limit_or_switch_provider_path_before_any_new_generation_attempt.
+- v7.260 product workflow paper chain quality stop reached.
+- v7.261 presented Route 1 quota resolution then A5 retry, Route 2 provider/model/account switch, Route 3 manual product prompt package sample, and Route 4 Review Console runtime integration planning.
+- recommended_next after v7.261: pending_human_selection（等待人工选择路线）.
+- do not enter v7.262 until the human selects a route.
 
 不要读取真实 VCPChat/VCPToolBox。
 不要读取真实 manifest。
