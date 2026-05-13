@@ -30,6 +30,7 @@
 25. v7.260 product workflow paper chain quality stop keeps generation stopped and recommends v7.261_human_product_route_selection_request_gate; further automatic artifact creation is blocked until human route selection.
 26. v7.265 true A5 authorization request creates AUTH-PENDING-PROJECT-PLUGIN-20260513-001 for preflight-only approval, but plugin call, provider contact, image generation, env value read, output write, DailyNote, and VCP memory remain blocked until separate exact authorization.
 27. quota_or_rate_limit_resolution_evidence is still not provided; same provider retry risk remains high and cannot be hidden inside preflight.
+28. v7.268b authorizes one v7.269 minimal real generation trial only; retry, second generation, prompt/product/provider switch, Batch 005, production_candidate_002, memory_write_path, DailyNote, and VCP memory remain blocked.
 ```
 
 ## Current Mainline Quality Stop

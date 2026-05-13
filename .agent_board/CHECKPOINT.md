@@ -1,5 +1,35 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.268b True A5 Minimal Real Generation Authorization Gate
+
+```text
+Status: completed_validated
+Source baseline: b90cdfe == origin/master
+Purpose: authorize one bounded Route B minimal real generation trial before v7.269
+route_B_selected: true
+minimal_real_generation_trial_authorized: true
+approved_product: matte_ceramic_mug
+approved_prompt_package: prompts/image_generation/product_still_life_matte_ceramic_mug_v1.yaml
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 4
+auto_retry: false
+stop_after_generation: true
+human_review_required_after_generation: true
+automatic_next_batch: false
+Batch_005: false
+production_candidate_002: false
+memory_write_path: false
+DailyNote_write: false
+VCP_memory_write: false
+dependency_change: false
+package_json_modified: false
+CDP_bridge_MCP: false
+recommended_next: v7.269_minimal_real_generation_trial_execution
+auto_execution_allowed_for_next: true
+validation: git diff --check passed; agent board state passed; current state alignment passed; native Doubao sandbox passed; validate_mvp passed; local validation passed with existing manual-review warnings
+```
+
 ## v7.265 True A5 Authorization Request Gate
 
 ```text

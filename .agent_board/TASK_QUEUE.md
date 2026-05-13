@@ -36,6 +36,7 @@ Project plugin route authorization planning: v7.262 completed; NativeDoubaoImage
 Project plugin A5 authorization package draft: v7.263 completed; AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 is draft-only with approval_status=not_requested and execute_now=false.
 Project plugin A5 authorization draft review: v7.264 completed; draft result is pass_to_keep_inactive and activation remains blocked.
 True A5 authorization request: v7.265 completed_validated; AUTH-PENDING-PROJECT-PLUGIN-20260513-001 fixes prompt/output/model/budget for preflight-only approval and still blocks provider/plugin/image/env value actions.
+Route B minimal real generation authorization: v7.268b in progress; v7.269 is limited to matte_ceramic_mug, one provider call, one attempt, max 4 outputs, no retry, stop after generation, human review required.
 ```
 
 ---
@@ -92,7 +93,7 @@ none
 ### recommended_next_after_v7_265
 
 ```text
-run_true_A5_preflight_only_after_exact_approval — 收到精确授权语后只运行真正 A5 preflight。No automatic provider contact, plugin call, runtime, memory write, output write, env value read, or generation.
+v7.269_minimal_real_generation_trial_execution — 执行一次最小真实生成试跑后立即停止。No retry, second generation, Batch 005, production_candidate_002, memory write, DailyNote write, tag, release, or deploy.
 ```
 
 ### done
@@ -166,6 +167,7 @@ run_true_A5_preflight_only_after_exact_approval — 收到精确授权语后只�
 66. v7.263 project plugin A5 authorization package draft gate created AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 as a draft-only inactive package.
 67. v7.264 project plugin A5 authorization draft review gate found the draft safe to keep inactive, with activation blocked.
 68. v7.265 true A5 authorization request gate prepared and validated AUTH-PENDING-PROJECT-PLUGIN-20260513-001 for preflight-only approval.
+69. v7.268b true A5 minimal real generation authorization gate authorizes exactly one v7.269 matte_ceramic_mug trial.
 ```
 
 ### blocked
@@ -218,6 +220,7 @@ run_true_A5_preflight_only_after_exact_approval — 收到精确授权语后只�
 45. v7.263 does not authorize active A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/output write/real manifest read/real asset read/.env.local value read/raw stdout retention/CDP/bridge/MCP/tag/release/deploy.
 46. v7.264 does not authorize active A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/output write/real manifest read/real asset read/.env.local value read/raw stdout retention/CDP/bridge/MCP/tag/release/deploy.
 47. v7.265 does not authorize provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/output write/real manifest read/real asset read/.env.local value read/raw stdout retention/CDP/bridge/MCP/tag/release/deploy; it only requests exact approval for preflight.
+48. v7.268b authorizes provider contact and image generation only for the single v7.269 minimal trial; it does not authorize retry, second generation, Batch 005, production_candidate_002, DailyNote, VCP memory, CDP/bridge/MCP, tag, release, or deploy.
 ```
 
 ### skipped

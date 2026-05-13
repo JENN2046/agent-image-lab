@@ -18,9 +18,9 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.265: eecbae5 on master == origin/master.
-Current mainline state: v7.265 true A5 authorization request gate（真正 A5 授权请求门）.
-Current phase id: v7.265_true_A5_authorization_request_gate.
+Latest visible remote baseline before v7.268b: b90cdfe on master == origin/master.
+Current mainline state: v7.268b true A5 minimal real generation authorization gate（真正 A5 最小真实生成试跑授权门）.
+Current phase id: v7.268b_true_A5_minimal_real_generation_authorization_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
@@ -52,8 +52,20 @@ preflight_approval_status: requested_for_preflight_only.
 active_A5_authorization_created: false.
 plugin_call_allowed_now: false.
 image_generation_allowed_now: false.
-Recommended next: run_true_A5_preflight_only_after_exact_approval（收到精确授权语后只运行真正 A5 preflight）.
-auto_execution_allowed_for_next: false.
+route_B_selected: true.
+minimal_real_generation_trial_authorized: true.
+approved_product: matte_ceramic_mug.
+approved_prompt_package: prompts/image_generation/product_still_life_matte_ceramic_mug_v1.yaml.
+provider_calls_max: 1.
+generation_attempts_max: 1.
+output_images_max: 4.
+auto_retry: false.
+stop_after_generation: true.
+human_review_required_after_generation: true.
+A5_execution_allowed_now: false outside v7.269 exact authorized run.
+provider_contact_allowed_now: false outside v7.269 exact authorized run.
+Recommended next: v7.269_minimal_real_generation_trial_execution（执行一次最小真实生成试跑后立即停止）.
+auto_execution_allowed_for_next: true.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)
 ```
@@ -197,7 +209,7 @@ master tracking origin/master
 - 正式 release 发布仍需单独授权（tag 策略已定义：`docs/233_tag_and_version_strategy.md`）。
 - 后续更多真实图片生成需新 A5 授权包（Phase F 已消耗 2/2 calls，双图 accepted）。
 - version actions 需要匹配当前授权和 preflight；v7.224 只允许白名单 docs/status 文件的 commit + push。
-- Product image A5 path 已进入 repeated quota/rate-limit stop；Native Doubao static syntax / sandbox 已硬化；v7.260 判断产品图纸面链路已进入 quality stop；v7.261 已提出四条路线；v7.262 已选择“项目内插件路线”进入纸面授权规划；v7.263 已起草项目内插件 A5 授权包但保持 draft / not_requested / execute_now=false；v7.264 已复核草案，结论为 pass_to_keep_inactive / activation blocked；v7.265 已把真正 A5 preflight 授权请求、prompt 包和输出目录固定下来，但仍未授权插件调用或生成图片。
+- Product image A5 path 已进入 repeated quota/rate-limit stop；Native Doubao static syntax / sandbox 已硬化；v7.260 判断产品图纸面链路已进入 quality stop；v7.261 已提出四条路线；v7.262 已选择“项目内插件路线”进入纸面授权规划；v7.263 已起草项目内插件 A5 授权包但保持 draft / not_requested / execute_now=false；v7.264 已复核草案，结论为 pass_to_keep_inactive / activation blocked；v7.265 已把真正 A5 preflight 授权请求、prompt 包和输出目录固定下来；v7.268b 授权一次最小真实生成试跑，限定 matte_ceramic_mug、1 次 provider call、1 次 attempt、最多 4 张图、无 retry、生成后停止等待人工 review。
 
 ## 阶段路线
 
@@ -347,9 +359,9 @@ daily_note_called: false
 3. v7.263_project_plugin_A5_authorization_package_draft_gate 已创建 AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 草案；它不是 active A5。
 4. v7.264_project_plugin_A5_authorization_draft_review_gate 已复核草案；草案可保留，但 activation blocked。
 5. v7.265_true_A5_authorization_request_gate 已创建 AUTH-PENDING-PROJECT-PLUGIN-20260513-001 preflight-only 请求；它不是执行授权。
-6. A5/provider/plugin/runtime/image/memory 仍未授权；任何真实生成、provider retry 或 runtime integration 都必须先有独立授权包。
-7. tag/release/deploy 仍未授权；任何版本动作都必须匹配当前授权、白名单和 push safety gate。
-8. recommended next: run_true_A5_preflight_only_after_exact_approval（收到精确授权语后只运行真正 A5 preflight）。
+6. v7.268b_true_A5_minimal_real_generation_authorization_gate 授权 v7.269 仅执行一次最小真实生成试跑。
+7. Batch 005、production_candidate_002、memory_write_path、DailyNote/VCP memory、retry、第二次生成、tag/release/deploy 仍未授权。
+8. recommended next: v7.269_minimal_real_generation_trial_execution（执行一次最小真实生成试跑后立即停止）。
 
 ## 永久安全门
 

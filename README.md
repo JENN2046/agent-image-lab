@@ -7,9 +7,9 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.265: eecbae5 on master == origin/master.
-Current mainline state: v7.265 true A5 authorization request gate（真正 A5 授权请求门）.
-Current phase id: v7.265_true_A5_authorization_request_gate.
+Latest visible remote baseline before v7.268b: b90cdfe on master == origin/master.
+Current mainline state: v7.268b true A5 minimal real generation authorization gate（真正 A5 最小真实生成试跑授权门）.
+Current phase id: v7.268b_true_A5_minimal_real_generation_authorization_gate.
 Prior human route selection gate: v7.261_human_product_route_selection_request_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
@@ -42,10 +42,22 @@ preflight_approval_status: requested_for_preflight_only.
 active_A5_authorization_created: false.
 plugin_call_allowed_now: false.
 image_generation_allowed_now: false.
+route_B_selected: true.
+minimal_real_generation_trial_authorized: true.
+approved_product: matte_ceramic_mug.
+approved_prompt_package: prompts/image_generation/product_still_life_matte_ceramic_mug_v1.yaml.
+provider_calls_max: 1.
+generation_attempts_max: 1.
+output_images_max: 4.
+auto_retry: false.
+stop_after_generation: true.
+human_review_required_after_generation: true.
+A5_execution_allowed_now: false outside v7.269 exact authorized run.
+provider_contact_allowed_now: false outside v7.269 exact authorized run.
 Master plan index: PROJECT_MASTER_PLAN.md.
-Not authorized: A5, provider contact, runtime, plugin call, image generation, DailyNote write, VCP memory write, real manifest read, tag, release, deploy.
-Recommended next: run_true_A5_preflight_only_after_exact_approval（收到精确授权语后只运行真正 A5 preflight）.
-auto_execution_allowed_for_next: false.
+Not authorized outside v7.269: Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, retry, second generation, tag, release, deploy.
+Recommended next: v7.269_minimal_real_generation_trial_execution（执行一次最小真实生成试跑后立即停止）.
+auto_execution_allowed_for_next: true.
 ```
 
 历史状态脉络：

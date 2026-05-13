@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_265: eecbae5
-origin_master_before_v7_265: eecbae5
+latest_visible_head_before_v7_268b: b90cdfe
+origin_master_before_v7_268b: b90cdfe
 status: failed_no_image_repeated_quota_or_rate_limit
-mode: A4 true A5 authorization request
-phase_id: v7.265_true_A5_authorization_request_gate
+mode: A5 minimal real generation authorization gate
+phase_id: v7.268b_true_A5_minimal_real_generation_authorization_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -56,7 +56,19 @@ preflight_approval_status: requested_for_preflight_only
 active_A5_authorization_created: false
 plugin_call_allowed_now: false
 image_generation_allowed_now: false
-recommended_next: run_true_A5_preflight_only_after_exact_approval
+route_B_selected: true
+minimal_real_generation_trial_authorized: true
+approved_product: matte_ceramic_mug
+approved_prompt_package: prompts/image_generation/product_still_life_matte_ceramic_mug_v1.yaml
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 4
+auto_retry: false
+stop_after_generation: true
+human_review_required_after_generation: true
+A5_execution_allowed_now: false outside v7.269 exact authorized run
+provider_contact_allowed_now: false outside v7.269 exact authorized run
+recommended_next: v7.269_minimal_real_generation_trial_execution
 ```
 
 ## Product Direction
@@ -149,15 +161,20 @@ write. v7.265 creates the true A5 authorization request surface for preflight:
 and the sandboxed output directory are now fixed. It still does not authorize
 provider contact, plugin execution, image generation, env value reads, output
 writes, or memory writes.
+v7.268b selects Route B and authorizes exactly one minimal real generation
+trial for `matte_ceramic_mug` in v7.269. The boundary is one provider call, one
+generation attempt, at most four output images, no retry, no second batch, no
+DailyNote, no VCP memory write, and immediate stop for human review after the
+trial.
 
 ## Active Boundaries
 
 ```text
-A5: not authorized
-provider contact: not authorized
+A5: authorized only for v7.269 minimal real generation trial
+provider contact: authorized only for one v7.269 provider call
 runtime execution: not authorized
-plugin call: not authorized
-image generation: not authorized
+plugin call: authorized only through the established v7.269 generation path
+image generation: authorized only for v7.269 matte_ceramic_mug trial
 DailyNote / VCP memory write: not authorized
 real manifest / VCPChat / VCPToolBox read: not authorized
 tag / release / deploy / push: not authorized by this file
@@ -172,6 +189,6 @@ validation interpretation, staging, commit decisions, and next-task selection.
 
 ## Recommended Next
 
-Recommended next is `run_true_A5_preflight_only_after_exact_approval`
-（收到精确授权语后只运行真正 A5 preflight）. No provider contact, plugin call,
-image generation, or env value read may start automatically.
+Recommended next is `v7.269_minimal_real_generation_trial_execution`
+（执行一次最小真实生成试跑后立即停止）. No retry, second generation, memory
+write, Batch 005, or production_candidate_002 may start automatically.

@@ -3,11 +3,11 @@
 ## Handoff Summary
 
 ```text
-Status: v7.265 true A5 authorization request prepared locally.
-Reason: v7.265 fixes the true A5 preflight request package for NativeDoubaoImage while keeping all execution blocked.
+Status: v7.268b true A5 minimal real generation authorization gate in progress.
+Reason: v7.268b authorizes one bounded v7.269 real generation trial for matte_ceramic_mug.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
-Latest visible head before v7.265: eecbae5 == origin/master
+Latest visible head before v7.268b: b90cdfe == origin/master
 Current status: failed_no_image_repeated_quota_or_rate_limit
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
@@ -37,6 +37,16 @@ preflight_approval_status: requested_for_preflight_only
 active_A5_authorization_created: false
 plugin_call_allowed_now: false
 image_generation_allowed_now: false
+Route B minimal real generation authorization: v7.268b in_progress
+minimal_real_generation_trial_authorized: true
+approved_product: matte_ceramic_mug
+approved_prompt_package: prompts/image_generation/product_still_life_matte_ceramic_mug_v1.yaml
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 4
+auto_retry: false
+stop_after_generation: true
+human_review_required_after_generation: true
 Current active workers: 0
 Current operating style: Single-Window 4-Agent Compact Autopilot
 ```
@@ -130,14 +140,24 @@ preflight_approval_status: requested_for_preflight_only
 active_A5_authorization_created: false
 plugin_call_allowed_now: false
 image_generation_allowed_now: false
+route B minimal real generation authorization: v7.268b in_progress
+minimal_real_generation_trial_authorized: true
+approved_product: matte_ceramic_mug
+approved_prompt_package: prompts/image_generation/product_still_life_matte_ceramic_mug_v1.yaml
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 4
+auto_retry: false
+stop_after_generation: true
+human_review_required_after_generation: true
 same_provider_retry_allowed_now: false
-A5_execution_allowed_now: false
-provider_contact_allowed_now: false
+A5_execution_allowed_now: false outside v7.269 exact authorized run
+provider_contact_allowed_now: false outside v7.269 exact authorized run
 
 continue_A4_docs_only_by_default: false
-recommended_next: run_true_A5_preflight_only_after_exact_approval
-recommended_next_zh: 收到精确授权语后只运行真正 A5 preflight
-auto_execution_allowed_for_next: false
+recommended_next: v7.269_minimal_real_generation_trial_execution
+recommended_next_zh: 执行一次最小真实生成试跑后立即停止
+auto_execution_allowed_for_next: true
 ```
 
 ## Current Stop Gates
@@ -211,7 +231,7 @@ dependency/config/env modification: no
 ## Human Decisions Needed
 
 ```text
-Next action is exact human approval for preflight only, or a decision to keep generation stopped. Human authorization is still needed before provider console/account review, any retry, raw plugin stderr/stdout review or capture, secret/config value review, provider/model/account switch, push/tag/release/deploy, runtime implementation, memory write, or any plugin call.
+Next action is v7.269 minimal real generation trial execution only after v7.268b commit/push completes. Human authorization is still needed before any retry, second generation, provider/model/account switch, raw plugin stderr/stdout review or capture, secret/config value review, push/tag/release/deploy beyond this gate, runtime implementation, memory write, or DailyNote call.
 ```
 
 ## Exact Resume Prompt
@@ -224,7 +244,7 @@ Next action is exact human approval for preflight only, or a decision to keep ge
 当前仓库状态：
 - master should track origin/master.
 - source baseline for v7.243: 03fd398.
-- current phase: v7.265_true_A5_authorization_request_gate completed_validated; the true A5 preflight request package is prepared and remains non-executing.
+- current phase: v7.268b_true_A5_minimal_real_generation_authorization_gate in progress; it authorizes one bounded v7.269 real generation trial but does not execute it.
 - v7.221 mainline quality stop reached.
 - v7.222 board calibration completed.
 - v7.223 read-only value selection selected v7.224 as the only safe next task.
@@ -269,8 +289,9 @@ Next action is exact human approval for preflight only, or a decision to keep ge
 - v7.263 created AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 with status=draft, approval_status=not_requested, execute_now=false.
 - v7.264 reviewed AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 and concluded pass_to_keep_inactive / activation blocked.
 - v7.265 prepares AUTH-PENDING-PROJECT-PLUGIN-20260513-001 with prompt_package_ref=prompts/image_generation/product_still_life_matte_ceramic_mug_v1.yaml and output_directory=runs/real_generation/A5-PROJECT-PLUGIN-20260513-001/.
-- recommended_next after v7.265: run_true_A5_preflight_only_after_exact_approval（收到精确授权语后只运行真正 A5 preflight）.
-- do not activate A5, contact provider, call plugin, or generate an image.
+- v7.268b authorizes Route B minimal real generation trial: matte_ceramic_mug, one provider call, one attempt, max 4 outputs, no retry, stop after generation, human review required.
+- recommended_next after v7.268b: v7.269_minimal_real_generation_trial_execution（执行一次最小真实生成试跑后立即停止）.
+- do not start any second generation, retry, memory write, DailyNote write, Batch 005, production_candidate_002, CDP, bridge, MCP, tag, release, or deploy.
 
 不要读取真实 VCPChat/VCPToolBox。
 不要读取真实 manifest。
