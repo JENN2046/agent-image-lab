@@ -3,15 +3,15 @@
 ## Handoff Summary
 
 ```text
-Status: v7.284 accepted candidate evidence package in progress locally; v4 remains the current best accepted candidate with minor retouch needs.
-Reason: v7.283 was committed and pushed at f3b8a05, and v7.284 seals evidence for keep_v4_and_stop_generation without copying or staging the output image.
+Status: v7.285 V7 product loop closeout and V8 route planning gate in progress; V7 product loop is being closed, current best candidate is v4, generation is stopped, and V8 route selection is required.
+Reason: v7.284 was committed and pushed at d0add63, and v7.285 seals the full V7 real generation/review/prompt-iteration loop while preserving no-generation, no-memory, and no-production-candidate boundaries.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
 Latest visible head before v7.273: 6f95b53 == origin/master
-Current synced HEAD before v7.284 local patch: f3b8a05 docs: decide accepted candidate or final retouch path
+Current synced HEAD before v7.285 local patch: d0add63 docs: add accepted candidate evidence package
 ahead_behind: 0/0
-Worktree: clean before v7.284 evidence package patch; v7.281 output remains ignored under runs/
-Current status: accepted_candidate_evidence_package_pending_checkpoint_commit
+Worktree: clean before v7.285 product loop closeout patch; v7.281 output remains ignored under runs/
+Current status: v7_product_loop_closeout_and_v8_route_planning_pending_checkpoint_commit
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false after v7.282; the single authorized v7.281 call has been consumed
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate
@@ -113,7 +113,7 @@ v7.278_accepted_candidate: false
 v7.278_commercial_delivery_ready: false
 v7.278_memory_suitability: deferred
 current_best_candidate: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
-v7.279_status: completed_locally_pending_checkpoint_commit
+v7.279_status: completed_remote_synced
 v7.279_selected_route: fourth_minimal_generation_trial
 v7.279_v3_failed_reason: handle attachment geometry regression
 v7.279_fourth_trial_goal: restore v2 composition while fixing handle geometry and preserving artifact control
@@ -149,6 +149,15 @@ v7.284_generation_stopped: true
 v7.284_output_image_added_to_git: false
 v7.284_accepted_samples_written: false
 v7.284_memory_write_performed: false
+v7.285_product_loop_closed: true
+v7.285_real_generation_chain_completed: true
+v7.285_total_real_generation_trials: 4
+v7.285_current_best_candidate: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+v7.285_prompt_evolution_analysis_created: true
+v7.285_review_dataset_summary_created: true
+v7.285_v8_route_options_created: true
+v7.285_recommended_default_route: final_retouch_planning
+v8_route_selection_required: true
 provider_contact_after_v7_274: false
 image_generation_after_v7_274: false
 human_review_required_now: true
@@ -270,7 +279,7 @@ prompt v2 static review: v7.272 passed
 second minimal generation authorization: v7.273 completed_committed_pushed_synced
 current_synced_head: d1a7ac8 docs: authorize second minimal generation trial
 ahead_behind: 0/0
-worktree: dirty with v7.284 evidence package documentation and state-surface updates
+worktree: clean before v7.285 product loop closeout; dirty only after the authorized v7.285 documentation/state patch
 v7.274_status: completed_success
 v7.274_output_images_count: 1
 v7.274_output_file: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
@@ -288,10 +297,11 @@ A5_execution_allowed_now: false; the single authorized v7.281 call has been cons
 provider_contact_allowed_now: false; the single authorized v7.281 provider contact has been consumed
 
 continue_A4_docs_only_by_default: false
-recommended_next: v7.285_v7_product_loop_closeout
-recommended_next_zh: 封存 V7 第一条真实生成-审片-prompt 迭代闭环
+recommended_next: v8_route_selection_human_decision_gate
+recommended_next_zh: 人工选择 V8 路线；默认推荐 final_retouch_planning
 auto_execution_allowed_for_next: false
 v7.284_purpose: accepted candidate evidence package for v4
+v7.285_purpose: close out V7 product loop and present V8 route options
 v7.284_image_generation_allowed: false
 v7.284_provider_contact_allowed: false
 v7.284_memory_write_allowed_without_separate_authorization: false

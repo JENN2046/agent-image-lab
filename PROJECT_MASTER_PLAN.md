@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_284: f3b8a05
-origin_master_before_v7_284: f3b8a05
-status: accepted_candidate_evidence_package
-mode: A4 docs-only evidence package
-phase_id: v7.284_accepted_candidate_evidence_package
+latest_visible_head_before_v7_285: d0add63
+origin_master_before_v7_285: d0add63
+status: v7_product_loop_closed_v8_route_selection_required
+mode: A4 product loop closeout and V8 route planning gate
+phase_id: v7.285_v7_product_loop_closeout_and_v8_route_planning_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -109,7 +109,7 @@ v7.278_accepted_candidate: false
 v7.278_commercial_delivery_ready: false
 v7.278_memory_suitability: deferred
 previous_best_candidate: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
-v7.279_status: completed_locally_pending_checkpoint_commit
+v7.279_status: completed_remote_synced
 v7.279_selected_route: fourth_minimal_generation_trial
 v7.279_v3_failed_reason: handle attachment geometry regression
 v7.279_fourth_trial_goal: restore v2 composition while fixing handle geometry and preserving artifact control
@@ -144,9 +144,17 @@ v7.284_generation_stopped: true
 v7.284_output_image_added_to_git: false
 v7.284_accepted_samples_written: false
 v7.284_memory_write_performed: false
+v7.285_product_loop_closed: true
+v7.285_real_generation_chain_completed: true
+v7.285_total_real_generation_trials: 4
+v7.285_prompt_evolution_analysis_created: true
+v7.285_review_dataset_summary_created: true
+v7.285_v8_route_options_created: true
+v7.285_recommended_default_route: final_retouch_planning
+v8_route_selection_required: true
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate
-recommended_next: v7.285_v7_product_loop_closeout
+recommended_next: v8_route_selection_human_decision_gate
 ```
 
 ## Product Direction
@@ -278,7 +286,13 @@ immediate stop for human review. v7.281 consumes that single authorization and
 generates one output. v7.282 records the human review result:
 `asset_status=accepted_candidate_with_minor_retouch`, `accepted_candidate=true`,
 `commercial_delivery_ready=false`, and the current best candidate is now the v4
-output.
+output. v7.283 presents the candidate/retouch/fifth-trial decision options and
+recommends keeping v4 while stopping generation by default. v7.284 seals the
+accepted candidate evidence package. v7.285 closes the V7 product loop, records
+the v1-v4 generation timeline, prompt evolution analysis, review dataset
+summary, safety/governance closeout, and V8 route options. The default V8
+recommendation is final retouch planning, with multi-product prompt package
+expansion as the strongest second option.
 
 ## Active Boundaries
 
@@ -303,6 +317,8 @@ validation interpretation, staging, commit decisions, and next-task selection.
 ## Recommended Next
 
 Recommended next is
-`v7.285_v7_product_loop_closeout`
-（封存 V7 第一条真实生成-审片-prompt 迭代闭环）. No retry, fifth generation,
-memory write, Batch 005, or production_candidate_002 may start automatically.
+`v8_route_selection_human_decision_gate`
+（人工选择 V8 路线）. The default recommendation is
+`final_retouch_planning`; `multi_product_prompt_package_expansion` is the
+secondary high-value route. No retry, fifth generation, memory write, Batch 005,
+or production_candidate_002 may start automatically.

@@ -36,7 +36,7 @@ Project plugin route authorization planning: v7.262 completed; NativeDoubaoImage
 Project plugin A5 authorization package draft: v7.263 completed; AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 is draft-only with approval_status=not_requested and execute_now=false.
 Project plugin A5 authorization draft review: v7.264 completed; draft result is pass_to_keep_inactive and activation remains blocked.
 True A5 authorization request: v7.265 completed_validated; AUTH-PENDING-PROJECT-PLUGIN-20260513-001 fixes prompt/output/model/budget for preflight-only approval and still blocks provider/plugin/image/env value actions.
-Route B minimal real generation authorization: v7.268b completed; v7.269 succeeded with one matte_ceramic_mug output and no retry; v7.270 records human review as needs_revision, accepted_candidate=false, commercial_delivery_ready=false, memory_suitability=deferred; v7.271 creates a static prompt v2 revision plan without generation; v7.272 static review passed; v7.273 authorized exactly one v7.274 second minimal generation trial using prompt v2 and is completed, committed, pushed, and synced at d1a7ac8; v7.274 completed successfully with one output and no retry; v7.275 reviewed that output as accepted_candidate_with_minor_retouch, accepted_candidate=true, commercial_delivery_ready=false, memory_suitability=deferred; v7.276 creates prompt v3 and authorizes exactly one v7.277 third minimal generation trial after commit and push; v7.277 completed successfully with one output; v7.278 reviewed v3 as needs_revision and keeps v2 as current best candidate; v7.279 records the human decision to continue with one fourth minimal trial focused only on handle geometry and product credibility; v7.280 creates prompt v4 and records the exact fourth-trial authorization boundary; v7.281 completed successfully with one v4 output; v7.282 reviewed v4 as accepted_candidate_with_minor_retouch and makes v4 the current best candidate while keeping commercial_delivery_ready=false; v7.283 presents Option A/B/C and recommends keeping v4 while stopping generation by default; v7.284 seals the accepted candidate evidence package without copying, moving, staging, or committing the output image.
+Route B minimal real generation authorization: v7.268b completed; v7.269 succeeded with one matte_ceramic_mug output and no retry; v7.270 records human review as needs_revision, accepted_candidate=false, commercial_delivery_ready=false, memory_suitability=deferred; v7.271 creates a static prompt v2 revision plan without generation; v7.272 static review passed; v7.273 authorized exactly one v7.274 second minimal generation trial using prompt v2 and is completed, committed, pushed, and synced at d1a7ac8; v7.274 completed successfully with one output and no retry; v7.275 reviewed that output as accepted_candidate_with_minor_retouch, accepted_candidate=true, commercial_delivery_ready=false, memory_suitability=deferred; v7.276 creates prompt v3 and authorizes exactly one v7.277 third minimal generation trial after commit and push; v7.277 completed successfully with one output; v7.278 reviewed v3 as needs_revision and keeps v2 as current best candidate; v7.279 records the human decision to continue with one fourth minimal trial focused only on handle geometry and product credibility; v7.280 creates prompt v4 and records the exact fourth-trial authorization boundary; v7.281 completed successfully with one v4 output; v7.282 reviewed v4 as accepted_candidate_with_minor_retouch and makes v4 the current best candidate while keeping commercial_delivery_ready=false; v7.283 presents Option A/B/C and recommends keeping v4 while stopping generation by default; v7.284 seals the accepted candidate evidence package without copying, moving, staging, or committing the output image; v7.285 closes the V7 product loop and prepares V8 route selection.
 ```
 
 ---
@@ -87,14 +87,14 @@ none
 ### todo
 
 ```text
-v7.285_v7_product_loop_closeout — 封存 V7 第一条真实生成-审片-prompt 迭代闭环；不生成新图、不写 memory、不进入 production_candidate_002。
+v8_route_selection_human_decision_gate — 人工选择 V8 路线；默认推荐 final_retouch_planning，次选 multi_product_prompt_package_expansion。
 ```
 
-### recommended_next_after_v7_284
+### recommended_next_after_v7_285
 
 ```text
-v7.285_v7_product_loop_closeout — close out the first V7 real generation, review, and prompt-iteration loop.
-status: pending_v7_284_checkpoint_commit
+v8_route_selection_human_decision_gate — choose the next V8 route after the first V7 real generation, review, and prompt-iteration loop.
+status: pending_human_selection
 reviewed_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
 current_best_candidate: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
 accepted_candidate_evidence_package_ref: docs/accepted_candidate_evidence_package_matte_ceramic_mug_v1.md
@@ -123,6 +123,12 @@ no_VCP_memory_write: true
 no_tag_release_deploy: true
 v7.284_purpose: accepted candidate evidence package for v4, no generation
 v7.285_purpose: close out the first V7 real product-image loop
+v7.285_product_loop_closed: true
+v7.285_prompt_evolution_analysis_created: true
+v7.285_review_dataset_summary_created: true
+v7.285_v8_route_options_created: true
+recommended_default_route: final_retouch_planning
+secondary_recommended_route: multi_product_prompt_package_expansion
 ```
 
 ### done
@@ -214,6 +220,7 @@ v7.285_purpose: close out the first V7 real product-image loop
 84. v7.282 human review of fourth real outputs records accepted_candidate_with_minor_retouch, accepted_candidate=true, commercial_delivery_ready=false, memory_suitability=deferred; v4 becomes the current best candidate.
 85. v7.283 candidate acceptance or final retouch decision gate presents Option A/B/C and recommends keep_v4_and_stop_generation by default; no fifth generation, provider contact, image generation, or memory write occurs.
 86. v7.284 accepted candidate evidence package seals the v4 candidate evidence and confirms no `runs/` image, accepted_samples, production_candidate_002, DailyNote, VCP memory, or fifth generation action occurs.
+87. v7.285 V7 product loop closeout and V8 route planning gate closes the first real matte_ceramic_mug product loop, creates prompt evolution analysis, review dataset summary, and V8 route options, with `final_retouch_planning` as the recommended default route.
 ```
 
 ### blocked

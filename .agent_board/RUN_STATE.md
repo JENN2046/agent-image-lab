@@ -9,24 +9,24 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab is in v7.284 accepted candidate evidence package. v4 is sealed as the current accepted candidate with minor retouch needs, generation is stopped, and no production candidate or memory write is authorized.
+Agent Image Lab is in v7.285 V7 product loop closeout and V8 route planning gate. V7 product loop is closed around v4 as the current best accepted candidate with minor retouch needs; generation is stopped and V8 route selection is required.
 ```
 
 ## Current Phase
 
 ```text
-v7.284 Accepted Candidate Evidence Package
-phase_id: v7.284_accepted_candidate_evidence_package
-source_phase: v7.283_candidate_acceptance_or_final_retouch_decision_gate
+v7.285 V7 Product Loop Closeout And V8 Route Planning Gate
+phase_id: v7.285_v7_product_loop_closeout_and_v8_route_planning_gate
+source_phase: v7.284_accepted_candidate_evidence_package
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
-status: accepted_candidate_evidence_package_pending_checkpoint_commit
-source_commit: f3b8a05
-source_message: docs: decide accepted candidate or final retouch path
+status: v7_product_loop_closeout_pending_checkpoint_commit
+source_commit: d0add63
+source_message: docs: add accepted candidate evidence package
 branch: master tracking origin/master
-Worktree: clean before v7.284 evidence package patch; generated v7.281 output remains ignored under runs/
+Worktree: clean before v7.285 closeout patch; generated v7.281 output remains ignored under runs/
 worktree_start_clean: true
-origin_sync_current: local HEAD equals origin/master at f3b8a05
+origin_sync_current: local HEAD equals origin/master at d0add63
 ahead_behind: 0/0
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false; the single authorized v7.281 call has been consumed
@@ -110,7 +110,7 @@ output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug
 auto_retry_for_second_trial: false
 stop_after_generation_for_second_trial: true
 human_review_required_after_generation: true
-recommended_next: v7.285_v7_product_loop_closeout
+recommended_next: v8_route_selection_human_decision_gate
 v7.274_status: completed_success
 v7.274_provider_contact: true
 v7.274_image_generation: true
@@ -159,7 +159,7 @@ v7.278_accepted_candidate: false
 v7.278_commercial_delivery_ready: false
 v7.278_memory_suitability: deferred
 current_best_candidate: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
-v7.279_status: completed_locally_pending_checkpoint_commit
+v7.279_status: completed_remote_synced
 v7.279_selected_route: fourth_minimal_generation_trial
 v7.279_v3_failed_reason: handle attachment geometry regression
 v7.279_fourth_trial_goal: restore v2 composition while fixing handle geometry and preserving artifact control
@@ -196,14 +196,24 @@ v7.283_recommended_option: keep_v4_and_stop_generation
 v7.283_secondary_safe_option: final_retouch_planning_no_generation
 v7.283_fifth_trial_recommendation: low_to_medium_requires_new_explicit_human_authorization
 v7.283_human_decision_required_before_next_generation: true
-v7.284_status: in_progress_evidence_package
+v7.284_status: completed_remote_synced
 v7.284_evidence_package_created: true
 accepted_candidate_evidence_package_ref: docs/accepted_candidate_evidence_package_matte_ceramic_mug_v1.md
 v7.284_generation_stopped: true
 v7.284_output_image_added_to_git: false
 v7.284_accepted_samples_written: false
 v7.284_memory_write_performed: false
-v7.285_recommended_next: v7.285_v7_product_loop_closeout
+v7.285_status: in_progress_product_loop_closeout_and_v8_route_planning
+v7.285_product_loop_closed: true
+v7.285_real_generation_chain_completed: true
+v7.285_total_real_generation_trials: 4
+v7.285_current_best_candidate: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+v7.285_prompt_evolution_analysis_created: true
+v7.285_review_dataset_summary_created: true
+v7.285_v8_route_options_created: true
+v7.285_recommended_default_route: final_retouch_planning
+v8_route_selection_required: true
+v7.285_recommended_next: v8_route_selection_human_decision_gate
 v7.274_stopped_after_generation: true
 human_review_required_now: true
 recommended_next_after_v7_274: v7.275_human_review_of_second_real_outputs
@@ -216,18 +226,18 @@ v7.275_memory_write_allowed_without_separate_authorization: false
 ## Current Task
 
 ```text
-v7.284 evidence package seals the v4 accepted candidate evidence for the first V7 real product-image loop. No fifth generation, production_candidate_002, accepted_samples write, or memory write is authorized.
+v7.285 closes the first V7 real product-image loop and prepares V8 route selection. No fifth generation, production_candidate_002, accepted_samples write, or memory write is authorized.
 ```
 
 ## Current Local Work State
 
 ```text
-Worktree: dirty with v7.284 evidence package documentation and state-surface updates.
+Worktree: dirty only with authorized v7.285 closeout documentation and state-surface updates after patching.
 active_workers: 0
 execution_mode: Single-Window 4-Agent Compact Autopilot
 commander_role: keep this evidence package inside A4 docs and stop before any new generation or unauthorized write
 architect_role: preserve no-generation and no-memory boundaries
-worker_role: apply only the v7.284 evidence package and board reality correction
+worker_role: apply only the v7.285 product loop closeout and V8 route planning package
 reviewer_role: inspect diff, run allowed local checks, confirm no new provider/plugin/image/memory behavior during this patch, and close out
 validation_status: completed_validated_pending_guarded_local_commit
 ```

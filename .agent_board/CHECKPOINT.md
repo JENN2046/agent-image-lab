@@ -1,10 +1,50 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.285 V7 Product Loop Closeout And V8 Route Planning Gate
+
+```text
+phase_id: v7.285_v7_product_loop_closeout_and_v8_route_planning_gate
+Status: completed_pending_guarded_commit_and_push
+Source phase: v7.284_accepted_candidate_evidence_package
+Source commit: d0add63f25a551d20ad17b3d0b17abde26b694b3
+Purpose: close the first V7 real product-image loop and present V8 route options
+product_loop_closed: true
+real_generation_chain_completed: true
+total_real_generation_trials: 4
+current_best_candidate: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+asset_status: accepted_candidate_with_minor_retouch
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+generation_stopped: true
+fifth_generation_started: false
+output_image_added_to_git: false
+accepted_samples_written: false
+memory_write_performed: false
+production_candidate_002_started: false
+prompt_evolution_analysis_created: true
+review_dataset_summary_created: true
+v8_route_options_created: true
+recommended_default_route: final_retouch_planning
+secondary_recommended_route: multi_product_prompt_package_expansion
+provider_contact: false
+plugin_call: false
+image_generation: false
+retry: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+Batch_005_started: false
+recommended_next: v8_route_selection_human_decision_gate
+recommended_next_zh: 人工选择 V8 路线；默认推荐 final_retouch_planning
+next_phase_started: false
+```
+
 ## v7.284 Accepted Candidate Evidence Package
 
 ```text
 phase_id: v7.284_accepted_candidate_evidence_package
-Status: completed_locally_pending_checkpoint_commit
+Status: completed_remote_synced
 Source phase: v7.283_candidate_acceptance_or_final_retouch_decision_gate
 Source commit: f3b8a05ab69f64795e18bf5e0f50fc383b268d3e
 Purpose: seal the v4 accepted candidate evidence package for the first V7 real product-image loop
@@ -135,7 +175,7 @@ next_phase_started: false
 
 ```text
 phase_id: v7.280_prompt_v4_handle_geometry_refinement_authorization_gate
-Status: completed_locally_pending_checkpoint_commit_and_push
+Status: completed_remote_synced
 Source phase: v7.279_best_candidate_selection_or_fourth_trial_decision_gate
 Purpose: create prompt v4 and record exact fourth minimal generation trial authorization
 current_best_candidate: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
@@ -169,7 +209,7 @@ next_phase_started: false
 
 ```text
 phase_id: v7.279_best_candidate_selection_or_fourth_trial_decision_gate
-Status: completed_locally_pending_checkpoint_commit
+Status: completed_remote_synced
 Source phase: v7.278_human_review_of_third_real_outputs
 Purpose: record current best candidate and human route selection for one fourth minimal trial
 current_best_candidate: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
