@@ -8,10 +8,10 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_251: e5c8773
-origin_master_before_v7_251: e5c8773
+latest_visible_head_before_v7_252: 758ea72
+origin_master_before_v7_252: 758ea72
 status: failed_no_image_repeated_quota_or_rate_limit
-mode: A4 docs-only static Review Surface acceptance checklist
+mode: A4 docs-only static Review Surface mockup readiness review
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
@@ -24,6 +24,7 @@ review_surface_product_spec_created: true
 review_record_template_created: true
 status_flow_defined: true
 static_review_surface_acceptance_checklist_created: true
+static_review_surface_mockup_readiness_review_created: true
 ```
 
 ## Product Direction
@@ -76,6 +77,8 @@ revision request handling, and memory_suitability yes/no/deferred routing.
 v7.251 adds the static Review Surface acceptance checklist for field
 completeness, status flow, human decision priority, memory write prohibition,
 A5/provider/plugin/runtime prohibition, and future mockup preconditions.
+v7.252 reviews those artifacts and confirms the next safe product step is a
+static mockup specification gate, not runtime implementation.
 
 ## Active Boundaries
 
@@ -99,7 +102,6 @@ validation interpretation, staging, commit decisions, and next-task selection.
 
 ## Recommended Next
 
-Recommended next is `v7.252_static_review_surface_mockup_readiness_review_gate`
-（静态审片台 mockup 准备度复核门）. It should decide whether the static
-Review Surface package is ready for a future no-runtime mockup task without A5,
-provider contact, plugin call, image generation, runtime, or memory write.
+Recommended next is `v7.253_static_review_surface_mockup_spec_gate`
+（静态审片台 mockup 规格门）. It should define screen regions, layout
+requirements, static fixture shape, and copy rules before any HTML/runtime work.

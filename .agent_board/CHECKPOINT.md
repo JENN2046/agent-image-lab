@@ -1,5 +1,31 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.252 Static Review Surface Mockup Readiness Review Gate
+
+```text
+Status: completed_validated
+Source baseline: 758ea72 == origin/master
+Purpose: review whether the static Review Surface package is ready for a no-runtime mockup specification gate
+route_3_meaning_zh: 继续停止生成
+source_artifacts_reviewed: static_review_surface_product_spec, review_record_template_and_status_flow, static_review_surface_acceptance_checklist
+readiness_result: ready_for_static_mockup_spec_gate
+ready_for_static_mockup_spec_gate: true
+ready_for_runtime_or_html_implementation: false
+direct_static_html_creation_allowed_now: false
+recommended_next: v7.253_static_review_surface_mockup_spec_gate
+same_provider_retry_allowed_now: false
+A5_execution_allowed_now: false
+provider_contact_allowed_now: false
+route_selection_required_before_new_A5: true
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+runtime_execution: false
+DailyNote_write: false
+VCP_memory_write: false
+```
+
 ## v7.251 Static Review Surface Acceptance Checklist Gate
 
 ```text

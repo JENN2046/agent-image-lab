@@ -7,8 +7,8 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.251: e5c8773 on master == origin/master.
-Current mainline state: v7.251 static Review Surface acceptance checklist gate（静态审片台验收清单门）.
+Latest visible remote baseline before v7.252: 758ea72 on master == origin/master.
+Current mainline state: v7.252 static Review Surface mockup readiness review gate（静态审片台 mockup 准备度复核门）.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
 Current status: failed_no_image_repeated_quota_or_rate_limit.
@@ -18,11 +18,11 @@ provider_contact_allowed_now: false.
 Native Doubao static hardening: syntax/path sandbox/base URL/raw output/env allowlist/validator drift patched.
 Diagnostic decision: continue_generation_stop_until_route_selection.
 Provider path decision: ROUTE-3-CONTINUED-STOP（路线 3：继续停止生成）selected now; Route 1 quota resolution and Route 2 provider/model/account switch remain available only after explicit human selection.
-Review Surface mainline: acceptance checklist created for field completeness, status flow, human decision priority, memory write prohibition, and future mockup readiness.
+Review Surface mainline: readiness review confirms the static spec, review record flow, and acceptance checklist are sufficient for a next static mockup specification gate, not runtime implementation.
 route_selection_required_before_new_A5: true.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized: A5, provider contact, runtime, plugin call, image generation, DailyNote write, VCP memory write, real manifest read, tag, release, deploy.
-Recommended next: v7.252_static_review_surface_mockup_readiness_review_gate（静态审片台 mockup 准备度复核门）.
+Recommended next: v7.253_static_review_surface_mockup_spec_gate（静态审片台 mockup 规格门）.
 ```
 
 历史状态脉络：

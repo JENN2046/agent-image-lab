@@ -19,6 +19,7 @@
 14. v7.249 static Review Surface product spec keeps generation stopped and recommends v7.250_review_record_template_and_status_flow_gate.
 15. v7.250 review record template and status flow keeps generation stopped and recommends v7.251_static_review_surface_acceptance_checklist_gate.
 16. v7.251 static Review Surface acceptance checklist keeps generation stopped and recommends v7.252_static_review_surface_mockup_readiness_review_gate.
+17. v7.252 static Review Surface mockup readiness review keeps generation stopped and recommends v7.253_static_review_surface_mockup_spec_gate; direct HTML/runtime implementation is still blocked.
 ```
 
 ## Current Mainline Quality Stop

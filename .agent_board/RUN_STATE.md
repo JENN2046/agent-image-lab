@@ -9,16 +9,16 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab is on Route 3 continued stop（继续停止生成）and has defined the static Review Surface acceptance checklist.
+Agent Image Lab is on Route 3 continued stop（继续停止生成）and has reviewed static Review Surface mockup readiness.
 ```
 
 ## Current Phase
 
 ```text
-v7.251 Static Review Surface Acceptance Checklist Gate
+v7.252 Static Review Surface Mockup Readiness Review Gate
 status: failed_no_image_repeated_quota_or_rate_limit
-source_commit: e5c8773
-source_message: docs: add review record status flow
+source_commit: 758ea72
+source_message: docs: add static review surface acceptance checklist
 branch: master tracking origin/master
 Worktree: clean at v7.247 start
 worktree_start_clean: true
@@ -35,12 +35,15 @@ static_review_surface_product_spec_created: true
 review_record_template_created: true
 status_flow_defined: true
 static_review_surface_acceptance_checklist_created: true
+static_review_surface_mockup_readiness_review_created: true
+ready_for_static_mockup_spec_gate: true
+ready_for_runtime_or_html_implementation: false
 ```
 
 ## Current Task
 
 ```text
-Define static Review Surface acceptance criteria without renderer/preload/IPC/runtime code.
+Review whether the static Review Surface package is ready for a next static mockup specification gate without renderer/preload/IPC/runtime code.
 ```
 
 ## Current Local Work State
@@ -87,7 +90,7 @@ MVP Aggregate Validator Calibration: completed_validated
 Product Image Authorization Draft Plan Ref Alignment: v7.241 completed_validated
 Product Image Authorization Activation Gap Review: v7.242 completed_validated
 Product Image Active Authorization Package Skeleton: v7.243 completed_validated
-Recommended next product task: v7.252_static_review_surface_mockup_readiness_review_gate（静态审片台 mockup 准备度复核门）
+Recommended next product task: v7.253_static_review_surface_mockup_spec_gate（静态审片台 mockup 规格门）
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```
@@ -133,8 +136,8 @@ tag/release/deploy remain blocked without explicit authorization and preflight
 ## Current Options
 
 ```text
-recommended_next_after_v7_251: v7.252_static_review_surface_mockup_readiness_review_gate
-purpose: review readiness for a future static Review Surface mockup without generation or runtime
+recommended_next_after_v7_252: v7.253_static_review_surface_mockup_spec_gate
+purpose: define static Review Surface mockup screen regions and fixture shape without generation or runtime
 not_allowed_as_next_by_default: A5, provider contact, runtime, plugin call, image generation, memory write, tag, release
 ```
 
