@@ -1,5 +1,68 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.282 Human Review Of Fourth Real Outputs
+
+```text
+phase_id: v7.282_human_review_of_fourth_real_outputs
+Status: completed_locally_pending_checkpoint_commit
+Source phase: v7.281_fourth_minimal_generation_trial_execution
+Purpose: record human review of the fourth real matte_ceramic_mug output
+reviewed_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+asset_status: accepted_candidate_with_minor_retouch
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+current_best_candidate: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+strengths: handle structure clearly improved versus v3; product scale appropriate; cup rim cleaner; warm-gray background more premium; top-left colored speck mostly solved; matte ceramic texture works; near ecommerce main-image candidate
+remaining_issues: upper handle attachment still slightly dark and soft; handle/body join is not final retouch-grade realistic; background slightly dark; body microtexture conservative; bottom shadow could be more refined
+decision: v4 becomes the current best accepted candidate, but is not final commercial delivery ready
+fifth_generation_started: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+retry: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+image_added_to_git: false
+production_candidate_002_started: false
+Batch_005_started: false
+recommended_next: v7.283_candidate_acceptance_or_final_retouch_decision_gate
+recommended_next_zh: 人工决定停在当前 accepted candidate、做局部后期修图计划，或授权极小范围第五次试跑
+next_phase_started: false
+```
+
+## v7.281 Fourth Minimal Generation Trial Execution
+
+```text
+phase_id: v7.281_fourth_minimal_generation_trial_execution
+Status: completed_success
+Source phase: v7.280_prompt_v4_handle_geometry_refinement_authorization_gate
+Purpose: execute exactly one bounded fourth minimal real generation trial using prompt v4
+approved_product: matte_ceramic_mug
+prompt_package_used: prompts/image_generation/product_still_life_matte_ceramic_mug_v4.yaml
+provider_contact: true
+image_generation: true
+provider_calls_used: 1
+generation_attempts_used: 1
+output_directory: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/
+output_images_count: 1
+output_file: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+auto_retry_used: false
+stopped_after_generation: true
+run_status: success
+human_review_required_now: true
+fifth_generation_started: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+output_added_to_git: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v7.282_human_review_of_fourth_real_outputs
+next_phase_started: false
+```
+
 ## v7.280 Prompt v4 Handle Geometry Refinement Authorization Gate
 
 ```text

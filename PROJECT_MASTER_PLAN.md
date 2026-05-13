@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_280: 1c65280
-origin_master_before_v7_280: da879f4
-status: prompt_v4_created_fourth_trial_authorized_pending_commit_push
-mode: A4 prompt refinement plus A5 bounded authorization gate
-phase_id: v7.280_prompt_v4_handle_geometry_refinement_authorization_gate
+latest_visible_head_before_v7_282: 9542c0c
+origin_master_before_v7_282: 9542c0c
+status: fourth_real_output_reviewed_accepted_candidate_with_minor_retouch
+mode: A4 review documentation only
+phase_id: v7.282_human_review_of_fourth_real_outputs
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -108,7 +108,7 @@ v7.278_asset_status: needs_revision
 v7.278_accepted_candidate: false
 v7.278_commercial_delivery_ready: false
 v7.278_memory_suitability: deferred
-current_best_candidate: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
+previous_best_candidate: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
 v7.279_status: completed_locally_pending_checkpoint_commit
 v7.279_selected_route: fourth_minimal_generation_trial
 v7.279_v3_failed_reason: handle attachment geometry regression
@@ -123,9 +123,19 @@ output_directory_for_fourth_trial: runs/real_generation/v7_281_matte_ceramic_mug
 auto_retry_for_fourth_trial: false
 stop_after_generation_for_fourth_trial: true
 human_review_required_after_generation: true
-A5_execution_allowed_now: false in v7.280 authorization gate itself; v7.281 is the only bounded execution phase after commit and push
-provider_contact_allowed_now: false in v7.280 authorization gate itself; exactly one provider contact is reserved for v7.281 after commit and push
-recommended_next: v7.281_fourth_minimal_generation_trial_execution
+v7.281_status: completed_success
+v7.281_output_images_count: 1
+v7.281_output_file: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+v7.281_auto_retry_used: false
+v7.282_human_review_status: completed_locally_pending_checkpoint_commit
+v7.282_asset_status: accepted_candidate_with_minor_retouch
+v7.282_accepted_candidate: true
+v7.282_commercial_delivery_ready: false
+v7.282_memory_suitability: deferred
+current_best_candidate: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed
+provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate
+recommended_next: v7.283_candidate_acceptance_or_final_retouch_decision_gate
 ```
 
 ## Product Direction
@@ -253,16 +263,20 @@ with one fourth minimal trial focused only on handle geometry and product
 credibility. v7.280 creates prompt v4 and records the exact fourth-trial
 boundary: one provider call, one generation attempt, at most four outputs, no
 retry, no memory writes, no Batch 005, no production candidate promotion, and
-immediate stop for human review.
+immediate stop for human review. v7.281 consumes that single authorization and
+generates one output. v7.282 records the human review result:
+`asset_status=accepted_candidate_with_minor_retouch`, `accepted_candidate=true`,
+`commercial_delivery_ready=false`, and the current best candidate is now the v4
+output.
 
 ## Active Boundaries
 
 ```text
-A5: not authorized in v7.280 authorization gate itself; v7.281 is the only bounded execution phase after commit and push
-provider contact: not authorized in v7.280 authorization gate itself; exactly one provider contact is reserved for v7.281 after commit and push
+A5: not authorized after v7.282; v7.281 single authorized call has been consumed
+provider contact: not authorized after v7.282; no fifth generation is active without a new authorization gate
 runtime execution: not authorized
-plugin call: not authorized in v7.280 authorization gate itself
-image generation: not authorized in v7.280 authorization gate itself
+plugin call: not authorized after v7.282
+image generation: not authorized after v7.282
 DailyNote / VCP memory write: not authorized
 real manifest / VCPChat / VCPToolBox read: not authorized
 tag / release / deploy / push: not authorized by this file
@@ -278,6 +292,6 @@ validation interpretation, staging, commit decisions, and next-task selection.
 ## Recommended Next
 
 Recommended next is
-`v7.281_fourth_minimal_generation_trial_execution`
-（使用 v4 prompt 执行一次且仅一次第四次最小真实生成试跑）. No retry,
+`v7.283_candidate_acceptance_or_final_retouch_decision_gate`
+（人工决定停在当前 accepted candidate、做局部后期修图计划，或授权极小范围第五次试跑）. No retry,
 fifth generation, memory write, Batch 005, or production_candidate_002 may start automatically.

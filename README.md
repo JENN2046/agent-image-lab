@@ -7,9 +7,9 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest visible local baseline before v7.280: 1c65280 on master.
-Current mainline state: v7.280 prompt v4 handle geometry refinement authorization gate（v4 prompt 与第四次最小试跑授权门）.
-Current phase id: v7.280_prompt_v4_handle_geometry_refinement_authorization_gate.
+Latest visible remote baseline before v7.282: 9542c0c on master == origin/master.
+Current mainline state: v7.282 human review of fourth real outputs（第四次真实输出人工审片）.
+Current phase id: v7.282_human_review_of_fourth_real_outputs.
 Prior human route selection gate: v7.261_human_product_route_selection_request_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
@@ -94,7 +94,7 @@ v7.278_asset_status: needs_revision.
 v7.278_accepted_candidate: false.
 v7.278_commercial_delivery_ready: false.
 v7.278_memory_suitability: deferred.
-current_best_candidate: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg.
+previous_best_candidate: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg.
 v7.279_status: completed_locally_pending_checkpoint_commit.
 v7.279_selected_route: fourth_minimal_generation_trial.
 v7.279_v3_failed_reason: handle attachment geometry regression.
@@ -109,12 +109,22 @@ output_directory_for_fourth_trial: runs/real_generation/v7_281_matte_ceramic_mug
 auto_retry_for_fourth_trial: false.
 stop_after_generation_for_fourth_trial: true.
 human_review_required_after_generation: true.
-A5_execution_allowed_now: false in v7.280 authorization gate itself; v7.281 is the only bounded execution phase after commit and push.
-provider_contact_allowed_now: false in v7.280 authorization gate itself; exactly one provider contact is reserved for v7.281 after commit and push.
+v7.281_status: completed_success.
+v7.281_output_images_count: 1.
+v7.281_output_file: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg.
+v7.281_auto_retry_used: false.
+v7.282_human_review_status: completed_locally_pending_checkpoint_commit.
+v7.282_asset_status: accepted_candidate_with_minor_retouch.
+v7.282_accepted_candidate: true.
+v7.282_commercial_delivery_ready: false.
+v7.282_memory_suitability: deferred.
+current_best_candidate: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg.
+A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed.
+provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized now: Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, retry, fifth generation, tag, release, deploy.
-Recommended next: v7.281_fourth_minimal_generation_trial_execution（使用 v4 prompt 执行一次且仅一次第四次最小真实生成试跑）.
-auto_execution_allowed_for_next: true after v7.280 commit and push safety gate.
+Recommended next: v7.283_candidate_acceptance_or_final_retouch_decision_gate（人工决定停在当前 accepted candidate、做局部后期修图计划，或授权极小范围第五次试跑）.
+auto_execution_allowed_for_next: false.
 ```
 
 历史状态脉络：

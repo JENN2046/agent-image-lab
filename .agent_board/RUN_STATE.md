@@ -9,28 +9,28 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab created prompt v4 and recorded the v7.280 fourth minimal generation authorization gate. The authorization is bounded to one v7.281 trial using prompt v4 after commit and push.
+Agent Image Lab completed v7.282 human review of the fourth real output. The v4 image is accepted_candidate_with_minor_retouch and is now the current best candidate, but it is not final commercial delivery ready.
 ```
 
 ## Current Phase
 
 ```text
-v7.280 Prompt v4 Handle Geometry Refinement Authorization Gate
-phase_id: v7.280_prompt_v4_handle_geometry_refinement_authorization_gate
-source_phase: v7.279_best_candidate_selection_or_fourth_trial_decision_gate
+v7.282 Human Review Of Fourth Real Outputs
+phase_id: v7.282_human_review_of_fourth_real_outputs
+source_phase: v7.281_fourth_minimal_generation_trial_execution
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
-status: prompt_v4_created_fourth_trial_authorized_pending_checkpoint_commit_and_push
-source_commit: 1c65280
-source_message: docs: select fourth minimal trial for handle geometry refinement
+status: fourth_real_output_reviewed_pending_checkpoint_commit
+source_commit: 9542c0c
+source_message: docs: authorize fourth minimal generation trial
 branch: master tracking origin/master
-Worktree: dirty with v7.280 prompt v4 authorization documentation and state-surface updates; generated outputs remain ignored under runs/
+Worktree: clean before v7.282 documentation patch; generated v7.281 output remains ignored under runs/
 worktree_start_clean: true
-origin_sync_current: local HEAD is ahead of origin/master after v7.279 local commit
-ahead_behind: 0/1 before v7.280 commit
+origin_sync_current: local HEAD equals origin/master at 9542c0c
+ahead_behind: 0/0
 same_provider_retry_allowed_now: false
-A5_execution_allowed_now: false; the single authorized v7.277 call has been consumed
-provider_contact_allowed_now: false; the single authorized v7.277 provider contact has been consumed
+A5_execution_allowed_now: false; the single authorized v7.281 call has been consumed
+provider_contact_allowed_now: false; the single authorized v7.281 provider contact has been consumed
 native_doubao_static_hardening: completed
 diagnostic_decision: continue_generation_stop_until_route_selection
 selected_route_now: ROUTE-3-CONTINUED-STOP
@@ -110,7 +110,7 @@ output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug
 auto_retry_for_second_trial: false
 stop_after_generation_for_second_trial: true
 human_review_required_after_generation: true
-recommended_next: v7.279_best_candidate_selection_or_fourth_trial_decision_gate
+recommended_next: v7.283_candidate_acceptance_or_final_retouch_decision_gate
 v7.274_status: completed_success
 v7.274_provider_contact: true
 v7.274_image_generation: true
@@ -176,7 +176,21 @@ auto_retry_for_fourth_trial: false
 stop_after_generation_for_fourth_trial: true
 human_review_required_after_generation: true
 fifth_generation_auto_start: false
-v7.280_recommended_next: v7.281_fourth_minimal_generation_trial_execution
+v7.281_status: completed_success
+v7.281_provider_contact: true
+v7.281_image_generation: true
+v7.281_provider_calls_used: 1
+v7.281_generation_attempts_used: 1
+v7.281_output_images_count: 1
+v7.281_output_file: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+v7.281_auto_retry_used: false
+v7.282_human_review_status: completed
+v7.282_asset_status: accepted_candidate_with_minor_retouch
+v7.282_accepted_candidate: true
+v7.282_commercial_delivery_ready: false
+v7.282_memory_suitability: deferred
+current_best_candidate: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+v7.283_recommended_next: v7.283_candidate_acceptance_or_final_retouch_decision_gate
 v7.274_stopped_after_generation: true
 human_review_required_now: true
 recommended_next_after_v7_274: v7.275_human_review_of_second_real_outputs
@@ -189,18 +203,18 @@ v7.275_memory_write_allowed_without_separate_authorization: false
 ## Current Task
 
 ```text
-v7.280 authorization gate completed locally. Prompt v4 is created and authorizes exactly one v7.281 fourth minimal trial after commit and push; no generation has happened in v7.280.
+v7.282 human review completed locally. v4 is the current best accepted candidate with minor retouch needs; no fifth generation is authorized.
 ```
 
 ## Current Local Work State
 
 ```text
-Worktree: dirty with v7.280 prompt v4 authorization documentation and state-surface updates.
+Worktree: dirty with v7.282 human review documentation and state-surface updates.
 active_workers: 0
 execution_mode: Single-Window 4-Agent Compact Autopilot
 commander_role: keep this correction inside .agent_board facts and stop before commit/push
 architect_role: preserve no-generation and no-memory boundaries
-worker_role: apply only the v7.274 board reality correction
+worker_role: apply only the v7.282 review documentation and board reality correction
 reviewer_role: inspect diff, run allowed local checks, confirm no new provider/plugin/image/memory behavior during this patch, and close out
 validation_status: completed_validated_pending_guarded_local_commit
 ```
@@ -249,7 +263,7 @@ Prompt revision plan from first real output: v7.271 completed_pending_validation
 Prompt v2 static review: v7.272 passed.
 Second minimal generation authorization: v7.273 completed, committed, pushed, and synced at d1a7ac8.
 Second minimal generation trial: v7.274 completed_success with one output and no retry.
-Recommended next product task: v7.281_fourth_minimal_generation_trial_execution（使用 v4 prompt 执行一次且仅一次第四次最小真实生成试跑）
+Recommended next product task: v7.283_candidate_acceptance_or_final_retouch_decision_gate（人工决定停在当前 accepted candidate、做局部后期修图计划，或授权极小范围第五次试跑）
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```

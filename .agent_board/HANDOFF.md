@@ -3,18 +3,18 @@
 ## Handoff Summary
 
 ```text
-Status: v7.280 prompt v4 handle geometry refinement authorization gate completed locally; prompt v4 is created and exactly one fourth minimal trial is authorized after commit and push.
-Reason: v7.277 generated one v3 output, v7.278 reviewed it as needs_revision because handle geometry regressed, v7.279 selected a fourth minimal trial, and v7.280 seals the v4 prompt and execution boundary.
+Status: v7.282 human review of fourth real output completed locally; v4 is now the current best accepted candidate with minor retouch needs.
+Reason: v7.281 generated one v4 output, and v7.282 reviewed it as accepted_candidate_with_minor_retouch while keeping commercial_delivery_ready=false.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
 Latest visible head before v7.273: 6f95b53 == origin/master
-Current synced HEAD before v7.279 local patch: da879f4 docs: review third real ceramic mug output
+Current synced HEAD before v7.282 local patch: 9542c0c docs: authorize fourth minimal generation trial
 ahead_behind: 0/0
-Worktree: clean before v7.278 documentation patch; v7.277 output remains ignored under runs/
-Current status: prompt_v4_created_fourth_trial_authorized_pending_checkpoint_commit_and_push
+Worktree: clean before v7.282 documentation patch; v7.281 output remains ignored under runs/
+Current status: fourth_real_output_reviewed_pending_checkpoint_commit
 same_provider_retry_allowed_now: false
-A5_execution_allowed_now: false in v7.280 authorization gate itself; v7.281 is the only bounded execution phase after commit and push
-provider_contact_allowed_now: false in v7.280 authorization gate itself; exactly one provider contact is reserved for v7.281 after commit and push
+A5_execution_allowed_now: false after v7.282; the single authorized v7.281 call has been consumed
+provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate
 Native Doubao static hardening: v7.245 completed_validated
 Diagnostic decision: continue_generation_stop_until_route_selection
 Provider path decision: ROUTE-3-CONTINUED-STOP selected now
@@ -128,6 +128,16 @@ output_directory_for_fourth_trial: runs/real_generation/v7_281_matte_ceramic_mug
 auto_retry_for_fourth_trial: false
 fifth_generation_auto_start: false
 v7.280_recommended_next: v7.281_fourth_minimal_generation_trial_execution
+v7.281_status: completed_success
+v7.281_output_images_count: 1
+v7.281_output_file: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+v7.281_auto_retry_used: false
+v7.282_human_review_status: completed
+v7.282_asset_status: accepted_candidate_with_minor_retouch
+v7.282_accepted_candidate: true
+v7.282_commercial_delivery_ready: false
+v7.282_memory_suitability: deferred
+current_best_candidate: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
 provider_contact_after_v7_274: false
 image_generation_after_v7_274: false
 human_review_required_now: true
@@ -249,23 +259,31 @@ prompt v2 static review: v7.272 passed
 second minimal generation authorization: v7.273 completed_committed_pushed_synced
 current_synced_head: d1a7ac8 docs: authorize second minimal generation trial
 ahead_behind: 0/0
-worktree: dirty with .agent_board reality correction only
+worktree: dirty with v7.282 review documentation and state-surface updates
 v7.274_status: completed_success
 v7.274_output_images_count: 1
 v7.274_output_file: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
+v7.281_status: completed_success
+v7.281_output_images_count: 1
+v7.281_output_file: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+v7.282_human_review_status: completed
+v7.282_asset_status: accepted_candidate_with_minor_retouch
+v7.282_accepted_candidate: true
+v7.282_commercial_delivery_ready: false
+v7.282_memory_suitability: deferred
+current_best_candidate: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
 same_provider_retry_allowed_now: false
-A5_execution_allowed_now: false; the single authorized v7.274 call has been consumed
-provider_contact_allowed_now: false; the single authorized v7.274 provider contact has been consumed
+A5_execution_allowed_now: false; the single authorized v7.281 call has been consumed
+provider_contact_allowed_now: false; the single authorized v7.281 provider contact has been consumed
 
 continue_A4_docs_only_by_default: false
-recommended_next: v7.281_fourth_minimal_generation_trial_execution
-recommended_next_zh: 使用 v4 prompt 执行一次且仅一次第四次最小真实生成试跑
-auto_execution_allowed_for_next: true_after_v7.280_commit_and_push_safety_gate
-v7.281_purpose: validate handle geometry refinement with one bounded v4 trial
-v7.281_provider_calls_max: 1
-v7.281_generation_attempts_max: 1
-v7.281_auto_retry: false
-v7.281_memory_write_allowed_without_separate_authorization: false
+recommended_next: v7.283_candidate_acceptance_or_final_retouch_decision_gate
+recommended_next_zh: 人工决定停在当前 accepted candidate、做局部后期修图计划，或授权极小范围第五次试跑
+auto_execution_allowed_for_next: false
+v7.283_purpose: candidate acceptance / final retouch / possible fifth-trial decision gate
+v7.283_image_generation_allowed: false
+v7.283_provider_contact_allowed: false
+v7.283_memory_write_allowed_without_separate_authorization: false
 ```
 
 ## Current Stop Gates
@@ -340,7 +358,7 @@ dependency/config/env modification: no
 ## Human Decisions Needed
 
 ```text
-Next action is v7.275 human review of the second real output only. No retry, third generation, product switch, prompt switch, provider/model/account switch, raw plugin stderr/stdout review or capture, secret/config value review, tag/release/deploy beyond this gate, runtime implementation, memory write, or DailyNote call is authorized.
+Next action is v7.283 candidate acceptance or final retouch decision gate only. No retry, fifth generation, product switch, prompt switch, provider/model/account switch, raw plugin stderr/stdout review or capture, secret/config value review, tag/release/deploy beyond this gate, runtime implementation, memory write, or DailyNote call is authorized.
 ```
 
 ## Exact Resume Prompt
