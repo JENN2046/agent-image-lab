@@ -15,6 +15,7 @@ same_provider_retry_allowed_now: false.
 A5_execution_allowed_now: false.
 provider_contact_allowed_now: false.
 Native Doubao static hardening: completed.
+Diagnostic decision: continue_generation_stop_until_route_selection.
 ```
 
 ---
@@ -65,13 +66,13 @@ none
 ### todo
 
 ```text
-1. v7.246_no_generation_quota_or_provider_path_diagnostic_readiness_gate.
+1. v7.247_provider_path_decision_package_gate.
 ```
 
 ### recommended_next_after_v7_243
 
 ```text
-v7.246_no_generation_quota_or_provider_path_diagnostic_readiness_gate — do not retry the same path immediately; decide no-generation readiness questions for quota resolution, provider path switching, or continued stop.
+v7.247_provider_path_decision_package_gate — paper-only decision package for quota resolution evidence, alternate provider/model/account path, or continued stop. No provider contact, plugin call, or generation.
 ```
 
 ### done
@@ -125,6 +126,7 @@ v7.246_no_generation_quota_or_provider_path_diagnostic_readiness_gate — do not
 46. A second newly authorized DoubaoGen retry/diagnostic call ran once, again returned plugin_status=error with sanitized_error_category=quota_or_rate_limit, generated no image, and left no retained secret cache or runtime plugin copy.
 47. v7.244 state surface reconciliation aligned current status to failed_no_image_repeated_quota_or_rate_limit and recommended_next to v7.245_native_doubao_syntax_and_sandbox_hardening.
 48. v7.245 Native Doubao syntax and sandbox hardening patched path containment, base URL gate, env allowlist, public result redaction, exact call budget, and validator drift without generation.
+49. v7.246 no-generation diagnostic readiness selected continue_generation_stop_until_route_selection and recommended v7.247_provider_path_decision_package_gate.
 ```
 
 ### blocked
@@ -157,6 +159,7 @@ v7.246_no_generation_quota_or_provider_path_diagnostic_readiness_gate — do not
 25. v7.243 does not authorize active A5/provider/model/plugin selection/provider contact/runtime/plugin/image/DailyNote/VCP memory/output save/Review Console runtime/real manifest read/real output path/raw payload/CDP/bridge/MCP/tag/release/deploy.
 26. v7.244 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/real manifest read/CDP/bridge/MCP/tag/release/deploy; same provider retry remains blocked.
 27. v7.245 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/real manifest read/.env.local value read/CDP/bridge/MCP/tag/release/deploy; same provider retry remains blocked.
+28. v7.246 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/real manifest read/.env.local value read/raw provider dashboard capture/CDP/bridge/MCP/tag/release/deploy; same provider retry remains blocked.
 ```
 
 ### skipped

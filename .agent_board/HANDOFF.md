@@ -12,7 +12,8 @@ Current status: failed_no_image_repeated_quota_or_rate_limit
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
-Native Doubao static hardening: v7.245 completed/pending closeout
+Native Doubao static hardening: v7.245 completed_validated
+Diagnostic decision: continue_generation_stop_until_route_selection
 Current active workers: 0
 Current operating style: Single-Window 4-Agent Compact Autopilot
 ```
@@ -62,7 +63,8 @@ active A5 diagnostic retry: failed_no_image_quota_or_rate_limit
 active A5 diagnostic retry 002: failed_no_image_repeated_quota_or_rate_limit
 state surface reconciliation: v7.244 completed_validated
 native Doubao syntax and sandbox hardening: v7.245 completed_validated
-recommended_next: v7.246_no_generation_quota_or_provider_path_diagnostic_readiness_gate
+no-generation quota/provider path diagnostic readiness: v7.246 completed_validated
+recommended_next: v7.247_provider_path_decision_package_gate
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
@@ -142,7 +144,7 @@ dependency/config/env modification: no
 ## Human Decisions Needed
 
 ```text
-Next action is v7.246_no_generation_quota_or_provider_path_diagnostic_readiness_gate. Human authorization is still needed before provider console/account review, any retry, raw plugin stderr/stdout review or capture, secret/config value review, push/tag/release/deploy, or repetitive low-value A4 gate.
+Next action is v7.247_provider_path_decision_package_gate. Human authorization is still needed before provider console/account review, any retry, raw plugin stderr/stdout review or capture, secret/config value review, push/tag/release/deploy, or repetitive low-value A4 gate.
 ```
 
 ## Exact Resume Prompt

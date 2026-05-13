@@ -18,8 +18,8 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.245: 6bc09de on master == origin/master.
-Current mainline state: v7.245 native Doubao syntax and sandbox hardening.
+Latest visible remote baseline before v7.246: f969d74 on master == origin/master.
+Current mainline state: v7.246 no-generation quota/provider path diagnostic readiness.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
 Current status: failed_no_image_repeated_quota_or_rate_limit.
@@ -27,7 +27,8 @@ same_provider_retry_allowed_now: false.
 A5_execution_allowed_now: false.
 provider_contact_allowed_now: false.
 Native Doubao static hardening: syntax/path sandbox/base URL/raw output/env allowlist/validator drift patched.
-Recommended next: v7.246_no_generation_quota_or_provider_path_diagnostic_readiness_gate.
+Diagnostic decision: continue_generation_stop_until_route_selection.
+Recommended next: v7.247_provider_path_decision_package_gate.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)
 ```
@@ -171,7 +172,7 @@ master tracking origin/master
 - 正式 release 发布仍需单独授权（tag 策略已定义：`docs/233_tag_and_version_strategy.md`）。
 - 后续更多真实图片生成需新 A5 授权包（Phase F 已消耗 2/2 calls，双图 accepted）。
 - version actions 需要匹配当前授权和 preflight；v7.224 只允许白名单 docs/status 文件的 commit + push。
-- Product image A5 path 已进入 repeated quota/rate-limit stop；Native Doubao static syntax / sandbox 已硬化，下一步只能做 v7.246 no-generation diagnostic readiness，不得继续同 provider/model/account path 即时重试。
+- Product image A5 path 已进入 repeated quota/rate-limit stop；Native Doubao static syntax / sandbox 已硬化；v7.246 决定继续停止生成，直到人类选择 quota resolution 或 provider path switch；下一步只能做 v7.247 paper-only provider path decision package。
 
 ## 阶段路线
 

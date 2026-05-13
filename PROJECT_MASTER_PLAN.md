@@ -8,14 +8,15 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_245: 6bc09de
-origin_master_before_v7_245: 6bc09de
+latest_visible_head_before_v7_246: f969d74
+origin_master_before_v7_246: f969d74
 status: failed_no_image_repeated_quota_or_rate_limit
-mode: A4 code/static hardening after active A5 diagnostic retries
+mode: A4 planning-only no-generation diagnostic readiness
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
 native_doubao_static_hardening: completed
+diagnostic_decision: continue_generation_stop_until_route_selection
 ```
 
 ## Product Direction
@@ -50,7 +51,10 @@ resolved or a different path is explicitly authorized. v7.244 reconciled state
 surfaces to that reality. v7.245 hardens the Native Doubao local execution
 surface statically: syntax check, prompt path containment, output containment,
 base URL validation, env allowlist, public result redaction, exact call budget,
-and validator drift.
+and validator drift. v7.246 makes the no-generation diagnostic readiness
+decision: generation remains stopped until a human provides sanitized quota
+resolution evidence or selects a different provider/model/account path for a
+future paper-only decision package.
 
 ## Active Boundaries
 
@@ -75,9 +79,8 @@ validation interpretation, staging, commit decisions, and next-task selection.
 ## Recommended Next
 
 Recommended next is
-`v7.246_no_generation_quota_or_provider_path_diagnostic_readiness_gate`: decide,
-without provider contact or generation, whether quota/rate-limit should be
-resolved externally, a different provider/model/account path should be prepared,
-or generation attempts should remain stopped. Do not call plugins, contact
-providers, generate images, save output, write memory, or perform remote/version
-actions as part of this recommendation.
+`v7.247_provider_path_decision_package_gate`: prepare a paper-only decision
+package for quota resolution evidence, alternate provider/model/account path, or
+continued stop. Do not call plugins, contact providers, generate images, save
+output, write memory, read secrets, or perform remote/version actions as part of
+this recommendation.

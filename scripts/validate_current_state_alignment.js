@@ -15,12 +15,12 @@ const files = [
   ".agent_board/CHECKPOINT.md",
   ".agent_board/BLOCKERS.md",
   ".agent_board/VALIDATION_LOG.md",
-  "docs/v7_245_native_doubao_syntax_and_sandbox_hardening.md",
+  "docs/v7_246_no_generation_quota_or_provider_path_diagnostic_readiness_gate.md",
 ];
 
 const requiredEverywhere = [
   "failed_no_image_repeated_quota_or_rate_limit",
-  "v7.246_no_generation_quota_or_provider_path_diagnostic_readiness_gate",
+  "v7.247_provider_path_decision_package_gate",
 ];
 
 const requiredCurrentSurfaces = [

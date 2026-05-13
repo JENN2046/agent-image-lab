@@ -9,30 +9,31 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab has statically hardened the Native Doubao local execution surface after repeated quota/rate-limit failure. The current status remains failed_no_image_repeated_quota_or_rate_limit, same-provider retry is blocked, and the next safe phase is no-generation diagnostic readiness planning.
+Agent Image Lab completed no-generation diagnostic readiness after repeated quota/rate-limit failure. The current decision is continue_generation_stop_until_route_selection; same-provider retry remains blocked until sanitized quota resolution evidence or a new provider/model/account path is selected.
 ```
 
 ## Current Phase
 
 ```text
-v7.245 Native Doubao Syntax And Sandbox Hardening
+v7.246 No-Generation Quota Or Provider Path Diagnostic Readiness
 status: failed_no_image_repeated_quota_or_rate_limit
-source_commit: 6bc09de
-source_message: docs: reconcile repeated Doubao quota failure state
+source_commit: f969d74
+source_message: fix: harden native doubao sandbox
 branch: master tracking origin/master
-Worktree: clean at v7.245 start
+Worktree: clean at v7.246 start
 worktree_start_clean: true
-origin_sync_start: local HEAD equals origin/master at 6bc09de
+origin_sync_start: local HEAD equals origin/master at f969d74
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
 native_doubao_static_hardening: completed
+diagnostic_decision: continue_generation_stop_until_route_selection
 ```
 
 ## Current Task
 
 ```text
-Patch Native Doubao syntax/sandbox/base URL/raw output/env allowlist/validator drift without provider contact, plugin call, image generation, runtime execution, or .env.local value read.
+Decide the no-generation path after repeated quota/rate-limit failure: external quota resolution, provider/model/account switch, or continued stop. Current decision is continued stop until route selection.
 ```
 
 ## Current Local Work State
@@ -79,7 +80,7 @@ MVP Aggregate Validator Calibration: completed_validated
 Product Image Authorization Draft Plan Ref Alignment: v7.241 completed_validated
 Product Image Authorization Activation Gap Review: v7.242 completed_validated
 Product Image Active Authorization Package Skeleton: v7.243 completed_validated
-Recommended next product task: v7.246_no_generation_quota_or_provider_path_diagnostic_readiness_gate
+Recommended next product task: v7.247_provider_path_decision_package_gate
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```
@@ -125,8 +126,8 @@ tag/release/deploy remain blocked without explicit authorization and preflight
 ## Current Options
 
 ```text
-recommended_next_after_active_execution_attempt: v7.246_no_generation_quota_or_provider_path_diagnostic_readiness_gate
-purpose: do not retry the same path immediately; decide no-generation readiness questions for quota resolution or provider path switching
+recommended_next_after_active_execution_attempt: v7.247_provider_path_decision_package_gate
+purpose: prepare a paper-only decision package for quota resolution evidence, alternate provider/model/account path, or continued stop
 not_allowed_as_next_by_default: A5, provider contact, runtime, plugin call, image generation, memory write, tag, release
 ```
 

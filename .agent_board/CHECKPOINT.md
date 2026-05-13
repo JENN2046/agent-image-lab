@@ -1,5 +1,30 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.246 No-Generation Quota Or Provider Path Diagnostic Readiness
+
+```text
+Status: completed_validated
+Source baseline: f969d74 == origin/master
+Purpose: decide no-generation path after repeated Doubao quota/rate-limit failure
+current_status: failed_no_image_repeated_quota_or_rate_limit
+native_doubao_static_hardening_completed: true
+diagnostic_decision: continue_generation_stop_until_route_selection
+same_provider_retry_allowed_now: false
+alternate_provider_path_selected: false
+external_quota_resolution_ready: false
+A5_execution_allowed_now: false
+provider_contact_allowed_now: false
+recommended_next: v7.247_provider_path_decision_package_gate
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+env_local_value_read_or_printed: false
+```
+
 ## v7.245 Native Doubao Syntax And Sandbox Hardening
 
 ```text
