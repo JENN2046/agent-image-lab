@@ -8,10 +8,10 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_259: 054cb21
-origin_master_before_v7_259: 054cb21
+latest_visible_head_before_v7_260: b536c93
+origin_master_before_v7_260: b536c93
 status: failed_no_image_repeated_quota_or_rate_limit
-mode: A4 product workflow fixture packet acceptance review
+mode: A4 product workflow paper chain quality stop
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
@@ -33,6 +33,7 @@ accepted_final_explicit_state_patched: true
 static_review_surface_quality_stop_reached: true
 product_workflow_fixture_packet_created: true
 product_workflow_fixture_packet_acceptance_passed: true
+product_workflow_paper_chain_quality_stop_reached: true
 ```
 
 ## Product Direction
@@ -106,6 +107,9 @@ package input, future authorization placeholder, review record, asset status,
 memory suitability decision, and delivery handoff.
 v7.259 reviews that fixture packet and accepts it as a synthetic non-executing
 paper-chain reference.
+v7.260 decides that the product image paper workflow has reached quality stop.
+Further automatic paper artifacts are blocked by default until a human selects
+the next product route.
 
 ## Active Boundaries
 
@@ -129,7 +133,6 @@ validation interpretation, staging, commit decisions, and next-task selection.
 
 ## Recommended Next
 
-Recommended next is `v7.260_product_workflow_paper_chain_quality_stop_gate`
-（产品图纸面链路质量停止门）. It should decide whether the product image
-paper workflow has reached quality stop or whether another non-executing product
-artifact is still justified.
+Recommended next is `v7.261_human_product_route_selection_request_gate`
+（人工产品路线选择请求门）. It should ask the human to choose the next route:
+continue A4 product artifacts, prepare a new A5 path, plan runtime, or pause.

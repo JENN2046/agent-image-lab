@@ -1,5 +1,31 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.260 Product Workflow Paper Chain Quality Stop Gate
+
+```text
+Status: completed_validated
+Source baseline: b536c93 == origin/master
+Purpose: decide whether the product image paper workflow has reached quality stop
+route_3_meaning_zh: 继续停止生成
+product_workflow_paper_chain_quality_stop_reached: true
+continue_A4_docs_only_by_default: false
+another_non_executing_artifact_needed_now: false
+human_route_selection_required_before_next_track: true
+recommended_next: v7.261_human_product_route_selection_request_gate
+recommended_next_zh: 人工产品路线选择请求门
+same_provider_retry_allowed_now: false
+A5_execution_allowed_now: false
+provider_contact_allowed_now: false
+route_selection_required_before_new_A5: true
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+runtime_execution: false
+DailyNote_write: false
+VCP_memory_write: false
+```
+
 ## v7.259 Product Workflow Fixture Packet Acceptance Review Gate
 
 ```text

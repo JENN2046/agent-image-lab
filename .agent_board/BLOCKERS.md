@@ -27,6 +27,7 @@
 22. v7.257 static Review Surface quality stop decision keeps generation stopped and recommends v7.258_product_workflow_fixture_packet_gate; same-track static Review Surface polish is stopped by default unless a new gap is proven.
 23. v7.258 product workflow fixture packet keeps generation stopped and recommends v7.259_product_workflow_fixture_packet_acceptance_review_gate; fixture remains synthetic and non-executing.
 24. v7.259 product workflow fixture packet acceptance review keeps generation stopped and recommends v7.260_product_workflow_paper_chain_quality_stop_gate; fixture review passed but does not authorize runtime or generation.
+25. v7.260 product workflow paper chain quality stop keeps generation stopped and recommends v7.261_human_product_route_selection_request_gate; further automatic artifact creation is blocked until human route selection.
 ```
 
 ## Current Mainline Quality Stop
