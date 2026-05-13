@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_282: 9542c0c
-origin_master_before_v7_282: 9542c0c
-status: fourth_real_output_reviewed_accepted_candidate_with_minor_retouch
-mode: A4 review documentation only
-phase_id: v7.282_human_review_of_fourth_real_outputs
+latest_visible_head_before_v7_283: 7970dec
+origin_master_before_v7_283: 7970dec
+status: candidate_acceptance_or_final_retouch_decision_gate
+mode: A4 decision gate
+phase_id: v7.283_candidate_acceptance_or_final_retouch_decision_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -127,15 +127,20 @@ v7.281_status: completed_success
 v7.281_output_images_count: 1
 v7.281_output_file: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
 v7.281_auto_retry_used: false
-v7.282_human_review_status: completed_locally_pending_checkpoint_commit
+v7.282_human_review_status: completed_remote_synced
 v7.282_asset_status: accepted_candidate_with_minor_retouch
 v7.282_accepted_candidate: true
 v7.282_commercial_delivery_ready: false
 v7.282_memory_suitability: deferred
 current_best_candidate: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+v7.283_options_presented: keep_v4_and_stop_generation | final_retouch_planning_no_generation | fifth_minimal_generation_trial
+v7.283_recommended_option: keep_v4_and_stop_generation
+v7.283_secondary_safe_option: final_retouch_planning_no_generation
+v7.283_fifth_trial_recommendation: low_to_medium_requires_new_explicit_human_authorization
+v7.283_human_decision_required_before_next_generation: true
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate
-recommended_next: v7.283_candidate_acceptance_or_final_retouch_decision_gate
+recommended_next: v7.284_accepted_candidate_evidence_package
 ```
 
 ## Product Direction
@@ -292,6 +297,6 @@ validation interpretation, staging, commit decisions, and next-task selection.
 ## Recommended Next
 
 Recommended next is
-`v7.283_candidate_acceptance_or_final_retouch_decision_gate`
-（人工决定停在当前 accepted candidate、做局部后期修图计划，或授权极小范围第五次试跑）. No retry,
-fifth generation, memory write, Batch 005, or production_candidate_002 may start automatically.
+`v7.284_accepted_candidate_evidence_package`
+（封存 v4 accepted candidate 证据包，不生成新图）. No retry, fifth generation,
+memory write, Batch 005, or production_candidate_002 may start automatically.

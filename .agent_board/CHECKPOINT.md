@@ -1,10 +1,45 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.283 Candidate Acceptance Or Final Retouch Decision Gate
+
+```text
+phase_id: v7.283_candidate_acceptance_or_final_retouch_decision_gate
+Status: completed_locally_pending_checkpoint_commit
+Source phase: v7.282_human_review_of_fourth_real_outputs
+Source commit: 7970dec11e6a6195259ebb51049f19ef13e98d2e
+Purpose: present human decision options for keeping v4, planning final retouch, or separately authorizing a fifth minimal trial
+current_best_candidate: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+asset_status: accepted_candidate_with_minor_retouch
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+options_presented: keep_v4_and_stop_generation | final_retouch_planning_no_generation | fifth_minimal_generation_trial
+recommended_option: keep_v4_and_stop_generation
+secondary_safe_option: final_retouch_planning_no_generation
+fifth_trial_recommendation: low_to_medium_requires_new_explicit_human_authorization
+human_decision_required_before_next_generation: true
+fifth_generation_started: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+retry: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+image_added_to_git: false
+accepted_samples_written: false
+production_candidate_002_started: false
+Batch_005_started: false
+recommended_next: v7.284_accepted_candidate_evidence_package
+recommended_next_zh: 封存 v4 accepted candidate 证据包，不生成新图
+next_phase_started: false
+```
+
 ## v7.282 Human Review Of Fourth Real Outputs
 
 ```text
 phase_id: v7.282_human_review_of_fourth_real_outputs
-Status: completed_locally_pending_checkpoint_commit
+Status: completed_remote_synced
 Source phase: v7.281_fourth_minimal_generation_trial_execution
 Purpose: record human review of the fourth real matte_ceramic_mug output
 reviewed_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg

@@ -9,24 +9,24 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab completed v7.282 human review of the fourth real output. The v4 image is accepted_candidate_with_minor_retouch and is now the current best candidate, but it is not final commercial delivery ready.
+Agent Image Lab is in v7.283 candidate acceptance or final retouch decision gate. v4 remains the current accepted candidate with minor retouch needs; the default recommendation is to keep v4 and stop generation, with final retouch planning as the secondary safe option.
 ```
 
 ## Current Phase
 
 ```text
-v7.282 Human Review Of Fourth Real Outputs
-phase_id: v7.282_human_review_of_fourth_real_outputs
-source_phase: v7.281_fourth_minimal_generation_trial_execution
+v7.283 Candidate Acceptance Or Final Retouch Decision Gate
+phase_id: v7.283_candidate_acceptance_or_final_retouch_decision_gate
+source_phase: v7.282_human_review_of_fourth_real_outputs
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
-status: fourth_real_output_reviewed_pending_checkpoint_commit
-source_commit: 9542c0c
-source_message: docs: authorize fourth minimal generation trial
+status: candidate_acceptance_options_presented_pending_checkpoint_commit
+source_commit: 7970dec
+source_message: docs: review fourth real ceramic mug output
 branch: master tracking origin/master
-Worktree: clean before v7.282 documentation patch; generated v7.281 output remains ignored under runs/
+Worktree: clean before v7.283 decision gate patch; generated v7.281 output remains ignored under runs/
 worktree_start_clean: true
-origin_sync_current: local HEAD equals origin/master at 9542c0c
+origin_sync_current: local HEAD equals origin/master at 7970dec
 ahead_behind: 0/0
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false; the single authorized v7.281 call has been consumed
@@ -190,7 +190,13 @@ v7.282_accepted_candidate: true
 v7.282_commercial_delivery_ready: false
 v7.282_memory_suitability: deferred
 current_best_candidate: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
-v7.283_recommended_next: v7.283_candidate_acceptance_or_final_retouch_decision_gate
+v7.283_status: in_progress_decision_gate
+v7.283_options_presented: keep_v4_and_stop_generation | final_retouch_planning_no_generation | fifth_minimal_generation_trial
+v7.283_recommended_option: keep_v4_and_stop_generation
+v7.283_secondary_safe_option: final_retouch_planning_no_generation
+v7.283_fifth_trial_recommendation: low_to_medium_requires_new_explicit_human_authorization
+v7.283_human_decision_required_before_next_generation: true
+v7.284_recommended_next: v7.284_accepted_candidate_evidence_package
 v7.274_stopped_after_generation: true
 human_review_required_now: true
 recommended_next_after_v7_274: v7.275_human_review_of_second_real_outputs
@@ -203,18 +209,18 @@ v7.275_memory_write_allowed_without_separate_authorization: false
 ## Current Task
 
 ```text
-v7.282 human review completed locally. v4 is the current best accepted candidate with minor retouch needs; no fifth generation is authorized.
+v7.283 decision gate presents three human options: keep v4 and stop generation, plan final retouch with no new generation, or separately authorize a fifth minimal trial. Recommendation favors keep_v4_and_stop_generation.
 ```
 
 ## Current Local Work State
 
 ```text
-Worktree: dirty with v7.282 human review documentation and state-surface updates.
+Worktree: dirty with v7.283 decision gate documentation and state-surface updates.
 active_workers: 0
 execution_mode: Single-Window 4-Agent Compact Autopilot
-commander_role: keep this correction inside .agent_board facts and stop before commit/push
+commander_role: keep this decision gate inside A4 docs and stop before any new generation or remote push
 architect_role: preserve no-generation and no-memory boundaries
-worker_role: apply only the v7.282 review documentation and board reality correction
+worker_role: apply only the v7.283 decision options and board reality correction
 reviewer_role: inspect diff, run allowed local checks, confirm no new provider/plugin/image/memory behavior during this patch, and close out
 validation_status: completed_validated_pending_guarded_local_commit
 ```
@@ -263,7 +269,7 @@ Prompt revision plan from first real output: v7.271 completed_pending_validation
 Prompt v2 static review: v7.272 passed.
 Second minimal generation authorization: v7.273 completed, committed, pushed, and synced at d1a7ac8.
 Second minimal generation trial: v7.274 completed_success with one output and no retry.
-Recommended next product task: v7.283_candidate_acceptance_or_final_retouch_decision_gate（人工决定停在当前 accepted candidate、做局部后期修图计划，或授权极小范围第五次试跑）
+Recommended next product task: v7.284_accepted_candidate_evidence_package（封存 v4 accepted candidate 证据包，不生成新图）
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```

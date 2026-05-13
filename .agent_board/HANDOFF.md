@@ -3,15 +3,15 @@
 ## Handoff Summary
 
 ```text
-Status: v7.282 human review of fourth real output completed locally; v4 is now the current best accepted candidate with minor retouch needs.
-Reason: v7.281 generated one v4 output, and v7.282 reviewed it as accepted_candidate_with_minor_retouch while keeping commercial_delivery_ready=false.
+Status: v7.283 candidate acceptance or final retouch decision gate in progress locally; v4 remains the current best accepted candidate with minor retouch needs.
+Reason: v7.282 was committed and pushed at 7970dec, and v7.283 now presents three human options without authorizing fifth generation.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
 Latest visible head before v7.273: 6f95b53 == origin/master
-Current synced HEAD before v7.282 local patch: 9542c0c docs: authorize fourth minimal generation trial
+Current synced HEAD before v7.283 local patch: 7970dec docs: review fourth real ceramic mug output
 ahead_behind: 0/0
-Worktree: clean before v7.282 documentation patch; v7.281 output remains ignored under runs/
-Current status: fourth_real_output_reviewed_pending_checkpoint_commit
+Worktree: clean before v7.283 decision gate patch; v7.281 output remains ignored under runs/
+Current status: candidate_acceptance_options_presented_pending_checkpoint_commit
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false after v7.282; the single authorized v7.281 call has been consumed
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate
@@ -138,6 +138,11 @@ v7.282_accepted_candidate: true
 v7.282_commercial_delivery_ready: false
 v7.282_memory_suitability: deferred
 current_best_candidate: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+v7.283_options_presented: keep_v4_and_stop_generation | final_retouch_planning_no_generation | fifth_minimal_generation_trial
+v7.283_recommended_option: keep_v4_and_stop_generation
+v7.283_secondary_safe_option: final_retouch_planning_no_generation
+v7.283_fifth_trial_recommendation: low_to_medium_requires_new_explicit_human_authorization
+v7.283_human_decision_required_before_next_generation: true
 provider_contact_after_v7_274: false
 image_generation_after_v7_274: false
 human_review_required_now: true
@@ -259,7 +264,7 @@ prompt v2 static review: v7.272 passed
 second minimal generation authorization: v7.273 completed_committed_pushed_synced
 current_synced_head: d1a7ac8 docs: authorize second minimal generation trial
 ahead_behind: 0/0
-worktree: dirty with v7.282 review documentation and state-surface updates
+worktree: dirty with v7.283 decision gate documentation and state-surface updates
 v7.274_status: completed_success
 v7.274_output_images_count: 1
 v7.274_output_file: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
@@ -277,8 +282,8 @@ A5_execution_allowed_now: false; the single authorized v7.281 call has been cons
 provider_contact_allowed_now: false; the single authorized v7.281 provider contact has been consumed
 
 continue_A4_docs_only_by_default: false
-recommended_next: v7.283_candidate_acceptance_or_final_retouch_decision_gate
-recommended_next_zh: 人工决定停在当前 accepted candidate、做局部后期修图计划，或授权极小范围第五次试跑
+recommended_next: v7.284_accepted_candidate_evidence_package
+recommended_next_zh: 封存 v4 accepted candidate 证据包，不生成新图
 auto_execution_allowed_for_next: false
 v7.283_purpose: candidate acceptance / final retouch / possible fifth-trial decision gate
 v7.283_image_generation_allowed: false

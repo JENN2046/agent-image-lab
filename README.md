@@ -7,9 +7,9 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.282: 9542c0c on master == origin/master.
-Current mainline state: v7.282 human review of fourth real outputs（第四次真实输出人工审片）.
-Current phase id: v7.282_human_review_of_fourth_real_outputs.
+Latest visible remote baseline before v7.283: 7970dec on master == origin/master.
+Current mainline state: v7.283 candidate acceptance or final retouch decision gate（候选保留 / 后期修图 / 第五次试跑人工决策门）.
+Current phase id: v7.283_candidate_acceptance_or_final_retouch_decision_gate.
 Prior human route selection gate: v7.261_human_product_route_selection_request_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
@@ -113,17 +113,22 @@ v7.281_status: completed_success.
 v7.281_output_images_count: 1.
 v7.281_output_file: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg.
 v7.281_auto_retry_used: false.
-v7.282_human_review_status: completed_locally_pending_checkpoint_commit.
+v7.282_human_review_status: completed_remote_synced.
 v7.282_asset_status: accepted_candidate_with_minor_retouch.
 v7.282_accepted_candidate: true.
 v7.282_commercial_delivery_ready: false.
 v7.282_memory_suitability: deferred.
 current_best_candidate: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg.
+v7.283_options_presented: keep_v4_and_stop_generation | final_retouch_planning_no_generation | fifth_minimal_generation_trial.
+v7.283_recommended_option: keep_v4_and_stop_generation.
+v7.283_secondary_safe_option: final_retouch_planning_no_generation.
+v7.283_fifth_trial_recommendation: low_to_medium_requires_new_explicit_human_authorization.
+v7.283_human_decision_required_before_next_generation: true.
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed.
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized now: Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, retry, fifth generation, tag, release, deploy.
-Recommended next: v7.283_candidate_acceptance_or_final_retouch_decision_gate（人工决定停在当前 accepted candidate、做局部后期修图计划，或授权极小范围第五次试跑）.
+Recommended next: v7.284_accepted_candidate_evidence_package（封存 v4 accepted candidate 证据包，不生成新图）.
 auto_execution_allowed_for_next: false.
 ```
 

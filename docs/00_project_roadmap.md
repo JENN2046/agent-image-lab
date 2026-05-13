@@ -18,9 +18,9 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.282: 9542c0c on master == origin/master.
-Current mainline state: v7.282 human review of fourth real outputs（第四次真实输出人工审片）.
-Current phase id: v7.282_human_review_of_fourth_real_outputs.
+Latest visible remote baseline before v7.283: 7970dec on master == origin/master.
+Current mainline state: v7.283 candidate acceptance or final retouch decision gate（候选保留 / 后期修图 / 第五次试跑人工决策门）.
+Current phase id: v7.283_candidate_acceptance_or_final_retouch_decision_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
@@ -123,15 +123,20 @@ v7.281_status: completed_success.
 v7.281_output_images_count: 1.
 v7.281_output_file: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg.
 v7.281_auto_retry_used: false.
-v7.282_human_review_status: completed_locally_pending_checkpoint_commit.
+v7.282_human_review_status: completed_remote_synced.
 v7.282_asset_status: accepted_candidate_with_minor_retouch.
 v7.282_accepted_candidate: true.
 v7.282_commercial_delivery_ready: false.
 v7.282_memory_suitability: deferred.
 current_best_candidate: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg.
+v7.283_options_presented: keep_v4_and_stop_generation | final_retouch_planning_no_generation | fifth_minimal_generation_trial.
+v7.283_recommended_option: keep_v4_and_stop_generation.
+v7.283_secondary_safe_option: final_retouch_planning_no_generation.
+v7.283_fifth_trial_recommendation: low_to_medium_requires_new_explicit_human_authorization.
+v7.283_human_decision_required_before_next_generation: true.
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed.
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate.
-Recommended next: v7.283_candidate_acceptance_or_final_retouch_decision_gate（人工决定停在当前 accepted candidate、做局部后期修图计划，或授权极小范围第五次试跑）.
+Recommended next: v7.284_accepted_candidate_evidence_package（封存 v4 accepted candidate 证据包，不生成新图）.
 auto_execution_allowed_for_next: false.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)
@@ -440,8 +445,9 @@ daily_note_called: false
 17. v7.280_prompt_v4_handle_geometry_refinement_authorization_gate 已创建 `prompts/image_generation/product_still_life_matte_ceramic_mug_v4.yaml` 并记录第四次最小真实生成试跑授权边界。
 18. v7.281_fourth_minimal_generation_trial_execution 已成功生成 1 张 v4 输出并停止，图片未加入 Git。
 19. v7.282_human_review_of_fourth_real_outputs 已记录人工审片：accepted_candidate_with_minor_retouch、accepted_candidate=true、commercial_delivery_ready=false、memory_suitability=deferred，当前最佳候选为 v4。
-20. Batch 005、production_candidate_002、memory_write_path、DailyNote/VCP memory、retry、第五次生成、tag/release/deploy 仍未授权。
-21. recommended next: v7.283_candidate_acceptance_or_final_retouch_decision_gate（人工决定停在当前 accepted candidate、做局部后期修图计划，或授权极小范围第五次试跑）。
+20. v7.283_candidate_acceptance_or_final_retouch_decision_gate 已给出三个选项：保留 v4 并停止生成、只做 final retouch planning、或重新授权第五次极小试跑；默认推荐保留 v4 并停止生成。
+21. Batch 005、production_candidate_002、memory_write_path、DailyNote/VCP memory、retry、第五次生成、tag/release/deploy 仍未授权。
+22. recommended next: v7.284_accepted_candidate_evidence_package（封存 v4 accepted candidate 证据包，不生成新图）。
 
 ## 永久安全门
 
