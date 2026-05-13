@@ -8,16 +8,17 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_247: 1c3edeb
-origin_master_before_v7_247: 1c3edeb
+latest_visible_head_before_v7_248: 5564ad9
+origin_master_before_v7_248: 5564ad9
 status: failed_no_image_repeated_quota_or_rate_limit
-mode: A4 planning-only provider path decision package
+mode: A4 planning-only generation stop closeout and route selection request
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
 native_doubao_static_hardening: completed
 diagnostic_decision: continue_generation_stop_until_route_selection
 selected_route_now: ROUTE-3-CONTINUED-STOP
+route_selection_required_before_new_A5: true
 ```
 
 ## Product Direction
@@ -57,7 +58,9 @@ decision: generation remains stopped until a human provides sanitized quota
 resolution evidence or selects a different provider/model/account path for a
 future paper-only decision package. v7.247 defines the paper-only decision
 package: Route 1 external quota resolution, Route 2 provider/model/account
-switch, and Route 3 continued stop. Route 3 is selected now.
+switch, and Route 3 continued stop. Route 3 is selected now. v7.248 closes
+the current stop state and requests an explicit human route selection before
+any new A5, provider contact, plugin call, image generation, or runtime action.
 
 ## Active Boundaries
 
@@ -81,8 +84,9 @@ validation interpretation, staging, commit decisions, and next-task selection.
 
 ## Recommended Next
 
-Recommended next is
-`v7.248_generation_stop_closeout_or_route_selection_request_gate`: record or ask
-for the human route decision. Do not call plugins, contact providers, generate
-images, save output, write memory, read secrets, or perform remote/version
-actions as part of this recommendation.
+Recommended next is human route selection. The project should not continue
+automatic A4 gate creation around the same failure unless it produces new
+evidence. The next safe forward move is either Route 1 external quota
+resolution evidence or Route 2 provider/model/account switch planning, each
+requiring explicit human selection and a fresh authorization path before A5.
+Marker: human_route_selection_required_before_any_new_A5.

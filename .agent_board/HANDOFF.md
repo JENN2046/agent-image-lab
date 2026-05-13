@@ -3,7 +3,7 @@
 ## Handoff Summary
 
 ```text
-Status: active A5 diagnostic retry 002 failed_no_image_repeated_quota_or_rate_limit.
+Status: generation stop closeout recorded after repeated quota/rate-limit failure.
 Reason: A second newly approved DoubaoGen retry/diagnostic call was consumed once; the plugin returned error again, sanitized category is still quota_or_rate_limit, and no image was generated.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
@@ -22,7 +22,7 @@ Current operating style: Single-Window 4-Agent Compact Autopilot
 ## Current Mainline Reality
 
 ```text
-latest_completed_remote_baseline_before_v7_243: 03fd398
+latest_completed_remote_baseline_before_v7_248: 5564ad9
 latest_completed_gate_before_v7_243: v7.242_product_image_authorization_activation_gap_review_gate
 current_gate: active_a5_execution_attempt_product_image_authorization
 current_gate_status: failed_no_image_repeated_quota_or_rate_limit
@@ -66,7 +66,9 @@ state surface reconciliation: v7.244 completed_validated
 native Doubao syntax and sandbox hardening: v7.245 completed_validated
 no-generation quota/provider path diagnostic readiness: v7.246 completed_validated
 provider path decision package: v7.247 completed_validated
-recommended_next: v7.248_generation_stop_closeout_or_route_selection_request_gate
+generation stop closeout / route selection request: v7.248 completed_validated
+recommended_next: human_route_selection_required_before_any_new_A5
+route_selection_required_before_new_A5: true
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
@@ -146,7 +148,7 @@ dependency/config/env modification: no
 ## Human Decisions Needed
 
 ```text
-Next action is v7.248_generation_stop_closeout_or_route_selection_request_gate. Human authorization is still needed before provider console/account review, any retry, raw plugin stderr/stdout review or capture, secret/config value review, push/tag/release/deploy, or repetitive low-value A4 gate.
+Next action is human route selection. Human authorization is still needed before provider console/account review, any retry, raw plugin stderr/stdout review or capture, secret/config value review, provider/model/account switch, push/tag/release/deploy, or repetitive low-value A4 gate.
 ```
 
 ## Exact Resume Prompt

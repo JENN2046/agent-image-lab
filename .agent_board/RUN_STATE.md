@@ -9,16 +9,16 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab completed the provider path decision package after repeated quota/rate-limit failure. Route 3 continued stop is selected now; Route 1 quota resolution and Route 2 provider/model/account switch remain selectable later only by human decision.
+Agent Image Lab completed the generation stop closeout after repeated quota/rate-limit failure. Route 3 continued stop remains selected now; Route 1 quota resolution and Route 2 provider/model/account switch require explicit human route selection before any new A5 path.
 ```
 
 ## Current Phase
 
 ```text
-v7.247 Provider Path Decision Package Gate
+v7.248 Generation Stop Closeout Or Route Selection Request Gate
 status: failed_no_image_repeated_quota_or_rate_limit
-source_commit: 1c3edeb
-source_message: docs: add no-generation diagnostic readiness gate
+source_commit: 5564ad9
+source_message: docs: add provider path decision package
 branch: master tracking origin/master
 Worktree: clean at v7.247 start
 worktree_start_clean: true
@@ -29,12 +29,13 @@ provider_contact_allowed_now: false
 native_doubao_static_hardening: completed
 diagnostic_decision: continue_generation_stop_until_route_selection
 selected_route_now: ROUTE-3-CONTINUED-STOP
+route_selection_required_before_new_A5: true
 ```
 
 ## Current Task
 
 ```text
-Define the paper-only provider path decision package: Route 1 external quota resolution, Route 2 provider/model/account switch, Route 3 continued stop. Current selected route is continued stop.
+Record generation stop closeout and request an explicit human route selection before any new A5/provider path can be prepared.
 ```
 
 ## Current Local Work State
@@ -81,7 +82,7 @@ MVP Aggregate Validator Calibration: completed_validated
 Product Image Authorization Draft Plan Ref Alignment: v7.241 completed_validated
 Product Image Authorization Activation Gap Review: v7.242 completed_validated
 Product Image Active Authorization Package Skeleton: v7.243 completed_validated
-Recommended next product task: v7.248_generation_stop_closeout_or_route_selection_request_gate
+Recommended next product task: human_route_selection_required_before_any_new_A5
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```
@@ -127,8 +128,8 @@ tag/release/deploy remain blocked without explicit authorization and preflight
 ## Current Options
 
 ```text
-recommended_next_after_active_execution_attempt: v7.248_generation_stop_closeout_or_route_selection_request_gate
-purpose: record or request the human route decision; keep generation stopped unless a later active authorization exists
+recommended_next_after_active_execution_attempt: human_route_selection_required_before_any_new_A5
+purpose: choose Route 1 quota resolution, Route 2 provider/model/account switch, or Route 3 continued stop before any new generation path
 not_allowed_as_next_by_default: A5, provider contact, runtime, plugin call, image generation, memory write, tag, release
 ```
 

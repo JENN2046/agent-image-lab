@@ -1,5 +1,28 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.248 Generation Stop Closeout Or Route Selection Request Gate
+
+```text
+Status: completed_validated
+Source baseline: 5564ad9 == origin/master
+Purpose: close the repeated quota/rate-limit generation stop and request explicit human route selection
+current_status: failed_no_image_repeated_quota_or_rate_limit
+selected_route_now: ROUTE-3-CONTINUED-STOP
+route_selection_required_before_new_A5: true
+same_provider_retry_allowed_now: false
+A5_execution_allowed_now: false
+provider_contact_allowed_now: false
+recommended_next: human_route_selection_required_before_any_new_A5
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+env_local_value_read_or_printed: false
+```
+
 ## v7.247 Provider Path Decision Package Gate
 
 ```text

@@ -15,18 +15,19 @@ const files = [
   ".agent_board/CHECKPOINT.md",
   ".agent_board/BLOCKERS.md",
   ".agent_board/VALIDATION_LOG.md",
-  "docs/v7_247_provider_path_decision_package_gate.md",
+  "docs/v7_248_generation_stop_closeout_or_route_selection_request_gate.md",
 ];
 
 const requiredEverywhere = [
   "failed_no_image_repeated_quota_or_rate_limit",
-  "v7.248_generation_stop_closeout_or_route_selection_request_gate",
+  "human_route_selection_required_before_any_new_A5",
 ];
 
 const requiredCurrentSurfaces = [
   "same_provider_retry_allowed_now: false",
   "A5_execution_allowed_now: false",
   "provider_contact_allowed_now: false",
+  "route_selection_required_before_new_A5: true",
 ];
 
 function readRepoFile(relPath) {

@@ -17,6 +17,8 @@ provider_contact_allowed_now: false.
 Native Doubao static hardening: completed.
 Diagnostic decision: continue_generation_stop_until_route_selection.
 Provider path decision: ROUTE-3-CONTINUED-STOP selected now.
+Generation stop closeout: v7.248 completed; human route selection is required before any new A5.
+route_selection_required_before_new_A5: true.
 ```
 
 ---
@@ -67,13 +69,13 @@ none
 ### todo
 
 ```text
-1. v7.248_generation_stop_closeout_or_route_selection_request_gate.
+none
 ```
 
 ### recommended_next_after_v7_243
 
 ```text
-v7.248_generation_stop_closeout_or_route_selection_request_gate — record or request the human route decision. No provider contact, plugin call, or generation.
+human_route_selection_required_before_any_new_A5 — choose Route 1 quota resolution, Route 2 provider/model/account switch, or Route 3 continued stop. No provider contact, plugin call, or generation is authorized by default.
 ```
 
 ### done
@@ -129,6 +131,7 @@ v7.248_generation_stop_closeout_or_route_selection_request_gate — record or re
 48. v7.245 Native Doubao syntax and sandbox hardening patched path containment, base URL gate, env allowlist, public result redaction, exact call budget, and validator drift without generation.
 49. v7.246 no-generation diagnostic readiness selected continue_generation_stop_until_route_selection and recommended v7.247_provider_path_decision_package_gate.
 50. v7.247 provider path decision package defined Route 1 external quota resolution, Route 2 provider/model/account switch, and Route 3 continued stop; selected Route 3 for now.
+51. v7.248 generation stop closeout recorded Route 3 continued stop and requested explicit human route selection before any new A5 path.
 ```
 
 ### blocked
@@ -163,6 +166,7 @@ v7.248_generation_stop_closeout_or_route_selection_request_gate — record or re
 27. v7.245 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/real manifest read/.env.local value read/CDP/bridge/MCP/tag/release/deploy; same provider retry remains blocked.
 28. v7.246 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/real manifest read/.env.local value read/raw provider dashboard capture/CDP/bridge/MCP/tag/release/deploy; same provider retry remains blocked.
 29. v7.247 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/real manifest read/.env.local value read/raw provider dashboard capture/CDP/bridge/MCP/tag/release/deploy; selected route remains continued stop.
+30. v7.248 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/real manifest read/.env.local value read/raw provider dashboard capture/CDP/bridge/MCP/tag/release/deploy; human route selection is required before any new A5.
 ```
 
 ### skipped

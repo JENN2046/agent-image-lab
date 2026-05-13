@@ -1,5 +1,44 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260513-V7-248-GENERATION-STOP-CLOSEOUT-ROUTE-SELECTION
+
+Task:
+
+```text
+Record generation stop closeout after v7.247 and request explicit human route selection before any new A5 path. Do not run A5, contact provider, call plugin, generate image, run generation runner, read .env.local values, write memory, or capture raw provider dashboard output.
+```
+
+Result:
+
+```text
+completed_validated
+```
+
+Decision:
+
+```text
+selected_route_now: ROUTE-3-CONTINUED-STOP
+route_selection_required_before_new_A5: true
+same_provider_retry_allowed_now: false
+A5_execution_allowed_now: false
+provider_contact_allowed_now: false
+```
+
+Validation:
+
+```text
+git diff --check: passed
+node --check scripts/validate_current_state_alignment.js: passed
+node scripts/validate_current_state_alignment.js: passed
+node scripts/validate_agent_board_state.js: passed
+```
+
+Recommended next:
+
+```text
+human_route_selection_required_before_any_new_A5
+```
+
 ## VALIDATION-20260513-V7-247-PROVIDER-PATH-DECISION-PACKAGE
 
 Task:

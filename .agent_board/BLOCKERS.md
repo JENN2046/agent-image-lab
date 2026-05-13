@@ -13,7 +13,9 @@
 8. current_status: failed_no_image_repeated_quota_or_rate_limit.
 9. Native Doubao execution surface has completed v7.245_native_doubao_syntax_and_sandbox_hardening, but same provider/model/account retry remains blocked until v7.246_no_generation_quota_or_provider_path_diagnostic_readiness_gate resolves the path decision.
 10. v7.246 diagnostic decision is continue_generation_stop_until_route_selection; next paper-only step is v7.247_provider_path_decision_package_gate.
-11. v7.247 provider path decision selected ROUTE-3-CONTINUED-STOP now; next step is v7.248_generation_stop_closeout_or_route_selection_request_gate.
+11. v7.247 provider path decision selected ROUTE-3-CONTINUED-STOP now.
+12. v7.248 generation stop closeout is complete; any new A5 path now requires explicit human route selection: Route 1 quota resolution, Route 2 provider/model/account switch, or Route 3 continued stop.
+13. recommended_next: human_route_selection_required_before_any_new_A5.
 ```
 
 ## Current Mainline Quality Stop
