@@ -11,7 +11,7 @@
 6. The newly approved diagnostic retry was also consumed once and failed with sanitized_error_category=quota_or_rate_limit. Immediate further retries are blocked unless provider quota/rate-limit conditions are resolved or a new explicit generation path is approved.
 7. A second newly approved diagnostic retry was consumed once and again failed with sanitized_error_category=quota_or_rate_limit. Continuing the same provider/model/account path without resolving quota or switching path is blocked.
 8. current_status: failed_no_image_repeated_quota_or_rate_limit.
-9. Native Doubao execution surface requires v7.245_native_doubao_syntax_and_sandbox_hardening before any future A5 retry decision.
+9. Native Doubao execution surface has completed v7.245_native_doubao_syntax_and_sandbox_hardening, but same provider/model/account retry remains blocked until v7.246_no_generation_quota_or_provider_path_diagnostic_readiness_gate resolves the path decision.
 ```
 
 ## Current Mainline Quality Stop

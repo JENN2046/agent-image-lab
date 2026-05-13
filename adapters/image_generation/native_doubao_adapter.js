@@ -18,11 +18,12 @@ async function run(options) {
 
   // 输出目录校验
   var outDir = options.outputDirectory || "";
-  if (outDir.indexOf("runs/real_generation/") !== 0) {
+  var safeOutput = plugin.resolveSafeOutputDirectory(outDir);
+  if (!safeOutput.valid) {
     return {
       status: "BLOCKED_OUTPUT_DIRECTORY",
       plugin_id: "NativeDoubaoImage",
-      error: "outputDirectory must be under runs/real_generation/",
+      error: safeOutput.error,
     };
   }
 
@@ -43,7 +44,7 @@ async function run(options) {
   // 调用 realGenerate（async）
   var result = await plugin.realGenerate(options);
   if (result.status === "BLOCKED_A5_REQUIRED" || result.status.indexOf("BLOCKED") === 0 || result.status === "FAILED") {
-    return result;
+    return plugin.normalizeResult(result);
   }
 
   // 模型 mismatch 检测（冗余检查）
@@ -61,8 +62,8 @@ async function run(options) {
   }
 
   // 图片写入
-  if (result.images && result.images.length > 0) {
-    var writeResult = await plugin.writeImageOutput(result, options.outputDirectory);
+  if (result._raw_images && result._raw_images.length > 0) {
+    var writeResult = await plugin.writeImageOutput({ images: result._raw_images }, options.outputDirectory);
     if (!writeResult.success) {
       return {
         status: "BLOCKED_WRITE_FAILED",
@@ -70,9 +71,10 @@ async function run(options) {
         error: writeResult.error,
       };
     }
+    result.files_written_count = writeResult.files.length;
   }
 
-  return result;
+  return plugin.normalizeResult(result);
 }
 
 module.exports = { run: run };

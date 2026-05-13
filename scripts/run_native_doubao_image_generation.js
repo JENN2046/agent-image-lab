@@ -10,8 +10,30 @@ const adapter = require("../adapters/image_generation/native_doubao_adapter.js")
 
 // ── Config ──
 const ENV_LOCAL_PATH = path.join(root, ".env.local");
+const ALLOWED_ENV_KEYS = [
+  "DOUBAO_IMAGE_API_BASE_URL",
+  "DOUBAO_IMAGE_API_KEY",
+  "DOUBAO_IMAGE_MODEL",
+  "DOUBAO_IMAGE_TIMEOUT_SECONDS",
+  "DOUBAO_IMAGE_DRY_RUN_DEFAULT",
+];
 
-function loadDotEnv(filePath) {
+function readEnvFieldNames(filePath) {
+  const fields = new Set();
+  if (!fs.existsSync(filePath)) return fields;
+  const lines = fs.readFileSync(filePath, "utf8").split("\n");
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+    const eqIdx = trimmed.indexOf("=");
+    if (eqIdx === -1) continue;
+    fields.add(trimmed.slice(0, eqIdx).trim());
+  }
+  return fields;
+}
+
+function loadDotEnv(filePath, allowedKeys) {
+  allowedKeys = allowedKeys || ALLOWED_ENV_KEYS;
   const env = {};
   if (!fs.existsSync(filePath)) return env;
   const lines = fs.readFileSync(filePath, "utf8").split("\n");
@@ -21,6 +43,7 @@ function loadDotEnv(filePath) {
     const eqIdx = trimmed.indexOf("=");
     if (eqIdx === -1) continue;
     const key = trimmed.slice(0, eqIdx).trim();
+    if (!allowedKeys.includes(key)) continue;
     const val = trimmed.slice(eqIdx + 1).trim();
     env[key] = val;
   }
@@ -29,7 +52,7 @@ function loadDotEnv(filePath) {
 
 function loadEnvLocal() {
   if (!fs.existsSync(ENV_LOCAL_PATH)) return { loaded: false, error: ".env.local not found" };
-  const env = loadDotEnv(ENV_LOCAL_PATH);
+  const env = loadDotEnv(ENV_LOCAL_PATH, ALLOWED_ENV_KEYS);
   if (!env.DOUBAO_IMAGE_API_KEY) return { loaded: false, error: "DOUBAO_IMAGE_API_KEY missing in .env.local" };
   if (!env.DOUBAO_IMAGE_API_BASE_URL) return { loaded: false, error: "DOUBAO_IMAGE_API_BASE_URL missing in .env.local" };
   for (const key of Object.keys(env)) process.env[key] = env[key];
@@ -39,17 +62,11 @@ function loadEnvLocal() {
 function preflightCheck(options) {
   const issues = [];
 
-  // Check .env.local field presence (no value output)
-  const envLocal = loadDotEnv(ENV_LOCAL_PATH);
-  const requiredFields = [
-    "DOUBAO_IMAGE_API_BASE_URL",
-    "DOUBAO_IMAGE_API_KEY",
-    "DOUBAO_IMAGE_MODEL",
-    "DOUBAO_IMAGE_TIMEOUT_SECONDS",
-    "DOUBAO_IMAGE_DRY_RUN_DEFAULT",
-  ];
+  // Check .env.local field names only (no value retention or output)
+  const envFields = readEnvFieldNames(ENV_LOCAL_PATH);
+  const requiredFields = ALLOWED_ENV_KEYS;
   for (const field of requiredFields) {
-    if (!(field in envLocal)) {
+    if (!envFields.has(field)) {
       issues.push("missing_env_field: " + field);
     }
   }
@@ -64,7 +81,7 @@ function preflightCheck(options) {
   return {
     preflight_passed: issues.length === 0,
     issues: issues,
-    env_fields_present: requiredFields.filter(function (f) { return f in envLocal; }).length,
+    env_fields_present: requiredFields.filter(function (f) { return envFields.has(f); }).length,
     env_fields_total: requiredFields.length,
     env_file_exists: fs.existsSync(ENV_LOCAL_PATH),
     env_file_ignored: true, // confirmed via .gitignore
@@ -118,13 +135,30 @@ async function run(options) {
   };
 
   const result = await adapter.run(adapterOptions);
+  const publicAdapterResult = {
+    status: result.status,
+    plugin_id: result.plugin_id,
+    command: result.command || "generate",
+    api_call_performed: result.api_call_performed === true,
+    image_created: result.image_created === true,
+    image_count: result.image_count || 0,
+    model_requested: result.model_requested || null,
+    model_reported: result.model_reported || null,
+    model_matches: result.model_matches === true,
+    http_status: result.http_status || null,
+    files_written_count: result.files_written_count || 0,
+    error_category: result.error_category || null,
+    error: result.error || null,
+    raw_image_payload_returned: false,
+    provider_url_returned: false,
+  };
 
   return {
     status: result.status,
     runner: "run_native_doubao_image_generation",
     plugin_id: "NativeDoubaoImage",
     preflight: preflight,
-    adapter_result: result,
+    adapter_result: publicAdapterResult,
     api_call_performed: result.api_call_performed === true,
     image_created: result.image_created === true,
     api_key_value_printed: false,
@@ -155,4 +189,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { run: run, preflightCheck: preflightCheck };
+module.exports = { run: run, preflightCheck: preflightCheck, loadDotEnv: loadDotEnv, readEnvFieldNames: readEnvFieldNames };

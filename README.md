@@ -7,17 +7,18 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline: c37bf46 on master == origin/master.
-Current mainline state: v7.244 state surface reconciliation after repeated Doubao quota failure.
+Latest visible remote baseline before v7.245: 6bc09de on master == origin/master.
+Current mainline state: v7.245 native Doubao syntax and sandbox hardening.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
 Current status: failed_no_image_repeated_quota_or_rate_limit.
 same_provider_retry_allowed_now: false.
 A5_execution_allowed_now: false.
 provider_contact_allowed_now: false.
+Native Doubao static hardening: syntax/path sandbox/base URL/raw output/env allowlist/validator drift patched.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized: A5, provider contact, runtime, plugin call, image generation, DailyNote write, VCP memory write, real manifest read, tag, release, deploy.
-Recommended next: v7.245_native_doubao_syntax_and_sandbox_hardening.
+Recommended next: v7.246_no_generation_quota_or_provider_path_diagnostic_readiness_gate.
 ```
 
 历史状态脉络：

@@ -1,5 +1,54 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260513-V7-245-NATIVE-DOUBAO-SYNTAX-SANDBOX-HARDENING
+
+Task:
+
+```text
+Patch Native Doubao syntax and sandbox issues without A5 execution, provider contact, plugin call, image generation, memory write, runtime execution, or .env.local value read.
+```
+
+Commands run:
+
+```text
+node --check plugins/image_generation/native_doubao_image/native_doubao_image.js
+node --check adapters/image_generation/native_doubao_adapter.js
+node --check scripts/run_native_doubao_image_generation.js
+node --check scripts/validate_native_doubao_sandbox.js
+node scripts/validate_native_doubao_sandbox.js
+node scripts/validate_v7_15_native_doubao_image_plugin.js
+node scripts/validate_v7_19_native_doubao_a5_runner_preflight.js
+node scripts/validate_v7_20_native_doubao_real_runner_implementation.js
+node --check scripts/validate_current_state_alignment.js
+node scripts/validate_current_state_alignment.js
+node scripts/validate_agent_board_state.js
+git diff --check
+```
+
+Result:
+
+```text
+completed_validated
+```
+
+Findings:
+
+```text
+Native Doubao now has promptPackageRef containment, outputDirectory containment, base URL validation, exact call/image budgets, allowlisted .env.local import for real mode, public adapter result redaction, and validator coverage for sandbox negative cases.
+```
+
+Not performed:
+
+```text
+No A5 execution, provider contact, plugin call, image generation, runtime generation runner, DailyNote write, VCP memory write, or .env.local value read/print was performed.
+```
+
+Recommended next:
+
+```text
+v7.246_no_generation_quota_or_provider_path_diagnostic_readiness_gate
+```
+
 ## VALIDATION-20260513-V7-244-STATE-SURFACE-RECONCILIATION
 
 Task:

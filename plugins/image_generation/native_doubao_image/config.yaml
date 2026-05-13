@@ -1,3 +1,7 @@
+placeholder_only: true
+do_not_store_secrets_here: true
+runtime_secret_source: ".env.local allowlisted fields only; never commit real values"
+
 doubao_api:
   base_url: "<DOUBAO_IMAGE_API_BASE_URL>"
   api_key_env: "DOUBAO_IMAGE_API_KEY"

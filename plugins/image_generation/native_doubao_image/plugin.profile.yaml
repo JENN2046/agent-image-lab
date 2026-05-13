@@ -12,11 +12,16 @@ model_policy:
 prompt_input:
   source: prompt_package_ref
   allowed_prompt_root: prompts/image_generation/
+  reject_path_traversal: true
+  reject_absolute_paths: true
   reference_policy_required: text_only_no_image_input
 
 output_policy:
   root: runs/real_generation/
   allow_outside_repo: false
+  enforce_resolved_containment: true
+  reject_path_traversal: true
+  reject_absolute_paths: true
   max_images_created: 1
 
 limits:

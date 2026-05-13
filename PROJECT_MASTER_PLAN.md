@@ -8,13 +8,14 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head: c37bf46
-origin_master: c37bf46
+latest_visible_head_before_v7_245: 6bc09de
+origin_master_before_v7_245: 6bc09de
 status: failed_no_image_repeated_quota_or_rate_limit
-mode: A4 docs-only state reconciliation after active A5 diagnostic retries
+mode: A4 code/static hardening after active A5 diagnostic retries
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
+native_doubao_static_hardening: completed
 ```
 
 ## Product Direction
@@ -45,8 +46,11 @@ must wait for explicit active authorization. v7.243 simplified the authorization
 draft into a one-page preflight-pending record. Subsequent active A5 diagnostic
 attempts reached `failed_no_image_repeated_quota_or_rate_limit`; the same
 provider/model/account path must not be retried until quota/rate-limit is
-resolved or a different path is explicitly authorized. v7.244 reconciles state
-surfaces to that reality and points next to static Native Doubao hardening.
+resolved or a different path is explicitly authorized. v7.244 reconciled state
+surfaces to that reality. v7.245 hardens the Native Doubao local execution
+surface statically: syntax check, prompt path containment, output containment,
+base URL validation, env allowlist, public result redaction, exact call budget,
+and validator drift.
 
 ## Active Boundaries
 
@@ -70,7 +74,10 @@ validation interpretation, staging, commit decisions, and next-task selection.
 
 ## Recommended Next
 
-Recommended next is `v7.245_native_doubao_syntax_and_sandbox_hardening`: patch
-the Native Doubao execution surface statically before any future A5 decision.
-Do not call plugins, contact providers, generate images, save output, write
-memory, or perform remote/version actions as part of this recommendation.
+Recommended next is
+`v7.246_no_generation_quota_or_provider_path_diagnostic_readiness_gate`: decide,
+without provider contact or generation, whether quota/rate-limit should be
+resolved externally, a different provider/model/account path should be prepared,
+or generation attempts should remain stopped. Do not call plugins, contact
+providers, generate images, save output, write memory, or perform remote/version
+actions as part of this recommendation.

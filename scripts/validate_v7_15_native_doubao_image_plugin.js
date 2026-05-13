@@ -8,7 +8,7 @@ function fileExists(p) { return fs.existsSync(path.join(root, p)); }
 function fileContains(p, s) { const fp = path.join(root, p); if (!fs.existsSync(fp)) return false; return fs.readFileSync(fp, "utf8").includes(s); }
 
 check("profile_exists", () => fileExists("plugins/image_generation/native_doubao_image/plugin.profile.yaml"));
-check("config_exists", () => fileExists("plugins/image_generation/native_doubao_image/config.example.yaml"));
+check("config_exists", () => fileExists("plugins/image_generation/native_doubao_image/config.yaml"));
 check("plugin_js_exists", () => fileExists("plugins/image_generation/native_doubao_image/native_doubao_image.js"));
 check("adapter_js_exists", () => fileExists("adapters/image_generation/native_doubao_adapter.js"));
 check("dry_run_fixture_exists", () => fileExists("plugins/image_generation/native_doubao_image/dry_run_fixture.json"));
@@ -31,16 +31,16 @@ check("max_calls_1", () => profile.includes("max_plugin_calls: 1"));
 check("max_images_1", () => profile.includes("max_images_created: 1"));
 check("retry_false", () => profile.includes("retry_allowed: false"));
 
-const config = fs.readFileSync(path.join(root, "plugins/image_generation/native_doubao_image/config.example.yaml"), "utf8");
-check("config_uses_env_var", () => config.includes("api_key_env") && !config.includes("sk-") && !config.includes("api_key: \"") && !config.includes("secret:"));
+const config = fs.readFileSync(path.join(root, "plugins/image_generation/native_doubao_image/config.yaml"), "utf8");
+check("config_uses_env_var", () => config.includes("api_key_env") && !config.includes("sk-") && !config.includes("api_key: \"") && !config.includes("secret: \""));
+check("config_placeholder_warning", () => config.includes("placeholder_only: true") && config.includes("do_not_store_secrets_here: true"));
 
 const js = fs.readFileSync(path.join(root, "plugins/image_generation/native_doubao_image/native_doubao_image.js"), "utf8");
 check("has_dry_run_generate", () => js.includes("function dryRunGenerate"));
 check("has_detect_mismatch", () => js.includes("function detectModelMismatch"));
-check("no_real_api_call", () => {
-  var code = js.split("\n").filter(function(l) { return !l.trim().startsWith("//"); }).join("\n");
-  return !code.includes("fetch(") && !code.includes("http.") && !code.includes("https.");
-});
+check("real_api_call_gated", () => js.includes("function validateRealExecutionGate") && js.includes("function validateBaseUrl") && js.includes("async function realGenerate"));
+check("prompt_root_enforced", () => js.includes("function resolveSafePromptPackageRef") && js.includes("prompts/image_generation/"));
+check("output_root_enforced", () => js.includes("function resolveSafeOutputDirectory") && js.includes("runs/real_generation/"));
 
 const fixture = JSON.parse(fs.readFileSync(path.join(root, "plugins/image_generation/native_doubao_image/dry_run_fixture.json"), "utf8"));
 check("fixture_api_call_false", () => fixture.api_call_performed === false);

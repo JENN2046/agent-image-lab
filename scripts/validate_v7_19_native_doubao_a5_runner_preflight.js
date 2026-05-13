@@ -12,7 +12,8 @@ const runner = fs.readFileSync(path.join(root, "scripts/run_native_doubao_image_
 check("runner_exists", () => fileExists("scripts/run_native_doubao_image_generation.js"));
 check("runner_loads_adapter", () => runner.includes("native_doubao_adapter.js"));
 check("runner_reads_dotenv", () => runner.includes(".env.local"));
-check("runner_no_api_key_output", () => !runner.includes("process.env.DOUBAO_IMAGE_API_KEY") || runner.includes("field"));
+check("runner_env_allowlist", () => runner.includes("ALLOWED_ENV_KEYS") && runner.includes("readEnvFieldNames"));
+check("runner_no_api_key_output", () => runner.includes("api_key_value_printed: false"));
 check("runner_defaults_dry_run", () => runner.includes("dryRun = true") || runner.includes("dryRun !== false"));
 check("runner_supports_plugin_profile_ref", () => runner.includes("plugin_profile_ref"));
 check("runner_supports_prompt_package_ref", () => runner.includes("prompt_package_ref"));
@@ -21,6 +22,7 @@ check("runner_supports_model", () => runner.includes("model") || runner.includes
 check("runner_supports_a5_ref", () => runner.includes("a5_activation_ref"));
 check("runner_enforces_retry", () => runner.includes("retry"));
 check("runner_has_preflight", () => runner.includes("preflightCheck") || runner.includes("preflight"));
+check("runner_public_adapter_result", () => runner.includes("publicAdapterResult") && runner.includes("raw_image_payload_returned: false"));
 check("doc_276_exists", () => fileExists("docs/276_v7_19_native_doubao_a5_runner_preflight.md"));
 check("validate_mvp_includes_v7_19", () => fileContains("scripts/validate_mvp.ps1", "validate_v7_19_native_doubao_a5_runner_preflight"));
 

@@ -1,5 +1,28 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.245 Native Doubao Syntax And Sandbox Hardening
+
+```text
+Status: completed_validated
+Source baseline: 6bc09de == origin/master
+Purpose: statically harden Native Doubao local execution surface after repeated quota/rate-limit failure
+current_status: failed_no_image_repeated_quota_or_rate_limit
+same_provider_retry_allowed_now: false
+A5_execution_allowed_now: false
+provider_contact_allowed_now: false
+patched: syntax_check, prompt_path_containment, output_directory_containment, base_url_gate, env_allowlist, public_result_redaction, exact_call_budget, validator_drift
+recommended_next: v7.246_no_generation_quota_or_provider_path_diagnostic_readiness_gate
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+env_local_value_read_or_printed: false
+validation: node syntax checks passed; native sandbox validator passed; v7.15/v7.19/v7.20 validators passed; current state alignment passed; agent board validator passed; git diff --check passed
+```
+
 ## v7.244 State Surface Reconciliation After Repeated Doubao Quota Failure
 
 ```text

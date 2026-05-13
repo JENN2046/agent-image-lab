@@ -9,29 +9,30 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab is reconciling all top-level state surfaces after a second approved DoubaoGen retry/diagnostic call again failed with sanitized category quota_or_rate_limit. The current status is failed_no_image_repeated_quota_or_rate_limit, same-provider retry is blocked, and the next safe phase is static Native Doubao syntax/sandbox hardening.
+Agent Image Lab has statically hardened the Native Doubao local execution surface after repeated quota/rate-limit failure. The current status remains failed_no_image_repeated_quota_or_rate_limit, same-provider retry is blocked, and the next safe phase is no-generation diagnostic readiness planning.
 ```
 
 ## Current Phase
 
 ```text
-v7.244 State Surface Reconciliation After Repeated Doubao Quota Failure
+v7.245 Native Doubao Syntax And Sandbox Hardening
 status: failed_no_image_repeated_quota_or_rate_limit
-source_commit: c37bf46
-source_message: chore: checkpoint native doubao config rename
+source_commit: 6bc09de
+source_message: docs: reconcile repeated Doubao quota failure state
 branch: master tracking origin/master
-Worktree: clean at v7.244 start
+Worktree: clean at v7.245 start
 worktree_start_clean: true
-origin_sync_start: local HEAD equals origin/master at c37bf46
+origin_sync_start: local HEAD equals origin/master at 6bc09de
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
+native_doubao_static_hardening: completed
 ```
 
 ## Current Task
 
 ```text
-Align README, roadmap, PROJECT_MASTER_PLAN, and .agent_board resume surfaces so future agents see repeated quota/rate-limit as the current stop state and v7.245 Native Doubao static hardening as the next safe task.
+Patch Native Doubao syntax/sandbox/base URL/raw output/env allowlist/validator drift without provider contact, plugin call, image generation, runtime execution, or .env.local value read.
 ```
 
 ## Current Local Work State
@@ -78,7 +79,7 @@ MVP Aggregate Validator Calibration: completed_validated
 Product Image Authorization Draft Plan Ref Alignment: v7.241 completed_validated
 Product Image Authorization Activation Gap Review: v7.242 completed_validated
 Product Image Active Authorization Package Skeleton: v7.243 completed_validated
-Recommended next product task: v7.245_native_doubao_syntax_and_sandbox_hardening
+Recommended next product task: v7.246_no_generation_quota_or_provider_path_diagnostic_readiness_gate
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```
@@ -124,8 +125,8 @@ tag/release/deploy remain blocked without explicit authorization and preflight
 ## Current Options
 
 ```text
-recommended_next_after_active_execution_attempt: v7.245_native_doubao_syntax_and_sandbox_hardening
-purpose: do not retry the same path immediately; first patch Native Doubao static syntax, sandbox, path containment, base URL gate, raw output redaction, and validator drift
+recommended_next_after_active_execution_attempt: v7.246_no_generation_quota_or_provider_path_diagnostic_readiness_gate
+purpose: do not retry the same path immediately; decide no-generation readiness questions for quota resolution or provider path switching
 not_allowed_as_next_by_default: A5, provider contact, runtime, plugin call, image generation, memory write, tag, release
 ```
 

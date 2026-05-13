@@ -2,18 +2,97 @@
 // 默认 dry_run=true。真实 API 调用必须通过 validateRealExecutionGate。
 // API key 只从 process.env.DOUBAO_IMAGE_API_KEY 读取，不硬编码。
 
+var fs = require("node:fs");
+var path = require("node:path");
+
+var REPO_ROOT = path.resolve(__dirname, "..", "..", "..");
+var PROMPT_ROOT = path.resolve(REPO_ROOT, "prompts", "image_generation");
+var OUTPUT_ROOT = path.resolve(REPO_ROOT, "runs", "real_generation");
+
+function hasUnsafePathSegment(ref) {
+  var value = String(ref || "");
+  if (value.indexOf("//") !== -1 || value.indexOf("\\\\") !== -1) return true;
+  return value.split(/[\\/]/).some(function (segment) {
+    return segment === "..";
+  });
+}
+
+function resolveSafePromptPackageRef(promptPackageRef) {
+  if (typeof promptPackageRef !== "string" || promptPackageRef.length === 0) {
+    return { valid: false, error: "promptPackageRef is required" };
+  }
+  if (path.isAbsolute(promptPackageRef) || /^[A-Za-z]:[\\/]/.test(promptPackageRef)) {
+    return { valid: false, error: "promptPackageRef must be repository-relative" };
+  }
+  if (promptPackageRef.indexOf("\\") !== -1 || hasUnsafePathSegment(promptPackageRef)) {
+    return { valid: false, error: "promptPackageRef contains unsafe path segment" };
+  }
+  if (promptPackageRef.indexOf("prompts/image_generation/") !== 0) {
+    return { valid: false, error: "promptPackageRef must be under prompts/image_generation/" };
+  }
+
+  var fullPath = path.resolve(REPO_ROOT, promptPackageRef);
+  if (fullPath.indexOf(PROMPT_ROOT + path.sep) !== 0) {
+    return { valid: false, error: "promptPackageRef escapes prompts/image_generation/" };
+  }
+  return { valid: true, fullPath: fullPath };
+}
+
+function resolveSafeOutputDirectory(outputDirectory) {
+  if (typeof outputDirectory !== "string" || outputDirectory.length === 0) {
+    return { valid: false, error: "outputDirectory is required" };
+  }
+  if (path.isAbsolute(outputDirectory) || /^[A-Za-z]:[\\/]/.test(outputDirectory)) {
+    return { valid: false, error: "outputDirectory must be repository-relative" };
+  }
+  if (outputDirectory.indexOf("\\") !== -1 || hasUnsafePathSegment(outputDirectory)) {
+    return { valid: false, error: "outputDirectory contains unsafe path segment" };
+  }
+  if (outputDirectory.indexOf("runs/real_generation/") !== 0) {
+    return { valid: false, error: "outputDirectory must be under runs/real_generation/" };
+  }
+
+  var fullPath = path.resolve(REPO_ROOT, outputDirectory);
+  if (fullPath.indexOf(OUTPUT_ROOT + path.sep) !== 0) {
+    return { valid: false, error: "outputDirectory escapes runs/real_generation/" };
+  }
+  return { valid: true, fullPath: fullPath };
+}
+
+function validateBaseUrl(rawBaseUrl) {
+  if (!rawBaseUrl) {
+    return { valid: false, error: "DOUBAO_IMAGE_API_BASE_URL environment variable is not set" };
+  }
+  try {
+    var parsed = new URL(rawBaseUrl);
+    var host = parsed.hostname.toLowerCase();
+    if (parsed.protocol !== "https:") {
+      return { valid: false, error: "DOUBAO_IMAGE_API_BASE_URL must use https" };
+    }
+    if (host === "localhost" || host === "127.0.0.1" || host === "::1") {
+      return { valid: false, error: "DOUBAO_IMAGE_API_BASE_URL must not target localhost" };
+    }
+    if (/^10\./.test(host) || /^192\.168\./.test(host) || /^172\.(1[6-9]|2\d|3[0-1])\./.test(host)) {
+      return { valid: false, error: "DOUBAO_IMAGE_API_BASE_URL must not target private network hosts" };
+    }
+    return { valid: true, url: parsed };
+  } catch (err) {
+    return { valid: false, error: "DOUBAO_IMAGE_API_BASE_URL is not a valid URL" };
+  }
+}
+
 function loadPromptPackage(promptPackageRef) {
   // 读取 prompts/image_generation/ 下的 YAML
-  var fs = require("node:fs");
-  var path = require("node:path");
-  var root = path.resolve(__dirname, "..", "..", "..");
-  var fullPath = path.join(root, promptPackageRef);
+  var safeRef = resolveSafePromptPackageRef(promptPackageRef);
+  if (!safeRef.valid) {
+    return { prompt: "", negative_prompt: "", error: safeRef.error };
+  }
 
-  if (!fs.existsSync(fullPath)) {
+  if (!fs.existsSync(safeRef.fullPath)) {
     return { prompt: "", negative_prompt: "", error: "prompt package not found: " + promptPackageRef };
   }
 
-  var content = fs.readFileSync(fullPath, "utf8");
+  var content = fs.readFileSync(safeRef.fullPath, "utf8");
   var lines = content.split("\n");
 
   var promptLines = [];
@@ -57,8 +136,8 @@ function loadPromptPackage(promptPackageRef) {
 
 function validateA5Limits(options) {
   var errors = [];
-  if (options.maxPluginCalls > 1) errors.push("max_plugin_calls must be 1");
-  if (options.maxImagesCreated > 1) errors.push("max_images_created must be 1");
+  if (options.maxPluginCalls !== 1) errors.push("maxPluginCalls must be exactly 1");
+  if (options.maxImagesCreated !== 1) errors.push("maxImagesCreated must be exactly 1");
   if (options.retryAllowed) errors.push("retry not allowed");
   return { valid: errors.length === 0, errors: errors };
 }
@@ -99,11 +178,15 @@ function validateRealExecutionGate(options) {
   if (!process.env.DOUBAO_IMAGE_API_KEY) {
     errors.push("DOUBAO_IMAGE_API_KEY environment variable is not set");
   }
-  if (options.maxPluginCalls > 1) {
-    errors.push("maxPluginCalls must be 1");
+  var baseUrlCheck = validateBaseUrl(process.env.DOUBAO_IMAGE_API_BASE_URL);
+  if (!baseUrlCheck.valid) {
+    errors.push(baseUrlCheck.error);
   }
-  if (options.maxImagesCreated > 1) {
-    errors.push("maxImagesCreated must be 1");
+  if (options.maxPluginCalls !== 1) {
+    errors.push("maxPluginCalls must be exactly 1");
+  }
+  if (options.maxImagesCreated !== 1) {
+    errors.push("maxImagesCreated must be exactly 1");
   }
   if (options.retryAllowed) {
     errors.push("retry not allowed");
@@ -156,11 +239,33 @@ async function realGenerate(options) {
   // Load prompt from package
   var pkgRef = options.promptPackageRef || "";
   var pkg = loadPromptPackage(pkgRef);
+  if (pkg.error) {
+    return {
+      status: "BLOCKED_PROMPT_PACKAGE_REF",
+      plugin_id: "NativeDoubaoImage",
+      command: "generate",
+      api_call_performed: false,
+      image_created: false,
+      error: pkg.error,
+    };
+  }
   var promptText = pkg.prompt || options.prompt || "";
   var negPrompt = pkg.negative_prompt || options.negativePrompt || "";
 
   // Append endpoint path for image generation API
-  var apiUrl = baseUrl.replace(/\/+$/, "") + "/images/generations";
+  var baseUrlCheck = validateBaseUrl(baseUrl);
+  if (!baseUrlCheck.valid) {
+    return {
+      status: "BLOCKED_BASE_URL",
+      plugin_id: "NativeDoubaoImage",
+      command: "generate",
+      api_call_performed: false,
+      image_created: false,
+      error_category: "base_url_invalid",
+      error: baseUrlCheck.error,
+    };
+  }
+  var apiUrl = baseUrlCheck.url.toString().replace(/\/+$/, "") + "/images/generations";
   var requestBody = buildDoubaoRequest({
     modelOverride: options.modelOverride || "doubao-seedream-5-0-260128",
     prompt: promptText,
@@ -222,14 +327,23 @@ async function realGenerate(options) {
         var item = responseData.data[i];
         generatedImages.push({
           index: i,
+          has_b64_json: Boolean(item.b64_json),
+          has_url: Boolean(item.url),
           b64_json: item.b64_json || null,
           url: item.url || null,
         });
       }
     }
+    var publicImageSummary = generatedImages.map(function (item) {
+      return {
+        index: item.index,
+        has_b64_json: item.has_b64_json,
+        has_url: item.has_url,
+      };
+    });
 
     if (modelMismatch.mismatch) {
-      return {
+      var mismatchResult = {
         status: "BLOCKED_MODEL_MISMATCH",
         plugin_id: "NativeDoubaoImage",
         command: "generate",
@@ -238,13 +352,21 @@ async function realGenerate(options) {
         model_requested: options.modelOverride || "doubao-seedream-5-0-260128",
         model_reported: reportedModel,
         model_matches: false,
-        images: generatedImages,
+        images: publicImageSummary,
+        public_images: publicImageSummary,
+        raw_image_payload_returned: false,
+        provider_url_returned: false,
         http_status: response.status,
         retry_performed: false,
       };
+      Object.defineProperty(mismatchResult, "_raw_images", {
+        value: generatedImages,
+        enumerable: false,
+      });
+      return mismatchResult;
     }
 
-    return {
+    var successResult = {
       status: "COMPLETED_GENERATED",
       plugin_id: "NativeDoubaoImage",
       command: "generate",
@@ -253,13 +375,21 @@ async function realGenerate(options) {
       model_requested: options.modelOverride || "doubao-seedream-5-0-260128",
       model_reported: reportedModel,
       model_matches: true,
-      images: generatedImages,
+      images: publicImageSummary,
+      public_images: publicImageSummary,
+      raw_image_payload_returned: false,
+      provider_url_returned: false,
       http_status: response.status,
       retry_performed: false,
       watermark_requested: false,
       watermark_parameter_sent: true,
       watermark_policy: "disabled_by_request_payload",
     };
+    Object.defineProperty(successResult, "_raw_images", {
+      value: generatedImages,
+      enumerable: false,
+    });
+    return successResult;
   } catch (err) {
     return {
       status: "FAILED",
@@ -267,7 +397,8 @@ async function realGenerate(options) {
       command: "generate",
       api_call_performed: true,
       image_created: false,
-      error: "HTTP request failed: " + (err.message || String(err)),
+      error_category: "network_or_provider_error",
+      error: "HTTP request failed",
       model_requested: options.modelOverride || "doubao-seedream-5-0-260128",
       model_reported: null,
       retry_performed: false,
@@ -276,17 +407,15 @@ async function realGenerate(options) {
 }
 
 async function writeImageOutput(result, outputDirectory) {
-  if (outputDirectory.indexOf("runs/real_generation/") !== 0) {
-    return { success: false, error: "outputDirectory must be under runs/real_generation/" };
+  var safeOutput = resolveSafeOutputDirectory(outputDirectory);
+  if (!safeOutput.valid) {
+    return { success: false, error: safeOutput.error };
   }
   if (!result.images || result.images.length === 0) {
     return { success: false, reason: "no_images_to_write" };
   }
 
-  var fs = require("node:fs");
-  var path = require("node:path");
-  var root = path.resolve(__dirname, "..", "..", "..");
-  var outDir = path.join(root, outputDirectory);
+  var outDir = safeOutput.fullPath;
 
   if (!fs.existsSync(outDir)) {
     fs.mkdirSync(outDir, { recursive: true });
@@ -306,6 +435,11 @@ async function writeImageOutput(result, outputDirectory) {
     } else if (img.url) {
       // Download from URL and save
       try {
+        var parsedUrl = new URL(img.url);
+        if (parsedUrl.protocol !== "https:") {
+          written.push({ index: i, note: "download_blocked_non_https_url" });
+          continue;
+        }
         var imageResponse = await fetch(img.url);
         var imageBuffer = Buffer.from(await imageResponse.arrayBuffer());
         fs.writeFileSync(filepath, imageBuffer);
@@ -320,11 +454,23 @@ async function writeImageOutput(result, outputDirectory) {
 }
 
 function normalizeResult(result) {
+  var imageCount = result.images && Array.isArray(result.images) ? result.images.length : 0;
   return {
     status: result.status || "unknown",
-    images: [],
-    model_reported: result.model || null,
+    plugin_id: result.plugin_id || "NativeDoubaoImage",
+    command: result.command || "generate",
+    api_call_performed: result.api_call_performed === true,
+    image_created: result.image_created === true,
+    image_count: imageCount,
+    model_requested: result.model_requested || null,
+    model_reported: result.model_reported || null,
+    model_matches: result.model_matches === true,
+    http_status: result.http_status || null,
+    files_written_count: result.files_written_count || 0,
     error: result.error || null,
+    error_category: result.error_category || null,
+    raw_image_payload_returned: false,
+    provider_url_returned: false,
   };
 }
 
@@ -339,6 +485,9 @@ function detectModelMismatch(requestedModel, reportedModel) {
 
 module.exports = {
   loadPromptPackage: loadPromptPackage,
+  resolveSafePromptPackageRef: resolveSafePromptPackageRef,
+  resolveSafeOutputDirectory: resolveSafeOutputDirectory,
+  validateBaseUrl: validateBaseUrl,
   validateA5Limits: validateA5Limits,
   validateRealExecutionGate: validateRealExecutionGate,
   buildDoubaoRequest: buildDoubaoRequest,
