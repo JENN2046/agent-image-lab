@@ -1,5 +1,28 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.250 Review Record Template And Status Flow Gate
+
+```text
+Status: completed_validated
+Source baseline: 07c5522 == origin/master
+Purpose: define review record template and paper status flow under Route 3 continued stop
+route_3_meaning_zh: 继续停止生成
+review_record_template_created: true
+status_flow_defined: true
+rejection_reasons_defined: true
+revision_request_defined: true
+accepted_candidate_conditions_defined: true
+memory_suitability_routing_defined: true
+recommended_next: v7.251_static_review_surface_acceptance_checklist_gate
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+runtime_execution: false
+DailyNote_write: false
+VCP_memory_write: false
+```
+
 ## v7.249 Static Review Surface Product Spec Gate
 
 ```text

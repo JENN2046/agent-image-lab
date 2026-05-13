@@ -9,16 +9,16 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab is on Route 3 continued stop（继续停止生成）and has returned to the non-generation static Review Surface product mainline.
+Agent Image Lab is on Route 3 continued stop（继续停止生成）and is defining the static Review Surface review record/status flow.
 ```
 
 ## Current Phase
 
 ```text
-v7.249 Static Review Surface Product Spec Gate
+v7.250 Review Record Template And Status Flow Gate
 status: failed_no_image_repeated_quota_or_rate_limit
-source_commit: 1d05db6
-source_message: docs: add generation stop route selection gate
+source_commit: 07c5522
+source_message: docs: add static review surface product spec
 branch: master tracking origin/master
 Worktree: clean at v7.247 start
 worktree_start_clean: true
@@ -32,12 +32,14 @@ selected_route_now: ROUTE-3-CONTINUED-STOP
 selected_route_meaning_zh: 继续停止生成
 route_selection_required_before_new_A5: true
 static_review_surface_product_spec_created: true
+review_record_template_created: true
+status_flow_defined: true
 ```
 
 ## Current Task
 
 ```text
-Create the static Review Surface product spec without renderer/preload/IPC/runtime code.
+Define the paper review record template and status flow without renderer/preload/IPC/runtime code.
 ```
 
 ## Current Local Work State
@@ -84,7 +86,7 @@ MVP Aggregate Validator Calibration: completed_validated
 Product Image Authorization Draft Plan Ref Alignment: v7.241 completed_validated
 Product Image Authorization Activation Gap Review: v7.242 completed_validated
 Product Image Active Authorization Package Skeleton: v7.243 completed_validated
-Recommended next product task: v7.250_review_record_template_and_status_flow_gate（审片记录模板与状态流门）
+Recommended next product task: v7.251_static_review_surface_acceptance_checklist_gate（静态审片台验收清单门）
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```
@@ -130,8 +132,8 @@ tag/release/deploy remain blocked without explicit authorization and preflight
 ## Current Options
 
 ```text
-recommended_next_after_v7_249: v7.250_review_record_template_and_status_flow_gate
-purpose: define the review record template and paper status flow without generation
+recommended_next_after_v7_250: v7.251_static_review_surface_acceptance_checklist_gate
+purpose: define static Review Surface acceptance checklist without generation
 not_allowed_as_next_by_default: A5, provider contact, runtime, plugin call, image generation, memory write, tag, release
 ```
 

@@ -7,8 +7,8 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.249: 1d05db6 on master == origin/master.
-Current mainline state: v7.249 static Review Surface product spec gate（静态审片台产品规格门）.
+Latest visible remote baseline before v7.250: 07c5522 on master == origin/master.
+Current mainline state: v7.250 review record template and status flow gate（审片记录模板与状态流门）.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
 Current status: failed_no_image_repeated_quota_or_rate_limit.
@@ -18,11 +18,11 @@ provider_contact_allowed_now: false.
 Native Doubao static hardening: syntax/path sandbox/base URL/raw output/env allowlist/validator drift patched.
 Diagnostic decision: continue_generation_stop_until_route_selection.
 Provider path decision: ROUTE-3-CONTINUED-STOP（路线 3：继续停止生成）selected now; Route 1 quota resolution and Route 2 provider/model/account switch remain available only after explicit human selection.
-Review Surface mainline: static product spec created without renderer/preload/IPC/runtime code.
+Review Surface mainline: review record template and paper status flow created without renderer/preload/IPC/runtime code.
 route_selection_required_before_new_A5: true.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized: A5, provider contact, runtime, plugin call, image generation, DailyNote write, VCP memory write, real manifest read, tag, release, deploy.
-Recommended next: v7.250_review_record_template_and_status_flow_gate（审片记录模板与状态流门）.
+Recommended next: v7.251_static_review_surface_acceptance_checklist_gate（静态审片台验收清单门）.
 ```
 
 历史状态脉络：

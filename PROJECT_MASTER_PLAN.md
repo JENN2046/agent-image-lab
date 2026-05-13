@@ -8,10 +8,10 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_249: 1d05db6
-origin_master_before_v7_249: 1d05db6
+latest_visible_head_before_v7_250: 07c5522
+origin_master_before_v7_250: 07c5522
 status: failed_no_image_repeated_quota_or_rate_limit
-mode: A4 docs-only static Review Surface product specification
+mode: A4 docs-only review record template and status flow
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
@@ -21,6 +21,8 @@ selected_route_now: ROUTE-3-CONTINUED-STOP
 selected_route_meaning_zh: 路线 3，继续停止生成
 route_selection_required_before_new_A5: true
 review_surface_product_spec_created: true
+review_record_template_created: true
+status_flow_defined: true
 ```
 
 ## Product Direction
@@ -67,6 +69,9 @@ Under Route 3, v7.249 returns to the non-generation product mainline and
 creates the static Review Surface product spec: page goal, user roles, core
 fields, asset card structure, review decision area, memory suitability area,
 handoff area, and no-execution boundaries.
+v7.250 adds the paper review record template and status flow, including
+accepted_candidate, rejected, needs_revision, deferred, rejection reasons,
+revision request handling, and memory_suitability yes/no/deferred routing.
 
 ## Active Boundaries
 
@@ -90,7 +95,7 @@ validation interpretation, staging, commit decisions, and next-task selection.
 
 ## Recommended Next
 
-Recommended next is `v7.250_review_record_template_and_status_flow_gate`
-（审片记录模板与状态流门）. It should define the paper review record and status
-flow without A5, provider contact, plugin call, image generation, runtime, or
-memory write.
+Recommended next is `v7.251_static_review_surface_acceptance_checklist_gate`
+（静态审片台验收清单门）. It should define the future static mockup/spec
+acceptance checklist without A5, provider contact, plugin call, image
+generation, runtime, or memory write.

@@ -7,7 +7,7 @@ Status: generation stop closeout recorded after repeated quota/rate-limit failur
 Reason: A second newly approved DoubaoGen retry/diagnostic call was consumed once; the plugin returned error again, sanitized category is still quota_or_rate_limit, and no image was generated.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
-Latest visible head: 1d05db6 == origin/master
+Latest visible head: 07c5522 == origin/master
 Current status: failed_no_image_repeated_quota_or_rate_limit
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
@@ -70,13 +70,14 @@ generation stop closeout / route selection request: v7.248 completed_validated
 recommended_next: human_route_selection_required_before_any_new_A5
 route_selection_required_before_new_A5: true
 static Review Surface product spec: v7.249 completed_validated
+review record template and status flow: v7.250 completed_validated
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
 
 continue_A4_docs_only_by_default: false
-recommended_next: v7.250_review_record_template_and_status_flow_gate
-recommended_next_zh: 审片记录模板与状态流门
+recommended_next: v7.251_static_review_surface_acceptance_checklist_gate
+recommended_next_zh: 静态审片台验收清单门
 ```
 
 ## Current Stop Gates
