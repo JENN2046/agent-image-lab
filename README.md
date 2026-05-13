@@ -7,14 +7,17 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest closed baseline before v7.243: 03fd398 on master == origin/master.
-Current mainline state: v7.243 product image active authorization package skeleton gate.
+Latest visible remote baseline: c37bf46 on master == origin/master.
+Current mainline state: v7.244 state surface reconciliation after repeated Doubao quota failure.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
-Current status: Product Image A5 Generation Authorization Draft simplified to a one-page preflight-pending record. It does not execute now.
+Current status: failed_no_image_repeated_quota_or_rate_limit.
+same_provider_retry_allowed_now: false.
+A5_execution_allowed_now: false.
+provider_contact_allowed_now: false.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized: A5, provider contact, runtime, plugin call, image generation, DailyNote write, VCP memory write, real manifest read, tag, release, deploy.
-Recommended next after active preflight: resolve_dirty_worktree_before_a5_execution.
+Recommended next: v7.245_native_doubao_syntax_and_sandbox_hardening.
 ```
 
 历史状态脉络：

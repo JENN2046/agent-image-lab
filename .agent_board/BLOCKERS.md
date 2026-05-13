@@ -4,12 +4,14 @@
 
 ```text
 1. Default A4 docs-only continuation is blocked unless the next task creates clear non-redundant product value.
-2. Active A5 product image execution is blocked by dirty worktree until current local changes are made safe or explicitly checkpointed and fresh preflight passes.
+2. Active A5 product image execution is blocked by repeated Doubao quota/rate-limit failure; same provider/model/account retry is not allowed now.
 3. Active A5 product image execution is blocked by execution surface mismatch: the approval phrase matches AUTH-PENDING-20260512-001, but no safe callable VCPToolBox / DoubaoGen execution entry is available in the current tool surface. Native/local runners require additional scope such as env/config or plugin-dir access and must not be substituted silently.
 4. AUTH-PENDING-20260512-001 has been consumed by one DoubaoGen process attempt. It failed with no image, and retry_limit=0 blocks another generation call without a new explicit retry authorization.
 5. Exact DoubaoGen provider root cause is unavailable from retained evidence because raw stdout/stderr was not printed or retained; only an inconclusive provider/API-layer failure category can be recorded.
 6. The newly approved diagnostic retry was also consumed once and failed with sanitized_error_category=quota_or_rate_limit. Immediate further retries are blocked unless provider quota/rate-limit conditions are resolved or a new explicit generation path is approved.
 7. A second newly approved diagnostic retry was consumed once and again failed with sanitized_error_category=quota_or_rate_limit. Continuing the same provider/model/account path without resolving quota or switching path is blocked.
+8. current_status: failed_no_image_repeated_quota_or_rate_limit.
+9. Native Doubao execution surface requires v7.245_native_doubao_syntax_and_sandbox_hardening before any future A5 retry decision.
 ```
 
 ## Current Mainline Quality Stop

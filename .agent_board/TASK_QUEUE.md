@@ -10,6 +10,10 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ```text
 AUTH-PENDING-20260512-001 was consumed by one approved DoubaoGen process attempt, then two separately approved single retry/diagnostic calls also failed with no image. The latest sanitized error category is still quota_or_rate_limit.
+Current status: failed_no_image_repeated_quota_or_rate_limit.
+same_provider_retry_allowed_now: false.
+A5_execution_allowed_now: false.
+provider_contact_allowed_now: false.
 ```
 
 ---
@@ -60,13 +64,13 @@ none
 ### todo
 
 ```text
-1. resolve_provider_quota_or_rate_limit_or_switch_provider_path_before_any_new_generation_attempt.
+1. v7.245_native_doubao_syntax_and_sandbox_hardening.
 ```
 
 ### recommended_next_after_v7_243
 
 ```text
-resolve_provider_quota_or_rate_limit_or_switch_provider_path_before_any_new_generation_attempt — do not retry the same path immediately; resolve provider quota/rate-limit conditions or authorize a different provider/model/account path first.
+v7.245_native_doubao_syntax_and_sandbox_hardening — do not retry the same path immediately; first patch Native Doubao syntax, sandbox/path containment, base URL gate, raw output redaction, env allowlist, and validator drift.
 ```
 
 ### done
@@ -118,6 +122,7 @@ resolve_provider_quota_or_rate_limit_or_switch_provider_path_before_any_new_gene
 44. Desensitized failure analysis completed: the failed attempt is inconclusive provider/API-layer failure; exact provider error is unavailable because raw stdout/stderr was not printed or retained.
 45. A newly authorized DoubaoGen retry/diagnostic call ran once, returned plugin_status=error with sanitized_error_category=quota_or_rate_limit, generated no image, and left no retained secret cache or runtime plugin copy.
 46. A second newly authorized DoubaoGen retry/diagnostic call ran once, again returned plugin_status=error with sanitized_error_category=quota_or_rate_limit, generated no image, and left no retained secret cache or runtime plugin copy.
+47. v7.244 state surface reconciliation aligned current status to failed_no_image_repeated_quota_or_rate_limit and recommended_next to v7.245_native_doubao_syntax_and_sandbox_hardening.
 ```
 
 ### blocked
@@ -148,6 +153,7 @@ resolve_provider_quota_or_rate_limit_or_switch_provider_path_before_any_new_gene
 23. v7.241 does not authorize active A5/provider/model/plugin selection/provider contact/runtime/plugin/image/DailyNote/VCP memory/output save/Review Console runtime/real manifest read/real output path/raw payload/CDP/bridge/MCP/tag/release/deploy.
 24. v7.242 does not authorize active A5/provider/model/plugin selection/provider contact/runtime/plugin/image/DailyNote/VCP memory/output save/Review Console runtime/real manifest read/real output path/raw payload/CDP/bridge/MCP/tag/release/deploy.
 25. v7.243 does not authorize active A5/provider/model/plugin selection/provider contact/runtime/plugin/image/DailyNote/VCP memory/output save/Review Console runtime/real manifest read/real output path/raw payload/CDP/bridge/MCP/tag/release/deploy.
+26. v7.244 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/real manifest read/CDP/bridge/MCP/tag/release/deploy; same provider retry remains blocked.
 ```
 
 ### skipped

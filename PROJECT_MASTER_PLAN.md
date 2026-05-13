@@ -8,10 +8,13 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-source_head_before_v7_243: 03fd398
-origin_master_at_v7_243_start: 03fd398
-status: v7.243 product image A5 generation authorization draft
-mode: A4.5 docs-only preflight-pending authorization record
+latest_visible_head: c37bf46
+origin_master: c37bf46
+status: failed_no_image_repeated_quota_or_rate_limit
+mode: A4 docs-only state reconciliation after active A5 diagnostic retries
+same_provider_retry_allowed_now: false
+A5_execution_allowed_now: false
+provider_contact_allowed_now: false
 ```
 
 ## Product Direction
@@ -38,10 +41,12 @@ compatible at paper level while keeping active A5 blocked. v7.241 patches the
 non-active authorization draft with the plan ref/version while leaving all
 executable A5 fields blocked. v7.242 classifies the remaining active
 authorization gaps and separates A4 paper-preparable fields from fields that
-must wait for explicit active authorization. v7.243 now keeps a one-page
-preflight-pending authorization draft with plugin/model/call-count/output and
-approval fields recorded, while `execute_now=false` keeps real execution
-blocked.
+must wait for explicit active authorization. v7.243 simplified the authorization
+draft into a one-page preflight-pending record. Subsequent active A5 diagnostic
+attempts reached `failed_no_image_repeated_quota_or_rate_limit`; the same
+provider/model/account path must not be retried until quota/rate-limit is
+resolved or a different path is explicitly authorized. v7.244 reconciles state
+surfaces to that reality and points next to static Native Doubao hardening.
 
 ## Active Boundaries
 
@@ -65,9 +70,7 @@ validation interpretation, staging, commit decisions, and next-task selection.
 
 ## Recommended Next
 
-Active preflight against `docs/product_image_active_authorization_package_skeleton.md`
-is blocked by dirty worktree. Next action is
-`resolve_dirty_worktree_before_a5_execution`: make the current local changes safe
-or explicitly checkpoint them, then rerun preflight. Do not call plugins,
-generate images, save output, write memory, or perform remote/version actions
-unless fresh preflight passes and a separate execution decision is made.
+Recommended next is `v7.245_native_doubao_syntax_and_sandbox_hardening`: patch
+the Native Doubao execution surface statically before any future A5 decision.
+Do not call plugins, contact providers, generate images, save output, write
+memory, or perform remote/version actions as part of this recommendation.

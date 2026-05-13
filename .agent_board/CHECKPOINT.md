@@ -1,5 +1,29 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.244 State Surface Reconciliation After Repeated Doubao Quota Failure
+
+```text
+Status: completed_validated
+Source baseline: c37bf46 == origin/master
+Purpose: align README, roadmap, PROJECT_MASTER_PLAN, and .agent_board resume surfaces after repeated Doubao quota/rate-limit failure
+current_status: failed_no_image_repeated_quota_or_rate_limit
+latest_visible_head: c37bf46
+same_provider_retry_allowed_now: false
+A5_execution_allowed_now: false
+provider_contact_allowed_now: false
+recommended_next: v7.245_native_doubao_syntax_and_sandbox_hardening
+scope: docs/static state reconciliation only
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+env_local_value_read_or_printed: false
+validation: git diff --check passed; node --check scripts/validate_current_state_alignment.js passed; node scripts/validate_agent_board_state.js passed; node scripts/validate_current_state_alignment.js passed
+```
+
 ## Active A5 DoubaoGen Diagnostic Retry 002 — Repeated Quota Or Rate Limit
 
 ```text

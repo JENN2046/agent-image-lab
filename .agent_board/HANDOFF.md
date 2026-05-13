@@ -7,7 +7,11 @@ Status: active A5 diagnostic retry 002 failed_no_image_repeated_quota_or_rate_li
 Reason: A second newly approved DoubaoGen retry/diagnostic call was consumed once; the plugin returned error again, sanitized category is still quota_or_rate_limit, and no image was generated.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
-Source baseline for v7.243: 03fd398 == origin/master at phase start
+Latest visible head: c37bf46 == origin/master
+Current status: failed_no_image_repeated_quota_or_rate_limit
+same_provider_retry_allowed_now: false
+A5_execution_allowed_now: false
+provider_contact_allowed_now: false
 Current active workers: 0
 Current operating style: Single-Window 4-Agent Compact Autopilot
 ```
@@ -55,7 +59,11 @@ active A5 execution attempt: failed_no_image_no_retry
 desensitized failure analysis: inconclusive_provider_or_api_layer_failure
 active A5 diagnostic retry: failed_no_image_quota_or_rate_limit
 active A5 diagnostic retry 002: failed_no_image_repeated_quota_or_rate_limit
-recommended_next: resolve_provider_quota_or_rate_limit_or_switch_provider_path_before_any_new_generation_attempt
+state surface reconciliation: v7.244 in progress/completed
+recommended_next: v7.245_native_doubao_syntax_and_sandbox_hardening
+same_provider_retry_allowed_now: false
+A5_execution_allowed_now: false
+provider_contact_allowed_now: false
 
 continue_A4_docs_only_by_default: false
 next_requires_human_decision_or_explicit_authorization: true
@@ -132,7 +140,7 @@ dependency/config/env modification: no
 ## Human Decisions Needed
 
 ```text
-Next action is resolve_provider_quota_or_rate_limit_or_switch_provider_path_before_any_new_generation_attempt. Human authorization is still needed before provider console/account review, any retry, raw plugin stderr/stdout review or capture, secret/config value review, push/tag/release/deploy, or repetitive low-value A4 gate.
+Next action is v7.245_native_doubao_syntax_and_sandbox_hardening. Human authorization is still needed before provider console/account review, any retry, raw plugin stderr/stdout review or capture, secret/config value review, push/tag/release/deploy, or repetitive low-value A4 gate.
 ```
 
 ## Exact Resume Prompt
