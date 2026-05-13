@@ -1,5 +1,32 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.251 Static Review Surface Acceptance Checklist Gate
+
+```text
+Status: completed_validated
+Source baseline: e5c8773 == origin/master
+Purpose: define static Review Surface acceptance checklist under Route 3 continued stop
+route_3_meaning_zh: 继续停止生成
+field_completeness_acceptance_defined: true
+status_flow_acceptance_defined: true
+human_decision_priority_defined: true
+memory_write_prohibition_defined: true
+A5_provider_plugin_runtime_prohibition_defined: true
+future_mockup_preconditions_defined: true
+recommended_next: v7.252_static_review_surface_mockup_readiness_review_gate
+same_provider_retry_allowed_now: false
+A5_execution_allowed_now: false
+provider_contact_allowed_now: false
+route_selection_required_before_new_A5: true
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+runtime_execution: false
+DailyNote_write: false
+VCP_memory_write: false
+```
+
 ## v7.250 Review Record Template And Status Flow Gate
 
 ```text

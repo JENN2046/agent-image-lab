@@ -18,6 +18,7 @@
 13. recommended_next: human_route_selection_required_before_any_new_A5.
 14. v7.249 static Review Surface product spec keeps generation stopped and recommends v7.250_review_record_template_and_status_flow_gate.
 15. v7.250 review record template and status flow keeps generation stopped and recommends v7.251_static_review_surface_acceptance_checklist_gate.
+16. v7.251 static Review Surface acceptance checklist keeps generation stopped and recommends v7.252_static_review_surface_mockup_readiness_review_gate.
 ```
 
 ## Current Mainline Quality Stop

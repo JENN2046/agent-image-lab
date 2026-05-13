@@ -21,6 +21,7 @@ Generation stop closeout: v7.248 completed; human route selection is required be
 route_selection_required_before_new_A5: true.
 Static Review Surface product spec: v7.249 completed; no generation, runtime, or memory write.
 Review record template and status flow: v7.250 completed; no generation, runtime, or memory write.
+Static Review Surface acceptance checklist: v7.251 completed; no generation, runtime, or memory write.
 ```
 
 ---
@@ -77,7 +78,7 @@ none
 ### recommended_next_after_v7_243
 
 ```text
-v7.251_static_review_surface_acceptance_checklist_gate — 静态审片台验收清单门。No provider contact, plugin call, runtime, memory write, or generation.
+v7.252_static_review_surface_mockup_readiness_review_gate — 静态审片台 mockup 准备度复核门。No provider contact, plugin call, runtime, memory write, or generation.
 ```
 
 ### done
@@ -136,6 +137,7 @@ v7.251_static_review_surface_acceptance_checklist_gate — 静态审片台验收
 51. v7.248 generation stop closeout recorded Route 3 continued stop and requested explicit human route selection before any new A5 path.
 52. v7.249 static Review Surface product spec created page goal, user roles, core fields, asset card, review decision area, memory suitability area, handoff area, and no-execution boundary.
 53. v7.250 review record template and status flow defined review schema, accepted/rejected/needs_revision/deferred routing, rejection reasons, revision requests, accepted_candidate conditions, and memory suitability yes/no/deferred handling.
+54. v7.251 static Review Surface acceptance checklist defined field completeness, status flow, human decision priority, memory write prohibition, A5/provider/plugin/runtime prohibition, and future mockup preconditions.
 ```
 
 ### blocked
@@ -173,6 +175,7 @@ v7.251_static_review_surface_acceptance_checklist_gate — 静态审片台验收
 30. v7.248 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/real manifest read/.env.local value read/raw provider dashboard capture/CDP/bridge/MCP/tag/release/deploy; human route selection is required before any new A5.
 31. v7.249 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/renderer/preload/IPC/real manifest read/.env.local value read/CDP/bridge/MCP/tag/release/deploy.
 32. v7.250 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/renderer/preload/IPC/real manifest read/.env.local value read/CDP/bridge/MCP/tag/release/deploy.
+33. v7.251 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/renderer/preload/IPC/real manifest read/.env.local value read/CDP/bridge/MCP/tag/release/deploy.
 ```
 
 ### skipped

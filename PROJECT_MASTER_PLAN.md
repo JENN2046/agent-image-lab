@@ -8,10 +8,10 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_250: 07c5522
-origin_master_before_v7_250: 07c5522
+latest_visible_head_before_v7_251: e5c8773
+origin_master_before_v7_251: e5c8773
 status: failed_no_image_repeated_quota_or_rate_limit
-mode: A4 docs-only review record template and status flow
+mode: A4 docs-only static Review Surface acceptance checklist
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
@@ -23,6 +23,7 @@ route_selection_required_before_new_A5: true
 review_surface_product_spec_created: true
 review_record_template_created: true
 status_flow_defined: true
+static_review_surface_acceptance_checklist_created: true
 ```
 
 ## Product Direction
@@ -72,6 +73,9 @@ handoff area, and no-execution boundaries.
 v7.250 adds the paper review record template and status flow, including
 accepted_candidate, rejected, needs_revision, deferred, rejection reasons,
 revision request handling, and memory_suitability yes/no/deferred routing.
+v7.251 adds the static Review Surface acceptance checklist for field
+completeness, status flow, human decision priority, memory write prohibition,
+A5/provider/plugin/runtime prohibition, and future mockup preconditions.
 
 ## Active Boundaries
 
@@ -95,7 +99,7 @@ validation interpretation, staging, commit decisions, and next-task selection.
 
 ## Recommended Next
 
-Recommended next is `v7.251_static_review_surface_acceptance_checklist_gate`
-（静态审片台验收清单门）. It should define the future static mockup/spec
-acceptance checklist without A5, provider contact, plugin call, image
-generation, runtime, or memory write.
+Recommended next is `v7.252_static_review_surface_mockup_readiness_review_gate`
+（静态审片台 mockup 准备度复核门）. It should decide whether the static
+Review Surface package is ready for a future no-runtime mockup task without A5,
+provider contact, plugin call, image generation, runtime, or memory write.

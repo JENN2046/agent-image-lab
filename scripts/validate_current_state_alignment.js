@@ -15,13 +15,13 @@ const files = [
   ".agent_board/CHECKPOINT.md",
   ".agent_board/BLOCKERS.md",
   ".agent_board/VALIDATION_LOG.md",
-  "docs/v7_250_review_record_template_and_status_flow_gate.md",
-  "docs/review_record_template_and_status_flow.md",
+  "docs/v7_251_static_review_surface_acceptance_checklist_gate.md",
+  "docs/static_review_surface_acceptance_checklist.md",
 ];
 
 const requiredEverywhere = [
   "failed_no_image_repeated_quota_or_rate_limit",
-  "v7.251_static_review_surface_acceptance_checklist_gate",
+  "v7.252_static_review_surface_mockup_readiness_review_gate",
 ];
 
 const requiredCurrentSurfaces = [
