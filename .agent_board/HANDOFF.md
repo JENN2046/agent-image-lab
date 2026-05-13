@@ -3,15 +3,15 @@
 ## Handoff Summary
 
 ```text
-Status: v7.271 prompt revision plan from first real output completed_pending_validation.
-Reason: v7.270 found the first real matte_ceramic_mug output needs revision; v7.271 creates a static v2 prompt revision plan without generation.
+Status: v7.273 second minimal generation trial authorization gate in progress.
+Reason: v7.272 static review passed prompt v2 and the human has explicitly authorized one bounded second minimal generation trial; v7.273 records the boundary before v7.274 execution.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
-Latest visible head before v7.271: efb627b == origin/master
-Current status: prompt_v2_revision_plan_created
+Latest visible head before v7.273: 6f95b53 == origin/master
+Current status: second_minimal_generation_trial_authorized
 same_provider_retry_allowed_now: false
-A5_execution_allowed_now: false
-provider_contact_allowed_now: false
+A5_execution_allowed_now: false during v7.273 authorization gate; true only for v7.274 bounded execution after v7.273 commit and push
+provider_contact_allowed_now: false during v7.273 authorization gate; true only for v7.274 bounded execution after v7.273 commit and push
 Native Doubao static hardening: v7.245 completed_validated
 Diagnostic decision: continue_generation_stop_until_route_selection
 Provider path decision: ROUTE-3-CONTINUED-STOP selected now
@@ -61,6 +61,17 @@ Prompt revision planning: v7.271 completed_pending_validation
 prompt_revision_plan_created: true
 prompt_v2_created_or_planned: created
 prompt_v2_ref: prompts/image_generation/product_still_life_matte_ceramic_mug_v2.yaml
+Prompt v2 static review: v7.272 passed
+Second minimal generation authorization: v7.273 active
+approved_product_for_second_trial: matte_ceramic_mug
+approved_prompt_package_for_second_trial: prompts/image_generation/product_still_life_matte_ceramic_mug_v2.yaml
+provider_calls_max_for_second_trial: 1
+generation_attempts_max_for_second_trial: 1
+output_images_max_for_second_trial: 4
+output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/
+auto_retry_for_second_trial: false
+stop_after_generation_for_second_trial: true
+human_review_required_after_generation: true
 Current active workers: 0
 Current operating style: Single-Window 4-Agent Compact Autopilot
 ```
@@ -175,14 +186,16 @@ prompt revision planning: v7.271 completed_pending_validation
 prompt_revision_plan_created: true
 prompt_v2_created_or_planned: created
 prompt_v2_ref: prompts/image_generation/product_still_life_matte_ceramic_mug_v2.yaml
+prompt v2 static review: v7.272 passed
+second minimal generation authorization: v7.273 active
 same_provider_retry_allowed_now: false
-A5_execution_allowed_now: false
-provider_contact_allowed_now: false
+A5_execution_allowed_now: false during v7.273 authorization gate; true only for v7.274 bounded execution after v7.273 commit and push
+provider_contact_allowed_now: false during v7.273 authorization gate; true only for v7.274 bounded execution after v7.273 commit and push
 
 continue_A4_docs_only_by_default: false
-recommended_next: v7.272_prompt_v2_static_review_and_second_trial_authorization_gate
-recommended_next_zh: 静态审查 prompt v2，并由人决定是否授权第二次最小生成试跑
-auto_execution_allowed_for_next: false
+recommended_next: v7.274_second_minimal_generation_trial_execution
+recommended_next_zh: 使用 v2 prompt 执行一次且仅一次第二次最小真实生成试跑，随后停止等待人工审片
+auto_execution_allowed_for_next: true under the v7.273 human authorization boundary only
 ```
 
 ## Current Stop Gates
@@ -257,7 +270,7 @@ dependency/config/env modification: no
 ## Human Decisions Needed
 
 ```text
-Next action is v7.272 prompt v2 static review and second-trial authorization gate only. Human authorization is still needed before any retry, second generation, provider/model/account switch, raw plugin stderr/stdout review or capture, secret/config value review, push/tag/release/deploy beyond this gate, runtime implementation, memory write, or DailyNote call.
+Next action is v7.274 second minimal generation trial execution only, after v7.273 commit and push succeed. No retry, third generation, product switch, prompt switch, provider/model/account switch, raw plugin stderr/stdout review or capture, secret/config value review, tag/release/deploy beyond this gate, runtime implementation, memory write, or DailyNote call is authorized.
 ```
 
 ## Exact Resume Prompt
@@ -270,7 +283,7 @@ Next action is v7.272 prompt v2 static review and second-trial authorization gat
 当前仓库状态：
 - master should track origin/master.
 - source baseline for v7.243: 03fd398.
-- current phase: v7.271_prompt_revision_plan_from_first_real_output completed_pending_validation; v7.271 created a prompt v2 revision plan from the first real output review without generation.
+- current phase: v7.273_second_minimal_generation_trial_authorization_gate; v7.273 records the human authorization for exactly one bounded second minimal generation trial using prompt v2, without generation in the authorization gate.
 - v7.221 mainline quality stop reached.
 - v7.222 board calibration completed.
 - v7.223 read-only value selection selected v7.224 as the only safe next task.
@@ -319,8 +332,10 @@ Next action is v7.272 prompt v2 static review and second-trial authorization gat
 - v7.269 completed the bounded trial with one output: runs/real_generation/v7_269_matte_ceramic_mug_trial/native_doubao_1778681238211_0.jpg.
 - v7.270 records human review: needs_revision, accepted_candidate=false, commercial_delivery_ready=false, memory_suitability=deferred.
 - v7.271 created prompt v2: prompts/image_generation/product_still_life_matte_ceramic_mug_v2.yaml and a static revision plan; no second generation was started.
-- recommended_next after v7.271: v7.272_prompt_v2_static_review_and_second_trial_authorization_gate（静态审查 prompt v2，并由人决定是否授权第二次最小生成试跑）.
-- do not start any second generation, retry, memory write, DailyNote write, Batch 005, production_candidate_002, CDP, bridge, MCP, tag, release, or deploy.
+- v7.272 static review passed prompt v2 for a bounded second trial.
+- v7.273 human authorization allows v7.274 to run exactly one second minimal generation trial using prompt v2 after v7.273 commit and push.
+- recommended_next after v7.273: v7.274_second_minimal_generation_trial_execution（使用 v2 prompt 执行一次且仅一次第二次最小真实生成试跑）.
+- do not start any retry, third generation, memory write, DailyNote write, Batch 005, production_candidate_002, CDP, bridge, MCP, tag, release, or deploy.
 
 不要读取真实 VCPChat/VCPToolBox。
 不要读取真实 manifest。

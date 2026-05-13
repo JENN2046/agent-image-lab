@@ -9,26 +9,26 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab has converted the first real matte_ceramic_mug review findings into a static prompt v2 revision plan. The v2 package is not authorized for generation until a separate v7.272 static review and human A5 authorization gate.
+Agent Image Lab has passed prompt v2 static review and received human authorization for one bounded second minimal real generation trial. v7.273 records the authorization boundary; v7.274 may run exactly one v2 trial after v7.273 commit and push.
 ```
 
 ## Current Phase
 
 ```text
-v7.271 Prompt Revision Plan From First Real Output
-phase_id: v7.271_prompt_revision_plan_from_first_real_output
+v7.273 Second Minimal Generation Trial Authorization Gate
+phase_id: v7.273_second_minimal_generation_trial_authorization_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
-status: prompt_v2_revision_plan_created
-source_commit: efb627b
-source_message: docs: authorize minimal real generation trial
+status: second_minimal_generation_trial_authorized
+source_commit: 6f95b53
+source_message: docs: review first real output and plan prompt revision
 branch: master tracking origin/master
-Worktree: dirty with expected v7.270-v7.271 docs, board, review, and prompt package changes
+Worktree: dirty with expected v7.273 docs and board authorization changes
 worktree_start_clean: true
-origin_sync_start: local HEAD equals origin/master at efb627b
+origin_sync_start: local HEAD equals origin/master at 6f95b53
 same_provider_retry_allowed_now: false
-A5_execution_allowed_now: false
-provider_contact_allowed_now: false
+A5_execution_allowed_now: false during v7.273 authorization gate; true only for v7.274 bounded execution after v7.273 commit and push
+provider_contact_allowed_now: false during v7.273 authorization gate; true only for v7.274 bounded execution after v7.273 commit and push
 native_doubao_static_hardening: completed
 diagnostic_decision: continue_generation_stop_until_route_selection
 selected_route_now: ROUTE-3-CONTINUED-STOP
@@ -97,25 +97,36 @@ memory_suitability: deferred
 prompt_revision_plan_created: true
 prompt_v2_created_or_planned: created
 prompt_v2_ref: prompts/image_generation/product_still_life_matte_ceramic_mug_v2.yaml
-recommended_next: v7.272_prompt_v2_static_review_and_second_trial_authorization_gate
+prompt_v2_static_review_result: passed
+second_minimal_generation_trial_authorized: true
+approved_product_for_second_trial: matte_ceramic_mug
+approved_prompt_package_for_second_trial: prompts/image_generation/product_still_life_matte_ceramic_mug_v2.yaml
+provider_calls_max_for_second_trial: 1
+generation_attempts_max_for_second_trial: 1
+output_images_max_for_second_trial: 4
+output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/
+auto_retry_for_second_trial: false
+stop_after_generation_for_second_trial: true
+human_review_required_after_generation: true
+recommended_next: v7.274_second_minimal_generation_trial_execution
 ```
 
 ## Current Task
 
 ```text
-Create the v7.271 static prompt revision plan and prompt v2 package from the first real matte_ceramic_mug review. Do not generate another image, retry, contact provider, write memory, or add the output image to Git.
+Record the v7.273 human authorization boundary for exactly one second minimal generation trial using prompt v2. Do not generate in this authorization gate; v7.274 is the only allowed execution phase after commit and push.
 ```
 
 ## Current Local Work State
 
 ```text
-Worktree: dirty with expected uncommitted v7.270-v7.271 changes; generated output is ignored under runs/
+Worktree: dirty with expected uncommitted v7.273 docs and board authorization changes; generated outputs remain ignored under runs/
 active_workers: 0
 execution_mode: Single-Window 4-Agent Compact Autopilot
-commander_role: keep v7.271 inside A4 prompt revision planning
+commander_role: keep v7.273 inside docs/board authorization until commit and push succeed
 architect_role: preserve no-generation and no-memory boundaries
-worker_role: apply only the review record, status indexes, and .agent_board patch
-reviewer_role: inspect diff, run allowed local checks, confirm no provider/plugin/image/memory behavior, and close out
+worker_role: apply only the v7.273 authorization record, status indexes, and .agent_board patch
+reviewer_role: inspect diff, run allowed local checks, confirm no provider/plugin/image/memory behavior during v7.273, and close out
 ```
 
 ## Latest Mainline Status
@@ -159,7 +170,9 @@ Minimal real generation authorization: v7.268b completed; Route B authorized exa
 Minimal real generation trial: v7.269 succeeded with one output and no retry.
 Human review of first real output: v7.270 completed_with_validation_gap; result needs_revision, not accepted, not commercial ready, memory deferred.
 Prompt revision plan from first real output: v7.271 completed_pending_validation; prompt v2 created without generation.
-Recommended next product task: v7.272_prompt_v2_static_review_and_second_trial_authorization_gate（静态审查 prompt v2，并由人决定是否授权第二次最小生成试跑）
+Prompt v2 static review: v7.272 passed.
+Second minimal generation authorization: v7.273 in progress; one v7.274 v2 trial authorized after commit and push.
+Recommended next product task: v7.274_second_minimal_generation_trial_execution（使用 v2 prompt 执行一次且仅一次第二次最小真实生成试跑）
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```
@@ -205,9 +218,9 @@ tag/release/deploy remain blocked without explicit authorization and preflight
 ## Current Options
 
 ```text
-recommended_next_after_v7_271: v7.272_prompt_v2_static_review_and_second_trial_authorization_gate
-purpose: statically review prompt v2 and let the human decide whether to authorize a second minimal generation trial
-not_allowed_as_next_by_default: retry, second generation, Batch 005, production_candidate_002, memory write, DailyNote write, tag, release
+recommended_next_after_v7_273: v7.274_second_minimal_generation_trial_execution
+purpose: execute exactly one bounded second minimal generation trial using prompt v2, then stop for human review
+not_allowed_as_next_by_default: retry, third generation, Batch 005, production_candidate_002, memory write, DailyNote write, tag, release
 ```
 
 ## Last Validation Snapshot
@@ -272,5 +285,5 @@ external repository modification: no
 ```text
 Use the calibrated board as the current navigation source.
 The second newly approved DoubaoGen diagnostic retry was consumed by one process attempt. The result is failed_no_image_repeated_quota_or_rate_limit; generation remains blocked unless the user resolves provider quota/rate-limit conditions or authorizes a new provider/model/account path.
-For the project plugin route, v7.269 already consumed the single bounded provider contact / image generation trial. v7.271 only creates a static prompt v2 plan. Stop before retry, second generation, prompt switch execution, product switch, memory write, DailyNote write, Batch 005, production_candidate_002, tag, release, or deploy. Next safe action is v7.272 prompt v2 static review and authorization gate only.
+For the project plugin route, v7.269 consumed the first bounded provider contact / image generation trial. v7.271 created prompt v2 and v7.272 statically reviewed it. v7.273 now authorizes exactly one v7.274 second trial using prompt v2 after commit and push. Stop before retry, third generation, prompt switch execution, product switch, memory write, DailyNote write, Batch 005, production_candidate_002, tag, release, or deploy.
 ```

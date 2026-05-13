@@ -18,9 +18,9 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.271: efb627b on master == origin/master.
-Current mainline state: v7.271 prompt revision plan from first real output（第一张真实图后的 prompt v2 修订计划）.
-Current phase id: v7.271_prompt_revision_plan_from_first_real_output.
+Latest visible remote baseline before v7.273: 6f95b53 on master == origin/master.
+Current mainline state: v7.273 second minimal generation trial authorization gate（第二次最小真实生成试跑授权门）.
+Current phase id: v7.273_second_minimal_generation_trial_authorization_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
@@ -73,10 +73,18 @@ memory_suitability: deferred.
 prompt_revision_plan_created: true.
 prompt_v2_created_or_planned: created.
 prompt_v2_ref: prompts/image_generation/product_still_life_matte_ceramic_mug_v2.yaml.
-A5_execution_allowed_now: false.
-provider_contact_allowed_now: false.
-Recommended next: v7.272_prompt_v2_static_review_and_second_trial_authorization_gate（静态审查 prompt v2，并由人决定是否授权第二次最小生成试跑）.
-auto_execution_allowed_for_next: false.
+prompt_v2_static_review_result: passed.
+second_minimal_generation_trial_authorized: true.
+approved_product_for_second_trial: matte_ceramic_mug.
+approved_prompt_package_for_second_trial: prompts/image_generation/product_still_life_matte_ceramic_mug_v2.yaml.
+provider_calls_max_for_second_trial: 1.
+generation_attempts_max_for_second_trial: 1.
+output_images_max_for_second_trial: 4.
+output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/.
+A5_execution_allowed_now: false during v7.273 authorization gate; true only for v7.274 bounded execution after v7.273 commit and push.
+provider_contact_allowed_now: false during v7.273 authorization gate; true only for v7.274 bounded execution after v7.273 commit and push.
+Recommended next: v7.274_second_minimal_generation_trial_execution（使用 v2 prompt 执行一次且仅一次第二次最小真实生成试跑，随后停止等待人工审片）.
+auto_execution_allowed_for_next: true under the v7.273 human authorization boundary only.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)
 ```
@@ -220,7 +228,7 @@ master tracking origin/master
 - 正式 release 发布仍需单独授权（tag 策略已定义：`docs/233_tag_and_version_strategy.md`）。
 - 后续更多真实图片生成需新 A5 授权包（Phase F 已消耗 2/2 calls，双图 accepted）。
 - version actions 需要匹配当前授权和 preflight；v7.224 只允许白名单 docs/status 文件的 commit + push。
-- Product image A5 path 已进入 repeated quota/rate-limit stop；Native Doubao static syntax / sandbox 已硬化；v7.260 判断产品图纸面链路已进入 quality stop；v7.261 已提出四条路线；v7.262 已选择“项目内插件路线”进入纸面授权规划；v7.263 已起草项目内插件 A5 授权包但保持 draft / not_requested / execute_now=false；v7.264 已复核草案，结论为 pass_to_keep_inactive / activation blocked；v7.265 已把真正 A5 preflight 授权请求、prompt 包和输出目录固定下来；v7.268b 授权一次最小真实生成试跑；v7.269 成功生成 1 张 matte_ceramic_mug 图；v7.270 人工审片结论为 needs_revision；v7.271 已根据问题创建 prompt v2 修订计划和 v2 prompt package，但不授权第二次生成。
+- Product image A5 path 已进入 repeated quota/rate-limit stop；Native Doubao static syntax / sandbox 已硬化；v7.260 判断产品图纸面链路已进入 quality stop；v7.261 已提出四条路线；v7.262 已选择“项目内插件路线”进入纸面授权规划；v7.263 已起草项目内插件 A5 授权包但保持 draft / not_requested / execute_now=false；v7.264 已复核草案，结论为 pass_to_keep_inactive / activation blocked；v7.265 已把真正 A5 preflight 授权请求、prompt 包和输出目录固定下来；v7.268b 授权一次最小真实生成试跑；v7.269 成功生成 1 张 matte_ceramic_mug 图；v7.270 人工审片结论为 needs_revision；v7.271 已根据问题创建 prompt v2 修订计划和 v2 prompt package；v7.272 静态审查通过；v7.273 已由人工授权第二次最小真实生成试跑，下一步 v7.274 只能用 v2 prompt 执行一次受控试跑。
 
 ## 阶段路线
 
@@ -374,8 +382,9 @@ daily_note_called: false
 7. v7.269_minimal_real_generation_trial_execution 已成功生成 1 张真实样本，未 retry，未把图片加入 Git。
 8. v7.270_human_review_of_real_outputs 已记录人工审片：needs_revision、accepted_candidate=false、commercial_delivery_ready=false、memory_suitability=deferred。
 9. v7.271_prompt_revision_plan_from_first_real_output 已创建 prompt v2 修订计划和 `prompts/image_generation/product_still_life_matte_ceramic_mug_v2.yaml`，不执行生成。
-10. Batch 005、production_candidate_002、memory_write_path、DailyNote/VCP memory、retry、第二次生成、tag/release/deploy 仍未授权。
-11. recommended next: v7.272_prompt_v2_static_review_and_second_trial_authorization_gate（静态审查 prompt v2，并由人决定是否授权第二次最小生成试跑）。
+10. v7.273_second_minimal_generation_trial_authorization_gate 已由人工授权第二次最小真实生成试跑：v2 prompt、1 次 provider call、1 次 attempt、最多 4 张输出、no retry、生成后停止等待人工审片。
+11. Batch 005、production_candidate_002、memory_write_path、DailyNote/VCP memory、retry、第三次生成、tag/release/deploy 仍未授权。
+12. recommended next: v7.274_second_minimal_generation_trial_execution（只执行一次 v2 prompt 第二次最小真实生成试跑）。
 
 ## 永久安全门
 

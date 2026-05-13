@@ -1,5 +1,39 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.273 Second Minimal Generation Trial Authorization Gate
+
+```text
+Status: completed_validated_pending_commit_push
+Source phase: v7.272_prompt_v2_static_review_and_second_trial_authorization_gate
+Purpose: record human authorization for exactly one bounded second minimal real generation trial using prompt v2
+prompt_v2_static_review_result: passed
+second_minimal_generation_trial_authorized: true
+approved_product: matte_ceramic_mug
+approved_prompt_package: prompts/image_generation/product_still_life_matte_ceramic_mug_v2.yaml
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 4
+output_directory: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/
+auto_retry: false
+stop_after_generation: true
+human_review_required_after_generation: true
+A5_execution_allowed_now: false during v7.273 authorization gate; true only for v7.274 bounded execution after v7.273 commit and push
+provider_contact_allowed_now: false during v7.273 authorization gate; true only for v7.274 bounded execution after v7.273 commit and push
+generation_in_authorization_gate: false
+provider_contact_in_authorization_gate: false
+image_generation_in_authorization_gate: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+Batch_005: false
+production_candidate_002: false
+recommended_next: v7.274_second_minimal_generation_trial_execution
+recommended_next_zh: 使用 v2 prompt 执行一次且仅一次第二次最小真实生成试跑，随后停止等待人工审片
+auto_execution_allowed_for_next: true under the v7.273 human authorization boundary only
+next_phase_started: false
+validation: git diff --check passed; agent board state passed; current state alignment passed; native Doubao sandbox passed; validate_mvp passed; local validation passed with existing manual-review warnings only
+```
+
 ## v7.271 Prompt Revision Plan From First Real Output
 
 ```text

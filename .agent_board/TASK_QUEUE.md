@@ -36,7 +36,7 @@ Project plugin route authorization planning: v7.262 completed; NativeDoubaoImage
 Project plugin A5 authorization package draft: v7.263 completed; AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 is draft-only with approval_status=not_requested and execute_now=false.
 Project plugin A5 authorization draft review: v7.264 completed; draft result is pass_to_keep_inactive and activation remains blocked.
 True A5 authorization request: v7.265 completed_validated; AUTH-PENDING-PROJECT-PLUGIN-20260513-001 fixes prompt/output/model/budget for preflight-only approval and still blocks provider/plugin/image/env value actions.
-Route B minimal real generation authorization: v7.268b completed; v7.269 succeeded with one matte_ceramic_mug output and no retry; v7.270 records human review as needs_revision, accepted_candidate=false, commercial_delivery_ready=false, memory_suitability=deferred; v7.271 creates a static prompt v2 revision plan without generation.
+Route B minimal real generation authorization: v7.268b completed; v7.269 succeeded with one matte_ceramic_mug output and no retry; v7.270 records human review as needs_revision, accepted_candidate=false, commercial_delivery_ready=false, memory_suitability=deferred; v7.271 creates a static prompt v2 revision plan without generation; v7.272 static review passed; v7.273 authorizes exactly one v7.274 second minimal generation trial using prompt v2 after commit and push.
 ```
 
 ---
@@ -81,7 +81,7 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-none
+v7.273_second_minimal_generation_trial_authorization_gate — validation passed; awaiting exact-file checkpoint commit and push before v7.274 execution.
 ```
 
 ### todo
@@ -90,10 +90,10 @@ none
 none
 ```
 
-### recommended_next_after_v7_271
+### recommended_next_after_v7_273
 
 ```text
-v7.272_prompt_v2_static_review_and_second_trial_authorization_gate — 静态审查 prompt v2，并由人决定是否授权第二次最小生成试跑。No retry, second generation, Batch 005, production_candidate_002, memory write, DailyNote write, tag, release, or deploy.
+v7.274_second_minimal_generation_trial_execution — 使用 v2 prompt 执行一次且仅一次第二次最小真实生成试跑，随后停止等待人工审片。No retry, third generation, Batch 005, production_candidate_002, memory write, DailyNote write, tag, release, or deploy.
 ```
 
 ### done
@@ -171,6 +171,8 @@ v7.272_prompt_v2_static_review_and_second_trial_authorization_gate — 静态审
 70. v7.269 minimal real generation trial succeeded with one output and no retry; output remains under ignored runs/.
 71. v7.270 human review of real outputs records needs_revision, accepted_candidate=false, commercial_delivery_ready=false, and memory_suitability=deferred.
 72. v7.271 prompt revision plan from first real output creates prompt v2 without A5/provider/plugin/image/memory execution.
+73. v7.272 prompt v2 static review passed and recommends human authorization for a second minimal trial.
+74. v7.273 second minimal generation authorization gate docs/board validation passed; commit and push are the remaining gate actions before v7.274.
 ```
 
 ### blocked
@@ -224,6 +226,7 @@ v7.272_prompt_v2_static_review_and_second_trial_authorization_gate — 静态审
 46. v7.264 does not authorize active A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/output write/real manifest read/real asset read/.env.local value read/raw stdout retention/CDP/bridge/MCP/tag/release/deploy.
 47. v7.265 does not authorize provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/output write/real manifest read/real asset read/.env.local value read/raw stdout retention/CDP/bridge/MCP/tag/release/deploy; it only requests exact approval for preflight.
 48. v7.268b authorizes provider contact and image generation only for the single v7.269 minimal trial; it does not authorize retry, second generation, Batch 005, production_candidate_002, DailyNote, VCP memory, CDP/bridge/MCP, tag, release, or deploy.
+49. v7.273 authorizes only the single v7.274 second minimal generation trial using prompt v2 after v7.273 commit and push; it does not authorize retry, third generation, prompt switch, product switch, Batch 005, production_candidate_002, DailyNote, VCP memory, CDP/bridge/MCP, tag, release, or deploy.
 ```
 
 ### skipped

@@ -7,9 +7,9 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.271: efb627b on master == origin/master.
-Current mainline state: v7.271 prompt revision plan from first real output（第一张真实图后的 prompt v2 修订计划）.
-Current phase id: v7.271_prompt_revision_plan_from_first_real_output.
+Latest visible remote baseline before v7.273: 6f95b53 on master == origin/master.
+Current mainline state: v7.273 second minimal generation trial authorization gate（第二次最小真实生成试跑授权门）.
+Current phase id: v7.273_second_minimal_generation_trial_authorization_gate.
 Prior human route selection gate: v7.261_human_product_route_selection_request_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
@@ -63,12 +63,20 @@ memory_suitability: deferred.
 prompt_revision_plan_created: true.
 prompt_v2_created_or_planned: created.
 prompt_v2_ref: prompts/image_generation/product_still_life_matte_ceramic_mug_v2.yaml.
-A5_execution_allowed_now: false.
-provider_contact_allowed_now: false.
+prompt_v2_static_review_result: passed.
+second_minimal_generation_trial_authorized: true.
+approved_product_for_second_trial: matte_ceramic_mug.
+approved_prompt_package_for_second_trial: prompts/image_generation/product_still_life_matte_ceramic_mug_v2.yaml.
+provider_calls_max_for_second_trial: 1.
+generation_attempts_max_for_second_trial: 1.
+output_images_max_for_second_trial: 4.
+output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/.
+A5_execution_allowed_now: false during v7.273 authorization gate; true only for v7.274 bounded execution after v7.273 commit and push.
+provider_contact_allowed_now: false during v7.273 authorization gate; true only for v7.274 bounded execution after v7.273 commit and push.
 Master plan index: PROJECT_MASTER_PLAN.md.
-Not authorized now: Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, retry, second generation, tag, release, deploy.
-Recommended next: v7.272_prompt_v2_static_review_and_second_trial_authorization_gate（静态审查 prompt v2，并由人决定是否授权第二次最小生成试跑）.
-auto_execution_allowed_for_next: false.
+Not authorized now: Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, retry, third generation, tag, release, deploy.
+Recommended next: v7.274_second_minimal_generation_trial_execution（使用 v2 prompt 执行一次且仅一次第二次最小真实生成试跑，随后停止等待人工审片）.
+auto_execution_allowed_for_next: true under the v7.273 human authorization boundary only.
 ```
 
 历史状态脉络：

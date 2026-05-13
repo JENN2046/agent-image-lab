@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_271: efb627b
-origin_master_before_v7_271: efb627b
-status: prompt_v2_revision_plan_created
-mode: A4 prompt revision planning
-phase_id: v7.271_prompt_revision_plan_from_first_real_output
+latest_visible_head_before_v7_273: 6f95b53
+origin_master_before_v7_273: 6f95b53
+status: second_minimal_generation_trial_authorized
+mode: A5 authorization gate, docs and board only
+phase_id: v7.273_second_minimal_generation_trial_authorization_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -77,9 +77,17 @@ memory_suitability: deferred
 prompt_revision_plan_created: true
 prompt_v2_created_or_planned: created
 prompt_v2_ref: prompts/image_generation/product_still_life_matte_ceramic_mug_v2.yaml
-A5_execution_allowed_now: false
-provider_contact_allowed_now: false
-recommended_next: v7.272_prompt_v2_static_review_and_second_trial_authorization_gate
+prompt_v2_static_review_result: passed
+second_minimal_generation_trial_authorized: true
+approved_product_for_second_trial: matte_ceramic_mug
+approved_prompt_package_for_second_trial: prompts/image_generation/product_still_life_matte_ceramic_mug_v2.yaml
+provider_calls_max_for_second_trial: 1
+generation_attempts_max_for_second_trial: 1
+output_images_max_for_second_trial: 4
+output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/
+A5_execution_allowed_now: false during v7.273 authorization gate; true only for v7.274 bounded execution after v7.273 commit and push
+provider_contact_allowed_now: false during v7.273 authorization gate; true only for v7.274 bounded execution after v7.273 commit and push
+recommended_next: v7.274_second_minimal_generation_trial_execution
 ```
 
 ## Product Direction
@@ -191,15 +199,21 @@ package tightens product scale, top margin, directional lighting, background
 depth, ceramic rim/handle clarity, and colored-speck suppression. It is not an
 execution request and still requires v7.272 static review plus separate human A5
 authorization before any second trial.
+v7.272 static review passes prompt v2 for a bounded second trial. v7.273 records
+the human authorization for exactly one second minimal real generation trial
+using the v2 prompt package. The authorized v7.274 boundary is one provider
+call, one generation attempt, at most four output images, no retry, no memory
+write, no DailyNote write, no production candidate, no Batch 005, and immediate
+stop for human review after generation.
 
 ## Active Boundaries
 
 ```text
-A5: not authorized now
-provider contact: not authorized now
+A5: authorized only for v7.274 bounded second minimal generation trial after v7.273 commit and push
+provider contact: authorized only for v7.274 bounded second minimal generation trial after v7.273 commit and push
 runtime execution: not authorized
-plugin call: not authorized now
-image generation: not authorized now
+plugin call: not authorized outside the v7.274 project-established generation path
+image generation: authorized only for v7.274 bounded second minimal generation trial after v7.273 commit and push
 DailyNote / VCP memory write: not authorized
 real manifest / VCPChat / VCPToolBox read: not authorized
 tag / release / deploy / push: not authorized by this file
@@ -215,7 +229,7 @@ validation interpretation, staging, commit decisions, and next-task selection.
 ## Recommended Next
 
 Recommended next is
-`v7.272_prompt_v2_static_review_and_second_trial_authorization_gate`
-（静态审查 prompt v2，并由人决定是否授权第二次最小生成试跑）. No retry,
-second generation, memory write, Batch 005, or production_candidate_002 may
+`v7.274_second_minimal_generation_trial_execution`
+（使用 v2 prompt 执行一次且仅一次第二次最小真实生成试跑）. No retry,
+third generation, memory write, Batch 005, or production_candidate_002 may
 start automatically.
