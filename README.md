@@ -7,8 +7,8 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.246: f969d74 on master == origin/master.
-Current mainline state: v7.246 no-generation quota/provider path diagnostic readiness.
+Latest visible remote baseline before v7.247: 1c3edeb on master == origin/master.
+Current mainline state: v7.247 provider path decision package gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
 Current status: failed_no_image_repeated_quota_or_rate_limit.
@@ -17,9 +17,10 @@ A5_execution_allowed_now: false.
 provider_contact_allowed_now: false.
 Native Doubao static hardening: syntax/path sandbox/base URL/raw output/env allowlist/validator drift patched.
 Diagnostic decision: continue_generation_stop_until_route_selection.
+Provider path decision: ROUTE-3-CONTINUED-STOP selected now; Route 1 quota resolution and Route 2 provider/model/account switch are selectable later only after human decision.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized: A5, provider contact, runtime, plugin call, image generation, DailyNote write, VCP memory write, real manifest read, tag, release, deploy.
-Recommended next: v7.247_provider_path_decision_package_gate.
+Recommended next: v7.248_generation_stop_closeout_or_route_selection_request_gate.
 ```
 
 历史状态脉络：

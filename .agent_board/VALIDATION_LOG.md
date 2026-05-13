@@ -1,5 +1,44 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260513-V7-247-PROVIDER-PATH-DECISION-PACKAGE
+
+Task:
+
+```text
+Create a paper-only provider path decision package with three routes: external quota resolution, provider/model/account switch, and continued stop. Do not run A5, contact provider, call plugin, generate image, run generation runner, read .env.local values, write memory, or capture raw provider dashboard output.
+```
+
+Result:
+
+```text
+completed_validated
+```
+
+Decision:
+
+```text
+route_1_external_quota_resolution_defined: true
+route_2_provider_model_account_switch_defined: true
+route_3_continued_stop_defined: true
+selected_route_now: ROUTE-3-CONTINUED-STOP
+same_provider_retry_allowed_now: false
+A5_execution_allowed_now: false
+```
+
+Validation:
+
+```text
+git diff --check: passed
+node scripts/validate_current_state_alignment.js: passed
+node scripts/validate_agent_board_state.js: passed
+```
+
+Recommended next:
+
+```text
+v7.248_generation_stop_closeout_or_route_selection_request_gate
+```
+
 ## VALIDATION-20260513-V7-246-NO-GENERATION-DIAGNOSTIC-READINESS
 
 Task:

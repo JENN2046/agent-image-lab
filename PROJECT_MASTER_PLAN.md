@@ -8,15 +8,16 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_246: f969d74
-origin_master_before_v7_246: f969d74
+latest_visible_head_before_v7_247: 1c3edeb
+origin_master_before_v7_247: 1c3edeb
 status: failed_no_image_repeated_quota_or_rate_limit
-mode: A4 planning-only no-generation diagnostic readiness
+mode: A4 planning-only provider path decision package
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
 native_doubao_static_hardening: completed
 diagnostic_decision: continue_generation_stop_until_route_selection
+selected_route_now: ROUTE-3-CONTINUED-STOP
 ```
 
 ## Product Direction
@@ -54,7 +55,9 @@ base URL validation, env allowlist, public result redaction, exact call budget,
 and validator drift. v7.246 makes the no-generation diagnostic readiness
 decision: generation remains stopped until a human provides sanitized quota
 resolution evidence or selects a different provider/model/account path for a
-future paper-only decision package.
+future paper-only decision package. v7.247 defines the paper-only decision
+package: Route 1 external quota resolution, Route 2 provider/model/account
+switch, and Route 3 continued stop. Route 3 is selected now.
 
 ## Active Boundaries
 
@@ -79,8 +82,7 @@ validation interpretation, staging, commit decisions, and next-task selection.
 ## Recommended Next
 
 Recommended next is
-`v7.247_provider_path_decision_package_gate`: prepare a paper-only decision
-package for quota resolution evidence, alternate provider/model/account path, or
-continued stop. Do not call plugins, contact providers, generate images, save
-output, write memory, read secrets, or perform remote/version actions as part of
-this recommendation.
+`v7.248_generation_stop_closeout_or_route_selection_request_gate`: record or ask
+for the human route decision. Do not call plugins, contact providers, generate
+images, save output, write memory, read secrets, or perform remote/version
+actions as part of this recommendation.

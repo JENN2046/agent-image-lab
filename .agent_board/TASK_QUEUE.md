@@ -16,6 +16,7 @@ A5_execution_allowed_now: false.
 provider_contact_allowed_now: false.
 Native Doubao static hardening: completed.
 Diagnostic decision: continue_generation_stop_until_route_selection.
+Provider path decision: ROUTE-3-CONTINUED-STOP selected now.
 ```
 
 ---
@@ -66,13 +67,13 @@ none
 ### todo
 
 ```text
-1. v7.247_provider_path_decision_package_gate.
+1. v7.248_generation_stop_closeout_or_route_selection_request_gate.
 ```
 
 ### recommended_next_after_v7_243
 
 ```text
-v7.247_provider_path_decision_package_gate — paper-only decision package for quota resolution evidence, alternate provider/model/account path, or continued stop. No provider contact, plugin call, or generation.
+v7.248_generation_stop_closeout_or_route_selection_request_gate — record or request the human route decision. No provider contact, plugin call, or generation.
 ```
 
 ### done
@@ -127,6 +128,7 @@ v7.247_provider_path_decision_package_gate — paper-only decision package for q
 47. v7.244 state surface reconciliation aligned current status to failed_no_image_repeated_quota_or_rate_limit and recommended_next to v7.245_native_doubao_syntax_and_sandbox_hardening.
 48. v7.245 Native Doubao syntax and sandbox hardening patched path containment, base URL gate, env allowlist, public result redaction, exact call budget, and validator drift without generation.
 49. v7.246 no-generation diagnostic readiness selected continue_generation_stop_until_route_selection and recommended v7.247_provider_path_decision_package_gate.
+50. v7.247 provider path decision package defined Route 1 external quota resolution, Route 2 provider/model/account switch, and Route 3 continued stop; selected Route 3 for now.
 ```
 
 ### blocked
@@ -160,6 +162,7 @@ v7.247_provider_path_decision_package_gate — paper-only decision package for q
 26. v7.244 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/real manifest read/CDP/bridge/MCP/tag/release/deploy; same provider retry remains blocked.
 27. v7.245 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/real manifest read/.env.local value read/CDP/bridge/MCP/tag/release/deploy; same provider retry remains blocked.
 28. v7.246 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/real manifest read/.env.local value read/raw provider dashboard capture/CDP/bridge/MCP/tag/release/deploy; same provider retry remains blocked.
+29. v7.247 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/real manifest read/.env.local value read/raw provider dashboard capture/CDP/bridge/MCP/tag/release/deploy; selected route remains continued stop.
 ```
 
 ### skipped
