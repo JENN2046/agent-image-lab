@@ -8,10 +8,10 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_257: 5d3c127
-origin_master_before_v7_257: 5d3c127
+latest_visible_head_before_v7_258: 228a56a
+origin_master_before_v7_258: 228a56a
 status: failed_no_image_repeated_quota_or_rate_limit
-mode: A4 static Review Surface quality stop or next product decision
+mode: A4 product workflow fixture packet
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
@@ -31,6 +31,7 @@ static_review_surface_mockup_acceptance_review_completed: true
 static_review_surface_mockup_acceptance_result: pass_with_warnings
 accepted_final_explicit_state_patched: true
 static_review_surface_quality_stop_reached: true
+product_workflow_fixture_packet_created: true
 ```
 
 ## Product Direction
@@ -99,6 +100,9 @@ v7.257 decides that the static Review Surface track has reached an A4 quality
 stop. More static Review Surface polish is not the default next value; the next
 useful product task should connect the paper workflow through a synthetic fixture
 packet.
+v7.258 creates that synthetic non-executing fixture packet, linking prompt
+package input, future authorization placeholder, review record, asset status,
+memory suitability decision, and delivery handoff.
 
 ## Active Boundaries
 
@@ -122,8 +126,7 @@ validation interpretation, staging, commit decisions, and next-task selection.
 
 ## Recommended Next
 
-Recommended next is `v7.258_product_workflow_fixture_packet_gate`
-（产品图工作流纸面样例包门）. It should create one synthetic, non-executing
-fixture packet that connects prompt package input, generation authorization
-placeholder, review record, asset status, memory suitability decision, and
-delivery handoff.
+Recommended next is `v7.259_product_workflow_fixture_packet_acceptance_review_gate`
+（产品图工作流纸面样例包验收复核门）. It should review the fixture packet
+against prompt package, review record, memory suitability, delivery handoff, and
+no-execution boundary requirements.

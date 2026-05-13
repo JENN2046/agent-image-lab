@@ -28,6 +28,7 @@ Static Review Surface mockup file: v7.254 completed; standalone offline HTML exi
 Static Review Surface mockup acceptance review: v7.255 completed; result pass_with_warnings, accepted_final should be exposed as an explicit future/blocked status.
 Static Review Surface acceptance patch: v7.256 completed; accepted_final is now visible as future_blocked in the offline HTML.
 Static Review Surface quality stop decision: v7.257 completed; same-track static Review Surface polish stops by default and next value shifts to a product workflow fixture packet.
+Product workflow fixture packet: v7.258 completed; a synthetic non-executing packet now connects prompt package, authorization placeholder, review record, asset status, memory suitability, and delivery handoff.
 ```
 
 ---
@@ -81,10 +82,10 @@ none
 none
 ```
 
-### recommended_next_after_v7_257
+### recommended_next_after_v7_258
 
 ```text
-v7.258_product_workflow_fixture_packet_gate — 产品图工作流纸面样例包门。No provider contact, plugin call, runtime, memory write, or generation.
+v7.259_product_workflow_fixture_packet_acceptance_review_gate — 产品图工作流纸面样例包验收复核门。No provider contact, plugin call, runtime, memory write, or generation.
 ```
 
 ### done
@@ -150,6 +151,7 @@ v7.258_product_workflow_fixture_packet_gate — 产品图工作流纸面样例�
 58. v7.255 static Review Surface mockup acceptance review checked v7.254 HTML against v7.251 checklist and v7.253 spec, passing core no-execution checks with an accepted_final explicit-state follow-up.
 59. v7.256 static Review Surface acceptance patch added accepted_final as future_blocked in the offline HTML and updated the current-state surfaces.
 60. v7.257 static Review Surface quality stop decision concluded the static Review Surface track is complete enough for A4 and recommended a product workflow fixture packet next.
+61. v7.258 product workflow fixture packet created a synthetic non-executing packet linking prompt package input, future authorization placeholder, review record, asset status, memory suitability, and delivery handoff.
 ```
 
 ### blocked
@@ -194,6 +196,7 @@ v7.258_product_workflow_fixture_packet_gate — 产品图工作流纸面样例�
 37. v7.255 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/renderer/preload/IPC/real manifest read/.env.local value read/CDP/bridge/MCP/tag/release/deploy.
 38. v7.256 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/renderer/preload/IPC/real manifest read/.env.local value read/CDP/bridge/MCP/tag/release/deploy.
 39. v7.257 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/renderer/preload/IPC/real manifest read/.env.local value read/CDP/bridge/MCP/tag/release/deploy.
+40. v7.258 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/renderer/preload/IPC/real manifest read/real asset read/.env.local value read/CDP/bridge/MCP/tag/release/deploy.
 ```
 
 ### skipped

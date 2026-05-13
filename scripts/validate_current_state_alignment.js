@@ -15,13 +15,13 @@ const files = [
   ".agent_board/CHECKPOINT.md",
   ".agent_board/BLOCKERS.md",
   ".agent_board/VALIDATION_LOG.md",
-  "docs/v7_257_static_review_surface_quality_stop_or_next_product_decision_gate.md",
-  "docs/static_review_surface_quality_stop_or_next_product_decision.md",
+  "docs/v7_258_product_workflow_fixture_packet_gate.md",
+  "docs/product_workflow_fixture_packet.md",
 ];
 
 const requiredEverywhere = [
   "failed_no_image_repeated_quota_or_rate_limit",
-  "v7.258_product_workflow_fixture_packet_gate",
+  "v7.259_product_workflow_fixture_packet_acceptance_review_gate",
 ];
 
 const requiredCurrentSurfaces = [
