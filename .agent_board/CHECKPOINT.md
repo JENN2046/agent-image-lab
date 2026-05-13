@@ -1,10 +1,43 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.284 Accepted Candidate Evidence Package
+
+```text
+phase_id: v7.284_accepted_candidate_evidence_package
+Status: completed_locally_pending_checkpoint_commit
+Source phase: v7.283_candidate_acceptance_or_final_retouch_decision_gate
+Source commit: f3b8a05ab69f64795e18bf5e0f50fc383b268d3e
+Purpose: seal the v4 accepted candidate evidence package for the first V7 real product-image loop
+accepted_candidate_path: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+evidence_package_ref: docs/accepted_candidate_evidence_package_matte_ceramic_mug_v1.md
+asset_status: accepted_candidate_with_minor_retouch
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+generation_stopped: true
+fifth_generation_started: false
+output_image_added_to_git: false
+accepted_samples_written: false
+memory_write_performed: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+retry: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+production_candidate_002_started: false
+Batch_005_started: false
+recommended_next: v7.285_v7_product_loop_closeout
+recommended_next_zh: 封存 V7 第一条真实生成-审片-prompt 迭代闭环
+next_phase_started: false
+```
+
 ## v7.283 Candidate Acceptance Or Final Retouch Decision Gate
 
 ```text
 phase_id: v7.283_candidate_acceptance_or_final_retouch_decision_gate
-Status: completed_locally_pending_checkpoint_commit
+Status: completed_remote_synced
 Source phase: v7.282_human_review_of_fourth_real_outputs
 Source commit: 7970dec11e6a6195259ebb51049f19ef13e98d2e
 Purpose: present human decision options for keeping v4, planning final retouch, or separately authorizing a fifth minimal trial

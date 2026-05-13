@@ -1,5 +1,49 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-V7-284-ACCEPTED-CANDIDATE-EVIDENCE-PACKAGE
+
+Task:
+
+```text
+Create v7.284 accepted candidate evidence package for the first V7 real product-image loop. Seal the current v4 accepted candidate path, prompt evolution summary, four real output paths, four human review decisions, and explicit non-promotion boundaries. Do not generate an image, contact provider, call plugin, retry, write memory, write DailyNote, write VCP memory, write accepted_samples, stage or commit runs/ output images, start production_candidate_002, or start Batch 005.
+```
+
+Result:
+
+```text
+completed_validated
+```
+
+Validation:
+
+```text
+git status --short --branch: passed
+git diff --check: passed
+exact diff review: passed
+node scripts/validate_agent_board_state.js: passed
+node scripts/validate_current_state_alignment.js: passed
+node scripts/validate_native_doubao_sandbox.js: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1: passed_with_existing_manual_review_warnings
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1: passed
+generated_output_ignored: true
+generated_output_tracked_by_git: false
+accepted_samples_written: false
+fifth_generation_started: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+retry: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+```
+
+Recommended next:
+
+```text
+v7.285_v7_product_loop_closeout（封存 V7 第一条真实生成-审片-prompt迭代闭环）
+```
+
 ## VALIDATION-20260514-V7-283-CANDIDATE-ACCEPTANCE-OR-RETOUCH-DECISION
 
 Task:

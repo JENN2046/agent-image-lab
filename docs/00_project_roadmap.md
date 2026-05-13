@@ -18,9 +18,9 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.283: 7970dec on master == origin/master.
-Current mainline state: v7.283 candidate acceptance or final retouch decision gate（候选保留 / 后期修图 / 第五次试跑人工决策门）.
-Current phase id: v7.283_candidate_acceptance_or_final_retouch_decision_gate.
+Latest visible remote baseline before v7.284: f3b8a05 on master == origin/master.
+Current mainline state: v7.284 accepted candidate evidence package（v4 accepted candidate 证据包）.
+Current phase id: v7.284_accepted_candidate_evidence_package.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
@@ -134,9 +134,15 @@ v7.283_recommended_option: keep_v4_and_stop_generation.
 v7.283_secondary_safe_option: final_retouch_planning_no_generation.
 v7.283_fifth_trial_recommendation: low_to_medium_requires_new_explicit_human_authorization.
 v7.283_human_decision_required_before_next_generation: true.
+v7.284_evidence_package_created: true.
+accepted_candidate_evidence_package_ref: docs/accepted_candidate_evidence_package_matte_ceramic_mug_v1.md.
+v7.284_generation_stopped: true.
+v7.284_output_image_added_to_git: false.
+v7.284_accepted_samples_written: false.
+v7.284_memory_write_performed: false.
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed.
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate.
-Recommended next: v7.284_accepted_candidate_evidence_package（封存 v4 accepted candidate 证据包，不生成新图）.
+Recommended next: v7.285_v7_product_loop_closeout（封存 V7 第一条真实生成-审片-prompt 迭代闭环）.
 auto_execution_allowed_for_next: false.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)
@@ -446,8 +452,9 @@ daily_note_called: false
 18. v7.281_fourth_minimal_generation_trial_execution 已成功生成 1 张 v4 输出并停止，图片未加入 Git。
 19. v7.282_human_review_of_fourth_real_outputs 已记录人工审片：accepted_candidate_with_minor_retouch、accepted_candidate=true、commercial_delivery_ready=false、memory_suitability=deferred，当前最佳候选为 v4。
 20. v7.283_candidate_acceptance_or_final_retouch_decision_gate 已给出三个选项：保留 v4 并停止生成、只做 final retouch planning、或重新授权第五次极小试跑；默认推荐保留 v4 并停止生成。
-21. Batch 005、production_candidate_002、memory_write_path、DailyNote/VCP memory、retry、第五次生成、tag/release/deploy 仍未授权。
-22. recommended next: v7.284_accepted_candidate_evidence_package（封存 v4 accepted candidate 证据包，不生成新图）。
+21. v7.284_accepted_candidate_evidence_package 已封存 v4 accepted candidate 证据包；不复制、不移动、不 stage、不 commit `runs/` 输出图。
+22. Batch 005、production_candidate_002、memory_write_path、DailyNote/VCP memory、retry、第五次生成、tag/release/deploy 仍未授权。
+23. recommended next: v7.285_v7_product_loop_closeout（封存 V7 第一条真实生成-审片-prompt 迭代闭环）。
 
 ## 永久安全门
 

@@ -9,24 +9,24 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab is in v7.283 candidate acceptance or final retouch decision gate. v4 remains the current accepted candidate with minor retouch needs; the default recommendation is to keep v4 and stop generation, with final retouch planning as the secondary safe option.
+Agent Image Lab is in v7.284 accepted candidate evidence package. v4 is sealed as the current accepted candidate with minor retouch needs, generation is stopped, and no production candidate or memory write is authorized.
 ```
 
 ## Current Phase
 
 ```text
-v7.283 Candidate Acceptance Or Final Retouch Decision Gate
-phase_id: v7.283_candidate_acceptance_or_final_retouch_decision_gate
-source_phase: v7.282_human_review_of_fourth_real_outputs
+v7.284 Accepted Candidate Evidence Package
+phase_id: v7.284_accepted_candidate_evidence_package
+source_phase: v7.283_candidate_acceptance_or_final_retouch_decision_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
-status: candidate_acceptance_options_presented_pending_checkpoint_commit
-source_commit: 7970dec
-source_message: docs: review fourth real ceramic mug output
+status: accepted_candidate_evidence_package_pending_checkpoint_commit
+source_commit: f3b8a05
+source_message: docs: decide accepted candidate or final retouch path
 branch: master tracking origin/master
-Worktree: clean before v7.283 decision gate patch; generated v7.281 output remains ignored under runs/
+Worktree: clean before v7.284 evidence package patch; generated v7.281 output remains ignored under runs/
 worktree_start_clean: true
-origin_sync_current: local HEAD equals origin/master at 7970dec
+origin_sync_current: local HEAD equals origin/master at f3b8a05
 ahead_behind: 0/0
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false; the single authorized v7.281 call has been consumed
@@ -110,7 +110,7 @@ output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug
 auto_retry_for_second_trial: false
 stop_after_generation_for_second_trial: true
 human_review_required_after_generation: true
-recommended_next: v7.283_candidate_acceptance_or_final_retouch_decision_gate
+recommended_next: v7.285_v7_product_loop_closeout
 v7.274_status: completed_success
 v7.274_provider_contact: true
 v7.274_image_generation: true
@@ -196,7 +196,14 @@ v7.283_recommended_option: keep_v4_and_stop_generation
 v7.283_secondary_safe_option: final_retouch_planning_no_generation
 v7.283_fifth_trial_recommendation: low_to_medium_requires_new_explicit_human_authorization
 v7.283_human_decision_required_before_next_generation: true
-v7.284_recommended_next: v7.284_accepted_candidate_evidence_package
+v7.284_status: in_progress_evidence_package
+v7.284_evidence_package_created: true
+accepted_candidate_evidence_package_ref: docs/accepted_candidate_evidence_package_matte_ceramic_mug_v1.md
+v7.284_generation_stopped: true
+v7.284_output_image_added_to_git: false
+v7.284_accepted_samples_written: false
+v7.284_memory_write_performed: false
+v7.285_recommended_next: v7.285_v7_product_loop_closeout
 v7.274_stopped_after_generation: true
 human_review_required_now: true
 recommended_next_after_v7_274: v7.275_human_review_of_second_real_outputs
@@ -209,18 +216,18 @@ v7.275_memory_write_allowed_without_separate_authorization: false
 ## Current Task
 
 ```text
-v7.283 decision gate presents three human options: keep v4 and stop generation, plan final retouch with no new generation, or separately authorize a fifth minimal trial. Recommendation favors keep_v4_and_stop_generation.
+v7.284 evidence package seals the v4 accepted candidate evidence for the first V7 real product-image loop. No fifth generation, production_candidate_002, accepted_samples write, or memory write is authorized.
 ```
 
 ## Current Local Work State
 
 ```text
-Worktree: dirty with v7.283 decision gate documentation and state-surface updates.
+Worktree: dirty with v7.284 evidence package documentation and state-surface updates.
 active_workers: 0
 execution_mode: Single-Window 4-Agent Compact Autopilot
-commander_role: keep this decision gate inside A4 docs and stop before any new generation or remote push
+commander_role: keep this evidence package inside A4 docs and stop before any new generation or unauthorized write
 architect_role: preserve no-generation and no-memory boundaries
-worker_role: apply only the v7.283 decision options and board reality correction
+worker_role: apply only the v7.284 evidence package and board reality correction
 reviewer_role: inspect diff, run allowed local checks, confirm no new provider/plugin/image/memory behavior during this patch, and close out
 validation_status: completed_validated_pending_guarded_local_commit
 ```
@@ -269,7 +276,7 @@ Prompt revision plan from first real output: v7.271 completed_pending_validation
 Prompt v2 static review: v7.272 passed.
 Second minimal generation authorization: v7.273 completed, committed, pushed, and synced at d1a7ac8.
 Second minimal generation trial: v7.274 completed_success with one output and no retry.
-Recommended next product task: v7.284_accepted_candidate_evidence_package（封存 v4 accepted candidate 证据包，不生成新图）
+Recommended next product task: v7.285_v7_product_loop_closeout（封存 V7 第一条真实生成-审片-prompt 迭代闭环）
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```

@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_283: 7970dec
-origin_master_before_v7_283: 7970dec
-status: candidate_acceptance_or_final_retouch_decision_gate
-mode: A4 decision gate
-phase_id: v7.283_candidate_acceptance_or_final_retouch_decision_gate
+latest_visible_head_before_v7_284: f3b8a05
+origin_master_before_v7_284: f3b8a05
+status: accepted_candidate_evidence_package
+mode: A4 docs-only evidence package
+phase_id: v7.284_accepted_candidate_evidence_package
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -138,9 +138,15 @@ v7.283_recommended_option: keep_v4_and_stop_generation
 v7.283_secondary_safe_option: final_retouch_planning_no_generation
 v7.283_fifth_trial_recommendation: low_to_medium_requires_new_explicit_human_authorization
 v7.283_human_decision_required_before_next_generation: true
+v7.284_evidence_package_created: true
+accepted_candidate_evidence_package_ref: docs/accepted_candidate_evidence_package_matte_ceramic_mug_v1.md
+v7.284_generation_stopped: true
+v7.284_output_image_added_to_git: false
+v7.284_accepted_samples_written: false
+v7.284_memory_write_performed: false
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate
-recommended_next: v7.284_accepted_candidate_evidence_package
+recommended_next: v7.285_v7_product_loop_closeout
 ```
 
 ## Product Direction
@@ -297,6 +303,6 @@ validation interpretation, staging, commit decisions, and next-task selection.
 ## Recommended Next
 
 Recommended next is
-`v7.284_accepted_candidate_evidence_package`
-（封存 v4 accepted candidate 证据包，不生成新图）. No retry, fifth generation,
+`v7.285_v7_product_loop_closeout`
+（封存 V7 第一条真实生成-审片-prompt 迭代闭环）. No retry, fifth generation,
 memory write, Batch 005, or production_candidate_002 may start automatically.
