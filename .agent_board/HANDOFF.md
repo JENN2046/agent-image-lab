@@ -3,15 +3,15 @@
 ## Handoff Summary
 
 ```text
-Status: v7.274 second minimal generation trial completed; human review required.
-Reason: v7.274 used prompt v2 for exactly one bounded second trial, generated 1 output, and stopped with no retry.
+Status: v7.275 human review of second real output completed; v3 minor refinement gate is next.
+Reason: v7.274 used prompt v2 for exactly one bounded second trial, generated 1 output, stopped with no retry, and v7.275 reviewed it as accepted_candidate_with_minor_retouch.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
 Latest visible head before v7.273: 6f95b53 == origin/master
 Current synced HEAD: d1a7ac8 docs: authorize second minimal generation trial
 ahead_behind: 0/0
 Worktree: dirty with .agent_board reality correction only
-Current status: second_minimal_generation_trial_succeeded
+Current status: second_real_output_reviewed
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false; the single authorized v7.274 call has been consumed
 provider_contact_allowed_now: false; the single authorized v7.274 provider contact has been consumed
@@ -88,6 +88,11 @@ third_generation_allowed_now: false
 accepted_candidate: pending_human_review
 commercial_delivery_ready: pending_human_review
 memory_suitability: pending_human_review
+v7.275_human_review_status: completed
+v7.275_asset_status: accepted_candidate_with_minor_retouch
+v7.275_accepted_candidate: true
+v7.275_commercial_delivery_ready: false
+v7.275_memory_suitability: deferred
 provider_contact_after_v7_274: false
 image_generation_after_v7_274: false
 human_review_required_now: true
@@ -218,13 +223,13 @@ A5_execution_allowed_now: false; the single authorized v7.274 call has been cons
 provider_contact_allowed_now: false; the single authorized v7.274 provider contact has been consumed
 
 continue_A4_docs_only_by_default: false
-recommended_next: v7.275_human_review_of_second_real_outputs
-recommended_next_zh: 人工审查第二次真实输出，不生成新图，不写 memory
+recommended_next: v7.276_prompt_v3_minor_refinement_and_third_trial_authorization_gate
+recommended_next_zh: 基于第二张图创建 v3 小幅精修 prompt，并由人工决定是否授权第三次最小真实生成试跑
 auto_execution_allowed_for_next: false
-v7.275_purpose: human review of the v7.274 generated output
-v7.275_image_generation_allowed: false
-v7.275_provider_contact_allowed: false
-v7.275_memory_write_allowed_without_separate_authorization: false
+v7.276_purpose: prompt v3 minor refinement and third-trial authorization boundary
+v7.276_image_generation_allowed: false
+v7.276_provider_contact_allowed: false
+v7.276_memory_write_allowed_without_separate_authorization: false
 ```
 
 ## Current Stop Gates

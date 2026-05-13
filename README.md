@@ -7,9 +7,9 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.273: 6f95b53 on master == origin/master.
-Current mainline state: v7.273 second minimal generation trial authorization gate（第二次最小真实生成试跑授权门）.
-Current phase id: v7.273_second_minimal_generation_trial_authorization_gate.
+Latest visible remote baseline before v7.275: 23453cf on master == origin/master.
+Current mainline state: v7.275 human review of second real outputs（第二次真实输出人工审片）.
+Current phase id: v7.275_human_review_of_second_real_outputs.
 Prior human route selection gate: v7.261_human_product_route_selection_request_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
@@ -71,12 +71,20 @@ provider_calls_max_for_second_trial: 1.
 generation_attempts_max_for_second_trial: 1.
 output_images_max_for_second_trial: 4.
 output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/.
-A5_execution_allowed_now: false during v7.273 authorization gate; true only for v7.274 bounded execution after v7.273 commit and push.
-provider_contact_allowed_now: false during v7.273 authorization gate; true only for v7.274 bounded execution after v7.273 commit and push.
+v7.274_status: completed_success.
+v7.274_output_images_count: 1.
+v7.274_output_file: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg.
+v7.275_human_review_status: completed.
+v7.275_asset_status: accepted_candidate_with_minor_retouch.
+v7.275_accepted_candidate: true.
+v7.275_commercial_delivery_ready: false.
+v7.275_memory_suitability: deferred.
+A5_execution_allowed_now: false after v7.275; v7.274 single authorized call has been consumed.
+provider_contact_allowed_now: false after v7.275; no retry or third generation is active without a new v7.276 authorization gate.
 Master plan index: PROJECT_MASTER_PLAN.md.
-Not authorized now: Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, retry, third generation, tag, release, deploy.
-Recommended next: v7.274_second_minimal_generation_trial_execution（使用 v2 prompt 执行一次且仅一次第二次最小真实生成试跑，随后停止等待人工审片）.
-auto_execution_allowed_for_next: true under the v7.273 human authorization boundary only.
+Not authorized now: Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, retry, third generation execution, tag, release, deploy.
+Recommended next: v7.276_prompt_v3_minor_refinement_and_third_trial_authorization_gate（创建 v3 小幅精修 prompt，并由人工决定是否授权第三次最小真实生成试跑）.
+auto_execution_allowed_for_next: false until v7.276 authorization gate is completed.
 ```
 
 历史状态脉络：

@@ -36,7 +36,7 @@ Project plugin route authorization planning: v7.262 completed; NativeDoubaoImage
 Project plugin A5 authorization package draft: v7.263 completed; AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 is draft-only with approval_status=not_requested and execute_now=false.
 Project plugin A5 authorization draft review: v7.264 completed; draft result is pass_to_keep_inactive and activation remains blocked.
 True A5 authorization request: v7.265 completed_validated; AUTH-PENDING-PROJECT-PLUGIN-20260513-001 fixes prompt/output/model/budget for preflight-only approval and still blocks provider/plugin/image/env value actions.
-Route B minimal real generation authorization: v7.268b completed; v7.269 succeeded with one matte_ceramic_mug output and no retry; v7.270 records human review as needs_revision, accepted_candidate=false, commercial_delivery_ready=false, memory_suitability=deferred; v7.271 creates a static prompt v2 revision plan without generation; v7.272 static review passed; v7.273 authorized exactly one v7.274 second minimal generation trial using prompt v2 and is completed, committed, pushed, and synced at d1a7ac8; v7.274 completed successfully with one output and no retry.
+Route B minimal real generation authorization: v7.268b completed; v7.269 succeeded with one matte_ceramic_mug output and no retry; v7.270 records human review as needs_revision, accepted_candidate=false, commercial_delivery_ready=false, memory_suitability=deferred; v7.271 creates a static prompt v2 revision plan without generation; v7.272 static review passed; v7.273 authorized exactly one v7.274 second minimal generation trial using prompt v2 and is completed, committed, pushed, and synced at d1a7ac8; v7.274 completed successfully with one output and no retry; v7.275 reviewed that output as accepted_candidate_with_minor_retouch, accepted_candidate=true, commercial_delivery_ready=false, memory_suitability=deferred.
 ```
 
 ---
@@ -87,14 +87,14 @@ none
 ### todo
 
 ```text
-v7.275_human_review_of_second_real_outputs — 人工审查第二次真实输出；不生成新图、不 provider contact、不 retry、不写 memory。
+v7.276_prompt_v3_minor_refinement_and_third_trial_authorization_gate — 创建 v3 小幅精修 prompt 并记录第三次最小真实生成试跑授权边界；本阶段不生成图片、不 provider contact、不 retry、不写 memory。
 ```
 
-### recommended_next_after_v7_274
+### recommended_next_after_v7_275
 
 ```text
-v7.275_human_review_of_second_real_outputs — 人工审查第二次真实输出，决定 accepted / needs_revision / rejected / deferred。No retry, third generation, Batch 005, production_candidate_002, memory write, DailyNote write, tag, release, or deploy.
-status: pending_human_review
+v7.276_prompt_v3_minor_refinement_and_third_trial_authorization_gate — 基于第二张图创建 v3 小幅精修 prompt，并由人工授权第三次最小真实生成试跑。No provider contact or image generation inside v7.276 itself.
+status: pending_prompt_v3_authorization_gate
 reviewed_output: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
 generated_output: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
 output_images_count: 1
@@ -103,19 +103,19 @@ generation_attempts_used: 1
 auto_retry: false
 retry_performed: false
 no_retry: true
-no_third_generation: true
-third_generation_allowed_now: false
-accepted_candidate: pending_human_review
-commercial_delivery_ready: pending_human_review
-memory_suitability: pending_human_review
+accepted_candidate: true
+asset_status: accepted_candidate_with_minor_retouch
+commercial_delivery_ready: false
+memory_suitability: deferred
+third_generation_execution_allowed_now: false
 no_memory_write: true
 no_DailyNote_write: true
 no_VCP_memory_write: true
 no_tag_release_deploy: true
-v7.275_purpose: human review of the v7.274 generated output
-v7.275_image_generation_allowed: false
-v7.275_provider_contact_allowed: false
-v7.275_memory_write_allowed_without_separate_authorization: false
+v7.276_purpose: create prompt v3 and authorization boundary for a separately bounded third trial
+v7.276_image_generation_allowed: false
+v7.276_provider_contact_allowed: false
+v7.276_memory_write_allowed_without_separate_authorization: false
 ```
 
 ### done
@@ -196,7 +196,8 @@ v7.275_memory_write_allowed_without_separate_authorization: false
 73. v7.272 prompt v2 static review passed and recommends human authorization for a second minimal trial.
 74. v7.273 second minimal generation authorization gate docs/board validation passed, was committed and pushed as d1a7ac8, and local master is synced with origin/master at 0/0.
 75. v7.274 second minimal generation trial completed successfully with one output and no retry: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg.
-76. v7_274_post_run_board_reconciliation completed validation and is pending guarded local commit.
+76. v7_274_post_run_board_reconciliation completed validation and was sealed/pushed in commit 23453cf.
+77. v7.275 human review of second real outputs records accepted_candidate_with_minor_retouch, accepted_candidate=true, commercial_delivery_ready=false, memory_suitability=deferred.
 ```
 
 ### blocked

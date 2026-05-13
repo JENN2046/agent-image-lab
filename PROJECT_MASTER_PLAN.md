@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_273: 6f95b53
-origin_master_before_v7_273: 6f95b53
-status: second_minimal_generation_trial_authorized
-mode: A5 authorization gate, docs and board only
-phase_id: v7.273_second_minimal_generation_trial_authorization_gate
+latest_visible_head_before_v7_275: 23453cf
+origin_master_before_v7_275: 23453cf
+status: second_real_output_reviewed
+mode: A4 review documentation only
+phase_id: v7.275_human_review_of_second_real_outputs
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -85,9 +85,17 @@ provider_calls_max_for_second_trial: 1
 generation_attempts_max_for_second_trial: 1
 output_images_max_for_second_trial: 4
 output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/
-A5_execution_allowed_now: false during v7.273 authorization gate; true only for v7.274 bounded execution after v7.273 commit and push
-provider_contact_allowed_now: false during v7.273 authorization gate; true only for v7.274 bounded execution after v7.273 commit and push
-recommended_next: v7.274_second_minimal_generation_trial_execution
+v7.274_status: completed_success
+v7.274_output_images_count: 1
+v7.274_output_file: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
+v7.275_human_review_status: completed
+v7.275_asset_status: accepted_candidate_with_minor_retouch
+v7.275_accepted_candidate: true
+v7.275_commercial_delivery_ready: false
+v7.275_memory_suitability: deferred
+A5_execution_allowed_now: false after v7.275; v7.274 single authorized call has been consumed
+provider_contact_allowed_now: false after v7.275; no retry or third generation is active without a new v7.276 authorization gate
+recommended_next: v7.276_prompt_v3_minor_refinement_and_third_trial_authorization_gate
 ```
 
 ## Product Direction
@@ -201,19 +209,22 @@ execution request and still requires v7.272 static review plus separate human A5
 authorization before any second trial.
 v7.272 static review passes prompt v2 for a bounded second trial. v7.273 records
 the human authorization for exactly one second minimal real generation trial
-using the v2 prompt package. The authorized v7.274 boundary is one provider
-call, one generation attempt, at most four output images, no retry, no memory
-write, no DailyNote write, no production candidate, no Batch 005, and immediate
-stop for human review after generation.
+using the v2 prompt package. v7.274 consumes that single authorized call and
+generates one output. v7.275 records the human review result:
+`asset_status=accepted_candidate_with_minor_retouch`,
+`accepted_candidate=true`, `commercial_delivery_ready=false`, and
+`memory_suitability=deferred`. The recommended next step is a small v3 prompt
+refinement and a separate third-trial authorization gate, not automatic
+generation.
 
 ## Active Boundaries
 
 ```text
-A5: authorized only for v7.274 bounded second minimal generation trial after v7.273 commit and push
-provider contact: authorized only for v7.274 bounded second minimal generation trial after v7.273 commit and push
+A5: not authorized after v7.275; v7.274 single authorized call has been consumed
+provider contact: not authorized after v7.275; no retry or third generation is active without v7.276
 runtime execution: not authorized
-plugin call: not authorized outside the v7.274 project-established generation path
-image generation: authorized only for v7.274 bounded second minimal generation trial after v7.273 commit and push
+plugin call: not authorized after v7.275
+image generation: not authorized after v7.275
 DailyNote / VCP memory write: not authorized
 real manifest / VCPChat / VCPToolBox read: not authorized
 tag / release / deploy / push: not authorized by this file
@@ -229,7 +240,7 @@ validation interpretation, staging, commit decisions, and next-task selection.
 ## Recommended Next
 
 Recommended next is
-`v7.274_second_minimal_generation_trial_execution`
-（使用 v2 prompt 执行一次且仅一次第二次最小真实生成试跑）. No retry,
-third generation, memory write, Batch 005, or production_candidate_002 may
-start automatically.
+`v7.276_prompt_v3_minor_refinement_and_third_trial_authorization_gate`
+（创建 v3 小幅精修 prompt，并由人工决定是否授权第三次最小真实生成试跑）. No retry,
+third generation execution, memory write, Batch 005, or production_candidate_002
+may start automatically.
