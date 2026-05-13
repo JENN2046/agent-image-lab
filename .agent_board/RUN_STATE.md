@@ -9,23 +9,23 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab has reviewed the draft-only project plugin A5 authorization package for NativeDoubaoImage; it remains inactive and all execution is still blocked.
+Agent Image Lab is preparing the true A5 preflight authorization request for NativeDoubaoImage; it remains non-executing and all provider/plugin/image actions are still blocked.
 ```
 
 ## Current Phase
 
 ```text
-v7.264 Project Plugin A5 Authorization Draft Review Gate
-phase_id: v7.264_project_plugin_A5_authorization_draft_review_gate
+v7.265 True A5 Authorization Request Gate
+phase_id: v7.265_true_A5_authorization_request_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 status: failed_no_image_repeated_quota_or_rate_limit
-source_commit: 95852dd
-source_message: docs: add project plugin A5 authorization draft
+source_commit: eecbae5
+source_message: docs: review project plugin A5 authorization draft
 branch: master tracking origin/master
-Worktree: clean at v7.264 start
+Worktree: clean at v7.265 start
 worktree_start_clean: true
-origin_sync_start: local HEAD equals origin/master at 95852dd
+origin_sync_start: local HEAD equals origin/master at eecbae5
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
@@ -68,19 +68,27 @@ execute_now: false
 project_plugin_A5_authorization_draft_review_completed: true
 draft_review_result: pass_to_keep_inactive
 activation_verdict: blocked
-recommended_next: pending_human_decision_for_true_A5_authorization
+true_A5_authorization_request_created: true
+pending_authorization_package_id: AUTH-PENDING-PROJECT-PLUGIN-20260513-001
+prompt_package_ref: prompts/image_generation/product_still_life_matte_ceramic_mug_v1.yaml
+output_directory_ref: runs/real_generation/A5-PROJECT-PLUGIN-20260513-001/
+preflight_approval_status: requested_for_preflight_only
+active_A5_authorization_created: false
+plugin_call_allowed_now: false
+image_generation_allowed_now: false
+recommended_next: run_true_A5_preflight_only_after_exact_approval
 ```
 
 ## Current Task
 
 ```text
-Stop and wait for a human decision on whether to enter true A5 authorization, keep generation stopped, or select a different provider/model/account path.
+Prepare and validate the true A5 preflight authorization request, then stop at the exact preflight approval phrase.
 ```
 
 ## Current Local Work State
 
 ```text
-Worktree: clean at v7.264 start after v7.263 push
+Worktree: clean at v7.265 start after v7.264 push
 active_workers: 0
 execution_mode: Single-Window 4-Agent Compact Autopilot
 commander_role: keep project plugin authorization review inside A4 paperwork
@@ -125,7 +133,8 @@ Human product route selection request: v7.261 completed; four routes are present
 Project plugin route authorization planning: v7.262 completed; NativeDoubaoImage is the candidate project plugin path for a future non-active authorization draft.
 Project plugin A5 authorization package draft: v7.263 completed; AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 is draft-only and inactive.
 Project plugin A5 authorization draft review: v7.264 completed; result pass_to_keep_inactive, activation blocked.
-Recommended next product task: pending_human_decision_for_true_A5_authorization（等待人工决定是否进入真正 A5 授权）
+True A5 authorization request: v7.265 completed_validated; AUTH-PENDING-PROJECT-PLUGIN-20260513-001 is preflight-only and inactive.
+Recommended next product task: run_true_A5_preflight_only_after_exact_approval（收到精确授权语后只运行真正 A5 preflight）
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```
@@ -171,8 +180,8 @@ tag/release/deploy remain blocked without explicit authorization and preflight
 ## Current Options
 
 ```text
-recommended_next_after_v7_264: pending_human_decision_for_true_A5_authorization
-purpose: stop until the owner chooses true A5 authorization, continued stop, or provider/model/account switch
+recommended_next_after_v7_265: run_true_A5_preflight_only_after_exact_approval
+purpose: stop until the owner provides the exact preflight-only approval phrase
 not_allowed_as_next_by_default: A5, provider contact, runtime, plugin call, image generation, memory write, tag, release
 ```
 
@@ -237,5 +246,5 @@ external repository modification: no
 ```text
 Use the calibrated board as the current navigation source.
 The second newly approved DoubaoGen diagnostic retry was consumed by one process attempt. The result is failed_no_image_repeated_quota_or_rate_limit; generation remains blocked unless the user resolves provider quota/rate-limit conditions or authorizes a new provider/model/account path.
-For the project plugin route, stop before any A5 activation, provider contact, plugin call, image generation, output write, or memory write. The current recommended next is pending_human_decision_for_true_A5_authorization.
+For the project plugin route, stop before any A5 activation, provider contact, plugin call, image generation, output write, or memory write. The current recommended next is run_true_A5_preflight_only_after_exact_approval.
 ```

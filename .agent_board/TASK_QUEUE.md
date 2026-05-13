@@ -35,6 +35,7 @@ Human product route selection request: v7.261_human_product_route_selection_requ
 Project plugin route authorization planning: v7.262 completed; NativeDoubaoImage is the candidate project plugin path, but A5/provider/plugin/image remain blocked.
 Project plugin A5 authorization package draft: v7.263 completed; AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 is draft-only with approval_status=not_requested and execute_now=false.
 Project plugin A5 authorization draft review: v7.264 completed; draft result is pass_to_keep_inactive and activation remains blocked.
+True A5 authorization request: v7.265 completed_validated; AUTH-PENDING-PROJECT-PLUGIN-20260513-001 fixes prompt/output/model/budget for preflight-only approval and still blocks provider/plugin/image/env value actions.
 ```
 
 ---
@@ -88,10 +89,10 @@ none
 none
 ```
 
-### recommended_next_after_v7_264
+### recommended_next_after_v7_265
 
 ```text
-pending_human_decision_for_true_A5_authorization — 等待人工决定是否进入真正 A5 授权。No automatic next phase; no activation, provider contact, plugin call, runtime, memory write, or generation.
+run_true_A5_preflight_only_after_exact_approval — 收到精确授权语后只运行真正 A5 preflight。No automatic provider contact, plugin call, runtime, memory write, output write, env value read, or generation.
 ```
 
 ### done
@@ -164,6 +165,7 @@ pending_human_decision_for_true_A5_authorization — 等待人工决定是否进
 65. v7.262 project plugin route authorization planning gate selected NativeDoubaoImage as the project-local candidate for a future non-active authorization draft.
 66. v7.263 project plugin A5 authorization package draft gate created AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 as a draft-only inactive package.
 67. v7.264 project plugin A5 authorization draft review gate found the draft safe to keep inactive, with activation blocked.
+68. v7.265 true A5 authorization request gate prepared and validated AUTH-PENDING-PROJECT-PLUGIN-20260513-001 for preflight-only approval.
 ```
 
 ### blocked
@@ -215,6 +217,7 @@ pending_human_decision_for_true_A5_authorization — 等待人工决定是否进
 44. v7.262 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/renderer/preload/IPC/real manifest read/real asset read/.env.local value read/CDP/bridge/MCP/tag/release/deploy.
 45. v7.263 does not authorize active A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/output write/real manifest read/real asset read/.env.local value read/raw stdout retention/CDP/bridge/MCP/tag/release/deploy.
 46. v7.264 does not authorize active A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/output write/real manifest read/real asset read/.env.local value read/raw stdout retention/CDP/bridge/MCP/tag/release/deploy.
+47. v7.265 does not authorize provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/output write/real manifest read/real asset read/.env.local value read/raw stdout retention/CDP/bridge/MCP/tag/release/deploy; it only requests exact approval for preflight.
 ```
 
 ### skipped

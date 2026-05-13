@@ -1,5 +1,36 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260513-V7-265-TRUE-A5-AUTHORIZATION-REQUEST
+
+Task:
+
+```text
+Create the true A5 preflight authorization request package for the NativeDoubaoImage project plugin path. Fix the prompt package ref, output directory ref, model, call budget, and preflight-only approval phrase. Do not call providers/plugins, generate images, run runtime, read .env values, or write memory.
+```
+
+Result:
+
+```text
+completed_validated
+```
+
+Validation:
+
+```text
+git diff --check: passed
+node scripts/validate_current_state_alignment.js: passed
+node scripts/validate_agent_board_state.js: passed
+node scripts/validate_native_doubao_sandbox.js: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1: passed_with_existing_manual_review_warnings
+```
+
+Recommended next:
+
+```text
+run_true_A5_preflight_only_after_exact_approval（收到精确授权语后只运行真正 A5 preflight）
+```
+
 ## VALIDATION-20260513-V7-264-PROJECT-PLUGIN-A5-AUTHORIZATION-DRAFT-REVIEW
 
 Task:

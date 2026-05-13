@@ -3,11 +3,11 @@
 ## Handoff Summary
 
 ```text
-Status: v7.264 project plugin A5 authorization draft review completed locally.
-Reason: v7.264 reviews AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 and concludes it is safe to keep as inactive paperwork, but blocked for activation.
+Status: v7.265 true A5 authorization request prepared locally.
+Reason: v7.265 fixes the true A5 preflight request package for NativeDoubaoImage while keeping all execution blocked.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
-Latest visible head before v7.264: 95852dd == origin/master
+Latest visible head before v7.265: eecbae5 == origin/master
 Current status: failed_no_image_repeated_quota_or_rate_limit
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
@@ -29,6 +29,14 @@ execute_now: false
 Project plugin A5 authorization draft review: v7.264 completed_validated
 draft_review_result: pass_to_keep_inactive
 activation_verdict: blocked
+True A5 authorization request: v7.265 completed_validated
+pending_authorization_package_id: AUTH-PENDING-PROJECT-PLUGIN-20260513-001
+prompt_package_ref: prompts/image_generation/product_still_life_matte_ceramic_mug_v1.yaml
+output_directory_ref: runs/real_generation/A5-PROJECT-PLUGIN-20260513-001/
+preflight_approval_status: requested_for_preflight_only
+active_A5_authorization_created: false
+plugin_call_allowed_now: false
+image_generation_allowed_now: false
 Current active workers: 0
 Current operating style: Single-Window 4-Agent Compact Autopilot
 ```
@@ -114,13 +122,21 @@ execute_now: false
 project plugin A5 authorization draft review: v7.264 completed_validated
 draft_review_result: pass_to_keep_inactive
 activation_verdict: blocked
+true A5 authorization request: v7.265 completed_validated
+pending_authorization_package_id: AUTH-PENDING-PROJECT-PLUGIN-20260513-001
+prompt_package_ref: prompts/image_generation/product_still_life_matte_ceramic_mug_v1.yaml
+output_directory_ref: runs/real_generation/A5-PROJECT-PLUGIN-20260513-001/
+preflight_approval_status: requested_for_preflight_only
+active_A5_authorization_created: false
+plugin_call_allowed_now: false
+image_generation_allowed_now: false
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
 
 continue_A4_docs_only_by_default: false
-recommended_next: pending_human_decision_for_true_A5_authorization
-recommended_next_zh: 等待人工决定是否进入真正 A5 授权
+recommended_next: run_true_A5_preflight_only_after_exact_approval
+recommended_next_zh: 收到精确授权语后只运行真正 A5 preflight
 auto_execution_allowed_for_next: false
 ```
 
@@ -195,7 +211,7 @@ dependency/config/env modification: no
 ## Human Decisions Needed
 
 ```text
-Next action is a human decision: either keep generation stopped, prepare a true active A5 authorization path, or choose a provider/model/account switch. Human authorization is still needed before provider console/account review, any retry, raw plugin stderr/stdout review or capture, secret/config value review, provider/model/account switch, push/tag/release/deploy, runtime implementation, memory write, or any plugin call.
+Next action is exact human approval for preflight only, or a decision to keep generation stopped. Human authorization is still needed before provider console/account review, any retry, raw plugin stderr/stdout review or capture, secret/config value review, provider/model/account switch, push/tag/release/deploy, runtime implementation, memory write, or any plugin call.
 ```
 
 ## Exact Resume Prompt
@@ -208,7 +224,7 @@ Next action is a human decision: either keep generation stopped, prepare a true 
 当前仓库状态：
 - master should track origin/master.
 - source baseline for v7.243: 03fd398.
-- current phase: v7.264_project_plugin_A5_authorization_draft_review_gate completed_validated; the project plugin A5 authorization package draft was reviewed and remains inactive.
+- current phase: v7.265_true_A5_authorization_request_gate completed_validated; the true A5 preflight request package is prepared and remains non-executing.
 - v7.221 mainline quality stop reached.
 - v7.222 board calibration completed.
 - v7.223 read-only value selection selected v7.224 as the only safe next task.
@@ -252,7 +268,8 @@ Next action is a human decision: either keep generation stopped, prepare a true 
 - v7.262 identified NativeDoubaoImage as the project-local candidate plugin path for future authorization planning.
 - v7.263 created AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 with status=draft, approval_status=not_requested, execute_now=false.
 - v7.264 reviewed AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 and concluded pass_to_keep_inactive / activation blocked.
-- recommended_next after v7.264: pending_human_decision_for_true_A5_authorization（等待人工决定是否进入真正 A5 授权）.
+- v7.265 prepares AUTH-PENDING-PROJECT-PLUGIN-20260513-001 with prompt_package_ref=prompts/image_generation/product_still_life_matte_ceramic_mug_v1.yaml and output_directory=runs/real_generation/A5-PROJECT-PLUGIN-20260513-001/.
+- recommended_next after v7.265: run_true_A5_preflight_only_after_exact_approval（收到精确授权语后只运行真正 A5 preflight）.
 - do not activate A5, contact provider, call plugin, or generate an image.
 
 不要读取真实 VCPChat/VCPToolBox。

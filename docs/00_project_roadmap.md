@@ -18,9 +18,9 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.264: 95852dd on master == origin/master.
-Current mainline state: v7.264 project plugin A5 authorization draft review gate（项目内插件 A5 授权包草案复核门）.
-Current phase id: v7.264_project_plugin_A5_authorization_draft_review_gate.
+Latest visible remote baseline before v7.265: eecbae5 on master == origin/master.
+Current mainline state: v7.265 true A5 authorization request gate（真正 A5 授权请求门）.
+Current phase id: v7.265_true_A5_authorization_request_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
@@ -44,7 +44,15 @@ execute_now: false.
 project_plugin_A5_authorization_draft_review_completed: true.
 draft_review_result: pass_to_keep_inactive.
 activation_verdict: blocked.
-Recommended next: pending_human_decision_for_true_A5_authorization（等待人工决定是否进入真正 A5 授权）.
+true_A5_authorization_request_created: true.
+pending_authorization_package_id: AUTH-PENDING-PROJECT-PLUGIN-20260513-001.
+prompt_package_ref: prompts/image_generation/product_still_life_matte_ceramic_mug_v1.yaml.
+output_directory_ref: runs/real_generation/A5-PROJECT-PLUGIN-20260513-001/.
+preflight_approval_status: requested_for_preflight_only.
+active_A5_authorization_created: false.
+plugin_call_allowed_now: false.
+image_generation_allowed_now: false.
+Recommended next: run_true_A5_preflight_only_after_exact_approval（收到精确授权语后只运行真正 A5 preflight）.
 auto_execution_allowed_for_next: false.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)
@@ -189,7 +197,7 @@ master tracking origin/master
 - 正式 release 发布仍需单独授权（tag 策略已定义：`docs/233_tag_and_version_strategy.md`）。
 - 后续更多真实图片生成需新 A5 授权包（Phase F 已消耗 2/2 calls，双图 accepted）。
 - version actions 需要匹配当前授权和 preflight；v7.224 只允许白名单 docs/status 文件的 commit + push。
-- Product image A5 path 已进入 repeated quota/rate-limit stop；Native Doubao static syntax / sandbox 已硬化；v7.260 判断产品图纸面链路已进入 quality stop；v7.261 已提出四条路线；v7.262 已选择“项目内插件路线”进入纸面授权规划；v7.263 已起草项目内插件 A5 授权包但保持 draft / not_requested / execute_now=false；v7.264 已复核草案，结论为 pass_to_keep_inactive / activation blocked。下一步必须等待人工决定是否进入真正 A5 授权。
+- Product image A5 path 已进入 repeated quota/rate-limit stop；Native Doubao static syntax / sandbox 已硬化；v7.260 判断产品图纸面链路已进入 quality stop；v7.261 已提出四条路线；v7.262 已选择“项目内插件路线”进入纸面授权规划；v7.263 已起草项目内插件 A5 授权包但保持 draft / not_requested / execute_now=false；v7.264 已复核草案，结论为 pass_to_keep_inactive / activation blocked；v7.265 已把真正 A5 preflight 授权请求、prompt 包和输出目录固定下来，但仍未授权插件调用或生成图片。
 
 ## 阶段路线
 
@@ -338,9 +346,10 @@ daily_note_called: false
 2. v7.262_project_plugin_route_authorization_planning_gate 已把项目内插件路线规划到 NativeDoubaoImage 候选，但不执行。
 3. v7.263_project_plugin_A5_authorization_package_draft_gate 已创建 AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 草案；它不是 active A5。
 4. v7.264_project_plugin_A5_authorization_draft_review_gate 已复核草案；草案可保留，但 activation blocked。
-5. A5/provider/plugin/runtime/image/memory 仍未授权；任何真实生成、provider retry 或 runtime integration 都必须先有独立授权包。
-6. tag/release/deploy 仍未授权；任何版本动作都必须匹配当前授权、白名单和 push safety gate。
-7. recommended next: pending_human_decision_for_true_A5_authorization（等待人工决定是否进入真正 A5 授权）。
+5. v7.265_true_A5_authorization_request_gate 已创建 AUTH-PENDING-PROJECT-PLUGIN-20260513-001 preflight-only 请求；它不是执行授权。
+6. A5/provider/plugin/runtime/image/memory 仍未授权；任何真实生成、provider retry 或 runtime integration 都必须先有独立授权包。
+7. tag/release/deploy 仍未授权；任何版本动作都必须匹配当前授权、白名单和 push safety gate。
+8. recommended next: run_true_A5_preflight_only_after_exact_approval（收到精确授权语后只运行真正 A5 preflight）。
 
 ## 永久安全门
 

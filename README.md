@@ -7,9 +7,9 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.264: 95852dd on master == origin/master.
-Current mainline state: v7.264 project plugin A5 authorization draft review gate（项目内插件 A5 授权包草案复核门）.
-Current phase id: v7.264_project_plugin_A5_authorization_draft_review_gate.
+Latest visible remote baseline before v7.265: eecbae5 on master == origin/master.
+Current mainline state: v7.265 true A5 authorization request gate（真正 A5 授权请求门）.
+Current phase id: v7.265_true_A5_authorization_request_gate.
 Prior human route selection gate: v7.261_human_product_route_selection_request_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
@@ -34,9 +34,17 @@ execute_now: false.
 project_plugin_A5_authorization_draft_review_completed: true.
 draft_review_result: pass_to_keep_inactive.
 activation_verdict: blocked.
+true_A5_authorization_request_created: true.
+pending_authorization_package_id: AUTH-PENDING-PROJECT-PLUGIN-20260513-001.
+prompt_package_ref: prompts/image_generation/product_still_life_matte_ceramic_mug_v1.yaml.
+output_directory_ref: runs/real_generation/A5-PROJECT-PLUGIN-20260513-001/.
+preflight_approval_status: requested_for_preflight_only.
+active_A5_authorization_created: false.
+plugin_call_allowed_now: false.
+image_generation_allowed_now: false.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized: A5, provider contact, runtime, plugin call, image generation, DailyNote write, VCP memory write, real manifest read, tag, release, deploy.
-Recommended next: pending_human_decision_for_true_A5_authorization（等待人工决定是否进入真正 A5 授权）.
+Recommended next: run_true_A5_preflight_only_after_exact_approval（收到精确授权语后只运行真正 A5 preflight）.
 auto_execution_allowed_for_next: false.
 ```
 

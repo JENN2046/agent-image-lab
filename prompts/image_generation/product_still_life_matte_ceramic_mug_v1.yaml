@@ -1,0 +1,46 @@
+prompt_package_id: product_still_life_matte_ceramic_mug_v1
+version: v1
+language: en
+mode: text_to_image
+reference_policy: text_only_no_image_input
+
+title_cn: "哑光陶瓷马克杯产品主图"
+purpose_cn: "为真正 A5 preflight 固定一个可审查、无真人、无品牌、无外部图片输入的产品图 prompt 包"
+source_fixture_ref: docs/product_workflow_fixture_packet.md
+source_fixture_id: PWFIX-20260513-001
+generation_plan_ref: GP-PROJECT-PLUGIN-20260513-001
+authorization_request_ref: AUTH-PENDING-PROJECT-PLUGIN-20260513-001
+status_cn: "待 A5 preflight 审批引用；不是执行请求"
+
+scene_type: clean_product_hero
+product_category: drinkware
+aspect_ratio: "4:5"
+style_direction: "premium clean commercial product photography"
+
+field_notes_cn:
+  prompt: "正向提示词：描述想要生成的画面。"
+  negative_prompt: "反向提示词：列出必须避免的内容。"
+  acceptance_gate: "验收门：生成后人工审片需要检查的最低条件。"
+  memory_write_allowed: "是否允许写长期记忆；本包不允许。"
+  daily_note_write_allowed: "是否允许写 DailyNote；本包不允许。"
+
+prompt: |
+  Clean premium commercial product photo of a synthetic warm-white matte ceramic coffee mug as the only product subject. Three-quarter hero angle, full product visible, simple curved handle, subtle handmade rim detail, smooth low-sheen ceramic surface, soft diffused studio lighting, gentle contact shadow, minimal neutral tabletop, quiet negative space, catalog-ready realism, accurate mug geometry, natural proportions, refined but simple product presentation, vertical 4:5.
+
+negative_prompt: |
+  people, hands, faces, readable text, brand logo, watermark, extra products, duplicate mugs, malformed handle, broken rim, warped geometry, unrealistic ceramic texture, excessive gloss, cluttered background, harsh reflections, cyberpunk style, gaming HUD, cartoon style, CGI plastic look, low resolution, overexposed highlights, underexposed product, noisy image
+
+acceptance_gate:
+  prompt_subject_match: true
+  style_direction_match: true
+  no_person_or_face_unless_expected: true
+  no_hands: true
+  no_readable_text_or_logo_unless_expected: true
+  single_product_subject: true
+  plausible_product_geometry: true
+  commercial_usability: true
+
+memory_write_allowed: false
+daily_note_write_allowed: false
+plugin_call_allowed_by_this_file: false
+image_generation_allowed_by_this_file: false

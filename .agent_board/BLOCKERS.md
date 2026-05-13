@@ -28,6 +28,8 @@
 23. v7.258 product workflow fixture packet keeps generation stopped and recommends v7.259_product_workflow_fixture_packet_acceptance_review_gate; fixture remains synthetic and non-executing.
 24. v7.259 product workflow fixture packet acceptance review keeps generation stopped and recommends v7.260_product_workflow_paper_chain_quality_stop_gate; fixture review passed but does not authorize runtime or generation.
 25. v7.260 product workflow paper chain quality stop keeps generation stopped and recommends v7.261_human_product_route_selection_request_gate; further automatic artifact creation is blocked until human route selection.
+26. v7.265 true A5 authorization request creates AUTH-PENDING-PROJECT-PLUGIN-20260513-001 for preflight-only approval, but plugin call, provider contact, image generation, env value read, output write, DailyNote, and VCP memory remain blocked until separate exact authorization.
+27. quota_or_rate_limit_resolution_evidence is still not provided; same provider retry risk remains high and cannot be hidden inside preflight.
 ```
 
 ## Current Mainline Quality Stop
