@@ -25,6 +25,7 @@ Static Review Surface acceptance checklist: v7.251 completed; no generation, run
 Static Review Surface mockup readiness review: v7.252 completed; ready for static mockup spec, not runtime or HTML implementation.
 Static Review Surface mockup spec: v7.253 completed; ready for an offline static mockup file, not runtime implementation.
 Static Review Surface mockup file: v7.254 completed; standalone offline HTML exists with no external assets, scripts, runtime, provider/plugin/image/memory behavior.
+Static Review Surface mockup acceptance review: v7.255 completed; result pass_with_warnings, accepted_final should be exposed as an explicit future/blocked status.
 ```
 
 ---
@@ -78,10 +79,10 @@ none
 none
 ```
 
-### recommended_next_after_v7_254
+### recommended_next_after_v7_255
 
 ```text
-v7.255_static_review_surface_mockup_acceptance_review_gate — 静态审片台 mockup 验收复核门。No provider contact, plugin call, runtime, memory write, or generation.
+v7.256_static_review_surface_acceptance_patch_gate — 静态审片台验收补丁门。No provider contact, plugin call, runtime, memory write, or generation.
 ```
 
 ### done
@@ -144,6 +145,7 @@ v7.255_static_review_surface_mockup_acceptance_review_gate — 静态审片台 m
 55. v7.252 static Review Surface mockup readiness review confirmed readiness for a no-runtime static mockup specification gate and blocked direct HTML/runtime implementation.
 56. v7.253 static Review Surface mockup spec defined screen regions, static fixture shape, Chinese copy rules, disabled action reasons, and checklist mapping without creating HTML or runtime code.
 57. v7.254 static Review Surface mockup file created standalone offline HTML with Route 3 status, review queue, asset card placeholders, decision panel, memory suitability panel, handoff panel, disabled actions, and no external assets or scripts.
+58. v7.255 static Review Surface mockup acceptance review checked v7.254 HTML against v7.251 checklist and v7.253 spec, passing core no-execution checks with an accepted_final explicit-state follow-up.
 ```
 
 ### blocked
@@ -185,6 +187,7 @@ v7.255_static_review_surface_mockup_acceptance_review_gate — 静态审片台 m
 34. v7.252 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/renderer/preload/IPC/HTML implementation/real manifest read/.env.local value read/CDP/bridge/MCP/tag/release/deploy.
 35. v7.253 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/renderer/preload/IPC/real manifest read/.env.local value read/CDP/bridge/MCP/tag/release/deploy.
 36. v7.254 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/renderer/preload/IPC/real manifest read/.env.local value read/CDP/bridge/MCP/tag/release/deploy.
+37. v7.255 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/renderer/preload/IPC/real manifest read/.env.local value read/CDP/bridge/MCP/tag/release/deploy.
 ```
 
 ### skipped

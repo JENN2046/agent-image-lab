@@ -18,8 +18,8 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.254: 1d39503 on master == origin/master.
-Current mainline state: v7.254 static Review Surface mockup file gate（静态审片台 mockup 文件门）.
+Latest visible remote baseline before v7.255: 3342eac on master == origin/master.
+Current mainline state: v7.255 static Review Surface mockup acceptance review gate（静态审片台 mockup 验收复核门）.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
 Current status: failed_no_image_repeated_quota_or_rate_limit.
@@ -29,9 +29,9 @@ provider_contact_allowed_now: false.
 Native Doubao static hardening: syntax/path sandbox/base URL/raw output/env allowlist/validator drift patched.
 Diagnostic decision: continue_generation_stop_until_route_selection.
 Provider path decision: ROUTE-3-CONTINUED-STOP（路线 3：继续停止生成）selected now; Route 1 quota resolution and Route 2 provider/model/account switch remain available only after explicit human selection.
-Review Surface mainline: standalone offline static HTML mockup file created under review_console/static_mockups/ with no external assets, no scripts, no provider/plugin/runtime/image/memory behavior.
+Review Surface mainline: static HTML mockup has been reviewed against the v7.251 checklist and v7.253 spec. Result is pass_with_warnings: accepted_final should become an explicit blocked/future state in the mockup.
 route_selection_required_before_new_A5: true.
-Recommended next: v7.255_static_review_surface_mockup_acceptance_review_gate（静态审片台 mockup 验收复核门）.
+Recommended next: v7.256_static_review_surface_acceptance_patch_gate（静态审片台验收补丁门）.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)
 ```
@@ -175,7 +175,7 @@ master tracking origin/master
 - 正式 release 发布仍需单独授权（tag 策略已定义：`docs/233_tag_and_version_strategy.md`）。
 - 后续更多真实图片生成需新 A5 授权包（Phase F 已消耗 2/2 calls，双图 accepted）。
 - version actions 需要匹配当前授权和 preflight；v7.224 只允许白名单 docs/status 文件的 commit + push。
-- Product image A5 path 已进入 repeated quota/rate-limit stop；Native Doubao static syntax / sandbox 已硬化；v7.254 在 Route 3（继续停止生成）下创建离线静态审片台 mockup 文件。下一步不自动重试生成，可做静态 mockup 验收复核。
+- Product image A5 path 已进入 repeated quota/rate-limit stop；Native Doubao static syntax / sandbox 已硬化；v7.255 在 Route 3（继续停止生成）下完成静态审片台 mockup 验收复核。下一步不自动重试生成，可补齐 accepted_final 显式阻断状态。
 
 ## 阶段路线
 
