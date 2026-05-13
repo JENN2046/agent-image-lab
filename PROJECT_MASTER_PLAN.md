@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_279: da879f4
-origin_master_before_v7_279: da879f4
-status: fourth_minimal_trial_selected_pending_prompt_v4_authorization
-mode: A4 decision gate
-phase_id: v7.279_best_candidate_selection_or_fourth_trial_decision_gate
+latest_visible_head_before_v7_280: 1c65280
+origin_master_before_v7_280: da879f4
+status: prompt_v4_created_fourth_trial_authorized_pending_commit_push
+mode: A4 prompt refinement plus A5 bounded authorization gate
+phase_id: v7.280_prompt_v4_handle_geometry_refinement_authorization_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -113,9 +113,19 @@ v7.279_status: completed_locally_pending_checkpoint_commit
 v7.279_selected_route: fourth_minimal_generation_trial
 v7.279_v3_failed_reason: handle attachment geometry regression
 v7.279_fourth_trial_goal: restore v2 composition while fixing handle geometry and preserving artifact control
-A5_execution_allowed_now: false in v7.279; v7.277 single authorized call has been consumed and v7.280 authorization is not yet sealed
-provider_contact_allowed_now: false in v7.279; no fourth generation execution is active before v7.280 authorization and v7.281 bounded execution
-recommended_next: v7.280_prompt_v4_handle_geometry_refinement_authorization_gate
+prompt_v4_ref: prompts/image_generation/product_still_life_matte_ceramic_mug_v4.yaml
+fourth_minimal_generation_trial_authorized: true
+approved_prompt_package_for_fourth_trial: prompts/image_generation/product_still_life_matte_ceramic_mug_v4.yaml
+provider_calls_max_for_fourth_trial: 1
+generation_attempts_max_for_fourth_trial: 1
+output_images_max_for_fourth_trial: 4
+output_directory_for_fourth_trial: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/
+auto_retry_for_fourth_trial: false
+stop_after_generation_for_fourth_trial: true
+human_review_required_after_generation: true
+A5_execution_allowed_now: false in v7.280 authorization gate itself; v7.281 is the only bounded execution phase after commit and push
+provider_contact_allowed_now: false in v7.280 authorization gate itself; exactly one provider contact is reserved for v7.281 after commit and push
+recommended_next: v7.281_fourth_minimal_generation_trial_execution
 ```
 
 ## Product Direction
@@ -238,16 +248,21 @@ the human authorization boundary for exactly one third minimal real generation
 trial using prompt v3. v7.277 consumes that single authorization and generates
 one output. v7.278 records that the v3 output regressed on handle geometry:
 `asset_status=needs_revision`, `accepted_candidate=false`, and current best
-candidate remains the v2 output.
+candidate remains the v2 output. v7.279 records the human decision to continue
+with one fourth minimal trial focused only on handle geometry and product
+credibility. v7.280 creates prompt v4 and records the exact fourth-trial
+boundary: one provider call, one generation attempt, at most four outputs, no
+retry, no memory writes, no Batch 005, no production candidate promotion, and
+immediate stop for human review.
 
 ## Active Boundaries
 
 ```text
-A5: not authorized in v7.279; v7.277 single authorized call has been consumed and v7.280 is not yet sealed
-provider contact: not authorized in v7.279; no fourth generation execution is active before v7.280 authorization and v7.281 bounded execution
+A5: not authorized in v7.280 authorization gate itself; v7.281 is the only bounded execution phase after commit and push
+provider contact: not authorized in v7.280 authorization gate itself; exactly one provider contact is reserved for v7.281 after commit and push
 runtime execution: not authorized
-plugin call: not authorized in v7.279
-image generation: not authorized in v7.279
+plugin call: not authorized in v7.280 authorization gate itself
+image generation: not authorized in v7.280 authorization gate itself
 DailyNote / VCP memory write: not authorized
 real manifest / VCPChat / VCPToolBox read: not authorized
 tag / release / deploy / push: not authorized by this file
@@ -263,6 +278,6 @@ validation interpretation, staging, commit decisions, and next-task selection.
 ## Recommended Next
 
 Recommended next is
-`v7.280_prompt_v4_handle_geometry_refinement_authorization_gate`
-（创建 v4 prompt 并封存第四次最小试跑授权边界，不生成图片）. No retry,
-fourth generation execution, memory write, Batch 005, or production_candidate_002 may start automatically.
+`v7.281_fourth_minimal_generation_trial_execution`
+（使用 v4 prompt 执行一次且仅一次第四次最小真实生成试跑）. No retry,
+fifth generation, memory write, Batch 005, or production_candidate_002 may start automatically.

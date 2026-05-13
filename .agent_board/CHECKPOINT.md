@@ -1,5 +1,39 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.280 Prompt v4 Handle Geometry Refinement Authorization Gate
+
+```text
+phase_id: v7.280_prompt_v4_handle_geometry_refinement_authorization_gate
+Status: completed_locally_pending_checkpoint_commit_and_push
+Source phase: v7.279_best_candidate_selection_or_fourth_trial_decision_gate
+Purpose: create prompt v4 and record exact fourth minimal generation trial authorization
+current_best_candidate: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
+negative_feedback_output: runs/real_generation/v7_277_matte_ceramic_mug_v3_trial/native_doubao_1778688750417_0.jpg
+prompt_v4_created: true
+prompt_v4_ref: prompts/image_generation/product_still_life_matte_ceramic_mug_v4.yaml
+approved_product: matte_ceramic_mug
+approved_prompt_package: prompts/image_generation/product_still_life_matte_ceramic_mug_v4.yaml
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 4
+output_directory: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/
+auto_retry: false
+stop_after_generation: true
+human_review_required_after_generation: true
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+fifth_generation_auto_start: false
+generation_in_authorization_gate: false
+provider_contact_in_authorization_gate: false
+image_generation_in_authorization_gate: false
+recommended_next: v7.281_fourth_minimal_generation_trial_execution
+recommended_next_zh: 使用 v4 prompt 执行一次且仅一次第四次最小真实生成试跑
+next_phase_started: false
+```
+
 ## v7.279 Best Candidate Selection Or Fourth Trial Decision Gate
 
 ```text

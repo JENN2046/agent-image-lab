@@ -7,9 +7,9 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.279: da879f4 on master == origin/master.
-Current mainline state: v7.279 best candidate selection / fourth trial decision gate（最佳候选选择与第四次最小试跑决策门）.
-Current phase id: v7.279_best_candidate_selection_or_fourth_trial_decision_gate.
+Latest visible local baseline before v7.280: 1c65280 on master.
+Current mainline state: v7.280 prompt v4 handle geometry refinement authorization gate（v4 prompt 与第四次最小试跑授权门）.
+Current phase id: v7.280_prompt_v4_handle_geometry_refinement_authorization_gate.
 Prior human route selection gate: v7.261_human_product_route_selection_request_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
@@ -99,12 +99,22 @@ v7.279_status: completed_locally_pending_checkpoint_commit.
 v7.279_selected_route: fourth_minimal_generation_trial.
 v7.279_v3_failed_reason: handle attachment geometry regression.
 v7.279_fourth_trial_goal: restore v2 composition while fixing handle geometry and preserving artifact control.
-A5_execution_allowed_now: false in v7.279; v7.277 single authorized call has been consumed and v7.280 authorization is not yet sealed.
-provider_contact_allowed_now: false in v7.279; no fourth generation execution is active before v7.280 authorization and v7.281 bounded execution.
+prompt_v4_ref: prompts/image_generation/product_still_life_matte_ceramic_mug_v4.yaml.
+fourth_minimal_generation_trial_authorized: true.
+approved_prompt_package_for_fourth_trial: prompts/image_generation/product_still_life_matte_ceramic_mug_v4.yaml.
+provider_calls_max_for_fourth_trial: 1.
+generation_attempts_max_for_fourth_trial: 1.
+output_images_max_for_fourth_trial: 4.
+output_directory_for_fourth_trial: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/.
+auto_retry_for_fourth_trial: false.
+stop_after_generation_for_fourth_trial: true.
+human_review_required_after_generation: true.
+A5_execution_allowed_now: false in v7.280 authorization gate itself; v7.281 is the only bounded execution phase after commit and push.
+provider_contact_allowed_now: false in v7.280 authorization gate itself; exactly one provider contact is reserved for v7.281 after commit and push.
 Master plan index: PROJECT_MASTER_PLAN.md.
-Not authorized now: Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, retry, fourth generation execution, tag, release, deploy.
-Recommended next: v7.280_prompt_v4_handle_geometry_refinement_authorization_gate（创建 v4 prompt 并封存第四次最小试跑授权边界，不生成图片）.
-auto_execution_allowed_for_next: false.
+Not authorized now: Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, retry, fifth generation, tag, release, deploy.
+Recommended next: v7.281_fourth_minimal_generation_trial_execution（使用 v4 prompt 执行一次且仅一次第四次最小真实生成试跑）.
+auto_execution_allowed_for_next: true after v7.280 commit and push safety gate.
 ```
 
 历史状态脉络：

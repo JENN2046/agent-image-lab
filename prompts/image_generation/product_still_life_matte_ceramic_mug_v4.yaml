@@ -1,0 +1,133 @@
+prompt_package_id: product_still_life_matte_ceramic_mug_v4
+version: v4
+language: en
+mode: text_to_image
+reference_policy: text_only_no_image_input
+
+title_cn: "哑光陶瓷马克杯产品主图 v4"
+purpose_cn: "基于 v2 当前最佳候选和 v3 负反馈，只做把手结构真实感、连接点清晰度和背景通透度小幅修订"
+source_prompt_package: prompts/image_generation/product_still_life_matte_ceramic_mug_v2.yaml
+negative_feedback_prompt_package: prompts/image_generation/product_still_life_matte_ceramic_mug_v3.yaml
+source_review_record: reviews/v7_278_matte_ceramic_mug_v3_human_review.md
+source_review_phase: v7.278_human_review_of_third_real_outputs
+source_best_candidate: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
+source_negative_feedback_output: runs/real_generation/v7_277_matte_ceramic_mug_v3_trial/native_doubao_1778688750417_0.jpg
+status_cn: "第四次最小真实生成试跑候选 prompt；只能在 v7.280 授权门完成并推送后，由 v7.281 单次受控执行使用"
+
+scene_type: clean_product_hero
+product_category: drinkware
+aspect_ratio: "4:5"
+style_direction: "premium clean commercial product photography"
+
+field_notes_cn:
+  prompt: "正向提示词：保留 v2 构图和产品占比，只加强真实陶瓷把手结构与背景通透度。"
+  negative_prompt: "反向提示词：重点禁止把手缺口、块状连接、断裂、融合、变形和角落彩色杂点。"
+  revision_goals_cn: "v4 修订目标：来自 v3 负反馈，避免继续探索新风格。"
+  composition_controls: "构图控制：保持 v2 的主体占比、三分之四角度和商业主图方向。"
+  lighting_controls: "光线控制：保持柔和高级感，阴影比 v3 更干净、更轻。"
+  background_controls: "背景控制：暖灰高级背景比 v3 更亮、更通透，不闷。"
+  material_texture_controls: "材质控制：哑光奶白陶瓷、干净杯口、真实一体成型把手连接。"
+  handle_geometry_controls: "把手结构控制：上下连接点都要圆润、连续、可信。"
+  defect_controls: "缺陷控制：禁止彩色杂点、随机像素、角落伪影、把手结构错误。"
+  acceptance_gate: "验收门：第四次生成后人工审片需要检查的最低条件。"
+  memory_write_allowed: "是否允许写长期记忆；本包不允许。"
+  daily_note_write_allowed: "是否允许写 DailyNote；本包不允许。"
+
+revision_goals_cn:
+  - "保留 v2 的稳定构图、产品占比和三分之四商业主图角度。"
+  - "不要大幅改变产品风格、摄影机角度或画面方向。"
+  - "修复 v3 的把手上连接处块状/缺口感。"
+  - "让把手上下连接点都像真实陶瓷一体成型结构。"
+  - "保持奶白哑光陶瓷质感和干净杯口。"
+  - "保持暖灰高级背景，但比 v3 更亮、更通透、不闷。"
+  - "保持干净柔和阴影，避免过暗。"
+  - "继续禁止彩色杂点、随机像素和角落伪影。"
+  - "保持无 logo、无文字、无人物、无道具干扰。"
+
+composition_controls:
+  preserve_v2_composition: true
+  product_scale_target: "mug occupies roughly 65-75 percent of image height"
+  framing: "centered three-quarter hero angle, full product visible, no crop"
+  camera_angle: "stable three-quarter product hero angle similar to v2"
+  top_margin: "balanced top negative space, not excessive"
+  subject_count: "single mug only"
+  drastic_style_or_angle_change_allowed: false
+
+lighting_controls:
+  key_light: "premium soft directional key light from upper left"
+  fill_light: "gentle fill preserving visible ceramic form"
+  rim_light: "subtle clean rim light, enough for edge definition but not dramatic"
+  shadow: "soft premium contact shadow, clean and not too dark"
+  avoid: "flat lighting, harsh reflections, hard shadow edges, muddy dark shadow, overexposed highlights"
+
+background_controls:
+  backdrop: "premium warm-gray layered studio backdrop, brighter and less muddy than v3"
+  depth: "soft depth gradient with clean tabletop separation"
+  horizon_line: "subtle or absent, never a distracting stripe"
+  clutter: "no props, no patterns, no extra objects"
+
+material_texture_controls:
+  ceramic_finish: "matte cream-white ceramic, low-sheen, fine tactile texture"
+  rim: "smooth clean continuous cup rim, not rough or broken"
+  body: "simple believable cylindrical mug body with natural thickness"
+  geometry: "accurate mug geometry and natural proportions"
+
+handle_geometry_controls:
+  handle_shape: "realistic smooth curved ceramic handle"
+  attachment_style: "upper and lower handle attachment points are continuous rounded ceramic transitions"
+  attachment_clarity: "clean visible connection to mug body, neither blurry nor blocky"
+  material_continuity: "handle and mug body appear made from the same matte ceramic material"
+  no_blocky_notch: true
+  no_cutout: true
+  no_dent: true
+  no_malformed_joint: true
+  no_broken_handle: true
+  no_fused_handle: true
+  no_impossible_connection: true
+
+defect_controls:
+  no_top_left_colored_speck: true
+  no_random_colored_pixel: true
+  no_color_noise: true
+  no_corner_artifacts: true
+  no_colored_specks: true
+  no_dust_spots: true
+  no_blurry_handle_attachment: true
+  no_blocky_handle_attachment: true
+  no_rough_rim_edge: true
+  no_small_product_in_frame: true
+
+prompt: |
+  Premium clean commercial product photo of a synthetic matte cream-white ceramic coffee mug as the only product subject. Preserve the stable v2 composition: large centered mug occupying about 70 percent of the frame height, full product visible, balanced margins, controlled top negative space, three-quarter product hero angle, no drastic camera angle change. Realistic smooth curved ceramic handle with clean upper and lower attachment points, continuous rounded ceramic transitions into the mug body, believable one-piece matte ceramic construction, no notch or gap at the handle joints. Smooth clean continuous cup rim, simple accurate mug geometry, natural proportions, refined low-sheen matte ceramic surface with fine tactile texture. Premium soft directional studio key light from upper left, gentle fill light, subtle clean rim light for edge definition, soft premium contact shadow that is clean and not too dark. Warm-gray layered studio backdrop, brighter and less muddy than v3, soft depth gradient, clean tabletop separation, no props, no text, no logo, no people, no colored specks, no random pixels, catalog-ready ecommerce main image, elevated quiet premium presentation, vertical 4:5.
+
+negative_prompt: |
+  people, hands, faces, readable text, brand logo, watermark, props, extra objects, extra products, duplicate mugs, small product in frame, excessive top whitespace, unbalanced margins, drastic angle change, different product style, malformed handle, blocky handle attachment, notch in handle joint, cutout near handle, dented handle joint, broken handle, fused handle, impossible handle connection, unrealistic handle attachment, blurry handle attachment, blurry handle joint, broken rim, rough rim edge, jagged rim, thick uneven rim, warped geometry, unrealistic ceramic texture, excessive gloss, CGI plastic look, flat lighting, weak background separation, harsh reflections, hard shadow, muddy dark shadow, overexposed highlights, underexposed product, obvious horizontal background line, background stripe, banding, top-left colored speck, random colored pixel, colored specks, color noise, corner artifact, random marks, dust spots, noisy image, cyberpunk style, gaming HUD, cartoon style, low resolution
+
+acceptance_gate:
+  prompt_subject_match: true
+  style_direction_match: true
+  no_person_or_face_unless_expected: true
+  no_hands: true
+  no_readable_text_or_logo_unless_expected: true
+  single_product_subject: true
+  plausible_product_geometry: true
+  commercial_usability: true
+  preserve_v2_composition_and_scale: true
+  product_scale_65_to_75_percent_height: true
+  controlled_top_margin: true
+  clean_warm_gray_background_not_muddy: true
+  clean_soft_shadow_not_too_dark: true
+  crisp_rim_edge: true
+  realistic_smooth_ceramic_handle_geometry: true
+  clean_upper_handle_attachment: true
+  clean_lower_handle_attachment: true
+  no_blocky_notch_cutout_dent_or_malformed_joint: true
+  no_top_left_colored_speck: true
+  no_colored_specks_or_random_marks: true
+  premium_main_image_feel: true
+
+next_trial_authorization_required: true
+memory_write_allowed: false
+daily_note_write_allowed: false
+plugin_call_allowed_by_this_file: false
+image_generation_allowed_by_this_file: false

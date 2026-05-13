@@ -9,25 +9,25 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab recorded the v7.279 best-candidate decision: v2 remains the current best candidate, and the human-selected route is one fourth minimal trial focused only on handle geometry and product credibility.
+Agent Image Lab created prompt v4 and recorded the v7.280 fourth minimal generation authorization gate. The authorization is bounded to one v7.281 trial using prompt v4 after commit and push.
 ```
 
 ## Current Phase
 
 ```text
-v7.279 Best Candidate Selection Or Fourth Trial Decision Gate
-phase_id: v7.279_best_candidate_selection_or_fourth_trial_decision_gate
-source_phase: v7.278_human_review_of_third_real_outputs
+v7.280 Prompt v4 Handle Geometry Refinement Authorization Gate
+phase_id: v7.280_prompt_v4_handle_geometry_refinement_authorization_gate
+source_phase: v7.279_best_candidate_selection_or_fourth_trial_decision_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
-status: fourth_minimal_trial_selected_pending_checkpoint_commit
-source_commit: da879f4
-source_message: docs: review third real ceramic mug output
+status: prompt_v4_created_fourth_trial_authorized_pending_checkpoint_commit_and_push
+source_commit: 1c65280
+source_message: docs: select fourth minimal trial for handle geometry refinement
 branch: master tracking origin/master
-Worktree: clean before v7.279 decision patch; generated v7.277 output remains ignored under runs/
+Worktree: dirty with v7.280 prompt v4 authorization documentation and state-surface updates; generated outputs remain ignored under runs/
 worktree_start_clean: true
-origin_sync_current: local HEAD equals origin/master at da879f4
-ahead_behind: 0/0
+origin_sync_current: local HEAD is ahead of origin/master after v7.279 local commit
+ahead_behind: 0/1 before v7.280 commit
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false; the single authorized v7.277 call has been consumed
 provider_contact_allowed_now: false; the single authorized v7.277 provider contact has been consumed
@@ -163,7 +163,20 @@ v7.279_status: completed_locally_pending_checkpoint_commit
 v7.279_selected_route: fourth_minimal_generation_trial
 v7.279_v3_failed_reason: handle attachment geometry regression
 v7.279_fourth_trial_goal: restore v2 composition while fixing handle geometry and preserving artifact control
-v7.279_recommended_next: v7.280_prompt_v4_handle_geometry_refinement_authorization_gate
+prompt_v4_created: true
+prompt_v4_ref: prompts/image_generation/product_still_life_matte_ceramic_mug_v4.yaml
+fourth_minimal_generation_trial_authorized: true
+approved_product_for_fourth_trial: matte_ceramic_mug
+approved_prompt_package_for_fourth_trial: prompts/image_generation/product_still_life_matte_ceramic_mug_v4.yaml
+provider_calls_max_for_fourth_trial: 1
+generation_attempts_max_for_fourth_trial: 1
+output_images_max_for_fourth_trial: 4
+output_directory_for_fourth_trial: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/
+auto_retry_for_fourth_trial: false
+stop_after_generation_for_fourth_trial: true
+human_review_required_after_generation: true
+fifth_generation_auto_start: false
+v7.280_recommended_next: v7.281_fourth_minimal_generation_trial_execution
 v7.274_stopped_after_generation: true
 human_review_required_now: true
 recommended_next_after_v7_274: v7.275_human_review_of_second_real_outputs
@@ -176,13 +189,13 @@ v7.275_memory_write_allowed_without_separate_authorization: false
 ## Current Task
 
 ```text
-v7.279 decision gate completed locally. v2 remains the current best candidate; the selected route is a fourth minimal trial, but execution is not allowed until v7.280 prompt v4 authorization is sealed and v7.281 bounded execution starts.
+v7.280 authorization gate completed locally. Prompt v4 is created and authorizes exactly one v7.281 fourth minimal trial after commit and push; no generation has happened in v7.280.
 ```
 
 ## Current Local Work State
 
 ```text
-Worktree: dirty with v7.279 decision documentation and state-surface updates.
+Worktree: dirty with v7.280 prompt v4 authorization documentation and state-surface updates.
 active_workers: 0
 execution_mode: Single-Window 4-Agent Compact Autopilot
 commander_role: keep this correction inside .agent_board facts and stop before commit/push
@@ -236,7 +249,7 @@ Prompt revision plan from first real output: v7.271 completed_pending_validation
 Prompt v2 static review: v7.272 passed.
 Second minimal generation authorization: v7.273 completed, committed, pushed, and synced at d1a7ac8.
 Second minimal generation trial: v7.274 completed_success with one output and no retry.
-Recommended next product task: v7.280_prompt_v4_handle_geometry_refinement_authorization_gate（创建 v4 prompt 并封存第四次最小试跑授权边界，不生成图片）
+Recommended next product task: v7.281_fourth_minimal_generation_trial_execution（使用 v4 prompt 执行一次且仅一次第四次最小真实生成试跑）
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```

@@ -36,7 +36,7 @@ Project plugin route authorization planning: v7.262 completed; NativeDoubaoImage
 Project plugin A5 authorization package draft: v7.263 completed; AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 is draft-only with approval_status=not_requested and execute_now=false.
 Project plugin A5 authorization draft review: v7.264 completed; draft result is pass_to_keep_inactive and activation remains blocked.
 True A5 authorization request: v7.265 completed_validated; AUTH-PENDING-PROJECT-PLUGIN-20260513-001 fixes prompt/output/model/budget for preflight-only approval and still blocks provider/plugin/image/env value actions.
-Route B minimal real generation authorization: v7.268b completed; v7.269 succeeded with one matte_ceramic_mug output and no retry; v7.270 records human review as needs_revision, accepted_candidate=false, commercial_delivery_ready=false, memory_suitability=deferred; v7.271 creates a static prompt v2 revision plan without generation; v7.272 static review passed; v7.273 authorized exactly one v7.274 second minimal generation trial using prompt v2 and is completed, committed, pushed, and synced at d1a7ac8; v7.274 completed successfully with one output and no retry; v7.275 reviewed that output as accepted_candidate_with_minor_retouch, accepted_candidate=true, commercial_delivery_ready=false, memory_suitability=deferred; v7.276 creates prompt v3 and authorizes exactly one v7.277 third minimal generation trial after commit and push; v7.277 completed successfully with one output; v7.278 reviewed v3 as needs_revision and keeps v2 as current best candidate; v7.279 records the human decision to continue with one fourth minimal trial focused only on handle geometry and product credibility.
+Route B minimal real generation authorization: v7.268b completed; v7.269 succeeded with one matte_ceramic_mug output and no retry; v7.270 records human review as needs_revision, accepted_candidate=false, commercial_delivery_ready=false, memory_suitability=deferred; v7.271 creates a static prompt v2 revision plan without generation; v7.272 static review passed; v7.273 authorized exactly one v7.274 second minimal generation trial using prompt v2 and is completed, committed, pushed, and synced at d1a7ac8; v7.274 completed successfully with one output and no retry; v7.275 reviewed that output as accepted_candidate_with_minor_retouch, accepted_candidate=true, commercial_delivery_ready=false, memory_suitability=deferred; v7.276 creates prompt v3 and authorizes exactly one v7.277 third minimal generation trial after commit and push; v7.277 completed successfully with one output; v7.278 reviewed v3 as needs_revision and keeps v2 as current best candidate; v7.279 records the human decision to continue with one fourth minimal trial focused only on handle geometry and product credibility; v7.280 creates prompt v4 and records the exact fourth-trial authorization boundary.
 ```
 
 ---
@@ -87,16 +87,17 @@ none
 ### todo
 
 ```text
-v7.280_prompt_v4_handle_geometry_refinement_authorization_gate — 创建 prompt v4，并封存第四次最小试跑授权边界；本阶段不生成图片、不 provider contact、不 retry。
+v7.281_fourth_minimal_generation_trial_execution — 使用 prompt v4 执行一次且仅一次第四次最小真实生成试跑；执行后立即停止等待人工审片。
 ```
 
-### recommended_next_after_v7_279
+### recommended_next_after_v7_280
 
 ```text
-v7.280_prompt_v4_handle_geometry_refinement_authorization_gate — create prompt v4 from the v2 best candidate and v3 negative feedback, then record the exact fourth-trial authorization boundary.
-status: pending_prompt_v4_authorization_gate
+v7.281_fourth_minimal_generation_trial_execution — execute exactly one fourth minimal real generation trial using prompt v4 after v7.280 commit and push.
+status: pending_commit_push_then_bounded_execution
 reviewed_output: runs/real_generation/v7_277_matte_ceramic_mug_v3_trial/native_doubao_1778688750417_0.jpg
 current_best_candidate: runs/real_generation/v7_274_matte_ceramic_mug_v2_trial/native_doubao_1778685572407_0.jpg
+prompt_package_for_fourth_trial: prompts/image_generation/product_still_life_matte_ceramic_mug_v4.yaml
 prompt_package_reviewed: prompts/image_generation/product_still_life_matte_ceramic_mug_v3.yaml
 output_images_count: 1
 provider_calls_used: 1
@@ -112,13 +113,19 @@ v3_should_be_current_candidate: false
 v2_remains_current_best_candidate: true
 selected_route: fourth_minimal_generation_trial
 fourth_trial_goal: restore v2 composition while fixing handle geometry and preserving artifact control
+fourth_minimal_generation_trial_authorized: true
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 4
+auto_retry: false
+stop_after_generation: true
 fourth_generation_auto_start: false
-fourth_generation_execution_allowed_now: false
+fifth_generation_auto_start: false
 no_memory_write: true
 no_DailyNote_write: true
 no_VCP_memory_write: true
 no_tag_release_deploy: true
-v7.280_purpose: prompt v4 refinement and fourth-trial authorization gate only
+v7.281_purpose: validate handle geometry refinement with one bounded v4 trial
 ```
 
 ### done
@@ -205,6 +212,7 @@ v7.280_purpose: prompt v4 refinement and fourth-trial authorization gate only
 79. v7.277 third minimal generation trial completed successfully with one output: runs/real_generation/v7_277_matte_ceramic_mug_v3_trial/native_doubao_1778688750417_0.jpg.
 80. v7.278 human review of third real outputs records needs_revision, accepted_candidate=false, commercial_delivery_ready=false, memory_suitability=deferred; v2 remains current best candidate.
 81. v7.279 best candidate selection / fourth trial decision gate records route B: continue with one fourth minimal trial focused only on handle geometry and product credibility; no generation occurs in v7.279.
+82. v7.280 prompt v4 handle geometry refinement authorization gate creates `prompts/image_generation/product_still_life_matte_ceramic_mug_v4.yaml` and authorizes exactly one v7.281 fourth minimal generation trial after commit and push.
 ```
 
 ### blocked
