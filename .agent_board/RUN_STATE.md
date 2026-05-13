@@ -9,16 +9,16 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab completed the generation stop closeout after repeated quota/rate-limit failure. Route 3 continued stop remains selected now; Route 1 quota resolution and Route 2 provider/model/account switch require explicit human route selection before any new A5 path.
+Agent Image Lab is on Route 3 continued stop（继续停止生成）and has returned to the non-generation static Review Surface product mainline.
 ```
 
 ## Current Phase
 
 ```text
-v7.248 Generation Stop Closeout Or Route Selection Request Gate
+v7.249 Static Review Surface Product Spec Gate
 status: failed_no_image_repeated_quota_or_rate_limit
-source_commit: 5564ad9
-source_message: docs: add provider path decision package
+source_commit: 1d05db6
+source_message: docs: add generation stop route selection gate
 branch: master tracking origin/master
 Worktree: clean at v7.247 start
 worktree_start_clean: true
@@ -29,13 +29,15 @@ provider_contact_allowed_now: false
 native_doubao_static_hardening: completed
 diagnostic_decision: continue_generation_stop_until_route_selection
 selected_route_now: ROUTE-3-CONTINUED-STOP
+selected_route_meaning_zh: 继续停止生成
 route_selection_required_before_new_A5: true
+static_review_surface_product_spec_created: true
 ```
 
 ## Current Task
 
 ```text
-Record generation stop closeout and request an explicit human route selection before any new A5/provider path can be prepared.
+Create the static Review Surface product spec without renderer/preload/IPC/runtime code.
 ```
 
 ## Current Local Work State
@@ -82,7 +84,7 @@ MVP Aggregate Validator Calibration: completed_validated
 Product Image Authorization Draft Plan Ref Alignment: v7.241 completed_validated
 Product Image Authorization Activation Gap Review: v7.242 completed_validated
 Product Image Active Authorization Package Skeleton: v7.243 completed_validated
-Recommended next product task: human_route_selection_required_before_any_new_A5
+Recommended next product task: v7.250_review_record_template_and_status_flow_gate（审片记录模板与状态流门）
 New A4 docs-only gate: allowed only if it creates a new decision, boundary, or product value
 Default continue_A4_docs_only_by_default: false
 ```
@@ -128,8 +130,8 @@ tag/release/deploy remain blocked without explicit authorization and preflight
 ## Current Options
 
 ```text
-recommended_next_after_active_execution_attempt: human_route_selection_required_before_any_new_A5
-purpose: choose Route 1 quota resolution, Route 2 provider/model/account switch, or Route 3 continued stop before any new generation path
+recommended_next_after_v7_249: v7.250_review_record_template_and_status_flow_gate
+purpose: define the review record template and paper status flow without generation
 not_allowed_as_next_by_default: A5, provider contact, runtime, plugin call, image generation, memory write, tag, release
 ```
 

@@ -19,6 +19,7 @@ Diagnostic decision: continue_generation_stop_until_route_selection.
 Provider path decision: ROUTE-3-CONTINUED-STOP selected now.
 Generation stop closeout: v7.248 completed; human route selection is required before any new A5.
 route_selection_required_before_new_A5: true.
+Static Review Surface product spec: v7.249 completed; no generation, runtime, or memory write.
 ```
 
 ---
@@ -75,7 +76,7 @@ none
 ### recommended_next_after_v7_243
 
 ```text
-human_route_selection_required_before_any_new_A5 — choose Route 1 quota resolution, Route 2 provider/model/account switch, or Route 3 continued stop. No provider contact, plugin call, or generation is authorized by default.
+v7.250_review_record_template_and_status_flow_gate — 审片记录模板与状态流门。No provider contact, plugin call, runtime, memory write, or generation.
 ```
 
 ### done
@@ -132,6 +133,7 @@ human_route_selection_required_before_any_new_A5 — choose Route 1 quota resolu
 49. v7.246 no-generation diagnostic readiness selected continue_generation_stop_until_route_selection and recommended v7.247_provider_path_decision_package_gate.
 50. v7.247 provider path decision package defined Route 1 external quota resolution, Route 2 provider/model/account switch, and Route 3 continued stop; selected Route 3 for now.
 51. v7.248 generation stop closeout recorded Route 3 continued stop and requested explicit human route selection before any new A5 path.
+52. v7.249 static Review Surface product spec created page goal, user roles, core fields, asset card, review decision area, memory suitability area, handoff area, and no-execution boundary.
 ```
 
 ### blocked
@@ -167,6 +169,7 @@ human_route_selection_required_before_any_new_A5 — choose Route 1 quota resolu
 28. v7.246 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/real manifest read/.env.local value read/raw provider dashboard capture/CDP/bridge/MCP/tag/release/deploy; same provider retry remains blocked.
 29. v7.247 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/real manifest read/.env.local value read/raw provider dashboard capture/CDP/bridge/MCP/tag/release/deploy; selected route remains continued stop.
 30. v7.248 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/real manifest read/.env.local value read/raw provider dashboard capture/CDP/bridge/MCP/tag/release/deploy; human route selection is required before any new A5.
+31. v7.249 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/renderer/preload/IPC/real manifest read/.env.local value read/CDP/bridge/MCP/tag/release/deploy.
 ```
 
 ### skipped

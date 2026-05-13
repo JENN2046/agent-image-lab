@@ -18,8 +18,8 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.248: 5564ad9 on master == origin/master.
-Current mainline state: v7.248 generation stop closeout or route selection request gate.
+Latest visible remote baseline before v7.249: 1d05db6 on master == origin/master.
+Current mainline state: v7.249 static Review Surface product spec gate（静态审片台产品规格门）.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
 Current status: failed_no_image_repeated_quota_or_rate_limit.
@@ -28,10 +28,10 @@ A5_execution_allowed_now: false.
 provider_contact_allowed_now: false.
 Native Doubao static hardening: syntax/path sandbox/base URL/raw output/env allowlist/validator drift patched.
 Diagnostic decision: continue_generation_stop_until_route_selection.
-Provider path decision: ROUTE-3-CONTINUED-STOP selected now; Route 1 quota resolution and Route 2 provider/model/account switch remain available only after explicit human selection.
-Generation stop closeout: current provider path remains stopped until the human selects Route 1 or Route 2 with a new authorization path.
+Provider path decision: ROUTE-3-CONTINUED-STOP（路线 3：继续停止生成）selected now; Route 1 quota resolution and Route 2 provider/model/account switch remain available only after explicit human selection.
+Review Surface mainline: static product spec created without renderer/preload/IPC/runtime code.
 route_selection_required_before_new_A5: true.
-Recommended next: human_route_selection_required_before_any_new_A5.
+Recommended next: v7.250_review_record_template_and_status_flow_gate（审片记录模板与状态流门）.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)
 ```
@@ -175,7 +175,7 @@ master tracking origin/master
 - 正式 release 发布仍需单独授权（tag 策略已定义：`docs/233_tag_and_version_strategy.md`）。
 - 后续更多真实图片生成需新 A5 授权包（Phase F 已消耗 2/2 calls，双图 accepted）。
 - version actions 需要匹配当前授权和 preflight；v7.224 只允许白名单 docs/status 文件的 commit + push。
-- Product image A5 path 已进入 repeated quota/rate-limit stop；Native Doubao static syntax / sandbox 已硬化；v7.248 已把当前 stop 封口为 route selection request。下一步不能自动重试，必须由人类选择 Route 1 quota resolution 或 Route 2 provider/model/account switch，并另开授权路径。
+- Product image A5 path 已进入 repeated quota/rate-limit stop；Native Doubao static syntax / sandbox 已硬化；v7.249 在 Route 3（继续停止生成）下把主线切回静态 Review Surface 产品规格。下一步不自动重试生成，继续做审片记录模板与状态流。
 
 ## 阶段路线
 

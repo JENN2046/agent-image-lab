@@ -16,6 +16,7 @@
 11. v7.247 provider path decision selected ROUTE-3-CONTINUED-STOP now.
 12. v7.248 generation stop closeout is complete; any new A5 path now requires explicit human route selection: Route 1 quota resolution, Route 2 provider/model/account switch, or Route 3 continued stop.
 13. recommended_next: human_route_selection_required_before_any_new_A5.
+14. v7.249 static Review Surface product spec keeps generation stopped and recommends v7.250_review_record_template_and_status_flow_gate.
 ```
 
 ## Current Mainline Quality Stop

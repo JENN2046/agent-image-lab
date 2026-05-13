@@ -1,5 +1,30 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.249 Static Review Surface Product Spec Gate
+
+```text
+Status: completed_validated
+Source baseline: 1d05db6 == origin/master
+Purpose: create static Review Surface product spec under Route 3 continued stop
+route_3_meaning_zh: 继续停止生成
+static_review_surface_product_spec_created: true
+page_goal_defined: true
+user_roles_defined: true
+core_fields_defined: true
+asset_card_structure_defined: true
+review_decision_area_defined: true
+memory_suitability_area_defined: true
+handoff_area_defined: true
+recommended_next: v7.250_review_record_template_and_status_flow_gate
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+runtime_execution: false
+DailyNote_write: false
+VCP_memory_write: false
+```
+
 ## v7.248 Generation Stop Closeout Or Route Selection Request Gate
 
 ```text
