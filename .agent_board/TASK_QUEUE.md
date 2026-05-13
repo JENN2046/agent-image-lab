@@ -36,7 +36,7 @@ Project plugin route authorization planning: v7.262 completed; NativeDoubaoImage
 Project plugin A5 authorization package draft: v7.263 completed; AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 is draft-only with approval_status=not_requested and execute_now=false.
 Project plugin A5 authorization draft review: v7.264 completed; draft result is pass_to_keep_inactive and activation remains blocked.
 True A5 authorization request: v7.265 completed_validated; AUTH-PENDING-PROJECT-PLUGIN-20260513-001 fixes prompt/output/model/budget for preflight-only approval and still blocks provider/plugin/image/env value actions.
-Route B minimal real generation authorization: v7.268b in progress; v7.269 is limited to matte_ceramic_mug, one provider call, one attempt, max 4 outputs, no retry, stop after generation, human review required.
+Route B minimal real generation authorization: v7.268b completed; v7.269 succeeded with one matte_ceramic_mug output and no retry; v7.270 records human review as needs_revision, accepted_candidate=false, commercial_delivery_ready=false, memory_suitability=deferred; v7.271 creates a static prompt v2 revision plan without generation.
 ```
 
 ---
@@ -90,10 +90,10 @@ none
 none
 ```
 
-### recommended_next_after_v7_265
+### recommended_next_after_v7_271
 
 ```text
-v7.269_minimal_real_generation_trial_execution — 执行一次最小真实生成试跑后立即停止。No retry, second generation, Batch 005, production_candidate_002, memory write, DailyNote write, tag, release, or deploy.
+v7.272_prompt_v2_static_review_and_second_trial_authorization_gate — 静态审查 prompt v2，并由人决定是否授权第二次最小生成试跑。No retry, second generation, Batch 005, production_candidate_002, memory write, DailyNote write, tag, release, or deploy.
 ```
 
 ### done
@@ -168,6 +168,9 @@ v7.269_minimal_real_generation_trial_execution — 执行一次最小真实生�
 67. v7.264 project plugin A5 authorization draft review gate found the draft safe to keep inactive, with activation blocked.
 68. v7.265 true A5 authorization request gate prepared and validated AUTH-PENDING-PROJECT-PLUGIN-20260513-001 for preflight-only approval.
 69. v7.268b true A5 minimal real generation authorization gate authorizes exactly one v7.269 matte_ceramic_mug trial.
+70. v7.269 minimal real generation trial succeeded with one output and no retry; output remains under ignored runs/.
+71. v7.270 human review of real outputs records needs_revision, accepted_candidate=false, commercial_delivery_ready=false, and memory_suitability=deferred.
+72. v7.271 prompt revision plan from first real output creates prompt v2 without A5/provider/plugin/image/memory execution.
 ```
 
 ### blocked

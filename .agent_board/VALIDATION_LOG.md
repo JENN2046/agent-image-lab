@@ -1,5 +1,74 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260513-V7-271-PROMPT-REVISION-PLAN-FROM-FIRST-REAL-OUTPUT
+
+Task:
+
+```text
+Create a static prompt revision plan and v2 prompt package from the first real matte_ceramic_mug output review. Do not run A5, contact providers, call plugins, generate images, retry, write memory, write DailyNote, or add generated images to Git.
+```
+
+Result:
+
+```text
+completed_with_validation_gap
+```
+
+Validation:
+
+```text
+git status -sb: dirty_expected_allowed_v7_270_v7_271_docs_board_review_prompt_changes
+git diff --check: passed
+prompt_v2_required_fields: passed
+prompt_v2_full_yaml_parse: unavailable_no_local_yaml_parser_without_new_dependency
+node scripts/validate_prompt_package_library.js: passed
+node scripts/validate_agent_board_state.js: passed
+node scripts/validate_current_state_alignment.js: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1: failed_pre_existing_validator_allowlist_gap_for_authorized_reviews_path
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1: passed_with_existing_manual_review_warnings
+image_added_to_git: false
+validation_gap: scripts/validate_mvp.ps1 current local commit scope allowlist does not include reviews/ even though v7.270 authorizes reviews/v7_270_matte_ceramic_mug_human_review.md
+```
+
+Recommended next:
+
+```text
+v7.272_prompt_v2_static_review_and_second_trial_authorization_gate（静态审查 prompt v2，并由人决定是否授权第二次最小生成试跑）
+```
+
+## VALIDATION-20260513-V7-270-HUMAN-REVIEW-OF-REAL-OUTPUTS
+
+Task:
+
+```text
+Record the human review result for the first real matte_ceramic_mug output. Keep the phase documentation-only: no retry, no second generation, no provider contact, no plugin call, no memory write, no DailyNote write, and do not add the generated image to Git.
+```
+
+Result:
+
+```text
+completed_with_validation_gap
+```
+
+Validation:
+
+```text
+git status -sb: dirty_expected_allowed_docs_and_board_changes
+git diff --check: passed
+node scripts/validate_agent_board_state.js: passed
+node scripts/validate_current_state_alignment.js: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1: failed_validator_allowlist_gap_for_authorized_reviews_path
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1: passed_with_existing_manual_review_warnings
+image_added_to_git: false
+validation_gap: scripts/validate_mvp.ps1 current local commit scope allowlist does not include reviews/ even though v7.270 authorizes reviews/v7_270_matte_ceramic_mug_human_review.md
+```
+
+Recommended next:
+
+```text
+v7.271_prompt_revision_plan_from_first_real_output（根据第一张真实图的问题，修订 prompt package，不直接生成）
+```
+
 ## VALIDATION-20260513-V7-268B-TRUE-A5-MINIMAL-REAL-GENERATION-AUTHORIZATION
 
 Task:

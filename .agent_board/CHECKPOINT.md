@@ -1,5 +1,61 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.271 Prompt Revision Plan From First Real Output
+
+```text
+Status: completed_with_validation_gap
+Source phase: v7.270_human_review_of_real_outputs
+Purpose: convert first real output review findings into prompt v2 revision plan without generation
+reviewed_output: runs/real_generation/v7_269_matte_ceramic_mug_trial/native_doubao_1778681238211_0.jpg
+source_asset_status: needs_revision
+prompt_revision_plan_created: true
+prompt_v2_created_or_planned: created
+prompt_v2_ref: prompts/image_generation/product_still_life_matte_ceramic_mug_v2.yaml
+revision_goals: larger product scale; reduced top whitespace; stronger premium directional lighting; subtle background depth; cleaner rim and handle joint; no colored specks
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+retry: false
+second_generation_started: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+image_added_to_git: false
+recommended_next: v7.272_prompt_v2_static_review_and_second_trial_authorization_gate
+recommended_next_zh: 静态审查 prompt v2，并由人决定是否授权第二次最小生成试跑
+next_phase_started: false
+validation: git diff --check passed; prompt v2 required fields passed; prompt package library passed; agent board state passed; current state alignment passed; local validation passed with existing manual-review warnings; validate_mvp blocked by pre-existing validator allowlist gap for authorized reviews/ path
+```
+
+## v7.270 Human Review Of Real Outputs
+
+```text
+Status: completed_with_validation_gap
+Source phase: v7.269_minimal_real_generation_trial_execution
+Purpose: record the first human review result for the first real matte_ceramic_mug output
+reviewed_output: runs/real_generation/v7_269_matte_ceramic_mug_trial/native_doubao_1778681238211_0.jpg
+asset_status: needs_revision
+accepted_candidate: false
+commercial_delivery_ready: false
+memory_suitability: deferred
+strengths: product clear; mug body/rim/handle complete; matte ceramic direction works; no text/logo/person pollution; usable as first real sample
+issues: product too small; too much top whitespace; flat lighting; weak background depth; rim slightly rough; handle connection slightly blurred; tiny colored speck at upper left; not premium enough for commercial main image
+second_generation_started: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+auto_retry: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+image_added_to_git: false
+recommended_next: v7.271_prompt_revision_plan_from_first_real_output
+recommended_next_zh: 根据第一张真实图的问题，修订 prompt package，不直接生成
+next_phase_started: false
+validation: git diff --check passed; agent board state passed; current state alignment passed; local validation passed with existing manual-review warnings; validate_mvp blocked by current validator allowlist gap for authorized reviews/ path
+```
+
 ## v7.268b True A5 Minimal Real Generation Authorization Gate
 
 ```text

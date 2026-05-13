@@ -3,12 +3,12 @@
 ## Handoff Summary
 
 ```text
-Status: v7.268b true A5 minimal real generation authorization gate in progress.
-Reason: v7.268b authorizes one bounded v7.269 real generation trial for matte_ceramic_mug.
+Status: v7.271 prompt revision plan from first real output completed_pending_validation.
+Reason: v7.270 found the first real matte_ceramic_mug output needs revision; v7.271 creates a static v2 prompt revision plan without generation.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
-Latest visible head before v7.268b: b90cdfe == origin/master
-Current status: failed_no_image_repeated_quota_or_rate_limit
+Latest visible head before v7.271: efb627b == origin/master
+Current status: prompt_v2_revision_plan_created
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
@@ -37,7 +37,7 @@ preflight_approval_status: requested_for_preflight_only
 active_A5_authorization_created: false
 plugin_call_allowed_now: false
 image_generation_allowed_now: false
-Route B minimal real generation authorization: v7.268b in_progress
+Route B minimal real generation authorization: v7.268b completed_validated
 minimal_real_generation_trial_authorized: true
 approved_product: matte_ceramic_mug
 approved_prompt_package: prompts/image_generation/product_still_life_matte_ceramic_mug_v1.yaml
@@ -47,6 +47,20 @@ output_images_max: 4
 auto_retry: false
 stop_after_generation: true
 human_review_required_after_generation: true
+Minimal real generation trial: v7.269 succeeded
+output_images_count: 1
+reviewed_output: runs/real_generation/v7_269_matte_ceramic_mug_trial/native_doubao_1778681238211_0.jpg
+Human review of real output: v7.270 completed_pending_validation
+asset_status: needs_revision
+accepted_candidate: false
+commercial_delivery_ready: false
+memory_suitability: deferred
+second_generation_started: false
+image_added_to_git: false
+Prompt revision planning: v7.271 completed_pending_validation
+prompt_revision_plan_created: true
+prompt_v2_created_or_planned: created
+prompt_v2_ref: prompts/image_generation/product_still_life_matte_ceramic_mug_v2.yaml
 Current active workers: 0
 Current operating style: Single-Window 4-Agent Compact Autopilot
 ```
@@ -140,7 +154,7 @@ preflight_approval_status: requested_for_preflight_only
 active_A5_authorization_created: false
 plugin_call_allowed_now: false
 image_generation_allowed_now: false
-route B minimal real generation authorization: v7.268b in_progress
+route B minimal real generation authorization: v7.268b completed_validated
 minimal_real_generation_trial_authorized: true
 approved_product: matte_ceramic_mug
 approved_prompt_package: prompts/image_generation/product_still_life_matte_ceramic_mug_v1.yaml
@@ -150,14 +164,25 @@ output_images_max: 4
 auto_retry: false
 stop_after_generation: true
 human_review_required_after_generation: true
+minimal real generation trial: v7.269 success
+human review of real output: v7.270 completed_pending_validation
+reviewed_output: runs/real_generation/v7_269_matte_ceramic_mug_trial/native_doubao_1778681238211_0.jpg
+asset_status: needs_revision
+accepted_candidate: false
+commercial_delivery_ready: false
+memory_suitability: deferred
+prompt revision planning: v7.271 completed_pending_validation
+prompt_revision_plan_created: true
+prompt_v2_created_or_planned: created
+prompt_v2_ref: prompts/image_generation/product_still_life_matte_ceramic_mug_v2.yaml
 same_provider_retry_allowed_now: false
-A5_execution_allowed_now: false outside v7.269 exact authorized run
-provider_contact_allowed_now: false outside v7.269 exact authorized run
+A5_execution_allowed_now: false
+provider_contact_allowed_now: false
 
 continue_A4_docs_only_by_default: false
-recommended_next: v7.269_minimal_real_generation_trial_execution
-recommended_next_zh: 执行一次最小真实生成试跑后立即停止
-auto_execution_allowed_for_next: true
+recommended_next: v7.272_prompt_v2_static_review_and_second_trial_authorization_gate
+recommended_next_zh: 静态审查 prompt v2，并由人决定是否授权第二次最小生成试跑
+auto_execution_allowed_for_next: false
 ```
 
 ## Current Stop Gates
@@ -215,15 +240,16 @@ node scripts/validate_runtime_prototype_suite.js: not required; no runtime proto
 ## Boundary Confirmation
 
 ```text
-real VCPChat read: no
-real VCPToolBox read: limited authorized DoubaoGen execution surface only
-real manifest read: no
-plugin call: yes, two authorized diagnostic retries total
-API/provider contact: yes, via authorized DoubaoGen diagnostic retries
-DailyNote call: no
-VCP memory write: no
-image file created: no
-runtime execution: yes, authorized child processes only
+real VCPChat read during v7.270: no
+real VCPToolBox read during v7.270: no
+real manifest read during v7.270: no
+plugin call during v7.270: no
+API/provider contact during v7.270: no
+DailyNote call during v7.270: no
+VCP memory write during v7.270: no
+image file created during v7.270: no
+runtime execution during v7.270: no
+generated output image added to Git: no
 external repository modification: no
 dependency/config/env modification: no
 ```
@@ -231,7 +257,7 @@ dependency/config/env modification: no
 ## Human Decisions Needed
 
 ```text
-Next action is v7.269 minimal real generation trial execution only after v7.268b commit/push completes. Human authorization is still needed before any retry, second generation, provider/model/account switch, raw plugin stderr/stdout review or capture, secret/config value review, push/tag/release/deploy beyond this gate, runtime implementation, memory write, or DailyNote call.
+Next action is v7.272 prompt v2 static review and second-trial authorization gate only. Human authorization is still needed before any retry, second generation, provider/model/account switch, raw plugin stderr/stdout review or capture, secret/config value review, push/tag/release/deploy beyond this gate, runtime implementation, memory write, or DailyNote call.
 ```
 
 ## Exact Resume Prompt
@@ -244,7 +270,7 @@ Next action is v7.269 minimal real generation trial execution only after v7.268b
 当前仓库状态：
 - master should track origin/master.
 - source baseline for v7.243: 03fd398.
-- current phase: v7.268b_true_A5_minimal_real_generation_authorization_gate in progress; it authorizes one bounded v7.269 real generation trial but does not execute it.
+- current phase: v7.271_prompt_revision_plan_from_first_real_output completed_pending_validation; v7.271 created a prompt v2 revision plan from the first real output review without generation.
 - v7.221 mainline quality stop reached.
 - v7.222 board calibration completed.
 - v7.223 read-only value selection selected v7.224 as the only safe next task.
@@ -289,8 +315,11 @@ Next action is v7.269 minimal real generation trial execution only after v7.268b
 - v7.263 created AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 with status=draft, approval_status=not_requested, execute_now=false.
 - v7.264 reviewed AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 and concluded pass_to_keep_inactive / activation blocked.
 - v7.265 prepares AUTH-PENDING-PROJECT-PLUGIN-20260513-001 with prompt_package_ref=prompts/image_generation/product_still_life_matte_ceramic_mug_v1.yaml and output_directory=runs/real_generation/A5-PROJECT-PLUGIN-20260513-001/.
-- v7.268b authorizes Route B minimal real generation trial: matte_ceramic_mug, one provider call, one attempt, max 4 outputs, no retry, stop after generation, human review required.
-- recommended_next after v7.268b: v7.269_minimal_real_generation_trial_execution（执行一次最小真实生成试跑后立即停止）.
+- v7.268b authorized Route B minimal real generation trial: matte_ceramic_mug, one provider call, one attempt, max 4 outputs, no retry, stop after generation, human review required.
+- v7.269 completed the bounded trial with one output: runs/real_generation/v7_269_matte_ceramic_mug_trial/native_doubao_1778681238211_0.jpg.
+- v7.270 records human review: needs_revision, accepted_candidate=false, commercial_delivery_ready=false, memory_suitability=deferred.
+- v7.271 created prompt v2: prompts/image_generation/product_still_life_matte_ceramic_mug_v2.yaml and a static revision plan; no second generation was started.
+- recommended_next after v7.271: v7.272_prompt_v2_static_review_and_second_trial_authorization_gate（静态审查 prompt v2，并由人决定是否授权第二次最小生成试跑）.
 - do not start any second generation, retry, memory write, DailyNote write, Batch 005, production_candidate_002, CDP, bridge, MCP, tag, release, or deploy.
 
 不要读取真实 VCPChat/VCPToolBox。

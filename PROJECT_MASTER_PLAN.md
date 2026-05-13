@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_268b: b90cdfe
-origin_master_before_v7_268b: b90cdfe
-status: failed_no_image_repeated_quota_or_rate_limit
-mode: A5 minimal real generation authorization gate
-phase_id: v7.268b_true_A5_minimal_real_generation_authorization_gate
+latest_visible_head_before_v7_271: efb627b
+origin_master_before_v7_271: efb627b
+status: prompt_v2_revision_plan_created
+mode: A4 prompt revision planning
+phase_id: v7.271_prompt_revision_plan_from_first_real_output
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -66,9 +66,20 @@ output_images_max: 4
 auto_retry: false
 stop_after_generation: true
 human_review_required_after_generation: true
-A5_execution_allowed_now: false outside v7.269 exact authorized run
-provider_contact_allowed_now: false outside v7.269 exact authorized run
-recommended_next: v7.269_minimal_real_generation_trial_execution
+v7_269_minimal_real_generation_trial_status: success
+reviewed_output: runs/real_generation/v7_269_matte_ceramic_mug_trial/native_doubao_1778681238211_0.jpg
+output_images_count: 1
+image_added_to_git: false
+asset_status: needs_revision
+accepted_candidate: false
+commercial_delivery_ready: false
+memory_suitability: deferred
+prompt_revision_plan_created: true
+prompt_v2_created_or_planned: created
+prompt_v2_ref: prompts/image_generation/product_still_life_matte_ceramic_mug_v2.yaml
+A5_execution_allowed_now: false
+provider_contact_allowed_now: false
+recommended_next: v7.272_prompt_v2_static_review_and_second_trial_authorization_gate
 ```
 
 ## Product Direction
@@ -166,15 +177,29 @@ trial for `matte_ceramic_mug` in v7.269. The boundary is one provider call, one
 generation attempt, at most four output images, no retry, no second batch, no
 DailyNote, no VCP memory write, and immediate stop for human review after the
 trial.
+v7.269 completes that bounded trial with one generated image saved under
+`runs/real_generation/v7_269_matte_ceramic_mug_trial/`. v7.270 records the
+human review result for the first real output: the sample is useful as first
+real data, but `asset_status=needs_revision`, `accepted_candidate=false`, and
+`commercial_delivery_ready=false` because product scale, top whitespace,
+lighting depth, background layering, rim/handle refinement, and a tiny colored
+speck need correction before commercial use.
+v7.271 turns those review findings into a static prompt revision plan and a new
+v2 prompt package at
+`prompts/image_generation/product_still_life_matte_ceramic_mug_v2.yaml`. The v2
+package tightens product scale, top margin, directional lighting, background
+depth, ceramic rim/handle clarity, and colored-speck suppression. It is not an
+execution request and still requires v7.272 static review plus separate human A5
+authorization before any second trial.
 
 ## Active Boundaries
 
 ```text
-A5: authorized only for v7.269 minimal real generation trial
-provider contact: authorized only for one v7.269 provider call
+A5: not authorized now
+provider contact: not authorized now
 runtime execution: not authorized
-plugin call: authorized only through the established v7.269 generation path
-image generation: authorized only for v7.269 matte_ceramic_mug trial
+plugin call: not authorized now
+image generation: not authorized now
 DailyNote / VCP memory write: not authorized
 real manifest / VCPChat / VCPToolBox read: not authorized
 tag / release / deploy / push: not authorized by this file
@@ -189,6 +214,8 @@ validation interpretation, staging, commit decisions, and next-task selection.
 
 ## Recommended Next
 
-Recommended next is `v7.269_minimal_real_generation_trial_execution`
-（执行一次最小真实生成试跑后立即停止）. No retry, second generation, memory
-write, Batch 005, or production_candidate_002 may start automatically.
+Recommended next is
+`v7.272_prompt_v2_static_review_and_second_trial_authorization_gate`
+（静态审查 prompt v2，并由人决定是否授权第二次最小生成试跑）. No retry,
+second generation, memory write, Batch 005, or production_candidate_002 may
+start automatically.

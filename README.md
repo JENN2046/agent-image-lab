@@ -7,9 +7,9 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.268b: b90cdfe on master == origin/master.
-Current mainline state: v7.268b true A5 minimal real generation authorization gate（真正 A5 最小真实生成试跑授权门）.
-Current phase id: v7.268b_true_A5_minimal_real_generation_authorization_gate.
+Latest visible remote baseline before v7.271: efb627b on master == origin/master.
+Current mainline state: v7.271 prompt revision plan from first real output（第一张真实图后的 prompt v2 修订计划）.
+Current phase id: v7.271_prompt_revision_plan_from_first_real_output.
 Prior human route selection gate: v7.261_human_product_route_selection_request_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
@@ -52,12 +52,23 @@ output_images_max: 4.
 auto_retry: false.
 stop_after_generation: true.
 human_review_required_after_generation: true.
-A5_execution_allowed_now: false outside v7.269 exact authorized run.
-provider_contact_allowed_now: false outside v7.269 exact authorized run.
+v7_269_minimal_real_generation_trial_status: success.
+reviewed_output: runs/real_generation/v7_269_matte_ceramic_mug_trial/native_doubao_1778681238211_0.jpg.
+output_images_count: 1.
+image_added_to_git: false.
+asset_status: needs_revision.
+accepted_candidate: false.
+commercial_delivery_ready: false.
+memory_suitability: deferred.
+prompt_revision_plan_created: true.
+prompt_v2_created_or_planned: created.
+prompt_v2_ref: prompts/image_generation/product_still_life_matte_ceramic_mug_v2.yaml.
+A5_execution_allowed_now: false.
+provider_contact_allowed_now: false.
 Master plan index: PROJECT_MASTER_PLAN.md.
-Not authorized outside v7.269: Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, retry, second generation, tag, release, deploy.
-Recommended next: v7.269_minimal_real_generation_trial_execution（执行一次最小真实生成试跑后立即停止）.
-auto_execution_allowed_for_next: true.
+Not authorized now: Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, retry, second generation, tag, release, deploy.
+Recommended next: v7.272_prompt_v2_static_review_and_second_trial_authorization_gate（静态审查 prompt v2，并由人决定是否授权第二次最小生成试跑）.
+auto_execution_allowed_for_next: false.
 ```
 
 历史状态脉络：
