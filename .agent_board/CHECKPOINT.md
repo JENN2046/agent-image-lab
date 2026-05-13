@@ -1,5 +1,33 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.253 Static Review Surface Mockup Spec Gate
+
+```text
+Status: completed_validated
+Source baseline: 09ab02a == origin/master
+Purpose: define static Review Surface mockup screen regions, fixtures, copy rules, and acceptance mapping
+route_3_meaning_zh: 继续停止生成
+screen_regions_defined: true
+static_fixture_shape_defined: true
+copy_rules_defined: true
+disabled_action_reasons_defined: true
+acceptance_mapping_defined: true
+ready_for_offline_static_mockup_file: true
+ready_for_runtime_implementation: false
+recommended_next: v7.254_static_review_surface_mockup_file_gate
+same_provider_retry_allowed_now: false
+A5_execution_allowed_now: false
+provider_contact_allowed_now: false
+route_selection_required_before_new_A5: true
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+runtime_execution: false
+DailyNote_write: false
+VCP_memory_write: false
+```
+
 ## v7.252 Static Review Surface Mockup Readiness Review Gate
 
 ```text

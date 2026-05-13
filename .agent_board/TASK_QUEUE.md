@@ -23,6 +23,7 @@ Static Review Surface product spec: v7.249 completed; no generation, runtime, or
 Review record template and status flow: v7.250 completed; no generation, runtime, or memory write.
 Static Review Surface acceptance checklist: v7.251 completed; no generation, runtime, or memory write.
 Static Review Surface mockup readiness review: v7.252 completed; ready for static mockup spec, not runtime or HTML implementation.
+Static Review Surface mockup spec: v7.253 completed; ready for an offline static mockup file, not runtime implementation.
 ```
 
 ---
@@ -79,7 +80,7 @@ none
 ### recommended_next_after_v7_243
 
 ```text
-v7.253_static_review_surface_mockup_spec_gate — 静态审片台 mockup 规格门。No provider contact, plugin call, runtime, memory write, or generation.
+v7.254_static_review_surface_mockup_file_gate — 静态审片台 mockup 文件门。No provider contact, plugin call, runtime, memory write, or generation.
 ```
 
 ### done
@@ -140,6 +141,7 @@ v7.253_static_review_surface_mockup_spec_gate — 静态审片台 mockup 规格�
 53. v7.250 review record template and status flow defined review schema, accepted/rejected/needs_revision/deferred routing, rejection reasons, revision requests, accepted_candidate conditions, and memory suitability yes/no/deferred handling.
 54. v7.251 static Review Surface acceptance checklist defined field completeness, status flow, human decision priority, memory write prohibition, A5/provider/plugin/runtime prohibition, and future mockup preconditions.
 55. v7.252 static Review Surface mockup readiness review confirmed readiness for a no-runtime static mockup specification gate and blocked direct HTML/runtime implementation.
+56. v7.253 static Review Surface mockup spec defined screen regions, static fixture shape, Chinese copy rules, disabled action reasons, and checklist mapping without creating HTML or runtime code.
 ```
 
 ### blocked
@@ -179,6 +181,7 @@ v7.253_static_review_surface_mockup_spec_gate — 静态审片台 mockup 规格�
 32. v7.250 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/renderer/preload/IPC/real manifest read/.env.local value read/CDP/bridge/MCP/tag/release/deploy.
 33. v7.251 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/renderer/preload/IPC/real manifest read/.env.local value read/CDP/bridge/MCP/tag/release/deploy.
 34. v7.252 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/renderer/preload/IPC/HTML implementation/real manifest read/.env.local value read/CDP/bridge/MCP/tag/release/deploy.
+35. v7.253 does not authorize A5/provider contact/plugin call/image generation/DailyNote/VCP memory/runtime/renderer/preload/IPC/real manifest read/.env.local value read/CDP/bridge/MCP/tag/release/deploy.
 ```
 
 ### skipped

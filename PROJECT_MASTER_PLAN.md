@@ -8,10 +8,10 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_252: 758ea72
-origin_master_before_v7_252: 758ea72
+latest_visible_head_before_v7_253: 09ab02a
+origin_master_before_v7_253: 09ab02a
 status: failed_no_image_repeated_quota_or_rate_limit
-mode: A4 docs-only static Review Surface mockup readiness review
+mode: A4 docs-only static Review Surface mockup spec
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
@@ -25,6 +25,7 @@ review_record_template_created: true
 status_flow_defined: true
 static_review_surface_acceptance_checklist_created: true
 static_review_surface_mockup_readiness_review_created: true
+static_review_surface_mockup_spec_created: true
 ```
 
 ## Product Direction
@@ -79,6 +80,9 @@ completeness, status flow, human decision priority, memory write prohibition,
 A5/provider/plugin/runtime prohibition, and future mockup preconditions.
 v7.252 reviews those artifacts and confirms the next safe product step is a
 static mockup specification gate, not runtime implementation.
+v7.253 defines the mockup specification: screen regions, fixture shape, Chinese
+copy rules, disabled action reasons, and checklist mapping before any HTML or
+runtime implementation.
 
 ## Active Boundaries
 
@@ -102,6 +106,7 @@ validation interpretation, staging, commit decisions, and next-task selection.
 
 ## Recommended Next
 
-Recommended next is `v7.253_static_review_surface_mockup_spec_gate`
-（静态审片台 mockup 规格门）. It should define screen regions, layout
-requirements, static fixture shape, and copy rules before any HTML/runtime work.
+Recommended next is `v7.254_static_review_surface_mockup_file_gate`
+（静态审片台 mockup 文件门）. It may create a standalone offline static mockup
+file only if it remains no-runtime, no-provider, no-plugin, no-image-generation,
+and no-memory-write.
