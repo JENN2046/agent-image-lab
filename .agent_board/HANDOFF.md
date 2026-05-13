@@ -7,7 +7,7 @@ Status: generation stop closeout recorded after repeated quota/rate-limit failur
 Reason: A second newly approved DoubaoGen retry/diagnostic call was consumed once; the plugin returned error again, sanitized category is still quota_or_rate_limit, and no image was generated.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
-Latest visible head: 6f3425e == origin/master
+Latest visible head: 5d3c127 == origin/master
 Current status: failed_no_image_repeated_quota_or_rate_limit
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
@@ -79,13 +79,15 @@ static Review Surface mockup acceptance review: v7.255 completed_validated
 static_review_surface_mockup_acceptance_result: pass_with_warnings
 static Review Surface acceptance patch: v7.256 completed_validated
 accepted_final_explicit_state_patched: true
+static Review Surface quality stop decision: v7.257 completed_validated
+static_review_surface_quality_stop_reached: true
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false
 provider_contact_allowed_now: false
 
 continue_A4_docs_only_by_default: false
-recommended_next: v7.257_static_review_surface_quality_stop_or_next_product_decision_gate
-recommended_next_zh: 静态审片台质量停止或下一产品决策门
+recommended_next: v7.258_product_workflow_fixture_packet_gate
+recommended_next_zh: 产品图工作流纸面样例包门
 ```
 
 ## Current Stop Gates
@@ -159,7 +161,7 @@ dependency/config/env modification: no
 ## Human Decisions Needed
 
 ```text
-Next A5 route action is human route selection. Human authorization is still needed before provider console/account review, any retry, raw plugin stderr/stdout review or capture, secret/config value review, provider/model/account switch, push/tag/release/deploy, or repetitive low-value A4 gate. The current product-mainline next task is v7.257_static_review_surface_quality_stop_or_next_product_decision_gate.
+Next A5 route action is human route selection. Human authorization is still needed before provider console/account review, any retry, raw plugin stderr/stdout review or capture, secret/config value review, provider/model/account switch, push/tag/release/deploy, or repetitive low-value A4 gate. The current product-mainline next task is v7.258_product_workflow_fixture_packet_gate.
 ```
 
 ## Exact Resume Prompt

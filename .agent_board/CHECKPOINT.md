@@ -1,5 +1,31 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## v7.257 Static Review Surface Quality Stop Or Next Product Decision Gate
+
+```text
+Status: completed_validated
+Source baseline: 5d3c127 == origin/master
+Purpose: decide whether the static Review Surface track should stop at A4 quality or continue into another product artifact
+route_3_meaning_zh: 继续停止生成
+static_review_surface_quality_stop_reached: true
+more_static_review_surface_polish_allowed_by_default: false
+one_more_review_surface_artifact_needed_now: false
+next_product_value_should_shift_to_fixture_packet: true
+recommended_next: v7.258_product_workflow_fixture_packet_gate
+recommended_next_zh: 产品图工作流纸面样例包门
+same_provider_retry_allowed_now: false
+A5_execution_allowed_now: false
+provider_contact_allowed_now: false
+route_selection_required_before_new_A5: true
+A5_execution: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+runtime_execution: false
+DailyNote_write: false
+VCP_memory_write: false
+```
+
 ## v7.256 Static Review Surface Acceptance Patch Gate
 
 ```text
