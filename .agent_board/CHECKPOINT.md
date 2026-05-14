@@ -1,10 +1,44 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8 Route Selection Human Decision Gate
+
+```text
+phase_id: v8_route_selection_human_decision_gate
+Status: completed_remote_synced_after_guarded_push
+Source phase: v7.285_v7_product_loop_closeout_and_v8_route_planning_gate
+Source commit: 6bcf427582cf46d7dd507e442ce2a4bbcba8e426
+Purpose: record the human V8 route decision and select final retouch planning for v4
+selected_route: final_retouch_planning
+selected_route_zh: 最终修图规划
+current_best_candidate: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+asset_status: accepted_candidate_with_minor_retouch
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+generation_stopped: true
+fifth_generation_started: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+retry: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+production_candidate_002_started: false
+Batch_005_started: false
+output_image_added_to_git: false
+accepted_samples_written: false
+recommended_next: v8_001_final_retouch_planning_gate
+recommended_next_zh: 为 v4 当前最佳候选制定最终修图说明包，不生成新图
+auto_execution_allowed_for_next: false
+next_phase_started: false
+```
+
 ## v7.285 V7 Product Loop Closeout And V8 Route Planning Gate
 
 ```text
 phase_id: v7.285_v7_product_loop_closeout_and_v8_route_planning_gate
-Status: completed_pending_guarded_commit_and_push
+Status: completed_remote_synced
 Source phase: v7.284_accepted_candidate_evidence_package
 Source commit: d0add63f25a551d20ad17b3d0b17abde26b694b3
 Purpose: close the first V7 real product-image loop and present V8 route options

@@ -18,9 +18,9 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.285: d0add63 on master == origin/master.
-Current mainline state: v7.285 V7 product loop closed; current best candidate is v4; generation stopped; V8 route selection required.
-Current phase id: v7.285_v7_product_loop_closeout_and_v8_route_planning_gate.
+Current synced baseline before v8 route selection: 6bcf427 on master == origin/master.
+Current mainline state: v8 route selected; final_retouch_planning chosen for v4; generation remains stopped.
+Current phase id: v8_route_selection_human_decision_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
@@ -148,9 +148,14 @@ v7.285_review_dataset_summary_created: true.
 v7.285_v8_route_options_created: true.
 v7.285_recommended_default_route: final_retouch_planning.
 v8_route_selection_required: true.
+v8_route_selection_completed: true.
+selected_v8_route: final_retouch_planning.
+selected_v8_route_zh: 最终修图规划.
+v8_next_phase: v8_001_final_retouch_planning_gate.
+v8_next_phase_auto_execution_allowed: false.
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed.
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate.
-Recommended next: v8_route_selection_human_decision_gate（人工选择 V8 路线；默认推荐 final retouch planning）.
+Recommended next: v8_001_final_retouch_planning_gate（为 v4 当前最佳候选制定最终修图说明包，不生成新图）.
 auto_execution_allowed_for_next: false.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)
@@ -463,7 +468,8 @@ daily_note_called: false
 21. v7.284_accepted_candidate_evidence_package 已封存 v4 accepted candidate 证据包；不复制、不移动、不 stage、不 commit `runs/` 输出图。
 22. v7.285_v7_product_loop_closeout_and_v8_route_planning_gate 已封存 V7 第一条真实生成-审片-prompt 迭代闭环，形成 prompt 演进分析、review 数据集摘要和 V8 路线选项。
 23. Batch 005、production_candidate_002、memory_write_path、DailyNote/VCP memory、retry、第五次生成、tag/release/deploy 仍未授权。
-24. recommended next: v8_route_selection_human_decision_gate（人工选择 V8 路线；默认推荐 final_retouch_planning）。
+24. v8_route_selection_human_decision_gate 已正式选择 `final_retouch_planning`（最终修图规划），不进入第五次生成、不写 memory、不进入 production_candidate_002。
+25. recommended next: v8_001_final_retouch_planning_gate（为 v4 当前最佳候选制定最终修图说明包，不生成新图）。
 
 ## 永久安全门
 

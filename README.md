@@ -7,9 +7,9 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Latest visible remote baseline before v7.285: d0add63 on master == origin/master.
-Current mainline state: v7.285 V7 product loop closed; current best candidate is v4; generation stopped; V8 route selection required.
-Current phase id: v7.285_v7_product_loop_closeout_and_v8_route_planning_gate.
+Current synced baseline before v8 route selection: 6bcf427 on master == origin/master.
+Current mainline state: v8 route selected; final_retouch_planning chosen for v4; generation remains stopped.
+Current phase id: v8_route_selection_human_decision_gate.
 Prior human route selection gate: v7.261_human_product_route_selection_request_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
@@ -138,11 +138,16 @@ v7.285_review_dataset_summary_created: true.
 v7.285_v8_route_options_created: true.
 v7.285_recommended_default_route: final_retouch_planning.
 v8_route_selection_required: true.
+v8_route_selection_completed: true.
+selected_v8_route: final_retouch_planning.
+selected_v8_route_zh: 最终修图规划.
+v8_next_phase: v8_001_final_retouch_planning_gate.
+v8_next_phase_auto_execution_allowed: false.
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed.
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized now: Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, retry, fifth generation, tag, release, deploy.
-Recommended next: v8_route_selection_human_decision_gate（人工选择 V8 路线；默认推荐 final retouch planning）.
+Recommended next: v8_001_final_retouch_planning_gate（为 v4 当前最佳候选制定最终修图说明包，不生成新图）.
 auto_execution_allowed_for_next: false.
 ```
 

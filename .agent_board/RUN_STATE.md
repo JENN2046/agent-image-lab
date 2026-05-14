@@ -9,24 +9,24 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab is in v7.285 V7 product loop closeout and V8 route planning gate. V7 product loop is closed around v4 as the current best accepted candidate with minor retouch needs; generation is stopped and V8 route selection is required.
+Agent Image Lab is in v8_route_selection_human_decision_gate. The V8 human route decision selected final_retouch_planning for v4; generation remains stopped and the next phase is a non-executing final retouch planning gate.
 ```
 
 ## Current Phase
 
 ```text
-v7.285 V7 Product Loop Closeout And V8 Route Planning Gate
-phase_id: v7.285_v7_product_loop_closeout_and_v8_route_planning_gate
-source_phase: v7.284_accepted_candidate_evidence_package
+v8 Route Selection Human Decision Gate
+phase_id: v8_route_selection_human_decision_gate
+source_phase: v7.285_v7_product_loop_closeout_and_v8_route_planning_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
-status: v7_product_loop_closeout_pending_checkpoint_commit
-source_commit: d0add63
-source_message: docs: add accepted candidate evidence package
+status: v8_route_selected_final_retouch_planning
+source_commit: 6bcf427
+source_message: docs: close out v7 product loop and plan v8 routes
 branch: master tracking origin/master
-Worktree: clean before v7.285 closeout patch; generated v7.281 output remains ignored under runs/
+Worktree: clean before v8 route selection patch; generated v7.281 output remains ignored under runs/
 worktree_start_clean: true
-origin_sync_current: local HEAD equals origin/master at d0add63
+origin_sync_current: local HEAD equals origin/master at 6bcf427
 ahead_behind: 0/0
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false; the single authorized v7.281 call has been consumed
@@ -110,7 +110,12 @@ output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug
 auto_retry_for_second_trial: false
 stop_after_generation_for_second_trial: true
 human_review_required_after_generation: true
-recommended_next: v8_route_selection_human_decision_gate
+recommended_next: v8_001_final_retouch_planning_gate
+recommended_next_zh: 为 v4 当前最佳候选制定最终修图说明包，不生成新图
+v8_route_selection_completed: true
+selected_v8_route: final_retouch_planning
+selected_v8_route_zh: 最终修图规划
+v8_next_phase_auto_execution_allowed: false
 v7.274_status: completed_success
 v7.274_provider_contact: true
 v7.274_image_generation: true

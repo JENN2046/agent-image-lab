@@ -3,15 +3,15 @@
 ## Handoff Summary
 
 ```text
-Status: v7.285 V7 product loop closeout and V8 route planning gate in progress; V7 product loop is being closed, current best candidate is v4, generation is stopped, and V8 route selection is required.
-Reason: v7.284 was committed and pushed at d0add63, and v7.285 seals the full V7 real generation/review/prompt-iteration loop while preserving no-generation, no-memory, and no-production-candidate boundaries.
+Status: v8_route_selection_human_decision_gate completed in this handoff; V8 route selected is final_retouch_planning, current best candidate remains v4, and generation remains stopped.
+Reason: v7.285 was committed and pushed at 6bcf427, then the human route selection chose the lowest-risk V8 path: final retouch planning without fifth generation, memory write, runtime implementation, or production_candidate_002.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
 Latest visible head before v7.273: 6f95b53 == origin/master
-Current synced HEAD before v7.285 local patch: d0add63 docs: add accepted candidate evidence package
+Current synced HEAD before v8 route selection patch: 6bcf427 docs: close out v7 product loop and plan v8 routes
 ahead_behind: 0/0
-Worktree: clean before v7.285 product loop closeout patch; v7.281 output remains ignored under runs/
-Current status: v7_product_loop_closeout_and_v8_route_planning_pending_checkpoint_commit
+Worktree: clean before v8 route selection patch; v7.281 output remains ignored under runs/
+Current status: v8_route_selected_final_retouch_planning
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false after v7.282; the single authorized v7.281 call has been consumed
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate
@@ -158,9 +158,14 @@ v7.285_review_dataset_summary_created: true
 v7.285_v8_route_options_created: true
 v7.285_recommended_default_route: final_retouch_planning
 v8_route_selection_required: true
+v8_route_selection_completed: true
+selected_v8_route: final_retouch_planning
+selected_v8_route_zh: 最终修图规划
+v8_next_phase: v8_001_final_retouch_planning_gate
+v8_next_phase_auto_execution_allowed: false
 provider_contact_after_v7_274: false
 image_generation_after_v7_274: false
-human_review_required_now: true
+human_review_required_now: false
 Current active workers: 0
 Current operating style: Single-Window 4-Agent Compact Autopilot
 ```

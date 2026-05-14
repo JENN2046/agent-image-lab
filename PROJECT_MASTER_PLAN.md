@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_visible_head_before_v7_285: d0add63
-origin_master_before_v7_285: d0add63
-status: v7_product_loop_closed_v8_route_selection_required
-mode: A4 product loop closeout and V8 route planning gate
-phase_id: v7.285_v7_product_loop_closeout_and_v8_route_planning_gate
+latest_synced_head_before_v8_route_selection: 6bcf427
+origin_master_before_v8_route_selection: 6bcf427
+status: v8_route_selected_final_retouch_planning
+mode: A4 docs-only human route selection gate
+phase_id: v8_route_selection_human_decision_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -152,9 +152,14 @@ v7.285_review_dataset_summary_created: true
 v7.285_v8_route_options_created: true
 v7.285_recommended_default_route: final_retouch_planning
 v8_route_selection_required: true
+v8_route_selection_completed: true
+selected_v8_route: final_retouch_planning
+selected_v8_route_zh: 最终修图规划
+v8_next_phase: v8_001_final_retouch_planning_gate
+v8_next_phase_auto_execution_allowed: false
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate
-recommended_next: v8_route_selection_human_decision_gate
+recommended_next: v8_001_final_retouch_planning_gate
 ```
 
 ## Product Direction
