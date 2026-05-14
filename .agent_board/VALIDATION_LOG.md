@@ -1,5 +1,31 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v8.022-SECOND-PRODUCT-REAL-OUTPUT-HUMAN-REVIEW
+
+Task:
+
+```text
+Record the human review for the v8.021 second-product second real output.
+```
+
+Result:
+
+```text
+reviewed_output: runs/real_generation/v8_021_multi_color_mesh_sports_visor_second_trial/native_doubao_1778733554203_0.jpg
+asset_status: needs_revision
+accepted_candidate: false
+commercial_delivery_ready: false
+memory_suitability: deferred
+reviewable_sample: true
+route_B_generation_recovered_after_http_400: true
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, DailyNote write, VCP memory write, production_candidate_002, Batch 005, dependency change, package.json change, accepted_samples write, or runs output commit is performed by v8.022.
+```
+
 ## VALIDATION-20260514-v8.020-SECOND-PRODUCT-SECOND-TRIAL-AUTHORIZATION
 
 Task:

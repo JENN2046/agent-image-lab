@@ -9,24 +9,24 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v8_020_second_product_second_trial_authorization_gate. Human selected Option A, and this phase records one new bounded A5 authorization for v8.021 after guarded push.
+Agent Image Lab is in v8_022_human_review_of_second_product_second_real_output. The v8.021 second-product second trial succeeded and produced a reviewable image, but human review marks it as needs_revision.
 ```
 
 ## Current Phase
 
 ```text
-v8.020 Second Product Second Trial Authorization Gate
-phase_id: v8_020_second_product_second_trial_authorization_gate
-source_phase: v8_019_second_product_second_trial_authorization_decision_gate
+v8.022 Human Review Of Second Product Second Real Output
+phase_id: v8_022_human_review_of_second_product_second_real_output
+source_phase: v8_021_second_product_second_minimal_generation_trial_execution
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
-status: second_product_second_trial_authorization_record_in_progress
-source_commit: e8bb77905cfd03e2e5ced9676810192885b2a558
-source_message: docs: decide second product retry authorization path
+status: second_product_second_real_output_review_in_progress
+source_commit: b3ea4d12d8bd814c7023196ccca8c825fac2574d
+source_message: docs: authorize second product second minimal generation trial
 branch: master tracking origin/master
 Worktree: clean before v8_003a A4.8 rail package patch; generated v7.281 output remains ignored under runs/
 worktree_start_clean: true
-origin_sync_current: local HEAD equals origin/master at e8bb779
+origin_sync_current: local HEAD equals origin/master at b3ea4d1
 ahead_behind: 0/0
 A4_8_safe_project_operator_rail_created: true
 A4_8_safe_project_operator_rail_zh: 安全项目运营轨
@@ -122,8 +122,8 @@ output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug
 auto_retry_for_second_trial: false
 stop_after_generation_for_second_trial: true
 human_review_required_after_generation: true
-recommended_next: v8_021_second_product_second_minimal_generation_trial_execution
-recommended_next_zh: v8.020 guarded push 后执行一次受控真实生成试跑
+recommended_next: v8_023_second_product_prompt_revision_plan_from_first_real_output
+recommended_next_zh: 根据第二商品首张真实图的问题修订 prompt package；不自动生成
 v8_003b_A4_8_rule_intake_smoke_test: passed
 v8_006_A4_8_state_and_rule_intake_review: passed_read_only
 v8_007_A4_8_mutation_live_run_docs_only: completed_remote_synced_after_guarded_push
@@ -195,7 +195,7 @@ v8_019_human_decision_required: true
 v8_019_provider_contact: false
 v8_019_image_generation: false
 v8_019_retry: false
-v8_020_second_product_second_trial_authorization_gate: in_progress
+v8_020_second_product_second_trial_authorization_gate: completed_remote_synced_after_guarded_push
 v8_020_this_is_new_A5_authorization: true
 v8_020_previous_v8_015_authorization_consumed: true
 v8_020_retry_allowed_by_previous_authorization: false
@@ -211,6 +211,26 @@ v8_020_human_review_required_after_generation: true
 v8_020_provider_contact: false
 v8_020_image_generation: false
 v8_020_env_local_secret_value_read: false
+v8_021_execution_status: success
+v8_021_provider_contact: true
+v8_021_image_generation_attempted: true
+v8_021_image_created: true
+v8_021_provider_calls_used: 1
+v8_021_generation_attempts_used: 1
+v8_021_output_images_count: 1
+v8_021_output_file: runs/real_generation/v8_021_multi_color_mesh_sports_visor_second_trial/native_doubao_1778733554203_0.jpg
+v8_021_auto_retry_used: false
+v8_021_output_added_to_git: false
+v8_022_human_review_status: completed
+v8_022_asset_status: needs_revision
+v8_022_accepted_candidate: false
+v8_022_commercial_delivery_ready: false
+v8_022_memory_suitability: deferred
+v8_022_reviewable_sample: true
+v8_022_route_B_generation_recovered_after_http_400: true
+v8_022_provider_contact: false
+v8_022_image_generation: false
+v8_022_retry: false
 Route_B_initial_docs_sequence_completed: true
 v8_route_selection_completed: true
 selected_v8_route: final_retouch_planning

@@ -18,9 +18,9 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Current synced baseline before v8_020 second product second-trial authorization gate: e8bb77905cfd03e2e5ced9676810192885b2a558 on master == origin/master.
-Current mainline state: v8_020 records a new A5 authorization for one second-product second minimal generation trial; this authorization record gate performs no provider execution.
-Current phase id: v8_020_second_product_second_trial_authorization_gate.
+Current synced baseline before v8_022 human review gate: b3ea4d12d8bd814c7023196ccca8c825fac2574d on master == origin/master.
+Current mainline state: v8_022 reviews the second-product second real output; the image is reviewable but needs revision.
+Current phase id: v8_022_human_review_of_second_product_second_real_output.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
@@ -270,8 +270,17 @@ v8_020_output_directory: runs/real_generation/v8_021_multi_color_mesh_sports_vis
 v8_020_provider_calls_max: 1.
 v8_020_generation_attempts_max: 1.
 v8_020_output_images_max: 1.
-Recommended next: v8_021_second_product_second_minimal_generation_trial_execution（v8.020 guarded push 后执行一次受控真实生成试跑）.
-auto_execution_allowed_for_next: true_after_v8_020_guarded_push.
+v8_021_execution_status: success.
+v8_021_output_file: runs/real_generation/v8_021_multi_color_mesh_sports_visor_second_trial/native_doubao_1778733554203_0.jpg.
+v8_021_output_images_count: 1.
+v8_021_output_added_to_git: false.
+v8_022_asset_status: needs_revision.
+v8_022_accepted_candidate: false.
+v8_022_commercial_delivery_ready: false.
+v8_022_memory_suitability: deferred.
+v8_022_reviewable_sample: true.
+Recommended next: v8_023_second_product_prompt_revision_plan_from_first_real_output（根据第二商品首张真实图的问题修订 prompt package；不自动生成）.
+auto_execution_allowed_for_next: false.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)
 ```

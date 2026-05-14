@@ -81,13 +81,13 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-v8_020_second_product_second_trial_authorization_gate — record the new bounded A5 authorization for one v8.021 second-product second trial; do not execute provider in this phase.
+v8_022_human_review_of_second_product_second_real_output — record human review for the v8.021 second-product output as needs_revision; do not generate or retry.
 ```
 
 ### todo
 
 ```text
-v8_021_second_product_second_minimal_generation_trial_execution — after v8.020 commit and guarded push, run exactly one authorized provider call / generation attempt.
+v8_023_second_product_prompt_revision_plan_from_first_real_output — revise the prompt plan from review findings; no automatic generation.
 ```
 
 ### recommended_next_after_v7_285
@@ -248,7 +248,7 @@ v8_018_provider_optional_fields_reviewed: true
 v8_019_options_presented: authorize_second_minimal_real_generation_trial | more_static_runner_payload_review | stop_second_product_real_generation_route
 v8_019_recommended_option: authorize_second_minimal_real_generation_trial
 v8_019_human_selected_option: authorize_second_minimal_real_generation_trial
-v8_020_second_product_second_trial_authorization_gate: in_progress
+v8_020_second_product_second_trial_authorization_gate: completed_remote_synced_after_guarded_push
 v8_020_this_is_new_A5_authorization: true
 v8_020_approved_prompt_package: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
 v8_020_output_directory: runs/real_generation/v8_021_multi_color_mesh_sports_visor_second_trial/
@@ -256,6 +256,15 @@ v8_020_provider_calls_max: 1
 v8_020_generation_attempts_max: 1
 v8_020_output_images_max: 1
 recommended_next_after_v8_020: v8_021_second_product_second_minimal_generation_trial_execution
+v8_021_second_product_second_minimal_generation_trial_execution: completed_success
+v8_021_output_file: runs/real_generation/v8_021_multi_color_mesh_sports_visor_second_trial/native_doubao_1778733554203_0.jpg
+v8_021_output_added_to_git: false
+v8_022_human_review_of_second_product_second_real_output: in_progress
+v8_022_asset_status: needs_revision
+v8_022_accepted_candidate: false
+v8_022_commercial_delivery_ready: false
+v8_022_memory_suitability: deferred
+recommended_next_after_v8_022: v8_023_second_product_prompt_revision_plan_from_first_real_output
 ```
 
 ### done

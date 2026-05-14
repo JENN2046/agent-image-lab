@@ -3,14 +3,14 @@
 ## Handoff Summary
 
 ```text
-Status: v8_020_second_product_second_trial_authorization_gate is the current Route B authorization record gate; a new bounded A5 authorization is recorded for v8.021 only.
-Reason: human selected v8.019 Option A after the v8.018 canonical prompt fix; v8.020 itself does not call provider or read .env.local.
+Status: v8_022_human_review_of_second_product_second_real_output is the current Route B review gate; the v8.021 output is reviewable but needs revision.
+Reason: v8.021 succeeded after the v8.018 canonical prompt fix, but the human review marks the output needs_revision rather than accepted_candidate.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
-Current synced HEAD before v8_020 patch: e8bb779 docs: decide second product retry authorization path
+Current synced HEAD before v8_022 patch: b3ea4d1 docs: authorize second product second minimal generation trial
 ahead_behind: 0/0
 Worktree: clean before v8_003a A4.8 rail package patch; v7.281 output remains ignored under runs/
-Current status: v8_020_second_product_second_trial_authorization_gate
+Current status: v8_022_human_review_of_second_product_second_real_output
 A4_8_safe_project_operator_rail_created: true
 A4_8_safe_project_operator_rail_zh: 安全项目运营轨
 A4_8_is_not_A5: true
@@ -228,8 +228,8 @@ v8_003a_safe_project_operator_rail_ref: docs/A4_8_SAFE_PROJECT_OPERATOR_RAIL.md
 v8_003a_safe_push_policy_ref: docs/SAFE_PUSH_POLICY.md
 v8_003a_validation_selection_matrix_ref: docs/VALIDATION_SELECTION_MATRIX.md
 v8_003a_failure_recovery_ref: docs/AUTOPILOT_FAILURE_RECOVERY.md
-recommended_next: v8_021_second_product_second_minimal_generation_trial_execution
-recommended_next_zh: v8.020 guarded push 后执行一次受控真实生成试跑
+recommended_next: v8_023_second_product_prompt_revision_plan_from_first_real_output
+recommended_next_zh: 根据第二商品首张真实图的问题修订 prompt package；不自动生成
 v8_003b_A4_8_rule_intake_smoke_test: passed
 v8_006_A4_8_state_and_rule_intake_review: passed_read_only
 v8_007_A4_8_mutation_live_run_docs_only: completed_remote_synced_after_guarded_push
@@ -293,7 +293,7 @@ v8_019_human_decision_required: true
 v8_019_provider_contact: false
 v8_019_image_generation: false
 v8_019_retry: false
-v8_020_second_product_second_trial_authorization_gate: in_progress
+v8_020_second_product_second_trial_authorization_gate: completed_remote_synced_after_guarded_push
 v8_020_this_is_new_A5_authorization: true
 v8_020_previous_v8_015_authorization_consumed: true
 v8_020_retry_allowed_by_previous_authorization: false
@@ -309,6 +309,26 @@ v8_020_human_review_required_after_generation: true
 v8_020_provider_contact: false
 v8_020_image_generation: false
 v8_020_env_local_secret_value_read: false
+v8_021_execution_status: success
+v8_021_provider_contact: true
+v8_021_image_generation_attempted: true
+v8_021_image_created: true
+v8_021_provider_calls_used: 1
+v8_021_generation_attempts_used: 1
+v8_021_output_images_count: 1
+v8_021_output_file: runs/real_generation/v8_021_multi_color_mesh_sports_visor_second_trial/native_doubao_1778733554203_0.jpg
+v8_021_auto_retry_used: false
+v8_021_output_added_to_git: false
+v8_022_human_review_status: completed
+v8_022_asset_status: needs_revision
+v8_022_accepted_candidate: false
+v8_022_commercial_delivery_ready: false
+v8_022_memory_suitability: deferred
+v8_022_reviewable_sample: true
+v8_022_route_B_generation_recovered_after_http_400: true
+v8_022_provider_contact: false
+v8_022_image_generation: false
+v8_022_retry: false
 Route_B_initial_docs_sequence_completed: true
 provider_contact_after_v7_274: false
 image_generation_after_v7_274: false

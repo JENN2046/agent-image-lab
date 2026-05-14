@@ -1,10 +1,62 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.022 Human Review Of Second Product Second Real Output
+
+```text
+phase_id: v8_022_human_review_of_second_product_second_real_output
+status: in_progress
+source_phase: v8_021_second_product_second_minimal_generation_trial_execution
+source_commit: b3ea4d12d8bd814c7023196ccca8c825fac2574d
+purpose: record human review for the second-product second real output
+phase_record_ref: docs/v8_022_human_review_of_second_product_second_real_output.md
+review_ref: reviews/v8_022_multi_color_mesh_sports_visor_human_review.md
+reviewed_output: runs/real_generation/v8_021_multi_color_mesh_sports_visor_second_trial/native_doubao_1778733554203_0.jpg
+asset_status: needs_revision
+accepted_candidate: false
+commercial_delivery_ready: false
+memory_suitability: deferred
+reviewable_sample: true
+route_B_generation_recovered_after_http_400: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+recommended_next: v8_023_second_product_prompt_revision_plan_from_first_real_output
+```
+
+# v8.021 Second Product Second Minimal Generation Trial Execution
+
+```text
+phase_id: v8_021_second_product_second_minimal_generation_trial_execution
+status: completed_success
+approved_product: multi_color_mesh_sports_visor
+prompt_package_used: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
+provider_contact: true
+image_generation_attempted: true
+image_created: true
+provider_calls_used: 1
+generation_attempts_used: 1
+output_images_count: 1
+output_file: runs/real_generation/v8_021_multi_color_mesh_sports_visor_second_trial/native_doubao_1778733554203_0.jpg
+auto_retry_used: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+output_added_to_git: false
+recommended_next: v8_022_human_review_of_second_product_second_real_output
+```
+
 # v8.020 Second Product Second Trial Authorization Gate
 
 ```text
 phase_id: v8_020_second_product_second_trial_authorization_gate
-status: in_progress
+status: completed_remote_synced_after_guarded_push
 source_phase: v8_019_second_product_second_trial_authorization_decision_gate
 source_commit: e8bb77905cfd03e2e5ced9676810192885b2a558
 purpose: record human Option A selection and authorize exactly one bounded v8.021 second-product second trial
