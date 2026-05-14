@@ -7,6 +7,22 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current synced baseline before v8_032 authorization gate: 9c457d991b2e6e1159f5e5d652943ee0c81d8fbb on master == origin/master.
+Current mainline state: v8_032 records the new single-use A5 authorization for one post-persistence-fix prompt v2 generation trial; no provider contact occurs until v8_033 after commit and push.
+Current phase id: v8_032_second_product_post_persistence_fix_generation_authorization_gate.
+approved_product: multi_color_mesh_sports_visor.
+approved_prompt_package: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml.
+output_directory: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/.
+provider_calls_max: 1.
+generation_attempts_max: 1.
+output_images_max: 1.
+auto_retry: false.
+success_requires_verified_local_file: true.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+env_local_secret_value_read_allowed_now: false.
+recommended_next: v8_033_second_product_post_persistence_fix_minimal_generation_trial_execution.
+recommended_next_auto_execution_allowed: true_after_v8_032_commit_and_guarded_push.
 Current synced baseline before v8_031 decision gate: 785cb23452c37c1893855cf75360d32c841e5075 on master == origin/master.
 Current mainline state: v8_031 presents the human decision gate for whether to authorize one more minimal real generation trial after the output persistence guard fix.
 Current phase id: v8_031_second_product_retry_after_persistence_fix_decision_gate.

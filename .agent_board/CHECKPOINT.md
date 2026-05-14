@@ -1,10 +1,43 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.032 Second Product Post Persistence Fix Generation Authorization Gate
+
+```text
+phase_id: v8_032_second_product_post_persistence_fix_generation_authorization_gate
+status: completed_validated_pending_guarded_push
+source_phase: v8_031_second_product_retry_after_persistence_fix_decision_gate
+source_commit: 9c457d991b2e6e1159f5e5d652943ee0c81d8fbb
+purpose: record one new single-use A5 authorization for v8.033 after the output persistence guard fix
+phase_record_ref: docs/v8_032_second_product_post_persistence_fix_generation_authorization_gate.md
+this_is_new_A5_authorization: true
+approved_product: multi_color_mesh_sports_visor
+approved_prompt_package: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
+output_directory: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 1
+auto_retry: false
+stop_after_generation: true
+human_review_required_after_generation: true
+success_requires_verified_local_file: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+recommended_next: v8_033_second_product_post_persistence_fix_minimal_generation_trial_execution
+```
+
 # v8.031 Second Product Retry After Persistence Fix Decision Gate
 
 ```text
 phase_id: v8_031_second_product_retry_after_persistence_fix_decision_gate
-status: completed_validated_pending_guarded_push
+status: completed_remote_synced_after_guarded_push
 source_phase: v8_030_runner_output_persistence_guard_static_code_fix_gate
 source_commit: 785cb23452c37c1893855cf75360d32c841e5075
 purpose: present human decision options after the output persistence guard fix

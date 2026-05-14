@@ -9,6 +9,20 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v8_032_second_product_post_persistence_fix_generation_authorization_gate.
+Purpose: record one new single-use A5 authorization for v8.033 after the output persistence guard fix.
+this_is_new_A5_authorization: true.
+approved_product: multi_color_mesh_sports_visor.
+approved_prompt_package: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml.
+output_directory: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/.
+provider_calls_max: 1.
+generation_attempts_max: 1.
+output_images_max: 1.
+auto_retry: false.
+success_requires_verified_local_file: true.
+v8_032 records authorization only; provider contact, image generation, and .env.local secret value read are allowed only in v8_033 after v8_032 commit and guarded push.
+recommended_next: v8_033_second_product_post_persistence_fix_minimal_generation_trial_execution.
+---
 Current active gate: v8_031_second_product_retry_after_persistence_fix_decision_gate.
 Purpose: present human options after the output persistence guard fix; no A5 authorization is created by this gate.
 output_persistence_guard_fixed: true.
@@ -143,13 +157,13 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-none — v8_031 is completed_validated_pending_guarded_push.
+v8_032_second_product_post_persistence_fix_generation_authorization_gate — A5 authorization record gate only.
 ```
 
 ### todo
 
 ```text
-pending_human_retry_authorization_after_persistence_fix — wait for Option A/B/C; no automatic provider execution.
+v8_033_second_product_post_persistence_fix_minimal_generation_trial_execution — allowed only after v8_032 commit and guarded push; exactly one provider call and generation attempt.
 ```
 
 ### recommended_next_after_v7_285

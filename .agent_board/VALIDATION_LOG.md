@@ -1,5 +1,34 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v8.032-POST-PERSISTENCE-FIX-GENERATION-AUTHORIZATION
+
+Task:
+
+```text
+Record the owner's v8.031 Option A selection and authorize exactly one bounded post-persistence-fix minimal generation trial for v8.033 after commit and push.
+```
+
+Authorization:
+
+```text
+this_is_new_A5_authorization: true
+approved_product: multi_color_mesh_sports_visor
+approved_prompt_package: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
+output_directory: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 1
+auto_retry: false
+success_requires_verified_local_file: true
+validation_result: passed
+```
+
+Boundary:
+
+```text
+v8.032 records authorization only. It performs no provider contact, image generation, retry, .env.local secret value read, DailyNote write, VCP memory write, production_candidate_002, Batch 005, dependency change, package.json change, accepted_samples write, or runs output commit.
+```
+
 ## VALIDATION-20260514-v8.031-RETRY-AFTER-PERSISTENCE-FIX-DECISION
 
 Task:

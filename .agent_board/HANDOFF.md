@@ -3,6 +3,31 @@
 ## Handoff Summary
 
 ```text
+Status: v8_032_second_product_post_persistence_fix_generation_authorization_gate is the current Route B A5 authorization record gate; owner selected v8.031 Option A.
+Reason: v8.032 records one new single-use A5 authorization for v8.033; provider contact is allowed only in v8.033 after v8.032 is committed and pushed.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v8_032 patch: 9c457d9 docs: decide retry after output persistence guard fix
+ahead_behind: 0/0
+Worktree: clean before v8_032 patch; generated runs output remains ignored and is not staged or committed
+Current status: v8_032_second_product_post_persistence_fix_generation_authorization_gate
+this_is_new_A5_authorization: true
+approved_product: multi_color_mesh_sports_visor
+approved_prompt_package: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
+output_directory: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 1
+auto_retry: false
+success_requires_verified_local_file: true
+v8_032_provider_contact: false
+v8_032_image_generation: false
+v8_032_env_local_secret_value_read: false
+v8_032_memory_write: false
+v8_032_runs_output_committed: false
+recommended_next: v8_033_second_product_post_persistence_fix_minimal_generation_trial_execution
+recommended_next_auto_execution_allowed: true_after_v8_032_commit_and_guarded_push
+---
 Status: v8_031_second_product_retry_after_persistence_fix_decision_gate is the current Route B human decision gate.
 Reason: v8.030 fixed the output persistence normalization risk; v8.031 presents Option A/B/C without creating A5 authorization or executing provider contact.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
