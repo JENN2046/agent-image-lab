@@ -1,5 +1,38 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.001 Final Retouch Planning Gate
+
+```text
+phase_id: v8_001_final_retouch_planning_gate
+Status: completed_remote_synced_after_guarded_push
+Source phase: v8_route_selection_human_decision_gate
+Source commit: 92d2eabcd76b8ed931621ea76616dec8b39caba3
+Purpose: create a final retouch plan for the v4 accepted candidate
+current_best_candidate: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+asset_status: accepted_candidate_with_minor_retouch
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+final_retouch_plan_created: true
+final_retouch_plan_ref: docs/final_retouch_plan_matte_ceramic_mug_v4.md
+fifth_generation_started: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+retry: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+production_candidate_002_started: false
+Batch_005_started: false
+output_image_added_to_git: false
+accepted_samples_written: false
+recommended_next: v8_002_retouch_acceptance_criteria_or_delivery_package_gate
+recommended_next_zh: 定义修图验收标准或交付包，不生成新图
+auto_execution_allowed_for_next: false
+next_phase_started: false
+```
+
 # v8 Route Selection Human Decision Gate
 
 ```text

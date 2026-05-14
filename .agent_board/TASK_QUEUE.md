@@ -36,7 +36,7 @@ Project plugin route authorization planning: v7.262 completed; NativeDoubaoImage
 Project plugin A5 authorization package draft: v7.263 completed; AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 is draft-only with approval_status=not_requested and execute_now=false.
 Project plugin A5 authorization draft review: v7.264 completed; draft result is pass_to_keep_inactive and activation remains blocked.
 True A5 authorization request: v7.265 completed_validated; AUTH-PENDING-PROJECT-PLUGIN-20260513-001 fixes prompt/output/model/budget for preflight-only approval and still blocks provider/plugin/image/env value actions.
-Route B minimal real generation authorization: v7.268b completed; v7.269 succeeded with one matte_ceramic_mug output and no retry; v7.270 records human review as needs_revision, accepted_candidate=false, commercial_delivery_ready=false, memory_suitability=deferred; v7.271 creates a static prompt v2 revision plan without generation; v7.272 static review passed; v7.273 authorized exactly one v7.274 second minimal generation trial using prompt v2 and is completed, committed, pushed, and synced at d1a7ac8; v7.274 completed successfully with one output and no retry; v7.275 reviewed that output as accepted_candidate_with_minor_retouch, accepted_candidate=true, commercial_delivery_ready=false, memory_suitability=deferred; v7.276 creates prompt v3 and authorizes exactly one v7.277 third minimal generation trial after commit and push; v7.277 completed successfully with one output; v7.278 reviewed v3 as needs_revision and keeps v2 as current best candidate; v7.279 records the human decision to continue with one fourth minimal trial focused only on handle geometry and product credibility; v7.280 creates prompt v4 and records the exact fourth-trial authorization boundary; v7.281 completed successfully with one v4 output; v7.282 reviewed v4 as accepted_candidate_with_minor_retouch and makes v4 the current best candidate while keeping commercial_delivery_ready=false; v7.283 presents Option A/B/C and recommends keeping v4 while stopping generation by default; v7.284 seals the accepted candidate evidence package without copying, moving, staging, or committing the output image; v7.285 closes the V7 product loop and prepares V8 route selection; v8_route_selection_human_decision_gate selected final_retouch_planning as the V8 route.
+Route B minimal real generation authorization: v7.268b completed; v7.269 succeeded with one matte_ceramic_mug output and no retry; v7.270 records human review as needs_revision, accepted_candidate=false, commercial_delivery_ready=false, memory_suitability=deferred; v7.271 creates a static prompt v2 revision plan without generation; v7.272 static review passed; v7.273 authorized exactly one v7.274 second minimal generation trial using prompt v2 and is completed, committed, pushed, and synced at d1a7ac8; v7.274 completed successfully with one output and no retry; v7.275 reviewed that output as accepted_candidate_with_minor_retouch, accepted_candidate=true, commercial_delivery_ready=false, memory_suitability=deferred; v7.276 creates prompt v3 and authorizes exactly one v7.277 third minimal generation trial after commit and push; v7.277 completed successfully with one output; v7.278 reviewed v3 as needs_revision and keeps v2 as current best candidate; v7.279 records the human decision to continue with one fourth minimal trial focused only on handle geometry and product credibility; v7.280 creates prompt v4 and records the exact fourth-trial authorization boundary; v7.281 completed successfully with one v4 output; v7.282 reviewed v4 as accepted_candidate_with_minor_retouch and makes v4 the current best candidate while keeping commercial_delivery_ready=false; v7.283 presents Option A/B/C and recommends keeping v4 while stopping generation by default; v7.284 seals the accepted candidate evidence package without copying, moving, staging, or committing the output image; v7.285 closes the V7 product loop and prepares V8 route selection; v8_route_selection_human_decision_gate selected final_retouch_planning as the V8 route; v8.001 created the final retouch plan for v4 without generation or memory write.
 ```
 
 ---
@@ -87,7 +87,7 @@ none
 ### todo
 
 ```text
-v8_001_final_retouch_planning_gate — 为 v4 当前最佳候选制定最终修图说明包，不生成新图；auto_execution_allowed=false。
+v8_002_retouch_acceptance_criteria_or_delivery_package_gate — 定义修图验收标准或交付包，不生成新图；auto_execution_allowed=false。
 ```
 
 ### recommended_next_after_v7_285
@@ -133,6 +133,13 @@ selected_v8_route: final_retouch_planning
 selected_v8_route_zh: 最终修图规划
 recommended_next: v8_001_final_retouch_planning_gate
 auto_execution_allowed_for_next: false
+v8_001_final_retouch_plan_created: true
+final_retouch_plan_ref: docs/final_retouch_plan_matte_ceramic_mug_v4.md
+v8_001_fifth_generation_started: false
+v8_001_output_image_added_to_git: false
+v8_001_memory_write_performed: false
+v8_001_production_candidate_002_started: false
+recommended_next_after_v8_001: v8_002_retouch_acceptance_criteria_or_delivery_package_gate
 ```
 
 ### done

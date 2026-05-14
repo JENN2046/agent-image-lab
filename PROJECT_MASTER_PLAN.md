@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_synced_head_before_v8_route_selection: 6bcf427
-origin_master_before_v8_route_selection: 6bcf427
-status: v8_route_selected_final_retouch_planning
-mode: A4 docs-only human route selection gate
-phase_id: v8_route_selection_human_decision_gate
+latest_synced_head_before_v8_001: 92d2eab
+origin_master_before_v8_001: 92d2eab
+status: v8_001_final_retouch_plan_created
+mode: A4 docs-only final retouch planning gate
+phase_id: v8_001_final_retouch_planning_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -157,9 +157,15 @@ selected_v8_route: final_retouch_planning
 selected_v8_route_zh: 最终修图规划
 v8_next_phase: v8_001_final_retouch_planning_gate
 v8_next_phase_auto_execution_allowed: false
+v8_001_final_retouch_plan_created: true
+final_retouch_plan_ref: docs/final_retouch_plan_matte_ceramic_mug_v4.md
+v8_001_fifth_generation_started: false
+v8_001_output_image_added_to_git: false
+v8_001_memory_write_performed: false
+v8_001_production_candidate_002_started: false
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate
-recommended_next: v8_001_final_retouch_planning_gate
+recommended_next: v8_002_retouch_acceptance_criteria_or_delivery_package_gate
 ```
 
 ## Product Direction
