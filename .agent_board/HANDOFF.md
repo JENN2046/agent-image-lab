@@ -3,15 +3,15 @@
 ## Handoff Summary
 
 ```text
-Status: v8_004_final_retouch_route_closeout completed in this handoff; V8 Route A final retouch planning is closed for v4, generation remains stopped, and v8.005 route decision is the next non-executing step.
-Reason: v8.003 was committed and pushed at f77c7bd, then v8.004 sealed the final retouch route closeout without fifth generation, memory write, runtime implementation, or production_candidate_002.
+Status: v8_005_next_route_decision_gate completed in this handoff; next-route options are presented, generation remains stopped, and the project is waiting for human route selection.
+Reason: v8.004 was committed and pushed at 795e4cd, then v8.005 presented route options without fifth generation, memory write, runtime implementation, or production_candidate_002.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
 Latest visible head before v7.273: 6f95b53 == origin/master
-Current synced HEAD before v8.004 patch: f77c7bd docs: add retouch handoff package
+Current synced HEAD before v8.005 patch: 795e4cd docs: close out v8 final retouch route
 ahead_behind: 0/0
-Worktree: clean before v8.004 final retouch route closeout patch; v7.281 output remains ignored under runs/
-Current status: v8_004_final_retouch_route_closed
+Worktree: clean before v8.005 next route decision patch; v7.281 output remains ignored under runs/
+Current status: v8_005_next_route_decision_options_presented
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false after v7.282; the single authorized v7.281 call has been consumed
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate
@@ -201,8 +201,18 @@ v8_004_fifth_generation_started: false
 v8_004_output_image_added_to_git: false
 v8_004_memory_write_performed: false
 v8_004_production_candidate_002_started: false
-recommended_next: v8_005_next_route_decision_gate
-recommended_next_zh: 人工决定 V8 下一条路线：多产品扩展、Review Console 产品化、memory planning，或 production readiness
+v8_005_next_route_decision_options_created: true
+v8_005_route_options_ref: docs/v8_next_route_decision_options.md
+v8_005_routes_presented: multi_product_prompt_package_expansion | review_console_productization_planning | memory_planning_package | production_readiness_planning | human_retouch_execution_outside_codex
+v8_005_recommended_low_risk_route: multi_product_prompt_package_expansion
+v8_005_human_route_selection_required: true
+v8_005_automatic_next_route_execution_allowed: false
+v8_005_fifth_generation_started: false
+v8_005_output_image_added_to_git: false
+v8_005_memory_write_performed: false
+v8_005_production_candidate_002_started: false
+recommended_next: pending_human_route_selection
+recommended_next_zh: 等待项目 owner 选择下一条 V8 路线
 provider_contact_after_v7_274: false
 image_generation_after_v7_274: false
 human_review_required_now: false

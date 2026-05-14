@@ -1,5 +1,51 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-V8-005-NEXT-ROUTE-DECISION
+
+Task:
+
+```text
+Present V8 next-route options after final retouch route closeout. Stop at pending human route selection. Do not start a new route, fifth generation, provider contact, plugin call, retry, memory write, DailyNote write, VCP memory write, accepted_samples write, runtime integration, production_candidate_002, or Batch 005.
+```
+
+Result:
+
+```text
+completed_validated
+```
+
+Validation:
+
+```text
+git status --short --branch: passed
+git diff --check: passed
+exact diff review: passed
+node scripts/validate_agent_board_state.js: passed
+node scripts/validate_current_state_alignment.js: passed
+node scripts/validate_native_doubao_sandbox.js: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1: passed_with_existing_manual_review_warnings
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1: passed
+generated_output_ignored: true
+generated_output_tracked_by_git: false
+accepted_samples_written: false
+fifth_generation_started: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+retry: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002_started: false
+Batch_005_started: false
+```
+
+Recommended next:
+
+```text
+pending_human_route_selection（等待项目 owner 选择下一条 V8 路线）
+```
+
 ## VALIDATION-20260514-V8-004-FINAL-RETOUCH-ROUTE-CLOSEOUT
 
 Task:

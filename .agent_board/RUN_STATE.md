@@ -9,24 +9,24 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab is in v8_004_final_retouch_route_closeout. V8 Route A final retouch planning is closed for v4; generation remains stopped and the next phase is a non-executing V8 next route decision gate.
+Agent Image Lab is in v8_005_next_route_decision_gate. Next-route options are presented after V8 Route A closeout; generation remains stopped and the project is waiting for human route selection.
 ```
 
 ## Current Phase
 
 ```text
-v8.004 Final Retouch Route Closeout
-phase_id: v8_004_final_retouch_route_closeout
-source_phase: v8_003_delivery_package_closeout_or_retouch_handoff_gate
+v8.005 Next Route Decision Gate
+phase_id: v8_005_next_route_decision_gate
+source_phase: v8_004_final_retouch_route_closeout
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
-status: v8_004_final_retouch_route_closed
-source_commit: f77c7bd
-source_message: docs: add retouch handoff package
+status: v8_005_next_route_decision_options_presented
+source_commit: 795e4cd
+source_message: docs: close out v8 final retouch route
 branch: master tracking origin/master
-Worktree: clean before v8.004 final retouch route closeout patch; generated v7.281 output remains ignored under runs/
+Worktree: clean before v8.005 next route decision patch; generated v7.281 output remains ignored under runs/
 worktree_start_clean: true
-origin_sync_current: local HEAD equals origin/master at f77c7bd
+origin_sync_current: local HEAD equals origin/master at 795e4cd
 ahead_behind: 0/0
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false; the single authorized v7.281 call has been consumed
@@ -110,8 +110,8 @@ output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug
 auto_retry_for_second_trial: false
 stop_after_generation_for_second_trial: true
 human_review_required_after_generation: true
-recommended_next: v8_005_next_route_decision_gate
-recommended_next_zh: 人工决定 V8 下一条路线：多产品扩展、Review Console 产品化、memory planning，或 production readiness
+recommended_next: pending_human_route_selection
+recommended_next_zh: 等待项目 owner 选择下一条 V8 路线
 v8_route_selection_completed: true
 selected_v8_route: final_retouch_planning
 selected_v8_route_zh: 最终修图规划
@@ -153,6 +153,16 @@ v8_004_fifth_generation_started: false
 v8_004_output_image_added_to_git: false
 v8_004_memory_write_performed: false
 v8_004_production_candidate_002_started: false
+v8_005_next_route_decision_options_created: true
+v8_005_route_options_ref: docs/v8_next_route_decision_options.md
+v8_005_routes_presented: multi_product_prompt_package_expansion | review_console_productization_planning | memory_planning_package | production_readiness_planning | human_retouch_execution_outside_codex
+v8_005_recommended_low_risk_route: multi_product_prompt_package_expansion
+v8_005_human_route_selection_required: true
+v8_005_automatic_next_route_execution_allowed: false
+v8_005_fifth_generation_started: false
+v8_005_output_image_added_to_git: false
+v8_005_memory_write_performed: false
+v8_005_production_candidate_002_started: false
 v8_next_phase_auto_execution_allowed: false
 v7.274_status: completed_success
 v7.274_provider_contact: true

@@ -1,5 +1,41 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.005 Next Route Decision Gate
+
+```text
+phase_id: v8_005_next_route_decision_gate
+Status: completed_remote_synced_after_guarded_push
+Source phase: v8_004_final_retouch_route_closeout
+Source commit: 795e4cd10fc636ce49e589863332fbbd4ea780f6
+Purpose: present next V8 route options and stop for human selection
+current_best_candidate: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+asset_status: accepted_candidate_with_minor_retouch
+commercial_delivery_ready: false
+memory_suitability: deferred
+next_route_decision_options_created: true
+route_options_ref: docs/v8_next_route_decision_options.md
+routes_presented: multi_product_prompt_package_expansion | review_console_productization_planning | memory_planning_package | production_readiness_planning | human_retouch_execution_outside_codex
+recommended_low_risk_route: multi_product_prompt_package_expansion
+human_route_selection_required: true
+automatic_next_route_execution_allowed: false
+fifth_generation_started: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+retry: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+production_candidate_002_started: false
+Batch_005_started: false
+output_image_added_to_git: false
+accepted_samples_written: false
+recommended_next: pending_human_route_selection
+recommended_next_zh: 等待项目 owner 选择下一条 V8 路线
+auto_execution_allowed_for_next: false
+next_phase_started: false
+```
+
 # v8.004 Final Retouch Route Closeout
 
 ```text

@@ -7,9 +7,9 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Current synced baseline before v8.004: f77c7bd on master == origin/master.
-Current mainline state: v8.004 final retouch route closed for v4; generation remains stopped.
-Current phase id: v8_004_final_retouch_route_closeout.
+Current synced baseline before v8.005: 795e4cd on master == origin/master.
+Current mainline state: v8.005 next route decision options presented; generation remains stopped.
+Current phase id: v8_005_next_route_decision_gate.
 Prior human route selection gate: v7.261_human_product_route_selection_request_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
@@ -181,11 +181,21 @@ v8_004_fifth_generation_started: false.
 v8_004_output_image_added_to_git: false.
 v8_004_memory_write_performed: false.
 v8_004_production_candidate_002_started: false.
+v8_005_next_route_decision_options_created: true.
+v8_005_route_options_ref: docs/v8_next_route_decision_options.md.
+v8_005_routes_presented: multi_product_prompt_package_expansion | review_console_productization_planning | memory_planning_package | production_readiness_planning | human_retouch_execution_outside_codex.
+v8_005_recommended_low_risk_route: multi_product_prompt_package_expansion.
+v8_005_human_route_selection_required: true.
+v8_005_automatic_next_route_execution_allowed: false.
+v8_005_fifth_generation_started: false.
+v8_005_output_image_added_to_git: false.
+v8_005_memory_write_performed: false.
+v8_005_production_candidate_002_started: false.
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed.
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized now: Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, retry, fifth generation, tag, release, deploy.
-Recommended next: v8_005_next_route_decision_gate（人工决定 V8 下一条路线：多产品扩展、Review Console 产品化、memory planning，或 production readiness）.
+Recommended next: pending_human_route_selection（等待项目 owner 选择下一条 V8 路线）.
 auto_execution_allowed_for_next: false.
 ```
 

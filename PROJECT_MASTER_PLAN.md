@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_synced_head_before_v8_004: f77c7bd
-origin_master_before_v8_004: f77c7bd
-status: v8_004_final_retouch_route_closed
-mode: A4 docs-only final retouch route closeout
-phase_id: v8_004_final_retouch_route_closeout
+latest_synced_head_before_v8_005: 795e4cd
+origin_master_before_v8_005: 795e4cd
+status: v8_005_next_route_decision_options_presented
+mode: A4.5 docs-only next route decision gate
+phase_id: v8_005_next_route_decision_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -195,9 +195,19 @@ v8_004_fifth_generation_started: false
 v8_004_output_image_added_to_git: false
 v8_004_memory_write_performed: false
 v8_004_production_candidate_002_started: false
+v8_005_next_route_decision_options_created: true
+v8_005_route_options_ref: docs/v8_next_route_decision_options.md
+v8_005_routes_presented: multi_product_prompt_package_expansion | review_console_productization_planning | memory_planning_package | production_readiness_planning | human_retouch_execution_outside_codex
+v8_005_recommended_low_risk_route: multi_product_prompt_package_expansion
+v8_005_human_route_selection_required: true
+v8_005_automatic_next_route_execution_allowed: false
+v8_005_fifth_generation_started: false
+v8_005_output_image_added_to_git: false
+v8_005_memory_write_performed: false
+v8_005_production_candidate_002_started: false
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate
-recommended_next: v8_005_next_route_decision_gate
+recommended_next: pending_human_route_selection
 ```
 
 ## Product Direction
