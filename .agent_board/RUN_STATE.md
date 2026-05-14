@@ -9,16 +9,56 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v9_012_real_retouch_execution_authorization_decision_gate. This docs-only gate presents Option A/B/C for ceramic_mug_v4 after the real retouch execution plan without executing retouching, editing images, creating derivative images, contacting providers, generating images, writing memory, writing accepted_samples, setting commercial_delivery_ready=true, or promoting production.
+Agent Image Lab is in v9_013_ceramic_mug_first_asset_delivery_lane_closeout_gate. This docs-only gate closes ceramic_mug_v4 at the real retouch authorization boundary without executing retouching, editing images, creating derivative images, contacting providers, generating images, writing memory, writing accepted_samples, setting commercial_delivery_ready=true, or promoting production.
 ```
 
 ## Current Phase
 
 ```text
+V9.013 Ceramic Mug First Asset Delivery Lane Closeout Gate
+phase_id: v9_013_ceramic_mug_first_asset_delivery_lane_closeout_gate
+source_phase: v9_012_real_retouch_execution_authorization_decision_gate
+status: completed_pending_validation_commit_push
+source_commit: f01c142c5a79bdf37fbf70e4fd71f3a54391736e
+source_message: docs: decide real retouch execution path
+branch: master tracking origin/master
+origin_sync_current: local HEAD equals origin/master at f01c142 before v9.013 patch
+ahead_behind: 0/0 before v9.013 patch
+selected_route: delivery_readiness_layer
+selected_asset: ceramic_mug_v4
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+previous_review_result: needs_final_retouch
+final_retouch_action_package_created: true
+real_retouch_execution_planning_created: true
+lane_closeout_created: true
+real_retouch_execution_performed: false
+derivative_image_created: false
+commercial_delivery_ready: false
+memory_suitability: deferred
+memory_write_allowed: false
+production_candidate_002_allowed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+image_editing_performed: false
+real_commercial_delivery_execution: false
+recommended_next: v9_014_sports_visor_delivery_readiness_scope_and_asset_selection_gate
+recommended_next_auto_execution_allowed: true
+---
 V9.012 Real Retouch Execution Authorization Decision Gate
 phase_id: v9_012_real_retouch_execution_authorization_decision_gate
 source_phase: v9_011_real_retouch_execution_planning_gate
-status: completed_pending_validation_commit_push
+status: completed_remote_synced_after_guarded_push
 source_commit: 260adfccb94b1bd1ff4ed9fa89be63d8d5ca853d
 source_message: docs: plan real retouch execution for ceramic mug
 branch: master tracking origin/master

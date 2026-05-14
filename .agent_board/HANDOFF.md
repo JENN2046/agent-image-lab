@@ -3,6 +3,40 @@
 ## Handoff Summary
 
 ```text
+Status: v9_013_ceramic_mug_first_asset_delivery_lane_closeout_gate is the current docs-only first asset lane closeout gate.
+Reason: v9.012 did not grant real retouch execution; v9.013 closes ceramic_mug_v4 at the real retouch authorization boundary and preserves the final retouch action package plus real retouch execution plan.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v9.013 patch: f01c142 docs: decide real retouch execution path
+ahead_behind: 0/0
+Worktree: clean before v9.013 patch; generated runs output remains ignored and is not staged or committed
+Current status: v9_013_ceramic_mug_first_asset_delivery_lane_closeout_gate
+selected_route: delivery_readiness_layer
+selected_asset: ceramic_mug_v4
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+previous_review_result: needs_final_retouch
+final_retouch_action_package_created: true
+real_retouch_execution_planning_created: true
+lane_closeout_created: true
+real_retouch_execution_performed: false
+derivative_image_created: false
+commercial_delivery_ready: false
+memory_suitability: deferred
+memory_write_allowed: false
+production_candidate_002_allowed: false
+v9_013_provider_contact: false
+v9_013_image_generation: false
+v9_013_retry: false
+v9_013_env_local_secret_value_read: false
+v9_013_memory_write: false
+v9_013_accepted_samples_written: false
+v9_013_runs_output_committed: false
+v9_013_image_editing_performed: false
+v9_013_derivative_image_created: false
+v9_013_real_commercial_delivery_execution: false
+recommended_next: v9_014_sports_visor_delivery_readiness_scope_and_asset_selection_gate
+recommended_next_auto_execution_allowed: true
+---
 Status: v9_012_real_retouch_execution_authorization_decision_gate is the current docs-only real retouch execution authorization decision gate.
 Reason: v9.011 created the real retouch execution plan; v9.012 presents Option A/B/C for authorizing a future real retouch execution gate, closing the ceramic mug lane, or switching to sports visor delivery readiness.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
