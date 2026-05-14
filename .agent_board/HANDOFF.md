@@ -3,6 +3,37 @@
 ## Handoff Summary
 
 ```text
+Status: v9_008_commercial_delivery_review_result_decision_gate is the current docs-only review result decision gate.
+Reason: v9.007 executed the docs-only commercial delivery review and returned needs_final_retouch; v9.008 presents Option A/B/C for closing that result, creating a final retouch action package, or entering higher-risk production/memory planning.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v9.008 patch: 0d8ab44 docs: execute commercial delivery review for ceramic mug
+ahead_behind: 0/0
+Worktree: clean before v9.008 patch; generated runs output remains ignored and is not staged or committed
+Current status: v9_008_commercial_delivery_review_result_decision_gate
+selected_route: delivery_readiness_layer
+selected_asset: ceramic_mug_v4
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+commercial_delivery_review_executed: true
+review_result: needs_final_retouch
+commercial_delivery_ready: false
+options_presented: close_review_result_as_needs_final_retouch | create_final_retouch_action_package | enter_production_or_memory_planning_gate
+recommended_option: create_final_retouch_action_package
+human_decision_required: true
+memory_suitability: deferred
+memory_write_allowed: false
+production_candidate_002_allowed: false
+v9_008_provider_contact: false
+v9_008_image_generation: false
+v9_008_retry: false
+v9_008_env_local_secret_value_read: false
+v9_008_memory_write: false
+v9_008_accepted_samples_written: false
+v9_008_runs_output_committed: false
+v9_008_real_commercial_delivery_execution: false
+recommended_next: pending_human_commercial_delivery_review_result_path_selection
+recommended_next_auto_execution_allowed: false
+---
 Status: v9_007_commercial_delivery_review_docs_only_execution_gate is the current docs-only commercial delivery review execution gate.
 Reason: Human selected v9.006 Option A; v9.007 executes one documented commercial delivery review for ceramic_mug_v4 and records needs_final_retouch without final delivery, production promotion, memory write, accepted_samples write, or image movement.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
