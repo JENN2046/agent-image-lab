@@ -9,24 +9,24 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v8_008_A4_8_controlled_failure_recovery_drill. This is the controlled failure recovery step of the explicitly selected A4.8 comprehensive validation track; generation remains stopped and no new product route is started.
+Agent Image Lab is in v8_010_A4_8_comprehensive_validation_closeout. This closes the explicitly selected A4.8 comprehensive validation track; A4.8 is validated, generation remains stopped, and no new product route is started.
 ```
 
 ## Current Phase
 
 ```text
-v8.008 A4.8 Controlled Failure Recovery Drill
-phase_id: v8_008_A4_8_controlled_failure_recovery_drill
-source_phase: v8_007_A4_8_mutation_live_run_docs_only
+v8.010 A4.8 Comprehensive Validation Closeout
+phase_id: v8_010_A4_8_comprehensive_validation_closeout
+source_phase: v8_009_A4_8_hard_stop_probe
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
-status: A4_8_controlled_failure_recovery_drill_in_progress
-source_commit: 2c227ca952f28ac98e29e9be8e181d9c781c663f
-source_message: docs: run A4.8 mutation live test
+status: A4_8_comprehensive_validation_closeout_in_progress
+source_commit: 082640b8e7df8fd4786a782a6109237a5ab4e738
+source_message: docs: test A4.8 failure recovery drill
 branch: master tracking origin/master
 Worktree: clean before v8_003a A4.8 rail package patch; generated v7.281 output remains ignored under runs/
 worktree_start_clean: true
-origin_sync_current: local HEAD equals origin/master at 5d66df0
+origin_sync_current: local HEAD equals origin/master at 082640b
 ahead_behind: 0/0
 A4_8_safe_project_operator_rail_created: true
 A4_8_safe_project_operator_rail_zh: 安全项目运营轨
@@ -122,18 +122,23 @@ output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug
 auto_retry_for_second_trial: false
 stop_after_generation_for_second_trial: true
 human_review_required_after_generation: true
-recommended_next: v8_009_A4_8_hard_stop_probe
-recommended_next_zh: 只读 hard stop 拒绝探针
+recommended_next: human_route_selection_after_A4_8_validation
+recommended_next_zh: A4.8 验证完成后的人工路线选择
 v8_003b_A4_8_rule_intake_smoke_test: passed
 v8_006_A4_8_state_and_rule_intake_review: passed_read_only
 v8_007_A4_8_mutation_live_run_docs_only: completed_remote_synced_after_guarded_push
 v8_007_phase_record_ref: docs/v8_007_A4_8_mutation_live_run_docs_only.md
-v8_008_A4_8_controlled_failure_recovery_drill: in_progress
+v8_008_A4_8_controlled_failure_recovery_drill: completed_remote_synced_after_guarded_push
 v8_008_phase_record_ref: docs/v8_008_A4_8_controlled_failure_recovery_drill.md
 v8_008_controlled_failure_induced: true
 v8_008_committed_failure_state: false
 v8_008_pushed_failure_state: false
 v8_008_fixed_before_commit: true
+v8_009_A4_8_hard_stop_probe: passed_read_only
+v8_010_A4_8_comprehensive_validation_closeout: in_progress
+v8_010_phase_record_ref: docs/v8_010_A4_8_comprehensive_validation_closeout.md
+A4_8_comprehensive_validation_passed: true
+A4_8_validated: true
 v8_route_selection_completed: true
 selected_v8_route: final_retouch_planning
 selected_v8_route_zh: 最终修图规划

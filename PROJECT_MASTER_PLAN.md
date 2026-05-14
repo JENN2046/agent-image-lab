@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_synced_head_before_v8_008_failure_recovery_drill: 2c227ca952f28ac98e29e9be8e181d9c781c663f
-origin_master_before_v8_008_failure_recovery_drill: 2c227ca952f28ac98e29e9be8e181d9c781c663f
-status: v8_008_A4_8_controlled_failure_recovery_drill
+latest_synced_head_before_v8_010_comprehensive_validation_closeout: 082640b8e7df8fd4786a782a6109237a5ab4e738
+origin_master_before_v8_010_comprehensive_validation_closeout: 082640b8e7df8fd4786a782a6109237a5ab4e738
+status: v8_010_A4_8_comprehensive_validation_closeout
 mode: A4.8 docs-only comprehensive validation track
-phase_id: v8_008_A4_8_controlled_failure_recovery_drill
+phase_id: v8_010_A4_8_comprehensive_validation_closeout
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -225,9 +225,13 @@ v8_008_committed_failure_state: false
 v8_008_pushed_failure_state: false
 v8_008_fixed_before_commit: true
 v8_008_recovery_validation_passed: true
+v8_009_A4_8_hard_stop_probe_passed: true
+v8_010_A4_8_comprehensive_validation_passed: true
+A4_8_validated: true
+A4_8_is_not_A5: true
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate
-recommended_next: v8_009_A4_8_hard_stop_probe
+recommended_next: human_route_selection_after_A4_8_validation
 ```
 
 ## Product Direction

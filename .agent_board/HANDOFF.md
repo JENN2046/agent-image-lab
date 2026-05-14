@@ -3,14 +3,14 @@
 ## Handoff Summary
 
 ```text
-Status: v8_007_A4_8_mutation_live_run_docs_only is the current A4.8 comprehensive validation step; generation remains stopped, and no new product route is started.
-Reason: v8.006 read-only intake confirmed A4.8 state/rules, and v8.007 now tests a low-risk docs-only mutation with validation, exact staging, guarded commit, and safe push.
+Status: v8_010_A4_8_comprehensive_validation_closeout is the current A4.8 comprehensive validation closeout; A4.8 is validated, generation remains stopped, and no new product route is started.
+Reason: v8.006 read-only intake passed, v8.007 mutation live run passed, v8.008 controlled failure recovery passed, and v8.009 hard stop probe passed.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
-Current synced HEAD before v8_007 patch: e059ba49 docs: add A4.8 safe project operator rail package
+Current synced HEAD before v8_010 patch: 082640b docs: test A4.8 failure recovery drill
 ahead_behind: 0/0
 Worktree: clean before v8_003a A4.8 rail package patch; v7.281 output remains ignored under runs/
-Current status: v8_007_A4_8_mutation_live_run_docs_only
+Current status: v8_010_A4_8_comprehensive_validation_closeout
 A4_8_safe_project_operator_rail_created: true
 A4_8_safe_project_operator_rail_zh: 安全项目运营轨
 A4_8_is_not_A5: true
@@ -228,12 +228,18 @@ v8_003a_safe_project_operator_rail_ref: docs/A4_8_SAFE_PROJECT_OPERATOR_RAIL.md
 v8_003a_safe_push_policy_ref: docs/SAFE_PUSH_POLICY.md
 v8_003a_validation_selection_matrix_ref: docs/VALIDATION_SELECTION_MATRIX.md
 v8_003a_failure_recovery_ref: docs/AUTOPILOT_FAILURE_RECOVERY.md
-recommended_next: v8_008_A4_8_controlled_failure_recovery_drill
-recommended_next_zh: 可控 validation failure 修复演练
+recommended_next: human_route_selection_after_A4_8_validation
+recommended_next_zh: A4.8 验证完成后的人工路线选择
 v8_003b_A4_8_rule_intake_smoke_test: passed
 v8_006_A4_8_state_and_rule_intake_review: passed_read_only
-v8_007_A4_8_mutation_live_run_docs_only: in_progress
+v8_007_A4_8_mutation_live_run_docs_only: completed_remote_synced_after_guarded_push
 v8_007_phase_record_ref: docs/v8_007_A4_8_mutation_live_run_docs_only.md
+v8_008_A4_8_controlled_failure_recovery_drill: completed_remote_synced_after_guarded_push
+v8_008_phase_record_ref: docs/v8_008_A4_8_controlled_failure_recovery_drill.md
+v8_009_A4_8_hard_stop_probe: passed_read_only
+v8_010_A4_8_comprehensive_validation_closeout: in_progress
+v8_010_phase_record_ref: docs/v8_010_A4_8_comprehensive_validation_closeout.md
+A4_8_comprehensive_validation_passed: true
 provider_contact_after_v7_274: false
 image_generation_after_v7_274: false
 human_review_required_now: false

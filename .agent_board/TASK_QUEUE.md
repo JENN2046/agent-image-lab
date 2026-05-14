@@ -81,15 +81,13 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-v8_008_A4_8_controlled_failure_recovery_drill — controlled markdown whitespace failure recovery drill; validates A4.8 can detect, fix, revalidate, and avoid committing or pushing a failed state.
+v8_010_A4_8_comprehensive_validation_closeout — close out A4.8 comprehensive validation and stop at human route selection.
 ```
 
 ### todo
 
 ```text
-v8_009_A4_8_hard_stop_probe — read-only high-risk request refusal probe.
-v8_010_A4_8_comprehensive_validation_closeout — close out A4.8 comprehensive validation and stop at human route selection.
-pending_human_route_selection — 等待项目 owner 选择下一条 V8 路线；blocked until A4.8 comprehensive validation closes.
+pending_human_route_selection — 等待项目 owner 选择下一条 V8 路线；blocked until the v8_010 closeout commit and safe push complete.
 ```
 
 ### recommended_next_after_v7_285
@@ -200,12 +198,14 @@ v8_003b_A4_8_rule_intake_smoke_test: passed
 v8_006_A4_8_state_and_rule_intake_review: passed_read_only
 v8_007_A4_8_mutation_live_run_docs_only: completed_remote_synced_after_guarded_push
 recommended_next_after_v8_007: v8_008_A4_8_controlled_failure_recovery_drill
-v8_008_A4_8_controlled_failure_recovery_drill: in_progress
+v8_008_A4_8_controlled_failure_recovery_drill: completed_remote_synced_after_guarded_push
 v8_008_controlled_failure_induced: true
 v8_008_committed_failure_state: false
 v8_008_pushed_failure_state: false
 v8_008_fixed_before_commit: true
-recommended_next_after_v8_008: v8_009_A4_8_hard_stop_probe
+v8_009_A4_8_hard_stop_probe: passed_read_only
+v8_010_A4_8_comprehensive_validation_closeout: in_progress
+recommended_next_after_v8_010: human_route_selection_after_A4_8_validation
 ```
 
 ### done
