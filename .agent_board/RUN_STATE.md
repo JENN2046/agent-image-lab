@@ -9,16 +9,56 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v9_009_final_retouch_action_package_gate. This docs-only gate creates a final retouch action package for ceramic_mug_v4 without image editing, image movement, provider contact, image generation, memory write, accepted_samples write, commercial_delivery_ready=true, or production promotion.
+Agent Image Lab is in v9_010_final_retouch_execution_or_closeout_decision_gate. This docs-only gate presents Option A/B/C for ceramic_mug_v4 after the final retouch action package without real retouch execution, image editing, derivative image creation, provider contact, image generation, memory write, accepted_samples write, commercial_delivery_ready=true, or production promotion.
 ```
 
 ## Current Phase
 
 ```text
+V9.010 Final Retouch Execution Or Closeout Decision Gate
+phase_id: v9_010_final_retouch_execution_or_closeout_decision_gate
+source_phase: v9_009_final_retouch_action_package_gate
+status: completed_pending_validation_commit_push
+source_commit: 0e3e40455a35db9a3a5bb268a5acb37ee3626a38
+source_message: docs: add final retouch action package for ceramic mug
+branch: master tracking origin/master
+origin_sync_current: local HEAD equals origin/master at 0e3e404 before v9.010 patch
+ahead_behind: 0/0 before v9.010 patch
+selected_route: delivery_readiness_layer
+selected_asset: ceramic_mug_v4
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+previous_review_result: needs_final_retouch
+final_retouch_action_package_created: true
+commercial_delivery_ready: false
+options_presented: enter_real_retouch_execution_planning_gate | close_ceramic_mug_first_asset_delivery_readiness_lane | switch_to_sports_visor_delivery_readiness_lane
+recommended_option: enter_real_retouch_execution_planning_gate_or_close_lane_based_on_human_goal
+human_decision_required: true
+memory_suitability: deferred
+memory_write_allowed: false
+production_candidate_002_allowed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+image_editing_performed: false
+derivative_image_created: false
+real_commercial_delivery_execution: false
+recommended_next: pending_human_final_retouch_or_lane_closeout_selection
+recommended_next_auto_execution_allowed: false
+---
 V9.009 Final Retouch Action Package Gate
 phase_id: v9_009_final_retouch_action_package_gate
 source_phase: v9_008_commercial_delivery_review_result_decision_gate
-status: completed_pending_validation_commit_push
+status: completed_remote_synced_after_guarded_push
 source_commit: f1f87ab3e5a82e22004da8f83d19e400ded5ae0f
 source_message: docs: decide commercial delivery review result path
 branch: master tracking origin/master

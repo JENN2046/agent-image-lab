@@ -1,10 +1,50 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V9.010 Final Retouch Execution Or Closeout Decision Gate
+
+```text
+phase_id: v9_010_final_retouch_execution_or_closeout_decision_gate
+status: completed_pending_validation_commit_push
+source_phase: v9_009_final_retouch_action_package_gate
+source_commit: 0e3e40455a35db9a3a5bb268a5acb37ee3626a38
+purpose: present Option A/B/C after the ceramic_mug_v4 final retouch action package
+phase_record_ref: docs/v9_010_final_retouch_execution_or_closeout_decision_gate.md
+selected_route: delivery_readiness_layer
+selected_asset: ceramic_mug_v4
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+previous_review_result: needs_final_retouch
+final_retouch_action_package_created: true
+commercial_delivery_ready: false
+options_presented: enter_real_retouch_execution_planning_gate | close_ceramic_mug_first_asset_delivery_readiness_lane | switch_to_sports_visor_delivery_readiness_lane
+recommended_option: enter_real_retouch_execution_planning_gate_or_close_lane_based_on_human_goal
+human_decision_required: true
+memory_suitability: deferred
+memory_write_allowed: false
+production_candidate_002_allowed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+image_editing_performed: false
+derivative_image_created: false
+real_commercial_delivery_execution: false
+recommended_next: pending_human_final_retouch_or_lane_closeout_selection
+```
+
 # V9.009 Final Retouch Action Package Gate
 
 ```text
 phase_id: v9_009_final_retouch_action_package_gate
-status: completed_pending_validation_commit_push
+status: completed_remote_synced_after_guarded_push
 source_phase: v9_008_commercial_delivery_review_result_decision_gate
 source_commit: f1f87ab3e5a82e22004da8f83d19e400ded5ae0f
 purpose: create a docs-only final retouch action package after human selected v9.008 Option B

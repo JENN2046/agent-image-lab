@@ -1,5 +1,41 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v9.010-FINAL-RETOUCH-EXECUTION-OR-CLOSEOUT-DECISION-GATE
+
+Task:
+
+```text
+Present Option A/B/C after the ceramic_mug_v4 final retouch action package was created.
+```
+
+Result:
+
+```text
+selected_route: delivery_readiness_layer
+selected_asset: ceramic_mug_v4
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+previous_review_result: needs_final_retouch
+final_retouch_action_package_created: true
+commercial_delivery_ready: false
+options_presented: enter_real_retouch_execution_planning_gate | close_ceramic_mug_first_asset_delivery_readiness_lane | switch_to_sports_visor_delivery_readiness_lane
+recommended_option: enter_real_retouch_execution_planning_gate_or_close_lane_based_on_human_goal
+human_decision_required: true
+accepted_samples_written: false
+runs_output_committed: false
+memory_write_performed: false
+production_candidate_002_started: false
+image_editing_performed: false
+derivative_image_created: false
+real_commercial_delivery_execution: false
+validation_result: passed
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, secret print, DailyNote write, VCP memory write, memory_write_path, production_candidate_002, Batch 005, runtime/CDP/bridge/MCP, dependency change, package.json change, accepted_samples write, image editing, derivative image creation, runs output commit, commercial_delivery_ready=true, or real commercial delivery execution is performed by v9.010.
+```
+
 ## VALIDATION-20260514-v9.009-FINAL-RETOUCH-ACTION-PACKAGE-GATE
 
 Task:
