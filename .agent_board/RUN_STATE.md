@@ -3,31 +3,43 @@
 ## Current Mode
 
 ```text
-A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
+A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot boundaries
 ```
 
 ## Current Mission
 
 ```text
-Agent Image Lab is in v8_005_next_route_decision_gate. Next-route options are presented after V8 Route A closeout; generation remains stopped and the project is waiting for human route selection.
+Agent Image Lab is in v8_003a_A4_8_safe_project_operator_rail_package. This is a governance/product-ops rail backfill after v8.005; generation remains stopped and no new product route is started.
 ```
 
 ## Current Phase
 
 ```text
-v8.005 Next Route Decision Gate
-phase_id: v8_005_next_route_decision_gate
-source_phase: v8_004_final_retouch_route_closeout
+v8.003a A4.8 Safe Project Operator Rail Package
+phase_id: v8_003a_A4_8_safe_project_operator_rail_package
+source_phase: v8_005_next_route_decision_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
-status: v8_005_next_route_decision_options_presented
-source_commit: 795e4cd
-source_message: docs: close out v8 final retouch route
+status: A4_8_safe_project_operator_rail_package_created
+source_commit: 5d66df0
+source_message: docs: add v8 next route decision gate
 branch: master tracking origin/master
-Worktree: clean before v8.005 next route decision patch; generated v7.281 output remains ignored under runs/
+Worktree: clean before v8_003a A4.8 rail package patch; generated v7.281 output remains ignored under runs/
 worktree_start_clean: true
-origin_sync_current: local HEAD equals origin/master at 795e4cd
+origin_sync_current: local HEAD equals origin/master at 5d66df0
 ahead_behind: 0/0
+A4_8_safe_project_operator_rail_created: true
+A4_8_safe_project_operator_rail_zh: 安全项目运营轨
+A4_8_is_not_A5: true
+A4_8_may_auto_advance_low_risk_local_work: true
+A4_8_may_validate_exact_stage_commit_and_safe_push_when_authorized: true
+A4_8_must_stop_at_hard_stops: true
+A4_8_provider_contact_allowed: false
+A4_8_image_generation_allowed: false
+A4_8_env_local_secret_value_read_allowed: false
+A4_8_memory_write_allowed: false
+A4_8_runtime_execution_allowed: false
+A4_8_production_candidate_002_allowed: false
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false; the single authorized v7.281 call has been consumed
 provider_contact_allowed_now: false; the single authorized v7.281 provider contact has been consumed
@@ -110,8 +122,8 @@ output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug
 auto_retry_for_second_trial: false
 stop_after_generation_for_second_trial: true
 human_review_required_after_generation: true
-recommended_next: pending_human_route_selection
-recommended_next_zh: 等待项目 owner 选择下一条 V8 路线
+recommended_next: v8_003b_A4_8_rule_intake_smoke_test
+recommended_next_zh: 只读验证 Codex 是否能正确复述 A4.8 权限和 hard stops
 v8_route_selection_completed: true
 selected_v8_route: final_retouch_planning
 selected_v8_route_zh: 最终修图规划
@@ -163,6 +175,12 @@ v8_005_fifth_generation_started: false
 v8_005_output_image_added_to_git: false
 v8_005_memory_write_performed: false
 v8_005_production_candidate_002_started: false
+v8_003a_A4_8_safe_project_operator_rail_created: true
+v8_003a_phase_record_ref: docs/v8_003a_A4_8_safe_project_operator_rail_package.md
+v8_003a_safe_project_operator_rail_ref: docs/A4_8_SAFE_PROJECT_OPERATOR_RAIL.md
+v8_003a_safe_push_policy_ref: docs/SAFE_PUSH_POLICY.md
+v8_003a_validation_selection_matrix_ref: docs/VALIDATION_SELECTION_MATRIX.md
+v8_003a_failure_recovery_ref: docs/AUTOPILOT_FAILURE_RECOVERY.md
 v8_next_phase_auto_execution_allowed: false
 v7.274_status: completed_success
 v7.274_provider_contact: true

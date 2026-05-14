@@ -12,7 +12,7 @@ Purpose: Enable Codex to work faster and more intelligently inside safe local bo
 Default mode:
 
 ```text
-A4.5 — Smart Local Autopilot
+A4.8 — Safe Project Operator Rail
 ```
 
 Codex should move automatically when the next action is all of:
@@ -168,10 +168,10 @@ v10.8 A5 guarded delivery baseline
 The default local automation mode is:
 
 ```text
-A4.5 — Smart Local Autopilot
+A4.8 — Safe Project Operator Rail
 ```
 
-This means Codex may continue safe, local, reversible project work across the allowed documentation, schema, dry-run, authorization-template, validation, `.agent_board`, and static-prototype surfaces without asking for step-by-step confirmation.
+This means Codex may continue safe, local, reversible project work across the allowed documentation, schema, dry-run, authorization-template, validation, `.agent_board`, tests, fixtures, review packages, evidence packages, route decision, and static-prototype surfaces without asking for step-by-step confirmation.
 
 The default next action must remain:
 
@@ -220,7 +220,7 @@ Every stage gate should follow this compact template:
 gate_template:
   phase: <phase_id>
   base_contract: AGENTS.md
-  mode: A0 | A1 | A2 | A3 | A4 | A4.5 | A4.7 | A5
+  mode: A0 | A1 | A2 | A3 | A4 | A4.5 | A4.7 | A4.8 | A5
   intent: discussion | planning | review | local_draft | local_implementation | remote_or_side_effectful_action
   risk_level: R0 | R1 | R2 | R3 | R4
   allowed_files: []
@@ -687,6 +687,53 @@ production execution
 ```
 
 If any user-owned or unrelated change is present, Codex must not include it in an automatic commit.
+
+---
+
+### A4.8 — Safe Project Operator Rail
+
+A4.8 is the Safe Project Operator Rail / 安全项目运营轨.
+
+It allows Codex to keep advancing low-risk local project operations when the task is clearly local, reversible, non-secret-bearing, non-production, and inside the current repository.
+
+A4.8 may automatically perform:
+
+```text
+docs-only planning
+tests / fixtures / dry-run records
+evidence and review packages
+README / roadmap / PROJECT_MASTER_PLAN / .agent_board status sync
+validation selection and execution
+exact-file staging
+guarded local commit
+safe push only when the task gives explicit push authorization and push preflight passes
+multiple consecutive A4 docs-only / tests / fixtures / dry-run / planning stages when each stage remains low risk
+```
+
+A4.8 must stop at hard stops. It is not A5 and does not authorize:
+
+```text
+provider contact
+plugin call
+image generation
+.env.local secret value read
+DailyNote write
+VCP memory write
+memory_write_path
+production_candidate_002
+Batch_005
+accepted_samples write
+runs output commit
+VCPToolBox runtime
+VCPChat runtime
+CDP / bridge / MCP
+real manifest read
+fifth or later generation trial
+package.json / dependency change
+release / deploy / tag
+```
+
+A5 remains the production executor. When useful work requires a real provider call, image generation, secret-bearing read, runtime integration, memory write, production candidate promotion, or external side effect, A4.8 must stop and prepare the smallest explicit A5 authorization request instead of executing.
 
 ---
 

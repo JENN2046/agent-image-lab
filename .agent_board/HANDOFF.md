@@ -3,15 +3,26 @@
 ## Handoff Summary
 
 ```text
-Status: v8_005_next_route_decision_gate completed in this handoff; next-route options are presented, generation remains stopped, and the project is waiting for human route selection.
-Reason: v8.004 was committed and pushed at 795e4cd, then v8.005 presented route options without fifth generation, memory write, runtime implementation, or production_candidate_002.
+Status: v8_003a_A4_8_safe_project_operator_rail_package is the current governance/product-ops rail package; generation remains stopped, and no new product route is started.
+Reason: v8.005 presented route options and stopped for human selection; this backfill defines A4.8 Safe Project Operator Rail / 安全项目运营轨 so future local project operations can proceed safely before hard stops.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
-Latest visible head before v7.273: 6f95b53 == origin/master
-Current synced HEAD before v8.005 patch: 795e4cd docs: close out v8 final retouch route
+Current synced HEAD before v8_003a patch: 5d66df0 docs: add v8 next route decision gate
 ahead_behind: 0/0
-Worktree: clean before v8.005 next route decision patch; v7.281 output remains ignored under runs/
-Current status: v8_005_next_route_decision_options_presented
+Worktree: clean before v8_003a A4.8 rail package patch; v7.281 output remains ignored under runs/
+Current status: v8_003a_A4_8_safe_project_operator_rail_package
+A4_8_safe_project_operator_rail_created: true
+A4_8_safe_project_operator_rail_zh: 安全项目运营轨
+A4_8_is_not_A5: true
+A4_8_may_auto_advance_low_risk_local_work: true
+A4_8_may_validate_exact_stage_commit_and_safe_push_when_authorized: true
+A4_8_must_stop_at_hard_stops: true
+A4_8_provider_contact_allowed: false
+A4_8_image_generation_allowed: false
+A4_8_env_local_secret_value_read_allowed: false
+A4_8_memory_write_allowed: false
+A4_8_runtime_execution_allowed: false
+A4_8_production_candidate_002_allowed: false
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false after v7.282; the single authorized v7.281 call has been consumed
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate
@@ -211,8 +222,14 @@ v8_005_fifth_generation_started: false
 v8_005_output_image_added_to_git: false
 v8_005_memory_write_performed: false
 v8_005_production_candidate_002_started: false
-recommended_next: pending_human_route_selection
-recommended_next_zh: 等待项目 owner 选择下一条 V8 路线
+v8_003a_A4_8_safe_project_operator_rail_created: true
+v8_003a_phase_record_ref: docs/v8_003a_A4_8_safe_project_operator_rail_package.md
+v8_003a_safe_project_operator_rail_ref: docs/A4_8_SAFE_PROJECT_OPERATOR_RAIL.md
+v8_003a_safe_push_policy_ref: docs/SAFE_PUSH_POLICY.md
+v8_003a_validation_selection_matrix_ref: docs/VALIDATION_SELECTION_MATRIX.md
+v8_003a_failure_recovery_ref: docs/AUTOPILOT_FAILURE_RECOVERY.md
+recommended_next: v8_003b_A4_8_rule_intake_smoke_test
+recommended_next_zh: 只读验证 Codex 是否能正确复述 A4.8 权限和 hard stops
 provider_contact_after_v7_274: false
 image_generation_after_v7_274: false
 human_review_required_now: false

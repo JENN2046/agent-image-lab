@@ -1,5 +1,52 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-V8-003A-A4-8-SAFE-PROJECT-OPERATOR-RAIL
+
+Task:
+
+```text
+Create A4.8 Safe Project Operator Rail / 安全项目运营轨 as a governance/product-ops rail package. Define safe local automation, validation selection, exact staging, guarded commit, safe push preconditions, failure recovery, phase protocol, and closeout schema. Do not start A5, provider contact, plugin call, image generation, secret value read, memory write, runtime integration, production_candidate_002, Batch 005, accepted_samples write, runs output commit, dependency change, tag, release, or deploy.
+```
+
+Result:
+
+```text
+completed_validated
+```
+
+Validation:
+
+```text
+git status --short --branch: passed
+git diff --check: passed
+exact diff review: passed
+node scripts/validate_agent_board_state.js: passed
+node scripts/validate_current_state_alignment.js: passed
+node scripts/validate_native_doubao_sandbox.js: passed
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1: passed_with_existing_manual_review_warnings
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1: passed
+provider_contact: false
+plugin_call: false
+image_generation: false
+env_local_secret_value_read: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+production_candidate_002_started: false
+Batch_005_started: false
+runs_output_committed: false
+accepted_samples_written: false
+package_json_modified: false
+dependency_change: false
+```
+
+Recommended next:
+
+```text
+v8_003b_A4_8_rule_intake_smoke_test（只读验证 Codex 是否能正确复述 A4.8 权限和 hard stops）
+```
+
 ## VALIDATION-20260514-V8-005-NEXT-ROUTE-DECISION
 
 Task:

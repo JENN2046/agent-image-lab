@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_synced_head_before_v8_005: 795e4cd
-origin_master_before_v8_005: 795e4cd
-status: v8_005_next_route_decision_options_presented
-mode: A4.5 docs-only next route decision gate
-phase_id: v8_005_next_route_decision_gate
+latest_synced_head_before_v8_003a_backfill: 5d66df0
+origin_master_before_v8_003a_backfill: 5d66df0
+status: v8_003a_A4_8_safe_project_operator_rail_package
+mode: A4 docs-only governance/product-ops rail package
+phase_id: v8_003a_A4_8_safe_project_operator_rail_package
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -205,9 +205,16 @@ v8_005_fifth_generation_started: false
 v8_005_output_image_added_to_git: false
 v8_005_memory_write_performed: false
 v8_005_production_candidate_002_started: false
+v8_003a_A4_8_safe_project_operator_rail_created: true
+v8_003a_A4_8_safe_project_operator_rail_zh: 安全项目运营轨
+v8_003a_A4_8_is_not_A5: true
+v8_003a_provider_contact_allowed: false
+v8_003a_image_generation_allowed: false
+v8_003a_memory_write_allowed: false
+v8_003a_runtime_execution_allowed: false
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate
-recommended_next: pending_human_route_selection
+recommended_next: v8_003b_A4_8_rule_intake_smoke_test
 ```
 
 ## Product Direction

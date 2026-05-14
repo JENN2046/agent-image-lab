@@ -36,7 +36,7 @@ Project plugin route authorization planning: v7.262 completed; NativeDoubaoImage
 Project plugin A5 authorization package draft: v7.263 completed; AUTH-DRAFT-PROJECT-PLUGIN-20260513-001 is draft-only with approval_status=not_requested and execute_now=false.
 Project plugin A5 authorization draft review: v7.264 completed; draft result is pass_to_keep_inactive and activation remains blocked.
 True A5 authorization request: v7.265 completed_validated; AUTH-PENDING-PROJECT-PLUGIN-20260513-001 fixes prompt/output/model/budget for preflight-only approval and still blocks provider/plugin/image/env value actions.
-Route B minimal real generation authorization: v7.268b completed; v7.269 succeeded with one matte_ceramic_mug output and no retry; v7.270 records human review as needs_revision, accepted_candidate=false, commercial_delivery_ready=false, memory_suitability=deferred; v7.271 creates a static prompt v2 revision plan without generation; v7.272 static review passed; v7.273 authorized exactly one v7.274 second minimal generation trial using prompt v2 and is completed, committed, pushed, and synced at d1a7ac8; v7.274 completed successfully with one output and no retry; v7.275 reviewed that output as accepted_candidate_with_minor_retouch, accepted_candidate=true, commercial_delivery_ready=false, memory_suitability=deferred; v7.276 creates prompt v3 and authorizes exactly one v7.277 third minimal generation trial after commit and push; v7.277 completed successfully with one output; v7.278 reviewed v3 as needs_revision and keeps v2 as current best candidate; v7.279 records the human decision to continue with one fourth minimal trial focused only on handle geometry and product credibility; v7.280 creates prompt v4 and records the exact fourth-trial authorization boundary; v7.281 completed successfully with one v4 output; v7.282 reviewed v4 as accepted_candidate_with_minor_retouch and makes v4 the current best candidate while keeping commercial_delivery_ready=false; v7.283 presents Option A/B/C and recommends keeping v4 while stopping generation by default; v7.284 seals the accepted candidate evidence package without copying, moving, staging, or committing the output image; v7.285 closes the V7 product loop and prepares V8 route selection; v8_route_selection_human_decision_gate selected final_retouch_planning as the V8 route; v8.001 created the final retouch plan for v4 without generation or memory write; v8.002 created retouch acceptance criteria and delivery package spec without generation or production promotion; v8.003 created the retouch handoff package without generation or asset promotion; v8.004 closed the final retouch planning route without generation, memory write, or production promotion; v8.005 presented next-route options and stops at human route selection.
+Route B minimal real generation authorization: v7.268b completed; v7.269 succeeded with one matte_ceramic_mug output and no retry; v7.270 records human review as needs_revision, accepted_candidate=false, commercial_delivery_ready=false, memory_suitability=deferred; v7.271 creates a static prompt v2 revision plan without generation; v7.272 static review passed; v7.273 authorized exactly one v7.274 second minimal generation trial using prompt v2 and is completed, committed, pushed, and synced at d1a7ac8; v7.274 completed successfully with one output and no retry; v7.275 reviewed that output as accepted_candidate_with_minor_retouch, accepted_candidate=true, commercial_delivery_ready=false, memory_suitability=deferred; v7.276 creates prompt v3 and authorizes exactly one v7.277 third minimal generation trial after commit and push; v7.277 completed successfully with one output; v7.278 reviewed v3 as needs_revision and keeps v2 as current best candidate; v7.279 records the human decision to continue with one fourth minimal trial focused only on handle geometry and product credibility; v7.280 creates prompt v4 and records the exact fourth-trial authorization boundary; v7.281 completed successfully with one v4 output; v7.282 reviewed v4 as accepted_candidate_with_minor_retouch and makes v4 the current best candidate while keeping commercial_delivery_ready=false; v7.283 presents Option A/B/C and recommends keeping v4 while stopping generation by default; v7.284 seals the accepted candidate evidence package without copying, moving, staging, or committing the output image; v7.285 closes the V7 product loop and prepares V8 route selection; v8_route_selection_human_decision_gate selected final_retouch_planning as the V8 route; v8.001 created the final retouch plan for v4 without generation or memory write; v8.002 created retouch acceptance criteria and delivery package spec without generation or production promotion; v8.003 created the retouch handoff package without generation or asset promotion; v8.004 closed the final retouch planning route without generation, memory write, or production promotion; v8.005 presented next-route options and stops at human route selection; v8_003a creates A4.8 Safe Project Operator Rail / 安全项目运营轨 as a governance backfill without starting a new product route.
 ```
 
 ---
@@ -44,7 +44,7 @@ Route B minimal real generation authorization: v7.268b completed; v7.269 succeed
 ## Current Mode
 
 ```text
-A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
+A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot boundaries
 Single-Window 4-Agent Compact Autopilot
 ```
 
@@ -87,7 +87,8 @@ none
 ### todo
 
 ```text
-pending_human_route_selection — 等待项目 owner 选择下一条 V8 路线；auto_execution_allowed=false。
+v8_003b_A4_8_rule_intake_smoke_test — 只读验证 Codex 是否能正确复述 A4.8 权限和 hard stops；auto_execution_allowed=false。
+pending_human_route_selection — 等待项目 owner 选择下一条 V8 路线；blocked until v8_003b is either completed or explicitly skipped by the owner.
 ```
 
 ### recommended_next_after_v7_285
@@ -186,6 +187,14 @@ v8_005_output_image_added_to_git: false
 v8_005_memory_write_performed: false
 v8_005_production_candidate_002_started: false
 recommended_next_after_v8_005: pending_human_route_selection
+v8_003a_A4_8_safe_project_operator_rail_created: true
+v8_003a_A4_8_safe_project_operator_rail_zh: 安全项目运营轨
+v8_003a_A4_8_is_not_A5: true
+v8_003a_provider_contact_allowed: false
+v8_003a_image_generation_allowed: false
+v8_003a_memory_write_allowed: false
+v8_003a_runtime_execution_allowed: false
+recommended_next_after_v8_003a: v8_003b_A4_8_rule_intake_smoke_test
 ```
 
 ### done

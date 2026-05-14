@@ -1,5 +1,46 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.003a A4.8 Safe Project Operator Rail Package
+
+```text
+phase_id: v8_003a_A4_8_safe_project_operator_rail_package
+Status: completed_remote_synced_after_guarded_push
+Source phase: v8_005_next_route_decision_gate
+Source commit: 5d66df06fa7d9b5c5cd299fae7ea54305378e969
+Purpose: create A4.8 Safe Project Operator Rail / 安全项目运营轨 as a governance/product-ops rail package
+sequence_note: created after v8.005 as a governance backfill; does not enter v8.004 or v8.005 execution
+A4_8_safe_project_operator_rail_created: true
+safe_project_operator_rail_ref: docs/A4_8_SAFE_PROJECT_OPERATOR_RAIL.md
+safe_push_policy_ref: docs/SAFE_PUSH_POLICY.md
+validation_selection_matrix_ref: docs/VALIDATION_SELECTION_MATRIX.md
+failure_recovery_ref: docs/AUTOPILOT_FAILURE_RECOVERY.md
+phase_protocol_ref: .agent_board/PHASE_PROTOCOL.md
+closeout_schema_ref: .agent_board/CLOSEOUT_SCHEMA.md
+A4_8_is_not_A5: true
+A4_8_may_auto_advance_low_risk_local_work: true
+A4_8_may_validate_exact_stage_commit_and_safe_push_when_authorized: true
+A4_8_must_stop_at_hard_stops: true
+provider_contact: false
+plugin_call: false
+image_generation: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002_started: false
+Batch_005_started: false
+runs_output_committed: false
+accepted_samples_written: false
+package_json_modified: false
+dependency_change: false
+release_deploy_tag: false
+recommended_next: v8_003b_A4_8_rule_intake_smoke_test
+recommended_next_zh: 只读验证 Codex 是否能正确复述 A4.8 权限和 hard stops
+auto_execution_allowed_for_next: false
+next_phase_started: false
+```
+
 # v8.005 Next Route Decision Gate
 
 ```text
