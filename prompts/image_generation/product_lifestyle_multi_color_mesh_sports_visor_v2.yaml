@@ -1,0 +1,189 @@
+prompt_package_id: product_lifestyle_multi_color_mesh_sports_visor_v2
+version: v2
+language: en
+mode: text_to_image
+reference_policy: text_only_no_image_input
+title_cn: "多色透气网眼运动空顶帽城市运动生活方式图 v2"
+purpose_cn: "根据 v8.021 真实输出审片问题修订；本文件不生成图片、不调用 provider、不写 memory。"
+
+product_brief_ref: briefs/product_brief_multi_color_mesh_sports_visor_v1.md
+source_review_ref: reviews/v8_022_multi_color_mesh_sports_visor_human_review.md
+source_output_ref: runs/real_generation/v8_021_multi_color_mesh_sports_visor_second_trial/native_doubao_1778733554203_0.jpg
+status_cn: "Route B 第二商品 prompt v2；仅供静态审查和未来独立 A5 授权输入。"
+
+product_identity:
+  product_type: open_top_sports_visor
+  category_terms:
+    - open-top sun visor
+    - breathable mesh sports visor
+    - summer racket-sport visor
+    - lightweight outdoor sports visor
+  must_not_be:
+    - cycling cap
+    - baseball cap
+    - full crown cap
+    - bucket hat
+    - helmet
+
+product_structure:
+  open_top: true
+  crown: absent
+  brim: soft flexible curved brim
+  headband: continuous fabric headband
+  side_panels: breathable mesh side panels
+  back_detail: adjustable back strap
+  silhouette: low-profile athletic visor shape
+
+material_texture:
+  primary_material: lightweight summer sports fabric
+  mesh_texture: breathable honeycomb mesh panels with clearly visible perforated weave
+  stitching: crisp stitched fabric edges and clean sportswear seams
+  brim_material: soft flexible fabric brim, not plastic or metallic
+  finish: matte textile surface with subtle fabric grain
+
+color_collection:
+  required_visible_colorways:
+    - bright turquoise blue
+    - soft pink
+    - warm white
+    - deep navy
+    - black
+    - muted olive green
+  color_count_target: 6_visible_colorways
+  color_relationship: bright turquoise blue or soft pink leads the image; warm white is secondary; deep navy, black, and muted olive green are visible supporting colors.
+  warm_white_dominance_allowed: false
+  black_or_navy_dominance_allowed: false
+  pale_turquoise_allowed: false
+
+hero_color_priority:
+  primary_visual_highlight:
+    - bright turquoise blue
+    - soft pink
+  secondary_color: warm white
+  supporting_dark_colors:
+    - deep navy
+    - black
+  supporting_earth_color: muted olive green
+  hierarchy_rule: The bright turquoise blue or soft pink visor must catch the eye first; black and deep navy must never become the main visual mass.
+
+shot_type:
+  primary: realistic urban sports lifestyle product photo
+  usage: commercial lifestyle hero image for a multi-color visor collection
+  not_a_studio_only_shot: true
+
+composition:
+  product_frame_coverage: 65_to_75_percent
+  layout: clean multi-color collection arrangement with several visors overlapping naturally
+  hierarchy: product collection is dominant; background is contextual but soft
+  clutter_allowed: false
+  human_model_allowed: false
+  people_or_hands_allowed: false
+
+environment:
+  primary_background: realistic urban sports lifestyle setting
+  allowed_contexts:
+    - outdoor cafe table beside a city greenway
+    - stylish sports rest area
+    - modern racket-sport club entrance
+  background_elements:
+    - pale concrete wall
+    - glass storefront
+    - blurred greenery
+    - city pavement
+  background_focus: softly out of focus
+  background_role: support lifestyle credibility without stealing attention from the visors
+
+lighting:
+  quality: clean natural daylight with soft commercial highlights
+  direction: gentle side daylight
+  shadows: soft and tidy
+  color_accuracy: preserve distinct colorways without oversaturation
+
+camera_language:
+  lens: product-lifestyle commercial photography lens
+  perspective: slightly elevated three-quarter view
+  depth_of_field: moderate shallow depth of field, product sharp, background soft
+  realism: natural commercial realism, not CGI, not illustration
+
+runner_prompt_mapping:
+  canonical_prompt_field: prompt
+  positive_prompt_retained_for_review: true
+  runner_expected_prompt_field: prompt
+
+prompt: |
+  Realistic premium urban sports lifestyle product photo of a coordinated six-color collection of open-top breathable mesh sports visors / sun visors. Show all required colorways clearly: bright turquoise blue, soft pink, warm white, deep navy, black, and muted olive green. The bright turquoise blue or soft pink visor must be the main visual highlight; warm white is only a secondary color; black and deep navy are supporting colors only and must not dominate the image.
+
+  Arrange several open-top sports visors naturally on an outdoor cafe table beside a city greenway, a stylish sports rest area, or a modern racket-sport club entrance. Include subtle lifestyle cues such as pale concrete wall, glass storefront, blurred greenery, and city pavement. The background must be softly out of focus and must not overpower the product.
+
+  Each visor should have an open-top structure, a soft flexible curved brim, a continuous fabric headband, adjustable back strap, breathable honeycomb mesh side panels, visible perforated weave, crisp stitched fabric edges, and lightweight summer sports material. The product collection should occupy about 65-75% of the frame. Clean natural daylight, soft commercial shadows, realistic fabric texture, premium sports accessory styling, no people, no hands, no logos, no text, no clutter.
+
+positive_prompt: |
+  Realistic premium urban sports lifestyle product photo of a coordinated six-color collection of open-top breathable mesh sports visors / sun visors. Show all required colorways clearly: bright turquoise blue, soft pink, warm white, deep navy, black, and muted olive green. The bright turquoise blue or soft pink visor must be the main visual highlight; warm white is only a secondary color; black and deep navy are supporting colors only and must not dominate the image.
+
+  Arrange several open-top sports visors naturally on an outdoor cafe table beside a city greenway, a stylish sports rest area, or a modern racket-sport club entrance. Include subtle lifestyle cues such as pale concrete wall, glass storefront, blurred greenery, and city pavement. The background must be softly out of focus and must not overpower the product.
+
+  Each visor should have an open-top structure, a soft flexible curved brim, a continuous fabric headband, adjustable back strap, breathable honeycomb mesh side panels, visible perforated weave, crisp stitched fabric edges, and lightweight summer sports material. The product collection should occupy about 65-75% of the frame. Clean natural daylight, soft commercial shadows, realistic fabric texture, premium sports accessory styling, no people, no hands, no logos, no text, no clutter.
+
+negative_prompt: |
+  studio-only product shot, plain white studio background, cream-dominant composition, warm white dominating the frame, missing deep navy, missing black, missing muted olive green, pale turquoise, washed-out turquoise, black-dominant image, navy-dominant image, cycling cap, baseball cap, full crown cap, bucket hat, helmet, hard plastic brim, metallic material, smooth plastic texture, no mesh detail, missing honeycomb mesh, missing stitching, cluttered background, busy props, human model, face, hands, logo, text, watermark, distorted product shape, unrealistic CGI, illustration, cartoon
+
+negative_constraints:
+  product_identity:
+    - do not turn the visor into a cycling cap, baseball cap, bucket hat, helmet, or full crown cap
+    - do not remove the open-top structure
+  color:
+    - do not omit deep navy, black, or muted olive green
+    - do not make turquoise pale or washed out
+    - do not let warm white, black, or deep navy dominate the composition
+  scene:
+    - avoid studio-only product shot language
+    - avoid plain white background as the main scene
+    - avoid cluttered lifestyle props
+  material:
+    - do not make the product look plastic, metallic, or hard-shell
+    - do not hide mesh, stitching, or fabric texture
+  safety:
+    - no logo
+    - no text
+    - no watermark
+    - no people
+    - no hands
+
+acceptance_criteria:
+  required_colors_visible: true
+  six_colorways:
+    - bright turquoise blue
+    - soft pink
+    - warm white
+    - deep navy
+    - black
+    - muted olive green
+  turquoise_or_pink_as_visual_highlight: true
+  black_or_navy_supporting_only: true
+  warm_white_not_dominant: true
+  urban_sports_lifestyle_context_visible: true
+  product_occupies_65_to_75_percent_frame: true
+  background_softly_out_of_focus: true
+  honeycomb_mesh_visible: true
+  stitching_visible: true
+  open_top_visor_structure_preserved: true
+  no_people_or_hands: true
+  no_logo_or_text: true
+
+human_review_checklist:
+  - Are all six required colors visible?
+  - Does bright turquoise or soft pink lead the visual hierarchy?
+  - Are black and deep navy visible but non-dominant?
+  - Is warm white prevented from becoming the main color mass?
+  - Does the image read as an urban sports lifestyle product photo rather than studio-only product photography?
+  - Are honeycomb mesh, stitching, flexible brim, and open-top structure clear?
+  - Does the product remain 65-75% of the frame?
+  - Is the background contextual but not distracting?
+  - Are people, hands, logos, text, and clutter absent?
+
+A5_authorization_required_later: true
+plugin_call_allowed_by_this_file: false
+image_generation_allowed_by_this_file: false
+memory_write_allowed: false
+daily_note_write_allowed: false
+provider_contact_allowed_by_this_file: false

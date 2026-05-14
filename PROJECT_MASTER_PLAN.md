@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_synced_head_before_v8_022_human_review_gate: b3ea4d12d8bd814c7023196ccca8c825fac2574d
-origin_master_before_v8_022_human_review_gate: b3ea4d12d8bd814c7023196ccca8c825fac2574d
-status: v8_022_human_review_of_second_product_second_real_output
-mode: A4 human review documentation only
-phase_id: v8_022_human_review_of_second_product_second_real_output
+latest_synced_head_before_v8_023_prompt_revision_plan: f9b0d9800d3e5c00e56a5a41bcdf92328bba2110
+origin_master_before_v8_023_prompt_revision_plan: f9b0d9800d3e5c00e56a5a41bcdf92328bba2110
+status: v8_023_second_product_prompt_revision_plan_from_first_real_output
+mode: A4.8 docs-only prompt revision planning
+phase_id: v8_023_second_product_prompt_revision_plan_from_first_real_output
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -280,7 +280,12 @@ v8_022_accepted_candidate: false
 v8_022_commercial_delivery_ready: false
 v8_022_memory_suitability: deferred
 v8_022_reviewable_sample: true
-recommended_next: v8_023_second_product_prompt_revision_plan_from_first_real_output
+v8_023_prompt_revision_plan_created: true
+v8_023_prompt_v2_created: true
+v8_023_prompt_v2_ref: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
+v8_023_provider_contact: false
+v8_023_image_generation: false
+recommended_next: v8_024_second_product_prompt_v2_static_review_gate
 ```
 
 ## Product Direction

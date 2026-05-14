@@ -81,13 +81,13 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-v8_022_human_review_of_second_product_second_real_output — record human review for the v8.021 second-product output as needs_revision; do not generate or retry.
+v8_023_second_product_prompt_revision_plan_from_first_real_output — create prompt v2 revision plan and v2 prompt package from the v8.021 review findings; do not generate or retry.
 ```
 
 ### todo
 
 ```text
-v8_023_second_product_prompt_revision_plan_from_first_real_output — revise the prompt plan from review findings; no automatic generation.
+v8_024_second_product_prompt_v2_static_review_gate — statically review prompt v2 against the v8.021 review gaps; no automatic generation.
 ```
 
 ### recommended_next_after_v7_285
@@ -259,12 +259,15 @@ recommended_next_after_v8_020: v8_021_second_product_second_minimal_generation_t
 v8_021_second_product_second_minimal_generation_trial_execution: completed_success
 v8_021_output_file: runs/real_generation/v8_021_multi_color_mesh_sports_visor_second_trial/native_doubao_1778733554203_0.jpg
 v8_021_output_added_to_git: false
-v8_022_human_review_of_second_product_second_real_output: in_progress
+v8_022_human_review_of_second_product_second_real_output: completed_remote_synced_after_guarded_push
 v8_022_asset_status: needs_revision
 v8_022_accepted_candidate: false
 v8_022_commercial_delivery_ready: false
 v8_022_memory_suitability: deferred
 recommended_next_after_v8_022: v8_023_second_product_prompt_revision_plan_from_first_real_output
+v8_023_second_product_prompt_revision_plan_from_first_real_output: in_progress
+v8_023_prompt_v2_ref: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
+recommended_next_after_v8_023: v8_024_second_product_prompt_v2_static_review_gate
 ```
 
 ### done
