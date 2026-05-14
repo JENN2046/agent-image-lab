@@ -9,16 +9,53 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v9_022_v9_delivery_readiness_layer_closeout_or_next_route_decision_gate. This docs-only gate closes the V9 delivery readiness layer and presents V10 route options; it does not enter V10 execution, edit images, create derivatives, generate images, contact providers, write memory, write accepted_samples, promote production, execute delivery, or set commercial_delivery_ready=true.
+Agent Image Lab is in v10_001_closeout_and_project_route_reset_gate. This docs-only gate records the human selection of V10 Option E and resets the project route after V9 closeout; it does not enter V10 execution, edit images, create derivatives, generate images, contact providers, write memory, write accepted_samples, promote production, execute delivery, or set commercial_delivery_ready=true.
 ```
 
 ## Current Phase
 
 ```text
+V10.001 Closeout And Project Route Reset Gate
+phase_id: v10_001_closeout_and_project_route_reset_gate
+source_phase: v9_022_v9_delivery_readiness_layer_closeout_or_next_route_decision_gate
+status: completed_pending_validation_commit_push
+source_commit: 908d8780b246b85c22a7f69ded23d6b57565dbea
+source_message: docs: close out v9 delivery readiness layer
+branch: master tracking origin/master
+origin_sync_current: local HEAD equals origin/master at 908d878 before v10.001 patch
+ahead_behind: 0/0 before v10.001 patch
+selected_v10_route: closeout_and_project_route_reset
+selected_v10_route_meaning: 封存 V9 后重新选择下一条产品主线
+selected_v10_route_risk: low
+selected_v10_route_recommendation: best_if_you_want_to_stop_V9_creep
+project_route_reset_created: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+memory_write_allowed: false
+production_candidate_002_allowed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+image_editing_performed: false
+derivative_image_created: false
+real_commercial_delivery_execution: false
+recommended_next: v10_002_next_project_route_selection_gate
+recommended_next_auto_execution_allowed: false
+---
 V9.022 V9 Delivery Readiness Layer Closeout Or Next Route Decision Gate
 phase_id: v9_022_v9_delivery_readiness_layer_closeout_or_next_route_decision_gate
 source_phase: v9_021_sports_visor_final_retouch_action_package_gate
-status: completed_pending_validation_commit_push
+status: completed_remote_synced_after_guarded_push
 source_commit: d40c9cb5a8bdc311ed620b1f9ec1b7f25a565f95
 source_message: docs: add final retouch action package for sports visor
 branch: master tracking origin/master

@@ -1,5 +1,40 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260515-v10.001-CLOSEOUT-AND-PROJECT-ROUTE-RESET-GATE
+
+Task:
+
+```text
+Record human selection of V10 Option E and reset the project route after V9 closeout.
+```
+
+Result:
+
+```text
+selected_v10_route: closeout_and_project_route_reset
+selected_v10_route_meaning: 封存 V9 后重新选择下一条产品主线
+selected_v10_route_risk: low
+selected_v10_route_recommendation: best_if_you_want_to_stop_V9_creep
+project_route_reset_created: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+accepted_samples_written: false
+runs_output_committed: false
+memory_write_performed: false
+production_candidate_002_started: false
+image_editing_performed: false
+derivative_image_created: false
+real_retouch_execution_performed: false
+real_commercial_delivery_execution: false
+validation_result: passed_with_existing_manual_review_warnings_only
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, secret print, DailyNote write, VCP memory write, memory_write_path, production_candidate_002, Batch 005, runtime/CDP/bridge/MCP, dependency change, package.json change, accepted_samples write, source image copy/move, runs output commit, image editing, derivative image creation, real retouch execution, commercial_delivery_ready=true, real commercial delivery execution, or automatic V10 execution is performed by v10.001.
+```
+
 ## VALIDATION-20260515-v9.022-V9-DELIVERY-READINESS-LAYER-CLOSEOUT-GATE
 
 Task:
