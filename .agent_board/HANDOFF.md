@@ -3,6 +3,35 @@
 ## Handoff Summary
 
 ```text
+Status: v10_004_third_product_brief_gate is the current docs-only third product brief gate.
+Reason: v10.004 creates a product brief for cosmetic_skincare_bottle / premium_serum_bottle and locks the first structure as a frosted_translucent_glass_bottle_with_clean_dropper_cap while staying before prompt package creation, A5 authorization, provider contact, image generation, memory write, runtime, production, accepted_samples, or runs output creation.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v10.004 patch: 155d30c docs: select third product prompt workflow route
+ahead_behind: 0/0
+Worktree: clean before v10.004 patch; generated runs output remains ignored and is not staged or committed
+Current status: v10_004_third_product_brief_gate
+source_phase: v10_003_third_product_prompt_workflow_expansion_route_gate
+selected_route: third_product_prompt_workflow_expansion
+selected_product: cosmetic_skincare_bottle / premium_serum_bottle
+locked_structure: frosted_translucent_glass_bottle_with_clean_dropper_cap
+product_brief_created: true
+prompt_package_created: false
+A5_authorization_created: false
+provider_contact_allowed_now: false
+image_generation_allowed_now: false
+memory_write_allowed: false
+production_candidate_002_allowed: false
+v10_004_provider_contact: false
+v10_004_image_generation: false
+v10_004_retry: false
+v10_004_env_local_secret_value_read: false
+v10_004_memory_write: false
+v10_004_accepted_samples_written: false
+v10_004_runs_output_committed: false
+recommended_next: v10_005_third_product_prompt_package_draft_gate
+recommended_next_auto_execution_allowed: true
+---
 Status: v10_003_third_product_prompt_workflow_expansion_route_gate is the current docs-only third product route/product candidate planning gate.
 Reason: Human selected v10.002 Option C; v10.003 selects cosmetic_skincare_bottle / premium_serum_bottle as the third product direction and keeps the workflow inside A4.8 docs-only planning before any A5 authorization, provider contact, image generation, memory write, runtime, production, or asset movement.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

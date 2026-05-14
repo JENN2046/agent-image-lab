@@ -1,10 +1,43 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V10.004 Third Product Brief Gate
+
+```text
+phase_id: v10_004_third_product_brief_gate
+status: completed_pending_validation_commit_push
+source_phase: v10_003_third_product_prompt_workflow_expansion_route_gate
+source_commit: 155d30caae054821bb839f331fedbd62da36e0d2
+purpose: create product brief for premium serum bottle third product lane
+phase_record_ref: docs/v10_004_third_product_brief_gate.md
+product_brief_ref: briefs/product_brief_premium_serum_bottle_v1.md
+selected_route: third_product_prompt_workflow_expansion
+selected_product: cosmetic_skincare_bottle / premium_serum_bottle
+locked_structure: frosted_translucent_glass_bottle_with_clean_dropper_cap
+product_brief_created: true
+prompt_package_created: false
+A5_authorization_created: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+runs_output_created: false
+recommended_next: v10_005_third_product_prompt_package_draft_gate
+```
+
 # V10.003 Third Product Prompt Workflow Expansion Route Gate
 
 ```text
 phase_id: v10_003_third_product_prompt_workflow_expansion_route_gate
-status: completed_pending_validation_commit_push
+status: completed_remote_synced_after_guarded_push
 source_phase: v10_002_next_project_route_selection_gate
 source_commit: 266bbaa79fd49fc784830297b385ca5248ca9a4f
 purpose: select third product prompt workflow expansion direction and define Route C boundary
