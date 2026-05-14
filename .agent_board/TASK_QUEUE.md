@@ -81,13 +81,13 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-v8_015_second_product_A5_authorization_decision_gate — record human Option A approval for one controlled second-product minimal real generation trial.
+v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate — record the failed v8.016 HTTP 400 trial and decide whether prompt/runner static fixes are needed.
 ```
 
 ### todo
 
 ```text
-v8_016_second_product_minimal_real_generation_trial_execution — execute one provider call / one generation attempt / max one output image, then stop for human review.
+v8_018_second_product_prompt_or_runner_static_fix_gate — human decision on prompt / runner static correction; no automatic retry.
 ```
 
 ### recommended_next_after_v7_285
@@ -228,7 +228,17 @@ v8_015_provider_calls_max: 1
 v8_015_generation_attempts_max: 1
 v8_015_output_images_max: 1
 v8_015_auto_retry: false
-recommended_next_after_v8_015: v8_016_second_product_minimal_real_generation_trial_execution
+v8_016_execution_status: failed_http_400
+v8_016_provider_contact_happened: true
+v8_016_provider_calls_used: 1
+v8_016_generation_attempts_used: 1
+v8_016_image_created: false
+v8_016_output_images_count: 0
+v8_016_output_directory_created: false
+v8_016_no_image_to_review: true
+v8_016_retry_allowed_now: false
+v8_017_failed_trial_review_or_prompt_fix_decision_gate: in_progress
+recommended_next_after_v8_017: v8_018_second_product_prompt_or_runner_static_fix_gate
 ```
 
 ### done

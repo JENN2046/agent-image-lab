@@ -18,9 +18,9 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Current synced baseline before v8_015 A5 authorization decision gate: 4c7f4461089d0181e3c0f1172b7b31934b05632a on master == origin/master.
-Current mainline state: v8_015 second product A5 authorization decision; human selected Option A for one minimal real generation trial in v8_016.
-Current phase id: v8_015_second_product_A5_authorization_decision_gate.
+Current synced baseline before v8_017 failed trial review gate: be841c1affce059da662d64f6ae85978d7009d58 on master == origin/master.
+Current mainline state: v8_017 failed second product generation review; v8.016 consumed one authorized provider call and failed with sanitized HTTP 400, no image.
+Current phase id: v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
@@ -245,7 +245,16 @@ provider_calls_max_for_v8_016: 1.
 generation_attempts_max_for_v8_016: 1.
 output_images_max_for_v8_016: 1.
 auto_retry_for_v8_016: false.
-Recommended next: v8_016_second_product_minimal_real_generation_trial_execution（第二商品一次最小真实生成试跑）.
+v8_016_execution_status: failed_http_400.
+v8_016_provider_calls_used: 1.
+v8_016_generation_attempts_used: 1.
+v8_016_image_created: false.
+v8_016_output_images_count: 0.
+v8_016_output_directory_created: false.
+v8_016_no_image_to_review: true.
+v8_016_retry_allowed_now: false.
+v8_017_failed_trial_review_in_progress: true.
+Recommended next: v8_018_second_product_prompt_or_runner_static_fix_gate（人工决定是否做 prompt / runner 参数静态修正；不自动重新生成）.
 auto_execution_allowed_for_next: false.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)

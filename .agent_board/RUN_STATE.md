@@ -9,24 +9,24 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v8_015_second_product_A5_authorization_decision_gate. The human selected Option A: one controlled v8.016 minimal real generation trial for the second Route B product.
+Agent Image Lab is in v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate. The v8.016 second-product trial consumed one authorized provider call, failed with sanitized HTTP 400, and produced no image.
 ```
 
 ## Current Phase
 
 ```text
-v8.015 Second Product A5 Authorization Decision Gate
-phase_id: v8_015_second_product_A5_authorization_decision_gate
-source_phase: v8_014_second_product_prompt_static_review_gate
+v8.017 Second Product Failed Trial Review Or Prompt Fix Decision Gate
+phase_id: v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate
+source_phase: v8_016_second_product_minimal_real_generation_trial_execution
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
-status: second_product_A5_authorization_decision_in_progress
-source_commit: 4c7f4461089d0181e3c0f1172b7b31934b05632a
-source_message: docs: review second product prompt package draft
+status: second_product_failed_trial_review_in_progress
+source_commit: be841c1affce059da662d64f6ae85978d7009d58
+source_message: docs: authorize second product minimal generation trial
 branch: master tracking origin/master
 Worktree: clean before v8_003a A4.8 rail package patch; generated v7.281 output remains ignored under runs/
 worktree_start_clean: true
-origin_sync_current: local HEAD equals origin/master at 4c7f446
+origin_sync_current: local HEAD equals origin/master at be841c1
 ahead_behind: 0/0
 A4_8_safe_project_operator_rail_created: true
 A4_8_safe_project_operator_rail_zh: 安全项目运营轨
@@ -122,8 +122,8 @@ output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug
 auto_retry_for_second_trial: false
 stop_after_generation_for_second_trial: true
 human_review_required_after_generation: true
-recommended_next: v8_016_second_product_minimal_real_generation_trial_execution
-recommended_next_zh: 第二商品一次最小真实生成试跑
+recommended_next: v8_018_second_product_prompt_or_runner_static_fix_gate
+recommended_next_zh: 人工决定是否做 prompt / runner 参数静态修正；不自动重新生成
 v8_003b_A4_8_rule_intake_smoke_test: passed
 v8_006_A4_8_state_and_rule_intake_review: passed_read_only
 v8_007_A4_8_mutation_live_run_docs_only: completed_remote_synced_after_guarded_push
@@ -165,6 +165,19 @@ v8_015_generation_attempts_max: 1
 v8_015_output_images_max: 1
 v8_015_auto_retry: false
 v8_015_human_review_required_after_generation: true
+v8_016_execution_status: failed_http_400
+v8_016_provider_contact_happened: true
+v8_016_provider_calls_used: 1
+v8_016_generation_attempts_used: 1
+v8_016_image_created: false
+v8_016_output_images_count: 0
+v8_016_output_directory_created: false
+v8_016_auto_retry_used: false
+v8_016_secret_value_printed: false
+v8_016_no_image_to_review: true
+v8_016_retry_allowed_now: false
+v8_017_failed_trial_review_or_prompt_fix_decision_gate: in_progress
+v8_017_possible_static_issue: prompt_package_uses_positive_prompt_but_loader_expects_prompt
 Route_B_initial_docs_sequence_completed: true
 v8_route_selection_completed: true
 selected_v8_route: final_retouch_planning

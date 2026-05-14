@@ -1,10 +1,63 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.017 Second Product Failed Trial Review Or Prompt Fix Decision Gate
+
+```text
+phase_id: v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate
+status: in_progress
+source_phase: v8_016_second_product_minimal_real_generation_trial_execution
+source_commit: be841c1affce059da662d64f6ae85978d7009d58
+purpose: record sanitized v8.016 failure and decide whether prompt or runner static fixes are needed before any new authorization
+phase_record_ref: docs/v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate.md
+review_ref: reviews/v8_017_second_product_failed_generation_review.md
+approved_product: multi_color_mesh_sports_visor
+prompt_package_used: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
+execution_status: failed_http_400
+provider_contact_happened: true
+provider_calls_used: 1
+generation_attempts_used: 1
+image_created: false
+output_images_count: 0
+output_directory_created: false
+no_image_to_review: true
+retry_allowed_now: false
+new_A5_authorization_required_for_retry: true
+provider_contact: false
+image_generation: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+recommended_next: v8_018_second_product_prompt_or_runner_static_fix_gate
+```
+
+# v8.016 Second Product Minimal Real Generation Trial Execution
+
+```text
+phase_id: v8_016_second_product_minimal_real_generation_trial_execution
+status: failed_http_400_no_image
+approved_product: multi_color_mesh_sports_visor
+prompt_package_used: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
+provider_contact_happened: true
+provider_calls_used: 1
+generation_attempts_used: 1
+image_created: false
+output_images_count: 0
+output_directory_created: false
+auto_retry_used: false
+secret_value_printed: false
+output_added_to_git: false
+recommended_next: v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate
+```
+
 # v8.015 Second Product A5 Authorization Decision Gate
 
 ```text
 phase_id: v8_015_second_product_A5_authorization_decision_gate
-status: in_progress
+status: completed_remote_synced_after_guarded_push
 source_commit: 4c7f4461089d0181e3c0f1172b7b31934b05632a
 purpose: record human Option A approval for one controlled minimal real generation trial of the Route B second product
 phase_record_ref: docs/v8_015_second_product_A5_authorization_decision_gate.md

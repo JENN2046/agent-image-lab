@@ -1,5 +1,45 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v8.017-SECOND-PRODUCT-FAILED-TRIAL-REVIEW
+
+Task:
+
+```text
+Review the failed v8.016 second-product real generation trial without retrying or reading secret values.
+```
+
+Result:
+
+```text
+execution_status: failed_http_400
+provider_contact_happened: true
+provider_calls_used: 1
+generation_attempts_used: 1
+image_created: false
+output_images_count: 0
+no_image_to_review: true
+retry_allowed_now: false
+new_A5_authorization_required_for_retry: true
+```
+
+Static review note:
+
+```text
+Possible local mapping issue: prompt package uses positive_prompt, while the Native Doubao loader recognizes prompt and negative_prompt. This is a category-level diagnostic note, not a claim about provider raw error details.
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, DailyNote write, VCP memory write, production_candidate_002, Batch 005, dependency change, package.json change, or runs output commit is performed by v8.017.
+```
+
+Validation note:
+
+```text
+scripts/validate_mvp.ps1 has a pre-commit local commit scope timing gap for this authorized new reviews/ file: before staging it reports the review as unexpected untracked. The exact allowlist was reviewed, git diff --check passed, and the script should be rerun after commit from a clean worktree.
+```
+
 ## VALIDATION-20260514-v8.015-SECOND-PRODUCT-A5-AUTHORIZATION-DECISION
 
 Task:

@@ -3,14 +3,14 @@
 ## Handoff Summary
 
 ```text
-Status: v8_015_second_product_A5_authorization_decision_gate is the current Route B authorization decision; the human selected Option A for one v8.016 minimal real generation trial.
-Reason: v8.014 completed the static prompt review; v8.015 records the exact A5 boundary for one second-product trial and keeps all other production routes blocked.
+Status: v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate is the current Route B failure review; v8.016 consumed one authorized provider call and failed with sanitized HTTP 400, no image.
+Reason: v8.016 had provider contact but created no image, so there is no human visual review; v8.017 records sanitized failure categories and stops before any retry.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
-Current synced HEAD before v8_015 patch: 4c7f446 docs: review second product prompt package draft
+Current synced HEAD before v8_017 patch: be841c1 docs: authorize second product minimal generation trial
 ahead_behind: 0/0
 Worktree: clean before v8_003a A4.8 rail package patch; v7.281 output remains ignored under runs/
-Current status: v8_015_second_product_A5_authorization_decision_gate
+Current status: v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate
 A4_8_safe_project_operator_rail_created: true
 A4_8_safe_project_operator_rail_zh: 安全项目运营轨
 A4_8_is_not_A5: true
@@ -228,8 +228,8 @@ v8_003a_safe_project_operator_rail_ref: docs/A4_8_SAFE_PROJECT_OPERATOR_RAIL.md
 v8_003a_safe_push_policy_ref: docs/SAFE_PUSH_POLICY.md
 v8_003a_validation_selection_matrix_ref: docs/VALIDATION_SELECTION_MATRIX.md
 v8_003a_failure_recovery_ref: docs/AUTOPILOT_FAILURE_RECOVERY.md
-recommended_next: v8_016_second_product_minimal_real_generation_trial_execution
-recommended_next_zh: 第二商品一次最小真实生成试跑
+recommended_next: v8_018_second_product_prompt_or_runner_static_fix_gate
+recommended_next_zh: 人工决定是否做 prompt / runner 参数静态修正；不自动重新生成
 v8_003b_A4_8_rule_intake_smoke_test: passed
 v8_006_A4_8_state_and_rule_intake_review: passed_read_only
 v8_007_A4_8_mutation_live_run_docs_only: completed_remote_synced_after_guarded_push
@@ -263,6 +263,19 @@ v8_015_output_images_max: 1
 v8_015_auto_retry: false
 v8_015_secret_value_printing_allowed: false
 v8_015_runs_output_commit_allowed: false
+v8_016_execution_status: failed_http_400
+v8_016_provider_contact_happened: true
+v8_016_provider_calls_used: 1
+v8_016_generation_attempts_used: 1
+v8_016_image_created: false
+v8_016_output_images_count: 0
+v8_016_output_directory_created: false
+v8_016_auto_retry_used: false
+v8_016_secret_value_printed: false
+v8_016_no_image_to_review: true
+v8_016_retry_allowed_now: false
+v8_017_failed_trial_review_or_prompt_fix_decision_gate: in_progress
+v8_017_possible_static_issue: prompt_package_uses_positive_prompt_but_loader_expects_prompt
 Route_B_initial_docs_sequence_completed: true
 provider_contact_after_v7_274: false
 image_generation_after_v7_274: false

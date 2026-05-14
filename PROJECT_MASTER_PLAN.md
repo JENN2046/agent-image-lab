@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_synced_head_before_v8_015_A5_authorization_decision_gate: 4c7f4461089d0181e3c0f1172b7b31934b05632a
-origin_master_before_v8_015_A5_authorization_decision_gate: 4c7f4461089d0181e3c0f1172b7b31934b05632a
-status: v8_015_second_product_A5_authorization_decision_gate
-mode: A5 authorization decision for one controlled Route B generation trial
-phase_id: v8_015_second_product_A5_authorization_decision_gate
+latest_synced_head_before_v8_017_failed_trial_review_gate: be841c1affce059da662d64f6ae85978d7009d58
+origin_master_before_v8_017_failed_trial_review_gate: be841c1affce059da662d64f6ae85978d7009d58
+status: v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate
+mode: A4/A0 failed generation review and decision gate
+phase_id: v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -249,7 +249,15 @@ provider_calls_max_for_v8_016: 1
 generation_attempts_max_for_v8_016: 1
 output_images_max_for_v8_016: 1
 auto_retry_for_v8_016: false
-recommended_next: v8_016_second_product_minimal_real_generation_trial_execution
+v8_016_execution_status: failed_http_400
+v8_016_provider_calls_used: 1
+v8_016_generation_attempts_used: 1
+v8_016_image_created: false
+v8_016_output_images_count: 0
+v8_016_output_directory_created: false
+v8_016_no_image_to_review: true
+v8_016_retry_allowed_now: false
+recommended_next: v8_018_second_product_prompt_or_runner_static_fix_gate
 ```
 
 ## Product Direction
