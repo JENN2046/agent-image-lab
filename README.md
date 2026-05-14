@@ -7,6 +7,31 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current synced baseline before v9.014 sports visor delivery readiness scope and asset selection gate: af22c2eff3faf96891ce97536279bb9430948d8b on master == origin/master.
+Current mainline state: v9_014_sports_visor_delivery_readiness_scope_and_asset_selection_gate selects sports_visor_v8_033 as the second V9 delivery readiness lane; this is not delivery package creation yet, not provider contact, not generation, not real retouch execution, not image editing, not derivative image creation, not accepted_samples write, not production_candidate_002, not memory write, and not real commercial delivery.
+Current phase id: v9_014_sports_visor_delivery_readiness_scope_and_asset_selection_gate.
+source_phase: v9_013_ceramic_mug_first_asset_delivery_lane_closeout_gate.
+selected_route: delivery_readiness_layer.
+selected_second_asset: sports_visor_v8_033.
+selected_product: multi_color_mesh_sports_visor.
+selected_candidate_path: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg.
+current_asset_status: accepted_candidate_with_minor_watch_items.
+commercial_delivery_ready: false.
+memory_suitability: deferred.
+delivery_readiness_scope_created: true.
+delivery_readiness_package_created: false.
+memory_write_allowed: false.
+production_candidate_002_allowed: false.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+retry_allowed_now: false.
+accepted_samples_written: false.
+runs_output_committed: false.
+image_editing_performed: false.
+derivative_image_created: false.
+real_commercial_delivery_execution: false.
+recommended_next: v9_015_sports_visor_delivery_readiness_package_gate.
+recommended_next_auto_execution_allowed: true.
 Current synced baseline before v9.013 ceramic mug first asset delivery lane closeout gate: f01c142c5a79bdf37fbf70e4fd71f3a54391736e on master == origin/master.
 Current mainline state: v9_013_ceramic_mug_first_asset_delivery_lane_closeout_gate closes the ceramic_mug_v4 first asset delivery readiness lane at the real retouch authorization boundary; this is not real retouch execution, not image editing, not derivative image creation, not provider contact, not generation, not accepted_samples write, not production_candidate_002, not memory write, and not real commercial delivery.
 Current phase id: v9_013_ceramic_mug_first_asset_delivery_lane_closeout_gate.

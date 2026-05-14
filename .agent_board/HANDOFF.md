@@ -3,6 +3,38 @@
 ## Handoff Summary
 
 ```text
+Status: v9_014_sports_visor_delivery_readiness_scope_and_asset_selection_gate is the current docs-only second asset scope and selection gate.
+Reason: v9.013 closed the ceramic mug first asset lane; v9.014 selects sports_visor_v8_033 as the second V9 delivery readiness lane without creating the package yet or performing production work.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v9.014 patch: af22c2e docs: close ceramic mug delivery readiness lane
+ahead_behind: 0/0
+Worktree: clean before v9.014 patch; generated runs output remains ignored and is not staged or committed
+Current status: v9_014_sports_visor_delivery_readiness_scope_and_asset_selection_gate
+selected_route: delivery_readiness_layer
+selected_second_asset: sports_visor_v8_033
+selected_product: multi_color_mesh_sports_visor
+selected_candidate_path: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg
+current_asset_status: accepted_candidate_with_minor_watch_items
+commercial_delivery_ready: false
+memory_suitability: deferred
+delivery_readiness_scope_created: true
+delivery_readiness_package_created: false
+memory_write_allowed: false
+production_candidate_002_allowed: false
+v9_014_provider_contact: false
+v9_014_image_generation: false
+v9_014_retry: false
+v9_014_env_local_secret_value_read: false
+v9_014_memory_write: false
+v9_014_accepted_samples_written: false
+v9_014_runs_output_committed: false
+v9_014_image_editing_performed: false
+v9_014_derivative_image_created: false
+v9_014_real_commercial_delivery_execution: false
+recommended_next: v9_015_sports_visor_delivery_readiness_package_gate
+recommended_next_auto_execution_allowed: true
+---
 Status: v9_013_ceramic_mug_first_asset_delivery_lane_closeout_gate is the current docs-only first asset lane closeout gate.
 Reason: v9.012 did not grant real retouch execution; v9.013 closes ceramic_mug_v4 at the real retouch authorization boundary and preserves the final retouch action package plus real retouch execution plan.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
