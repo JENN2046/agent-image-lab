@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_synced_head_before_v8_003a_backfill: 5d66df0
-origin_master_before_v8_003a_backfill: 5d66df0
-status: v8_003a_A4_8_safe_project_operator_rail_package
-mode: A4 docs-only governance/product-ops rail package
-phase_id: v8_003a_A4_8_safe_project_operator_rail_package
+latest_synced_head_before_v8_007_mutation_live_run: e059ba49e31d69770d50e355d433f1f066280f03
+origin_master_before_v8_007_mutation_live_run: e059ba49e31d69770d50e355d433f1f066280f03
+status: v8_007_A4_8_mutation_live_run_docs_only
+mode: A4.8 docs-only comprehensive validation track
+phase_id: v8_007_A4_8_mutation_live_run_docs_only
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -212,9 +212,16 @@ v8_003a_provider_contact_allowed: false
 v8_003a_image_generation_allowed: false
 v8_003a_memory_write_allowed: false
 v8_003a_runtime_execution_allowed: false
+v8_003b_A4_8_rule_intake_smoke_test_passed: true
+v8_006_A4_8_state_and_rule_intake_review_passed: true
+v8_007_A4_8_mutation_live_run_docs_only_started: true
+v8_007_provider_contact_allowed: false
+v8_007_image_generation_allowed: false
+v8_007_memory_write_allowed: false
+v8_007_runtime_execution_allowed: false
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate
-recommended_next: v8_003b_A4_8_rule_intake_smoke_test
+recommended_next: v8_008_A4_8_controlled_failure_recovery_drill
 ```
 
 ## Product Direction

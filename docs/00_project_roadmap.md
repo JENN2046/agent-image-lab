@@ -18,9 +18,9 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Current synced baseline before v8_003a backfill: 5d66df0 on master == origin/master.
-Current mainline state: v8_003a A4.8 Safe Project Operator Rail package; generation remains stopped.
-Current phase id: v8_003a_A4_8_safe_project_operator_rail_package.
+Current synced baseline before v8_007 mutation live run: e059ba49e31d69770d50e355d433f1f066280f03 on master == origin/master.
+Current mainline state: v8_007 A4.8 mutation live run docs-only validation; generation remains stopped.
+Current phase id: v8_007_A4_8_mutation_live_run_docs_only.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
@@ -208,10 +208,17 @@ v8_003a_provider_contact_allowed: false.
 v8_003a_image_generation_allowed: false.
 v8_003a_memory_write_allowed: false.
 v8_003a_runtime_execution_allowed: false.
+v8_003b_A4_8_rule_intake_smoke_test_passed: true.
+v8_006_A4_8_state_and_rule_intake_review_passed: true.
+v8_007_A4_8_mutation_live_run_docs_only_started: true.
+v8_007_provider_contact_allowed: false.
+v8_007_image_generation_allowed: false.
+v8_007_memory_write_allowed: false.
+v8_007_runtime_execution_allowed: false.
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed.
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate.
-Recommended next: v8_003b_A4_8_rule_intake_smoke_test（只读验证 Codex 是否能正确复述 A4.8 权限和 hard stops）.
-auto_execution_allowed_for_next: false.
+Recommended next: v8_008_A4_8_controlled_failure_recovery_drill（可控 validation failure 修复演练）.
+auto_execution_allowed_for_next: true under the explicitly selected A4.8 comprehensive validation track.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)
 ```
@@ -531,7 +538,9 @@ daily_note_called: false
 29. v8_005_next_route_decision_gate 已整理下一阶段路线选项：多产品 prompt package 扩展、Review Console 产品化规划、memory planning、production readiness planning、人工修图外部执行；推荐低风险候选为多产品 prompt package 扩展，但必须等待人工选择。
 30. recommended next after v8.005: pending_human_route_selection（等待项目 owner 选择下一条 V8 路线）。
 31. v8_003a_A4_8_safe_project_operator_rail_package 已作为治理/运营轨道回填创建：A4.8 = Safe Project Operator Rail / 安全项目运营轨；它可以自动推进低风险本地项目工作、验证、exact stage、commit、safe push，但不是 A5，不授权 provider contact、image generation、secret read、memory write、runtime、production_candidate_002、Batch 005、runs output commit、accepted_samples write、第五次生成、依赖变更、tag/release/deploy。
-32. recommended next: v8_003b_A4_8_rule_intake_smoke_test（只读验证 Codex 是否能正确复述 A4.8 权限和 hard stops）。
+32. v8_003b_A4_8_rule_intake_smoke_test 已通过，只读验证 Codex 能正确复述 A4.8 权限和 hard stops。
+33. v8_006_A4_8_state_and_rule_intake_review 已只读确认当前状态、规则源和综合测试计划。
+34. v8_007_A4_8_mutation_live_run_docs_only 正在验证 A4.8 能完成低风险 docs-only 修改、validation、exact stage、guarded commit 和 safe push；recommended next 为 v8_008_A4_8_controlled_failure_recovery_drill。
 
 ## 永久安全门
 

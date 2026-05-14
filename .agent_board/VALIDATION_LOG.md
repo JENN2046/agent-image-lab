@@ -1,5 +1,31 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v8.007-A4.8-MUTATION-LIVE-RUN
+
+Task:
+
+```text
+Run the A4.8 mutation live test with docs-only status updates.
+```
+
+Planned commands:
+
+```text
+git status -sb
+git diff --check
+node scripts/validate_agent_board_state.js
+node scripts/validate_current_state_alignment.js
+node scripts/validate_native_doubao_sandbox.js
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+```
+
+Boundary:
+
+```text
+No A5, provider contact, image generation, env secret read, DailyNote write, VCP memory write, runtime execution, production_candidate_002, Batch 005, dependency change, package.json change, or runs output commit is authorized or performed.
+```
+
 ## VALIDATION-20260514-V8-003A-A4-8-SAFE-PROJECT-OPERATOR-RAIL
 
 Task:

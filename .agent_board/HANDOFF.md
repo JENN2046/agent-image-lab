@@ -3,14 +3,14 @@
 ## Handoff Summary
 
 ```text
-Status: v8_003a_A4_8_safe_project_operator_rail_package is the current governance/product-ops rail package; generation remains stopped, and no new product route is started.
-Reason: v8.005 presented route options and stopped for human selection; this backfill defines A4.8 Safe Project Operator Rail / 安全项目运营轨 so future local project operations can proceed safely before hard stops.
+Status: v8_007_A4_8_mutation_live_run_docs_only is the current A4.8 comprehensive validation step; generation remains stopped, and no new product route is started.
+Reason: v8.006 read-only intake confirmed A4.8 state/rules, and v8.007 now tests a low-risk docs-only mutation with validation, exact staging, guarded commit, and safe push.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
-Current synced HEAD before v8_003a patch: 5d66df0 docs: add v8 next route decision gate
+Current synced HEAD before v8_007 patch: e059ba49 docs: add A4.8 safe project operator rail package
 ahead_behind: 0/0
 Worktree: clean before v8_003a A4.8 rail package patch; v7.281 output remains ignored under runs/
-Current status: v8_003a_A4_8_safe_project_operator_rail_package
+Current status: v8_007_A4_8_mutation_live_run_docs_only
 A4_8_safe_project_operator_rail_created: true
 A4_8_safe_project_operator_rail_zh: 安全项目运营轨
 A4_8_is_not_A5: true
@@ -228,8 +228,12 @@ v8_003a_safe_project_operator_rail_ref: docs/A4_8_SAFE_PROJECT_OPERATOR_RAIL.md
 v8_003a_safe_push_policy_ref: docs/SAFE_PUSH_POLICY.md
 v8_003a_validation_selection_matrix_ref: docs/VALIDATION_SELECTION_MATRIX.md
 v8_003a_failure_recovery_ref: docs/AUTOPILOT_FAILURE_RECOVERY.md
-recommended_next: v8_003b_A4_8_rule_intake_smoke_test
-recommended_next_zh: 只读验证 Codex 是否能正确复述 A4.8 权限和 hard stops
+recommended_next: v8_008_A4_8_controlled_failure_recovery_drill
+recommended_next_zh: 可控 validation failure 修复演练
+v8_003b_A4_8_rule_intake_smoke_test: passed
+v8_006_A4_8_state_and_rule_intake_review: passed_read_only
+v8_007_A4_8_mutation_live_run_docs_only: in_progress
+v8_007_phase_record_ref: docs/v8_007_A4_8_mutation_live_run_docs_only.md
 provider_contact_after_v7_274: false
 image_generation_after_v7_274: false
 human_review_required_now: false

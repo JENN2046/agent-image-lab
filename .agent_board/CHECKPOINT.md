@@ -1,5 +1,25 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.007 A4.8 Mutation Live Run Docs Only
+
+```text
+phase_id: v8_007_A4_8_mutation_live_run_docs_only
+status: in_progress
+source_head: e059ba49e31d69770d50e355d433f1f066280f03
+purpose: verify A4.8 can make a low-risk docs-only mutation, update status surfaces, validate, exact stage, guarded commit, and safe push
+phase_record_ref: docs/v8_007_A4_8_mutation_live_run_docs_only.md
+provider_contact: false
+image_generation: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+recommended_next: v8_008_A4_8_controlled_failure_recovery_drill
+```
+
 # v8.003a A4.8 Safe Project Operator Rail Package
 
 ```text

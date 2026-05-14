@@ -81,14 +81,16 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-none
+v8_007_A4_8_mutation_live_run_docs_only — docs-only mutation live run; validates A4.8 can update status surfaces, run validation, exact stage, guarded commit, and safe push without starting a product route.
 ```
 
 ### todo
 
 ```text
-v8_003b_A4_8_rule_intake_smoke_test — 只读验证 Codex 是否能正确复述 A4.8 权限和 hard stops；auto_execution_allowed=false。
-pending_human_route_selection — 等待项目 owner 选择下一条 V8 路线；blocked until v8_003b is either completed or explicitly skipped by the owner.
+v8_008_A4_8_controlled_failure_recovery_drill — 可控 markdown whitespace failure 修复演练；auto_execution_allowed=true inside the selected A4.8 comprehensive validation track.
+v8_009_A4_8_hard_stop_probe — read-only high-risk request refusal probe.
+v8_010_A4_8_comprehensive_validation_closeout — close out A4.8 comprehensive validation and stop at human route selection.
+pending_human_route_selection — 等待项目 owner 选择下一条 V8 路线；blocked until A4.8 comprehensive validation closes.
 ```
 
 ### recommended_next_after_v7_285
@@ -195,6 +197,10 @@ v8_003a_image_generation_allowed: false
 v8_003a_memory_write_allowed: false
 v8_003a_runtime_execution_allowed: false
 recommended_next_after_v8_003a: v8_003b_A4_8_rule_intake_smoke_test
+v8_003b_A4_8_rule_intake_smoke_test: passed
+v8_006_A4_8_state_and_rule_intake_review: passed_read_only
+v8_007_A4_8_mutation_live_run_docs_only: in_progress
+recommended_next_after_v8_007: v8_008_A4_8_controlled_failure_recovery_drill
 ```
 
 ### done
