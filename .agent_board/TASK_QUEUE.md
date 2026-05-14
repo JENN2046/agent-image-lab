@@ -9,6 +9,26 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v9_004_delivery_readiness_review_or_closeout_decision_gate.
+Purpose: present Option A/B/C for ceramic_mug_v4's next delivery-readiness path; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, or commercial delivery execution.
+source_phase: v9_003_delivery_readiness_acceptance_criteria_gate.
+source_commit: f5b5c60f670d1bf85d0d9e2aa0b14c24c8315af2.
+selected_route: delivery_readiness_layer.
+selected_asset: ceramic_mug_v4.
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg.
+current_asset_status: accepted_candidate_with_minor_retouch.
+delivery_readiness_package_created: true.
+delivery_readiness_acceptance_criteria_created: true.
+commercial_delivery_ready: false.
+options_presented: enter_commercial_delivery_review_planning | supplement_delivery_materials_before_review | close_first_asset_delivery_readiness_package.
+recommended_option: enter_commercial_delivery_review_planning.
+secondary_safe_option: supplement_delivery_materials_before_review.
+human_decision_required: true.
+memory_write_allowed: false.
+production_candidate_002_allowed: false.
+recommended_next: pending_human_delivery_readiness_path_selection.
+recommended_next_auto_execution_allowed: false.
+---
 Current active gate: v9_003_delivery_readiness_acceptance_criteria_gate.
 Purpose: define pass / needs_retouch / reject criteria for ceramic_mug_v4 before commercial delivery review; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, or commercial delivery execution.
 source_phase: v9_002_delivery_readiness_package_gate.

@@ -1,5 +1,40 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v9.004-DELIVERY-READINESS-REVIEW-OR-CLOSEOUT-DECISION-GATE
+
+Task:
+
+```text
+Present Option A/B/C for ceramic_mug_v4's next delivery-readiness path after the readiness package and acceptance criteria were created.
+```
+
+Result:
+
+```text
+selected_route: delivery_readiness_layer
+selected_asset: ceramic_mug_v4
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+current_asset_status: accepted_candidate_with_minor_retouch
+delivery_readiness_package_created: true
+delivery_readiness_acceptance_criteria_created: true
+commercial_delivery_ready: false
+options_presented: enter_commercial_delivery_review_planning | supplement_delivery_materials_before_review | close_first_asset_delivery_readiness_package
+recommended_option: enter_commercial_delivery_review_planning
+secondary_safe_option: supplement_delivery_materials_before_review
+human_decision_required: true
+accepted_samples_written: false
+runs_output_committed: false
+memory_write_performed: false
+production_candidate_002_started: false
+validation_result: passed
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, secret print, DailyNote write, VCP memory write, memory_write_path, production_candidate_002, Batch 005, runtime/CDP/bridge/MCP, dependency change, package.json change, accepted_samples write, runs output commit, or commercial delivery execution is performed by v9.004.
+```
+
 ## VALIDATION-20260514-v9.003-DELIVERY-READINESS-ACCEPTANCE-CRITERIA-GATE
 
 Task:

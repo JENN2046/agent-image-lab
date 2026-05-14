@@ -1,10 +1,49 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V9.004 Delivery Readiness Review Or Closeout Decision Gate
+
+```text
+phase_id: v9_004_delivery_readiness_review_or_closeout_decision_gate
+status: completed_validated_guarded_commit_and_push_authorized
+source_phase: v9_003_delivery_readiness_acceptance_criteria_gate
+source_commit: f5b5c60f670d1bf85d0d9e2aa0b14c24c8315af2
+purpose: present ceramic_mug_v4 delivery-readiness path options before any commercial delivery review
+phase_record_ref: docs/v9_004_delivery_readiness_review_or_closeout_decision_gate.md
+selected_route: delivery_readiness_layer
+selected_asset: ceramic_mug_v4
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+current_asset_status: accepted_candidate_with_minor_retouch
+delivery_readiness_package_created: true
+delivery_readiness_acceptance_criteria_created: true
+commercial_delivery_ready: false
+options_presented: enter_commercial_delivery_review_planning | supplement_delivery_materials_before_review | close_first_asset_delivery_readiness_package
+recommended_option: enter_commercial_delivery_review_planning
+secondary_safe_option: supplement_delivery_materials_before_review
+human_decision_required: true
+memory_suitability: deferred
+memory_write_allowed: false
+production_candidate_002_allowed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+recommended_next: pending_human_delivery_readiness_path_selection
+```
+
 # V9.003 Delivery Readiness Acceptance Criteria Gate
 
 ```text
 phase_id: v9_003_delivery_readiness_acceptance_criteria_gate
-status: completed_validated_guarded_commit_and_push_authorized
+status: completed_remote_synced_after_guarded_push
 source_phase: v9_002_delivery_readiness_package_gate
 source_commit: 3b178749d28fc38ecf2f3fff860b9d8a3d8c11fd
 purpose: define ceramic_mug_v4 acceptance criteria before commercial delivery review

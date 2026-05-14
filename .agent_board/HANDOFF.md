@@ -3,6 +3,38 @@
 ## Handoff Summary
 
 ```text
+Status: v9_004_delivery_readiness_review_or_closeout_decision_gate is the current V9 first-asset path decision gate.
+Reason: v9.003 created acceptance criteria; v9.004 presents Option A/B/C for whether ceramic_mug_v4 should enter commercial delivery review planning, receive more delivery materials, or close the first asset package.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v9.004 patch: f5b5c60 docs: add delivery readiness acceptance criteria for ceramic mug
+ahead_behind: 0/0
+Worktree: clean before v9.004 patch; generated runs output remains ignored and is not staged or committed
+Current status: v9_004_delivery_readiness_review_or_closeout_decision_gate
+selected_route: delivery_readiness_layer
+selected_asset: ceramic_mug_v4
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+current_asset_status: accepted_candidate_with_minor_retouch
+delivery_readiness_package_created: true
+delivery_readiness_acceptance_criteria_created: true
+commercial_delivery_ready: false
+options_presented: enter_commercial_delivery_review_planning | supplement_delivery_materials_before_review | close_first_asset_delivery_readiness_package
+recommended_option: enter_commercial_delivery_review_planning
+secondary_safe_option: supplement_delivery_materials_before_review
+human_decision_required: true
+memory_suitability: deferred
+memory_write_allowed: false
+production_candidate_002_allowed: false
+v9_004_provider_contact: false
+v9_004_image_generation: false
+v9_004_retry: false
+v9_004_env_local_secret_value_read: false
+v9_004_memory_write: false
+v9_004_accepted_samples_written: false
+v9_004_runs_output_committed: false
+recommended_next: pending_human_delivery_readiness_path_selection
+recommended_next_auto_execution_allowed: false
+---
 Status: v9_003_delivery_readiness_acceptance_criteria_gate is the current V9 delivery readiness acceptance criteria gate.
 Reason: v9.002 created the ceramic_mug_v4 delivery readiness package; v9.003 defines pass / needs_retouch / reject criteria before any commercial delivery review.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
