@@ -1,10 +1,51 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V9.017 Sports Visor Commercial Delivery Review Planning Gate
+
+```text
+phase_id: v9_017_sports_visor_commercial_delivery_review_planning_gate
+status: completed_pending_validation_commit_push
+source_phase: v9_016_sports_visor_delivery_readiness_acceptance_criteria_gate
+source_commit: fbb9009981b6b8e829aa66626e66bdac6b393df4
+purpose: create sports_visor_v8_033 commercial delivery review planning
+phase_record_ref: docs/v9_017_sports_visor_commercial_delivery_review_planning_gate.md
+commercial_delivery_review_plan_ref: docs/commercial_delivery_review_plan_multi_color_mesh_sports_visor_v8_033.md
+selected_route: delivery_readiness_layer
+selected_asset: sports_visor_v8_033
+selected_product: multi_color_mesh_sports_visor
+source_output: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg
+current_asset_status: accepted_candidate_with_minor_watch_items
+delivery_readiness_package_created: true
+acceptance_criteria_created: true
+commercial_delivery_review_planning_created: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+memory_write_allowed: false
+production_candidate_002_allowed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+image_editing_performed: false
+derivative_image_created: false
+real_commercial_delivery_execution: false
+recommended_next: v9_018_sports_visor_commercial_delivery_review_execution_decision_gate
+```
+
 # V9.016 Sports Visor Delivery Readiness Acceptance Criteria Gate
 
 ```text
 phase_id: v9_016_sports_visor_delivery_readiness_acceptance_criteria_gate
-status: completed_pending_validation_commit_push
+status: completed_remote_synced_after_guarded_push
 source_phase: v9_015_sports_visor_delivery_readiness_package_gate
 source_commit: 645e00607cbe085b4e58f32df61ad6aa9c9975d9
 purpose: define sports_visor_v8_033 delivery readiness acceptance criteria
