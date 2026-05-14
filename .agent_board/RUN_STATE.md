@@ -9,24 +9,24 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v8_012_second_product_candidate_and_brief_gate. Route B is selected, the second product is a multi-color mesh sports visor, and generation remains stopped.
+Agent Image Lab is in v8_013_second_product_prompt_package_draft_gate. The second product brief exists, the prompt package draft is being created, and generation remains stopped.
 ```
 
 ## Current Phase
 
 ```text
-v8.012 Second Product Candidate And Brief Gate
-phase_id: v8_012_second_product_candidate_and_brief_gate
-source_phase: v8_011_route_B_multi_product_expansion_selection_gate
+v8.013 Second Product Prompt Package Draft Gate
+phase_id: v8_013_second_product_prompt_package_draft_gate
+source_phase: v8_012_second_product_candidate_and_brief_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
-status: second_product_brief_in_progress
-source_commit: 5fae1c0dc3c24a59c1f0a7d3ad8d383a4446dc08
-source_message: docs: select route B multi product prompt expansion
+status: second_product_prompt_package_draft_in_progress
+source_commit: 23066edc1b0235671fe0d0f7c6ae1ac742275af3
+source_message: docs: add second product brief for prompt expansion
 branch: master tracking origin/master
 Worktree: clean before v8_003a A4.8 rail package patch; generated v7.281 output remains ignored under runs/
 worktree_start_clean: true
-origin_sync_current: local HEAD equals origin/master at 5fae1c0
+origin_sync_current: local HEAD equals origin/master at 23066ed
 ahead_behind: 0/0
 A4_8_safe_project_operator_rail_created: true
 A4_8_safe_project_operator_rail_zh: 安全项目运营轨
@@ -122,8 +122,8 @@ output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug
 auto_retry_for_second_trial: false
 stop_after_generation_for_second_trial: true
 human_review_required_after_generation: true
-recommended_next: v8_013_second_product_prompt_package_draft_gate
-recommended_next_zh: 第二商品 prompt package 草案门
+recommended_next: v8_014_second_product_prompt_static_review_gate
+recommended_next_zh: 第二商品 prompt package 静态审查门
 v8_003b_A4_8_rule_intake_smoke_test: passed
 v8_006_A4_8_state_and_rule_intake_review: passed_read_only
 v8_007_A4_8_mutation_live_run_docs_only: completed_remote_synced_after_guarded_push
@@ -148,6 +148,9 @@ v8_012_second_product_candidate_and_brief_gate: in_progress
 v8_012_selected_second_product: multi_color_mesh_sports_visor
 v8_012_second_product_brief_created: true
 v8_012_second_product_brief_ref: briefs/product_brief_multi_color_mesh_sports_visor_v1.md
+v8_013_second_product_prompt_package_draft_gate: in_progress
+v8_013_second_product_prompt_package_created: true
+v8_013_second_product_prompt_package_ref: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
 v8_route_selection_completed: true
 selected_v8_route: final_retouch_planning
 selected_v8_route_zh: 最终修图规划

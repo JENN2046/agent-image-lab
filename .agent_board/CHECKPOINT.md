@@ -1,10 +1,32 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.013 Second Product Prompt Package Draft Gate
+
+```text
+phase_id: v8_013_second_product_prompt_package_draft_gate
+status: in_progress
+source_commit: 23066edc1b0235671fe0d0f7c6ae1ac742275af3
+purpose: create a non-executing prompt package draft for the multi-color mesh sports visor
+phase_record_ref: docs/v8_013_second_product_prompt_package_draft_gate.md
+prompt_package_ref: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
+A5_authorization_required_later: true
+provider_contact: false
+image_generation: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+recommended_next: v8_014_second_product_prompt_static_review_gate
+```
+
 # v8.012 Second Product Candidate And Brief Gate
 
 ```text
 phase_id: v8_012_second_product_candidate_and_brief_gate
-status: in_progress
+status: completed_remote_synced_after_guarded_push
 source_commit: 5fae1c0dc3c24a59c1f0a7d3ad8d383a4446dc08
 purpose: select the second Route B product and create a product brief for prompt package drafting
 phase_record_ref: docs/v8_012_second_product_candidate_and_brief_gate.md

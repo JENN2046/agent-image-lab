@@ -81,13 +81,12 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-v8_012_second_product_candidate_and_brief_gate — select the second product candidate and create its product brief.
+v8_013_second_product_prompt_package_draft_gate — create the second product prompt package draft.
 ```
 
 ### todo
 
 ```text
-v8_013_second_product_prompt_package_draft_gate — create the second product prompt package draft.
 v8_014_second_product_prompt_static_review_gate — statically review the second product prompt package and stop before A5.
 ```
 
@@ -214,6 +213,9 @@ v8_012_second_product_candidate_and_brief_gate: in_progress
 v8_012_selected_second_product: multi_color_mesh_sports_visor
 v8_012_second_product_brief_ref: briefs/product_brief_multi_color_mesh_sports_visor_v1.md
 recommended_next_after_v8_012: v8_013_second_product_prompt_package_draft_gate
+v8_013_second_product_prompt_package_draft_gate: in_progress
+v8_013_second_product_prompt_package_ref: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
+recommended_next_after_v8_013: v8_014_second_product_prompt_static_review_gate
 ```
 
 ### done

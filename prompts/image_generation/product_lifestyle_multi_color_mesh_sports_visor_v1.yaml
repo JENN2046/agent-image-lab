@@ -1,0 +1,172 @@
+prompt_package_id: product_lifestyle_multi_color_mesh_sports_visor_v1
+version: v1
+language: en
+mode: text_to_image
+reference_policy: text_only_no_image_input
+
+title_cn: "多色透气网眼运动空顶帽产品图 v1"
+purpose_cn: "基于第二商品 brief 创建可审查 prompt package 草案；不生成图片，不调用 provider，不写 memory"
+product_brief_ref: briefs/product_brief_multi_color_mesh_sports_visor_v1.md
+status_cn: "Route B 第二商品 prompt package 草案；只能用于人工审查和未来独立 A5 授权草案输入"
+
+product_identity:
+  product_name: multi-color breathable mesh sports visor
+  product_name_zh: 多色透气网眼运动空顶帽
+  product_category: sports_headwear
+  product_type: open-top sun visor
+  target_use:
+    - running
+    - tennis
+    - golf
+    - hiking
+    - summer sun protection
+
+product_structure:
+  open_top_crown: true
+  curved_front_brim: true
+  breathable_mesh_side_panels: true
+  soft_fabric_sweatband: true
+  adjustable_back_closure: true
+  full_crown_hat_allowed: false
+  baseball_cap_drift_allowed: false
+  cycling_cap_drift_allowed: false
+  bucket_hat_drift_allowed: false
+
+material_texture:
+  primary_material: lightweight matte athletic fabric
+  mesh_texture: fine breathable mesh panels with visible weave
+  brim_texture: structured but soft fabric-covered curved brim
+  stitching: subtle clean sportswear stitching
+  finish: matte textile, not glossy, plastic, rubber, or metallic
+
+color_collection:
+  collection_type: coordinated multi-color series
+  color_count_target: 4_to_6_visible_colorways
+  preferred_colorways:
+    - white
+    - light gray
+    - beige
+    - soft pink
+    - sky blue
+    - mint green
+  dark_colorways_supporting_only:
+    - black
+    - navy
+  color_relationship: light neutral or pastel visor leads the composition, darker items only support
+
+hero_color_priority:
+  lead_color_family: light_neutral_or_soft_pastel
+  dark_color_dominance_allowed: false
+  black_or_navy_as_hero_allowed: false
+
+shot_type:
+  primary: ecommerce_color_collection_hero
+  alternate_allowed_later: product_only_light_lifestyle_scene
+  aspect_ratio: "4:5"
+  output_count_request: 1
+
+composition:
+  layout: clean grouped product family display
+  product_priority: product_first
+  framing: full visors visible, no clipped brim edges
+  arrangement: one hero visor slightly forward with supporting colorways behind or beside it
+  no_people: true
+  no_hands: true
+  no_faces: true
+
+environment:
+  primary_background: bright clean neutral studio surface
+  secondary_background_language: subtle airy summer daylight cue only if it does not overpower the product
+  props_allowed: false
+  readable_text_allowed: false
+  logo_allowed: false
+
+lighting:
+  key_light: soft bright commercial daylight
+  fill_light: gentle even fill preserving mesh texture
+  shadow: clean soft contact shadows under each visor
+  avoid: harsh shadows, muddy background, blown highlights, color cast that changes product colors
+
+camera_language:
+  angle: slightly elevated three-quarter product view
+  lens_feel: clean ecommerce catalog lens, natural product proportions
+  depth_of_field: enough depth to keep all colorways legible
+  crop_safety: every visor brim and open-top structure remains visible
+
+positive_prompt: |
+  Clean premium ecommerce product photo of a coordinated multi-color collection of breathable open-top sports sun visors. One light neutral or soft pastel visor is the hero product, with supporting colorways arranged neatly behind or beside it. Each visor has a clear open-top crown, smooth curved front brim, lightweight matte athletic fabric, visible breathable mesh side panels, subtle clean stitching, soft fabric sweatband, and a simple adjustable back closure. The product must read unmistakably as an open-top sports visor, not a baseball cap or cycling cap. Fresh summer sports feeling, bright neutral studio surface, soft commercial daylight, clean gentle shadows, accurate pastel and light neutral colors, product-first composition, full visors visible, no cropped brim edges, no people, no hands, no faces, no logo, no readable text, no props, catalog-ready product image, airy lightweight breathable material detail, vertical 4:5.
+
+negative_constraints:
+  forbidden_subjects:
+    - baseball cap
+    - cycling cap
+    - bucket hat
+    - helmet
+    - full crown hat
+    - people
+    - faces
+    - hands
+    - props
+    - extra unrelated products
+  forbidden_text_or_logo:
+    - readable text
+    - brand logo
+    - watermark
+    - label-like marks
+  forbidden_style_drift:
+    - dark black-dominant composition
+    - navy-dominant composition
+    - neon color dominance
+    - fashion model lifestyle scene
+    - cluttered outdoor background
+    - plastic or rubber look
+    - metallic shell
+  forbidden_artifacts:
+    - closed crown
+    - missing open-top structure
+    - warped brim
+    - flat broken brim
+    - mesh panels missing
+    - fabric texture lost
+    - duplicate impossible straps
+    - inconsistent color family
+    - background overpowering product
+
+negative_prompt: |
+  baseball cap, cycling cap, bucket hat, helmet, full crown hat, closed crown, people, face, hands, model wearing hat, hair, readable text, brand logo, watermark, props, sunglasses, phone, sports equipment, extra unrelated objects, black-dominant image, navy-dominant image, neon-dominant colors, dark moody lighting, cluttered background, busy lifestyle scene, product too small, cropped brim, cropped visor, warped brim, flat broken brim, missing mesh, plastic texture, rubber helmet texture, metallic shell, glossy hard plastic, malformed strap, duplicate strap, inconsistent product family, random marks, noisy image, low resolution
+
+acceptance_criteria:
+  product_identity_match: true
+  open_top_visor_structure_clear: true
+  sports_visor_not_baseball_cap: true
+  sports_visor_not_cycling_cap: true
+  curved_brim_plausible: true
+  mesh_panels_visible: true
+  lightweight_fabric_texture_visible: true
+  multi_color_collection_legible: true
+  light_or_pastel_hero_color: true
+  black_or_dark_navy_not_dominant: true
+  product_first_composition: true
+  no_people_faces_hands: true
+  no_logo_or_readable_text: true
+  no_props_or_background_distraction: true
+  A5_authorization_required_later: true
+  plugin_call_allowed_by_this_file: false
+  image_generation_allowed_by_this_file: false
+  memory_write_allowed: false
+
+human_review_checklist:
+  - "Does the product read as an open-top sports visor?"
+  - "Are mesh panels visible and textile-like?"
+  - "Is the curved brim clean and plausible?"
+  - "Do multiple colorways look coordinated?"
+  - "Does a light or pastel visor lead the image?"
+  - "Are black or navy colorways only supporting?"
+  - "Are there no people, hands, faces, logo, text, or props?"
+  - "Is the package narrow enough for a future single A5 authorization?"
+
+A5_authorization_required_later: true
+plugin_call_allowed_by_this_file: false
+image_generation_allowed_by_this_file: false
+memory_write_allowed: false
+daily_note_write_allowed: false
