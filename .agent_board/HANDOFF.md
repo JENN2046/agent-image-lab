@@ -3,6 +3,36 @@
 ## Handoff Summary
 
 ```text
+Status: v9_003_delivery_readiness_acceptance_criteria_gate is the current V9 delivery readiness acceptance criteria gate.
+Reason: v9.002 created the ceramic_mug_v4 delivery readiness package; v9.003 defines pass / needs_retouch / reject criteria before any commercial delivery review.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v9.003 patch: 3b178749 docs: add delivery readiness package for ceramic mug
+ahead_behind: 0/0
+Worktree: clean before v9.003 patch; generated runs output remains ignored and is not staged or committed
+Current status: v9_003_delivery_readiness_acceptance_criteria_gate
+selected_route: delivery_readiness_layer
+selected_asset: ceramic_mug_v4
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+current_asset_status: accepted_candidate_with_minor_retouch
+target_status_after_future_review: commercial_delivery_review_ready
+commercial_delivery_ready_now: false
+acceptance_criteria_created: true
+acceptance_criteria_ref: docs/delivery_readiness_acceptance_criteria_matte_ceramic_mug_v4.md
+phase_record_ref: docs/v9_003_delivery_readiness_acceptance_criteria_gate.md
+memory_suitability: deferred
+memory_write_allowed: false
+production_candidate_002_allowed: false
+v9_003_provider_contact: false
+v9_003_image_generation: false
+v9_003_retry: false
+v9_003_env_local_secret_value_read: false
+v9_003_memory_write: false
+v9_003_accepted_samples_written: false
+v9_003_runs_output_committed: false
+recommended_next: v9_004_delivery_readiness_review_or_closeout_decision_gate
+recommended_next_auto_execution_allowed: false
+---
 Status: v9_002_delivery_readiness_package_gate is the current V9 delivery readiness package gate.
 Reason: v9.001 selected ceramic_mug_v4 as the first delivery-readiness asset; v9.002 creates its readiness package without commercial delivery execution, provider contact, generation, memory write, accepted_samples write, or production promotion.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

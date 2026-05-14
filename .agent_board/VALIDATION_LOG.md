@@ -1,5 +1,39 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v9.003-DELIVERY-READINESS-ACCEPTANCE-CRITERIA-GATE
+
+Task:
+
+```text
+Define pass / needs_retouch / reject criteria for ceramic_mug_v4 before commercial delivery review.
+```
+
+Result:
+
+```text
+selected_route: delivery_readiness_layer
+selected_asset: ceramic_mug_v4
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+current_asset_status: accepted_candidate_with_minor_retouch
+target_status_after_future_review: commercial_delivery_review_ready
+acceptance_criteria_created: true
+acceptance_criteria_ref: docs/delivery_readiness_acceptance_criteria_matte_ceramic_mug_v4.md
+phase_record_ref: docs/v9_003_delivery_readiness_acceptance_criteria_gate.md
+commercial_delivery_ready: false
+memory_suitability: deferred
+accepted_samples_written: false
+runs_output_committed: false
+memory_write_performed: false
+production_candidate_002_started: false
+validation_result: passed
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, secret print, DailyNote write, VCP memory write, memory_write_path, production_candidate_002, Batch 005, runtime/CDP/bridge/MCP, dependency change, package.json change, accepted_samples write, runs output commit, or commercial delivery execution is performed by v9.003.
+```
+
 ## VALIDATION-20260514-v9.002-DELIVERY-READINESS-PACKAGE-GATE
 
 Task:

@@ -1,10 +1,46 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V9.003 Delivery Readiness Acceptance Criteria Gate
+
+```text
+phase_id: v9_003_delivery_readiness_acceptance_criteria_gate
+status: completed_validated_guarded_commit_and_push_authorized
+source_phase: v9_002_delivery_readiness_package_gate
+source_commit: 3b178749d28fc38ecf2f3fff860b9d8a3d8c11fd
+purpose: define ceramic_mug_v4 acceptance criteria before commercial delivery review
+phase_record_ref: docs/v9_003_delivery_readiness_acceptance_criteria_gate.md
+acceptance_criteria_ref: docs/delivery_readiness_acceptance_criteria_matte_ceramic_mug_v4.md
+selected_route: delivery_readiness_layer
+selected_asset: ceramic_mug_v4
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+current_asset_status: accepted_candidate_with_minor_retouch
+target_status_after_future_review: commercial_delivery_review_ready
+acceptance_criteria_created: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+memory_write_allowed: false
+production_candidate_002_allowed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+recommended_next: v9_004_delivery_readiness_review_or_closeout_decision_gate
+```
+
 # V9.002 Delivery Readiness Package Gate
 
 ```text
 phase_id: v9_002_delivery_readiness_package_gate
-status: completed_validated_guarded_commit_and_push_authorized
+status: completed_remote_synced_after_guarded_push
 source_phase: v9_001_delivery_readiness_scope_and_asset_selection_plus_code_surface_guard_gate
 source_commit: 6a50b7fbcc0e57aa52b798ad111a9a642c81974b
 purpose: create the ceramic_mug_v4 delivery readiness package without commercial delivery execution
