@@ -1,10 +1,40 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.025 Second Product Next Minimal Generation Authorization Decision Gate
+
+```text
+phase_id: v8_025_second_product_next_minimal_generation_authorization_decision_gate
+status: in_progress
+source_phase: v8_024_second_product_prompt_v2_static_review_gate
+source_commit: bcf0b556d7fdc9b63ad62386d0bf338a70e74b68
+purpose: present Option A/B/C for whether prompt v2 should get a new minimal generation authorization
+phase_record_ref: docs/v8_025_second_product_next_minimal_generation_authorization_decision_gate.md
+source_output: runs/real_generation/v8_021_multi_color_mesh_sports_visor_second_trial/native_doubao_1778733554203_0.jpg
+source_asset_status: needs_revision
+prompt_v2_path: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
+prompt_v2_static_review_result: pass_ready_for_authorization_decision
+A5_authorization_created: false
+options_presented: authorize_next_minimal_real_generation_trial | more_static_prompt_payload_review | stop_route_B_generation_here
+recommended_option: authorize_next_minimal_real_generation_trial
+human_decision_required: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+recommended_next: pending_human_generation_authorization_for_prompt_v2
+```
+
 # v8.024 Second Product Prompt V2 Static Review Gate
 
 ```text
 phase_id: v8_024_second_product_prompt_v2_static_review_gate
-status: in_progress
+status: completed_remote_synced_after_guarded_push
 source_phase: v8_023_second_product_prompt_revision_plan_from_first_real_output
 source_commit: f95b118decf6d4425a1ea9818b0706c724c98626
 purpose: statically review prompt v2 against v8.021 review gaps and stop before authorization

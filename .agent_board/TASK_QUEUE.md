@@ -81,13 +81,13 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-v8_024_second_product_prompt_v2_static_review_gate — statically review prompt v2 against the v8.021 review gaps; do not generate or retry.
+v8_025_second_product_next_minimal_generation_authorization_decision_gate — present Option A/B/C for prompt v2; do not generate or retry.
 ```
 
 ### todo
 
 ```text
-v8_025_second_product_next_minimal_generation_authorization_decision_gate — human decides whether prompt v2 gets a new minimal generation authorization; do not auto-enter execution.
+pending_human_generation_authorization_for_prompt_v2 — wait for human selection; do not auto-enter provider execution.
 ```
 
 ### recommended_next_after_v7_285
@@ -268,10 +268,14 @@ recommended_next_after_v8_022: v8_023_second_product_prompt_revision_plan_from_f
 v8_023_second_product_prompt_revision_plan_from_first_real_output: completed_remote_synced_after_guarded_push
 v8_023_prompt_v2_ref: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
 recommended_next_after_v8_023: v8_024_second_product_prompt_v2_static_review_gate
-v8_024_second_product_prompt_v2_static_review_gate: in_progress
+v8_024_second_product_prompt_v2_static_review_gate: completed_remote_synced_after_guarded_push
 v8_024_prompt_v2_static_review_ref: reviews/v8_024_second_product_prompt_v2_static_review.md
 v8_024_prompt_v2_static_review_result: pass_ready_for_authorization_decision
 recommended_next_after_v8_024: v8_025_second_product_next_minimal_generation_authorization_decision_gate
+v8_025_second_product_next_minimal_generation_authorization_decision_gate: in_progress
+v8_025_options_presented: authorize_next_minimal_real_generation_trial | more_static_prompt_payload_review | stop_route_B_generation_here
+v8_025_recommended_option: authorize_next_minimal_real_generation_trial
+recommended_next_after_v8_025: pending_human_generation_authorization_for_prompt_v2
 ```
 
 ### done

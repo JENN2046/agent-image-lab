@@ -1,5 +1,30 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v8.025-SECOND-PRODUCT-PROMPT-V2-GENERATION-DECISION
+
+Task:
+
+```text
+Present Option A/B/C for whether prompt v2 should receive a new minimal real generation authorization.
+```
+
+Result:
+
+```text
+prompt_v2_path: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
+prompt_v2_static_review_result: pass_ready_for_authorization_decision
+A5_authorization_created: false
+options_presented: authorize_next_minimal_real_generation_trial | more_static_prompt_payload_review | stop_route_B_generation_here
+recommended_option: authorize_next_minimal_real_generation_trial
+human_decision_required: true
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, DailyNote write, VCP memory write, production_candidate_002, Batch 005, dependency change, package.json change, accepted_samples write, or runs output commit is performed by v8.025.
+```
+
 ## VALIDATION-20260514-v8.024-SECOND-PRODUCT-PROMPT-V2-STATIC-REVIEW
 
 Task:

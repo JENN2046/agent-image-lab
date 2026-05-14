@@ -18,9 +18,9 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Current synced baseline before v8_024 prompt v2 static review: f95b118decf6d4425a1ea9818b0706c724c98626 on master == origin/master.
-Current mainline state: v8_024 statically reviews second-product prompt v2 and stops before any next-generation authorization.
-Current phase id: v8_024_second_product_prompt_v2_static_review_gate.
+Current synced baseline before v8_025 decision gate: bcf0b556d7fdc9b63ad62386d0bf338a70e74b68 on master == origin/master.
+Current mainline state: v8_025 presents the human decision for whether prompt v2 should receive a new minimal generation authorization.
+Current phase id: v8_025_second_product_next_minimal_generation_authorization_decision_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
@@ -288,7 +288,13 @@ v8_024_prompt_v2_static_review_completed: true.
 v8_024_prompt_v2_static_review_result: pass_ready_for_authorization_decision.
 v8_024_provider_contact: false.
 v8_024_image_generation: false.
-Recommended next after v8.024: v8_025_second_product_next_minimal_generation_authorization_decision_gate（人工决定是否基于 prompt v2 授权下一次最小真实生成）.
+v8_025_options_presented: authorize_next_minimal_real_generation_trial | more_static_prompt_payload_review | stop_route_B_generation_here.
+v8_025_recommended_option: authorize_next_minimal_real_generation_trial.
+v8_025_human_decision_required: true.
+v8_025_A5_authorization_created: false.
+v8_025_provider_contact: false.
+v8_025_image_generation: false.
+Recommended next: pending_human_generation_authorization_for_prompt_v2（等待人工选择 Option A/B/C；不得自动进入 provider execution）.
 auto_execution_allowed_for_next: false.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)

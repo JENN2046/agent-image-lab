@@ -7,9 +7,9 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Current synced baseline before v8_024 prompt v2 static review: f95b118decf6d4425a1ea9818b0706c724c98626 on master == origin/master.
-Current mainline state: v8_024 statically reviews second-product prompt v2 and stops before any next-generation authorization.
-Current phase id: v8_024_second_product_prompt_v2_static_review_gate.
+Current synced baseline before v8_025 decision gate: bcf0b556d7fdc9b63ad62386d0bf338a70e74b68 on master == origin/master.
+Current mainline state: v8_025 presents the human decision for whether prompt v2 should receive a new minimal generation authorization.
+Current phase id: v8_025_second_product_next_minimal_generation_authorization_decision_gate.
 Prior human route selection gate: v7.261_human_product_route_selection_request_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
@@ -278,11 +278,16 @@ v8_024_prompt_v2_static_review_completed: true.
 v8_024_prompt_v2_static_review_result: pass_ready_for_authorization_decision.
 v8_024_provider_contact: false.
 v8_024_image_generation: false.
+v8_025_options_presented: authorize_next_minimal_real_generation_trial | more_static_prompt_payload_review | stop_route_B_generation_here.
+v8_025_recommended_option: authorize_next_minimal_real_generation_trial.
+v8_025_human_decision_required: true.
+v8_025_A5_authorization_created: false.
+v8_025_provider_contact: false.
+v8_025_image_generation: false.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized now in v8.022: provider contact, image generation, .env.local read, retry, Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, accepted_samples write, runs output commit, tag, release, deploy.
 Not authorized now in v8.023: provider contact, image generation, .env.local read, retry, Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, accepted_samples write, runs output commit, tag, release, deploy.
-Recommended next: v8_024_second_product_prompt_v2_static_review_gate（静态审查第二商品 prompt v2；不生成）.
-Recommended next after v8.024: v8_025_second_product_next_minimal_generation_authorization_decision_gate（人工决定是否基于 prompt v2 授权下一次最小真实生成）.
+Recommended next: pending_human_generation_authorization_for_prompt_v2（等待人工选择 Option A/B/C；不得自动进入 provider execution）.
 auto_execution_allowed_for_next: false.
 ```
 
