@@ -81,13 +81,13 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-v8_013_second_product_prompt_package_draft_gate — create the second product prompt package draft.
+v8_014_second_product_prompt_static_review_gate — statically review the second product prompt package and stop before A5.
 ```
 
 ### todo
 
 ```text
-v8_014_second_product_prompt_static_review_gate — statically review the second product prompt package and stop before A5.
+v8_015_second_product_A5_authorization_decision_gate — human-only decision on whether to authorize one minimal real generation trial for the second product; auto execution is false.
 ```
 
 ### recommended_next_after_v7_285
@@ -216,6 +216,10 @@ recommended_next_after_v8_012: v8_013_second_product_prompt_package_draft_gate
 v8_013_second_product_prompt_package_draft_gate: in_progress
 v8_013_second_product_prompt_package_ref: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
 recommended_next_after_v8_013: v8_014_second_product_prompt_static_review_gate
+v8_014_second_product_prompt_static_review_gate: in_progress
+v8_014_second_product_prompt_static_review_ref: reviews/v8_014_second_product_prompt_static_review.md
+v8_014_second_product_prompt_static_review_result: pass_with_minor_watch_items
+recommended_next_after_v8_014: v8_015_second_product_A5_authorization_decision_gate
 ```
 
 ### done

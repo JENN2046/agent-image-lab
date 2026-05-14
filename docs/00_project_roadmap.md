@@ -18,9 +18,9 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Current synced baseline before v8_013 prompt package draft gate: 23066edc1b0235671fe0d0f7c6ae1ac742275af3 on master == origin/master.
-Current mainline state: v8_013 second product prompt package draft; generation remains stopped.
-Current phase id: v8_013_second_product_prompt_package_draft_gate.
+Current synced baseline before v8_014 prompt static review gate: 52d5cc8dbc9ee5e658e61d0915c818ffe7c11fc8 on master == origin/master.
+Current mainline state: v8_014 second product prompt static review; Route B docs-only sequence is closing and generation remains stopped.
+Current phase id: v8_014_second_product_prompt_static_review_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
@@ -233,10 +233,13 @@ v8_012_second_product_brief_created: true.
 v8_012_second_product_brief_ref: briefs/product_brief_multi_color_mesh_sports_visor_v1.md.
 v8_013_second_product_prompt_package_created: true.
 v8_013_second_product_prompt_package_ref: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml.
+v8_014_second_product_prompt_static_review_completed: true.
+v8_014_second_product_prompt_static_review_result: pass_with_minor_watch_items.
+Route_B_initial_docs_sequence_completed: true.
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed.
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate.
-Recommended next: v8_014_second_product_prompt_static_review_gate（第二商品 prompt package 静态审查门）.
-auto_execution_allowed_for_next: true under the selected A4.8 Route B docs-only track.
+Recommended next: v8_015_second_product_A5_authorization_decision_gate（人工决定是否为第二商品授权一次最小真实生成试跑）.
+auto_execution_allowed_for_next: false.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)
 ```
@@ -565,6 +568,7 @@ daily_note_called: false
 38. v8_011_route_B_multi_product_expansion_selection_gate 已记录人工选择 Route B：多商品 prompt package 扩展；它不改变 v7/v8 陶瓷杯 accepted candidate 状态，不进入 provider/image/memory/production。
 39. v8_012_second_product_candidate_and_brief_gate 已选择第二商品：多色透气网眼运动空顶帽，并创建 brief；不生成图、不调用 provider、不写 memory。
 40. v8_013_second_product_prompt_package_draft_gate 已创建第二商品 prompt package 草案；该文件不是执行授权，不允许 provider 或 image generation。
+41. v8_014_second_product_prompt_static_review_gate 已静态审查第二商品 prompt package，结果为 pass_with_minor_watch_items；Route B 初始 docs-only 序列完成，必须停在 v8_015 人工授权决策前。
 
 ## 永久安全门
 

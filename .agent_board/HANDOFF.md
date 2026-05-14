@@ -3,14 +3,14 @@
 ## Handoff Summary
 
 ```text
-Status: v8_013_second_product_prompt_package_draft_gate is the current A4.8 Route B prompt package draft gate; generation remains stopped, and the package is not execution authorization.
-Reason: v8.012 selected the multi-color mesh sports visor and created the brief; v8.013 drafts the prompt package for static review.
+Status: v8_014_second_product_prompt_static_review_gate is the current A4.8 Route B static review closeout; generation remains stopped and Route B must stop before A5.
+Reason: v8.013 created the second product prompt package draft; v8.014 statically reviews it and closes the initial docs-only Route B sequence.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
-Current synced HEAD before v8_013 patch: 23066ed docs: add second product brief for prompt expansion
+Current synced HEAD before v8_014 patch: 52d5cc8 docs: add second product prompt package draft
 ahead_behind: 0/0
 Worktree: clean before v8_003a A4.8 rail package patch; v7.281 output remains ignored under runs/
-Current status: v8_013_second_product_prompt_package_draft_gate
+Current status: v8_014_second_product_prompt_static_review_gate
 A4_8_safe_project_operator_rail_created: true
 A4_8_safe_project_operator_rail_zh: 安全项目运营轨
 A4_8_is_not_A5: true
@@ -228,8 +228,8 @@ v8_003a_safe_project_operator_rail_ref: docs/A4_8_SAFE_PROJECT_OPERATOR_RAIL.md
 v8_003a_safe_push_policy_ref: docs/SAFE_PUSH_POLICY.md
 v8_003a_validation_selection_matrix_ref: docs/VALIDATION_SELECTION_MATRIX.md
 v8_003a_failure_recovery_ref: docs/AUTOPILOT_FAILURE_RECOVERY.md
-recommended_next: v8_014_second_product_prompt_static_review_gate
-recommended_next_zh: 第二商品 prompt package 静态审查门
+recommended_next: v8_015_second_product_A5_authorization_decision_gate
+recommended_next_zh: 人工决定是否为第二商品授权一次最小真实生成试跑
 v8_003b_A4_8_rule_intake_smoke_test: passed
 v8_006_A4_8_state_and_rule_intake_review: passed_read_only
 v8_007_A4_8_mutation_live_run_docs_only: completed_remote_synced_after_guarded_push
@@ -249,6 +249,10 @@ v8_012_second_product_brief_created: true
 v8_012_second_product_brief_ref: briefs/product_brief_multi_color_mesh_sports_visor_v1.md
 v8_013_second_product_prompt_package_created: true
 v8_013_second_product_prompt_package_ref: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
+v8_014_second_product_prompt_static_review_completed: true
+v8_014_second_product_prompt_static_review_ref: reviews/v8_014_second_product_prompt_static_review.md
+v8_014_second_product_prompt_static_review_result: pass_with_minor_watch_items
+Route_B_initial_docs_sequence_completed: true
 provider_contact_after_v7_274: false
 image_generation_after_v7_274: false
 human_review_required_now: false

@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_synced_head_before_v8_013_prompt_package_draft_gate: 23066edc1b0235671fe0d0f7c6ae1ac742275af3
-origin_master_before_v8_013_prompt_package_draft_gate: 23066edc1b0235671fe0d0f7c6ae1ac742275af3
-status: v8_013_second_product_prompt_package_draft_gate
+latest_synced_head_before_v8_014_prompt_static_review_gate: 52d5cc8dbc9ee5e658e61d0915c818ffe7c11fc8
+origin_master_before_v8_014_prompt_static_review_gate: 52d5cc8dbc9ee5e658e61d0915c818ffe7c11fc8
+status: v8_014_second_product_prompt_static_review_gate
 mode: A4.8 docs-only Route B product-planning track
-phase_id: v8_013_second_product_prompt_package_draft_gate
+phase_id: v8_014_second_product_prompt_static_review_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -237,9 +237,12 @@ v8_012_second_product_brief_created: true
 v8_012_second_product_brief_ref: briefs/product_brief_multi_color_mesh_sports_visor_v1.md
 v8_013_second_product_prompt_package_created: true
 v8_013_second_product_prompt_package_ref: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
+v8_014_second_product_prompt_static_review_completed: true
+v8_014_second_product_prompt_static_review_result: pass_with_minor_watch_items
+Route_B_initial_docs_sequence_completed: true
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate
-recommended_next: v8_014_second_product_prompt_static_review_gate
+recommended_next: v8_015_second_product_A5_authorization_decision_gate
 ```
 
 ## Product Direction

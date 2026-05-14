@@ -1,5 +1,31 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v8.014-SECOND-PRODUCT-PROMPT-STATIC-REVIEW
+
+Task:
+
+```text
+Statically review the multi-color mesh sports visor prompt package and close the initial Route B docs-only sequence.
+```
+
+Result:
+
+```text
+review_result: pass_with_minor_watch_items
+A5_authorization_created: false
+provider_contact: false
+image_generation: false
+memory_write: false
+recommended_next: v8_015_second_product_A5_authorization_decision_gate
+auto_execution_allowed: false
+```
+
+Validation note:
+
+```text
+scripts/validate_mvp.ps1 has a pre-commit local commit scope timing gap for this authorized new reviews/ file: before staging it reports the review as unexpected untracked. The exact allowlist was reviewed, git diff --check passed, and the script should be rerun after commit from a clean worktree.
+```
+
 ## VALIDATION-20260514-v8.013-SECOND-PRODUCT-PROMPT-DRAFT
 
 Task:

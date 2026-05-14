@@ -1,10 +1,34 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.014 Second Product Prompt Static Review Gate
+
+```text
+phase_id: v8_014_second_product_prompt_static_review_gate
+status: in_progress
+source_commit: 52d5cc8dbc9ee5e658e61d0915c818ffe7c11fc8
+purpose: statically review the second product prompt package and stop before any A5 decision
+phase_record_ref: docs/v8_014_second_product_prompt_static_review_gate.md
+review_ref: reviews/v8_014_second_product_prompt_static_review.md
+review_result: pass_with_minor_watch_items
+Route_B_initial_docs_sequence_completed: true
+A5_authorization_created: false
+provider_contact: false
+image_generation: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+recommended_next: v8_015_second_product_A5_authorization_decision_gate
+```
+
 # v8.013 Second Product Prompt Package Draft Gate
 
 ```text
 phase_id: v8_013_second_product_prompt_package_draft_gate
-status: in_progress
+status: completed_remote_synced_after_guarded_push
 source_commit: 23066edc1b0235671fe0d0f7c6ae1ac742275af3
 purpose: create a non-executing prompt package draft for the multi-color mesh sports visor
 phase_record_ref: docs/v8_013_second_product_prompt_package_draft_gate.md

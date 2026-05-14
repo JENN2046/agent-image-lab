@@ -7,9 +7,9 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Current synced baseline before v8_013 prompt package draft gate: 23066edc1b0235671fe0d0f7c6ae1ac742275af3 on master == origin/master.
-Current mainline state: v8_013 second product prompt package draft; generation remains stopped.
-Current phase id: v8_013_second_product_prompt_package_draft_gate.
+Current synced baseline before v8_014 prompt static review gate: 52d5cc8dbc9ee5e658e61d0915c818ffe7c11fc8 on master == origin/master.
+Current mainline state: v8_014 second product prompt static review; Route B docs-only sequence is closing and generation remains stopped.
+Current phase id: v8_014_second_product_prompt_static_review_gate.
 Prior human route selection gate: v7.261_human_product_route_selection_request_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
@@ -223,12 +223,15 @@ v8_012_second_product_brief_created: true.
 v8_012_second_product_brief_ref: briefs/product_brief_multi_color_mesh_sports_visor_v1.md.
 v8_013_second_product_prompt_package_created: true.
 v8_013_second_product_prompt_package_ref: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml.
+v8_014_second_product_prompt_static_review_completed: true.
+v8_014_second_product_prompt_static_review_result: pass_with_minor_watch_items.
+Route_B_initial_docs_sequence_completed: true.
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed.
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized now: Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, retry, fifth generation, tag, release, deploy.
-Recommended next: v8_014_second_product_prompt_static_review_gate（第二商品 prompt package 静态审查门）.
-auto_execution_allowed_for_next: true under the selected A4.8 Route B docs-only track.
+Recommended next: v8_015_second_product_A5_authorization_decision_gate（人工决定是否为第二商品授权一次最小真实生成试跑）.
+auto_execution_allowed_for_next: false.
 ```
 
 历史状态脉络：
