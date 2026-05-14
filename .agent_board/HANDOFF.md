@@ -3,6 +3,31 @@
 ## Handoff Summary
 
 ```text
+Status: v8_031_second_product_retry_after_persistence_fix_decision_gate is the current Route B human decision gate.
+Reason: v8.030 fixed the output persistence normalization risk; v8.031 presents Option A/B/C without creating A5 authorization or executing provider contact.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v8_031 patch: 785cb23 fix: guard native doubao output persistence
+ahead_behind: 0/0
+Worktree: clean before v8_031 patch; generated runs output remains ignored and is not staged or committed
+Current status: v8_031_second_product_retry_after_persistence_fix_decision_gate
+output_persistence_guard_fixed: true
+prompt_v2_path: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
+previous_execution_status: failed_no_local_output_file
+success_requires_verified_local_file: true
+A5_authorization_created: false
+options_presented: authorize_one_more_minimal_real_generation_trial_after_persistence_fix | more_local_static_sandbox_testing | stop_second_product_real_generation_route
+recommended_option: authorize_one_more_minimal_real_generation_trial_after_persistence_fix
+human_decision_required: true
+v8_031_provider_contact: false
+v8_031_image_generation: false
+v8_031_retry: false
+v8_031_env_local_secret_value_read: false
+v8_031_memory_write: false
+v8_031_runs_output_committed: false
+recommended_next: pending_human_retry_authorization_after_persistence_fix
+recommended_next_auto_execution_allowed: false
+---
 Status: v8_030_runner_output_persistence_guard_static_code_fix_gate is the current Route B static code fix gate.
 Reason: v8.030 tightens Native Doubao result normalization so only explicit verified local file count can create local output success or human review readiness.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

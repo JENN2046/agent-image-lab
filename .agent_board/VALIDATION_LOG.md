@@ -1,5 +1,33 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v8.031-RETRY-AFTER-PERSISTENCE-FIX-DECISION
+
+Task:
+
+```text
+Present Option A/B/C for whether to authorize one more minimal real generation trial after the output persistence guard fix.
+```
+
+Result:
+
+```text
+output_persistence_guard_fixed: true
+prompt_v2_path: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
+previous_execution_status: failed_no_local_output_file
+success_requires_verified_local_file: true
+A5_authorization_created: false
+options_presented: authorize_one_more_minimal_real_generation_trial_after_persistence_fix | more_local_static_sandbox_testing | stop_second_product_real_generation_route
+recommended_option: authorize_one_more_minimal_real_generation_trial_after_persistence_fix
+human_decision_required: true
+validation_result: passed
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, DailyNote write, VCP memory write, production_candidate_002, Batch 005, dependency change, package.json change, accepted_samples write, or runs output commit is performed by v8.031.
+```
+
 ## VALIDATION-20260514-v8.030-RUNNER-OUTPUT-PERSISTENCE-GUARD-STATIC-CODE-FIX
 
 Task:

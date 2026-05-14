@@ -1,12 +1,42 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.031 Second Product Retry After Persistence Fix Decision Gate
+
+```text
+phase_id: v8_031_second_product_retry_after_persistence_fix_decision_gate
+status: completed_validated_pending_guarded_push
+source_phase: v8_030_runner_output_persistence_guard_static_code_fix_gate
+source_commit: 785cb23452c37c1893855cf75360d32c841e5075
+purpose: present human decision options after the output persistence guard fix
+phase_record_ref: docs/v8_031_second_product_retry_after_persistence_fix_decision_gate.md
+output_persistence_guard_fixed: true
+prompt_v2_path: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
+previous_execution_status: failed_no_local_output_file
+success_requires_verified_local_file: true
+A5_authorization_created: false
+options_presented: authorize_one_more_minimal_real_generation_trial_after_persistence_fix | more_local_static_sandbox_testing | stop_second_product_real_generation_route
+recommended_option: authorize_one_more_minimal_real_generation_trial_after_persistence_fix
+human_decision_required: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+recommended_next: pending_human_retry_authorization_after_persistence_fix
+```
+
 # v8.030 Runner Output Persistence Guard Static Code Fix Gate
 
 ```text
 phase_id: v8_030_runner_output_persistence_guard_static_code_fix_gate
-status: completed_validated_pending_guarded_commit
+status: completed_remote_synced_after_guarded_push
 source_phase: v8_029_timestamp_evidence_policy_patch
-source_commit: 2cb27d2789fd639dbee46709fa15ceb485979ae3
+source_commit: 785cb23452c37c1893855cf75360d32c841e5075
 purpose: statically tighten Native Doubao result normalization after the v8.027 zero-local-file anomaly
 phase_record_ref: docs/v8_030_runner_output_persistence_guard_static_code_fix_gate.md
 runner_output_persistence_guard_static_code_fix_created: true

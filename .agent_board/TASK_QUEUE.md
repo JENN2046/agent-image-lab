@@ -9,6 +9,19 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v8_031_second_product_retry_after_persistence_fix_decision_gate.
+Purpose: present human options after the output persistence guard fix; no A5 authorization is created by this gate.
+output_persistence_guard_fixed: true.
+prompt_v2_path: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml.
+previous_execution_status: failed_no_local_output_file.
+success_requires_verified_local_file: true.
+A5_authorization_created: false.
+options_presented: authorize_one_more_minimal_real_generation_trial_after_persistence_fix | more_local_static_sandbox_testing | stop_second_product_real_generation_route.
+recommended_option: authorize_one_more_minimal_real_generation_trial_after_persistence_fix.
+human_decision_required: true.
+v8_031 does not authorize provider contact, image generation, retry, .env.local secret value read, memory write, production_candidate_002, Batch 005, or runs output commit.
+recommended_next: pending_human_retry_authorization_after_persistence_fix.
+---
 Current active gate: v8_030_runner_output_persistence_guard_static_code_fix_gate.
 Purpose: statically tighten Native Doubao result normalization so only explicit verified local file count can create local output success.
 runner_output_persistence_guard_static_code_fix_created: true.
@@ -130,13 +143,13 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-none — v8_030 is completed_validated_pending_guarded_commit.
+none — v8_031 is completed_validated_pending_guarded_push.
 ```
 
 ### todo
 
 ```text
-v8_031_second_product_retry_after_persistence_fix_decision_gate — human decision gate only; no automatic generation authorization.
+pending_human_retry_authorization_after_persistence_fix — wait for Option A/B/C; no automatic provider execution.
 ```
 
 ### recommended_next_after_v7_285

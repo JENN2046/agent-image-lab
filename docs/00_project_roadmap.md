@@ -18,7 +18,23 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Current synced baseline before v8_030 static code fix gate: 2cb27d2789fd639dbee46709fa15ceb485979ae3 on master == origin/master.
+Current synced baseline before v8_031 decision gate: 785cb23452c37c1893855cf75360d32c841e5075 on master == origin/master.
+Current mainline state: v8_031 presents the human decision gate for whether to authorize one more minimal real generation trial after the output persistence guard fix.
+Current phase id: v8_031_second_product_retry_after_persistence_fix_decision_gate.
+output_persistence_guard_fixed: true.
+prompt_v2_path: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml.
+previous_execution_status: failed_no_local_output_file.
+success_requires_verified_local_file: true.
+A5_authorization_created: false.
+options_presented: authorize_one_more_minimal_real_generation_trial_after_persistence_fix | more_local_static_sandbox_testing | stop_second_product_real_generation_route.
+recommended_option: authorize_one_more_minimal_real_generation_trial_after_persistence_fix.
+human_decision_required: true.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+retry_allowed_now: false.
+recommended_next: pending_human_retry_authorization_after_persistence_fix.
+recommended_next_auto_execution_allowed: false.
+Current synced baseline before v8_030 static code fix gate: 785cb23452c37c1893855cf75360d32c841e5075 on master == origin/master.
 Current mainline state: v8_030 statically tightens Native Doubao result normalization so legacy write counts or success flags cannot create local output success without verified local files.
 Current phase id: v8_030_runner_output_persistence_guard_static_code_fix_gate.
 runner_output_persistence_guard_static_code_fix_created: true.
