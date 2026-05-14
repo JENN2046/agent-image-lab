@@ -7,9 +7,9 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Current synced baseline before v8_023 prompt revision plan: f9b0d9800d3e5c00e56a5a41bcdf92328bba2110 on master == origin/master.
-Current mainline state: v8_023 turns the v8.021 second-product review findings into prompt v2; no provider contact or image generation is authorized.
-Current phase id: v8_023_second_product_prompt_revision_plan_from_first_real_output.
+Current synced baseline before v8_024 prompt v2 static review: f95b118decf6d4425a1ea9818b0706c724c98626 on master == origin/master.
+Current mainline state: v8_024 statically reviews second-product prompt v2 and stops before any next-generation authorization.
+Current phase id: v8_024_second_product_prompt_v2_static_review_gate.
 Prior human route selection gate: v7.261_human_product_route_selection_request_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
@@ -274,11 +274,16 @@ v8_023_prompt_v2_created: true.
 v8_023_prompt_v2_ref: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml.
 v8_023_provider_contact: false.
 v8_023_image_generation: false.
+v8_024_prompt_v2_static_review_completed: true.
+v8_024_prompt_v2_static_review_result: pass_ready_for_authorization_decision.
+v8_024_provider_contact: false.
+v8_024_image_generation: false.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized now in v8.022: provider contact, image generation, .env.local read, retry, Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, accepted_samples write, runs output commit, tag, release, deploy.
 Not authorized now in v8.023: provider contact, image generation, .env.local read, retry, Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, accepted_samples write, runs output commit, tag, release, deploy.
 Recommended next: v8_024_second_product_prompt_v2_static_review_gate（静态审查第二商品 prompt v2；不生成）.
-auto_execution_allowed_for_next: true_a4_8_docs_only.
+Recommended next after v8.024: v8_025_second_product_next_minimal_generation_authorization_decision_gate（人工决定是否基于 prompt v2 授权下一次最小真实生成）.
+auto_execution_allowed_for_next: false.
 ```
 
 历史状态脉络：

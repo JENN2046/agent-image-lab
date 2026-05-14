@@ -3,14 +3,14 @@
 ## Handoff Summary
 
 ```text
-Status: v8_023_second_product_prompt_revision_plan_from_first_real_output is the current Route B prompt revision gate; the v8.021 output remains needs_revision.
-Reason: v8.022 sealed the human review, so v8.023 creates a prompt v2 revision plan and a new v2 prompt package without provider contact or image generation.
+Status: v8_024_second_product_prompt_v2_static_review_gate is the current Route B static review gate; prompt v2 is being reviewed before any new A5 decision.
+Reason: v8.023 created prompt v2 from the v8.021 needs_revision findings, and v8.024 checks whether it is ready for a human authorization decision.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
-Current synced HEAD before v8_023 patch: f9b0d98 docs: review second product real output
+Current synced HEAD before v8_024 patch: f95b118 docs: plan second product prompt revision
 ahead_behind: 0/0
 Worktree: clean before v8_003a A4.8 rail package patch; v7.281 output remains ignored under runs/
-Current status: v8_023_second_product_prompt_revision_plan_from_first_real_output
+Current status: v8_024_second_product_prompt_v2_static_review_gate
 A4_8_safe_project_operator_rail_created: true
 A4_8_safe_project_operator_rail_zh: 安全项目运营轨
 A4_8_is_not_A5: true
@@ -228,8 +228,8 @@ v8_003a_safe_project_operator_rail_ref: docs/A4_8_SAFE_PROJECT_OPERATOR_RAIL.md
 v8_003a_safe_push_policy_ref: docs/SAFE_PUSH_POLICY.md
 v8_003a_validation_selection_matrix_ref: docs/VALIDATION_SELECTION_MATRIX.md
 v8_003a_failure_recovery_ref: docs/AUTOPILOT_FAILURE_RECOVERY.md
-recommended_next: v8_024_second_product_prompt_v2_static_review_gate
-recommended_next_zh: 静态审查第二商品 prompt v2；不生成
+recommended_next: v8_025_second_product_next_minimal_generation_authorization_decision_gate
+recommended_next_zh: 人工决定是否基于 prompt v2 授权下一次最小真实生成；不得自动执行
 v8_003b_A4_8_rule_intake_smoke_test: passed
 v8_006_A4_8_state_and_rule_intake_review: passed_read_only
 v8_007_A4_8_mutation_live_run_docs_only: completed_remote_synced_after_guarded_push
@@ -329,12 +329,18 @@ v8_022_route_B_generation_recovered_after_http_400: true
 v8_022_provider_contact: false
 v8_022_image_generation: false
 v8_022_retry: false
-v8_023_second_product_prompt_revision_plan_from_first_real_output: in_progress
+v8_023_second_product_prompt_revision_plan_from_first_real_output: completed_remote_synced_after_guarded_push
 v8_023_prompt_revision_plan_created: true
 v8_023_prompt_v2_created: true
 v8_023_prompt_v2_ref: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
 v8_023_provider_contact: false
 v8_023_image_generation: false
+v8_024_second_product_prompt_v2_static_review_gate: in_progress
+v8_024_prompt_v2_static_review_completed: true
+v8_024_prompt_v2_static_review_ref: reviews/v8_024_second_product_prompt_v2_static_review.md
+v8_024_prompt_v2_static_review_result: pass_ready_for_authorization_decision
+v8_024_provider_contact: false
+v8_024_image_generation: false
 Route_B_initial_docs_sequence_completed: true
 provider_contact_after_v7_274: false
 image_generation_after_v7_274: false

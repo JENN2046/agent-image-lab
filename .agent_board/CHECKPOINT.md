@@ -1,10 +1,36 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.024 Second Product Prompt V2 Static Review Gate
+
+```text
+phase_id: v8_024_second_product_prompt_v2_static_review_gate
+status: in_progress
+source_phase: v8_023_second_product_prompt_revision_plan_from_first_real_output
+source_commit: f95b118decf6d4425a1ea9818b0706c724c98626
+purpose: statically review prompt v2 against v8.021 review gaps and stop before authorization
+phase_record_ref: docs/v8_024_second_product_prompt_v2_static_review_gate.md
+review_ref: reviews/v8_024_second_product_prompt_v2_static_review.md
+prompt_package_reviewed: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
+review_result: pass_ready_for_authorization_decision
+A5_authorization_created: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+recommended_next: v8_025_second_product_next_minimal_generation_authorization_decision_gate
+```
+
 # v8.023 Second Product Prompt Revision Plan From First Real Output
 
 ```text
 phase_id: v8_023_second_product_prompt_revision_plan_from_first_real_output
-status: in_progress
+status: completed_remote_synced_after_guarded_push
 source_phase: v8_022_human_review_of_second_product_second_real_output
 source_commit: f9b0d9800d3e5c00e56a5a41bcdf92328bba2110
 purpose: turn v8.021 second-product review findings into prompt v2 without generation

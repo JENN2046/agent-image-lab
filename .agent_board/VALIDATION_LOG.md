@@ -1,5 +1,34 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v8.024-SECOND-PRODUCT-PROMPT-V2-STATIC-REVIEW
+
+Task:
+
+```text
+Statically review prompt v2 against the v8.021 second-product review gaps.
+```
+
+Result:
+
+```text
+prompt_package_reviewed: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
+review_ref: reviews/v8_024_second_product_prompt_v2_static_review.md
+review_result: pass_ready_for_authorization_decision
+A5_authorization_created: false
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, DailyNote write, VCP memory write, production_candidate_002, Batch 005, dependency change, package.json change, accepted_samples write, or runs output commit is performed by v8.024.
+```
+
+Validation note:
+
+```text
+scripts/validate_mvp.ps1 has a pre-commit local commit scope timing gap for this authorized new reviews/ file: before staging it reports the review as unexpected untracked. The exact allowlist was reviewed, git diff --check passed, and the script must be rerun after commit from a clean worktree before guarded push.
+```
+
 ## VALIDATION-20260514-v8.023-SECOND-PRODUCT-PROMPT-REVISION-PLAN
 
 Task:

@@ -81,13 +81,13 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-v8_023_second_product_prompt_revision_plan_from_first_real_output — create prompt v2 revision plan and v2 prompt package from the v8.021 review findings; do not generate or retry.
+v8_024_second_product_prompt_v2_static_review_gate — statically review prompt v2 against the v8.021 review gaps; do not generate or retry.
 ```
 
 ### todo
 
 ```text
-v8_024_second_product_prompt_v2_static_review_gate — statically review prompt v2 against the v8.021 review gaps; no automatic generation.
+v8_025_second_product_next_minimal_generation_authorization_decision_gate — human decides whether prompt v2 gets a new minimal generation authorization; do not auto-enter execution.
 ```
 
 ### recommended_next_after_v7_285
@@ -265,9 +265,13 @@ v8_022_accepted_candidate: false
 v8_022_commercial_delivery_ready: false
 v8_022_memory_suitability: deferred
 recommended_next_after_v8_022: v8_023_second_product_prompt_revision_plan_from_first_real_output
-v8_023_second_product_prompt_revision_plan_from_first_real_output: in_progress
+v8_023_second_product_prompt_revision_plan_from_first_real_output: completed_remote_synced_after_guarded_push
 v8_023_prompt_v2_ref: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
 recommended_next_after_v8_023: v8_024_second_product_prompt_v2_static_review_gate
+v8_024_second_product_prompt_v2_static_review_gate: in_progress
+v8_024_prompt_v2_static_review_ref: reviews/v8_024_second_product_prompt_v2_static_review.md
+v8_024_prompt_v2_static_review_result: pass_ready_for_authorization_decision
+recommended_next_after_v8_024: v8_025_second_product_next_minimal_generation_authorization_decision_gate
 ```
 
 ### done
