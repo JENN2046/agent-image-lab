@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_synced_head_before_v8_003: f77f51e
-origin_master_before_v8_003: f77f51e
-status: v8_003_retouch_handoff_package_created
-mode: A4 docs-only delivery package closeout and retouch handoff gate
-phase_id: v8_003_delivery_package_closeout_or_retouch_handoff_gate
+latest_synced_head_before_v8_004: f77c7bd
+origin_master_before_v8_004: f77c7bd
+status: v8_004_final_retouch_route_closed
+mode: A4 docs-only final retouch route closeout
+phase_id: v8_004_final_retouch_route_closeout
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -183,9 +183,21 @@ v8_003_fifth_generation_started: false
 v8_003_output_image_added_to_git: false
 v8_003_memory_write_performed: false
 v8_003_production_candidate_002_started: false
+v8_004_final_retouch_route_closed: true
+v8_004_route_closeout_ref: docs/v8_final_retouch_route_closeout_matte_ceramic_mug_v4.md
+v8_004_final_retouch_plan_created: true
+v8_004_retouch_acceptance_criteria_created: true
+v8_004_delivery_package_spec_created: true
+v8_004_retouch_handoff_package_created: true
+v8_004_commercial_delivery_ready: false
+v8_004_memory_suitability: deferred
+v8_004_fifth_generation_started: false
+v8_004_output_image_added_to_git: false
+v8_004_memory_write_performed: false
+v8_004_production_candidate_002_started: false
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate
-recommended_next: v8_004_final_retouch_route_closeout
+recommended_next: v8_005_next_route_decision_gate
 ```
 
 ## Product Direction
