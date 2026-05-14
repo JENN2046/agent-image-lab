@@ -18,6 +18,21 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
+Current synced baseline before v8_029 output persistence fix gate: 1c5c97605be208222c326101335d29cb84f48eb2 on master == origin/master.
+Current mainline state: v8_029 statically fixes Native Doubao output persistence accounting so zero verified local files cannot be reported as local output success.
+Current phase id: v8_029_runner_output_persistence_static_review_and_fix_gate.
+output_persistence_guard_created: true.
+provider_success_vs_local_persistence_split: true.
+local_file_existence_required_for_success: true.
+local_file_count_verification_added_or_confirmed: true.
+zero_local_file_forces_failed_no_local_output_file: true.
+human_review_requires_local_file: true.
+runner_success_condition_tightened: true.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+retry_allowed_now: false.
+recommended_next: v8_030_second_product_retry_after_persistence_fix_decision_gate.
+recommended_next_auto_execution_allowed: false.
 Current synced baseline before v8_028 anomaly review gate: 00764b4bfd980fe92af023667ee06309819b6f32 on master == origin/master.
 Current mainline state: v8_028 records the Route B prompt v2 output persistence anomaly; v8.027 consumed one authorized provider call and reported generated, but local artifact verification found no image file.
 Current phase id: v8_028_second_product_prompt_v2_failed_trial_review_or_output_persistence_gate.

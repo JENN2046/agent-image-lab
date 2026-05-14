@@ -142,6 +142,13 @@ async function run(options) {
     api_call_performed: result.api_call_performed === true,
     image_created: result.image_created === true,
     image_count: result.image_count || 0,
+    provider_request_success: result.provider_request_success === true,
+    provider_reported_image_count: result.provider_reported_image_count || 0,
+    local_files_written_count: result.local_files_written_count || 0,
+    local_files_verified_count: result.local_files_verified_count || 0,
+    local_persistence_success: result.local_persistence_success === true,
+    human_review_required_now: result.human_review_required_now === true,
+    output_files: Array.isArray(result.output_files) ? result.output_files : [],
     model_requested: result.model_requested || null,
     model_reported: result.model_reported || null,
     model_matches: result.model_matches === true,
@@ -161,6 +168,7 @@ async function run(options) {
     adapter_result: publicAdapterResult,
     api_call_performed: result.api_call_performed === true,
     image_created: result.image_created === true,
+    human_review_required_now: result.human_review_required_now === true,
     api_key_value_printed: false,
   };
 }

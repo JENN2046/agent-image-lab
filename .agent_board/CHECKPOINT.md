@@ -1,10 +1,40 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.029 Runner Output Persistence Static Review And Fix Gate
+
+```text
+phase_id: v8_029_runner_output_persistence_static_review_and_fix_gate
+status: completed_validated_pending_guarded_push
+source_phase: v8_028_second_product_prompt_v2_failed_trial_review_or_output_persistence_gate
+source_commit: 1c5c97605be208222c326101335d29cb84f48eb2
+purpose: statically tighten Native Doubao output persistence accounting after the v8.027 zero-local-file anomaly
+phase_record_ref: docs/v8_029_runner_output_persistence_static_review_and_fix_gate.md
+persistence_guard_ref: docs/native_doubao_output_persistence_guard.md
+anomaly_reviewed: true
+provider_success_vs_local_persistence_split: true
+local_file_existence_required_for_success: true
+local_file_count_verification_added_or_confirmed: true
+zero_local_file_forces_failed_no_local_output_file: true
+human_review_requires_local_file: true
+runner_success_condition_tightened: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+recommended_next: v8_030_second_product_retry_after_persistence_fix_decision_gate
+```
+
 # v8.028 Second Product Prompt V2 Failed Trial Review Or Output Persistence Gate
 
 ```text
 phase_id: v8_028_second_product_prompt_v2_failed_trial_review_or_output_persistence_gate
-status: completed_validated_pending_guarded_push
+status: completed_remote_synced_after_guarded_push
 source_phase: v8_027_second_product_prompt_v2_minimal_generation_trial_execution
 source_commit: 00764b4bfd980fe92af023667ee06309819b6f32
 purpose: seal the Route B prompt v2 output persistence anomaly and decide next static runner/adapter review route

@@ -9,6 +9,17 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v8_029_runner_output_persistence_static_review_and_fix_gate.
+Purpose: statically fix Native Doubao output persistence accounting so provider HTTP success cannot be counted as a local output image unless a verified local file exists.
+provider_success_vs_local_persistence_split: true.
+local_file_existence_required_for_success: true.
+local_file_count_verification_added_or_confirmed: true.
+zero_local_file_forces_failed_no_local_output_file: true.
+human_review_requires_local_file: true.
+runner_success_condition_tightened: true.
+v8_029 does not authorize provider contact, image generation, retry, .env.local secret value read, memory write, production_candidate_002, Batch 005, or runs output commit.
+recommended_next: v8_030_second_product_retry_after_persistence_fix_decision_gate.
+---
 Current active gate: v8_028_second_product_prompt_v2_failed_trial_review_or_output_persistence_gate.
 Purpose: seal the Route B prompt v2 anomaly where v8.027 returned HTTP 200 / COMPLETED_GENERATED but local output verification found zero image files.
 approved_product: multi_color_mesh_sports_visor.
@@ -101,13 +112,13 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-none — v8_028 is completed_validated_pending_guarded_push.
+none — v8_029 is completed_validated_pending_guarded_push.
 ```
 
 ### todo
 
 ```text
-v8_029_runner_output_persistence_static_review_and_fix_gate — recommended static runner/adapter persistence review; no automatic generation authorization.
+v8_030_second_product_retry_after_persistence_fix_decision_gate — human decision gate only; no automatic generation authorization.
 ```
 
 ### recommended_next_after_v7_285

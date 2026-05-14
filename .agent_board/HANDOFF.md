@@ -3,6 +3,29 @@
 ## Handoff Summary
 
 ```text
+Status: v8_029_runner_output_persistence_static_review_and_fix_gate is the current Route B static code fix gate.
+Reason: v8.027 exposed an output persistence anomaly; v8.029 tightens Native Doubao success accounting so only verified local files count as output images.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v8_029 patch: 1c5c976 docs: review second product prompt v2 output persistence anomaly
+ahead_behind: 0/0
+Worktree: clean before v8_029 patch; generated runs output remains ignored and is not staged or committed
+Current status: v8_029_runner_output_persistence_static_review_and_fix_gate
+provider_success_vs_local_persistence_split: true
+local_file_existence_required_for_success: true
+local_file_count_verification_added_or_confirmed: true
+zero_local_file_forces_failed_no_local_output_file: true
+human_review_requires_local_file: true
+runner_success_condition_tightened: true
+v8_029_provider_contact: false
+v8_029_image_generation: false
+v8_029_retry: false
+v8_029_env_local_secret_value_read: false
+v8_029_memory_write: false
+v8_029_runs_output_committed: false
+recommended_next: v8_030_second_product_retry_after_persistence_fix_decision_gate
+recommended_next_auto_execution_allowed: false
+---
 Status: v8_028_second_product_prompt_v2_failed_trial_review_or_output_persistence_gate is the current Route B anomaly review gate.
 Reason: v8.027 consumed one authorized prompt v2 provider call and reported HTTP 200 / COMPLETED_GENERATED, but local verification found zero output files, so there is no image for human review.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

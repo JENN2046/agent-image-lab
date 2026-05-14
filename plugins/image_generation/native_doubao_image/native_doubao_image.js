@@ -59,6 +59,29 @@ function resolveSafeOutputDirectory(outputDirectory) {
   return { valid: true, fullPath: fullPath };
 }
 
+function verifyLocalOutputFile(filePath, outputRoot) {
+  try {
+    var resolvedFile = path.resolve(filePath);
+    var resolvedRoot = path.resolve(outputRoot);
+    if (resolvedFile.indexOf(resolvedRoot + path.sep) !== 0) {
+      return { verified: false, reason: "file_outside_output_directory" };
+    }
+    if (!fs.existsSync(resolvedFile)) {
+      return { verified: false, reason: "file_missing" };
+    }
+    var stat = fs.statSync(resolvedFile);
+    if (!stat.isFile()) {
+      return { verified: false, reason: "not_a_file" };
+    }
+    if (stat.size <= 0) {
+      return { verified: false, reason: "empty_file" };
+    }
+    return { verified: true, bytes: stat.size };
+  } catch (err) {
+    return { verified: false, reason: "stat_failed" };
+  }
+}
+
 function validateBaseUrl(rawBaseUrl) {
   if (!rawBaseUrl) {
     return { valid: false, error: "DOUBAO_IMAGE_API_BASE_URL environment variable is not set" };
@@ -422,6 +445,7 @@ async function writeImageOutput(result, outputDirectory) {
   }
 
   var written = [];
+  var failed = [];
   for (var i = 0; i < result.images.length; i++) {
     var img = result.images[i];
     var ext = ".jpg";
@@ -431,42 +455,83 @@ async function writeImageOutput(result, outputDirectory) {
     if (img.b64_json) {
       var buffer = Buffer.from(img.b64_json, "base64");
       fs.writeFileSync(filepath, buffer);
-      written.push({ index: i, file: filename, bytes: buffer.length, source: "b64_json" });
+      var b64Check = verifyLocalOutputFile(filepath, outDir);
+      if (b64Check.verified) {
+        written.push({ index: i, file: filename, bytes: b64Check.bytes, source: "b64_json" });
+      } else {
+        failed.push({ index: i, reason: b64Check.reason, source: "b64_json" });
+      }
     } else if (img.url) {
       // Download from URL and save
       try {
         var parsedUrl = new URL(img.url);
         if (parsedUrl.protocol !== "https:") {
-          written.push({ index: i, note: "download_blocked_non_https_url" });
+          failed.push({ index: i, reason: "download_blocked_non_https_url" });
           continue;
         }
         var imageResponse = await fetch(img.url);
+        if (!imageResponse.ok) {
+          failed.push({ index: i, reason: "download_http_failed" });
+          continue;
+        }
         var imageBuffer = Buffer.from(await imageResponse.arrayBuffer());
+        if (imageBuffer.length <= 0) {
+          failed.push({ index: i, reason: "download_empty_body" });
+          continue;
+        }
         fs.writeFileSync(filepath, imageBuffer);
-        written.push({ index: i, file: filename, bytes: imageBuffer.length, source: "url_download" });
+        var urlCheck = verifyLocalOutputFile(filepath, outDir);
+        if (urlCheck.verified) {
+          written.push({ index: i, file: filename, bytes: urlCheck.bytes, source: "url_download" });
+        } else {
+          failed.push({ index: i, reason: urlCheck.reason, source: "url_download" });
+        }
       } catch (downloadErr) {
-        written.push({ index: i, url: img.url, note: "download_failed: " + downloadErr.message });
+        failed.push({ index: i, reason: "download_failed" });
       }
+    } else {
+      failed.push({ index: i, reason: "no_supported_image_payload" });
     }
   }
 
-  return { success: written.length > 0, files: written, output_directory: outputDirectory };
+  return {
+    success: written.length > 0,
+    files: written,
+    failed: failed,
+    output_directory: outputDirectory,
+    local_files_written_count: written.length,
+    local_files_verified_count: written.length,
+    local_persistence_success: written.length > 0,
+  };
 }
 
 function normalizeResult(result) {
-  var imageCount = result.images && Array.isArray(result.images) ? result.images.length : 0;
+  var providerReportedImageCount = typeof result.provider_reported_image_count === "number"
+    ? result.provider_reported_image_count
+    : (result.images && Array.isArray(result.images) ? result.images.length : 0);
+  var localFilesVerifiedCount = typeof result.local_files_verified_count === "number"
+    ? result.local_files_verified_count
+    : (result.files_written_count || 0);
+  var localPersistenceSuccess = result.local_persistence_success === true || localFilesVerifiedCount > 0;
   return {
     status: result.status || "unknown",
     plugin_id: result.plugin_id || "NativeDoubaoImage",
     command: result.command || "generate",
     api_call_performed: result.api_call_performed === true,
-    image_created: result.image_created === true,
-    image_count: imageCount,
+    provider_request_success: result.provider_request_success === true,
+    provider_reported_image_count: providerReportedImageCount,
+    image_created: localPersistenceSuccess,
+    image_count: localFilesVerifiedCount,
     model_requested: result.model_requested || null,
     model_reported: result.model_reported || null,
     model_matches: result.model_matches === true,
     http_status: result.http_status || null,
-    files_written_count: result.files_written_count || 0,
+    files_written_count: localFilesVerifiedCount,
+    local_files_written_count: typeof result.local_files_written_count === "number" ? result.local_files_written_count : localFilesVerifiedCount,
+    local_files_verified_count: localFilesVerifiedCount,
+    local_persistence_success: localPersistenceSuccess,
+    human_review_required_now: localPersistenceSuccess,
+    output_files: Array.isArray(result.output_files) ? result.output_files : [],
     error: result.error || null,
     error_category: result.error_category || null,
     raw_image_payload_returned: false,
@@ -487,6 +552,7 @@ module.exports = {
   loadPromptPackage: loadPromptPackage,
   resolveSafePromptPackageRef: resolveSafePromptPackageRef,
   resolveSafeOutputDirectory: resolveSafeOutputDirectory,
+  verifyLocalOutputFile: verifyLocalOutputFile,
   validateBaseUrl: validateBaseUrl,
   validateA5Limits: validateA5Limits,
   validateRealExecutionGate: validateRealExecutionGate,

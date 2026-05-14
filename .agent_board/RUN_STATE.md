@@ -9,12 +9,41 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v8_028_second_product_prompt_v2_failed_trial_review_or_output_persistence_gate. v8.027 consumed one authorized prompt v2 provider call and reported HTTP 200 / COMPLETED_GENERATED, but local verification found zero output image files, so this gate seals the output persistence anomaly and stops before any retry.
+Agent Image Lab is in v8_029_runner_output_persistence_static_review_and_fix_gate. This gate statically tightens Native Doubao output persistence so provider HTTP success cannot be counted as a local reviewable image unless a verified local file exists.
 ```
 
 ## Current Phase
 
 ```text
+v8.029 Runner Output Persistence Static Review And Fix Gate
+phase_id: v8_029_runner_output_persistence_static_review_and_fix_gate
+source_phase: v8_028_second_product_prompt_v2_failed_trial_review_or_output_persistence_gate
+status: output_persistence_guard_fix_completed_validated_pending_guarded_push
+source_commit: 1c5c97605be208222c326101335d29cb84f48eb2
+source_message: docs: review second product prompt v2 output persistence anomaly
+branch: master tracking origin/master
+origin_sync_current: local HEAD equals origin/master at 1c5c976
+ahead_behind: 0/0
+anomaly_reviewed: true
+provider_success_vs_local_persistence_split: true
+local_file_existence_required_for_success: true
+local_file_count_verification_added_or_confirmed: true
+zero_local_file_forces_failed_no_local_output_file: true
+human_review_requires_local_file: true
+runner_success_condition_tightened: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+recommended_next: v8_030_second_product_retry_after_persistence_fix_decision_gate
+recommended_next_auto_execution_allowed: false
+---
 v8.028 Second Product Prompt V2 Failed Trial Review Or Output Persistence Gate
 phase_id: v8_028_second_product_prompt_v2_failed_trial_review_or_output_persistence_gate
 source_phase: v8_027_second_product_prompt_v2_minimal_generation_trial_execution

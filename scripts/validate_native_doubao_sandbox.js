@@ -75,6 +75,33 @@ check("json_result_can_hide_non_enumerable_raw_images", () => {
     !serialized.includes("image.png");
 });
 
+check("normalize_result_requires_local_persistence_for_image_count", () => {
+  const normalized = plugin.normalizeResult({
+    status: "COMPLETED_GENERATED",
+    api_call_performed: true,
+    provider_request_success: true,
+    provider_reported_image_count: 1,
+    image_created: true,
+    images: [{ index: 0, has_b64_json: true }],
+    files_written_count: 0,
+    local_files_verified_count: 0,
+    local_persistence_success: false,
+  });
+  return normalized.provider_reported_image_count === 1 &&
+    normalized.image_count === 0 &&
+    normalized.image_created === false &&
+    normalized.human_review_required_now === false &&
+    normalized.local_persistence_success === false;
+});
+
+check("verify_local_output_file_rejects_missing_file", () => {
+  const result = plugin.verifyLocalOutputFile(
+    "runs/real_generation/does_not_exist/native_doubao_missing.jpg",
+    "runs/real_generation/does_not_exist"
+  );
+  return result.verified === false;
+});
+
 const summary = {
   passed,
   validator: "validate_native_doubao_sandbox",

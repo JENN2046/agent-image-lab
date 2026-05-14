@@ -46,6 +46,9 @@ async function run(options) {
   if (result.status === "BLOCKED_A5_REQUIRED" || result.status.indexOf("BLOCKED") === 0 || result.status === "FAILED") {
     return plugin.normalizeResult(result);
   }
+  var providerReportedImageCount = result.images && Array.isArray(result.images) ? result.images.length : 0;
+  result.provider_request_success = result.api_call_performed === true && result.http_status >= 200 && result.http_status < 300;
+  result.provider_reported_image_count = providerReportedImageCount;
 
   // 模型 mismatch 检测（冗余检查）
   var modelCheck = plugin.detectModelMismatch(
@@ -64,14 +67,30 @@ async function run(options) {
   // 图片写入
   if (result._raw_images && result._raw_images.length > 0) {
     var writeResult = await plugin.writeImageOutput({ images: result._raw_images }, options.outputDirectory);
-    if (!writeResult.success) {
-      return {
-        status: "BLOCKED_WRITE_FAILED",
-        plugin_id: "NativeDoubaoImage",
-        error: writeResult.error,
-      };
+    result.local_files_written_count = writeResult.local_files_written_count || 0;
+    result.local_files_verified_count = writeResult.local_files_verified_count || 0;
+    result.local_persistence_success = writeResult.local_persistence_success === true;
+    result.output_files = writeResult.files.map(function (item) { return item.file; }).filter(Boolean);
+    result.files_written_count = result.local_files_verified_count;
+    if (!writeResult.success || result.local_files_verified_count === 0) {
+      result.status = "failed_no_local_output_file";
+      result.image_created = false;
+      result.error_category = "output_persistence_anomaly";
+      result.error = writeResult.error || writeResult.reason || "no verified local output file";
+      return plugin.normalizeResult(result);
     }
-    result.files_written_count = writeResult.files.length;
+    result.image_created = true;
+  } else {
+    result.local_files_written_count = 0;
+    result.local_files_verified_count = 0;
+    result.local_persistence_success = false;
+    result.output_files = [];
+    result.files_written_count = 0;
+    result.status = "failed_no_local_output_file";
+    result.image_created = false;
+    result.error_category = "output_persistence_anomaly";
+    result.error = "provider returned no writable image payload";
+    return plugin.normalizeResult(result);
   }
 
   return plugin.normalizeResult(result);

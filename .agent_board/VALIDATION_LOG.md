@@ -7755,3 +7755,33 @@ Not validated:
   - No .env.local secret value read in v8.028
 Notes:
   - v8.028 records the v8.027 HTTP 200 / COMPLETED_GENERATED but zero-local-file anomaly.
+
+## VALIDATION-20260514-v8.029
+
+Task: v8.029 Runner Output Persistence Static Review And Fix Gate
+Commands run:
+  - node --check plugins/image_generation/native_doubao_image/native_doubao_image.js
+  - node --check adapters/image_generation/native_doubao_adapter.js
+  - node --check scripts/run_native_doubao_image_generation.js
+  - node --check scripts/validate_native_doubao_sandbox.js
+  - node scripts/validate_native_doubao_sandbox.js
+  - git status -sb
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - node scripts/validate_current_state_alignment.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+Result: ALL REQUIRED CHECKS PASSED
+Findings:
+  - Native Doubao output persistence guard added.
+  - Provider reported image count is separated from local verified image count.
+  - Zero local verified files now forces failed_no_local_output_file.
+Warnings:
+  - validate-agent-image-lab-local.ps1 reported existing manual-review warning patterns only.
+Not validated:
+  - No provider contact in v8.029
+  - No image generation in v8.029
+  - No retry in v8.029
+  - No .env.local secret value read in v8.029
+Notes:
+  - This phase is a static local code fix and validation gate only.
