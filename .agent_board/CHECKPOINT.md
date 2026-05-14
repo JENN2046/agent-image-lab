@@ -1,5 +1,30 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.008 A4.8 Controlled Failure Recovery Drill
+
+```text
+phase_id: v8_008_A4_8_controlled_failure_recovery_drill
+status: in_progress
+source_commit: 2c227ca952f28ac98e29e9be8e181d9c781c663f
+purpose: induce one controlled git diff --check trailing whitespace failure, fix it before commit, rerun validation, and avoid committing or pushing the failed state
+phase_record_ref: docs/v8_008_A4_8_controlled_failure_recovery_drill.md
+controlled_failure_induced: true
+failure_type: git_diff_check_trailing_whitespace
+committed_failure_state: false
+pushed_failure_state: false
+fixed_before_commit: true
+provider_contact: false
+image_generation: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+recommended_next: v8_009_A4_8_hard_stop_probe
+```
+
 # v8.007 A4.8 Mutation Live Run Docs Only
 
 ```text

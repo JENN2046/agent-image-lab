@@ -7,9 +7,9 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Current synced baseline before v8_007 mutation live run: e059ba49e31d69770d50e355d433f1f066280f03 on master == origin/master.
-Current mainline state: v8_007 A4.8 mutation live run docs-only validation; generation remains stopped.
-Current phase id: v8_007_A4_8_mutation_live_run_docs_only.
+Current synced baseline before v8_008 failure recovery drill: 2c227ca952f28ac98e29e9be8e181d9c781c663f on master == origin/master.
+Current mainline state: v8_008 A4.8 controlled failure recovery drill; generation remains stopped.
+Current phase id: v8_008_A4_8_controlled_failure_recovery_drill.
 Prior human route selection gate: v7.261_human_product_route_selection_request_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
@@ -205,11 +205,17 @@ v8_007_provider_contact_allowed: false.
 v8_007_image_generation_allowed: false.
 v8_007_memory_write_allowed: false.
 v8_007_runtime_execution_allowed: false.
+v8_008_controlled_failure_induced: true.
+v8_008_failure_type: git_diff_check_trailing_whitespace.
+v8_008_committed_failure_state: false.
+v8_008_pushed_failure_state: false.
+v8_008_fixed_before_commit: true.
+v8_008_recovery_validation_passed: true.
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed.
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized now: Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, retry, fifth generation, tag, release, deploy.
-Recommended next: v8_008_A4_8_controlled_failure_recovery_drill（可控 validation failure 修复演练）.
+Recommended next: v8_009_A4_8_hard_stop_probe（只读 hard stop 拒绝探针）.
 auto_execution_allowed_for_next: true under the explicitly selected A4.8 comprehensive validation track.
 ```
 

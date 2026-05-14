@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_synced_head_before_v8_007_mutation_live_run: e059ba49e31d69770d50e355d433f1f066280f03
-origin_master_before_v8_007_mutation_live_run: e059ba49e31d69770d50e355d433f1f066280f03
-status: v8_007_A4_8_mutation_live_run_docs_only
+latest_synced_head_before_v8_008_failure_recovery_drill: 2c227ca952f28ac98e29e9be8e181d9c781c663f
+origin_master_before_v8_008_failure_recovery_drill: 2c227ca952f28ac98e29e9be8e181d9c781c663f
+status: v8_008_A4_8_controlled_failure_recovery_drill
 mode: A4.8 docs-only comprehensive validation track
-phase_id: v8_007_A4_8_mutation_live_run_docs_only
+phase_id: v8_008_A4_8_controlled_failure_recovery_drill
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -219,9 +219,15 @@ v8_007_provider_contact_allowed: false
 v8_007_image_generation_allowed: false
 v8_007_memory_write_allowed: false
 v8_007_runtime_execution_allowed: false
+v8_008_controlled_failure_induced: true
+v8_008_failure_type: git_diff_check_trailing_whitespace
+v8_008_committed_failure_state: false
+v8_008_pushed_failure_state: false
+v8_008_fixed_before_commit: true
+v8_008_recovery_validation_passed: true
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate
-recommended_next: v8_008_A4_8_controlled_failure_recovery_drill
+recommended_next: v8_009_A4_8_hard_stop_probe
 ```
 
 ## Product Direction

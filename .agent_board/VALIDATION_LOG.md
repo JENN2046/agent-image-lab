@@ -1,5 +1,28 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v8.008-A4.8-CONTROLLED-FAILURE-RECOVERY
+
+Task:
+
+```text
+Induce one controlled markdown trailing whitespace failure, observe git diff --check fail, repair before commit, rerun validation, and never commit or push the failed state.
+```
+
+Observed controlled failure:
+
+```text
+docs/v8_008_A4_8_controlled_failure_recovery_drill.md:24: trailing whitespace.
+```
+
+Recovery:
+
+```text
+committed_failure_state: false
+pushed_failure_state: false
+fixed_before_commit: true
+recovery_validation_required: true
+```
+
 ## VALIDATION-20260514-v8.007-A4.8-MUTATION-LIVE-RUN
 
 Task:
