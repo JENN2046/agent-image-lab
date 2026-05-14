@@ -1,5 +1,32 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v8.018-SECOND-PRODUCT-PROMPT-RUNNER-MAPPING-FIX
+
+Task:
+
+```text
+Fix the second-product prompt package to include the runner-facing canonical prompt field.
+```
+
+Result:
+
+```text
+prompt_package_path: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
+canonical_prompt_field_added_or_confirmed: true
+positive_prompt_mapping_resolved: true
+runner_prompt_field: prompt
+runner_or_loader_fallback_added: false
+provider_optional_fields_reviewed: true
+retry_allowed_now: false
+new_A5_authorization_required_for_retry: true
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, DailyNote write, VCP memory write, production_candidate_002, Batch 005, dependency change, package.json change, or runs output commit is performed by v8.018.
+```
+
 ## VALIDATION-20260514-v8.017-SECOND-PRODUCT-FAILED-TRIAL-REVIEW
 
 Task:

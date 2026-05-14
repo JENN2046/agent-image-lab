@@ -81,13 +81,13 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate — record the failed v8.016 HTTP 400 trial and decide whether prompt/runner static fixes are needed.
+v8_018_second_product_prompt_or_runner_static_fix_gate — add the runner-facing canonical prompt field and record static provider-field review, without retrying.
 ```
 
 ### todo
 
 ```text
-v8_018_second_product_prompt_or_runner_static_fix_gate — human decision on prompt / runner static correction; no automatic retry.
+v8_019_second_product_second_trial_authorization_decision_gate — human decision on whether to authorize one new minimal real generation trial after the static fix.
 ```
 
 ### recommended_next_after_v7_285
@@ -238,7 +238,14 @@ v8_016_output_directory_created: false
 v8_016_no_image_to_review: true
 v8_016_retry_allowed_now: false
 v8_017_failed_trial_review_or_prompt_fix_decision_gate: in_progress
-recommended_next_after_v8_017: v8_018_second_product_prompt_or_runner_static_fix_gate
+v8_018_second_product_prompt_or_runner_static_fix_gate: in_progress
+v8_018_prompt_package_path: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
+v8_018_canonical_prompt_field_added_or_confirmed: true
+v8_018_positive_prompt_mapping_resolved: true
+v8_018_runner_prompt_field: prompt
+v8_018_runner_or_loader_fallback_added: false
+v8_018_provider_optional_fields_reviewed: true
+recommended_next_after_v8_018: v8_019_second_product_second_trial_authorization_decision_gate
 ```
 
 ### done

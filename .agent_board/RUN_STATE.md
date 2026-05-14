@@ -9,18 +9,18 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate. The v8.016 second-product trial consumed one authorized provider call, failed with sanitized HTTP 400, and produced no image.
+Agent Image Lab is in v8_018_second_product_prompt_or_runner_static_fix_gate. The second-product prompt package is being statically aligned with the Native Doubao loader by adding the canonical runner-facing prompt field.
 ```
 
 ## Current Phase
 
 ```text
-v8.017 Second Product Failed Trial Review Or Prompt Fix Decision Gate
-phase_id: v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate
-source_phase: v8_016_second_product_minimal_real_generation_trial_execution
+v8.018 Second Product Prompt Or Runner Static Fix Gate
+phase_id: v8_018_second_product_prompt_or_runner_static_fix_gate
+source_phase: v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
-status: second_product_failed_trial_review_in_progress
+status: second_product_prompt_runner_static_fix_in_progress
 source_commit: be841c1affce059da662d64f6ae85978d7009d58
 source_message: docs: authorize second product minimal generation trial
 branch: master tracking origin/master
@@ -122,8 +122,8 @@ output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug
 auto_retry_for_second_trial: false
 stop_after_generation_for_second_trial: true
 human_review_required_after_generation: true
-recommended_next: v8_018_second_product_prompt_or_runner_static_fix_gate
-recommended_next_zh: 人工决定是否做 prompt / runner 参数静态修正；不自动重新生成
+recommended_next: v8_019_second_product_second_trial_authorization_decision_gate
+recommended_next_zh: 人工决定是否基于静态修正，重新授权一次最小真实生成试跑
 v8_003b_A4_8_rule_intake_smoke_test: passed
 v8_006_A4_8_state_and_rule_intake_review: passed_read_only
 v8_007_A4_8_mutation_live_run_docs_only: completed_remote_synced_after_guarded_push
@@ -178,6 +178,16 @@ v8_016_no_image_to_review: true
 v8_016_retry_allowed_now: false
 v8_017_failed_trial_review_or_prompt_fix_decision_gate: in_progress
 v8_017_possible_static_issue: prompt_package_uses_positive_prompt_but_loader_expects_prompt
+v8_018_second_product_prompt_or_runner_static_fix_gate: in_progress
+v8_018_prompt_package_path: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
+v8_018_canonical_prompt_field_added_or_confirmed: true
+v8_018_positive_prompt_mapping_resolved: true
+v8_018_runner_prompt_field: prompt
+v8_018_runner_or_loader_fallback_added: false
+v8_018_provider_optional_fields_reviewed: true
+v8_018_provider_contact: false
+v8_018_image_generation: false
+v8_018_retry_allowed_now: false
 Route_B_initial_docs_sequence_completed: true
 v8_route_selection_completed: true
 selected_v8_route: final_retouch_planning

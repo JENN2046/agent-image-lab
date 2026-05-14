@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_synced_head_before_v8_017_failed_trial_review_gate: be841c1affce059da662d64f6ae85978d7009d58
-origin_master_before_v8_017_failed_trial_review_gate: be841c1affce059da662d64f6ae85978d7009d58
-status: v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate
-mode: A4/A0 failed generation review and decision gate
-phase_id: v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate
+latest_synced_head_before_v8_018_prompt_runner_mapping_fix_gate: e59fe0cac8df4d61e5b705f10640c6057ceb916f
+origin_master_before_v8_018_prompt_runner_mapping_fix_gate: e59fe0cac8df4d61e5b705f10640c6057ceb916f
+status: v8_018_second_product_prompt_or_runner_static_fix_gate
+mode: A4.8 static prompt runner mapping fix
+phase_id: v8_018_second_product_prompt_or_runner_static_fix_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -257,7 +257,11 @@ v8_016_output_images_count: 0
 v8_016_output_directory_created: false
 v8_016_no_image_to_review: true
 v8_016_retry_allowed_now: false
-recommended_next: v8_018_second_product_prompt_or_runner_static_fix_gate
+v8_017_failed_trial_review_completed: true
+v8_018_canonical_prompt_field_added_or_confirmed: true
+v8_018_positive_prompt_mapping_resolved: true
+v8_018_runner_prompt_field: prompt
+recommended_next: v8_019_second_product_second_trial_authorization_decision_gate
 ```
 
 ## Product Direction

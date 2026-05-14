@@ -1,10 +1,40 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.018 Second Product Prompt Or Runner Static Fix Gate
+
+```text
+phase_id: v8_018_second_product_prompt_or_runner_static_fix_gate
+status: in_progress
+source_phase: v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate
+source_commit: e59fe0cac8df4d61e5b705f10640c6057ceb916f
+purpose: fix the second-product prompt package mapping risk by adding runner-facing canonical prompt
+phase_record_ref: docs/v8_018_second_product_prompt_or_runner_static_fix_gate.md
+mapping_fix_ref: docs/second_product_prompt_runner_mapping_fix.md
+prompt_package_path: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
+canonical_prompt_field_added_or_confirmed: true
+positive_prompt_mapping_resolved: true
+runner_prompt_field: prompt
+runner_or_loader_fallback_added: false
+provider_optional_fields_reviewed: true
+retry_allowed_now: false
+new_A5_authorization_required_for_retry: true
+provider_contact: false
+image_generation: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+recommended_next: v8_019_second_product_second_trial_authorization_decision_gate
+```
+
 # v8.017 Second Product Failed Trial Review Or Prompt Fix Decision Gate
 
 ```text
 phase_id: v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate
-status: in_progress
+status: completed_remote_synced_after_guarded_push
 source_phase: v8_016_second_product_minimal_real_generation_trial_execution
 source_commit: be841c1affce059da662d64f6ae85978d7009d58
 purpose: record sanitized v8.016 failure and decide whether prompt or runner static fixes are needed before any new authorization

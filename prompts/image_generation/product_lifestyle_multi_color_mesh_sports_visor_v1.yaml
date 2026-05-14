@@ -93,6 +93,15 @@ camera_language:
   depth_of_field: enough depth to keep all colorways legible
   crop_safety: every visor brim and open-top structure remains visible
 
+runner_prompt_mapping:
+  runner_canonical_prompt_field: prompt
+  positive_prompt_retained_for_review: true
+  prompt_and_positive_prompt_synchronized: true
+  note_cn: "Native Doubao loader 读取 prompt 字段；positive_prompt 保留为人工审查语义字段。"
+
+prompt: |
+  Clean premium ecommerce product photo of a coordinated multi-color collection of breathable open-top sports sun visors. One light neutral or soft pastel visor is the hero product, with supporting colorways arranged neatly behind or beside it. Each visor has a clear open-top crown, smooth curved front brim, lightweight matte athletic fabric, visible breathable mesh side panels, subtle clean stitching, soft fabric sweatband, and a simple adjustable back closure. The product must read unmistakably as an open-top sports visor, not a baseball cap or cycling cap. Fresh summer sports feeling, bright neutral studio surface, soft commercial daylight, clean gentle shadows, accurate pastel and light neutral colors, product-first composition, full visors visible, no cropped brim edges, no people, no hands, no faces, no logo, no readable text, no props, catalog-ready product image, airy lightweight breathable material detail, vertical 4:5.
+
 positive_prompt: |
   Clean premium ecommerce product photo of a coordinated multi-color collection of breathable open-top sports sun visors. One light neutral or soft pastel visor is the hero product, with supporting colorways arranged neatly behind or beside it. Each visor has a clear open-top crown, smooth curved front brim, lightweight matte athletic fabric, visible breathable mesh side panels, subtle clean stitching, soft fabric sweatband, and a simple adjustable back closure. The product must read unmistakably as an open-top sports visor, not a baseball cap or cycling cap. Fresh summer sports feeling, bright neutral studio surface, soft commercial daylight, clean gentle shadows, accurate pastel and light neutral colors, product-first composition, full visors visible, no cropped brim edges, no people, no hands, no faces, no logo, no readable text, no props, catalog-ready product image, airy lightweight breathable material detail, vertical 4:5.
 

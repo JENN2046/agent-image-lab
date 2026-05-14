@@ -7,9 +7,9 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Current synced baseline before v8_017 failed trial review gate: be841c1affce059da662d64f6ae85978d7009d58 on master == origin/master.
-Current mainline state: v8_017 failed second product generation review; v8.016 consumed one authorized provider call and failed with sanitized HTTP 400, no image.
-Current phase id: v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate.
+Current synced baseline before v8_018 prompt runner mapping fix gate: e59fe0cac8df4d61e5b705f10640c6057ceb916f on master == origin/master.
+Current mainline state: v8_018 second product prompt runner mapping fix; canonical prompt field added for the Native Doubao loader, no retry performed.
+Current phase id: v8_018_second_product_prompt_or_runner_static_fix_gate.
 Prior human route selection gate: v7.261_human_product_route_selection_request_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
@@ -243,10 +243,14 @@ v8_016_output_images_count: 0.
 v8_016_output_directory_created: false.
 v8_016_no_image_to_review: true.
 v8_016_retry_allowed_now: false.
-v8_017_failed_trial_review_in_progress: true.
+v8_017_failed_trial_review_completed: true.
+v8_018_prompt_runner_mapping_fix_in_progress: true.
+v8_018_canonical_prompt_field_added_or_confirmed: true.
+v8_018_positive_prompt_mapping_resolved: true.
+v8_018_runner_prompt_field: prompt.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized now: second generation, Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, retry, accepted_samples write, runs output commit, tag, release, deploy.
-Recommended next: v8_018_second_product_prompt_or_runner_static_fix_gate（人工决定是否做 prompt / runner 参数静态修正；不自动重新生成）.
+Recommended next: v8_019_second_product_second_trial_authorization_decision_gate（人工决定是否基于静态修正，重新授权一次最小真实生成试跑）.
 auto_execution_allowed_for_next: false.
 ```
 
