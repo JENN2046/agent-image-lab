@@ -1,5 +1,39 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.003 Delivery Package Closeout Or Retouch Handoff Gate
+
+```text
+phase_id: v8_003_delivery_package_closeout_or_retouch_handoff_gate
+Status: completed_validated_pending_guarded_commit_and_push
+Source phase: v8_002_retouch_acceptance_criteria_or_delivery_package_gate
+Source commit: f77f51e41d0231d9ef17b3c32981ffb6accd7956
+Purpose: create a retouch handoff package for v4
+current_best_candidate: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+asset_status: accepted_candidate_with_minor_retouch
+commercial_delivery_ready: false
+memory_suitability: deferred
+retouch_handoff_package_created: true
+retouch_handoff_package_ref: docs/retouch_handoff_package_matte_ceramic_mug_v4.md
+delivery_package_spec_linked: true
+retouch_acceptance_criteria_linked: true
+fifth_generation_started: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+retry: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+production_candidate_002_started: false
+Batch_005_started: false
+output_image_added_to_git: false
+accepted_samples_written: false
+recommended_next: v8_004_final_retouch_route_closeout
+recommended_next_zh: 封存 V8 final retouch planning 路线结果，不生成新图
+auto_execution_allowed_for_next: false
+next_phase_started: false
+```
+
 # v8.002 Retouch Acceptance Criteria Or Delivery Package Gate
 
 ```text

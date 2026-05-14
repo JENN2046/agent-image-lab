@@ -7,9 +7,9 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Current synced baseline before v8.002: 5ce86e0 on master == origin/master.
-Current mainline state: v8.002 retouch acceptance criteria and delivery package spec created for v4; generation remains stopped.
-Current phase id: v8_002_retouch_acceptance_criteria_or_delivery_package_gate.
+Current synced baseline before v8.003: f77f51e on master == origin/master.
+Current mainline state: v8.003 retouch handoff package created for v4; generation remains stopped.
+Current phase id: v8_003_delivery_package_closeout_or_retouch_handoff_gate.
 Prior human route selection gate: v7.261_human_product_route_selection_request_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
@@ -159,11 +159,21 @@ v8_002_fifth_generation_started: false.
 v8_002_output_image_added_to_git: false.
 v8_002_memory_write_performed: false.
 v8_002_production_candidate_002_started: false.
+v8_003_retouch_handoff_package_created: true.
+retouch_handoff_package_ref: docs/retouch_handoff_package_matte_ceramic_mug_v4.md.
+v8_003_delivery_package_spec_linked: true.
+v8_003_retouch_acceptance_criteria_linked: true.
+v8_003_commercial_delivery_ready: false.
+v8_003_memory_suitability: deferred.
+v8_003_fifth_generation_started: false.
+v8_003_output_image_added_to_git: false.
+v8_003_memory_write_performed: false.
+v8_003_production_candidate_002_started: false.
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed.
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized now: Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, retry, fifth generation, tag, release, deploy.
-Recommended next: v8_003_delivery_package_closeout_or_retouch_handoff_gate（封存修图交付包，或进入人工修图交接说明；不生成新图）.
+Recommended next: v8_004_final_retouch_route_closeout（封存 V8 final retouch planning 路线结果，不生成新图）.
 auto_execution_allowed_for_next: false.
 ```
 
