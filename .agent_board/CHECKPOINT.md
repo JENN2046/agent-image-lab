@@ -1,10 +1,47 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V9.009 Final Retouch Action Package Gate
+
+```text
+phase_id: v9_009_final_retouch_action_package_gate
+status: completed_pending_validation_commit_push
+source_phase: v9_008_commercial_delivery_review_result_decision_gate
+source_commit: f1f87ab3e5a82e22004da8f83d19e400ded5ae0f
+purpose: create a docs-only final retouch action package after human selected v9.008 Option B
+phase_record_ref: docs/v9_009_final_retouch_action_package_gate.md
+final_retouch_action_package_ref: docs/final_retouch_action_package_matte_ceramic_mug_v4.md
+selected_route: delivery_readiness_layer
+selected_asset: ceramic_mug_v4
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+previous_review_result: needs_final_retouch
+final_retouch_action_package_created: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+memory_write_allowed: false
+production_candidate_002_allowed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+image_editing_performed: false
+real_commercial_delivery_execution: false
+recommended_next: v9_010_final_retouch_execution_or_closeout_decision_gate
+```
+
 # V9.008 Commercial Delivery Review Result Decision Gate
 
 ```text
 phase_id: v9_008_commercial_delivery_review_result_decision_gate
-status: completed_pending_validation_commit_push
+status: completed_remote_synced_after_guarded_push
 source_phase: v9_007_commercial_delivery_review_docs_only_execution_gate
 source_commit: 0d8ab4478bdfc488c6eda0ec3c83b66946d99e9d
 purpose: present path options after the v9.007 commercial delivery review returned needs_final_retouch

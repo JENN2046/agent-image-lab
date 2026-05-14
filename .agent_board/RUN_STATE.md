@@ -9,16 +9,53 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v9_008_commercial_delivery_review_result_decision_gate. This docs-only gate presents Option A/B/C after the v9.007 needs_final_retouch review result without provider contact, image generation, memory write, accepted_samples write, commercial_delivery_ready=true, or production promotion.
+Agent Image Lab is in v9_009_final_retouch_action_package_gate. This docs-only gate creates a final retouch action package for ceramic_mug_v4 without image editing, image movement, provider contact, image generation, memory write, accepted_samples write, commercial_delivery_ready=true, or production promotion.
 ```
 
 ## Current Phase
 
 ```text
+V9.009 Final Retouch Action Package Gate
+phase_id: v9_009_final_retouch_action_package_gate
+source_phase: v9_008_commercial_delivery_review_result_decision_gate
+status: completed_pending_validation_commit_push
+source_commit: f1f87ab3e5a82e22004da8f83d19e400ded5ae0f
+source_message: docs: decide commercial delivery review result path
+branch: master tracking origin/master
+origin_sync_current: local HEAD equals origin/master at f1f87ab before v9.009 patch
+ahead_behind: 0/0 before v9.009 patch
+selected_route: delivery_readiness_layer
+selected_asset: ceramic_mug_v4
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+previous_review_result: needs_final_retouch
+final_retouch_action_package_created: true
+final_retouch_action_package_ref: docs/final_retouch_action_package_matte_ceramic_mug_v4.md
+commercial_delivery_ready: false
+memory_suitability: deferred
+memory_write_allowed: false
+production_candidate_002_allowed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+image_editing_performed: false
+real_commercial_delivery_execution: false
+recommended_next: v9_010_final_retouch_execution_or_closeout_decision_gate
+recommended_next_auto_execution_allowed: false
+---
 V9.008 Commercial Delivery Review Result Decision Gate
 phase_id: v9_008_commercial_delivery_review_result_decision_gate
 source_phase: v9_007_commercial_delivery_review_docs_only_execution_gate
-status: completed_pending_validation_commit_push
+status: completed_remote_synced_after_guarded_push
 source_commit: 0d8ab4478bdfc488c6eda0ec3c83b66946d99e9d
 source_message: docs: execute commercial delivery review for ceramic mug
 branch: master tracking origin/master

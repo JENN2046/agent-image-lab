@@ -9,6 +9,23 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v9_009_final_retouch_action_package_gate.
+Purpose: create a docs-only final retouch action package after human selected v9.008 Option B; no image editing, image movement, provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, real commercial delivery execution, or commercial_delivery_ready=true.
+source_phase: v9_008_commercial_delivery_review_result_decision_gate.
+source_commit: f1f87ab3e5a82e22004da8f83d19e400ded5ae0f.
+selected_route: delivery_readiness_layer.
+selected_asset: ceramic_mug_v4.
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg.
+previous_review_result: needs_final_retouch.
+final_retouch_action_package_created: true.
+final_retouch_action_package_ref: docs/final_retouch_action_package_matte_ceramic_mug_v4.md.
+commercial_delivery_ready: false.
+memory_suitability: deferred.
+memory_write_allowed: false.
+production_candidate_002_allowed: false.
+recommended_next: v9_010_final_retouch_execution_or_closeout_decision_gate.
+recommended_next_auto_execution_allowed: false.
+---
 Current active gate: v9_008_commercial_delivery_review_result_decision_gate.
 Purpose: present Option A/B/C after v9.007 returned needs_final_retouch; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, real commercial delivery execution, or commercial_delivery_ready=true.
 source_phase: v9_007_commercial_delivery_review_docs_only_execution_gate.
