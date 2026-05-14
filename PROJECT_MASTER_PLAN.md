@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_synced_head_before_v8_001: 92d2eab
-origin_master_before_v8_001: 92d2eab
-status: v8_001_final_retouch_plan_created
-mode: A4 docs-only final retouch planning gate
-phase_id: v8_001_final_retouch_planning_gate
+latest_synced_head_before_v8_002: 5ce86e0
+origin_master_before_v8_002: 5ce86e0
+status: v8_002_retouch_acceptance_and_delivery_package_created
+mode: A4 docs-only retouch acceptance and delivery package gate
+phase_id: v8_002_retouch_acceptance_criteria_or_delivery_package_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -163,9 +163,19 @@ v8_001_fifth_generation_started: false
 v8_001_output_image_added_to_git: false
 v8_001_memory_write_performed: false
 v8_001_production_candidate_002_started: false
+v8_002_retouch_acceptance_criteria_created: true
+retouch_acceptance_criteria_ref: docs/retouch_acceptance_criteria_matte_ceramic_mug_v4.md
+v8_002_delivery_package_spec_created: true
+delivery_package_spec_ref: docs/delivery_package_spec_matte_ceramic_mug_v4.md
+v8_002_commercial_delivery_ready: false
+v8_002_memory_suitability: deferred
+v8_002_fifth_generation_started: false
+v8_002_output_image_added_to_git: false
+v8_002_memory_write_performed: false
+v8_002_production_candidate_002_started: false
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate
-recommended_next: v8_002_retouch_acceptance_criteria_or_delivery_package_gate
+recommended_next: v8_003_delivery_package_closeout_or_retouch_handoff_gate
 ```
 
 ## Product Direction

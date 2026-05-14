@@ -1,5 +1,39 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.002 Retouch Acceptance Criteria Or Delivery Package Gate
+
+```text
+phase_id: v8_002_retouch_acceptance_criteria_or_delivery_package_gate
+Status: completed_remote_synced_after_guarded_push
+Source phase: v8_001_final_retouch_planning_gate
+Source commit: 5ce86e0f5297f8a25b2195746f286c7eca0ba5e7
+Purpose: define retouch acceptance criteria and delivery package structure for v4
+current_best_candidate: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+asset_status: accepted_candidate_with_minor_retouch
+commercial_delivery_ready: false
+memory_suitability: deferred
+retouch_acceptance_criteria_created: true
+retouch_acceptance_criteria_ref: docs/retouch_acceptance_criteria_matte_ceramic_mug_v4.md
+delivery_package_spec_created: true
+delivery_package_spec_ref: docs/delivery_package_spec_matte_ceramic_mug_v4.md
+fifth_generation_started: false
+provider_contact: false
+plugin_call: false
+image_generation: false
+retry: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+production_candidate_002_started: false
+Batch_005_started: false
+output_image_added_to_git: false
+accepted_samples_written: false
+recommended_next: v8_003_delivery_package_closeout_or_retouch_handoff_gate
+recommended_next_zh: 封存修图交付包，或进入人工修图交接说明；不生成新图
+auto_execution_allowed_for_next: false
+next_phase_started: false
+```
+
 # v8.001 Final Retouch Planning Gate
 
 ```text

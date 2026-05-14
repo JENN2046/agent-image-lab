@@ -9,24 +9,24 @@ A4.5 — Smart Local Autopilot under A4 — Sustained Local Autopilot boundaries
 ## Current Mission
 
 ```text
-Agent Image Lab is in v8_001_final_retouch_planning_gate. The v4 final retouch plan has been created; generation remains stopped and the next phase is a non-executing retouch acceptance criteria or delivery package gate.
+Agent Image Lab is in v8_002_retouch_acceptance_criteria_or_delivery_package_gate. Retouch acceptance criteria and delivery package spec have been created for v4; generation remains stopped and the next phase is a non-executing closeout or retouch handoff gate.
 ```
 
 ## Current Phase
 
 ```text
-v8.001 Final Retouch Planning Gate
-phase_id: v8_001_final_retouch_planning_gate
-source_phase: v8_route_selection_human_decision_gate
+v8.002 Retouch Acceptance Criteria Or Delivery Package Gate
+phase_id: v8_002_retouch_acceptance_criteria_or_delivery_package_gate
+source_phase: v8_001_final_retouch_planning_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
-status: v8_001_final_retouch_plan_created
-source_commit: 92d2eab
-source_message: docs: select v8 final retouch planning route
+status: v8_002_retouch_acceptance_and_delivery_package_created
+source_commit: 5ce86e0
+source_message: docs: add final retouch plan for v4 candidate
 branch: master tracking origin/master
-Worktree: clean before v8.001 final retouch planning patch; generated v7.281 output remains ignored under runs/
+Worktree: clean before v8.002 retouch acceptance patch; generated v7.281 output remains ignored under runs/
 worktree_start_clean: true
-origin_sync_current: local HEAD equals origin/master at 92d2eab
+origin_sync_current: local HEAD equals origin/master at 5ce86e0
 ahead_behind: 0/0
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false; the single authorized v7.281 call has been consumed
@@ -110,8 +110,8 @@ output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug
 auto_retry_for_second_trial: false
 stop_after_generation_for_second_trial: true
 human_review_required_after_generation: true
-recommended_next: v8_002_retouch_acceptance_criteria_or_delivery_package_gate
-recommended_next_zh: 定义修图验收标准或交付包，不生成新图
+recommended_next: v8_003_delivery_package_closeout_or_retouch_handoff_gate
+recommended_next_zh: 封存修图交付包，或进入人工修图交接说明；不生成新图
 v8_route_selection_completed: true
 selected_v8_route: final_retouch_planning
 selected_v8_route_zh: 最终修图规划
@@ -121,6 +121,16 @@ v8_001_fifth_generation_started: false
 v8_001_output_image_added_to_git: false
 v8_001_memory_write_performed: false
 v8_001_production_candidate_002_started: false
+v8_002_retouch_acceptance_criteria_created: true
+retouch_acceptance_criteria_ref: docs/retouch_acceptance_criteria_matte_ceramic_mug_v4.md
+v8_002_delivery_package_spec_created: true
+delivery_package_spec_ref: docs/delivery_package_spec_matte_ceramic_mug_v4.md
+v8_002_commercial_delivery_ready: false
+v8_002_memory_suitability: deferred
+v8_002_fifth_generation_started: false
+v8_002_output_image_added_to_git: false
+v8_002_memory_write_performed: false
+v8_002_production_candidate_002_started: false
 v8_next_phase_auto_execution_allowed: false
 v7.274_status: completed_success
 v7.274_provider_contact: true

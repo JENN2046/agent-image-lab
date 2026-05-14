@@ -3,15 +3,15 @@
 ## Handoff Summary
 
 ```text
-Status: v8_001_final_retouch_planning_gate completed in this handoff; final retouch plan created for v4, generation remains stopped, and v8.002 delivery/acceptance planning is the next non-executing step.
-Reason: v8 route selection was committed and pushed at 92d2eab, then v8.001 created a retouch instruction package for the current best candidate without fifth generation, memory write, runtime implementation, or production_candidate_002.
+Status: v8_002_retouch_acceptance_criteria_or_delivery_package_gate completed in this handoff; retouch acceptance criteria and delivery package spec are created for v4, generation remains stopped, and v8.003 closeout/handoff is the next non-executing step.
+Reason: v8.001 was committed and pushed at 5ce86e0, then v8.002 defined pass/fail/needs_rework criteria and delivery package fields without fifth generation, memory write, runtime implementation, or production_candidate_002.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
 Latest visible head before v7.273: 6f95b53 == origin/master
-Current synced HEAD before v8.001 patch: 92d2eab docs: select v8 final retouch planning route
+Current synced HEAD before v8.002 patch: 5ce86e0 docs: add final retouch plan for v4 candidate
 ahead_behind: 0/0
-Worktree: clean before v8.001 final retouch planning patch; v7.281 output remains ignored under runs/
-Current status: v8_001_final_retouch_plan_created
+Worktree: clean before v8.002 retouch acceptance patch; v7.281 output remains ignored under runs/
+Current status: v8_002_retouch_acceptance_and_delivery_package_created
 same_provider_retry_allowed_now: false
 A5_execution_allowed_now: false after v7.282; the single authorized v7.281 call has been consumed
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate
@@ -169,8 +169,18 @@ v8_001_fifth_generation_started: false
 v8_001_output_image_added_to_git: false
 v8_001_memory_write_performed: false
 v8_001_production_candidate_002_started: false
-recommended_next: v8_002_retouch_acceptance_criteria_or_delivery_package_gate
-recommended_next_zh: 定义修图验收标准或交付包，不生成新图
+v8_002_retouch_acceptance_criteria_created: true
+retouch_acceptance_criteria_ref: docs/retouch_acceptance_criteria_matte_ceramic_mug_v4.md
+v8_002_delivery_package_spec_created: true
+delivery_package_spec_ref: docs/delivery_package_spec_matte_ceramic_mug_v4.md
+v8_002_commercial_delivery_ready: false
+v8_002_memory_suitability: deferred
+v8_002_fifth_generation_started: false
+v8_002_output_image_added_to_git: false
+v8_002_memory_write_performed: false
+v8_002_production_candidate_002_started: false
+recommended_next: v8_003_delivery_package_closeout_or_retouch_handoff_gate
+recommended_next_zh: 封存修图交付包，或进入人工修图交接说明；不生成新图
 provider_contact_after_v7_274: false
 image_generation_after_v7_274: false
 human_review_required_now: false

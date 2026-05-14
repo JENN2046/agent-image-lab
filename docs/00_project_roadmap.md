@@ -18,9 +18,9 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Current synced baseline before v8.001: 92d2eab on master == origin/master.
-Current mainline state: v8.001 final retouch planning created for v4; generation remains stopped.
-Current phase id: v8_001_final_retouch_planning_gate.
+Current synced baseline before v8.002: 5ce86e0 on master == origin/master.
+Current mainline state: v8.002 retouch acceptance criteria and delivery package spec created for v4; generation remains stopped.
+Current phase id: v8_002_retouch_acceptance_criteria_or_delivery_package_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
@@ -159,9 +159,19 @@ v8_001_fifth_generation_started: false.
 v8_001_output_image_added_to_git: false.
 v8_001_memory_write_performed: false.
 v8_001_production_candidate_002_started: false.
+v8_002_retouch_acceptance_criteria_created: true.
+retouch_acceptance_criteria_ref: docs/retouch_acceptance_criteria_matte_ceramic_mug_v4.md.
+v8_002_delivery_package_spec_created: true.
+delivery_package_spec_ref: docs/delivery_package_spec_matte_ceramic_mug_v4.md.
+v8_002_commercial_delivery_ready: false.
+v8_002_memory_suitability: deferred.
+v8_002_fifth_generation_started: false.
+v8_002_output_image_added_to_git: false.
+v8_002_memory_write_performed: false.
+v8_002_production_candidate_002_started: false.
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed.
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate.
-Recommended next: v8_002_retouch_acceptance_criteria_or_delivery_package_gate（定义修图验收标准或交付包，不生成新图）.
+Recommended next: v8_003_delivery_package_closeout_or_retouch_handoff_gate（封存修图交付包，或进入人工修图交接说明；不生成新图）.
 auto_execution_allowed_for_next: false.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)
@@ -476,7 +486,8 @@ daily_note_called: false
 23. Batch 005、production_candidate_002、memory_write_path、DailyNote/VCP memory、retry、第五次生成、tag/release/deploy 仍未授权。
 24. v8_route_selection_human_decision_gate 已正式选择 `final_retouch_planning`（最终修图规划），不进入第五次生成、不写 memory、不进入 production_candidate_002。
 25. v8_001_final_retouch_planning_gate 已为 v4 当前最佳候选制定最终修图说明包；不生成新图、不写 memory、不复制或提交 `runs/` 输出图。
-26. recommended next: v8_002_retouch_acceptance_criteria_or_delivery_package_gate（定义修图验收标准或交付包，不生成新图）。
+26. v8_002_retouch_acceptance_criteria_or_delivery_package_gate 已定义修图验收标准和交付包结构；commercial_delivery_ready 仍为 false，memory_suitability 仍为 deferred。
+27. recommended next: v8_003_delivery_package_closeout_or_retouch_handoff_gate（封存修图交付包，或进入人工修图交接说明；不生成新图）。
 
 ## 永久安全门
 
