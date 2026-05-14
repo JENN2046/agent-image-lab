@@ -1,10 +1,43 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.026 Second Product Prompt V2 Generation Authorization Gate
+
+```text
+phase_id: v8_026_second_product_prompt_v2_generation_authorization_gate
+status: in_progress
+source_phase: v8_025_second_product_next_minimal_generation_authorization_decision_gate
+source_commit: 6a2417802daa95cf05e611dd607183a374154011
+purpose: record the owner's Option A selection and authorize exactly one prompt v2 minimal real generation trial for v8.027
+phase_record_ref: docs/v8_026_second_product_prompt_v2_generation_authorization_gate.md
+this_is_new_A5_authorization: true
+previous_v8_020_authorization_consumed: true
+retry_allowed_by_previous_authorization: false
+approved_product: multi_color_mesh_sports_visor
+approved_prompt_package: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
+output_directory: runs/real_generation/v8_027_multi_color_mesh_sports_visor_v2_trial/
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 1
+auto_retry: false
+stop_after_generation: true
+human_review_required_after_generation: true
+provider_contact: false
+image_generation: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+recommended_next: v8_027_second_product_prompt_v2_minimal_generation_trial_execution
+```
+
 # v8.025 Second Product Next Minimal Generation Authorization Decision Gate
 
 ```text
 phase_id: v8_025_second_product_next_minimal_generation_authorization_decision_gate
-status: in_progress
+status: completed_remote_synced_after_guarded_push
 source_phase: v8_024_second_product_prompt_v2_static_review_gate
 source_commit: bcf0b556d7fdc9b63ad62386d0bf338a70e74b68
 purpose: present Option A/B/C for whether prompt v2 should get a new minimal generation authorization

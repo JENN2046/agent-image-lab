@@ -1,5 +1,32 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v8.026-SECOND-PRODUCT-PROMPT-V2-GENERATION-AUTHORIZATION
+
+Task:
+
+```text
+Record the owner's v8.025 Option A selection and authorize exactly one prompt v2 minimal real generation trial for v8.027 after commit and push.
+```
+
+Result:
+
+```text
+approved_product: multi_color_mesh_sports_visor
+approved_prompt_package: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
+output_directory: runs/real_generation/v8_027_multi_color_mesh_sports_visor_v2_trial/
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 1
+auto_retry: false
+this_is_new_A5_authorization: true
+```
+
+Boundary:
+
+```text
+v8.026 records authorization only. No provider contact, image generation, retry, .env.local secret value read, DailyNote write, VCP memory write, production_candidate_002, Batch 005, dependency change, package.json change, accepted_samples write, or runs output commit is performed by v8.026.
+```
+
 ## VALIDATION-20260514-v8.025-SECOND-PRODUCT-PROMPT-V2-GENERATION-DECISION
 
 Task:

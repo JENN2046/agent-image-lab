@@ -9,24 +9,24 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v8_025_second_product_next_minimal_generation_authorization_decision_gate. Prompt v2 passed static review, and the project is waiting for human Option A/B/C selection.
+Agent Image Lab is in v8_026_second_product_prompt_v2_generation_authorization_gate. The owner selected v8.025 Option A, and this gate records the new single-use A5 authorization before v8.027 execution.
 ```
 
 ## Current Phase
 
 ```text
-v8.025 Second Product Next Minimal Generation Authorization Decision Gate
-phase_id: v8_025_second_product_next_minimal_generation_authorization_decision_gate
-source_phase: v8_024_second_product_prompt_v2_static_review_gate
+v8.026 Second Product Prompt V2 Generation Authorization Gate
+phase_id: v8_026_second_product_prompt_v2_generation_authorization_gate
+source_phase: v8_025_second_product_next_minimal_generation_authorization_decision_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
-status: pending_human_generation_authorization_for_prompt_v2
-source_commit: bcf0b556d7fdc9b63ad62386d0bf338a70e74b68
-source_message: docs: review second product prompt v2
+status: prompt_v2_generation_authorization_record_in_progress
+source_commit: 6a2417802daa95cf05e611dd607183a374154011
+source_message: docs: decide second product prompt v2 generation path
 branch: master tracking origin/master
 Worktree: clean before v8_003a A4.8 rail package patch; generated v7.281 output remains ignored under runs/
 worktree_start_clean: true
-origin_sync_current: local HEAD equals origin/master at bcf0b55
+origin_sync_current: local HEAD equals origin/master at 6a24178
 ahead_behind: 0/0
 A4_8_safe_project_operator_rail_created: true
 A4_8_safe_project_operator_rail_zh: 安全项目运营轨
@@ -122,8 +122,8 @@ output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug
 auto_retry_for_second_trial: false
 stop_after_generation_for_second_trial: true
 human_review_required_after_generation: true
-recommended_next: pending_human_generation_authorization_for_prompt_v2
-recommended_next_zh: 等待人工选择 Option A/B/C；不得自动进入 provider execution
+recommended_next: v8_027_second_product_prompt_v2_minimal_generation_trial_execution
+recommended_next_zh: 执行一次已授权 prompt v2 最小真实生成，然后停止等待人工审片或失败复核
 v8_003b_A4_8_rule_intake_smoke_test: passed
 v8_006_A4_8_state_and_rule_intake_review: passed_read_only
 v8_007_A4_8_mutation_live_run_docs_only: completed_remote_synced_after_guarded_push
@@ -243,13 +243,27 @@ v8_024_prompt_v2_static_review_ref: reviews/v8_024_second_product_prompt_v2_stat
 v8_024_prompt_v2_static_review_result: pass_ready_for_authorization_decision
 v8_024_provider_contact: false
 v8_024_image_generation: false
-v8_025_second_product_next_minimal_generation_authorization_decision_gate: in_progress
+v8_025_second_product_next_minimal_generation_authorization_decision_gate: completed_remote_synced_after_guarded_push
 v8_025_options_presented: authorize_next_minimal_real_generation_trial | more_static_prompt_payload_review | stop_route_B_generation_here
 v8_025_recommended_option: authorize_next_minimal_real_generation_trial
 v8_025_human_decision_required: true
 v8_025_A5_authorization_created: false
 v8_025_provider_contact: false
 v8_025_image_generation: false
+v8_026_second_product_prompt_v2_generation_authorization_gate: in_progress
+v8_026_human_selected_option: authorize_next_minimal_real_generation_trial
+v8_026_this_is_new_A5_authorization: true
+v8_026_previous_v8_020_authorization_consumed: true
+v8_026_approved_product: multi_color_mesh_sports_visor
+v8_026_approved_prompt_package: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
+v8_026_output_directory: runs/real_generation/v8_027_multi_color_mesh_sports_visor_v2_trial/
+v8_026_provider_calls_max: 1
+v8_026_generation_attempts_max: 1
+v8_026_output_images_max: 1
+v8_026_auto_retry: false
+v8_026_provider_contact: false
+v8_026_image_generation: false
+v8_026_env_local_secret_value_read: false
 Route_B_initial_docs_sequence_completed: true
 v8_route_selection_completed: true
 selected_v8_route: final_retouch_planning

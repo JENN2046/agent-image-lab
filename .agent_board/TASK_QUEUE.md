@@ -81,13 +81,13 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-v8_025_second_product_next_minimal_generation_authorization_decision_gate — present Option A/B/C for prompt v2; do not generate or retry.
+v8_026_second_product_prompt_v2_generation_authorization_gate — record the owner's Option A selection and one new single-use A5 authorization; do not generate in this gate.
 ```
 
 ### todo
 
 ```text
-pending_human_generation_authorization_for_prompt_v2 — wait for human selection; do not auto-enter provider execution.
+v8_027_second_product_prompt_v2_minimal_generation_trial_execution — after v8.026 commit and push, execute exactly one authorized prompt v2 generation attempt, then stop.
 ```
 
 ### recommended_next_after_v7_285
@@ -272,10 +272,17 @@ v8_024_second_product_prompt_v2_static_review_gate: completed_remote_synced_afte
 v8_024_prompt_v2_static_review_ref: reviews/v8_024_second_product_prompt_v2_static_review.md
 v8_024_prompt_v2_static_review_result: pass_ready_for_authorization_decision
 recommended_next_after_v8_024: v8_025_second_product_next_minimal_generation_authorization_decision_gate
-v8_025_second_product_next_minimal_generation_authorization_decision_gate: in_progress
+v8_025_second_product_next_minimal_generation_authorization_decision_gate: completed_remote_synced_after_guarded_push
 v8_025_options_presented: authorize_next_minimal_real_generation_trial | more_static_prompt_payload_review | stop_route_B_generation_here
 v8_025_recommended_option: authorize_next_minimal_real_generation_trial
-recommended_next_after_v8_025: pending_human_generation_authorization_for_prompt_v2
+v8_025_human_selected_option: authorize_next_minimal_real_generation_trial
+v8_026_second_product_prompt_v2_generation_authorization_gate: in_progress
+v8_026_approved_prompt_package: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
+v8_026_output_directory: runs/real_generation/v8_027_multi_color_mesh_sports_visor_v2_trial/
+v8_026_provider_calls_max: 1
+v8_026_generation_attempts_max: 1
+v8_026_output_images_max: 1
+recommended_next_after_v8_026: v8_027_second_product_prompt_v2_minimal_generation_trial_execution
 ```
 
 ### done

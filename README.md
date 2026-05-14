@@ -7,9 +7,9 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Current synced baseline before v8_025 decision gate: bcf0b556d7fdc9b63ad62386d0bf338a70e74b68 on master == origin/master.
-Current mainline state: v8_025 presents the human decision for whether prompt v2 should receive a new minimal generation authorization.
-Current phase id: v8_025_second_product_next_minimal_generation_authorization_decision_gate.
+Current synced baseline before v8_026 authorization gate: 6a2417802daa95cf05e611dd607183a374154011 on master == origin/master.
+Current mainline state: v8_026 records the new single-use A5 authorization for one prompt v2 minimal generation trial; no provider contact occurs until v8_027 after commit and push.
+Current phase id: v8_026_second_product_prompt_v2_generation_authorization_gate.
 Prior human route selection gate: v7.261_human_product_route_selection_request_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
@@ -284,11 +284,22 @@ v8_025_human_decision_required: true.
 v8_025_A5_authorization_created: false.
 v8_025_provider_contact: false.
 v8_025_image_generation: false.
+v8_026_human_selected_option: authorize_next_minimal_real_generation_trial.
+v8_026_this_is_new_A5_authorization: true.
+v8_026_approved_product: multi_color_mesh_sports_visor.
+v8_026_approved_prompt_package: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml.
+v8_026_output_directory: runs/real_generation/v8_027_multi_color_mesh_sports_visor_v2_trial/.
+v8_026_provider_calls_max: 1.
+v8_026_generation_attempts_max: 1.
+v8_026_output_images_max: 1.
+v8_026_auto_retry: false.
+v8_026_provider_contact: false.
+v8_026_image_generation: false.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized now in v8.022: provider contact, image generation, .env.local read, retry, Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, accepted_samples write, runs output commit, tag, release, deploy.
 Not authorized now in v8.023: provider contact, image generation, .env.local read, retry, Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, accepted_samples write, runs output commit, tag, release, deploy.
-Recommended next: pending_human_generation_authorization_for_prompt_v2（等待人工选择 Option A/B/C；不得自动进入 provider execution）.
-auto_execution_allowed_for_next: false.
+Recommended next: v8_027_second_product_prompt_v2_minimal_generation_trial_execution（执行一次已授权 prompt v2 最小真实生成，然后停止）.
+auto_execution_allowed_for_next: true_after_v8_026_commit_and_push.
 ```
 
 历史状态脉络：
