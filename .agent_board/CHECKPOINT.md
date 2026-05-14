@@ -1,10 +1,49 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V9.015 Sports Visor Delivery Readiness Package Gate
+
+```text
+phase_id: v9_015_sports_visor_delivery_readiness_package_gate
+status: completed_pending_validation_commit_push
+source_phase: v9_014_sports_visor_delivery_readiness_scope_and_asset_selection_gate
+source_commit: 84146f422703ae8831a1336af5724c0a00ee8d56
+purpose: create a docs-only delivery readiness package for sports_visor_v8_033
+phase_record_ref: docs/v9_015_sports_visor_delivery_readiness_package_gate.md
+delivery_readiness_package_ref: docs/delivery_readiness_package_multi_color_mesh_sports_visor_v8_033.md
+selected_route: delivery_readiness_layer
+selected_asset: sports_visor_v8_033
+selected_product: multi_color_mesh_sports_visor
+source_output: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg
+asset_status: accepted_candidate_with_minor_watch_items
+delivery_readiness_package_created: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+memory_write_allowed: false
+production_candidate_002_allowed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+image_editing_performed: false
+derivative_image_created: false
+real_commercial_delivery_execution: false
+recommended_next: v9_016_sports_visor_delivery_readiness_acceptance_criteria_gate
+```
+
 # V9.014 Sports Visor Delivery Readiness Scope And Asset Selection Gate
 
 ```text
 phase_id: v9_014_sports_visor_delivery_readiness_scope_and_asset_selection_gate
-status: completed_pending_validation_commit_push
+status: completed_remote_synced_after_guarded_push
 source_phase: v9_013_ceramic_mug_first_asset_delivery_lane_closeout_gate
 source_commit: af22c2eff3faf96891ce97536279bb9430948d8b
 purpose: select sports_visor_v8_033 as the second V9 delivery readiness lane
