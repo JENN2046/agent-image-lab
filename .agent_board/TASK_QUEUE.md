@@ -9,6 +9,26 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v8_028_second_product_prompt_v2_failed_trial_review_or_output_persistence_gate.
+Purpose: seal the Route B prompt v2 anomaly where v8.027 returned HTTP 200 / COMPLETED_GENERATED but local output verification found zero image files.
+approved_product: multi_color_mesh_sports_visor.
+prompt_package_used: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml.
+v8_027_provider_contact_happened: true.
+v8_027_provider_calls_used: 1.
+v8_027_generation_attempts_used: 1.
+v8_027_http_status: 200.
+v8_027_runner_reported_completed_generated: true.
+v8_027_runner_reported_image_count: 1.
+v8_027_runner_reported_files_written_count: 1.
+v8_027_local_file_count_verified: 0.
+v8_027_output_images_count: 0.
+image_created_for_review: false.
+retry_allowed_now: false.
+new_A5_authorization_required_for_retry: true.
+suspected_issue_class: output_persistence_anomaly.
+recommended_next: v8_029_runner_output_persistence_static_review_and_fix_gate.
+v8_028 does not authorize provider contact, image generation, retry, .env.local secret value read, memory write, production_candidate_002, Batch 005, or runs output commit.
+---
 AUTH-PENDING-20260512-001 was consumed by one approved DoubaoGen process attempt, then two separately approved single retry/diagnostic calls also failed with no image. The latest sanitized error category is still quota_or_rate_limit.
 Current status: failed_no_image_repeated_quota_or_rate_limit.
 same_provider_retry_allowed_now: false.
@@ -81,13 +101,13 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-v8_026_second_product_prompt_v2_generation_authorization_gate — record the owner's Option A selection and one new single-use A5 authorization; do not generate in this gate.
+none — v8_028 is completed_validated_pending_guarded_push.
 ```
 
 ### todo
 
 ```text
-v8_027_second_product_prompt_v2_minimal_generation_trial_execution — after v8.026 commit and push, execute exactly one authorized prompt v2 generation attempt, then stop.
+v8_029_runner_output_persistence_static_review_and_fix_gate — recommended static runner/adapter persistence review; no automatic generation authorization.
 ```
 
 ### recommended_next_after_v7_285

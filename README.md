@@ -7,6 +7,24 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current synced baseline before v8_028 anomaly review gate: 00764b4bfd980fe92af023667ee06309819b6f32 on master == origin/master.
+Current mainline state: v8_028 seals the prompt v2 second-product output persistence anomaly; v8.027 consumed one authorized provider call and returned HTTP 200 / COMPLETED_GENERATED, but local file verification found zero output images.
+Current phase id: v8_028_second_product_prompt_v2_failed_trial_review_or_output_persistence_gate.
+Route B second product prompt v2: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml.
+v8_027_execution_status: failed_no_local_output_file.
+v8_027_http_status: 200.
+v8_027_runner_reported_completed_generated: true.
+v8_027_runner_reported_image_count: 1.
+v8_027_runner_reported_files_written_count: 1.
+v8_027_local_file_count_verified: 0.
+v8_027_output_images_count: 0.
+v8_027_output_files: [].
+image_created_for_review: false.
+retry_allowed_now: false.
+new_A5_authorization_required_for_retry: true.
+suspected_issue_class: output_persistence_anomaly.
+recommended_next: v8_029_runner_output_persistence_static_review_and_fix_gate.
+recommended_next_auto_execution_allowed: false.
 Current synced baseline before v8_026 authorization gate: 6a2417802daa95cf05e611dd607183a374154011 on master == origin/master.
 Current mainline state: v8_026 records the new single-use A5 authorization for one prompt v2 minimal generation trial; no provider contact occurs until v8_027 after commit and push.
 Current phase id: v8_026_second_product_prompt_v2_generation_authorization_gate.

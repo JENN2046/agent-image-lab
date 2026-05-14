@@ -9,12 +9,53 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v8_026_second_product_prompt_v2_generation_authorization_gate. The owner selected v8.025 Option A, and this gate records the new single-use A5 authorization before v8.027 execution.
+Agent Image Lab is in v8_028_second_product_prompt_v2_failed_trial_review_or_output_persistence_gate. v8.027 consumed one authorized prompt v2 provider call and reported HTTP 200 / COMPLETED_GENERATED, but local verification found zero output image files, so this gate seals the output persistence anomaly and stops before any retry.
 ```
 
 ## Current Phase
 
 ```text
+v8.028 Second Product Prompt V2 Failed Trial Review Or Output Persistence Gate
+phase_id: v8_028_second_product_prompt_v2_failed_trial_review_or_output_persistence_gate
+source_phase: v8_027_second_product_prompt_v2_minimal_generation_trial_execution
+status: output_persistence_anomaly_review_completed_validated_pending_guarded_push
+source_commit: 00764b4bfd980fe92af023667ee06309819b6f32
+source_message: docs: authorize second product prompt v2 generation trial
+branch: master tracking origin/master
+origin_sync_current: local HEAD equals origin/master at 00764b4
+ahead_behind: 0/0
+approved_product: multi_color_mesh_sports_visor
+prompt_package_used: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
+v8_027_execution_status: failed_no_local_output_file
+v8_027_provider_contact_happened: true
+v8_027_image_generation_attempted: true
+v8_027_provider_calls_used: 1
+v8_027_generation_attempts_used: 1
+v8_027_http_status: 200
+v8_027_runner_reported_completed_generated: true
+v8_027_runner_reported_image_count: 1
+v8_027_runner_reported_files_written_count: 1
+v8_027_local_file_count_verified: 0
+v8_027_output_images_count: 0
+v8_027_output_files: []
+image_created_for_review: false
+no_image_to_review: true
+retry_allowed_now: false
+new_A5_authorization_required_for_retry: true
+suspected_issue_class: output_persistence_anomaly
+recommended_next: v8_029_runner_output_persistence_static_review_and_fix_gate
+recommended_next_auto_execution_allowed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+---
 v8.026 Second Product Prompt V2 Generation Authorization Gate
 phase_id: v8_026_second_product_prompt_v2_generation_authorization_gate
 source_phase: v8_025_second_product_next_minimal_generation_authorization_decision_gate

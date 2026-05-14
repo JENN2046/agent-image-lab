@@ -3,6 +3,40 @@
 ## Handoff Summary
 
 ```text
+Status: v8_028_second_product_prompt_v2_failed_trial_review_or_output_persistence_gate is the current Route B anomaly review gate.
+Reason: v8.027 consumed one authorized prompt v2 provider call and reported HTTP 200 / COMPLETED_GENERATED, but local verification found zero output files, so there is no image for human review.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v8_028 patch: 00764b4 docs: authorize second product prompt v2 generation trial
+ahead_behind: 0/0
+Worktree: clean before v8_028 patch; generated runs output remains ignored and is not staged or committed
+Current status: v8_028_second_product_prompt_v2_failed_trial_review_or_output_persistence_gate
+approved_product: multi_color_mesh_sports_visor
+prompt_package_used: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
+v8_027_execution_status: failed_no_local_output_file
+v8_027_provider_contact_happened: true
+v8_027_image_generation_attempted: true
+v8_027_provider_calls_used: 1
+v8_027_generation_attempts_used: 1
+v8_027_http_status: 200
+v8_027_runner_reported_completed_generated: true
+v8_027_runner_reported_image_count: 1
+v8_027_runner_reported_files_written_count: 1
+v8_027_local_file_count_verified: 0
+v8_027_output_images_count: 0
+image_created_for_review: false
+retry_allowed_now: false
+new_A5_authorization_required_for_retry: true
+suspected_issue_class: output_persistence_anomaly
+recommended_next: v8_029_runner_output_persistence_static_review_and_fix_gate
+recommended_next_auto_execution_allowed: false
+v8_028_provider_contact: false
+v8_028_image_generation: false
+v8_028_retry: false
+v8_028_env_local_secret_value_read: false
+v8_028_memory_write: false
+v8_028_runs_output_committed: false
+---
 Status: v8_026_second_product_prompt_v2_generation_authorization_gate is the current Route B A5 authorization record gate; the owner selected v8.025 Option A.
 Reason: v8.026 records one new single-use A5 authorization for prompt v2; provider contact is allowed only in v8.027 after v8.026 is committed and pushed.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

@@ -7725,3 +7725,33 @@ Warnings:
 Not validated:
 Notes:
 ```
+
+## VALIDATION-20260514-v8.028
+
+Task: v8.028 Second Product Prompt V2 Failed Trial Review Or Output Persistence Gate
+Commands run:
+  - git status -sb
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - node scripts/validate_current_state_alignment.js
+  - node scripts/validate_native_doubao_sandbox.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+Result: ALL REQUIRED CHECKS PASSED
+Findings:
+  - git diff --check passed after EOF whitespace fix.
+  - node scripts/validate_agent_board_state.js passed.
+  - node scripts/validate_current_state_alignment.js passed.
+  - node scripts/validate_native_doubao_sandbox.js passed.
+  - scripts/validate-agent-image-lab-local.ps1 passed with manual-review warnings only.
+  - scripts/validate_mvp.ps1 passed after the guarded commit produced the clean no-staged-files state required by its local commit scope check.
+Warnings:
+  - validate-agent-image-lab-local.ps1 reported existing manual-review warning patterns only.
+  - validate_mvp.ps1 precommit run blocked on staged files after exact staging, not on content failure; postcommit clean-state rerun passed.
+Not validated:
+  - No provider contact in v8.028
+  - No image generation in v8.028
+  - No retry in v8.028
+  - No .env.local secret value read in v8.028
+Notes:
+  - v8.028 records the v8.027 HTTP 200 / COMPLETED_GENERATED but zero-local-file anomaly.

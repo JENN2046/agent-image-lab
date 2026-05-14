@@ -1,10 +1,77 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.028 Second Product Prompt V2 Failed Trial Review Or Output Persistence Gate
+
+```text
+phase_id: v8_028_second_product_prompt_v2_failed_trial_review_or_output_persistence_gate
+status: completed_validated_pending_guarded_push
+source_phase: v8_027_second_product_prompt_v2_minimal_generation_trial_execution
+source_commit: 00764b4bfd980fe92af023667ee06309819b6f32
+purpose: seal the Route B prompt v2 output persistence anomaly and decide next static runner/adapter review route
+phase_record_ref: docs/v8_028_second_product_prompt_v2_failed_trial_review_or_output_persistence_gate.md
+review_ref: reviews/v8_028_second_product_prompt_v2_failed_output_persistence_review.md
+approved_product: multi_color_mesh_sports_visor
+prompt_package_used: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
+execution_status: failed_no_local_output_file
+provider_contact_happened: true
+image_generation_attempted: true
+provider_calls_used: 1
+generation_attempts_used: 1
+http_status: 200
+runner_reported_completed_generated: true
+runner_reported_image_count: 1
+runner_reported_files_written_count: 1
+local_file_count_verified: 0
+image_created_for_review: false
+output_images_count: 0
+no_image_to_review: true
+retry_allowed_now: false
+new_A5_authorization_required_for_retry: true
+suspected_issue_class: output_persistence_anomaly
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+recommended_next: v8_029_runner_output_persistence_static_review_and_fix_gate
+```
+
+# v8.027 Second Product Prompt V2 Minimal Generation Trial Execution
+
+```text
+phase_id: v8_027_second_product_prompt_v2_minimal_generation_trial_execution
+status: failed_no_local_output_file
+approved_product: multi_color_mesh_sports_visor
+prompt_package_used: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
+provider_contact: true
+image_generation_attempted: true
+provider_calls_used: 1
+generation_attempts_used: 1
+http_status: 200
+runner_reported_completed_generated: true
+runner_reported_image_count: 1
+runner_reported_files_written_count: 1
+local_file_count_verified: 0
+output_images_count: 0
+output_files: []
+auto_retry_used: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+output_added_to_git: false
+recommended_next: v8_028_second_product_prompt_v2_failed_trial_review_or_output_persistence_gate
+```
+
 # v8.026 Second Product Prompt V2 Generation Authorization Gate
 
 ```text
 phase_id: v8_026_second_product_prompt_v2_generation_authorization_gate
-status: in_progress
+status: completed_remote_synced_after_guarded_push
 source_phase: v8_025_second_product_next_minimal_generation_authorization_decision_gate
 source_commit: 6a2417802daa95cf05e611dd607183a374154011
 purpose: record the owner's Option A selection and authorize exactly one prompt v2 minimal real generation trial for v8.027
