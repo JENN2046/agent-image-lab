@@ -9,6 +9,23 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v9_002_delivery_readiness_package_gate.
+Purpose: create the ceramic_mug_v4 delivery readiness package; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, or commercial delivery execution.
+source_phase: v9_001_delivery_readiness_scope_and_asset_selection_plus_code_surface_guard_gate.
+source_commit: 6a50b7fbcc0e57aa52b798ad111a9a642c81974b.
+selected_route: delivery_readiness_layer.
+selected_asset: ceramic_mug_v4.
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg.
+asset_status: accepted_candidate_with_minor_retouch.
+delivery_readiness_package_created: true.
+delivery_readiness_package_ref: docs/delivery_readiness_package_matte_ceramic_mug_v4.md.
+commercial_delivery_ready: false.
+memory_suitability: deferred.
+memory_write_allowed: false.
+production_candidate_002_allowed: false.
+recommended_next: v9_003_delivery_readiness_acceptance_criteria_gate.
+recommended_next_auto_execution_allowed: false.
+---
 Current active gate: v9_001_delivery_readiness_scope_and_asset_selection_plus_code_surface_guard_gate.
 Purpose: select the first V9 delivery-readiness asset and harden Native Doubao local preflight checks; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, or delivery package execution.
 source_phase: v9_delivery_readiness_layer_route_selection_gate.
@@ -271,13 +288,13 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-none — v9_001_delivery_readiness_scope_and_asset_selection_plus_code_surface_guard_gate is completed_validated_guarded_commit_and_push_authorized.
+none — v9_002_delivery_readiness_package_gate is completed_validated_guarded_commit_and_push_authorized.
 ```
 
 ### todo
 
 ```text
-v9_002_delivery_readiness_package_gate — recommended next gate only; no automatic execution.
+v9_003_delivery_readiness_acceptance_criteria_gate — recommended next gate only; no automatic execution.
 ```
 
 ### recommended_next_after_v7_285

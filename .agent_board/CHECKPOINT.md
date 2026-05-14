@@ -1,10 +1,45 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V9.002 Delivery Readiness Package Gate
+
+```text
+phase_id: v9_002_delivery_readiness_package_gate
+status: completed_validated_guarded_commit_and_push_authorized
+source_phase: v9_001_delivery_readiness_scope_and_asset_selection_plus_code_surface_guard_gate
+source_commit: 6a50b7fbcc0e57aa52b798ad111a9a642c81974b
+purpose: create the ceramic_mug_v4 delivery readiness package without commercial delivery execution
+phase_record_ref: docs/v9_002_delivery_readiness_package_gate.md
+delivery_readiness_package_ref: docs/delivery_readiness_package_matte_ceramic_mug_v4.md
+selected_route: delivery_readiness_layer
+selected_asset: ceramic_mug_v4
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+asset_status: accepted_candidate_with_minor_retouch
+delivery_readiness_package_created: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+memory_write_allowed: false
+production_candidate_002_allowed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+recommended_next: v9_003_delivery_readiness_acceptance_criteria_gate
+```
+
 # V9.001 Delivery Readiness Scope And Asset Selection Plus Code Surface Guard Gate
 
 ```text
 phase_id: v9_001_delivery_readiness_scope_and_asset_selection_plus_code_surface_guard_gate
-status: completed_validated_guarded_commit_and_push_authorized
+status: completed_remote_synced_after_guarded_push
 source_phase: v9_delivery_readiness_layer_route_selection_gate
 source_commit: a461ce90c3e6072928eca23caf8f625f58f05d8b
 purpose: select the first delivery-readiness asset and harden Native Doubao local preflight checks without provider execution
