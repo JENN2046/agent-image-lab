@@ -81,13 +81,13 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-v8_018_second_product_prompt_or_runner_static_fix_gate — add the runner-facing canonical prompt field and record static provider-field review, without retrying.
+v8_019_second_product_second_trial_authorization_decision_gate — present Option A/B/C after the prompt mapping fix and stop for human retry authorization.
 ```
 
 ### todo
 
 ```text
-v8_019_second_product_second_trial_authorization_decision_gate — human decision on whether to authorize one new minimal real generation trial after the static fix.
+pending_human_retry_authorization — wait for human Option A/B/C; no automatic provider execution.
 ```
 
 ### recommended_next_after_v7_285
@@ -238,14 +238,17 @@ v8_016_output_directory_created: false
 v8_016_no_image_to_review: true
 v8_016_retry_allowed_now: false
 v8_017_failed_trial_review_or_prompt_fix_decision_gate: in_progress
-v8_018_second_product_prompt_or_runner_static_fix_gate: in_progress
+v8_018_second_product_prompt_or_runner_static_fix_gate: completed_remote_synced_after_guarded_push
 v8_018_prompt_package_path: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
 v8_018_canonical_prompt_field_added_or_confirmed: true
 v8_018_positive_prompt_mapping_resolved: true
 v8_018_runner_prompt_field: prompt
 v8_018_runner_or_loader_fallback_added: false
 v8_018_provider_optional_fields_reviewed: true
-recommended_next_after_v8_018: v8_019_second_product_second_trial_authorization_decision_gate
+v8_019_options_presented: authorize_second_minimal_real_generation_trial | more_static_runner_payload_review | stop_second_product_real_generation_route
+v8_019_recommended_option: authorize_second_minimal_real_generation_trial
+v8_019_human_decision_required: true
+recommended_next_after_v8_019: pending_human_retry_authorization
 ```
 
 ### done

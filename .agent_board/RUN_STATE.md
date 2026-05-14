@@ -9,24 +9,24 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v8_018_second_product_prompt_or_runner_static_fix_gate. The second-product prompt package is being statically aligned with the Native Doubao loader by adding the canonical runner-facing prompt field.
+Agent Image Lab is in v8_019_second_product_second_trial_authorization_decision_gate. The second-product prompt mapping fix is complete, but any new real generation still requires an explicit human choice and A5 authorization.
 ```
 
 ## Current Phase
 
 ```text
-v8.018 Second Product Prompt Or Runner Static Fix Gate
-phase_id: v8_018_second_product_prompt_or_runner_static_fix_gate
-source_phase: v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate
+v8.019 Second Product Second Trial Authorization Decision Gate
+phase_id: v8_019_second_product_second_trial_authorization_decision_gate
+source_phase: v8_018_second_product_prompt_or_runner_static_fix_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
-status: second_product_prompt_runner_static_fix_in_progress
-source_commit: be841c1affce059da662d64f6ae85978d7009d58
-source_message: docs: authorize second product minimal generation trial
+status: second_product_second_trial_authorization_decision_in_progress
+source_commit: d7db551471fdedbfe3f5d98d96d8e64282ccaaea
+source_message: docs: fix second product prompt runner mapping
 branch: master tracking origin/master
 Worktree: clean before v8_003a A4.8 rail package patch; generated v7.281 output remains ignored under runs/
 worktree_start_clean: true
-origin_sync_current: local HEAD equals origin/master at be841c1
+origin_sync_current: local HEAD equals origin/master at d7db551
 ahead_behind: 0/0
 A4_8_safe_project_operator_rail_created: true
 A4_8_safe_project_operator_rail_zh: 安全项目运营轨
@@ -122,8 +122,8 @@ output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug
 auto_retry_for_second_trial: false
 stop_after_generation_for_second_trial: true
 human_review_required_after_generation: true
-recommended_next: v8_019_second_product_second_trial_authorization_decision_gate
-recommended_next_zh: 人工决定是否基于静态修正，重新授权一次最小真实生成试跑
+recommended_next: pending_human_retry_authorization
+recommended_next_zh: 等待人工选择 Option A/B/C；不得自动进入 provider execution
 v8_003b_A4_8_rule_intake_smoke_test: passed
 v8_006_A4_8_state_and_rule_intake_review: passed_read_only
 v8_007_A4_8_mutation_live_run_docs_only: completed_remote_synced_after_guarded_push
@@ -178,7 +178,7 @@ v8_016_no_image_to_review: true
 v8_016_retry_allowed_now: false
 v8_017_failed_trial_review_or_prompt_fix_decision_gate: in_progress
 v8_017_possible_static_issue: prompt_package_uses_positive_prompt_but_loader_expects_prompt
-v8_018_second_product_prompt_or_runner_static_fix_gate: in_progress
+v8_018_second_product_prompt_or_runner_static_fix_gate: completed_remote_synced_after_guarded_push
 v8_018_prompt_package_path: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
 v8_018_canonical_prompt_field_added_or_confirmed: true
 v8_018_positive_prompt_mapping_resolved: true
@@ -188,6 +188,13 @@ v8_018_provider_optional_fields_reviewed: true
 v8_018_provider_contact: false
 v8_018_image_generation: false
 v8_018_retry_allowed_now: false
+v8_019_second_product_second_trial_authorization_decision_gate: in_progress
+v8_019_options_presented: authorize_second_minimal_real_generation_trial | more_static_runner_payload_review | stop_second_product_real_generation_route
+v8_019_recommended_option: authorize_second_minimal_real_generation_trial
+v8_019_human_decision_required: true
+v8_019_provider_contact: false
+v8_019_image_generation: false
+v8_019_retry: false
 Route_B_initial_docs_sequence_completed: true
 v8_route_selection_completed: true
 selected_v8_route: final_retouch_planning

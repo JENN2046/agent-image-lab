@@ -1,5 +1,31 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v8.019-SECOND-PRODUCT-SECOND-TRIAL-AUTHORIZATION-DECISION
+
+Task:
+
+```text
+Present the second-product second-trial authorization decision options after the v8.018 prompt mapping fix.
+```
+
+Result:
+
+```text
+prompt_mapping_fix_completed: true
+prompt_package_path: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
+retry_allowed_now: false
+new_A5_authorization_required_for_retry: true
+options_presented: authorize_second_minimal_real_generation_trial | more_static_runner_payload_review | stop_second_product_real_generation_route
+recommended_option: authorize_second_minimal_real_generation_trial
+human_decision_required: true
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, DailyNote write, VCP memory write, production_candidate_002, Batch 005, dependency change, package.json change, or runs output commit is performed by v8.019.
+```
+
 ## VALIDATION-20260514-v8.018-SECOND-PRODUCT-PROMPT-RUNNER-MAPPING-FIX
 
 Task:

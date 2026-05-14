@@ -7,9 +7,9 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Current synced baseline before v8_018 prompt runner mapping fix gate: e59fe0cac8df4d61e5b705f10640c6057ceb916f on master == origin/master.
-Current mainline state: v8_018 second product prompt runner mapping fix; canonical prompt field added for the Native Doubao loader, no retry performed.
-Current phase id: v8_018_second_product_prompt_or_runner_static_fix_gate.
+Current synced baseline before v8_019 second trial authorization decision gate: d7db551471fdedbfe3f5d98d96d8e64282ccaaea on master == origin/master.
+Current mainline state: v8_019 second product second-trial authorization decision; options are presented and no provider execution is authorized by this gate.
+Current phase id: v8_019_second_product_second_trial_authorization_decision_gate.
 Prior human route selection gate: v7.261_human_product_route_selection_request_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
@@ -244,13 +244,17 @@ v8_016_output_directory_created: false.
 v8_016_no_image_to_review: true.
 v8_016_retry_allowed_now: false.
 v8_017_failed_trial_review_completed: true.
-v8_018_prompt_runner_mapping_fix_in_progress: true.
+v8_018_prompt_runner_mapping_fix_completed: true.
 v8_018_canonical_prompt_field_added_or_confirmed: true.
 v8_018_positive_prompt_mapping_resolved: true.
 v8_018_runner_prompt_field: prompt.
+v8_019_second_trial_authorization_decision_in_progress: true.
+v8_019_options_presented: authorize_second_minimal_real_generation_trial | more_static_runner_payload_review | stop_second_product_real_generation_route.
+v8_019_recommended_option: authorize_second_minimal_real_generation_trial.
+v8_019_human_decision_required: true.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized now: second generation, Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, retry, accepted_samples write, runs output commit, tag, release, deploy.
-Recommended next: v8_019_second_product_second_trial_authorization_decision_gate（人工决定是否基于静态修正，重新授权一次最小真实生成试跑）.
+Recommended next: pending_human_retry_authorization（等待人工选择 Option A/B/C；不得自动进入 provider execution）.
 auto_execution_allowed_for_next: false.
 ```
 

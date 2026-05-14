@@ -1,10 +1,38 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.019 Second Product Second Trial Authorization Decision Gate
+
+```text
+phase_id: v8_019_second_product_second_trial_authorization_decision_gate
+status: in_progress
+source_phase: v8_018_second_product_prompt_or_runner_static_fix_gate
+source_commit: d7db551471fdedbfe3f5d98d96d8e64282ccaaea
+purpose: present Option A/B/C for whether to authorize a second minimal real generation trial
+phase_record_ref: docs/v8_019_second_product_second_trial_authorization_decision_gate.md
+prompt_mapping_fix_completed: true
+prompt_package_path: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
+retry_allowed_now: false
+new_A5_authorization_required_for_retry: true
+options_presented: authorize_second_minimal_real_generation_trial | more_static_runner_payload_review | stop_second_product_real_generation_route
+recommended_option: authorize_second_minimal_real_generation_trial
+human_decision_required: true
+provider_contact: false
+image_generation: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+recommended_next: pending_human_retry_authorization
+```
+
 # v8.018 Second Product Prompt Or Runner Static Fix Gate
 
 ```text
 phase_id: v8_018_second_product_prompt_or_runner_static_fix_gate
-status: in_progress
+status: completed_remote_synced_after_guarded_push
 source_phase: v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate
 source_commit: e59fe0cac8df4d61e5b705f10640c6057ceb916f
 purpose: fix the second-product prompt package mapping risk by adding runner-facing canonical prompt
