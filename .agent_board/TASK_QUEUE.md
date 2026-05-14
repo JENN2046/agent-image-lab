@@ -9,6 +9,23 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v8_035_route_B_second_product_accepted_candidate_evidence_package.
+Purpose: package the full Route B second-product accepted candidate evidence chain; no provider contact, generation, retry, .env.local read, memory write, accepted_samples write, production_candidate_002, or runs output commit.
+accepted_candidate_path: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg.
+asset_status: accepted_candidate_with_minor_watch_items.
+accepted_candidate: true.
+commercial_delivery_ready: false.
+memory_suitability: deferred.
+local_files_verified_count: 1.
+local_persistence_success: true.
+route_B_cross_product_reuse_validated: true.
+accepted_samples_written: false.
+runs_output_committed: false.
+memory_write_performed: false.
+production_candidate_002_started: false.
+recommended_next: v8_036_route_B_multi_product_expansion_closeout.
+recommended_next_auto_execution_allowed: false.
+---
 Current active gate: v8_034_human_review_of_second_product_post_persistence_fix_output.
 Purpose: record human review for the verified v8.033 output; no provider contact, generation, retry, .env.local read, memory write, accepted_samples write, or runs output commit.
 reviewed_output: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg.
@@ -171,13 +188,13 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-none — v8_034 is completed_validated_pending_guarded_push.
+none — v8_035 is completed_validated_pending_guarded_push.
 ```
 
 ### todo
 
 ```text
-v8_035_route_B_second_product_accepted_candidate_evidence_package — evidence package only; no new generation.
+v8_036_route_B_multi_product_expansion_closeout — close out Route B after the accepted candidate evidence package; no new generation.
 ```
 
 ### recommended_next_after_v7_285

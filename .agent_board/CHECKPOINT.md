@@ -1,10 +1,44 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.035 Route B Second Product Accepted Candidate Evidence Package
+
+```text
+phase_id: v8_035_route_B_second_product_accepted_candidate_evidence_package
+status: completed_validated_pending_guarded_push
+source_phase: v8_034_human_review_of_second_product_post_persistence_fix_output
+source_commit: 5295f77d95c5f6a9ce8b6b3f8e6637661bc8ea67
+purpose: package Route B second-product accepted candidate evidence chain
+phase_record_ref: docs/v8_035_route_B_second_product_accepted_candidate_evidence_package.md
+evidence_package_ref: docs/accepted_candidate_evidence_package_multi_color_mesh_sports_visor_v1.md
+accepted_candidate_path: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg
+asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+local_files_verified_count: 1
+local_persistence_success: true
+route_B_cross_product_reuse_validated: true
+accepted_samples_written: false
+runs_output_committed: false
+memory_write_performed: false
+production_candidate_002_started: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v8_036_route_B_multi_product_expansion_closeout
+```
+
 # v8.034 Human Review Of Second Product Post Persistence Fix Output
 
 ```text
 phase_id: v8_034_human_review_of_second_product_post_persistence_fix_output
-status: completed_validated_pending_guarded_push
+status: completed_remote_synced_after_guarded_push
 source_phase: v8_033_second_product_post_persistence_fix_minimal_generation_trial_execution
 source_commit: f98dee058ed2eddee77733dc529272593fe95639
 purpose: record human review for the verified v8.033 output

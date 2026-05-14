@@ -1,5 +1,38 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v8.035-ROUTE-B-SECOND-PRODUCT-ACCEPTED-CANDIDATE-EVIDENCE-PACKAGE
+
+Task:
+
+```text
+Package the Route B second-product accepted candidate evidence chain from brief through accepted candidate review.
+```
+
+Result:
+
+```text
+product: multi_color_mesh_sports_visor
+accepted_candidate_path: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg
+asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+local_files_verified_count: 1
+local_persistence_success: true
+route_B_cross_product_reuse_validated: true
+output_image_added_to_git: false
+accepted_samples_written: false
+memory_write_performed: false
+production_candidate_002_started: false
+validation_result: passed
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, DailyNote write, VCP memory write, production_candidate_002, Batch 005, dependency change, package.json change, accepted_samples write, or runs output commit is performed by v8.035.
+```
+
 ## VALIDATION-20260514-v8.034-SECOND-PRODUCT-POST-PERSISTENCE-FIX-HUMAN-REVIEW
 
 Task:
