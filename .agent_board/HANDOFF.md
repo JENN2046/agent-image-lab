@@ -3,6 +3,36 @@
 ## Handoff Summary
 
 ```text
+Status: v8_036_route_B_multi_product_expansion_closeout is the current Route B closeout gate.
+Reason: v8.035 sealed the accepted candidate evidence package; v8.036 closes Route B as a validated multi-product reuse route without production promotion.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v8_036 patch: 8c03d48 docs: add second product accepted candidate evidence package
+ahead_behind: 0/0
+Worktree: clean before v8_036 patch; generated runs output remains ignored and is not staged or committed
+Current status: v8_036_route_B_multi_product_expansion_closeout
+route_B_closed: true
+route_B_goal_met: true
+multi_product_reuse_validated: true
+second_product: multi_color_mesh_sports_visor
+accepted_candidate_path: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg
+asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+local_files_verified_count: 1
+local_persistence_success: true
+accepted_samples_written: false
+runs_output_committed: false
+memory_write_performed: false
+production_candidate_002_started: false
+v8_036_provider_contact: false
+v8_036_image_generation: false
+v8_036_retry: false
+v8_036_env_local_secret_value_read: false
+recommended_next: v8_037_v8_product_loop_closeout_or_next_route_selection_gate
+recommended_next_auto_execution_allowed: false
+---
 Status: v8_035_route_B_second_product_accepted_candidate_evidence_package is the current Route B accepted candidate evidence package gate.
 Reason: v8.034 accepted the v8.033 verified output as accepted_candidate_with_minor_watch_items; v8.035 packages the full evidence chain without new execution.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

@@ -9,16 +9,52 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v8_035_route_B_second_product_accepted_candidate_evidence_package. This gate packages the Route B second-product accepted candidate evidence chain and does not authorize any new provider execution.
+Agent Image Lab is in v8_036_route_B_multi_product_expansion_closeout. This gate closes Route B as a validated multi-product reuse route and does not authorize any new provider execution.
 ```
 
 ## Current Phase
 
 ```text
+v8.036 Route B Multi Product Expansion Closeout
+phase_id: v8_036_route_B_multi_product_expansion_closeout
+source_phase: v8_035_route_B_second_product_accepted_candidate_evidence_package
+status: completed_validated_pending_guarded_push
+source_commit: 8c03d48daa674f039f931840e03f4df0ae007509
+source_message: docs: add second product accepted candidate evidence package
+branch: master tracking origin/master
+origin_sync_current: local HEAD equals origin/master at 8c03d48
+ahead_behind: 0/0
+route_B_closed: true
+route_B_goal_met: true
+multi_product_reuse_validated: true
+second_product: multi_color_mesh_sports_visor
+accepted_candidate_path: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg
+asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+local_files_verified_count: 1
+local_persistence_success: true
+accepted_samples_written: false
+runs_output_committed: false
+memory_write_performed: false
+production_candidate_002_started: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v8_037_v8_product_loop_closeout_or_next_route_selection_gate
+recommended_next_auto_execution_allowed: false
+---
 v8.035 Route B Second Product Accepted Candidate Evidence Package
 phase_id: v8_035_route_B_second_product_accepted_candidate_evidence_package
 source_phase: v8_034_human_review_of_second_product_post_persistence_fix_output
-status: completed_validated_pending_guarded_push
+status: completed_remote_synced_after_guarded_push
 source_commit: 5295f77d95c5f6a9ce8b6b3f8e6637661bc8ea67
 source_message: docs: review second product accepted candidate output
 branch: master tracking origin/master

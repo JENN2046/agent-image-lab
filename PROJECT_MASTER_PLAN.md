@@ -8,6 +8,31 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+latest_synced_head_before_v8_036_route_B_closeout_gate: 8c03d48daa674f039f931840e03f4df0ae007509
+origin_master_before_v8_036_route_B_closeout_gate: 8c03d48daa674f039f931840e03f4df0ae007509
+status: v8_036_route_B_multi_product_expansion_closeout
+mode: A4.8 docs-only Route B closeout
+phase_id: v8_036_route_B_multi_product_expansion_closeout
+route_B_closed: true
+route_B_goal_met: true
+multi_product_reuse_validated: true
+second_product: multi_color_mesh_sports_visor
+accepted_candidate_path: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg
+asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+local_files_verified_count: 1
+local_persistence_success: true
+accepted_samples_written: false
+runs_output_committed: false
+memory_write_performed: false
+production_candidate_002_started: false
+provider_contact_allowed_now: false
+image_generation_allowed_now: false
+retry_allowed_now: false
+recommended_next: v8_037_v8_product_loop_closeout_or_next_route_selection_gate
+recommended_next_auto_execution_allowed: false
 latest_synced_head_before_v8_035_evidence_package_gate: 5295f77d95c5f6a9ce8b6b3f8e6637661bc8ea67
 origin_master_before_v8_035_evidence_package_gate: 5295f77d95c5f6a9ce8b6b3f8e6637661bc8ea67
 status: v8_035_route_B_second_product_accepted_candidate_evidence_package
