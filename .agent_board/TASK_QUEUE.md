@@ -9,6 +9,22 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v8_038_v8_product_loop_final_closeout.
+Purpose: seal the full V8 product loop after human selected Option A; no provider contact, generation, retry, .env.local read, memory write, runtime, production_candidate_002, accepted_samples write, or V9 execution.
+v8_closed: true.
+route_A_closed: true.
+A4_8_validated: true.
+route_B_closed: true.
+multi_product_reuse_validated: true.
+ceramic_mug_accepted_candidate_exists: true.
+sports_visor_accepted_candidate_exists: true.
+second_product: multi_color_mesh_sports_visor.
+second_product_accepted_candidate_path: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg.
+commercial_delivery_ready: false.
+memory_suitability: deferred.
+recommended_next: v9_delivery_readiness_layer_route_selection_gate.
+recommended_next_auto_execution_allowed: false.
+---
 Current active gate: v8_037_v8_product_loop_closeout_or_next_route_selection_gate.
 Purpose: present V8 closeout or next-route options; no provider contact, generation, retry, .env.local read, memory write, accepted_samples write, production_candidate_002, or new route execution.
 route_A_closed: true.
@@ -225,13 +241,13 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-none — v8_037 is completed_validated_pending_guarded_push.
+none — v8_038 is completed_validated_pending_guarded_push.
 ```
 
 ### todo
 
 ```text
-pending_human_v8_closeout_or_next_route_selection — choose Option A/B/C/D/E/F; no automatic execution.
+v9_delivery_readiness_layer_route_selection_gate — recommended next route-selection gate only; no automatic execution.
 ```
 
 ### recommended_next_after_v7_285

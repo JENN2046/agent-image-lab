@@ -7,6 +7,31 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current synced baseline before v8_038 final closeout: 615aa187e8909667ade600b22e2e9895e29bffa7 on master == origin/master.
+Current mainline state: v8_038 closes the V8 product loop after human selected Option A; V8 is sealed as a multi-product workflow validation cycle, not a commercial delivery or memory-write cycle.
+Current phase id: v8_038_v8_product_loop_final_closeout.
+v8_closed: true.
+route_A_closed: true.
+A4_8_validated: true.
+route_B_closed: true.
+multi_product_reuse_validated: true.
+ceramic_mug_accepted_candidate_exists: true.
+sports_visor_accepted_candidate_exists: true.
+second_product: multi_color_mesh_sports_visor.
+second_product_accepted_candidate_path: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg.
+second_product_asset_status: accepted_candidate_with_minor_watch_items.
+commercial_delivery_ready: false.
+memory_suitability: deferred.
+output_persistence_guard_fixed: true.
+accepted_samples_written: false.
+runs_output_committed: false.
+memory_write_performed: false.
+production_candidate_002_started: false.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+retry_allowed_now: false.
+recommended_next: v9_delivery_readiness_layer_route_selection_gate.
+recommended_next_auto_execution_allowed: false.
 Current synced baseline before v8_037 route decision gate: 462f614d97ec3bccaf9dd67f3b0dc03e2f08d980 on master == origin/master.
 Current mainline state: v8_037 presents the human decision gate for closing V8 or selecting the next route; no new route execution starts here.
 Current phase id: v8_037_v8_product_loop_closeout_or_next_route_selection_gate.

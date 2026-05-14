@@ -1,10 +1,50 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.038 V8 Product Loop Final Closeout
+
+```text
+phase_id: v8_038_v8_product_loop_final_closeout
+status: completed_validated_pending_guarded_push
+source_phase: v8_037_v8_product_loop_closeout_or_next_route_selection_gate
+source_commit: 615aa187e8909667ade600b22e2e9895e29bffa7
+purpose: seal V8 product loop after human selected Option A
+phase_record_ref: docs/v8_038_v8_product_loop_final_closeout.md
+final_closeout_ref: docs/v8_product_loop_final_closeout.md
+v9_recommendation_ref: docs/v9_delivery_readiness_layer_route_recommendation.md
+v8_closed: true
+route_A_closed: true
+A4_8_validated: true
+route_B_closed: true
+multi_product_reuse_validated: true
+ceramic_mug_accepted_candidate_exists: true
+sports_visor_accepted_candidate_exists: true
+second_product: multi_color_mesh_sports_visor
+second_product_accepted_candidate_path: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg
+commercial_delivery_ready: false
+memory_suitability: deferred
+output_persistence_guard_fixed: true
+accepted_samples_written: false
+runs_output_committed: false
+memory_write_performed: false
+production_candidate_002_started: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v9_delivery_readiness_layer_route_selection_gate
+```
+
 # v8.037 V8 Product Loop Closeout Or Next Route Selection Gate
 
 ```text
 phase_id: v8_037_v8_product_loop_closeout_or_next_route_selection_gate
-status: completed_validated_pending_guarded_push
+status: completed_remote_synced_after_guarded_push
 source_phase: v8_036_route_B_multi_product_expansion_closeout
 source_commit: 462f614d97ec3bccaf9dd67f3b0dc03e2f08d980
 purpose: present V8 closeout or next-route options

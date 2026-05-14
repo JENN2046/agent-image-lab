@@ -3,6 +3,38 @@
 ## Handoff Summary
 
 ```text
+Status: v8_038_v8_product_loop_final_closeout is the current V8 final closeout gate.
+Reason: Human selected v8.037 Option A; V8 is now sealed as a multi-product workflow validation cycle and V9 delivery readiness is the recommended next route-selection gate.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v8_038 patch: 615aa18 docs: decide v8 closeout or next route
+ahead_behind: 0/0
+Worktree: clean before v8_038 patch; generated runs output remains ignored and is not staged or committed
+Current status: v8_038_v8_product_loop_final_closeout
+v8_closed: true
+route_A_closed: true
+A4_8_validated: true
+route_B_closed: true
+multi_product_reuse_validated: true
+ceramic_mug_accepted_candidate_exists: true
+sports_visor_accepted_candidate_exists: true
+second_product: multi_color_mesh_sports_visor
+second_product_accepted_candidate_path: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg
+commercial_delivery_ready: false
+memory_suitability: deferred
+output_persistence_guard_fixed: true
+accepted_samples_written: false
+runs_output_committed: false
+memory_write_performed: false
+production_candidate_002_started: false
+v8_038_provider_contact: false
+v8_038_image_generation: false
+v8_038_retry: false
+v8_038_env_local_secret_value_read: false
+v8_038_runtime_execution: false
+recommended_next: v9_delivery_readiness_layer_route_selection_gate
+recommended_next_auto_execution_allowed: false
+---
 Status: v8_037_v8_product_loop_closeout_or_next_route_selection_gate is the current V8 route decision gate.
 Reason: Route A is closed, A4.8 is validated, Route B is closed, and Route B produced a second-product accepted candidate; v8.037 asks whether to close V8 or select a next route.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

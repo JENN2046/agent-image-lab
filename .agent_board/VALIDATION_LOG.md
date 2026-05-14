@@ -1,5 +1,41 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v8.038-V8-PRODUCT-LOOP-FINAL-CLOSEOUT
+
+Task:
+
+```text
+Seal the full V8 product loop after the human selected v8.037 Option A.
+```
+
+Result:
+
+```text
+v8_closed: true
+route_A_closed: true
+A4_8_validated: true
+route_B_closed: true
+multi_product_reuse_validated: true
+ceramic_mug_accepted_candidate_exists: true
+sports_visor_accepted_candidate_exists: true
+second_product: multi_color_mesh_sports_visor
+second_product_accepted_candidate_path: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg
+commercial_delivery_ready: false
+memory_suitability: deferred
+output_persistence_guard_fixed: true
+accepted_samples_written: false
+runs_output_committed: false
+memory_write_performed: false
+production_candidate_002_started: false
+validation_result: passed
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, DailyNote write, VCP memory write, production_candidate_002, Batch 005, Review Console runtime, dependency change, package.json change, accepted_samples write, runs output commit, or V9 execution is performed by v8.038.
+```
+
 ## VALIDATION-20260514-v8.037-V8-PRODUCT-LOOP-CLOSEOUT-OR-NEXT-ROUTE-SELECTION
 
 Task:
