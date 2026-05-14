@@ -7,6 +7,28 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current synced baseline before v9.005 commercial delivery review planning gate: 451c757f38ebdcc39c84181e0ca741e40589f422 on master == origin/master.
+Current mainline state: v9_005_commercial_delivery_review_planning_gate records the human selection of v9.004 Option A and creates commercial delivery review planning for ceramic_mug_v4; this is not commercial delivery execution, not commercial_delivery_ready=true, not production_candidate_002, not accepted_samples write, not generation, and not memory write.
+Current phase id: v9_005_commercial_delivery_review_planning_gate.
+source_phase: v9_004_delivery_readiness_review_or_closeout_decision_gate.
+selected_route: delivery_readiness_layer.
+selected_asset: ceramic_mug_v4.
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg.
+current_asset_status: accepted_candidate_with_minor_retouch.
+delivery_readiness_package_created: true.
+delivery_readiness_acceptance_criteria_created: true.
+commercial_delivery_review_planning_created: true.
+commercial_delivery_ready: false.
+memory_suitability: deferred.
+memory_write_allowed: false.
+production_candidate_002_allowed: false.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+retry_allowed_now: false.
+accepted_samples_written: false.
+runs_output_committed: false.
+recommended_next: v9_006_commercial_delivery_review_execution_decision_gate.
+recommended_next_auto_execution_allowed: false.
 Current synced baseline before v9.004 delivery readiness review or closeout decision gate: f5b5c60f670d1bf85d0d9e2aa0b14c24c8315af2 on master == origin/master.
 Current mainline state: v9_004_delivery_readiness_review_or_closeout_decision_gate presents Option A/B/C for ceramic_mug_v4's next delivery-readiness path; this is not commercial delivery execution, production_candidate_002, accepted_samples write, generation, or memory write.
 Current phase id: v9_004_delivery_readiness_review_or_closeout_decision_gate.

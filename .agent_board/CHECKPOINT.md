@@ -1,10 +1,48 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V9.005 Commercial Delivery Review Planning Gate
+
+```text
+phase_id: v9_005_commercial_delivery_review_planning_gate
+status: completed_validated_guarded_commit_and_push_authorized
+source_phase: v9_004_delivery_readiness_review_or_closeout_decision_gate
+source_commit: 451c757f38ebdcc39c84181e0ca741e40589f422
+purpose: create commercial delivery review planning for ceramic_mug_v4 after human selected v9.004 Option A
+phase_record_ref: docs/v9_005_commercial_delivery_review_planning_gate.md
+commercial_delivery_review_plan_ref: docs/commercial_delivery_review_plan_matte_ceramic_mug_v4.md
+selected_route: delivery_readiness_layer
+selected_asset: ceramic_mug_v4
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+current_asset_status: accepted_candidate_with_minor_retouch
+delivery_readiness_package_created: true
+delivery_readiness_acceptance_criteria_created: true
+commercial_delivery_review_planning_created: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+memory_write_allowed: false
+production_candidate_002_allowed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+commercial_delivery_execution: false
+recommended_next: v9_006_commercial_delivery_review_execution_decision_gate
+```
+
 # V9.004 Delivery Readiness Review Or Closeout Decision Gate
 
 ```text
 phase_id: v9_004_delivery_readiness_review_or_closeout_decision_gate
-status: completed_validated_guarded_commit_and_push_authorized
+status: completed_remote_synced_after_guarded_push
 source_phase: v9_003_delivery_readiness_acceptance_criteria_gate
 source_commit: f5b5c60f670d1bf85d0d9e2aa0b14c24c8315af2
 purpose: present ceramic_mug_v4 delivery-readiness path options before any commercial delivery review

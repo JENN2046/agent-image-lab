@@ -9,6 +9,24 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v9_005_commercial_delivery_review_planning_gate.
+Purpose: record human-selected Option A from v9.004 and create commercial delivery review planning for ceramic_mug_v4; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, commercial delivery execution, or commercial_delivery_ready=true.
+source_phase: v9_004_delivery_readiness_review_or_closeout_decision_gate.
+source_commit: 451c757f38ebdcc39c84181e0ca741e40589f422.
+selected_route: delivery_readiness_layer.
+selected_asset: ceramic_mug_v4.
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg.
+current_asset_status: accepted_candidate_with_minor_retouch.
+delivery_readiness_package_created: true.
+delivery_readiness_acceptance_criteria_created: true.
+commercial_delivery_review_planning_created: true.
+commercial_delivery_ready: false.
+memory_suitability: deferred.
+memory_write_allowed: false.
+production_candidate_002_allowed: false.
+recommended_next: v9_006_commercial_delivery_review_execution_decision_gate.
+recommended_next_auto_execution_allowed: false.
+---
 Current active gate: v9_004_delivery_readiness_review_or_closeout_decision_gate.
 Purpose: present Option A/B/C for ceramic_mug_v4's next delivery-readiness path; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, or commercial delivery execution.
 source_phase: v9_003_delivery_readiness_acceptance_criteria_gate.
