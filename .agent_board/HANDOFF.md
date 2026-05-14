@@ -3,6 +3,36 @@
 ## Handoff Summary
 
 ```text
+Status: v8_037_v8_product_loop_closeout_or_next_route_selection_gate is the current V8 route decision gate.
+Reason: Route A is closed, A4.8 is validated, Route B is closed, and Route B produced a second-product accepted candidate; v8.037 asks whether to close V8 or select a next route.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v8_037 patch: 462f614 docs: close out route B multi product expansion
+ahead_behind: 0/0
+Worktree: clean before v8_037 patch; generated runs output remains ignored and is not staged or committed
+Current status: v8_037_v8_product_loop_closeout_or_next_route_selection_gate
+route_A_closed: true
+A4_8_validated: true
+route_B_closed: true
+multi_product_reuse_validated: true
+second_product_accepted_candidate_created: true
+accepted_candidate_path: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg
+asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+production_candidate_002_started: false
+options_presented: close_v8_product_loop_now | final_retouch_package_for_second_product | third_product_prompt_package_expansion | review_console_productization_planning | memory_write_planning | production_candidate_002_readiness_planning
+recommended_option: close_v8_product_loop_now
+human_decision_required: true
+v8_037_provider_contact: false
+v8_037_image_generation: false
+v8_037_retry: false
+v8_037_env_local_secret_value_read: false
+v8_037_memory_write: false
+recommended_next: v8_038_v8_product_loop_final_closeout
+recommended_next_auto_execution_allowed: false
+---
 Status: v8_036_route_B_multi_product_expansion_closeout is the current Route B closeout gate.
 Reason: v8.035 sealed the accepted candidate evidence package; v8.036 closes Route B as a validated multi-product reuse route without production promotion.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

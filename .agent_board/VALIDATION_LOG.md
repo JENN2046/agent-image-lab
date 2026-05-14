@@ -1,5 +1,36 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v8.037-V8-PRODUCT-LOOP-CLOSEOUT-OR-NEXT-ROUTE-SELECTION
+
+Task:
+
+```text
+Present V8 closeout or next-route options after Route A, A4.8 validation, and Route B closeout.
+```
+
+Result:
+
+```text
+route_A_closed: true
+A4_8_validated: true
+route_B_closed: true
+multi_product_reuse_validated: true
+second_product_accepted_candidate_created: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+production_candidate_002_started: false
+options_presented: close_v8_product_loop_now | final_retouch_package_for_second_product | third_product_prompt_package_expansion | review_console_productization_planning | memory_write_planning | production_candidate_002_readiness_planning
+recommended_option: close_v8_product_loop_now
+human_decision_required: true
+validation_result: passed
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, DailyNote write, VCP memory write, production_candidate_002, Batch 005, dependency change, package.json change, accepted_samples write, runs output commit, or new route execution is performed by v8.037.
+```
+
 ## VALIDATION-20260514-v8.036-ROUTE-B-MULTI-PRODUCT-EXPANSION-CLOSEOUT
 
 Task:

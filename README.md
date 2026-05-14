@@ -7,6 +7,29 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current synced baseline before v8_037 route decision gate: 462f614d97ec3bccaf9dd67f3b0dc03e2f08d980 on master == origin/master.
+Current mainline state: v8_037 presents the human decision gate for closing V8 or selecting the next route; no new route execution starts here.
+Current phase id: v8_037_v8_product_loop_closeout_or_next_route_selection_gate.
+route_A_closed: true.
+A4_8_validated: true.
+route_B_closed: true.
+multi_product_reuse_validated: true.
+second_product_accepted_candidate_created: true.
+accepted_candidate_path: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg.
+asset_status: accepted_candidate_with_minor_watch_items.
+accepted_candidate: true.
+commercial_delivery_ready: false.
+memory_suitability: deferred.
+production_candidate_002_started: false.
+options_presented: close_v8_product_loop_now | final_retouch_package_for_second_product | third_product_prompt_package_expansion | review_console_productization_planning | memory_write_planning | production_candidate_002_readiness_planning.
+recommended_option: close_v8_product_loop_now.
+human_decision_required: true.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+retry_allowed_now: false.
+memory_write_allowed_now: false.
+recommended_next: v8_038_v8_product_loop_final_closeout.
+recommended_next_auto_execution_allowed: false.
 Current synced baseline before v8_036 Route B closeout gate: 8c03d48daa674f039f931840e03f4df0ae007509 on master == origin/master.
 Current mainline state: v8_036 closes Route B multi-product prompt package expansion; Route B validated cross-product reuse and created a second-product accepted candidate, but did not create a commercial delivery asset, memory write, accepted_samples entry, or production_candidate_002.
 Current phase id: v8_036_route_B_multi_product_expansion_closeout.

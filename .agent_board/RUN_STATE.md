@@ -9,16 +9,51 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v8_036_route_B_multi_product_expansion_closeout. This gate closes Route B as a validated multi-product reuse route and does not authorize any new provider execution.
+Agent Image Lab is in v8_037_v8_product_loop_closeout_or_next_route_selection_gate. This gate presents V8 closeout or next-route options and does not authorize any new provider execution.
 ```
 
 ## Current Phase
 
 ```text
+v8.037 V8 Product Loop Closeout Or Next Route Selection Gate
+phase_id: v8_037_v8_product_loop_closeout_or_next_route_selection_gate
+source_phase: v8_036_route_B_multi_product_expansion_closeout
+status: completed_validated_pending_guarded_push
+source_commit: 462f614d97ec3bccaf9dd67f3b0dc03e2f08d980
+source_message: docs: close out route B multi product expansion
+branch: master tracking origin/master
+origin_sync_current: local HEAD equals origin/master at 462f614
+ahead_behind: 0/0
+route_A_closed: true
+A4_8_validated: true
+route_B_closed: true
+multi_product_reuse_validated: true
+second_product_accepted_candidate_created: true
+accepted_candidate_path: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg
+asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+production_candidate_002_started: false
+options_presented: close_v8_product_loop_now | final_retouch_package_for_second_product | third_product_prompt_package_expansion | review_console_productization_planning | memory_write_planning | production_candidate_002_readiness_planning
+recommended_option: close_v8_product_loop_now
+human_decision_required: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v8_038_v8_product_loop_final_closeout
+recommended_next_auto_execution_allowed: false
+---
 v8.036 Route B Multi Product Expansion Closeout
 phase_id: v8_036_route_B_multi_product_expansion_closeout
 source_phase: v8_035_route_B_second_product_accepted_candidate_evidence_package
-status: completed_validated_pending_guarded_push
+status: completed_remote_synced_after_guarded_push
 source_commit: 8c03d48daa674f039f931840e03f4df0ae007509
 source_message: docs: add second product accepted candidate evidence package
 branch: master tracking origin/master
