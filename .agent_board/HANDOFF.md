@@ -3,6 +3,39 @@
 ## Handoff Summary
 
 ```text
+Status: v9_006_commercial_delivery_review_execution_decision_gate is the current commercial delivery review execution decision gate.
+Reason: v9.005 created commercial delivery review planning; v9.006 presents Option A/B/C for whether to enter a docs-only commercial delivery review, supplement final delivery materials, or close the ceramic_mug_v4 lane.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v9.006 patch: 868bc4d docs: plan commercial delivery review for ceramic mug
+ahead_behind: 0/0
+Worktree: clean before v9.006 patch; generated runs output remains ignored and is not staged or committed
+Current status: v9_006_commercial_delivery_review_execution_decision_gate
+selected_route: delivery_readiness_layer
+selected_asset: ceramic_mug_v4
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+current_asset_status: accepted_candidate_with_minor_retouch
+delivery_readiness_package_created: true
+delivery_readiness_acceptance_criteria_created: true
+commercial_delivery_review_planning_created: true
+commercial_delivery_ready: false
+options_presented: execute_commercial_delivery_review_as_docs_only_review | supplement_final_delivery_materials_before_review | close_ceramic_mug_delivery_readiness_lane
+recommended_option: execute_commercial_delivery_review_as_docs_only_review
+human_decision_required: true
+memory_suitability: deferred
+memory_write_allowed: false
+production_candidate_002_allowed: false
+v9_006_provider_contact: false
+v9_006_image_generation: false
+v9_006_retry: false
+v9_006_env_local_secret_value_read: false
+v9_006_memory_write: false
+v9_006_accepted_samples_written: false
+v9_006_runs_output_committed: false
+v9_006_commercial_delivery_execution: false
+recommended_next: pending_human_commercial_delivery_review_execution_selection
+recommended_next_auto_execution_allowed: false
+---
 Status: v9_005_commercial_delivery_review_planning_gate is the current commercial delivery review planning gate.
 Reason: Human selected v9.004 Option A; v9.005 creates the planning surface for a future ceramic_mug_v4 commercial delivery review without executing commercial delivery.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
