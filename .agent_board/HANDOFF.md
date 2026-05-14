@@ -3,6 +3,40 @@
 ## Handoff Summary
 
 ```text
+Status: v9_012_real_retouch_execution_authorization_decision_gate is the current docs-only real retouch execution authorization decision gate.
+Reason: v9.011 created the real retouch execution plan; v9.012 presents Option A/B/C for authorizing a future real retouch execution gate, closing the ceramic mug lane, or switching to sports visor delivery readiness.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v9.012 patch: 260adfc docs: plan real retouch execution for ceramic mug
+ahead_behind: 0/0
+Worktree: clean before v9.012 patch; generated runs output remains ignored and is not staged or committed
+Current status: v9_012_real_retouch_execution_authorization_decision_gate
+selected_route: delivery_readiness_layer
+selected_asset: ceramic_mug_v4
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+previous_review_result: needs_final_retouch
+final_retouch_action_package_created: true
+real_retouch_execution_planning_created: true
+commercial_delivery_ready: false
+options_presented: authorize_real_retouch_execution | close_ceramic_mug_first_asset_delivery_lane | switch_to_sports_visor_delivery_readiness_lane
+recommended_option: authorize_real_retouch_execution_or_close_lane_based_on_human_goal
+human_decision_required: true
+memory_suitability: deferred
+memory_write_allowed: false
+production_candidate_002_allowed: false
+v9_012_provider_contact: false
+v9_012_image_generation: false
+v9_012_retry: false
+v9_012_env_local_secret_value_read: false
+v9_012_memory_write: false
+v9_012_accepted_samples_written: false
+v9_012_runs_output_committed: false
+v9_012_image_editing_performed: false
+v9_012_derivative_image_created: false
+v9_012_real_commercial_delivery_execution: false
+recommended_next: pending_human_real_retouch_execution_selection
+recommended_next_auto_execution_allowed: false
+---
 Status: v9_011_real_retouch_execution_planning_gate is the current docs-only real retouch execution planning gate.
 Reason: Human selected v9.010 Option A; v9.011 converts the final retouch action package into a future execution plan without performing retouching, editing, derivative creation, provider contact, generation, memory write, accepted_samples write, or production promotion.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

@@ -1,10 +1,51 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V9.012 Real Retouch Execution Authorization Decision Gate
+
+```text
+phase_id: v9_012_real_retouch_execution_authorization_decision_gate
+status: completed_pending_validation_commit_push
+source_phase: v9_011_real_retouch_execution_planning_gate
+source_commit: 260adfccb94b1bd1ff4ed9fa89be63d8d5ca853d
+purpose: present Option A/B/C for real retouch execution authorization after v9.011 planning
+phase_record_ref: docs/v9_012_real_retouch_execution_authorization_decision_gate.md
+selected_route: delivery_readiness_layer
+selected_asset: ceramic_mug_v4
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+previous_review_result: needs_final_retouch
+final_retouch_action_package_created: true
+real_retouch_execution_planning_created: true
+commercial_delivery_ready: false
+options_presented: authorize_real_retouch_execution | close_ceramic_mug_first_asset_delivery_lane | switch_to_sports_visor_delivery_readiness_lane
+recommended_option: authorize_real_retouch_execution_or_close_lane_based_on_human_goal
+human_decision_required: true
+memory_suitability: deferred
+memory_write_allowed: false
+production_candidate_002_allowed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+image_editing_performed: false
+derivative_image_created: false
+real_commercial_delivery_execution: false
+recommended_next: pending_human_real_retouch_execution_selection
+```
+
 # V9.011 Real Retouch Execution Planning Gate
 
 ```text
 phase_id: v9_011_real_retouch_execution_planning_gate
-status: completed_pending_validation_commit_push
+status: completed_remote_synced_after_guarded_push
 source_phase: v9_010_final_retouch_execution_or_closeout_decision_gate
 source_commit: 4125dde4dfe9c2f936affbf9472cdc5a31248f12
 purpose: create a docs-only real retouch execution plan after human selected v9.010 Option A

@@ -1,5 +1,42 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v9.012-REAL-RETOUCH-EXECUTION-AUTHORIZATION-DECISION-GATE
+
+Task:
+
+```text
+Present Option A/B/C after the ceramic_mug_v4 real retouch execution plan was created.
+```
+
+Result:
+
+```text
+selected_route: delivery_readiness_layer
+selected_asset: ceramic_mug_v4
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+previous_review_result: needs_final_retouch
+final_retouch_action_package_created: true
+real_retouch_execution_planning_created: true
+commercial_delivery_ready: false
+options_presented: authorize_real_retouch_execution | close_ceramic_mug_first_asset_delivery_lane | switch_to_sports_visor_delivery_readiness_lane
+recommended_option: authorize_real_retouch_execution_or_close_lane_based_on_human_goal
+human_decision_required: true
+accepted_samples_written: false
+runs_output_committed: false
+memory_write_performed: false
+production_candidate_002_started: false
+image_editing_performed: false
+derivative_image_created: false
+real_commercial_delivery_execution: false
+validation_result: passed
+```
+
+Boundary:
+
+```text
+No real retouch execution, image editing, derivative image creation, source image copy/move, runs output commit, provider contact, image generation, retry, .env.local secret value read, secret print, DailyNote write, VCP memory write, memory_write_path, production_candidate_002, Batch 005, runtime/CDP/bridge/MCP, dependency change, package.json change, accepted_samples write, commercial_delivery_ready=true, or real commercial delivery execution is performed by v9.012.
+```
+
 ## VALIDATION-20260514-v9.011-REAL-RETOUCH-EXECUTION-PLANNING-GATE
 
 Task:
