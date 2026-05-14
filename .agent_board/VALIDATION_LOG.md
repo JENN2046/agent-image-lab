@@ -1,5 +1,32 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v8.029-TIMESTAMP-EVIDENCE-POLICY
+
+Task:
+
+```text
+Add timestamp evidence policy to v8.029 so provider API platform time and local runner artifact time are recorded as separate evidence surfaces.
+```
+
+Result:
+
+```text
+v8_021_provider_api_platform_time: 2026-05-14 12:41:47
+v8_021_local_output_file_time: 2026-05-14 12:39:14.203 +08:00
+v8_027_provider_api_platform_time: 2026-05-14 14:01:44
+v8_027_local_output_directory_time: 2026-05-14 13:57:02.216 +08:00
+provider_api_platform_time_is_primary_provider_contact_evidence: true
+local_file_or_directory_time_is_runner_artifact_evidence: true
+timestamp_sources_do_not_strictly_prove_causal_order: true
+v8_027_output_persistence_anomaly_remains_primary_issue: true
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, DailyNote write, VCP memory write, production_candidate_002, Batch 005, dependency change, package.json change, accepted_samples write, or runs output commit is performed by this timestamp evidence policy patch.
+```
+
 ## VALIDATION-20260514-v8.026-SECOND-PRODUCT-PROMPT-V2-GENERATION-AUTHORIZATION
 
 Task:

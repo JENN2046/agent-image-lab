@@ -17,6 +17,14 @@ local_file_count_verification_added_or_confirmed: true
 zero_local_file_forces_failed_no_local_output_file: true
 human_review_requires_local_file: true
 runner_success_condition_tightened: true
+timestamp_evidence_policy_added: true
+v8_021_provider_api_platform_time: 2026-05-14 12:41:47
+v8_021_local_output_file_time: 2026-05-14 12:39:14.203 +08:00
+v8_027_provider_api_platform_time: 2026-05-14 14:01:44
+v8_027_local_output_directory_time: 2026-05-14 13:57:02.216 +08:00
+provider_api_platform_time_is_primary_provider_contact_evidence: true
+local_file_or_directory_time_is_runner_artifact_evidence: true
+timestamp_sources_do_not_strictly_prove_causal_order: true
 v8_029_provider_contact: false
 v8_029_image_generation: false
 v8_029_retry: false

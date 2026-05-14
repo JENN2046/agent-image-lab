@@ -22,6 +22,26 @@ image_created: local_persistence_success
 
 The provider may report one image while the project reports zero local output images.
 
+## Timestamp Evidence Policy
+
+Timestamp evidence must keep provider contact evidence separate from local artifact evidence:
+
+```yaml
+provider_api_platform_time:
+  meaning: primary evidence for provider contact
+  v8_021: "2026-05-14 12:41:47"
+  v8_027: "2026-05-14 14:01:44"
+
+local_artifact_time:
+  meaning: runner artifact-side evidence
+  v8_021_local_output_file_time: "2026-05-14 12:39:14.203 +08:00"
+  v8_027_local_output_directory_time: "2026-05-14 13:57:02.216 +08:00"
+```
+
+Do not use the provider API platform time and local file or directory time as strict standalone proof of causal order. They come from different evidence surfaces and may differ because of clock sources, provider processing time, download timing, local directory creation, and persistence behavior.
+
+For v8.027, the decisive finding remains the output persistence anomaly: HTTP 200 and runner-reported generated output did not produce any verified local file.
+
 ## Local File Verification Rule
 
 A file may count as written only when all are true:

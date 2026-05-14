@@ -33,6 +33,36 @@ local_artifact_layer:
 
 The safe conclusion is that provider success and local output persistence are separate layers. A generated image is not reviewable unless a real local file exists.
 
+## Timestamp Evidence Policy
+
+Timestamp evidence must be recorded as two separate evidence layers:
+
+```yaml
+provider_contact_layer:
+  primary_evidence: provider API platform time
+  v8_021_provider_api_platform_time: "2026-05-14 12:41:47"
+  v8_027_provider_api_platform_time: "2026-05-14 14:01:44"
+
+local_artifact_layer:
+  primary_evidence: local file or directory filesystem time
+  v8_021_local_output_file_time: "2026-05-14 12:39:14.203 +08:00"
+  v8_027_local_output_directory_time: "2026-05-14 13:57:02.216 +08:00"
+```
+
+The provider API platform time is the primary evidence for provider contact.
+The local file or directory time is runner artifact-side evidence only.
+These two time sources must not be used by themselves as strict proof of causal order because provider-side clocks, local filesystem timestamps, request duration, download behavior, and runner persistence behavior can differ.
+
+For v8.027, the critical issue remains the output persistence anomaly:
+
+```yaml
+http_status: 200
+runner_reported_completed_generated: true
+runner_reported_files_written_count: 1
+local_file_count_verified: 0
+output_persistence_anomaly: true
+```
+
 ## Static Findings
 
 The static review found three persistence risks:

@@ -17,6 +17,14 @@ local_file_count_verification_added_or_confirmed: true
 zero_local_file_forces_failed_no_local_output_file: true
 human_review_requires_local_file: true
 runner_success_condition_tightened: true
+timestamp_evidence_policy_added: true
+v8_021_provider_api_platform_time: 2026-05-14 12:41:47
+v8_021_local_output_file_time: 2026-05-14 12:39:14.203 +08:00
+v8_027_provider_api_platform_time: 2026-05-14 14:01:44
+v8_027_local_output_directory_time: 2026-05-14 13:57:02.216 +08:00
+provider_api_platform_time_is_primary_provider_contact_evidence: true
+local_file_or_directory_time_is_runner_artifact_evidence: true
+timestamp_sources_do_not_strictly_prove_causal_order: true
 provider_contact: false
 image_generation: false
 retry: false
@@ -48,6 +56,8 @@ image_generation_attempted: true
 provider_calls_used: 1
 generation_attempts_used: 1
 http_status: 200
+provider_api_platform_time: 2026-05-14 14:01:44
+local_output_directory_time: 2026-05-14 13:57:02.216 +08:00
 runner_reported_completed_generated: true
 runner_reported_image_count: 1
 runner_reported_files_written_count: 1
@@ -256,6 +266,8 @@ provider_calls_used: 1
 generation_attempts_used: 1
 output_images_count: 1
 output_file: runs/real_generation/v8_021_multi_color_mesh_sports_visor_second_trial/native_doubao_1778733554203_0.jpg
+provider_api_platform_time: 2026-05-14 12:41:47
+local_output_file_time: 2026-05-14 12:39:14.203 +08:00
 auto_retry_used: false
 secret_value_printed: false
 DailyNote_write: false
