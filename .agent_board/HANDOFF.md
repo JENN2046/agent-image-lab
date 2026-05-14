@@ -3,14 +3,14 @@
 ## Handoff Summary
 
 ```text
-Status: v8_019_second_product_second_trial_authorization_decision_gate is the current Route B decision gate; options for a second trial are presented and execution remains blocked.
-Reason: v8.018 fixed the prompt mapping risk, but a new A5 authorization is still required before any retry or provider contact.
+Status: v8_020_second_product_second_trial_authorization_gate is the current Route B authorization record gate; a new bounded A5 authorization is recorded for v8.021 only.
+Reason: human selected v8.019 Option A after the v8.018 canonical prompt fix; v8.020 itself does not call provider or read .env.local.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
-Current synced HEAD before v8_019 patch: d7db551 docs: fix second product prompt runner mapping
+Current synced HEAD before v8_020 patch: e8bb779 docs: decide second product retry authorization path
 ahead_behind: 0/0
 Worktree: clean before v8_003a A4.8 rail package patch; v7.281 output remains ignored under runs/
-Current status: v8_019_second_product_second_trial_authorization_decision_gate
+Current status: v8_020_second_product_second_trial_authorization_gate
 A4_8_safe_project_operator_rail_created: true
 A4_8_safe_project_operator_rail_zh: 安全项目运营轨
 A4_8_is_not_A5: true
@@ -228,8 +228,8 @@ v8_003a_safe_project_operator_rail_ref: docs/A4_8_SAFE_PROJECT_OPERATOR_RAIL.md
 v8_003a_safe_push_policy_ref: docs/SAFE_PUSH_POLICY.md
 v8_003a_validation_selection_matrix_ref: docs/VALIDATION_SELECTION_MATRIX.md
 v8_003a_failure_recovery_ref: docs/AUTOPILOT_FAILURE_RECOVERY.md
-recommended_next: pending_human_retry_authorization
-recommended_next_zh: 等待人工选择 Option A/B/C；不得自动进入 provider execution
+recommended_next: v8_021_second_product_second_minimal_generation_trial_execution
+recommended_next_zh: v8.020 guarded push 后执行一次受控真实生成试跑
 v8_003b_A4_8_rule_intake_smoke_test: passed
 v8_006_A4_8_state_and_rule_intake_review: passed_read_only
 v8_007_A4_8_mutation_live_run_docs_only: completed_remote_synced_after_guarded_push
@@ -286,13 +286,29 @@ v8_018_provider_optional_fields_reviewed: true
 v8_018_provider_contact: false
 v8_018_image_generation: false
 v8_018_retry_allowed_now: false
-v8_019_second_product_second_trial_authorization_decision_gate: in_progress
+v8_019_second_product_second_trial_authorization_decision_gate: completed_remote_synced_after_guarded_push
 v8_019_options_presented: authorize_second_minimal_real_generation_trial | more_static_runner_payload_review | stop_second_product_real_generation_route
 v8_019_recommended_option: authorize_second_minimal_real_generation_trial
 v8_019_human_decision_required: true
 v8_019_provider_contact: false
 v8_019_image_generation: false
 v8_019_retry: false
+v8_020_second_product_second_trial_authorization_gate: in_progress
+v8_020_this_is_new_A5_authorization: true
+v8_020_previous_v8_015_authorization_consumed: true
+v8_020_retry_allowed_by_previous_authorization: false
+v8_020_approved_product: multi_color_mesh_sports_visor
+v8_020_approved_prompt_package: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
+v8_020_output_directory: runs/real_generation/v8_021_multi_color_mesh_sports_visor_second_trial/
+v8_020_provider_calls_max: 1
+v8_020_generation_attempts_max: 1
+v8_020_output_images_max: 1
+v8_020_auto_retry: false
+v8_020_stop_after_generation: true
+v8_020_human_review_required_after_generation: true
+v8_020_provider_contact: false
+v8_020_image_generation: false
+v8_020_env_local_secret_value_read: false
 Route_B_initial_docs_sequence_completed: true
 provider_contact_after_v7_274: false
 image_generation_after_v7_274: false

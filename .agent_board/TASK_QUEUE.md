@@ -81,13 +81,13 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-v8_019_second_product_second_trial_authorization_decision_gate — present Option A/B/C after the prompt mapping fix and stop for human retry authorization.
+v8_020_second_product_second_trial_authorization_gate — record the new bounded A5 authorization for one v8.021 second-product second trial; do not execute provider in this phase.
 ```
 
 ### todo
 
 ```text
-pending_human_retry_authorization — wait for human Option A/B/C; no automatic provider execution.
+v8_021_second_product_second_minimal_generation_trial_execution — after v8.020 commit and guarded push, run exactly one authorized provider call / generation attempt.
 ```
 
 ### recommended_next_after_v7_285
@@ -247,8 +247,15 @@ v8_018_runner_or_loader_fallback_added: false
 v8_018_provider_optional_fields_reviewed: true
 v8_019_options_presented: authorize_second_minimal_real_generation_trial | more_static_runner_payload_review | stop_second_product_real_generation_route
 v8_019_recommended_option: authorize_second_minimal_real_generation_trial
-v8_019_human_decision_required: true
-recommended_next_after_v8_019: pending_human_retry_authorization
+v8_019_human_selected_option: authorize_second_minimal_real_generation_trial
+v8_020_second_product_second_trial_authorization_gate: in_progress
+v8_020_this_is_new_A5_authorization: true
+v8_020_approved_prompt_package: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
+v8_020_output_directory: runs/real_generation/v8_021_multi_color_mesh_sports_visor_second_trial/
+v8_020_provider_calls_max: 1
+v8_020_generation_attempts_max: 1
+v8_020_output_images_max: 1
+recommended_next_after_v8_020: v8_021_second_product_second_minimal_generation_trial_execution
 ```
 
 ### done

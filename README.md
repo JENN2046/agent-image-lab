@@ -7,9 +7,9 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Current synced baseline before v8_019 second trial authorization decision gate: d7db551471fdedbfe3f5d98d96d8e64282ccaaea on master == origin/master.
-Current mainline state: v8_019 second product second-trial authorization decision; options are presented and no provider execution is authorized by this gate.
-Current phase id: v8_019_second_product_second_trial_authorization_decision_gate.
+Current synced baseline before v8_020 second product second-trial authorization gate: e8bb77905cfd03e2e5ced9676810192885b2a558 on master == origin/master.
+Current mainline state: v8_020 records a new A5 authorization for one second-product second minimal generation trial; this authorization record gate performs no provider execution.
+Current phase id: v8_020_second_product_second_trial_authorization_gate.
 Prior human route selection gate: v7.261_human_product_route_selection_request_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
@@ -248,14 +248,22 @@ v8_018_prompt_runner_mapping_fix_completed: true.
 v8_018_canonical_prompt_field_added_or_confirmed: true.
 v8_018_positive_prompt_mapping_resolved: true.
 v8_018_runner_prompt_field: prompt.
-v8_019_second_trial_authorization_decision_in_progress: true.
+v8_019_second_trial_authorization_decision_completed: true.
 v8_019_options_presented: authorize_second_minimal_real_generation_trial | more_static_runner_payload_review | stop_second_product_real_generation_route.
 v8_019_recommended_option: authorize_second_minimal_real_generation_trial.
 v8_019_human_decision_required: true.
+v8_020_human_selected_option: authorize_second_minimal_real_generation_trial.
+v8_020_this_is_new_A5_authorization: true.
+v8_020_previous_v8_015_authorization_consumed: true.
+v8_020_approved_prompt_package: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml.
+v8_020_output_directory: runs/real_generation/v8_021_multi_color_mesh_sports_visor_second_trial/.
+v8_020_provider_calls_max: 1.
+v8_020_generation_attempts_max: 1.
+v8_020_output_images_max: 1.
 Master plan index: PROJECT_MASTER_PLAN.md.
-Not authorized now: second generation, Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, retry, accepted_samples write, runs output commit, tag, release, deploy.
-Recommended next: pending_human_retry_authorization（等待人工选择 Option A/B/C；不得自动进入 provider execution）.
-auto_execution_allowed_for_next: false.
+Not authorized now in v8.020: provider contact, image generation, .env.local read, retry, Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, accepted_samples write, runs output commit, tag, release, deploy.
+Recommended next: v8_021_second_product_second_minimal_generation_trial_execution（v8.020 guarded push 后执行一次受控真实生成试跑）.
+auto_execution_allowed_for_next: true_after_v8_020_guarded_push.
 ```
 
 历史状态脉络：

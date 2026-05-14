@@ -1,5 +1,35 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v8.020-SECOND-PRODUCT-SECOND-TRIAL-AUTHORIZATION
+
+Task:
+
+```text
+Record human Option A selection and authorize exactly one bounded second-product second minimal generation trial for v8.021.
+```
+
+Authorization:
+
+```text
+this_is_new_A5_authorization: true
+previous_v8_015_authorization_consumed: true
+approved_product: multi_color_mesh_sports_visor
+approved_prompt_package: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
+output_directory: runs/real_generation/v8_021_multi_color_mesh_sports_visor_second_trial/
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 1
+auto_retry: false
+stop_after_generation: true
+human_review_required_after_generation: true
+```
+
+Boundary:
+
+```text
+v8.020 records authorization only. It performs no provider contact, image generation, retry, .env.local secret value read, DailyNote write, VCP memory write, production_candidate_002, Batch 005, dependency change, package.json change, accepted_samples write, or runs output commit.
+```
+
 ## VALIDATION-20260514-v8.019-SECOND-PRODUCT-SECOND-TRIAL-AUTHORIZATION-DECISION
 
 Task:

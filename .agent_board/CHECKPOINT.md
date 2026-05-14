@@ -1,10 +1,46 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.020 Second Product Second Trial Authorization Gate
+
+```text
+phase_id: v8_020_second_product_second_trial_authorization_gate
+status: in_progress
+source_phase: v8_019_second_product_second_trial_authorization_decision_gate
+source_commit: e8bb77905cfd03e2e5ced9676810192885b2a558
+purpose: record human Option A selection and authorize exactly one bounded v8.021 second-product second trial
+phase_record_ref: docs/v8_020_second_product_second_trial_authorization_gate.md
+this_is_new_A5_authorization: true
+previous_v8_015_authorization_consumed: true
+retry_allowed_by_previous_authorization: false
+approved_product: multi_color_mesh_sports_visor
+approved_prompt_package: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
+output_directory: runs/real_generation/v8_021_multi_color_mesh_sports_visor_second_trial/
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 1
+auto_retry: false
+stop_after_generation: true
+human_review_required_after_generation: true
+canonical_prompt_field_required: true
+prompt_field_present_after_v8_018: true
+positive_prompt_retained_for_review: true
+provider_contact: false
+image_generation: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+recommended_next: v8_021_second_product_second_minimal_generation_trial_execution
+```
+
 # v8.019 Second Product Second Trial Authorization Decision Gate
 
 ```text
 phase_id: v8_019_second_product_second_trial_authorization_decision_gate
-status: in_progress
+status: completed_remote_synced_after_guarded_push
 source_phase: v8_018_second_product_prompt_or_runner_static_fix_gate
 source_commit: d7db551471fdedbfe3f5d98d96d8e64282ccaaea
 purpose: present Option A/B/C for whether to authorize a second minimal real generation trial
