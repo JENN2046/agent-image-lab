@@ -3,14 +3,14 @@
 ## Handoff Summary
 
 ```text
-Status: v8_010_A4_8_comprehensive_validation_closeout is the current A4.8 comprehensive validation closeout; A4.8 is validated, generation remains stopped, and no new product route is started.
-Reason: v8.006 read-only intake passed, v8.007 mutation live run passed, v8.008 controlled failure recovery passed, and v8.009 hard stop probe passed.
+Status: v8_011_route_B_multi_product_expansion_selection_gate is the current A4.8 Route B selection gate; generation remains stopped, and Route B is docs-only product planning.
+Reason: A4.8 comprehensive validation passed, and the project owner selected Route B: multi-product prompt package expansion.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
-Current synced HEAD before v8_010 patch: 082640b docs: test A4.8 failure recovery drill
+Current synced HEAD before v8_011 patch: 720d0ea docs: close out A4.8 comprehensive validation
 ahead_behind: 0/0
 Worktree: clean before v8_003a A4.8 rail package patch; v7.281 output remains ignored under runs/
-Current status: v8_010_A4_8_comprehensive_validation_closeout
+Current status: v8_011_route_B_multi_product_expansion_selection_gate
 A4_8_safe_project_operator_rail_created: true
 A4_8_safe_project_operator_rail_zh: 安全项目运营轨
 A4_8_is_not_A5: true
@@ -228,8 +228,8 @@ v8_003a_safe_project_operator_rail_ref: docs/A4_8_SAFE_PROJECT_OPERATOR_RAIL.md
 v8_003a_safe_push_policy_ref: docs/SAFE_PUSH_POLICY.md
 v8_003a_validation_selection_matrix_ref: docs/VALIDATION_SELECTION_MATRIX.md
 v8_003a_failure_recovery_ref: docs/AUTOPILOT_FAILURE_RECOVERY.md
-recommended_next: human_route_selection_after_A4_8_validation
-recommended_next_zh: A4.8 验证完成后的人工路线选择
+recommended_next: v8_012_second_product_candidate_and_brief_gate
+recommended_next_zh: 第二商品候选与 brief 门
 v8_003b_A4_8_rule_intake_smoke_test: passed
 v8_006_A4_8_state_and_rule_intake_review: passed_read_only
 v8_007_A4_8_mutation_live_run_docs_only: completed_remote_synced_after_guarded_push
@@ -240,6 +240,10 @@ v8_009_A4_8_hard_stop_probe: passed_read_only
 v8_010_A4_8_comprehensive_validation_closeout: in_progress
 v8_010_phase_record_ref: docs/v8_010_A4_8_comprehensive_validation_closeout.md
 A4_8_comprehensive_validation_passed: true
+v8_011_selected_route: multi_product_prompt_package_expansion
+v8_011_selected_route_zh: 多商品 prompt package 扩展
+v8_011_phase_record_ref: docs/v8_011_route_B_multi_product_expansion_selection_gate.md
+Route_B_changes_v7_accepted_candidate_status: false
 provider_contact_after_v7_274: false
 image_generation_after_v7_274: false
 human_review_required_now: false

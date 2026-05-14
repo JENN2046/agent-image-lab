@@ -1,10 +1,33 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.011 Route B Multi-Product Expansion Selection Gate
+
+```text
+phase_id: v8_011_route_B_multi_product_expansion_selection_gate
+status: in_progress
+source_commit: 720d0ea5fc2d5395448880d818a101b7a21b513e
+purpose: record human selection of Route B multi-product prompt package expansion and lock the docs-only boundary
+phase_record_ref: docs/v8_011_route_B_multi_product_expansion_selection_gate.md
+selected_route: multi_product_prompt_package_expansion
+selected_route_zh: 多商品 prompt package 扩展
+Route_B_changes_v7_accepted_candidate_status: false
+provider_contact: false
+image_generation: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+recommended_next: v8_012_second_product_candidate_and_brief_gate
+```
+
 # v8.010 A4.8 Comprehensive Validation Closeout
 
 ```text
 phase_id: v8_010_A4_8_comprehensive_validation_closeout
-status: in_progress
+status: completed_remote_synced_after_guarded_push
 source_commit: 082640b8e7df8fd4786a782a6109237a5ab4e738
 purpose: close out the A4.8 comprehensive validation track after rule intake, mutation live run, controlled failure recovery, and hard stop probe all passed
 phase_record_ref: docs/v8_010_A4_8_comprehensive_validation_closeout.md

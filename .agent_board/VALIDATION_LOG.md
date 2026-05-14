@@ -1,5 +1,19 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v8.011-ROUTE-B-SELECTION
+
+Task:
+
+```text
+Record the human selection of Route B multi-product prompt package expansion.
+```
+
+Boundary:
+
+```text
+This stage is docs-only product planning. It does not authorize provider contact, plugin call, image generation, env secret read, memory write, runtime, production_candidate_002, Batch 005, accepted_samples write, runs output commit, dependency change, tag, release, or deploy.
+```
+
 ## VALIDATION-20260514-v8.010-A4.8-COMPREHENSIVE-CLOSEOUT
 
 Task:

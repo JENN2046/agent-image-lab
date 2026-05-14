@@ -18,9 +18,9 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Current synced baseline before v8_010 comprehensive validation closeout: 082640b8e7df8fd4786a782a6109237a5ab4e738 on master == origin/master.
-Current mainline state: v8_010 A4.8 comprehensive validation closeout; A4.8 validated and generation remains stopped.
-Current phase id: v8_010_A4_8_comprehensive_validation_closeout.
+Current synced baseline before v8_011 Route B selection gate: 720d0ea5fc2d5395448880d818a101b7a21b513e on master == origin/master.
+Current mainline state: v8_011 Route B multi-product prompt package expansion selection; generation remains stopped.
+Current phase id: v8_011_route_B_multi_product_expansion_selection_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
@@ -225,10 +225,13 @@ v8_009_A4_8_hard_stop_probe_passed: true.
 v8_010_A4_8_comprehensive_validation_passed: true.
 A4_8_validated: true.
 A4_8_is_not_A5: true.
+v8_011_selected_route: multi_product_prompt_package_expansion.
+v8_011_selected_route_zh: 多商品 prompt package 扩展.
+v8_011_route_B_changes_v7_accepted_candidate_status: false.
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed.
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate.
-Recommended next: human_route_selection_after_A4_8_validation（A4.8 验证完成后的人工路线选择）.
-auto_execution_allowed_for_next: false.
+Recommended next: v8_012_second_product_candidate_and_brief_gate（第二商品候选与 brief 门）.
+auto_execution_allowed_for_next: true under the selected A4.8 Route B docs-only track.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)
 ```
@@ -554,6 +557,7 @@ daily_note_called: false
 35. v8_008_A4_8_controlled_failure_recovery_drill 诱发一次未提交的 trailing whitespace failure，修复后复验，不提交或推送失败状态。
 36. v8_009_A4_8_hard_stop_probe 已只读验证 A4.8 会拒绝第五次生成、provider 试跑、secret read、memory write、production_candidate_002、runs 输出提交、依赖变更和 runtime integration。
 37. v8_010_A4_8_comprehensive_validation_closeout 已封存综合验证结果：A4.8 validated，但仍不是 A5；项目停在 `human_route_selection_after_A4_8_validation`。
+38. v8_011_route_B_multi_product_expansion_selection_gate 已记录人工选择 Route B：多商品 prompt package 扩展；它不改变 v7/v8 陶瓷杯 accepted candidate 状态，不进入 provider/image/memory/production。
 
 ## 永久安全门
 

@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_synced_head_before_v8_010_comprehensive_validation_closeout: 082640b8e7df8fd4786a782a6109237a5ab4e738
-origin_master_before_v8_010_comprehensive_validation_closeout: 082640b8e7df8fd4786a782a6109237a5ab4e738
-status: v8_010_A4_8_comprehensive_validation_closeout
-mode: A4.8 docs-only comprehensive validation track
-phase_id: v8_010_A4_8_comprehensive_validation_closeout
+latest_synced_head_before_v8_011_route_B_selection_gate: 720d0ea5fc2d5395448880d818a101b7a21b513e
+origin_master_before_v8_011_route_B_selection_gate: 720d0ea5fc2d5395448880d818a101b7a21b513e
+status: v8_011_route_B_multi_product_expansion_selection_gate
+mode: A4.8 docs-only Route B product-planning track
+phase_id: v8_011_route_B_multi_product_expansion_selection_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -229,9 +229,12 @@ v8_009_A4_8_hard_stop_probe_passed: true
 v8_010_A4_8_comprehensive_validation_passed: true
 A4_8_validated: true
 A4_8_is_not_A5: true
+v8_011_selected_route: multi_product_prompt_package_expansion
+v8_011_selected_route_zh: 多商品 prompt package 扩展
+v8_011_route_B_changes_v7_accepted_candidate_status: false
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate
-recommended_next: human_route_selection_after_A4_8_validation
+recommended_next: v8_012_second_product_candidate_and_brief_gate
 ```
 
 ## Product Direction

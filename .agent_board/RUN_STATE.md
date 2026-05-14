@@ -9,24 +9,24 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v8_010_A4_8_comprehensive_validation_closeout. This closes the explicitly selected A4.8 comprehensive validation track; A4.8 is validated, generation remains stopped, and no new product route is started.
+Agent Image Lab is in v8_011_route_B_multi_product_expansion_selection_gate. A4.8 is validated, the project owner selected Route B, and generation remains stopped.
 ```
 
 ## Current Phase
 
 ```text
-v8.010 A4.8 Comprehensive Validation Closeout
-phase_id: v8_010_A4_8_comprehensive_validation_closeout
-source_phase: v8_009_A4_8_hard_stop_probe
+v8.011 Route B Multi-Product Expansion Selection Gate
+phase_id: v8_011_route_B_multi_product_expansion_selection_gate
+source_phase: v8_010_A4_8_comprehensive_validation_closeout
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
-status: A4_8_comprehensive_validation_closeout_in_progress
-source_commit: 082640b8e7df8fd4786a782a6109237a5ab4e738
-source_message: docs: test A4.8 failure recovery drill
+status: route_B_multi_product_expansion_selected
+source_commit: 720d0ea5fc2d5395448880d818a101b7a21b513e
+source_message: docs: close out A4.8 comprehensive validation
 branch: master tracking origin/master
 Worktree: clean before v8_003a A4.8 rail package patch; generated v7.281 output remains ignored under runs/
 worktree_start_clean: true
-origin_sync_current: local HEAD equals origin/master at 082640b
+origin_sync_current: local HEAD equals origin/master at 720d0ea
 ahead_behind: 0/0
 A4_8_safe_project_operator_rail_created: true
 A4_8_safe_project_operator_rail_zh: 安全项目运营轨
@@ -122,8 +122,8 @@ output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug
 auto_retry_for_second_trial: false
 stop_after_generation_for_second_trial: true
 human_review_required_after_generation: true
-recommended_next: human_route_selection_after_A4_8_validation
-recommended_next_zh: A4.8 验证完成后的人工路线选择
+recommended_next: v8_012_second_product_candidate_and_brief_gate
+recommended_next_zh: 第二商品候选与 brief 门
 v8_003b_A4_8_rule_intake_smoke_test: passed
 v8_006_A4_8_state_and_rule_intake_review: passed_read_only
 v8_007_A4_8_mutation_live_run_docs_only: completed_remote_synced_after_guarded_push
@@ -139,6 +139,11 @@ v8_010_A4_8_comprehensive_validation_closeout: in_progress
 v8_010_phase_record_ref: docs/v8_010_A4_8_comprehensive_validation_closeout.md
 A4_8_comprehensive_validation_passed: true
 A4_8_validated: true
+v8_011_route_B_multi_product_expansion_selection_gate: in_progress
+v8_011_selected_route: multi_product_prompt_package_expansion
+v8_011_selected_route_zh: 多商品 prompt package 扩展
+v8_011_phase_record_ref: docs/v8_011_route_B_multi_product_expansion_selection_gate.md
+Route_B_changes_v7_accepted_candidate_status: false
 v8_route_selection_completed: true
 selected_v8_route: final_retouch_planning
 selected_v8_route_zh: 最终修图规划

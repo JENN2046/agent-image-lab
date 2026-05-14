@@ -7,9 +7,9 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
-Current synced baseline before v8_010 comprehensive validation closeout: 082640b8e7df8fd4786a782a6109237a5ab4e738 on master == origin/master.
-Current mainline state: v8_010 A4.8 comprehensive validation closeout; A4.8 validated and generation remains stopped.
-Current phase id: v8_010_A4_8_comprehensive_validation_closeout.
+Current synced baseline before v8_011 Route B selection gate: 720d0ea5fc2d5395448880d818a101b7a21b513e on master == origin/master.
+Current mainline state: v8_011 Route B multi-product prompt package expansion selection; generation remains stopped.
+Current phase id: v8_011_route_B_multi_product_expansion_selection_gate.
 Prior human route selection gate: v7.261_human_product_route_selection_request_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
@@ -215,12 +215,15 @@ v8_009_A4_8_hard_stop_probe_passed: true.
 v8_010_A4_8_comprehensive_validation_passed: true.
 A4_8_validated: true.
 A4_8_is_not_A5: true.
+v8_011_selected_route: multi_product_prompt_package_expansion.
+v8_011_selected_route_zh: 多商品 prompt package 扩展.
+v8_011_route_B_changes_v7_accepted_candidate_status: false.
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed.
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Not authorized now: Batch 005, production_candidate_002, memory_write_path, DailyNote write, VCP memory write, retry, fifth generation, tag, release, deploy.
-Recommended next: human_route_selection_after_A4_8_validation（A4.8 验证完成后的人工路线选择）.
-auto_execution_allowed_for_next: false.
+Recommended next: v8_012_second_product_candidate_and_brief_gate（第二商品候选与 brief 门）.
+auto_execution_allowed_for_next: true under the selected A4.8 Route B docs-only track.
 ```
 
 历史状态脉络：
