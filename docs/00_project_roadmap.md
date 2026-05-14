@@ -18,9 +18,9 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
-Current synced baseline before v8_014 prompt static review gate: 52d5cc8dbc9ee5e658e61d0915c818ffe7c11fc8 on master == origin/master.
-Current mainline state: v8_014 second product prompt static review; Route B docs-only sequence is closing and generation remains stopped.
-Current phase id: v8_014_second_product_prompt_static_review_gate.
+Current synced baseline before v8_015 A5 authorization decision gate: 4c7f4461089d0181e3c0f1172b7b31934b05632a on master == origin/master.
+Current mainline state: v8_015 second product A5 authorization decision; human selected Option A for one minimal real generation trial in v8_016.
+Current phase id: v8_015_second_product_A5_authorization_decision_gate.
 Prior project plugin A5 authorization package draft gate: v7.263_project_plugin_A5_authorization_package_draft_gate.
 Board calibration: v7.222 completed and pushed.
 Task selection: v7.223 read-only review selected v7.224 mainline status freshness alignment as the only safe next task.
@@ -236,9 +236,16 @@ v8_013_second_product_prompt_package_ref: prompts/image_generation/product_lifes
 v8_014_second_product_prompt_static_review_completed: true.
 v8_014_second_product_prompt_static_review_result: pass_with_minor_watch_items.
 Route_B_initial_docs_sequence_completed: true.
-A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed.
-provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate.
-Recommended next: v8_015_second_product_A5_authorization_decision_gate（人工决定是否为第二商品授权一次最小真实生成试跑）.
+A5_execution_allowed_for_v8_016_once: true.
+provider_contact_allowed_for_v8_016_once: true.
+approved_second_product_for_v8_016: multi_color_mesh_sports_visor.
+approved_prompt_package_for_v8_016: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml.
+approved_output_directory_for_v8_016: runs/real_generation/v8_016_multi_color_mesh_sports_visor_trial/.
+provider_calls_max_for_v8_016: 1.
+generation_attempts_max_for_v8_016: 1.
+output_images_max_for_v8_016: 1.
+auto_retry_for_v8_016: false.
+Recommended next: v8_016_second_product_minimal_real_generation_trial_execution（第二商品一次最小真实生成试跑）.
 auto_execution_allowed_for_next: false.
 Master plan index: PROJECT_MASTER_PLAN.md.
 Historical baseline: v1.0 true-loop closeout candidate + v10.28 DailyNote canonical location guard + Runtime Review sustained autopilot chain complete (9A→10C→final checkpoint, 7/7) + Smart Commander portable support model complete (v7.199→v7.203) + Static Review Console mockup quality stop reached (v7.205→v7.212) + Provider fingerprint preparation complete/inactive (v7.214→v7.216) + Release readiness delta quality stop (v7.219)

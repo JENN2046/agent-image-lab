@@ -9,24 +9,24 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v8_014_second_product_prompt_static_review_gate. The second product prompt package is being statically reviewed, Route B initial docs-only sequence is closing, and generation remains stopped.
+Agent Image Lab is in v8_015_second_product_A5_authorization_decision_gate. The human selected Option A: one controlled v8.016 minimal real generation trial for the second Route B product.
 ```
 
 ## Current Phase
 
 ```text
-v8.014 Second Product Prompt Static Review Gate
-phase_id: v8_014_second_product_prompt_static_review_gate
-source_phase: v8_013_second_product_prompt_package_draft_gate
+v8.015 Second Product A5 Authorization Decision Gate
+phase_id: v8_015_second_product_A5_authorization_decision_gate
+source_phase: v8_014_second_product_prompt_static_review_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
-status: second_product_prompt_static_review_in_progress
-source_commit: 52d5cc8dbc9ee5e658e61d0915c818ffe7c11fc8
-source_message: docs: add second product prompt package draft
+status: second_product_A5_authorization_decision_in_progress
+source_commit: 4c7f4461089d0181e3c0f1172b7b31934b05632a
+source_message: docs: review second product prompt package draft
 branch: master tracking origin/master
 Worktree: clean before v8_003a A4.8 rail package patch; generated v7.281 output remains ignored under runs/
 worktree_start_clean: true
-origin_sync_current: local HEAD equals origin/master at 52d5cc8
+origin_sync_current: local HEAD equals origin/master at 4c7f446
 ahead_behind: 0/0
 A4_8_safe_project_operator_rail_created: true
 A4_8_safe_project_operator_rail_zh: 安全项目运营轨
@@ -122,8 +122,8 @@ output_directory_for_second_trial: runs/real_generation/v7_274_matte_ceramic_mug
 auto_retry_for_second_trial: false
 stop_after_generation_for_second_trial: true
 human_review_required_after_generation: true
-recommended_next: v8_015_second_product_A5_authorization_decision_gate
-recommended_next_zh: 人工决定是否为第二商品授权一次最小真实生成试跑
+recommended_next: v8_016_second_product_minimal_real_generation_trial_execution
+recommended_next_zh: 第二商品一次最小真实生成试跑
 v8_003b_A4_8_rule_intake_smoke_test: passed
 v8_006_A4_8_state_and_rule_intake_review: passed_read_only
 v8_007_A4_8_mutation_live_run_docs_only: completed_remote_synced_after_guarded_push
@@ -155,6 +155,16 @@ v8_014_second_product_prompt_static_review_gate: in_progress
 v8_014_second_product_prompt_static_review_completed: true
 v8_014_second_product_prompt_static_review_ref: reviews/v8_014_second_product_prompt_static_review.md
 v8_014_second_product_prompt_static_review_result: pass_with_minor_watch_items
+v8_015_second_product_A5_authorization_decision_gate: in_progress
+v8_015_selected_option: Option A
+v8_015_approved_product: multi_color_mesh_sports_visor
+v8_015_approved_prompt_package: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
+v8_015_approved_output_directory: runs/real_generation/v8_016_multi_color_mesh_sports_visor_trial/
+v8_015_provider_calls_max: 1
+v8_015_generation_attempts_max: 1
+v8_015_output_images_max: 1
+v8_015_auto_retry: false
+v8_015_human_review_required_after_generation: true
 Route_B_initial_docs_sequence_completed: true
 v8_route_selection_completed: true
 selected_v8_route: final_retouch_planning

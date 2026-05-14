@@ -1,5 +1,35 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v8.015-SECOND-PRODUCT-A5-AUTHORIZATION-DECISION
+
+Task:
+
+```text
+Record human Option A authorization for one controlled minimal real generation trial of the Route B second product.
+```
+
+Authorized next action:
+
+```text
+phase: v8_016_second_product_minimal_real_generation_trial_execution
+approved_product: multi_color_mesh_sports_visor
+approved_prompt_package: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
+output_directory: runs/real_generation/v8_016_multi_color_mesh_sports_visor_trial/
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 1
+auto_retry: false
+secret_value_printing_allowed: false
+runs_output_commit_allowed: false
+human_review_required_after_generation: true
+```
+
+Boundary:
+
+```text
+This record authorizes only the next v8.016 controlled call. It does not authorize a second generation, DailyNote write, VCP memory write, production_candidate_002, Batch 005, accepted_samples write, package/dependency changes, or adding generated runs output to Git.
+```
+
 ## VALIDATION-20260514-v8.014-SECOND-PRODUCT-PROMPT-STATIC-REVIEW
 
 Task:

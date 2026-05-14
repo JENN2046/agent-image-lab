@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_synced_head_before_v8_014_prompt_static_review_gate: 52d5cc8dbc9ee5e658e61d0915c818ffe7c11fc8
-origin_master_before_v8_014_prompt_static_review_gate: 52d5cc8dbc9ee5e658e61d0915c818ffe7c11fc8
-status: v8_014_second_product_prompt_static_review_gate
-mode: A4.8 docs-only Route B product-planning track
-phase_id: v8_014_second_product_prompt_static_review_gate
+latest_synced_head_before_v8_015_A5_authorization_decision_gate: 4c7f4461089d0181e3c0f1172b7b31934b05632a
+origin_master_before_v8_015_A5_authorization_decision_gate: 4c7f4461089d0181e3c0f1172b7b31934b05632a
+status: v8_015_second_product_A5_authorization_decision_gate
+mode: A5 authorization decision for one controlled Route B generation trial
+phase_id: v8_015_second_product_A5_authorization_decision_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -240,9 +240,16 @@ v8_013_second_product_prompt_package_ref: prompts/image_generation/product_lifes
 v8_014_second_product_prompt_static_review_completed: true
 v8_014_second_product_prompt_static_review_result: pass_with_minor_watch_items
 Route_B_initial_docs_sequence_completed: true
-A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed
-provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate
-recommended_next: v8_015_second_product_A5_authorization_decision_gate
+A5_execution_allowed_for_v8_016_once: true
+provider_contact_allowed_for_v8_016_once: true
+approved_second_product_for_v8_016: multi_color_mesh_sports_visor
+approved_prompt_package_for_v8_016: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
+approved_output_directory_for_v8_016: runs/real_generation/v8_016_multi_color_mesh_sports_visor_trial/
+provider_calls_max_for_v8_016: 1
+generation_attempts_max_for_v8_016: 1
+output_images_max_for_v8_016: 1
+auto_retry_for_v8_016: false
+recommended_next: v8_016_second_product_minimal_real_generation_trial_execution
 ```
 
 ## Product Direction

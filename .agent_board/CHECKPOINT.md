@@ -1,10 +1,36 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.015 Second Product A5 Authorization Decision Gate
+
+```text
+phase_id: v8_015_second_product_A5_authorization_decision_gate
+status: in_progress
+source_commit: 4c7f4461089d0181e3c0f1172b7b31934b05632a
+purpose: record human Option A approval for one controlled minimal real generation trial of the Route B second product
+phase_record_ref: docs/v8_015_second_product_A5_authorization_decision_gate.md
+approved_product: multi_color_mesh_sports_visor
+approved_prompt_package: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
+approved_output_directory: runs/real_generation/v8_016_multi_color_mesh_sports_visor_trial/
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 1
+auto_retry: false
+stop_after_generation: true
+human_review_required_after_generation: true
+secret_value_printing_allowed: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+runs_output_commit_allowed: false
+recommended_next: v8_016_second_product_minimal_real_generation_trial_execution
+```
+
 # v8.014 Second Product Prompt Static Review Gate
 
 ```text
 phase_id: v8_014_second_product_prompt_static_review_gate
-status: in_progress
+status: completed_remote_synced_after_guarded_push
 source_commit: 52d5cc8dbc9ee5e658e61d0915c818ffe7c11fc8
 purpose: statically review the second product prompt package and stop before any A5 decision
 phase_record_ref: docs/v8_014_second_product_prompt_static_review_gate.md
