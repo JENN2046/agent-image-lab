@@ -1,10 +1,50 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V9.011 Real Retouch Execution Planning Gate
+
+```text
+phase_id: v9_011_real_retouch_execution_planning_gate
+status: completed_pending_validation_commit_push
+source_phase: v9_010_final_retouch_execution_or_closeout_decision_gate
+source_commit: 4125dde4dfe9c2f936affbf9472cdc5a31248f12
+purpose: create a docs-only real retouch execution plan after human selected v9.010 Option A
+phase_record_ref: docs/v9_011_real_retouch_execution_planning_gate.md
+real_retouch_execution_plan_ref: docs/real_retouch_execution_plan_matte_ceramic_mug_v4.md
+selected_route: delivery_readiness_layer
+selected_asset: ceramic_mug_v4
+source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+previous_review_result: needs_final_retouch
+final_retouch_action_package_created: true
+real_retouch_execution_planning_created: true
+real_retouch_execution_performed: false
+derivative_image_created: false
+commercial_delivery_ready: false
+memory_suitability: deferred
+memory_write_allowed: false
+production_candidate_002_allowed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+image_editing_performed: false
+real_commercial_delivery_execution: false
+recommended_next: v9_012_real_retouch_execution_authorization_decision_gate
+```
+
 # V9.010 Final Retouch Execution Or Closeout Decision Gate
 
 ```text
 phase_id: v9_010_final_retouch_execution_or_closeout_decision_gate
-status: completed_pending_validation_commit_push
+status: completed_remote_synced_after_guarded_push
 source_phase: v9_009_final_retouch_action_package_gate
 source_commit: 0e3e40455a35db9a3a5bb268a5acb37ee3626a38
 purpose: present Option A/B/C after the ceramic_mug_v4 final retouch action package
