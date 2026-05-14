@@ -9,6 +9,16 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v8_030_runner_output_persistence_guard_static_code_fix_gate.
+Purpose: statically tighten Native Doubao result normalization so only explicit verified local file count can create local output success.
+runner_output_persistence_guard_static_code_fix_created: true.
+normalize_result_requires_verified_local_file_count: true.
+legacy_files_written_count_can_create_success: false.
+local_persistence_success_flag_alone_can_create_success: false.
+human_review_requires_verified_local_file: true.
+v8_030 does not authorize provider contact, image generation, retry, .env.local secret value read, memory write, production_candidate_002, Batch 005, or runs output commit.
+recommended_next: v8_031_second_product_retry_after_persistence_fix_decision_gate.
+---
 Current active gate: v8_029_runner_output_persistence_static_review_and_fix_gate.
 Purpose: statically fix Native Doubao output persistence accounting so provider HTTP success cannot be counted as a local output image unless a verified local file exists.
 provider_success_vs_local_persistence_split: true.
@@ -120,13 +130,13 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-none — v8_029 is completed_validated_pending_guarded_push.
+none — v8_030 is completed_validated_pending_guarded_commit.
 ```
 
 ### todo
 
 ```text
-v8_030_second_product_retry_after_persistence_fix_decision_gate — human decision gate only; no automatic generation authorization.
+v8_031_second_product_retry_after_persistence_fix_decision_gate — human decision gate only; no automatic generation authorization.
 ```
 
 ### recommended_next_after_v7_285

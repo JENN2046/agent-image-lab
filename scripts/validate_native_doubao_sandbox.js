@@ -94,6 +94,40 @@ check("normalize_result_requires_local_persistence_for_image_count", () => {
     normalized.local_persistence_success === false;
 });
 
+check("normalize_result_rejects_legacy_files_written_overcount", () => {
+  const normalized = plugin.normalizeResult({
+    status: "COMPLETED_GENERATED",
+    api_call_performed: true,
+    provider_request_success: true,
+    provider_reported_image_count: 1,
+    image_created: true,
+    files_written_count: 1,
+    local_persistence_success: true,
+  });
+  return normalized.provider_reported_image_count === 1 &&
+    normalized.files_written_count === 0 &&
+    normalized.local_files_verified_count === 0 &&
+    normalized.image_count === 0 &&
+    normalized.image_created === false &&
+    normalized.human_review_required_now === false &&
+    normalized.local_persistence_success === false;
+});
+
+check("normalize_result_requires_verified_count_even_if_flag_true", () => {
+  const normalized = plugin.normalizeResult({
+    status: "COMPLETED_GENERATED",
+    api_call_performed: true,
+    provider_request_success: true,
+    provider_reported_image_count: 1,
+    local_files_verified_count: 0,
+    local_persistence_success: true,
+  });
+  return normalized.image_count === 0 &&
+    normalized.image_created === false &&
+    normalized.human_review_required_now === false &&
+    normalized.local_persistence_success === false;
+});
+
 check("verify_local_output_file_rejects_missing_file", () => {
   const result = plugin.verifyLocalOutputFile(
     "runs/real_generation/does_not_exist/native_doubao_missing.jpg",

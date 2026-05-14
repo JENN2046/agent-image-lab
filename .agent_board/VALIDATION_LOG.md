@@ -1,5 +1,31 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v8.030-RUNNER-OUTPUT-PERSISTENCE-GUARD-STATIC-CODE-FIX
+
+Task:
+
+```text
+Tighten Native Doubao result normalization so local output success requires explicit verified local file count.
+```
+
+Result:
+
+```text
+runner_output_persistence_guard_static_code_fix_created: true
+normalize_result_requires_verified_local_file_count: true
+legacy_files_written_count_can_create_success: false
+local_persistence_success_flag_alone_can_create_success: false
+human_review_requires_verified_local_file: true
+validator_negative_cases_added: normalize_result_rejects_legacy_files_written_overcount | normalize_result_requires_verified_count_even_if_flag_true
+validation_result: passed
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, DailyNote write, VCP memory write, production_candidate_002, Batch 005, dependency change, package.json change, accepted_samples write, or runs output commit is performed by v8.030.
+```
+
 ## VALIDATION-20260514-v8.029-TIMESTAMP-EVIDENCE-POLICY
 
 Task:

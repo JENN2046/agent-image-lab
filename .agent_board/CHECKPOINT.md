@@ -1,10 +1,37 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.030 Runner Output Persistence Guard Static Code Fix Gate
+
+```text
+phase_id: v8_030_runner_output_persistence_guard_static_code_fix_gate
+status: completed_validated_pending_guarded_commit
+source_phase: v8_029_timestamp_evidence_policy_patch
+source_commit: 2cb27d2789fd639dbee46709fa15ceb485979ae3
+purpose: statically tighten Native Doubao result normalization after the v8.027 zero-local-file anomaly
+phase_record_ref: docs/v8_030_runner_output_persistence_guard_static_code_fix_gate.md
+runner_output_persistence_guard_static_code_fix_created: true
+normalize_result_requires_verified_local_file_count: true
+legacy_files_written_count_can_create_success: false
+local_persistence_success_flag_alone_can_create_success: false
+human_review_requires_verified_local_file: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+recommended_next: v8_031_second_product_retry_after_persistence_fix_decision_gate
+```
+
 # v8.029 Runner Output Persistence Static Review And Fix Gate
 
 ```text
 phase_id: v8_029_runner_output_persistence_static_review_and_fix_gate
-status: completed_validated_pending_guarded_push
+status: completed_remote_synced_after_guarded_push
 source_phase: v8_028_second_product_prompt_v2_failed_trial_review_or_output_persistence_gate
 source_commit: 1c5c97605be208222c326101335d29cb84f48eb2
 purpose: statically tighten Native Doubao output persistence accounting after the v8.027 zero-local-file anomaly

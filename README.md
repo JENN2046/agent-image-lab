@@ -7,6 +7,19 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current synced baseline before v8_030 static code fix gate: 2cb27d2789fd639dbee46709fa15ceb485979ae3 on master == origin/master.
+Current mainline state: v8_030 statically tightens Native Doubao result normalization so only explicit verified local files can create local output success.
+Current phase id: v8_030_runner_output_persistence_guard_static_code_fix_gate.
+runner_output_persistence_guard_static_code_fix_created: true.
+normalize_result_requires_verified_local_file_count: true.
+legacy_files_written_count_can_create_success: false.
+local_persistence_success_flag_alone_can_create_success: false.
+human_review_requires_verified_local_file: true.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+retry_allowed_now: false.
+recommended_next: v8_031_second_product_retry_after_persistence_fix_decision_gate.
+recommended_next_auto_execution_allowed: false.
 Current synced baseline before v8_029 output persistence fix gate: 1c5c97605be208222c326101335d29cb84f48eb2 on master == origin/master.
 Current mainline state: v8_029 statically tightens Native Doubao output persistence; provider success and local file verification are now separate result layers.
 Current phase id: v8_029_runner_output_persistence_static_review_and_fix_gate.

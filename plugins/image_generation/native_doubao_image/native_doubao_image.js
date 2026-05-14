@@ -511,8 +511,8 @@ function normalizeResult(result) {
     : (result.images && Array.isArray(result.images) ? result.images.length : 0);
   var localFilesVerifiedCount = typeof result.local_files_verified_count === "number"
     ? result.local_files_verified_count
-    : (result.files_written_count || 0);
-  var localPersistenceSuccess = result.local_persistence_success === true || localFilesVerifiedCount > 0;
+    : 0;
+  var localPersistenceSuccess = localFilesVerifiedCount > 0;
   return {
     status: result.status || "unknown",
     plugin_id: result.plugin_id || "NativeDoubaoImage",
