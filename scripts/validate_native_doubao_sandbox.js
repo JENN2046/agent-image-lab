@@ -24,12 +24,24 @@ function invalidOutput(ref) {
   return plugin.resolveSafeOutputDirectory(ref).valid === false;
 }
 
+const sportsVisorPromptV2 = "prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml";
+
 check("prompt_ref_accepts_allowed_root", () => plugin.resolveSafePromptPackageRef("prompts/image_generation/example.yaml").valid === true);
 check("prompt_ref_rejects_parent_traversal", () => invalidPrompt("../README.md"));
 check("prompt_ref_rejects_nested_traversal", () => invalidPrompt("prompts/image_generation/../../README.md"));
 check("prompt_ref_rejects_absolute_windows_path", () => invalidPrompt("C:\\temp\\prompt.yaml"));
 check("prompt_ref_rejects_backslash_path", () => invalidPrompt("prompts\\image_generation\\example.yaml"));
 check("prompt_ref_rejects_wrong_root", () => invalidPrompt("docs/00_project_roadmap.md"));
+
+check("sports_visor_v2_prompt_package_loads_prompt_non_empty", () => {
+  const pkg = plugin.loadPromptPackage(sportsVisorPromptV2);
+  return typeof pkg.prompt === "string" && pkg.prompt.trim().length > 0;
+});
+
+check("sports_visor_v2_prompt_package_loads_negative_prompt_non_empty", () => {
+  const pkg = plugin.loadPromptPackage(sportsVisorPromptV2);
+  return typeof pkg.negative_prompt === "string" && pkg.negative_prompt.trim().length > 0;
+});
 
 check("output_dir_accepts_allowed_root", () => plugin.resolveSafeOutputDirectory("runs/real_generation/v7_245/").valid === true);
 check("output_dir_rejects_parent_traversal", () => invalidOutput("runs/real_generation/../../../x"));
@@ -126,6 +138,19 @@ check("normalize_result_requires_verified_count_even_if_flag_true", () => {
     normalized.image_created === false &&
     normalized.human_review_required_now === false &&
     normalized.local_persistence_success === false;
+});
+
+check("human_review_requires_verified_local_file_count", () => {
+  const normalized = plugin.normalizeResult({
+    status: "COMPLETED_GENERATED",
+    api_call_performed: true,
+    provider_request_success: true,
+    provider_reported_image_count: 1,
+    local_files_verified_count: 0,
+  });
+  return normalized.human_review_required_now === false &&
+    normalized.image_created === false &&
+    normalized.image_count === 0;
 });
 
 check("verify_local_output_file_rejects_missing_file", () => {

@@ -9,20 +9,56 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v9_delivery_readiness_layer_route_selection_gate. This gate selects V9 Option A, Delivery Readiness Layer, and does not authorize v9.001 execution.
+Agent Image Lab is in v9_001_delivery_readiness_scope_and_asset_selection_plus_code_surface_guard_gate. This gate selects the first delivery-readiness asset and hardens Native Doubao local preflight checks without provider contact, image generation, memory write, or production promotion.
 ```
 
 ## Current Phase
 
 ```text
+V9.001 Delivery Readiness Scope And Asset Selection Plus Code Surface Guard Gate
+phase_id: v9_001_delivery_readiness_scope_and_asset_selection_plus_code_surface_guard_gate
+source_phase: v9_delivery_readiness_layer_route_selection_gate
+status: completed_validated_guarded_commit_and_push_authorized
+source_commit: a461ce90c3e6072928eca23caf8f625f58f05d8b
+source_message: docs: select v9 delivery readiness route
+branch: master tracking origin/master
+origin_sync_current: local HEAD equals origin/master at a461ce9
+ahead_behind: 0/0
+v8_closed: true
+selected_route: delivery_readiness_layer
+selected_first_asset_for_delivery_readiness: ceramic_mug_v4
+selected_candidate_path: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+sports_visor_delivery_readiness_candidate: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg
+asset_selection_matrix_created: true
+commercial_delivery_ready: false
+memory_write_allowed: false
+production_candidate_002_allowed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+prompt_v2_loader_checked: true
+prompt_v2_prompt_non_empty: true
+prompt_v2_negative_prompt_non_empty: true
+output_persistence_guard_checked: true
+local_file_required_for_human_review: true
+recommended_next: v9_002_delivery_readiness_package_gate
+recommended_next_auto_execution_allowed: false
+---
 V9 Delivery Readiness Layer Route Selection Gate
 phase_id: v9_delivery_readiness_layer_route_selection_gate
 source_phase: v8_038_v8_product_loop_final_closeout
-status: completed_validated_pending_guarded_push
+status: completed_remote_synced_after_guarded_push
 source_commit: 87cbc755833e00eae03d5f9381cbc324b727cd36
 source_message: docs: close out v8 product loop
 branch: master tracking origin/master
-origin_sync_current: local HEAD equals origin/master at 87cbc75
+origin_sync_current: local HEAD equals origin/master at a461ce9
 ahead_behind: 0/0
 v8_closed: true
 selected_route: delivery_readiness_layer

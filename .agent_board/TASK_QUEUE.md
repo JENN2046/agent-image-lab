@@ -9,6 +9,22 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v9_001_delivery_readiness_scope_and_asset_selection_plus_code_surface_guard_gate.
+Purpose: select the first V9 delivery-readiness asset and harden Native Doubao local preflight checks; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, or delivery package execution.
+source_phase: v9_delivery_readiness_layer_route_selection_gate.
+source_commit: a461ce90c3e6072928eca23caf8f625f58f05d8b.
+selected_route: delivery_readiness_layer.
+selected_first_asset_for_delivery_readiness: ceramic_mug_v4.
+selected_candidate_path: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg.
+sports_visor_delivery_readiness_candidate: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg.
+commercial_delivery_ready: false.
+memory_write_allowed: false.
+production_candidate_002_allowed: false.
+prompt_v2_loader_checked: true.
+output_persistence_guard_checked: true.
+recommended_next: v9_002_delivery_readiness_package_gate.
+recommended_next_auto_execution_allowed: false.
+---
 Current active gate: v9_delivery_readiness_layer_route_selection_gate.
 Purpose: record the human route selection for V9 Option A, Delivery Readiness Layer; no provider contact, generation, retry, .env.local read, memory write, runtime, production_candidate_002, accepted_samples write, or V9 execution.
 v8_closed: true.
@@ -255,13 +271,13 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-none — v9_delivery_readiness_layer_route_selection_gate is completed_validated_pending_guarded_push.
+none — v9_001_delivery_readiness_scope_and_asset_selection_plus_code_surface_guard_gate is completed_validated_guarded_commit_and_push_authorized.
 ```
 
 ### todo
 
 ```text
-v9_001_delivery_readiness_scope_and_asset_selection_gate — recommended next gate only; no automatic execution.
+v9_002_delivery_readiness_package_gate — recommended next gate only; no automatic execution.
 ```
 
 ### recommended_next_after_v7_285

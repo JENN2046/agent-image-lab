@@ -3,6 +3,36 @@
 ## Handoff Summary
 
 ```text
+Status: v9_001_delivery_readiness_scope_and_asset_selection_plus_code_surface_guard_gate is the current V9 guard gate.
+Reason: V9 delivery readiness was selected and synced at a461ce9; this gate selects ceramic_mug_v4 as the first delivery-readiness asset and hardens local Native Doubao prompt/output guards without executing a delivery package.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v9.001 patch: a461ce9 docs: select v9 delivery readiness route
+ahead_behind: 0/0
+Worktree: clean before v9.001 patch; generated runs output remains ignored and is not staged or committed
+Current status: v9_001_delivery_readiness_scope_and_asset_selection_plus_code_surface_guard_gate
+selected_route: delivery_readiness_layer
+selected_first_asset_for_delivery_readiness: ceramic_mug_v4
+selected_candidate_path: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+sports_visor_delivery_readiness_candidate: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg
+asset_selection_matrix_created: true
+commercial_delivery_ready: false
+memory_write_allowed: false
+production_candidate_002_allowed: false
+prompt_v2_loader_checked: true
+prompt_v2_prompt_non_empty: true
+prompt_v2_negative_prompt_non_empty: true
+output_persistence_guard_checked: true
+local_file_required_for_human_review: true
+v9_001_provider_contact: false
+v9_001_image_generation: false
+v9_001_retry: false
+v9_001_env_local_secret_value_read: false
+v9_001_memory_write: false
+v9_001_runtime_execution: false
+recommended_next: v9_002_delivery_readiness_package_gate
+recommended_next_auto_execution_allowed: false
+---
 Status: v9_delivery_readiness_layer_route_selection_gate is the current V9 route selection gate.
 Reason: V8 is closed and the owner selected V9 Option A, Delivery Readiness Layer; this gate records the route only and does not start V9 execution.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

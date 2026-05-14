@@ -1,5 +1,39 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v9.001-DELIVERY-READINESS-SCOPE-ASSET-SELECTION-GUARD
+
+Task:
+
+```text
+Select the first V9 delivery-readiness asset and harden Native Doubao local prompt-loader / output-persistence guard checks.
+```
+
+Result:
+
+```text
+selected_route: delivery_readiness_layer
+asset_selection_matrix_created: true
+selected_first_asset_for_delivery_readiness: ceramic_mug_v4
+selected_candidate_path: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
+sports_visor_delivery_readiness_candidate: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg
+commercial_delivery_ready: false
+memory_write_allowed: false
+production_candidate_002_allowed: false
+gitignore_checked: true
+prompt_v2_loader_checked: true
+prompt_v2_prompt_non_empty: true
+prompt_v2_negative_prompt_non_empty: true
+output_persistence_guard_checked: true
+local_file_required_for_human_review: true
+validation_result: passed
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, secret print, DailyNote write, VCP memory write, memory_write_path, production_candidate_002, Batch 005, runtime/CDP/bridge/MCP, dependency change, package.json change, accepted_samples write, or runs output commit is performed by v9.001.
+```
+
 ## VALIDATION-20260514-v9-DELIVERY-READINESS-LAYER-ROUTE-SELECTION
 
 Task:

@@ -7,6 +7,29 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current synced baseline before v9.001 guard gate: a461ce90c3e6072928eca23caf8f625f58f05d8b on master == origin/master.
+Current mainline state: v9_001_delivery_readiness_scope_and_asset_selection_plus_code_surface_guard_gate selects ceramic_mug_v4 as the first delivery-readiness asset and hardens Native Doubao local preflight checks; no delivery package execution starts here.
+Current phase id: v9_001_delivery_readiness_scope_and_asset_selection_plus_code_surface_guard_gate.
+source_phase: v9_delivery_readiness_layer_route_selection_gate.
+v8_closed: true.
+selected_route: delivery_readiness_layer.
+selected_first_asset_for_delivery_readiness: ceramic_mug_v4.
+selected_candidate_path: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg.
+sports_visor_delivery_readiness_candidate: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg.
+asset_selection_matrix_created: true.
+commercial_delivery_ready: false.
+memory_write_allowed: false.
+production_candidate_002_allowed: false.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+retry_allowed_now: false.
+prompt_v2_loader_checked: true.
+prompt_v2_prompt_non_empty: true.
+prompt_v2_negative_prompt_non_empty: true.
+output_persistence_guard_checked: true.
+local_file_required_for_human_review: true.
+recommended_next: v9_002_delivery_readiness_package_gate.
+recommended_next_auto_execution_allowed: false.
 Current synced baseline before v9 route selection gate: 87cbc755833e00eae03d5f9381cbc324b727cd36 on master == origin/master.
 Current mainline state: v9_delivery_readiness_layer_route_selection_gate selects V9 Option A as the delivery readiness layer; no V9 execution starts here.
 Current phase id: v9_delivery_readiness_layer_route_selection_gate.
