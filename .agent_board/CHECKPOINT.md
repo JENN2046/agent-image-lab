@@ -1,10 +1,49 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V9.022 V9 Delivery Readiness Layer Closeout Or Next Route Decision Gate
+
+```text
+phase_id: v9_022_v9_delivery_readiness_layer_closeout_or_next_route_decision_gate
+status: completed_pending_validation_commit_push
+source_phase: v9_021_sports_visor_final_retouch_action_package_gate
+source_commit: d40c9cb5a8bdc311ed620b1f9ec1b7f25a565f95
+purpose: close V9 delivery readiness layer and present V10 route options
+phase_record_ref: docs/v9_022_v9_delivery_readiness_layer_closeout_or_next_route_decision_gate.md
+closeout_ref: docs/v9_delivery_readiness_layer_closeout.md
+selected_route: delivery_readiness_layer
+delivery_readiness_layer_closed: true
+ceramic_mug_lane_completed: true
+ceramic_mug_final_status: needs_final_retouch
+sports_visor_lane_completed: true
+sports_visor_final_status: needs_minor_retouch
+commercial_delivery_ready: false
+memory_suitability: deferred
+memory_write_allowed: false
+production_candidate_002_allowed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+image_editing_performed: false
+derivative_image_created: false
+real_commercial_delivery_execution: false
+recommended_next: V10_route_selection_human_decision_gate
+```
+
 # V9.021 Sports Visor Final Retouch Action Package Gate
 
 ```text
 phase_id: v9_021_sports_visor_final_retouch_action_package_gate
-status: completed_pending_validation_commit_push
+status: completed_remote_synced_after_guarded_push
 source_phase: v9_020_sports_visor_commercial_delivery_review_result_decision_gate
 source_commit: 9f088d4aced2e09c2afbba161a84c68846f2c988
 purpose: create sports_visor_v8_033 final retouch action package

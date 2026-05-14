@@ -9,16 +9,54 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v9_021_sports_visor_final_retouch_action_package_gate. This docs-only gate creates a sports visor final retouch action package after v9.020 Option B selection; it does not edit images, create derivatives, generate images, contact providers, write memory, write accepted_samples, promote production, execute delivery, or set commercial_delivery_ready=true.
+Agent Image Lab is in v9_022_v9_delivery_readiness_layer_closeout_or_next_route_decision_gate. This docs-only gate closes the V9 delivery readiness layer and presents V10 route options; it does not enter V10 execution, edit images, create derivatives, generate images, contact providers, write memory, write accepted_samples, promote production, execute delivery, or set commercial_delivery_ready=true.
 ```
 
 ## Current Phase
 
 ```text
+V9.022 V9 Delivery Readiness Layer Closeout Or Next Route Decision Gate
+phase_id: v9_022_v9_delivery_readiness_layer_closeout_or_next_route_decision_gate
+source_phase: v9_021_sports_visor_final_retouch_action_package_gate
+status: completed_pending_validation_commit_push
+source_commit: d40c9cb5a8bdc311ed620b1f9ec1b7f25a565f95
+source_message: docs: add final retouch action package for sports visor
+branch: master tracking origin/master
+origin_sync_current: local HEAD equals origin/master at d40c9cb before v9.022 patch
+ahead_behind: 0/0 before v9.022 patch
+selected_route: delivery_readiness_layer
+delivery_readiness_layer_closed: true
+ceramic_mug_lane_completed: true
+ceramic_mug_final_status: needs_final_retouch
+sports_visor_lane_completed: true
+sports_visor_final_status: needs_minor_retouch
+commercial_delivery_ready: false
+memory_suitability: deferred
+memory_write_allowed: false
+production_candidate_002_allowed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+image_editing_performed: false
+derivative_image_created: false
+real_commercial_delivery_execution: false
+recommended_next: V10_route_selection_human_decision_gate
+recommended_next_auto_execution_allowed: false
+---
 V9.021 Sports Visor Final Retouch Action Package Gate
 phase_id: v9_021_sports_visor_final_retouch_action_package_gate
 source_phase: v9_020_sports_visor_commercial_delivery_review_result_decision_gate
-status: completed_pending_validation_commit_push
+status: completed_remote_synced_after_guarded_push
 source_commit: 9f088d4aced2e09c2afbba161a84c68846f2c988
 source_message: docs: decide sports visor commercial delivery review result path
 branch: master tracking origin/master
