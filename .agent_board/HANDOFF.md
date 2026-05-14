@@ -3,14 +3,14 @@
 ## Handoff Summary
 
 ```text
-Status: v8_011_route_B_multi_product_expansion_selection_gate is the current A4.8 Route B selection gate; generation remains stopped, and Route B is docs-only product planning.
-Reason: A4.8 comprehensive validation passed, and the project owner selected Route B: multi-product prompt package expansion.
+Status: v8_012_second_product_candidate_and_brief_gate is the current A4.8 Route B product brief gate; generation remains stopped, and Route B remains docs-only product planning.
+Reason: Route B was selected in v8.011; v8.012 selects the second product and creates a brief for prompt package drafting.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
-Current synced HEAD before v8_011 patch: 720d0ea docs: close out A4.8 comprehensive validation
+Current synced HEAD before v8_012 patch: 5fae1c0 docs: select route B multi product prompt expansion
 ahead_behind: 0/0
 Worktree: clean before v8_003a A4.8 rail package patch; v7.281 output remains ignored under runs/
-Current status: v8_011_route_B_multi_product_expansion_selection_gate
+Current status: v8_012_second_product_candidate_and_brief_gate
 A4_8_safe_project_operator_rail_created: true
 A4_8_safe_project_operator_rail_zh: 安全项目运营轨
 A4_8_is_not_A5: true
@@ -228,8 +228,8 @@ v8_003a_safe_project_operator_rail_ref: docs/A4_8_SAFE_PROJECT_OPERATOR_RAIL.md
 v8_003a_safe_push_policy_ref: docs/SAFE_PUSH_POLICY.md
 v8_003a_validation_selection_matrix_ref: docs/VALIDATION_SELECTION_MATRIX.md
 v8_003a_failure_recovery_ref: docs/AUTOPILOT_FAILURE_RECOVERY.md
-recommended_next: v8_012_second_product_candidate_and_brief_gate
-recommended_next_zh: 第二商品候选与 brief 门
+recommended_next: v8_013_second_product_prompt_package_draft_gate
+recommended_next_zh: 第二商品 prompt package 草案门
 v8_003b_A4_8_rule_intake_smoke_test: passed
 v8_006_A4_8_state_and_rule_intake_review: passed_read_only
 v8_007_A4_8_mutation_live_run_docs_only: completed_remote_synced_after_guarded_push
@@ -244,6 +244,9 @@ v8_011_selected_route: multi_product_prompt_package_expansion
 v8_011_selected_route_zh: 多商品 prompt package 扩展
 v8_011_phase_record_ref: docs/v8_011_route_B_multi_product_expansion_selection_gate.md
 Route_B_changes_v7_accepted_candidate_status: false
+v8_012_selected_second_product: multi_color_mesh_sports_visor
+v8_012_second_product_brief_created: true
+v8_012_second_product_brief_ref: briefs/product_brief_multi_color_mesh_sports_visor_v1.md
 provider_contact_after_v7_274: false
 image_generation_after_v7_274: false
 human_review_required_now: false

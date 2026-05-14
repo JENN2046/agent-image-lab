@@ -8,11 +8,11 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_synced_head_before_v8_011_route_B_selection_gate: 720d0ea5fc2d5395448880d818a101b7a21b513e
-origin_master_before_v8_011_route_B_selection_gate: 720d0ea5fc2d5395448880d818a101b7a21b513e
-status: v8_011_route_B_multi_product_expansion_selection_gate
+latest_synced_head_before_v8_012_second_product_brief_gate: 5fae1c0dc3c24a59c1f0a7d3ad8d383a4446dc08
+origin_master_before_v8_012_second_product_brief_gate: 5fae1c0dc3c24a59c1f0a7d3ad8d383a4446dc08
+status: v8_012_second_product_candidate_and_brief_gate
 mode: A4.8 docs-only Route B product-planning track
-phase_id: v8_011_route_B_multi_product_expansion_selection_gate
+phase_id: v8_012_second_product_candidate_and_brief_gate
 prior_human_route_selection_gate: v7.261_human_product_route_selection_request_gate
 prior_project_plugin_A5_authorization_package_draft_gate: v7.263_project_plugin_A5_authorization_package_draft_gate
 same_provider_retry_allowed_now: false
@@ -232,9 +232,12 @@ A4_8_is_not_A5: true
 v8_011_selected_route: multi_product_prompt_package_expansion
 v8_011_selected_route_zh: 多商品 prompt package 扩展
 v8_011_route_B_changes_v7_accepted_candidate_status: false
+v8_012_selected_second_product: multi_color_mesh_sports_visor
+v8_012_second_product_brief_created: true
+v8_012_second_product_brief_ref: briefs/product_brief_multi_color_mesh_sports_visor_v1.md
 A5_execution_allowed_now: false after v7.282; v7.281 single authorized call has been consumed
 provider_contact_allowed_now: false after v7.282; no fifth generation is active without a new authorization gate
-recommended_next: v8_012_second_product_candidate_and_brief_gate
+recommended_next: v8_013_second_product_prompt_package_draft_gate
 ```
 
 ## Product Direction

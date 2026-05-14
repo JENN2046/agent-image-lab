@@ -1,5 +1,25 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v8.012-SECOND-PRODUCT-BRIEF
+
+Task:
+
+```text
+Select the second product for Route B and create the multi-color mesh sports visor product brief.
+```
+
+Boundary:
+
+```text
+Docs-only product planning. No provider contact, image generation, plugin call, env secret read, memory write, runtime, production_candidate_002, Batch 005, accepted_samples write, runs output commit, dependency change, tag, release, or deploy.
+```
+
+Validation note:
+
+```text
+scripts/validate_mvp.ps1 has a pre-commit local commit scope timing gap for this authorized new briefs/ file: before staging it reports the brief as unexpected untracked, and after exact staging it reports that staged files are present. The exact allowlist was reviewed, git diff --check passed, and the script should be rerun after commit from a clean worktree.
+```
+
 ## VALIDATION-20260514-v8.011-ROUTE-B-SELECTION
 
 Task:

@@ -81,13 +81,12 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-v8_011_route_B_multi_product_expansion_selection_gate — record the human selection of Route B and lock docs-only/product-planning boundaries.
+v8_012_second_product_candidate_and_brief_gate — select the second product candidate and create its product brief.
 ```
 
 ### todo
 
 ```text
-v8_012_second_product_candidate_and_brief_gate — select the second product candidate and create its product brief.
 v8_013_second_product_prompt_package_draft_gate — create the second product prompt package draft.
 v8_014_second_product_prompt_static_review_gate — statically review the second product prompt package and stop before A5.
 ```
@@ -211,6 +210,10 @@ recommended_next_after_v8_010: human_route_selection_after_A4_8_validation
 v8_011_route_B_multi_product_expansion_selection_gate: in_progress
 v8_011_selected_route: multi_product_prompt_package_expansion
 recommended_next_after_v8_011: v8_012_second_product_candidate_and_brief_gate
+v8_012_second_product_candidate_and_brief_gate: in_progress
+v8_012_selected_second_product: multi_color_mesh_sports_visor
+v8_012_second_product_brief_ref: briefs/product_brief_multi_color_mesh_sports_visor_v1.md
+recommended_next_after_v8_012: v8_013_second_product_prompt_package_draft_gate
 ```
 
 ### done

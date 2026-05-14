@@ -1,10 +1,32 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.012 Second Product Candidate And Brief Gate
+
+```text
+phase_id: v8_012_second_product_candidate_and_brief_gate
+status: in_progress
+source_commit: 5fae1c0dc3c24a59c1f0a7d3ad8d383a4446dc08
+purpose: select the second Route B product and create a product brief for prompt package drafting
+phase_record_ref: docs/v8_012_second_product_candidate_and_brief_gate.md
+selected_second_product: multi_color_mesh_sports_visor
+brief_ref: briefs/product_brief_multi_color_mesh_sports_visor_v1.md
+provider_contact: false
+image_generation: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+recommended_next: v8_013_second_product_prompt_package_draft_gate
+```
+
 # v8.011 Route B Multi-Product Expansion Selection Gate
 
 ```text
 phase_id: v8_011_route_B_multi_product_expansion_selection_gate
-status: in_progress
+status: completed_remote_synced_after_guarded_push
 source_commit: 720d0ea5fc2d5395448880d818a101b7a21b513e
 purpose: record human selection of Route B multi-product prompt package expansion and lock the docs-only boundary
 phase_record_ref: docs/v8_011_route_B_multi_product_expansion_selection_gate.md
