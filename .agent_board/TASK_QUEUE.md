@@ -9,6 +9,20 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v8_034_human_review_of_second_product_post_persistence_fix_output.
+Purpose: record human review for the verified v8.033 output; no provider contact, generation, retry, .env.local read, memory write, accepted_samples write, or runs output commit.
+reviewed_output: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg.
+asset_status: accepted_candidate_with_minor_watch_items.
+accepted_candidate: true.
+commercial_delivery_ready: false.
+memory_suitability: deferred.
+reviewable_sample: true.
+local_files_verified_count: 1.
+local_persistence_success: true.
+route_B_cross_product_reuse_validated: true.
+recommended_next: v8_035_route_B_second_product_accepted_candidate_evidence_package.
+recommended_next_auto_execution_allowed: false.
+---
 Current active gate: v8_032_second_product_post_persistence_fix_generation_authorization_gate.
 Purpose: record one new single-use A5 authorization for v8.033 after the output persistence guard fix.
 this_is_new_A5_authorization: true.
@@ -157,13 +171,13 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-v8_032_second_product_post_persistence_fix_generation_authorization_gate — A5 authorization record gate only.
+none — v8_034 is completed_validated_pending_guarded_push.
 ```
 
 ### todo
 
 ```text
-v8_033_second_product_post_persistence_fix_minimal_generation_trial_execution — allowed only after v8_032 commit and guarded push; exactly one provider call and generation attempt.
+v8_035_route_B_second_product_accepted_candidate_evidence_package — evidence package only; no new generation.
 ```
 
 ### recommended_next_after_v7_285

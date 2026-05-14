@@ -3,6 +3,33 @@
 ## Handoff Summary
 
 ```text
+Status: v8_034_human_review_of_second_product_post_persistence_fix_output is the current Route B human review documentation gate.
+Reason: v8.033 succeeded after the output persistence guard fix with local_files_verified_count=1; v8.034 records the output as accepted_candidate_with_minor_watch_items.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v8_034 patch: f98dee0 docs: authorize second product generation after persistence fix
+ahead_behind: 0/0
+Worktree: clean before v8_034 patch; generated runs output remains ignored and is not staged or committed
+Current status: v8_034_human_review_of_second_product_post_persistence_fix_output
+reviewed_output: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg
+asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+reviewable_sample: true
+local_files_verified_count: 1
+local_persistence_success: true
+route_B_cross_product_reuse_validated: true
+v8_034_provider_contact: false
+v8_034_image_generation: false
+v8_034_retry: false
+v8_034_env_local_secret_value_read: false
+v8_034_memory_write: false
+v8_034_accepted_samples_written: false
+v8_034_runs_output_committed: false
+recommended_next: v8_035_route_B_second_product_accepted_candidate_evidence_package
+recommended_next_auto_execution_allowed: false
+---
 Status: v8_032_second_product_post_persistence_fix_generation_authorization_gate is the current Route B A5 authorization record gate; owner selected v8.031 Option A.
 Reason: v8.032 records one new single-use A5 authorization for v8.033; provider contact is allowed only in v8.033 after v8.032 is committed and pushed.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

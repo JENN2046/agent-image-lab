@@ -1,10 +1,71 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# v8.034 Human Review Of Second Product Post Persistence Fix Output
+
+```text
+phase_id: v8_034_human_review_of_second_product_post_persistence_fix_output
+status: completed_validated_pending_guarded_push
+source_phase: v8_033_second_product_post_persistence_fix_minimal_generation_trial_execution
+source_commit: f98dee058ed2eddee77733dc529272593fe95639
+purpose: record human review for the verified v8.033 output
+phase_record_ref: docs/v8_034_human_review_of_second_product_post_persistence_fix_output.md
+review_ref: reviews/v8_034_multi_color_mesh_sports_visor_v2_human_review.md
+reviewed_output: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg
+asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+reviewable_sample: true
+local_files_verified_count: 1
+local_persistence_success: true
+route_B_cross_product_reuse_validated: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: v8_035_route_B_second_product_accepted_candidate_evidence_package
+```
+
+# v8.033 Second Product Post Persistence Fix Minimal Generation Trial Execution
+
+```text
+phase_id: v8_033_second_product_post_persistence_fix_minimal_generation_trial_execution
+status: completed_success
+approved_product: multi_color_mesh_sports_visor
+prompt_package_used: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
+provider_contact: true
+image_generation_attempted: true
+image_created: true
+provider_calls_used: 1
+generation_attempts_used: 1
+output_directory: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/
+output_images_count: 1
+output_file: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg
+local_files_verified_count: 1
+local_persistence_success: true
+auto_retry_used: false
+human_review_required_now: true
+output_added_to_git: false
+accepted_samples_written: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v8_034_human_review_of_second_product_post_persistence_fix_output
+```
+
 # v8.032 Second Product Post Persistence Fix Generation Authorization Gate
 
 ```text
 phase_id: v8_032_second_product_post_persistence_fix_generation_authorization_gate
-status: completed_validated_pending_guarded_push
+status: completed_remote_synced_after_guarded_push
 source_phase: v8_031_second_product_retry_after_persistence_fix_decision_gate
 source_commit: 9c457d991b2e6e1159f5e5d652943ee0c81d8fbb
 purpose: record one new single-use A5 authorization for v8.033 after the output persistence guard fix
