@@ -1,10 +1,42 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V9 Delivery Readiness Layer Route Selection Gate
+
+```text
+phase_id: v9_delivery_readiness_layer_route_selection_gate
+status: completed_validated_pending_guarded_push
+source_phase: v8_038_v8_product_loop_final_closeout
+source_commit: 87cbc755833e00eae03d5f9381cbc324b727cd36
+purpose: select V9 delivery readiness route without starting execution
+phase_record_ref: docs/v9_delivery_readiness_layer_route_selection_gate.md
+v8_closed: true
+selected_route: delivery_readiness_layer
+selected_route_zh: 交付准备层
+accepted_candidates_exist: true
+ceramic_mug_accepted_candidate_exists: true
+sports_visor_accepted_candidate_exists: true
+commercial_delivery_ready: false
+memory_write_allowed: false
+production_candidate_002_allowed: false
+human_selection_completed: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v9_001_delivery_readiness_scope_and_asset_selection_gate
+```
+
 # v8.038 V8 Product Loop Final Closeout
 
 ```text
 phase_id: v8_038_v8_product_loop_final_closeout
-status: completed_validated_pending_guarded_push
+status: completed_remote_synced_after_guarded_push
 source_phase: v8_037_v8_product_loop_closeout_or_next_route_selection_gate
 source_commit: 615aa187e8909667ade600b22e2e9895e29bffa7
 purpose: seal V8 product loop after human selected Option A

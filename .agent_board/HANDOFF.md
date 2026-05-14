@@ -3,6 +3,33 @@
 ## Handoff Summary
 
 ```text
+Status: v9_delivery_readiness_layer_route_selection_gate is the current V9 route selection gate.
+Reason: V8 is closed and the owner selected V9 Option A, Delivery Readiness Layer; this gate records the route only and does not start V9 execution.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v9 route selection patch: 87cbc75 docs: close out v8 product loop
+ahead_behind: 0/0
+Worktree: clean before v9 route selection patch; generated runs output remains ignored and is not staged or committed
+Current status: v9_delivery_readiness_layer_route_selection_gate
+v8_closed: true
+selected_route: delivery_readiness_layer
+selected_route_zh: 交付准备层
+accepted_candidates_exist: true
+ceramic_mug_accepted_candidate_exists: true
+sports_visor_accepted_candidate_exists: true
+commercial_delivery_ready: false
+memory_write_allowed: false
+production_candidate_002_allowed: false
+human_selection_completed: true
+v9_route_selection_provider_contact: false
+v9_route_selection_image_generation: false
+v9_route_selection_retry: false
+v9_route_selection_env_local_secret_value_read: false
+v9_route_selection_memory_write: false
+v9_route_selection_runtime_execution: false
+recommended_next: v9_001_delivery_readiness_scope_and_asset_selection_gate
+recommended_next_auto_execution_allowed: false
+---
 Status: v8_038_v8_product_loop_final_closeout is the current V8 final closeout gate.
 Reason: Human selected v8.037 Option A; V8 is now sealed as a multi-product workflow validation cycle and V9 delivery readiness is the recommended next route-selection gate.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

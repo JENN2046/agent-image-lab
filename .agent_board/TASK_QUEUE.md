@@ -9,6 +9,20 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v9_delivery_readiness_layer_route_selection_gate.
+Purpose: record the human route selection for V9 Option A, Delivery Readiness Layer; no provider contact, generation, retry, .env.local read, memory write, runtime, production_candidate_002, accepted_samples write, or V9 execution.
+v8_closed: true.
+selected_route: delivery_readiness_layer.
+selected_route_zh: 交付准备层.
+accepted_candidates_exist: true.
+ceramic_mug_accepted_candidate_exists: true.
+sports_visor_accepted_candidate_exists: true.
+commercial_delivery_ready: false.
+memory_write_allowed: false.
+production_candidate_002_allowed: false.
+recommended_next: v9_001_delivery_readiness_scope_and_asset_selection_gate.
+recommended_next_auto_execution_allowed: false.
+---
 Current active gate: v8_038_v8_product_loop_final_closeout.
 Purpose: seal the full V8 product loop after human selected Option A; no provider contact, generation, retry, .env.local read, memory write, runtime, production_candidate_002, accepted_samples write, or V9 execution.
 v8_closed: true.
@@ -241,13 +255,13 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-none — v8_038 is completed_validated_pending_guarded_push.
+none — v9_delivery_readiness_layer_route_selection_gate is completed_validated_pending_guarded_push.
 ```
 
 ### todo
 
 ```text
-v9_delivery_readiness_layer_route_selection_gate — recommended next route-selection gate only; no automatic execution.
+v9_001_delivery_readiness_scope_and_asset_selection_gate — recommended next gate only; no automatic execution.
 ```
 
 ### recommended_next_after_v7_285

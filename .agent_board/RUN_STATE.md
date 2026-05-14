@@ -9,16 +9,48 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v8_038_v8_product_loop_final_closeout. This gate seals V8 after human selected Option A and does not authorize V9 execution.
+Agent Image Lab is in v9_delivery_readiness_layer_route_selection_gate. This gate selects V9 Option A, Delivery Readiness Layer, and does not authorize v9.001 execution.
 ```
 
 ## Current Phase
 
 ```text
+V9 Delivery Readiness Layer Route Selection Gate
+phase_id: v9_delivery_readiness_layer_route_selection_gate
+source_phase: v8_038_v8_product_loop_final_closeout
+status: completed_validated_pending_guarded_push
+source_commit: 87cbc755833e00eae03d5f9381cbc324b727cd36
+source_message: docs: close out v8 product loop
+branch: master tracking origin/master
+origin_sync_current: local HEAD equals origin/master at 87cbc75
+ahead_behind: 0/0
+v8_closed: true
+selected_route: delivery_readiness_layer
+selected_route_zh: 交付准备层
+accepted_candidates_exist: true
+ceramic_mug_accepted_candidate_exists: true
+sports_visor_accepted_candidate_exists: true
+commercial_delivery_ready: false
+memory_write_allowed: false
+production_candidate_002_allowed: false
+human_selection_completed: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v9_001_delivery_readiness_scope_and_asset_selection_gate
+recommended_next_auto_execution_allowed: false
+---
 v8.038 V8 Product Loop Final Closeout
 phase_id: v8_038_v8_product_loop_final_closeout
 source_phase: v8_037_v8_product_loop_closeout_or_next_route_selection_gate
-status: completed_validated_pending_guarded_push
+status: completed_remote_synced_after_guarded_push
 source_commit: 615aa187e8909667ade600b22e2e9895e29bffa7
 source_message: docs: decide v8 closeout or next route
 branch: master tracking origin/master

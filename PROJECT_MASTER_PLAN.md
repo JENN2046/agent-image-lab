@@ -8,6 +8,27 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+latest_synced_head_before_v9_route_selection_gate: 87cbc755833e00eae03d5f9381cbc324b727cd36
+origin_master_before_v9_route_selection_gate: 87cbc755833e00eae03d5f9381cbc324b727cd36
+status: v9_delivery_readiness_layer_route_selection_gate
+mode: A4.8 docs-only V9 route selection gate
+phase_id: v9_delivery_readiness_layer_route_selection_gate
+v8_closed: true
+selected_route: delivery_readiness_layer
+selected_route_zh: 交付准备层
+accepted_candidates_exist: true
+ceramic_mug_accepted_candidate_exists: true
+sports_visor_accepted_candidate_exists: true
+commercial_delivery_ready: false
+memory_write_allowed: false
+production_candidate_002_allowed: false
+human_selection_completed: true
+provider_contact_allowed_now: false
+image_generation_allowed_now: false
+retry_allowed_now: false
+runtime_allowed_now: false
+recommended_next: v9_001_delivery_readiness_scope_and_asset_selection_gate
+recommended_next_auto_execution_allowed: false
 latest_synced_head_before_v8_038_final_closeout: 615aa187e8909667ade600b22e2e9895e29bffa7
 origin_master_before_v8_038_final_closeout: 615aa187e8909667ade600b22e2e9895e29bffa7
 status: v8_038_v8_product_loop_final_closeout

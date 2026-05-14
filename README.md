@@ -7,6 +7,25 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current synced baseline before v9 route selection gate: 87cbc755833e00eae03d5f9381cbc324b727cd36 on master == origin/master.
+Current mainline state: v9_delivery_readiness_layer_route_selection_gate selects V9 Option A as the delivery readiness layer; no V9 execution starts here.
+Current phase id: v9_delivery_readiness_layer_route_selection_gate.
+v8_closed: true.
+selected_route: delivery_readiness_layer.
+selected_route_zh: 交付准备层.
+accepted_candidates_exist: true.
+ceramic_mug_accepted_candidate_exists: true.
+sports_visor_accepted_candidate_exists: true.
+commercial_delivery_ready: false.
+memory_write_allowed: false.
+production_candidate_002_allowed: false.
+human_selection_completed: true.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+retry_allowed_now: false.
+runtime_allowed_now: false.
+recommended_next: v9_001_delivery_readiness_scope_and_asset_selection_gate.
+recommended_next_auto_execution_allowed: false.
 Current synced baseline before v8_038 final closeout: 615aa187e8909667ade600b22e2e9895e29bffa7 on master == origin/master.
 Current mainline state: v8_038 closes the V8 product loop after human selected Option A; V8 is sealed as a multi-product workflow validation cycle, not a commercial delivery or memory-write cycle.
 Current phase id: v8_038_v8_product_loop_final_closeout.

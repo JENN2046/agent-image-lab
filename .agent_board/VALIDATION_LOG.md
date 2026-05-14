@@ -1,5 +1,35 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260514-v9-DELIVERY-READINESS-LAYER-ROUTE-SELECTION
+
+Task:
+
+```text
+Record V9 route selection after V8 final closeout.
+```
+
+Result:
+
+```text
+v8_closed: true
+selected_route: delivery_readiness_layer
+selected_route_zh: 交付准备层
+accepted_candidates_exist: true
+ceramic_mug_accepted_candidate_exists: true
+sports_visor_accepted_candidate_exists: true
+commercial_delivery_ready: false
+memory_write_allowed: false
+production_candidate_002_allowed: false
+human_selection_completed: true
+validation_result: passed
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, DailyNote write, VCP memory write, production_candidate_002, Batch 005, Review Console runtime, dependency change, package.json change, accepted_samples write, runs output commit, or v9.001 execution is performed by the V9 route selection gate.
+```
+
 ## VALIDATION-20260514-v8.038-V8-PRODUCT-LOOP-FINAL-CLOSEOUT
 
 Task:
