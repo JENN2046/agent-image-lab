@@ -9,6 +9,16 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v11_012_human_review_schema_draft_gate.
+Purpose: draft human review canonical schema separating accepted_candidate, commercial_delivery_ready, and memory_suitability; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, dependency change, review artifact migration, commercial_delivery_ready promotion, or machine validator implementation.
+source_phase: v11_011_A5_authorization_schema_static_review_gate.
+source_commit: 0bc443f71d4f71b8cd198fe7e14089aa747a9bd6.
+selected_route: prompt_schema_hardening.
+human_review_canonical_schema_drafted: true.
+commercial_delivery_ready_changed: false.
+recommended_next: v11_013_human_review_schema_static_review_gate.
+recommended_next_auto_execution_allowed: true.
+---
 Current active gate: v11_011_A5_authorization_schema_static_review_gate.
 Purpose: statically review A5 authorization canonical schema; no real A5 authorization, provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, dependency change, runner behavior change, machine validator implementation, or output directory creation.
 source_phase: v11_010_A5_authorization_schema_draft_gate.

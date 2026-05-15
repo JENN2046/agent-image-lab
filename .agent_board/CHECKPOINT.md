@@ -1,5 +1,42 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V11.012 Human Review Schema Draft Gate
+
+```text
+phase_id: v11_012_human_review_schema_draft_gate
+status: completed_validated_local_commit_pending_remote_push_authorization
+source_phase: v11_011_A5_authorization_schema_static_review_gate
+source_commit: 0bc443f71d4f71b8cd198fe7e14089aa747a9bd6
+purpose: draft human review canonical schema and validation strategy from v11.003 inventory
+phase_record_ref: docs/v11_012_human_review_schema_draft_gate.md
+schema_ref: docs/human_review_canonical_schema.md
+selected_route: prompt_schema_hardening
+human_review_canonical_schema_drafted: true
+local_persistence_review_fields_defined: true
+accepted_candidate_commercial_delivery_split_defined: true
+memory_suitability_deferred_policy_defined: true
+watch_items_and_scores_schema_defined: true
+machine_validator_implemented: false
+review_artifact_migration_performed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+commercial_delivery_ready_changed: false
+recommended_next: v11_013_human_review_schema_static_review_gate
+```
+
 # V11.011 A5 Authorization Schema Static Review Gate
 
 ```text

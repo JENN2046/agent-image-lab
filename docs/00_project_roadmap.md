@@ -18,6 +18,23 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
+Current local baseline before v11.012 human review schema draft: 0bc443f71d4f71b8cd198fe7e14089aa747a9bd6 on master ahead origin/master by 8.
+Current mainline state: v11_012 drafts the human review canonical schema. It defines reviewed output, product/prompt lineage, local persistence verification, asset_status, accepted_candidate, commercial_delivery_ready, memory_suitability, strengths, watch items, optional scores, revision focus, safety boundary, and recommended_next. It does not migrate reviews, generate images, write memory, write accepted_samples, enter production, change commercial_delivery_ready to true, or commit runs output.
+Current phase id: v11_012_human_review_schema_draft_gate.
+selected_route: prompt_schema_hardening.
+human_review_canonical_schema_drafted: true.
+local_persistence_review_fields_defined: true.
+accepted_candidate_commercial_delivery_split_defined: true.
+memory_suitability_deferred_policy_defined: true.
+watch_items_and_scores_schema_defined: true.
+machine_validator_implemented: false.
+review_artifact_migration_performed: false.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+memory_write_allowed_now: false.
+production_candidate_002_allowed_now: false.
+recommended_next: v11_013_human_review_schema_static_review_gate.
+recommended_next_auto_execution_allowed: true.
 Current local baseline before v11.011 A5 authorization schema static review: 0b94c9acb786df29463bf7248c2394a4edce6829 on master ahead origin/master by 7.
 Current mainline state: v11_011 statically reviews the A5 authorization canonical schema. Result: pass_for_schema_static_review. It confirms authorization draft / execution confirmation / execution closeout separation, provider/generation/output budgets, no-retry, stop-after-generation, secret boundary, local persistence success rule, non-inheritance markers, and provider-vs-local-persistence closeout split. It does not create real A5 authorization, contact provider, read .env.local, generate images, create output directories, write memory, enter production, write accepted_samples, or commit runs output.
 Current phase id: v11_011_A5_authorization_schema_static_review_gate.

@@ -3,6 +3,31 @@
 ## Handoff Summary
 
 ```text
+Status: v11_012_human_review_schema_draft_gate is the current docs-only schema draft gate.
+Reason: v11.011 passed static review for the A5 authorization schema. v11.012 drafts a human review canonical schema separating accepted candidate, commercial delivery readiness, and memory suitability, while adding stable local persistence and watch item fields. It leaves human review schema static review, evidence package schema, migration, and machine validator implementation for later gates.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current local HEAD before v11.012 patch: 0bc443f docs: review A5 authorization canonical schema
+ahead_behind: 0/8 before v11.012 patch
+Worktree: clean before v11.012 patch
+Current status: v11_012_human_review_schema_draft_gate
+source_phase: v11_011_A5_authorization_schema_static_review_gate
+source_commit: 0bc443f71d4f71b8cd198fe7e14089aa747a9bd6
+selected_route: prompt_schema_hardening
+human_review_canonical_schema_drafted: true
+local_persistence_review_fields_defined: true
+accepted_candidate_commercial_delivery_split_defined: true
+memory_suitability_deferred_policy_defined: true
+watch_items_and_scores_schema_defined: true
+machine_validator_implemented: false
+review_artifact_migration_performed: false
+provider_contact_allowed_now: false
+image_generation_allowed_now: false
+memory_write_allowed_now: false
+production_candidate_002_allowed_now: false
+recommended_next: v11_013_human_review_schema_static_review_gate
+recommended_next_auto_execution_allowed: true
+---
 Status: v11_011_A5_authorization_schema_static_review_gate is the current docs-only schema static review gate.
 Reason: v11.010 drafted the A5 authorization canonical schema. v11.011 statically reviews that schema and records pass_for_schema_static_review, while leaving human review schema, evidence package schema, migration, and machine validator implementation for later gates.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
