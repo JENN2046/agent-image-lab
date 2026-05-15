@@ -1,5 +1,39 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V11.011 A5 Authorization Schema Static Review Gate
+
+```text
+phase_id: v11_011_A5_authorization_schema_static_review_gate
+status: completed_validated_local_commit_pending_remote_push_authorization
+source_phase: v11_010_A5_authorization_schema_draft_gate
+source_commit: 0b94c9acb786df29463bf7248c2394a4edce6829
+purpose: statically review A5 authorization canonical schema against v11.003 inventory risks
+phase_record_ref: docs/v11_011_A5_authorization_schema_static_review_gate.md
+review_ref: docs/v11_011_A5_authorization_schema_static_review_gate.md
+selected_route: prompt_schema_hardening
+A5_authorization_schema_static_review_completed: true
+A5_authorization_schema_static_review_result: pass_for_schema_static_review
+A5_authorization_created: false
+A5_execution_started: false
+machine_validator_implemented: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: v11_012_human_review_schema_draft_gate
+```
+
 # V11.010 A5 Authorization Schema Draft Gate
 
 ```text

@@ -3,6 +3,30 @@
 ## Handoff Summary
 
 ```text
+Status: v11_011_A5_authorization_schema_static_review_gate is the current docs-only schema static review gate.
+Reason: v11.010 drafted the A5 authorization canonical schema. v11.011 statically reviews that schema and records pass_for_schema_static_review, while leaving human review schema, evidence package schema, migration, and machine validator implementation for later gates.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current local HEAD before v11.011 patch: 0b94c9a docs: draft A5 authorization canonical schema
+ahead_behind: 0/7 before v11.011 patch
+Worktree: clean before v11.011 patch
+Current status: v11_011_A5_authorization_schema_static_review_gate
+source_phase: v11_010_A5_authorization_schema_draft_gate
+source_commit: 0b94c9acb786df29463bf7248c2394a4edce6829
+selected_route: prompt_schema_hardening
+A5_authorization_schema_static_review_completed: true
+A5_authorization_schema_static_review_result: pass_for_schema_static_review
+A5_authorization_created: false
+A5_execution_started: false
+machine_validator_implemented: false
+provider_contact_allowed_now: false
+image_generation_allowed_now: false
+env_local_secret_value_read_allowed_now: false
+memory_write_allowed_now: false
+production_candidate_002_allowed_now: false
+recommended_next: v11_012_human_review_schema_draft_gate
+recommended_next_auto_execution_allowed: true
+---
 Status: v11_010_A5_authorization_schema_draft_gate is the current docs-only schema draft gate.
 Reason: v11.009 passed static review for the static review canonical schema. v11.010 drafts a canonical A5 authorization schema separating authorization draft, execution confirmation, and execution closeout, with one-call budgets, secret boundary, local persistence success requirements, and non-inheritance markers. It creates no real A5 authorization and performs no execution.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

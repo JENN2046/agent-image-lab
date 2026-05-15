@@ -7,6 +7,22 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current local baseline before v11.011 A5 authorization schema static review: 0b94c9acb786df29463bf7248c2394a4edce6829 on master ahead origin/master by 7.
+Current mainline state: v11_011 statically reviews the A5 authorization canonical schema. Result: pass_for_schema_static_review. It confirms authorization draft / execution confirmation / execution closeout separation, provider/generation/output budgets, no-retry, stop-after-generation, secret boundary, local persistence success rule, non-inheritance markers, and provider-vs-local-persistence closeout split. It does not create real A5 authorization, contact provider, read .env.local, generate images, create output directories, write memory, enter production, write accepted_samples, or commit runs output.
+Current phase id: v11_011_A5_authorization_schema_static_review_gate.
+selected_route: prompt_schema_hardening.
+A5_authorization_schema_static_review_completed: true.
+A5_authorization_schema_static_review_result: pass_for_schema_static_review.
+A5_authorization_created: false.
+A5_execution_started: false.
+machine_validator_implemented: false.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+env_local_secret_value_read_allowed_now: false.
+memory_write_allowed_now: false.
+production_candidate_002_allowed_now: false.
+recommended_next: v11_012_human_review_schema_draft_gate.
+recommended_next_auto_execution_allowed: true.
 Current local baseline before v11.010 A5 authorization schema draft: 7c8f782813b0c87025987c696a95a022cb8af591 on master ahead origin/master by 6.
 Current mainline state: v11_010 drafts the A5 authorization canonical schema. It separates authorization_draft, execution_confirmation, and execution_closeout; defines product/prompt/runner/output scope, one-call budgets, no-retry policy, secret read boundary, local persistence success requirements, non-inheritance markers, and sanitized execution closeout fields. It does not create real A5 authorization, contact provider, read .env.local, generate images, create output directories, write memory, enter production, write accepted_samples, or commit runs output.
 Current phase id: v11_010_A5_authorization_schema_draft_gate.
