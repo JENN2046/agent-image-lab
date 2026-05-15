@@ -8,6 +8,31 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+latest_head_after_v13_005_reconstruction: 9fb10d57fd1586eab2bab79d3418c37af501b01a
+status: v13_006_visual_production_loop_foundation_closeout_or_next_route_decision_gate
+mode: A4.8 docs-only foundation closeout / decision gate
+phase_id: v13_006_visual_production_loop_foundation_closeout_or_next_route_decision_gate
+source_phase: v13_005_existing_asset_loop_reconstruction_docs_only_gate
+source_commit: 9fb10d57fd1586eab2bab79d3418c37af501b01a
+v13_foundation_closed: true
+canonical_model_created: true
+state_machine_created: true
+static_review_completed: true
+existing_asset_reconstruction_completed: true
+selected_asset: premium_serum_bottle_v10_011
+provider_contact: false
+image_generation: false
+memory_write: false
+real_retouch_execution: false
+real_commercial_delivery_execution: false
+accepted_samples_written: false
+runs_output_committed: false
+recommended_option: next_product_visual_production_trial_planning
+backup_option: one_more_existing_asset_reconstruction
+human_decision_required: true
+recommended_next: pending_human_v13_next_route_selection
+recommended_next_auto_execution_allowed: false
+branch: master
 latest_head_after_v13_004_reconstruction_selection: 4232ad8b1f7b8dfbcb547772ca805edad9ccfe6a
 status: v13_005_existing_asset_loop_reconstruction_docs_only_gate
 mode: A4.8 docs-only reconstruction gate

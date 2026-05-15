@@ -7,6 +7,21 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current phase: v13_006_visual_production_loop_foundation_closeout_or_next_route_decision_gate.
+Current local/remote baseline after v13.005 reconstruction: 9fb10d57fd1586eab2bab79d3418c37af501b01a.
+Current mainline state: V13 Visual Production Loop foundation is closed. The lane created a canonical model, state machine, static review, and premium serum bottle reconstruction, then presents next route options without entering execution.
+v13_foundation_closed: true.
+canonical_model_created: true.
+state_machine_created: true.
+static_review_completed: true.
+existing_asset_reconstruction_completed: true.
+selected_asset: premium_serum_bottle_v10_011.
+options_presented: one_more_existing_asset_reconstruction | next_product_visual_production_trial_planning | retouch_delivery_entry_criteria_gate | visual_memory_policy_gate | close_v13_foundation_and_stop.
+recommended_option: next_product_visual_production_trial_planning.
+backup_option: one_more_existing_asset_reconstruction.
+human_decision_required: true.
+recommended_next: pending_human_v13_next_route_selection.
+recommended_next_auto_execution_allowed: false.
 Current phase: v13_005_existing_asset_loop_reconstruction_docs_only_gate.
 Current local/remote baseline after v13.004 reconstruction selection: 4232ad8b1f7b8dfbcb547772ca805edad9ccfe6a.
 Current mainline state: V13 reconstructed the premium_serum_bottle_v10_011 Visual Production Loop from existing docs. The reconstruction maps ProductBrief, ShotPlan, PromptPackage, GenerationAuthorization, GenerationRun, LocalOutput, HumanReview, AcceptedCandidate, RetouchPlan, DeliveryReadinessPackage, MemorySuitabilityDecision, and RouteCloseout without reading image binaries or modifying historical artifacts.

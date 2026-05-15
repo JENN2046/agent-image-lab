@@ -1,5 +1,49 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V13.006 Visual Production Loop Foundation Closeout Or Next Route Decision Gate
+
+```text
+phase_id: v13_006_visual_production_loop_foundation_closeout_or_next_route_decision_gate
+status: completed_validated_foundation_closeout_record
+source_phase: v13_005_existing_asset_loop_reconstruction_docs_only_gate
+source_commit: 9fb10d57fd1586eab2bab79d3418c37af501b01a
+purpose: close V13 Visual Production Loop foundation and present next route options
+phase_record_ref: docs/v13_006_visual_production_loop_foundation_closeout_or_next_route_decision_gate.md
+foundation_closeout_ref: docs/v13_visual_production_loop_foundation_closeout.md
+v13_foundation_closed: true
+canonical_model_created: true
+state_machine_created: true
+static_review_completed: true
+existing_asset_reconstruction_completed: true
+selected_asset: premium_serum_bottle_v10_011
+recommended_option: next_product_visual_production_trial_planning
+backup_option: one_more_existing_asset_reconstruction
+human_decision_required: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+real_retouch_execution: false
+commercial_delivery_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+package_lock_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+existing_artifacts_migrated: false
+existing_prompt_packages_modified: false
+recommended_next: pending_human_v13_next_route_selection
+recommended_next_auto_execution_allowed: false
+next_phase_started: false
+```
+
 # V13.005 Existing Asset Loop Reconstruction Docs-Only Gate
 
 ```text
