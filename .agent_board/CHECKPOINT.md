@@ -1,10 +1,46 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V10.007 Third Product A5 Authorization Decision Gate
+
+```text
+phase_id: v10_007_third_product_A5_authorization_decision_gate
+status: completed_pending_validation_commit_push
+source_phase: v10_006_third_product_prompt_package_static_review_and_yaml_format_fix_gate
+source_commit: 0ba94323c6f07412503c96cd6de48a0650094193
+purpose: present human decision options for a future third-product one-shot minimal real generation trial
+phase_record_ref: docs/v10_007_third_product_A5_authorization_decision_gate.md
+selected_route: third_product_prompt_workflow_expansion
+selected_product: cosmetic_skincare_bottle / premium_serum_bottle
+locked_structure: frosted_translucent_glass_bottle_with_clean_dropper_cap
+product_brief_ref: briefs/product_brief_premium_serum_bottle_v1.md
+prompt_package_ref: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+static_review_result: pass_for_static_review
+A5_authorization_created: false
+options_presented: authorize_one_minimal_real_generation_trial | more_static_prompt_payload_review | stop_third_product_real_generation_route
+recommended_option: authorize_one_minimal_real_generation_trial
+human_decision_required: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+real_output_directory_created: false
+recommended_next: pending_human_third_product_generation_authorization
+```
+
 # V10.006 Third Product Prompt Package Static Review And YAML Format Fix Gate
 
 ```text
 phase_id: v10_006_third_product_prompt_package_static_review_and_yaml_format_fix_gate
-status: completed_pending_validation_commit_push
+status: completed_remote_synced_after_guarded_push
 source_phase: v10_005_third_product_prompt_package_draft_gate
 source_commit: 19c6a5a7f71d2af208c381a23a4c5ab0771ba533
 purpose: statically review serum bottle prompt package and fix YAML readability / runner-shape risk
