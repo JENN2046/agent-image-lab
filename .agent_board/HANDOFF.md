@@ -3,6 +3,28 @@
 ## Handoff Summary
 
 ```text
+Status: v11_009_static_review_schema_static_review_gate is the current docs-only schema static review gate.
+Reason: v11.008 drafted the static review canonical schema. v11.009 statically reviews that schema and records pass_for_schema_static_review, while leaving review migration, machine validator implementation, A5 authorization schema, human review schema, and evidence package schema for later gates.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current local HEAD before v11.009 patch: 53875c6 docs: draft static review canonical schema
+ahead_behind: 0/5 before v11.009 patch
+Worktree: clean before v11.009 patch
+Current status: v11_009_static_review_schema_static_review_gate
+source_phase: v11_008_static_review_schema_draft_gate
+source_commit: 53875c62d6a8975bd28afaacc1cce3591732e14a
+selected_route: prompt_schema_hardening
+static_review_schema_static_review_completed: true
+static_review_schema_static_review_result: pass_for_schema_static_review
+machine_validator_implemented: false
+review_artifact_migration_performed: false
+provider_contact_allowed_now: false
+image_generation_allowed_now: false
+memory_write_allowed_now: false
+production_candidate_002_allowed_now: false
+recommended_next: v11_010_A5_authorization_schema_draft_gate
+recommended_next_auto_execution_allowed: true
+---
 Status: v11_008_static_review_schema_draft_gate is the current docs-only schema draft gate.
 Reason: v11.007 passed static review for the product brief canonical schema. v11.008 drafts a canonical static review schema covering review identity, target lineage, source findings, checklist evidence, verdicts, authorization boundary, and next gate semantics. It leaves review migration, machine validator implementation, A5 authorization schema, human review schema, and evidence package schema for later gates.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
