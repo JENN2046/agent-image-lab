@@ -9,6 +9,18 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v12_008_prompt_schema_validator_fixture_execution_gate.
+Purpose: record full synthetic fixture execution for the minimal prompt schema validator; no code change, no fixture change, no existing artifact migration, no prompt package edit, no provider contact, no image generation, no memory write, no production, and no runtime.
+source_phase: v12_007_prompt_schema_validator_static_review_and_syntax_gate.
+source_commit: 4e05debd36890ffc681cce94cce54668329a263a.
+fixture_execution_passed: true.
+validator_passed_on_synthetic_fixtures: true.
+fixtures_checked: 16.
+expected_matched_count: 16.
+expected_mismatch_count: 0.
+recommended_next: v12_009_v12_prompt_schema_machine_validator_final_closeout.
+recommended_next_auto_execution_allowed: true.
+---
 Current active gate: v12_007_prompt_schema_validator_static_review_and_syntax_gate.
 Purpose: statically review the v12.006 minimal validator implementation and syntax evidence before dedicated fixture execution; no code change, no fixture change, no existing artifact migration, no prompt package edit, no provider contact, no image generation, no memory write, no production, and no runtime.
 source_phase: v12_006_prompt_schema_minimal_validator_implementation_gate.

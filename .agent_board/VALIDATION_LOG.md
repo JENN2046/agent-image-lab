@@ -1,5 +1,39 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260515-v12.008-PROMPT-SCHEMA-VALIDATOR-FIXTURE-EXECUTION
+
+Task:
+
+```text
+Execute the minimal prompt schema validator against the synthetic fixture manifest and record PASS/WARN/FAIL separation.
+```
+
+Result:
+
+```text
+source_commit: 4e05debd36890ffc681cce94cce54668329a263a
+fixture_execution_passed: true
+validator_passed_on_synthetic_fixtures: true
+fixtures_checked: 16
+expected_matched_count: 16
+expected_mismatch_count: 0
+setup_error_count: 0
+warnings_total: 2
+fixture_errors_total: 12
+machine_validator_implemented: true
+fixture_files_created: true
+scripts_modified: true
+existing_artifacts_migrated: false
+existing_prompt_packages_modified: false
+validation_result: passed_with_existing_manual_review_warnings_only
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, secret print, DailyNote write, VCP memory write, memory_write_path, production_candidate_002, Batch 005, runtime/CDP/bridge/MCP, dependency change, package.json change, package-lock change, accepted_samples write, runs output commit, derivative image creation, real retouch execution, commercial delivery execution, existing artifact migration, existing prompt package modification, runner behavior change, memory write, provider execution, or production execution is performed by v12.008.
+```
+
 ## VALIDATION-20260515-v12.007-PROMPT-SCHEMA-VALIDATOR-STATIC-REVIEW
 
 Task:
