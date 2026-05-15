@@ -9,12 +9,48 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v11_007_product_brief_schema_static_review_gate. This docs-only schema static review gate reviews the product brief canonical schema against v11.003 inventory risks without changing existing briefs or execution behavior.
+Agent Image Lab is in v11_008_static_review_schema_draft_gate. This docs-only schema draft gate defines the canonical static review shape and validation strategy without changing existing reviews or execution behavior.
 ```
 
 ## Current Phase
 
 ```text
+V11.008 Static Review Schema Draft Gate
+phase_id: v11_008_static_review_schema_draft_gate
+source_phase: v11_007_product_brief_schema_static_review_gate
+status: completed_validated_local_commit_pending_remote_push_authorization
+source_commit: 8f8b3356326d49a7e0f14953aaa82d86ef374e7f
+source_message: docs: review product brief canonical schema
+branch: master tracking origin/master
+origin_sync_current: local HEAD ahead origin/master by 4 before v11.008 patch
+ahead_behind: 0/4 before v11.008 patch
+selected_route: prompt_schema_hardening
+static_review_canonical_schema_drafted: true
+review_target_schema_defined: true
+source_findings_schema_defined: true
+checklist_schema_defined: true
+authorization_boundary_schema_defined: true
+machine_validator_implemented: false
+review_artifact_migration_performed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+A5_generation_authorization_created: false
+recommended_next: v11_009_static_review_schema_static_review_gate
+recommended_next_auto_execution_allowed: true
+---
 V11.007 Product Brief Schema Static Review Gate
 phase_id: v11_007_product_brief_schema_static_review_gate
 source_phase: v11_006_product_brief_schema_draft_gate

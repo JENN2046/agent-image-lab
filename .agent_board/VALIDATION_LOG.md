@@ -1,5 +1,33 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260515-v11.008-STATIC-REVIEW-SCHEMA-DRAFT
+
+Task:
+
+```text
+Draft canonical static review schema and validation strategy from v11.003 inventory.
+```
+
+Result:
+
+```text
+selected_route: prompt_schema_hardening
+static_review_canonical_schema_drafted: true
+review_target_schema_defined: true
+source_findings_schema_defined: true
+checklist_schema_defined: true
+authorization_boundary_schema_defined: true
+machine_validator_implemented: false
+review_artifact_migration_performed: false
+validation_result: passed_with_existing_manual_review_warnings_only
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, secret print, DailyNote write, VCP memory write, memory_write_path, production_candidate_002, Batch 005, runtime/CDP/bridge/MCP, dependency change, package.json change, accepted_samples write, runs output commit, derivative image creation, real retouch execution, commercial delivery execution, review artifact migration, prompt package behavior change, machine validator implementation, or A5 generation authorization creation is performed by v11.008.
+```
+
 ## VALIDATION-20260515-v11.007-PRODUCT-BRIEF-SCHEMA-STATIC-REVIEW
 
 Task:

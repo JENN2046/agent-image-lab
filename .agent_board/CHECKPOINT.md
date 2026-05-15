@@ -1,5 +1,43 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V11.008 Static Review Schema Draft Gate
+
+```text
+phase_id: v11_008_static_review_schema_draft_gate
+status: completed_validated_local_commit_pending_remote_push_authorization
+source_phase: v11_007_product_brief_schema_static_review_gate
+source_commit: 8f8b3356326d49a7e0f14953aaa82d86ef374e7f
+purpose: draft canonical static review schema and validation strategy from v11.003 inventory
+phase_record_ref: docs/v11_008_static_review_schema_draft_gate.md
+schema_ref: docs/static_review_canonical_schema.md
+selected_route: prompt_schema_hardening
+static_review_canonical_schema_drafted: true
+review_target_schema_defined: true
+source_findings_schema_defined: true
+checklist_schema_defined: true
+authorization_boundary_schema_defined: true
+machine_validator_implemented: false
+review_artifact_migration_performed: false
+prompt_package_behavior_changed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+A5_generation_authorization_created: false
+recommended_next: v11_009_static_review_schema_static_review_gate
+```
+
 # V11.007 Product Brief Schema Static Review Gate
 
 ```text

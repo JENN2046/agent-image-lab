@@ -3,6 +3,31 @@
 ## Handoff Summary
 
 ```text
+Status: v11_008_static_review_schema_draft_gate is the current docs-only schema draft gate.
+Reason: v11.007 passed static review for the product brief canonical schema. v11.008 drafts a canonical static review schema covering review identity, target lineage, source findings, checklist evidence, verdicts, authorization boundary, and next gate semantics. It leaves review migration, machine validator implementation, A5 authorization schema, human review schema, and evidence package schema for later gates.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current local HEAD before v11.008 patch: 8f8b335 docs: review product brief canonical schema
+ahead_behind: 0/4 before v11.008 patch
+Worktree: clean before v11.008 patch
+Current status: v11_008_static_review_schema_draft_gate
+source_phase: v11_007_product_brief_schema_static_review_gate
+source_commit: 8f8b3356326d49a7e0f14953aaa82d86ef374e7f
+selected_route: prompt_schema_hardening
+static_review_canonical_schema_drafted: true
+review_target_schema_defined: true
+source_findings_schema_defined: true
+checklist_schema_defined: true
+authorization_boundary_schema_defined: true
+machine_validator_implemented: false
+review_artifact_migration_performed: false
+provider_contact_allowed_now: false
+image_generation_allowed_now: false
+memory_write_allowed_now: false
+production_candidate_002_allowed_now: false
+recommended_next: v11_009_static_review_schema_static_review_gate
+recommended_next_auto_execution_allowed: true
+---
 Status: v11_007_product_brief_schema_static_review_gate is the current docs-only schema static review gate.
 Reason: v11.006 drafted the product brief canonical schema. v11.007 statically reviews that schema against v11.003 inventory risks and records pass_for_schema_static_review, while leaving machine validator implementation, brief migration, static review schema, A5 authorization schema, human review schema, and evidence package schema for later gates.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

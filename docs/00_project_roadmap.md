@@ -18,6 +18,23 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
+Current local baseline before v11.008 static review schema draft: 8f8b3356326d49a7e0f14953aaa82d86ef374e7f on master ahead origin/master by 4.
+Current mainline state: v11_008 drafts the static review canonical schema from v11.003 inventory and v8.024 static review patterns. It defines review identity, review target, source context, checklist items, review result, authorization boundary, recommended_next, and future machine validation checks. It does not migrate review artifacts, modify prompt packages, implement validators, contact provider, generate images, write memory, enter production, write accepted_samples, or commit runs output.
+Current phase id: v11_008_static_review_schema_draft_gate.
+selected_route: prompt_schema_hardening.
+static_review_canonical_schema_drafted: true.
+review_target_schema_defined: true.
+source_findings_schema_defined: true.
+checklist_schema_defined: true.
+authorization_boundary_schema_defined: true.
+machine_validator_implemented: false.
+review_artifact_migration_performed: false.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+memory_write_allowed_now: false.
+production_candidate_002_allowed_now: false.
+recommended_next: v11_009_static_review_schema_static_review_gate.
+recommended_next_auto_execution_allowed: true.
 Current local baseline before v11.007 product brief schema static review: 55f46669f425714912eb695f0b454de390bda8dd on master ahead origin/master by 3.
 Current mainline state: v11_007 statically reviews the product brief canonical schema against the v11.003 inventory. Result: pass_for_schema_static_review. It confirms coverage for brief identity, product identity lock, structure lock, material/texture constraints, color or finish strategy, scene/composition boundary, text/label/logo policy, acceptance criteria, known risks, no-execution handoff, and the ceramic mug legacy missing-brief policy. It does not edit briefs, prompt packages, validators, runner behavior, provider contact, image generation, memory, production, accepted_samples, or runs output.
 Current phase id: v11_007_product_brief_schema_static_review_gate.
