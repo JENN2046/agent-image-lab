@@ -8,6 +8,38 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+latest_head_after_v14_005_review_console_productization_closeout: c69d36acbd36754b1f32d3392197e573cb0d41c9
+status: v14_006_review_console_UI_implementation_authorization_planning_gate
+mode: A4.8 docs-only UI implementation authorization planning gate
+phase_id: v14_006_review_console_UI_implementation_authorization_planning_gate
+source_phase: v14_005_review_console_static_review_and_route_closeout_gate
+source_commit: c69d36acbd36754b1f32d3392197e573cb0d41c9
+selected_route: review_console_UI_implementation_authorization_planning
+authorization_plan: docs/review_console_UI_implementation_authorization_plan_v14.md
+phase_record: docs/v14_006_review_console_UI_implementation_authorization_planning_gate.md
+authorization_plan_created: true
+implementation_options_presented: true
+future_file_allowlist_proposed: true
+read_only_data_source_allowlist_defined: true
+forbidden_data_sources_defined: true
+recommended_option: static_HTML_or_docs_rendered_console_prototype_later
+UI_implementation_started: false
+runtime_execution: false
+frontend_files_created: false
+runs_image_binary_read: false
+provider_contact: false
+image_generation: false
+retry: false
+memory_write: false
+accepted_samples_written: false
+runs_output_committed: false
+real_retouch_execution: false
+derivative_image_created: false
+real_commercial_delivery_execution: false
+production_candidate_002: false
+recommended_next: pending_human_review_console_UI_implementation_authorization_selection
+recommended_next_auto_execution_allowed: false
+branch: master
 latest_head_after_v14_004_wireframe_data_contract: 92742f93296df9140aba4f937929973c8cdd4429
 status: v14_005_review_console_static_review_and_route_closeout_gate
 mode: A4.8 docs-only static review and route closeout gate

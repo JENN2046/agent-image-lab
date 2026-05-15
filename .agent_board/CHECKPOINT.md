@@ -1,5 +1,48 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.006 Review Console UI Implementation Authorization Planning Gate
+
+```text
+phase_id: v14_006_review_console_UI_implementation_authorization_planning_gate
+status: completed_validated_UI_implementation_authorization_planning_record
+source_phase: v14_005_review_console_static_review_and_route_closeout_gate
+source_commit: c69d36acbd36754b1f32d3392197e573cb0d41c9
+purpose: define future Review Console UI implementation authorization boundaries without UI implementation
+phase_record_ref: docs/v14_006_review_console_UI_implementation_authorization_planning_gate.md
+authorization_plan_ref: docs/review_console_UI_implementation_authorization_plan_v14.md
+selected_route: review_console_UI_implementation_authorization_planning
+authorization_plan_created: true
+implementation_options_presented: true
+future_file_allowlist_proposed: true
+read_only_data_source_allowlist_defined: true
+forbidden_data_sources_defined: true
+recommended_option: static_HTML_or_docs_rendered_console_prototype_later
+UI_implementation_started: false
+runtime_execution: false
+frontend_files_created: false
+runs_image_binary_read: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+memory_write: false
+accepted_samples_written: false
+runs_output_committed: false
+real_retouch_execution: false
+derivative_image_created: false
+real_commercial_delivery_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+package_lock_modified: false
+scripts_modified: false
+prompt_package_modified: false
+recommended_next: pending_human_review_console_UI_implementation_authorization_selection
+recommended_next_auto_execution_allowed: false
+next_phase_started: false
+```
+
 # V14.005 Review Console Static Review And Route Closeout Gate
 
 ```text
