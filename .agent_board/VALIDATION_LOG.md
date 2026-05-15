@@ -1,5 +1,34 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260515-v14.003-REVIEW-CONSOLE-INFORMATION-ARCHITECTURE
+
+Task:
+
+```text
+Define Review Console information architecture after V14 productization planning.
+```
+
+Result:
+
+```text
+source_commit: e172e5a25bcdb4ea95cc9f9dece39cdec5082a27
+phase_record: docs/v14_003_review_console_information_architecture_gate.md
+information_architecture: docs/review_console_information_architecture_v14.md
+selected_route: review_console_productization_planning
+page_structure_defined: true
+navigation_structure_defined: true
+core_information_blocks_defined: true
+asset_status_taxonomy_mapped: true
+existing_asset_examples_covered: true
+validation_result: passed_with_existing_manual_review_warnings_only
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local read, memory write, accepted_samples write, runs output commit, image copy, real retouch execution, derivative image creation, real commercial delivery execution, production_candidate_002, scripts/package/prompt-package change, dependency change, UI implementation, runtime execution, frontend file creation, or V14.004 entry is performed by v14.003.
+```
+
 ## VALIDATION-20260515-v14.002-REVIEW-CONSOLE-PRODUCTIZATION-PLANNING
 
 Task:

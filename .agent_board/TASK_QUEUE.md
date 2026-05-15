@@ -9,6 +9,35 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v14_003_review_console_information_architecture_gate.
+Purpose: define Review Console information architecture for page structure, navigation, core information blocks, status classification, existing asset examples, and observation/decision boundaries without UI implementation or runtime execution.
+source_phase: v14_002_review_console_productization_planning_gate.
+source_commit: e172e5a25bcdb4ea95cc9f9dece39cdec5082a27.
+selected_route: review_console_productization_planning.
+information_architecture: docs/review_console_information_architecture_v14.md.
+phase_record: docs/v14_003_review_console_information_architecture_gate.md.
+page_structure_defined: true.
+navigation_structure_defined: true.
+core_information_blocks_defined: true.
+asset_status_taxonomy_mapped: true.
+existing_asset_examples_covered: true.
+Review_Console_is_observation_and_decision_surface: true.
+UI_implementation_started: false.
+runtime_execution: false.
+provider_contact: false.
+image_generation: false.
+retry: false.
+memory_write: false.
+accepted_samples_written: false.
+runs_output_committed: false.
+real_retouch_execution: false.
+derivative_image_created: false.
+real_commercial_delivery_execution: false.
+production_candidate_002: false.
+recommended_next: v14_004_review_console_wireframe_and_data_contract_gate.
+recommended_next_auto_execution_allowed: true.
+next_phase_started: false.
+---
 Current active gate: v14_002_review_console_productization_planning_gate.
 Purpose: plan Review Console productization for V13 asset status, human review, evidence package, delivery readiness, watch items, safety boundaries, route closeout, and next actions without UI implementation or runtime execution.
 source_phase: v14_001_route_selection_gate.

@@ -3,6 +3,37 @@
 ## Handoff Summary
 
 ```text
+Status: v14_003_review_console_information_architecture_gate is the current information architecture gate.
+Reason: v14.002 created the Review Console productization plan. v14.003 defines page structure, navigation structure, core information blocks, asset status mapping, existing asset examples, and the observation/decision boundary without UI implementation or runtime execution.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Source commit: e172e5a25bcdb4ea95cc9f9dece39cdec5082a27
+Current status: v14_003_review_console_information_architecture_gate
+selected_route: review_console_productization_planning
+information_architecture: docs/review_console_information_architecture_v14.md
+phase_record: docs/v14_003_review_console_information_architecture_gate.md
+page_structure_defined: true
+navigation_structure_defined: true
+core_information_blocks_defined: true
+asset_status_taxonomy_mapped: true
+existing_asset_examples_covered: true
+Review_Console_is_observation_and_decision_surface: true
+UI_implementation_started: false
+runtime_execution: false
+provider_contact: false
+image_generation: false
+retry: false
+memory_write: false
+accepted_samples_written: false
+runs_output_committed: false
+real_retouch_execution: false
+derivative_image_created: false
+real_commercial_delivery_execution: false
+production_candidate_002: false
+recommended_next: v14_004_review_console_wireframe_and_data_contract_gate
+recommended_next_auto_execution_allowed: true
+next_phase_started: false
+---
 Status: v14_002_review_console_productization_planning_gate is the current productization planning gate.
 Reason: Human selected v14.001 Option A. V14 now plans the Review Console product surface for asset status, human review, evidence packages, delivery readiness, watch items, route closeout, and next action decisions without UI implementation or runtime execution.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

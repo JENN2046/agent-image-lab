@@ -8,6 +8,36 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+latest_head_after_v14_002_productization_planning: e172e5a25bcdb4ea95cc9f9dece39cdec5082a27
+status: v14_003_review_console_information_architecture_gate
+mode: A4.8 docs-only information architecture gate
+phase_id: v14_003_review_console_information_architecture_gate
+source_phase: v14_002_review_console_productization_planning_gate
+source_commit: e172e5a25bcdb4ea95cc9f9dece39cdec5082a27
+selected_route: review_console_productization_planning
+information_architecture: docs/review_console_information_architecture_v14.md
+phase_record: docs/v14_003_review_console_information_architecture_gate.md
+page_structure_defined: true
+navigation_structure_defined: true
+core_information_blocks_defined: true
+asset_status_taxonomy_mapped: true
+existing_asset_examples_covered: true
+Review_Console_is_observation_and_decision_surface: true
+UI_implementation_started: false
+runtime_execution: false
+provider_contact: false
+image_generation: false
+retry: false
+memory_write: false
+accepted_samples_written: false
+runs_output_committed: false
+real_retouch_execution: false
+derivative_image_created: false
+real_commercial_delivery_execution: false
+production_candidate_002: false
+recommended_next: v14_004_review_console_wireframe_and_data_contract_gate
+recommended_next_auto_execution_allowed: true
+branch: master
 latest_head_after_v14_001_route_selection: 110ac1e842f3e70dd2a44d78f98e928eb8cdadee
 status: v14_002_review_console_productization_planning_gate
 mode: A4.8 docs-only productization planning gate
