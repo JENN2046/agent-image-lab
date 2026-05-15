@@ -9,6 +9,17 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v11_010_A5_authorization_schema_draft_gate.
+Purpose: draft A5 authorization canonical schema separating authorization draft, execution confirmation, and execution closeout; no real A5 authorization, provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, dependency change, runner behavior change, machine validator implementation, or output directory creation.
+source_phase: v11_009_static_review_schema_static_review_gate.
+source_commit: 7c8f782813b0c87025987c696a95a022cb8af591.
+selected_route: prompt_schema_hardening.
+A5_authorization_canonical_schema_drafted: true.
+A5_authorization_created: false.
+A5_execution_started: false.
+recommended_next: v11_011_A5_authorization_schema_static_review_gate.
+recommended_next_auto_execution_allowed: true.
+---
 Current active gate: v11_009_static_review_schema_static_review_gate.
 Purpose: statically review static review canonical schema against v11.003 inventory risks; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, dependency change, review artifact migration, prompt package behavior change, machine validator implementation, or A5 generation authorization creation.
 source_phase: v11_008_static_review_schema_draft_gate.

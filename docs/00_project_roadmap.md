@@ -18,6 +18,25 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
+Current local baseline before v11.010 A5 authorization schema draft: 7c8f782813b0c87025987c696a95a022cb8af591 on master ahead origin/master by 6.
+Current mainline state: v11_010 drafts the A5 authorization canonical schema. It separates authorization_draft, execution_confirmation, and execution_closeout; defines product/prompt/runner/output scope, one-call budgets, no-retry policy, secret read boundary, local persistence success requirements, non-inheritance markers, and sanitized execution closeout fields. It does not create real A5 authorization, contact provider, read .env.local, generate images, create output directories, write memory, enter production, write accepted_samples, or commit runs output.
+Current phase id: v11_010_A5_authorization_schema_draft_gate.
+selected_route: prompt_schema_hardening.
+A5_authorization_canonical_schema_drafted: true.
+authorization_draft_schema_defined: true.
+execution_confirmation_schema_defined: true.
+execution_closeout_schema_defined: true.
+secret_boundary_schema_defined: true.
+local_persistence_success_policy_defined: true.
+A5_authorization_created: false.
+A5_execution_started: false.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+env_local_secret_value_read_allowed_now: false.
+memory_write_allowed_now: false.
+production_candidate_002_allowed_now: false.
+recommended_next: v11_011_A5_authorization_schema_static_review_gate.
+recommended_next_auto_execution_allowed: true.
 Current local baseline before v11.009 static review schema static review: 53875c62d6a8975bd28afaacc1cce3591732e14a on master ahead origin/master by 5.
 Current mainline state: v11_009 statically reviews the static review canonical schema against v11.003 inventory and v8.024 review patterns. Result: pass_for_schema_static_review. It confirms review identity, target lineage, source findings, checklist evidence/risk, verdict semantics, A5 non-authorization, provider/image boundary, memory/production boundary, and recommended_next auto-execution boundary. It does not migrate reviews, implement validators, contact provider, generate images, write memory, enter production, write accepted_samples, or commit runs output.
 Current phase id: v11_009_static_review_schema_static_review_gate.

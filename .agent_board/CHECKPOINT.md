@@ -1,5 +1,42 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V11.010 A5 Authorization Schema Draft Gate
+
+```text
+phase_id: v11_010_A5_authorization_schema_draft_gate
+status: completed_validated_local_commit_pending_remote_push_authorization
+source_phase: v11_009_static_review_schema_static_review_gate
+source_commit: 7c8f782813b0c87025987c696a95a022cb8af591
+purpose: draft A5 authorization / execution confirmation / execution closeout canonical schema
+phase_record_ref: docs/v11_010_A5_authorization_schema_draft_gate.md
+schema_ref: docs/a5_authorization_canonical_schema.md
+selected_route: prompt_schema_hardening
+A5_authorization_canonical_schema_drafted: true
+authorization_draft_schema_defined: true
+execution_confirmation_schema_defined: true
+execution_closeout_schema_defined: true
+secret_boundary_schema_defined: true
+local_persistence_success_policy_defined: true
+A5_authorization_created: false
+A5_execution_started: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: v11_011_A5_authorization_schema_static_review_gate
+```
+
 # V11.009 Static Review Schema Static Review Gate
 
 ```text
