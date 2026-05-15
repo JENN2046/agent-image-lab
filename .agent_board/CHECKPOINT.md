@@ -1,10 +1,45 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V10.005 Third Product Prompt Package Draft Gate
+
+```text
+phase_id: v10_005_third_product_prompt_package_draft_gate
+status: completed_pending_validation_commit_push
+source_phase: v10_004_third_product_brief_gate
+source_commit: d3d2f41b44fb696d3bdaf1fc9e9c64d2f69e6d2f
+purpose: create docs-only prompt package draft for premium serum bottle
+phase_record_ref: docs/v10_005_third_product_prompt_package_draft_gate.md
+product_brief_ref: briefs/product_brief_premium_serum_bottle_v1.md
+prompt_package_ref: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+selected_route: third_product_prompt_workflow_expansion
+selected_product: cosmetic_skincare_bottle / premium_serum_bottle
+locked_structure: frosted_translucent_glass_bottle_with_clean_dropper_cap
+prompt_package_created: true
+canonical_prompt_field_present: true
+negative_prompt_present: true
+A5_authorization_created: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+runs_output_created: false
+recommended_next: v10_006_third_product_prompt_package_static_review_gate
+```
+
 # V10.004 Third Product Brief Gate
 
 ```text
 phase_id: v10_004_third_product_brief_gate
-status: completed_pending_validation_commit_push
+status: completed_remote_synced_after_guarded_push
 source_phase: v10_003_third_product_prompt_workflow_expansion_route_gate
 source_commit: 155d30caae054821bb839f331fedbd62da36e0d2
 purpose: create product brief for premium serum bottle third product lane

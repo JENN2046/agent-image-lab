@@ -9,16 +9,50 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v10_004_third_product_brief_gate. This docs-only gate creates the third product brief for cosmetic_skincare_bottle / premium_serum_bottle and locks the first structure as a frosted_translucent_glass_bottle_with_clean_dropper_cap; it does not create a prompt package, create A5 authorization, edit images, create derivatives, generate images, contact providers, write memory, write accepted_samples, promote production, execute delivery, or set commercial_delivery_ready=true.
+Agent Image Lab is in v10_005_third_product_prompt_package_draft_gate. This docs-only gate creates the premium serum bottle prompt package draft with canonical prompt, positive_prompt alias, negative_prompt, product identity, structure lock, acceptance criteria, and human review checklist; it does not create A5 authorization, edit images, create derivatives, generate images, contact providers, write memory, write accepted_samples, promote production, execute delivery, or set commercial_delivery_ready=true.
 ```
 
 ## Current Phase
 
 ```text
+V10.005 Third Product Prompt Package Draft Gate
+phase_id: v10_005_third_product_prompt_package_draft_gate
+source_phase: v10_004_third_product_brief_gate
+status: completed_pending_validation_commit_push
+source_commit: d3d2f41b44fb696d3bdaf1fc9e9c64d2f69e6d2f
+source_message: docs: add third product brief for serum bottle
+branch: master tracking origin/master
+origin_sync_current: local HEAD equals origin/master at d3d2f41 before v10.005 patch
+ahead_behind: 0/0 before v10.005 patch
+selected_route: third_product_prompt_workflow_expansion
+selected_product: cosmetic_skincare_bottle / premium_serum_bottle
+locked_structure: frosted_translucent_glass_bottle_with_clean_dropper_cap
+product_brief_ref: briefs/product_brief_premium_serum_bottle_v1.md
+prompt_package_path: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+prompt_package_created: true
+canonical_prompt_field_present: true
+negative_prompt_present: true
+A5_authorization_created: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+recommended_next: v10_006_third_product_prompt_package_static_review_gate
+recommended_next_auto_execution_allowed: true
+---
 V10.004 Third Product Brief Gate
 phase_id: v10_004_third_product_brief_gate
 source_phase: v10_003_third_product_prompt_workflow_expansion_route_gate
-status: completed_pending_validation_commit_push
+status: completed_remote_synced_after_guarded_push
 source_commit: 155d30caae054821bb839f331fedbd62da36e0d2
 source_message: docs: select third product prompt workflow route
 branch: master tracking origin/master

@@ -1,0 +1,161 @@
+prompt_package_id: product_lifestyle_premium_serum_bottle_v1
+version: v1
+language: en
+mode: text_to_image
+reference_policy: text_only_no_image_input
+title_cn: "高端精华瓶护肤品主图 prompt package v1"
+purpose_cn: "基于 v10.004 第三商品 brief 创建 prompt package 草案；本文件不生成图片、不调用 provider、不写 memory、不创建 A5 授权。"
+
+product_brief_ref: briefs/product_brief_premium_serum_bottle_v1.md
+source_phase: v10_005_third_product_prompt_package_draft_gate
+source_brief_phase: v10_004_third_product_brief_gate
+status_cn: "第三商品 prompt package 草案；仅供静态审查和未来独立 A5 授权输入。"
+
+product_identity:
+  product_type: premium_serum_bottle
+  product_category: cosmetic_skincare_bottle
+  category_terms:
+    - premium serum bottle
+    - cosmetic skincare bottle
+    - frosted glass skincare serum
+    - luxury beauty product bottle
+  must_not_be:
+    - perfume bottle
+    - medicine bottle
+    - candle jar
+    - beverage bottle
+    - lotion pump bottle
+    - generic plastic container
+
+structure_lock:
+  locked_structure: frosted_translucent_glass_bottle_with_clean_dropper_cap
+  bottle_body: upright frosted translucent glass bottle
+  cap_type: clean dropper cap
+  cap_geometry: smooth symmetric cap collar and simple dropper top
+  pump_allowed: false
+  malformed_cap_allowed: false
+  extra_bottle_allowed: false
+
+material_texture_constraints:
+  bottle_material: frosted or softly translucent glass
+  glass_behavior: subtle internal depth, soft edge highlights, controlled reflections
+  cap_material: satin white, warm silver, champagne metal, or soft neutral premium finish
+  label_area: elegant blank or non-readable minimal label zone
+  finish: premium skincare packaging, clean and restrained
+  cheap_plastic_drift_allowed: false
+  metallic_bottle_body_drift_allowed: false
+
+scene_direction:
+  shot_type: clean premium beauty product still life
+  usage: ecommerce hero image / premium beauty product photography
+  surface: clean stone, ivory, warm-gray, or soft neutral luxury surface
+  background: subtle premium background with gentle depth, soft gradient, or warm neutral layers
+  props_allowed: false
+  people_allowed: false
+  hands_allowed: false
+  overdecorated_luxury_scene_allowed: false
+
+composition:
+  product_frame_coverage: 60_to_75_percent
+  product_dominance: hero product remains dominant
+  layout: single bottle only, clean centered or slightly offset hero composition
+  camera_angle: straight-on or slight three-quarter front angle
+  crop: full bottle visible, no cut-off cap or base
+  background_role: support product, never overpower it
+
+lighting_camera_language:
+  lighting_quality: premium soft studio lighting
+  highlights: soft controlled highlights on frosted glass, dropper cap, and label area
+  reflections: controlled, clean, not noisy, not impossible
+  shadow: soft refined contact shadow
+  depth_of_field: gentle product photography depth, product sharp, background soft
+  realism: realistic commercial product photography, not CGI, not illustration
+
+runner_prompt_mapping:
+  canonical_prompt_field: prompt
+  positive_prompt_retained_for_review: true
+  runner_expected_prompt_field: prompt
+  positive_prompt_sync_required: true
+
+prompt: |
+  Realistic premium beauty product photography of a single cosmetic skincare serum bottle as the hero product. The bottle is frosted translucent glass with subtle internal depth, soft edge highlights, and controlled premium reflections. It has a clean symmetric dropper cap with a smooth collar and simple dropper top, refined satin white, warm silver, champagne metal, or soft neutral cap finish. Elegant skincare packaging with a blank or non-readable minimal label area, no readable brand logo, no fake text, no random letters, no broken label.
+
+  Compose the product as a clean ecommerce hero image on a refined stone, ivory, warm-gray, or soft neutral luxury surface. Use a subtle premium background with gentle depth, warm neutral layers, or a soft gradient that supports the bottle without overpowering it. The single serum bottle should occupy about 60-75% of the visual importance, full bottle visible, straight-on or slight three-quarter front angle, clean product silhouette, stable bottle geometry.
+
+  Premium soft studio lighting, soft controlled highlights on frosted glass, dropper cap, and label area, tidy refined contact shadow, realistic glass material, quiet luxury skincare mood, product dominant composition, no people, no hands, no props, no extra bottles, no logo, no readable text, no watermark, no overdecorated spa clutter, no cheap plastic material drift.
+
+positive_prompt: |
+  Realistic premium beauty product photography of a single cosmetic skincare serum bottle as the hero product. The bottle is frosted translucent glass with subtle internal depth, soft edge highlights, and controlled premium reflections. It has a clean symmetric dropper cap with a smooth collar and simple dropper top, refined satin white, warm silver, champagne metal, or soft neutral cap finish. Elegant skincare packaging with a blank or non-readable minimal label area, no readable brand logo, no fake text, no random letters, no broken label.
+
+  Compose the product as a clean ecommerce hero image on a refined stone, ivory, warm-gray, or soft neutral luxury surface. Use a subtle premium background with gentle depth, warm neutral layers, or a soft gradient that supports the bottle without overpowering it. The single serum bottle should occupy about 60-75% of the visual importance, full bottle visible, straight-on or slight three-quarter front angle, clean product silhouette, stable bottle geometry.
+
+  Premium soft studio lighting, soft controlled highlights on frosted glass, dropper cap, and label area, tidy refined contact shadow, realistic glass material, quiet luxury skincare mood, product dominant composition, no people, no hands, no props, no extra bottles, no logo, no readable text, no watermark, no overdecorated spa clutter, no cheap plastic material drift.
+
+negative_prompt: |
+  readable brand logo, fake text, random text, random letters, broken label, watermark, people, hands, face, model, flowers, spa stones, leaves, towels, boxes, extra bottles, extra products, overdecorated luxury scene, cluttered props, perfume bottle, medicine bottle, candle jar, beverage bottle, lotion pump bottle, generic plastic container, pump dispenser, malformed dropper cap, fused cap, broken cap, crooked cap, impossible cap geometry, distorted bottle, warped bottle silhouette, messy liquid distortion, cheap plastic material, metallic bottle body, noisy reflections, impossible reflections, harsh glare, mirror-like glare, background overpowering product, product too small, cut-off cap, cut-off base, CGI look, illustration, cartoon, low resolution
+
+negative_constraints:
+  product_identity:
+    - do not turn the serum bottle into a perfume bottle, medicine bottle, candle jar, beverage bottle, lotion pump bottle, or generic plastic container
+    - do not add extra bottles or product variants
+  structure:
+    - keep one frosted translucent glass serum bottle with a clean dropper cap
+    - do not create a pump dispenser
+    - do not create malformed, fused, broken, crooked, or impossible cap geometry
+  label:
+    - no readable brand logo
+    - no fake text
+    - no random text or letters
+    - no broken label
+    - no watermark
+  material:
+    - do not make the bottle look like cheap plastic
+    - do not make the bottle body metallic
+    - do not create noisy or impossible reflections
+    - do not distort the liquid or bottle body
+  scene:
+    - no people
+    - no hands
+    - no overdecorated spa scene
+    - no flowers, leaves, towels, stones, boxes, or cluttered props
+    - do not let the background overpower the product
+
+acceptance_criteria:
+  product_identity_clear: true
+  premium_serum_bottle_read: true
+  frosted_translucent_glass_material: true
+  clean_dropper_cap_structure: true
+  pump_dispenser_absent: true
+  label_boundary_clean_and_non_readable: true
+  no_readable_logo_or_fake_text: true
+  controlled_reflections: true
+  soft_highlights_on_glass_cap_label: true
+  product_dominant_60_to_75_percent: true
+  full_bottle_visible: true
+  subtle_premium_background: true
+  background_not_overpowering_product: true
+  no_people_hands_props_extra_bottles: true
+  no_plastic_or_metallic_body_drift: true
+
+human_review_checklist:
+  - Does the product clearly read as a premium cosmetic serum bottle?
+  - Is the bottle frosted or softly translucent glass rather than cheap plastic?
+  - Is the clean dropper cap structure intact, symmetric, and not a pump dispenser?
+  - Are the glass, cap, and label highlights soft and controlled?
+  - Is the label area elegant, blank or non-readable, and free of fake text?
+  - Is there no readable brand logo, watermark, or random lettering?
+  - Does the product remain dominant at roughly 60-75% visual importance?
+  - Is the full bottle visible without cap or base cropping?
+  - Does the background feel subtle, premium, and supportive rather than overpowering?
+  - Are people, hands, props, extra bottles, and overdecorated spa clutter absent?
+  - Does the material avoid perfume, medicine, plastic-container, or metallic-body drift?
+
+A5_authorization_required_later: true
+plugin_call_allowed_by_this_file: false
+provider_contact_allowed_by_this_file: false
+image_generation_allowed_by_this_file: false
+memory_write_allowed: false
+daily_note_write_allowed: false
+production_candidate_002_allowed: false
+accepted_samples_write_allowed: false
+runs_output_creation_allowed: false

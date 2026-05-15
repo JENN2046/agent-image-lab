@@ -3,6 +3,36 @@
 ## Handoff Summary
 
 ```text
+Status: v10_005_third_product_prompt_package_draft_gate is the current docs-only prompt package draft gate.
+Reason: v10.005 creates the premium serum bottle prompt package draft with canonical prompt, positive_prompt alias, negative_prompt, structure lock, material constraints, acceptance criteria, and human review checklist while staying before A5 authorization, provider contact, image generation, memory write, runtime, production, accepted_samples, or runs output creation.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v10.005 patch: d3d2f41 docs: add third product brief for serum bottle
+ahead_behind: 0/0
+Worktree: clean before v10.005 patch; generated runs output remains ignored and is not staged or committed
+Current status: v10_005_third_product_prompt_package_draft_gate
+source_phase: v10_004_third_product_brief_gate
+selected_route: third_product_prompt_workflow_expansion
+selected_product: cosmetic_skincare_bottle / premium_serum_bottle
+locked_structure: frosted_translucent_glass_bottle_with_clean_dropper_cap
+product_brief_ref: briefs/product_brief_premium_serum_bottle_v1.md
+prompt_package_path: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+prompt_package_created: true
+A5_authorization_created: false
+provider_contact_allowed_now: false
+image_generation_allowed_now: false
+memory_write_allowed: false
+production_candidate_002_allowed: false
+v10_005_provider_contact: false
+v10_005_image_generation: false
+v10_005_retry: false
+v10_005_env_local_secret_value_read: false
+v10_005_memory_write: false
+v10_005_accepted_samples_written: false
+v10_005_runs_output_committed: false
+recommended_next: v10_006_third_product_prompt_package_static_review_gate
+recommended_next_auto_execution_allowed: true
+---
 Status: v10_004_third_product_brief_gate is the current docs-only third product brief gate.
 Reason: v10.004 creates a product brief for cosmetic_skincare_bottle / premium_serum_bottle and locks the first structure as a frosted_translucent_glass_bottle_with_clean_dropper_cap while staying before prompt package creation, A5 authorization, provider contact, image generation, memory write, runtime, production, accepted_samples, or runs output creation.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

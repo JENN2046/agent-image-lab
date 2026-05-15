@@ -9,6 +9,20 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v10_005_third_product_prompt_package_draft_gate.
+Purpose: create the docs-only prompt package draft for cosmetic_skincare_bottle / premium_serum_bottle at prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml; include canonical prompt, positive_prompt alias, negative_prompt, structure lock, material constraints, acceptance criteria, and human review checklist; no A5 authorization, provider contact, generation, retry, real retouch execution, image editing, derivative image creation, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, runs output creation, real commercial delivery execution, commercial_delivery_ready=true, or automatic provider/image execution.
+source_phase: v10_004_third_product_brief_gate.
+source_commit: d3d2f41b44fb696d3bdaf1fc9e9c64d2f69e6d2f.
+selected_route: third_product_prompt_workflow_expansion.
+selected_product: cosmetic_skincare_bottle / premium_serum_bottle.
+locked_structure: frosted_translucent_glass_bottle_with_clean_dropper_cap.
+product_brief_ref: briefs/product_brief_premium_serum_bottle_v1.md.
+prompt_package_path: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml.
+prompt_package_created: true.
+A5_authorization_created: false.
+recommended_next: v10_006_third_product_prompt_package_static_review_gate.
+recommended_next_auto_execution_allowed: true.
+---
 Current active gate: v10_004_third_product_brief_gate.
 Purpose: create the docs-only product brief for cosmetic_skincare_bottle / premium_serum_bottle; lock the first structure as a frosted_translucent_glass_bottle_with_clean_dropper_cap; no prompt package creation, A5 authorization, provider contact, generation, retry, real retouch execution, image editing, derivative image creation, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, runs output creation, real commercial delivery execution, commercial_delivery_ready=true, or automatic provider/image execution.
 source_phase: v10_003_third_product_prompt_workflow_expansion_route_gate.

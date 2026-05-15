@@ -7,6 +7,23 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current synced baseline before v10.005 third product prompt package draft gate: d3d2f41b44fb696d3bdaf1fc9e9c64d2f69e6d2f on master == origin/master.
+Current mainline state: v10_005_third_product_prompt_package_draft_gate creates the docs-only prompt package draft for cosmetic_skincare_bottle / premium_serum_bottle at prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml. The package contains canonical prompt, synchronized positive_prompt alias, negative_prompt, product identity, structure lock, material constraints, scene direction, acceptance criteria, and human review checklist. This is not A5 authorization, not provider contact, not image generation, not .env.local read, not memory write, not production_candidate_002, not accepted_samples write, and not runs output creation.
+Current phase id: v10_005_third_product_prompt_package_draft_gate.
+source_phase: v10_004_third_product_brief_gate.
+selected_route: third_product_prompt_workflow_expansion.
+selected_product: cosmetic_skincare_bottle / premium_serum_bottle.
+locked_structure: frosted_translucent_glass_bottle_with_clean_dropper_cap.
+product_brief_ref: briefs/product_brief_premium_serum_bottle_v1.md.
+prompt_package_path: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml.
+prompt_package_created: true.
+A5_authorization_created: false.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+memory_write_allowed: false.
+production_candidate_002_allowed: false.
+recommended_next: v10_006_third_product_prompt_package_static_review_gate.
+recommended_next_auto_execution_allowed: true.
 Current synced baseline before v10.004 third product brief gate: 155d30caae054821bb839f331fedbd62da36e0d2 on master == origin/master.
 Current mainline state: v10_004_third_product_brief_gate creates a docs-only product brief for cosmetic_skincare_bottle / premium_serum_bottle and locks the first structure as a frosted_translucent_glass_bottle_with_clean_dropper_cap. This is not a prompt package, not A5 authorization, not provider contact, not image generation, not .env.local read, not memory write, not production_candidate_002, not runtime, not accepted_samples write, and not runs output creation.
 Current phase id: v10_004_third_product_brief_gate.
