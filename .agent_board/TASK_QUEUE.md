@@ -9,6 +9,26 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v13_005_existing_asset_loop_reconstruction_docs_only_gate.
+Purpose: reconstruct premium_serum_bottle_v10_011 across the Visual Production Loop from existing docs only; no image binary read, no provider contact, no image generation, no memory write, no production, no runtime, no real retouch, no commercial delivery, no artifact migration, no prompt package modification, and no runs output commit.
+source_phase: v13_004_existing_asset_loop_reconstruction_selection_gate.
+source_commit: 4232ad8b1f7b8dfbcb547772ca805edad9ccfe6a.
+selected_asset: premium_serum_bottle_v10_011.
+loop_reconstruction_created: true.
+product_brief_mapped: true.
+shot_strategy_mapped: true.
+prompt_package_mapped: true.
+generation_authorization_mapped: true.
+generation_run_mapped: true.
+human_review_mapped: true.
+accepted_candidate_evidence_mapped: true.
+retouch_decision_mapped: true.
+delivery_decision_mapped: true.
+memory_decision_mapped: true.
+recommended_next: v13_006_visual_production_loop_foundation_closeout_or_next_route_decision_gate.
+recommended_next_auto_execution_allowed: true.
+next_phase_started: false.
+---
 Current active gate: v13_004_existing_asset_loop_reconstruction_selection_gate.
 Purpose: select one existing accepted candidate for docs-only loop reconstruction; no image binary read, no provider contact, no image generation, no memory write, no production, no runtime, no real retouch, no commercial delivery, no artifact migration, no prompt package modification, and no runs output commit.
 source_phase: v13_003_visual_production_loop_canonical_model_static_review_gate.

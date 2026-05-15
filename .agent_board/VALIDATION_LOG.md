@@ -1,5 +1,38 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260515-v13.005-EXISTING-ASSET-LOOP-RECONSTRUCTION
+
+Task:
+
+```text
+Reconstruct premium_serum_bottle_v10_011 across the Visual Production Loop from existing docs only.
+```
+
+Result:
+
+```text
+source_commit: 4232ad8b1f7b8dfbcb547772ca805edad9ccfe6a
+selected_asset: premium_serum_bottle_v10_011
+loop_reconstruction_created: true
+product_brief_mapped: true
+shot_strategy_mapped: true
+prompt_package_mapped: true
+generation_authorization_mapped: true
+generation_run_mapped: true
+human_review_mapped: true
+accepted_candidate_evidence_mapped: true
+retouch_decision_mapped: true
+delivery_decision_mapped: true
+memory_decision_mapped: true
+validation_result: passed_with_existing_manual_review_warnings_only
+```
+
+Boundary:
+
+```text
+No image binary read, provider contact, image generation, retry, .env.local secret value read, secret print, DailyNote write, VCP memory write, memory_write_path, production_candidate_002, Batch 005, runtime/CDP/bridge/MCP, dependency change, package.json change, package-lock change, scripts change, prompts/image_generation change, accepted_samples write, runs output commit, derivative image creation, real retouch execution, commercial delivery execution, existing artifact migration, existing prompt package modification, memory write, provider execution, production execution, or V14 execution is performed by v13.005.
+```
+
 ## VALIDATION-20260515-v13.004-EXISTING-ASSET-LOOP-RECONSTRUCTION-SELECTION
 
 Task:

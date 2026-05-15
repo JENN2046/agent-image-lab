@@ -3,6 +3,33 @@
 ## Handoff Summary
 
 ```text
+Status: v13_005_existing_asset_loop_reconstruction_docs_only_gate is the current reconstruction gate.
+Reason: V13.004 selected premium_serum_bottle_v10_011. V13.005 reconstructs the loop from existing docs without reading image binaries or modifying historical artifacts.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Source commit: 4232ad8b1f7b8dfbcb547772ca805edad9ccfe6a
+Current status: v13_005_existing_asset_loop_reconstruction_docs_only_gate
+selected_asset: premium_serum_bottle_v10_011
+loop_reconstruction_created: true
+product_brief_mapped: true
+shot_strategy_mapped: true
+prompt_package_mapped: true
+generation_authorization_mapped: true
+generation_run_mapped: true
+human_review_mapped: true
+accepted_candidate_evidence_mapped: true
+retouch_decision_mapped: true
+delivery_decision_mapped: true
+memory_decision_mapped: true
+provider_contact: false
+image_generation: false
+memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+recommended_next: v13_006_visual_production_loop_foundation_closeout_or_next_route_decision_gate
+recommended_next_auto_execution_allowed: true
+next_phase_started: false
+---
 Status: v13_004_existing_asset_loop_reconstruction_selection_gate is the current reconstruction selection gate.
 Reason: V13.003 passed static review. V13.004 selects premium_serum_bottle_v10_011 for docs-only reconstruction without reading, copying, staging, or committing image binaries.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

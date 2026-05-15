@@ -8,6 +8,32 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+latest_head_after_v13_004_reconstruction_selection: 4232ad8b1f7b8dfbcb547772ca805edad9ccfe6a
+status: v13_005_existing_asset_loop_reconstruction_docs_only_gate
+mode: A4.8 docs-only reconstruction gate
+phase_id: v13_005_existing_asset_loop_reconstruction_docs_only_gate
+source_phase: v13_004_existing_asset_loop_reconstruction_selection_gate
+source_commit: 4232ad8b1f7b8dfbcb547772ca805edad9ccfe6a
+selected_asset: premium_serum_bottle_v10_011
+loop_reconstruction_created: true
+product_brief_mapped: true
+shot_strategy_mapped: true
+prompt_package_mapped: true
+generation_authorization_mapped: true
+generation_run_mapped: true
+human_review_mapped: true
+accepted_candidate_evidence_mapped: true
+retouch_decision_mapped: true
+delivery_decision_mapped: true
+memory_decision_mapped: true
+provider_contact: false
+image_generation: false
+memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+recommended_next: v13_006_visual_production_loop_foundation_closeout_or_next_route_decision_gate
+recommended_next_auto_execution_allowed: true
+branch: master
 latest_head_after_v13_003_static_review: f33eff521056884931a04b22594ba2738bb30535
 status: v13_004_existing_asset_loop_reconstruction_selection_gate
 mode: A4.8 docs-only reconstruction selection gate
