@@ -3,6 +3,27 @@
 ## Handoff Summary
 
 ```text
+Status: v10_013_third_product_prompt_revision_or_candidate_evidence_decision_gate is the current docs-only decision gate.
+Reason: v10.012 accepted the premium serum bottle first real output with minor watch items. v10.013 presents Option A prompt revision plan, Option B accepted candidate evidence package, and Option C stop route here. It recommends Option B and does not create A5 authorization, contact providers, generate images, retry, read .env.local, write memory, write accepted_samples, start production_candidate_002, or commit runs output.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v10.013 patch: 6c3708c docs: review third product first real output
+ahead_behind: 0/0
+Worktree: clean before v10.013 patch; generated runs output remains ignored and is not staged or committed
+Current status: v10_013_third_product_prompt_revision_or_candidate_evidence_decision_gate
+source_phase: v10_012_human_review_of_third_product_first_real_output
+reviewed_output: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg
+product: cosmetic_skincare_bottle / premium_serum_bottle
+asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+options_presented: create_prompt_revision_plan | create_accepted_candidate_evidence_package | stop_third_product_route_here
+recommended_option: create_accepted_candidate_evidence_package
+human_decision_required: true
+recommended_next: pending_human_third_product_candidate_path_selection
+recommended_next_auto_execution_allowed: false
+---
 Status: v10_012_human_review_of_third_product_first_real_output is the current human review documentation gate.
 Reason: v10.011 succeeded with one authorized provider call and one generation attempt, produced one locally verified serum bottle image, and stopped. v10.012 records the human review result as accepted_candidate_with_minor_watch_items without new provider contact, generation, retry, .env.local read, memory write, accepted_samples write, production_candidate_002, or runs output commit.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

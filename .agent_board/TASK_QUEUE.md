@@ -9,6 +9,20 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v10_013_third_product_prompt_revision_or_candidate_evidence_decision_gate.
+Purpose: present Option A prompt revision plan, Option B accepted candidate evidence package, and Option C stop third product route here after the premium serum bottle first real output was accepted with minor watch items; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, derivative image creation, real retouch execution, or commercial_delivery_ready=true.
+source_phase: v10_012_human_review_of_third_product_first_real_output.
+source_commit: 6c3708cfe3190869bd7e8968ab09322161051819.
+reviewed_output: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg.
+product: cosmetic_skincare_bottle / premium_serum_bottle.
+asset_status: accepted_candidate_with_minor_watch_items.
+accepted_candidate: true.
+commercial_delivery_ready: false.
+memory_suitability: deferred.
+recommended_option: create_accepted_candidate_evidence_package.
+recommended_next: pending_human_third_product_candidate_path_selection.
+recommended_next_auto_execution_allowed: false.
+---
 Current active gate: v10_012_human_review_of_third_product_first_real_output.
 Purpose: record human review of the first real premium serum bottle output as accepted_candidate_with_minor_watch_items; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, derivative image creation, real retouch execution, or commercial_delivery_ready=true.
 source_phase: v10_011_third_product_minimal_generation_trial_execution.
@@ -825,7 +839,7 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-none — v10_012_human_review_of_third_product_first_real_output is completed_validated_pending_guarded_commit_and_push.
+none — v10_013_third_product_prompt_revision_or_candidate_evidence_decision_gate is completed_validated_pending_guarded_commit_and_push.
 ```
 
 ### todo

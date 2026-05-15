@@ -1,10 +1,44 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V10.013 Third Product Prompt Revision Or Candidate Evidence Decision Gate
+
+```text
+phase_id: v10_013_third_product_prompt_revision_or_candidate_evidence_decision_gate
+status: completed_validated_pending_guarded_commit_and_push
+source_phase: v10_012_human_review_of_third_product_first_real_output
+source_commit: 6c3708cfe3190869bd7e8968ab09322161051819
+purpose: present third product next path decision after accepted candidate review
+phase_record_ref: docs/v10_013_third_product_prompt_revision_or_candidate_evidence_decision_gate.md
+reviewed_output: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg
+product: cosmetic_skincare_bottle / premium_serum_bottle
+asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+options_presented: create_prompt_revision_plan | create_accepted_candidate_evidence_package | stop_third_product_route_here
+recommended_option: create_accepted_candidate_evidence_package
+human_decision_required: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+recommended_next: pending_human_third_product_candidate_path_selection
+```
+
 # V10.012 Human Review Of Third Product First Real Output
 
 ```text
 phase_id: v10_012_human_review_of_third_product_first_real_output
-status: completed_validated_pending_guarded_commit_and_push
+status: completed_remote_synced_after_guarded_push
 source_phase: v10_011_third_product_minimal_generation_trial_execution
 source_commit: 19e9880fba6099927e0c11185a0e5ad1dac7c6ba
 purpose: record human review of the first real premium serum bottle output
