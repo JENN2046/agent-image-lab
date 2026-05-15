@@ -32,6 +32,11 @@ retouch, execute delivery, modify `scripts/`, or modify `prompts/image_generatio
 selected_product: premium_portable_led_camping_lantern
 selected_product_zh: 高端便携式 LED 露营灯
 product_category: outdoor_lifestyle_electronics
+candidate_products:
+  - premium_portable_led_camping_lantern
+  - minimal_stainless_steel_thermal_bottle
+  - compact_modular_wireless_charger
+  - premium_packable_travel_hair_dryer
 recommended_for_future_generation: true
 future_generation_authorized_now: false
 provider_contact_allowed_now: false
@@ -42,6 +47,16 @@ The lantern is recommended because it tests product qualities not yet covered by
 the ceramic mug, sports visor, or serum bottle routes: emitted light, translucent
 diffuser material, handle geometry, warm glow control, mixed outdoor/electronic
 identity, and lifestyle context.
+
+It is different from the ceramic mug because it is an illuminated electronic
+object rather than a static matte hard good. It is different from the sports
+visor because it tests rigid product geometry, translucency, and controlled glow
+rather than fabric, mesh, and wearable color blocking. It is different from the
+serum bottle because the translucent material must emit light without becoming a
+skincare/glass bottle composition. This makes it a useful V13 loop test: the
+future prompt package must connect schema fields to visual production controls
+for identity, structure, material, light behavior, scene restraint, and human
+review.
 
 ## Closeout
 
@@ -55,11 +70,16 @@ closeout:
   prompt_package_planning_requirements_created: true
   static_review_plan_created: true
   A5_decision_gate_prerequisites_created: true
+  prompt_package_created: false
+  A5_authorization_created: false
   recommended_for_future_generation: true
   future_generation_authorized_now: false
   provider_contact: false
   image_generation: false
+  output_directory_created: false
   memory_write: false
+  accepted_samples_written: false
+  runs_output_committed: false
   production_candidate_002: false
   runtime_execution: false
   final_state:
