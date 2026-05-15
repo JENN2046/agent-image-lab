@@ -1,5 +1,49 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V13.002 Visual Production Loop Canonical Model Gate
+
+```text
+phase_id: v13_002_visual_production_loop_canonical_model_gate
+status: completed_validated_canonical_model_record
+source_phase: v13_001_visual_production_loop_route_selection_gate
+source_commit: 46df48201ce770b79797c4c41db225417da5e2fd
+purpose: define Visual Production Loop canonical objects, state machine, forbidden transitions, and status taxonomy
+phase_record_ref: docs/v13_002_visual_production_loop_canonical_model_gate.md
+canonical_model_ref: docs/visual_production_loop_canonical_model.md
+state_machine_ref: docs/visual_production_loop_state_machine.md
+selected_option: visual_production_loop_canonical_model
+visual_production_loop_canonical_model_created: true
+state_machine_created: true
+forbidden_transitions_defined: true
+asset_status_taxonomy_defined: true
+retouch_entry_conditions_defined: true
+delivery_entry_conditions_defined: true
+memory_entry_conditions_defined: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+real_retouch_execution: false
+commercial_delivery_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+package_lock_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+existing_artifacts_migrated: false
+existing_prompt_packages_modified: false
+recommended_next: v13_003_visual_production_loop_canonical_model_static_review_gate
+recommended_next_auto_execution_allowed: true
+next_phase_started: false
+```
+
 # V13.001 Visual Production Loop Route Selection Gate
 
 ```text

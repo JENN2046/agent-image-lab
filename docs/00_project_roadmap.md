@@ -18,6 +18,16 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
+Current phase: v13_002_visual_production_loop_canonical_model_gate.
+Current local/remote baseline after v13.001 route selection: 46df48201ce770b79797c4c41db225417da5e2fd.
+Current mainline state: V13 foundational lane selected Option A and is defining the Visual Production Loop canonical model: core objects, state machine, forbidden transitions, asset status taxonomy, and retouch / delivery / memory entry conditions. This is docs-only and does not enter provider contact, image generation, memory write, production, runtime, real retouch, real delivery, artifact migration, prompt package modification, or existing asset binary access.
+selected_option: visual_production_loop_canonical_model.
+visual_production_loop_canonical_model_created: true.
+state_machine_created: true.
+forbidden_transitions_defined: true.
+asset_status_taxonomy_defined: true.
+recommended_next: v13_003_visual_production_loop_canonical_model_static_review_gate.
+recommended_next_auto_execution_allowed: true.
 Current phase: v13_001_visual_production_loop_route_selection_gate.
 Current local/remote baseline after v12.009 final closeout: 8cced3101864ac90f787d8854db862cc71ddbcb6.
 Current mainline state: V13 route selection is open. The project is shifting from Prompt Schema Machine Validator work back to the Visual Production Loop. This gate presents route choices only and does not generate images, call providers, write memory, enter production, execute real retouch, execute real delivery, migrate artifacts, or modify prompt packages.

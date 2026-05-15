@@ -8,6 +8,28 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+latest_head_after_v13_001_route_selection: 46df48201ce770b79797c4c41db225417da5e2fd
+status: v13_002_visual_production_loop_canonical_model_gate
+mode: A4.8 docs-only canonical model gate
+phase_id: v13_002_visual_production_loop_canonical_model_gate
+source_phase: v13_001_visual_production_loop_route_selection_gate
+source_commit: 46df48201ce770b79797c4c41db225417da5e2fd
+selected_option: visual_production_loop_canonical_model
+visual_production_loop_canonical_model_created: true
+state_machine_created: true
+forbidden_transitions_defined: true
+asset_status_taxonomy_defined: true
+retouch_entry_conditions_defined: true
+delivery_entry_conditions_defined: true
+memory_entry_conditions_defined: true
+provider_contact: false
+image_generation: false
+memory_write: false
+production_candidate_002: false
+runtime_execution: false
+recommended_next: v13_003_visual_production_loop_canonical_model_static_review_gate
+recommended_next_auto_execution_allowed: true
+branch: master
 latest_head_after_v12_009_final_closeout: 8cced3101864ac90f787d8854db862cc71ddbcb6
 status: v13_001_visual_production_loop_route_selection_gate
 mode: A4.8 docs-only route selection gate

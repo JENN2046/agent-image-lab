@@ -9,6 +9,19 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v13_002_visual_production_loop_canonical_model_gate.
+Purpose: define Visual Production Loop core objects, state machine, forbidden transitions, asset status taxonomy, and retouch / delivery / memory entry conditions; no provider contact, no image generation, no memory write, no production, no runtime, no real retouch, no commercial delivery, no artifact migration, no prompt package modification, and no runs output commit.
+source_phase: v13_001_visual_production_loop_route_selection_gate.
+source_commit: 46df48201ce770b79797c4c41db225417da5e2fd.
+selected_option: visual_production_loop_canonical_model.
+visual_production_loop_canonical_model_created: true.
+state_machine_created: true.
+forbidden_transitions_defined: true.
+asset_status_taxonomy_defined: true.
+recommended_next: v13_003_visual_production_loop_canonical_model_static_review_gate.
+recommended_next_auto_execution_allowed: true.
+next_phase_started: false.
+---
 Current active gate: v13_001_visual_production_loop_route_selection_gate.
 Purpose: present V13 Visual Production Loop route options after V12 Prompt Schema Machine Validator closeout; no V13 execution, no provider contact, no image generation, no memory write, no production, no runtime, no real retouch, no commercial delivery, no artifact migration, and no prompt package modification.
 source_phase: v12_009_v12_prompt_schema_machine_validator_final_closeout.
