@@ -9,12 +9,51 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v14_003_review_console_information_architecture_gate. V14 Review Console productization now has docs-only page structure, navigation axes, core information blocks, asset status mapping, existing asset examples, and observation/decision boundaries. No UI implementation or runtime execution has started.
+Agent Image Lab is in v14_004_review_console_wireframe_and_data_contract_gate. V14 Review Console productization now has docs-only low-fidelity wireframe and data contract v1, including read-only source mapping and future implementation prerequisites. No UI implementation, frontend files, runtime execution, or image binary read has started.
 ```
 
 ## Current Phase
 
 ```text
+V14.004 Review Console Wireframe And Data Contract Gate
+phase_id: v14_004_review_console_wireframe_and_data_contract_gate
+source_phase: v14_003_review_console_information_architecture_gate
+status: completed_validated_wireframe_and_data_contract_record
+source_commit: 33e26855758a9205f7e3c53342e81302017d7867
+branch: master tracking origin/master
+selected_route: review_console_productization_planning
+wireframe: docs/review_console_wireframe_v14.md
+data_contract: docs/review_console_data_contract_v1.md
+phase_record: docs/v14_004_review_console_wireframe_and_data_contract_gate.md
+wireframe_created: true
+data_contract_created: true
+readonly_data_sources_defined: true
+future_implementation_prerequisites_defined: true
+UI_implementation_started: false
+runtime_execution: false
+frontend_files_created: false
+runs_image_binary_read: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+memory_write: false
+accepted_samples_written: false
+runs_output_committed: false
+real_retouch_execution: false
+derivative_image_created: false
+real_commercial_delivery_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+package_lock_modified: false
+scripts_modified: false
+prompt_package_modified: false
+recommended_next: v14_005_review_console_static_review_and_route_closeout_gate
+recommended_next_auto_execution_allowed: true
+next_phase_started: false
+---
 V14.003 Review Console Information Architecture Gate
 phase_id: v14_003_review_console_information_architecture_gate
 source_phase: v14_002_review_console_productization_planning_gate

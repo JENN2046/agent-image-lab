@@ -1,5 +1,47 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.004 Review Console Wireframe And Data Contract Gate
+
+```text
+phase_id: v14_004_review_console_wireframe_and_data_contract_gate
+status: completed_validated_wireframe_and_data_contract_record
+source_phase: v14_003_review_console_information_architecture_gate
+source_commit: 33e26855758a9205f7e3c53342e81302017d7867
+purpose: define low-fidelity Review Console wireframe and data contract without UI implementation or runtime execution
+phase_record_ref: docs/v14_004_review_console_wireframe_and_data_contract_gate.md
+wireframe_ref: docs/review_console_wireframe_v14.md
+data_contract_ref: docs/review_console_data_contract_v1.md
+selected_route: review_console_productization_planning
+wireframe_created: true
+data_contract_created: true
+readonly_data_sources_defined: true
+future_implementation_prerequisites_defined: true
+UI_implementation_started: false
+runtime_execution: false
+frontend_files_created: false
+runs_image_binary_read: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+memory_write: false
+accepted_samples_written: false
+runs_output_committed: false
+real_retouch_execution: false
+derivative_image_created: false
+real_commercial_delivery_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+package_lock_modified: false
+scripts_modified: false
+prompt_package_modified: false
+recommended_next: v14_005_review_console_static_review_and_route_closeout_gate
+recommended_next_auto_execution_allowed: true
+next_phase_started: false
+```
+
 # V14.003 Review Console Information Architecture Gate
 
 ```text

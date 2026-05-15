@@ -8,6 +8,37 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+latest_head_after_v14_003_information_architecture: 33e26855758a9205f7e3c53342e81302017d7867
+status: v14_004_review_console_wireframe_and_data_contract_gate
+mode: A4.8 docs-only wireframe and data contract gate
+phase_id: v14_004_review_console_wireframe_and_data_contract_gate
+source_phase: v14_003_review_console_information_architecture_gate
+source_commit: 33e26855758a9205f7e3c53342e81302017d7867
+selected_route: review_console_productization_planning
+wireframe: docs/review_console_wireframe_v14.md
+data_contract: docs/review_console_data_contract_v1.md
+phase_record: docs/v14_004_review_console_wireframe_and_data_contract_gate.md
+wireframe_created: true
+data_contract_created: true
+readonly_data_sources_defined: true
+future_implementation_prerequisites_defined: true
+UI_implementation_started: false
+runtime_execution: false
+frontend_files_created: false
+runs_image_binary_read: false
+provider_contact: false
+image_generation: false
+retry: false
+memory_write: false
+accepted_samples_written: false
+runs_output_committed: false
+real_retouch_execution: false
+derivative_image_created: false
+real_commercial_delivery_execution: false
+production_candidate_002: false
+recommended_next: v14_005_review_console_static_review_and_route_closeout_gate
+recommended_next_auto_execution_allowed: true
+branch: master
 latest_head_after_v14_002_productization_planning: e172e5a25bcdb4ea95cc9f9dece39cdec5082a27
 status: v14_003_review_console_information_architecture_gate
 mode: A4.8 docs-only information architecture gate

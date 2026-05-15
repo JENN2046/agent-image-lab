@@ -9,6 +9,36 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v14_004_review_console_wireframe_and_data_contract_gate.
+Purpose: define low-fidelity Review Console markdown wireframes, data contract v1, read-only source mapping, forbidden data sources, read/write boundary, and future implementation prerequisites without UI implementation or runtime execution.
+source_phase: v14_003_review_console_information_architecture_gate.
+source_commit: 33e26855758a9205f7e3c53342e81302017d7867.
+selected_route: review_console_productization_planning.
+wireframe: docs/review_console_wireframe_v14.md.
+data_contract: docs/review_console_data_contract_v1.md.
+phase_record: docs/v14_004_review_console_wireframe_and_data_contract_gate.md.
+wireframe_created: true.
+data_contract_created: true.
+readonly_data_sources_defined: true.
+future_implementation_prerequisites_defined: true.
+UI_implementation_started: false.
+runtime_execution: false.
+frontend_files_created: false.
+runs_image_binary_read: false.
+provider_contact: false.
+image_generation: false.
+retry: false.
+memory_write: false.
+accepted_samples_written: false.
+runs_output_committed: false.
+real_retouch_execution: false.
+derivative_image_created: false.
+real_commercial_delivery_execution: false.
+production_candidate_002: false.
+recommended_next: v14_005_review_console_static_review_and_route_closeout_gate.
+recommended_next_auto_execution_allowed: true.
+next_phase_started: false.
+---
 Current active gate: v14_003_review_console_information_architecture_gate.
 Purpose: define Review Console information architecture for page structure, navigation, core information blocks, status classification, existing asset examples, and observation/decision boundaries without UI implementation or runtime execution.
 source_phase: v14_002_review_console_productization_planning_gate.
