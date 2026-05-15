@@ -8,6 +8,27 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+latest_head_after_v12_009_final_closeout: 8cced3101864ac90f787d8854db862cc71ddbcb6
+status: v13_001_visual_production_loop_route_selection_gate
+mode: A4.8 docs-only route selection gate
+phase_id: v13_001_visual_production_loop_route_selection_gate
+source_phase: v12_009_v12_prompt_schema_machine_validator_final_closeout
+source_commit: 8cced3101864ac90f787d8854db862cc71ddbcb6
+v12_closed: true
+machine_validator_implemented: true
+validator_passed_on_synthetic_fixtures: true
+existing_artifacts_migrated: false
+options_presented: visual_production_loop_canonical_model | one_existing_asset_loop_reconstruction | next_product_visual_production_trial_planning | retouch_delivery_loop_planning | visual_memory_policy_planning
+recommended_option: visual_production_loop_canonical_model
+backup_option: one_existing_asset_loop_reconstruction
+human_decision_required: true
+provider_contact_allowed_now: false
+image_generation_allowed_now: false
+memory_write_allowed_now: false
+production_candidate_002_allowed_now: false
+recommended_next: pending_human_v13_route_selection
+recommended_next_auto_execution_allowed: false
+branch: master
 latest_head_after_v12_008_fixture_execution: a36dfbda5296a12b382724721273ebc1914d5d74
 status: v12_009_v12_prompt_schema_machine_validator_final_closeout
 mode: A4.8 final closeout

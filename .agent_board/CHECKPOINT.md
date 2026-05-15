@@ -1,5 +1,46 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V13.001 Visual Production Loop Route Selection Gate
+
+```text
+phase_id: v13_001_visual_production_loop_route_selection_gate
+status: completed_validated_route_selection_record
+source_phase: v12_009_v12_prompt_schema_machine_validator_final_closeout
+source_commit: 8cced3101864ac90f787d8854db862cc71ddbcb6
+purpose: present V13 Visual Production Loop route options and wait for human selection
+phase_record_ref: docs/v13_001_visual_production_loop_route_selection_gate.md
+v12_closed: true
+machine_validator_implemented: true
+validator_passed_on_synthetic_fixtures: true
+existing_artifacts_migrated: false
+options_presented: visual_production_loop_canonical_model | one_existing_asset_loop_reconstruction | next_product_visual_production_trial_planning | retouch_delivery_loop_planning | visual_memory_policy_planning
+recommended_option: visual_production_loop_canonical_model
+backup_option: one_existing_asset_loop_reconstruction
+human_decision_required: true
+package_json_modified: false
+package_lock_modified: false
+dependency_change: false
+existing_prompt_packages_modified: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+real_retouch_execution: false
+commercial_delivery_execution: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: pending_human_v13_route_selection
+recommended_next_auto_execution_allowed: false
+next_phase_started: false
+```
+
 # V12.009 V12 Prompt Schema Machine Validator Final Closeout
 
 ```text

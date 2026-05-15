@@ -9,12 +9,49 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v12_009_v12_prompt_schema_machine_validator_final_closeout. V12 Prompt Schema Machine Validator route is closed: validator implemented, synthetic fixtures created, fixture execution passed, and no provider/image/memory/production/runtime or artifact migration occurred.
+Agent Image Lab is in v13_001_visual_production_loop_route_selection_gate. V12 Prompt Schema Machine Validator route is closed, and V13 is selecting the next Visual Production Loop route without provider contact, image generation, memory write, production execution, runtime, artifact migration, or prompt package modification.
 ```
 
 ## Current Phase
 
 ```text
+V13.001 Visual Production Loop Route Selection Gate
+phase_id: v13_001_visual_production_loop_route_selection_gate
+source_phase: v12_009_v12_prompt_schema_machine_validator_final_closeout
+status: completed_validated_route_selection_record
+source_commit: 8cced3101864ac90f787d8854db862cc71ddbcb6
+branch: master tracking origin/master
+v12_closed: true
+machine_validator_implemented: true
+validator_passed_on_synthetic_fixtures: true
+existing_artifacts_migrated: false
+options_presented: visual_production_loop_canonical_model | one_existing_asset_loop_reconstruction | next_product_visual_production_trial_planning | retouch_delivery_loop_planning | visual_memory_policy_planning
+recommended_option: visual_production_loop_canonical_model
+backup_option: one_existing_asset_loop_reconstruction
+human_decision_required: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+real_retouch_execution: false
+commercial_delivery_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+package_lock_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+existing_prompt_packages_modified: false
+recommended_next: pending_human_v13_route_selection
+recommended_next_auto_execution_allowed: false
+next_phase_started: false
+---
 V12.009 V12 Prompt Schema Machine Validator Final Closeout
 phase_id: v12_009_v12_prompt_schema_machine_validator_final_closeout
 source_phase: v12_008_prompt_schema_validator_fixture_execution_gate

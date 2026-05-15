@@ -9,6 +9,22 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v13_001_visual_production_loop_route_selection_gate.
+Purpose: present V13 Visual Production Loop route options after V12 Prompt Schema Machine Validator closeout; no V13 execution, no provider contact, no image generation, no memory write, no production, no runtime, no real retouch, no commercial delivery, no artifact migration, and no prompt package modification.
+source_phase: v12_009_v12_prompt_schema_machine_validator_final_closeout.
+source_commit: 8cced3101864ac90f787d8854db862cc71ddbcb6.
+v12_closed: true.
+machine_validator_implemented: true.
+validator_passed_on_synthetic_fixtures: true.
+existing_artifacts_migrated: false.
+options_presented: visual_production_loop_canonical_model | one_existing_asset_loop_reconstruction | next_product_visual_production_trial_planning | retouch_delivery_loop_planning | visual_memory_policy_planning.
+recommended_option: visual_production_loop_canonical_model.
+backup_option: one_existing_asset_loop_reconstruction.
+human_decision_required: true.
+recommended_next: pending_human_v13_route_selection.
+recommended_next_auto_execution_allowed: false.
+next_phase_started: false.
+---
 Current active gate: v12_009_v12_prompt_schema_machine_validator_final_closeout.
 Purpose: close V12 Prompt Schema Machine Validator route after validator implementation, static review, and synthetic fixture execution; no V13 execution, no existing artifact migration, no prompt package edit, no provider contact, no image generation, no memory write, no production, and no runtime.
 source_phase: v12_008_prompt_schema_validator_fixture_execution_gate.

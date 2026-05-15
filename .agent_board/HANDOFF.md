@@ -3,6 +3,28 @@
 ## Handoff Summary
 
 ```text
+Status: v13_001_visual_production_loop_route_selection_gate is the current route selection gate.
+Reason: V12 Prompt Schema Machine Validator route is closed. V13 now presents Visual Production Loop route options and waits for human selection without entering execution.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Source commit: 8cced3101864ac90f787d8854db862cc71ddbcb6
+Current status: v13_001_visual_production_loop_route_selection_gate
+v12_closed: true
+machine_validator_implemented: true
+validator_passed_on_synthetic_fixtures: true
+existing_artifacts_migrated: false
+options_presented: visual_production_loop_canonical_model | one_existing_asset_loop_reconstruction | next_product_visual_production_trial_planning | retouch_delivery_loop_planning | visual_memory_policy_planning
+recommended_option: visual_production_loop_canonical_model
+backup_option: one_existing_asset_loop_reconstruction
+human_decision_required: true
+provider_contact_allowed_now: false
+image_generation_allowed_now: false
+memory_write_allowed_now: false
+production_candidate_002_allowed_now: false
+recommended_next: pending_human_v13_route_selection
+recommended_next_auto_execution_allowed: false
+next_phase_started: false
+---
 Status: v12_009_v12_prompt_schema_machine_validator_final_closeout is the current final closeout gate.
 Reason: V12 Prompt Schema Machine Validator route is closed. The validator exists, synthetic fixtures exist, and fixture execution passed with all expected PASS/WARN/FAIL outcomes matched.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
