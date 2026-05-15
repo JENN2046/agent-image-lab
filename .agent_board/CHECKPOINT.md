@@ -1,10 +1,42 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V11.001 Route Selection Gate
+
+```text
+phase_id: v11_001_route_selection_gate
+status: completed_remote_synced_after_guarded_push
+source_phase: v10_018_v10_final_closeout_remote_sync
+source_commit: 223b1550f57e422c1bf4336c4619ef65ec4509c3
+purpose: present V11 route options and wait for human selection
+phase_record_ref: docs/v11_001_route_selection_gate.md
+v10_closed: true
+options_presented: prompt_schema_hardening | review_console_productization_planning | fourth_product_prompt_workflow_expansion | delivery_completion_package_track | memory_suitability_planning | production_candidate_002_readiness_planning
+recommended_option: prompt_schema_hardening
+backup_option: review_console_productization_planning
+human_decision_required: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: pending_human_v11_route_selection
+```
+
 # V10.018 V10 Final Closeout
 
 ```text
 phase_id: v10_018_v10_final_closeout
-status: completed_validated_local_commit_pending_remote_push_authorization
+status: completed_remote_synced_after_guarded_push
 source_phase: v10_017_third_product_route_closeout_gate
 source_commit: 22cff4e4ce2ad741d6188269536b16f8f9db0f6f
 purpose: close V10 as route-reset and third-product prompt workflow expansion cycle
