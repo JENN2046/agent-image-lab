@@ -1,5 +1,51 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V13.012 Camping Lantern Minimal Generation Execution Confirmation Gate
+
+```text
+phase_id: v13_012_camping_lantern_minimal_generation_execution_confirmation_gate
+status: completed_validated_execution_confirmation_record
+source_phase: v13_011_camping_lantern_minimal_generation_authorization_draft_gate
+source_commit: 4d8420ed75aa53f96c9a095050591388f4c1bd03
+purpose: confirm camping lantern one-shot generation execution boundary without execution
+phase_record_ref: docs/v13_012_camping_lantern_minimal_generation_execution_confirmation_gate.md
+approved_product: premium_portable_led_camping_lantern
+approved_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml
+output_directory: runs/real_generation/v13_012_premium_portable_led_camping_lantern_first_trial/
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 1
+auto_retry: false
+stop_after_generation: true
+success_requires_verified_local_file: true
+human_review_required_after_success: true
+secret_read_boundary: only during v13.013 execution if human explicitly authorizes
+execution_started: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+output_directory_created: false
+runtime_execution: false
+real_retouch_execution: false
+commercial_delivery_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+package_lock_modified: false
+scripts_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: pending_human_camping_lantern_minimal_generation_execution_authorization
+recommended_next_auto_execution_allowed: false
+next_phase_started: false
+```
+
 # V13.011 Camping Lantern Minimal Generation Authorization Draft Gate
 
 ```text

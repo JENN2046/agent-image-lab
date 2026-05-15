@@ -8,6 +8,31 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+latest_head_after_v13_011_authorization_draft: 4d8420ed75aa53f96c9a095050591388f4c1bd03
+status: v13_012_camping_lantern_minimal_generation_execution_confirmation_gate
+mode: A5 execution confirmation gate under non-execution boundary
+phase_id: v13_012_camping_lantern_minimal_generation_execution_confirmation_gate
+source_phase: v13_011_camping_lantern_minimal_generation_authorization_draft_gate
+source_commit: 4d8420ed75aa53f96c9a095050591388f4c1bd03
+approved_product: premium_portable_led_camping_lantern
+approved_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml
+output_directory: runs/real_generation/v13_012_premium_portable_led_camping_lantern_first_trial/
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 1
+auto_retry: false
+stop_after_generation: true
+success_requires_verified_local_file: true
+human_review_required_after_success: true
+secret_read_boundary: only during v13.013 execution if human explicitly authorizes
+execution_started: false
+provider_contact: false
+image_generation: false
+env_local_secret_value_read: false
+output_directory_created: false
+recommended_next: pending_human_camping_lantern_minimal_generation_execution_authorization
+recommended_next_auto_execution_allowed: false
+branch: master
 latest_head_after_v13_010_A5_path_decision: 7d6b16ab0baf54f95e7a05f3dc8395aef3061651
 status: v13_011_camping_lantern_minimal_generation_authorization_draft_gate
 mode: A5 pre-execution authorization draft gate under A4.8 docs-only boundaries
