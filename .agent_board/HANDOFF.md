@@ -3,6 +3,29 @@
 ## Handoff Summary
 
 ```text
+Status: v11_013_human_review_schema_static_review_gate is the current docs-only schema static review gate.
+Reason: v11.012 drafted the human review canonical schema. v11.013 statically reviews that schema and records pass_for_schema_static_review, while leaving accepted candidate evidence package schema, migration, and machine validator implementation for later gates.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current local HEAD before v11.013 patch: ef59dfb docs: draft human review canonical schema
+ahead_behind: 0/9 before v11.013 patch
+Worktree: clean before v11.013 patch
+Current status: v11_013_human_review_schema_static_review_gate
+source_phase: v11_012_human_review_schema_draft_gate
+source_commit: ef59dfb8ae54387973fa3cae44bbd1ab9a201f2e
+selected_route: prompt_schema_hardening
+human_review_schema_static_review_completed: true
+human_review_schema_static_review_result: pass_for_schema_static_review
+machine_validator_implemented: false
+review_artifact_migration_performed: false
+commercial_delivery_ready_changed: false
+provider_contact_allowed_now: false
+image_generation_allowed_now: false
+memory_write_allowed_now: false
+production_candidate_002_allowed_now: false
+recommended_next: v11_014_accepted_candidate_evidence_package_schema_draft_gate
+recommended_next_auto_execution_allowed: true
+---
 Status: v11_012_human_review_schema_draft_gate is the current docs-only schema draft gate.
 Reason: v11.011 passed static review for the A5 authorization schema. v11.012 drafts a human review canonical schema separating accepted candidate, commercial delivery readiness, and memory suitability, while adding stable local persistence and watch item fields. It leaves human review schema static review, evidence package schema, migration, and machine validator implementation for later gates.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
