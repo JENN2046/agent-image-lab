@@ -3,6 +3,35 @@
 ## Handoff Summary
 
 ```text
+Status: v11_014_accepted_candidate_evidence_package_schema_draft_gate is the current docs-only schema draft gate.
+Reason: v11.013 passed static review for the human review canonical schema. v11.014 drafts the accepted candidate evidence package canonical schema, normalizing source_output, prompt_package, lineage, evidence summary, commercial delivery boundary, memory boundary, accepted_samples/runs output boundary, and production boundary. It leaves static review, migration, and machine validator implementation for later gates.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current local HEAD before v11.014 patch: c74a3f7 docs: review human review canonical schema
+ahead_behind: 0/10 before v11.014 patch
+Worktree: clean before v11.014 patch
+Current status: v11_014_accepted_candidate_evidence_package_schema_draft_gate
+source_phase: v11_013_human_review_schema_static_review_gate
+source_commit: c74a3f7d3f2db9fe1671a1acbcf00b3e9d089b5c
+selected_route: prompt_schema_hardening
+accepted_candidate_evidence_package_schema_drafted: true
+source_output_canonical_field_defined: true
+prompt_package_canonical_field_defined: true
+lineage_schema_defined: true
+evidence_summary_schema_defined: true
+commercial_delivery_boundary_defined: true
+memory_boundary_defined: true
+accepted_samples_and_runs_output_boundary_defined: true
+production_candidate_boundary_defined: true
+machine_validator_implemented: false
+evidence_package_migration_performed: false
+provider_contact_allowed_now: false
+image_generation_allowed_now: false
+memory_write_allowed_now: false
+production_candidate_002_allowed_now: false
+recommended_next: v11_015_accepted_candidate_evidence_package_schema_static_review_gate
+recommended_next_auto_execution_allowed: true
+---
 Status: v11_013_human_review_schema_static_review_gate is the current docs-only schema static review gate.
 Reason: v11.012 drafted the human review canonical schema. v11.013 statically reviews that schema and records pass_for_schema_static_review, while leaving accepted candidate evidence package schema, migration, and machine validator implementation for later gates.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

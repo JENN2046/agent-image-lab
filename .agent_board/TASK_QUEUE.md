@@ -9,6 +9,17 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v11_014_accepted_candidate_evidence_package_schema_draft_gate.
+Purpose: draft accepted candidate evidence package canonical schema; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, dependency change, evidence package migration, commercial_delivery_ready promotion, or machine validator implementation.
+source_phase: v11_013_human_review_schema_static_review_gate.
+source_commit: c74a3f7d3f2db9fe1671a1acbcf00b3e9d089b5c.
+selected_route: prompt_schema_hardening.
+accepted_candidate_evidence_package_schema_drafted: true.
+source_output_canonical_field_defined: true.
+prompt_package_canonical_field_defined: true.
+recommended_next: v11_015_accepted_candidate_evidence_package_schema_static_review_gate.
+recommended_next_auto_execution_allowed: true.
+---
 Current active gate: v11_013_human_review_schema_static_review_gate.
 Purpose: statically review human review canonical schema; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, dependency change, review artifact migration, commercial_delivery_ready promotion, or machine validator implementation.
 source_phase: v11_012_human_review_schema_draft_gate.

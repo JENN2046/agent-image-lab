@@ -1,5 +1,46 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V11.014 Accepted Candidate Evidence Package Schema Draft Gate
+
+```text
+phase_id: v11_014_accepted_candidate_evidence_package_schema_draft_gate
+status: completed_validated_local_commit_pending_remote_push_authorization
+source_phase: v11_013_human_review_schema_static_review_gate
+source_commit: c74a3f7d3f2db9fe1671a1acbcf00b3e9d089b5c
+purpose: draft accepted candidate evidence package canonical schema and validation strategy from v11.003 inventory
+phase_record_ref: docs/v11_014_accepted_candidate_evidence_package_schema_draft_gate.md
+schema_ref: docs/accepted_candidate_evidence_package_canonical_schema.md
+selected_route: prompt_schema_hardening
+accepted_candidate_evidence_package_schema_drafted: true
+source_output_canonical_field_defined: true
+prompt_package_canonical_field_defined: true
+lineage_schema_defined: true
+evidence_summary_schema_defined: true
+commercial_delivery_boundary_defined: true
+memory_boundary_defined: true
+accepted_samples_and_runs_output_boundary_defined: true
+production_candidate_boundary_defined: true
+machine_validator_implemented: false
+evidence_package_migration_performed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+commercial_delivery_ready_changed: false
+recommended_next: v11_015_accepted_candidate_evidence_package_schema_static_review_gate
+```
+
 # V11.013 Human Review Schema Static Review Gate
 
 ```text

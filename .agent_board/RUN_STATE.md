@@ -9,12 +9,52 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v11_013_human_review_schema_static_review_gate. This docs-only schema static review gate reviews the human review canonical schema without generating images, writing memory, or promoting delivery/production status.
+Agent Image Lab is in v11_014_accepted_candidate_evidence_package_schema_draft_gate. This docs-only schema draft gate normalizes accepted candidate evidence package fields without generating images, writing memory, copying output assets, or promoting delivery/production status.
 ```
 
 ## Current Phase
 
 ```text
+V11.014 Accepted Candidate Evidence Package Schema Draft Gate
+phase_id: v11_014_accepted_candidate_evidence_package_schema_draft_gate
+source_phase: v11_013_human_review_schema_static_review_gate
+status: completed_validated_local_commit_pending_remote_push_authorization
+source_commit: c74a3f7d3f2db9fe1671a1acbcf00b3e9d089b5c
+source_message: docs: review human review canonical schema
+branch: master tracking origin/master
+origin_sync_current: local HEAD ahead origin/master by 10 before v11.014 patch
+ahead_behind: 0/10 before v11.014 patch
+selected_route: prompt_schema_hardening
+accepted_candidate_evidence_package_schema_drafted: true
+source_output_canonical_field_defined: true
+prompt_package_canonical_field_defined: true
+lineage_schema_defined: true
+evidence_summary_schema_defined: true
+commercial_delivery_boundary_defined: true
+memory_boundary_defined: true
+accepted_samples_and_runs_output_boundary_defined: true
+production_candidate_boundary_defined: true
+machine_validator_implemented: false
+evidence_package_migration_performed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+commercial_delivery_ready_changed: false
+recommended_next: v11_015_accepted_candidate_evidence_package_schema_static_review_gate
+recommended_next_auto_execution_allowed: true
+---
 V11.013 Human Review Schema Static Review Gate
 phase_id: v11_013_human_review_schema_static_review_gate
 source_phase: v11_012_human_review_schema_draft_gate

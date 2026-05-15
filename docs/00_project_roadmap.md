@@ -18,6 +18,27 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
+Current local baseline before v11.014 accepted candidate evidence package schema draft: c74a3f7d3f2db9fe1671a1acbcf00b3e9d089b5c on master ahead origin/master by 10.
+Current mainline state: v11_014 drafts the accepted candidate evidence package canonical schema. It normalizes source_output, prompt_package, lineage, evidence summary, accepted_candidate/commercial_delivery_ready split, memory_suitability deferred policy, no accepted_samples write, no runs output commit, and no production promotion. It does not migrate evidence packages, copy output images, generate images, write memory, enter production, or change commercial_delivery_ready to true.
+Current phase id: v11_014_accepted_candidate_evidence_package_schema_draft_gate.
+selected_route: prompt_schema_hardening.
+accepted_candidate_evidence_package_schema_drafted: true.
+source_output_canonical_field_defined: true.
+prompt_package_canonical_field_defined: true.
+lineage_schema_defined: true.
+evidence_summary_schema_defined: true.
+commercial_delivery_boundary_defined: true.
+memory_boundary_defined: true.
+accepted_samples_and_runs_output_boundary_defined: true.
+production_candidate_boundary_defined: true.
+machine_validator_implemented: false.
+evidence_package_migration_performed: false.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+memory_write_allowed_now: false.
+production_candidate_002_allowed_now: false.
+recommended_next: v11_015_accepted_candidate_evidence_package_schema_static_review_gate.
+recommended_next_auto_execution_allowed: true.
 Current local baseline before v11.013 human review schema static review: ef59dfb8ae54387973fa3cae44bbd1ab9a201f2e on master ahead origin/master by 9.
 Current mainline state: v11_013 statically reviews the human review canonical schema. Result: pass_for_schema_static_review. It confirms reviewed output reference, product/prompt lineage, local persistence fields, reviewable sample rule, accepted_candidate/commercial_delivery_ready separation, memory_suitability deferred policy, strengths/watch items, optional scores, safety boundaries, and non-executing next gate behavior. It does not migrate reviews, generate images, write memory, write accepted_samples, enter production, change commercial_delivery_ready to true, or commit runs output.
 Current phase id: v11_013_human_review_schema_static_review_gate.
