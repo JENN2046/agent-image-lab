@@ -9,6 +9,21 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v10_017_third_product_route_closeout_gate.
+Purpose: close premium serum bottle third-product route as accepted candidate evidence; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, derivative image creation, real retouch execution, commercial delivery execution, or commercial_delivery_ready=true.
+source_phase: v10_016_post_push_status_sync_guard_improvement.
+source_commit: f6b4e9ee36d8bc079bf8f2726e5fea78fce422a3.
+human_selected_option: close_third_product_route_as_accepted_candidate_evidence.
+product: cosmetic_skincare_bottle / premium_serum_bottle.
+source_output: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg.
+prompt_package: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml.
+accepted_candidate: true.
+third_product_route_closed: true.
+commercial_delivery_ready: false.
+memory_suitability: deferred.
+recommended_next: v10_018_v10_route_closeout_or_next_route_selection_gate.
+recommended_next_auto_execution_allowed: false.
+---
 Current active gate: v10_016_post_push_status_sync_guard_improvement.
 Purpose: fix v10.015 post-push status wording drift and add validator coverage for current-phase pending commit/push status when master equals origin/master; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, dependency change, package change, tag, release, or deploy.
 source_phase: v10_015_third_product_route_closeout_or_revision_decision_gate.
@@ -16,8 +31,8 @@ source_commit: 94cbd27fd014f4677d605d26782173ffba062522.
 v10_015_status_after_correction: completed_remote_synced_after_guarded_push.
 post_push_status_sync_guard_added: true.
 validator_updated: scripts/validate_agent_board_state.js.
-remote_push_authorized_now: false.
-recommended_next: optional_human_authorized_remote_sync_for_v10_016.
+remote_push_performed: true.
+recommended_next: v10_017_third_product_route_closeout_gate.
 recommended_next_auto_execution_allowed: false.
 ---
 Current active gate: v10_015_third_product_route_closeout_or_revision_decision_gate.
@@ -880,7 +895,7 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-none — v10_016_post_push_status_sync_guard_improvement is completed_validated_local_commit_pending_remote_push_authorization.
+none — v10_017_third_product_route_closeout_gate is completed_remote_synced_after_guarded_push.
 ```
 
 ### todo

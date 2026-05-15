@@ -9,16 +9,59 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v10_016_post_push_status_sync_guard_improvement. This local A4.8 maintenance patch fixes the v10.015 post-push status wording drift and adds a validator guard so the current phase cannot remain pending commit/push after master is synced with origin/master.
+Agent Image Lab is in v10_017_third_product_route_closeout_gate. This docs-only closeout gate seals the premium serum bottle third-product route as accepted candidate evidence after human selected v10.015 Option B.
 ```
 
 ## Current Phase
 
 ```text
+V10.017 Third Product Route Closeout Gate
+phase_id: v10_017_third_product_route_closeout_gate
+source_phase: v10_016_post_push_status_sync_guard_improvement
+status: completed_remote_synced_after_guarded_push
+source_commit: f6b4e9ee36d8bc079bf8f2726e5fea78fce422a3
+source_message: fix: guard post-push status sync
+branch: master tracking origin/master
+origin_sync_current: local HEAD equals origin/master at f6b4e9e before v10.017 patch
+ahead_behind: 0/0 before v10.017 patch
+human_selected_option: close_third_product_route_as_accepted_candidate_evidence
+product: cosmetic_skincare_bottle / premium_serum_bottle
+source_output: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg
+prompt_package: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+product_brief: done
+prompt_package_status: done
+static_review: done
+A5_one_shot_generation: done
+local_persistence_verified: done
+human_review: done
+accepted_candidate_evidence_package: done
+third_product_route_closed: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+output_image_added_to_git: false
+accepted_samples_written: false
+memory_write_performed: false
+production_candidate_002_started: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+Batch_005: false
+runs_output_committed: false
+recommended_next: v10_018_v10_route_closeout_or_next_route_selection_gate
+recommended_next_auto_execution_allowed: false
+---
 V10.016 Post-Push Status Sync Guard Improvement
 phase_id: v10_016_post_push_status_sync_guard_improvement
 source_phase: v10_015_third_product_route_closeout_or_revision_decision_gate
-status: completed_validated_local_commit_pending_remote_push_authorization
+status: completed_remote_synced_after_guarded_push
 source_commit: 94cbd27fd014f4677d605d26782173ffba062522
 source_message: docs: decide third product route closeout path
 branch: master tracking origin/master
@@ -40,8 +83,8 @@ production_candidate_002: false
 Batch_005: false
 accepted_samples_written: false
 runs_output_committed: false
-remote_push_authorized_now: false
-recommended_next: optional_human_authorized_remote_sync_for_v10_016
+remote_push_performed: true
+recommended_next: v10_017_third_product_route_closeout_gate
 recommended_next_auto_execution_allowed: false
 ---
 V10.015 Third Product Route Closeout Or Revision Decision Gate

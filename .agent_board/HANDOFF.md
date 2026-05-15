@@ -3,6 +3,31 @@
 ## Handoff Summary
 
 ```text
+Status: v10_017_third_product_route_closeout_gate is the current docs-only closeout gate.
+Reason: Human selected v10.015 Option B. v10.017 closes the premium serum bottle third-product route as accepted candidate evidence after brief, prompt package, static review, one-shot generation, local persistence verification, human review, and evidence package are complete. It does not generate, contact provider, retry, read .env.local, write memory, write accepted_samples, commit runs output, or start production_candidate_002.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v10.017 patch: f6b4e9e fix: guard post-push status sync
+ahead_behind: 0/0 before v10.017 patch
+Worktree: clean before v10.017 patch
+Current status: v10_017_third_product_route_closeout_gate
+source_phase: v10_016_post_push_status_sync_guard_improvement
+source_commit: f6b4e9ee36d8bc079bf8f2726e5fea78fce422a3
+product: cosmetic_skincare_bottle / premium_serum_bottle
+source_output: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg
+prompt_package: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+third_product_route_closed: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+output_image_added_to_git: false
+accepted_samples_written: false
+memory_write_performed: false
+production_candidate_002_started: false
+recommended_next: v10_018_v10_route_closeout_or_next_route_selection_gate
+recommended_next_auto_execution_allowed: false
+---
 Status: v10_016_post_push_status_sync_guard_improvement is the current local maintenance checkpoint.
 Reason: v10.015 was already pushed but three current state surfaces still used completed_validated_pending_guarded_commit_and_push. v10.016 corrects the v10.015 status to completed_remote_synced_after_guarded_push and adds a validator guard to catch this drift in future synced states.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
@@ -23,8 +48,8 @@ env_local_secret_value_read: false
 memory_write: false
 accepted_samples_written: false
 runs_output_committed: false
-remote_push_authorized_now: false
-recommended_next: optional_human_authorized_remote_sync_for_v10_016
+remote_push_performed: true
+recommended_next: v10_017_third_product_route_closeout_gate
 recommended_next_auto_execution_allowed: false
 ---
 Status: v10_015_third_product_route_closeout_or_revision_decision_gate is the current docs-only decision gate.

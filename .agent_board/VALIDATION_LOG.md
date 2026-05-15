@@ -1,5 +1,44 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260515-v10.017-THIRD-PRODUCT-ROUTE-CLOSEOUT
+
+Task:
+
+```text
+Close the premium serum bottle third-product route as accepted candidate evidence after human selected v10.015 Option B.
+```
+
+Result:
+
+```text
+product: cosmetic_skincare_bottle / premium_serum_bottle
+source_output: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg
+prompt_package: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+product_brief: done
+prompt_package_status: done
+static_review: done
+A5_one_shot_generation: done
+local_persistence_verified: done
+human_review: done
+accepted_candidate_evidence_package: done
+third_product_route_closed: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+output_image_added_to_git: false
+accepted_samples_written: false
+memory_write_performed: false
+production_candidate_002_started: false
+validation_result: passed_with_existing_manual_review_warnings_only
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, secret print, DailyNote write, VCP memory write, memory_write_path, production_candidate_002, Batch 005, runtime/CDP/bridge/MCP, dependency change, package.json change, accepted_samples write, runs output commit, derivative image creation, real retouch execution, commercial_delivery_ready=true, or real commercial delivery execution is performed by v10.017.
+```
+
 ## VALIDATION-20260515-v10.016-POST-PUSH-STATUS-SYNC-GUARD-IMPROVEMENT
 
 Task:
@@ -17,7 +56,7 @@ v10_015_status_after_correction: completed_remote_synced_after_guarded_push
 post_push_status_sync_guard_added: true
 validator_updated: scripts/validate_agent_board_state.js
 validation_result: passed_with_existing_manual_review_warnings_only
-remote_push_authorized_now: false
+remote_push_performed: true
 ```
 
 Boundary:
