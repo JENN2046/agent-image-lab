@@ -9,6 +9,25 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v10_010_third_product_minimal_generation_execution_confirmation_gate.
+Purpose: confirm exact future execution boundary for one minimal premium serum bottle generation trial; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, output directory creation, runner execution, or automatic provider/image execution.
+source_phase: v10_009_third_product_minimal_generation_authorization_draft_gate_remote_sync.
+source_commit: a206d66a5838f1e35925aebe3a40fa72dc6bdffa.
+approved_product: cosmetic_skincare_bottle / premium_serum_bottle.
+approved_prompt_package: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml.
+output_directory: runs/real_generation/v10_010_premium_serum_bottle_first_trial/.
+provider_calls_max: 1.
+generation_attempts_max: 1.
+output_images_max: 1.
+auto_retry: false.
+stop_after_generation: true.
+success_requires_verified_local_file: true.
+human_review_required_after_success: true.
+new_explicit_execution_authorization_still_required_before_provider_call: true.
+A5_execution_started: false.
+recommended_next: v10_011_third_product_minimal_generation_trial_execution.
+recommended_next_auto_execution_allowed: false.
+---
 Current active gate: v10_009_third_product_minimal_generation_authorization_draft_gate.
 Purpose: record human selection of v10.007 Option A and draft a bounded one-shot A5 generation package; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, output directory creation, or automatic provider/image execution.
 source_phase: v10_007_third_product_A5_authorization_decision_gate.
@@ -792,7 +811,7 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-none — v10_009_third_product_minimal_generation_authorization_draft_gate is completed_validated_pending_guarded_commit.
+none — v10_010_third_product_minimal_generation_execution_confirmation_gate is completed_validated_pending_guarded_commit_and_push.
 ```
 
 ### todo

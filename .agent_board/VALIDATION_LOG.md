@@ -1,5 +1,41 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260515-v10.010-THIRD-PRODUCT-MINIMAL-GENERATION-EXECUTION-CONFIRMATION
+
+Task:
+
+```text
+Confirm the exact future execution boundary for one minimal premium serum bottle generation trial.
+```
+
+Result:
+
+```text
+approved_product: cosmetic_skincare_bottle / premium_serum_bottle
+approved_prompt_package: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+output_directory: runs/real_generation/v10_010_premium_serum_bottle_first_trial/
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 1
+auto_retry: false
+stop_after_generation: true
+success_requires_verified_local_file: true
+human_review_required_after_success: true
+new_explicit_execution_authorization_still_required_before_provider_call: true
+A5_execution_started: false
+provider_contact: false
+image_generation: false
+env_local_secret_value_read: false
+output_directory_created: false
+validation_result: passed_with_existing_manual_review_warnings_only
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, secret print, DailyNote write, VCP memory write, memory_write_path, production_candidate_002, Batch 005, runtime/CDP/bridge/MCP, dependency change, package.json change, accepted_samples write, runs output commit, output directory creation, runner execution, or A5 execution is performed by v10.010.
+```
+
 ## VALIDATION-20260515-v10.009-THIRD-PRODUCT-MINIMAL-GENERATION-AUTHORIZATION-DRAFT
 
 Task:

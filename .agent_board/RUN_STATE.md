@@ -9,16 +9,54 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v10_009_third_product_minimal_generation_authorization_draft_gate. This docs-only gate records the human selection of v10.007 Option A and drafts a one-shot A5 package, but it does not execute provider contact, read .env.local values, generate images, create output directories, write memory, write accepted_samples, promote production, or execute delivery.
+Agent Image Lab is in v10_010_third_product_minimal_generation_execution_confirmation_gate. This docs-only confirmation gate records the exact future execution boundary for one minimal premium serum bottle generation trial, but it does not execute A5, contact a provider, read .env.local values, generate images, create output directories, write memory, write accepted_samples, promote production, or execute delivery.
 ```
 
 ## Current Phase
 
 ```text
+V10.010 Third Product Minimal Generation Execution Confirmation Gate
+phase_id: v10_010_third_product_minimal_generation_execution_confirmation_gate
+source_phase: v10_009_third_product_minimal_generation_authorization_draft_gate_remote_sync
+status: completed_validated_pending_guarded_commit_and_push
+source_commit: a206d66a5838f1e35925aebe3a40fa72dc6bdffa
+source_message: docs: draft third product minimal generation authorization
+branch: master tracking origin/master
+origin_sync_current: local HEAD equals origin/master at a206d66 before v10.010 patch
+ahead_behind: 0/0 before v10.010 patch
+approved_product: cosmetic_skincare_bottle / premium_serum_bottle
+approved_prompt_package: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+output_directory: runs/real_generation/v10_010_premium_serum_bottle_first_trial/
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 1
+auto_retry: false
+stop_after_generation: true
+success_requires_verified_local_file: true
+human_review_required_after_success: true
+new_explicit_execution_authorization_still_required_before_provider_call: true
+A5_execution_started: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+output_directory_created: false
+recommended_next: v10_011_third_product_minimal_generation_trial_execution
+recommended_next_auto_execution_allowed: false
+---
 V10.009 Third Product Minimal Generation Authorization Draft Gate
 phase_id: v10_009_third_product_minimal_generation_authorization_draft_gate
 source_phase: v10_007_third_product_A5_authorization_decision_gate
-status: completed_validated_pending_guarded_commit
+status: completed_remote_synced_after_guarded_push
 source_commit: caf3e68d471cfed7f9e3a61cca015aa476fbda50
 source_message: docs: sync remote status after v10.007
 branch: master tracking origin/master

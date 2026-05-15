@@ -3,6 +3,34 @@
 ## Handoff Summary
 
 ```text
+Status: v10_010_third_product_minimal_generation_execution_confirmation_gate is the current docs-only execution confirmation gate.
+Reason: Human entered v10.010 to confirm the exact future single-generation boundary. This gate confirms output directory, prompt package, provider/generation/output budgets, secret boundary, output persistence success rule, and no-retry policy, but does not execute provider contact, read .env.local, generate images, create output directories, write memory, or commit runs output.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v10.010 patch: a206d66 docs: draft third product minimal generation authorization
+ahead_behind: 0/0
+Worktree: clean before v10.010 patch; generated runs output remains ignored and is not staged or committed
+Current status: v10_010_third_product_minimal_generation_execution_confirmation_gate
+source_phase: v10_009_third_product_minimal_generation_authorization_draft_gate_remote_sync
+approved_product: cosmetic_skincare_bottle / premium_serum_bottle
+approved_prompt_package: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+output_directory: runs/real_generation/v10_010_premium_serum_bottle_first_trial/
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 1
+auto_retry: false
+stop_after_generation: true
+success_requires_verified_local_file: true
+human_review_required_after_success: true
+new_explicit_execution_authorization_still_required_before_provider_call: true
+A5_execution_started: false
+provider_contact_allowed_now: false
+image_generation_allowed_now: false
+env_local_secret_value_read_allowed_now: false
+output_directory_created: false
+recommended_next: v10_011_third_product_minimal_generation_trial_execution
+recommended_next_auto_execution_allowed: false
+---
 Status: v10_009_third_product_minimal_generation_authorization_draft_gate is the current docs-only A5 authorization draft gate.
 Reason: Human selected v10.007 Option A. v10.009 records the selection and drafts the exact one-shot generation package, but does not execute provider contact, read .env.local, generate images, create output directories, write memory, or commit runs output.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

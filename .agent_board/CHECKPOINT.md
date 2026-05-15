@@ -1,10 +1,48 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V10.010 Third Product Minimal Generation Execution Confirmation Gate
+
+```text
+phase_id: v10_010_third_product_minimal_generation_execution_confirmation_gate
+status: completed_validated_pending_guarded_commit_and_push
+source_phase: v10_009_third_product_minimal_generation_authorization_draft_gate_remote_sync
+source_commit: a206d66a5838f1e35925aebe3a40fa72dc6bdffa
+purpose: confirm exact future execution boundary before any one-shot A5 generation trial
+phase_record_ref: docs/v10_010_third_product_minimal_generation_execution_confirmation_gate.md
+approved_product: cosmetic_skincare_bottle / premium_serum_bottle
+approved_prompt_package: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+output_directory: runs/real_generation/v10_010_premium_serum_bottle_first_trial/
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 1
+auto_retry: false
+stop_after_generation: true
+success_requires_verified_local_file: true
+human_review_required_after_success: true
+new_explicit_execution_authorization_still_required_before_provider_call: true
+A5_execution_started: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+output_directory_created: false
+recommended_next: v10_011_third_product_minimal_generation_trial_execution
+```
+
 # V10.009 Third Product Minimal Generation Authorization Draft Gate
 
 ```text
 phase_id: v10_009_third_product_minimal_generation_authorization_draft_gate
-status: completed_validated_pending_guarded_commit
+status: completed_remote_synced_after_guarded_push
 source_phase: v10_007_third_product_A5_authorization_decision_gate
 source_commit: caf3e68d471cfed7f9e3a61cca015aa476fbda50
 purpose: record human Option A selection and draft one-shot A5 package

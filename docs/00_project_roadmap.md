@@ -18,6 +18,27 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
+Current synced baseline before v10.010 third product minimal generation execution confirmation gate: a206d66a5838f1e35925aebe3a40fa72dc6bdffa on master == origin/master.
+Current mainline state: v10_010 confirms the exact future execution boundary for one minimal premium serum bottle generation trial. It does not execute A5, contact provider, generate image, read .env.local, create output directory, write memory, or commit runs output.
+Current phase id: v10_010_third_product_minimal_generation_execution_confirmation_gate.
+approved_product: cosmetic_skincare_bottle / premium_serum_bottle.
+approved_prompt_package: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml.
+output_directory: runs/real_generation/v10_010_premium_serum_bottle_first_trial/.
+provider_calls_max: 1.
+generation_attempts_max: 1.
+output_images_max: 1.
+auto_retry: false.
+stop_after_generation: true.
+success_requires_verified_local_file: true.
+human_review_required_after_success: true.
+new_explicit_execution_authorization_still_required_before_provider_call: true.
+A5_execution_started: false.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+env_local_secret_value_read_allowed_now: false.
+output_directory_created: false.
+recommended_next: v10_011_third_product_minimal_generation_trial_execution.
+recommended_next_auto_execution_allowed: false.
 Current synced baseline before v10.009 third product minimal generation authorization draft: caf3e68d471cfed7f9e3a61cca015aa476fbda50 on master == origin/master.
 Current mainline state: v10_009 records human selection of v10.007 Option A and creates an A5 authorization draft for one minimal premium serum bottle generation trial. It does not execute provider contact, image generation, .env.local read, output directory creation, memory write, or runs output commit.
 Current phase id: v10_009_third_product_minimal_generation_authorization_draft_gate.
