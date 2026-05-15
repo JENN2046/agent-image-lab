@@ -3,6 +3,23 @@
 ## Handoff Summary
 
 ```text
+Status: v12_009_v12_prompt_schema_machine_validator_final_closeout is the current final closeout gate.
+Reason: V12 Prompt Schema Machine Validator route is closed. The validator exists, synthetic fixtures exist, and fixture execution passed with all expected PASS/WARN/FAIL outcomes matched.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Source commit: a36dfbda5296a12b382724721273ebc1914d5d74
+Current status: v12_009_v12_prompt_schema_machine_validator_final_closeout
+v12_closed: true
+machine_validator_implemented: true
+fixture_files_created: true
+scripts_modified: true
+validator_passed_on_synthetic_fixtures: true
+existing_artifacts_migrated: false
+existing_prompt_packages_modified: false
+recommended_next: V13_route_selection_gate
+recommended_next_auto_execution_allowed: false
+next_phase_started: false
+---
 Status: v12_008_prompt_schema_validator_fixture_execution_gate is the current fixture execution gate.
 Reason: The minimal prompt schema validator passed its synthetic fixture manifest: 16 fixtures checked, 16 expected outcomes matched, 0 mismatches.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

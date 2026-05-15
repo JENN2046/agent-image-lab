@@ -1,5 +1,45 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V12.009 V12 Prompt Schema Machine Validator Final Closeout
+
+```text
+phase_id: v12_009_v12_prompt_schema_machine_validator_final_closeout
+status: completed_validated_final_closeout_record
+source_phase: v12_008_prompt_schema_validator_fixture_execution_gate
+source_commit: a36dfbda5296a12b382724721273ebc1914d5d74
+purpose: close V12 Prompt Schema Machine Validator route
+phase_record_ref: docs/v12_009_v12_prompt_schema_machine_validator_final_closeout.md
+v12_closed: true
+machine_validator_implemented: true
+fixture_files_created: true
+scripts_modified: true
+validator_passed_on_synthetic_fixtures: true
+fixtures_checked: 16
+expected_matched_count: 16
+expected_mismatch_count: 0
+package_json_modified: false
+package_lock_modified: false
+dependency_change: false
+existing_artifacts_migrated: false
+existing_prompt_packages_modified: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: V13_route_selection_gate
+recommended_next_auto_execution_allowed: false
+next_phase_started: false
+```
+
 # V12.008 Prompt Schema Validator Fixture Execution Gate
 
 ```text

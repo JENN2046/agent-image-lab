@@ -9,6 +9,21 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v12_009_v12_prompt_schema_machine_validator_final_closeout.
+Purpose: close V12 Prompt Schema Machine Validator route after validator implementation, static review, and synthetic fixture execution; no V13 execution, no existing artifact migration, no prompt package edit, no provider contact, no image generation, no memory write, no production, and no runtime.
+source_phase: v12_008_prompt_schema_validator_fixture_execution_gate.
+source_commit: a36dfbda5296a12b382724721273ebc1914d5d74.
+v12_closed: true.
+machine_validator_implemented: true.
+fixture_files_created: true.
+scripts_modified: true.
+validator_passed_on_synthetic_fixtures: true.
+existing_artifacts_migrated: false.
+existing_prompt_packages_modified: false.
+recommended_next: V13_route_selection_gate.
+recommended_next_auto_execution_allowed: false.
+next_phase_started: false.
+---
 Current active gate: v12_008_prompt_schema_validator_fixture_execution_gate.
 Purpose: record full synthetic fixture execution for the minimal prompt schema validator; no code change, no fixture change, no existing artifact migration, no prompt package edit, no provider contact, no image generation, no memory write, no production, and no runtime.
 source_phase: v12_007_prompt_schema_validator_static_review_and_syntax_gate.
