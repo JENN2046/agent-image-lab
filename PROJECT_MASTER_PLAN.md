@@ -8,6 +8,28 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+latest_head_after_v13_008_prompt_package_draft: 0ba2a60763cbca560072b75f5db3685e2bb5d4a1
+status: v13_009_premium_portable_led_camping_lantern_prompt_package_static_review_gate
+mode: A4.8 docs-only static review gate
+phase_id: v13_009_premium_portable_led_camping_lantern_prompt_package_static_review_gate
+source_phase: v13_008_premium_portable_led_camping_lantern_prompt_package_draft_gate
+source_commit: 0ba2a60763cbca560072b75f5db3685e2bb5d4a1
+selected_product: premium_portable_led_camping_lantern
+prompt_package_path: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml
+static_review_completed: true
+static_review_result: pass_ready_for_A5_decision
+prompt_positive_sync_checked: true
+negative_prompt_checked: true
+product_identity_checked: true
+structure_lock_checked: true
+material_constraints_checked: true
+A5_authorization_created: false
+provider_contact: false
+image_generation: false
+memory_write: false
+recommended_next: v13_010_premium_portable_led_camping_lantern_A5_authorization_decision_gate
+recommended_next_auto_execution_allowed: true
+branch: master
 latest_head_after_v13_007_planning: eaab60f16d3fef7467b5d2afc2b78e6e0ea3c150
 status: v13_008_premium_portable_led_camping_lantern_prompt_package_draft_gate
 mode: A4.8 docs-only prompt package draft gate

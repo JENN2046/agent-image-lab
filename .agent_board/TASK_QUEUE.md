@@ -9,6 +9,27 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v13_009_premium_portable_led_camping_lantern_prompt_package_static_review_gate.
+Purpose: statically review the camping lantern prompt package and record whether it is ready for an A5 path decision; no A5 authorization, no provider contact, no image generation, no .env.local read, no output directory creation, no memory write, no production, no runtime, no real retouch, no commercial delivery, no accepted_samples write, and no runs output commit.
+source_phase: v13_008_premium_portable_led_camping_lantern_prompt_package_draft_gate.
+source_commit: 0ba2a60763cbca560072b75f5db3685e2bb5d4a1.
+selected_product: premium_portable_led_camping_lantern.
+prompt_package_path: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml.
+static_review_completed: true.
+static_review_result: pass_ready_for_A5_decision.
+prompt_positive_sync_checked: true.
+negative_prompt_checked: true.
+product_identity_checked: true.
+structure_lock_checked: true.
+material_constraints_checked: true.
+A5_authorization_created: false.
+provider_contact: false.
+image_generation: false.
+memory_write: false.
+recommended_next: v13_010_premium_portable_led_camping_lantern_A5_authorization_decision_gate.
+recommended_next_auto_execution_allowed: true.
+next_phase_started: false.
+---
 Current active gate: v13_008_premium_portable_led_camping_lantern_prompt_package_draft_gate.
 Purpose: create the fourth-product canonical prompt package draft for static review only; no provider contact, no image generation, no .env.local read, no output directory creation, no memory write, no production, no runtime, no A5 authorization, no real retouch, no commercial delivery, no accepted_samples write, and no runs output commit.
 source_phase: v13_007_next_product_visual_production_trial_planning_gate.
