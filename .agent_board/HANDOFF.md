@@ -3,6 +3,31 @@
 ## Handoff Summary
 
 ```text
+Status: v13_008_premium_portable_led_camping_lantern_prompt_package_draft_gate is the current prompt package draft gate.
+Reason: V13.007 selected premium_portable_led_camping_lantern. V13.008 creates a canonical prompt package draft for static review only; it is not A5 authorization and does not permit provider contact or image generation.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Source commit: eaab60f16d3fef7467b5d2afc2b78e6e0ea3c150
+Current status: v13_008_premium_portable_led_camping_lantern_prompt_package_draft_gate
+selected_product: premium_portable_led_camping_lantern
+prompt_package_path: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml
+prompt_package_created: true
+canonical_prompt_field_present: true
+positive_prompt_present: true
+positive_prompt_synced: true
+negative_prompt_present: true
+A5_authorization_required_later: true
+A5_authorization_created: false
+provider_contact: false
+image_generation: false
+output_directory_created: false
+memory_write: false
+production_candidate_002: false
+runtime_execution: false
+recommended_next: v13_009_premium_portable_led_camping_lantern_prompt_package_static_review_gate
+recommended_next_auto_execution_allowed: true
+next_phase_started: false
+---
 Status: v13_007_next_product_visual_production_trial_planning_gate is the current planning gate.
 Reason: Human selected v13.006 Option B. This gate selects the fourth-product planning target and drafts brief / shot / prompt planning / static review / A5 decision prerequisites only.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

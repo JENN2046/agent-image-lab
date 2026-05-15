@@ -1,0 +1,176 @@
+package_id: product_lifestyle_premium_portable_led_camping_lantern_v1
+version: v1
+language: en
+mode: text_to_image
+reference_policy: text_only_no_image_input
+title: "Premium portable LED camping lantern prompt package v1"
+purpose: "Draft prompt package for static review and later independent A5 authorization only; this file does not contact providers, generate images, write memory, or create execution authorization."
+
+source_phase: v13_008_premium_portable_led_camping_lantern_prompt_package_draft_gate
+source_planning_phase: v13_007_next_product_visual_production_trial_planning_gate
+product_brief_ref: docs/next_product_visual_production_trial_plan_v13_007.md#productbrief-draft
+shot_ref: docs/next_product_visual_production_trial_plan_v13_007.md#hero_product_shot
+status: draft_prompt_package_static_review_pending
+
+selected_product: premium_portable_led_camping_lantern
+product_identity:
+  product_type: premium_portable_led_camping_lantern
+  product_category: outdoor_lifestyle_electronics
+  category_terms:
+    - premium portable LED camping lantern
+    - compact outdoor lantern
+    - rechargeable camping lantern
+    - warm diffuser lantern
+  must_not_be:
+    - flashlight
+    - candle
+    - speaker
+    - humidifier
+    - thermos
+    - desk lamp
+    - smart speaker
+
+locked_structure: compact_single_lantern_with_translucent_diffuser_attached_handle_loop_and_stable_base
+structure_lock:
+  body: single compact cylindrical or softly rectangular lantern body
+  diffuser: warm translucent or frosted diffuser section
+  handle: sturdy continuous attached handle loop or hanging loop
+  base: stable non-slip base visible at product contact point
+  single_product_only: true
+  extra_lantern_allowed: false
+
+runner_prompt_mapping:
+  canonical_prompt_field: prompt
+  positive_prompt_alias: positive_prompt
+  positive_prompt_sync_required: true
+  runner_expected_prompt_field: prompt
+
+visual_intent:
+  shot_role: hero_product_shot
+  commercial_goal: commercially usable premium outdoor lifestyle hero image
+  product_role: single compact premium lantern as the hero product
+  mood: quiet dusk outdoor premium product photography
+  product_dominance: 55_to_70_percent_visual_importance
+
+material_constraints:
+  diffuser: warm translucent or frosted diffuser with readable material, not blown out
+  body: matte graphite, dark anodized metal, or premium soft-touch body
+  handle: sturdy clean handle loop with plausible attachment points
+  base: stable premium base with subtle contact shadow
+  finish: premium outdoor electronics finish, not toy plastic
+
+structure_constraints:
+  - one compact premium LED camping lantern only
+  - clear diffuser, body, handle loop, and base hierarchy
+  - handle must remain attached, continuous, symmetric, and structurally plausible
+  - product must not drift into flashlight, candle, speaker, humidifier, thermos, desk lamp, or smart speaker
+  - product geometry must remain manufactured, stable, and commercially believable
+
+scene_constraints:
+  surface: restrained outdoor tabletop, stone, or weathered wood surface
+  background: soft dusk outdoor depth that supports the product
+  people_allowed: false
+  hands_allowed: false
+  open_flame_allowed: false
+  scene_must_not_overpower_product: true
+  camping_scene_intensity: restrained
+
+lighting_camera:
+  lighting: dusk ambient light mixed with controlled warm practical LED glow from the diffuser
+  glow_control: warm glow visible but product edges and diffuser surface remain readable
+  camera_angle: straight-on or slight three-quarter front angle at product height
+  crop: full product visible, no cut-off handle or base
+  depth_of_field: realistic product photography depth, product sharp, background soft
+  realism: realistic commercial product photography, not CGI, not illustration
+
+forbidden_elements:
+  - readable brand text
+  - fake logo
+  - random letters
+  - watermark
+  - people
+  - hands
+  - open flame
+  - smoke
+  - unsafe wet electronics
+  - extra lanterns
+  - packaging box by default
+  - flashlight drift
+  - candle drift
+  - speaker drift
+  - humidifier drift
+  - thermos drift
+  - desk lamp drift
+  - smart speaker drift
+  - warped handle
+  - detached handle
+  - blown diffuser
+  - broken geometry
+  - over-cinematic scene
+  - cyberpunk or gaming look
+
+prompt: |
+  Realistic commercial product photography of a single premium portable LED camping lantern as the hero product. The lantern is compact and premium, with a matte graphite or dark anodized metal body, a warm translucent or frosted diffuser, a sturdy continuous handle loop, and a stable non-slip base. The product reads clearly as a rechargeable outdoor LED camping lantern, not a flashlight, candle, speaker, humidifier, thermos, desk lamp, or smart speaker.
+
+  Compose the lantern as a single hero product on a restrained outdoor tabletop, stone, or weathered wood surface at dusk. Use soft outdoor depth in the background without turning the scene into a busy camping advertisement. The lantern should occupy about 55-70% of the visual importance, full product visible, straight-on or slight three-quarter front camera angle at product height, clean silhouette, attached handle, readable diffuser, clear body and base hierarchy.
+
+  Use dusk ambient light mixed with controlled warm practical LED glow from the diffuser. The warm glow should feel inviting and premium while preserving product edges, diffuser texture, handle geometry, and base contact shadow. Quiet premium outdoor lifestyle mood, commercially usable hero image direction, no brand text, no fake logo, no people, no hands, no open flame, no smoke, no unsafe wet electronics, no extra lanterns, no watermark, no cyberpunk or gaming look.
+
+positive_prompt: |
+  Realistic commercial product photography of a single premium portable LED camping lantern as the hero product. The lantern is compact and premium, with a matte graphite or dark anodized metal body, a warm translucent or frosted diffuser, a sturdy continuous handle loop, and a stable non-slip base. The product reads clearly as a rechargeable outdoor LED camping lantern, not a flashlight, candle, speaker, humidifier, thermos, desk lamp, or smart speaker.
+
+  Compose the lantern as a single hero product on a restrained outdoor tabletop, stone, or weathered wood surface at dusk. Use soft outdoor depth in the background without turning the scene into a busy camping advertisement. The lantern should occupy about 55-70% of the visual importance, full product visible, straight-on or slight three-quarter front camera angle at product height, clean silhouette, attached handle, readable diffuser, clear body and base hierarchy.
+
+  Use dusk ambient light mixed with controlled warm practical LED glow from the diffuser. The warm glow should feel inviting and premium while preserving product edges, diffuser texture, handle geometry, and base contact shadow. Quiet premium outdoor lifestyle mood, commercially usable hero image direction, no brand text, no fake logo, no people, no hands, no open flame, no smoke, no unsafe wet electronics, no extra lanterns, no watermark, no cyberpunk or gaming look.
+
+negative_prompt: |
+  wrong product type, flashlight, candle, speaker, humidifier, thermos, desk lamp, smart speaker,
+  readable brand text, fake text, random letters, fake logo, watermark,
+  people, hands, faces, model, open flame, fire, smoke, unsafe wet electronics, rain-soaked electronics,
+  extra lanterns, extra products, packaging box, cluttered camping gear,
+  warped handle, detached handle, broken handle, impossible handle geometry, fused handle,
+  blown diffuser, overexposed glow, unreadable product silhouette, melted diffuser, broken geometry,
+  product too small, background overpowering product, busy campsite scene, over-cinematic scene,
+  cyberpunk look, gaming look, neon HUD, sci-fi prop, toy plastic, cheap plastic,
+  CGI look, illustration, cartoon, low resolution
+
+acceptance_criteria:
+  selected_product_correct: true
+  premium_portable_led_camping_lantern_read: true
+  single_product_only: true
+  warm_translucent_or_frosted_diffuser_present: true
+  matte_graphite_or_dark_premium_body_present: true
+  attached_handle_loop_plausible: true
+  stable_base_present: true
+  controlled_warm_led_glow: true
+  diffuser_not_blown_out: true
+  product_edges_readable: true
+  full_product_visible: true
+  restrained_outdoor_tabletop_scene: true
+  no_readable_brand_text_or_fake_logo: true
+  no_people_hands_open_flame_or_smoke: true
+  no_wrong_product_type_drift: true
+  commercial_hero_direction_present: true
+
+human_review_checklist:
+  - Does the image clearly read as a premium portable LED camping lantern?
+  - Is there exactly one lantern as the hero product?
+  - Is the diffuser warm, translucent or frosted, and still readable rather than blown out?
+  - Does the body read as matte graphite, dark anodized metal, or premium soft-touch material?
+  - Is the handle loop attached, continuous, symmetric, and structurally plausible?
+  - Is the base stable with believable contact shadow?
+  - Is the warm LED glow controlled while product edges remain visible?
+  - Is the scene restrained outdoor tabletop, stone, or wood rather than a busy campsite?
+  - Are readable brand text, fake logo, random letters, people, hands, open flame, and smoke absent?
+  - Does the product avoid drifting into flashlight, candle, speaker, humidifier, thermos, desk lamp, or smart speaker?
+  - Does the result feel commercially usable as a premium outdoor product hero image?
+
+A5_authorization_required_later: true
+provider_contact_allowed: false
+image_generation_allowed: false
+memory_write_allowed: false
+production_candidate_002_allowed: false
+prompt_package_is_A5_authorization: false
+output_directory_creation_allowed: false
+accepted_samples_write_allowed: false
+runs_output_commit_allowed: false

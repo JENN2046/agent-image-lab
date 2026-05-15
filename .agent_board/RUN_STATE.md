@@ -9,12 +9,52 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v13_007_next_product_visual_production_trial_planning_gate. V13 selected the fourth-product planning target, premium_portable_led_camping_lantern, and is drafting brief / shot / prompt planning / static review / A5 decision prerequisites without provider contact, image generation, memory write, production execution, runtime, prompt package file creation, real retouch, or real delivery.
+Agent Image Lab is in v13_008_premium_portable_led_camping_lantern_prompt_package_draft_gate. V13 drafted the fourth-product canonical prompt package for premium_portable_led_camping_lantern as a static-review input only. It is not A5 authorization and does not permit provider contact, image generation, .env.local read, output directory creation, memory write, production execution, runtime, real retouch, or real delivery.
 ```
 
 ## Current Phase
 
 ```text
+V13.008 Premium Portable LED Camping Lantern Prompt Package Draft Gate
+phase_id: v13_008_premium_portable_led_camping_lantern_prompt_package_draft_gate
+source_phase: v13_007_next_product_visual_production_trial_planning_gate
+status: completed_validated_prompt_package_draft_record
+source_commit: eaab60f16d3fef7467b5d2afc2b78e6e0ea3c150
+branch: master tracking origin/master
+selected_product: premium_portable_led_camping_lantern
+prompt_package_path: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml
+prompt_package_created: true
+canonical_prompt_field_present: true
+positive_prompt_present: true
+positive_prompt_synced: true
+negative_prompt_present: true
+A5_authorization_required_later: true
+A5_authorization_created: false
+A5_execution_started: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+output_directory_created: false
+runtime_execution: false
+real_retouch_execution: false
+commercial_delivery_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+package_lock_modified: false
+scripts_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: v13_009_premium_portable_led_camping_lantern_prompt_package_static_review_gate
+recommended_next_auto_execution_allowed: true
+next_phase_started: false
+---
 V13.007 Next Product Visual Production Trial Planning Gate
 phase_id: v13_007_next_product_visual_production_trial_planning_gate
 source_phase: v13_006_visual_production_loop_foundation_closeout_or_next_route_decision_gate
