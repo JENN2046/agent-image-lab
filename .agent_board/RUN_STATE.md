@@ -9,12 +9,55 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v13_010_premium_portable_led_camping_lantern_A5_authorization_decision_gate. V13 presents the camping lantern A5 path choices and stops before v13.011, A5 authorization, provider contact, image generation, .env.local read, output directory creation, memory write, production, runtime, retouch, or delivery.
+Agent Image Lab is in v13_011_camping_lantern_minimal_generation_authorization_draft_gate. V13 drafts a one-shot camping lantern generation authorization boundary only. It is not execution confirmation and does not allow provider contact, image generation, .env.local read, output directory creation, memory write, production, runtime, retouch, or delivery.
 ```
 
 ## Current Phase
 
 ```text
+V13.011 Camping Lantern Minimal Generation Authorization Draft Gate
+phase_id: v13_011_camping_lantern_minimal_generation_authorization_draft_gate
+source_phase: v13_010_premium_portable_led_camping_lantern_A5_authorization_decision_gate
+status: completed_validated_A5_authorization_draft_record
+source_commit: 7d6b16ab0baf54f95e7a05f3dc8395aef3061651
+branch: master tracking origin/master
+human_selected_option: authorize_one_minimal_real_generation_trial_later
+approved_product: premium_portable_led_camping_lantern
+approved_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml
+proposed_output_directory: runs/real_generation/v13_012_premium_portable_led_camping_lantern_first_trial/
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 1
+auto_retry: false
+stop_after_generation: true
+success_requires_verified_local_file: true
+human_review_required_after_success: true
+A5_authorization_draft_created: true
+A5_execution_started: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+output_directory_created: false
+runtime_execution: false
+real_retouch_execution: false
+commercial_delivery_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+package_lock_modified: false
+scripts_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: v13_012_camping_lantern_minimal_generation_execution_confirmation_gate
+recommended_next_auto_execution_allowed: false
+next_phase_started: false
+---
 V13.010 Premium Portable LED Camping Lantern A5 Authorization Decision Gate
 phase_id: v13_010_premium_portable_led_camping_lantern_A5_authorization_decision_gate
 source_phase: v13_009_premium_portable_led_camping_lantern_prompt_package_static_review_gate

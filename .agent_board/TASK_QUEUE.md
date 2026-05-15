@@ -9,6 +9,31 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v13_011_camping_lantern_minimal_generation_authorization_draft_gate.
+Purpose: draft one-shot camping lantern generation authorization boundaries only; no execution confirmation, no provider contact, no image generation, no .env.local read, no output directory creation, no memory write, no production, no runtime, no real retouch, no commercial delivery, no accepted_samples write, and no runs output commit.
+source_phase: v13_010_premium_portable_led_camping_lantern_A5_authorization_decision_gate.
+source_commit: 7d6b16ab0baf54f95e7a05f3dc8395aef3061651.
+human_selected_option: authorize_one_minimal_real_generation_trial_later.
+approved_product: premium_portable_led_camping_lantern.
+approved_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml.
+proposed_output_directory: runs/real_generation/v13_012_premium_portable_led_camping_lantern_first_trial/.
+provider_calls_max: 1.
+generation_attempts_max: 1.
+output_images_max: 1.
+auto_retry: false.
+stop_after_generation: true.
+success_requires_verified_local_file: true.
+human_review_required_after_success: true.
+A5_authorization_draft_created: true.
+A5_execution_started: false.
+provider_contact: false.
+image_generation: false.
+env_local_secret_value_read: false.
+output_directory_created: false.
+recommended_next: v13_012_camping_lantern_minimal_generation_execution_confirmation_gate.
+recommended_next_auto_execution_allowed: false.
+next_phase_started: false.
+---
 Current active gate: v13_010_premium_portable_led_camping_lantern_A5_authorization_decision_gate.
 Purpose: present camping lantern A5 path options and stop before any A5 authorization, execution confirmation, provider contact, image generation, .env.local read, output directory creation, memory write, production, runtime, real retouch, commercial delivery, accepted_samples write, or runs output commit.
 source_phase: v13_009_premium_portable_led_camping_lantern_prompt_package_static_review_gate.

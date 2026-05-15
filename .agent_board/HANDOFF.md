@@ -3,6 +3,36 @@
 ## Handoff Summary
 
 ```text
+Status: v13_011_camping_lantern_minimal_generation_authorization_draft_gate is the current A5 pre-execution authorization draft gate.
+Reason: Human selected v13.010 Option A. V13.011 drafts the one-shot camping lantern generation authorization boundaries but does not execute, confirm execution, read .env.local, create an output directory, contact providers, or generate images.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Source commit: 7d6b16ab0baf54f95e7a05f3dc8395aef3061651
+Current status: v13_011_camping_lantern_minimal_generation_authorization_draft_gate
+human_selected_option: authorize_one_minimal_real_generation_trial_later
+approved_product: premium_portable_led_camping_lantern
+approved_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml
+proposed_output_directory: runs/real_generation/v13_012_premium_portable_led_camping_lantern_first_trial/
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 1
+auto_retry: false
+stop_after_generation: true
+success_requires_verified_local_file: true
+human_review_required_after_success: true
+A5_authorization_draft_created: true
+A5_execution_started: false
+provider_contact: false
+image_generation: false
+env_local_secret_value_read: false
+output_directory_created: false
+memory_write: false
+production_candidate_002: false
+runtime_execution: false
+recommended_next: v13_012_camping_lantern_minimal_generation_execution_confirmation_gate
+recommended_next_auto_execution_allowed: false
+next_phase_started: false
+---
 Status: v13_010_premium_portable_led_camping_lantern_A5_authorization_decision_gate is the current A5 path decision gate.
 Reason: V13.009 returned pass_ready_for_A5_decision. V13.010 presents Option A/B/C and stops before any A5 authorization or provider execution.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
