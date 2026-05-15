@@ -3,6 +3,31 @@
 ## Handoff Summary
 
 ```text
+Status: v11_016_prompt_schema_hardening_validation_strategy_gate is the current docs-only validation strategy gate.
+Reason: v11.015 passed static review for the accepted candidate evidence package schema. v11.016 consolidates the V11 schema-level validation checks into a route-level fail/warn/info validation strategy, while leaving validator implementation and artifact migration for later gates.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current local HEAD before v11.016 patch: 37837e7 docs: review accepted candidate evidence package schema
+ahead_behind: 0/12 before v11.016 patch
+Worktree: clean before v11.016 patch
+Current status: v11_016_prompt_schema_hardening_validation_strategy_gate
+source_phase: v11_015_accepted_candidate_evidence_package_schema_static_review_gate
+source_commit: 37837e7a459a68df97be252702682b9411dc5bbd
+selected_route: prompt_schema_hardening
+validation_strategy_created: true
+fail_warn_info_severity_model_defined: true
+legacy_warning_policy_defined: true
+future_validator_shape_defined: true
+route_level_pass_condition_defined: true
+machine_validator_implemented: false
+existing_artifacts_migrated: false
+provider_contact_allowed_now: false
+image_generation_allowed_now: false
+memory_write_allowed_now: false
+production_candidate_002_allowed_now: false
+recommended_next: v11_017_prompt_schema_hardening_route_closeout_gate
+recommended_next_auto_execution_allowed: true
+---
 Status: v11_015_accepted_candidate_evidence_package_schema_static_review_gate is the current docs-only schema static review gate.
 Reason: v11.014 drafted the accepted candidate evidence package canonical schema. v11.015 statically reviews that schema and records pass_for_schema_static_review, while leaving route-level validation strategy, migration, and machine validator implementation for later gates.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

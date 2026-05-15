@@ -9,6 +9,16 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v11_016_prompt_schema_hardening_validation_strategy_gate.
+Purpose: consolidate V11 schema-level validation checks into a route-level validation strategy; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, dependency change, artifact migration, runner behavior change, or machine validator implementation.
+source_phase: v11_015_accepted_candidate_evidence_package_schema_static_review_gate.
+source_commit: 37837e7a459a68df97be252702682b9411dc5bbd.
+selected_route: prompt_schema_hardening.
+validation_strategy_created: true.
+route_level_pass_condition_defined: true.
+recommended_next: v11_017_prompt_schema_hardening_route_closeout_gate.
+recommended_next_auto_execution_allowed: true.
+---
 Current active gate: v11_015_accepted_candidate_evidence_package_schema_static_review_gate.
 Purpose: statically review accepted candidate evidence package canonical schema; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, dependency change, evidence package migration, commercial_delivery_ready promotion, or machine validator implementation.
 source_phase: v11_014_accepted_candidate_evidence_package_schema_draft_gate.

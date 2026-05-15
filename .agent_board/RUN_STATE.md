@@ -9,12 +9,47 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v11_015_accepted_candidate_evidence_package_schema_static_review_gate. This docs-only schema static review gate reviews the accepted candidate evidence package canonical schema without generating images, writing memory, copying output assets, or promoting delivery/production status.
+Agent Image Lab is in v11_016_prompt_schema_hardening_validation_strategy_gate. This docs-only validation strategy gate consolidates schema-level validation checks without implementing scripts, generating images, writing memory, copying output assets, or promoting delivery/production status.
 ```
 
 ## Current Phase
 
 ```text
+V11.016 Prompt Schema Hardening Validation Strategy Gate
+phase_id: v11_016_prompt_schema_hardening_validation_strategy_gate
+source_phase: v11_015_accepted_candidate_evidence_package_schema_static_review_gate
+status: completed_validated_local_commit_pending_remote_push_authorization
+source_commit: 37837e7a459a68df97be252702682b9411dc5bbd
+source_message: docs: review accepted candidate evidence package schema
+branch: master tracking origin/master
+origin_sync_current: local HEAD ahead origin/master by 12 before v11.016 patch
+ahead_behind: 0/12 before v11.016 patch
+selected_route: prompt_schema_hardening
+validation_strategy_created: true
+fail_warn_info_severity_model_defined: true
+legacy_warning_policy_defined: true
+future_validator_shape_defined: true
+route_level_pass_condition_defined: true
+machine_validator_implemented: false
+existing_artifacts_migrated: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: v11_017_prompt_schema_hardening_route_closeout_gate
+recommended_next_auto_execution_allowed: true
+---
 V11.015 Accepted Candidate Evidence Package Schema Static Review Gate
 phase_id: v11_015_accepted_candidate_evidence_package_schema_static_review_gate
 source_phase: v11_014_accepted_candidate_evidence_package_schema_draft_gate

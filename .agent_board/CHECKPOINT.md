@@ -1,5 +1,41 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V11.016 Prompt Schema Hardening Validation Strategy Gate
+
+```text
+phase_id: v11_016_prompt_schema_hardening_validation_strategy_gate
+status: completed_validated_local_commit_pending_remote_push_authorization
+source_phase: v11_015_accepted_candidate_evidence_package_schema_static_review_gate
+source_commit: 37837e7a459a68df97be252702682b9411dc5bbd
+purpose: consolidate V11 schema-level validation checks into a route-level validation strategy
+phase_record_ref: docs/v11_016_prompt_schema_hardening_validation_strategy_gate.md
+strategy_ref: docs/prompt_schema_hardening_validation_strategy.md
+selected_route: prompt_schema_hardening
+validation_strategy_created: true
+fail_warn_info_severity_model_defined: true
+legacy_warning_policy_defined: true
+future_validator_shape_defined: true
+route_level_pass_condition_defined: true
+machine_validator_implemented: false
+existing_artifacts_migrated: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: v11_017_prompt_schema_hardening_route_closeout_gate
+```
+
 # V11.015 Accepted Candidate Evidence Package Schema Static Review Gate
 
 ```text

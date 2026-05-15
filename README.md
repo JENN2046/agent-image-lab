@@ -7,6 +7,23 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current local baseline before v11.016 prompt schema hardening validation strategy: 37837e7a459a68df97be252702682b9411dc5bbd on master ahead origin/master by 12.
+Current mainline state: v11_016 creates the route-level prompt schema hardening validation strategy. It consolidates product brief, prompt package, static review, A5 authorization, human review, and accepted candidate evidence package checks into fail/warn/info validation tiers. It defines a future validator shape but does not implement scripts, migrate artifacts, generate images, write memory, enter production, or change runner behavior.
+Current phase id: v11_016_prompt_schema_hardening_validation_strategy_gate.
+selected_route: prompt_schema_hardening.
+validation_strategy_created: true.
+fail_warn_info_severity_model_defined: true.
+legacy_warning_policy_defined: true.
+future_validator_shape_defined: true.
+route_level_pass_condition_defined: true.
+machine_validator_implemented: false.
+existing_artifacts_migrated: false.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+memory_write_allowed_now: false.
+production_candidate_002_allowed_now: false.
+recommended_next: v11_017_prompt_schema_hardening_route_closeout_gate.
+recommended_next_auto_execution_allowed: true.
 Current local baseline before v11.015 accepted candidate evidence package schema static review: 3fe36ab9f5369cfc533434433bca95ebc079b487 on master ahead origin/master by 11.
 Current mainline state: v11_015 statically reviews the accepted candidate evidence package canonical schema. Result: pass_for_schema_static_review. It confirms source_output and prompt_package canonical keys, lineage, human-review-backed accepted_candidate decision, commercial_delivery_ready separation, memory_suitability deferred policy, rationale/strengths/watch items, no accepted_samples write, no runs output commit, and no production promotion. It does not migrate evidence packages, generate images, write memory, enter production, or implement a validator.
 Current phase id: v11_015_accepted_candidate_evidence_package_schema_static_review_gate.
