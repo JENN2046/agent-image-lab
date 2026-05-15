@@ -92,7 +92,17 @@ positive_prompt: |
   Premium soft studio lighting, soft controlled highlights on frosted glass, dropper cap, and label area, tidy refined contact shadow, realistic glass material, quiet luxury skincare mood, product dominant composition, no people, no hands, no props, no extra bottles, no logo, no readable text, no watermark, no overdecorated spa clutter, no cheap plastic material drift.
 
 negative_prompt: |
-  readable brand logo, fake text, random text, random letters, broken label, watermark, people, hands, face, model, flowers, spa stones, leaves, towels, boxes, extra bottles, extra products, overdecorated luxury scene, cluttered props, perfume bottle, medicine bottle, candle jar, beverage bottle, lotion pump bottle, generic plastic container, pump dispenser, malformed dropper cap, fused cap, broken cap, crooked cap, impossible cap geometry, distorted bottle, warped bottle silhouette, messy liquid distortion, cheap plastic material, metallic bottle body, noisy reflections, impossible reflections, harsh glare, mirror-like glare, background overpowering product, product too small, cut-off cap, cut-off base, CGI look, illustration, cartoon, low resolution
+  readable brand logo, fake text, random text, random letters, broken label, watermark,
+  people, hands, face, model,
+  flowers, spa stones, leaves, towels, boxes, extra bottles, extra products,
+  overdecorated luxury scene, cluttered props,
+  perfume bottle, medicine bottle, candle jar, beverage bottle, lotion pump bottle, generic plastic container,
+  pump dispenser, malformed dropper cap, fused cap, broken cap, crooked cap, impossible cap geometry,
+  distorted bottle, warped bottle silhouette, messy liquid distortion,
+  cheap plastic material, metallic bottle body,
+  noisy reflections, impossible reflections, harsh glare, mirror-like glare,
+  background overpowering product, product too small, cut-off cap, cut-off base,
+  CGI look, illustration, cartoon, low resolution
 
 negative_constraints:
   product_identity:

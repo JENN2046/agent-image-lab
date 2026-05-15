@@ -1,10 +1,50 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V10.006 Third Product Prompt Package Static Review And YAML Format Fix Gate
+
+```text
+phase_id: v10_006_third_product_prompt_package_static_review_and_yaml_format_fix_gate
+status: completed_pending_validation_commit_push
+source_phase: v10_005_third_product_prompt_package_draft_gate
+source_commit: 19c6a5a7f71d2af208c381a23a4c5ab0771ba533
+purpose: statically review serum bottle prompt package and fix YAML readability / runner-shape risk
+phase_record_ref: docs/v10_006_third_product_prompt_package_static_review_gate.md
+static_review_ref: reviews/v10_006_third_product_prompt_package_static_review.md
+prompt_package_ref: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+selected_route: third_product_prompt_workflow_expansion
+selected_product: cosmetic_skincare_bottle / premium_serum_bottle
+yaml_format_fixed: true
+canonical_prompt_field_present: true
+canonical_prompt_field_independent_line: true
+positive_prompt_present: true
+positive_prompt_synced: true
+negative_prompt_present: true
+structure_lock_verified: true
+material_constraints_verified: true
+label_text_boundary_verified: true
+static_review_result: pass_for_static_review
+A5_authorization_created: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+recommended_next: v10_007_third_product_A5_authorization_decision_gate
+```
+
 # V10.005 Third Product Prompt Package Draft Gate
 
 ```text
 phase_id: v10_005_third_product_prompt_package_draft_gate
-status: completed_pending_validation_commit_push
+status: completed_remote_synced_after_guarded_push
 source_phase: v10_004_third_product_brief_gate
 source_commit: d3d2f41b44fb696d3bdaf1fc9e9c64d2f69e6d2f
 purpose: create docs-only prompt package draft for premium serum bottle

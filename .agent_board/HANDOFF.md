@@ -3,6 +3,35 @@
 ## Handoff Summary
 
 ```text
+Status: v10_006_third_product_prompt_package_static_review_and_yaml_format_fix_gate is the current docs-only static review and YAML format fix gate.
+Reason: v10.006 statically reviews the premium serum bottle prompt package, confirms product identity / structure lock / material / label / composition boundaries, and reformats negative_prompt into a readable multi-line literal block while preserving independent prompt, positive_prompt, and negative_prompt fields. It does not create A5 authorization, provider contact, image generation, memory write, production, accepted_samples, or runs output.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v10.006 patch: 19c6a5a docs: add third product prompt package draft
+ahead_behind: 0/0
+Worktree: clean before v10.006 patch; generated runs output remains ignored and is not staged or committed
+Current status: v10_006_third_product_prompt_package_static_review_and_yaml_format_fix_gate
+source_phase: v10_005_third_product_prompt_package_draft_gate
+selected_route: third_product_prompt_workflow_expansion
+selected_product: cosmetic_skincare_bottle / premium_serum_bottle
+prompt_package_path: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+yaml_format_fixed: true
+static_review_result: pass_for_static_review
+A5_authorization_created: false
+provider_contact_allowed_now: false
+image_generation_allowed_now: false
+memory_write_allowed: false
+production_candidate_002_allowed: false
+v10_006_provider_contact: false
+v10_006_image_generation: false
+v10_006_retry: false
+v10_006_env_local_secret_value_read: false
+v10_006_memory_write: false
+v10_006_accepted_samples_written: false
+v10_006_runs_output_committed: false
+recommended_next: v10_007_third_product_A5_authorization_decision_gate
+recommended_next_auto_execution_allowed: false
+---
 Status: v10_005_third_product_prompt_package_draft_gate is the current docs-only prompt package draft gate.
 Reason: v10.005 creates the premium serum bottle prompt package draft with canonical prompt, positive_prompt alias, negative_prompt, structure lock, material constraints, acceptance criteria, and human review checklist while staying before A5 authorization, provider contact, image generation, memory write, runtime, production, accepted_samples, or runs output creation.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

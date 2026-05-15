@@ -9,16 +9,55 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v10_005_third_product_prompt_package_draft_gate. This docs-only gate creates the premium serum bottle prompt package draft with canonical prompt, positive_prompt alias, negative_prompt, product identity, structure lock, acceptance criteria, and human review checklist; it does not create A5 authorization, edit images, create derivatives, generate images, contact providers, write memory, write accepted_samples, promote production, execute delivery, or set commercial_delivery_ready=true.
+Agent Image Lab is in v10_006_third_product_prompt_package_static_review_and_yaml_format_fix_gate. This docs-only gate statically reviews the premium serum bottle prompt package and applies a YAML readability fix to negative_prompt while preserving independent prompt / positive_prompt / negative_prompt fields; it does not create A5 authorization, edit images, create derivatives, generate images, contact providers, write memory, write accepted_samples, promote production, execute delivery, or set commercial_delivery_ready=true.
 ```
 
 ## Current Phase
 
 ```text
+V10.006 Third Product Prompt Package Static Review And YAML Format Fix Gate
+phase_id: v10_006_third_product_prompt_package_static_review_and_yaml_format_fix_gate
+source_phase: v10_005_third_product_prompt_package_draft_gate
+status: completed_pending_validation_commit_push
+source_commit: 19c6a5a7f71d2af208c381a23a4c5ab0771ba533
+source_message: docs: add third product prompt package draft
+branch: master tracking origin/master
+origin_sync_current: local HEAD equals origin/master at 19c6a5a before v10.006 patch
+ahead_behind: 0/0 before v10.006 patch
+selected_route: third_product_prompt_workflow_expansion
+selected_product: cosmetic_skincare_bottle / premium_serum_bottle
+prompt_package_path: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+yaml_format_fixed: true
+canonical_prompt_field_present: true
+canonical_prompt_field_independent_line: true
+positive_prompt_present: true
+positive_prompt_synced: true
+negative_prompt_present: true
+structure_lock_verified: true
+material_constraints_verified: true
+label_text_boundary_verified: true
+static_review_result: pass_for_static_review
+A5_authorization_created: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+recommended_next: v10_007_third_product_A5_authorization_decision_gate
+recommended_next_auto_execution_allowed: false
+---
 V10.005 Third Product Prompt Package Draft Gate
 phase_id: v10_005_third_product_prompt_package_draft_gate
 source_phase: v10_004_third_product_brief_gate
-status: completed_pending_validation_commit_push
+status: completed_remote_synced_after_guarded_push
 source_commit: d3d2f41b44fb696d3bdaf1fc9e9c64d2f69e6d2f
 source_message: docs: add third product brief for serum bottle
 branch: master tracking origin/master

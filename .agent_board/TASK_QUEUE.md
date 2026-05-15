@@ -9,6 +9,19 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v10_006_third_product_prompt_package_static_review_and_yaml_format_fix_gate.
+Purpose: statically review prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml, verify prompt / positive_prompt / negative_prompt YAML shape, verify serum bottle product identity / structure lock / material / label / reflection / composition constraints, and stop before any A5 authorization or provider/image execution.
+source_phase: v10_005_third_product_prompt_package_draft_gate.
+source_commit: 19c6a5a7f71d2af208c381a23a4c5ab0771ba533.
+selected_route: third_product_prompt_workflow_expansion.
+selected_product: cosmetic_skincare_bottle / premium_serum_bottle.
+prompt_package_path: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml.
+yaml_format_fixed: true.
+static_review_result: pass_for_static_review.
+A5_authorization_created: false.
+recommended_next: v10_007_third_product_A5_authorization_decision_gate.
+recommended_next_auto_execution_allowed: false.
+---
 Current active gate: v10_005_third_product_prompt_package_draft_gate.
 Purpose: create the docs-only prompt package draft for cosmetic_skincare_bottle / premium_serum_bottle at prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml; include canonical prompt, positive_prompt alias, negative_prompt, structure lock, material constraints, acceptance criteria, and human review checklist; no A5 authorization, provider contact, generation, retry, real retouch execution, image editing, derivative image creation, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, runs output creation, real commercial delivery execution, commercial_delivery_ready=true, or automatic provider/image execution.
 source_phase: v10_004_third_product_brief_gate.
