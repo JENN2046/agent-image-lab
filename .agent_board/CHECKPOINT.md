@@ -1,5 +1,43 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V12.004 Prompt Schema Validator Fixture Planning Closeout Or Implementation Decision Gate
+
+```text
+phase_id: v12_004_prompt_schema_validator_fixture_planning_closeout_or_implementation_decision_gate
+status: completed_validated_decision_gate_record
+source_phase: v12_003_prompt_schema_validator_rule_specification_gate
+source_commit: c27e77afb5e9cdd3b3a5b5d7ad25a52fe4ee9af5
+purpose: present V12 validator path options and stop before implementation
+phase_record_ref: docs/v12_004_prompt_schema_validator_fixture_planning_closeout_or_implementation_decision_gate.md
+selected_route: prompt_schema_machine_validator_implementation_planning
+rule_specification_created: true
+fixture_matrix_created: true
+options_presented: continue_fixture_planning_as_docs_only | enter_validator_implementation_authorization_gate | close_v12_planning_route
+recommended_option: enter_validator_implementation_authorization_gate
+human_decision_required: true
+machine_validator_implemented: false
+fixture_files_created: false
+scripts_modified: false
+package_json_modified: false
+package_lock_modified: false
+dependency_change: false
+existing_artifacts_migrated: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: pending_human_prompt_schema_validator_implementation_path_selection
+```
+
 # V12.003 Prompt Schema Validator Rule Specification Gate
 
 ```text

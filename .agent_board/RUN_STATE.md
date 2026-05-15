@@ -9,12 +9,47 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v12_003_prompt_schema_validator_rule_specification_gate. V12 is specifying future prompt schema validator rules and fixture matrix planning from the v12.002 plan. This docs-only gate does not implement validators, create fixtures, modify scripts, migrate artifacts, generate images, write memory, copy output assets, enter production, or enter runtime.
+Agent Image Lab is in v12_004_prompt_schema_validator_fixture_planning_closeout_or_implementation_decision_gate. V12 is deciding whether to continue fixture planning as docs-only, enter a validator implementation authorization gate, or close V12 planning. This docs-only gate does not implement validators, create fixtures, create tests/fixtures, modify scripts, migrate artifacts, generate images, write memory, copy output assets, enter production, or enter runtime.
 ```
 
 ## Current Phase
 
 ```text
+V12.004 Prompt Schema Validator Fixture Planning Closeout Or Implementation Decision Gate
+phase_id: v12_004_prompt_schema_validator_fixture_planning_closeout_or_implementation_decision_gate
+source_phase: v12_003_prompt_schema_validator_rule_specification_gate
+status: completed_validated_decision_gate_record
+source_commit: c27e77afb5e9cdd3b3a5b5d7ad25a52fe4ee9af5
+branch: master tracking origin/master
+selected_route: prompt_schema_machine_validator_implementation_planning
+rule_specification_created: true
+fixture_matrix_created: true
+options_presented: continue_fixture_planning_as_docs_only | enter_validator_implementation_authorization_gate | close_v12_planning_route
+recommended_option: enter_validator_implementation_authorization_gate
+human_decision_required: true
+machine_validator_implemented: false
+fixture_files_created: false
+scripts_modified: false
+existing_artifacts_migrated: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+package_lock_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: pending_human_prompt_schema_validator_implementation_path_selection
+recommended_next_auto_execution_allowed: false
+---
 V12.003 Prompt Schema Validator Rule Specification Gate
 phase_id: v12_003_prompt_schema_validator_rule_specification_gate
 source_phase: v12_002_prompt_schema_machine_validator_implementation_planning_gate

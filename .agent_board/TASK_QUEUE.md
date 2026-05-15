@@ -9,6 +9,23 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v12_004_prompt_schema_validator_fixture_planning_closeout_or_implementation_decision_gate.
+Purpose: present the next path decision after v12.003 rule specification and fixture matrix planning; no validator code, scripts changes, fixture files, tests/fixtures directory creation, dependency changes, artifact migration, prompt package changes, provider contact, image generation, memory write, production, or runtime.
+source_phase: v12_003_prompt_schema_validator_rule_specification_gate.
+source_commit: c27e77afb5e9cdd3b3a5b5d7ad25a52fe4ee9af5.
+selected_route: prompt_schema_machine_validator_implementation_planning.
+rule_specification_created: true.
+fixture_matrix_created: true.
+options_presented: continue_fixture_planning_as_docs_only | enter_validator_implementation_authorization_gate | close_v12_planning_route.
+recommended_option: enter_validator_implementation_authorization_gate.
+human_decision_required: true.
+machine_validator_implemented: false.
+fixture_files_created: false.
+scripts_modified: false.
+existing_artifacts_migrated: false.
+recommended_next: pending_human_prompt_schema_validator_implementation_path_selection.
+recommended_next_auto_execution_allowed: false.
+---
 Current active gate: v12_003_prompt_schema_validator_rule_specification_gate.
 Purpose: specify future prompt schema validator rules and fixture matrix from v12.002 plan; no validator code, scripts changes, fixture files, dependency changes, artifact migration, prompt package changes, provider contact, image generation, memory write, production, or runtime.
 source_phase: v12_002_prompt_schema_machine_validator_implementation_planning_gate.

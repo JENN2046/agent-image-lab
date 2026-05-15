@@ -3,6 +3,25 @@
 ## Handoff Summary
 
 ```text
+Status: v12_004_prompt_schema_validator_fixture_planning_closeout_or_implementation_decision_gate is the current docs-only path decision gate.
+Reason: v12.003 created the validator rule specification and fixture matrix planning. v12.004 presents whether to continue fixture planning as docs-only, enter a validator implementation authorization gate, or close V12 planning, without implementing code or creating fixtures.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Source commit: c27e77afb5e9cdd3b3a5b5d7ad25a52fe4ee9af5
+Current status: v12_004_prompt_schema_validator_fixture_planning_closeout_or_implementation_decision_gate
+selected_route: prompt_schema_machine_validator_implementation_planning
+rule_specification_created: true
+fixture_matrix_created: true
+options_presented: continue_fixture_planning_as_docs_only | enter_validator_implementation_authorization_gate | close_v12_planning_route
+recommended_option: enter_validator_implementation_authorization_gate
+human_decision_required: true
+machine_validator_implemented: false
+fixture_files_created: false
+scripts_modified: false
+existing_artifacts_migrated: false
+recommended_next: pending_human_prompt_schema_validator_implementation_path_selection
+recommended_next_auto_execution_allowed: false
+---
 Status: v12_003_prompt_schema_validator_rule_specification_gate is the current docs-only validator rule specification / fixture matrix gate.
 Reason: v12.002 created the implementation plan and rule inventory. v12.003 specifies concrete prompt schema validator rules, severity behavior, legacy compatibility cases, and planned fixture names without implementing code or creating fixtures.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
