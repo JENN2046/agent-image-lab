@@ -1,5 +1,6 @@
 const fs = require("node:fs");
 const path = require("node:path");
+const { execFileSync } = require("node:child_process");
 
 const root = path.resolve(__dirname, "..");
 const boardRoot = path.join(root, ".agent_board");
@@ -26,6 +27,39 @@ function assert(condition, message) {
   if (!condition) {
     throw new Error(message);
   }
+}
+
+function getAheadBehind() {
+  try {
+    const output = execFileSync("git", ["rev-list", "--left-right", "--count", "origin/master...master"], {
+      cwd: root,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "pipe"]
+    }).trim();
+    const [behindRaw, aheadRaw] = output.split(/\s+/);
+    return {
+      behind: Number.parseInt(behindRaw, 10),
+      ahead: Number.parseInt(aheadRaw, 10),
+      raw: output
+    };
+  } catch (error) {
+    return null;
+  }
+}
+
+function getCurrentPhaseBlock(runState) {
+  const phaseMatch = runState.match(/phase_id:\s*([^\s]+)/);
+  if (!phaseMatch) {
+    return { phaseId: null, block: "" };
+  }
+
+  const start = phaseMatch.index;
+  const nextSeparator = runState.indexOf("---", start);
+  const block = nextSeparator === -1 ? runState.slice(start) : runState.slice(start, nextSeparator);
+  return {
+    phaseId: phaseMatch[1],
+    block
+  };
 }
 
 function main() {
@@ -86,6 +120,14 @@ function main() {
     "Push/tag/release"
   ]);
 
+  const aheadBehind = getAheadBehind();
+  const currentPhase = getCurrentPhaseBlock(runState);
+  const branchIsSynced = aheadBehind && aheadBehind.behind === 0 && aheadBehind.ahead === 0;
+  const currentPhaseHasPostPushPendingStatus = currentPhase.block.includes(
+    "completed_validated_pending_guarded_commit_and_push"
+  );
+  const postPushStatusSyncVerified = !branchIsSynced || !currentPhaseHasPostPushPendingStatus;
+
   const phaseFreshnessVerified = hasAll(runState + handoff + checkpoint + taskQueue, [
     "Validator Governance Chain v1: closed",
     "batch_005_allowed_now: false",
@@ -102,6 +144,10 @@ function main() {
   assert(handoffResumePromptPresent, "Agent board handoff must include guarded resume prompt.");
   assert(overlaySeparationDecisionPresent, "Agent board decisions must keep overlay separate from root AGENTS.md.");
   assert(localWorkStateDeclared, "Agent board must declare current local work state.");
+  assert(
+    postPushStatusSyncVerified,
+    `Current phase ${currentPhase.phaseId || "(unknown)"} still uses completed_validated_pending_guarded_commit_and_push while master equals origin/master. Run post-push status sync and use completed_remote_synced_after_guarded_push.`
+  );
   assert(phaseFreshnessVerified, "Agent board phase freshness check failed: stale board state detected (governance chain / v7.170 state not reflected).");
 
   const result = {
@@ -117,6 +163,9 @@ function main() {
       handoff_resume_prompt_present: handoffResumePromptPresent,
       overlay_separation_decision_present: overlaySeparationDecisionPresent,
       local_work_state_declared: localWorkStateDeclared,
+      post_push_status_sync_verified: postPushStatusSyncVerified,
+      ahead_behind: aheadBehind ? aheadBehind.raw : "unavailable",
+      current_phase_checked: currentPhase.phaseId,
       phase_freshness_verified: phaseFreshnessVerified,
       external_network_required: false,
       external_service_required: false,
