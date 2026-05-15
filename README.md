@@ -7,6 +7,24 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current synced baseline before v10.009 third product minimal generation authorization draft: caf3e68d471cfed7f9e3a61cca015aa476fbda50 on master == origin/master.
+Current mainline state: v10_009 records human selection of v10.007 Option A and creates an A5 authorization draft for one minimal premium serum bottle generation trial. It does not execute provider contact, image generation, .env.local read, output directory creation, memory write, or runs output commit.
+Current phase id: v10_009_third_product_minimal_generation_authorization_draft_gate.
+human_selected_option: authorize_one_minimal_real_generation_trial.
+approved_product: cosmetic_skincare_bottle / premium_serum_bottle.
+prompt_package_path: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml.
+proposed_output_directory: runs/real_generation/v10_010_premium_serum_bottle_first_trial/.
+provider_calls_max: 1.
+generation_attempts_max: 1.
+output_images_max: 1.
+auto_retry: false.
+A5_authorization_draft_created: true.
+A5_execution_started: false.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+env_local_secret_value_read_allowed_now: false.
+recommended_next: v10_010_third_product_minimal_generation_execution_confirmation_gate.
+recommended_next_auto_execution_allowed: false.
 Current synced baseline after v10.008 remote sync correction: 089069cee8e48f8338b3b78cb8c784d2725bf564 on master == origin/master.
 Current mainline state: v10_008_remote_sync_and_status_surface_correction_gate confirms the local branch fast-forwarded to origin/master and corrects v10.007 as completed_remote_synced_after_guarded_push; no A5 authorization or provider execution starts here.
 Current phase id: v10_008_remote_sync_and_status_surface_correction_gate.

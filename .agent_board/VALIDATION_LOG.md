@@ -1,5 +1,41 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260515-v10.009-THIRD-PRODUCT-MINIMAL-GENERATION-AUTHORIZATION-DRAFT
+
+Task:
+
+```text
+Record human selection of v10.007 Option A and draft a bounded one-shot A5 generation package.
+```
+
+Result:
+
+```text
+human_selected_option: authorize_one_minimal_real_generation_trial
+approved_product: cosmetic_skincare_bottle / premium_serum_bottle
+prompt_package_path: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+proposed_output_directory: runs/real_generation/v10_010_premium_serum_bottle_first_trial/
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 1
+auto_retry: false
+A5_authorization_draft_created: true
+A5_execution_started: false
+provider_contact: false
+image_generation: false
+memory_write_performed: false
+production_candidate_002_started: false
+accepted_samples_written: false
+runs_output_committed: false
+validation_result: passed_with_existing_manual_review_warnings_only
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, secret print, DailyNote write, VCP memory write, memory_write_path, production_candidate_002, Batch 005, runtime/CDP/bridge/MCP, dependency change, package.json change, accepted_samples write, runs output commit, image editing, derivative image creation, real retouch execution, commercial_delivery_ready=true, real commercial delivery execution, real output directory creation, or A5 execution is performed by v10.009.
+```
+
 ## VALIDATION-20260515-v10.008-REMOTE-SYNC-AND-STATUS-SURFACE-CORRECTION
 
 Task:

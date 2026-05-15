@@ -3,6 +3,31 @@
 ## Handoff Summary
 
 ```text
+Status: v10_009_third_product_minimal_generation_authorization_draft_gate is the current docs-only A5 authorization draft gate.
+Reason: Human selected v10.007 Option A. v10.009 records the selection and drafts the exact one-shot generation package, but does not execute provider contact, read .env.local, generate images, create output directories, write memory, or commit runs output.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v10.009 patch: caf3e68 docs: sync remote status after v10.007
+ahead_behind: 0/0
+Worktree: clean before v10.009 patch; generated runs output remains ignored and is not staged or committed
+Current status: v10_009_third_product_minimal_generation_authorization_draft_gate
+source_phase: v10_007_third_product_A5_authorization_decision_gate
+human_selected_option: authorize_one_minimal_real_generation_trial
+approved_product: cosmetic_skincare_bottle / premium_serum_bottle
+prompt_package_path: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+proposed_output_directory: runs/real_generation/v10_010_premium_serum_bottle_first_trial/
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 1
+auto_retry: false
+A5_authorization_draft_created: true
+A5_execution_started: false
+provider_contact_allowed_now: false
+image_generation_allowed_now: false
+env_local_secret_value_read_allowed_now: false
+recommended_next: v10_010_third_product_minimal_generation_execution_confirmation_gate
+recommended_next_auto_execution_allowed: false
+---
 Status: v10_008_remote_sync_and_status_surface_correction_gate is the current docs-only remote sync checkpoint.
 Reason: Local master fast-forwarded to origin/master at 089069c, and v10.007 is being corrected from pending validation/commit/push wording to completed_remote_synced_after_guarded_push. This does not create A5 authorization or start provider execution.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

@@ -9,16 +9,52 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v10_008_remote_sync_and_status_surface_correction_gate. This docs-only checkpoint records the fast-forward to origin/master and corrects v10.007 status to completed_remote_synced_after_guarded_push; it does not create A5 authorization, generate images, contact providers, read .env.local values, write memory, write accepted_samples, promote production, create output directories, or execute delivery.
+Agent Image Lab is in v10_009_third_product_minimal_generation_authorization_draft_gate. This docs-only gate records the human selection of v10.007 Option A and drafts a one-shot A5 package, but it does not execute provider contact, read .env.local values, generate images, create output directories, write memory, write accepted_samples, promote production, or execute delivery.
 ```
 
 ## Current Phase
 
 ```text
+V10.009 Third Product Minimal Generation Authorization Draft Gate
+phase_id: v10_009_third_product_minimal_generation_authorization_draft_gate
+source_phase: v10_007_third_product_A5_authorization_decision_gate
+status: completed_validated_pending_guarded_commit
+source_commit: caf3e68d471cfed7f9e3a61cca015aa476fbda50
+source_message: docs: sync remote status after v10.007
+branch: master tracking origin/master
+origin_sync_current: local HEAD equals origin/master at caf3e68 before v10.009 patch
+ahead_behind: 0/0 before v10.009 patch
+human_selected_option: authorize_one_minimal_real_generation_trial
+approved_product: cosmetic_skincare_bottle / premium_serum_bottle
+prompt_package_path: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+proposed_output_directory: runs/real_generation/v10_010_premium_serum_bottle_first_trial/
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 1
+auto_retry: false
+A5_authorization_draft_created: true
+A5_execution_started: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+real_output_directory_created: false
+recommended_next: v10_010_third_product_minimal_generation_execution_confirmation_gate
+recommended_next_auto_execution_allowed: false
+---
 V10.008 Remote Sync And Status Surface Correction Gate
 phase_id: v10_008_remote_sync_and_status_surface_correction_gate
 source_phase: v10_007_third_product_A5_authorization_decision_gate
-status: completed_validated_pending_guarded_push
+status: completed_remote_synced_after_guarded_push
 source_commit: 089069cee8e48f8338b3b78cb8c784d2725bf564
 source_message: docs: decide third product A5 generation path
 branch: master tracking origin/master

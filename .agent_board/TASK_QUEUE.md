@@ -9,6 +9,22 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v10_009_third_product_minimal_generation_authorization_draft_gate.
+Purpose: record human selection of v10.007 Option A and draft a bounded one-shot A5 generation package; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, output directory creation, or automatic provider/image execution.
+source_phase: v10_007_third_product_A5_authorization_decision_gate.
+source_commit: caf3e68d471cfed7f9e3a61cca015aa476fbda50.
+human_selected_option: authorize_one_minimal_real_generation_trial.
+approved_product: cosmetic_skincare_bottle / premium_serum_bottle.
+prompt_package_path: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml.
+proposed_output_directory: runs/real_generation/v10_010_premium_serum_bottle_first_trial/.
+provider_calls_max: 1.
+generation_attempts_max: 1.
+output_images_max: 1.
+A5_authorization_draft_created: true.
+A5_execution_started: false.
+recommended_next: v10_010_third_product_minimal_generation_execution_confirmation_gate.
+recommended_next_auto_execution_allowed: false.
+---
 Current active gate: v10_008_remote_sync_and_status_surface_correction_gate.
 Purpose: record that local master fast-forwarded to origin/master and correct v10.007 status surfaces to completed_remote_synced_after_guarded_push; no A5 authorization creation, provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, output directory creation, or automatic provider/image execution.
 source_phase: v10_007_third_product_A5_authorization_decision_gate.
@@ -776,13 +792,13 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-none — v10_008_remote_sync_and_status_surface_correction_gate is completed_validated_pending_guarded_push.
+none — v10_009_third_product_minimal_generation_authorization_draft_gate is completed_validated_pending_guarded_commit.
 ```
 
 ### todo
 
 ```text
-v9_003_delivery_readiness_acceptance_criteria_gate — recommended next gate only; no automatic execution.
+v10_010_third_product_minimal_generation_execution_confirmation_gate — human must confirm exact A5 execution package before provider execution.
 ```
 
 ### recommended_next_after_v7_285
