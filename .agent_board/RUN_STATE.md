@@ -9,12 +9,60 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v13_012_camping_lantern_minimal_generation_execution_confirmation_gate. V13 confirms the camping lantern one-shot execution boundary for future human review only. Execution has not started and provider contact, image generation, .env.local read, output directory creation, memory write, production, runtime, retouch, and delivery remain forbidden until a separate v13.013 authorization.
+Agent Image Lab is in v13_012_camping_lantern_A5_pre_execution_package_gate. V13 consolidates the camping lantern one-shot authorization draft into a complete pre-execution package for future human authorization only. Execution has not started and provider contact, image generation, .env.local read, output directory creation, memory write, production, runtime, retouch, and delivery remain forbidden until a separate v13.013 authorization.
 ```
 
 ## Current Phase
 
 ```text
+V13.012 Camping Lantern A5 Pre-Execution Package Gate
+phase_id: v13_012_camping_lantern_A5_pre_execution_package_gate
+source_phase: v13_011_camping_lantern_minimal_generation_authorization_draft_gate
+status: completed_validated_pre_execution_package_record
+source_commit: 4d8420ed75aa53f96c9a095050591388f4c1bd03
+branch: master tracking origin/master
+approved_product: premium_portable_led_camping_lantern
+approved_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml
+output_directory: runs/real_generation/v13_012_premium_portable_led_camping_lantern_first_trial/
+provider_calls_max: 1
+generation_attempts_max: 1
+output_images_max: 1
+auto_retry: false
+second_provider_call_allowed: false
+second_generation_attempt_allowed: false
+stop_after_generation: true
+stop_after_one_attempt_even_if_failed: true
+success_requires_verified_local_file: true
+human_review_required_after_success: true
+failed_no_local_output_file_policy_defined: true
+local_file_verification_required: true
+secret_read_boundary: only during v13.013 execution if human explicitly authorizes
+A5_execution_started: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+secret_value_recorded: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+output_directory_created: false
+runtime_execution: false
+real_retouch_execution: false
+commercial_delivery_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+package_lock_modified: false
+scripts_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: pending_human_camping_lantern_one_minimal_real_generation_execution_authorization
+recommended_next_auto_execution_allowed: false
+next_phase_started: false
+---
 V13.012 Camping Lantern Minimal Generation Execution Confirmation Gate
 phase_id: v13_012_camping_lantern_minimal_generation_execution_confirmation_gate
 source_phase: v13_011_camping_lantern_minimal_generation_authorization_draft_gate
