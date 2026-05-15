@@ -9,12 +9,46 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v11_004_prompt_package_schema_draft_gate. This docs-only schema draft gate defines the canonical prompt package shape and validation strategy without changing prompt packages or execution behavior.
+Agent Image Lab is in v11_005_prompt_package_schema_static_review_gate. This docs-only static review gate reviews the prompt package canonical schema against v11.003 inventory risks without changing prompt packages or execution behavior.
 ```
 
 ## Current Phase
 
 ```text
+V11.005 Prompt Package Schema Static Review Gate
+phase_id: v11_005_prompt_package_schema_static_review_gate
+source_phase: v11_004_prompt_package_schema_draft_gate
+status: completed_validated_local_commit_pending_remote_push_authorization
+source_commit: 270dd3af89eb8d932319b4cad16da597127db08c
+source_message: docs: draft prompt package canonical schema
+branch: master tracking origin/master
+origin_sync_current: local HEAD ahead origin/master by 1 before v11.005 patch
+ahead_behind: 0/1 before v11.005 patch
+selected_route: prompt_schema_hardening
+prompt_package_schema_static_review_completed: true
+prompt_package_schema_static_review_result: pass_for_schema_static_review
+machine_validator_implemented: false
+prompt_package_behavior_changed: false
+runner_behavior_changed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+A5_generation_authorization_created: false
+recommended_next: v11_006_product_brief_schema_draft_gate
+recommended_next_auto_execution_allowed: true
+---
 V11.004 Prompt Package Schema Draft Gate
 phase_id: v11_004_prompt_package_schema_draft_gate
 source_phase: v11_003_existing_prompt_artifact_schema_inventory_gate

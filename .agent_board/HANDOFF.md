@@ -3,6 +3,29 @@
 ## Handoff Summary
 
 ```text
+Status: v11_005_prompt_package_schema_static_review_gate is the current docs-only schema static review gate.
+Reason: v11.004 drafted the prompt package canonical schema. v11.005 statically reviews that schema against v11.003 inventory risks and records pass_for_schema_static_review, while leaving machine validator implementation, prompt package migration, product brief schema, static review schema, A5 authorization schema, human review schema, and evidence package schema for later gates.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current local HEAD before v11.005 patch: 270dd3a docs: draft prompt package canonical schema
+ahead_behind: 0/1 before v11.005 patch
+Worktree: clean before v11.005 patch
+Current status: v11_005_prompt_package_schema_static_review_gate
+source_phase: v11_004_prompt_package_schema_draft_gate
+source_commit: 270dd3af89eb8d932319b4cad16da597127db08c
+selected_route: prompt_schema_hardening
+prompt_package_schema_static_review_completed: true
+prompt_package_schema_static_review_result: pass_for_schema_static_review
+machine_validator_implemented: false
+prompt_package_behavior_changed: false
+runner_behavior_changed: false
+provider_contact_allowed_now: false
+image_generation_allowed_now: false
+memory_write_allowed_now: false
+production_candidate_002_allowed_now: false
+recommended_next: v11_006_product_brief_schema_draft_gate
+recommended_next_auto_execution_allowed: true
+---
 Status: v11_004_prompt_package_schema_draft_gate is the current docs-only schema draft gate.
 Reason: v11.003 inventoried prompt workflow schema drift. v11.004 drafts the canonical prompt package schema and validation strategy covering runner-facing `prompt`, `positive_prompt` synchronization, YAML literal block shape, product identity, structure lock, material constraints, scene constraints, text/logo boundaries, acceptance criteria, human review checklist, and no-execution safety flags. It does not modify prompt packages, runner behavior, create A5 authorization, contact provider, generate images, read .env.local, write memory, write accepted_samples, or enter production/runtime.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
