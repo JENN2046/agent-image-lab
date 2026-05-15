@@ -9,6 +9,38 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v13_016_camping_lantern_delivery_readiness_review_and_lane_closeout_gate.
+Purpose: review the camping lantern delivery readiness package and close the lane as an accepted candidate with minor watch items, without real retouch, derivative image creation, commercial delivery, memory write, accepted_samples write, retry, production, or runs output commit.
+source_phase: v13_015_camping_lantern_delivery_readiness_planning_gate.
+source_commit: 181b33464dd1cf193e4a9252e98677c9f7cfe335.
+selected_product: premium_portable_led_camping_lantern.
+source_output: runs/real_generation/v13_012_premium_portable_led_camping_lantern_first_trial/native_doubao_1778838659034_0.jpg.
+evidence_package: docs/camping_lantern_accepted_candidate_evidence_package_v1.md.
+delivery_readiness_package: docs/camping_lantern_delivery_readiness_package_v1.md.
+delivery_readiness_review: docs/camping_lantern_delivery_readiness_review_v1.md.
+route_closeout: docs/camping_lantern_route_closeout_v1.md.
+final_asset_status: accepted_candidate_with_minor_watch_items.
+accepted_candidate: true.
+accepted_candidate_retained: true.
+commercial_delivery_ready: false.
+real_retouch_needed_later: optional_minor_retouch.
+memory_suitability: deferred.
+accepted_samples_ready: false.
+camping_lantern_route_closed: true.
+real_retouch_execution: false.
+derivative_image_created: false.
+real_commercial_delivery_execution: false.
+accepted_samples_written: false.
+memory_write: false.
+runs_output_committed: false.
+provider_contact: false.
+image_generation: false.
+retry: false.
+production_candidate_002: false.
+recommended_next: V14_route_selection_gate.
+recommended_next_auto_execution_allowed: false.
+next_phase_started: false.
+---
 Current active gate: v13_015_camping_lantern_delivery_readiness_planning_gate.
 Purpose: create docs-only delivery readiness package for the camping lantern accepted candidate and define blockers before real retouch, commercial delivery review, memory suitability planning, or accepted_samples entry.
 source_phase: v13_014_camping_lantern_post_generation_review_and_route_decision_gate.
