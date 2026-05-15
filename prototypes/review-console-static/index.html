@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agent Image Lab Review Console Static Prototype</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script defer src="./app.js"></script>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero" aria-labelledby="console-title">
+        <div>
+          <p class="eyebrow">Agent Image Lab / Review Console</p>
+          <h1 id="console-title">Static review desk for accepted candidates</h1>
+          <p class="hero-copy">
+            A local-only prototype for inspecting review status, evidence,
+            delivery readiness, watch items, safety boundaries, and next-route
+            decisions. It is not connected to runtime systems.
+          </p>
+        </div>
+        <aside class="boundary-card" aria-label="Prototype boundary">
+          <span class="status-dot"></span>
+          <strong>Static-only boundary</strong>
+          <p>No provider contact, image generation, memory write, accepted samples write, or runtime execution.</p>
+          <a href="./fixture-data.json" class="fixture-link">Open local fixture JSON</a>
+        </aside>
+      </section>
+
+      <section class="metrics-grid" aria-label="Review summary">
+        <article>
+          <span>Total assets</span>
+          <strong data-metric="totalAssets">0</strong>
+        </article>
+        <article>
+          <span>Accepted candidates</span>
+          <strong data-metric="acceptedCandidates">0</strong>
+        </article>
+        <article>
+          <span>Commercial ready</span>
+          <strong data-metric="commercialReady">0</strong>
+        </article>
+        <article>
+          <span>Memory deferred</span>
+          <strong data-metric="memoryDeferred">0</strong>
+        </article>
+      </section>
+
+      <section class="workspace-grid">
+        <aside class="asset-rail" aria-labelledby="asset-list-title">
+          <div class="panel-heading">
+            <p class="eyebrow">Queue</p>
+            <h2 id="asset-list-title">Review assets</h2>
+          </div>
+          <div class="filter-row" role="group" aria-label="Asset filters">
+            <button class="filter-button is-active" type="button" data-filter="all">All</button>
+            <button class="filter-button" type="button" data-filter="accepted">Accepted</button>
+            <button class="filter-button" type="button" data-filter="deferred">Memory deferred</button>
+          </div>
+          <div class="asset-list" data-asset-list></div>
+        </aside>
+
+        <section class="detail-stack" aria-live="polite">
+          <article class="detail-card asset-detail">
+            <div class="panel-heading">
+              <p class="eyebrow" data-selected-product>Product</p>
+              <h2 data-selected-title>Select an asset</h2>
+            </div>
+            <dl class="definition-grid" data-selected-fields></dl>
+          </article>
+
+          <article class="detail-card">
+            <div class="panel-heading">
+              <p class="eyebrow">Evidence</p>
+              <h2>Evidence package</h2>
+            </div>
+            <ul class="evidence-list" data-evidence-list></ul>
+          </article>
+
+          <article class="detail-card">
+            <div class="panel-heading">
+              <p class="eyebrow">Delivery</p>
+              <h2>Readiness state</h2>
+            </div>
+            <div class="readiness-board" data-readiness-board></div>
+          </article>
+        </section>
+
+        <aside class="side-stack">
+          <article class="detail-card">
+            <div class="panel-heading">
+              <p class="eyebrow">Watch</p>
+              <h2>Watch items</h2>
+            </div>
+            <ul class="watch-list" data-watch-list></ul>
+          </article>
+
+          <article class="detail-card">
+            <div class="panel-heading">
+              <p class="eyebrow">Boundary</p>
+              <h2>Safety state</h2>
+            </div>
+            <ul class="boundary-list" data-boundary-list></ul>
+          </article>
+
+          <article class="detail-card">
+            <div class="panel-heading">
+              <p class="eyebrow">Next</p>
+              <h2>Action queue</h2>
+            </div>
+            <ol class="action-list" data-action-list></ol>
+          </article>
+        </aside>
+      </section>
+    </main>
+  </body>
+</html>

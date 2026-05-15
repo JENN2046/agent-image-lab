@@ -1,0 +1,73 @@
+{
+  "fixture_id": "review_console_static_html_fixture_v14_011",
+  "fixture_type": "mock_redacted_static_fixture",
+  "source_phase": "v14_011_review_console_static_HTML_prototype_creation_execution",
+  "runtime_data": false,
+  "external_network_required": false,
+  "image_binary_ingestion": false,
+  "records": [
+    {
+      "asset_id": "premium_portable_led_camping_lantern_v13_013",
+      "product": "premium_portable_led_camping_lantern",
+      "source_output": "text reference only; local image file is not loaded",
+      "prompt_package": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml",
+      "asset_status": "accepted_candidate_with_minor_watch_items",
+      "accepted_candidate": true,
+      "commercial_delivery_ready": false,
+      "memory_suitability": "deferred",
+      "accepted_samples_ready": false,
+      "route_status": "closed_as_accepted_candidate_with_delivery_readiness_package",
+      "evidence_package_ref": "docs/camping_lantern_accepted_candidate_evidence_package_v1.md",
+      "delivery_readiness_package_ref": "docs/camping_lantern_delivery_readiness_package_v1.md",
+      "watch_items": [
+        "diffuser_center_brightness",
+        "lower_body_darkness",
+        "base_body_separation",
+        "edge_readability_in_crop",
+        "product_identity_lock"
+      ]
+    },
+    {
+      "asset_id": "premium_serum_bottle_v10_011",
+      "product": "cosmetic_skincare_bottle / premium_serum_bottle",
+      "source_output": "text reference only; local image file is not loaded",
+      "prompt_package": "prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml",
+      "asset_status": "accepted_candidate_with_minor_watch_items",
+      "accepted_candidate": true,
+      "commercial_delivery_ready": false,
+      "memory_suitability": "deferred",
+      "accepted_samples_ready": false,
+      "route_status": "reconstructed_as_visual_production_loop_sample",
+      "evidence_package_ref": "docs/premium_serum_bottle_accepted_candidate_evidence_package_v1.md",
+      "delivery_readiness_package_ref": null,
+      "watch_items": [
+        "label_legibility_boundary",
+        "material_highlight_control",
+        "commercial_delivery_review_not_completed"
+      ]
+    }
+  ],
+  "safety_boundary": {
+    "provider_contact": false,
+    "image_generation": false,
+    "retry": false,
+    "env_local_secret_value_read": false,
+    "memory_write": false,
+    "accepted_samples_written": false,
+    "runs_output_committed": false,
+    "runs_image_binary_read": false,
+    "real_retouch_execution": false,
+    "derivative_image_created": false,
+    "real_commercial_delivery_execution": false,
+    "production_candidate_002": false,
+    "Batch_005": false
+  },
+  "fixture_policy": {
+    "mock_redacted_data_only": true,
+    "contains_customer_data": false,
+    "contains_credentials": false,
+    "contains_private_local_paths": false,
+    "copies_source_output": false,
+    "loads_source_output": false
+  }
+}
