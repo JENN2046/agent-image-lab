@@ -1,5 +1,39 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260515-v10.018-V10-FINAL-CLOSEOUT
+
+Task:
+
+```text
+Close V10 as a route-reset and third-product prompt workflow expansion cycle.
+```
+
+Result:
+
+```text
+v10_closed: true
+route_reset_completed: true
+third_product_route_closed: true
+third_product_workflow_validated: true
+third_product_accepted_candidate_created: true
+third_product: cosmetic_skincare_bottle / premium_serum_bottle
+third_product_accepted_candidate_path: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg
+third_product_asset_status: accepted_candidate_with_minor_watch_items
+commercial_delivery_ready: false
+memory_suitability: deferred
+memory_write_performed: false
+accepted_samples_written: false
+runs_output_committed: false
+production_candidate_002_started: false
+validation_result: passed_with_existing_manual_review_warnings_only
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, secret print, DailyNote write, VCP memory write, memory_write_path, production_candidate_002, Batch 005, runtime/CDP/bridge/MCP, dependency change, package.json change, accepted_samples write, runs output commit, derivative image creation, real retouch execution, commercial_delivery_ready=true, or real commercial delivery execution is performed by v10.018.
+```
+
 ## VALIDATION-20260515-v10.017-THIRD-PRODUCT-ROUTE-CLOSEOUT
 
 Task:

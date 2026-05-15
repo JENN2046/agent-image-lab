@@ -9,6 +9,19 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v10_018_v10_final_closeout.
+Purpose: close V10 as a route-reset and third-product prompt workflow expansion cycle; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, derivative image creation, real retouch execution, commercial delivery execution, or commercial_delivery_ready=true.
+source_phase: v10_017_third_product_route_closeout_gate.
+source_commit: 22cff4e4ce2ad741d6188269536b16f8f9db0f6f.
+v10_closed: true.
+third_product: cosmetic_skincare_bottle / premium_serum_bottle.
+third_product_route_closed: true.
+third_product_accepted_candidate_created: true.
+commercial_delivery_ready: false.
+memory_suitability: deferred.
+recommended_next: v11_route_selection_gate.
+recommended_next_auto_execution_allowed: false.
+---
 Current active gate: v10_017_third_product_route_closeout_gate.
 Purpose: close premium serum bottle third-product route as accepted candidate evidence; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, derivative image creation, real retouch execution, commercial delivery execution, or commercial_delivery_ready=true.
 source_phase: v10_016_post_push_status_sync_guard_improvement.
@@ -895,7 +908,7 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-none — v10_017_third_product_route_closeout_gate is completed_remote_synced_after_guarded_push.
+none — v10_018_v10_final_closeout is completed_validated_local_commit_pending_remote_push_authorization.
 ```
 
 ### todo

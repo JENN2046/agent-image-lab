@@ -1,5 +1,43 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V10.018 V10 Final Closeout
+
+```text
+phase_id: v10_018_v10_final_closeout
+status: completed_validated_local_commit_pending_remote_push_authorization
+source_phase: v10_017_third_product_route_closeout_gate
+source_commit: 22cff4e4ce2ad741d6188269536b16f8f9db0f6f
+purpose: close V10 as route-reset and third-product prompt workflow expansion cycle
+phase_record_ref: docs/v10_018_v10_final_closeout.md
+final_closeout_ref: docs/v10_product_loop_final_closeout.md
+selected_action: close_v10
+v10_closed: true
+route_reset_completed: true
+third_product_route_closed: true
+third_product_workflow_validated: true
+third_product_accepted_candidate_created: true
+third_product: cosmetic_skincare_bottle / premium_serum_bottle
+third_product_accepted_candidate_path: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg
+third_product_asset_status: accepted_candidate_with_minor_watch_items
+commercial_delivery_ready: false
+memory_suitability: deferred
+memory_write_performed: false
+accepted_samples_written: false
+runs_output_committed: false
+production_candidate_002_started: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+Batch_005: false
+recommended_next: v11_route_selection_gate
+```
+
 # V10.017 Third Product Route Closeout Gate
 
 ```text

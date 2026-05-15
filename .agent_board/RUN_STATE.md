@@ -9,12 +9,49 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v10_017_third_product_route_closeout_gate. This docs-only closeout gate seals the premium serum bottle third-product route as accepted candidate evidence after human selected v10.015 Option B.
+Agent Image Lab is in v10_018_v10_final_closeout. This docs-only final closeout seals V10 as a route-reset and third-product prompt workflow expansion cycle, with no further automatic V10 execution.
 ```
 
 ## Current Phase
 
 ```text
+V10.018 V10 Final Closeout
+phase_id: v10_018_v10_final_closeout
+source_phase: v10_017_third_product_route_closeout_gate
+status: completed_validated_local_commit_pending_remote_push_authorization
+source_commit: 22cff4e4ce2ad741d6188269536b16f8f9db0f6f
+source_message: docs: close third product route
+branch: master tracking origin/master
+origin_sync_current: local HEAD equals origin/master at 22cff4e before v10.018 patch
+ahead_behind: 0/0 before v10.018 patch
+selected_action: close_v10
+v10_closed: true
+route_reset_completed: true
+third_product_route_closed: true
+third_product_workflow_validated: true
+third_product_accepted_candidate_created: true
+third_product: cosmetic_skincare_bottle / premium_serum_bottle
+third_product_accepted_candidate_path: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg
+third_product_asset_status: accepted_candidate_with_minor_watch_items
+commercial_delivery_ready: false
+memory_suitability: deferred
+memory_write_performed: false
+accepted_samples_written: false
+runs_output_committed: false
+production_candidate_002_started: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+Batch_005: false
+recommended_next: v11_route_selection_gate
+recommended_next_auto_execution_allowed: false
+---
 V10.017 Third Product Route Closeout Gate
 phase_id: v10_017_third_product_route_closeout_gate
 source_phase: v10_016_post_push_status_sync_guard_improvement

@@ -8,6 +8,30 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+latest_synced_head_before_v10_018_v10_final_closeout: 22cff4e4ce2ad741d6188269536b16f8f9db0f6f
+origin_master_before_v10_018_v10_final_closeout: 22cff4e4ce2ad741d6188269536b16f8f9db0f6f
+status: v10_018_v10_final_closeout
+mode: A4.8 docs-only V10 final closeout
+phase_id: v10_018_v10_final_closeout
+source_phase: v10_017_third_product_route_closeout_gate
+source_commit: 22cff4e4ce2ad741d6188269536b16f8f9db0f6f
+v10_closed: true
+route_reset_completed: true
+third_product_route_closed: true
+third_product_workflow_validated: true
+third_product_accepted_candidate_created: true
+third_product: cosmetic_skincare_bottle / premium_serum_bottle
+third_product_accepted_candidate_path: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg
+third_product_asset_status: accepted_candidate_with_minor_watch_items
+commercial_delivery_ready: false
+memory_suitability: deferred
+memory_write_performed: false
+accepted_samples_written: false
+runs_output_committed: false
+production_candidate_002_started: false
+recommended_next: v11_route_selection_gate
+recommended_next_auto_execution_allowed: false
+branch: master
 latest_synced_head_before_v10_017_third_product_route_closeout_gate: f6b4e9ee36d8bc079bf8f2726e5fea78fce422a3
 origin_master_before_v10_017_third_product_route_closeout_gate: f6b4e9ee36d8bc079bf8f2726e5fea78fce422a3
 status: v10_017_third_product_route_closeout_gate
