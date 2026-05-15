@@ -9,12 +9,45 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v11_014_accepted_candidate_evidence_package_schema_draft_gate. This docs-only schema draft gate normalizes accepted candidate evidence package fields without generating images, writing memory, copying output assets, or promoting delivery/production status.
+Agent Image Lab is in v11_015_accepted_candidate_evidence_package_schema_static_review_gate. This docs-only schema static review gate reviews the accepted candidate evidence package canonical schema without generating images, writing memory, copying output assets, or promoting delivery/production status.
 ```
 
 ## Current Phase
 
 ```text
+V11.015 Accepted Candidate Evidence Package Schema Static Review Gate
+phase_id: v11_015_accepted_candidate_evidence_package_schema_static_review_gate
+source_phase: v11_014_accepted_candidate_evidence_package_schema_draft_gate
+status: completed_validated_local_commit_pending_remote_push_authorization
+source_commit: 3fe36ab9f5369cfc533434433bca95ebc079b487
+source_message: docs: draft accepted candidate evidence package schema
+branch: master tracking origin/master
+origin_sync_current: local HEAD ahead origin/master by 11 before v11.015 patch
+ahead_behind: 0/11 before v11.015 patch
+selected_route: prompt_schema_hardening
+accepted_candidate_evidence_package_schema_static_review_completed: true
+accepted_candidate_evidence_package_schema_static_review_result: pass_for_schema_static_review
+machine_validator_implemented: false
+evidence_package_migration_performed: false
+commercial_delivery_ready_changed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: v11_016_prompt_schema_hardening_validation_strategy_gate
+recommended_next_auto_execution_allowed: true
+---
 V11.014 Accepted Candidate Evidence Package Schema Draft Gate
 phase_id: v11_014_accepted_candidate_evidence_package_schema_draft_gate
 source_phase: v11_013_human_review_schema_static_review_gate

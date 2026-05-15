@@ -3,6 +3,29 @@
 ## Handoff Summary
 
 ```text
+Status: v11_015_accepted_candidate_evidence_package_schema_static_review_gate is the current docs-only schema static review gate.
+Reason: v11.014 drafted the accepted candidate evidence package canonical schema. v11.015 statically reviews that schema and records pass_for_schema_static_review, while leaving route-level validation strategy, migration, and machine validator implementation for later gates.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current local HEAD before v11.015 patch: 3fe36ab docs: draft accepted candidate evidence package schema
+ahead_behind: 0/11 before v11.015 patch
+Worktree: clean before v11.015 patch
+Current status: v11_015_accepted_candidate_evidence_package_schema_static_review_gate
+source_phase: v11_014_accepted_candidate_evidence_package_schema_draft_gate
+source_commit: 3fe36ab9f5369cfc533434433bca95ebc079b487
+selected_route: prompt_schema_hardening
+accepted_candidate_evidence_package_schema_static_review_completed: true
+accepted_candidate_evidence_package_schema_static_review_result: pass_for_schema_static_review
+machine_validator_implemented: false
+evidence_package_migration_performed: false
+commercial_delivery_ready_changed: false
+provider_contact_allowed_now: false
+image_generation_allowed_now: false
+memory_write_allowed_now: false
+production_candidate_002_allowed_now: false
+recommended_next: v11_016_prompt_schema_hardening_validation_strategy_gate
+recommended_next_auto_execution_allowed: true
+---
 Status: v11_014_accepted_candidate_evidence_package_schema_draft_gate is the current docs-only schema draft gate.
 Reason: v11.013 passed static review for the human review canonical schema. v11.014 drafts the accepted candidate evidence package canonical schema, normalizing source_output, prompt_package, lineage, evidence summary, commercial delivery boundary, memory boundary, accepted_samples/runs output boundary, and production boundary. It leaves static review, migration, and machine validator implementation for later gates.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
