@@ -1,5 +1,42 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V11.004 Prompt Package Schema Draft Gate Schema Path Alignment
+
+```text
+phase_id: v11_004_prompt_package_schema_draft_gate
+status: completed_validated_local_commit_pending_remote_push_authorization
+source_phase: v11_003_existing_prompt_artifact_schema_inventory_gate
+source_commit: 8331dc09c381946d9b93637c3478c837ab53d6e4
+purpose: add docs/schemas/prompt_package_schema_v1.md as stable prompt package canonical schema path
+phase_record_ref: docs/v11_004_prompt_package_schema_draft_gate.md
+schema_ref: docs/schemas/prompt_package_schema_v1.md
+selected_route: prompt_schema_hardening
+prompt_package_schema_created: true
+runner_canonical_prompt_field_defined: true
+positive_prompt_alias_defined: true
+prompt_positive_sync_required: true
+negative_prompt_required: true
+A5_authorization_separation_defined: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+machine_validator_implemented: false
+existing_artifacts_migrated: false
+recommended_next: v11_005_prompt_package_schema_static_review_gate
+```
+
 # V11.017 Prompt Schema Hardening Route Closeout Gate
 
 ```text

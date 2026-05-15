@@ -9,12 +9,49 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v11_017_prompt_schema_hardening_route_closeout_gate. This docs-only route closeout gate closes V11 Prompt Schema Hardening without implementing scripts, generating images, writing memory, copying output assets, or promoting delivery/production status.
+Agent Image Lab is in v11_004_prompt_package_schema_draft_gate schema path alignment. This docs-only supplemental patch adds docs/schemas/prompt_package_schema_v1.md without implementing scripts, migrating prompt packages, generating images, writing memory, copying output assets, or promoting delivery/production status.
 ```
 
 ## Current Phase
 
 ```text
+V11.004 Prompt Package Schema Draft Gate Schema Path Alignment
+phase_id: v11_004_prompt_package_schema_draft_gate
+source_phase: v11_003_existing_prompt_artifact_schema_inventory_gate
+status: completed_validated_local_commit_pending_remote_push_authorization
+source_commit: 8331dc09c381946d9b93637c3478c837ab53d6e4
+source_message: docs: inventory prompt workflow schema artifacts
+branch: master tracking origin/master
+origin_sync_current: local HEAD ahead origin/master by 14 before patch
+ahead_behind: 0/14 before patch
+selected_route: prompt_schema_hardening
+prompt_package_schema_created: true
+schema_path: docs/schemas/prompt_package_schema_v1.md
+runner_canonical_prompt_field_defined: true
+positive_prompt_alias_defined: true
+prompt_positive_sync_required: true
+negative_prompt_required: true
+A5_authorization_separation_defined: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+machine_validator_implemented: false
+existing_artifacts_migrated: false
+recommended_next: v11_005_prompt_package_schema_static_review_gate
+recommended_next_auto_execution_allowed: true
+---
 V11.017 Prompt Schema Hardening Route Closeout Gate
 phase_id: v11_017_prompt_schema_hardening_route_closeout_gate
 source_phase: v11_016_prompt_schema_hardening_validation_strategy_gate

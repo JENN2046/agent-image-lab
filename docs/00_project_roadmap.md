@@ -18,6 +18,26 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
+Current supplemental patch: v11_004_prompt_package_schema_draft_gate schema path alignment.
+Current local baseline before v11.004 schema path alignment: 69ff5a30ed6c2fe8cdf4db33f4e3b9f51b7fc964 on master ahead origin/master by 14.
+Current mainline state: v11_004 prompt package schema is supplemented with the stable schema path docs/schemas/prompt_package_schema_v1.md. The patch preserves the already closed V11 route and does not implement validators, migrate prompt packages, generate images, write memory, enter production, or change runner behavior.
+Current phase id: v11_004_prompt_package_schema_draft_gate.
+selected_route: prompt_schema_hardening.
+prompt_package_schema_created: true.
+schema_path: docs/schemas/prompt_package_schema_v1.md.
+runner_canonical_prompt_field_defined: true.
+positive_prompt_alias_defined: true.
+prompt_positive_sync_required: true.
+negative_prompt_required: true.
+A5_authorization_separation_defined: true.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+memory_write_allowed_now: false.
+production_candidate_002_allowed_now: false.
+machine_validator_implemented: false.
+existing_artifacts_migrated: false.
+recommended_next: v11_005_prompt_package_schema_static_review_gate.
+recommended_next_auto_execution_allowed: true.
 Current local baseline before v11.017 prompt schema hardening route closeout: 33025c036098af5431a92c5117647d1ba755a327 on master ahead origin/master by 13.
 Current mainline state: v11_017 closes the V11 Prompt Schema Hardening route. The route has completed scope, inventory, prompt package schema, product brief schema, static review schema, A5 authorization schema, human review schema, accepted candidate evidence package schema, static reviews, and route-level validation strategy. It does not implement machine validators, migrate artifacts, generate images, write memory, enter production, or change runner behavior.
 Current phase id: v11_017_prompt_schema_hardening_route_closeout_gate.

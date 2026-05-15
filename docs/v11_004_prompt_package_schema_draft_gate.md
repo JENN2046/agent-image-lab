@@ -10,6 +10,7 @@ gate_template:
   allowed_files:
     - docs/v11_004_prompt_package_schema_draft_gate.md
     - docs/prompt_package_canonical_schema.md
+    - docs/schemas/prompt_package_schema_v1.md
     - README.md
     - docs/00_project_roadmap.md
     - PROJECT_MASTER_PLAN.md
@@ -83,7 +84,9 @@ V11.004 turns the v11.003 inventory findings into a canonical prompt package sch
 
 ## Schema Draft Output
 
-The canonical schema draft is recorded in [prompt_package_canonical_schema.md](prompt_package_canonical_schema.md).
+The original canonical schema draft is recorded in [prompt_package_canonical_schema.md](prompt_package_canonical_schema.md).
+
+The stable schema path requested for V11 schema hardening is recorded in [schemas/prompt_package_schema_v1.md](schemas/prompt_package_schema_v1.md). It preserves the same non-execution boundary and makes the v1 schema path explicit for future validators.
 
 It defines:
 
@@ -134,6 +137,9 @@ safety:
   accepted_samples_written: false
   prompt_package_behavior_changed: false
   runner_behavior_changed: false
+  stable_schema_path_added: docs/schemas/prompt_package_schema_v1.md
+  machine_validator_implemented: false
+  existing_prompt_packages_migrated: false
 ```
 
 ## Recommended Next
@@ -157,4 +163,23 @@ closeout:
   git_status: clean
   final_state:
     next_phase_started: false
+```
+
+## Schema Path Alignment Addendum
+
+```yaml
+schema_path_alignment:
+  added_schema_path: docs/schemas/prompt_package_schema_v1.md
+  prompt_package_schema_created: true
+  runner_canonical_prompt_field_defined: true
+  positive_prompt_alias_defined: true
+  prompt_positive_sync_required: true
+  negative_prompt_required: true
+  A5_authorization_separation_defined: true
+  provider_contact_allowed_by_schema: false
+  image_generation_allowed_by_schema: false
+  memory_write_allowed_by_schema: false
+  production_candidate_002_allowed_by_schema: false
+  machine_validator_implemented: false
+  existing_artifacts_migrated: false
 ```

@@ -9,6 +9,16 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v11_004_prompt_package_schema_draft_gate schema path alignment.
+Purpose: add docs/schemas/prompt_package_schema_v1.md as the stable prompt package canonical schema path; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, dependency change, prompt package migration, runner behavior change, or machine validator implementation.
+source_phase: v11_003_existing_prompt_artifact_schema_inventory_gate.
+source_commit: 8331dc09c381946d9b93637c3478c837ab53d6e4.
+selected_route: prompt_schema_hardening.
+prompt_package_schema_created: true.
+schema_path: docs/schemas/prompt_package_schema_v1.md.
+recommended_next: v11_005_prompt_package_schema_static_review_gate.
+recommended_next_auto_execution_allowed: true.
+---
 Current active gate: v11_017_prompt_schema_hardening_route_closeout_gate.
 Purpose: close V11 Prompt Schema Hardening as a completed docs-only schema and validation strategy route; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, dependency change, artifact migration, runner behavior change, or machine validator implementation.
 source_phase: v11_016_prompt_schema_hardening_validation_strategy_gate.

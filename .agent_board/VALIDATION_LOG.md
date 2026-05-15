@@ -1,5 +1,35 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260515-v11.004-PROMPT-PACKAGE-SCHEMA-PATH-ALIGNMENT
+
+Task:
+
+```text
+Add docs/schemas/prompt_package_schema_v1.md as the stable prompt package canonical schema path for v11.004.
+```
+
+Result:
+
+```text
+selected_route: prompt_schema_hardening
+prompt_package_schema_created: true
+schema_path: docs/schemas/prompt_package_schema_v1.md
+runner_canonical_prompt_field_defined: true
+positive_prompt_alias_defined: true
+prompt_positive_sync_required: true
+negative_prompt_required: true
+A5_authorization_separation_defined: true
+machine_validator_implemented: false
+existing_artifacts_migrated: false
+validation_result: passed_with_existing_manual_review_warnings_only
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, secret print, DailyNote write, VCP memory write, memory_write_path, production_candidate_002, Batch 005, runtime/CDP/bridge/MCP, dependency change, package.json change, accepted_samples write, runs output commit, derivative image creation, real retouch execution, commercial delivery execution, prompt package migration, runner behavior change, memory write, or machine validator implementation is performed by this v11.004 schema path alignment patch.
+```
+
 ## VALIDATION-20260515-v11.017-PROMPT-SCHEMA-HARDENING-ROUTE-CLOSEOUT
 
 Task:

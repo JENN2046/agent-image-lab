@@ -3,6 +3,33 @@
 ## Handoff Summary
 
 ```text
+Status: v11_004_prompt_package_schema_draft_gate schema path alignment is the current docs-only supplemental patch.
+Reason: The existing v11.004 local commit created docs/prompt_package_canonical_schema.md, but the current phase contract requires docs/schemas/prompt_package_schema_v1.md. This patch adds the stable schema path without migrating prompt packages, implementing validators, or changing runner behavior.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current local HEAD before patch: 69ff5a3 docs: close prompt schema hardening route
+ahead_behind: 0/14 before patch
+Worktree: clean before patch
+Current status: v11_004_prompt_package_schema_draft_gate_schema_path_alignment
+source_phase: v11_003_existing_prompt_artifact_schema_inventory_gate
+source_commit: 8331dc09c381946d9b93637c3478c837ab53d6e4
+selected_route: prompt_schema_hardening
+prompt_package_schema_created: true
+schema_path: docs/schemas/prompt_package_schema_v1.md
+runner_canonical_prompt_field_defined: true
+positive_prompt_alias_defined: true
+prompt_positive_sync_required: true
+negative_prompt_required: true
+A5_authorization_separation_defined: true
+provider_contact_allowed_now: false
+image_generation_allowed_now: false
+memory_write_allowed_now: false
+production_candidate_002_allowed_now: false
+machine_validator_implemented: false
+existing_artifacts_migrated: false
+recommended_next: v11_005_prompt_package_schema_static_review_gate
+recommended_next_auto_execution_allowed: true
+---
 Status: v11_017_prompt_schema_hardening_route_closeout_gate is the current docs-only route closeout gate.
 Reason: v11.016 created the route-level validation strategy. v11.017 closes Prompt Schema Hardening as a completed docs-only schema/strategy route; validator implementation and artifact migration remain future human choices.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
