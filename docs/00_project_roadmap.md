@@ -18,6 +18,18 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
+Current phase: v13_004_existing_asset_loop_reconstruction_selection_gate.
+Current local/remote baseline after v13.003 static review: f33eff521056884931a04b22594ba2738bb30535.
+Current mainline state: V13 selected premium_serum_bottle_v10_011 for docs-only Visual Production Loop reconstruction. The selection records candidate paths as documentation references only and does not read, copy, stage, or commit image binaries.
+selected_asset: premium_serum_bottle_v10_011.
+selected_product: cosmetic_skincare_bottle / premium_serum_bottle.
+source_output: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg.
+source_output_available_in_current_workspace: true.
+reconstruction_scope: docs_only.
+image_binary_access: false.
+output_image_added_to_git: false.
+recommended_next: v13_005_existing_asset_loop_reconstruction_docs_only_gate.
+recommended_next_auto_execution_allowed: true.
 Current phase: v13_003_visual_production_loop_canonical_model_static_review_gate.
 Current local/remote baseline after v13.002 canonical model: b359d4015a9801e97efdc99b2b905060ec871b83.
 Current mainline state: V13 has statically reviewed the Visual Production Loop canonical model against V7 ceramic mug, V8 sports visor, and V10 premium serum bottle routes. The model covers accepted candidate, delivery readiness, memory suitability, provider authorization, accepted_samples, production_candidate_002, and runs output commit boundaries.

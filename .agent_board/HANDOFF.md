@@ -3,6 +3,28 @@
 ## Handoff Summary
 
 ```text
+Status: v13_004_existing_asset_loop_reconstruction_selection_gate is the current reconstruction selection gate.
+Reason: V13.003 passed static review. V13.004 selects premium_serum_bottle_v10_011 for docs-only reconstruction without reading, copying, staging, or committing image binaries.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Source commit: f33eff521056884931a04b22594ba2738bb30535
+Current status: v13_004_existing_asset_loop_reconstruction_selection_gate
+selected_asset: premium_serum_bottle_v10_011
+selected_product: cosmetic_skincare_bottle / premium_serum_bottle
+source_output: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg
+source_output_available_in_current_workspace: true
+reconstruction_scope: docs_only
+image_binary_access: false
+output_image_added_to_git: false
+provider_contact: false
+image_generation: false
+memory_write: false
+production_candidate_002: false
+runtime_execution: false
+recommended_next: v13_005_existing_asset_loop_reconstruction_docs_only_gate
+recommended_next_auto_execution_allowed: true
+next_phase_started: false
+---
 Status: v13_003_visual_production_loop_canonical_model_static_review_gate is the current static review gate.
 Reason: V13.002 defined the canonical model. V13.003 confirms it covers V7, V8, and V10 product routes and preserves execution, delivery, memory, accepted_samples, production, and runs-output boundaries.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

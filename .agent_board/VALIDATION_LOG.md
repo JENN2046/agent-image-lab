@@ -1,5 +1,33 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260515-v13.004-EXISTING-ASSET-LOOP-RECONSTRUCTION-SELECTION
+
+Task:
+
+```text
+Select one existing accepted candidate for docs-only Visual Production Loop reconstruction.
+```
+
+Result:
+
+```text
+source_commit: f33eff521056884931a04b22594ba2738bb30535
+selected_asset: premium_serum_bottle_v10_011
+selected_product: cosmetic_skincare_bottle / premium_serum_bottle
+source_output: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg
+source_output_available_in_current_workspace: true
+reconstruction_scope: docs_only
+image_binary_access: false
+output_image_added_to_git: false
+validation_result: passed_with_existing_manual_review_warnings_only
+```
+
+Boundary:
+
+```text
+No image binary read, provider contact, image generation, retry, .env.local secret value read, secret print, DailyNote write, VCP memory write, memory_write_path, production_candidate_002, Batch 005, runtime/CDP/bridge/MCP, dependency change, package.json change, package-lock change, scripts change, prompts/image_generation change, accepted_samples write, runs output commit, derivative image creation, real retouch execution, commercial delivery execution, existing artifact migration, existing prompt package modification, memory write, provider execution, production execution, or V14 execution is performed by v13.004.
+```
+
 ## VALIDATION-20260515-v13.003-VISUAL-PRODUCTION-LOOP-CANONICAL-MODEL-STATIC-REVIEW
 
 Task:

@@ -9,6 +9,21 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v13_004_existing_asset_loop_reconstruction_selection_gate.
+Purpose: select one existing accepted candidate for docs-only loop reconstruction; no image binary read, no provider contact, no image generation, no memory write, no production, no runtime, no real retouch, no commercial delivery, no artifact migration, no prompt package modification, and no runs output commit.
+source_phase: v13_003_visual_production_loop_canonical_model_static_review_gate.
+source_commit: f33eff521056884931a04b22594ba2738bb30535.
+selected_asset: premium_serum_bottle_v10_011.
+selected_product: cosmetic_skincare_bottle / premium_serum_bottle.
+source_output: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg.
+source_output_available_in_current_workspace: true.
+reconstruction_scope: docs_only.
+image_binary_access: false.
+output_image_added_to_git: false.
+recommended_next: v13_005_existing_asset_loop_reconstruction_docs_only_gate.
+recommended_next_auto_execution_allowed: true.
+next_phase_started: false.
+---
 Current active gate: v13_003_visual_production_loop_canonical_model_static_review_gate.
 Purpose: statically review the V13.002 canonical model against V7 ceramic mug, V8 sports visor, and V10 serum bottle routes; no provider contact, no image generation, no memory write, no production, no runtime, no real retouch, no commercial delivery, no artifact migration, no prompt package modification, and no image binary access.
 source_phase: v13_002_visual_production_loop_canonical_model_gate.

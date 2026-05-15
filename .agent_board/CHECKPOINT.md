@@ -1,5 +1,46 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V13.004 Existing Asset Loop Reconstruction Selection Gate
+
+```text
+phase_id: v13_004_existing_asset_loop_reconstruction_selection_gate
+status: completed_validated_reconstruction_selection_record
+source_phase: v13_003_visual_production_loop_canonical_model_static_review_gate
+source_commit: f33eff521056884931a04b22594ba2738bb30535
+purpose: select premium serum bottle as docs-only loop reconstruction sample
+phase_record_ref: docs/v13_004_existing_asset_loop_reconstruction_selection_gate.md
+selected_asset: premium_serum_bottle_v10_011
+selected_product: cosmetic_skincare_bottle / premium_serum_bottle
+source_output: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg
+source_output_available_in_current_workspace: true
+reconstruction_scope: docs_only
+image_binary_access: false
+output_image_added_to_git: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+real_retouch_execution: false
+commercial_delivery_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+package_lock_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+existing_artifacts_migrated: false
+existing_prompt_packages_modified: false
+recommended_next: v13_005_existing_asset_loop_reconstruction_docs_only_gate
+recommended_next_auto_execution_allowed: true
+next_phase_started: false
+```
+
 # V13.003 Visual Production Loop Canonical Model Static Review Gate
 
 ```text
