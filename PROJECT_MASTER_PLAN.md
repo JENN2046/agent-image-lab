@@ -8,6 +8,34 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+latest_head_after_v13_016_camping_lantern_lane_closeout: 312c5e0695254e4f5df2898eeafde87b763ec0ab
+status: v14_001_route_selection_gate
+mode: A4.8 docs-only route selection gate
+phase_id: v14_001_route_selection_gate
+source_phase: v13_016_camping_lantern_delivery_readiness_review_and_lane_closeout_gate
+source_commit: 312c5e0695254e4f5df2898eeafde87b763ec0ab
+v13_camping_lantern_route_closed: true
+final_asset_status: accepted_candidate_with_minor_watch_items
+commercial_delivery_ready: false
+memory_suitability: deferred
+accepted_samples_ready: false
+options_presented: review_console_productization_planning | accepted_samples_entry_policy_planning | visual_memory_suitability_planning | real_retouch_authorization_planning | next_product_visual_production_trial_planning | v13_final_handoff_project_route_reset
+recommended_option: review_console_productization_planning
+backup_option: accepted_samples_entry_policy_planning
+human_decision_required: true
+provider_contact: false
+image_generation: false
+retry: false
+memory_write: false
+accepted_samples_written: false
+runs_output_committed: false
+real_retouch_execution: false
+derivative_image_created: false
+real_commercial_delivery_execution: false
+production_candidate_002: false
+recommended_next: pending_human_v14_route_selection
+recommended_next_auto_execution_allowed: false
+branch: master
 latest_head_after_v13_015_delivery_readiness_planning: 181b33464dd1cf193e4a9252e98677c9f7cfe335
 status: v13_016_camping_lantern_delivery_readiness_review_and_lane_closeout_gate
 mode: A4.8 docs-only delivery readiness review and lane closeout gate

@@ -9,6 +9,33 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v14_001_route_selection_gate.
+Purpose: present V14 next-route options after V13 Visual Production Loop foundation and camping lantern lane closeout; wait for human selection without entering execution.
+source_phase: v13_016_camping_lantern_delivery_readiness_review_and_lane_closeout_gate.
+source_commit: 312c5e0695254e4f5df2898eeafde87b763ec0ab.
+v13_camping_lantern_route_closed: true.
+final_asset_status: accepted_candidate_with_minor_watch_items.
+commercial_delivery_ready: false.
+memory_suitability: deferred.
+accepted_samples_ready: false.
+options_presented: review_console_productization_planning | accepted_samples_entry_policy_planning | visual_memory_suitability_planning | real_retouch_authorization_planning | next_product_visual_production_trial_planning | v13_final_handoff_project_route_reset.
+recommended_option: review_console_productization_planning.
+backup_option: accepted_samples_entry_policy_planning.
+human_decision_required: true.
+provider_contact: false.
+image_generation: false.
+retry: false.
+memory_write: false.
+accepted_samples_written: false.
+runs_output_committed: false.
+real_retouch_execution: false.
+derivative_image_created: false.
+real_commercial_delivery_execution: false.
+production_candidate_002: false.
+recommended_next: pending_human_v14_route_selection.
+recommended_next_auto_execution_allowed: false.
+next_phase_started: false.
+---
 Current active gate: v13_016_camping_lantern_delivery_readiness_review_and_lane_closeout_gate.
 Purpose: review the camping lantern delivery readiness package and close the lane as an accepted candidate with minor watch items, without real retouch, derivative image creation, commercial delivery, memory write, accepted_samples write, retry, production, or runs output commit.
 source_phase: v13_015_camping_lantern_delivery_readiness_planning_gate.

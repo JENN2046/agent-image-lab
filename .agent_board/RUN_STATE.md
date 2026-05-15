@@ -9,12 +9,48 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v13_016_camping_lantern_delivery_readiness_review_and_lane_closeout_gate. V13 has completed a docs-only delivery readiness review for the camping lantern accepted candidate and closed the camping lantern lane as accepted_candidate_with_minor_watch_items. It remains stopped before real retouch, derivative image creation, commercial delivery, memory, accepted_samples, production, retry, or runs output commit.
+Agent Image Lab is in v14_001_route_selection_gate. V13 has completed the Visual Production Loop foundation and closed the camping lantern lane as accepted_candidate_with_minor_watch_items. V14 route options are presented for human selection; no V14 execution has started.
 ```
 
 ## Current Phase
 
 ```text
+V14.001 Route Selection Gate
+phase_id: v14_001_route_selection_gate
+source_phase: v13_016_camping_lantern_delivery_readiness_review_and_lane_closeout_gate
+status: completed_validated_route_selection_record
+source_commit: 312c5e0695254e4f5df2898eeafde87b763ec0ab
+branch: master tracking origin/master
+v13_camping_lantern_route_closed: true
+final_asset_status: accepted_candidate_with_minor_watch_items
+commercial_delivery_ready: false
+memory_suitability: deferred
+accepted_samples_ready: false
+options_presented: review_console_productization_planning | accepted_samples_entry_policy_planning | visual_memory_suitability_planning | real_retouch_authorization_planning | next_product_visual_production_trial_planning | v13_final_handoff_project_route_reset
+recommended_option: review_console_productization_planning
+backup_option: accepted_samples_entry_policy_planning
+human_decision_required: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+memory_write: false
+accepted_samples_written: false
+runs_output_committed: false
+real_retouch_execution: false
+derivative_image_created: false
+real_commercial_delivery_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+package_lock_modified: false
+scripts_modified: false
+prompt_package_modified: false
+recommended_next: pending_human_v14_route_selection
+recommended_next_auto_execution_allowed: false
+next_phase_started: false
+---
 V13.016 Camping Lantern Delivery Readiness Review And Lane Closeout Gate
 phase_id: v13_016_camping_lantern_delivery_readiness_review_and_lane_closeout_gate
 source_phase: v13_015_camping_lantern_delivery_readiness_planning_gate

@@ -1,5 +1,35 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260515-v14.001-ROUTE-SELECTION-GATE
+
+Task:
+
+```text
+Present V14 route options after V13 Visual Production Loop foundation and camping lantern lane closeout.
+```
+
+Result:
+
+```text
+source_commit: 312c5e0695254e4f5df2898eeafde87b763ec0ab
+phase_record: docs/v14_001_route_selection_gate.md
+v13_camping_lantern_route_closed: true
+final_asset_status: accepted_candidate_with_minor_watch_items
+commercial_delivery_ready: false
+memory_suitability: deferred
+accepted_samples_ready: false
+recommended_option: review_console_productization_planning
+backup_option: accepted_samples_entry_policy_planning
+human_decision_required: true
+validation_result: passed_with_existing_manual_review_warnings_only
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local read, memory write, accepted_samples write, runs output commit, image copy, real retouch execution, derivative image creation, real commercial delivery execution, production_candidate_002, scripts/package/prompt-package change, dependency change, or V14 route execution is performed by v14.001.
+```
+
 ## VALIDATION-20260515-v13.016-CAMPING-LANTERN-DELIVERY-READINESS-REVIEW-LANE-CLOSEOUT
 
 Task:

@@ -3,6 +3,35 @@
 ## Handoff Summary
 
 ```text
+Status: v14_001_route_selection_gate is the current route selection gate.
+Reason: V13 completed the Visual Production Loop foundation, serum bottle reconstruction, camping lantern fourth-product trial, accepted candidate evidence, delivery readiness review, and camping lantern lane closeout. V14 now presents next-route options and waits for human selection without execution.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Source commit: 312c5e0695254e4f5df2898eeafde87b763ec0ab
+Current status: v14_001_route_selection_gate
+v13_camping_lantern_route_closed: true
+final_asset_status: accepted_candidate_with_minor_watch_items
+commercial_delivery_ready: false
+memory_suitability: deferred
+accepted_samples_ready: false
+options_presented: review_console_productization_planning | accepted_samples_entry_policy_planning | visual_memory_suitability_planning | real_retouch_authorization_planning | next_product_visual_production_trial_planning | v13_final_handoff_project_route_reset
+recommended_option: review_console_productization_planning
+backup_option: accepted_samples_entry_policy_planning
+human_decision_required: true
+provider_contact: false
+image_generation: false
+retry: false
+memory_write: false
+accepted_samples_written: false
+runs_output_committed: false
+real_retouch_execution: false
+derivative_image_created: false
+real_commercial_delivery_execution: false
+production_candidate_002: false
+recommended_next: pending_human_v14_route_selection
+recommended_next_auto_execution_allowed: false
+next_phase_started: false
+---
 Status: v13_016_camping_lantern_delivery_readiness_review_and_lane_closeout_gate is the current delivery readiness review and lane closeout gate.
 Reason: v13.015 created the camping lantern delivery readiness package. v13.016 reviews that package, retains the asset as accepted_candidate_with_minor_watch_items, keeps commercial_delivery_ready=false, and closes the camping lantern lane without retouch, delivery, memory, accepted_samples, retry, or runs output commit.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

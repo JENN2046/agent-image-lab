@@ -1,5 +1,45 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.001 Route Selection Gate
+
+```text
+phase_id: v14_001_route_selection_gate
+status: completed_validated_route_selection_record
+source_phase: v13_016_camping_lantern_delivery_readiness_review_and_lane_closeout_gate
+source_commit: 312c5e0695254e4f5df2898eeafde87b763ec0ab
+purpose: present V14 next-route options and wait for human selection
+phase_record_ref: docs/v14_001_route_selection_gate.md
+v13_camping_lantern_route_closed: true
+final_asset_status: accepted_candidate_with_minor_watch_items
+commercial_delivery_ready: false
+memory_suitability: deferred
+accepted_samples_ready: false
+options_presented: review_console_productization_planning | accepted_samples_entry_policy_planning | visual_memory_suitability_planning | real_retouch_authorization_planning | next_product_visual_production_trial_planning | v13_final_handoff_project_route_reset
+recommended_option: review_console_productization_planning
+backup_option: accepted_samples_entry_policy_planning
+human_decision_required: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+memory_write: false
+accepted_samples_written: false
+runs_output_committed: false
+real_retouch_execution: false
+derivative_image_created: false
+real_commercial_delivery_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+package_lock_modified: false
+scripts_modified: false
+prompt_package_modified: false
+recommended_next: pending_human_v14_route_selection
+recommended_next_auto_execution_allowed: false
+next_phase_started: false
+```
+
 # V13.016 Camping Lantern Delivery Readiness Review And Lane Closeout Gate
 
 ```text
