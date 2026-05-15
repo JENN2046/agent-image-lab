@@ -8,6 +8,30 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+latest_head_after_v13_014_post_generation_review: f6f0a1cbca223017d2b8642b524e1d04cb8ec078
+status: v13_015_camping_lantern_delivery_readiness_planning_gate
+mode: A4.8 docs-only delivery readiness planning gate
+phase_id: v13_015_camping_lantern_delivery_readiness_planning_gate
+source_phase: v13_014_camping_lantern_post_generation_review_and_route_decision_gate
+source_commit: f6f0a1cbca223017d2b8642b524e1d04cb8ec078
+selected_product: premium_portable_led_camping_lantern
+source_output: runs/real_generation/v13_012_premium_portable_led_camping_lantern_first_trial/native_doubao_1778838659034_0.jpg
+evidence_package: docs/camping_lantern_accepted_candidate_evidence_package_v1.md
+delivery_readiness_package: docs/camping_lantern_delivery_readiness_package_v1.md
+current_asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+retouch_needed: minor_watch_items_only
+delivery_readiness_review_required: true
+real_retouch_execution: false
+derivative_image_created: false
+accepted_samples_written: false
+memory_write: false
+runs_output_committed: false
+recommended_next: pending_human_camping_lantern_delivery_or_closeout_selection
+recommended_next_auto_execution_allowed: false
+branch: master
 latest_head_after_v13_012_pre_execution_package: 8ab8d952cb5ebb0afb7aff505aadb6878c670702
 status: v13_014_camping_lantern_post_generation_review_and_route_decision_gate
 mode: A4.8 post-generation docs-only review / route decision gate

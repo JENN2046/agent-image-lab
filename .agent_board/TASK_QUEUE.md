@@ -9,6 +9,33 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v13_015_camping_lantern_delivery_readiness_planning_gate.
+Purpose: create docs-only delivery readiness package for the camping lantern accepted candidate and define blockers before real retouch, commercial delivery review, memory suitability planning, or accepted_samples entry.
+source_phase: v13_014_camping_lantern_post_generation_review_and_route_decision_gate.
+source_commit: f6f0a1cbca223017d2b8642b524e1d04cb8ec078.
+selected_product: premium_portable_led_camping_lantern.
+source_output: runs/real_generation/v13_012_premium_portable_led_camping_lantern_first_trial/native_doubao_1778838659034_0.jpg.
+evidence_package: docs/camping_lantern_accepted_candidate_evidence_package_v1.md.
+delivery_readiness_package: docs/camping_lantern_delivery_readiness_package_v1.md.
+current_asset_status: accepted_candidate_with_minor_watch_items.
+accepted_candidate: true.
+commercial_delivery_ready: false.
+memory_suitability: deferred.
+retouch_needed: minor_watch_items_only.
+delivery_readiness_review_required: true.
+real_retouch_execution: false.
+derivative_image_created: false.
+accepted_samples_written: false.
+memory_write: false.
+runs_output_committed: false.
+provider_contact: false.
+image_generation: false.
+retry: false.
+production_candidate_002: false.
+recommended_next: pending_human_camping_lantern_delivery_or_closeout_selection.
+recommended_next_auto_execution_allowed: false.
+next_phase_started: false.
+---
 Current active gate: v13_014_camping_lantern_post_generation_review_and_route_decision_gate.
 Purpose: record v13.013 local persistence, review the generated camping lantern output, accept it as candidate evidence with minor watch items, and stop before delivery, memory, accepted_samples, retouch, production, retry, or runs output commit.
 source_phase: v13_013_one_minimal_real_generation_execution.
