@@ -1,10 +1,46 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V10.014 Third Product Accepted Candidate Evidence Package Gate
+
+```text
+phase_id: v10_014_third_product_accepted_candidate_evidence_package_gate
+status: completed_validated_pending_guarded_commit_and_push
+source_phase: v10_013_third_product_prompt_revision_or_candidate_evidence_decision_gate
+source_commit: 602e008dc94de7ba2a073a8f35b86ffbe7d85086
+purpose: create accepted candidate evidence package for premium serum bottle first real output
+phase_record_ref: docs/v10_014_third_product_accepted_candidate_evidence_package_gate.md
+evidence_package_ref: docs/accepted_candidate_evidence_package_premium_serum_bottle_v1.md
+product: cosmetic_skincare_bottle / premium_serum_bottle
+source_output: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg
+prompt_package: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+evidence_package_created: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+output_image_added_to_git: false
+accepted_samples_written: false
+memory_write_performed: false
+production_candidate_002_started: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+Batch_005: false
+runs_output_committed: false
+recommended_next: v10_015_third_product_route_closeout_or_revision_decision_gate
+```
+
 # V10.013 Third Product Prompt Revision Or Candidate Evidence Decision Gate
 
 ```text
 phase_id: v10_013_third_product_prompt_revision_or_candidate_evidence_decision_gate
-status: completed_validated_pending_guarded_commit_and_push
+status: completed_remote_synced_after_guarded_push
 source_phase: v10_012_human_review_of_third_product_first_real_output
 source_commit: 6c3708cfe3190869bd7e8968ab09322161051819
 purpose: present third product next path decision after accepted candidate review

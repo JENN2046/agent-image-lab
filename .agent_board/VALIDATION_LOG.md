@@ -1,5 +1,37 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260515-v10.014-THIRD-PRODUCT-ACCEPTED-CANDIDATE-EVIDENCE-PACKAGE
+
+Task:
+
+```text
+Create accepted candidate evidence package for the premium serum bottle first real output.
+```
+
+Result:
+
+```text
+product: cosmetic_skincare_bottle / premium_serum_bottle
+source_output: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg
+prompt_package: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+evidence_package_created: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+output_image_added_to_git: false
+accepted_samples_written: false
+memory_write_performed: false
+production_candidate_002_started: false
+validation_result: passed_with_existing_manual_review_warnings_only
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, secret print, DailyNote write, VCP memory write, memory_write_path, production_candidate_002, Batch 005, runtime/CDP/bridge/MCP, dependency change, package.json change, accepted_samples write, runs output commit, derivative image creation, real retouch execution, commercial_delivery_ready=true, or real commercial delivery execution is performed by v10.014.
+```
+
 ## VALIDATION-20260515-v10.013-THIRD-PRODUCT-CANDIDATE-PATH-DECISION
 
 Task:

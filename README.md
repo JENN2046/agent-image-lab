@@ -7,6 +7,23 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current synced baseline before v10.014 third product accepted candidate evidence package: 602e008dc94de7ba2a073a8f35b86ffbe7d85086 on master == origin/master.
+Current mainline state: v10_014 creates the accepted candidate evidence package for the premium serum bottle first real output. It seals evidence only; it does not commit the runs image, write accepted_samples, write memory, enter commercial delivery, or start production_candidate_002.
+Current phase id: v10_014_third_product_accepted_candidate_evidence_package_gate.
+product: cosmetic_skincare_bottle / premium_serum_bottle.
+source_output: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg.
+prompt_package: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml.
+asset_status: accepted_candidate_with_minor_watch_items.
+accepted_candidate: true.
+evidence_package_created: true.
+commercial_delivery_ready: false.
+memory_suitability: deferred.
+output_image_added_to_git: false.
+accepted_samples_written: false.
+memory_write_performed: false.
+production_candidate_002_started: false.
+recommended_next: v10_015_third_product_route_closeout_or_revision_decision_gate.
+recommended_next_auto_execution_allowed: false.
 Current synced baseline before v10.013 third product candidate path decision gate: 6c3708cfe3190869bd7e8968ab09322161051819 on master == origin/master.
 Current mainline state: v10_013 presents the next path after the premium serum bottle first real output was accepted with minor watch items. It recommends creating an accepted candidate evidence package and does not create A5 authorization, contact provider, generate image, retry, read .env.local, write memory, write accepted_samples, or start production_candidate_002.
 Current phase id: v10_013_third_product_prompt_revision_or_candidate_evidence_decision_gate.

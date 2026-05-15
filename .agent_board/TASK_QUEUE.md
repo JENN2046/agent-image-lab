@@ -9,6 +9,21 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v10_014_third_product_accepted_candidate_evidence_package_gate.
+Purpose: create accepted candidate evidence package for the premium serum bottle first real output; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, derivative image creation, real retouch execution, or commercial_delivery_ready=true.
+source_phase: v10_013_third_product_prompt_revision_or_candidate_evidence_decision_gate.
+source_commit: 602e008dc94de7ba2a073a8f35b86ffbe7d85086.
+product: cosmetic_skincare_bottle / premium_serum_bottle.
+source_output: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg.
+prompt_package: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml.
+asset_status: accepted_candidate_with_minor_watch_items.
+accepted_candidate: true.
+evidence_package_created: true.
+commercial_delivery_ready: false.
+memory_suitability: deferred.
+recommended_next: v10_015_third_product_route_closeout_or_revision_decision_gate.
+recommended_next_auto_execution_allowed: false.
+---
 Current active gate: v10_013_third_product_prompt_revision_or_candidate_evidence_decision_gate.
 Purpose: present Option A prompt revision plan, Option B accepted candidate evidence package, and Option C stop third product route here after the premium serum bottle first real output was accepted with minor watch items; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, derivative image creation, real retouch execution, or commercial_delivery_ready=true.
 source_phase: v10_012_human_review_of_third_product_first_real_output.
@@ -839,7 +854,7 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-none — v10_013_third_product_prompt_revision_or_candidate_evidence_decision_gate is completed_validated_pending_guarded_commit_and_push.
+none — v10_014_third_product_accepted_candidate_evidence_package_gate is completed_validated_pending_guarded_commit_and_push.
 ```
 
 ### todo

@@ -3,6 +3,30 @@
 ## Handoff Summary
 
 ```text
+Status: v10_014_third_product_accepted_candidate_evidence_package_gate is the current docs-only evidence package gate.
+Reason: Human selected v10.013 Option B. v10.014 seals accepted candidate evidence for the premium serum bottle first real output without committing runs output, writing accepted_samples, writing memory, entering commercial delivery, or starting production_candidate_002.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v10.014 patch: 602e008 docs: decide third product candidate evidence path
+ahead_behind: 0/0
+Worktree: clean before v10.014 patch; generated runs output remains ignored and is not staged or committed
+Current status: v10_014_third_product_accepted_candidate_evidence_package_gate
+source_phase: v10_013_third_product_prompt_revision_or_candidate_evidence_decision_gate
+product: cosmetic_skincare_bottle / premium_serum_bottle
+source_output: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg
+prompt_package: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+evidence_package_created: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+output_image_added_to_git: false
+accepted_samples_written: false
+memory_write_performed: false
+production_candidate_002_started: false
+recommended_next: v10_015_third_product_route_closeout_or_revision_decision_gate
+recommended_next_auto_execution_allowed: false
+---
 Status: v10_013_third_product_prompt_revision_or_candidate_evidence_decision_gate is the current docs-only decision gate.
 Reason: v10.012 accepted the premium serum bottle first real output with minor watch items. v10.013 presents Option A prompt revision plan, Option B accepted candidate evidence package, and Option C stop route here. It recommends Option B and does not create A5 authorization, contact providers, generate images, retry, read .env.local, write memory, write accepted_samples, start production_candidate_002, or commit runs output.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
