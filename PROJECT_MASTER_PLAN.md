@@ -8,6 +8,29 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+latest_head_after_v13_002_canonical_model: b359d4015a9801e97efdc99b2b905060ec871b83
+status: v13_003_visual_production_loop_canonical_model_static_review_gate
+mode: A4.8 docs-only static review gate
+phase_id: v13_003_visual_production_loop_canonical_model_static_review_gate
+source_phase: v13_002_visual_production_loop_canonical_model_gate
+source_commit: b359d4015a9801e97efdc99b2b905060ec871b83
+canonical_model_static_review_completed: true
+coverage_matrix_created: true
+v7_ceramic_mug_route_covered: true
+v8_sports_visor_route_covered: true
+v10_serum_bottle_route_covered: true
+accepted_candidate_commercial_delivery_boundary_checked: true
+memory_suitability_memory_write_boundary_checked: true
+provider_authorization_boundary_checked: true
+static_review_result: pass_with_minor_watch_items
+provider_contact: false
+image_generation: false
+memory_write: false
+production_candidate_002: false
+runtime_execution: false
+recommended_next: v13_004_existing_asset_loop_reconstruction_selection_gate
+recommended_next_auto_execution_allowed: true
+branch: master
 latest_head_after_v13_001_route_selection: 46df48201ce770b79797c4c41db225417da5e2fd
 status: v13_002_visual_production_loop_canonical_model_gate
 mode: A4.8 docs-only canonical model gate
