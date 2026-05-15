@@ -1,5 +1,42 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V12.001 Route Selection Gate
+
+```text
+phase_id: v12_001_route_selection_gate
+status: completed_remote_synced_after_guarded_push
+source_phase: v11_018_post_remote_sync_state_reconciliation_gate
+source_commit: b8dec73f116841525c1c1cca26b8d7fa5a16ae57
+purpose: present V12 route options and wait for human route selection
+phase_record_ref: docs/v12_001_route_selection_gate.md
+v11_prompt_schema_hardening_closed: true
+prompt_package_schema_path_alignment_included: true
+canonical_schemas_created: true
+canonical_schema_static_reviews_completed: true
+validation_strategy_created: true
+machine_validator_implemented: false
+existing_artifacts_migrated: false
+recommended_option: prompt_schema_machine_validator_implementation_planning
+backup_option: review_console_productization_planning
+human_decision_required: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: pending_human_v12_route_selection
+```
+
 # V11.018 Post Remote Sync State Reconciliation Gate
 
 ```text

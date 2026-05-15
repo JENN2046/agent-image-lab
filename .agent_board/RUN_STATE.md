@@ -9,12 +9,48 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v11_018_post_remote_sync_state_reconciliation_gate. V11 Prompt Schema Hardening is closed, and the v11.004 prompt package schema path alignment is included inside that closed route. This docs-only status reconciliation does not implement scripts, migrate prompt packages, generate images, write memory, copy output assets, or promote delivery/production status.
+Agent Image Lab is in v12_001_route_selection_gate. V11 Prompt Schema Hardening is closed, including prompt package schema path alignment, and V12 is presenting route options only. This docs-only gate does not implement machine validators, migrate artifacts, generate images, write memory, copy output assets, enter production, or enter runtime.
 ```
 
 ## Current Phase
 
 ```text
+V12.001 Route Selection Gate
+phase_id: v12_001_route_selection_gate
+source_phase: v11_018_post_remote_sync_state_reconciliation_gate
+status: completed_remote_synced_after_guarded_push
+source_commit: b8dec73f116841525c1c1cca26b8d7fa5a16ae57
+branch: master tracking origin/master
+selected_previous_route: prompt_schema_hardening
+v11_prompt_schema_hardening_closed: true
+prompt_package_schema_path_alignment_included: true
+canonical_schemas_created: true
+canonical_schema_static_reviews_completed: true
+validation_strategy_created: true
+machine_validator_implemented: false
+existing_artifacts_migrated: false
+options_presented: prompt_schema_machine_validator_implementation_planning | existing_artifact_migration_planning | review_console_productization_planning | fourth_product_prompt_workflow_expansion | delivery_completion_package_track | memory_suitability_planning | production_candidate_002_readiness_planning
+recommended_option: prompt_schema_machine_validator_implementation_planning
+backup_option: review_console_productization_planning
+human_decision_required: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: pending_human_v12_route_selection
+recommended_next_auto_execution_allowed: false
+---
 V11.018 Post Remote Sync State Reconciliation Gate
 phase_id: v11_018_post_remote_sync_state_reconciliation_gate
 source_phase: v11_prompt_schema_hardening_local_chain_remote_sync

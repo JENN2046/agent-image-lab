@@ -8,6 +8,26 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+latest_head_after_v11_018_reconciliation: b8dec73f116841525c1c1cca26b8d7fa5a16ae57
+status: v12_001_route_selection_gate
+mode: A4.8 docs-only route selection gate
+phase_id: v12_001_route_selection_gate
+source_phase: v11_018_post_remote_sync_state_reconciliation_gate
+source_commit: b8dec73f116841525c1c1cca26b8d7fa5a16ae57
+selected_previous_route: prompt_schema_hardening
+v11_prompt_schema_hardening_closed: true
+prompt_package_schema_path_alignment_included: true
+canonical_schemas_created: true
+canonical_schema_static_reviews_completed: true
+validation_strategy_created: true
+machine_validator_implemented: false
+existing_artifacts_migrated: false
+recommended_option: prompt_schema_machine_validator_implementation_planning
+backup_option: review_console_productization_planning
+human_decision_required: true
+recommended_next: pending_human_v12_route_selection
+recommended_next_auto_execution_allowed: false
+branch: master
 latest_head_after_v11_remote_sync: 72671faa547e3db040bed09a0c3751effb663bce
 origin_master_after_v11_remote_sync: 72671faa547e3db040bed09a0c3751effb663bce
 status: v11_018_post_remote_sync_state_reconciliation_gate

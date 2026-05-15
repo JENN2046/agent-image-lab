@@ -1,5 +1,36 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260515-v12.001-ROUTE-SELECTION-GATE
+
+Task:
+
+```text
+Present V12 route options after V11 Prompt Schema Hardening closed and wait for human selection.
+```
+
+Result:
+
+```text
+source_commit: b8dec73f116841525c1c1cca26b8d7fa5a16ae57
+v11_prompt_schema_hardening_closed: true
+prompt_package_schema_path_alignment_included: true
+canonical_schemas_created: true
+canonical_schema_static_reviews_completed: true
+validation_strategy_created: true
+machine_validator_implemented: false
+existing_artifacts_migrated: false
+recommended_option: prompt_schema_machine_validator_implementation_planning
+backup_option: review_console_productization_planning
+human_decision_required: true
+validation_result: passed_with_existing_manual_review_warnings_only
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, secret print, DailyNote write, VCP memory write, memory_write_path, production_candidate_002, Batch 005, runtime/CDP/bridge/MCP, dependency change, package.json change, accepted_samples write, runs output commit, derivative image creation, real retouch execution, commercial delivery execution, machine validator implementation, existing artifact migration, memory write, or V12 route execution is performed by v12.001.
+```
+
 ## VALIDATION-20260515-v11.018-POST-REMOTE-SYNC-STATE-RECONCILIATION
 
 Task:

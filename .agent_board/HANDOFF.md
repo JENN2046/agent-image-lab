@@ -3,6 +3,27 @@
 ## Handoff Summary
 
 ```text
+Status: v12_001_route_selection_gate is the current docs-only route selection gate.
+Reason: V11 Prompt Schema Hardening is closed after v11.018 post-sync reconciliation. V12 presents the next route options and waits for human selection without entering validator implementation, artifact migration, provider/image generation, memory, production, or runtime.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Source commit: b8dec73f116841525c1c1cca26b8d7fa5a16ae57
+Current status: v12_001_route_selection_gate
+source_phase: v11_018_post_remote_sync_state_reconciliation_gate
+selected_previous_route: prompt_schema_hardening
+v11_prompt_schema_hardening_closed: true
+prompt_package_schema_path_alignment_included: true
+canonical_schemas_created: true
+canonical_schema_static_reviews_completed: true
+validation_strategy_created: true
+machine_validator_implemented: false
+existing_artifacts_migrated: false
+recommended_option: prompt_schema_machine_validator_implementation_planning
+backup_option: review_console_productization_planning
+human_decision_required: true
+recommended_next: pending_human_v12_route_selection
+recommended_next_auto_execution_allowed: false
+---
 Status: v11_018_post_remote_sync_state_reconciliation_gate is the current docs-only status reconciliation gate.
 Reason: The V11 local chain was pushed to origin/master at 72671faa547e3db040bed09a0c3751effb663bce. The pushed HEAD was a v11.004 schema path alignment patch, so this gate restores active state surfaces to V11 Prompt Schema Hardening closed while preserving the prompt package schema path alignment as included.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

@@ -18,6 +18,21 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
+Current phase: v12_001_route_selection_gate.
+Current local/remote baseline after v11.018 reconciliation: b8dec73f116841525c1c1cca26b8d7fa5a16ae57.
+Current mainline state: V12 route selection is open after V11 Prompt Schema Hardening closed. This gate presents next route options only and does not implement machine validators, migrate existing artifacts, generate images, call providers, write memory, enter production, or enter runtime.
+v11_prompt_schema_hardening_closed: true.
+prompt_package_schema_path_alignment_included: true.
+canonical_schemas_created: true.
+canonical_schema_static_reviews_completed: true.
+validation_strategy_created: true.
+machine_validator_implemented: false.
+existing_artifacts_migrated: false.
+recommended_option: prompt_schema_machine_validator_implementation_planning.
+backup_option: review_console_productization_planning.
+human_decision_required: true.
+recommended_next: pending_human_v12_route_selection.
+recommended_next_auto_execution_allowed: false.
 Current phase: v11_018_post_remote_sync_state_reconciliation_gate.
 Current local/remote baseline after V11 remote sync: 72671faa547e3db040bed09a0c3751effb663bce.
 Current mainline state: V11 Prompt Schema Hardening is closed. The route includes scope, inventory, prompt package schema, product brief schema, static review schema, A5 authorization schema, human review schema, accepted candidate evidence package schema, static reviews, route-level validation strategy, route closeout, and the prompt package schema path alignment at docs/schemas/prompt_package_schema_v1.md. The active state no longer points to v11_004 as the current route; v11_004 is recorded as an included alignment patch inside the closed V11 route.

@@ -9,6 +9,20 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v12_001_route_selection_gate.
+Purpose: present V12 route options after V11 Prompt Schema Hardening closed; wait for human route selection; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, dependency change, machine validator implementation, or existing artifact migration.
+source_phase: v11_018_post_remote_sync_state_reconciliation_gate.
+source_commit: b8dec73f116841525c1c1cca26b8d7fa5a16ae57.
+v11_prompt_schema_hardening_closed: true.
+prompt_package_schema_path_alignment_included: true.
+machine_validator_implemented: false.
+existing_artifacts_migrated: false.
+recommended_option: prompt_schema_machine_validator_implementation_planning.
+backup_option: review_console_productization_planning.
+human_decision_required: true.
+recommended_next: pending_human_v12_route_selection.
+recommended_next_auto_execution_allowed: false.
+---
 Current active gate: v11_018_post_remote_sync_state_reconciliation_gate.
 Purpose: reconcile post-remote-sync status surfaces so the active repository state says V11 Prompt Schema Hardening is closed and the v11.004 prompt package schema path alignment is included; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, dependency change, prompt package migration, runner behavior change, or machine validator implementation.
 source_phase: v11_prompt_schema_hardening_local_chain_remote_sync.
