@@ -8,6 +8,36 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+latest_head_after_v13_012_pre_execution_package: 8ab8d952cb5ebb0afb7aff505aadb6878c670702
+status: v13_014_camping_lantern_post_generation_review_and_route_decision_gate
+mode: A4.8 post-generation docs-only review / route decision gate
+phase_id: v13_014_camping_lantern_post_generation_review_and_route_decision_gate
+source_phase: v13_013_one_minimal_real_generation_execution
+source_commit: 8ab8d952cb5ebb0afb7aff505aadb6878c670702
+approved_product: premium_portable_led_camping_lantern
+prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml
+output_file: runs/real_generation/v13_012_premium_portable_led_camping_lantern_first_trial/native_doubao_1778838659034_0.jpg
+file_size_bytes: 240457
+provider_calls_used: 1
+generation_attempts_used: 1
+output_images_created: 1
+local_files_verified_count: 1
+local_persistence_success: true
+asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+evidence_package_created: true
+evidence_package: docs/camping_lantern_accepted_candidate_evidence_package_v1.md
+auto_retry_used: false
+second_provider_call: false
+second_generation_attempt: false
+runs_output_committed: false
+accepted_samples_written: false
+memory_write: false
+recommended_next: pending_human_camping_lantern_accepted_candidate_closeout_or_delivery_readiness_selection
+recommended_next_auto_execution_allowed: false
+branch: master
 latest_head_after_v13_011_authorization_draft: 4d8420ed75aa53f96c9a095050591388f4c1bd03
 status: v13_012_camping_lantern_A5_pre_execution_package_gate
 mode: A5 pre-execution package gate under non-execution boundary

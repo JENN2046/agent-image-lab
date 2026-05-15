@@ -3,6 +3,43 @@
 ## Handoff Summary
 
 ```text
+Status: v13_014_camping_lantern_post_generation_review_and_route_decision_gate is the current post-generation review gate.
+Reason: v13.013 completed exactly one authorized camping lantern generation attempt and verified one local output file. v13.014 reviews the output, accepts it as candidate evidence with minor watch items, and stops before delivery, memory, accepted_samples, retouch, production, retry, or runs output commit.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Source commit: 8ab8d952cb5ebb0afb7aff505aadb6878c670702
+Current status: v13_014_camping_lantern_post_generation_review_and_route_decision_gate
+approved_product: premium_portable_led_camping_lantern
+prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml
+output_file: runs/real_generation/v13_012_premium_portable_led_camping_lantern_first_trial/native_doubao_1778838659034_0.jpg
+file_size_bytes: 240457
+provider_calls_used: 1
+generation_attempts_used: 1
+output_images_created: 1
+local_files_verified_count: 1
+local_persistence_success: true
+asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+evidence_package_created: true
+evidence_package: docs/camping_lantern_accepted_candidate_evidence_package_v1.md
+auto_retry_used: false
+second_provider_call: false
+second_generation_attempt: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+memory_write: false
+accepted_samples_written: false
+runs_output_committed: false
+production_candidate_002: false
+runtime_execution: false
+recommended_next: pending_human_camping_lantern_accepted_candidate_closeout_or_delivery_readiness_selection
+recommended_next_auto_execution_allowed: false
+next_phase_started: false
+---
 Status: v13_012_camping_lantern_A5_pre_execution_package_gate is the current pre-execution package gate.
 Reason: V13.011 drafted the one-shot authorization boundary. V13.012 now consolidates authorization finalization, execution confirmation, output directory policy, provider budget, secret boundary, stop conditions, and success condition without executing.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

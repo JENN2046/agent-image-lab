@@ -1,5 +1,57 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V13.014 Camping Lantern Post-Generation Review and Route Decision Gate
+
+```text
+phase_id: v13_014_camping_lantern_post_generation_review_and_route_decision_gate
+status: completed_validated_post_generation_review_record
+source_phase: v13_013_one_minimal_real_generation_execution
+source_commit: 8ab8d952cb5ebb0afb7aff505aadb6878c670702
+purpose: review camping lantern first real output and choose route without retry or downstream execution
+phase_record_ref: docs/v13_014_camping_lantern_post_generation_review_and_route_decision_gate.md
+evidence_package_ref: docs/camping_lantern_accepted_candidate_evidence_package_v1.md
+approved_product: premium_portable_led_camping_lantern
+prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml
+output_file: runs/real_generation/v13_012_premium_portable_led_camping_lantern_first_trial/native_doubao_1778838659034_0.jpg
+file_size_bytes: 240457
+provider_calls_used: 1
+generation_attempts_used: 1
+output_images_created: 1
+local_files_verified_count: 1
+local_persistence_success: true
+asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+evidence_package_created: true
+auto_retry_used: false
+second_provider_call: false
+second_generation_attempt: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+secret_value_recorded: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+real_retouch_execution: false
+commercial_delivery_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+package_lock_modified: false
+scripts_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: pending_human_camping_lantern_accepted_candidate_closeout_or_delivery_readiness_selection
+recommended_next_auto_execution_allowed: false
+next_phase_started: false
+```
+
 # V13.012 Camping Lantern A5 Pre-Execution Package Gate
 
 ```text

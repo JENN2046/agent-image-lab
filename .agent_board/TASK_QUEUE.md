@@ -9,6 +9,39 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v13_014_camping_lantern_post_generation_review_and_route_decision_gate.
+Purpose: record v13.013 local persistence, review the generated camping lantern output, accept it as candidate evidence with minor watch items, and stop before delivery, memory, accepted_samples, retouch, production, retry, or runs output commit.
+source_phase: v13_013_one_minimal_real_generation_execution.
+source_commit: 8ab8d952cb5ebb0afb7aff505aadb6878c670702.
+approved_product: premium_portable_led_camping_lantern.
+prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml.
+output_file: runs/real_generation/v13_012_premium_portable_led_camping_lantern_first_trial/native_doubao_1778838659034_0.jpg.
+file_size_bytes: 240457.
+provider_calls_used: 1.
+generation_attempts_used: 1.
+output_images_created: 1.
+local_files_verified_count: 1.
+local_persistence_success: true.
+asset_status: accepted_candidate_with_minor_watch_items.
+accepted_candidate: true.
+commercial_delivery_ready: false.
+memory_suitability: deferred.
+evidence_package_created: true.
+auto_retry_used: false.
+second_provider_call: false.
+second_generation_attempt: false.
+provider_contact: false.
+image_generation: false.
+retry: false.
+env_local_secret_value_read: false.
+memory_write: false.
+accepted_samples_written: false.
+runs_output_committed: false.
+production_candidate_002: false.
+recommended_next: pending_human_camping_lantern_accepted_candidate_closeout_or_delivery_readiness_selection.
+recommended_next_auto_execution_allowed: false.
+next_phase_started: false.
+---
 Current active gate: v13_012_camping_lantern_A5_pre_execution_package_gate.
 Purpose: consolidate the one-shot camping lantern A5 pre-execution package; no v13.013 entry, no provider contact, no image generation, no .env.local read, no output directory creation, no memory write, no production, no runtime, no real retouch, no commercial delivery, no accepted_samples write, and no runs output commit.
 source_phase: v13_011_camping_lantern_minimal_generation_authorization_draft_gate.
