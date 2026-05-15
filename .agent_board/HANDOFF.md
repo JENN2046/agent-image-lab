@@ -3,6 +3,31 @@
 ## Handoff Summary
 
 ```text
+Status: v13_010_premium_portable_led_camping_lantern_A5_authorization_decision_gate is the current A5 path decision gate.
+Reason: V13.009 returned pass_ready_for_A5_decision. V13.010 presents Option A/B/C and stops before any A5 authorization or provider execution.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Source commit: b89bba38918f44c56e3032d0e2d25e337a1c76f9
+Current status: v13_010_premium_portable_led_camping_lantern_A5_authorization_decision_gate
+selected_product: premium_portable_led_camping_lantern
+prompt_package_path: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml
+static_review_result: pass_ready_for_A5_decision
+options_presented: authorize_one_minimal_real_generation_trial_later | more_static_prompt_payload_review | stop_fourth_product_generation_route_here
+recommended_option: authorize_one_minimal_real_generation_trial_later
+human_decision_required: true
+A5_authorization_created: false
+A5_execution_started: false
+provider_contact: false
+image_generation: false
+env_local_secret_value_read: false
+output_directory_created: false
+memory_write: false
+production_candidate_002: false
+runtime_execution: false
+recommended_next: pending_human_camping_lantern_A5_path_selection
+recommended_next_auto_execution_allowed: false
+next_phase_started: false
+---
 Status: v13_009_premium_portable_led_camping_lantern_prompt_package_static_review_gate is the current static review gate.
 Reason: V13.008 created the camping lantern prompt package draft. V13.009 statically reviews the package and records pass_ready_for_A5_decision without creating A5 authorization or execution.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

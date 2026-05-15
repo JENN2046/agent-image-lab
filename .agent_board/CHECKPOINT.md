@@ -1,5 +1,47 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V13.010 Premium Portable LED Camping Lantern A5 Authorization Decision Gate
+
+```text
+phase_id: v13_010_premium_portable_led_camping_lantern_A5_authorization_decision_gate
+status: completed_validated_A5_path_decision_gate_record
+source_phase: v13_009_premium_portable_led_camping_lantern_prompt_package_static_review_gate
+source_commit: b89bba38918f44c56e3032d0e2d25e337a1c76f9
+purpose: present camping lantern A5 path options and stop before execution
+phase_record_ref: docs/v13_010_premium_portable_led_camping_lantern_A5_authorization_decision_gate.md
+prompt_package_ref: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml
+selected_product: premium_portable_led_camping_lantern
+static_review_result: pass_ready_for_A5_decision
+options_presented: authorize_one_minimal_real_generation_trial_later | more_static_prompt_payload_review | stop_fourth_product_generation_route_here
+recommended_option: authorize_one_minimal_real_generation_trial_later
+human_decision_required: true
+A5_authorization_created: false
+A5_execution_started: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+output_directory_created: false
+runtime_execution: false
+real_retouch_execution: false
+commercial_delivery_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+package_lock_modified: false
+scripts_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: pending_human_camping_lantern_A5_path_selection
+recommended_next_auto_execution_allowed: false
+next_phase_started: false
+```
+
 # V13.009 Premium Portable LED Camping Lantern Prompt Package Static Review Gate
 
 ```text
