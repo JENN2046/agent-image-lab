@@ -1,5 +1,34 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260515-v11.006-PRODUCT-BRIEF-SCHEMA-DRAFT
+
+Task:
+
+```text
+Draft canonical product brief schema and validation strategy from v11.003 inventory.
+```
+
+Result:
+
+```text
+selected_route: prompt_schema_hardening
+product_brief_canonical_schema_drafted: true
+product_identity_lock_defined: true
+structure_lock_defined: true
+material_texture_constraints_defined: true
+text_label_logo_policy_defined: true
+no_execution_handoff_defined: true
+legacy_ceramic_mug_missing_brief_documented: true
+machine_validator_implemented: false
+validation_result: passed_with_existing_manual_review_warnings_only
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, secret print, DailyNote write, VCP memory write, memory_write_path, production_candidate_002, Batch 005, runtime/CDP/bridge/MCP, dependency change, package.json change, accepted_samples write, runs output commit, derivative image creation, real retouch execution, commercial delivery execution, brief behavior change, prompt package behavior change, machine validator implementation, or A5 generation authorization creation is performed by v11.006.
+```
+
 ## VALIDATION-20260515-v11.005-PROMPT-PACKAGE-SCHEMA-STATIC-REVIEW
 
 Task:

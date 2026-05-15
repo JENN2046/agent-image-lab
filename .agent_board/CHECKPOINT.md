@@ -1,5 +1,45 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V11.006 Product Brief Schema Draft Gate
+
+```text
+phase_id: v11_006_product_brief_schema_draft_gate
+status: completed_validated_local_commit_pending_remote_push_authorization
+source_phase: v11_005_prompt_package_schema_static_review_gate
+source_commit: 28852990878776dcc32b0febcab84a5328165c60
+purpose: draft canonical product brief schema and validation strategy from v11.003 inventory
+phase_record_ref: docs/v11_006_product_brief_schema_draft_gate.md
+schema_ref: docs/product_brief_canonical_schema.md
+selected_route: prompt_schema_hardening
+product_brief_canonical_schema_drafted: true
+product_identity_lock_defined: true
+structure_lock_defined: true
+material_texture_constraints_defined: true
+text_label_logo_policy_defined: true
+no_execution_handoff_defined: true
+legacy_ceramic_mug_missing_brief_documented: true
+machine_validator_implemented: false
+brief_behavior_changed: false
+prompt_package_behavior_changed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+A5_generation_authorization_created: false
+recommended_next: v11_007_product_brief_schema_static_review_gate
+```
+
 # V11.005 Prompt Package Schema Static Review Gate
 
 ```text

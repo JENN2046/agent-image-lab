@@ -7,6 +7,24 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current local baseline before v11.006 product brief schema draft: 28852990878776dcc32b0febcab84a5328165c60 on master ahead origin/master by 2.
+Current mainline state: v11_006 drafts the product brief canonical schema from the sports visor and premium serum bottle briefs, while documenting the ceramic mug route as a legacy lane without a dedicated briefs artifact. It defines brief identity, product identity lock, structure lock, material/texture constraints, color or finish strategy, scene/composition boundary, text/label/logo policy, acceptance criteria, known risks, and no-execution handoff fields. It does not edit briefs, prompt packages, validators, runner behavior, provider contact, image generation, memory, production, accepted_samples, or runs output.
+Current phase id: v11_006_product_brief_schema_draft_gate.
+selected_route: prompt_schema_hardening.
+product_brief_canonical_schema_drafted: true.
+product_identity_lock_defined: true.
+structure_lock_defined: true.
+material_texture_constraints_defined: true.
+text_label_logo_policy_defined: true.
+no_execution_handoff_defined: true.
+legacy_ceramic_mug_missing_brief_documented: true.
+machine_validator_implemented: false.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+memory_write_allowed_now: false.
+production_candidate_002_allowed_now: false.
+recommended_next: v11_007_product_brief_schema_static_review_gate.
+recommended_next_auto_execution_allowed: true.
 Current local baseline before v11.005 prompt package schema static review: 270dd3af89eb8d932319b4cad16da597127db08c on master ahead origin/master by 1.
 Current mainline state: v11_005 statically reviews the prompt package canonical schema against the v11.003 inventory. Result: pass_for_schema_static_review. It confirms coverage for prompt / positive_prompt sync, YAML literal block shape, runner-facing prompt, product identity, structure lock, material constraints, scene constraints, text/logo boundaries, no-execution safety flags, and downstream separation of accepted_candidate, commercial_delivery_ready, and memory_suitability. It does not implement validators, migrate prompt packages, modify runner behavior, contact provider, generate images, write memory, enter production, write accepted_samples, or commit runs output.
 Current phase id: v11_005_prompt_package_schema_static_review_gate.

@@ -9,12 +9,51 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v11_005_prompt_package_schema_static_review_gate. This docs-only static review gate reviews the prompt package canonical schema against v11.003 inventory risks without changing prompt packages or execution behavior.
+Agent Image Lab is in v11_006_product_brief_schema_draft_gate. This docs-only schema draft gate defines the canonical product brief shape and validation strategy without changing existing briefs or execution behavior.
 ```
 
 ## Current Phase
 
 ```text
+V11.006 Product Brief Schema Draft Gate
+phase_id: v11_006_product_brief_schema_draft_gate
+source_phase: v11_005_prompt_package_schema_static_review_gate
+status: completed_validated_local_commit_pending_remote_push_authorization
+source_commit: 28852990878776dcc32b0febcab84a5328165c60
+source_message: docs: review prompt package canonical schema
+branch: master tracking origin/master
+origin_sync_current: local HEAD ahead origin/master by 2 before v11.006 patch
+ahead_behind: 0/2 before v11.006 patch
+selected_route: prompt_schema_hardening
+product_brief_canonical_schema_drafted: true
+product_identity_lock_defined: true
+structure_lock_defined: true
+material_texture_constraints_defined: true
+text_label_logo_policy_defined: true
+no_execution_handoff_defined: true
+legacy_ceramic_mug_missing_brief_documented: true
+machine_validator_implemented: false
+brief_behavior_changed: false
+prompt_package_behavior_changed: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+A5_generation_authorization_created: false
+recommended_next: v11_007_product_brief_schema_static_review_gate
+recommended_next_auto_execution_allowed: true
+---
 V11.005 Prompt Package Schema Static Review Gate
 phase_id: v11_005_prompt_package_schema_static_review_gate
 source_phase: v11_004_prompt_package_schema_draft_gate
