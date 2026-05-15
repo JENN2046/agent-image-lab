@@ -7,6 +7,16 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current phase: v12_006_prompt_schema_minimal_validator_implementation_gate.
+Current local/remote baseline after v12.005 authorization gate: b37cf2d98ea59334b8500555399ae1eb19c15f8c.
+Current mainline state: V12 has created the minimal read-only Prompt Schema Machine Validator v1 and synthetic fixture manifest. The validator is Node.js only, dependency-free, manifest-driven, explicit-file only, non-recursive, and does not read `.env.local`, mutate files, run Git, contact providers, generate images, write memory, enter production, or enter runtime.
+machine_validator_implemented: true.
+fixture_files_created: true.
+scripts_modified: true.
+existing_artifacts_migrated: false.
+existing_prompt_packages_modified: false.
+recommended_next: v12_007_prompt_schema_validator_static_review_and_syntax_gate.
+recommended_next_auto_execution_allowed: true.
 Current phase: v12_005_prompt_schema_validator_implementation_authorization_gate.
 Current local/remote baseline after v12.004 path decision: 127bd71c8b4cdfc522a84b37c8808ef323c67c72.
 Current mainline state: Human selected v12.004 Option B, entering the validator implementation authorization gate. This gate authorizes v12.006 to create a minimal read-only Node.js prompt schema validator and synthetic fixtures, but it does not itself create validator code, fixture files, tests/fixtures, dependency changes, artifact migration, prompt package changes, provider contact, image generation, memory write, production, or runtime.

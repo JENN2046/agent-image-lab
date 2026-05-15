@@ -9,12 +9,45 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v12_005_prompt_schema_validator_implementation_authorization_gate. The human selected v12.004 Option B, authorizing v12.006 to create a minimal read-only Node.js prompt schema validator and synthetic fixtures. v12.005 itself remains a boundary record and does not create validator code, fixture files, migrate artifacts, generate images, write memory, enter production, or enter runtime.
+Agent Image Lab is in v12_006_prompt_schema_minimal_validator_implementation_gate. V12 has created a minimal read-only Node.js prompt schema validator and synthetic fixture manifest. It remains explicit-file only and does not migrate existing artifacts, modify existing prompt packages, generate images, write memory, enter production, or enter runtime.
 ```
 
 ## Current Phase
 
 ```text
+V12.006 Prompt Schema Minimal Validator Implementation Gate
+phase_id: v12_006_prompt_schema_minimal_validator_implementation_gate
+source_phase: v12_005_prompt_schema_validator_implementation_authorization_gate
+status: completed_validated_pending_guarded_commit_and_post_commit_scope_validation
+source_commit: b37cf2d98ea59334b8500555399ae1eb19c15f8c
+branch: master tracking origin/master
+machine_validator_implemented: true
+fixture_files_created: true
+scripts_modified: true
+validator_path: scripts/validate_prompt_schema.js
+fixture_manifest: tests/fixtures/prompt_schema_validator/manifest.json
+existing_artifacts_migrated: false
+existing_prompt_packages_modified: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+package_lock_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: v12_007_prompt_schema_validator_static_review_and_syntax_gate
+recommended_next_auto_execution_allowed: true
+post_commit_scope_validation_required: true
+---
 V12.005 Prompt Schema Validator Implementation Authorization Gate
 phase_id: v12_005_prompt_schema_validator_implementation_authorization_gate
 source_phase: v12_004_prompt_schema_validator_fixture_planning_closeout_or_implementation_decision_gate

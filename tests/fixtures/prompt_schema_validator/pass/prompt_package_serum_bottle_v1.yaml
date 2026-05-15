@@ -1,0 +1,36 @@
+package_id: synthetic_prompt_package_serum_bottle_v1
+artifact_type: prompt_package
+selected_product: premium_serum_bottle
+product_identity: frosted translucent premium serum bottle with clean dropper cap
+locked_structure: cylindrical bottle, straight shoulders, centered label panel, glass pipette dropper
+product_brief_ref: synthetic/product_brief_serum_bottle_v1.md
+prompt: |
+  Premium frosted translucent serum bottle on a quiet stone vanity, clean dropper cap, centered elegant blank label panel, soft studio daylight, refined skincare brand atmosphere.
+positive_prompt: |
+  Premium frosted translucent serum bottle on a quiet stone vanity, clean dropper cap, centered elegant blank label panel, soft studio daylight, refined skincare brand atmosphere.
+negative_prompt: |
+  readable logo, fake brand text, people, hands, broken label, plastic toy material, distorted bottle shape, unstable dropper, messy background
+runner_prompt_mapping:
+  canonical_field: prompt
+  human_alias: positive_prompt
+visual_intent:
+  premium beauty still life with calm commercial clarity
+material_constraints:
+  frosted glass, subtle thickness, refined dropper materials
+structure_constraints:
+  straight bottle, stable shoulder, clean cap alignment
+scene_constraints:
+  minimal vanity scene, no distracting props
+lighting_camera:
+  soft daylight, front three-quarter product view
+forbidden_elements:
+  readable logo, fake text, people, extra bottles, shape drift
+acceptance_criteria:
+  product identity correct, material credible, label clean, no fake text
+human_review_checklist:
+  identity, structure, material, label boundary, commercial polish
+A5_authorization_required_later: true
+provider_contact_allowed: false
+image_generation_allowed: false
+memory_write_allowed: false
+production_candidate_002_allowed: false

@@ -3,6 +3,22 @@
 ## Handoff Summary
 
 ```text
+Status: v12_006_prompt_schema_minimal_validator_implementation_gate is the current minimal validator implementation gate.
+Reason: v12.005 authorized creation of a small read-only Node.js validator and synthetic fixture manifest. v12.006 creates that implementation without migrating existing artifacts or modifying existing prompt packages.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Source commit: b37cf2d98ea59334b8500555399ae1eb19c15f8c
+Current status: v12_006_prompt_schema_minimal_validator_implementation_gate
+machine_validator_implemented: true
+fixture_files_created: true
+scripts_modified: true
+validator_path: scripts/validate_prompt_schema.js
+fixture_manifest: tests/fixtures/prompt_schema_validator/manifest.json
+existing_artifacts_migrated: false
+existing_prompt_packages_modified: false
+recommended_next: v12_007_prompt_schema_validator_static_review_and_syntax_gate
+recommended_next_auto_execution_allowed: true
+---
 Status: v12_005_prompt_schema_validator_implementation_authorization_gate is the current validator implementation authorization gate.
 Reason: Human selected v12.004 Option B. This gate authorizes v12.006 to create a minimal read-only Node.js validator and synthetic fixtures, while v12.005 itself remains docs/status only.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

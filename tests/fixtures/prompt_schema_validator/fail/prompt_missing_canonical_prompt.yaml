@@ -1,0 +1,20 @@
+package_id: synthetic_fail_prompt_missing_canonical_prompt
+artifact_type: prompt_package
+selected_product: premium_serum_bottle
+product_identity: premium serum bottle
+locked_structure: frosted glass bottle with dropper
+product_brief_ref: synthetic/product_brief_serum_bottle_v1.md
+positive_prompt: |
+  Premium frosted serum bottle.
+negative_prompt: |
+  readable logo, fake text, people
+material_constraints: frosted glass
+structure_constraints: stable bottle and dropper
+scene_constraints: quiet vanity scene
+forbidden_elements: readable logo, fake text
+acceptance_criteria: identity and material credible
+human_review_checklist: identity, structure, material
+provider_contact_allowed: false
+image_generation_allowed: false
+memory_write_allowed: false
+production_candidate_002_allowed: false

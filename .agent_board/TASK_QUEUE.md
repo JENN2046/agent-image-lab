@@ -9,6 +9,20 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v12_006_prompt_schema_minimal_validator_implementation_gate.
+Purpose: create the minimal read-only Node.js prompt schema validator and synthetic fixture manifest; no existing artifact migration, no existing prompt package edits, no provider contact, no image generation, no memory write, no production, and no runtime.
+source_phase: v12_005_prompt_schema_validator_implementation_authorization_gate.
+source_commit: b37cf2d98ea59334b8500555399ae1eb19c15f8c.
+machine_validator_implemented: true.
+fixture_files_created: true.
+scripts_modified: true.
+validator_path: scripts/validate_prompt_schema.js.
+fixture_manifest: tests/fixtures/prompt_schema_validator/manifest.json.
+existing_artifacts_migrated: false.
+existing_prompt_packages_modified: false.
+recommended_next: v12_007_prompt_schema_validator_static_review_and_syntax_gate.
+recommended_next_auto_execution_allowed: true.
+---
 Current active gate: v12_005_prompt_schema_validator_implementation_authorization_gate.
 Purpose: record human selection of v12.004 Option B and authorize v12.006 minimal validator implementation; v12.005 does not create validator code, fixture files, tests/fixtures, dependency changes, artifact migration, prompt package changes, provider contact, image generation, memory write, production, or runtime.
 source_phase: v12_004_prompt_schema_validator_fixture_planning_closeout_or_implementation_decision_gate.

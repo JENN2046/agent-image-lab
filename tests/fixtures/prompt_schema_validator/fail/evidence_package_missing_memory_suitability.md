@@ -1,0 +1,12 @@
+# Synthetic Evidence Package Missing Memory Suitability
+
+source_output: synthetic/output/premium_serum_bottle_first_trial/reviewable_output
+prompt_package: tests/fixtures/prompt_schema_validator/pass/prompt_package_serum_bottle_v1.yaml
+asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+commercial_delivery_ready: false
+evidence_package_created: true
+output_image_added_to_git: false
+accepted_samples_written: false
+memory_write_performed: false
+production_candidate_002_started: false

@@ -1,5 +1,38 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260515-v12.006-PROMPT-SCHEMA-MINIMAL-VALIDATOR-IMPLEMENTATION
+
+Task:
+
+```text
+Create the minimal read-only Node.js prompt schema validator and synthetic PASS/WARN/FAIL fixture manifest.
+```
+
+Result:
+
+```text
+source_commit: b37cf2d98ea59334b8500555399ae1eb19c15f8c
+validator_path: scripts/validate_prompt_schema.js
+fixture_manifest: tests/fixtures/prompt_schema_validator/manifest.json
+machine_validator_implemented: true
+fixture_files_created: true
+scripts_modified: true
+package_json_modified: false
+package_lock_modified: false
+dependency_change: false
+existing_artifacts_migrated: false
+existing_prompt_packages_modified: false
+validation_result: passed_core_checks_post_commit_scope_validation_pending
+core_checks_passed: git diff --check | node --check scripts/validate_prompt_schema.js | validator manifest execution | agent board state | current state alignment | native doubao sandbox | local validation with manual-review warnings
+post_commit_scope_validation_required: scripts/validate_mvp.ps1 requires a clean no-staged/no-untracked worktree after guarded commit
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, secret print, DailyNote write, VCP memory write, memory_write_path, production_candidate_002, Batch 005, runtime/CDP/bridge/MCP, dependency change, package.json change, package-lock change, accepted_samples write, runs output commit, derivative image creation, real retouch execution, commercial delivery execution, existing artifact migration, existing prompt package modification, runner behavior change, memory write, provider execution, or production execution is performed by v12.006.
+```
+
 ## VALIDATION-20260515-v12.005-PROMPT-SCHEMA-VALIDATOR-IMPLEMENTATION-AUTHORIZATION
 
 Task:

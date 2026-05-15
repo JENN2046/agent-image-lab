@@ -1,5 +1,41 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V12.006 Prompt Schema Minimal Validator Implementation Gate
+
+```text
+phase_id: v12_006_prompt_schema_minimal_validator_implementation_gate
+status: completed_validated_pending_guarded_commit_and_post_commit_scope_validation
+source_phase: v12_005_prompt_schema_validator_implementation_authorization_gate
+source_commit: b37cf2d98ea59334b8500555399ae1eb19c15f8c
+purpose: create minimal read-only prompt schema validator and synthetic fixtures
+phase_record_ref: docs/v12_006_prompt_schema_minimal_validator_implementation_gate.md
+validator_path: scripts/validate_prompt_schema.js
+fixture_manifest: tests/fixtures/prompt_schema_validator/manifest.json
+machine_validator_implemented: true
+fixture_files_created: true
+scripts_modified: true
+package_json_modified: false
+package_lock_modified: false
+dependency_change: false
+existing_artifacts_migrated: false
+existing_prompt_packages_modified: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: v12_007_prompt_schema_validator_static_review_and_syntax_gate
+post_commit_scope_validation_required: true
+```
+
 # V12.005 Prompt Schema Validator Implementation Authorization Gate
 
 ```text

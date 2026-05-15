@@ -1,0 +1,22 @@
+{
+  "schema": "prompt_schema_validator_fixture_manifest_v1",
+  "description": "Synthetic fixtures only. No provider payloads, secrets, generated images, runs output, accepted_samples, production records, or real prompt packages.",
+  "fixtures": [
+    { "path": "pass/prompt_package_serum_bottle_v1.yaml", "type": "prompt_package", "expected": "pass" },
+    { "path": "pass/product_brief_serum_bottle_v1.md", "type": "product_brief", "expected": "pass" },
+    { "path": "pass/static_review_prompt_package_v1.md", "type": "static_review", "expected": "pass" },
+    { "path": "pass/A5_authorization_gate_minimal_generation.md", "type": "A5_authorization", "expected": "pass" },
+    { "path": "pass/human_review_accepted_candidate.md", "type": "human_review", "expected": "pass" },
+    { "path": "pass/accepted_candidate_evidence_package.md", "type": "accepted_candidate_evidence", "expected": "pass" },
+    { "path": "fail/prompt_missing_canonical_prompt.yaml", "type": "prompt_package", "expected": "fail" },
+    { "path": "fail/positive_prompt_not_synced.yaml", "type": "prompt_package", "expected": "fail" },
+    { "path": "fail/negative_prompt_not_literal_block.yaml", "type": "prompt_package", "expected": "fail" },
+    { "path": "fail/prompt_package_implies_provider_contact.yaml", "type": "prompt_package", "expected": "fail" },
+    { "path": "fail/A5_auth_missing_budget.md", "type": "A5_authorization", "expected": "fail" },
+    { "path": "fail/static_review_claims_image_generation.md", "type": "static_review", "expected": "fail" },
+    { "path": "fail/human_review_missing_commercial_delivery_boundary.md", "type": "human_review", "expected": "fail" },
+    { "path": "fail/evidence_package_missing_memory_suitability.md", "type": "accepted_candidate_evidence", "expected": "fail" },
+    { "path": "warn/legacy_prompt_package_missing_product_brief_ref.yaml", "type": "prompt_package", "expected": "warn" },
+    { "path": "warn/legacy_review_missing_watch_items.md", "type": "static_review", "expected": "warn" }
+  ]
+}
