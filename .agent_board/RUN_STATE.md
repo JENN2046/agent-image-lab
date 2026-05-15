@@ -9,12 +9,52 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v13_006_visual_production_loop_foundation_closeout_or_next_route_decision_gate. V13 foundation is closed and the project is waiting for human selection of the next route without provider contact, image generation, memory write, production execution, runtime, artifact migration, prompt package modification, real retouch, or real delivery.
+Agent Image Lab is in v13_007_next_product_visual_production_trial_planning_gate. V13 selected the fourth-product planning target, premium_portable_led_camping_lantern, and is drafting brief / shot / prompt planning / static review / A5 decision prerequisites without provider contact, image generation, memory write, production execution, runtime, prompt package file creation, real retouch, or real delivery.
 ```
 
 ## Current Phase
 
 ```text
+V13.007 Next Product Visual Production Trial Planning Gate
+phase_id: v13_007_next_product_visual_production_trial_planning_gate
+source_phase: v13_006_visual_production_loop_foundation_closeout_or_next_route_decision_gate
+status: completed_validated_next_product_planning_record
+source_commit: a17be5c9b3c6960cb7e59881a79e2768b2c66b1a
+branch: master tracking origin/master
+selected_product: premium_portable_led_camping_lantern
+selected_product_zh: 高端便携式 LED 露营灯
+candidate_products_presented_count: 4
+product_brief_draft_created: true
+shot_plan_draft_created: true
+shot_list_created: true
+prompt_package_planning_requirements_created: true
+static_review_plan_created: true
+A5_decision_gate_prerequisites_created: true
+future_generation_authorized_now: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+real_retouch_execution: false
+commercial_delivery_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+package_lock_modified: false
+scripts_modified: false
+prompts_image_generation_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: pending_human_v13_008_prompt_package_draft_or_stop_selection
+recommended_next_auto_execution_allowed: false
+next_phase_started: false
+---
 V13.006 Visual Production Loop Foundation Closeout Or Next Route Decision Gate
 phase_id: v13_006_visual_production_loop_foundation_closeout_or_next_route_decision_gate
 source_phase: v13_005_existing_asset_loop_reconstruction_docs_only_gate

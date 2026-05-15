@@ -8,6 +8,29 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+latest_head_after_v13_006_foundation_closeout: a17be5c9b3c6960cb7e59881a79e2768b2c66b1a
+status: v13_007_next_product_visual_production_trial_planning_gate
+mode: A4.8 docs-only next product planning gate
+phase_id: v13_007_next_product_visual_production_trial_planning_gate
+source_phase: v13_006_visual_production_loop_foundation_closeout_or_next_route_decision_gate
+source_commit: a17be5c9b3c6960cb7e59881a79e2768b2c66b1a
+selected_product: premium_portable_led_camping_lantern
+candidate_products_presented_count: 4
+product_brief_draft_created: true
+shot_plan_draft_created: true
+shot_list_created: true
+prompt_package_planning_requirements_created: true
+static_review_plan_created: true
+A5_decision_gate_prerequisites_created: true
+future_generation_authorized_now: false
+provider_contact: false
+image_generation: false
+memory_write: false
+production_candidate_002: false
+runtime_execution: false
+recommended_next: pending_human_v13_008_prompt_package_draft_or_stop_selection
+recommended_next_auto_execution_allowed: false
+branch: master
 latest_head_after_v13_005_reconstruction: 9fb10d57fd1586eab2bab79d3418c37af501b01a
 status: v13_006_visual_production_loop_foundation_closeout_or_next_route_decision_gate
 mode: A4.8 docs-only foundation closeout / decision gate
