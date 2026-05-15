@@ -1,5 +1,45 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V11.004 Prompt Package Schema Draft Gate
+
+```text
+phase_id: v11_004_prompt_package_schema_draft_gate
+status: completed_validated_pending_guarded_commit
+source_phase: v11_003_existing_prompt_artifact_schema_inventory_gate
+source_commit: 8331dc09c381946d9b93637c3478c837ab53d6e4
+purpose: draft canonical prompt package schema and validation strategy from v11.003 inventory
+phase_record_ref: docs/v11_004_prompt_package_schema_draft_gate.md
+schema_ref: docs/prompt_package_canonical_schema.md
+selected_route: prompt_schema_hardening
+prompt_package_canonical_schema_drafted: true
+runner_canonical_prompt_field_required: prompt
+positive_prompt_sync_policy_defined: true
+yaml_literal_block_policy_defined: true
+product_identity_structure_material_scene_fields_defined: true
+text_logo_policy_defined: true
+execution_safety_flags_defined: true
+validation_strategy_defined: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+prompt_package_behavior_changed: false
+runner_behavior_changed: false
+A5_generation_authorization_created: false
+recommended_next: v11_005_prompt_package_schema_static_review_gate
+```
+
 # V11.003 Existing Prompt Artifact Schema Inventory Gate
 
 ```text

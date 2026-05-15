@@ -7,6 +7,24 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current local baseline before v11.004 prompt package schema draft: 8331dc09c381946d9b93637c3478c837ab53d6e4 on master == origin/master.
+Current mainline state: v11_004 drafts the prompt package canonical schema and validation strategy from the v11.003 inventory. It defines runner-facing prompt field rules, prompt / positive_prompt sync policy, YAML literal block expectations, product identity, structure lock, material, scene, text/logo, review, and no-execution safety fields without modifying prompt packages, runner behavior, provider contact, image generation, memory, production, accepted_samples, or runs output.
+Current phase id: v11_004_prompt_package_schema_draft_gate.
+selected_route: prompt_schema_hardening.
+prompt_package_canonical_schema_drafted: true.
+runner_canonical_prompt_field_required: prompt.
+positive_prompt_sync_policy_defined: true.
+yaml_literal_block_policy_defined: true.
+product_identity_structure_material_scene_fields_defined: true.
+text_logo_policy_defined: true.
+execution_safety_flags_defined: true.
+validation_strategy_defined: true.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+memory_write_allowed_now: false.
+production_candidate_002_allowed_now: false.
+recommended_next: v11_005_prompt_package_schema_static_review_gate.
+recommended_next_auto_execution_allowed: true.
 Current synced baseline before v11.003 prompt artifact schema inventory: d55bd3d6d58aa137c1cbac7124798b9cd0556196 on master == origin/master.
 Current mainline state: v11_003 inventories existing prompt workflow artifacts across matte ceramic mug, multi-color mesh sports visor, and premium serum bottle routes. It records schema drift examples and machine validation gaps without changing prompt package behavior, runner behavior, A5 authorization, provider contact, image generation, memory, production, accepted_samples, or runs output.
 Current phase id: v11_003_existing_prompt_artifact_schema_inventory_gate.

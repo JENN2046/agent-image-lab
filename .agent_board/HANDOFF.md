@@ -3,6 +3,32 @@
 ## Handoff Summary
 
 ```text
+Status: v11_004_prompt_package_schema_draft_gate is the current docs-only schema draft gate.
+Reason: v11.003 inventoried prompt workflow schema drift. v11.004 drafts the canonical prompt package schema and validation strategy covering runner-facing `prompt`, `positive_prompt` synchronization, YAML literal block shape, product identity, structure lock, material constraints, scene constraints, text/logo boundaries, acceptance criteria, human review checklist, and no-execution safety flags. It does not modify prompt packages, runner behavior, create A5 authorization, contact provider, generate images, read .env.local, write memory, write accepted_samples, or enter production/runtime.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v11.004 patch: 8331dc0 docs: inventory prompt workflow schema artifacts
+ahead_behind: 0/0 before v11.004 patch
+Worktree: clean before v11.004 patch
+Current status: v11_004_prompt_package_schema_draft_gate
+source_phase: v11_003_existing_prompt_artifact_schema_inventory_gate
+source_commit: 8331dc09c381946d9b93637c3478c837ab53d6e4
+selected_route: prompt_schema_hardening
+prompt_package_canonical_schema_drafted: true
+runner_canonical_prompt_field_required: prompt
+positive_prompt_sync_policy_defined: true
+yaml_literal_block_policy_defined: true
+product_identity_structure_material_scene_fields_defined: true
+text_logo_policy_defined: true
+execution_safety_flags_defined: true
+validation_strategy_defined: true
+provider_contact_allowed_now: false
+image_generation_allowed_now: false
+memory_write_allowed_now: false
+production_candidate_002_allowed_now: false
+recommended_next: v11_005_prompt_package_schema_static_review_gate
+recommended_next_auto_execution_allowed: true
+---
 Status: v11_003_existing_prompt_artifact_schema_inventory_gate is the current docs-only schema inventory gate.
 Reason: v11.002 activated Prompt Schema Hardening. v11.003 inventories product brief, prompt package, static review, A5 authorization/execution confirmation, human review, evidence package, delivery readiness, and route closeout artifacts across the ceramic mug, sports visor, and premium serum bottle routes. It records drift and validation gaps only; it does not change runner behavior, create A5 authorization, contact provider, generate images, read .env.local, write memory, write accepted_samples, or enter production/runtime.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

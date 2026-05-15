@@ -9,12 +9,51 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v11_003_existing_prompt_artifact_schema_inventory_gate. This docs-only schema inventory gate catalogs existing prompt workflow artifacts and records schema drift plus machine validation gaps without execution.
+Agent Image Lab is in v11_004_prompt_package_schema_draft_gate. This docs-only schema draft gate defines the canonical prompt package shape and validation strategy without changing prompt packages or execution behavior.
 ```
 
 ## Current Phase
 
 ```text
+V11.004 Prompt Package Schema Draft Gate
+phase_id: v11_004_prompt_package_schema_draft_gate
+source_phase: v11_003_existing_prompt_artifact_schema_inventory_gate
+status: completed_validated_pending_guarded_commit
+source_commit: 8331dc09c381946d9b93637c3478c837ab53d6e4
+source_message: docs: inventory prompt workflow schema artifacts
+branch: master tracking origin/master
+origin_sync_current: local HEAD equals origin/master at 8331dc0 before v11.004 patch
+ahead_behind: 0/0 before v11.004 patch
+selected_route: prompt_schema_hardening
+prompt_package_canonical_schema_drafted: true
+runner_canonical_prompt_field_required: prompt
+positive_prompt_sync_policy_defined: true
+yaml_literal_block_policy_defined: true
+product_identity_structure_material_scene_fields_defined: true
+text_logo_policy_defined: true
+execution_safety_flags_defined: true
+validation_strategy_defined: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+prompt_package_behavior_changed: false
+runner_behavior_changed: false
+A5_generation_authorization_created: false
+recommended_next: v11_005_prompt_package_schema_static_review_gate
+recommended_next_auto_execution_allowed: true
+---
 V11.003 Existing Prompt Artifact Schema Inventory Gate
 phase_id: v11_003_existing_prompt_artifact_schema_inventory_gate
 source_phase: v11_002_prompt_schema_hardening_route_activation_gate
