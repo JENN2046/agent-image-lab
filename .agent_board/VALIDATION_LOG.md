@@ -1,5 +1,39 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260515-v10.015-THIRD-PRODUCT-ROUTE-CLOSEOUT-OR-REVISION-DECISION
+
+Task:
+
+```text
+Present third product route closeout, prompt revision, or delivery readiness planning options.
+```
+
+Result:
+
+```text
+product: cosmetic_skincare_bottle / premium_serum_bottle
+source_output: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg
+asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+evidence_package_created: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+options_presented: create_prompt_revision_plan | close_third_product_route_as_accepted_candidate_evidence | enter_third_product_delivery_readiness_planning
+recommended_option: close_third_product_route_as_accepted_candidate_evidence
+human_decision_required: true
+accepted_samples_written: false
+runs_output_committed: false
+memory_write_performed: false
+production_candidate_002_started: false
+validation_result: passed_with_existing_manual_review_warnings_only
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, secret print, DailyNote write, VCP memory write, memory_write_path, production_candidate_002, Batch 005, runtime/CDP/bridge/MCP, dependency change, package.json change, accepted_samples write, runs output commit, derivative image creation, real retouch execution, commercial_delivery_ready=true, or real commercial delivery execution is performed by v10.015.
+```
+
 ## VALIDATION-20260515-v10.014-THIRD-PRODUCT-ACCEPTED-CANDIDATE-EVIDENCE-PACKAGE
 
 Task:

@@ -7,6 +7,27 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current synced baseline before v10.015 third product route closeout or revision decision gate: 94ec6db6ddf50cae531feecace128ba92b081e30 on master == origin/master.
+Current mainline state: v10_015 presents third product route next choices after the premium serum bottle accepted candidate evidence package. It recommends closing the third product route as accepted candidate evidence and does not create A5 authorization, contact provider, generate image, retry, read .env.local, write memory, write accepted_samples, or start production_candidate_002.
+Current phase id: v10_015_third_product_route_closeout_or_revision_decision_gate.
+product: cosmetic_skincare_bottle / premium_serum_bottle.
+source_output: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg.
+asset_status: accepted_candidate_with_minor_watch_items.
+accepted_candidate: true.
+evidence_package_created: true.
+commercial_delivery_ready: false.
+memory_suitability: deferred.
+options_presented: create_prompt_revision_plan | close_third_product_route_as_accepted_candidate_evidence | enter_third_product_delivery_readiness_planning.
+recommended_option: close_third_product_route_as_accepted_candidate_evidence.
+human_decision_required: true.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+retry_allowed_now: false.
+env_local_secret_value_read_allowed_now: false.
+accepted_samples_written: false.
+runs_output_committed: false.
+recommended_next: pending_human_third_product_route_closeout_selection.
+recommended_next_auto_execution_allowed: false.
 Current synced baseline before v10.014 third product accepted candidate evidence package: 602e008dc94de7ba2a073a8f35b86ffbe7d85086 on master == origin/master.
 Current mainline state: v10_014 creates the accepted candidate evidence package for the premium serum bottle first real output. It seals evidence only; it does not commit the runs image, write accepted_samples, write memory, enter commercial delivery, or start production_candidate_002.
 Current phase id: v10_014_third_product_accepted_candidate_evidence_package_gate.

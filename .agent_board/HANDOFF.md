@@ -3,6 +3,28 @@
 ## Handoff Summary
 
 ```text
+Status: v10_015_third_product_route_closeout_or_revision_decision_gate is the current docs-only decision gate.
+Reason: v10.014 sealed the premium serum bottle accepted candidate evidence package. v10.015 presents Option A prompt revision plan, Option B close third product route as accepted candidate evidence, and Option C delivery readiness planning. It recommends Option B and does not create A5 authorization, contact providers, generate images, retry, read .env.local, write memory, write accepted_samples, start production_candidate_002, or commit runs output.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current synced HEAD before v10.015 patch: 94ec6db docs: add accepted candidate evidence package for serum bottle
+ahead_behind: 0/0
+Worktree: clean before v10.015 patch; generated runs output remains ignored and is not staged or committed
+Current status: v10_015_third_product_route_closeout_or_revision_decision_gate
+source_phase: v10_014_third_product_accepted_candidate_evidence_package_gate
+product: cosmetic_skincare_bottle / premium_serum_bottle
+source_output: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg
+asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+evidence_package_created: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+options_presented: create_prompt_revision_plan | close_third_product_route_as_accepted_candidate_evidence | enter_third_product_delivery_readiness_planning
+recommended_option: close_third_product_route_as_accepted_candidate_evidence
+human_decision_required: true
+recommended_next: pending_human_third_product_route_closeout_selection
+recommended_next_auto_execution_allowed: false
+---
 Status: v10_014_third_product_accepted_candidate_evidence_package_gate is the current docs-only evidence package gate.
 Reason: Human selected v10.013 Option B. v10.014 seals accepted candidate evidence for the premium serum bottle first real output without committing runs output, writing accepted_samples, writing memory, entering commercial delivery, or starting production_candidate_002.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

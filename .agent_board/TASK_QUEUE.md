@@ -9,6 +9,21 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v10_015_third_product_route_closeout_or_revision_decision_gate.
+Purpose: present third product route next choices after accepted candidate evidence package; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, derivative image creation, real retouch execution, commercial delivery execution, or commercial_delivery_ready=true.
+source_phase: v10_014_third_product_accepted_candidate_evidence_package_gate.
+source_commit: 94ec6db6ddf50cae531feecace128ba92b081e30.
+product: cosmetic_skincare_bottle / premium_serum_bottle.
+source_output: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg.
+asset_status: accepted_candidate_with_minor_watch_items.
+accepted_candidate: true.
+evidence_package_created: true.
+commercial_delivery_ready: false.
+memory_suitability: deferred.
+recommended_option: close_third_product_route_as_accepted_candidate_evidence.
+recommended_next: pending_human_third_product_route_closeout_selection.
+recommended_next_auto_execution_allowed: false.
+---
 Current active gate: v10_014_third_product_accepted_candidate_evidence_package_gate.
 Purpose: create accepted candidate evidence package for the premium serum bottle first real output; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, derivative image creation, real retouch execution, or commercial_delivery_ready=true.
 source_phase: v10_013_third_product_prompt_revision_or_candidate_evidence_decision_gate.
@@ -854,7 +869,7 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-none — v10_014_third_product_accepted_candidate_evidence_package_gate is completed_validated_pending_guarded_commit_and_push.
+none — v10_015_third_product_route_closeout_or_revision_decision_gate is completed_validated_pending_guarded_commit_and_push.
 ```
 
 ### todo
