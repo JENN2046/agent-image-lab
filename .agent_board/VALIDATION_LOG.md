@@ -1,5 +1,37 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260515-v10.012-THIRD-PRODUCT-FIRST-REAL-OUTPUT-HUMAN-REVIEW
+
+Task:
+
+```text
+Record human review of the first real premium serum bottle output.
+```
+
+Result:
+
+```text
+reviewed_output: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg
+product: cosmetic_skincare_bottle / premium_serum_bottle
+asset_status: accepted_candidate_with_minor_watch_items
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+reviewable_sample: true
+local_persistence_verified: true
+accepted_samples_written: false
+runs_output_committed: false
+memory_write_performed: false
+production_candidate_002_started: false
+validation_result: passed_after_exact_staging_with_existing_manual_review_warnings_only
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, secret print, DailyNote write, VCP memory write, memory_write_path, production_candidate_002, Batch 005, runtime/CDP/bridge/MCP, dependency change, package.json change, accepted_samples write, runs output commit, derivative image creation, real retouch execution, commercial_delivery_ready=true, or real commercial delivery execution is performed by v10.012.
+```
+
 ## VALIDATION-20260515-v10.010-THIRD-PRODUCT-MINIMAL-GENERATION-EXECUTION-CONFIRMATION
 
 Task:
