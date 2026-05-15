@@ -9,12 +9,48 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v12_001_route_selection_gate. V11 Prompt Schema Hardening is closed, including prompt package schema path alignment, and V12 is presenting route options only. This docs-only gate does not implement machine validators, migrate artifacts, generate images, write memory, copy output assets, enter production, or enter runtime.
+Agent Image Lab is in v12_002_prompt_schema_machine_validator_implementation_planning_gate. V12 selected prompt_schema_machine_validator_implementation_planning and is planning future machine validator scope, rule inventory, fixtures, pass/fail/warning policy, legacy compatibility, and implementation phases. This docs-only gate does not implement validators, modify scripts, migrate artifacts, generate images, write memory, copy output assets, enter production, or enter runtime.
 ```
 
 ## Current Phase
 
 ```text
+V12.002 Prompt Schema Machine Validator Implementation Planning Gate
+phase_id: v12_002_prompt_schema_machine_validator_implementation_planning_gate
+source_phase: v12_001_route_selection_gate
+status: completed_remote_synced_after_guarded_push
+source_commit: f789f72dfbb104932e6b482fd9543bbb02ca6ed9
+branch: master tracking origin/master
+selected_route: prompt_schema_machine_validator_implementation_planning
+implementation_plan_created: true
+rule_inventory_created: true
+fixture_strategy_created: true
+schema_to_validator_mapping_created: true
+legacy_artifact_compatibility_policy_created: true
+schema_scope: prompt_package_schema_v1 | product_brief_schema | static_review_schema | A5_authorization_schema | human_review_schema | accepted_candidate_evidence_package_schema | route_level_validation_strategy
+machine_validator_implemented: false
+existing_artifacts_migrated: false
+runner_behavior_changed: false
+scripts_modified: false
+dependency_change: false
+package_json_modified: false
+package_lock_modified: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: v12_003_prompt_schema_validator_rule_specification_gate
+recommended_next_auto_execution_allowed: true
+---
 V12.001 Route Selection Gate
 phase_id: v12_001_route_selection_gate
 source_phase: v11_018_post_remote_sync_state_reconciliation_gate

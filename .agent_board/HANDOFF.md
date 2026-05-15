@@ -3,6 +3,27 @@
 ## Handoff Summary
 
 ```text
+Status: v12_002_prompt_schema_machine_validator_implementation_planning_gate is the current docs-only validator implementation planning gate.
+Reason: Human selected v12.001 Option A. This gate plans how V11 canonical schemas become a future machine validator without implementing the validator or touching scripts.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Source commit: f789f72dfbb104932e6b482fd9543bbb02ca6ed9
+Current status: v12_002_prompt_schema_machine_validator_implementation_planning_gate
+selected_route: prompt_schema_machine_validator_implementation_planning
+implementation_plan_created: true
+rule_inventory_created: true
+fixture_strategy_created: true
+schema_to_validator_mapping_created: true
+legacy_artifact_compatibility_policy_created: true
+machine_validator_implemented: false
+existing_artifacts_migrated: false
+runner_behavior_changed: false
+scripts_modified: false
+dependency_change: false
+package_json_modified: false
+recommended_next: v12_003_prompt_schema_validator_rule_specification_gate
+recommended_next_auto_execution_allowed: true
+---
 Status: v12_001_route_selection_gate is the current docs-only route selection gate.
 Reason: V11 Prompt Schema Hardening is closed after v11.018 post-sync reconciliation. V12 presents the next route options and waits for human selection without entering validator implementation, artifact migration, provider/image generation, memory, production, or runtime.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

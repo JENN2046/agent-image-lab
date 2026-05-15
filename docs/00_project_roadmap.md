@@ -18,6 +18,21 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
+Current phase: v12_002_prompt_schema_machine_validator_implementation_planning_gate.
+Current local/remote baseline after v12.001 route selection: f789f72dfbb104932e6b482fd9543bbb02ca6ed9.
+Current mainline state: V12 selected prompt_schema_machine_validator_implementation_planning. This gate creates implementation planning, schema-to-validator mapping, rule inventory, fixture strategy, pass/fail/warning policy, legacy compatibility policy, and implementation phase plan. It does not implement a machine validator, create scripts/validate_prompt_schema*.js, modify scripts, migrate artifacts, modify prompt packages, add dependencies, generate images, call providers, write memory, enter production, or enter runtime.
+selected_route: prompt_schema_machine_validator_implementation_planning.
+implementation_plan_created: true.
+rule_inventory_created: true.
+fixture_strategy_created: true.
+schema_to_validator_mapping_created: true.
+legacy_artifact_compatibility_policy_created: true.
+machine_validator_implemented: false.
+existing_artifacts_migrated: false.
+scripts_modified: false.
+dependency_change: false.
+recommended_next: v12_003_prompt_schema_validator_rule_specification_gate.
+recommended_next_auto_execution_allowed: true.
 Current phase: v12_001_route_selection_gate.
 Current local/remote baseline after v11.018 reconciliation: b8dec73f116841525c1c1cca26b8d7fa5a16ae57.
 Current mainline state: V12 route selection is open after V11 Prompt Schema Hardening closed. This gate presents next route options only and does not implement machine validators, migrate existing artifacts, generate images, call providers, write memory, enter production, or enter runtime.

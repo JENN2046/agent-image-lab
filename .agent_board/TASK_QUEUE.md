@@ -9,6 +9,23 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v12_002_prompt_schema_machine_validator_implementation_planning_gate.
+Purpose: plan future prompt schema machine validator implementation from V11 canonical schemas; no validator code, scripts changes, dependency changes, artifact migration, prompt package changes, provider contact, image generation, memory write, production, or runtime.
+source_phase: v12_001_route_selection_gate.
+source_commit: f789f72dfbb104932e6b482fd9543bbb02ca6ed9.
+selected_route: prompt_schema_machine_validator_implementation_planning.
+implementation_plan_created: true.
+rule_inventory_created: true.
+fixture_strategy_created: true.
+schema_to_validator_mapping_created: true.
+legacy_artifact_compatibility_policy_created: true.
+machine_validator_implemented: false.
+existing_artifacts_migrated: false.
+scripts_modified: false.
+dependency_change: false.
+recommended_next: v12_003_prompt_schema_validator_rule_specification_gate.
+recommended_next_auto_execution_allowed: true.
+---
 Current active gate: v12_001_route_selection_gate.
 Purpose: present V12 route options after V11 Prompt Schema Hardening closed; wait for human route selection; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, dependency change, machine validator implementation, or existing artifact migration.
 source_phase: v11_018_post_remote_sync_state_reconciliation_gate.

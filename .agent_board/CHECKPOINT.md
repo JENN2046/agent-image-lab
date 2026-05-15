@@ -1,5 +1,45 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V12.002 Prompt Schema Machine Validator Implementation Planning Gate
+
+```text
+phase_id: v12_002_prompt_schema_machine_validator_implementation_planning_gate
+status: completed_remote_synced_after_guarded_push
+source_phase: v12_001_route_selection_gate
+source_commit: f789f72dfbb104932e6b482fd9543bbb02ca6ed9
+purpose: plan future prompt schema machine validator implementation
+phase_record_ref: docs/v12_002_prompt_schema_machine_validator_implementation_planning_gate.md
+implementation_plan_ref: docs/prompt_schema_machine_validator_implementation_plan.md
+rule_inventory_ref: docs/prompt_schema_machine_validator_rule_inventory.md
+selected_route: prompt_schema_machine_validator_implementation_planning
+implementation_plan_created: true
+rule_inventory_created: true
+fixture_strategy_created: true
+schema_to_validator_mapping_created: true
+legacy_artifact_compatibility_policy_created: true
+machine_validator_implemented: false
+existing_artifacts_migrated: false
+runner_behavior_changed: false
+scripts_modified: false
+dependency_change: false
+package_json_modified: false
+package_lock_modified: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: v12_003_prompt_schema_validator_rule_specification_gate
+```
+
 # V12.001 Route Selection Gate
 
 ```text
