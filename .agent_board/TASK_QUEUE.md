@@ -9,6 +9,15 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v11_002_prompt_schema_hardening_route_activation_gate.
+Purpose: activate V11 Prompt Schema Hardening and define schema targets for product brief, prompt package, static review, A5 authorization draft, human review, and evidence package; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, dependency change, runner behavior change, or A5 generation authorization creation.
+source_phase: v11_001_route_selection_gate.
+source_commit: baf109b7566515522020fbba5e3a7b9b2005c95b.
+selected_route: prompt_schema_hardening.
+schema_hardening_scope_created: true.
+recommended_next: v11_003_existing_prompt_artifact_schema_inventory_gate.
+recommended_next_auto_execution_allowed: true.
+---
 Current active gate: v11_001_route_selection_gate.
 Purpose: present V11 route options after V10 final closeout; no provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, derivative image creation, real retouch execution, commercial delivery execution, or automatic V11 route execution.
 source_phase: v10_018_v10_final_closeout_remote_sync.
@@ -920,7 +929,7 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-none — v11_001_route_selection_gate is completed_remote_synced_after_guarded_push after guarded push.
+none — v11_002_prompt_schema_hardening_route_activation_gate is completed_remote_synced_after_guarded_push after guarded push.
 ```
 
 ### todo

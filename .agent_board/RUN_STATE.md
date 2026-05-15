@@ -9,12 +9,48 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v11_001_route_selection_gate. This docs-only route gate presents V11 options after V10 final closeout and stops at pending human route selection.
+Agent Image Lab is in v11_002_prompt_schema_hardening_route_activation_gate. This docs-only route activation gate starts V11 Prompt Schema Hardening and defines schema targets without execution.
 ```
 
 ## Current Phase
 
 ```text
+V11.002 Prompt Schema Hardening Route Activation Gate
+phase_id: v11_002_prompt_schema_hardening_route_activation_gate
+source_phase: v11_001_route_selection_gate
+status: completed_remote_synced_after_guarded_push
+source_commit: baf109b7566515522020fbba5e3a7b9b2005c95b
+source_message: docs: select v11 project route
+branch: master tracking origin/master
+origin_sync_current: local HEAD equals origin/master at baf109b before v11.002 patch
+ahead_behind: 0/0 before v11.002 patch
+selected_route: prompt_schema_hardening
+schema_hardening_scope_created: true
+product_brief_schema_target_defined: true
+prompt_package_schema_target_defined: true
+static_review_schema_target_defined: true
+A5_authorization_schema_target_defined: true
+human_review_schema_target_defined: true
+evidence_package_schema_target_defined: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+A5_generation_authorization_created: false
+recommended_next: v11_003_existing_prompt_artifact_schema_inventory_gate
+recommended_next_auto_execution_allowed: true
+---
 V11.001 Route Selection Gate
 phase_id: v11_001_route_selection_gate
 source_phase: v10_018_v10_final_closeout_remote_sync

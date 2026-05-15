@@ -1,5 +1,42 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V11.002 Prompt Schema Hardening Route Activation Gate
+
+```text
+phase_id: v11_002_prompt_schema_hardening_route_activation_gate
+status: completed_remote_synced_after_guarded_push
+source_phase: v11_001_route_selection_gate
+source_commit: baf109b7566515522020fbba5e3a7b9b2005c95b
+purpose: activate V11 Prompt Schema Hardening and define schema hardening scope
+phase_record_ref: docs/v11_002_prompt_schema_hardening_route_activation_gate.md
+scope_ref: docs/prompt_schema_hardening_scope.md
+selected_route: prompt_schema_hardening
+schema_hardening_scope_created: true
+product_brief_schema_target_defined: true
+prompt_package_schema_target_defined: true
+static_review_schema_target_defined: true
+A5_authorization_schema_target_defined: true
+human_review_schema_target_defined: true
+evidence_package_schema_target_defined: true
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+runs_output_committed: false
+accepted_samples_written: false
+A5_generation_authorization_created: false
+recommended_next: v11_003_existing_prompt_artifact_schema_inventory_gate
+```
+
 # V11.001 Route Selection Gate
 
 ```text

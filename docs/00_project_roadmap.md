@@ -18,6 +18,23 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
+Current synced baseline before v11.002 prompt schema hardening route activation: baf109b7566515522020fbba5e3a7b9b2005c95b on master == origin/master.
+Current mainline state: v11_002 activates the V11 Prompt Schema Hardening route after human selected v11.001 Option A. It defines schema targets for product brief, prompt package, static review, A5 authorization draft, human review, and accepted candidate evidence packages without changing runner behavior or creating A5 authorization.
+Current phase id: v11_002_prompt_schema_hardening_route_activation_gate.
+selected_route: prompt_schema_hardening.
+schema_hardening_scope_created: true.
+product_brief_schema_target_defined: true.
+prompt_package_schema_target_defined: true.
+static_review_schema_target_defined: true.
+A5_authorization_schema_target_defined: true.
+human_review_schema_target_defined: true.
+evidence_package_schema_target_defined: true.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+memory_write_allowed_now: false.
+production_candidate_002_allowed_now: false.
+recommended_next: v11_003_existing_prompt_artifact_schema_inventory_gate.
+recommended_next_auto_execution_allowed: true.
 Current synced baseline before v11.001 route selection gate: 223b1550f57e422c1bf4336c4619ef65ec4509c3 on master == origin/master.
 Current mainline state: v11_001 presents the V11 route selection gate after V10 final closeout. It recommends Prompt Schema Hardening, offers Review Console productization planning as the backup route, and keeps provider contact, image generation, memory write, accepted_samples write, production_candidate_002, runtime, and real commercial delivery blocked.
 Current phase id: v11_001_route_selection_gate.
