@@ -1,5 +1,37 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260515-v10.008-REMOTE-SYNC-AND-STATUS-SURFACE-CORRECTION
+
+Task:
+
+```text
+Record local fast-forward to origin/master and correct v10.007 remote-synced status surfaces.
+```
+
+Result:
+
+```text
+fast_forward_performed: true
+synced_head: 089069cee8e48f8338b3b78cb8c784d2725bf564
+local_equals_origin_after_sync: true
+ahead_behind_after_sync: 0/0
+v10_007_status_after_correction: completed_remote_synced_after_guarded_push
+A5_authorization_created: false
+provider_contact: false
+image_generation: false
+memory_write_performed: false
+production_candidate_002_started: false
+accepted_samples_written: false
+runs_output_committed: false
+validation_result: passed_with_existing_manual_review_warnings_only
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, secret print, DailyNote write, VCP memory write, memory_write_path, production_candidate_002, Batch 005, runtime/CDP/bridge/MCP, dependency change, package.json change, accepted_samples write, runs output commit, image editing, derivative image creation, real retouch execution, commercial_delivery_ready=true, real commercial delivery execution, real output directory creation, or A5 generation authorization creation is performed by v10.008.
+```
+
 ## VALIDATION-20260515-v10.007-THIRD-PRODUCT-A5-AUTHORIZATION-DECISION-GATE
 
 Task:

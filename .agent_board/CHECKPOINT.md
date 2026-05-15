@@ -1,10 +1,44 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V10.008 Remote Sync And Status Surface Correction Gate
+
+```text
+phase_id: v10_008_remote_sync_and_status_surface_correction_gate
+status: completed_validated_pending_guarded_push
+source_phase: v10_007_third_product_A5_authorization_decision_gate
+source_commit: 089069cee8e48f8338b3b78cb8c784d2725bf564
+purpose: record fast-forward sync and correct v10.007 remote-synced status surfaces
+phase_record_ref: docs/v10_008_remote_sync_and_status_surface_correction_gate.md
+fast_forward_performed: true
+local_equals_origin_after_sync: true
+ahead_behind_after_sync: 0/0
+v10_007_status_after_correction: completed_remote_synced_after_guarded_push
+selected_route: third_product_prompt_workflow_expansion
+selected_product: cosmetic_skincare_bottle / premium_serum_bottle
+prompt_package_ref: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+static_review_result: pass_for_static_review
+A5_authorization_created: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+recommended_next: pending_human_third_product_generation_authorization
+```
+
 # V10.007 Third Product A5 Authorization Decision Gate
 
 ```text
 phase_id: v10_007_third_product_A5_authorization_decision_gate
-status: completed_pending_validation_commit_push
+status: completed_remote_synced_after_guarded_push
 source_phase: v10_006_third_product_prompt_package_static_review_and_yaml_format_fix_gate
 source_commit: 0ba94323c6f07412503c96cd6de48a0650094193
 purpose: present human decision options for a future third-product one-shot minimal real generation trial

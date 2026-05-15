@@ -3,6 +3,28 @@
 ## Handoff Summary
 
 ```text
+Status: v10_008_remote_sync_and_status_surface_correction_gate is the current docs-only remote sync checkpoint.
+Reason: Local master fast-forwarded to origin/master at 089069c, and v10.007 is being corrected from pending validation/commit/push wording to completed_remote_synced_after_guarded_push. This does not create A5 authorization or start provider execution.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Synced HEAD after fast-forward: 089069c docs: decide third product A5 generation path
+ahead_behind_after_sync: 0/0
+Worktree: clean before v10.008 patch; generated runs output remains ignored and is not staged or committed
+Current status: v10_008_remote_sync_and_status_surface_correction_gate
+source_phase: v10_007_third_product_A5_authorization_decision_gate
+v10_007_status_after_correction: completed_remote_synced_after_guarded_push
+selected_route: third_product_prompt_workflow_expansion
+selected_product: cosmetic_skincare_bottle / premium_serum_bottle
+prompt_package_path: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+static_review_result: pass_for_static_review
+A5_authorization_created: false
+provider_contact_allowed_now: false
+image_generation_allowed_now: false
+memory_write_allowed: false
+production_candidate_002_allowed: false
+recommended_next: pending_human_third_product_generation_authorization
+recommended_next_auto_execution_allowed: false
+---
 Status: v10_007_third_product_A5_authorization_decision_gate is the current docs-only A5 authorization decision gate.
 Reason: v10.007 presents Option A/B/C for whether a future A5 gate should authorize one minimal real generation trial for the premium serum bottle. It recommends Option A as a human decision path only if cross-category validation is desired, but it does not create A5 authorization, contact providers, read .env.local values, generate images, write memory, create output directories, write accepted_samples, promote production, or commit runs output.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

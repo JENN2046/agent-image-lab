@@ -9,6 +9,20 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v10_008_remote_sync_and_status_surface_correction_gate.
+Purpose: record that local master fast-forwarded to origin/master and correct v10.007 status surfaces to completed_remote_synced_after_guarded_push; no A5 authorization creation, provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, output directory creation, or automatic provider/image execution.
+source_phase: v10_007_third_product_A5_authorization_decision_gate.
+source_commit: 089069cee8e48f8338b3b78cb8c784d2725bf564.
+fast_forward_performed: true.
+local_equals_origin_after_sync: true.
+v10_007_status_after_correction: completed_remote_synced_after_guarded_push.
+selected_route: third_product_prompt_workflow_expansion.
+selected_product: cosmetic_skincare_bottle / premium_serum_bottle.
+prompt_package_path: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml.
+A5_authorization_created: false.
+recommended_next: pending_human_third_product_generation_authorization.
+recommended_next_auto_execution_allowed: false.
+---
 Current active gate: v10_007_third_product_A5_authorization_decision_gate.
 Purpose: present Option A/B/C for whether a future A5 gate should authorize one minimal real generation trial for cosmetic_skincare_bottle / premium_serum_bottle; recommend Option A only as a human decision path if cross-category validation is desired; no A5 authorization creation, provider contact, generation, retry, .env.local value read, memory write, runtime, production_candidate_002, accepted_samples write, runs output commit, output directory creation, or automatic provider/image execution.
 source_phase: v10_006_third_product_prompt_package_static_review_and_yaml_format_fix_gate.
@@ -762,7 +776,7 @@ active authorization package required for A5
 ### in_progress
 
 ```text
-none — v9_002_delivery_readiness_package_gate is completed_validated_guarded_commit_and_push_authorized.
+none — v10_008_remote_sync_and_status_surface_correction_gate is completed_validated_pending_guarded_push.
 ```
 
 ### todo

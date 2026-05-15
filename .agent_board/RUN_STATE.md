@@ -9,16 +9,48 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v10_007_third_product_A5_authorization_decision_gate. This docs-only decision gate presents Option A/B/C for whether to authorize a future one-shot minimal real generation trial for the premium serum bottle; it recommends Option A as a human decision path only, and does not create A5 authorization, edit images, create derivatives, generate images, contact providers, read .env.local values, write memory, write accepted_samples, promote production, create output directories, execute delivery, or set commercial_delivery_ready=true.
+Agent Image Lab is in v10_008_remote_sync_and_status_surface_correction_gate. This docs-only checkpoint records the fast-forward to origin/master and corrects v10.007 status to completed_remote_synced_after_guarded_push; it does not create A5 authorization, generate images, contact providers, read .env.local values, write memory, write accepted_samples, promote production, create output directories, or execute delivery.
 ```
 
 ## Current Phase
 
 ```text
+V10.008 Remote Sync And Status Surface Correction Gate
+phase_id: v10_008_remote_sync_and_status_surface_correction_gate
+source_phase: v10_007_third_product_A5_authorization_decision_gate
+status: completed_validated_pending_guarded_push
+source_commit: 089069cee8e48f8338b3b78cb8c784d2725bf564
+source_message: docs: decide third product A5 generation path
+branch: master tracking origin/master
+origin_sync_current: local HEAD equals origin/master at 089069c before v10.008 patch
+ahead_behind: 0/0 before v10.008 patch
+fast_forward_performed: true
+v10_007_status_after_correction: completed_remote_synced_after_guarded_push
+selected_route: third_product_prompt_workflow_expansion
+selected_product: cosmetic_skincare_bottle / premium_serum_bottle
+prompt_package_path: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+static_review_result: pass_for_static_review
+A5_authorization_created: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+accepted_samples_written: false
+runs_output_committed: false
+recommended_next: pending_human_third_product_generation_authorization
+recommended_next_auto_execution_allowed: false
+---
 V10.007 Third Product A5 Authorization Decision Gate
 phase_id: v10_007_third_product_A5_authorization_decision_gate
 source_phase: v10_006_third_product_prompt_package_static_review_and_yaml_format_fix_gate
-status: completed_pending_validation_commit_push
+status: completed_remote_synced_after_guarded_push
 source_commit: 0ba94323c6f07412503c96cd6de48a0650094193
 source_message: docs: review third product prompt package draft
 branch: master tracking origin/master
