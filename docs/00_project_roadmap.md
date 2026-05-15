@@ -18,6 +18,21 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
+Current local baseline before v11.007 product brief schema static review: 55f46669f425714912eb695f0b454de390bda8dd on master ahead origin/master by 3.
+Current mainline state: v11_007 statically reviews the product brief canonical schema against the v11.003 inventory. Result: pass_for_schema_static_review. It confirms coverage for brief identity, product identity lock, structure lock, material/texture constraints, color or finish strategy, scene/composition boundary, text/label/logo policy, acceptance criteria, known risks, no-execution handoff, and the ceramic mug legacy missing-brief policy. It does not edit briefs, prompt packages, validators, runner behavior, provider contact, image generation, memory, production, accepted_samples, or runs output.
+Current phase id: v11_007_product_brief_schema_static_review_gate.
+selected_route: prompt_schema_hardening.
+product_brief_schema_static_review_completed: true.
+product_brief_schema_static_review_result: pass_for_schema_static_review.
+machine_validator_implemented: false.
+brief_behavior_changed: false.
+prompt_package_behavior_changed: false.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+memory_write_allowed_now: false.
+production_candidate_002_allowed_now: false.
+recommended_next: v11_008_static_review_schema_draft_gate.
+recommended_next_auto_execution_allowed: true.
 Current local baseline before v11.006 product brief schema draft: 28852990878776dcc32b0febcab84a5328165c60 on master ahead origin/master by 2.
 Current mainline state: v11_006 drafts the product brief canonical schema from the sports visor and premium serum bottle briefs, while documenting the ceramic mug route as a legacy lane without a dedicated briefs artifact. It defines brief identity, product identity lock, structure lock, material/texture constraints, color or finish strategy, scene/composition boundary, text/label/logo policy, acceptance criteria, known risks, and no-execution handoff fields. It does not edit briefs, prompt packages, validators, runner behavior, provider contact, image generation, memory, production, accepted_samples, or runs output.
 Current phase id: v11_006_product_brief_schema_draft_gate.

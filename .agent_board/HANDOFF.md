@@ -3,6 +3,29 @@
 ## Handoff Summary
 
 ```text
+Status: v11_007_product_brief_schema_static_review_gate is the current docs-only schema static review gate.
+Reason: v11.006 drafted the product brief canonical schema. v11.007 statically reviews that schema against v11.003 inventory risks and records pass_for_schema_static_review, while leaving machine validator implementation, brief migration, static review schema, A5 authorization schema, human review schema, and evidence package schema for later gates.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current local HEAD before v11.007 patch: 55f4666 docs: draft product brief canonical schema
+ahead_behind: 0/3 before v11.007 patch
+Worktree: clean before v11.007 patch
+Current status: v11_007_product_brief_schema_static_review_gate
+source_phase: v11_006_product_brief_schema_draft_gate
+source_commit: 55f46669f425714912eb695f0b454de390bda8dd
+selected_route: prompt_schema_hardening
+product_brief_schema_static_review_completed: true
+product_brief_schema_static_review_result: pass_for_schema_static_review
+machine_validator_implemented: false
+brief_behavior_changed: false
+prompt_package_behavior_changed: false
+provider_contact_allowed_now: false
+image_generation_allowed_now: false
+memory_write_allowed_now: false
+production_candidate_002_allowed_now: false
+recommended_next: v11_008_static_review_schema_draft_gate
+recommended_next_auto_execution_allowed: true
+---
 Status: v11_006_product_brief_schema_draft_gate is the current docs-only schema draft gate.
 Reason: v11.005 passed static review for the prompt package canonical schema. v11.006 drafts a canonical product brief schema from the sports visor and premium serum bottle brief artifacts and documents the ceramic mug route as a legacy lane without a dedicated brief. It leaves actual brief migration, machine validator implementation, static review schema, A5 authorization schema, human review schema, and evidence package schema for later gates.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
