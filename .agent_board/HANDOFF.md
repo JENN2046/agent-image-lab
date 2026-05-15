@@ -3,6 +3,29 @@
 ## Handoff Summary
 
 ```text
+Status: v11_018_post_remote_sync_state_reconciliation_gate is the current docs-only status reconciliation gate.
+Reason: The V11 local chain was pushed to origin/master at 72671faa547e3db040bed09a0c3751effb663bce. The pushed HEAD was a v11.004 schema path alignment patch, so this gate restores active state surfaces to V11 Prompt Schema Hardening closed while preserving the prompt package schema path alignment as included.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Current HEAD and origin/master: 72671faa547e3db040bed09a0c3751effb663bce
+ahead_behind before patch: 0/0
+Worktree: clean before patch
+Current status: v11_018_post_remote_sync_state_reconciliation_gate
+source_phase: v11_prompt_schema_hardening_local_chain_remote_sync
+source_commit: 72671faa547e3db040bed09a0c3751effb663bce
+selected_route: prompt_schema_hardening
+v11_prompt_schema_hardening_closed: true
+prompt_package_schema_path_alignment_included: true
+current_state_no_longer_points_to_v11_004_as_active_route: true
+machine_validator_implemented: false
+existing_artifacts_migrated: false
+provider_contact_allowed_now: false
+image_generation_allowed_now: false
+memory_write_allowed_now: false
+production_candidate_002_allowed_now: false
+recommended_next: V12_route_selection_gate
+recommended_next_auto_execution_allowed: false
+---
 Status: v11_004_prompt_package_schema_draft_gate schema path alignment is the current docs-only supplemental patch.
 Reason: The existing v11.004 local commit created docs/prompt_package_canonical_schema.md, but the current phase contract requires docs/schemas/prompt_package_schema_v1.md. This patch adds the stable schema path without migrating prompt packages, implementing validators, or changing runner behavior.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

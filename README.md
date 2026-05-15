@@ -7,6 +7,20 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current phase: v11_018_post_remote_sync_state_reconciliation_gate.
+Current local/remote baseline after V11 remote sync: 72671faa547e3db040bed09a0c3751effb663bce.
+Current mainline state: V11 Prompt Schema Hardening is closed. The route includes scope, inventory, prompt package schema, product brief schema, static review schema, A5 authorization schema, human review schema, accepted candidate evidence package schema, static reviews, route-level validation strategy, route closeout, and the prompt package schema path alignment at docs/schemas/prompt_package_schema_v1.md. The active state no longer points to v11_004 as the current route; v11_004 is recorded as an included alignment patch inside the closed V11 route.
+v11_prompt_schema_hardening_closed: true.
+prompt_package_schema_path_alignment_included: true.
+current_state_no_longer_points_to_v11_004_as_active_route: true.
+machine_validator_implemented: false.
+existing_artifacts_migrated: false.
+provider_contact_allowed_now: false.
+image_generation_allowed_now: false.
+memory_write_allowed_now: false.
+production_candidate_002_allowed_now: false.
+recommended_next: V12_route_selection_gate.
+recommended_next_auto_execution_allowed: false.
 Current supplemental patch: v11_004_prompt_package_schema_draft_gate schema path alignment.
 Current local baseline before v11.004 schema path alignment: 69ff5a30ed6c2fe8cdf4db33f4e3b9f51b7fc964 on master ahead origin/master by 14.
 Current mainline state: v11_004 prompt package schema is supplemented with the stable schema path docs/schemas/prompt_package_schema_v1.md. The patch preserves the already closed V11 route and does not implement validators, migrate prompt packages, generate images, write memory, enter production, or change runner behavior.
