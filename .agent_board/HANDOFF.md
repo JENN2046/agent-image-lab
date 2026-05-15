@@ -3,6 +3,26 @@
 ## Handoff Summary
 
 ```text
+Status: v12_003_prompt_schema_validator_rule_specification_gate is the current docs-only validator rule specification / fixture matrix gate.
+Reason: v12.002 created the implementation plan and rule inventory. v12.003 specifies concrete prompt schema validator rules, severity behavior, legacy compatibility cases, and planned fixture names without implementing code or creating fixtures.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Source commit: ce57b469d1a4bcc61ff0d90d7ee77055bb431d91
+Current status: v12_003_prompt_schema_validator_rule_specification_gate
+selected_route: prompt_schema_machine_validator_implementation_planning
+rule_specification_created: true
+fixture_matrix_created: true
+severity_model_created: true
+pass_fail_warn_policy_created: true
+legacy_compatibility_cases_created: true
+planned_fixture_names_created: true
+machine_validator_implemented: false
+fixture_files_created: false
+scripts_modified: false
+existing_artifacts_migrated: false
+recommended_next: v12_004_prompt_schema_validator_fixture_planning_closeout_or_implementation_decision_gate
+recommended_next_auto_execution_allowed: false
+---
 Status: v12_002_prompt_schema_machine_validator_implementation_planning_gate is the current docs-only validator implementation planning gate.
 Reason: Human selected v12.001 Option A. This gate plans how V11 canonical schemas become a future machine validator without implementing the validator or touching scripts.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

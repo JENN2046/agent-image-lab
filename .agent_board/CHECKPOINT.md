@@ -1,5 +1,53 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V12.003 Prompt Schema Validator Rule Specification Gate
+
+```text
+phase_id: v12_003_prompt_schema_validator_rule_specification_gate
+status: completed_remote_synced_after_guarded_push
+source_phase: v12_002_prompt_schema_machine_validator_implementation_planning_gate
+source_commit: ce57b469d1a4bcc61ff0d90d7ee77055bb431d91
+purpose: specify future prompt schema validator rules and fixture matrix
+phase_record_ref: docs/v12_003_prompt_schema_validator_rule_specification_gate.md
+rule_specification_ref: docs/prompt_schema_validator_rule_specification.md
+fixture_matrix_ref: docs/prompt_schema_validator_fixture_matrix.md
+selected_route: prompt_schema_machine_validator_implementation_planning
+rule_specification_created: true
+fixture_matrix_created: true
+severity_model_created: true
+pass_fail_warn_policy_created: true
+legacy_compatibility_cases_created: true
+planned_fixture_names_created: true
+prompt_package_rules_specified: true
+product_brief_rules_specified: true
+static_review_rules_specified: true
+A5_authorization_rules_specified: true
+human_review_rules_specified: true
+accepted_candidate_evidence_rules_specified: true
+route_level_validation_rules_specified: true
+machine_validator_implemented: false
+fixture_files_created: false
+scripts_modified: false
+package_json_modified: false
+package_lock_modified: false
+dependency_change: false
+existing_artifacts_migrated: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: v12_004_prompt_schema_validator_fixture_planning_closeout_or_implementation_decision_gate
+```
+
 # V12.002 Prompt Schema Machine Validator Implementation Planning Gate
 
 ```text

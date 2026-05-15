@@ -7,6 +7,22 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current phase: v12_003_prompt_schema_validator_rule_specification_gate.
+Current local/remote baseline after v12.002 implementation planning: ce57b469d1a4bcc61ff0d90d7ee77055bb431d91.
+Current mainline state: V12 prompt schema validator planning has moved from implementation plan to rule specification. This gate creates validator rule specification and fixture matrix planning only. It does not implement a validator, create fixture files, modify scripts, modify package files, migrate artifacts, modify prompt packages, generate images, call providers, write memory, enter production, or enter runtime.
+selected_route: prompt_schema_machine_validator_implementation_planning.
+rule_specification_created: true.
+fixture_matrix_created: true.
+severity_model_created: true.
+pass_fail_warn_policy_created: true.
+legacy_compatibility_cases_created: true.
+planned_fixture_names_created: true.
+machine_validator_implemented: false.
+fixture_files_created: false.
+scripts_modified: false.
+existing_artifacts_migrated: false.
+recommended_next: v12_004_prompt_schema_validator_fixture_planning_closeout_or_implementation_decision_gate.
+recommended_next_auto_execution_allowed: false.
 Current phase: v12_002_prompt_schema_machine_validator_implementation_planning_gate.
 Current local/remote baseline after v12.001 route selection: f789f72dfbb104932e6b482fd9543bbb02ca6ed9.
 Current mainline state: V12 selected prompt_schema_machine_validator_implementation_planning. This gate creates implementation planning, schema-to-validator mapping, rule inventory, fixture strategy, pass/fail/warning policy, legacy compatibility policy, and implementation phase plan. It does not implement a machine validator, create scripts/validate_prompt_schema*.js, modify scripts, migrate artifacts, modify prompt packages, add dependencies, generate images, call providers, write memory, enter production, or enter runtime.

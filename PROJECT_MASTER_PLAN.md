@@ -8,6 +8,28 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+latest_head_after_v12_002_planning: ce57b469d1a4bcc61ff0d90d7ee77055bb431d91
+status: v12_003_prompt_schema_validator_rule_specification_gate
+mode: A4.8 docs-only validator rule specification / fixture matrix gate
+phase_id: v12_003_prompt_schema_validator_rule_specification_gate
+source_phase: v12_002_prompt_schema_machine_validator_implementation_planning_gate
+source_commit: ce57b469d1a4bcc61ff0d90d7ee77055bb431d91
+selected_route: prompt_schema_machine_validator_implementation_planning
+rule_specification_created: true
+fixture_matrix_created: true
+severity_model_created: true
+pass_fail_warn_policy_created: true
+legacy_compatibility_cases_created: true
+planned_fixture_names_created: true
+machine_validator_implemented: false
+fixture_files_created: false
+scripts_modified: false
+package_json_modified: false
+dependency_change: false
+existing_artifacts_migrated: false
+recommended_next: v12_004_prompt_schema_validator_fixture_planning_closeout_or_implementation_decision_gate
+recommended_next_auto_execution_allowed: false
+branch: master
 latest_head_after_v12_001_route_selection: f789f72dfbb104932e6b482fd9543bbb02ca6ed9
 status: v12_002_prompt_schema_machine_validator_implementation_planning_gate
 mode: A4.8 docs-only validator implementation planning gate

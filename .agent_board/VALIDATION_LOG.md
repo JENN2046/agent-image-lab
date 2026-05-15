@@ -1,5 +1,39 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260515-v12.003-PROMPT-SCHEMA-VALIDATOR-RULE-SPECIFICATION
+
+Task:
+
+```text
+Specify future prompt schema validator rules and planned fixture matrix without creating validator code or fixture files.
+```
+
+Result:
+
+```text
+source_commit: ce57b469d1a4bcc61ff0d90d7ee77055bb431d91
+selected_route: prompt_schema_machine_validator_implementation_planning
+rule_specification_created: true
+fixture_matrix_created: true
+severity_model_created: true
+pass_fail_warn_policy_created: true
+legacy_compatibility_cases_created: true
+planned_fixture_names_created: true
+machine_validator_implemented: false
+fixture_files_created: false
+scripts_modified: false
+package_json_modified: false
+dependency_change: false
+existing_artifacts_migrated: false
+validation_result: passed_with_existing_manual_review_warnings_only
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local secret value read, secret print, DailyNote write, VCP memory write, memory_write_path, production_candidate_002, Batch 005, runtime/CDP/bridge/MCP, dependency change, package.json change, package-lock change, scripts modification, fixture file creation, accepted_samples write, runs output commit, derivative image creation, real retouch execution, commercial delivery execution, existing artifact migration, prompt package modification, runner behavior change, memory write, machine validator implementation, or V12 implementation execution is performed by v12.003.
+```
+
 ## VALIDATION-20260515-v12.002-PROMPT-SCHEMA-MACHINE-VALIDATOR-IMPLEMENTATION-PLANNING
 
 Task:
