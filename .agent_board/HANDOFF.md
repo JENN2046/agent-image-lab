@@ -3,6 +3,22 @@
 ## Handoff Summary
 
 ```text
+Status: v12_005_prompt_schema_validator_implementation_authorization_gate is the current validator implementation authorization gate.
+Reason: Human selected v12.004 Option B. This gate authorizes v12.006 to create a minimal read-only Node.js validator and synthetic fixtures, while v12.005 itself remains docs/status only.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Source commit: 127bd71c8b4cdfc522a84b37c8808ef323c67c72
+Current status: v12_005_prompt_schema_validator_implementation_authorization_gate
+selected_route: prompt_schema_machine_validator_implementation_planning
+selected_option_from_v12_004: enter_validator_implementation_authorization_gate
+implementation_authorized_for_v12_006: true
+machine_validator_implemented: false
+fixture_files_created: false
+scripts_modified: false
+existing_artifacts_migrated: false
+recommended_next: v12_006_prompt_schema_minimal_validator_implementation_gate
+recommended_next_auto_execution_allowed: true
+---
 Status: v12_004_prompt_schema_validator_fixture_planning_closeout_or_implementation_decision_gate is the current docs-only path decision gate.
 Reason: v12.003 created the validator rule specification and fixture matrix planning. v12.004 presents whether to continue fixture planning as docs-only, enter a validator implementation authorization gate, or close V12 planning, without implementing code or creating fixtures.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

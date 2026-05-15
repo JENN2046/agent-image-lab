@@ -1,5 +1,40 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V12.005 Prompt Schema Validator Implementation Authorization Gate
+
+```text
+phase_id: v12_005_prompt_schema_validator_implementation_authorization_gate
+status: completed_validated_pending_guarded_commit_and_push
+source_phase: v12_004_prompt_schema_validator_fixture_planning_closeout_or_implementation_decision_gate
+source_commit: 127bd71c8b4cdfc522a84b37c8808ef323c67c72
+purpose: record human selection of v12.004 Option B and authorize v12.006 minimal validator implementation
+phase_record_ref: docs/v12_005_prompt_schema_validator_implementation_authorization_gate.md
+selected_route: prompt_schema_machine_validator_implementation_planning
+selected_option_from_v12_004: enter_validator_implementation_authorization_gate
+implementation_authorized_for_v12_006: true
+machine_validator_implemented: false
+fixture_files_created: false
+scripts_modified: false
+package_json_modified: false
+package_lock_modified: false
+dependency_change: false
+existing_artifacts_migrated: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+secret_value_printed: false
+DailyNote_write: false
+VCP_memory_write: false
+memory_write_path: false
+runtime_execution: false
+production_candidate_002: false
+Batch_005: false
+runs_output_committed: false
+accepted_samples_written: false
+recommended_next: v12_006_prompt_schema_minimal_validator_implementation_gate
+```
+
 # V12.004 Prompt Schema Validator Fixture Planning Closeout Or Implementation Decision Gate
 
 ```text
