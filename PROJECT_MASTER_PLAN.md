@@ -8,6 +8,33 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+latest_head_after_v14_001_route_selection: 110ac1e842f3e70dd2a44d78f98e928eb8cdadee
+status: v14_002_review_console_productization_planning_gate
+mode: A4.8 docs-only productization planning gate
+phase_id: v14_002_review_console_productization_planning_gate
+source_phase: v14_001_route_selection_gate
+source_commit: 110ac1e842f3e70dd2a44d78f98e928eb8cdadee
+selected_route: review_console_productization_planning
+productization_plan: docs/review_console_productization_plan_v14.md
+phase_record: docs/v14_002_review_console_productization_planning_gate.md
+core_views_defined: true
+core_objects_defined: true
+V13_asset_chains_referenced: true
+UI_implementation_started: false
+runtime_execution: false
+provider_contact: false
+image_generation: false
+retry: false
+memory_write: false
+accepted_samples_written: false
+runs_output_committed: false
+real_retouch_execution: false
+derivative_image_created: false
+real_commercial_delivery_execution: false
+production_candidate_002: false
+recommended_next: v14_003_review_console_information_architecture_gate
+recommended_next_auto_execution_allowed: true
+branch: master
 latest_head_after_v13_016_camping_lantern_lane_closeout: 312c5e0695254e4f5df2898eeafde87b763ec0ab
 status: v14_001_route_selection_gate
 mode: A4.8 docs-only route selection gate
