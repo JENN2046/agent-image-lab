@@ -66,6 +66,7 @@ $requiredFiles = @(
   'scripts/validate_adapter_delivery_surface.js',
   'scripts/validate_review_console_adapter_handoff.js',
   'scripts/validate_review_console_blocker_arbiter_regression_matrix.js',
+  'scripts/validate_review_report_negative_guard_regression_matrix.js',
   'scripts/validate_review_blocker_arbiter_route_summary.js',
   'scripts/validate_review_memory_admission_control.js',
   'scripts/validate_review_production_admission_control.js',
@@ -190,6 +191,7 @@ $requiredFiles = @(
   'tests/schema_examples/review_console_blocker_arbiter_draft_output_snapshot.example.json',
   'tests/schema_examples/review_console_review_report_draft_output_snapshot.example.json',
   'tests/schema_examples/review_console_review_report_negative_guard_draft_output_snapshot.example.json',
+  'tests/schema_examples/review_report_negative_guard_regression_matrix.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix_v14_062.example.json',
   'tests/schema_examples/review_blocker_arbiter_route_summary.example.json',
@@ -243,6 +245,7 @@ $requiredFiles = @(
   'docs/v14_070_review_report_draft_output_snapshot_gate.md',
   'docs/v14_071_review_report_negative_guard_static_handoff_gate.md',
   'docs/v14_072_review_report_negative_guard_draft_output_snapshot_gate.md',
+  'docs/v14_073_review_report_negative_guard_regression_matrix_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -3970,6 +3973,11 @@ if (-not $node) {
     Add-Failure "scripts/validate_review_console_blocker_arbiter_regression_matrix.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'scripts/validate_review_report_negative_guard_regression_matrix.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_review_report_negative_guard_regression_matrix.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_review_blocker_arbiter_route_summary.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_review_blocker_arbiter_route_summary.js failed node --check"
@@ -6126,6 +6134,40 @@ if (-not $node) {
     }
     if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.file_write_performed -ne $false) {
       Add-Failure "Review Console Adapter handoff validation must not write files"
+    }
+  }
+
+  $reviewReportNegativeGuardMatrixOutput = & node (Join-Path $Root 'scripts/validate_review_report_negative_guard_regression_matrix.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "ReviewReport negative guard regression matrix validation exited with failure"
+  } else {
+    $reviewReportNegativeGuardMatrix = ($reviewReportNegativeGuardMatrixOutput -join "`n") | ConvertFrom-Json
+    if ($reviewReportNegativeGuardMatrix.passed -ne $true) {
+      Add-Failure "ReviewReport negative guard regression matrix validation must report passed true"
+    }
+    foreach ($reviewReportNegativeGuardMatrixCheck in @(
+      @{ Flag = 'review_report_negative_guard_matrix_present'; Message = 'ReviewReport negative guard regression matrix must be present' },
+      @{ Flag = 'review_report_negative_guard_surface_consensus_verified'; Message = 'ReviewReport negative guard regression matrix must verify surface consensus' },
+      @{ Flag = 'review_report_negative_guard_adapter_contract_surface_verified'; Message = 'ReviewReport negative guard regression matrix must verify adapter contract surface' },
+      @{ Flag = 'review_report_negative_guard_console_guard_surface_verified'; Message = 'ReviewReport negative guard regression matrix must verify console guard surface' },
+      @{ Flag = 'review_report_negative_guard_static_mock_surface_verified'; Message = 'ReviewReport negative guard regression matrix must verify static mock surface' },
+      @{ Flag = 'review_report_negative_guard_draft_snapshot_surface_verified'; Message = 'ReviewReport negative guard regression matrix must verify draft snapshot surface' },
+      @{ Flag = 'review_report_negative_guard_reject_routes_verified'; Message = 'ReviewReport negative guard regression matrix must verify reject routes' },
+      @{ Flag = 'review_report_negative_guard_memory_forbidden_verified'; Message = 'ReviewReport negative guard regression matrix must verify memory forbidden' },
+      @{ Flag = 'review_report_negative_guard_never_production_verified'; Message = 'ReviewReport negative guard regression matrix must verify never production' },
+      @{ Flag = 'review_report_negative_guard_unknown_failure_verified'; Message = 'ReviewReport negative guard regression matrix must verify unknown failure tags' },
+      @{ Flag = 'review_report_negative_guard_no_daily_note_write_verified'; Message = 'ReviewReport negative guard regression matrix must verify no DailyNote write' },
+      @{ Flag = 'review_report_negative_guard_no_vcp_memory_write_verified'; Message = 'ReviewReport negative guard regression matrix must verify no VCP memory write' },
+      @{ Flag = 'review_report_negative_guard_no_accepted_samples_write_verified'; Message = 'ReviewReport negative guard regression matrix must verify no accepted_samples write' },
+      @{ Flag = 'review_report_negative_guard_no_production_candidate_verified'; Message = 'ReviewReport negative guard regression matrix must verify no production candidate' },
+      @{ Flag = 'review_report_negative_guard_no_provider_plugin_api_image_verified'; Message = 'ReviewReport negative guard regression matrix must verify no provider/plugin/API/image effects' }
+    )) {
+      if ($reviewReportNegativeGuardMatrix.review_report_negative_guard_regression_matrix.($reviewReportNegativeGuardMatrixCheck.Flag) -ne $true) {
+        Add-Failure $reviewReportNegativeGuardMatrixCheck.Message
+      }
+    }
+    if ($reviewReportNegativeGuardMatrix.review_report_negative_guard_regression_matrix.file_write_performed -ne $false) {
+      Add-Failure "ReviewReport negative guard regression matrix validation must not write files"
     }
   }
 

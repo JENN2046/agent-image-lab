@@ -51,6 +51,7 @@ v14.055 还用 `tests/schema_examples/review_console_adapter_negative_fixture_dr
 v14.061 还用 `tests/schema_examples/review_console_blocker_arbiter_draft_output_snapshot.example.json` 固化草案输出 snapshot，验证 `#draftOutput` 中的 blocker arbiter handoff 与静态 mock 和 PVOS adapter handoff 保持一致。
 v14.070 还用 `tests/schema_examples/review_console_review_report_draft_output_snapshot.example.json` 固化草案输出 snapshot，验证 `#draftOutput` 中的 ReviewReport handoff 与静态 mock 和 PVOS adapter handoff 保持一致。
 v14.072 还用 `tests/schema_examples/review_console_review_report_negative_guard_draft_output_snapshot.example.json` 固化草案输出 snapshot，验证 `#draftOutput` 中的 negative ReviewReport handoff 与静态 mock 和 PVOS negative adapter handoff 保持一致。
+v14.073 还用 `tests/schema_examples/review_report_negative_guard_regression_matrix.example.json` 固化四表面一致性矩阵，验证 adapter contract、Review Console guard、static mock 和 draft output snapshot 的 negative ReviewReport 不漂移。
 
 ## 文件说明
 
@@ -88,3 +89,4 @@ v14.072 还用 `tests/schema_examples/review_console_review_report_negative_guar
 `review_console_blocker_arbiter_draft_output_snapshot.example.json` 必须与静态 mock 的 blocker arbiter handoff、PVOS adapter handoff 和 `#draftOutput` 渲染结果一致；它是回归证据，不是执行授权。
 `review_console_review_report_draft_output_snapshot.example.json` 必须与静态 mock 的 ReviewReport handoff、PVOS adapter handoff 和 `#draftOutput` 渲染结果一致；它是回归证据，不是执行授权。
 `review_console_review_report_negative_guard_draft_output_snapshot.example.json` 必须与静态 mock 的 negative ReviewReport handoff、PVOS negative adapter handoff 和 `#draftOutput` 渲染结果一致；它是回归证据，不是执行授权。
+`review_report_negative_guard_regression_matrix.example.json` 必须验证 negative ReviewReport 在 adapter contract、Review Console guard、static mock 和 draft output snapshot 之间一致；它是回归证据，不是执行授权。

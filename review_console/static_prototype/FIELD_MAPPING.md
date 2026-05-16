@@ -253,6 +253,19 @@ Phase 9 审批记录必须满足：
 
 `review_console_review_report_negative_guard_draft_output_snapshot.example.json` 是草案输出回归证据，不是生产执行记录。它不得授权 provider contact、plugin/API 调用、图片生成、accepted_samples 写入、记忆写入或 production promotion。
 
+## v14.073 ReviewReport Negative Guard Regression Matrix
+
+本节用于验收负向 ReviewReport 在多个本地表面之间不漂移。它仍然只读取项目内 mock / fixture / snapshot，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
+
+| Matrix 表面 | 对应本地来源 | 必须一致的字段 |
+| --- | --- | --- |
+| `adapter_review_report_contract` | `pvos_kernel_dry_run_adapter_negative_guard_response.example.json#review_report_contract` | rejected candidate IDs、final routes、unknown failure tags、memory forbidden、never-production 和 no-execution guard |
+| `review_console_handoff_guard` | `pvos_kernel_dry_run_adapter_negative_guard_response.example.json#review_console_handoff_draft.review_report_guard_summary` | memory-forbidden IDs、never-production IDs、write counts 和 blocked write flags |
+| `static_mock_negative_review_report` | `mock_data.js#review_report_negative_guard_static_handoff` | 静态 UI handoff 不得偏离 adapter contract |
+| `draft_output_snapshot_negative_review_report` | `review_console_review_report_negative_guard_draft_output_snapshot.example.json` | `#draftOutput` snapshot 不得偏离 static mock 或 adapter contract |
+
+`review_report_negative_guard_regression_matrix.example.json` 是本地一致性矩阵，不是生产执行记录。它只证明负向审片报告的 rejected route、memory-forbidden、unknown failure、never-production 和 no-execution guard 在四个表面上保持一致。
+
 ## v14.061 Review Blocker Arbiter Draft Output Snapshot
 
 本节用于验收静态 Review Console 的 `renderDraft()` 草案输出没有丢失审片阻断仲裁字段。它仍然只执行本目录内静态 JS 的 mock DOM 校验，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
