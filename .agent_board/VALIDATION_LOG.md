@@ -1,5 +1,69 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.066-REVIEW-ADMISSION-CONTROL-MATRIX
+
+Task:
+
+```text
+Create a local admission control matrix that cross-checks memory and production admission for every reviewed candidate: passed candidates stay draft-only with no memory write or production, rejected candidates stay failure-learning-only and never-production.
+```
+
+Result:
+
+```text
+phase_record: docs/v14_066_review_admission_control_matrix_gate.md
+source_commit: 43865dd
+selected_product_route: review_admission_control_matrix
+admission_matrix_fixture_created: tests/schema_examples/review_admission_control_matrix.example.json
+validator_created: scripts/validate_review_admission_control_matrix.js
+validator_wiring_modified: scripts/validate_mvp.ps1
+admission_matrix_present: true
+admission_matrix_matches_memory_admission: true
+admission_matrix_matches_production_admission: true
+admission_matrix_pass_candidate_draft_only_verified: true
+admission_matrix_reject_candidate_failure_learning_never_production_verified: true
+admission_matrix_all_memory_writes_blocked: true
+admission_matrix_all_production_writes_blocked: true
+admission_matrix_no_provider_execution_verified: true
+admission_matrix_no_accepted_samples_write_verified: true
+admission_matrix_no_production_candidate_verified: true
+browser_plugin_preview: not_required_no_frontend_render_change
+direct_memory_write_performed: false
+production_candidate_created: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+validation_result: passed
+```
+
+Commands run:
+
+```text
+node --check scripts/validate_review_admission_control_matrix.js
+node scripts/validate_review_admission_control_matrix.js
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+node scripts/validate_agent_board_state.js
+node scripts/validate_current_state_alignment.js
+git diff --check
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+Validation notes:
+
+```text
+The admission control matrix validator compares `review_admission_control_matrix.example.json` against route summary, memory admission, and production admission fixtures. It verifies passed candidate draft-only routing, rejected candidate failure-learning plus never-production routing, and no memory write, production write, accepted_samples write, production candidate, provider contact, plugin call, API call, or image generation.
+```
+
+Boundary:
+
+```text
+No runtime prototype integration, provider contact, plugin call, API call, image generation, accepted_samples write, image binary read, runs output commit, DailyNote write, VCP memory write, external manifest read, real VCPChat/VCPToolBox read, dependency change, package change, tag, release, deploy, or push is performed by v14.066.
+```
+
 ## VALIDATION-20260517-v14.065-REVIEW-PRODUCTION-ADMISSION-CONTROL
 
 Task:

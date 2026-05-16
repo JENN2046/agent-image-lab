@@ -9,12 +9,56 @@ A4.8 safe local static prototype validator after expired 2026-05-16 A5 window
 ## Current Mission
 
 ```text
-Agent Image Lab is in v14_065_review_production_admission_control_gate. This local fixture validator creates a production admission control record for why passed candidates remain blocked until human production approval, why rejected candidates are permanently never-production, and why accepted_samples writes, production candidates, provider execution, deployment, release, and VCP source access remain blocked.
+Agent Image Lab is in v14_066_review_admission_control_matrix_gate. This local fixture validator cross-checks memory and production admission for every reviewed candidate, proving passed candidates stay draft-only and rejected candidates stay failure-learning-only and never-production while all memory writes, production writes, provider execution, deployment, release, and VCP source access remain blocked.
 ```
 
 ## Current Phase
 
 ```text
+V14.066 Review Admission Control Matrix Gate
+phase_id: v14_066_review_admission_control_matrix_gate
+status: completed_local_validated
+source_phase: v14_065_review_production_admission_control_gate
+source_commit: 43865dd
+selected_product_route: review_admission_control_matrix
+branch: master tracking origin/master
+phase_record: docs/v14_066_review_admission_control_matrix_gate.md
+admission_matrix_fixture_created: tests/schema_examples/review_admission_control_matrix.example.json
+validator_created: scripts/validate_review_admission_control_matrix.js
+validator_wiring_modified: scripts/validate_mvp.ps1
+admission_matrix_present: true
+admission_matrix_matches_memory_admission: true
+admission_matrix_matches_production_admission: true
+admission_matrix_pass_candidate_draft_only_verified: true
+admission_matrix_reject_candidate_failure_learning_never_production_verified: true
+admission_matrix_all_memory_writes_blocked: true
+admission_matrix_all_production_writes_blocked: true
+admission_matrix_no_provider_execution_verified: true
+admission_matrix_no_accepted_samples_write_verified: true
+admission_matrix_no_production_candidate_verified: true
+direct_memory_write_performed: false
+production_candidate_created: false
+accepted_samples_written: false
+image_binaries_read: false
+runs_output_committed: false
+runtime_prototype_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v14_067_review_report_contract_gate
+recommended_next_auto_execution_allowed: true
+push_requires_explicit_remote_authorization: true
+runtime_provider_image_memory_production_batch: false
+next_phase_started: false
+---
 V14.065 Review Production Admission Control Gate
 phase_id: v14_065_review_production_admission_control_gate
 status: completed_local_validated
@@ -6449,18 +6493,18 @@ v7.275_memory_write_allowed_without_separate_authorization: false
 ## Current Task
 
 ```text
-v14.065 records production admission control for review outcomes. It does not authorize provider contact, plugin/API calls, image generation, accepted_samples writes, DailyNote writes, VCP memory writes, runtime integration, push, tag, release, or deploy.
+v14.066 records an admission control matrix for review outcomes. It does not authorize provider contact, plugin/API calls, image generation, accepted_samples writes, DailyNote writes, VCP memory writes, runtime integration, push, tag, release, or deploy.
 ```
 
 ## Current Local Work State
 
 ```text
-Worktree: dirty only with authorized v14.065 fixture, validator, docs, and state-surface updates after patching.
+Worktree: dirty only with authorized v14.066 fixture, validator, docs, and state-surface updates after patching.
 active_workers: 0
 execution_mode: Persistent 4-Agent Council compact local loop
-commander_role: keep v14.065 as a local production admission control gate and continue toward admission control matrix only if safe
+commander_role: keep v14.066 as a local admission control matrix gate and continue toward review report contract only if safe
 architect_role: preserve no-runtime, no-provider, no-plugin, no-image, no-memory, and no-production boundaries
-worker_role: apply only the production admission fixture, validator, docs, and status surfaces
+worker_role: apply only the admission matrix fixture, validator, docs, and status surfaces
 reviewer_role: inspect diff, run allowed local checks, confirm no new execution or write behavior during this patch, and close out
 validation_status: completed_validated_pending_guarded_local_commit
 ```

@@ -69,6 +69,7 @@ $requiredFiles = @(
   'scripts/validate_review_blocker_arbiter_route_summary.js',
   'scripts/validate_review_memory_admission_control.js',
   'scripts/validate_review_production_admission_control.js',
+  'scripts/validate_review_admission_control_matrix.js',
   'scripts/validate_review_console_blocker_arbiter_boundary_scan.js',
   'scripts/validate_v5_local_sync_readiness.js',
   'scripts/validate_v5_post_commit_reconciliation.js',
@@ -190,6 +191,7 @@ $requiredFiles = @(
   'tests/schema_examples/review_blocker_arbiter_route_summary.example.json',
   'tests/schema_examples/review_memory_admission_control.example.json',
   'tests/schema_examples/review_production_admission_control.example.json',
+  'tests/schema_examples/review_admission_control_matrix.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_boundary_scan.example.json',
   'tests/schema_examples/review_result_protocol_input.example.json',
   'tests/schema_examples/review_result_protocol_report.example.json',
@@ -229,6 +231,7 @@ $requiredFiles = @(
   'docs/v14_063_review_blocker_arbiter_route_summary_gate.md',
   'docs/v14_064_review_memory_admission_control_gate.md',
   'docs/v14_065_review_production_admission_control_gate.md',
+  'docs/v14_066_review_admission_control_matrix_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -3971,6 +3974,11 @@ if (-not $node) {
     Add-Failure "scripts/validate_review_production_admission_control.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'scripts/validate_review_admission_control_matrix.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_review_admission_control_matrix.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_review_console_blocker_arbiter_boundary_scan.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_review_console_blocker_arbiter_boundary_scan.js failed node --check"
@@ -6183,6 +6191,49 @@ if (-not $node) {
     }
     if ($reviewProductionAdmissionControl.review_production_admission_control.file_write_performed -ne $false) {
       Add-Failure "Review production admission control validation must not write files"
+    }
+  }
+
+  $reviewAdmissionControlMatrixOutput = & node (Join-Path $Root 'scripts/validate_review_admission_control_matrix.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review admission control matrix validation exited with failure"
+  } else {
+    $reviewAdmissionControlMatrix = ($reviewAdmissionControlMatrixOutput -join "`n") | ConvertFrom-Json
+    if ($reviewAdmissionControlMatrix.passed -ne $true) {
+      Add-Failure "Review admission control matrix validation must report passed true"
+    }
+    if ($reviewAdmissionControlMatrix.review_admission_control_matrix.admission_matrix_present -ne $true) {
+      Add-Failure "Review admission control matrix must be present"
+    }
+    if ($reviewAdmissionControlMatrix.review_admission_control_matrix.admission_matrix_matches_memory_admission -ne $true) {
+      Add-Failure "Review admission control matrix must match memory admission"
+    }
+    if ($reviewAdmissionControlMatrix.review_admission_control_matrix.admission_matrix_matches_production_admission -ne $true) {
+      Add-Failure "Review admission control matrix must match production admission"
+    }
+    if ($reviewAdmissionControlMatrix.review_admission_control_matrix.admission_matrix_pass_candidate_draft_only_verified -ne $true) {
+      Add-Failure "Review admission control matrix must verify pass candidate draft-only route"
+    }
+    if ($reviewAdmissionControlMatrix.review_admission_control_matrix.admission_matrix_reject_candidate_failure_learning_never_production_verified -ne $true) {
+      Add-Failure "Review admission control matrix must verify reject candidate failure-learning never-production route"
+    }
+    if ($reviewAdmissionControlMatrix.review_admission_control_matrix.admission_matrix_all_memory_writes_blocked -ne $true) {
+      Add-Failure "Review admission control matrix must block all memory writes"
+    }
+    if ($reviewAdmissionControlMatrix.review_admission_control_matrix.admission_matrix_all_production_writes_blocked -ne $true) {
+      Add-Failure "Review admission control matrix must block all production writes"
+    }
+    if ($reviewAdmissionControlMatrix.review_admission_control_matrix.admission_matrix_no_provider_execution_verified -ne $true) {
+      Add-Failure "Review admission control matrix must block provider execution"
+    }
+    if ($reviewAdmissionControlMatrix.review_admission_control_matrix.admission_matrix_no_accepted_samples_write_verified -ne $true) {
+      Add-Failure "Review admission control matrix must verify no accepted_samples write"
+    }
+    if ($reviewAdmissionControlMatrix.review_admission_control_matrix.admission_matrix_no_production_candidate_verified -ne $true) {
+      Add-Failure "Review admission control matrix must verify no production candidate"
+    }
+    if ($reviewAdmissionControlMatrix.review_admission_control_matrix.file_write_performed -ne $false) {
+      Add-Failure "Review admission control matrix validation must not write files"
     }
   }
 
