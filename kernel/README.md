@@ -61,10 +61,13 @@ that integration boundary.
 
 ```powershell
 node adapters\pvos_kernel_dry_run_adapter.js --input tests\schema_examples\pvos_kernel_input.example.json
+node adapters\pvos_kernel_dry_run_adapter.js --protocol-input tests\schema_examples\review_result_protocol_input.example.json
 ```
 
 The adapter contract wraps the kernel output in local VCP adapter and Review
-Console handoff drafts. It is still stdout-only and no-execution.
+Console handoff drafts. It also attaches the local review-result protocol
+report so a future Review Console can read pass/reject reasons, memory routes,
+and production routes directly. It is still stdout-only and no-execution.
 
 ## Review Result Protocol
 

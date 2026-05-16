@@ -3,6 +3,45 @@
 ## Handoff Summary
 
 ```text
+Status: v14_040_review_protocol_adapter_binding_gate completed locally and validated.
+Reason: V14.040 binds the hard review-result protocol into the PVOS dry-run adapter output and Review Console handoff draft. The adapter now carries pass/reject reasons, memory routes, production routes, and never_production count while preserving selected_plugin=null, max_plugin_calls=0, and no provider/plugin/API/image/memory/output writes.
+Current repository: project_root
+Branch: master tracking origin/master
+source_phase: v14_039_review_result_protocol_hardening_gate
+source_commit: a5c35dd077005fc6b188b6af73a23d41b597dae2
+phase_record: docs/v14_040_review_protocol_adapter_binding_gate.md
+selected_product_route: review_result_protocol_to_adapter_handoff
+adapter_cli_modified: adapters/pvos_kernel_dry_run_adapter.js
+adapter_schema_modified: schemas/pvos_kernel_dry_run_adapter.schema.yaml
+adapter_example_modified: tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json
+adapter_validator_modified: scripts/validate_pvos_kernel_dry_run_adapter.js
+validator_wiring_modified: scripts/validate_mvp.ps1
+review_result_protocol_report_attached: true
+review_console_protocol_handoff_present: true
+never_production_contract_verified: true
+direct_memory_write_performed: false
+production_candidate_created: false
+accepted_samples_written: false
+image_binaries_read: false
+runs_output_committed: false
+review_console_runtime_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v14_041_review_console_protocol_static_contract_gate
+recommended_next_auto_execution_allowed: true
+push_requires_explicit_remote_authorization: true
+runtime_provider_image_memory_production_batch: false
+next_phase_started: false
+---
 Status: v14_039_review_result_protocol_hardening_gate completed locally and validated.
 Reason: V14.039 hardens the review-result protocol. It creates a local stdout-only protocol kernel that records why each candidate passes or rejects, how each result may enter memory, and when a candidate must never enter production. Protocol pass is not production approval, memory remains draft-only, and rejected candidates with mapped failure tags are routed to never_production.
 Current repository: project_root

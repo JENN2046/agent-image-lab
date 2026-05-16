@@ -11,6 +11,7 @@ const kernelPath = "kernel/pvos_kernel.js";
 const schemaPath = "schemas/pvos_kernel_dry_run_adapter.schema.yaml";
 const examplePath = "tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json";
 const fixturePath = "tests/schema_examples/pvos_kernel_input.example.json";
+const protocolFixturePath = "tests/schema_examples/review_result_protocol_input.example.json";
 
 const errors = [];
 const results = [];
@@ -99,6 +100,8 @@ function validateResponse(response) {
   addResult("kernel_run_present", Boolean(response.kernel_run));
   addResult("kernel_run_version_v1", response.kernel_run?.pvos_kernel_run_version === "v1");
   addResult("kernel_run_stdout_mode", response.kernel_run?.mode === "local_stdout_only_kernel");
+  addResult("review_result_protocol_report_present", Boolean(response.review_result_protocol_report));
+  addResult("review_result_protocol_handoff_present", Boolean(response.review_result_protocol_handoff_draft));
   addResult("vcp_handoff_present", Boolean(response.vcp_adapter_handoff_draft));
   addResult("review_console_handoff_present", Boolean(response.review_console_handoff_draft));
   addResult("provenance_handoff_present", Boolean(response.provenance_handoff_draft));
@@ -119,6 +122,41 @@ function validateResponse(response) {
   addResult("review_console_has_rejected_candidate", Array.isArray(review.rejected_candidate_ids) && review.rejected_candidate_ids.length === 1);
   addResult("review_console_human_required", review.human_review_required_for_production === true);
   addResult("review_console_memory_separate_approval", review.memory_write_requires_separate_approval === true);
+  addResult("review_console_protocol_attached", review.review_result_protocol_report_attached === true);
+
+  const protocolReport = response.review_result_protocol_report || {};
+  addResult("protocol_report_version_v1", protocolReport.review_result_protocol_report_version === "v1");
+  addResult("protocol_report_pass_count_one", protocolReport.report_summary?.pass_count === 1);
+  addResult("protocol_report_reject_count_one", protocolReport.report_summary?.reject_count === 1);
+  addResult("protocol_report_never_production_count_one", protocolReport.report_summary?.never_production_count === 1);
+  addResult("protocol_report_direct_memory_write_false", protocolReport.report_summary?.direct_memory_write_performed === false);
+  addResult("protocol_report_production_candidate_false", protocolReport.report_summary?.production_candidate_created === false);
+  addResult(
+    "protocol_report_has_pass_reason",
+    protocolReport.candidate_review_results?.some(
+      (candidate) => candidate.review_outcome === "pass" && candidate.pass_reasons?.length > 0
+    )
+  );
+  addResult(
+    "protocol_report_has_reject_reason",
+    protocolReport.candidate_review_results?.some(
+      (candidate) => candidate.review_outcome === "reject" && candidate.reject_reasons?.length > 0
+    )
+  );
+  addResult(
+    "protocol_report_has_never_production",
+    protocolReport.candidate_review_results?.some(
+      (candidate) => candidate.production_route?.status === "never_production"
+    )
+  );
+
+  const protocolHandoff = response.review_result_protocol_handoff_draft || {};
+  addResult("protocol_handoff_draft_ready", protocolHandoff.status === "draft_ready");
+  addResult("protocol_handoff_pass_count_one", protocolHandoff.pass_count === 1);
+  addResult("protocol_handoff_reject_count_one", protocolHandoff.reject_count === 1);
+  addResult("protocol_handoff_never_production_count_one", protocolHandoff.never_production_count === 1);
+  addResult("protocol_handoff_production_candidate_false", protocolHandoff.production_candidate_created === false);
+  addResult("protocol_handoff_direct_memory_write_false", protocolHandoff.direct_memory_write_performed === false);
 
   const provenance = response.provenance_handoff_draft || {};
   addResult("provenance_payload_absent", provenance.provider_payload_included === false);
@@ -136,11 +174,14 @@ function validateResponse(response) {
   addResult("audit_output_write_false", response.audit_record?.output_file_write_observed === false);
   addResult("audit_image_generation_false", response.audit_record?.image_generation_observed === false);
   addResult("audit_memory_write_false", response.audit_record?.memory_write_observed === false);
+  addResult("audit_protocol_observed_true", response.audit_record?.review_result_protocol_observed === true);
+  addResult("audit_production_candidate_false", response.audit_record?.production_candidate_created === false);
+  addResult("audit_never_production_count_one", response.audit_record?.never_production_count === 1);
 
   validateNoSensitiveMaterial("adapter_response_stdout", JSON.stringify(response));
 }
 
-for (const file of [adapterPath, kernelPath, schemaPath, examplePath, fixturePath]) {
+for (const file of [adapterPath, kernelPath, schemaPath, examplePath, fixturePath, protocolFixturePath]) {
   addResult(`${file}_exists`, fs.existsSync(repoPath(file)), file);
 }
 
@@ -153,6 +194,9 @@ try {
   addResult("schema_stdout_policy_declared", /output_channel: stdout/.test(schema));
   addResult("schema_no_file_write_declared", /output_file_write_allowed: false/.test(schema));
   addResult("schema_max_plugin_calls_zero", /max_plugin_calls: 0/.test(schema));
+  addResult("schema_protocol_report_declared", /review_result_protocol_report/.test(schema));
+  addResult("schema_protocol_handoff_declared", /review_result_protocol_handoff_draft/.test(schema));
+  addResult("schema_protocol_attached_declared", /review_result_protocol_report_attached: true/.test(schema));
   validateNoSensitiveMaterial("schema", schema);
 } catch (error) {
   addResult("schema_readable", false, error.message);
@@ -163,6 +207,10 @@ try {
   addResult("example_version_v1", example.pvos_kernel_dry_run_adapter_response_version === "v1");
   addResult("example_selected_plugin_null", example.vcp_adapter_handoff_draft?.selected_plugin === null);
   addResult("example_max_plugin_calls_zero", example.vcp_adapter_handoff_draft?.max_plugin_calls === 0);
+  addResult("example_protocol_report_present", Boolean(example.review_result_protocol_report));
+  addResult("example_protocol_handoff_present", Boolean(example.review_result_protocol_handoff_draft));
+  addResult("example_protocol_never_production_count_one", example.review_result_protocol_report?.report_summary?.never_production_count === 1);
+  addResult("example_review_console_protocol_attached", example.review_console_handoff_draft?.review_result_protocol_report_attached === true);
   for (const flag of falseGuardFields) {
     addResult(`example_guard_${flag}_false`, example.no_execution_guard?.[flag] === false);
   }
@@ -182,7 +230,7 @@ const summary = {
   validator: "validate_pvos_kernel_dry_run_adapter",
   version: "v1",
   passed,
-  files_checked: [adapterPath, kernelPath, schemaPath, examplePath, fixturePath],
+  files_checked: [adapterPath, kernelPath, schemaPath, examplePath, fixturePath, protocolFixturePath],
   check_count: results.length,
   failed_count: errors.length,
   pvos_kernel_dry_run_adapter: {
@@ -190,6 +238,9 @@ const summary = {
     schema_present: fs.existsSync(repoPath(schemaPath)),
     example_present: fs.existsSync(repoPath(examplePath)),
     kernel_dependency_present: fs.existsSync(repoPath(kernelPath)),
+    review_result_protocol_binding_present: true,
+    review_console_protocol_handoff_present: true,
+    never_production_contract_verified: true,
     stdout_only: true,
     external_network_required: false,
     external_service_required: false,

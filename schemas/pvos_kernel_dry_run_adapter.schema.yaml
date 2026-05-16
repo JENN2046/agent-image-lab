@@ -11,6 +11,8 @@ pvos_kernel_dry_run_adapter_response:
     - status
     - mode
     - kernel_run
+    - review_result_protocol_report
+    - review_result_protocol_handoff_draft
     - vcp_adapter_handoff_draft
     - review_console_handoff_draft
     - provenance_handoff_draft
@@ -35,10 +37,30 @@ pvos_kernel_dry_run_adapter_response:
     api_call_allowed: false
     output_write_allowed: false
     expected_outputs: 0
+  review_result_protocol_report:
+    review_result_protocol_report_version: v1
+    mode: local_stdout_only_review_result_protocol
+    required_contracts:
+      pass_requires_non_empty_pass_reasons: true
+      reject_requires_non_empty_reject_reasons: true
+      memory_route_required: true
+      production_route_required: true
+      production_candidate_created: false
+  review_result_protocol_handoff_draft:
+    status: draft_ready
+    production_candidate_created: false
+    direct_memory_write_performed: false
+    required_review_fields:
+      - review_outcome
+      - pass_reasons
+      - reject_reasons
+      - memory_route
+      - production_route
   review_console_handoff_draft:
     display_only: true
     human_review_required_for_production: true
     memory_write_requires_separate_approval: true
+    review_result_protocol_report_attached: true
     forbidden_actions:
       - execute_plugin
       - call_api

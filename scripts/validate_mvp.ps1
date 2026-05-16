@@ -173,6 +173,7 @@ $requiredFiles = @(
   'docs/v14_037_pvos_kernel_minimal_implementation_gate.md',
   'docs/v14_038_pvos_kernel_dry_run_adapter_gate.md',
   'docs/v14_039_review_result_protocol_hardening_gate.md',
+  'docs/v14_040_review_protocol_adapter_binding_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -4239,6 +4240,15 @@ if (-not $node) {
     }
     if ($pvosAdapter.pvos_kernel_dry_run_adapter.kernel_dependency_present -ne $true) {
       Add-Failure "PVOS adapter validation must verify kernel dependency"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.review_result_protocol_binding_present -ne $true) {
+      Add-Failure "PVOS adapter validation must verify review result protocol binding"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.review_console_protocol_handoff_present -ne $true) {
+      Add-Failure "PVOS adapter validation must verify Review Console protocol handoff"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.never_production_contract_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify never-production contract"
     }
     if ($pvosAdapter.pvos_kernel_dry_run_adapter.stdout_only -ne $true) {
       Add-Failure "PVOS adapter validation must verify stdout-only boundary"

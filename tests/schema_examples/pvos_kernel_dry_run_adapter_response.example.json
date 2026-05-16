@@ -5,6 +5,72 @@
   "status": "accepted_draft",
   "mode": "local_no_execution_adapter_contract",
   "kernel_run_ref": "pvos_kernel_run_portable_lantern_local_fixture_001",
+  "review_result_protocol_report": {
+    "review_result_protocol_report_version": "v1",
+    "protocol_id": "review_result_protocol_hardening_v1",
+    "source_kernel_run_id": "pvos_kernel_run_portable_lantern_local_fixture_001",
+    "status": "completed_local_protocol_report",
+    "mode": "local_stdout_only_review_result_protocol",
+    "candidate_review_results": [
+      {
+        "candidate_id": "candidate_accept_metadata_001",
+        "review_outcome": "pass",
+        "pass_reasons": [
+          "weighted_score_meets_accept_threshold",
+          "no_failure_tags_present"
+        ],
+        "reject_reasons": [],
+        "memory_route": {
+          "route": "draft_memory_candidate",
+          "direct_write_performed": false
+        },
+        "production_route": {
+          "status": "blocked_until_human_review",
+          "production_candidate": false
+        }
+      },
+      {
+        "candidate_id": "candidate_reject_metadata_001",
+        "review_outcome": "reject",
+        "pass_reasons": [],
+        "reject_reasons": [
+          "weighted_score_below_accept_threshold",
+          "weighted_score_below_reject_threshold",
+          "mapped_failure_tags_present"
+        ],
+        "memory_route": {
+          "route": "audit_only_failure_learning",
+          "direct_write_performed": false
+        },
+        "production_route": {
+          "status": "never_production",
+          "production_candidate": false
+        }
+      }
+    ],
+    "report_summary": {
+      "pass_count": 1,
+      "reject_count": 1,
+      "never_production_count": 1,
+      "direct_memory_write_performed": false,
+      "production_candidate_created": false
+    }
+  },
+  "review_result_protocol_handoff_draft": {
+    "status": "draft_ready",
+    "pass_count": 1,
+    "reject_count": 1,
+    "never_production_count": 1,
+    "production_candidate_created": false,
+    "direct_memory_write_performed": false,
+    "required_review_fields": [
+      "review_outcome",
+      "pass_reasons",
+      "reject_reasons",
+      "memory_route",
+      "production_route"
+    ]
+  },
   "vcp_adapter_handoff_draft": {
     "target_platform": "VCP_adapter_future",
     "adapter_boundary": "local_dry_run_contract_only",
@@ -28,7 +94,15 @@
       "candidate_reject_metadata_001"
     ],
     "human_review_required_for_production": true,
-    "memory_write_requires_separate_approval": true
+    "memory_write_requires_separate_approval": true,
+    "review_result_protocol_report_attached": true,
+    "required_review_fields": [
+      "review_outcome",
+      "pass_reasons",
+      "reject_reasons",
+      "memory_route",
+      "production_route"
+    ]
   },
   "provenance_handoff_draft": {
     "provider_payload_included": false,
@@ -43,7 +117,10 @@
     "external_api_observed": false,
     "output_file_write_observed": false,
     "image_generation_observed": false,
-    "memory_write_observed": false
+    "memory_write_observed": false,
+    "review_result_protocol_observed": true,
+    "production_candidate_created": false,
+    "never_production_count": 1
   },
   "no_execution_guard": {
     "execution_authorized": false,
