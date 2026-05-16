@@ -215,6 +215,7 @@ $requiredFiles = @(
   'docs/v14_057_review_console_blocker_arbiter_boundary_scan_gate.md',
   'docs/v14_058_review_blocker_arbiter_local_kernel_gate.md',
   'docs/v14_059_review_blocker_arbiter_adapter_handoff_gate.md',
+  'docs/v14_060_review_console_blocker_arbiter_ui_binding_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -5850,6 +5851,36 @@ if (-not $node) {
     }
     if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.evidence_blocker_no_accepted_samples_write_verified -ne $true) {
       Add-Failure "Review Console Adapter handoff must verify evidence blocker performs no accepted_samples write"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.review_blocker_arbiter_static_handoff_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify review blocker arbiter static handoff"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.review_blocker_arbiter_guard_summary_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify blocker arbiter guard summary"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.blocker_arbiter_candidate_routes_visible -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify blocker arbiter candidate route visibility"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.blocker_arbiter_pass_route_visible -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify blocker arbiter pass route visibility"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.blocker_arbiter_reject_never_production_visible -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify blocker arbiter reject never-production visibility"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.blocker_arbiter_production_blocked_visible -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify blocker arbiter production blocked visibility"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.blocker_arbiter_memory_entry_blocked_visible -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify blocker arbiter memory entry blocked visibility"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.blocker_arbiter_no_production_candidate_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify blocker arbiter creates no production candidate"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.blocker_arbiter_no_direct_memory_write_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify blocker arbiter performs no direct memory write"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.blocker_arbiter_no_accepted_samples_write_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify blocker arbiter performs no accepted_samples write"
     }
     if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.review_evidence_blocker_adapter_negative_static_handoff_verified -ne $true) {
       Add-Failure "Review Console Adapter handoff must verify adapter negative static handoff"

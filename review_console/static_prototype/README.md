@@ -43,6 +43,7 @@ review_console/static_prototype/index.html
 审片结果协议面板还会显示 `review_protocol_guard_summary`：包括 `memory_forbidden_count`、`memory_forbidden_candidate_ids`、`never_production_candidate_ids`、`negative_guard_observed` 和 production candidate 创建阻断状态。
 草案输出还会携带 `review_decision_package_static_handoff`，用于展示 accepted/rejected sample 草案、memory delta 草案、production exclusion register，以及 `production_candidate_created=false`、`direct_memory_write_performed=false`、`accepted_samples_write_performed=false` 的决策包阻断状态。
 草案输出还会携带 `review_evidence_blocker_contract_static_handoff`，用于展示 EvidenceRecord、BlockerDecision、ProductionExclusionRegister，以及 `evidence_record_is_not_approval`、`blocker_decision_is_not_write`、`no_production_without_human_review` 的证据仲裁边界。
+草案输出还会携带 `review_blocker_arbiter_static_handoff`，用于展示最终 candidate route：pass 只进入待人工 review 草案，reject 只进入 failure learning 且永远不得进入 production。
 草案输出还会携带 `review_evidence_blocker_adapter_negative_static_handoff`，用于展示 adapter negative guard fixture 中的 memory-forbidden 候选、never-production 候选、production exclusion IDs，以及 evidence blocker golden fixture match 状态。
 v14.055 还用 `tests/schema_examples/review_console_adapter_negative_fixture_draft_output_snapshot.example.json` 固化草案输出 snapshot，验证 `#draftOutput` 中的 adapter negative handoff 与静态 mock 和 adapter negative fixture 保持一致。
 
@@ -64,6 +65,7 @@ v14.055 还用 `tests/schema_examples/review_console_adapter_negative_fixture_dr
 - `review_result_protocol_static_handoff`
 - `review_decision_package_static_handoff`
 - `review_evidence_blocker_contract_static_handoff`
+- `review_blocker_arbiter_static_handoff`
 - `review_evidence_blocker_adapter_negative_static_handoff`
 
 其中 `review_session` 必须能映射到 `schemas/review_session.schema.yaml` 和 `review_console/review_session.schema.yaml` 的字段语义。`FIELD_MAPPING.md` 是人工验收依据。
@@ -71,5 +73,6 @@ v14.055 还用 `tests/schema_examples/review_console_adapter_negative_fixture_dr
 `review_protocol_guard_summary` 必须作为可见 UI guard 呈现；它只显示阻断证据，不代表允许写入记忆、创建 production candidate 或执行插件。
 `review_decision_package_static_handoff` 必须作为可见 UI guard 呈现；它只显示 sample/memory/exclusion 草案证据，不代表允许写入 accepted_samples、写入记忆或创建 production candidate。
 `review_evidence_blocker_contract_static_handoff` 必须作为可见 UI guard 呈现；它只显示 evidence/blocker/arbitration 证据，不代表 approval、write、production promotion、accepted_samples 写入、记忆写入或插件执行。
+`review_blocker_arbiter_static_handoff` 必须作为可见 UI guard 呈现；它只显示 final route、memory decision、production decision 和 blocker guard，不代表 production approval、accepted_samples 写入、记忆写入或插件执行。
 `review_evidence_blocker_adapter_negative_static_handoff` 必须作为可见 UI guard 呈现；它只显示 adapter negative fixture 的阻断证据，不代表真实 adapter runtime、provider contact、plugin/API 调用、图片生成、accepted_samples 写入、记忆写入或 production promotion。
 `review_console_adapter_negative_fixture_draft_output_snapshot.example.json` 必须与静态 mock 的 adapter negative handoff 和 `#draftOutput` 渲染结果一致；它是回归证据，不是执行授权。

@@ -415,6 +415,7 @@ input[type="range"] {
 
 .decision-package-section,
 .evidence-blocker-section,
+.blocker-arbiter-section,
 .adapter-negative-section {
   display: grid;
   gap: 12px;
@@ -496,6 +497,7 @@ input[type="range"] {
 
 .evidence-record-list,
 .blocker-decision-list,
+.blocker-arbiter-list,
 .adapter-negative-list {
   display: grid;
   gap: 10px;
@@ -517,6 +519,7 @@ input[type="range"] {
 
 .evidence-card,
 .blocker-card,
+.blocker-arbiter-card,
 .adapter-negative-card {
   display: grid;
   gap: 10px;
@@ -535,6 +538,14 @@ input[type="range"] {
 
 .blocker-card.temporary {
   border-left-color: var(--amber);
+}
+
+.blocker-arbiter-card.human-review {
+  border-left-color: var(--cyan);
+}
+
+.blocker-arbiter-card.never-production {
+  border-left-color: var(--red);
 }
 
 .adapter-negative-card.never-production {
@@ -576,6 +587,7 @@ input[type="range"] {
 .protocol-card dl,
 .evidence-card dl,
 .blocker-card dl,
+.blocker-arbiter-card dl,
 .adapter-negative-card dl {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -586,6 +598,7 @@ input[type="range"] {
 .protocol-card dl div,
 .evidence-card dl div,
 .blocker-card dl div,
+.blocker-arbiter-card dl div,
 .adapter-negative-card dl div {
   min-width: 0;
   padding: 8px;
@@ -597,6 +610,7 @@ input[type="range"] {
 .protocol-card dt,
 .evidence-card dt,
 .blocker-card dt,
+.blocker-arbiter-card dt,
 .adapter-negative-card dt {
   color: var(--muted);
   font-size: 12px;
@@ -605,6 +619,7 @@ input[type="range"] {
 .protocol-card dd,
 .evidence-card dd,
 .blocker-card dd,
+.blocker-arbiter-card dd,
 .adapter-negative-card dd {
   margin: 3px 0 0;
   overflow-wrap: anywhere;

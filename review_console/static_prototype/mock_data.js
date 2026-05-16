@@ -469,6 +469,148 @@ window.REVIEW_CONSOLE_MOCK = {
       accepted_samples_write_performed: false
     }
   },
+  review_blocker_arbiter_static_handoff: {
+    source_adapter_response_ref: "tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json",
+    status: "draft_ready",
+    display_only: true,
+    review_blocker_arbiter_attached: true,
+    review_blocker_arbiter_handoff_id: "review_blocker_arbiter_handoff_portable_lantern_local_fixture_001",
+    arbiter_id: "review_blocker_arbiter_portable_lantern_local_fixture_001",
+    source_evidence_blocker_contract_id: "evidence_blocker_contract_portable_lantern_local_fixture_001",
+    candidate_arbitrations: [
+      {
+        candidate_id: "candidate_accept_metadata_001",
+        review_outcome: "pass",
+        evidence_record_id: "evidence_candidate_accept_metadata_001",
+        production_blocker_decision_id: "blocker_production_candidate_accept_metadata_001",
+        memory_blocker_decision_ids: [],
+        production_exclusion_record_id: null,
+        final_route: "pass_draft_only_pending_human_review",
+        production_decision: "block_until_human_review",
+        memory_decision: "block_until_human_memory_approval",
+        memory_forbidden: false,
+        never_production: false,
+        production_promotion_allowed_now: false,
+        memory_entry_allowed_now: false,
+        memory_draft_allowed: true,
+        requires_human_review: true,
+        production_candidate_created: false,
+        direct_memory_write_performed: false,
+        accepted_samples_write_performed: false
+      },
+      {
+        candidate_id: "candidate_reject_metadata_001",
+        review_outcome: "reject",
+        evidence_record_id: "evidence_candidate_reject_metadata_001",
+        production_blocker_decision_id: "blocker_production_candidate_reject_metadata_001",
+        memory_blocker_decision_ids: [],
+        production_exclusion_record_id: "production_exclusion_candidate_reject_metadata_001",
+        final_route: "reject_failure_learning_only_never_production",
+        production_decision: "block_permanently",
+        memory_decision: "block_until_human_memory_approval",
+        memory_forbidden: false,
+        never_production: true,
+        production_promotion_allowed_now: false,
+        memory_entry_allowed_now: false,
+        memory_draft_allowed: true,
+        requires_human_review: true,
+        production_candidate_created: false,
+        direct_memory_write_performed: false,
+        accepted_samples_write_performed: false
+      }
+    ],
+    arbiter_summary: {
+      candidate_count: 2,
+      passed_candidate_count: 1,
+      rejected_candidate_count: 1,
+      memory_draft_candidate_count: 2,
+      memory_forbidden_count: 0,
+      never_production_count: 1,
+      production_blocked_count: 2,
+      permanent_block_count: 1,
+      human_review_required_count: 2,
+      all_production_blocked: true,
+      all_writes_blocked: true,
+      direct_memory_write_performed: false,
+      production_candidate_created: false,
+      accepted_samples_write_performed: false
+    },
+    review_blocker_arbiter_guard_summary: {
+      candidate_count: 2,
+      memory_forbidden_count: 0,
+      never_production_count: 1,
+      production_blocked_count: 2,
+      memory_forbidden_candidate_ids: [],
+      never_production_candidate_ids: [
+        "candidate_reject_metadata_001"
+      ],
+      production_promotion_allowed_now: false,
+      memory_entry_allowed_now: false,
+      production_candidate_created: false,
+      direct_memory_write_performed: false,
+      accepted_samples_write_performed: false,
+      memory_forbidden_prevents_memory: true,
+      never_production_prevents_production: true,
+      human_review_required_before_production: true
+    },
+    production_blocked_candidate_ids: [
+      "candidate_accept_metadata_001",
+      "candidate_reject_metadata_001"
+    ],
+    promotion_guard: {
+      evidence_required_for_every_candidate: true,
+      blocker_required_for_every_candidate: true,
+      memory_forbidden_prevents_memory: true,
+      never_production_prevents_production: true,
+      pass_is_not_production_approval: true,
+      human_review_required_before_production: true,
+      production_candidate_created: false,
+      direct_memory_write_performed: false,
+      accepted_samples_write_performed: false
+    },
+    final_route_by_candidate: [
+      {
+        candidate_id: "candidate_accept_metadata_001",
+        final_route: "pass_draft_only_pending_human_review",
+        production_decision: "block_until_human_review",
+        memory_decision: "block_until_human_memory_approval",
+        memory_forbidden: false,
+        never_production: false
+      },
+      {
+        candidate_id: "candidate_reject_metadata_001",
+        final_route: "reject_failure_learning_only_never_production",
+        production_decision: "block_permanently",
+        memory_decision: "block_until_human_memory_approval",
+        memory_forbidden: false,
+        never_production: true
+      }
+    ],
+    no_execution_guard: {
+      provider_contact_allowed: false,
+      plugin_call_allowed: false,
+      api_call_allowed: false,
+      daily_note_write_allowed: false,
+      vcp_memory_write_allowed: false,
+      image_generation_allowed: false,
+      output_file_write_allowed: false,
+      accepted_samples_write_allowed: false,
+      production_candidate_write_allowed: false,
+      external_manifest_read_allowed: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      daily_note_write_performed: false,
+      vcp_memory_write_performed: false,
+      image_generation_performed: false,
+      output_file_write_performed: false,
+      accepted_samples_write_performed: false,
+      production_candidate_created: false,
+      external_manifest_read_performed: false,
+      vcpchat_source_read_performed: false,
+      vcptoolbox_source_read_performed: false
+    }
+  },
   review_evidence_blocker_adapter_negative_static_handoff: {
     source_adapter_response_ref: "tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json",
     source_evidence_blocker_fixture_ref: "tests/schema_examples/evidence_blocker_contract_negative_guard.example.json",

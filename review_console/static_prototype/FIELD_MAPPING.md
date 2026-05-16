@@ -176,6 +176,23 @@ Phase 9 审批记录必须满足：
 
 `review_evidence_blocker_contract_static_handoff` 是 evidence collector + blocker arbiter 的可视化层。它不得创建 production candidate，不得写 accepted_samples，不得写 memory，不得调用插件，也不得让 `never_production` 候选绕过 exclusion register。
 
+## v14.060 Review Blocker Arbiter Static Handoff 映射
+
+本节用于验收 `tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json` 中的审片阻断仲裁字段进入静态 Review Console 可见 UI 与草案输出。它仍然只读取项目内 mock / fixture，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
+
+| Adapter arbiter 字段 | Review Console 可见/草案字段 | 说明 |
+| --- | --- | --- |
+| `review_blocker_arbiter` | `review_blocker_arbiter_static_handoff.candidate_arbitrations` / `blockerArbiterRouteList` | 显示每个候选的 evidence record、production blocker、final route、memory decision 和 production decision |
+| `review_blocker_arbiter_handoff_draft.final_route_by_candidate` | `review_blocker_arbiter_static_handoff.final_route_by_candidate` / `blockerArbiterRouteList` | `pass_draft_only_pending_human_review` 仍需人工 review，`reject_failure_learning_only_never_production` 永远不得进入 production |
+| `review_blocker_arbiter_handoff_draft.production_blocked_candidate_ids` | `review_blocker_arbiter_static_handoff.production_blocked_candidate_ids` / `blockerArbiterGuardSummary` | 所有候选当前都不得 production promotion |
+| `review_blocker_arbiter_handoff_draft.production_promotion_allowed_now` / `memory_entry_allowed_now` | `review_blocker_arbiter_static_handoff.review_blocker_arbiter_guard_summary` / `blockerArbiterGuard` | 当前不得生产提升，也不得直接进入记忆 |
+| `review_console_handoff_draft.review_blocker_arbiter_guard_summary` | `review_blocker_arbiter_static_handoff.review_blocker_arbiter_guard_summary` / `blockerArbiterGuardSummary` | 显示 memory-forbidden、never-production、production-blocked 计数和候选 ID |
+| `review_blocker_arbiter.promotion_guard.pass_is_not_production_approval` | `blockerArbiterGuard` | pass 不是生产批准 |
+| `review_blocker_arbiter.promotion_guard.human_review_required_before_production` | `blockerArbiterGuard` | 进入 production 之前必须有人审 |
+| `review_blocker_arbiter.no_execution_guard` | `review_blocker_arbiter_static_handoff.no_execution_guard` | provider/plugin/API/image/memory/output/production 写入保持 false |
+
+`review_blocker_arbiter_static_handoff` 是审片最终路线的可视化层。它不得创建 production candidate，不得写 accepted_samples，不得写 memory，不得调用插件，也不得让 pass 候选绕过 human review 或让 reject 候选绕过 never-production。
+
 ## v14.054 Adapter Negative Fixture Static Handoff 映射
 
 本节用于验收 `tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json` 中的负向 adapter handoff 进入静态 Review Console 可见 UI 与草案输出。它仍然只读取项目内 mock / fixture，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。

@@ -25,6 +25,7 @@ const state = {
   review_result_protocol_static_handoff: mock.review_result_protocol_static_handoff,
   review_decision_package_static_handoff: mock.review_decision_package_static_handoff,
   review_evidence_blocker_contract_static_handoff: mock.review_evidence_blocker_contract_static_handoff,
+  review_blocker_arbiter_static_handoff: mock.review_blocker_arbiter_static_handoff,
   review_evidence_blocker_adapter_negative_static_handoff: mock.review_evidence_blocker_adapter_negative_static_handoff,
   humanScores: { ...mock.review_session.human_review.breakdown }
 };
@@ -403,6 +404,75 @@ function renderEvidenceBlockerHandoff() {
   `;
 }
 
+function renderReviewBlockerArbiterHandoff() {
+  const handoff = state.review_blocker_arbiter_static_handoff;
+  const summary = handoff.arbiter_summary;
+  const guardSummary = handoff.review_blocker_arbiter_guard_summary;
+
+  qs("#blockerArbiterSummary").innerHTML = `
+    <span>Candidates <strong>${summary.candidate_count}</strong></span>
+    <span>Production blocked <strong>${summary.production_blocked_count}</strong></span>
+    <span>Human review <strong>${summary.human_review_required_count}</strong></span>
+    <span>Permanent blocks <strong>${summary.permanent_block_count}</strong></span>
+  `;
+
+  qs("#blockerArbiterGuardSummary").innerHTML = `
+    <article class="guard-tile">
+      <span>Memory forbidden</span>
+      <strong>${guardSummary.memory_forbidden_count}</strong>
+    </article>
+    <article class="guard-tile">
+      <span>Never production</span>
+      <strong>${guardSummary.never_production_count}</strong>
+    </article>
+    <article class="guard-tile">
+      <span>Production candidate</span>
+      <strong>${guardSummary.production_candidate_created}</strong>
+    </article>
+    <article class="guard-tile wide">
+      <span>Never production ids</span>
+      <strong>${guardSummary.never_production_candidate_ids.join(", ")}</strong>
+    </article>
+    <article class="guard-tile wide">
+      <span>Production blocked ids</span>
+      <strong>${handoff.production_blocked_candidate_ids.join(", ")}</strong>
+    </article>
+  `;
+
+  const root = qs("#blockerArbiterRouteList");
+  root.innerHTML = "";
+  handoff.candidate_arbitrations.forEach((item) => {
+    const card = document.createElement("article");
+    card.className = `blocker-arbiter-card ${item.never_production ? "never-production" : "human-review"}`;
+    card.innerHTML = `
+      <div class="protocol-card-head">
+        <strong>${item.candidate_id}</strong>
+        <span>${item.final_route}</span>
+      </div>
+      <dl>
+        <div><dt>Evidence</dt><dd>${item.evidence_record_id}</dd></div>
+        <div><dt>Production blocker</dt><dd>${item.production_blocker_decision_id}</dd></div>
+        <div><dt>Production decision</dt><dd>${item.production_decision}</dd></div>
+        <div><dt>Memory decision</dt><dd>${item.memory_decision}</dd></div>
+        <div><dt>Memory forbidden</dt><dd>${item.memory_forbidden}</dd></div>
+        <div><dt>Never production</dt><dd>${item.never_production}</dd></div>
+      </dl>
+    `;
+    root.appendChild(card);
+  });
+
+  qs("#blockerArbiterGuard").innerHTML = `
+    <span>review blocker arbiter attached: ${handoff.review_blocker_arbiter_attached}</span>
+    <span>production promotion allowed now: ${guardSummary.production_promotion_allowed_now}</span>
+    <span>memory entry allowed now: ${guardSummary.memory_entry_allowed_now}</span>
+    <span>memory forbidden prevents memory: ${guardSummary.memory_forbidden_prevents_memory}</span>
+    <span>never production prevents production: ${guardSummary.never_production_prevents_production}</span>
+    <span>pass is not production approval: ${handoff.promotion_guard.pass_is_not_production_approval}</span>
+    <span>human review required before production: ${guardSummary.human_review_required_before_production}</span>
+    <span>all writes blocked: ${summary.all_writes_blocked}</span>
+  `;
+}
+
 function renderAdapterNegativeHandoff() {
   const handoff = state.review_evidence_blocker_adapter_negative_static_handoff;
   const guard = handoff.guard_summary;
@@ -643,6 +713,7 @@ function renderDraft() {
     review_result_protocol_static_handoff: state.review_result_protocol_static_handoff,
     review_decision_package_static_handoff: state.review_decision_package_static_handoff,
     review_evidence_blocker_contract_static_handoff: state.review_evidence_blocker_contract_static_handoff,
+    review_blocker_arbiter_static_handoff: state.review_blocker_arbiter_static_handoff,
     review_evidence_blocker_adapter_negative_static_handoff: state.review_evidence_blocker_adapter_negative_static_handoff,
     review_session: buildReviewSession(memoryApproval, humanTotal),
     image_case: buildImageCase(humanTotal),
@@ -668,6 +739,7 @@ function renderAll() {
   renderProtocolHandoff();
   renderDecisionPackageHandoff();
   renderEvidenceBlockerHandoff();
+  renderReviewBlockerArbiterHandoff();
   renderAdapterNegativeHandoff();
   renderDraft();
 }

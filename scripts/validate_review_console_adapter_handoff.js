@@ -125,6 +125,10 @@ function loadRenderedStaticDraft(mock) {
     "evidenceRecordList",
     "blockerDecisionList",
     "evidenceBlockerGuard",
+    "blockerArbiterSummary",
+    "blockerArbiterGuardSummary",
+    "blockerArbiterRouteList",
+    "blockerArbiterGuard",
     "adapterNegativeSummary",
     "adapterNegativeGuardSummary",
     "adapterNegativeBlockerList",
@@ -580,6 +584,143 @@ function assertEvidenceBlockerContractHandoff(handoff, adapterExample) {
   assert(handoff.arbitration_guard.accepted_samples_write_performed === false, "Static evidence blocker must not write accepted samples.");
 }
 
+function assertReviewBlockerArbiterStaticHandoff(handoff, adapterExample) {
+  assert(handoff, "Static mock must expose review_blocker_arbiter_static_handoff.");
+  assert(handoff.status === "draft_ready", "Review blocker arbiter static handoff must be draft_ready.");
+  assert(handoff.display_only === true, "Review blocker arbiter static handoff must be display-only.");
+  assert(
+    handoff.source_adapter_response_ref === "tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json",
+    "Review blocker arbiter static handoff must cite the PVOS adapter fixture."
+  );
+  assert(handoff.review_blocker_arbiter_attached === true, "Review blocker arbiter static handoff must mark arbiter attached.");
+
+  const arbiter = adapterExample.review_blocker_arbiter;
+  const adapterHandoff = adapterExample.review_blocker_arbiter_handoff_draft;
+  const adapterGuardSummary = adapterExample.review_console_handoff_draft.review_blocker_arbiter_guard_summary;
+  assert(arbiter, "PVOS adapter example must include review_blocker_arbiter.");
+  assert(adapterHandoff, "PVOS adapter example must include review_blocker_arbiter_handoff_draft.");
+  assert(adapterGuardSummary, "PVOS adapter example must include Review Console blocker arbiter guard summary.");
+  assert(
+    handoff.review_blocker_arbiter_handoff_id === adapterExample.review_console_handoff_draft.review_blocker_arbiter_handoff_id,
+    "Static blocker arbiter handoff id must match Review Console adapter handoff."
+  );
+  assert(handoff.arbiter_id === adapterHandoff.arbiter_id, "Static blocker arbiter arbiter_id must match adapter handoff.");
+  assert(
+    handoff.source_evidence_blocker_contract_id === adapterHandoff.source_evidence_blocker_contract_id,
+    "Static blocker arbiter source evidence contract must match adapter handoff."
+  );
+  assert(
+    handoff.candidate_arbitrations.length === arbiter.candidate_arbitrations.length,
+    "Static blocker arbiter must carry candidate arbitrations."
+  );
+  assertDeepEqual(
+    handoff.final_route_by_candidate,
+    adapterHandoff.final_route_by_candidate,
+    "Static blocker arbiter final routes must match adapter handoff."
+  );
+  assertArrayEqual(
+    handoff.production_blocked_candidate_ids,
+    adapterHandoff.production_blocked_candidate_ids,
+    "Static blocker arbiter production blocked IDs must match adapter handoff"
+  );
+
+  const summary = handoff.arbiter_summary;
+  for (const key of [
+    "candidate_count",
+    "passed_candidate_count",
+    "rejected_candidate_count",
+    "memory_draft_candidate_count",
+    "memory_forbidden_count",
+    "never_production_count",
+    "production_blocked_count",
+    "permanent_block_count",
+    "human_review_required_count",
+  ]) {
+    assert(summary[key] === arbiter.arbiter_summary[key], `Static blocker arbiter summary ${key} must match adapter arbiter.`);
+  }
+  assert(summary.all_production_blocked === true, "Static blocker arbiter must keep all production blocked.");
+  assert(summary.all_writes_blocked === true, "Static blocker arbiter must keep all writes blocked.");
+  assert(summary.direct_memory_write_performed === false, "Static blocker arbiter must not write memory directly.");
+  assert(summary.production_candidate_created === false, "Static blocker arbiter must not create production candidates.");
+  assert(summary.accepted_samples_write_performed === false, "Static blocker arbiter must not write accepted samples.");
+
+  const guardSummary = handoff.review_blocker_arbiter_guard_summary;
+  for (const key of [
+    "candidate_count",
+    "memory_forbidden_count",
+    "never_production_count",
+    "production_blocked_count",
+  ]) {
+    assert(guardSummary[key] === adapterGuardSummary[key], `Static blocker arbiter guard ${key} must match adapter Review Console guard.`);
+  }
+  assertArrayEqual(
+    guardSummary.memory_forbidden_candidate_ids,
+    adapterGuardSummary.memory_forbidden_candidate_ids,
+    "Static blocker arbiter memory forbidden IDs must match adapter guard"
+  );
+  assertArrayEqual(
+    guardSummary.never_production_candidate_ids,
+    adapterGuardSummary.never_production_candidate_ids,
+    "Static blocker arbiter never production IDs must match adapter guard"
+  );
+  assert(guardSummary.production_promotion_allowed_now === false, "Static blocker arbiter must block production promotion now.");
+  assert(guardSummary.memory_entry_allowed_now === false, "Static blocker arbiter must block memory entry now.");
+  assert(guardSummary.production_candidate_created === false, "Static blocker arbiter guard must not create production candidates.");
+  assert(guardSummary.direct_memory_write_performed === false, "Static blocker arbiter guard must not write memory directly.");
+  assert(guardSummary.accepted_samples_write_performed === false, "Static blocker arbiter guard must not write accepted samples.");
+  assert(guardSummary.memory_forbidden_prevents_memory === true, "Static blocker arbiter guard must block memory-forbidden memory.");
+  assert(guardSummary.never_production_prevents_production === true, "Static blocker arbiter guard must block never-production promotion.");
+  assert(guardSummary.human_review_required_before_production === true, "Static blocker arbiter guard must require human review before production.");
+
+  const passRoute = handoff.candidate_arbitrations.find((item) => item.candidate_id === "candidate_accept_metadata_001");
+  const rejectRoute = handoff.candidate_arbitrations.find((item) => item.candidate_id === "candidate_reject_metadata_001");
+  assert(passRoute, "Static blocker arbiter must include pass candidate route.");
+  assert(rejectRoute, "Static blocker arbiter must include reject candidate route.");
+  assert(passRoute.final_route === "pass_draft_only_pending_human_review", "Pass candidate must remain pass draft pending human review.");
+  assert(passRoute.production_decision === "block_until_human_review", "Pass candidate production must be blocked until human review.");
+  assert(passRoute.memory_decision === "block_until_human_memory_approval", "Pass candidate memory must be blocked until human memory approval.");
+  assert(passRoute.production_promotion_allowed_now === false, "Pass candidate must not be promotable now.");
+  assert(passRoute.memory_entry_allowed_now === false, "Pass candidate must not enter memory now.");
+  assert(passRoute.production_candidate_created === false, "Pass candidate must not create production candidate.");
+  assert(passRoute.direct_memory_write_performed === false, "Pass candidate must not write memory directly.");
+  assert(passRoute.accepted_samples_write_performed === false, "Pass candidate must not write accepted samples.");
+  assert(rejectRoute.final_route === "reject_failure_learning_only_never_production", "Reject candidate must remain failure-learning-only never production.");
+  assert(rejectRoute.production_decision === "block_permanently", "Reject candidate production must be permanently blocked.");
+  assert(rejectRoute.never_production === true, "Reject candidate must stay never production.");
+  assert(rejectRoute.production_promotion_allowed_now === false, "Reject candidate must not be promotable now.");
+  assert(rejectRoute.memory_entry_allowed_now === false, "Reject candidate must not enter memory now.");
+  assert(rejectRoute.production_candidate_created === false, "Reject candidate must not create production candidate.");
+  assert(rejectRoute.direct_memory_write_performed === false, "Reject candidate must not write memory directly.");
+  assert(rejectRoute.accepted_samples_write_performed === false, "Reject candidate must not write accepted samples.");
+
+  assert(handoff.promotion_guard.evidence_required_for_every_candidate === true, "Static blocker arbiter must require evidence for every candidate.");
+  assert(handoff.promotion_guard.blocker_required_for_every_candidate === true, "Static blocker arbiter must require blockers for every candidate.");
+  assert(handoff.promotion_guard.memory_forbidden_prevents_memory === true, "Static blocker arbiter must prevent forbidden memory.");
+  assert(handoff.promotion_guard.never_production_prevents_production === true, "Static blocker arbiter must prevent never-production promotion.");
+  assert(handoff.promotion_guard.pass_is_not_production_approval === true, "Static blocker arbiter must keep pass-is-not-production-approval.");
+  assert(handoff.promotion_guard.human_review_required_before_production === true, "Static blocker arbiter must require human review before production.");
+  assert(handoff.promotion_guard.production_candidate_created === false, "Static blocker arbiter promotion guard must not create production candidates.");
+  assert(handoff.promotion_guard.direct_memory_write_performed === false, "Static blocker arbiter promotion guard must not write memory directly.");
+  assert(handoff.promotion_guard.accepted_samples_write_performed === false, "Static blocker arbiter promotion guard must not write accepted samples.");
+
+  for (const key of [
+    "provider_contact_performed",
+    "plugin_call_performed",
+    "api_call_performed",
+    "daily_note_write_performed",
+    "vcp_memory_write_performed",
+    "image_generation_performed",
+    "output_file_write_performed",
+    "accepted_samples_write_performed",
+    "production_candidate_created",
+    "external_manifest_read_performed",
+    "vcpchat_source_read_performed",
+    "vcptoolbox_source_read_performed",
+  ]) {
+    assert(handoff.no_execution_guard[key] === false, `Static blocker arbiter no-execution guard ${key} must be false.`);
+  }
+}
+
 function assertAdapterNegativeStaticHandoff(handoff, negativeAdapterExample) {
   assert(handoff, "Static mock must expose review_evidence_blocker_adapter_negative_static_handoff.");
   assert(handoff.status === "draft_ready", "Adapter negative static handoff must be draft_ready.");
@@ -834,6 +975,12 @@ function main() {
   assertReviewResultProtocolHandoff(mock.review_result_protocol_static_handoff, pvosAdapterExample);
   assertReviewDecisionPackageHandoff(mock.review_decision_package_static_handoff, pvosAdapterExample);
   assertEvidenceBlockerContractHandoff(mock.review_evidence_blocker_contract_static_handoff, pvosAdapterExample);
+  assertReviewBlockerArbiterStaticHandoff(mock.review_blocker_arbiter_static_handoff, pvosAdapterExample);
+  assertDeepEqual(
+    renderedDraftOutput.review_blocker_arbiter_static_handoff,
+    mock.review_blocker_arbiter_static_handoff,
+    "Rendered draft output blocker arbiter handoff must match static mock handoff."
+  );
   assertAdapterNegativeStaticHandoff(
     mock.review_evidence_blocker_adapter_negative_static_handoff,
     pvosAdapterNegativeExample
@@ -862,12 +1009,17 @@ function main() {
     "Static app must carry review_evidence_blocker_contract_static_handoff into draft output."
   );
   assert(
+    appSource.includes("review_blocker_arbiter_static_handoff"),
+    "Static app must carry review_blocker_arbiter_static_handoff into draft output."
+  );
+  assert(
     appSource.includes("review_evidence_blocker_adapter_negative_static_handoff"),
     "Static app must carry review_evidence_blocker_adapter_negative_static_handoff into draft output."
   );
   assert(appSource.includes("renderProtocolHandoff"), "Static app must render review protocol handoff.");
   assert(appSource.includes("renderDecisionPackageHandoff"), "Static app must render review decision package handoff.");
   assert(appSource.includes("renderEvidenceBlockerHandoff"), "Static app must render evidence blocker handoff.");
+  assert(appSource.includes("renderReviewBlockerArbiterHandoff"), "Static app must render review blocker arbiter handoff.");
   assert(appSource.includes("renderAdapterNegativeHandoff"), "Static app must render adapter negative handoff.");
   assert(indexSource.includes("protocolCandidateList"), "Static HTML must expose protocol candidate list.");
   assert(indexSource.includes("protocolSummary"), "Static HTML must expose protocol summary.");
@@ -882,6 +1034,10 @@ function main() {
   assert(indexSource.includes("evidenceRecordList"), "Static HTML must expose evidence record list.");
   assert(indexSource.includes("blockerDecisionList"), "Static HTML must expose blocker decision list.");
   assert(indexSource.includes("evidenceBlockerGuard"), "Static HTML must expose evidence blocker guard.");
+  assert(indexSource.includes("blockerArbiterSummary"), "Static HTML must expose blocker arbiter summary.");
+  assert(indexSource.includes("blockerArbiterGuardSummary"), "Static HTML must expose blocker arbiter guard summary.");
+  assert(indexSource.includes("blockerArbiterRouteList"), "Static HTML must expose blocker arbiter route list.");
+  assert(indexSource.includes("blockerArbiterGuard"), "Static HTML must expose blocker arbiter guard.");
   assert(indexSource.includes("adapterNegativeSummary"), "Static HTML must expose adapter negative summary.");
   assert(indexSource.includes("adapterNegativeGuardSummary"), "Static HTML must expose adapter negative guard summary.");
   assert(indexSource.includes("adapterNegativeBlockerList"), "Static HTML must expose adapter negative blocker list.");
@@ -895,6 +1051,8 @@ function main() {
   assert(styleSource.includes(".evidence-blocker-section"), "Static CSS must style evidence blocker section.");
   assert(styleSource.includes(".evidence-card"), "Static CSS must style evidence cards.");
   assert(styleSource.includes(".blocker-card.permanent"), "Static CSS must style permanent blocker cards.");
+  assert(styleSource.includes(".blocker-arbiter-section"), "Static CSS must style blocker arbiter section.");
+  assert(styleSource.includes(".blocker-arbiter-card.never-production"), "Static CSS must style never-production blocker arbiter cards.");
   assert(styleSource.includes(".adapter-negative-section"), "Static CSS must style adapter negative section.");
   assert(styleSource.includes(".adapter-negative-card.memory-forbidden"), "Static CSS must style memory-forbidden adapter negative cards.");
   assert(appSource.includes("Never production"), "Static app must expose never production summary copy.");
@@ -913,6 +1071,10 @@ function main() {
   assert(appSource.includes("evidence record is not approval"), "Static app must expose evidence-not-approval guard copy.");
   assert(appSource.includes("blocker decision is not write"), "Static app must expose blocker-not-write guard copy.");
   assert(appSource.includes("no production without human review"), "Static app must expose no-production-without-review guard copy.");
+  assert(appSource.includes("Review Blocker Arbiter") || indexSource.includes("Review Blocker Arbiter"), "Static app must expose blocker arbiter copy.");
+  assert(appSource.includes("Production blocked ids"), "Static app must expose blocker arbiter production-blocked IDs copy.");
+  assert(appSource.includes("pass is not production approval"), "Static app must expose blocker arbiter pass-not-approval copy.");
+  assert(appSource.includes("human review required before production"), "Static app must expose blocker arbiter human-review guard copy.");
   assert(appSource.includes("Adapter negative fixture"), "Static app must expose adapter negative fixture copy.");
   assert(appSource.includes("Golden fixture match"), "Static app must expose golden fixture match copy.");
   assert(appSource.includes("Memory forbidden IDs"), "Static app must expose memory-forbidden IDs copy.");
@@ -949,6 +1111,17 @@ function main() {
     "evidence_record_is_not_approval",
     "blocker_decision_is_not_write",
     "no_production_without_human_review",
+    "v14.060 Review Blocker Arbiter Static Handoff",
+    "review_blocker_arbiter_static_handoff",
+    "review_blocker_arbiter_handoff_draft",
+    "review_console_handoff_draft.review_blocker_arbiter_guard_summary",
+    "review_blocker_arbiter_static_handoff.candidate_arbitrations",
+    "review_blocker_arbiter_static_handoff.final_route_by_candidate",
+    "review_blocker_arbiter_static_handoff.review_blocker_arbiter_guard_summary",
+    "pass_draft_only_pending_human_review",
+    "reject_failure_learning_only_never_production",
+    "production_promotion_allowed_now",
+    "memory_entry_allowed_now",
     "v14.054 Adapter Negative Fixture Static Handoff",
     "review_evidence_blocker_adapter_negative_static_handoff.memory_forbidden_candidate_ids",
     "review_evidence_blocker_adapter_negative_static_handoff.production_exclusion_candidate_ids",
@@ -1012,6 +1185,16 @@ function main() {
       evidence_blocker_no_production_candidate_verified: true,
       evidence_blocker_no_direct_memory_write_verified: true,
       evidence_blocker_no_accepted_samples_write_verified: true,
+      review_blocker_arbiter_static_handoff_verified: true,
+      review_blocker_arbiter_guard_summary_verified: true,
+      blocker_arbiter_candidate_routes_visible: true,
+      blocker_arbiter_pass_route_visible: true,
+      blocker_arbiter_reject_never_production_visible: true,
+      blocker_arbiter_production_blocked_visible: true,
+      blocker_arbiter_memory_entry_blocked_visible: true,
+      blocker_arbiter_no_production_candidate_verified: true,
+      blocker_arbiter_no_direct_memory_write_verified: true,
+      blocker_arbiter_no_accepted_samples_write_verified: true,
       review_evidence_blocker_adapter_negative_static_handoff_verified: true,
       adapter_negative_fixture_guard_summary_verified: true,
       adapter_negative_memory_forbidden_visible: true,
