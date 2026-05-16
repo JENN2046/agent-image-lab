@@ -10,6 +10,10 @@ const adapterPath = "adapters/pvos_kernel_dry_run_adapter.js";
 const kernelPath = "kernel/pvos_kernel.js";
 const schemaPath = "schemas/pvos_kernel_dry_run_adapter.schema.yaml";
 const examplePath = "tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json";
+const negativeGuardAdapterExamplePath =
+  "tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json";
+const negativeGuardEvidenceBlockerExamplePath =
+  "tests/schema_examples/evidence_blocker_contract_negative_guard.example.json";
 const fixturePath = "tests/schema_examples/pvos_kernel_input.example.json";
 const protocolFixturePath = "tests/schema_examples/review_result_protocol_input.example.json";
 const negativeGuardFixturePath = "tests/schema_examples/pvos_kernel_negative_guard_input.example.json";
@@ -50,6 +54,14 @@ function addResult(check, passed, detail) {
 
 function readFile(relativePath) {
   return fs.readFileSync(repoPath(relativePath), "utf8");
+}
+
+function parseJson(relativePath) {
+  return JSON.parse(readFile(relativePath));
+}
+
+function deepEqual(actual, expected) {
+  return JSON.stringify(actual) === JSON.stringify(expected);
 }
 
 function validateNoSensitiveMaterial(label, text) {
@@ -567,11 +579,96 @@ function validateNegativeGuardAdapterResponse(response) {
   validateNoSensitiveMaterial("negative_adapter_response_stdout", JSON.stringify(response));
 }
 
+function validateNegativeGuardAdapterAgainstEvidenceFixture(response, evidenceFixture, label) {
+  const handoff = response.evidence_blocker_contract_handoff_draft || {};
+  const reviewGuard = response.review_console_handoff_draft?.review_evidence_blocker_contract_guard_summary || {};
+  const audit = response.audit_record || {};
+  const summary = evidenceFixture.blocker_summary || {};
+  const memoryForbiddenCandidateIds = (evidenceFixture.blocker_decisions || [])
+    .filter((decision) => decision.blocker_type === "memory_forbidden")
+    .map((decision) => decision.candidate_id);
+  const productionExclusionCandidateIds = (evidenceFixture.production_exclusion_register || [])
+    .map((record) => record.candidate_id);
+
+  addResult(`${label}_evidence_contract_id_matches_fixture`, handoff.contract_id === evidenceFixture.contract_id);
+  addResult(
+    `${label}_source_decision_package_matches_fixture`,
+    handoff.source_decision_package_id === evidenceFixture.source_decision_package_id
+  );
+  addResult(`${label}_source_protocol_matches_fixture`, handoff.source_protocol_id === evidenceFixture.source_protocol_id);
+  addResult(
+    `${label}_source_kernel_run_matches_fixture`,
+    handoff.source_kernel_run_id === evidenceFixture.source_kernel_run_id
+  );
+  addResult(`${label}_handoff_evidence_count_matches_fixture`, handoff.evidence_record_count === summary.evidence_record_count);
+  addResult(`${label}_handoff_blocker_count_matches_fixture`, handoff.blocker_decision_count === summary.blocker_decision_count);
+  addResult(
+    `${label}_handoff_production_exclusion_count_matches_fixture`,
+    handoff.production_exclusion_count === summary.production_exclusion_count
+  );
+  addResult(`${label}_handoff_permanent_block_count_matches_fixture`, handoff.permanent_block_count === summary.permanent_block_count);
+  addResult(
+    `${label}_handoff_memory_forbidden_count_matches_fixture`,
+    handoff.memory_forbidden_block_count === summary.memory_forbidden_block_count
+  );
+  addResult(
+    `${label}_handoff_memory_forbidden_ids_match_fixture`,
+    deepEqual(handoff.memory_forbidden_candidate_ids, memoryForbiddenCandidateIds)
+  );
+  addResult(
+    `${label}_handoff_production_exclusion_ids_match_fixture`,
+    deepEqual(handoff.production_exclusion_candidate_ids, productionExclusionCandidateIds)
+  );
+  addResult(
+    `${label}_review_guard_counts_match_handoff`,
+    reviewGuard.evidence_record_count === handoff.evidence_record_count &&
+      reviewGuard.blocker_decision_count === handoff.blocker_decision_count &&
+      reviewGuard.production_exclusion_count === handoff.production_exclusion_count &&
+      reviewGuard.permanent_block_count === handoff.permanent_block_count &&
+      reviewGuard.memory_forbidden_block_count === handoff.memory_forbidden_block_count
+  );
+  addResult(
+    `${label}_review_guard_production_exclusion_ids_match_handoff`,
+    deepEqual(reviewGuard.production_exclusion_candidate_ids, handoff.production_exclusion_candidate_ids)
+  );
+  addResult(
+    `${label}_audit_counts_match_handoff`,
+    audit.evidence_record_count === handoff.evidence_record_count &&
+      audit.blocker_decision_count === handoff.blocker_decision_count &&
+      audit.production_exclusion_count === handoff.production_exclusion_count &&
+      audit.permanent_block_count === handoff.permanent_block_count &&
+      audit.memory_forbidden_block_count === handoff.memory_forbidden_block_count
+  );
+  addResult(`${label}_audit_never_production_matches_fixture`, audit.never_production_count === productionExclusionCandidateIds.length);
+  addResult(`${label}_audit_memory_forbidden_matches_fixture`, audit.memory_forbidden_count === memoryForbiddenCandidateIds.length);
+  addResult(
+    "negative_guard_adapter_memory_forbidden_handoff_verified",
+    memoryForbiddenCandidateIds.includes("candidate_reject_unknown_guard_001") &&
+      (handoff.memory_forbidden_candidate_ids || []).includes("candidate_reject_unknown_guard_001") &&
+      reviewGuard.memory_forbidden_block_count === memoryForbiddenCandidateIds.length &&
+      audit.memory_forbidden_count === memoryForbiddenCandidateIds.length
+  );
+  addResult(
+    "negative_guard_adapter_unknown_candidate_never_production_verified",
+    productionExclusionCandidateIds.includes("candidate_reject_unknown_guard_001") &&
+      (handoff.production_exclusion_candidate_ids || []).includes("candidate_reject_unknown_guard_001") &&
+      (response.evidence_blocker_contract?.production_exclusion_register || []).some(
+        (record) =>
+          record.candidate_id === "candidate_reject_unknown_guard_001" &&
+          record.status === "never_production" &&
+          record.permanent_block === true &&
+          record.production_candidate === false
+      )
+  );
+}
+
 for (const file of [
   adapterPath,
   kernelPath,
   schemaPath,
   examplePath,
+  negativeGuardAdapterExamplePath,
+  negativeGuardEvidenceBlockerExamplePath,
   fixturePath,
   protocolFixturePath,
   negativeGuardFixturePath,
@@ -673,6 +770,37 @@ try {
   addResult("example_parseable", false, error.message);
 }
 
+let negativeGuardAdapterExample = null;
+let negativeGuardEvidenceBlockerExample = null;
+
+try {
+  negativeGuardAdapterExample = parseJson(negativeGuardAdapterExamplePath);
+  addResult("negative_guard_adapter_example_parseable", true);
+  validateNegativeGuardAdapterResponse(negativeGuardAdapterExample);
+  validateNoSensitiveMaterial("negative_guard_adapter_example", JSON.stringify(negativeGuardAdapterExample));
+} catch (error) {
+  addResult("negative_guard_adapter_example_parseable", false, error.message);
+}
+
+try {
+  negativeGuardEvidenceBlockerExample = parseJson(negativeGuardEvidenceBlockerExamplePath);
+  addResult("negative_guard_evidence_blocker_example_parseable", true);
+  validateNoSensitiveMaterial(
+    "negative_guard_evidence_blocker_example",
+    JSON.stringify(negativeGuardEvidenceBlockerExample)
+  );
+} catch (error) {
+  addResult("negative_guard_evidence_blocker_example_parseable", false, error.message);
+}
+
+if (negativeGuardAdapterExample && negativeGuardEvidenceBlockerExample) {
+  validateNegativeGuardAdapterAgainstEvidenceFixture(
+    negativeGuardAdapterExample,
+    negativeGuardEvidenceBlockerExample,
+    "negative_guard_adapter_example"
+  );
+}
+
 const response = runAdapter(fixturePath, protocolFixturePath, "adapter");
 if (response) {
   addResult("adapter_cli_stdout_json_parseable", true);
@@ -683,6 +811,23 @@ const negativeGuardResponse = runAdapter(negativeGuardFixturePath, negativeGuard
 if (negativeGuardResponse) {
   addResult("negative_guard_adapter_cli_stdout_json_parseable", true);
   validateNegativeGuardAdapterResponse(negativeGuardResponse);
+  if (negativeGuardAdapterExample) {
+    addResult(
+      "negative_guard_adapter_example_matches_cli_output",
+      deepEqual(negativeGuardResponse, negativeGuardAdapterExample)
+    );
+  }
+  if (negativeGuardEvidenceBlockerExample) {
+    addResult(
+      "negative_guard_adapter_embeds_evidence_blocker_fixture",
+      deepEqual(negativeGuardResponse.evidence_blocker_contract, negativeGuardEvidenceBlockerExample)
+    );
+    validateNegativeGuardAdapterAgainstEvidenceFixture(
+      negativeGuardResponse,
+      negativeGuardEvidenceBlockerExample,
+      "negative_guard_adapter_cli"
+    );
+  }
 }
 
 const passed = errors.length === 0;
@@ -695,6 +840,8 @@ const summary = {
     kernelPath,
     schemaPath,
     examplePath,
+    negativeGuardAdapterExamplePath,
+    negativeGuardEvidenceBlockerExamplePath,
     fixturePath,
     protocolFixturePath,
     negativeGuardFixturePath,
@@ -706,6 +853,8 @@ const summary = {
     adapter_cli_present: fs.existsSync(repoPath(adapterPath)),
     schema_present: fs.existsSync(repoPath(schemaPath)),
     example_present: fs.existsSync(repoPath(examplePath)),
+    negative_guard_adapter_example_present: fs.existsSync(repoPath(negativeGuardAdapterExamplePath)),
+    negative_guard_evidence_blocker_example_present: fs.existsSync(repoPath(negativeGuardEvidenceBlockerExamplePath)),
     kernel_dependency_present: fs.existsSync(repoPath(kernelPath)),
     review_result_protocol_binding_present: true,
     review_console_protocol_handoff_present: true,
@@ -727,6 +876,10 @@ const summary = {
     negative_guard_evidence_blocker_contract_verified: true,
     negative_guard_evidence_blocker_contract_handoff_verified: true,
     negative_guard_review_console_evidence_blocker_contract_handoff_verified: true,
+    negative_guard_adapter_example_matches_cli_output: true,
+    negative_guard_adapter_embeds_evidence_blocker_fixture: true,
+    negative_guard_adapter_memory_forbidden_handoff_verified: true,
+    negative_guard_adapter_unknown_candidate_never_production_verified: true,
     negative_guard_memory_forbidden_verified: true,
     negative_guard_all_rejected_never_production_verified: true,
     negative_guard_no_production_candidate_verified: true,

@@ -174,6 +174,7 @@ $requiredFiles = @(
   'tests/schema_examples/pvos_kernel_input.example.json',
   'tests/schema_examples/pvos_kernel_run.example.json',
   'tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json',
+  'tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json',
   'tests/schema_examples/review_result_protocol_input.example.json',
   'tests/schema_examples/review_result_protocol_report.example.json',
   'tests/schema_examples/review_result_protocol_negative_guard_input.example.json',
@@ -197,6 +198,7 @@ $requiredFiles = @(
   'docs/v14_050_evidence_blocker_adapter_handoff_gate.md',
   'docs/v14_051_review_console_evidence_blocker_ui_binding_gate.md',
   'docs/v14_052_evidence_blocker_contract_negative_fixture_gate.md',
+  'docs/v14_053_evidence_blocker_adapter_negative_fixture_handoff_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -4281,6 +4283,12 @@ if (-not $node) {
     if ($pvosAdapter.pvos_kernel_dry_run_adapter.example_present -ne $true) {
       Add-Failure "PVOS adapter validation must verify example"
     }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_adapter_example_present -ne $true) {
+      Add-Failure "PVOS adapter validation must verify negative guard adapter example"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_evidence_blocker_example_present -ne $true) {
+      Add-Failure "PVOS adapter validation must verify negative guard evidence blocker example"
+    }
     if ($pvosAdapter.pvos_kernel_dry_run_adapter.kernel_dependency_present -ne $true) {
       Add-Failure "PVOS adapter validation must verify kernel dependency"
     }
@@ -4343,6 +4351,18 @@ if (-not $node) {
     }
     if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_review_console_evidence_blocker_contract_handoff_verified -ne $true) {
       Add-Failure "PVOS adapter validation must verify negative guard Review Console evidence blocker contract handoff"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_adapter_example_matches_cli_output -ne $true) {
+      Add-Failure "PVOS adapter validation must verify negative guard adapter example matches CLI output"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_adapter_embeds_evidence_blocker_fixture -ne $true) {
+      Add-Failure "PVOS adapter validation must verify negative guard adapter embeds evidence blocker fixture"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_adapter_memory_forbidden_handoff_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify negative guard adapter memory-forbidden handoff"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_adapter_unknown_candidate_never_production_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify negative guard adapter unknown candidate remains never_production"
     }
     if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_memory_forbidden_verified -ne $true) {
       Add-Failure "PVOS adapter validation must verify negative guard forbidden memory route"

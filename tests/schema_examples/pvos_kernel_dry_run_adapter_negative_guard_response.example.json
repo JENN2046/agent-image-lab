@@ -1,0 +1,1262 @@
+{
+  "pvos_kernel_dry_run_adapter_response_version": "v1",
+  "adapter_id": "pvos_kernel_dry_run_adapter",
+  "request_id": "pvos_adapter_request_negative_guard_local_fixture_001",
+  "status": "accepted_draft",
+  "mode": "local_no_execution_adapter_contract",
+  "kernel_run": {
+    "pvos_kernel_run_version": "v1",
+    "run_id": "pvos_kernel_run_negative_guard_local_fixture_001",
+    "task_id": "negative_guard_local_fixture_001",
+    "mode": "local_stdout_only_kernel",
+    "status": "completed_local_draft",
+    "domain_model_refs": [
+      "ShotPlan",
+      "Shot",
+      "PromptLineage",
+      "ImageCandidate",
+      "ReviewRubric",
+      "VisualEvalDecision",
+      "FailureTaxonomy",
+      "AcceptedSample",
+      "RejectedSample",
+      "ReviewReport",
+      "ProvenanceRecord",
+      "EvalSeed",
+      "RunManifest"
+    ],
+    "task_envelope_draft": {
+      "task_id": "negative_guard_local_fixture_001",
+      "intent": "local_visual_production_kernel_draft",
+      "risk_level": "R1",
+      "execution_mode": "no_execution_stdout_only",
+      "external_side_effects_allowed": false
+    },
+    "shot_plan": {
+      "shot_plan_id": "shot_plan_negative_guard_001",
+      "strategy": "Validate that rejected and unmapped-failure candidates cannot become production candidates.",
+      "shots": [
+        {
+          "shot_id": "shot_negative_guard_hero_001",
+          "shot_type": "hero_product_validation",
+          "intent": "Exercise hard review-result rejection routes without using image binaries.",
+          "composition": [
+            "metadata-only candidate references",
+            "reviewable failure observations",
+            "no provider output"
+          ],
+          "success_criteria": [
+            "rejected candidates receive explicit reject reasons",
+            "rejected candidates stay out of production",
+            "unmapped failures cannot enter memory"
+          ]
+        }
+      ]
+    },
+    "shots": [
+      {
+        "shot_id": "shot_negative_guard_hero_001",
+        "shot_type": "hero_product_validation",
+        "intent": "Exercise hard review-result rejection routes without using image binaries.",
+        "composition": [
+          "metadata-only candidate references",
+          "reviewable failure observations",
+          "no provider output"
+        ],
+        "success_criteria": [
+          "rejected candidates receive explicit reject reasons",
+          "rejected candidates stay out of production",
+          "unmapped failures cannot enter memory"
+        ]
+      }
+    ],
+    "prompt_lineage": {
+      "lineage_id": "prompt_lineage_negative_guard_001",
+      "prompt_package_ref": "prompts/image_generation/product_validation_negative_guard_v1.yaml",
+      "revision": "v1",
+      "parent_refs": [],
+      "locked_terms": [
+        "metadata only",
+        "no output file",
+        "no provider call"
+      ],
+      "change_reason": "synthetic negative guard validation fixture"
+    },
+    "prompt_package_ref": "prompts/image_generation/product_validation_negative_guard_v1.yaml",
+    "dispatch_plan_draft": {
+      "dispatch_plan_id": "dispatch_negative_guard_local_fixture_001",
+      "execution_authorized": false,
+      "provider_contact_allowed": false,
+      "max_plugin_calls": 0,
+      "output_write_allowed": false
+    },
+    "image_candidates": [
+      {
+        "candidate_id": "candidate_reject_mapped_guard_001",
+        "shot_id": "shot_negative_guard_hero_001",
+        "artifact_ref": "artifact_ref_negative_guard_mapped_001",
+        "artifact_ref_kind": "metadata_only_reference",
+        "scores": {
+          "product_fidelity": 3.1,
+          "lighting_control": 2.9,
+          "composition_balance": 2.8,
+          "artifact_risk": 3.2
+        },
+        "observations": [
+          "mapped failure tags identify a hard visual rejection",
+          "candidate is useful only as failure-learning evidence"
+        ],
+        "failure_tags": [
+          "lighting_flat",
+          "composition_imbalance"
+        ]
+      },
+      {
+        "candidate_id": "candidate_reject_unknown_guard_001",
+        "shot_id": "shot_negative_guard_hero_001",
+        "artifact_ref": "artifact_ref_negative_guard_unknown_001",
+        "artifact_ref_kind": "metadata_only_reference",
+        "scores": {
+          "product_fidelity": 2.8,
+          "lighting_control": 3,
+          "composition_balance": 2.9,
+          "artifact_risk": 2.7
+        },
+        "observations": [
+          "unmapped failure tag prevents memory promotion",
+          "candidate is permanently blocked from production"
+        ],
+        "failure_tags": [
+          "unmapped_identity_drift"
+        ]
+      }
+    ],
+    "review_rubric": {
+      "rubric_id": "review_rubric_negative_guard_v1",
+      "accept_threshold": 4,
+      "reject_below": 3.4,
+      "dimensions": [
+        {
+          "id": "product_fidelity",
+          "label": "Product fidelity",
+          "weight": 0.3,
+          "pass_threshold": 4
+        },
+        {
+          "id": "lighting_control",
+          "label": "Lighting control",
+          "weight": 0.25,
+          "pass_threshold": 4
+        },
+        {
+          "id": "composition_balance",
+          "label": "Composition balance",
+          "weight": 0.25,
+          "pass_threshold": 4
+        },
+        {
+          "id": "artifact_risk",
+          "label": "Artifact risk",
+          "weight": 0.2,
+          "pass_threshold": 4
+        }
+      ]
+    },
+    "failure_taxonomy": [
+      {
+        "tag": "lighting_flat",
+        "severity": "medium",
+        "definition": "The generated scene lacks deliberate key, fill, or product-light hierarchy."
+      },
+      {
+        "tag": "composition_imbalance",
+        "severity": "medium",
+        "definition": "The product placement, crop, or surrounding props weaken the intended focal hierarchy."
+      },
+      {
+        "tag": "artifact_or_text_risk",
+        "severity": "high",
+        "definition": "The candidate contains visible unwanted text, watermark-like marks, or object artifacts."
+      }
+    ],
+    "visual_eval_decision": {
+      "decision_set_id": "decision_negative_guard_local_fixture_001",
+      "aggregate_decision": "rejected_candidates_only",
+      "candidate_decisions": [
+        {
+          "candidate_id": "candidate_reject_mapped_guard_001",
+          "shot_id": "shot_negative_guard_hero_001",
+          "weighted_score": 2.99,
+          "decision": "rejected_candidate_reference",
+          "accepted": false,
+          "rejected": true,
+          "failure_tags": [
+            "lighting_flat",
+            "composition_imbalance"
+          ],
+          "unknown_failure_tags": [],
+          "rationale": "Candidate requires rejection or revision based on score threshold or mapped failure tags."
+        },
+        {
+          "candidate_id": "candidate_reject_unknown_guard_001",
+          "shot_id": "shot_negative_guard_hero_001",
+          "weighted_score": 2.85,
+          "decision": "rejected_candidate_reference",
+          "accepted": false,
+          "rejected": true,
+          "failure_tags": [
+            "unmapped_identity_drift"
+          ],
+          "unknown_failure_tags": [
+            "unmapped_identity_drift"
+          ],
+          "rationale": "Candidate requires rejection or revision based on score threshold or mapped failure tags."
+        }
+      ]
+    },
+    "accepted_samples": [],
+    "rejected_samples": [
+      {
+        "rejected_sample_id": "rejected_candidate_reject_mapped_guard_001",
+        "candidate_id": "candidate_reject_mapped_guard_001",
+        "shot_id": "shot_negative_guard_hero_001",
+        "failure_tags": [
+          "lighting_flat",
+          "composition_imbalance"
+        ],
+        "write_performed": false,
+        "memory_suitability": false
+      },
+      {
+        "rejected_sample_id": "rejected_candidate_reject_unknown_guard_001",
+        "candidate_id": "candidate_reject_unknown_guard_001",
+        "shot_id": "shot_negative_guard_hero_001",
+        "failure_tags": [
+          "unmapped_identity_drift"
+        ],
+        "write_performed": false,
+        "memory_suitability": false
+      }
+    ],
+    "review_report": {
+      "review_report_id": "review_report_negative_guard_local_fixture_001",
+      "accepted_count": 0,
+      "rejected_count": 2,
+      "reviewer": "codex_local_kernel",
+      "report_status": "draft_only",
+      "memory_delta_status": "draft_not_written",
+      "summary_zh": "本地内核已把视觉任务、镜头、提示词谱系、候选图、评审规则、失败标签、接收/拒绝样本草案和来源记录串成一次可验证的草案运行。"
+    },
+    "image_case_draft": {
+      "image_case_id": "image_case_negative_guard_local_fixture_001",
+      "case_status": "metadata_only_draft",
+      "accepted_candidate_ids": [],
+      "rejected_candidate_ids": [
+        "candidate_reject_mapped_guard_001",
+        "candidate_reject_unknown_guard_001"
+      ]
+    },
+    "memory_delta_draft": {
+      "memory_delta_id": "memory_delta_negative_guard_local_fixture_001",
+      "status": "draft",
+      "language": "zh-CN",
+      "direct_write_allowed": false,
+      "direct_write_performed": false,
+      "body_zh": "本次仅生成本地草案，不写入 DailyNote 或 VCP 长期记忆。"
+    },
+    "provenance_record": {
+      "provenance_record_id": "provenance_negative_guard_local_fixture_001",
+      "source_fixture_ref": "tests/schema_examples/pvos_kernel_negative_guard_input.example.json",
+      "provider_payload_included": false,
+      "image_binary_included": false,
+      "private_path_included": false,
+      "external_manifest_included": false,
+      "artifact_refs_are_metadata_only": true
+    },
+    "eval_seed": {
+      "seed_id": "eval_seed_negative_guard_local_001",
+      "source_type": "synthetic_fixture",
+      "redaction_status": "redacted_metadata_only",
+      "linked_seed_registry_ref": "tests/schema_examples/visual_eval_seed_registry.example.yaml"
+    },
+    "run_manifest": {
+      "run_manifest_id": "manifest_negative_guard_local_fixture_001",
+      "run_id": "pvos_kernel_run_negative_guard_local_fixture_001",
+      "domain_model_refs": [
+        "ShotPlan",
+        "Shot",
+        "PromptLineage",
+        "ImageCandidate",
+        "ReviewRubric",
+        "VisualEvalDecision",
+        "FailureTaxonomy",
+        "AcceptedSample",
+        "RejectedSample",
+        "ReviewReport",
+        "ProvenanceRecord",
+        "EvalSeed",
+        "RunManifest"
+      ],
+      "object_counts": {
+        "shots": 1,
+        "image_candidates": 2,
+        "accepted_samples": 0,
+        "rejected_samples": 2,
+        "failure_taxonomy_tags": 3
+      },
+      "validation_targets": [
+        "node --check kernel/pvos_kernel.js",
+        "node scripts/validate_pvos_kernel_minimal.js"
+      ],
+      "boundary_flags": {
+        "provider_contact_allowed": false,
+        "plugin_call_allowed": false,
+        "api_call_allowed": false,
+        "daily_note_write_allowed": false,
+        "vcp_memory_write_allowed": false,
+        "image_generation_allowed": false,
+        "disk_write_allowed": false,
+        "external_manifest_read_allowed": false,
+        "external_repo_read_allowed": false,
+        "provider_contact_performed": false,
+        "plugin_call_performed": false,
+        "api_call_performed": false,
+        "daily_note_write_performed": false,
+        "vcp_memory_write_performed": false,
+        "image_generation_performed": false,
+        "disk_write_performed": false,
+        "accepted_samples_write_performed": false,
+        "external_manifest_read_performed": false,
+        "vcpchat_source_read_performed": false,
+        "vcptoolbox_source_read_performed": false
+      }
+    },
+    "visual_loop_state": {
+      "current_state": "review_report_drafted",
+      "next_safe_state": "local_adapter_contract_or_review_console_binding",
+      "blocked_states": [
+        "provider_generation",
+        "accepted_samples_write",
+        "DailyNote_write",
+        "VCP_memory_write"
+      ]
+    },
+    "no_execution_guard": {
+      "provider_contact_allowed": false,
+      "plugin_call_allowed": false,
+      "api_call_allowed": false,
+      "daily_note_write_allowed": false,
+      "vcp_memory_write_allowed": false,
+      "image_generation_allowed": false,
+      "disk_write_allowed": false,
+      "external_manifest_read_allowed": false,
+      "external_repo_read_allowed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "daily_note_write_performed": false,
+      "vcp_memory_write_performed": false,
+      "image_generation_performed": false,
+      "disk_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "external_manifest_read_performed": false,
+      "vcpchat_source_read_performed": false,
+      "vcptoolbox_source_read_performed": false
+    }
+  },
+  "review_result_protocol_report": {
+    "review_result_protocol_report_version": "v1",
+    "protocol_id": "review_result_protocol_negative_guard_v1",
+    "source_kernel_run_id": "pvos_kernel_run_negative_guard_local_fixture_001",
+    "task_id": "negative_guard_local_fixture_001",
+    "status": "completed_local_protocol_report",
+    "mode": "local_stdout_only_review_result_protocol",
+    "candidate_review_results": [
+      {
+        "candidate_id": "candidate_reject_mapped_guard_001",
+        "shot_id": "shot_negative_guard_hero_001",
+        "review_outcome": "reject",
+        "weighted_score": 2.99,
+        "rubric_id": "review_rubric_negative_guard_v1",
+        "accept_threshold": 4,
+        "reject_below": 3.4,
+        "pass_reasons": [],
+        "reject_reasons": [
+          "weighted_score_below_accept_threshold",
+          "weighted_score_below_reject_threshold",
+          "mapped_failure_tags_present"
+        ],
+        "reject_reason_codes": [
+          "weighted_score_below_accept_threshold",
+          "weighted_score_below_reject_threshold",
+          "mapped_failure_tags_present"
+        ],
+        "failure_tags": [
+          "lighting_flat",
+          "composition_imbalance"
+        ],
+        "unknown_failure_tags": [],
+        "evidence_summary": {
+          "artifact_ref_kind": "metadata_only_reference",
+          "observations": [
+            "mapped failure tags identify a hard visual rejection",
+            "candidate is useful only as failure-learning evidence"
+          ],
+          "rationale": "Candidate requires rejection or revision based on score threshold or mapped failure tags."
+        },
+        "memory_route": {
+          "route": "audit_only_failure_learning",
+          "allowed_to_enter_memory": true,
+          "memory_entry_type": "failure_lesson_draft",
+          "direct_daily_note_write_allowed": false,
+          "direct_vcp_memory_write_allowed": false,
+          "direct_write_performed": false,
+          "requires_human_memory_approval": true,
+          "reasons": [
+            "rejected_candidate_can_only_be_preserved_as_failure_learning",
+            "failure_tags:lighting_flat,composition_imbalance",
+            "no_production_memory_promotion_allowed"
+          ]
+        },
+        "production_route": {
+          "status": "never_production",
+          "allowed_for_production": false,
+          "production_candidate": false,
+          "human_review_required": true,
+          "permanent_block": true,
+          "never_production_codes": [
+            "weighted_score_below_reject_threshold",
+            "mapped_failure_tags_present"
+          ],
+          "reasons": [
+            "candidate_failed_hard_review_protocol",
+            "rejected_or_sensitive_candidates_must_never_enter_production"
+          ]
+        }
+      },
+      {
+        "candidate_id": "candidate_reject_unknown_guard_001",
+        "shot_id": "shot_negative_guard_hero_001",
+        "review_outcome": "reject",
+        "weighted_score": 2.85,
+        "rubric_id": "review_rubric_negative_guard_v1",
+        "accept_threshold": 4,
+        "reject_below": 3.4,
+        "pass_reasons": [],
+        "reject_reasons": [
+          "weighted_score_below_accept_threshold",
+          "weighted_score_below_reject_threshold",
+          "mapped_failure_tags_present",
+          "unknown_failure_tags_present"
+        ],
+        "reject_reason_codes": [
+          "weighted_score_below_accept_threshold",
+          "weighted_score_below_reject_threshold",
+          "mapped_failure_tags_present",
+          "unknown_failure_tags_present"
+        ],
+        "failure_tags": [
+          "unmapped_identity_drift"
+        ],
+        "unknown_failure_tags": [
+          "unmapped_identity_drift"
+        ],
+        "evidence_summary": {
+          "artifact_ref_kind": "metadata_only_reference",
+          "observations": [
+            "unmapped failure tag prevents memory promotion",
+            "candidate is permanently blocked from production"
+          ],
+          "rationale": "Candidate requires rejection or revision based on score threshold or mapped failure tags."
+        },
+        "memory_route": {
+          "route": "forbidden",
+          "allowed_to_enter_memory": false,
+          "memory_entry_type": "none",
+          "direct_daily_note_write_allowed": false,
+          "direct_vcp_memory_write_allowed": false,
+          "direct_write_performed": false,
+          "requires_human_memory_approval": true,
+          "reasons": [
+            "sensitive_or_unmapped_material_must_not_enter_memory",
+            "memory_delta_requires_desensitized_chinese_summary"
+          ]
+        },
+        "production_route": {
+          "status": "never_production",
+          "allowed_for_production": false,
+          "production_candidate": false,
+          "human_review_required": true,
+          "permanent_block": true,
+          "never_production_codes": [
+            "weighted_score_below_reject_threshold",
+            "mapped_failure_tags_present",
+            "unknown_failure_tags_present"
+          ],
+          "reasons": [
+            "candidate_failed_hard_review_protocol",
+            "rejected_or_sensitive_candidates_must_never_enter_production"
+          ]
+        }
+      }
+    ],
+    "report_summary": {
+      "candidate_count": 2,
+      "pass_count": 0,
+      "reject_count": 2,
+      "memory_draft_count": 1,
+      "never_production_count": 2,
+      "direct_memory_write_performed": false,
+      "production_candidate_created": false
+    },
+    "review_protocol_guards": {
+      "every_candidate_has_review_outcome": true,
+      "pass_requires_non_empty_pass_reasons": true,
+      "reject_requires_non_empty_reject_reasons": true,
+      "every_candidate_has_memory_route": true,
+      "every_candidate_has_production_route": true,
+      "direct_daily_note_write_performed": false,
+      "direct_vcp_memory_write_performed": false,
+      "production_candidate_created": false
+    },
+    "no_execution_guard": {
+      "provider_contact_allowed": false,
+      "plugin_call_allowed": false,
+      "api_call_allowed": false,
+      "daily_note_write_allowed": false,
+      "vcp_memory_write_allowed": false,
+      "image_generation_allowed": false,
+      "output_file_write_allowed": false,
+      "accepted_samples_write_allowed": false,
+      "external_manifest_read_allowed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "daily_note_write_performed": false,
+      "vcp_memory_write_performed": false,
+      "image_generation_performed": false,
+      "output_file_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "external_manifest_read_performed": false,
+      "vcpchat_source_read_performed": false,
+      "vcptoolbox_source_read_performed": false
+    }
+  },
+  "review_result_protocol_handoff_draft": {
+    "handoff_id": "review_protocol_handoff_negative_guard_local_fixture_001",
+    "protocol_id": "review_result_protocol_negative_guard_v1",
+    "source_kernel_run_id": "pvos_kernel_run_negative_guard_local_fixture_001",
+    "status": "draft_ready",
+    "candidate_count": 2,
+    "pass_count": 0,
+    "reject_count": 2,
+    "never_production_count": 2,
+    "never_production_candidate_ids": [
+      "candidate_reject_mapped_guard_001",
+      "candidate_reject_unknown_guard_001"
+    ],
+    "memory_forbidden_count": 1,
+    "memory_forbidden_candidate_ids": [
+      "candidate_reject_unknown_guard_001"
+    ],
+    "production_blocked_count": 2,
+    "all_production_candidate_creation_blocked": true,
+    "negative_guard_observed": true,
+    "production_candidate_created": false,
+    "direct_memory_write_performed": false,
+    "required_review_fields": [
+      "review_outcome",
+      "pass_reasons",
+      "reject_reasons",
+      "memory_route",
+      "production_route"
+    ]
+  },
+  "review_decision_package": {
+    "review_decision_package_version": "v1",
+    "package_id": "review_decision_package_negative_guard_local_fixture_001",
+    "source_protocol_id": "review_result_protocol_negative_guard_v1",
+    "source_kernel_run_id": "pvos_kernel_run_negative_guard_local_fixture_001",
+    "task_id": "negative_guard_local_fixture_001",
+    "status": "completed_local_decision_package",
+    "mode": "local_stdout_only_review_decision_package",
+    "candidate_decision_records": [
+      {
+        "candidate_id": "candidate_reject_mapped_guard_001",
+        "shot_id": "shot_negative_guard_hero_001",
+        "review_outcome": "reject",
+        "pass_reasons": [],
+        "reject_reasons": [
+          "weighted_score_below_accept_threshold",
+          "weighted_score_below_reject_threshold",
+          "mapped_failure_tags_present"
+        ],
+        "memory_route": {
+          "route": "audit_only_failure_learning",
+          "allowed_to_enter_memory": true,
+          "memory_entry_type": "failure_lesson_draft",
+          "direct_daily_note_write_allowed": false,
+          "direct_vcp_memory_write_allowed": false,
+          "direct_write_performed": false,
+          "requires_human_memory_approval": true,
+          "reasons": [
+            "rejected_candidate_can_only_be_preserved_as_failure_learning",
+            "failure_tags:lighting_flat,composition_imbalance",
+            "no_production_memory_promotion_allowed"
+          ]
+        },
+        "production_route": {
+          "status": "never_production",
+          "allowed_for_production": false,
+          "production_candidate": false,
+          "human_review_required": true,
+          "permanent_block": true,
+          "never_production_codes": [
+            "weighted_score_below_reject_threshold",
+            "mapped_failure_tags_present"
+          ],
+          "reasons": [
+            "candidate_failed_hard_review_protocol",
+            "rejected_or_sensitive_candidates_must_never_enter_production"
+          ]
+        }
+      },
+      {
+        "candidate_id": "candidate_reject_unknown_guard_001",
+        "shot_id": "shot_negative_guard_hero_001",
+        "review_outcome": "reject",
+        "pass_reasons": [],
+        "reject_reasons": [
+          "weighted_score_below_accept_threshold",
+          "weighted_score_below_reject_threshold",
+          "mapped_failure_tags_present",
+          "unknown_failure_tags_present"
+        ],
+        "memory_route": {
+          "route": "forbidden",
+          "allowed_to_enter_memory": false,
+          "memory_entry_type": "none",
+          "direct_daily_note_write_allowed": false,
+          "direct_vcp_memory_write_allowed": false,
+          "direct_write_performed": false,
+          "requires_human_memory_approval": true,
+          "reasons": [
+            "sensitive_or_unmapped_material_must_not_enter_memory",
+            "memory_delta_requires_desensitized_chinese_summary"
+          ]
+        },
+        "production_route": {
+          "status": "never_production",
+          "allowed_for_production": false,
+          "production_candidate": false,
+          "human_review_required": true,
+          "permanent_block": true,
+          "never_production_codes": [
+            "weighted_score_below_reject_threshold",
+            "mapped_failure_tags_present",
+            "unknown_failure_tags_present"
+          ],
+          "reasons": [
+            "candidate_failed_hard_review_protocol",
+            "rejected_or_sensitive_candidates_must_never_enter_production"
+          ]
+        }
+      }
+    ],
+    "accepted_sample_drafts": [],
+    "rejected_sample_drafts": [
+      {
+        "rejected_sample_id": "rejected_candidate_reject_mapped_guard_001",
+        "candidate_id": "candidate_reject_mapped_guard_001",
+        "shot_id": "shot_negative_guard_hero_001",
+        "review_outcome": "reject",
+        "reject_reasons": [
+          "weighted_score_below_accept_threshold",
+          "weighted_score_below_reject_threshold",
+          "mapped_failure_tags_present"
+        ],
+        "failure_tags": [
+          "lighting_flat",
+          "composition_imbalance"
+        ],
+        "unknown_failure_tags": [],
+        "write_performed": false,
+        "production_candidate": false,
+        "production_status": "never_production",
+        "memory_route": "audit_only_failure_learning"
+      },
+      {
+        "rejected_sample_id": "rejected_candidate_reject_unknown_guard_001",
+        "candidate_id": "candidate_reject_unknown_guard_001",
+        "shot_id": "shot_negative_guard_hero_001",
+        "review_outcome": "reject",
+        "reject_reasons": [
+          "weighted_score_below_accept_threshold",
+          "weighted_score_below_reject_threshold",
+          "mapped_failure_tags_present",
+          "unknown_failure_tags_present"
+        ],
+        "failure_tags": [
+          "unmapped_identity_drift"
+        ],
+        "unknown_failure_tags": [
+          "unmapped_identity_drift"
+        ],
+        "write_performed": false,
+        "production_candidate": false,
+        "production_status": "never_production",
+        "memory_route": "forbidden"
+      }
+    ],
+    "memory_delta_drafts": [
+      {
+        "memory_delta_id": "memory_delta_candidate_reject_mapped_guard_001",
+        "candidate_id": "candidate_reject_mapped_guard_001",
+        "shot_id": "shot_negative_guard_hero_001",
+        "status": "draft",
+        "language": "zh-CN",
+        "route": "audit_only_failure_learning",
+        "memory_entry_type": "failure_lesson_draft",
+        "allowed_to_enter_memory": true,
+        "direct_daily_note_write_allowed": false,
+        "direct_vcp_memory_write_allowed": false,
+        "direct_write_performed": false,
+        "requires_human_memory_approval": true,
+        "summary_zh": "候选图未通过本地审片协议，只能作为失败学习草案保留，不能进入 production 记忆。",
+        "reasons": [
+          "rejected_candidate_can_only_be_preserved_as_failure_learning",
+          "failure_tags:lighting_flat,composition_imbalance",
+          "no_production_memory_promotion_allowed"
+        ]
+      }
+    ],
+    "memory_forbidden_records": [
+      {
+        "candidate_id": "candidate_reject_unknown_guard_001",
+        "shot_id": "shot_negative_guard_hero_001",
+        "route": "forbidden",
+        "allowed_to_enter_memory": false,
+        "direct_write_performed": false,
+        "requires_human_memory_approval": true,
+        "reasons": [
+          "sensitive_or_unmapped_material_must_not_enter_memory",
+          "memory_delta_requires_desensitized_chinese_summary"
+        ]
+      }
+    ],
+    "production_exclusion_register": [
+      {
+        "candidate_id": "candidate_reject_mapped_guard_001",
+        "shot_id": "shot_negative_guard_hero_001",
+        "status": "never_production",
+        "permanent_block": true,
+        "production_candidate": false,
+        "never_production_codes": [
+          "weighted_score_below_reject_threshold",
+          "mapped_failure_tags_present"
+        ],
+        "reasons": [
+          "candidate_failed_hard_review_protocol",
+          "rejected_or_sensitive_candidates_must_never_enter_production"
+        ]
+      },
+      {
+        "candidate_id": "candidate_reject_unknown_guard_001",
+        "shot_id": "shot_negative_guard_hero_001",
+        "status": "never_production",
+        "permanent_block": true,
+        "production_candidate": false,
+        "never_production_codes": [
+          "weighted_score_below_reject_threshold",
+          "mapped_failure_tags_present",
+          "unknown_failure_tags_present"
+        ],
+        "reasons": [
+          "candidate_failed_hard_review_protocol",
+          "rejected_or_sensitive_candidates_must_never_enter_production"
+        ]
+      }
+    ],
+    "decision_summary": {
+      "candidate_count": 2,
+      "pass_count": 0,
+      "reject_count": 2,
+      "accepted_sample_draft_count": 0,
+      "rejected_sample_draft_count": 2,
+      "memory_delta_draft_count": 1,
+      "memory_forbidden_count": 1,
+      "never_production_count": 2,
+      "direct_memory_write_performed": false,
+      "production_candidate_created": false,
+      "accepted_samples_write_performed": false
+    },
+    "promotion_guard": {
+      "protocol_pass_is_not_production_approval": true,
+      "every_never_production_candidate_blocked": true,
+      "production_candidate_creation_allowed": false,
+      "production_candidate_created": false,
+      "memory_write_allowed_without_human_approval": false,
+      "direct_memory_write_performed": false
+    },
+    "no_execution_guard": {
+      "provider_contact_allowed": false,
+      "plugin_call_allowed": false,
+      "api_call_allowed": false,
+      "daily_note_write_allowed": false,
+      "vcp_memory_write_allowed": false,
+      "image_generation_allowed": false,
+      "output_file_write_allowed": false,
+      "accepted_samples_write_allowed": false,
+      "external_manifest_read_allowed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "daily_note_write_performed": false,
+      "vcp_memory_write_performed": false,
+      "image_generation_performed": false,
+      "output_file_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "external_manifest_read_performed": false,
+      "vcpchat_source_read_performed": false,
+      "vcptoolbox_source_read_performed": false
+    }
+  },
+  "review_decision_package_handoff_draft": {
+    "handoff_id": "review_decision_package_handoff_negative_guard_local_fixture_001",
+    "package_id": "review_decision_package_negative_guard_local_fixture_001",
+    "source_protocol_id": "review_result_protocol_negative_guard_v1",
+    "source_kernel_run_id": "pvos_kernel_run_negative_guard_local_fixture_001",
+    "status": "draft_ready",
+    "accepted_sample_draft_count": 0,
+    "rejected_sample_draft_count": 2,
+    "memory_delta_draft_count": 1,
+    "memory_forbidden_count": 1,
+    "production_exclusion_count": 2,
+    "accepted_sample_ids": [],
+    "rejected_sample_ids": [
+      "rejected_candidate_reject_mapped_guard_001",
+      "rejected_candidate_reject_unknown_guard_001"
+    ],
+    "memory_delta_ids": [
+      "memory_delta_candidate_reject_mapped_guard_001"
+    ],
+    "memory_forbidden_candidate_ids": [
+      "candidate_reject_unknown_guard_001"
+    ],
+    "production_exclusion_candidate_ids": [
+      "candidate_reject_mapped_guard_001",
+      "candidate_reject_unknown_guard_001"
+    ],
+    "direct_memory_write_performed": false,
+    "production_candidate_created": false,
+    "accepted_samples_write_performed": false,
+    "protocol_pass_is_not_production_approval": true,
+    "every_never_production_candidate_blocked": true,
+    "required_decision_fields": [
+      "accepted_sample_drafts",
+      "rejected_sample_drafts",
+      "memory_delta_drafts",
+      "memory_forbidden_records",
+      "production_exclusion_register",
+      "promotion_guard"
+    ]
+  },
+  "evidence_blocker_contract": {
+    "evidence_blocker_contract_version": "v1",
+    "contract_id": "evidence_blocker_contract_negative_guard_local_fixture_001",
+    "source_decision_package_id": "review_decision_package_negative_guard_local_fixture_001",
+    "source_protocol_id": "review_result_protocol_negative_guard_v1",
+    "source_kernel_run_id": "pvos_kernel_run_negative_guard_local_fixture_001",
+    "task_id": "negative_guard_local_fixture_001",
+    "status": "completed_local_evidence_blocker_contract",
+    "mode": "local_stdout_only_evidence_blocker_contract",
+    "evidence_records": [
+      {
+        "evidence_record_id": "evidence_candidate_reject_mapped_guard_001",
+        "candidate_id": "candidate_reject_mapped_guard_001",
+        "shot_id": "shot_negative_guard_hero_001",
+        "evidence_scope": "candidate_rejection_evidence",
+        "review_outcome": "reject",
+        "evidence_codes": [
+          "weighted_score_below_accept_threshold",
+          "weighted_score_below_reject_threshold",
+          "mapped_failure_tags_present"
+        ],
+        "pass_reasons": [],
+        "reject_reasons": [
+          "weighted_score_below_accept_threshold",
+          "weighted_score_below_reject_threshold",
+          "mapped_failure_tags_present"
+        ],
+        "memory_route": "audit_only_failure_learning",
+        "memory_allowed": true,
+        "production_route": "never_production",
+        "production_allowed": false,
+        "production_candidate": false,
+        "direct_write_performed": false
+      },
+      {
+        "evidence_record_id": "evidence_candidate_reject_unknown_guard_001",
+        "candidate_id": "candidate_reject_unknown_guard_001",
+        "shot_id": "shot_negative_guard_hero_001",
+        "evidence_scope": "candidate_rejection_evidence",
+        "review_outcome": "reject",
+        "evidence_codes": [
+          "weighted_score_below_accept_threshold",
+          "weighted_score_below_reject_threshold",
+          "mapped_failure_tags_present",
+          "unknown_failure_tags_present"
+        ],
+        "pass_reasons": [],
+        "reject_reasons": [
+          "weighted_score_below_accept_threshold",
+          "weighted_score_below_reject_threshold",
+          "mapped_failure_tags_present",
+          "unknown_failure_tags_present"
+        ],
+        "memory_route": "forbidden",
+        "memory_allowed": false,
+        "production_route": "never_production",
+        "production_allowed": false,
+        "production_candidate": false,
+        "direct_write_performed": false
+      }
+    ],
+    "blocker_decisions": [
+      {
+        "blocker_decision_id": "blocker_production_candidate_reject_mapped_guard_001",
+        "candidate_id": "candidate_reject_mapped_guard_001",
+        "shot_id": "shot_negative_guard_hero_001",
+        "blocker_type": "production_exclusion",
+        "blocking_scope": "production_promotion",
+        "decision": "block_permanently",
+        "severity": "hard_block",
+        "permanent_block": true,
+        "reversible_by_human_review": false,
+        "requires_human_review": true,
+        "production_candidate": false,
+        "reason_codes": [
+          "weighted_score_below_reject_threshold",
+          "mapped_failure_tags_present"
+        ],
+        "direct_write_performed": false
+      },
+      {
+        "blocker_decision_id": "blocker_production_candidate_reject_unknown_guard_001",
+        "candidate_id": "candidate_reject_unknown_guard_001",
+        "shot_id": "shot_negative_guard_hero_001",
+        "blocker_type": "production_exclusion",
+        "blocking_scope": "production_promotion",
+        "decision": "block_permanently",
+        "severity": "hard_block",
+        "permanent_block": true,
+        "reversible_by_human_review": false,
+        "requires_human_review": true,
+        "production_candidate": false,
+        "reason_codes": [
+          "weighted_score_below_reject_threshold",
+          "mapped_failure_tags_present",
+          "unknown_failure_tags_present"
+        ],
+        "direct_write_performed": false
+      },
+      {
+        "blocker_decision_id": "blocker_memory_candidate_reject_unknown_guard_001",
+        "candidate_id": "candidate_reject_unknown_guard_001",
+        "shot_id": "shot_negative_guard_hero_001",
+        "blocker_type": "memory_forbidden",
+        "blocking_scope": "memory_promotion",
+        "decision": "block_memory_entry",
+        "severity": "hard_block",
+        "permanent_block": true,
+        "reversible_by_human_review": false,
+        "requires_human_review": true,
+        "production_candidate": false,
+        "reason_codes": [
+          "sensitive_or_unmapped_material_must_not_enter_memory",
+          "memory_delta_requires_desensitized_chinese_summary"
+        ],
+        "direct_write_performed": false
+      }
+    ],
+    "production_exclusion_register": [
+      {
+        "exclusion_record_id": "production_exclusion_candidate_reject_mapped_guard_001",
+        "candidate_id": "candidate_reject_mapped_guard_001",
+        "shot_id": "shot_negative_guard_hero_001",
+        "status": "never_production",
+        "permanent_block": true,
+        "production_candidate": false,
+        "never_production_codes": [
+          "weighted_score_below_reject_threshold",
+          "mapped_failure_tags_present"
+        ],
+        "reasons": [
+          "candidate_failed_hard_review_protocol",
+          "rejected_or_sensitive_candidates_must_never_enter_production"
+        ],
+        "source_blocker_decision_id": "blocker_production_candidate_reject_mapped_guard_001"
+      },
+      {
+        "exclusion_record_id": "production_exclusion_candidate_reject_unknown_guard_001",
+        "candidate_id": "candidate_reject_unknown_guard_001",
+        "shot_id": "shot_negative_guard_hero_001",
+        "status": "never_production",
+        "permanent_block": true,
+        "production_candidate": false,
+        "never_production_codes": [
+          "weighted_score_below_reject_threshold",
+          "mapped_failure_tags_present",
+          "unknown_failure_tags_present"
+        ],
+        "reasons": [
+          "candidate_failed_hard_review_protocol",
+          "rejected_or_sensitive_candidates_must_never_enter_production"
+        ],
+        "source_blocker_decision_id": "blocker_production_candidate_reject_unknown_guard_001"
+      }
+    ],
+    "blocker_summary": {
+      "candidate_count": 2,
+      "evidence_record_count": 2,
+      "blocker_decision_count": 3,
+      "production_exclusion_count": 2,
+      "permanent_block_count": 3,
+      "human_review_block_count": 2,
+      "memory_forbidden_block_count": 1,
+      "direct_memory_write_performed": false,
+      "production_candidate_created": false,
+      "accepted_samples_write_performed": false
+    },
+    "arbitration_guard": {
+      "evidence_record_is_not_approval": true,
+      "blocker_decision_is_not_write": true,
+      "every_candidate_has_evidence_record": true,
+      "every_candidate_has_production_blocker_decision": true,
+      "every_never_production_candidate_has_exclusion": true,
+      "no_production_without_human_review": true,
+      "production_candidate_created": false,
+      "direct_memory_write_performed": false,
+      "accepted_samples_write_performed": false
+    },
+    "no_execution_guard": {
+      "provider_contact_allowed": false,
+      "plugin_call_allowed": false,
+      "api_call_allowed": false,
+      "daily_note_write_allowed": false,
+      "vcp_memory_write_allowed": false,
+      "image_generation_allowed": false,
+      "output_file_write_allowed": false,
+      "accepted_samples_write_allowed": false,
+      "production_candidate_write_allowed": false,
+      "external_manifest_read_allowed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "daily_note_write_performed": false,
+      "vcp_memory_write_performed": false,
+      "image_generation_performed": false,
+      "output_file_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "production_candidate_created": false,
+      "external_manifest_read_performed": false,
+      "vcpchat_source_read_performed": false,
+      "vcptoolbox_source_read_performed": false
+    }
+  },
+  "evidence_blocker_contract_handoff_draft": {
+    "handoff_id": "evidence_blocker_contract_handoff_negative_guard_local_fixture_001",
+    "contract_id": "evidence_blocker_contract_negative_guard_local_fixture_001",
+    "source_decision_package_id": "review_decision_package_negative_guard_local_fixture_001",
+    "source_protocol_id": "review_result_protocol_negative_guard_v1",
+    "source_kernel_run_id": "pvos_kernel_run_negative_guard_local_fixture_001",
+    "status": "draft_ready",
+    "evidence_record_count": 2,
+    "blocker_decision_count": 3,
+    "production_exclusion_count": 2,
+    "permanent_block_count": 3,
+    "human_review_block_count": 2,
+    "memory_forbidden_block_count": 1,
+    "human_review_blocked_candidate_ids": [],
+    "memory_forbidden_candidate_ids": [
+      "candidate_reject_unknown_guard_001"
+    ],
+    "production_exclusion_candidate_ids": [
+      "candidate_reject_mapped_guard_001",
+      "candidate_reject_unknown_guard_001"
+    ],
+    "direct_memory_write_performed": false,
+    "production_candidate_created": false,
+    "accepted_samples_write_performed": false,
+    "evidence_record_is_not_approval": true,
+    "blocker_decision_is_not_write": true,
+    "every_candidate_has_evidence_record": true,
+    "every_candidate_has_production_blocker_decision": true,
+    "every_never_production_candidate_has_exclusion": true,
+    "no_production_without_human_review": true,
+    "required_evidence_blocker_fields": [
+      "evidence_records",
+      "blocker_decisions",
+      "production_exclusion_register",
+      "blocker_summary",
+      "arbitration_guard"
+    ]
+  },
+  "vcp_adapter_handoff_draft": {
+    "handoff_id": "vcp_handoff_negative_guard_local_fixture_001",
+    "target_platform": "VCP_adapter_future",
+    "adapter_boundary": "local_dry_run_contract_only",
+    "input_reference": "tests/schema_examples/pvos_kernel_negative_guard_input.example.json",
+    "selected_plugin": null,
+    "fallback_plugins": [],
+    "max_plugin_calls": 0,
+    "execution_authorized": false,
+    "provider_contact_allowed": false,
+    "plugin_call_allowed": false,
+    "api_call_allowed": false,
+    "output_write_allowed": false,
+    "expected_outputs": 0
+  },
+  "review_console_handoff_draft": {
+    "review_session_id": "review_session_negative_guard_local_fixture_001",
+    "display_only": true,
+    "status": "draft_ready",
+    "accepted_candidate_ids": [],
+    "rejected_candidate_ids": [
+      "candidate_reject_mapped_guard_001",
+      "candidate_reject_unknown_guard_001"
+    ],
+    "allowed_actions": [
+      "review_candidate_scores",
+      "compare_accepted_rejected_routes",
+      "request_revision_plan"
+    ],
+    "forbidden_actions": [
+      "execute_plugin",
+      "call_api",
+      "write_daily_note",
+      "save_image",
+      "write_accepted_samples"
+    ],
+    "human_review_required_for_production": true,
+    "memory_write_requires_separate_approval": true,
+    "review_result_protocol_report_attached": true,
+    "review_result_protocol_handoff_id": "review_protocol_handoff_negative_guard_local_fixture_001",
+    "review_decision_package_attached": true,
+    "review_decision_package_handoff_id": "review_decision_package_handoff_negative_guard_local_fixture_001",
+    "evidence_blocker_contract_attached": true,
+    "evidence_blocker_contract_handoff_id": "evidence_blocker_contract_handoff_negative_guard_local_fixture_001",
+    "required_review_fields": [
+      "review_outcome",
+      "pass_reasons",
+      "reject_reasons",
+      "memory_route",
+      "production_route"
+    ],
+    "review_protocol_guard_summary": {
+      "never_production_count": 2,
+      "never_production_candidate_ids": [
+        "candidate_reject_mapped_guard_001",
+        "candidate_reject_unknown_guard_001"
+      ],
+      "memory_forbidden_count": 1,
+      "memory_forbidden_candidate_ids": [
+        "candidate_reject_unknown_guard_001"
+      ],
+      "production_candidate_created": false,
+      "direct_memory_write_performed": false,
+      "negative_guard_observed": true
+    },
+    "review_decision_package_guard_summary": {
+      "accepted_sample_draft_count": 0,
+      "rejected_sample_draft_count": 2,
+      "memory_delta_draft_count": 1,
+      "memory_forbidden_count": 1,
+      "production_exclusion_count": 2,
+      "production_exclusion_candidate_ids": [
+        "candidate_reject_mapped_guard_001",
+        "candidate_reject_unknown_guard_001"
+      ],
+      "production_candidate_created": false,
+      "direct_memory_write_performed": false,
+      "accepted_samples_write_performed": false
+    },
+    "review_evidence_blocker_contract_guard_summary": {
+      "evidence_record_count": 2,
+      "blocker_decision_count": 3,
+      "production_exclusion_count": 2,
+      "permanent_block_count": 3,
+      "human_review_block_count": 2,
+      "memory_forbidden_block_count": 1,
+      "production_exclusion_candidate_ids": [
+        "candidate_reject_mapped_guard_001",
+        "candidate_reject_unknown_guard_001"
+      ],
+      "production_candidate_created": false,
+      "direct_memory_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "every_candidate_has_evidence_record": true,
+      "every_candidate_has_production_blocker_decision": true,
+      "every_never_production_candidate_has_exclusion": true
+    }
+  },
+  "provenance_handoff_draft": {
+    "provenance_record_id": "provenance_negative_guard_local_fixture_001",
+    "source_fixture_ref": "tests/schema_examples/pvos_kernel_negative_guard_input.example.json",
+    "provider_payload_included": false,
+    "image_binary_included": false,
+    "private_path_included": false,
+    "artifact_refs_are_metadata_only": true
+  },
+  "audit_record": {
+    "audit_id": "adapter_audit_negative_guard_local_fixture_001",
+    "status": "draft_only",
+    "summary_zh": "PVOS dry-run adapter 仅把本地内核运行结果映射为 VCP 与审片台草案，不执行生产动作。",
+    "selected_plugin": null,
+    "max_plugin_calls_observed": 0,
+    "external_api_observed": false,
+    "output_file_write_observed": false,
+    "image_generation_observed": false,
+    "memory_write_observed": false,
+    "review_result_protocol_observed": true,
+    "review_decision_package_observed": true,
+    "evidence_blocker_contract_observed": true,
+    "accepted_sample_draft_count": 0,
+    "rejected_sample_draft_count": 2,
+    "memory_delta_draft_count": 1,
+    "production_exclusion_count": 2,
+    "evidence_record_count": 2,
+    "blocker_decision_count": 3,
+    "permanent_block_count": 3,
+    "memory_forbidden_block_count": 1,
+    "production_candidate_created": false,
+    "never_production_count": 2,
+    "memory_forbidden_count": 1,
+    "negative_guard_observed": true
+  },
+  "no_execution_guard": {
+    "execution_authorized": false,
+    "provider_contact_allowed": false,
+    "plugin_call_allowed": false,
+    "api_call_allowed": false,
+    "daily_note_write_allowed": false,
+    "vcp_memory_write_allowed": false,
+    "image_generation_allowed": false,
+    "output_file_write_allowed": false,
+    "accepted_samples_write_allowed": false,
+    "production_candidate_write_allowed": false,
+    "external_manifest_read_allowed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "daily_note_write_performed": false,
+    "vcp_memory_write_performed": false,
+    "image_generation_performed": false,
+    "output_file_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_created": false,
+    "external_manifest_read_performed": false,
+    "vcpchat_source_read_performed": false,
+    "vcptoolbox_source_read_performed": false
+  }
+}

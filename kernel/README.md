@@ -77,6 +77,12 @@ delta drafts, memory-forbidden records, and production exclusion registers
 without writing accepted samples, memory, provider outputs, or production
 candidates.
 
+The adapter negative guard fixture is pinned in
+`tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json`.
+It must match adapter CLI output exactly and its embedded
+`evidence_blocker_contract` must match
+`tests/schema_examples/evidence_blocker_contract_negative_guard.example.json`.
+
 ## Review Result Protocol
 
 ```powershell
