@@ -66,6 +66,7 @@ $requiredFiles = @(
   'scripts/validate_adapter_delivery_surface.js',
   'scripts/validate_review_console_adapter_handoff.js',
   'scripts/validate_review_console_blocker_arbiter_regression_matrix.js',
+  'scripts/validate_review_blocker_arbiter_route_summary.js',
   'scripts/validate_review_console_blocker_arbiter_boundary_scan.js',
   'scripts/validate_v5_local_sync_readiness.js',
   'scripts/validate_v5_post_commit_reconciliation.js',
@@ -184,6 +185,7 @@ $requiredFiles = @(
   'tests/schema_examples/review_console_blocker_arbiter_draft_output_snapshot.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix_v14_062.example.json',
+  'tests/schema_examples/review_blocker_arbiter_route_summary.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_boundary_scan.example.json',
   'tests/schema_examples/review_result_protocol_input.example.json',
   'tests/schema_examples/review_result_protocol_report.example.json',
@@ -220,6 +222,7 @@ $requiredFiles = @(
   'docs/v14_060_review_console_blocker_arbiter_ui_binding_gate.md',
   'docs/v14_061_review_console_blocker_arbiter_draft_output_snapshot_gate.md',
   'docs/v14_062_review_console_blocker_arbiter_regression_matrix_refresh_gate.md',
+  'docs/v14_063_review_blocker_arbiter_route_summary_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -3947,6 +3950,11 @@ if (-not $node) {
     Add-Failure "scripts/validate_review_console_blocker_arbiter_regression_matrix.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'scripts/validate_review_blocker_arbiter_route_summary.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_review_blocker_arbiter_route_summary.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_review_console_blocker_arbiter_boundary_scan.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_review_console_blocker_arbiter_boundary_scan.js failed node --check"
@@ -6033,6 +6041,52 @@ if (-not $node) {
     }
     if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.file_write_performed -ne $false) {
       Add-Failure "Review Console blocker arbiter regression matrix validation must not write files"
+    }
+  }
+
+  $reviewBlockerArbiterRouteSummaryOutput = & node (Join-Path $Root 'scripts/validate_review_blocker_arbiter_route_summary.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review blocker arbiter route summary validation exited with failure"
+  } else {
+    $reviewBlockerArbiterRouteSummary = ($reviewBlockerArbiterRouteSummaryOutput -join "`n") | ConvertFrom-Json
+    if ($reviewBlockerArbiterRouteSummary.passed -ne $true) {
+      Add-Failure "Review blocker arbiter route summary validation must report passed true"
+    }
+    if ($reviewBlockerArbiterRouteSummary.review_blocker_arbiter_route_summary.route_summary_present -ne $true) {
+      Add-Failure "Review blocker arbiter route summary must be present"
+    }
+    if ($reviewBlockerArbiterRouteSummary.review_blocker_arbiter_route_summary.route_summary_matches_snapshot -ne $true) {
+      Add-Failure "Review blocker arbiter route summary must match snapshot"
+    }
+    if ($reviewBlockerArbiterRouteSummary.review_blocker_arbiter_route_summary.route_summary_matches_adapter_arbiter -ne $true) {
+      Add-Failure "Review blocker arbiter route summary must match adapter arbiter"
+    }
+    if ($reviewBlockerArbiterRouteSummary.review_blocker_arbiter_route_summary.route_summary_pass_reason_verified -ne $true) {
+      Add-Failure "Review blocker arbiter route summary must verify pass reasons"
+    }
+    if ($reviewBlockerArbiterRouteSummary.review_blocker_arbiter_route_summary.route_summary_reject_reason_verified -ne $true) {
+      Add-Failure "Review blocker arbiter route summary must verify reject reasons"
+    }
+    if ($reviewBlockerArbiterRouteSummary.review_blocker_arbiter_route_summary.route_summary_memory_rules_verified -ne $true) {
+      Add-Failure "Review blocker arbiter route summary must verify memory rules"
+    }
+    if ($reviewBlockerArbiterRouteSummary.review_blocker_arbiter_route_summary.route_summary_production_rules_verified -ne $true) {
+      Add-Failure "Review blocker arbiter route summary must verify production rules"
+    }
+    if ($reviewBlockerArbiterRouteSummary.review_blocker_arbiter_route_summary.route_summary_never_production_verified -ne $true) {
+      Add-Failure "Review blocker arbiter route summary must verify never-production route"
+    }
+    if ($reviewBlockerArbiterRouteSummary.review_blocker_arbiter_route_summary.route_summary_no_production_candidate_verified -ne $true) {
+      Add-Failure "Review blocker arbiter route summary must verify no production candidate"
+    }
+    if ($reviewBlockerArbiterRouteSummary.review_blocker_arbiter_route_summary.route_summary_no_direct_memory_write_verified -ne $true) {
+      Add-Failure "Review blocker arbiter route summary must verify no direct memory write"
+    }
+    if ($reviewBlockerArbiterRouteSummary.review_blocker_arbiter_route_summary.route_summary_no_accepted_samples_write_verified -ne $true) {
+      Add-Failure "Review blocker arbiter route summary must verify no accepted_samples write"
+    }
+    if ($reviewBlockerArbiterRouteSummary.review_blocker_arbiter_route_summary.file_write_performed -ne $false) {
+      Add-Failure "Review blocker arbiter route summary validation must not write files"
     }
   }
 
