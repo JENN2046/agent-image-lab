@@ -207,6 +207,22 @@ Phase 9 审批记录必须满足：
 
 `review_report_static_handoff` 是审片结果的最终可读报告层。它只把 pass/reject 解释、memory/production admission 阻断、never-production 状态和 no-execution guard 展示给审片台，不代表生产批准、accepted_samples 写入、记忆写入、插件调用、图片生成或 provider contact。
 
+## v14.070 ReviewReport Draft Output Snapshot
+
+本节用于验收静态 Review Console 的 `renderDraft()` 草案输出没有丢失 ReviewReport 字段。它仍然只执行本目录内静态 JS 的 mock DOM 校验，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
+
+| Snapshot 字段 | Review Console 草案字段 | 说明 |
+| --- | --- | --- |
+| `review_console_review_report_draft_output_snapshot.example.json.draft_output_required_keys` | `#draftOutput` JSON 顶层字段 | 草案输出必须继续携带 adapter handoff、review protocol、decision package、evidence blocker、blocker arbiter、ReviewReport、adapter negative handoff、review_session、image_case、memory_delta 和 prototype_guard |
+| `snapshot_assertions.review_report_handoff_present_in_draft_output` | `#draftOutput.review_report_static_handoff` | 必须为 true，证明 ReviewReport handoff 出现在草案输出中 |
+| `snapshot_assertions.pass_candidate_ids` / `snapshot_assertions.reject_candidate_ids` | `review_report_static_handoff.report_items` | pass/reject 候选必须继续被解释，不能只保留静态结论 |
+| `snapshot_assertions.never_production_candidate_ids` | `review_report_static_handoff.review_report_guard_summary.never_production_candidate_ids` | rejected 候选必须保持 never-production |
+| `snapshot_assertions.memory_entry_allowed_now_count` / `production_promotion_allowed_now_count` / `writes_allowed_now_count` | `review_report_static_handoff.review_report_guard_summary` | 当前进入记忆、生产提升和写入数量必须均为 0 |
+| `review_report_draft_output_snapshot_matches_static_mock` | validator result flag | snapshot 必须与 `mock_data.js` 中的 ReviewReport handoff 完全一致 |
+| `review_report_draft_output_snapshot_matches_adapter_fixture` | validator result flag | snapshot 必须继续匹配 PVOS dry-run adapter ReviewReport handoff |
+
+`review_console_review_report_draft_output_snapshot.example.json` 是草案输出回归证据，不是生产执行记录。它不得授权 provider contact、plugin/API 调用、图片生成、accepted_samples 写入、记忆写入或 production promotion。
+
 ## v14.061 Review Blocker Arbiter Draft Output Snapshot
 
 本节用于验收静态 Review Console 的 `renderDraft()` 草案输出没有丢失审片阻断仲裁字段。它仍然只执行本目录内静态 JS 的 mock DOM 校验，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。

@@ -188,6 +188,7 @@ $requiredFiles = @(
   'tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json',
   'tests/schema_examples/review_console_adapter_negative_fixture_draft_output_snapshot.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_draft_output_snapshot.example.json',
+  'tests/schema_examples/review_console_review_report_draft_output_snapshot.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix_v14_062.example.json',
   'tests/schema_examples/review_blocker_arbiter_route_summary.example.json',
@@ -237,6 +238,8 @@ $requiredFiles = @(
   'docs/v14_066_review_admission_control_matrix_gate.md',
   'docs/v14_067_review_report_contract_gate.md',
   'docs/v14_068_review_report_adapter_handoff_gate.md',
+  'docs/v14_069_review_report_console_binding_gate.md',
+  'docs/v14_070_review_report_draft_output_snapshot_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -6001,6 +6004,39 @@ if (-not $node) {
     }
     if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.blocker_arbiter_snapshot_no_accepted_samples_write_verified -ne $true) {
       Add-Failure "Review Console Adapter handoff must verify blocker arbiter snapshot performs no accepted_samples write"
+    }
+    foreach ($reviewReportCheck in @(
+      @{ Flag = 'review_report_static_handoff_verified'; Message = 'Review Console Adapter handoff must verify ReviewReport static handoff' },
+      @{ Flag = 'review_report_guard_summary_verified'; Message = 'Review Console Adapter handoff must verify ReviewReport guard summary' },
+      @{ Flag = 'review_report_candidate_items_visible'; Message = 'Review Console Adapter handoff must verify ReviewReport candidate items are visible' },
+      @{ Flag = 'review_report_pass_item_explained'; Message = 'Review Console Adapter handoff must verify ReviewReport pass item explanation' },
+      @{ Flag = 'review_report_reject_item_explained'; Message = 'Review Console Adapter handoff must verify ReviewReport reject item explanation' },
+      @{ Flag = 'review_report_memory_entry_blocked_visible'; Message = 'Review Console Adapter handoff must verify ReviewReport memory entry block visibility' },
+      @{ Flag = 'review_report_production_promotion_blocked_visible'; Message = 'Review Console Adapter handoff must verify ReviewReport production promotion block visibility' },
+      @{ Flag = 'review_report_never_production_visible'; Message = 'Review Console Adapter handoff must verify ReviewReport never-production visibility' },
+      @{ Flag = 'review_report_draft_output_matches_static_mock'; Message = 'Review Console Adapter handoff must verify ReviewReport draft output matches static mock' },
+      @{ Flag = 'review_report_no_daily_note_write_verified'; Message = 'Review Console Adapter handoff must verify ReviewReport performs no DailyNote write' },
+      @{ Flag = 'review_report_no_vcp_memory_write_verified'; Message = 'Review Console Adapter handoff must verify ReviewReport performs no VCP memory write' },
+      @{ Flag = 'review_report_no_accepted_samples_write_verified'; Message = 'Review Console Adapter handoff must verify ReviewReport performs no accepted_samples write' },
+      @{ Flag = 'review_report_no_production_candidate_verified'; Message = 'Review Console Adapter handoff must verify ReviewReport creates no production candidate' },
+      @{ Flag = 'review_report_no_provider_execution_verified'; Message = 'Review Console Adapter handoff must verify ReviewReport performs no provider execution' },
+      @{ Flag = 'review_report_draft_output_snapshot_present'; Message = 'Review Console Adapter handoff must verify ReviewReport draft output snapshot is present' },
+      @{ Flag = 'review_report_draft_output_snapshot_matches_static_mock'; Message = 'Review Console Adapter handoff must verify ReviewReport draft output snapshot matches static mock' },
+      @{ Flag = 'review_report_draft_output_snapshot_matches_adapter_fixture'; Message = 'Review Console Adapter handoff must verify ReviewReport draft output snapshot matches adapter fixture' },
+      @{ Flag = 'review_report_snapshot_candidate_ids_verified'; Message = 'Review Console Adapter handoff must verify ReviewReport snapshot candidate IDs' },
+      @{ Flag = 'review_report_snapshot_pass_reject_verified'; Message = 'Review Console Adapter handoff must verify ReviewReport snapshot pass/reject IDs' },
+      @{ Flag = 'review_report_snapshot_memory_entry_block_verified'; Message = 'Review Console Adapter handoff must verify ReviewReport snapshot memory entry block' },
+      @{ Flag = 'review_report_snapshot_production_promotion_block_verified'; Message = 'Review Console Adapter handoff must verify ReviewReport snapshot production promotion block' },
+      @{ Flag = 'review_report_snapshot_writes_blocked_verified'; Message = 'Review Console Adapter handoff must verify ReviewReport snapshot write block' },
+      @{ Flag = 'review_report_snapshot_no_daily_note_write_verified'; Message = 'Review Console Adapter handoff must verify ReviewReport snapshot performs no DailyNote write' },
+      @{ Flag = 'review_report_snapshot_no_vcp_memory_write_verified'; Message = 'Review Console Adapter handoff must verify ReviewReport snapshot performs no VCP memory write' },
+      @{ Flag = 'review_report_snapshot_no_accepted_samples_write_verified'; Message = 'Review Console Adapter handoff must verify ReviewReport snapshot performs no accepted_samples write' },
+      @{ Flag = 'review_report_snapshot_no_production_candidate_verified'; Message = 'Review Console Adapter handoff must verify ReviewReport snapshot creates no production candidate' },
+      @{ Flag = 'review_report_snapshot_no_provider_execution_verified'; Message = 'Review Console Adapter handoff must verify ReviewReport snapshot performs no provider execution' }
+    )) {
+      if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.($reviewReportCheck.Flag) -ne $true) {
+        Add-Failure $reviewReportCheck.Message
+      }
     }
     if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.review_evidence_blocker_adapter_negative_static_handoff_verified -ne $true) {
       Add-Failure "Review Console Adapter handoff must verify adapter negative static handoff"
