@@ -9,12 +9,46 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v14_021b_rubric_phase_chain_reconciliation_closeout. This docs-only closeout reconciles the actual remote phase chain v14.020 -> v14.021 -> v14.021a, confirms v14.021 rubric field planning and v14.021a state/validator alignment, and does not start v14.022. It does not authorize prototype edits, script edits, schema files, eval sample files, accepted_samples writes, browser preview, runtime execution, provider contact, image generation, memory writes, production_candidate_002, memory_write_path, or Batch_005.
+Agent Image Lab is in v14_022_visual_eval_decision_policy_planning_gate. This docs-only planning gate maps visual rubric scores and failure tags into accepted_candidate, patch_candidate, rejected_candidate, and archive_reference_only decisions. It does not authorize prototype edits, script edits, schema files, eval sample files, accepted_samples writes, browser preview, runtime execution, provider contact, image generation, memory writes, production_candidate_002, memory_write_path, or Batch_005.
 ```
 
 ## Current Phase
 
 ```text
+V14.022 Visual Eval Decision Policy Planning Gate
+phase_id: v14_022_visual_eval_decision_policy_planning_gate
+status: completed_remote_synced_after_guarded_push
+source_phase: v14_021b_rubric_phase_chain_reconciliation_closeout
+source_commit: 088f3d5d3b0844041def2684243a91e5b1232492
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+branch: master tracking origin/master
+phase_record: docs/v14_022_visual_eval_decision_policy_planning_gate.md
+decision_policy_planning_created: true
+accepted_candidate_policy_created: true
+patch_candidate_policy_created: true
+rejected_candidate_policy_created: true
+archive_reference_only_policy_created: true
+hard_reject_conditions_created: true
+human_override_rules_created: true
+memory_suitability_default_false: true
+production_candidate_002_default_blocked: true
+schema_files_created: false
+eval_samples_created: false
+accepted_samples_written: false
+prototype_files_modified: false
+scripts_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+image_generation: false
+memory_write: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v14_023_visual_eval_failure_tag_mapping_planning_gate
+docs_only_gate_creation_and_validation_only: true
+runtime_provider_image_memory_production_batch: false
+next_phase_started: false
+---
 V14.021b Rubric Phase Chain Reconciliation Closeout
 phase_id: v14_021b_rubric_phase_chain_reconciliation_closeout
 status: completed_remote_synced_after_guarded_push

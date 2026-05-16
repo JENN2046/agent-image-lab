@@ -1,5 +1,72 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260516-v14.022-VISUAL-EVAL-DECISION-POLICY-PLANNING
+
+Task:
+
+```text
+Plan the visual evaluation decision policy that maps rubric scores and failure tags into accepted_candidate, patch_candidate, rejected_candidate, and archive_reference_only without creating schemas, samples, registries, accepted_samples, memory writes, production routes, runtime, provider contact, or image generation.
+```
+
+Result:
+
+```text
+phase_record: docs/v14_022_visual_eval_decision_policy_planning_gate.md
+source_commit: 088f3d5d3b0844041def2684243a91e5b1232492
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+decision_policy_planning_created: true
+accepted_candidate_policy_created: true
+patch_candidate_policy_created: true
+rejected_candidate_policy_created: true
+archive_reference_only_policy_created: true
+hard_reject_conditions_created: true
+human_override_rules_created: true
+memory_suitability_default_false: true
+production_candidate_002_default_blocked: true
+schema_files_created: false
+eval_samples_created: false
+accepted_samples_written: false
+prototype_files_modified: false
+scripts_modified: false
+provider_contact: false
+image_generation: false
+memory_write: false
+production_candidate_002: false
+Batch_005: false
+next_phase_started: false
+validation_result: passed_with_existing_manual_review_warnings_only
+```
+
+Commands run:
+
+```text
+git diff --check
+node scripts/validate_agent_board_state.js
+node scripts/validate_current_state_alignment.js
+node scripts/validate_native_doubao_sandbox.js
+node scripts/validate_prompt_schema.js --manifest tests/fixtures/prompt_schema_validator/manifest.json
+pwsh -File scripts/validate-agent-image-lab-local.ps1
+pwsh -File scripts/validate_mvp.ps1
+```
+
+Validation notes:
+
+```text
+git diff --check passed.
+node scripts/validate_agent_board_state.js passed.
+node scripts/validate_current_state_alignment.js passed.
+node scripts/validate_native_doubao_sandbox.js passed.
+node scripts/validate_prompt_schema.js --manifest tests/fixtures/prompt_schema_validator/manifest.json passed.
+pwsh -File scripts/validate-agent-image-lab-local.ps1 passed with existing manual-review warnings only.
+pwsh -File scripts/validate_mvp.ps1 passed.
+```
+
+Boundary:
+
+```text
+No prototype file mutation, script modification, schema file creation, eval sample creation, accepted/rejected registry creation, accepted_samples write, browser preview, dev server, live server, localhost runtime, browser automation, CDP, Runtime.evaluate, bridge method, MCP/VCPToolBox runtime, provider contact, image generation, retry, .env.local value read, DailyNote write, VCP memory write, runs image binary read, runs output commit, production_candidate_002, memory_write_path, Batch_005, dependency change, package change, or automatic next phase entry is performed by v14.022.
+```
+
 ## VALIDATION-20260516-v14.021b-RUBRIC-PHASE-CHAIN-RECONCILIATION
 
 Task:
