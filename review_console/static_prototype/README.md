@@ -54,6 +54,7 @@ v14.072 还用 `tests/schema_examples/review_console_review_report_negative_guar
 v14.073 还用 `tests/schema_examples/review_report_negative_guard_regression_matrix.example.json` 固化四表面一致性矩阵，验证 adapter contract、Review Console guard、static mock 和 draft output snapshot 的 negative ReviewReport 不漂移。
 v14.074 还用 `tests/schema_examples/review_report_route_summary.example.json` 固化 ReviewReport 路由摘要，验证 pass、mapped reject 和 unknown reject 分别保持在草案审阅、failure learning 或 memory-forbidden never-production 路线。
 v14.075 还用 `tests/schema_examples/review_report_admission_control_matrix.example.json` 固化 ReviewReport admission 阻断矩阵，验证当前所有 memory、production、accepted_samples 和 production candidate 写入都被阻断，并区分未来人工审批与永久禁止路线。
+v14.076 还用 `tests/schema_examples/review_report_production_exclusion_register.example.json` 固化 ReviewReport production exclusion register，验证所有 rejected / never-production 候选被登记，pass 候选不被永久排除，unknown failure 同时阻断 memory 与 production。
 
 ## 文件说明
 
@@ -94,3 +95,4 @@ v14.075 还用 `tests/schema_examples/review_report_admission_control_matrix.exa
 `review_report_negative_guard_regression_matrix.example.json` 必须验证 negative ReviewReport 在 adapter contract、Review Console guard、static mock 和 draft output snapshot 之间一致；它是回归证据，不是执行授权。
 `review_report_route_summary.example.json` 必须验证 positive / negative ReviewReport 的 pass、mapped reject 和 unknown reject 路由一致；它是回归证据，不是执行授权。
 `review_report_admission_control_matrix.example.json` 必须验证 ReviewReport route summary 的 memory、production、accepted_samples 和 production candidate admission 全部保持阻断；它是回归证据，不是执行授权。
+`review_report_production_exclusion_register.example.json` 必须验证 ReviewReport admission matrix 的 rejected candidates 都进入 production exclusion register，且 pass candidate 不进入永久 exclusion；它是回归证据，不是执行授权。

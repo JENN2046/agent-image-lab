@@ -7,6 +7,55 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current phase: v14_076_review_report_production_exclusion_register_gate.
+phase_status: completed_local_validated.
+source_phase: v14_075_review_report_admission_control_matrix_gate.
+source_commit: f791825.
+selected_product_route: review_report_production_exclusion_register.
+Current mainline state: Agent Image Lab now has a ReviewReport production exclusion register that turns never-production decisions into auditable exclusion records: all rejected candidates are registered, pass candidates are not permanently excluded, unknown-failure rejects are both memory-forbidden and never-production, and exclusion removal is blocked while all runtime, provider, plugin, API, image, DailyNote, VCP memory, accepted_samples, and production candidate writes remain blocked.
+phase_record: docs/v14_076_review_report_production_exclusion_register_gate.md.
+production_exclusion_register_fixture_created: tests/schema_examples/review_report_production_exclusion_register.example.json.
+validator_created: scripts/validate_review_report_production_exclusion_register.js.
+mvp_validator_modified: scripts/validate_mvp.ps1.
+static_mapping_updated: review_console/static_prototype/FIELD_MAPPING.md.
+static_readme_updated: review_console/static_prototype/README.md.
+review_report_production_exclusion_register_present: true.
+review_report_production_exclusion_matches_admission_matrix: true.
+review_report_production_exclusion_matches_route_summary: true.
+review_report_production_exclusion_all_rejects_registered: true.
+review_report_production_exclusion_no_pass_registered: true.
+review_report_production_exclusion_never_production_verified: true.
+review_report_production_exclusion_unknown_memory_forbidden_verified: true.
+review_report_production_exclusion_removal_blocked: true.
+review_report_production_exclusion_no_daily_note_write_verified: true.
+review_report_production_exclusion_no_vcp_memory_write_verified: true.
+review_report_production_exclusion_no_accepted_samples_write_verified: true.
+review_report_production_exclusion_no_production_candidate_verified: true.
+review_report_production_exclusion_no_provider_plugin_api_image_verified: true.
+direct_memory_write_performed: false.
+production_candidate_created: false.
+accepted_samples_written: false.
+image_binaries_read: false.
+runs_output_committed: false.
+runtime_prototype_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+plugin_call: false.
+api_call: false.
+image_generation: false.
+memory_write: false.
+DailyNote_write: false.
+VCP_memory_write: false.
+production_candidate_002: false.
+Batch_005: false.
+push_performed: false.
+recommended_next: v14_077_review_report_memory_admission_register_gate.
+recommended_next_auto_execution_allowed: true.
+push_requires_explicit_remote_authorization: true.
+runtime_provider_image_memory_production_batch: false.
+next_phase_started: false.
+---
 Current phase: v14_075_review_report_admission_control_matrix_gate.
 phase_status: completed_local_validated.
 source_phase: v14_074_review_report_route_summary_gate.

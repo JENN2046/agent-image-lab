@@ -294,6 +294,20 @@ Phase 9 审批记录必须满足：
 
 `review_report_admission_control_matrix.example.json` 是本地 admission 阻断矩阵，不是生产执行记录。它只证明当前所有写入都被阻断，并区分“未来需人工审批”和“永久禁止”的候选路径。
 
+## v14.076 ReviewReport Production Exclusion Register
+
+本节用于验收 ReviewReport 的 production exclusion register。它仍然只读取项目内 admission matrix / route summary，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
+
+| Source | Target | Rule |
+| --- | --- | --- |
+| reject rows in `review_report_admission_control_matrix.candidate_admissions` | `review_report_production_exclusion_register.exclusion_records` | 每个 rejected / never-production 候选必须有 production exclusion record |
+| pass rows in `review_report_admission_control_matrix.candidate_admissions` | `review_report_production_exclusion_register.non_exclusion_records` | pass 候选当前 blocked，但不得被写入永久 exclusion register |
+| unknown failure reject | `exclusion_records[].blocked_destinations` | unknown failure 必须同时阻断 `production_forever` 和 `memory_forever` |
+| `register_summary` | Review Console guard summary | `all_rejects_registered=true`、`no_pass_candidates_registered=true`、`exclusion_removal_allowed_by_this_gate=false` |
+| `no_execution_guard` | `review_report_production_exclusion_register.no_execution_guard` | provider/plugin/API/image/DailyNote/VCP memory/output/accepted_samples/production candidate 写入必须保持 false |
+
+`review_report_production_exclusion_register.example.json` 是本地 production exclusion 证据，不是生产执行记录。它只证明哪些候选永远不得进入 production，并且本 gate 不允许移除 exclusion。
+
 ## v14.061 Review Blocker Arbiter Draft Output Snapshot
 
 本节用于验收静态 Review Console 的 `renderDraft()` 草案输出没有丢失审片阻断仲裁字段。它仍然只执行本目录内静态 JS 的 mock DOM 校验，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。

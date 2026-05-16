@@ -69,6 +69,7 @@ $requiredFiles = @(
   'scripts/validate_review_report_negative_guard_regression_matrix.js',
   'scripts/validate_review_report_route_summary.js',
   'scripts/validate_review_report_admission_control_matrix.js',
+  'scripts/validate_review_report_production_exclusion_register.js',
   'scripts/validate_review_blocker_arbiter_route_summary.js',
   'scripts/validate_review_memory_admission_control.js',
   'scripts/validate_review_production_admission_control.js',
@@ -196,6 +197,7 @@ $requiredFiles = @(
   'tests/schema_examples/review_report_negative_guard_regression_matrix.example.json',
   'tests/schema_examples/review_report_route_summary.example.json',
   'tests/schema_examples/review_report_admission_control_matrix.example.json',
+  'tests/schema_examples/review_report_production_exclusion_register.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix_v14_062.example.json',
   'tests/schema_examples/review_blocker_arbiter_route_summary.example.json',
@@ -252,6 +254,7 @@ $requiredFiles = @(
   'docs/v14_073_review_report_negative_guard_regression_matrix_gate.md',
   'docs/v14_074_review_report_route_summary_gate.md',
   'docs/v14_075_review_report_admission_control_matrix_gate.md',
+  'docs/v14_076_review_report_production_exclusion_register_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -3994,6 +3997,11 @@ if (-not $node) {
     Add-Failure "scripts/validate_review_report_admission_control_matrix.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'scripts/validate_review_report_production_exclusion_register.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_review_report_production_exclusion_register.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_review_blocker_arbiter_route_summary.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_review_blocker_arbiter_route_summary.js failed node --check"
@@ -6253,6 +6261,38 @@ if (-not $node) {
     }
     if ($reviewReportAdmissionMatrix.review_report_admission_control_matrix.file_write_performed -ne $false) {
       Add-Failure "ReviewReport admission control matrix validation must not write files"
+    }
+  }
+
+  $reviewReportProductionExclusionOutput = & node (Join-Path $Root 'scripts/validate_review_report_production_exclusion_register.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "ReviewReport production exclusion register validation exited with failure"
+  } else {
+    $reviewReportProductionExclusion = ($reviewReportProductionExclusionOutput -join "`n") | ConvertFrom-Json
+    if ($reviewReportProductionExclusion.passed -ne $true) {
+      Add-Failure "ReviewReport production exclusion register validation must report passed true"
+    }
+    foreach ($reviewReportProductionExclusionCheck in @(
+      @{ Flag = 'review_report_production_exclusion_register_present'; Message = 'ReviewReport production exclusion register must be present' },
+      @{ Flag = 'review_report_production_exclusion_matches_admission_matrix'; Message = 'ReviewReport production exclusion register must match admission matrix' },
+      @{ Flag = 'review_report_production_exclusion_matches_route_summary'; Message = 'ReviewReport production exclusion register must match route summary' },
+      @{ Flag = 'review_report_production_exclusion_all_rejects_registered'; Message = 'ReviewReport production exclusion register must register all rejects' },
+      @{ Flag = 'review_report_production_exclusion_no_pass_registered'; Message = 'ReviewReport production exclusion register must not register pass candidates' },
+      @{ Flag = 'review_report_production_exclusion_never_production_verified'; Message = 'ReviewReport production exclusion register must verify never-production' },
+      @{ Flag = 'review_report_production_exclusion_unknown_memory_forbidden_verified'; Message = 'ReviewReport production exclusion register must verify unknown memory-forbidden exclusion' },
+      @{ Flag = 'review_report_production_exclusion_removal_blocked'; Message = 'ReviewReport production exclusion register must block exclusion removal' },
+      @{ Flag = 'review_report_production_exclusion_no_daily_note_write_verified'; Message = 'ReviewReport production exclusion register must verify no DailyNote write' },
+      @{ Flag = 'review_report_production_exclusion_no_vcp_memory_write_verified'; Message = 'ReviewReport production exclusion register must verify no VCP memory write' },
+      @{ Flag = 'review_report_production_exclusion_no_accepted_samples_write_verified'; Message = 'ReviewReport production exclusion register must verify no accepted_samples write' },
+      @{ Flag = 'review_report_production_exclusion_no_production_candidate_verified'; Message = 'ReviewReport production exclusion register must verify no production candidate' },
+      @{ Flag = 'review_report_production_exclusion_no_provider_plugin_api_image_verified'; Message = 'ReviewReport production exclusion register must verify no provider/plugin/API/image effects' }
+    )) {
+      if ($reviewReportProductionExclusion.review_report_production_exclusion_register.($reviewReportProductionExclusionCheck.Flag) -ne $true) {
+        Add-Failure $reviewReportProductionExclusionCheck.Message
+      }
+    }
+    if ($reviewReportProductionExclusion.review_report_production_exclusion_register.file_write_performed -ne $false) {
+      Add-Failure "ReviewReport production exclusion register validation must not write files"
     }
   }
 
