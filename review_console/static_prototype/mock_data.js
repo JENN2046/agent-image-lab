@@ -372,6 +372,103 @@ window.REVIEW_CONSOLE_MOCK = {
       direct_memory_write_performed: false
     }
   },
+  review_evidence_blocker_contract_static_handoff: {
+    source_adapter_response_ref: "tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json",
+    status: "draft_ready",
+    display_only: true,
+    evidence_blocker_contract_attached: true,
+    evidence_blocker_contract_handoff_id: "evidence_blocker_contract_handoff_portable_lantern_local_fixture_001",
+    evidence_records: [
+      {
+        candidate_id: "candidate_accept_metadata_001",
+        review_outcome: "pass",
+        evidence_codes: [
+          "weighted_score_meets_accept_threshold",
+          "no_failure_tags_present"
+        ],
+        production_candidate: false,
+        direct_write_performed: false
+      },
+      {
+        candidate_id: "candidate_reject_metadata_001",
+        review_outcome: "reject",
+        evidence_codes: [
+          "weighted_score_below_accept_threshold",
+          "weighted_score_below_reject_threshold",
+          "mapped_failure_tags_present"
+        ],
+        production_candidate: false,
+        direct_write_performed: false
+      }
+    ],
+    blocker_decisions: [
+      {
+        candidate_id: "candidate_accept_metadata_001",
+        blocker_type: "human_review_required",
+        blocking_scope: "production_promotion",
+        decision: "block_until_required_review",
+        permanent_block: false,
+        production_candidate: false,
+        direct_write_performed: false
+      },
+      {
+        candidate_id: "candidate_reject_metadata_001",
+        blocker_type: "production_exclusion",
+        blocking_scope: "production_promotion",
+        decision: "block_permanently",
+        permanent_block: true,
+        production_candidate: false,
+        direct_write_performed: false
+      }
+    ],
+    production_exclusion_register: [
+      {
+        candidate_id: "candidate_reject_metadata_001",
+        status: "never_production",
+        permanent_block: true,
+        production_candidate: false
+      }
+    ],
+    blocker_summary: {
+      evidence_record_count: 2,
+      blocker_decision_count: 2,
+      production_exclusion_count: 1,
+      permanent_block_count: 1,
+      human_review_block_count: 2,
+      memory_forbidden_block_count: 0,
+      direct_memory_write_performed: false,
+      production_candidate_created: false,
+      accepted_samples_write_performed: false
+    },
+    review_evidence_blocker_contract_guard_summary: {
+      evidence_record_count: 2,
+      blocker_decision_count: 2,
+      production_exclusion_count: 1,
+      permanent_block_count: 1,
+      human_review_block_count: 2,
+      memory_forbidden_block_count: 0,
+      production_exclusion_candidate_ids: [
+        "candidate_reject_metadata_001"
+      ],
+      production_candidate_created: false,
+      direct_memory_write_performed: false,
+      accepted_samples_write_performed: false,
+      every_candidate_has_evidence_record: true,
+      every_candidate_has_production_blocker_decision: true,
+      every_never_production_candidate_has_exclusion: true
+    },
+    arbitration_guard: {
+      evidence_record_is_not_approval: true,
+      blocker_decision_is_not_write: true,
+      every_candidate_has_evidence_record: true,
+      every_candidate_has_production_blocker_decision: true,
+      every_never_production_candidate_has_exclusion: true,
+      no_production_without_human_review: true,
+      production_candidate_created: false,
+      direct_memory_write_performed: false,
+      accepted_samples_write_performed: false
+    }
+  },
   image_case_seed: {
     input_assets: ["asset_archive/references/photo_studio_os_reference.placeholder"],
     prompt_package_id: "prompt-package-photo-studio-os-001",

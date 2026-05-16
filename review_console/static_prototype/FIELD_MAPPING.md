@@ -159,6 +159,23 @@ Phase 9 审批记录必须满足：
 
 `review_decision_package_static_handoff` 是 evidence/blocker 可视化层，不是 production promotion 层。它不得创建 production candidate，不得写 accepted_samples，不得写 memory，不得调用插件，也不得把 rejected / never-production 候选送入生产。
 
+## v14.051 Evidence Blocker Contract Static Handoff 映射
+
+本节用于验收 PVOS adapter 输出中的 `evidence_blocker_contract` 进入静态 Review Console 可见 UI 与草案输出。它仍然只读取项目内 mock / fixture，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
+
+| PVOS adapter / evidence blocker 字段 | Review Console 可见/草案字段 | 说明 |
+| --- | --- | --- |
+| `evidence_blocker_contract.evidence_records` | `review_evidence_blocker_contract_static_handoff.evidence_records` / `evidenceRecordList` | 每个候选必须携带 evidence codes；evidence record 不等于 approval |
+| `evidence_blocker_contract.blocker_decisions` | `review_evidence_blocker_contract_static_handoff.blocker_decisions` / `blockerDecisionList` | 每个候选必须有 production blocker decision；blocker decision 不等于写入 |
+| `evidence_blocker_contract.production_exclusion_register` | `review_evidence_blocker_contract_static_handoff.production_exclusion_register` | `candidate_reject_metadata_001` 必须保持 `never_production` 和 `permanent_block=true` |
+| `evidence_blocker_contract.blocker_summary` | `review_evidence_blocker_contract_static_handoff.blocker_summary` / `evidenceBlockerSummary` | 显示 evidence record、blocker decision、permanent block、human review block 数量 |
+| `review_console_handoff_draft.review_evidence_blocker_contract_guard_summary` | `review_evidence_blocker_contract_static_handoff.review_evidence_blocker_contract_guard_summary` / `evidenceBlockerGuardSummary` | 显示 production exclusion IDs、`production_candidate_created=false`、`direct_memory_write_performed=false`、`accepted_samples_write_performed=false` |
+| `evidence_blocker_contract.arbitration_guard.evidence_record_is_not_approval` | `evidenceBlockerGuard` | 证据记录只是审片证据，不是生产批准 |
+| `evidence_blocker_contract.arbitration_guard.blocker_decision_is_not_write` | `evidenceBlockerGuard` | 阻断决策只是仲裁结果，不是样本或记忆写入 |
+| `evidence_blocker_contract.arbitration_guard.no_production_without_human_review` | `evidenceBlockerGuard` | 没有人工生产审批不得进入 production |
+
+`review_evidence_blocker_contract_static_handoff` 是 evidence collector + blocker arbiter 的可视化层。它不得创建 production candidate，不得写 accepted_samples，不得写 memory，不得调用插件，也不得让 `never_production` 候选绕过 exclusion register。
+
 ## 原型防越界标记
 
 草案输出包含：

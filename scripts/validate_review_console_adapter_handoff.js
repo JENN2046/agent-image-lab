@@ -304,6 +304,166 @@ function assertReviewDecisionPackageHandoff(handoff, adapterExample) {
   );
 }
 
+function assertEvidenceBlockerContractHandoff(handoff, adapterExample) {
+  assert(handoff, "Static mock must expose review_evidence_blocker_contract_static_handoff.");
+  assert(handoff.status === "draft_ready", "Evidence blocker contract static handoff must be draft_ready.");
+  assert(handoff.display_only === true, "Evidence blocker contract static handoff must be display-only.");
+  assert(
+    handoff.evidence_blocker_contract_attached === true,
+    "Evidence blocker contract static handoff must mark contract attached."
+  );
+
+  const contract = adapterExample.evidence_blocker_contract;
+  const adapterHandoff = adapterExample.evidence_blocker_contract_handoff_draft;
+  const adapterGuardSummary = adapterExample.review_console_handoff_draft.review_evidence_blocker_contract_guard_summary;
+  assert(contract, "PVOS adapter example must include evidence_blocker_contract.");
+  assert(adapterHandoff, "PVOS adapter example must include evidence_blocker_contract_handoff_draft.");
+  assert(adapterGuardSummary, "PVOS adapter example must include Review Console evidence blocker guard summary.");
+  assert(
+    handoff.evidence_blocker_contract_handoff_id === adapterExample.review_console_handoff_draft.evidence_blocker_contract_handoff_id,
+    "Static evidence blocker handoff id must match Review Console adapter handoff."
+  );
+
+  const summary = handoff.blocker_summary;
+  assert(
+    summary.evidence_record_count === contract.blocker_summary.evidence_record_count,
+    "Static evidence blocker evidence_record_count must match adapter contract."
+  );
+  assert(
+    summary.blocker_decision_count === contract.blocker_summary.blocker_decision_count,
+    "Static evidence blocker blocker_decision_count must match adapter contract."
+  );
+  assert(
+    summary.production_exclusion_count === adapterHandoff.production_exclusion_count,
+    "Static evidence blocker production_exclusion_count must match adapter handoff."
+  );
+  assert(
+    summary.permanent_block_count === adapterHandoff.permanent_block_count,
+    "Static evidence blocker permanent_block_count must match adapter handoff."
+  );
+  assert(
+    summary.human_review_block_count === adapterHandoff.human_review_block_count,
+    "Static evidence blocker human_review_block_count must match adapter handoff."
+  );
+  assert(
+    summary.memory_forbidden_block_count === adapterHandoff.memory_forbidden_block_count,
+    "Static evidence blocker memory_forbidden_block_count must match adapter handoff."
+  );
+  assert(summary.direct_memory_write_performed === false, "Static evidence blocker must not perform direct memory writes.");
+  assert(summary.production_candidate_created === false, "Static evidence blocker must not create production candidates.");
+  assert(summary.accepted_samples_write_performed === false, "Static evidence blocker must not write accepted samples.");
+
+  assert(
+    handoff.evidence_records.length === contract.evidence_records.length,
+    "Static evidence blocker must carry evidence records."
+  );
+  assert(
+    handoff.blocker_decisions.length === contract.blocker_decisions.length,
+    "Static evidence blocker must carry blocker decisions."
+  );
+  assert(
+    handoff.production_exclusion_register.length === contract.production_exclusion_register.length,
+    "Static evidence blocker must carry production exclusion register."
+  );
+  assertArrayEqual(
+    handoff.evidence_records.map((record) => record.candidate_id),
+    contract.evidence_records.map((record) => record.candidate_id),
+    "Static evidence blocker evidence record candidate IDs must match adapter contract"
+  );
+  assertArrayEqual(
+    handoff.blocker_decisions.map((blocker) => blocker.candidate_id),
+    contract.blocker_decisions.map((blocker) => blocker.candidate_id),
+    "Static evidence blocker blocker decision candidate IDs must match adapter contract"
+  );
+  assertArrayEqual(
+    handoff.production_exclusion_register.map((record) => record.candidate_id),
+    adapterHandoff.production_exclusion_candidate_ids,
+    "Static evidence blocker production exclusion IDs must match adapter handoff"
+  );
+
+  const passRecord = handoff.evidence_records.find((record) => record.review_outcome === "pass");
+  const rejectRecord = handoff.evidence_records.find((record) => record.review_outcome === "reject");
+  assert(passRecord, "Static evidence blocker must include a pass evidence record.");
+  assert(rejectRecord, "Static evidence blocker must include a reject evidence record.");
+  assert(passRecord.evidence_codes.length > 0, "Pass evidence record must carry evidence codes.");
+  assert(rejectRecord.evidence_codes.length > 0, "Reject evidence record must carry evidence codes.");
+  assert(passRecord.production_candidate === false, "Pass evidence record must not be a production candidate.");
+  assert(rejectRecord.production_candidate === false, "Reject evidence record must not be a production candidate.");
+  assert(passRecord.direct_write_performed === false, "Pass evidence record must not write directly.");
+  assert(rejectRecord.direct_write_performed === false, "Reject evidence record must not write directly.");
+
+  const humanReviewBlocker = handoff.blocker_decisions.find(
+    (blocker) => blocker.blocker_type === "human_review_required"
+  );
+  const productionExclusionBlocker = handoff.blocker_decisions.find(
+    (blocker) => blocker.blocker_type === "production_exclusion"
+  );
+  assert(humanReviewBlocker, "Static evidence blocker must include a human-review blocker.");
+  assert(productionExclusionBlocker, "Static evidence blocker must include a production-exclusion blocker.");
+  assert(
+    humanReviewBlocker.decision === "block_until_required_review",
+    "Human-review blocker must block until required review."
+  );
+  assert(humanReviewBlocker.permanent_block === false, "Human-review blocker must not be permanent.");
+  assert(
+    productionExclusionBlocker.decision === "block_permanently",
+    "Production-exclusion blocker must block permanently."
+  );
+  assert(productionExclusionBlocker.permanent_block === true, "Production-exclusion blocker must be permanent.");
+  assert(productionExclusionBlocker.production_candidate === false, "Production-exclusion blocker must not be production.");
+
+  const guardSummary = handoff.review_evidence_blocker_contract_guard_summary;
+  assert(guardSummary, "Static evidence blocker must expose review_evidence_blocker_contract_guard_summary.");
+  assert(
+    guardSummary.evidence_record_count === adapterGuardSummary.evidence_record_count,
+    "Static evidence blocker guard evidence_record_count must match Review Console handoff."
+  );
+  assert(
+    guardSummary.blocker_decision_count === adapterGuardSummary.blocker_decision_count,
+    "Static evidence blocker guard blocker_decision_count must match Review Console handoff."
+  );
+  assert(
+    guardSummary.production_exclusion_count === adapterGuardSummary.production_exclusion_count,
+    "Static evidence blocker guard production_exclusion_count must match Review Console handoff."
+  );
+  assertArrayEqual(
+    guardSummary.production_exclusion_candidate_ids,
+    adapterGuardSummary.production_exclusion_candidate_ids,
+    "Static evidence blocker guard production exclusion IDs must match Review Console handoff"
+  );
+  assert(guardSummary.production_candidate_created === false, "Static evidence blocker guard must not create production candidates.");
+  assert(guardSummary.direct_memory_write_performed === false, "Static evidence blocker guard must not write memory directly.");
+  assert(guardSummary.accepted_samples_write_performed === false, "Static evidence blocker guard must not write accepted samples.");
+  assert(
+    guardSummary.every_candidate_has_evidence_record === true,
+    "Static evidence blocker guard must prove every candidate has evidence."
+  );
+  assert(
+    guardSummary.every_candidate_has_production_blocker_decision === true,
+    "Static evidence blocker guard must prove every candidate has production blocker decision."
+  );
+  assert(
+    guardSummary.every_never_production_candidate_has_exclusion === true,
+    "Static evidence blocker guard must prove every never-production candidate has exclusion."
+  );
+
+  assert(
+    handoff.arbitration_guard.evidence_record_is_not_approval === true,
+    "Static evidence blocker must keep evidence-record-is-not-approval guard."
+  );
+  assert(
+    handoff.arbitration_guard.blocker_decision_is_not_write === true,
+    "Static evidence blocker must keep blocker-decision-is-not-write guard."
+  );
+  assert(
+    handoff.arbitration_guard.no_production_without_human_review === true,
+    "Static evidence blocker must keep no-production-without-human-review guard."
+  );
+  assert(handoff.arbitration_guard.production_candidate_created === false, "Static evidence blocker must not create production candidates.");
+  assert(handoff.arbitration_guard.direct_memory_write_performed === false, "Static evidence blocker must not write memory directly.");
+  assert(handoff.arbitration_guard.accepted_samples_write_performed === false, "Static evidence blocker must not write accepted samples.");
+}
+
 function main() {
   const missingFiles = requiredFiles.filter((relativePath) => !exists(relativePath));
   assert(missingFiles.length === 0, `Missing Review Console adapter handoff files: ${missingFiles.join(", ")}`);
@@ -346,6 +506,7 @@ function main() {
   assertGuardClean(fixtureHandoff.no_execution_guard, "static adapter handoff guard");
   assertReviewResultProtocolHandoff(mock.review_result_protocol_static_handoff, pvosAdapterExample);
   assertReviewDecisionPackageHandoff(mock.review_decision_package_static_handoff, pvosAdapterExample);
+  assertEvidenceBlockerContractHandoff(mock.review_evidence_blocker_contract_static_handoff, pvosAdapterExample);
 
   const appSource = read("review_console/static_prototype/app.js");
   const indexSource = read("review_console/static_prototype/index.html");
@@ -359,8 +520,13 @@ function main() {
     appSource.includes("review_decision_package_static_handoff"),
     "Static app must carry review_decision_package_static_handoff into draft output."
   );
+  assert(
+    appSource.includes("review_evidence_blocker_contract_static_handoff"),
+    "Static app must carry review_evidence_blocker_contract_static_handoff into draft output."
+  );
   assert(appSource.includes("renderProtocolHandoff"), "Static app must render review protocol handoff.");
   assert(appSource.includes("renderDecisionPackageHandoff"), "Static app must render review decision package handoff.");
+  assert(appSource.includes("renderEvidenceBlockerHandoff"), "Static app must render evidence blocker handoff.");
   assert(indexSource.includes("protocolCandidateList"), "Static HTML must expose protocol candidate list.");
   assert(indexSource.includes("protocolSummary"), "Static HTML must expose protocol summary.");
   assert(indexSource.includes("protocolGuardSummary"), "Static HTML must expose protocol guard summary.");
@@ -369,12 +535,20 @@ function main() {
   assert(indexSource.includes("decisionPackageGuardSummary"), "Static HTML must expose decision package guard summary.");
   assert(indexSource.includes("decisionPackageDraftList"), "Static HTML must expose decision package draft list.");
   assert(indexSource.includes("decisionPackageGuard"), "Static HTML must expose decision package guard.");
+  assert(indexSource.includes("evidenceBlockerSummary"), "Static HTML must expose evidence blocker summary.");
+  assert(indexSource.includes("evidenceBlockerGuardSummary"), "Static HTML must expose evidence blocker guard summary.");
+  assert(indexSource.includes("evidenceRecordList"), "Static HTML must expose evidence record list.");
+  assert(indexSource.includes("blockerDecisionList"), "Static HTML must expose blocker decision list.");
+  assert(indexSource.includes("evidenceBlockerGuard"), "Static HTML must expose evidence blocker guard.");
   assert(styleSource.includes(".protocol-panel"), "Static CSS must style protocol panel.");
   assert(styleSource.includes(".protocol-card.reject"), "Static CSS must style rejected protocol cards.");
   assert(styleSource.includes(".protocol-guard-summary"), "Static CSS must style protocol guard summary.");
   assert(styleSource.includes(".guard-tile"), "Static CSS must style protocol guard tiles.");
   assert(styleSource.includes(".decision-package-section"), "Static CSS must style decision package section.");
   assert(styleSource.includes(".decision-package-card"), "Static CSS must style decision package cards.");
+  assert(styleSource.includes(".evidence-blocker-section"), "Static CSS must style evidence blocker section.");
+  assert(styleSource.includes(".evidence-card"), "Static CSS must style evidence cards.");
+  assert(styleSource.includes(".blocker-card.permanent"), "Static CSS must style permanent blocker cards.");
   assert(appSource.includes("Never production"), "Static app must expose never production summary copy.");
   assert(appSource.includes("Memory forbidden"), "Static app must expose memory forbidden summary copy.");
   assert(appSource.includes("Negative guard"), "Static app must expose negative guard summary copy.");
@@ -384,6 +558,13 @@ function main() {
   assert(appSource.includes("Memory drafts"), "Static app must expose memory draft summary copy.");
   assert(appSource.includes("Production exclusions"), "Static app must expose production exclusion summary copy.");
   assert(appSource.includes("protocol pass is not production approval"), "Static app must expose production approval guard copy.");
+  assert(appSource.includes("Evidence records"), "Static app must expose evidence record summary copy.");
+  assert(appSource.includes("Blocker decisions"), "Static app must expose blocker decision summary copy.");
+  assert(appSource.includes("Permanent blocks"), "Static app must expose permanent block summary copy.");
+  assert(appSource.includes("Human review blocks"), "Static app must expose human review block summary copy.");
+  assert(appSource.includes("evidence record is not approval"), "Static app must expose evidence-not-approval guard copy.");
+  assert(appSource.includes("blocker decision is not write"), "Static app must expose blocker-not-write guard copy.");
+  assert(appSource.includes("no production without human review"), "Static app must expose no-production-without-review guard copy.");
   assert(!/fetch\s*\(|XMLHttpRequest|writeFile|appendFile|fs\.|eval\s*\(|Function\s*\(/.test(appSource), "Static app must not contain forbidden runtime calls.");
 
   const fieldMapping = read("review_console/static_prototype/FIELD_MAPPING.md");
@@ -408,7 +589,15 @@ function main() {
     "review_decision_package_static_handoff.production_exclusion_register",
     "review_decision_package_static_handoff.review_decision_package_guard_summary",
     "accepted_samples_write_performed",
-    "protocol_pass_is_not_production_approval"
+    "protocol_pass_is_not_production_approval",
+    "v14.051 Evidence Blocker Contract Static Handoff",
+    "review_evidence_blocker_contract_static_handoff.evidence_records",
+    "review_evidence_blocker_contract_static_handoff.blocker_decisions",
+    "review_evidence_blocker_contract_static_handoff.production_exclusion_register",
+    "review_evidence_blocker_contract_static_handoff.review_evidence_blocker_contract_guard_summary",
+    "evidence_record_is_not_approval",
+    "blocker_decision_is_not_write",
+    "no_production_without_human_review"
   ]) {
     assert(fieldMapping.includes(text), `FIELD_MAPPING must document ${text}.`);
   }
@@ -449,6 +638,17 @@ function main() {
       review_decision_package_no_production_candidate_verified: true,
       review_decision_package_no_direct_memory_write_verified: true,
       review_decision_package_no_accepted_samples_write_verified: true,
+      review_evidence_blocker_contract_static_handoff_verified: true,
+      review_evidence_blocker_contract_guard_summary_verified: true,
+      evidence_blocker_evidence_records_visible: true,
+      evidence_blocker_blocker_decisions_visible: true,
+      evidence_blocker_production_exclusion_visible: true,
+      evidence_blocker_human_review_block_visible: true,
+      evidence_blocker_never_production_visible: true,
+      evidence_blocker_arbitration_guard_visible: true,
+      evidence_blocker_no_production_candidate_verified: true,
+      evidence_blocker_no_direct_memory_write_verified: true,
+      evidence_blocker_no_accepted_samples_write_verified: true,
       static_app_draft_output_current: true,
       field_mapping_current: true,
       external_network_required: false,

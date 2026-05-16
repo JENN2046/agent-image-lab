@@ -24,6 +24,7 @@ const state = {
   adapter_dry_run_handoff: mock.adapter_dry_run_handoff,
   review_result_protocol_static_handoff: mock.review_result_protocol_static_handoff,
   review_decision_package_static_handoff: mock.review_decision_package_static_handoff,
+  review_evidence_blocker_contract_static_handoff: mock.review_evidence_blocker_contract_static_handoff,
   humanScores: { ...mock.review_session.human_review.breakdown }
 };
 
@@ -322,6 +323,85 @@ function renderDecisionPackageHandoff() {
   `;
 }
 
+function renderEvidenceBlockerHandoff() {
+  const handoff = state.review_evidence_blocker_contract_static_handoff;
+  const summary = handoff.blocker_summary;
+  const guardSummary = handoff.review_evidence_blocker_contract_guard_summary;
+  qs("#evidenceBlockerSummary").innerHTML = `
+    <span>Evidence records <strong>${summary.evidence_record_count}</strong></span>
+    <span>Blocker decisions <strong>${summary.blocker_decision_count}</strong></span>
+    <span>Permanent blocks <strong>${summary.permanent_block_count}</strong></span>
+    <span>Human review blocks <strong>${summary.human_review_block_count}</strong></span>
+  `;
+
+  qs("#evidenceBlockerGuardSummary").innerHTML = `
+    <article class="guard-tile">
+      <span>Production exclusions</span>
+      <strong>${guardSummary.production_exclusion_count}</strong>
+    </article>
+    <article class="guard-tile">
+      <span>Memory forbidden blocks</span>
+      <strong>${guardSummary.memory_forbidden_block_count}</strong>
+    </article>
+    <article class="guard-tile">
+      <span>Production candidate</span>
+      <strong>${guardSummary.production_candidate_created}</strong>
+    </article>
+    <article class="guard-tile wide">
+      <span>Production exclusion ids</span>
+      <strong>${guardSummary.production_exclusion_candidate_ids.join(", ")}</strong>
+    </article>
+  `;
+
+  const evidenceRoot = qs("#evidenceRecordList");
+  evidenceRoot.innerHTML = "";
+  handoff.evidence_records.forEach((record) => {
+    const card = document.createElement("article");
+    card.className = `evidence-card ${record.review_outcome}`;
+    card.innerHTML = `
+      <div class="protocol-card-head">
+        <strong>${record.candidate_id}</strong>
+        <span>${record.review_outcome}</span>
+      </div>
+      <ul>${record.evidence_codes.map((code) => `<li>${code}</li>`).join("")}</ul>
+      <dl>
+        <div><dt>Production candidate</dt><dd>${record.production_candidate}</dd></div>
+        <div><dt>Direct write</dt><dd>${record.direct_write_performed}</dd></div>
+      </dl>
+    `;
+    evidenceRoot.appendChild(card);
+  });
+
+  const blockerRoot = qs("#blockerDecisionList");
+  blockerRoot.innerHTML = "";
+  handoff.blocker_decisions.forEach((blocker) => {
+    const card = document.createElement("article");
+    card.className = `blocker-card ${blocker.permanent_block ? "permanent" : "temporary"}`;
+    card.innerHTML = `
+      <div class="protocol-card-head">
+        <strong>${blocker.candidate_id}</strong>
+        <span>${blocker.decision}</span>
+      </div>
+      <dl>
+        <div><dt>Type</dt><dd>${blocker.blocker_type}</dd></div>
+        <div><dt>Scope</dt><dd>${blocker.blocking_scope}</dd></div>
+        <div><dt>Permanent</dt><dd>${blocker.permanent_block}</dd></div>
+        <div><dt>Production candidate</dt><dd>${blocker.production_candidate}</dd></div>
+      </dl>
+    `;
+    blockerRoot.appendChild(card);
+  });
+
+  qs("#evidenceBlockerGuard").innerHTML = `
+    <span>evidence record is not approval: ${handoff.arbitration_guard.evidence_record_is_not_approval}</span>
+    <span>blocker decision is not write: ${handoff.arbitration_guard.blocker_decision_is_not_write}</span>
+    <span>every candidate has evidence record: ${handoff.arbitration_guard.every_candidate_has_evidence_record}</span>
+    <span>every candidate has production blocker: ${handoff.arbitration_guard.every_candidate_has_production_blocker_decision}</span>
+    <span>every never-production candidate has exclusion: ${handoff.arbitration_guard.every_never_production_candidate_has_exclusion}</span>
+    <span>no production without human review: ${handoff.arbitration_guard.no_production_without_human_review}</span>
+  `;
+}
+
 function approvalPayload() {
   if (state.memoryStatus === "approved") {
     return {
@@ -495,6 +575,7 @@ function renderDraft() {
     adapter_dry_run_handoff: state.adapter_dry_run_handoff,
     review_result_protocol_static_handoff: state.review_result_protocol_static_handoff,
     review_decision_package_static_handoff: state.review_decision_package_static_handoff,
+    review_evidence_blocker_contract_static_handoff: state.review_evidence_blocker_contract_static_handoff,
     review_session: buildReviewSession(memoryApproval, humanTotal),
     image_case: buildImageCase(humanTotal),
     memory_delta: buildMemoryDelta(memoryApproval),
@@ -518,6 +599,7 @@ function renderAll() {
   renderIteration();
   renderProtocolHandoff();
   renderDecisionPackageHandoff();
+  renderEvidenceBlockerHandoff();
   renderDraft();
 }
 

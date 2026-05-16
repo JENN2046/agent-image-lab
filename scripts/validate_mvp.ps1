@@ -193,6 +193,8 @@ $requiredFiles = @(
   'docs/v14_047_review_decision_package_adapter_binding_gate.md',
   'docs/v14_048_review_console_decision_package_ui_binding_gate.md',
   'docs/v14_049_evidence_record_and_blocker_decision_contract_gate.md',
+  'docs/v14_050_evidence_blocker_adapter_handoff_gate.md',
+  'docs/v14_051_review_console_evidence_blocker_ui_binding_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -5575,6 +5577,39 @@ if (-not $node) {
     }
     if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.review_decision_package_no_accepted_samples_write_verified -ne $true) {
       Add-Failure "Review Console Adapter handoff must verify decision package performs no accepted_samples write"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.review_evidence_blocker_contract_static_handoff_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify evidence blocker contract static handoff"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.review_evidence_blocker_contract_guard_summary_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify evidence blocker guard summary"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.evidence_blocker_evidence_records_visible -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify evidence record visibility"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.evidence_blocker_blocker_decisions_visible -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify blocker decision visibility"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.evidence_blocker_production_exclusion_visible -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify evidence blocker production exclusion visibility"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.evidence_blocker_human_review_block_visible -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify evidence blocker human review block visibility"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.evidence_blocker_never_production_visible -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify evidence blocker never-production visibility"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.evidence_blocker_arbitration_guard_visible -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify evidence blocker arbitration guard visibility"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.evidence_blocker_no_production_candidate_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify evidence blocker creates no production candidate"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.evidence_blocker_no_direct_memory_write_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify evidence blocker performs no direct memory write"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.evidence_blocker_no_accepted_samples_write_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify evidence blocker performs no accepted_samples write"
     }
     if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.file_write_performed -ne $false) {
       Add-Failure "Review Console Adapter handoff validation must not write files"

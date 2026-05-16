@@ -9,6 +9,58 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v14_051_review_console_evidence_blocker_ui_binding_gate.
+Status: completed_local_validated.
+Purpose: expose evidence/blocker arbitration in the isolated Review Console static UI.
+source_phase: v14_050_evidence_blocker_adapter_handoff_gate.
+source_commit: dd257c8.
+phase_record: docs/v14_051_review_console_evidence_blocker_ui_binding_gate.md.
+selected_product_route: review_console_evidence_blocker_ui_binding.
+static_mock_modified: review_console/static_prototype/mock_data.js.
+static_html_modified: review_console/static_prototype/index.html.
+static_app_modified: review_console/static_prototype/app.js.
+static_styles_modified: review_console/static_prototype/styles.css.
+static_field_mapping_modified: review_console/static_prototype/FIELD_MAPPING.md.
+static_readme_modified: review_console/static_prototype/README.md.
+validator_modified: scripts/validate_review_console_adapter_handoff.js.
+validator_wiring_modified: scripts/validate_mvp.ps1.
+review_evidence_blocker_contract_static_handoff_verified: true.
+review_evidence_blocker_contract_guard_summary_verified: true.
+evidence_blocker_evidence_records_visible: true.
+evidence_blocker_blocker_decisions_visible: true.
+evidence_blocker_production_exclusion_visible: true.
+evidence_blocker_human_review_block_visible: true.
+evidence_blocker_never_production_visible: true.
+evidence_blocker_arbitration_guard_visible: true.
+evidence_blocker_no_production_candidate_verified: true.
+evidence_blocker_no_direct_memory_write_verified: true.
+evidence_blocker_no_accepted_samples_write_verified: true.
+direct_memory_write_performed: false.
+production_candidate_created: false.
+accepted_samples_written: false.
+image_binaries_read: false.
+runs_output_committed: false.
+runtime_prototype_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+plugin_call: false.
+api_call: false.
+image_generation: false.
+memory_write: false.
+DailyNote_write: false.
+VCP_memory_write: false.
+production_candidate_002: false.
+Batch_005: false.
+batch_005_allowed_now: false.
+production_candidate_002_allowed_now: false.
+memory_write_path_allowed_now: false.
+recommended_next: v14_052_evidence_blocker_contract_negative_fixture_gate.
+recommended_next_auto_execution_allowed: true.
+push_requires_explicit_remote_authorization: true.
+runtime_provider_image_memory_production_batch: false.
+next_phase_started: false.
+---
 Current active gate: v14_050_evidence_blocker_adapter_handoff_gate.
 Status: completed_local_validated.
 Purpose: carry evidence/blocker arbitration through the PVOS dry-run adapter handoff.
