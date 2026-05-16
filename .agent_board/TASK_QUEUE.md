@@ -9,6 +9,35 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v14_019_product_route_planning_selection_gate.
+Purpose: choose B_visual_eval_and_failure_taxonomy_planning as the next concrete product-planning route after the Review Console static prototype archive.
+source_phase: v14_018_post_archive_project_route_selection_gate.
+source_commit: d8943f154338c0213ea10a172b837534c25661f2.
+phase_record: docs/v14_019_product_route_planning_selection_gate.md.
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning.
+secondary_product_route: A_visual_production_core_schema_planning.
+review_console_static_prototype_archived: true.
+prototype_patch_allowed_now: false.
+preview_allowed_now: false.
+runtime_allowed_now: false.
+prototype_files_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+image_generation: false.
+retry: false.
+memory_write: false.
+accepted_samples_written: false.
+runs_output_committed: false.
+runs_image_binary_read: false.
+production_candidate_002: false.
+memory_write_path: false.
+Batch_005: false.
+dependency_change: false.
+recommended_next: v14_020_visual_eval_and_failure_taxonomy_planning_gate.
+recommended_next_auto_execution_allowed: true.
+next_phase_started: false.
+---
 Current active gate: v14_018_post_archive_project_route_selection_gate.
 Purpose: select the project line after archiving the Review Console static prototype, without reopening prototype files or entering preview/runtime/provider/image/memory/production routes.
 source_phase: v14_017_review_console_static_prototype_human_route_selection.

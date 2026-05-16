@@ -1,10 +1,50 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.019 Product Route Planning Selection Gate
+
+```text
+phase_id: v14_019_product_route_planning_selection_gate
+status: completed_validated_product_route_selection_local
+source_phase: v14_018_post_archive_project_route_selection_gate
+source_commit: d8943f154338c0213ea10a172b837534c25661f2
+purpose: choose the next concrete product-planning route after Review Console static prototype archive
+phase_record: docs/v14_019_product_route_planning_selection_gate.md
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+secondary_product_route: A_visual_production_core_schema_planning
+review_console_static_prototype_archived: true
+prototype_patch_allowed_now: false
+preview_allowed_now: false
+runtime_allowed_now: false
+prototype_files_modified: false
+browser_preview_started: false
+dev_server_started: false
+live_server_started: false
+localhost_runtime_started: false
+runtime_execution: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+memory_write: false
+accepted_samples_written: false
+runs_output_committed: false
+runs_image_binary_read: false
+production_candidate_002: false
+memory_write_path: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+package_lock_modified: false
+recommended_next: v14_020_visual_eval_and_failure_taxonomy_planning_gate
+recommended_next_auto_execution_allowed: true
+next_phase_started: false
+```
+
 # V14.018 Post-Archive Project Route Selection Gate
 
 ```text
 phase_id: v14_018_post_archive_project_route_selection_gate
-status: completed_validated_post_archive_route_selection_local
+status: completed_remote_synced_after_guarded_push
 source_phase: v14_017_review_console_static_prototype_human_route_selection
 source_commit: 615eab08e2f5c61d0977f5a911381bbfd5ad25b9
 purpose: decide the project line after archiving the Review Console static prototype
