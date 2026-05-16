@@ -1,5 +1,41 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.027 Visual Eval Seed Record Validator Planning Gate
+
+```text
+phase_id: v14_027_visual_eval_seed_record_validator_planning_gate
+status: completed_local_validated
+source_phase: v14_026_visual_eval_seed_record_schema_draft_gate
+source_commit: ce50874f36e0c47d288f79d2731ff78a691c8249
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+phase_record: docs/v14_027_visual_eval_seed_record_validator_planning_gate.md
+future_validator_target: scripts/validate_visual_eval_seed_record_schema.js
+validator_script_created: false
+validator_wiring_modified: false
+schema_files_modified: false
+example_files_modified: false
+seed_ingestion_created: false
+accepted_registry_created: false
+rejected_registry_created: false
+accepted_samples_written: false
+image_binaries_read: false
+prototype_files_modified: false
+scripts_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v14_028_visual_eval_seed_record_validator_implementation_gate
+local_validator_implementation_only: true
+runtime_provider_image_memory_production_batch: false
+next_phase_started: false
+```
+
 # V14.026 Visual Eval Seed Record Schema Draft Gate
 
 ```text
