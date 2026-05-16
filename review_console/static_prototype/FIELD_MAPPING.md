@@ -193,6 +193,24 @@ Phase 9 审批记录必须满足：
 
 `review_blocker_arbiter_static_handoff` 是审片最终路线的可视化层。它不得创建 production candidate，不得写 accepted_samples，不得写 memory，不得调用插件，也不得让 pass 候选绕过 human review 或让 reject 候选绕过 never-production。
 
+## v14.061 Review Blocker Arbiter Draft Output Snapshot
+
+本节用于验收静态 Review Console 的 `renderDraft()` 草案输出没有丢失审片阻断仲裁字段。它仍然只执行本目录内静态 JS 的 mock DOM 校验，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
+
+| Snapshot 字段 | Review Console 草案字段 | 说明 |
+| --- | --- | --- |
+| `review_console_blocker_arbiter_draft_output_snapshot.example.json.draft_output_required_keys` | `#draftOutput` JSON 顶层字段 | 草案输出必须继续携带 adapter handoff、review protocol、decision package、evidence blocker、blocker arbiter、adapter negative handoff、review_session、image_case、memory_delta 和 prototype_guard |
+| `snapshot_assertions.blocker_arbiter_handoff_present_in_draft_output` | `#draftOutput.review_blocker_arbiter_static_handoff` | 必须为 true，证明 blocker arbiter handoff 出现在草案输出中 |
+| `snapshot_assertions.final_route_by_candidate` | `review_blocker_arbiter_static_handoff.final_route_by_candidate` | pass 仍是待人工 review 草案；reject 仍是 failure-learning-only never-production |
+| `snapshot_assertions.production_blocked_candidate_ids` | `review_blocker_arbiter_static_handoff.production_blocked_candidate_ids` | 两个候选当前都不得 production promotion |
+| `snapshot_assertions.never_production_candidate_ids` | `review_blocker_arbiter_static_handoff.review_blocker_arbiter_guard_summary.never_production_candidate_ids` | rejected 候选必须保持 never-production |
+| `snapshot_assertions.production_promotion_allowed_now` | `review_blocker_arbiter_static_handoff.review_blocker_arbiter_guard_summary.production_promotion_allowed_now` | 必须为 false |
+| `snapshot_assertions.memory_entry_allowed_now` | `review_blocker_arbiter_static_handoff.review_blocker_arbiter_guard_summary.memory_entry_allowed_now` | 必须为 false |
+| `blocker_arbiter_draft_output_snapshot_matches_static_mock` | validator result flag | snapshot 必须与 `mock_data.js` 中的静态 handoff 完全一致 |
+| `blocker_arbiter_draft_output_snapshot_matches_adapter_fixture` | validator result flag | snapshot 必须继续匹配 PVOS dry-run adapter handoff |
+
+`review_console_blocker_arbiter_draft_output_snapshot.example.json` 是草案输出回归证据，不是生产执行记录。它不得授权 provider contact、plugin/API 调用、图片生成、accepted_samples 写入、记忆写入或 production promotion。
+
 ## v14.054 Adapter Negative Fixture Static Handoff 映射
 
 本节用于验收 `tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json` 中的负向 adapter handoff 进入静态 Review Console 可见 UI 与草案输出。它仍然只读取项目内 mock / fixture，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。

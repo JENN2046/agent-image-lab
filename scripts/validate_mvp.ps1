@@ -181,6 +181,7 @@ $requiredFiles = @(
   'tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json',
   'tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json',
   'tests/schema_examples/review_console_adapter_negative_fixture_draft_output_snapshot.example.json',
+  'tests/schema_examples/review_console_blocker_arbiter_draft_output_snapshot.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_boundary_scan.example.json',
   'tests/schema_examples/review_result_protocol_input.example.json',
@@ -216,6 +217,7 @@ $requiredFiles = @(
   'docs/v14_058_review_blocker_arbiter_local_kernel_gate.md',
   'docs/v14_059_review_blocker_arbiter_adapter_handoff_gate.md',
   'docs/v14_060_review_console_blocker_arbiter_ui_binding_gate.md',
+  'docs/v14_061_review_console_blocker_arbiter_draft_output_snapshot_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -5881,6 +5883,33 @@ if (-not $node) {
     }
     if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.blocker_arbiter_no_accepted_samples_write_verified -ne $true) {
       Add-Failure "Review Console Adapter handoff must verify blocker arbiter performs no accepted_samples write"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.blocker_arbiter_draft_output_snapshot_present -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify blocker arbiter draft output snapshot is present"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.blocker_arbiter_draft_output_snapshot_matches_static_mock -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify blocker arbiter draft output snapshot matches static mock"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.blocker_arbiter_draft_output_snapshot_matches_adapter_fixture -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify blocker arbiter draft output snapshot matches adapter fixture"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.blocker_arbiter_snapshot_final_routes_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify blocker arbiter snapshot final routes"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.blocker_arbiter_snapshot_production_block_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify blocker arbiter snapshot production block"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.blocker_arbiter_snapshot_memory_entry_block_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify blocker arbiter snapshot memory entry block"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.blocker_arbiter_snapshot_no_production_candidate_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify blocker arbiter snapshot creates no production candidate"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.blocker_arbiter_snapshot_no_direct_memory_write_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify blocker arbiter snapshot performs no direct memory write"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.blocker_arbiter_snapshot_no_accepted_samples_write_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify blocker arbiter snapshot performs no accepted_samples write"
     }
     if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.review_evidence_blocker_adapter_negative_static_handoff_verified -ne $true) {
       Add-Failure "Review Console Adapter handoff must verify adapter negative static handoff"

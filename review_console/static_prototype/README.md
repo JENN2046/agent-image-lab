@@ -46,6 +46,7 @@ review_console/static_prototype/index.html
 草案输出还会携带 `review_blocker_arbiter_static_handoff`，用于展示最终 candidate route：pass 只进入待人工 review 草案，reject 只进入 failure learning 且永远不得进入 production。
 草案输出还会携带 `review_evidence_blocker_adapter_negative_static_handoff`，用于展示 adapter negative guard fixture 中的 memory-forbidden 候选、never-production 候选、production exclusion IDs，以及 evidence blocker golden fixture match 状态。
 v14.055 还用 `tests/schema_examples/review_console_adapter_negative_fixture_draft_output_snapshot.example.json` 固化草案输出 snapshot，验证 `#draftOutput` 中的 adapter negative handoff 与静态 mock 和 adapter negative fixture 保持一致。
+v14.061 还用 `tests/schema_examples/review_console_blocker_arbiter_draft_output_snapshot.example.json` 固化草案输出 snapshot，验证 `#draftOutput` 中的 blocker arbiter handoff 与静态 mock 和 PVOS adapter handoff 保持一致。
 
 ## 文件说明
 
@@ -76,3 +77,4 @@ v14.055 还用 `tests/schema_examples/review_console_adapter_negative_fixture_dr
 `review_blocker_arbiter_static_handoff` 必须作为可见 UI guard 呈现；它只显示 final route、memory decision、production decision 和 blocker guard，不代表 production approval、accepted_samples 写入、记忆写入或插件执行。
 `review_evidence_blocker_adapter_negative_static_handoff` 必须作为可见 UI guard 呈现；它只显示 adapter negative fixture 的阻断证据，不代表真实 adapter runtime、provider contact、plugin/API 调用、图片生成、accepted_samples 写入、记忆写入或 production promotion。
 `review_console_adapter_negative_fixture_draft_output_snapshot.example.json` 必须与静态 mock 的 adapter negative handoff 和 `#draftOutput` 渲染结果一致；它是回归证据，不是执行授权。
+`review_console_blocker_arbiter_draft_output_snapshot.example.json` 必须与静态 mock 的 blocker arbiter handoff、PVOS adapter handoff 和 `#draftOutput` 渲染结果一致；它是回归证据，不是执行授权。

@@ -14,7 +14,8 @@ const requiredFiles = [
   "exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js",
   "tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json",
   "tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json",
-  "tests/schema_examples/review_console_adapter_negative_fixture_draft_output_snapshot.example.json"
+  "tests/schema_examples/review_console_adapter_negative_fixture_draft_output_snapshot.example.json",
+  "tests/schema_examples/review_console_blocker_arbiter_draft_output_snapshot.example.json"
 ];
 
 function read(relativePath) {
@@ -923,6 +924,114 @@ function assertAdapterNegativeDraftOutputSnapshot(snapshot, mock, renderedDraft,
   );
 }
 
+function assertReviewBlockerArbiterDraftOutputSnapshot(snapshot, mock, renderedDraft, adapterExample) {
+  assert(snapshot, "Review blocker arbiter draft output snapshot must exist.");
+  assert(snapshot.status === "draft_output_snapshot", "Review blocker arbiter snapshot must be draft_output_snapshot.");
+  assert(snapshot.display_only === true, "Review blocker arbiter snapshot must be display-only.");
+  assert(
+    snapshot.source_phase === "v14_060_review_console_blocker_arbiter_ui_binding_gate",
+    "Review blocker arbiter snapshot must cite v14.060 as source phase."
+  );
+  assert(
+    snapshot.snapshot_phase === "v14_061_review_console_blocker_arbiter_draft_output_snapshot_gate",
+    "Review blocker arbiter snapshot must cite v14.061 as snapshot phase."
+  );
+  assert(
+    snapshot.source_adapter_response_ref === "tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json",
+    "Review blocker arbiter snapshot must cite the PVOS adapter fixture."
+  );
+
+  for (const key of snapshot.draft_output_required_keys) {
+    assert(Object.prototype.hasOwnProperty.call(renderedDraft, key), `Rendered draft output must include ${key}.`);
+  }
+
+  const renderedHandoff = renderedDraft.review_blocker_arbiter_static_handoff;
+  const mockHandoff = mock.review_blocker_arbiter_static_handoff;
+  const snapshotHandoff = snapshot.review_blocker_arbiter_static_handoff;
+  assertDeepEqual(snapshotHandoff, mockHandoff, "Review blocker arbiter snapshot handoff must match static mock handoff.");
+  assertDeepEqual(renderedHandoff, snapshotHandoff, "Rendered draft output blocker arbiter handoff must match snapshot.");
+  assertReviewBlockerArbiterStaticHandoff(snapshotHandoff, adapterExample);
+
+  assertDeepEqual(renderedDraft.prototype_guard, snapshot.prototype_guard, "Rendered draft prototype guard must match blocker arbiter snapshot.");
+  assert(renderedDraft.prototype_guard.api_called === false, "Rendered draft must not call API.");
+  assert(renderedDraft.prototype_guard.daily_note_called === false, "Rendered draft must not call DailyNote.");
+  assert(renderedDraft.prototype_guard.vcp_plugin_called === false, "Rendered draft must not call VCP plugin.");
+  assert(renderedDraft.prototype_guard.disk_write_performed === false, "Rendered draft must not write disk.");
+  assert(renderedDraft.prototype_guard.image_file_created === false, "Rendered draft must not create image files.");
+
+  const assertions = snapshot.snapshot_assertions;
+  assert(assertions.blocker_arbiter_handoff_present_in_draft_output === true, "Snapshot must assert blocker arbiter handoff presence.");
+  assert(
+    assertions.review_blocker_arbiter_attached === renderedHandoff.review_blocker_arbiter_attached,
+    "Snapshot must assert blocker arbiter attachment state."
+  );
+  assertArrayEqual(
+    assertions.candidate_ids,
+    renderedHandoff.candidate_arbitrations.map((item) => item.candidate_id),
+    "Snapshot candidate IDs must match rendered draft"
+  );
+  assertArrayEqual(
+    assertions.production_blocked_candidate_ids,
+    renderedHandoff.production_blocked_candidate_ids,
+    "Snapshot production-blocked IDs must match rendered draft"
+  );
+  assertArrayEqual(
+    assertions.never_production_candidate_ids,
+    renderedHandoff.review_blocker_arbiter_guard_summary.never_production_candidate_ids,
+    "Snapshot never-production IDs must match rendered draft"
+  );
+  assertDeepEqual(
+    assertions.final_route_by_candidate,
+    renderedHandoff.final_route_by_candidate,
+    "Snapshot final routes must match rendered draft."
+  );
+  assert(
+    assertions.pass_is_not_production_approval === renderedHandoff.promotion_guard.pass_is_not_production_approval,
+    "Snapshot must assert pass-is-not-production-approval guard."
+  );
+  assert(
+    assertions.human_review_required_before_production === renderedHandoff.promotion_guard.human_review_required_before_production,
+    "Snapshot must assert human-review-before-production guard."
+  );
+  assert(assertions.production_promotion_allowed_now === false, "Snapshot must assert production promotion is blocked now.");
+  assert(assertions.memory_entry_allowed_now === false, "Snapshot must assert memory entry is blocked now.");
+  assert(
+    renderedHandoff.review_blocker_arbiter_guard_summary.production_promotion_allowed_now === false,
+    "Rendered blocker arbiter must block production promotion now."
+  );
+  assert(
+    renderedHandoff.review_blocker_arbiter_guard_summary.memory_entry_allowed_now === false,
+    "Rendered blocker arbiter must block memory entry now."
+  );
+  assert(assertions.production_candidate_created === false, "Snapshot must assert no production candidate.");
+  assert(assertions.direct_memory_write_performed === false, "Snapshot must assert no direct memory write.");
+  assert(assertions.accepted_samples_write_performed === false, "Snapshot must assert no accepted_samples write.");
+  assert(renderedHandoff.arbiter_summary.production_candidate_created === false, "Rendered blocker arbiter must not create production candidates.");
+  assert(renderedHandoff.arbiter_summary.direct_memory_write_performed === false, "Rendered blocker arbiter must not write memory directly.");
+  assert(renderedHandoff.arbiter_summary.accepted_samples_write_performed === false, "Rendered blocker arbiter must not write accepted samples.");
+
+  for (const key of [
+    "provider_contact_performed",
+    "plugin_call_performed",
+    "api_call_performed",
+    "daily_note_write_performed",
+    "vcp_memory_write_performed",
+    "image_generation_performed",
+    "output_file_write_performed"
+  ]) {
+    assert(assertions[key] === false, `Blocker arbiter snapshot assertion ${key} must be false.`);
+    assert(renderedHandoff.no_execution_guard[key] === false, `Rendered blocker arbiter no-execution guard ${key} must be false.`);
+  }
+  assert(
+    renderedHandoff.no_execution_guard.accepted_samples_write_performed === false,
+    "Rendered blocker arbiter no-execution guard accepted_samples_write_performed must be false."
+  );
+  assert(
+    renderedHandoff.no_execution_guard.production_candidate_created === false,
+    "Rendered blocker arbiter no-execution guard production_candidate_created must be false."
+  );
+}
+
 function main() {
   const missingFiles = requiredFiles.filter((relativePath) => !exists(relativePath));
   assert(missingFiles.length === 0, `Missing Review Console adapter handoff files: ${missingFiles.join(", ")}`);
@@ -945,6 +1054,10 @@ function main() {
   const adapterNegativeDraftOutputSnapshot = parseJson(
     read("tests/schema_examples/review_console_adapter_negative_fixture_draft_output_snapshot.example.json"),
     "Review Console adapter negative draft output snapshot"
+  );
+  const reviewBlockerArbiterDraftOutputSnapshot = parseJson(
+    read("tests/schema_examples/review_console_blocker_arbiter_draft_output_snapshot.example.json"),
+    "Review Console blocker arbiter draft output snapshot"
   );
   const renderedDraftOutput = loadRenderedStaticDraft(mock);
 
@@ -990,6 +1103,12 @@ function main() {
     mock,
     renderedDraftOutput,
     pvosAdapterNegativeExample
+  );
+  assertReviewBlockerArbiterDraftOutputSnapshot(
+    reviewBlockerArbiterDraftOutputSnapshot,
+    mock,
+    renderedDraftOutput,
+    pvosAdapterExample
   );
 
   const appSource = read("review_console/static_prototype/app.js");
@@ -1122,6 +1241,11 @@ function main() {
     "reject_failure_learning_only_never_production",
     "production_promotion_allowed_now",
     "memory_entry_allowed_now",
+    "v14.061 Review Blocker Arbiter Draft Output Snapshot",
+    "review_console_blocker_arbiter_draft_output_snapshot.example.json",
+    "blocker_arbiter_handoff_present_in_draft_output",
+    "blocker_arbiter_draft_output_snapshot_matches_static_mock",
+    "blocker_arbiter_draft_output_snapshot_matches_adapter_fixture",
     "v14.054 Adapter Negative Fixture Static Handoff",
     "review_evidence_blocker_adapter_negative_static_handoff.memory_forbidden_candidate_ids",
     "review_evidence_blocker_adapter_negative_static_handoff.production_exclusion_candidate_ids",
@@ -1195,6 +1319,15 @@ function main() {
       blocker_arbiter_no_production_candidate_verified: true,
       blocker_arbiter_no_direct_memory_write_verified: true,
       blocker_arbiter_no_accepted_samples_write_verified: true,
+      blocker_arbiter_draft_output_snapshot_present: true,
+      blocker_arbiter_draft_output_snapshot_matches_static_mock: true,
+      blocker_arbiter_draft_output_snapshot_matches_adapter_fixture: true,
+      blocker_arbiter_snapshot_final_routes_verified: true,
+      blocker_arbiter_snapshot_production_block_verified: true,
+      blocker_arbiter_snapshot_memory_entry_block_verified: true,
+      blocker_arbiter_snapshot_no_production_candidate_verified: true,
+      blocker_arbiter_snapshot_no_direct_memory_write_verified: true,
+      blocker_arbiter_snapshot_no_accepted_samples_write_verified: true,
       review_evidence_blocker_adapter_negative_static_handoff_verified: true,
       adapter_negative_fixture_guard_summary_verified: true,
       adapter_negative_memory_forbidden_visible: true,
