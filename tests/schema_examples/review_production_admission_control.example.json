@@ -1,0 +1,108 @@
+{
+  "production_admission_control_id": "review_production_admission_control_v14_065_001",
+  "phase": "v14_065_review_production_admission_control_gate",
+  "source_phase": "v14_064_review_memory_admission_control_gate",
+  "source_commit": "e958f9d",
+  "status": "local_production_admission_control",
+  "display_only": true,
+  "source_route_summary_ref": "tests/schema_examples/review_blocker_arbiter_route_summary.example.json",
+  "source_memory_admission_ref": "tests/schema_examples/review_memory_admission_control.example.json",
+  "production_admissions": [
+    {
+      "candidate_id": "candidate_accept_metadata_001",
+      "review_outcome": "pass",
+      "route_summary_final_route": "pass_draft_only_pending_human_review",
+      "production_decision": "block_until_human_review",
+      "production_destination": "blocked_until_human_review",
+      "admission_status": "blocked_until_human_review",
+      "production_promotion_allowed_now": false,
+      "requires_human_review": true,
+      "requires_human_production_approval": true,
+      "production_candidate_allowed_now": false,
+      "production_candidate_created": false,
+      "accepted_samples_write_allowed": false,
+      "accepted_samples_write_performed": false,
+      "never_production": false,
+      "production_exclusion_record_required": false,
+      "production_exclusion_record_id": null,
+      "admission_blockers": [
+        "human_review_missing",
+        "human_production_approval_missing",
+        "accepted_samples_write_forbidden",
+        "production_candidate_creation_forbidden"
+      ],
+      "allowed_output_now": "review_pending_candidate_only",
+      "forbidden_outputs": [
+        "production_candidate",
+        "accepted_samples_write",
+        "provider_execution",
+        "deployment_or_release",
+        "production_without_human_review"
+      ]
+    },
+    {
+      "candidate_id": "candidate_reject_metadata_001",
+      "review_outcome": "reject",
+      "route_summary_final_route": "reject_failure_learning_only_never_production",
+      "production_decision": "block_permanently",
+      "production_destination": "never_production",
+      "admission_status": "permanently_blocked_never_production",
+      "production_promotion_allowed_now": false,
+      "requires_human_review": true,
+      "requires_human_production_approval": false,
+      "production_candidate_allowed_now": false,
+      "production_candidate_created": false,
+      "accepted_samples_write_allowed": false,
+      "accepted_samples_write_performed": false,
+      "never_production": true,
+      "production_exclusion_record_required": true,
+      "production_exclusion_record_id": "production_exclusion_candidate_reject_metadata_001",
+      "failure_tags": [
+        "lighting_flat",
+        "composition_imbalance"
+      ],
+      "admission_blockers": [
+        "review_rejected",
+        "mapped_failure_tags_present",
+        "never_production_candidate",
+        "accepted_samples_write_forbidden",
+        "production_candidate_creation_forbidden"
+      ],
+      "allowed_output_now": "failure_learning_only",
+      "forbidden_outputs": [
+        "production_candidate",
+        "accepted_samples_write",
+        "provider_execution",
+        "deployment_or_release",
+        "production_forever"
+      ]
+    }
+  ],
+  "admission_summary": {
+    "candidate_count": 2,
+    "production_promotion_allowed_now_count": 0,
+    "production_candidate_allowed_now_count": 0,
+    "production_candidate_created_count": 0,
+    "accepted_samples_write_allowed_count": 0,
+    "accepted_samples_write_performed_count": 0,
+    "blocked_until_human_review_count": 1,
+    "permanently_blocked_count": 1,
+    "never_production_count": 1,
+    "human_review_required_count": 2,
+    "human_production_approval_required_count": 1,
+    "all_production_blocked": true,
+    "all_accepted_samples_writes_blocked": true,
+    "all_provider_execution_blocked": true
+  },
+  "no_execution_guard": {
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "daily_note_write_performed": false,
+    "vcp_memory_write_performed": false,
+    "image_generation_performed": false,
+    "output_file_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_created": false
+  }
+}
