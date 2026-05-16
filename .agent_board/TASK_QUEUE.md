@@ -9,6 +9,39 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v14_021_visual_eval_rubric_fields_planning_gate.
+Purpose: define concrete visual rubric field names, scoring policy, pass/patch/reject thresholds, hard reject conditions, review-note structure, and failure taxonomy linkage after v14.020.
+source_phase: v14_020_visual_eval_and_failure_taxonomy_planning_gate.
+source_commit: 48d634c9cedb8b4ea221bb1e6788867d830475cc.
+phase_record: docs/v14_021_visual_eval_rubric_fields_planning_gate.md.
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning.
+rubric_field_planning_created: true.
+scoring_policy_created: true.
+global_decision_policy_draft_created: true.
+failure_taxonomy_linkage_created: true.
+review_note_structure_planned: true.
+schema_files_created: false.
+eval_samples_created: false.
+accepted_samples_written: false.
+accepted_registry_created: false.
+rejected_registry_created: false.
+prototype_files_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+image_generation: false.
+retry: false.
+memory_write: false.
+runs_output_committed: false.
+runs_image_binary_read: false.
+production_candidate_002: false.
+memory_write_path: false.
+Batch_005: false.
+dependency_change: false.
+recommended_next: v14_022_visual_eval_decision_policy_planning_gate.
+recommended_next_auto_execution_allowed: true.
+next_phase_started: false.
+---
 Current active gate: v14_020_visual_eval_and_failure_taxonomy_planning_gate.
 Purpose: define docs-only visual evaluation rubric, failure taxonomy, accepted/rejected policy, and minimal eval seed planning after selecting B_visual_eval_and_failure_taxonomy_planning.
 source_phase: v14_019_product_route_planning_selection_gate.

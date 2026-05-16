@@ -1,5 +1,60 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260516-v14.021-VISUAL-EVAL-RUBRIC-FIELDS-PLANNING
+
+Task:
+
+```text
+Plan concrete visual evaluation rubric fields, 0-to-10 scoring policy, pass/patch/reject thresholds, hard reject conditions, review-note structure, and failure taxonomy linkage without creating schemas, samples, registries, runtime, provider, image, or memory paths.
+```
+
+Result:
+
+```text
+source_commit: 48d634c9cedb8b4ea221bb1e6788867d830475cc
+phase_record: docs/v14_021_visual_eval_rubric_fields_planning_gate.md
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+rubric_field_planning_created: true
+scoring_policy_created: true
+global_decision_policy_draft_created: true
+failure_taxonomy_linkage_created: true
+review_note_structure_planned: true
+schema_files_created: false
+eval_samples_created: false
+accepted_samples_written: false
+validation_result: passed_with_existing_manual_review_warnings_only
+```
+
+Commands run:
+
+```text
+git diff --check
+node scripts/validate_agent_board_state.js
+node scripts/validate_current_state_alignment.js
+node scripts/validate_native_doubao_sandbox.js
+node scripts/validate_prompt_schema.js --manifest tests/fixtures/prompt_schema_validator/manifest.json
+pwsh -File scripts/validate-agent-image-lab-local.ps1
+pwsh -File scripts/validate_mvp.ps1
+```
+
+Validation notes:
+
+```text
+git diff --check passed.
+node scripts/validate_agent_board_state.js passed.
+node scripts/validate_current_state_alignment.js passed.
+node scripts/validate_native_doubao_sandbox.js passed.
+node scripts/validate_prompt_schema.js --manifest tests/fixtures/prompt_schema_validator/manifest.json passed.
+pwsh -File scripts/validate-agent-image-lab-local.ps1 passed with existing manual-review warnings only.
+pwsh -File scripts/validate_mvp.ps1 passed.
+```
+
+Boundary:
+
+```text
+No prototype file mutation, schema file creation, eval sample creation, accepted/rejected registry creation, accepted_samples write, browser preview, dev server, live server, localhost runtime, provider contact, image generation, retry, .env.local value read, DailyNote write, VCP memory write, runs image binary read, runs output commit, production_candidate_002, memory_write_path, Batch_005, CDP, bridge, MCP/VCPToolBox runtime, dependency change, package change, or automatic next phase entry is performed by v14.021.
+```
+
 ## VALIDATION-20260516-v14.020-VISUAL-EVAL-AND-FAILURE-TAXONOMY-PLANNING
 
 Task:

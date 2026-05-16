@@ -8,7 +8,36 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
-latest_head_after_v14_020_visual_eval_taxonomy_planning: e5705dbb678acb60339ef1ad3f3476223c338711
+latest_head_after_v14_021_visual_eval_rubric_fields_planning: 48d634c9cedb8b4ea221bb1e6788867d830475cc
+status: v14_021_visual_eval_rubric_fields_planning_gate
+mode: A4.8 docs-only product planning gate
+phase_id: v14_021_visual_eval_rubric_fields_planning_gate
+source_phase: v14_020_visual_eval_and_failure_taxonomy_planning_gate
+source_commit: 48d634c9cedb8b4ea221bb1e6788867d830475cc
+phase_record: docs/v14_021_visual_eval_rubric_fields_planning_gate.md
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+rubric_field_planning_created: true
+scoring_policy_created: true
+global_decision_policy_draft_created: true
+failure_taxonomy_linkage_created: true
+review_note_structure_planned: true
+schema_files_created: false
+eval_samples_created: false
+accepted_samples_written: false
+prototype_files_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+image_generation: false
+memory_write: false
+runs_output_committed: false
+dependency_change: false
+Batch_005: false
+production_candidate_002: false
+recommended_next: v14_022_visual_eval_decision_policy_planning_gate
+recommended_next_auto_execution_allowed: true
+branch: master
+latest_head_after_v14_020_visual_eval_taxonomy_planning: 48d634c9cedb8b4ea221bb1e6788867d830475cc
 status: v14_020_visual_eval_and_failure_taxonomy_planning_gate
 mode: A4.8 docs-only product planning gate
 phase_id: v14_020_visual_eval_and_failure_taxonomy_planning_gate

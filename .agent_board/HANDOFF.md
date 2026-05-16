@@ -3,7 +3,38 @@
 ## Handoff Summary
 
 ```text
-Status: v14_020_visual_eval_and_failure_taxonomy_planning_gate completed validation; guarded commit and push pending.
+Status: v14_021_visual_eval_rubric_fields_planning_gate completed validation; guarded commit and push pending.
+Reason: V14.021 turns the v14.020 visual evaluation plan into concrete rubric field planning: field names, 0-to-10 scoring policy, pass/patch/reject thresholds, hard reject conditions, review-note structure, and failure taxonomy linkage. It creates no schema files, eval samples, registries, accepted_samples, runtime, provider, image, memory, production candidate, or Batch_005 paths.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Source commit: 48d634c9cedb8b4ea221bb1e6788867d830475cc
+Current status: v14_021_visual_eval_rubric_fields_planning_gate
+phase_record: docs/v14_021_visual_eval_rubric_fields_planning_gate.md
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+rubric_field_planning_created: true
+scoring_policy_created: true
+global_decision_policy_draft_created: true
+failure_taxonomy_linkage_created: true
+review_note_structure_planned: true
+schema_files_created: false
+eval_samples_created: false
+accepted_samples_written: false
+prototype_files_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+image_generation: false
+memory_write: false
+runs_output_committed: false
+runs_image_binary_read: false
+production_candidate_002: false
+memory_write_path: false
+Batch_005: false
+recommended_next: v14_022_visual_eval_decision_policy_planning_gate
+recommended_next_auto_execution_allowed: true
+next_phase_started: false
+---
+Status: v14_020_visual_eval_and_failure_taxonomy_planning_gate completed and remote synced.
 Reason: V14.020 creates the first docs-only visual judgment planning layer after selecting B_visual_eval_and_failure_taxonomy_planning. It defines rubric dimensions, failure categories, accepted/rejected policy, and minimal eval seed targets without creating schemas, sample files, registries, runtime, provider, image, memory, production candidate, or Batch_005 paths.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master

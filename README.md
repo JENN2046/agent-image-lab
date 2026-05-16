@@ -7,8 +7,33 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current phase: v14_021_visual_eval_rubric_fields_planning_gate.
+Current local/remote baseline after v14.020 visual eval taxonomy planning sync: 48d634c9cedb8b4ea221bb1e6788867d830475cc.
+Current mainline state: Visual evaluation rubric field planning converts the v14.020 high-level visual judgment layer into concrete field names, 0-to-10 scoring policy, pass/patch/reject thresholds, hard reject conditions, human override requirement, review-note structure, and failure taxonomy linkage. No schema files, eval samples, accepted/rejected registries, accepted_samples, image generation, runtime, provider contact, memory write, production_candidate_002, or Batch_005 are created or authorized.
+phase_record: docs/v14_021_visual_eval_rubric_fields_planning_gate.md.
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning.
+rubric_field_planning_created: true.
+scoring_policy_created: true.
+global_decision_policy_draft_created: true.
+failure_taxonomy_linkage_created: true.
+review_note_structure_planned: true.
+schema_files_created: false.
+eval_samples_created: false.
+accepted_samples_written: false.
+prototype_files_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+image_generation: false.
+memory_write: false.
+runs_output_committed: false.
+dependency_change: false.
+Batch_005: false.
+production_candidate_002: false.
+recommended_next: v14_022_visual_eval_decision_policy_planning_gate.
+recommended_next_auto_execution_allowed: true.
 Current phase: v14_020_visual_eval_and_failure_taxonomy_planning_gate.
-Current local/remote baseline after v14.019 product route selection sync: e5705dbb678acb60339ef1ad3f3476223c338711.
+Current local/remote baseline after v14.020 visual eval taxonomy planning sync: 48d634c9cedb8b4ea221bb1e6788867d830475cc.
 Current mainline state: Visual evaluation and failure taxonomy planning defines the first docs-only product judgment layer after Review Console static prototype archive. It drafts visual review rubric dimensions, failure taxonomy, accepted/rejected policy, and minimal eval seed targets. No schema files, eval samples, accepted_samples, image generation, runtime, provider contact, memory write, production_candidate_002, or Batch_005 are created or authorized.
 phase_record: docs/v14_020_visual_eval_and_failure_taxonomy_planning_gate.md.
 selected_product_route: B_visual_eval_and_failure_taxonomy_planning.
