@@ -8,6 +8,27 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+latest_head_after_v14_015_static_prototype_polish_closeout: 959af8eb74cc6fa00765bc171ff1f0ccbe86aaac
+status: v14_015_review_console_static_prototype_post_polish_static_review_closeout
+mode: A0 static review and closeout only
+phase_id: v14_015_review_console_static_prototype_post_polish_static_review_closeout
+source_commit: 959af8eb74cc6fa00765bc171ff1f0ccbe86aaac
+static_review: reviews/v14_012_review_console_static_html_visual_and_safety_review.md
+static_review_result: pass_static_only
+local_equals_origin: true
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+image_generation: false
+memory_write: false
+accepted_samples_written: false
+runs_output_committed: false
+dependency_change: false
+Batch_005: false
+production_candidate_002: false
+recommended_next: pending_human_review_console_static_prototype_next_route
+recommended_next_auto_execution_allowed: false
+branch: master
 latest_head_after_v14_010_static_HTML_creation_authorization: 21d1fefcd20d7f637043b4b58fa928229c5d2af2
 status: v14_011_review_console_static_HTML_prototype_creation_execution
 mode: A4.8 static prototype file creation only
