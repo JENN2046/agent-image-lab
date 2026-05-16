@@ -1,0 +1,101 @@
+schema_id: review_decision_package
+version: v1
+purpose: >
+  Local stdout-only package that turns hard review-result protocol output into
+  accepted/rejected sample drafts, memory draft or forbidden records, and a
+  never-production register.
+base_contract: AGENTS.md
+mode: local_stdout_only_review_decision_package
+input:
+  required:
+    review_result_protocol_input_version: v1
+    protocol_id: string
+    kernel_input_ref: tests/schema_examples/pvos_kernel_input.example.json
+output:
+  required:
+    review_decision_package_version: v1
+    package_id: string
+    source_protocol_id: string
+    source_kernel_run_id: string
+    task_id: string
+    status: completed_local_decision_package
+    mode: local_stdout_only_review_decision_package
+    candidate_decision_records:
+      item_required:
+        candidate_id: string
+        review_outcome: pass | reject
+        pass_reasons: array
+        reject_reasons: array
+        memory_route: object
+        production_route: object
+    accepted_sample_drafts:
+      item_required:
+        accepted_sample_id: string
+        candidate_id: string
+        pass_reasons: array
+        write_performed: false
+        production_candidate: false
+    rejected_sample_drafts:
+      item_required:
+        rejected_sample_id: string
+        candidate_id: string
+        reject_reasons: array
+        write_performed: false
+        production_candidate: false
+    memory_delta_drafts:
+      item_required:
+        memory_delta_id: string
+        candidate_id: string
+        status: draft
+        language: zh-CN
+        allowed_to_enter_memory: true
+        direct_daily_note_write_allowed: false
+        direct_vcp_memory_write_allowed: false
+        direct_write_performed: false
+        requires_human_memory_approval: true
+        summary_zh: string
+    memory_forbidden_records:
+      item_required:
+        candidate_id: string
+        route: forbidden
+        allowed_to_enter_memory: false
+        direct_write_performed: false
+    production_exclusion_register:
+      item_required:
+        candidate_id: string
+        status: never_production
+        permanent_block: true
+        production_candidate: false
+        never_production_codes: array
+    decision_summary:
+      direct_memory_write_performed: false
+      production_candidate_created: false
+      accepted_samples_write_performed: false
+    promotion_guard:
+      protocol_pass_is_not_production_approval: true
+      every_never_production_candidate_blocked: true
+      production_candidate_creation_allowed: false
+      production_candidate_created: false
+      memory_write_allowed_without_human_approval: false
+      direct_memory_write_performed: false
+boundary:
+  output_channel: stdout
+  output_file_write_allowed: false
+  provider_contact_allowed: false
+  plugin_call_allowed: false
+  api_call_allowed: false
+  image_generation_allowed: false
+  daily_note_write_allowed: false
+  vcp_memory_write_allowed: false
+  accepted_samples_write_allowed: false
+  external_manifest_read_allowed: false
+  real_vcpchat_source_read_allowed: false
+  real_vcptoolbox_source_read_allowed: false
+  dependency_change_allowed: false
+hard_rules:
+  - Accepted sample drafts are not production candidates.
+  - Rejected sample drafts are not production candidates.
+  - Memory entries remain draft-only and require human approval.
+  - Memory-forbidden records cannot enter long-term memory.
+  - Every never-production candidate must appear in production_exclusion_register.
+  - No package output may perform file, image, plugin, API, DailyNote, or VCP memory writes.

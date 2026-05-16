@@ -87,3 +87,31 @@ node --check kernel\review_result_protocol.js
 node --check scripts\validate_review_result_protocol.js
 node scripts\validate_review_result_protocol.js
 ```
+
+## Review Decision Package
+
+```powershell
+node kernel\review_decision_package.js --input tests\schema_examples\review_result_protocol_input.example.json
+```
+
+The review decision package wraps the hard review-result protocol into the
+next local production-kernel layer:
+
+```text
+candidate decision records
+accepted sample drafts
+rejected sample drafts
+memory delta drafts
+memory forbidden records
+production exclusion register
+```
+
+It keeps protocol pass separate from production approval. Accepted and rejected
+sample entries are drafts only, memory entries require human approval, and every
+`never_production` candidate is copied into `production_exclusion_register`.
+
+```powershell
+node --check kernel\review_decision_package.js
+node --check scripts\validate_review_decision_package.js
+node scripts\validate_review_decision_package.js
+```

@@ -158,19 +158,23 @@ $requiredFiles = @(
   'scripts/validate_pvos_kernel_minimal.js',
   'scripts/validate_pvos_kernel_dry_run_adapter.js',
   'scripts/validate_review_result_protocol.js',
+  'scripts/validate_review_decision_package.js',
   'kernel/pvos_kernel.js',
   'kernel/README.md',
   'kernel/review_result_protocol.js',
+  'kernel/review_decision_package.js',
   'adapters/pvos_kernel_dry_run_adapter.js',
   'schemas/pvos_kernel_run.schema.yaml',
   'schemas/pvos_kernel_dry_run_adapter.schema.yaml',
   'schemas/review_result_protocol.schema.yaml',
+  'schemas/review_decision_package.schema.yaml',
   'tests/schema_examples/pvos_kernel_input.example.json',
   'tests/schema_examples/pvos_kernel_run.example.json',
   'tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json',
   'tests/schema_examples/review_result_protocol_input.example.json',
   'tests/schema_examples/review_result_protocol_report.example.json',
   'tests/schema_examples/review_result_protocol_negative_guard_input.example.json',
+  'tests/schema_examples/review_decision_package.example.json',
   'tests/schema_examples/pvos_kernel_negative_guard_input.example.json',
   'docs/v14_037_pvos_kernel_minimal_implementation_gate.md',
   'docs/v14_038_pvos_kernel_dry_run_adapter_gate.md',
@@ -181,6 +185,7 @@ $requiredFiles = @(
   'docs/v14_043_review_protocol_fixture_negative_guard_gate.md',
   'docs/v14_044_review_protocol_negative_guard_adapter_handoff_gate.md',
   'docs/v14_045_review_console_negative_guard_ui_affordance_gate.md',
+  'docs/v14_046_review_decision_package_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -4023,6 +4028,16 @@ if (-not $node) {
     Add-Failure "scripts/validate_review_result_protocol.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'kernel/review_decision_package.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "kernel/review_decision_package.js failed node --check"
+  }
+
+  & node --check (Join-Path $Root 'scripts/validate_review_decision_package.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_review_decision_package.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_local_checkpoint_manifest.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_local_checkpoint_manifest.js failed node --check"
@@ -4383,6 +4398,76 @@ if (-not $node) {
     }
     if ($reviewResultProtocol.review_result_protocol.production_candidate_created -ne $false) {
       Add-Failure "Review result protocol validation must not create production candidates"
+    }
+  }
+
+  $reviewDecisionPackageOutput = & node (Join-Path $Root 'scripts/validate_review_decision_package.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review decision package validation exited with failure"
+  } else {
+    $reviewDecisionPackage = ($reviewDecisionPackageOutput -join "`n") | ConvertFrom-Json
+    if ($reviewDecisionPackage.passed -ne $true) {
+      Add-Failure "Review decision package validation must report passed true"
+    }
+    if ($reviewDecisionPackage.review_decision_package.package_cli_present -ne $true) {
+      Add-Failure "Review decision package validation must verify package CLI"
+    }
+    if ($reviewDecisionPackage.review_decision_package.schema_present -ne $true) {
+      Add-Failure "Review decision package validation must verify schema"
+    }
+    if ($reviewDecisionPackage.review_decision_package.example_present -ne $true) {
+      Add-Failure "Review decision package validation must verify example"
+    }
+    if ($reviewDecisionPackage.review_decision_package.stdout_only -ne $true) {
+      Add-Failure "Review decision package validation must verify stdout-only boundary"
+    }
+    if ($reviewDecisionPackage.review_decision_package.accepted_sample_drafts_verified -ne $true) {
+      Add-Failure "Review decision package validation must verify accepted sample drafts"
+    }
+    if ($reviewDecisionPackage.review_decision_package.rejected_sample_drafts_verified -ne $true) {
+      Add-Failure "Review decision package validation must verify rejected sample drafts"
+    }
+    if ($reviewDecisionPackage.review_decision_package.memory_delta_drafts_verified -ne $true) {
+      Add-Failure "Review decision package validation must verify memory delta drafts"
+    }
+    if ($reviewDecisionPackage.review_decision_package.memory_forbidden_records_verified -ne $true) {
+      Add-Failure "Review decision package validation must verify memory-forbidden records"
+    }
+    if ($reviewDecisionPackage.review_decision_package.production_exclusion_register_verified -ne $true) {
+      Add-Failure "Review decision package validation must verify production exclusion register"
+    }
+    if ($reviewDecisionPackage.review_decision_package.negative_guard_memory_forbidden_verified -ne $true) {
+      Add-Failure "Review decision package validation must verify negative guard memory-forbidden record"
+    }
+    if ($reviewDecisionPackage.review_decision_package.negative_guard_never_production_register_verified -ne $true) {
+      Add-Failure "Review decision package validation must verify negative guard never-production register"
+    }
+    if ($reviewDecisionPackage.review_decision_package.no_direct_memory_write_verified -ne $true) {
+      Add-Failure "Review decision package validation must verify direct memory write is false"
+    }
+    if ($reviewDecisionPackage.review_decision_package.no_production_candidate_created_verified -ne $true) {
+      Add-Failure "Review decision package validation must verify production candidate creation is false"
+    }
+    if ($reviewDecisionPackage.review_decision_package.provider_contact_performed -ne $false) {
+      Add-Failure "Review decision package validation must not perform provider contact"
+    }
+    if ($reviewDecisionPackage.review_decision_package.plugin_call_performed -ne $false) {
+      Add-Failure "Review decision package validation must not call plugins"
+    }
+    if ($reviewDecisionPackage.review_decision_package.api_call_performed -ne $false) {
+      Add-Failure "Review decision package validation must not call APIs"
+    }
+    if ($reviewDecisionPackage.review_decision_package.image_generation_performed -ne $false) {
+      Add-Failure "Review decision package validation must not generate images"
+    }
+    if ($reviewDecisionPackage.review_decision_package.daily_note_write_performed -ne $false) {
+      Add-Failure "Review decision package validation must not write DailyNote"
+    }
+    if ($reviewDecisionPackage.review_decision_package.vcp_memory_write_performed -ne $false) {
+      Add-Failure "Review decision package validation must not write VCP memory"
+    }
+    if ($reviewDecisionPackage.review_decision_package.output_file_write_performed -ne $false) {
+      Add-Failure "Review decision package validation must not write output files"
     }
   }
 
