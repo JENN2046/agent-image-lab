@@ -123,3 +123,30 @@ node --check kernel\review_decision_package.js
 node --check scripts\validate_review_decision_package.js
 node scripts\validate_review_decision_package.js
 ```
+
+## Evidence Blocker Contract
+
+```powershell
+node kernel\evidence_blocker_contract.js --input tests\schema_examples\review_result_protocol_input.example.json
+```
+
+The evidence blocker contract turns the review decision package into the hard
+arbiter surface for the local production kernel:
+
+```text
+EvidenceRecord
+BlockerDecision
+ProductionExclusionRegister
+```
+
+An `EvidenceRecord` explains what was observed and why the candidate passed or
+rejected. A `BlockerDecision` explains why production or memory promotion is
+blocked. `ProductionExclusionRegister` contains the candidates that must remain
+`never_production`. None of these records perform writes or create production
+candidates.
+
+```powershell
+node --check kernel\evidence_blocker_contract.js
+node --check scripts\validate_evidence_blocker_contract.js
+node scripts\validate_evidence_blocker_contract.js
+```

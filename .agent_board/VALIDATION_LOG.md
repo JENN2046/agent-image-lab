@@ -1,5 +1,72 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.049-EVIDENCE-RECORD-AND-BLOCKER-DECISION-CONTRACT
+
+Task:
+
+```text
+Create the local stdout-only EvidenceRecord, BlockerDecision, and ProductionExclusionRegister contract so review-result evidence becomes machine-checkable blocker arbitration without runtime integration, provider contact, plugin/API calls, image generation, output writes, DailyNote writes, VCP memory writes, accepted_samples writes, or production candidate creation.
+```
+
+Result:
+
+```text
+phase_record: docs/v14_049_evidence_record_and_blocker_decision_contract_gate.md
+source_commit: 0dc554c
+selected_product_route: evidence_blocker_contract
+contract_cli_created: kernel/evidence_blocker_contract.js
+schema_created: schemas/evidence_blocker_contract.schema.yaml
+example_created: tests/schema_examples/evidence_blocker_contract.example.json
+validator_created: scripts/validate_evidence_blocker_contract.js
+kernel_readme_modified: kernel/README.md
+validator_wiring_modified: scripts/validate_mvp.ps1
+evidence_records_verified: true
+blocker_decisions_verified: true
+production_exclusion_register_verified: true
+pass_candidate_blocked_until_human_review_verified: true
+reject_candidate_never_production_verified: true
+negative_guard_memory_forbidden_block_verified: true
+negative_guard_production_exclusion_verified: true
+no_direct_memory_write_verified: true
+no_production_candidate_created_verified: true
+no_accepted_samples_write_verified: true
+direct_memory_write_performed: false
+production_candidate_created: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+validation_result: passed
+```
+
+Commands run:
+
+```text
+node --check kernel/evidence_blocker_contract.js
+node --check scripts/validate_evidence_blocker_contract.js
+node scripts/validate_evidence_blocker_contract.js
+node scripts/validate_agent_board_state.js
+node scripts/validate_current_state_alignment.js
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+git diff --check
+```
+
+Validation notes:
+
+```text
+The focused evidence blocker contract validator passed and confirmed evidence_records_verified=true, blocker_decisions_verified=true, production_exclusion_register_verified=true, pass_candidate_blocked_until_human_review_verified=true, reject_candidate_never_production_verified=true, negative_guard_memory_forbidden_block_verified=true, negative_guard_production_exclusion_verified=true, no_direct_memory_write_verified=true, no_production_candidate_created_verified=true, and no_accepted_samples_write_verified=true. Default fixture output contains two EvidenceRecord objects, two production BlockerDecision objects, and one ProductionExclusionRegister record. Negative guard output contains a memory_forbidden BlockerDecision and two never-production exclusions. Agent-board, current-state, MVP, local project, and whitespace validation passed. Local project validation reported existing manual-review warning patterns only.
+```
+
+Boundary:
+
+```text
+No runtime prototype edit, provider contact, plugin call, API call, image generation, accepted_samples write, image binary read, runs output commit, DailyNote write, VCP memory write, external manifest read, real VCPChat/VCPToolBox read, real VCP runtime integration, dependency change, package change, tag, release, deploy, or push is performed by v14.049.
+```
+
 ## VALIDATION-20260517-v14.048-REVIEW-CONSOLE-DECISION-PACKAGE-UI-BINDING
 
 Task:

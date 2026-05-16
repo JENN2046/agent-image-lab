@@ -159,15 +159,18 @@ $requiredFiles = @(
   'scripts/validate_pvos_kernel_dry_run_adapter.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
+  'scripts/validate_evidence_blocker_contract.js',
   'kernel/pvos_kernel.js',
   'kernel/README.md',
   'kernel/review_result_protocol.js',
   'kernel/review_decision_package.js',
+  'kernel/evidence_blocker_contract.js',
   'adapters/pvos_kernel_dry_run_adapter.js',
   'schemas/pvos_kernel_run.schema.yaml',
   'schemas/pvos_kernel_dry_run_adapter.schema.yaml',
   'schemas/review_result_protocol.schema.yaml',
   'schemas/review_decision_package.schema.yaml',
+  'schemas/evidence_blocker_contract.schema.yaml',
   'tests/schema_examples/pvos_kernel_input.example.json',
   'tests/schema_examples/pvos_kernel_run.example.json',
   'tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json',
@@ -175,6 +178,7 @@ $requiredFiles = @(
   'tests/schema_examples/review_result_protocol_report.example.json',
   'tests/schema_examples/review_result_protocol_negative_guard_input.example.json',
   'tests/schema_examples/review_decision_package.example.json',
+  'tests/schema_examples/evidence_blocker_contract.example.json',
   'tests/schema_examples/pvos_kernel_negative_guard_input.example.json',
   'docs/v14_037_pvos_kernel_minimal_implementation_gate.md',
   'docs/v14_038_pvos_kernel_dry_run_adapter_gate.md',
@@ -188,6 +192,7 @@ $requiredFiles = @(
   'docs/v14_046_review_decision_package_gate.md',
   'docs/v14_047_review_decision_package_adapter_binding_gate.md',
   'docs/v14_048_review_console_decision_package_ui_binding_gate.md',
+  'docs/v14_049_evidence_record_and_blocker_decision_contract_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -4040,6 +4045,16 @@ if (-not $node) {
     Add-Failure "scripts/validate_review_decision_package.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'kernel/evidence_blocker_contract.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "kernel/evidence_blocker_contract.js failed node --check"
+  }
+
+  & node --check (Join-Path $Root 'scripts/validate_evidence_blocker_contract.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_evidence_blocker_contract.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_local_checkpoint_manifest.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_local_checkpoint_manifest.js failed node --check"
@@ -4488,6 +4503,79 @@ if (-not $node) {
     }
     if ($reviewDecisionPackage.review_decision_package.output_file_write_performed -ne $false) {
       Add-Failure "Review decision package validation must not write output files"
+    }
+  }
+
+  $evidenceBlockerContractOutput = & node (Join-Path $Root 'scripts/validate_evidence_blocker_contract.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Evidence blocker contract validation exited with failure"
+  } else {
+    $evidenceBlockerContract = ($evidenceBlockerContractOutput -join "`n") | ConvertFrom-Json
+    if ($evidenceBlockerContract.passed -ne $true) {
+      Add-Failure "Evidence blocker contract validation must report passed true"
+    }
+    if ($evidenceBlockerContract.evidence_blocker_contract.contract_cli_present -ne $true) {
+      Add-Failure "Evidence blocker contract validation must verify contract CLI"
+    }
+    if ($evidenceBlockerContract.evidence_blocker_contract.schema_present -ne $true) {
+      Add-Failure "Evidence blocker contract validation must verify schema"
+    }
+    if ($evidenceBlockerContract.evidence_blocker_contract.example_present -ne $true) {
+      Add-Failure "Evidence blocker contract validation must verify example"
+    }
+    if ($evidenceBlockerContract.evidence_blocker_contract.stdout_only -ne $true) {
+      Add-Failure "Evidence blocker contract validation must verify stdout-only boundary"
+    }
+    if ($evidenceBlockerContract.evidence_blocker_contract.evidence_records_verified -ne $true) {
+      Add-Failure "Evidence blocker contract validation must verify evidence records"
+    }
+    if ($evidenceBlockerContract.evidence_blocker_contract.blocker_decisions_verified -ne $true) {
+      Add-Failure "Evidence blocker contract validation must verify blocker decisions"
+    }
+    if ($evidenceBlockerContract.evidence_blocker_contract.production_exclusion_register_verified -ne $true) {
+      Add-Failure "Evidence blocker contract validation must verify production exclusion register"
+    }
+    if ($evidenceBlockerContract.evidence_blocker_contract.pass_candidate_blocked_until_human_review_verified -ne $true) {
+      Add-Failure "Evidence blocker contract validation must verify pass candidate remains blocked until human review"
+    }
+    if ($evidenceBlockerContract.evidence_blocker_contract.reject_candidate_never_production_verified -ne $true) {
+      Add-Failure "Evidence blocker contract validation must verify reject candidate is never_production"
+    }
+    if ($evidenceBlockerContract.evidence_blocker_contract.negative_guard_memory_forbidden_block_verified -ne $true) {
+      Add-Failure "Evidence blocker contract validation must verify negative guard memory-forbidden blocker"
+    }
+    if ($evidenceBlockerContract.evidence_blocker_contract.negative_guard_production_exclusion_verified -ne $true) {
+      Add-Failure "Evidence blocker contract validation must verify negative guard production exclusions"
+    }
+    if ($evidenceBlockerContract.evidence_blocker_contract.no_direct_memory_write_verified -ne $true) {
+      Add-Failure "Evidence blocker contract validation must verify direct memory write is false"
+    }
+    if ($evidenceBlockerContract.evidence_blocker_contract.no_production_candidate_created_verified -ne $true) {
+      Add-Failure "Evidence blocker contract validation must verify production candidate creation is false"
+    }
+    if ($evidenceBlockerContract.evidence_blocker_contract.no_accepted_samples_write_verified -ne $true) {
+      Add-Failure "Evidence blocker contract validation must verify accepted_samples write is false"
+    }
+    if ($evidenceBlockerContract.evidence_blocker_contract.provider_contact_performed -ne $false) {
+      Add-Failure "Evidence blocker contract validation must not perform provider contact"
+    }
+    if ($evidenceBlockerContract.evidence_blocker_contract.plugin_call_performed -ne $false) {
+      Add-Failure "Evidence blocker contract validation must not call plugins"
+    }
+    if ($evidenceBlockerContract.evidence_blocker_contract.api_call_performed -ne $false) {
+      Add-Failure "Evidence blocker contract validation must not call APIs"
+    }
+    if ($evidenceBlockerContract.evidence_blocker_contract.image_generation_performed -ne $false) {
+      Add-Failure "Evidence blocker contract validation must not generate images"
+    }
+    if ($evidenceBlockerContract.evidence_blocker_contract.daily_note_write_performed -ne $false) {
+      Add-Failure "Evidence blocker contract validation must not write DailyNote"
+    }
+    if ($evidenceBlockerContract.evidence_blocker_contract.vcp_memory_write_performed -ne $false) {
+      Add-Failure "Evidence blocker contract validation must not write VCP memory"
+    }
+    if ($evidenceBlockerContract.evidence_blocker_contract.output_file_write_performed -ne $false) {
+      Add-Failure "Evidence blocker contract validation must not write output files"
     }
   }
 

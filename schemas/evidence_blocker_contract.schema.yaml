@@ -1,0 +1,94 @@
+schema_id: evidence_blocker_contract
+version: v1
+purpose: >
+  Local stdout-only contract that turns review decision package output into
+  explicit EvidenceRecord, BlockerDecision, and ProductionExclusionRegister
+  objects.
+base_contract: AGENTS.md
+mode: local_stdout_only_evidence_blocker_contract
+input:
+  required:
+    review_result_protocol_input_version: v1
+    protocol_id: string
+    kernel_input_ref: tests/schema_examples/pvos_kernel_input.example.json
+output:
+  required:
+    evidence_blocker_contract_version: v1
+    contract_id: string
+    source_decision_package_id: string
+    source_protocol_id: string
+    source_kernel_run_id: string
+    task_id: string
+    status: completed_local_evidence_blocker_contract
+    mode: local_stdout_only_evidence_blocker_contract
+    evidence_records:
+      item_required:
+        evidence_record_id: string
+        candidate_id: string
+        evidence_scope: candidate_acceptance_evidence | candidate_rejection_evidence
+        review_outcome: pass | reject
+        evidence_codes: array
+        memory_route: string
+        production_route: string
+        production_candidate: false
+        direct_write_performed: false
+    blocker_decisions:
+      item_required:
+        blocker_decision_id: string
+        candidate_id: string
+        blocker_type: production_exclusion | human_review_required | revision_required | memory_forbidden
+        blocking_scope: production_promotion | memory_promotion
+        decision: block_permanently | block_until_required_review | block_memory_entry
+        permanent_block: boolean
+        requires_human_review: true
+        production_candidate: false
+        direct_write_performed: false
+    production_exclusion_register:
+      item_required:
+        exclusion_record_id: string
+        candidate_id: string
+        status: never_production
+        permanent_block: true
+        production_candidate: false
+        source_blocker_decision_id: string
+    blocker_summary:
+      evidence_record_count: integer
+      blocker_decision_count: integer
+      production_exclusion_count: integer
+      permanent_block_count: integer
+      human_review_block_count: integer
+      memory_forbidden_block_count: integer
+      direct_memory_write_performed: false
+      production_candidate_created: false
+      accepted_samples_write_performed: false
+    arbitration_guard:
+      evidence_record_is_not_approval: true
+      blocker_decision_is_not_write: true
+      every_candidate_has_evidence_record: true
+      every_candidate_has_production_blocker_decision: true
+      every_never_production_candidate_has_exclusion: true
+      no_production_without_human_review: true
+      production_candidate_created: false
+      direct_memory_write_performed: false
+      accepted_samples_write_performed: false
+boundary:
+  output_channel: stdout
+  output_file_write_allowed: false
+  provider_contact_allowed: false
+  plugin_call_allowed: false
+  api_call_allowed: false
+  image_generation_allowed: false
+  daily_note_write_allowed: false
+  vcp_memory_write_allowed: false
+  accepted_samples_write_allowed: false
+  production_candidate_write_allowed: false
+  external_manifest_read_allowed: false
+  real_vcpchat_source_read_allowed: false
+  real_vcptoolbox_source_read_allowed: false
+  dependency_change_allowed: false
+hard_rules:
+  - EvidenceRecord is evidence only and cannot approve production.
+  - BlockerDecision is an arbitration record only and cannot perform writes.
+  - Every candidate must have an EvidenceRecord and a production BlockerDecision.
+  - Every never-production candidate must appear in ProductionExclusionRegister.
+  - No contract output may perform file, image, plugin, API, DailyNote, VCP memory, accepted_samples, or production candidate writes.
