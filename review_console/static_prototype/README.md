@@ -57,6 +57,7 @@ v14.075 还用 `tests/schema_examples/review_report_admission_control_matrix.exa
 v14.076 还用 `tests/schema_examples/review_report_production_exclusion_register.example.json` 固化 ReviewReport production exclusion register，验证所有 rejected / never-production 候选被登记，pass 候选不被永久排除，unknown failure 同时阻断 memory 与 production。
 v14.077 还用 `tests/schema_examples/review_report_memory_admission_register.example.json` 固化 ReviewReport memory admission register，验证 pass 只能进入 memory_delta 草案、mapped reject 只能进入 failure lesson 草案、unknown failure 永久不得进入 memory，且所有真实记忆写入仍被阻断。
 v14.078 还用 `tests/schema_examples/review_report_memory_delta_draft_register.example.json` 固化 ReviewReport memory_delta 草案 register，验证可起草候选都有中文草案、unknown failure 不创建草案，且所有真实记忆写入仍被阻断。
+v14.079 还用 `tests/schema_examples/review_report_protocol_final_closeout.example.json` 固化 ReviewReport 本地协议链 closeout，验证 route、admission、production exclusion、memory admission 和 memory draft 五层证据闭合。
 
 ## 文件说明
 
@@ -100,3 +101,4 @@ v14.078 还用 `tests/schema_examples/review_report_memory_delta_draft_register.
 `review_report_production_exclusion_register.example.json` 必须验证 ReviewReport admission matrix 的 rejected candidates 都进入 production exclusion register，且 pass candidate 不进入永久 exclusion；它是回归证据，不是执行授权。
 `review_report_memory_admission_register.example.json` 必须验证 ReviewReport admission matrix 的 memory 路径只产生草案或永久禁止记录，且不允许 DailyNote、VCP memory、direct memory、accepted_samples 或 production candidate 写入；它是回归证据，不是执行授权。
 `review_report_memory_delta_draft_register.example.json` 必须验证 ReviewReport memory admission 的可起草候选只产生待人工审批的中文 memory_delta / failure lesson 草案，memory-forbidden 候选不得创建草案，且不允许任何真实记忆或生产写入；它是回归证据，不是执行授权。
+`review_report_protocol_final_closeout.example.json` 必须验证 ReviewReport 从 route summary 到 memory draft register 的本地证据链闭合，且不允许任何真实记忆、生产、provider、plugin、API 或图片动作；它是回归证据，不是执行授权。

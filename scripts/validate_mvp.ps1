@@ -72,6 +72,7 @@ $requiredFiles = @(
   'scripts/validate_review_report_production_exclusion_register.js',
   'scripts/validate_review_report_memory_admission_register.js',
   'scripts/validate_review_report_memory_delta_draft_register.js',
+  'scripts/validate_review_report_protocol_final_closeout.js',
   'scripts/validate_review_blocker_arbiter_route_summary.js',
   'scripts/validate_review_memory_admission_control.js',
   'scripts/validate_review_production_admission_control.js',
@@ -202,6 +203,7 @@ $requiredFiles = @(
   'tests/schema_examples/review_report_production_exclusion_register.example.json',
   'tests/schema_examples/review_report_memory_admission_register.example.json',
   'tests/schema_examples/review_report_memory_delta_draft_register.example.json',
+  'tests/schema_examples/review_report_protocol_final_closeout.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix_v14_062.example.json',
   'tests/schema_examples/review_blocker_arbiter_route_summary.example.json',
@@ -261,6 +263,7 @@ $requiredFiles = @(
   'docs/v14_076_review_report_production_exclusion_register_gate.md',
   'docs/v14_077_review_report_memory_admission_register_gate.md',
   'docs/v14_078_review_report_memory_delta_draft_register_gate.md',
+  'docs/v14_079_review_report_final_local_closeout_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -4018,6 +4021,11 @@ if (-not $node) {
     Add-Failure "scripts/validate_review_report_memory_delta_draft_register.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'scripts/validate_review_report_protocol_final_closeout.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_review_report_protocol_final_closeout.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_review_blocker_arbiter_route_summary.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_review_blocker_arbiter_route_summary.js failed node --check"
@@ -6381,6 +6389,40 @@ if (-not $node) {
     }
     if ($reviewReportMemoryDeltaDraft.review_report_memory_delta_draft_register.file_write_performed -ne $false) {
       Add-Failure "ReviewReport memory delta draft register validation must not write files"
+    }
+  }
+
+  $reviewReportProtocolCloseoutOutput = & node (Join-Path $Root 'scripts/validate_review_report_protocol_final_closeout.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "ReviewReport protocol final closeout validation exited with failure"
+  } else {
+    $reviewReportProtocolCloseout = ($reviewReportProtocolCloseoutOutput -join "`n") | ConvertFrom-Json
+    if ($reviewReportProtocolCloseout.passed -ne $true) {
+      Add-Failure "ReviewReport protocol final closeout validation must report passed true"
+    }
+    foreach ($reviewReportProtocolCloseoutCheck in @(
+      @{ Flag = 'review_report_protocol_final_closeout_present'; Message = 'ReviewReport protocol final closeout must be present' },
+      @{ Flag = 'review_report_protocol_final_closeout_candidate_ids_unique'; Message = 'ReviewReport protocol final closeout must have unique candidate ids' },
+      @{ Flag = 'review_report_protocol_final_closeout_exact_candidate_set_verified'; Message = 'ReviewReport protocol final closeout must verify exact candidate set' },
+      @{ Flag = 'review_report_protocol_final_closeout_route_summary_binding_verified'; Message = 'ReviewReport protocol final closeout must verify route summary binding' },
+      @{ Flag = 'review_report_protocol_final_closeout_admission_binding_verified'; Message = 'ReviewReport protocol final closeout must verify admission binding' },
+      @{ Flag = 'review_report_protocol_final_closeout_production_exclusion_binding_verified'; Message = 'ReviewReport protocol final closeout must verify production exclusion binding' },
+      @{ Flag = 'review_report_protocol_final_closeout_memory_admission_binding_verified'; Message = 'ReviewReport protocol final closeout must verify memory admission binding' },
+      @{ Flag = 'review_report_protocol_final_closeout_memory_delta_draft_binding_verified'; Message = 'ReviewReport protocol final closeout must verify memory delta draft binding' },
+      @{ Flag = 'review_report_protocol_final_closeout_pass_path_verified'; Message = 'ReviewReport protocol final closeout must verify pass path' },
+      @{ Flag = 'review_report_protocol_final_closeout_mapped_reject_path_verified'; Message = 'ReviewReport protocol final closeout must verify mapped reject path' },
+      @{ Flag = 'review_report_protocol_final_closeout_unknown_failure_path_verified'; Message = 'ReviewReport protocol final closeout must verify unknown failure path' },
+      @{ Flag = 'review_report_protocol_final_closeout_no_memory_write_verified'; Message = 'ReviewReport protocol final closeout must verify no memory write' },
+      @{ Flag = 'review_report_protocol_final_closeout_no_production_write_verified'; Message = 'ReviewReport protocol final closeout must verify no production write' },
+      @{ Flag = 'review_report_protocol_final_closeout_no_provider_plugin_api_image_verified'; Message = 'ReviewReport protocol final closeout must verify no provider/plugin/API/image effects' },
+      @{ Flag = 'review_report_protocol_final_closeout_local_only_verified'; Message = 'ReviewReport protocol final closeout must be local only' }
+    )) {
+      if ($reviewReportProtocolCloseout.review_report_protocol_final_closeout.($reviewReportProtocolCloseoutCheck.Flag) -ne $true) {
+        Add-Failure $reviewReportProtocolCloseoutCheck.Message
+      }
+    }
+    if ($reviewReportProtocolCloseout.review_report_protocol_final_closeout.file_write_performed -ne $false) {
+      Add-Failure "ReviewReport protocol final closeout validation must not write files"
     }
   }
 

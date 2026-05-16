@@ -337,6 +337,21 @@ Phase 9 审批记录必须满足：
 
 `review_report_memory_delta_draft_register.example.json` 是本地草案证据，不是 memory 写入记录。它只证明草案正文和候选映射可审计，并且所有真实记忆写入仍被阻断。
 
+## v14.079 ReviewReport Final Local Closeout
+
+本节用于验收 ReviewReport 本地协议链 closeout。它仍然只读取项目内 route summary、admission matrix、production exclusion、memory admission 和 memory delta draft register，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
+
+| Source | Target | Rule |
+| --- | --- | --- |
+| five ReviewReport local artifacts | `review_report_protocol_final_closeout.protocol_chain` | route、admission、production exclusion、memory admission、memory draft 五层必须全部 verified |
+| every candidate id | `candidate_closeout_records` | 每个候选必须有最终 pass/reject、memory、production、blocker 解释 |
+| pass closeout | `final_production_state` | pass 仍然只可待人工 review 和单独 promotion gate，不得现在 production |
+| mapped reject closeout | `production_output_final` | mapped reject 只可 failure learning，永远不得 production |
+| unknown failure closeout | `memory_output_final` | unknown failure 必须 `memory_forbidden_no_draft` 且永远不得 production |
+| `no_execution_guard` | `review_report_protocol_final_closeout.no_execution_guard` | provider/plugin/API/image/DailyNote/VCP memory/output/accepted_samples/production candidate 写入必须保持 false |
+
+`review_report_protocol_final_closeout.example.json` 是本地 closeout 证据，不是执行授权。它只证明审片结果协议在本地证据链上已经闭合。
+
 ## v14.061 Review Blocker Arbiter Draft Output Snapshot
 
 本节用于验收静态 Review Console 的 `renderDraft()` 草案输出没有丢失审片阻断仲裁字段。它仍然只执行本目录内静态 JS 的 mock DOM 校验，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
