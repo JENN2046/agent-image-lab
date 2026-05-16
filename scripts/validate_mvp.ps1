@@ -70,6 +70,7 @@ $requiredFiles = @(
   'scripts/validate_review_report_route_summary.js',
   'scripts/validate_review_report_admission_control_matrix.js',
   'scripts/validate_review_report_production_exclusion_register.js',
+  'scripts/validate_review_report_memory_admission_register.js',
   'scripts/validate_review_blocker_arbiter_route_summary.js',
   'scripts/validate_review_memory_admission_control.js',
   'scripts/validate_review_production_admission_control.js',
@@ -198,6 +199,7 @@ $requiredFiles = @(
   'tests/schema_examples/review_report_route_summary.example.json',
   'tests/schema_examples/review_report_admission_control_matrix.example.json',
   'tests/schema_examples/review_report_production_exclusion_register.example.json',
+  'tests/schema_examples/review_report_memory_admission_register.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix_v14_062.example.json',
   'tests/schema_examples/review_blocker_arbiter_route_summary.example.json',
@@ -255,6 +257,7 @@ $requiredFiles = @(
   'docs/v14_074_review_report_route_summary_gate.md',
   'docs/v14_075_review_report_admission_control_matrix_gate.md',
   'docs/v14_076_review_report_production_exclusion_register_gate.md',
+  'docs/v14_077_review_report_memory_admission_register_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -4002,6 +4005,11 @@ if (-not $node) {
     Add-Failure "scripts/validate_review_report_production_exclusion_register.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'scripts/validate_review_report_memory_admission_register.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_review_report_memory_admission_register.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_review_blocker_arbiter_route_summary.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_review_blocker_arbiter_route_summary.js failed node --check"
@@ -6293,6 +6301,42 @@ if (-not $node) {
     }
     if ($reviewReportProductionExclusion.review_report_production_exclusion_register.file_write_performed -ne $false) {
       Add-Failure "ReviewReport production exclusion register validation must not write files"
+    }
+  }
+
+  $reviewReportMemoryAdmissionOutput = & node (Join-Path $Root 'scripts/validate_review_report_memory_admission_register.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "ReviewReport memory admission register validation exited with failure"
+  } else {
+    $reviewReportMemoryAdmission = ($reviewReportMemoryAdmissionOutput -join "`n") | ConvertFrom-Json
+    if ($reviewReportMemoryAdmission.passed -ne $true) {
+      Add-Failure "ReviewReport memory admission register validation must report passed true"
+    }
+    foreach ($reviewReportMemoryAdmissionCheck in @(
+      @{ Flag = 'review_report_memory_admission_register_present'; Message = 'ReviewReport memory admission register must be present' },
+      @{ Flag = 'review_report_memory_admission_candidate_ids_unique'; Message = 'ReviewReport memory admission register must have unique candidate ids' },
+      @{ Flag = 'review_report_memory_admission_exact_candidate_set_verified'; Message = 'ReviewReport memory admission register must verify exact candidate set' },
+      @{ Flag = 'review_report_memory_admission_matches_admission_matrix'; Message = 'ReviewReport memory admission register must match admission matrix' },
+      @{ Flag = 'review_report_memory_admission_matches_route_summary'; Message = 'ReviewReport memory admission register must match route summary' },
+      @{ Flag = 'review_report_memory_admission_matches_production_exclusion_register'; Message = 'ReviewReport memory admission register must match production exclusion register' },
+      @{ Flag = 'review_report_memory_admission_memory_delta_draft_only_verified'; Message = 'ReviewReport memory admission register must verify memory_delta draft only' },
+      @{ Flag = 'review_report_memory_admission_failure_lesson_draft_only_verified'; Message = 'ReviewReport memory admission register must verify failure lesson draft only' },
+      @{ Flag = 'review_report_memory_admission_unknown_failure_memory_forbidden_verified'; Message = 'ReviewReport memory admission register must verify unknown failure memory-forbidden' },
+      @{ Flag = 'review_report_memory_admission_memory_entry_blocked_now'; Message = 'ReviewReport memory admission register must block memory entries now' },
+      @{ Flag = 'review_report_memory_admission_all_drafts_require_human_approval'; Message = 'ReviewReport memory admission register drafts must require human approval' },
+      @{ Flag = 'review_report_memory_admission_no_direct_memory_write_verified'; Message = 'ReviewReport memory admission register must verify no direct memory write' },
+      @{ Flag = 'review_report_memory_admission_no_daily_note_write_verified'; Message = 'ReviewReport memory admission register must verify no DailyNote write' },
+      @{ Flag = 'review_report_memory_admission_no_vcp_memory_write_verified'; Message = 'ReviewReport memory admission register must verify no VCP memory write' },
+      @{ Flag = 'review_report_memory_admission_no_accepted_samples_write_verified'; Message = 'ReviewReport memory admission register must verify no accepted_samples write' },
+      @{ Flag = 'review_report_memory_admission_no_production_candidate_verified'; Message = 'ReviewReport memory admission register must verify no production candidate' },
+      @{ Flag = 'review_report_memory_admission_no_provider_plugin_api_image_verified'; Message = 'ReviewReport memory admission register must verify no provider/plugin/API/image effects' }
+    )) {
+      if ($reviewReportMemoryAdmission.review_report_memory_admission_register.($reviewReportMemoryAdmissionCheck.Flag) -ne $true) {
+        Add-Failure $reviewReportMemoryAdmissionCheck.Message
+      }
+    }
+    if ($reviewReportMemoryAdmission.review_report_memory_admission_register.file_write_performed -ne $false) {
+      Add-Failure "ReviewReport memory admission register validation must not write files"
     }
   }
 

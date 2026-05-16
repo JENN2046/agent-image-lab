@@ -308,6 +308,20 @@ Phase 9 审批记录必须满足：
 
 `review_report_production_exclusion_register.example.json` 是本地 production exclusion 证据，不是生产执行记录。它只证明哪些候选永远不得进入 production，并且本 gate 不允许移除 exclusion。
 
+## v14.077 ReviewReport Memory Admission Register
+
+本节用于验收 ReviewReport 的 memory admission register。它仍然只读取项目内 admission matrix / route summary / production exclusion register，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
+
+| Source | Target | Rule |
+| --- | --- | --- |
+| pass rows in `review_report_admission_control_matrix.candidate_admissions` | `review_report_memory_admission_register.memory_admission_records` | pass 候选只能生成 `memory_delta_draft_only`，并且必须等待人工 memory approval |
+| mapped reject rows | `memory_admission_records[].memory_draft_type` | mapped reject 只能生成 failure lesson draft，不能写入 DailyNote 或 VCP memory |
+| unknown failure reject | `memory_admission_records[].blocked_destinations` | unknown failure 必须 `memory_forbidden=true` 并阻断 `memory_forever` |
+| `register_summary` | Review Console guard summary | `no_memory_entry_allowed_now=true`、`all_memory_writes_blocked_now=true`、`all_memory_drafts_require_human_approval=true` |
+| `no_execution_guard` | `review_report_memory_admission_register.no_execution_guard` | provider/plugin/API/image/DailyNote/VCP memory/output/accepted_samples/production candidate 写入必须保持 false |
+
+`review_report_memory_admission_register.example.json` 是本地 memory admission 证据，不是 memory 写入记录。它只证明哪些候选可形成草案、哪些候选永久 memory-forbidden，以及所有真实记忆写入仍被阻断。
+
 ## v14.061 Review Blocker Arbiter Draft Output Snapshot
 
 本节用于验收静态 Review Console 的 `renderDraft()` 草案输出没有丢失审片阻断仲裁字段。它仍然只执行本目录内静态 JS 的 mock DOM 校验，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
