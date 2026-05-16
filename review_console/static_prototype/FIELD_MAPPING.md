@@ -106,6 +106,22 @@ Phase 9 审批记录必须满足：
 
 `accepted_draft` 不等于真实执行授权。静态 Review Console 只能展示 handoff 和审批动作草案，不能触发插件执行、API 调用、DailyNote 写入、文件写入或图片创建。
 
+## v14.041 Review Result Protocol Static Handoff 映射
+
+本节用于验收 PVOS adapter 输出中的硬审片结果协议进入静态 Review Console 草案输出。它只读取项目内 fixture，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
+
+| PVOS adapter / protocol 字段 | Review Console 草案字段 | 说明 |
+| --- | --- | --- |
+| `review_result_protocol_report.candidate_review_results` | `review_result_protocol_static_handoff.candidate_review_results` | 每个候选必须有 `review_outcome`、`pass_reasons` 或 `reject_reasons` |
+| `review_result_protocol_report.report_summary` | `review_result_protocol_static_handoff.report_summary` | 必须保留 `pass_count`、`reject_count`、`never_production_count` |
+| `review_result_protocol_handoff_draft.required_review_fields` | `review_result_protocol_static_handoff.required_review_fields` | 静态审片台必须展示/携带 `review_outcome`、`pass_reasons`、`reject_reasons`、`memory_route`、`production_route` |
+| pass candidate `memory_route` | `candidate_review_results[].memory_route` | pass 只能进入 `draft_memory_candidate`，且不得直接写 DailyNote 或 VCP memory |
+| reject candidate `memory_route` | `candidate_review_results[].memory_route` | reject 只能进入 `audit_only_failure_learning` 草案 |
+| reject candidate `production_route.status` | `candidate_review_results[].production_route.status` | 带 mapped failure tags 的 reject 必须是 `never_production` |
+| `production_candidate_created` | `review_result_protocol_static_handoff.report_summary.production_candidate_created` | 必须为 `false` |
+
+静态 Review Console 只能生成草案输出；协议 pass 不等于生产批准，协议 reject 不得被 promotion 流程绕过。任何 `never_production` 候选都只能作为失败学习或审计信息，不能进入 production。
+
 ## 原型防越界标记
 
 草案输出包含：

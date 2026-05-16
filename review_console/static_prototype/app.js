@@ -22,6 +22,7 @@ const state = {
   next_iteration: mock.review_session.next_iteration,
   audit_log: mock.review_session.audit_log,
   adapter_dry_run_handoff: mock.adapter_dry_run_handoff,
+  review_result_protocol_static_handoff: mock.review_result_protocol_static_handoff,
   humanScores: { ...mock.review_session.human_review.breakdown }
 };
 
@@ -348,6 +349,7 @@ function renderDraft() {
   const humanTotal = totalFrom(state.humanScores);
   const draft = {
     adapter_dry_run_handoff: state.adapter_dry_run_handoff,
+    review_result_protocol_static_handoff: state.review_result_protocol_static_handoff,
     review_session: buildReviewSession(memoryApproval, humanTotal),
     image_case: buildImageCase(humanTotal),
     memory_delta: buildMemoryDelta(memoryApproval),

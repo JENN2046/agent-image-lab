@@ -174,6 +174,7 @@ $requiredFiles = @(
   'docs/v14_038_pvos_kernel_dry_run_adapter_gate.md',
   'docs/v14_039_review_result_protocol_hardening_gate.md',
   'docs/v14_040_review_protocol_adapter_binding_gate.md',
+  'docs/v14_041_review_console_protocol_static_contract_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -5241,6 +5242,24 @@ if (-not $node) {
     if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.forbidden_actions_verified -ne $true) {
       Add-Failure "Review Console Adapter handoff must verify forbidden actions"
     }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.review_result_protocol_static_handoff_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify review result protocol static handoff"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.review_protocol_pass_reasons_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify pass reasons"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.review_protocol_reject_reasons_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify reject reasons"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.review_protocol_memory_route_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify memory routes"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.review_protocol_never_production_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify never_production"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.review_protocol_production_candidate_blocked -ne $true) {
+      Add-Failure "Review Console Adapter handoff must block production candidate creation"
+    }
     if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.file_write_performed -ne $false) {
       Add-Failure "Review Console Adapter handoff validation must not write files"
     }
@@ -5790,6 +5809,7 @@ if (-not $node) {
       'prompts/',
       'review_console/embed_contract/',
       'review_console/runtime_prototype/',
+      'review_console/static_prototype/',
       'schemas/',
       'scripts/',
       'stability_tests/',

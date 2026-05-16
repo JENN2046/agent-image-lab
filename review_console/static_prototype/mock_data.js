@@ -213,6 +213,78 @@ window.REVIEW_CONSOLE_MOCK = {
       real_execution_allowed: false
     }
   },
+  review_result_protocol_static_handoff: {
+    source_adapter_response_ref: "tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json",
+    status: "draft_ready",
+    display_only: true,
+    review_result_protocol_report_attached: true,
+    required_review_fields: [
+      "review_outcome",
+      "pass_reasons",
+      "reject_reasons",
+      "memory_route",
+      "production_route"
+    ],
+    candidate_review_results: [
+      {
+        candidate_id: "candidate_accept_metadata_001",
+        review_outcome: "pass",
+        pass_reasons: [
+          "weighted_score_meets_accept_threshold",
+          "no_failure_tags_present"
+        ],
+        reject_reasons: [],
+        memory_route: {
+          route: "draft_memory_candidate",
+          direct_write_performed: false,
+          requires_human_memory_approval: true
+        },
+        production_route: {
+          status: "blocked_until_human_review",
+          production_candidate: false,
+          allowed_for_production: false,
+          human_review_required: true
+        }
+      },
+      {
+        candidate_id: "candidate_reject_metadata_001",
+        review_outcome: "reject",
+        pass_reasons: [],
+        reject_reasons: [
+          "weighted_score_below_accept_threshold",
+          "weighted_score_below_reject_threshold",
+          "mapped_failure_tags_present"
+        ],
+        memory_route: {
+          route: "audit_only_failure_learning",
+          direct_write_performed: false,
+          requires_human_memory_approval: true
+        },
+        production_route: {
+          status: "never_production",
+          production_candidate: false,
+          allowed_for_production: false,
+          human_review_required: true,
+          permanent_block: true
+        }
+      }
+    ],
+    report_summary: {
+      pass_count: 1,
+      reject_count: 1,
+      never_production_count: 1,
+      direct_memory_write_performed: false,
+      production_candidate_created: false
+    },
+    protocol_guards: {
+      pass_requires_non_empty_pass_reasons: true,
+      reject_requires_non_empty_reject_reasons: true,
+      every_candidate_has_memory_route: true,
+      every_candidate_has_production_route: true,
+      direct_memory_write_performed: false,
+      production_candidate_created: false
+    }
+  },
   image_case_seed: {
     input_assets: ["asset_archive/references/photo_studio_os_reference.placeholder"],
     prompt_package_id: "prompt-package-photo-studio-os-001",
