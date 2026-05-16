@@ -9,12 +9,49 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v14_023_visual_eval_failure_tag_mapping_planning_gate. This docs-only planning gate maps failure taxonomy tags into hard reject, patch candidate, archive-reference-only, and human-review escalation routing. It does not authorize prototype edits, script edits, schema files, eval sample files, accepted/rejected registries, accepted_samples writes, browser preview, runtime execution, provider contact, image generation, memory writes, production_candidate_002, memory_write_path, or Batch_005.
+Agent Image Lab is in v14_024_visual_eval_minimal_seed_set_planning_gate. This docs-only planning gate defines future accepted and rejected seed targets, recurring failure-type coverage, seed record fields, and mapping between seed categories, rubric dimensions, and failure tags. It does not authorize prototype edits, script edits, schema files, eval sample files, accepted/rejected registries, accepted_samples writes, image binary reads, browser preview, runtime execution, provider contact, image generation, memory writes, production_candidate_002, memory_write_path, or Batch_005.
 ```
 
 ## Current Phase
 
 ```text
+V14.024 Visual Eval Minimal Seed Set Planning Gate
+phase_id: v14_024_visual_eval_minimal_seed_set_planning_gate
+status: completed_remote_synced_after_guarded_push
+source_phase: v14_023_visual_eval_failure_tag_mapping_planning_gate
+source_commit: 97311f9c72c3faa8875f15151a0f232f9edc3f4c
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+branch: master tracking origin/master
+phase_record: docs/v14_024_visual_eval_minimal_seed_set_planning_gate.md
+minimal_seed_set_planning_created: true
+accepted_examples_target: 10
+rejected_examples_target: 10
+recurring_failure_types_target: 5
+accepted_seed_categories_planned: true
+rejected_seed_categories_planned: true
+seed_record_fields_planned: true
+rubric_dimension_mapping_planned: true
+failure_tag_mapping_planned: true
+memory_suitability_default_false: true
+production_candidate_eligible_default_false: true
+schema_files_created: false
+eval_samples_created: false
+accepted_samples_written: false
+image_binaries_read: false
+prototype_files_modified: false
+scripts_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+image_generation: false
+memory_write: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v14_025_visual_eval_seed_record_schema_planning_gate
+docs_only_gate_creation_and_validation_only: true
+runtime_provider_image_memory_production_batch: false
+next_phase_started: false
+---
 V14.023 Visual Eval Failure Tag Mapping Planning Gate
 phase_id: v14_023_visual_eval_failure_tag_mapping_planning_gate
 status: completed_remote_synced_after_guarded_push
