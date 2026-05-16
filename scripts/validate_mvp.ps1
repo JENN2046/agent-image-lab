@@ -67,6 +67,7 @@ $requiredFiles = @(
   'scripts/validate_review_console_adapter_handoff.js',
   'scripts/validate_review_console_blocker_arbiter_regression_matrix.js',
   'scripts/validate_review_blocker_arbiter_route_summary.js',
+  'scripts/validate_review_memory_admission_control.js',
   'scripts/validate_review_console_blocker_arbiter_boundary_scan.js',
   'scripts/validate_v5_local_sync_readiness.js',
   'scripts/validate_v5_post_commit_reconciliation.js',
@@ -186,6 +187,7 @@ $requiredFiles = @(
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix_v14_062.example.json',
   'tests/schema_examples/review_blocker_arbiter_route_summary.example.json',
+  'tests/schema_examples/review_memory_admission_control.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_boundary_scan.example.json',
   'tests/schema_examples/review_result_protocol_input.example.json',
   'tests/schema_examples/review_result_protocol_report.example.json',
@@ -223,6 +225,7 @@ $requiredFiles = @(
   'docs/v14_061_review_console_blocker_arbiter_draft_output_snapshot_gate.md',
   'docs/v14_062_review_console_blocker_arbiter_regression_matrix_refresh_gate.md',
   'docs/v14_063_review_blocker_arbiter_route_summary_gate.md',
+  'docs/v14_064_review_memory_admission_control_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -3955,6 +3958,11 @@ if (-not $node) {
     Add-Failure "scripts/validate_review_blocker_arbiter_route_summary.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'scripts/validate_review_memory_admission_control.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_review_memory_admission_control.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_review_console_blocker_arbiter_boundary_scan.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_review_console_blocker_arbiter_boundary_scan.js failed node --check"
@@ -6087,6 +6095,49 @@ if (-not $node) {
     }
     if ($reviewBlockerArbiterRouteSummary.review_blocker_arbiter_route_summary.file_write_performed -ne $false) {
       Add-Failure "Review blocker arbiter route summary validation must not write files"
+    }
+  }
+
+  $reviewMemoryAdmissionControlOutput = & node (Join-Path $Root 'scripts/validate_review_memory_admission_control.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review memory admission control validation exited with failure"
+  } else {
+    $reviewMemoryAdmissionControl = ($reviewMemoryAdmissionControlOutput -join "`n") | ConvertFrom-Json
+    if ($reviewMemoryAdmissionControl.passed -ne $true) {
+      Add-Failure "Review memory admission control validation must report passed true"
+    }
+    if ($reviewMemoryAdmissionControl.review_memory_admission_control.memory_admission_control_present -ne $true) {
+      Add-Failure "Review memory admission control must be present"
+    }
+    if ($reviewMemoryAdmissionControl.review_memory_admission_control.memory_admission_matches_route_summary -ne $true) {
+      Add-Failure "Review memory admission control must match route summary"
+    }
+    if ($reviewMemoryAdmissionControl.review_memory_admission_control.memory_admission_pass_draft_verified -ne $true) {
+      Add-Failure "Review memory admission control must verify pass draft route"
+    }
+    if ($reviewMemoryAdmissionControl.review_memory_admission_control.memory_admission_reject_failure_learning_verified -ne $true) {
+      Add-Failure "Review memory admission control must verify reject failure-learning route"
+    }
+    if ($reviewMemoryAdmissionControl.review_memory_admission_control.memory_admission_human_approval_required -ne $true) {
+      Add-Failure "Review memory admission control must require human memory approval"
+    }
+    if ($reviewMemoryAdmissionControl.review_memory_admission_control.memory_admission_daily_note_blocked -ne $true) {
+      Add-Failure "Review memory admission control must block DailyNote writes"
+    }
+    if ($reviewMemoryAdmissionControl.review_memory_admission_control.memory_admission_vcp_memory_blocked -ne $true) {
+      Add-Failure "Review memory admission control must block VCP memory writes"
+    }
+    if ($reviewMemoryAdmissionControl.review_memory_admission_control.memory_admission_no_direct_memory_write_verified -ne $true) {
+      Add-Failure "Review memory admission control must verify no direct memory write"
+    }
+    if ($reviewMemoryAdmissionControl.review_memory_admission_control.memory_admission_no_production_candidate_verified -ne $true) {
+      Add-Failure "Review memory admission control must verify no production candidate"
+    }
+    if ($reviewMemoryAdmissionControl.review_memory_admission_control.memory_admission_no_accepted_samples_write_verified -ne $true) {
+      Add-Failure "Review memory admission control must verify no accepted_samples write"
+    }
+    if ($reviewMemoryAdmissionControl.review_memory_admission_control.file_write_performed -ne $false) {
+      Add-Failure "Review memory admission control validation must not write files"
     }
   }
 

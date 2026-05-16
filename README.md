@@ -7,6 +7,49 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current phase: v14_064_review_memory_admission_control_gate.
+phase_status: completed_local_validated.
+source_phase: v14_063_review_blocker_arbiter_route_summary_gate.
+source_commit: 408fa84.
+selected_product_route: review_memory_admission_control.
+Current mainline state: Agent Image Lab now has a local memory admission control record that proves passed candidates can only become memory_delta drafts, rejected candidates can only become failure-learning drafts, and no candidate may enter DailyNote or VCP memory without future human memory approval.
+phase_record: docs/v14_064_review_memory_admission_control_gate.md.
+memory_admission_fixture_created: tests/schema_examples/review_memory_admission_control.example.json.
+validator_created: scripts/validate_review_memory_admission_control.js.
+validator_wiring_modified: scripts/validate_mvp.ps1.
+memory_admission_control_present: true.
+memory_admission_matches_route_summary: true.
+memory_admission_pass_draft_verified: true.
+memory_admission_reject_failure_learning_verified: true.
+memory_admission_human_approval_required: true.
+memory_admission_daily_note_blocked: true.
+memory_admission_vcp_memory_blocked: true.
+memory_admission_no_direct_memory_write_verified: true.
+memory_admission_no_production_candidate_verified: true.
+memory_admission_no_accepted_samples_write_verified: true.
+direct_memory_write_performed: false.
+production_candidate_created: false.
+accepted_samples_written: false.
+image_binaries_read: false.
+runs_output_committed: false.
+runtime_prototype_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+plugin_call: false.
+api_call: false.
+image_generation: false.
+memory_write: false.
+DailyNote_write: false.
+VCP_memory_write: false.
+production_candidate_002: false.
+Batch_005: false.
+push_performed: false.
+recommended_next: v14_065_review_production_admission_control_gate.
+recommended_next_auto_execution_allowed: true.
+push_requires_explicit_remote_authorization: true.
+runtime_provider_image_memory_production_batch: false.
+next_phase_started: false.
 Current phase: v14_063_review_blocker_arbiter_route_summary_gate.
 phase_status: completed_local_validated.
 source_phase: v14_062_review_console_blocker_arbiter_regression_matrix_refresh_gate.

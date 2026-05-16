@@ -1,0 +1,110 @@
+{
+  "memory_admission_control_id": "review_memory_admission_control_v14_064_001",
+  "phase": "v14_064_review_memory_admission_control_gate",
+  "source_phase": "v14_063_review_blocker_arbiter_route_summary_gate",
+  "source_commit": "408fa84",
+  "status": "local_memory_admission_control",
+  "display_only": true,
+  "source_route_summary_ref": "tests/schema_examples/review_blocker_arbiter_route_summary.example.json",
+  "source_snapshot_ref": "tests/schema_examples/review_console_blocker_arbiter_draft_output_snapshot.example.json",
+  "memory_admissions": [
+    {
+      "candidate_id": "candidate_accept_metadata_001",
+      "review_outcome": "pass",
+      "route_summary_final_route": "pass_draft_only_pending_human_review",
+      "memory_route": "draft_memory_candidate",
+      "memory_decision": "block_until_human_memory_approval",
+      "memory_destination": "memory_delta_draft_only",
+      "admission_status": "draft_only_pending_human_memory_approval",
+      "memory_entry_allowed_now": false,
+      "memory_draft_allowed": true,
+      "requires_human_memory_approval": true,
+      "daily_note_write_allowed": false,
+      "daily_note_write_performed": false,
+      "vcp_memory_write_allowed": false,
+      "vcp_memory_write_performed": false,
+      "direct_memory_write_performed": false,
+      "production_candidate_created": false,
+      "accepted_samples_write_performed": false,
+      "never_production": false,
+      "admission_blockers": [
+        "human_memory_approval_missing",
+        "daily_note_direct_write_forbidden",
+        "vcp_memory_write_forbidden"
+      ],
+      "allowed_output_now": "memory_delta_draft_only",
+      "forbidden_outputs": [
+        "DailyNote_write",
+        "VCP_memory_write",
+        "direct_memory_write",
+        "accepted_samples_write",
+        "production_candidate"
+      ]
+    },
+    {
+      "candidate_id": "candidate_reject_metadata_001",
+      "review_outcome": "reject",
+      "route_summary_final_route": "reject_failure_learning_only_never_production",
+      "memory_route": "audit_only_failure_learning",
+      "memory_decision": "block_until_human_memory_approval",
+      "memory_destination": "failure_lesson_draft_only",
+      "admission_status": "failure_learning_draft_only_pending_human_memory_approval",
+      "memory_entry_allowed_now": false,
+      "memory_draft_allowed": true,
+      "requires_human_memory_approval": true,
+      "daily_note_write_allowed": false,
+      "daily_note_write_performed": false,
+      "vcp_memory_write_allowed": false,
+      "vcp_memory_write_performed": false,
+      "direct_memory_write_performed": false,
+      "production_candidate_created": false,
+      "accepted_samples_write_performed": false,
+      "never_production": true,
+      "failure_tags": [
+        "lighting_flat",
+        "composition_imbalance"
+      ],
+      "admission_blockers": [
+        "human_memory_approval_missing",
+        "daily_note_direct_write_forbidden",
+        "vcp_memory_write_forbidden",
+        "never_production_candidate"
+      ],
+      "allowed_output_now": "failure_lesson_draft_only",
+      "forbidden_outputs": [
+        "DailyNote_write",
+        "VCP_memory_write",
+        "direct_memory_write",
+        "accepted_samples_write",
+        "production_candidate",
+        "production_promotion"
+      ]
+    }
+  ],
+  "admission_summary": {
+    "candidate_count": 2,
+    "memory_draft_allowed_count": 2,
+    "memory_entry_allowed_now_count": 0,
+    "human_memory_approval_required_count": 2,
+    "daily_note_write_allowed_count": 0,
+    "vcp_memory_write_allowed_count": 0,
+    "never_production_count": 1,
+    "direct_memory_write_performed": false,
+    "production_candidate_created": false,
+    "accepted_samples_write_performed": false,
+    "all_memory_entries_blocked_now": true,
+    "all_memory_writes_blocked": true,
+    "all_production_candidates_blocked": true
+  },
+  "no_execution_guard": {
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "daily_note_write_performed": false,
+    "vcp_memory_write_performed": false,
+    "image_generation_performed": false,
+    "output_file_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_created": false
+  }
+}
