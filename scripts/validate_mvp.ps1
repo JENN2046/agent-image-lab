@@ -215,6 +215,8 @@ $requiredFiles = @(
   'docs/v14_026_visual_eval_seed_record_schema_draft_gate.md',
   'docs/v14_027_visual_eval_seed_record_validator_planning_gate.md',
   'docs/v14_028_visual_eval_seed_record_validator_implementation_gate.md',
+  'docs/v14_029_visual_eval_rejected_seed_fixture_planning_gate.md',
+  'docs/v14_030_visual_eval_rejected_seed_fixture_implementation_gate.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
@@ -327,6 +329,7 @@ $requiredFiles = @(
   'tests/schema_examples/v10_27_dailynotewrite_root_path_correction.example.yaml',
   'tests/schema_examples/v10_28_dailynote_canonical_location_guard.example.yaml',
   'tests/schema_examples/visual_eval_seed_record.example.yaml',
+  'tests/schema_examples/visual_eval_seed_record.rejected.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -4029,6 +4032,12 @@ if (-not $node) {
     }
     if ($visualEvalSeedRecord.visual_eval_seed_record_schema.example_file_present -ne $true) {
       Add-Failure "visual eval seed record schema validation must verify example file"
+    }
+    if ($visualEvalSeedRecord.visual_eval_seed_record_schema.accepted_example_present -ne $true) {
+      Add-Failure "visual eval seed record schema validation must verify accepted example file"
+    }
+    if ($visualEvalSeedRecord.visual_eval_seed_record_schema.rejected_example_present -ne $true) {
+      Add-Failure "visual eval seed record schema validation must verify rejected example file"
     }
     if ($visualEvalSeedRecord.visual_eval_seed_record_schema.metadata_only_verified -ne $true) {
       Add-Failure "visual eval seed record schema validation must verify metadata-only boundary"

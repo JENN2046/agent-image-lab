@@ -8,6 +8,38 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+status: v14_030_visual_eval_rejected_seed_fixture_implementation_gate
+mode: A4.8 local fixture and validator extension gate
+phase_id: v14_030_visual_eval_rejected_seed_fixture_implementation_gate
+source_phase: v14_029_visual_eval_rejected_seed_fixture_planning_gate
+source_commit: 91391b909bf9a27feb18de17c9198485d0b04e55
+phase_record: docs/v14_030_visual_eval_rejected_seed_fixture_implementation_gate.md
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+rejected_fixture_created: tests/schema_examples/visual_eval_seed_record.rejected.example.yaml
+validator_script_modified: scripts/validate_visual_eval_seed_record_schema.js
+validator_wiring_modified: scripts/validate_mvp.ps1
+accepted_fixture_still_validated: true
+rejected_fixture_validated: true
+seed_ingestion_created: false
+accepted_registry_created: false
+rejected_registry_created: false
+accepted_samples_written: false
+image_binaries_read: false
+prototype_files_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v14_031_visual_eval_seed_registry_planning_gate
+docs_only_registry_planning_only: true
+runtime_provider_image_memory_production_batch: false
+next_phase_started: false
+branch: master
 status: v14_029_visual_eval_rejected_seed_fixture_planning_gate
 mode: A4.8 fixture planning gate
 phase_id: v14_029_visual_eval_rejected_seed_fixture_planning_gate
