@@ -1,5 +1,69 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.052-EVIDENCE-BLOCKER-CONTRACT-NEGATIVE-FIXTURE
+
+Task:
+
+```text
+Pin the evidence/blocker negative guard output as a local fixture and validator target so memory-forbidden rejected candidates remain forbidden from memory, permanently excluded from production, and unable to create production candidates, accepted_samples writes, or memory writes.
+```
+
+Result:
+
+```text
+phase_record: docs/v14_052_evidence_blocker_contract_negative_fixture_gate.md
+source_commit: 5fdb8fa
+selected_product_route: evidence_blocker_negative_fixture
+negative_guard_fixture_created: tests/schema_examples/evidence_blocker_contract_negative_guard.example.json
+validator_modified: scripts/validate_evidence_blocker_contract.js
+validator_wiring_modified: scripts/validate_mvp.ps1
+kernel_readme_modified: kernel/README.md
+negative_guard_example_present: true
+negative_guard_memory_forbidden_route_verified: true
+negative_guard_memory_forbidden_candidate_never_production_verified: true
+negative_guard_unknown_candidate_production_blocker_verified: true
+negative_guard_example_matches_cli_output: true
+negative_guard_memory_forbidden_block_verified: true
+negative_guard_production_exclusion_verified: true
+no_direct_memory_write_verified: true
+no_production_candidate_created_verified: true
+no_accepted_samples_write_verified: true
+direct_memory_write_performed: false
+production_candidate_created: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+validation_result: passed
+```
+
+Commands run:
+
+```text
+node --check scripts/validate_evidence_blocker_contract.js
+node scripts/validate_evidence_blocker_contract.js
+node scripts/validate_agent_board_state.js
+node scripts/validate_current_state_alignment.js
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+git diff --check
+```
+
+Validation notes:
+
+```text
+The focused evidence blocker validator passed with 280 checks and confirmed negative_guard_example_present=true, negative_guard_memory_forbidden_route_verified=true, negative_guard_memory_forbidden_candidate_never_production_verified=true, negative_guard_unknown_candidate_production_blocker_verified=true, and negative_guard_example_matches_cli_output=true. Agent-board, current-state, MVP, local project, and whitespace validation passed. Local project validation reported existing manual-review warning patterns only.
+```
+
+Boundary:
+
+```text
+No runtime prototype edit, provider contact, plugin call, API call, image generation, accepted_samples write, image binary read, runs output commit, DailyNote write, VCP memory write, external manifest read, real VCPChat/VCPToolBox read, real VCP runtime integration, dependency change, package change, tag, release, deploy, or push is performed by v14.052.
+```
+
 ## VALIDATION-20260517-v14.051-REVIEW-CONSOLE-EVIDENCE-BLOCKER-UI-BINDING
 
 Task:

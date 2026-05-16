@@ -128,6 +128,7 @@ node scripts\validate_review_decision_package.js
 
 ```powershell
 node kernel\evidence_blocker_contract.js --input tests\schema_examples\review_result_protocol_input.example.json
+node kernel\evidence_blocker_contract.js --input tests\schema_examples\review_result_protocol_negative_guard_input.example.json
 ```
 
 The evidence blocker contract turns the review decision package into the hard
@@ -150,3 +151,8 @@ node --check kernel\evidence_blocker_contract.js
 node --check scripts\validate_evidence_blocker_contract.js
 node scripts\validate_evidence_blocker_contract.js
 ```
+
+The negative guard fixture is pinned in
+`tests/schema_examples/evidence_blocker_contract_negative_guard.example.json`.
+It must match the CLI output exactly and proves that memory-forbidden candidates
+remain blocked from memory and permanently excluded from production.

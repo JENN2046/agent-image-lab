@@ -179,6 +179,7 @@ $requiredFiles = @(
   'tests/schema_examples/review_result_protocol_negative_guard_input.example.json',
   'tests/schema_examples/review_decision_package.example.json',
   'tests/schema_examples/evidence_blocker_contract.example.json',
+  'tests/schema_examples/evidence_blocker_contract_negative_guard.example.json',
   'tests/schema_examples/pvos_kernel_negative_guard_input.example.json',
   'docs/v14_037_pvos_kernel_minimal_implementation_gate.md',
   'docs/v14_038_pvos_kernel_dry_run_adapter_gate.md',
@@ -195,6 +196,7 @@ $requiredFiles = @(
   'docs/v14_049_evidence_record_and_blocker_decision_contract_gate.md',
   'docs/v14_050_evidence_blocker_adapter_handoff_gate.md',
   'docs/v14_051_review_console_evidence_blocker_ui_binding_gate.md',
+  'docs/v14_052_evidence_blocker_contract_negative_fixture_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -4552,6 +4554,9 @@ if (-not $node) {
     if ($evidenceBlockerContract.evidence_blocker_contract.example_present -ne $true) {
       Add-Failure "Evidence blocker contract validation must verify example"
     }
+    if ($evidenceBlockerContract.evidence_blocker_contract.negative_guard_example_present -ne $true) {
+      Add-Failure "Evidence blocker contract validation must verify negative guard example"
+    }
     if ($evidenceBlockerContract.evidence_blocker_contract.stdout_only -ne $true) {
       Add-Failure "Evidence blocker contract validation must verify stdout-only boundary"
     }
@@ -4573,8 +4578,20 @@ if (-not $node) {
     if ($evidenceBlockerContract.evidence_blocker_contract.negative_guard_memory_forbidden_block_verified -ne $true) {
       Add-Failure "Evidence blocker contract validation must verify negative guard memory-forbidden blocker"
     }
+    if ($evidenceBlockerContract.evidence_blocker_contract.negative_guard_memory_forbidden_route_verified -ne $true) {
+      Add-Failure "Evidence blocker contract validation must verify negative guard memory-forbidden route"
+    }
+    if ($evidenceBlockerContract.evidence_blocker_contract.negative_guard_memory_forbidden_candidate_never_production_verified -ne $true) {
+      Add-Failure "Evidence blocker contract validation must verify memory-forbidden candidate remains never_production"
+    }
+    if ($evidenceBlockerContract.evidence_blocker_contract.negative_guard_unknown_candidate_production_blocker_verified -ne $true) {
+      Add-Failure "Evidence blocker contract validation must verify unknown-failure candidate production blocker"
+    }
     if ($evidenceBlockerContract.evidence_blocker_contract.negative_guard_production_exclusion_verified -ne $true) {
       Add-Failure "Evidence blocker contract validation must verify negative guard production exclusions"
+    }
+    if ($evidenceBlockerContract.evidence_blocker_contract.negative_guard_example_matches_cli_output -ne $true) {
+      Add-Failure "Evidence blocker contract validation must verify negative guard example matches CLI output"
     }
     if ($evidenceBlockerContract.evidence_blocker_contract.no_direct_memory_write_verified -ne $true) {
       Add-Failure "Evidence blocker contract validation must verify direct memory write is false"

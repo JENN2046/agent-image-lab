@@ -9,6 +9,7 @@ const root = path.resolve(__dirname, "..");
 const contractPath = "kernel/evidence_blocker_contract.js";
 const schemaPath = "schemas/evidence_blocker_contract.schema.yaml";
 const examplePath = "tests/schema_examples/evidence_blocker_contract.example.json";
+const negativeExamplePath = "tests/schema_examples/evidence_blocker_contract_negative_guard.example.json";
 const defaultInputPath = "tests/schema_examples/review_result_protocol_input.example.json";
 const negativeInputPath = "tests/schema_examples/review_result_protocol_negative_guard_input.example.json";
 
@@ -37,6 +38,10 @@ function readFile(relativePath) {
 
 function parseJson(relativePath) {
   return JSON.parse(readFile(relativePath));
+}
+
+function deepEqual(actual, expected) {
+  return JSON.stringify(actual) === JSON.stringify(expected);
 }
 
 function validateNoSensitiveMaterial(label, text) {
@@ -225,6 +230,38 @@ function validateNegativeGuardContract(contract) {
     )
   );
   addResult(
+    "negative_guard_memory_forbidden_candidate_memory_route_forbidden",
+    contract.evidence_records.some(
+      (item) =>
+        item.candidate_id === "candidate_reject_unknown_guard_001" &&
+        item.memory_route === "forbidden" &&
+        item.memory_allowed === false &&
+        item.direct_write_performed === false
+    )
+  );
+  addResult(
+    "negative_guard_memory_forbidden_candidate_never_production",
+    contract.production_exclusion_register.some(
+      (item) =>
+        item.candidate_id === "candidate_reject_unknown_guard_001" &&
+        item.status === "never_production" &&
+        item.permanent_block === true &&
+        item.source_blocker_decision_id === "blocker_production_candidate_reject_unknown_guard_001" &&
+        item.production_candidate === false
+    )
+  );
+  addResult(
+    "negative_guard_unknown_candidate_production_blocker_permanent",
+    contract.blocker_decisions.some(
+      (item) =>
+        item.blocker_decision_id === "blocker_production_candidate_reject_unknown_guard_001" &&
+        item.candidate_id === "candidate_reject_unknown_guard_001" &&
+        item.decision === "block_permanently" &&
+        item.permanent_block === true &&
+        item.direct_write_performed === false
+    )
+  );
+  addResult(
     "negative_guard_all_rejected_excluded_from_production",
     ["candidate_reject_mapped_guard_001", "candidate_reject_unknown_guard_001"].every((id) =>
       contract.production_exclusion_register.some((item) => item.candidate_id === id)
@@ -232,7 +269,7 @@ function validateNegativeGuardContract(contract) {
   );
 }
 
-for (const file of [contractPath, schemaPath, examplePath, defaultInputPath, negativeInputPath]) {
+for (const file of [contractPath, schemaPath, examplePath, negativeExamplePath, defaultInputPath, negativeInputPath]) {
   addResult(`${file}_exists`, fs.existsSync(repoPath(file)), file);
 }
 
@@ -251,6 +288,16 @@ try {
   addResult("example_parseable", false, error.message);
 }
 
+let negativeExample = null;
+try {
+  negativeExample = parseJson(negativeExamplePath);
+  validateNegativeGuardContract(negativeExample);
+  addResult("negative_guard_example_parseable", true);
+  validateNoSensitiveMaterial("negative_guard_example", JSON.stringify(negativeExample));
+} catch (error) {
+  addResult("negative_guard_example_parseable", false, error.message);
+}
+
 const defaultContract = runContractCli(defaultInputPath, "default_contract");
 if (defaultContract) {
   validateDefaultContract(defaultContract, "default_contract");
@@ -259,6 +306,13 @@ if (defaultContract) {
 const negativeGuardContract = runContractCli(negativeInputPath, "negative_guard_contract");
 if (negativeGuardContract) {
   validateNegativeGuardContract(negativeGuardContract);
+  if (negativeExample) {
+    addResult(
+      "negative_guard_example_matches_cli_output",
+      deepEqual(negativeGuardContract, negativeExample),
+      "negative guard fixture must stay identical to CLI output"
+    );
+  }
 }
 
 const passed = errors.length === 0;
@@ -266,13 +320,14 @@ const summary = {
   validator: "validate_evidence_blocker_contract",
   version: "v1",
   passed,
-  files_checked: [contractPath, schemaPath, examplePath, defaultInputPath, negativeInputPath],
+  files_checked: [contractPath, schemaPath, examplePath, negativeExamplePath, defaultInputPath, negativeInputPath],
   check_count: results.length,
   failed_count: errors.length,
   evidence_blocker_contract: {
     contract_cli_present: fs.existsSync(repoPath(contractPath)),
     schema_present: fs.existsSync(repoPath(schemaPath)),
     example_present: fs.existsSync(repoPath(examplePath)),
+    negative_guard_example_present: fs.existsSync(repoPath(negativeExamplePath)),
     stdout_only: true,
     evidence_records_verified: true,
     blocker_decisions_verified: true,
@@ -280,7 +335,11 @@ const summary = {
     pass_candidate_blocked_until_human_review_verified: true,
     reject_candidate_never_production_verified: true,
     negative_guard_memory_forbidden_block_verified: true,
+    negative_guard_memory_forbidden_route_verified: true,
+    negative_guard_memory_forbidden_candidate_never_production_verified: true,
+    negative_guard_unknown_candidate_production_blocker_verified: true,
     negative_guard_production_exclusion_verified: true,
+    negative_guard_example_matches_cli_output: negativeExample && negativeGuardContract ? deepEqual(negativeGuardContract, negativeExample) : false,
     no_direct_memory_write_verified: true,
     no_production_candidate_created_verified: true,
     no_accepted_samples_write_verified: true,
