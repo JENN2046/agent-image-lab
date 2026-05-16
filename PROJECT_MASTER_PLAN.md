@@ -8,6 +8,36 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+status: v14_035_visual_eval_seed_registry_static_review_gate
+mode: A4.8 static review gate
+phase_id: v14_035_visual_eval_seed_registry_static_review_gate
+source_phase: v14_034_visual_eval_seed_registry_validator_implementation_gate
+source_commit: 83abefdeaa0479edaac27c577c1973f27d9b34a7
+phase_record: docs/v14_035_visual_eval_seed_registry_static_review_gate.md
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+static_review_result: pass
+validator_script_modified: false
+validator_wiring_modified: false
+schema_files_modified: false
+example_files_modified: false
+seed_ingestion_created: false
+accepted_samples_written: false
+image_binaries_read: false
+prototype_files_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v14_036_visual_eval_seed_registry_closeout_or_expansion_route_gate
+local_closeout_or_metadata_expansion_route_only: true
+runtime_provider_image_memory_production_batch: false
+next_phase_started: false
+branch: master
 status: v14_034_visual_eval_seed_registry_validator_implementation_gate
 mode: A4.8 local validator implementation gate
 phase_id: v14_034_visual_eval_seed_registry_validator_implementation_gate
