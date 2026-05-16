@@ -1,0 +1,78 @@
+pvos_kernel_dry_run_adapter_response:
+  schema_version: v1
+  purpose: >
+    Descriptive schema for the local PVOS kernel dry-run adapter response. It
+    maps a pvos_kernel_run draft to future VCP adapter and Review Console
+    handoff drafts without authorizing execution.
+  required_top_level_fields:
+    - pvos_kernel_dry_run_adapter_response_version
+    - adapter_id
+    - request_id
+    - status
+    - mode
+    - kernel_run
+    - vcp_adapter_handoff_draft
+    - review_console_handoff_draft
+    - provenance_handoff_draft
+    - audit_record
+    - no_execution_guard
+  adapter_id:
+    enum:
+      - pvos_kernel_dry_run_adapter
+  mode:
+    enum:
+      - local_no_execution_adapter_contract
+  status:
+    enum:
+      - accepted_draft
+      - rejected
+  vcp_adapter_handoff_draft:
+    selected_plugin: null
+    max_plugin_calls: 0
+    execution_authorized: false
+    provider_contact_allowed: false
+    plugin_call_allowed: false
+    api_call_allowed: false
+    output_write_allowed: false
+    expected_outputs: 0
+  review_console_handoff_draft:
+    display_only: true
+    human_review_required_for_production: true
+    memory_write_requires_separate_approval: true
+    forbidden_actions:
+      - execute_plugin
+      - call_api
+      - write_daily_note
+      - save_image
+      - write_accepted_samples
+  provenance_handoff_draft:
+    provider_payload_included: false
+    image_binary_included: false
+    private_path_included: false
+    artifact_refs_are_metadata_only: true
+  no_execution_guard:
+    execution_authorized: false
+    provider_contact_allowed: false
+    plugin_call_allowed: false
+    api_call_allowed: false
+    daily_note_write_allowed: false
+    vcp_memory_write_allowed: false
+    image_generation_allowed: false
+    output_file_write_allowed: false
+    accepted_samples_write_allowed: false
+    external_manifest_read_allowed: false
+    provider_contact_performed: false
+    plugin_call_performed: false
+    api_call_performed: false
+    daily_note_write_performed: false
+    vcp_memory_write_performed: false
+    image_generation_performed: false
+    output_file_write_performed: false
+    accepted_samples_write_performed: false
+    external_manifest_read_performed: false
+    vcpchat_source_read_performed: false
+    vcptoolbox_source_read_performed: false
+  output_policy:
+    output_channel: stdout
+    output_file_write_allowed: false
+    committed_example_is_shape_reference_only: true

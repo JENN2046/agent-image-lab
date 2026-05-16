@@ -156,12 +156,17 @@ $requiredFiles = @(
   'scripts/validate_visual_eval_seed_record_schema.js',
   'scripts/validate_visual_eval_seed_registry_schema.js',
   'scripts/validate_pvos_kernel_minimal.js',
+  'scripts/validate_pvos_kernel_dry_run_adapter.js',
   'kernel/pvos_kernel.js',
   'kernel/README.md',
+  'adapters/pvos_kernel_dry_run_adapter.js',
   'schemas/pvos_kernel_run.schema.yaml',
+  'schemas/pvos_kernel_dry_run_adapter.schema.yaml',
   'tests/schema_examples/pvos_kernel_input.example.json',
   'tests/schema_examples/pvos_kernel_run.example.json',
+  'tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json',
   'docs/v14_037_pvos_kernel_minimal_implementation_gate.md',
+  'docs/v14_038_pvos_kernel_dry_run_adapter_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -3984,6 +3989,16 @@ if (-not $node) {
     Add-Failure "scripts/validate_pvos_kernel_minimal.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'adapters/pvos_kernel_dry_run_adapter.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "adapters/pvos_kernel_dry_run_adapter.js failed node --check"
+  }
+
+  & node --check (Join-Path $Root 'scripts/validate_pvos_kernel_dry_run_adapter.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_pvos_kernel_dry_run_adapter.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_local_checkpoint_manifest.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_local_checkpoint_manifest.js failed node --check"
@@ -4186,6 +4201,55 @@ if (-not $node) {
     }
     if ($pvosKernel.pvos_kernel.disk_write_performed -ne $false) {
       Add-Failure "PVOS kernel validation must not write output files"
+    }
+  }
+
+  $pvosAdapterOutput = & node (Join-Path $Root 'scripts/validate_pvos_kernel_dry_run_adapter.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "PVOS kernel dry-run adapter validation exited with failure"
+  } else {
+    $pvosAdapter = ($pvosAdapterOutput -join "`n") | ConvertFrom-Json
+    if ($pvosAdapter.passed -ne $true) {
+      Add-Failure "PVOS kernel dry-run adapter validation must report passed true"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.adapter_cli_present -ne $true) {
+      Add-Failure "PVOS adapter validation must verify adapter CLI"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.schema_present -ne $true) {
+      Add-Failure "PVOS adapter validation must verify schema"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.example_present -ne $true) {
+      Add-Failure "PVOS adapter validation must verify example"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.kernel_dependency_present -ne $true) {
+      Add-Failure "PVOS adapter validation must verify kernel dependency"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.stdout_only -ne $true) {
+      Add-Failure "PVOS adapter validation must verify stdout-only boundary"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.external_network_required -ne $false) {
+      Add-Failure "PVOS adapter validation must not require external network"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.provider_contact_performed -ne $false) {
+      Add-Failure "PVOS adapter validation must not perform provider contact"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.plugin_call_performed -ne $false) {
+      Add-Failure "PVOS adapter validation must not call plugins"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.api_call_performed -ne $false) {
+      Add-Failure "PVOS adapter validation must not call APIs"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.image_generation_performed -ne $false) {
+      Add-Failure "PVOS adapter validation must not generate images"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.daily_note_write_performed -ne $false) {
+      Add-Failure "PVOS adapter validation must not write DailyNote"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.vcp_memory_write_performed -ne $false) {
+      Add-Failure "PVOS adapter validation must not write VCP memory"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.output_file_write_performed -ne $false) {
+      Add-Failure "PVOS adapter validation must not write output files"
     }
   }
 

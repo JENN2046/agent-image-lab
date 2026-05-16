@@ -56,3 +56,12 @@ node scripts\validate_pvos_kernel_minimal.js
 This kernel is not a VCP runtime adapter. It is the local data spine that a
 future adapter or review console binding can call after a separate gate defines
 that integration boundary.
+
+## Dry-Run Adapter Contract
+
+```powershell
+node adapters\pvos_kernel_dry_run_adapter.js --input tests\schema_examples\pvos_kernel_input.example.json
+```
+
+The adapter contract wraps the kernel output in local VCP adapter and Review
+Console handoff drafts. It is still stdout-only and no-execution.

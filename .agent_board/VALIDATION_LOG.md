@@ -1,5 +1,67 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260516-v14.038-PVOS-KERNEL-DRY-RUN-ADAPTER
+
+Task:
+
+```text
+Finish the local stdout-only PVOS kernel dry-run adapter contract that maps one pvos_kernel_run draft into future VCP adapter and Review Console handoff drafts without provider contact, plugin/API calls, image generation, accepted_samples writes, DailyNote writes, VCP memory writes, external manifest reads, real VCPChat/VCPToolBox reads, dependency changes, or output file writes.
+```
+
+Result:
+
+```text
+phase_record: docs/v14_038_pvos_kernel_dry_run_adapter_gate.md
+source_commit: 3c667aba10b17565da49090b4c9dd8d9f583c055
+selected_product_route: pvos_kernel_to_local_dry_run_adapter
+adapter_cli_created: adapters/pvos_kernel_dry_run_adapter.js
+adapter_schema_created: schemas/pvos_kernel_dry_run_adapter.schema.yaml
+adapter_example_created: tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json
+adapter_validator_created: scripts/validate_pvos_kernel_dry_run_adapter.js
+validator_wiring_modified: scripts/validate_mvp.ps1
+stdout_only_adapter: true
+selected_plugin_null_verified: true
+max_plugin_calls_zero_verified: true
+review_console_handoff_verified: true
+human_review_required_for_production: true
+memory_write_requires_separate_approval: true
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+next_phase_started: false
+validation_result: passed
+```
+
+Commands run:
+
+```text
+node --check adapters/pvos_kernel_dry_run_adapter.js
+node --check scripts/validate_pvos_kernel_dry_run_adapter.js
+node adapters/pvos_kernel_dry_run_adapter.js --input tests/schema_examples/pvos_kernel_input.example.json
+node scripts/validate_pvos_kernel_dry_run_adapter.js
+node scripts/validate_pvos_kernel_minimal.js
+node scripts/validate_agent_board_state.js
+node scripts/validate_current_state_alignment.js
+pwsh -File scripts/validate_mvp.ps1
+git diff --check
+```
+
+Validation notes:
+
+```text
+The adapter validator passed and confirmed adapter CLI, schema, output-shape example, kernel dependency, stdout-only operation, selected_plugin=null, max_plugin_calls=0, Review Console handoff, metadata-only provenance, and no provider/plugin/API/image/DailyNote/VCP memory/output-file actions. MVP validation and current-state alignment also passed after wiring the adapter validator into scripts/validate_mvp.ps1.
+```
+
+Boundary:
+
+```text
+No provider contact, plugin call, API call, image generation, accepted_samples write, image binary read, runs output commit, DailyNote write, VCP memory write, external manifest read, real VCPChat/VCPToolBox read, real VCP runtime integration, dependency change, package change, tag, release, deploy, or push is performed by v14.038.
+```
+
 ## VALIDATION-20260516-v14.037-PVOS-KERNEL-MINIMAL-IMPLEMENTATION
 
 Task:

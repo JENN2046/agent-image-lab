@@ -1,0 +1,62 @@
+{
+  "pvos_kernel_dry_run_adapter_response_version": "v1",
+  "adapter_id": "pvos_kernel_dry_run_adapter",
+  "request_id": "pvos_adapter_request_portable_lantern_local_fixture_001",
+  "status": "accepted_draft",
+  "mode": "local_no_execution_adapter_contract",
+  "kernel_run_ref": "pvos_kernel_run_portable_lantern_local_fixture_001",
+  "vcp_adapter_handoff_draft": {
+    "target_platform": "VCP_adapter_future",
+    "adapter_boundary": "local_dry_run_contract_only",
+    "selected_plugin": null,
+    "fallback_plugins": [],
+    "max_plugin_calls": 0,
+    "execution_authorized": false,
+    "provider_contact_allowed": false,
+    "plugin_call_allowed": false,
+    "api_call_allowed": false,
+    "output_write_allowed": false,
+    "expected_outputs": 0
+  },
+  "review_console_handoff_draft": {
+    "display_only": true,
+    "status": "draft_ready",
+    "accepted_candidate_ids": [
+      "candidate_accept_metadata_001"
+    ],
+    "rejected_candidate_ids": [
+      "candidate_reject_metadata_001"
+    ],
+    "human_review_required_for_production": true,
+    "memory_write_requires_separate_approval": true
+  },
+  "provenance_handoff_draft": {
+    "provider_payload_included": false,
+    "image_binary_included": false,
+    "private_path_included": false,
+    "artifact_refs_are_metadata_only": true
+  },
+  "audit_record": {
+    "status": "draft_only",
+    "selected_plugin": null,
+    "max_plugin_calls_observed": 0,
+    "external_api_observed": false,
+    "output_file_write_observed": false,
+    "image_generation_observed": false,
+    "memory_write_observed": false
+  },
+  "no_execution_guard": {
+    "execution_authorized": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "daily_note_write_performed": false,
+    "vcp_memory_write_performed": false,
+    "image_generation_performed": false,
+    "output_file_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "external_manifest_read_performed": false,
+    "vcpchat_source_read_performed": false,
+    "vcptoolbox_source_read_performed": false
+  }
+}

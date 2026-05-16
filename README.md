@@ -7,6 +7,44 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current phase: v14_038_pvos_kernel_dry_run_adapter_gate.
+source_phase: v14_037_pvos_kernel_minimal_implementation_gate.
+source_commit: 3c667aba10b17565da49090b4c9dd8d9f583c055.
+selected_product_route: pvos_kernel_to_local_dry_run_adapter.
+Current mainline state: Agent Image Lab now has a local stdout-only PVOS kernel dry-run adapter contract. It maps the v14.037 pvos_kernel_run draft into future VCP adapter and Review Console handoff drafts while preserving selected_plugin=null, max_plugin_calls=0, no provider/plugin/API/image/memory/output writes, and human review required for production.
+phase_record: docs/v14_038_pvos_kernel_dry_run_adapter_gate.md.
+adapter_cli_created: adapters/pvos_kernel_dry_run_adapter.js.
+adapter_schema_created: schemas/pvos_kernel_dry_run_adapter.schema.yaml.
+adapter_example_created: tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json.
+adapter_validator_created: scripts/validate_pvos_kernel_dry_run_adapter.js.
+validator_wiring_modified: scripts/validate_mvp.ps1.
+stdout_only_adapter: true.
+selected_plugin_null_verified: true.
+max_plugin_calls_zero_verified: true.
+review_console_handoff_verified: true.
+human_review_required_for_production: true.
+memory_write_requires_separate_approval: true.
+accepted_samples_written: false.
+image_binaries_read: false.
+runs_output_committed: false.
+review_console_runtime_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+plugin_call: false.
+api_call: false.
+image_generation: false.
+memory_write: false.
+DailyNote_write: false.
+VCP_memory_write: false.
+production_candidate_002: false.
+Batch_005: false.
+push_performed: false.
+recommended_next: v14_039_review_result_protocol_hardening_gate.
+recommended_next_auto_execution_allowed: true.
+push_requires_explicit_remote_authorization: true.
+runtime_provider_image_memory_production_batch: false.
+next_phase_started: false.
 Current phase: v14_037_pvos_kernel_minimal_implementation_gate.
 source_phase: v14_036_visual_eval_seed_registry_closeout_or_expansion_route_gate.
 source_commit: ace9cee2c37532d79356b3943f402b649ef2ce19.

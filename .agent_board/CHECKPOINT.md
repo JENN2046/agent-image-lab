@@ -1,5 +1,47 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.038 PVOS Kernel Dry-Run Adapter Gate
+
+```text
+phase_id: v14_038_pvos_kernel_dry_run_adapter_gate
+status: completed_local_validated
+source_phase: v14_037_pvos_kernel_minimal_implementation_gate
+source_commit: 3c667aba10b17565da49090b4c9dd8d9f583c055
+selected_product_route: pvos_kernel_to_local_dry_run_adapter
+phase_record: docs/v14_038_pvos_kernel_dry_run_adapter_gate.md
+adapter_cli_created: adapters/pvos_kernel_dry_run_adapter.js
+adapter_schema_created: schemas/pvos_kernel_dry_run_adapter.schema.yaml
+adapter_example_created: tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json
+adapter_validator_created: scripts/validate_pvos_kernel_dry_run_adapter.js
+validator_wiring_modified: scripts/validate_mvp.ps1
+stdout_only_adapter: true
+selected_plugin_null_verified: true
+max_plugin_calls_zero_verified: true
+review_console_handoff_verified: true
+human_review_required_for_production: true
+memory_write_requires_separate_approval: true
+accepted_samples_written: false
+image_binaries_read: false
+runs_output_committed: false
+review_console_runtime_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v14_039_review_result_protocol_hardening_gate
+recommended_next_auto_execution_allowed: true
+push_requires_explicit_remote_authorization: true
+runtime_provider_image_memory_production_batch: false
+next_phase_started: false
+```
+
 # V14.037 PVOS Kernel Minimal Implementation Gate
 
 ```text
