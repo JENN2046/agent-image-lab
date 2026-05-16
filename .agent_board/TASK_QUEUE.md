@@ -9,6 +9,37 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v14_029_visual_eval_rejected_seed_fixture_planning_gate.
+Purpose: plan a future synthetic rejected-reference fixture for the visual-evaluation seed record schema.
+source_phase: v14_028_visual_eval_seed_record_validator_implementation_gate.
+source_commit: 5a096473a83a5a4cd0ef796725c91141c7c7421a.
+phase_record: docs/v14_029_visual_eval_rejected_seed_fixture_planning_gate.md.
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning.
+future_fixture_target: tests/schema_examples/visual_eval_seed_record.rejected.example.yaml.
+fixture_file_created: false.
+validator_script_modified: false.
+validator_wiring_modified: false.
+schema_files_modified: false.
+seed_ingestion_created: false.
+accepted_registry_created: false.
+rejected_registry_created: false.
+accepted_samples_written: false.
+image_binaries_read: false.
+prototype_files_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+plugin_call: false.
+api_call: false.
+image_generation: false.
+memory_write: false.
+production_candidate_002: false.
+Batch_005: false.
+recommended_next: v14_030_visual_eval_rejected_seed_fixture_implementation_gate.
+local_fixture_and_validator_extension_only: true.
+runtime_provider_image_memory_production_batch: false.
+next_phase_started: false.
+---
 Current active gate: v14_028_visual_eval_seed_record_validator_implementation_gate.
 Purpose: implement the read-only local validator for the metadata-only visual-evaluation seed record schema and synthetic fixture, then wire it into MVP validation.
 source_phase: v14_027_visual_eval_seed_record_validator_planning_gate.

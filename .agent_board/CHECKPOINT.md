@@ -1,5 +1,40 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.029 Visual Eval Rejected Seed Fixture Planning Gate
+
+```text
+phase_id: v14_029_visual_eval_rejected_seed_fixture_planning_gate
+status: completed_local_validated
+source_phase: v14_028_visual_eval_seed_record_validator_implementation_gate
+source_commit: 5a096473a83a5a4cd0ef796725c91141c7c7421a
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+phase_record: docs/v14_029_visual_eval_rejected_seed_fixture_planning_gate.md
+future_fixture_target: tests/schema_examples/visual_eval_seed_record.rejected.example.yaml
+fixture_file_created: false
+validator_script_modified: false
+validator_wiring_modified: false
+schema_files_modified: false
+seed_ingestion_created: false
+accepted_registry_created: false
+rejected_registry_created: false
+accepted_samples_written: false
+image_binaries_read: false
+prototype_files_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v14_030_visual_eval_rejected_seed_fixture_implementation_gate
+local_fixture_and_validator_extension_only: true
+runtime_provider_image_memory_production_batch: false
+next_phase_started: false
+```
+
 # V14.028 Visual Eval Seed Record Validator Implementation Gate
 
 ```text

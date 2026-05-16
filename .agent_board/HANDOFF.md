@@ -3,6 +3,36 @@
 ## Handoff Summary
 
 ```text
+Status: v14_029_visual_eval_rejected_seed_fixture_planning_gate completed locally and validated.
+Reason: V14.029 plans a future synthetic rejected-reference example for the visual-evaluation seed record schema. It defines non-empty failure tags, rejection review notes, safe defaults, boundary flags, and validator extension requirements without creating fixture files, modifying validator code, changing MVP wiring, ingesting seeds, creating registries, writing accepted_samples, reading image binaries, or entering runtime/provider/plugin/API/image/memory/production paths.
+Current repository: project_root
+Branch: master tracking origin/master
+source_phase: v14_028_visual_eval_seed_record_validator_implementation_gate
+source_commit: 5a096473a83a5a4cd0ef796725c91141c7c7421a
+phase_record: docs/v14_029_visual_eval_rejected_seed_fixture_planning_gate.md
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+future_fixture_target: tests/schema_examples/visual_eval_seed_record.rejected.example.yaml
+fixture_file_created: false
+validator_script_modified: false
+validator_wiring_modified: false
+schema_files_modified: false
+seed_ingestion_created: false
+accepted_registry_created: false
+rejected_registry_created: false
+accepted_samples_written: false
+image_binaries_read: false
+prototype_files_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+production_candidate_002: false
+Batch_005: false
+next_phase_started: false
+---
 Status: v14_028_visual_eval_seed_record_validator_implementation_gate completed locally and validated.
 Reason: V14.028 implements the read-only local validator for the metadata-only visual-evaluation seed record schema and synthetic fixture, wires it into MVP validation, and verifies required fields, enum boundaries, safe defaults, boundary flags, sensitive-material absence, and no-execution flags without seed ingestion, registries, accepted_samples, image binaries, runtime, provider, plugin, API, image, memory, or production paths.
 Current repository: project_root
