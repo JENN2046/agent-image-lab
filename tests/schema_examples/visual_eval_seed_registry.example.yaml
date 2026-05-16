@@ -1,0 +1,62 @@
+visual_eval_seed_registry:
+  registry_id: registry-visual-eval-seed-fixtures-001
+  registry_version: 0.1.0
+  created_from_phase: v14_032_visual_eval_seed_registry_schema_draft_gate
+  selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+  registry_scope: accepted_and_rejected_seed_fixtures
+  accepted_seed_records:
+    - seed_id: seed-visual-eval-accepted-reference-001
+      fixture_ref: tests/schema_examples/visual_eval_seed_record.example.yaml
+      intended_decision: accepted_candidate_reference
+      linked_rubric_dimensions:
+        - product_identity
+        - brief_alignment
+      linked_failure_tags: []
+      redaction_status: redacted_metadata_only
+      validation_role: accepted_reference_calibration
+  rejected_seed_records:
+    - seed_id: seed-visual-eval-rejected-reference-001
+      fixture_ref: tests/schema_examples/visual_eval_seed_record.rejected.example.yaml
+      intended_decision: rejected_candidate_reference
+      linked_rubric_dimensions:
+        - product_identity
+        - artifact_control
+      linked_failure_tags:
+        - product_identity_loss
+        - geometry_defect
+      redaction_status: redacted_metadata_only
+      validation_role: failure_tag_calibration
+  calibration_scope:
+    accepted_seed_records_min_count: 1
+    rejected_seed_records_min_count: 1
+    recurring_failure_types_min_count: 1
+    fixture_refs_must_be_repo_relative: true
+    fixture_refs_root: tests/schema_examples/
+  safety_defaults:
+    memory_suitability_default: false
+    production_candidate_eligible_default: false
+    provider_contact_allowed: false
+    plugin_call_authorized: false
+    api_call_authorized: false
+    image_generation_authorized: false
+    daily_note_write_authorized: false
+    vcp_memory_write_authorized: false
+  boundary_flags:
+    image_binary_included: false
+    real_provider_payload_included: false
+    private_path_included: false
+    external_manifest_included: false
+    runtime_execution_authorized: false
+    seed_ingestion_authorized: false
+    accepted_samples_write_authorized: false
+    memory_write_authorized: false
+    memory_write_path_included: false
+    production_candidate_authorized: false
+    plugin_call_authorized: false
+    api_call_authorized: false
+    daily_note_write_authorized: false
+  validation_notes:
+    - "Registry entries point only to repository-local synthetic metadata fixtures."
+    - "Accepted seed records may have an empty linked_failure_tags list."
+    - "Rejected seed records include at least one linked failure tag."
+    - "No image binaries, provider payloads, private paths, memory writes, or production candidates are authorized."

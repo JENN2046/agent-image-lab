@@ -1,0 +1,62 @@
+# visual_eval_seed_registry.schema.yaml
+# Metadata-only registry draft for future visual evaluation seed calibration.
+# This schema indexes repository-local synthetic seed-record fixtures. It must
+# not require image binaries, real provider payloads, private paths, or external
+# reads.
+visual_eval_seed_registry:
+  registry_id: string
+  registry_version: string
+  created_from_phase: string
+  selected_product_route: string
+  registry_scope: accepted_and_rejected_seed_fixtures | accepted_seed_fixtures | rejected_seed_fixtures
+  accepted_seed_records:
+    - seed_id: string
+      fixture_ref: tests/schema_examples/*.yaml
+      intended_decision: accepted_candidate_reference | archive_reference_only | human_review_required
+      linked_rubric_dimensions:
+        - string
+      linked_failure_tags:
+        - string
+      redaction_status: redacted_metadata_only | needs_redaction_review | blocked_sensitive_source
+      validation_role: accepted_reference_calibration | archive_reference_calibration | human_review_calibration
+  rejected_seed_records:
+    - seed_id: string
+      fixture_ref: tests/schema_examples/*.yaml
+      intended_decision: rejected_candidate_reference | human_review_required
+      linked_rubric_dimensions:
+        - string
+      linked_failure_tags:
+        - string
+      redaction_status: redacted_metadata_only | needs_redaction_review | blocked_sensitive_source
+      validation_role: rejected_reference_calibration | failure_tag_calibration | human_review_calibration
+  calibration_scope:
+    accepted_seed_records_min_count: number
+    rejected_seed_records_min_count: number
+    recurring_failure_types_min_count: number
+    fixture_refs_must_be_repo_relative: true
+    fixture_refs_root: tests/schema_examples/
+  safety_defaults:
+    memory_suitability_default: false
+    production_candidate_eligible_default: false
+    provider_contact_allowed: false
+    plugin_call_authorized: false
+    api_call_authorized: false
+    image_generation_authorized: false
+    daily_note_write_authorized: false
+    vcp_memory_write_authorized: false
+  boundary_flags:
+    image_binary_included: false
+    real_provider_payload_included: false
+    private_path_included: false
+    external_manifest_included: false
+    runtime_execution_authorized: false
+    seed_ingestion_authorized: false
+    accepted_samples_write_authorized: false
+    memory_write_authorized: false
+    memory_write_path_included: false
+    production_candidate_authorized: false
+    plugin_call_authorized: false
+    api_call_authorized: false
+    daily_note_write_authorized: false
+  validation_notes:
+    - string

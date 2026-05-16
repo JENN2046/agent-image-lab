@@ -7,6 +7,33 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current phase: v14_032_visual_eval_seed_registry_schema_draft_gate.
+source_phase: v14_031_visual_eval_seed_registry_planning_gate.
+source_commit: 1fa581b1333763d638fcd70747584cb59dfd7630.
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning.
+Current mainline state: Visual eval seed registry schema draft creates a metadata-only registry schema and synthetic registry example for accepted and rejected seed fixtures. It indexes repository-local fixture refs and seed IDs without validator changes, seed ingestion, accepted_samples writes, image binary reads, runtime, provider contact, plugin call, API call, image generation, memory write, production_candidate_002, or Batch_005.
+phase_record: docs/v14_032_visual_eval_seed_registry_schema_draft_gate.md.
+registry_schema_created: schemas/visual_eval_seed_registry.schema.yaml.
+registry_example_created: tests/schema_examples/visual_eval_seed_registry.example.yaml.
+validator_script_modified: false.
+validator_wiring_modified: false.
+seed_ingestion_created: false.
+accepted_samples_written: false.
+image_binaries_read: false.
+prototype_files_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+plugin_call: false.
+api_call: false.
+image_generation: false.
+memory_write: false.
+production_candidate_002: false.
+Batch_005: false.
+recommended_next: v14_033_visual_eval_seed_registry_validator_planning_gate.
+local_registry_validator_planning_only: true.
+runtime_provider_image_memory_production_batch: false.
+next_phase_started: false.
 Current phase: v14_031_visual_eval_seed_registry_planning_gate.
 source_phase: v14_030_visual_eval_rejected_seed_fixture_implementation_gate.
 source_commit: 118699a9ecef2a78ef9b13b77252e1d8f993eb10.
