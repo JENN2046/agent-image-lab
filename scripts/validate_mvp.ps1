@@ -157,16 +157,22 @@ $requiredFiles = @(
   'scripts/validate_visual_eval_seed_registry_schema.js',
   'scripts/validate_pvos_kernel_minimal.js',
   'scripts/validate_pvos_kernel_dry_run_adapter.js',
+  'scripts/validate_review_result_protocol.js',
   'kernel/pvos_kernel.js',
   'kernel/README.md',
+  'kernel/review_result_protocol.js',
   'adapters/pvos_kernel_dry_run_adapter.js',
   'schemas/pvos_kernel_run.schema.yaml',
   'schemas/pvos_kernel_dry_run_adapter.schema.yaml',
+  'schemas/review_result_protocol.schema.yaml',
   'tests/schema_examples/pvos_kernel_input.example.json',
   'tests/schema_examples/pvos_kernel_run.example.json',
   'tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json',
+  'tests/schema_examples/review_result_protocol_input.example.json',
+  'tests/schema_examples/review_result_protocol_report.example.json',
   'docs/v14_037_pvos_kernel_minimal_implementation_gate.md',
   'docs/v14_038_pvos_kernel_dry_run_adapter_gate.md',
+  'docs/v14_039_review_result_protocol_hardening_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -3999,6 +4005,16 @@ if (-not $node) {
     Add-Failure "scripts/validate_pvos_kernel_dry_run_adapter.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'kernel/review_result_protocol.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "kernel/review_result_protocol.js failed node --check"
+  }
+
+  & node --check (Join-Path $Root 'scripts/validate_review_result_protocol.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_review_result_protocol.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_local_checkpoint_manifest.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_local_checkpoint_manifest.js failed node --check"
@@ -4250,6 +4266,67 @@ if (-not $node) {
     }
     if ($pvosAdapter.pvos_kernel_dry_run_adapter.output_file_write_performed -ne $false) {
       Add-Failure "PVOS adapter validation must not write output files"
+    }
+  }
+
+  $reviewResultProtocolOutput = & node (Join-Path $Root 'scripts/validate_review_result_protocol.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review result protocol validation exited with failure"
+  } else {
+    $reviewResultProtocol = ($reviewResultProtocolOutput -join "`n") | ConvertFrom-Json
+    if ($reviewResultProtocol.passed -ne $true) {
+      Add-Failure "Review result protocol validation must report passed true"
+    }
+    if ($reviewResultProtocol.review_result_protocol.protocol_cli_present -ne $true) {
+      Add-Failure "Review result protocol validation must verify protocol CLI"
+    }
+    if ($reviewResultProtocol.review_result_protocol.schema_present -ne $true) {
+      Add-Failure "Review result protocol validation must verify schema"
+    }
+    if ($reviewResultProtocol.review_result_protocol.input_fixture_present -ne $true) {
+      Add-Failure "Review result protocol validation must verify input fixture"
+    }
+    if ($reviewResultProtocol.review_result_protocol.report_example_present -ne $true) {
+      Add-Failure "Review result protocol validation must verify report example"
+    }
+    if ($reviewResultProtocol.review_result_protocol.stdout_only -ne $true) {
+      Add-Failure "Review result protocol validation must verify stdout-only boundary"
+    }
+    if ($reviewResultProtocol.review_result_protocol.pass_reason_contract_verified -ne $true) {
+      Add-Failure "Review result protocol validation must verify pass reasons"
+    }
+    if ($reviewResultProtocol.review_result_protocol.reject_reason_contract_verified -ne $true) {
+      Add-Failure "Review result protocol validation must verify reject reasons"
+    }
+    if ($reviewResultProtocol.review_result_protocol.memory_route_contract_verified -ne $true) {
+      Add-Failure "Review result protocol validation must verify memory routes"
+    }
+    if ($reviewResultProtocol.review_result_protocol.never_production_contract_verified -ne $true) {
+      Add-Failure "Review result protocol validation must verify never-production route"
+    }
+    if ($reviewResultProtocol.review_result_protocol.provider_contact_performed -ne $false) {
+      Add-Failure "Review result protocol validation must not perform provider contact"
+    }
+    if ($reviewResultProtocol.review_result_protocol.plugin_call_performed -ne $false) {
+      Add-Failure "Review result protocol validation must not call plugins"
+    }
+    if ($reviewResultProtocol.review_result_protocol.api_call_performed -ne $false) {
+      Add-Failure "Review result protocol validation must not call APIs"
+    }
+    if ($reviewResultProtocol.review_result_protocol.image_generation_performed -ne $false) {
+      Add-Failure "Review result protocol validation must not generate images"
+    }
+    if ($reviewResultProtocol.review_result_protocol.daily_note_write_performed -ne $false) {
+      Add-Failure "Review result protocol validation must not write DailyNote"
+    }
+    if ($reviewResultProtocol.review_result_protocol.vcp_memory_write_performed -ne $false) {
+      Add-Failure "Review result protocol validation must not write VCP memory"
+    }
+    if ($reviewResultProtocol.review_result_protocol.output_file_write_performed -ne $false) {
+      Add-Failure "Review result protocol validation must not write output files"
+    }
+    if ($reviewResultProtocol.review_result_protocol.production_candidate_created -ne $false) {
+      Add-Failure "Review result protocol validation must not create production candidates"
     }
   }
 

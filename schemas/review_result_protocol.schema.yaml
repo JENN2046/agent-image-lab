@@ -1,0 +1,94 @@
+schema_id: review_result_protocol
+version: v1
+purpose: >
+  Local hard protocol for deciding why each ImageCandidate passes or rejects,
+  how the result may enter memory, and when it must never enter production.
+base_contract: AGENTS.md
+mode: local_stdout_only_review_result_protocol
+input:
+  required:
+    review_result_protocol_input_version: v1
+    protocol_id: string
+    kernel_input_ref: tests/schema_examples/pvos_kernel_input.example.json
+    human_review:
+      status: pending | approved | rejected
+      production_approval: false
+      memory_approval: false
+    memory_policy:
+      direct_daily_note_write_allowed: false
+      direct_vcp_memory_write_allowed: false
+      accepted_route: draft_memory_candidate
+      rejected_route: audit_only_failure_learning
+      forbidden_route: forbidden
+    production_policy:
+      human_review_required: true
+      protocol_pass_is_not_production_approval: true
+      reject_with_failure_tags_is_never_production: true
+output:
+  required:
+    review_result_protocol_report_version: v1
+    protocol_id: string
+    source_kernel_run_id: string
+    task_id: string
+    status: completed_local_protocol_report
+    mode: local_stdout_only_review_result_protocol
+    candidate_review_results:
+      item_required:
+        candidate_id: string
+        shot_id: string
+        review_outcome: pass | reject
+        weighted_score: number
+        pass_reasons: array
+        reject_reasons: array
+        reject_reason_codes: array
+        failure_tags: array
+        unknown_failure_tags: array
+        evidence_summary: object
+        memory_route:
+          route: draft_memory_candidate | audit_only_failure_learning | forbidden
+          allowed_to_enter_memory: boolean
+          memory_entry_type: memory_delta_draft | failure_lesson_draft | none
+          direct_daily_note_write_allowed: false
+          direct_vcp_memory_write_allowed: false
+          direct_write_performed: false
+          requires_human_memory_approval: true
+        production_route:
+          status: blocked_until_human_review | not_production_revision_required | never_production
+          allowed_for_production: false
+          production_candidate: false
+          human_review_required: true
+          permanent_block: boolean
+          never_production_codes: array
+    report_summary:
+      direct_memory_write_performed: false
+      production_candidate_created: false
+    review_protocol_guards:
+      every_candidate_has_review_outcome: true
+      pass_requires_non_empty_pass_reasons: true
+      reject_requires_non_empty_reject_reasons: true
+      every_candidate_has_memory_route: true
+      every_candidate_has_production_route: true
+      direct_daily_note_write_performed: false
+      direct_vcp_memory_write_performed: false
+      production_candidate_created: false
+boundary:
+  output_channel: stdout
+  output_file_write_allowed: false
+  provider_contact_allowed: false
+  plugin_call_allowed: false
+  api_call_allowed: false
+  image_generation_allowed: false
+  daily_note_write_allowed: false
+  vcp_memory_write_allowed: false
+  accepted_samples_write_allowed: false
+  external_manifest_read_allowed: false
+  real_vcpchat_source_read_allowed: false
+  real_vcptoolbox_source_read_allowed: false
+  dependency_change_allowed: false
+hard_rules:
+  - A pass must include at least one explicit pass reason.
+  - A reject must include at least one explicit reject reason.
+  - A rejected candidate with mapped failure tags is never production.
+  - A candidate with private path, provider payload, image binary, or unknown failure tags is memory-forbidden or production-forbidden.
+  - Memory entry is draft-only and requires human memory approval.
+  - Protocol pass never equals production approval.

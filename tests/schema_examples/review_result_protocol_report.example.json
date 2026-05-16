@@ -1,0 +1,166 @@
+{
+  "review_result_protocol_report_version": "v1",
+  "protocol_id": "review_result_protocol_hardening_v1",
+  "source_kernel_run_id": "pvos_kernel_run_portable_lantern_local_fixture_001",
+  "task_id": "portable_lantern_local_fixture_001",
+  "status": "completed_local_protocol_report",
+  "mode": "local_stdout_only_review_result_protocol",
+  "candidate_review_results": [
+    {
+      "candidate_id": "candidate_accept_metadata_001",
+      "shot_id": "shot_hero_tabletop_001",
+      "review_outcome": "pass",
+      "weighted_score": 4.3,
+      "rubric_id": "review_rubric_premium_product_v1",
+      "accept_threshold": 4,
+      "reject_below": 3.4,
+      "pass_reasons": [
+        "weighted_score_meets_accept_threshold",
+        "no_failure_tags_present",
+        "metadata_only_artifact_reference",
+        "provenance_is_metadata_only"
+      ],
+      "reject_reasons": [],
+      "reject_reason_codes": [],
+      "failure_tags": [],
+      "unknown_failure_tags": [],
+      "evidence_summary": {
+        "artifact_ref_kind": "metadata_only_reference",
+        "observations": [
+          "central product silhouette is readable",
+          "lighting hierarchy supports premium review"
+        ],
+        "rationale": "Candidate meets threshold and has no mapped failure tags."
+      },
+      "memory_route": {
+        "route": "draft_memory_candidate",
+        "allowed_to_enter_memory": true,
+        "memory_entry_type": "memory_delta_draft",
+        "direct_daily_note_write_allowed": false,
+        "direct_vcp_memory_write_allowed": false,
+        "direct_write_performed": false,
+        "requires_human_memory_approval": true,
+        "reasons": [
+          "candidate_passed_protocol_review",
+          "only_desensitized_chinese_memory_delta_draft_allowed",
+          "direct_memory_write_requires_separate_approval"
+        ]
+      },
+      "production_route": {
+        "status": "blocked_until_human_review",
+        "allowed_for_production": false,
+        "production_candidate": false,
+        "human_review_required": true,
+        "permanent_block": false,
+        "never_production_codes": [],
+        "reasons": [
+          "protocol_pass_is_not_human_production_approval",
+          "production_requires_human_review_and_separate_promotion_gate"
+        ]
+      }
+    },
+    {
+      "candidate_id": "candidate_reject_metadata_001",
+      "shot_id": "shot_hero_tabletop_001",
+      "review_outcome": "reject",
+      "weighted_score": 3.34,
+      "rubric_id": "review_rubric_premium_product_v1",
+      "accept_threshold": 4,
+      "reject_below": 3.4,
+      "pass_reasons": [],
+      "reject_reasons": [
+        "weighted_score_below_accept_threshold",
+        "weighted_score_below_reject_threshold",
+        "mapped_failure_tags_present"
+      ],
+      "reject_reason_codes": [
+        "weighted_score_below_accept_threshold",
+        "weighted_score_below_reject_threshold",
+        "mapped_failure_tags_present"
+      ],
+      "failure_tags": [
+        "lighting_flat",
+        "composition_imbalance"
+      ],
+      "unknown_failure_tags": [],
+      "evidence_summary": {
+        "artifact_ref_kind": "metadata_only_reference",
+        "observations": [
+          "scene is usable for failure learning only",
+          "lighting and focal hierarchy need correction"
+        ],
+        "rationale": "Candidate requires rejection or revision based on score threshold or mapped failure tags."
+      },
+      "memory_route": {
+        "route": "audit_only_failure_learning",
+        "allowed_to_enter_memory": true,
+        "memory_entry_type": "failure_lesson_draft",
+        "direct_daily_note_write_allowed": false,
+        "direct_vcp_memory_write_allowed": false,
+        "direct_write_performed": false,
+        "requires_human_memory_approval": true,
+        "reasons": [
+          "rejected_candidate_can_only_be_preserved_as_failure_learning",
+          "failure_tags:lighting_flat,composition_imbalance",
+          "no_production_memory_promotion_allowed"
+        ]
+      },
+      "production_route": {
+        "status": "never_production",
+        "allowed_for_production": false,
+        "production_candidate": false,
+        "human_review_required": true,
+        "permanent_block": true,
+        "never_production_codes": [
+          "weighted_score_below_reject_threshold",
+          "mapped_failure_tags_present"
+        ],
+        "reasons": [
+          "candidate_failed_hard_review_protocol",
+          "rejected_or_sensitive_candidates_must_never_enter_production"
+        ]
+      }
+    }
+  ],
+  "report_summary": {
+    "candidate_count": 2,
+    "pass_count": 1,
+    "reject_count": 1,
+    "memory_draft_count": 2,
+    "never_production_count": 1,
+    "direct_memory_write_performed": false,
+    "production_candidate_created": false
+  },
+  "review_protocol_guards": {
+    "every_candidate_has_review_outcome": true,
+    "pass_requires_non_empty_pass_reasons": true,
+    "reject_requires_non_empty_reject_reasons": true,
+    "every_candidate_has_memory_route": true,
+    "every_candidate_has_production_route": true,
+    "direct_daily_note_write_performed": false,
+    "direct_vcp_memory_write_performed": false,
+    "production_candidate_created": false
+  },
+  "no_execution_guard": {
+    "provider_contact_allowed": false,
+    "plugin_call_allowed": false,
+    "api_call_allowed": false,
+    "daily_note_write_allowed": false,
+    "vcp_memory_write_allowed": false,
+    "image_generation_allowed": false,
+    "output_file_write_allowed": false,
+    "accepted_samples_write_allowed": false,
+    "external_manifest_read_allowed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "daily_note_write_performed": false,
+    "vcp_memory_write_performed": false,
+    "image_generation_performed": false,
+    "output_file_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "external_manifest_read_performed": false,
+    "vcpchat_source_read_performed": false,
+    "vcptoolbox_source_read_performed": false
+  }
+}

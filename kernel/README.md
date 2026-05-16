@@ -65,3 +65,22 @@ node adapters\pvos_kernel_dry_run_adapter.js --input tests\schema_examples\pvos_
 
 The adapter contract wraps the kernel output in local VCP adapter and Review
 Console handoff drafts. It is still stdout-only and no-execution.
+
+## Review Result Protocol
+
+```powershell
+node kernel\review_result_protocol.js --input tests\schema_examples\review_result_protocol_input.example.json
+```
+
+The review-result protocol turns the local kernel run into a hard per-candidate
+decision report. Every candidate receives explicit pass or reject reasons, a
+memory route, and a production route. A protocol pass is not production
+approval; production remains blocked until human review and a separate
+promotion gate. Rejected candidates with mapped failure tags are marked
+`never_production`.
+
+```powershell
+node --check kernel\review_result_protocol.js
+node --check scripts\validate_review_result_protocol.js
+node scripts\validate_review_result_protocol.js
+```

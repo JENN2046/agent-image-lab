@@ -7,6 +7,48 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current phase: v14_039_review_result_protocol_hardening_gate.
+source_phase: v14_038_pvos_kernel_dry_run_adapter_gate.
+source_commit: a34f29e4a2107354b6d3537e3e65383baa2cf2b9.
+selected_product_route: hard_review_result_protocol.
+Current mainline state: Agent Image Lab now has a local hard review-result protocol. It turns the PVOS kernel run into a per-candidate report that records why each image passes or rejects, how it may enter memory, and when it is blocked forever from production. Protocol pass is not production approval; rejected candidates with mapped failure tags become never_production.
+phase_record: docs/v14_039_review_result_protocol_hardening_gate.md.
+protocol_cli_created: kernel/review_result_protocol.js.
+protocol_schema_created: schemas/review_result_protocol.schema.yaml.
+protocol_input_created: tests/schema_examples/review_result_protocol_input.example.json.
+protocol_report_example_created: tests/schema_examples/review_result_protocol_report.example.json.
+protocol_validator_created: scripts/validate_review_result_protocol.js.
+validator_wiring_modified: scripts/validate_mvp.ps1.
+stdout_only_protocol: true.
+pass_reason_contract_verified: true.
+reject_reason_contract_verified: true.
+memory_route_contract_verified: true.
+never_production_contract_verified: true.
+protocol_pass_is_not_production_approval: true.
+human_review_required_for_production: true.
+direct_memory_write_performed: false.
+production_candidate_created: false.
+accepted_samples_written: false.
+image_binaries_read: false.
+runs_output_committed: false.
+review_console_runtime_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+plugin_call: false.
+api_call: false.
+image_generation: false.
+memory_write: false.
+DailyNote_write: false.
+VCP_memory_write: false.
+production_candidate_002: false.
+Batch_005: false.
+push_performed: false.
+recommended_next: v14_040_review_protocol_static_adapter_or_console_binding_gate.
+recommended_next_auto_execution_allowed: true.
+push_requires_explicit_remote_authorization: true.
+runtime_provider_image_memory_production_batch: false.
+next_phase_started: false.
 Current phase: v14_038_pvos_kernel_dry_run_adapter_gate.
 source_phase: v14_037_pvos_kernel_minimal_implementation_gate.
 source_commit: 3c667aba10b17565da49090b4c9dd8d9f583c055.
