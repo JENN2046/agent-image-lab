@@ -176,6 +176,21 @@ Phase 9 审批记录必须满足：
 
 `review_evidence_blocker_contract_static_handoff` 是 evidence collector + blocker arbiter 的可视化层。它不得创建 production candidate，不得写 accepted_samples，不得写 memory，不得调用插件，也不得让 `never_production` 候选绕过 exclusion register。
 
+## v14.054 Adapter Negative Fixture Static Handoff 映射
+
+本节用于验收 `tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json` 中的负向 adapter handoff 进入静态 Review Console 可见 UI 与草案输出。它仍然只读取项目内 mock / fixture，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
+
+| Adapter negative fixture 字段 | Review Console 可见/草案字段 | 说明 |
+| --- | --- | --- |
+| `evidence_blocker_contract_handoff_draft.memory_forbidden_candidate_ids` | `review_evidence_blocker_adapter_negative_static_handoff.memory_forbidden_candidate_ids` / `adapterNegativeGuardSummary` | `candidate_reject_unknown_guard_001` 必须保持 memory forbidden |
+| `evidence_blocker_contract_handoff_draft.production_exclusion_candidate_ids` | `review_evidence_blocker_adapter_negative_static_handoff.production_exclusion_candidate_ids` / `adapterNegativeGuardSummary` | 两个 rejected candidates 必须保持 production exclusion |
+| `review_console_handoff_draft.review_evidence_blocker_contract_guard_summary` | `review_evidence_blocker_adapter_negative_static_handoff.guard_summary` / `adapterNegativeSummary` | 显示 evidence/blocker/exclusion/permanent/memory-forbidden 计数 |
+| `audit_record.never_production_count` / `audit_record.memory_forbidden_count` | `review_evidence_blocker_adapter_negative_static_handoff.audit_summary` / `adapterNegativeSummary` | 显示 never-production 和 memory-forbidden 数量 |
+| `evidence_blocker_contract` | `review_evidence_blocker_adapter_negative_static_handoff.evidence_blocker_contract_matches_fixture` / `adapterNegativeGuard` | 必须匹配 `evidence_blocker_contract_negative_guard.example.json` |
+| `no_execution_guard` | `review_evidence_blocker_adapter_negative_static_handoff.no_execution_guard` | 所有 provider/plugin/API/image/memory/output/production 写入保持 false |
+
+`review_evidence_blocker_adapter_negative_static_handoff` 是 adapter negative fixture 的可视化层。它不得创建 production candidate，不得写 accepted_samples，不得写 memory，不得调用插件，也不得把 memory-forbidden 或 never-production 候选送入生产。
+
 ## 原型防越界标记
 
 草案输出包含：

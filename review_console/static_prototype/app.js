@@ -25,6 +25,7 @@ const state = {
   review_result_protocol_static_handoff: mock.review_result_protocol_static_handoff,
   review_decision_package_static_handoff: mock.review_decision_package_static_handoff,
   review_evidence_blocker_contract_static_handoff: mock.review_evidence_blocker_contract_static_handoff,
+  review_evidence_blocker_adapter_negative_static_handoff: mock.review_evidence_blocker_adapter_negative_static_handoff,
   humanScores: { ...mock.review_session.human_review.breakdown }
 };
 
@@ -402,6 +403,72 @@ function renderEvidenceBlockerHandoff() {
   `;
 }
 
+function renderAdapterNegativeHandoff() {
+  const handoff = state.review_evidence_blocker_adapter_negative_static_handoff;
+  const guard = handoff.guard_summary;
+  const audit = handoff.audit_summary;
+
+  qs("#adapterNegativeSummary").innerHTML = `
+    <span>Adapter negative fixture <strong>${handoff.adapter_negative_guard_observed}</strong></span>
+    <span>Golden fixture match <strong>${handoff.evidence_blocker_contract_matches_fixture}</strong></span>
+    <span>Never production <strong>${audit.never_production_count}</strong></span>
+    <span>Memory forbidden <strong>${audit.memory_forbidden_count}</strong></span>
+  `;
+
+  qs("#adapterNegativeGuardSummary").innerHTML = `
+    <article class="guard-tile">
+      <span>Production exclusions</span>
+      <strong>${guard.production_exclusion_count}</strong>
+    </article>
+    <article class="guard-tile">
+      <span>Memory forbidden blocks</span>
+      <strong>${guard.memory_forbidden_block_count}</strong>
+    </article>
+    <article class="guard-tile">
+      <span>Production candidate</span>
+      <strong>${guard.production_candidate_created}</strong>
+    </article>
+    <article class="guard-tile wide">
+      <span>Memory forbidden IDs</span>
+      <strong>${handoff.memory_forbidden_candidate_ids.join(", ")}</strong>
+    </article>
+    <article class="guard-tile wide">
+      <span>Production exclusion IDs</span>
+      <strong>${handoff.production_exclusion_candidate_ids.join(", ")}</strong>
+    </article>
+  `;
+
+  const root = qs("#adapterNegativeBlockerList");
+  root.innerHTML = "";
+  handoff.blocker_highlights.forEach((item) => {
+    const card = document.createElement("article");
+    card.className = `adapter-negative-card ${item.memory_route === "forbidden" ? "memory-forbidden" : "never-production"}`;
+    card.innerHTML = `
+      <div class="protocol-card-head">
+        <strong>${item.candidate_id}</strong>
+        <span>${item.decision}</span>
+      </div>
+      <dl>
+        <div><dt>Memory route</dt><dd>${item.memory_route}</dd></div>
+        <div><dt>Production route</dt><dd>${item.production_route}</dd></div>
+        <div><dt>Blocker</dt><dd>${item.blocker_type}</dd></div>
+        <div><dt>Direct write</dt><dd>${item.direct_write_performed}</dd></div>
+      </dl>
+    `;
+    root.appendChild(card);
+  });
+
+  qs("#adapterNegativeGuard").innerHTML = `
+    <span>embedded evidence blocker contract: ${handoff.evidence_blocker_contract_embedded}</span>
+    <span>matches golden fixture: ${handoff.evidence_blocker_contract_matches_fixture}</span>
+    <span>every candidate has evidence record: ${guard.every_candidate_has_evidence_record}</span>
+    <span>every candidate has production blocker: ${guard.every_candidate_has_production_blocker_decision}</span>
+    <span>every never-production candidate has exclusion: ${guard.every_never_production_candidate_has_exclusion}</span>
+    <span>selected plugin: ${audit.selected_plugin}</span>
+    <span>max plugin calls: ${audit.max_plugin_calls_observed}</span>
+  `;
+}
+
 function approvalPayload() {
   if (state.memoryStatus === "approved") {
     return {
@@ -576,6 +643,7 @@ function renderDraft() {
     review_result_protocol_static_handoff: state.review_result_protocol_static_handoff,
     review_decision_package_static_handoff: state.review_decision_package_static_handoff,
     review_evidence_blocker_contract_static_handoff: state.review_evidence_blocker_contract_static_handoff,
+    review_evidence_blocker_adapter_negative_static_handoff: state.review_evidence_blocker_adapter_negative_static_handoff,
     review_session: buildReviewSession(memoryApproval, humanTotal),
     image_case: buildImageCase(humanTotal),
     memory_delta: buildMemoryDelta(memoryApproval),
@@ -600,6 +668,7 @@ function renderAll() {
   renderProtocolHandoff();
   renderDecisionPackageHandoff();
   renderEvidenceBlockerHandoff();
+  renderAdapterNegativeHandoff();
   renderDraft();
 }
 

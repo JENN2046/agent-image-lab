@@ -12,7 +12,8 @@ const requiredFiles = [
   "review_console/static_prototype/FIELD_MAPPING.md",
   "adapter_dry_run_lab/fixtures/accepted_request.json",
   "exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js",
-  "tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json"
+  "tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json",
+  "tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json"
 ];
 
 function read(relativePath) {
@@ -464,6 +465,117 @@ function assertEvidenceBlockerContractHandoff(handoff, adapterExample) {
   assert(handoff.arbitration_guard.accepted_samples_write_performed === false, "Static evidence blocker must not write accepted samples.");
 }
 
+function assertAdapterNegativeStaticHandoff(handoff, negativeAdapterExample) {
+  assert(handoff, "Static mock must expose review_evidence_blocker_adapter_negative_static_handoff.");
+  assert(handoff.status === "draft_ready", "Adapter negative static handoff must be draft_ready.");
+  assert(handoff.display_only === true, "Adapter negative static handoff must be display-only.");
+  assert(
+    handoff.source_adapter_response_ref === "tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json",
+    "Adapter negative static handoff must cite the negative adapter fixture."
+  );
+  assert(
+    handoff.source_evidence_blocker_fixture_ref === "tests/schema_examples/evidence_blocker_contract_negative_guard.example.json",
+    "Adapter negative static handoff must cite the evidence blocker golden fixture."
+  );
+  assert(handoff.adapter_negative_guard_observed === true, "Adapter negative static handoff must observe negative guard.");
+  assert(handoff.evidence_blocker_contract_embedded === true, "Adapter negative static handoff must mark embedded evidence blocker contract.");
+  assert(handoff.evidence_blocker_contract_matches_fixture === true, "Adapter negative static handoff must verify golden fixture match.");
+
+  const adapterHandoff = negativeAdapterExample.evidence_blocker_contract_handoff_draft;
+  const adapterGuard = negativeAdapterExample.review_console_handoff_draft.review_evidence_blocker_contract_guard_summary;
+  const audit = negativeAdapterExample.audit_record;
+  assert(adapterHandoff, "Negative adapter example must include evidence blocker handoff.");
+  assert(adapterGuard, "Negative adapter example must include Review Console evidence blocker guard summary.");
+  assert(audit, "Negative adapter example must include audit record.");
+  assert(
+    handoff.evidence_blocker_contract_handoff_id === adapterHandoff.handoff_id,
+    "Adapter negative static handoff id must match negative adapter handoff."
+  );
+  assertArrayEqual(
+    handoff.memory_forbidden_candidate_ids,
+    adapterHandoff.memory_forbidden_candidate_ids,
+    "Adapter negative memory forbidden IDs must match negative adapter handoff"
+  );
+  assertArrayEqual(
+    handoff.production_exclusion_candidate_ids,
+    adapterHandoff.production_exclusion_candidate_ids,
+    "Adapter negative production exclusion IDs must match negative adapter handoff"
+  );
+  assertArrayEqual(
+    handoff.rejected_candidate_ids,
+    negativeAdapterExample.review_console_handoff_draft.rejected_candidate_ids,
+    "Adapter negative rejected candidate IDs must match Review Console handoff"
+  );
+
+  const guard = handoff.guard_summary;
+  for (const key of [
+    "evidence_record_count",
+    "blocker_decision_count",
+    "production_exclusion_count",
+    "permanent_block_count",
+    "human_review_block_count",
+    "memory_forbidden_block_count",
+  ]) {
+    assert(guard[key] === adapterGuard[key], `Adapter negative guard ${key} must match adapter fixture.`);
+  }
+  assert(guard.production_candidate_created === false, "Adapter negative guard must not create production candidates.");
+  assert(guard.direct_memory_write_performed === false, "Adapter negative guard must not write memory directly.");
+  assert(guard.accepted_samples_write_performed === false, "Adapter negative guard must not write accepted samples.");
+  assert(guard.every_candidate_has_evidence_record === true, "Adapter negative guard must prove every candidate has evidence.");
+  assert(
+    guard.every_candidate_has_production_blocker_decision === true,
+    "Adapter negative guard must prove every candidate has production blocker."
+  );
+  assert(
+    guard.every_never_production_candidate_has_exclusion === true,
+    "Adapter negative guard must prove every never-production candidate has exclusion."
+  );
+
+  assert(handoff.audit_summary.accepted_sample_draft_count === audit.accepted_sample_draft_count, "Adapter negative audit accepted count must match.");
+  assert(handoff.audit_summary.rejected_sample_draft_count === audit.rejected_sample_draft_count, "Adapter negative audit rejected count must match.");
+  assert(handoff.audit_summary.memory_delta_draft_count === audit.memory_delta_draft_count, "Adapter negative audit memory delta count must match.");
+  assert(handoff.audit_summary.production_exclusion_count === audit.production_exclusion_count, "Adapter negative audit production exclusion count must match.");
+  assert(handoff.audit_summary.never_production_count === audit.never_production_count, "Adapter negative audit never-production count must match.");
+  assert(handoff.audit_summary.memory_forbidden_count === audit.memory_forbidden_count, "Adapter negative audit memory forbidden count must match.");
+  assert(handoff.audit_summary.selected_plugin === null, "Adapter negative audit must keep selected_plugin null.");
+  assert(handoff.audit_summary.max_plugin_calls_observed === 0, "Adapter negative audit must keep plugin calls at zero.");
+  assert(handoff.audit_summary.production_candidate_created === false, "Adapter negative audit must not create production candidates.");
+  assert(handoff.audit_summary.external_api_observed === false, "Adapter negative audit must not observe external API.");
+  assert(handoff.audit_summary.image_generation_observed === false, "Adapter negative audit must not observe image generation.");
+  assert(handoff.audit_summary.memory_write_observed === false, "Adapter negative audit must not observe memory write.");
+
+  assert(
+    handoff.blocker_highlights.some(
+      (item) =>
+        item.candidate_id === "candidate_reject_unknown_guard_001" &&
+        item.memory_route === "forbidden" &&
+        item.production_route === "never_production" &&
+        item.production_candidate === false &&
+        item.direct_write_performed === false
+    ),
+    "Adapter negative UI must expose unknown failure as memory forbidden and never production."
+  );
+  assert(
+    handoff.production_exclusion_candidate_ids.includes("candidate_reject_mapped_guard_001") &&
+      handoff.production_exclusion_candidate_ids.includes("candidate_reject_unknown_guard_001"),
+    "Adapter negative UI must expose both rejected candidates as production exclusions."
+  );
+
+  for (const key of [
+    "provider_contact_performed",
+    "plugin_call_performed",
+    "api_call_performed",
+    "daily_note_write_performed",
+    "vcp_memory_write_performed",
+    "image_generation_performed",
+    "output_file_write_performed",
+    "accepted_samples_write_performed",
+    "production_candidate_created",
+  ]) {
+    assert(handoff.no_execution_guard[key] === false, `Adapter negative no-execution guard ${key} must be false.`);
+  }
+}
+
 function main() {
   const missingFiles = requiredFiles.filter((relativePath) => !exists(relativePath));
   assert(missingFiles.length === 0, `Missing Review Console adapter handoff files: ${missingFiles.join(", ")}`);
@@ -478,6 +590,10 @@ function main() {
   const pvosAdapterExample = parseJson(
     read("tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json"),
     "PVOS adapter example"
+  );
+  const pvosAdapterNegativeExample = parseJson(
+    read("tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json"),
+    "PVOS adapter negative example"
   );
 
   assert(adapterResponse.status === "accepted_draft", "Adapter accepted fixture must produce accepted_draft.");
@@ -507,6 +623,10 @@ function main() {
   assertReviewResultProtocolHandoff(mock.review_result_protocol_static_handoff, pvosAdapterExample);
   assertReviewDecisionPackageHandoff(mock.review_decision_package_static_handoff, pvosAdapterExample);
   assertEvidenceBlockerContractHandoff(mock.review_evidence_blocker_contract_static_handoff, pvosAdapterExample);
+  assertAdapterNegativeStaticHandoff(
+    mock.review_evidence_blocker_adapter_negative_static_handoff,
+    pvosAdapterNegativeExample
+  );
 
   const appSource = read("review_console/static_prototype/app.js");
   const indexSource = read("review_console/static_prototype/index.html");
@@ -524,9 +644,14 @@ function main() {
     appSource.includes("review_evidence_blocker_contract_static_handoff"),
     "Static app must carry review_evidence_blocker_contract_static_handoff into draft output."
   );
+  assert(
+    appSource.includes("review_evidence_blocker_adapter_negative_static_handoff"),
+    "Static app must carry review_evidence_blocker_adapter_negative_static_handoff into draft output."
+  );
   assert(appSource.includes("renderProtocolHandoff"), "Static app must render review protocol handoff.");
   assert(appSource.includes("renderDecisionPackageHandoff"), "Static app must render review decision package handoff.");
   assert(appSource.includes("renderEvidenceBlockerHandoff"), "Static app must render evidence blocker handoff.");
+  assert(appSource.includes("renderAdapterNegativeHandoff"), "Static app must render adapter negative handoff.");
   assert(indexSource.includes("protocolCandidateList"), "Static HTML must expose protocol candidate list.");
   assert(indexSource.includes("protocolSummary"), "Static HTML must expose protocol summary.");
   assert(indexSource.includes("protocolGuardSummary"), "Static HTML must expose protocol guard summary.");
@@ -540,6 +665,10 @@ function main() {
   assert(indexSource.includes("evidenceRecordList"), "Static HTML must expose evidence record list.");
   assert(indexSource.includes("blockerDecisionList"), "Static HTML must expose blocker decision list.");
   assert(indexSource.includes("evidenceBlockerGuard"), "Static HTML must expose evidence blocker guard.");
+  assert(indexSource.includes("adapterNegativeSummary"), "Static HTML must expose adapter negative summary.");
+  assert(indexSource.includes("adapterNegativeGuardSummary"), "Static HTML must expose adapter negative guard summary.");
+  assert(indexSource.includes("adapterNegativeBlockerList"), "Static HTML must expose adapter negative blocker list.");
+  assert(indexSource.includes("adapterNegativeGuard"), "Static HTML must expose adapter negative guard.");
   assert(styleSource.includes(".protocol-panel"), "Static CSS must style protocol panel.");
   assert(styleSource.includes(".protocol-card.reject"), "Static CSS must style rejected protocol cards.");
   assert(styleSource.includes(".protocol-guard-summary"), "Static CSS must style protocol guard summary.");
@@ -549,6 +678,8 @@ function main() {
   assert(styleSource.includes(".evidence-blocker-section"), "Static CSS must style evidence blocker section.");
   assert(styleSource.includes(".evidence-card"), "Static CSS must style evidence cards.");
   assert(styleSource.includes(".blocker-card.permanent"), "Static CSS must style permanent blocker cards.");
+  assert(styleSource.includes(".adapter-negative-section"), "Static CSS must style adapter negative section.");
+  assert(styleSource.includes(".adapter-negative-card.memory-forbidden"), "Static CSS must style memory-forbidden adapter negative cards.");
   assert(appSource.includes("Never production"), "Static app must expose never production summary copy.");
   assert(appSource.includes("Memory forbidden"), "Static app must expose memory forbidden summary copy.");
   assert(appSource.includes("Negative guard"), "Static app must expose negative guard summary copy.");
@@ -565,6 +696,9 @@ function main() {
   assert(appSource.includes("evidence record is not approval"), "Static app must expose evidence-not-approval guard copy.");
   assert(appSource.includes("blocker decision is not write"), "Static app must expose blocker-not-write guard copy.");
   assert(appSource.includes("no production without human review"), "Static app must expose no-production-without-review guard copy.");
+  assert(appSource.includes("Adapter negative fixture"), "Static app must expose adapter negative fixture copy.");
+  assert(appSource.includes("Golden fixture match"), "Static app must expose golden fixture match copy.");
+  assert(appSource.includes("Memory forbidden IDs"), "Static app must expose memory-forbidden IDs copy.");
   assert(!/fetch\s*\(|XMLHttpRequest|writeFile|appendFile|fs\.|eval\s*\(|Function\s*\(/.test(appSource), "Static app must not contain forbidden runtime calls.");
 
   const fieldMapping = read("review_console/static_prototype/FIELD_MAPPING.md");
@@ -597,7 +731,15 @@ function main() {
     "review_evidence_blocker_contract_static_handoff.review_evidence_blocker_contract_guard_summary",
     "evidence_record_is_not_approval",
     "blocker_decision_is_not_write",
-    "no_production_without_human_review"
+    "no_production_without_human_review",
+    "v14.054 Adapter Negative Fixture Static Handoff",
+    "review_evidence_blocker_adapter_negative_static_handoff.memory_forbidden_candidate_ids",
+    "review_evidence_blocker_adapter_negative_static_handoff.production_exclusion_candidate_ids",
+    "review_evidence_blocker_adapter_negative_static_handoff.guard_summary",
+    "review_evidence_blocker_adapter_negative_static_handoff.audit_summary",
+    "review_evidence_blocker_adapter_negative_static_handoff.evidence_blocker_contract_matches_fixture",
+    "adapterNegativeGuardSummary",
+    "adapterNegativeGuard"
   ]) {
     assert(fieldMapping.includes(text), `FIELD_MAPPING must document ${text}.`);
   }
@@ -649,6 +791,14 @@ function main() {
       evidence_blocker_no_production_candidate_verified: true,
       evidence_blocker_no_direct_memory_write_verified: true,
       evidence_blocker_no_accepted_samples_write_verified: true,
+      review_evidence_blocker_adapter_negative_static_handoff_verified: true,
+      adapter_negative_fixture_guard_summary_verified: true,
+      adapter_negative_memory_forbidden_visible: true,
+      adapter_negative_never_production_visible: true,
+      adapter_negative_fixture_match_visible: true,
+      adapter_negative_no_production_candidate_verified: true,
+      adapter_negative_no_direct_memory_write_verified: true,
+      adapter_negative_no_accepted_samples_write_verified: true,
       static_app_draft_output_current: true,
       field_mapping_current: true,
       external_network_required: false,

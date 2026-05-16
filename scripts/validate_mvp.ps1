@@ -199,6 +199,7 @@ $requiredFiles = @(
   'docs/v14_051_review_console_evidence_blocker_ui_binding_gate.md',
   'docs/v14_052_evidence_blocker_contract_negative_fixture_gate.md',
   'docs/v14_053_evidence_blocker_adapter_negative_fixture_handoff_gate.md',
+  'docs/v14_054_review_console_adapter_negative_fixture_ui_binding_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -5647,6 +5648,30 @@ if (-not $node) {
     }
     if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.evidence_blocker_no_accepted_samples_write_verified -ne $true) {
       Add-Failure "Review Console Adapter handoff must verify evidence blocker performs no accepted_samples write"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.review_evidence_blocker_adapter_negative_static_handoff_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify adapter negative static handoff"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.adapter_negative_fixture_guard_summary_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify adapter negative guard summary"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.adapter_negative_memory_forbidden_visible -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify adapter negative memory-forbidden visibility"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.adapter_negative_never_production_visible -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify adapter negative never-production visibility"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.adapter_negative_fixture_match_visible -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify adapter negative fixture match visibility"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.adapter_negative_no_production_candidate_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify adapter negative creates no production candidate"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.adapter_negative_no_direct_memory_write_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify adapter negative performs no direct memory write"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.adapter_negative_no_accepted_samples_write_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify adapter negative performs no accepted_samples write"
     }
     if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.file_write_performed -ne $false) {
       Add-Failure "Review Console Adapter handoff validation must not write files"

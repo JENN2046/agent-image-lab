@@ -469,6 +469,90 @@ window.REVIEW_CONSOLE_MOCK = {
       accepted_samples_write_performed: false
     }
   },
+  review_evidence_blocker_adapter_negative_static_handoff: {
+    source_adapter_response_ref: "tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json",
+    source_evidence_blocker_fixture_ref: "tests/schema_examples/evidence_blocker_contract_negative_guard.example.json",
+    status: "draft_ready",
+    display_only: true,
+    adapter_negative_guard_observed: true,
+    evidence_blocker_contract_embedded: true,
+    evidence_blocker_contract_matches_fixture: true,
+    evidence_blocker_contract_handoff_id: "evidence_blocker_contract_handoff_negative_guard_local_fixture_001",
+    memory_forbidden_candidate_ids: [
+      "candidate_reject_unknown_guard_001"
+    ],
+    production_exclusion_candidate_ids: [
+      "candidate_reject_mapped_guard_001",
+      "candidate_reject_unknown_guard_001"
+    ],
+    rejected_candidate_ids: [
+      "candidate_reject_mapped_guard_001",
+      "candidate_reject_unknown_guard_001"
+    ],
+    guard_summary: {
+      evidence_record_count: 2,
+      blocker_decision_count: 3,
+      production_exclusion_count: 2,
+      permanent_block_count: 3,
+      human_review_block_count: 2,
+      memory_forbidden_block_count: 1,
+      production_candidate_created: false,
+      direct_memory_write_performed: false,
+      accepted_samples_write_performed: false,
+      every_candidate_has_evidence_record: true,
+      every_candidate_has_production_blocker_decision: true,
+      every_never_production_candidate_has_exclusion: true
+    },
+    audit_summary: {
+      accepted_sample_draft_count: 0,
+      rejected_sample_draft_count: 2,
+      memory_delta_draft_count: 1,
+      production_exclusion_count: 2,
+      never_production_count: 2,
+      memory_forbidden_count: 1,
+      selected_plugin: null,
+      max_plugin_calls_observed: 0,
+      production_candidate_created: false,
+      external_api_observed: false,
+      image_generation_observed: false,
+      memory_write_observed: false
+    },
+    blocker_highlights: [
+      {
+        candidate_id: "candidate_reject_mapped_guard_001",
+        review_outcome: "reject",
+        memory_route: "audit_only_failure_learning",
+        production_route: "never_production",
+        blocker_type: "production_exclusion",
+        decision: "block_permanently",
+        permanent_block: true,
+        production_candidate: false,
+        direct_write_performed: false
+      },
+      {
+        candidate_id: "candidate_reject_unknown_guard_001",
+        review_outcome: "reject",
+        memory_route: "forbidden",
+        production_route: "never_production",
+        blocker_type: "memory_forbidden",
+        decision: "block_memory_entry",
+        permanent_block: true,
+        production_candidate: false,
+        direct_write_performed: false
+      }
+    ],
+    no_execution_guard: {
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      daily_note_write_performed: false,
+      vcp_memory_write_performed: false,
+      image_generation_performed: false,
+      output_file_write_performed: false,
+      accepted_samples_write_performed: false,
+      production_candidate_created: false
+    }
+  },
   image_case_seed: {
     input_assets: ["asset_archive/references/photo_studio_os_reference.placeholder"],
     prompt_package_id: "prompt-package-photo-studio-os-001",

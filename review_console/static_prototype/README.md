@@ -43,6 +43,7 @@ review_console/static_prototype/index.html
 审片结果协议面板还会显示 `review_protocol_guard_summary`：包括 `memory_forbidden_count`、`memory_forbidden_candidate_ids`、`never_production_candidate_ids`、`negative_guard_observed` 和 production candidate 创建阻断状态。
 草案输出还会携带 `review_decision_package_static_handoff`，用于展示 accepted/rejected sample 草案、memory delta 草案、production exclusion register，以及 `production_candidate_created=false`、`direct_memory_write_performed=false`、`accepted_samples_write_performed=false` 的决策包阻断状态。
 草案输出还会携带 `review_evidence_blocker_contract_static_handoff`，用于展示 EvidenceRecord、BlockerDecision、ProductionExclusionRegister，以及 `evidence_record_is_not_approval`、`blocker_decision_is_not_write`、`no_production_without_human_review` 的证据仲裁边界。
+草案输出还会携带 `review_evidence_blocker_adapter_negative_static_handoff`，用于展示 adapter negative guard fixture 中的 memory-forbidden 候选、never-production 候选、production exclusion IDs，以及 evidence blocker golden fixture match 状态。
 
 ## 文件说明
 
@@ -62,9 +63,11 @@ review_console/static_prototype/index.html
 - `review_result_protocol_static_handoff`
 - `review_decision_package_static_handoff`
 - `review_evidence_blocker_contract_static_handoff`
+- `review_evidence_blocker_adapter_negative_static_handoff`
 
 其中 `review_session` 必须能映射到 `schemas/review_session.schema.yaml` 和 `review_console/review_session.schema.yaml` 的字段语义。`FIELD_MAPPING.md` 是人工验收依据。
 `review_result_protocol_static_handoff` 必须保留 pass/reject reasons、memory route、production route 和 `never_production` 边界。
 `review_protocol_guard_summary` 必须作为可见 UI guard 呈现；它只显示阻断证据，不代表允许写入记忆、创建 production candidate 或执行插件。
 `review_decision_package_static_handoff` 必须作为可见 UI guard 呈现；它只显示 sample/memory/exclusion 草案证据，不代表允许写入 accepted_samples、写入记忆或创建 production candidate。
 `review_evidence_blocker_contract_static_handoff` 必须作为可见 UI guard 呈现；它只显示 evidence/blocker/arbitration 证据，不代表 approval、write、production promotion、accepted_samples 写入、记忆写入或插件执行。
+`review_evidence_blocker_adapter_negative_static_handoff` 必须作为可见 UI guard 呈现；它只显示 adapter negative fixture 的阻断证据，不代表真实 adapter runtime、provider contact、plugin/API 调用、图片生成、accepted_samples 写入、记忆写入或 production promotion。
