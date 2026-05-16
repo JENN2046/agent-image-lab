@@ -1,5 +1,39 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.031 Visual Eval Seed Registry Planning Gate
+
+```text
+phase_id: v14_031_visual_eval_seed_registry_planning_gate
+status: completed_local_validated
+source_phase: v14_030_visual_eval_rejected_seed_fixture_implementation_gate
+source_commit: 118699a9ecef2a78ef9b13b77252e1d8f993eb10
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+phase_record: docs/v14_031_visual_eval_seed_registry_planning_gate.md
+future_registry_schema_target: schemas/visual_eval_seed_registry.schema.yaml
+future_registry_example_target: tests/schema_examples/visual_eval_seed_registry.example.yaml
+registry_schema_created: false
+registry_example_created: false
+validator_script_modified: false
+validator_wiring_modified: false
+seed_ingestion_created: false
+accepted_samples_written: false
+image_binaries_read: false
+prototype_files_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v14_032_visual_eval_seed_registry_schema_draft_gate
+local_registry_schema_and_example_only: true
+runtime_provider_image_memory_production_batch: false
+next_phase_started: false
+```
+
 # V14.030 Visual Eval Rejected Seed Fixture Implementation Gate
 
 ```text

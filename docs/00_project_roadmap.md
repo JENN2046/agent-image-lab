@@ -18,6 +18,35 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
+Current phase: v14_031_visual_eval_seed_registry_planning_gate.
+source_phase: v14_030_visual_eval_rejected_seed_fixture_implementation_gate.
+source_commit: 118699a9ecef2a78ef9b13b77252e1d8f993eb10.
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning.
+Current mainline state: Visual eval seed registry planning defines a future metadata-only registry for accepted and rejected seed fixtures. It plans registry fields, seed reference fields, fixture-ref limits, safe defaults, and validation rules without creating registry files, modifying schemas or validators, ingesting seeds, writing accepted_samples, reading image binaries, runtime, provider contact, plugin call, API call, image generation, memory write, production_candidate_002, or Batch_005.
+phase_record: docs/v14_031_visual_eval_seed_registry_planning_gate.md.
+future_registry_schema_target: schemas/visual_eval_seed_registry.schema.yaml.
+future_registry_example_target: tests/schema_examples/visual_eval_seed_registry.example.yaml.
+registry_schema_created: false.
+registry_example_created: false.
+validator_script_modified: false.
+validator_wiring_modified: false.
+seed_ingestion_created: false.
+accepted_samples_written: false.
+image_binaries_read: false.
+prototype_files_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+plugin_call: false.
+api_call: false.
+image_generation: false.
+memory_write: false.
+production_candidate_002: false.
+Batch_005: false.
+recommended_next: v14_032_visual_eval_seed_registry_schema_draft_gate.
+local_registry_schema_and_example_only: true.
+runtime_provider_image_memory_production_batch: false.
+next_phase_started: false.
 Current phase: v14_030_visual_eval_rejected_seed_fixture_implementation_gate.
 source_phase: v14_029_visual_eval_rejected_seed_fixture_planning_gate.
 source_commit: 91391b909bf9a27feb18de17c9198485d0b04e55.
