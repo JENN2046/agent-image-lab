@@ -154,6 +154,7 @@ $requiredFiles = @(
   'scripts/validate_prompt_package_library.js',
   'scripts/validate_a5_generation_template.js',
   'scripts/validate_visual_eval_seed_record_schema.js',
+  'scripts/validate_visual_eval_seed_registry_schema.js',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -217,6 +218,10 @@ $requiredFiles = @(
   'docs/v14_028_visual_eval_seed_record_validator_implementation_gate.md',
   'docs/v14_029_visual_eval_rejected_seed_fixture_planning_gate.md',
   'docs/v14_030_visual_eval_rejected_seed_fixture_implementation_gate.md',
+  'docs/v14_031_visual_eval_seed_registry_planning_gate.md',
+  'docs/v14_032_visual_eval_seed_registry_schema_draft_gate.md',
+  'docs/v14_033_visual_eval_seed_registry_validator_planning_gate.md',
+  'docs/v14_034_visual_eval_seed_registry_validator_implementation_gate.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
@@ -257,6 +262,7 @@ $requiredFiles = @(
   'schemas/dispatch_plan.schema.yaml',
   'schemas/review_session.schema.yaml',
   'schemas/visual_eval_seed_record.schema.yaml',
+  'schemas/visual_eval_seed_registry.schema.yaml',
   'tests/validation_checklist.md',
   'tests/schema_examples/task_envelope.example.yaml',
   'tests/schema_examples/review_score.example.yaml',
@@ -330,6 +336,7 @@ $requiredFiles = @(
   'tests/schema_examples/v10_28_dailynote_canonical_location_guard.example.yaml',
   'tests/schema_examples/visual_eval_seed_record.example.yaml',
   'tests/schema_examples/visual_eval_seed_record.rejected.example.yaml',
+  'tests/schema_examples/visual_eval_seed_registry.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -3955,6 +3962,11 @@ if (-not $node) {
     Add-Failure "scripts/validate_visual_eval_seed_record_schema.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'scripts/validate_visual_eval_seed_registry_schema.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_visual_eval_seed_registry_schema.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_local_checkpoint_manifest.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_local_checkpoint_manifest.js failed node --check"
@@ -4059,6 +4071,55 @@ if (-not $node) {
     }
     if ($visualEvalSeedRecord.visual_eval_seed_record_schema.file_write_performed -ne $false) {
       Add-Failure "visual eval seed record schema validation must not write files"
+    }
+  }
+
+  $visualEvalSeedRegistryOutput = & node (Join-Path $Root 'scripts/validate_visual_eval_seed_registry_schema.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "visual eval seed registry schema validation exited with failure"
+  } else {
+    $visualEvalSeedRegistry = ($visualEvalSeedRegistryOutput -join "`n") | ConvertFrom-Json
+    if ($visualEvalSeedRegistry.passed -ne $true) {
+      Add-Failure "visual eval seed registry schema validation must report passed true"
+    }
+    if ($visualEvalSeedRegistry.visual_eval_seed_registry_schema.schema_file_present -ne $true) {
+      Add-Failure "visual eval seed registry schema validation must verify schema file"
+    }
+    if ($visualEvalSeedRegistry.visual_eval_seed_registry_schema.example_file_present -ne $true) {
+      Add-Failure "visual eval seed registry schema validation must verify registry example file"
+    }
+    if ($visualEvalSeedRegistry.visual_eval_seed_registry_schema.accepted_seed_fixture_present -ne $true) {
+      Add-Failure "visual eval seed registry schema validation must verify accepted seed fixture"
+    }
+    if ($visualEvalSeedRegistry.visual_eval_seed_registry_schema.rejected_seed_fixture_present -ne $true) {
+      Add-Failure "visual eval seed registry schema validation must verify rejected seed fixture"
+    }
+    if ($visualEvalSeedRegistry.visual_eval_seed_registry_schema.fixture_refs_verified -ne $true) {
+      Add-Failure "visual eval seed registry schema validation must verify fixture refs"
+    }
+    if ($visualEvalSeedRegistry.visual_eval_seed_registry_schema.seed_id_cross_references_verified -ne $true) {
+      Add-Failure "visual eval seed registry schema validation must verify seed id cross references"
+    }
+    if ($visualEvalSeedRegistry.visual_eval_seed_registry_schema.metadata_only_verified -ne $true) {
+      Add-Failure "visual eval seed registry schema validation must verify metadata-only boundary"
+    }
+    if ($visualEvalSeedRegistry.visual_eval_seed_registry_schema.external_network_required -ne $false) {
+      Add-Failure "visual eval seed registry schema validation must not require external network"
+    }
+    if ($visualEvalSeedRegistry.visual_eval_seed_registry_schema.provider_contact_performed -ne $false) {
+      Add-Failure "visual eval seed registry schema validation must not perform provider contact"
+    }
+    if ($visualEvalSeedRegistry.visual_eval_seed_registry_schema.plugin_call_performed -ne $false) {
+      Add-Failure "visual eval seed registry schema validation must not call plugins"
+    }
+    if ($visualEvalSeedRegistry.visual_eval_seed_registry_schema.image_generation_performed -ne $false) {
+      Add-Failure "visual eval seed registry schema validation must not generate images"
+    }
+    if ($visualEvalSeedRegistry.visual_eval_seed_registry_schema.memory_write_performed -ne $false) {
+      Add-Failure "visual eval seed registry schema validation must not write memory"
+    }
+    if ($visualEvalSeedRegistry.visual_eval_seed_registry_schema.file_write_performed -ne $false) {
+      Add-Failure "visual eval seed registry schema validation must not write files"
     }
   }
 

@@ -8,6 +8,37 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+status: v14_034_visual_eval_seed_registry_validator_implementation_gate
+mode: A4.8 local validator implementation gate
+phase_id: v14_034_visual_eval_seed_registry_validator_implementation_gate
+source_phase: v14_033_visual_eval_seed_registry_validator_planning_gate
+source_commit: 5d7e369ecb18a36bde76d6200373bc6e6cb7bc92
+phase_record: docs/v14_034_visual_eval_seed_registry_validator_implementation_gate.md
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+validator_script_created: scripts/validate_visual_eval_seed_registry_schema.js
+validator_wiring_modified: scripts/validate_mvp.ps1
+registry_schema_validated: schemas/visual_eval_seed_registry.schema.yaml
+registry_example_validated: tests/schema_examples/visual_eval_seed_registry.example.yaml
+accepted_fixture_cross_checked: tests/schema_examples/visual_eval_seed_record.example.yaml
+rejected_fixture_cross_checked: tests/schema_examples/visual_eval_seed_record.rejected.example.yaml
+seed_ingestion_created: false
+accepted_samples_written: false
+image_binaries_read: false
+prototype_files_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v14_035_visual_eval_seed_registry_static_review_gate
+local_static_review_only: true
+runtime_provider_image_memory_production_batch: false
+next_phase_started: false
+branch: master
 status: v14_033_visual_eval_seed_registry_validator_planning_gate
 mode: A4.8 docs-only validator planning gate
 phase_id: v14_033_visual_eval_seed_registry_validator_planning_gate
