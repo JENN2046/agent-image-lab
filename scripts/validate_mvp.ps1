@@ -70,6 +70,7 @@ $requiredFiles = @(
   'scripts/validate_review_memory_admission_control.js',
   'scripts/validate_review_production_admission_control.js',
   'scripts/validate_review_admission_control_matrix.js',
+  'scripts/validate_review_report_contract.js',
   'scripts/validate_review_console_blocker_arbiter_boundary_scan.js',
   'scripts/validate_v5_local_sync_readiness.js',
   'scripts/validate_v5_post_commit_reconciliation.js',
@@ -192,6 +193,7 @@ $requiredFiles = @(
   'tests/schema_examples/review_memory_admission_control.example.json',
   'tests/schema_examples/review_production_admission_control.example.json',
   'tests/schema_examples/review_admission_control_matrix.example.json',
+  'tests/schema_examples/review_report_contract.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_boundary_scan.example.json',
   'tests/schema_examples/review_result_protocol_input.example.json',
   'tests/schema_examples/review_result_protocol_report.example.json',
@@ -232,6 +234,7 @@ $requiredFiles = @(
   'docs/v14_064_review_memory_admission_control_gate.md',
   'docs/v14_065_review_production_admission_control_gate.md',
   'docs/v14_066_review_admission_control_matrix_gate.md',
+  'docs/v14_067_review_report_contract_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -3979,6 +3982,11 @@ if (-not $node) {
     Add-Failure "scripts/validate_review_admission_control_matrix.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'scripts/validate_review_report_contract.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_review_report_contract.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_review_console_blocker_arbiter_boundary_scan.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_review_console_blocker_arbiter_boundary_scan.js failed node --check"
@@ -6234,6 +6242,52 @@ if (-not $node) {
     }
     if ($reviewAdmissionControlMatrix.review_admission_control_matrix.file_write_performed -ne $false) {
       Add-Failure "Review admission control matrix validation must not write files"
+    }
+  }
+
+  $reviewReportContractOutput = & node (Join-Path $Root 'scripts/validate_review_report_contract.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review report contract validation exited with failure"
+  } else {
+    $reviewReportContract = ($reviewReportContractOutput -join "`n") | ConvertFrom-Json
+    if ($reviewReportContract.passed -ne $true) {
+      Add-Failure "Review report contract validation must report passed true"
+    }
+    if ($reviewReportContract.review_report_contract.review_report_contract_present -ne $true) {
+      Add-Failure "Review report contract must be present"
+    }
+    if ($reviewReportContract.review_report_contract.review_report_matches_route_summary -ne $true) {
+      Add-Failure "Review report contract must match route summary"
+    }
+    if ($reviewReportContract.review_report_contract.review_report_matches_admission_matrix -ne $true) {
+      Add-Failure "Review report contract must match admission matrix"
+    }
+    if ($reviewReportContract.review_report_contract.review_report_pass_candidate_explained -ne $true) {
+      Add-Failure "Review report contract must explain pass candidate"
+    }
+    if ($reviewReportContract.review_report_contract.review_report_reject_candidate_explained -ne $true) {
+      Add-Failure "Review report contract must explain reject candidate"
+    }
+    if ($reviewReportContract.review_report_contract.review_report_memory_entry_blocked -ne $true) {
+      Add-Failure "Review report contract must block memory entry"
+    }
+    if ($reviewReportContract.review_report_contract.review_report_production_blocked -ne $true) {
+      Add-Failure "Review report contract must block production"
+    }
+    if ($reviewReportContract.review_report_contract.review_report_never_production_verified -ne $true) {
+      Add-Failure "Review report contract must verify never-production"
+    }
+    if ($reviewReportContract.review_report_contract.review_report_no_direct_memory_write_verified -ne $true) {
+      Add-Failure "Review report contract must verify no direct memory write"
+    }
+    if ($reviewReportContract.review_report_contract.review_report_no_accepted_samples_write_verified -ne $true) {
+      Add-Failure "Review report contract must verify no accepted_samples write"
+    }
+    if ($reviewReportContract.review_report_contract.review_report_no_production_candidate_verified -ne $true) {
+      Add-Failure "Review report contract must verify no production candidate"
+    }
+    if ($reviewReportContract.review_report_contract.file_write_performed -ne $false) {
+      Add-Failure "Review report contract validation must not write files"
     }
   }
 

@@ -9,6 +9,53 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v14_067_review_report_contract_gate.
+Status: completed_local_validated.
+Purpose: create a local ReviewReport contract that consolidates pass/reject reasons, evidence records, blocker decisions, memory draft admission, production blocking, and never-production state into one verifiable report object.
+source_phase: v14_066_review_admission_control_matrix_gate.
+source_commit: 49e57be.
+phase_record: docs/v14_067_review_report_contract_gate.md.
+selected_product_route: review_report_contract.
+review_report_fixture_created: tests/schema_examples/review_report_contract.example.json.
+validator_created: scripts/validate_review_report_contract.js.
+validator_wiring_modified: scripts/validate_mvp.ps1.
+review_report_contract_present: true.
+review_report_matches_route_summary: true.
+review_report_matches_admission_matrix: true.
+review_report_pass_candidate_explained: true.
+review_report_reject_candidate_explained: true.
+review_report_memory_entry_blocked: true.
+review_report_production_blocked: true.
+review_report_never_production_verified: true.
+review_report_no_direct_memory_write_verified: true.
+review_report_no_accepted_samples_write_verified: true.
+review_report_no_production_candidate_verified: true.
+direct_memory_write_performed: false.
+production_candidate_created: false.
+accepted_samples_written: false.
+image_binaries_read: false.
+runs_output_committed: false.
+runtime_prototype_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+plugin_call: false.
+api_call: false.
+image_generation: false.
+memory_write: false.
+DailyNote_write: false.
+VCP_memory_write: false.
+production_candidate_002: false.
+Batch_005: false.
+batch_005_allowed_now: false.
+production_candidate_002_allowed_now: false.
+memory_write_path_allowed_now: false.
+recommended_next: v14_068_review_report_adapter_handoff_gate.
+recommended_next_auto_execution_allowed: true.
+push_requires_explicit_remote_authorization: true.
+runtime_provider_image_memory_production_batch: false.
+next_phase_started: false.
+---
 Current active gate: v14_066_review_admission_control_matrix_gate.
 Status: completed_local_validated.
 Purpose: create a local admission control matrix that cross-checks memory and production admission for every reviewed candidate: passed candidates stay draft-only with no memory write or production, rejected candidates stay failure-learning-only and never-production.
