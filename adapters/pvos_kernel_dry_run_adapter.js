@@ -9,6 +9,7 @@ const {
 const { buildReviewDecisionPackage } = require("../kernel/review_decision_package");
 const { buildEvidenceBlockerContract } = require("../kernel/evidence_blocker_contract");
 const { buildReviewBlockerArbiter } = require("../kernel/review_blocker_arbiter");
+const { buildReviewReportContract } = require("../kernel/review_report_contract");
 
 const defaultInputPath = "tests/schema_examples/pvos_kernel_input.example.json";
 const defaultProtocolInputPath = "tests/schema_examples/review_result_protocol_input.example.json";
@@ -270,6 +271,62 @@ function buildReviewBlockerArbiterHandoff(reviewBlockerArbiter) {
   };
 }
 
+function buildReviewReportHandoff(reviewReportContract) {
+  const neverProductionCandidateIds = reviewReportContract.report_items
+    .filter((item) => item.production_report?.never_production === true)
+    .map((item) => item.candidate_id);
+  const memoryForbiddenCandidateIds = reviewReportContract.report_items
+    .filter((item) => item.memory_report?.memory_forbidden === true)
+    .map((item) => item.candidate_id);
+
+  return {
+    handoff_id: `review_report_handoff_${reviewReportContract.task_id}`,
+    review_report_id: reviewReportContract.review_report_id,
+    source_review_blocker_arbiter_id:
+      reviewReportContract.source_review_blocker_arbiter_id,
+    source_evidence_blocker_contract_id:
+      reviewReportContract.source_evidence_blocker_contract_id,
+    source_decision_package_id: reviewReportContract.source_decision_package_id,
+    source_protocol_id: reviewReportContract.source_protocol_id,
+    source_kernel_run_id: reviewReportContract.source_kernel_run_id,
+    status: "draft_ready",
+    candidate_count: reviewReportContract.report_summary.candidate_count,
+    pass_count: reviewReportContract.report_summary.pass_count,
+    reject_count: reviewReportContract.report_summary.reject_count,
+    never_production_count: reviewReportContract.report_summary.never_production_count,
+    memory_entry_allowed_now_count:
+      reviewReportContract.report_summary.memory_entry_allowed_now_count,
+    production_promotion_allowed_now_count:
+      reviewReportContract.report_summary.production_promotion_allowed_now_count,
+    writes_allowed_now_count: reviewReportContract.report_summary.writes_allowed_now_count,
+    never_production_candidate_ids: neverProductionCandidateIds,
+    memory_forbidden_candidate_ids: memoryForbiddenCandidateIds,
+    all_memory_writes_blocked:
+      reviewReportContract.report_summary.all_memory_writes_blocked,
+    all_production_writes_blocked:
+      reviewReportContract.report_summary.all_production_writes_blocked,
+    all_provider_execution_blocked:
+      reviewReportContract.report_summary.all_provider_execution_blocked,
+    all_candidates_have_evidence_record:
+      reviewReportContract.report_summary.all_candidates_have_evidence_record,
+    all_candidates_have_blocker_decision:
+      reviewReportContract.report_summary.all_candidates_have_blocker_decision,
+    direct_memory_write_performed: false,
+    daily_note_write_performed: false,
+    vcp_memory_write_performed: false,
+    production_candidate_created: false,
+    accepted_samples_write_performed: false,
+    required_review_report_fields: [
+      "report_items",
+      "report_summary",
+      "memory_report",
+      "production_report",
+      "final_controls",
+      "no_execution_guard",
+    ],
+  };
+}
+
 function buildAdapterResponse(input, protocolInput) {
   const kernelRun = buildKernelRun(input);
   const protocolReport = buildReviewResultProtocolReport(protocolInput, kernelRun);
@@ -280,6 +337,10 @@ function buildAdapterResponse(input, protocolInput) {
   const evidenceBlockerContractHandoff = buildEvidenceBlockerContractHandoff(evidenceBlockerContract);
   const reviewBlockerArbiter = buildReviewBlockerArbiter(evidenceBlockerContract);
   const reviewBlockerArbiterHandoff = buildReviewBlockerArbiterHandoff(reviewBlockerArbiter);
+  const reviewReportContract = buildReviewReportContract(reviewBlockerArbiter, {
+    protocolReport,
+  });
+  const reviewReportHandoff = buildReviewReportHandoff(reviewReportContract);
   const acceptedCandidateIds = kernelRun.accepted_samples.map((sample) => sample.candidate_id);
   const rejectedCandidateIds = kernelRun.rejected_samples.map((sample) => sample.candidate_id);
 
@@ -298,6 +359,8 @@ function buildAdapterResponse(input, protocolInput) {
     evidence_blocker_contract_handoff_draft: evidenceBlockerContractHandoff,
     review_blocker_arbiter: reviewBlockerArbiter,
     review_blocker_arbiter_handoff_draft: reviewBlockerArbiterHandoff,
+    review_report_contract: reviewReportContract,
+    review_report_handoff_draft: reviewReportHandoff,
     vcp_adapter_handoff_draft: {
       handoff_id: `vcp_handoff_${kernelRun.task_id}`,
       target_platform: "VCP_adapter_future",
@@ -341,6 +404,8 @@ function buildAdapterResponse(input, protocolInput) {
       evidence_blocker_contract_handoff_id: evidenceBlockerContractHandoff.handoff_id,
       review_blocker_arbiter_attached: true,
       review_blocker_arbiter_handoff_id: reviewBlockerArbiterHandoff.handoff_id,
+      review_report_contract_attached: true,
+      review_report_handoff_id: reviewReportHandoff.handoff_id,
       required_review_fields: protocolHandoff.required_review_fields,
       review_protocol_guard_summary: {
         never_production_count: protocolHandoff.never_production_count,
@@ -401,6 +466,32 @@ function buildAdapterResponse(input, protocolInput) {
         human_review_required_before_production:
           reviewBlockerArbiterHandoff.human_review_required_before_production,
       },
+      review_report_guard_summary: {
+        candidate_count: reviewReportHandoff.candidate_count,
+        pass_count: reviewReportHandoff.pass_count,
+        reject_count: reviewReportHandoff.reject_count,
+        never_production_count: reviewReportHandoff.never_production_count,
+        memory_entry_allowed_now_count:
+          reviewReportHandoff.memory_entry_allowed_now_count,
+        production_promotion_allowed_now_count:
+          reviewReportHandoff.production_promotion_allowed_now_count,
+        writes_allowed_now_count: reviewReportHandoff.writes_allowed_now_count,
+        never_production_candidate_ids:
+          reviewReportHandoff.never_production_candidate_ids,
+        memory_forbidden_candidate_ids:
+          reviewReportHandoff.memory_forbidden_candidate_ids,
+        all_memory_writes_blocked:
+          reviewReportHandoff.all_memory_writes_blocked,
+        all_production_writes_blocked:
+          reviewReportHandoff.all_production_writes_blocked,
+        all_provider_execution_blocked:
+          reviewReportHandoff.all_provider_execution_blocked,
+        production_candidate_created: false,
+        direct_memory_write_performed: false,
+        daily_note_write_performed: false,
+        vcp_memory_write_performed: false,
+        accepted_samples_write_performed: false,
+      },
     },
     provenance_handoff_draft: {
       provenance_record_id: kernelRun.provenance_record.provenance_record_id,
@@ -424,6 +515,7 @@ function buildAdapterResponse(input, protocolInput) {
       review_decision_package_observed: true,
       evidence_blocker_contract_observed: true,
       review_blocker_arbiter_observed: true,
+      review_report_contract_observed: true,
       accepted_sample_draft_count: decisionPackageHandoff.accepted_sample_draft_count,
       rejected_sample_draft_count: decisionPackageHandoff.rejected_sample_draft_count,
       memory_delta_draft_count: decisionPackageHandoff.memory_delta_draft_count,
@@ -436,6 +528,14 @@ function buildAdapterResponse(input, protocolInput) {
       arbiter_memory_forbidden_count: reviewBlockerArbiterHandoff.memory_forbidden_count,
       arbiter_never_production_count: reviewBlockerArbiterHandoff.never_production_count,
       arbiter_production_blocked_count: reviewBlockerArbiterHandoff.production_blocked_count,
+      review_report_candidate_count: reviewReportHandoff.candidate_count,
+      review_report_pass_count: reviewReportHandoff.pass_count,
+      review_report_reject_count: reviewReportHandoff.reject_count,
+      review_report_never_production_count: reviewReportHandoff.never_production_count,
+      review_report_memory_entry_allowed_now_count:
+        reviewReportHandoff.memory_entry_allowed_now_count,
+      review_report_production_promotion_allowed_now_count:
+        reviewReportHandoff.production_promotion_allowed_now_count,
       production_candidate_created: false,
       never_production_count: protocolReport.report_summary.never_production_count,
       memory_forbidden_count: protocolHandoff.memory_forbidden_count,

@@ -200,3 +200,20 @@ The pinned fixtures are:
 tests/schema_examples/review_blocker_arbiter.example.json
 tests/schema_examples/review_blocker_arbiter_negative_guard.example.json
 ```
+
+## ReviewReport Contract
+
+```powershell
+node kernel\review_report_contract.js --input tests\schema_examples\review_result_protocol_input.example.json
+node kernel\review_report_contract.js --input tests\schema_examples\review_result_protocol_negative_guard_input.example.json
+```
+
+The ReviewReport contract turns final blocker-arbiter routes into the report
+object that a Review Console or future adapter can display. It records why a
+candidate passed or rejected, which evidence and blocker records control the
+route, whether memory is draft-only or forbidden, and whether production is
+blocked forever.
+
+The contract is still stdout-only. It does not write memory, create accepted
+samples, create production candidates, call providers, call plugins, call APIs,
+or create images.

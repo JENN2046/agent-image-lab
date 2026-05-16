@@ -174,6 +174,7 @@ $requiredFiles = @(
   'kernel/review_decision_package.js',
   'kernel/evidence_blocker_contract.js',
   'kernel/review_blocker_arbiter.js',
+  'kernel/review_report_contract.js',
   'adapters/pvos_kernel_dry_run_adapter.js',
   'schemas/pvos_kernel_run.schema.yaml',
   'schemas/pvos_kernel_dry_run_adapter.schema.yaml',
@@ -235,6 +236,7 @@ $requiredFiles = @(
   'docs/v14_065_review_production_admission_control_gate.md',
   'docs/v14_066_review_admission_control_matrix_gate.md',
   'docs/v14_067_review_report_contract_gate.md',
+  'docs/v14_068_review_report_adapter_handoff_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -3987,6 +3989,11 @@ if (-not $node) {
     Add-Failure "scripts/validate_review_report_contract.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'kernel/review_report_contract.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "kernel/review_report_contract.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_review_console_blocker_arbiter_boundary_scan.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_review_console_blocker_arbiter_boundary_scan.js failed node --check"
@@ -4373,6 +4380,9 @@ if (-not $node) {
     if ($pvosAdapter.pvos_kernel_dry_run_adapter.kernel_dependency_present -ne $true) {
       Add-Failure "PVOS adapter validation must verify kernel dependency"
     }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.review_report_kernel_present -ne $true) {
+      Add-Failure "PVOS adapter validation must verify review report kernel"
+    }
     if ($pvosAdapter.pvos_kernel_dry_run_adapter.review_result_protocol_binding_present -ne $true) {
       Add-Failure "PVOS adapter validation must verify review result protocol binding"
     }
@@ -4406,6 +4416,15 @@ if (-not $node) {
     if ($pvosAdapter.pvos_kernel_dry_run_adapter.review_console_blocker_arbiter_handoff_present -ne $true) {
       Add-Failure "PVOS adapter validation must verify Review Console blocker arbiter handoff"
     }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.review_report_contract_binding_present -ne $true) {
+      Add-Failure "PVOS adapter validation must verify review report contract binding"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.review_report_handoff_present -ne $true) {
+      Add-Failure "PVOS adapter validation must verify review report handoff"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.review_console_review_report_handoff_present -ne $true) {
+      Add-Failure "PVOS adapter validation must verify Review Console review report handoff"
+    }
     if ($pvosAdapter.pvos_kernel_dry_run_adapter.evidence_blocker_contract_verified -ne $true) {
       Add-Failure "PVOS adapter validation must verify evidence blocker contract"
     }
@@ -4423,6 +4442,24 @@ if (-not $node) {
     }
     if ($pvosAdapter.pvos_kernel_dry_run_adapter.review_blocker_arbiter_reject_candidate_never_production_verified -ne $true) {
       Add-Failure "PVOS adapter validation must verify arbiter keeps reject candidate never_production"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.review_report_contract_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify review report contract"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.review_report_pass_candidate_explained_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify review report explains pass candidate"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.review_report_reject_candidate_explained_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify review report explains reject candidate"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.review_report_memory_entry_blocked_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify review report blocks memory entry"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.review_report_production_blocked_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify review report blocks production"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.review_report_never_production_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify review report never-production route"
     }
     if ($pvosAdapter.pvos_kernel_dry_run_adapter.never_production_contract_verified -ne $true) {
       Add-Failure "PVOS adapter validation must verify never-production contract"
@@ -4459,6 +4496,18 @@ if (-not $node) {
     }
     if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_review_console_blocker_arbiter_handoff_verified -ne $true) {
       Add-Failure "PVOS adapter validation must verify negative guard Review Console blocker arbiter handoff"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_review_report_contract_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify negative guard review report contract"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_review_report_handoff_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify negative guard review report handoff"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_review_console_review_report_handoff_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify negative guard Review Console review report handoff"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_review_report_memory_forbidden_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify negative guard review report memory-forbidden route"
     }
     if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_arbiter_memory_forbidden_verified -ne $true) {
       Add-Failure "PVOS adapter validation must verify negative guard arbiter memory-forbidden route"
