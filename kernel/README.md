@@ -162,3 +162,41 @@ The negative guard fixture is pinned in
 `tests/schema_examples/evidence_blocker_contract_negative_guard.example.json`.
 It must match the CLI output exactly and proves that memory-forbidden candidates
 remain blocked from memory and permanently excluded from production.
+
+## Review Blocker Arbiter
+
+```powershell
+node kernel\review_blocker_arbiter.js --input tests\schema_examples\review_result_protocol_input.example.json
+node kernel\review_blocker_arbiter.js --input tests\schema_examples\review_result_protocol_negative_guard_input.example.json
+```
+
+The review blocker arbiter turns the evidence blocker contract into final
+candidate-level verdicts for the local production kernel. It is still
+stdout-only and does not approve production or write memory. It decides whether
+each candidate is:
+
+```text
+pass_draft_only_pending_human_review
+reject_failure_learning_only_never_production
+reject_memory_forbidden_never_production
+blocked_pending_required_review
+```
+
+The arbiter preserves the hard rules: every candidate must trace to an
+EvidenceRecord and production BlockerDecision, memory-forbidden candidates
+cannot create memory drafts, never-production candidates cannot become
+production candidates, and all production promotion remains blocked until a
+human review and separate promotion gate.
+
+```powershell
+node --check kernel\review_blocker_arbiter.js
+node --check scripts\validate_review_blocker_arbiter.js
+node scripts\validate_review_blocker_arbiter.js
+```
+
+The pinned fixtures are:
+
+```text
+tests/schema_examples/review_blocker_arbiter.example.json
+tests/schema_examples/review_blocker_arbiter_negative_guard.example.json
+```

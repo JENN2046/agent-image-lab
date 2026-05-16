@@ -162,17 +162,20 @@ $requiredFiles = @(
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
   'scripts/validate_evidence_blocker_contract.js',
+  'scripts/validate_review_blocker_arbiter.js',
   'kernel/pvos_kernel.js',
   'kernel/README.md',
   'kernel/review_result_protocol.js',
   'kernel/review_decision_package.js',
   'kernel/evidence_blocker_contract.js',
+  'kernel/review_blocker_arbiter.js',
   'adapters/pvos_kernel_dry_run_adapter.js',
   'schemas/pvos_kernel_run.schema.yaml',
   'schemas/pvos_kernel_dry_run_adapter.schema.yaml',
   'schemas/review_result_protocol.schema.yaml',
   'schemas/review_decision_package.schema.yaml',
   'schemas/evidence_blocker_contract.schema.yaml',
+  'schemas/review_blocker_arbiter.schema.yaml',
   'tests/schema_examples/pvos_kernel_input.example.json',
   'tests/schema_examples/pvos_kernel_run.example.json',
   'tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json',
@@ -186,6 +189,8 @@ $requiredFiles = @(
   'tests/schema_examples/review_decision_package.example.json',
   'tests/schema_examples/evidence_blocker_contract.example.json',
   'tests/schema_examples/evidence_blocker_contract_negative_guard.example.json',
+  'tests/schema_examples/review_blocker_arbiter.example.json',
+  'tests/schema_examples/review_blocker_arbiter_negative_guard.example.json',
   'tests/schema_examples/pvos_kernel_negative_guard_input.example.json',
   'docs/v14_037_pvos_kernel_minimal_implementation_gate.md',
   'docs/v14_038_pvos_kernel_dry_run_adapter_gate.md',
@@ -208,6 +213,7 @@ $requiredFiles = @(
   'docs/v14_055_review_console_adapter_negative_fixture_draft_output_snapshot_gate.md',
   'docs/v14_056_review_console_blocker_arbiter_regression_matrix_gate.md',
   'docs/v14_057_review_console_blocker_arbiter_boundary_scan_gate.md',
+  'docs/v14_058_review_blocker_arbiter_local_kernel_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -4080,6 +4086,16 @@ if (-not $node) {
     Add-Failure "scripts/validate_evidence_blocker_contract.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'kernel/review_blocker_arbiter.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "kernel/review_blocker_arbiter.js failed node --check"
+  }
+
+  & node --check (Join-Path $Root 'scripts/validate_review_blocker_arbiter.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_review_blocker_arbiter.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_local_checkpoint_manifest.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_local_checkpoint_manifest.js failed node --check"
@@ -4661,6 +4677,91 @@ if (-not $node) {
     }
     if ($evidenceBlockerContract.evidence_blocker_contract.output_file_write_performed -ne $false) {
       Add-Failure "Evidence blocker contract validation must not write output files"
+    }
+  }
+
+  $reviewBlockerArbiterOutput = & node (Join-Path $Root 'scripts/validate_review_blocker_arbiter.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review blocker arbiter validation exited with failure"
+  } else {
+    $reviewBlockerArbiter = ($reviewBlockerArbiterOutput -join "`n") | ConvertFrom-Json
+    if ($reviewBlockerArbiter.passed -ne $true) {
+      Add-Failure "Review blocker arbiter validation must report passed true"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.arbiter_cli_present -ne $true) {
+      Add-Failure "Review blocker arbiter validation must verify arbiter CLI"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.schema_present -ne $true) {
+      Add-Failure "Review blocker arbiter validation must verify schema"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.example_present -ne $true) {
+      Add-Failure "Review blocker arbiter validation must verify example"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.negative_guard_example_present -ne $true) {
+      Add-Failure "Review blocker arbiter validation must verify negative guard example"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.stdout_only -ne $true) {
+      Add-Failure "Review blocker arbiter validation must verify stdout-only boundary"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.candidate_arbitrations_verified -ne $true) {
+      Add-Failure "Review blocker arbiter validation must verify candidate arbitrations"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.evidence_contract_trace_verified -ne $true) {
+      Add-Failure "Review blocker arbiter validation must verify evidence contract trace"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.default_pass_candidate_human_review_blocked_verified -ne $true) {
+      Add-Failure "Review blocker arbiter validation must verify pass candidate remains blocked pending human review"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.default_reject_candidate_never_production_verified -ne $true) {
+      Add-Failure "Review blocker arbiter validation must verify rejected candidate is never_production"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.negative_guard_memory_forbidden_verified -ne $true) {
+      Add-Failure "Review blocker arbiter validation must verify negative guard memory forbidden"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.negative_guard_never_production_verified -ne $true) {
+      Add-Failure "Review blocker arbiter validation must verify negative guard never production"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.negative_guard_memory_forbidden_prevents_memory_verified -ne $true) {
+      Add-Failure "Review blocker arbiter validation must verify memory-forbidden candidate cannot enter memory"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.production_promotion_blocked_verified -ne $true) {
+      Add-Failure "Review blocker arbiter validation must verify production promotion is blocked"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.default_arbiter_example_matches_cli_output -ne $true) {
+      Add-Failure "Review blocker arbiter validation must verify default example matches CLI output"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.negative_guard_arbiter_example_matches_cli_output -ne $true) {
+      Add-Failure "Review blocker arbiter validation must verify negative guard example matches CLI output"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.no_direct_memory_write_verified -ne $true) {
+      Add-Failure "Review blocker arbiter validation must verify no direct memory write"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.no_production_candidate_created_verified -ne $true) {
+      Add-Failure "Review blocker arbiter validation must verify no production candidate creation"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.no_accepted_samples_write_verified -ne $true) {
+      Add-Failure "Review blocker arbiter validation must verify no accepted_samples write"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.provider_contact_performed -ne $false) {
+      Add-Failure "Review blocker arbiter validation must not perform provider contact"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.plugin_call_performed -ne $false) {
+      Add-Failure "Review blocker arbiter validation must not call plugins"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.api_call_performed -ne $false) {
+      Add-Failure "Review blocker arbiter validation must not call APIs"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.image_generation_performed -ne $false) {
+      Add-Failure "Review blocker arbiter validation must not generate images"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.daily_note_write_performed -ne $false) {
+      Add-Failure "Review blocker arbiter validation must not write DailyNote"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.vcp_memory_write_performed -ne $false) {
+      Add-Failure "Review blocker arbiter validation must not write VCP memory"
+    }
+    if ($reviewBlockerArbiter.review_blocker_arbiter.output_file_write_performed -ne $false) {
+      Add-Failure "Review blocker arbiter validation must not write output files"
     }
   }
 

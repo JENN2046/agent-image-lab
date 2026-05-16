@@ -1,5 +1,74 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.058-REVIEW-BLOCKER-ARBITER-LOCAL-KERNEL
+
+Task:
+
+```text
+Add a local stdout-only review blocker arbiter kernel that traces candidate verdicts back to EvidenceRecord, BlockerDecision, and ProductionExclusionRegister while blocking production promotion, memory writes, accepted_samples writes, provider/plugin/API/image/runtime actions, and VCP source access.
+```
+
+Result:
+
+```text
+phase_record: docs/v14_058_review_blocker_arbiter_local_kernel_gate.md
+source_commit: 58e68f7
+selected_product_route: review_blocker_arbiter_local_kernel
+arbiter_cli_created: kernel/review_blocker_arbiter.js
+schema_created: schemas/review_blocker_arbiter.schema.yaml
+example_created: tests/schema_examples/review_blocker_arbiter.example.json
+negative_guard_example_created: tests/schema_examples/review_blocker_arbiter_negative_guard.example.json
+validator_created: scripts/validate_review_blocker_arbiter.js
+validator_wiring_modified: scripts/validate_mvp.ps1
+kernel_readme_updated: kernel/README.md
+candidate_arbitrations_verified: true
+evidence_contract_trace_verified: true
+default_pass_candidate_human_review_blocked_verified: true
+default_reject_candidate_never_production_verified: true
+negative_guard_memory_forbidden_verified: true
+negative_guard_never_production_verified: true
+negative_guard_memory_forbidden_prevents_memory_verified: true
+production_promotion_blocked_verified: true
+direct_memory_write_performed: false
+production_candidate_created: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+validation_result: passed
+```
+
+Commands run:
+
+```text
+node --check kernel/review_blocker_arbiter.js
+node --check scripts/validate_review_blocker_arbiter.js
+node scripts/validate_review_blocker_arbiter.js
+node scripts/validate_evidence_blocker_contract.js
+node scripts/validate_review_console_blocker_arbiter_regression_matrix.js
+node scripts/validate_review_console_blocker_arbiter_boundary_scan.js
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+node scripts/validate_agent_board_state.js
+node scripts/validate_current_state_alignment.js
+git diff --check
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+Validation notes:
+
+```text
+The arbiter validator compares default and negative guard CLI output against pinned fixtures, checks schema tokens, traces every arbitration back to the evidence blocker contract, and verifies memory-forbidden and never-production candidates cannot enter memory or production. MVP, agent-board, current-state, whitespace, and local project validation passed. Local project validation reported existing manual-review warning patterns only.
+```
+
+Boundary:
+
+```text
+No runtime prototype edit, adapter runtime edit, provider contact, plugin call, API call, image generation, accepted_samples write, image binary read, runs output commit, DailyNote write, VCP memory write, external manifest read, real VCPChat/VCPToolBox read, real VCP runtime integration, dependency change, package change, tag, release, deploy, or push is performed by v14.058.
+```
+
 ## VALIDATION-20260517-v14.057-REVIEW-CONSOLE-BLOCKER-ARBITER-BOUNDARY-SCAN
 
 Task:

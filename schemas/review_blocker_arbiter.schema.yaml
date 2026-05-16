@@ -1,0 +1,91 @@
+schema_id: review_blocker_arbiter
+version: v1
+purpose: >
+  Local stdout-only arbiter that turns an EvidenceBlockerContract into final
+  candidate-level blocker verdicts for memory and production promotion.
+base_contract: AGENTS.md
+mode: local_stdout_only_blocker_arbiter
+input:
+  required:
+    evidence_blocker_contract_version: v1
+    evidence_records: array
+    blocker_decisions: array
+    production_exclusion_register: array
+output:
+  required:
+    review_blocker_arbiter_version: v1
+    arbiter_id: string
+    source_evidence_blocker_contract_id: string
+    source_decision_package_id: string
+    source_protocol_id: string
+    source_kernel_run_id: string
+    task_id: string
+    status: completed_local_blocker_arbiter
+    mode: local_stdout_only_blocker_arbiter
+    candidate_arbitrations:
+      item_required:
+        candidate_id: string
+        shot_id: string
+        review_outcome: pass | reject
+        evidence_record_id: string
+        production_blocker_decision_id: string | null
+        memory_blocker_decision_ids: array
+        production_exclusion_record_id: string | null
+        final_route: pass_draft_only_pending_human_review | reject_failure_learning_only_never_production | reject_memory_forbidden_never_production | blocked_pending_required_review
+        production_decision: block_permanently | block_until_human_review
+        production_promotion_allowed_now: false
+        production_candidate_created: false
+        never_production: boolean
+        memory_decision: block_memory_entry | block_until_human_memory_approval
+        memory_draft_allowed: boolean
+        memory_entry_allowed_now: false
+        memory_forbidden: boolean
+        accepted_samples_write_performed: false
+        direct_memory_write_performed: false
+        requires_human_review: true
+    arbiter_summary:
+      candidate_count: integer
+      passed_candidate_count: integer
+      rejected_candidate_count: integer
+      memory_draft_candidate_count: integer
+      memory_forbidden_count: integer
+      never_production_count: integer
+      production_blocked_count: integer
+      permanent_block_count: integer
+      human_review_required_count: integer
+      all_production_blocked: true
+      all_writes_blocked: true
+      direct_memory_write_performed: false
+      production_candidate_created: false
+      accepted_samples_write_performed: false
+    promotion_guard:
+      evidence_required_for_every_candidate: true
+      blocker_required_for_every_candidate: true
+      memory_forbidden_prevents_memory: true
+      never_production_prevents_production: true
+      pass_is_not_production_approval: true
+      human_review_required_before_production: true
+      production_candidate_created: false
+      direct_memory_write_performed: false
+      accepted_samples_write_performed: false
+boundary:
+  output_channel: stdout
+  output_file_write_allowed: false
+  provider_contact_allowed: false
+  plugin_call_allowed: false
+  api_call_allowed: false
+  image_generation_allowed: false
+  daily_note_write_allowed: false
+  vcp_memory_write_allowed: false
+  accepted_samples_write_allowed: false
+  production_candidate_write_allowed: false
+  external_manifest_read_allowed: false
+  real_vcpchat_source_read_allowed: false
+  real_vcptoolbox_source_read_allowed: false
+  dependency_change_allowed: false
+hard_rules:
+  - Arbiter output is a verdict only and cannot approve production.
+  - Passing review can only become draft evidence until human review.
+  - Memory-forbidden candidates cannot create memory drafts or memory writes.
+  - Never-production candidates cannot become production candidates.
+  - No arbiter output may perform file, image, plugin, API, DailyNote, VCP memory, accepted_samples, or production candidate writes.
