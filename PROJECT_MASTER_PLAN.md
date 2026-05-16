@@ -8,6 +8,37 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+status: v14_033_visual_eval_seed_registry_validator_planning_gate
+mode: A4.8 docs-only validator planning gate
+phase_id: v14_033_visual_eval_seed_registry_validator_planning_gate
+source_phase: v14_032_visual_eval_seed_registry_schema_draft_gate
+source_commit: 0d9620e04befc21a633153b60ff664c7ceec51c6
+phase_record: docs/v14_033_visual_eval_seed_registry_validator_planning_gate.md
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+future_validator_target: scripts/validate_visual_eval_seed_registry_schema.js
+future_mvp_wiring_target: scripts/validate_mvp.ps1
+validator_script_created: false
+validator_wiring_modified: false
+schema_files_modified: false
+example_files_modified: false
+seed_ingestion_created: false
+accepted_samples_written: false
+image_binaries_read: false
+prototype_files_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v14_034_visual_eval_seed_registry_validator_implementation_gate
+local_registry_validator_implementation_only: true
+runtime_provider_image_memory_production_batch: false
+next_phase_started: false
+branch: master
 status: v14_032_visual_eval_seed_registry_schema_draft_gate
 mode: A4.8 local schema draft gate
 phase_id: v14_032_visual_eval_seed_registry_schema_draft_gate
