@@ -50,6 +50,12 @@ pvos_kernel_dry_run_adapter_response:
     status: draft_ready
     production_candidate_created: false
     direct_memory_write_performed: false
+    never_production_candidate_ids: array
+    memory_forbidden_count: integer
+    memory_forbidden_candidate_ids: array
+    production_blocked_count: integer
+    all_production_candidate_creation_blocked: true
+    negative_guard_observed: boolean
     required_review_fields:
       - review_outcome
       - pass_reasons
@@ -61,6 +67,12 @@ pvos_kernel_dry_run_adapter_response:
     human_review_required_for_production: true
     memory_write_requires_separate_approval: true
     review_result_protocol_report_attached: true
+    review_protocol_guard_summary:
+      never_production_count: integer
+      memory_forbidden_count: integer
+      production_candidate_created: false
+      direct_memory_write_performed: false
+      negative_guard_observed: boolean
     forbidden_actions:
       - execute_plugin
       - call_api

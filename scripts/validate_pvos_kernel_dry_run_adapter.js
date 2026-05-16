@@ -12,6 +12,8 @@ const schemaPath = "schemas/pvos_kernel_dry_run_adapter.schema.yaml";
 const examplePath = "tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json";
 const fixturePath = "tests/schema_examples/pvos_kernel_input.example.json";
 const protocolFixturePath = "tests/schema_examples/review_result_protocol_input.example.json";
+const negativeGuardFixturePath = "tests/schema_examples/pvos_kernel_negative_guard_input.example.json";
+const negativeGuardProtocolFixturePath = "tests/schema_examples/review_result_protocol_negative_guard_input.example.json";
 
 const errors = [];
 const results = [];
@@ -75,19 +77,19 @@ function runNodeCheck(relativePath) {
   addResult(`${relativePath}_node_check_passed`, result.status === 0, result.stderr || result.stdout);
 }
 
-function runAdapter() {
+function runAdapter(inputPath, protocolInputPath, label) {
   const result = childProcess.spawnSync(
     process.execPath,
-    [repoPath(adapterPath), "--input", fixturePath],
+    [repoPath(adapterPath), "--input", inputPath, "--protocol-input", protocolInputPath],
     { cwd: root, encoding: "utf8" }
   );
-  addResult("adapter_cli_exit_zero", result.status === 0, result.stderr || result.stdout);
-  addResult("adapter_cli_stderr_empty", result.stderr.trim() === "", result.stderr);
+  addResult(`${label}_adapter_cli_exit_zero`, result.status === 0, result.stderr || result.stdout);
+  addResult(`${label}_adapter_cli_stderr_empty`, result.stderr.trim() === "", result.stderr);
   if (result.status !== 0) return null;
   try {
     return JSON.parse(result.stdout);
   } catch (error) {
-    addResult("adapter_cli_stdout_json_parseable", false, error.message);
+    addResult(`${label}_adapter_cli_stdout_json_parseable`, false, error.message);
     return null;
   }
 }
@@ -155,8 +157,20 @@ function validateResponse(response) {
   addResult("protocol_handoff_pass_count_one", protocolHandoff.pass_count === 1);
   addResult("protocol_handoff_reject_count_one", protocolHandoff.reject_count === 1);
   addResult("protocol_handoff_never_production_count_one", protocolHandoff.never_production_count === 1);
+  addResult("protocol_handoff_never_production_ids_present", Array.isArray(protocolHandoff.never_production_candidate_ids) && protocolHandoff.never_production_candidate_ids.includes("candidate_reject_metadata_001"));
+  addResult("protocol_handoff_memory_forbidden_count_zero", protocolHandoff.memory_forbidden_count === 0);
+  addResult("protocol_handoff_production_blocked_count_two", protocolHandoff.production_blocked_count === 2);
+  addResult("protocol_handoff_all_production_blocked", protocolHandoff.all_production_candidate_creation_blocked === true);
+  addResult("protocol_handoff_negative_guard_false", protocolHandoff.negative_guard_observed === false);
   addResult("protocol_handoff_production_candidate_false", protocolHandoff.production_candidate_created === false);
   addResult("protocol_handoff_direct_memory_write_false", protocolHandoff.direct_memory_write_performed === false);
+
+  const reviewGuard = review.review_protocol_guard_summary || {};
+  addResult("review_console_guard_summary_present", Boolean(review.review_protocol_guard_summary));
+  addResult("review_console_guard_never_production_count_one", reviewGuard.never_production_count === 1);
+  addResult("review_console_guard_memory_forbidden_count_zero", reviewGuard.memory_forbidden_count === 0);
+  addResult("review_console_guard_production_candidate_false", reviewGuard.production_candidate_created === false);
+  addResult("review_console_guard_direct_memory_write_false", reviewGuard.direct_memory_write_performed === false);
 
   const provenance = response.provenance_handoff_draft || {};
   addResult("provenance_payload_absent", provenance.provider_payload_included === false);
@@ -177,11 +191,81 @@ function validateResponse(response) {
   addResult("audit_protocol_observed_true", response.audit_record?.review_result_protocol_observed === true);
   addResult("audit_production_candidate_false", response.audit_record?.production_candidate_created === false);
   addResult("audit_never_production_count_one", response.audit_record?.never_production_count === 1);
+  addResult("audit_memory_forbidden_count_zero", response.audit_record?.memory_forbidden_count === 0);
+  addResult("audit_negative_guard_false", response.audit_record?.negative_guard_observed === false);
 
   validateNoSensitiveMaterial("adapter_response_stdout", JSON.stringify(response));
 }
 
-for (const file of [adapterPath, kernelPath, schemaPath, examplePath, fixturePath, protocolFixturePath]) {
+function validateNegativeGuardAdapterResponse(response) {
+  addResult("negative_adapter_response_version_v1", response.pvos_kernel_dry_run_adapter_response_version === "v1");
+  addResult("negative_adapter_status_accepted_draft", response.status === "accepted_draft");
+  addResult("negative_adapter_mode_no_execution", response.mode === "local_no_execution_adapter_contract");
+
+  const review = response.review_console_handoff_draft || {};
+  addResult("negative_review_console_no_accepted_candidates", Array.isArray(review.accepted_candidate_ids) && review.accepted_candidate_ids.length === 0);
+  addResult("negative_review_console_two_rejected_candidates", Array.isArray(review.rejected_candidate_ids) && review.rejected_candidate_ids.length === 2);
+  addResult("negative_review_console_display_only", review.display_only === true);
+  addResult("negative_review_console_protocol_attached", review.review_result_protocol_report_attached === true);
+
+  const protocolReport = response.review_result_protocol_report || {};
+  addResult("negative_protocol_report_pass_count_zero", protocolReport.report_summary?.pass_count === 0);
+  addResult("negative_protocol_report_reject_count_two", protocolReport.report_summary?.reject_count === 2);
+  addResult("negative_protocol_report_never_production_count_two", protocolReport.report_summary?.never_production_count === 2);
+  addResult("negative_protocol_report_direct_memory_write_false", protocolReport.report_summary?.direct_memory_write_performed === false);
+  addResult("negative_protocol_report_production_candidate_false", protocolReport.report_summary?.production_candidate_created === false);
+
+  const protocolHandoff = response.review_result_protocol_handoff_draft || {};
+  addResult("negative_protocol_handoff_draft_ready", protocolHandoff.status === "draft_ready");
+  addResult("negative_protocol_handoff_pass_count_zero", protocolHandoff.pass_count === 0);
+  addResult("negative_protocol_handoff_reject_count_two", protocolHandoff.reject_count === 2);
+  addResult("negative_protocol_handoff_never_production_count_two", protocolHandoff.never_production_count === 2);
+  addResult("negative_protocol_handoff_memory_forbidden_count_one", protocolHandoff.memory_forbidden_count === 1);
+  addResult(
+    "negative_protocol_handoff_unknown_memory_forbidden_id",
+    Array.isArray(protocolHandoff.memory_forbidden_candidate_ids) &&
+      protocolHandoff.memory_forbidden_candidate_ids.includes("candidate_reject_unknown_guard_001")
+  );
+  addResult(
+    "negative_protocol_handoff_never_production_ids_present",
+    Array.isArray(protocolHandoff.never_production_candidate_ids) &&
+      protocolHandoff.never_production_candidate_ids.includes("candidate_reject_mapped_guard_001") &&
+      protocolHandoff.never_production_candidate_ids.includes("candidate_reject_unknown_guard_001")
+  );
+  addResult("negative_protocol_handoff_all_production_blocked", protocolHandoff.all_production_candidate_creation_blocked === true);
+  addResult("negative_protocol_handoff_negative_guard_true", protocolHandoff.negative_guard_observed === true);
+  addResult("negative_protocol_handoff_production_candidate_false", protocolHandoff.production_candidate_created === false);
+  addResult("negative_protocol_handoff_direct_memory_write_false", protocolHandoff.direct_memory_write_performed === false);
+
+  const reviewGuard = review.review_protocol_guard_summary || {};
+  addResult("negative_review_guard_summary_present", Boolean(review.review_protocol_guard_summary));
+  addResult("negative_review_guard_never_production_count_two", reviewGuard.never_production_count === 2);
+  addResult("negative_review_guard_memory_forbidden_count_one", reviewGuard.memory_forbidden_count === 1);
+  addResult("negative_review_guard_production_candidate_false", reviewGuard.production_candidate_created === false);
+  addResult("negative_review_guard_direct_memory_write_false", reviewGuard.direct_memory_write_performed === false);
+  addResult("negative_review_guard_negative_guard_true", reviewGuard.negative_guard_observed === true);
+
+  addResult("negative_audit_production_candidate_false", response.audit_record?.production_candidate_created === false);
+  addResult("negative_audit_never_production_count_two", response.audit_record?.never_production_count === 2);
+  addResult("negative_audit_memory_forbidden_count_one", response.audit_record?.memory_forbidden_count === 1);
+  addResult("negative_audit_negative_guard_true", response.audit_record?.negative_guard_observed === true);
+
+  for (const flag of falseGuardFields) {
+    addResult(`negative_adapter_guard_${flag}_false`, response.no_execution_guard?.[flag] === false);
+  }
+  validateNoSensitiveMaterial("negative_adapter_response_stdout", JSON.stringify(response));
+}
+
+for (const file of [
+  adapterPath,
+  kernelPath,
+  schemaPath,
+  examplePath,
+  fixturePath,
+  protocolFixturePath,
+  negativeGuardFixturePath,
+  negativeGuardProtocolFixturePath,
+]) {
   addResult(`${file}_exists`, fs.existsSync(repoPath(file)), file);
 }
 
@@ -197,6 +281,9 @@ try {
   addResult("schema_protocol_report_declared", /review_result_protocol_report/.test(schema));
   addResult("schema_protocol_handoff_declared", /review_result_protocol_handoff_draft/.test(schema));
   addResult("schema_protocol_attached_declared", /review_result_protocol_report_attached: true/.test(schema));
+  addResult("schema_negative_guard_declared", /negative_guard_observed: boolean/.test(schema));
+  addResult("schema_memory_forbidden_declared", /memory_forbidden_count: integer/.test(schema));
+  addResult("schema_never_production_ids_declared", /never_production_candidate_ids: array/.test(schema));
   validateNoSensitiveMaterial("schema", schema);
 } catch (error) {
   addResult("schema_readable", false, error.message);
@@ -210,7 +297,12 @@ try {
   addResult("example_protocol_report_present", Boolean(example.review_result_protocol_report));
   addResult("example_protocol_handoff_present", Boolean(example.review_result_protocol_handoff_draft));
   addResult("example_protocol_never_production_count_one", example.review_result_protocol_report?.report_summary?.never_production_count === 1);
+  addResult("example_protocol_handoff_memory_forbidden_count_zero", example.review_result_protocol_handoff_draft?.memory_forbidden_count === 0);
+  addResult("example_protocol_handoff_all_production_blocked", example.review_result_protocol_handoff_draft?.all_production_candidate_creation_blocked === true);
+  addResult("example_protocol_handoff_negative_guard_false", example.review_result_protocol_handoff_draft?.negative_guard_observed === false);
   addResult("example_review_console_protocol_attached", example.review_console_handoff_draft?.review_result_protocol_report_attached === true);
+  addResult("example_review_console_guard_summary_present", Boolean(example.review_console_handoff_draft?.review_protocol_guard_summary));
+  addResult("example_review_console_guard_memory_forbidden_count_zero", example.review_console_handoff_draft?.review_protocol_guard_summary?.memory_forbidden_count === 0);
   for (const flag of falseGuardFields) {
     addResult(`example_guard_${flag}_false`, example.no_execution_guard?.[flag] === false);
   }
@@ -219,10 +311,16 @@ try {
   addResult("example_parseable", false, error.message);
 }
 
-const response = runAdapter();
+const response = runAdapter(fixturePath, protocolFixturePath, "adapter");
 if (response) {
   addResult("adapter_cli_stdout_json_parseable", true);
   validateResponse(response);
+}
+
+const negativeGuardResponse = runAdapter(negativeGuardFixturePath, negativeGuardProtocolFixturePath, "negative_guard_adapter");
+if (negativeGuardResponse) {
+  addResult("negative_guard_adapter_cli_stdout_json_parseable", true);
+  validateNegativeGuardAdapterResponse(negativeGuardResponse);
 }
 
 const passed = errors.length === 0;
@@ -230,7 +328,16 @@ const summary = {
   validator: "validate_pvos_kernel_dry_run_adapter",
   version: "v1",
   passed,
-  files_checked: [adapterPath, kernelPath, schemaPath, examplePath, fixturePath, protocolFixturePath],
+  files_checked: [
+    adapterPath,
+    kernelPath,
+    schemaPath,
+    examplePath,
+    fixturePath,
+    protocolFixturePath,
+    negativeGuardFixturePath,
+    negativeGuardProtocolFixturePath,
+  ],
   check_count: results.length,
   failed_count: errors.length,
   pvos_kernel_dry_run_adapter: {
@@ -241,6 +348,12 @@ const summary = {
     review_result_protocol_binding_present: true,
     review_console_protocol_handoff_present: true,
     never_production_contract_verified: true,
+    negative_guard_adapter_handoff_verified: true,
+    negative_guard_review_console_handoff_verified: true,
+    negative_guard_memory_forbidden_verified: true,
+    negative_guard_all_rejected_never_production_verified: true,
+    negative_guard_no_production_candidate_verified: true,
+    negative_guard_no_direct_memory_write_verified: true,
     stdout_only: true,
     external_network_required: false,
     external_service_required: false,

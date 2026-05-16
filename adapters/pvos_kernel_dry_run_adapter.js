@@ -66,6 +66,17 @@ function parseArgs(argv) {
 }
 
 function buildProtocolHandoff(protocolReport) {
+  const candidateResults = protocolReport.candidate_review_results || [];
+  const neverProductionCandidateIds = candidateResults
+    .filter((candidate) => candidate.production_route?.status === "never_production")
+    .map((candidate) => candidate.candidate_id);
+  const memoryForbiddenCandidateIds = candidateResults
+    .filter((candidate) => candidate.memory_route?.route === "forbidden")
+    .map((candidate) => candidate.candidate_id);
+  const productionBlockedCount = candidateResults.filter(
+    (candidate) => candidate.production_route?.production_candidate === false
+  ).length;
+
   return {
     handoff_id: `review_protocol_handoff_${protocolReport.task_id}`,
     protocol_id: protocolReport.protocol_id,
@@ -75,6 +86,15 @@ function buildProtocolHandoff(protocolReport) {
     pass_count: protocolReport.report_summary.pass_count,
     reject_count: protocolReport.report_summary.reject_count,
     never_production_count: protocolReport.report_summary.never_production_count,
+    never_production_candidate_ids: neverProductionCandidateIds,
+    memory_forbidden_count: memoryForbiddenCandidateIds.length,
+    memory_forbidden_candidate_ids: memoryForbiddenCandidateIds,
+    production_blocked_count: productionBlockedCount,
+    all_production_candidate_creation_blocked: productionBlockedCount === candidateResults.length,
+    negative_guard_observed:
+      protocolReport.report_summary.pass_count === 0 &&
+      protocolReport.report_summary.reject_count === candidateResults.length &&
+      protocolReport.report_summary.never_production_count === candidateResults.length,
     production_candidate_created: false,
     direct_memory_write_performed: false,
     required_review_fields: [
@@ -141,6 +161,15 @@ function buildAdapterResponse(input, protocolInput) {
       review_result_protocol_report_attached: true,
       review_result_protocol_handoff_id: protocolHandoff.handoff_id,
       required_review_fields: protocolHandoff.required_review_fields,
+      review_protocol_guard_summary: {
+        never_production_count: protocolHandoff.never_production_count,
+        never_production_candidate_ids: protocolHandoff.never_production_candidate_ids,
+        memory_forbidden_count: protocolHandoff.memory_forbidden_count,
+        memory_forbidden_candidate_ids: protocolHandoff.memory_forbidden_candidate_ids,
+        production_candidate_created: false,
+        direct_memory_write_performed: false,
+        negative_guard_observed: protocolHandoff.negative_guard_observed,
+      },
     },
     provenance_handoff_draft: {
       provenance_record_id: kernelRun.provenance_record.provenance_record_id,
@@ -163,6 +192,8 @@ function buildAdapterResponse(input, protocolInput) {
       review_result_protocol_observed: true,
       production_candidate_created: false,
       never_production_count: protocolReport.report_summary.never_production_count,
+      memory_forbidden_count: protocolHandoff.memory_forbidden_count,
+      negative_guard_observed: protocolHandoff.negative_guard_observed,
     },
     no_execution_guard: adapterGuard,
   };

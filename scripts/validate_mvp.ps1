@@ -179,6 +179,7 @@ $requiredFiles = @(
   'docs/v14_041_review_console_protocol_static_contract_gate.md',
   'docs/v14_042_review_console_protocol_ui_affordance_gate.md',
   'docs/v14_043_review_protocol_fixture_negative_guard_gate.md',
+  'docs/v14_044_review_protocol_negative_guard_adapter_handoff_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -4254,6 +4255,24 @@ if (-not $node) {
     }
     if ($pvosAdapter.pvos_kernel_dry_run_adapter.never_production_contract_verified -ne $true) {
       Add-Failure "PVOS adapter validation must verify never-production contract"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_adapter_handoff_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify negative guard adapter handoff"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_review_console_handoff_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify negative guard Review Console handoff"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_memory_forbidden_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify negative guard forbidden memory route"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_all_rejected_never_production_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify all negative guard candidates are never_production"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_no_production_candidate_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify negative guard production candidate creation is false"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_no_direct_memory_write_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify negative guard direct memory write is false"
     }
     if ($pvosAdapter.pvos_kernel_dry_run_adapter.stdout_only -ne $true) {
       Add-Failure "PVOS adapter validation must verify stdout-only boundary"

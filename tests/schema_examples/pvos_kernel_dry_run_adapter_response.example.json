@@ -61,6 +61,14 @@
     "pass_count": 1,
     "reject_count": 1,
     "never_production_count": 1,
+    "never_production_candidate_ids": [
+      "candidate_reject_metadata_001"
+    ],
+    "memory_forbidden_count": 0,
+    "memory_forbidden_candidate_ids": [],
+    "production_blocked_count": 2,
+    "all_production_candidate_creation_blocked": true,
+    "negative_guard_observed": false,
     "production_candidate_created": false,
     "direct_memory_write_performed": false,
     "required_review_fields": [
@@ -96,6 +104,17 @@
     "human_review_required_for_production": true,
     "memory_write_requires_separate_approval": true,
     "review_result_protocol_report_attached": true,
+    "review_protocol_guard_summary": {
+      "never_production_count": 1,
+      "never_production_candidate_ids": [
+        "candidate_reject_metadata_001"
+      ],
+      "memory_forbidden_count": 0,
+      "memory_forbidden_candidate_ids": [],
+      "production_candidate_created": false,
+      "direct_memory_write_performed": false,
+      "negative_guard_observed": false
+    },
     "required_review_fields": [
       "review_outcome",
       "pass_reasons",
@@ -120,7 +139,9 @@
     "memory_write_observed": false,
     "review_result_protocol_observed": true,
     "production_candidate_created": false,
-    "never_production_count": 1
+    "never_production_count": 1,
+    "memory_forbidden_count": 0,
+    "negative_guard_observed": false
   },
   "no_execution_guard": {
     "execution_authorized": false,
