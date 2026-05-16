@@ -3,6 +3,37 @@
 ## Handoff Summary
 
 ```text
+Status: v14_036_visual_eval_seed_registry_closeout_or_expansion_route_gate completed locally and validated.
+Reason: V14.036 closes the visual-evaluation seed registry foundation lane after the v14.031-v14.035 chain. It records that the registry plan, metadata-only schema/example, accepted and rejected seed fixture references, dedicated read-only validator, MVP wiring, and static review are complete enough for this lane. Immediate metadata-only fixture expansion is deferred to a separate future planning gate.
+Current repository: project_root
+Branch: master tracking origin/master
+source_phase: v14_035_visual_eval_seed_registry_static_review_gate
+source_commit: ec6f75d6f60a94a0243fb72362da2e6f4d96022b
+phase_record: docs/v14_036_visual_eval_seed_registry_closeout_or_expansion_route_gate.md
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+route_decision: close_foundation_lane
+immediate_metadata_expansion_selected: false
+metadata_expansion_requires_new_gate: true
+schema_files_modified: false
+example_files_modified: false
+validator_script_modified: false
+validator_wiring_modified: false
+seed_ingestion_created: false
+accepted_samples_written: false
+image_binaries_read: false
+prototype_files_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+production_candidate_002: false
+Batch_005: false
+push_performed: false
+next_phase_started: false
+---
 Status: v14_035_visual_eval_seed_registry_static_review_gate completed locally and validated.
 Reason: V14.035 statically reviews the v14.034 registry validator and MVP wiring against the v14.033 plan. It records pass status for read-only local validation, fixture-ref containment, accepted/rejected seed cross-checks, safe defaults, boundary flags, and sensitive-material scans without modifying scripts, schemas, examples, ingesting seeds, writing accepted_samples, reading image binaries, or entering runtime/provider/plugin/API/image/memory/production paths.
 Current repository: project_root

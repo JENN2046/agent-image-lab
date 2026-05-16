@@ -8,6 +8,41 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+status: v14_036_visual_eval_seed_registry_closeout_or_expansion_route_gate
+mode: A4.8 docs-only route closeout gate
+phase_id: v14_036_visual_eval_seed_registry_closeout_or_expansion_route_gate
+source_phase: v14_035_visual_eval_seed_registry_static_review_gate
+source_commit: ec6f75d6f60a94a0243fb72362da2e6f4d96022b
+phase_record: docs/v14_036_visual_eval_seed_registry_closeout_or_expansion_route_gate.md
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+route_decision: close_foundation_lane
+immediate_metadata_expansion_selected: false
+metadata_expansion_requires_new_gate: true
+schema_files_modified: false
+example_files_modified: false
+validator_script_modified: false
+validator_wiring_modified: false
+seed_ingestion_created: false
+accepted_samples_written: false
+image_binaries_read: false
+prototype_files_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+production_candidate_002: false
+Batch_005: false
+push_performed: false
+recommended_next: pending_human_v14_next_route_selection
+recommended_next_auto_execution_allowed: false
+local_foundation_lane_closed: true
+push_requires_explicit_remote_authorization: true
+runtime_provider_image_memory_production_batch: false
+next_phase_started: false
+branch: master
 status: v14_035_visual_eval_seed_registry_static_review_gate
 mode: A4.8 static review gate
 phase_id: v14_035_visual_eval_seed_registry_static_review_gate
