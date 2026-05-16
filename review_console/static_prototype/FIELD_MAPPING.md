@@ -322,6 +322,21 @@ Phase 9 审批记录必须满足：
 
 `review_report_memory_admission_register.example.json` 是本地 memory admission 证据，不是 memory 写入记录。它只证明哪些候选可形成草案、哪些候选永久 memory-forbidden，以及所有真实记忆写入仍被阻断。
 
+## v14.078 ReviewReport Memory Delta Draft Register
+
+本节用于验收 ReviewReport 的 memory_delta / failure lesson 草案 register。它仍然只读取项目内 memory admission register，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
+
+| Source | Target | Rule |
+| --- | --- | --- |
+| draftable memory admission rows | `review_report_memory_delta_draft_register.memory_delta_draft_records` | 每个可起草候选必须有且只有一个本地草案记录 |
+| pass draft | `draft_kind=accepted_candidate_memory_delta` | pass 候选只能成为待人工审批的 accepted-candidate memory_delta 草案 |
+| mapped reject draft | `draft_kind=failure_lesson_memory_delta` | mapped reject 只能成为待人工审批的 failure lesson 草案 |
+| unknown failure admission row | `memory_forbidden_records` | unknown failure 不得创建草案，必须继续 memory-forbidden |
+| `register_summary` | Review Console guard summary | `all_drafts_language_zh_cn=true`、`no_memory_entry_created=true`、`no_memory_forbidden_draft_created=true` |
+| `no_execution_guard` | `review_report_memory_delta_draft_register.no_execution_guard` | provider/plugin/API/image/DailyNote/VCP memory/output/accepted_samples/production candidate 写入必须保持 false |
+
+`review_report_memory_delta_draft_register.example.json` 是本地草案证据，不是 memory 写入记录。它只证明草案正文和候选映射可审计，并且所有真实记忆写入仍被阻断。
+
 ## v14.061 Review Blocker Arbiter Draft Output Snapshot
 
 本节用于验收静态 Review Console 的 `renderDraft()` 草案输出没有丢失审片阻断仲裁字段。它仍然只执行本目录内静态 JS 的 mock DOM 校验，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。

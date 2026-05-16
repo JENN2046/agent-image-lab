@@ -71,6 +71,7 @@ $requiredFiles = @(
   'scripts/validate_review_report_admission_control_matrix.js',
   'scripts/validate_review_report_production_exclusion_register.js',
   'scripts/validate_review_report_memory_admission_register.js',
+  'scripts/validate_review_report_memory_delta_draft_register.js',
   'scripts/validate_review_blocker_arbiter_route_summary.js',
   'scripts/validate_review_memory_admission_control.js',
   'scripts/validate_review_production_admission_control.js',
@@ -200,6 +201,7 @@ $requiredFiles = @(
   'tests/schema_examples/review_report_admission_control_matrix.example.json',
   'tests/schema_examples/review_report_production_exclusion_register.example.json',
   'tests/schema_examples/review_report_memory_admission_register.example.json',
+  'tests/schema_examples/review_report_memory_delta_draft_register.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix_v14_062.example.json',
   'tests/schema_examples/review_blocker_arbiter_route_summary.example.json',
@@ -258,6 +260,7 @@ $requiredFiles = @(
   'docs/v14_075_review_report_admission_control_matrix_gate.md',
   'docs/v14_076_review_report_production_exclusion_register_gate.md',
   'docs/v14_077_review_report_memory_admission_register_gate.md',
+  'docs/v14_078_review_report_memory_delta_draft_register_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -4010,6 +4013,11 @@ if (-not $node) {
     Add-Failure "scripts/validate_review_report_memory_admission_register.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'scripts/validate_review_report_memory_delta_draft_register.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_review_report_memory_delta_draft_register.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_review_blocker_arbiter_route_summary.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_review_blocker_arbiter_route_summary.js failed node --check"
@@ -6337,6 +6345,42 @@ if (-not $node) {
     }
     if ($reviewReportMemoryAdmission.review_report_memory_admission_register.file_write_performed -ne $false) {
       Add-Failure "ReviewReport memory admission register validation must not write files"
+    }
+  }
+
+  $reviewReportMemoryDeltaDraftOutput = & node (Join-Path $Root 'scripts/validate_review_report_memory_delta_draft_register.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "ReviewReport memory delta draft register validation exited with failure"
+  } else {
+    $reviewReportMemoryDeltaDraft = ($reviewReportMemoryDeltaDraftOutput -join "`n") | ConvertFrom-Json
+    if ($reviewReportMemoryDeltaDraft.passed -ne $true) {
+      Add-Failure "ReviewReport memory delta draft register validation must report passed true"
+    }
+    foreach ($reviewReportMemoryDeltaDraftCheck in @(
+      @{ Flag = 'review_report_memory_delta_draft_register_present'; Message = 'ReviewReport memory delta draft register must be present' },
+      @{ Flag = 'review_report_memory_delta_draft_candidate_ids_unique'; Message = 'ReviewReport memory delta draft register must have unique candidate ids' },
+      @{ Flag = 'review_report_memory_delta_draft_exact_candidate_set_verified'; Message = 'ReviewReport memory delta draft register must verify exact draft candidate set' },
+      @{ Flag = 'review_report_memory_delta_draft_forbidden_candidate_set_verified'; Message = 'ReviewReport memory delta draft register must verify forbidden candidate set' },
+      @{ Flag = 'review_report_memory_delta_draft_matches_memory_admission_register'; Message = 'ReviewReport memory delta draft register must match memory admission register' },
+      @{ Flag = 'review_report_memory_delta_draft_accepted_candidate_draft_verified'; Message = 'ReviewReport memory delta draft register must verify accepted candidate draft' },
+      @{ Flag = 'review_report_memory_delta_draft_failure_lesson_draft_verified'; Message = 'ReviewReport memory delta draft register must verify failure lesson draft' },
+      @{ Flag = 'review_report_memory_delta_draft_unknown_failure_forbidden_verified'; Message = 'ReviewReport memory delta draft register must verify unknown failure forbidden' },
+      @{ Flag = 'review_report_memory_delta_draft_chinese_body_verified'; Message = 'ReviewReport memory delta draft register must verify Chinese draft body' },
+      @{ Flag = 'review_report_memory_delta_draft_human_approval_required'; Message = 'ReviewReport memory delta draft register must require human approval' },
+      @{ Flag = 'review_report_memory_delta_draft_no_memory_entry_created'; Message = 'ReviewReport memory delta draft register must not create memory entry' },
+      @{ Flag = 'review_report_memory_delta_draft_no_direct_memory_write_verified'; Message = 'ReviewReport memory delta draft register must verify no direct memory write' },
+      @{ Flag = 'review_report_memory_delta_draft_no_daily_note_write_verified'; Message = 'ReviewReport memory delta draft register must verify no DailyNote write' },
+      @{ Flag = 'review_report_memory_delta_draft_no_vcp_memory_write_verified'; Message = 'ReviewReport memory delta draft register must verify no VCP memory write' },
+      @{ Flag = 'review_report_memory_delta_draft_no_accepted_samples_write_verified'; Message = 'ReviewReport memory delta draft register must verify no accepted_samples write' },
+      @{ Flag = 'review_report_memory_delta_draft_no_production_candidate_verified'; Message = 'ReviewReport memory delta draft register must verify no production candidate' },
+      @{ Flag = 'review_report_memory_delta_draft_no_provider_plugin_api_image_verified'; Message = 'ReviewReport memory delta draft register must verify no provider/plugin/API/image effects' }
+    )) {
+      if ($reviewReportMemoryDeltaDraft.review_report_memory_delta_draft_register.($reviewReportMemoryDeltaDraftCheck.Flag) -ne $true) {
+        Add-Failure $reviewReportMemoryDeltaDraftCheck.Message
+      }
+    }
+    if ($reviewReportMemoryDeltaDraft.review_report_memory_delta_draft_register.file_write_performed -ne $false) {
+      Add-Failure "ReviewReport memory delta draft register validation must not write files"
     }
   }
 
