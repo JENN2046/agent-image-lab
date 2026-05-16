@@ -23,6 +23,7 @@ const state = {
   audit_log: mock.review_session.audit_log,
   adapter_dry_run_handoff: mock.adapter_dry_run_handoff,
   review_result_protocol_static_handoff: mock.review_result_protocol_static_handoff,
+  review_decision_package_static_handoff: mock.review_decision_package_static_handoff,
   humanScores: { ...mock.review_session.human_review.breakdown }
 };
 
@@ -235,6 +236,92 @@ function renderProtocolHandoff() {
   `;
 }
 
+function renderDecisionPackageHandoff() {
+  const handoff = state.review_decision_package_static_handoff;
+  const summary = handoff.decision_summary;
+  const guardSummary = handoff.review_decision_package_guard_summary;
+  qs("#decisionPackageSummary").innerHTML = `
+    <span>Accepted drafts <strong>${summary.accepted_sample_draft_count}</strong></span>
+    <span>Rejected drafts <strong>${summary.rejected_sample_draft_count}</strong></span>
+    <span>Memory drafts <strong>${summary.memory_delta_draft_count}</strong></span>
+    <span>Production exclusions <strong>${summary.production_exclusion_count}</strong></span>
+  `;
+
+  qs("#decisionPackageGuardSummary").innerHTML = `
+    <article class="guard-tile">
+      <span>Accepted samples write</span>
+      <strong>${guardSummary.accepted_samples_write_performed}</strong>
+    </article>
+    <article class="guard-tile">
+      <span>Direct memory write</span>
+      <strong>${guardSummary.direct_memory_write_performed}</strong>
+    </article>
+    <article class="guard-tile">
+      <span>Production candidate</span>
+      <strong>${guardSummary.production_candidate_created}</strong>
+    </article>
+    <article class="guard-tile wide">
+      <span>Production exclusion ids</span>
+      <strong>${guardSummary.production_exclusion_candidate_ids.join(", ")}</strong>
+    </article>
+  `;
+
+  const root = qs("#decisionPackageDraftList");
+  root.innerHTML = "";
+  const draftGroups = [
+    {
+      label: "Accepted sample drafts",
+      items: handoff.accepted_sample_drafts.map((draft) => ({
+        id: draft.accepted_sample_id,
+        meta: draft.candidate_id,
+        status: `write=${draft.write_performed} production=${draft.production_candidate}`
+      }))
+    },
+    {
+      label: "Rejected sample drafts",
+      items: handoff.rejected_sample_drafts.map((draft) => ({
+        id: draft.rejected_sample_id,
+        meta: draft.candidate_id,
+        status: `write=${draft.write_performed} production=${draft.production_candidate}`
+      }))
+    },
+    {
+      label: "Memory delta drafts",
+      items: handoff.memory_delta_drafts.map((draft) => ({
+        id: draft.memory_delta_id,
+        meta: draft.language,
+        status: `status=${draft.status} direct_write=${draft.direct_write_performed}`
+      }))
+    },
+    {
+      label: "Production exclusion register",
+      items: handoff.production_exclusion_register.map((record) => ({
+        id: record.candidate_id,
+        meta: record.status,
+        status: `permanent=${record.permanent_block} production=${record.production_candidate}`
+      }))
+    }
+  ];
+
+  draftGroups.forEach((group) => {
+    const card = document.createElement("article");
+    card.className = "decision-package-card";
+    card.innerHTML = `
+      <strong>${group.label}</strong>
+      <ul>
+        ${group.items.map((item) => `<li><span>${item.id}</span><small>${item.meta} · ${item.status}</small></li>`).join("")}
+      </ul>
+    `;
+    root.appendChild(card);
+  });
+
+  qs("#decisionPackageGuard").innerHTML = `
+    <span>protocol pass is not production approval: ${handoff.promotion_guard.protocol_pass_is_not_production_approval}</span>
+    <span>every never-production candidate blocked: ${handoff.promotion_guard.every_never_production_candidate_blocked}</span>
+    <span>memory forbidden count: ${summary.memory_forbidden_count}</span>
+  `;
+}
+
 function approvalPayload() {
   if (state.memoryStatus === "approved") {
     return {
@@ -407,6 +494,7 @@ function renderDraft() {
   const draft = {
     adapter_dry_run_handoff: state.adapter_dry_run_handoff,
     review_result_protocol_static_handoff: state.review_result_protocol_static_handoff,
+    review_decision_package_static_handoff: state.review_decision_package_static_handoff,
     review_session: buildReviewSession(memoryApproval, humanTotal),
     image_case: buildImageCase(humanTotal),
     memory_delta: buildMemoryDelta(memoryApproval),
@@ -429,6 +517,7 @@ function renderAll() {
   renderComments();
   renderIteration();
   renderProtocolHandoff();
+  renderDecisionPackageHandoff();
   renderDraft();
 }
 

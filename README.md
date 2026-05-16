@@ -7,6 +7,53 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current phase: v14_048_review_console_decision_package_ui_binding_gate.
+phase_status: completed_local_validated.
+source_phase: v14_047_review_decision_package_adapter_binding_gate.
+source_commit: 7fda835.
+selected_product_route: review_console_decision_package_ui_binding.
+Current mainline state: Agent Image Lab now exposes the review decision package in the isolated Review Console static UI, making sample drafts, memory drafts, production exclusions, and no-write blockers visible without runtime execution.
+phase_record: docs/v14_048_review_console_decision_package_ui_binding_gate.md.
+static_mock_modified: review_console/static_prototype/mock_data.js.
+static_html_modified: review_console/static_prototype/index.html.
+static_app_modified: review_console/static_prototype/app.js.
+static_styles_modified: review_console/static_prototype/styles.css.
+static_field_mapping_modified: review_console/static_prototype/FIELD_MAPPING.md.
+static_readme_modified: review_console/static_prototype/README.md.
+validator_modified: scripts/validate_review_console_adapter_handoff.js.
+validator_wiring_modified: scripts/validate_mvp.ps1.
+review_decision_package_static_handoff_verified: true.
+review_decision_package_guard_summary_verified: true.
+review_decision_package_accepted_drafts_visible: true.
+review_decision_package_rejected_drafts_visible: true.
+review_decision_package_memory_delta_visible: true.
+review_decision_package_production_exclusion_visible: true.
+review_decision_package_no_production_candidate_verified: true.
+review_decision_package_no_direct_memory_write_verified: true.
+review_decision_package_no_accepted_samples_write_verified: true.
+direct_memory_write_performed: false.
+production_candidate_created: false.
+accepted_samples_written: false.
+image_binaries_read: false.
+runs_output_committed: false.
+runtime_prototype_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+plugin_call: false.
+api_call: false.
+image_generation: false.
+memory_write: false.
+DailyNote_write: false.
+VCP_memory_write: false.
+production_candidate_002: false.
+Batch_005: false.
+push_performed: false.
+recommended_next: v14_049_evidence_record_and_blocker_decision_contract_gate.
+recommended_next_auto_execution_allowed: true.
+push_requires_explicit_remote_authorization: true.
+runtime_provider_image_memory_production_batch: false.
+next_phase_started: false.
 Current phase: v14_047_review_decision_package_adapter_binding_gate.
 phase_status: completed_local_validated.
 source_phase: v14_046_review_decision_package_gate.

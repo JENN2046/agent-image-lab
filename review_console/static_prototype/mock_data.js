@@ -298,6 +298,80 @@ window.REVIEW_CONSOLE_MOCK = {
       production_candidate_created: false
     }
   },
+  review_decision_package_static_handoff: {
+    source_adapter_response_ref: "tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json",
+    status: "draft_ready",
+    display_only: true,
+    review_decision_package_attached: true,
+    accepted_sample_drafts: [
+      {
+        accepted_sample_id: "accepted_candidate_accept_metadata_001",
+        candidate_id: "candidate_accept_metadata_001",
+        write_performed: false,
+        production_candidate: false
+      }
+    ],
+    rejected_sample_drafts: [
+      {
+        rejected_sample_id: "rejected_candidate_reject_metadata_001",
+        candidate_id: "candidate_reject_metadata_001",
+        write_performed: false,
+        production_candidate: false
+      }
+    ],
+    memory_delta_drafts: [
+      {
+        memory_delta_id: "memory_delta_candidate_accept_metadata_001",
+        status: "draft",
+        language: "zh-CN",
+        direct_write_performed: false
+      },
+      {
+        memory_delta_id: "memory_delta_candidate_reject_metadata_001",
+        status: "draft",
+        language: "zh-CN",
+        direct_write_performed: false
+      }
+    ],
+    memory_forbidden_records: [],
+    production_exclusion_register: [
+      {
+        candidate_id: "candidate_reject_metadata_001",
+        status: "never_production",
+        permanent_block: true,
+        production_candidate: false
+      }
+    ],
+    decision_summary: {
+      accepted_sample_draft_count: 1,
+      rejected_sample_draft_count: 1,
+      memory_delta_draft_count: 2,
+      memory_forbidden_count: 0,
+      production_exclusion_count: 1,
+      direct_memory_write_performed: false,
+      production_candidate_created: false,
+      accepted_samples_write_performed: false
+    },
+    review_decision_package_guard_summary: {
+      accepted_sample_draft_count: 1,
+      rejected_sample_draft_count: 1,
+      memory_delta_draft_count: 2,
+      memory_forbidden_count: 0,
+      production_exclusion_count: 1,
+      production_exclusion_candidate_ids: [
+        "candidate_reject_metadata_001"
+      ],
+      production_candidate_created: false,
+      direct_memory_write_performed: false,
+      accepted_samples_write_performed: false
+    },
+    promotion_guard: {
+      protocol_pass_is_not_production_approval: true,
+      every_never_production_candidate_blocked: true,
+      production_candidate_created: false,
+      direct_memory_write_performed: false
+    }
+  },
   image_case_seed: {
     input_assets: ["asset_archive/references/photo_studio_os_reference.placeholder"],
     prompt_package_id: "prompt-package-photo-studio-os-001",

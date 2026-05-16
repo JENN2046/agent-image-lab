@@ -413,6 +413,18 @@ input[type="range"] {
   align-content: start;
 }
 
+.decision-package-section {
+  display: grid;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.section-head {
+  display: grid;
+  gap: 8px;
+}
+
 .protocol-summary,
 .protocol-guard {
   display: flex;
@@ -471,6 +483,12 @@ input[type="range"] {
 
 .protocol-candidate-list {
   display: grid;
+  gap: 10px;
+}
+
+.decision-package-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
 }
 
@@ -541,6 +559,41 @@ input[type="range"] {
   overflow-wrap: anywhere;
 }
 
+.decision-package-card {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--amber);
+  border-radius: 8px;
+  background: #0e1518;
+}
+
+.decision-package-card strong,
+.decision-package-card span {
+  overflow-wrap: anywhere;
+}
+
+.decision-package-card ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.decision-package-card li {
+  display: grid;
+  gap: 3px;
+}
+
+.decision-package-card small {
+  overflow-wrap: anywhere;
+  color: var(--muted);
+  font-size: 12px;
+}
+
 .output-panel textarea {
   min-height: 310px;
   color: #d5ecef;
@@ -599,6 +652,10 @@ input[type="range"] {
   }
 
   .protocol-guard-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .decision-package-list {
     grid-template-columns: 1fr;
   }
 }

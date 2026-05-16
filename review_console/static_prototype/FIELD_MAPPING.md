@@ -141,6 +141,24 @@ Phase 9 审批记录必须满足：
 
 负向 guard UI affordance 只负责让审片员看见阻断原因与阻断对象。它不创建 production candidate，不批准记忆写入，也不绕过 `memory_approval`。
 
+## v14.048 Review Decision Package Static Handoff 映射
+
+本节用于验收 PVOS adapter 输出中的 `review_decision_package` 进入静态 Review Console 可见 UI 与草案输出。它仍然只读取项目内 mock / fixture，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
+
+| PVOS adapter / decision package 字段 | Review Console 可见/草案字段 | 说明 |
+| --- | --- | --- |
+| `review_decision_package.accepted_sample_drafts` | `review_decision_package_static_handoff.accepted_sample_drafts` / `decisionPackageDraftList` | 只显示 accepted sample 草案 ID；`write_performed=false` |
+| `review_decision_package.rejected_sample_drafts` | `review_decision_package_static_handoff.rejected_sample_drafts` / `decisionPackageDraftList` | 只显示 rejected sample 草案 ID；`production_candidate=false` |
+| `review_decision_package.memory_delta_drafts` | `review_decision_package_static_handoff.memory_delta_drafts` / `decisionPackageDraftList` | 只显示中文记忆草案引用；不得直接写 DailyNote 或 VCP memory |
+| `review_decision_package.memory_forbidden_records` | `review_decision_package_static_handoff.memory_forbidden_records` | 只作为不得入记忆的阻断记录；空数组也必须保留 |
+| `review_decision_package.production_exclusion_register` | `review_decision_package_static_handoff.production_exclusion_register` / `decisionPackageDraftList` | `candidate_reject_metadata_001` 必须保持 `never_production` 和 `permanent_block=true` |
+| `review_decision_package_handoff_draft` | `review_decision_package_static_handoff.decision_summary` | 保留 accepted/rejected/memory/exclusion 计数和所有 no-write 标记 |
+| `review_console_handoff_draft.review_decision_package_guard_summary` | `review_decision_package_static_handoff.review_decision_package_guard_summary` / `decisionPackageGuardSummary` | 显示 production exclusion IDs、`production_candidate_created=false`、`direct_memory_write_performed=false`、`accepted_samples_write_performed=false` |
+| `review_decision_package.promotion_guard.protocol_pass_is_not_production_approval` | `decisionPackageGuard` | 协议 pass 不等于生产批准 |
+| `review_decision_package.promotion_guard.every_never_production_candidate_blocked` | `decisionPackageGuard` | 所有 `never_production` 候选必须保持生产阻断 |
+
+`review_decision_package_static_handoff` 是 evidence/blocker 可视化层，不是 production promotion 层。它不得创建 production candidate，不得写 accepted_samples，不得写 memory，不得调用插件，也不得把 rejected / never-production 候选送入生产。
+
 ## 原型防越界标记
 
 草案输出包含：
