@@ -180,6 +180,7 @@ $requiredFiles = @(
   'docs/v14_042_review_console_protocol_ui_affordance_gate.md',
   'docs/v14_043_review_protocol_fixture_negative_guard_gate.md',
   'docs/v14_044_review_protocol_negative_guard_adapter_handoff_gate.md',
+  'docs/v14_045_review_console_negative_guard_ui_affordance_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -5312,6 +5313,21 @@ if (-not $node) {
     }
     if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.review_protocol_guard_visible -ne $true) {
       Add-Failure "Review Console Adapter handoff must verify protocol guard visibility"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.review_protocol_guard_summary_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify protocol guard summary"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.review_protocol_memory_forbidden_visible -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify memory-forbidden visibility"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.review_protocol_negative_guard_visible -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify negative guard visibility"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.review_protocol_production_blocked_visible -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify production-blocked visibility"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.review_protocol_never_production_ids_visible -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify never-production id visibility"
     }
     if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.file_write_performed -ne $false) {
       Add-Failure "Review Console Adapter handoff validation must not write files"

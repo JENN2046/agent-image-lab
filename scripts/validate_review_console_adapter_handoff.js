@@ -29,6 +29,15 @@ function assert(condition, message) {
   }
 }
 
+function assertArrayEqual(actual, expected, message) {
+  assert(Array.isArray(actual), `${message}: actual value must be an array.`);
+  assert(Array.isArray(expected), `${message}: expected value must be an array.`);
+  assert(actual.length === expected.length, `${message}: array length mismatch.`);
+  expected.forEach((item) => {
+    assert(actual.includes(item), `${message}: missing ${item}.`);
+  });
+}
+
 function parseJson(text, label) {
   try {
     return JSON.parse(text);
@@ -90,8 +99,10 @@ function assertReviewResultProtocolHandoff(handoff, adapterExample) {
 
   const report = adapterExample.review_result_protocol_report;
   const adapterHandoff = adapterExample.review_result_protocol_handoff_draft;
+  const adapterGuardSummary = adapterExample.review_console_handoff_draft.review_protocol_guard_summary;
   assert(report, "PVOS adapter example must include review_result_protocol_report.");
   assert(adapterHandoff, "PVOS adapter example must include review_result_protocol_handoff_draft.");
+  assert(adapterGuardSummary, "PVOS adapter example must include Review Console guard summary.");
   assert(
     handoff.report_summary.pass_count === report.report_summary.pass_count,
     "Static protocol handoff pass_count must match adapter report."
@@ -112,6 +123,42 @@ function assertReviewResultProtocolHandoff(handoff, adapterExample) {
     handoff.report_summary.direct_memory_write_performed === false,
     "Static protocol handoff must not perform direct memory writes."
   );
+
+  const guardSummary = handoff.review_protocol_guard_summary;
+  assert(guardSummary, "Static protocol handoff must expose review_protocol_guard_summary.");
+  assert(
+    guardSummary.never_production_count === adapterGuardSummary.never_production_count,
+    "Static guard summary never_production_count must match adapter handoff."
+  );
+  assertArrayEqual(
+    guardSummary.never_production_candidate_ids,
+    adapterGuardSummary.never_production_candidate_ids,
+    "Static guard summary never_production_candidate_ids must match adapter handoff"
+  );
+  assert(
+    guardSummary.memory_forbidden_count === adapterGuardSummary.memory_forbidden_count,
+    "Static guard summary memory_forbidden_count must match adapter handoff."
+  );
+  assertArrayEqual(
+    guardSummary.memory_forbidden_candidate_ids,
+    adapterGuardSummary.memory_forbidden_candidate_ids,
+    "Static guard summary memory_forbidden_candidate_ids must match adapter handoff"
+  );
+  assert(
+    guardSummary.production_blocked_count === adapterHandoff.production_blocked_count,
+    "Static guard summary production_blocked_count must match adapter protocol handoff."
+  );
+  assert(
+    guardSummary.all_production_candidate_creation_blocked === adapterHandoff.all_production_candidate_creation_blocked,
+    "Static guard summary must carry all-production-blocked guard."
+  );
+  assert(
+    guardSummary.negative_guard_observed === adapterGuardSummary.negative_guard_observed,
+    "Static guard summary negative_guard_observed must match adapter handoff."
+  );
+  assert(guardSummary.production_candidate_created === false, "Static guard summary must not create production candidates.");
+  assert(guardSummary.direct_memory_write_performed === false, "Static guard summary must not perform direct memory writes.");
+
   for (const field of adapterHandoff.required_review_fields) {
     assert(handoff.required_review_fields.includes(field), `Static protocol handoff must require ${field}.`);
   }
@@ -197,10 +244,16 @@ function main() {
   assert(appSource.includes("renderProtocolHandoff"), "Static app must render review protocol handoff.");
   assert(indexSource.includes("protocolCandidateList"), "Static HTML must expose protocol candidate list.");
   assert(indexSource.includes("protocolSummary"), "Static HTML must expose protocol summary.");
+  assert(indexSource.includes("protocolGuardSummary"), "Static HTML must expose protocol guard summary.");
   assert(indexSource.includes("protocolGuard"), "Static HTML must expose protocol guard.");
   assert(styleSource.includes(".protocol-panel"), "Static CSS must style protocol panel.");
   assert(styleSource.includes(".protocol-card.reject"), "Static CSS must style rejected protocol cards.");
+  assert(styleSource.includes(".protocol-guard-summary"), "Static CSS must style protocol guard summary.");
+  assert(styleSource.includes(".guard-tile"), "Static CSS must style protocol guard tiles.");
   assert(appSource.includes("Never production"), "Static app must expose never production summary copy.");
+  assert(appSource.includes("Memory forbidden"), "Static app must expose memory forbidden summary copy.");
+  assert(appSource.includes("Negative guard"), "Static app must expose negative guard summary copy.");
+  assert(appSource.includes("all production creation blocked"), "Static app must expose production-blocked guard copy.");
   assert(!/fetch\s*\(|XMLHttpRequest|writeFile|appendFile|fs\.|eval\s*\(|Function\s*\(/.test(appSource), "Static app must not contain forbidden runtime calls.");
 
   const fieldMapping = read("review_console/static_prototype/FIELD_MAPPING.md");
@@ -213,7 +266,10 @@ function main() {
     "不等于真实执行授权",
     "v14.041 Review Result Protocol Static Handoff",
     "review_result_protocol_static_handoff.candidate_review_results",
+    "review_result_protocol_static_handoff.review_protocol_guard_summary",
     "never_production",
+    "memory_forbidden_count",
+    "negative_guard_observed",
     "production_candidate_created"
   ]) {
     assert(fieldMapping.includes(text), `FIELD_MAPPING must document ${text}.`);
@@ -238,6 +294,11 @@ function main() {
       review_protocol_memory_route_verified: true,
       review_protocol_never_production_verified: true,
       review_protocol_production_candidate_blocked: true,
+      review_protocol_guard_summary_verified: true,
+      review_protocol_memory_forbidden_visible: true,
+      review_protocol_negative_guard_visible: true,
+      review_protocol_production_blocked_visible: true,
+      review_protocol_never_production_ids_visible: true,
       review_protocol_visible_ui_verified: true,
       review_protocol_candidate_cards_verified: true,
       review_protocol_guard_visible: true,

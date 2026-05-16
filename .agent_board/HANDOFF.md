@@ -3,6 +3,51 @@
 ## Handoff Summary
 
 ```text
+Status: v14_045_review_console_negative_guard_ui_affordance_gate completed locally and validated.
+Reason: V14.045 exposes v14.044 review-protocol negative guard summary as a visible Review Console static UI affordance. The static panel now shows memory-forbidden count/ids, never-production candidate ids, production-blocked count, negative_guard_observed, production candidate creation, and direct memory-write state.
+Current repository: project_root
+Branch: master tracking origin/master
+source_phase: v14_044_review_protocol_negative_guard_adapter_handoff_gate
+source_commit: 0a6d0f7
+phase_record: docs/v14_045_review_console_negative_guard_ui_affordance_gate.md
+selected_product_route: review_console_negative_guard_ui_affordance
+static_mock_modified: review_console/static_prototype/mock_data.js
+static_html_modified: review_console/static_prototype/index.html
+static_app_modified: review_console/static_prototype/app.js
+static_styles_modified: review_console/static_prototype/styles.css
+static_field_mapping_modified: review_console/static_prototype/FIELD_MAPPING.md
+static_readme_modified: review_console/static_prototype/README.md
+validator_modified: scripts/validate_review_console_adapter_handoff.js
+validator_wiring_modified: scripts/validate_mvp.ps1
+review_protocol_guard_summary_verified: true
+review_protocol_memory_forbidden_visible: true
+review_protocol_negative_guard_visible: true
+review_protocol_production_blocked_visible: true
+review_protocol_never_production_ids_visible: true
+direct_memory_write_performed: false
+production_candidate_created: false
+accepted_samples_written: false
+image_binaries_read: false
+runs_output_committed: false
+runtime_prototype_modified: false
+browser_preview_started: false
+browser_plugin_preview: not_run_node_repl_tool_unavailable
+runtime_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v14_046_review_protocol_ui_boundary_snapshot_gate
+recommended_next_auto_execution_allowed: true
+push_requires_explicit_remote_authorization: true
+runtime_provider_image_memory_production_batch: false
+next_phase_started: false
+---
 Status: v14_044_review_protocol_negative_guard_adapter_handoff_gate completed locally and validated.
 Reason: V14.044 carries the negative review-protocol guard into the local PVOS dry-run adapter handoff. Adapter, Review Console handoff, and audit record now expose never_production candidate ids, memory_forbidden candidate ids, and negative_guard_observed without runtime execution.
 Current repository: project_root

@@ -420,6 +420,37 @@ input[type="range"] {
   gap: 8px;
 }
 
+.protocol-guard-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.guard-tile {
+  display: grid;
+  gap: 4px;
+  min-height: 66px;
+  padding: 10px;
+  border: 1px solid rgba(240, 185, 91, 0.35);
+  border-radius: 8px;
+  background: rgba(240, 185, 91, 0.06);
+}
+
+.guard-tile.wide {
+  grid-column: 1 / -1;
+}
+
+.guard-tile span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.guard-tile strong {
+  overflow-wrap: anywhere;
+  color: var(--amber);
+  font-size: 14px;
+}
+
 .protocol-summary span,
 .protocol-guard span {
   display: inline-flex;
@@ -564,6 +595,10 @@ input[type="range"] {
   }
 
   .protocol-card dl {
+    grid-template-columns: 1fr;
+  }
+
+  .protocol-guard-summary {
     grid-template-columns: 1fr;
   }
 }

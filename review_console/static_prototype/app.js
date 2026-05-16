@@ -181,10 +181,30 @@ function renderIteration() {
 function renderProtocolHandoff() {
   const handoff = state.review_result_protocol_static_handoff;
   const summary = handoff.report_summary;
+  const guardSummary = handoff.review_protocol_guard_summary;
   qs("#protocolSummary").innerHTML = `
     <span>Pass <strong>${summary.pass_count}</strong></span>
     <span>Reject <strong>${summary.reject_count}</strong></span>
     <span>Never production <strong>${summary.never_production_count}</strong></span>
+  `;
+
+  qs("#protocolGuardSummary").innerHTML = `
+    <article class="guard-tile">
+      <span>Memory forbidden</span>
+      <strong>${guardSummary.memory_forbidden_count}</strong>
+    </article>
+    <article class="guard-tile">
+      <span>Production blocked</span>
+      <strong>${guardSummary.production_blocked_count}</strong>
+    </article>
+    <article class="guard-tile">
+      <span>Negative guard</span>
+      <strong>${guardSummary.negative_guard_observed}</strong>
+    </article>
+    <article class="guard-tile wide">
+      <span>Never production ids</span>
+      <strong>${guardSummary.never_production_candidate_ids.join(", ")}</strong>
+    </article>
   `;
 
   const root = qs("#protocolCandidateList");
@@ -210,6 +230,8 @@ function renderProtocolHandoff() {
   qs("#protocolGuard").innerHTML = `
     <span>direct memory write: ${summary.direct_memory_write_performed}</span>
     <span>production candidate created: ${summary.production_candidate_created}</span>
+    <span>all production creation blocked: ${guardSummary.all_production_candidate_creation_blocked}</span>
+    <span>memory forbidden ids: ${guardSummary.memory_forbidden_candidate_ids.join(", ") || "none"}</span>
   `;
 }
 

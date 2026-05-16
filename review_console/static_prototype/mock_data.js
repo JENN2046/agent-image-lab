@@ -276,6 +276,19 @@ window.REVIEW_CONSOLE_MOCK = {
       direct_memory_write_performed: false,
       production_candidate_created: false
     },
+    review_protocol_guard_summary: {
+      never_production_count: 1,
+      never_production_candidate_ids: [
+        "candidate_reject_metadata_001"
+      ],
+      memory_forbidden_count: 0,
+      memory_forbidden_candidate_ids: [],
+      production_blocked_count: 2,
+      all_production_candidate_creation_blocked: true,
+      production_candidate_created: false,
+      direct_memory_write_performed: false,
+      negative_guard_observed: false
+    },
     protocol_guards: {
       pass_requires_non_empty_pass_reasons: true,
       reject_requires_non_empty_reject_reasons: true,

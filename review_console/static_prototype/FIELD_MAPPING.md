@@ -122,6 +122,25 @@ Phase 9 审批记录必须满足：
 
 静态 Review Console 只能生成草案输出；协议 pass 不等于生产批准，协议 reject 不得被 promotion 流程绕过。任何 `never_production` 候选都只能作为失败学习或审计信息，不能进入 production。
 
+## v14.045 Negative Guard UI Affordance 映射
+
+本节用于验收 v14.044 adapter handoff 中的负向 guard 字段进入静态 Review Console 可见 UI。它仍然只读取项目内 mock / fixture，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
+
+| PVOS adapter / protocol 字段 | Review Console 可见字段 | 说明 |
+| --- | --- | --- |
+| `review_console_handoff_draft.review_protocol_guard_summary.never_production_count` | `protocolGuardSummary` | 显示永不进入 production 的候选数量 |
+| `review_console_handoff_draft.review_protocol_guard_summary.never_production_candidate_ids` | `protocolGuardSummary` | 显示被永久阻断的候选 ID |
+| `review_console_handoff_draft.review_protocol_guard_summary.memory_forbidden_count` | `protocolGuardSummary` | 显示不得进入记忆的候选数量 |
+| `review_console_handoff_draft.review_protocol_guard_summary.memory_forbidden_candidate_ids` | `protocolGuard` | 显示不得进入记忆的候选 ID；空数组显示为 `none` |
+| `review_result_protocol_static_handoff.review_protocol_guard_summary` | `protocolGuardSummary` / `protocolGuard` | 静态审片台携带并渲染负向 guard 汇总 |
+| `review_result_protocol_handoff_draft.production_blocked_count` | `protocolGuardSummary` | 显示生产候选创建被阻断的数量 |
+| `review_result_protocol_handoff_draft.all_production_candidate_creation_blocked` | `protocolGuard` | 显示所有候选创建 production candidate 都被阻断 |
+| `review_console_handoff_draft.review_protocol_guard_summary.negative_guard_observed` | `protocolGuardSummary` | 显示负向 guard 是否被观察到 |
+| `production_candidate_created` | `protocolGuard` / `protocolGuardSummary` | 必须为 `false` |
+| `direct_memory_write_performed` | `protocolGuard` / `protocolGuardSummary` | 必须为 `false` |
+
+负向 guard UI affordance 只负责让审片员看见阻断原因与阻断对象。它不创建 production candidate，不批准记忆写入，也不绕过 `memory_approval`。
+
 ## 原型防越界标记
 
 草案输出包含：
