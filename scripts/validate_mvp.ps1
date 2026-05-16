@@ -68,6 +68,7 @@ $requiredFiles = @(
   'scripts/validate_review_console_blocker_arbiter_regression_matrix.js',
   'scripts/validate_review_report_negative_guard_regression_matrix.js',
   'scripts/validate_review_report_route_summary.js',
+  'scripts/validate_review_report_admission_control_matrix.js',
   'scripts/validate_review_blocker_arbiter_route_summary.js',
   'scripts/validate_review_memory_admission_control.js',
   'scripts/validate_review_production_admission_control.js',
@@ -194,6 +195,7 @@ $requiredFiles = @(
   'tests/schema_examples/review_console_review_report_negative_guard_draft_output_snapshot.example.json',
   'tests/schema_examples/review_report_negative_guard_regression_matrix.example.json',
   'tests/schema_examples/review_report_route_summary.example.json',
+  'tests/schema_examples/review_report_admission_control_matrix.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix_v14_062.example.json',
   'tests/schema_examples/review_blocker_arbiter_route_summary.example.json',
@@ -249,6 +251,7 @@ $requiredFiles = @(
   'docs/v14_072_review_report_negative_guard_draft_output_snapshot_gate.md',
   'docs/v14_073_review_report_negative_guard_regression_matrix_gate.md',
   'docs/v14_074_review_report_route_summary_gate.md',
+  'docs/v14_075_review_report_admission_control_matrix_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -3986,6 +3989,11 @@ if (-not $node) {
     Add-Failure "scripts/validate_review_report_route_summary.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'scripts/validate_review_report_admission_control_matrix.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_review_report_admission_control_matrix.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_review_blocker_arbiter_route_summary.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_review_blocker_arbiter_route_summary.js failed node --check"
@@ -6212,6 +6220,39 @@ if (-not $node) {
     }
     if ($reviewReportRouteSummary.review_report_route_summary.file_write_performed -ne $false) {
       Add-Failure "ReviewReport route summary validation must not write files"
+    }
+  }
+
+  $reviewReportAdmissionMatrixOutput = & node (Join-Path $Root 'scripts/validate_review_report_admission_control_matrix.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "ReviewReport admission control matrix validation exited with failure"
+  } else {
+    $reviewReportAdmissionMatrix = ($reviewReportAdmissionMatrixOutput -join "`n") | ConvertFrom-Json
+    if ($reviewReportAdmissionMatrix.passed -ne $true) {
+      Add-Failure "ReviewReport admission control matrix validation must report passed true"
+    }
+    foreach ($reviewReportAdmissionMatrixCheck in @(
+      @{ Flag = 'review_report_admission_matrix_present'; Message = 'ReviewReport admission matrix must be present' },
+      @{ Flag = 'review_report_admission_matrix_matches_route_summary'; Message = 'ReviewReport admission matrix must match route summary' },
+      @{ Flag = 'review_report_admission_pass_draft_review_only_verified'; Message = 'ReviewReport admission matrix must verify pass draft-review route' },
+      @{ Flag = 'review_report_admission_reject_failure_learning_verified'; Message = 'ReviewReport admission matrix must verify reject failure-learning route' },
+      @{ Flag = 'review_report_admission_unknown_memory_forbidden_verified'; Message = 'ReviewReport admission matrix must verify unknown memory-forbidden route' },
+      @{ Flag = 'review_report_admission_memory_entry_blocked_now'; Message = 'ReviewReport admission matrix must block memory entry now' },
+      @{ Flag = 'review_report_admission_production_blocked_now'; Message = 'ReviewReport admission matrix must block production now' },
+      @{ Flag = 'review_report_admission_accepted_samples_blocked_now'; Message = 'ReviewReport admission matrix must block accepted_samples now' },
+      @{ Flag = 'review_report_admission_never_production_verified'; Message = 'ReviewReport admission matrix must verify never-production' },
+      @{ Flag = 'review_report_admission_no_daily_note_write_verified'; Message = 'ReviewReport admission matrix must verify no DailyNote write' },
+      @{ Flag = 'review_report_admission_no_vcp_memory_write_verified'; Message = 'ReviewReport admission matrix must verify no VCP memory write' },
+      @{ Flag = 'review_report_admission_no_accepted_samples_write_verified'; Message = 'ReviewReport admission matrix must verify no accepted_samples write' },
+      @{ Flag = 'review_report_admission_no_production_candidate_verified'; Message = 'ReviewReport admission matrix must verify no production candidate' },
+      @{ Flag = 'review_report_admission_no_provider_plugin_api_image_verified'; Message = 'ReviewReport admission matrix must verify no provider/plugin/API/image effects' }
+    )) {
+      if ($reviewReportAdmissionMatrix.review_report_admission_control_matrix.($reviewReportAdmissionMatrixCheck.Flag) -ne $true) {
+        Add-Failure $reviewReportAdmissionMatrixCheck.Message
+      }
+    }
+    if ($reviewReportAdmissionMatrix.review_report_admission_control_matrix.file_write_performed -ne $false) {
+      Add-Failure "ReviewReport admission control matrix validation must not write files"
     }
   }
 

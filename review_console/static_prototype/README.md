@@ -53,6 +53,7 @@ v14.070 还用 `tests/schema_examples/review_console_review_report_draft_output_
 v14.072 还用 `tests/schema_examples/review_console_review_report_negative_guard_draft_output_snapshot.example.json` 固化草案输出 snapshot，验证 `#draftOutput` 中的 negative ReviewReport handoff 与静态 mock 和 PVOS negative adapter handoff 保持一致。
 v14.073 还用 `tests/schema_examples/review_report_negative_guard_regression_matrix.example.json` 固化四表面一致性矩阵，验证 adapter contract、Review Console guard、static mock 和 draft output snapshot 的 negative ReviewReport 不漂移。
 v14.074 还用 `tests/schema_examples/review_report_route_summary.example.json` 固化 ReviewReport 路由摘要，验证 pass、mapped reject 和 unknown reject 分别保持在草案审阅、failure learning 或 memory-forbidden never-production 路线。
+v14.075 还用 `tests/schema_examples/review_report_admission_control_matrix.example.json` 固化 ReviewReport admission 阻断矩阵，验证当前所有 memory、production、accepted_samples 和 production candidate 写入都被阻断，并区分未来人工审批与永久禁止路线。
 
 ## 文件说明
 
@@ -92,3 +93,4 @@ v14.074 还用 `tests/schema_examples/review_report_route_summary.example.json` 
 `review_console_review_report_negative_guard_draft_output_snapshot.example.json` 必须与静态 mock 的 negative ReviewReport handoff、PVOS negative adapter handoff 和 `#draftOutput` 渲染结果一致；它是回归证据，不是执行授权。
 `review_report_negative_guard_regression_matrix.example.json` 必须验证 negative ReviewReport 在 adapter contract、Review Console guard、static mock 和 draft output snapshot 之间一致；它是回归证据，不是执行授权。
 `review_report_route_summary.example.json` 必须验证 positive / negative ReviewReport 的 pass、mapped reject 和 unknown reject 路由一致；它是回归证据，不是执行授权。
+`review_report_admission_control_matrix.example.json` 必须验证 ReviewReport route summary 的 memory、production、accepted_samples 和 production candidate admission 全部保持阻断；它是回归证据，不是执行授权。

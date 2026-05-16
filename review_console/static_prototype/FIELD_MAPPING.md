@@ -280,6 +280,20 @@ Phase 9 审批记录必须满足：
 
 `review_report_route_summary.example.json` 是本地路由仲裁摘要，不是生产执行记录。它只证明 ReviewReport 能把 pass、mapped reject、unknown reject 分别送入草案审阅、failure learning 或 memory-forbidden 永久阻断路线。
 
+## v14.075 ReviewReport Admission Control Matrix
+
+本节用于验收 ReviewReport 路由进入 memory / production / accepted_samples admission 之前的硬阻断矩阵。它仍然只读取项目内 route summary，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
+
+| Source | Target | Rule |
+| --- | --- | --- |
+| `review_report_route_summary.candidate_routes` | `review_report_admission_control_matrix.candidate_admissions` | 每个候选必须继承 review outcome、final route、memory state、production state 和 blocked execution |
+| pass route | `memory_admission_state` / `production_admission_state` | pass 只能等待 human memory approval 与独立 production promotion gate，当前不得写入 |
+| mapped reject route | `matrix_verdict` | mapped reject 只能进入 failure-learning draft，且永远不得进入 production |
+| unknown reject route | `matrix_verdict` | unknown failure 必须 memory-forbidden，且永远不得进入 production |
+| `no_execution_guard` | `review_report_admission_control_matrix.no_execution_guard` | provider/plugin/API/image/DailyNote/VCP memory/output/accepted_samples/production candidate 写入必须保持 false |
+
+`review_report_admission_control_matrix.example.json` 是本地 admission 阻断矩阵，不是生产执行记录。它只证明当前所有写入都被阻断，并区分“未来需人工审批”和“永久禁止”的候选路径。
+
 ## v14.061 Review Blocker Arbiter Draft Output Snapshot
 
 本节用于验收静态 Review Console 的 `renderDraft()` 草案输出没有丢失审片阻断仲裁字段。它仍然只执行本目录内静态 JS 的 mock DOM 校验，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
