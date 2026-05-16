@@ -3,18 +3,67 @@
 ## Current Mode
 
 ```text
-A4.8 safe local core contract after expired 2026-05-16 A5 window
+A4.8 safe local adapter contract after expired 2026-05-16 A5 window
 ```
 
 ## Current Mission
 
 ```text
-Agent Image Lab is in v14_049_evidence_record_and_blocker_decision_contract_gate. This local core slice turns review decisions into explicit EvidenceRecord, BlockerDecision, and ProductionExclusionRegister objects so pass/reject reasons, memory blocks, human-review blocks, and never-production exclusions are machine-checkable. It remains stdout-only and local: no provider/plugin/API/image/DailyNote/VCP memory/output writes, no real VCP runtime integration, and no production candidate creation.
+Agent Image Lab is in v14_050_evidence_blocker_adapter_handoff_gate. This local adapter slice carries EvidenceRecord, BlockerDecision, and ProductionExclusionRegister output through the PVOS dry-run adapter handoff into Review Console and audit drafts. It remains stdout-only and local: no provider/plugin/API/image/DailyNote/VCP memory/output writes, no real VCP runtime integration, and no production candidate creation.
 ```
 
 ## Current Phase
 
 ```text
+V14.050 Evidence Blocker Adapter Handoff Gate
+phase_id: v14_050_evidence_blocker_adapter_handoff_gate
+status: completed_local_validated
+source_phase: v14_049_evidence_record_and_blocker_decision_contract_gate
+source_commit: 02bf5de
+selected_product_route: evidence_blocker_adapter_handoff
+branch: master tracking origin/master
+phase_record: docs/v14_050_evidence_blocker_adapter_handoff_gate.md
+adapter_modified: adapters/pvos_kernel_dry_run_adapter.js
+adapter_schema_modified: schemas/pvos_kernel_dry_run_adapter.schema.yaml
+adapter_example_modified: tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json
+adapter_validator_modified: scripts/validate_pvos_kernel_dry_run_adapter.js
+validator_wiring_modified: scripts/validate_mvp.ps1
+evidence_blocker_contract_binding_present: true
+evidence_blocker_contract_handoff_present: true
+review_console_evidence_blocker_contract_handoff_present: true
+evidence_blocker_contract_verified: true
+evidence_blocker_pass_candidate_human_review_blocked_verified: true
+evidence_blocker_reject_candidate_never_production_verified: true
+negative_guard_evidence_blocker_contract_verified: true
+negative_guard_evidence_blocker_contract_handoff_verified: true
+negative_guard_review_console_evidence_blocker_contract_handoff_verified: true
+negative_guard_memory_forbidden_verified: true
+negative_guard_all_rejected_never_production_verified: true
+negative_guard_no_production_candidate_verified: true
+negative_guard_no_direct_memory_write_verified: true
+direct_memory_write_performed: false
+production_candidate_created: false
+accepted_samples_written: false
+image_binaries_read: false
+runs_output_committed: false
+runtime_prototype_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v14_051_review_console_evidence_blocker_ui_binding_gate
+recommended_next_auto_execution_allowed: true
+push_requires_explicit_remote_authorization: true
+runtime_provider_image_memory_production_batch: false
+next_phase_started: false
+---
 V14.049 Evidence Record And Blocker Decision Contract Gate
 phase_id: v14_049_evidence_record_and_blocker_decision_contract_gate
 status: completed_local_validated

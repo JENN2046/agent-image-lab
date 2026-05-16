@@ -7,6 +7,54 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current phase: v14_050_evidence_blocker_adapter_handoff_gate.
+phase_status: completed_local_validated.
+source_phase: v14_049_evidence_record_and_blocker_decision_contract_gate.
+source_commit: 02bf5de.
+selected_product_route: evidence_blocker_adapter_handoff.
+Current mainline state: Agent Image Lab now carries the evidence/blocker contract through the PVOS dry-run adapter handoff, exposing blocker decisions, production exclusions, and memory-forbidden blockers to Review Console and audit drafts without runtime execution.
+phase_record: docs/v14_050_evidence_blocker_adapter_handoff_gate.md.
+adapter_modified: adapters/pvos_kernel_dry_run_adapter.js.
+adapter_schema_modified: schemas/pvos_kernel_dry_run_adapter.schema.yaml.
+adapter_example_modified: tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json.
+adapter_validator_modified: scripts/validate_pvos_kernel_dry_run_adapter.js.
+validator_wiring_modified: scripts/validate_mvp.ps1.
+evidence_blocker_contract_binding_present: true.
+evidence_blocker_contract_handoff_present: true.
+review_console_evidence_blocker_contract_handoff_present: true.
+evidence_blocker_contract_verified: true.
+evidence_blocker_pass_candidate_human_review_blocked_verified: true.
+evidence_blocker_reject_candidate_never_production_verified: true.
+negative_guard_evidence_blocker_contract_verified: true.
+negative_guard_evidence_blocker_contract_handoff_verified: true.
+negative_guard_review_console_evidence_blocker_contract_handoff_verified: true.
+negative_guard_memory_forbidden_verified: true.
+negative_guard_all_rejected_never_production_verified: true.
+negative_guard_no_production_candidate_verified: true.
+negative_guard_no_direct_memory_write_verified: true.
+direct_memory_write_performed: false.
+production_candidate_created: false.
+accepted_samples_written: false.
+image_binaries_read: false.
+runs_output_committed: false.
+runtime_prototype_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+plugin_call: false.
+api_call: false.
+image_generation: false.
+memory_write: false.
+DailyNote_write: false.
+VCP_memory_write: false.
+production_candidate_002: false.
+Batch_005: false.
+push_performed: false.
+recommended_next: v14_051_review_console_evidence_blocker_ui_binding_gate.
+recommended_next_auto_execution_allowed: true.
+push_requires_explicit_remote_authorization: true.
+runtime_provider_image_memory_production_batch: false.
+next_phase_started: false.
 Current phase: v14_049_evidence_record_and_blocker_decision_contract_gate.
 phase_status: completed_local_validated.
 source_phase: v14_048_review_console_decision_package_ui_binding_gate.

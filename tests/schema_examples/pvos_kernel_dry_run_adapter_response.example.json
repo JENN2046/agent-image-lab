@@ -169,6 +169,113 @@
     "protocol_pass_is_not_production_approval": true,
     "every_never_production_candidate_blocked": true
   },
+  "evidence_blocker_contract": {
+    "evidence_blocker_contract_version": "v1",
+    "contract_id": "evidence_blocker_contract_portable_lantern_local_fixture_001",
+    "source_decision_package_id": "review_decision_package_portable_lantern_local_fixture_001",
+    "source_protocol_id": "review_result_protocol_hardening_v1",
+    "source_kernel_run_id": "pvos_kernel_run_portable_lantern_local_fixture_001",
+    "status": "completed_local_evidence_blocker_contract",
+    "mode": "local_stdout_only_evidence_blocker_contract",
+    "evidence_records": [
+      {
+        "candidate_id": "candidate_accept_metadata_001",
+        "review_outcome": "pass",
+        "evidence_codes": [
+          "weighted_score_meets_accept_threshold",
+          "no_failure_tags_present"
+        ],
+        "production_candidate": false,
+        "direct_write_performed": false
+      },
+      {
+        "candidate_id": "candidate_reject_metadata_001",
+        "review_outcome": "reject",
+        "evidence_codes": [
+          "weighted_score_below_accept_threshold",
+          "weighted_score_below_reject_threshold",
+          "mapped_failure_tags_present"
+        ],
+        "production_candidate": false,
+        "direct_write_performed": false
+      }
+    ],
+    "blocker_decisions": [
+      {
+        "candidate_id": "candidate_accept_metadata_001",
+        "blocker_type": "human_review_required",
+        "blocking_scope": "production_promotion",
+        "decision": "block_until_required_review",
+        "permanent_block": false,
+        "production_candidate": false,
+        "direct_write_performed": false
+      },
+      {
+        "candidate_id": "candidate_reject_metadata_001",
+        "blocker_type": "production_exclusion",
+        "blocking_scope": "production_promotion",
+        "decision": "block_permanently",
+        "permanent_block": true,
+        "production_candidate": false,
+        "direct_write_performed": false
+      }
+    ],
+    "production_exclusion_register": [
+      {
+        "candidate_id": "candidate_reject_metadata_001",
+        "status": "never_production",
+        "permanent_block": true,
+        "production_candidate": false
+      }
+    ],
+    "blocker_summary": {
+      "evidence_record_count": 2,
+      "blocker_decision_count": 2,
+      "production_exclusion_count": 1,
+      "permanent_block_count": 1,
+      "human_review_block_count": 2,
+      "memory_forbidden_block_count": 0,
+      "direct_memory_write_performed": false,
+      "production_candidate_created": false,
+      "accepted_samples_write_performed": false
+    },
+    "arbitration_guard": {
+      "evidence_record_is_not_approval": true,
+      "blocker_decision_is_not_write": true,
+      "every_candidate_has_evidence_record": true,
+      "every_candidate_has_production_blocker_decision": true,
+      "every_never_production_candidate_has_exclusion": true,
+      "no_production_without_human_review": true,
+      "production_candidate_created": false,
+      "direct_memory_write_performed": false,
+      "accepted_samples_write_performed": false
+    }
+  },
+  "evidence_blocker_contract_handoff_draft": {
+    "status": "draft_ready",
+    "evidence_record_count": 2,
+    "blocker_decision_count": 2,
+    "production_exclusion_count": 1,
+    "permanent_block_count": 1,
+    "human_review_block_count": 2,
+    "memory_forbidden_block_count": 0,
+    "human_review_blocked_candidate_ids": [
+      "candidate_accept_metadata_001"
+    ],
+    "memory_forbidden_candidate_ids": [],
+    "production_exclusion_candidate_ids": [
+      "candidate_reject_metadata_001"
+    ],
+    "direct_memory_write_performed": false,
+    "production_candidate_created": false,
+    "accepted_samples_write_performed": false,
+    "evidence_record_is_not_approval": true,
+    "blocker_decision_is_not_write": true,
+    "every_candidate_has_evidence_record": true,
+    "every_candidate_has_production_blocker_decision": true,
+    "every_never_production_candidate_has_exclusion": true,
+    "no_production_without_human_review": true
+  },
   "vcp_adapter_handoff_draft": {
     "target_platform": "VCP_adapter_future",
     "adapter_boundary": "local_dry_run_contract_only",
@@ -196,6 +303,8 @@
     "review_result_protocol_report_attached": true,
     "review_decision_package_attached": true,
     "review_decision_package_handoff_id": "review_decision_package_handoff_portable_lantern_local_fixture_001",
+    "evidence_blocker_contract_attached": true,
+    "evidence_blocker_contract_handoff_id": "evidence_blocker_contract_handoff_portable_lantern_local_fixture_001",
     "review_protocol_guard_summary": {
       "never_production_count": 1,
       "never_production_candidate_ids": [
@@ -219,6 +328,23 @@
       "production_candidate_created": false,
       "direct_memory_write_performed": false,
       "accepted_samples_write_performed": false
+    },
+    "review_evidence_blocker_contract_guard_summary": {
+      "evidence_record_count": 2,
+      "blocker_decision_count": 2,
+      "production_exclusion_count": 1,
+      "permanent_block_count": 1,
+      "human_review_block_count": 2,
+      "memory_forbidden_block_count": 0,
+      "production_exclusion_candidate_ids": [
+        "candidate_reject_metadata_001"
+      ],
+      "production_candidate_created": false,
+      "direct_memory_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "every_candidate_has_evidence_record": true,
+      "every_candidate_has_production_blocker_decision": true,
+      "every_never_production_candidate_has_exclusion": true
     },
     "required_review_fields": [
       "review_outcome",
@@ -244,10 +370,15 @@
     "memory_write_observed": false,
     "review_result_protocol_observed": true,
     "review_decision_package_observed": true,
+    "evidence_blocker_contract_observed": true,
     "accepted_sample_draft_count": 1,
     "rejected_sample_draft_count": 1,
     "memory_delta_draft_count": 2,
     "production_exclusion_count": 1,
+    "evidence_record_count": 2,
+    "blocker_decision_count": 2,
+    "permanent_block_count": 1,
+    "memory_forbidden_block_count": 0,
     "production_candidate_created": false,
     "never_production_count": 1,
     "memory_forbidden_count": 0,
@@ -263,6 +394,7 @@
     "image_generation_performed": false,
     "output_file_write_performed": false,
     "accepted_samples_write_performed": false,
+    "production_candidate_created": false,
     "external_manifest_read_performed": false,
     "vcpchat_source_read_performed": false,
     "vcptoolbox_source_read_performed": false

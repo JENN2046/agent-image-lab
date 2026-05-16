@@ -15,6 +15,8 @@ pvos_kernel_dry_run_adapter_response:
     - review_result_protocol_handoff_draft
     - review_decision_package
     - review_decision_package_handoff_draft
+    - evidence_blocker_contract
+    - evidence_blocker_contract_handoff_draft
     - vcp_adapter_handoff_draft
     - review_console_handoff_draft
     - provenance_handoff_draft
@@ -106,12 +108,66 @@ pvos_kernel_dry_run_adapter_response:
       - memory_forbidden_records
       - production_exclusion_register
       - promotion_guard
+  evidence_blocker_contract:
+    evidence_blocker_contract_version: v1
+    status: completed_local_evidence_blocker_contract
+    mode: local_stdout_only_evidence_blocker_contract
+    evidence_records: array
+    blocker_decisions: array
+    production_exclusion_register: array
+    blocker_summary:
+      evidence_record_count: integer
+      blocker_decision_count: integer
+      production_exclusion_count: integer
+      permanent_block_count: integer
+      human_review_block_count: integer
+      memory_forbidden_block_count: integer
+      direct_memory_write_performed: false
+      production_candidate_created: false
+      accepted_samples_write_performed: false
+    arbitration_guard:
+      evidence_record_is_not_approval: true
+      blocker_decision_is_not_write: true
+      every_candidate_has_evidence_record: true
+      every_candidate_has_production_blocker_decision: true
+      every_never_production_candidate_has_exclusion: true
+      no_production_without_human_review: true
+      production_candidate_created: false
+      direct_memory_write_performed: false
+      accepted_samples_write_performed: false
+  evidence_blocker_contract_handoff_draft:
+    status: draft_ready
+    evidence_record_count: integer
+    blocker_decision_count: integer
+    production_exclusion_count: integer
+    permanent_block_count: integer
+    human_review_block_count: integer
+    memory_forbidden_block_count: integer
+    human_review_blocked_candidate_ids: array
+    memory_forbidden_candidate_ids: array
+    production_exclusion_candidate_ids: array
+    direct_memory_write_performed: false
+    production_candidate_created: false
+    accepted_samples_write_performed: false
+    evidence_record_is_not_approval: true
+    blocker_decision_is_not_write: true
+    every_candidate_has_evidence_record: true
+    every_candidate_has_production_blocker_decision: true
+    every_never_production_candidate_has_exclusion: true
+    no_production_without_human_review: true
+    required_evidence_blocker_fields:
+      - evidence_records
+      - blocker_decisions
+      - production_exclusion_register
+      - blocker_summary
+      - arbitration_guard
   review_console_handoff_draft:
     display_only: true
     human_review_required_for_production: true
     memory_write_requires_separate_approval: true
     review_result_protocol_report_attached: true
     review_decision_package_attached: true
+    evidence_blocker_contract_attached: true
     review_protocol_guard_summary:
       never_production_count: integer
       memory_forbidden_count: integer
@@ -127,6 +183,19 @@ pvos_kernel_dry_run_adapter_response:
       production_candidate_created: false
       direct_memory_write_performed: false
       accepted_samples_write_performed: false
+    review_evidence_blocker_contract_guard_summary:
+      evidence_record_count: integer
+      blocker_decision_count: integer
+      production_exclusion_count: integer
+      permanent_block_count: integer
+      human_review_block_count: integer
+      memory_forbidden_block_count: integer
+      production_candidate_created: false
+      direct_memory_write_performed: false
+      accepted_samples_write_performed: false
+      every_candidate_has_evidence_record: true
+      every_candidate_has_production_blocker_decision: true
+      every_never_production_candidate_has_exclusion: true
     forbidden_actions:
       - execute_plugin
       - call_api
@@ -148,6 +217,7 @@ pvos_kernel_dry_run_adapter_response:
     image_generation_allowed: false
     output_file_write_allowed: false
     accepted_samples_write_allowed: false
+    production_candidate_write_allowed: false
     external_manifest_read_allowed: false
     provider_contact_performed: false
     plugin_call_performed: false
@@ -157,6 +227,7 @@ pvos_kernel_dry_run_adapter_response:
     image_generation_performed: false
     output_file_write_performed: false
     accepted_samples_write_performed: false
+    production_candidate_created: false
     external_manifest_read_performed: false
     vcpchat_source_read_performed: false
     vcptoolbox_source_read_performed: false

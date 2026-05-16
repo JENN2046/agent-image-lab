@@ -4295,6 +4295,24 @@ if (-not $node) {
     if ($pvosAdapter.pvos_kernel_dry_run_adapter.review_console_decision_package_handoff_present -ne $true) {
       Add-Failure "PVOS adapter validation must verify Review Console decision package handoff"
     }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.evidence_blocker_contract_binding_present -ne $true) {
+      Add-Failure "PVOS adapter validation must verify evidence blocker contract binding"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.evidence_blocker_contract_handoff_present -ne $true) {
+      Add-Failure "PVOS adapter validation must verify evidence blocker contract handoff"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.review_console_evidence_blocker_contract_handoff_present -ne $true) {
+      Add-Failure "PVOS adapter validation must verify Review Console evidence blocker contract handoff"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.evidence_blocker_contract_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify evidence blocker contract"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.evidence_blocker_pass_candidate_human_review_blocked_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify pass candidate remains blocked until human review"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.evidence_blocker_reject_candidate_never_production_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify reject candidate is never_production"
+    }
     if ($pvosAdapter.pvos_kernel_dry_run_adapter.never_production_contract_verified -ne $true) {
       Add-Failure "PVOS adapter validation must verify never-production contract"
     }
@@ -4312,6 +4330,15 @@ if (-not $node) {
     }
     if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_production_exclusion_register_binding_verified -ne $true) {
       Add-Failure "PVOS adapter validation must verify negative guard production exclusion register binding"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_evidence_blocker_contract_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify negative guard evidence blocker contract"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_evidence_blocker_contract_handoff_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify negative guard evidence blocker contract handoff"
+    }
+    if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_review_console_evidence_blocker_contract_handoff_verified -ne $true) {
+      Add-Failure "PVOS adapter validation must verify negative guard Review Console evidence blocker contract handoff"
     }
     if ($pvosAdapter.pvos_kernel_dry_run_adapter.negative_guard_memory_forbidden_verified -ne $true) {
       Add-Failure "PVOS adapter validation must verify negative guard forbidden memory route"
