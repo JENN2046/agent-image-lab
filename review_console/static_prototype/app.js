@@ -178,6 +178,41 @@ function renderIteration() {
   });
 }
 
+function renderProtocolHandoff() {
+  const handoff = state.review_result_protocol_static_handoff;
+  const summary = handoff.report_summary;
+  qs("#protocolSummary").innerHTML = `
+    <span>Pass <strong>${summary.pass_count}</strong></span>
+    <span>Reject <strong>${summary.reject_count}</strong></span>
+    <span>Never production <strong>${summary.never_production_count}</strong></span>
+  `;
+
+  const root = qs("#protocolCandidateList");
+  root.innerHTML = "";
+  handoff.candidate_review_results.forEach((candidate) => {
+    const activeReasons = candidate.review_outcome === "pass" ? candidate.pass_reasons : candidate.reject_reasons;
+    const card = document.createElement("article");
+    card.className = `protocol-card ${candidate.review_outcome}`;
+    card.innerHTML = `
+      <div class="protocol-card-head">
+        <strong>${candidate.candidate_id}</strong>
+        <span>${candidate.review_outcome}</span>
+      </div>
+      <ul>${activeReasons.map((reason) => `<li>${reason}</li>`).join("")}</ul>
+      <dl>
+        <div><dt>Memory</dt><dd>${candidate.memory_route.route}</dd></div>
+        <div><dt>Production</dt><dd>${candidate.production_route.status}</dd></div>
+      </dl>
+    `;
+    root.appendChild(card);
+  });
+
+  qs("#protocolGuard").innerHTML = `
+    <span>direct memory write: ${summary.direct_memory_write_performed}</span>
+    <span>production candidate created: ${summary.production_candidate_created}</span>
+  `;
+}
+
 function approvalPayload() {
   if (state.memoryStatus === "approved") {
     return {
@@ -371,6 +406,7 @@ function renderAll() {
   renderScores();
   renderComments();
   renderIteration();
+  renderProtocolHandoff();
   renderDraft();
 }
 

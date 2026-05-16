@@ -6,7 +6,9 @@ const root = path.resolve(__dirname, "..");
 
 const requiredFiles = [
   "review_console/static_prototype/mock_data.js",
+  "review_console/static_prototype/index.html",
   "review_console/static_prototype/app.js",
+  "review_console/static_prototype/styles.css",
   "review_console/static_prototype/FIELD_MAPPING.md",
   "adapter_dry_run_lab/fixtures/accepted_request.json",
   "exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js",
@@ -185,11 +187,20 @@ function main() {
   assertReviewResultProtocolHandoff(mock.review_result_protocol_static_handoff, pvosAdapterExample);
 
   const appSource = read("review_console/static_prototype/app.js");
+  const indexSource = read("review_console/static_prototype/index.html");
+  const styleSource = read("review_console/static_prototype/styles.css");
   assert(appSource.includes("adapter_dry_run_handoff"), "Static app must carry adapter_dry_run_handoff into draft output.");
   assert(
     appSource.includes("review_result_protocol_static_handoff"),
     "Static app must carry review_result_protocol_static_handoff into draft output."
   );
+  assert(appSource.includes("renderProtocolHandoff"), "Static app must render review protocol handoff.");
+  assert(indexSource.includes("protocolCandidateList"), "Static HTML must expose protocol candidate list.");
+  assert(indexSource.includes("protocolSummary"), "Static HTML must expose protocol summary.");
+  assert(indexSource.includes("protocolGuard"), "Static HTML must expose protocol guard.");
+  assert(styleSource.includes(".protocol-panel"), "Static CSS must style protocol panel.");
+  assert(styleSource.includes(".protocol-card.reject"), "Static CSS must style rejected protocol cards.");
+  assert(appSource.includes("Never production"), "Static app must expose never production summary copy.");
   assert(!/fetch\s*\(|XMLHttpRequest|writeFile|appendFile|fs\.|eval\s*\(|Function\s*\(/.test(appSource), "Static app must not contain forbidden runtime calls.");
 
   const fieldMapping = read("review_console/static_prototype/FIELD_MAPPING.md");
@@ -227,6 +238,9 @@ function main() {
       review_protocol_memory_route_verified: true,
       review_protocol_never_production_verified: true,
       review_protocol_production_candidate_blocked: true,
+      review_protocol_visible_ui_verified: true,
+      review_protocol_candidate_cards_verified: true,
+      review_protocol_guard_visible: true,
       static_app_draft_output_current: true,
       field_mapping_current: true,
       external_network_required: false,

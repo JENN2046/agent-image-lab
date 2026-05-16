@@ -176,7 +176,7 @@ h2 {
 
 .bottom-grid {
   display: grid;
-  grid-template-columns: minmax(280px, 0.8fr) minmax(420px, 1.2fr);
+  grid-template-columns: minmax(260px, 0.72fr) minmax(360px, 1fr) minmax(420px, 1.14fr);
   gap: 16px;
 }
 
@@ -409,6 +409,107 @@ input[type="range"] {
   color: var(--text);
 }
 
+.protocol-panel {
+  align-content: start;
+}
+
+.protocol-summary,
+.protocol-guard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.protocol-summary span,
+.protocol-guard span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #0e1518;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.protocol-summary strong {
+  margin-left: 5px;
+  color: var(--text);
+}
+
+.protocol-candidate-list {
+  display: grid;
+  gap: 10px;
+}
+
+.protocol-card {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--green);
+  border-radius: 8px;
+  background: #0e1518;
+}
+
+.protocol-card.reject {
+  border-left-color: var(--red);
+}
+
+.protocol-card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.protocol-card-head strong {
+  overflow-wrap: anywhere;
+}
+
+.protocol-card-head span {
+  flex: 0 0 auto;
+  color: var(--cyan);
+  text-transform: uppercase;
+}
+
+.protocol-card.reject .protocol-card-head span {
+  color: var(--red);
+}
+
+.protocol-card ul {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text);
+}
+
+.protocol-card dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 0;
+}
+
+.protocol-card dl div {
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #10191d;
+}
+
+.protocol-card dt {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.protocol-card dd {
+  margin: 3px 0 0;
+  overflow-wrap: anywhere;
+}
+
 .output-panel textarea {
   min-height: 310px;
   color: #d5ecef;
@@ -459,6 +560,10 @@ input[type="range"] {
   }
 
   .score-row {
+    grid-template-columns: 1fr;
+  }
+
+  .protocol-card dl {
     grid-template-columns: 1fr;
   }
 }

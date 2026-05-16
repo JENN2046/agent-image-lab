@@ -3,6 +3,51 @@
 ## Handoff Summary
 
 ```text
+Status: v14_042_review_console_protocol_ui_affordance_gate completed locally and validated.
+Reason: V14.042 makes the hard review-result protocol visible in the isolated Review Console static prototype UI. The reviewer can see protocol summary, pass/reject reasons, memory route, production route, never_production, and guard state without opening the JSON draft.
+Current repository: project_root
+Branch: master tracking origin/master
+source_phase: v14_041_review_console_protocol_static_contract_gate
+source_commit: a1a862b
+phase_record: docs/v14_042_review_console_protocol_ui_affordance_gate.md
+selected_product_route: review_protocol_visible_static_ui
+static_html_modified: review_console/static_prototype/index.html
+static_app_modified: review_console/static_prototype/app.js
+static_styles_modified: review_console/static_prototype/styles.css
+validator_modified: scripts/validate_review_console_adapter_handoff.js
+validator_wiring_modified: scripts/validate_mvp.ps1
+protocol_panel_visible: true
+protocol_candidate_cards_visible: true
+pass_reason_ui_verified: true
+reject_reason_ui_verified: true
+memory_route_ui_verified: true
+production_route_ui_verified: true
+never_production_ui_verified: true
+protocol_guard_visible: true
+direct_memory_write_performed: false
+production_candidate_created: false
+accepted_samples_written: false
+image_binaries_read: false
+runs_output_committed: false
+runtime_prototype_modified: false
+browser_preview_started: false
+browser_plugin_preview: not_run_tool_unavailable
+runtime_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v14_043_review_protocol_fixture_negative_guard_gate
+recommended_next_auto_execution_allowed: true
+push_requires_explicit_remote_authorization: true
+runtime_provider_image_memory_production_batch: false
+next_phase_started: false
+---
 Status: v14_041_review_console_protocol_static_contract_gate completed locally and validated.
 Reason: V14.041 binds the hard review-result protocol into the isolated Review Console static prototype draft output. The static handoff carries pass/reject reasons, memory routes, production routes, and never_production count while preserving static-only boundaries.
 Current repository: project_root
