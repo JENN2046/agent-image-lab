@@ -193,6 +193,20 @@ Phase 9 审批记录必须满足：
 
 `review_blocker_arbiter_static_handoff` 是审片最终路线的可视化层。它不得创建 production candidate，不得写 accepted_samples，不得写 memory，不得调用插件，也不得让 pass 候选绕过 human review 或让 reject 候选绕过 never-production。
 
+## v14.069 ReviewReport Static Handoff 映射
+
+本节用于验收 `tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json` 中的 `ReviewReport` 合同进入静态 Review Console 可见 UI 与草案输出。它仍然只读取项目内 mock / fixture，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
+
+| Adapter ReviewReport 字段 | Review Console 可见/草案字段 | 说明 |
+| --- | --- | --- |
+| `review_report_contract.report_items` | `review_report_static_handoff.report_items` / `reviewReportItemList` | 每个候选必须解释 pass 或 reject，携带 evidence record、production blocker、memory report、production report 和 final controls |
+| `review_report_contract.report_summary` | `review_report_static_handoff.report_summary` / `reviewReportSummary` | 显示 candidate/pass/reject/never-production 数量，并保留 `all_memory_writes_blocked`、`all_production_writes_blocked`、`all_provider_execution_blocked` |
+| `review_report_handoff_draft.required_review_report_fields` | `review_report_static_handoff.required_review_report_fields` | 静态审片台必须携带 `report_items`、`report_summary`、`memory_report`、`production_report`、`final_controls`、`no_execution_guard` |
+| `review_console_handoff_draft.review_report_guard_summary` | `review_report_static_handoff.review_report_guard_summary` / `reviewReportGuardSummary` | 显示当前允许进入记忆、生产和写入的数量均为 0，并显示 never-production 候选 ID |
+| `review_report_contract.no_execution_guard` | `review_report_static_handoff.no_execution_guard` / `reviewReportGuard` | provider/plugin/API/image/DailyNote/VCP memory/output/accepted_samples/production candidate 写入必须保持 false |
+
+`review_report_static_handoff` 是审片结果的最终可读报告层。它只把 pass/reject 解释、memory/production admission 阻断、never-production 状态和 no-execution guard 展示给审片台，不代表生产批准、accepted_samples 写入、记忆写入、插件调用、图片生成或 provider contact。
+
 ## v14.061 Review Blocker Arbiter Draft Output Snapshot
 
 本节用于验收静态 Review Console 的 `renderDraft()` 草案输出没有丢失审片阻断仲裁字段。它仍然只执行本目录内静态 JS 的 mock DOM 校验，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。

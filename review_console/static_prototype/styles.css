@@ -416,6 +416,7 @@ input[type="range"] {
 .decision-package-section,
 .evidence-blocker-section,
 .blocker-arbiter-section,
+.review-report-section,
 .adapter-negative-section {
   display: grid;
   gap: 12px;
@@ -498,6 +499,7 @@ input[type="range"] {
 .evidence-record-list,
 .blocker-decision-list,
 .blocker-arbiter-list,
+.review-report-list,
 .adapter-negative-list {
   display: grid;
   gap: 10px;
@@ -520,6 +522,7 @@ input[type="range"] {
 .evidence-card,
 .blocker-card,
 .blocker-arbiter-card,
+.review-report-card,
 .adapter-negative-card {
   display: grid;
   gap: 10px;
@@ -545,6 +548,14 @@ input[type="range"] {
 }
 
 .blocker-arbiter-card.never-production {
+  border-left-color: var(--red);
+}
+
+.review-report-card.pending-review {
+  border-left-color: var(--cyan);
+}
+
+.review-report-card.never-production {
   border-left-color: var(--red);
 }
 
@@ -588,6 +599,7 @@ input[type="range"] {
 .evidence-card dl,
 .blocker-card dl,
 .blocker-arbiter-card dl,
+.review-report-card dl,
 .adapter-negative-card dl {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -599,6 +611,7 @@ input[type="range"] {
 .evidence-card dl div,
 .blocker-card dl div,
 .blocker-arbiter-card dl div,
+.review-report-card dl div,
 .adapter-negative-card dl div {
   min-width: 0;
   padding: 8px;
@@ -611,6 +624,7 @@ input[type="range"] {
 .evidence-card dt,
 .blocker-card dt,
 .blocker-arbiter-card dt,
+.review-report-card dt,
 .adapter-negative-card dt {
   color: var(--muted);
   font-size: 12px;
@@ -620,6 +634,7 @@ input[type="range"] {
 .evidence-card dd,
 .blocker-card dd,
 .blocker-arbiter-card dd,
+.review-report-card dd,
 .adapter-negative-card dd {
   margin: 3px 0 0;
   overflow-wrap: anywhere;
@@ -727,6 +742,7 @@ input[type="range"] {
 
   .evidence-card dl,
   .blocker-card dl,
+  .review-report-card dl,
   .adapter-negative-card dl {
     grid-template-columns: 1fr;
   }
