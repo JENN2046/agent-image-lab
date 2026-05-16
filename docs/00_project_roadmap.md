@@ -18,6 +18,28 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
+Current phase: v14_016_review_console_static_prototype_next_route_decision_gate.
+Current local/remote baseline after v14.015 closeout sync: dc6921898fe46cc76d431fee510251f9f3f6b4af.
+Current mainline state: V14.016 presents the next-route decision gate for the isolated Review Console static prototype. The polished prototype remains a local-only static surface under prototypes/review-console-static/ and this phase does not modify prototype files, run preview, start runtime, call provider, generate images, write memory, write accepted_samples, or enter production routes.
+phase_record: docs/v14_016_review_console_static_prototype_next_route_decision_gate.md.
+route_options_presented: no_change_archive | docs_only_human_visual_review_notes | bounded_static_prototype_patch_gate | runtime_preview_gate_blocked_by_default.
+selected_route: pending_human_selection.
+recommended_primary: no_change_archive.
+recommended_secondary: docs_only_human_visual_review_notes.
+human_decision_required: true.
+prototype_files_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+image_generation: false.
+memory_write: false.
+accepted_samples_written: false.
+runs_output_committed: false.
+dependency_change: false.
+Batch_005: false.
+production_candidate_002: false.
+recommended_next: pending_human_review_console_static_prototype_next_route_selection.
+recommended_next_auto_execution_allowed: false.
 Current phase: v14_015_review_console_static_prototype_post_polish_static_review_closeout.
 Current local/remote baseline after static prototype polish: 959af8eb74cc6fa00765bc171ff1f0ccbe86aaac.
 Current mainline state: The Review Console static prototype polish commit has been pushed and statically reviewed. The polished prototype remains isolated under prototypes/review-console-static/ with local HTML, CSS, JS, and mock/redacted fixture JSON only. Post-polish safety review confirms no external assets, CDN, network requests, provider/runtime/image/memory path, accepted_samples write, runs image binary read, package/dependency change, production_candidate_002, or Batch_005. Browser preview was not started during this closeout phase.

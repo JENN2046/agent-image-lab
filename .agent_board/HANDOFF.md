@@ -3,6 +3,32 @@
 ## Handoff Summary
 
 ```text
+Status: v14_016_review_console_static_prototype_next_route_decision_gate completed local validation; local commit pending.
+Reason: V14.016 presents next-route options for the isolated Review Console static prototype after the v14.015 closeout sync. The selected route remains pending human selection. No prototype file edits, browser preview, runtime, provider contact, image generation, memory write, accepted_samples write, runs binary read, dependency change, production_candidate_002, or Batch_005 are authorized by this gate.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Source commit: dc6921898fe46cc76d431fee510251f9f3f6b4af
+Current status: v14_016_review_console_static_prototype_next_route_decision_gate
+phase_record: docs/v14_016_review_console_static_prototype_next_route_decision_gate.md
+route_options_presented: no_change_archive | docs_only_human_visual_review_notes | bounded_static_prototype_patch_gate | runtime_preview_gate_blocked_by_default
+selected_route: pending_human_selection
+recommended_primary: no_change_archive
+recommended_secondary: docs_only_human_visual_review_notes
+human_decision_required: true
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+image_generation: false
+memory_write: false
+accepted_samples_written: false
+runs_output_committed: false
+runs_image_binary_read: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: pending_human_review_console_static_prototype_next_route_selection
+recommended_next_auto_execution_allowed: false
+next_phase_started: false
+---
 Status: v14_015_review_console_static_prototype_post_polish_static_review_closeout completed local static review closeout.
 Reason: The already-pushed static prototype polish commit 959af8eb74cc6fa00765bc171ff1f0ccbe86aaac was reviewed as local-only. The prototype remains isolated under prototypes/review-console-static/ with local HTML/CSS/JS/mock fixture JSON and no external network, provider, runtime, image, memory, accepted_samples, runs binary, dependency, production candidate, or Batch_005 surface.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

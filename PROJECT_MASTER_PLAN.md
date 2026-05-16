@@ -8,6 +8,32 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+latest_head_after_v14_016_route_decision_gate: dc6921898fe46cc76d431fee510251f9f3f6b4af
+status: v14_016_review_console_static_prototype_next_route_decision_gate
+mode: A4.8 docs-only route decision gate
+phase_id: v14_016_review_console_static_prototype_next_route_decision_gate
+source_phase: v14_015_review_console_static_prototype_post_polish_static_review_closeout
+source_commit: dc6921898fe46cc76d431fee510251f9f3f6b4af
+phase_record: docs/v14_016_review_console_static_prototype_next_route_decision_gate.md
+route_options_presented: no_change_archive | docs_only_human_visual_review_notes | bounded_static_prototype_patch_gate | runtime_preview_gate_blocked_by_default
+selected_route: pending_human_selection
+recommended_primary: no_change_archive
+recommended_secondary: docs_only_human_visual_review_notes
+human_decision_required: true
+prototype_files_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+image_generation: false
+memory_write: false
+accepted_samples_written: false
+runs_output_committed: false
+dependency_change: false
+Batch_005: false
+production_candidate_002: false
+recommended_next: pending_human_review_console_static_prototype_next_route_selection
+recommended_next_auto_execution_allowed: false
+branch: master
 latest_head_after_v14_015_static_prototype_polish_closeout: 959af8eb74cc6fa00765bc171ff1f0ccbe86aaac
 status: v14_015_review_console_static_prototype_post_polish_static_review_closeout
 mode: A0 static review and closeout only

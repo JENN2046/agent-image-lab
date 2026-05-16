@@ -9,6 +9,33 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v14_016_review_console_static_prototype_next_route_decision_gate.
+Purpose: decide the next route for the isolated Review Console static prototype after the v14.015 closeout sync, without modifying prototype files or entering preview/runtime/provider/image/memory/production routes.
+source_phase: v14_015_review_console_static_prototype_post_polish_static_review_closeout.
+source_commit: dc6921898fe46cc76d431fee510251f9f3f6b4af.
+phase_record: docs/v14_016_review_console_static_prototype_next_route_decision_gate.md.
+route_options_presented: no_change_archive | docs_only_human_visual_review_notes | bounded_static_prototype_patch_gate | runtime_preview_gate_blocked_by_default.
+selected_route: pending_human_selection.
+recommended_primary: no_change_archive.
+recommended_secondary: docs_only_human_visual_review_notes.
+human_decision_required: true.
+prototype_files_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+image_generation: false.
+retry: false.
+memory_write: false.
+accepted_samples_written: false.
+runs_output_committed: false.
+runs_image_binary_read: false.
+production_candidate_002: false.
+Batch_005: false.
+dependency_change: false.
+recommended_next: pending_human_review_console_static_prototype_next_route_selection.
+recommended_next_auto_execution_allowed: false.
+next_phase_started: false.
+---
 Current active gate: v14_015_review_console_static_prototype_post_polish_static_review_closeout.
 Purpose: close out the already-pushed static prototype polish commit and verify the polished Review Console prototype remains local-only.
 source_commit: 959af8eb74cc6fa00765bc171ff1f0ccbe86aaac.
