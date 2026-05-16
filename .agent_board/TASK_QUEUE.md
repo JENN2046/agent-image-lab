@@ -9,6 +9,30 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v14_017_review_console_static_prototype_human_route_selection.
+Purpose: close pending_human_selection into Option A, no_change_archive, accepting the polished Review Console static prototype as an archived static reference without prototype edits or runtime/provider/image/memory/production routes.
+source_phase: v14_016_review_console_static_prototype_next_route_decision_gate.
+source_commit: b22e2817ee574857b96dfa92b96987a38b189df2.
+phase_record: docs/v14_017_review_console_static_prototype_human_route_selection.md.
+selected_route: A_no_change_archive.
+archived_static_reference: true.
+prototype_files_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+image_generation: false.
+retry: false.
+memory_write: false.
+accepted_samples_written: false.
+runs_output_committed: false.
+runs_image_binary_read: false.
+production_candidate_002: false.
+Batch_005: false.
+dependency_change: false.
+recommended_next: pending_human_post_archive_project_route_selection.
+recommended_next_auto_execution_allowed: false.
+next_phase_started: false.
+---
 Current active gate: v14_016_review_console_static_prototype_next_route_decision_gate.
 Purpose: decide the next route for the isolated Review Console static prototype after the v14.015 closeout sync, without modifying prototype files or entering preview/runtime/provider/image/memory/production routes.
 source_phase: v14_015_review_console_static_prototype_post_polish_static_review_closeout.

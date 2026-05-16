@@ -1,5 +1,53 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260516-v14.017-REVIEW-CONSOLE-STATIC-PROTOTYPE-HUMAN-ROUTE-SELECTION
+
+Task:
+
+```text
+Select the next route for the isolated Review Console static prototype and close pending_human_selection into no_change_archive.
+```
+
+Result:
+
+```text
+source_commit: b22e2817ee574857b96dfa92b96987a38b189df2
+phase_record: docs/v14_017_review_console_static_prototype_human_route_selection.md
+selected_route: A_no_change_archive
+archived_static_reference: true
+validation_result: passed_with_existing_manual_review_warnings_only
+```
+
+Commands run:
+
+```text
+git diff --check
+node scripts/validate_agent_board_state.js
+node scripts/validate_current_state_alignment.js
+node scripts/validate_native_doubao_sandbox.js
+node scripts/validate_prompt_schema.js --manifest tests/fixtures/prompt_schema_validator/manifest.json
+pwsh -File scripts/validate-agent-image-lab-local.ps1
+pwsh -File scripts/validate_mvp.ps1
+```
+
+Validation notes:
+
+```text
+git diff --check passed.
+node scripts/validate_agent_board_state.js passed.
+node scripts/validate_current_state_alignment.js passed.
+node scripts/validate_native_doubao_sandbox.js passed.
+node scripts/validate_prompt_schema.js --manifest tests/fixtures/prompt_schema_validator/manifest.json passed.
+pwsh -File scripts/validate-agent-image-lab-local.ps1 passed with existing manual-review warnings only.
+pwsh -File scripts/validate_mvp.ps1 passed.
+```
+
+Boundary:
+
+```text
+No prototype file mutation, browser preview, dev server, live server, localhost runtime, provider contact, image generation, retry, .env.local value read, DailyNote write, VCP memory write, accepted_samples write, runs image binary read, runs output commit, production_candidate_002, memory_write_path, Batch_005, CDP, bridge, MCP/VCPToolBox runtime, dependency change, package change, or automatic next phase entry is performed by v14.017.
+```
+
 ## VALIDATION-20260516-v14.016-REVIEW-CONSOLE-STATIC-PROTOTYPE-NEXT-ROUTE-DECISION
 
 Task:

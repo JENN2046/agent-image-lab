@@ -18,6 +18,25 @@ Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成�
 当前仓库处于：
 
 ```text
+Current phase: v14_017_review_console_static_prototype_human_route_selection.
+Current local/remote baseline after v14.016 route decision sync: b22e2817ee574857b96dfa92b96987a38b189df2.
+Current mainline state: Human route selection closes the Review Console static prototype pending route into Option A, no_change_archive. The current polished static prototype is accepted as an archived static reference. No prototype file edits, preview, runtime, provider contact, image generation, memory write, accepted_samples write, runs image binary read, or production route is authorized.
+phase_record: docs/v14_017_review_console_static_prototype_human_route_selection.md.
+selected_route: A_no_change_archive.
+archived_static_reference: true.
+prototype_files_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+image_generation: false.
+memory_write: false.
+accepted_samples_written: false.
+runs_output_committed: false.
+dependency_change: false.
+Batch_005: false.
+production_candidate_002: false.
+recommended_next: pending_human_post_archive_project_route_selection.
+recommended_next_auto_execution_allowed: false.
 Current phase: v14_016_review_console_static_prototype_next_route_decision_gate.
 Current local/remote baseline after v14.015 closeout sync: dc6921898fe46cc76d431fee510251f9f3f6b4af.
 Current mainline state: V14.016 presents the next-route decision gate for the isolated Review Console static prototype. The polished prototype remains a local-only static surface under prototypes/review-console-static/ and this phase does not modify prototype files, run preview, start runtime, call provider, generate images, write memory, write accepted_samples, or enter production routes.

@@ -3,7 +3,30 @@
 ## Handoff Summary
 
 ```text
-Status: v14_016_review_console_static_prototype_next_route_decision_gate completed local validation; local commit pending.
+Status: v14_017_review_console_static_prototype_human_route_selection completed local validation; guarded commit/push pending.
+Reason: V14.017 selects Option A, no_change_archive, for the isolated Review Console static prototype. The polished prototype is accepted as an archived static reference. No prototype file edits, browser preview, runtime, provider contact, image generation, memory write, accepted_samples write, runs binary read, dependency change, production_candidate_002, or Batch_005 are authorized by this gate.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Source commit: b22e2817ee574857b96dfa92b96987a38b189df2
+Current status: v14_017_review_console_static_prototype_human_route_selection
+phase_record: docs/v14_017_review_console_static_prototype_human_route_selection.md
+selected_route: A_no_change_archive
+archived_static_reference: true
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+image_generation: false
+memory_write: false
+accepted_samples_written: false
+runs_output_committed: false
+runs_image_binary_read: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: pending_human_post_archive_project_route_selection
+recommended_next_auto_execution_allowed: false
+next_phase_started: false
+---
+Status: v14_016_review_console_static_prototype_next_route_decision_gate completed and remote synced.
 Reason: V14.016 presents next-route options for the isolated Review Console static prototype after the v14.015 closeout sync. The selected route remains pending human selection. No prototype file edits, browser preview, runtime, provider contact, image generation, memory write, accepted_samples write, runs binary read, dependency change, production_candidate_002, or Batch_005 are authorized by this gate.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
