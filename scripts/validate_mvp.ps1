@@ -67,6 +67,7 @@ $requiredFiles = @(
   'scripts/validate_review_console_adapter_handoff.js',
   'scripts/validate_review_console_blocker_arbiter_regression_matrix.js',
   'scripts/validate_review_report_negative_guard_regression_matrix.js',
+  'scripts/validate_review_report_route_summary.js',
   'scripts/validate_review_blocker_arbiter_route_summary.js',
   'scripts/validate_review_memory_admission_control.js',
   'scripts/validate_review_production_admission_control.js',
@@ -192,6 +193,7 @@ $requiredFiles = @(
   'tests/schema_examples/review_console_review_report_draft_output_snapshot.example.json',
   'tests/schema_examples/review_console_review_report_negative_guard_draft_output_snapshot.example.json',
   'tests/schema_examples/review_report_negative_guard_regression_matrix.example.json',
+  'tests/schema_examples/review_report_route_summary.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix_v14_062.example.json',
   'tests/schema_examples/review_blocker_arbiter_route_summary.example.json',
@@ -246,6 +248,7 @@ $requiredFiles = @(
   'docs/v14_071_review_report_negative_guard_static_handoff_gate.md',
   'docs/v14_072_review_report_negative_guard_draft_output_snapshot_gate.md',
   'docs/v14_073_review_report_negative_guard_regression_matrix_gate.md',
+  'docs/v14_074_review_report_route_summary_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -3978,6 +3981,11 @@ if (-not $node) {
     Add-Failure "scripts/validate_review_report_negative_guard_regression_matrix.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'scripts/validate_review_report_route_summary.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_review_report_route_summary.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_review_blocker_arbiter_route_summary.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_review_blocker_arbiter_route_summary.js failed node --check"
@@ -6168,6 +6176,42 @@ if (-not $node) {
     }
     if ($reviewReportNegativeGuardMatrix.review_report_negative_guard_regression_matrix.file_write_performed -ne $false) {
       Add-Failure "ReviewReport negative guard regression matrix validation must not write files"
+    }
+  }
+
+  $reviewReportRouteSummaryOutput = & node (Join-Path $Root 'scripts/validate_review_report_route_summary.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "ReviewReport route summary validation exited with failure"
+  } else {
+    $reviewReportRouteSummary = ($reviewReportRouteSummaryOutput -join "`n") | ConvertFrom-Json
+    if ($reviewReportRouteSummary.passed -ne $true) {
+      Add-Failure "ReviewReport route summary validation must report passed true"
+    }
+    foreach ($reviewReportRouteSummaryCheck in @(
+      @{ Flag = 'review_report_route_summary_present'; Message = 'ReviewReport route summary must be present' },
+      @{ Flag = 'review_report_route_summary_matches_positive_review_report'; Message = 'ReviewReport route summary must match positive ReviewReport' },
+      @{ Flag = 'review_report_route_summary_matches_negative_review_report'; Message = 'ReviewReport route summary must match negative ReviewReport' },
+      @{ Flag = 'review_report_route_summary_matches_negative_matrix'; Message = 'ReviewReport route summary must match negative matrix' },
+      @{ Flag = 'review_report_route_summary_groups_verified'; Message = 'ReviewReport route summary must verify route groups' },
+      @{ Flag = 'review_report_route_summary_pass_route_verified'; Message = 'ReviewReport route summary must verify pass route' },
+      @{ Flag = 'review_report_route_summary_reject_failure_learning_route_verified'; Message = 'ReviewReport route summary must verify reject failure-learning route' },
+      @{ Flag = 'review_report_route_summary_memory_forbidden_route_verified'; Message = 'ReviewReport route summary must verify memory-forbidden route' },
+      @{ Flag = 'review_report_route_summary_unknown_failure_verified'; Message = 'ReviewReport route summary must verify unknown failure' },
+      @{ Flag = 'review_report_route_summary_memory_entry_blocked'; Message = 'ReviewReport route summary must block memory entry' },
+      @{ Flag = 'review_report_route_summary_production_blocked'; Message = 'ReviewReport route summary must block production' },
+      @{ Flag = 'review_report_route_summary_never_production_verified'; Message = 'ReviewReport route summary must verify never-production' },
+      @{ Flag = 'review_report_route_summary_no_daily_note_write_verified'; Message = 'ReviewReport route summary must verify no DailyNote write' },
+      @{ Flag = 'review_report_route_summary_no_vcp_memory_write_verified'; Message = 'ReviewReport route summary must verify no VCP memory write' },
+      @{ Flag = 'review_report_route_summary_no_accepted_samples_write_verified'; Message = 'ReviewReport route summary must verify no accepted_samples write' },
+      @{ Flag = 'review_report_route_summary_no_production_candidate_verified'; Message = 'ReviewReport route summary must verify no production candidate' },
+      @{ Flag = 'review_report_route_summary_no_provider_plugin_api_image_verified'; Message = 'ReviewReport route summary must verify no provider/plugin/API/image effects' }
+    )) {
+      if ($reviewReportRouteSummary.review_report_route_summary.($reviewReportRouteSummaryCheck.Flag) -ne $true) {
+        Add-Failure $reviewReportRouteSummaryCheck.Message
+      }
+    }
+    if ($reviewReportRouteSummary.review_report_route_summary.file_write_performed -ne $false) {
+      Add-Failure "ReviewReport route summary validation must not write files"
     }
   }
 

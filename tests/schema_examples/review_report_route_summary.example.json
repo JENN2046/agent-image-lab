@@ -1,0 +1,319 @@
+{
+  "review_report_route_summary_id": "review_report_route_summary_v14_074_001",
+  "phase": "v14_074_review_report_route_summary_gate",
+  "source_phase": "v14_073_review_report_negative_guard_regression_matrix_gate",
+  "source_commit": "b192f9a",
+  "status": "local_review_report_route_summary",
+  "display_only": true,
+  "source_positive_review_report_ref": "tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json#review_report_contract",
+  "source_negative_review_report_ref": "tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json#review_report_contract",
+  "source_negative_matrix_ref": "tests/schema_examples/review_report_negative_guard_regression_matrix.example.json",
+  "source_review_report_contract_ref": "tests/schema_examples/review_report_contract.example.json",
+  "candidate_routes": [
+    {
+      "candidate_id": "candidate_accept_metadata_001",
+      "source_fixture": "positive_review_report_contract",
+      "review_outcome": "pass",
+      "report_decision": "pass_to_draft_review_queue",
+      "report_status": "draft_report_pending_human_review",
+      "route_class": "pass_review_pending",
+      "final_route": "pass_draft_only_pending_human_review",
+      "pass_reasons": [
+        "weighted_score_meets_accept_threshold",
+        "no_failure_tags_present",
+        "metadata_only_artifact_reference",
+        "provenance_is_metadata_only"
+      ],
+      "reject_reasons": [],
+      "failure_tags": [],
+      "unknown_failure_tags": [],
+      "evidence_record_id": "evidence_candidate_accept_metadata_001",
+      "production_blocker_decision_id": "blocker_production_candidate_accept_metadata_001",
+      "memory_blocker_decision_ids": [],
+      "production_exclusion_record_id": null,
+      "memory_route": "draft_memory_candidate",
+      "memory_allowed_output_now": "memory_delta_draft_only",
+      "memory_draft_allowed": true,
+      "memory_forbidden": false,
+      "memory_entry_allowed_now": false,
+      "requires_human_memory_approval": true,
+      "direct_memory_write_performed": false,
+      "daily_note_write_performed": false,
+      "vcp_memory_write_performed": false,
+      "production_allowed_output_now": "review_pending_candidate_only",
+      "production_promotion_allowed_now": false,
+      "requires_human_production_approval": true,
+      "production_candidate_created": false,
+      "accepted_samples_write_performed": false,
+      "never_production": false,
+      "may_enter_memory_now": false,
+      "may_enter_production_now": false,
+      "writes_allowed_now": [],
+      "writes_blocked": [
+        "DailyNote_write",
+        "VCP_memory_write",
+        "direct_memory_write",
+        "accepted_samples_write",
+        "production_candidate"
+      ],
+      "execution_blocked": [
+        "provider_execution",
+        "plugin_call",
+        "api_call",
+        "image_generation",
+        "deployment_or_release"
+      ]
+    },
+    {
+      "candidate_id": "candidate_reject_metadata_001",
+      "source_fixture": "positive_review_report_contract",
+      "review_outcome": "reject",
+      "report_decision": "reject_to_failure_learning_never_production",
+      "report_status": "draft_report_failure_learning_only",
+      "route_class": "reject_failure_learning",
+      "final_route": "reject_failure_learning_only_never_production",
+      "pass_reasons": [],
+      "reject_reasons": [
+        "weighted_score_below_accept_threshold",
+        "weighted_score_below_reject_threshold",
+        "mapped_failure_tags_present"
+      ],
+      "failure_tags": [
+        "lighting_flat",
+        "composition_imbalance"
+      ],
+      "unknown_failure_tags": [],
+      "evidence_record_id": "evidence_candidate_reject_metadata_001",
+      "production_blocker_decision_id": "blocker_production_candidate_reject_metadata_001",
+      "memory_blocker_decision_ids": [],
+      "production_exclusion_record_id": "production_exclusion_candidate_reject_metadata_001",
+      "memory_route": "audit_only_failure_learning",
+      "memory_allowed_output_now": "failure_lesson_draft_only",
+      "memory_draft_allowed": true,
+      "memory_forbidden": false,
+      "memory_entry_allowed_now": false,
+      "requires_human_memory_approval": true,
+      "direct_memory_write_performed": false,
+      "daily_note_write_performed": false,
+      "vcp_memory_write_performed": false,
+      "production_allowed_output_now": "failure_learning_only",
+      "production_promotion_allowed_now": false,
+      "requires_human_production_approval": false,
+      "production_candidate_created": false,
+      "accepted_samples_write_performed": false,
+      "never_production": true,
+      "may_enter_memory_now": false,
+      "may_enter_production_now": false,
+      "writes_allowed_now": [],
+      "writes_blocked": [
+        "DailyNote_write",
+        "VCP_memory_write",
+        "direct_memory_write",
+        "accepted_samples_write",
+        "production_candidate"
+      ],
+      "execution_blocked": [
+        "provider_execution",
+        "plugin_call",
+        "api_call",
+        "image_generation",
+        "deployment_or_release",
+        "production_forever"
+      ]
+    },
+    {
+      "candidate_id": "candidate_reject_mapped_guard_001",
+      "source_fixture": "negative_review_report_contract",
+      "review_outcome": "reject",
+      "report_decision": "reject_to_failure_learning_never_production",
+      "report_status": "draft_report_failure_learning_only",
+      "route_class": "reject_failure_learning",
+      "final_route": "reject_failure_learning_only_never_production",
+      "pass_reasons": [],
+      "reject_reasons": [
+        "weighted_score_below_accept_threshold",
+        "weighted_score_below_reject_threshold",
+        "mapped_failure_tags_present"
+      ],
+      "failure_tags": [
+        "lighting_flat",
+        "composition_imbalance"
+      ],
+      "unknown_failure_tags": [],
+      "evidence_record_id": "evidence_candidate_reject_mapped_guard_001",
+      "production_blocker_decision_id": "blocker_production_candidate_reject_mapped_guard_001",
+      "memory_blocker_decision_ids": [],
+      "production_exclusion_record_id": "production_exclusion_candidate_reject_mapped_guard_001",
+      "memory_route": "audit_only_failure_learning",
+      "memory_allowed_output_now": "failure_lesson_draft_only",
+      "memory_draft_allowed": true,
+      "memory_forbidden": false,
+      "memory_entry_allowed_now": false,
+      "requires_human_memory_approval": true,
+      "direct_memory_write_performed": false,
+      "daily_note_write_performed": false,
+      "vcp_memory_write_performed": false,
+      "production_allowed_output_now": "failure_learning_only",
+      "production_promotion_allowed_now": false,
+      "requires_human_production_approval": false,
+      "production_candidate_created": false,
+      "accepted_samples_write_performed": false,
+      "never_production": true,
+      "may_enter_memory_now": false,
+      "may_enter_production_now": false,
+      "writes_allowed_now": [],
+      "writes_blocked": [
+        "DailyNote_write",
+        "VCP_memory_write",
+        "direct_memory_write",
+        "accepted_samples_write",
+        "production_candidate"
+      ],
+      "execution_blocked": [
+        "provider_execution",
+        "plugin_call",
+        "api_call",
+        "image_generation",
+        "deployment_or_release",
+        "production_forever"
+      ]
+    },
+    {
+      "candidate_id": "candidate_reject_unknown_guard_001",
+      "source_fixture": "negative_review_report_contract",
+      "review_outcome": "reject",
+      "report_decision": "reject_to_memory_forbidden_never_production",
+      "report_status": "draft_report_memory_forbidden_never_production",
+      "route_class": "reject_memory_forbidden",
+      "final_route": "reject_memory_forbidden_never_production",
+      "pass_reasons": [],
+      "reject_reasons": [
+        "weighted_score_below_accept_threshold",
+        "weighted_score_below_reject_threshold",
+        "mapped_failure_tags_present",
+        "unknown_failure_tags_present"
+      ],
+      "failure_tags": [
+        "unmapped_identity_drift"
+      ],
+      "unknown_failure_tags": [
+        "unmapped_identity_drift"
+      ],
+      "evidence_record_id": "evidence_candidate_reject_unknown_guard_001",
+      "production_blocker_decision_id": "blocker_production_candidate_reject_unknown_guard_001",
+      "memory_blocker_decision_ids": [
+        "blocker_memory_candidate_reject_unknown_guard_001"
+      ],
+      "production_exclusion_record_id": "production_exclusion_candidate_reject_unknown_guard_001",
+      "memory_route": "forbidden",
+      "memory_allowed_output_now": "none",
+      "memory_draft_allowed": false,
+      "memory_forbidden": true,
+      "memory_entry_allowed_now": false,
+      "requires_human_memory_approval": true,
+      "direct_memory_write_performed": false,
+      "daily_note_write_performed": false,
+      "vcp_memory_write_performed": false,
+      "production_allowed_output_now": "failure_learning_only",
+      "production_promotion_allowed_now": false,
+      "requires_human_production_approval": false,
+      "production_candidate_created": false,
+      "accepted_samples_write_performed": false,
+      "never_production": true,
+      "may_enter_memory_now": false,
+      "may_enter_production_now": false,
+      "writes_allowed_now": [],
+      "writes_blocked": [
+        "DailyNote_write",
+        "VCP_memory_write",
+        "direct_memory_write",
+        "accepted_samples_write",
+        "production_candidate"
+      ],
+      "execution_blocked": [
+        "provider_execution",
+        "plugin_call",
+        "api_call",
+        "image_generation",
+        "deployment_or_release",
+        "production_forever"
+      ]
+    }
+  ],
+  "route_groups": [
+    {
+      "final_route": "pass_draft_only_pending_human_review",
+      "route_class": "pass_review_pending",
+      "candidate_ids": [
+        "candidate_accept_metadata_001"
+      ],
+      "allowed_memory_output": "memory_delta_draft_only",
+      "allowed_production_output": "review_pending_candidate_only",
+      "production_promotion_allowed_now": false,
+      "memory_entry_allowed_now": false,
+      "writes_allowed_now_count": 0
+    },
+    {
+      "final_route": "reject_failure_learning_only_never_production",
+      "route_class": "reject_failure_learning",
+      "candidate_ids": [
+        "candidate_reject_metadata_001",
+        "candidate_reject_mapped_guard_001"
+      ],
+      "allowed_memory_output": "failure_lesson_draft_only",
+      "allowed_production_output": "failure_learning_only",
+      "production_promotion_allowed_now": false,
+      "memory_entry_allowed_now": false,
+      "writes_allowed_now_count": 0
+    },
+    {
+      "final_route": "reject_memory_forbidden_never_production",
+      "route_class": "reject_memory_forbidden",
+      "candidate_ids": [
+        "candidate_reject_unknown_guard_001"
+      ],
+      "allowed_memory_output": "none",
+      "allowed_production_output": "failure_learning_only",
+      "production_promotion_allowed_now": false,
+      "memory_entry_allowed_now": false,
+      "writes_allowed_now_count": 0
+    }
+  ],
+  "route_summary": {
+    "candidate_count": 4,
+    "pass_count": 1,
+    "reject_count": 3,
+    "route_group_count": 3,
+    "memory_draft_allowed_count": 3,
+    "memory_forbidden_count": 1,
+    "memory_entry_allowed_now_count": 0,
+    "production_promotion_allowed_now_count": 0,
+    "writes_allowed_now_count": 0,
+    "never_production_count": 3,
+    "unknown_failure_candidate_count": 1,
+    "all_report_items_explained": true,
+    "all_memory_entries_blocked_now": true,
+    "all_production_promotion_blocked_now": true,
+    "all_writes_blocked": true,
+    "all_provider_execution_blocked": true,
+    "all_candidates_have_evidence_record": true,
+    "all_candidates_have_blocker_decision": true,
+    "all_never_production_rejects_have_exclusion": true,
+    "direct_memory_write_performed": false,
+    "daily_note_write_performed": false,
+    "vcp_memory_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_created": false
+  },
+  "no_execution_guard": {
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "daily_note_write_performed": false,
+    "vcp_memory_write_performed": false,
+    "image_generation_performed": false,
+    "output_file_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_created": false
+  }
+}

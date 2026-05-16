@@ -266,6 +266,20 @@ Phase 9 审批记录必须满足：
 
 `review_report_negative_guard_regression_matrix.example.json` 是本地一致性矩阵，不是生产执行记录。它只证明负向审片报告的 rejected route、memory-forbidden、unknown failure、never-production 和 no-execution guard 在四个表面上保持一致。
 
+## v14.074 ReviewReport Route Summary
+
+本节用于验收 ReviewReport 的最终路由摘要。它仍然只读取项目内 positive / negative fixture 与 v14.073 matrix，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
+
+| Source | Target | Rule |
+| --- | --- | --- |
+| positive `review_report_contract.report_items` | `review_report_route_summary.candidate_routes` | pass 候选必须保持 `pass_draft_only_pending_human_review`，只能进入草案审阅队列 |
+| positive / negative reject report items | `review_report_route_summary.candidate_routes` | mapped reject 必须保持 `reject_failure_learning_only_never_production` |
+| negative unknown report item | `review_report_route_summary.candidate_routes` | unknown failure 必须保持 `reject_memory_forbidden_never_production`，不得创建 memory draft |
+| v14.073 negative matrix consensus | `review_report_route_summary.route_groups` | memory-forbidden ID、unknown failure tag、never-production IDs 必须一致 |
+| `no_execution_guard` | `review_report_route_summary.no_execution_guard` | provider/plugin/API/image/DailyNote/VCP memory/output/accepted_samples/production candidate 写入必须保持 false |
+
+`review_report_route_summary.example.json` 是本地路由仲裁摘要，不是生产执行记录。它只证明 ReviewReport 能把 pass、mapped reject、unknown reject 分别送入草案审阅、failure learning 或 memory-forbidden 永久阻断路线。
+
 ## v14.061 Review Blocker Arbiter Draft Output Snapshot
 
 本节用于验收静态 Review Console 的 `renderDraft()` 草案输出没有丢失审片阻断仲裁字段。它仍然只执行本目录内静态 JS 的 mock DOM 校验，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
