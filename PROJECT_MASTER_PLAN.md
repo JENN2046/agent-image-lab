@@ -8,6 +8,32 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+latest_head_after_v14_018_post_archive_route_selection: 615eab08e2f5c61d0977f5a911381bbfd5ad25b9
+status: v14_018_post_archive_project_route_selection_gate
+mode: A4.8 docs-only route selection gate
+phase_id: v14_018_post_archive_project_route_selection_gate
+source_phase: v14_017_review_console_static_prototype_human_route_selection
+source_commit: 615eab08e2f5c61d0977f5a911381bbfd5ad25b9
+phase_record: docs/v14_018_post_archive_project_route_selection_gate.md
+selected_route: E_product_route_planning
+archived_static_reference: true
+prototype_patch_allowed_now: false
+preview_allowed_now: false
+runtime_allowed_now: false
+prototype_files_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+image_generation: false
+memory_write: false
+accepted_samples_written: false
+runs_output_committed: false
+dependency_change: false
+Batch_005: false
+production_candidate_002: false
+recommended_next: pending_human_product_route_planning_selection
+recommended_next_auto_execution_allowed: false
+branch: master
 latest_head_after_v14_017_human_route_selection: b22e2817ee574857b96dfa92b96987a38b189df2
 status: v14_017_review_console_static_prototype_human_route_selection
 mode: A4.8 human decision docs-only gate

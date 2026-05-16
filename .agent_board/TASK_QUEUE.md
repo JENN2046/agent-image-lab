@@ -9,6 +9,33 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v14_018_post_archive_project_route_selection_gate.
+Purpose: select the project line after archiving the Review Console static prototype, without reopening prototype files or entering preview/runtime/provider/image/memory/production routes.
+source_phase: v14_017_review_console_static_prototype_human_route_selection.
+source_commit: 615eab08e2f5c61d0977f5a911381bbfd5ad25b9.
+phase_record: docs/v14_018_post_archive_project_route_selection_gate.md.
+selected_route: E_product_route_planning.
+archived_static_reference: true.
+prototype_patch_allowed_now: false.
+preview_allowed_now: false.
+runtime_allowed_now: false.
+prototype_files_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+image_generation: false.
+retry: false.
+memory_write: false.
+accepted_samples_written: false.
+runs_output_committed: false.
+runs_image_binary_read: false.
+production_candidate_002: false.
+Batch_005: false.
+dependency_change: false.
+recommended_next: pending_human_product_route_planning_selection.
+recommended_next_auto_execution_allowed: false.
+next_phase_started: false.
+---
 Current active gate: v14_017_review_console_static_prototype_human_route_selection.
 Purpose: close pending_human_selection into Option A, no_change_archive, accepting the polished Review Console static prototype as an archived static reference without prototype edits or runtime/provider/image/memory/production routes.
 source_phase: v14_016_review_console_static_prototype_next_route_decision_gate.

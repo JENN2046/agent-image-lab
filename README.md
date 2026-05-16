@@ -7,6 +7,28 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current phase: v14_018_post_archive_project_route_selection_gate.
+Current local/remote baseline after v14.017 human route selection sync: 615eab08e2f5c61d0977f5a911381bbfd5ad25b9.
+Current mainline state: Review Console static prototype remains archived as a static reference. V14.018 selects E_product_route_planning as the next route, returning to broader Agent Image Lab product roadmap planning without reopening prototype files, preview, runtime, provider, image generation, memory, accepted_samples, production_candidate_002, or Batch_005.
+phase_record: docs/v14_018_post_archive_project_route_selection_gate.md.
+selected_route: E_product_route_planning.
+archived_static_reference: true.
+prototype_patch_allowed_now: false.
+preview_allowed_now: false.
+runtime_allowed_now: false.
+prototype_files_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+image_generation: false.
+memory_write: false.
+accepted_samples_written: false.
+runs_output_committed: false.
+dependency_change: false.
+Batch_005: false.
+production_candidate_002: false.
+recommended_next: pending_human_product_route_planning_selection.
+recommended_next_auto_execution_allowed: false.
 Current phase: v14_017_review_console_static_prototype_human_route_selection.
 Current local/remote baseline after v14.016 route decision sync: b22e2817ee574857b96dfa92b96987a38b189df2.
 Current mainline state: Human route selection closes the Review Console static prototype pending route into Option A, no_change_archive. The current polished static prototype is accepted as an archived static reference. No prototype file edits, preview, runtime, provider contact, image generation, memory write, accepted_samples write, runs image binary read, or production route is authorized.

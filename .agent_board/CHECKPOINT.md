@@ -1,10 +1,48 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.018 Post-Archive Project Route Selection Gate
+
+```text
+phase_id: v14_018_post_archive_project_route_selection_gate
+status: completed_validated_post_archive_route_selection_local
+source_phase: v14_017_review_console_static_prototype_human_route_selection
+source_commit: 615eab08e2f5c61d0977f5a911381bbfd5ad25b9
+purpose: decide the project line after archiving the Review Console static prototype
+phase_record: docs/v14_018_post_archive_project_route_selection_gate.md
+selected_route: E_product_route_planning
+archived_static_reference: true
+prototype_patch_allowed_now: false
+preview_allowed_now: false
+runtime_allowed_now: false
+prototype_files_modified: false
+browser_preview_started: false
+dev_server_started: false
+live_server_started: false
+localhost_runtime_started: false
+runtime_execution: false
+provider_contact: false
+image_generation: false
+retry: false
+env_local_secret_value_read: false
+memory_write: false
+accepted_samples_written: false
+runs_output_committed: false
+runs_image_binary_read: false
+production_candidate_002: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+package_lock_modified: false
+recommended_next: pending_human_product_route_planning_selection
+recommended_next_auto_execution_allowed: false
+next_phase_started: false
+```
+
 # V14.017 Review Console Static Prototype Human Route Selection
 
 ```text
 phase_id: v14_017_review_console_static_prototype_human_route_selection
-status: completed_validated_human_route_selection_local
+status: completed_remote_synced_after_guarded_push
 source_phase: v14_016_review_console_static_prototype_next_route_decision_gate
 source_commit: b22e2817ee574857b96dfa92b96987a38b189df2
 purpose: close pending_human_selection into one selected Review Console static prototype route
