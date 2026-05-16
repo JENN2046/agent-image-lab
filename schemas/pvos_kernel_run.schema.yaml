@@ -1,0 +1,96 @@
+pvos_kernel_run:
+  schema_version: v1
+  purpose: >
+    Descriptive schema for the minimal Personal Visual Operating System local
+    kernel run. The run links Agent Image Lab visual production objects into a
+    single stdout-only draft and does not authorize execution.
+  required_top_level_fields:
+    - pvos_kernel_run_version
+    - run_id
+    - task_id
+    - mode
+    - status
+    - domain_model_refs
+    - task_envelope_draft
+    - shot_plan
+    - shots
+    - prompt_lineage
+    - prompt_package_ref
+    - dispatch_plan_draft
+    - image_candidates
+    - review_rubric
+    - failure_taxonomy
+    - visual_eval_decision
+    - accepted_samples
+    - rejected_samples
+    - review_report
+    - image_case_draft
+    - memory_delta_draft
+    - provenance_record
+    - eval_seed
+    - run_manifest
+    - visual_loop_state
+    - no_execution_guard
+  domain_model_refs:
+    enum:
+      - ShotPlan
+      - Shot
+      - PromptLineage
+      - ImageCandidate
+      - ReviewRubric
+      - VisualEvalDecision
+      - FailureTaxonomy
+      - AcceptedSample
+      - RejectedSample
+      - ReviewReport
+      - ProvenanceRecord
+      - EvalSeed
+      - RunManifest
+  mode:
+    enum:
+      - local_stdout_only_kernel
+  status:
+    enum:
+      - completed_local_draft
+      - blocked_validation_failed
+  visual_eval_decision:
+    aggregate_decision_enum:
+      - accepted_and_rejected_candidates
+      - rejected_candidates_only
+    candidate_decision_enum:
+      - accepted_candidate_reference
+      - rejected_candidate_reference
+  boundary_defaults:
+    provider_contact_allowed: false
+    plugin_call_allowed: false
+    api_call_allowed: false
+    daily_note_write_allowed: false
+    vcp_memory_write_allowed: false
+    image_generation_allowed: false
+    disk_write_allowed: false
+    external_manifest_read_allowed: false
+    external_repo_read_allowed: false
+  no_execution_guard:
+    provider_contact_performed: false
+    plugin_call_performed: false
+    api_call_performed: false
+    daily_note_write_performed: false
+    vcp_memory_write_performed: false
+    image_generation_performed: false
+    disk_write_performed: false
+    accepted_samples_write_performed: false
+    external_manifest_read_performed: false
+    vcpchat_source_read_performed: false
+    vcptoolbox_source_read_performed: false
+  prohibited_fields:
+    - image_binary_path
+    - provider_payload
+    - private_path
+    - memory_write_path
+    - daily_note_write_path
+    - external_manifest_path
+  allowed_fixture_root: tests/schema_examples/
+  output_policy:
+    output_channel: stdout
+    output_file_write_allowed: false
+    committed_example_is_shape_reference_only: true

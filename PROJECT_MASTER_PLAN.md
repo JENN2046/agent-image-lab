@@ -8,6 +8,47 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+status: v14_037_pvos_kernel_minimal_implementation_gate
+mode: A5 full-development authorized local kernel implementation
+phase_id: v14_037_pvos_kernel_minimal_implementation_gate
+source_phase: v14_036_visual_eval_seed_registry_closeout_or_expansion_route_gate
+source_commit: ace9cee2c37532d79356b3943f402b649ef2ce19
+phase_record: docs/v14_037_pvos_kernel_minimal_implementation_gate.md
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning_to_pvos_kernel
+kernel_cli_created: kernel/pvos_kernel.js
+kernel_schema_created: schemas/pvos_kernel_run.schema.yaml
+kernel_fixture_created: tests/schema_examples/pvos_kernel_input.example.json
+kernel_output_example_created: tests/schema_examples/pvos_kernel_run.example.json
+kernel_validator_created: scripts/validate_pvos_kernel_minimal.js
+validator_wiring_modified: scripts/validate_mvp.ps1
+stdout_only_kernel: true
+accepted_candidate_route_verified: true
+rejected_candidate_route_verified: true
+failure_taxonomy_mapping_verified: true
+provenance_metadata_only_verified: true
+no_execution_guard_verified: true
+accepted_samples_written: false
+image_binaries_read: false
+runs_output_committed: false
+review_console_runtime_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+push_performed: false
+recommended_next: v14_038_pvos_kernel_contract_static_review_or_adapter_binding_gate
+recommended_next_auto_execution_allowed: true
+push_requires_explicit_remote_authorization: true
+runtime_provider_image_memory_production_batch: false
+next_phase_started: false
+branch: master
 status: v14_036_visual_eval_seed_registry_closeout_or_expansion_route_gate
 mode: A4.8 docs-only route closeout gate
 phase_id: v14_036_visual_eval_seed_registry_closeout_or_expansion_route_gate

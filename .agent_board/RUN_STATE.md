@@ -3,18 +3,59 @@
 ## Current Mode
 
 ```text
-A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot boundaries
+A5 full-development authorized local kernel implementation under Jenn's 2026-05-16 window
 ```
 
 ## Current Mission
 
 ```text
-Agent Image Lab is in v14_036_visual_eval_seed_registry_closeout_or_expansion_route_gate. This docs-only route closeout gate closes the visual-evaluation seed registry foundation lane after the v14.031-v14.035 chain and defers any further metadata-only seed expansion to a separate future planning gate. It does not modify scripts, schemas, examples, ingest seeds, write accepted_samples, read image binaries, start browser preview, run runtime, contact providers, call plugins, call APIs, generate images, write memory, start production_candidate_002, memory_write_path, or Batch_005.
+Agent Image Lab is in v14_037_pvos_kernel_minimal_implementation_gate. This A5 full-development local slice creates the minimal runnable Personal Visual Operating System kernel: a dependency-free stdout-only CLI that links ShotPlan, Shot, PromptLineage, ImageCandidate, ReviewRubric, VisualEvalDecision, FailureTaxonomy, AcceptedSample, RejectedSample, ReviewReport, ProvenanceRecord, EvalSeed, and RunManifest from one synthetic repository fixture. It does not write accepted_samples, read image binaries, commit runs output, start browser preview, run VCP runtime, contact providers, call plugins, call APIs, generate images, write DailyNote, write VCP memory, start production_candidate_002, memory_write_path, or Batch_005.
 ```
 
 ## Current Phase
 
 ```text
+V14.037 PVOS Kernel Minimal Implementation Gate
+phase_id: v14_037_pvos_kernel_minimal_implementation_gate
+status: completed_local_validated
+source_phase: v14_036_visual_eval_seed_registry_closeout_or_expansion_route_gate
+source_commit: ace9cee2c37532d79356b3943f402b649ef2ce19
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning_to_pvos_kernel
+branch: master tracking origin/master
+phase_record: docs/v14_037_pvos_kernel_minimal_implementation_gate.md
+kernel_cli_created: kernel/pvos_kernel.js
+kernel_schema_created: schemas/pvos_kernel_run.schema.yaml
+kernel_fixture_created: tests/schema_examples/pvos_kernel_input.example.json
+kernel_output_example_created: tests/schema_examples/pvos_kernel_run.example.json
+kernel_validator_created: scripts/validate_pvos_kernel_minimal.js
+validator_wiring_modified: scripts/validate_mvp.ps1
+stdout_only_kernel: true
+accepted_candidate_route_verified: true
+rejected_candidate_route_verified: true
+failure_taxonomy_mapping_verified: true
+provenance_metadata_only_verified: true
+no_execution_guard_verified: true
+accepted_samples_written: false
+image_binaries_read: false
+runs_output_committed: false
+review_console_runtime_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v14_038_pvos_kernel_contract_static_review_or_adapter_binding_gate
+recommended_next_auto_execution_allowed: true
+push_requires_explicit_remote_authorization: true
+runtime_provider_image_memory_production_batch: false
+next_phase_started: false
+---
 V14.036 Visual Eval Seed Registry Closeout Or Expansion Route Gate
 phase_id: v14_036_visual_eval_seed_registry_closeout_or_expansion_route_gate
 status: completed_local_validated

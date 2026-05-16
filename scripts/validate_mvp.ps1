@@ -155,6 +155,13 @@ $requiredFiles = @(
   'scripts/validate_a5_generation_template.js',
   'scripts/validate_visual_eval_seed_record_schema.js',
   'scripts/validate_visual_eval_seed_registry_schema.js',
+  'scripts/validate_pvos_kernel_minimal.js',
+  'kernel/pvos_kernel.js',
+  'kernel/README.md',
+  'schemas/pvos_kernel_run.schema.yaml',
+  'tests/schema_examples/pvos_kernel_input.example.json',
+  'tests/schema_examples/pvos_kernel_run.example.json',
+  'docs/v14_037_pvos_kernel_minimal_implementation_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -3967,6 +3974,16 @@ if (-not $node) {
     Add-Failure "scripts/validate_visual_eval_seed_registry_schema.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'kernel/pvos_kernel.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "kernel/pvos_kernel.js failed node --check"
+  }
+
+  & node --check (Join-Path $Root 'scripts/validate_pvos_kernel_minimal.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_pvos_kernel_minimal.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_local_checkpoint_manifest.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_local_checkpoint_manifest.js failed node --check"
@@ -4120,6 +4137,55 @@ if (-not $node) {
     }
     if ($visualEvalSeedRegistry.visual_eval_seed_registry_schema.file_write_performed -ne $false) {
       Add-Failure "visual eval seed registry schema validation must not write files"
+    }
+  }
+
+  $pvosKernelOutput = & node (Join-Path $Root 'scripts/validate_pvos_kernel_minimal.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "PVOS kernel minimal validation exited with failure"
+  } else {
+    $pvosKernel = ($pvosKernelOutput -join "`n") | ConvertFrom-Json
+    if ($pvosKernel.passed -ne $true) {
+      Add-Failure "PVOS kernel minimal validation must report passed true"
+    }
+    if ($pvosKernel.pvos_kernel.kernel_cli_present -ne $true) {
+      Add-Failure "PVOS kernel validation must verify kernel CLI"
+    }
+    if ($pvosKernel.pvos_kernel.schema_present -ne $true) {
+      Add-Failure "PVOS kernel validation must verify schema"
+    }
+    if ($pvosKernel.pvos_kernel.input_fixture_present -ne $true) {
+      Add-Failure "PVOS kernel validation must verify input fixture"
+    }
+    if ($pvosKernel.pvos_kernel.output_example_present -ne $true) {
+      Add-Failure "PVOS kernel validation must verify output example"
+    }
+    if ($pvosKernel.pvos_kernel.stdout_only -ne $true) {
+      Add-Failure "PVOS kernel validation must verify stdout-only boundary"
+    }
+    if ($pvosKernel.pvos_kernel.external_network_required -ne $false) {
+      Add-Failure "PVOS kernel validation must not require external network"
+    }
+    if ($pvosKernel.pvos_kernel.provider_contact_performed -ne $false) {
+      Add-Failure "PVOS kernel validation must not perform provider contact"
+    }
+    if ($pvosKernel.pvos_kernel.plugin_call_performed -ne $false) {
+      Add-Failure "PVOS kernel validation must not call plugins"
+    }
+    if ($pvosKernel.pvos_kernel.api_call_performed -ne $false) {
+      Add-Failure "PVOS kernel validation must not call APIs"
+    }
+    if ($pvosKernel.pvos_kernel.image_generation_performed -ne $false) {
+      Add-Failure "PVOS kernel validation must not generate images"
+    }
+    if ($pvosKernel.pvos_kernel.daily_note_write_performed -ne $false) {
+      Add-Failure "PVOS kernel validation must not write DailyNote"
+    }
+    if ($pvosKernel.pvos_kernel.vcp_memory_write_performed -ne $false) {
+      Add-Failure "PVOS kernel validation must not write VCP memory"
+    }
+    if ($pvosKernel.pvos_kernel.disk_write_performed -ne $false) {
+      Add-Failure "PVOS kernel validation must not write output files"
     }
   }
 
@@ -5567,6 +5633,7 @@ if (-not $node) {
       'docs/',
       'failure_samples/',
       'integrations/vcp/',
+      'kernel/',
       'plugin_calls/',
       'plugins/',
       'prompts/',

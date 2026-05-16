@@ -1,5 +1,73 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260516-v14.037-PVOS-KERNEL-MINIMAL-IMPLEMENTATION
+
+Task:
+
+```text
+Implement a minimal local Personal Visual Operating System kernel that turns one synthetic visual task fixture into a structured pvos_kernel_run JSON draft without provider contact, plugin/API calls, image generation, accepted_samples writes, DailyNote writes, VCP memory writes, external manifest reads, real VCPChat/VCPToolBox reads, dependency changes, or output file writes.
+```
+
+Result:
+
+```text
+phase_record: docs/v14_037_pvos_kernel_minimal_implementation_gate.md
+source_commit: ace9cee2c37532d79356b3943f402b649ef2ce19
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning_to_pvos_kernel
+kernel_cli_created: kernel/pvos_kernel.js
+kernel_schema_created: schemas/pvos_kernel_run.schema.yaml
+kernel_fixture_created: tests/schema_examples/pvos_kernel_input.example.json
+kernel_output_example_created: tests/schema_examples/pvos_kernel_run.example.json
+kernel_validator_created: scripts/validate_pvos_kernel_minimal.js
+validator_wiring_modified: scripts/validate_mvp.ps1
+stdout_only_kernel: true
+accepted_candidate_route_verified: true
+rejected_candidate_route_verified: true
+failure_taxonomy_mapping_verified: true
+provenance_metadata_only_verified: true
+no_execution_guard_verified: true
+accepted_samples_written: false
+image_binaries_read: false
+runs_output_committed: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+next_phase_started: false
+validation_result: passed
+```
+
+Commands run:
+
+```text
+node --check kernel/pvos_kernel.js
+node --check scripts/validate_pvos_kernel_minimal.js
+node kernel/pvos_kernel.js --input tests/schema_examples/pvos_kernel_input.example.json
+node scripts/validate_pvos_kernel_minimal.js
+git diff --check
+node scripts/validate_agent_board_state.js
+node scripts/validate_current_state_alignment.js
+pwsh -File scripts/validate_mvp.ps1
+pwsh -File scripts/validate-agent-image-lab-local.ps1
+```
+
+Validation notes:
+
+```text
+The PVOS kernel validator passed and confirmed the CLI, schema, input fixture, output shape example, domain object refs, accepted/rejected candidate routing, failure taxonomy mapping, provenance metadata-only defaults, and no-execution guard. MVP validation also passed after wiring the PVOS validator into scripts/validate_mvp.ps1. Local project validation passed with existing manual-review warning patterns only.
+```
+
+Boundary:
+
+```text
+No provider contact, plugin call, API call, image generation, accepted_samples write, image binary read, runs output commit, DailyNote write, VCP memory write, external manifest read, real VCPChat/VCPToolBox read, review console runtime modification, dependency change, package change, tag, release, deploy, or push is performed by v14.037.
+```
+
 ## VALIDATION-20260516-v14.024-VISUAL-EVAL-MINIMAL-SEED-SET-PLANNING
 
 Task:

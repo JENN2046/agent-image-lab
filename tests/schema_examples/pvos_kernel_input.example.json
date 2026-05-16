@@ -1,0 +1,157 @@
+{
+  "pvos_kernel_input_version": "v1",
+  "task_id": "portable_lantern_local_fixture_001",
+  "brief": {
+    "brief_id": "brief_portable_lantern_local_fixture_001",
+    "product_category": "portable led camping lantern",
+    "visual_goal": "premium controlled product lifestyle validation fixture",
+    "constraints": [
+      "metadata_only",
+      "no_image_binary",
+      "no_provider_payload",
+      "no_external_path"
+    ]
+  },
+  "shot_plan": {
+    "shot_plan_id": "shot_plan_portable_lantern_001",
+    "strategy": "Validate the visual production loop with one hero shot and two metadata-only candidate records.",
+    "shots": [
+      {
+        "shot_id": "shot_hero_tabletop_001",
+        "shot_type": "hero_product_lifestyle",
+        "intent": "Show a premium lantern as the central product with controlled warm light and believable material response.",
+        "composition": [
+          "center-weighted product silhouette",
+          "subtle outdoor table context",
+          "clean negative space for review"
+        ],
+        "success_criteria": [
+          "product form is readable",
+          "light source feels plausible",
+          "no visible brand text or watermark"
+        ]
+      }
+    ]
+  },
+  "prompt_lineage": {
+    "lineage_id": "prompt_lineage_portable_lantern_001",
+    "prompt_package_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml",
+    "revision": "v1",
+    "parent_refs": [],
+    "locked_terms": [
+      "no visible text",
+      "no watermark",
+      "product remains central"
+    ],
+    "change_reason": "synthetic local kernel validation fixture"
+  },
+  "review_rubric": {
+    "rubric_id": "review_rubric_premium_product_v1",
+    "accept_threshold": 4,
+    "reject_below": 3.4,
+    "dimensions": [
+      {
+        "id": "product_fidelity",
+        "label": "Product fidelity",
+        "weight": 0.3,
+        "pass_threshold": 4
+      },
+      {
+        "id": "lighting_control",
+        "label": "Lighting control",
+        "weight": 0.25,
+        "pass_threshold": 4
+      },
+      {
+        "id": "composition_balance",
+        "label": "Composition balance",
+        "weight": 0.25,
+        "pass_threshold": 4
+      },
+      {
+        "id": "artifact_risk",
+        "label": "Artifact risk",
+        "weight": 0.2,
+        "pass_threshold": 4
+      }
+    ]
+  },
+  "failure_taxonomy": [
+    {
+      "tag": "lighting_flat",
+      "severity": "medium",
+      "definition": "The generated scene lacks deliberate key, fill, or product-light hierarchy."
+    },
+    {
+      "tag": "composition_imbalance",
+      "severity": "medium",
+      "definition": "The product placement, crop, or surrounding props weaken the intended focal hierarchy."
+    },
+    {
+      "tag": "artifact_or_text_risk",
+      "severity": "high",
+      "definition": "The candidate contains visible unwanted text, watermark-like marks, or object artifacts."
+    }
+  ],
+  "eval_seed": {
+    "seed_id": "eval_seed_portable_lantern_local_pair_001",
+    "source_type": "synthetic_fixture",
+    "redaction_status": "redacted_metadata_only",
+    "linked_seed_registry_ref": "tests/schema_examples/visual_eval_seed_registry.example.yaml"
+  },
+  "candidates": [
+    {
+      "candidate_id": "candidate_accept_metadata_001",
+      "shot_id": "shot_hero_tabletop_001",
+      "artifact_ref_kind": "metadata_only_reference",
+      "artifact_ref": "artifact_ref_redacted_accept_001",
+      "scores": {
+        "product_fidelity": 4.5,
+        "lighting_control": 4.2,
+        "composition_balance": 4.1,
+        "artifact_risk": 4.4
+      },
+      "observations": [
+        "central product silhouette is readable",
+        "lighting hierarchy supports premium review"
+      ],
+      "failure_tags": []
+    },
+    {
+      "candidate_id": "candidate_reject_metadata_001",
+      "shot_id": "shot_hero_tabletop_001",
+      "artifact_ref_kind": "metadata_only_reference",
+      "artifact_ref": "artifact_ref_redacted_reject_001",
+      "scores": {
+        "product_fidelity": 3.4,
+        "lighting_control": 3.0,
+        "composition_balance": 3.1,
+        "artifact_risk": 4.0
+      },
+      "observations": [
+        "scene is usable for failure learning only",
+        "lighting and focal hierarchy need correction"
+      ],
+      "failure_tags": [
+        "lighting_flat",
+        "composition_imbalance"
+      ]
+    }
+  ],
+  "provenance": {
+    "input_package_ref": "tests/schema_examples/pvos_kernel_input.example.json",
+    "source_run_ref": "redacted_local_fixture_run_001",
+    "provider_payload_ref": "not_included"
+  },
+  "guard": {
+    "provider_contact_allowed": false,
+    "plugin_call_allowed": false,
+    "api_call_allowed": false,
+    "daily_note_write_allowed": false,
+    "vcp_memory_write_allowed": false,
+    "image_generation_allowed": false,
+    "disk_write_allowed": false,
+    "external_manifest_read_allowed": false,
+    "external_repo_read_allowed": false
+  }
+}

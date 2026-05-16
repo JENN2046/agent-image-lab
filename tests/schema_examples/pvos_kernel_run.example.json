@@ -1,0 +1,74 @@
+{
+  "pvos_kernel_run_version": "v1",
+  "run_id": "pvos_kernel_run_portable_lantern_local_fixture_001",
+  "task_id": "portable_lantern_local_fixture_001",
+  "mode": "local_stdout_only_kernel",
+  "status": "completed_local_draft",
+  "domain_model_refs": [
+    "ShotPlan",
+    "Shot",
+    "PromptLineage",
+    "ImageCandidate",
+    "ReviewRubric",
+    "VisualEvalDecision",
+    "FailureTaxonomy",
+    "AcceptedSample",
+    "RejectedSample",
+    "ReviewReport",
+    "ProvenanceRecord",
+    "EvalSeed",
+    "RunManifest"
+  ],
+  "task_envelope_draft": {
+    "task_id": "portable_lantern_local_fixture_001",
+    "intent": "local_visual_production_kernel_draft",
+    "risk_level": "R1",
+    "execution_mode": "no_execution_stdout_only",
+    "external_side_effects_allowed": false
+  },
+  "prompt_package_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml",
+  "dispatch_plan_draft": {
+    "execution_authorized": false,
+    "provider_contact_allowed": false,
+    "max_plugin_calls": 0,
+    "output_write_allowed": false
+  },
+  "visual_eval_decision": {
+    "aggregate_decision": "accepted_and_rejected_candidates"
+  },
+  "review_report": {
+    "accepted_count": 1,
+    "rejected_count": 1,
+    "report_status": "draft_only",
+    "memory_delta_status": "draft_not_written"
+  },
+  "provenance_record": {
+    "provider_payload_included": false,
+    "image_binary_included": false,
+    "private_path_included": false,
+    "external_manifest_included": false,
+    "artifact_refs_are_metadata_only": true
+  },
+  "run_manifest": {
+    "object_counts": {
+      "shots": 1,
+      "image_candidates": 2,
+      "accepted_samples": 1,
+      "rejected_samples": 1,
+      "failure_taxonomy_tags": 3
+    }
+  },
+  "no_execution_guard": {
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "daily_note_write_performed": false,
+    "vcp_memory_write_performed": false,
+    "image_generation_performed": false,
+    "disk_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "external_manifest_read_performed": false,
+    "vcpchat_source_read_performed": false,
+    "vcptoolbox_source_read_performed": false
+  }
+}
