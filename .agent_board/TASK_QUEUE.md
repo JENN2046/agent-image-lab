@@ -9,6 +9,72 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v14_026_visual_eval_seed_record_schema_draft_gate.
+Purpose: create the first metadata-only visual-evaluation seed record schema draft and one redacted synthetic example fixture.
+source_phase: v14_025_visual_eval_seed_record_schema_planning_gate.
+source_commit: local_uncommitted_v14_025_on_043f32843a9d990db85096dfb63034efed97a260.
+phase_record: docs/v14_026_visual_eval_seed_record_schema_draft_gate.md.
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning.
+schema_file_created: schemas/visual_eval_seed_record.schema.yaml.
+example_file_created: tests/schema_examples/visual_eval_seed_record.example.yaml.
+metadata_only_schema_draft_created: true.
+synthetic_example_fixture_created: true.
+real_seed_ingestion_created: false.
+accepted_registry_created: false.
+rejected_registry_created: false.
+accepted_samples_written: false.
+image_binaries_read: false.
+prototype_files_modified: false.
+scripts_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+plugin_call: false.
+api_call: false.
+image_generation: false.
+memory_write: false.
+production_candidate_002: false.
+Batch_005: false.
+recommended_next: v14_027_visual_eval_seed_record_validator_planning_gate.
+docs_or_validation_planning_only: true.
+runtime_provider_image_memory_production_batch: false.
+next_phase_started: false.
+---
+Current active gate: v14_025_visual_eval_seed_record_schema_planning_gate.
+Purpose: plan the future visual-evaluation seed record schema contract, including required fields, optional traceability fields, enum boundaries, safe defaults, validation rules, and mapping from v14.024 seed planning vocabulary.
+source_phase: v14_024_visual_eval_minimal_seed_set_planning_gate.
+source_commit: 043f32843a9d990db85096dfb63034efed97a260.
+phase_record: docs/v14_025_visual_eval_seed_record_schema_planning_gate.md.
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning.
+seed_record_schema_planning_created: true.
+required_fields_planned: true.
+optional_fields_planned: true.
+enum_boundaries_planned: true.
+safe_defaults_planned: true.
+validation_rules_planned: true.
+v14_024_field_mapping_created: true.
+schema_files_created: false.
+schema_files_modified: false.
+eval_samples_created: false.
+accepted_samples_written: false.
+image_references_created: false.
+image_binaries_read: false.
+prototype_files_modified: false.
+scripts_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+plugin_call: false.
+api_call: false.
+image_generation: false.
+memory_write: false.
+production_candidate_002: false.
+Batch_005: false.
+recommended_next: v14_026_visual_eval_seed_record_schema_draft_gate.
+docs_only_or_schema_draft_gate_only: true.
+runtime_provider_image_memory_production_batch: false.
+next_phase_started: false.
+---
 Current active gate: v14_024_visual_eval_minimal_seed_set_planning_gate.
 Purpose: plan the minimal future visual-evaluation seed set, including accepted/rejected example targets, recurring failure-type coverage, seed record fields, and mapping from seed categories to rubric dimensions and failure tags.
 source_phase: v14_023_visual_eval_failure_tag_mapping_planning_gate.

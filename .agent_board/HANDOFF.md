@@ -3,6 +3,70 @@
 ## Handoff Summary
 
 ```text
+Status: v14_026_visual_eval_seed_record_schema_draft_gate completed locally and validated.
+Reason: V14.026 creates the first metadata-only visual-evaluation seed record schema draft and one redacted synthetic example fixture. It defines identity fields, rubric links, failure-tag links, redaction status, safe defaults, and boundary flags without real seed ingestion, accepted/rejected registries, accepted_samples, image binaries, runtime, provider, plugin, API, image, memory, or production paths.
+Current repository: project_root
+Branch: master tracking origin/master
+source_phase: v14_025_visual_eval_seed_record_schema_planning_gate
+source_commit: local_uncommitted_v14_025_on_043f32843a9d990db85096dfb63034efed97a260
+phase_record: docs/v14_026_visual_eval_seed_record_schema_draft_gate.md
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+schema_file_created: schemas/visual_eval_seed_record.schema.yaml
+example_file_created: tests/schema_examples/visual_eval_seed_record.example.yaml
+metadata_only_schema_draft_created: true
+synthetic_example_fixture_created: true
+real_seed_ingestion_created: false
+accepted_registry_created: false
+rejected_registry_created: false
+accepted_samples_written: false
+image_binaries_read: false
+prototype_files_modified: false
+scripts_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+production_candidate_002: false
+Batch_005: false
+next_phase_started: false
+---
+Status: v14_025_visual_eval_seed_record_schema_planning_gate completed locally and validated.
+Reason: V14.025 plans the future visual-evaluation seed record schema contract. It defines required fields, optional traceability fields, enum boundaries, safe defaults, validation rules, and mapping from v14.024 seed planning vocabulary without creating schemas, samples, registries, accepted_samples, image references, image binaries, runtime, provider, plugin, API, image, memory, or production paths.
+Current repository: project_root
+Branch: master tracking origin/master
+source_phase: v14_024_visual_eval_minimal_seed_set_planning_gate
+source_commit: 043f32843a9d990db85096dfb63034efed97a260
+phase_record: docs/v14_025_visual_eval_seed_record_schema_planning_gate.md
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+seed_record_schema_planning_created: true
+required_fields_planned: true
+optional_fields_planned: true
+enum_boundaries_planned: true
+safe_defaults_planned: true
+validation_rules_planned: true
+v14_024_field_mapping_created: true
+schema_files_created: false
+schema_files_modified: false
+eval_samples_created: false
+accepted_samples_written: false
+image_references_created: false
+image_binaries_read: false
+prototype_files_modified: false
+scripts_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+production_candidate_002: false
+Batch_005: false
+next_phase_started: false
+---
 Status: v14_024_visual_eval_minimal_seed_set_planning_gate completed and remote synced.
 Reason: V14.024 plans the minimal future visual-evaluation seed set. It defines accepted and rejected example targets, recurring failure-type coverage, seed record fields, and mapping from seed categories to rubric dimensions and failure tags without creating schemas, samples, registries, accepted_samples, image binaries, runtime, provider, image, memory, or production paths.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2

@@ -9,12 +9,82 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v14_024_visual_eval_minimal_seed_set_planning_gate. This docs-only planning gate defines future accepted and rejected seed targets, recurring failure-type coverage, seed record fields, and mapping between seed categories, rubric dimensions, and failure tags. It does not authorize prototype edits, script edits, schema files, eval sample files, accepted/rejected registries, accepted_samples writes, image binary reads, browser preview, runtime execution, provider contact, image generation, memory writes, production_candidate_002, memory_write_path, or Batch_005.
+Agent Image Lab is in v14_026_visual_eval_seed_record_schema_draft_gate. This schema draft gate creates a metadata-only visual-evaluation seed record schema and one redacted synthetic example fixture. It does not authorize real seed ingestion, accepted/rejected registries, accepted_samples writes, image binary reads, browser preview, runtime execution, provider contact, plugin calls, API calls, image generation, memory writes, production_candidate_002, memory_write_path, or Batch_005.
 ```
 
 ## Current Phase
 
 ```text
+V14.026 Visual Eval Seed Record Schema Draft Gate
+phase_id: v14_026_visual_eval_seed_record_schema_draft_gate
+status: completed_local_validated
+source_phase: v14_025_visual_eval_seed_record_schema_planning_gate
+source_commit: local_uncommitted_v14_025_on_043f32843a9d990db85096dfb63034efed97a260
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+branch: master tracking origin/master
+phase_record: docs/v14_026_visual_eval_seed_record_schema_draft_gate.md
+schema_file_created: schemas/visual_eval_seed_record.schema.yaml
+example_file_created: tests/schema_examples/visual_eval_seed_record.example.yaml
+metadata_only_schema_draft_created: true
+synthetic_example_fixture_created: true
+real_seed_ingestion_created: false
+accepted_registry_created: false
+rejected_registry_created: false
+accepted_samples_written: false
+image_binaries_read: false
+prototype_files_modified: false
+scripts_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v14_027_visual_eval_seed_record_validator_planning_gate
+docs_or_validation_planning_only: true
+runtime_provider_image_memory_production_batch: false
+next_phase_started: false
+---
+V14.025 Visual Eval Seed Record Schema Planning Gate
+phase_id: v14_025_visual_eval_seed_record_schema_planning_gate
+status: completed_local_validated
+source_phase: v14_024_visual_eval_minimal_seed_set_planning_gate
+source_commit: 043f32843a9d990db85096dfb63034efed97a260
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+branch: master tracking origin/master
+phase_record: docs/v14_025_visual_eval_seed_record_schema_planning_gate.md
+seed_record_schema_planning_created: true
+required_fields_planned: true
+optional_fields_planned: true
+enum_boundaries_planned: true
+safe_defaults_planned: true
+validation_rules_planned: true
+v14_024_field_mapping_created: true
+schema_files_created: false
+schema_files_modified: false
+eval_samples_created: false
+accepted_samples_written: false
+image_references_created: false
+image_binaries_read: false
+prototype_files_modified: false
+scripts_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v14_026_visual_eval_seed_record_schema_draft_gate
+docs_only_or_schema_draft_gate_only: true
+runtime_provider_image_memory_production_batch: false
+next_phase_started: false
+---
 V14.024 Visual Eval Minimal Seed Set Planning Gate
 phase_id: v14_024_visual_eval_minimal_seed_set_planning_gate
 status: completed_remote_synced_after_guarded_push

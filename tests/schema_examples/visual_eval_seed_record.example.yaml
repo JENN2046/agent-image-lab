@@ -1,0 +1,31 @@
+visual_eval_seed_record:
+  seed_id: seed-visual-eval-accepted-reference-001
+  source_type: accepted_reference
+  intended_decision: accepted_candidate_reference
+  seed_category: strong_product_identity
+  linked_rubric_dimensions:
+    - product_identity
+    - brief_alignment
+  linked_failure_tags: []
+  review_note: "Redacted metadata-only accepted reference for product identity calibration."
+  redaction_status: redacted_metadata_only
+  memory_suitability_default: false
+  production_candidate_eligible_default: false
+  reviewer_id: null
+  reviewer_confidence: not_reviewed
+  source_reference_id: redacted-seed-source-001
+  asset_reference_redacted: redacted-reference-only-no-image-binary
+  provenance_note: "Synthetic fixture record for schema validation; no real image or private source material included."
+  created_from_phase: v14_026_visual_eval_seed_record_schema_draft_gate
+  validation_notes:
+    - "Accepted reference records may have an empty linked_failure_tags list."
+    - "Memory suitability and production eligibility remain false by default."
+  boundary_flags:
+    image_binary_included: false
+    real_provider_payload_included: false
+    private_path_included: false
+    memory_write_authorized: false
+    production_candidate_authorized: false
+    plugin_call_authorized: false
+    api_call_authorized: false
+    daily_note_write_authorized: false

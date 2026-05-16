@@ -1,0 +1,34 @@
+# visual_eval_seed_record.schema.yaml
+# Metadata-only seed record draft for future visual evaluation calibration.
+# This schema is descriptive and non-executing. It must not require image
+# binaries, real provider payloads, private local paths, or external reads.
+visual_eval_seed_record:
+  seed_id: string
+  source_type: accepted_reference | rejected_reference | synthetic_fixture | redacted_prior_case
+  intended_decision: accepted_candidate_reference | rejected_candidate_reference | archive_reference_only | human_review_required
+  seed_category: string
+  linked_rubric_dimensions:
+    - string
+  linked_failure_tags:
+    - string
+  review_note: string
+  redaction_status: redacted_metadata_only | needs_redaction_review | blocked_sensitive_source
+  memory_suitability_default: false
+  production_candidate_eligible_default: false
+  reviewer_id: string | null
+  reviewer_confidence: high | medium | low | not_reviewed
+  source_reference_id: string | null
+  asset_reference_redacted: string | null
+  provenance_note: string | null
+  created_from_phase: string | null
+  validation_notes:
+    - string
+  boundary_flags:
+    image_binary_included: false
+    real_provider_payload_included: false
+    private_path_included: false
+    memory_write_authorized: false
+    production_candidate_authorized: false
+    plugin_call_authorized: false
+    api_call_authorized: false
+    daily_note_write_authorized: false
