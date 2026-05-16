@@ -1,0 +1,159 @@
+{
+  "pvos_kernel_input_version": "v1",
+  "task_id": "negative_guard_local_fixture_001",
+  "brief": {
+    "brief_id": "brief_negative_guard_local_fixture_001",
+    "product_category": "premium tabletop object",
+    "visual_goal": "negative guard validation fixture for rejected candidates",
+    "constraints": [
+      "metadata_only",
+      "no_image_binary",
+      "no_provider_payload",
+      "no_external_path"
+    ]
+  },
+  "shot_plan": {
+    "shot_plan_id": "shot_plan_negative_guard_001",
+    "strategy": "Validate that rejected and unmapped-failure candidates cannot become production candidates.",
+    "shots": [
+      {
+        "shot_id": "shot_negative_guard_hero_001",
+        "shot_type": "hero_product_validation",
+        "intent": "Exercise hard review-result rejection routes without using image binaries.",
+        "composition": [
+          "metadata-only candidate references",
+          "reviewable failure observations",
+          "no provider output"
+        ],
+        "success_criteria": [
+          "rejected candidates receive explicit reject reasons",
+          "rejected candidates stay out of production",
+          "unmapped failures cannot enter memory"
+        ]
+      }
+    ]
+  },
+  "prompt_lineage": {
+    "lineage_id": "prompt_lineage_negative_guard_001",
+    "prompt_package_ref": "prompts/image_generation/product_validation_negative_guard_v1.yaml",
+    "revision": "v1",
+    "parent_refs": [],
+    "locked_terms": [
+      "metadata only",
+      "no output file",
+      "no provider call"
+    ],
+    "change_reason": "synthetic negative guard validation fixture"
+  },
+  "review_rubric": {
+    "rubric_id": "review_rubric_negative_guard_v1",
+    "accept_threshold": 4,
+    "reject_below": 3.4,
+    "dimensions": [
+      {
+        "id": "product_fidelity",
+        "label": "Product fidelity",
+        "weight": 0.3,
+        "pass_threshold": 4
+      },
+      {
+        "id": "lighting_control",
+        "label": "Lighting control",
+        "weight": 0.25,
+        "pass_threshold": 4
+      },
+      {
+        "id": "composition_balance",
+        "label": "Composition balance",
+        "weight": 0.25,
+        "pass_threshold": 4
+      },
+      {
+        "id": "artifact_risk",
+        "label": "Artifact risk",
+        "weight": 0.2,
+        "pass_threshold": 4
+      }
+    ]
+  },
+  "failure_taxonomy": [
+    {
+      "tag": "lighting_flat",
+      "severity": "medium",
+      "definition": "The generated scene lacks deliberate key, fill, or product-light hierarchy."
+    },
+    {
+      "tag": "composition_imbalance",
+      "severity": "medium",
+      "definition": "The product placement, crop, or surrounding props weaken the intended focal hierarchy."
+    },
+    {
+      "tag": "artifact_or_text_risk",
+      "severity": "high",
+      "definition": "The candidate contains visible unwanted text, watermark-like marks, or object artifacts."
+    }
+  ],
+  "eval_seed": {
+    "seed_id": "eval_seed_negative_guard_local_001",
+    "source_type": "synthetic_fixture",
+    "redaction_status": "redacted_metadata_only",
+    "linked_seed_registry_ref": "tests/schema_examples/visual_eval_seed_registry.example.yaml"
+  },
+  "candidates": [
+    {
+      "candidate_id": "candidate_reject_mapped_guard_001",
+      "shot_id": "shot_negative_guard_hero_001",
+      "artifact_ref_kind": "metadata_only_reference",
+      "artifact_ref": "artifact_ref_negative_guard_mapped_001",
+      "scores": {
+        "product_fidelity": 3.1,
+        "lighting_control": 2.9,
+        "composition_balance": 2.8,
+        "artifact_risk": 3.2
+      },
+      "observations": [
+        "mapped failure tags identify a hard visual rejection",
+        "candidate is useful only as failure-learning evidence"
+      ],
+      "failure_tags": [
+        "lighting_flat",
+        "composition_imbalance"
+      ]
+    },
+    {
+      "candidate_id": "candidate_reject_unknown_guard_001",
+      "shot_id": "shot_negative_guard_hero_001",
+      "artifact_ref_kind": "metadata_only_reference",
+      "artifact_ref": "artifact_ref_negative_guard_unknown_001",
+      "scores": {
+        "product_fidelity": 2.8,
+        "lighting_control": 3.0,
+        "composition_balance": 2.9,
+        "artifact_risk": 2.7
+      },
+      "observations": [
+        "unmapped failure tag prevents memory promotion",
+        "candidate is permanently blocked from production"
+      ],
+      "failure_tags": [
+        "unmapped_identity_drift"
+      ]
+    }
+  ],
+  "provenance": {
+    "input_package_ref": "tests/schema_examples/pvos_kernel_negative_guard_input.example.json",
+    "source_run_ref": "redacted_negative_guard_local_fixture_run_001",
+    "provider_payload_ref": "not_included"
+  },
+  "guard": {
+    "provider_contact_allowed": false,
+    "plugin_call_allowed": false,
+    "api_call_allowed": false,
+    "daily_note_write_allowed": false,
+    "vcp_memory_write_allowed": false,
+    "image_generation_allowed": false,
+    "disk_write_allowed": false,
+    "external_manifest_read_allowed": false,
+    "external_repo_read_allowed": false
+  }
+}

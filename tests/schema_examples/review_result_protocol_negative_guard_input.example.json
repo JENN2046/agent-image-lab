@@ -1,0 +1,37 @@
+{
+  "review_result_protocol_input_version": "v1",
+  "protocol_id": "review_result_protocol_negative_guard_v1",
+  "task_id": "negative_guard_review_protocol_fixture_001",
+  "kernel_input_ref": "tests/schema_examples/pvos_kernel_negative_guard_input.example.json",
+  "human_review": {
+    "status": "pending",
+    "production_approval": false,
+    "memory_approval": false,
+    "reviewer_required_before_production": true
+  },
+  "memory_policy": {
+    "direct_daily_note_write_allowed": false,
+    "direct_vcp_memory_write_allowed": false,
+    "accepted_route": "draft_memory_candidate",
+    "rejected_route": "audit_only_failure_learning",
+    "forbidden_route": "forbidden",
+    "entry_language": "zh-CN",
+    "requires_desensitized_summary": true,
+    "unknown_failure_tags_forbid_memory": true
+  },
+  "production_policy": {
+    "human_review_required": true,
+    "protocol_pass_is_not_production_approval": true,
+    "reject_with_failure_tags_is_never_production": true,
+    "unknown_failure_tags_are_never_production": true,
+    "never_production_if": [
+      "mapped_failure_tags_present",
+      "unknown_failure_tags_present",
+      "weighted_score_below_reject_threshold",
+      "private_path_included",
+      "provider_payload_included",
+      "image_binary_included",
+      "artifact_ref_not_metadata_only"
+    ]
+  }
+}

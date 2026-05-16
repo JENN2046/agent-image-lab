@@ -170,12 +170,15 @@ $requiredFiles = @(
   'tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json',
   'tests/schema_examples/review_result_protocol_input.example.json',
   'tests/schema_examples/review_result_protocol_report.example.json',
+  'tests/schema_examples/review_result_protocol_negative_guard_input.example.json',
+  'tests/schema_examples/pvos_kernel_negative_guard_input.example.json',
   'docs/v14_037_pvos_kernel_minimal_implementation_gate.md',
   'docs/v14_038_pvos_kernel_dry_run_adapter_gate.md',
   'docs/v14_039_review_result_protocol_hardening_gate.md',
   'docs/v14_040_review_protocol_adapter_binding_gate.md',
   'docs/v14_041_review_console_protocol_static_contract_gate.md',
   'docs/v14_042_review_console_protocol_ui_affordance_gate.md',
+  'docs/v14_043_review_protocol_fixture_negative_guard_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -4315,6 +4318,27 @@ if (-not $node) {
     }
     if ($reviewResultProtocol.review_result_protocol.never_production_contract_verified -ne $true) {
       Add-Failure "Review result protocol validation must verify never-production route"
+    }
+    if ($reviewResultProtocol.review_result_protocol.negative_guard_input_fixture_present -ne $true) {
+      Add-Failure "Review result protocol validation must verify negative guard input fixture"
+    }
+    if ($reviewResultProtocol.review_result_protocol.negative_guard_kernel_fixture_present -ne $true) {
+      Add-Failure "Review result protocol validation must verify negative guard kernel fixture"
+    }
+    if ($reviewResultProtocol.review_result_protocol.negative_guard_cli_verified -ne $true) {
+      Add-Failure "Review result protocol validation must verify negative guard CLI"
+    }
+    if ($reviewResultProtocol.review_result_protocol.negative_guard_all_rejected_never_production_verified -ne $true) {
+      Add-Failure "Review result protocol validation must verify all negative guard candidates are never_production"
+    }
+    if ($reviewResultProtocol.review_result_protocol.negative_guard_forbidden_memory_route_verified -ne $true) {
+      Add-Failure "Review result protocol validation must verify forbidden memory route for unmapped failure"
+    }
+    if ($reviewResultProtocol.review_result_protocol.negative_guard_no_direct_memory_write_verified -ne $true) {
+      Add-Failure "Review result protocol validation must verify negative guard direct memory write is false"
+    }
+    if ($reviewResultProtocol.review_result_protocol.negative_guard_no_production_candidate_verified -ne $true) {
+      Add-Failure "Review result protocol validation must verify negative guard production candidate creation is false"
     }
     if ($reviewResultProtocol.review_result_protocol.provider_contact_performed -ne $false) {
       Add-Failure "Review result protocol validation must not perform provider contact"

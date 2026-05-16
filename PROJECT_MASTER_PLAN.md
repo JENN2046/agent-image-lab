@@ -8,6 +8,47 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+status: v14_043_review_protocol_fixture_negative_guard_gate
+mode: A5 full-development authorized local validator fixture
+phase_id: v14_043_review_protocol_fixture_negative_guard_gate
+source_phase: v14_042_review_console_protocol_ui_affordance_gate
+source_commit: 808d590
+phase_record: docs/v14_043_review_protocol_fixture_negative_guard_gate.md
+selected_product_route: review_protocol_negative_guard_fixture
+negative_kernel_fixture_created: tests/schema_examples/pvos_kernel_negative_guard_input.example.json
+negative_protocol_input_created: tests/schema_examples/review_result_protocol_negative_guard_input.example.json
+protocol_validator_modified: scripts/validate_review_result_protocol.js
+validator_wiring_modified: scripts/validate_mvp.ps1
+negative_guard_candidate_count: 2
+all_candidates_review_outcome: reject
+all_candidates_production_route: never_production
+mapped_failure_memory_route: audit_only_failure_learning
+unknown_failure_memory_route: forbidden
+unknown_failure_allowed_to_enter_memory: false
+direct_memory_write_performed: false
+production_candidate_created: false
+accepted_samples_written: false
+image_binaries_read: false
+runs_output_committed: false
+runtime_prototype_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+push_performed: false
+recommended_next: v14_044_review_protocol_negative_guard_adapter_handoff_gate
+recommended_next_auto_execution_allowed: true
+push_requires_explicit_remote_authorization: true
+runtime_provider_image_memory_production_batch: false
+next_phase_started: false
+branch: master
 status: v14_042_review_console_protocol_ui_affordance_gate
 mode: A5 full-development authorized local static UI
 phase_id: v14_042_review_console_protocol_ui_affordance_gate
