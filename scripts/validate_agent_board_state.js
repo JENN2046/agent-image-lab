@@ -47,6 +47,18 @@ function getAheadBehind() {
   }
 }
 
+function getGitStatusShort() {
+  try {
+    return execFileSync("git", ["status", "--short"], {
+      cwd: root,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "pipe"]
+    }).trim();
+  } catch (error) {
+    return null;
+  }
+}
+
 function getCurrentPhaseBlock(runState) {
   const phaseMatch = runState.match(/phase_id:\s*([^\s]+)/);
   if (!phaseMatch) {
@@ -60,6 +72,17 @@ function getCurrentPhaseBlock(runState) {
     phaseId: phaseMatch[1],
     block
   };
+}
+
+function getFirstTextBlock(content) {
+  const match = content.match(/```text\s*([\s\S]*?)```/);
+  return match ? match[1] : "";
+}
+
+function getCurrentSegment(content) {
+  const block = getFirstTextBlock(content);
+  const separatorIndex = block.indexOf("---");
+  return separatorIndex === -1 ? block : block.slice(0, separatorIndex);
 }
 
 function main() {
@@ -121,12 +144,24 @@ function main() {
   ]);
 
   const aheadBehind = getAheadBehind();
+  const gitStatusShort = getGitStatusShort();
   const currentPhase = getCurrentPhaseBlock(runState);
   const branchIsSynced = aheadBehind && aheadBehind.behind === 0 && aheadBehind.ahead === 0;
-  const currentPhaseHasPostPushPendingStatus = currentPhase.block.includes(
-    "completed_validated_pending_guarded_commit_and_push"
-  );
-  const postPushStatusSyncVerified = !branchIsSynced || !currentPhaseHasPostPushPendingStatus;
+  const worktreeIsClean = gitStatusShort === "";
+  const stalePostPushPatterns = [
+    "completed_validated_pending_guarded_commit_push",
+    "completed_validated_pending_guarded_commit_and_push",
+    "guarded commit and push pending",
+    "commit and push pending"
+  ];
+  const currentStatusSurfaces = [
+    currentPhase.block,
+    getCurrentSegment(handoff),
+    getCurrentSegment(checkpoint),
+    getCurrentSegment(taskQueue)
+  ].join("\n");
+  const stalePostPushMatches = stalePostPushPatterns.filter((pattern) => currentStatusSurfaces.includes(pattern));
+  const postPushStatusSyncVerified = !branchIsSynced || !worktreeIsClean || stalePostPushMatches.length === 0;
 
   const phaseFreshnessVerified = hasAll(runState + handoff + checkpoint + taskQueue, [
     "Validator Governance Chain v1: closed",
@@ -146,7 +181,7 @@ function main() {
   assert(localWorkStateDeclared, "Agent board must declare current local work state.");
   assert(
     postPushStatusSyncVerified,
-    `Current phase ${currentPhase.phaseId || "(unknown)"} still uses completed_validated_pending_guarded_commit_and_push while master equals origin/master. Run post-push status sync and use completed_remote_synced_after_guarded_push.`
+    `Current phase ${currentPhase.phaseId || "(unknown)"} still has post-push stale wording while master equals origin/master and the worktree is clean: ${stalePostPushMatches.join(", ")}. Run post-push status sync and use completed_remote_synced_after_guarded_push or equivalent synced wording.`
   );
   assert(phaseFreshnessVerified, "Agent board phase freshness check failed: stale board state detected (governance chain / v7.170 state not reflected).");
 
@@ -164,7 +199,10 @@ function main() {
       overlay_separation_decision_present: overlaySeparationDecisionPresent,
       local_work_state_declared: localWorkStateDeclared,
       post_push_status_sync_verified: postPushStatusSyncVerified,
+      stale_post_push_patterns_checked: stalePostPushPatterns,
+      stale_post_push_matches: stalePostPushMatches,
       ahead_behind: aheadBehind ? aheadBehind.raw : "unavailable",
+      git_status_short: gitStatusShort === "" ? "clean" : gitStatusShort || "unavailable",
       current_phase_checked: currentPhase.phaseId,
       phase_freshness_verified: phaseFreshnessVerified,
       external_network_required: false,
