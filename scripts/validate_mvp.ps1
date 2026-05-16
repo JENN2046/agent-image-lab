@@ -65,6 +65,7 @@ $requiredFiles = @(
   'scripts/validate_runtime_delivery_surface.js',
   'scripts/validate_adapter_delivery_surface.js',
   'scripts/validate_review_console_adapter_handoff.js',
+  'scripts/validate_review_console_blocker_arbiter_regression_matrix.js',
   'scripts/validate_v5_local_sync_readiness.js',
   'scripts/validate_v5_post_commit_reconciliation.js',
   'scripts/validate_v5_index_consistency.js',
@@ -176,6 +177,7 @@ $requiredFiles = @(
   'tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json',
   'tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json',
   'tests/schema_examples/review_console_adapter_negative_fixture_draft_output_snapshot.example.json',
+  'tests/schema_examples/review_console_blocker_arbiter_regression_matrix.example.json',
   'tests/schema_examples/review_result_protocol_input.example.json',
   'tests/schema_examples/review_result_protocol_report.example.json',
   'tests/schema_examples/review_result_protocol_negative_guard_input.example.json',
@@ -202,6 +204,7 @@ $requiredFiles = @(
   'docs/v14_053_evidence_blocker_adapter_negative_fixture_handoff_gate.md',
   'docs/v14_054_review_console_adapter_negative_fixture_ui_binding_gate.md',
   'docs/v14_055_review_console_adapter_negative_fixture_draft_output_snapshot_gate.md',
+  'docs/v14_056_review_console_blocker_arbiter_regression_matrix_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -3924,6 +3927,11 @@ if (-not $node) {
     Add-Failure "scripts/validate_review_console_adapter_handoff.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'scripts/validate_review_console_blocker_arbiter_regression_matrix.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_review_console_blocker_arbiter_regression_matrix.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_v5_local_sync_readiness.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_v5_local_sync_readiness.js failed node --check"
@@ -5701,6 +5709,61 @@ if (-not $node) {
     }
     if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.file_write_performed -ne $false) {
       Add-Failure "Review Console Adapter handoff validation must not write files"
+    }
+  }
+
+  $reviewConsoleBlockerArbiterMatrixOutput = & node (Join-Path $Root 'scripts/validate_review_console_blocker_arbiter_regression_matrix.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console blocker arbiter regression matrix validation exited with failure"
+  } else {
+    $reviewConsoleBlockerArbiterMatrix = ($reviewConsoleBlockerArbiterMatrixOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleBlockerArbiterMatrix.passed -ne $true) {
+      Add-Failure "Review Console blocker arbiter regression matrix validation must report passed true"
+    }
+    if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.blocker_arbiter_matrix_present -ne $true) {
+      Add-Failure "Review Console blocker arbiter regression matrix must be present"
+    }
+    if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.blocker_arbiter_surface_consensus_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter regression matrix must verify surface consensus"
+    }
+    if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.blocker_arbiter_protocol_surface_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter regression matrix must verify protocol surface"
+    }
+    if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.blocker_arbiter_decision_package_surface_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter regression matrix must verify decision package surface"
+    }
+    if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.blocker_arbiter_evidence_blocker_surface_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter regression matrix must verify evidence blocker surface"
+    }
+    if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.blocker_arbiter_adapter_negative_surface_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter regression matrix must verify adapter negative surface"
+    }
+    if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.blocker_arbiter_draft_output_snapshot_surface_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter regression matrix must verify draft output snapshot surface"
+    }
+    if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.blocker_arbiter_memory_forbidden_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter regression matrix must verify memory-forbidden consensus"
+    }
+    if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.blocker_arbiter_never_production_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter regression matrix must verify never-production consensus"
+    }
+    if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.blocker_arbiter_production_exclusion_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter regression matrix must verify production-exclusion consensus"
+    }
+    if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.blocker_arbiter_no_production_candidate_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter regression matrix must verify no production candidate"
+    }
+    if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.blocker_arbiter_no_direct_memory_write_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter regression matrix must verify no direct memory write"
+    }
+    if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.blocker_arbiter_no_accepted_samples_write_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter regression matrix must verify no accepted_samples write"
+    }
+    if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.blocker_arbiter_no_provider_plugin_api_image_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter regression matrix must verify no provider/plugin/API/image effects"
+    }
+    if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.file_write_performed -ne $false) {
+      Add-Failure "Review Console blocker arbiter regression matrix validation must not write files"
     }
   }
 

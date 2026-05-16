@@ -1,0 +1,141 @@
+{
+  "matrix_id": "review_console_blocker_arbiter_regression_matrix_v14_056_001",
+  "phase": "v14_056_review_console_blocker_arbiter_regression_matrix_gate",
+  "source_phase": "v14_055_review_console_adapter_negative_fixture_draft_output_snapshot_gate",
+  "source_commit": "3813830",
+  "status": "local_regression_matrix",
+  "display_only": true,
+  "surfaces": [
+    {
+      "surface_id": "protocol",
+      "source_ref": "tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json#review_result_protocol_report",
+      "memory_forbidden_candidate_ids": [
+        "candidate_reject_unknown_guard_001"
+      ],
+      "never_production_candidate_ids": [
+        "candidate_reject_mapped_guard_001",
+        "candidate_reject_unknown_guard_001"
+      ],
+      "production_exclusion_candidate_ids": [
+        "candidate_reject_mapped_guard_001",
+        "candidate_reject_unknown_guard_001"
+      ],
+      "production_candidate_created": false,
+      "direct_memory_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "provider_plugin_api_image_effects": false,
+      "selected_plugin": null,
+      "max_plugin_calls_observed": 0
+    },
+    {
+      "surface_id": "decision_package",
+      "source_ref": "tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json#review_decision_package",
+      "memory_forbidden_candidate_ids": [
+        "candidate_reject_unknown_guard_001"
+      ],
+      "never_production_candidate_ids": [
+        "candidate_reject_mapped_guard_001",
+        "candidate_reject_unknown_guard_001"
+      ],
+      "production_exclusion_candidate_ids": [
+        "candidate_reject_mapped_guard_001",
+        "candidate_reject_unknown_guard_001"
+      ],
+      "production_candidate_created": false,
+      "direct_memory_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "provider_plugin_api_image_effects": false,
+      "selected_plugin": null,
+      "max_plugin_calls_observed": 0
+    },
+    {
+      "surface_id": "evidence_blocker",
+      "source_ref": "tests/schema_examples/evidence_blocker_contract_negative_guard.example.json",
+      "memory_forbidden_candidate_ids": [
+        "candidate_reject_unknown_guard_001"
+      ],
+      "never_production_candidate_ids": [
+        "candidate_reject_mapped_guard_001",
+        "candidate_reject_unknown_guard_001"
+      ],
+      "production_exclusion_candidate_ids": [
+        "candidate_reject_mapped_guard_001",
+        "candidate_reject_unknown_guard_001"
+      ],
+      "production_candidate_created": false,
+      "direct_memory_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "provider_plugin_api_image_effects": false,
+      "selected_plugin": null,
+      "max_plugin_calls_observed": 0
+    },
+    {
+      "surface_id": "adapter_negative",
+      "source_ref": "tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json#review_console_handoff_draft",
+      "memory_forbidden_candidate_ids": [
+        "candidate_reject_unknown_guard_001"
+      ],
+      "never_production_candidate_ids": [
+        "candidate_reject_mapped_guard_001",
+        "candidate_reject_unknown_guard_001"
+      ],
+      "production_exclusion_candidate_ids": [
+        "candidate_reject_mapped_guard_001",
+        "candidate_reject_unknown_guard_001"
+      ],
+      "production_candidate_created": false,
+      "direct_memory_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "provider_plugin_api_image_effects": false,
+      "selected_plugin": null,
+      "max_plugin_calls_observed": 0
+    },
+    {
+      "surface_id": "draft_output_snapshot",
+      "source_ref": "tests/schema_examples/review_console_adapter_negative_fixture_draft_output_snapshot.example.json",
+      "memory_forbidden_candidate_ids": [
+        "candidate_reject_unknown_guard_001"
+      ],
+      "never_production_candidate_ids": [
+        "candidate_reject_mapped_guard_001",
+        "candidate_reject_unknown_guard_001"
+      ],
+      "production_exclusion_candidate_ids": [
+        "candidate_reject_mapped_guard_001",
+        "candidate_reject_unknown_guard_001"
+      ],
+      "production_candidate_created": false,
+      "direct_memory_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "provider_plugin_api_image_effects": false,
+      "selected_plugin": null,
+      "max_plugin_calls_observed": 0
+    }
+  ],
+  "expected_consensus": {
+    "surface_count": 5,
+    "memory_forbidden_candidate_ids": [
+      "candidate_reject_unknown_guard_001"
+    ],
+    "never_production_candidate_ids": [
+      "candidate_reject_mapped_guard_001",
+      "candidate_reject_unknown_guard_001"
+    ],
+    "production_exclusion_candidate_ids": [
+      "candidate_reject_mapped_guard_001",
+      "candidate_reject_unknown_guard_001"
+    ],
+    "production_candidate_created": false,
+    "direct_memory_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "daily_note_write_performed": false,
+    "vcp_memory_write_performed": false,
+    "image_generation_performed": false,
+    "output_file_write_performed": false,
+    "selected_plugin": null,
+    "max_plugin_calls_observed": 0
+  }
+}
