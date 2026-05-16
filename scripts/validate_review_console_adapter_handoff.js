@@ -16,7 +16,8 @@ const requiredFiles = [
   "tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json",
   "tests/schema_examples/review_console_adapter_negative_fixture_draft_output_snapshot.example.json",
   "tests/schema_examples/review_console_blocker_arbiter_draft_output_snapshot.example.json",
-  "tests/schema_examples/review_console_review_report_draft_output_snapshot.example.json"
+  "tests/schema_examples/review_console_review_report_draft_output_snapshot.example.json",
+  "tests/schema_examples/review_console_review_report_negative_guard_draft_output_snapshot.example.json"
 ];
 
 function read(relativePath) {
@@ -1449,6 +1450,120 @@ function assertReviewReportDraftOutputSnapshot(snapshot, mock, renderedDraft, ad
   );
 }
 
+function assertReviewReportNegativeGuardDraftOutputSnapshot(snapshot, mock, renderedDraft, negativeAdapterExample) {
+  assert(snapshot, "Negative ReviewReport draft output snapshot must exist.");
+  assert(snapshot.status === "draft_output_snapshot", "Negative ReviewReport snapshot must be draft_output_snapshot.");
+  assert(snapshot.display_only === true, "Negative ReviewReport snapshot must be display-only.");
+  assert(
+    snapshot.source_phase === "v14_071_review_report_negative_guard_static_handoff_gate",
+    "Negative ReviewReport snapshot must cite v14.071 as source phase."
+  );
+  assert(
+    snapshot.snapshot_phase === "v14_072_review_report_negative_guard_draft_output_snapshot_gate",
+    "Negative ReviewReport snapshot must cite v14.072 as snapshot phase."
+  );
+  assert(
+    snapshot.source_adapter_response_ref === "tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json",
+    "Negative ReviewReport snapshot must cite the negative adapter fixture."
+  );
+
+  for (const key of snapshot.draft_output_required_keys) {
+    assert(Object.prototype.hasOwnProperty.call(renderedDraft, key), `Rendered draft output must include ${key}.`);
+  }
+
+  const renderedHandoff = renderedDraft.review_report_negative_guard_static_handoff;
+  const mockHandoff = mock.review_report_negative_guard_static_handoff;
+  const snapshotHandoff = snapshot.review_report_negative_guard_static_handoff;
+  assertDeepEqual(snapshotHandoff, mockHandoff, "Negative ReviewReport snapshot handoff must match static mock handoff.");
+  assertDeepEqual(renderedHandoff, snapshotHandoff, "Rendered draft output negative ReviewReport handoff must match snapshot.");
+  assertReviewReportNegativeGuardStaticHandoff(snapshotHandoff, negativeAdapterExample);
+
+  assertDeepEqual(renderedDraft.prototype_guard, snapshot.prototype_guard, "Rendered draft prototype guard must match negative ReviewReport snapshot.");
+  assert(renderedDraft.prototype_guard.api_called === false, "Rendered draft must not call API.");
+  assert(renderedDraft.prototype_guard.daily_note_called === false, "Rendered draft must not call DailyNote.");
+  assert(renderedDraft.prototype_guard.vcp_plugin_called === false, "Rendered draft must not call VCP plugin.");
+  assert(renderedDraft.prototype_guard.disk_write_performed === false, "Rendered draft must not write disk.");
+  assert(renderedDraft.prototype_guard.image_file_created === false, "Rendered draft must not create image files.");
+
+  const assertions = snapshot.snapshot_assertions;
+  assert(assertions.review_report_negative_guard_handoff_present_in_draft_output === true, "Snapshot must assert negative ReviewReport handoff presence.");
+  assert(
+    assertions.negative_guard_observed === renderedHandoff.negative_guard_observed,
+    "Snapshot must assert negative guard state."
+  );
+  assert(
+    assertions.review_report_contract_attached === renderedHandoff.review_report_contract_attached,
+    "Snapshot must assert negative ReviewReport attachment state."
+  );
+  assertArrayEqual(
+    assertions.candidate_ids,
+    renderedHandoff.report_items.map((item) => item.candidate_id),
+    "Negative ReviewReport snapshot candidate IDs must match rendered draft"
+  );
+  assertArrayEqual(
+    assertions.reject_candidate_ids,
+    renderedHandoff.report_items.filter((item) => item.review_outcome === "reject").map((item) => item.candidate_id),
+    "Negative ReviewReport snapshot reject candidate IDs must match rendered draft"
+  );
+  assertArrayEqual(
+    assertions.memory_forbidden_candidate_ids,
+    renderedHandoff.review_report_guard_summary.memory_forbidden_candidate_ids,
+    "Negative ReviewReport snapshot memory-forbidden IDs must match rendered draft"
+  );
+  assertArrayEqual(
+    assertions.never_production_candidate_ids,
+    renderedHandoff.review_report_guard_summary.never_production_candidate_ids,
+    "Negative ReviewReport snapshot never-production IDs must match rendered draft"
+  );
+  assertArrayEqual(
+    assertions.final_routes,
+    renderedHandoff.report_items.map((item) => item.final_route),
+    "Negative ReviewReport snapshot final routes must match rendered draft"
+  );
+  const renderedUnknownTags = renderedHandoff.report_items.flatMap((item) => item.unknown_failure_tags);
+  assertArrayEqual(assertions.unknown_failure_tags, renderedUnknownTags, "Negative ReviewReport snapshot unknown failure tags must match rendered draft");
+  assert(
+    assertions.memory_entry_allowed_now_count === renderedHandoff.review_report_guard_summary.memory_entry_allowed_now_count,
+    "Negative ReviewReport snapshot memory-entry count must match rendered draft."
+  );
+  assert(
+    assertions.production_promotion_allowed_now_count === renderedHandoff.review_report_guard_summary.production_promotion_allowed_now_count,
+    "Negative ReviewReport snapshot production-promotion count must match rendered draft."
+  );
+  assert(
+    assertions.writes_allowed_now_count === renderedHandoff.review_report_guard_summary.writes_allowed_now_count,
+    "Negative ReviewReport snapshot writes-allowed count must match rendered draft."
+  );
+  assert(assertions.all_memory_writes_blocked === true, "Negative ReviewReport snapshot must assert memory writes are blocked.");
+  assert(assertions.all_production_writes_blocked === true, "Negative ReviewReport snapshot must assert production writes are blocked.");
+  assert(assertions.all_provider_execution_blocked === true, "Negative ReviewReport snapshot must assert provider execution is blocked.");
+  assert(assertions.report_items_explain_all_candidates === true, "Negative ReviewReport snapshot must assert report items explain all candidates.");
+  assert(renderedHandoff.report_summary.all_memory_writes_blocked === true, "Rendered negative ReviewReport must block memory writes.");
+  assert(renderedHandoff.report_summary.all_production_writes_blocked === true, "Rendered negative ReviewReport must block production writes.");
+  assert(renderedHandoff.report_summary.all_provider_execution_blocked === true, "Rendered negative ReviewReport must block provider execution.");
+  assert(renderedHandoff.report_summary.report_items_explain_all_candidates === true, "Rendered negative ReviewReport must explain all candidates.");
+
+  for (const key of [
+    "production_candidate_created",
+    "daily_note_write_performed",
+    "vcp_memory_write_performed",
+    "accepted_samples_write_performed",
+    "provider_contact_performed",
+    "plugin_call_performed",
+    "api_call_performed",
+    "image_generation_performed",
+    "output_file_write_performed"
+  ]) {
+    assert(assertions[key] === false, `Negative ReviewReport snapshot assertion ${key} must be false.`);
+    assert(renderedHandoff.no_execution_guard[key] === false, `Rendered negative ReviewReport no-execution guard ${key} must be false.`);
+  }
+  assert(assertions.direct_memory_write_performed === false, "Negative ReviewReport snapshot assertion direct_memory_write_performed must be false.");
+  assert(
+    renderedHandoff.review_report_guard_summary.direct_memory_write_performed === false,
+    "Rendered negative ReviewReport guard summary direct_memory_write_performed must be false."
+  );
+}
+
 function main() {
   const missingFiles = requiredFiles.filter((relativePath) => !exists(relativePath));
   assert(missingFiles.length === 0, `Missing Review Console adapter handoff files: ${missingFiles.join(", ")}`);
@@ -1479,6 +1594,10 @@ function main() {
   const reviewReportDraftOutputSnapshot = parseJson(
     read("tests/schema_examples/review_console_review_report_draft_output_snapshot.example.json"),
     "Review Console ReviewReport draft output snapshot"
+  );
+  const reviewReportNegativeGuardDraftOutputSnapshot = parseJson(
+    read("tests/schema_examples/review_console_review_report_negative_guard_draft_output_snapshot.example.json"),
+    "Review Console negative ReviewReport draft output snapshot"
   );
   const renderedDraftOutput = loadRenderedStaticDraft(mock);
 
@@ -1535,6 +1654,12 @@ function main() {
     mock,
     renderedDraftOutput,
     pvosAdapterExample
+  );
+  assertReviewReportNegativeGuardDraftOutputSnapshot(
+    reviewReportNegativeGuardDraftOutputSnapshot,
+    mock,
+    renderedDraftOutput,
+    pvosAdapterNegativeExample
   );
   assertAdapterNegativeStaticHandoff(
     mock.review_evidence_blocker_adapter_negative_static_handoff,
@@ -1735,6 +1860,11 @@ function main() {
     "negativeReviewReportItemList",
     "reject_memory_forbidden_never_production",
     "unmapped_identity_drift",
+    "v14.072 ReviewReport Negative Guard Draft Output Snapshot",
+    "review_console_review_report_negative_guard_draft_output_snapshot.example.json",
+    "review_report_negative_guard_handoff_present_in_draft_output",
+    "review_report_negative_guard_draft_output_snapshot_matches_static_mock",
+    "review_report_negative_guard_draft_output_snapshot_matches_adapter_fixture",
     "v14.061 Review Blocker Arbiter Draft Output Snapshot",
     "review_console_blocker_arbiter_draft_output_snapshot.example.json",
     "blocker_arbiter_handoff_present_in_draft_output",
@@ -1860,6 +1990,18 @@ function main() {
       review_report_negative_guard_no_accepted_samples_write_verified: true,
       review_report_negative_guard_no_production_candidate_verified: true,
       review_report_negative_guard_no_provider_execution_verified: true,
+      review_report_negative_guard_draft_output_snapshot_present: true,
+      review_report_negative_guard_draft_output_snapshot_matches_static_mock: true,
+      review_report_negative_guard_draft_output_snapshot_matches_adapter_fixture: true,
+      review_report_negative_guard_snapshot_candidate_ids_verified: true,
+      review_report_negative_guard_snapshot_reject_routes_verified: true,
+      review_report_negative_guard_snapshot_memory_forbidden_verified: true,
+      review_report_negative_guard_snapshot_never_production_verified: true,
+      review_report_negative_guard_snapshot_no_daily_note_write_verified: true,
+      review_report_negative_guard_snapshot_no_vcp_memory_write_verified: true,
+      review_report_negative_guard_snapshot_no_accepted_samples_write_verified: true,
+      review_report_negative_guard_snapshot_no_production_candidate_verified: true,
+      review_report_negative_guard_snapshot_no_provider_execution_verified: true,
       review_evidence_blocker_adapter_negative_static_handoff_verified: true,
       adapter_negative_fixture_guard_summary_verified: true,
       adapter_negative_memory_forbidden_visible: true,

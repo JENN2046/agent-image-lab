@@ -237,6 +237,22 @@ Phase 9 审批记录必须满足：
 
 `review_report_negative_guard_static_handoff` 是负向审片结果的最终可读报告层。它让审片台直接看到 `reject_memory_forbidden_never_production`、`unmapped_identity_drift`、memory-forbidden ID 和 never-production ID；它不代表生产批准、accepted_samples 写入、记忆写入、插件调用、图片生成或 provider contact。
 
+## v14.072 ReviewReport Negative Guard Draft Output Snapshot
+
+本节用于验收静态 Review Console 的 `renderDraft()` 草案输出没有丢失负向 ReviewReport 字段。它仍然只执行本目录内静态 JS 的 mock DOM 校验，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
+
+| Snapshot 字段 | Review Console 草案字段 | 说明 |
+| --- | --- | --- |
+| `review_console_review_report_negative_guard_draft_output_snapshot.example.json.draft_output_required_keys` | `#draftOutput` JSON 顶层字段 | 草案输出必须继续携带 adapter handoff、review protocol、decision package、evidence blocker、blocker arbiter、ReviewReport、negative ReviewReport、adapter negative handoff、review_session、image_case、memory_delta 和 prototype_guard |
+| `snapshot_assertions.review_report_negative_guard_handoff_present_in_draft_output` | `#draftOutput.review_report_negative_guard_static_handoff` | 必须为 true，证明 negative ReviewReport handoff 出现在草案输出中 |
+| `snapshot_assertions.reject_candidate_ids` / `final_routes` | `review_report_negative_guard_static_handoff.report_items` | 两个 rejected candidates 必须继续携带 reject route，其中 unknown failure candidate 必须保持 `reject_memory_forbidden_never_production` |
+| `snapshot_assertions.memory_forbidden_candidate_ids` / `unknown_failure_tags` | `review_report_negative_guard_static_handoff.review_report_guard_summary` / `report_items` | `candidate_reject_unknown_guard_001` 与 `unmapped_identity_drift` 必须继续触发 memory forbidden |
+| `snapshot_assertions.never_production_candidate_ids` | `review_report_negative_guard_static_handoff.review_report_guard_summary.never_production_candidate_ids` | 两个 rejected candidates 必须保持 never-production |
+| `review_report_negative_guard_draft_output_snapshot_matches_static_mock` | validator result flag | snapshot 必须与 `mock_data.js` 中的 negative ReviewReport handoff 完全一致 |
+| `review_report_negative_guard_draft_output_snapshot_matches_adapter_fixture` | validator result flag | snapshot 必须继续匹配 PVOS negative adapter ReviewReport handoff |
+
+`review_console_review_report_negative_guard_draft_output_snapshot.example.json` 是草案输出回归证据，不是生产执行记录。它不得授权 provider contact、plugin/API 调用、图片生成、accepted_samples 写入、记忆写入或 production promotion。
+
 ## v14.061 Review Blocker Arbiter Draft Output Snapshot
 
 本节用于验收静态 Review Console 的 `renderDraft()` 草案输出没有丢失审片阻断仲裁字段。它仍然只执行本目录内静态 JS 的 mock DOM 校验，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。

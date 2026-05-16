@@ -189,6 +189,7 @@ $requiredFiles = @(
   'tests/schema_examples/review_console_adapter_negative_fixture_draft_output_snapshot.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_draft_output_snapshot.example.json',
   'tests/schema_examples/review_console_review_report_draft_output_snapshot.example.json',
+  'tests/schema_examples/review_console_review_report_negative_guard_draft_output_snapshot.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix_v14_062.example.json',
   'tests/schema_examples/review_blocker_arbiter_route_summary.example.json',
@@ -241,6 +242,7 @@ $requiredFiles = @(
   'docs/v14_069_review_report_console_binding_gate.md',
   'docs/v14_070_review_report_draft_output_snapshot_gate.md',
   'docs/v14_071_review_report_negative_guard_static_handoff_gate.md',
+  'docs/v14_072_review_report_negative_guard_draft_output_snapshot_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -6054,6 +6056,24 @@ if (-not $node) {
     )) {
       if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.($negativeReviewReportCheck.Flag) -ne $true) {
         Add-Failure $negativeReviewReportCheck.Message
+      }
+    }
+    foreach ($negativeReviewReportSnapshotCheck in @(
+      @{ Flag = 'review_report_negative_guard_draft_output_snapshot_present'; Message = 'Review Console Adapter handoff must verify negative ReviewReport draft output snapshot is present' },
+      @{ Flag = 'review_report_negative_guard_draft_output_snapshot_matches_static_mock'; Message = 'Review Console Adapter handoff must verify negative ReviewReport draft output snapshot matches static mock' },
+      @{ Flag = 'review_report_negative_guard_draft_output_snapshot_matches_adapter_fixture'; Message = 'Review Console Adapter handoff must verify negative ReviewReport draft output snapshot matches adapter fixture' },
+      @{ Flag = 'review_report_negative_guard_snapshot_candidate_ids_verified'; Message = 'Review Console Adapter handoff must verify negative ReviewReport snapshot candidate IDs' },
+      @{ Flag = 'review_report_negative_guard_snapshot_reject_routes_verified'; Message = 'Review Console Adapter handoff must verify negative ReviewReport snapshot reject routes' },
+      @{ Flag = 'review_report_negative_guard_snapshot_memory_forbidden_verified'; Message = 'Review Console Adapter handoff must verify negative ReviewReport snapshot memory-forbidden candidate' },
+      @{ Flag = 'review_report_negative_guard_snapshot_never_production_verified'; Message = 'Review Console Adapter handoff must verify negative ReviewReport snapshot never-production candidates' },
+      @{ Flag = 'review_report_negative_guard_snapshot_no_daily_note_write_verified'; Message = 'Review Console Adapter handoff must verify negative ReviewReport snapshot performs no DailyNote write' },
+      @{ Flag = 'review_report_negative_guard_snapshot_no_vcp_memory_write_verified'; Message = 'Review Console Adapter handoff must verify negative ReviewReport snapshot performs no VCP memory write' },
+      @{ Flag = 'review_report_negative_guard_snapshot_no_accepted_samples_write_verified'; Message = 'Review Console Adapter handoff must verify negative ReviewReport snapshot performs no accepted_samples write' },
+      @{ Flag = 'review_report_negative_guard_snapshot_no_production_candidate_verified'; Message = 'Review Console Adapter handoff must verify negative ReviewReport snapshot creates no production candidate' },
+      @{ Flag = 'review_report_negative_guard_snapshot_no_provider_execution_verified'; Message = 'Review Console Adapter handoff must verify negative ReviewReport snapshot performs no provider execution' }
+    )) {
+      if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.($negativeReviewReportSnapshotCheck.Flag) -ne $true) {
+        Add-Failure $negativeReviewReportSnapshotCheck.Message
       }
     }
     if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.review_evidence_blocker_adapter_negative_static_handoff_verified -ne $true) {
