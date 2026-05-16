@@ -183,6 +183,7 @@ $requiredFiles = @(
   'tests/schema_examples/review_console_adapter_negative_fixture_draft_output_snapshot.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_draft_output_snapshot.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix.example.json',
+  'tests/schema_examples/review_console_blocker_arbiter_regression_matrix_v14_062.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_boundary_scan.example.json',
   'tests/schema_examples/review_result_protocol_input.example.json',
   'tests/schema_examples/review_result_protocol_report.example.json',
@@ -218,6 +219,7 @@ $requiredFiles = @(
   'docs/v14_059_review_blocker_arbiter_adapter_handoff_gate.md',
   'docs/v14_060_review_console_blocker_arbiter_ui_binding_gate.md',
   'docs/v14_061_review_console_blocker_arbiter_draft_output_snapshot_gate.md',
+  'docs/v14_062_review_console_blocker_arbiter_regression_matrix_refresh_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -5975,6 +5977,9 @@ if (-not $node) {
     if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.blocker_arbiter_matrix_present -ne $true) {
       Add-Failure "Review Console blocker arbiter regression matrix must be present"
     }
+    if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.blocker_arbiter_regression_matrix_refreshed_v14_062 -ne $true) {
+      Add-Failure "Review Console blocker arbiter regression matrix must verify v14.062 refresh"
+    }
     if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.blocker_arbiter_surface_consensus_verified -ne $true) {
       Add-Failure "Review Console blocker arbiter regression matrix must verify surface consensus"
     }
@@ -5992,6 +5997,18 @@ if (-not $node) {
     }
     if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.blocker_arbiter_draft_output_snapshot_surface_verified -ne $true) {
       Add-Failure "Review Console blocker arbiter regression matrix must verify draft output snapshot surface"
+    }
+    if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.blocker_arbiter_route_snapshot_surface_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter regression matrix must verify route snapshot surface"
+    }
+    if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.blocker_arbiter_route_snapshot_final_routes_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter regression matrix must verify route snapshot final routes"
+    }
+    if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.blocker_arbiter_route_snapshot_production_block_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter regression matrix must verify route snapshot production block"
+    }
+    if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.blocker_arbiter_route_snapshot_memory_block_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter regression matrix must verify route snapshot memory block"
     }
     if ($reviewConsoleBlockerArbiterMatrix.review_console_blocker_arbiter_regression_matrix.blocker_arbiter_memory_forbidden_verified -ne $true) {
       Add-Failure "Review Console blocker arbiter regression matrix must verify memory-forbidden consensus"

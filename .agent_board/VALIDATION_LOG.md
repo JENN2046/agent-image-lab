@@ -1,5 +1,68 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.062-REVIEW-CONSOLE-BLOCKER-ARBITER-REGRESSION-MATRIX-REFRESH
+
+Task:
+
+```text
+Refresh the blocker arbiter regression matrix with a route snapshot surface for the v14.061 draft output snapshot while preserving the legacy negative-guard consensus matrix.
+```
+
+Result:
+
+```text
+phase_record: docs/v14_062_review_console_blocker_arbiter_regression_matrix_refresh_gate.md
+source_commit: 067342e
+selected_product_route: review_console_blocker_arbiter_regression_matrix_refresh
+matrix_fixture_created: tests/schema_examples/review_console_blocker_arbiter_regression_matrix_v14_062.example.json
+validator_modified: scripts/validate_review_console_blocker_arbiter_regression_matrix.js
+validator_wiring_modified: scripts/validate_mvp.ps1
+blocker_arbiter_regression_matrix_refreshed_v14_062: true
+blocker_arbiter_route_snapshot_surface_verified: true
+blocker_arbiter_route_snapshot_final_routes_verified: true
+blocker_arbiter_route_snapshot_production_block_verified: true
+blocker_arbiter_route_snapshot_memory_block_verified: true
+blocker_arbiter_no_production_candidate_verified: true
+blocker_arbiter_no_direct_memory_write_verified: true
+blocker_arbiter_no_accepted_samples_write_verified: true
+blocker_arbiter_no_provider_plugin_api_image_verified: true
+browser_plugin_preview: not_required_no_frontend_render_change
+direct_memory_write_performed: false
+production_candidate_created: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+validation_result: passed
+```
+
+Commands run:
+
+```text
+node --check scripts/validate_review_console_blocker_arbiter_regression_matrix.js
+node scripts/validate_review_console_blocker_arbiter_regression_matrix.js
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+node scripts/validate_agent_board_state.js
+node scripts/validate_current_state_alignment.js
+git diff --check
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+Validation notes:
+
+```text
+The refreshed matrix validator keeps the legacy negative-guard consensus checks and adds a route snapshot surface check for `review_console_blocker_arbiter_draft_output_snapshot.example.json`. It verifies the pass route remains draft-only pending human review, the reject route remains failure-learning-only never-production, production promotion and memory entry are blocked, and no production candidate, direct memory write, accepted_samples write, provider contact, plugin call, API call, or image generation occurs.
+```
+
+Boundary:
+
+```text
+No runtime prototype integration, provider contact, plugin call, API call, image generation, accepted_samples write, image binary read, runs output commit, DailyNote write, VCP memory write, external manifest read, real VCPChat/VCPToolBox read, dependency change, package change, tag, release, deploy, or push is performed by v14.062.
+```
+
 ## VALIDATION-20260517-v14.061-REVIEW-CONSOLE-BLOCKER-ARBITER-DRAFT-OUTPUT-SNAPSHOT
 
 Task:

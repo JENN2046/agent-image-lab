@@ -9,6 +9,51 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active gate: v14_062_review_console_blocker_arbiter_regression_matrix_refresh_gate.
+Status: completed_local_validated.
+Purpose: refresh the blocker arbiter regression matrix with a route snapshot surface for the v14.061 draft output snapshot while preserving the legacy negative-guard consensus matrix.
+source_phase: v14_061_review_console_blocker_arbiter_draft_output_snapshot_gate.
+source_commit: 067342e.
+phase_record: docs/v14_062_review_console_blocker_arbiter_regression_matrix_refresh_gate.md.
+selected_product_route: review_console_blocker_arbiter_regression_matrix_refresh.
+matrix_fixture_created: tests/schema_examples/review_console_blocker_arbiter_regression_matrix_v14_062.example.json.
+validator_modified: scripts/validate_review_console_blocker_arbiter_regression_matrix.js.
+validator_wiring_modified: scripts/validate_mvp.ps1.
+blocker_arbiter_regression_matrix_refreshed_v14_062: true.
+blocker_arbiter_route_snapshot_surface_verified: true.
+blocker_arbiter_route_snapshot_final_routes_verified: true.
+blocker_arbiter_route_snapshot_production_block_verified: true.
+blocker_arbiter_route_snapshot_memory_block_verified: true.
+blocker_arbiter_no_production_candidate_verified: true.
+blocker_arbiter_no_direct_memory_write_verified: true.
+blocker_arbiter_no_accepted_samples_write_verified: true.
+blocker_arbiter_no_provider_plugin_api_image_verified: true.
+direct_memory_write_performed: false.
+production_candidate_created: false.
+accepted_samples_written: false.
+image_binaries_read: false.
+runs_output_committed: false.
+runtime_prototype_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+plugin_call: false.
+api_call: false.
+image_generation: false.
+memory_write: false.
+DailyNote_write: false.
+VCP_memory_write: false.
+production_candidate_002: false.
+Batch_005: false.
+batch_005_allowed_now: false.
+production_candidate_002_allowed_now: false.
+memory_write_path_allowed_now: false.
+recommended_next: v14_063_review_blocker_arbiter_route_summary_gate.
+recommended_next_auto_execution_allowed: true.
+push_requires_explicit_remote_authorization: true.
+runtime_provider_image_memory_production_batch: false.
+next_phase_started: false.
+---
 Current active gate: v14_061_review_console_blocker_arbiter_draft_output_snapshot_gate.
 Status: completed_local_validated.
 Purpose: pin the Review Console blocker arbiter handoff as a local draft output snapshot and prove it matches static mock plus PVOS adapter handoff.

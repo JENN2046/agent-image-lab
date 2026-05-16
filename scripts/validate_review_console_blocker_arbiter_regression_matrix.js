@@ -7,7 +7,9 @@ const root = path.resolve(__dirname, "..");
 const requiredFiles = [
   "review_console/static_prototype/mock_data.js",
   "tests/schema_examples/review_console_blocker_arbiter_regression_matrix.example.json",
+  "tests/schema_examples/review_console_blocker_arbiter_regression_matrix_v14_062.example.json",
   "tests/schema_examples/review_console_adapter_negative_fixture_draft_output_snapshot.example.json",
+  "tests/schema_examples/review_console_blocker_arbiter_draft_output_snapshot.example.json",
   "tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json",
   "tests/schema_examples/evidence_blocker_contract_negative_guard.example.json"
 ];
@@ -145,6 +147,44 @@ function assertDraftSnapshotSurface(surface, snapshot) {
   assert(handoff.no_execution_guard.image_generation_performed === false, "Draft snapshot must not generate images.");
 }
 
+function assertRouteSnapshotSurface(surface, routeSnapshot) {
+  const handoff = routeSnapshot.review_blocker_arbiter_static_handoff;
+  assertArrayEqual(
+    surface.candidate_ids,
+    handoff.candidate_arbitrations.map((item) => item.candidate_id),
+    "Route snapshot candidate IDs must match snapshot"
+  );
+  assertArrayEqual(
+    surface.production_blocked_candidate_ids,
+    handoff.production_blocked_candidate_ids,
+    "Route snapshot production-blocked IDs must match snapshot"
+  );
+  assertArrayEqual(
+    surface.never_production_candidate_ids,
+    handoff.review_blocker_arbiter_guard_summary.never_production_candidate_ids,
+    "Route snapshot never-production IDs must match snapshot"
+  );
+  assert(
+    JSON.stringify(surface.final_route_by_candidate) === JSON.stringify(handoff.final_route_by_candidate),
+    "Route snapshot final routes must match snapshot."
+  );
+  assert(surface.production_promotion_allowed_now === false, "Route snapshot must block production promotion now.");
+  assert(surface.memory_entry_allowed_now === false, "Route snapshot must block memory entry now.");
+  assert(handoff.review_blocker_arbiter_guard_summary.production_promotion_allowed_now === false, "Snapshot must block production promotion now.");
+  assert(handoff.review_blocker_arbiter_guard_summary.memory_entry_allowed_now === false, "Snapshot must block memory entry now.");
+  assert(surface.production_candidate_created === false, "Route snapshot must not create production candidates.");
+  assert(surface.direct_memory_write_performed === false, "Route snapshot must not write memory directly.");
+  assert(surface.accepted_samples_write_performed === false, "Route snapshot must not write accepted samples.");
+  assert(surface.provider_plugin_api_image_effects === false, "Route snapshot must not perform provider/plugin/API/image effects.");
+  assert(surface.selected_plugin === null, "Route snapshot must keep selected_plugin null.");
+  assert(surface.max_plugin_calls_observed === 0, "Route snapshot must observe zero plugin calls.");
+  assert(handoff.no_execution_guard.plugin_call_performed === false, "Route snapshot must not call plugins.");
+  assert(handoff.no_execution_guard.api_call_performed === false, "Route snapshot must not call APIs.");
+  assert(handoff.no_execution_guard.image_generation_performed === false, "Route snapshot must not generate images.");
+  assert(handoff.no_execution_guard.accepted_samples_write_performed === false, "Route snapshot must not write accepted samples.");
+  assert(handoff.no_execution_guard.production_candidate_created === false, "Route snapshot must not create production candidates.");
+}
+
 function assertStaticMockNotLoosened(mock, consensus) {
   const handoff = mock.review_evidence_blocker_adapter_negative_static_handoff;
   assertArrayEqual(handoff.memory_forbidden_candidate_ids, consensus.memory_forbidden_candidate_ids, "Static mock memory-forbidden IDs must match consensus");
@@ -165,9 +205,17 @@ function main() {
     read("tests/schema_examples/review_console_blocker_arbiter_regression_matrix.example.json"),
     "blocker arbiter regression matrix"
   );
+  const refreshedMatrix = parseJson(
+    read("tests/schema_examples/review_console_blocker_arbiter_regression_matrix_v14_062.example.json"),
+    "blocker arbiter refreshed regression matrix"
+  );
   const snapshot = parseJson(
     read("tests/schema_examples/review_console_adapter_negative_fixture_draft_output_snapshot.example.json"),
     "adapter negative draft output snapshot"
+  );
+  const routeSnapshot = parseJson(
+    read("tests/schema_examples/review_console_blocker_arbiter_draft_output_snapshot.example.json"),
+    "blocker arbiter draft output snapshot"
   );
   const adapterFixture = parseJson(
     read("tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json"),
@@ -211,16 +259,83 @@ function main() {
   assert(matrix.expected_consensus.selected_plugin === null, "Matrix consensus selected_plugin must be null.");
   assert(matrix.expected_consensus.max_plugin_calls_observed === 0, "Matrix consensus max_plugin_calls_observed must be 0.");
 
+  assert(refreshedMatrix.status === "local_regression_matrix_refresh", "Refreshed matrix must be local_regression_matrix_refresh.");
+  assert(refreshedMatrix.display_only === true, "Refreshed matrix must be display-only.");
+  assert(
+    refreshedMatrix.source_phase === "v14_061_review_console_blocker_arbiter_draft_output_snapshot_gate",
+    "Refreshed matrix source phase must be v14.061."
+  );
+  assert(
+    refreshedMatrix.legacy_negative_matrix_ref === "tests/schema_examples/review_console_blocker_arbiter_regression_matrix.example.json",
+    "Refreshed matrix must cite the legacy negative matrix."
+  );
+  assert(
+    refreshedMatrix.blocker_arbiter_snapshot_ref === "tests/schema_examples/review_console_blocker_arbiter_draft_output_snapshot.example.json",
+    "Refreshed matrix must cite the blocker arbiter snapshot."
+  );
+  assert(
+    refreshedMatrix.expected_route_consensus.surface_count === refreshedMatrix.route_surfaces.length,
+    "Refreshed matrix route surface count must match consensus."
+  );
+
+  const routeSurface = refreshedMatrix.route_surfaces.find((item) => item.surface_id === "blocker_arbiter_draft_output_snapshot");
+  assert(routeSurface, "Refreshed matrix must include blocker arbiter draft output snapshot route surface.");
+  assertRouteSnapshotSurface(routeSurface, routeSnapshot);
+  assertArrayEqual(
+    routeSurface.production_blocked_candidate_ids,
+    refreshedMatrix.expected_route_consensus.production_blocked_candidate_ids,
+    "Refreshed matrix production-blocked IDs must match route consensus"
+  );
+  assertArrayEqual(
+    routeSurface.never_production_candidate_ids,
+    refreshedMatrix.expected_route_consensus.never_production_candidate_ids,
+    "Refreshed matrix never-production IDs must match route consensus"
+  );
+  assert(
+    routeSurface.final_route_by_candidate.find((item) => item.candidate_id === "candidate_accept_metadata_001").final_route ===
+      refreshedMatrix.expected_route_consensus.pass_final_route,
+    "Refreshed matrix pass final route must match consensus."
+  );
+  assert(
+    routeSurface.final_route_by_candidate.find((item) => item.candidate_id === "candidate_reject_metadata_001").final_route ===
+      refreshedMatrix.expected_route_consensus.reject_final_route,
+    "Refreshed matrix reject final route must match consensus."
+  );
+
+  for (const key of [
+    "production_promotion_allowed_now",
+    "memory_entry_allowed_now",
+    "production_candidate_created",
+    "direct_memory_write_performed",
+    "accepted_samples_write_performed",
+    "provider_contact_performed",
+    "plugin_call_performed",
+    "api_call_performed",
+    "daily_note_write_performed",
+    "vcp_memory_write_performed",
+    "image_generation_performed",
+    "output_file_write_performed"
+  ]) {
+    assert(refreshedMatrix.expected_route_consensus[key] === false, `Refreshed matrix route consensus ${key} must be false.`);
+  }
+  assert(refreshedMatrix.expected_route_consensus.selected_plugin === null, "Refreshed matrix route consensus selected_plugin must be null.");
+  assert(refreshedMatrix.expected_route_consensus.max_plugin_calls_observed === 0, "Refreshed matrix route consensus max_plugin_calls_observed must be 0.");
+
   const result = {
     passed: true,
     review_console_blocker_arbiter_regression_matrix: {
       blocker_arbiter_matrix_present: true,
+      blocker_arbiter_regression_matrix_refreshed_v14_062: true,
       blocker_arbiter_surface_consensus_verified: true,
       blocker_arbiter_protocol_surface_verified: true,
       blocker_arbiter_decision_package_surface_verified: true,
       blocker_arbiter_evidence_blocker_surface_verified: true,
       blocker_arbiter_adapter_negative_surface_verified: true,
       blocker_arbiter_draft_output_snapshot_surface_verified: true,
+      blocker_arbiter_route_snapshot_surface_verified: true,
+      blocker_arbiter_route_snapshot_final_routes_verified: true,
+      blocker_arbiter_route_snapshot_production_block_verified: true,
+      blocker_arbiter_route_snapshot_memory_block_verified: true,
       blocker_arbiter_memory_forbidden_verified: true,
       blocker_arbiter_never_production_verified: true,
       blocker_arbiter_production_exclusion_verified: true,
