@@ -175,6 +175,7 @@ $requiredFiles = @(
   'tests/schema_examples/pvos_kernel_run.example.json',
   'tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json',
   'tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json',
+  'tests/schema_examples/review_console_adapter_negative_fixture_draft_output_snapshot.example.json',
   'tests/schema_examples/review_result_protocol_input.example.json',
   'tests/schema_examples/review_result_protocol_report.example.json',
   'tests/schema_examples/review_result_protocol_negative_guard_input.example.json',
@@ -200,6 +201,7 @@ $requiredFiles = @(
   'docs/v14_052_evidence_blocker_contract_negative_fixture_gate.md',
   'docs/v14_053_evidence_blocker_adapter_negative_fixture_handoff_gate.md',
   'docs/v14_054_review_console_adapter_negative_fixture_ui_binding_gate.md',
+  'docs/v14_055_review_console_adapter_negative_fixture_draft_output_snapshot_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -5672,6 +5674,30 @@ if (-not $node) {
     }
     if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.adapter_negative_no_accepted_samples_write_verified -ne $true) {
       Add-Failure "Review Console Adapter handoff must verify adapter negative performs no accepted_samples write"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.adapter_negative_draft_output_snapshot_present -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify adapter negative draft output snapshot is present"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.adapter_negative_draft_output_snapshot_matches_static_mock -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify adapter negative draft output snapshot matches static mock"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.adapter_negative_draft_output_snapshot_matches_adapter_fixture -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify adapter negative draft output snapshot matches adapter fixture"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.adapter_negative_snapshot_memory_forbidden_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify adapter negative snapshot memory-forbidden candidate"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.adapter_negative_snapshot_never_production_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify adapter negative snapshot never-production candidates"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.adapter_negative_snapshot_no_production_candidate_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify adapter negative snapshot creates no production candidate"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.adapter_negative_snapshot_no_direct_memory_write_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify adapter negative snapshot performs no direct memory write"
+    }
+    if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.adapter_negative_snapshot_no_accepted_samples_write_verified -ne $true) {
+      Add-Failure "Review Console Adapter handoff must verify adapter negative snapshot performs no accepted_samples write"
     }
     if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.file_write_performed -ne $false) {
       Add-Failure "Review Console Adapter handoff validation must not write files"

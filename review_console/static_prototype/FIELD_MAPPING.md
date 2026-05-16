@@ -191,6 +191,24 @@ Phase 9 审批记录必须满足：
 
 `review_evidence_blocker_adapter_negative_static_handoff` 是 adapter negative fixture 的可视化层。它不得创建 production candidate，不得写 accepted_samples，不得写 memory，不得调用插件，也不得把 memory-forbidden 或 never-production 候选送入生产。
 
+## v14.055 Adapter Negative Fixture Draft Output Snapshot
+
+本节用于验收静态 Review Console 的 `renderDraft()` 草案输出没有丢失 adapter negative fixture 的 evidence/blocker 阻断字段。它仍然只执行本目录内静态 JS 的 mock DOM 校验，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
+
+| Snapshot 字段 | Review Console 草案字段 | 说明 |
+| --- | --- | --- |
+| `review_console_adapter_negative_fixture_draft_output_snapshot.example.json.draft_output_required_keys` | `#draftOutput` JSON 顶层字段 | 草案输出必须继续携带 adapter handoff、review protocol、decision package、evidence blocker、adapter negative handoff、review_session、image_case、memory_delta 和 prototype_guard |
+| `snapshot_assertions.adapter_negative_handoff_present_in_draft_output` | `#draftOutput.review_evidence_blocker_adapter_negative_static_handoff` | 必须为 true，证明 adapter negative handoff 出现在草案输出中 |
+| `snapshot_assertions.memory_forbidden_candidate_ids` | `review_evidence_blocker_adapter_negative_static_handoff.memory_forbidden_candidate_ids` | `candidate_reject_unknown_guard_001` 必须保持 memory forbidden |
+| `snapshot_assertions.production_exclusion_candidate_ids` | `review_evidence_blocker_adapter_negative_static_handoff.production_exclusion_candidate_ids` | 两个 rejected candidates 必须保持 production exclusion |
+| `snapshot_assertions.never_production_count` | `review_evidence_blocker_adapter_negative_static_handoff.audit_summary.never_production_count` | 两个 rejected candidates 必须保持 never-production |
+| `snapshot_assertions.production_candidate_created` | `review_evidence_blocker_adapter_negative_static_handoff.guard_summary.production_candidate_created` | 必须为 false |
+| `snapshot_assertions.direct_memory_write_performed` | `review_evidence_blocker_adapter_negative_static_handoff.guard_summary.direct_memory_write_performed` | 必须为 false |
+| `snapshot_assertions.accepted_samples_write_performed` | `review_evidence_blocker_adapter_negative_static_handoff.guard_summary.accepted_samples_write_performed` | 必须为 false |
+| `adapter_negative_draft_output_snapshot_matches_static_mock` | validator result flag | snapshot 必须与 `mock_data.js` 中的静态 handoff 完全一致 |
+
+`review_console_adapter_negative_fixture_draft_output_snapshot.example.json` 是草案输出回归证据，不是生产执行记录。它不得授权 provider contact、plugin/API 调用、图片生成、accepted_samples 写入、记忆写入或 production promotion。
+
 ## 原型防越界标记
 
 草案输出包含：

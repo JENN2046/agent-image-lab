@@ -13,7 +13,8 @@ const requiredFiles = [
   "adapter_dry_run_lab/fixtures/accepted_request.json",
   "exports/vcptoolbox/Plugin/AgentImageLabAdapter/dry-run-adapter.js",
   "tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json",
-  "tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json"
+  "tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json",
+  "tests/schema_examples/review_console_adapter_negative_fixture_draft_output_snapshot.example.json"
 ];
 
 function read(relativePath) {
@@ -39,6 +40,12 @@ function assertArrayEqual(actual, expected, message) {
   });
 }
 
+function assertDeepEqual(actual, expected, message) {
+  const actualJson = JSON.stringify(actual, null, 2);
+  const expectedJson = JSON.stringify(expected, null, 2);
+  assert(actualJson === expectedJson, message);
+}
+
 function parseJson(text, label) {
   try {
     return JSON.parse(text);
@@ -55,6 +62,114 @@ function loadStaticMock() {
     filename: "review_console/static_prototype/mock_data.js"
   });
   return context.window.REVIEW_CONSOLE_MOCK;
+}
+
+function createFakeElement(initial = {}) {
+  const element = {
+    children: [],
+    dataset: initial.dataset || {},
+    value: initial.value || "",
+    textContent: initial.textContent || "",
+    innerHTML: "",
+    title: "",
+    className: initial.className || "",
+    classList: {
+      add() {},
+      remove() {},
+      toggle() {}
+    },
+    appendChild(child) {
+      this.children.push(child);
+      return child;
+    },
+    addEventListener() {},
+    querySelector(selector) {
+      if (!this.__queryChildren) this.__queryChildren = {};
+      if (!this.__queryChildren[selector]) this.__queryChildren[selector] = createFakeElement();
+      return this.__queryChildren[selector];
+    }
+  };
+  return element;
+}
+
+function loadRenderedStaticDraft(mock) {
+  const elements = new Map();
+  const ensureElement = (id, initial = {}) => {
+    if (!elements.has(id)) elements.set(id, createFakeElement(initial));
+    return elements.get(id);
+  };
+
+  for (const id of [
+    "versionList",
+    "currentVersionScore",
+    "scoreControls",
+    "aiTotal",
+    "humanTotal",
+    "finalTotal",
+    "commentList",
+    "commentText",
+    "commentTarget",
+    "commentSeverity",
+    "addCommentBtn",
+    "iterationList",
+    "protocolSummary",
+    "protocolGuardSummary",
+    "protocolCandidateList",
+    "protocolGuard",
+    "decisionPackageSummary",
+    "decisionPackageGuardSummary",
+    "decisionPackageDraftList",
+    "decisionPackageGuard",
+    "evidenceBlockerSummary",
+    "evidenceBlockerGuardSummary",
+    "evidenceRecordList",
+    "blockerDecisionList",
+    "evidenceBlockerGuard",
+    "adapterNegativeSummary",
+    "adapterNegativeGuardSummary",
+    "adapterNegativeBlockerList",
+    "adapterNegativeGuard",
+    "dailyNoteLock",
+    "refreshDraftBtn",
+    "draftOutput",
+    "sessionId",
+    "sessionStatus"
+  ]) {
+    ensureElement(id);
+  }
+  ensureElement("memoryTitle", { value: mock.review_session.memory_preview.chinese_diary_title });
+  ensureElement("memoryContent", { value: mock.review_session.memory_preview.chinese_diary_content });
+
+  const archiveButtons = ["accepted", "candidate", "rejected", "draft"].map((archive) =>
+    createFakeElement({ dataset: { archive } })
+  );
+  const memoryButtons = ["approved", "rejected", "pending"].map((memory) =>
+    createFakeElement({ dataset: { memory } })
+  );
+
+  const context = {
+    window: { REVIEW_CONSOLE_MOCK: mock },
+    document: {
+      querySelector(selector) {
+        if (selector.startsWith("#")) return ensureElement(selector.slice(1));
+        throw new Error(`Unsupported static prototype selector: ${selector}`);
+      },
+      querySelectorAll(selector) {
+        if (selector === "[data-archive]") return archiveButtons;
+        if (selector === "[data-memory]") return memoryButtons;
+        return [];
+      },
+      createElement() {
+        return createFakeElement();
+      }
+    }
+  };
+
+  vm.runInNewContext(read("review_console/static_prototype/app.js"), context, {
+    filename: "review_console/static_prototype/app.js"
+  });
+
+  return parseJson(ensureElement("draftOutput").value, "rendered Review Console static draft output");
 }
 
 function assertGuardClean(guard, label) {
@@ -576,6 +691,97 @@ function assertAdapterNegativeStaticHandoff(handoff, negativeAdapterExample) {
   }
 }
 
+function assertAdapterNegativeDraftOutputSnapshot(snapshot, mock, renderedDraft, negativeAdapterExample) {
+  assert(snapshot, "Adapter negative draft output snapshot must exist.");
+  assert(snapshot.status === "draft_output_snapshot", "Adapter negative snapshot must be draft_output_snapshot.");
+  assert(snapshot.display_only === true, "Adapter negative snapshot must be display-only.");
+  assert(
+    snapshot.source_phase === "v14_054_review_console_adapter_negative_fixture_ui_binding_gate",
+    "Adapter negative snapshot must cite v14.054 as source phase."
+  );
+  assert(
+    snapshot.snapshot_phase === "v14_055_review_console_adapter_negative_fixture_draft_output_snapshot_gate",
+    "Adapter negative snapshot must cite v14.055 as snapshot phase."
+  );
+  assert(
+    snapshot.source_adapter_response_ref === "tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json",
+    "Adapter negative snapshot must cite the negative adapter fixture."
+  );
+  assert(
+    snapshot.source_evidence_blocker_fixture_ref === "tests/schema_examples/evidence_blocker_contract_negative_guard.example.json",
+    "Adapter negative snapshot must cite the evidence blocker fixture."
+  );
+
+  for (const key of snapshot.draft_output_required_keys) {
+    assert(Object.prototype.hasOwnProperty.call(renderedDraft, key), `Rendered draft output must include ${key}.`);
+  }
+
+  const renderedHandoff = renderedDraft.review_evidence_blocker_adapter_negative_static_handoff;
+  const mockHandoff = mock.review_evidence_blocker_adapter_negative_static_handoff;
+  const snapshotHandoff = snapshot.review_evidence_blocker_adapter_negative_static_handoff;
+  assertDeepEqual(snapshotHandoff, mockHandoff, "Adapter negative snapshot handoff must match static mock handoff.");
+  assertDeepEqual(renderedHandoff, snapshotHandoff, "Rendered draft output adapter negative handoff must match snapshot.");
+  assertAdapterNegativeStaticHandoff(snapshotHandoff, negativeAdapterExample);
+
+  assertDeepEqual(renderedDraft.prototype_guard, snapshot.prototype_guard, "Rendered draft prototype guard must match snapshot.");
+  assert(renderedDraft.prototype_guard.api_called === false, "Rendered draft must not call API.");
+  assert(renderedDraft.prototype_guard.daily_note_called === false, "Rendered draft must not call DailyNote.");
+  assert(renderedDraft.prototype_guard.vcp_plugin_called === false, "Rendered draft must not call VCP plugin.");
+  assert(renderedDraft.prototype_guard.disk_write_performed === false, "Rendered draft must not write disk.");
+  assert(renderedDraft.prototype_guard.image_file_created === false, "Rendered draft must not create image files.");
+
+  const assertions = snapshot.snapshot_assertions;
+  assert(assertions.adapter_negative_handoff_present_in_draft_output === true, "Snapshot must assert handoff presence.");
+  assert(assertions.adapter_negative_guard_observed === renderedHandoff.adapter_negative_guard_observed, "Snapshot must assert negative guard state.");
+  assert(
+    assertions.evidence_blocker_contract_matches_fixture === renderedHandoff.evidence_blocker_contract_matches_fixture,
+    "Snapshot must assert fixture match state."
+  );
+  assertArrayEqual(
+    assertions.memory_forbidden_candidate_ids,
+    renderedHandoff.memory_forbidden_candidate_ids,
+    "Snapshot memory-forbidden IDs must match rendered draft"
+  );
+  assertArrayEqual(
+    assertions.production_exclusion_candidate_ids,
+    renderedHandoff.production_exclusion_candidate_ids,
+    "Snapshot production-exclusion IDs must match rendered draft"
+  );
+  assertArrayEqual(
+    assertions.rejected_candidate_ids,
+    renderedHandoff.rejected_candidate_ids,
+    "Snapshot rejected candidate IDs must match rendered draft"
+  );
+  assert(assertions.never_production_count === renderedHandoff.audit_summary.never_production_count, "Snapshot never-production count must match.");
+  assert(assertions.memory_forbidden_count === renderedHandoff.audit_summary.memory_forbidden_count, "Snapshot memory-forbidden count must match.");
+  assert(assertions.production_candidate_created === false, "Snapshot must assert no production candidate.");
+  assert(assertions.direct_memory_write_performed === false, "Snapshot must assert no direct memory write.");
+  assert(assertions.accepted_samples_write_performed === false, "Snapshot must assert no accepted_samples write.");
+  assert(assertions.selected_plugin === null, "Snapshot must assert selected_plugin null.");
+  assert(assertions.max_plugin_calls_observed === 0, "Snapshot must assert zero plugin calls.");
+
+  for (const key of [
+    "provider_contact_performed",
+    "plugin_call_performed",
+    "api_call_performed",
+    "daily_note_write_performed",
+    "vcp_memory_write_performed",
+    "image_generation_performed",
+    "output_file_write_performed"
+  ]) {
+    assert(assertions[key] === false, `Snapshot assertion ${key} must be false.`);
+    assert(renderedHandoff.no_execution_guard[key] === false, `Rendered draft no-execution guard ${key} must be false.`);
+  }
+  assert(
+    renderedHandoff.no_execution_guard.accepted_samples_write_performed === false,
+    "Rendered draft no-execution guard accepted_samples_write_performed must be false."
+  );
+  assert(
+    renderedHandoff.no_execution_guard.production_candidate_created === false,
+    "Rendered draft no-execution guard production_candidate_created must be false."
+  );
+}
+
 function main() {
   const missingFiles = requiredFiles.filter((relativePath) => !exists(relativePath));
   assert(missingFiles.length === 0, `Missing Review Console adapter handoff files: ${missingFiles.join(", ")}`);
@@ -595,6 +801,11 @@ function main() {
     read("tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json"),
     "PVOS adapter negative example"
   );
+  const adapterNegativeDraftOutputSnapshot = parseJson(
+    read("tests/schema_examples/review_console_adapter_negative_fixture_draft_output_snapshot.example.json"),
+    "Review Console adapter negative draft output snapshot"
+  );
+  const renderedDraftOutput = loadRenderedStaticDraft(mock);
 
   assert(adapterResponse.status === "accepted_draft", "Adapter accepted fixture must produce accepted_draft.");
   assert(fixtureHandoff.status === adapterResponse.status, "Static handoff status must match Adapter accepted fixture.");
@@ -625,6 +836,12 @@ function main() {
   assertEvidenceBlockerContractHandoff(mock.review_evidence_blocker_contract_static_handoff, pvosAdapterExample);
   assertAdapterNegativeStaticHandoff(
     mock.review_evidence_blocker_adapter_negative_static_handoff,
+    pvosAdapterNegativeExample
+  );
+  assertAdapterNegativeDraftOutputSnapshot(
+    adapterNegativeDraftOutputSnapshot,
+    mock,
+    renderedDraftOutput,
     pvosAdapterNegativeExample
   );
 
@@ -739,7 +956,11 @@ function main() {
     "review_evidence_blocker_adapter_negative_static_handoff.audit_summary",
     "review_evidence_blocker_adapter_negative_static_handoff.evidence_blocker_contract_matches_fixture",
     "adapterNegativeGuardSummary",
-    "adapterNegativeGuard"
+    "adapterNegativeGuard",
+    "v14.055 Adapter Negative Fixture Draft Output Snapshot",
+    "review_console_adapter_negative_fixture_draft_output_snapshot.example.json",
+    "adapter_negative_handoff_present_in_draft_output",
+    "adapter_negative_draft_output_snapshot_matches_static_mock"
   ]) {
     assert(fieldMapping.includes(text), `FIELD_MAPPING must document ${text}.`);
   }
@@ -799,6 +1020,14 @@ function main() {
       adapter_negative_no_production_candidate_verified: true,
       adapter_negative_no_direct_memory_write_verified: true,
       adapter_negative_no_accepted_samples_write_verified: true,
+      adapter_negative_draft_output_snapshot_present: true,
+      adapter_negative_draft_output_snapshot_matches_static_mock: true,
+      adapter_negative_draft_output_snapshot_matches_adapter_fixture: true,
+      adapter_negative_snapshot_memory_forbidden_verified: true,
+      adapter_negative_snapshot_never_production_verified: true,
+      adapter_negative_snapshot_no_production_candidate_verified: true,
+      adapter_negative_snapshot_no_direct_memory_write_verified: true,
+      adapter_negative_snapshot_no_accepted_samples_write_verified: true,
       static_app_draft_output_current: true,
       field_mapping_current: true,
       external_network_required: false,
