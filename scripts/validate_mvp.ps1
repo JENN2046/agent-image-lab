@@ -240,6 +240,7 @@ $requiredFiles = @(
   'docs/v14_068_review_report_adapter_handoff_gate.md',
   'docs/v14_069_review_report_console_binding_gate.md',
   'docs/v14_070_review_report_draft_output_snapshot_gate.md',
+  'docs/v14_071_review_report_negative_guard_static_handoff_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -6036,6 +6037,23 @@ if (-not $node) {
     )) {
       if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.($reviewReportCheck.Flag) -ne $true) {
         Add-Failure $reviewReportCheck.Message
+      }
+    }
+    foreach ($negativeReviewReportCheck in @(
+      @{ Flag = 'review_report_negative_guard_static_handoff_verified'; Message = 'Review Console Adapter handoff must verify negative ReviewReport static handoff' },
+      @{ Flag = 'review_report_negative_guard_guard_summary_verified'; Message = 'Review Console Adapter handoff must verify negative ReviewReport guard summary' },
+      @{ Flag = 'review_report_negative_guard_memory_forbidden_visible'; Message = 'Review Console Adapter handoff must verify negative ReviewReport memory-forbidden visibility' },
+      @{ Flag = 'review_report_negative_guard_never_production_visible'; Message = 'Review Console Adapter handoff must verify negative ReviewReport never-production visibility' },
+      @{ Flag = 'review_report_negative_guard_unknown_failure_visible'; Message = 'Review Console Adapter handoff must verify negative ReviewReport unknown failure visibility' },
+      @{ Flag = 'review_report_negative_guard_draft_output_matches_static_mock'; Message = 'Review Console Adapter handoff must verify negative ReviewReport draft output matches static mock' },
+      @{ Flag = 'review_report_negative_guard_no_daily_note_write_verified'; Message = 'Review Console Adapter handoff must verify negative ReviewReport performs no DailyNote write' },
+      @{ Flag = 'review_report_negative_guard_no_vcp_memory_write_verified'; Message = 'Review Console Adapter handoff must verify negative ReviewReport performs no VCP memory write' },
+      @{ Flag = 'review_report_negative_guard_no_accepted_samples_write_verified'; Message = 'Review Console Adapter handoff must verify negative ReviewReport performs no accepted_samples write' },
+      @{ Flag = 'review_report_negative_guard_no_production_candidate_verified'; Message = 'Review Console Adapter handoff must verify negative ReviewReport creates no production candidate' },
+      @{ Flag = 'review_report_negative_guard_no_provider_execution_verified'; Message = 'Review Console Adapter handoff must verify negative ReviewReport performs no provider execution' }
+    )) {
+      if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.($negativeReviewReportCheck.Flag) -ne $true) {
+        Add-Failure $negativeReviewReportCheck.Message
       }
     }
     if ($reviewConsoleAdapterHandoff.review_console_adapter_handoff.review_evidence_blocker_adapter_negative_static_handoff_verified -ne $true) {

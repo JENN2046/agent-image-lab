@@ -7,6 +7,56 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current phase: v14_071_review_report_negative_guard_static_handoff_gate.
+phase_status: completed_local_validated.
+source_phase: v14_070_review_report_draft_output_snapshot_gate.
+source_commit: 959bf1d.
+selected_product_route: review_report_negative_guard_static_handoff.
+Current mainline state: Agent Image Lab now exposes the negative-guard ReviewReport from the adapter negative fixture in the isolated static Review Console and draft output, making memory-forbidden rejection, unknown failure tags, and never-production exclusion visible while runtime, provider, plugin, API, image, accepted_samples, and memory writes remain blocked.
+phase_record: docs/v14_071_review_report_negative_guard_static_handoff_gate.md.
+static_mock_modified: review_console/static_prototype/mock_data.js.
+static_app_modified: review_console/static_prototype/app.js.
+static_html_modified: review_console/static_prototype/index.html.
+static_css_modified: review_console/static_prototype/styles.css.
+static_mapping_updated: review_console/static_prototype/FIELD_MAPPING.md.
+static_readme_updated: review_console/static_prototype/README.md.
+review_console_validator_modified: scripts/validate_review_console_adapter_handoff.js.
+mvp_validator_modified: scripts/validate_mvp.ps1.
+review_report_negative_guard_static_handoff_verified: true.
+review_report_negative_guard_guard_summary_verified: true.
+review_report_negative_guard_memory_forbidden_visible: true.
+review_report_negative_guard_never_production_visible: true.
+review_report_negative_guard_unknown_failure_visible: true.
+review_report_negative_guard_draft_output_matches_static_mock: true.
+review_report_negative_guard_no_daily_note_write_verified: true.
+review_report_negative_guard_no_vcp_memory_write_verified: true.
+review_report_negative_guard_no_accepted_samples_write_verified: true.
+review_report_negative_guard_no_production_candidate_verified: true.
+review_report_negative_guard_no_provider_execution_verified: true.
+direct_memory_write_performed: false.
+production_candidate_created: false.
+accepted_samples_written: false.
+image_binaries_read: false.
+runs_output_committed: false.
+runtime_prototype_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+plugin_call: false.
+api_call: false.
+image_generation: false.
+memory_write: false.
+DailyNote_write: false.
+VCP_memory_write: false.
+production_candidate_002: false.
+Batch_005: false.
+push_performed: false.
+recommended_next: v14_072_review_report_negative_guard_draft_output_snapshot_gate.
+recommended_next_auto_execution_allowed: true.
+push_requires_explicit_remote_authorization: true.
+runtime_provider_image_memory_production_batch: false.
+next_phase_started: false.
+---
 Current phase: v14_070_review_report_draft_output_snapshot_gate.
 phase_status: completed_local_validated.
 source_phase: v14_069_review_report_console_binding_gate.

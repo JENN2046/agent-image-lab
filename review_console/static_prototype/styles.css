@@ -559,6 +559,10 @@ input[type="range"] {
   border-left-color: var(--red);
 }
 
+.review-report-card.memory-forbidden {
+  border-left-color: var(--amber);
+}
+
 .adapter-negative-card.never-production {
   border-left-color: var(--red);
 }

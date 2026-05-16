@@ -27,6 +27,7 @@ const state = {
   review_evidence_blocker_contract_static_handoff: mock.review_evidence_blocker_contract_static_handoff,
   review_blocker_arbiter_static_handoff: mock.review_blocker_arbiter_static_handoff,
   review_report_static_handoff: mock.review_report_static_handoff,
+  review_report_negative_guard_static_handoff: mock.review_report_negative_guard_static_handoff,
   review_evidence_blocker_adapter_negative_static_handoff: mock.review_evidence_blocker_adapter_negative_static_handoff,
   humanScores: { ...mock.review_session.human_review.breakdown }
 };
@@ -544,6 +545,84 @@ function renderReviewReportHandoff() {
   `;
 }
 
+function renderNegativeReviewReportHandoff() {
+  const handoff = state.review_report_negative_guard_static_handoff;
+  const summary = handoff.report_summary;
+  const guardSummary = handoff.review_report_guard_summary;
+
+  qs("#negativeReviewReportSummary").innerHTML = `
+    <span>Negative ReviewReport <strong>${handoff.negative_guard_observed}</strong></span>
+    <span>Candidates <strong>${summary.candidate_count}</strong></span>
+    <span>Reject <strong>${summary.reject_count}</strong></span>
+    <span>Memory forbidden <strong>${guardSummary.memory_forbidden_candidate_ids.length}</strong></span>
+    <span>Never production <strong>${summary.never_production_count}</strong></span>
+  `;
+
+  qs("#negativeReviewReportGuardSummary").innerHTML = `
+    <article class="guard-tile">
+      <span>Memory entries now</span>
+      <strong>${guardSummary.memory_entry_allowed_now_count}</strong>
+    </article>
+    <article class="guard-tile">
+      <span>Production promotions now</span>
+      <strong>${guardSummary.production_promotion_allowed_now_count}</strong>
+    </article>
+    <article class="guard-tile">
+      <span>Writes allowed now</span>
+      <strong>${guardSummary.writes_allowed_now_count}</strong>
+    </article>
+    <article class="guard-tile wide">
+      <span>Memory forbidden ids</span>
+      <strong>${guardSummary.memory_forbidden_candidate_ids.join(", ") || "none"}</strong>
+    </article>
+    <article class="guard-tile wide">
+      <span>Never production ids</span>
+      <strong>${guardSummary.never_production_candidate_ids.join(", ") || "none"}</strong>
+    </article>
+  `;
+
+  const root = qs("#negativeReviewReportItemList");
+  root.innerHTML = "";
+  handoff.report_items.forEach((item) => {
+    const card = document.createElement("article");
+    const statusClass = item.memory_report.memory_forbidden ? "memory-forbidden" : "never-production";
+    card.className = `review-report-card ${statusClass}`;
+    card.innerHTML = `
+      <div class="protocol-card-head">
+        <strong>${item.candidate_id}</strong>
+        <span>${item.report_decision}</span>
+      </div>
+      <dl>
+        <div><dt>Review outcome</dt><dd>${item.review_outcome}</dd></div>
+        <div><dt>Final route</dt><dd>${item.final_route}</dd></div>
+        <div><dt>Evidence</dt><dd>${item.evidence_record_id}</dd></div>
+        <div><dt>Production blocker</dt><dd>${item.production_blocker_decision_id}</dd></div>
+        <div><dt>Memory blockers</dt><dd>${item.memory_blocker_decision_ids.join(", ") || "none"}</dd></div>
+        <div><dt>Failure tags</dt><dd>${item.failure_tags.join(", ") || "none"}</dd></div>
+        <div><dt>Unknown failure tags</dt><dd>${item.unknown_failure_tags.join(", ") || "none"}</dd></div>
+        <div><dt>Memory output</dt><dd>${item.memory_report.allowed_output_now}</dd></div>
+        <div><dt>Production output</dt><dd>${item.production_report.allowed_output_now}</dd></div>
+        <div><dt>Memory forbidden</dt><dd>${item.memory_report.memory_forbidden}</dd></div>
+        <div><dt>Never production</dt><dd>${item.production_report.never_production}</dd></div>
+        <div><dt>Writes allowed now</dt><dd>${item.final_controls.writes_allowed_now.length}</dd></div>
+        <div><dt>Execution blocked</dt><dd>${item.final_controls.execution_blocked.join(", ")}</dd></div>
+      </dl>
+    `;
+    root.appendChild(card);
+  });
+
+  qs("#negativeReviewReportGuard").innerHTML = `
+    <span>all report items explain candidates: ${summary.report_items_explain_all_candidates}</span>
+    <span>all memory writes blocked: ${summary.all_memory_writes_blocked}</span>
+    <span>all production writes blocked: ${summary.all_production_writes_blocked}</span>
+    <span>all provider execution blocked: ${summary.all_provider_execution_blocked}</span>
+    <span>DailyNote write: ${guardSummary.daily_note_write_performed}</span>
+    <span>VCP memory write: ${guardSummary.vcp_memory_write_performed}</span>
+    <span>accepted_samples write: ${guardSummary.accepted_samples_write_performed}</span>
+    <span>production candidate created: ${guardSummary.production_candidate_created}</span>
+  `;
+}
+
 function renderAdapterNegativeHandoff() {
   const handoff = state.review_evidence_blocker_adapter_negative_static_handoff;
   const guard = handoff.guard_summary;
@@ -786,6 +865,7 @@ function renderDraft() {
     review_evidence_blocker_contract_static_handoff: state.review_evidence_blocker_contract_static_handoff,
     review_blocker_arbiter_static_handoff: state.review_blocker_arbiter_static_handoff,
     review_report_static_handoff: state.review_report_static_handoff,
+    review_report_negative_guard_static_handoff: state.review_report_negative_guard_static_handoff,
     review_evidence_blocker_adapter_negative_static_handoff: state.review_evidence_blocker_adapter_negative_static_handoff,
     review_session: buildReviewSession(memoryApproval, humanTotal),
     image_case: buildImageCase(humanTotal),
@@ -813,6 +893,7 @@ function renderAll() {
   renderEvidenceBlockerHandoff();
   renderReviewBlockerArbiterHandoff();
   renderReviewReportHandoff();
+  renderNegativeReviewReportHandoff();
   renderAdapterNegativeHandoff();
   renderDraft();
 }

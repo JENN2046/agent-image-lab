@@ -223,6 +223,20 @@ Phase 9 审批记录必须满足：
 
 `review_console_review_report_draft_output_snapshot.example.json` 是草案输出回归证据，不是生产执行记录。它不得授权 provider contact、plugin/API 调用、图片生成、accepted_samples 写入、记忆写入或 production promotion。
 
+## v14.071 ReviewReport Negative Guard Static Handoff
+
+本节用于验收 `tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json` 中的负向 `ReviewReport` 合同进入静态 Review Console 可见 UI 与草案输出。它仍然只读取项目内 mock / fixture，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
+
+| Negative ReviewReport 字段 | Review Console 可见/草案字段 | 说明 |
+| --- | --- | --- |
+| `review_report_contract.report_items` | `review_report_negative_guard_static_handoff.report_items` / `negativeReviewReportItemList` | 两个 rejected candidates 必须解释 reject 原因、evidence record、production blocker、memory blocker、failure tags、unknown failure tags 和 final controls |
+| `review_report_contract.report_summary` | `review_report_negative_guard_static_handoff.report_summary` / `negativeReviewReportSummary` | 显示 candidate=2、pass=0、reject=2、never-production=2，并证明所有写入和 provider execution 被阻断 |
+| `review_console_handoff_draft.review_report_guard_summary.memory_forbidden_candidate_ids` | `review_report_negative_guard_static_handoff.review_report_guard_summary` / `negativeReviewReportGuardSummary` | `candidate_reject_unknown_guard_001` 必须保持 memory forbidden，不能生成 memory draft 或 memory entry |
+| `review_console_handoff_draft.review_report_guard_summary.never_production_candidate_ids` | `review_report_negative_guard_static_handoff.review_report_guard_summary` / `negativeReviewReportGuardSummary` | 两个 rejected candidates 必须永远不得进入 production |
+| `review_report_contract.no_execution_guard` | `review_report_negative_guard_static_handoff.no_execution_guard` / `negativeReviewReportGuard` | provider/plugin/API/image/DailyNote/VCP memory/output/accepted_samples/production candidate 写入必须保持 false |
+
+`review_report_negative_guard_static_handoff` 是负向审片结果的最终可读报告层。它让审片台直接看到 `reject_memory_forbidden_never_production`、`unmapped_identity_drift`、memory-forbidden ID 和 never-production ID；它不代表生产批准、accepted_samples 写入、记忆写入、插件调用、图片生成或 provider contact。
+
 ## v14.061 Review Blocker Arbiter Draft Output Snapshot
 
 本节用于验收静态 Review Console 的 `renderDraft()` 草案输出没有丢失审片阻断仲裁字段。它仍然只执行本目录内静态 JS 的 mock DOM 校验，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。

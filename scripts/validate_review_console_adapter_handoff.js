@@ -135,6 +135,10 @@ function loadRenderedStaticDraft(mock) {
     "reviewReportGuardSummary",
     "reviewReportItemList",
     "reviewReportGuard",
+    "negativeReviewReportSummary",
+    "negativeReviewReportGuardSummary",
+    "negativeReviewReportItemList",
+    "negativeReviewReportGuard",
     "adapterNegativeSummary",
     "adapterNegativeGuardSummary",
     "adapterNegativeBlockerList",
@@ -869,6 +873,169 @@ function assertReviewReportStaticHandoff(handoff, adapterExample) {
   }
 }
 
+function assertReviewReportNegativeGuardStaticHandoff(handoff, negativeAdapterExample) {
+  assert(handoff, "Static mock must expose review_report_negative_guard_static_handoff.");
+  assert(handoff.status === "draft_ready", "Negative ReviewReport static handoff must be draft_ready.");
+  assert(handoff.display_only === true, "Negative ReviewReport static handoff must be display-only.");
+  assert(handoff.negative_guard_observed === true, "Negative ReviewReport static handoff must observe negative guard.");
+  assert(
+    handoff.source_adapter_response_ref === "tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json",
+    "Negative ReviewReport static handoff must cite the negative adapter fixture."
+  );
+  assert(
+    handoff.review_report_contract_attached === true,
+    "Negative ReviewReport static handoff must mark report contract attached."
+  );
+
+  const report = negativeAdapterExample.review_report_contract;
+  const adapterHandoff = negativeAdapterExample.review_report_handoff_draft;
+  const consoleHandoff = negativeAdapterExample.review_console_handoff_draft;
+  const adapterGuardSummary = consoleHandoff.review_report_guard_summary;
+  assert(report, "Negative adapter example must include review_report_contract.");
+  assert(adapterHandoff, "Negative adapter example must include review_report_handoff_draft.");
+  assert(consoleHandoff, "Negative adapter example must include Review Console handoff draft.");
+  assert(adapterGuardSummary, "Negative adapter example must include Review Console review report guard summary.");
+  assert(
+    handoff.review_report_handoff_id === consoleHandoff.review_report_handoff_id,
+    "Negative ReviewReport handoff id must match Review Console adapter handoff."
+  );
+  assert(handoff.review_report_handoff_id === adapterHandoff.handoff_id, "Negative ReviewReport handoff id must match adapter handoff.");
+  assert(handoff.review_report_id === adapterHandoff.review_report_id, "Negative ReviewReport id must match adapter handoff.");
+  assert(
+    handoff.source_review_blocker_arbiter_id === adapterHandoff.source_review_blocker_arbiter_id,
+    "Negative ReviewReport source arbiter must match adapter handoff."
+  );
+  assert(
+    handoff.source_evidence_blocker_contract_id === adapterHandoff.source_evidence_blocker_contract_id,
+    "Negative ReviewReport source evidence contract must match adapter handoff."
+  );
+  assert(
+    handoff.source_decision_package_id === adapterHandoff.source_decision_package_id,
+    "Negative ReviewReport source decision package must match adapter handoff."
+  );
+  assert(
+    handoff.source_protocol_id === adapterHandoff.source_protocol_id,
+    "Negative ReviewReport source protocol must match adapter handoff."
+  );
+  assert(
+    handoff.source_kernel_run_id === adapterHandoff.source_kernel_run_id,
+    "Negative ReviewReport source kernel run must match adapter handoff."
+  );
+  assertArrayEqual(
+    handoff.required_review_report_fields,
+    adapterHandoff.required_review_report_fields,
+    "Negative ReviewReport required fields must match adapter handoff"
+  );
+  assertDeepEqual(
+    handoff.report_items,
+    report.report_items,
+    "Negative ReviewReport items must match adapter report contract."
+  );
+  assertDeepEqual(
+    handoff.report_summary,
+    report.report_summary,
+    "Negative ReviewReport summary must match adapter report contract."
+  );
+
+  const guardSummary = handoff.review_report_guard_summary;
+  assertDeepEqual(
+    guardSummary,
+    adapterGuardSummary,
+    "Negative ReviewReport guard summary must match adapter Review Console guard."
+  );
+  assert(guardSummary.candidate_count === 2, "Negative ReviewReport guard must count two candidates.");
+  assert(guardSummary.pass_count === 0, "Negative ReviewReport guard must count zero pass candidates.");
+  assert(guardSummary.reject_count === 2, "Negative ReviewReport guard must count two rejected candidates.");
+  assert(guardSummary.never_production_count === 2, "Negative ReviewReport guard must keep all rejected candidates never-production.");
+  assert(guardSummary.memory_entry_allowed_now_count === 0, "Negative ReviewReport guard must allow no memory entries now.");
+  assert(guardSummary.production_promotion_allowed_now_count === 0, "Negative ReviewReport guard must allow no production promotions now.");
+  assert(guardSummary.writes_allowed_now_count === 0, "Negative ReviewReport guard must allow no writes now.");
+  assertArrayEqual(
+    guardSummary.never_production_candidate_ids,
+    ["candidate_reject_mapped_guard_001", "candidate_reject_unknown_guard_001"],
+    "Negative ReviewReport never-production IDs must include both rejected candidates"
+  );
+  assertArrayEqual(
+    guardSummary.memory_forbidden_candidate_ids,
+    ["candidate_reject_unknown_guard_001"],
+    "Negative ReviewReport memory-forbidden IDs must include the unknown failure candidate"
+  );
+  assert(guardSummary.all_memory_writes_blocked === true, "Negative ReviewReport guard must block all memory writes.");
+  assert(guardSummary.all_production_writes_blocked === true, "Negative ReviewReport guard must block all production writes.");
+  assert(guardSummary.all_provider_execution_blocked === true, "Negative ReviewReport guard must block provider execution.");
+  assert(guardSummary.production_candidate_created === false, "Negative ReviewReport guard must not create production candidates.");
+  assert(guardSummary.direct_memory_write_performed === false, "Negative ReviewReport guard must not write memory directly.");
+  assert(guardSummary.daily_note_write_performed === false, "Negative ReviewReport guard must not write DailyNote.");
+  assert(guardSummary.vcp_memory_write_performed === false, "Negative ReviewReport guard must not write VCP memory.");
+  assert(guardSummary.accepted_samples_write_performed === false, "Negative ReviewReport guard must not write accepted samples.");
+
+  const mappedReject = handoff.report_items.find((item) => item.candidate_id === "candidate_reject_mapped_guard_001");
+  const unknownReject = handoff.report_items.find((item) => item.candidate_id === "candidate_reject_unknown_guard_001");
+  assert(mappedReject, "Negative ReviewReport must include mapped-failure rejected item.");
+  assert(unknownReject, "Negative ReviewReport must include unknown-failure rejected item.");
+  assert(mappedReject.review_outcome === "reject", "Mapped negative ReviewReport item must reject.");
+  assert(mappedReject.final_route === "reject_failure_learning_only_never_production", "Mapped negative item must route to failure learning only.");
+  assert(mappedReject.failure_tags.includes("lighting_flat"), "Mapped negative item must carry mapped failure tags.");
+  assert(mappedReject.unknown_failure_tags.length === 0, "Mapped negative item must not carry unknown failure tags.");
+  assert(mappedReject.memory_report.allowed_output_now === "failure_lesson_draft_only", "Mapped negative item must allow only failure lesson draft output.");
+  assert(mappedReject.memory_report.memory_forbidden === false, "Mapped negative item must not be memory-forbidden.");
+  assert(mappedReject.memory_report.memory_draft_allowed === true, "Mapped negative item may only draft a failure lesson.");
+  assert(mappedReject.production_report.never_production === true, "Mapped negative item must stay never-production.");
+  assert(mappedReject.production_report.production_candidate_created === false, "Mapped negative item must not create production candidate.");
+  assert(mappedReject.production_report.accepted_samples_write_performed === false, "Mapped negative item must not write accepted samples.");
+  assert(mappedReject.final_controls.writes_allowed_now.length === 0, "Mapped negative item must allow no writes now.");
+  assert(mappedReject.final_controls.execution_blocked.includes("production_forever"), "Mapped negative item must block production forever.");
+
+  assert(unknownReject.review_outcome === "reject", "Unknown negative ReviewReport item must reject.");
+  assert(
+    unknownReject.final_route === "reject_memory_forbidden_never_production",
+    "Unknown negative item must route to memory-forbidden never-production."
+  );
+  assert(
+    unknownReject.reject_reasons.includes("unknown_failure_tags_present"),
+    "Unknown negative item must explain unknown failure tags."
+  );
+  assert(
+    unknownReject.failure_tags.includes("unmapped_identity_drift"),
+    "Unknown negative item must carry unmapped identity drift as failure tag."
+  );
+  assert(
+    unknownReject.unknown_failure_tags.includes("unmapped_identity_drift"),
+    "Unknown negative item must expose unknown failure tags."
+  );
+  assert(
+    unknownReject.memory_blocker_decision_ids.includes("blocker_memory_candidate_reject_unknown_guard_001"),
+    "Unknown negative item must expose memory blocker decision."
+  );
+  assert(unknownReject.memory_report.allowed_output_now === "none", "Unknown negative item must allow no memory output now.");
+  assert(unknownReject.memory_report.memory_forbidden === true, "Unknown negative item must be memory-forbidden.");
+  assert(unknownReject.memory_report.memory_draft_allowed === false, "Unknown negative item must not create memory draft.");
+  assert(unknownReject.memory_report.direct_memory_write_performed === false, "Unknown negative item must not write memory directly.");
+  assert(unknownReject.memory_report.daily_note_write_performed === false, "Unknown negative item must not write DailyNote.");
+  assert(unknownReject.memory_report.vcp_memory_write_performed === false, "Unknown negative item must not write VCP memory.");
+  assert(unknownReject.production_report.never_production === true, "Unknown negative item must stay never-production.");
+  assert(unknownReject.production_report.production_candidate_created === false, "Unknown negative item must not create production candidate.");
+  assert(unknownReject.production_report.accepted_samples_write_performed === false, "Unknown negative item must not write accepted samples.");
+  assert(unknownReject.final_controls.may_enter_memory_now === false, "Unknown negative item must not enter memory now.");
+  assert(unknownReject.final_controls.may_enter_production_now === false, "Unknown negative item must not enter production now.");
+  assert(unknownReject.final_controls.writes_allowed_now.length === 0, "Unknown negative item must allow no writes now.");
+  assert(unknownReject.final_controls.execution_blocked.includes("production_forever"), "Unknown negative item must block production forever.");
+
+  for (const key of [
+    "provider_contact_performed",
+    "plugin_call_performed",
+    "api_call_performed",
+    "daily_note_write_performed",
+    "vcp_memory_write_performed",
+    "image_generation_performed",
+    "output_file_write_performed",
+    "accepted_samples_write_performed",
+    "production_candidate_created",
+  ]) {
+    assert(handoff.no_execution_guard[key] === false, `Negative ReviewReport no-execution guard ${key} must be false.`);
+  }
+}
+
 function assertAdapterNegativeStaticHandoff(handoff, negativeAdapterExample) {
   assert(handoff, "Static mock must expose review_evidence_blocker_adapter_negative_static_handoff.");
   assert(handoff.status === "draft_ready", "Adapter negative static handoff must be draft_ready.");
@@ -1354,6 +1521,15 @@ function main() {
     mock.review_report_static_handoff,
     "Rendered draft output ReviewReport handoff must match static mock handoff."
   );
+  assertReviewReportNegativeGuardStaticHandoff(
+    mock.review_report_negative_guard_static_handoff,
+    pvosAdapterNegativeExample
+  );
+  assertDeepEqual(
+    renderedDraftOutput.review_report_negative_guard_static_handoff,
+    mock.review_report_negative_guard_static_handoff,
+    "Rendered draft output negative ReviewReport handoff must match static mock handoff."
+  );
   assertReviewReportDraftOutputSnapshot(
     reviewReportDraftOutputSnapshot,
     mock,
@@ -1402,6 +1578,10 @@ function main() {
     "Static app must carry review_report_static_handoff into draft output."
   );
   assert(
+    appSource.includes("review_report_negative_guard_static_handoff"),
+    "Static app must carry review_report_negative_guard_static_handoff into draft output."
+  );
+  assert(
     appSource.includes("review_evidence_blocker_adapter_negative_static_handoff"),
     "Static app must carry review_evidence_blocker_adapter_negative_static_handoff into draft output."
   );
@@ -1410,6 +1590,7 @@ function main() {
   assert(appSource.includes("renderEvidenceBlockerHandoff"), "Static app must render evidence blocker handoff.");
   assert(appSource.includes("renderReviewBlockerArbiterHandoff"), "Static app must render review blocker arbiter handoff.");
   assert(appSource.includes("renderReviewReportHandoff"), "Static app must render ReviewReport handoff.");
+  assert(appSource.includes("renderNegativeReviewReportHandoff"), "Static app must render negative ReviewReport handoff.");
   assert(appSource.includes("renderAdapterNegativeHandoff"), "Static app must render adapter negative handoff.");
   assert(indexSource.includes("protocolCandidateList"), "Static HTML must expose protocol candidate list.");
   assert(indexSource.includes("protocolSummary"), "Static HTML must expose protocol summary.");
@@ -1432,6 +1613,10 @@ function main() {
   assert(indexSource.includes("reviewReportGuardSummary"), "Static HTML must expose ReviewReport guard summary.");
   assert(indexSource.includes("reviewReportItemList"), "Static HTML must expose ReviewReport item list.");
   assert(indexSource.includes("reviewReportGuard"), "Static HTML must expose ReviewReport guard.");
+  assert(indexSource.includes("negativeReviewReportSummary"), "Static HTML must expose negative ReviewReport summary.");
+  assert(indexSource.includes("negativeReviewReportGuardSummary"), "Static HTML must expose negative ReviewReport guard summary.");
+  assert(indexSource.includes("negativeReviewReportItemList"), "Static HTML must expose negative ReviewReport item list.");
+  assert(indexSource.includes("negativeReviewReportGuard"), "Static HTML must expose negative ReviewReport guard.");
   assert(indexSource.includes("adapterNegativeSummary"), "Static HTML must expose adapter negative summary.");
   assert(indexSource.includes("adapterNegativeGuardSummary"), "Static HTML must expose adapter negative guard summary.");
   assert(indexSource.includes("adapterNegativeBlockerList"), "Static HTML must expose adapter negative blocker list.");
@@ -1449,6 +1634,7 @@ function main() {
   assert(styleSource.includes(".blocker-arbiter-card.never-production"), "Static CSS must style never-production blocker arbiter cards.");
   assert(styleSource.includes(".review-report-section"), "Static CSS must style ReviewReport section.");
   assert(styleSource.includes(".review-report-card.never-production"), "Static CSS must style never-production ReviewReport cards.");
+  assert(styleSource.includes(".review-report-card.memory-forbidden"), "Static CSS must style memory-forbidden ReviewReport cards.");
   assert(styleSource.includes(".adapter-negative-section"), "Static CSS must style adapter negative section.");
   assert(styleSource.includes(".adapter-negative-card.memory-forbidden"), "Static CSS must style memory-forbidden adapter negative cards.");
   assert(appSource.includes("Never production"), "Static app must expose never production summary copy.");
@@ -1476,6 +1662,9 @@ function main() {
   assert(appSource.includes("Production promotions now"), "Static app must expose ReviewReport production guard copy.");
   assert(appSource.includes("Writes allowed now"), "Static app must expose ReviewReport write guard copy.");
   assert(appSource.includes("all report items explain candidates"), "Static app must expose ReviewReport explanation guard copy.");
+  assert(appSource.includes("Negative ReviewReport"), "Static app must expose negative ReviewReport copy.");
+  assert(appSource.includes("Memory forbidden ids"), "Static app must expose negative ReviewReport memory-forbidden IDs copy.");
+  assert(appSource.includes("Unknown failure tags"), "Static app must expose negative ReviewReport unknown failure tags copy.");
   assert(appSource.includes("Adapter negative fixture"), "Static app must expose adapter negative fixture copy.");
   assert(appSource.includes("Golden fixture match"), "Static app must expose golden fixture match copy.");
   assert(appSource.includes("Memory forbidden IDs"), "Static app must expose memory-forbidden IDs copy.");
@@ -1537,6 +1726,15 @@ function main() {
     "review_report_handoff_present_in_draft_output",
     "review_report_draft_output_snapshot_matches_static_mock",
     "review_report_draft_output_snapshot_matches_adapter_fixture",
+    "v14.071 ReviewReport Negative Guard Static Handoff",
+    "review_report_negative_guard_static_handoff.report_items",
+    "review_report_negative_guard_static_handoff.report_summary",
+    "review_report_negative_guard_static_handoff.review_report_guard_summary",
+    "review_report_negative_guard_static_handoff.no_execution_guard",
+    "negativeReviewReportGuardSummary",
+    "negativeReviewReportItemList",
+    "reject_memory_forbidden_never_production",
+    "unmapped_identity_drift",
     "v14.061 Review Blocker Arbiter Draft Output Snapshot",
     "review_console_blocker_arbiter_draft_output_snapshot.example.json",
     "blocker_arbiter_handoff_present_in_draft_output",
@@ -1651,6 +1849,17 @@ function main() {
       review_report_snapshot_no_accepted_samples_write_verified: true,
       review_report_snapshot_no_production_candidate_verified: true,
       review_report_snapshot_no_provider_execution_verified: true,
+      review_report_negative_guard_static_handoff_verified: true,
+      review_report_negative_guard_guard_summary_verified: true,
+      review_report_negative_guard_memory_forbidden_visible: true,
+      review_report_negative_guard_never_production_visible: true,
+      review_report_negative_guard_unknown_failure_visible: true,
+      review_report_negative_guard_draft_output_matches_static_mock: true,
+      review_report_negative_guard_no_daily_note_write_verified: true,
+      review_report_negative_guard_no_vcp_memory_write_verified: true,
+      review_report_negative_guard_no_accepted_samples_write_verified: true,
+      review_report_negative_guard_no_production_candidate_verified: true,
+      review_report_negative_guard_no_provider_execution_verified: true,
       review_evidence_blocker_adapter_negative_static_handoff_verified: true,
       adapter_negative_fixture_guard_summary_verified: true,
       adapter_negative_memory_forbidden_visible: true,
