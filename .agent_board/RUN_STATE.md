@@ -9,15 +9,48 @@ A4.8 — Safe Project Operator Rail under A4 — Sustained Local Autopilot bound
 ## Current Mission
 
 ```text
-Agent Image Lab is in v14_019_product_route_planning_selection_gate. The Review Console static prototype remains archived, and this docs-only gate selects B_visual_eval_and_failure_taxonomy_planning as the next concrete product-planning route. It does not authorize prototype file edits, browser preview, runtime execution, provider contact, image generation, memory writes, accepted_samples writes, runs image binary reads, dependencies, production_candidate_002, memory_write_path, or Batch_005.
+Agent Image Lab is in v14_020_visual_eval_and_failure_taxonomy_planning_gate. The Review Console static prototype remains archived, and this docs-only gate defines the first visual judgment planning layer: rubric dimensions, failure taxonomy, accepted/rejected policy, and minimal eval seed targets. It does not authorize schemas, eval sample files, accepted_samples writes, prototype edits, browser preview, runtime execution, provider contact, image generation, memory writes, production_candidate_002, memory_write_path, or Batch_005.
 ```
 
 ## Current Phase
 
 ```text
+V14.020 Visual Eval and Failure Taxonomy Planning Gate
+phase_id: v14_020_visual_eval_and_failure_taxonomy_planning_gate
+status: completed_validated_pending_guarded_commit_push
+source_phase: v14_019_product_route_planning_selection_gate
+source_commit: e5705dbb678acb60339ef1ad3f3476223c338711
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+branch: master tracking origin/master
+phase_record: docs/v14_020_visual_eval_and_failure_taxonomy_planning_gate.md
+visual_rubric_planning_created: true
+failure_taxonomy_planning_created: true
+accepted_rejected_policy_draft_created: true
+minimal_eval_seed_planning_created: true
+schema_files_created: false
+eval_samples_created: false
+accepted_samples_written: false
+prototype_files_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+image_generation: false
+memory_write: false
+runs_output_committed: false
+runs_image_binary_read: false
+production_candidate_002: false
+memory_write_path: false
+Batch_005: false
+dependency_change: false
+package_json_modified: false
+package_lock_modified: false
+recommended_next: v14_021_visual_eval_rubric_fields_planning_gate
+recommended_next_auto_execution_allowed: true
+next_phase_started: false
+---
 V14.019 Product Route Planning Selection Gate
 phase_id: v14_019_product_route_planning_selection_gate
-status: completed_validated_product_route_selection_local
+status: completed_remote_synced_after_guarded_push
 source_phase: v14_018_post_archive_project_route_selection_gate
 source_commit: d8943f154338c0213ea10a172b837534c25661f2
 branch: master tracking origin/master

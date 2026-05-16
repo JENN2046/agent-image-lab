@@ -8,6 +8,34 @@ source of truth. Detailed history and operating authority remain in `README.md`,
 
 ```text
 branch: master
+latest_head_after_v14_020_visual_eval_taxonomy_planning: e5705dbb678acb60339ef1ad3f3476223c338711
+status: v14_020_visual_eval_and_failure_taxonomy_planning_gate
+mode: A4.8 docs-only product planning gate
+phase_id: v14_020_visual_eval_and_failure_taxonomy_planning_gate
+source_phase: v14_019_product_route_planning_selection_gate
+source_commit: e5705dbb678acb60339ef1ad3f3476223c338711
+phase_record: docs/v14_020_visual_eval_and_failure_taxonomy_planning_gate.md
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+visual_rubric_planning_created: true
+failure_taxonomy_planning_created: true
+accepted_rejected_policy_draft_created: true
+minimal_eval_seed_planning_created: true
+schema_files_created: false
+eval_samples_created: false
+accepted_samples_written: false
+prototype_files_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+image_generation: false
+memory_write: false
+runs_output_committed: false
+dependency_change: false
+Batch_005: false
+production_candidate_002: false
+recommended_next: v14_021_visual_eval_rubric_fields_planning_gate
+recommended_next_auto_execution_allowed: true
+branch: master
 latest_head_after_v14_019_product_route_selection: d8943f154338c0213ea10a172b837534c25661f2
 status: v14_019_product_route_planning_selection_gate
 mode: A4.8 docs-only product route selection gate

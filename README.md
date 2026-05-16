@@ -7,6 +7,30 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current phase: v14_020_visual_eval_and_failure_taxonomy_planning_gate.
+Current local/remote baseline after v14.019 product route selection sync: e5705dbb678acb60339ef1ad3f3476223c338711.
+Current mainline state: Visual evaluation and failure taxonomy planning defines the first docs-only product judgment layer after Review Console static prototype archive. It drafts visual review rubric dimensions, failure taxonomy, accepted/rejected policy, and minimal eval seed targets. No schema files, eval samples, accepted_samples, image generation, runtime, provider contact, memory write, production_candidate_002, or Batch_005 are created or authorized.
+phase_record: docs/v14_020_visual_eval_and_failure_taxonomy_planning_gate.md.
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning.
+visual_rubric_planning_created: true.
+failure_taxonomy_planning_created: true.
+accepted_rejected_policy_draft_created: true.
+minimal_eval_seed_planning_created: true.
+schema_files_created: false.
+eval_samples_created: false.
+accepted_samples_written: false.
+prototype_files_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+image_generation: false.
+memory_write: false.
+runs_output_committed: false.
+dependency_change: false.
+Batch_005: false.
+production_candidate_002: false.
+recommended_next: v14_021_visual_eval_rubric_fields_planning_gate.
+recommended_next_auto_execution_allowed: true.
 Current phase: v14_019_product_route_planning_selection_gate.
 Current local/remote baseline after v14.018 post-archive route sync: d8943f154338c0213ea10a172b837534c25661f2.
 Current mainline state: Product route planning selects B_visual_eval_and_failure_taxonomy_planning as the next concrete route after archiving the Review Console static prototype. The archived prototype remains frozen, and no runtime, provider contact, image generation, memory write, accepted_samples write, production_candidate_002, memory_write_path, or Batch_005 is authorized.

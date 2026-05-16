@@ -3,7 +3,37 @@
 ## Handoff Summary
 
 ```text
-Status: v14_019_product_route_planning_selection_gate completed local validation; local commit pending.
+Status: v14_020_visual_eval_and_failure_taxonomy_planning_gate completed validation; guarded commit and push pending.
+Reason: V14.020 creates the first docs-only visual judgment planning layer after selecting B_visual_eval_and_failure_taxonomy_planning. It defines rubric dimensions, failure categories, accepted/rejected policy, and minimal eval seed targets without creating schemas, sample files, registries, runtime, provider, image, memory, production candidate, or Batch_005 paths.
+Current repository: A:/agent-image-lab/agent-image-lab-v0.2
+Branch: master tracking origin/master
+Source commit: e5705dbb678acb60339ef1ad3f3476223c338711
+Current status: v14_020_visual_eval_and_failure_taxonomy_planning_gate
+phase_record: docs/v14_020_visual_eval_and_failure_taxonomy_planning_gate.md
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+visual_rubric_planning_created: true
+failure_taxonomy_planning_created: true
+accepted_rejected_policy_draft_created: true
+minimal_eval_seed_planning_created: true
+schema_files_created: false
+eval_samples_created: false
+accepted_samples_written: false
+prototype_files_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+image_generation: false
+memory_write: false
+runs_output_committed: false
+runs_image_binary_read: false
+production_candidate_002: false
+memory_write_path: false
+Batch_005: false
+recommended_next: v14_021_visual_eval_rubric_fields_planning_gate
+recommended_next_auto_execution_allowed: true
+next_phase_started: false
+---
+Status: v14_019_product_route_planning_selection_gate completed and remote synced.
 Reason: V14.019 selects B_visual_eval_and_failure_taxonomy_planning as the next concrete product route after archiving the Review Console static prototype. The next route is docs-only visual judgment infrastructure planning. No prototype file edits, browser preview, runtime, provider contact, image generation, memory write, accepted_samples write, runs binary read, dependency change, production_candidate_002, memory_write_path, or Batch_005 are authorized by this gate.
 Current repository: A:/agent-image-lab/agent-image-lab-v0.2
 Branch: master tracking origin/master
