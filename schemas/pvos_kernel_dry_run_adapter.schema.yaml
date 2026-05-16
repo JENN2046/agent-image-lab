@@ -17,6 +17,8 @@ pvos_kernel_dry_run_adapter_response:
     - review_decision_package_handoff_draft
     - evidence_blocker_contract
     - evidence_blocker_contract_handoff_draft
+    - review_blocker_arbiter
+    - review_blocker_arbiter_handoff_draft
     - vcp_adapter_handoff_draft
     - review_console_handoff_draft
     - provenance_handoff_draft
@@ -161,6 +163,57 @@ pvos_kernel_dry_run_adapter_response:
       - production_exclusion_register
       - blocker_summary
       - arbitration_guard
+  review_blocker_arbiter:
+    review_blocker_arbiter_version: v1
+    status: completed_local_blocker_arbiter
+    mode: local_stdout_only_blocker_arbiter
+    candidate_arbitrations: array
+    arbiter_summary:
+      candidate_count: integer
+      memory_forbidden_count: integer
+      never_production_count: integer
+      production_blocked_count: integer
+      all_production_blocked: true
+      all_writes_blocked: true
+      direct_memory_write_performed: false
+      production_candidate_created: false
+      accepted_samples_write_performed: false
+    promotion_guard:
+      evidence_required_for_every_candidate: true
+      blocker_required_for_every_candidate: true
+      memory_forbidden_prevents_memory: true
+      never_production_prevents_production: true
+      pass_is_not_production_approval: true
+      human_review_required_before_production: true
+      production_candidate_created: false
+      direct_memory_write_performed: false
+      accepted_samples_write_performed: false
+  review_blocker_arbiter_handoff_draft:
+    status: draft_ready
+    candidate_count: integer
+    memory_forbidden_count: integer
+    never_production_count: integer
+    production_blocked_count: integer
+    permanent_block_count: integer
+    human_review_required_count: integer
+    memory_forbidden_candidate_ids: array
+    never_production_candidate_ids: array
+    production_blocked_candidate_ids: array
+    final_route_by_candidate: array
+    production_promotion_allowed_now: false
+    memory_entry_allowed_now: false
+    direct_memory_write_performed: false
+    production_candidate_created: false
+    accepted_samples_write_performed: false
+    memory_forbidden_prevents_memory: true
+    never_production_prevents_production: true
+    pass_is_not_production_approval: true
+    human_review_required_before_production: true
+    required_arbiter_fields:
+      - candidate_arbitrations
+      - arbiter_summary
+      - promotion_guard
+      - no_execution_guard
   review_console_handoff_draft:
     display_only: true
     human_review_required_for_production: true
@@ -168,6 +221,7 @@ pvos_kernel_dry_run_adapter_response:
     review_result_protocol_report_attached: true
     review_decision_package_attached: true
     evidence_blocker_contract_attached: true
+    review_blocker_arbiter_attached: true
     review_protocol_guard_summary:
       never_production_count: integer
       memory_forbidden_count: integer
@@ -196,6 +250,21 @@ pvos_kernel_dry_run_adapter_response:
       every_candidate_has_evidence_record: true
       every_candidate_has_production_blocker_decision: true
       every_never_production_candidate_has_exclusion: true
+    review_blocker_arbiter_guard_summary:
+      candidate_count: integer
+      memory_forbidden_count: integer
+      never_production_count: integer
+      production_blocked_count: integer
+      memory_forbidden_candidate_ids: array
+      never_production_candidate_ids: array
+      production_promotion_allowed_now: false
+      memory_entry_allowed_now: false
+      production_candidate_created: false
+      direct_memory_write_performed: false
+      accepted_samples_write_performed: false
+      memory_forbidden_prevents_memory: true
+      never_production_prevents_production: true
+      human_review_required_before_production: true
     forbidden_actions:
       - execute_plugin
       - call_api

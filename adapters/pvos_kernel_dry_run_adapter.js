@@ -8,6 +8,7 @@ const {
 } = require("../kernel/review_result_protocol");
 const { buildReviewDecisionPackage } = require("../kernel/review_decision_package");
 const { buildEvidenceBlockerContract } = require("../kernel/evidence_blocker_contract");
+const { buildReviewBlockerArbiter } = require("../kernel/review_blocker_arbiter");
 
 const defaultInputPath = "tests/schema_examples/pvos_kernel_input.example.json";
 const defaultProtocolInputPath = "tests/schema_examples/review_result_protocol_input.example.json";
@@ -204,6 +205,71 @@ function buildEvidenceBlockerContractHandoff(evidenceBlockerContract) {
   };
 }
 
+function buildReviewBlockerArbiterHandoff(reviewBlockerArbiter) {
+  const candidateArbitrations = reviewBlockerArbiter.candidate_arbitrations || [];
+  const memoryForbiddenCandidateIds = candidateArbitrations
+    .filter((item) => item.memory_forbidden === true)
+    .map((item) => item.candidate_id);
+  const neverProductionCandidateIds = candidateArbitrations
+    .filter((item) => item.never_production === true)
+    .map((item) => item.candidate_id);
+  const productionBlockedCandidateIds = candidateArbitrations
+    .filter((item) => item.production_promotion_allowed_now === false)
+    .map((item) => item.candidate_id);
+
+  return {
+    handoff_id: `review_blocker_arbiter_handoff_${reviewBlockerArbiter.task_id}`,
+    arbiter_id: reviewBlockerArbiter.arbiter_id,
+    source_evidence_blocker_contract_id:
+      reviewBlockerArbiter.source_evidence_blocker_contract_id,
+    source_decision_package_id: reviewBlockerArbiter.source_decision_package_id,
+    source_protocol_id: reviewBlockerArbiter.source_protocol_id,
+    source_kernel_run_id: reviewBlockerArbiter.source_kernel_run_id,
+    status: "draft_ready",
+    candidate_count: reviewBlockerArbiter.arbiter_summary.candidate_count,
+    memory_forbidden_count: reviewBlockerArbiter.arbiter_summary.memory_forbidden_count,
+    never_production_count: reviewBlockerArbiter.arbiter_summary.never_production_count,
+    production_blocked_count: reviewBlockerArbiter.arbiter_summary.production_blocked_count,
+    permanent_block_count: reviewBlockerArbiter.arbiter_summary.permanent_block_count,
+    human_review_required_count:
+      reviewBlockerArbiter.arbiter_summary.human_review_required_count,
+    memory_forbidden_candidate_ids: memoryForbiddenCandidateIds,
+    never_production_candidate_ids: neverProductionCandidateIds,
+    production_blocked_candidate_ids: productionBlockedCandidateIds,
+    final_route_by_candidate: candidateArbitrations.map((item) => ({
+      candidate_id: item.candidate_id,
+      final_route: item.final_route,
+      production_decision: item.production_decision,
+      memory_decision: item.memory_decision,
+      memory_forbidden: item.memory_forbidden,
+      never_production: item.never_production,
+    })),
+    production_promotion_allowed_now: false,
+    memory_entry_allowed_now: false,
+    direct_memory_write_performed: false,
+    production_candidate_created: false,
+    accepted_samples_write_performed: false,
+    evidence_required_for_every_candidate:
+      reviewBlockerArbiter.promotion_guard.evidence_required_for_every_candidate,
+    blocker_required_for_every_candidate:
+      reviewBlockerArbiter.promotion_guard.blocker_required_for_every_candidate,
+    memory_forbidden_prevents_memory:
+      reviewBlockerArbiter.promotion_guard.memory_forbidden_prevents_memory,
+    never_production_prevents_production:
+      reviewBlockerArbiter.promotion_guard.never_production_prevents_production,
+    pass_is_not_production_approval:
+      reviewBlockerArbiter.promotion_guard.pass_is_not_production_approval,
+    human_review_required_before_production:
+      reviewBlockerArbiter.promotion_guard.human_review_required_before_production,
+    required_arbiter_fields: [
+      "candidate_arbitrations",
+      "arbiter_summary",
+      "promotion_guard",
+      "no_execution_guard",
+    ],
+  };
+}
+
 function buildAdapterResponse(input, protocolInput) {
   const kernelRun = buildKernelRun(input);
   const protocolReport = buildReviewResultProtocolReport(protocolInput, kernelRun);
@@ -212,6 +278,8 @@ function buildAdapterResponse(input, protocolInput) {
   const decisionPackageHandoff = buildDecisionPackageHandoff(decisionPackage);
   const evidenceBlockerContract = buildEvidenceBlockerContract(decisionPackage);
   const evidenceBlockerContractHandoff = buildEvidenceBlockerContractHandoff(evidenceBlockerContract);
+  const reviewBlockerArbiter = buildReviewBlockerArbiter(evidenceBlockerContract);
+  const reviewBlockerArbiterHandoff = buildReviewBlockerArbiterHandoff(reviewBlockerArbiter);
   const acceptedCandidateIds = kernelRun.accepted_samples.map((sample) => sample.candidate_id);
   const rejectedCandidateIds = kernelRun.rejected_samples.map((sample) => sample.candidate_id);
 
@@ -228,6 +296,8 @@ function buildAdapterResponse(input, protocolInput) {
     review_decision_package_handoff_draft: decisionPackageHandoff,
     evidence_blocker_contract: evidenceBlockerContract,
     evidence_blocker_contract_handoff_draft: evidenceBlockerContractHandoff,
+    review_blocker_arbiter: reviewBlockerArbiter,
+    review_blocker_arbiter_handoff_draft: reviewBlockerArbiterHandoff,
     vcp_adapter_handoff_draft: {
       handoff_id: `vcp_handoff_${kernelRun.task_id}`,
       target_platform: "VCP_adapter_future",
@@ -269,6 +339,8 @@ function buildAdapterResponse(input, protocolInput) {
       review_decision_package_handoff_id: decisionPackageHandoff.handoff_id,
       evidence_blocker_contract_attached: true,
       evidence_blocker_contract_handoff_id: evidenceBlockerContractHandoff.handoff_id,
+      review_blocker_arbiter_attached: true,
+      review_blocker_arbiter_handoff_id: reviewBlockerArbiterHandoff.handoff_id,
       required_review_fields: protocolHandoff.required_review_fields,
       review_protocol_guard_summary: {
         never_production_count: protocolHandoff.never_production_count,
@@ -308,6 +380,27 @@ function buildAdapterResponse(input, protocolInput) {
         every_never_production_candidate_has_exclusion:
           evidenceBlockerContractHandoff.every_never_production_candidate_has_exclusion,
       },
+      review_blocker_arbiter_guard_summary: {
+        candidate_count: reviewBlockerArbiterHandoff.candidate_count,
+        memory_forbidden_count: reviewBlockerArbiterHandoff.memory_forbidden_count,
+        never_production_count: reviewBlockerArbiterHandoff.never_production_count,
+        production_blocked_count: reviewBlockerArbiterHandoff.production_blocked_count,
+        memory_forbidden_candidate_ids:
+          reviewBlockerArbiterHandoff.memory_forbidden_candidate_ids,
+        never_production_candidate_ids:
+          reviewBlockerArbiterHandoff.never_production_candidate_ids,
+        production_promotion_allowed_now: false,
+        memory_entry_allowed_now: false,
+        production_candidate_created: false,
+        direct_memory_write_performed: false,
+        accepted_samples_write_performed: false,
+        memory_forbidden_prevents_memory:
+          reviewBlockerArbiterHandoff.memory_forbidden_prevents_memory,
+        never_production_prevents_production:
+          reviewBlockerArbiterHandoff.never_production_prevents_production,
+        human_review_required_before_production:
+          reviewBlockerArbiterHandoff.human_review_required_before_production,
+      },
     },
     provenance_handoff_draft: {
       provenance_record_id: kernelRun.provenance_record.provenance_record_id,
@@ -330,6 +423,7 @@ function buildAdapterResponse(input, protocolInput) {
       review_result_protocol_observed: true,
       review_decision_package_observed: true,
       evidence_blocker_contract_observed: true,
+      review_blocker_arbiter_observed: true,
       accepted_sample_draft_count: decisionPackageHandoff.accepted_sample_draft_count,
       rejected_sample_draft_count: decisionPackageHandoff.rejected_sample_draft_count,
       memory_delta_draft_count: decisionPackageHandoff.memory_delta_draft_count,
@@ -338,6 +432,10 @@ function buildAdapterResponse(input, protocolInput) {
       blocker_decision_count: evidenceBlockerContractHandoff.blocker_decision_count,
       permanent_block_count: evidenceBlockerContractHandoff.permanent_block_count,
       memory_forbidden_block_count: evidenceBlockerContractHandoff.memory_forbidden_block_count,
+      arbiter_candidate_count: reviewBlockerArbiterHandoff.candidate_count,
+      arbiter_memory_forbidden_count: reviewBlockerArbiterHandoff.memory_forbidden_count,
+      arbiter_never_production_count: reviewBlockerArbiterHandoff.never_production_count,
+      arbiter_production_blocked_count: reviewBlockerArbiterHandoff.production_blocked_count,
       production_candidate_created: false,
       never_production_count: protocolReport.report_summary.never_production_count,
       memory_forbidden_count: protocolHandoff.memory_forbidden_count,

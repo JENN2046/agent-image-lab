@@ -64,6 +64,11 @@ function deepEqual(actual, expected) {
   return JSON.stringify(actual) === JSON.stringify(expected);
 }
 
+function sameMembers(actual, expected) {
+  if (!Array.isArray(actual) || !Array.isArray(expected)) return false;
+  return deepEqual([...actual].sort(), [...expected].sort());
+}
+
 function validateNoSensitiveMaterial(label, text) {
   const forbidden = [
     { id: "windows_absolute_path", pattern: /[A-Z]:[\\/]/ },
@@ -107,6 +112,147 @@ function runAdapter(inputPath, protocolInputPath, label) {
   }
 }
 
+function validateReviewBlockerArbiterBinding(response, label, expected) {
+  const evidenceBlocker = response.evidence_blocker_contract || {};
+  const evidenceRecords = evidenceBlocker.evidence_records || [];
+  const blockerDecisions = evidenceBlocker.blocker_decisions || [];
+  const productionExclusions = evidenceBlocker.production_exclusion_register || [];
+  const evidenceRecordIds = new Set(evidenceRecords.map((record) => record.evidence_record_id));
+  const blockerDecisionIds = new Set(blockerDecisions.map((decision) => decision.blocker_decision_id));
+  const productionExclusionRecordIds = new Set(
+    productionExclusions.map((record) => record.exclusion_record_id)
+  );
+
+  const arbiter = response.review_blocker_arbiter || {};
+  const arbitrations = arbiter.candidate_arbitrations || [];
+  const arbiterSummary = arbiter.arbiter_summary || {};
+  const promotionGuard = arbiter.promotion_guard || {};
+  const handoff = response.review_blocker_arbiter_handoff_draft || {};
+  const review = response.review_console_handoff_draft || {};
+  const reviewGuard = review.review_blocker_arbiter_guard_summary || {};
+  const audit = response.audit_record || {};
+
+  addResult(`${label}_review_blocker_arbiter_present`, Boolean(response.review_blocker_arbiter));
+  addResult(`${label}_review_blocker_arbiter_handoff_present`, Boolean(response.review_blocker_arbiter_handoff_draft));
+  addResult(`${label}_review_blocker_arbiter_version_v1`, arbiter.review_blocker_arbiter_version === "v1");
+  addResult(`${label}_review_blocker_arbiter_status_completed`, arbiter.status === "completed_local_blocker_arbiter");
+  addResult(`${label}_review_blocker_arbiter_mode_stdout_only`, arbiter.mode === "local_stdout_only_blocker_arbiter");
+  addResult(`${label}_review_blocker_arbiter_source_contract_matches`, arbiter.source_evidence_blocker_contract_id === evidenceBlocker.contract_id);
+  addResult(`${label}_review_blocker_arbiter_source_decision_package_matches`, arbiter.source_decision_package_id === evidenceBlocker.source_decision_package_id);
+  addResult(`${label}_review_blocker_arbiter_source_protocol_matches`, arbiter.source_protocol_id === expected.sourceProtocolId);
+  addResult(`${label}_review_blocker_arbiter_source_kernel_matches`, arbiter.source_kernel_run_id === evidenceBlocker.source_kernel_run_id);
+  addResult(`${label}_review_blocker_arbiter_candidate_count_matches_evidence`, arbitrations.length === evidenceRecords.length);
+  addResult(`${label}_review_blocker_arbiter_candidate_count_expected`, arbiterSummary.candidate_count === expected.candidateCount);
+  addResult(`${label}_review_blocker_arbiter_passed_count_expected`, arbiterSummary.passed_candidate_count === expected.passedCandidateCount);
+  addResult(`${label}_review_blocker_arbiter_rejected_count_expected`, arbiterSummary.rejected_candidate_count === expected.rejectedCandidateCount);
+  addResult(`${label}_review_blocker_arbiter_memory_forbidden_count_expected`, arbiterSummary.memory_forbidden_count === expected.memoryForbiddenCount);
+  addResult(`${label}_review_blocker_arbiter_never_production_count_expected`, arbiterSummary.never_production_count === expected.neverProductionCount);
+  addResult(`${label}_review_blocker_arbiter_production_blocked_count_expected`, arbiterSummary.production_blocked_count === expected.productionBlockedCount);
+  addResult(`${label}_review_blocker_arbiter_permanent_block_count_expected`, arbiterSummary.permanent_block_count === expected.permanentBlockCount);
+  addResult(`${label}_review_blocker_arbiter_human_review_count_expected`, arbiterSummary.human_review_required_count === expected.humanReviewRequiredCount);
+  addResult(`${label}_review_blocker_arbiter_all_production_blocked`, arbiterSummary.all_production_blocked === true);
+  addResult(`${label}_review_blocker_arbiter_all_writes_blocked`, arbiterSummary.all_writes_blocked === true);
+  addResult(`${label}_review_blocker_arbiter_no_direct_memory_write`, arbiterSummary.direct_memory_write_performed === false);
+  addResult(`${label}_review_blocker_arbiter_no_production_candidate`, arbiterSummary.production_candidate_created === false);
+  addResult(`${label}_review_blocker_arbiter_no_accepted_samples_write`, arbiterSummary.accepted_samples_write_performed === false);
+  addResult(
+    `${label}_review_blocker_arbiter_evidence_refs_match_contract`,
+    arbitrations.every((item) => evidenceRecordIds.has(item.evidence_record_id))
+  );
+  addResult(
+    `${label}_review_blocker_arbiter_production_blocker_refs_match_contract`,
+    arbitrations.every(
+      (item) =>
+        item.production_blocker_decision_id === null ||
+        blockerDecisionIds.has(item.production_blocker_decision_id)
+    )
+  );
+  addResult(
+    `${label}_review_blocker_arbiter_memory_blocker_refs_match_contract`,
+    arbitrations.every((item) =>
+      (item.memory_blocker_decision_ids || []).every((id) => blockerDecisionIds.has(id))
+    )
+  );
+  addResult(
+    `${label}_review_blocker_arbiter_never_production_refs_match_contract`,
+    arbitrations
+      .filter((item) => item.never_production === true)
+      .every((item) => productionExclusionRecordIds.has(item.production_exclusion_record_id))
+  );
+
+  addResult(`${label}_review_blocker_arbiter_guard_evidence_required`, promotionGuard.evidence_required_for_every_candidate === true);
+  addResult(`${label}_review_blocker_arbiter_guard_blocker_required`, promotionGuard.blocker_required_for_every_candidate === true);
+  addResult(`${label}_review_blocker_arbiter_guard_memory_forbidden_prevents_memory`, promotionGuard.memory_forbidden_prevents_memory === true);
+  addResult(`${label}_review_blocker_arbiter_guard_never_production_prevents_production`, promotionGuard.never_production_prevents_production === true);
+  addResult(`${label}_review_blocker_arbiter_guard_pass_not_approval`, promotionGuard.pass_is_not_production_approval === true);
+  addResult(`${label}_review_blocker_arbiter_guard_human_review_required`, promotionGuard.human_review_required_before_production === true);
+  addResult(`${label}_review_blocker_arbiter_guard_no_production_candidate`, promotionGuard.production_candidate_created === false);
+  addResult(`${label}_review_blocker_arbiter_guard_no_direct_memory_write`, promotionGuard.direct_memory_write_performed === false);
+  addResult(`${label}_review_blocker_arbiter_guard_no_accepted_samples_write`, promotionGuard.accepted_samples_write_performed === false);
+
+  addResult(`${label}_review_blocker_arbiter_handoff_draft_ready`, handoff.status === "draft_ready");
+  addResult(`${label}_review_blocker_arbiter_handoff_id_present`, typeof handoff.handoff_id === "string" && handoff.handoff_id.startsWith("review_blocker_arbiter_handoff_"));
+  addResult(`${label}_review_blocker_arbiter_handoff_arbiter_id_matches`, handoff.arbiter_id === arbiter.arbiter_id);
+  addResult(`${label}_review_blocker_arbiter_handoff_source_contract_matches`, handoff.source_evidence_blocker_contract_id === evidenceBlocker.contract_id);
+  addResult(`${label}_review_blocker_arbiter_handoff_source_protocol_matches`, handoff.source_protocol_id === expected.sourceProtocolId);
+  addResult(`${label}_review_blocker_arbiter_handoff_candidate_count_expected`, handoff.candidate_count === expected.candidateCount);
+  addResult(`${label}_review_blocker_arbiter_handoff_memory_forbidden_count_expected`, handoff.memory_forbidden_count === expected.memoryForbiddenCount);
+  addResult(`${label}_review_blocker_arbiter_handoff_never_production_count_expected`, handoff.never_production_count === expected.neverProductionCount);
+  addResult(`${label}_review_blocker_arbiter_handoff_production_blocked_count_expected`, handoff.production_blocked_count === expected.productionBlockedCount);
+  addResult(`${label}_review_blocker_arbiter_handoff_memory_forbidden_ids_expected`, sameMembers(handoff.memory_forbidden_candidate_ids, expected.memoryForbiddenCandidateIds));
+  addResult(`${label}_review_blocker_arbiter_handoff_never_production_ids_expected`, sameMembers(handoff.never_production_candidate_ids, expected.neverProductionCandidateIds));
+  addResult(`${label}_review_blocker_arbiter_handoff_production_blocked_ids_expected`, sameMembers(handoff.production_blocked_candidate_ids, expected.productionBlockedCandidateIds));
+  addResult(`${label}_review_blocker_arbiter_handoff_no_production_promotion`, handoff.production_promotion_allowed_now === false);
+  addResult(`${label}_review_blocker_arbiter_handoff_no_memory_entry`, handoff.memory_entry_allowed_now === false);
+  addResult(`${label}_review_blocker_arbiter_handoff_no_direct_memory_write`, handoff.direct_memory_write_performed === false);
+  addResult(`${label}_review_blocker_arbiter_handoff_no_production_candidate`, handoff.production_candidate_created === false);
+  addResult(`${label}_review_blocker_arbiter_handoff_no_accepted_samples_write`, handoff.accepted_samples_write_performed === false);
+  addResult(`${label}_review_blocker_arbiter_handoff_pass_not_approval`, handoff.pass_is_not_production_approval === true);
+  addResult(`${label}_review_blocker_arbiter_handoff_human_review_required`, handoff.human_review_required_before_production === true);
+
+  addResult(`${label}_review_console_blocker_arbiter_attached`, review.review_blocker_arbiter_attached === true);
+  addResult(`${label}_review_console_blocker_arbiter_handoff_id_matches`, review.review_blocker_arbiter_handoff_id === handoff.handoff_id);
+  addResult(`${label}_review_console_blocker_arbiter_guard_summary_present`, Boolean(review.review_blocker_arbiter_guard_summary));
+  addResult(
+    `${label}_review_console_blocker_arbiter_guard_counts_match_handoff`,
+    reviewGuard.candidate_count === handoff.candidate_count &&
+      reviewGuard.memory_forbidden_count === handoff.memory_forbidden_count &&
+      reviewGuard.never_production_count === handoff.never_production_count &&
+      reviewGuard.production_blocked_count === handoff.production_blocked_count
+  );
+  addResult(`${label}_review_console_blocker_arbiter_guard_memory_forbidden_ids_match`, sameMembers(reviewGuard.memory_forbidden_candidate_ids, handoff.memory_forbidden_candidate_ids));
+  addResult(`${label}_review_console_blocker_arbiter_guard_never_production_ids_match`, sameMembers(reviewGuard.never_production_candidate_ids, handoff.never_production_candidate_ids));
+  addResult(`${label}_review_console_blocker_arbiter_guard_no_production_promotion`, reviewGuard.production_promotion_allowed_now === false);
+  addResult(`${label}_review_console_blocker_arbiter_guard_no_memory_entry`, reviewGuard.memory_entry_allowed_now === false);
+  addResult(`${label}_review_console_blocker_arbiter_guard_no_production_candidate`, reviewGuard.production_candidate_created === false);
+  addResult(`${label}_review_console_blocker_arbiter_guard_no_direct_memory_write`, reviewGuard.direct_memory_write_performed === false);
+  addResult(`${label}_review_console_blocker_arbiter_guard_no_accepted_samples_write`, reviewGuard.accepted_samples_write_performed === false);
+  addResult(`${label}_review_console_blocker_arbiter_guard_memory_forbidden_prevents_memory`, reviewGuard.memory_forbidden_prevents_memory === true);
+  addResult(`${label}_review_console_blocker_arbiter_guard_never_production_prevents_production`, reviewGuard.never_production_prevents_production === true);
+  addResult(`${label}_review_console_blocker_arbiter_guard_human_review_required`, reviewGuard.human_review_required_before_production === true);
+
+  addResult(`${label}_audit_review_blocker_arbiter_observed`, audit.review_blocker_arbiter_observed === true);
+  addResult(`${label}_audit_arbiter_candidate_count_matches`, audit.arbiter_candidate_count === handoff.candidate_count);
+  addResult(`${label}_audit_arbiter_memory_forbidden_count_matches`, audit.arbiter_memory_forbidden_count === handoff.memory_forbidden_count);
+  addResult(`${label}_audit_arbiter_never_production_count_matches`, audit.arbiter_never_production_count === handoff.never_production_count);
+  addResult(`${label}_audit_arbiter_production_blocked_count_matches`, audit.arbiter_production_blocked_count === handoff.production_blocked_count);
+
+  for (const route of expected.routes) {
+    const arbitration = arbitrations.find((item) => item.candidate_id === route.candidate_id) || {};
+    addResult(`${label}_${route.name}_final_route_expected`, arbitration.final_route === route.final_route);
+    addResult(`${label}_${route.name}_production_decision_expected`, arbitration.production_decision === route.production_decision);
+    addResult(`${label}_${route.name}_memory_decision_expected`, arbitration.memory_decision === route.memory_decision);
+    addResult(`${label}_${route.name}_memory_draft_allowed_expected`, arbitration.memory_draft_allowed === route.memoryDraftAllowed);
+    addResult(`${label}_${route.name}_memory_forbidden_expected`, arbitration.memory_forbidden === route.memoryForbidden);
+    addResult(`${label}_${route.name}_never_production_expected`, arbitration.never_production === route.neverProduction);
+    addResult(`${label}_${route.name}_production_promotion_blocked`, arbitration.production_promotion_allowed_now === false);
+    addResult(`${label}_${route.name}_memory_entry_blocked`, arbitration.memory_entry_allowed_now === false);
+    addResult(`${label}_${route.name}_no_production_candidate`, arbitration.production_candidate_created === false);
+    addResult(`${label}_${route.name}_no_direct_memory_write`, arbitration.direct_memory_write_performed === false);
+    addResult(`${label}_${route.name}_no_accepted_samples_write`, arbitration.accepted_samples_write_performed === false);
+  }
+}
+
 function validateResponse(response) {
   addResult("response_version_v1", response.pvos_kernel_dry_run_adapter_response_version === "v1");
   addResult("adapter_id_expected", response.adapter_id === "pvos_kernel_dry_run_adapter");
@@ -121,6 +267,8 @@ function validateResponse(response) {
   addResult("review_decision_package_handoff_present", Boolean(response.review_decision_package_handoff_draft));
   addResult("evidence_blocker_contract_present", Boolean(response.evidence_blocker_contract));
   addResult("evidence_blocker_contract_handoff_present", Boolean(response.evidence_blocker_contract_handoff_draft));
+  addResult("review_blocker_arbiter_present", Boolean(response.review_blocker_arbiter));
+  addResult("review_blocker_arbiter_handoff_present", Boolean(response.review_blocker_arbiter_handoff_draft));
   addResult("vcp_handoff_present", Boolean(response.vcp_adapter_handoff_draft));
   addResult("review_console_handoff_present", Boolean(response.review_console_handoff_draft));
   addResult("provenance_handoff_present", Boolean(response.provenance_handoff_draft));
@@ -144,6 +292,7 @@ function validateResponse(response) {
   addResult("review_console_protocol_attached", review.review_result_protocol_report_attached === true);
   addResult("review_console_decision_package_attached", review.review_decision_package_attached === true);
   addResult("review_console_evidence_blocker_attached", review.evidence_blocker_contract_attached === true);
+  addResult("review_console_blocker_arbiter_attached", review.review_blocker_arbiter_attached === true);
   addResult(
     "review_console_decision_package_handoff_id_present",
     typeof review.review_decision_package_handoff_id === "string" &&
@@ -153,6 +302,11 @@ function validateResponse(response) {
     "review_console_evidence_blocker_contract_handoff_id_present",
     typeof review.evidence_blocker_contract_handoff_id === "string" &&
       review.evidence_blocker_contract_handoff_id.startsWith("evidence_blocker_contract_handoff_")
+  );
+  addResult(
+    "review_console_blocker_arbiter_handoff_id_present",
+    typeof review.review_blocker_arbiter_handoff_id === "string" &&
+      review.review_blocker_arbiter_handoff_id.startsWith("review_blocker_arbiter_handoff_")
   );
 
   const protocolReport = response.review_result_protocol_report || {};
@@ -303,6 +457,46 @@ function validateResponse(response) {
     evidenceBlockerHandoff.every_never_production_candidate_has_exclusion === true
   );
 
+  validateReviewBlockerArbiterBinding(response, "default_adapter", {
+    sourceProtocolId: "review_result_protocol_hardening_v1",
+    candidateCount: 2,
+    passedCandidateCount: 1,
+    rejectedCandidateCount: 1,
+    memoryForbiddenCount: 0,
+    neverProductionCount: 1,
+    productionBlockedCount: 2,
+    permanentBlockCount: 1,
+    humanReviewRequiredCount: 2,
+    memoryForbiddenCandidateIds: [],
+    neverProductionCandidateIds: ["candidate_reject_metadata_001"],
+    productionBlockedCandidateIds: [
+      "candidate_accept_metadata_001",
+      "candidate_reject_metadata_001",
+    ],
+    routes: [
+      {
+        name: "pass_candidate",
+        candidate_id: "candidate_accept_metadata_001",
+        final_route: "pass_draft_only_pending_human_review",
+        production_decision: "block_until_human_review",
+        memory_decision: "block_until_human_memory_approval",
+        memoryDraftAllowed: true,
+        memoryForbidden: false,
+        neverProduction: false,
+      },
+      {
+        name: "reject_candidate",
+        candidate_id: "candidate_reject_metadata_001",
+        final_route: "reject_failure_learning_only_never_production",
+        production_decision: "block_permanently",
+        memory_decision: "block_until_human_memory_approval",
+        memoryDraftAllowed: true,
+        memoryForbidden: false,
+        neverProduction: true,
+      },
+    ],
+  });
+
   const reviewGuard = review.review_protocol_guard_summary || {};
   addResult("review_console_guard_summary_present", Boolean(review.review_protocol_guard_summary));
   addResult("review_console_guard_never_production_count_one", reviewGuard.never_production_count === 1);
@@ -379,6 +573,8 @@ function validateNegativeGuardAdapterResponse(response) {
   addResult("negative_adapter_response_version_v1", response.pvos_kernel_dry_run_adapter_response_version === "v1");
   addResult("negative_adapter_status_accepted_draft", response.status === "accepted_draft");
   addResult("negative_adapter_mode_no_execution", response.mode === "local_no_execution_adapter_contract");
+  addResult("negative_review_blocker_arbiter_present", Boolean(response.review_blocker_arbiter));
+  addResult("negative_review_blocker_arbiter_handoff_present", Boolean(response.review_blocker_arbiter_handoff_draft));
 
   const review = response.review_console_handoff_draft || {};
   addResult("negative_review_console_no_accepted_candidates", Array.isArray(review.accepted_candidate_ids) && review.accepted_candidate_ids.length === 0);
@@ -387,6 +583,7 @@ function validateNegativeGuardAdapterResponse(response) {
   addResult("negative_review_console_protocol_attached", review.review_result_protocol_report_attached === true);
   addResult("negative_review_console_decision_package_attached", review.review_decision_package_attached === true);
   addResult("negative_review_console_evidence_blocker_attached", review.evidence_blocker_contract_attached === true);
+  addResult("negative_review_console_blocker_arbiter_attached", review.review_blocker_arbiter_attached === true);
 
   const protocolReport = response.review_result_protocol_report || {};
   addResult("negative_protocol_report_pass_count_zero", protocolReport.report_summary?.pass_count === 0);
@@ -525,6 +722,49 @@ function validateNegativeGuardAdapterResponse(response) {
     evidenceBlockerHandoff.every_never_production_candidate_has_exclusion === true
   );
 
+  validateReviewBlockerArbiterBinding(response, "negative_guard_adapter", {
+    sourceProtocolId: "review_result_protocol_negative_guard_v1",
+    candidateCount: 2,
+    passedCandidateCount: 0,
+    rejectedCandidateCount: 2,
+    memoryForbiddenCount: 1,
+    neverProductionCount: 2,
+    productionBlockedCount: 2,
+    permanentBlockCount: 2,
+    humanReviewRequiredCount: 2,
+    memoryForbiddenCandidateIds: ["candidate_reject_unknown_guard_001"],
+    neverProductionCandidateIds: [
+      "candidate_reject_mapped_guard_001",
+      "candidate_reject_unknown_guard_001",
+    ],
+    productionBlockedCandidateIds: [
+      "candidate_reject_mapped_guard_001",
+      "candidate_reject_unknown_guard_001",
+    ],
+    routes: [
+      {
+        name: "mapped_reject_candidate",
+        candidate_id: "candidate_reject_mapped_guard_001",
+        final_route: "reject_failure_learning_only_never_production",
+        production_decision: "block_permanently",
+        memory_decision: "block_until_human_memory_approval",
+        memoryDraftAllowed: true,
+        memoryForbidden: false,
+        neverProduction: true,
+      },
+      {
+        name: "unknown_reject_candidate",
+        candidate_id: "candidate_reject_unknown_guard_001",
+        final_route: "reject_memory_forbidden_never_production",
+        production_decision: "block_permanently",
+        memory_decision: "block_memory_entry",
+        memoryDraftAllowed: false,
+        memoryForbidden: true,
+        neverProduction: true,
+      },
+    ],
+  });
+
   const reviewGuard = review.review_protocol_guard_summary || {};
   addResult("negative_review_guard_summary_present", Boolean(review.review_protocol_guard_summary));
   addResult("negative_review_guard_never_production_count_two", reviewGuard.never_production_count === 2);
@@ -581,7 +821,9 @@ function validateNegativeGuardAdapterResponse(response) {
 
 function validateNegativeGuardAdapterAgainstEvidenceFixture(response, evidenceFixture, label) {
   const handoff = response.evidence_blocker_contract_handoff_draft || {};
+  const arbiterHandoff = response.review_blocker_arbiter_handoff_draft || {};
   const reviewGuard = response.review_console_handoff_draft?.review_evidence_blocker_contract_guard_summary || {};
+  const reviewArbiterGuard = response.review_console_handoff_draft?.review_blocker_arbiter_guard_summary || {};
   const audit = response.audit_record || {};
   const summary = evidenceFixture.blocker_summary || {};
   const memoryForbiddenCandidateIds = (evidenceFixture.blocker_decisions || [])
@@ -618,6 +860,26 @@ function validateNegativeGuardAdapterAgainstEvidenceFixture(response, evidenceFi
   addResult(
     `${label}_handoff_production_exclusion_ids_match_fixture`,
     deepEqual(handoff.production_exclusion_candidate_ids, productionExclusionCandidateIds)
+  );
+  addResult(
+    `${label}_arbiter_memory_forbidden_ids_match_fixture`,
+    sameMembers(arbiterHandoff.memory_forbidden_candidate_ids, memoryForbiddenCandidateIds)
+  );
+  addResult(
+    `${label}_arbiter_never_production_ids_match_fixture`,
+    sameMembers(arbiterHandoff.never_production_candidate_ids, productionExclusionCandidateIds)
+  );
+  addResult(
+    `${label}_review_arbiter_guard_counts_match_handoff`,
+    reviewArbiterGuard.candidate_count === arbiterHandoff.candidate_count &&
+      reviewArbiterGuard.memory_forbidden_count === arbiterHandoff.memory_forbidden_count &&
+      reviewArbiterGuard.never_production_count === arbiterHandoff.never_production_count &&
+      reviewArbiterGuard.production_blocked_count === arbiterHandoff.production_blocked_count
+  );
+  addResult(
+    `${label}_review_arbiter_guard_ids_match_handoff`,
+    sameMembers(reviewArbiterGuard.memory_forbidden_candidate_ids, arbiterHandoff.memory_forbidden_candidate_ids) &&
+      sameMembers(reviewArbiterGuard.never_production_candidate_ids, arbiterHandoff.never_production_candidate_ids)
   );
   addResult(
     `${label}_review_guard_counts_match_handoff`,
@@ -694,6 +956,11 @@ try {
   addResult("schema_evidence_blocker_contract_handoff_declared", /evidence_blocker_contract_handoff_draft:/.test(schema));
   addResult("schema_evidence_blocker_attached_declared", /evidence_blocker_contract_attached: true/.test(schema));
   addResult("schema_evidence_blocker_contract_guard_declared", /review_evidence_blocker_contract_guard_summary:/.test(schema));
+  addResult("schema_review_blocker_arbiter_declared", /review_blocker_arbiter:/.test(schema));
+  addResult("schema_review_blocker_arbiter_handoff_declared", /review_blocker_arbiter_handoff_draft:/.test(schema));
+  addResult("schema_review_blocker_arbiter_attached_declared", /review_blocker_arbiter_attached: true/.test(schema));
+  addResult("schema_review_blocker_arbiter_guard_declared", /review_blocker_arbiter_guard_summary:/.test(schema));
+  addResult("schema_arbiter_human_review_guard_declared", /human_review_required_before_production: true/.test(schema));
   addResult("schema_decision_package_attached_declared", /review_decision_package_attached: true/.test(schema));
   addResult("schema_production_exclusion_declared", /production_exclusion_register: array/.test(schema));
   addResult("schema_decision_guard_declared", /review_decision_package_guard_summary:/.test(schema));
@@ -723,6 +990,14 @@ try {
   addResult("example_decision_handoff_present", Boolean(example.review_decision_package_handoff_draft));
   addResult("example_evidence_blocker_present", Boolean(example.evidence_blocker_contract));
   addResult("example_evidence_blocker_contract_handoff_present", Boolean(example.evidence_blocker_contract_handoff_draft));
+  addResult("example_review_blocker_arbiter_present", Boolean(example.review_blocker_arbiter));
+  addResult("example_review_blocker_arbiter_handoff_present", Boolean(example.review_blocker_arbiter_handoff_draft));
+  addResult("example_review_blocker_arbiter_version_v1", example.review_blocker_arbiter?.review_blocker_arbiter_version === "v1");
+  addResult("example_review_blocker_arbiter_candidate_count_two", example.review_blocker_arbiter?.candidate_arbitrations?.length === 2);
+  addResult("example_review_blocker_arbiter_handoff_candidate_count_two", example.review_blocker_arbiter_handoff_draft?.candidate_count === 2);
+  addResult("example_review_blocker_arbiter_handoff_memory_forbidden_zero", example.review_blocker_arbiter_handoff_draft?.memory_forbidden_count === 0);
+  addResult("example_review_blocker_arbiter_handoff_never_production_one", example.review_blocker_arbiter_handoff_draft?.never_production_count === 1);
+  addResult("example_review_blocker_arbiter_handoff_production_blocked_two", example.review_blocker_arbiter_handoff_draft?.production_blocked_count === 2);
   addResult("example_protocol_never_production_count_one", example.review_result_protocol_report?.report_summary?.never_production_count === 1);
   addResult("example_protocol_handoff_memory_forbidden_count_zero", example.review_result_protocol_handoff_draft?.memory_forbidden_count === 0);
   addResult("example_protocol_handoff_all_production_blocked", example.review_result_protocol_handoff_draft?.all_production_candidate_creation_blocked === true);
@@ -756,12 +1031,17 @@ try {
   addResult("example_review_console_protocol_attached", example.review_console_handoff_draft?.review_result_protocol_report_attached === true);
   addResult("example_review_console_decision_package_attached", example.review_console_handoff_draft?.review_decision_package_attached === true);
   addResult("example_review_console_evidence_blocker_attached", example.review_console_handoff_draft?.evidence_blocker_contract_attached === true);
+  addResult("example_review_console_blocker_arbiter_attached", example.review_console_handoff_draft?.review_blocker_arbiter_attached === true);
   addResult("example_review_console_guard_summary_present", Boolean(example.review_console_handoff_draft?.review_protocol_guard_summary));
   addResult("example_review_console_decision_guard_summary_present", Boolean(example.review_console_handoff_draft?.review_decision_package_guard_summary));
   addResult("example_review_console_evidence_guard_summary_present", Boolean(example.review_console_handoff_draft?.review_evidence_blocker_contract_guard_summary));
+  addResult("example_review_console_blocker_arbiter_guard_summary_present", Boolean(example.review_console_handoff_draft?.review_blocker_arbiter_guard_summary));
   addResult("example_review_console_guard_memory_forbidden_count_zero", example.review_console_handoff_draft?.review_protocol_guard_summary?.memory_forbidden_count === 0);
   addResult("example_review_console_decision_guard_production_exclusion_count_one", example.review_console_handoff_draft?.review_decision_package_guard_summary?.production_exclusion_count === 1);
   addResult("example_review_console_evidence_guard_production_exclusion_count_one", example.review_console_handoff_draft?.review_evidence_blocker_contract_guard_summary?.production_exclusion_count === 1);
+  addResult("example_review_console_blocker_arbiter_guard_never_production_count_one", example.review_console_handoff_draft?.review_blocker_arbiter_guard_summary?.never_production_count === 1);
+  addResult("example_audit_review_blocker_arbiter_observed", example.audit_record?.review_blocker_arbiter_observed === true);
+  addResult("example_audit_arbiter_candidate_count_two", example.audit_record?.arbiter_candidate_count === 2);
   for (const flag of falseGuardFields) {
     addResult(`example_guard_${flag}_false`, example.no_execution_guard?.[flag] === false);
   }
@@ -864,9 +1144,15 @@ const summary = {
     evidence_blocker_contract_binding_present: true,
     evidence_blocker_contract_handoff_present: true,
     review_console_evidence_blocker_contract_handoff_present: true,
+    review_blocker_arbiter_binding_present: true,
+    review_blocker_arbiter_handoff_present: true,
+    review_console_blocker_arbiter_handoff_present: true,
     evidence_blocker_contract_verified: true,
     evidence_blocker_pass_candidate_human_review_blocked_verified: true,
     evidence_blocker_reject_candidate_never_production_verified: true,
+    review_blocker_arbiter_verified: true,
+    review_blocker_arbiter_pass_candidate_human_review_blocked_verified: true,
+    review_blocker_arbiter_reject_candidate_never_production_verified: true,
     never_production_contract_verified: true,
     negative_guard_adapter_handoff_verified: true,
     negative_guard_review_console_handoff_verified: true,
@@ -876,6 +1162,11 @@ const summary = {
     negative_guard_evidence_blocker_contract_verified: true,
     negative_guard_evidence_blocker_contract_handoff_verified: true,
     negative_guard_review_console_evidence_blocker_contract_handoff_verified: true,
+    negative_guard_review_blocker_arbiter_verified: true,
+    negative_guard_review_blocker_arbiter_handoff_verified: true,
+    negative_guard_review_console_blocker_arbiter_handoff_verified: true,
+    negative_guard_arbiter_memory_forbidden_verified: true,
+    negative_guard_arbiter_all_rejected_never_production_verified: true,
     negative_guard_adapter_example_matches_cli_output: true,
     negative_guard_adapter_embeds_evidence_blocker_fixture: true,
     negative_guard_adapter_memory_forbidden_handoff_verified: true,
