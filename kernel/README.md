@@ -51,6 +51,8 @@ RunManifest
 node --check kernel\pvos_kernel.js
 node --check scripts\validate_pvos_kernel_minimal.js
 node scripts\validate_pvos_kernel_minimal.js
+node --check scripts\validate_pvos_kernel_dry_run_adapter.js
+node scripts\validate_pvos_kernel_dry_run_adapter.js
 ```
 
 This kernel is not a VCP runtime adapter. It is the local data spine that a
@@ -68,6 +70,12 @@ The adapter contract wraps the kernel output in local VCP adapter and Review
 Console handoff drafts. It also attaches the local review-result protocol
 report so a future Review Console can read pass/reject reasons, memory routes,
 and production routes directly. It is still stdout-only and no-execution.
+
+The adapter also binds the local review decision package into its handoff
+surface. Future consumers can read accepted/rejected sample drafts, memory
+delta drafts, memory-forbidden records, and production exclusion registers
+without writing accepted samples, memory, provider outputs, or production
+candidates.
 
 ## Review Result Protocol
 

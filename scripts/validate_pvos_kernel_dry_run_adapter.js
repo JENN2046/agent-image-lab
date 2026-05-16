@@ -104,6 +104,8 @@ function validateResponse(response) {
   addResult("kernel_run_stdout_mode", response.kernel_run?.mode === "local_stdout_only_kernel");
   addResult("review_result_protocol_report_present", Boolean(response.review_result_protocol_report));
   addResult("review_result_protocol_handoff_present", Boolean(response.review_result_protocol_handoff_draft));
+  addResult("review_decision_package_present", Boolean(response.review_decision_package));
+  addResult("review_decision_package_handoff_present", Boolean(response.review_decision_package_handoff_draft));
   addResult("vcp_handoff_present", Boolean(response.vcp_adapter_handoff_draft));
   addResult("review_console_handoff_present", Boolean(response.review_console_handoff_draft));
   addResult("provenance_handoff_present", Boolean(response.provenance_handoff_draft));
@@ -125,6 +127,12 @@ function validateResponse(response) {
   addResult("review_console_human_required", review.human_review_required_for_production === true);
   addResult("review_console_memory_separate_approval", review.memory_write_requires_separate_approval === true);
   addResult("review_console_protocol_attached", review.review_result_protocol_report_attached === true);
+  addResult("review_console_decision_package_attached", review.review_decision_package_attached === true);
+  addResult(
+    "review_console_decision_package_handoff_id_present",
+    typeof review.review_decision_package_handoff_id === "string" &&
+      review.review_decision_package_handoff_id.startsWith("review_decision_package_handoff_")
+  );
 
   const protocolReport = response.review_result_protocol_report || {};
   addResult("protocol_report_version_v1", protocolReport.review_result_protocol_report_version === "v1");
@@ -165,12 +173,57 @@ function validateResponse(response) {
   addResult("protocol_handoff_production_candidate_false", protocolHandoff.production_candidate_created === false);
   addResult("protocol_handoff_direct_memory_write_false", protocolHandoff.direct_memory_write_performed === false);
 
+  const decisionPackage = response.review_decision_package || {};
+  const decisionSummary = decisionPackage.decision_summary || {};
+  addResult("decision_package_version_v1", decisionPackage.review_decision_package_version === "v1");
+  addResult("decision_package_status_completed", decisionPackage.status === "completed_local_decision_package");
+  addResult("decision_package_mode_stdout_only", decisionPackage.mode === "local_stdout_only_review_decision_package");
+  addResult("decision_package_accepted_draft_count_one", decisionPackage.accepted_sample_drafts?.length === 1);
+  addResult("decision_package_rejected_draft_count_one", decisionPackage.rejected_sample_drafts?.length === 1);
+  addResult("decision_package_memory_delta_count_two", decisionPackage.memory_delta_drafts?.length === 2);
+  addResult("decision_package_memory_forbidden_count_zero", decisionPackage.memory_forbidden_records?.length === 0);
+  addResult("decision_package_production_exclusion_count_one", decisionPackage.production_exclusion_register?.length === 1);
+  addResult("decision_package_summary_production_candidate_false", decisionSummary.production_candidate_created === false);
+  addResult("decision_package_summary_direct_memory_write_false", decisionSummary.direct_memory_write_performed === false);
+  addResult("decision_package_summary_accepted_samples_write_false", decisionSummary.accepted_samples_write_performed === false);
+  addResult("decision_package_promotion_pass_not_approval", decisionPackage.promotion_guard?.protocol_pass_is_not_production_approval === true);
+  addResult("decision_package_promotion_never_production_blocked", decisionPackage.promotion_guard?.every_never_production_candidate_blocked === true);
+
+  const decisionHandoff = response.review_decision_package_handoff_draft || {};
+  addResult("decision_handoff_draft_ready", decisionHandoff.status === "draft_ready");
+  addResult("decision_handoff_accepted_count_one", decisionHandoff.accepted_sample_draft_count === 1);
+  addResult("decision_handoff_rejected_count_one", decisionHandoff.rejected_sample_draft_count === 1);
+  addResult("decision_handoff_memory_delta_count_two", decisionHandoff.memory_delta_draft_count === 2);
+  addResult("decision_handoff_memory_forbidden_count_zero", decisionHandoff.memory_forbidden_count === 0);
+  addResult("decision_handoff_production_exclusion_count_one", decisionHandoff.production_exclusion_count === 1);
+  addResult(
+    "decision_handoff_production_exclusion_id_present",
+    Array.isArray(decisionHandoff.production_exclusion_candidate_ids) &&
+      decisionHandoff.production_exclusion_candidate_ids.includes("candidate_reject_metadata_001")
+  );
+  addResult("decision_handoff_direct_memory_write_false", decisionHandoff.direct_memory_write_performed === false);
+  addResult("decision_handoff_production_candidate_false", decisionHandoff.production_candidate_created === false);
+  addResult("decision_handoff_accepted_samples_write_false", decisionHandoff.accepted_samples_write_performed === false);
+  addResult("decision_handoff_pass_not_approval", decisionHandoff.protocol_pass_is_not_production_approval === true);
+  addResult("decision_handoff_never_production_blocked", decisionHandoff.every_never_production_candidate_blocked === true);
+
   const reviewGuard = review.review_protocol_guard_summary || {};
   addResult("review_console_guard_summary_present", Boolean(review.review_protocol_guard_summary));
   addResult("review_console_guard_never_production_count_one", reviewGuard.never_production_count === 1);
   addResult("review_console_guard_memory_forbidden_count_zero", reviewGuard.memory_forbidden_count === 0);
   addResult("review_console_guard_production_candidate_false", reviewGuard.production_candidate_created === false);
   addResult("review_console_guard_direct_memory_write_false", reviewGuard.direct_memory_write_performed === false);
+
+  const reviewDecisionGuard = review.review_decision_package_guard_summary || {};
+  addResult("review_console_decision_guard_summary_present", Boolean(review.review_decision_package_guard_summary));
+  addResult("review_console_decision_guard_accepted_count_one", reviewDecisionGuard.accepted_sample_draft_count === 1);
+  addResult("review_console_decision_guard_rejected_count_one", reviewDecisionGuard.rejected_sample_draft_count === 1);
+  addResult("review_console_decision_guard_memory_delta_count_two", reviewDecisionGuard.memory_delta_draft_count === 2);
+  addResult("review_console_decision_guard_memory_forbidden_count_zero", reviewDecisionGuard.memory_forbidden_count === 0);
+  addResult("review_console_decision_guard_production_exclusion_count_one", reviewDecisionGuard.production_exclusion_count === 1);
+  addResult("review_console_decision_guard_production_candidate_false", reviewDecisionGuard.production_candidate_created === false);
+  addResult("review_console_decision_guard_direct_memory_write_false", reviewDecisionGuard.direct_memory_write_performed === false);
+  addResult("review_console_decision_guard_accepted_samples_write_false", reviewDecisionGuard.accepted_samples_write_performed === false);
 
   const provenance = response.provenance_handoff_draft || {};
   addResult("provenance_payload_absent", provenance.provider_payload_included === false);
@@ -189,6 +242,11 @@ function validateResponse(response) {
   addResult("audit_image_generation_false", response.audit_record?.image_generation_observed === false);
   addResult("audit_memory_write_false", response.audit_record?.memory_write_observed === false);
   addResult("audit_protocol_observed_true", response.audit_record?.review_result_protocol_observed === true);
+  addResult("audit_decision_package_observed_true", response.audit_record?.review_decision_package_observed === true);
+  addResult("audit_accepted_sample_draft_count_one", response.audit_record?.accepted_sample_draft_count === 1);
+  addResult("audit_rejected_sample_draft_count_one", response.audit_record?.rejected_sample_draft_count === 1);
+  addResult("audit_memory_delta_draft_count_two", response.audit_record?.memory_delta_draft_count === 2);
+  addResult("audit_production_exclusion_count_one", response.audit_record?.production_exclusion_count === 1);
   addResult("audit_production_candidate_false", response.audit_record?.production_candidate_created === false);
   addResult("audit_never_production_count_one", response.audit_record?.never_production_count === 1);
   addResult("audit_memory_forbidden_count_zero", response.audit_record?.memory_forbidden_count === 0);
@@ -207,6 +265,7 @@ function validateNegativeGuardAdapterResponse(response) {
   addResult("negative_review_console_two_rejected_candidates", Array.isArray(review.rejected_candidate_ids) && review.rejected_candidate_ids.length === 2);
   addResult("negative_review_console_display_only", review.display_only === true);
   addResult("negative_review_console_protocol_attached", review.review_result_protocol_report_attached === true);
+  addResult("negative_review_console_decision_package_attached", review.review_decision_package_attached === true);
 
   const protocolReport = response.review_result_protocol_report || {};
   addResult("negative_protocol_report_pass_count_zero", protocolReport.report_summary?.pass_count === 0);
@@ -237,6 +296,51 @@ function validateNegativeGuardAdapterResponse(response) {
   addResult("negative_protocol_handoff_production_candidate_false", protocolHandoff.production_candidate_created === false);
   addResult("negative_protocol_handoff_direct_memory_write_false", protocolHandoff.direct_memory_write_performed === false);
 
+  const decisionPackage = response.review_decision_package || {};
+  addResult("negative_decision_package_version_v1", decisionPackage.review_decision_package_version === "v1");
+  addResult("negative_decision_package_source_protocol_expected", decisionPackage.source_protocol_id === "review_result_protocol_negative_guard_v1");
+  addResult("negative_decision_package_accepted_count_zero", decisionPackage.accepted_sample_drafts?.length === 0);
+  addResult("negative_decision_package_rejected_count_two", decisionPackage.rejected_sample_drafts?.length === 2);
+  addResult("negative_decision_package_memory_delta_count_one", decisionPackage.memory_delta_drafts?.length === 1);
+  addResult("negative_decision_package_memory_forbidden_count_one", decisionPackage.memory_forbidden_records?.length === 1);
+  addResult("negative_decision_package_production_exclusion_count_two", decisionPackage.production_exclusion_register?.length === 2);
+  addResult(
+    "negative_decision_package_unknown_memory_forbidden_recorded",
+    decisionPackage.memory_forbidden_records?.some((item) => item.candidate_id === "candidate_reject_unknown_guard_001")
+  );
+  addResult(
+    "negative_decision_package_all_rejected_never_production_registered",
+    ["candidate_reject_mapped_guard_001", "candidate_reject_unknown_guard_001"].every((id) =>
+      decisionPackage.production_exclusion_register?.some((item) => item.candidate_id === id)
+    )
+  );
+  addResult("negative_decision_package_production_candidate_false", decisionPackage.decision_summary?.production_candidate_created === false);
+  addResult("negative_decision_package_direct_memory_write_false", decisionPackage.decision_summary?.direct_memory_write_performed === false);
+
+  const decisionHandoff = response.review_decision_package_handoff_draft || {};
+  addResult("negative_decision_handoff_draft_ready", decisionHandoff.status === "draft_ready");
+  addResult("negative_decision_handoff_accepted_count_zero", decisionHandoff.accepted_sample_draft_count === 0);
+  addResult("negative_decision_handoff_rejected_count_two", decisionHandoff.rejected_sample_draft_count === 2);
+  addResult("negative_decision_handoff_memory_delta_count_one", decisionHandoff.memory_delta_draft_count === 1);
+  addResult("negative_decision_handoff_memory_forbidden_count_one", decisionHandoff.memory_forbidden_count === 1);
+  addResult("negative_decision_handoff_production_exclusion_count_two", decisionHandoff.production_exclusion_count === 2);
+  addResult(
+    "negative_decision_handoff_memory_forbidden_id_present",
+    Array.isArray(decisionHandoff.memory_forbidden_candidate_ids) &&
+      decisionHandoff.memory_forbidden_candidate_ids.includes("candidate_reject_unknown_guard_001")
+  );
+  addResult(
+    "negative_decision_handoff_production_exclusion_ids_present",
+    Array.isArray(decisionHandoff.production_exclusion_candidate_ids) &&
+      decisionHandoff.production_exclusion_candidate_ids.includes("candidate_reject_mapped_guard_001") &&
+      decisionHandoff.production_exclusion_candidate_ids.includes("candidate_reject_unknown_guard_001")
+  );
+  addResult("negative_decision_handoff_production_candidate_false", decisionHandoff.production_candidate_created === false);
+  addResult("negative_decision_handoff_direct_memory_write_false", decisionHandoff.direct_memory_write_performed === false);
+  addResult("negative_decision_handoff_accepted_samples_write_false", decisionHandoff.accepted_samples_write_performed === false);
+  addResult("negative_decision_handoff_pass_not_approval", decisionHandoff.protocol_pass_is_not_production_approval === true);
+  addResult("negative_decision_handoff_never_production_blocked", decisionHandoff.every_never_production_candidate_blocked === true);
+
   const reviewGuard = review.review_protocol_guard_summary || {};
   addResult("negative_review_guard_summary_present", Boolean(review.review_protocol_guard_summary));
   addResult("negative_review_guard_never_production_count_two", reviewGuard.never_production_count === 2);
@@ -245,7 +349,23 @@ function validateNegativeGuardAdapterResponse(response) {
   addResult("negative_review_guard_direct_memory_write_false", reviewGuard.direct_memory_write_performed === false);
   addResult("negative_review_guard_negative_guard_true", reviewGuard.negative_guard_observed === true);
 
+  const reviewDecisionGuard = review.review_decision_package_guard_summary || {};
+  addResult("negative_review_decision_guard_summary_present", Boolean(review.review_decision_package_guard_summary));
+  addResult("negative_review_decision_guard_accepted_count_zero", reviewDecisionGuard.accepted_sample_draft_count === 0);
+  addResult("negative_review_decision_guard_rejected_count_two", reviewDecisionGuard.rejected_sample_draft_count === 2);
+  addResult("negative_review_decision_guard_memory_delta_count_one", reviewDecisionGuard.memory_delta_draft_count === 1);
+  addResult("negative_review_decision_guard_memory_forbidden_count_one", reviewDecisionGuard.memory_forbidden_count === 1);
+  addResult("negative_review_decision_guard_production_exclusion_count_two", reviewDecisionGuard.production_exclusion_count === 2);
+  addResult("negative_review_decision_guard_production_candidate_false", reviewDecisionGuard.production_candidate_created === false);
+  addResult("negative_review_decision_guard_direct_memory_write_false", reviewDecisionGuard.direct_memory_write_performed === false);
+  addResult("negative_review_decision_guard_accepted_samples_write_false", reviewDecisionGuard.accepted_samples_write_performed === false);
+
   addResult("negative_audit_production_candidate_false", response.audit_record?.production_candidate_created === false);
+  addResult("negative_audit_decision_package_observed_true", response.audit_record?.review_decision_package_observed === true);
+  addResult("negative_audit_accepted_sample_draft_count_zero", response.audit_record?.accepted_sample_draft_count === 0);
+  addResult("negative_audit_rejected_sample_draft_count_two", response.audit_record?.rejected_sample_draft_count === 2);
+  addResult("negative_audit_memory_delta_draft_count_one", response.audit_record?.memory_delta_draft_count === 1);
+  addResult("negative_audit_production_exclusion_count_two", response.audit_record?.production_exclusion_count === 2);
   addResult("negative_audit_never_production_count_two", response.audit_record?.never_production_count === 2);
   addResult("negative_audit_memory_forbidden_count_one", response.audit_record?.memory_forbidden_count === 1);
   addResult("negative_audit_negative_guard_true", response.audit_record?.negative_guard_observed === true);
@@ -280,6 +400,11 @@ try {
   addResult("schema_max_plugin_calls_zero", /max_plugin_calls: 0/.test(schema));
   addResult("schema_protocol_report_declared", /review_result_protocol_report/.test(schema));
   addResult("schema_protocol_handoff_declared", /review_result_protocol_handoff_draft/.test(schema));
+  addResult("schema_decision_package_declared", /review_decision_package:/.test(schema));
+  addResult("schema_decision_handoff_declared", /review_decision_package_handoff_draft:/.test(schema));
+  addResult("schema_decision_package_attached_declared", /review_decision_package_attached: true/.test(schema));
+  addResult("schema_production_exclusion_declared", /production_exclusion_register: array/.test(schema));
+  addResult("schema_decision_guard_declared", /review_decision_package_guard_summary:/.test(schema));
   addResult("schema_protocol_attached_declared", /review_result_protocol_report_attached: true/.test(schema));
   addResult("schema_negative_guard_declared", /negative_guard_observed: boolean/.test(schema));
   addResult("schema_memory_forbidden_declared", /memory_forbidden_count: integer/.test(schema));
@@ -296,13 +421,28 @@ try {
   addResult("example_max_plugin_calls_zero", example.vcp_adapter_handoff_draft?.max_plugin_calls === 0);
   addResult("example_protocol_report_present", Boolean(example.review_result_protocol_report));
   addResult("example_protocol_handoff_present", Boolean(example.review_result_protocol_handoff_draft));
+  addResult("example_decision_package_present", Boolean(example.review_decision_package));
+  addResult("example_decision_handoff_present", Boolean(example.review_decision_package_handoff_draft));
   addResult("example_protocol_never_production_count_one", example.review_result_protocol_report?.report_summary?.never_production_count === 1);
   addResult("example_protocol_handoff_memory_forbidden_count_zero", example.review_result_protocol_handoff_draft?.memory_forbidden_count === 0);
   addResult("example_protocol_handoff_all_production_blocked", example.review_result_protocol_handoff_draft?.all_production_candidate_creation_blocked === true);
   addResult("example_protocol_handoff_negative_guard_false", example.review_result_protocol_handoff_draft?.negative_guard_observed === false);
+  addResult("example_decision_package_accepted_count_one", example.review_decision_package?.accepted_sample_drafts?.length === 1);
+  addResult("example_decision_package_rejected_count_one", example.review_decision_package?.rejected_sample_drafts?.length === 1);
+  addResult("example_decision_package_memory_delta_count_two", example.review_decision_package?.memory_delta_drafts?.length === 2);
+  addResult("example_decision_package_production_exclusion_count_one", example.review_decision_package?.production_exclusion_register?.length === 1);
+  addResult("example_decision_handoff_accepted_count_one", example.review_decision_package_handoff_draft?.accepted_sample_draft_count === 1);
+  addResult("example_decision_handoff_rejected_count_one", example.review_decision_package_handoff_draft?.rejected_sample_draft_count === 1);
+  addResult("example_decision_handoff_memory_delta_count_two", example.review_decision_package_handoff_draft?.memory_delta_draft_count === 2);
+  addResult("example_decision_handoff_production_exclusion_count_one", example.review_decision_package_handoff_draft?.production_exclusion_count === 1);
+  addResult("example_decision_handoff_no_direct_memory_write", example.review_decision_package_handoff_draft?.direct_memory_write_performed === false);
+  addResult("example_decision_handoff_no_production_candidate", example.review_decision_package_handoff_draft?.production_candidate_created === false);
   addResult("example_review_console_protocol_attached", example.review_console_handoff_draft?.review_result_protocol_report_attached === true);
+  addResult("example_review_console_decision_package_attached", example.review_console_handoff_draft?.review_decision_package_attached === true);
   addResult("example_review_console_guard_summary_present", Boolean(example.review_console_handoff_draft?.review_protocol_guard_summary));
+  addResult("example_review_console_decision_guard_summary_present", Boolean(example.review_console_handoff_draft?.review_decision_package_guard_summary));
   addResult("example_review_console_guard_memory_forbidden_count_zero", example.review_console_handoff_draft?.review_protocol_guard_summary?.memory_forbidden_count === 0);
+  addResult("example_review_console_decision_guard_production_exclusion_count_one", example.review_console_handoff_draft?.review_decision_package_guard_summary?.production_exclusion_count === 1);
   for (const flag of falseGuardFields) {
     addResult(`example_guard_${flag}_false`, example.no_execution_guard?.[flag] === false);
   }
@@ -347,9 +487,15 @@ const summary = {
     kernel_dependency_present: fs.existsSync(repoPath(kernelPath)),
     review_result_protocol_binding_present: true,
     review_console_protocol_handoff_present: true,
+    review_decision_package_binding_present: true,
+    review_decision_package_handoff_present: true,
+    review_console_decision_package_handoff_present: true,
     never_production_contract_verified: true,
     negative_guard_adapter_handoff_verified: true,
     negative_guard_review_console_handoff_verified: true,
+    negative_guard_decision_package_handoff_verified: true,
+    negative_guard_memory_forbidden_package_binding_verified: true,
+    negative_guard_production_exclusion_register_binding_verified: true,
     negative_guard_memory_forbidden_verified: true,
     negative_guard_all_rejected_never_production_verified: true,
     negative_guard_no_production_candidate_verified: true,

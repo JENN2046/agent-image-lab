@@ -13,6 +13,8 @@ pvos_kernel_dry_run_adapter_response:
     - kernel_run
     - review_result_protocol_report
     - review_result_protocol_handoff_draft
+    - review_decision_package
+    - review_decision_package_handoff_draft
     - vcp_adapter_handoff_draft
     - review_console_handoff_draft
     - provenance_handoff_draft
@@ -62,17 +64,69 @@ pvos_kernel_dry_run_adapter_response:
       - reject_reasons
       - memory_route
       - production_route
+  review_decision_package:
+    review_decision_package_version: v1
+    status: completed_local_decision_package
+    mode: local_stdout_only_review_decision_package
+    accepted_sample_drafts: array
+    rejected_sample_drafts: array
+    memory_delta_drafts: array
+    memory_forbidden_records: array
+    production_exclusion_register: array
+    decision_summary:
+      direct_memory_write_performed: false
+      production_candidate_created: false
+      accepted_samples_write_performed: false
+    promotion_guard:
+      protocol_pass_is_not_production_approval: true
+      every_never_production_candidate_blocked: true
+      production_candidate_created: false
+      direct_memory_write_performed: false
+  review_decision_package_handoff_draft:
+    status: draft_ready
+    accepted_sample_draft_count: integer
+    rejected_sample_draft_count: integer
+    memory_delta_draft_count: integer
+    memory_forbidden_count: integer
+    production_exclusion_count: integer
+    accepted_sample_ids: array
+    rejected_sample_ids: array
+    memory_delta_ids: array
+    memory_forbidden_candidate_ids: array
+    production_exclusion_candidate_ids: array
+    direct_memory_write_performed: false
+    production_candidate_created: false
+    accepted_samples_write_performed: false
+    protocol_pass_is_not_production_approval: true
+    every_never_production_candidate_blocked: true
+    required_decision_fields:
+      - accepted_sample_drafts
+      - rejected_sample_drafts
+      - memory_delta_drafts
+      - memory_forbidden_records
+      - production_exclusion_register
+      - promotion_guard
   review_console_handoff_draft:
     display_only: true
     human_review_required_for_production: true
     memory_write_requires_separate_approval: true
     review_result_protocol_report_attached: true
+    review_decision_package_attached: true
     review_protocol_guard_summary:
       never_production_count: integer
       memory_forbidden_count: integer
       production_candidate_created: false
       direct_memory_write_performed: false
       negative_guard_observed: boolean
+    review_decision_package_guard_summary:
+      accepted_sample_draft_count: integer
+      rejected_sample_draft_count: integer
+      memory_delta_draft_count: integer
+      memory_forbidden_count: integer
+      production_exclusion_count: integer
+      production_candidate_created: false
+      direct_memory_write_performed: false
+      accepted_samples_write_performed: false
     forbidden_actions:
       - execute_plugin
       - call_api

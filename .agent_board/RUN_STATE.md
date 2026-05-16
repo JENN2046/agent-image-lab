@@ -3,18 +3,61 @@
 ## Current Mode
 
 ```text
-A5 full-development authorized local kernel implementation under Jenn's 2026-05-16 window
+A5 full-development authorized local adapter evidence handoff implementation under Jenn's 2026-05-16 window
 ```
 
 ## Current Mission
 
 ```text
-Agent Image Lab is in v14_046_review_decision_package_gate. This A5 full-development local slice packages hard review-result protocol output into accepted/rejected sample drafts, memory draft/forbidden records, and a never-production register. It remains stdout-only and local: no provider/plugin/API/image/DailyNote/VCP memory/output writes, no real VCP runtime integration, and no production candidate creation.
+Agent Image Lab is in v14_047_review_decision_package_adapter_binding_gate. This A5 full-development local slice binds the review decision package into the PVOS dry-run adapter handoff so evidence and blocker routes become adapter-visible fields. It remains stdout-only and local: no provider/plugin/API/image/DailyNote/VCP memory/output writes, no real VCP runtime integration, and no production candidate creation.
 ```
 
 ## Current Phase
 
 ```text
+V14.047 Review Decision Package Adapter Binding Gate
+phase_id: v14_047_review_decision_package_adapter_binding_gate
+status: completed_local_validated
+source_phase: v14_046_review_decision_package_gate
+source_commit: 608f508
+selected_product_route: review_decision_package_adapter_binding
+branch: master tracking origin/master
+phase_record: docs/v14_047_review_decision_package_adapter_binding_gate.md
+adapter_modified: adapters/pvos_kernel_dry_run_adapter.js
+adapter_schema_modified: schemas/pvos_kernel_dry_run_adapter.schema.yaml
+adapter_example_modified: tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json
+adapter_validator_modified: scripts/validate_pvos_kernel_dry_run_adapter.js
+validator_wiring_modified: scripts/validate_mvp.ps1
+kernel_readme_modified: kernel/README.md
+review_decision_package_binding_present: true
+review_decision_package_handoff_present: true
+review_console_decision_package_handoff_present: true
+negative_guard_decision_package_handoff_verified: true
+negative_guard_memory_forbidden_package_binding_verified: true
+negative_guard_production_exclusion_register_binding_verified: true
+direct_memory_write_performed: false
+production_candidate_created: false
+accepted_samples_written: false
+image_binaries_read: false
+runs_output_committed: false
+runtime_prototype_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+memory_write: false
+DailyNote_write: false
+VCP_memory_write: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v14_048_review_console_decision_package_ui_binding_gate
+recommended_next_auto_execution_allowed: true
+push_requires_explicit_remote_authorization: true
+runtime_provider_image_memory_production_batch: false
+next_phase_started: false
+---
 V14.046 Review Decision Package Gate
 phase_id: v14_046_review_decision_package_gate
 status: completed_local_validated
