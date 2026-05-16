@@ -153,6 +153,7 @@ $requiredFiles = @(
   'scripts/validate_v7_34_3_shot_stability_test_plan.js',
   'scripts/validate_prompt_package_library.js',
   'scripts/validate_a5_generation_template.js',
+  'scripts/validate_visual_eval_seed_record_schema.js',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -210,6 +211,10 @@ $requiredFiles = @(
   'docs/212_v10_26_real_dailynote_write_closeout.md',
   'docs/213_v10_27_dailynotewrite_root_path_correction.md',
   'docs/214_v10_28_dailynote_canonical_location_guard.md',
+  'docs/v14_025_visual_eval_seed_record_schema_planning_gate.md',
+  'docs/v14_026_visual_eval_seed_record_schema_draft_gate.md',
+  'docs/v14_027_visual_eval_seed_record_validator_planning_gate.md',
+  'docs/v14_028_visual_eval_seed_record_validator_implementation_gate.md',
   'integrations/vcp/v0_3_authorization_closeout.md',
   'integrations/vcp/phase_c_manifest_sanitized_read_contract.md',
   'integrations/vcp/phase_c_manifest_sanitized_review_record.md',
@@ -249,6 +254,7 @@ $requiredFiles = @(
   'schemas/memory_delta.schema.yaml',
   'schemas/dispatch_plan.schema.yaml',
   'schemas/review_session.schema.yaml',
+  'schemas/visual_eval_seed_record.schema.yaml',
   'tests/validation_checklist.md',
   'tests/schema_examples/task_envelope.example.yaml',
   'tests/schema_examples/review_score.example.yaml',
@@ -320,6 +326,7 @@ $requiredFiles = @(
   'tests/schema_examples/v10_26_real_dailynote_write_closeout.example.yaml',
   'tests/schema_examples/v10_27_dailynotewrite_root_path_correction.example.yaml',
   'tests/schema_examples/v10_28_dailynote_canonical_location_guard.example.yaml',
+  'tests/schema_examples/visual_eval_seed_record.example.yaml',
   'review_console/static_prototype/index.html',
   'review_console/static_prototype/app.js',
   'review_console/static_prototype/mock_data.js',
@@ -3940,6 +3947,11 @@ if (-not $node) {
     Add-Failure "scripts/validate_agent_board_state.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'scripts/validate_visual_eval_seed_record_schema.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_visual_eval_seed_record_schema.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_local_checkpoint_manifest.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_local_checkpoint_manifest.js failed node --check"
@@ -4001,6 +4013,43 @@ if (-not $node) {
     }
     if ($agentBoardState.agent_board_state.file_write_performed -ne $false) {
       Add-Failure "agent board state validation must not write files"
+    }
+  }
+
+  $visualEvalSeedRecordOutput = & node (Join-Path $Root 'scripts/validate_visual_eval_seed_record_schema.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "visual eval seed record schema validation exited with failure"
+  } else {
+    $visualEvalSeedRecord = ($visualEvalSeedRecordOutput -join "`n") | ConvertFrom-Json
+    if ($visualEvalSeedRecord.passed -ne $true) {
+      Add-Failure "visual eval seed record schema validation must report passed true"
+    }
+    if ($visualEvalSeedRecord.visual_eval_seed_record_schema.schema_file_present -ne $true) {
+      Add-Failure "visual eval seed record schema validation must verify schema file"
+    }
+    if ($visualEvalSeedRecord.visual_eval_seed_record_schema.example_file_present -ne $true) {
+      Add-Failure "visual eval seed record schema validation must verify example file"
+    }
+    if ($visualEvalSeedRecord.visual_eval_seed_record_schema.metadata_only_verified -ne $true) {
+      Add-Failure "visual eval seed record schema validation must verify metadata-only boundary"
+    }
+    if ($visualEvalSeedRecord.visual_eval_seed_record_schema.external_network_required -ne $false) {
+      Add-Failure "visual eval seed record schema validation must not require external network"
+    }
+    if ($visualEvalSeedRecord.visual_eval_seed_record_schema.provider_contact_performed -ne $false) {
+      Add-Failure "visual eval seed record schema validation must not perform provider contact"
+    }
+    if ($visualEvalSeedRecord.visual_eval_seed_record_schema.plugin_call_performed -ne $false) {
+      Add-Failure "visual eval seed record schema validation must not call plugins"
+    }
+    if ($visualEvalSeedRecord.visual_eval_seed_record_schema.image_generation_performed -ne $false) {
+      Add-Failure "visual eval seed record schema validation must not generate images"
+    }
+    if ($visualEvalSeedRecord.visual_eval_seed_record_schema.memory_write_performed -ne $false) {
+      Add-Failure "visual eval seed record schema validation must not write memory"
+    }
+    if ($visualEvalSeedRecord.visual_eval_seed_record_schema.file_write_performed -ne $false) {
+      Add-Failure "visual eval seed record schema validation must not write files"
     }
   }
 
