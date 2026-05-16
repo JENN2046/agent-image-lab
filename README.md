@@ -7,6 +7,37 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 当前仓库处于：
 
 ```text
+Current phase: v14_023_visual_eval_failure_tag_mapping_planning_gate.
+source_phase: v14_022_visual_eval_decision_policy_planning_gate.
+source_commit: a327d67d58125fe435d1560b881a6b36704a8d8c.
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning.
+Current mainline state: Visual eval failure tag mapping planning connects the v14.020 failure taxonomy to the v14.022 decision policy. It maps hard reject tags, patch candidate tags, archive-reference-only tags, and human-review escalation tags into default decisions and blocked boundaries. No schema files, eval samples, accepted/rejected registries, accepted_samples, prototype changes, scripts changes, runtime, provider contact, image generation, memory write, production_candidate_002, or Batch_005 are created or authorized.
+phase_record: docs/v14_023_visual_eval_failure_tag_mapping_planning_gate.md.
+failure_tag_mapping_created: true.
+hard_reject_tag_mapping_created: true.
+patch_candidate_tag_mapping_created: true.
+archive_reference_only_tag_mapping_created: true.
+human_review_escalation_tags_created: true.
+mapping_fields_planned: true.
+policy_rules_created: true.
+memory_suitability_default_false: true.
+production_candidate_eligible_default_false: true.
+schema_files_created: false.
+eval_samples_created: false.
+accepted_samples_written: false.
+prototype_files_modified: false.
+scripts_modified: false.
+browser_preview_started: false.
+runtime_execution: false.
+provider_contact: false.
+image_generation: false.
+memory_write: false.
+production_candidate_002: false.
+Batch_005: false.
+recommended_next: v14_024_visual_eval_minimal_seed_set_planning_gate.
+docs_only_gate_creation_and_validation_only: true.
+runtime_provider_image_memory_production_batch: false.
+next_phase_started: false.
 Current phase: v14_022_visual_eval_decision_policy_planning_gate.
 source_phase: v14_021b_rubric_phase_chain_reconciliation_closeout.
 source_commit: 088f3d5d3b0844041def2684243a91e5b1232492.

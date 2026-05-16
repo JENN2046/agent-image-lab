@@ -1,5 +1,41 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.023 Visual Eval Failure Tag Mapping Planning Gate
+
+```text
+phase_id: v14_023_visual_eval_failure_tag_mapping_planning_gate
+status: completed_remote_synced_after_guarded_push
+source_phase: v14_022_visual_eval_decision_policy_planning_gate
+source_commit: a327d67d58125fe435d1560b881a6b36704a8d8c
+selected_product_route: B_visual_eval_and_failure_taxonomy_planning
+phase_record: docs/v14_023_visual_eval_failure_tag_mapping_planning_gate.md
+failure_tag_mapping_created: true
+hard_reject_tag_mapping_created: true
+patch_candidate_tag_mapping_created: true
+archive_reference_only_tag_mapping_created: true
+human_review_escalation_tags_created: true
+mapping_fields_planned: true
+policy_rules_created: true
+memory_suitability_default_false: true
+production_candidate_eligible_default_false: true
+schema_files_created: false
+eval_samples_created: false
+accepted_samples_written: false
+prototype_files_modified: false
+scripts_modified: false
+browser_preview_started: false
+runtime_execution: false
+provider_contact: false
+image_generation: false
+memory_write: false
+production_candidate_002: false
+Batch_005: false
+recommended_next: v14_024_visual_eval_minimal_seed_set_planning_gate
+docs_only_gate_creation_and_validation_only: true
+runtime_provider_image_memory_production_batch: false
+next_phase_started: false
+```
+
 # V14.022 Visual Eval Decision Policy Planning Gate
 
 ```text
