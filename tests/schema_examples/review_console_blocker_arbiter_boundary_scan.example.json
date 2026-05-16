@@ -1,0 +1,113 @@
+{
+  "scan_id": "review_console_blocker_arbiter_boundary_scan_v14_057_001",
+  "phase": "v14_057_review_console_blocker_arbiter_boundary_scan_gate",
+  "source_phase": "v14_056_review_console_blocker_arbiter_regression_matrix_gate",
+  "source_commit": "70ce677",
+  "status": "local_boundary_scan",
+  "display_only": true,
+  "scan_targets": [
+    "tests/schema_examples/review_console_blocker_arbiter_regression_matrix.example.json",
+    "scripts/validate_review_console_blocker_arbiter_regression_matrix.js",
+    "docs/v14_056_review_console_blocker_arbiter_regression_matrix_gate.md"
+  ],
+  "required_allowed_refs": [
+    "review_console/static_prototype/mock_data.js",
+    "tests/schema_examples/review_console_adapter_negative_fixture_draft_output_snapshot.example.json",
+    "tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json",
+    "tests/schema_examples/evidence_blocker_contract_negative_guard.example.json"
+  ],
+  "forbidden_patterns": [
+    {
+      "label": "windows_absolute_path",
+      "pattern": "[A-Z]:[\\\\/]"
+    },
+    {
+      "label": "env_file_reference",
+      "pattern": "\\.env|config\\.env"
+    },
+    {
+      "label": "real_manifest_reference",
+      "pattern": "real[_ -]?manifest"
+    },
+    {
+      "label": "vcpchat_source_reference",
+      "pattern": "VCPChat source|real VCPChat"
+    },
+    {
+      "label": "vcptoolbox_source_reference",
+      "pattern": "VCPToolBox source|real VCPToolBox"
+    },
+    {
+      "label": "runs_path_reference",
+      "pattern": "runs[\\\\/]"
+    },
+    {
+      "label": "accepted_samples_path_reference",
+      "pattern": "accepted_samples[\\\\/]"
+    },
+    {
+      "label": "image_binary_reference",
+      "pattern": "\\.(png|jpe?g|webp|gif|psd)\\b"
+    },
+    {
+      "label": "network_url_reference",
+      "pattern": "https?:\\/\\/"
+    },
+    {
+      "label": "process_env_access",
+      "pattern": "process\\.env"
+    },
+    {
+      "label": "child_process_access",
+      "pattern": "child_process|node:child_process"
+    },
+    {
+      "label": "network_or_browser_api_call",
+      "pattern": "fetch\\s*\\(|XMLHttpRequest|\\bhttp\\.|\\bhttps\\.|\\bnet\\."
+    },
+    {
+      "label": "filesystem_write_call",
+      "pattern": "writeFile|appendFile|rmSync|rmdir|unlink|mkdir|createWriteStream"
+    },
+    {
+      "label": "shell_execution_call",
+      "pattern": "\\bexec\\s*\\(|\\bspawn\\s*\\("
+    },
+    {
+      "label": "provider_plugin_execution_true",
+      "pattern": "provider_contact_performed\\s*[:=]\\s*true|plugin_call_performed\\s*[:=]\\s*true|api_call_performed\\s*[:=]\\s*true|image_generation_performed\\s*[:=]\\s*true"
+    },
+    {
+      "label": "production_candidate_true",
+      "pattern": "production_candidate_created\\s*[:=]\\s*true|production_candidate_002\\s*[:=]\\s*true"
+    },
+    {
+      "label": "direct_memory_write_true",
+      "pattern": "direct_memory_write_performed\\s*[:=]\\s*true|vcp_memory_write_performed\\s*[:=]\\s*true|DailyNote_write\\s*[:=]\\s*true"
+    },
+    {
+      "label": "selected_plugin_non_null",
+      "pattern": "\"selected_plugin\"\\s*:\\s*(?:\"[^\"\\r\\n]+\"|true|false|[0-9]|\\{)"
+    },
+    {
+      "label": "max_plugin_calls_non_zero",
+      "pattern": "\"max_plugin_calls(?:_observed)?\"\\s*:\\s*[1-9]"
+    }
+  ],
+  "expected_result": {
+    "boundary_scan_passed": true,
+    "target_count": 3,
+    "forbidden_match_count": 0,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "daily_note_write_performed": false,
+    "vcp_memory_write_performed": false,
+    "image_generation_performed": false,
+    "output_file_write_performed": false,
+    "regression_matrix_rechecked": true,
+    "external_network_required": false,
+    "external_service_required": false,
+    "file_write_performed": false
+  }
+}

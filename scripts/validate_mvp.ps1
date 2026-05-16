@@ -66,6 +66,7 @@ $requiredFiles = @(
   'scripts/validate_adapter_delivery_surface.js',
   'scripts/validate_review_console_adapter_handoff.js',
   'scripts/validate_review_console_blocker_arbiter_regression_matrix.js',
+  'scripts/validate_review_console_blocker_arbiter_boundary_scan.js',
   'scripts/validate_v5_local_sync_readiness.js',
   'scripts/validate_v5_post_commit_reconciliation.js',
   'scripts/validate_v5_index_consistency.js',
@@ -178,6 +179,7 @@ $requiredFiles = @(
   'tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json',
   'tests/schema_examples/review_console_adapter_negative_fixture_draft_output_snapshot.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_regression_matrix.example.json',
+  'tests/schema_examples/review_console_blocker_arbiter_boundary_scan.example.json',
   'tests/schema_examples/review_result_protocol_input.example.json',
   'tests/schema_examples/review_result_protocol_report.example.json',
   'tests/schema_examples/review_result_protocol_negative_guard_input.example.json',
@@ -205,6 +207,7 @@ $requiredFiles = @(
   'docs/v14_054_review_console_adapter_negative_fixture_ui_binding_gate.md',
   'docs/v14_055_review_console_adapter_negative_fixture_draft_output_snapshot_gate.md',
   'docs/v14_056_review_console_blocker_arbiter_regression_matrix_gate.md',
+  'docs/v14_057_review_console_blocker_arbiter_boundary_scan_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -3932,6 +3935,11 @@ if (-not $node) {
     Add-Failure "scripts/validate_review_console_blocker_arbiter_regression_matrix.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'scripts/validate_review_console_blocker_arbiter_boundary_scan.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_review_console_blocker_arbiter_boundary_scan.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'scripts/validate_v5_local_sync_readiness.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "scripts/validate_v5_local_sync_readiness.js failed node --check"
@@ -5248,6 +5256,55 @@ if (-not $node) {
     }
   }
 
+  }
+
+  $reviewConsoleBlockerArbiterBoundaryScanOutput = & node (Join-Path $Root 'scripts/validate_review_console_blocker_arbiter_boundary_scan.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console blocker arbiter boundary scan validation exited with failure"
+  } else {
+    $reviewConsoleBlockerArbiterBoundaryScan = ($reviewConsoleBlockerArbiterBoundaryScanOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleBlockerArbiterBoundaryScan.passed -ne $true) {
+      Add-Failure "Review Console blocker arbiter boundary scan validation must report passed true"
+    }
+    if ($reviewConsoleBlockerArbiterBoundaryScan.review_console_blocker_arbiter_boundary_scan.blocker_arbiter_boundary_scan_present -ne $true) {
+      Add-Failure "Review Console blocker arbiter boundary scan must be present"
+    }
+    if ($reviewConsoleBlockerArbiterBoundaryScan.review_console_blocker_arbiter_boundary_scan.blocker_arbiter_boundary_targets_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter boundary scan must verify exact targets"
+    }
+    if ($reviewConsoleBlockerArbiterBoundaryScan.review_console_blocker_arbiter_boundary_scan.blocker_arbiter_no_env_reference_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter boundary scan must verify no env references"
+    }
+    if ($reviewConsoleBlockerArbiterBoundaryScan.review_console_blocker_arbiter_boundary_scan.blocker_arbiter_no_real_manifest_reference_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter boundary scan must verify no real manifest references"
+    }
+    if ($reviewConsoleBlockerArbiterBoundaryScan.review_console_blocker_arbiter_boundary_scan.blocker_arbiter_no_vcp_source_reference_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter boundary scan must verify no VCP source references"
+    }
+    if ($reviewConsoleBlockerArbiterBoundaryScan.review_console_blocker_arbiter_boundary_scan.blocker_arbiter_no_runs_or_accepted_samples_path_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter boundary scan must verify no runs or accepted_samples paths"
+    }
+    if ($reviewConsoleBlockerArbiterBoundaryScan.review_console_blocker_arbiter_boundary_scan.blocker_arbiter_no_image_binary_reference_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter boundary scan must verify no image binary references"
+    }
+    if ($reviewConsoleBlockerArbiterBoundaryScan.review_console_blocker_arbiter_boundary_scan.blocker_arbiter_no_network_or_process_execution_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter boundary scan must verify no network or process execution"
+    }
+    if ($reviewConsoleBlockerArbiterBoundaryScan.review_console_blocker_arbiter_boundary_scan.blocker_arbiter_no_write_api_verified -ne $true) {
+      Add-Failure "Review Console blocker arbiter boundary scan must verify no write APIs"
+    }
+    if ($reviewConsoleBlockerArbiterBoundaryScan.review_console_blocker_arbiter_boundary_scan.blocker_arbiter_regression_matrix_validator_rechecked -ne $true) {
+      Add-Failure "Review Console blocker arbiter boundary scan must recheck regression matrix invariants"
+    }
+    if ($reviewConsoleBlockerArbiterBoundaryScan.review_console_blocker_arbiter_boundary_scan.external_network_required -ne $false) {
+      Add-Failure "Review Console blocker arbiter boundary scan must not require external network"
+    }
+    if ($reviewConsoleBlockerArbiterBoundaryScan.review_console_blocker_arbiter_boundary_scan.external_service_required -ne $false) {
+      Add-Failure "Review Console blocker arbiter boundary scan must not require external service"
+    }
+    if ($reviewConsoleBlockerArbiterBoundaryScan.review_console_blocker_arbiter_boundary_scan.file_write_performed -ne $false) {
+      Add-Failure "Review Console blocker arbiter boundary scan validation must not write files"
+    }
   }
 
   if ($runHistoricalCurrentStateValidators) {
