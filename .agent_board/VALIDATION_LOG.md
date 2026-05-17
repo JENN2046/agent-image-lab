@@ -1,5 +1,54 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.141-RECOVERABILITY-CORE-EXTRACTION
+
+Scope:
+
+Validate that v14.131 real artifact recoverability logic was extracted into a
+reusable local core module and that the original validator still passes through
+the core path.
+
+Commands:
+
+```text
+node --check scripts/lib/artifact_recoverability_core.js
+node --check scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js
+node scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js
+node --check scripts/validate_v14_141_recoverability_core_extraction.js
+node scripts/validate_v14_141_recoverability_core_extraction.js
+git diff --check
+node scripts/validate_agent_board_state.js
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+Expected:
+
+```yaml
+passed: true
+recoverability_core_extracted: true
+v14_131_validator_uses_recoverability_core: true
+core_positive_chain_passes: true
+core_negative_hash_mismatch_fails: true
+core_negative_missing_artifact_fails: true
+core_negative_missing_human_approval_fails: true
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+```
+
 ## VALIDATION-20260517-v14.140-REVIEW-FINDINGS-REPAIR
 
 Scope:

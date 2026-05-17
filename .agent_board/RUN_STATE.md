@@ -1,5 +1,47 @@
 # RUN_STATE.md — Agent Image Lab
 
+## Active Two-Month Artifact Lifecycle Goal
+
+```text
+objective: extend v14.131-v14.140 single-sample recoverability into multi-category local artifact lifecycle product capability
+status: v14_141_recoverability_core_extraction_completed_validated
+mode: Persistent 4-Agent Council local loop under A4.8 / A4 — Sustained Local Autopilot
+phase_id: v14_141_recoverability_core_extraction
+phase_record_ref: docs/v14_141_recoverability_core_extraction.md
+recoverability_core_ref: scripts/lib/artifact_recoverability_core.js
+validator_created: scripts/validate_v14_141_recoverability_core_extraction.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+recoverability_core_extracted: true
+v14_131_validator_uses_recoverability_core: true
+core_positive_chain_passes: true
+core_negative_hash_mismatch_fails: true
+core_negative_missing_artifact_fails: true
+core_negative_missing_human_approval_fails: true
+multi_sample_matrix_started: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+image_binary_copy_performed: false
+runs_source_image_modified: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+validated_now: node --check scripts/lib/artifact_recoverability_core.js; node --check scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js; node scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js; node --check scripts/validate_v14_141_recoverability_core_extraction.js; node scripts/validate_v14_141_recoverability_core_extraction.js
+recommended_next: v14_142_multi_accepted_sample_matrix
+recommended_next_auto_execution_allowed: true_after_v14_141_local_commit
+```
+
 ## Active Two-Week Regression Closeout
 
 ```text

@@ -204,6 +204,8 @@ $requiredFiles = @(
   'scripts/validate_v14_138_dashboard_alignment_from_real_artifact_evidence.js',
   'scripts/validate_v14_139_durable_archive_production_candidate_memory_write_authorization_split_planning.js',
   'scripts/validate_v14_140_two_week_regression_closeout.js',
+  'scripts/lib/artifact_recoverability_core.js',
+  'scripts/validate_v14_141_recoverability_core_extraction.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -340,6 +342,7 @@ $requiredFiles = @(
   'docs/v14_138_dashboard_alignment_from_real_artifact_evidence.md',
   'docs/v14_139_durable_archive_production_candidate_memory_write_authorization_split_planning.md',
   'docs/v14_140_two_week_regression_closeout.md',
+  'docs/v14_141_recoverability_core_extraction.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8864,6 +8867,31 @@ process.exit(child.status || 0);
     }
     if ($twoWeekRegressionCloseout.real_manifest_read_performed -ne $false -or $twoWeekRegressionCloseout.real_vcpchat_read_performed -ne $false -or $twoWeekRegressionCloseout.real_vcptoolbox_read_performed -ne $false) {
       Add-Failure "two-week closeout must not read real manifest/VCPChat/VCPToolBox"
+    }
+  }
+
+  $recoverabilityCoreExtractionOutput = & node (Join-Path $Root 'scripts/validate_v14_141_recoverability_core_extraction.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "recoverability core extraction validation exited with failure"
+  } else {
+    $recoverabilityCoreExtraction = ($recoverabilityCoreExtractionOutput -join "`n") | ConvertFrom-Json
+    if ($recoverabilityCoreExtraction.passed -ne $true) {
+      Add-Failure "recoverability core extraction validation must pass"
+    }
+    if ($recoverabilityCoreExtraction.recoverability_core_extracted -ne $true -or $recoverabilityCoreExtraction.v14_131_validator_uses_recoverability_core -ne $true) {
+      Add-Failure "v14.141 must extract and use the recoverability core"
+    }
+    if ($recoverabilityCoreExtraction.core_positive_chain_passes -ne $true -or $recoverabilityCoreExtraction.core_negative_hash_mismatch_fails -ne $true -or $recoverabilityCoreExtraction.core_negative_missing_artifact_fails -ne $true -or $recoverabilityCoreExtraction.core_negative_missing_human_approval_fails -ne $true) {
+      Add-Failure "recoverability core must pass the positive chain and fail the required negative cases"
+    }
+    if ($recoverabilityCoreExtraction.vcp_runtime_integration_proven -ne $false -or $recoverabilityCoreExtraction.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "recoverability core extraction must not claim VCP runtime integration"
+    }
+    if ($recoverabilityCoreExtraction.provider_contact_performed -ne $false -or $recoverabilityCoreExtraction.plugin_call_performed -ne $false -or $recoverabilityCoreExtraction.api_call_performed -ne $false -or $recoverabilityCoreExtraction.mcp_runtime_performed -ne $false) {
+      Add-Failure "recoverability core extraction must not call provider/plugin/API/MCP"
+    }
+    if ($recoverabilityCoreExtraction.image_generation_performed -ne $false -or $recoverabilityCoreExtraction.production_candidate_created -ne $false -or $recoverabilityCoreExtraction.daily_note_write_performed -ne $false -or $recoverabilityCoreExtraction.vcp_memory_write_performed -ne $false) {
+      Add-Failure "recoverability core extraction must not generate images, create production candidates, or write memory"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

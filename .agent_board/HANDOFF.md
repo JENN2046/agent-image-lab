@@ -3,6 +3,41 @@
 ## Handoff Summary
 
 ```text
+Status: v14_141_recoverability_core_extraction completed locally and validated.
+Reason: The new two-month artifact lifecycle goal starts by extracting v14.131 recoverability logic into a reusable local core.
+Current repository: project_root
+Branch: master tracking origin/master; local commits may be ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.141 core, validator, phase record, MVP wiring, and .agent_board sync until commit decision.
+Phase record: docs/v14_141_recoverability_core_extraction.md
+Recoverability core: scripts/lib/artifact_recoverability_core.js
+Validator created: scripts/validate_v14_141_recoverability_core_extraction.js
+MVP validator updated: scripts/validate_mvp.ps1
+recoverability_core_extracted: true
+v14_131_validator_uses_recoverability_core: true
+core_positive_chain_passes: true
+core_negative_hash_mismatch_fails: true
+core_negative_missing_artifact_fails: true
+core_negative_missing_human_approval_fails: true
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+validated_now: node --check scripts/lib/artifact_recoverability_core.js; node --check scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js; node scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js; node --check scripts/validate_v14_141_recoverability_core_extraction.js; node scripts/validate_v14_141_recoverability_core_extraction.js
+recommended_next: v14_142_multi_accepted_sample_matrix
+recommended_next_auto_execution_allowed: true_after_v14_141_local_commit
+---
 Status: v14_140_two_week_regression_closeout completed locally and validated; review-finding repair completed and validated.
 Reason: The v14.131-v14.140 two-week chain now has a regression closeout and three-part progress report; review found two local repair items.
 Current repository: project_root
