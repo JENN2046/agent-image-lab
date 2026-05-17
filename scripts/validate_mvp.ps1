@@ -186,6 +186,7 @@ $requiredFiles = @(
   'scripts/validate_v14_120_visual_series_taxonomy_review_scorecard_alignment.js',
   'scripts/validate_v14_121_codex_session_prompt_package_library_governance.js',
   'scripts/validate_v14_122_local_review_record_schema_refresh.js',
+  'scripts/validate_v14_123_memory_delta_draft_schema_alignment_for_codex_reviews.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -299,6 +300,7 @@ $requiredFiles = @(
   'docs/v14_120_visual_series_taxonomy_review_scorecard_alignment.md',
   'docs/v14_121_codex_session_prompt_package_library_governance.md',
   'docs/v14_122_local_review_record_schema_refresh.md',
+  'docs/v14_123_memory_delta_draft_schema_alignment_for_codex_reviews.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8193,6 +8195,37 @@ process.exit(child.status || 0);
     }
     if ($localReviewRecordSchema.accepted_samples_write_performed -ne $false -or $localReviewRecordSchema.failure_samples_write_performed -ne $false -or $localReviewRecordSchema.production_candidate_created -ne $false) {
       Add-Failure "local review record schema validation must not write samples or production candidates"
+    }
+  }
+
+  $memoryDeltaDraftAlignmentOutput = & node (Join-Path $Root 'scripts/validate_v14_123_memory_delta_draft_schema_alignment_for_codex_reviews.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "memory_delta draft schema alignment for Codex reviews validation exited with failure"
+  } else {
+    $memoryDeltaDraftAlignment = ($memoryDeltaDraftAlignmentOutput -join "`n") | ConvertFrom-Json
+    if ($memoryDeltaDraftAlignment.passed -ne $true) {
+      Add-Failure "memory_delta draft schema alignment for Codex reviews validation must pass"
+    }
+    if ($memoryDeltaDraftAlignment.memory_delta_draft_schema_aligned_for_codex_reviews -ne $true -or $memoryDeltaDraftAlignment.review_record_to_memory_delta_mapping_verified -ne $true) {
+      Add-Failure "memory_delta draft schema must remain mapped to Codex review records"
+    }
+    if ($memoryDeltaDraftAlignment.memory_delta_draft_only_verified -ne $true -or $memoryDeltaDraftAlignment.daily_note_vcp_memory_write_blocked -ne $true) {
+      Add-Failure "memory_delta alignment must stay draft-only and block DailyNote/VCP memory writes"
+    }
+    if ($memoryDeltaDraftAlignment.provider_contact_performed -ne $false -or $memoryDeltaDraftAlignment.plugin_call_performed -ne $false -or $memoryDeltaDraftAlignment.api_call_performed -ne $false -or $memoryDeltaDraftAlignment.mcp_runtime_performed -ne $false) {
+      Add-Failure "memory_delta draft alignment validation must not call provider/plugin/API/MCP"
+    }
+    if ($memoryDeltaDraftAlignment.image_generation_performed -ne $false -or $memoryDeltaDraftAlignment.output_file_write_performed -ne $false -or $memoryDeltaDraftAlignment.file_write_performed -ne $false) {
+      Add-Failure "memory_delta draft alignment validation must not generate images or write files"
+    }
+    if ($memoryDeltaDraftAlignment.daily_note_write_performed -ne $false -or $memoryDeltaDraftAlignment.vcp_memory_write_performed -ne $false) {
+      Add-Failure "memory_delta draft alignment validation must not write DailyNote or VCP memory"
+    }
+    if ($memoryDeltaDraftAlignment.real_manifest_read_performed -ne $false -or $memoryDeltaDraftAlignment.real_vcpchat_read_performed -ne $false -or $memoryDeltaDraftAlignment.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "memory_delta draft alignment validation must not read real manifest/VCPChat/VCPToolBox"
+    }
+    if ($memoryDeltaDraftAlignment.accepted_samples_write_performed -ne $false -or $memoryDeltaDraftAlignment.failure_samples_write_performed -ne $false -or $memoryDeltaDraftAlignment.production_candidate_created -ne $false) {
+      Add-Failure "memory_delta draft alignment validation must not write samples or production candidates"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

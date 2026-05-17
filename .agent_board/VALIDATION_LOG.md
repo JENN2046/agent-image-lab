@@ -1,5 +1,50 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.123-MEMORY-DELTA-DRAFT-SCHEMA-ALIGNMENT-FOR-CODEX-REVIEWS
+
+Scope:
+
+Validate that Codex-session local review record fields map to memory_delta draft fields while keeping write_mode=draft, approval_status=pending, should_write_to_vcp=false, and DailyNote/VCP memory writes blocked.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_123_memory_delta_draft_schema_alignment_for_codex_reviews.js
+node scripts/validate_v14_123_memory_delta_draft_schema_alignment_for_codex_reviews.js
+```
+
+Expected:
+
+```yaml
+passed: true
+memory_delta_draft_schema_aligned_for_codex_reviews: true
+review_record_to_memory_delta_mapping_verified: true
+memory_delta_draft_only_verified: true
+daily_note_vcp_memory_write_blocked: true
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+output_file_write_performed: false
+```
+
+Result:
+
+```yaml
+status: passed
+validator: scripts/validate_v14_123_memory_delta_draft_schema_alignment_for_codex_reviews.js
+phase_record: docs/v14_123_memory_delta_draft_schema_alignment_for_codex_reviews.md
+```
+
 ## VALIDATION-20260517-v14.122-LOCAL-REVIEW-RECORD-SCHEMA-REFRESH
 
 Scope:

@@ -1,5 +1,36 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.123 Memory Delta Draft Schema Alignment For Codex Reviews
+
+```text
+phase_id: v14_123_memory_delta_draft_schema_alignment_for_codex_reviews
+status: completed_validated
+phase_record_ref: docs/v14_123_memory_delta_draft_schema_alignment_for_codex_reviews.md
+validator_created: scripts/validate_v14_123_memory_delta_draft_schema_alignment_for_codex_reviews.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+memory_delta_draft_schema_aligned_for_codex_reviews: true
+review_record_to_memory_delta_mapping_verified: true
+memory_delta_draft_only_verified: true
+daily_note_vcp_memory_write_blocked: true
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+output_file_write_performed: false
+validated_now: node --check scripts/validate_v14_123_memory_delta_draft_schema_alignment_for_codex_reviews.js; node scripts/validate_v14_123_memory_delta_draft_schema_alignment_for_codex_reviews.js
+recommended_next: review_console_memory_delta_handoff_refresh
+recommended_next_auto_execution_allowed: true
+```
+
 # V14.122 Local Review Record Schema Refresh
 
 ```text
