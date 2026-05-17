@@ -198,6 +198,7 @@ $requiredFiles = @(
   'scripts/validate_v14_132_state_scope_canonicalization.js',
   'scripts/validate_v14_133_main_validator_real_import_record_wiring.js',
   'scripts/validate_v14_134_review_console_static_import_record_reader.js',
+  'scripts/validate_v14_135_review_console_import_reader_safety_review.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -326,6 +327,7 @@ $requiredFiles = @(
   'docs/v14_132_state_scope_canonicalization.md',
   'docs/v14_133_main_validator_real_import_record_wiring.md',
   'docs/v14_134_review_console_static_import_record_reader.md',
+  'docs/v14_135_review_console_import_reader_safety_review.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8646,6 +8648,37 @@ process.exit(child.status || 0);
     }
     if ($reviewConsoleStaticImportRecordReader.real_manifest_read_performed -ne $false -or $reviewConsoleStaticImportRecordReader.real_vcpchat_read_performed -ne $false -or $reviewConsoleStaticImportRecordReader.real_vcptoolbox_read_performed -ne $false) {
       Add-Failure "Review Console import reader must not read real manifest/VCPChat/VCPToolBox"
+    }
+  }
+
+  $reviewConsoleImportReaderSafetyReviewOutput = & node (Join-Path $Root 'scripts/validate_v14_135_review_console_import_reader_safety_review.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console import reader safety review validation exited with failure"
+  } else {
+    $reviewConsoleImportReaderSafetyReview = ($reviewConsoleImportReaderSafetyReviewOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleImportReaderSafetyReview.passed -ne $true) {
+      Add-Failure "Review Console import reader safety review validation must pass"
+    }
+    if ($reviewConsoleImportReaderSafetyReview.no_fetch_or_network_path_verified -ne $true -or $reviewConsoleImportReaderSafetyReview.no_file_write_path_verified -ne $true) {
+      Add-Failure "Review Console import reader safety review must verify no fetch/network or file write path"
+    }
+    if ($reviewConsoleImportReaderSafetyReview.no_plugin_or_provider_path_verified -ne $true -or $reviewConsoleImportReaderSafetyReview.no_vcp_runtime_path_verified -ne $true) {
+      Add-Failure "Review Console import reader safety review must verify no plugin/provider or VCP runtime path"
+    }
+    if ($reviewConsoleImportReaderSafetyReview.no_dailynote_or_vcp_memory_path_verified -ne $true -or $reviewConsoleImportReaderSafetyReview.review_console_static_reader_remains_in_memory_only -ne $true) {
+      Add-Failure "Review Console import reader safety review must verify no DailyNote/VCP memory and in-memory-only behavior"
+    }
+    if ($reviewConsoleImportReaderSafetyReview.provider_contact_performed -ne $false -or $reviewConsoleImportReaderSafetyReview.plugin_call_performed -ne $false -or $reviewConsoleImportReaderSafetyReview.api_call_performed -ne $false -or $reviewConsoleImportReaderSafetyReview.mcp_runtime_performed -ne $false) {
+      Add-Failure "Review Console import reader safety review must not call provider/plugin/API/MCP"
+    }
+    if ($reviewConsoleImportReaderSafetyReview.image_generation_performed -ne $false -or $reviewConsoleImportReaderSafetyReview.daily_note_write_performed -ne $false -or $reviewConsoleImportReaderSafetyReview.vcp_memory_write_performed -ne $false) {
+      Add-Failure "Review Console import reader safety review must not generate images or write DailyNote/VCP memory"
+    }
+    if ($reviewConsoleImportReaderSafetyReview.failure_samples_write_performed -ne $false -or $reviewConsoleImportReaderSafetyReview.production_candidate_created -ne $false) {
+      Add-Failure "Review Console import reader safety review must not write failure_samples or production candidates"
+    }
+    if ($reviewConsoleImportReaderSafetyReview.real_manifest_read_performed -ne $false -or $reviewConsoleImportReaderSafetyReview.real_vcpchat_read_performed -ne $false -or $reviewConsoleImportReaderSafetyReview.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "Review Console import reader safety review must not read real manifest/VCPChat/VCPToolBox"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding
