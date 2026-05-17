@@ -1,5 +1,40 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.110-CODEX-SESSION-IMPORT-REVIEW-CHAIN-VALIDATOR-ALIGNMENT
+
+Task:
+
+```text
+Create a local-session validator for the Codex session image import -> review record -> accepted_samples metadata chain.
+```
+
+Commands run:
+
+```text
+node --check scripts/validate_codex_session_review_chain.js
+node scripts/validate_codex_session_review_chain.js
+```
+
+Result:
+
+```text
+validator: scripts/validate_codex_session_review_chain.js
+import_record_count: 5
+check_count: 256
+failed_count: 0
+accepted_sample_link_verified: accepted_womens_resort_relaxed_knit_codex_v2_001
+image_binary_read_performed: false
+runs_source_image_modification_performed: false
+validation_result: completed_validated
+recommended_next: review_record_to_memory_delta_draft_suitability_gate
+```
+
+Boundary:
+
+```text
+No provider contact, plugin call, API call, MCP runtime, project-script image generation, .env or .env.local value read, image binary read, image binary copy, runs source image modification, DailyNote write, VCP memory write, failure_samples write, production_candidate write, real manifest read, real VCPChat read, real VCPToolBox read, push, tag, release, deploy, or dependency change was performed.
+```
+
 ## VALIDATION-20260517-v14.109-ACCEPTED-SAMPLES-METADATA-POLICY-VALIDATOR-ALIGNMENT
 
 Task:

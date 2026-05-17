@@ -1,5 +1,31 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.110 Codex Session Import Review Chain Validator Alignment
+
+```text
+phase_id: v14_110_codex_session_import_review_chain_validator_alignment
+status: completed_validated
+phase_record_ref: docs/v14_110_codex_session_import_review_chain_validator_alignment.md
+validator_created: scripts/validate_codex_session_review_chain.js
+validator_scope: local_session_runs_import_records_not_fresh_clone_mvp_baseline
+import_record_count_verified: 5
+review_record_count_verified: 3
+accepted_sample_link_verified: accepted_womens_resort_relaxed_knit_codex_v2_001
+image_binary_read_performed: false
+image_binary_copy_performed: false
+runs_source_image_modification_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+validated_now: node --check scripts/validate_codex_session_review_chain.js; node scripts/validate_codex_session_review_chain.js
+recommended_next: review_record_to_memory_delta_draft_suitability_gate
+recommended_next_auto_execution_allowed: true
+```
+
 # V14.109 Accepted Samples Metadata Policy Validator Alignment
 
 ```text
