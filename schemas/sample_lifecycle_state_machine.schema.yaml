@@ -1,0 +1,67 @@
+# sample_lifecycle_state_machine.schema.yaml
+# Local lifecycle contract for visual artifacts and accepted samples.
+
+sample_lifecycle_state_machine:
+  version: v1
+  state_order:
+    - imported
+    - reviewed
+    - accepted_metadata_registered
+    - recoverable
+    - archive_ready
+    - production_candidate_pending
+
+state_requirements:
+  imported:
+    import_record_exists: true
+    artifact_relative_path_present: true
+    local_file_verified: true
+  reviewed:
+    review_record_exists: true
+    review_decision_present: true
+    formal_acceptance_status_recorded: true
+  accepted_metadata_registered:
+    accepted_registry_entry_exists: true
+    category_index_entry_exists: true
+    human_approval_record_exists: true
+    accepted_samples_write_completed_by_authorization: true
+  recoverable:
+    artifact_exists: true
+    sha256_verified: true
+    dimensions_verified: true
+    mime_verified: true
+    import_review_registry_category_chain_verified: true
+  archive_ready:
+    durable_archive_manifest_prepared: true
+    image_binary_copy_performed: false
+    archive_execution_authorization_required: true
+  production_candidate_pending:
+    production_candidate_created: false
+    production_candidate_write_authorization_required: true
+    production_candidate_is_not_accepted_sample: true
+
+transition_guards:
+  imported_to_reviewed_requires_review_record: true
+  reviewed_to_accepted_metadata_registered_requires_human_approval: true
+  accepted_metadata_registered_to_recoverable_requires_hash_dimensions_mime: true
+  recoverable_to_archive_ready_requires_durable_archive_manifest_or_A5_authorization: true
+  archive_ready_to_production_candidate_pending_requires_separate_A5_authorization: true
+  accepted_sample_direct_to_production_candidate_forbidden: true
+
+current_v14_105_state:
+  sample_id: accepted_womens_resort_relaxed_knit_codex_v2_001
+  current_state: recoverable
+  archive_ready: false
+  production_candidate_pending: false
+  production_candidate_created: false
+
+non_authorization:
+  accepted_samples_write_allowed_by_schema: false
+  durable_archive_execution_allowed_by_schema: false
+  image_binary_copy_allowed_by_schema: false
+  production_candidate_write_allowed_by_schema: false
+  failure_samples_write_allowed_by_schema: false
+  DailyNote_write_allowed_by_schema: false
+  VCP_memory_write_allowed_by_schema: false
+  provider_api_plugin_mcp_allowed_by_schema: false
+  real_manifest_vcpchat_vcptoolbox_read_allowed_by_schema: false

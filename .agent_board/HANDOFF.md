@@ -3,6 +3,45 @@
 ## Handoff Summary
 
 ```text
+Status: v14_145_sample_lifecycle_state_machine completed locally and validated.
+Reason: The artifact lifecycle needs explicit local states before durable archive dry-run manifest work.
+Current repository: project_root
+Branch: master tracking origin/master; local commits may be ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.145 lifecycle schema, validator, phase record, MVP wiring, and .agent_board sync until commit decision.
+Phase record: docs/v14_145_sample_lifecycle_state_machine.md
+Lifecycle schema: schemas/sample_lifecycle_state_machine.schema.yaml
+Validator created: scripts/validate_v14_145_sample_lifecycle_state_machine.js
+MVP validator updated: scripts/validate_mvp.ps1
+sample_lifecycle_state_machine_created: true
+current_sample_state: recoverable
+archive_ready: false
+production_candidate_pending: false
+accepted_sample_is_not_production_candidate: true
+negative_case_skip_archive_to_production_candidate_fails: true
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+accepted_samples_write_performed: false
+image_binary_copy_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+Validation run: node --check scripts/validate_v14_145_sample_lifecycle_state_machine.js; node scripts/validate_v14_145_sample_lifecycle_state_machine.js.
+Next safe action: run broader validation, exact-stage v14.145 files, create a guarded local commit, then continue to v14.146 if still inside A4.8.
+```
+
+## Previous Handoff Summary
+
+```text
 Status: v14_144_review_console_schema_binding completed locally and validated.
 Reason: The static Review Console needs an explicit schema binding before lifecycle state machine work.
 Current repository: project_root

@@ -1,5 +1,49 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.145-SAMPLE-LIFECYCLE-STATE-MACHINE
+
+Scope:
+
+Validate the local sample lifecycle state machine and production candidate guard.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_145_sample_lifecycle_state_machine.js
+node scripts/validate_v14_145_sample_lifecycle_state_machine.js
+```
+
+Expected:
+
+```yaml
+passed: true
+sample_lifecycle_state_machine_created: true
+current_sample_state: recoverable
+archive_ready: false
+production_candidate_pending: false
+accepted_sample_is_not_production_candidate: true
+negative_case_missing_human_approval_blocks_accepted_metadata_registered: true
+negative_case_missing_recoverability_blocks_archive_ready: true
+negative_case_skip_archive_to_production_candidate_fails: true
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+accepted_samples_write_performed: false
+image_binary_copy_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+```
+
 ## VALIDATION-20260517-v14.144-REVIEW-CONSOLE-SCHEMA-BINDING
 
 Scope:

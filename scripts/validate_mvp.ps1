@@ -209,6 +209,7 @@ $requiredFiles = @(
   'scripts/validate_v14_142_multi_accepted_sample_matrix.js',
   'scripts/validate_v14_143_import_review_registry_schema_hardening.js',
   'scripts/validate_v14_144_review_console_schema_binding.js',
+  'scripts/validate_v14_145_sample_lifecycle_state_machine.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -229,6 +230,7 @@ $requiredFiles = @(
   'schemas/codex_session_image_import.schema.yaml',
   'schemas/local_review_record.schema.yaml',
   'schemas/accepted_sample_registry.schema.yaml',
+  'schemas/sample_lifecycle_state_machine.schema.yaml',
   'schemas/review_result_protocol.schema.yaml',
   'schemas/review_decision_package.schema.yaml',
   'schemas/evidence_blocker_contract.schema.yaml',
@@ -350,6 +352,7 @@ $requiredFiles = @(
   'docs/v14_142_multi_accepted_sample_matrix.md',
   'docs/v14_143_import_review_registry_schema_hardening.md',
   'docs/v14_144_review_console_schema_binding.md',
+  'docs/v14_145_sample_lifecycle_state_machine.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -9011,6 +9014,40 @@ process.exit(child.status || 0);
     }
     if ($reviewConsoleSchemaBinding.real_manifest_read_performed -ne $false -or $reviewConsoleSchemaBinding.real_vcpchat_read_performed -ne $false -or $reviewConsoleSchemaBinding.real_vcptoolbox_read_performed -ne $false) {
       Add-Failure "Review Console schema binding must not read real manifest/VCPChat/VCPToolBox"
+    }
+  }
+
+  $sampleLifecycleOutput = & node (Join-Path $Root 'scripts/validate_v14_145_sample_lifecycle_state_machine.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "sample lifecycle state machine validation exited with failure"
+  } else {
+    $sampleLifecycle = ($sampleLifecycleOutput -join "`n") | ConvertFrom-Json
+    if ($sampleLifecycle.passed -ne $true) {
+      Add-Failure "sample lifecycle state machine validation must pass"
+    }
+    if ($sampleLifecycle.sample_lifecycle_state_machine_created -ne $true -or $sampleLifecycle.current_sample_state -ne 'recoverable') {
+      Add-Failure "v14.145 must create the lifecycle state machine and classify the current sample as recoverable"
+    }
+    if ($sampleLifecycle.archive_ready -ne $false -or $sampleLifecycle.production_candidate_pending -ne $false -or $sampleLifecycle.accepted_sample_is_not_production_candidate -ne $true) {
+      Add-Failure "v14.145 must block archive-ready and production-candidate states until authorized"
+    }
+    if ($sampleLifecycle.negative_case_missing_human_approval_blocks_accepted_metadata_registered -ne $true -or $sampleLifecycle.negative_case_missing_recoverability_blocks_archive_ready -ne $true -or $sampleLifecycle.negative_case_skip_archive_to_production_candidate_fails -ne $true) {
+      Add-Failure "v14.145 must fail lifecycle negative cases"
+    }
+    if ($sampleLifecycle.vcp_runtime_integration_proven -ne $false -or $sampleLifecycle.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "sample lifecycle must not claim VCP runtime integration"
+    }
+    if ($sampleLifecycle.provider_contact_performed -ne $false -or $sampleLifecycle.plugin_call_performed -ne $false -or $sampleLifecycle.api_call_performed -ne $false -or $sampleLifecycle.mcp_runtime_performed -ne $false) {
+      Add-Failure "sample lifecycle must not call provider/plugin/API/MCP"
+    }
+    if ($sampleLifecycle.image_generation_performed -ne $false -or $sampleLifecycle.image_binary_copy_performed -ne $false -or $sampleLifecycle.accepted_samples_write_performed -ne $false) {
+      Add-Failure "sample lifecycle must not generate images, copy binaries, or write accepted_samples"
+    }
+    if ($sampleLifecycle.production_candidate_created -ne $false -or $sampleLifecycle.failure_samples_write_performed -ne $false -or $sampleLifecycle.daily_note_write_performed -ne $false -or $sampleLifecycle.vcp_memory_write_performed -ne $false) {
+      Add-Failure "sample lifecycle must not write production candidates, failure samples, or memory"
+    }
+    if ($sampleLifecycle.real_manifest_read_performed -ne $false -or $sampleLifecycle.real_vcpchat_read_performed -ne $false -or $sampleLifecycle.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "sample lifecycle must not read real manifest/VCPChat/VCPToolBox"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

@@ -1,5 +1,42 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.145 Sample Lifecycle State Machine
+
+```text
+phase_id: v14_145_sample_lifecycle_state_machine
+status: completed_validated
+phase_record_ref: docs/v14_145_sample_lifecycle_state_machine.md
+schema_ref: schemas/sample_lifecycle_state_machine.schema.yaml
+validator_created: scripts/validate_v14_145_sample_lifecycle_state_machine.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+sample_lifecycle_state_machine_created: true
+current_sample_state: recoverable
+archive_ready: false
+production_candidate_pending: false
+accepted_sample_is_not_production_candidate: true
+negative_case_skip_archive_to_production_candidate_fails: true
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+accepted_samples_write_performed: false
+image_binary_copy_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+validated_now: node --check scripts/validate_v14_145_sample_lifecycle_state_machine.js; node scripts/validate_v14_145_sample_lifecycle_state_machine.js
+recommended_next: v14_146_durable_archive_dry_run_manifest
+recommended_next_auto_execution_allowed: true_after_v14_145_local_commit
+```
+
 # V14.144 Review Console Schema Binding
 
 ```text
