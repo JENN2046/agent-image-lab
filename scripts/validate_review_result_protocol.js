@@ -41,6 +41,10 @@ function parseJson(relativePath) {
   return JSON.parse(readFile(relativePath));
 }
 
+function clone(value) {
+  return JSON.parse(JSON.stringify(value));
+}
+
 function validateNoSensitiveMaterial(label, text) {
   const forbidden = [
     { id: "windows_absolute_path", pattern: /[A-Z]:[\\/]/ },
@@ -85,6 +89,41 @@ function runProtocolCli(inputPath, label) {
     addResult(`${label}_protocol_cli_stdout_json_parseable`, false, error.message);
     return null;
   }
+}
+
+function runSensitiveMemoryRouteProbes() {
+  const { buildKernelRun } = require(repoPath("kernel/pvos_kernel.js"));
+  const { buildReviewResultProtocolReport } = require(repoPath(protocolPath));
+  const protocolInput = parseJson(inputFixturePath);
+  const kernelInput = parseJson(kernelInputPath);
+
+  const artifactRun = buildKernelRun(kernelInput);
+  artifactRun.image_candidates[0].artifact_ref_kind = "file_reference";
+  const artifactReport = buildReviewResultProtocolReport(protocolInput, artifactRun);
+  const artifactCandidate = artifactReport.candidate_review_results.find(
+    (candidate) => candidate.candidate_id === "candidate_accept_metadata_001"
+  );
+  addResult(
+    "sensitive_artifact_ref_not_metadata_only_memory_forbidden",
+    artifactCandidate?.memory_route?.route === "forbidden" &&
+      artifactCandidate?.memory_route?.allowed_to_enter_memory === false &&
+      artifactCandidate?.reject_reason_codes?.includes("artifact_ref_not_metadata_only")
+  );
+
+  const provenanceRun = buildKernelRun(clone(kernelInput));
+  provenanceRun.provenance_record.provider_payload_included = true;
+  provenanceRun.provenance_record.image_binary_included = true;
+  const provenanceReport = buildReviewResultProtocolReport(protocolInput, provenanceRun);
+  const provenanceCandidate = provenanceReport.candidate_review_results.find(
+    (candidate) => candidate.candidate_id === "candidate_accept_metadata_001"
+  );
+  addResult(
+    "sensitive_provider_payload_or_image_binary_memory_forbidden",
+    provenanceCandidate?.memory_route?.route === "forbidden" &&
+      provenanceCandidate?.memory_route?.allowed_to_enter_memory === false &&
+      provenanceCandidate?.reject_reason_codes?.includes("provider_payload_included") &&
+      provenanceCandidate?.reject_reason_codes?.includes("image_binary_included")
+  );
 }
 
 function validateSchemaText(schema) {
@@ -351,6 +390,12 @@ if (cliReport) {
 const negativeGuardCliReport = runProtocolCli(negativeGuardInputFixturePath, "negative_guard");
 if (negativeGuardCliReport) {
   validateNegativeGuardReport(negativeGuardCliReport);
+}
+
+try {
+  runSensitiveMemoryRouteProbes();
+} catch (error) {
+  addResult("sensitive_memory_route_probes_completed", false, error.message);
 }
 
 const passed = errors.length === 0;

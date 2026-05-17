@@ -111,6 +111,7 @@
       "production_candidate": false,
       "reason_codes": [
         "sensitive_or_unmapped_material_must_not_enter_memory",
+        "memory_forbidden_codes:unknown_failure_tags_present",
         "memory_delta_requires_desensitized_chinese_summary"
       ],
       "direct_write_performed": false

@@ -108,6 +108,52 @@ function runKernel() {
   }
 }
 
+function clone(value) {
+  return JSON.parse(JSON.stringify(value));
+}
+
+function throwsWith(fn, pattern) {
+  try {
+    fn();
+    return false;
+  } catch (error) {
+    return pattern.test(error.message);
+  }
+}
+
+function runKernelHardeningProbes() {
+  const kernel = require(repoPath(kernelPath));
+  const base = JSON.parse(readFile(inputFixturePath));
+
+  const duplicateCandidate = clone(base);
+  duplicateCandidate.candidates[1].candidate_id = duplicateCandidate.candidates[0].candidate_id;
+  addResult(
+    "kernel_rejects_duplicate_candidate_id",
+    throwsWith(() => kernel.normalizeInput(duplicateCandidate), /candidate\.candidate_id must be unique/)
+  );
+
+  const nonMetadataArtifact = clone(base);
+  nonMetadataArtifact.candidates[0].artifact_ref_kind = "file_reference";
+  addResult(
+    "kernel_rejects_non_metadata_artifact_kind",
+    throwsWith(() => kernel.normalizeInput(nonMetadataArtifact), /artifact_ref_kind must be metadata_only_reference/)
+  );
+
+  const absoluteArtifact = clone(base);
+  absoluteArtifact.candidates[0].artifact_ref = "C:\\private\\candidate.png";
+  addResult(
+    "kernel_rejects_private_or_image_artifact_ref",
+    throwsWith(() => kernel.normalizeInput(absoluteArtifact), /artifact_ref contains forbidden/)
+  );
+
+  const pathLikeArtifact = clone(base);
+  pathLikeArtifact.candidates[0].artifact_ref = "asset_archive/candidates/candidate_001";
+  addResult(
+    "kernel_rejects_path_like_artifact_ref",
+    throwsWith(() => kernel.normalizeInput(pathLikeArtifact), /artifact_ref contains forbidden path_separator/)
+  );
+}
+
 function hasAllFields(object, fields, label) {
   for (const field of fields) {
     addResult(`${label}_${field}_present`, Object.prototype.hasOwnProperty.call(object, field));
@@ -251,6 +297,12 @@ const run = runKernel();
 if (run) {
   addResult("kernel_cli_stdout_json_parseable", true);
   validateRun(run);
+}
+
+try {
+  runKernelHardeningProbes();
+} catch (error) {
+  addResult("kernel_hardening_probes_completed", false, error.message);
 }
 
 const passed = errors.length === 0;

@@ -1794,6 +1794,15 @@ function main() {
   assert(appSource.includes("Golden fixture match"), "Static app must expose golden fixture match copy.");
   assert(appSource.includes("Memory forbidden IDs"), "Static app must expose memory-forbidden IDs copy.");
   assert(!/fetch\s*\(|XMLHttpRequest|writeFile|appendFile|fs\.|eval\s*\(|Function\s*\(/.test(appSource), "Static app must not contain forbidden runtime calls.");
+  assert(appSource.includes("function escapeHtml"), "Static app must define an HTML escaping helper.");
+  assert(appSource.includes("function listItemsHtml"), "Static app must define a safe list rendering helper.");
+  assert(appSource.includes("function inlineList"), "Static app must define a safe inline list rendering helper.");
+  assert(appSource.includes("escapeHtml(comment.comment_cn)"), "Static comment rendering must escape human-entered comment text.");
+  assert(appSource.includes("listItemsHtml(activeReasons)"), "Static protocol reasons must render through safe list helper.");
+  assert(appSource.includes("inlineList(item.failure_tags)"), "Static failure tags must render through safe inline list helper.");
+  assert(!appSource.includes("<p>${comment.comment_cn}</p>"), "Static comments must not interpolate raw human comment text.");
+  assert(!appSource.includes("<li>${reason}</li>"), "Static reason lists must not interpolate raw reason text.");
+  assert(!appSource.includes("${item.failure_tags.join"), "Static failure tags must not interpolate raw joined tag text.");
 
   const fieldMapping = read("review_console/static_prototype/FIELD_MAPPING.md");
   for (const text of [

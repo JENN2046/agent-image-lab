@@ -31,6 +31,16 @@ const noExecutionGuard = Object.freeze({
   vcptoolbox_source_read_performed: false,
 });
 
+const memoryForbiddenBlockCodes = Object.freeze([
+  "unknown_failure_tags_present",
+  "private_path_included",
+  "provider_payload_included",
+  "image_binary_included",
+  "external_manifest_included",
+  "artifact_refs_not_metadata_only",
+  "artifact_ref_not_metadata_only",
+]);
+
 function assertObject(value, label) {
   if (!value || typeof value !== "object" || Array.isArray(value)) {
     throw new Error(`${label} must be an object`);
@@ -115,7 +125,8 @@ function getRubricThresholds(kernelRun) {
 }
 
 function buildMemoryRoute(reviewOutcome, blockCodes, failureTags) {
-  if (blockCodes.includes("unknown_failure_tags_present") || blockCodes.includes("private_path_included")) {
+  const forbiddenCodes = blockCodes.filter((code) => memoryForbiddenBlockCodes.includes(code));
+  if (forbiddenCodes.length > 0) {
     return {
       route: "forbidden",
       allowed_to_enter_memory: false,
@@ -126,6 +137,7 @@ function buildMemoryRoute(reviewOutcome, blockCodes, failureTags) {
       requires_human_memory_approval: true,
       reasons: [
         "sensitive_or_unmapped_material_must_not_enter_memory",
+        `memory_forbidden_codes:${forbiddenCodes.join(",")}`,
         "memory_delta_requires_desensitized_chinese_summary",
       ],
     };

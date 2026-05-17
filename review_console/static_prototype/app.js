@@ -35,6 +35,29 @@ const state = {
 const qs = (selector) => document.querySelector(selector);
 const qsa = (selector) => Array.from(document.querySelectorAll(selector));
 
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+function safeClassToken(value) {
+  return String(value ?? "").replace(/[^A-Za-z0-9_-]/g, "");
+}
+
+function listItemsHtml(items) {
+  return (Array.isArray(items) ? items : []).map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+}
+
+function inlineList(items, fallback = "none") {
+  const values = Array.isArray(items) ? items : [];
+  return escapeHtml(values.length > 0 ? values.join(", ") : fallback);
+}
+
 function totalFrom(values, scoreIndex) {
   return scoreModel.reduce((sum, item) => {
     const key = item[0];
@@ -59,10 +82,10 @@ function renderVersions() {
     button.className = `version-item${version.version_id === state.currentVersionId ? " is-active" : ""}`;
     button.innerHTML = `
       <span>
-        <strong>${version.label}</strong>
-        <small>${version.asset_ref}</small>
+        <strong>${escapeHtml(version.label)}</strong>
+        <small>${escapeHtml(version.asset_ref)}</small>
       </span>
-      <span>${version.score}</span>
+      <span>${escapeHtml(version.score)}</span>
     `;
     button.addEventListener("click", () => {
       state.currentVersionId = version.version_id;
@@ -81,9 +104,9 @@ function renderScores() {
     const row = document.createElement("label");
     row.className = "score-row";
     row.innerHTML = `
-      <span>${label}</span>
-      <input type="range" min="0" max="${max}" value="${state.humanScores[key]}" data-score-key="${key}" />
-      <output>${state.humanScores[key]} / ${max}</output>
+      <span>${escapeHtml(label)}</span>
+      <input type="range" min="0" max="${escapeHtml(max)}" value="${escapeHtml(state.humanScores[key])}" data-score-key="${escapeHtml(key)}" />
+      <output>${escapeHtml(state.humanScores[key])} / ${escapeHtml(max)}</output>
     `;
     row.querySelector("input").addEventListener("input", (event) => {
       state.humanScores[key] = Number(event.target.value);
@@ -110,11 +133,11 @@ function renderComments() {
   root.innerHTML = "";
   state.comments.forEach((comment) => {
     const item = document.createElement("article");
-    item.className = `comment-item ${comment.severity}`;
+    item.className = `comment-item ${safeClassToken(comment.severity)}`;
     item.innerHTML = `
-      <strong>${comment.target} / ${comment.severity}</strong>
-      <p>${comment.comment_cn}</p>
-      <small>${comment.author} · ${comment.created_at} · ${comment.status}</small>
+      <strong>${escapeHtml(comment.target)} / ${escapeHtml(comment.severity)}</strong>
+      <p>${escapeHtml(comment.comment_cn)}</p>
+      <small>${escapeHtml(comment.author)} · ${escapeHtml(comment.created_at)} · ${escapeHtml(comment.status)}</small>
     `;
     root.appendChild(item);
   });
@@ -189,27 +212,27 @@ function renderProtocolHandoff() {
   const summary = handoff.report_summary;
   const guardSummary = handoff.review_protocol_guard_summary;
   qs("#protocolSummary").innerHTML = `
-    <span>Pass <strong>${summary.pass_count}</strong></span>
-    <span>Reject <strong>${summary.reject_count}</strong></span>
-    <span>Never production <strong>${summary.never_production_count}</strong></span>
+    <span>Pass <strong>${escapeHtml(summary.pass_count)}</strong></span>
+    <span>Reject <strong>${escapeHtml(summary.reject_count)}</strong></span>
+    <span>Never production <strong>${escapeHtml(summary.never_production_count)}</strong></span>
   `;
 
   qs("#protocolGuardSummary").innerHTML = `
     <article class="guard-tile">
       <span>Memory forbidden</span>
-      <strong>${guardSummary.memory_forbidden_count}</strong>
+      <strong>${escapeHtml(guardSummary.memory_forbidden_count)}</strong>
     </article>
     <article class="guard-tile">
       <span>Production blocked</span>
-      <strong>${guardSummary.production_blocked_count}</strong>
+      <strong>${escapeHtml(guardSummary.production_blocked_count)}</strong>
     </article>
     <article class="guard-tile">
       <span>Negative guard</span>
-      <strong>${guardSummary.negative_guard_observed}</strong>
+      <strong>${escapeHtml(guardSummary.negative_guard_observed)}</strong>
     </article>
     <article class="guard-tile wide">
       <span>Never production ids</span>
-      <strong>${guardSummary.never_production_candidate_ids.join(", ")}</strong>
+      <strong>${inlineList(guardSummary.never_production_candidate_ids)}</strong>
     </article>
   `;
 
@@ -218,26 +241,26 @@ function renderProtocolHandoff() {
   handoff.candidate_review_results.forEach((candidate) => {
     const activeReasons = candidate.review_outcome === "pass" ? candidate.pass_reasons : candidate.reject_reasons;
     const card = document.createElement("article");
-    card.className = `protocol-card ${candidate.review_outcome}`;
+    card.className = `protocol-card ${safeClassToken(candidate.review_outcome)}`;
     card.innerHTML = `
       <div class="protocol-card-head">
-        <strong>${candidate.candidate_id}</strong>
-        <span>${candidate.review_outcome}</span>
+        <strong>${escapeHtml(candidate.candidate_id)}</strong>
+        <span>${escapeHtml(candidate.review_outcome)}</span>
       </div>
-      <ul>${activeReasons.map((reason) => `<li>${reason}</li>`).join("")}</ul>
+      <ul>${listItemsHtml(activeReasons)}</ul>
       <dl>
-        <div><dt>Memory</dt><dd>${candidate.memory_route.route}</dd></div>
-        <div><dt>Production</dt><dd>${candidate.production_route.status}</dd></div>
+        <div><dt>Memory</dt><dd>${escapeHtml(candidate.memory_route.route)}</dd></div>
+        <div><dt>Production</dt><dd>${escapeHtml(candidate.production_route.status)}</dd></div>
       </dl>
     `;
     root.appendChild(card);
   });
 
   qs("#protocolGuard").innerHTML = `
-    <span>direct memory write: ${summary.direct_memory_write_performed}</span>
-    <span>production candidate created: ${summary.production_candidate_created}</span>
-    <span>all production creation blocked: ${guardSummary.all_production_candidate_creation_blocked}</span>
-    <span>memory forbidden ids: ${guardSummary.memory_forbidden_candidate_ids.join(", ") || "none"}</span>
+    <span>direct memory write: ${escapeHtml(summary.direct_memory_write_performed)}</span>
+    <span>production candidate created: ${escapeHtml(summary.production_candidate_created)}</span>
+    <span>all production creation blocked: ${escapeHtml(guardSummary.all_production_candidate_creation_blocked)}</span>
+    <span>memory forbidden ids: ${inlineList(guardSummary.memory_forbidden_candidate_ids)}</span>
   `;
 }
 
@@ -246,28 +269,28 @@ function renderDecisionPackageHandoff() {
   const summary = handoff.decision_summary;
   const guardSummary = handoff.review_decision_package_guard_summary;
   qs("#decisionPackageSummary").innerHTML = `
-    <span>Accepted drafts <strong>${summary.accepted_sample_draft_count}</strong></span>
-    <span>Rejected drafts <strong>${summary.rejected_sample_draft_count}</strong></span>
-    <span>Memory drafts <strong>${summary.memory_delta_draft_count}</strong></span>
-    <span>Production exclusions <strong>${summary.production_exclusion_count}</strong></span>
+    <span>Accepted drafts <strong>${escapeHtml(summary.accepted_sample_draft_count)}</strong></span>
+    <span>Rejected drafts <strong>${escapeHtml(summary.rejected_sample_draft_count)}</strong></span>
+    <span>Memory drafts <strong>${escapeHtml(summary.memory_delta_draft_count)}</strong></span>
+    <span>Production exclusions <strong>${escapeHtml(summary.production_exclusion_count)}</strong></span>
   `;
 
   qs("#decisionPackageGuardSummary").innerHTML = `
     <article class="guard-tile">
       <span>Accepted samples write</span>
-      <strong>${guardSummary.accepted_samples_write_performed}</strong>
+      <strong>${escapeHtml(guardSummary.accepted_samples_write_performed)}</strong>
     </article>
     <article class="guard-tile">
       <span>Direct memory write</span>
-      <strong>${guardSummary.direct_memory_write_performed}</strong>
+      <strong>${escapeHtml(guardSummary.direct_memory_write_performed)}</strong>
     </article>
     <article class="guard-tile">
       <span>Production candidate</span>
-      <strong>${guardSummary.production_candidate_created}</strong>
+      <strong>${escapeHtml(guardSummary.production_candidate_created)}</strong>
     </article>
     <article class="guard-tile wide">
       <span>Production exclusion ids</span>
-      <strong>${guardSummary.production_exclusion_candidate_ids.join(", ")}</strong>
+      <strong>${inlineList(guardSummary.production_exclusion_candidate_ids)}</strong>
     </article>
   `;
 
@@ -312,18 +335,18 @@ function renderDecisionPackageHandoff() {
     const card = document.createElement("article");
     card.className = "decision-package-card";
     card.innerHTML = `
-      <strong>${group.label}</strong>
+      <strong>${escapeHtml(group.label)}</strong>
       <ul>
-        ${group.items.map((item) => `<li><span>${item.id}</span><small>${item.meta} · ${item.status}</small></li>`).join("")}
+        ${group.items.map((item) => `<li><span>${escapeHtml(item.id)}</span><small>${escapeHtml(item.meta)} · ${escapeHtml(item.status)}</small></li>`).join("")}
       </ul>
     `;
     root.appendChild(card);
   });
 
   qs("#decisionPackageGuard").innerHTML = `
-    <span>protocol pass is not production approval: ${handoff.promotion_guard.protocol_pass_is_not_production_approval}</span>
-    <span>every never-production candidate blocked: ${handoff.promotion_guard.every_never_production_candidate_blocked}</span>
-    <span>memory forbidden count: ${summary.memory_forbidden_count}</span>
+    <span>protocol pass is not production approval: ${escapeHtml(handoff.promotion_guard.protocol_pass_is_not_production_approval)}</span>
+    <span>every never-production candidate blocked: ${escapeHtml(handoff.promotion_guard.every_never_production_candidate_blocked)}</span>
+    <span>memory forbidden count: ${escapeHtml(summary.memory_forbidden_count)}</span>
   `;
 }
 
@@ -332,28 +355,28 @@ function renderEvidenceBlockerHandoff() {
   const summary = handoff.blocker_summary;
   const guardSummary = handoff.review_evidence_blocker_contract_guard_summary;
   qs("#evidenceBlockerSummary").innerHTML = `
-    <span>Evidence records <strong>${summary.evidence_record_count}</strong></span>
-    <span>Blocker decisions <strong>${summary.blocker_decision_count}</strong></span>
-    <span>Permanent blocks <strong>${summary.permanent_block_count}</strong></span>
-    <span>Human review blocks <strong>${summary.human_review_block_count}</strong></span>
+    <span>Evidence records <strong>${escapeHtml(summary.evidence_record_count)}</strong></span>
+    <span>Blocker decisions <strong>${escapeHtml(summary.blocker_decision_count)}</strong></span>
+    <span>Permanent blocks <strong>${escapeHtml(summary.permanent_block_count)}</strong></span>
+    <span>Human review blocks <strong>${escapeHtml(summary.human_review_block_count)}</strong></span>
   `;
 
   qs("#evidenceBlockerGuardSummary").innerHTML = `
     <article class="guard-tile">
       <span>Production exclusions</span>
-      <strong>${guardSummary.production_exclusion_count}</strong>
+      <strong>${escapeHtml(guardSummary.production_exclusion_count)}</strong>
     </article>
     <article class="guard-tile">
       <span>Memory forbidden blocks</span>
-      <strong>${guardSummary.memory_forbidden_block_count}</strong>
+      <strong>${escapeHtml(guardSummary.memory_forbidden_block_count)}</strong>
     </article>
     <article class="guard-tile">
       <span>Production candidate</span>
-      <strong>${guardSummary.production_candidate_created}</strong>
+      <strong>${escapeHtml(guardSummary.production_candidate_created)}</strong>
     </article>
     <article class="guard-tile wide">
       <span>Production exclusion ids</span>
-      <strong>${guardSummary.production_exclusion_candidate_ids.join(", ")}</strong>
+      <strong>${inlineList(guardSummary.production_exclusion_candidate_ids)}</strong>
     </article>
   `;
 
@@ -361,16 +384,16 @@ function renderEvidenceBlockerHandoff() {
   evidenceRoot.innerHTML = "";
   handoff.evidence_records.forEach((record) => {
     const card = document.createElement("article");
-    card.className = `evidence-card ${record.review_outcome}`;
+    card.className = `evidence-card ${safeClassToken(record.review_outcome)}`;
     card.innerHTML = `
       <div class="protocol-card-head">
-        <strong>${record.candidate_id}</strong>
-        <span>${record.review_outcome}</span>
+        <strong>${escapeHtml(record.candidate_id)}</strong>
+        <span>${escapeHtml(record.review_outcome)}</span>
       </div>
-      <ul>${record.evidence_codes.map((code) => `<li>${code}</li>`).join("")}</ul>
+      <ul>${listItemsHtml(record.evidence_codes)}</ul>
       <dl>
-        <div><dt>Production candidate</dt><dd>${record.production_candidate}</dd></div>
-        <div><dt>Direct write</dt><dd>${record.direct_write_performed}</dd></div>
+        <div><dt>Production candidate</dt><dd>${escapeHtml(record.production_candidate)}</dd></div>
+        <div><dt>Direct write</dt><dd>${escapeHtml(record.direct_write_performed)}</dd></div>
       </dl>
     `;
     evidenceRoot.appendChild(card);
@@ -383,26 +406,26 @@ function renderEvidenceBlockerHandoff() {
     card.className = `blocker-card ${blocker.permanent_block ? "permanent" : "temporary"}`;
     card.innerHTML = `
       <div class="protocol-card-head">
-        <strong>${blocker.candidate_id}</strong>
-        <span>${blocker.decision}</span>
+        <strong>${escapeHtml(blocker.candidate_id)}</strong>
+        <span>${escapeHtml(blocker.decision)}</span>
       </div>
       <dl>
-        <div><dt>Type</dt><dd>${blocker.blocker_type}</dd></div>
-        <div><dt>Scope</dt><dd>${blocker.blocking_scope}</dd></div>
-        <div><dt>Permanent</dt><dd>${blocker.permanent_block}</dd></div>
-        <div><dt>Production candidate</dt><dd>${blocker.production_candidate}</dd></div>
+        <div><dt>Type</dt><dd>${escapeHtml(blocker.blocker_type)}</dd></div>
+        <div><dt>Scope</dt><dd>${escapeHtml(blocker.blocking_scope)}</dd></div>
+        <div><dt>Permanent</dt><dd>${escapeHtml(blocker.permanent_block)}</dd></div>
+        <div><dt>Production candidate</dt><dd>${escapeHtml(blocker.production_candidate)}</dd></div>
       </dl>
     `;
     blockerRoot.appendChild(card);
   });
 
   qs("#evidenceBlockerGuard").innerHTML = `
-    <span>evidence record is not approval: ${handoff.arbitration_guard.evidence_record_is_not_approval}</span>
-    <span>blocker decision is not write: ${handoff.arbitration_guard.blocker_decision_is_not_write}</span>
-    <span>every candidate has evidence record: ${handoff.arbitration_guard.every_candidate_has_evidence_record}</span>
-    <span>every candidate has production blocker: ${handoff.arbitration_guard.every_candidate_has_production_blocker_decision}</span>
-    <span>every never-production candidate has exclusion: ${handoff.arbitration_guard.every_never_production_candidate_has_exclusion}</span>
-    <span>no production without human review: ${handoff.arbitration_guard.no_production_without_human_review}</span>
+    <span>evidence record is not approval: ${escapeHtml(handoff.arbitration_guard.evidence_record_is_not_approval)}</span>
+    <span>blocker decision is not write: ${escapeHtml(handoff.arbitration_guard.blocker_decision_is_not_write)}</span>
+    <span>every candidate has evidence record: ${escapeHtml(handoff.arbitration_guard.every_candidate_has_evidence_record)}</span>
+    <span>every candidate has production blocker: ${escapeHtml(handoff.arbitration_guard.every_candidate_has_production_blocker_decision)}</span>
+    <span>every never-production candidate has exclusion: ${escapeHtml(handoff.arbitration_guard.every_never_production_candidate_has_exclusion)}</span>
+    <span>no production without human review: ${escapeHtml(handoff.arbitration_guard.no_production_without_human_review)}</span>
   `;
 }
 
@@ -412,32 +435,32 @@ function renderReviewBlockerArbiterHandoff() {
   const guardSummary = handoff.review_blocker_arbiter_guard_summary;
 
   qs("#blockerArbiterSummary").innerHTML = `
-    <span>Candidates <strong>${summary.candidate_count}</strong></span>
-    <span>Production blocked <strong>${summary.production_blocked_count}</strong></span>
-    <span>Human review <strong>${summary.human_review_required_count}</strong></span>
-    <span>Permanent blocks <strong>${summary.permanent_block_count}</strong></span>
+    <span>Candidates <strong>${escapeHtml(summary.candidate_count)}</strong></span>
+    <span>Production blocked <strong>${escapeHtml(summary.production_blocked_count)}</strong></span>
+    <span>Human review <strong>${escapeHtml(summary.human_review_required_count)}</strong></span>
+    <span>Permanent blocks <strong>${escapeHtml(summary.permanent_block_count)}</strong></span>
   `;
 
   qs("#blockerArbiterGuardSummary").innerHTML = `
     <article class="guard-tile">
       <span>Memory forbidden</span>
-      <strong>${guardSummary.memory_forbidden_count}</strong>
+      <strong>${escapeHtml(guardSummary.memory_forbidden_count)}</strong>
     </article>
     <article class="guard-tile">
       <span>Never production</span>
-      <strong>${guardSummary.never_production_count}</strong>
+      <strong>${escapeHtml(guardSummary.never_production_count)}</strong>
     </article>
     <article class="guard-tile">
       <span>Production candidate</span>
-      <strong>${guardSummary.production_candidate_created}</strong>
+      <strong>${escapeHtml(guardSummary.production_candidate_created)}</strong>
     </article>
     <article class="guard-tile wide">
       <span>Never production ids</span>
-      <strong>${guardSummary.never_production_candidate_ids.join(", ")}</strong>
+      <strong>${inlineList(guardSummary.never_production_candidate_ids)}</strong>
     </article>
     <article class="guard-tile wide">
       <span>Production blocked ids</span>
-      <strong>${handoff.production_blocked_candidate_ids.join(", ")}</strong>
+      <strong>${inlineList(handoff.production_blocked_candidate_ids)}</strong>
     </article>
   `;
 
@@ -448,30 +471,30 @@ function renderReviewBlockerArbiterHandoff() {
     card.className = `blocker-arbiter-card ${item.never_production ? "never-production" : "human-review"}`;
     card.innerHTML = `
       <div class="protocol-card-head">
-        <strong>${item.candidate_id}</strong>
-        <span>${item.final_route}</span>
+        <strong>${escapeHtml(item.candidate_id)}</strong>
+        <span>${escapeHtml(item.final_route)}</span>
       </div>
       <dl>
-        <div><dt>Evidence</dt><dd>${item.evidence_record_id}</dd></div>
-        <div><dt>Production blocker</dt><dd>${item.production_blocker_decision_id}</dd></div>
-        <div><dt>Production decision</dt><dd>${item.production_decision}</dd></div>
-        <div><dt>Memory decision</dt><dd>${item.memory_decision}</dd></div>
-        <div><dt>Memory forbidden</dt><dd>${item.memory_forbidden}</dd></div>
-        <div><dt>Never production</dt><dd>${item.never_production}</dd></div>
+        <div><dt>Evidence</dt><dd>${escapeHtml(item.evidence_record_id)}</dd></div>
+        <div><dt>Production blocker</dt><dd>${escapeHtml(item.production_blocker_decision_id)}</dd></div>
+        <div><dt>Production decision</dt><dd>${escapeHtml(item.production_decision)}</dd></div>
+        <div><dt>Memory decision</dt><dd>${escapeHtml(item.memory_decision)}</dd></div>
+        <div><dt>Memory forbidden</dt><dd>${escapeHtml(item.memory_forbidden)}</dd></div>
+        <div><dt>Never production</dt><dd>${escapeHtml(item.never_production)}</dd></div>
       </dl>
     `;
     root.appendChild(card);
   });
 
   qs("#blockerArbiterGuard").innerHTML = `
-    <span>review blocker arbiter attached: ${handoff.review_blocker_arbiter_attached}</span>
-    <span>production promotion allowed now: ${guardSummary.production_promotion_allowed_now}</span>
-    <span>memory entry allowed now: ${guardSummary.memory_entry_allowed_now}</span>
-    <span>memory forbidden prevents memory: ${guardSummary.memory_forbidden_prevents_memory}</span>
-    <span>never production prevents production: ${guardSummary.never_production_prevents_production}</span>
-    <span>pass is not production approval: ${handoff.promotion_guard.pass_is_not_production_approval}</span>
-    <span>human review required before production: ${guardSummary.human_review_required_before_production}</span>
-    <span>all writes blocked: ${summary.all_writes_blocked}</span>
+    <span>review blocker arbiter attached: ${escapeHtml(handoff.review_blocker_arbiter_attached)}</span>
+    <span>production promotion allowed now: ${escapeHtml(guardSummary.production_promotion_allowed_now)}</span>
+    <span>memory entry allowed now: ${escapeHtml(guardSummary.memory_entry_allowed_now)}</span>
+    <span>memory forbidden prevents memory: ${escapeHtml(guardSummary.memory_forbidden_prevents_memory)}</span>
+    <span>never production prevents production: ${escapeHtml(guardSummary.never_production_prevents_production)}</span>
+    <span>pass is not production approval: ${escapeHtml(handoff.promotion_guard.pass_is_not_production_approval)}</span>
+    <span>human review required before production: ${escapeHtml(guardSummary.human_review_required_before_production)}</span>
+    <span>all writes blocked: ${escapeHtml(summary.all_writes_blocked)}</span>
   `;
 }
 
@@ -481,29 +504,29 @@ function renderReviewReportHandoff() {
   const guardSummary = handoff.review_report_guard_summary;
 
   qs("#reviewReportSummary").innerHTML = `
-    <span>ReviewReport <strong>${handoff.review_report_contract_attached}</strong></span>
-    <span>Candidates <strong>${summary.candidate_count}</strong></span>
-    <span>Pass <strong>${summary.pass_count}</strong></span>
-    <span>Reject <strong>${summary.reject_count}</strong></span>
-    <span>Never production <strong>${summary.never_production_count}</strong></span>
+    <span>ReviewReport <strong>${escapeHtml(handoff.review_report_contract_attached)}</strong></span>
+    <span>Candidates <strong>${escapeHtml(summary.candidate_count)}</strong></span>
+    <span>Pass <strong>${escapeHtml(summary.pass_count)}</strong></span>
+    <span>Reject <strong>${escapeHtml(summary.reject_count)}</strong></span>
+    <span>Never production <strong>${escapeHtml(summary.never_production_count)}</strong></span>
   `;
 
   qs("#reviewReportGuardSummary").innerHTML = `
     <article class="guard-tile">
       <span>Memory entries now</span>
-      <strong>${guardSummary.memory_entry_allowed_now_count}</strong>
+      <strong>${escapeHtml(guardSummary.memory_entry_allowed_now_count)}</strong>
     </article>
     <article class="guard-tile">
       <span>Production promotions now</span>
-      <strong>${guardSummary.production_promotion_allowed_now_count}</strong>
+      <strong>${escapeHtml(guardSummary.production_promotion_allowed_now_count)}</strong>
     </article>
     <article class="guard-tile">
       <span>Writes allowed now</span>
-      <strong>${guardSummary.writes_allowed_now_count}</strong>
+      <strong>${escapeHtml(guardSummary.writes_allowed_now_count)}</strong>
     </article>
     <article class="guard-tile wide">
       <span>Never production ids</span>
-      <strong>${guardSummary.never_production_candidate_ids.join(", ") || "none"}</strong>
+      <strong>${inlineList(guardSummary.never_production_candidate_ids)}</strong>
     </article>
   `;
 
@@ -514,34 +537,34 @@ function renderReviewReportHandoff() {
     card.className = `review-report-card ${item.production_report.never_production ? "never-production" : "pending-review"}`;
     card.innerHTML = `
       <div class="protocol-card-head">
-        <strong>${item.candidate_id}</strong>
-        <span>${item.report_decision}</span>
+        <strong>${escapeHtml(item.candidate_id)}</strong>
+        <span>${escapeHtml(item.report_decision)}</span>
       </div>
       <dl>
-        <div><dt>Review outcome</dt><dd>${item.review_outcome}</dd></div>
-        <div><dt>Final route</dt><dd>${item.final_route}</dd></div>
-        <div><dt>Evidence</dt><dd>${item.evidence_record_id}</dd></div>
-        <div><dt>Production blocker</dt><dd>${item.production_blocker_decision_id}</dd></div>
-        <div><dt>Memory output</dt><dd>${item.memory_report.allowed_output_now}</dd></div>
-        <div><dt>Production output</dt><dd>${item.production_report.allowed_output_now}</dd></div>
-        <div><dt>Memory now</dt><dd>${item.memory_report.memory_entry_allowed_now}</dd></div>
-        <div><dt>Production now</dt><dd>${item.production_report.production_promotion_allowed_now}</dd></div>
-        <div><dt>Never production</dt><dd>${item.production_report.never_production}</dd></div>
-        <div><dt>Writes blocked</dt><dd>${item.final_controls.writes_blocked.join(", ")}</dd></div>
+        <div><dt>Review outcome</dt><dd>${escapeHtml(item.review_outcome)}</dd></div>
+        <div><dt>Final route</dt><dd>${escapeHtml(item.final_route)}</dd></div>
+        <div><dt>Evidence</dt><dd>${escapeHtml(item.evidence_record_id)}</dd></div>
+        <div><dt>Production blocker</dt><dd>${escapeHtml(item.production_blocker_decision_id)}</dd></div>
+        <div><dt>Memory output</dt><dd>${escapeHtml(item.memory_report.allowed_output_now)}</dd></div>
+        <div><dt>Production output</dt><dd>${escapeHtml(item.production_report.allowed_output_now)}</dd></div>
+        <div><dt>Memory now</dt><dd>${escapeHtml(item.memory_report.memory_entry_allowed_now)}</dd></div>
+        <div><dt>Production now</dt><dd>${escapeHtml(item.production_report.production_promotion_allowed_now)}</dd></div>
+        <div><dt>Never production</dt><dd>${escapeHtml(item.production_report.never_production)}</dd></div>
+        <div><dt>Writes blocked</dt><dd>${inlineList(item.final_controls.writes_blocked)}</dd></div>
       </dl>
     `;
     root.appendChild(card);
   });
 
   qs("#reviewReportGuard").innerHTML = `
-    <span>all report items explain candidates: ${summary.report_items_explain_all_candidates}</span>
-    <span>all memory writes blocked: ${summary.all_memory_writes_blocked}</span>
-    <span>all production writes blocked: ${summary.all_production_writes_blocked}</span>
-    <span>all provider execution blocked: ${summary.all_provider_execution_blocked}</span>
-    <span>DailyNote write: ${guardSummary.daily_note_write_performed}</span>
-    <span>VCP memory write: ${guardSummary.vcp_memory_write_performed}</span>
-    <span>accepted_samples write: ${guardSummary.accepted_samples_write_performed}</span>
-    <span>production candidate created: ${guardSummary.production_candidate_created}</span>
+    <span>all report items explain candidates: ${escapeHtml(summary.report_items_explain_all_candidates)}</span>
+    <span>all memory writes blocked: ${escapeHtml(summary.all_memory_writes_blocked)}</span>
+    <span>all production writes blocked: ${escapeHtml(summary.all_production_writes_blocked)}</span>
+    <span>all provider execution blocked: ${escapeHtml(summary.all_provider_execution_blocked)}</span>
+    <span>DailyNote write: ${escapeHtml(guardSummary.daily_note_write_performed)}</span>
+    <span>VCP memory write: ${escapeHtml(guardSummary.vcp_memory_write_performed)}</span>
+    <span>accepted_samples write: ${escapeHtml(guardSummary.accepted_samples_write_performed)}</span>
+    <span>production candidate created: ${escapeHtml(guardSummary.production_candidate_created)}</span>
   `;
 }
 
@@ -551,33 +574,33 @@ function renderNegativeReviewReportHandoff() {
   const guardSummary = handoff.review_report_guard_summary;
 
   qs("#negativeReviewReportSummary").innerHTML = `
-    <span>Negative ReviewReport <strong>${handoff.negative_guard_observed}</strong></span>
-    <span>Candidates <strong>${summary.candidate_count}</strong></span>
-    <span>Reject <strong>${summary.reject_count}</strong></span>
-    <span>Memory forbidden <strong>${guardSummary.memory_forbidden_candidate_ids.length}</strong></span>
-    <span>Never production <strong>${summary.never_production_count}</strong></span>
+    <span>Negative ReviewReport <strong>${escapeHtml(handoff.negative_guard_observed)}</strong></span>
+    <span>Candidates <strong>${escapeHtml(summary.candidate_count)}</strong></span>
+    <span>Reject <strong>${escapeHtml(summary.reject_count)}</strong></span>
+    <span>Memory forbidden <strong>${escapeHtml(guardSummary.memory_forbidden_candidate_ids.length)}</strong></span>
+    <span>Never production <strong>${escapeHtml(summary.never_production_count)}</strong></span>
   `;
 
   qs("#negativeReviewReportGuardSummary").innerHTML = `
     <article class="guard-tile">
       <span>Memory entries now</span>
-      <strong>${guardSummary.memory_entry_allowed_now_count}</strong>
+      <strong>${escapeHtml(guardSummary.memory_entry_allowed_now_count)}</strong>
     </article>
     <article class="guard-tile">
       <span>Production promotions now</span>
-      <strong>${guardSummary.production_promotion_allowed_now_count}</strong>
+      <strong>${escapeHtml(guardSummary.production_promotion_allowed_now_count)}</strong>
     </article>
     <article class="guard-tile">
       <span>Writes allowed now</span>
-      <strong>${guardSummary.writes_allowed_now_count}</strong>
+      <strong>${escapeHtml(guardSummary.writes_allowed_now_count)}</strong>
     </article>
     <article class="guard-tile wide">
       <span>Memory forbidden ids</span>
-      <strong>${guardSummary.memory_forbidden_candidate_ids.join(", ") || "none"}</strong>
+      <strong>${inlineList(guardSummary.memory_forbidden_candidate_ids)}</strong>
     </article>
     <article class="guard-tile wide">
       <span>Never production ids</span>
-      <strong>${guardSummary.never_production_candidate_ids.join(", ") || "none"}</strong>
+      <strong>${inlineList(guardSummary.never_production_candidate_ids)}</strong>
     </article>
   `;
 
@@ -589,37 +612,37 @@ function renderNegativeReviewReportHandoff() {
     card.className = `review-report-card ${statusClass}`;
     card.innerHTML = `
       <div class="protocol-card-head">
-        <strong>${item.candidate_id}</strong>
-        <span>${item.report_decision}</span>
+        <strong>${escapeHtml(item.candidate_id)}</strong>
+        <span>${escapeHtml(item.report_decision)}</span>
       </div>
       <dl>
-        <div><dt>Review outcome</dt><dd>${item.review_outcome}</dd></div>
-        <div><dt>Final route</dt><dd>${item.final_route}</dd></div>
-        <div><dt>Evidence</dt><dd>${item.evidence_record_id}</dd></div>
-        <div><dt>Production blocker</dt><dd>${item.production_blocker_decision_id}</dd></div>
-        <div><dt>Memory blockers</dt><dd>${item.memory_blocker_decision_ids.join(", ") || "none"}</dd></div>
-        <div><dt>Failure tags</dt><dd>${item.failure_tags.join(", ") || "none"}</dd></div>
-        <div><dt>Unknown failure tags</dt><dd>${item.unknown_failure_tags.join(", ") || "none"}</dd></div>
-        <div><dt>Memory output</dt><dd>${item.memory_report.allowed_output_now}</dd></div>
-        <div><dt>Production output</dt><dd>${item.production_report.allowed_output_now}</dd></div>
-        <div><dt>Memory forbidden</dt><dd>${item.memory_report.memory_forbidden}</dd></div>
-        <div><dt>Never production</dt><dd>${item.production_report.never_production}</dd></div>
-        <div><dt>Writes allowed now</dt><dd>${item.final_controls.writes_allowed_now.length}</dd></div>
-        <div><dt>Execution blocked</dt><dd>${item.final_controls.execution_blocked.join(", ")}</dd></div>
+        <div><dt>Review outcome</dt><dd>${escapeHtml(item.review_outcome)}</dd></div>
+        <div><dt>Final route</dt><dd>${escapeHtml(item.final_route)}</dd></div>
+        <div><dt>Evidence</dt><dd>${escapeHtml(item.evidence_record_id)}</dd></div>
+        <div><dt>Production blocker</dt><dd>${escapeHtml(item.production_blocker_decision_id)}</dd></div>
+        <div><dt>Memory blockers</dt><dd>${inlineList(item.memory_blocker_decision_ids)}</dd></div>
+        <div><dt>Failure tags</dt><dd>${inlineList(item.failure_tags)}</dd></div>
+        <div><dt>Unknown failure tags</dt><dd>${inlineList(item.unknown_failure_tags)}</dd></div>
+        <div><dt>Memory output</dt><dd>${escapeHtml(item.memory_report.allowed_output_now)}</dd></div>
+        <div><dt>Production output</dt><dd>${escapeHtml(item.production_report.allowed_output_now)}</dd></div>
+        <div><dt>Memory forbidden</dt><dd>${escapeHtml(item.memory_report.memory_forbidden)}</dd></div>
+        <div><dt>Never production</dt><dd>${escapeHtml(item.production_report.never_production)}</dd></div>
+        <div><dt>Writes allowed now</dt><dd>${escapeHtml(item.final_controls.writes_allowed_now.length)}</dd></div>
+        <div><dt>Execution blocked</dt><dd>${inlineList(item.final_controls.execution_blocked)}</dd></div>
       </dl>
     `;
     root.appendChild(card);
   });
 
   qs("#negativeReviewReportGuard").innerHTML = `
-    <span>all report items explain candidates: ${summary.report_items_explain_all_candidates}</span>
-    <span>all memory writes blocked: ${summary.all_memory_writes_blocked}</span>
-    <span>all production writes blocked: ${summary.all_production_writes_blocked}</span>
-    <span>all provider execution blocked: ${summary.all_provider_execution_blocked}</span>
-    <span>DailyNote write: ${guardSummary.daily_note_write_performed}</span>
-    <span>VCP memory write: ${guardSummary.vcp_memory_write_performed}</span>
-    <span>accepted_samples write: ${guardSummary.accepted_samples_write_performed}</span>
-    <span>production candidate created: ${guardSummary.production_candidate_created}</span>
+    <span>all report items explain candidates: ${escapeHtml(summary.report_items_explain_all_candidates)}</span>
+    <span>all memory writes blocked: ${escapeHtml(summary.all_memory_writes_blocked)}</span>
+    <span>all production writes blocked: ${escapeHtml(summary.all_production_writes_blocked)}</span>
+    <span>all provider execution blocked: ${escapeHtml(summary.all_provider_execution_blocked)}</span>
+    <span>DailyNote write: ${escapeHtml(guardSummary.daily_note_write_performed)}</span>
+    <span>VCP memory write: ${escapeHtml(guardSummary.vcp_memory_write_performed)}</span>
+    <span>accepted_samples write: ${escapeHtml(guardSummary.accepted_samples_write_performed)}</span>
+    <span>production candidate created: ${escapeHtml(guardSummary.production_candidate_created)}</span>
   `;
 }
 
@@ -629,32 +652,32 @@ function renderAdapterNegativeHandoff() {
   const audit = handoff.audit_summary;
 
   qs("#adapterNegativeSummary").innerHTML = `
-    <span>Adapter negative fixture <strong>${handoff.adapter_negative_guard_observed}</strong></span>
-    <span>Golden fixture match <strong>${handoff.evidence_blocker_contract_matches_fixture}</strong></span>
-    <span>Never production <strong>${audit.never_production_count}</strong></span>
-    <span>Memory forbidden <strong>${audit.memory_forbidden_count}</strong></span>
+    <span>Adapter negative fixture <strong>${escapeHtml(handoff.adapter_negative_guard_observed)}</strong></span>
+    <span>Golden fixture match <strong>${escapeHtml(handoff.evidence_blocker_contract_matches_fixture)}</strong></span>
+    <span>Never production <strong>${escapeHtml(audit.never_production_count)}</strong></span>
+    <span>Memory forbidden <strong>${escapeHtml(audit.memory_forbidden_count)}</strong></span>
   `;
 
   qs("#adapterNegativeGuardSummary").innerHTML = `
     <article class="guard-tile">
       <span>Production exclusions</span>
-      <strong>${guard.production_exclusion_count}</strong>
+      <strong>${escapeHtml(guard.production_exclusion_count)}</strong>
     </article>
     <article class="guard-tile">
       <span>Memory forbidden blocks</span>
-      <strong>${guard.memory_forbidden_block_count}</strong>
+      <strong>${escapeHtml(guard.memory_forbidden_block_count)}</strong>
     </article>
     <article class="guard-tile">
       <span>Production candidate</span>
-      <strong>${guard.production_candidate_created}</strong>
+      <strong>${escapeHtml(guard.production_candidate_created)}</strong>
     </article>
     <article class="guard-tile wide">
       <span>Memory forbidden IDs</span>
-      <strong>${handoff.memory_forbidden_candidate_ids.join(", ")}</strong>
+      <strong>${inlineList(handoff.memory_forbidden_candidate_ids)}</strong>
     </article>
     <article class="guard-tile wide">
       <span>Production exclusion IDs</span>
-      <strong>${handoff.production_exclusion_candidate_ids.join(", ")}</strong>
+      <strong>${inlineList(handoff.production_exclusion_candidate_ids)}</strong>
     </article>
   `;
 
@@ -665,27 +688,27 @@ function renderAdapterNegativeHandoff() {
     card.className = `adapter-negative-card ${item.memory_route === "forbidden" ? "memory-forbidden" : "never-production"}`;
     card.innerHTML = `
       <div class="protocol-card-head">
-        <strong>${item.candidate_id}</strong>
-        <span>${item.decision}</span>
+        <strong>${escapeHtml(item.candidate_id)}</strong>
+        <span>${escapeHtml(item.decision)}</span>
       </div>
       <dl>
-        <div><dt>Memory route</dt><dd>${item.memory_route}</dd></div>
-        <div><dt>Production route</dt><dd>${item.production_route}</dd></div>
-        <div><dt>Blocker</dt><dd>${item.blocker_type}</dd></div>
-        <div><dt>Direct write</dt><dd>${item.direct_write_performed}</dd></div>
+        <div><dt>Memory route</dt><dd>${escapeHtml(item.memory_route)}</dd></div>
+        <div><dt>Production route</dt><dd>${escapeHtml(item.production_route)}</dd></div>
+        <div><dt>Blocker</dt><dd>${escapeHtml(item.blocker_type)}</dd></div>
+        <div><dt>Direct write</dt><dd>${escapeHtml(item.direct_write_performed)}</dd></div>
       </dl>
     `;
     root.appendChild(card);
   });
 
   qs("#adapterNegativeGuard").innerHTML = `
-    <span>embedded evidence blocker contract: ${handoff.evidence_blocker_contract_embedded}</span>
-    <span>matches golden fixture: ${handoff.evidence_blocker_contract_matches_fixture}</span>
-    <span>every candidate has evidence record: ${guard.every_candidate_has_evidence_record}</span>
-    <span>every candidate has production blocker: ${guard.every_candidate_has_production_blocker_decision}</span>
-    <span>every never-production candidate has exclusion: ${guard.every_never_production_candidate_has_exclusion}</span>
-    <span>selected plugin: ${audit.selected_plugin}</span>
-    <span>max plugin calls: ${audit.max_plugin_calls_observed}</span>
+    <span>embedded evidence blocker contract: ${escapeHtml(handoff.evidence_blocker_contract_embedded)}</span>
+    <span>matches golden fixture: ${escapeHtml(handoff.evidence_blocker_contract_matches_fixture)}</span>
+    <span>every candidate has evidence record: ${escapeHtml(guard.every_candidate_has_evidence_record)}</span>
+    <span>every candidate has production blocker: ${escapeHtml(guard.every_candidate_has_production_blocker_decision)}</span>
+    <span>every never-production candidate has exclusion: ${escapeHtml(guard.every_never_production_candidate_has_exclusion)}</span>
+    <span>selected plugin: ${escapeHtml(audit.selected_plugin)}</span>
+    <span>max plugin calls: ${escapeHtml(audit.max_plugin_calls_observed)}</span>
   `;
 }
 

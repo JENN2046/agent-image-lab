@@ -61,8 +61,49 @@ function assertString(value, label) {
   }
 }
 
+function assertUniqueId(value, seen, label) {
+  assertString(value, label);
+  if (seen.has(value)) {
+    throw new Error(`${label} must be unique: ${value}`);
+  }
+  seen.add(value);
+}
+
 function clone(value) {
   return JSON.parse(JSON.stringify(value));
+}
+
+function assertSafeMetadataArtifactRef(candidate) {
+  const label = `candidate ${candidate.candidate_id}`;
+  assertString(candidate.artifact_ref, `${label} artifact_ref`);
+  const artifactKind = candidate.artifact_ref_kind || "metadata_only_reference";
+  if (artifactKind !== "metadata_only_reference") {
+    throw new Error(`${label} artifact_ref_kind must be metadata_only_reference`);
+  }
+
+  const ref = candidate.artifact_ref;
+  const forbiddenPatterns = [
+    { id: "windows_absolute_path", pattern: /[A-Za-z]:[\\/]/ },
+    { id: "rooted_path", pattern: /^[\\/]/ },
+    { id: "path_traversal", pattern: /\.\./ },
+    { id: "path_separator", pattern: /[\\/]/ },
+    { id: "external_url", pattern: /https?:\/\//i },
+    { id: "env_or_config", pattern: /\.env|config\.env/i },
+    { id: "image_binary_extension", pattern: /\.(png|jpe?g|webp|gif|psd|tiff?|bmp|heic)\b/i },
+    { id: "real_generation_run", pattern: /runs[\\/]real_generation/i },
+    { id: "accepted_samples_path", pattern: /accepted_samples[\\/]/i },
+    {
+      id: "sensitive_artifact_marker",
+      pattern: /provider_payload|image_binary|private_path|memory_write_path|daily_note_write_path|external_manifest/i,
+    },
+  ];
+  const matched = forbiddenPatterns.find((rule) => rule.pattern.test(ref));
+  if (matched) {
+    throw new Error(`${label} artifact_ref contains forbidden ${matched.id}`);
+  }
+  if (!/^[A-Za-z0-9][A-Za-z0-9._-]*$/.test(ref)) {
+    throw new Error(`${label} artifact_ref must be an opaque metadata token`);
+  }
 }
 
 function sumWeightedScore(candidate, rubric) {
@@ -118,13 +159,31 @@ function normalizeInput(input) {
     throw new Error("input.review_rubric.dimensions must contain at least one dimension");
   }
 
-  const shotIds = new Set(input.shot_plan.shots.map((shot) => shot.shot_id));
+  const shotIds = new Set();
+  for (const shot of input.shot_plan.shots) {
+    assertUniqueId(shot.shot_id, shotIds, "shot.shot_id");
+  }
+
+  const dimensionIds = new Set();
+  for (const dimension of input.review_rubric.dimensions) {
+    assertUniqueId(dimension.id, dimensionIds, "review_rubric.dimension.id");
+  }
+
+  const taxonomy = Array.isArray(input.failure_taxonomy) ? input.failure_taxonomy : [];
+  const taxonomyTags = new Set();
+  for (const entry of taxonomy) {
+    assertUniqueId(entry.tag, taxonomyTags, "failure_taxonomy.tag");
+  }
+
+  const candidateIds = new Set();
   for (const candidate of input.candidates) {
-    assertString(candidate.candidate_id, "candidate.candidate_id");
+    assertUniqueId(candidate.candidate_id, candidateIds, "candidate.candidate_id");
     assertString(candidate.shot_id, `candidate ${candidate.candidate_id} shot_id`);
     if (!shotIds.has(candidate.shot_id)) {
       throw new Error(`candidate ${candidate.candidate_id} references unknown shot_id ${candidate.shot_id}`);
     }
+    assertObject(candidate.scores, `candidate ${candidate.candidate_id} scores`);
+    assertSafeMetadataArtifactRef(candidate);
   }
 
   return clone(input);
@@ -351,6 +410,7 @@ if (require.main === module) {
 
 module.exports = {
   buildKernelRun,
+  assertSafeMetadataArtifactRef,
   loadInput,
   normalizeInput,
   resolveFixturePath,
