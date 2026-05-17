@@ -1,5 +1,52 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260518-v14.164-BAG-ACCEPTED-SAMPLES-METADATA-REGISTRATION-PREFLIGHT
+
+Scope:
+
+Validate that the v14.161 woven crossbody bag candidate has enough real local
+evidence for a future accepted_samples metadata registration, without writing
+registry/category metadata or copying image files.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_164_bag_accepted_samples_metadata_registration_preflight.js
+node scripts/validate_v14_164_bag_accepted_samples_metadata_registration_preflight.js
+```
+
+Expected:
+
+```yaml
+passed: true
+proposed_sample_id: accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001
+artifact_sha256: 3422671f95e9b218829966ae46f4b284ae619875e080c473a295cf9e65432ba3
+artifact_dimensions: 1254x1254
+artifact_mime: image/png
+human_approval_status: approved
+approved_by: Jenn
+accepted_samples_registration_eligible: true
+negative_case_missing_artifact_fails: true
+negative_case_hash_mismatch_fails: true
+negative_case_dimensions_mismatch_fails: true
+negative_case_mime_mismatch_fails: true
+negative_case_review_record_missing_fails: true
+negative_case_human_approval_missing_fails: true
+negative_case_category_index_missing_fails: true
+negative_case_existing_registry_duplicate_fails: true
+negative_case_registry_write_flag_blocks_preflight: true
+negative_case_vcp_runtime_claim_blocks_preflight: true
+accepted_samples_write_performed: false
+category_index_write_performed: false
+image_file_copy_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+daily_note_write_performed: false
+vcp_memory_write_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+```
+
 ## VALIDATION-20260518-v14.163-LAMP-V2-GENERATED-CANDIDATE-READINESS
 
 Scope:

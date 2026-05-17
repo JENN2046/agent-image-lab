@@ -225,6 +225,7 @@ $requiredFiles = @(
   'scripts/validate_v14_161_codex_session_generated_candidate_readiness.js',
   'scripts/validate_v14_162_lamp_prompt_revision_after_v14_161_review.js',
   'scripts/validate_v14_163_lamp_v2_generated_candidate_readiness.js',
+  'scripts/validate_v14_164_bag_accepted_samples_metadata_registration_preflight.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -412,6 +413,8 @@ $requiredFiles = @(
   'docs/v14_163_lamp_v2_generated_candidate_readiness.md',
   'tests/schema_examples/v14_163_lamp_v2_generated_candidate_readiness.example.json',
   'tests/schema_examples/v14_163_lamp_v2_generated_candidate_import_record.json',
+  'docs/v14_164_bag_accepted_samples_metadata_registration_preflight.md',
+  'tests/schema_examples/v14_164_bag_accepted_samples_metadata_registration_preflight.example.json',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -9579,6 +9582,37 @@ process.exit(child.status || 0);
     }
     if ($lampV2Readiness.vcp_runtime_integration_proven -ne $false -or $lampV2Readiness.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
       Add-Failure "v14.163 must not claim VCP runtime integration"
+    }
+  }
+
+  $bagAcceptedSamplesPreflightOutput = & node (Join-Path $Root 'scripts/validate_v14_164_bag_accepted_samples_metadata_registration_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "bag accepted_samples metadata registration preflight validation exited with failure"
+  } else {
+    $bagAcceptedSamplesPreflight = ($bagAcceptedSamplesPreflightOutput -join "`n") | ConvertFrom-Json
+    if ($bagAcceptedSamplesPreflight.passed -ne $true) {
+      Add-Failure "bag accepted_samples metadata registration preflight validation must pass"
+    }
+    if ($bagAcceptedSamplesPreflight.accepted_samples_registration_eligible -ne $true -or $bagAcceptedSamplesPreflight.human_approval_status -ne 'approved' -or $bagAcceptedSamplesPreflight.approved_by -ne 'Jenn') {
+      Add-Failure "v14.164 must prove the v14.161 bag candidate has Jenn approval and is registration-eligible"
+    }
+    if ($bagAcceptedSamplesPreflight.artifact_sha256 -ne '3422671f95e9b218829966ae46f4b284ae619875e080c473a295cf9e65432ba3' -or $bagAcceptedSamplesPreflight.artifact_dimensions -ne '1254x1254' -or $bagAcceptedSamplesPreflight.artifact_mime -ne 'image/png') {
+      Add-Failure "v14.164 must verify the real bag artifact hash, dimensions, and mime"
+    }
+    if ($bagAcceptedSamplesPreflight.negative_case_missing_artifact_fails -ne $true -or $bagAcceptedSamplesPreflight.negative_case_hash_mismatch_fails -ne $true -or $bagAcceptedSamplesPreflight.negative_case_dimensions_mismatch_fails -ne $true -or $bagAcceptedSamplesPreflight.negative_case_mime_mismatch_fails -ne $true -or $bagAcceptedSamplesPreflight.negative_case_review_record_missing_fails -ne $true -or $bagAcceptedSamplesPreflight.negative_case_human_approval_missing_fails -ne $true -or $bagAcceptedSamplesPreflight.negative_case_category_index_missing_fails -ne $true -or $bagAcceptedSamplesPreflight.negative_case_existing_registry_duplicate_fails -ne $true -or $bagAcceptedSamplesPreflight.negative_case_registry_write_flag_blocks_preflight -ne $true -or $bagAcceptedSamplesPreflight.negative_case_vcp_runtime_claim_blocks_preflight -ne $true) {
+      Add-Failure "v14.164 must fail bag accepted_samples registration preflight negative cases"
+    }
+    if ($bagAcceptedSamplesPreflight.accepted_samples_write_performed -ne $false -or $bagAcceptedSamplesPreflight.category_index_write_performed -ne $false -or $bagAcceptedSamplesPreflight.image_file_copy_performed -ne $false) {
+      Add-Failure "v14.164 must not write accepted_samples/category index or copy image files"
+    }
+    if ($bagAcceptedSamplesPreflight.failure_samples_write_performed -ne $false -or $bagAcceptedSamplesPreflight.production_candidate_write_performed -ne $false -or $bagAcceptedSamplesPreflight.daily_note_write_performed -ne $false -or $bagAcceptedSamplesPreflight.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.164 must not write failure/production/memory outputs"
+    }
+    if ($bagAcceptedSamplesPreflight.provider_contact_performed -ne $false -or $bagAcceptedSamplesPreflight.plugin_call_performed -ne $false -or $bagAcceptedSamplesPreflight.api_call_performed -ne $false -or $bagAcceptedSamplesPreflight.mcp_runtime_performed -ne $false -or $bagAcceptedSamplesPreflight.real_manifest_read_performed -ne $false -or $bagAcceptedSamplesPreflight.real_vcpchat_read_performed -ne $false -or $bagAcceptedSamplesPreflight.real_vcptoolbox_read_performed -ne $false -or $bagAcceptedSamplesPreflight.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.164 must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($bagAcceptedSamplesPreflight.vcp_runtime_integration_proven -ne $false -or $bagAcceptedSamplesPreflight.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.164 must not claim VCP runtime integration"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

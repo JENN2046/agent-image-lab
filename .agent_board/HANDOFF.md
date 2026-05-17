@@ -3,6 +3,50 @@
 ## Handoff Summary
 
 ```text
+Status: v14_164_bag_accepted_samples_metadata_registration_preflight completed locally and validated.
+Reason: The v14.161 woven crossbody bag candidate has Jenn approval and needs a local preflight proving accepted_samples metadata registration eligibility without writing registry/category metadata.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.164 preflight doc, fixture, validator, MVP wiring, and .agent_board sync until commit decision.
+Phase record: docs/v14_164_bag_accepted_samples_metadata_registration_preflight.md
+Fixture: tests/schema_examples/v14_164_bag_accepted_samples_metadata_registration_preflight.example.json
+Source import record: tests/schema_examples/v14_161_fashion_lifestyle_woven_crossbody_bag_import_record.json
+Source review record: docs/v14_161_codex_session_generated_candidate_readiness.md
+Validator created: scripts/validate_v14_164_bag_accepted_samples_metadata_registration_preflight.js
+MVP validator updated: scripts/validate_mvp.ps1
+proposed_sample_id: accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001
+category_index_ref: accepted_samples/categories/fashion_lifestyle_still_life.yaml
+artifact_ref: runs/real_generation/v14_161_codex_session_two_more_recoverable_samples_generation_trial/codex_session_v14_161_fashion_lifestyle_woven_crossbody_bag_candidate_001.png
+artifact_sha256: 3422671f95e9b218829966ae46f4b284ae619875e080c473a295cf9e65432ba3
+artifact_dimensions: 1254x1254
+artifact_mime: image/png
+human_approval_status: approved
+approved_by: Jenn
+accepted_samples_registration_eligible: true
+accepted_samples_write_performed: false
+category_index_write_performed: false
+image_file_copy_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_164_bag_accepted_samples_metadata_registration_preflight.js; node scripts/validate_v14_164_bag_accepted_samples_metadata_registration_preflight.js.
+Next safe action: run broader validation, exact-stage v14.164 files, create a guarded local commit, then stop before accepted_samples write unless the write boundary is opened.
+```
+
+## Previous Handoff Summary
+
+```text
 Status: v14_163_lamp_v2_generated_candidate_readiness completed locally and validated.
 Reason: A new Codex-session lamp v2 image exists in runs/real_generation and needs local import/review readiness evidence before any human approval or accepted_samples decision.
 Current repository: project_root

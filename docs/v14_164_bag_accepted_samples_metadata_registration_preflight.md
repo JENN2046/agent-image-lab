@@ -1,0 +1,90 @@
+# v14.164 Bag Accepted Samples Metadata Registration Preflight
+
+## Scope
+
+```text
+phase: v14_164_bag_accepted_samples_metadata_registration_preflight
+base_contract: AGENTS.md
+mode: A4.8
+intent: local_implementation
+risk_level: R2
+execution_mode: accepted_samples_metadata_registration_preflight_only
+source_candidate_id: v14_161_fashion_lifestyle_woven_crossbody_bag_candidate_001
+source_import_record_ref: tests/schema_examples/v14_161_fashion_lifestyle_woven_crossbody_bag_import_record.json
+source_review_record_ref: docs/v14_161_codex_session_generated_candidate_readiness.md
+source_artifact_ref: runs/real_generation/v14_161_codex_session_two_more_recoverable_samples_generation_trial/codex_session_v14_161_fashion_lifestyle_woven_crossbody_bag_candidate_001.png
+source_artifact_sha256: 3422671f95e9b218829966ae46f4b284ae619875e080c473a295cf9e65432ba3
+source_artifact_dimensions: 1254x1254
+source_artifact_mime: image/png
+human_approval_status: approved
+approved_by: Jenn
+approval_statement: 第二张可以接受通过
+accepted_samples_registration_eligible: true
+accepted_samples_write_performed: false
+category_index_write_performed: false
+image_file_copy_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+```
+
+## Proposed Registration Target
+
+```text
+proposed_sample_id: accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001
+registry_ref: accepted_samples/accepted_sample_registry.yaml
+category_index_ref: accepted_samples/categories/fashion_lifestyle_still_life.yaml
+category: fashion_lifestyle_still_life
+artifact_locator_scope: project_relative_runs
+verification_mode: local_file_hash
+portable_after_clone: false
+image_files_committed_to_git: false
+```
+
+## Eligibility Result
+
+The v14.161 woven crossbody bag candidate is eligible for the next
+accepted_samples metadata registration decision because it has a real local
+artifact, verified hash, verified dimensions, verified MIME type, import record,
+review record, category index target, and human approval from Jenn.
+
+This phase does not write accepted_samples metadata. It only proves the exact
+minimum conditions for a later metadata-only registry patch.
+
+## Negative Case Coverage
+
+```text
+negative_case_missing_artifact_fails: true
+negative_case_hash_mismatch_fails: true
+negative_case_dimensions_mismatch_fails: true
+negative_case_mime_mismatch_fails: true
+negative_case_review_record_missing_fails: true
+negative_case_human_approval_missing_fails: true
+negative_case_category_index_missing_fails: true
+negative_case_existing_registry_duplicate_fails: true
+negative_case_registry_write_flag_blocks_preflight: true
+negative_case_vcp_runtime_claim_blocks_preflight: true
+```
+
+## Next Gate
+
+```text
+recommended_next: accepted_samples_metadata_registration_for_v14_161_bag_candidate_if_write_boundary_is_opened
+automatic_next_generation_recommended: false
+automatic_accepted_samples_write_performed: false
+accepted_samples_write_scope_if_authorized: accepted_samples/accepted_sample_registry.yaml; accepted_samples/categories/fashion_lifestyle_still_life.yaml
+production_candidate_write_requires_separate_authorization: true
+memory_write_requires_separate_authorization: true
+artifact_recoverability_is_not_vcp_runtime_integration: true
+```
