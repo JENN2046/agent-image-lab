@@ -178,6 +178,7 @@ $requiredFiles = @(
   'scripts/validate_v14_112_production_candidate_gate_policy.js',
   'scripts/validate_v14_113_failure_samples_authorization_boundary.js',
   'scripts/validate_v14_114_review_console_handoff_taxonomy_alignment.js',
+  'scripts/validate_v14_115_dry_run_vcp_adapter_current_goal_alignment.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -282,6 +283,7 @@ $requiredFiles = @(
   'docs/v14_081_pvos_evidence_collector_blocker_exact_A5_authorization_package_gate.md',
   'docs/v14_082_pvos_metadata_only_preflight_authorization_correction_gate.md',
   'docs/codex_session_image_provider_minimal_contract.md',
+  'docs/v14_115_dry_run_vcp_adapter_current_goal_alignment.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -7880,6 +7882,43 @@ process.exit(child.status || 0);
     }
     if ($reviewConsoleHandoffTaxonomy.daily_note_write_performed -ne $false -or $reviewConsoleHandoffTaxonomy.vcp_memory_write_performed -ne $false) {
       Add-Failure "Review Console handoff taxonomy validation must not write DailyNote or VCP memory"
+    }
+  }
+
+  $dryRunVcpAdapterGoalAlignmentOutput = & node (Join-Path $Root 'scripts/validate_v14_115_dry_run_vcp_adapter_current_goal_alignment.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "dry-run VCP adapter current goal alignment validation exited with failure"
+  } else {
+    $dryRunVcpAdapterGoalAlignment = ($dryRunVcpAdapterGoalAlignmentOutput -join "`n") | ConvertFrom-Json
+    if ($dryRunVcpAdapterGoalAlignment.passed -ne $true) {
+      Add-Failure "dry-run VCP adapter current goal alignment validation must pass"
+    }
+    if ($dryRunVcpAdapterGoalAlignment.dry_run_vcp_adapter_contract_aligned -ne $true) {
+      Add-Failure "dry-run VCP adapter contract must stay aligned with current goal"
+    }
+    if ($dryRunVcpAdapterGoalAlignment.codex_session_default_route_preserved -ne $true) {
+      Add-Failure "Codex session image route must remain the default generation route"
+    }
+    if ($dryRunVcpAdapterGoalAlignment.selected_plugin -ne $null) {
+      Add-Failure "dry-run VCP adapter goal alignment must keep selected_plugin null"
+    }
+    if ($dryRunVcpAdapterGoalAlignment.max_plugin_calls -ne 0) {
+      Add-Failure "dry-run VCP adapter goal alignment must keep max_plugin_calls 0"
+    }
+    if ($dryRunVcpAdapterGoalAlignment.provider_contact_performed -ne $false -or $dryRunVcpAdapterGoalAlignment.plugin_call_performed -ne $false -or $dryRunVcpAdapterGoalAlignment.api_call_performed -ne $false -or $dryRunVcpAdapterGoalAlignment.mcp_runtime_performed -ne $false) {
+      Add-Failure "dry-run VCP adapter goal alignment validation must not call provider/plugin/API/MCP"
+    }
+    if ($dryRunVcpAdapterGoalAlignment.real_manifest_read_performed -ne $false -or $dryRunVcpAdapterGoalAlignment.real_vcpchat_read_performed -ne $false -or $dryRunVcpAdapterGoalAlignment.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "dry-run VCP adapter goal alignment validation must not read real manifest/VCPChat/VCPToolBox"
+    }
+    if ($dryRunVcpAdapterGoalAlignment.image_generation_performed -ne $false -or $dryRunVcpAdapterGoalAlignment.output_file_write_performed -ne $false -or $dryRunVcpAdapterGoalAlignment.file_write_performed -ne $false) {
+      Add-Failure "dry-run VCP adapter goal alignment validation must not generate images or write files"
+    }
+    if ($dryRunVcpAdapterGoalAlignment.daily_note_write_performed -ne $false -or $dryRunVcpAdapterGoalAlignment.vcp_memory_write_performed -ne $false) {
+      Add-Failure "dry-run VCP adapter goal alignment validation must not write DailyNote or VCP memory"
+    }
+    if ($dryRunVcpAdapterGoalAlignment.accepted_samples_write_performed -ne $false -or $dryRunVcpAdapterGoalAlignment.failure_samples_write_performed -ne $false -or $dryRunVcpAdapterGoalAlignment.production_candidate_created -ne $false) {
+      Add-Failure "dry-run VCP adapter goal alignment validation must not write samples or production candidates"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

@@ -3,6 +3,35 @@
 ## Handoff Summary
 
 ```text
+Status: v14_115_dry_run_vcp_adapter_current_goal_alignment completed locally and validated.
+Reason: The dry-run VCP adapter must remain a no-execution contract while the three-month default generation route stays Codex session image import/review.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.115 dry-run VCP adapter alignment validator, MVP wiring, phase record, and .agent_board sync until commit decision.
+Phase record: docs/v14_115_dry_run_vcp_adapter_current_goal_alignment.md
+Validator created: scripts/validate_v14_115_dry_run_vcp_adapter_current_goal_alignment.js
+MVP validator updated: scripts/validate_mvp.ps1
+dry_run_vcp_adapter_contract_aligned: true
+codex_session_default_route_preserved: true
+selected_plugin: null
+max_plugin_calls: 0
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+validated_now: node --check scripts/validate_v14_115_dry_run_vcp_adapter_current_goal_alignment.js; node scripts/validate_v14_115_dry_run_vcp_adapter_current_goal_alignment.js
+recommended_next: manifest_read_authorization_package_current_goal_alignment
+recommended_next_auto_execution_allowed: true
+---
 Status: v14_114_review_console_handoff_taxonomy_index_alignment completed locally and validated.
 Reason: The Review Console handoff needs a display-only index over accepted, rejected, memory draft, and production exclusion routes without runtime integration.
 Current repository: project_root

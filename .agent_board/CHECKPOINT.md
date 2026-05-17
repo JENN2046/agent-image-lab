@@ -1,5 +1,35 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.115 Dry-Run VCP Adapter Current Goal Alignment
+
+```text
+phase_id: v14_115_dry_run_vcp_adapter_current_goal_alignment
+status: completed_validated
+phase_record_ref: docs/v14_115_dry_run_vcp_adapter_current_goal_alignment.md
+validator_created: scripts/validate_v14_115_dry_run_vcp_adapter_current_goal_alignment.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+dry_run_vcp_adapter_contract_aligned: true
+codex_session_default_route_preserved: true
+selected_plugin: null
+max_plugin_calls: 0
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+validated_now: node --check scripts/validate_v14_115_dry_run_vcp_adapter_current_goal_alignment.js; node scripts/validate_v14_115_dry_run_vcp_adapter_current_goal_alignment.js
+recommended_next: manifest_read_authorization_package_current_goal_alignment
+recommended_next_auto_execution_allowed: true
+```
+
 # V14.114 Review Console Handoff Taxonomy Index Alignment
 
 ```text

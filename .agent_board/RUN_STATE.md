@@ -4,10 +4,10 @@
 
 ```text
 objective: 3-month Agent Image Lab visual production control layer for the VCP ecosystem
-status: v14_114_review_console_handoff_taxonomy_index_alignment_completed_validated
+status: v14_115_dry_run_vcp_adapter_current_goal_alignment_completed_validated
 mode: Persistent 4-Agent Council local loop under A4.8
-phase_id: v14_114_review_console_handoff_taxonomy_index_alignment
-phase_record_ref: docs/v14_114_review_console_handoff_taxonomy_index_alignment.md
+phase_id: v14_115_dry_run_vcp_adapter_current_goal_alignment
+phase_record_ref: docs/v14_115_dry_run_vcp_adapter_current_goal_alignment.md
 default_generation_route_for_next_three_months: codex_session_image
 native_doubao_default_route: false
 provider_api_default_route: false
@@ -32,9 +32,25 @@ env_or_env_local_value_read_allowed_without_separate_authorization: false
 provider_api_plugin_mcp_allowed_without_separate_authorization: false
 real_manifest_VCPChat_VCPToolBox_read_allowed_without_separate_authorization: false
 push_tag_release_deploy_allowed_without_separate_authorization: false
-current_focus: dry_run_vcp_adapter_contract_current_goal_alignment
-validated_now: node --check scripts/validate_v14_114_review_console_handoff_taxonomy_alignment.js; node scripts/validate_v14_114_review_console_handoff_taxonomy_alignment.js
-recommended_next: dry_run_vcp_adapter_contract_current_goal_alignment
+current_focus: manifest_read_authorization_package_current_goal_alignment
+dry_run_vcp_adapter_contract_aligned: true
+selected_plugin: null
+max_plugin_calls: 0
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+validated_now: node --check scripts/validate_v14_115_dry_run_vcp_adapter_current_goal_alignment.js; node scripts/validate_v14_115_dry_run_vcp_adapter_current_goal_alignment.js
+recommended_next: manifest_read_authorization_package_current_goal_alignment
 recommended_next_auto_execution_allowed: true
 ```
 

@@ -1,5 +1,43 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.115-DRY-RUN-VCP-ADAPTER-CURRENT-GOAL-ALIGNMENT
+
+Task:
+
+```text
+Validate that the PVOS dry-run VCP adapter remains no-execution while Codex session images remain the default generation route.
+```
+
+Commands run:
+
+```text
+node --check scripts/validate_v14_115_dry_run_vcp_adapter_current_goal_alignment.js
+node scripts/validate_v14_115_dry_run_vcp_adapter_current_goal_alignment.js
+```
+
+Result:
+
+```text
+passed: true
+dry_run_vcp_adapter_contract_aligned: true
+codex_session_default_route_preserved: true
+selected_plugin: null
+max_plugin_calls: 0
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+```
+
 ## VALIDATION-20260517-v14.114-REVIEW-CONSOLE-HANDOFF-TAXONOMY-ALIGNMENT
 
 Task:
