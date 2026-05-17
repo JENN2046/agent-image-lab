@@ -3,6 +3,42 @@
 ## Handoff Summary
 
 ```text
+Status: v14_162_lamp_prompt_revision_after_v14_161_review completed locally and validated.
+Reason: The first v14.161 lamp candidate needed optimization. A corrected prompt package now targets stronger premium portable LED camping lantern identity while preserving no-execution boundaries for the record.
+Current repository: project_root
+Branch: master tracking origin/master; local commits may be ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.162 prompt package, validator, fixture, phase record, MVP wiring, and .agent_board sync until commit decision.
+Phase record: docs/v14_162_lamp_prompt_revision_after_v14_161_review.md
+Prompt package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_codex_v2.yaml
+Fixture: tests/schema_examples/v14_162_lamp_prompt_revision_after_v14_161_review.example.json
+Validator created: scripts/validate_v14_162_lamp_prompt_revision_after_v14_161_review.js
+MVP validator updated: scripts/validate_mvp.ps1
+source_candidate_status: needs_revision
+prompt_package_created: true
+fixes_indoor_desk_lamp_drift: true
+clarifies_portable_led_camping_lantern_identity: true
+generation_authorized_by_this_record: false
+image_generation_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+durable_archive_copy_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_162_lamp_prompt_revision_after_v14_161_review.js; node scripts/validate_v14_162_lamp_prompt_revision_after_v14_161_review.js.
+Next safe action: run broader validation, commit exact v14.162 files, then locally import/review the newly generated lamp candidate without accepted_samples write.
+```
+
+## Previous Handoff Summary
+
+```text
 Status: v14_161_codex_session_generated_candidate_readiness completed locally and validated.
 Reason: Jenn reviewed the two new Codex-session artifacts: the first lamp candidate needs optimization, and the second woven crossbody bag candidate can pass as an approved candidate. The current stage records local import/review readiness only and does not write accepted_samples.
 Current repository: project_root

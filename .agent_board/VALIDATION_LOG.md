@@ -1,5 +1,50 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260518-v14.162-LAMP-PROMPT-REVISION
+
+Scope:
+
+Validate the corrected lamp prompt package after the first v14.161 candidate was
+marked `needs_revision`. This stage is prompt/package readiness only; it does
+not authorize or perform image generation, accepted_samples writes, memory
+writes, production candidate writes, or VCP runtime integration.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_162_lamp_prompt_revision_after_v14_161_review.js
+node scripts/validate_v14_162_lamp_prompt_revision_after_v14_161_review.js
+```
+
+Expected:
+
+```yaml
+passed: true
+prompt_package_created: true
+source_candidate_status: needs_revision
+fixes_indoor_desk_lamp_drift: true
+clarifies_portable_led_camping_lantern_identity: true
+negative_case_generation_flag_blocks_prompt_readiness: true
+negative_case_accepted_samples_write_flag_blocks_prompt_readiness: true
+negative_case_vcp_runtime_claim_blocks_prompt_readiness: true
+negative_case_missing_prompt_ref_blocks_prompt_readiness: true
+generation_authorized_by_this_record: false
+image_generation_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+daily_note_write_performed: false
+vcp_memory_write_performed: false
+durable_archive_copy_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+```
+
 ## VALIDATION-20260518-v14.161-CODEX-GENERATED-CANDIDATE-READINESS
 
 Scope:

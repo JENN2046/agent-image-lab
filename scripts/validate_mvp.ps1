@@ -223,6 +223,7 @@ $requiredFiles = @(
   'scripts/validate_v14_159_end_to_end_audit_rollback_package.js',
   'scripts/validate_v14_160_two_month_product_capability_closeout.js',
   'scripts/validate_v14_161_codex_session_generated_candidate_readiness.js',
+  'scripts/validate_v14_162_lamp_prompt_revision_after_v14_161_review.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -404,6 +405,9 @@ $requiredFiles = @(
   'tests/schema_examples/v14_161_codex_session_generated_candidate_readiness.example.json',
   'tests/schema_examples/v14_161_product_still_life_smart_desk_lamp_import_record.json',
   'tests/schema_examples/v14_161_fashion_lifestyle_woven_crossbody_bag_import_record.json',
+  'docs/v14_162_lamp_prompt_revision_after_v14_161_review.md',
+  'prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_codex_v2.yaml',
+  'tests/schema_examples/v14_162_lamp_prompt_revision_after_v14_161_review.example.json',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -9515,6 +9519,34 @@ process.exit(child.status || 0);
     }
     if ($codexGeneratedCandidateReadiness.vcp_runtime_integration_proven -ne $false -or $codexGeneratedCandidateReadiness.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
       Add-Failure "v14.161 must not claim VCP runtime integration"
+    }
+  }
+
+  $lampPromptRevisionOutput = & node (Join-Path $Root 'scripts/validate_v14_162_lamp_prompt_revision_after_v14_161_review.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "lamp prompt revision validation exited with failure"
+  } else {
+    $lampPromptRevision = ($lampPromptRevisionOutput -join "`n") | ConvertFrom-Json
+    if ($lampPromptRevision.passed -ne $true) {
+      Add-Failure "lamp prompt revision validation must pass"
+    }
+    if ($lampPromptRevision.prompt_package_created -ne $true -or $lampPromptRevision.source_candidate_status -ne 'needs_revision' -or $lampPromptRevision.fixes_indoor_desk_lamp_drift -ne $true -or $lampPromptRevision.clarifies_portable_led_camping_lantern_identity -ne $true) {
+      Add-Failure "v14.162 must create a prompt package that fixes the lamp candidate positioning problem"
+    }
+    if ($lampPromptRevision.negative_case_generation_flag_blocks_prompt_readiness -ne $true -or $lampPromptRevision.negative_case_accepted_samples_write_flag_blocks_prompt_readiness -ne $true -or $lampPromptRevision.negative_case_vcp_runtime_claim_blocks_prompt_readiness -ne $true -or $lampPromptRevision.negative_case_missing_prompt_ref_blocks_prompt_readiness -ne $true) {
+      Add-Failure "v14.162 must fail prompt revision negative cases"
+    }
+    if ($lampPromptRevision.generation_authorized_by_this_record -ne $false -or $lampPromptRevision.image_generation_performed -ne $false -or $lampPromptRevision.provider_contact_performed -ne $false -or $lampPromptRevision.plugin_call_performed -ne $false -or $lampPromptRevision.api_call_performed -ne $false -or $lampPromptRevision.mcp_runtime_performed -ne $false) {
+      Add-Failure "v14.162 prompt revision record must not authorize or perform generation/provider/plugin/API/MCP actions"
+    }
+    if ($lampPromptRevision.accepted_samples_write_performed -ne $false -or $lampPromptRevision.failure_samples_write_performed -ne $false -or $lampPromptRevision.production_candidate_write_performed -ne $false -or $lampPromptRevision.daily_note_write_performed -ne $false -or $lampPromptRevision.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.162 prompt revision must not write accepted/failure/production/memory outputs"
+    }
+    if ($lampPromptRevision.durable_archive_copy_performed -ne $false -or $lampPromptRevision.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.162 prompt revision must not copy to durable archive or push/tag/release/deploy"
+    }
+    if ($lampPromptRevision.vcp_runtime_integration_proven -ne $false -or $lampPromptRevision.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.162 prompt revision must not claim VCP runtime integration"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

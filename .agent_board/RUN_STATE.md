@@ -3,6 +3,42 @@
 ## Active Two-Month Artifact Lifecycle Goal
 
 ```text
+objective: prepare lamp candidate correction while preserving artifact lifecycle boundaries
+status: v14_162_lamp_prompt_revision_after_v14_161_review_completed_validated
+mode: Persistent 4-Agent Council local loop under A4.8 / A4 — Sustained Local Autopilot
+phase_id: v14_162_lamp_prompt_revision_after_v14_161_review
+phase_record_ref: docs/v14_162_lamp_prompt_revision_after_v14_161_review.md
+prompt_package_ref: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_codex_v2.yaml
+fixture_ref: tests/schema_examples/v14_162_lamp_prompt_revision_after_v14_161_review.example.json
+validator_created: scripts/validate_v14_162_lamp_prompt_revision_after_v14_161_review.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+source_candidate_status: needs_revision
+prompt_package_created: true
+fixes_indoor_desk_lamp_drift: true
+clarifies_portable_led_camping_lantern_identity: true
+generation_authorized_by_this_record: false
+image_generation_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+durable_archive_copy_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+validated_now: node --check scripts/validate_v14_162_lamp_prompt_revision_after_v14_161_review.js; node scripts/validate_v14_162_lamp_prompt_revision_after_v14_161_review.js
+recommended_next: import_review_the_newly_generated_lamp_candidate_without_accepted_samples_write
+recommended_next_auto_execution_allowed: true_for_local_import_review_only
+```
+
+## Active Two-Month Artifact Lifecycle Goal
+
+```text
 objective: extend single-sample recoverability toward multi-category local artifact lifecycle capability with two new Codex-session candidates
 status: v14_161_codex_session_generated_candidate_readiness_completed_validated
 mode: Persistent 4-Agent Council local loop under A4.8 / A4 — Sustained Local Autopilot
