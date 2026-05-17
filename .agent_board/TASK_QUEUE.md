@@ -10,10 +10,41 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ```text
 Current active long-term objective: 3-month Agent Image Lab visual production control layer for the VCP ecosystem.
-Status: v14_131_real_artifact_validation_and_accepted_sample_recoverability_completed_validated.
+Status: v14_132_state_scope_canonicalization_completed_validated.
 Purpose: move Agent Image Lab from local verifiable visual production MVP toward a controlled VCPChat / VCPToolBox visual production system while staying inside A4.8 unless separately authorized.
-phase_id: v14_131_real_artifact_validation_and_accepted_sample_recoverability_gate.
-phase_record_ref: docs/v14_131_real_artifact_validation_and_accepted_sample_recoverability_gate.md.
+phase_id: v14_132_state_scope_canonicalization.
+phase_record_ref: docs/v14_132_state_scope_canonicalization.md.
+active_scope:
+active_phase_id: v14_132_state_scope_canonicalization.
+active_phase_record_ref: docs/v14_132_state_scope_canonicalization.md.
+active_recommended_next: main_validator_real_import_record_wiring.
+recommended_next_source_phase: v14_132_state_scope_canonicalization.
+supersedes_recommendation_from: review_console_current_goal_gap_dashboard_alignment.
+artifact_scope:
+artifact_sample_id: accepted_womens_resort_relaxed_knit_codex_v2_001.
+artifact_recoverability_status: workspace_local_verified.
+artifact_locator_scope: project_relative_runs.
+artifact_portable_after_clone: false.
+artifact_vcp_runtime_integration_proven: false.
+authorization_scope:
+authorization_failure_samples_write_allowed: false.
+authorization_production_candidate_allowed: false.
+authorization_DailyNote_write_allowed: false.
+authorization_VCP_memory_write_allowed: false.
+authorization_real_manifest_read_allowed: false.
+authorization_real_vcpchat_read_allowed: false.
+authorization_real_vcptoolbox_read_allowed: false.
+authorization_push_tag_release_deploy_allowed: false.
+side_effect_scope:
+side_effect_current_phase_registry_metadata_write_performed: false.
+side_effect_current_phase_image_binary_copy_performed: false.
+side_effect_current_phase_source_image_modified: false.
+side_effect_current_phase_provider_contact_performed: false.
+side_effect_current_phase_vcp_runtime_integration_performed: false.
+history_scope:
+history_v14_107_accepted_sample_registry_write_completed: true.
+history_v14_131_artifact_recoverability_completed: true.
+history_PROJECT_MASTER_PLAN_default_authority: false.
 default_generation_route_for_next_three_months: codex_session_image.
 NativeDoubaoImage_default_route: false.
 provider_API_default_route: false.
@@ -38,7 +69,17 @@ env_value_read_allowed_without_separate_authorization: false.
 provider_API_plugin_MCP_allowed_without_separate_authorization: false.
 real_manifest_VCPChat_VCPToolBox_read_allowed_without_separate_authorization: false.
 push_tag_release_deploy_allowed_without_separate_authorization: false.
-current_focus: real_artifact_validation_and_accepted_sample_recoverability.
+current_focus: state_scope_canonicalization.
+state_scope_canonicalization_created: true.
+active_scope_defined: true.
+artifact_scope_defined: true.
+authorization_scope_defined: true.
+side_effect_scope_defined: true.
+history_scope_defined: true.
+phase_current_project_history_separated: true.
+recommended_next_source_phase_required: true.
+supersedes_recommendation_from_recorded: true.
+progress_percentage_requires_scope_split: true.
 artifact_recoverability_validator_created: true.
 real_import_record_parsed: true.
 real_artifact_file_exists: true.
@@ -160,8 +201,8 @@ accepted_samples_write_performed: false.
 failure_samples_write_performed: false.
 production_candidate_created: false.
 output_file_write_performed: false.
-validated_now: node --check scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js; node scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js.
-recommended_next: state_scope_canonicalization.
+validated_now: node --check scripts/validate_v14_132_state_scope_canonicalization.js; node scripts/validate_v14_132_state_scope_canonicalization.js.
+recommended_next: main_validator_real_import_record_wiring.
 recommended_next_auto_execution_allowed: true.
 ---
 Current active local objective: v14_107_womens_resort_relaxed_knit_accepted_sample_closeout.

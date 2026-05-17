@@ -195,6 +195,7 @@ $requiredFiles = @(
   'scripts/validate_v14_129_current_goal_completion_audit_gap_map.js',
   'scripts/validate_v14_130_legacy_docs_context_quarantine_refresh.js',
   'scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js',
+  'scripts/validate_v14_132_state_scope_canonicalization.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -320,6 +321,7 @@ $requiredFiles = @(
   'docs/v14_129_current_goal_completion_audit_gap_map.md',
   'docs/v14_130_legacy_docs_context_quarantine_refresh.md',
   'docs/v14_131_real_artifact_validation_and_accepted_sample_recoverability_gate.md',
+  'docs/v14_132_state_scope_canonicalization.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8535,6 +8537,40 @@ process.exit(child.status || 0);
     }
     if ($artifactRecoverability.real_manifest_read_performed -ne $false -or $artifactRecoverability.real_vcpchat_read_performed -ne $false -or $artifactRecoverability.real_vcptoolbox_read_performed -ne $false) {
       Add-Failure "real artifact recoverability must not read real manifest/VCPChat/VCPToolBox"
+    }
+  }
+
+  $stateScopeCanonicalizationOutput = & node (Join-Path $Root 'scripts/validate_v14_132_state_scope_canonicalization.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "state scope canonicalization validation exited with failure"
+  } else {
+    $stateScopeCanonicalization = ($stateScopeCanonicalizationOutput -join "`n") | ConvertFrom-Json
+    if ($stateScopeCanonicalization.passed -ne $true) {
+      Add-Failure "state scope canonicalization validation must pass"
+    }
+    if ($stateScopeCanonicalization.active_scope_defined -ne $true -or $stateScopeCanonicalization.artifact_scope_defined -ne $true) {
+      Add-Failure "state scope canonicalization must define active and artifact scopes"
+    }
+    if ($stateScopeCanonicalization.authorization_scope_defined -ne $true -or $stateScopeCanonicalization.side_effect_scope_defined -ne $true -or $stateScopeCanonicalization.history_scope_defined -ne $true) {
+      Add-Failure "state scope canonicalization must define authorization, side-effect, and history scopes"
+    }
+    if ($stateScopeCanonicalization.phase_current_project_history_separated -ne $true -or $stateScopeCanonicalization.progress_percentage_requires_scope_split -ne $true) {
+      Add-Failure "state scope canonicalization must separate phase-current facts from project history and scoped progress"
+    }
+    if ($stateScopeCanonicalization.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "state scope canonicalization must keep artifact recoverability separate from VCP runtime integration"
+    }
+    if ($stateScopeCanonicalization.provider_contact_performed -ne $false -or $stateScopeCanonicalization.plugin_call_performed -ne $false -or $stateScopeCanonicalization.api_call_performed -ne $false -or $stateScopeCanonicalization.mcp_runtime_performed -ne $false) {
+      Add-Failure "state scope canonicalization must not call provider/plugin/API/MCP"
+    }
+    if ($stateScopeCanonicalization.image_generation_performed -ne $false -or $stateScopeCanonicalization.daily_note_write_performed -ne $false -or $stateScopeCanonicalization.vcp_memory_write_performed -ne $false) {
+      Add-Failure "state scope canonicalization must not generate images or write DailyNote/VCP memory"
+    }
+    if ($stateScopeCanonicalization.failure_samples_write_performed -ne $false -or $stateScopeCanonicalization.production_candidate_created -ne $false) {
+      Add-Failure "state scope canonicalization must not write failure_samples or production candidates"
+    }
+    if ($stateScopeCanonicalization.real_manifest_read_performed -ne $false -or $stateScopeCanonicalization.real_vcpchat_read_performed -ne $false -or $stateScopeCanonicalization.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "state scope canonicalization must not read real manifest/VCPChat/VCPToolBox"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

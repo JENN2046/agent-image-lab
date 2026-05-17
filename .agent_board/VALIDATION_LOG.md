@@ -1,5 +1,58 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.132-STATE-SCOPE-CANONICALIZATION
+
+Scope:
+
+Validate that current board state separates active, artifact, authorization,
+side-effect, and history scopes instead of mixing phase-current facts with
+project-history facts.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_132_state_scope_canonicalization.js
+node scripts/validate_v14_132_state_scope_canonicalization.js
+```
+
+Expected:
+
+```yaml
+passed: true
+state_scope_canonicalization_created: true
+active_scope_defined: true
+artifact_scope_defined: true
+authorization_scope_defined: true
+side_effect_scope_defined: true
+history_scope_defined: true
+phase_current_project_history_separated: true
+recommended_next_source_phase_required: true
+supersedes_recommendation_from_recorded: true
+progress_percentage_requires_scope_split: true
+artifact_recoverability_is_not_vcp_runtime_integration: true
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+```
+
+Result:
+
+```yaml
+status: passed
+validator: scripts/validate_v14_132_state_scope_canonicalization.js
+phase_record: docs/v14_132_state_scope_canonicalization.md
+```
+
 ## VALIDATION-20260517-v14.131-REAL-ARTIFACT-VALIDATION-AND-ACCEPTED-SAMPLE-RECOVERABILITY
 
 Scope:

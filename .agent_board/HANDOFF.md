@@ -3,6 +3,42 @@
 ## Handoff Summary
 
 ```text
+Status: v14_132_state_scope_canonicalization completed locally and validated.
+Reason: The board state needed explicit active/artifact/authorization/side-effect/history scopes so current phase facts are no longer mixed with project-history facts.
+Current repository: project_root
+Branch: master tracking origin/master; local commits may be ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.132 state scope canonicalization, validator, MVP wiring, phase record, and .agent_board sync until validation and commit decision.
+Phase record: docs/v14_132_state_scope_canonicalization.md
+Validator created: scripts/validate_v14_132_state_scope_canonicalization.js
+MVP validator updated: scripts/validate_mvp.ps1
+state_scope_canonicalization_created: true
+active_scope_defined: true
+artifact_scope_defined: true
+authorization_scope_defined: true
+side_effect_scope_defined: true
+history_scope_defined: true
+phase_current_project_history_separated: true
+recommended_next_source_phase_required: true
+supersedes_recommendation_from_recorded: true
+progress_percentage_requires_scope_split: true
+artifact_recoverability_is_not_vcp_runtime_integration: true
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+validated_now: node --check scripts/validate_v14_132_state_scope_canonicalization.js; node scripts/validate_v14_132_state_scope_canonicalization.js
+recommended_next: main_validator_real_import_record_wiring
+recommended_next_auto_execution_allowed: true
+---
 Status: v14_131_real_artifact_validation_and_accepted_sample_recoverability completed locally and validated.
 Reason: The current accepted Codex-session sample needed real artifact recoverability proof instead of another dashboard or token-only document gate.
 Current repository: project_root

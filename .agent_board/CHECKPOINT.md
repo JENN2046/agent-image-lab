@@ -1,5 +1,42 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.132 State Scope Canonicalization
+
+```text
+phase_id: v14_132_state_scope_canonicalization
+status: completed_validated
+phase_record_ref: docs/v14_132_state_scope_canonicalization.md
+validator_created: scripts/validate_v14_132_state_scope_canonicalization.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+state_scope_canonicalization_created: true
+active_scope_defined: true
+artifact_scope_defined: true
+authorization_scope_defined: true
+side_effect_scope_defined: true
+history_scope_defined: true
+phase_current_project_history_separated: true
+recommended_next_source_phase_required: true
+supersedes_recommendation_from_recorded: true
+progress_percentage_requires_scope_split: true
+artifact_recoverability_is_not_vcp_runtime_integration: true
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+validated_now: node --check scripts/validate_v14_132_state_scope_canonicalization.js; node scripts/validate_v14_132_state_scope_canonicalization.js
+recommended_next: main_validator_real_import_record_wiring
+recommended_next_auto_execution_allowed: true
+```
+
 # V14.131 Real Artifact Validation And Accepted Sample Recoverability Gate
 
 ```text
