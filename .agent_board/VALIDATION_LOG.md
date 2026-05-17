@@ -1,5 +1,49 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.117-DAILYNOTE-VCP-MEMORY-AUTHORIZATION-CURRENT-GOAL-ALIGNMENT
+
+Task:
+
+```text
+Validate that DailyNote and VCP memory writes remain draft/preflight only and are not triggered by Codex session review or accepted_samples metadata.
+```
+
+Commands run:
+
+```text
+node --check scripts/validate_v14_117_daily_note_vcp_memory_authorization_current_goal_alignment.js
+node scripts/validate_v14_117_daily_note_vcp_memory_authorization_current_goal_alignment.js
+```
+
+Result:
+
+```text
+passed: true
+daily_note_vcp_memory_authorization_chain_aligned: true
+codex_memory_delta_draft_preserved: true
+accepted_samples_metadata_does_not_authorize_memory: true
+codex_session_default_route_preserved: true
+write_mode: draft
+approval_required: true
+approval_status: pending
+should_write_to_vcp: false
+daily_note_write_authorized: false
+daily_note_write_performed: false
+vcp_memory_write_performed: false
+direct_memory_write_performed: false
+actual_write_performed: false
+vcp_memory_written: false
+image_binary_saved_to_memory: false
+raw_sensitive_content_saved: false
+accepted_samples_write_performed: false
+production_candidate_created: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+```
+
 ## VALIDATION-20260517-v14.116-MANIFEST-READ-AUTHORIZATION-CURRENT-GOAL-ALIGNMENT
 
 Task:

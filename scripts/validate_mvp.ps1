@@ -180,6 +180,7 @@ $requiredFiles = @(
   'scripts/validate_v14_114_review_console_handoff_taxonomy_alignment.js',
   'scripts/validate_v14_115_dry_run_vcp_adapter_current_goal_alignment.js',
   'scripts/validate_v14_116_manifest_read_authorization_current_goal_alignment.js',
+  'scripts/validate_v14_117_daily_note_vcp_memory_authorization_current_goal_alignment.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -286,6 +287,7 @@ $requiredFiles = @(
   'docs/codex_session_image_provider_minimal_contract.md',
   'docs/v14_115_dry_run_vcp_adapter_current_goal_alignment.md',
   'docs/v14_116_manifest_read_authorization_current_goal_alignment.md',
+  'docs/v14_117_daily_note_vcp_memory_authorization_current_goal_alignment.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -7964,6 +7966,46 @@ process.exit(child.status || 0);
     }
     if ($manifestReadAuthorizationGoal.daily_note_write_performed -ne $false -or $manifestReadAuthorizationGoal.vcp_memory_write_performed -ne $false -or $manifestReadAuthorizationGoal.production_candidate_created -ne $false) {
       Add-Failure "manifest read authorization alignment must not write memory or create production candidates"
+    }
+  }
+
+  $dailyNoteMemoryGoalOutput = & node (Join-Path $Root 'scripts/validate_v14_117_daily_note_vcp_memory_authorization_current_goal_alignment.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "DailyNote/VCP memory authorization current goal alignment validation exited with failure"
+  } else {
+    $dailyNoteMemoryGoal = ($dailyNoteMemoryGoalOutput -join "`n") | ConvertFrom-Json
+    if ($dailyNoteMemoryGoal.passed -ne $true) {
+      Add-Failure "DailyNote/VCP memory authorization current goal alignment validation must pass"
+    }
+    if ($dailyNoteMemoryGoal.daily_note_vcp_memory_authorization_chain_aligned -ne $true -or $dailyNoteMemoryGoal.codex_memory_delta_draft_preserved -ne $true) {
+      Add-Failure "DailyNote/VCP memory authorization chain and Codex memory delta draft must remain aligned"
+    }
+    if ($dailyNoteMemoryGoal.accepted_samples_metadata_does_not_authorize_memory -ne $true) {
+      Add-Failure "accepted_samples metadata must not authorize memory writes"
+    }
+    if ($dailyNoteMemoryGoal.codex_session_default_route_preserved -ne $true) {
+      Add-Failure "DailyNote/VCP memory alignment must preserve Codex session default route"
+    }
+    if ($dailyNoteMemoryGoal.write_mode -ne 'draft' -or $dailyNoteMemoryGoal.approval_required -ne $true -or $dailyNoteMemoryGoal.approval_status -ne 'pending') {
+      Add-Failure "Codex memory delta must remain a pending draft"
+    }
+    if ($dailyNoteMemoryGoal.should_write_to_vcp -ne $false -or $dailyNoteMemoryGoal.daily_note_write_authorized -ne $false) {
+      Add-Failure "Codex memory delta must not authorize VCP or DailyNote writes"
+    }
+    if ($dailyNoteMemoryGoal.daily_note_write_performed -ne $false -or $dailyNoteMemoryGoal.vcp_memory_write_performed -ne $false -or $dailyNoteMemoryGoal.direct_memory_write_performed -ne $false -or $dailyNoteMemoryGoal.actual_write_performed -ne $false -or $dailyNoteMemoryGoal.vcp_memory_written -ne $false) {
+      Add-Failure "DailyNote/VCP memory alignment must not perform memory writes"
+    }
+    if ($dailyNoteMemoryGoal.image_binary_saved_to_memory -ne $false -or $dailyNoteMemoryGoal.raw_sensitive_content_saved -ne $false) {
+      Add-Failure "DailyNote/VCP memory alignment must not save image binaries or raw sensitive content"
+    }
+    if ($dailyNoteMemoryGoal.accepted_samples_write_performed -ne $false -or $dailyNoteMemoryGoal.production_candidate_created -ne $false) {
+      Add-Failure "DailyNote/VCP memory alignment must not write accepted_samples or create production candidates"
+    }
+    if ($dailyNoteMemoryGoal.provider_contact_performed -ne $false -or $dailyNoteMemoryGoal.plugin_call_performed -ne $false -or $dailyNoteMemoryGoal.api_call_performed -ne $false -or $dailyNoteMemoryGoal.mcp_runtime_performed -ne $false) {
+      Add-Failure "DailyNote/VCP memory alignment must not call provider/plugin/API/MCP"
+    }
+    if ($dailyNoteMemoryGoal.image_generation_performed -ne $false -or $dailyNoteMemoryGoal.output_file_write_performed -ne $false -or $dailyNoteMemoryGoal.file_write_performed -ne $false) {
+      Add-Failure "DailyNote/VCP memory alignment must not generate images or write files"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding
