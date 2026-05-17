@@ -1,5 +1,40 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.127 Production Exclusion Draft Current Goal Gap Review
+
+```text
+phase_id: v14_127_production_exclusion_draft_current_goal_gap_review
+status: completed_validated
+phase_record_ref: docs/v14_127_production_exclusion_draft_current_goal_gap_review.md
+validator_created: scripts/validate_v14_127_production_exclusion_draft_current_goal_gap_review.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+production_exclusion_register_present: true
+production_exclusion_register_scope: historical_review_report_fixture
+codex_session_accepted_sample_should_be_production_exclusion: false
+codex_session_accepted_sample_in_production_exclusion_register: false
+current_codex_sample_production_exclusion_gap_is_expected: true
+production_candidate_gate_still_blocks_upgrade: true
+production_exclusion_draft_write_performed: false
+production_exclusion_register_modified: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+output_file_write_performed: false
+validated_now: node --check scripts/validate_v14_127_production_exclusion_draft_current_goal_gap_review.js; node scripts/validate_v14_127_production_exclusion_draft_current_goal_gap_review.js
+recommended_next: failure_samples_authorization_template_current_goal_gap_review
+recommended_next_auto_execution_allowed: true
+```
+
 # V14.126 Accepted / Failure Metadata Cross-Index Gap Review
 
 ```text

@@ -190,6 +190,7 @@ $requiredFiles = @(
   'scripts/validate_v14_124_context_load_guide_and_historical_docs_compaction.js',
   'scripts/validate_v14_125_review_console_memory_delta_handoff_refresh.js',
   'scripts/validate_v14_126_accepted_failure_metadata_cross_index_gap_review.js',
+  'scripts/validate_v14_127_production_exclusion_draft_current_goal_gap_review.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -309,6 +310,7 @@ $requiredFiles = @(
   'docs/v14_124_context_load_guide_and_historical_docs_compaction.md',
   'docs/v14_125_review_console_memory_delta_handoff_refresh.md',
   'docs/v14_126_accepted_failure_metadata_cross_index_gap_review.md',
+  'docs/v14_127_production_exclusion_draft_current_goal_gap_review.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8336,6 +8338,40 @@ process.exit(child.status || 0);
     }
     if ($acceptedFailureMetadataGap.real_manifest_read_performed -ne $false -or $acceptedFailureMetadataGap.real_vcpchat_read_performed -ne $false -or $acceptedFailureMetadataGap.real_vcptoolbox_read_performed -ne $false) {
       Add-Failure "accepted/failure metadata gap validation must not read real manifest/VCPChat/VCPToolBox"
+    }
+  }
+
+  $productionExclusionCurrentGoalGapOutput = & node (Join-Path $Root 'scripts/validate_v14_127_production_exclusion_draft_current_goal_gap_review.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "production exclusion current-goal gap validation exited with failure"
+  } else {
+    $productionExclusionCurrentGoalGap = ($productionExclusionCurrentGoalGapOutput -join "`n") | ConvertFrom-Json
+    if ($productionExclusionCurrentGoalGap.passed -ne $true) {
+      Add-Failure "production exclusion current-goal gap validation must pass"
+    }
+    if ($productionExclusionCurrentGoalGap.production_exclusion_register_present -ne $true -or $productionExclusionCurrentGoalGap.codex_session_accepted_sample_in_production_exclusion_register -ne $false) {
+      Add-Failure "production exclusion current-goal gap must preserve register presence and keep Codex accepted sample out of exclusion register"
+    }
+    if ($productionExclusionCurrentGoalGap.current_codex_sample_production_exclusion_gap_is_expected -ne $true -or $productionExclusionCurrentGoalGap.production_candidate_gate_still_blocks_upgrade -ne $true) {
+      Add-Failure "production exclusion current-goal gap must remain expected and production-candidate gated"
+    }
+    if ($productionExclusionCurrentGoalGap.production_exclusion_draft_write_performed -ne $false -or $productionExclusionCurrentGoalGap.production_exclusion_register_modified -ne $false) {
+      Add-Failure "production exclusion current-goal gap validation must not write production exclusion artifacts"
+    }
+    if ($productionExclusionCurrentGoalGap.accepted_samples_write_performed -ne $false -or $productionExclusionCurrentGoalGap.failure_samples_write_performed -ne $false -or $productionExclusionCurrentGoalGap.production_candidate_created -ne $false) {
+      Add-Failure "production exclusion current-goal gap validation must not write samples or production candidates"
+    }
+    if ($productionExclusionCurrentGoalGap.provider_contact_performed -ne $false -or $productionExclusionCurrentGoalGap.plugin_call_performed -ne $false -or $productionExclusionCurrentGoalGap.api_call_performed -ne $false -or $productionExclusionCurrentGoalGap.mcp_runtime_performed -ne $false) {
+      Add-Failure "production exclusion current-goal gap validation must not call provider/plugin/API/MCP"
+    }
+    if ($productionExclusionCurrentGoalGap.image_generation_performed -ne $false -or $productionExclusionCurrentGoalGap.output_file_write_performed -ne $false -or $productionExclusionCurrentGoalGap.file_write_performed -ne $false) {
+      Add-Failure "production exclusion current-goal gap validation must not generate images or write output files"
+    }
+    if ($productionExclusionCurrentGoalGap.daily_note_write_performed -ne $false -or $productionExclusionCurrentGoalGap.vcp_memory_write_performed -ne $false) {
+      Add-Failure "production exclusion current-goal gap validation must not write DailyNote or VCP memory"
+    }
+    if ($productionExclusionCurrentGoalGap.real_manifest_read_performed -ne $false -or $productionExclusionCurrentGoalGap.real_vcpchat_read_performed -ne $false -or $productionExclusionCurrentGoalGap.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "production exclusion current-goal gap validation must not read real manifest/VCPChat/VCPToolBox"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

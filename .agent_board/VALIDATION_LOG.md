@@ -1,5 +1,54 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.127-PRODUCTION-EXCLUSION-DRAFT-CURRENT-GOAL-GAP-REVIEW
+
+Scope:
+
+Validate that the current Codex-session accepted sample is not treated as a production exclusion record or production candidate, while preserving the historical ReviewReport production exclusion register.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_127_production_exclusion_draft_current_goal_gap_review.js
+node scripts/validate_v14_127_production_exclusion_draft_current_goal_gap_review.js
+```
+
+Expected:
+
+```yaml
+passed: true
+production_exclusion_register_present: true
+production_exclusion_register_scope: historical_review_report_fixture
+codex_session_accepted_sample_should_be_production_exclusion: false
+codex_session_accepted_sample_in_production_exclusion_register: false
+current_codex_sample_production_exclusion_gap_is_expected: true
+production_candidate_gate_still_blocks_upgrade: true
+production_exclusion_draft_write_performed: false
+production_exclusion_register_modified: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+output_file_write_performed: false
+```
+
+Result:
+
+```yaml
+status: passed
+validator: scripts/validate_v14_127_production_exclusion_draft_current_goal_gap_review.js
+phase_record: docs/v14_127_production_exclusion_draft_current_goal_gap_review.md
+```
+
 ## VALIDATION-20260517-v14.126-ACCEPTED-FAILURE-METADATA-CROSS-INDEX-GAP-REVIEW
 
 Scope:
