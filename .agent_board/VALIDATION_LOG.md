@@ -1,5 +1,38 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.113-FAILURE-SAMPLES-AUTHORIZATION-BOUNDARY
+
+Task:
+
+```text
+Validate that existing failure_samples taxonomy remains read-only and any new failure_samples write still requires separate authorization.
+```
+
+Commands run:
+
+```text
+node --check scripts/validate_v14_113_failure_samples_authorization_boundary.js
+node scripts/validate_v14_113_failure_samples_authorization_boundary.js
+```
+
+Result:
+
+```text
+passed: true
+existing_failure_registry_preserved: true
+failure_samples_write_allowed_without_separate_authorization: false
+failure_samples_write_performed: false
+failure_samples_registry_write_performed: false
+failure_samples_taxonomy_write_performed: false
+codex_accepted_sample_written_to_failure_registry: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+```
+
 ## VALIDATION-20260517-v14.112-PRODUCTION-CANDIDATE-GATE-LOCAL-POLICY
 
 Task:

@@ -1,5 +1,30 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.113 Failure Samples Authorization And Taxonomy Draft Without Write
+
+```text
+phase_id: v14_113_failure_samples_authorization_and_taxonomy_draft_without_write
+status: completed_validated
+phase_record_ref: docs/v14_113_failure_samples_authorization_and_taxonomy_draft_without_write.md
+validator_created: scripts/validate_v14_113_failure_samples_authorization_boundary.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+existing_failure_registry_preserved: true
+failure_samples_write_allowed_without_separate_authorization: false
+failure_samples_write_performed: false
+failure_samples_registry_write_performed: false
+failure_samples_taxonomy_write_performed: false
+codex_accepted_sample_written_to_failure_registry: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+validated_now: node --check scripts/validate_v14_113_failure_samples_authorization_boundary.js; node scripts/validate_v14_113_failure_samples_authorization_boundary.js
+recommended_next: review_console_handoff_taxonomy_index_alignment
+recommended_next_auto_execution_allowed: true
+```
+
 # V14.112 Production Candidate Gate Local Policy Refresh
 
 ```text

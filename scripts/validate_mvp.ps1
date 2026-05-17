@@ -176,6 +176,7 @@ $requiredFiles = @(
   'scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js',
   'scripts/validate_v14_111_codex_session_memory_delta_draft.js',
   'scripts/validate_v14_112_production_candidate_gate_policy.js',
+  'scripts/validate_v14_113_failure_samples_authorization_boundary.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -7834,6 +7835,28 @@ process.exit(child.status || 0);
     }
     if ($productionCandidateGate.daily_note_write_performed -ne $false -or $productionCandidateGate.vcp_memory_write_performed -ne $false) {
       Add-Failure "production candidate gate validation must not write DailyNote or VCP memory"
+    }
+  }
+
+  $failureSamplesBoundaryOutput = & node (Join-Path $Root 'scripts/validate_v14_113_failure_samples_authorization_boundary.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "failure_samples authorization boundary validation exited with failure"
+  } else {
+    $failureSamplesBoundary = ($failureSamplesBoundaryOutput -join "`n") | ConvertFrom-Json
+    if ($failureSamplesBoundary.passed -ne $true) {
+      Add-Failure "failure_samples authorization boundary validation must pass"
+    }
+    if ($failureSamplesBoundary.failure_samples_write_allowed_without_separate_authorization -ne $false) {
+      Add-Failure "failure_samples writes must require separate authorization"
+    }
+    if ($failureSamplesBoundary.failure_samples_write_performed -ne $false) {
+      Add-Failure "failure_samples boundary validation must not write failure_samples"
+    }
+    if ($failureSamplesBoundary.failure_samples_registry_write_performed -ne $false -or $failureSamplesBoundary.failure_samples_taxonomy_write_performed -ne $false) {
+      Add-Failure "failure_samples boundary validation must not write registry or taxonomy"
+    }
+    if ($failureSamplesBoundary.codex_accepted_sample_written_to_failure_registry -ne $false) {
+      Add-Failure "Codex accepted sample must not be written to failure registry"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding
