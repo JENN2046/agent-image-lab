@@ -219,6 +219,7 @@ $requiredFiles = @(
   'scripts/validate_v14_150_local_regression_suite_consolidation.js',
   'scripts/validate_v14_151_dry_run_vcp_adapter_contract_v1.js',
   'scripts/validate_v14_152_review_console_handoff_contract.js',
+  'scripts/validate_v14_153_manifest_read_authorization_gate_package.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -385,6 +386,10 @@ $requiredFiles = @(
   'review_console/static_prototype/HANDOFF_CONTRACT.md',
   'schemas/review_console_handoff_contract.schema.yaml',
   'tests/schema_examples/v14_152_review_console_handoff_contract.example.yaml',
+  'docs/v14_153_manifest_read_authorization_gate_package.md',
+  'integrations/vcp/manifest_read_authorization_gate_package_v1.yaml',
+  'schemas/manifest_read_authorization_gate_package.schema.yaml',
+  'tests/schema_examples/v14_153_manifest_read_authorization_gate_package.example.yaml',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -9360,6 +9365,40 @@ process.exit(child.status || 0);
     }
     if ($reviewConsoleHandoff.ipc_channel_created -ne $false -or $reviewConsoleHandoff.preload_script_created -ne $false -or $reviewConsoleHandoff.renderer_integration_created -ne $false -or $reviewConsoleHandoff.production_candidate_write_performed -ne $false -or $reviewConsoleHandoff.daily_note_write_performed -ne $false -or $reviewConsoleHandoff.vcp_memory_write_performed -ne $false) {
       Add-Failure "Review Console handoff contract must not create runtime integration or write production/memory outputs"
+    }
+  }
+
+  $manifestReadAuthorizationGateOutput = & node (Join-Path $Root 'scripts/validate_v14_153_manifest_read_authorization_gate_package.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "manifest read authorization gate package validation exited with failure"
+  } else {
+    $manifestReadAuthorizationGate = ($manifestReadAuthorizationGateOutput -join "`n") | ConvertFrom-Json
+    if ($manifestReadAuthorizationGate.passed -ne $true) {
+      Add-Failure "manifest read authorization gate package validation must pass"
+    }
+    if ($manifestReadAuthorizationGate.manifest_read_authorization_gate_package_created -ne $true -or $manifestReadAuthorizationGate.package_status -ne 'prepared_incomplete_not_granted' -or $manifestReadAuthorizationGate.exact_real_manifest_path_provided -ne $false -or $manifestReadAuthorizationGate.manifest_read_authorization_ready -ne $false) {
+      Add-Failure "v14.153 must create an incomplete, not granted manifest read authorization gate package"
+    }
+    if ($manifestReadAuthorizationGate.v14_116_manifest_read_authorization_alignment_still_passes -ne $true -or $manifestReadAuthorizationGate.v14_152_review_console_handoff_contract_still_passes -ne $true) {
+      Add-Failure "v14.153 must preserve v14.116 and v14.152 validation"
+    }
+    if ($manifestReadAuthorizationGate.negative_case_exact_manifest_path_missing_keeps_package_incomplete -ne $true -or $manifestReadAuthorizationGate.negative_case_read_performed_blocks_package -ne $true -or $manifestReadAuthorizationGate.negative_case_source_path_allowed_without_A5_blocks_package -ne $true -or $manifestReadAuthorizationGate.negative_case_raw_manifest_copy_allowed_blocks_package -ne $true -or $manifestReadAuthorizationGate.negative_case_runtime_integration_allowed_blocks_package -ne $true -or $manifestReadAuthorizationGate.negative_case_real_vcpchat_read_blocks_package -ne $true) {
+      Add-Failure "v14.153 must fail manifest read authorization negative cases"
+    }
+    if ($manifestReadAuthorizationGate.vcp_runtime_integration_proven -ne $false -or $manifestReadAuthorizationGate.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "manifest read authorization gate package must not claim VCP runtime integration"
+    }
+    if ($manifestReadAuthorizationGate.read_authorized -ne $false -or $manifestReadAuthorizationGate.read_performed -ne $false -or $manifestReadAuthorizationGate.source_authorized -ne $false -or $manifestReadAuthorizationGate.source_read_performed -ne $false) {
+      Add-Failure "manifest read authorization gate package must not authorize or perform reads"
+    }
+    if ($manifestReadAuthorizationGate.real_manifest_read_performed -ne $false -or $manifestReadAuthorizationGate.real_vcpchat_read_performed -ne $false -or $manifestReadAuthorizationGate.real_vcptoolbox_read_performed -ne $false -or $manifestReadAuthorizationGate.raw_manifest_copy_allowed -ne $false -or $manifestReadAuthorizationGate.read_command_permission -ne $false) {
+      Add-Failure "manifest read authorization gate package must not read real VCP systems or allow raw manifest copy"
+    }
+    if ($manifestReadAuthorizationGate.provider_contact_performed -ne $false -or $manifestReadAuthorizationGate.plugin_call_performed -ne $false -or $manifestReadAuthorizationGate.api_call_performed -ne $false -or $manifestReadAuthorizationGate.mcp_runtime_performed -ne $false -or $manifestReadAuthorizationGate.image_generation_performed -ne $false) {
+      Add-Failure "manifest read authorization gate package must not call provider/plugin/API/MCP or generate images"
+    }
+    if ($manifestReadAuthorizationGate.runtime_integration_performed -ne $false -or $manifestReadAuthorizationGate.production_candidate_write_performed -ne $false -or $manifestReadAuthorizationGate.daily_note_write_performed -ne $false -or $manifestReadAuthorizationGate.vcp_memory_write_performed -ne $false) {
+      Add-Failure "manifest read authorization gate package must not create runtime integration or write production/memory outputs"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

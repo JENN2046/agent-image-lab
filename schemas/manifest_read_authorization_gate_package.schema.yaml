@@ -1,0 +1,58 @@
+# manifest_read_authorization_gate_package.schema.yaml
+# Local authorization package schema for a future single-file manifest read.
+
+manifest_read_authorization_gate_package:
+  version: v1
+  contract_type: manifest_read_authorization_gate_package
+  mode: local_authorization_package_only
+  package_status: prepared_incomplete_not_granted
+  authorization_granted_by_this_record: false
+  exact_real_manifest_path_provided: false
+  manifest_read_authorization_ready: false
+
+requested_future_a5:
+  target_systems:
+    - future_single_real_manifest_file
+  exact_allowed_paths: []
+  missing_required_fields:
+    - exact_real_manifest_path
+    - allowed_read_command
+    - reviewer
+    - stop_conditions
+  allowed_operations_after_future_A5_only:
+    - read_one_explicit_manifest_file
+    - extract_sanitized_manifest_summary
+    - produce_review_console_manifest_summary
+
+read_boundary:
+  read_authorized: false
+  read_performed: false
+  source_authorized: false
+  source_read_performed: false
+  real_manifest_read_performed: false
+  real_vcpchat_read_performed: false
+  real_vcptoolbox_read_performed: false
+  raw_manifest_copy_allowed: false
+  allowed_source_paths: []
+  allowed_file_types: []
+  read_command_permission: false
+
+non_authorization:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  mcp_runtime_performed: false
+  image_generation_performed: false
+  runtime_integration_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+
+negative_case_requirements:
+  exact_manifest_path_missing_keeps_package_incomplete: true
+  read_performed_blocks_package: true
+  source_path_allowed_without_A5_blocks_package: true
+  raw_manifest_copy_allowed_blocks_package: true
+  runtime_integration_allowed_blocks_package: true
+  real_vcpchat_read_blocks_package: true

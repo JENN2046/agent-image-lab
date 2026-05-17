@@ -1,5 +1,47 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.153 Manifest Read Authorization Gate Package
+
+```text
+phase_id: v14_153_manifest_read_authorization_gate_package
+status: completed_validated
+phase_record_ref: docs/v14_153_manifest_read_authorization_gate_package.md
+authorization_gate_ref: integrations/vcp/manifest_read_authorization_gate_package_v1.yaml
+schema_ref: schemas/manifest_read_authorization_gate_package.schema.yaml
+fixture_ref: tests/schema_examples/v14_153_manifest_read_authorization_gate_package.example.yaml
+validator_created: scripts/validate_v14_153_manifest_read_authorization_gate_package.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+manifest_read_authorization_gate_package_created: true
+package_status: prepared_incomplete_not_granted
+exact_real_manifest_path_provided: false
+manifest_read_authorization_ready: false
+authorization_granted_by_this_record: false
+read_authorized: false
+read_performed: false
+source_authorized: false
+source_read_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+raw_manifest_copy_allowed: false
+read_command_permission: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+runtime_integration_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+validated_now: node --check scripts/validate_v14_153_manifest_read_authorization_gate_package.js; node scripts/validate_v14_153_manifest_read_authorization_gate_package.js
+recommended_next: v14_159_end_to_end_audit_and_rollback_package_or_A5_wait
+recommended_next_auto_execution_allowed: true_for_v14_159_local_audit_only
+```
+
 # V14.152 Review Console Handoff Contract
 
 ```text

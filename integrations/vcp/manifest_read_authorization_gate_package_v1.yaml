@@ -1,0 +1,91 @@
+manifest_read_authorization_gate_package:
+  version: v1
+  phase: v14_153_manifest_read_authorization_gate_package
+  mode: local_authorization_package_only
+  package_status: prepared_incomplete_not_granted
+  authorization_granted_by_this_record: false
+  exact_real_manifest_path_provided: false
+  manifest_read_authorization_ready: false
+
+  source_evidence:
+    review_console_handoff_contract_ref: review_console/static_prototype/HANDOFF_CONTRACT.md
+    dry_run_vcp_adapter_contract_ref: integrations/vcp/dry_run_vcp_adapter_contract_v1.yaml
+    authorization_package_compiler_ref: scripts/compile_v14_149_authorization_packages.js
+    prior_manifest_authorization_alignment_ref: docs/v14_116_manifest_read_authorization_current_goal_alignment.md
+
+  requested_future_a5:
+    target_systems:
+      - future_single_real_manifest_file
+    exact_allowed_paths: []
+    missing_required_fields:
+      - exact_real_manifest_path
+      - allowed_read_command
+      - reviewer
+      - stop_conditions
+    allowed_operations_after_future_A5_only:
+      - read_one_explicit_manifest_file
+      - extract_sanitized_manifest_summary
+      - produce_review_console_manifest_summary
+    forbidden_operations:
+      - read_directory_tree
+      - read_VCPChat_source
+      - read_VCPToolBox_source
+      - copy_raw_manifest
+      - call_plugin_API_or_MCP
+      - create_runtime_integration
+      - write_files
+      - write_DailyNote
+      - write_VCP_memory
+      - push_tag_release_deploy
+
+  extract_policy:
+    sanitized_summary_only: true
+    allowed_extract_fields:
+      - plugin_display_name_summary_cn
+      - command_set_summary_cn
+      - input_output_schema_summary_cn
+      - permission_risk_summary_cn
+      - gatekeeper_review_points_cn
+    forbidden_extract_fields:
+      - api_key_token_cookie_password
+      - private_absolute_path
+      - webhook_database_or_endpoint_raw_value
+      - raw_manifest_sensitive_config
+      - customer_private_data
+      - image_binary
+      - real_plugin_output
+      - runtime_log
+
+  review_console_handoff:
+    handoff_contract_ref: review_console/static_prototype/HANDOFF_CONTRACT.md
+    display_only: true
+    may_display_authorization_request: true
+    may_display_missing_required_fields: true
+    may_request_jenn_authorization: true
+    may_execute_read: false
+    may_mark_manifest_reviewed_safe: false
+
+  no_execution_guard:
+    read_authorized: false
+    read_performed: false
+    source_authorized: false
+    source_read_performed: false
+    real_manifest_read_performed: false
+    real_vcpchat_read_performed: false
+    real_vcptoolbox_read_performed: false
+    raw_manifest_copy_allowed: false
+    allowed_source_paths: []
+    allowed_file_types: []
+    read_command_permission: false
+    provider_contact_performed: false
+    plugin_call_performed: false
+    api_call_performed: false
+    mcp_runtime_performed: false
+    image_generation_performed: false
+    runtime_integration_performed: false
+    DailyNote_write_performed: false
+    VCP_memory_write_performed: false
+    production_candidate_write_performed: false
+    push_tag_release_deploy_performed: false
+    artifact_recoverability_is_not_vcp_runtime_integration: true
+    vcp_runtime_integration_proven: false

@@ -1,5 +1,60 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.153-MANIFEST-READ-AUTHORIZATION-GATE-PACKAGE
+
+Scope:
+
+Validate the local manifest read authorization gate package while keeping it
+incomplete, not granted, and no-read until Jenn provides a separate exact A5
+authorization package.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_153_manifest_read_authorization_gate_package.js
+node scripts/validate_v14_153_manifest_read_authorization_gate_package.js
+```
+
+Expected:
+
+```yaml
+passed: true
+manifest_read_authorization_gate_package_created: true
+package_status: prepared_incomplete_not_granted
+exact_real_manifest_path_provided: false
+manifest_read_authorization_ready: false
+v14_116_manifest_read_authorization_alignment_still_passes: true
+v14_152_review_console_handoff_contract_still_passes: true
+negative_case_exact_manifest_path_missing_keeps_package_incomplete: true
+negative_case_read_performed_blocks_package: true
+negative_case_source_path_allowed_without_A5_blocks_package: true
+negative_case_raw_manifest_copy_allowed_blocks_package: true
+negative_case_runtime_integration_allowed_blocks_package: true
+negative_case_real_vcpchat_read_blocks_package: true
+authorization_granted_by_this_record: false
+read_authorized: false
+read_performed: false
+source_authorized: false
+source_read_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+raw_manifest_copy_allowed: false
+read_command_permission: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+runtime_integration_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+```
+
 ## VALIDATION-20260517-v14.152-REVIEW-CONSOLE-HANDOFF-CONTRACT
 
 Scope:

@@ -3,6 +3,50 @@
 ## Handoff Summary
 
 ```text
+Status: v14_153_manifest_read_authorization_gate_package completed locally and validated.
+Reason: The project needs an explicit manifest read authorization gate package before any future A5 real manifest read can be considered.
+Current repository: project_root
+Branch: master tracking origin/master; local commits may be ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.153 manifest read authorization gate package, schema, fixture, validator, phase record, MVP wiring, and .agent_board sync until commit decision.
+Phase record: docs/v14_153_manifest_read_authorization_gate_package.md
+Authorization gate: integrations/vcp/manifest_read_authorization_gate_package_v1.yaml
+Schema: schemas/manifest_read_authorization_gate_package.schema.yaml
+Fixture: tests/schema_examples/v14_153_manifest_read_authorization_gate_package.example.yaml
+Validator created: scripts/validate_v14_153_manifest_read_authorization_gate_package.js
+MVP validator updated: scripts/validate_mvp.ps1
+manifest_read_authorization_gate_package_created: true
+package_status: prepared_incomplete_not_granted
+exact_real_manifest_path_provided: false
+manifest_read_authorization_ready: false
+authorization_granted_by_this_record: false
+read_authorized: false
+read_performed: false
+source_authorized: false
+source_read_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+raw_manifest_copy_allowed: false
+read_command_permission: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+runtime_integration_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_153_manifest_read_authorization_gate_package.js; node scripts/validate_v14_153_manifest_read_authorization_gate_package.js.
+Next safe action: run broader validation, exact-stage v14.153 files, create a guarded local commit, then either stop for v14.154-v14.158 A5 authorization or continue to v14.159 local audit/rollback packaging.
+```
+
+## Previous Handoff Summary
+
+```text
 Status: v14_152_review_console_handoff_contract completed locally and validated.
 Reason: The project needs a static Review Console child-window handoff contract before manifest read authorization gates.
 Current repository: project_root
