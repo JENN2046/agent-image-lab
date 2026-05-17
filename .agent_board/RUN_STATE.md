@@ -1,5 +1,37 @@
 # RUN_STATE.md — Agent Image Lab
 
+## Active Local Objective Override
+
+```text
+objective: A4.8 local-only PVOS evidence collector + blocker arbiter pipeline
+status: completed_local_pipeline_implemented_dedicated_validator_passed
+mode: Persistent 4-Agent Council local loop
+pipeline: kernel/pvos_evidence_collector_blocker_pipeline.js
+validator: scripts/validate_pvos_evidence_collector_blocker_pipeline.js
+schema: schemas/pvos_evidence_collector_blocker_pipeline.schema.yaml
+example: tests/schema_examples/pvos_evidence_collector_blocker_pipeline.example.json
+review_console_mapping_updated: review_console/static_prototype/FIELD_MAPPING.md
+kernel_readme_updated: kernel/README.md
+mvp_validator_wired: scripts/validate_mvp.ps1
+validated_now: node scripts/validate_pvos_evidence_collector_blocker_pipeline.js; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+full_post_board_validation_required: false
+post_board_validation_passed: true
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+DailyNote_write: false
+VCP_memory_write: false
+output_file_write: false
+production_candidate_created: false
+real_manifest_read: false
+real_VCPChat_read: false
+real_VCPToolBox_read: false
+remote_action: false
+recommended_next: mission_complete_wait_for_next_user_instruction
+recommended_next_auto_execution_allowed: false
+```
+
 ## Current Mode
 
 ```text

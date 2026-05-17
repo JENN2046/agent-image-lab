@@ -171,11 +171,13 @@ $requiredFiles = @(
   'scripts/validate_visual_eval_seed_registry_schema.js',
   'scripts/validate_pvos_kernel_minimal.js',
   'scripts/validate_pvos_kernel_dry_run_adapter.js',
+  'scripts/validate_pvos_evidence_collector_blocker_pipeline.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
   'scripts/validate_evidence_blocker_contract.js',
   'scripts/validate_review_blocker_arbiter.js',
   'kernel/pvos_kernel.js',
+  'kernel/pvos_evidence_collector_blocker_pipeline.js',
   'kernel/README.md',
   'kernel/review_result_protocol.js',
   'kernel/review_decision_package.js',
@@ -185,6 +187,7 @@ $requiredFiles = @(
   'adapters/pvos_kernel_dry_run_adapter.js',
   'schemas/pvos_kernel_run.schema.yaml',
   'schemas/pvos_kernel_dry_run_adapter.schema.yaml',
+  'schemas/pvos_evidence_collector_blocker_pipeline.schema.yaml',
   'schemas/review_result_protocol.schema.yaml',
   'schemas/review_decision_package.schema.yaml',
   'schemas/evidence_blocker_contract.schema.yaml',
@@ -193,6 +196,7 @@ $requiredFiles = @(
   'tests/schema_examples/pvos_kernel_run.example.json',
   'tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json',
   'tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json',
+  'tests/schema_examples/pvos_evidence_collector_blocker_pipeline.example.json',
   'tests/schema_examples/review_console_adapter_negative_fixture_draft_output_snapshot.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_draft_output_snapshot.example.json',
   'tests/schema_examples/review_console_review_report_draft_output_snapshot.example.json',
@@ -4171,6 +4175,16 @@ if (-not $node) {
     Add-Failure "scripts/validate_pvos_kernel_dry_run_adapter.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'kernel/pvos_evidence_collector_blocker_pipeline.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "kernel/pvos_evidence_collector_blocker_pipeline.js failed node --check"
+  }
+
+  & node --check (Join-Path $Root 'scripts/validate_pvos_evidence_collector_blocker_pipeline.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_pvos_evidence_collector_blocker_pipeline.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'kernel/review_result_protocol.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "kernel/review_result_protocol.js failed node --check"
@@ -4627,6 +4641,82 @@ if (-not $node) {
     }
     if ($pvosAdapter.pvos_kernel_dry_run_adapter.output_file_write_performed -ne $false) {
       Add-Failure "PVOS adapter validation must not write output files"
+    }
+  }
+
+  $pvosEvidencePipelineOutput = & node (Join-Path $Root 'scripts/validate_pvos_evidence_collector_blocker_pipeline.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "PVOS evidence collector blocker pipeline validation exited with failure"
+  } else {
+    $pvosEvidencePipeline = ($pvosEvidencePipelineOutput -join "`n") | ConvertFrom-Json
+    if ($pvosEvidencePipeline.passed -ne $true) {
+      Add-Failure "PVOS evidence collector blocker pipeline validation must report passed true"
+    }
+    if ($pvosEvidencePipeline.pvos_evidence_collector_blocker_pipeline.pipeline_cli_present -ne $true) {
+      Add-Failure "PVOS evidence pipeline validation must verify pipeline CLI"
+    }
+    if ($pvosEvidencePipeline.pvos_evidence_collector_blocker_pipeline.schema_present -ne $true) {
+      Add-Failure "PVOS evidence pipeline validation must verify schema"
+    }
+    if ($pvosEvidencePipeline.pvos_evidence_collector_blocker_pipeline.example_present -ne $true) {
+      Add-Failure "PVOS evidence pipeline validation must verify example fixture"
+    }
+    if ($pvosEvidencePipeline.pvos_evidence_collector_blocker_pipeline.approved_fixture_allowlist_verified -ne $true) {
+      Add-Failure "PVOS evidence pipeline validation must verify approved fixture allowlist"
+    }
+    if ($pvosEvidencePipeline.pvos_evidence_collector_blocker_pipeline.evidence_records_verified -ne $true) {
+      Add-Failure "PVOS evidence pipeline validation must verify EvidenceRecord output"
+    }
+    if ($pvosEvidencePipeline.pvos_evidence_collector_blocker_pipeline.blocker_decisions_verified -ne $true) {
+      Add-Failure "PVOS evidence pipeline validation must verify BlockerDecision output"
+    }
+    if ($pvosEvidencePipeline.pvos_evidence_collector_blocker_pipeline.review_report_verified -ne $true) {
+      Add-Failure "PVOS evidence pipeline validation must verify ReviewReport output"
+    }
+    if ($pvosEvidencePipeline.pvos_evidence_collector_blocker_pipeline.memory_delta_drafts_verified -ne $true) {
+      Add-Failure "PVOS evidence pipeline validation must verify memory_delta drafts"
+    }
+    if ($pvosEvidencePipeline.pvos_evidence_collector_blocker_pipeline.production_exclusion_drafts_verified -ne $true) {
+      Add-Failure "PVOS evidence pipeline validation must verify production exclusion drafts"
+    }
+    if ($pvosEvidencePipeline.pvos_evidence_collector_blocker_pipeline.review_console_handoff_verified -ne $true) {
+      Add-Failure "PVOS evidence pipeline validation must verify Review Console handoff"
+    }
+    if ($pvosEvidencePipeline.pvos_evidence_collector_blocker_pipeline.negative_guard_memory_forbidden_verified -ne $true) {
+      Add-Failure "PVOS evidence pipeline validation must verify negative guard memory-forbidden route"
+    }
+    if ($pvosEvidencePipeline.pvos_evidence_collector_blocker_pipeline.negative_guard_never_production_verified -ne $true) {
+      Add-Failure "PVOS evidence pipeline validation must verify negative guard never-production route"
+    }
+    if ($pvosEvidencePipeline.pvos_evidence_collector_blocker_pipeline.stdout_only -ne $true) {
+      Add-Failure "PVOS evidence pipeline validation must verify stdout-only boundary"
+    }
+    if ($pvosEvidencePipeline.pvos_evidence_collector_blocker_pipeline.local_only -ne $true) {
+      Add-Failure "PVOS evidence pipeline validation must verify local-only boundary"
+    }
+    if ($pvosEvidencePipeline.pvos_evidence_collector_blocker_pipeline.external_network_required -ne $false) {
+      Add-Failure "PVOS evidence pipeline validation must not require external network"
+    }
+    if ($pvosEvidencePipeline.pvos_evidence_collector_blocker_pipeline.provider_contact_performed -ne $false) {
+      Add-Failure "PVOS evidence pipeline validation must not perform provider contact"
+    }
+    if ($pvosEvidencePipeline.pvos_evidence_collector_blocker_pipeline.plugin_call_performed -ne $false) {
+      Add-Failure "PVOS evidence pipeline validation must not call plugins"
+    }
+    if ($pvosEvidencePipeline.pvos_evidence_collector_blocker_pipeline.api_call_performed -ne $false) {
+      Add-Failure "PVOS evidence pipeline validation must not call APIs"
+    }
+    if ($pvosEvidencePipeline.pvos_evidence_collector_blocker_pipeline.image_generation_performed -ne $false) {
+      Add-Failure "PVOS evidence pipeline validation must not generate images"
+    }
+    if ($pvosEvidencePipeline.pvos_evidence_collector_blocker_pipeline.daily_note_write_performed -ne $false) {
+      Add-Failure "PVOS evidence pipeline validation must not write DailyNote"
+    }
+    if ($pvosEvidencePipeline.pvos_evidence_collector_blocker_pipeline.vcp_memory_write_performed -ne $false) {
+      Add-Failure "PVOS evidence pipeline validation must not write VCP memory"
+    }
+    if ($pvosEvidencePipeline.pvos_evidence_collector_blocker_pipeline.output_file_write_performed -ne $false) {
+      Add-Failure "PVOS evidence pipeline validation must not write output files"
     }
   }
 

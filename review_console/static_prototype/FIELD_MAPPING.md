@@ -176,6 +176,23 @@ Phase 9 审批记录必须满足：
 
 `review_evidence_blocker_contract_static_handoff` 是 evidence collector + blocker arbiter 的可视化层。它不得创建 production candidate，不得写 accepted_samples，不得写 memory，不得调用插件，也不得让 `never_production` 候选绕过 exclusion register。
 
+## PVOS Evidence Collector + Blocker Pipeline Handoff 映射
+
+本节用于验收 `kernel/pvos_evidence_collector_blocker_pipeline.js` 输出进入静态 Review Console 的最小组合 handoff。它只接受项目 allowlist 中的本地 fixture pair，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
+
+| Pipeline 字段 | Review Console 可见/草案字段 | 说明 |
+| --- | --- | --- |
+| `fixture_approval.approved_local_fixture` / `allowed_fixture_pair` | `pvos_evidence_collector_blocker_pipeline_handoff.fixture_approval` | 必须为 true，证明来源是项目内批准 fixture pair |
+| `outputs.evidence_records` | `pvos_evidence_collector_blocker_pipeline_handoff.evidence_records` | 每个候选必须有 EvidenceRecord，证据记录不是生产批准 |
+| `outputs.blocker_decisions` | `pvos_evidence_collector_blocker_pipeline_handoff.blocker_decisions` | 每个候选必须有 BlockerDecision，阻断决策不是写入动作 |
+| `outputs.review_report` | `pvos_evidence_collector_blocker_pipeline_handoff.review_report` | ReviewReport 只用于 display-only 审片解释 |
+| `outputs.memory_delta_drafts` | `pvos_evidence_collector_blocker_pipeline_handoff.memory_delta_drafts` | 只显示中文记忆草案，不写 DailyNote 或 VCP memory |
+| `outputs.production_exclusion_drafts` | `pvos_evidence_collector_blocker_pipeline_handoff.production_exclusion_drafts` | rejected / never-production 候选必须保留 exclusion 证据 |
+| `review_console_handoff_draft.guard_summary` | `pipelineGuardSummary` | 显示 evidence、blocker、ReviewReport、memory_delta、production_exclusion 计数和所有 no-write 标记 |
+| `no_execution_guard` | `pipelineGuard` | provider/plugin/API/image/DailyNote/VCP memory/output/accepted_samples/production candidate 写入必须保持 false |
+
+`pvos_evidence_collector_blocker_pipeline_handoff` 是本地证据收集与阻断仲裁的组合草案，不是生产执行记录。它不得授权 provider contact、plugin/API 调用、图片生成、accepted_samples 写入、记忆写入或 production promotion。
+
 ## v14.060 Review Blocker Arbiter Static Handoff 映射
 
 本节用于验收 `tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json` 中的审片阻断仲裁字段进入静态 Review Console 可见 UI 与草案输出。它仍然只读取项目内 mock / fixture，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。

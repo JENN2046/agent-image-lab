@@ -3,6 +3,42 @@
 ## Handoff Summary
 
 ```text
+Status: pvos_evidence_collector_blocker_pipeline completed locally; dedicated validator passed.
+Reason: The local PVOS evidence collector + blocker arbiter objective now has one named stdout-only pipeline from approved repository fixture pairs to EvidenceRecord, BlockerDecision, ReviewReport, memory_delta drafts, production_exclusion drafts, and a Review Console handoff draft.
+Current repository: project_root
+Branch: master tracking origin/master
+Worktree: dirty only with the local pipeline, validator, schema/example, README/static mapping, validate_mvp, and .agent_board sync updates until final validation/commit decision.
+Pipeline: kernel/pvos_evidence_collector_blocker_pipeline.js
+Validator: scripts/validate_pvos_evidence_collector_blocker_pipeline.js
+Schema: schemas/pvos_evidence_collector_blocker_pipeline.schema.yaml
+Example: tests/schema_examples/pvos_evidence_collector_blocker_pipeline.example.json
+validated_now: node --check kernel/pvos_evidence_collector_blocker_pipeline.js; node --check scripts/validate_pvos_evidence_collector_blocker_pipeline.js; node scripts/validate_pvos_evidence_collector_blocker_pipeline.js; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+pipeline_validator_passed: true
+pipeline_validator_failed_count: 0
+approved_fixture_allowlist_verified: true
+evidence_records_verified: true
+blocker_decisions_verified: true
+review_report_verified: true
+memory_delta_drafts_verified: true
+production_exclusion_drafts_verified: true
+review_console_handoff_verified: true
+negative_guard_memory_forbidden_verified: true
+negative_guard_never_production_verified: true
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+DailyNote_write: false
+VCP_memory_write: false
+output_file_write: false
+production_candidate_created: false
+real_manifest_read: false
+real_VCPChat_read: false
+real_VCPToolBox_read: false
+push_tag_release: false
+recommended_next: mission_complete_wait_for_next_user_instruction
+recommended_next_auto_execution_allowed: false
+---
 Status: v14_079_review_report_final_local_closeout_gate completed locally and validated.
 Reason: V14.079 closes the local ReviewReport protocol chain by proving route summary, admission matrix, production exclusion register, memory admission register, and memory delta draft register agree; every candidate has final pass/reject, memory, production, blocker, and no-write evidence while all DailyNote, VCP memory, direct memory, accepted_samples, production candidate, runtime, provider, plugin, API, image, push, tag, and release actions remain blocked.
 Current repository: project_root

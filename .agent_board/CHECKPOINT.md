@@ -1,5 +1,48 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# PVOS Evidence Collector + Blocker Pipeline
+
+```text
+objective: A4.8 local-only PVOS evidence collector + blocker arbiter pipeline
+status: completed_local_pipeline_implemented_dedicated_validator_passed
+pipeline_created: kernel/pvos_evidence_collector_blocker_pipeline.js
+schema_created: schemas/pvos_evidence_collector_blocker_pipeline.schema.yaml
+example_created: tests/schema_examples/pvos_evidence_collector_blocker_pipeline.example.json
+validator_created: scripts/validate_pvos_evidence_collector_blocker_pipeline.js
+mvp_validator_modified: scripts/validate_mvp.ps1
+kernel_readme_updated: kernel/README.md
+static_mapping_updated: review_console/static_prototype/FIELD_MAPPING.md
+review_console_handoff: pvos_evidence_collector_blocker_pipeline_handoff
+pipeline_validator_passed: true
+pipeline_validator_failed_count: 0
+approved_fixture_allowlist_verified: true
+evidence_records_verified: true
+blocker_decisions_verified: true
+review_report_verified: true
+memory_delta_drafts_verified: true
+production_exclusion_drafts_verified: true
+review_console_handoff_verified: true
+negative_guard_memory_forbidden_verified: true
+negative_guard_never_production_verified: true
+stdout_only: true
+local_only: true
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+DailyNote_write: false
+VCP_memory_write: false
+output_file_write: false
+production_candidate_created: false
+real_manifest_read: false
+real_VCPChat_read: false
+real_VCPToolBox_read: false
+remote_action: false
+post_board_validation_passed: true
+recommended_next: mission_complete_wait_for_next_user_instruction
+recommended_next_auto_execution_allowed: false
+```
+
 # V14.079 Review Report Final Local Closeout Gate
 
 ```text

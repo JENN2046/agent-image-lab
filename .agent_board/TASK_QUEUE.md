@@ -9,6 +9,41 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active local objective: pvos_evidence_collector_blocker_pipeline.
+Status: completed_local_pipeline_implemented_dedicated_validator_passed.
+Purpose: provide one named stdout-only pipeline from approved local PVOS fixture pairs to EvidenceRecord, BlockerDecision, ReviewReport, memory_delta drafts, production_exclusion drafts, and Review Console handoff without runtime, provider, plugin, API, image, DailyNote, VCP memory, direct memory, accepted_samples, production candidate, production writes, push, tag, or release.
+pipeline_created: kernel/pvos_evidence_collector_blocker_pipeline.js.
+schema_created: schemas/pvos_evidence_collector_blocker_pipeline.schema.yaml.
+example_created: tests/schema_examples/pvos_evidence_collector_blocker_pipeline.example.json.
+validator_created: scripts/validate_pvos_evidence_collector_blocker_pipeline.js.
+mvp_validator_modified: scripts/validate_mvp.ps1.
+kernel_readme_updated: kernel/README.md.
+static_mapping_updated: review_console/static_prototype/FIELD_MAPPING.md.
+pipeline_validator_passed: true.
+pipeline_validator_failed_count: 0.
+approved_fixture_allowlist_verified: true.
+evidence_records_verified: true.
+blocker_decisions_verified: true.
+review_report_verified: true.
+memory_delta_drafts_verified: true.
+production_exclusion_drafts_verified: true.
+review_console_handoff_verified: true.
+negative_guard_memory_forbidden_verified: true.
+negative_guard_never_production_verified: true.
+provider_contact: false.
+plugin_call: false.
+api_call: false.
+image_generation: false.
+DailyNote_write: false.
+VCP_memory_write: false.
+production_candidate_created: false.
+real_manifest_read: false.
+real_VCPChat_read: false.
+real_VCPToolBox_read: false.
+post_board_validation_passed: true.
+recommended_next: mission_complete_wait_for_next_user_instruction.
+recommended_next_auto_execution_allowed: false.
+---
 Current active gate: v14_079_review_report_final_local_closeout_gate.
 Status: completed_local_validated.
 Purpose: close the local ReviewReport protocol chain across route summary, admission matrix, production exclusion register, memory admission register, and memory delta draft register without runtime, provider, plugin, API, image, DailyNote, VCP memory, direct memory, accepted_samples, production candidate, production writes, push, tag, or release.

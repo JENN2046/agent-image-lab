@@ -1,5 +1,52 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-PVOS-EVIDENCE-COLLECTOR-BLOCKER-PIPELINE
+
+Task:
+
+```text
+Create one named local PVOS evidence collector + blocker arbiter pipeline from approved repository fixture pairs to EvidenceRecord, BlockerDecision, ReviewReport, memory_delta drafts, production_exclusion drafts, and Review Console handoff.
+```
+
+Commands run:
+
+```text
+node --check kernel/pvos_evidence_collector_blocker_pipeline.js
+node --check scripts/validate_pvos_evidence_collector_blocker_pipeline.js
+node scripts/validate_pvos_evidence_collector_blocker_pipeline.js
+node scripts/validate_agent_board_state.js
+git diff --check
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+Result:
+
+```text
+pipeline_created: kernel/pvos_evidence_collector_blocker_pipeline.js
+schema_created: schemas/pvos_evidence_collector_blocker_pipeline.schema.yaml
+example_created: tests/schema_examples/pvos_evidence_collector_blocker_pipeline.example.json
+validator_created: scripts/validate_pvos_evidence_collector_blocker_pipeline.js
+pipeline_validator_passed: true
+pipeline_validator_failed_count: 0
+approved_fixture_allowlist_verified: true
+evidence_records_verified: true
+blocker_decisions_verified: true
+review_report_verified: true
+memory_delta_drafts_verified: true
+production_exclusion_drafts_verified: true
+review_console_handoff_verified: true
+negative_guard_memory_forbidden_verified: true
+negative_guard_never_production_verified: true
+validation_result: completed_validated
+```
+
+Boundary:
+
+```text
+No provider contact, plugin call, API call, image generation, output-file write, accepted_samples write, production candidate creation, DailyNote write, VCP memory write, real manifest read, real VCPChat read, real VCPToolBox read, push, tag, release, deploy, or dependency change was performed.
+```
+
 ## VALIDATION-20260517-v14.079-REVIEW-REPORT-FINAL-LOCAL-CLOSEOUT
 
 Task:

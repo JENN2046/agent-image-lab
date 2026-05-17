@@ -83,6 +83,37 @@ It must match adapter CLI output exactly and its embedded
 `evidence_blocker_contract` must match
 `tests/schema_examples/evidence_blocker_contract_negative_guard.example.json`.
 
+## Evidence Collector + Blocker Pipeline
+
+```powershell
+node kernel\pvos_evidence_collector_blocker_pipeline.js --input tests\schema_examples\pvos_kernel_input.example.json --protocol-input tests\schema_examples\review_result_protocol_input.example.json
+node kernel\pvos_evidence_collector_blocker_pipeline.js --input tests\schema_examples\pvos_kernel_negative_guard_input.example.json --protocol-input tests\schema_examples\review_result_protocol_negative_guard_input.example.json
+```
+
+The pipeline is the named minimal local route from approved repository fixtures
+to the hard review surface:
+
+```text
+EvidenceRecord
+BlockerDecision
+ReviewReport
+memory_delta draft
+production_exclusion draft
+Review Console handoff draft
+```
+
+It is a thin stdout-only orchestrator over the existing PVOS adapter response.
+It accepts only project allowlisted fixture pairs under `tests/schema_examples/`
+and performs no provider contact, plugin call, API call, image generation,
+DailyNote write, VCP memory write, production candidate write, or output-file
+write.
+
+```powershell
+node --check kernel\pvos_evidence_collector_blocker_pipeline.js
+node --check scripts\validate_pvos_evidence_collector_blocker_pipeline.js
+node scripts\validate_pvos_evidence_collector_blocker_pipeline.js
+```
+
 ## Review Result Protocol
 
 ```powershell

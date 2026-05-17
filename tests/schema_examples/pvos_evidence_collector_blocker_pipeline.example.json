@@ -1,0 +1,101 @@
+{
+  "pvos_evidence_collector_blocker_pipeline_version": "v1",
+  "pipeline_id": "pvos_evidence_collector_blocker_pipeline_portable_lantern_local_fixture_001",
+  "source_adapter_id": "pvos_kernel_dry_run_adapter",
+  "task_id": "portable_lantern_local_fixture_001",
+  "status": "completed_local_pipeline_draft",
+  "mode": "local_stdout_only_evidence_collector_blocker_pipeline",
+  "fixture_approval": {
+    "source": "project_schema_examples_allowlist",
+    "fixture_status": "approved_local_fixture",
+    "approved_local_fixture": true,
+    "input_ref": "tests/schema_examples/pvos_kernel_input.example.json",
+    "protocol_input_ref": "tests/schema_examples/review_result_protocol_input.example.json",
+    "allowed_fixture_pair": true,
+    "provider_payload_included": false,
+    "image_binary_included": false,
+    "private_path_included": false
+  },
+  "output_refs": {
+    "evidence_record_ids": [
+      "evidence_candidate_accept_metadata_001",
+      "evidence_candidate_reject_metadata_001"
+    ],
+    "blocker_decision_ids": [
+      "blocker_production_candidate_accept_metadata_001",
+      "blocker_production_candidate_reject_metadata_001"
+    ],
+    "review_report_id": "review_report_portable_lantern_local_fixture_001",
+    "memory_delta_ids": [
+      "memory_delta_candidate_accept_metadata_001",
+      "memory_delta_candidate_reject_metadata_001"
+    ],
+    "production_exclusion_record_ids": [
+      "production_exclusion_candidate_reject_metadata_001"
+    ],
+    "production_exclusion_candidate_ids": [
+      "candidate_reject_metadata_001"
+    ],
+    "memory_forbidden_candidate_ids": [],
+    "never_production_candidate_ids": [
+      "candidate_reject_metadata_001"
+    ]
+  },
+  "review_console_handoff_draft": {
+    "handoff_id": "pvos_evidence_collector_blocker_pipeline_handoff_portable_lantern_local_fixture_001",
+    "display_only": true,
+    "status": "draft_ready",
+    "evidence_blocker_contract_attached": true,
+    "review_blocker_arbiter_attached": true,
+    "review_report_contract_attached": true,
+    "memory_delta_drafts_attached": true,
+    "production_exclusion_drafts_attached": true,
+    "guard_summary": {
+      "evidence_record_count": 2,
+      "blocker_decision_count": 2,
+      "review_report_item_count": 2,
+      "memory_delta_draft_count": 2,
+      "production_exclusion_draft_count": 1,
+      "all_candidates_have_evidence_record": true,
+      "all_candidates_have_blocker_decision": true,
+      "all_memory_writes_blocked": true,
+      "all_production_writes_blocked": true,
+      "all_provider_execution_blocked": true,
+      "production_candidate_created": false,
+      "direct_memory_write_performed": false,
+      "daily_note_write_performed": false,
+      "vcp_memory_write_performed": false,
+      "accepted_samples_write_performed": false
+    }
+  },
+  "pipeline_summary": {
+    "candidate_count": 2,
+    "evidence_record_count": 2,
+    "blocker_decision_count": 2,
+    "review_report_item_count": 2,
+    "memory_delta_draft_count": 2,
+    "production_exclusion_draft_count": 1,
+    "memory_forbidden_count": 0,
+    "never_production_count": 1,
+    "no_memory_entry_allowed_now": true,
+    "no_production_promotion_allowed_now": true,
+    "all_outputs_are_drafts": true,
+    "stdout_only": true,
+    "local_only": true
+  },
+  "no_execution_guard": {
+    "execution_authorized": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "daily_note_write_performed": false,
+    "vcp_memory_write_performed": false,
+    "image_generation_performed": false,
+    "output_file_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_created": false,
+    "external_manifest_read_performed": false,
+    "vcpchat_source_read_performed": false,
+    "vcptoolbox_source_read_performed": false
+  }
+}
