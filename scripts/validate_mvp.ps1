@@ -173,6 +173,7 @@ $requiredFiles = @(
   'scripts/validate_pvos_kernel_dry_run_adapter.js',
   'scripts/validate_pvos_evidence_collector_blocker_pipeline.js',
   'scripts/validate_v14_081_pvos_exact_a5_authorization_package.js',
+  'scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
   'scripts/validate_evidence_blocker_contract.js',
@@ -271,6 +272,7 @@ $requiredFiles = @(
   'docs/v14_079_review_report_final_local_closeout_gate.md',
   'docs/v14_080_pvos_evidence_collector_blocker_A5_authorization_package_draft_gate.md',
   'docs/v14_081_pvos_evidence_collector_blocker_exact_A5_authorization_package_gate.md',
+  'docs/v14_082_pvos_metadata_only_preflight_authorization_correction_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -4193,6 +4195,11 @@ if (-not $node) {
     Add-Failure "scripts/validate_v14_081_pvos_exact_a5_authorization_package.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'kernel/review_result_protocol.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "kernel/review_result_protocol.js failed node --check"
@@ -4792,6 +4799,46 @@ if (-not $node) {
     }
     if ($v14081ExactA5.v14_081_pvos_exact_a5_authorization_package.file_write_performed -ne $false) {
       Add-Failure "v14.081 exact A5 package validation must not write files"
+    }
+  }
+
+  $v14082MetadataPreflightOutput = & node (Join-Path $Root 'scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v14.082 metadata-only preflight authorization correction validation exited with failure"
+  } else {
+    $v14082MetadataPreflight = ($v14082MetadataPreflightOutput -join "`n") | ConvertFrom-Json
+    if ($v14082MetadataPreflight.passed -ne $true) {
+      Add-Failure "v14.082 metadata-only preflight authorization correction validation must report passed true"
+    }
+    if ($v14082MetadataPreflight.v14_082_pvos_metadata_only_preflight_authorization_correction.authorization_package_id -ne 'AUTH-PENDING-PVOS-EVIDENCE-BLOCKER-20260517-001') {
+      Add-Failure "v14.082 metadata-only preflight correction must keep package id stable"
+    }
+    if ($v14082MetadataPreflight.v14_082_pvos_metadata_only_preflight_authorization_correction.env_local_metadata_only_allowed -ne $true) {
+      Add-Failure "v14.082 must allow .env.local metadata-only preflight"
+    }
+    if ($v14082MetadataPreflight.v14_082_pvos_metadata_only_preflight_authorization_correction.env_value_read_allowed -ne $false) {
+      Add-Failure "v14.082 must not allow env value reads"
+    }
+    if ($v14082MetadataPreflight.v14_082_pvos_metadata_only_preflight_authorization_correction.provider_contact_allowed -ne $false) {
+      Add-Failure "v14.082 must not allow provider contact"
+    }
+    if ($v14082MetadataPreflight.v14_082_pvos_metadata_only_preflight_authorization_correction.plugin_call_allowed -ne $false) {
+      Add-Failure "v14.082 must not allow plugin calls"
+    }
+    if ($v14082MetadataPreflight.v14_082_pvos_metadata_only_preflight_authorization_correction.api_call_allowed -ne $false) {
+      Add-Failure "v14.082 must not allow API calls"
+    }
+    if ($v14082MetadataPreflight.v14_082_pvos_metadata_only_preflight_authorization_correction.image_generation_allowed -ne $false) {
+      Add-Failure "v14.082 must not allow image generation"
+    }
+    if ($v14082MetadataPreflight.v14_082_pvos_metadata_only_preflight_authorization_correction.output_directory_creation_allowed -ne $false) {
+      Add-Failure "v14.082 must not allow output directory creation"
+    }
+    if ($v14082MetadataPreflight.v14_082_pvos_metadata_only_preflight_authorization_correction.output_write_allowed -ne $false) {
+      Add-Failure "v14.082 must not allow output writes"
+    }
+    if ($v14082MetadataPreflight.v14_082_pvos_metadata_only_preflight_authorization_correction.file_write_performed -ne $false) {
+      Add-Failure "v14.082 validator must not write files"
     }
   }
 

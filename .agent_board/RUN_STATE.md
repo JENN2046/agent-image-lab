@@ -3,6 +3,51 @@
 ## Active Local Objective Override
 
 ```text
+objective: v14.082 metadata-only preflight authorization correction for PVOS evidence collector blocker package
+status: completed_local_correction_validated_pending_guarded_commit
+mode: Persistent 4-Agent Council local loop
+phase_id: v14_082_pvos_metadata_only_preflight_authorization_correction_gate
+phase_record: docs/v14_082_pvos_metadata_only_preflight_authorization_correction_gate.md
+source_phase: v14_081_pvos_evidence_collector_blocker_exact_A5_authorization_package_gate
+source_commit: bc74a6f
+authorization_package_id: AUTH-PENDING-PVOS-EVIDENCE-BLOCKER-20260517-001
+authorization_status: approved_for_metadata_only_preflight
+approval_status: approved_for_preflight_only
+env_local_metadata_only_allowed: true
+env_value_read_allowed: false
+selected_plugin_id: NativeDoubaoImage
+selected_plugin_command: generate
+selected_plugin_model: doubao-seedream-5-0-260128
+prompt_package_ref: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml
+plugin_profile_ref: plugins/image_generation/native_doubao_image/plugin.profile.yaml
+runner_ref: scripts/run_native_doubao_image_generation.js
+output_directory_ref: runs/real_generation/v14_081_pvos_premium_portable_led_camping_lantern_first_trial/
+max_plugin_calls: 1
+max_images_created: 1
+retry_limit: 0
+A5_generation_execution_allowed_now: false
+preflight_allowed_after_clean_commit: true
+provider_contact_allowed_now: false
+plugin_call_allowed_now: false
+api_call_allowed_now: false
+image_generation_allowed_now: false
+output_directory_creation_allowed_now: false
+DailyNote_write_allowed_now: false
+VCP_memory_write_allowed_now: false
+accepted_samples_write_allowed_now: false
+production_candidate_write_allowed_now: false
+real_manifest_read_allowed_now: false
+real_VCPChat_read_allowed_now: false
+real_VCPToolBox_read_allowed_now: false
+remote_action: false
+validated_now: node --check scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js; node scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js; node scripts/validate_v14_081_pvos_exact_a5_authorization_package.js; git diff --check
+recommended_next: clean_worktree_then_run_authorized_metadata_only_preflight
+recommended_next_auto_execution_allowed: true
+```
+
+## Active Local Objective Override
+
+```text
 objective: v14.081 exact pending A5 preflight authorization package for PVOS evidence collector blocker pipeline
 status: completed_local_exact_package_validated
 mode: Persistent 4-Agent Council local loop

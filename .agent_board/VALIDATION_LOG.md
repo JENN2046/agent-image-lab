@@ -1,5 +1,45 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.082-PVOS-METADATA-ONLY-PREFLIGHT-CORRECTION
+
+Task:
+
+```text
+Correct v14.081 so the approved preflight can inspect `.env.local` as metadata only: file existence, required field-name presence, counts, and missing field names. Env values, loadDotEnv, process.env mutation, provider/plugin/API/image/output/DailyNote/VCP memory/production/manifest/VCPChat/VCPToolBox/push/tag/release/deploy remain blocked.
+```
+
+Commands run:
+
+```text
+node --check scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js
+node scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js
+node scripts/validate_v14_081_pvos_exact_a5_authorization_package.js
+git diff --check
+```
+
+Result:
+
+```text
+phase_record: docs/v14_082_pvos_metadata_only_preflight_authorization_correction_gate.md
+validator: scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js
+authorization_package_id: AUTH-PENDING-PVOS-EVIDENCE-BLOCKER-20260517-001
+authorization_status: approved_for_metadata_only_preflight
+approval_status: approved_for_preflight_only
+env_local_metadata_only_allowed: true
+env_value_read_allowed: false
+preflight_allowed_after_clean_commit: true
+validation_result: completed_validated_pending_guarded_commit
+exact_correction_validator: passed
+v14_081_validator: passed
+git_diff_check: passed
+```
+
+Boundary:
+
+```text
+No A5 generation execution, provider contact, plugin call, API call, image generation, .env.local value read, output directory creation, output-file write, accepted_samples write, production candidate creation, DailyNote write, VCP memory write, real manifest read, real VCPChat read, real VCPToolBox read, push, tag, release, deploy, or dependency change was performed by v14.082.
+```
+
 ## VALIDATION-20260517-v14.081-PVOS-EXACT-A5-AUTHORIZATION-PACKAGE
 
 Task:

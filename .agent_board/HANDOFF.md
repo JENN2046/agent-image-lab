@@ -3,6 +3,36 @@
 ## Handoff Summary
 
 ```text
+Status: v14_082_pvos_metadata_only_preflight_authorization_correction_gate created locally and validated; guarded local commit pending before preflight.
+Reason: v14.081 had an internal conflict: the runner preflight checks `.env.local` field names, while v14.081 listed `.env.local` as fully forbidden. v14.082 corrects this to metadata-only preflight access.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist after PVOS pipeline, v14.080, and v14.081 sealing. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty only with v14.082 correction doc, validator, validate_mvp, and .agent_board sync until guarded local commit; preflight must wait for clean worktree.
+Phase record: docs/v14_082_pvos_metadata_only_preflight_authorization_correction_gate.md
+Validator: scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js
+Authorization package id: AUTH-PENDING-PVOS-EVIDENCE-BLOCKER-20260517-001
+authorization_status: approved_for_metadata_only_preflight
+approval_status: approved_for_preflight_only
+env_local_metadata_only_allowed: true
+env_value_read_allowed: false
+preflight_allowed_after_clean_commit: true
+A5_generation_execution_allowed_now: false
+provider_contact_allowed_now: false
+plugin_call_allowed_now: false
+api_call_allowed_now: false
+image_generation_allowed_now: false
+output_directory_creation_allowed_now: false
+DailyNote_write_allowed_now: false
+VCP_memory_write_allowed_now: false
+accepted_samples_write_allowed_now: false
+production_candidate_write_allowed_now: false
+real_manifest_read_allowed_now: false
+real_VCPChat_read_allowed_now: false
+real_VCPToolBox_read_allowed_now: false
+validated_now: node --check scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js; node scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js; node scripts/validate_v14_081_pvos_exact_a5_authorization_package.js; git diff --check
+recommended_next: clean_worktree_then_run_authorized_metadata_only_preflight
+recommended_next_auto_execution_allowed: true
+---
 Status: v14_081_pvos_evidence_collector_blocker_exact_A5_authorization_package_gate created locally and validated.
 Reason: The v14.080 inactive draft was converted into an exact pending preflight-only package with plugin, command, model, prompt, plugin profile, runner, output directory, call budget, stop conditions, rollback plan, and exact approval wording filled.
 Current repository: project_root
