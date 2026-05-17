@@ -1,5 +1,46 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.080-PVOS-EVIDENCE-BLOCKER-A5-AUTH-DRAFT
+
+Task:
+
+```text
+Create an inactive A5 authorization package draft for the PVOS evidence collector blocker pipeline baseline without activating A5 or allowing provider, plugin, API, image, DailyNote, VCP memory, accepted_samples, production candidate, real manifest, VCPChat, VCPToolBox, push, tag, release, or deploy actions.
+```
+
+Commands run:
+
+```text
+git status --short --branch
+git diff --check
+node scripts/validate_agent_board_state.js
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+Result:
+
+```text
+phase_record: docs/v14_080_pvos_evidence_collector_blocker_A5_authorization_package_draft_gate.md
+source_pipeline_commit: 3db9e17
+draft_package_id: AUTH-DRAFT-PVOS-EVIDENCE-BLOCKER-20260517-001
+authorization_status: draft
+approval_status: not_requested
+active_A5_authorization_created: false
+execute_now: false
+validation_result: completed_validated
+git_diff_check: passed
+agent_board_state: passed
+validate_mvp: passed
+validate_agent_image_lab_local: passed_with_existing_manual_review_warnings
+```
+
+Boundary:
+
+```text
+No A5 execution, provider contact, plugin call, API call, image generation, output-file write, accepted_samples write, production candidate creation, DailyNote write, VCP memory write, real manifest read, real VCPChat read, real VCPToolBox read, push, tag, release, deploy, or dependency change is authorized by this draft.
+```
+
 ## VALIDATION-20260517-PVOS-EVIDENCE-COLLECTOR-BLOCKER-PIPELINE
 
 Task:

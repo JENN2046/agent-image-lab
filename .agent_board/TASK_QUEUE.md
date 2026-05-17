@@ -9,6 +9,31 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active local objective: v14_080_pvos_evidence_collector_blocker_A5_authorization_package_draft_gate.
+Status: completed_local_draft_validated.
+Purpose: create the smallest inactive A5 authorization package draft after the validated PVOS evidence collector blocker pipeline baseline, without activating A5 or allowing provider/plugin/API/image/DailyNote/VCP memory/production actions.
+source_pipeline_commit: 3db9e17.
+phase_record_created: docs/v14_080_pvos_evidence_collector_blocker_A5_authorization_package_draft_gate.md.
+draft_package_id: AUTH-DRAFT-PVOS-EVIDENCE-BLOCKER-20260517-001.
+authorization_status: draft.
+approval_status: not_requested.
+active: false.
+execute_now: false.
+A5_execution_allowed_now: false.
+provider_contact_allowed_now: false.
+plugin_call_allowed_now: false.
+api_call_allowed_now: false.
+image_generation_allowed_now: false.
+DailyNote_write_allowed_now: false.
+VCP_memory_write_allowed_now: false.
+accepted_samples_write_allowed_now: false.
+production_candidate_write_allowed_now: false.
+real_manifest_read_allowed_now: false.
+real_VCPChat_read_allowed_now: false.
+real_VCPToolBox_read_allowed_now: false.
+recommended_next: human_review_or_fill_exact_A5_authorization_package.
+recommended_next_auto_execution_allowed: false.
+---
 Current active local objective: pvos_evidence_collector_blocker_pipeline.
 Status: completed_local_pipeline_implemented_dedicated_validator_passed.
 Purpose: provide one named stdout-only pipeline from approved local PVOS fixture pairs to EvidenceRecord, BlockerDecision, ReviewReport, memory_delta drafts, production_exclusion drafts, and Review Console handoff without runtime, provider, plugin, API, image, DailyNote, VCP memory, direct memory, accepted_samples, production candidate, production writes, push, tag, or release.

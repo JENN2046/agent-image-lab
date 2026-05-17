@@ -3,6 +3,35 @@
 ## Active Local Objective Override
 
 ```text
+objective: v14.080 inactive A5 authorization package draft for PVOS evidence collector blocker pipeline
+status: completed_local_draft_validated
+mode: Persistent 4-Agent Council local loop
+source_pipeline_commit: 3db9e17
+phase_record: docs/v14_080_pvos_evidence_collector_blocker_A5_authorization_package_draft_gate.md
+draft_package_id: AUTH-DRAFT-PVOS-EVIDENCE-BLOCKER-20260517-001
+authorization_status: draft
+approval_status: not_requested
+active: false
+execute_now: false
+A5_execution_allowed_now: false
+provider_contact_allowed_now: false
+plugin_call_allowed_now: false
+api_call_allowed_now: false
+image_generation_allowed_now: false
+runtime_execution_allowed_now: false
+DailyNote_write_allowed_now: false
+VCP_memory_write_allowed_now: false
+real_manifest_read_allowed_now: false
+real_VCPChat_read_allowed_now: false
+real_VCPToolBox_read_allowed_now: false
+remote_action: false
+recommended_next: human_review_or_fill_exact_A5_authorization_package
+recommended_next_auto_execution_allowed: false
+```
+
+## Previous Local Objective Override
+
+```text
 objective: A4.8 local-only PVOS evidence collector + blocker arbiter pipeline
 status: completed_local_pipeline_implemented_dedicated_validator_passed
 mode: Persistent 4-Agent Council local loop

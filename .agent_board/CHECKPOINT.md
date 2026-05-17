@@ -1,5 +1,35 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.080 PVOS Evidence Collector Blocker A5 Authorization Draft Gate
+
+```text
+phase_id: v14_080_pvos_evidence_collector_blocker_A5_authorization_package_draft_gate
+status: completed_local_draft_validated
+source_phase: pvos_evidence_collector_blocker_pipeline
+source_commit: 3db9e17
+draft_package_id: AUTH-DRAFT-PVOS-EVIDENCE-BLOCKER-20260517-001
+phase_record_created: docs/v14_080_pvos_evidence_collector_blocker_A5_authorization_package_draft_gate.md
+authorization_status: draft
+approval_status: not_requested
+active_A5_authorization_created: false
+execute_now: false
+A5_execution_allowed_now: false
+provider_contact_allowed_now: false
+plugin_call_allowed_now: false
+api_call_allowed_now: false
+image_generation_allowed_now: false
+runtime_execution_allowed_now: false
+DailyNote_write_allowed_now: false
+VCP_memory_write_allowed_now: false
+accepted_samples_write_allowed_now: false
+production_candidate_write_allowed_now: false
+real_manifest_read_allowed_now: false
+real_VCPChat_read_allowed_now: false
+real_VCPToolBox_read_allowed_now: false
+recommended_next: human_review_or_fill_exact_A5_authorization_package
+recommended_next_auto_execution_allowed: false
+```
+
 # PVOS Evidence Collector + Blocker Pipeline
 
 ```text

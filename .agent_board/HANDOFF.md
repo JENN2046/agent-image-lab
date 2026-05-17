@@ -3,6 +3,32 @@
 ## Handoff Summary
 
 ```text
+Status: v14_080_pvos_evidence_collector_blocker_A5_authorization_package_draft_gate drafted locally and validated.
+Reason: The validated PVOS evidence collector + blocker pipeline baseline is sealed in commit 3db9e17, and the next safest route is an inactive A5 authorization package draft that keeps every real execution field empty until human review.
+Current repository: project_root
+Branch: master tracking origin/master, ahead 1 after local baseline commit.
+Worktree: dirty only with v14.080 draft doc and .agent_board sync updates until final commit decision.
+Phase record: docs/v14_080_pvos_evidence_collector_blocker_A5_authorization_package_draft_gate.md
+Draft package id: AUTH-DRAFT-PVOS-EVIDENCE-BLOCKER-20260517-001
+authorization_status: draft
+approval_status: not_requested
+active: false
+execute_now: false
+A5_execution_allowed_now: false
+provider_contact_allowed_now: false
+plugin_call_allowed_now: false
+api_call_allowed_now: false
+image_generation_allowed_now: false
+DailyNote_write_allowed_now: false
+VCP_memory_write_allowed_now: false
+accepted_samples_write_allowed_now: false
+production_candidate_write_allowed_now: false
+real_manifest_read_allowed_now: false
+real_VCPChat_read_allowed_now: false
+real_VCPToolBox_read_allowed_now: false
+recommended_next: human_review_or_fill_exact_A5_authorization_package
+recommended_next_auto_execution_allowed: false
+---
 Status: pvos_evidence_collector_blocker_pipeline completed locally; dedicated validator passed.
 Reason: The local PVOS evidence collector + blocker arbiter objective now has one named stdout-only pipeline from approved repository fixture pairs to EvidenceRecord, BlockerDecision, ReviewReport, memory_delta drafts, production_exclusion drafts, and a Review Console handoff draft.
 Current repository: project_root
