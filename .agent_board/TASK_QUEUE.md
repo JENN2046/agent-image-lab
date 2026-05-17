@@ -10,6 +10,57 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ```text
 Current active two-month objective: expand single-sample artifact recoverability into multi-category local artifact lifecycle product capability.
+Status: v14_146_durable_archive_dry_run_manifest_completed_validated.
+Purpose: create a local durable archive dry-run manifest schema, fixture, and validator without copying image binaries.
+phase_id: v14_146_durable_archive_dry_run_manifest.
+phase_record_ref: docs/v14_146_durable_archive_dry_run_manifest.md.
+schema_ref: schemas/durable_archive_dry_run_manifest.schema.yaml.
+fixture_ref: tests/schema_examples/v14_146_durable_archive_dry_run_manifest.example.yaml.
+validator_created: scripts/validate_v14_146_durable_archive_dry_run_manifest.js.
+mvp_validator_updated: scripts/validate_mvp.ps1.
+durable_archive_dry_run_manifest_created: true.
+archive_dry_run_ready: true.
+archive_ready: false.
+source_sample_id: accepted_womens_resort_relaxed_knit_codex_v2_001.
+source_lifecycle_state: recoverable.
+target_archive_does_not_exist: true.
+negative_case_missing_recoverability_blocks_manifest: true.
+negative_case_hash_mismatch_blocks_manifest: true.
+negative_case_target_path_escape_blocks_manifest: true.
+negative_case_absolute_target_path_blocks_manifest: true.
+negative_case_existing_archive_target_requires_A5_review: true.
+authorization_granted_by_this_record: false.
+archive_manifest_written: false.
+image_binary_copy_performed: false.
+target_archive_directory_created: false.
+target_archive_artifact_created: false.
+accepted_samples_write_performed: false.
+failure_samples_write_performed: false.
+production_candidate_created: false.
+DailyNote_write_performed: false.
+VCP_memory_write_performed: false.
+provider_contact_performed: false.
+plugin_call_performed: false.
+api_call_performed: false.
+mcp_runtime_performed: false.
+image_generation_performed: false.
+real_manifest_read_performed: false.
+real_vcpchat_read_performed: false.
+real_vcptoolbox_read_performed: false.
+push_tag_release_deploy_performed: false.
+artifact_recoverability_is_not_vcp_runtime_integration: true.
+vcp_runtime_integration_proven: false.
+validated_now: node --check scripts/validate_v14_146_durable_archive_dry_run_manifest.js; node scripts/validate_v14_146_durable_archive_dry_run_manifest.js.
+recommended_next: v14_147_production_candidate_eligibility_preflight.
+recommended_next_auto_execution_allowed: true_after_v14_146_local_commit.
+```
+
+---
+
+## Previous Two-Month Artifact Lifecycle Mission
+
+```text
+Current active two-month objective: expand single-sample artifact recoverability into multi-category local artifact lifecycle product capability.
 Status: v14_145_sample_lifecycle_state_machine_completed_validated.
 Purpose: define local lifecycle states and prevent accepted samples being mistaken for production candidates.
 phase_id: v14_145_sample_lifecycle_state_machine.

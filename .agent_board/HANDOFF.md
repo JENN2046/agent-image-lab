@@ -3,6 +3,50 @@
 ## Handoff Summary
 
 ```text
+Status: v14_146_durable_archive_dry_run_manifest completed locally and validated.
+Reason: The recoverable accepted sample now needs a durable archive planning contract before any archive write can be authorized.
+Current repository: project_root
+Branch: master tracking origin/master; local commits may be ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.146 dry-run archive schema, fixture, validator, phase record, MVP wiring, and .agent_board sync until commit decision.
+Phase record: docs/v14_146_durable_archive_dry_run_manifest.md
+Dry-run archive schema: schemas/durable_archive_dry_run_manifest.schema.yaml
+Dry-run fixture: tests/schema_examples/v14_146_durable_archive_dry_run_manifest.example.yaml
+Validator created: scripts/validate_v14_146_durable_archive_dry_run_manifest.js
+MVP validator updated: scripts/validate_mvp.ps1
+durable_archive_dry_run_manifest_created: true
+archive_dry_run_ready: true
+archive_ready: false
+source_sample_id: accepted_womens_resort_relaxed_knit_codex_v2_001
+source_lifecycle_state: recoverable
+target_archive_does_not_exist: true
+authorization_granted_by_this_record: false
+archive_manifest_written: false
+image_binary_copy_performed: false
+target_archive_directory_created: false
+target_archive_artifact_created: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_146_durable_archive_dry_run_manifest.js; node scripts/validate_v14_146_durable_archive_dry_run_manifest.js.
+Next safe action: run broader validation, exact-stage v14.146 files, create a guarded local commit, then continue to v14.147 if still inside A4.8.
+```
+
+## Previous Handoff Summary
+
+```text
 Status: v14_145_sample_lifecycle_state_machine completed locally and validated.
 Reason: The artifact lifecycle needs explicit local states before durable archive dry-run manifest work.
 Current repository: project_root

@@ -1,5 +1,63 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.146-DURABLE-ARCHIVE-DRY-RUN-MANIFEST
+
+Scope:
+
+Validate the durable archive dry-run manifest schema, fixture, evidence chain,
+target path guards, and non-execution boundary.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_146_durable_archive_dry_run_manifest.js
+node scripts/validate_v14_146_durable_archive_dry_run_manifest.js
+```
+
+Expected:
+
+```yaml
+passed: true
+durable_archive_dry_run_manifest_created: true
+archive_dry_run_ready: true
+archive_ready: false
+source_lifecycle_state: recoverable
+target_archive_does_not_exist: true
+registry_to_import_record_verified: true
+registry_to_review_record_verified: true
+registry_to_category_index_verified: true
+human_approval_verified: true
+artifact_sha256_verified: true
+artifact_dimensions_verified: true
+artifact_mime_verified: true
+negative_case_missing_recoverability_blocks_manifest: true
+negative_case_hash_mismatch_blocks_manifest: true
+negative_case_target_path_escape_blocks_manifest: true
+negative_case_absolute_target_path_blocks_manifest: true
+negative_case_existing_archive_target_requires_A5_review: true
+authorization_granted_by_this_record: false
+archive_manifest_written: false
+image_binary_copy_performed: false
+target_archive_directory_created: false
+target_archive_artifact_created: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+```
+
 ## VALIDATION-20260517-v14.145-SAMPLE-LIFECYCLE-STATE-MACHINE
 
 Scope:

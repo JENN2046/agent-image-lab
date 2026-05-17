@@ -210,6 +210,7 @@ $requiredFiles = @(
   'scripts/validate_v14_143_import_review_registry_schema_hardening.js',
   'scripts/validate_v14_144_review_console_schema_binding.js',
   'scripts/validate_v14_145_sample_lifecycle_state_machine.js',
+  'scripts/validate_v14_146_durable_archive_dry_run_manifest.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -353,6 +354,9 @@ $requiredFiles = @(
   'docs/v14_143_import_review_registry_schema_hardening.md',
   'docs/v14_144_review_console_schema_binding.md',
   'docs/v14_145_sample_lifecycle_state_machine.md',
+  'docs/v14_146_durable_archive_dry_run_manifest.md',
+  'schemas/durable_archive_dry_run_manifest.schema.yaml',
+  'tests/schema_examples/v14_146_durable_archive_dry_run_manifest.example.yaml',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -9048,6 +9052,55 @@ process.exit(child.status || 0);
     }
     if ($sampleLifecycle.real_manifest_read_performed -ne $false -or $sampleLifecycle.real_vcpchat_read_performed -ne $false -or $sampleLifecycle.real_vcptoolbox_read_performed -ne $false) {
       Add-Failure "sample lifecycle must not read real manifest/VCPChat/VCPToolBox"
+    }
+  }
+
+  $durableArchiveDryRunOutput = & node (Join-Path $Root 'scripts/validate_v14_146_durable_archive_dry_run_manifest.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "durable archive dry-run manifest validation exited with failure"
+  } else {
+    $durableArchiveDryRun = ($durableArchiveDryRunOutput -join "`n") | ConvertFrom-Json
+    if ($durableArchiveDryRun.passed -ne $true) {
+      Add-Failure "durable archive dry-run manifest validation must pass"
+    }
+    if ($durableArchiveDryRun.durable_archive_dry_run_manifest_created -ne $true -or $durableArchiveDryRun.archive_dry_run_ready -ne $true -or $durableArchiveDryRun.archive_ready -ne $false) {
+      Add-Failure "v14.146 must create a dry-run archive manifest without marking the sample archive-ready"
+    }
+    if ($durableArchiveDryRun.registry_to_import_record_verified -ne $true -or $durableArchiveDryRun.registry_to_review_record_verified -ne $true -or $durableArchiveDryRun.registry_to_category_index_verified -ne $true -or $durableArchiveDryRun.human_approval_verified -ne $true) {
+      Add-Failure "v14.146 must verify the registry/import/review/category/approval evidence chain"
+    }
+    if ($durableArchiveDryRun.artifact_sha256_verified -ne $true -or $durableArchiveDryRun.artifact_dimensions_verified -ne $true -or $durableArchiveDryRun.artifact_mime_verified -ne $true) {
+      Add-Failure "v14.146 must verify artifact hash, dimensions, and mime"
+    }
+    if ($durableArchiveDryRun.target_path_project_relative -ne $true -or $durableArchiveDryRun.target_path_inside_asset_archive -ne $true -or $durableArchiveDryRun.target_archive_does_not_exist -ne $true) {
+      Add-Failure "v14.146 dry-run target path must be project-relative, inside asset_archive, and not already created"
+    }
+    if ($durableArchiveDryRun.negative_case_missing_recoverability_blocks_manifest -ne $true -or $durableArchiveDryRun.negative_case_hash_mismatch_blocks_manifest -ne $true -or $durableArchiveDryRun.negative_case_target_path_escape_blocks_manifest -ne $true -or $durableArchiveDryRun.negative_case_absolute_target_path_blocks_manifest -ne $true -or $durableArchiveDryRun.negative_case_existing_archive_target_requires_A5_review -ne $true) {
+      Add-Failure "v14.146 must fail dry-run archive manifest negative cases"
+    }
+    if ($durableArchiveDryRun.v14_145_lifecycle_validator_still_passes -ne $true) {
+      Add-Failure "v14.146 must preserve v14.145 lifecycle validation"
+    }
+    if ($durableArchiveDryRun.vcp_runtime_integration_proven -ne $false -or $durableArchiveDryRun.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "durable archive dry-run manifest must not claim VCP runtime integration"
+    }
+    if ($durableArchiveDryRun.authorization_granted_by_this_record -ne $false -or $durableArchiveDryRun.archive_manifest_written -ne $false -or $durableArchiveDryRun.image_binary_copy_performed -ne $false) {
+      Add-Failure "durable archive dry-run manifest must not authorize or execute archive writes"
+    }
+    if ($durableArchiveDryRun.target_archive_directory_created -ne $false -or $durableArchiveDryRun.target_archive_artifact_created -ne $false -or $durableArchiveDryRun.runs_source_image_modified -ne $false) {
+      Add-Failure "durable archive dry-run manifest must not create archive targets or modify runs source images"
+    }
+    if ($durableArchiveDryRun.provider_contact_performed -ne $false -or $durableArchiveDryRun.plugin_call_performed -ne $false -or $durableArchiveDryRun.api_call_performed -ne $false -or $durableArchiveDryRun.mcp_runtime_performed -ne $false) {
+      Add-Failure "durable archive dry-run manifest must not call provider/plugin/API/MCP"
+    }
+    if ($durableArchiveDryRun.image_generation_performed -ne $false -or $durableArchiveDryRun.accepted_samples_write_performed -ne $false -or $durableArchiveDryRun.failure_samples_write_performed -ne $false) {
+      Add-Failure "durable archive dry-run manifest must not generate images or write accepted/failure sample registries"
+    }
+    if ($durableArchiveDryRun.production_candidate_created -ne $false -or $durableArchiveDryRun.production_candidate_write_performed -ne $false -or $durableArchiveDryRun.daily_note_write_performed -ne $false -or $durableArchiveDryRun.vcp_memory_write_performed -ne $false) {
+      Add-Failure "durable archive dry-run manifest must not write production candidates, DailyNote, or VCP memory"
+    }
+    if ($durableArchiveDryRun.real_manifest_read_performed -ne $false -or $durableArchiveDryRun.real_vcpchat_read_performed -ne $false -or $durableArchiveDryRun.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "durable archive dry-run manifest must not read real manifest/VCPChat/VCPToolBox"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding
