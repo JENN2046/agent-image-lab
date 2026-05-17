@@ -1,5 +1,51 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.120-VISUAL-SERIES-TAXONOMY-REVIEW-SCORECARD-ALIGNMENT
+
+Scope:
+
+Validate that reusable visual-series taxonomy and review scorecard fields align with current Codex-session review records, accepted_samples metadata, product hero prompt review checklist, and Review Console asset status taxonomy without image generation or production writes.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_120_visual_series_taxonomy_review_scorecard_alignment.js
+node scripts/validate_v14_120_visual_series_taxonomy_review_scorecard_alignment.js
+```
+
+Expected:
+
+```yaml
+passed: true
+visual_series_taxonomy_review_scorecard_aligned: true
+fashion_lookbook_portrait_scorecard_fields_verified: true
+product_hero_prompt_review_checklist_verified: true
+accepted_samples_acceptance_summary_mapped: true
+review_console_asset_status_taxonomy_verified: true
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+output_file_write_performed: false
+```
+
+Result:
+
+```yaml
+status: passed
+validator: scripts/validate_v14_120_visual_series_taxonomy_review_scorecard_alignment.js
+phase_record: docs/v14_120_visual_series_taxonomy_review_scorecard_alignment.md
+```
+
 ## VALIDATION-20260517-v14.119-PROMPT-TO-ARTIFACT-COMPLETION-AUDIT-CURRENT-GOAL-REFRESH
 
 Scope:

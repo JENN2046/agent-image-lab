@@ -183,6 +183,7 @@ $requiredFiles = @(
   'scripts/validate_v14_117_daily_note_vcp_memory_authorization_current_goal_alignment.js',
   'scripts/validate_v14_118_rollback_audit_validation_package_current_goal_alignment.js',
   'scripts/validate_v14_119_prompt_to_artifact_completion_audit_current_goal_refresh.js',
+  'scripts/validate_v14_120_visual_series_taxonomy_review_scorecard_alignment.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -292,6 +293,7 @@ $requiredFiles = @(
   'docs/v14_117_daily_note_vcp_memory_authorization_current_goal_alignment.md',
   'docs/v14_118_rollback_audit_validation_package_current_goal_alignment.md',
   'docs/v14_119_prompt_to_artifact_completion_audit_current_goal_refresh.md',
+  'docs/v14_120_visual_series_taxonomy_review_scorecard_alignment.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8084,6 +8086,40 @@ process.exit(child.status || 0);
     }
     if ($promptToArtifactAudit.accepted_samples_write_performed -ne $false -or $promptToArtifactAudit.failure_samples_write_performed -ne $false -or $promptToArtifactAudit.production_candidate_created -ne $false) {
       Add-Failure "prompt-to-artifact completion audit validation must not write samples or production candidates"
+    }
+  }
+
+  $visualSeriesScorecardOutput = & node (Join-Path $Root 'scripts/validate_v14_120_visual_series_taxonomy_review_scorecard_alignment.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "visual series taxonomy review scorecard alignment validation exited with failure"
+  } else {
+    $visualSeriesScorecard = ($visualSeriesScorecardOutput -join "`n") | ConvertFrom-Json
+    if ($visualSeriesScorecard.passed -ne $true) {
+      Add-Failure "visual series taxonomy review scorecard alignment validation must pass"
+    }
+    if ($visualSeriesScorecard.visual_series_taxonomy_review_scorecard_aligned -ne $true -or $visualSeriesScorecard.fashion_lookbook_portrait_scorecard_fields_verified -ne $true) {
+      Add-Failure "visual series taxonomy and fashion lookbook scorecard fields must remain aligned"
+    }
+    if ($visualSeriesScorecard.product_hero_prompt_review_checklist_verified -ne $true -or $visualSeriesScorecard.accepted_samples_acceptance_summary_mapped -ne $true) {
+      Add-Failure "product hero prompt checklist and accepted_samples acceptance summary must remain mapped"
+    }
+    if ($visualSeriesScorecard.review_console_asset_status_taxonomy_verified -ne $true) {
+      Add-Failure "Review Console asset status taxonomy must remain verified"
+    }
+    if ($visualSeriesScorecard.provider_contact_performed -ne $false -or $visualSeriesScorecard.plugin_call_performed -ne $false -or $visualSeriesScorecard.api_call_performed -ne $false -or $visualSeriesScorecard.mcp_runtime_performed -ne $false) {
+      Add-Failure "visual series scorecard validation must not call provider/plugin/API/MCP"
+    }
+    if ($visualSeriesScorecard.image_generation_performed -ne $false -or $visualSeriesScorecard.output_file_write_performed -ne $false -or $visualSeriesScorecard.file_write_performed -ne $false) {
+      Add-Failure "visual series scorecard validation must not generate images or write files"
+    }
+    if ($visualSeriesScorecard.daily_note_write_performed -ne $false -or $visualSeriesScorecard.vcp_memory_write_performed -ne $false) {
+      Add-Failure "visual series scorecard validation must not write DailyNote or VCP memory"
+    }
+    if ($visualSeriesScorecard.real_manifest_read_performed -ne $false -or $visualSeriesScorecard.real_vcpchat_read_performed -ne $false -or $visualSeriesScorecard.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "visual series scorecard validation must not read real manifest/VCPChat/VCPToolBox"
+    }
+    if ($visualSeriesScorecard.accepted_samples_write_performed -ne $false -or $visualSeriesScorecard.failure_samples_write_performed -ne $false -or $visualSeriesScorecard.production_candidate_created -ne $false) {
+      Add-Failure "visual series scorecard validation must not write samples or production candidates"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

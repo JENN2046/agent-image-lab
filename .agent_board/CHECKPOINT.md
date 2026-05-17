@@ -1,5 +1,37 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.120 Visual Series Taxonomy Review Scorecard Alignment
+
+```text
+phase_id: v14_120_visual_series_taxonomy_review_scorecard_alignment
+status: completed_validated
+phase_record_ref: docs/v14_120_visual_series_taxonomy_review_scorecard_alignment.md
+validator_created: scripts/validate_v14_120_visual_series_taxonomy_review_scorecard_alignment.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+visual_series_taxonomy_review_scorecard_aligned: true
+fashion_lookbook_portrait_scorecard_fields_verified: true
+product_hero_prompt_review_checklist_verified: true
+accepted_samples_acceptance_summary_mapped: true
+review_console_asset_status_taxonomy_verified: true
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+output_file_write_performed: false
+validated_now: node --check scripts/validate_v14_120_visual_series_taxonomy_review_scorecard_alignment.js; node scripts/validate_v14_120_visual_series_taxonomy_review_scorecard_alignment.js
+recommended_next: codex_session_prompt_package_library_governance
+recommended_next_auto_execution_allowed: true
+```
+
 # V14.119 Prompt-To-Artifact Completion Audit Current Goal Refresh
 
 ```text

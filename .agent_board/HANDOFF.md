@@ -3,6 +3,37 @@
 ## Handoff Summary
 
 ```text
+Status: v14_120_visual_series_taxonomy_review_scorecard_alignment completed locally and validated.
+Reason: The current Codex-session visual control goal needs reusable taxonomy and scorecard coverage for fashion lookbook portraits and product hero prompt review before further prompt library governance.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.120 visual series taxonomy/review scorecard validator, MVP wiring, phase record, and .agent_board sync until commit decision.
+Phase record: docs/v14_120_visual_series_taxonomy_review_scorecard_alignment.md
+Validator created: scripts/validate_v14_120_visual_series_taxonomy_review_scorecard_alignment.js
+MVP validator updated: scripts/validate_mvp.ps1
+visual_series_taxonomy_review_scorecard_aligned: true
+fashion_lookbook_portrait_scorecard_fields_verified: true
+product_hero_prompt_review_checklist_verified: true
+accepted_samples_acceptance_summary_mapped: true
+review_console_asset_status_taxonomy_verified: true
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+output_file_write_performed: false
+validated_now: node --check scripts/validate_v14_120_visual_series_taxonomy_review_scorecard_alignment.js; node scripts/validate_v14_120_visual_series_taxonomy_review_scorecard_alignment.js
+recommended_next: codex_session_prompt_package_library_governance
+recommended_next_auto_execution_allowed: true
+---
 Status: v14_119_prompt_to_artifact_completion_audit_current_goal_refresh completed locally and validated.
 Reason: The active long-term goal requires prompt-to-artifact completion evidence tied to actual local artifacts, not only document presence or test success.
 Current repository: project_root
