@@ -184,6 +184,7 @@ $requiredFiles = @(
   'scripts/validate_v14_118_rollback_audit_validation_package_current_goal_alignment.js',
   'scripts/validate_v14_119_prompt_to_artifact_completion_audit_current_goal_refresh.js',
   'scripts/validate_v14_120_visual_series_taxonomy_review_scorecard_alignment.js',
+  'scripts/validate_v14_121_codex_session_prompt_package_library_governance.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -294,6 +295,7 @@ $requiredFiles = @(
   'docs/v14_118_rollback_audit_validation_package_current_goal_alignment.md',
   'docs/v14_119_prompt_to_artifact_completion_audit_current_goal_refresh.md',
   'docs/v14_120_visual_series_taxonomy_review_scorecard_alignment.md',
+  'docs/v14_121_codex_session_prompt_package_library_governance.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8120,6 +8122,40 @@ process.exit(child.status || 0);
     }
     if ($visualSeriesScorecard.accepted_samples_write_performed -ne $false -or $visualSeriesScorecard.failure_samples_write_performed -ne $false -or $visualSeriesScorecard.production_candidate_created -ne $false) {
       Add-Failure "visual series scorecard validation must not write samples or production candidates"
+    }
+  }
+
+  $codexPromptGovernanceOutput = & node (Join-Path $Root 'scripts/validate_v14_121_codex_session_prompt_package_library_governance.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Codex session prompt package library governance validation exited with failure"
+  } else {
+    $codexPromptGovernance = ($codexPromptGovernanceOutput -join "`n") | ConvertFrom-Json
+    if ($codexPromptGovernance.passed -ne $true) {
+      Add-Failure "Codex session prompt package library governance validation must pass"
+    }
+    if ($codexPromptGovernance.codex_session_prompt_package_library_governance_aligned -ne $true -or $codexPromptGovernance.codex_prompt_schema_validation_passed -ne $true) {
+      Add-Failure "Codex session prompt package governance and schema validation must remain aligned"
+    }
+    if ($codexPromptGovernance.codex_prompt_not_execution_authorization -ne $true -or $codexPromptGovernance.codex_prompt_project_script_generation_blocked -ne $true) {
+      Add-Failure "Codex session prompt package must not authorize execution or project-script generation"
+    }
+    if ($codexPromptGovernance.codex_prompt_review_chain_linked -ne $true) {
+      Add-Failure "Codex session prompt package must remain linked to review/import chain"
+    }
+    if ($codexPromptGovernance.provider_contact_performed -ne $false -or $codexPromptGovernance.plugin_call_performed -ne $false -or $codexPromptGovernance.api_call_performed -ne $false -or $codexPromptGovernance.mcp_runtime_performed -ne $false) {
+      Add-Failure "Codex session prompt governance validation must not call provider/plugin/API/MCP"
+    }
+    if ($codexPromptGovernance.image_generation_performed -ne $false -or $codexPromptGovernance.output_file_write_performed -ne $false -or $codexPromptGovernance.file_write_performed -ne $false) {
+      Add-Failure "Codex session prompt governance validation must not generate images or write files"
+    }
+    if ($codexPromptGovernance.daily_note_write_performed -ne $false -or $codexPromptGovernance.vcp_memory_write_performed -ne $false) {
+      Add-Failure "Codex session prompt governance validation must not write DailyNote or VCP memory"
+    }
+    if ($codexPromptGovernance.real_manifest_read_performed -ne $false -or $codexPromptGovernance.real_vcpchat_read_performed -ne $false -or $codexPromptGovernance.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "Codex session prompt governance validation must not read real manifest/VCPChat/VCPToolBox"
+    }
+    if ($codexPromptGovernance.accepted_samples_write_performed -ne $false -or $codexPromptGovernance.failure_samples_write_performed -ne $false -or $codexPromptGovernance.production_candidate_created -ne $false) {
+      Add-Failure "Codex session prompt governance validation must not write samples or production candidates"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

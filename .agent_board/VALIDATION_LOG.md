@@ -1,5 +1,51 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.121-CODEX-SESSION-PROMPT-PACKAGE-LIBRARY-GOVERNANCE
+
+Scope:
+
+Validate that the Codex-session lantern prompt package remains schema-valid, prompt/positive-prompt synchronized, linked to the local review/import chain, and explicitly blocked from becoming provider/plugin/MCP/runtime execution or production authorization.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_121_codex_session_prompt_package_library_governance.js
+node scripts/validate_v14_121_codex_session_prompt_package_library_governance.js
+```
+
+Expected:
+
+```yaml
+passed: true
+codex_session_prompt_package_library_governance_aligned: true
+codex_prompt_schema_validation_passed: true
+codex_prompt_not_execution_authorization: true
+codex_prompt_project_script_generation_blocked: true
+codex_prompt_review_chain_linked: true
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+output_file_write_performed: false
+```
+
+Result:
+
+```yaml
+status: passed
+validator: scripts/validate_v14_121_codex_session_prompt_package_library_governance.js
+phase_record: docs/v14_121_codex_session_prompt_package_library_governance.md
+```
+
 ## VALIDATION-20260517-v14.120-VISUAL-SERIES-TAXONOMY-REVIEW-SCORECARD-ALIGNMENT
 
 Scope:

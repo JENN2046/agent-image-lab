@@ -1,5 +1,37 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.121 Codex Session Prompt Package Library Governance
+
+```text
+phase_id: v14_121_codex_session_prompt_package_library_governance
+status: completed_validated
+phase_record_ref: docs/v14_121_codex_session_prompt_package_library_governance.md
+validator_created: scripts/validate_v14_121_codex_session_prompt_package_library_governance.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+codex_session_prompt_package_library_governance_aligned: true
+codex_prompt_schema_validation_passed: true
+codex_prompt_not_execution_authorization: true
+codex_prompt_project_script_generation_blocked: true
+codex_prompt_review_chain_linked: true
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+output_file_write_performed: false
+validated_now: node --check scripts/validate_v14_121_codex_session_prompt_package_library_governance.js; node scripts/validate_v14_121_codex_session_prompt_package_library_governance.js
+recommended_next: local_review_record_schema_refresh
+recommended_next_auto_execution_allowed: true
+```
+
 # V14.120 Visual Series Taxonomy Review Scorecard Alignment
 
 ```text

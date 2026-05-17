@@ -10,10 +10,10 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ```text
 Current active long-term objective: 3-month Agent Image Lab visual production control layer for the VCP ecosystem.
-Status: v14_120_visual_series_taxonomy_review_scorecard_alignment_completed_validated.
+Status: v14_121_codex_session_prompt_package_library_governance_completed_validated.
 Purpose: move Agent Image Lab from local verifiable visual production MVP toward a controlled VCPChat / VCPToolBox visual production system while staying inside A4.8 unless separately authorized.
-phase_id: v14_120_visual_series_taxonomy_review_scorecard_alignment.
-phase_record_ref: docs/v14_120_visual_series_taxonomy_review_scorecard_alignment.md.
+phase_id: v14_121_codex_session_prompt_package_library_governance.
+phase_record_ref: docs/v14_121_codex_session_prompt_package_library_governance.md.
 default_generation_route_for_next_three_months: codex_session_image.
 NativeDoubaoImage_default_route: false.
 provider_API_default_route: false.
@@ -38,7 +38,12 @@ env_value_read_allowed_without_separate_authorization: false.
 provider_API_plugin_MCP_allowed_without_separate_authorization: false.
 real_manifest_VCPChat_VCPToolBox_read_allowed_without_separate_authorization: false.
 push_tag_release_deploy_allowed_without_separate_authorization: false.
-current_focus: visual_series_taxonomy_and_review_scorecard_alignment.
+current_focus: codex_session_prompt_package_library_governance.
+codex_session_prompt_package_library_governance_aligned: true.
+codex_prompt_schema_validation_passed: true.
+codex_prompt_not_execution_authorization: true.
+codex_prompt_project_script_generation_blocked: true.
+codex_prompt_review_chain_linked: true.
 visual_series_taxonomy_review_scorecard_aligned: true.
 fashion_lookbook_portrait_scorecard_fields_verified: true.
 product_hero_prompt_review_checklist_verified: true.
@@ -74,8 +79,8 @@ accepted_samples_write_performed: false.
 failure_samples_write_performed: false.
 production_candidate_created: false.
 output_file_write_performed: false.
-validated_now: node --check scripts/validate_v14_120_visual_series_taxonomy_review_scorecard_alignment.js; node scripts/validate_v14_120_visual_series_taxonomy_review_scorecard_alignment.js.
-recommended_next: codex_session_prompt_package_library_governance.
+validated_now: node --check scripts/validate_v14_121_codex_session_prompt_package_library_governance.js; node scripts/validate_v14_121_codex_session_prompt_package_library_governance.js.
+recommended_next: local_review_record_schema_refresh.
 recommended_next_auto_execution_allowed: true.
 ---
 Current active local objective: v14_107_womens_resort_relaxed_knit_accepted_sample_closeout.
