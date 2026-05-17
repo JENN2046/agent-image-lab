@@ -3,6 +3,38 @@
 ## Handoff Summary
 
 ```text
+Status: v14_126_accepted_failure_metadata_cross_index_gap_review completed locally and validated.
+Reason: The current goal permits accepted_samples metadata automation after local review but still blocks failure_samples writes, so the Codex-session accepted sample / no Codex failure sample gap needed explicit local evidence.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.126 accepted/failure metadata gap review, validator, MVP wiring, phase record, and .agent_board sync until validation and commit decision.
+Phase record: docs/v14_126_accepted_failure_metadata_cross_index_gap_review.md
+Validator created: scripts/validate_v14_126_accepted_failure_metadata_cross_index_gap_review.js
+MVP validator updated: scripts/validate_mvp.ps1
+codex_session_accepted_sample_registered: true
+codex_session_failure_sample_registered: false
+failure_samples_gap_is_authorization_blocked: true
+failure_samples_write_requires_separate_authorization: true
+failure_samples_registry_write_performed: false
+failure_samples_taxonomy_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+output_file_write_performed: false
+validated_now: node --check scripts/validate_v14_126_accepted_failure_metadata_cross_index_gap_review.js; node scripts/validate_v14_126_accepted_failure_metadata_cross_index_gap_review.js
+recommended_next: production_exclusion_draft_current_goal_gap_review
+recommended_next_auto_execution_allowed: true
+---
 Status: v14_125_review_console_memory_delta_handoff_refresh completed locally and validated.
 Reason: Codex-session memory_delta drafts needed an explicit display-only Review Console handoff mapping while preserving DailyNote and VCP memory write blockers.
 Current repository: project_root

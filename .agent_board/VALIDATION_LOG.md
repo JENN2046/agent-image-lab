@@ -1,5 +1,52 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.126-ACCEPTED-FAILURE-METADATA-CROSS-INDEX-GAP-REVIEW
+
+Scope:
+
+Validate that the current Codex-session accepted sample is registered in accepted_samples metadata while no Codex-session failure sample is written, because failure_samples writes remain separately authorized only.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_126_accepted_failure_metadata_cross_index_gap_review.js
+node scripts/validate_v14_126_accepted_failure_metadata_cross_index_gap_review.js
+```
+
+Expected:
+
+```yaml
+passed: true
+codex_session_accepted_sample_registered: true
+codex_session_failure_sample_registered: false
+failure_samples_gap_is_authorization_blocked: true
+failure_samples_write_requires_separate_authorization: true
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+failure_samples_registry_write_performed: false
+failure_samples_taxonomy_write_performed: false
+production_candidate_created: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+output_file_write_performed: false
+```
+
+Result:
+
+```yaml
+status: passed
+validator: scripts/validate_v14_126_accepted_failure_metadata_cross_index_gap_review.js
+phase_record: docs/v14_126_accepted_failure_metadata_cross_index_gap_review.md
+```
+
 ## VALIDATION-20260517-v14.125-REVIEW-CONSOLE-MEMORY-DELTA-HANDOFF-REFRESH
 
 Scope:

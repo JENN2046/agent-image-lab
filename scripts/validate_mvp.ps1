@@ -189,6 +189,7 @@ $requiredFiles = @(
   'scripts/validate_v14_123_memory_delta_draft_schema_alignment_for_codex_reviews.js',
   'scripts/validate_v14_124_context_load_guide_and_historical_docs_compaction.js',
   'scripts/validate_v14_125_review_console_memory_delta_handoff_refresh.js',
+  'scripts/validate_v14_126_accepted_failure_metadata_cross_index_gap_review.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -307,6 +308,7 @@ $requiredFiles = @(
   'docs/HISTORICAL_DOCS_COMPACTION_INDEX.md',
   'docs/v14_124_context_load_guide_and_historical_docs_compaction.md',
   'docs/v14_125_review_console_memory_delta_handoff_refresh.md',
+  'docs/v14_126_accepted_failure_metadata_cross_index_gap_review.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8300,6 +8302,40 @@ process.exit(child.status || 0);
     }
     if ($reviewConsoleMemoryDeltaHandoff.accepted_samples_write_performed -ne $false -or $reviewConsoleMemoryDeltaHandoff.failure_samples_write_performed -ne $false -or $reviewConsoleMemoryDeltaHandoff.production_candidate_created -ne $false) {
       Add-Failure "Review Console memory_delta handoff validation must not write samples or production candidates"
+    }
+  }
+
+  $acceptedFailureMetadataGapOutput = & node (Join-Path $Root 'scripts/validate_v14_126_accepted_failure_metadata_cross_index_gap_review.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "accepted/failure metadata cross-index gap validation exited with failure"
+  } else {
+    $acceptedFailureMetadataGap = ($acceptedFailureMetadataGapOutput -join "`n") | ConvertFrom-Json
+    if ($acceptedFailureMetadataGap.passed -ne $true) {
+      Add-Failure "accepted/failure metadata cross-index gap validation must pass"
+    }
+    if ($acceptedFailureMetadataGap.codex_session_accepted_sample_registered -ne $true -or $acceptedFailureMetadataGap.codex_session_failure_sample_registered -ne $false) {
+      Add-Failure "accepted/failure metadata gap validation must preserve Codex accepted sample and no Codex failure sample"
+    }
+    if ($acceptedFailureMetadataGap.failure_samples_gap_is_authorization_blocked -ne $true -or $acceptedFailureMetadataGap.failure_samples_write_requires_separate_authorization -ne $true) {
+      Add-Failure "accepted/failure metadata gap must remain blocked by failure_samples authorization"
+    }
+    if ($acceptedFailureMetadataGap.failure_samples_write_performed -ne $false -or $acceptedFailureMetadataGap.failure_samples_registry_write_performed -ne $false -or $acceptedFailureMetadataGap.failure_samples_taxonomy_write_performed -ne $false) {
+      Add-Failure "accepted/failure metadata gap validation must not write failure_samples"
+    }
+    if ($acceptedFailureMetadataGap.accepted_samples_write_performed -ne $false -or $acceptedFailureMetadataGap.production_candidate_created -ne $false) {
+      Add-Failure "accepted/failure metadata gap validation must not write accepted_samples or production candidates"
+    }
+    if ($acceptedFailureMetadataGap.provider_contact_performed -ne $false -or $acceptedFailureMetadataGap.plugin_call_performed -ne $false -or $acceptedFailureMetadataGap.api_call_performed -ne $false -or $acceptedFailureMetadataGap.mcp_runtime_performed -ne $false) {
+      Add-Failure "accepted/failure metadata gap validation must not call provider/plugin/API/MCP"
+    }
+    if ($acceptedFailureMetadataGap.image_generation_performed -ne $false -or $acceptedFailureMetadataGap.output_file_write_performed -ne $false -or $acceptedFailureMetadataGap.file_write_performed -ne $false) {
+      Add-Failure "accepted/failure metadata gap validation must not generate images or write output files"
+    }
+    if ($acceptedFailureMetadataGap.daily_note_write_performed -ne $false -or $acceptedFailureMetadataGap.vcp_memory_write_performed -ne $false) {
+      Add-Failure "accepted/failure metadata gap validation must not write DailyNote or VCP memory"
+    }
+    if ($acceptedFailureMetadataGap.real_manifest_read_performed -ne $false -or $acceptedFailureMetadataGap.real_vcpchat_read_performed -ne $false -or $acceptedFailureMetadataGap.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "accepted/failure metadata gap validation must not read real manifest/VCPChat/VCPToolBox"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding
