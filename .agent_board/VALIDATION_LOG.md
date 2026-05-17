@@ -1,5 +1,59 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.142-MULTI-ACCEPTED-SAMPLE-MATRIX
+
+Scope:
+
+Validate a local multi-sample recoverability matrix over the current
+`accepted_samples` registry while preserving the truth that only the v14.105
+Codex-session sample is fully recoverable under the v14.131+ standard.
+
+Commands:
+
+```text
+node --check scripts/lib/artifact_recoverability_core.js
+node --check scripts/validate_v14_142_multi_accepted_sample_matrix.js
+node scripts/validate_v14_142_multi_accepted_sample_matrix.js
+```
+
+Expected:
+
+```yaml
+passed: true
+multi_sample_matrix_created: true
+matrix_row_count: 6
+category_count: 3
+local_artifact_sample_count: 4
+complete_recoverable_sample_count: 1
+legacy_partial_artifact_sample_count: 3
+full_recoverability_count_is_currently_one: true
+negative_case_artifact_missing_fails: true
+negative_case_hash_mismatch_fails: true
+negative_case_dimensions_mismatch_fails: true
+negative_case_mime_mismatch_fails: true
+negative_case_review_record_missing_fails: true
+negative_case_human_approval_missing_fails: true
+negative_case_category_index_missing_fails: true
+negative_case_registry_category_mismatch_fails: true
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+accepted_samples_write_performed: false
+image_binary_copy_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+```
+
 ## VALIDATION-20260517-v14.141-RECOVERABILITY-CORE-EXTRACTION
 
 Scope:

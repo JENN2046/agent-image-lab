@@ -45,6 +45,90 @@ function createRecoverabilityCore(root) {
     };
   }
 
+  function readJpegDimensions(relativePath) {
+    const buffer = fs.readFileSync(repoPath(relativePath));
+    if (buffer.length < 4 || buffer[0] !== 0xff || buffer[1] !== 0xd8) {
+      return {
+        signature: buffer.subarray(0, 2).toString("hex"),
+        signatureValid: false,
+        width: null,
+        height: null,
+      };
+    }
+
+    let offset = 2;
+    while (offset < buffer.length) {
+      if (buffer[offset] !== 0xff) {
+        offset += 1;
+        continue;
+      }
+
+      const marker = buffer[offset + 1];
+      offset += 2;
+
+      if (marker === 0xd9 || marker === 0xda) break;
+      if (offset + 2 > buffer.length) break;
+
+      const length = buffer.readUInt16BE(offset);
+      if (length < 2 || offset + length > buffer.length) break;
+
+      const isStartOfFrame =
+        (marker >= 0xc0 && marker <= 0xc3) ||
+        (marker >= 0xc5 && marker <= 0xc7) ||
+        (marker >= 0xc9 && marker <= 0xcb) ||
+        (marker >= 0xcd && marker <= 0xcf);
+
+      if (isStartOfFrame && length >= 7) {
+        return {
+          signature: buffer.subarray(0, 2).toString("hex"),
+          signatureValid: true,
+          width: buffer.readUInt16BE(offset + 5),
+          height: buffer.readUInt16BE(offset + 3),
+        };
+      }
+
+      offset += length;
+    }
+
+    return {
+      signature: buffer.subarray(0, 2).toString("hex"),
+      signatureValid: true,
+      width: null,
+      height: null,
+    };
+  }
+
+  function readImageMetadata(relativePath) {
+    const buffer = fs.readFileSync(repoPath(relativePath));
+    const pngSignature = buffer.subarray(0, 8).toString("hex");
+    if (pngSignature === "89504e470d0a1a0a") {
+      const dimensions = readPngDimensions(relativePath);
+      return {
+        mimeType: "image/png",
+        signatureValid: dimensions.signatureValid,
+        width: dimensions.width,
+        height: dimensions.height,
+      };
+    }
+
+    if (buffer.length >= 2 && buffer[0] === 0xff && buffer[1] === 0xd8) {
+      const dimensions = readJpegDimensions(relativePath);
+      return {
+        mimeType: "image/jpeg",
+        signatureValid: dimensions.signatureValid,
+        width: dimensions.width,
+        height: dimensions.height,
+      };
+    }
+
+    return {
+      mimeType: "application/octet-stream",
+      signatureValid: false,
+      width: null,
+      height: null,
+    };
+  }
+
   function extractRegistrySampleBlock(registryText, id) {
     const marker = `sample_id: ${id}`;
     const start = registryText.indexOf(marker);
@@ -52,6 +136,47 @@ function createRecoverabilityCore(root) {
     const rest = registryText.slice(start);
     const next = rest.search(/\n\s+- sample_id: /);
     return next >= 0 ? rest.slice(0, next) : rest;
+  }
+
+  function listRegistrySampleBlocks(registryText) {
+    const rows = [];
+    let currentId = null;
+    let currentLines = [];
+
+    for (const line of registryText.split(/\r?\n/)) {
+      const match = line.match(/^\s*-\s+sample_id:\s*(\S+)/);
+      if (match) {
+        if (currentId) {
+          rows.push({ sampleId: currentId, block: currentLines.join("\n") });
+        }
+        currentId = match[1];
+        currentLines = [line];
+      } else if (currentId) {
+        currentLines.push(line);
+      }
+    }
+
+    if (currentId) {
+      rows.push({ sampleId: currentId, block: currentLines.join("\n") });
+    }
+
+    return rows;
+  }
+
+  function extractScalarField(block, fieldName) {
+    const escaped = fieldName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const match = block.match(new RegExp(`^\\s*${escaped}:\\s*(.+?)\\s*$`, "m"));
+    if (!match) return null;
+    const value = match[1].trim();
+    return value === "null" ? null : value;
+  }
+
+  function extractCategoryIndexSamples(categoryIndexText) {
+    return categoryIndexText
+      .split(/\r?\n/)
+      .map((line) => line.match(/^\s*-\s+(\S+)/))
+      .filter(Boolean)
+      .map((match) => match[1]);
   }
 
   function validateRecordChain(record, expected, options = {}) {
@@ -118,7 +243,12 @@ function createRecoverabilityCore(root) {
     parseJson,
     sha256File,
     readPngDimensions,
+    readJpegDimensions,
+    readImageMetadata,
     extractRegistrySampleBlock,
+    listRegistrySampleBlocks,
+    extractScalarField,
+    extractCategoryIndexSamples,
     validateRecordChain,
   };
 }

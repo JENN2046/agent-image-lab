@@ -3,6 +3,55 @@
 ## Handoff Summary
 
 ```text
+Status: v14_142_multi_accepted_sample_matrix completed locally and validated.
+Reason: The two-month artifact lifecycle goal now needs multi-sample recoverability visibility without lowering full recoverability standards.
+Current repository: project_root
+Branch: master tracking origin/master; local commits may be ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.142 matrix validator, core extension, phase record, MVP wiring, and .agent_board sync until commit decision.
+Phase record: docs/v14_142_multi_accepted_sample_matrix.md
+Recoverability core: scripts/lib/artifact_recoverability_core.js
+Validator created: scripts/validate_v14_142_multi_accepted_sample_matrix.js
+MVP validator updated: scripts/validate_mvp.ps1
+multi_sample_matrix_created: true
+registry_sample_count: 6
+matrix_row_count: 6
+category_count: 3
+local_artifact_sample_count: 4
+complete_recoverable_sample_count: 1
+legacy_partial_artifact_sample_count: 3
+full_recoverability_count_is_currently_one: true
+negative_case_artifact_missing_fails: true
+negative_case_hash_mismatch_fails: true
+negative_case_dimensions_mismatch_fails: true
+negative_case_mime_mismatch_fails: true
+negative_case_review_record_missing_fails: true
+negative_case_human_approval_missing_fails: true
+negative_case_category_index_missing_fails: true
+negative_case_registry_category_mismatch_fails: true
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+accepted_samples_write_performed: false
+image_binary_copy_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+Validation run: node --check scripts/lib/artifact_recoverability_core.js; node --check scripts/validate_v14_142_multi_accepted_sample_matrix.js; node scripts/validate_v14_142_multi_accepted_sample_matrix.js.
+Next safe action: run broader validation, exact-stage v14.142 files, create a guarded local commit, then continue to v14.143 if still inside A4.8.
+```
+
+## Previous Handoff Summary
+
+```text
 Status: v14_141_recoverability_core_extraction completed locally and validated.
 Reason: The new two-month artifact lifecycle goal starts by extracting v14.131 recoverability logic into a reusable local core.
 Current repository: project_root

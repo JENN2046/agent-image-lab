@@ -4,6 +4,57 @@
 
 ```text
 objective: extend v14.131-v14.140 single-sample recoverability into multi-category local artifact lifecycle product capability
+status: v14_142_multi_accepted_sample_matrix_completed_validated
+mode: Persistent 4-Agent Council local loop under A4.8 / A4 — Sustained Local Autopilot
+phase_id: v14_142_multi_accepted_sample_matrix
+phase_record_ref: docs/v14_142_multi_accepted_sample_matrix.md
+recoverability_core_ref: scripts/lib/artifact_recoverability_core.js
+validator_created: scripts/validate_v14_142_multi_accepted_sample_matrix.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+multi_sample_matrix_created: true
+registry_sample_count: 6
+matrix_row_count: 6
+category_count: 3
+local_artifact_sample_count: 4
+complete_recoverable_sample_count: 1
+legacy_partial_artifact_sample_count: 3
+full_recoverability_count_is_currently_one: true
+negative_case_artifact_missing_fails: true
+negative_case_hash_mismatch_fails: true
+negative_case_dimensions_mismatch_fails: true
+negative_case_mime_mismatch_fails: true
+negative_case_review_record_missing_fails: true
+negative_case_human_approval_missing_fails: true
+negative_case_category_index_missing_fails: true
+negative_case_registry_category_mismatch_fails: true
+accepted_samples_write_performed: false
+image_binary_copy_performed: false
+runs_source_image_modified: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+validated_now: node --check scripts/lib/artifact_recoverability_core.js; node --check scripts/validate_v14_142_multi_accepted_sample_matrix.js; node scripts/validate_v14_142_multi_accepted_sample_matrix.js
+recommended_next: v14_143_import_review_registry_schema_hardening
+recommended_next_auto_execution_allowed: true_after_v14_142_local_commit
+```
+
+## Active Two-Month Artifact Lifecycle Goal
+
+```text
+objective: extend v14.131-v14.140 single-sample recoverability into multi-category local artifact lifecycle product capability
 status: v14_141_recoverability_core_extraction_completed_validated
 mode: Persistent 4-Agent Council local loop under A4.8 / A4 — Sustained Local Autopilot
 phase_id: v14_141_recoverability_core_extraction

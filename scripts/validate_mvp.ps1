@@ -206,6 +206,7 @@ $requiredFiles = @(
   'scripts/validate_v14_140_two_week_regression_closeout.js',
   'scripts/lib/artifact_recoverability_core.js',
   'scripts/validate_v14_141_recoverability_core_extraction.js',
+  'scripts/validate_v14_142_multi_accepted_sample_matrix.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -343,6 +344,7 @@ $requiredFiles = @(
   'docs/v14_139_durable_archive_production_candidate_memory_write_authorization_split_planning.md',
   'docs/v14_140_two_week_regression_closeout.md',
   'docs/v14_141_recoverability_core_extraction.md',
+  'docs/v14_142_multi_accepted_sample_matrix.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8892,6 +8894,46 @@ process.exit(child.status || 0);
     }
     if ($recoverabilityCoreExtraction.image_generation_performed -ne $false -or $recoverabilityCoreExtraction.production_candidate_created -ne $false -or $recoverabilityCoreExtraction.daily_note_write_performed -ne $false -or $recoverabilityCoreExtraction.vcp_memory_write_performed -ne $false) {
       Add-Failure "recoverability core extraction must not generate images, create production candidates, or write memory"
+    }
+  }
+
+  $multiAcceptedSampleMatrixOutput = & node (Join-Path $Root 'scripts/validate_v14_142_multi_accepted_sample_matrix.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "multi accepted sample matrix validation exited with failure"
+  } else {
+    $multiAcceptedSampleMatrix = ($multiAcceptedSampleMatrixOutput -join "`n") | ConvertFrom-Json
+    if ($multiAcceptedSampleMatrix.passed -ne $true) {
+      Add-Failure "multi accepted sample matrix validation must pass"
+    }
+    if ($multiAcceptedSampleMatrix.multi_sample_matrix_created -ne $true -or $multiAcceptedSampleMatrix.matrix_row_count -lt 3 -or $multiAcceptedSampleMatrix.category_count -lt 3) {
+      Add-Failure "v14.142 must create a multi-sample, multi-category matrix"
+    }
+    if ($multiAcceptedSampleMatrix.complete_recoverable_sample_count -ne 1 -or $multiAcceptedSampleMatrix.full_recoverability_count_is_currently_one -ne $true) {
+      Add-Failure "v14.142 must preserve the current one fully recoverable sample truth"
+    }
+    if ($multiAcceptedSampleMatrix.legacy_partial_artifact_sample_count -lt 3 -or $multiAcceptedSampleMatrix.local_artifact_sample_count -lt 4) {
+      Add-Failure "v14.142 must detect legacy local artifact rows without promoting them"
+    }
+    if ($multiAcceptedSampleMatrix.negative_case_artifact_missing_fails -ne $true -or $multiAcceptedSampleMatrix.negative_case_hash_mismatch_fails -ne $true -or $multiAcceptedSampleMatrix.negative_case_dimensions_mismatch_fails -ne $true -or $multiAcceptedSampleMatrix.negative_case_mime_mismatch_fails -ne $true) {
+      Add-Failure "v14.142 must fail artifact missing/hash/dimensions/mime negative cases"
+    }
+    if ($multiAcceptedSampleMatrix.negative_case_review_record_missing_fails -ne $true -or $multiAcceptedSampleMatrix.negative_case_human_approval_missing_fails -ne $true -or $multiAcceptedSampleMatrix.negative_case_category_index_missing_fails -ne $true -or $multiAcceptedSampleMatrix.negative_case_registry_category_mismatch_fails -ne $true) {
+      Add-Failure "v14.142 must fail review/approval/category negative cases"
+    }
+    if ($multiAcceptedSampleMatrix.vcp_runtime_integration_proven -ne $false -or $multiAcceptedSampleMatrix.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "multi accepted sample matrix must not claim VCP runtime integration"
+    }
+    if ($multiAcceptedSampleMatrix.provider_contact_performed -ne $false -or $multiAcceptedSampleMatrix.plugin_call_performed -ne $false -or $multiAcceptedSampleMatrix.api_call_performed -ne $false -or $multiAcceptedSampleMatrix.mcp_runtime_performed -ne $false) {
+      Add-Failure "multi accepted sample matrix must not call provider/plugin/API/MCP"
+    }
+    if ($multiAcceptedSampleMatrix.image_generation_performed -ne $false -or $multiAcceptedSampleMatrix.image_binary_copy_performed -ne $false -or $multiAcceptedSampleMatrix.accepted_samples_write_performed -ne $false) {
+      Add-Failure "multi accepted sample matrix must not generate images, copy binaries, or write accepted_samples"
+    }
+    if ($multiAcceptedSampleMatrix.production_candidate_created -ne $false -or $multiAcceptedSampleMatrix.failure_samples_write_performed -ne $false -or $multiAcceptedSampleMatrix.daily_note_write_performed -ne $false -or $multiAcceptedSampleMatrix.vcp_memory_write_performed -ne $false) {
+      Add-Failure "multi accepted sample matrix must not write production candidates, failure samples, or memory"
+    }
+    if ($multiAcceptedSampleMatrix.real_manifest_read_performed -ne $false -or $multiAcceptedSampleMatrix.real_vcpchat_read_performed -ne $false -or $multiAcceptedSampleMatrix.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "multi accepted sample matrix must not read real manifest/VCPChat/VCPToolBox"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding
