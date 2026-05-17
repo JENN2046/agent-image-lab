@@ -1,5 +1,60 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.130-LEGACY-DOCS-CONTEXT-QUARANTINE-REFRESH
+
+Scope:
+
+Validate that old and stale documentation is compressed behind a context
+quarantine map, current goal status routes through v14.129, and no historical
+docs are deleted, moved, or rewritten.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_130_legacy_docs_context_quarantine_refresh.js
+node scripts/validate_v14_130_legacy_docs_context_quarantine_refresh.js
+```
+
+Expected:
+
+```yaml
+passed: true
+legacy_docs_context_quarantine_created: true
+context_load_guide_hot_packet_refreshed: true
+historical_compaction_index_quarantine_refreshed: true
+current_goal_audit_is_hot_context: true
+v14_129_preferred_over_old_v14_chain: true
+bulk_historical_load_allowed: false
+targeted_lookup_required_for_legacy_docs: true
+goal_complete_now: false
+update_goal_called: false
+historical_docs_deleted: false
+historical_docs_moved: false
+historical_docs_rewritten: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+```
+
+Result:
+
+```yaml
+status: passed
+validator: scripts/validate_v14_130_legacy_docs_context_quarantine_refresh.js
+phase_record: docs/v14_130_legacy_docs_context_quarantine_refresh.md
+```
+
 ## VALIDATION-20260517-v14.129-CURRENT-GOAL-COMPLETION-AUDIT-GAP-MAP
 
 Scope:

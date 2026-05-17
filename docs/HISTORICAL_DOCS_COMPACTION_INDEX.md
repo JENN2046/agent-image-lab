@@ -12,13 +12,26 @@ Default future sessions should read:
 
 ```text
 docs/CONTEXT_LOAD_GUIDE.md
+docs/LEGACY_DOCS_CONTEXT_QUARANTINE.md
 .agent_board/RUN_STATE.md
 .agent_board/TASK_QUEUE.md
 .agent_board/CHECKPOINT.md
 .agent_board/HANDOFF.md
 ```
 
-Then use the current v14 control records for the active three-month goal.
+Then use `docs/v14_129_current_goal_completion_audit_gap_map.md` as the current
+active-goal audit before opening older v14 records.
+
+## Context Quarantine
+
+`docs/LEGACY_DOCS_CONTEXT_QUARANTINE.md` is the small routing summary for old
+chains. Prefer it over bulk-reading the historical files listed below.
+
+```yaml
+legacy_docs_context_quarantine_active: true
+bulk_historical_load_allowed: false
+current_goal_audit_ref: docs/v14_129_current_goal_completion_audit_gap_map.md
+```
 
 ## Archive Bands
 
@@ -105,6 +118,9 @@ Status: current active control-layer series.
 Default handling: prefer the latest v14 records and `.agent_board` state over
 older v14 setup records. Do not treat any v14 A5 package as active unless the
 current user message gives exact matching authorization.
+
+For the current three-month objective, use v14.129 as the current audit summary
+and retrieve v14.108 through v14.128 only by exact token when proof is needed.
 
 ## Large File Warning
 

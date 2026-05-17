@@ -193,6 +193,7 @@ $requiredFiles = @(
   'scripts/validate_v14_127_production_exclusion_draft_current_goal_gap_review.js',
   'scripts/validate_v14_128_failure_samples_authorization_template_current_goal_gap_review.js',
   'scripts/validate_v14_129_current_goal_completion_audit_gap_map.js',
+  'scripts/validate_v14_130_legacy_docs_context_quarantine_refresh.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -309,12 +310,14 @@ $requiredFiles = @(
   'docs/v14_123_memory_delta_draft_schema_alignment_for_codex_reviews.md',
   'docs/CONTEXT_LOAD_GUIDE.md',
   'docs/HISTORICAL_DOCS_COMPACTION_INDEX.md',
+  'docs/LEGACY_DOCS_CONTEXT_QUARANTINE.md',
   'docs/v14_124_context_load_guide_and_historical_docs_compaction.md',
   'docs/v14_125_review_console_memory_delta_handoff_refresh.md',
   'docs/v14_126_accepted_failure_metadata_cross_index_gap_review.md',
   'docs/v14_127_production_exclusion_draft_current_goal_gap_review.md',
   'docs/v14_128_failure_samples_authorization_template_current_goal_gap_review.md',
   'docs/v14_129_current_goal_completion_audit_gap_map.md',
+  'docs/v14_130_legacy_docs_context_quarantine_refresh.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8447,6 +8450,46 @@ process.exit(child.status || 0);
     }
     if ($currentGoalCompletionAudit.real_manifest_read_performed -ne $false -or $currentGoalCompletionAudit.real_vcpchat_read_performed -ne $false -or $currentGoalCompletionAudit.real_vcptoolbox_read_performed -ne $false) {
       Add-Failure "current goal completion audit must not read real manifest/VCPChat/VCPToolBox"
+    }
+  }
+
+  $legacyDocsContextQuarantineOutput = & node (Join-Path $Root 'scripts/validate_v14_130_legacy_docs_context_quarantine_refresh.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "legacy docs context quarantine refresh validation exited with failure"
+  } else {
+    $legacyDocsContextQuarantine = ($legacyDocsContextQuarantineOutput -join "`n") | ConvertFrom-Json
+    if ($legacyDocsContextQuarantine.passed -ne $true) {
+      Add-Failure "legacy docs context quarantine refresh validation must pass"
+    }
+    if ($legacyDocsContextQuarantine.legacy_docs_context_quarantine_created -ne $true -or $legacyDocsContextQuarantine.context_load_guide_hot_packet_refreshed -ne $true) {
+      Add-Failure "legacy docs context quarantine must create quarantine map and refresh the hot context packet"
+    }
+    if ($legacyDocsContextQuarantine.historical_compaction_index_quarantine_refreshed -ne $true -or $legacyDocsContextQuarantine.current_goal_audit_is_hot_context -ne $true) {
+      Add-Failure "legacy docs context quarantine must refresh historical index and route to current goal audit"
+    }
+    if ($legacyDocsContextQuarantine.bulk_historical_load_allowed -ne $false -or $legacyDocsContextQuarantine.targeted_lookup_required_for_legacy_docs -ne $true) {
+      Add-Failure "legacy docs context quarantine must block bulk historical load and require targeted lookup"
+    }
+    if ($legacyDocsContextQuarantine.goal_complete_now -ne $false -or $legacyDocsContextQuarantine.update_goal_called -ne $false) {
+      Add-Failure "legacy docs context quarantine must not mark the active goal complete"
+    }
+    if ($legacyDocsContextQuarantine.historical_docs_deleted -ne $false -or $legacyDocsContextQuarantine.historical_docs_moved -ne $false -or $legacyDocsContextQuarantine.historical_docs_rewritten -ne $false) {
+      Add-Failure "legacy docs context quarantine must not delete, move, or rewrite historical docs"
+    }
+    if ($legacyDocsContextQuarantine.provider_contact_performed -ne $false -or $legacyDocsContextQuarantine.plugin_call_performed -ne $false -or $legacyDocsContextQuarantine.api_call_performed -ne $false -or $legacyDocsContextQuarantine.mcp_runtime_performed -ne $false) {
+      Add-Failure "legacy docs context quarantine must not call provider/plugin/API/MCP"
+    }
+    if ($legacyDocsContextQuarantine.image_generation_performed -ne $false -or $legacyDocsContextQuarantine.output_file_write_performed -ne $false -or $legacyDocsContextQuarantine.file_write_performed -ne $false) {
+      Add-Failure "legacy docs context quarantine must not generate images or write output files"
+    }
+    if ($legacyDocsContextQuarantine.daily_note_write_performed -ne $false -or $legacyDocsContextQuarantine.vcp_memory_write_performed -ne $false) {
+      Add-Failure "legacy docs context quarantine must not write DailyNote or VCP memory"
+    }
+    if ($legacyDocsContextQuarantine.accepted_samples_write_performed -ne $false -or $legacyDocsContextQuarantine.failure_samples_write_performed -ne $false -or $legacyDocsContextQuarantine.production_candidate_created -ne $false) {
+      Add-Failure "legacy docs context quarantine must not write samples or production candidates"
+    }
+    if ($legacyDocsContextQuarantine.real_manifest_read_performed -ne $false -or $legacyDocsContextQuarantine.real_vcpchat_read_performed -ne $false -or $legacyDocsContextQuarantine.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "legacy docs context quarantine must not read real manifest/VCPChat/VCPToolBox"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

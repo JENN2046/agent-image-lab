@@ -4,10 +4,10 @@
 
 ```text
 objective: 3-month Agent Image Lab visual production control layer for the VCP ecosystem
-status: v14_129_current_goal_completion_audit_gap_map_completed_validated
+status: v14_130_legacy_docs_context_quarantine_refresh_completed_validated
 mode: Persistent 4-Agent Council local loop under A4.8
-phase_id: v14_129_current_goal_completion_audit_gap_map
-phase_record_ref: docs/v14_129_current_goal_completion_audit_gap_map.md
+phase_id: v14_130_legacy_docs_context_quarantine_refresh
+phase_record_ref: docs/v14_130_legacy_docs_context_quarantine_refresh.md
 default_generation_route_for_next_three_months: codex_session_image
 native_doubao_default_route: false
 provider_api_default_route: false
@@ -32,7 +32,17 @@ env_or_env_local_value_read_allowed_without_separate_authorization: false
 provider_api_plugin_mcp_allowed_without_separate_authorization: false
 real_manifest_VCPChat_VCPToolBox_read_allowed_without_separate_authorization: false
 push_tag_release_deploy_allowed_without_separate_authorization: false
-current_focus: current_goal_completion_audit_gap_map
+current_focus: legacy_docs_context_quarantine_refresh
+legacy_docs_context_quarantine_created: true
+context_load_guide_hot_packet_refreshed: true
+historical_compaction_index_quarantine_refreshed: true
+current_goal_audit_is_hot_context: true
+v14_129_preferred_over_old_v14_chain: true
+bulk_historical_load_allowed: false
+targeted_lookup_required_for_legacy_docs: true
+historical_docs_deleted: false
+historical_docs_moved: false
+historical_docs_rewritten: false
 current_goal_completion_audit_gap_map_created: true
 objective_restated: true
 prompt_to_artifact_checklist_created: true
@@ -127,7 +137,7 @@ accepted_samples_write_performed: false
 failure_samples_write_performed: false
 production_candidate_created: false
 output_file_write_performed: false
-validated_now: node --check scripts/validate_v14_129_current_goal_completion_audit_gap_map.js; node scripts/validate_v14_129_current_goal_completion_audit_gap_map.js
+validated_now: node --check scripts/validate_v14_130_legacy_docs_context_quarantine_refresh.js; node scripts/validate_v14_130_legacy_docs_context_quarantine_refresh.js
 recommended_next: review_console_current_goal_gap_dashboard_alignment
 recommended_next_auto_execution_allowed: true
 ```

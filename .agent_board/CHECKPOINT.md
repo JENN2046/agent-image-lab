@@ -1,5 +1,45 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.130 Legacy Docs Context Quarantine Refresh
+
+```text
+phase_id: v14_130_legacy_docs_context_quarantine_refresh
+status: completed_validated
+phase_record_ref: docs/v14_130_legacy_docs_context_quarantine_refresh.md
+validator_created: scripts/validate_v14_130_legacy_docs_context_quarantine_refresh.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+legacy_docs_context_quarantine_created: true
+context_load_guide_hot_packet_refreshed: true
+historical_compaction_index_quarantine_refreshed: true
+current_goal_audit_is_hot_context: true
+v14_129_preferred_over_old_v14_chain: true
+bulk_historical_load_allowed: false
+targeted_lookup_required_for_legacy_docs: true
+goal_complete_now: false
+update_goal_called: false
+historical_docs_deleted: false
+historical_docs_moved: false
+historical_docs_rewritten: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+output_file_write_performed: false
+push_tag_release_deploy_performed: false
+validated_now: node --check scripts/validate_v14_130_legacy_docs_context_quarantine_refresh.js; node scripts/validate_v14_130_legacy_docs_context_quarantine_refresh.js
+recommended_next: review_console_current_goal_gap_dashboard_alignment
+recommended_next_auto_execution_allowed: true
+```
+
 # V14.129 Current Goal Completion Audit Gap Map
 
 ```text

@@ -19,20 +19,23 @@ AGENTS.autopilot-overlay.md
 .agent_board/HANDOFF.md
 .agent_board/VALIDATION_LOG.md
 docs/HISTORICAL_DOCS_COMPACTION_INDEX.md
+docs/LEGACY_DOCS_CONTEXT_QUARANTINE.md
 docs/CONTEXT_LOAD_GUIDE.md
 ```
 
-For the current long-term goal, also prefer the current v14 control records over
-older phase chains:
+## Hot Context Packet
+
+For ordinary continuation work, load the board surfaces and the latest hot
+context packet before opening any historical phase chain:
 
 ```text
-docs/v14_108_three_month_visual_control_layer_goal_activation.md
-docs/v14_119_prompt_to_artifact_completion_audit_current_goal_refresh.md
-docs/v14_120_visual_series_taxonomy_review_scorecard_alignment.md
-docs/v14_121_codex_session_prompt_package_library_governance.md
-docs/v14_122_local_review_record_schema_refresh.md
-docs/v14_123_memory_delta_draft_schema_alignment_for_codex_reviews.md
+docs/v14_129_current_goal_completion_audit_gap_map.md
+docs/v14_124_context_load_guide_and_historical_docs_compaction.md
+docs/v14_108_three_month_visual_control_layer_goal_alignment_gate.md
 ```
+
+Then use exact search for supporting records such as v14.119 through v14.128
+only when the current audit, board state, or validator asks for proof.
 
 ## Do Not Load By Default
 
@@ -54,6 +57,10 @@ They are historical evidence, not the default authority for the current task.
 Use `rg` to retrieve exact records only when a current validator, board surface,
 or user question requires historical proof.
 
+Also avoid bulk-loading all `docs/v14_*.md`. Only the hot context packet is
+default context. Other v14 records are current-series evidence, but they are
+still targeted lookup unless the active task names them.
+
 ## Authority Rule
 
 Current active instruction, repository reality, `AGENTS.md`, and `.agent_board`
@@ -73,6 +80,20 @@ rg -n "<phase_id|artifact_id|sample_id|validator_name>" docs .agent_board script
 
 Open only the smallest matching file set needed for the question. Avoid loading
 large route chains when one current phase record or validator proves the point.
+
+## Legacy Quarantine Rule
+
+Old route chains are quarantined from default context. Quarantine means:
+
+```text
+keep files in place for auditability
+summarize the chain in docs/LEGACY_DOCS_CONTEXT_QUARANTINE.md
+read exact old records only after a token search
+prefer current board state and v14.129 audit for active-goal status
+```
+
+This prevents stale A5 packages, old provider trials, old runtime bridge work,
+or obsolete route decisions from polluting current Codex-session visual work.
 
 ## Compression Policy
 

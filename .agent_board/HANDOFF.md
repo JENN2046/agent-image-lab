@@ -3,6 +3,46 @@
 ## Handoff Summary
 
 ```text
+Status: v14_130_legacy_docs_context_quarantine_refresh completed locally and validated.
+Reason: Old and stale documentation needed a stronger quarantine layer so future sessions start from the board surfaces and v14.129 audit instead of bulk-loading historical phase chains.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.130 legacy docs context quarantine refresh, validator, MVP wiring, phase record, and .agent_board sync until validation and commit decision.
+Phase record: docs/v14_130_legacy_docs_context_quarantine_refresh.md
+Context quarantine map: docs/LEGACY_DOCS_CONTEXT_QUARANTINE.md
+Validator created: scripts/validate_v14_130_legacy_docs_context_quarantine_refresh.js
+MVP validator updated: scripts/validate_mvp.ps1
+legacy_docs_context_quarantine_created: true
+context_load_guide_hot_packet_refreshed: true
+historical_compaction_index_quarantine_refreshed: true
+current_goal_audit_is_hot_context: true
+v14_129_preferred_over_old_v14_chain: true
+bulk_historical_load_allowed: false
+targeted_lookup_required_for_legacy_docs: true
+goal_complete_now: false
+update_goal_called: false
+historical_docs_deleted: false
+historical_docs_moved: false
+historical_docs_rewritten: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+output_file_write_performed: false
+push_tag_release_deploy_performed: false
+validated_now: node --check scripts/validate_v14_130_legacy_docs_context_quarantine_refresh.js; node scripts/validate_v14_130_legacy_docs_context_quarantine_refresh.js
+recommended_next: review_console_current_goal_gap_dashboard_alignment
+recommended_next_auto_execution_allowed: true
+---
 Status: v14_129_current_goal_completion_audit_gap_map completed locally and validated.
 Reason: The active three-month objective needed a current prompt-to-artifact audit that separates verified local artifacts from authorization-blocked or future integration work before any completion claim.
 Current repository: project_root
