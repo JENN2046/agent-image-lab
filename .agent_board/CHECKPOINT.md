@@ -1,5 +1,52 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.081 PVOS Evidence Collector Blocker Exact A5 Authorization Package Gate
+
+```text
+phase_id: v14_081_pvos_evidence_collector_blocker_exact_A5_authorization_package_gate
+status: completed_local_exact_package_validated
+source_phase: v14_080_pvos_evidence_collector_blocker_A5_authorization_package_draft_gate
+source_commit: 5d6e2ba
+authorization_package_id: AUTH-PENDING-PVOS-EVIDENCE-BLOCKER-20260517-001
+phase_record_created: docs/v14_081_pvos_evidence_collector_blocker_exact_A5_authorization_package_gate.md
+validator_created: scripts/validate_v14_081_pvos_exact_a5_authorization_package.js
+mvp_validator_modified: scripts/validate_mvp.ps1
+authorization_status: pending_human_preflight_approval
+approval_status: requested_for_preflight_only
+active_A5_authorization_created: false
+active: false
+execute_now: false
+selected_plugin_id: NativeDoubaoImage
+selected_plugin_command: generate
+selected_plugin_model: doubao-seedream-5-0-260128
+prompt_package_ref: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml
+plugin_profile_ref: plugins/image_generation/native_doubao_image/plugin.profile.yaml
+runner_ref: scripts/run_native_doubao_image_generation.js
+output_directory_ref: runs/real_generation/v14_081_pvos_premium_portable_led_camping_lantern_first_trial/
+max_plugin_calls: 1
+max_images_created: 1
+retry_limit: 0
+A5_execution_allowed_now: false
+preflight_allowed_now: false
+provider_contact_allowed_now: false
+plugin_call_allowed_now: false
+api_call_allowed_now: false
+image_generation_allowed_now: false
+env_value_read_allowed_now: false
+output_directory_creation_allowed_now: false
+DailyNote_write_allowed_now: false
+VCP_memory_write_allowed_now: false
+accepted_samples_write_allowed_now: false
+production_candidate_write_allowed_now: false
+real_manifest_read_allowed_now: false
+real_VCPChat_read_allowed_now: false
+real_VCPToolBox_read_allowed_now: false
+validation_result: completed_validated
+validated_now: node --check scripts/validate_v14_081_pvos_exact_a5_authorization_package.js; node scripts/validate_v14_081_pvos_exact_a5_authorization_package.js; node scripts/validate_native_doubao_sandbox.js; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: human_preflight_approval_or_reject_package
+recommended_next_auto_execution_allowed: false
+```
+
 # V14.080 PVOS Evidence Collector Blocker A5 Authorization Draft Gate
 
 ```text

@@ -172,6 +172,7 @@ $requiredFiles = @(
   'scripts/validate_pvos_kernel_minimal.js',
   'scripts/validate_pvos_kernel_dry_run_adapter.js',
   'scripts/validate_pvos_evidence_collector_blocker_pipeline.js',
+  'scripts/validate_v14_081_pvos_exact_a5_authorization_package.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
   'scripts/validate_evidence_blocker_contract.js',
@@ -268,6 +269,8 @@ $requiredFiles = @(
   'docs/v14_077_review_report_memory_admission_register_gate.md',
   'docs/v14_078_review_report_memory_delta_draft_register_gate.md',
   'docs/v14_079_review_report_final_local_closeout_gate.md',
+  'docs/v14_080_pvos_evidence_collector_blocker_A5_authorization_package_draft_gate.md',
+  'docs/v14_081_pvos_evidence_collector_blocker_exact_A5_authorization_package_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -4185,6 +4188,11 @@ if (-not $node) {
     Add-Failure "scripts/validate_pvos_evidence_collector_blocker_pipeline.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'scripts/validate_v14_081_pvos_exact_a5_authorization_package.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_v14_081_pvos_exact_a5_authorization_package.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'kernel/review_result_protocol.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "kernel/review_result_protocol.js failed node --check"
@@ -4717,6 +4725,73 @@ if (-not $node) {
     }
     if ($pvosEvidencePipeline.pvos_evidence_collector_blocker_pipeline.output_file_write_performed -ne $false) {
       Add-Failure "PVOS evidence pipeline validation must not write output files"
+    }
+  }
+
+  $v14081ExactA5Output = & node (Join-Path $Root 'scripts/validate_v14_081_pvos_exact_a5_authorization_package.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v14.081 exact A5 authorization package validation exited with failure"
+  } else {
+    $v14081ExactA5 = ($v14081ExactA5Output -join "`n") | ConvertFrom-Json
+    if ($v14081ExactA5.passed -ne $true) {
+      Add-Failure "v14.081 exact A5 authorization package validation must report passed true"
+    }
+    if ($v14081ExactA5.v14_081_pvos_exact_a5_authorization_package.authorization_package_id -ne 'AUTH-PENDING-PVOS-EVIDENCE-BLOCKER-20260517-001') {
+      Add-Failure "v14.081 exact A5 authorization package must keep package id stable"
+    }
+    if ($v14081ExactA5.v14_081_pvos_exact_a5_authorization_package.authorization_status -ne 'pending_human_preflight_approval') {
+      Add-Failure "v14.081 exact A5 authorization package must remain pending human preflight approval"
+    }
+    if ($v14081ExactA5.v14_081_pvos_exact_a5_authorization_package.active -ne $false) {
+      Add-Failure "v14.081 exact A5 authorization package must not be active"
+    }
+    if ($v14081ExactA5.v14_081_pvos_exact_a5_authorization_package.execute_now -ne $false) {
+      Add-Failure "v14.081 exact A5 authorization package must not execute now"
+    }
+    if ($v14081ExactA5.v14_081_pvos_exact_a5_authorization_package.selected_plugin_id -ne 'NativeDoubaoImage') {
+      Add-Failure "v14.081 exact A5 authorization package must select NativeDoubaoImage"
+    }
+    if ($v14081ExactA5.v14_081_pvos_exact_a5_authorization_package.selected_plugin_model -ne 'doubao-seedream-5-0-260128') {
+      Add-Failure "v14.081 exact A5 authorization package must lock doubao-seedream-5-0-260128"
+    }
+    if ($v14081ExactA5.v14_081_pvos_exact_a5_authorization_package.max_plugin_calls -ne 1) {
+      Add-Failure "v14.081 exact A5 authorization package must limit max_plugin_calls to 1"
+    }
+    if ($v14081ExactA5.v14_081_pvos_exact_a5_authorization_package.max_images_created -ne 1) {
+      Add-Failure "v14.081 exact A5 authorization package must limit max_images_created to 1"
+    }
+    if ($v14081ExactA5.v14_081_pvos_exact_a5_authorization_package.retry_limit -ne 0) {
+      Add-Failure "v14.081 exact A5 authorization package must keep retry_limit 0"
+    }
+    if ($v14081ExactA5.v14_081_pvos_exact_a5_authorization_package.output_directory_absent_or_empty -ne $true) {
+      Add-Failure "v14.081 exact A5 authorization package output directory must be absent or empty"
+    }
+    if ($v14081ExactA5.v14_081_pvos_exact_a5_authorization_package.external_network_required -ne $false) {
+      Add-Failure "v14.081 exact A5 package validation must not require external network"
+    }
+    if ($v14081ExactA5.v14_081_pvos_exact_a5_authorization_package.provider_contact_performed -ne $false) {
+      Add-Failure "v14.081 exact A5 package validation must not perform provider contact"
+    }
+    if ($v14081ExactA5.v14_081_pvos_exact_a5_authorization_package.plugin_call_performed -ne $false) {
+      Add-Failure "v14.081 exact A5 package validation must not call plugins"
+    }
+    if ($v14081ExactA5.v14_081_pvos_exact_a5_authorization_package.api_call_performed -ne $false) {
+      Add-Failure "v14.081 exact A5 package validation must not call APIs"
+    }
+    if ($v14081ExactA5.v14_081_pvos_exact_a5_authorization_package.image_generation_performed -ne $false) {
+      Add-Failure "v14.081 exact A5 package validation must not generate images"
+    }
+    if ($v14081ExactA5.v14_081_pvos_exact_a5_authorization_package.env_value_read_performed -ne $false) {
+      Add-Failure "v14.081 exact A5 package validation must not read env secret values"
+    }
+    if ($v14081ExactA5.v14_081_pvos_exact_a5_authorization_package.daily_note_write_performed -ne $false) {
+      Add-Failure "v14.081 exact A5 package validation must not write DailyNote"
+    }
+    if ($v14081ExactA5.v14_081_pvos_exact_a5_authorization_package.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.081 exact A5 package validation must not write VCP memory"
+    }
+    if ($v14081ExactA5.v14_081_pvos_exact_a5_authorization_package.file_write_performed -ne $false) {
+      Add-Failure "v14.081 exact A5 package validation must not write files"
     }
   }
 

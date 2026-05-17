@@ -1,5 +1,60 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.081-PVOS-EXACT-A5-AUTHORIZATION-PACKAGE
+
+Task:
+
+```text
+Fill an exact pending preflight-only A5 authorization package for the PVOS evidence collector blocker pipeline using NativeDoubaoImage, the camping lantern prompt package, one exact output directory, one call budget, zero retry, and explicit stop conditions, without activating A5 or running preflight/execution.
+```
+
+Commands run:
+
+```text
+node --check scripts/validate_v14_081_pvos_exact_a5_authorization_package.js
+node scripts/validate_v14_081_pvos_exact_a5_authorization_package.js
+node scripts/validate_native_doubao_sandbox.js
+node scripts/validate_agent_board_state.js
+git diff --check
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+Result:
+
+```text
+phase_record: docs/v14_081_pvos_evidence_collector_blocker_exact_A5_authorization_package_gate.md
+validator: scripts/validate_v14_081_pvos_exact_a5_authorization_package.js
+authorization_package_id: AUTH-PENDING-PVOS-EVIDENCE-BLOCKER-20260517-001
+authorization_status: pending_human_preflight_approval
+approval_status: requested_for_preflight_only
+selected_plugin_id: NativeDoubaoImage
+selected_plugin_command: generate
+selected_plugin_model: doubao-seedream-5-0-260128
+prompt_package_ref: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml
+plugin_profile_ref: plugins/image_generation/native_doubao_image/plugin.profile.yaml
+runner_ref: scripts/run_native_doubao_image_generation.js
+output_directory_ref: runs/real_generation/v14_081_pvos_premium_portable_led_camping_lantern_first_trial/
+max_plugin_calls: 1
+max_images_created: 1
+retry_limit: 0
+active_A5_authorization_created: false
+execute_now: false
+validation_result: completed_validated
+exact_package_validator: passed
+native_doubao_sandbox: passed
+agent_board_state: passed
+git_diff_check: passed
+validate_mvp: passed
+validate_agent_image_lab_local: passed_with_existing_manual_review_warnings
+```
+
+Boundary:
+
+```text
+No A5 execution, preflight execution, provider contact, plugin call, API call, image generation, .env.local secret value read, output directory creation, output-file write, accepted_samples write, production candidate creation, DailyNote write, VCP memory write, real manifest read, real VCPChat read, real VCPToolBox read, push, tag, release, deploy, or dependency change was performed or authorized by v14.081.
+```
+
 ## VALIDATION-20260517-v14.080-PVOS-EVIDENCE-BLOCKER-A5-AUTH-DRAFT
 
 Task:
