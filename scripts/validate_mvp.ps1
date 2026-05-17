@@ -208,6 +208,7 @@ $requiredFiles = @(
   'scripts/validate_v14_141_recoverability_core_extraction.js',
   'scripts/validate_v14_142_multi_accepted_sample_matrix.js',
   'scripts/validate_v14_143_import_review_registry_schema_hardening.js',
+  'scripts/validate_v14_144_review_console_schema_binding.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -348,6 +349,7 @@ $requiredFiles = @(
   'docs/v14_141_recoverability_core_extraction.md',
   'docs/v14_142_multi_accepted_sample_matrix.md',
   'docs/v14_143_import_review_registry_schema_hardening.md',
+  'docs/v14_144_review_console_schema_binding.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -535,6 +537,7 @@ $requiredFiles = @(
   'review_console/static_prototype/mock_data.js',
   'review_console/static_prototype/styles.css',
   'review_console/static_prototype/FIELD_MAPPING.md',
+  'review_console/static_prototype/SCHEMA_BINDING.md',
   'review_console/runtime_prototype/index.html',
   'review_console/runtime_prototype/runtime_guard.js',
   'review_console/runtime_prototype/app.js',
@@ -8974,6 +8977,40 @@ process.exit(child.status || 0);
     }
     if ($schemaHardening.real_manifest_read_performed -ne $false -or $schemaHardening.real_vcpchat_read_performed -ne $false -or $schemaHardening.real_vcptoolbox_read_performed -ne $false) {
       Add-Failure "schema hardening must not read real manifest/VCPChat/VCPToolBox"
+    }
+  }
+
+  $reviewConsoleSchemaBindingOutput = & node (Join-Path $Root 'scripts/validate_v14_144_review_console_schema_binding.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console schema binding validation exited with failure"
+  } else {
+    $reviewConsoleSchemaBinding = ($reviewConsoleSchemaBindingOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleSchemaBinding.passed -ne $true) {
+      Add-Failure "Review Console schema binding validation must pass"
+    }
+    if ($reviewConsoleSchemaBinding.review_console_static_schema_binding_created -ne $true -or $reviewConsoleSchemaBinding.import_record_reader_bound_to_import_schema -ne $true -or $reviewConsoleSchemaBinding.artifact_evidence_bound_to_accepted_registry_schema -ne $true -or $reviewConsoleSchemaBinding.review_record_bound_to_local_review_schema -ne $true) {
+      Add-Failure "v14.144 must bind static Review Console fields to import/review/accepted schemas"
+    }
+    if ($reviewConsoleSchemaBinding.v14_134_static_import_reader_still_passes -ne $true -or $reviewConsoleSchemaBinding.v14_135_import_reader_safety_still_passes -ne $true -or $reviewConsoleSchemaBinding.v14_143_schema_hardening_still_passes -ne $true) {
+      Add-Failure "v14.144 must preserve v14.134, v14.135, and v14.143 validation"
+    }
+    if ($reviewConsoleSchemaBinding.vcp_runtime_integration_proven -ne $false -or $reviewConsoleSchemaBinding.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "Review Console schema binding must not claim VCP runtime integration"
+    }
+    if ($reviewConsoleSchemaBinding.fetch_performed -ne $false -or $reviewConsoleSchemaBinding.file_write_performed -ne $false -or $reviewConsoleSchemaBinding.runtime_vcp_integration_performed -ne $false) {
+      Add-Failure "Review Console schema binding must remain static, in-memory, and no-runtime"
+    }
+    if ($reviewConsoleSchemaBinding.provider_contact_performed -ne $false -or $reviewConsoleSchemaBinding.plugin_call_performed -ne $false -or $reviewConsoleSchemaBinding.api_call_performed -ne $false -or $reviewConsoleSchemaBinding.mcp_runtime_performed -ne $false) {
+      Add-Failure "Review Console schema binding must not call provider/plugin/API/MCP"
+    }
+    if ($reviewConsoleSchemaBinding.image_generation_performed -ne $false -or $reviewConsoleSchemaBinding.image_binary_copy_performed -ne $false -or $reviewConsoleSchemaBinding.accepted_samples_write_performed -ne $false) {
+      Add-Failure "Review Console schema binding must not generate images, copy binaries, or write accepted_samples"
+    }
+    if ($reviewConsoleSchemaBinding.production_candidate_created -ne $false -or $reviewConsoleSchemaBinding.failure_samples_write_performed -ne $false -or $reviewConsoleSchemaBinding.daily_note_write_performed -ne $false -or $reviewConsoleSchemaBinding.vcp_memory_write_performed -ne $false) {
+      Add-Failure "Review Console schema binding must not write production candidates, failure samples, or memory"
+    }
+    if ($reviewConsoleSchemaBinding.real_manifest_read_performed -ne $false -or $reviewConsoleSchemaBinding.real_vcpchat_read_performed -ne $false -or $reviewConsoleSchemaBinding.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "Review Console schema binding must not read real manifest/VCPChat/VCPToolBox"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

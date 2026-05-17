@@ -1,5 +1,53 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.144-REVIEW-CONSOLE-SCHEMA-BINDING
+
+Scope:
+
+Validate the static Review Console schema binding for import record reader,
+artifact evidence, local review record references, and accepted registry
+metadata.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_144_review_console_schema_binding.js
+node scripts/validate_v14_144_review_console_schema_binding.js
+```
+
+Expected:
+
+```yaml
+passed: true
+review_console_static_schema_binding_created: true
+import_record_reader_bound_to_import_schema: true
+artifact_evidence_bound_to_accepted_registry_schema: true
+review_record_bound_to_local_review_schema: true
+v14_134_static_import_reader_still_passes: true
+v14_135_import_reader_safety_still_passes: true
+v14_143_schema_hardening_still_passes: true
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+fetch_performed: false
+file_write_performed: false
+runtime_vcp_integration_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+accepted_samples_write_performed: false
+image_binary_copy_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+```
+
 ## VALIDATION-20260517-v14.143-IMPORT-REVIEW-REGISTRY-SCHEMA-HARDENING
 
 Scope:

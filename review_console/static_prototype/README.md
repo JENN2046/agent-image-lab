@@ -68,6 +68,7 @@ v14.079 还用 `tests/schema_examples/review_report_protocol_final_closeout.exam
 - `mock_data.js`：固定 mock 数据，不包含真实图片、真实插件、API 或客户信息。
 - `app.js`：浏览器内交互和草案文本生成。
 - `FIELD_MAPPING.md`：草案输出到 schema 的字段映射验收说明。
+- `SCHEMA_BINDING.md`：v14.144 静态 schema binding，绑定 import record、local review record 和 accepted sample registry schema。
 
 ## 字段映射验收
 
@@ -97,6 +98,7 @@ v14.079 还用 `tests/schema_examples/review_report_protocol_final_closeout.exam
 `review_evidence_blocker_adapter_negative_static_handoff` 必须作为可见 UI guard 呈现；它只显示 adapter negative fixture 的阻断证据，不代表真实 adapter runtime、provider contact、plugin/API 调用、图片生成、accepted_samples 写入、记忆写入或 production promotion。
 `codex_session_import_record_reader` 必须作为本地静态读取者呈现；它只解析 import record JSON 到内存摘要，不读取 real manifest / VCPChat / VCPToolBox，不 fetch，不写文件，不调用 runtime、provider、plugin、API、DailyNote 或 VCP memory。
 `artifact_recoverability_dashboard_evidence` 必须作为本地静态 dashboard 证据呈现；它只能展示 v14.131 validator、真实 artifact、sha256、dimensions、review record、human approval、registry 和 category index 证据，不能把文档存在、旧 ledger 或 token 数量当成产品进度，也不能声称 VCP runtime integration。
+`review_console_static_schema_binding` 必须绑定 `schemas/codex_session_image_import.schema.yaml`、`schemas/local_review_record.schema.yaml` 和 `schemas/accepted_sample_registry.schema.yaml`；它只做静态展示和草案映射，不 fetch、不写文件、不调用 runtime，不读取 real manifest / VCPChat / VCPToolBox，也不写 accepted_samples、DailyNote、VCP memory 或 production_candidate。
 `review_console_adapter_negative_fixture_draft_output_snapshot.example.json` 必须与静态 mock 的 adapter negative handoff 和 `#draftOutput` 渲染结果一致；它是回归证据，不是执行授权。
 `review_console_blocker_arbiter_draft_output_snapshot.example.json` 必须与静态 mock 的 blocker arbiter handoff、PVOS adapter handoff 和 `#draftOutput` 渲染结果一致；它是回归证据，不是执行授权。
 `review_console_review_report_draft_output_snapshot.example.json` 必须与静态 mock 的 ReviewReport handoff、PVOS adapter handoff 和 `#draftOutput` 渲染结果一致；它是回归证据，不是执行授权。

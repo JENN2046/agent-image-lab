@@ -457,6 +457,22 @@ v14.125 handoff 只刷新静态字段映射，不实现 runtime UI，不读取�
 
 `codex_session_import_record_reader` 是 artifact recoverability 的本地可视化入口，不是 artifact recoverability validator 的替代品，也不是 VCP runtime integration。
 
+## v14.144 Review Console Static Schema Binding
+
+本节用于验收静态 Review Console 将 v14.143 schema hardening 绑定到本地可审查字段。它只读取 `mock_data.js` 中的静态 seed 和项目内 schema 文档，不读取 real manifest / VCPChat / VCPToolBox，不 fetch，不写文件，不调用 runtime、provider、plugin、API、DailyNote 或 VCP memory。
+
+详细绑定契约见 `SCHEMA_BINDING.md`。
+
+| Schema | Review Console 静态字段 | 说明 |
+| --- | --- | --- |
+| `schemas/codex_session_image_import.schema.yaml` | `codex_session_import_record_reader.parsed` | 展示 import id、provider、prompt、artifact path、sha256、dimensions、MIME 和 review record ref |
+| `schemas/local_review_record.schema.yaml` | `artifact_recoverability_dashboard_evidence.review_record_ref` | review record 只提供审查记录和 artifact link，`pending_human_review` 不等于人工批准 |
+| `schemas/accepted_sample_registry.schema.yaml` | `artifact_recoverability_dashboard_evidence.accepted_sample_id` / `verified_sha256` / `verified_dimensions` / `verified_mime` | 只展示已验证 accepted sample metadata，不写 registry |
+| `accepted_samples/categories/fashion_lookbook_portrait.yaml` | `artifact_recoverability_dashboard_evidence.category_index_ref` | category index 只作为可追踪证据引用 |
+| `docs/v14_107_womens_resort_relaxed_knit_accepted_sample_closeout.md` | `artifact_recoverability_dashboard_evidence.human_approval_record_ref` | 人工批准证据来自 closeout，不来自 Review Console 自行推断 |
+
+`review_console_static_schema_binding` 是静态 schema-to-display 合约，不是 artifact recoverability validator 的替代品，也不是 VCP runtime integration。任何 accepted_samples 写入、production_candidate 晋级、DailyNote/VCP memory 写入、provider/API/plugin/MCP 调用都必须停在单独授权边界。
+
 ## Artifact Recoverability Dashboard Evidence
 
 `artifact_recoverability_dashboard_evidence` 只能从 v14.131 real artifact
