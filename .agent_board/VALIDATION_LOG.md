@@ -1,5 +1,57 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.159-END-TO-END-AUDIT-ROLLBACK-PACKAGE
+
+Scope:
+
+Validate the local v14.141-v14.153 artifact lifecycle chain and rollback
+package while explicitly skipping v14.154-v14.158 A5 execution slots.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_159_end_to_end_audit_rollback_package.js
+node scripts/validate_v14_159_end_to_end_audit_rollback_package.js
+```
+
+Expected:
+
+```yaml
+passed: true
+end_to_end_audit_and_rollback_package_created: true
+audited_local_stage_count: 13
+required_validator_chain_passed: true
+a5_execution_slots_skipped_without_authorization: true
+rollback_scope: local_draft_metadata_only
+rollback_external_action_allowed: false
+negative_case_missing_stage_validator_blocks_audit: true
+negative_case_external_action_flag_blocks_rollback: true
+negative_case_image_binary_copy_in_rollback_blocks_package: true
+negative_case_recoverability_claimed_as_vcp_runtime_blocks_package: true
+negative_case_skipped_a5_marked_complete_blocks_package: true
+authorization_granted_by_this_record: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+durable_archive_executed: false
+archive_manifest_written: false
+image_binary_copy_performed: false
+production_candidate_write_performed: false
+failure_samples_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+rollback_external_action_performed: false
+destructive_filesystem_action_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+```
+
 ## VALIDATION-20260517-v14.153-MANIFEST-READ-AUTHORIZATION-GATE-PACKAGE
 
 Scope:

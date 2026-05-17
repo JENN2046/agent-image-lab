@@ -1,0 +1,66 @@
+# end_to_end_audit_rollback_package.schema.yaml
+# Local audit and rollback package for the v14.141-v14.153 artifact lifecycle chain.
+
+end_to_end_audit_rollback_package:
+  version: v1
+  contract_type: end_to_end_audit_rollback_package
+  phase: v14_159_end_to_end_audit_and_rollback_package
+  execution_mode: local_validation_only
+  authorization_granted_by_this_record: false
+  audited_local_stage_count: 13
+  required_validator_chain_passed: true
+  a5_execution_slots_skipped_without_authorization: true
+
+rollback_plan:
+  rollback_scope: local_draft_metadata_only
+  rollback_external_action_allowed: false
+  rollback_external_action_performed: false
+  destructive_filesystem_action_allowed: false
+  destructive_filesystem_action_performed: false
+  image_binary_copy_allowed: false
+  image_binary_copy_performed: false
+  runs_source_image_modification_allowed: false
+  runs_source_image_modified: false
+
+skipped_a5_slots:
+  v14_154_manifest_read_execution:
+    status: skipped_requires_jenn_A5
+    executed: false
+  v14_155_durable_archive_execution:
+    status: skipped_requires_jenn_A5
+    executed: false
+  v14_156_production_candidate_execution:
+    status: skipped_requires_jenn_A5
+    executed: false
+  v14_157_dailynote_vcp_memory_execution:
+    status: skipped_requires_jenn_A5
+    executed: false
+  v14_158_external_runtime_or_memory_followup:
+    status: skipped_requires_jenn_A5
+    executed: false
+
+non_authorization:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  mcp_runtime_performed: false
+  image_generation_performed: false
+  real_manifest_read_performed: false
+  real_vcpchat_read_performed: false
+  real_vcptoolbox_read_performed: false
+  durable_archive_executed: false
+  archive_manifest_written: false
+  production_candidate_write_performed: false
+  failure_samples_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  push_tag_release_deploy_performed: false
+  artifact_recoverability_is_not_vcp_runtime_integration: true
+  vcp_runtime_integration_proven: false
+
+negative_case_requirements:
+  missing_stage_validator_blocks_audit: true
+  external_action_flag_blocks_rollback: true
+  image_binary_copy_in_rollback_blocks_package: true
+  recoverability_claimed_as_vcp_runtime_blocks_package: true
+  skipped_a5_marked_complete_blocks_package: true

@@ -3,6 +3,50 @@
 ## Handoff Summary
 
 ```text
+Status: v14_159_end_to_end_audit_and_rollback_package completed locally and validated.
+Reason: The project needed a local audit/rollback package after v14.153 because v14.154-v14.158 are A5 execution slots requiring Jenn authorization.
+Current repository: project_root
+Branch: master tracking origin/master; local commits may be ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.159 audit/rollback schema, fixture, validator, phase record, MVP wiring, and .agent_board sync until commit decision.
+Phase record: docs/v14_159_end_to_end_audit_and_rollback_package.md
+Schema: schemas/end_to_end_audit_rollback_package.schema.yaml
+Fixture: tests/schema_examples/v14_159_end_to_end_audit_rollback_package.example.yaml
+Validator created: scripts/validate_v14_159_end_to_end_audit_rollback_package.js
+MVP validator updated: scripts/validate_mvp.ps1
+end_to_end_audit_and_rollback_package_created: true
+audited_local_stage_count: 13
+required_validator_chain_passed: true
+a5_execution_slots_skipped_without_authorization: true
+rollback_scope: local_draft_metadata_only
+rollback_external_action_allowed: false
+authorization_granted_by_this_record: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+durable_archive_executed: false
+archive_manifest_written: false
+image_binary_copy_performed: false
+production_candidate_write_performed: false
+failure_samples_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+rollback_external_action_performed: false
+destructive_filesystem_action_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_159_end_to_end_audit_rollback_package.js; node scripts/validate_v14_159_end_to_end_audit_rollback_package.js.
+Next safe action: run broader validation, exact-stage v14.159 files, create a guarded local commit, then continue to v14.160 local closeout if still inside A4.8.
+```
+
+## Previous Handoff Summary
+
+```text
 Status: v14_153_manifest_read_authorization_gate_package completed locally and validated.
 Reason: The project needs an explicit manifest read authorization gate package before any future A5 real manifest read can be considered.
 Current repository: project_root

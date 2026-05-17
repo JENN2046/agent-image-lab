@@ -220,6 +220,7 @@ $requiredFiles = @(
   'scripts/validate_v14_151_dry_run_vcp_adapter_contract_v1.js',
   'scripts/validate_v14_152_review_console_handoff_contract.js',
   'scripts/validate_v14_153_manifest_read_authorization_gate_package.js',
+  'scripts/validate_v14_159_end_to_end_audit_rollback_package.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -390,6 +391,9 @@ $requiredFiles = @(
   'integrations/vcp/manifest_read_authorization_gate_package_v1.yaml',
   'schemas/manifest_read_authorization_gate_package.schema.yaml',
   'tests/schema_examples/v14_153_manifest_read_authorization_gate_package.example.yaml',
+  'docs/v14_159_end_to_end_audit_and_rollback_package.md',
+  'schemas/end_to_end_audit_rollback_package.schema.yaml',
+  'tests/schema_examples/v14_159_end_to_end_audit_rollback_package.example.yaml',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -9399,6 +9403,37 @@ process.exit(child.status || 0);
     }
     if ($manifestReadAuthorizationGate.runtime_integration_performed -ne $false -or $manifestReadAuthorizationGate.production_candidate_write_performed -ne $false -or $manifestReadAuthorizationGate.daily_note_write_performed -ne $false -or $manifestReadAuthorizationGate.vcp_memory_write_performed -ne $false) {
       Add-Failure "manifest read authorization gate package must not create runtime integration or write production/memory outputs"
+    }
+  }
+
+  $endToEndAuditRollbackOutput = & node (Join-Path $Root 'scripts/validate_v14_159_end_to_end_audit_rollback_package.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "end-to-end audit and rollback package validation exited with failure"
+  } else {
+    $endToEndAuditRollback = ($endToEndAuditRollbackOutput -join "`n") | ConvertFrom-Json
+    if ($endToEndAuditRollback.passed -ne $true) {
+      Add-Failure "end-to-end audit and rollback package validation must pass"
+    }
+    if ($endToEndAuditRollback.end_to_end_audit_and_rollback_package_created -ne $true -or $endToEndAuditRollback.audited_local_stage_count -ne 13 -or $endToEndAuditRollback.required_validator_chain_passed -ne $true -or $endToEndAuditRollback.a5_execution_slots_skipped_without_authorization -ne $true) {
+      Add-Failure "v14.159 must audit all v14.141-v14.153 local stages and mark A5 slots skipped"
+    }
+    if ($endToEndAuditRollback.negative_case_missing_stage_validator_blocks_audit -ne $true -or $endToEndAuditRollback.negative_case_external_action_flag_blocks_rollback -ne $true -or $endToEndAuditRollback.negative_case_image_binary_copy_in_rollback_blocks_package -ne $true -or $endToEndAuditRollback.negative_case_recoverability_claimed_as_vcp_runtime_blocks_package -ne $true -or $endToEndAuditRollback.negative_case_skipped_a5_marked_complete_blocks_package -ne $true) {
+      Add-Failure "v14.159 must fail audit and rollback negative cases"
+    }
+    if ($endToEndAuditRollback.rollback_scope -ne 'local_draft_metadata_only' -or $endToEndAuditRollback.rollback_external_action_allowed -ne $false) {
+      Add-Failure "v14.159 rollback scope must remain local draft metadata only"
+    }
+    if ($endToEndAuditRollback.vcp_runtime_integration_proven -ne $false -or $endToEndAuditRollback.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "end-to-end audit and rollback package must not claim VCP runtime integration"
+    }
+    if ($endToEndAuditRollback.provider_contact_performed -ne $false -or $endToEndAuditRollback.plugin_call_performed -ne $false -or $endToEndAuditRollback.api_call_performed -ne $false -or $endToEndAuditRollback.mcp_runtime_performed -ne $false -or $endToEndAuditRollback.image_generation_performed -ne $false) {
+      Add-Failure "end-to-end audit and rollback package must not call provider/plugin/API/MCP or generate images"
+    }
+    if ($endToEndAuditRollback.real_manifest_read_performed -ne $false -or $endToEndAuditRollback.real_vcpchat_read_performed -ne $false -or $endToEndAuditRollback.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "end-to-end audit and rollback package must not read real VCP systems"
+    }
+    if ($endToEndAuditRollback.image_binary_copy_performed -ne $false -or $endToEndAuditRollback.production_candidate_write_performed -ne $false -or $endToEndAuditRollback.failure_samples_write_performed -ne $false -or $endToEndAuditRollback.daily_note_write_performed -ne $false -or $endToEndAuditRollback.vcp_memory_write_performed -ne $false) {
+      Add-Failure "end-to-end audit and rollback package must not copy images or write production/memory/failure outputs"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

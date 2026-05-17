@@ -1,0 +1,79 @@
+# v14.159 end-to-end audit and rollback package example
+
+end_to_end_audit_rollback_package:
+  version: v1
+  phase: v14_159_end_to_end_audit_and_rollback_package
+  schema_ref: schemas/end_to_end_audit_rollback_package.schema.yaml
+  validator_ref: scripts/validate_v14_159_end_to_end_audit_rollback_package.js
+  contract_type: end_to_end_audit_rollback_package
+  execution_mode: local_validation_only
+  authorization_granted_by_this_record: false
+  audited_local_stage_count: 13
+  required_validator_chain_passed: true
+  a5_execution_slots_skipped_without_authorization: true
+
+  audited_local_phases:
+    - v14_141_recoverability_core_extraction
+    - v14_142_multi_accepted_sample_matrix
+    - v14_143_import_review_registry_schema_hardening
+    - v14_144_review_console_schema_binding
+    - v14_145_sample_lifecycle_state_machine
+    - v14_146_durable_archive_dry_run_manifest
+    - v14_147_production_candidate_eligibility_preflight
+    - v14_148_memory_delta_draft_package
+    - v14_149_authorization_package_compiler
+    - v14_150_local_regression_suite_consolidation
+    - v14_151_dry_run_vcp_adapter_contract_v1
+    - v14_152_review_console_handoff_contract
+    - v14_153_manifest_read_authorization_gate_package
+
+  rollback_plan:
+    rollback_scope: local_draft_metadata_only
+    rollback_external_action_allowed: false
+    rollback_external_action_performed: false
+    destructive_filesystem_action_allowed: false
+    destructive_filesystem_action_performed: false
+    image_binary_copy_allowed: false
+    image_binary_copy_performed: false
+    runs_source_image_modification_allowed: false
+    runs_source_image_modified: false
+    rollback_notes_cn: "回滚只针对本地草案和元数据，不删除真实 artifact，不修改 runs 源图，不撤销外部系统动作。"
+
+  skipped_a5_slots:
+    v14_154_manifest_read_execution:
+      status: skipped_requires_jenn_A5
+      executed: false
+    v14_155_durable_archive_execution:
+      status: skipped_requires_jenn_A5
+      executed: false
+    v14_156_production_candidate_execution:
+      status: skipped_requires_jenn_A5
+      executed: false
+    v14_157_dailynote_vcp_memory_execution:
+      status: skipped_requires_jenn_A5
+      executed: false
+    v14_158_external_runtime_or_memory_followup:
+      status: skipped_requires_jenn_A5
+      executed: false
+
+  non_authorization:
+    provider_contact_performed: false
+    plugin_call_performed: false
+    api_call_performed: false
+    mcp_runtime_performed: false
+    image_generation_performed: false
+    real_manifest_read_performed: false
+    real_vcpchat_read_performed: false
+    real_vcptoolbox_read_performed: false
+    durable_archive_executed: false
+    archive_manifest_written: false
+    image_binary_copy_performed: false
+    production_candidate_write_performed: false
+    failure_samples_write_performed: false
+    DailyNote_write_performed: false
+    VCP_memory_write_performed: false
+    rollback_external_action_performed: false
+    destructive_filesystem_action_performed: false
+    push_tag_release_deploy_performed: false
+    artifact_recoverability_is_not_vcp_runtime_integration: true
+    vcp_runtime_integration_proven: false
