@@ -182,6 +182,7 @@ $requiredFiles = @(
   'scripts/validate_v14_116_manifest_read_authorization_current_goal_alignment.js',
   'scripts/validate_v14_117_daily_note_vcp_memory_authorization_current_goal_alignment.js',
   'scripts/validate_v14_118_rollback_audit_validation_package_current_goal_alignment.js',
+  'scripts/validate_v14_119_prompt_to_artifact_completion_audit_current_goal_refresh.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -290,6 +291,7 @@ $requiredFiles = @(
   'docs/v14_116_manifest_read_authorization_current_goal_alignment.md',
   'docs/v14_117_daily_note_vcp_memory_authorization_current_goal_alignment.md',
   'docs/v14_118_rollback_audit_validation_package_current_goal_alignment.md',
+  'docs/v14_119_prompt_to_artifact_completion_audit_current_goal_refresh.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8045,6 +8047,43 @@ process.exit(child.status || 0);
     }
     if ($rollbackAuditValidationGoal.accepted_samples_write_performed -ne $false -or $rollbackAuditValidationGoal.failure_samples_write_performed -ne $false -or $rollbackAuditValidationGoal.production_candidate_created -ne $false) {
       Add-Failure "rollback/audit/validation package validation must not write samples or production candidates"
+    }
+  }
+
+  $promptToArtifactAuditOutput = & node (Join-Path $Root 'scripts/validate_v14_119_prompt_to_artifact_completion_audit_current_goal_refresh.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "prompt-to-artifact completion audit current goal refresh validation exited with failure"
+  } else {
+    $promptToArtifactAudit = ($promptToArtifactAuditOutput -join "`n") | ConvertFrom-Json
+    if ($promptToArtifactAudit.passed -ne $true) {
+      Add-Failure "prompt-to-artifact completion audit current goal refresh validation must pass"
+    }
+    if ($promptToArtifactAudit.prompt_to_artifact_completion_audit_aligned -ne $true -or $promptToArtifactAudit.goal_to_artifact_trace_complete -ne $true) {
+      Add-Failure "prompt-to-artifact completion audit must trace the active goal to concrete artifacts"
+    }
+    if ($promptToArtifactAudit.codex_session_generation_route_preserved -ne $true -or $promptToArtifactAudit.import_review_registry_chain_verified -ne $true) {
+      Add-Failure "prompt-to-artifact completion audit must preserve Codex session route and import/review/registry chain"
+    }
+    if ($promptToArtifactAudit.review_to_memory_and_production_boundaries_verified -ne $true -or $promptToArtifactAudit.rollback_audit_validation_chain_verified -ne $true) {
+      Add-Failure "prompt-to-artifact completion audit must verify memory/production boundaries and rollback/audit validation chain"
+    }
+    if ($promptToArtifactAudit.prompt_to_artifact_completion_audit_not_proxy_only -ne $true) {
+      Add-Failure "prompt-to-artifact completion audit must not be proxy-only"
+    }
+    if ($promptToArtifactAudit.provider_contact_performed -ne $false -or $promptToArtifactAudit.plugin_call_performed -ne $false -or $promptToArtifactAudit.api_call_performed -ne $false -or $promptToArtifactAudit.mcp_runtime_performed -ne $false) {
+      Add-Failure "prompt-to-artifact completion audit validation must not call provider/plugin/API/MCP"
+    }
+    if ($promptToArtifactAudit.image_generation_performed -ne $false -or $promptToArtifactAudit.output_file_write_performed -ne $false -or $promptToArtifactAudit.file_write_performed -ne $false) {
+      Add-Failure "prompt-to-artifact completion audit validation must not generate images or write files"
+    }
+    if ($promptToArtifactAudit.daily_note_write_performed -ne $false -or $promptToArtifactAudit.vcp_memory_write_performed -ne $false) {
+      Add-Failure "prompt-to-artifact completion audit validation must not write DailyNote or VCP memory"
+    }
+    if ($promptToArtifactAudit.real_manifest_read_performed -ne $false -or $promptToArtifactAudit.real_vcpchat_read_performed -ne $false -or $promptToArtifactAudit.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "prompt-to-artifact completion audit validation must not read real manifest/VCPChat/VCPToolBox"
+    }
+    if ($promptToArtifactAudit.accepted_samples_write_performed -ne $false -or $promptToArtifactAudit.failure_samples_write_performed -ne $false -or $promptToArtifactAudit.production_candidate_created -ne $false) {
+      Add-Failure "prompt-to-artifact completion audit validation must not write samples or production candidates"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding
