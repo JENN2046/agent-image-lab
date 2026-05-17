@@ -1,5 +1,50 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.140-REVIEW-FINDINGS-REPAIR
+
+Scope:
+
+Repair two review findings from the v14.140 closeout review: make v14.131
+negative cases run through the same recoverability validator path, and remove
+stale current-task context from `.agent_board/RUN_STATE.md`.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js
+node scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js
+node --check scripts/validate_v14_140_two_week_regression_closeout.js
+node scripts/validate_v14_140_two_week_regression_closeout.js
+node scripts/validate_agent_board_state.js
+git diff --check
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+Expected:
+
+```yaml
+passed: true
+negative_case_hash_mismatch_fails: true
+negative_case_missing_artifact_fails: true
+negative_case_missing_human_approval_fails: true
+negative_cases_use_same_recoverability_validator: true
+stale_current_task_context_removed: true
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+```
+
 ## VALIDATION-20260517-v14.140-TWO-WEEK-REGRESSION-CLOSEOUT
 
 Scope:

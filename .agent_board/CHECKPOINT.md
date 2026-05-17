@@ -8,6 +8,9 @@ status: completed_validated
 phase_record_ref: docs/v14_140_two_week_regression_closeout.md
 validator_created: scripts/validate_v14_140_two_week_regression_closeout.js
 mvp_validator_updated: scripts/validate_mvp.ps1
+review_findings_repair_status: completed_validated
+review_finding_1_negative_cases_use_same_recoverability_validator: true
+review_finding_2_stale_current_task_context_removed: true
 two_week_regression_closeout_completed: true
 accepted_sample_traceability_hard_acceptance_met: true
 negative_cases_fail_as_expected: true

@@ -3,14 +3,17 @@
 ## Handoff Summary
 
 ```text
-Status: v14_140_two_week_regression_closeout completed locally and validated.
-Reason: The v14.131-v14.140 two-week chain now has a regression closeout and three-part progress report.
+Status: v14_140_two_week_regression_closeout completed locally and validated; review-finding repair completed and validated.
+Reason: The v14.131-v14.140 two-week chain now has a regression closeout and three-part progress report; review found two local repair items.
 Current repository: project_root
 Branch: master tracking origin/master; local commits may be ahead. Verify with `git status --short --branch` before any remote decision.
-Worktree: dirty with v14.140 closeout docs, validator, MVP wiring, and .agent_board sync until validation and commit decision.
+Worktree: verify with `git status --short --branch`; only v14.140 review-finding repair files may be dirty before guarded local commit.
 Phase record: docs/v14_140_two_week_regression_closeout.md
 Validator created: scripts/validate_v14_140_two_week_regression_closeout.js
 MVP validator updated: scripts/validate_mvp.ps1
+review_findings_repair_status: completed_validated
+review_finding_1_negative_cases_use_same_recoverability_validator: true
+review_finding_2_stale_current_task_context_removed: true
 two_week_regression_closeout_completed: true
 accepted_sample_traceability_hard_acceptance_met: true
 negative_cases_fail_as_expected: true

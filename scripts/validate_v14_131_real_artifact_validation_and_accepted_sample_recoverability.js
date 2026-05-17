@@ -124,6 +124,8 @@ function validateRecordChain(record, options = {}) {
   const source = wrapper?.source || {};
   const guard = wrapper?.no_execution_guard || {};
   const reviewBridge = wrapper?.review_bridge || {};
+  const closeoutText = options.closeoutText || closeout;
+  const artifactRelativePath = typeof artifact.relative_path === "string" ? artifact.relative_path : null;
 
   function check(condition, label) {
     if (!condition) failures.push(label);
@@ -136,6 +138,15 @@ function validateRecordChain(record, options = {}) {
   check(wrapper?.prompt_package_ref === expected.promptPackageRef, "prompt_package_ref_matches");
   check(artifact.relative_path === expected.imagePath, "artifact_path_matches");
   check(artifact.sha256 === (options.sha256 || expected.sha256), "artifact_sha256_matches_expected");
+  check(Boolean(artifactRelativePath) && exists(artifactRelativePath), "artifact_file_exists");
+  if (artifactRelativePath && exists(artifactRelativePath)) {
+    const actualSha256 = sha256File(artifactRelativePath);
+    const actualDimensions = readPngDimensions(artifactRelativePath);
+    check(actualSha256 === artifact.sha256, "artifact_file_sha256_matches_record");
+    check(actualSha256 === expected.sha256, "artifact_file_sha256_matches_expected");
+    check(actualDimensions.width === artifact.width_px, "artifact_file_width_matches_record");
+    check(actualDimensions.height === artifact.height_px, "artifact_file_height_matches_record");
+  }
   check(artifact.width_px === expected.width, "artifact_width_matches");
   check(artifact.height_px === expected.height, "artifact_height_matches");
   check(artifact.mime_type === expected.mimeType, "artifact_mime_matches");
@@ -143,6 +154,7 @@ function validateRecordChain(record, options = {}) {
   check(artifact.copied_by_project_script === false, "artifact_not_copied_by_project_script");
   check(reviewBridge.review_record_ref === expected.reviewRecordPath, "review_record_ref_matches");
   check(reviewBridge.image_case_id === expected.imageCaseId, "image_case_id_matches");
+  check(closeoutText.includes("approved_by: Jenn"), "human_approval_present");
   check(source.codex_session_generation === true, "codex_session_generation_true");
   check(source.codex_image_direct_call_allowed === false, "codex_direct_call_disallowed");
   check(source.mcp_runtime_allowed === false, "mcp_runtime_disallowed");
@@ -329,12 +341,19 @@ requireToken("mvp_validator", mvpValidator, files.phaseRecord);
 const badHashRecord = JSON.parse(JSON.stringify(record));
 badHashRecord.codex_session_image_import.imported_asset.sha256 = "0".repeat(64);
 const badHash = validateRecordChain(badHashRecord, { sha256: expected.sha256 });
-addResult("negative_case_hash_mismatch_fails", badHash.passed === false && badHash.failures.includes("artifact_sha256_matches_expected"));
+const negativeCaseHashMismatchFails = badHash.passed === false && badHash.failures.includes("artifact_sha256_matches_expected") && badHash.failures.includes("artifact_file_sha256_matches_record");
+addResult("negative_case_hash_mismatch_fails", negativeCaseHashMismatchFails);
 
-addResult("negative_case_missing_artifact_fails", exists("runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/missing_artifact_for_negative_case.png") === false);
+const missingArtifactRecord = JSON.parse(JSON.stringify(record));
+missingArtifactRecord.codex_session_image_import.imported_asset.relative_path = "runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/missing_artifact_for_negative_case.png";
+const missingArtifact = validateRecordChain(missingArtifactRecord);
+const negativeCaseMissingArtifactFails = missingArtifact.passed === false && missingArtifact.failures.includes("artifact_file_exists");
+addResult("negative_case_missing_artifact_fails", negativeCaseMissingArtifactFails);
 
 const missingApprovalCloseout = closeout.replace("approved_by: Jenn", "approved_by: null");
-addResult("negative_case_missing_human_approval_fails", !missingApprovalCloseout.includes("approved_by: Jenn"));
+const missingApproval = validateRecordChain(record, { closeoutText: missingApprovalCloseout });
+const negativeCaseMissingHumanApprovalFails = missingApproval.passed === false && missingApproval.failures.includes("human_approval_present");
+addResult("negative_case_missing_human_approval_fails", negativeCaseMissingHumanApprovalFails);
 
 forbidPattern("current_surfaces", currentSurfaces, /provider_contact_performed:\s+true/i);
 forbidPattern("current_surfaces", currentSurfaces, /plugin_call_performed:\s+true/i);
@@ -366,9 +385,9 @@ const summary = {
   artifact_hash_validation: calculatedSha256 === expected.sha256 ? "local_file_hash_passed" : "failed",
   artifact_dimensions_validation: dimensions.width === expected.width && dimensions.height === expected.height ? "png_header_dimensions_passed" : "failed",
   registry_import_review_category_chain_verified: passed,
-  negative_case_hash_mismatch_fails: true,
-  negative_case_missing_artifact_fails: true,
-  negative_case_missing_human_approval_fails: true,
+  negative_case_hash_mismatch_fails: negativeCaseHashMismatchFails,
+  negative_case_missing_artifact_fails: negativeCaseMissingArtifactFails,
+  negative_case_missing_human_approval_fails: negativeCaseMissingHumanApprovalFails,
   recoverability_status: "workspace_local_verified",
   artifact_locator_scope: "project_relative_runs",
   verification_mode: "local_file_hash",

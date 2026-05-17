@@ -10,6 +10,9 @@ phase_id: v14_140_two_week_regression_closeout
 phase_record_ref: docs/v14_140_two_week_regression_closeout.md
 validator_created: scripts/validate_v14_140_two_week_regression_closeout.js
 mvp_validator_updated: scripts/validate_mvp.ps1
+review_findings_repair_status: completed_validated
+review_finding_1_negative_cases_use_same_recoverability_validator: true
+review_finding_2_stale_current_task_context_removed: true
 two_week_regression_closeout_completed: true
 accepted_sample_traceability_hard_acceptance_met: true
 negative_cases_fail_as_expected: true
@@ -8269,20 +8272,21 @@ v7.275_memory_write_allowed_without_separate_authorization: false
 ## Current Task
 
 ```text
-v14.067 records a ReviewReport contract for review outcomes. It does not authorize provider contact, plugin/API calls, image generation, accepted_samples writes, DailyNote writes, VCP memory writes, runtime integration, push, tag, release, or deploy.
+v14.140 review findings repair: strengthen real artifact recoverability negative cases and remove stale current-task context.
+This local repair does not authorize provider contact, plugin/API/MCP calls, image generation, accepted_samples writes, failure_samples writes, DailyNote writes, VCP memory writes, runtime integration, push, tag, release, or deploy.
 ```
 
 ## Current Local Work State
 
 ```text
-Worktree: dirty only with authorized v14.067 fixture, validator, docs, and state-surface updates after patching.
+Worktree: verify with git status; only local v14.140 review-finding repair files may be dirty before guarded commit.
 active_workers: 0
-execution_mode: Persistent 4-Agent Council compact local loop
-commander_role: keep v14.067 as a local ReviewReport contract gate and continue toward adapter handoff only if safe
-architect_role: preserve no-runtime, no-provider, no-plugin, no-image, no-memory, and no-production boundaries
-worker_role: apply only the ReviewReport fixture, validator, docs, and status surfaces
-reviewer_role: inspect diff, run allowed local checks, confirm no new execution or write behavior during this patch, and close out
-validation_status: completed_validated_pending_guarded_local_commit
+execution_mode: Persistent 4-Agent Council compact local repair loop under A4.8
+commander_role: keep repair scoped to validator correctness and board context hygiene
+architect_role: preserve no-runtime, no-provider, no-plugin, no-image, no-memory, no-production, and no-remote boundaries
+worker_role: patch only v14.131 validator negative-case logic and current .agent_board status surfaces
+reviewer_role: inspect diff, run v14.131/v14.140/agent_board/MVP/local validation, and close out
+validation_status: completed_validated
 ```
 
 ## Latest Mainline Status
