@@ -32,6 +32,14 @@ required_review_fields:
   - commercial_delivery_ready
   - memory_suitability
 
+required_artifact_link_fields:
+  - prompt_package_ref
+  - import_record_ref
+  - asset_ref_or_final_asset_ref
+  - artifact_sha256_or_import_record_sha256
+  - artifact_dimensions_or_import_record_dimensions
+  - artifact_mime_or_import_record_mime
+
 required_boundary_fields:
   - codex_session_generation_used
   - separate_A5_for_codex_session_generation_required_now
@@ -84,3 +92,8 @@ non_authorization:
   VCP_memory_write_allowed_by_schema: false
   provider_api_plugin_mcp_allowed_by_schema: false
   real_manifest_vcpchat_vcptoolbox_read_allowed_by_schema: false
+
+recoverability_invariants:
+  - review records may reference an imported artifact but cannot make it recoverable without an accepted_samples registry entry and human approval.
+  - formal_acceptance_status pending_human_review cannot be treated as human approval.
+  - production_candidate_write_requires_separate_authorization must remain true unless a separate A5 package is active.

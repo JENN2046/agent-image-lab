@@ -34,6 +34,16 @@ codex_session_image_import:
     local_file_verified: boolean
     copied_by_project_script: false
 
+  recoverability_contract:
+    artifact_locator_scope: project_relative_runs
+    relative_path_required: true
+    local_file_verified_requires_sha256: true
+    local_file_verified_requires_dimensions: true
+    local_file_verified_requires_mime_type: true
+    local_file_verified_requires_project_relative_path: true
+    absolute_local_path_as_only_locator_allowed: false
+    clone_portable_without_artifact_strategy: false
+
   review_bridge:
     image_case_id: string | null
     review_status: pending_human_review | needs_revision | rejected | accepted_candidate_with_human_approval

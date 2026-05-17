@@ -207,6 +207,7 @@ $requiredFiles = @(
   'scripts/lib/artifact_recoverability_core.js',
   'scripts/validate_v14_141_recoverability_core_extraction.js',
   'scripts/validate_v14_142_multi_accepted_sample_matrix.js',
+  'scripts/validate_v14_143_import_review_registry_schema_hardening.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -226,6 +227,7 @@ $requiredFiles = @(
   'schemas/pvos_evidence_collector_blocker_pipeline.schema.yaml',
   'schemas/codex_session_image_import.schema.yaml',
   'schemas/local_review_record.schema.yaml',
+  'schemas/accepted_sample_registry.schema.yaml',
   'schemas/review_result_protocol.schema.yaml',
   'schemas/review_decision_package.schema.yaml',
   'schemas/evidence_blocker_contract.schema.yaml',
@@ -345,6 +347,7 @@ $requiredFiles = @(
   'docs/v14_140_two_week_regression_closeout.md',
   'docs/v14_141_recoverability_core_extraction.md',
   'docs/v14_142_multi_accepted_sample_matrix.md',
+  'docs/v14_143_import_review_registry_schema_hardening.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8934,6 +8937,43 @@ process.exit(child.status || 0);
     }
     if ($multiAcceptedSampleMatrix.real_manifest_read_performed -ne $false -or $multiAcceptedSampleMatrix.real_vcpchat_read_performed -ne $false -or $multiAcceptedSampleMatrix.real_vcptoolbox_read_performed -ne $false) {
       Add-Failure "multi accepted sample matrix must not read real manifest/VCPChat/VCPToolBox"
+    }
+  }
+
+  $schemaHardeningOutput = & node (Join-Path $Root 'scripts/validate_v14_143_import_review_registry_schema_hardening.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "import/review/registry schema hardening validation exited with failure"
+  } else {
+    $schemaHardening = ($schemaHardeningOutput -join "`n") | ConvertFrom-Json
+    if ($schemaHardening.passed -ne $true) {
+      Add-Failure "import/review/registry schema hardening validation must pass"
+    }
+    if ($schemaHardening.import_schema_recoverability_contract_hardened -ne $true -or $schemaHardening.review_schema_artifact_link_fields_hardened -ne $true -or $schemaHardening.accepted_registry_schema_created -ne $true) {
+      Add-Failure "v14.143 must harden import/review/accepted registry schemas"
+    }
+    if ($schemaHardening.real_import_record_contract_verified -ne $true -or $schemaHardening.real_review_record_contract_verified -ne $true) {
+      Add-Failure "v14.143 must verify the real import and review records against the hardened contract"
+    }
+    if ($schemaHardening.registry_full_recoverability_metadata_verified -ne $true -or $schemaHardening.category_index_full_recoverability_metadata_verified -ne $true) {
+      Add-Failure "v14.143 must verify registry and category full recoverability metadata"
+    }
+    if ($schemaHardening.v14_142_matrix_validator_still_passes -ne $true -or $schemaHardening.v14_142_negative_matrix_still_covers_schema_failures -ne $true) {
+      Add-Failure "v14.143 must preserve v14.142 matrix and negative-case coverage"
+    }
+    if ($schemaHardening.vcp_runtime_integration_proven -ne $false -or $schemaHardening.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "schema hardening must not claim VCP runtime integration"
+    }
+    if ($schemaHardening.provider_contact_performed -ne $false -or $schemaHardening.plugin_call_performed -ne $false -or $schemaHardening.api_call_performed -ne $false -or $schemaHardening.mcp_runtime_performed -ne $false) {
+      Add-Failure "schema hardening must not call provider/plugin/API/MCP"
+    }
+    if ($schemaHardening.image_generation_performed -ne $false -or $schemaHardening.image_binary_copy_performed -ne $false -or $schemaHardening.accepted_samples_write_performed -ne $false) {
+      Add-Failure "schema hardening must not generate images, copy binaries, or write accepted_samples"
+    }
+    if ($schemaHardening.production_candidate_created -ne $false -or $schemaHardening.failure_samples_write_performed -ne $false -or $schemaHardening.daily_note_write_performed -ne $false -or $schemaHardening.vcp_memory_write_performed -ne $false) {
+      Add-Failure "schema hardening must not write production candidates, failure samples, or memory"
+    }
+    if ($schemaHardening.real_manifest_read_performed -ne $false -or $schemaHardening.real_vcpchat_read_performed -ne $false -or $schemaHardening.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "schema hardening must not read real manifest/VCPChat/VCPToolBox"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

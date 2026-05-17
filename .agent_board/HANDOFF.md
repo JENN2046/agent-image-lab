@@ -3,6 +3,51 @@
 ## Handoff Summary
 
 ```text
+Status: v14_143_import_review_registry_schema_hardening completed locally and validated.
+Reason: The two-month artifact lifecycle goal needs import, review, and accepted registry schemas to encode recoverability before Review Console binding.
+Current repository: project_root
+Branch: master tracking origin/master; local commits may be ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.143 schema hardening, validator, phase record, MVP wiring, and .agent_board sync until commit decision.
+Phase record: docs/v14_143_import_review_registry_schema_hardening.md
+Import schema: schemas/codex_session_image_import.schema.yaml
+Review schema: schemas/local_review_record.schema.yaml
+Accepted registry schema: schemas/accepted_sample_registry.schema.yaml
+Validator created: scripts/validate_v14_143_import_review_registry_schema_hardening.js
+MVP validator updated: scripts/validate_mvp.ps1
+import_schema_recoverability_contract_hardened: true
+review_schema_artifact_link_fields_hardened: true
+accepted_registry_schema_created: true
+real_import_record_contract_verified: true
+real_review_record_contract_verified: true
+registry_full_recoverability_metadata_verified: true
+category_index_full_recoverability_metadata_verified: true
+v14_142_matrix_validator_still_passes: true
+v14_142_negative_matrix_still_covers_schema_failures: true
+full_recoverability_count_is_currently_one: true
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+accepted_samples_write_performed: false
+image_binary_copy_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+Validation run: node --check scripts/validate_v14_143_import_review_registry_schema_hardening.js; node scripts/validate_v14_143_import_review_registry_schema_hardening.js.
+Next safe action: run broader validation, exact-stage v14.143 files, create a guarded local commit, then continue to v14.144 if still inside A4.8.
+```
+
+## Previous Handoff Summary
+
+```text
 Status: v14_142_multi_accepted_sample_matrix completed locally and validated.
 Reason: The two-month artifact lifecycle goal now needs multi-sample recoverability visibility without lowering full recoverability standards.
 Current repository: project_root

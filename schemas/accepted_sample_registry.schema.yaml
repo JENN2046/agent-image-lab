@@ -1,0 +1,79 @@
+# accepted_sample_registry.schema.yaml
+# Local metadata contract for accepted sample registry entries.
+
+accepted_sample_registry:
+  version: v1
+  registry_only: true
+  image_files_committed_to_git: false
+  memory_write_allowed: false
+  daily_note_write_allowed: false
+
+sample_entry:
+  sample_id: string
+  source_phase: string
+  asset_status: accepted_candidate | accepted_with_support_logic_warning
+  provider_type: codex_session_image | direct_api
+  plugin_id: string | null
+  model: string
+  prompt_package_ref: string
+  review_doc_ref: string
+  formal_sample_package_ref: string | null
+  image_path: project_relative_path
+  image_sha256: sha256 | null
+  image_dimensions: widthxheight | null
+  category: string
+  commercial_use_level: accepted_candidate | accepted_with_support_logic_warning
+  write_to_memory_allowed: false
+  daily_note_write_allowed: false
+
+full_recoverability_metadata:
+  recoverability_status: workspace_local_verified
+  artifact_locator_scope: project_relative_runs
+  verification_mode: local_file_hash
+  verified_sha256: sha256
+  verified_dimensions: widthxheight
+  verified_mime: image/jpeg | image/png | image/webp
+  verification_record_ref: docs_path
+  import_record_ref: project_relative_json_path
+  portable_after_clone: boolean
+  artifact_recoverability_is_not_vcp_runtime_integration: true
+
+category_index_contract:
+  category: string
+  sample_count: integer
+  samples:
+    - sample_id
+  recoverability_metadata:
+    sample_id:
+      recoverability_status: workspace_local_verified
+      artifact_locator_scope: project_relative_runs
+      verification_mode: local_file_hash
+      verified_sha256: sha256
+      verified_dimensions: widthxheight
+      verified_mime: image/jpeg | image/png | image/webp
+      verification_record_ref: docs_path
+      import_record_ref: project_relative_json_path
+      portable_after_clone: boolean
+      artifact_recoverability_is_not_vcp_runtime_integration: true
+
+legacy_partial_entry_policy:
+  legacy_entry_with_local_artifact_but_without_import_record: partial_recoverability_only
+  missing_artifact: not_recoverable
+  missing_hash: not_fully_recoverable
+  missing_dimensions: not_fully_recoverable
+  missing_mime: not_fully_recoverable
+  missing_review_record: not_fully_recoverable
+  missing_human_approval: not_fully_recoverable
+  missing_category_index: not_fully_recoverable
+  registry_category_mismatch: not_fully_recoverable
+
+non_authorization:
+  accepted_samples_write_allowed_by_schema: false
+  image_binary_copy_allowed_by_schema: false
+  runs_source_image_modification_allowed_by_schema: false
+  production_candidate_write_allowed_by_schema: false
+  failure_samples_write_allowed_by_schema: false
+  DailyNote_write_allowed_by_schema: false
+  VCP_memory_write_allowed_by_schema: false
+  provider_api_plugin_mcp_allowed_by_schema: false
+  real_manifest_vcpchat_vcptoolbox_read_allowed_by_schema: false
