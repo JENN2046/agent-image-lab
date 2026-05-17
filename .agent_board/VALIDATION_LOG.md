@@ -1,5 +1,50 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.116-MANIFEST-READ-AUTHORIZATION-CURRENT-GOAL-ALIGNMENT
+
+Task:
+
+```text
+Validate that real manifest, VCPChat, and VCPToolBox reads remain behind exact authorization packages under the current Codex-session-default goal.
+```
+
+Commands run:
+
+```text
+node --check scripts/validate_v14_116_manifest_read_authorization_current_goal_alignment.js
+node scripts/validate_v14_116_manifest_read_authorization_current_goal_alignment.js
+```
+
+Result:
+
+```text
+passed: true
+manifest_read_authorization_package_aligned: true
+vcpchat_read_authorization_package_aligned: true
+codex_session_default_route_preserved: true
+user_authorized: false
+read_authorized: false
+source_read_authorized: false
+source_read_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+raw_source_copy_allowed: false
+raw_manifest_copy_allowed: false
+allowed_source_paths_empty: true
+exact_real_paths_empty: true
+target_repository_root_stored: false
+read_command_permission: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_created: false
+```
+
 ## VALIDATION-20260517-v14.115-DRY-RUN-VCP-ADAPTER-CURRENT-GOAL-ALIGNMENT
 
 Task:

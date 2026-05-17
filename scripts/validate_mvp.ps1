@@ -179,6 +179,7 @@ $requiredFiles = @(
   'scripts/validate_v14_113_failure_samples_authorization_boundary.js',
   'scripts/validate_v14_114_review_console_handoff_taxonomy_alignment.js',
   'scripts/validate_v14_115_dry_run_vcp_adapter_current_goal_alignment.js',
+  'scripts/validate_v14_116_manifest_read_authorization_current_goal_alignment.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -284,6 +285,7 @@ $requiredFiles = @(
   'docs/v14_082_pvos_metadata_only_preflight_authorization_correction_gate.md',
   'docs/codex_session_image_provider_minimal_contract.md',
   'docs/v14_115_dry_run_vcp_adapter_current_goal_alignment.md',
+  'docs/v14_116_manifest_read_authorization_current_goal_alignment.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -7919,6 +7921,49 @@ process.exit(child.status || 0);
     }
     if ($dryRunVcpAdapterGoalAlignment.accepted_samples_write_performed -ne $false -or $dryRunVcpAdapterGoalAlignment.failure_samples_write_performed -ne $false -or $dryRunVcpAdapterGoalAlignment.production_candidate_created -ne $false) {
       Add-Failure "dry-run VCP adapter goal alignment validation must not write samples or production candidates"
+    }
+  }
+
+  $manifestReadAuthorizationGoalOutput = & node (Join-Path $Root 'scripts/validate_v14_116_manifest_read_authorization_current_goal_alignment.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "manifest read authorization current goal alignment validation exited with failure"
+  } else {
+    $manifestReadAuthorizationGoal = ($manifestReadAuthorizationGoalOutput -join "`n") | ConvertFrom-Json
+    if ($manifestReadAuthorizationGoal.passed -ne $true) {
+      Add-Failure "manifest read authorization current goal alignment validation must pass"
+    }
+    if ($manifestReadAuthorizationGoal.manifest_read_authorization_package_aligned -ne $true -or $manifestReadAuthorizationGoal.vcpchat_read_authorization_package_aligned -ne $true) {
+      Add-Failure "manifest and VCPChat read authorization packages must remain aligned"
+    }
+    if ($manifestReadAuthorizationGoal.codex_session_default_route_preserved -ne $true) {
+      Add-Failure "manifest read authorization alignment must preserve Codex session default route"
+    }
+    if ($manifestReadAuthorizationGoal.user_authorized -ne $false -or $manifestReadAuthorizationGoal.read_authorized -ne $false -or $manifestReadAuthorizationGoal.source_read_authorized -ne $false) {
+      Add-Failure "manifest read authorization alignment must not authorize real reads"
+    }
+    if ($manifestReadAuthorizationGoal.source_read_performed -ne $false -or $manifestReadAuthorizationGoal.real_manifest_read_performed -ne $false -or $manifestReadAuthorizationGoal.real_vcpchat_read_performed -ne $false -or $manifestReadAuthorizationGoal.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "manifest read authorization alignment must not perform real source reads"
+    }
+    if ($manifestReadAuthorizationGoal.raw_source_copy_allowed -ne $false -or $manifestReadAuthorizationGoal.raw_manifest_copy_allowed -ne $false) {
+      Add-Failure "manifest read authorization alignment must not allow raw source or manifest copying"
+    }
+    if ($manifestReadAuthorizationGoal.allowed_source_paths_empty -ne $true -or $manifestReadAuthorizationGoal.exact_real_paths_empty -ne $true -or $manifestReadAuthorizationGoal.target_repository_root_stored -ne $false) {
+      Add-Failure "manifest read authorization alignment must keep real path fields empty or unstored"
+    }
+    if ($manifestReadAuthorizationGoal.read_command_permission -ne $false) {
+      Add-Failure "manifest read authorization alignment must not grant read command permission"
+    }
+    if ($manifestReadAuthorizationGoal.selected_plugin -ne $null -or $manifestReadAuthorizationGoal.max_plugin_calls -ne 0) {
+      Add-Failure "manifest read authorization alignment must not select a plugin or allow plugin calls"
+    }
+    if ($manifestReadAuthorizationGoal.provider_contact_performed -ne $false -or $manifestReadAuthorizationGoal.plugin_call_performed -ne $false -or $manifestReadAuthorizationGoal.api_call_performed -ne $false -or $manifestReadAuthorizationGoal.mcp_runtime_performed -ne $false) {
+      Add-Failure "manifest read authorization alignment must not call provider/plugin/API/MCP"
+    }
+    if ($manifestReadAuthorizationGoal.image_generation_performed -ne $false -or $manifestReadAuthorizationGoal.output_file_write_performed -ne $false -or $manifestReadAuthorizationGoal.file_write_performed -ne $false) {
+      Add-Failure "manifest read authorization alignment must not generate images or write files"
+    }
+    if ($manifestReadAuthorizationGoal.daily_note_write_performed -ne $false -or $manifestReadAuthorizationGoal.vcp_memory_write_performed -ne $false -or $manifestReadAuthorizationGoal.production_candidate_created -ne $false) {
+      Add-Failure "manifest read authorization alignment must not write memory or create production candidates"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding
