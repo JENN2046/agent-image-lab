@@ -179,16 +179,26 @@ not_authorized_by_v14_082:
 
 ```yaml
 preflight_result:
-  status: pending_run
-  command_run: null
-  preflight_passed: null
+  status: DRY_RUN_ONLY
+  command_run: node scripts/run_native_doubao_image_generation.js --prompt-package-ref=prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml --plugin-profile-ref=plugins/image_generation/native_doubao_image/plugin.profile.yaml --output-directory=runs/real_generation/v14_081_pvos_premium_portable_led_camping_lantern_first_trial/ --model=doubao-seedream-5-0-260128 --max-plugin-calls=1 --max-images-created=1 --retry-allowed=false --dry-run=true --execution-authorized=false --a5-activation-ref=AUTH-PENDING-PVOS-EVIDENCE-BLOCKER-20260517-001
+  preflight_passed: true
+  issues: []
+  env_file_exists: true
+  env_file_ignored: true
+  env_fields_present: 5
+  env_fields_total: 5
+  adapter_status: DRY_RUN_ONLY
   provider_contact_performed: false
   plugin_call_performed: false
   api_call_performed: false
   image_generation_performed: false
+  image_count: 0
   env_value_read_performed: false
+  api_key_value_printed: false
   output_directory_created: false
   output_file_written: false
+  local_files_written_count: 0
+  local_files_verified_count: 0
   DailyNote_write_performed: false
   VCP_memory_write_performed: false
 ```
@@ -208,8 +218,8 @@ powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
 
 ```yaml
 recommended_next:
-  phase: run_authorized_metadata_only_preflight
-  zh: 运行已授权的 metadata-only dry-run preflight
-  auto_execution_allowed: true
+  phase: wait_for_next_explicit_A5_decision
+  zh: metadata-only dry-run preflight 已通过；等待下一次明确 A5 决策
+  auto_execution_allowed: false
   hard_stop_after_preflight: true
 ```

@@ -74,7 +74,22 @@ function main() {
     "image_generation: false",
     "output_directory_creation: false",
     "output_write: false",
-    "push_tag_release_deploy: false"
+    "push_tag_release_deploy: false",
+    "preflight_result:",
+    "status: DRY_RUN_ONLY",
+    "preflight_passed: true",
+    "issues: []",
+    "env_file_exists: true",
+    "env_file_ignored: true",
+    "env_fields_present: 5",
+    "env_fields_total: 5",
+    "adapter_status: DRY_RUN_ONLY",
+    "image_count: 0",
+    "api_key_value_printed: false",
+    "local_files_written_count: 0",
+    "local_files_verified_count: 0",
+    "phase: wait_for_next_explicit_A5_decision",
+    "auto_execution_allowed: false"
   ].forEach((pattern) => addCheck(checks, `doc_contains:${pattern}`, doc.includes(pattern)));
 
   [

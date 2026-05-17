@@ -10,7 +10,7 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ```text
 Current active local objective: v14_082_pvos_metadata_only_preflight_authorization_correction_gate.
-Status: completed_local_correction_validated_pending_guarded_commit.
+Status: completed_metadata_only_preflight_passed_validated.
 Purpose: correct v14.081 so .env.local is metadata-only preflight allowed for field-name/existence checks while env value reads, loadDotEnv, process.env mutation, provider/plugin/API/image/output/DailyNote/VCP memory/production/manifest/VCPChat/VCPToolBox/push/tag/release/deploy remain blocked.
 source_phase: v14_081_pvos_evidence_collector_blocker_exact_A5_authorization_package_gate.
 phase_record_created: docs/v14_082_pvos_metadata_only_preflight_authorization_correction_gate.md.
@@ -20,8 +20,15 @@ authorization_status: approved_for_metadata_only_preflight.
 approval_status: approved_for_preflight_only.
 env_local_metadata_only_allowed: true.
 env_value_read_allowed: false.
+preflight_status: DRY_RUN_ONLY.
+preflight_passed: true.
+preflight_issues: [].
+env_file_exists: true.
+env_file_ignored: true.
+env_fields_present: 5.
+env_fields_total: 5.
 A5_generation_execution_allowed_now: false.
-preflight_allowed_after_clean_commit: true.
+preflight_authorization_consumed: true.
 provider_contact_allowed_now: false.
 plugin_call_allowed_now: false.
 api_call_allowed_now: false.
@@ -34,9 +41,9 @@ production_candidate_write_allowed_now: false.
 real_manifest_read_allowed_now: false.
 real_VCPChat_read_allowed_now: false.
 real_VCPToolBox_read_allowed_now: false.
-validated_now: node --check scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js; node scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js; node scripts/validate_v14_081_pvos_exact_a5_authorization_package.js; git diff --check.
-recommended_next: clean_worktree_then_run_authorized_metadata_only_preflight.
-recommended_next_auto_execution_allowed: true.
+validated_now: node --check scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js; node scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js; node scripts/validate_v14_081_pvos_exact_a5_authorization_package.js; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+recommended_next: wait_for_next_explicit_A5_decision.
+recommended_next_auto_execution_allowed: false.
 ---
 Current active local objective: v14_081_pvos_evidence_collector_blocker_exact_A5_authorization_package_gate.
 Status: completed_local_exact_package_validated.

@@ -14,6 +14,9 @@ Commands run:
 node --check scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js
 node scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js
 node scripts/validate_v14_081_pvos_exact_a5_authorization_package.js
+node scripts/run_native_doubao_image_generation.js --prompt-package-ref=prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml --plugin-profile-ref=plugins/image_generation/native_doubao_image/plugin.profile.yaml --output-directory=runs/real_generation/v14_081_pvos_premium_portable_led_camping_lantern_first_trial/ --model=doubao-seedream-5-0-260128 --max-plugin-calls=1 --max-images-created=1 --retry-allowed=false --dry-run=true --execution-authorized=false --a5-activation-ref=AUTH-PENDING-PVOS-EVIDENCE-BLOCKER-20260517-001
+node scripts/validate_agent_board_state.js
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
 git diff --check
 ```
 
@@ -27,10 +30,19 @@ authorization_status: approved_for_metadata_only_preflight
 approval_status: approved_for_preflight_only
 env_local_metadata_only_allowed: true
 env_value_read_allowed: false
-preflight_allowed_after_clean_commit: true
-validation_result: completed_validated_pending_guarded_commit
+preflight_status: DRY_RUN_ONLY
+preflight_passed: true
+preflight_issues: []
+env_file_exists: true
+env_file_ignored: true
+env_fields_present: 5
+env_fields_total: 5
+preflight_authorization_consumed: true
+validation_result: completed_validated
 exact_correction_validator: passed
 v14_081_validator: passed
+agent_board_state: passed
+validate_mvp: passed
 git_diff_check: passed
 ```
 

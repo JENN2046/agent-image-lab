@@ -4,17 +4,25 @@
 
 ```text
 objective: v14.082 metadata-only preflight authorization correction for PVOS evidence collector blocker package
-status: completed_local_correction_validated_pending_guarded_commit
+status: completed_metadata_only_preflight_passed_validated
 mode: Persistent 4-Agent Council local loop
 phase_id: v14_082_pvos_metadata_only_preflight_authorization_correction_gate
 phase_record: docs/v14_082_pvos_metadata_only_preflight_authorization_correction_gate.md
 source_phase: v14_081_pvos_evidence_collector_blocker_exact_A5_authorization_package_gate
 source_commit: bc74a6f
+correction_commit: ff51a6e
 authorization_package_id: AUTH-PENDING-PVOS-EVIDENCE-BLOCKER-20260517-001
 authorization_status: approved_for_metadata_only_preflight
 approval_status: approved_for_preflight_only
 env_local_metadata_only_allowed: true
 env_value_read_allowed: false
+preflight_status: DRY_RUN_ONLY
+preflight_passed: true
+preflight_issues: []
+env_file_exists: true
+env_file_ignored: true
+env_fields_present: 5
+env_fields_total: 5
 selected_plugin_id: NativeDoubaoImage
 selected_plugin_command: generate
 selected_plugin_model: doubao-seedream-5-0-260128
@@ -26,7 +34,7 @@ max_plugin_calls: 1
 max_images_created: 1
 retry_limit: 0
 A5_generation_execution_allowed_now: false
-preflight_allowed_after_clean_commit: true
+preflight_authorization_consumed: true
 provider_contact_allowed_now: false
 plugin_call_allowed_now: false
 api_call_allowed_now: false
@@ -40,9 +48,9 @@ real_manifest_read_allowed_now: false
 real_VCPChat_read_allowed_now: false
 real_VCPToolBox_read_allowed_now: false
 remote_action: false
-validated_now: node --check scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js; node scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js; node scripts/validate_v14_081_pvos_exact_a5_authorization_package.js; git diff --check
-recommended_next: clean_worktree_then_run_authorized_metadata_only_preflight
-recommended_next_auto_execution_allowed: true
+validated_now: node --check scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js; node scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js; node scripts/validate_v14_081_pvos_exact_a5_authorization_package.js; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+recommended_next: wait_for_next_explicit_A5_decision
+recommended_next_auto_execution_allowed: false
 ```
 
 ## Active Local Objective Override
