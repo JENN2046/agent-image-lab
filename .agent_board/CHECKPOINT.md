@@ -1,5 +1,44 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.137 PROJECT_MASTER_PLAN Quarantine Status Demotion
+
+```text
+phase_id: v14_137_project_master_plan_quarantine_status_demotion
+status: completed_validated
+phase_record_ref: docs/v14_137_project_master_plan_quarantine_status_demotion.md
+validator_created: scripts/validate_v14_137_project_master_plan_quarantine_status_demotion.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+project_master_plan_quarantined: true
+project_master_plan_status_demoted: true
+project_master_plan_status: historical_reference_only
+project_master_plan_default_authority: false
+default_routing_authority: false
+current_goal_routing_source: .agent_board/RUN_STATE.md
+current_artifact_recoverability_chain: v14.131-v14.136
+legacy_ledger_progress_promotion_blocked: true
+old_ledger_must_not_raise_product_progress: true
+dashboard_progress_from_project_master_plan_allowed: false
+current_route_remains_artifact_recoverability_chain: true
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+validated_now: node --check scripts/validate_v14_137_project_master_plan_quarantine_status_demotion.js; node scripts/validate_v14_137_project_master_plan_quarantine_status_demotion.js
+recommended_next: dashboard_alignment_from_real_artifact_evidence
+recommended_next_auto_execution_allowed: true
+```
+
 # V14.136 Accepted Samples Recoverability Metadata Patch
 
 ```text

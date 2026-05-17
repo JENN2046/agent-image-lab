@@ -200,6 +200,7 @@ $requiredFiles = @(
   'scripts/validate_v14_134_review_console_static_import_record_reader.js',
   'scripts/validate_v14_135_review_console_import_reader_safety_review.js',
   'scripts/validate_v14_136_accepted_samples_recoverability_metadata_patch.js',
+  'scripts/validate_v14_137_project_master_plan_quarantine_status_demotion.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -330,6 +331,7 @@ $requiredFiles = @(
   'docs/v14_134_review_console_static_import_record_reader.md',
   'docs/v14_135_review_console_import_reader_safety_review.md',
   'docs/v14_136_accepted_samples_recoverability_metadata_patch.md',
+  'docs/v14_137_project_master_plan_quarantine_status_demotion.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8715,6 +8717,43 @@ process.exit(child.status || 0);
     }
     if ($acceptedSamplesRecoverabilityMetadata.real_manifest_read_performed -ne $false -or $acceptedSamplesRecoverabilityMetadata.real_vcpchat_read_performed -ne $false -or $acceptedSamplesRecoverabilityMetadata.real_vcptoolbox_read_performed -ne $false) {
       Add-Failure "accepted sample recoverability metadata patch must not read real manifest/VCPChat/VCPToolBox"
+    }
+  }
+
+  $projectMasterPlanQuarantineOutput = & node (Join-Path $Root 'scripts/validate_v14_137_project_master_plan_quarantine_status_demotion.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "PROJECT_MASTER_PLAN quarantine/status demotion validation exited with failure"
+  } else {
+    $projectMasterPlanQuarantine = ($projectMasterPlanQuarantineOutput -join "`n") | ConvertFrom-Json
+    if ($projectMasterPlanQuarantine.passed -ne $true) {
+      Add-Failure "PROJECT_MASTER_PLAN quarantine/status demotion validation must pass"
+    }
+    if ($projectMasterPlanQuarantine.project_master_plan_quarantined -ne $true -or $projectMasterPlanQuarantine.project_master_plan_status_demoted -ne $true) {
+      Add-Failure "PROJECT_MASTER_PLAN must be quarantined and status-demoted"
+    }
+    if ($projectMasterPlanQuarantine.project_master_plan_default_authority -ne $false -or $projectMasterPlanQuarantine.default_routing_authority -ne $false) {
+      Add-Failure "PROJECT_MASTER_PLAN must not be the default routing authority"
+    }
+    if ($projectMasterPlanQuarantine.legacy_ledger_progress_promotion_blocked -ne $true -or $projectMasterPlanQuarantine.dashboard_progress_from_project_master_plan_allowed -ne $false) {
+      Add-Failure "PROJECT_MASTER_PLAN legacy ledger must not promote product or dashboard progress"
+    }
+    if ($projectMasterPlanQuarantine.current_route_remains_artifact_recoverability_chain -ne $true) {
+      Add-Failure "Current route must remain anchored to the artifact recoverability chain"
+    }
+    if ($projectMasterPlanQuarantine.vcp_runtime_integration_proven -ne $false -or $projectMasterPlanQuarantine.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "PROJECT_MASTER_PLAN demotion must not claim VCP runtime integration"
+    }
+    if ($projectMasterPlanQuarantine.provider_contact_performed -ne $false -or $projectMasterPlanQuarantine.plugin_call_performed -ne $false -or $projectMasterPlanQuarantine.api_call_performed -ne $false -or $projectMasterPlanQuarantine.mcp_runtime_performed -ne $false) {
+      Add-Failure "PROJECT_MASTER_PLAN demotion must not call provider/plugin/API/MCP"
+    }
+    if ($projectMasterPlanQuarantine.image_generation_performed -ne $false -or $projectMasterPlanQuarantine.daily_note_write_performed -ne $false -or $projectMasterPlanQuarantine.vcp_memory_write_performed -ne $false) {
+      Add-Failure "PROJECT_MASTER_PLAN demotion must not generate images or write DailyNote/VCP memory"
+    }
+    if ($projectMasterPlanQuarantine.failure_samples_write_performed -ne $false -or $projectMasterPlanQuarantine.production_candidate_created -ne $false) {
+      Add-Failure "PROJECT_MASTER_PLAN demotion must not write failure_samples or production candidates"
+    }
+    if ($projectMasterPlanQuarantine.real_manifest_read_performed -ne $false -or $projectMasterPlanQuarantine.real_vcpchat_read_performed -ne $false -or $projectMasterPlanQuarantine.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "PROJECT_MASTER_PLAN demotion must not read real manifest/VCPChat/VCPToolBox"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

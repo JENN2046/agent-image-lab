@@ -15,6 +15,7 @@ hot_context_packet_ref: docs/CONTEXT_LOAD_GUIDE.md
 current_goal_audit_ref: docs/v14_129_current_goal_completion_audit_gap_map.md
 historical_lookup_index_ref: docs/HISTORICAL_DOCS_COMPACTION_INDEX.md
 bulk_historical_load_allowed: false
+PROJECT_MASTER_PLAN_default_authority: false
 historical_docs_deleted: false
 historical_docs_moved: false
 historical_docs_rewritten: false

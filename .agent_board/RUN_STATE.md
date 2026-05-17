@@ -1,5 +1,71 @@
 # RUN_STATE.md — Agent Image Lab
 
+## Active Two-Week Artifact Recoverability Goal
+
+```text
+objective: shift Agent Image Lab from governance/document proof to real artifact recoverability product capability
+status: v14_137_project_master_plan_quarantine_status_demotion_completed_validated
+mode: Persistent 4-Agent Council local loop under A4.8 / A4 — Sustained Local Autopilot
+phase_id: v14_137_project_master_plan_quarantine_status_demotion
+phase_record_ref: docs/v14_137_project_master_plan_quarantine_status_demotion.md
+validator_created: scripts/validate_v14_137_project_master_plan_quarantine_status_demotion.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+active_scope:
+active_phase_id: v14_137_project_master_plan_quarantine_status_demotion
+active_phase_record_ref: docs/v14_137_project_master_plan_quarantine_status_demotion.md
+active_recommended_next: dashboard_alignment_from_real_artifact_evidence
+recommended_next_source_phase: v14_137_project_master_plan_quarantine_status_demotion
+supersedes_recommendation_from: project_master_plan_quarantine_status_demotion
+artifact_scope:
+current_route_remains_artifact_recoverability_chain: true
+current_artifact_recoverability_chain: v14.131-v14.136
+artifact_recoverability_status: workspace_local_verified
+artifact_vcp_runtime_integration_proven: false
+authorization_scope:
+authorization_failure_samples_write_allowed: false
+authorization_production_candidate_allowed: false
+authorization_DailyNote_write_allowed: false
+authorization_VCP_memory_write_allowed: false
+authorization_real_manifest_read_allowed: false
+authorization_real_vcpchat_read_allowed: false
+authorization_real_vcptoolbox_read_allowed: false
+authorization_push_tag_release_deploy_allowed: false
+side_effect_scope:
+side_effect_current_phase_project_master_plan_write_performed: true
+side_effect_current_phase_provider_contact_performed: false
+side_effect_current_phase_vcp_runtime_integration_performed: false
+history_scope:
+history_v14_131_artifact_recoverability_completed: true
+history_v14_136_accepted_samples_recoverability_metadata_completed: true
+project_master_plan_quarantined: true
+project_master_plan_status_demoted: true
+project_master_plan_status: historical_reference_only
+project_master_plan_default_authority: false
+default_routing_authority: false
+current_goal_routing_source: .agent_board/RUN_STATE.md
+legacy_ledger_progress_promotion_blocked: true
+old_ledger_must_not_raise_product_progress: true
+dashboard_progress_from_project_master_plan_allowed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+validated_now: node --check scripts/validate_v14_137_project_master_plan_quarantine_status_demotion.js; node scripts/validate_v14_137_project_master_plan_quarantine_status_demotion.js
+recommended_next: dashboard_alignment_from_real_artifact_evidence
+recommended_next_auto_execution_allowed: true
+```
+
 ## Active Long-Term Goal Override
 
 ```text

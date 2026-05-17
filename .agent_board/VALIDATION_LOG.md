@@ -1,5 +1,60 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.137-PROJECT-MASTER-PLAN-QUARANTINE-STATUS-DEMOTION
+
+Scope:
+
+Validate that `PROJECT_MASTER_PLAN.md` is demoted to a historical reference and
+cannot promote product progress, dashboard progress, production readiness, or
+VCP runtime readiness over the v14.131-v14.136 real artifact recoverability
+chain.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_137_project_master_plan_quarantine_status_demotion.js
+node scripts/validate_v14_137_project_master_plan_quarantine_status_demotion.js
+```
+
+Expected:
+
+```yaml
+passed: true
+project_master_plan_quarantined: true
+project_master_plan_status_demoted: true
+project_master_plan_status: historical_reference_only
+project_master_plan_default_authority: false
+default_routing_authority: false
+current_goal_routing_source: .agent_board/RUN_STATE.md
+current_artifact_recoverability_chain: v14.131-v14.136
+legacy_ledger_progress_promotion_blocked: true
+dashboard_progress_from_project_master_plan_allowed: false
+current_route_remains_artifact_recoverability_chain: true
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+```
+
+Result:
+
+```yaml
+status: passed
+validator: scripts/validate_v14_137_project_master_plan_quarantine_status_demotion.js
+phase_record: docs/v14_137_project_master_plan_quarantine_status_demotion.md
+```
+
 ## VALIDATION-20260517-v14.136-ACCEPTED-SAMPLES-RECOVERABILITY-METADATA-PATCH
 
 Scope:

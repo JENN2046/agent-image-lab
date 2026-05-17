@@ -1,10 +1,33 @@
 # Agent Image Lab Project Master Plan
 
+## Current Authority Demotion
+
+```yaml
+project_master_plan_status: historical_reference_only
+default_routing_authority: false
+current_goal_routing_source: .agent_board/RUN_STATE.md
+current_artifact_recoverability_chain: v14.131-v14.136
+old_ledger_must_not_raise_product_progress: true
+dashboard_progress_from_this_file_allowed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+```
+
+This file is a historical ledger and compact index. It is no longer the
+default routing authority for active work. Current route selection must come
+from `.agent_board/RUN_STATE.md`, the active user goal, and the validated
+v14.131-v14.136 artifact recoverability chain.
+
+Old completion notes in this file must not be used to raise product capability
+progress, dashboard progress, production readiness, VCP runtime readiness, or
+external integration readiness. Any current progress claim must point to a
+current validator and real artifact evidence, not to this historical ledger.
+
 Purpose: short index for current project direction. This file is not the only
 source of truth. Detailed history and operating authority remain in `README.md`,
 `docs/00_project_roadmap.md`, `AGENTS.md`, and `.agent_board/`.
 
-## Current Baseline
+## Historical Baseline Ledger
 
 ```text
 branch: master

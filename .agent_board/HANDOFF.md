@@ -3,6 +3,44 @@
 ## Handoff Summary
 
 ```text
+Status: v14_137_project_master_plan_quarantine_status_demotion completed locally and validated.
+Reason: PROJECT_MASTER_PLAN.md was still presenting an old v14.079 baseline as current-looking status, so it was demoted to historical_reference_only.
+Current repository: project_root
+Branch: master tracking origin/master; local commits may be ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.137 PROJECT_MASTER_PLAN demotion, validator, phase record, MVP wiring, and .agent_board sync until validation and commit decision.
+Phase record: docs/v14_137_project_master_plan_quarantine_status_demotion.md
+Validator created: scripts/validate_v14_137_project_master_plan_quarantine_status_demotion.js
+MVP validator updated: scripts/validate_mvp.ps1
+project_master_plan_quarantined: true
+project_master_plan_status_demoted: true
+project_master_plan_status: historical_reference_only
+project_master_plan_default_authority: false
+default_routing_authority: false
+current_goal_routing_source: .agent_board/RUN_STATE.md
+current_artifact_recoverability_chain: v14.131-v14.136
+legacy_ledger_progress_promotion_blocked: true
+old_ledger_must_not_raise_product_progress: true
+dashboard_progress_from_project_master_plan_allowed: false
+current_route_remains_artifact_recoverability_chain: true
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+validated_now: node --check scripts/validate_v14_137_project_master_plan_quarantine_status_demotion.js; node scripts/validate_v14_137_project_master_plan_quarantine_status_demotion.js
+recommended_next: dashboard_alignment_from_real_artifact_evidence
+recommended_next_auto_execution_allowed: true
+---
 Status: v14_136_accepted_samples_recoverability_metadata_patch completed locally and validated.
 Reason: The accepted Codex-session sample needed registry/category recoverability metadata so it can be traced from accepted_samples to v14.131 verification evidence without copying image binaries.
 Current repository: project_root
