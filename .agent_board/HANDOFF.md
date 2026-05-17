@@ -6,8 +6,8 @@
 Status: v14_080_pvos_evidence_collector_blocker_A5_authorization_package_draft_gate drafted locally and validated.
 Reason: The validated PVOS evidence collector + blocker pipeline baseline is sealed in commit 3db9e17, and the next safest route is an inactive A5 authorization package draft that keeps every real execution field empty until human review.
 Current repository: project_root
-Branch: master tracking origin/master, ahead 1 after local baseline commit.
-Worktree: dirty only with v14.080 draft doc and .agent_board sync updates until final commit decision.
+Branch: master tracking origin/master; local commits exist after PVOS pipeline and v14.080 draft sealing. Verify with `git status --short --branch` before any remote decision.
+Worktree: expected clean after the v14.080 handoff sync commit. Verify before resuming.
 Phase record: docs/v14_080_pvos_evidence_collector_blocker_A5_authorization_package_draft_gate.md
 Draft package id: AUTH-DRAFT-PVOS-EVIDENCE-BLOCKER-20260517-001
 authorization_status: draft
