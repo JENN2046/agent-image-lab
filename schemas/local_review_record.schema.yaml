@@ -1,0 +1,86 @@
+schema_id: local_review_record
+version: v1
+status: local_contract
+purpose: >
+  Defines the minimum local review record shape for Codex-session imported
+  visual candidates before accepted_samples, memory, production, or VCP runtime
+  gates.
+
+required_sections:
+  - Scope
+  - Visual Review or Series Review or Final Review
+  - Checklist or Outfit Checklist
+  - Boundary Review
+  - Next Gate
+
+required_scope_fields:
+  - phase_id
+  - asset_role
+  - provider_id
+  - project_script_generation
+  - MCP_runtime
+  - provider_API_call_by_project
+  - env_local_secret_value_read
+  - DailyNote_write
+  - VCP_memory_write
+  - accepted_samples_write
+  - production_candidate_write
+
+required_review_fields:
+  - decision_or_overall_decision
+  - formal_acceptance_status
+  - commercial_delivery_ready
+  - memory_suitability
+
+required_boundary_fields:
+  - codex_session_generation_used
+  - separate_A5_for_codex_session_generation_required_now
+  - project_provider_contact_performed
+  - project_plugin_call_performed
+  - project_api_call_performed
+  - image_generation_by_project_script_performed
+  - env_local_secret_value_read_performed
+  - DailyNote_write_performed
+  - VCP_memory_write_performed
+  - accepted_samples_write_performed
+  - production_candidate_write_performed
+  - push_tag_release_deploy_performed
+
+required_next_gate_fields:
+  - recommended_next
+  - automatic_next_generation_recommended
+  - accepted_samples_write_requires_separate_authorization
+  - production_candidate_write_requires_separate_authorization
+  - memory_write_requires_separate_authorization
+
+no_execution_defaults:
+  provider_id: codex_session_image
+  project_script_generation: false
+  MCP_runtime: false
+  provider_API_call_by_project: false
+  env_local_secret_value_read: false
+  DailyNote_write: false
+  VCP_memory_write: false
+  accepted_samples_write: false
+  production_candidate_write: false
+  project_provider_contact_performed: false
+  project_plugin_call_performed: false
+  project_api_call_performed: false
+  image_generation_by_project_script_performed: false
+  env_local_secret_value_read_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+
+non_authorization:
+  image_binary_read_allowed: false
+  image_binary_copy_allowed: false
+  accepted_samples_write_allowed_by_schema: false
+  failure_samples_write_allowed_by_schema: false
+  production_candidate_write_allowed_by_schema: false
+  DailyNote_write_allowed_by_schema: false
+  VCP_memory_write_allowed_by_schema: false
+  provider_api_plugin_mcp_allowed_by_schema: false
+  real_manifest_vcpchat_vcptoolbox_read_allowed_by_schema: false

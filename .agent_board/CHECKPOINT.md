@@ -1,5 +1,38 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.122 Local Review Record Schema Refresh
+
+```text
+phase_id: v14_122_local_review_record_schema_refresh
+status: completed_validated
+phase_record_ref: docs/v14_122_local_review_record_schema_refresh.md
+schema_created: schemas/local_review_record.schema.yaml
+validator_created: scripts/validate_v14_122_local_review_record_schema_refresh.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+local_review_record_schema_aligned: true
+codex_session_review_records_verified: true
+review_record_boundary_fields_verified: true
+review_record_next_gate_authorization_fields_verified: true
+review_record_schema_no_execution: true
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+output_file_write_performed: false
+validated_now: node --check scripts/validate_v14_122_local_review_record_schema_refresh.js; node scripts/validate_v14_122_local_review_record_schema_refresh.js
+recommended_next: memory_delta_draft_schema_alignment_for_codex_reviews
+recommended_next_auto_execution_allowed: true
+```
+
 # V14.121 Codex Session Prompt Package Library Governance
 
 ```text

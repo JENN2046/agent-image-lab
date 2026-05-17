@@ -185,6 +185,7 @@ $requiredFiles = @(
   'scripts/validate_v14_119_prompt_to_artifact_completion_audit_current_goal_refresh.js',
   'scripts/validate_v14_120_visual_series_taxonomy_review_scorecard_alignment.js',
   'scripts/validate_v14_121_codex_session_prompt_package_library_governance.js',
+  'scripts/validate_v14_122_local_review_record_schema_refresh.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -203,6 +204,7 @@ $requiredFiles = @(
   'schemas/pvos_kernel_dry_run_adapter.schema.yaml',
   'schemas/pvos_evidence_collector_blocker_pipeline.schema.yaml',
   'schemas/codex_session_image_import.schema.yaml',
+  'schemas/local_review_record.schema.yaml',
   'schemas/review_result_protocol.schema.yaml',
   'schemas/review_decision_package.schema.yaml',
   'schemas/evidence_blocker_contract.schema.yaml',
@@ -296,6 +298,7 @@ $requiredFiles = @(
   'docs/v14_119_prompt_to_artifact_completion_audit_current_goal_refresh.md',
   'docs/v14_120_visual_series_taxonomy_review_scorecard_alignment.md',
   'docs/v14_121_codex_session_prompt_package_library_governance.md',
+  'docs/v14_122_local_review_record_schema_refresh.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8156,6 +8159,40 @@ process.exit(child.status || 0);
     }
     if ($codexPromptGovernance.accepted_samples_write_performed -ne $false -or $codexPromptGovernance.failure_samples_write_performed -ne $false -or $codexPromptGovernance.production_candidate_created -ne $false) {
       Add-Failure "Codex session prompt governance validation must not write samples or production candidates"
+    }
+  }
+
+  $localReviewRecordSchemaOutput = & node (Join-Path $Root 'scripts/validate_v14_122_local_review_record_schema_refresh.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "local review record schema refresh validation exited with failure"
+  } else {
+    $localReviewRecordSchema = ($localReviewRecordSchemaOutput -join "`n") | ConvertFrom-Json
+    if ($localReviewRecordSchema.passed -ne $true) {
+      Add-Failure "local review record schema refresh validation must pass"
+    }
+    if ($localReviewRecordSchema.local_review_record_schema_aligned -ne $true -or $localReviewRecordSchema.codex_session_review_records_verified -ne $true) {
+      Add-Failure "local review record schema and Codex session review records must remain aligned"
+    }
+    if ($localReviewRecordSchema.review_record_boundary_fields_verified -ne $true -or $localReviewRecordSchema.review_record_next_gate_authorization_fields_verified -ne $true) {
+      Add-Failure "local review records must include boundary and next-gate authorization fields"
+    }
+    if ($localReviewRecordSchema.review_record_schema_no_execution -ne $true) {
+      Add-Failure "local review record schema must remain no-execution"
+    }
+    if ($localReviewRecordSchema.provider_contact_performed -ne $false -or $localReviewRecordSchema.plugin_call_performed -ne $false -or $localReviewRecordSchema.api_call_performed -ne $false -or $localReviewRecordSchema.mcp_runtime_performed -ne $false) {
+      Add-Failure "local review record schema validation must not call provider/plugin/API/MCP"
+    }
+    if ($localReviewRecordSchema.image_generation_performed -ne $false -or $localReviewRecordSchema.output_file_write_performed -ne $false -or $localReviewRecordSchema.file_write_performed -ne $false) {
+      Add-Failure "local review record schema validation must not generate images or write files"
+    }
+    if ($localReviewRecordSchema.daily_note_write_performed -ne $false -or $localReviewRecordSchema.vcp_memory_write_performed -ne $false) {
+      Add-Failure "local review record schema validation must not write DailyNote or VCP memory"
+    }
+    if ($localReviewRecordSchema.real_manifest_read_performed -ne $false -or $localReviewRecordSchema.real_vcpchat_read_performed -ne $false -or $localReviewRecordSchema.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "local review record schema validation must not read real manifest/VCPChat/VCPToolBox"
+    }
+    if ($localReviewRecordSchema.accepted_samples_write_performed -ne $false -or $localReviewRecordSchema.failure_samples_write_performed -ne $false -or $localReviewRecordSchema.production_candidate_created -ne $false) {
+      Add-Failure "local review record schema validation must not write samples or production candidates"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

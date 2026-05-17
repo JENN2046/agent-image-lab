@@ -4,10 +4,10 @@
 
 ```text
 objective: 3-month Agent Image Lab visual production control layer for the VCP ecosystem
-status: v14_121_codex_session_prompt_package_library_governance_completed_validated
+status: v14_122_local_review_record_schema_refresh_completed_validated
 mode: Persistent 4-Agent Council local loop under A4.8
-phase_id: v14_121_codex_session_prompt_package_library_governance
-phase_record_ref: docs/v14_121_codex_session_prompt_package_library_governance.md
+phase_id: v14_122_local_review_record_schema_refresh
+phase_record_ref: docs/v14_122_local_review_record_schema_refresh.md
 default_generation_route_for_next_three_months: codex_session_image
 native_doubao_default_route: false
 provider_api_default_route: false
@@ -32,7 +32,12 @@ env_or_env_local_value_read_allowed_without_separate_authorization: false
 provider_api_plugin_mcp_allowed_without_separate_authorization: false
 real_manifest_VCPChat_VCPToolBox_read_allowed_without_separate_authorization: false
 push_tag_release_deploy_allowed_without_separate_authorization: false
-current_focus: codex_session_prompt_package_library_governance
+current_focus: local_review_record_schema_refresh
+local_review_record_schema_aligned: true
+codex_session_review_records_verified: true
+review_record_boundary_fields_verified: true
+review_record_next_gate_authorization_fields_verified: true
+review_record_schema_no_execution: true
 codex_session_prompt_package_library_governance_aligned: true
 codex_prompt_schema_validation_passed: true
 codex_prompt_not_execution_authorization: true
@@ -73,8 +78,8 @@ accepted_samples_write_performed: false
 failure_samples_write_performed: false
 production_candidate_created: false
 output_file_write_performed: false
-validated_now: node --check scripts/validate_v14_121_codex_session_prompt_package_library_governance.js; node scripts/validate_v14_121_codex_session_prompt_package_library_governance.js
-recommended_next: local_review_record_schema_refresh
+validated_now: node --check scripts/validate_v14_122_local_review_record_schema_refresh.js; node scripts/validate_v14_122_local_review_record_schema_refresh.js
+recommended_next: memory_delta_draft_schema_alignment_for_codex_reviews
 recommended_next_auto_execution_allowed: true
 ```
 

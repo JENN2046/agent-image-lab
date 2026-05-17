@@ -1,5 +1,51 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.122-LOCAL-REVIEW-RECORD-SCHEMA-REFRESH
+
+Scope:
+
+Create and validate a local review record schema contract for Codex-session review records, covering required sections, decision fields, no-execution boundary fields, and next-gate authorization markers without reading image binaries or writing accepted_samples, memory, failure_samples, or production candidates.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_122_local_review_record_schema_refresh.js
+node scripts/validate_v14_122_local_review_record_schema_refresh.js
+```
+
+Expected:
+
+```yaml
+passed: true
+local_review_record_schema_aligned: true
+codex_session_review_records_verified: true
+review_record_boundary_fields_verified: true
+review_record_next_gate_authorization_fields_verified: true
+review_record_schema_no_execution: true
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+output_file_write_performed: false
+```
+
+Result:
+
+```yaml
+status: passed
+validator: scripts/validate_v14_122_local_review_record_schema_refresh.js
+phase_record: docs/v14_122_local_review_record_schema_refresh.md
+```
+
 ## VALIDATION-20260517-v14.121-CODEX-SESSION-PROMPT-PACKAGE-LIBRARY-GOVERNANCE
 
 Scope:
