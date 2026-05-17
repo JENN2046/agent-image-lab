@@ -194,6 +194,7 @@ $requiredFiles = @(
   'scripts/validate_v14_128_failure_samples_authorization_template_current_goal_gap_review.js',
   'scripts/validate_v14_129_current_goal_completion_audit_gap_map.js',
   'scripts/validate_v14_130_legacy_docs_context_quarantine_refresh.js',
+  'scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -318,6 +319,7 @@ $requiredFiles = @(
   'docs/v14_128_failure_samples_authorization_template_current_goal_gap_review.md',
   'docs/v14_129_current_goal_completion_audit_gap_map.md',
   'docs/v14_130_legacy_docs_context_quarantine_refresh.md',
+  'docs/v14_131_real_artifact_validation_and_accepted_sample_recoverability_gate.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8490,6 +8492,49 @@ process.exit(child.status || 0);
     }
     if ($legacyDocsContextQuarantine.real_manifest_read_performed -ne $false -or $legacyDocsContextQuarantine.real_vcpchat_read_performed -ne $false -or $legacyDocsContextQuarantine.real_vcptoolbox_read_performed -ne $false) {
       Add-Failure "legacy docs context quarantine must not read real manifest/VCPChat/VCPToolBox"
+    }
+  }
+
+  $artifactRecoverabilityOutput = & node (Join-Path $Root 'scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "real artifact recoverability validation exited with failure"
+  } else {
+    $artifactRecoverability = ($artifactRecoverabilityOutput -join "`n") | ConvertFrom-Json
+    if ($artifactRecoverability.passed -ne $true) {
+      Add-Failure "real artifact recoverability validation must pass"
+    }
+    if ($artifactRecoverability.real_import_record_parsed -ne $true -or $artifactRecoverability.real_artifact_file_exists -ne $true) {
+      Add-Failure "real artifact recoverability must parse the real import record and find the real artifact"
+    }
+    if ($artifactRecoverability.artifact_hash_validation -ne "local_file_hash_passed" -or $artifactRecoverability.artifact_dimensions_validation -ne "png_header_dimensions_passed") {
+      Add-Failure "real artifact recoverability must verify real local hash and PNG dimensions"
+    }
+    if ($artifactRecoverability.registry_import_review_category_chain_verified -ne $true) {
+      Add-Failure "real artifact recoverability must verify registry/import/review/category chain"
+    }
+    if ($artifactRecoverability.negative_case_hash_mismatch_fails -ne $true -or $artifactRecoverability.negative_case_missing_artifact_fails -ne $true -or $artifactRecoverability.negative_case_missing_human_approval_fails -ne $true) {
+      Add-Failure "real artifact recoverability must include negative case coverage"
+    }
+    if ($artifactRecoverability.recoverability_status -ne "workspace_local_verified" -or $artifactRecoverability.portable_after_clone -ne $false) {
+      Add-Failure "real artifact recoverability must report workspace-local verification without claiming clone portability"
+    }
+    if ($artifactRecoverability.vcp_runtime_integration_proven -ne $false -or $artifactRecoverability.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "real artifact recoverability must not claim VCP runtime integration"
+    }
+    if ($artifactRecoverability.provider_contact_performed -ne $false -or $artifactRecoverability.plugin_call_performed -ne $false -or $artifactRecoverability.api_call_performed -ne $false -or $artifactRecoverability.mcp_runtime_performed -ne $false) {
+      Add-Failure "real artifact recoverability must not call provider/plugin/API/MCP"
+    }
+    if ($artifactRecoverability.image_generation_performed -ne $false -or $artifactRecoverability.output_file_write_performed -ne $false -or $artifactRecoverability.file_write_performed -ne $false) {
+      Add-Failure "real artifact recoverability must not generate or write image/output files"
+    }
+    if ($artifactRecoverability.daily_note_write_performed -ne $false -or $artifactRecoverability.vcp_memory_write_performed -ne $false) {
+      Add-Failure "real artifact recoverability must not write DailyNote or VCP memory"
+    }
+    if ($artifactRecoverability.failure_samples_write_performed -ne $false -or $artifactRecoverability.production_candidate_created -ne $false) {
+      Add-Failure "real artifact recoverability must not write failure_samples or production candidates"
+    }
+    if ($artifactRecoverability.real_manifest_read_performed -ne $false -or $artifactRecoverability.real_vcpchat_read_performed -ne $false -or $artifactRecoverability.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "real artifact recoverability must not read real manifest/VCPChat/VCPToolBox"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

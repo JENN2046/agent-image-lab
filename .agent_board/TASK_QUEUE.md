@@ -10,10 +10,10 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ```text
 Current active long-term objective: 3-month Agent Image Lab visual production control layer for the VCP ecosystem.
-Status: v14_130_legacy_docs_context_quarantine_refresh_completed_validated.
+Status: v14_131_real_artifact_validation_and_accepted_sample_recoverability_completed_validated.
 Purpose: move Agent Image Lab from local verifiable visual production MVP toward a controlled VCPChat / VCPToolBox visual production system while staying inside A4.8 unless separately authorized.
-phase_id: v14_130_legacy_docs_context_quarantine_refresh.
-phase_record_ref: docs/v14_130_legacy_docs_context_quarantine_refresh.md.
+phase_id: v14_131_real_artifact_validation_and_accepted_sample_recoverability_gate.
+phase_record_ref: docs/v14_131_real_artifact_validation_and_accepted_sample_recoverability_gate.md.
 default_generation_route_for_next_three_months: codex_session_image.
 NativeDoubaoImage_default_route: false.
 provider_API_default_route: false.
@@ -38,7 +38,24 @@ env_value_read_allowed_without_separate_authorization: false.
 provider_API_plugin_MCP_allowed_without_separate_authorization: false.
 real_manifest_VCPChat_VCPToolBox_read_allowed_without_separate_authorization: false.
 push_tag_release_deploy_allowed_without_separate_authorization: false.
-current_focus: legacy_docs_context_quarantine_refresh.
+current_focus: real_artifact_validation_and_accepted_sample_recoverability.
+artifact_recoverability_validator_created: true.
+real_import_record_parsed: true.
+real_artifact_file_exists: true.
+artifact_hash_validation: local_file_hash_passed.
+artifact_dimensions_validation: png_header_dimensions_passed.
+registry_import_review_category_chain_verified: true.
+negative_case_hash_mismatch_fails: true.
+negative_case_missing_artifact_fails: true.
+negative_case_missing_human_approval_fails: true.
+recoverability_status: workspace_local_verified.
+artifact_locator_scope: project_relative_runs.
+verification_mode: local_file_hash.
+verified_sha256: 9d23208d05427b02ffc177664c1918ed73bf57831a9694be16522fe9a8f3c910.
+verified_dimensions: 1254x1254.
+portable_after_clone: false.
+artifact_recoverability_is_not_vcp_runtime_integration: true.
+vcp_runtime_integration_proven: false.
 legacy_docs_context_quarantine_created: true.
 context_load_guide_hot_packet_refreshed: true.
 historical_compaction_index_quarantine_refreshed: true.
@@ -143,8 +160,8 @@ accepted_samples_write_performed: false.
 failure_samples_write_performed: false.
 production_candidate_created: false.
 output_file_write_performed: false.
-validated_now: node --check scripts/validate_v14_130_legacy_docs_context_quarantine_refresh.js; node scripts/validate_v14_130_legacy_docs_context_quarantine_refresh.js.
-recommended_next: review_console_current_goal_gap_dashboard_alignment.
+validated_now: node --check scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js; node scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js.
+recommended_next: state_scope_canonicalization.
 recommended_next_auto_execution_allowed: true.
 ---
 Current active local objective: v14_107_womens_resort_relaxed_knit_accepted_sample_closeout.

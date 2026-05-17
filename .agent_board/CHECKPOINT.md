@@ -1,5 +1,50 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.131 Real Artifact Validation And Accepted Sample Recoverability Gate
+
+```text
+phase_id: v14_131_real_artifact_validation_and_accepted_sample_recoverability_gate
+status: completed_validated
+phase_record_ref: docs/v14_131_real_artifact_validation_and_accepted_sample_recoverability_gate.md
+validator_created: scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+artifact_recoverability_validator_created: true
+real_import_record_parsed: true
+real_artifact_file_exists: true
+artifact_hash_validation: local_file_hash_passed
+artifact_dimensions_validation: png_header_dimensions_passed
+registry_import_review_category_chain_verified: true
+negative_case_hash_mismatch_fails: true
+negative_case_missing_artifact_fails: true
+negative_case_missing_human_approval_fails: true
+recoverability_status: workspace_local_verified
+artifact_locator_scope: project_relative_runs
+verification_mode: local_file_hash
+verified_sha256: 9d23208d05427b02ffc177664c1918ed73bf57831a9694be16522fe9a8f3c910
+verified_dimensions: 1254x1254
+portable_after_clone: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+output_file_write_performed: false
+push_tag_release_deploy_performed: false
+validated_now: node --check scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js; node scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js
+recommended_next: state_scope_canonicalization
+recommended_next_auto_execution_allowed: true
+```
+
 # V14.130 Legacy Docs Context Quarantine Refresh
 
 ```text

@@ -1,5 +1,64 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.131-REAL-ARTIFACT-VALIDATION-AND-ACCEPTED-SAMPLE-RECOVERABILITY
+
+Scope:
+
+Validate that the v14.105 Codex-session accepted sample is a real
+workspace-local artifact event by parsing the real import record, re-hashing the
+real PNG, checking PNG dimensions, and cross-checking the review, closeout,
+accepted sample registry, and category index.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js
+node scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js
+```
+
+Expected:
+
+```yaml
+passed: true
+artifact_recoverability_validator_created: true
+real_import_record_parsed: true
+real_artifact_file_exists: true
+artifact_hash_validation: local_file_hash_passed
+artifact_dimensions_validation: png_header_dimensions_passed
+registry_import_review_category_chain_verified: true
+negative_case_hash_mismatch_fails: true
+negative_case_missing_artifact_fails: true
+negative_case_missing_human_approval_fails: true
+recoverability_status: workspace_local_verified
+artifact_locator_scope: project_relative_runs
+verification_mode: local_file_hash
+portable_after_clone: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+```
+
+Result:
+
+```yaml
+status: passed
+validator: scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js
+phase_record: docs/v14_131_real_artifact_validation_and_accepted_sample_recoverability_gate.md
+```
+
 ## VALIDATION-20260517-v14.130-LEGACY-DOCS-CONTEXT-QUARANTINE-REFRESH
 
 Scope:

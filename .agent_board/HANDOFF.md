@@ -3,6 +3,50 @@
 ## Handoff Summary
 
 ```text
+Status: v14_131_real_artifact_validation_and_accepted_sample_recoverability completed locally and validated.
+Reason: The current accepted Codex-session sample needed real artifact recoverability proof instead of another dashboard or token-only document gate.
+Current repository: project_root
+Branch: master tracking origin/master. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.131 real artifact validator, phase record, MVP wiring, and .agent_board sync until validation and commit decision.
+Phase record: docs/v14_131_real_artifact_validation_and_accepted_sample_recoverability_gate.md
+Validator created: scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js
+MVP validator updated: scripts/validate_mvp.ps1
+artifact_recoverability_validator_created: true
+real_import_record_parsed: true
+real_artifact_file_exists: true
+artifact_hash_validation: local_file_hash_passed
+artifact_dimensions_validation: png_header_dimensions_passed
+registry_import_review_category_chain_verified: true
+negative_case_hash_mismatch_fails: true
+negative_case_missing_artifact_fails: true
+negative_case_missing_human_approval_fails: true
+recoverability_status: workspace_local_verified
+artifact_locator_scope: project_relative_runs
+verification_mode: local_file_hash
+verified_sha256: 9d23208d05427b02ffc177664c1918ed73bf57831a9694be16522fe9a8f3c910
+verified_dimensions: 1254x1254
+portable_after_clone: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+output_file_write_performed: false
+push_tag_release_deploy_performed: false
+validated_now: node --check scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js; node scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js
+recommended_next: state_scope_canonicalization
+recommended_next_auto_execution_allowed: true
+---
 Status: v14_130_legacy_docs_context_quarantine_refresh completed locally and validated.
 Reason: Old and stale documentation needed a stronger quarantine layer so future sessions start from the board surfaces and v14.129 audit instead of bulk-loading historical phase chains.
 Current repository: project_root
