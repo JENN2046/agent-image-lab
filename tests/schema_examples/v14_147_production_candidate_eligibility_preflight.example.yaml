@@ -1,0 +1,68 @@
+# v14.147 production candidate eligibility preflight example
+
+production_candidate_eligibility_preflight:
+  version: v1
+  preflight_type: production_candidate_eligibility
+  phase: v14_147_production_candidate_eligibility_preflight
+  execution_mode: local_schema_fixture_validator_only
+  authorization_granted_by_this_preflight: false
+
+  candidate_identity:
+    sample_id: accepted_womens_resort_relaxed_knit_codex_v2_001
+    category: fashion_lookbook_portrait
+    source_lifecycle_state_required: recoverable
+    archive_dry_run_ready_required: true
+    production_candidate_existing_record_allowed: false
+
+  source_refs:
+    accepted_registry_ref: accepted_samples/accepted_sample_registry.yaml
+    category_index_ref: accepted_samples/categories/fashion_lookbook_portrait.yaml
+    import_record_ref: runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/resort_relaxed_knit_final_import_record.json
+    review_record_ref: docs/v14_105_codex_session_womens_resort_relaxed_knit_final_review.md
+    human_approval_ref: docs/v14_107_womens_resort_relaxed_knit_accepted_sample_closeout.md
+    durable_archive_dry_run_manifest_ref: tests/schema_examples/v14_146_durable_archive_dry_run_manifest.example.yaml
+    durable_archive_dry_run_record_ref: docs/v14_146_durable_archive_dry_run_manifest.md
+
+  verified_artifact:
+    source_artifact_ref: runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/codex_session_womens_resort_relaxed_knit_final_v2.png
+    sha256: 9d23208d05427b02ffc177664c1918ed73bf57831a9694be16522fe9a8f3c910
+    dimensions: 1254x1254
+    mime: image/png
+
+  planned_production_candidate:
+    candidate_id: womens_resort_relaxed_knit_codex_v2_production_candidate_001
+    plan_ref: production/plans/womens_resort_relaxed_knit_codex_v2_production_candidate_001_plan.yaml
+    review_ref: production/reviews/womens_resort_relaxed_knit_codex_v2_production_candidate_001_review.md
+    production_candidate_write_allowed_now: false
+    production_candidate_created: false
+    production_candidate_write_performed: false
+
+  eligibility_result:
+    eligible_for_preflight: true
+    ready_for_A5_authorization_package: true
+    blocked_for_execution_now: true
+    blockers:
+      - durable_archive_execution_not_performed
+      - production_candidate_A5_authorization_not_granted
+
+  dry_run_guards:
+    dry_run_only: true
+    authorization_granted_by_this_preflight: false
+    production_directory_write_performed: false
+    production_candidate_created: false
+    production_candidate_write_performed: false
+    image_binary_copy_performed: false
+    runs_source_image_modified: false
+    accepted_samples_write_performed: false
+    failure_samples_write_performed: false
+    DailyNote_write_performed: false
+    VCP_memory_write_performed: false
+    provider_contact_performed: false
+    plugin_call_performed: false
+    api_call_performed: false
+    mcp_runtime_performed: false
+    image_generation_performed: false
+    real_manifest_read_performed: false
+    real_vcpchat_read_performed: false
+    real_vcptoolbox_read_performed: false
+    push_tag_release_deploy_performed: false

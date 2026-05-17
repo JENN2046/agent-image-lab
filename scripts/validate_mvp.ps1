@@ -211,6 +211,7 @@ $requiredFiles = @(
   'scripts/validate_v14_144_review_console_schema_binding.js',
   'scripts/validate_v14_145_sample_lifecycle_state_machine.js',
   'scripts/validate_v14_146_durable_archive_dry_run_manifest.js',
+  'scripts/validate_v14_147_production_candidate_eligibility_preflight.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -357,6 +358,9 @@ $requiredFiles = @(
   'docs/v14_146_durable_archive_dry_run_manifest.md',
   'schemas/durable_archive_dry_run_manifest.schema.yaml',
   'tests/schema_examples/v14_146_durable_archive_dry_run_manifest.example.yaml',
+  'docs/v14_147_production_candidate_eligibility_preflight.md',
+  'schemas/production_candidate_eligibility_preflight.schema.yaml',
+  'tests/schema_examples/v14_147_production_candidate_eligibility_preflight.example.yaml',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -9101,6 +9105,58 @@ process.exit(child.status || 0);
     }
     if ($durableArchiveDryRun.real_manifest_read_performed -ne $false -or $durableArchiveDryRun.real_vcpchat_read_performed -ne $false -or $durableArchiveDryRun.real_vcptoolbox_read_performed -ne $false) {
       Add-Failure "durable archive dry-run manifest must not read real manifest/VCPChat/VCPToolBox"
+    }
+  }
+
+  $productionCandidatePreflightOutput = & node (Join-Path $Root 'scripts/validate_v14_147_production_candidate_eligibility_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "production candidate eligibility preflight validation exited with failure"
+  } else {
+    $productionCandidatePreflight = ($productionCandidatePreflightOutput -join "`n") | ConvertFrom-Json
+    if ($productionCandidatePreflight.passed -ne $true) {
+      Add-Failure "production candidate eligibility preflight validation must pass"
+    }
+    if ($productionCandidatePreflight.production_candidate_eligibility_preflight_created -ne $true -or $productionCandidatePreflight.eligible_for_preflight -ne $true -or $productionCandidatePreflight.ready_for_A5_authorization_package -ne $true) {
+      Add-Failure "v14.147 must create a production candidate eligibility preflight ready for A5 authorization drafting"
+    }
+    if ($productionCandidatePreflight.blocked_for_execution_now -ne $true -or $productionCandidatePreflight.production_candidate_write_allowed_now -ne $false) {
+      Add-Failure "v14.147 must keep production candidate execution blocked"
+    }
+    if ($productionCandidatePreflight.durable_archive_execution_not_performed -ne $true -or $productionCandidatePreflight.production_candidate_A5_authorization_not_granted -ne $true) {
+      Add-Failure "v14.147 must preserve durable archive and A5 authorization blockers"
+    }
+    if ($productionCandidatePreflight.registry_to_import_record_verified -ne $true -or $productionCandidatePreflight.registry_to_review_record_verified -ne $true -or $productionCandidatePreflight.registry_to_category_index_verified -ne $true -or $productionCandidatePreflight.human_approval_verified -ne $true) {
+      Add-Failure "v14.147 must verify registry/import/review/category/approval evidence"
+    }
+    if ($productionCandidatePreflight.artifact_sha256_verified -ne $true -or $productionCandidatePreflight.artifact_dimensions_verified -ne $true -or $productionCandidatePreflight.artifact_mime_verified -ne $true -or $productionCandidatePreflight.durable_archive_dry_run_manifest_verified -ne $true) {
+      Add-Failure "v14.147 must verify artifact evidence and durable archive dry-run manifest"
+    }
+    if ($productionCandidatePreflight.v14_146_dry_run_validator_still_passes -ne $true -or $productionCandidatePreflight.v14_112_production_candidate_gate_still_passes -ne $true) {
+      Add-Failure "v14.147 must preserve v14.146 and v14.112 validation"
+    }
+    if ($productionCandidatePreflight.negative_case_missing_human_approval_blocks_eligibility -ne $true -or $productionCandidatePreflight.negative_case_missing_recoverability_blocks_eligibility -ne $true -or $productionCandidatePreflight.negative_case_missing_archive_dry_run_blocks_authorization_readiness -ne $true -or $productionCandidatePreflight.negative_case_existing_production_candidate_blocks_new_candidate -ne $true -or $productionCandidatePreflight.negative_case_missing_A5_authorization_blocks_write -ne $true) {
+      Add-Failure "v14.147 must fail production candidate eligibility negative cases"
+    }
+    if ($productionCandidatePreflight.vcp_runtime_integration_proven -ne $false -or $productionCandidatePreflight.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "production candidate eligibility preflight must not claim VCP runtime integration"
+    }
+    if ($productionCandidatePreflight.authorization_granted_by_this_record -ne $false -or $productionCandidatePreflight.authorization_granted_by_this_preflight -ne $false) {
+      Add-Failure "production candidate eligibility preflight must not grant authorization"
+    }
+    if ($productionCandidatePreflight.production_directory_write_performed -ne $false -or $productionCandidatePreflight.production_candidate_created -ne $false -or $productionCandidatePreflight.production_candidate_write_performed -ne $false) {
+      Add-Failure "production candidate eligibility preflight must not write production candidate files"
+    }
+    if ($productionCandidatePreflight.provider_contact_performed -ne $false -or $productionCandidatePreflight.plugin_call_performed -ne $false -or $productionCandidatePreflight.api_call_performed -ne $false -or $productionCandidatePreflight.mcp_runtime_performed -ne $false) {
+      Add-Failure "production candidate eligibility preflight must not call provider/plugin/API/MCP"
+    }
+    if ($productionCandidatePreflight.image_generation_performed -ne $false -or $productionCandidatePreflight.image_binary_copy_performed -ne $false -or $productionCandidatePreflight.runs_source_image_modified -ne $false) {
+      Add-Failure "production candidate eligibility preflight must not generate images, copy binaries, or modify runs"
+    }
+    if ($productionCandidatePreflight.accepted_samples_write_performed -ne $false -or $productionCandidatePreflight.failure_samples_write_performed -ne $false -or $productionCandidatePreflight.daily_note_write_performed -ne $false -or $productionCandidatePreflight.vcp_memory_write_performed -ne $false) {
+      Add-Failure "production candidate eligibility preflight must not write accepted/failure samples, DailyNote, or VCP memory"
+    }
+    if ($productionCandidatePreflight.real_manifest_read_performed -ne $false -or $productionCandidatePreflight.real_vcpchat_read_performed -ne $false -or $productionCandidatePreflight.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "production candidate eligibility preflight must not read real manifest/VCPChat/VCPToolBox"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

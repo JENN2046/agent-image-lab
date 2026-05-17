@@ -1,5 +1,66 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.147-PRODUCTION-CANDIDATE-ELIGIBILITY-PREFLIGHT
+
+Scope:
+
+Validate production candidate eligibility without writing production candidate
+metadata, archive files, images, or memory.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_147_production_candidate_eligibility_preflight.js
+node scripts/validate_v14_147_production_candidate_eligibility_preflight.js
+```
+
+Expected:
+
+```yaml
+passed: true
+production_candidate_eligibility_preflight_created: true
+eligible_for_preflight: true
+ready_for_A5_authorization_package: true
+blocked_for_execution_now: true
+durable_archive_execution_not_performed: true
+production_candidate_A5_authorization_not_granted: true
+production_candidate_write_allowed_now: false
+production_candidate_created: false
+production_candidate_write_performed: false
+registry_to_import_record_verified: true
+registry_to_review_record_verified: true
+registry_to_category_index_verified: true
+human_approval_verified: true
+artifact_sha256_verified: true
+artifact_dimensions_verified: true
+artifact_mime_verified: true
+durable_archive_dry_run_manifest_verified: true
+negative_case_missing_human_approval_blocks_eligibility: true
+negative_case_missing_recoverability_blocks_eligibility: true
+negative_case_missing_archive_dry_run_blocks_authorization_readiness: true
+negative_case_existing_production_candidate_blocks_new_candidate: true
+negative_case_missing_A5_authorization_blocks_write: true
+authorization_granted_by_this_record: false
+production_directory_write_performed: false
+image_binary_copy_performed: false
+runs_source_image_modified: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+```
+
 ## VALIDATION-20260517-v14.146-DURABLE-ARCHIVE-DRY-RUN-MANIFEST
 
 Scope:

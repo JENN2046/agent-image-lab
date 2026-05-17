@@ -1,0 +1,56 @@
+# production_candidate_eligibility_preflight.schema.yaml
+# Local preflight contract for a future production_candidate write.
+
+production_candidate_eligibility_preflight:
+  version: v1
+  preflight_type: production_candidate_eligibility
+  execution_mode: local_schema_fixture_validator_only
+  authorization_granted_by_this_preflight: false
+
+candidate_identity:
+  sample_id: string
+  category: string
+  source_lifecycle_state_required: recoverable
+  archive_dry_run_ready_required: true
+  production_candidate_existing_record_allowed: false
+
+required_evidence:
+  accepted_registry_entry_exists: true
+  category_index_entry_exists: true
+  import_record_exists: true
+  review_record_exists: true
+  human_approval_exists: true
+  artifact_sha256_verified: true
+  artifact_dimensions_verified: true
+  artifact_mime_verified: true
+  durable_archive_dry_run_manifest_exists: true
+
+eligibility_result:
+  eligible_for_preflight: true
+  ready_for_A5_authorization_package: true
+  production_candidate_write_allowed_now: false
+  production_candidate_created: false
+  production_candidate_write_performed: false
+
+blockers:
+  durable_archive_execution_not_performed: true
+  production_candidate_A5_authorization_not_granted: true
+  production_candidate_target_files_not_created: true
+
+forbidden_without_A5:
+  production_directory_write: true
+  production_candidate_metadata_write: true
+  image_binary_copy: true
+  runs_source_image_modification: true
+  DailyNote_write: true
+  VCP_memory_write: true
+  provider_api_plugin_mcp_call: true
+  real_manifest_vcpchat_vcptoolbox_read: true
+  push_tag_release_deploy: true
+
+negative_case_requirements:
+  missing_human_approval_blocks_eligibility: true
+  missing_recoverability_blocks_eligibility: true
+  missing_archive_dry_run_blocks_authorization_readiness: true
+  existing_production_candidate_blocks_new_candidate: true
+  missing_A5_authorization_blocks_write: true

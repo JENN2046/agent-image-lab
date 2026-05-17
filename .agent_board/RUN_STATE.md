@@ -4,6 +4,53 @@
 
 ```text
 objective: extend v14.131-v14.140 single-sample recoverability into multi-category local artifact lifecycle product capability
+status: v14_147_production_candidate_eligibility_preflight_completed_validated
+mode: Persistent 4-Agent Council local loop under A4.8 / A4 — Sustained Local Autopilot
+phase_id: v14_147_production_candidate_eligibility_preflight
+phase_record_ref: docs/v14_147_production_candidate_eligibility_preflight.md
+schema_ref: schemas/production_candidate_eligibility_preflight.schema.yaml
+fixture_ref: tests/schema_examples/v14_147_production_candidate_eligibility_preflight.example.yaml
+validator_created: scripts/validate_v14_147_production_candidate_eligibility_preflight.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+production_candidate_eligibility_preflight_created: true
+eligible_for_preflight: true
+ready_for_A5_authorization_package: true
+blocked_for_execution_now: true
+durable_archive_execution_not_performed: true
+production_candidate_A5_authorization_not_granted: true
+production_candidate_write_allowed_now: false
+production_candidate_created: false
+production_candidate_write_performed: false
+negative_case_missing_A5_authorization_blocks_write: true
+accepted_sample_direct_to_production_candidate_forbidden: true
+authorization_granted_by_this_record: false
+production_directory_write_performed: false
+image_binary_copy_performed: false
+runs_source_image_modified: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+validated_now: node --check scripts/validate_v14_147_production_candidate_eligibility_preflight.js; node scripts/validate_v14_147_production_candidate_eligibility_preflight.js
+recommended_next: v14_148_memory_delta_draft_package
+recommended_next_auto_execution_allowed: true_after_v14_147_local_commit
+```
+
+## Previous Two-Month Artifact Lifecycle Goal
+
+```text
+objective: extend v14.131-v14.140 single-sample recoverability into multi-category local artifact lifecycle product capability
 status: v14_146_durable_archive_dry_run_manifest_completed_validated
 mode: Persistent 4-Agent Council local loop under A4.8 / A4 — Sustained Local Autopilot
 phase_id: v14_146_durable_archive_dry_run_manifest
