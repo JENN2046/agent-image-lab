@@ -22,6 +22,19 @@ function isDirectoryEmptyOrAbsent(relativePath) {
   return stat.isDirectory() && fs.readdirSync(absolutePath).length === 0;
 }
 
+function hasOnlyAuthorizedPostRunOutput(relativePath) {
+  const absolutePath = path.join(root, relativePath);
+  if (!fs.existsSync(absolutePath)) {
+    return false;
+  }
+  const stat = fs.statSync(absolutePath);
+  if (!stat.isDirectory()) {
+    return false;
+  }
+  const entries = fs.readdirSync(absolutePath);
+  return entries.length === 1 && entries[0] === "native_doubao_1778997050035_0.jpg";
+}
+
 function has(content, pattern) {
   return content.includes(pattern);
 }
@@ -121,7 +134,10 @@ function main() {
     "tests/schema_examples/pvos_evidence_collector_blocker_pipeline.example.json"
   ].forEach((requiredPath) => add(`required_source_exists:${requiredPath}`, exists(requiredPath)));
 
-  add("output_directory_absent_or_empty", isDirectoryEmptyOrAbsent(outputDirectory));
+  add(
+    "output_directory_absent_or_empty_or_authorized_post_run_output_only",
+    isDirectoryEmptyOrAbsent(outputDirectory) || hasOnlyAuthorizedPostRunOutput(outputDirectory)
+  );
 
   const failed = checks.filter((check) => !check.passed);
   const result = {
@@ -144,6 +160,8 @@ function main() {
       daily_note_direct_write_allowed: false,
       memory_delta_only: true,
       output_directory_absent_or_empty: isDirectoryEmptyOrAbsent(outputDirectory),
+      authorized_post_run_output_present: hasOnlyAuthorizedPostRunOutput(outputDirectory),
+      output_directory_state_compatible: isDirectoryEmptyOrAbsent(outputDirectory) || hasOnlyAuthorizedPostRunOutput(outputDirectory),
       external_network_required: false,
       provider_contact_performed: false,
       plugin_call_performed: false,

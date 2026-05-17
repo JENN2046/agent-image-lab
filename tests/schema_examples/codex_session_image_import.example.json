@@ -1,0 +1,69 @@
+{
+  "codex_session_image_import": {
+    "import_version": "v1",
+    "import_id": "codex_session_image_import_lantern_placeholder_001",
+    "provider_id": "codex_session_image",
+    "import_mode": "manual_session_import",
+    "status": "draft_import_record",
+    "source": {
+      "codex_session_generation": true,
+      "codex_image_direct_call_allowed": false,
+      "mcp_runtime_allowed": false,
+      "provider_api_call_allowed": false,
+      "project_script_generation_allowed": false,
+      "image_generation_by_script": false,
+      "human_session_action_required": true
+    },
+    "prompt_package_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v9.yaml",
+    "prompt_package_id": "product_lifestyle_premium_portable_led_camping_lantern_v9",
+    "generation_notes_cn": "示例记录只描述手动导入边界，不代表真实图片已导入。",
+    "imported_asset": {
+      "output_directory_ref": "runs/real_generation/codex_session_image_import_example/",
+      "file_name": "codex_session_image_placeholder.jpg",
+      "relative_path": "runs/real_generation/codex_session_image_import_example/codex_session_image_placeholder.jpg",
+      "mime_type": "image/jpeg",
+      "width_px": 1920,
+      "height_px": 1920,
+      "aspect_ratio": "1:1",
+      "sha256": "placeholder_manual_import_sha256_not_computed",
+      "local_file_verified": false,
+      "copied_by_project_script": false
+    },
+    "review_bridge": {
+      "image_case_id": null,
+      "review_status": "pending_human_review",
+      "accepted_candidate": false,
+      "commercial_delivery_ready": false,
+      "memory_suitability": "deferred",
+      "review_record_ref": null
+    },
+    "no_execution_guard": {
+      "provider_contact_allowed": false,
+      "plugin_call_allowed": false,
+      "api_call_allowed": false,
+      "image_generation_allowed_by_project": false,
+      "env_local_secret_value_read_allowed": false,
+      "DailyNote_write_allowed": false,
+      "VCP_memory_write_allowed": false,
+      "accepted_samples_write_allowed": false,
+      "production_candidate_write_allowed": false,
+      "real_manifest_read_allowed": false,
+      "real_VCPChat_read_allowed": false,
+      "real_VCPToolBox_read_allowed": false,
+      "push_tag_release_deploy_allowed": false,
+      "provider_contact_performed_by_project": false,
+      "plugin_call_performed_by_project": false,
+      "api_call_performed_by_project": false,
+      "image_generation_performed_by_project": false,
+      "env_local_secret_value_read_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "real_manifest_read_performed": false,
+      "real_VCPChat_read_performed": false,
+      "real_VCPToolBox_read_performed": false,
+      "push_tag_release_deploy_performed": false
+    }
+  }
+}

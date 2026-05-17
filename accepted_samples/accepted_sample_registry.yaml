@@ -1,6 +1,6 @@
 accepted_sample_registry:
   version: v1
-  updated_by_phase: v7_32
+  updated_by_phase: v14_106
   image_files_committed_to_git: false
   registry_only: true
   memory_write_allowed: false
@@ -193,5 +193,48 @@ accepted_sample_registry:
         - flower_plastic_wrap_feels_somewhat_studio_styled
       commercial_use_level: accepted_with_support_logic_warning
       validates_watermark_false_parameter: true
+      write_to_memory_allowed: false
+      daily_note_write_allowed: false
+
+    - sample_id: accepted_womens_resort_relaxed_knit_codex_v2_001
+      source_phase: v14_105
+      source_plan: womens_resort_relaxed_knit_final_v2
+      asset_status: accepted_candidate
+      provider_type: codex_session_image
+      plugin_id: null
+      model: codex_session_builtin_image_generation
+      prompt_package_ref: session_prompt_inline:womens_resort_relaxed_knit_final_v2
+      review_doc_ref: docs/v14_105_codex_session_womens_resort_relaxed_knit_final_review.md
+      formal_sample_package_ref: docs/v14_106_womens_resort_relaxed_knit_formal_sample_promotion_package.md
+      image_path: runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/codex_session_womens_resort_relaxed_knit_final_v2.png
+      image_sha256: 9d23208d05427b02ffc177664c1918ed73bf57831a9694be16522fe9a8f3c910
+      image_dimensions: 1254x1254
+      image_files_committed_to_git: false
+      category: fashion_lookbook_portrait
+      style_tags:
+        - womens_fashion
+        - resort_relaxed_knit
+        - coastal_lifestyle
+        - square_hero_portrait
+        - codex_session_image
+        - accepted_candidate
+      acceptance_summary:
+        adult_model_only: pass
+        clothing_first_visual: pass
+        resort_relaxed_direction_clear: pass
+        knit_texture_visible: pass
+        trouser_pleats_and_drape_visible: pass
+        background_secondary: pass
+        decorative_prop_removed: pass
+        not_beige_washed: pass
+        hands_and_pose: pass
+        no_text_logo_watermark: pass
+        no_extra_people: pass
+        commercial_usability: pass
+        memory_suitability: false
+      known_minor_issues:
+        - lower_trouser_hem_not_visible_because_square_hero_crop_is_upper_body_dominant
+        - model_face_and_upper_body_are_visually_strong_so_full_garment_catalog_detail_is_not_complete
+      commercial_use_level: accepted_candidate
       write_to_memory_allowed: false
       daily_note_write_allowed: false

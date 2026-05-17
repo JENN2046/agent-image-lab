@@ -21,6 +21,15 @@ function isDirectoryEmptyOrAbsent(relativePath) {
   return stat.isDirectory() && fs.readdirSync(absolutePath).length === 0;
 }
 
+function hasOnlyAuthorizedPostRunOutput(relativePath) {
+  const absolutePath = path.join(root, relativePath);
+  if (!fs.existsSync(absolutePath)) return false;
+  const stat = fs.statSync(absolutePath);
+  if (!stat.isDirectory()) return false;
+  const entries = fs.readdirSync(absolutePath);
+  return entries.length === 1 && entries[0] === "native_doubao_1778997050035_0.jpg";
+}
+
 function addCheck(checks, name, passed) {
   checks.push({ name, passed: Boolean(passed) });
 }
@@ -109,7 +118,11 @@ function main() {
   addCheck(checks, "runner_default_dry_run", runner.includes("if (options.dryRun === undefined) options.dryRun = true;"));
   addCheck(checks, "runner_cli_supports_execution_authorized_false", runner.includes('execution_authorized: args["--execution-authorized"] === "true"'));
   addCheck(checks, "runner_does_not_call_load_env_before_real_gate", runner.indexOf("const preflight = preflightCheck(options);") < runner.indexOf("if (options.dryRun === false && options.execution_authorized === true)"));
-  addCheck(checks, "output_directory_absent_or_empty", isDirectoryEmptyOrAbsent(outputDirectory));
+  addCheck(
+    checks,
+    "output_directory_absent_or_empty_or_authorized_post_run_output_only",
+    isDirectoryEmptyOrAbsent(outputDirectory) || hasOnlyAuthorizedPostRunOutput(outputDirectory)
+  );
 
   const failed = checks.filter((check) => !check.passed);
   const result = {
@@ -130,6 +143,8 @@ function main() {
       vcp_memory_write_allowed: false,
       push_tag_release_deploy_allowed: false,
       output_directory_absent_or_empty: isDirectoryEmptyOrAbsent(outputDirectory),
+      authorized_post_run_output_present: hasOnlyAuthorizedPostRunOutput(outputDirectory),
+      output_directory_state_compatible: isDirectoryEmptyOrAbsent(outputDirectory) || hasOnlyAuthorizedPostRunOutput(outputDirectory),
       external_network_required: false,
       file_write_performed: false,
       check_count: checks.length,

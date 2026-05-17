@@ -3,6 +3,427 @@
 ## Handoff Summary
 
 ```text
+Status: v14_107_womens_resort_relaxed_knit_accepted_sample_closeout completed locally and validated.
+Reason: User authorized accepted_samples registry write and then asked to continue the plan. This phase syncs state and closes out the formal accepted sample registry write.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.084-v14.107 local prompt/review/validator/board/import/package/accepted_samples changes until validation/commit decision.
+Accepted sample id: accepted_womens_resort_relaxed_knit_codex_v2_001
+Category: fashion_lookbook_portrait
+Accepted sample registry: accepted_samples/accepted_sample_registry.yaml
+Category index: accepted_samples/categories/fashion_lookbook_portrait.yaml
+Accepted sample closeout: docs/v14_107_womens_resort_relaxed_knit_accepted_sample_closeout.md
+Source image: runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/codex_session_womens_resort_relaxed_knit_final_v2.png
+accepted_sample_registry_write_completed: true
+image_files_committed_to_git: false
+source_image_modified: false
+production_candidate_002: false
+DailyNote_write: false
+VCP_memory_write: false
+provider_contact: false
+image_generation_by_project_script: false
+validated_now: accepted sample registry presence check; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: choose_production_candidate_planning_memory_suitability_review_or_new_visual_series
+recommended_next_auto_execution_allowed: false
+---
+Status: v14_106_womens_resort_relaxed_knit_formal_sample_promotion_package completed locally and validated.
+Reason: User asked to continue toward a formal sample. Because accepted_samples is an independent write surface, this phase prepares the promotion package and exact authorization phrase without writing accepted_samples.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.084-v14.106 local prompt/review/validator/board/import/package changes until validation/commit decision.
+Formal sample package: docs/v14_106_womens_resort_relaxed_knit_formal_sample_promotion_package.md
+Source image: runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/codex_session_womens_resort_relaxed_knit_final_v2.png
+Proposed sample id: accepted_womens_resort_relaxed_knit_codex_v2_001
+Proposed category: fashion_lookbook_portrait
+accepted_samples_written: false
+production_candidate_002: false
+DailyNote_write: false
+VCP_memory_write: false
+provider_contact: false
+image_generation_by_project_script: false
+validated_now: node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: wait_for_exact_authorization_statement_before_accepted_samples_registry_write
+recommended_next_auto_execution_allowed: false
+---
+Status: v14_105_codex_session_womens_resort_relaxed_knit_final_candidate completed locally and validated.
+Reason: User asked to push to final output. The weakest first-round fashion direction, resort relaxed knit, was refined with Codex session generation and imported as a final visual candidate.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.084-v14.105 local prompt/review/validator/board/import changes until validation/commit decision.
+Final asset: runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/codex_session_womens_resort_relaxed_knit_final_v2.png
+Import record: runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/resort_relaxed_knit_final_import_record.json
+Review record: docs/v14_105_codex_session_womens_resort_relaxed_knit_final_review.md
+asset_dimensions: 1254x1254
+asset_sha256: 9d23208d05427b02ffc177664c1918ed73bf57831a9694be16522fe9a8f3c910
+visual_decision: final_visual_candidate_pass
+formal_acceptance_status: pending_human_review
+commercial_delivery_ready: false
+memory_suitability: deferred
+codex_session_generation_used: true
+codex_session_generation_separate_A5_authorization_required_now: false
+project_script_generation: false
+MCP_runtime: false
+provider_API_call_by_project: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: import JSON parse check; node scripts/validate_codex_session_image_import.js; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: human_can_accept_this_as_final_visual_candidate_or_authorize_formal_sample_promotion
+recommended_next_auto_execution_allowed: false
+---
+Status: v14_104_codex_session_womens_fashion_three_outfit_first_round_import completed locally and validated.
+Reason: User asked to continue toward a three-outfit fashion portrait objective. Codex session generation was used under the current direct-request rule, and the three outputs were imported as local first-round candidates, not accepted_samples or production_candidate.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.084-v14.104 local prompt/review/validator/board/import changes until validation/commit decision.
+Output directory: runs/real_generation/v14_104_codex_session_womens_fashion_three_outfit_first_round_candidates/
+Review record: docs/v14_104_codex_session_womens_fashion_three_outfit_first_round_review.md
+commuter_asset: runs/real_generation/v14_104_codex_session_womens_fashion_three_outfit_first_round_candidates/codex_session_womens_commuter_tailored_suit_v1.png
+outdoor_asset: runs/real_generation/v14_104_codex_session_womens_fashion_three_outfit_first_round_candidates/codex_session_womens_outdoor_technical_v1.png
+resort_asset: runs/real_generation/v14_104_codex_session_womens_fashion_three_outfit_first_round_candidates/codex_session_womens_resort_relaxed_knit_v1.png
+overall_decision: first_round_series_candidate_pass
+best_single_direction: commuter_tailored_suit
+strongest_visual_drama: outdoor_technical
+v2_refinement_target_if_needed: resort_relaxed_knit
+formal_acceptance_status: pending_human_review
+commercial_delivery_ready: false
+memory_suitability: deferred
+codex_session_generation_used: true
+codex_session_generation_separate_A5_authorization_required_now: false
+project_script_generation: false
+MCP_runtime: false
+provider_API_call_by_project: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: three import JSON parse checks; node scripts/validate_codex_session_image_import.js; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: refine_resort_relaxed_knit_v2_only_if_final_series_consistency_is_required
+recommended_next_auto_execution_allowed: false
+---
+Status: v14_103_codex_session_lantern_codex_v1_square_hero_candidate_import completed locally and validated.
+Reason: User asked to run the Codex image path end-to-end without waiting for more manual review. Codex session generation is temporarily allowed by direct user request; the final session output was imported as a local candidate record, not as accepted_samples or production_candidate.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.084-v14.103 local prompt/review/validator/board/import changes until validation/commit decision.
+Prompt package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_codex_v1.yaml
+Imported asset: runs/real_generation/v14_103_codex_session_premium_portable_led_camping_lantern_codex_v1_square_hero_candidate/codex_session_lantern_codex_v1_square_hero_candidate.png
+Import record: runs/real_generation/v14_103_codex_session_premium_portable_led_camping_lantern_codex_v1_square_hero_candidate/codex_session_image_import_record.json
+Review record: docs/v14_103_codex_session_lantern_codex_v1_square_hero_candidate_review.md
+asset_dimensions: 1254x1254
+asset_sha256: dec895455bf6c607094baf4616abaf05c9f2cd95e95bcb55a40dcf8f286a9702
+visual_decision: internal_visual_pass_as_imported_candidate
+formal_acceptance_status: pending_human_review
+commercial_delivery_ready: false
+memory_suitability: deferred
+codex_session_generation_used: true
+codex_session_generation_separate_A5_authorization_required_now: false
+project_script_generation: false
+NativeDoubaoImage_call: false
+MCP_runtime: false
+provider_API_call_by_project: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: import JSON parse check; node scripts/validate_codex_session_image_import.js; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: human_may_formally_accept_or_request_one_codex_v2_refinement
+recommended_next_auto_execution_allowed: false
+---
+Status: v14_102_codex_session_lantern_v1_prompt_package completed locally and statically validated.
+Reason: User decided to stop NativeDoubaoImage iteration and use Codex image generation afterward. This phase creates only the Codex Session Image prompt package, not the image.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.084-v14.102 local prompt/review/validator/board changes until validation/commit decision.
+Prompt package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_codex_v1.yaml
+Source prompt package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v10.yaml
+Source generation result: runs/real_generation/v14_101_pvos_premium_portable_led_camping_lantern_v10_square_hero_trial/native_doubao_1779005117784_0.jpg
+codex_session_provider_contract_ref: docs/codex_session_image_provider_minimal_contract.md
+provider_id_for_future_manual_generation: codex_session_image
+manual_session_generation_required: true
+codex_session_generation_separate_A5_authorization_required_now: false
+codex_session_generation_direct_user_request_sufficient_now: true
+direct_project_call_allowed: false
+mcp_runtime_allowed: false
+project_script_generation_allowed: false
+next_codex_session_generation_requires_direct_user_request: true
+provider_contact_by_this_prompt_work: false
+image_generation_by_this_prompt_work: false
+image_generation_by_project_script: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_codex_v1.yaml; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: optional_codex_session_image_generation_by_direct_user_request_then_codex_session_image_import_record
+recommended_next_auto_execution_allowed: false
+---
+Status: v14_100_pvos_lantern_v10_prompt_revision_plan completed locally and statically validated.
+Reason: Human asked for NativeDoubaoImage V10. V10 is prepared locally as a prompt package first because actual NativeDoubaoImage generation remains A5 and needs a separate exact authorization phrase.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.084-v14.100 local prompt/review/validator/board changes until validation/commit decision.
+Prompt package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v10.yaml
+Source prompt package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v9.yaml
+Source generation result: runs/real_generation/v14_098_pvos_premium_portable_led_camping_lantern_v9_square_hero_trial/native_doubao_1779003902063_0.jpg
+future_authorization_package_id_recommended: AUTH-PENDING-PVOS-LANTERN-V10-SQUARE-HERO-20260517-001
+future_output_directory_ref: runs/real_generation/v14_101_pvos_premium_portable_led_camping_lantern_v10_square_hero_trial/
+next_generation_authorized_now: false
+provider_contact_by_this_prompt_work: false
+image_generation_by_this_prompt_work: false
+retry: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v10.yaml; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: human_A5_authorization_for_v14_101_native_doubao_v10_square_hero_trial
+recommended_next_auto_execution_allowed: false
+---
+Status: v14_099_codex_session_image_provider_minimal_import_contract completed locally and validated.
+Reason: User confirmed returning to the minimal implementation instead of MCP. This phase defines Codex Session Image Provider as a manual-only import bridge, not a project-callable provider or MCP runtime.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.084-v14.099 local prompt/review/validator/board changes until validation/commit decision.
+Contract: docs/codex_session_image_provider_minimal_contract.md
+Schema: schemas/codex_session_image_import.schema.yaml
+Example: tests/schema_examples/codex_session_image_import.example.json
+Validator: scripts/validate_codex_session_image_import.js
+MVP validator modified: scripts/validate_mvp.ps1
+manual_import_only: true
+codex_image_direct_call_allowed: false
+mcp_runtime_allowed: false
+provider_api_call_allowed: false
+project_script_generation_allowed: false
+image_generation_by_script: false
+env_local_secret_value_read_allowed: false
+DailyNote_write_allowed: false
+VCP_memory_write_allowed: false
+accepted_samples_write_allowed: false
+production_candidate_write_allowed: false
+real_manifest_read_allowed: false
+real_VCPChat_read_allowed: false
+real_VCPToolBox_read_allowed: false
+push_tag_release_deploy_allowed: false
+provider_contact_by_this_contract_work: false
+image_generation_by_this_contract_work: false
+validated_now: node scripts/validate_codex_session_image_import.js; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: use_manual_codex_session_image_import_record_when_a_codex_session_image_needs_project_review
+recommended_next_auto_execution_allowed: false
+---
+Status: v14_097_pvos_lantern_v9_prompt_revision_plan completed locally and statically validated.
+Reason: Human review rejected v8. v9 returns to v7 as the visual base and keeps only the lower-body control correction, while explicitly forbidding v8 regressions: smaller product, dirty/spotty diffuser, gray cheap shell, chunky base, and oversized table.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.084 review record, v2/v3/v4/v5/v6/v7/v8/v9 prompt packages, validator drift fixes, and .agent_board sync until validation/commit decision.
+Prompt package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v9.yaml
+Source prompt package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v7.yaml
+Source rejected prompt package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v8.yaml
+Source generation result: runs/real_generation/v14_094_pvos_premium_portable_led_camping_lantern_v7_square_hero_trial/native_doubao_1779002776319_0.jpg
+Source rejected generation result: runs/real_generation/v14_096_pvos_premium_portable_led_camping_lantern_v8_square_hero_trial/native_doubao_1779003213706_0.jpg
+aspect_ratio_required: 1:1_square
+future_authorization_package_id_recommended: AUTH-PENDING-PVOS-LANTERN-V9-SQUARE-HERO-20260517-001
+future_output_directory_ref: runs/real_generation/v14_098_pvos_premium_portable_led_camping_lantern_v9_square_hero_trial/
+next_generation_authorized_now: false
+provider_contact_by_this_prompt_work: false
+image_generation_by_this_prompt_work: false
+retry: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v9.yaml; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: human_A5_authorization_for_v14_098_native_doubao_v9_square_hero_trial
+recommended_next_auto_execution_allowed: false
+---
+Status: v14_095_pvos_lantern_v8_prompt_revision_plan completed locally and statically validated.
+Reason: Human review corrected the v7 direction: keep v7 product scale, high contrast, and saturation, but move the control knob/button back below the light diffuser on the lower body.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.084 review record, v2/v3/v4/v5/v6/v7/v8 prompt packages, validator drift fixes, and .agent_board sync until validation/commit decision.
+Prompt package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v8.yaml
+Source prompt package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v7.yaml
+Source generation result: runs/real_generation/v14_094_pvos_premium_portable_led_camping_lantern_v7_square_hero_trial/native_doubao_1779002776319_0.jpg
+aspect_ratio_required: 1:1_square
+future_authorization_package_id_recommended: AUTH-PENDING-PVOS-LANTERN-V8-SQUARE-HERO-20260517-001
+future_output_directory_ref: runs/real_generation/v14_096_pvos_premium_portable_led_camping_lantern_v8_square_hero_trial/
+next_generation_authorized_now: false
+provider_contact_by_this_prompt_work: false
+image_generation_by_this_prompt_work: false
+retry: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v8.yaml; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: human_A5_authorization_for_v14_096_native_doubao_v8_square_hero_trial
+recommended_next_auto_execution_allowed: false
+---
+Status: v14_093_pvos_lantern_v7_prompt_revision_plan completed locally and statically validated.
+Reason: Human review added that v6 product frame share should return toward v5, with higher global contrast and saturation, while preserving v6 material, horizontal table, and dark background gains.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.084 review record, v2/v3/v4/v5/v6/v7 prompt packages, validator drift fixes, and .agent_board sync until validation/commit decision.
+Prompt package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v7.yaml
+Source prompt package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v6.yaml
+Source generation result: runs/real_generation/v14_092_pvos_premium_portable_led_camping_lantern_v6_square_hero_trial/native_doubao_1779002132757_0.jpg
+aspect_ratio_required: 1:1_square
+future_authorization_package_id_recommended: AUTH-PENDING-PVOS-LANTERN-V7-SQUARE-HERO-20260517-001
+future_output_directory_ref: runs/real_generation/v14_094_pvos_premium_portable_led_camping_lantern_v7_square_hero_trial/
+next_generation_authorized_now: false
+provider_contact_by_this_prompt_work: false
+image_generation_by_this_prompt_work: false
+retry: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v7.yaml; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: human_A5_authorization_for_v14_094_native_doubao_v7_square_hero_trial
+recommended_next_auto_execution_allowed: false
+---
+Status: v14_091_pvos_lantern_v6_prompt_revision_plan completed locally and statically validated.
+Reason: Human review corrected the v5 direction: keep square/dark background/dark table, but restore v4-quality diffuser texture, upgrade gray cheap shell to premium dark metal, and fix lower table horizontally.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.084 review record, v2/v3/v4/v5/v6 prompt packages, validator drift fixes, and .agent_board sync until validation/commit decision.
+Prompt package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v6.yaml
+Source prompt package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v5.yaml
+Source generation result: runs/real_generation/v14_090_pvos_premium_portable_led_camping_lantern_v5_square_hero_trial/native_doubao_1779001423852_0.jpg
+aspect_ratio_required: 1:1_square
+future_authorization_package_id_recommended: AUTH-PENDING-PVOS-LANTERN-V6-SQUARE-HERO-20260517-001
+future_output_directory_ref: runs/real_generation/v14_092_pvos_premium_portable_led_camping_lantern_v6_square_hero_trial/
+next_generation_authorized_now: false
+provider_contact_by_this_prompt_work: false
+image_generation_by_this_prompt_work: false
+retry: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v6.yaml; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: human_A5_authorization_for_v14_092_native_doubao_v6_square_hero_trial
+recommended_next_auto_execution_allowed: false
+---
+Status: v14_089_pvos_lantern_v5_prompt_revision_plan completed locally and statically validated.
+Reason: Human review corrected the v4 direction: diffuser brightness is acceptable, but the background is too bright, the lower table must be deeper dark, and the image ratio must be fixed at 1:1.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.084 review record, v2/v3/v4/v5 prompt packages, validator drift fixes, and .agent_board sync until validation/commit decision.
+Prompt package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v5.yaml
+Source prompt package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v4.yaml
+Source generation result: runs/real_generation/v14_088_pvos_premium_portable_led_camping_lantern_v4_hero_trial/native_doubao_1779000827093_0.jpg
+aspect_ratio_required: 1:1_square
+future_authorization_package_id_recommended: AUTH-PENDING-PVOS-LANTERN-V5-SQUARE-HERO-20260517-001
+future_output_directory_ref: runs/real_generation/v14_090_pvos_premium_portable_led_camping_lantern_v5_square_hero_trial/
+next_generation_authorized_now: false
+provider_contact_by_this_prompt_work: false
+image_generation_by_this_prompt_work: false
+retry: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v5.yaml; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: human_A5_authorization_for_v14_090_native_doubao_v5_square_hero_trial
+recommended_next_auto_execution_allowed: false
+---
+Status: v14_087_pvos_lantern_v4_prompt_revision_plan completed locally and statically validated.
+Reason: NativeDoubao v3 is the closest current direction but still has diffuser overexposure, basic product design, foreground/tabletop competition, and a competing background light point.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.084 review record, v2/v3/v4 prompt packages, validator drift fixes, and .agent_board sync until validation/commit decision.
+Prompt package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v4.yaml
+Source prompt package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v3.yaml
+Source generation result: runs/real_generation/v14_086_pvos_premium_portable_led_camping_lantern_v3_hero_trial/native_doubao_1779000214909_0.jpg
+future_authorization_package_id_recommended: AUTH-PENDING-PVOS-LANTERN-V4-HERO-20260517-001
+future_output_directory_ref: runs/real_generation/v14_088_pvos_premium_portable_led_camping_lantern_v4_hero_trial/
+next_generation_authorized_now: false
+provider_contact_by_this_prompt_work: false
+image_generation_by_this_prompt_work: false
+retry: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v4.yaml; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: human_A5_authorization_for_v14_088_native_doubao_v4_hero_trial
+recommended_next_auto_execution_allowed: false
+---
+Status: v14_085_pvos_lantern_v3_prompt_revision_plan completed locally and statically validated.
+Reason: NativeDoubaoImage v2 was directionally correct but underpowered as a hero main image; v3 strengthens product-first hierarchy, modern rechargeable LED design, background restraint, dark lower layer, and diffuser control.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.084 review record, v2 prompt package, v3 prompt package, validator drift fixes, and .agent_board sync until validation/commit decision.
+Prompt package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v3.yaml
+Source review record: docs/v14_084_pvos_lantern_v2_hero_second_review_record.md
+Source generation result: runs/real_generation/v14_083_pvos_premium_portable_led_camping_lantern_v2_hero_trial/native_doubao_1778998955426_0.jpg
+future_authorization_package_id_recommended: AUTH-PENDING-PVOS-LANTERN-V3-HERO-20260517-001
+future_output_directory_ref: runs/real_generation/v14_086_pvos_premium_portable_led_camping_lantern_v3_hero_trial/
+next_generation_authorized_now: false
+provider_contact_by_this_prompt_work: false
+image_generation_by_this_prompt_work: false
+retry: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v3.yaml; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: human_A5_authorization_for_v14_086_native_doubao_v3_hero_trial
+recommended_next_auto_execution_allowed: false
+---
+Status: v14_084_pvos_lantern_v2_hero_second_review_record created locally and validated.
+Reason: NativeDoubaoImage v2 hero output was reviewed twice and remains revision evidence, not an accepted candidate.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with docs-only v14.084 review record, .agent_board sync, and the untracked v2 prompt package until validation/commit decision.
+Phase record: docs/v14_084_pvos_lantern_v2_hero_second_review_record.md
+Source prompt package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml
+Reviewed output: runs/real_generation/v14_083_pvos_premium_portable_led_camping_lantern_v2_hero_trial/native_doubao_1778998955426_0.jpg
+review_passes_recorded: 2
+review_result: needs_revision
+asset_status: needs_revision
+accepted_candidate: false
+commercial_hero_ready: false
+commercial_delivery_ready: false
+memory_suitability: deferred
+provider_contact_by_this_record: false
+image_generation_by_this_record: false
+retry: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml; node scripts/validate_agent_board_state.js; node scripts/validate_v14_081_pvos_exact_a5_authorization_package.js; node scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: v14_085_pvos_lantern_v3_prompt_revision_plan
+recommended_next_auto_execution_allowed: false
+---
 Status: v14_082_pvos_metadata_only_preflight_authorization_correction_gate created, committed, and metadata-only dry-run preflight passed.
 Reason: v14.081 had an internal conflict: the runner preflight checks `.env.local` field names, while v14.081 listed `.env.local` as fully forbidden. v14.082 corrects this to metadata-only preflight access.
 Current repository: project_root

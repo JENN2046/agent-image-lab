@@ -1,5 +1,467 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.102-CODEX-SESSION-LANTERN-V1-PROMPT-PACKAGE
+
+Task:
+
+```text
+Create and statically validate the Codex Session Image dedicated v1 prompt package for the premium portable LED camping lantern square hero, without project-script image generation.
+```
+
+Commands run:
+
+```text
+node scripts\validate_prompt_schema.js --type prompt_package prompts\image_generation\product_lifestyle_premium_portable_led_camping_lantern_codex_v1.yaml
+node scripts\validate_agent_board_state.js
+git diff --check
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+```
+
+Result:
+
+```text
+prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_codex_v1.yaml
+source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v10.yaml
+source_generation_result: runs/real_generation/v14_101_pvos_premium_portable_led_camping_lantern_v10_square_hero_trial/native_doubao_1779005117784_0.jpg
+codex_session_provider_contract_ref: docs/codex_session_image_provider_minimal_contract.md
+revision_result: centered modern cylindrical lantern, large hero scale, thin base, shallow table, small integrated lower-body control, fine frosted diffuser, and deep blue-hour background
+codex_session_generation_separate_A5_authorization_required_now: false
+codex_session_generation_direct_user_request_sufficient_now: true
+prompt_schema: passed
+agent_board_state: passed
+git_diff_check: passed
+validate_mvp: passed
+validate_agent_image_lab_local: passed_with_existing_manual_review_warnings
+validation_result: completed_validated
+recommended_next: optional_codex_session_image_generation_by_direct_user_request_then_codex_session_image_import_record
+```
+
+Boundary:
+
+```text
+No NativeDoubaoImage call, MCP runtime, provider/API call by project script, image generation by project script, retry, .env.local value read, DailyNote write, VCP memory write, accepted_samples write, production_candidate_002, real manifest read, real VCPChat read, real VCPToolBox read, runs output commit, push, tag, release, deploy, or dependency change is performed by this prompt package work.
+```
+
+## VALIDATION-20260517-v14.100-PVOS-LANTERN-V10-SQUARE-HERO-PROMPT-REVISION
+
+Task:
+
+```text
+Create and statically validate the v10 prompt package for a tighter fixed 1:1 square NativeDoubaoImage premium portable LED camping lantern hero trial, without provider contact or image generation.
+```
+
+Commands run:
+
+```text
+node scripts\validate_prompt_schema.js --type prompt_package prompts\image_generation\product_lifestyle_premium_portable_led_camping_lantern_v10.yaml
+node scripts\validate_agent_board_state.js
+git diff --check
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+```
+
+Result:
+
+```text
+prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v10.yaml
+source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v9.yaml
+source_generation_result: runs/real_generation/v14_098_pvos_premium_portable_led_camping_lantern_v9_square_hero_trial/native_doubao_1779003902063_0.jpg
+revision_result: keep v9 correct direction but make product 10-15 percent larger, reduce top/side blue empty space, thin and refine the base, shrink and integrate the lower-body control, and improve diffuser material beyond smooth plastic
+prompt_schema: passed
+agent_board_state: passed
+git_diff_check: passed
+validate_mvp: passed
+validate_agent_image_lab_local: passed_with_existing_manual_review_warnings
+validation_result: completed_validated
+recommended_next: human_A5_authorization_for_v14_101_native_doubao_v10_square_hero_trial
+```
+
+Boundary:
+
+```text
+No provider contact, plugin call, API call, image generation, retry, .env.local value read, DailyNote write, VCP memory write, accepted_samples write, production_candidate_002, real manifest read, real VCPChat read, real VCPToolBox read, runs output commit, push, tag, release, deploy, or dependency change is performed by this prompt package work.
+```
+
+## VALIDATION-20260517-v14.099-CODEX-SESSION-IMAGE-MINIMAL-IMPORT-CONTRACT
+
+Task:
+
+```text
+Create a minimal manual-only Codex Session Image Provider import contract, schema, example, and validator so Codex session-generated images can be recorded and reviewed by Agent Image Lab without MCP/runtime/provider automation.
+```
+
+Commands run:
+
+```text
+node scripts\validate_codex_session_image_import.js
+node scripts\validate_agent_board_state.js
+git diff --check
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+```
+
+Result:
+
+```text
+contract: docs/codex_session_image_provider_minimal_contract.md
+schema: schemas/codex_session_image_import.schema.yaml
+example: tests/schema_examples/codex_session_image_import.example.json
+validator: scripts/validate_codex_session_image_import.js
+mvp_validator_modified: scripts/validate_mvp.ps1
+manual_import_only: true
+codex_image_direct_call_allowed: false
+mcp_runtime_allowed: false
+provider_api_call_allowed: false
+project_script_generation_allowed: false
+image_generation_by_script: false
+codex_session_image_import_validator: passed
+agent_board_state: passed
+git_diff_check: passed
+validate_mvp: passed
+validate_agent_image_lab_local: passed_with_existing_manual_review_warnings
+validation_result: completed_validated
+recommended_next: use_manual_codex_session_image_import_record_when_a_codex_session_image_needs_project_review
+```
+
+Boundary:
+
+```text
+No MCP runtime, provider contact, plugin call, API call, image generation by project script, retry, .env.local value read, DailyNote write, VCP memory write, accepted_samples write, production_candidate_002, real manifest read, real VCPChat read, real VCPToolBox read, runs output commit, push, tag, release, deploy, or dependency change is performed by this local contract work.
+```
+
+## VALIDATION-20260517-v14.097-PVOS-LANTERN-V9-SQUARE-HERO-PROMPT-REVISION
+
+Task:
+
+```text
+Create and statically validate the v9 prompt package for a fixed 1:1 square NativeDoubaoImage premium portable LED camping lantern hero trial after v8 rejection, returning to v7 as the visual base and keeping only the lower-body control correction, without provider contact or image generation.
+```
+
+Commands run:
+
+```text
+node scripts\validate_prompt_schema.js --type prompt_package prompts\image_generation\product_lifestyle_premium_portable_led_camping_lantern_v9.yaml
+node scripts\validate_agent_board_state.js
+git diff --check
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+```
+
+Result:
+
+```text
+prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v9.yaml
+source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v7.yaml
+source_rejected_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v8.yaml
+source_generation_result: runs/real_generation/v14_094_pvos_premium_portable_led_camping_lantern_v7_square_hero_trial/native_doubao_1779002776319_0.jpg
+source_rejected_generation_result: runs/real_generation/v14_096_pvos_premium_portable_led_camping_lantern_v8_square_hero_trial/native_doubao_1779003213706_0.jpg
+revision_result: v9 returns to v7 product scale, diffuser cleanliness, shell refinement, compact base, shallow table, contrast, and saturation; v9 keeps only the lower-body control correction and forbids v8 regressions
+prompt_schema: passed
+agent_board_state: passed
+git_diff_check: passed
+validate_mvp: passed
+validate_agent_image_lab_local: passed_with_existing_manual_review_warnings
+validation_result: completed_validated
+recommended_next: human_A5_authorization_for_v14_098_native_doubao_v9_square_hero_trial
+```
+
+Boundary:
+
+```text
+No provider contact, plugin call, API call, image generation, retry, .env.local value read, DailyNote write, VCP memory write, accepted_samples write, production_candidate_002, real manifest read, real VCPChat read, real VCPToolBox read, runs output commit, push, tag, release, deploy, or dependency change is performed by this prompt package work.
+```
+
+## VALIDATION-20260517-v14.095-PVOS-LANTERN-V8-SQUARE-HERO-PROMPT-REVISION
+
+Task:
+
+```text
+Create and statically validate the v8 prompt package for a fixed 1:1 square NativeDoubaoImage premium portable LED camping lantern hero trial with the control knob/button returned to the lower body below the diffuser, without provider contact or image generation.
+```
+
+Commands run:
+
+```text
+node scripts\validate_prompt_schema.js --type prompt_package prompts\image_generation\product_lifestyle_premium_portable_led_camping_lantern_v8.yaml
+node scripts\validate_agent_board_state.js
+git diff --check
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+```
+
+Result:
+
+```text
+prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v8.yaml
+source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v7.yaml
+source_generation_result: runs/real_generation/v14_094_pvos_premium_portable_led_camping_lantern_v7_square_hero_trial/native_doubao_1779002776319_0.jpg
+revision_result: preserve v7 scale/contrast/saturation direction, but move the control knob or button back to the lower body below the diffuser and above the base
+prompt_schema: passed
+agent_board_state: passed
+git_diff_check: passed
+validate_mvp: passed
+validate_agent_image_lab_local: passed_with_existing_manual_review_warnings
+validation_result: completed_validated
+recommended_next: human_A5_authorization_for_v14_096_native_doubao_v8_square_hero_trial
+```
+
+Boundary:
+
+```text
+No provider contact, plugin call, API call, image generation, retry, .env.local value read, DailyNote write, VCP memory write, accepted_samples write, production_candidate_002, real manifest read, real VCPChat read, real VCPToolBox read, runs output commit, push, tag, release, deploy, or dependency change is performed by this prompt package work.
+```
+
+## VALIDATION-20260517-v14.093-PVOS-LANTERN-V7-SQUARE-HERO-PROMPT-REVISION
+
+Task:
+
+```text
+Create and statically validate the v7 prompt package for a larger, higher-contrast, higher-saturation fixed 1:1 square NativeDoubaoImage premium portable LED camping lantern hero trial, without provider contact or image generation.
+```
+
+Commands run:
+
+```text
+node scripts\validate_prompt_schema.js --type prompt_package prompts\image_generation\product_lifestyle_premium_portable_led_camping_lantern_v7.yaml
+node scripts\validate_agent_board_state.js
+git diff --check
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+```
+
+Result:
+
+```text
+prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v7.yaml
+source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v6.yaml
+source_generation_result: runs/real_generation/v14_092_pvos_premium_portable_led_camping_lantern_v6_square_hero_trial/native_doubao_1779002132757_0.jpg
+revision_result: preserve v6 material/table/background gains, restore v5-like product frame share, and increase global contrast plus saturation
+prompt_schema: passed
+agent_board_state: passed
+git_diff_check: passed
+validate_mvp: passed
+validate_agent_image_lab_local: passed_with_existing_manual_review_warnings
+validation_result: completed_validated
+recommended_next: human_A5_authorization_for_v14_094_native_doubao_v7_square_hero_trial
+```
+
+Boundary:
+
+```text
+No provider contact, plugin call, API call, image generation, retry, .env.local value read, DailyNote write, VCP memory write, accepted_samples write, production_candidate_002, real manifest read, real VCPChat read, real VCPToolBox read, runs output commit, push, tag, release, deploy, or dependency change is performed by this prompt package work.
+```
+
+## VALIDATION-20260517-v14.091-PVOS-LANTERN-V6-SQUARE-HERO-PROMPT-REVISION
+
+Task:
+
+```text
+Create and statically validate the v6 prompt package for a fixed 1:1 square NativeDoubaoImage premium portable LED camping lantern hero trial, without provider contact or image generation.
+```
+
+Commands run:
+
+```text
+node scripts\validate_prompt_schema.js --type prompt_package prompts\image_generation\product_lifestyle_premium_portable_led_camping_lantern_v6.yaml
+node scripts\validate_agent_board_state.js
+git diff --check
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+```
+
+Result:
+
+```text
+prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v6.yaml
+source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v5.yaml
+source_generation_result: runs/real_generation/v14_090_pvos_premium_portable_led_camping_lantern_v5_square_hero_trial/native_doubao_1779001423852_0.jpg
+revision_result: keep v5 square/dark background/dark table direction, restore v4-quality diffuser texture, upgrade shell to premium dark metal, and lock lower table horizontally
+prompt_schema: passed
+agent_board_state: passed
+git_diff_check: passed
+validate_mvp: passed
+validate_agent_image_lab_local: passed_with_existing_manual_review_warnings
+validation_result: completed_validated
+recommended_next: human_A5_authorization_for_v14_092_native_doubao_v6_square_hero_trial
+```
+
+Boundary:
+
+```text
+No provider contact, plugin call, API call, image generation, retry, .env.local value read, DailyNote write, VCP memory write, accepted_samples write, production_candidate_002, real manifest read, real VCPChat read, real VCPToolBox read, runs output commit, push, tag, release, deploy, or dependency change is performed by this prompt package work.
+```
+
+## VALIDATION-20260517-v14.089-PVOS-LANTERN-V5-SQUARE-HERO-PROMPT-REVISION
+
+Task:
+
+```text
+Create and statically validate the v5 prompt package for a fixed 1:1 square NativeDoubaoImage premium portable LED camping lantern hero trial, without provider contact or image generation.
+```
+
+Commands run:
+
+```text
+node scripts\validate_prompt_schema.js --type prompt_package prompts\image_generation\product_lifestyle_premium_portable_led_camping_lantern_v5.yaml
+node scripts\validate_agent_board_state.js
+git diff --check
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+```
+
+Result:
+
+```text
+prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v5.yaml
+source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v4.yaml
+source_generation_result: runs/real_generation/v14_088_pvos_premium_portable_led_camping_lantern_v4_hero_trial/native_doubao_1779000827093_0.jpg
+revision_result: preserve current diffuser brightness; darken background; make lower table deep dark; fix image ratio at 1:1 square
+prompt_schema: passed
+agent_board_state: passed
+git_diff_check: passed
+validate_mvp: passed
+validate_agent_image_lab_local: passed_with_existing_manual_review_warnings
+validation_result: completed_validated
+recommended_next: human_A5_authorization_for_v14_090_native_doubao_v5_square_hero_trial
+```
+
+Boundary:
+
+```text
+No provider contact, plugin call, API call, image generation, retry, .env.local value read, DailyNote write, VCP memory write, accepted_samples write, production_candidate_002, real manifest read, real VCPChat read, real VCPToolBox read, runs output commit, push, tag, release, deploy, or dependency change is performed by this prompt package work.
+```
+
+## VALIDATION-20260517-v14.087-PVOS-LANTERN-V4-PROMPT-REVISION
+
+Task:
+
+```text
+Create and statically validate the v4 prompt package for a fourth NativeDoubaoImage premium portable LED camping lantern hero trial, without provider contact or image generation.
+```
+
+Commands run:
+
+```text
+node scripts\validate_prompt_schema.js --type prompt_package prompts\image_generation\product_lifestyle_premium_portable_led_camping_lantern_v4.yaml
+node scripts\validate_agent_board_state.js
+git diff --check
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+```
+
+Result:
+
+```text
+prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v4.yaml
+source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v3.yaml
+source_generation_result: runs/real_generation/v14_086_pvos_premium_portable_led_camping_lantern_v3_hero_trial/native_doubao_1779000214909_0.jpg
+revision_result: v4 keeps the v3 product-first blue-hour hero direction while lowering diffuser exposure, improving premium industrial design, reducing tabletop/foreground activity, and forbidding competing background light points
+prompt_schema: passed
+agent_board_state: passed
+git_diff_check: passed
+validate_mvp: passed
+validate_agent_image_lab_local: passed_with_existing_manual_review_warnings
+validation_result: completed_validated
+recommended_next: human_A5_authorization_for_v14_088_native_doubao_v4_hero_trial
+```
+
+Boundary:
+
+```text
+No provider contact, plugin call, API call, image generation, retry, .env.local value read, DailyNote write, VCP memory write, accepted_samples write, production_candidate_002, real manifest read, real VCPChat read, real VCPToolBox read, runs output commit, push, tag, release, deploy, or dependency change is performed by this prompt package work.
+```
+
+## VALIDATION-20260517-v14.085-PVOS-LANTERN-V3-PROMPT-REVISION
+
+Task:
+
+```text
+Create and statically validate the v3 prompt package for a third NativeDoubaoImage premium portable LED camping lantern hero trial, without provider contact or image generation.
+```
+
+Commands run:
+
+```text
+node scripts\validate_prompt_schema.js --type prompt_package prompts\image_generation\product_lifestyle_premium_portable_led_camping_lantern_v3.yaml
+node scripts\validate_agent_board_state.js
+git diff --check
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+```
+
+Result:
+
+```text
+prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v3.yaml
+source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml
+source_review_record: docs/v14_084_pvos_lantern_v2_hero_second_review_record.md
+source_generation_result: runs/real_generation/v14_083_pvos_premium_portable_led_camping_lantern_v2_hero_trial/native_doubao_1778998955426_0.jpg
+revision_result: stronger product-first prompt with larger modern lantern, weaker background, darker lower layer, and stricter diffuser control
+prompt_schema: passed
+agent_board_state: passed
+git_diff_check: passed
+validate_mvp: passed
+validate_agent_image_lab_local: passed_with_existing_manual_review_warnings
+validation_result: completed_validated
+recommended_next: human_A5_authorization_for_v14_086_native_doubao_v3_hero_trial
+```
+
+Boundary:
+
+```text
+No provider contact, plugin call, API call, image generation, retry, .env.local value read, DailyNote write, VCP memory write, accepted_samples write, production_candidate_002, real manifest read, real VCPChat read, real VCPToolBox read, runs output commit, push, tag, release, deploy, or dependency change is performed by this prompt package work.
+```
+
+## VALIDATION-20260517-v14.084-PVOS-LANTERN-V2-HERO-SECOND-REVIEW
+
+Task:
+
+```text
+Record two review passes for the NativeDoubaoImage v2 hero output as docs-only review evidence, with final result needs_revision and accepted_candidate=false.
+```
+
+Commands run:
+
+```text
+node scripts\validate_prompt_schema.js --type prompt_package prompts\image_generation\product_lifestyle_premium_portable_led_camping_lantern_v2.yaml
+node scripts\validate_agent_board_state.js
+git diff --check
+powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+```
+
+Result:
+
+```text
+phase_record: docs/v14_084_pvos_lantern_v2_hero_second_review_record.md
+source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml
+reviewed_output: runs/real_generation/v14_083_pvos_premium_portable_led_camping_lantern_v2_hero_trial/native_doubao_1778998955426_0.jpg
+review_passes_recorded: 2
+review_result: needs_revision
+asset_status: needs_revision
+accepted_candidate: false
+commercial_hero_ready: false
+commercial_delivery_ready: false
+memory_suitability: deferred
+validation_result: pending_after_validator_drift_fix
+validator_drift_found: v14.081 and v14.082 preflight validators still required the v14.081 output directory to be absent or empty after later authorized real generation created one exact output.
+validator_drift_fix: accept absent/empty output directory or the single known authorized post-run output native_doubao_1778997050035_0.jpg only.
+prompt_schema: passed
+agent_board_state: passed
+v14_081_validator: passed_after_exact_post_run_output_allowlist
+v14_082_validator: passed_after_exact_post_run_output_allowlist
+git_diff_check: passed
+validate_mvp: passed
+validate_agent_image_lab_local: passed_with_existing_manual_review_warnings
+```
+
+Boundary:
+
+```text
+No provider contact, image generation, retry, .env.local read, DailyNote write, VCP memory write, accepted_samples write, production_candidate_002, runs output commit, push, tag, release, deploy, or dependency change is performed by this review record.
+```
+
 ## VALIDATION-20260517-v14.082-PVOS-METADATA-ONLY-PREFLIGHT-CORRECTION
 
 Task:
@@ -14890,6 +15352,151 @@ Warnings:
 Not validated:
 Notes:
 ```
+
+## VALIDATION-20260517-v14.103
+
+Task: v14.103 Codex Session Lantern Codex V1 Square Hero Candidate Import
+Commands run:
+  - Get-Content runs\real_generation\v14_103_codex_session_premium_portable_led_camping_lantern_codex_v1_square_hero_candidate\codex_session_image_import_record.json | ConvertFrom-Json
+  - node scripts\validate_codex_session_image_import.js
+  - node scripts\validate_agent_board_state.js
+  - git diff --check
+  - powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+  - powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+Result: ALL REQUIRED CHECKS PASSED
+Findings:
+  - Codex session image import record JSON parsed successfully.
+  - Codex session image import contract validator passed.
+  - Agent board state validator passed and detected the current phase as v14_103_codex_session_lantern_codex_v1_square_hero_candidate_import.
+  - git diff --check passed with Windows line-ending warnings only.
+  - scripts/validate_mvp.ps1 passed.
+  - scripts/validate-agent-image-lab-local.ps1 passed with manual-review warnings only.
+Warnings:
+  - validate-agent-image-lab-local.ps1 reported expected manual-review warning patterns.
+  - The imported image is a local candidate record only; it is not accepted_samples, production_candidate, memory, DailyNote, release, tag, push, or deployment.
+Not validated:
+  - No formal human acceptance was recorded.
+  - No accepted_samples write was performed.
+  - No production_candidate write was performed.
+  - No DailyNote or VCP memory write was performed.
+Notes:
+  - Codex session generation was performed by direct user request under the user's temporary rule that separate A5 is not needed for Codex session image generation.
+  - Project scripts did not generate the image and did not contact NativeDoubaoImage, MCP, provider APIs, VCPChat, VCPToolBox, or real manifests.
+
+## VALIDATION-20260517-v14.104
+
+Task: v14.104 Codex Session Women's Fashion Three-Outfit First Round Import
+Commands run:
+  - Get-ChildItem runs\real_generation\v14_104_codex_session_womens_fashion_three_outfit_first_round_candidates -Filter *_import_record.json | ConvertFrom-Json
+  - node scripts\validate_codex_session_image_import.js
+  - node scripts\validate_agent_board_state.js
+  - git diff --check
+  - powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+  - powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+Result: ALL REQUIRED CHECKS PASSED
+Findings:
+  - Three Codex session fashion import records parsed successfully.
+  - Codex session image import contract validator passed.
+  - Agent board state validator passed and detected the current phase as v14_104_codex_session_womens_fashion_three_outfit_first_round_import.
+  - git diff --check passed with Windows line-ending warnings only.
+  - scripts/validate_mvp.ps1 passed.
+  - scripts/validate-agent-image-lab-local.ps1 passed with manual-review warnings only.
+Warnings:
+  - validate-agent-image-lab-local.ps1 reported expected manual-review warning patterns.
+  - The first-round fashion images are local candidates only; they are not accepted_samples, production_candidate, memory, DailyNote, release, tag, push, or deployment.
+Not validated:
+  - No formal human acceptance was recorded.
+  - No accepted_samples write was performed.
+  - No production_candidate write was performed.
+  - No DailyNote or VCP memory write was performed.
+Notes:
+  - Codex session generation was performed by direct user request under the user's temporary rule that separate A5 is not needed for Codex session image generation.
+  - Project scripts did not generate the images and did not contact NativeDoubaoImage, MCP, provider APIs, VCPChat, VCPToolBox, or real manifests.
+
+## VALIDATION-20260517-v14.105
+
+Task: v14.105 Codex Session Women's Resort Relaxed Knit Final Candidate
+Commands run:
+  - Get-Content runs\real_generation\v14_105_codex_session_womens_resort_relaxed_knit_final_candidate\resort_relaxed_knit_final_import_record.json | ConvertFrom-Json
+  - node scripts\validate_codex_session_image_import.js
+  - node scripts\validate_agent_board_state.js
+  - git diff --check
+  - powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+  - powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+Result: ALL REQUIRED CHECKS PASSED
+Findings:
+  - Final resort relaxed knit import record parsed successfully.
+  - Codex session image import contract validator passed.
+  - Agent board state validator passed and detected the current phase as v14_105_codex_session_womens_resort_relaxed_knit_final_candidate.
+  - git diff --check passed with Windows line-ending warnings only.
+  - scripts/validate_mvp.ps1 passed.
+  - scripts/validate-agent-image-lab-local.ps1 passed with manual-review warnings only.
+Warnings:
+  - validate-agent-image-lab-local.ps1 reported expected manual-review warning patterns.
+  - The v14.105 image is a final visual candidate only; it is not accepted_samples, production_candidate, memory, DailyNote, release, tag, push, or deployment.
+Not validated:
+  - No formal human acceptance was recorded.
+  - No accepted_samples write was performed.
+  - No production_candidate write was performed.
+  - No DailyNote or VCP memory write was performed.
+Notes:
+  - Codex session generation was performed by direct user request under the user's temporary rule that separate A5 is not needed for Codex session image generation.
+  - Project scripts did not generate the image and did not contact NativeDoubaoImage, MCP, provider APIs, VCPChat, VCPToolBox, or real manifests.
+
+## VALIDATION-20260517-v14.106
+
+Task: v14.106 Women's Resort Relaxed Knit Formal Sample Promotion Package
+Commands run:
+  - node scripts\validate_agent_board_state.js
+  - git diff --check
+  - powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+  - powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+Result: ALL REQUIRED CHECKS PASSED
+Findings:
+  - Formal sample promotion package was created for v14.105.
+  - Exact accepted_samples registry write authorization phrase was recorded in the package.
+  - Agent board state validator passed and detected the current phase as v14_106_womens_resort_relaxed_knit_formal_sample_promotion_package.
+  - git diff --check passed with Windows line-ending warnings only.
+  - scripts/validate_mvp.ps1 passed.
+  - scripts/validate-agent-image-lab-local.ps1 passed with manual-review warnings only.
+Warnings:
+  - validate-agent-image-lab-local.ps1 reported expected manual-review warning patterns.
+  - accepted_samples remains unwritten because it requires a separate exact authorization statement.
+Not validated:
+  - No accepted_samples registry write was performed.
+  - No production_candidate write was performed.
+  - No DailyNote or VCP memory write was performed.
+Notes:
+  - This package is a local authorization-prep artifact only.
+  - Project scripts did not generate images and did not contact NativeDoubaoImage, MCP, provider APIs, VCPChat, VCPToolBox, or real manifests.
+
+## VALIDATION-20260517-v14.107
+
+Task: v14.107 Women's Resort Relaxed Knit Accepted Sample Closeout
+Commands run:
+  - Select-String accepted_samples\accepted_sample_registry.yaml accepted_womens_resort_relaxed_knit_codex_v2_001
+  - Get-Content accepted_samples\categories\fashion_lookbook_portrait.yaml
+  - node scripts\validate_agent_board_state.js
+  - git diff --check
+  - powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+  - powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+Result: ALL REQUIRED CHECKS PASSED
+Findings:
+  - accepted_womens_resort_relaxed_knit_codex_v2_001 is present in accepted_samples/accepted_sample_registry.yaml.
+  - accepted_samples/categories/fashion_lookbook_portrait.yaml exists and lists the accepted sample id.
+  - Agent board state validator passed and detected the current phase as v14_107_womens_resort_relaxed_knit_accepted_sample_closeout.
+  - git diff --check passed with Windows line-ending warnings only.
+  - scripts/validate_mvp.ps1 passed.
+  - scripts/validate-agent-image-lab-local.ps1 passed with manual-review warnings only.
+Warnings:
+  - validate-agent-image-lab-local.ps1 reported expected manual-review warning patterns.
+Not validated:
+  - No production_candidate write was performed.
+  - No DailyNote or VCP memory write was performed.
+  - No push, tag, release, or deploy was performed.
+Notes:
+  - The formal accepted sample registry write is now synced to .agent_board and closeout documentation.
+  - Image files remain referenced from runs/real_generation and were not copied into accepted_samples.
 
 ## VALIDATION-20260514-v8.028
 

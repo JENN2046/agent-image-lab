@@ -1,0 +1,243 @@
+package_id: product_lifestyle_premium_portable_led_camping_lantern_v2
+version: v2
+language: en
+mode: text_to_image
+reference_policy: text_only_no_image_input
+title: "Premium portable LED camping lantern blue-hour hero prompt package v2"
+purpose: "Prompt revision for a stronger premium outdoor lifestyle hero image; this file does not contact providers, generate images, write memory, or create execution authorization."
+
+source_phase: v14_083_premium_portable_led_camping_lantern_prompt_revision_after_first_trial
+source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml
+source_generation_result: runs/real_generation/v14_081_pvos_premium_portable_led_camping_lantern_first_trial/native_doubao_1778997050035_0.jpg
+product_brief_ref: docs/next_product_visual_production_trial_plan_v13_007.md#productbrief-draft
+shot_ref: docs/next_product_visual_production_trial_plan_v13_007.md#hero_product_shot
+revision_reason: first_trial_correct_product_but_not_strong_enough_as_hero_main_image
+status: draft_prompt_package_static_review_pending
+
+selected_product: premium_portable_led_camping_lantern
+product_identity:
+  product_type: premium_portable_led_camping_lantern
+  product_category: outdoor_lifestyle_electronics
+  category_terms:
+    - premium portable LED camping lantern
+    - rechargeable camping lantern
+    - compact outdoor lantern
+    - warm diffuser lantern
+  must_not_be:
+    - flashlight
+    - candle
+    - speaker
+    - humidifier
+    - thermos
+    - desk lamp
+    - smart speaker
+
+locked_structure: premium_single_rechargeable_lantern_with_frosted_diffuser_attached_handle_dimmer_knob_and_stable_base
+structure_lock:
+  body: compact premium cylindrical or softly rounded rectangular lantern body
+  diffuser: warm frosted diffuser section with readable surface and edges
+  handle: sturdy continuous attached carrying or hanging handle loop
+  control_detail: small visible dimmer knob or refined side control
+  base: stable non-slip weighted base with believable contact shadow
+  single_product_only: true
+  extra_lantern_allowed: false
+
+runner_prompt_mapping:
+  canonical_prompt_field: prompt
+  positive_prompt_alias: positive_prompt
+  positive_prompt_sync_required: true
+  runner_expected_prompt_field: prompt
+
+visual_intent:
+  shot_role: premium_outdoor_lifestyle_hero_product_shot
+  commercial_goal: commercially usable premium outdoor lifestyle hero main image
+  product_role: single compact premium lantern as the first visual focus
+  hero_task: first glance must sell product quality, outdoor use, warm light, and portability
+  mood: refined early blue-hour outdoor campsite product photography
+  product_dominance: 60_to_70_percent_visual_importance
+  background_role: second visual layer that supports the product without stealing attention
+
+hero_selling_points:
+  - premium matte graphite or dark anodized metal body
+  - frosted warm diffuser with controlled glow and visible material edge
+  - continuous attached carry handle suitable for hanging or portable use
+  - refined dimmer knob or side control as a clear functional detail
+  - stable non-slip base with grounded contact shadow
+  - rechargeable outdoor electronics feel without logos or fake text
+
+composition_layers:
+  upper_layer: clean early blue-hour sky shortly after sunset, perfect deep blue, not bright daytime and not black night, with soft distant campsite silhouettes or tree shapes
+  middle_layer: lantern as the dominant hero product, full handle, diffuser, dimmer knob, body, and base visible, sharp focus, strongest visual attraction
+  lower_layer: darker grounded tabletop than the upper sky and middle product area, deep-toned weathered wood or dark stone with restrained texture, subtle contact shadow, and soft warm reflection from the lantern
+  layer_priority: product_first_lower_layer_grounding_background_second
+
+time_and_light:
+  time_of_day: early blue hour shortly after sunset
+  sky_color: clean refined deep blue sky, not orange sunset, not daylight, not black night
+  ambient_light: enough cool ambient light to preserve product silhouette and material detail
+  lantern_light: controlled warm LED glow that attracts the eye without blowing out the diffuser
+  color_contrast: premium warm lantern glow against cool blue-hour outdoor environment
+
+material_constraints:
+  diffuser: warm frosted diffuser, readable surface texture and edges, not blown out
+  body: matte graphite, dark anodized metal, or premium soft-touch outdoor electronics finish
+  handle: sturdy clean handle loop with plausible attachment points
+  control_detail: visible refined dimmer knob or side control, not random decoration
+  base: stable premium base with subtle contact shadow and slight warm reflection
+  finish: premium, manufactured, not toy plastic
+
+structure_constraints:
+  - one compact premium rechargeable LED camping lantern only
+  - clear diffuser, body, attached handle loop, dimmer knob or side control, and base hierarchy
+  - handle must remain attached, continuous, symmetric, and structurally plausible
+  - dimmer knob or side control must look manufactured and functional, not random decoration
+  - product must not drift into flashlight, candle, speaker, humidifier, thermos, desk lamp, or smart speaker
+  - product geometry must remain stable, manufactured, and commercially believable
+  - full product must remain visible with no cropped handle, diffuser, body, or base
+
+scene_constraints:
+  surface: dark-toned weathered wood, dark stone, or restrained campsite table
+  background: softly blurred premium campsite support elements, such as a tent silhouette, distant warm camp light, or tree line, always secondary
+  upper_middle_lower_layers_required: true
+  lower_layer_darker_than_sky_and_product: true
+  people_allowed: false
+  hands_allowed: false
+  open_flame_allowed: false
+  scene_must_not_overpower_product: true
+  camping_scene_intensity: refined_and_restrained
+
+lighting_camera:
+  lighting: cool early blue-hour ambient light plus controlled warm practical LED glow from the diffuser
+  glow_control: warm glow visible but product edges, diffuser texture, handle geometry, dimmer knob, and base remain readable
+  camera_angle: straight-on or slight three-quarter front angle at product height
+  crop: full product visible, no cut-off handle, body, diffuser, or base
+  framing: premium commercial hero composition with product centered or slightly off-center, balanced negative space, and clear three-layer depth
+  depth_of_field: realistic product photography depth, product sharp, background softly blurred
+  realism: realistic commercial product photography, not CGI, not illustration
+
+forbidden_elements:
+  - readable brand text
+  - fake logo
+  - random letters
+  - watermark
+  - people
+  - hands
+  - faces
+  - open flame
+  - fire
+  - smoke
+  - unsafe wet electronics
+  - extra lanterns
+  - extra products
+  - packaging box by default
+  - flashlight drift
+  - candle drift
+  - speaker drift
+  - humidifier drift
+  - thermos drift
+  - desk lamp drift
+  - smart speaker drift
+  - plain generic cylinder with no design detail
+  - missing dimmer knob or functional detail
+  - warped handle
+  - detached handle
+  - impossible handle geometry
+  - blown diffuser
+  - overexposed glow
+  - unreadable product silhouette
+  - bright tabletop
+  - busy foreground texture
+  - foreground brighter than the product
+  - empty background with no campsite support
+  - background overpowering product
+  - orange sunset sky
+  - bright daytime sky
+  - black night scene
+  - over-cinematic scene
+  - cyberpunk or gaming look
+  - toy plastic
+  - CGI look
+  - illustration
+  - cartoon
+  - low resolution
+
+prompt: |
+  Realistic commercial product photography of a single premium rechargeable portable LED camping lantern as the hero product for an outdoor lifestyle main image. The product must be the first visual focus and should feel valuable, well-designed, and worth buying. The lantern has a matte graphite or dark anodized metal body, a warm frosted diffuser with readable edges, a sturdy continuous attached carry handle, a small refined dimmer knob or side control, and a stable non-slip base. It must clearly read as a premium portable LED camping lantern, not a flashlight, candle, speaker, humidifier, thermos, desk lamp, or smart speaker.
+
+  Set the scene at early blue hour shortly after sunset: the sky is a clean refined deep blue, not bright daytime, not orange sunset, and not black night. There is enough cool ambient light to preserve the product silhouette, material detail, handle geometry, diffuser edge, control detail, and base shape. The lantern emits controlled warm LED light that becomes the visual attraction without overexposing or blowing out the frosted diffuser.
+
+  Design a clear three-layer hero composition. The upper layer has clean blue-hour sky with softly blurred campsite silhouettes, tree shapes, or a distant warm campsite light as secondary support. The middle layer is dominated by the lantern, sharp and complete, with full handle, diffuser, dimmer knob, body, and base visible. The lower layer is darker and more grounded than the upper sky and middle product area: a deep-toned weathered wood, dark stone, or restrained campsite tabletop with subtle texture, contact shadow, and a soft warm reflection from the lantern. The background must serve the product as the second visual layer and must not steal attention.
+
+  Use a straight-on or slight three-quarter front camera angle at product height, realistic product photography depth of field, balanced negative space, premium outdoor electronics finish, clean silhouette, believable contact shadow, and refined warm-versus-cool color contrast. No brand text, no fake logo, no people, no hands, no open flame, no smoke, no extra lanterns, no watermark, no cyberpunk look, no toy plastic, no bright busy foreground, and no overexposed glow.
+
+positive_prompt: |
+  Realistic commercial product photography of a single premium rechargeable portable LED camping lantern as the hero product for an outdoor lifestyle main image. The product must be the first visual focus and should feel valuable, well-designed, and worth buying. The lantern has a matte graphite or dark anodized metal body, a warm frosted diffuser with readable edges, a sturdy continuous attached carry handle, a small refined dimmer knob or side control, and a stable non-slip base. It must clearly read as a premium portable LED camping lantern, not a flashlight, candle, speaker, humidifier, thermos, desk lamp, or smart speaker.
+
+  Set the scene at early blue hour shortly after sunset: the sky is a clean refined deep blue, not bright daytime, not orange sunset, and not black night. There is enough cool ambient light to preserve the product silhouette, material detail, handle geometry, diffuser edge, control detail, and base shape. The lantern emits controlled warm LED light that becomes the visual attraction without overexposing or blowing out the frosted diffuser.
+
+  Design a clear three-layer hero composition. The upper layer has clean blue-hour sky with softly blurred campsite silhouettes, tree shapes, or a distant warm campsite light as secondary support. The middle layer is dominated by the lantern, sharp and complete, with full handle, diffuser, dimmer knob, body, and base visible. The lower layer is darker and more grounded than the upper sky and middle product area: a deep-toned weathered wood, dark stone, or restrained campsite tabletop with subtle texture, contact shadow, and a soft warm reflection from the lantern. The background must serve the product as the second visual layer and must not steal attention.
+
+  Use a straight-on or slight three-quarter front camera angle at product height, realistic product photography depth of field, balanced negative space, premium outdoor electronics finish, clean silhouette, believable contact shadow, and refined warm-versus-cool color contrast. No brand text, no fake logo, no people, no hands, no open flame, no smoke, no extra lanterns, no watermark, no cyberpunk look, no toy plastic, no bright busy foreground, and no overexposed glow.
+
+negative_prompt: |
+  wrong product type, flashlight, candle, speaker, humidifier, thermos, desk lamp, smart speaker,
+  plain generic cylinder, cheap plastic lantern, toy plastic, missing handle, missing base, missing functional detail,
+  readable brand text, fake text, random letters, fake logo, watermark,
+  people, hands, faces, model, open flame, fire, smoke, unsafe wet electronics, rain-soaked electronics,
+  extra lanterns, extra products, packaging box, cluttered camping gear,
+  warped handle, detached handle, broken handle, impossible handle geometry, fused handle,
+  blown diffuser, overexposed glow, unreadable product silhouette, melted diffuser, broken geometry,
+  product too small, product cropped, handle cropped, base cropped, background overpowering product,
+  bright tabletop, busy foreground texture, high-contrast foreground, foreground brighter than the product,
+  empty background with no campsite support, busy campsite scene, orange sunset sky, bright daytime sky, black night scene,
+  over-cinematic scene, cyberpunk look, gaming look, neon HUD, sci-fi prop,
+  CGI look, illustration, cartoon, low resolution
+
+acceptance_criteria:
+  selected_product_correct: true
+  premium_portable_led_camping_lantern_read: true
+  single_product_only: true
+  hero_main_image_direction_present: true
+  product_first_visual_focus: true
+  product_dominance_60_to_70_percent: true
+  early_blue_hour_sky_present: true
+  sky_not_daytime_or_black_night: true
+  warm_cool_contrast_present: true
+  upper_middle_lower_layer_composition: true
+  lower_layer_darker_than_sky_and_product: true
+  background_supports_product_as_second_visual_layer: true
+  warm_frosted_diffuser_present: true
+  diffuser_not_blown_out: true
+  product_edges_readable: true
+  matte_graphite_or_dark_premium_body_present: true
+  attached_handle_loop_plausible: true
+  visible_dimmer_knob_or_control_detail: true
+  stable_base_present: true
+  full_product_visible: true
+  restrained_premium_campsite_support: true
+  no_readable_brand_text_or_fake_logo: true
+  no_people_hands_open_flame_or_smoke: true
+  no_wrong_product_type_drift: true
+
+human_review_checklist:
+  - Does the image work as a premium outdoor lifestyle hero main image rather than only a detail or ambient image?
+  - Is the lantern the first visual focus, with the background clearly serving as the second visual layer?
+  - Is the time of day clearly early blue hour, with a clean blue sky that is neither too bright nor too dark?
+  - Does the image have a clear upper, middle, and lower layer composition?
+  - Is the lower layer darker and more grounded than the sky and product area without becoming dead black?
+  - Does the product clearly read as a premium portable rechargeable LED camping lantern?
+  - Are the handle, frosted diffuser, dimmer knob or side control, body, and stable base all visible and plausible?
+  - Is the warm LED glow controlled while diffuser texture and product edges remain readable?
+  - Does the product show enough design detail to feel premium rather than generic?
+  - Is the campsite or outdoor background refined, supportive, and not distracting?
+  - Are readable brand text, fake logo, random letters, people, hands, open flame, smoke, and extra lanterns absent?
+
+A5_authorization_required_later: true
+provider_contact_allowed: false
+image_generation_allowed: false
+memory_write_allowed: false
+production_candidate_002_allowed: false
+prompt_package_is_A5_authorization: false
+output_directory_creation_allowed: false
+accepted_samples_write_allowed: false
+runs_output_commit_allowed: false

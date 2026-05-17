@@ -3,6 +3,552 @@
 ## Active Local Objective Override
 
 ```text
+objective: v14.107 Women's resort relaxed knit accepted sample closeout
+status: completed_accepted_sample_closeout_validated
+mode: Persistent 4-Agent Council local loop
+phase_id: v14_107_womens_resort_relaxed_knit_accepted_sample_closeout
+source_phase: v14_106_womens_resort_relaxed_knit_formal_sample_promotion_package
+authorization_id: AUTH-PENDING-WOMENS-RESORT-KNIT-FORMAL-SAMPLE-20260517-001
+approved_by: Jenn
+accepted_sample_registry_write_completed: true
+accepted_sample_id: accepted_womens_resort_relaxed_knit_codex_v2_001
+category: fashion_lookbook_portrait
+accepted_sample_registry_ref: accepted_samples/accepted_sample_registry.yaml
+category_index_ref: accepted_samples/categories/fashion_lookbook_portrait.yaml
+accepted_sample_closeout_ref: docs/v14_107_womens_resort_relaxed_knit_accepted_sample_closeout.md
+source_image_path: runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/codex_session_womens_resort_relaxed_knit_final_v2.png
+image_files_committed_to_git: false
+source_image_modified: false
+production_candidate_002: false
+DailyNote_write: false
+VCP_memory_write: false
+provider_contact: false
+image_generation_by_project_script: false
+validated_now: accepted sample registry presence check; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: choose_production_candidate_planning_memory_suitability_review_or_new_visual_series
+recommended_next_auto_execution_allowed: false
+```
+
+## Active Local Objective Override
+
+```text
+objective: v14.106 Women's resort relaxed knit formal sample promotion package
+status: completed_formal_sample_package_validated
+mode: Persistent 4-Agent Council local loop
+phase_id: v14_106_womens_resort_relaxed_knit_formal_sample_promotion_package
+source_phase: v14_105_codex_session_womens_resort_relaxed_knit_final_candidate
+formal_sample_package_ref: docs/v14_106_womens_resort_relaxed_knit_formal_sample_promotion_package.md
+source_image_path: runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/codex_session_womens_resort_relaxed_knit_final_v2.png
+source_review_record: docs/v14_105_codex_session_womens_resort_relaxed_knit_final_review.md
+proposed_sample_id: accepted_womens_resort_relaxed_knit_codex_v2_001
+proposed_category: fashion_lookbook_portrait
+asset_sha256: 9d23208d05427b02ffc177664c1918ed73bf57831a9694be16522fe9a8f3c910
+asset_dimensions: 1254x1254
+accepted_samples_written: false
+production_candidate_002: false
+DailyNote_write: false
+VCP_memory_write: false
+provider_contact: false
+image_generation_by_project_script: false
+validated_now: node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: wait_for_exact_authorization_statement_before_accepted_samples_registry_write
+recommended_next_auto_execution_allowed: false
+```
+
+## Active Local Objective Override
+
+```text
+objective: v14.105 Codex Session women's resort relaxed knit final visual candidate
+status: completed_final_visual_candidate_validated
+mode: Persistent 4-Agent Council local loop
+phase_id: v14_105_codex_session_womens_resort_relaxed_knit_final_candidate
+source_phase: v14_104_codex_session_womens_fashion_three_outfit_first_round_import
+source_first_round_asset: runs/real_generation/v14_104_codex_session_womens_fashion_three_outfit_first_round_candidates/codex_session_womens_resort_relaxed_knit_v1.png
+final_asset_ref: runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/codex_session_womens_resort_relaxed_knit_final_v2.png
+import_record_ref: runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/resort_relaxed_knit_final_import_record.json
+review_record_ref: docs/v14_105_codex_session_womens_resort_relaxed_knit_final_review.md
+asset_dimensions: 1254x1254
+asset_sha256: 9d23208d05427b02ffc177664c1918ed73bf57831a9694be16522fe9a8f3c910
+visual_decision: final_visual_candidate_pass
+formal_acceptance_status: pending_human_review
+commercial_delivery_ready: false
+memory_suitability: deferred
+codex_session_generation_used: true
+codex_session_generation_separate_A5_authorization_required_now: false
+codex_session_generation_direct_user_request_sufficient_now: true
+direct_project_call_allowed: false
+mcp_runtime_allowed: false
+project_script_generation_allowed: false
+provider_API_call_by_project: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: import JSON parse check; node scripts/validate_codex_session_image_import.js; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: human_can_accept_this_as_final_visual_candidate_or_authorize_formal_sample_promotion
+recommended_next_auto_execution_allowed: false
+```
+
+## Active Local Objective Override
+
+```text
+objective: v14.104 Codex Session women's fashion three-outfit first round import
+status: completed_first_round_series_candidate_validated
+mode: Persistent 4-Agent Council local loop
+phase_id: v14_104_codex_session_womens_fashion_three_outfit_first_round_import
+series_goal: three adult female fashion hero portraits with one shared commercial language and three outfit directions
+output_directory_ref: runs/real_generation/v14_104_codex_session_womens_fashion_three_outfit_first_round_candidates/
+review_record_ref: docs/v14_104_codex_session_womens_fashion_three_outfit_first_round_review.md
+commuter_asset: runs/real_generation/v14_104_codex_session_womens_fashion_three_outfit_first_round_candidates/codex_session_womens_commuter_tailored_suit_v1.png
+commuter_sha256: 635484bbbdd1c7a61596df5258b8797d3a865cfca73495a70a9a70d4f9a0876c
+outdoor_asset: runs/real_generation/v14_104_codex_session_womens_fashion_three_outfit_first_round_candidates/codex_session_womens_outdoor_technical_v1.png
+outdoor_sha256: ae8075a6d324ebc1fdce4ea21098f857b3294aacf1cab7d4616d946fe9a71af0
+resort_asset: runs/real_generation/v14_104_codex_session_womens_fashion_three_outfit_first_round_candidates/codex_session_womens_resort_relaxed_knit_v1.png
+resort_sha256: 8cd3220db3f041af6036dbe265e1eac2a107ff7309d7633e9cf417603186553b
+asset_dimensions: 1254x1254_each
+overall_decision: first_round_series_candidate_pass
+best_single_direction: commuter_tailored_suit
+strongest_visual_drama: outdoor_technical
+v2_refinement_target_if_needed: resort_relaxed_knit
+formal_acceptance_status: pending_human_review
+commercial_delivery_ready: false
+memory_suitability: deferred
+codex_session_generation_used: true
+codex_session_generation_separate_A5_authorization_required_now: false
+codex_session_generation_direct_user_request_sufficient_now: true
+direct_project_call_allowed: false
+mcp_runtime_allowed: false
+project_script_generation_allowed: false
+provider_API_call_by_project: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: three import JSON parse checks; node scripts/validate_codex_session_image_import.js; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: refine_resort_relaxed_knit_v2_only_if_final_series_consistency_is_required
+recommended_next_auto_execution_allowed: false
+```
+
+## Active Local Objective Override
+
+```text
+objective: v14.103 Codex Session Image lantern Codex v1 square hero candidate import
+status: completed_imported_candidate_validated
+mode: Persistent 4-Agent Council local loop
+phase_id: v14_103_codex_session_lantern_codex_v1_square_hero_candidate_import
+prompt_package_ref: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_codex_v1.yaml
+imported_asset: runs/real_generation/v14_103_codex_session_premium_portable_led_camping_lantern_codex_v1_square_hero_candidate/codex_session_lantern_codex_v1_square_hero_candidate.png
+import_record_ref: runs/real_generation/v14_103_codex_session_premium_portable_led_camping_lantern_codex_v1_square_hero_candidate/codex_session_image_import_record.json
+review_record_ref: docs/v14_103_codex_session_lantern_codex_v1_square_hero_candidate_review.md
+asset_dimensions: 1254x1254
+asset_aspect_ratio: 1:1
+asset_sha256: dec895455bf6c607094baf4616abaf05c9f2cd95e95bcb55a40dcf8f286a9702
+visual_decision: internal_visual_pass_as_imported_candidate
+formal_acceptance_status: pending_human_review
+commercial_delivery_ready: false
+memory_suitability: deferred
+codex_session_generation_used: true
+codex_session_generation_separate_A5_authorization_required_now: false
+codex_session_generation_direct_user_request_sufficient_now: true
+direct_project_call_allowed: false
+mcp_runtime_allowed: false
+project_script_generation_allowed: false
+NativeDoubaoImage_call: false
+provider_API_call_by_project: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: import JSON parse check; node scripts/validate_codex_session_image_import.js; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: human_may_formally_accept_or_request_one_codex_v2_refinement
+recommended_next_auto_execution_allowed: false
+```
+
+## Active Local Objective Override
+
+```text
+objective: v14.102 Codex Session Image lantern v1 prompt package
+status: completed_prompt_package_static_validated
+mode: Persistent 4-Agent Council local loop
+phase_id: v14_102_codex_session_lantern_v1_prompt_package
+prompt_package_created: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_codex_v1.yaml
+source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v10.yaml
+source_generation_result: runs/real_generation/v14_101_pvos_premium_portable_led_camping_lantern_v10_square_hero_trial/native_doubao_1779005117784_0.jpg
+codex_session_provider_contract_ref: docs/codex_session_image_provider_minimal_contract.md
+human_review_correction: stop spending NativeDoubaoImage calls; prepare Codex-specific prompt focused on centered modern cylindrical lantern, large hero scale, thin base, shallow table, small integrated lower-body control, fine frosted diffuser, and deep blue-hour background
+target_role: premium_outdoor_lifestyle_hero_product_shot
+aspect_ratio_required: 1:1_square
+provider_id_for_future_manual_generation: codex_session_image
+manual_session_generation_required: true
+codex_session_generation_separate_A5_authorization_required_now: false
+codex_session_generation_direct_user_request_sufficient_now: true
+direct_project_call_allowed: false
+mcp_runtime_allowed: false
+project_script_generation_allowed: false
+next_codex_session_generation_requires_direct_user_request: true
+provider_contact_by_this_prompt_work: false
+image_generation_by_this_prompt_work: false
+image_generation_by_project_script: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_codex_v1.yaml; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: optional_codex_session_image_generation_by_direct_user_request_then_codex_session_image_import_record
+recommended_next_auto_execution_allowed: false
+```
+
+## Active Local Objective Override
+
+```text
+objective: v14.100 PVOS lantern v10 prompt package for tighter NativeDoubaoImage square hero readiness
+status: completed_prompt_package_static_validated
+mode: Persistent 4-Agent Council local loop
+phase_id: v14_100_pvos_lantern_v10_prompt_revision_plan
+prompt_package_created: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v10.yaml
+source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v9.yaml
+source_generation_result: runs/real_generation/v14_098_pvos_premium_portable_led_camping_lantern_v9_square_hero_trial/native_doubao_1779003902063_0.jpg
+human_review_correction: keep v9 correct direction but make product 10-15 percent larger, reduce top/side blue empty space, thin and refine the base, shrink and integrate the lower-body control, and improve diffuser material beyond smooth plastic
+target_role: premium_outdoor_lifestyle_hero_product_shot
+aspect_ratio_required: 1:1_square
+selected_plugin_id_for_future_authorization: NativeDoubaoImage
+selected_plugin_command_for_future_authorization: generate
+selected_plugin_model_for_future_authorization: doubao-seedream-5-0-260128
+recommended_output_directory_for_future_authorization: runs/real_generation/v14_101_pvos_premium_portable_led_camping_lantern_v10_square_hero_trial/
+future_authorization_package_id_recommended: AUTH-PENDING-PVOS-LANTERN-V10-SQUARE-HERO-20260517-001
+max_plugin_calls_recommended: 1
+max_images_created_recommended: 1
+retry_limit_recommended: 0
+next_generation_authorized_now: false
+provider_contact_by_this_prompt_work: false
+image_generation_by_this_prompt_work: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v10.yaml; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: human_A5_authorization_for_v14_101_native_doubao_v10_square_hero_trial
+recommended_next_auto_execution_allowed: false
+```
+
+## Active Local Objective Override
+
+```text
+objective: v14.099 Codex Session Image Provider minimal manual import contract
+status: completed_local_contract_validated
+mode: Persistent 4-Agent Council local loop
+phase_id: v14_099_codex_session_image_provider_minimal_import_contract
+contract_created: docs/codex_session_image_provider_minimal_contract.md
+schema_created: schemas/codex_session_image_import.schema.yaml
+example_created: tests/schema_examples/codex_session_image_import.example.json
+validator_created: scripts/validate_codex_session_image_import.js
+mvp_validator_modified: scripts/validate_mvp.ps1
+purpose: define a manual-only Codex session image import bridge so Codex-generated session images can be recorded and reviewed by Agent Image Lab without MCP/runtime/provider automation
+manual_import_only: true
+codex_image_direct_call_allowed: false
+mcp_runtime_allowed: false
+provider_api_call_allowed: false
+project_script_generation_allowed: false
+image_generation_by_script: false
+env_local_secret_value_read_allowed: false
+DailyNote_write_allowed: false
+VCP_memory_write_allowed: false
+accepted_samples_write_allowed: false
+production_candidate_write_allowed: false
+real_manifest_read_allowed: false
+real_VCPChat_read_allowed: false
+real_VCPToolBox_read_allowed: false
+push_tag_release_deploy_allowed: false
+provider_contact_by_this_contract_work: false
+image_generation_by_this_contract_work: false
+validated_now: node scripts/validate_codex_session_image_import.js; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: use_manual_codex_session_image_import_record_when_a_codex_session_image_needs_project_review
+recommended_next_auto_execution_allowed: false
+```
+
+## Active Local Objective Override
+
+```text
+objective: v14.097 PVOS lantern v9 prompt package returning to v7 visual base after v8 rejection
+status: completed_prompt_package_static_validated
+mode: Persistent 4-Agent Council local loop
+phase_id: v14_097_pvos_lantern_v9_prompt_revision_plan
+prompt_package_created: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v9.yaml
+source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v7.yaml
+source_rejected_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v8.yaml
+source_generation_result: runs/real_generation/v14_094_pvos_premium_portable_led_camping_lantern_v7_square_hero_trial/native_doubao_1779002776319_0.jpg
+source_rejected_generation_result: runs/real_generation/v14_096_pvos_premium_portable_led_camping_lantern_v8_square_hero_trial/native_doubao_1779003213706_0.jpg
+human_review_correction: reject v8 as a visual base; return to v7 product scale, diffuser cleanliness, shell refinement, compact base, shallow table, contrast, and saturation; keep only the lower-body control correction
+target_role: premium_outdoor_lifestyle_hero_product_shot
+aspect_ratio_required: 1:1_square
+selected_plugin_id_for_future_authorization: NativeDoubaoImage
+selected_plugin_command_for_future_authorization: generate
+selected_plugin_model_for_future_authorization: doubao-seedream-5-0-260128
+recommended_output_directory_for_future_authorization: runs/real_generation/v14_098_pvos_premium_portable_led_camping_lantern_v9_square_hero_trial/
+future_authorization_package_id_recommended: AUTH-PENDING-PVOS-LANTERN-V9-SQUARE-HERO-20260517-001
+max_plugin_calls_recommended: 1
+max_images_created_recommended: 1
+retry_limit_recommended: 0
+next_generation_authorized_now: false
+provider_contact_by_this_prompt_work: false
+image_generation_by_this_prompt_work: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v9.yaml; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: human_A5_authorization_for_v14_098_native_doubao_v9_square_hero_trial
+recommended_next_auto_execution_allowed: false
+```
+
+## Active Local Objective Override
+
+```text
+objective: v14.095 PVOS lantern v8 prompt package for lower-body-control high-contrast square hero readiness
+status: completed_prompt_package_static_validated
+mode: Persistent 4-Agent Council local loop
+phase_id: v14_095_pvos_lantern_v8_prompt_revision_plan
+prompt_package_created: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v8.yaml
+source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v7.yaml
+source_generation_result: runs/real_generation/v14_094_pvos_premium_portable_led_camping_lantern_v7_square_hero_trial/native_doubao_1779002776319_0.jpg
+human_review_correction: preserve v7 scale/contrast/saturation direction, but move the control knob or button back to the lower body below the diffuser and above the base
+target_role: premium_outdoor_lifestyle_hero_product_shot
+aspect_ratio_required: 1:1_square
+selected_plugin_id_for_future_authorization: NativeDoubaoImage
+selected_plugin_command_for_future_authorization: generate
+selected_plugin_model_for_future_authorization: doubao-seedream-5-0-260128
+recommended_output_directory_for_future_authorization: runs/real_generation/v14_096_pvos_premium_portable_led_camping_lantern_v8_square_hero_trial/
+max_plugin_calls_recommended: 1
+max_images_created_recommended: 1
+retry_limit_recommended: 0
+next_generation_authorized_now: false
+provider_contact_by_this_prompt_work: false
+image_generation_by_this_prompt_work: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v8.yaml; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: human_A5_authorization_for_v14_096_native_doubao_v8_square_hero_trial
+recommended_next_auto_execution_allowed: false
+```
+
+## Active Local Objective Override
+
+```text
+objective: v14.093 PVOS lantern v7 prompt package for larger high-contrast square hero readiness
+status: completed_prompt_package_static_validated
+mode: Persistent 4-Agent Council local loop
+phase_id: v14_093_pvos_lantern_v7_prompt_revision_plan
+prompt_package_created: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v7.yaml
+source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v6.yaml
+source_generation_result: runs/real_generation/v14_092_pvos_premium_portable_led_camping_lantern_v6_square_hero_trial/native_doubao_1779002132757_0.jpg
+human_review_correction: preserve v6 material/table/background gains, restore v5-like product frame share, and increase global contrast plus saturation
+target_role: premium_outdoor_lifestyle_hero_product_shot
+aspect_ratio_required: 1:1_square
+selected_plugin_id_for_future_authorization: NativeDoubaoImage
+selected_plugin_command_for_future_authorization: generate
+selected_plugin_model_for_future_authorization: doubao-seedream-5-0-260128
+recommended_output_directory_for_future_authorization: runs/real_generation/v14_094_pvos_premium_portable_led_camping_lantern_v7_square_hero_trial/
+max_plugin_calls_recommended: 1
+max_images_created_recommended: 1
+retry_limit_recommended: 0
+next_generation_authorized_now: false
+provider_contact_by_this_prompt_work: false
+image_generation_by_this_prompt_work: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v7.yaml; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: human_A5_authorization_for_v14_094_native_doubao_v7_square_hero_trial
+recommended_next_auto_execution_allowed: false
+```
+
+## Active Local Objective Override
+
+```text
+objective: v14.091 PVOS lantern v6 prompt package for metal-shell horizontal-table square hero readiness
+status: completed_prompt_package_static_validated
+mode: Persistent 4-Agent Council local loop
+phase_id: v14_091_pvos_lantern_v6_prompt_revision_plan
+prompt_package_created: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v6.yaml
+source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v5.yaml
+source_generation_result: runs/real_generation/v14_090_pvos_premium_portable_led_camping_lantern_v5_square_hero_trial/native_doubao_1779001423852_0.jpg
+human_review_correction: v5 square/dark background/table direction passes, but diffuser texture is worse than v4, shell looks gray and cheap, and lower table must be fixed horizontally rather than angled or side-placed
+target_role: premium_outdoor_lifestyle_hero_product_shot
+aspect_ratio_required: 1:1_square
+selected_plugin_id_for_future_authorization: NativeDoubaoImage
+selected_plugin_command_for_future_authorization: generate
+selected_plugin_model_for_future_authorization: doubao-seedream-5-0-260128
+recommended_output_directory_for_future_authorization: runs/real_generation/v14_092_pvos_premium_portable_led_camping_lantern_v6_square_hero_trial/
+max_plugin_calls_recommended: 1
+max_images_created_recommended: 1
+retry_limit_recommended: 0
+next_generation_authorized_now: false
+provider_contact_by_this_prompt_work: false
+image_generation_by_this_prompt_work: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v6.yaml; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: human_A5_authorization_for_v14_092_native_doubao_v6_square_hero_trial
+recommended_next_auto_execution_allowed: false
+```
+
+## Active Local Objective Override
+
+```text
+objective: v14.089 PVOS lantern v5 prompt package for square darker-background hero trial readiness
+status: completed_prompt_package_static_validated
+mode: Persistent 4-Agent Council local loop
+phase_id: v14_089_pvos_lantern_v5_prompt_revision_plan
+prompt_package_created: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v5.yaml
+source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v4.yaml
+source_generation_result: runs/real_generation/v14_088_pvos_premium_portable_led_camping_lantern_v4_hero_trial/native_doubao_1779000827093_0.jpg
+human_review_correction: preserve current diffuser brightness; darken background; make lower table deep dark; fix image ratio at 1:1
+target_role: premium_outdoor_lifestyle_hero_product_shot
+aspect_ratio_required: 1:1_square
+selected_plugin_id_for_future_authorization: NativeDoubaoImage
+selected_plugin_command_for_future_authorization: generate
+selected_plugin_model_for_future_authorization: doubao-seedream-5-0-260128
+recommended_output_directory_for_future_authorization: runs/real_generation/v14_090_pvos_premium_portable_led_camping_lantern_v5_square_hero_trial/
+max_plugin_calls_recommended: 1
+max_images_created_recommended: 1
+retry_limit_recommended: 0
+next_generation_authorized_now: false
+provider_contact_by_this_prompt_work: false
+image_generation_by_this_prompt_work: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v5.yaml; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: human_A5_authorization_for_v14_090_native_doubao_v5_square_hero_trial
+recommended_next_auto_execution_allowed: false
+```
+
+## Active Local Objective Override
+
+```text
+objective: v14.087 PVOS lantern v4 prompt package for fourth NativeDoubaoImage hero trial readiness
+status: completed_prompt_package_static_validated
+mode: Persistent 4-Agent Council local loop
+phase_id: v14_087_pvos_lantern_v4_prompt_revision_plan
+prompt_package_created: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v4.yaml
+source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v3.yaml
+source_generation_result: runs/real_generation/v14_086_pvos_premium_portable_led_camping_lantern_v3_hero_trial/native_doubao_1779000214909_0.jpg
+revision_goal: keep NativeDoubao v3 product-first hero direction while reducing diffuser overexposure, strengthening premium industrial design, quieting the lower surface, and removing competing background light points
+codex_direction_sample_used_as_reference_only: true
+target_role: premium_outdoor_lifestyle_hero_product_shot
+selected_plugin_id_for_future_authorization: NativeDoubaoImage
+selected_plugin_command_for_future_authorization: generate
+selected_plugin_model_for_future_authorization: doubao-seedream-5-0-260128
+recommended_output_directory_for_future_authorization: runs/real_generation/v14_088_pvos_premium_portable_led_camping_lantern_v4_hero_trial/
+max_plugin_calls_recommended: 1
+max_images_created_recommended: 1
+retry_limit_recommended: 0
+next_generation_authorized_now: false
+provider_contact_by_this_prompt_work: false
+image_generation_by_this_prompt_work: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v4.yaml; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: human_A5_authorization_for_v14_088_native_doubao_v4_hero_trial
+recommended_next_auto_execution_allowed: false
+```
+
+## Active Local Objective Override
+
+```text
+objective: v14.085 PVOS lantern v3 prompt package for third generation readiness
+status: completed_prompt_package_static_validated
+mode: Persistent 4-Agent Council local loop
+phase_id: v14_085_pvos_lantern_v3_prompt_revision_plan
+prompt_package_created: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v3.yaml
+source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml
+source_review_record: docs/v14_084_pvos_lantern_v2_hero_second_review_record.md
+source_generation_result: runs/real_generation/v14_083_pvos_premium_portable_led_camping_lantern_v2_hero_trial/native_doubao_1778998955426_0.jpg
+revision_goal: make product larger, more modern, more premium, and more visually dominant while weakening the background and lower tabletop layer
+target_role: premium_outdoor_lifestyle_hero_product_shot
+selected_plugin_id_for_future_authorization: NativeDoubaoImage
+selected_plugin_command_for_future_authorization: generate
+selected_plugin_model_for_future_authorization: doubao-seedream-5-0-260128
+recommended_output_directory_for_future_authorization: runs/real_generation/v14_086_pvos_premium_portable_led_camping_lantern_v3_hero_trial/
+max_plugin_calls_recommended: 1
+max_images_created_recommended: 1
+retry_limit_recommended: 0
+provider_contact_by_this_prompt_work: false
+image_generation_by_this_prompt_work: false
+env_local_secret_value_read: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v3.yaml; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: human_A5_authorization_for_v14_086_native_doubao_v3_hero_trial
+recommended_next_auto_execution_allowed: false
+```
+
+## Active Local Objective Override
+
+```text
+objective: v14.084 NativeDoubaoImage v2 hero two-pass review record
+status: completed_docs_only_review_record_validated
+mode: Persistent 4-Agent Council local loop
+phase_id: v14_084_pvos_lantern_v2_hero_second_review_record
+phase_record: docs/v14_084_pvos_lantern_v2_hero_second_review_record.md
+source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml
+reviewed_output: runs/real_generation/v14_083_pvos_premium_portable_led_camping_lantern_v2_hero_trial/native_doubao_1778998955426_0.jpg
+review_passes_recorded: 2
+review_result: needs_revision
+asset_status: needs_revision
+accepted_candidate: false
+commercial_hero_ready: false
+commercial_delivery_ready: false
+memory_suitability: deferred
+provider_contact_by_this_record: false
+image_generation_by_this_record: false
+retry: false
+DailyNote_write: false
+VCP_memory_write: false
+accepted_samples_written: false
+production_candidate_002: false
+runs_output_committed: false
+validated_now: node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml; node scripts/validate_agent_board_state.js; node scripts/validate_v14_081_pvos_exact_a5_authorization_package.js; node scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: v14_085_pvos_lantern_v3_prompt_revision_plan
+recommended_next_auto_execution_allowed: false
+```
+
+## Active Local Objective Override
+
+```text
 objective: v14.082 metadata-only preflight authorization correction for PVOS evidence collector blocker package
 status: completed_metadata_only_preflight_passed_validated
 mode: Persistent 4-Agent Council local loop

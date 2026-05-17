@@ -174,6 +174,7 @@ $requiredFiles = @(
   'scripts/validate_pvos_evidence_collector_blocker_pipeline.js',
   'scripts/validate_v14_081_pvos_exact_a5_authorization_package.js',
   'scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js',
+  'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
   'scripts/validate_evidence_blocker_contract.js',
@@ -190,6 +191,7 @@ $requiredFiles = @(
   'schemas/pvos_kernel_run.schema.yaml',
   'schemas/pvos_kernel_dry_run_adapter.schema.yaml',
   'schemas/pvos_evidence_collector_blocker_pipeline.schema.yaml',
+  'schemas/codex_session_image_import.schema.yaml',
   'schemas/review_result_protocol.schema.yaml',
   'schemas/review_decision_package.schema.yaml',
   'schemas/evidence_blocker_contract.schema.yaml',
@@ -199,6 +201,7 @@ $requiredFiles = @(
   'tests/schema_examples/pvos_kernel_dry_run_adapter_response.example.json',
   'tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json',
   'tests/schema_examples/pvos_evidence_collector_blocker_pipeline.example.json',
+  'tests/schema_examples/codex_session_image_import.example.json',
   'tests/schema_examples/review_console_adapter_negative_fixture_draft_output_snapshot.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_draft_output_snapshot.example.json',
   'tests/schema_examples/review_console_review_report_draft_output_snapshot.example.json',
@@ -273,6 +276,7 @@ $requiredFiles = @(
   'docs/v14_080_pvos_evidence_collector_blocker_A5_authorization_package_draft_gate.md',
   'docs/v14_081_pvos_evidence_collector_blocker_exact_A5_authorization_package_gate.md',
   'docs/v14_082_pvos_metadata_only_preflight_authorization_correction_gate.md',
+  'docs/codex_session_image_provider_minimal_contract.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -4200,6 +4204,11 @@ if (-not $node) {
     Add-Failure "scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js failed node --check"
   }
 
+  & node --check (Join-Path $Root 'scripts/validate_codex_session_image_import.js') | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "scripts/validate_codex_session_image_import.js failed node --check"
+  }
+
   & node --check (Join-Path $Root 'kernel/review_result_protocol.js') | Out-Null
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "kernel/review_result_protocol.js failed node --check"
@@ -4770,8 +4779,8 @@ if (-not $node) {
     if ($v14081ExactA5.v14_081_pvos_exact_a5_authorization_package.retry_limit -ne 0) {
       Add-Failure "v14.081 exact A5 authorization package must keep retry_limit 0"
     }
-    if ($v14081ExactA5.v14_081_pvos_exact_a5_authorization_package.output_directory_absent_or_empty -ne $true) {
-      Add-Failure "v14.081 exact A5 authorization package output directory must be absent or empty"
+    if ($v14081ExactA5.v14_081_pvos_exact_a5_authorization_package.output_directory_state_compatible -ne $true) {
+      Add-Failure "v14.081 exact A5 authorization package output directory must be absent, empty, or contain only the known authorized post-run output"
     }
     if ($v14081ExactA5.v14_081_pvos_exact_a5_authorization_package.external_network_required -ne $false) {
       Add-Failure "v14.081 exact A5 package validation must not require external network"
@@ -4839,6 +4848,46 @@ if (-not $node) {
     }
     if ($v14082MetadataPreflight.v14_082_pvos_metadata_only_preflight_authorization_correction.file_write_performed -ne $false) {
       Add-Failure "v14.082 validator must not write files"
+    }
+  }
+
+  $codexSessionImageImportOutput = & node (Join-Path $Root 'scripts/validate_codex_session_image_import.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Codex session image import validation exited with failure"
+  } else {
+    $codexSessionImageImport = ($codexSessionImageImportOutput -join "`n") | ConvertFrom-Json
+    if ($codexSessionImageImport.passed -ne $true) {
+      Add-Failure "Codex session image import validation must report passed true"
+    }
+    if ($codexSessionImageImport.codex_session_image_import.manual_import_only -ne $true) {
+      Add-Failure "Codex session image import must stay manual import only"
+    }
+    if ($codexSessionImageImport.codex_session_image_import.codex_image_direct_call_allowed -ne $false) {
+      Add-Failure "Codex session image import must not allow direct Codex image calls"
+    }
+    if ($codexSessionImageImport.codex_session_image_import.mcp_runtime_allowed -ne $false) {
+      Add-Failure "Codex session image import must not allow MCP runtime"
+    }
+    if ($codexSessionImageImport.codex_session_image_import.provider_api_call_allowed -ne $false) {
+      Add-Failure "Codex session image import must not allow provider API calls"
+    }
+    if ($codexSessionImageImport.codex_session_image_import.image_generation_by_script -ne $false) {
+      Add-Failure "Codex session image import must not allow image generation by project script"
+    }
+    if ($codexSessionImageImport.codex_session_image_import.daily_note_write_allowed -ne $false) {
+      Add-Failure "Codex session image import must not allow DailyNote writes"
+    }
+    if ($codexSessionImageImport.codex_session_image_import.vcp_memory_write_allowed -ne $false) {
+      Add-Failure "Codex session image import must not allow VCP memory writes"
+    }
+    if ($codexSessionImageImport.codex_session_image_import.accepted_samples_write_allowed -ne $false) {
+      Add-Failure "Codex session image import must not allow accepted_samples writes"
+    }
+    if ($codexSessionImageImport.codex_session_image_import.production_candidate_write_allowed -ne $false) {
+      Add-Failure "Codex session image import must not allow production candidate writes"
+    }
+    if ($codexSessionImageImport.codex_session_image_import.file_write_performed -ne $false) {
+      Add-Failure "Codex session image import validator must not write files"
     }
   }
 
