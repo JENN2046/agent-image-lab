@@ -1,5 +1,45 @@
 # RUN_STATE.md — Agent Image Lab
 
+## Active Two-Week Dashboard Evidence Goal
+
+```text
+objective: shift Agent Image Lab from governance/document proof to real artifact recoverability product capability
+status: v14_138_dashboard_alignment_from_real_artifact_evidence_completed_validated
+mode: Persistent 4-Agent Council local loop under A4.8 / A4 — Sustained Local Autopilot
+phase_id: v14_138_dashboard_alignment_from_real_artifact_evidence
+phase_record_ref: docs/v14_138_dashboard_alignment_from_real_artifact_evidence.md
+validator_created: scripts/validate_v14_138_dashboard_alignment_from_real_artifact_evidence.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+dashboard_alignment_from_real_artifact_evidence_completed: true
+artifact_recoverability_dashboard_evidence_created: true
+dashboard_evidence_source: v14_131_real_artifact_validator
+dashboard_progress_basis: real_artifact_recoverability_evidence
+dashboard_uses_real_v14_131_recoverability_evidence: true
+dashboard_uses_project_master_plan_progress: false
+dashboard_uses_document_token_progress: false
+dashboard_promotes_product_status: false
+current_route_remains_artifact_recoverability_chain: true
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+file_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+validated_now: node --check review_console/static_prototype/app.js; node --check review_console/static_prototype/mock_data.js; node --check scripts/validate_v14_138_dashboard_alignment_from_real_artifact_evidence.js; node scripts/validate_v14_138_dashboard_alignment_from_real_artifact_evidence.js
+recommended_next: durable_archive_production_candidate_memory_write_authorization_split_planning
+recommended_next_auto_execution_allowed: true
+```
+
 ## Active Two-Week Artifact Recoverability Goal
 
 ```text

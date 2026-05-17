@@ -29,6 +29,7 @@ const state = {
   review_report_static_handoff: mock.review_report_static_handoff,
   review_report_negative_guard_static_handoff: mock.review_report_negative_guard_static_handoff,
   review_evidence_blocker_adapter_negative_static_handoff: mock.review_evidence_blocker_adapter_negative_static_handoff,
+  artifact_dashboard_evidence: mock.artifact_recoverability_dashboard_evidence,
   import_record_reader: {
     source_mode: "project_local_seed",
     parsed: null,
@@ -196,6 +197,18 @@ function renderImportRecordReader() {
   ` : `
     <span>source <strong>${escapeHtml(reader.source_mode)}</strong></span>
     <span>status <strong>${escapeHtml(reader.parse_status)}</strong></span>
+  `;
+}
+
+function renderArtifactEvidenceDashboard() {
+  const evidence = state.artifact_dashboard_evidence;
+  qs("#artifactEvidenceSummary").innerHTML = `
+    <span>sample <strong>${escapeHtml(evidence.accepted_sample_id)}</strong></span>
+    <span>status <strong>${escapeHtml(evidence.recoverability_status)}</strong></span>
+    <span>size <strong>${escapeHtml(evidence.verified_dimensions)}</strong></span>
+    <span>hash <strong>${escapeHtml(evidence.verified_sha256.slice(0, 12))}</strong></span>
+    <span>basis <strong>${escapeHtml(evidence.dashboard_progress_basis)}</strong></span>
+    <span>runtime <strong>${escapeHtml(evidence.vcp_runtime_integration_proven)}</strong></span>
   `;
 }
 
@@ -1053,6 +1066,7 @@ function renderDraft() {
     review_report_static_handoff: state.review_report_static_handoff,
     review_report_negative_guard_static_handoff: state.review_report_negative_guard_static_handoff,
     review_evidence_blocker_adapter_negative_static_handoff: state.review_evidence_blocker_adapter_negative_static_handoff,
+    artifact_recoverability_dashboard_evidence: state.artifact_dashboard_evidence,
     codex_session_import_record_reader: state.import_record_reader,
     review_session: buildReviewSession(memoryApproval, humanTotal),
     image_case: buildImageCase(humanTotal),
@@ -1082,6 +1096,7 @@ function renderAll() {
   renderReviewReportHandoff();
   renderNegativeReviewReportHandoff();
   renderAdapterNegativeHandoff();
+  renderArtifactEvidenceDashboard();
   loadImportRecordSeed();
   renderDraft();
 }

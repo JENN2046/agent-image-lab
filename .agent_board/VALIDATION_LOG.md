@@ -1,5 +1,60 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.138-DASHBOARD-ALIGNMENT-FROM-REAL-ARTIFACT-EVIDENCE
+
+Scope:
+
+Validate that dashboard evidence comes from the v14.131 real artifact
+recoverability chain and cannot use `PROJECT_MASTER_PLAN.md`, document
+presence, token counts, or old ledger status to raise product progress.
+
+Commands:
+
+```text
+node --check review_console/static_prototype/app.js
+node --check review_console/static_prototype/mock_data.js
+node --check scripts/validate_v14_138_dashboard_alignment_from_real_artifact_evidence.js
+node scripts/validate_v14_138_dashboard_alignment_from_real_artifact_evidence.js
+```
+
+Expected:
+
+```yaml
+passed: true
+dashboard_alignment_from_real_artifact_evidence_completed: true
+artifact_recoverability_dashboard_evidence_created: true
+dashboard_evidence_source: v14_131_real_artifact_validator
+dashboard_progress_basis: real_artifact_recoverability_evidence
+dashboard_uses_real_v14_131_recoverability_evidence: true
+dashboard_uses_project_master_plan_progress: false
+dashboard_uses_document_token_progress: false
+dashboard_promotes_product_status: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+file_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+```
+
+Result:
+
+```yaml
+status: passed
+validator: scripts/validate_v14_138_dashboard_alignment_from_real_artifact_evidence.js
+phase_record: docs/v14_138_dashboard_alignment_from_real_artifact_evidence.md
+```
+
 ## VALIDATION-20260517-v14.137-PROJECT-MASTER-PLAN-QUARANTINE-STATUS-DEMOTION
 
 Scope:

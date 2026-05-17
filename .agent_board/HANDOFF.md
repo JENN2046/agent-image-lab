@@ -3,6 +3,42 @@
 ## Handoff Summary
 
 ```text
+Status: v14_138_dashboard_alignment_from_real_artifact_evidence completed locally and validated.
+Reason: Dashboard/progress surfaces needed a real v14.131 artifact evidence source and explicit blockers against PROJECT_MASTER_PLAN/document/token progress promotion.
+Current repository: project_root
+Branch: master tracking origin/master; local commits may be ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.138 static dashboard evidence, fixture, validator, MVP wiring, and .agent_board sync until validation and commit decision.
+Phase record: docs/v14_138_dashboard_alignment_from_real_artifact_evidence.md
+Validator created: scripts/validate_v14_138_dashboard_alignment_from_real_artifact_evidence.js
+MVP validator updated: scripts/validate_mvp.ps1
+dashboard_alignment_from_real_artifact_evidence_completed: true
+artifact_recoverability_dashboard_evidence_created: true
+dashboard_evidence_source: v14_131_real_artifact_validator
+dashboard_progress_basis: real_artifact_recoverability_evidence
+dashboard_uses_real_v14_131_recoverability_evidence: true
+dashboard_uses_project_master_plan_progress: false
+dashboard_uses_document_token_progress: false
+dashboard_promotes_product_status: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+file_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+validated_now: node --check review_console/static_prototype/app.js; node --check review_console/static_prototype/mock_data.js; node --check scripts/validate_v14_138_dashboard_alignment_from_real_artifact_evidence.js; node scripts/validate_v14_138_dashboard_alignment_from_real_artifact_evidence.js
+recommended_next: durable_archive_production_candidate_memory_write_authorization_split_planning
+recommended_next_auto_execution_allowed: true
+---
 Status: v14_137_project_master_plan_quarantine_status_demotion completed locally and validated.
 Reason: PROJECT_MASTER_PLAN.md was still presenting an old v14.079 baseline as current-looking status, so it was demoted to historical_reference_only.
 Current repository: project_root

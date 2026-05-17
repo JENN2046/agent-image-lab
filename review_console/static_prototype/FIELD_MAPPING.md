@@ -457,6 +457,29 @@ v14.125 handoff 只刷新静态字段映射，不实现 runtime UI，不读取�
 
 `codex_session_import_record_reader` 是 artifact recoverability 的本地可视化入口，不是 artifact recoverability validator 的替代品，也不是 VCP runtime integration。
 
+## Artifact Recoverability Dashboard Evidence
+
+`artifact_recoverability_dashboard_evidence` 只能从 v14.131 real artifact
+recoverability validator 证明过的字段生成 dashboard 摘要：
+
+- `accepted_sample_id`
+- `import_record_ref`
+- `artifact_ref`
+- `verified_sha256`
+- `verified_dimensions`
+- `review_record_ref`
+- `human_approval_record_ref`
+- `category_index_ref`
+- `accepted_registry_ref`
+- `recoverability_status`
+- `negative_case_hash_mismatch_fails`
+- `negative_case_missing_artifact_fails`
+- `negative_case_missing_human_approval_fails`
+
+禁止 dashboard 用 `PROJECT_MASTER_PLAN.md`、文档存在、阶段 token 数量或旧
+ledger 推高产品进度。该 evidence 只证明 artifact recoverability，不证明 VCP
+runtime integration。
+
 ## 原型防越界标记
 
 草案输出包含：

@@ -201,6 +201,7 @@ $requiredFiles = @(
   'scripts/validate_v14_135_review_console_import_reader_safety_review.js',
   'scripts/validate_v14_136_accepted_samples_recoverability_metadata_patch.js',
   'scripts/validate_v14_137_project_master_plan_quarantine_status_demotion.js',
+  'scripts/validate_v14_138_dashboard_alignment_from_real_artifact_evidence.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -230,6 +231,7 @@ $requiredFiles = @(
   'tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json',
   'tests/schema_examples/pvos_evidence_collector_blocker_pipeline.example.json',
   'tests/schema_examples/codex_session_image_import.example.json',
+  'tests/schema_examples/artifact_recoverability_dashboard_evidence.example.json',
   'tests/schema_examples/v14_111_codex_session_memory_delta_draft.example.yaml',
   'tests/schema_examples/review_console_adapter_negative_fixture_draft_output_snapshot.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_draft_output_snapshot.example.json',
@@ -332,6 +334,7 @@ $requiredFiles = @(
   'docs/v14_135_review_console_import_reader_safety_review.md',
   'docs/v14_136_accepted_samples_recoverability_metadata_patch.md',
   'docs/v14_137_project_master_plan_quarantine_status_demotion.md',
+  'docs/v14_138_dashboard_alignment_from_real_artifact_evidence.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8754,6 +8757,43 @@ process.exit(child.status || 0);
     }
     if ($projectMasterPlanQuarantine.real_manifest_read_performed -ne $false -or $projectMasterPlanQuarantine.real_vcpchat_read_performed -ne $false -or $projectMasterPlanQuarantine.real_vcptoolbox_read_performed -ne $false) {
       Add-Failure "PROJECT_MASTER_PLAN demotion must not read real manifest/VCPChat/VCPToolBox"
+    }
+  }
+
+  $dashboardArtifactEvidenceOutput = & node (Join-Path $Root 'scripts/validate_v14_138_dashboard_alignment_from_real_artifact_evidence.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "dashboard alignment from real artifact evidence validation exited with failure"
+  } else {
+    $dashboardArtifactEvidence = ($dashboardArtifactEvidenceOutput -join "`n") | ConvertFrom-Json
+    if ($dashboardArtifactEvidence.passed -ne $true) {
+      Add-Failure "dashboard alignment from real artifact evidence validation must pass"
+    }
+    if ($dashboardArtifactEvidence.artifact_recoverability_dashboard_evidence_created -ne $true -or $dashboardArtifactEvidence.dashboard_uses_real_v14_131_recoverability_evidence -ne $true) {
+      Add-Failure "dashboard must carry real v14.131 artifact recoverability evidence"
+    }
+    if ($dashboardArtifactEvidence.dashboard_uses_project_master_plan_progress -ne $false -or $dashboardArtifactEvidence.dashboard_uses_document_token_progress -ne $false) {
+      Add-Failure "dashboard must not use PROJECT_MASTER_PLAN or document/token progress as product evidence"
+    }
+    if ($dashboardArtifactEvidence.dashboard_promotes_product_status -ne $false) {
+      Add-Failure "dashboard evidence must not promote product status"
+    }
+    if ($dashboardArtifactEvidence.vcp_runtime_integration_proven -ne $false -or $dashboardArtifactEvidence.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "dashboard evidence must not claim VCP runtime integration"
+    }
+    if ($dashboardArtifactEvidence.provider_contact_performed -ne $false -or $dashboardArtifactEvidence.plugin_call_performed -ne $false -or $dashboardArtifactEvidence.api_call_performed -ne $false -or $dashboardArtifactEvidence.mcp_runtime_performed -ne $false) {
+      Add-Failure "dashboard evidence must not call provider/plugin/API/MCP"
+    }
+    if ($dashboardArtifactEvidence.image_generation_performed -ne $false -or $dashboardArtifactEvidence.file_write_performed -ne $false) {
+      Add-Failure "dashboard evidence must not generate images or write files"
+    }
+    if ($dashboardArtifactEvidence.daily_note_write_performed -ne $false -or $dashboardArtifactEvidence.vcp_memory_write_performed -ne $false) {
+      Add-Failure "dashboard evidence must not write DailyNote or VCP memory"
+    }
+    if ($dashboardArtifactEvidence.failure_samples_write_performed -ne $false -or $dashboardArtifactEvidence.production_candidate_created -ne $false) {
+      Add-Failure "dashboard evidence must not write failure_samples or production candidates"
+    }
+    if ($dashboardArtifactEvidence.real_manifest_read_performed -ne $false -or $dashboardArtifactEvidence.real_vcpchat_read_performed -ne $false -or $dashboardArtifactEvidence.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "dashboard evidence must not read real manifest/VCPChat/VCPToolBox"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding
