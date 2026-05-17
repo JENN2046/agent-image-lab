@@ -1,5 +1,39 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.114-REVIEW-CONSOLE-HANDOFF-TAXONOMY-ALIGNMENT
+
+Task:
+
+```text
+Validate display-only Review Console handoff indexes for accepted, rejected, memory_delta draft, and production exclusion routes.
+```
+
+Commands run:
+
+```text
+node --check scripts/validate_v14_114_review_console_handoff_taxonomy_alignment.js
+node scripts/validate_v14_114_review_console_handoff_taxonomy_alignment.js
+```
+
+Result:
+
+```text
+passed: true
+accepted_sample_draft_count: 1
+rejected_sample_draft_count: 1
+memory_delta_draft_count: 2
+production_exclusion_count: 3
+review_console_display_only: true
+runtime_integration_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+```
+
 ## VALIDATION-20260517-v14.113-FAILURE-SAMPLES-AUTHORIZATION-BOUNDARY
 
 Task:

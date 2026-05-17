@@ -177,6 +177,7 @@ $requiredFiles = @(
   'scripts/validate_v14_111_codex_session_memory_delta_draft.js',
   'scripts/validate_v14_112_production_candidate_gate_policy.js',
   'scripts/validate_v14_113_failure_samples_authorization_boundary.js',
+  'scripts/validate_v14_114_review_console_handoff_taxonomy_alignment.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -7857,6 +7858,28 @@ process.exit(child.status || 0);
     }
     if ($failureSamplesBoundary.codex_accepted_sample_written_to_failure_registry -ne $false) {
       Add-Failure "Codex accepted sample must not be written to failure registry"
+    }
+  }
+
+  $reviewConsoleHandoffTaxonomyOutput = & node (Join-Path $Root 'scripts/validate_v14_114_review_console_handoff_taxonomy_alignment.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console handoff taxonomy alignment validation exited with failure"
+  } else {
+    $reviewConsoleHandoffTaxonomy = ($reviewConsoleHandoffTaxonomyOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleHandoffTaxonomy.passed -ne $true) {
+      Add-Failure "Review Console handoff taxonomy alignment validation must pass"
+    }
+    if ($reviewConsoleHandoffTaxonomy.review_console_display_only -ne $true) {
+      Add-Failure "Review Console handoff taxonomy must remain display-only"
+    }
+    if ($reviewConsoleHandoffTaxonomy.runtime_integration_performed -ne $false -or $reviewConsoleHandoffTaxonomy.real_vcpchat_read_performed -ne $false -or $reviewConsoleHandoffTaxonomy.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "Review Console handoff taxonomy validation must not perform runtime or real VCP reads"
+    }
+    if ($reviewConsoleHandoffTaxonomy.accepted_samples_write_performed -ne $false -or $reviewConsoleHandoffTaxonomy.failure_samples_write_performed -ne $false -or $reviewConsoleHandoffTaxonomy.production_candidate_created -ne $false) {
+      Add-Failure "Review Console handoff taxonomy validation must not write accepted/failure samples or production candidates"
+    }
+    if ($reviewConsoleHandoffTaxonomy.daily_note_write_performed -ne $false -or $reviewConsoleHandoffTaxonomy.vcp_memory_write_performed -ne $false) {
+      Add-Failure "Review Console handoff taxonomy validation must not write DailyNote or VCP memory"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

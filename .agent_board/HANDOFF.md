@@ -3,11 +3,33 @@
 ## Handoff Summary
 
 ```text
+Status: v14_114_review_console_handoff_taxonomy_index_alignment completed locally and validated.
+Reason: The Review Console handoff needs a display-only index over accepted, rejected, memory draft, and production exclusion routes without runtime integration.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.114 Review Console handoff taxonomy validator, MVP wiring, phase record, and .agent_board sync until commit decision.
+Phase record: docs/v14_114_review_console_handoff_taxonomy_index_alignment.md
+Validator created: scripts/validate_v14_114_review_console_handoff_taxonomy_alignment.js
+MVP validator updated: scripts/validate_mvp.ps1
+review_console_display_only: true
+accepted_sample_draft_count: 1
+rejected_sample_draft_count: 1
+memory_delta_draft_count: 2
+production_exclusion_count: 3
+runtime_integration_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+validated_now: node --check scripts/validate_v14_114_review_console_handoff_taxonomy_alignment.js; node scripts/validate_v14_114_review_console_handoff_taxonomy_alignment.js
+recommended_next: dry_run_vcp_adapter_contract_current_goal_alignment
+recommended_next_auto_execution_allowed: true
+---
 Status: v14_113_failure_samples_authorization_and_taxonomy_draft_without_write completed locally and validated.
 Reason: The current goal keeps failure_samples writes behind separate authorization even though historical v7.33 failure registry files already exist.
 Current repository: project_root
 Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
-Worktree: dirty with v14.113 failure_samples boundary validator, MVP wiring, phase record, and .agent_board sync until commit decision.
+Worktree: committed in local checkpoint 719a798 before v14.114 started.
 Phase record: docs/v14_113_failure_samples_authorization_and_taxonomy_draft_without_write.md
 Validator created: scripts/validate_v14_113_failure_samples_authorization_boundary.js
 MVP validator updated: scripts/validate_mvp.ps1
