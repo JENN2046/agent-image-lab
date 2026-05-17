@@ -1,5 +1,39 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.128 Failure Samples Authorization Template Current Goal Gap Review
+
+```text
+phase_id: v14_128_failure_samples_authorization_template_current_goal_gap_review
+status: completed_validated
+phase_record_ref: docs/v14_128_failure_samples_authorization_template_current_goal_gap_review.md
+validator_created: scripts/validate_v14_128_failure_samples_authorization_template_current_goal_gap_review.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+failure_samples_authorization_template_created: true
+failure_samples_authorization_template_active: false
+authorization_granted_by_this_record: false
+actual_failure_samples_write_blocked_until_separate_exact_a5_authorization: true
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+failure_samples_registry_write_performed: false
+failure_samples_taxonomy_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+output_file_write_performed: false
+validated_now: node --check scripts/validate_v14_128_failure_samples_authorization_template_current_goal_gap_review.js; node scripts/validate_v14_128_failure_samples_authorization_template_current_goal_gap_review.js
+recommended_next: actual_failure_samples_registry_write
+recommended_next_auto_execution_allowed: false
+blocked_until: separate_exact_A5_failure_samples_write_authorization
+```
+
 # V14.127 Production Exclusion Draft Current Goal Gap Review
 
 ```text

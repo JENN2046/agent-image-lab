@@ -3,6 +3,39 @@
 ## Handoff Summary
 
 ```text
+Status: v14_128_failure_samples_authorization_template_current_goal_gap_review completed locally and validated.
+Reason: The project now has an inactive exact authorization template for future Codex-session failure_samples registry writes, while actual writes remain blocked.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.128 failure_samples authorization template, validator, MVP wiring, phase record, and .agent_board sync until validation and commit decision.
+Phase record: docs/v14_128_failure_samples_authorization_template_current_goal_gap_review.md
+Validator created: scripts/validate_v14_128_failure_samples_authorization_template_current_goal_gap_review.js
+MVP validator updated: scripts/validate_mvp.ps1
+failure_samples_authorization_template_created: true
+failure_samples_authorization_template_active: false
+authorization_granted_by_this_record: false
+actual_failure_samples_write_blocked_until_separate_exact_a5_authorization: true
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+failure_samples_registry_write_performed: false
+failure_samples_taxonomy_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+output_file_write_performed: false
+validated_now: node --check scripts/validate_v14_128_failure_samples_authorization_template_current_goal_gap_review.js; node scripts/validate_v14_128_failure_samples_authorization_template_current_goal_gap_review.js
+recommended_next: actual_failure_samples_registry_write
+recommended_next_auto_execution_allowed: false
+blocked_until: separate_exact_A5_failure_samples_write_authorization
+---
 Status: v14_127_production_exclusion_draft_current_goal_gap_review completed locally and validated.
 Reason: The current Codex-session accepted sample needed an explicit production_exclusion gap review so future contexts do not confuse accepted metadata with production exclusion or production candidate state.
 Current repository: project_root

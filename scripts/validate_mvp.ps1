@@ -191,6 +191,7 @@ $requiredFiles = @(
   'scripts/validate_v14_125_review_console_memory_delta_handoff_refresh.js',
   'scripts/validate_v14_126_accepted_failure_metadata_cross_index_gap_review.js',
   'scripts/validate_v14_127_production_exclusion_draft_current_goal_gap_review.js',
+  'scripts/validate_v14_128_failure_samples_authorization_template_current_goal_gap_review.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -311,6 +312,7 @@ $requiredFiles = @(
   'docs/v14_125_review_console_memory_delta_handoff_refresh.md',
   'docs/v14_126_accepted_failure_metadata_cross_index_gap_review.md',
   'docs/v14_127_production_exclusion_draft_current_goal_gap_review.md',
+  'docs/v14_128_failure_samples_authorization_template_current_goal_gap_review.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8372,6 +8374,40 @@ process.exit(child.status || 0);
     }
     if ($productionExclusionCurrentGoalGap.real_manifest_read_performed -ne $false -or $productionExclusionCurrentGoalGap.real_vcpchat_read_performed -ne $false -or $productionExclusionCurrentGoalGap.real_vcptoolbox_read_performed -ne $false) {
       Add-Failure "production exclusion current-goal gap validation must not read real manifest/VCPChat/VCPToolBox"
+    }
+  }
+
+  $failureSamplesAuthorizationTemplateOutput = & node (Join-Path $Root 'scripts/validate_v14_128_failure_samples_authorization_template_current_goal_gap_review.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "failure_samples authorization template validation exited with failure"
+  } else {
+    $failureSamplesAuthorizationTemplate = ($failureSamplesAuthorizationTemplateOutput -join "`n") | ConvertFrom-Json
+    if ($failureSamplesAuthorizationTemplate.passed -ne $true) {
+      Add-Failure "failure_samples authorization template validation must pass"
+    }
+    if ($failureSamplesAuthorizationTemplate.failure_samples_authorization_template_created -ne $true -or $failureSamplesAuthorizationTemplate.failure_samples_authorization_template_active -ne $false) {
+      Add-Failure "failure_samples authorization template must exist and remain inactive"
+    }
+    if ($failureSamplesAuthorizationTemplate.authorization_granted_by_this_record -ne $false -or $failureSamplesAuthorizationTemplate.actual_failure_samples_write_blocked_until_separate_exact_a5_authorization -ne $true) {
+      Add-Failure "failure_samples authorization template must not grant authorization and must block actual writes"
+    }
+    if ($failureSamplesAuthorizationTemplate.failure_samples_write_performed -ne $false -or $failureSamplesAuthorizationTemplate.failure_samples_registry_write_performed -ne $false -or $failureSamplesAuthorizationTemplate.failure_samples_taxonomy_write_performed -ne $false) {
+      Add-Failure "failure_samples authorization template validation must not write failure_samples"
+    }
+    if ($failureSamplesAuthorizationTemplate.accepted_samples_write_performed -ne $false -or $failureSamplesAuthorizationTemplate.production_candidate_created -ne $false) {
+      Add-Failure "failure_samples authorization template validation must not write accepted_samples or production candidates"
+    }
+    if ($failureSamplesAuthorizationTemplate.provider_contact_performed -ne $false -or $failureSamplesAuthorizationTemplate.plugin_call_performed -ne $false -or $failureSamplesAuthorizationTemplate.api_call_performed -ne $false -or $failureSamplesAuthorizationTemplate.mcp_runtime_performed -ne $false) {
+      Add-Failure "failure_samples authorization template validation must not call provider/plugin/API/MCP"
+    }
+    if ($failureSamplesAuthorizationTemplate.image_generation_performed -ne $false -or $failureSamplesAuthorizationTemplate.output_file_write_performed -ne $false -or $failureSamplesAuthorizationTemplate.file_write_performed -ne $false) {
+      Add-Failure "failure_samples authorization template validation must not generate images or write output files"
+    }
+    if ($failureSamplesAuthorizationTemplate.daily_note_write_performed -ne $false -or $failureSamplesAuthorizationTemplate.vcp_memory_write_performed -ne $false) {
+      Add-Failure "failure_samples authorization template validation must not write DailyNote or VCP memory"
+    }
+    if ($failureSamplesAuthorizationTemplate.real_manifest_read_performed -ne $false -or $failureSamplesAuthorizationTemplate.real_vcpchat_read_performed -ne $false -or $failureSamplesAuthorizationTemplate.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "failure_samples authorization template validation must not read real manifest/VCPChat/VCPToolBox"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

@@ -1,5 +1,52 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.128-FAILURE-SAMPLES-AUTHORIZATION-TEMPLATE-CURRENT-GOAL-GAP-REVIEW
+
+Scope:
+
+Validate that an inactive exact authorization template exists for future Codex-session failure_samples writes, and that no authorization is granted or executed by this record.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_128_failure_samples_authorization_template_current_goal_gap_review.js
+node scripts/validate_v14_128_failure_samples_authorization_template_current_goal_gap_review.js
+```
+
+Expected:
+
+```yaml
+passed: true
+failure_samples_authorization_template_created: true
+failure_samples_authorization_template_active: false
+authorization_granted_by_this_record: false
+actual_failure_samples_write_blocked_until_separate_exact_a5_authorization: true
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+failure_samples_registry_write_performed: false
+failure_samples_taxonomy_write_performed: false
+production_candidate_created: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+output_file_write_performed: false
+```
+
+Result:
+
+```yaml
+status: passed
+validator: scripts/validate_v14_128_failure_samples_authorization_template_current_goal_gap_review.js
+phase_record: docs/v14_128_failure_samples_authorization_template_current_goal_gap_review.md
+```
+
 ## VALIDATION-20260517-v14.127-PRODUCTION-EXCLUSION-DRAFT-CURRENT-GOAL-GAP-REVIEW
 
 Scope:

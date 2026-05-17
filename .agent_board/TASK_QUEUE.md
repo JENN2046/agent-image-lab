@@ -10,10 +10,10 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ```text
 Current active long-term objective: 3-month Agent Image Lab visual production control layer for the VCP ecosystem.
-Status: v14_127_production_exclusion_draft_current_goal_gap_review_completed_validated.
+Status: v14_128_failure_samples_authorization_template_current_goal_gap_review_completed_validated.
 Purpose: move Agent Image Lab from local verifiable visual production MVP toward a controlled VCPChat / VCPToolBox visual production system while staying inside A4.8 unless separately authorized.
-phase_id: v14_127_production_exclusion_draft_current_goal_gap_review.
-phase_record_ref: docs/v14_127_production_exclusion_draft_current_goal_gap_review.md.
+phase_id: v14_128_failure_samples_authorization_template_current_goal_gap_review.
+phase_record_ref: docs/v14_128_failure_samples_authorization_template_current_goal_gap_review.md.
 default_generation_route_for_next_three_months: codex_session_image.
 NativeDoubaoImage_default_route: false.
 provider_API_default_route: false.
@@ -38,7 +38,11 @@ env_value_read_allowed_without_separate_authorization: false.
 provider_API_plugin_MCP_allowed_without_separate_authorization: false.
 real_manifest_VCPChat_VCPToolBox_read_allowed_without_separate_authorization: false.
 push_tag_release_deploy_allowed_without_separate_authorization: false.
-current_focus: production_exclusion_draft_current_goal_gap_review.
+current_focus: failure_samples_authorization_template_current_goal_gap_review.
+failure_samples_authorization_template_created: true.
+failure_samples_authorization_template_active: false.
+authorization_granted_by_this_record: false.
+actual_failure_samples_write_blocked_until_separate_exact_a5_authorization: true.
 production_exclusion_register_present: true.
 production_exclusion_register_scope: historical_review_report_fixture.
 codex_session_accepted_sample_should_be_production_exclusion: false.
@@ -120,9 +124,10 @@ accepted_samples_write_performed: false.
 failure_samples_write_performed: false.
 production_candidate_created: false.
 output_file_write_performed: false.
-validated_now: node --check scripts/validate_v14_127_production_exclusion_draft_current_goal_gap_review.js; node scripts/validate_v14_127_production_exclusion_draft_current_goal_gap_review.js.
-recommended_next: failure_samples_authorization_template_current_goal_gap_review.
-recommended_next_auto_execution_allowed: true.
+validated_now: node --check scripts/validate_v14_128_failure_samples_authorization_template_current_goal_gap_review.js; node scripts/validate_v14_128_failure_samples_authorization_template_current_goal_gap_review.js.
+recommended_next: actual_failure_samples_registry_write.
+recommended_next_auto_execution_allowed: false.
+blocked_until: separate_exact_A5_failure_samples_write_authorization.
 ---
 Current active local objective: v14_107_womens_resort_relaxed_knit_accepted_sample_closeout.
 Status: completed_accepted_sample_closeout_validated.
