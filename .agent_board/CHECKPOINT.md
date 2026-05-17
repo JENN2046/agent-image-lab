@@ -1,5 +1,42 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.129 Current Goal Completion Audit Gap Map
+
+```text
+phase_id: v14_129_current_goal_completion_audit_gap_map
+status: completed_validated
+phase_record_ref: docs/v14_129_current_goal_completion_audit_gap_map.md
+validator_created: scripts/validate_v14_129_current_goal_completion_audit_gap_map.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+current_goal_completion_audit_gap_map_created: true
+objective_restated: true
+prompt_to_artifact_checklist_created: true
+completion_audit_uses_real_artifacts: true
+proxy_signal_only: false
+goal_complete_now: false
+update_goal_called: false
+missing_or_incomplete_items_present: true
+authorization_blocked_items_count: 5
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+output_file_write_performed: false
+push_tag_release_deploy_performed: false
+validated_now: node --check scripts/validate_v14_129_current_goal_completion_audit_gap_map.js; node scripts/validate_v14_129_current_goal_completion_audit_gap_map.js
+recommended_next: review_console_current_goal_gap_dashboard_alignment
+recommended_next_auto_execution_allowed: true
+```
+
 # V14.128 Failure Samples Authorization Template Current Goal Gap Review
 
 ```text

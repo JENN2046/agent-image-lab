@@ -192,6 +192,7 @@ $requiredFiles = @(
   'scripts/validate_v14_126_accepted_failure_metadata_cross_index_gap_review.js',
   'scripts/validate_v14_127_production_exclusion_draft_current_goal_gap_review.js',
   'scripts/validate_v14_128_failure_samples_authorization_template_current_goal_gap_review.js',
+  'scripts/validate_v14_129_current_goal_completion_audit_gap_map.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -313,6 +314,7 @@ $requiredFiles = @(
   'docs/v14_126_accepted_failure_metadata_cross_index_gap_review.md',
   'docs/v14_127_production_exclusion_draft_current_goal_gap_review.md',
   'docs/v14_128_failure_samples_authorization_template_current_goal_gap_review.md',
+  'docs/v14_129_current_goal_completion_audit_gap_map.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8408,6 +8410,43 @@ process.exit(child.status || 0);
     }
     if ($failureSamplesAuthorizationTemplate.real_manifest_read_performed -ne $false -or $failureSamplesAuthorizationTemplate.real_vcpchat_read_performed -ne $false -or $failureSamplesAuthorizationTemplate.real_vcptoolbox_read_performed -ne $false) {
       Add-Failure "failure_samples authorization template validation must not read real manifest/VCPChat/VCPToolBox"
+    }
+  }
+
+  $currentGoalCompletionAuditOutput = & node (Join-Path $Root 'scripts/validate_v14_129_current_goal_completion_audit_gap_map.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "current goal completion audit gap map validation exited with failure"
+  } else {
+    $currentGoalCompletionAudit = ($currentGoalCompletionAuditOutput -join "`n") | ConvertFrom-Json
+    if ($currentGoalCompletionAudit.passed -ne $true) {
+      Add-Failure "current goal completion audit gap map validation must pass"
+    }
+    if ($currentGoalCompletionAudit.objective_restated -ne $true -or $currentGoalCompletionAudit.prompt_to_artifact_checklist_created -ne $true) {
+      Add-Failure "current goal completion audit must restate objective and create prompt-to-artifact checklist"
+    }
+    if ($currentGoalCompletionAudit.goal_complete_now -ne $false -or $currentGoalCompletionAudit.update_goal_called -ne $false) {
+      Add-Failure "current goal completion audit must not mark the active goal complete"
+    }
+    if ($currentGoalCompletionAudit.missing_or_incomplete_items_present -ne $true -or $currentGoalCompletionAudit.authorization_blocked_items_count -lt 1) {
+      Add-Failure "current goal completion audit must identify missing or authorization-blocked items"
+    }
+    if ($currentGoalCompletionAudit.proxy_signal_only -ne $false -or $currentGoalCompletionAudit.completion_audit_uses_real_artifacts -ne $true) {
+      Add-Failure "current goal completion audit must rely on real artifacts, not proxy signals only"
+    }
+    if ($currentGoalCompletionAudit.provider_contact_performed -ne $false -or $currentGoalCompletionAudit.plugin_call_performed -ne $false -or $currentGoalCompletionAudit.api_call_performed -ne $false -or $currentGoalCompletionAudit.mcp_runtime_performed -ne $false) {
+      Add-Failure "current goal completion audit must not call provider/plugin/API/MCP"
+    }
+    if ($currentGoalCompletionAudit.image_generation_performed -ne $false -or $currentGoalCompletionAudit.output_file_write_performed -ne $false -or $currentGoalCompletionAudit.file_write_performed -ne $false) {
+      Add-Failure "current goal completion audit must not generate images or write output files"
+    }
+    if ($currentGoalCompletionAudit.daily_note_write_performed -ne $false -or $currentGoalCompletionAudit.vcp_memory_write_performed -ne $false) {
+      Add-Failure "current goal completion audit must not write DailyNote or VCP memory"
+    }
+    if ($currentGoalCompletionAudit.accepted_samples_write_performed -ne $false -or $currentGoalCompletionAudit.failure_samples_write_performed -ne $false -or $currentGoalCompletionAudit.production_candidate_created -ne $false) {
+      Add-Failure "current goal completion audit must not write samples or production candidates"
+    }
+    if ($currentGoalCompletionAudit.real_manifest_read_performed -ne $false -or $currentGoalCompletionAudit.real_vcpchat_read_performed -ne $false -or $currentGoalCompletionAudit.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "current goal completion audit must not read real manifest/VCPChat/VCPToolBox"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding
