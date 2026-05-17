@@ -1084,6 +1084,75 @@ window.REVIEW_CONSOLE_MOCK = {
       production_candidate_created: false
     }
   },
+  codex_session_import_record_seed: {
+    source_ref: "runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/resort_relaxed_knit_final_import_record.json",
+    codex_session_image_import: {
+      import_version: "v1",
+      import_id: "v14_105_codex_session_womens_resort_relaxed_knit_final_v2",
+      provider_id: "codex_session_image",
+      import_mode: "manual_session_import",
+      status: "review_linked",
+      source: {
+        codex_session_generation: true,
+        codex_image_direct_call_allowed: false,
+        mcp_runtime_allowed: false,
+        provider_api_call_allowed: false,
+        project_script_generation_allowed: false,
+        image_generation_by_script: false,
+        human_session_action_required: true
+      },
+      prompt_package_ref: "session_prompt_inline:womens_resort_relaxed_knit_final_v2",
+      prompt_package_id: "womens_resort_relaxed_knit_final_v2",
+      imported_asset: {
+        output_directory_ref: "runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/",
+        file_name: "codex_session_womens_resort_relaxed_knit_final_v2.png",
+        relative_path: "runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/codex_session_womens_resort_relaxed_knit_final_v2.png",
+        mime_type: "image/png",
+        width_px: 1254,
+        height_px: 1254,
+        aspect_ratio: "1:1",
+        sha256: "9d23208d05427b02ffc177664c1918ed73bf57831a9694be16522fe9a8f3c910",
+        local_file_verified: true,
+        copied_by_project_script: false
+      },
+      review_bridge: {
+        image_case_id: "v14_105_womens_resort_relaxed_knit_final_v2",
+        review_status: "pending_human_review",
+        accepted_candidate: false,
+        commercial_delivery_ready: false,
+        memory_suitability: "deferred",
+        review_record_ref: "docs/v14_105_codex_session_womens_resort_relaxed_knit_final_review.md"
+      },
+      no_execution_guard: {
+        provider_contact_allowed: false,
+        plugin_call_allowed: false,
+        api_call_allowed: false,
+        image_generation_allowed_by_project: false,
+        env_local_secret_value_read_allowed: false,
+        DailyNote_write_allowed: false,
+        VCP_memory_write_allowed: false,
+        accepted_samples_write_allowed: false,
+        production_candidate_write_allowed: false,
+        real_manifest_read_allowed: false,
+        real_VCPChat_read_allowed: false,
+        real_VCPToolBox_read_allowed: false,
+        push_tag_release_deploy_allowed: false,
+        provider_contact_performed_by_project: false,
+        plugin_call_performed_by_project: false,
+        api_call_performed_by_project: false,
+        image_generation_performed_by_project: false,
+        env_local_secret_value_read_performed: false,
+        DailyNote_write_performed: false,
+        VCP_memory_write_performed: false,
+        accepted_samples_write_performed: false,
+        production_candidate_write_performed: false,
+        real_manifest_read_performed: false,
+        real_VCPChat_read_performed: false,
+        real_VCPToolBox_read_performed: false,
+        push_tag_release_deploy_performed: false
+      }
+    }
+  },
   image_case_seed: {
     input_assets: ["asset_archive/references/photo_studio_os_reference.placeholder"],
     prompt_package_id: "prompt-package-photo-studio-os-001",

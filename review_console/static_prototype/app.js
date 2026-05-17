@@ -29,6 +29,23 @@ const state = {
   review_report_static_handoff: mock.review_report_static_handoff,
   review_report_negative_guard_static_handoff: mock.review_report_negative_guard_static_handoff,
   review_evidence_blocker_adapter_negative_static_handoff: mock.review_evidence_blocker_adapter_negative_static_handoff,
+  import_record_reader: {
+    source_mode: "project_local_seed",
+    parsed: null,
+    parse_status: "not_loaded",
+    errors: [],
+    guard: {
+      parsed_in_memory: false,
+      fetch_performed: false,
+      file_write_performed: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      mcp_runtime_performed: false,
+      daily_note_write_performed: false,
+      vcp_memory_write_performed: false
+    }
+  },
   humanScores: { ...mock.review_session.human_review.breakdown }
 };
 
@@ -71,6 +88,152 @@ function currentVersion() {
 
 function nowIso() {
   return new Date().toISOString();
+}
+
+function importRecordSeedText() {
+  return JSON.stringify(mock.codex_session_import_record_seed.codex_session_image_import, null, 2);
+}
+
+function normalizeImportRecord(raw) {
+  if (raw && raw.codex_session_image_import) return raw.codex_session_image_import;
+  return raw;
+}
+
+function parseImportRecordText(sourceMode) {
+  const text = qs("#importRecordInput").value.trim();
+  const guard = {
+    parsed_in_memory: false,
+    fetch_performed: false,
+    file_write_performed: false,
+    provider_contact_performed: false,
+    plugin_call_performed: false,
+    api_call_performed: false,
+    mcp_runtime_performed: false,
+    daily_note_write_performed: false,
+    vcp_memory_write_performed: false
+  };
+  try {
+    const record = normalizeImportRecord(JSON.parse(text));
+    const asset = record.imported_asset || {};
+    const reviewBridge = record.review_bridge || {};
+    const noExecutionGuard = record.no_execution_guard || {};
+    const required = [
+      ["import_id", record.import_id],
+      ["provider_id", record.provider_id],
+      ["prompt_package_ref", record.prompt_package_ref],
+      ["imported_asset.relative_path", asset.relative_path],
+      ["imported_asset.sha256", asset.sha256],
+      ["imported_asset.width_px", asset.width_px],
+      ["imported_asset.height_px", asset.height_px],
+      ["imported_asset.mime_type", asset.mime_type],
+      ["review_bridge.review_record_ref", reviewBridge.review_record_ref]
+    ];
+    const missing = required.filter((item) => item[1] === undefined || item[1] === null || item[1] === "").map((item) => item[0]);
+    const blockedExecution = [
+      noExecutionGuard.provider_contact_performed_by_project,
+      noExecutionGuard.plugin_call_performed_by_project,
+      noExecutionGuard.api_call_performed_by_project,
+      noExecutionGuard.image_generation_performed_by_project,
+      noExecutionGuard.DailyNote_write_performed,
+      noExecutionGuard.VCP_memory_write_performed,
+      noExecutionGuard.real_manifest_read_performed,
+      noExecutionGuard.real_VCPChat_read_performed,
+      noExecutionGuard.real_VCPToolBox_read_performed
+    ].some(Boolean);
+    if (missing.length > 0) {
+      throw new Error(`missing required fields: ${missing.join(", ")}`);
+    }
+    if (blockedExecution) {
+      throw new Error("import record reports a forbidden execution side effect");
+    }
+    guard.parsed_in_memory = true;
+    state.import_record_reader = {
+      source_mode: sourceMode,
+      parse_status: "parsed",
+      errors: [],
+      parsed: {
+        import_id: record.import_id,
+        provider_id: record.provider_id,
+        prompt_package_ref: record.prompt_package_ref,
+        asset_ref: asset.relative_path,
+        mime_type: asset.mime_type,
+        dimensions: `${asset.width_px}x${asset.height_px}`,
+        sha256: asset.sha256,
+        review_record_ref: reviewBridge.review_record_ref,
+        review_status: reviewBridge.review_status,
+        local_file_verified: asset.local_file_verified === true,
+        accepted_candidate: reviewBridge.accepted_candidate === true
+      },
+      guard
+    };
+  } catch (error) {
+    state.import_record_reader = {
+      source_mode: sourceMode,
+      parse_status: "parse_failed",
+      errors: [error.message],
+      parsed: null,
+      guard
+    };
+  }
+  renderImportRecordReader();
+  renderDraft();
+}
+
+function renderImportRecordReader() {
+  const reader = state.import_record_reader;
+  const parsed = reader.parsed || {};
+  const status = qs("#importRecordStatus");
+  status.classList.toggle("approved", reader.parse_status === "parsed");
+  status.textContent = reader.parse_status === "parsed"
+    ? "Import record parsed in browser memory only. No fetch, file write, provider, plugin, API, DailyNote, or VCP memory action was performed."
+    : `Import record not accepted: ${reader.errors.join("; ") || "not parsed yet"}`;
+  qs("#importRecordSummary").innerHTML = reader.parse_status === "parsed" ? `
+    <span>source <strong>${escapeHtml(reader.source_mode)}</strong></span>
+    <span>import <strong>${escapeHtml(parsed.import_id)}</strong></span>
+    <span>mime <strong>${escapeHtml(parsed.mime_type)}</strong></span>
+    <span>size <strong>${escapeHtml(parsed.dimensions)}</strong></span>
+    <span>local verified <strong>${escapeHtml(parsed.local_file_verified)}</strong></span>
+  ` : `
+    <span>source <strong>${escapeHtml(reader.source_mode)}</strong></span>
+    <span>status <strong>${escapeHtml(reader.parse_status)}</strong></span>
+  `;
+}
+
+function loadImportRecordSeed() {
+  qs("#importRecordInput").value = importRecordSeedText();
+  parseImportRecordText("project_local_seed");
+}
+
+function handleImportRecordFile(event) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.addEventListener("load", () => {
+    qs("#importRecordInput").value = String(reader.result || "");
+    parseImportRecordText("user_selected_file");
+  });
+  reader.addEventListener("error", () => {
+    state.import_record_reader = {
+      source_mode: "user_selected_file",
+      parse_status: "parse_failed",
+      errors: ["browser FileReader could not read the selected file"],
+      parsed: null,
+      guard: {
+        parsed_in_memory: false,
+        fetch_performed: false,
+        file_write_performed: false,
+        provider_contact_performed: false,
+        plugin_call_performed: false,
+        api_call_performed: false,
+        mcp_runtime_performed: false,
+        daily_note_write_performed: false,
+        vcp_memory_write_performed: false
+      }
+    };
+    renderImportRecordReader();
+    renderDraft();
+  });
+  reader.readAsText(file);
 }
 
 function renderVersions() {
@@ -890,6 +1053,7 @@ function renderDraft() {
     review_report_static_handoff: state.review_report_static_handoff,
     review_report_negative_guard_static_handoff: state.review_report_negative_guard_static_handoff,
     review_evidence_blocker_adapter_negative_static_handoff: state.review_evidence_blocker_adapter_negative_static_handoff,
+    codex_session_import_record_reader: state.import_record_reader,
     review_session: buildReviewSession(memoryApproval, humanTotal),
     image_case: buildImageCase(humanTotal),
     memory_delta: buildMemoryDelta(memoryApproval),
@@ -918,11 +1082,15 @@ function renderAll() {
   renderReviewReportHandoff();
   renderNegativeReviewReportHandoff();
   renderAdapterNegativeHandoff();
+  loadImportRecordSeed();
   renderDraft();
 }
 
 qs("#addCommentBtn").addEventListener("click", addComment);
 qs("#refreshDraftBtn").addEventListener("click", renderDraft);
+qs("#loadImportSeedBtn").addEventListener("click", loadImportRecordSeed);
+qs("#parseImportRecordBtn").addEventListener("click", () => parseImportRecordText("manual_text_input"));
+qs("#importRecordFile").addEventListener("change", handleImportRecordFile);
 qsa("[data-archive]").forEach((button) => {
   button.addEventListener("click", () => setArchiveStatus(button.dataset.archive));
 });

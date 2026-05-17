@@ -197,6 +197,7 @@ $requiredFiles = @(
   'scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js',
   'scripts/validate_v14_132_state_scope_canonicalization.js',
   'scripts/validate_v14_133_main_validator_real_import_record_wiring.js',
+  'scripts/validate_v14_134_review_console_static_import_record_reader.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -324,6 +325,7 @@ $requiredFiles = @(
   'docs/v14_131_real_artifact_validation_and_accepted_sample_recoverability_gate.md',
   'docs/v14_132_state_scope_canonicalization.md',
   'docs/v14_133_main_validator_real_import_record_wiring.md',
+  'docs/v14_134_review_console_static_import_record_reader.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8610,6 +8612,40 @@ process.exit(child.status || 0);
     }
     if ($mainValidatorRealImportRecordWiring.real_manifest_read_performed -ne $false -or $mainValidatorRealImportRecordWiring.real_vcpchat_read_performed -ne $false -or $mainValidatorRealImportRecordWiring.real_vcptoolbox_read_performed -ne $false) {
       Add-Failure "main validator real import record wiring must not read real manifest/VCPChat/VCPToolBox"
+    }
+  }
+
+  $reviewConsoleStaticImportRecordReaderOutput = & node (Join-Path $Root 'scripts/validate_v14_134_review_console_static_import_record_reader.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console static import record reader validation exited with failure"
+  } else {
+    $reviewConsoleStaticImportRecordReader = ($reviewConsoleStaticImportRecordReaderOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleStaticImportRecordReader.passed -ne $true) {
+      Add-Failure "Review Console static import record reader validation must pass"
+    }
+    if ($reviewConsoleStaticImportRecordReader.review_console_static_import_record_reader_created -ne $true -or $reviewConsoleStaticImportRecordReader.draft_output_carries_import_record_reader -ne $true) {
+      Add-Failure "Review Console must create the static import record reader and carry it in draft output"
+    }
+    if ($reviewConsoleStaticImportRecordReader.import_record_project_seed_available -ne $true -or $reviewConsoleStaticImportRecordReader.user_selected_file_reader_available -ne $true -or $reviewConsoleStaticImportRecordReader.textarea_import_record_parse_available -ne $true) {
+      Add-Failure "Review Console import reader must support project seed, user-selected file, and textarea parsing"
+    }
+    if ($reviewConsoleStaticImportRecordReader.parsed_in_memory_only -ne $true -or $reviewConsoleStaticImportRecordReader.fetch_performed -ne $false -or $reviewConsoleStaticImportRecordReader.file_write_performed -ne $false) {
+      Add-Failure "Review Console import reader must parse in memory only without fetch or file writes"
+    }
+    if ($reviewConsoleStaticImportRecordReader.runtime_vcp_integration_performed -ne $false) {
+      Add-Failure "Review Console import reader must not claim VCP runtime integration"
+    }
+    if ($reviewConsoleStaticImportRecordReader.provider_contact_performed -ne $false -or $reviewConsoleStaticImportRecordReader.plugin_call_performed -ne $false -or $reviewConsoleStaticImportRecordReader.api_call_performed -ne $false -or $reviewConsoleStaticImportRecordReader.mcp_runtime_performed -ne $false) {
+      Add-Failure "Review Console import reader must not call provider/plugin/API/MCP"
+    }
+    if ($reviewConsoleStaticImportRecordReader.image_generation_performed -ne $false -or $reviewConsoleStaticImportRecordReader.daily_note_write_performed -ne $false -or $reviewConsoleStaticImportRecordReader.vcp_memory_write_performed -ne $false) {
+      Add-Failure "Review Console import reader must not generate images or write DailyNote/VCP memory"
+    }
+    if ($reviewConsoleStaticImportRecordReader.failure_samples_write_performed -ne $false -or $reviewConsoleStaticImportRecordReader.production_candidate_created -ne $false) {
+      Add-Failure "Review Console import reader must not write failure_samples or production candidates"
+    }
+    if ($reviewConsoleStaticImportRecordReader.real_manifest_read_performed -ne $false -or $reviewConsoleStaticImportRecordReader.real_vcpchat_read_performed -ne $false -or $reviewConsoleStaticImportRecordReader.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "Review Console import reader must not read real manifest/VCPChat/VCPToolBox"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

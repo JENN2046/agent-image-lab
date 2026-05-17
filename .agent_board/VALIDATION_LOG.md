@@ -1,5 +1,59 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.134-REVIEW-CONSOLE-STATIC-IMPORT-RECORD-READER
+
+Scope:
+
+Validate that the static Review Console can parse the project v14.105
+Codex-session import record seed, textarea JSON, and user-selected local JSON
+with browser memory only, while keeping fetch, file writes, runtime, VCP,
+provider, plugin, API, DailyNote, and VCP memory paths blocked.
+
+Commands:
+
+```text
+node --check review_console/static_prototype/app.js
+node --check review_console/static_prototype/mock_data.js
+node --check scripts/validate_v14_134_review_console_static_import_record_reader.js
+node scripts/validate_v14_134_review_console_static_import_record_reader.js
+```
+
+Expected:
+
+```yaml
+passed: true
+review_console_static_import_record_reader_created: true
+import_record_project_seed_available: true
+user_selected_file_reader_available: true
+textarea_import_record_parse_available: true
+parsed_in_memory_only: true
+draft_output_carries_import_record_reader: true
+fetch_performed: false
+file_write_performed: false
+runtime_vcp_integration_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+```
+
+Result:
+
+```yaml
+status: passed
+validator: scripts/validate_v14_134_review_console_static_import_record_reader.js
+phase_record: docs/v14_134_review_console_static_import_record_reader.md
+```
+
 ## VALIDATION-20260517-v14.133-MAIN-VALIDATOR-REAL-IMPORT-RECORD-WIRING
 
 Scope:

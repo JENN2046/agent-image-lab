@@ -234,6 +234,23 @@
             </div>
             <button id="refreshDraftBtn" type="button">刷新草案</button>
           </div>
+          <section class="import-record-reader" aria-labelledby="importRecordTitle">
+            <div class="section-head">
+              <p class="eyebrow">Import Record Reader</p>
+              <h2 id="importRecordTitle">本地导入记录读取</h2>
+            </div>
+            <label>
+              Import record JSON
+              <textarea id="importRecordInput" rows="8"></textarea>
+            </label>
+            <div class="action-group import-actions" aria-label="导入记录读取动作">
+              <input id="importRecordFile" type="file" accept="application/json,.json" />
+              <button id="loadImportSeedBtn" type="button">载入项目样例</button>
+              <button id="parseImportRecordBtn" type="button">解析记录</button>
+            </div>
+            <div id="importRecordStatus" class="safety-box"></div>
+            <div id="importRecordSummary" class="protocol-summary" aria-label="导入记录摘要"></div>
+          </section>
           <textarea id="draftOutput" rows="14" readonly></textarea>
         </section>
       </section>

@@ -39,6 +39,7 @@ review_console/static_prototype/index.html
 ```
 
 页面内的“草案输出”只是在浏览器中生成 `review_session` / `image_case` / `memory_delta` 的预览文本，不代表保存、入库或写入长期记忆。
+页面内的“本地导入记录读取”只解析用户粘贴、用户选择的本地 JSON 文件，或项目内置 v14.105 import record seed。解析结果只留在浏览器内存和草案输出中，不 fetch、不写文件、不调用 runtime / VCP / plugin / API / DailyNote / VCP memory。
 草案输出还会携带 `review_result_protocol_static_handoff`，用于展示每个候选为什么 pass、为什么 reject、如何进入记忆草案，以及何时必须永远不得进入 production。
 审片结果协议面板还会显示 `review_protocol_guard_summary`：包括 `memory_forbidden_count`、`memory_forbidden_candidate_ids`、`never_production_candidate_ids`、`negative_guard_observed` 和 production candidate 创建阻断状态。
 草案输出还会携带 `review_decision_package_static_handoff`，用于展示 accepted/rejected sample 草案、memory delta 草案、production exclusion register，以及 `production_candidate_created=false`、`direct_memory_write_performed=false`、`accepted_samples_write_performed=false` 的决策包阻断状态。
@@ -81,6 +82,7 @@ v14.079 还用 `tests/schema_examples/review_report_protocol_final_closeout.exam
 - `review_report_static_handoff`
 - `review_report_negative_guard_static_handoff`
 - `review_evidence_blocker_adapter_negative_static_handoff`
+- `codex_session_import_record_reader`
 
 其中 `review_session` 必须能映射到 `schemas/review_session.schema.yaml` 和 `review_console/review_session.schema.yaml` 的字段语义。`FIELD_MAPPING.md` 是人工验收依据。
 `review_result_protocol_static_handoff` 必须保留 pass/reject reasons、memory route、production route 和 `never_production` 边界。
@@ -91,6 +93,7 @@ v14.079 还用 `tests/schema_examples/review_report_protocol_final_closeout.exam
 `review_report_static_handoff` 必须作为可见 UI guard 呈现；它只显示 ReviewReport 的 pass/reject 解释、memory/production 阻断、never-production 和 no-execution guard，不代表 production approval、accepted_samples 写入、记忆写入、provider contact、插件调用或图片生成。
 `review_report_negative_guard_static_handoff` 必须作为可见 UI guard 呈现；它只显示负向 ReviewReport 的 reject 解释、memory-forbidden、unknown failure tags、never-production 和 no-execution guard，不代表 production approval、accepted_samples 写入、记忆写入、provider contact、插件调用或图片生成。
 `review_evidence_blocker_adapter_negative_static_handoff` 必须作为可见 UI guard 呈现；它只显示 adapter negative fixture 的阻断证据，不代表真实 adapter runtime、provider contact、plugin/API 调用、图片生成、accepted_samples 写入、记忆写入或 production promotion。
+`codex_session_import_record_reader` 必须作为本地静态读取者呈现；它只解析 import record JSON 到内存摘要，不读取 real manifest / VCPChat / VCPToolBox，不 fetch，不写文件，不调用 runtime、provider、plugin、API、DailyNote 或 VCP memory。
 `review_console_adapter_negative_fixture_draft_output_snapshot.example.json` 必须与静态 mock 的 adapter negative handoff 和 `#draftOutput` 渲染结果一致；它是回归证据，不是执行授权。
 `review_console_blocker_arbiter_draft_output_snapshot.example.json` 必须与静态 mock 的 blocker arbiter handoff、PVOS adapter handoff 和 `#draftOutput` 渲染结果一致；它是回归证据，不是执行授权。
 `review_console_review_report_draft_output_snapshot.example.json` 必须与静态 mock 的 ReviewReport handoff、PVOS adapter handoff 和 `#draftOutput` 渲染结果一致；它是回归证据，不是执行授权。

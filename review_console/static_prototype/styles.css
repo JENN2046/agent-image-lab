@@ -356,7 +356,8 @@ input[type="range"] {
 }
 
 .comment-composer,
-.memory-preview {
+.memory-preview,
+.import-record-reader {
   display: grid;
   gap: 10px;
   padding: 12px;
@@ -407,6 +408,15 @@ input[type="range"] {
   margin: 0;
   padding-left: 18px;
   color: var(--text);
+}
+
+.import-actions {
+  grid-template-columns: minmax(180px, 1fr) auto auto;
+}
+
+.import-actions input[type="file"] {
+  min-height: 36px;
+  padding: 6px 10px;
 }
 
 .protocol-panel {

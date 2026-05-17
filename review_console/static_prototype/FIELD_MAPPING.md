@@ -438,6 +438,25 @@ v14.125 handoff 只刷新静态字段映射，不实现 runtime UI，不读取�
 
 `review_console_adapter_negative_fixture_draft_output_snapshot.example.json` 是草案输出回归证据，不是生产执行记录。它不得授权 provider contact、plugin/API 调用、图片生成、accepted_samples 写入、记忆写入或 production promotion。
 
+## Codex Session Import Record Reader 映射
+
+本节用于验收 v14.134 静态 Review Console 对 Codex-session import record 的本地读取能力。它只接受 textarea、浏览器 FileReader 选择的本地 JSON、或静态 mock 中的项目 v14.105 seed；不得 fetch，不得写文件，不得读取 real manifest / VCPChat / VCPToolBox，不得调用 runtime、provider、plugin、API、DailyNote 或 VCP memory。
+换句话说：不 fetch，不写文件，不调用 runtime，不调用 provider/plugin/API/DailyNote/VCP memory。
+
+| Import record 字段 | Review Console 字段 | 说明 |
+| --- | --- | --- |
+| `codex_session_image_import.import_id` | `codex_session_import_record_reader.parsed.import_id` | 只显示导入记录 ID |
+| `provider_id` | `parsed.provider_id` | 必须保留 `codex_session_image`，不代表 provider/API 调用 |
+| `prompt_package_ref` | `parsed.prompt_package_ref` | 只作为追踪引用 |
+| `imported_asset.relative_path` | `parsed.asset_ref` | 只显示项目相对路径，不读取图片二进制 |
+| `imported_asset.sha256` | `parsed.sha256` | 只显示 import record 内的 hash，不在浏览器内重新 hash |
+| `imported_asset.width_px` / `height_px` | `parsed.dimensions` | 只显示尺寸摘要 |
+| `imported_asset.mime_type` | `parsed.mime_type` | 只显示 MIME |
+| `review_bridge.review_record_ref` | `parsed.review_record_ref` | 只显示 review record 引用 |
+| `no_execution_guard` | `codex_session_import_record_reader.guard` | 所有 fetch、写文件、runtime、provider、plugin、API、DailyNote、VCP memory 行为保持 false |
+
+`codex_session_import_record_reader` 是 artifact recoverability 的本地可视化入口，不是 artifact recoverability validator 的替代品，也不是 VCP runtime integration。
+
 ## 原型防越界标记
 
 草案输出包含：

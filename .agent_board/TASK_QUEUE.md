@@ -10,16 +10,16 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ```text
 Current active long-term objective: 3-month Agent Image Lab visual production control layer for the VCP ecosystem.
-Status: v14_133_main_validator_real_import_record_wiring_completed_validated.
+Status: v14_134_review_console_static_import_record_reader_completed_validated.
 Purpose: move Agent Image Lab from local verifiable visual production MVP toward a controlled VCPChat / VCPToolBox visual production system while staying inside A4.8 unless separately authorized.
-phase_id: v14_133_main_validator_real_import_record_wiring.
-phase_record_ref: docs/v14_133_main_validator_real_import_record_wiring.md.
+phase_id: v14_134_review_console_static_import_record_reader.
+phase_record_ref: docs/v14_134_review_console_static_import_record_reader.md.
 active_scope:
-active_phase_id: v14_133_main_validator_real_import_record_wiring.
-active_phase_record_ref: docs/v14_133_main_validator_real_import_record_wiring.md.
-active_recommended_next: review_console_static_import_record_reader.
-recommended_next_source_phase: v14_133_main_validator_real_import_record_wiring.
-supersedes_recommendation_from: main_validator_real_import_record_wiring.
+active_phase_id: v14_134_review_console_static_import_record_reader.
+active_phase_record_ref: docs/v14_134_review_console_static_import_record_reader.md.
+active_recommended_next: review_console_import_reader_safety_review.
+recommended_next_source_phase: v14_134_review_console_static_import_record_reader.
+supersedes_recommendation_from: review_console_static_import_record_reader.
 artifact_scope:
 artifact_sample_id: accepted_womens_resort_relaxed_knit_codex_v2_001.
 artifact_recoverability_status: workspace_local_verified.
@@ -69,7 +69,16 @@ env_value_read_allowed_without_separate_authorization: false.
 provider_API_plugin_MCP_allowed_without_separate_authorization: false.
 real_manifest_VCPChat_VCPToolBox_read_allowed_without_separate_authorization: false.
 push_tag_release_deploy_allowed_without_separate_authorization: false.
-current_focus: main_validator_real_import_record_wiring.
+current_focus: review_console_static_import_record_reader.
+review_console_static_import_record_reader_created: true.
+import_record_project_seed_available: true.
+user_selected_file_reader_available: true.
+textarea_import_record_parse_available: true.
+parsed_in_memory_only: true.
+draft_output_carries_import_record_reader: true.
+fetch_performed: false.
+file_write_performed: false.
+runtime_vcp_integration_performed: false.
 main_validator_real_import_record_wiring_verified: true.
 mvp_invokes_real_artifact_validator: true.
 mvp_still_runs_fixture_validator: true.
@@ -210,8 +219,8 @@ accepted_samples_write_performed: false.
 failure_samples_write_performed: false.
 production_candidate_created: false.
 output_file_write_performed: false.
-validated_now: node --check scripts/validate_v14_133_main_validator_real_import_record_wiring.js; node scripts/validate_v14_133_main_validator_real_import_record_wiring.js.
-recommended_next: review_console_static_import_record_reader.
+validated_now: node --check review_console/static_prototype/app.js; node --check review_console/static_prototype/mock_data.js; node --check scripts/validate_v14_134_review_console_static_import_record_reader.js; node scripts/validate_v14_134_review_console_static_import_record_reader.js.
+recommended_next: review_console_import_reader_safety_review.
 recommended_next_auto_execution_allowed: true.
 ---
 Current active local objective: v14_107_womens_resort_relaxed_knit_accepted_sample_closeout.
