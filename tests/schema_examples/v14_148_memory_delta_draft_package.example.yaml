@@ -1,0 +1,65 @@
+# v14.148 memory delta draft package example
+
+memory_delta_draft_package:
+  version: v1
+  package_type: memory_delta_draft_package
+  phase: v14_148_memory_delta_draft_package
+  execution_mode: local_schema_fixture_validator_only
+  authorization_granted_by_this_package: false
+
+  source_case:
+    sample_id: accepted_womens_resort_relaxed_knit_codex_v2_001
+    accepted_registry_ref: accepted_samples/accepted_sample_registry.yaml
+    category_index_ref: accepted_samples/categories/fashion_lookbook_portrait.yaml
+    review_record_ref: docs/v14_105_codex_session_womens_resort_relaxed_knit_final_review.md
+    memory_delta_ref: tests/schema_examples/v14_111_codex_session_memory_delta_draft.example.yaml
+    production_candidate_eligibility_ref: tests/schema_examples/v14_147_production_candidate_eligibility_preflight.example.yaml
+
+  daily_note_draft:
+    language: zh-CN
+    title_cn: "女装度假针织样片审查经验草案"
+    body_cn: "这次样片的有效经验是先保证服装成为第一视觉，再让背景、姿态和道具退到辅助层。针织材质、裤装垂感和方形主图构图都需要在审查记录、导入记录和 accepted_samples 元数据之间保持可追踪。当前内容只是 DailyNote 草案，没有写入授权。"
+    write_mode: draft
+    approval_required: true
+    approval_status: pending
+    write_allowed_now: false
+    DailyNote_write_performed: false
+
+  vcp_memory_draft:
+    language: zh-CN
+    memory_type: accepted_sample_review_learning_draft
+    summary_cn: "女装度假针织样片通过的关键不是背景复杂度，而是主体服装占比、材质可信度、姿态自然度和审查证据链完整。"
+    lessons_cn:
+      - "服装人像主图必须让服装先被看见，背景只能服务主题。"
+      - "accepted sample 进入记忆前要保留 import record、review record、human approval 和 hash 证据。"
+      - "记忆草案不等于 DailyNote 或 VCP memory 写入，必须等待单独 A5 授权。"
+    write_mode: draft
+    approval_required: true
+    approval_status: pending
+    should_write_to_vcp: false
+    VCP_memory_write_performed: false
+
+  memory_safety:
+    contains_secret: false
+    contains_private_path: false
+    contains_customer_private_data: false
+    contains_image_binary: false
+    raw_sensitive_content_saved: false
+
+  boundary:
+    DailyNote_write_performed: false
+    VCP_memory_write_performed: false
+    direct_memory_write_performed: false
+    accepted_samples_write_performed: false
+    failure_samples_write_performed: false
+    production_candidate_write_performed: false
+    provider_contact_performed: false
+    plugin_call_performed: false
+    api_call_performed: false
+    mcp_runtime_performed: false
+    image_generation_performed: false
+    image_binary_included: false
+    real_manifest_read_performed: false
+    real_vcpchat_read_performed: false
+    real_vcptoolbox_read_performed: false
+    push_tag_release_deploy_performed: false

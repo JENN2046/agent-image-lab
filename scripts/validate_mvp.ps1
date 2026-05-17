@@ -212,6 +212,7 @@ $requiredFiles = @(
   'scripts/validate_v14_145_sample_lifecycle_state_machine.js',
   'scripts/validate_v14_146_durable_archive_dry_run_manifest.js',
   'scripts/validate_v14_147_production_candidate_eligibility_preflight.js',
+  'scripts/validate_v14_148_memory_delta_draft_package.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -361,6 +362,9 @@ $requiredFiles = @(
   'docs/v14_147_production_candidate_eligibility_preflight.md',
   'schemas/production_candidate_eligibility_preflight.schema.yaml',
   'tests/schema_examples/v14_147_production_candidate_eligibility_preflight.example.yaml',
+  'docs/v14_148_memory_delta_draft_package.md',
+  'schemas/memory_delta_draft_package.schema.yaml',
+  'tests/schema_examples/v14_148_memory_delta_draft_package.example.yaml',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -9157,6 +9161,52 @@ process.exit(child.status || 0);
     }
     if ($productionCandidatePreflight.real_manifest_read_performed -ne $false -or $productionCandidatePreflight.real_vcpchat_read_performed -ne $false -or $productionCandidatePreflight.real_vcptoolbox_read_performed -ne $false) {
       Add-Failure "production candidate eligibility preflight must not read real manifest/VCPChat/VCPToolBox"
+    }
+  }
+
+  $memoryDeltaDraftPackageOutput = & node (Join-Path $Root 'scripts/validate_v14_148_memory_delta_draft_package.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "memory delta draft package validation exited with failure"
+  } else {
+    $memoryDeltaDraftPackage = ($memoryDeltaDraftPackageOutput -join "`n") | ConvertFrom-Json
+    if ($memoryDeltaDraftPackage.passed -ne $true) {
+      Add-Failure "memory delta draft package validation must pass"
+    }
+    if ($memoryDeltaDraftPackage.memory_delta_draft_package_created -ne $true -or $memoryDeltaDraftPackage.daily_note_draft_cn_present -ne $true -or $memoryDeltaDraftPackage.vcp_memory_draft_cn_present -ne $true) {
+      Add-Failure "v14.148 must create Chinese DailyNote and VCP memory drafts"
+    }
+    if ($memoryDeltaDraftPackage.write_mode -ne 'draft' -or $memoryDeltaDraftPackage.approval_required -ne $true -or $memoryDeltaDraftPackage.approval_status -ne 'pending' -or $memoryDeltaDraftPackage.should_write_to_vcp -ne $false) {
+      Add-Failure "v14.148 memory package must remain draft-only and pending"
+    }
+    if ($memoryDeltaDraftPackage.memory_delta_source_ref_verified -ne $true -or $memoryDeltaDraftPackage.review_record_ref_verified -ne $true -or $memoryDeltaDraftPackage.accepted_registry_ref_verified -ne $true -or $memoryDeltaDraftPackage.production_candidate_preflight_ref_verified -ne $true) {
+      Add-Failure "v14.148 must verify memory source, review, registry, and production candidate preflight refs"
+    }
+    if ($memoryDeltaDraftPackage.v14_111_memory_delta_validator_still_passes -ne $true -or $memoryDeltaDraftPackage.v14_117_memory_authorization_validator_still_passes -ne $true -or $memoryDeltaDraftPackage.v14_147_production_candidate_preflight_still_passes -ne $true) {
+      Add-Failure "v14.148 must preserve v14.111, v14.117, and v14.147 validation"
+    }
+    if ($memoryDeltaDraftPackage.negative_case_non_chinese_daily_note_body_blocks_package -ne $true -or $memoryDeltaDraftPackage.negative_case_approval_granted_without_A5_blocks_package -ne $true -or $memoryDeltaDraftPackage.negative_case_should_write_to_vcp_true_without_authorization_blocks_package -ne $true -or $memoryDeltaDraftPackage.negative_case_raw_sensitive_content_blocks_package -ne $true -or $memoryDeltaDraftPackage.negative_case_image_binary_reference_blocks_package -ne $true) {
+      Add-Failure "v14.148 must fail memory draft package negative cases"
+    }
+    if ($memoryDeltaDraftPackage.vcp_runtime_integration_proven -ne $false -or $memoryDeltaDraftPackage.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "memory delta draft package must not claim VCP runtime integration"
+    }
+    if ($memoryDeltaDraftPackage.authorization_granted_by_this_record -ne $false -or $memoryDeltaDraftPackage.authorization_granted_by_this_package -ne $false) {
+      Add-Failure "memory delta draft package must not grant authorization"
+    }
+    if ($memoryDeltaDraftPackage.daily_note_write_performed -ne $false -or $memoryDeltaDraftPackage.vcp_memory_write_performed -ne $false -or $memoryDeltaDraftPackage.direct_memory_write_performed -ne $false) {
+      Add-Failure "memory delta draft package must not write DailyNote or VCP memory"
+    }
+    if ($memoryDeltaDraftPackage.accepted_samples_write_performed -ne $false -or $memoryDeltaDraftPackage.failure_samples_write_performed -ne $false -or $memoryDeltaDraftPackage.production_candidate_write_performed -ne $false) {
+      Add-Failure "memory delta draft package must not write accepted/failure samples or production candidates"
+    }
+    if ($memoryDeltaDraftPackage.provider_contact_performed -ne $false -or $memoryDeltaDraftPackage.plugin_call_performed -ne $false -or $memoryDeltaDraftPackage.api_call_performed -ne $false -or $memoryDeltaDraftPackage.mcp_runtime_performed -ne $false) {
+      Add-Failure "memory delta draft package must not call provider/plugin/API/MCP"
+    }
+    if ($memoryDeltaDraftPackage.image_generation_performed -ne $false -or $memoryDeltaDraftPackage.image_binary_included -ne $false) {
+      Add-Failure "memory delta draft package must not generate or include image binaries"
+    }
+    if ($memoryDeltaDraftPackage.real_manifest_read_performed -ne $false -or $memoryDeltaDraftPackage.real_vcpchat_read_performed -ne $false -or $memoryDeltaDraftPackage.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "memory delta draft package must not read real manifest/VCPChat/VCPToolBox"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

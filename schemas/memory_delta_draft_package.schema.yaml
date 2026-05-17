@@ -1,0 +1,62 @@
+# memory_delta_draft_package.schema.yaml
+# Local draft-only contract for future DailyNote and VCP memory writes.
+
+memory_delta_draft_package:
+  version: v1
+  package_type: memory_delta_draft_package
+  execution_mode: local_schema_fixture_validator_only
+  authorization_granted_by_this_package: false
+
+source_case:
+  sample_id: string
+  accepted_registry_ref: accepted_samples/accepted_sample_registry.yaml
+  review_record_ref: docs_path
+  memory_delta_ref: tests/schema_examples/<draft>.yaml
+  production_candidate_eligibility_ref: tests/schema_examples/<preflight>.yaml
+
+daily_note_draft:
+  language: zh-CN
+  title_cn: chinese_text
+  body_cn: chinese_text
+  write_mode: draft
+  approval_required: true
+  approval_status: pending
+  write_allowed_now: false
+  DailyNote_write_performed: false
+
+vcp_memory_draft:
+  language: zh-CN
+  memory_type: accepted_sample_review_learning_draft
+  summary_cn: chinese_text
+  lessons_cn:
+    - chinese_text
+  write_mode: draft
+  approval_required: true
+  approval_status: pending
+  should_write_to_vcp: false
+  VCP_memory_write_performed: false
+
+memory_safety:
+  contains_secret: false
+  contains_private_path: false
+  contains_customer_private_data: false
+  contains_image_binary: false
+  raw_sensitive_content_saved: false
+
+non_authorization:
+  DailyNote_write_allowed_by_schema: false
+  VCP_memory_write_allowed_by_schema: false
+  direct_memory_write_allowed_by_schema: false
+  production_candidate_write_allowed_by_schema: false
+  accepted_samples_write_allowed_by_schema: false
+  failure_samples_write_allowed_by_schema: false
+  provider_api_plugin_mcp_allowed_by_schema: false
+  real_manifest_vcpchat_vcptoolbox_read_allowed_by_schema: false
+  push_tag_release_deploy_allowed_by_schema: false
+
+negative_case_requirements:
+  non_chinese_daily_note_body_blocks_package: true
+  approval_granted_without_A5_blocks_package: true
+  should_write_to_vcp_true_without_authorization_blocks_package: true
+  raw_sensitive_content_blocks_package: true
+  image_binary_reference_blocks_package: true
