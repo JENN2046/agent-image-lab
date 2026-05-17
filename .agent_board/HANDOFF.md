@@ -3,6 +3,45 @@
 ## Handoff Summary
 
 ```text
+Status: v14_150_local_regression_suite_consolidation completed locally and validated.
+Reason: The artifact lifecycle validator chain needed a single local regression runner before dry-run VCP adapter contract work.
+Current repository: project_root
+Branch: master tracking origin/master; local commits may be ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.150 regression suite schema, manifest, runner, validator, phase record, MVP wiring, and .agent_board sync until commit decision.
+Phase record: docs/v14_150_local_regression_suite_consolidation.md
+Regression suite schema: schemas/local_regression_suite.schema.yaml
+Regression suite manifest: tests/schema_examples/v14_150_local_regression_suite_manifest.example.yaml
+Runner created: scripts/run_v14_local_regression_suite.js
+Validator created: scripts/validate_v14_150_local_regression_suite_consolidation.js
+MVP validator updated: scripts/validate_mvp.ps1
+local_regression_suite_consolidated: true
+validator_count: 9
+passed_count: 9
+failed_count: 0
+output_file_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/run_v14_local_regression_suite.js; node --check scripts/validate_v14_150_local_regression_suite_consolidation.js; node scripts/validate_v14_150_local_regression_suite_consolidation.js.
+Next safe action: run broader validation, exact-stage v14.150 files, create a guarded local commit, then continue to v14.151 if still inside A4.8.
+```
+
+## Previous Handoff Summary
+
+```text
 Status: v14_149_authorization_package_compiler completed locally and validated.
 Reason: The archive, production_candidate, memory, and manifest_read paths need inactive A5 package drafts before any real execution authorization.
 Current repository: project_root

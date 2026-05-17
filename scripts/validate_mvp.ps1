@@ -215,6 +215,8 @@ $requiredFiles = @(
   'scripts/validate_v14_148_memory_delta_draft_package.js',
   'scripts/compile_v14_149_authorization_packages.js',
   'scripts/validate_v14_149_authorization_package_compiler.js',
+  'scripts/run_v14_local_regression_suite.js',
+  'scripts/validate_v14_150_local_regression_suite_consolidation.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -370,6 +372,9 @@ $requiredFiles = @(
   'docs/v14_149_authorization_package_compiler.md',
   'schemas/authorization_package_compiler.schema.yaml',
   'tests/schema_examples/v14_149_authorization_package_compiler_input.example.yaml',
+  'docs/v14_150_local_regression_suite_consolidation.md',
+  'schemas/local_regression_suite.schema.yaml',
+  'tests/schema_examples/v14_150_local_regression_suite_manifest.example.yaml',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -9252,6 +9257,37 @@ process.exit(child.status || 0);
     }
     if ($authorizationPackageCompiler.archive_manifest_written -ne $false -or $authorizationPackageCompiler.image_binary_copy_performed -ne $false -or $authorizationPackageCompiler.production_candidate_write_performed -ne $false -or $authorizationPackageCompiler.daily_note_write_performed -ne $false -or $authorizationPackageCompiler.vcp_memory_write_performed -ne $false) {
       Add-Failure "authorization package compiler must not write archive, production candidate, DailyNote, or VCP memory"
+    }
+  }
+
+  $localRegressionSuiteOutput = & node (Join-Path $Root 'scripts/validate_v14_150_local_regression_suite_consolidation.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "local regression suite consolidation validation exited with failure"
+  } else {
+    $localRegressionSuite = ($localRegressionSuiteOutput -join "`n") | ConvertFrom-Json
+    if ($localRegressionSuite.passed -ne $true) {
+      Add-Failure "local regression suite consolidation validation must pass"
+    }
+    if ($localRegressionSuite.local_regression_suite_consolidated -ne $true -or $localRegressionSuite.validator_count -ne 9 -or $localRegressionSuite.child_failed_count -ne 0) {
+      Add-Failure "v14.150 must consolidate a nine-validator passing local regression suite"
+    }
+    if ($localRegressionSuite.suite_runner_passed -ne $true) {
+      Add-Failure "v14.150 suite runner must pass"
+    }
+    if ($localRegressionSuite.negative_case_missing_validator_blocks_suite -ne $true -or $localRegressionSuite.negative_case_child_failure_blocks_suite -ne $true -or $localRegressionSuite.negative_case_output_file_write_blocks_suite -ne $true -or $localRegressionSuite.negative_case_external_action_flag_blocks_suite -ne $true) {
+      Add-Failure "v14.150 must fail local regression suite negative cases"
+    }
+    if ($localRegressionSuite.vcp_runtime_integration_proven -ne $false -or $localRegressionSuite.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "local regression suite must not claim VCP runtime integration"
+    }
+    if ($localRegressionSuite.provider_contact_performed -ne $false -or $localRegressionSuite.plugin_call_performed -ne $false -or $localRegressionSuite.api_call_performed -ne $false -or $localRegressionSuite.mcp_runtime_performed -ne $false) {
+      Add-Failure "local regression suite must not call provider/plugin/API/MCP"
+    }
+    if ($localRegressionSuite.image_generation_performed -ne $false -or $localRegressionSuite.real_manifest_read_performed -ne $false -or $localRegressionSuite.real_vcpchat_read_performed -ne $false -or $localRegressionSuite.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "local regression suite must not generate images or read real manifest/VCP systems"
+    }
+    if ($localRegressionSuite.accepted_samples_write_performed -ne $false -or $localRegressionSuite.failure_samples_write_performed -ne $false -or $localRegressionSuite.production_candidate_write_performed -ne $false -or $localRegressionSuite.daily_note_write_performed -ne $false -or $localRegressionSuite.vcp_memory_write_performed -ne $false) {
+      Add-Failure "local regression suite must not write samples, production candidates, DailyNote, or VCP memory"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

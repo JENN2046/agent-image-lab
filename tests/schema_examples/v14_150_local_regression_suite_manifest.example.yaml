@@ -1,0 +1,45 @@
+# v14.150 local regression suite manifest example
+
+local_regression_suite:
+  version: v1
+  suite_id: v14_150_local_regression_suite_consolidation
+  execution_mode: local_validator_runner_only
+  output_mode: stdout_json
+  output_file_write_allowed: false
+
+  validators:
+    - phase: v14_141_recoverability_core_extraction
+      command: node scripts/validate_v14_141_recoverability_core_extraction.js
+    - phase: v14_142_multi_accepted_sample_matrix
+      command: node scripts/validate_v14_142_multi_accepted_sample_matrix.js
+    - phase: v14_143_import_review_registry_schema_hardening
+      command: node scripts/validate_v14_143_import_review_registry_schema_hardening.js
+    - phase: v14_144_review_console_schema_binding
+      command: node scripts/validate_v14_144_review_console_schema_binding.js
+    - phase: v14_145_sample_lifecycle_state_machine
+      command: node scripts/validate_v14_145_sample_lifecycle_state_machine.js
+    - phase: v14_146_durable_archive_dry_run_manifest
+      command: node scripts/validate_v14_146_durable_archive_dry_run_manifest.js
+    - phase: v14_147_production_candidate_eligibility_preflight
+      command: node scripts/validate_v14_147_production_candidate_eligibility_preflight.js
+    - phase: v14_148_memory_delta_draft_package
+      command: node scripts/validate_v14_148_memory_delta_draft_package.js
+    - phase: v14_149_authorization_package_compiler
+      command: node scripts/validate_v14_149_authorization_package_compiler.js
+
+  suite_guards:
+    output_file_write_performed: false
+    provider_contact_performed: false
+    plugin_call_performed: false
+    api_call_performed: false
+    mcp_runtime_performed: false
+    image_generation_performed: false
+    real_manifest_read_performed: false
+    real_vcpchat_read_performed: false
+    real_vcptoolbox_read_performed: false
+    accepted_samples_write_performed: false
+    failure_samples_write_performed: false
+    production_candidate_write_performed: false
+    DailyNote_write_performed: false
+    VCP_memory_write_performed: false
+    push_tag_release_deploy_performed: false

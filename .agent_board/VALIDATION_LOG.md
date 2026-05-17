@@ -1,5 +1,52 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.150-LOCAL-REGRESSION-SUITE-CONSOLIDATION
+
+Scope:
+
+Validate the local v14.141-v14.149 regression suite runner and confirm all
+child validators pass without external or write side effects.
+
+Commands:
+
+```text
+node --check scripts/run_v14_local_regression_suite.js
+node --check scripts/validate_v14_150_local_regression_suite_consolidation.js
+node scripts/validate_v14_150_local_regression_suite_consolidation.js
+```
+
+Expected:
+
+```yaml
+passed: true
+local_regression_suite_consolidated: true
+validator_count: 9
+passed_count: 9
+child_failed_count: 0
+suite_runner_passed: true
+negative_case_missing_validator_blocks_suite: true
+negative_case_child_failure_blocks_suite: true
+negative_case_output_file_write_blocks_suite: true
+negative_case_external_action_flag_blocks_suite: true
+output_file_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+```
+
 ## VALIDATION-20260517-v14.149-AUTHORIZATION-PACKAGE-COMPILER
 
 Scope:

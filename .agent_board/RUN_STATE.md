@@ -4,6 +4,45 @@
 
 ```text
 objective: extend v14.131-v14.140 single-sample recoverability into multi-category local artifact lifecycle product capability
+status: v14_150_local_regression_suite_consolidation_completed_validated
+mode: Persistent 4-Agent Council local loop under A4.8 / A4 — Sustained Local Autopilot
+phase_id: v14_150_local_regression_suite_consolidation
+phase_record_ref: docs/v14_150_local_regression_suite_consolidation.md
+schema_ref: schemas/local_regression_suite.schema.yaml
+manifest_ref: tests/schema_examples/v14_150_local_regression_suite_manifest.example.yaml
+runner_created: scripts/run_v14_local_regression_suite.js
+validator_created: scripts/validate_v14_150_local_regression_suite_consolidation.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+local_regression_suite_consolidated: true
+validator_count: 9
+passed_count: 9
+failed_count: 0
+output_file_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+validated_now: node --check scripts/run_v14_local_regression_suite.js; node --check scripts/validate_v14_150_local_regression_suite_consolidation.js; node scripts/validate_v14_150_local_regression_suite_consolidation.js
+recommended_next: v14_151_dry_run_vcp_adapter_contract_v1
+recommended_next_auto_execution_allowed: true_after_v14_150_local_commit
+```
+
+## Previous Two-Month Artifact Lifecycle Goal
+
+```text
+objective: extend v14.131-v14.140 single-sample recoverability into multi-category local artifact lifecycle product capability
 status: v14_149_authorization_package_compiler_completed_validated
 mode: Persistent 4-Agent Council local loop under A4.8 / A4 — Sustained Local Autopilot
 phase_id: v14_149_authorization_package_compiler
