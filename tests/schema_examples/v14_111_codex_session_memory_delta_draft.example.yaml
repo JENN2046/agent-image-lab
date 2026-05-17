@@ -1,0 +1,63 @@
+memory_delta:
+  delta_id: memory_delta_draft_accepted_womens_resort_relaxed_knit_codex_v2_001
+  task_id: v14_111_review_record_to_memory_delta_draft_suitability_gate
+  case_id: accepted_womens_resort_relaxed_knit_codex_v2_001
+  created_at: "2026-05-17T00:00:00+08:00"
+  agent_name: Agent Image Lab
+  agent_role: visual_production_control_layer
+  project: Agent Image Lab
+  memory_type: accepted_sample_review_learning_draft
+  target_notebook: VCP_Visual_Production_Lessons
+  write_mode: draft
+  importance: medium
+  approval_required: true
+  approval_status: pending
+  approved_by: null
+  approved_at: null
+  source:
+    source_type: codex_session_review_record
+    source_ids:
+      - docs/v14_105_codex_session_womens_resort_relaxed_knit_final_review.md
+      - accepted_samples/accepted_sample_registry.yaml#accepted_womens_resort_relaxed_knit_codex_v2_001
+      - docs/v14_110_codex_session_import_review_chain_validator_alignment.md
+  chinese_diary_title: "女装度假针织 Codex 会话样片审查经验草案"
+  chinese_diary_content: "本次 Codex 会话内生图在女装度假针织方向上形成可作为正式样片登记的方形主图：人物为成年女性，服装是第一视觉，针织纹理和裤装垂感清晰，背景退为第二视觉。经验点是先用系列首轮比较找到弱项，再针对抢戏道具、背景冷暖层次和服装材质做定向修正。该记录当前仅作为记忆草案，尚未获得 DailyNote 或 VCP memory 写入授权。"
+  preserved_original:
+    prompt_en: null
+    plugin_name: null
+    model_name: codex_session_builtin_image_generation
+    file_ref: accepted_samples/accepted_sample_registry.yaml#accepted_womens_resort_relaxed_knit_codex_v2_001
+  tags:
+    - 女装样片
+    - 度假针织
+    - Codex会话生图
+    - 方形主图
+    - 审查经验草案
+  visibility: audit
+  memory_safety:
+    contains_secret: false
+    contains_private_path: false
+    contains_customer_private_data: false
+    contains_image_binary: false
+    safety_notes_cn: "仅引用项目内元数据和审查记录，不包含密钥、私密路径、客户隐私或图片二进制。"
+  promotion:
+    sync_to_git_candidate: false
+    promoted_to_git: false
+    git_target_file: null
+    promotion_reason_cn: null
+  final_decision:
+    should_write_to_vcp: false
+    should_show_in_review_console: true
+    rejection_reason_cn: "当前只是 memory_delta 草案，未获得 DailyNote 或 VCP memory 写入授权。"
+boundary:
+  daily_note_write_performed: false
+  vcp_memory_write_performed: false
+  direct_memory_write_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  mcp_runtime_performed: false
+  image_generation_by_project_script_performed: false
+  image_binary_included: false

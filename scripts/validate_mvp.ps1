@@ -174,6 +174,7 @@ $requiredFiles = @(
   'scripts/validate_pvos_evidence_collector_blocker_pipeline.js',
   'scripts/validate_v14_081_pvos_exact_a5_authorization_package.js',
   'scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js',
+  'scripts/validate_v14_111_codex_session_memory_delta_draft.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -202,6 +203,7 @@ $requiredFiles = @(
   'tests/schema_examples/pvos_kernel_dry_run_adapter_negative_guard_response.example.json',
   'tests/schema_examples/pvos_evidence_collector_blocker_pipeline.example.json',
   'tests/schema_examples/codex_session_image_import.example.json',
+  'tests/schema_examples/v14_111_codex_session_memory_delta_draft.example.yaml',
   'tests/schema_examples/review_console_adapter_negative_fixture_draft_output_snapshot.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_draft_output_snapshot.example.json',
   'tests/schema_examples/review_console_review_report_draft_output_snapshot.example.json',
@@ -7775,6 +7777,34 @@ process.exit(child.status || 0);
     }
     if ($acceptedSampleRegistry.file_write_performed -ne $false) {
       Add-Failure "accepted sample registry validation must not write files"
+    }
+  }
+
+  $codexSessionMemoryDeltaDraftOutput = & node (Join-Path $Root 'scripts/validate_v14_111_codex_session_memory_delta_draft.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Codex session memory_delta draft validation exited with failure"
+  } else {
+    $codexSessionMemoryDeltaDraft = ($codexSessionMemoryDeltaDraftOutput -join "`n") | ConvertFrom-Json
+    if ($codexSessionMemoryDeltaDraft.passed -ne $true) {
+      Add-Failure "Codex session memory_delta draft validation must pass"
+    }
+    if ($codexSessionMemoryDeltaDraft.memory_delta_draft.write_mode -ne 'draft') {
+      Add-Failure "Codex session memory_delta must remain draft"
+    }
+    if ($codexSessionMemoryDeltaDraft.memory_delta_draft.should_write_to_vcp -ne $false) {
+      Add-Failure "Codex session memory_delta draft must not write to VCP"
+    }
+    if ($codexSessionMemoryDeltaDraft.memory_delta_draft.daily_note_write_performed -ne $false) {
+      Add-Failure "Codex session memory_delta draft must not write DailyNote"
+    }
+    if ($codexSessionMemoryDeltaDraft.memory_delta_draft.vcp_memory_write_performed -ne $false) {
+      Add-Failure "Codex session memory_delta draft must not write VCP memory"
+    }
+    if ($codexSessionMemoryDeltaDraft.memory_delta_draft.image_binary_included -ne $false) {
+      Add-Failure "Codex session memory_delta draft must not include image binary"
+    }
+    if ($codexSessionMemoryDeltaDraft.memory_delta_draft.file_write_performed -ne $false) {
+      Add-Failure "Codex session memory_delta draft validation must not write files"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding
