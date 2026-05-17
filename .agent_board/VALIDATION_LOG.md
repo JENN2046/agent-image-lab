@@ -1,5 +1,49 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260518-v14.163-LAMP-V2-GENERATED-CANDIDATE-READINESS
+
+Scope:
+
+Validate the new lamp v2 Codex-session artifact as local import/review readiness
+evidence. The candidate remains pending human review and must not be registered
+in accepted_samples.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_163_lamp_v2_generated_candidate_readiness.js
+node scripts/validate_v14_163_lamp_v2_generated_candidate_readiness.js
+```
+
+Expected:
+
+```yaml
+passed: true
+artifact_sha256: ba55bae4cbddc7233545b1d6822d77f0c4048266c9d5fb3b0be3ab1aa328178b
+artifact_dimensions: 1254x1254
+artifact_mime: image/png
+review_status: pending_human_review
+human_approval_status: pending
+accepted_candidate: false
+commercial_delivery_ready: false
+negative_case_missing_artifact_ref_fails: true
+negative_case_hash_mismatch_fails: true
+negative_case_dimensions_mismatch_fails: true
+negative_case_mime_mismatch_fails: true
+negative_case_premature_human_approval_blocks_readiness: true
+negative_case_accepted_samples_write_flag_blocks_readiness: true
+negative_case_vcp_runtime_claim_blocks_readiness: true
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+daily_note_write_performed: false
+vcp_memory_write_performed: false
+durable_archive_copy_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+```
+
 ## VALIDATION-20260518-v14.162-LAMP-PROMPT-REVISION
 
 Scope:

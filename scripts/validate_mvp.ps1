@@ -224,6 +224,7 @@ $requiredFiles = @(
   'scripts/validate_v14_160_two_month_product_capability_closeout.js',
   'scripts/validate_v14_161_codex_session_generated_candidate_readiness.js',
   'scripts/validate_v14_162_lamp_prompt_revision_after_v14_161_review.js',
+  'scripts/validate_v14_163_lamp_v2_generated_candidate_readiness.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -408,6 +409,9 @@ $requiredFiles = @(
   'docs/v14_162_lamp_prompt_revision_after_v14_161_review.md',
   'prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_codex_v2.yaml',
   'tests/schema_examples/v14_162_lamp_prompt_revision_after_v14_161_review.example.json',
+  'docs/v14_163_lamp_v2_generated_candidate_readiness.md',
+  'tests/schema_examples/v14_163_lamp_v2_generated_candidate_readiness.example.json',
+  'tests/schema_examples/v14_163_lamp_v2_generated_candidate_import_record.json',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -9547,6 +9551,34 @@ process.exit(child.status || 0);
     }
     if ($lampPromptRevision.vcp_runtime_integration_proven -ne $false -or $lampPromptRevision.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
       Add-Failure "v14.162 prompt revision must not claim VCP runtime integration"
+    }
+  }
+
+  $lampV2ReadinessOutput = & node (Join-Path $Root 'scripts/validate_v14_163_lamp_v2_generated_candidate_readiness.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "lamp v2 generated candidate readiness validation exited with failure"
+  } else {
+    $lampV2Readiness = ($lampV2ReadinessOutput -join "`n") | ConvertFrom-Json
+    if ($lampV2Readiness.passed -ne $true) {
+      Add-Failure "lamp v2 generated candidate readiness validation must pass"
+    }
+    if ($lampV2Readiness.review_status -ne 'pending_human_review' -or $lampV2Readiness.human_approval_status -ne 'pending' -or $lampV2Readiness.accepted_candidate -ne $false -or $lampV2Readiness.commercial_delivery_ready -ne $false) {
+      Add-Failure "v14.163 lamp v2 candidate must remain pending human review and not accepted"
+    }
+    if ($lampV2Readiness.artifact_sha256 -ne 'ba55bae4cbddc7233545b1d6822d77f0c4048266c9d5fb3b0be3ab1aa328178b' -or $lampV2Readiness.artifact_dimensions -ne '1254x1254' -or $lampV2Readiness.artifact_mime -ne 'image/png') {
+      Add-Failure "v14.163 must verify the real lamp v2 artifact hash, dimensions, and mime"
+    }
+    if ($lampV2Readiness.negative_case_missing_artifact_ref_fails -ne $true -or $lampV2Readiness.negative_case_hash_mismatch_fails -ne $true -or $lampV2Readiness.negative_case_dimensions_mismatch_fails -ne $true -or $lampV2Readiness.negative_case_mime_mismatch_fails -ne $true -or $lampV2Readiness.negative_case_premature_human_approval_blocks_readiness -ne $true -or $lampV2Readiness.negative_case_accepted_samples_write_flag_blocks_readiness -ne $true -or $lampV2Readiness.negative_case_vcp_runtime_claim_blocks_readiness -ne $true) {
+      Add-Failure "v14.163 must fail lamp v2 readiness negative cases"
+    }
+    if ($lampV2Readiness.accepted_samples_write_performed -ne $false -or $lampV2Readiness.failure_samples_write_performed -ne $false -or $lampV2Readiness.production_candidate_write_performed -ne $false -or $lampV2Readiness.daily_note_write_performed -ne $false -or $lampV2Readiness.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.163 must not write accepted/failure/production/memory outputs"
+    }
+    if ($lampV2Readiness.durable_archive_copy_performed -ne $false -or $lampV2Readiness.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.163 must not copy to durable archive or push/tag/release/deploy"
+    }
+    if ($lampV2Readiness.vcp_runtime_integration_proven -ne $false -or $lampV2Readiness.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.163 must not claim VCP runtime integration"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

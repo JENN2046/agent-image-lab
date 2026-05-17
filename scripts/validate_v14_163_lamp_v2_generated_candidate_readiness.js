@@ -1,0 +1,251 @@
+#!/usr/bin/env node
+"use strict";
+
+const path = require("node:path");
+const { createRecoverabilityCore } = require("./lib/artifact_recoverability_core");
+
+const root = path.resolve(__dirname, "..");
+const core = createRecoverabilityCore(root);
+
+const files = {
+  phaseRecord: "docs/v14_163_lamp_v2_generated_candidate_readiness.md",
+  promptPackage: "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_codex_v2.yaml",
+  fixture: "tests/schema_examples/v14_163_lamp_v2_generated_candidate_readiness.example.json",
+  importRecord: "tests/schema_examples/v14_163_lamp_v2_generated_candidate_import_record.json",
+  currentValidator: "scripts/validate_v14_163_lamp_v2_generated_candidate_readiness.js",
+  mvpValidator: "scripts/validate_mvp.ps1",
+  runState: ".agent_board/RUN_STATE.md",
+  taskQueue: ".agent_board/TASK_QUEUE.md",
+  checkpoint: ".agent_board/CHECKPOINT.md",
+  handoff: ".agent_board/HANDOFF.md",
+};
+
+const expected = {
+  phase: "v14_163_lamp_v2_generated_candidate_readiness",
+  imageCaseId: "v14_163_lamp_v2_generated_candidate_001",
+  artifactRef: "runs/real_generation/v14_162_codex_session_premium_portable_led_camping_lantern_v2_generation_trial/codex_session_v14_162_premium_portable_led_camping_lantern_v2_candidate_001.png",
+  promptPackageRef: files.promptPackage,
+  importRecordRef: files.importRecord,
+  sha256: "ba55bae4cbddc7233545b1d6822d77f0c4048266c9d5fb3b0be3ab1aa328178b",
+  width: 1254,
+  height: 1254,
+  mime: "image/png",
+};
+
+const results = [];
+const errors = [];
+
+function addResult(check, passed, detail) {
+  results.push({ check, passed: Boolean(passed), ...(detail ? { detail } : {}) });
+  if (!passed) errors.push({ check, detail: detail || "check failed" });
+}
+
+function requireToken(label, text, token) {
+  addResult(`${label}_token_${token}_present`, text.includes(token));
+}
+
+function forbidPattern(label, text, pattern) {
+  addResult(`${label}_forbidden_${pattern}_absent`, !pattern.test(text), `${pattern}`);
+}
+
+function dimensionsString(width, height) {
+  return `${width}x${height}`;
+}
+
+function evaluateReadiness(input) {
+  const guard = input.guard || {};
+  const metadataOk =
+    input.artifact_ref === expected.artifactRef &&
+    input.import_record_ref === expected.importRecordRef &&
+    input.source_prompt_package_ref === expected.promptPackageRef &&
+    input.sha256 === expected.sha256 &&
+    input.dimensions === dimensionsString(expected.width, expected.height) &&
+    input.mime === expected.mime &&
+    input.local_file_verified === true;
+  const reviewOk =
+    input.review_status === "pending_human_review" &&
+    input.human_approval_status === "pending" &&
+    input.accepted_candidate === false &&
+    input.commercial_delivery_ready === false;
+  const noWrites =
+    guard.accepted_samples_write_performed === false &&
+    guard.failure_samples_write_performed === false &&
+    guard.production_candidate_write_performed === false &&
+    guard.DailyNote_write_performed === false &&
+    guard.VCP_memory_write_performed === false &&
+    guard.durable_archive_copy_performed === false;
+  const noExternal =
+    guard.provider_contact_performed_by_project === false &&
+    guard.plugin_call_performed_by_project === false &&
+    guard.api_call_performed_by_project === false &&
+    guard.mcp_runtime_performed_by_project === false &&
+    guard.real_manifest_read_performed === false &&
+    guard.real_vcpchat_read_performed === false &&
+    guard.real_vcptoolbox_read_performed === false;
+  const noRuntimeClaim = guard.artifact_recoverability_is_not_vcp_runtime_integration === true && guard.vcp_runtime_integration_proven === false;
+  const nextGateOk =
+    input.next_gate?.human_review_required_before_accepted_samples === true &&
+    input.next_gate?.automatic_accepted_samples_write_allowed === false &&
+    input.next_gate?.accepted_samples_write_requires_separate_authorization === true;
+  return {
+    passed: metadataOk && reviewOk && noWrites && noExternal && noRuntimeClaim && nextGateOk,
+    metadataOk,
+    reviewOk,
+    noWrites,
+    noExternal,
+    noRuntimeClaim,
+    nextGateOk,
+  };
+}
+
+for (const [key, relativePath] of Object.entries(files)) {
+  addResult(`${key}_exists`, core.exists(relativePath), relativePath);
+}
+
+const phaseRecord = core.read(files.phaseRecord);
+const promptPackage = core.read(files.promptPackage);
+const fixture = core.parseJson(files.fixture).lamp_v2_generated_candidate_readiness;
+const importRecord = core.parseJson(files.importRecord).codex_session_image_import;
+const metadata = core.readImageMetadata(expected.artifactRef);
+const actualSha256 = core.sha256File(expected.artifactRef);
+const currentSurfaces = [
+  phaseRecord,
+  promptPackage,
+  JSON.stringify(fixture, null, 2),
+  core.read(files.runState),
+  core.read(files.taskQueue),
+  core.read(files.checkpoint),
+  core.read(files.handoff),
+  core.read(files.mvpValidator),
+].join("\n");
+
+addResult("artifact_file_exists", core.exists(expected.artifactRef));
+addResult("artifact_sha256_matches_expected", actualSha256 === expected.sha256, actualSha256);
+addResult("artifact_mime_matches_expected", metadata.mimeType === expected.mime, metadata.mimeType);
+addResult("artifact_dimensions_match_expected", metadata.width === expected.width && metadata.height === expected.height, `${metadata.width}x${metadata.height}`);
+addResult("artifact_signature_valid", metadata.signatureValid === true);
+
+for (const token of [
+  "package_id: product_lifestyle_premium_portable_led_camping_lantern_codex_v2",
+  "fix_indoor_desk_lamp_drift: true",
+  "clarify_portable_led_camping_lantern_identity: true",
+  "accepted_samples_write_allowed: false",
+]) {
+  requireToken("prompt_package", promptPackage, token);
+}
+
+for (const token of [
+  "phase: v14_163_lamp_v2_generated_candidate_readiness",
+  `artifact_ref: ${expected.artifactRef}`,
+  `import_record_ref: ${expected.importRecordRef}`,
+  `artifact_sha256: ${expected.sha256}`,
+  "review_status: pending_human_review",
+  "accepted_candidate: false",
+  "human_approval_status: pending",
+  "accepted_samples_write_performed: false",
+  "human_approval_present: fail_pending",
+  "recommended_next: human_review_v14_163_lamp_v2_candidate_then_either_mark_needs_revision_or_authorize_accepted_samples_metadata_registration",
+  "artifact_recoverability_is_not_vcp_runtime_integration: true",
+  "vcp_runtime_integration_proven: false",
+]) {
+  requireToken("phase_record", phaseRecord, token);
+}
+
+addResult("fixture_phase_matches", fixture.phase === expected.phase);
+addResult("fixture_execution_mode_readiness_only", fixture.execution_mode === "local_artifact_import_review_readiness_only");
+addResult("fixture_metadata_matches", evaluateReadiness(fixture).metadataOk);
+addResult("fixture_review_pending_human_review", evaluateReadiness(fixture).reviewOk);
+addResult("fixture_no_writes", evaluateReadiness(fixture).noWrites);
+addResult("fixture_no_external_actions", evaluateReadiness(fixture).noExternal);
+addResult("fixture_no_runtime_claim", evaluateReadiness(fixture).noRuntimeClaim);
+addResult("fixture_next_gate_blocks_accepted_samples", evaluateReadiness(fixture).nextGateOk);
+addResult("readiness_evaluation_passes", evaluateReadiness(fixture).passed, JSON.stringify(evaluateReadiness(fixture)));
+
+addResult("import_record_id_matches", importRecord.import_id === expected.imageCaseId);
+addResult("import_record_prompt_ref_matches", importRecord.prompt_package_ref === expected.promptPackageRef);
+addResult("import_record_asset_path_matches", importRecord.imported_asset.relative_path === expected.artifactRef);
+addResult("import_record_sha256_matches", importRecord.imported_asset.sha256 === expected.sha256);
+addResult("import_record_dimensions_match", importRecord.imported_asset.width_px === expected.width && importRecord.imported_asset.height_px === expected.height);
+addResult("import_record_mime_matches", importRecord.imported_asset.mime_type === expected.mime);
+addResult("import_record_local_file_verified", importRecord.imported_asset.local_file_verified === true);
+addResult("import_record_not_copied_by_project_script", importRecord.imported_asset.copied_by_project_script === false);
+addResult("import_record_review_pending", importRecord.review_bridge.review_status === "pending_human_review");
+addResult("import_record_not_accepted", importRecord.review_bridge.accepted_candidate === false);
+addResult("import_record_review_ref_matches", importRecord.review_bridge.review_record_ref === files.phaseRecord);
+
+for (const [field, value] of Object.entries(importRecord.no_execution_guard)) {
+  if (field.endsWith("_allowed") || field.endsWith("_performed") || field.endsWith("_performed_by_project")) {
+    addResult(`import_record_guard_${field}_false`, value === false);
+  }
+}
+
+const missingArtifact = evaluateReadiness({ ...fixture, artifact_ref: "" });
+const hashMismatch = evaluateReadiness({ ...fixture, sha256: "0".repeat(64) });
+const dimensionsMismatch = evaluateReadiness({ ...fixture, dimensions: "1024x1024" });
+const mimeMismatch = evaluateReadiness({ ...fixture, mime: "image/jpeg" });
+const prematureApproval = evaluateReadiness({ ...fixture, review_status: "accepted_candidate_with_human_approval", human_approval_status: "approved", accepted_candidate: true, commercial_delivery_ready: true });
+const acceptedWrite = evaluateReadiness({ ...fixture, guard: { ...fixture.guard, accepted_samples_write_performed: true } });
+const runtimeClaim = evaluateReadiness({ ...fixture, guard: { ...fixture.guard, artifact_recoverability_is_not_vcp_runtime_integration: false, vcp_runtime_integration_proven: true } });
+
+addResult("negative_case_missing_artifact_ref_fails", missingArtifact.passed === false && missingArtifact.metadataOk === false);
+addResult("negative_case_hash_mismatch_fails", hashMismatch.passed === false && hashMismatch.metadataOk === false);
+addResult("negative_case_dimensions_mismatch_fails", dimensionsMismatch.passed === false && dimensionsMismatch.metadataOk === false);
+addResult("negative_case_mime_mismatch_fails", mimeMismatch.passed === false && mimeMismatch.metadataOk === false);
+addResult("negative_case_premature_human_approval_blocks_readiness", prematureApproval.passed === false && prematureApproval.reviewOk === false);
+addResult("negative_case_accepted_samples_write_flag_blocks_readiness", acceptedWrite.passed === false && acceptedWrite.noWrites === false);
+addResult("negative_case_vcp_runtime_claim_blocks_readiness", runtimeClaim.passed === false && runtimeClaim.noRuntimeClaim === false);
+
+for (const token of [
+  "scripts/validate_v14_163_lamp_v2_generated_candidate_readiness.js",
+  "docs/v14_163_lamp_v2_generated_candidate_readiness.md",
+  "tests/schema_examples/v14_163_lamp_v2_generated_candidate_readiness.example.json",
+  "tests/schema_examples/v14_163_lamp_v2_generated_candidate_import_record.json",
+  "v14_163_lamp_v2_generated_candidate_readiness",
+]) {
+  requireToken("current_surfaces", currentSurfaces, token);
+}
+
+forbidPattern("current_surfaces", currentSurfaces, /accepted_samples_write_performed:\s+true/i);
+forbidPattern("current_surfaces", currentSurfaces, /failure_samples_write_performed:\s+true/i);
+forbidPattern("current_surfaces", currentSurfaces, /production_candidate_write_performed:\s+true/i);
+forbidPattern("current_surfaces", currentSurfaces, /DailyNote_write_performed:\s+true/i);
+forbidPattern("current_surfaces", currentSurfaces, /VCP_memory_write_performed:\s+true/i);
+forbidPattern("current_surfaces", currentSurfaces, /vcp_runtime_integration_proven:\s+true/i);
+
+const passed = errors.length === 0;
+const summary = {
+  validator: "validate_v14_163_lamp_v2_generated_candidate_readiness",
+  version: "v1",
+  passed,
+  check_count: results.length,
+  failed_count: errors.length,
+  artifact_ref: expected.artifactRef,
+  artifact_sha256: expected.sha256,
+  artifact_dimensions: dimensionsString(expected.width, expected.height),
+  artifact_mime: expected.mime,
+  review_status: "pending_human_review",
+  human_approval_status: "pending",
+  accepted_candidate: false,
+  commercial_delivery_ready: false,
+  accepted_samples_write_performed: false,
+  failure_samples_write_performed: false,
+  production_candidate_write_performed: false,
+  daily_note_write_performed: false,
+  vcp_memory_write_performed: false,
+  durable_archive_copy_performed: false,
+  push_tag_release_deploy_performed: false,
+  artifact_recoverability_is_not_vcp_runtime_integration: true,
+  vcp_runtime_integration_proven: false,
+  negative_case_missing_artifact_ref_fails: missingArtifact.passed === false && missingArtifact.metadataOk === false,
+  negative_case_hash_mismatch_fails: hashMismatch.passed === false && hashMismatch.metadataOk === false,
+  negative_case_dimensions_mismatch_fails: dimensionsMismatch.passed === false && dimensionsMismatch.metadataOk === false,
+  negative_case_mime_mismatch_fails: mimeMismatch.passed === false && mimeMismatch.metadataOk === false,
+  negative_case_premature_human_approval_blocks_readiness: prematureApproval.passed === false && prematureApproval.reviewOk === false,
+  negative_case_accepted_samples_write_flag_blocks_readiness: acceptedWrite.passed === false && acceptedWrite.noWrites === false,
+  negative_case_vcp_runtime_claim_blocks_readiness: runtimeClaim.passed === false && runtimeClaim.noRuntimeClaim === false,
+  errors,
+  results,
+};
+
+process.stdout.write(`${JSON.stringify(summary, null, 2)}\n`);
+process.exit(passed ? 0 : 1);

@@ -1,0 +1,69 @@
+{
+  "codex_session_image_import": {
+    "import_version": "v1",
+    "import_id": "v14_163_lamp_v2_generated_candidate_001",
+    "provider_id": "codex_session_image",
+    "import_mode": "manual_session_import",
+    "status": "review_linked",
+    "source": {
+      "codex_session_generation": true,
+      "codex_image_direct_call_allowed": false,
+      "mcp_runtime_allowed": false,
+      "provider_api_call_allowed": false,
+      "project_script_generation_allowed": false,
+      "image_generation_by_script": false,
+      "human_session_action_required": true
+    },
+    "prompt_package_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_codex_v2.yaml",
+    "prompt_package_id": "product_lifestyle_premium_portable_led_camping_lantern_codex_v2",
+    "generation_notes_cn": "用户允许再生成一次 Codex 会话内图片后生成的灯图 v2 候选。该记录只做本地 import/review readiness，不写 accepted_samples、production_candidate、DailyNote 或 VCP memory。",
+    "imported_asset": {
+      "output_directory_ref": "runs/real_generation/v14_162_codex_session_premium_portable_led_camping_lantern_v2_generation_trial/",
+      "file_name": "codex_session_v14_162_premium_portable_led_camping_lantern_v2_candidate_001.png",
+      "relative_path": "runs/real_generation/v14_162_codex_session_premium_portable_led_camping_lantern_v2_generation_trial/codex_session_v14_162_premium_portable_led_camping_lantern_v2_candidate_001.png",
+      "mime_type": "image/png",
+      "width_px": 1254,
+      "height_px": 1254,
+      "aspect_ratio": "1:1",
+      "sha256": "ba55bae4cbddc7233545b1d6822d77f0c4048266c9d5fb3b0be3ab1aa328178b",
+      "local_file_verified": true,
+      "copied_by_project_script": false
+    },
+    "review_bridge": {
+      "image_case_id": "v14_163_lamp_v2_generated_candidate_001",
+      "review_status": "pending_human_review",
+      "accepted_candidate": false,
+      "commercial_delivery_ready": false,
+      "memory_suitability": "deferred",
+      "review_record_ref": "docs/v14_163_lamp_v2_generated_candidate_readiness.md"
+    },
+    "no_execution_guard": {
+      "provider_contact_allowed": false,
+      "plugin_call_allowed": false,
+      "api_call_allowed": false,
+      "image_generation_allowed_by_project": false,
+      "env_local_secret_value_read_allowed": false,
+      "DailyNote_write_allowed": false,
+      "VCP_memory_write_allowed": false,
+      "accepted_samples_write_allowed": false,
+      "production_candidate_write_allowed": false,
+      "real_manifest_read_allowed": false,
+      "real_VCPChat_read_allowed": false,
+      "real_VCPToolBox_read_allowed": false,
+      "push_tag_release_deploy_allowed": false,
+      "provider_contact_performed_by_project": false,
+      "plugin_call_performed_by_project": false,
+      "api_call_performed_by_project": false,
+      "image_generation_performed_by_project": false,
+      "env_local_secret_value_read_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "real_manifest_read_performed": false,
+      "real_VCPChat_read_performed": false,
+      "real_VCPToolBox_read_performed": false,
+      "push_tag_release_deploy_performed": false
+    }
+  }
+}

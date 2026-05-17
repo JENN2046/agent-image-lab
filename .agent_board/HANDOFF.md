@@ -3,6 +3,40 @@
 ## Handoff Summary
 
 ```text
+Status: v14_163_lamp_v2_generated_candidate_readiness completed locally and validated.
+Reason: A new Codex-session lamp v2 image exists in runs/real_generation and needs local import/review readiness evidence before any human approval or accepted_samples decision.
+Current repository: project_root
+Branch: master tracking origin/master; local commits may be ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.163 readiness doc, fixture, import record, validator, MVP wiring, and .agent_board sync until commit decision.
+Phase record: docs/v14_163_lamp_v2_generated_candidate_readiness.md
+Fixture: tests/schema_examples/v14_163_lamp_v2_generated_candidate_readiness.example.json
+Import record: tests/schema_examples/v14_163_lamp_v2_generated_candidate_import_record.json
+Validator created: scripts/validate_v14_163_lamp_v2_generated_candidate_readiness.js
+MVP validator updated: scripts/validate_mvp.ps1
+artifact_ref: runs/real_generation/v14_162_codex_session_premium_portable_led_camping_lantern_v2_generation_trial/codex_session_v14_162_premium_portable_led_camping_lantern_v2_candidate_001.png
+artifact_sha256: ba55bae4cbddc7233545b1d6822d77f0c4048266c9d5fb3b0be3ab1aa328178b
+artifact_dimensions: 1254x1254
+artifact_mime: image/png
+review_status: pending_human_review
+human_approval_status: pending
+accepted_candidate: false
+commercial_delivery_ready: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+durable_archive_copy_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_163_lamp_v2_generated_candidate_readiness.js; node scripts/validate_v14_163_lamp_v2_generated_candidate_readiness.js.
+Next safe action: run broader validation and commit exact v14.163 files, then stop for human review or accepted_samples authorization.
+```
+
+## Previous Handoff Summary
+
+```text
 Status: v14_162_lamp_prompt_revision_after_v14_161_review completed locally and validated.
 Reason: The first v14.161 lamp candidate needed optimization. A corrected prompt package now targets stronger premium portable LED camping lantern identity while preserving no-execution boundaries for the record.
 Current repository: project_root

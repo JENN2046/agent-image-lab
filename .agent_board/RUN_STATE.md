@@ -3,6 +3,40 @@
 ## Active Two-Month Artifact Lifecycle Goal
 
 ```text
+objective: convert newly generated lamp v2 artifact into local import/review readiness evidence without accepted_samples write
+status: v14_163_lamp_v2_generated_candidate_readiness_completed_validated
+mode: Persistent 4-Agent Council local loop under A4.8 / A4 — Sustained Local Autopilot
+phase_id: v14_163_lamp_v2_generated_candidate_readiness
+phase_record_ref: docs/v14_163_lamp_v2_generated_candidate_readiness.md
+fixture_ref: tests/schema_examples/v14_163_lamp_v2_generated_candidate_readiness.example.json
+import_record_ref: tests/schema_examples/v14_163_lamp_v2_generated_candidate_import_record.json
+validator_created: scripts/validate_v14_163_lamp_v2_generated_candidate_readiness.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+artifact_ref: runs/real_generation/v14_162_codex_session_premium_portable_led_camping_lantern_v2_generation_trial/codex_session_v14_162_premium_portable_led_camping_lantern_v2_candidate_001.png
+artifact_sha256: ba55bae4cbddc7233545b1d6822d77f0c4048266c9d5fb3b0be3ab1aa328178b
+artifact_dimensions: 1254x1254
+artifact_mime: image/png
+review_status: pending_human_review
+human_approval_status: pending
+accepted_candidate: false
+commercial_delivery_ready: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+durable_archive_copy_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+validated_now: node --check scripts/validate_v14_163_lamp_v2_generated_candidate_readiness.js; node scripts/validate_v14_163_lamp_v2_generated_candidate_readiness.js
+recommended_next: human_review_v14_163_lamp_v2_candidate_then_either_revision_or_accepted_samples_authorization
+recommended_next_auto_execution_allowed: false_human_review_or_accepted_samples_boundary
+```
+
+## Active Two-Month Artifact Lifecycle Goal
+
+```text
 objective: prepare lamp candidate correction while preserving artifact lifecycle boundaries
 status: v14_162_lamp_prompt_revision_after_v14_161_review_completed_validated
 mode: Persistent 4-Agent Council local loop under A4.8 / A4 — Sustained Local Autopilot
