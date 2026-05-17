@@ -1,5 +1,31 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.112 Production Candidate Gate Local Policy Refresh
+
+```text
+phase_id: v14_112_production_candidate_gate_local_policy_refresh
+status: completed_validated
+phase_record_ref: docs/v14_112_production_candidate_gate_local_policy_refresh.md
+validator_created: scripts/validate_v14_112_production_candidate_gate_policy.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+accepted_sample_id: accepted_womens_resort_relaxed_knit_codex_v2_001
+accepted_samples_metadata_auto_allowed: true
+accepted_samples_auto_promote_to_production_candidate: false
+production_candidate_write_allowed: false
+production_candidate_write_performed: false
+production_directory_write_performed: false
+historical_production_candidate_chain_preserved: true
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+validated_now: node --check scripts/validate_v14_112_production_candidate_gate_policy.js; node scripts/validate_v14_112_production_candidate_gate_policy.js
+recommended_next: failure_samples_authorization_and_taxonomy_draft_without_write
+recommended_next_auto_execution_allowed: true
+```
+
 # V14.111 Review Record To Memory Delta Draft Suitability Gate
 
 ```text

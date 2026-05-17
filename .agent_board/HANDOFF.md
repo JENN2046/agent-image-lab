@@ -3,11 +3,31 @@
 ## Handoff Summary
 
 ```text
+Status: v14_112_production_candidate_gate_local_policy_refresh completed locally and validated.
+Reason: The current goal allows accepted_samples metadata automation, but production_candidate promotion must remain a separate authorization gate.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.112 production_candidate gate validator, MVP wiring, phase record, and .agent_board sync until commit decision.
+Phase record: docs/v14_112_production_candidate_gate_local_policy_refresh.md
+Validator created: scripts/validate_v14_112_production_candidate_gate_policy.js
+MVP validator updated: scripts/validate_mvp.ps1
+accepted_sample_id: accepted_womens_resort_relaxed_knit_codex_v2_001
+accepted_samples_metadata_auto_allowed: true
+accepted_samples_auto_promote_to_production_candidate: false
+production_candidate_write_allowed: false
+production_directory_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+validated_now: node --check scripts/validate_v14_112_production_candidate_gate_policy.js; node scripts/validate_v14_112_production_candidate_gate_policy.js
+recommended_next: failure_samples_authorization_and_taxonomy_draft_without_write
+recommended_next_auto_execution_allowed: true
+---
 Status: v14_111_review_record_to_memory_delta_draft_suitability_gate completed locally and validated.
 Reason: The Codex session accepted sample now needs a memory_delta draft path that stays draft-only and does not write DailyNote or VCP memory.
 Current repository: project_root
 Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
-Worktree: dirty with v14.111 memory_delta draft, validator, MVP wiring, phase record, and .agent_board sync until commit decision.
+Worktree: committed in local checkpoint 104246f before v14.112 started.
 Phase record: docs/v14_111_review_record_to_memory_delta_draft_suitability_gate.md
 Memory delta draft: tests/schema_examples/v14_111_codex_session_memory_delta_draft.example.yaml
 Validator created: scripts/validate_v14_111_codex_session_memory_delta_draft.js

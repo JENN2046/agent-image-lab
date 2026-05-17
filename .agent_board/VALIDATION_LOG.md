@@ -1,5 +1,36 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.112-PRODUCTION-CANDIDATE-GATE-LOCAL-POLICY
+
+Task:
+
+```text
+Validate that accepted_samples metadata automation cannot be treated as production_candidate promotion.
+```
+
+Commands run:
+
+```text
+node --check scripts/validate_v14_112_production_candidate_gate_policy.js
+node scripts/validate_v14_112_production_candidate_gate_policy.js
+```
+
+Result:
+
+```text
+passed: true
+accepted_samples_auto_promote_to_production_candidate: false
+production_candidate_write_allowed: false
+production_candidate_write_performed: false
+production_directory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+```
+
 ## VALIDATION-20260517-v14.111-REVIEW-RECORD-TO-MEMORY-DELTA-DRAFT-SUITABILITY
 
 Task:

@@ -175,6 +175,7 @@ $requiredFiles = @(
   'scripts/validate_v14_081_pvos_exact_a5_authorization_package.js',
   'scripts/validate_v14_082_pvos_metadata_only_preflight_authorization_correction.js',
   'scripts/validate_v14_111_codex_session_memory_delta_draft.js',
+  'scripts/validate_v14_112_production_candidate_gate_policy.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -7805,6 +7806,34 @@ process.exit(child.status || 0);
     }
     if ($codexSessionMemoryDeltaDraft.memory_delta_draft.file_write_performed -ne $false) {
       Add-Failure "Codex session memory_delta draft validation must not write files"
+    }
+  }
+
+  $productionCandidateGateOutput = & node (Join-Path $Root 'scripts/validate_v14_112_production_candidate_gate_policy.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "production candidate gate policy validation exited with failure"
+  } else {
+    $productionCandidateGate = ($productionCandidateGateOutput -join "`n") | ConvertFrom-Json
+    if ($productionCandidateGate.passed -ne $true) {
+      Add-Failure "production candidate gate policy validation must pass"
+    }
+    if ($productionCandidateGate.accepted_samples_auto_promote_to_production_candidate -ne $false) {
+      Add-Failure "accepted_samples metadata must not auto-promote to production_candidate"
+    }
+    if ($productionCandidateGate.production_candidate_write_allowed -ne $false) {
+      Add-Failure "production candidate gate must keep write allowance false"
+    }
+    if ($productionCandidateGate.production_candidate_write_performed -ne $false) {
+      Add-Failure "production candidate gate validation must not write production_candidate"
+    }
+    if ($productionCandidateGate.production_directory_write_performed -ne $false) {
+      Add-Failure "production candidate gate validation must not write production directory"
+    }
+    if ($productionCandidateGate.provider_contact_performed -ne $false -or $productionCandidateGate.plugin_call_performed -ne $false -or $productionCandidateGate.api_call_performed -ne $false -or $productionCandidateGate.mcp_runtime_performed -ne $false) {
+      Add-Failure "production candidate gate validation must not call provider/plugin/API/MCP"
+    }
+    if ($productionCandidateGate.daily_note_write_performed -ne $false -or $productionCandidateGate.vcp_memory_write_performed -ne $false) {
+      Add-Failure "production candidate gate validation must not write DailyNote or VCP memory"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

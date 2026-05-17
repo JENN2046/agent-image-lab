@@ -10,10 +10,10 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ```text
 Current active long-term objective: 3-month Agent Image Lab visual production control layer for the VCP ecosystem.
-Status: v14_111_review_record_to_memory_delta_draft_suitability_gate_completed_validated.
+Status: v14_112_production_candidate_gate_local_policy_refresh_completed_validated.
 Purpose: move Agent Image Lab from local verifiable visual production MVP toward a controlled VCPChat / VCPToolBox visual production system while staying inside A4.8 unless separately authorized.
-phase_id: v14_111_review_record_to_memory_delta_draft_suitability_gate.
-phase_record_ref: docs/v14_111_review_record_to_memory_delta_draft_suitability_gate.md.
+phase_id: v14_112_production_candidate_gate_local_policy_refresh.
+phase_record_ref: docs/v14_112_production_candidate_gate_local_policy_refresh.md.
 default_generation_route_for_next_three_months: codex_session_image.
 NativeDoubaoImage_default_route: false.
 provider_API_default_route: false.
@@ -38,9 +38,9 @@ env_value_read_allowed_without_separate_authorization: false.
 provider_API_plugin_MCP_allowed_without_separate_authorization: false.
 real_manifest_VCPChat_VCPToolBox_read_allowed_without_separate_authorization: false.
 push_tag_release_deploy_allowed_without_separate_authorization: false.
-current_focus: production_candidate_gate_local_policy_refresh.
-validated_now: node --check scripts/validate_v14_111_codex_session_memory_delta_draft.js; node scripts/validate_v14_111_codex_session_memory_delta_draft.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
-recommended_next: production_candidate_gate_local_policy_refresh.
+current_focus: failure_samples_authorization_and_taxonomy_draft_without_write.
+validated_now: node --check scripts/validate_v14_112_production_candidate_gate_policy.js; node scripts/validate_v14_112_production_candidate_gate_policy.js.
+recommended_next: failure_samples_authorization_and_taxonomy_draft_without_write.
 recommended_next_auto_execution_allowed: true.
 ---
 Current active local objective: v14_107_womens_resort_relaxed_knit_accepted_sample_closeout.
