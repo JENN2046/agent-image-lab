@@ -203,6 +203,7 @@ $requiredFiles = @(
   'scripts/validate_v14_137_project_master_plan_quarantine_status_demotion.js',
   'scripts/validate_v14_138_dashboard_alignment_from_real_artifact_evidence.js',
   'scripts/validate_v14_139_durable_archive_production_candidate_memory_write_authorization_split_planning.js',
+  'scripts/validate_v14_140_two_week_regression_closeout.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -338,6 +339,7 @@ $requiredFiles = @(
   'docs/v14_137_project_master_plan_quarantine_status_demotion.md',
   'docs/v14_138_dashboard_alignment_from_real_artifact_evidence.md',
   'docs/v14_139_durable_archive_production_candidate_memory_write_authorization_split_planning.md',
+  'docs/v14_140_two_week_regression_closeout.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8831,6 +8833,37 @@ process.exit(child.status || 0);
     }
     if ($authorizationSplit.real_manifest_read_performed -ne $false -or $authorizationSplit.real_vcpchat_read_performed -ne $false -or $authorizationSplit.real_vcptoolbox_read_performed -ne $false) {
       Add-Failure "authorization split planning must not read real manifest/VCPChat/VCPToolBox"
+    }
+  }
+
+  $twoWeekRegressionCloseoutOutput = & node (Join-Path $Root 'scripts/validate_v14_140_two_week_regression_closeout.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "two-week regression closeout validation exited with failure"
+  } else {
+    $twoWeekRegressionCloseout = ($twoWeekRegressionCloseoutOutput -join "`n") | ConvertFrom-Json
+    if ($twoWeekRegressionCloseout.passed -ne $true) {
+      Add-Failure "two-week regression closeout validation must pass"
+    }
+    if ($twoWeekRegressionCloseout.accepted_sample_traceability_hard_acceptance_met -ne $true -or $twoWeekRegressionCloseout.negative_cases_fail_as_expected -ne $true) {
+      Add-Failure "two-week closeout must meet traceability hard acceptance and negative-case requirements"
+    }
+    if ($twoWeekRegressionCloseout.review_console_static_reader_only -ne $true) {
+      Add-Failure "two-week closeout must keep Review Console as a static reader only"
+    }
+    if ($twoWeekRegressionCloseout.vcp_runtime_integration_proven -ne $false -or $twoWeekRegressionCloseout.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "two-week closeout must not claim VCP runtime integration"
+    }
+    if ($twoWeekRegressionCloseout.provider_contact_performed -ne $false -or $twoWeekRegressionCloseout.plugin_call_performed -ne $false -or $twoWeekRegressionCloseout.api_call_performed -ne $false -or $twoWeekRegressionCloseout.mcp_runtime_performed -ne $false) {
+      Add-Failure "two-week closeout must not call provider/plugin/API/MCP"
+    }
+    if ($twoWeekRegressionCloseout.image_generation_performed -ne $false -or $twoWeekRegressionCloseout.image_binary_copy_performed -ne $false) {
+      Add-Failure "two-week closeout must not generate images or copy image binaries"
+    }
+    if ($twoWeekRegressionCloseout.production_candidate_created -ne $false -or $twoWeekRegressionCloseout.daily_note_write_performed -ne $false -or $twoWeekRegressionCloseout.vcp_memory_write_performed -ne $false) {
+      Add-Failure "two-week closeout must not create production candidates or write memory"
+    }
+    if ($twoWeekRegressionCloseout.real_manifest_read_performed -ne $false -or $twoWeekRegressionCloseout.real_vcpchat_read_performed -ne $false -or $twoWeekRegressionCloseout.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "two-week closeout must not read real manifest/VCPChat/VCPToolBox"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

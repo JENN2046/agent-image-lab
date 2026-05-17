@@ -1,5 +1,46 @@
 # RUN_STATE.md — Agent Image Lab
 
+## Active Two-Week Regression Closeout
+
+```text
+objective: shift Agent Image Lab from governance/document proof to real artifact recoverability product capability
+status: v14_140_two_week_regression_closeout_completed_validated
+mode: Persistent 4-Agent Council local loop under A4.8 / A4 — Sustained Local Autopilot
+phase_id: v14_140_two_week_regression_closeout
+phase_record_ref: docs/v14_140_two_week_regression_closeout.md
+validator_created: scripts/validate_v14_140_two_week_regression_closeout.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+two_week_regression_closeout_completed: true
+accepted_sample_traceability_hard_acceptance_met: true
+negative_cases_fail_as_expected: true
+review_console_static_reader_only: true
+product_capability_progress_percent: 62
+governance_capability_progress_percent: 82
+real_vcp_integration_progress_percent: 24
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+durable_archive_executed: false
+archive_manifest_written: false
+image_binary_copy_performed: false
+production_candidate_created: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+failure_samples_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+validated_now: git diff --check; node scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js; node scripts/validate_v14_140_two_week_regression_closeout.js; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: wait_for_next_exact_A5_or_new_local_goal
+recommended_next_auto_execution_allowed: false
+```
+
 ## Active Two-Week Authorization Split Goal
 
 ```text

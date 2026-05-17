@@ -3,6 +3,44 @@
 ## Handoff Summary
 
 ```text
+Status: v14_140_two_week_regression_closeout completed locally and validated.
+Reason: The v14.131-v14.140 two-week chain now has a regression closeout and three-part progress report.
+Current repository: project_root
+Branch: master tracking origin/master; local commits may be ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.140 closeout docs, validator, MVP wiring, and .agent_board sync until validation and commit decision.
+Phase record: docs/v14_140_two_week_regression_closeout.md
+Validator created: scripts/validate_v14_140_two_week_regression_closeout.js
+MVP validator updated: scripts/validate_mvp.ps1
+two_week_regression_closeout_completed: true
+accepted_sample_traceability_hard_acceptance_met: true
+negative_cases_fail_as_expected: true
+review_console_static_reader_only: true
+product_capability_progress_percent: 62
+governance_capability_progress_percent: 82
+real_vcp_integration_progress_percent: 24
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+durable_archive_executed: false
+archive_manifest_written: false
+image_binary_copy_performed: false
+production_candidate_created: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+failure_samples_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+validated_now: git diff --check; v14.131-v14.140 validators; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: wait_for_next_exact_A5_or_new_local_goal
+recommended_next_auto_execution_allowed: false
+---
 Status: v14_139_durable_archive_production_candidate_memory_write_authorization_split_planning completed locally and validated.
 Reason: Durable archive, production_candidate promotion, and DailyNote/VCP memory write needed separate inactive A5 packages before regression closeout.
 Current repository: project_root
