@@ -3,6 +3,41 @@
 ## Handoff Summary
 
 ```text
+Status: v14_125_review_console_memory_delta_handoff_refresh completed locally and validated.
+Reason: Codex-session memory_delta drafts needed an explicit display-only Review Console handoff mapping while preserving DailyNote and VCP memory write blockers.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.125 Review Console memory_delta handoff field mapping, validator, MVP wiring, phase record, and .agent_board sync until validation and commit decision.
+Phase record: docs/v14_125_review_console_memory_delta_handoff_refresh.md
+Field mapping updated: review_console/static_prototype/FIELD_MAPPING.md
+Validator created: scripts/validate_v14_125_review_console_memory_delta_handoff_refresh.js
+MVP validator updated: scripts/validate_mvp.ps1
+review_console_memory_delta_handoff_refreshed: true
+codex_session_memory_delta_draft_visible_in_review_console: true
+memory_delta_write_mode_remains_draft: true
+memory_delta_approval_status_remains_pending: true
+memory_delta_should_write_to_vcp_false: true
+review_console_memory_handoff_display_only: true
+daily_note_vcp_memory_write_blocked: true
+runtime_integration_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+output_file_write_performed: false
+validated_now: node --check scripts/validate_v14_125_review_console_memory_delta_handoff_refresh.js; node scripts/validate_v14_125_review_console_memory_delta_handoff_refresh.js
+recommended_next: accepted_samples_failure_samples_metadata_cross_index_gap_review
+recommended_next_auto_execution_allowed: true
+---
 Status: v14_124_context_load_guide_and_historical_docs_compaction completed locally and validated.
 Reason: Old and stale docs were causing context pollution, so the current context packet and historical targeted-lookup index were made explicit without deleting or rewriting audit evidence.
 Current repository: project_root

@@ -1,5 +1,41 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.125 Review Console memory_delta Handoff Refresh
+
+```text
+phase_id: v14_125_review_console_memory_delta_handoff_refresh
+status: completed_validated
+phase_record_ref: docs/v14_125_review_console_memory_delta_handoff_refresh.md
+field_mapping_updated: review_console/static_prototype/FIELD_MAPPING.md
+validator_created: scripts/validate_v14_125_review_console_memory_delta_handoff_refresh.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+review_console_memory_delta_handoff_refreshed: true
+codex_session_memory_delta_draft_visible_in_review_console: true
+memory_delta_write_mode_remains_draft: true
+memory_delta_approval_status_remains_pending: true
+memory_delta_should_write_to_vcp_false: true
+review_console_memory_handoff_display_only: true
+daily_note_vcp_memory_write_blocked: true
+runtime_integration_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+output_file_write_performed: false
+validated_now: node --check scripts/validate_v14_125_review_console_memory_delta_handoff_refresh.js; node scripts/validate_v14_125_review_console_memory_delta_handoff_refresh.js
+recommended_next: accepted_samples_failure_samples_metadata_cross_index_gap_review
+recommended_next_auto_execution_allowed: true
+```
+
 # V14.124 Context Load Guide And Historical Docs Compaction
 
 ```text

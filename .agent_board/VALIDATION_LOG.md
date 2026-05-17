@@ -1,5 +1,54 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.125-REVIEW-CONSOLE-MEMORY-DELTA-HANDOFF-REFRESH
+
+Scope:
+
+Validate that Codex-session memory_delta drafts are mapped into the static Review Console handoff as display-only memory preview / pending approval records while DailyNote and VCP memory writes remain blocked.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_125_review_console_memory_delta_handoff_refresh.js
+node scripts/validate_v14_125_review_console_memory_delta_handoff_refresh.js
+```
+
+Expected:
+
+```yaml
+passed: true
+review_console_memory_delta_handoff_refreshed: true
+codex_session_memory_delta_draft_visible_in_review_console: true
+memory_delta_write_mode_remains_draft: true
+memory_delta_approval_status_remains_pending: true
+memory_delta_should_write_to_vcp_false: true
+review_console_memory_handoff_display_only: true
+daily_note_vcp_memory_write_blocked: true
+runtime_integration_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+output_file_write_performed: false
+```
+
+Result:
+
+```yaml
+status: passed
+validator: scripts/validate_v14_125_review_console_memory_delta_handoff_refresh.js
+phase_record: docs/v14_125_review_console_memory_delta_handoff_refresh.md
+```
+
 ## VALIDATION-20260517-v14.124-CONTEXT-LOAD-GUIDE-AND-HISTORICAL-DOCS-COMPACTION
 
 Scope:

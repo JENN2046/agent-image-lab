@@ -354,6 +354,24 @@ Phase 9 审批记录必须满足：
 
 `review_report_memory_delta_draft_register.example.json` 是本地草案证据，不是 memory 写入记录。它只证明草案正文和候选映射可审计，并且所有真实记忆写入仍被阻断。
 
+## v14.125 Codex Session memory_delta Draft Handoff
+
+本节用于验收当前 Codex 会话正式样片审查经验草案进入 Review Console 的静态 handoff。来源是 `tests/schema_examples/v14_111_codex_session_memory_delta_draft.example.yaml`，它只能作为 display-only memory preview 和 pending memory approval 草案展示。
+
+| Codex memory_delta draft 字段 | Review Console 字段 | 说明 |
+| --- | --- | --- |
+| `memory_delta.delta_id` | `memory_preview.delta_id` / `audit_log.memory_delta_ref` | 只显示草案 ID，不创建长期记忆 |
+| `memory_delta.case_id` | `review_session.case_id` / `memory_preview.case_id` | 关联已登记 accepted sample metadata |
+| `memory_delta.write_mode` | `memory_approval.write_mode` | 必须保持 `draft` |
+| `memory_delta.approval_status` | `memory_approval.status` | 必须保持 `pending` |
+| `memory_delta.chinese_diary_title` / `chinese_diary_content` | `memory_preview.title_cn` / `memory_preview.body_cn` | 只显示中文脱敏正文 |
+| `memory_delta.final_decision.should_write_to_vcp` | `memory_approval.should_write_to_vcp` | 未批准时必须为 `false` |
+| `memory_delta.final_decision.should_show_in_review_console` | `memory_preview.visible` | 可以在 Review Console 展示 |
+| `boundary.daily_note_write_performed` / `vcp_memory_write_performed` | `audit_log.no_write_guard` | 必须保持 `false` |
+| `boundary.accepted_samples_write_performed` / `production_candidate_write_performed` | `audit_log.production_guard` | 当前 handoff 不写 accepted_samples，不晋级 production |
+
+v14.125 handoff 只刷新静态字段映射，不实现 runtime UI，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不创建图片。Review Console 只能展示该草案并请求未来单独的 memory write authorization；不能直接写 DailyNote 或 VCP memory。
+
 ## v14.079 ReviewReport Final Local Closeout
 
 本节用于验收 ReviewReport 本地协议链 closeout。它仍然只读取项目内 route summary、admission matrix、production exclusion、memory admission 和 memory delta draft register，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。

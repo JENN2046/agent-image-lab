@@ -188,6 +188,7 @@ $requiredFiles = @(
   'scripts/validate_v14_122_local_review_record_schema_refresh.js',
   'scripts/validate_v14_123_memory_delta_draft_schema_alignment_for_codex_reviews.js',
   'scripts/validate_v14_124_context_load_guide_and_historical_docs_compaction.js',
+  'scripts/validate_v14_125_review_console_memory_delta_handoff_refresh.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -305,6 +306,7 @@ $requiredFiles = @(
   'docs/CONTEXT_LOAD_GUIDE.md',
   'docs/HISTORICAL_DOCS_COMPACTION_INDEX.md',
   'docs/v14_124_context_load_guide_and_historical_docs_compaction.md',
+  'docs/v14_125_review_console_memory_delta_handoff_refresh.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8264,6 +8266,40 @@ process.exit(child.status || 0);
     }
     if ($contextLoadCompaction.accepted_samples_write_performed -ne $false -or $contextLoadCompaction.failure_samples_write_performed -ne $false -or $contextLoadCompaction.production_candidate_created -ne $false) {
       Add-Failure "context compaction validation must not write samples or production candidates"
+    }
+  }
+
+  $reviewConsoleMemoryDeltaHandoffOutput = & node (Join-Path $Root 'scripts/validate_v14_125_review_console_memory_delta_handoff_refresh.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console memory_delta handoff refresh validation exited with failure"
+  } else {
+    $reviewConsoleMemoryDeltaHandoff = ($reviewConsoleMemoryDeltaHandoffOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleMemoryDeltaHandoff.passed -ne $true) {
+      Add-Failure "Review Console memory_delta handoff refresh validation must pass"
+    }
+    if ($reviewConsoleMemoryDeltaHandoff.review_console_memory_delta_handoff_refreshed -ne $true -or $reviewConsoleMemoryDeltaHandoff.codex_session_memory_delta_draft_visible_in_review_console -ne $true) {
+      Add-Failure "Review Console memory_delta handoff must expose the Codex-session memory_delta draft"
+    }
+    if ($reviewConsoleMemoryDeltaHandoff.memory_delta_write_mode_remains_draft -ne $true -or $reviewConsoleMemoryDeltaHandoff.memory_delta_approval_status_remains_pending -ne $true -or $reviewConsoleMemoryDeltaHandoff.memory_delta_should_write_to_vcp_false -ne $true) {
+      Add-Failure "Review Console memory_delta handoff must keep draft/pending/no-write memory controls"
+    }
+    if ($reviewConsoleMemoryDeltaHandoff.review_console_memory_handoff_display_only -ne $true -or $reviewConsoleMemoryDeltaHandoff.daily_note_vcp_memory_write_blocked -ne $true) {
+      Add-Failure "Review Console memory_delta handoff must remain display-only and block memory writes"
+    }
+    if ($reviewConsoleMemoryDeltaHandoff.provider_contact_performed -ne $false -or $reviewConsoleMemoryDeltaHandoff.plugin_call_performed -ne $false -or $reviewConsoleMemoryDeltaHandoff.api_call_performed -ne $false -or $reviewConsoleMemoryDeltaHandoff.mcp_runtime_performed -ne $false) {
+      Add-Failure "Review Console memory_delta handoff validation must not call provider/plugin/API/MCP"
+    }
+    if ($reviewConsoleMemoryDeltaHandoff.image_generation_performed -ne $false -or $reviewConsoleMemoryDeltaHandoff.output_file_write_performed -ne $false -or $reviewConsoleMemoryDeltaHandoff.file_write_performed -ne $false) {
+      Add-Failure "Review Console memory_delta handoff validation must not generate images or write output files"
+    }
+    if ($reviewConsoleMemoryDeltaHandoff.daily_note_write_performed -ne $false -or $reviewConsoleMemoryDeltaHandoff.vcp_memory_write_performed -ne $false) {
+      Add-Failure "Review Console memory_delta handoff validation must not write DailyNote or VCP memory"
+    }
+    if ($reviewConsoleMemoryDeltaHandoff.real_manifest_read_performed -ne $false -or $reviewConsoleMemoryDeltaHandoff.real_vcpchat_read_performed -ne $false -or $reviewConsoleMemoryDeltaHandoff.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "Review Console memory_delta handoff validation must not read real manifest/VCPChat/VCPToolBox"
+    }
+    if ($reviewConsoleMemoryDeltaHandoff.accepted_samples_write_performed -ne $false -or $reviewConsoleMemoryDeltaHandoff.failure_samples_write_performed -ne $false -or $reviewConsoleMemoryDeltaHandoff.production_candidate_created -ne $false) {
+      Add-Failure "Review Console memory_delta handoff validation must not write samples or production candidates"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

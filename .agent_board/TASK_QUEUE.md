@@ -10,10 +10,10 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ```text
 Current active long-term objective: 3-month Agent Image Lab visual production control layer for the VCP ecosystem.
-Status: v14_124_context_load_guide_and_historical_docs_compaction_completed_validated.
+Status: v14_125_review_console_memory_delta_handoff_refresh_completed_validated.
 Purpose: move Agent Image Lab from local verifiable visual production MVP toward a controlled VCPChat / VCPToolBox visual production system while staying inside A4.8 unless separately authorized.
-phase_id: v14_124_context_load_guide_and_historical_docs_compaction.
-phase_record_ref: docs/v14_124_context_load_guide_and_historical_docs_compaction.md.
+phase_id: v14_125_review_console_memory_delta_handoff_refresh.
+phase_record_ref: docs/v14_125_review_console_memory_delta_handoff_refresh.md.
 default_generation_route_for_next_three_months: codex_session_image.
 NativeDoubaoImage_default_route: false.
 provider_API_default_route: false.
@@ -38,7 +38,14 @@ env_value_read_allowed_without_separate_authorization: false.
 provider_API_plugin_MCP_allowed_without_separate_authorization: false.
 real_manifest_VCPChat_VCPToolBox_read_allowed_without_separate_authorization: false.
 push_tag_release_deploy_allowed_without_separate_authorization: false.
-current_focus: context_load_guide_and_historical_docs_compaction.
+current_focus: review_console_memory_delta_handoff_refresh.
+review_console_memory_delta_handoff_refreshed: true.
+codex_session_memory_delta_draft_visible_in_review_console: true.
+memory_delta_write_mode_remains_draft: true.
+memory_delta_approval_status_remains_pending: true.
+memory_delta_should_write_to_vcp_false: true.
+review_console_memory_handoff_display_only: true.
+daily_note_vcp_memory_write_blocked: true.
 context_load_guide_created: true.
 historical_docs_compaction_index_created: true.
 default_context_packet_defined: true.
@@ -99,8 +106,8 @@ accepted_samples_write_performed: false.
 failure_samples_write_performed: false.
 production_candidate_created: false.
 output_file_write_performed: false.
-validated_now: node --check scripts/validate_v14_124_context_load_guide_and_historical_docs_compaction.js; node scripts/validate_v14_124_context_load_guide_and_historical_docs_compaction.js.
-recommended_next: review_console_memory_delta_handoff_refresh.
+validated_now: node --check scripts/validate_v14_125_review_console_memory_delta_handoff_refresh.js; node scripts/validate_v14_125_review_console_memory_delta_handoff_refresh.js.
+recommended_next: accepted_samples_failure_samples_metadata_cross_index_gap_review.
 recommended_next_auto_execution_allowed: true.
 ---
 Current active local objective: v14_107_womens_resort_relaxed_knit_accepted_sample_closeout.
