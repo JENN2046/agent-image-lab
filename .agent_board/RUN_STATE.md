@@ -1,5 +1,43 @@
 # RUN_STATE.md — Agent Image Lab
 
+## Active Long-Term Goal Override
+
+```text
+objective: 3-month Agent Image Lab visual production control layer for the VCP ecosystem
+status: v14_109_accepted_samples_metadata_policy_validator_alignment_completed_validated
+mode: Persistent 4-Agent Council local loop under A4.8
+phase_id: v14_109_accepted_samples_metadata_policy_validator_alignment
+phase_record_ref: docs/v14_109_accepted_samples_metadata_policy_validator_alignment.md
+default_generation_route_for_next_three_months: codex_session_image
+native_doubao_default_route: false
+provider_api_default_route: false
+plugin_default_route: false
+mcp_default_route: false
+codex_session_image_generation_by_user_goal: allowed_in_session
+prompt_iteration_auto_allowed: true
+internal_review_auto_allowed: true
+local_import_record_auto_allowed: true
+review_record_auto_allowed: true
+agent_board_sync_auto_allowed: true
+local_validation_auto_allowed: true
+accepted_samples_metadata_auto_allowed_after_local_review: true
+accepted_samples_metadata_exact_files_only: accepted_samples/accepted_sample_registry.yaml; accepted_samples/categories/*.yaml
+accepted_samples_image_copy_allowed: false
+runs_source_image_modification_allowed: false
+production_candidate_upgrade_allowed_without_separate_authorization: false
+failure_samples_write_allowed_without_separate_authorization: false
+DailyNote_write_allowed_without_separate_authorization: false
+VCP_memory_write_allowed_without_separate_authorization: false
+env_or_env_local_value_read_allowed_without_separate_authorization: false
+provider_api_plugin_mcp_allowed_without_separate_authorization: false
+real_manifest_VCPChat_VCPToolBox_read_allowed_without_separate_authorization: false
+push_tag_release_deploy_allowed_without_separate_authorization: false
+current_focus: codex_session_import_to_review_record_completion_validator_alignment
+validated_now: node --check scripts/validate_v7_32_accepted_sample_registry_update.js; node scripts/validate_v7_32_accepted_sample_registry_update.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+recommended_next: codex_session_import_to_review_record_completion_validator_alignment
+recommended_next_auto_execution_allowed: true
+```
+
 ## Active Local Objective Override
 
 ```text

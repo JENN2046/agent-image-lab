@@ -1,5 +1,81 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.109-ACCEPTED-SAMPLES-METADATA-POLICY-VALIDATOR-ALIGNMENT
+
+Task:
+
+```text
+Upgrade the accepted_samples validator from a v7.32 phase-hardcoded check into a metadata-only registry consistency validator aligned with the active three-month goal.
+```
+
+Commands run:
+
+```text
+node --check scripts/validate_v7_32_accepted_sample_registry_update.js
+node scripts/validate_v7_32_accepted_sample_registry_update.js
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+```
+
+Result:
+
+```text
+validator: scripts/validate_v7_32_accepted_sample_registry_update.js
+validator_version: v2
+category_index_updated: accepted_samples/categories/fashion_lifestyle_still_life.yaml
+category_drift_fixed: fashion_lifestyle_still_life sample_count 1 -> 4
+codex_session_sample_verified: accepted_womens_resort_relaxed_knit_codex_v2_001
+accepted_samples_metadata_validator: passed
+validate_mvp: passed
+validation_result: completed_validated
+recommended_next: codex_session_import_to_review_record_completion_validator_alignment
+```
+
+Boundary:
+
+```text
+No provider contact, plugin call, API call, MCP runtime, project-script image generation, .env or .env.local value read, DailyNote write, VCP memory write, failure_samples write, production_candidate write, real manifest read, real VCPChat read, real VCPToolBox read, image binary copy, runs source image modification, push, tag, release, deploy, or dependency change was performed.
+```
+
+## VALIDATION-20260517-v14.108-THREE-MONTH-VISUAL-CONTROL-LAYER-GOAL-ALIGNMENT
+
+Task:
+
+```text
+Register the active three-month goal locally, preserve Codex session image generation as the default route, audit prompt-to-artifact coverage, and sync .agent_board away from the old v14.107 active objective.
+```
+
+Commands run:
+
+```text
+git diff --check
+node scripts/validate_pvos_evidence_collector_blocker_pipeline.js
+node scripts/validate_codex_session_image_import.js
+node scripts/validate_agent_board_state.js
+powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+Result:
+
+```text
+phase_record: docs/v14_108_three_month_visual_control_layer_goal_alignment_gate.md
+default_generation_route_for_next_three_months: codex_session_image
+pvos_pipeline_validator: passed
+codex_session_image_import_validator: passed
+agent_board_state: passed
+validate_mvp: passed
+validate_agent_image_lab_local: passed_with_existing_manual_review_warnings
+prompt_to_artifact_audit: completed
+validation_result: completed_validated
+recommended_next: accepted_samples_metadata_policy_validator_alignment
+```
+
+Boundary:
+
+```text
+No provider contact, plugin call, API call, MCP runtime, project-script image generation, .env or .env.local value read, DailyNote write, VCP memory write, failure_samples write, production_candidate write, real manifest read, real VCPChat read, real VCPToolBox read, image binary copy, runs source image modification, push, tag, release, deploy, or dependency change was performed.
+```
+
 ## VALIDATION-20260517-v14.102-CODEX-SESSION-LANTERN-V1-PROMPT-PACKAGE
 
 Task:

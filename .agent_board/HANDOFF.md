@@ -3,6 +3,56 @@
 ## Handoff Summary
 
 ```text
+Status: v14_109_accepted_samples_metadata_policy_validator_alignment completed locally and validated.
+Reason: User's active three-month goal allows automatic accepted_samples metadata registration after local review. The existing validator was still phase-hardcoded and missed category-index drift, so this phase upgrades it into a metadata-only registry consistency validator and syncs the stale fashion_lifestyle_still_life category index.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.108/v14.109 docs, .agent_board sync, accepted_samples category metadata, and validator changes until commit decision.
+Phase record: docs/v14_109_accepted_samples_metadata_policy_validator_alignment.md
+Validator updated: scripts/validate_v7_32_accepted_sample_registry_update.js
+MVP validator updated: scripts/validate_mvp.ps1
+Category index updated: accepted_samples/categories/fashion_lifestyle_still_life.yaml
+accepted_samples_metadata_validator_version: v2
+codex_session_sample_verified: accepted_womens_resort_relaxed_knit_codex_v2_001
+tracked_accepted_samples_are_metadata_only: true
+image_binary_copy_allowed: false
+runs_source_image_modification_allowed: false
+production_candidate_write_allowed_without_separate_authorization: false
+DailyNote_write_allowed_without_separate_authorization: false
+VCP_memory_write_allowed_without_separate_authorization: false
+provider_API_plugin_MCP_allowed_without_separate_authorization: false
+validated_now: node --check scripts/validate_v7_32_accepted_sample_registry_update.js; node scripts/validate_v7_32_accepted_sample_registry_update.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+recommended_next: codex_session_import_to_review_record_completion_validator_alignment
+recommended_next_auto_execution_allowed: true
+---
+Status: v14_108_three_month_visual_control_layer_goal_alignment_gate completed locally and validated.
+Reason: User set a new active three-month goal: Agent Image Lab should become the VCP ecosystem visual production control layer, with Codex session image generation as the default route and A4.8 local work continuing automatically inside explicit hard boundaries.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.108 goal-alignment doc and .agent_board sync until commit decision.
+Phase record: docs/v14_108_three_month_visual_control_layer_goal_alignment_gate.md
+Default generation route for next three months: codex_session_image
+NativeDoubaoImage_default_route: false
+provider_API_default_route: false
+plugin_default_route: false
+MCP_default_route: false
+accepted_samples_metadata_auto_allowed_after_local_review: true
+accepted_samples_metadata_exact_files_only: accepted_samples/accepted_sample_registry.yaml; accepted_samples/categories/*.yaml
+image_binary_copy_allowed: false
+runs_source_image_modification_allowed: false
+production_candidate_upgrade_allowed_without_separate_authorization: false
+failure_samples_write_allowed_without_separate_authorization: false
+DailyNote_write_allowed_without_separate_authorization: false
+VCP_memory_write_allowed_without_separate_authorization: false
+env_value_read_allowed_without_separate_authorization: false
+provider_API_plugin_MCP_allowed_without_separate_authorization: false
+real_manifest_VCPChat_VCPToolBox_read_allowed_without_separate_authorization: false
+push_tag_release_deploy_allowed_without_separate_authorization: false
+prompt_to_artifact_audit_created: true
+validated_now: git diff --check; node scripts/validate_pvos_evidence_collector_blocker_pipeline.js; node scripts/validate_codex_session_image_import.js; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: accepted_samples_metadata_policy_validator_alignment
+recommended_next_auto_execution_allowed: true
+---
 Status: v14_107_womens_resort_relaxed_knit_accepted_sample_closeout completed locally and validated.
 Reason: User authorized accepted_samples registry write and then asked to continue the plan. This phase syncs state and closes out the formal accepted sample registry write.
 Current repository: project_root

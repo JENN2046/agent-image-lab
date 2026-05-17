@@ -1,5 +1,62 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.109 Accepted Samples Metadata Policy Validator Alignment
+
+```text
+phase_id: v14_109_accepted_samples_metadata_policy_validator_alignment
+status: completed_validated
+phase_record_ref: docs/v14_109_accepted_samples_metadata_policy_validator_alignment.md
+validator_updated: scripts/validate_v7_32_accepted_sample_registry_update.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+category_index_updated: accepted_samples/categories/fashion_lifestyle_still_life.yaml
+accepted_samples_metadata_validator_version: v2
+accepted_samples_metadata_write_allowed_by_current_goal: true
+accepted_samples_metadata_exact_files_only: accepted_samples/accepted_sample_registry.yaml; accepted_samples/categories/*.yaml
+category_drift_fixed: fashion_lifestyle_still_life sample_count 1 -> 4
+codex_session_sample_verified: accepted_womens_resort_relaxed_knit_codex_v2_001
+tracked_accepted_samples_are_metadata_only: true
+image_binary_copy_allowed: false
+runs_source_image_modification_allowed: false
+production_candidate_write_allowed_without_separate_authorization: false
+DailyNote_write_allowed_without_separate_authorization: false
+VCP_memory_write_allowed_without_separate_authorization: false
+validated_now: node --check scripts/validate_v7_32_accepted_sample_registry_update.js; node scripts/validate_v7_32_accepted_sample_registry_update.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+recommended_next: codex_session_import_to_review_record_completion_validator_alignment
+recommended_next_auto_execution_allowed: true
+```
+
+# V14.108 Three-Month Visual Control Layer Goal Alignment
+
+```text
+phase_id: v14_108_three_month_visual_control_layer_goal_alignment_gate
+status: completed_goal_alignment_validated
+phase_record_ref: docs/v14_108_three_month_visual_control_layer_goal_alignment_gate.md
+long_term_goal: Agent Image Lab becomes the VCP ecosystem visual production control layer within three months
+default_generation_route_for_next_three_months: codex_session_image
+NativeDoubaoImage_default_route: false
+provider_API_default_route: false
+plugin_default_route: false
+MCP_default_route: false
+codex_session_generation_auto_allowed_by_user_goal: true
+accepted_samples_metadata_auto_allowed_after_local_review: true
+accepted_samples_metadata_exact_files_only: accepted_samples/accepted_sample_registry.yaml; accepted_samples/categories/*.yaml
+accepted_samples_image_copy_allowed: false
+runs_source_image_modification_allowed: false
+production_candidate_upgrade_allowed_without_separate_authorization: false
+failure_samples_write_allowed_without_separate_authorization: false
+DailyNote_write_allowed_without_separate_authorization: false
+VCP_memory_write_allowed_without_separate_authorization: false
+env_or_env_local_value_read_allowed_without_separate_authorization: false
+provider_API_plugin_MCP_allowed_without_separate_authorization: false
+real_manifest_VCPChat_VCPToolBox_read_allowed_without_separate_authorization: false
+push_tag_release_deploy_allowed_without_separate_authorization: false
+prompt_to_artifact_audit_created: true
+current_focus: accepted_samples metadata-only automation validator alignment
+validated_now: git diff --check; node scripts/validate_pvos_evidence_collector_blocker_pipeline.js; node scripts/validate_codex_session_image_import.js; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: accepted_samples_metadata_policy_validator_alignment
+recommended_next_auto_execution_allowed: true
+```
+
 # V14.107 Women's Resort Relaxed Knit Accepted Sample Closeout
 
 ```text

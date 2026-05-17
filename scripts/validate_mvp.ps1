@@ -7746,6 +7746,37 @@ process.exit(child.status || 0);
       Add-Failure "v0.7 Photo Studio OS dry-run rehearsal must not allow real execution"
     }
   }
+
+  $acceptedSampleRegistryOutput = & node (Join-Path $Root 'scripts/validate_v7_32_accepted_sample_registry_update.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "accepted sample registry metadata validation exited with failure"
+  } else {
+    $acceptedSampleRegistry = ($acceptedSampleRegistryOutput -join "`n") | ConvertFrom-Json
+    if ($acceptedSampleRegistry.passed -ne $true) {
+      Add-Failure "accepted sample registry metadata validation must pass"
+    }
+    if ($acceptedSampleRegistry.metadata_only -ne $true) {
+      Add-Failure "accepted sample registry validation must be metadata-only"
+    }
+    if ($acceptedSampleRegistry.image_files_committed_to_git -ne $false) {
+      Add-Failure "accepted sample registry validation must verify no image files are committed"
+    }
+    if ($acceptedSampleRegistry.runs_source_image_modification_allowed -ne $false) {
+      Add-Failure "accepted sample registry validation must block runs source image modification"
+    }
+    if ($acceptedSampleRegistry.production_candidate_write_allowed -ne $false) {
+      Add-Failure "accepted sample registry validation must block production candidate writes"
+    }
+    if ($acceptedSampleRegistry.daily_note_write_allowed -ne $false) {
+      Add-Failure "accepted sample registry validation must block DailyNote writes"
+    }
+    if ($acceptedSampleRegistry.vcp_memory_write_allowed -ne $false) {
+      Add-Failure "accepted sample registry validation must block VCP memory writes"
+    }
+    if ($acceptedSampleRegistry.file_write_performed -ne $false) {
+      Add-Failure "accepted sample registry validation must not write files"
+    }
+  }
   [Console]::OutputEncoding = $prevOutputEncoding
 }
 

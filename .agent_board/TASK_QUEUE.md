@@ -9,6 +9,40 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 ## Current Mission
 
 ```text
+Current active long-term objective: 3-month Agent Image Lab visual production control layer for the VCP ecosystem.
+Status: v14_109_accepted_samples_metadata_policy_validator_alignment_completed_validated.
+Purpose: move Agent Image Lab from local verifiable visual production MVP toward a controlled VCPChat / VCPToolBox visual production system while staying inside A4.8 unless separately authorized.
+phase_id: v14_109_accepted_samples_metadata_policy_validator_alignment.
+phase_record_ref: docs/v14_109_accepted_samples_metadata_policy_validator_alignment.md.
+default_generation_route_for_next_three_months: codex_session_image.
+NativeDoubaoImage_default_route: false.
+provider_API_default_route: false.
+plugin_default_route: false.
+MCP_default_route: false.
+codex_session_generation_auto_allowed_by_user_goal: true.
+prompt_iteration_auto_allowed: true.
+internal_review_auto_allowed: true.
+local_import_record_auto_allowed: true.
+review_record_auto_allowed: true.
+agent_board_sync_auto_allowed: true.
+local_validation_auto_allowed: true.
+accepted_samples_metadata_auto_allowed_after_local_review: true.
+accepted_samples_metadata_exact_files_only: accepted_samples/accepted_sample_registry.yaml; accepted_samples/categories/*.yaml.
+image_binary_copy_allowed: false.
+runs_source_image_modification_allowed: false.
+production_candidate_upgrade_allowed_without_separate_authorization: false.
+failure_samples_write_allowed_without_separate_authorization: false.
+DailyNote_write_allowed_without_separate_authorization: false.
+VCP_memory_write_allowed_without_separate_authorization: false.
+env_value_read_allowed_without_separate_authorization: false.
+provider_API_plugin_MCP_allowed_without_separate_authorization: false.
+real_manifest_VCPChat_VCPToolBox_read_allowed_without_separate_authorization: false.
+push_tag_release_deploy_allowed_without_separate_authorization: false.
+current_focus: codex_session_import_to_review_record_completion_validator_alignment.
+validated_now: node --check scripts/validate_v7_32_accepted_sample_registry_update.js; node scripts/validate_v7_32_accepted_sample_registry_update.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+recommended_next: codex_session_import_to_review_record_completion_validator_alignment.
+recommended_next_auto_execution_allowed: true.
+---
 Current active local objective: v14_107_womens_resort_relaxed_knit_accepted_sample_closeout.
 Status: completed_accepted_sample_closeout_validated.
 Purpose: sync state and close out the authorized accepted_samples registry write for the women's resort relaxed knit final candidate.
