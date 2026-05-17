@@ -1,0 +1,44 @@
+# v14.149 authorization package compiler input example
+
+authorization_package_compiler_input:
+  version: v1
+  phase: v14_149_authorization_package_compiler
+  execution_mode: local_stdout_only
+  authorization_granted_by_compiler: false
+
+  source_evidence:
+    accepted_sample_id: accepted_womens_resort_relaxed_knit_codex_v2_001
+    durable_archive_dry_run_ref: tests/schema_examples/v14_146_durable_archive_dry_run_manifest.example.yaml
+    production_candidate_preflight_ref: tests/schema_examples/v14_147_production_candidate_eligibility_preflight.example.yaml
+    memory_delta_draft_package_ref: tests/schema_examples/v14_148_memory_delta_draft_package.example.yaml
+
+  output_contract:
+    output_file_write_allowed: false
+    stdout_json_only: true
+    compiled_package_count: 4
+    package_kinds:
+      - durable_archive
+      - production_candidate
+      - memory_write
+      - manifest_read
+
+  manifest_read_known_gap:
+    exact_real_manifest_path_provided: false
+    package_status: prepared_incomplete_not_granted
+    reason: "Jenn must provide the exact real manifest path before any A5 manifest read package can become executable."
+
+  global_non_authorization:
+    provider_contact_performed: false
+    plugin_call_performed: false
+    api_call_performed: false
+    mcp_runtime_performed: false
+    image_generation_performed: false
+    real_manifest_read_performed: false
+    real_vcpchat_read_performed: false
+    real_vcptoolbox_read_performed: false
+    archive_manifest_written: false
+    image_binary_copy_performed: false
+    production_candidate_write_performed: false
+    DailyNote_write_performed: false
+    VCP_memory_write_performed: false
+    push_tag_release_deploy_performed: false

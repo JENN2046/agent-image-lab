@@ -3,6 +3,49 @@
 ## Handoff Summary
 
 ```text
+Status: v14_149_authorization_package_compiler completed locally and validated.
+Reason: The archive, production_candidate, memory, and manifest_read paths need inactive A5 package drafts before any real execution authorization.
+Current repository: project_root
+Branch: master tracking origin/master; local commits may be ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.149 compiler schema, input fixture, compiler, validator, phase record, MVP wiring, and .agent_board sync until commit decision.
+Phase record: docs/v14_149_authorization_package_compiler.md
+Compiler schema: schemas/authorization_package_compiler.schema.yaml
+Compiler input: tests/schema_examples/v14_149_authorization_package_compiler_input.example.yaml
+Compiler created: scripts/compile_v14_149_authorization_packages.js
+Validator created: scripts/validate_v14_149_authorization_package_compiler.js
+MVP validator updated: scripts/validate_mvp.ps1
+authorization_package_compiler_created: true
+compiled_package_count: 4
+durable_archive_package_status: prepared_not_granted
+production_candidate_package_status: prepared_not_granted
+memory_write_package_status: prepared_not_granted
+manifest_read_package_status: prepared_incomplete_not_granted
+manifest_read_missing_exact_real_manifest_path: true
+output_file_write_performed: false
+authorization_granted_by_this_record: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+archive_manifest_written: false
+image_binary_copy_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/compile_v14_149_authorization_packages.js; node --check scripts/validate_v14_149_authorization_package_compiler.js; node scripts/validate_v14_149_authorization_package_compiler.js.
+Next safe action: run broader validation, exact-stage v14.149 files, create a guarded local commit, then continue to v14.150 if still inside A4.8.
+```
+
+## Previous Handoff Summary
+
+```text
 Status: v14_148_memory_delta_draft_package completed locally and validated.
 Reason: The memory path needs a Chinese draft package before any separate A5 DailyNote or VCP memory write authorization.
 Current repository: project_root

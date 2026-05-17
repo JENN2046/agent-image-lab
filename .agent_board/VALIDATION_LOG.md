@@ -1,5 +1,59 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.149-AUTHORIZATION-PACKAGE-COMPILER
+
+Scope:
+
+Validate the local stdout-only authorization package compiler and its inactive
+A5 package split for archive, production_candidate, memory, and manifest_read.
+
+Commands:
+
+```text
+node --check scripts/compile_v14_149_authorization_packages.js
+node --check scripts/validate_v14_149_authorization_package_compiler.js
+node scripts/validate_v14_149_authorization_package_compiler.js
+```
+
+Expected:
+
+```yaml
+passed: true
+authorization_package_compiler_created: true
+compiled_package_count: 4
+durable_archive_package_status: prepared_not_granted
+production_candidate_package_status: prepared_not_granted
+memory_write_package_status: prepared_not_granted
+manifest_read_package_status: prepared_incomplete_not_granted
+manifest_read_missing_exact_real_manifest_path: true
+output_file_write_performed: false
+v14_146_durable_archive_dry_run_still_passes: true
+v14_147_production_candidate_preflight_still_passes: true
+v14_148_memory_delta_draft_package_still_passes: true
+negative_case_granted_package_blocks_compiler: true
+negative_case_merged_archive_and_production_candidate_blocks_compiler: true
+negative_case_missing_validation_command_blocks_package: true
+negative_case_manifest_read_without_exact_path_stays_incomplete: true
+negative_case_external_execution_operation_blocks_compiler: true
+authorization_granted_by_this_record: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+archive_manifest_written: false
+image_binary_copy_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+```
+
 ## VALIDATION-20260517-v14.148-MEMORY-DELTA-DRAFT-PACKAGE
 
 Scope:

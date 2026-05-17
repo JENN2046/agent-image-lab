@@ -213,6 +213,8 @@ $requiredFiles = @(
   'scripts/validate_v14_146_durable_archive_dry_run_manifest.js',
   'scripts/validate_v14_147_production_candidate_eligibility_preflight.js',
   'scripts/validate_v14_148_memory_delta_draft_package.js',
+  'scripts/compile_v14_149_authorization_packages.js',
+  'scripts/validate_v14_149_authorization_package_compiler.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -365,6 +367,9 @@ $requiredFiles = @(
   'docs/v14_148_memory_delta_draft_package.md',
   'schemas/memory_delta_draft_package.schema.yaml',
   'tests/schema_examples/v14_148_memory_delta_draft_package.example.yaml',
+  'docs/v14_149_authorization_package_compiler.md',
+  'schemas/authorization_package_compiler.schema.yaml',
+  'tests/schema_examples/v14_149_authorization_package_compiler_input.example.yaml',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -9207,6 +9212,46 @@ process.exit(child.status || 0);
     }
     if ($memoryDeltaDraftPackage.real_manifest_read_performed -ne $false -or $memoryDeltaDraftPackage.real_vcpchat_read_performed -ne $false -or $memoryDeltaDraftPackage.real_vcptoolbox_read_performed -ne $false) {
       Add-Failure "memory delta draft package must not read real manifest/VCPChat/VCPToolBox"
+    }
+  }
+
+  $authorizationPackageCompilerOutput = & node (Join-Path $Root 'scripts/validate_v14_149_authorization_package_compiler.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "authorization package compiler validation exited with failure"
+  } else {
+    $authorizationPackageCompiler = ($authorizationPackageCompilerOutput -join "`n") | ConvertFrom-Json
+    if ($authorizationPackageCompiler.passed -ne $true) {
+      Add-Failure "authorization package compiler validation must pass"
+    }
+    if ($authorizationPackageCompiler.authorization_package_compiler_created -ne $true -or $authorizationPackageCompiler.compiled_package_count -ne 4) {
+      Add-Failure "v14.149 must compile four inactive A5 authorization package drafts"
+    }
+    if ($authorizationPackageCompiler.durable_archive_package_status -ne 'prepared_not_granted' -or $authorizationPackageCompiler.production_candidate_package_status -ne 'prepared_not_granted' -or $authorizationPackageCompiler.memory_write_package_status -ne 'prepared_not_granted') {
+      Add-Failure "v14.149 archive, production, and memory packages must be prepared_not_granted"
+    }
+    if ($authorizationPackageCompiler.manifest_read_package_status -ne 'prepared_incomplete_not_granted' -or $authorizationPackageCompiler.manifest_read_missing_exact_real_manifest_path -ne $true) {
+      Add-Failure "v14.149 manifest read package must stay incomplete until Jenn provides an exact real manifest path"
+    }
+    if ($authorizationPackageCompiler.output_file_write_performed -ne $false -or $authorizationPackageCompiler.authorization_granted_by_compiler -ne $false) {
+      Add-Failure "v14.149 compiler must be stdout-only and must not grant authorization"
+    }
+    if ($authorizationPackageCompiler.v14_146_durable_archive_dry_run_still_passes -ne $true -or $authorizationPackageCompiler.v14_147_production_candidate_preflight_still_passes -ne $true -or $authorizationPackageCompiler.v14_148_memory_delta_draft_package_still_passes -ne $true) {
+      Add-Failure "v14.149 must preserve v14.146, v14.147, and v14.148 validation"
+    }
+    if ($authorizationPackageCompiler.negative_case_granted_package_blocks_compiler -ne $true -or $authorizationPackageCompiler.negative_case_merged_archive_and_production_candidate_blocks_compiler -ne $true -or $authorizationPackageCompiler.negative_case_missing_validation_command_blocks_package -ne $true -or $authorizationPackageCompiler.negative_case_manifest_read_without_exact_path_stays_incomplete -ne $true -or $authorizationPackageCompiler.negative_case_external_execution_operation_blocks_compiler -ne $true) {
+      Add-Failure "v14.149 must fail authorization package compiler negative cases"
+    }
+    if ($authorizationPackageCompiler.vcp_runtime_integration_proven -ne $false -or $authorizationPackageCompiler.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "authorization package compiler must not claim VCP runtime integration"
+    }
+    if ($authorizationPackageCompiler.provider_contact_performed -ne $false -or $authorizationPackageCompiler.plugin_call_performed -ne $false -or $authorizationPackageCompiler.api_call_performed -ne $false -or $authorizationPackageCompiler.mcp_runtime_performed -ne $false) {
+      Add-Failure "authorization package compiler must not call provider/plugin/API/MCP"
+    }
+    if ($authorizationPackageCompiler.image_generation_performed -ne $false -or $authorizationPackageCompiler.real_manifest_read_performed -ne $false -or $authorizationPackageCompiler.real_vcpchat_read_performed -ne $false -or $authorizationPackageCompiler.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "authorization package compiler must not generate images or read real manifest/VCP systems"
+    }
+    if ($authorizationPackageCompiler.archive_manifest_written -ne $false -or $authorizationPackageCompiler.image_binary_copy_performed -ne $false -or $authorizationPackageCompiler.production_candidate_write_performed -ne $false -or $authorizationPackageCompiler.daily_note_write_performed -ne $false -or $authorizationPackageCompiler.vcp_memory_write_performed -ne $false) {
+      Add-Failure "authorization package compiler must not write archive, production candidate, DailyNote, or VCP memory"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

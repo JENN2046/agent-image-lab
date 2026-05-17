@@ -4,6 +4,49 @@
 
 ```text
 objective: extend v14.131-v14.140 single-sample recoverability into multi-category local artifact lifecycle product capability
+status: v14_149_authorization_package_compiler_completed_validated
+mode: Persistent 4-Agent Council local loop under A4.8 / A4 — Sustained Local Autopilot
+phase_id: v14_149_authorization_package_compiler
+phase_record_ref: docs/v14_149_authorization_package_compiler.md
+schema_ref: schemas/authorization_package_compiler.schema.yaml
+input_fixture_ref: tests/schema_examples/v14_149_authorization_package_compiler_input.example.yaml
+compiler_created: scripts/compile_v14_149_authorization_packages.js
+validator_created: scripts/validate_v14_149_authorization_package_compiler.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+authorization_package_compiler_created: true
+compiled_package_count: 4
+durable_archive_package_status: prepared_not_granted
+production_candidate_package_status: prepared_not_granted
+memory_write_package_status: prepared_not_granted
+manifest_read_package_status: prepared_incomplete_not_granted
+manifest_read_missing_exact_real_manifest_path: true
+output_file_write_performed: false
+authorization_granted_by_this_record: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+archive_manifest_written: false
+image_binary_copy_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+validated_now: node --check scripts/compile_v14_149_authorization_packages.js; node --check scripts/validate_v14_149_authorization_package_compiler.js; node scripts/validate_v14_149_authorization_package_compiler.js
+recommended_next: v14_150_local_regression_suite_consolidation
+recommended_next_auto_execution_allowed: true_after_v14_149_local_commit
+```
+
+## Previous Two-Month Artifact Lifecycle Goal
+
+```text
+objective: extend v14.131-v14.140 single-sample recoverability into multi-category local artifact lifecycle product capability
 status: v14_148_memory_delta_draft_package_completed_validated
 mode: Persistent 4-Agent Council local loop under A4.8 / A4 — Sustained Local Autopilot
 phase_id: v14_148_memory_delta_draft_package

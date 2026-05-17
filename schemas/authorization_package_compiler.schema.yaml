@@ -1,0 +1,59 @@
+# authorization_package_compiler.schema.yaml
+# Local compiler contract for inactive A5 authorization package drafts.
+
+authorization_package_compiler:
+  version: v1
+  compiler_type: a5_authorization_package_compiler
+  execution_mode: local_stdout_only
+  authorization_granted_by_compiler: false
+  output_file_write_allowed: false
+
+source_evidence:
+  durable_archive_dry_run_ref: tests/schema_examples/v14_146_durable_archive_dry_run_manifest.example.yaml
+  production_candidate_preflight_ref: tests/schema_examples/v14_147_production_candidate_eligibility_preflight.example.yaml
+  memory_delta_draft_package_ref: tests/schema_examples/v14_148_memory_delta_draft_package.example.yaml
+
+compiled_packages:
+  required_count: 4
+  required_kinds:
+    - durable_archive
+    - production_candidate
+    - memory_write
+    - manifest_read
+
+package_contract:
+  authorization_id: string
+  package_status: prepared_not_granted | prepared_incomplete_not_granted
+  target_systems: list
+  exact_allowed_paths: list
+  allowed_operations: list
+  forbidden_operations: list
+  validation_required: list
+  execution_authorized_by_this_package: false
+  execution_performed: false
+
+split_guards:
+  durable_archive_is_not_production_candidate: true
+  production_candidate_is_not_memory_write: true
+  memory_write_is_not_manifest_read: true
+  manifest_read_is_not_runtime_integration: true
+
+non_authorization:
+  provider_api_plugin_mcp_call_performed: false
+  real_manifest_read_performed: false
+  real_vcpchat_read_performed: false
+  real_vcptoolbox_read_performed: false
+  image_generation_performed: false
+  image_binary_copy_performed: false
+  archive_manifest_written: false
+  production_candidate_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  push_tag_release_deploy_performed: false
+
+negative_case_requirements:
+  granted_package_blocks_compiler: true
+  merged_archive_and_production_candidate_blocks_compiler: true
+  missing_validation_command_blocks_package: true
+  manifest_read_without_exact_path_stays_incomplete: true
+  external_execution_operation_blocks_compiler: true
