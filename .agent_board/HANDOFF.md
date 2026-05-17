@@ -3,6 +3,45 @@
 ## Handoff Summary
 
 ```text
+Status: v14_151_dry_run_vcp_adapter_contract_v1 completed locally and validated.
+Reason: The project needs an explicit dry-run VCP handoff contract before Review Console handoff and manifest read authorization stages.
+Current repository: project_root
+Branch: master tracking origin/master; local commits may be ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.151 dry-run VCP adapter contract, schema, fixture, validator, phase record, MVP wiring, and .agent_board sync until commit decision.
+Phase record: docs/v14_151_dry_run_vcp_adapter_contract_v1.md
+Contract: integrations/vcp/dry_run_vcp_adapter_contract_v1.yaml
+Schema: schemas/dry_run_vcp_adapter_contract_v1.schema.yaml
+Fixture: tests/schema_examples/v14_151_dry_run_vcp_adapter_contract_v1.example.yaml
+Validator created: scripts/validate_v14_151_dry_run_vcp_adapter_contract_v1.js
+MVP validator updated: scripts/validate_mvp.ps1
+dry_run_vcp_adapter_contract_v1_created: true
+vcpchat_static_handoff_defined: true
+vcptoolbox_static_handoff_defined: true
+manifest_authorization_handoff_defined: true
+runtime_integration_allowed: false
+authorization_granted_by_this_record: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+ipc_preload_renderer_integration_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_151_dry_run_vcp_adapter_contract_v1.js; node scripts/validate_v14_151_dry_run_vcp_adapter_contract_v1.js.
+Next safe action: run broader validation, exact-stage v14.151 files, create a guarded local commit, then continue to v14.152 if still inside A4.8.
+```
+
+## Previous Handoff Summary
+
+```text
 Status: v14_150_local_regression_suite_consolidation completed locally and validated.
 Reason: The artifact lifecycle validator chain needed a single local regression runner before dry-run VCP adapter contract work.
 Current repository: project_root

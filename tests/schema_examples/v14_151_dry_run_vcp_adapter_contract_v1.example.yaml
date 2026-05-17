@@ -1,0 +1,55 @@
+# v14.151 dry-run VCP adapter contract v1 example
+
+dry_run_vcp_adapter_contract_v1:
+  version: v1
+  phase: v14_151_dry_run_vcp_adapter_contract_v1
+  contract_ref: integrations/vcp/dry_run_vcp_adapter_contract_v1.yaml
+  schema_ref: schemas/dry_run_vcp_adapter_contract_v1.schema.yaml
+  contract_type: dry_run_vcp_adapter_contract
+  execution_mode: local_contract_only
+  authorization_granted_by_contract: false
+  runtime_integration_allowed: false
+
+  handoff_payload:
+    accepted_sample_id: accepted_womens_resort_relaxed_knit_codex_v2_001
+    review_console_static_import_record_ref: runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/resort_relaxed_knit_final_import_record.json
+    recoverability_suite_ref: scripts/run_v14_local_regression_suite.js
+    authorization_package_compiler_ref: scripts/compile_v14_149_authorization_packages.js
+    review_console_static_reader_only: true
+
+  channels:
+    vcpchat_handoff:
+      channel_mode: static_handoff_draft
+      source_read_allowed: false
+      source_read_performed: false
+      ipc_preload_renderer_integration_allowed: false
+      runtime_window_allowed: false
+    vcptoolbox_handoff:
+      channel_mode: static_tool_request_draft
+      source_read_allowed: false
+      source_read_performed: false
+      plugin_call_allowed: false
+      plugin_call_performed: false
+    manifest_handoff:
+      channel_mode: authorization_package_draft_only
+      exact_real_manifest_path_provided: false
+      manifest_read_allowed: false
+      manifest_read_performed: false
+      package_status: prepared_incomplete_not_granted
+
+  non_authorization:
+    provider_contact_performed: false
+    plugin_call_performed: false
+    api_call_performed: false
+    mcp_runtime_performed: false
+    image_generation_performed: false
+    real_manifest_read_performed: false
+    real_vcpchat_read_performed: false
+    real_vcptoolbox_read_performed: false
+    ipc_preload_renderer_integration_performed: false
+    production_candidate_write_performed: false
+    DailyNote_write_performed: false
+    VCP_memory_write_performed: false
+    push_tag_release_deploy_performed: false
+    artifact_recoverability_is_not_vcp_runtime_integration: true
+    vcp_runtime_integration_proven: false

@@ -1,5 +1,53 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.151-DRY-RUN-VCP-ADAPTER-CONTRACT-V1
+
+Scope:
+
+Validate dry-run VCPChat, VCPToolBox, and manifest handoff contract without
+real VCP source reads, IPC/preload/renderer integration, plugin calls, or
+runtime execution.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_151_dry_run_vcp_adapter_contract_v1.js
+node scripts/validate_v14_151_dry_run_vcp_adapter_contract_v1.js
+```
+
+Expected:
+
+```yaml
+passed: true
+dry_run_vcp_adapter_contract_v1_created: true
+vcpchat_static_handoff_defined: true
+vcptoolbox_static_handoff_defined: true
+manifest_authorization_handoff_defined: true
+v14_115_dry_run_vcp_adapter_alignment_still_passes: true
+v14_150_local_regression_suite_still_passes: true
+negative_case_vcpchat_runtime_channel_enabled_blocks_contract: true
+negative_case_vcptoolbox_plugin_call_allowed_blocks_contract: true
+negative_case_manifest_read_performed_blocks_contract: true
+negative_case_exact_manifest_path_without_A5_stays_blocked: true
+negative_case_runtime_integration_claim_blocks_contract: true
+authorization_granted_by_this_record: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+ipc_preload_renderer_integration_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+```
+
 ## VALIDATION-20260517-v14.150-LOCAL-REGRESSION-SUITE-CONSOLIDATION
 
 Scope:

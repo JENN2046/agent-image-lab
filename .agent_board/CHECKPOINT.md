@@ -1,5 +1,42 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.151 Dry-Run VCP Adapter Contract v1
+
+```text
+phase_id: v14_151_dry_run_vcp_adapter_contract_v1
+status: completed_validated
+phase_record_ref: docs/v14_151_dry_run_vcp_adapter_contract_v1.md
+contract_ref: integrations/vcp/dry_run_vcp_adapter_contract_v1.yaml
+schema_ref: schemas/dry_run_vcp_adapter_contract_v1.schema.yaml
+fixture_ref: tests/schema_examples/v14_151_dry_run_vcp_adapter_contract_v1.example.yaml
+validator_created: scripts/validate_v14_151_dry_run_vcp_adapter_contract_v1.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+dry_run_vcp_adapter_contract_v1_created: true
+vcpchat_static_handoff_defined: true
+vcptoolbox_static_handoff_defined: true
+manifest_authorization_handoff_defined: true
+runtime_integration_allowed: false
+authorization_granted_by_this_record: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+ipc_preload_renderer_integration_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+validated_now: node --check scripts/validate_v14_151_dry_run_vcp_adapter_contract_v1.js; node scripts/validate_v14_151_dry_run_vcp_adapter_contract_v1.js
+recommended_next: v14_152_review_console_handoff_contract
+recommended_next_auto_execution_allowed: true_after_v14_151_local_commit
+```
+
 # V14.150 Local Regression Suite Consolidation
 
 ```text

@@ -10,6 +10,47 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ```text
 Current active two-month objective: expand single-sample artifact recoverability into multi-category local artifact lifecycle product capability.
+Status: v14_151_dry_run_vcp_adapter_contract_v1_completed_validated.
+Purpose: define dry-run VCPChat, VCPToolBox, and manifest handoff contract without runtime integration or real source reads.
+phase_id: v14_151_dry_run_vcp_adapter_contract_v1.
+phase_record_ref: docs/v14_151_dry_run_vcp_adapter_contract_v1.md.
+contract_ref: integrations/vcp/dry_run_vcp_adapter_contract_v1.yaml.
+schema_ref: schemas/dry_run_vcp_adapter_contract_v1.schema.yaml.
+fixture_ref: tests/schema_examples/v14_151_dry_run_vcp_adapter_contract_v1.example.yaml.
+validator_created: scripts/validate_v14_151_dry_run_vcp_adapter_contract_v1.js.
+mvp_validator_updated: scripts/validate_mvp.ps1.
+dry_run_vcp_adapter_contract_v1_created: true.
+vcpchat_static_handoff_defined: true.
+vcptoolbox_static_handoff_defined: true.
+manifest_authorization_handoff_defined: true.
+runtime_integration_allowed: false.
+authorization_granted_by_this_record: false.
+provider_contact_performed: false.
+plugin_call_performed: false.
+api_call_performed: false.
+mcp_runtime_performed: false.
+image_generation_performed: false.
+real_manifest_read_performed: false.
+real_vcpchat_read_performed: false.
+real_vcptoolbox_read_performed: false.
+ipc_preload_renderer_integration_performed: false.
+production_candidate_write_performed: false.
+DailyNote_write_performed: false.
+VCP_memory_write_performed: false.
+push_tag_release_deploy_performed: false.
+artifact_recoverability_is_not_vcp_runtime_integration: true.
+vcp_runtime_integration_proven: false.
+validated_now: node --check scripts/validate_v14_151_dry_run_vcp_adapter_contract_v1.js; node scripts/validate_v14_151_dry_run_vcp_adapter_contract_v1.js.
+recommended_next: v14_152_review_console_handoff_contract.
+recommended_next_auto_execution_allowed: true_after_v14_151_local_commit.
+```
+
+---
+
+## Previous Two-Month Artifact Lifecycle Mission
+
+```text
+Current active two-month objective: expand single-sample artifact recoverability into multi-category local artifact lifecycle product capability.
 Status: v14_150_local_regression_suite_consolidation_completed_validated.
 Purpose: consolidate v14.141-v14.149 validator scheduling into a local stdout-only regression suite runner.
 phase_id: v14_150_local_regression_suite_consolidation.

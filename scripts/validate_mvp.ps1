@@ -217,6 +217,7 @@ $requiredFiles = @(
   'scripts/validate_v14_149_authorization_package_compiler.js',
   'scripts/run_v14_local_regression_suite.js',
   'scripts/validate_v14_150_local_regression_suite_consolidation.js',
+  'scripts/validate_v14_151_dry_run_vcp_adapter_contract_v1.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -375,6 +376,10 @@ $requiredFiles = @(
   'docs/v14_150_local_regression_suite_consolidation.md',
   'schemas/local_regression_suite.schema.yaml',
   'tests/schema_examples/v14_150_local_regression_suite_manifest.example.yaml',
+  'docs/v14_151_dry_run_vcp_adapter_contract_v1.md',
+  'integrations/vcp/dry_run_vcp_adapter_contract_v1.yaml',
+  'schemas/dry_run_vcp_adapter_contract_v1.schema.yaml',
+  'tests/schema_examples/v14_151_dry_run_vcp_adapter_contract_v1.example.yaml',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -9288,6 +9293,37 @@ process.exit(child.status || 0);
     }
     if ($localRegressionSuite.accepted_samples_write_performed -ne $false -or $localRegressionSuite.failure_samples_write_performed -ne $false -or $localRegressionSuite.production_candidate_write_performed -ne $false -or $localRegressionSuite.daily_note_write_performed -ne $false -or $localRegressionSuite.vcp_memory_write_performed -ne $false) {
       Add-Failure "local regression suite must not write samples, production candidates, DailyNote, or VCP memory"
+    }
+  }
+
+  $dryRunVcpAdapterContractOutput = & node (Join-Path $Root 'scripts/validate_v14_151_dry_run_vcp_adapter_contract_v1.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "dry-run VCP adapter contract validation exited with failure"
+  } else {
+    $dryRunVcpAdapterContract = ($dryRunVcpAdapterContractOutput -join "`n") | ConvertFrom-Json
+    if ($dryRunVcpAdapterContract.passed -ne $true) {
+      Add-Failure "dry-run VCP adapter contract validation must pass"
+    }
+    if ($dryRunVcpAdapterContract.dry_run_vcp_adapter_contract_v1_created -ne $true -or $dryRunVcpAdapterContract.vcpchat_static_handoff_defined -ne $true -or $dryRunVcpAdapterContract.vcptoolbox_static_handoff_defined -ne $true -or $dryRunVcpAdapterContract.manifest_authorization_handoff_defined -ne $true) {
+      Add-Failure "v14.151 must define dry-run VCPChat, VCPToolBox, and manifest handoff channels"
+    }
+    if ($dryRunVcpAdapterContract.v14_115_dry_run_vcp_adapter_alignment_still_passes -ne $true -or $dryRunVcpAdapterContract.v14_150_local_regression_suite_still_passes -ne $true) {
+      Add-Failure "v14.151 must preserve v14.115 and v14.150 validation"
+    }
+    if ($dryRunVcpAdapterContract.negative_case_vcpchat_runtime_channel_enabled_blocks_contract -ne $true -or $dryRunVcpAdapterContract.negative_case_vcptoolbox_plugin_call_allowed_blocks_contract -ne $true -or $dryRunVcpAdapterContract.negative_case_manifest_read_performed_blocks_contract -ne $true -or $dryRunVcpAdapterContract.negative_case_exact_manifest_path_without_A5_stays_blocked -ne $true -or $dryRunVcpAdapterContract.negative_case_runtime_integration_claim_blocks_contract -ne $true) {
+      Add-Failure "v14.151 must fail dry-run VCP adapter contract negative cases"
+    }
+    if ($dryRunVcpAdapterContract.vcp_runtime_integration_proven -ne $false -or $dryRunVcpAdapterContract.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "dry-run VCP adapter contract must not claim VCP runtime integration"
+    }
+    if ($dryRunVcpAdapterContract.provider_contact_performed -ne $false -or $dryRunVcpAdapterContract.plugin_call_performed -ne $false -or $dryRunVcpAdapterContract.api_call_performed -ne $false -or $dryRunVcpAdapterContract.mcp_runtime_performed -ne $false) {
+      Add-Failure "dry-run VCP adapter contract must not call provider/plugin/API/MCP"
+    }
+    if ($dryRunVcpAdapterContract.image_generation_performed -ne $false -or $dryRunVcpAdapterContract.real_manifest_read_performed -ne $false -or $dryRunVcpAdapterContract.real_vcpchat_read_performed -ne $false -or $dryRunVcpAdapterContract.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "dry-run VCP adapter contract must not generate images or read real VCP systems"
+    }
+    if ($dryRunVcpAdapterContract.ipc_preload_renderer_integration_performed -ne $false -or $dryRunVcpAdapterContract.production_candidate_write_performed -ne $false -or $dryRunVcpAdapterContract.daily_note_write_performed -ne $false -or $dryRunVcpAdapterContract.vcp_memory_write_performed -ne $false) {
+      Add-Failure "dry-run VCP adapter contract must not create runtime integration or write production/memory outputs"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding
