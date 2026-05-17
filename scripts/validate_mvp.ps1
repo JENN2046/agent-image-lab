@@ -181,6 +181,7 @@ $requiredFiles = @(
   'scripts/validate_v14_115_dry_run_vcp_adapter_current_goal_alignment.js',
   'scripts/validate_v14_116_manifest_read_authorization_current_goal_alignment.js',
   'scripts/validate_v14_117_daily_note_vcp_memory_authorization_current_goal_alignment.js',
+  'scripts/validate_v14_118_rollback_audit_validation_package_current_goal_alignment.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -288,6 +289,7 @@ $requiredFiles = @(
   'docs/v14_115_dry_run_vcp_adapter_current_goal_alignment.md',
   'docs/v14_116_manifest_read_authorization_current_goal_alignment.md',
   'docs/v14_117_daily_note_vcp_memory_authorization_current_goal_alignment.md',
+  'docs/v14_118_rollback_audit_validation_package_current_goal_alignment.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8006,6 +8008,43 @@ process.exit(child.status || 0);
     }
     if ($dailyNoteMemoryGoal.image_generation_performed -ne $false -or $dailyNoteMemoryGoal.output_file_write_performed -ne $false -or $dailyNoteMemoryGoal.file_write_performed -ne $false) {
       Add-Failure "DailyNote/VCP memory alignment must not generate images or write files"
+    }
+  }
+
+  $rollbackAuditValidationGoalOutput = & node (Join-Path $Root 'scripts/validate_v14_118_rollback_audit_validation_package_current_goal_alignment.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "rollback/audit/validation package current goal alignment validation exited with failure"
+  } else {
+    $rollbackAuditValidationGoal = ($rollbackAuditValidationGoalOutput -join "`n") | ConvertFrom-Json
+    if ($rollbackAuditValidationGoal.passed -ne $true) {
+      Add-Failure "rollback/audit/validation package current goal alignment validation must pass"
+    }
+    if ($rollbackAuditValidationGoal.rollback_audit_validation_package_aligned -ne $true -or $rollbackAuditValidationGoal.continuous_stage_evidence_present -ne $true) {
+      Add-Failure "rollback/audit/validation package must include continuous stage evidence"
+    }
+    if ($rollbackAuditValidationGoal.validation_selection_matrix_present -ne $true -or $rollbackAuditValidationGoal.validation_log_stage_chain_present -ne $true -or $rollbackAuditValidationGoal.mvp_validator_wired -ne $true) {
+      Add-Failure "rollback/audit/validation package must wire matrix, validation log, and MVP validator"
+    }
+    if ($rollbackAuditValidationGoal.local_validation_helper_present -ne $true -or $rollbackAuditValidationGoal.agent_board_validator_present -ne $true) {
+      Add-Failure "rollback/audit/validation package must include local and agent board validators"
+    }
+    if ($rollbackAuditValidationGoal.codex_session_default_route_preserved -ne $true) {
+      Add-Failure "rollback/audit/validation package must preserve Codex session default route"
+    }
+    if ($rollbackAuditValidationGoal.provider_contact_performed -ne $false -or $rollbackAuditValidationGoal.plugin_call_performed -ne $false -or $rollbackAuditValidationGoal.api_call_performed -ne $false -or $rollbackAuditValidationGoal.mcp_runtime_performed -ne $false) {
+      Add-Failure "rollback/audit/validation package validation must not call provider/plugin/API/MCP"
+    }
+    if ($rollbackAuditValidationGoal.image_generation_performed -ne $false -or $rollbackAuditValidationGoal.output_file_write_performed -ne $false -or $rollbackAuditValidationGoal.file_write_performed -ne $false) {
+      Add-Failure "rollback/audit/validation package validation must not generate images or write files"
+    }
+    if ($rollbackAuditValidationGoal.daily_note_write_performed -ne $false -or $rollbackAuditValidationGoal.vcp_memory_write_performed -ne $false) {
+      Add-Failure "rollback/audit/validation package validation must not write DailyNote or VCP memory"
+    }
+    if ($rollbackAuditValidationGoal.real_manifest_read_performed -ne $false -or $rollbackAuditValidationGoal.real_vcpchat_read_performed -ne $false -or $rollbackAuditValidationGoal.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "rollback/audit/validation package validation must not read real manifest/VCPChat/VCPToolBox"
+    }
+    if ($rollbackAuditValidationGoal.accepted_samples_write_performed -ne $false -or $rollbackAuditValidationGoal.failure_samples_write_performed -ne $false -or $rollbackAuditValidationGoal.production_candidate_created -ne $false) {
+      Add-Failure "rollback/audit/validation package validation must not write samples or production candidates"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

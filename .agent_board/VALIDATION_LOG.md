@@ -1,5 +1,48 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.118-ROLLBACK-AUDIT-VALIDATION-PACKAGE-CURRENT-GOAL-ALIGNMENT
+
+Task:
+
+```text
+Validate that rollback, audit, and validation package evidence covers the current v14.115-v14.117 local stage chain without external or high-risk actions.
+```
+
+Commands run:
+
+```text
+node --check scripts/validate_v14_118_rollback_audit_validation_package_current_goal_alignment.js
+node scripts/validate_v14_118_rollback_audit_validation_package_current_goal_alignment.js
+```
+
+Result:
+
+```text
+passed: true
+rollback_audit_validation_package_aligned: true
+continuous_stage_evidence_present: true
+validation_selection_matrix_present: true
+validation_log_stage_chain_present: true
+mvp_validator_wired: true
+local_validation_helper_present: true
+agent_board_validator_present: true
+codex_session_default_route_preserved: true
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+output_file_write_performed: false
+```
+
 ## VALIDATION-20260517-v14.117-DAILYNOTE-VCP-MEMORY-AUTHORIZATION-CURRENT-GOAL-ALIGNMENT
 
 Task:
