@@ -1,0 +1,58 @@
+# v14.160 two-month product capability closeout example
+
+two_month_product_capability_closeout:
+  version: v1
+  phase: v14_160_two_month_product_capability_closeout
+  schema_ref: schemas/two_month_product_capability_closeout.schema.yaml
+  validator_ref: scripts/validate_v14_160_two_month_product_capability_closeout.js
+  execution_mode: local_closeout_only
+  authorization_granted_by_this_record: false
+  local_lifecycle_chain_completed_validated: true
+  audited_local_stage_count: 13
+  registry_sample_count: 6
+  registry_category_count: 3
+  local_artifact_sample_count: 4
+  full_recoverable_sample_count: 1
+  hard_acceptance_three_full_samples_met: false
+  remaining_full_recoverable_sample_gap: 2
+  a5_execution_slots_skipped_without_authorization: true
+  two_month_goal_fully_complete: false
+
+  progress_sections:
+    product_capability_progress:
+      status: local_artifact_lifecycle_control_layer_validated_with_sample_gap
+      approximate_progress_percent: 72
+    governance_capability_progress:
+      status: strong_local_authorization_and_validation_layer
+      approximate_progress_percent: 90
+    real_vcp_integration_progress:
+      status: pre_runtime_authorization_control_layer_only
+      approximate_progress_percent: 38
+    artifact_recoverability_is_not_vcp_runtime_integration: true
+    vcp_runtime_integration_proven: false
+
+  remaining_gap:
+    needs_two_more_fully_recoverable_samples: true
+    current_full_recoverable_sample_ids:
+      - accepted_womens_resort_relaxed_knit_codex_v2_001
+    next_safe_action: prepare_two_more_codex_session_sample_recoverability_plan_or_wait_for_generation_authorization
+
+  non_authorization:
+    provider_contact_performed: false
+    plugin_call_performed: false
+    api_call_performed: false
+    mcp_runtime_performed: false
+    image_generation_performed: false
+    real_manifest_read_performed: false
+    real_vcpchat_read_performed: false
+    real_vcptoolbox_read_performed: false
+    ipc_preload_renderer_integration_performed: false
+    durable_archive_executed: false
+    archive_manifest_written: false
+    image_binary_copy_performed: false
+    production_candidate_write_performed: false
+    failure_samples_write_performed: false
+    DailyNote_write_performed: false
+    VCP_memory_write_performed: false
+    push_tag_release_deploy_performed: false
+    update_goal_called: false

@@ -1,5 +1,64 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.160-TWO-MONTH-PRODUCT-CAPABILITY-CLOSEOUT
+
+Scope:
+
+Validate the two-month closeout without overclaiming completion. The local
+v14.141-v14.160 chain is closed out, but the hard acceptance target still needs
+two additional fully recoverable accepted samples.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_160_two_month_product_capability_closeout.js
+node scripts/validate_v14_160_two_month_product_capability_closeout.js
+```
+
+Expected:
+
+```yaml
+passed: true
+two_month_product_capability_closeout_created: true
+local_lifecycle_chain_completed_validated: true
+audited_local_stage_count: 13
+registry_sample_count: 6
+registry_category_count: 3
+local_artifact_sample_count: 4
+full_recoverable_sample_count: 1
+hard_acceptance_three_full_samples_met: false
+remaining_full_recoverable_sample_gap: 2
+product_capability_progress_percent: 72
+governance_capability_progress_percent: 90
+real_vcp_integration_progress_percent: 38
+a5_execution_slots_skipped_without_authorization: true
+two_month_goal_fully_complete: false
+goal_status: active_not_complete
+negative_case_three_sample_gap_must_block_goal_completion: true
+negative_case_skipped_a5_marked_complete_blocks_closeout: true
+negative_case_vcp_runtime_claim_blocks_closeout: true
+negative_case_dashboard_token_progress_blocks_closeout: true
+negative_case_external_action_flag_blocks_closeout: true
+authorization_granted_by_this_record: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+image_binary_copy_performed: false
+production_candidate_write_performed: false
+failure_samples_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+update_goal_called: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+```
+
 ## VALIDATION-20260517-v14.159-END-TO-END-AUDIT-ROLLBACK-PACKAGE
 
 Scope:

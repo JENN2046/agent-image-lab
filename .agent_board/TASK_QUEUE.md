@@ -10,6 +10,58 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ```text
 Current active two-month objective: expand single-sample artifact recoverability into multi-category local artifact lifecycle product capability.
+Status: v14_160_two_month_product_capability_closeout_completed_validated_with_remaining_hard_acceptance_gap.
+Purpose: close out v14.141-v14.160 local chain without overclaiming the two-month goal, because only one fully recoverable accepted sample exists.
+phase_id: v14_160_two_month_product_capability_closeout.
+phase_record_ref: docs/v14_160_two_month_product_capability_closeout.md.
+schema_ref: schemas/two_month_product_capability_closeout.schema.yaml.
+fixture_ref: tests/schema_examples/v14_160_two_month_product_capability_closeout.example.yaml.
+validator_created: scripts/validate_v14_160_two_month_product_capability_closeout.js.
+mvp_validator_updated: scripts/validate_mvp.ps1.
+two_month_product_capability_closeout_created: true.
+local_lifecycle_chain_completed_validated: true.
+audited_local_stage_count: 13.
+registry_sample_count: 6.
+registry_category_count: 3.
+local_artifact_sample_count: 4.
+full_recoverable_sample_count: 1.
+hard_acceptance_three_full_samples_met: false.
+remaining_full_recoverable_sample_gap: 2.
+a5_execution_slots_skipped_without_authorization: true.
+two_month_goal_fully_complete: false.
+goal_status: active_not_complete.
+product_capability_progress_percent: 72.
+governance_capability_progress_percent: 90.
+real_vcp_integration_progress_percent: 38.
+authorization_granted_by_this_record: false.
+provider_contact_performed: false.
+plugin_call_performed: false.
+api_call_performed: false.
+mcp_runtime_performed: false.
+image_generation_performed: false.
+real_manifest_read_performed: false.
+real_vcpchat_read_performed: false.
+real_vcptoolbox_read_performed: false.
+image_binary_copy_performed: false.
+production_candidate_write_performed: false.
+failure_samples_write_performed: false.
+DailyNote_write_performed: false.
+VCP_memory_write_performed: false.
+push_tag_release_deploy_performed: false.
+update_goal_called: false.
+artifact_recoverability_is_not_vcp_runtime_integration: true.
+vcp_runtime_integration_proven: false.
+validated_now: node --check scripts/validate_v14_160_two_month_product_capability_closeout.js; node scripts/validate_v14_160_two_month_product_capability_closeout.js.
+recommended_next: prepare_two_more_codex_session_sample_recoverability_plan_or_wait_for_generation_authorization.
+recommended_next_auto_execution_allowed: false_generation_or_approval_boundary.
+```
+
+---
+
+## Previous Two-Month Artifact Lifecycle Mission
+
+```text
+Current active two-month objective: expand single-sample artifact recoverability into multi-category local artifact lifecycle product capability.
 Status: v14_159_end_to_end_audit_and_rollback_package_completed_validated.
 Purpose: audit v14.141-v14.153 local lifecycle chain and define local draft rollback while skipping v14.154-v14.158 A5 execution slots.
 phase_id: v14_159_end_to_end_audit_and_rollback_package.

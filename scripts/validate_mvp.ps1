@@ -221,6 +221,7 @@ $requiredFiles = @(
   'scripts/validate_v14_152_review_console_handoff_contract.js',
   'scripts/validate_v14_153_manifest_read_authorization_gate_package.js',
   'scripts/validate_v14_159_end_to_end_audit_rollback_package.js',
+  'scripts/validate_v14_160_two_month_product_capability_closeout.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -394,6 +395,9 @@ $requiredFiles = @(
   'docs/v14_159_end_to_end_audit_and_rollback_package.md',
   'schemas/end_to_end_audit_rollback_package.schema.yaml',
   'tests/schema_examples/v14_159_end_to_end_audit_rollback_package.example.yaml',
+  'docs/v14_160_two_month_product_capability_closeout.md',
+  'schemas/two_month_product_capability_closeout.schema.yaml',
+  'tests/schema_examples/v14_160_two_month_product_capability_closeout.example.yaml',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -9434,6 +9438,40 @@ process.exit(child.status || 0);
     }
     if ($endToEndAuditRollback.image_binary_copy_performed -ne $false -or $endToEndAuditRollback.production_candidate_write_performed -ne $false -or $endToEndAuditRollback.failure_samples_write_performed -ne $false -or $endToEndAuditRollback.daily_note_write_performed -ne $false -or $endToEndAuditRollback.vcp_memory_write_performed -ne $false) {
       Add-Failure "end-to-end audit and rollback package must not copy images or write production/memory/failure outputs"
+    }
+  }
+
+  $twoMonthCloseoutOutput = & node (Join-Path $Root 'scripts/validate_v14_160_two_month_product_capability_closeout.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "two-month product capability closeout validation exited with failure"
+  } else {
+    $twoMonthCloseout = ($twoMonthCloseoutOutput -join "`n") | ConvertFrom-Json
+    if ($twoMonthCloseout.passed -ne $true) {
+      Add-Failure "two-month product capability closeout validation must pass"
+    }
+    if ($twoMonthCloseout.two_month_product_capability_closeout_created -ne $true -or $twoMonthCloseout.local_lifecycle_chain_completed_validated -ne $true -or $twoMonthCloseout.audited_local_stage_count -ne 13) {
+      Add-Failure "v14.160 must close out the local lifecycle chain"
+    }
+    if ($twoMonthCloseout.registry_sample_count -ne 6 -or $twoMonthCloseout.registry_category_count -ne 3 -or $twoMonthCloseout.local_artifact_sample_count -ne 4 -or $twoMonthCloseout.full_recoverable_sample_count -ne 1) {
+      Add-Failure "v14.160 must reflect observed accepted sample matrix counts"
+    }
+    if ($twoMonthCloseout.hard_acceptance_three_full_samples_met -ne $false -or $twoMonthCloseout.remaining_full_recoverable_sample_gap -ne 2 -or $twoMonthCloseout.two_month_goal_fully_complete -ne $false -or $twoMonthCloseout.goal_status -ne 'active_not_complete') {
+      Add-Failure "v14.160 must not mark the two-month goal complete while only one full recoverable sample exists"
+    }
+    if ($twoMonthCloseout.negative_case_three_sample_gap_must_block_goal_completion -ne $true -or $twoMonthCloseout.negative_case_skipped_a5_marked_complete_blocks_closeout -ne $true -or $twoMonthCloseout.negative_case_vcp_runtime_claim_blocks_closeout -ne $true -or $twoMonthCloseout.negative_case_dashboard_token_progress_blocks_closeout -ne $true -or $twoMonthCloseout.negative_case_external_action_flag_blocks_closeout -ne $true) {
+      Add-Failure "v14.160 must fail closeout negative cases"
+    }
+    if ($twoMonthCloseout.vcp_runtime_integration_proven -ne $false -or $twoMonthCloseout.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "two-month closeout must not claim VCP runtime integration"
+    }
+    if ($twoMonthCloseout.provider_contact_performed -ne $false -or $twoMonthCloseout.plugin_call_performed -ne $false -or $twoMonthCloseout.api_call_performed -ne $false -or $twoMonthCloseout.mcp_runtime_performed -ne $false -or $twoMonthCloseout.image_generation_performed -ne $false) {
+      Add-Failure "two-month closeout must not call provider/plugin/API/MCP or generate images"
+    }
+    if ($twoMonthCloseout.real_manifest_read_performed -ne $false -or $twoMonthCloseout.real_vcpchat_read_performed -ne $false -or $twoMonthCloseout.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "two-month closeout must not read real VCP systems"
+    }
+    if ($twoMonthCloseout.image_binary_copy_performed -ne $false -or $twoMonthCloseout.production_candidate_write_performed -ne $false -or $twoMonthCloseout.failure_samples_write_performed -ne $false -or $twoMonthCloseout.daily_note_write_performed -ne $false -or $twoMonthCloseout.vcp_memory_write_performed -ne $false) {
+      Add-Failure "two-month closeout must not copy images or write production/memory/failure outputs"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

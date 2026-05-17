@@ -1,0 +1,51 @@
+# two_month_product_capability_closeout.schema.yaml
+# Closeout schema for the two-month local artifact lifecycle capability goal.
+
+two_month_product_capability_closeout:
+  version: v1
+  phase: v14_160_two_month_product_capability_closeout
+  execution_mode: local_closeout_only
+  authorization_granted_by_this_record: false
+  local_lifecycle_chain_completed_validated: true
+  audited_local_stage_count: 13
+  registry_sample_count: 6
+  registry_category_count: 3
+  local_artifact_sample_count: 4
+  full_recoverable_sample_count: 1
+  hard_acceptance_three_full_samples_met: false
+  remaining_full_recoverable_sample_gap: 2
+  a5_execution_slots_skipped_without_authorization: true
+  two_month_goal_fully_complete: false
+
+progress_sections:
+  product_capability_progress_percent: 72
+  governance_capability_progress_percent: 90
+  real_vcp_integration_progress_percent: 38
+  artifact_recoverability_is_not_vcp_runtime_integration: true
+  vcp_runtime_integration_proven: false
+
+non_authorization:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  mcp_runtime_performed: false
+  image_generation_performed: false
+  real_manifest_read_performed: false
+  real_vcpchat_read_performed: false
+  real_vcptoolbox_read_performed: false
+  ipc_preload_renderer_integration_performed: false
+  durable_archive_executed: false
+  archive_manifest_written: false
+  image_binary_copy_performed: false
+  production_candidate_write_performed: false
+  failure_samples_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  push_tag_release_deploy_performed: false
+
+negative_case_requirements:
+  three_sample_gap_must_block_goal_completion: true
+  skipped_a5_marked_complete_blocks_closeout: true
+  vcp_runtime_claim_blocks_closeout: true
+  dashboard_token_progress_blocks_closeout: true
+  external_action_flag_blocks_closeout: true
