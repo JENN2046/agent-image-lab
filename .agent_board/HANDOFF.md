@@ -3,6 +3,43 @@
 ## Handoff Summary
 
 ```text
+Status: v14_124_context_load_guide_and_historical_docs_compaction completed locally and validated.
+Reason: Old and stale docs were causing context pollution, so the current context packet and historical targeted-lookup index were made explicit without deleting or rewriting audit evidence.
+Current repository: project_root
+Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.124 context guide, historical compaction index, validator, MVP wiring, phase record, and .agent_board sync until validation and commit decision.
+Phase record: docs/v14_124_context_load_guide_and_historical_docs_compaction.md
+Context guide: docs/CONTEXT_LOAD_GUIDE.md
+Historical compaction index: docs/HISTORICAL_DOCS_COMPACTION_INDEX.md
+Validator created: scripts/validate_v14_124_context_load_guide_and_historical_docs_compaction.js
+MVP validator updated: scripts/validate_mvp.ps1
+default_context_packet_defined: true
+historical_docs_demoted_to_targeted_lookup: true
+docs_00_project_roadmap_not_default_context: true
+v7_dense_chain_not_default_context: true
+numbered_gate_chain_not_default_context: true
+old_authorization_records_not_current_authorization: true
+historical_docs_deleted: false
+historical_docs_moved: false
+historical_docs_rewritten: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+output_file_write_performed: false
+validated_now: node --check scripts/validate_v14_124_context_load_guide_and_historical_docs_compaction.js; node scripts/validate_v14_124_context_load_guide_and_historical_docs_compaction.js
+recommended_next: review_console_memory_delta_handoff_refresh
+recommended_next_auto_execution_allowed: true
+---
 Status: v14_123_memory_delta_draft_schema_alignment_for_codex_reviews completed locally and validated.
 Reason: Local review record fields need an explicit mapping into memory_delta drafts while keeping DailyNote and VCP memory writes blocked.
 Current repository: project_root

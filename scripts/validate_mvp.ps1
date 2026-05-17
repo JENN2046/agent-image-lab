@@ -187,6 +187,7 @@ $requiredFiles = @(
   'scripts/validate_v14_121_codex_session_prompt_package_library_governance.js',
   'scripts/validate_v14_122_local_review_record_schema_refresh.js',
   'scripts/validate_v14_123_memory_delta_draft_schema_alignment_for_codex_reviews.js',
+  'scripts/validate_v14_124_context_load_guide_and_historical_docs_compaction.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -301,6 +302,9 @@ $requiredFiles = @(
   'docs/v14_121_codex_session_prompt_package_library_governance.md',
   'docs/v14_122_local_review_record_schema_refresh.md',
   'docs/v14_123_memory_delta_draft_schema_alignment_for_codex_reviews.md',
+  'docs/CONTEXT_LOAD_GUIDE.md',
+  'docs/HISTORICAL_DOCS_COMPACTION_INDEX.md',
+  'docs/v14_124_context_load_guide_and_historical_docs_compaction.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8226,6 +8230,40 @@ process.exit(child.status || 0);
     }
     if ($memoryDeltaDraftAlignment.accepted_samples_write_performed -ne $false -or $memoryDeltaDraftAlignment.failure_samples_write_performed -ne $false -or $memoryDeltaDraftAlignment.production_candidate_created -ne $false) {
       Add-Failure "memory_delta draft alignment validation must not write samples or production candidates"
+    }
+  }
+
+  $contextLoadCompactionOutput = & node (Join-Path $Root 'scripts/validate_v14_124_context_load_guide_and_historical_docs_compaction.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "context load guide and historical docs compaction validation exited with failure"
+  } else {
+    $contextLoadCompaction = ($contextLoadCompactionOutput -join "`n") | ConvertFrom-Json
+    if ($contextLoadCompaction.passed -ne $true) {
+      Add-Failure "context load guide and historical docs compaction validation must pass"
+    }
+    if ($contextLoadCompaction.default_context_packet_defined -ne $true -or $contextLoadCompaction.historical_docs_demoted_to_targeted_lookup -ne $true) {
+      Add-Failure "context compaction must define default context and demote old docs to targeted lookup"
+    }
+    if ($contextLoadCompaction.old_authorization_records_not_current_authorization -ne $true) {
+      Add-Failure "context compaction must keep old authorization records from becoming current authorization"
+    }
+    if ($contextLoadCompaction.historical_docs_deleted -ne $false -or $contextLoadCompaction.historical_docs_moved -ne $false -or $contextLoadCompaction.historical_docs_rewritten -ne $false) {
+      Add-Failure "context compaction validation must not delete, move, or rewrite historical docs"
+    }
+    if ($contextLoadCompaction.provider_contact_performed -ne $false -or $contextLoadCompaction.plugin_call_performed -ne $false -or $contextLoadCompaction.api_call_performed -ne $false -or $contextLoadCompaction.mcp_runtime_performed -ne $false) {
+      Add-Failure "context compaction validation must not call provider/plugin/API/MCP"
+    }
+    if ($contextLoadCompaction.image_generation_performed -ne $false -or $contextLoadCompaction.output_file_write_performed -ne $false -or $contextLoadCompaction.file_write_performed -ne $false) {
+      Add-Failure "context compaction validation must not generate images or write output files"
+    }
+    if ($contextLoadCompaction.daily_note_write_performed -ne $false -or $contextLoadCompaction.vcp_memory_write_performed -ne $false) {
+      Add-Failure "context compaction validation must not write DailyNote or VCP memory"
+    }
+    if ($contextLoadCompaction.real_manifest_read_performed -ne $false -or $contextLoadCompaction.real_vcpchat_read_performed -ne $false -or $contextLoadCompaction.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "context compaction validation must not read real manifest/VCPChat/VCPToolBox"
+    }
+    if ($contextLoadCompaction.accepted_samples_write_performed -ne $false -or $contextLoadCompaction.failure_samples_write_performed -ne $false -or $contextLoadCompaction.production_candidate_created -ne $false) {
+      Add-Failure "context compaction validation must not write samples or production candidates"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

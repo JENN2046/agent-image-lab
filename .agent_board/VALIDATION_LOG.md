@@ -1,5 +1,55 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.124-CONTEXT-LOAD-GUIDE-AND-HISTORICAL-DOCS-COMPACTION
+
+Scope:
+
+Validate that the context load guide and historical docs compaction index define a small default context packet, demote stale historical docs to targeted lookup, and preserve all audit evidence and hard stops.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_124_context_load_guide_and_historical_docs_compaction.js
+node scripts/validate_v14_124_context_load_guide_and_historical_docs_compaction.js
+```
+
+Expected:
+
+```yaml
+passed: true
+default_context_packet_defined: true
+historical_docs_demoted_to_targeted_lookup: true
+docs_00_project_roadmap_not_default_context: true
+v7_dense_chain_not_default_context: true
+numbered_gate_chain_not_default_context: true
+old_authorization_records_not_current_authorization: true
+historical_docs_deleted: false
+historical_docs_moved: false
+historical_docs_rewritten: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+output_file_write_performed: false
+```
+
+Result:
+
+```yaml
+status: passed
+validator: scripts/validate_v14_124_context_load_guide_and_historical_docs_compaction.js
+phase_record: docs/v14_124_context_load_guide_and_historical_docs_compaction.md
+```
+
 ## VALIDATION-20260517-v14.123-MEMORY-DELTA-DRAFT-SCHEMA-ALIGNMENT-FOR-CODEX-REVIEWS
 
 Scope:

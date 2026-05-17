@@ -1,5 +1,43 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.124 Context Load Guide And Historical Docs Compaction
+
+```text
+phase_id: v14_124_context_load_guide_and_historical_docs_compaction
+status: completed_validated
+phase_record_ref: docs/v14_124_context_load_guide_and_historical_docs_compaction.md
+context_load_guide_created: true
+historical_docs_compaction_index_created: true
+validator_created: scripts/validate_v14_124_context_load_guide_and_historical_docs_compaction.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+default_context_packet_defined: true
+historical_docs_demoted_to_targeted_lookup: true
+docs_00_project_roadmap_not_default_context: true
+v7_dense_chain_not_default_context: true
+numbered_gate_chain_not_default_context: true
+old_authorization_records_not_current_authorization: true
+historical_docs_deleted: false
+historical_docs_moved: false
+historical_docs_rewritten: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+output_file_write_performed: false
+validated_now: node --check scripts/validate_v14_124_context_load_guide_and_historical_docs_compaction.js; node scripts/validate_v14_124_context_load_guide_and_historical_docs_compaction.js
+recommended_next: review_console_memory_delta_handoff_refresh
+recommended_next_auto_execution_allowed: true
+```
+
 # V14.123 Memory Delta Draft Schema Alignment For Codex Reviews
 
 ```text
