@@ -218,6 +218,7 @@ $requiredFiles = @(
   'scripts/run_v14_local_regression_suite.js',
   'scripts/validate_v14_150_local_regression_suite_consolidation.js',
   'scripts/validate_v14_151_dry_run_vcp_adapter_contract_v1.js',
+  'scripts/validate_v14_152_review_console_handoff_contract.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -380,6 +381,10 @@ $requiredFiles = @(
   'integrations/vcp/dry_run_vcp_adapter_contract_v1.yaml',
   'schemas/dry_run_vcp_adapter_contract_v1.schema.yaml',
   'tests/schema_examples/v14_151_dry_run_vcp_adapter_contract_v1.example.yaml',
+  'docs/v14_152_review_console_handoff_contract.md',
+  'review_console/static_prototype/HANDOFF_CONTRACT.md',
+  'schemas/review_console_handoff_contract.schema.yaml',
+  'tests/schema_examples/v14_152_review_console_handoff_contract.example.yaml',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -9324,6 +9329,37 @@ process.exit(child.status || 0);
     }
     if ($dryRunVcpAdapterContract.ipc_preload_renderer_integration_performed -ne $false -or $dryRunVcpAdapterContract.production_candidate_write_performed -ne $false -or $dryRunVcpAdapterContract.daily_note_write_performed -ne $false -or $dryRunVcpAdapterContract.vcp_memory_write_performed -ne $false) {
       Add-Failure "dry-run VCP adapter contract must not create runtime integration or write production/memory outputs"
+    }
+  }
+
+  $reviewConsoleHandoffOutput = & node (Join-Path $Root 'scripts/validate_v14_152_review_console_handoff_contract.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console handoff contract validation exited with failure"
+  } else {
+    $reviewConsoleHandoff = ($reviewConsoleHandoffOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleHandoff.passed -ne $true) {
+      Add-Failure "Review Console handoff contract validation must pass"
+    }
+    if ($reviewConsoleHandoff.review_console_handoff_contract_created -ne $true -or $reviewConsoleHandoff.static_child_window_data_contract_defined -ne $true -or $reviewConsoleHandoff.review_console_display_only_fields_defined -ne $true -or $reviewConsoleHandoff.future_runtime_boundary_defined -ne $true) {
+      Add-Failure "v14.152 must define static Review Console handoff data contract and runtime boundary"
+    }
+    if ($reviewConsoleHandoff.v14_144_review_console_schema_binding_still_passes -ne $true -or $reviewConsoleHandoff.v14_151_dry_run_vcp_adapter_contract_still_passes -ne $true) {
+      Add-Failure "v14.152 must preserve v14.144 and v14.151 validation"
+    }
+    if ($reviewConsoleHandoff.negative_case_ipc_channel_created_blocks_contract -ne $true -or $reviewConsoleHandoff.negative_case_preload_script_created_blocks_contract -ne $true -or $reviewConsoleHandoff.negative_case_renderer_integration_created_blocks_contract -ne $true -or $reviewConsoleHandoff.negative_case_fetch_performed_blocks_contract -ne $true -or $reviewConsoleHandoff.negative_case_real_vcpchat_read_blocks_contract -ne $true -or $reviewConsoleHandoff.negative_case_dailynote_write_blocks_contract -ne $true) {
+      Add-Failure "v14.152 must fail Review Console runtime/read/write negative cases"
+    }
+    if ($reviewConsoleHandoff.vcp_runtime_integration_proven -ne $false -or $reviewConsoleHandoff.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "Review Console handoff contract must not claim VCP runtime integration"
+    }
+    if ($reviewConsoleHandoff.provider_contact_performed -ne $false -or $reviewConsoleHandoff.plugin_call_performed -ne $false -or $reviewConsoleHandoff.api_call_performed -ne $false -or $reviewConsoleHandoff.mcp_runtime_performed -ne $false) {
+      Add-Failure "Review Console handoff contract must not call provider/plugin/API/MCP"
+    }
+    if ($reviewConsoleHandoff.image_generation_performed -ne $false -or $reviewConsoleHandoff.real_manifest_read_performed -ne $false -or $reviewConsoleHandoff.real_vcpchat_read_performed -ne $false -or $reviewConsoleHandoff.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "Review Console handoff contract must not generate images or read real VCP systems"
+    }
+    if ($reviewConsoleHandoff.ipc_channel_created -ne $false -or $reviewConsoleHandoff.preload_script_created -ne $false -or $reviewConsoleHandoff.renderer_integration_created -ne $false -or $reviewConsoleHandoff.production_candidate_write_performed -ne $false -or $reviewConsoleHandoff.daily_note_write_performed -ne $false -or $reviewConsoleHandoff.vcp_memory_write_performed -ne $false) {
+      Add-Failure "Review Console handoff contract must not create runtime integration or write production/memory outputs"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

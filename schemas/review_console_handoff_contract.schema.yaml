@@ -1,0 +1,58 @@
+# review_console_handoff_contract.schema.yaml
+# Static data contract for a future Review Console child-window handoff.
+
+review_console_handoff_contract:
+  version: v1
+  contract_type: review_console_handoff_contract
+  handoff_mode: static_child_window_data_contract
+  execution_mode: local_contract_only
+  runtime_integration_allowed: false
+  authorization_granted_by_contract: false
+
+handoff_envelope:
+  accepted_sample_id: string
+  import_record_ref: string
+  review_record_ref: string
+  accepted_registry_ref: accepted_samples/accepted_sample_registry.yaml
+  category_index_ref: accepted_samples/categories/fashion_lookbook_portrait.yaml
+  recoverability_suite_ref: scripts/run_v14_local_regression_suite.js
+  dry_run_vcp_adapter_contract_ref: integrations/vcp/dry_run_vcp_adapter_contract_v1.yaml
+  authorization_package_compiler_ref: scripts/compile_v14_149_authorization_packages.js
+
+review_console_surface:
+  display_only: true
+  static_reader_only: true
+  child_window_runtime_allowed: false
+  child_window_runtime_created: false
+  ipc_channel_allowed: false
+  ipc_channel_created: false
+  preload_script_allowed: false
+  preload_script_created: false
+  renderer_integration_allowed: false
+  renderer_integration_created: false
+  fetch_allowed: false
+  fetch_performed: false
+  file_write_allowed: false
+  file_write_performed: false
+
+non_authorization:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  mcp_runtime_performed: false
+  image_generation_performed: false
+  real_manifest_read_performed: false
+  real_vcpchat_read_performed: false
+  real_vcptoolbox_read_performed: false
+  production_candidate_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  push_tag_release_deploy_performed: false
+
+negative_case_requirements:
+  ipc_channel_created_blocks_contract: true
+  preload_script_created_blocks_contract: true
+  renderer_integration_created_blocks_contract: true
+  fetch_performed_blocks_contract: true
+  real_vcpchat_read_blocks_contract: true
+  dailynote_write_blocks_contract: true

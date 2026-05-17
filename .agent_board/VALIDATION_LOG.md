@@ -1,5 +1,59 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.152-REVIEW-CONSOLE-HANDOFF-CONTRACT
+
+Scope:
+
+Validate the static Review Console handoff data contract for a future child
+window without IPC, preload, renderer integration, fetch, file writes, real VCP
+reads, or memory/production writes.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_152_review_console_handoff_contract.js
+node scripts/validate_v14_152_review_console_handoff_contract.js
+```
+
+Expected:
+
+```yaml
+passed: true
+review_console_handoff_contract_created: true
+static_child_window_data_contract_defined: true
+review_console_display_only_fields_defined: true
+future_runtime_boundary_defined: true
+v14_144_review_console_schema_binding_still_passes: true
+v14_151_dry_run_vcp_adapter_contract_still_passes: true
+negative_case_ipc_channel_created_blocks_contract: true
+negative_case_preload_script_created_blocks_contract: true
+negative_case_renderer_integration_created_blocks_contract: true
+negative_case_fetch_performed_blocks_contract: true
+negative_case_real_vcpchat_read_blocks_contract: true
+negative_case_dailynote_write_blocks_contract: true
+authorization_granted_by_this_record: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+child_window_runtime_created: false
+ipc_channel_created: false
+preload_script_created: false
+renderer_integration_created: false
+fetch_performed: false
+file_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+```
+
 ## VALIDATION-20260517-v14.151-DRY-RUN-VCP-ADAPTER-CONTRACT-V1
 
 Scope:
