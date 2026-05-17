@@ -2,3 +2,15 @@ category: fashion_lookbook_portrait
 sample_count: 1
 samples:
   - accepted_womens_resort_relaxed_knit_codex_v2_001
+recoverability_metadata:
+  accepted_womens_resort_relaxed_knit_codex_v2_001:
+    recoverability_status: workspace_local_verified
+    artifact_locator_scope: project_relative_runs
+    verification_mode: local_file_hash
+    verified_sha256: 9d23208d05427b02ffc177664c1918ed73bf57831a9694be16522fe9a8f3c910
+    verified_dimensions: 1254x1254
+    verified_mime: image/png
+    verification_record_ref: docs/v14_131_real_artifact_validation_and_accepted_sample_recoverability_gate.md
+    import_record_ref: runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/resort_relaxed_knit_final_import_record.json
+    portable_after_clone: false
+    artifact_recoverability_is_not_vcp_runtime_integration: true

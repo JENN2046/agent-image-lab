@@ -10,16 +10,16 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ```text
 Current active long-term objective: 3-month Agent Image Lab visual production control layer for the VCP ecosystem.
-Status: v14_135_review_console_import_reader_safety_review_completed_validated.
+Status: v14_136_accepted_samples_recoverability_metadata_patch_completed_validated.
 Purpose: move Agent Image Lab from local verifiable visual production MVP toward a controlled VCPChat / VCPToolBox visual production system while staying inside A4.8 unless separately authorized.
-phase_id: v14_135_review_console_import_reader_safety_review.
-phase_record_ref: docs/v14_135_review_console_import_reader_safety_review.md.
+phase_id: v14_136_accepted_samples_recoverability_metadata_patch.
+phase_record_ref: docs/v14_136_accepted_samples_recoverability_metadata_patch.md.
 active_scope:
-active_phase_id: v14_135_review_console_import_reader_safety_review.
-active_phase_record_ref: docs/v14_135_review_console_import_reader_safety_review.md.
-active_recommended_next: accepted_samples_recoverability_metadata_patch.
-recommended_next_source_phase: v14_135_review_console_import_reader_safety_review.
-supersedes_recommendation_from: review_console_import_reader_safety_review.
+active_phase_id: v14_136_accepted_samples_recoverability_metadata_patch.
+active_phase_record_ref: docs/v14_136_accepted_samples_recoverability_metadata_patch.md.
+active_recommended_next: project_master_plan_quarantine_status_demotion.
+recommended_next_source_phase: v14_136_accepted_samples_recoverability_metadata_patch.
+supersedes_recommendation_from: accepted_samples_recoverability_metadata_patch.
 artifact_scope:
 artifact_sample_id: accepted_womens_resort_relaxed_knit_codex_v2_001.
 artifact_recoverability_status: workspace_local_verified.
@@ -69,7 +69,12 @@ env_value_read_allowed_without_separate_authorization: false.
 provider_API_plugin_MCP_allowed_without_separate_authorization: false.
 real_manifest_VCPChat_VCPToolBox_read_allowed_without_separate_authorization: false.
 push_tag_release_deploy_allowed_without_separate_authorization: false.
-current_focus: review_console_import_reader_safety_review.
+current_focus: accepted_samples_recoverability_metadata_patch.
+accepted_samples_recoverability_metadata_patch_completed: true.
+accepted_samples_registry_metadata_patched: true.
+category_index_recoverability_metadata_patched: true.
+image_binary_copy_performed: false.
+runs_source_image_modified: false.
 review_console_import_reader_safety_review_completed: true.
 no_fetch_or_network_path_verified: true.
 no_plugin_or_provider_path_verified: true.
@@ -226,8 +231,8 @@ accepted_samples_write_performed: false.
 failure_samples_write_performed: false.
 production_candidate_created: false.
 output_file_write_performed: false.
-validated_now: node --check scripts/validate_v14_135_review_console_import_reader_safety_review.js; node scripts/validate_v14_135_review_console_import_reader_safety_review.js.
-recommended_next: accepted_samples_recoverability_metadata_patch.
+validated_now: node --check scripts/validate_v14_136_accepted_samples_recoverability_metadata_patch.js; node scripts/validate_v14_136_accepted_samples_recoverability_metadata_patch.js.
+recommended_next: project_master_plan_quarantine_status_demotion.
 recommended_next_auto_execution_allowed: true.
 ---
 Current active local objective: v14_107_womens_resort_relaxed_knit_accepted_sample_closeout.

@@ -1,5 +1,57 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.136-ACCEPTED-SAMPLES-RECOVERABILITY-METADATA-PATCH
+
+Scope:
+
+Validate that the accepted Codex-session sample registry and category index now
+carry recoverability metadata that points to v14.131 real artifact verification,
+without copying image binaries, modifying `runs/`, writing failure samples,
+promoting production candidates, or writing memory.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_136_accepted_samples_recoverability_metadata_patch.js
+node scripts/validate_v14_136_accepted_samples_recoverability_metadata_patch.js
+```
+
+Expected:
+
+```yaml
+passed: true
+accepted_samples_recoverability_metadata_patch_completed: true
+accepted_samples_registry_metadata_patched: true
+category_index_recoverability_metadata_patched: true
+recoverability_status: workspace_local_verified
+artifact_locator_scope: project_relative_runs
+verification_mode: local_file_hash
+portable_after_clone: false
+image_binary_copy_performed: false
+runs_source_image_modified: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+```
+
+Result:
+
+```yaml
+status: passed
+validator: scripts/validate_v14_136_accepted_samples_recoverability_metadata_patch.js
+phase_record: docs/v14_136_accepted_samples_recoverability_metadata_patch.md
+```
+
 ## VALIDATION-20260517-v14.135-REVIEW-CONSOLE-IMPORT-READER-SAFETY-REVIEW
 
 Scope:

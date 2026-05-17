@@ -1,5 +1,44 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.136 Accepted Samples Recoverability Metadata Patch
+
+```text
+phase_id: v14_136_accepted_samples_recoverability_metadata_patch
+status: completed_validated
+phase_record_ref: docs/v14_136_accepted_samples_recoverability_metadata_patch.md
+validator_created: scripts/validate_v14_136_accepted_samples_recoverability_metadata_patch.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+accepted_samples_recoverability_metadata_patch_completed: true
+accepted_samples_registry_metadata_patched: true
+category_index_recoverability_metadata_patched: true
+recoverability_status: workspace_local_verified
+artifact_locator_scope: project_relative_runs
+verification_mode: local_file_hash
+verified_sha256: 9d23208d05427b02ffc177664c1918ed73bf57831a9694be16522fe9a8f3c910
+verified_dimensions: 1254x1254
+verification_record_ref: docs/v14_131_real_artifact_validation_and_accepted_sample_recoverability_gate.md
+portable_after_clone: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+image_binary_copy_performed: false
+runs_source_image_modified: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+validated_now: node --check scripts/validate_v14_136_accepted_samples_recoverability_metadata_patch.js; node scripts/validate_v14_136_accepted_samples_recoverability_metadata_patch.js
+recommended_next: project_master_plan_quarantine_status_demotion
+recommended_next_auto_execution_allowed: true
+```
+
 # V14.135 Review Console Import Reader Safety Review
 
 ```text

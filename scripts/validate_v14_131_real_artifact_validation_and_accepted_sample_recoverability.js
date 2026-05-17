@@ -216,7 +216,8 @@ for (const token of [
   requireToken("registry_sample", sampleBlock, token);
 }
 
-addResult("category_index_sample_id_exactly_once", countOccurrences(categoryIndex, sampleId) === 1);
+addResult("category_index_sample_list_entry_present", categoryIndex.includes(`  - ${sampleId}`));
+addResult("category_index_sample_metadata_entry_present", categoryIndex.includes(`  ${sampleId}:`));
 requireToken("category_index", categoryIndex, `category: ${expected.category}`);
 requireToken("category_index", categoryIndex, "sample_count: 1");
 

@@ -199,6 +199,7 @@ $requiredFiles = @(
   'scripts/validate_v14_133_main_validator_real_import_record_wiring.js',
   'scripts/validate_v14_134_review_console_static_import_record_reader.js',
   'scripts/validate_v14_135_review_console_import_reader_safety_review.js',
+  'scripts/validate_v14_136_accepted_samples_recoverability_metadata_patch.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -328,6 +329,7 @@ $requiredFiles = @(
   'docs/v14_133_main_validator_real_import_record_wiring.md',
   'docs/v14_134_review_console_static_import_record_reader.md',
   'docs/v14_135_review_console_import_reader_safety_review.md',
+  'docs/v14_136_accepted_samples_recoverability_metadata_patch.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8679,6 +8681,40 @@ process.exit(child.status || 0);
     }
     if ($reviewConsoleImportReaderSafetyReview.real_manifest_read_performed -ne $false -or $reviewConsoleImportReaderSafetyReview.real_vcpchat_read_performed -ne $false -or $reviewConsoleImportReaderSafetyReview.real_vcptoolbox_read_performed -ne $false) {
       Add-Failure "Review Console import reader safety review must not read real manifest/VCPChat/VCPToolBox"
+    }
+  }
+
+  $acceptedSamplesRecoverabilityMetadataOutput = & node (Join-Path $Root 'scripts/validate_v14_136_accepted_samples_recoverability_metadata_patch.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "accepted samples recoverability metadata validation exited with failure"
+  } else {
+    $acceptedSamplesRecoverabilityMetadata = ($acceptedSamplesRecoverabilityMetadataOutput -join "`n") | ConvertFrom-Json
+    if ($acceptedSamplesRecoverabilityMetadata.passed -ne $true) {
+      Add-Failure "accepted samples recoverability metadata validation must pass"
+    }
+    if ($acceptedSamplesRecoverabilityMetadata.accepted_samples_registry_metadata_patched -ne $true -or $acceptedSamplesRecoverabilityMetadata.category_index_recoverability_metadata_patched -ne $true) {
+      Add-Failure "accepted sample recoverability metadata must be present in registry and category index"
+    }
+    if ($acceptedSamplesRecoverabilityMetadata.recoverability_status -ne "workspace_local_verified" -or $acceptedSamplesRecoverabilityMetadata.verification_mode -ne "local_file_hash") {
+      Add-Failure "accepted sample recoverability metadata must preserve workspace-local hash verification"
+    }
+    if ($acceptedSamplesRecoverabilityMetadata.portable_after_clone -ne $false) {
+      Add-Failure "accepted sample recoverability metadata must not claim clone portability"
+    }
+    if ($acceptedSamplesRecoverabilityMetadata.image_binary_copy_performed -ne $false -or $acceptedSamplesRecoverabilityMetadata.runs_source_image_modified -ne $false) {
+      Add-Failure "accepted sample recoverability metadata patch must not copy image binaries or modify runs source images"
+    }
+    if ($acceptedSamplesRecoverabilityMetadata.provider_contact_performed -ne $false -or $acceptedSamplesRecoverabilityMetadata.plugin_call_performed -ne $false -or $acceptedSamplesRecoverabilityMetadata.api_call_performed -ne $false -or $acceptedSamplesRecoverabilityMetadata.mcp_runtime_performed -ne $false) {
+      Add-Failure "accepted sample recoverability metadata patch must not call provider/plugin/API/MCP"
+    }
+    if ($acceptedSamplesRecoverabilityMetadata.image_generation_performed -ne $false -or $acceptedSamplesRecoverabilityMetadata.daily_note_write_performed -ne $false -or $acceptedSamplesRecoverabilityMetadata.vcp_memory_write_performed -ne $false) {
+      Add-Failure "accepted sample recoverability metadata patch must not generate images or write DailyNote/VCP memory"
+    }
+    if ($acceptedSamplesRecoverabilityMetadata.failure_samples_write_performed -ne $false -or $acceptedSamplesRecoverabilityMetadata.production_candidate_created -ne $false) {
+      Add-Failure "accepted sample recoverability metadata patch must not write failure_samples or production candidates"
+    }
+    if ($acceptedSamplesRecoverabilityMetadata.real_manifest_read_performed -ne $false -or $acceptedSamplesRecoverabilityMetadata.real_vcpchat_read_performed -ne $false -or $acceptedSamplesRecoverabilityMetadata.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "accepted sample recoverability metadata patch must not read real manifest/VCPChat/VCPToolBox"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding
