@@ -1,5 +1,44 @@
 # RUN_STATE.md — Agent Image Lab
 
+## Active Two-Week Authorization Split Goal
+
+```text
+objective: shift Agent Image Lab from governance/document proof to real artifact recoverability product capability
+status: v14_139_durable_archive_production_candidate_memory_write_authorization_split_planning_completed_validated
+mode: Persistent 4-Agent Council local loop under A4.8 / A4 — Sustained Local Autopilot
+phase_id: v14_139_durable_archive_production_candidate_memory_write_authorization_split_planning
+phase_record_ref: docs/v14_139_durable_archive_production_candidate_memory_write_authorization_split_planning.md
+validator_created: scripts/validate_v14_139_durable_archive_production_candidate_memory_write_authorization_split_planning.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+durable_archive_authorization_prepared: true
+production_candidate_authorization_prepared: true
+memory_write_authorization_prepared: true
+authorization_packages_split: true
+authorization_granted_by_this_record: false
+durable_archive_is_not_production_candidate: true
+production_candidate_is_not_memory_write: true
+memory_write_is_not_durable_archive: true
+durable_archive_executed: false
+archive_manifest_written: false
+image_binary_copy_performed: false
+production_candidate_created: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+validated_now: node --check scripts/validate_v14_139_durable_archive_production_candidate_memory_write_authorization_split_planning.js; node scripts/validate_v14_139_durable_archive_production_candidate_memory_write_authorization_split_planning.js
+recommended_next: two_week_regression_closeout
+recommended_next_auto_execution_allowed: true
+```
+
 ## Active Two-Week Dashboard Evidence Goal
 
 ```text

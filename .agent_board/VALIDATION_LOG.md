@@ -1,5 +1,55 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260517-v14.139-AUTHORIZATION-SPLIT-PLANNING
+
+Scope:
+
+Validate that durable archive, production_candidate, and DailyNote/VCP memory
+write have three separate inactive A5 authorization packages, and that none of
+the packages is executed by this phase.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_139_durable_archive_production_candidate_memory_write_authorization_split_planning.js
+node scripts/validate_v14_139_durable_archive_production_candidate_memory_write_authorization_split_planning.js
+```
+
+Expected:
+
+```yaml
+passed: true
+durable_archive_authorization_prepared: true
+production_candidate_authorization_prepared: true
+memory_write_authorization_prepared: true
+authorization_packages_split: true
+authorization_granted_by_this_record: false
+durable_archive_executed: false
+archive_manifest_written: false
+image_binary_copy_performed: false
+production_candidate_created: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+```
+
+Result:
+
+```yaml
+status: passed
+validator: scripts/validate_v14_139_durable_archive_production_candidate_memory_write_authorization_split_planning.js
+phase_record: docs/v14_139_durable_archive_production_candidate_memory_write_authorization_split_planning.md
+```
+
 ## VALIDATION-20260517-v14.138-DASHBOARD-ALIGNMENT-FROM-REAL-ARTIFACT-EVIDENCE
 
 Scope:

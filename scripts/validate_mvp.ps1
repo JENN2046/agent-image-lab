@@ -202,6 +202,7 @@ $requiredFiles = @(
   'scripts/validate_v14_136_accepted_samples_recoverability_metadata_patch.js',
   'scripts/validate_v14_137_project_master_plan_quarantine_status_demotion.js',
   'scripts/validate_v14_138_dashboard_alignment_from_real_artifact_evidence.js',
+  'scripts/validate_v14_139_durable_archive_production_candidate_memory_write_authorization_split_planning.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -232,6 +233,7 @@ $requiredFiles = @(
   'tests/schema_examples/pvos_evidence_collector_blocker_pipeline.example.json',
   'tests/schema_examples/codex_session_image_import.example.json',
   'tests/schema_examples/artifact_recoverability_dashboard_evidence.example.json',
+  'tests/schema_examples/v14_139_authorization_split_package.example.yaml',
   'tests/schema_examples/v14_111_codex_session_memory_delta_draft.example.yaml',
   'tests/schema_examples/review_console_adapter_negative_fixture_draft_output_snapshot.example.json',
   'tests/schema_examples/review_console_blocker_arbiter_draft_output_snapshot.example.json',
@@ -335,6 +337,7 @@ $requiredFiles = @(
   'docs/v14_136_accepted_samples_recoverability_metadata_patch.md',
   'docs/v14_137_project_master_plan_quarantine_status_demotion.md',
   'docs/v14_138_dashboard_alignment_from_real_artifact_evidence.md',
+  'docs/v14_139_durable_archive_production_candidate_memory_write_authorization_split_planning.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8794,6 +8797,40 @@ process.exit(child.status || 0);
     }
     if ($dashboardArtifactEvidence.real_manifest_read_performed -ne $false -or $dashboardArtifactEvidence.real_vcpchat_read_performed -ne $false -or $dashboardArtifactEvidence.real_vcptoolbox_read_performed -ne $false) {
       Add-Failure "dashboard evidence must not read real manifest/VCPChat/VCPToolBox"
+    }
+  }
+
+  $authorizationSplitOutput = & node (Join-Path $Root 'scripts/validate_v14_139_durable_archive_production_candidate_memory_write_authorization_split_planning.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "durable archive / production candidate / memory write authorization split validation exited with failure"
+  } else {
+    $authorizationSplit = ($authorizationSplitOutput -join "`n") | ConvertFrom-Json
+    if ($authorizationSplit.passed -ne $true) {
+      Add-Failure "authorization split planning validation must pass"
+    }
+    if ($authorizationSplit.durable_archive_authorization_prepared -ne $true -or $authorizationSplit.production_candidate_authorization_prepared -ne $true -or $authorizationSplit.memory_write_authorization_prepared -ne $true) {
+      Add-Failure "authorization split planning must prepare durable archive, production candidate, and memory write packages"
+    }
+    if ($authorizationSplit.authorization_packages_split -ne $true -or $authorizationSplit.authorization_granted_by_this_record -ne $false) {
+      Add-Failure "authorization packages must remain split and not granted by this record"
+    }
+    if ($authorizationSplit.durable_archive_executed -ne $false -or $authorizationSplit.archive_manifest_written -ne $false -or $authorizationSplit.image_binary_copy_performed -ne $false) {
+      Add-Failure "authorization split planning must not execute durable archive or copy binaries"
+    }
+    if ($authorizationSplit.production_candidate_created -ne $false -or $authorizationSplit.production_candidate_write_performed -ne $false) {
+      Add-Failure "authorization split planning must not create or write production candidates"
+    }
+    if ($authorizationSplit.daily_note_write_performed -ne $false -or $authorizationSplit.vcp_memory_write_performed -ne $false) {
+      Add-Failure "authorization split planning must not write DailyNote or VCP memory"
+    }
+    if ($authorizationSplit.provider_contact_performed -ne $false -or $authorizationSplit.plugin_call_performed -ne $false -or $authorizationSplit.api_call_performed -ne $false -or $authorizationSplit.mcp_runtime_performed -ne $false) {
+      Add-Failure "authorization split planning must not call provider/plugin/API/MCP"
+    }
+    if ($authorizationSplit.image_generation_performed -ne $false) {
+      Add-Failure "authorization split planning must not generate images"
+    }
+    if ($authorizationSplit.real_manifest_read_performed -ne $false -or $authorizationSplit.real_vcpchat_read_performed -ne $false -or $authorizationSplit.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "authorization split planning must not read real manifest/VCPChat/VCPToolBox"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

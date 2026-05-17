@@ -1,0 +1,29 @@
+authorization_split_package:
+  phase: v14_139_durable_archive_production_candidate_memory_write_authorization_split_planning
+  status: prepared_not_granted
+  authorization_granted_by_this_record: false
+  packages:
+    durable_archive:
+      authorization_id: AUTH-PENDING-WOMENS-RESORT-KNIT-DURABLE-ARCHIVE-20260517-001
+      package_status: prepared_not_granted
+      permits_production_candidate_write: false
+      permits_memory_write: false
+    production_candidate:
+      authorization_id: AUTH-PENDING-WOMENS-RESORT-KNIT-PRODUCTION-CANDIDATE-20260517-001
+      package_status: prepared_not_granted
+      permits_image_binary_copy: false
+      permits_memory_write: false
+    memory_write:
+      authorization_id: AUTH-PENDING-WOMENS-RESORT-KNIT-MEMORY-WRITE-20260517-001
+      package_status: prepared_not_granted
+      permits_image_binary_copy: false
+      permits_production_candidate_write: false
+  split_guards:
+    durable_archive_is_not_production_candidate: true
+    production_candidate_is_not_memory_write: true
+    memory_write_is_not_durable_archive: true
+    durable_archive_executed: false
+    image_binary_copy_performed: false
+    production_candidate_created: false
+    DailyNote_write_performed: false
+    VCP_memory_write_performed: false
