@@ -196,6 +196,7 @@ $requiredFiles = @(
   'scripts/validate_v14_130_legacy_docs_context_quarantine_refresh.js',
   'scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js',
   'scripts/validate_v14_132_state_scope_canonicalization.js',
+  'scripts/validate_v14_133_main_validator_real_import_record_wiring.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -322,6 +323,7 @@ $requiredFiles = @(
   'docs/v14_130_legacy_docs_context_quarantine_refresh.md',
   'docs/v14_131_real_artifact_validation_and_accepted_sample_recoverability_gate.md',
   'docs/v14_132_state_scope_canonicalization.md',
+  'docs/v14_133_main_validator_real_import_record_wiring.md',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8571,6 +8573,43 @@ process.exit(child.status || 0);
     }
     if ($stateScopeCanonicalization.real_manifest_read_performed -ne $false -or $stateScopeCanonicalization.real_vcpchat_read_performed -ne $false -or $stateScopeCanonicalization.real_vcptoolbox_read_performed -ne $false) {
       Add-Failure "state scope canonicalization must not read real manifest/VCPChat/VCPToolBox"
+    }
+  }
+
+  $mainValidatorRealImportRecordWiringOutput = & node (Join-Path $Root 'scripts/validate_v14_133_main_validator_real_import_record_wiring.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "main validator real import record wiring validation exited with failure"
+  } else {
+    $mainValidatorRealImportRecordWiring = ($mainValidatorRealImportRecordWiringOutput -join "`n") | ConvertFrom-Json
+    if ($mainValidatorRealImportRecordWiring.passed -ne $true) {
+      Add-Failure "main validator real import record wiring validation must pass"
+    }
+    if ($mainValidatorRealImportRecordWiring.mvp_invokes_real_artifact_validator -ne $true -or $mainValidatorRealImportRecordWiring.real_v14_105_import_record_in_main_validation_chain -ne $true) {
+      Add-Failure "main validator must invoke the real artifact validator and include the real v14.105 import record"
+    }
+    if ($mainValidatorRealImportRecordWiring.mvp_still_runs_fixture_validator -ne $true -or $mainValidatorRealImportRecordWiring.fixture_validator_not_sole_import_evidence -ne $true) {
+      Add-Failure "main validator must keep fixture validation but not treat fixtures as sole import evidence"
+    }
+    if ($mainValidatorRealImportRecordWiring.artifact_hash_negative_case_covered_by_main_validator -ne $true -or $mainValidatorRealImportRecordWiring.missing_artifact_negative_case_covered_by_main_validator -ne $true -or $mainValidatorRealImportRecordWiring.missing_human_approval_negative_case_covered_by_main_validator -ne $true) {
+      Add-Failure "main validator real import record wiring must cover hash mismatch, missing artifact, and missing human approval negative cases"
+    }
+    if ($mainValidatorRealImportRecordWiring.main_validator_requires_workspace_local_not_clone_portable_claim -ne $true) {
+      Add-Failure "main validator must preserve workspace-local verification without claiming clone portability"
+    }
+    if ($mainValidatorRealImportRecordWiring.provider_contact_performed -ne $false -or $mainValidatorRealImportRecordWiring.plugin_call_performed -ne $false -or $mainValidatorRealImportRecordWiring.api_call_performed -ne $false -or $mainValidatorRealImportRecordWiring.mcp_runtime_performed -ne $false) {
+      Add-Failure "main validator real import record wiring must not call provider/plugin/API/MCP"
+    }
+    if ($mainValidatorRealImportRecordWiring.image_generation_performed -ne $false -or $mainValidatorRealImportRecordWiring.file_write_performed -ne $false) {
+      Add-Failure "main validator real import record wiring must not generate images or write output files"
+    }
+    if ($mainValidatorRealImportRecordWiring.daily_note_write_performed -ne $false -or $mainValidatorRealImportRecordWiring.vcp_memory_write_performed -ne $false) {
+      Add-Failure "main validator real import record wiring must not write DailyNote or VCP memory"
+    }
+    if ($mainValidatorRealImportRecordWiring.failure_samples_write_performed -ne $false -or $mainValidatorRealImportRecordWiring.production_candidate_created -ne $false) {
+      Add-Failure "main validator real import record wiring must not write failure_samples or production candidates"
+    }
+    if ($mainValidatorRealImportRecordWiring.real_manifest_read_performed -ne $false -or $mainValidatorRealImportRecordWiring.real_vcpchat_read_performed -ne $false -or $mainValidatorRealImportRecordWiring.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "main validator real import record wiring must not read real manifest/VCPChat/VCPToolBox"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

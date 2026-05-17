@@ -1,5 +1,40 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.133 Main Validator Real Import Record Wiring
+
+```text
+phase_id: v14_133_main_validator_real_import_record_wiring
+status: completed_validated
+phase_record_ref: docs/v14_133_main_validator_real_import_record_wiring.md
+validator_created: scripts/validate_v14_133_main_validator_real_import_record_wiring.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+main_validator_real_import_record_wiring_verified: true
+mvp_invokes_real_artifact_validator: true
+mvp_still_runs_fixture_validator: true
+fixture_validator_not_sole_import_evidence: true
+real_v14_105_import_record_in_main_validation_chain: true
+artifact_hash_negative_case_covered_by_main_validator: true
+missing_artifact_negative_case_covered_by_main_validator: true
+missing_human_approval_negative_case_covered_by_main_validator: true
+main_validator_requires_workspace_local_not_clone_portable_claim: true
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+validated_now: node --check scripts/validate_v14_133_main_validator_real_import_record_wiring.js; node scripts/validate_v14_133_main_validator_real_import_record_wiring.js
+recommended_next: review_console_static_import_record_reader
+recommended_next_auto_execution_allowed: true
+```
+
 # V14.132 State Scope Canonicalization
 
 ```text

@@ -101,11 +101,6 @@ for (const label of ["run_state", "task_queue"]) {
   const text = label === "run_state" ? runState : taskQueue;
   for (const token of [
     "active_scope:",
-    "active_phase_id: v14_132_state_scope_canonicalization",
-    "active_phase_record_ref: docs/v14_132_state_scope_canonicalization.md",
-    "active_recommended_next: main_validator_real_import_record_wiring",
-    "recommended_next_source_phase: v14_132_state_scope_canonicalization",
-    "supersedes_recommendation_from: review_console_current_goal_gap_dashboard_alignment",
     "artifact_scope:",
     "artifact_sample_id: accepted_womens_resort_relaxed_knit_codex_v2_001",
     "artifact_recoverability_status: workspace_local_verified",

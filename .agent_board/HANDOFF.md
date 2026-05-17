@@ -3,6 +3,40 @@
 ## Handoff Summary
 
 ```text
+Status: v14_133_main_validator_real_import_record_wiring completed locally and validated.
+Reason: The MVP validation chain now needs to prove the real v14.105 import record and artifact recoverability validator are first-class validation inputs, while retaining fixture validation only as fixture coverage.
+Current repository: project_root
+Branch: master tracking origin/master; local commits may be ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.133 main validator wiring, validator, phase record, and .agent_board sync until validation and commit decision.
+Phase record: docs/v14_133_main_validator_real_import_record_wiring.md
+Validator created: scripts/validate_v14_133_main_validator_real_import_record_wiring.js
+MVP validator updated: scripts/validate_mvp.ps1
+main_validator_real_import_record_wiring_verified: true
+mvp_invokes_real_artifact_validator: true
+mvp_still_runs_fixture_validator: true
+fixture_validator_not_sole_import_evidence: true
+real_v14_105_import_record_in_main_validation_chain: true
+artifact_hash_negative_case_covered_by_main_validator: true
+missing_artifact_negative_case_covered_by_main_validator: true
+missing_human_approval_negative_case_covered_by_main_validator: true
+main_validator_requires_workspace_local_not_clone_portable_claim: true
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+failure_samples_write_performed: false
+production_candidate_created: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+validated_now: node --check scripts/validate_v14_133_main_validator_real_import_record_wiring.js; node scripts/validate_v14_133_main_validator_real_import_record_wiring.js
+recommended_next: review_console_static_import_record_reader
+recommended_next_auto_execution_allowed: true
+---
 Status: v14_132_state_scope_canonicalization completed locally and validated.
 Reason: The board state needed explicit active/artifact/authorization/side-effect/history scopes so current phase facts are no longer mixed with project-history facts.
 Current repository: project_root
