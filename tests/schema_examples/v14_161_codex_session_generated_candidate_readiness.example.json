@@ -1,0 +1,73 @@
+{
+  "codex_session_generated_candidate_readiness": {
+    "version": "v1",
+    "phase": "v14_161_codex_session_generated_candidate_readiness",
+    "execution_mode": "local_artifact_import_review_readiness_only",
+    "generated_candidate_count": 2,
+    "different_visual_task_count": 2,
+    "artifacts": [
+      {
+        "candidate_id": "v14_161_product_still_life_smart_desk_lamp_candidate_001",
+        "visual_task": "product_still_life_square_hero",
+        "artifact_ref": "runs/real_generation/v14_161_codex_session_two_more_recoverable_samples_generation_trial/codex_session_v14_161_product_still_life_smart_desk_lamp_candidate_001.png",
+        "import_record_ref": "tests/schema_examples/v14_161_product_still_life_smart_desk_lamp_import_record.json",
+        "prompt_package_ref": "session_prompt_inline:v14_161_product_still_life_smart_desk_lamp_candidate_001",
+        "sha256": "94e8354eb96b2a38e44d5cb080a2350f46517cab7d1a6201ec6abe2b8f705e40",
+        "dimensions": "1254x1254",
+        "mime": "image/png",
+        "local_file_verified": true,
+        "review_status": "needs_revision",
+        "human_approval_status": "not_approved",
+        "approved_by": null,
+        "accepted_candidate": false,
+        "visual_score": 7.8,
+        "commercial_delivery_ready": false,
+        "revision_direction": "keep_black_metal_body_and_warm_lamp_quality_but_make_product_positioning_clearer_and_hero_impact_stronger"
+      },
+      {
+        "candidate_id": "v14_161_fashion_lifestyle_woven_crossbody_bag_candidate_001",
+        "visual_task": "fashion_lifestyle_accessory_square_hero",
+        "artifact_ref": "runs/real_generation/v14_161_codex_session_two_more_recoverable_samples_generation_trial/codex_session_v14_161_fashion_lifestyle_woven_crossbody_bag_candidate_001.png",
+        "import_record_ref": "tests/schema_examples/v14_161_fashion_lifestyle_woven_crossbody_bag_import_record.json",
+        "prompt_package_ref": "session_prompt_inline:v14_161_fashion_lifestyle_woven_crossbody_bag_candidate_001",
+        "sha256": "3422671f95e9b218829966ae46f4b284ae619875e080c473a295cf9e65432ba3",
+        "dimensions": "1254x1254",
+        "mime": "image/png",
+        "local_file_verified": true,
+        "review_status": "accepted_candidate_with_human_approval",
+        "human_approval_status": "approved",
+        "approved_by": "Jenn",
+        "approval_statement": "第二张可以接受通过",
+        "accepted_candidate": true,
+        "visual_score": 8.2,
+        "commercial_delivery_ready": true
+      }
+    ],
+    "guard": {
+      "accepted_samples_write_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed_by_project": false,
+      "plugin_call_performed_by_project": false,
+      "api_call_performed_by_project": false,
+      "mcp_runtime_performed_by_project": false,
+      "image_generation_performed_by_project_script": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "durable_archive_copy_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "next_gate": {
+      "automatic_next_generation_recommended": false,
+      "automatic_accepted_samples_write_allowed": false,
+      "accepted_samples_write_requires_separate_authorization": true,
+      "production_candidate_write_requires_separate_authorization": true,
+      "memory_write_requires_separate_authorization": true
+    }
+  }
+}

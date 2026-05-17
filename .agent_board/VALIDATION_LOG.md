@@ -1,5 +1,59 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260518-v14.161-CODEX-GENERATED-CANDIDATE-READINESS
+
+Scope:
+
+Validate local import/review readiness for the two new Codex-session candidate
+artifacts. The first lamp candidate must remain a revision candidate; the
+second woven crossbody bag candidate may be recorded as Jenn-approved, but this
+stage must not write accepted_samples.
+
+Commands:
+
+```text
+node --check scripts/validate_v14_161_codex_session_generated_candidate_readiness.js
+node scripts/validate_v14_161_codex_session_generated_candidate_readiness.js
+```
+
+Expected:
+
+```yaml
+passed: true
+generated_candidate_count: 2
+different_visual_task_count: 2
+lamp_candidate_status: needs_revision
+lamp_candidate_accepted: false
+bag_candidate_status: accepted_candidate_with_human_approval
+bag_candidate_approved_by: Jenn
+bag_candidate_accepted: true
+negative_case_missing_artifact_fails: true
+negative_case_hash_mismatch_fails: true
+negative_case_dimensions_mismatch_fails: true
+negative_case_mime_mismatch_fails: true
+negative_case_human_approval_missing_for_passed_candidate_fails: true
+negative_case_unapproved_candidate_marked_accepted_fails: true
+negative_case_accepted_samples_write_flag_blocks_readiness: true
+negative_case_vcp_runtime_claim_blocks_readiness: true
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+daily_note_write_performed: false
+vcp_memory_write_performed: false
+provider_contact_performed_by_project: false
+plugin_call_performed_by_project: false
+api_call_performed_by_project: false
+mcp_runtime_performed_by_project: false
+image_generation_performed_by_project_script: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+durable_archive_copy_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+```
+
 ## VALIDATION-20260517-v14.160-TWO-MONTH-PRODUCT-CAPABILITY-CLOSEOUT
 
 Scope:

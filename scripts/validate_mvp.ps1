@@ -222,6 +222,7 @@ $requiredFiles = @(
   'scripts/validate_v14_153_manifest_read_authorization_gate_package.js',
   'scripts/validate_v14_159_end_to_end_audit_rollback_package.js',
   'scripts/validate_v14_160_two_month_product_capability_closeout.js',
+  'scripts/validate_v14_161_codex_session_generated_candidate_readiness.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -398,6 +399,11 @@ $requiredFiles = @(
   'docs/v14_160_two_month_product_capability_closeout.md',
   'schemas/two_month_product_capability_closeout.schema.yaml',
   'tests/schema_examples/v14_160_two_month_product_capability_closeout.example.yaml',
+  'docs/v14_161_codex_session_generated_candidate_readiness.md',
+  'schemas/codex_session_generated_candidate_readiness.schema.yaml',
+  'tests/schema_examples/v14_161_codex_session_generated_candidate_readiness.example.json',
+  'tests/schema_examples/v14_161_product_still_life_smart_desk_lamp_import_record.json',
+  'tests/schema_examples/v14_161_fashion_lifestyle_woven_crossbody_bag_import_record.json',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -9472,6 +9478,43 @@ process.exit(child.status || 0);
     }
     if ($twoMonthCloseout.image_binary_copy_performed -ne $false -or $twoMonthCloseout.production_candidate_write_performed -ne $false -or $twoMonthCloseout.failure_samples_write_performed -ne $false -or $twoMonthCloseout.daily_note_write_performed -ne $false -or $twoMonthCloseout.vcp_memory_write_performed -ne $false) {
       Add-Failure "two-month closeout must not copy images or write production/memory/failure outputs"
+    }
+  }
+
+  $codexGeneratedCandidateReadinessOutput = & node (Join-Path $Root 'scripts/validate_v14_161_codex_session_generated_candidate_readiness.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Codex generated candidate readiness validation exited with failure"
+  } else {
+    $codexGeneratedCandidateReadiness = ($codexGeneratedCandidateReadinessOutput -join "`n") | ConvertFrom-Json
+    if ($codexGeneratedCandidateReadiness.passed -ne $true) {
+      Add-Failure "Codex generated candidate readiness validation must pass"
+    }
+    if ($codexGeneratedCandidateReadiness.generated_candidate_count -ne 2 -or $codexGeneratedCandidateReadiness.different_visual_task_count -ne 2) {
+      Add-Failure "v14.161 must verify two candidates across two different visual tasks"
+    }
+    if ($codexGeneratedCandidateReadiness.lamp_candidate_status -ne 'needs_revision' -or $codexGeneratedCandidateReadiness.lamp_candidate_accepted -ne $false) {
+      Add-Failure "v14.161 must hold back the first lamp candidate for revision"
+    }
+    if ($codexGeneratedCandidateReadiness.bag_candidate_status -ne 'accepted_candidate_with_human_approval' -or $codexGeneratedCandidateReadiness.bag_candidate_approved_by -ne 'Jenn' -or $codexGeneratedCandidateReadiness.bag_candidate_accepted -ne $true) {
+      Add-Failure "v14.161 must record Jenn approval for the second bag candidate only"
+    }
+    if ($codexGeneratedCandidateReadiness.negative_case_missing_artifact_fails -ne $true -or $codexGeneratedCandidateReadiness.negative_case_hash_mismatch_fails -ne $true -or $codexGeneratedCandidateReadiness.negative_case_dimensions_mismatch_fails -ne $true -or $codexGeneratedCandidateReadiness.negative_case_mime_mismatch_fails -ne $true -or $codexGeneratedCandidateReadiness.negative_case_human_approval_missing_for_passed_candidate_fails -ne $true -or $codexGeneratedCandidateReadiness.negative_case_unapproved_candidate_marked_accepted_fails -ne $true -or $codexGeneratedCandidateReadiness.negative_case_accepted_samples_write_flag_blocks_readiness -ne $true -or $codexGeneratedCandidateReadiness.negative_case_vcp_runtime_claim_blocks_readiness -ne $true) {
+      Add-Failure "v14.161 must fail generated candidate readiness negative cases"
+    }
+    if ($codexGeneratedCandidateReadiness.accepted_samples_write_performed -ne $false -or $codexGeneratedCandidateReadiness.failure_samples_write_performed -ne $false -or $codexGeneratedCandidateReadiness.production_candidate_write_performed -ne $false -or $codexGeneratedCandidateReadiness.daily_note_write_performed -ne $false -or $codexGeneratedCandidateReadiness.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.161 must not write accepted/failure/production/memory outputs"
+    }
+    if ($codexGeneratedCandidateReadiness.provider_contact_performed_by_project -ne $false -or $codexGeneratedCandidateReadiness.plugin_call_performed_by_project -ne $false -or $codexGeneratedCandidateReadiness.api_call_performed_by_project -ne $false -or $codexGeneratedCandidateReadiness.mcp_runtime_performed_by_project -ne $false -or $codexGeneratedCandidateReadiness.image_generation_performed_by_project_script -ne $false) {
+      Add-Failure "v14.161 must not call provider/plugin/API/MCP or generate by project script"
+    }
+    if ($codexGeneratedCandidateReadiness.real_manifest_read_performed -ne $false -or $codexGeneratedCandidateReadiness.real_vcpchat_read_performed -ne $false -or $codexGeneratedCandidateReadiness.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "v14.161 must not read real manifest or VCP systems"
+    }
+    if ($codexGeneratedCandidateReadiness.durable_archive_copy_performed -ne $false -or $codexGeneratedCandidateReadiness.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.161 must not copy to durable archive or push/tag/release/deploy"
+    }
+    if ($codexGeneratedCandidateReadiness.vcp_runtime_integration_proven -ne $false -or $codexGeneratedCandidateReadiness.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.161 must not claim VCP runtime integration"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

@@ -1,5 +1,46 @@
 # CHECKPOINT.md — Agent Image Lab
 
+# V14.161 Codex Session Generated Candidate Readiness
+
+```text
+phase_id: v14_161_codex_session_generated_candidate_readiness
+status: completed_validated
+phase_record_ref: docs/v14_161_codex_session_generated_candidate_readiness.md
+schema_ref: schemas/codex_session_generated_candidate_readiness.schema.yaml
+fixture_ref: tests/schema_examples/v14_161_codex_session_generated_candidate_readiness.example.json
+lamp_import_record_ref: tests/schema_examples/v14_161_product_still_life_smart_desk_lamp_import_record.json
+bag_import_record_ref: tests/schema_examples/v14_161_fashion_lifestyle_woven_crossbody_bag_import_record.json
+validator_created: scripts/validate_v14_161_codex_session_generated_candidate_readiness.js
+mvp_validator_updated: scripts/validate_mvp.ps1
+generated_candidate_count: 2
+different_visual_task_count: 2
+lamp_candidate_status: needs_revision
+lamp_candidate_accepted: false
+bag_candidate_status: accepted_candidate_with_human_approval
+bag_candidate_approved_by: Jenn
+bag_candidate_accepted: true
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed_by_project: false
+plugin_call_performed_by_project: false
+api_call_performed_by_project: false
+mcp_runtime_performed_by_project: false
+image_generation_performed_by_project_script: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+durable_archive_copy_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+validated_now: node --check scripts/validate_v14_161_codex_session_generated_candidate_readiness.js; node scripts/validate_v14_161_codex_session_generated_candidate_readiness.js
+recommended_next: prepare_accepted_samples_authorization_for_bag_candidate_only_or_lamp_prompt_revision_without_generation
+recommended_next_auto_execution_allowed: false_accepted_samples_write_boundary
+```
+
 # V14.160 Two-Month Product Capability Closeout
 
 ```text

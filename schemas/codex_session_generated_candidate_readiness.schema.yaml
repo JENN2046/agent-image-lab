@@ -1,0 +1,61 @@
+# codex_session_generated_candidate_readiness.schema.yaml
+# Local readiness contract for Codex-session generated candidate artifacts.
+
+codex_session_generated_candidate_readiness:
+  version: v1
+  phase: v14_161_codex_session_generated_candidate_readiness
+  execution_mode: local_artifact_import_review_readiness_only
+  generated_candidate_count: integer
+  different_visual_task_count: integer
+
+candidate_entry:
+  candidate_id: string
+  visual_task: string
+  artifact_ref: project_relative_runs_path
+  import_record_ref: project_relative_json_path
+  prompt_package_ref: session_prompt_inline | project_prompt_package_path
+  sha256: sha256
+  dimensions: widthxheight
+  mime: image/png | image/jpeg | image/webp
+  local_file_verified: true
+  review_status: needs_revision | accepted_candidate_with_human_approval
+  human_approval_status: not_approved | approved
+  approved_by: string | null
+  accepted_candidate: boolean
+  visual_score: number
+  commercial_delivery_ready: boolean
+
+promotion_guard:
+  needs_revision_candidate_must_not_be_accepted: true
+  accepted_candidate_requires_human_approval: true
+  accepted_candidate_requires_real_artifact: true
+  accepted_candidate_requires_hash_dimensions_mime: true
+  accepted_candidate_requires_import_record_ref: true
+  accepted_samples_registry_write_requires_separate_authorization: true
+
+non_authorization:
+  provider_contact_allowed: false
+  plugin_call_allowed: false
+  api_call_allowed: false
+  mcp_runtime_allowed: false
+  image_generation_allowed_by_this_stage: false
+  env_local_secret_value_read_allowed: false
+  real_manifest_vcpchat_vcptoolbox_read_allowed: false
+  accepted_samples_write_allowed_by_this_stage: false
+  failure_samples_write_allowed_by_this_stage: false
+  production_candidate_write_allowed_by_this_stage: false
+  DailyNote_write_allowed_by_this_stage: false
+  VCP_memory_write_allowed_by_this_stage: false
+  durable_archive_copy_allowed_by_this_stage: false
+  push_tag_release_deploy_allowed_by_this_stage: false
+
+negative_case_contract:
+  missing_artifact: fail
+  hash_mismatch: fail
+  dimensions_mismatch: fail
+  mime_mismatch: fail
+  review_status_missing: fail
+  human_approval_missing_for_passed_candidate: fail
+  unapproved_candidate_marked_accepted: fail
+  accepted_samples_write_flag: fail
+  vcp_runtime_claim: fail

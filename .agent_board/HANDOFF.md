@@ -3,6 +3,49 @@
 ## Handoff Summary
 
 ```text
+Status: v14_161_codex_session_generated_candidate_readiness completed locally and validated.
+Reason: Jenn reviewed the two new Codex-session artifacts: the first lamp candidate needs optimization, and the second woven crossbody bag candidate can pass as an approved candidate. The current stage records local import/review readiness only and does not write accepted_samples.
+Current repository: project_root
+Branch: master tracking origin/master; local commits may be ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.161 readiness schema, fixture, two import records, validator, phase record, MVP wiring, and .agent_board sync until commit decision.
+Phase record: docs/v14_161_codex_session_generated_candidate_readiness.md
+Schema: schemas/codex_session_generated_candidate_readiness.schema.yaml
+Fixture: tests/schema_examples/v14_161_codex_session_generated_candidate_readiness.example.json
+Lamp import record: tests/schema_examples/v14_161_product_still_life_smart_desk_lamp_import_record.json
+Bag import record: tests/schema_examples/v14_161_fashion_lifestyle_woven_crossbody_bag_import_record.json
+Validator created: scripts/validate_v14_161_codex_session_generated_candidate_readiness.js
+MVP validator updated: scripts/validate_mvp.ps1
+generated_candidate_count: 2
+different_visual_task_count: 2
+lamp_candidate_status: needs_revision
+lamp_candidate_accepted: false
+bag_candidate_status: accepted_candidate_with_human_approval
+bag_candidate_approved_by: Jenn
+bag_candidate_accepted: true
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed_by_project: false
+plugin_call_performed_by_project: false
+api_call_performed_by_project: false
+mcp_runtime_performed_by_project: false
+image_generation_performed_by_project_script: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+durable_archive_copy_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_161_codex_session_generated_candidate_readiness.js; node scripts/validate_v14_161_codex_session_generated_candidate_readiness.js.
+Next safe action: run broader local validation and commit exact v14.161 files; stop before accepted_samples write unless Jenn gives exact authorization.
+```
+
+## Previous Handoff Summary
+
+```text
 Status: v14_160_two_month_product_capability_closeout completed locally and validated with remaining hard acceptance gap.
 Reason: The v14.141-v14.160 local chain can be closed out, but the long-running two-month goal cannot be marked complete because only one fully recoverable accepted sample exists and the hard acceptance target requires three.
 Current repository: project_root

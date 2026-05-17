@@ -1,0 +1,99 @@
+# v14.161 Codex Session Generated Candidate Readiness
+
+## Scope
+
+```text
+phase: v14_161_codex_session_generated_candidate_readiness
+base_contract: AGENTS.md
+mode: A4.8
+intent: local_implementation
+risk_level: R2
+execution_mode: local_artifact_import_review_readiness_only
+source_generation_authorization_ref: AUTH-PENDING-CODEX-SESSION-TWO-MORE-RECOVERABLE-SAMPLES-GENERATION-20260518
+generated_candidate_count: 2
+different_visual_task_count: 2
+real_artifact_files_verified: true
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed_by_project: false
+plugin_call_performed_by_project: false
+api_call_performed_by_project: false
+mcp_runtime_performed_by_project: false
+image_generation_performed_by_project_script: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+```
+
+## Candidate Review
+
+```text
+candidate_1_id: v14_161_product_still_life_smart_desk_lamp_candidate_001
+candidate_1_visual_task: product_still_life_square_hero
+candidate_1_artifact_ref: runs/real_generation/v14_161_codex_session_two_more_recoverable_samples_generation_trial/codex_session_v14_161_product_still_life_smart_desk_lamp_candidate_001.png
+candidate_1_import_record_ref: tests/schema_examples/v14_161_product_still_life_smart_desk_lamp_import_record.json
+candidate_1_sha256: 94e8354eb96b2a38e44d5cb080a2350f46517cab7d1a6201ec6abe2b8f705e40
+candidate_1_dimensions: 1254x1254
+candidate_1_mime: image/png
+candidate_1_review_status: needs_revision
+candidate_1_human_approval_status: not_approved
+candidate_1_accepted_candidate: false
+candidate_1_visual_score: 7.8
+candidate_1_revision_direction: keep_black_metal_body_and_warm_lamp_quality_but_make_product_positioning_clearer_and_hero_impact_stronger
+
+candidate_2_id: v14_161_fashion_lifestyle_woven_crossbody_bag_candidate_001
+candidate_2_visual_task: fashion_lifestyle_accessory_square_hero
+candidate_2_artifact_ref: runs/real_generation/v14_161_codex_session_two_more_recoverable_samples_generation_trial/codex_session_v14_161_fashion_lifestyle_woven_crossbody_bag_candidate_001.png
+candidate_2_import_record_ref: tests/schema_examples/v14_161_fashion_lifestyle_woven_crossbody_bag_import_record.json
+candidate_2_sha256: 3422671f95e9b218829966ae46f4b284ae619875e080c473a295cf9e65432ba3
+candidate_2_dimensions: 1254x1254
+candidate_2_mime: image/png
+candidate_2_review_status: accepted_candidate_with_human_approval
+candidate_2_human_approval_status: approved
+candidate_2_approved_by: Jenn
+candidate_2_approval_statement: 第二张可以接受通过
+candidate_2_accepted_candidate: true
+candidate_2_visual_score: 8.2
+candidate_2_next_gate: accepted_samples_metadata_registration_requires_separate_authorization_under_project_AGENTS
+```
+
+## Readiness Result
+
+The two generated artifacts are now ready for local import/review validation.
+The desk lamp candidate is intentionally held back as a revision candidate; it
+should not be promoted or registered. The woven crossbody bag candidate has
+human visual approval from Jenn and may be used as the next formal registration
+candidate only after the accepted_samples write boundary is opened separately.
+
+## Negative Case Coverage
+
+```text
+negative_case_missing_artifact_fails: true
+negative_case_hash_mismatch_fails: true
+negative_case_dimensions_mismatch_fails: true
+negative_case_mime_mismatch_fails: true
+negative_case_review_status_missing_fails: true
+negative_case_human_approval_missing_for_passed_candidate_fails: true
+negative_case_unapproved_candidate_marked_accepted_fails: true
+negative_case_accepted_samples_write_flag_blocks_readiness: true
+negative_case_vcp_runtime_claim_blocks_readiness: true
+```
+
+## Next Gate
+
+```text
+recommended_next: prepare_A5_or_A4_8_exact_authorization_for_accepted_samples_metadata_registration_of_candidate_2_only
+automatic_next_generation_recommended: false
+automatic_accepted_samples_write_allowed: false
+accepted_samples_write_requires_separate_authorization: true
+production_candidate_write_requires_separate_authorization: true
+memory_write_requires_separate_authorization: true
+first_candidate_next_action: prompt_revision_only_until_new_generation_authorized
+second_candidate_next_action: eligible_for_formal_sample_registration_after_authorization
+```
