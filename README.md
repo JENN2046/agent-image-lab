@@ -35,6 +35,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 - `docs/archive/DOCS_ARCHIVE_C1P_POST_REWRITE_REFERENCE_MAP.md` 记录 C1p post-rewrite 引用图；它确认 source docs 旧路径归零，剩余非 archive 命中仅为 3 个待移动目标文件的 self-reference。
 - `docs/archive/DOCS_ARCHIVE_C1Q_EXACT_MOVE_EXECUTION_RECORD.md` 记录 C1q 67 个 docs-only-reference candidates 的 exact-file physical move 执行。
 - `docs/archive/DOCS_ARCHIVE_C1R_POST_MOVE_REFERENCE_MAP.md` 记录 C1r post-move 引用图；它确认旧路径命中只剩 `docs/archive/` 内历史审计/规划记录。
+- `docs/archive/DOCS_ARCHIVE_C1T_WRAPPER_REQUIRED_200_ROUTE_PLANNING.md` 记录 C1t wrapper-required 200 路线规划；它决定先做 link graph 和陈旧引用分流，不默认创建 200 个 wrappers。
 - `asset_archive/accepted_samples/<sample_id>/manifest.json + preview.webp` 是新的 accepted sample portable evidence capsule 目标路径。
 - 历史 `docs/v*` 阶段记录、旧 closeout、旧 authorization 草案是审计记录，不等于当前授权。
 - 未经明确 A5 授权，不要运行 provider/plugin/API/image generation/DailyNote/VCP memory/runtime/push/tag/release/deploy 相关入口。

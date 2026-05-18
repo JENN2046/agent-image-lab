@@ -1,5 +1,30 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — C1t Wrapper-Required 200 Route Planning
+
+```text
+Status: c1t_wrapper_required_200_route_planning completed_validated.
+Reason: C1n-C1s closed the docs-only-reference lane and the next C1 lane is wrapper-required.
+Execution mode: A4.8 local docs-only route planning.
+Route plan: docs/archive/DOCS_ARCHIVE_C1T_WRAPPER_REQUIRED_200_ROUTE_PLANNING.md.
+Wrapper-required records: 200.
+Records with .agent_board references: 186.
+Records with README.md references: 39.
+Records with PROJECT_MASTER_PLAN.md references: 25.
+Records with non-archive docs references: 89.
+Records with scripts references: 0.
+Decision: do not create 200 wrappers by default; run link graph first and split stale .agent_board references from human-navigation references.
+Wrappers created: false.
+References rewritten: false.
+Files moved: false.
+Validator behavior changed: false.
+Push/tag/release/deploy performed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Recommended next: C1u wrapper-required link graph dry-run; push remains separately blocked.
+```
+
+---
+
 ## Current Handoff Update — C1q/C1r Exact Move And Post-Move Validation
 
 ```text

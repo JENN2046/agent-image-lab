@@ -1,5 +1,27 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## C1t Wrapper-Required 200 Route Planning
+
+```yaml
+phase: c1t_wrapper_required_200_route_planning
+status: completed_validated
+goal: decide the route for remaining 200 wrapper-required docs archive records
+completed:
+  - confirmed wrapper-required lane count 200 from C1e
+  - confirmed scripts reference count 0 for wrapper-required lane
+  - confirmed .agent_board references dominate the lane
+  - decided not to create 200 wrappers by default
+  - generated docs/archive/DOCS_ARCHIVE_C1T_WRAPPER_REQUIRED_200_ROUTE_PLANNING.md
+  - updated README.md and docs/archive indexes
+  - updated .agent_board HANDOFF/RUN_STATE/TASK_QUEUE/CHECKPOINT surfaces
+not_performed:
+  - no wrappers created
+  - no references rewritten
+  - no docs moved
+  - no validator behavior changed
+  - no push, tag, release, or deploy
+```
+
 ## C1q/C1r Exact Move And Post-Move Validation
 
 ```yaml

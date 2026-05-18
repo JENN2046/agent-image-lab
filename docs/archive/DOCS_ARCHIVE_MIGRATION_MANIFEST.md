@@ -28,6 +28,7 @@ C1o docs-only-reference exact rewrite execution record: `docs/archive/DOCS_ARCHI
 C1p post-rewrite reference map: `docs/archive/DOCS_ARCHIVE_C1P_POST_REWRITE_REFERENCE_MAP.md`
 C1q exact-move execution record: `docs/archive/DOCS_ARCHIVE_C1Q_EXACT_MOVE_EXECUTION_RECORD.md`
 C1r post-move reference map: `docs/archive/DOCS_ARCHIVE_C1R_POST_MOVE_REFERENCE_MAP.md`
+C1t wrapper-required 200 route planning: `docs/archive/DOCS_ARCHIVE_C1T_WRAPPER_REQUIRED_200_ROUTE_PLANNING.md`
 
 This manifest records proposed future archive targets for historical `docs/` records. It is not a file-move authorization.
 

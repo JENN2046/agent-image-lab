@@ -6,6 +6,26 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current C1t Wrapper-Required 200 Route Planning
+
+```text
+Current archive task: c1t_wrapper_required_200_route_planning.
+Status: completed validated.
+Purpose: decide how to handle 200 wrapper-required records after docs-only-reference migration closed.
+Route plan: docs/archive/DOCS_ARCHIVE_C1T_WRAPPER_REQUIRED_200_ROUTE_PLANNING.md.
+Wrapper-required records: 200.
+Agent board referenced records: 186.
+README referenced records: 39.
+PROJECT_MASTER_PLAN referenced records: 25.
+Non-archive docs referenced records: 89.
+Scripts referenced records: 0.
+Decision: do not create 200 wrappers by default; run wrapper-required link graph first.
+Recommended next: C1u wrapper-required link graph dry-run.
+Not allowed now: push/tag/release/deploy, wrapper creation, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
+```
+
+---
+
 ## Current C1q/C1r Exact Move And Post-Move Validation
 
 ```text

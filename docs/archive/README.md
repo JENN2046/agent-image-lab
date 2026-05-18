@@ -48,6 +48,7 @@ The current authority remains:
 - `docs/archive/DOCS_ARCHIVE_C1P_POST_REWRITE_REFERENCE_MAP.md` records the post-rewrite reference map and confirms remaining non-archive old-path hits are limited to target self-references.
 - `docs/archive/DOCS_ARCHIVE_C1Q_EXACT_MOVE_EXECUTION_RECORD.md` records the C1q exact-file physical move for 67 docs-only-reference candidates.
 - `docs/archive/DOCS_ARCHIVE_C1R_POST_MOVE_REFERENCE_MAP.md` records the C1r post-move reference map and confirms remaining old-path hits are archive-only.
+- `docs/archive/DOCS_ARCHIVE_C1T_WRAPPER_REQUIRED_200_ROUTE_PLANNING.md` records the C1t wrapper-required 200 route planning and recommends link-graph separation before any wrapper creation.
 
 ## Non-Authorization
 

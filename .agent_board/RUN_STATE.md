@@ -1,5 +1,27 @@
 # RUN_STATE.md — Agent Image Lab
 
+## C1t Wrapper-Required 200 Route Planning
+
+```yaml
+phase: c1t_wrapper_required_200_route_planning
+status: completed_validated
+mode: A4.8_safe_local_docs_only_route_planning
+goal: decide the route for 200 wrapper-required records after C1n-C1s closed docs-only-reference migration
+route_plan: docs/archive/DOCS_ARCHIVE_C1T_WRAPPER_REQUIRED_200_ROUTE_PLANNING.md
+evidence:
+  wrapper_required_records: 200
+  agent_board_referenced_records: 186
+  readme_referenced_records: 39
+  project_master_plan_referenced_records: 25
+  non_archive_docs_referenced_records: 89
+  scripts_referenced_records: 0
+decision:
+  create_all_wrappers_by_default: false
+  c1u_link_graph_ready: true
+  push_allowed_now: false
+  recommended_next: c1u_wrapper_required_link_graph_dry_run
+```
+
 ## C1q/C1r Exact Move And Post-Move Validation
 
 ```yaml
