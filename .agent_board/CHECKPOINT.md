@@ -1,10 +1,32 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## C1am Agent-Board-Only 04 Execution
+
+```yaml
+phase: c1am_agent_board_only_04_execution
+status: completed_validated_pending_commit
+goal: execute fourth low-risk agent-board-only paired move/rewrite batch
+completed:
+  - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_04_EXECUTION_PACKAGE.md
+  - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_04_EXECUTION_PACKAGE.csv
+  - moved 20 exact files to docs/archive/
+  - rewrote 20 exact old-path references in one .agent_board source file
+  - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_04_EXECUTION_RECORD.md
+  - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_04_POST_MOVE_REFERENCE_MAP.csv
+  - generated docs_registry/generated/c1am_agent_board_only_04_registry_evidence.csv
+  - confirmed non-archive active old-path hit records count 0
+not_performed:
+  - no files outside move allowlist moved
+  - no files deleted
+  - no wrappers created
+  - no push, tag, release, or deploy
+```
+
 ## C1am Agent-Board-Only 03 Execution
 
 ```yaml
 phase: c1am_agent_board_only_03_execution
-status: completed_validated_pending_commit
+status: completed_validated_committed
 goal: execute third low-risk agent-board-only paired move/rewrite batch
 completed:
   - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_03_EXECUTION_PACKAGE.md
@@ -12940,7 +12962,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v9_007_commercial_delivery_review_docs_only_execution_gate
 source_commit: 0d8ab4478bdfc488c6eda0ec3c83b66946d99e9d
 purpose: present path options after the v9.007 commercial delivery review returned needs_final_retouch
-phase_record_ref: docs/v9_008_commercial_delivery_review_result_decision_gate.md
+phase_record_ref: docs/archive/phases/v9/v9_008_commercial_delivery_review_result_decision_gate.md
 selected_route: delivery_readiness_layer
 selected_asset: ceramic_mug_v4
 source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
@@ -12978,7 +13000,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v9_006_commercial_delivery_review_execution_decision_gate
 source_commit: 0c8f9cf5d7392420b4c9b30ce85c460482aff057
 purpose: execute one docs-only commercial delivery review for ceramic_mug_v4 and record needs_final_retouch
-phase_record_ref: docs/v9_007_commercial_delivery_review_docs_only_execution_gate.md
+phase_record_ref: docs/archive/phases/v9/v9_007_commercial_delivery_review_docs_only_execution_gate.md
 review_record_ref: reviews/v9_007_ceramic_mug_v4_commercial_delivery_review.md
 selected_route: delivery_readiness_layer
 selected_asset: ceramic_mug_v4
@@ -13018,7 +13040,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v9_005_commercial_delivery_review_planning_gate
 source_commit: 868bc4d3b33bb227377d9df5e85f43b46dc20929
 purpose: present commercial delivery review execution path options for ceramic_mug_v4 without executing review
-phase_record_ref: docs/v9_006_commercial_delivery_review_execution_decision_gate.md
+phase_record_ref: docs/archive/phases/v9/v9_006_commercial_delivery_review_execution_decision_gate.md
 selected_route: delivery_readiness_layer
 selected_asset: ceramic_mug_v4
 source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
@@ -13058,7 +13080,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v9_004_delivery_readiness_review_or_closeout_decision_gate
 source_commit: 451c757f38ebdcc39c84181e0ca741e40589f422
 purpose: create commercial delivery review planning for ceramic_mug_v4 after human selected v9.004 Option A
-phase_record_ref: docs/v9_005_commercial_delivery_review_planning_gate.md
+phase_record_ref: docs/archive/phases/v9/v9_005_commercial_delivery_review_planning_gate.md
 commercial_delivery_review_plan_ref: docs/commercial_delivery_review_plan_matte_ceramic_mug_v4.md
 selected_route: delivery_readiness_layer
 selected_asset: ceramic_mug_v4
@@ -13096,7 +13118,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v9_003_delivery_readiness_acceptance_criteria_gate
 source_commit: f5b5c60f670d1bf85d0d9e2aa0b14c24c8315af2
 purpose: present ceramic_mug_v4 delivery-readiness path options before any commercial delivery review
-phase_record_ref: docs/v9_004_delivery_readiness_review_or_closeout_decision_gate.md
+phase_record_ref: docs/archive/phases/v9/v9_004_delivery_readiness_review_or_closeout_decision_gate.md
 selected_route: delivery_readiness_layer
 selected_asset: ceramic_mug_v4
 source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
@@ -13206,7 +13228,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v9_delivery_readiness_layer_route_selection_gate
 source_commit: a461ce90c3e6072928eca23caf8f625f58f05d8b
 purpose: select the first delivery-readiness asset and harden Native Doubao local preflight checks without provider execution
-phase_record_ref: docs/v9_001_delivery_readiness_scope_and_asset_selection_gate.md
+phase_record_ref: docs/archive/phases/v9/v9_001_delivery_readiness_scope_and_asset_selection_gate.md
 selected_route: delivery_readiness_layer
 selected_first_asset_for_delivery_readiness: ceramic_mug_v4
 selected_candidate_path: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
@@ -13274,8 +13296,8 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v8_037_v8_product_loop_closeout_or_next_route_selection_gate
 source_commit: 615aa187e8909667ade600b22e2e9895e29bffa7
 purpose: seal V8 product loop after human selected Option A
-phase_record_ref: docs/v8_038_v8_product_loop_final_closeout.md
-final_closeout_ref: docs/v8_product_loop_final_closeout.md
+phase_record_ref: docs/archive/phases/v8/v8_038_v8_product_loop_final_closeout.md
+final_closeout_ref: docs/archive/phases/v8/v8_product_loop_final_closeout.md
 v9_recommendation_ref: docs/v9_delivery_readiness_layer_route_recommendation.md
 v8_closed: true
 route_A_closed: true
@@ -13314,7 +13336,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v8_036_route_B_multi_product_expansion_closeout
 source_commit: 462f614d97ec3bccaf9dd67f3b0dc03e2f08d980
 purpose: present V8 closeout or next-route options
-phase_record_ref: docs/v8_037_v8_product_loop_closeout_or_next_route_selection_gate.md
+phase_record_ref: docs/archive/phases/v8/v8_037_v8_product_loop_closeout_or_next_route_selection_gate.md
 route_A_closed: true
 A4_8_validated: true
 route_B_closed: true
@@ -13349,7 +13371,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v8_035_route_B_second_product_accepted_candidate_evidence_package
 source_commit: 8c03d48daa674f039f931840e03f4df0ae007509
 purpose: close Route B multi-product prompt package expansion
-phase_record_ref: docs/v8_036_route_B_multi_product_expansion_closeout.md
+phase_record_ref: docs/archive/phases/v8/v8_036_route_B_multi_product_expansion_closeout.md
 route_closeout_ref: docs/route_B_multi_product_expansion_closeout.md
 route_B_closed: true
 route_B_goal_met: true
@@ -13420,7 +13442,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v8_033_second_product_post_persistence_fix_minimal_generation_trial_execution
 source_commit: f98dee058ed2eddee77733dc529272593fe95639
 purpose: record human review for the verified v8.033 output
-phase_record_ref: docs/v8_034_human_review_of_second_product_post_persistence_fix_output.md
+phase_record_ref: docs/archive/phases/v8/v8_034_human_review_of_second_product_post_persistence_fix_output.md
 review_ref: reviews/v8_034_multi_color_mesh_sports_visor_v2_human_review.md
 reviewed_output: runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg
 asset_status: accepted_candidate_with_minor_watch_items
@@ -13514,7 +13536,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v8_030_runner_output_persistence_guard_static_code_fix_gate
 source_commit: 785cb23452c37c1893855cf75360d32c841e5075
 purpose: present human decision options after the output persistence guard fix
-phase_record_ref: docs/v8_031_second_product_retry_after_persistence_fix_decision_gate.md
+phase_record_ref: docs/archive/phases/v8/v8_031_second_product_retry_after_persistence_fix_decision_gate.md
 output_persistence_guard_fixed: true
 prompt_v2_path: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
 previous_execution_status: failed_no_local_output_file
@@ -13544,7 +13566,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v8_029_timestamp_evidence_policy_patch
 source_commit: 785cb23452c37c1893855cf75360d32c841e5075
 purpose: statically tighten Native Doubao result normalization after the v8.027 zero-local-file anomaly
-phase_record_ref: docs/v8_030_runner_output_persistence_guard_static_code_fix_gate.md
+phase_record_ref: docs/archive/phases/v8/v8_030_runner_output_persistence_guard_static_code_fix_gate.md
 runner_output_persistence_guard_static_code_fix_created: true
 normalize_result_requires_verified_local_file_count: true
 legacy_files_written_count_can_create_success: false
@@ -13571,7 +13593,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v8_028_second_product_prompt_v2_failed_trial_review_or_output_persistence_gate
 source_commit: 1c5c97605be208222c326101335d29cb84f48eb2
 purpose: statically tighten Native Doubao output persistence accounting after the v8.027 zero-local-file anomaly
-phase_record_ref: docs/v8_029_runner_output_persistence_static_review_and_fix_gate.md
+phase_record_ref: docs/archive/phases/v8/v8_029_runner_output_persistence_static_review_and_fix_gate.md
 persistence_guard_ref: docs/native_doubao_output_persistence_guard.md
 anomaly_reviewed: true
 provider_success_vs_local_persistence_split: true
@@ -13609,7 +13631,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v8_027_second_product_prompt_v2_minimal_generation_trial_execution
 source_commit: 00764b4bfd980fe92af023667ee06309819b6f32
 purpose: seal the Route B prompt v2 output persistence anomaly and decide next static runner/adapter review route
-phase_record_ref: docs/v8_028_second_product_prompt_v2_failed_trial_review_or_output_persistence_gate.md
+phase_record_ref: docs/archive/phases/v8/v8_028_second_product_prompt_v2_failed_trial_review_or_output_persistence_gate.md
 review_ref: reviews/v8_028_second_product_prompt_v2_failed_output_persistence_review.md
 approved_product: multi_color_mesh_sports_visor
 prompt_package_used: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
@@ -13678,7 +13700,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v8_025_second_product_next_minimal_generation_authorization_decision_gate
 source_commit: 6a2417802daa95cf05e611dd607183a374154011
 purpose: record the owner's Option A selection and authorize exactly one prompt v2 minimal real generation trial for v8.027
-phase_record_ref: docs/v8_026_second_product_prompt_v2_generation_authorization_gate.md
+phase_record_ref: docs/archive/phases/v8/v8_026_second_product_prompt_v2_generation_authorization_gate.md
 this_is_new_A5_authorization: true
 previous_v8_020_authorization_consumed: true
 retry_allowed_by_previous_authorization: false
@@ -13711,7 +13733,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v8_024_second_product_prompt_v2_static_review_gate
 source_commit: bcf0b556d7fdc9b63ad62386d0bf338a70e74b68
 purpose: present Option A/B/C for whether prompt v2 should get a new minimal generation authorization
-phase_record_ref: docs/v8_025_second_product_next_minimal_generation_authorization_decision_gate.md
+phase_record_ref: docs/archive/phases/v8/v8_025_second_product_next_minimal_generation_authorization_decision_gate.md
 source_output: runs/real_generation/v8_021_multi_color_mesh_sports_visor_second_trial/native_doubao_1778733554203_0.jpg
 source_asset_status: needs_revision
 prompt_v2_path: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
@@ -13767,7 +13789,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v8_022_human_review_of_second_product_second_real_output
 source_commit: f9b0d9800d3e5c00e56a5a41bcdf92328bba2110
 purpose: turn v8.021 second-product review findings into prompt v2 without generation
-phase_record_ref: docs/v8_023_second_product_prompt_revision_plan_from_first_real_output.md
+phase_record_ref: docs/archive/phases/v8/v8_023_second_product_prompt_revision_plan_from_first_real_output.md
 prompt_v2_ref: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml
 source_output: runs/real_generation/v8_021_multi_color_mesh_sports_visor_second_trial/native_doubao_1778733554203_0.jpg
 source_asset_status: needs_revision
@@ -13793,7 +13815,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v8_021_second_product_second_minimal_generation_trial_execution
 source_commit: b3ea4d12d8bd814c7023196ccca8c825fac2574d
 purpose: record human review for the second-product second real output
-phase_record_ref: docs/v8_022_human_review_of_second_product_second_real_output.md
+phase_record_ref: docs/archive/phases/v8/v8_022_human_review_of_second_product_second_real_output.md
 review_ref: reviews/v8_022_multi_color_mesh_sports_visor_human_review.md
 reviewed_output: runs/real_generation/v8_021_multi_color_mesh_sports_visor_second_trial/native_doubao_1778733554203_0.jpg
 asset_status: needs_revision
@@ -13847,7 +13869,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v8_019_second_product_second_trial_authorization_decision_gate
 source_commit: e8bb77905cfd03e2e5ced9676810192885b2a558
 purpose: record human Option A selection and authorize exactly one bounded v8.021 second-product second trial
-phase_record_ref: docs/v8_020_second_product_second_trial_authorization_gate.md
+phase_record_ref: docs/archive/phases/v8/v8_020_second_product_second_trial_authorization_gate.md
 this_is_new_A5_authorization: true
 previous_v8_015_authorization_consumed: true
 retry_allowed_by_previous_authorization: false

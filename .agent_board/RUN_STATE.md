@@ -1,10 +1,34 @@
 # RUN_STATE.md — Agent Image Lab
 
+## C1am Agent-Board-Only 04 Execution
+
+```yaml
+phase: c1am_agent_board_only_04_execution
+status: completed_validated_pending_commit
+mode: A4.8_safe_local_docs_only_exact_move_rewrite
+goal: execute fourth low-risk agent-board-only paired move/rewrite batch
+evidence:
+  execution_package: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_04_EXECUTION_PACKAGE.md
+  execution_record: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_04_EXECUTION_RECORD.md
+  post_map: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_04_POST_MOVE_REFERENCE_MAP.csv
+  registry_evidence: docs_registry/generated/c1am_agent_board_only_04_registry_evidence.csv
+result:
+  files_moved: 20
+  rewrite_hits: 20
+  non_archive_active_old_path_hits: 0
+  wrappers_created: false
+  files_deleted: false
+decision:
+  validation_ready: true
+  push_allowed_now: false
+  recommended_next: validate_and_commit_fourth_batch
+```
+
 ## C1am Agent-Board-Only 03 Execution
 
 ```yaml
 phase: c1am_agent_board_only_03_execution
-status: completed_validated_pending_commit
+status: completed_validated_committed
 mode: A4.8_safe_local_docs_only_exact_move_rewrite
 goal: execute third low-risk agent-board-only paired move/rewrite batch
 evidence:
@@ -21,7 +45,7 @@ result:
 decision:
   validation_ready: true
   push_allowed_now: false
-  recommended_next: validate_and_commit_third_batch
+  recommended_next: c1am_continue_low_risk_batches
 ```
 
 ## C1am Agent-Board-Only 02 Execution

@@ -20,6 +20,7 @@ Current files:
   - `generated/c1ak_agent_board_only_01_registry_evidence.csv`
   - `generated/c1am_agent_board_only_02_registry_evidence.csv`
   - `generated/c1am_agent_board_only_03_registry_evidence.csv`
+  - `generated/c1am_agent_board_only_04_registry_evidence.csv`
 
 Non-authorization:
 
