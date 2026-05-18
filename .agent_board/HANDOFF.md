@@ -1,9 +1,53 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — C1ad-D3 Paired Package And Registry Drafts
+
+```text
+Status: c1ad_d3_paired_package_and_registry_drafts completed_validated_pending_commit.
+Reason: Jenn set the next goal to create C1ad paired move/rewrite dry-run evidence and minimal registry design without execution.
+Execution mode: A4.8 local docs-only dry-run/package/schema work.
+C1ad package: docs/archive/DOCS_ARCHIVE_C1AD_PAIRED_EXACT_MOVE_REWRITE_PACKAGE_DRY_RUN.md.
+C1ad CSV: docs/archive/DOCS_ARCHIVE_C1AD_PAIRED_EXACT_MOVE_REWRITE_PACKAGE.csv.
+C1ae review: docs/archive/DOCS_ARCHIVE_C1AE_PAIRED_PACKAGE_VERIFIER_REVIEW.md.
+C1af split: docs/archive/DOCS_ARCHIVE_C1AF_PACKAGE_SPLIT_DECISION.md.
+D1 schema: docs_registry/document_registry_schema_v1.yaml.
+D2 scanner dry-run: docs_registry/registry_scanner_dry_run.md.
+D3 validator dry-run: docs_registry/registry_validator_dry_run.md.
+Candidate records: 200.
+Future split batches: 21.
+Human-navigation blocker records: 39.
+Files moved: false.
+References rewritten: false.
+Wrappers created: false.
+Existing validator behavior changed: false; exact local commit scope allowlist updated for four docs_registry draft files.
+Push/tag/release/deploy performed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Recommended next: C1ag exact-file commit readiness audit, then local commit, then push readiness.
+```
+
+---
+
+## Current Handoff Update — C1ag Exact-File Commit Readiness Audit
+
+```text
+Status: c1ag_exact_file_commit_readiness_audit completed_validated_pending_commit.
+Reason: C1ad-D3 changes are docs-only evidence/schema drafts and index/status sync.
+Execution mode: A4.8 local commit-readiness audit.
+Readiness audit: docs/archive/DOCS_ARCHIVE_C1AG_EXACT_FILE_COMMIT_READINESS_AUDIT.md.
+Exact staging preview: passed.
+Forbidden path hits: 0.
+Validator scope alignment: scripts/validate_mvp.ps1 exact allowlist updated for docs_registry draft files only.
+Decision: exact-file staging and local commit may proceed after validation passes.
+Push/tag/release/deploy performed: false.
+Recommended next: C1ah exact-file staging plus local commit, then C1ai push readiness report.
+```
+
+---
+
 ## Current Handoff Update — C1u-C1z Wrapper-Required 200 Machine Triage
 
 ```text
-Status: c1u_c1aa_wrapper_required_200_machine_triage completed_validated_pending_commit.
+Status: c1u_c1aa_wrapper_required_200_machine_triage completed_validated_pushed.
 Reason: Jenn approved machine-bucketed C1 wrapper-required 200 triage under A4.8 docs-only boundaries.
 Execution mode: A4.8 local docs-only scan/package/verifier closeout.
 Link graph: docs/archive/DOCS_ARCHIVE_C1U_WRAPPER_REQUIRED_LINK_GRAPH_DRY_RUN.md.
@@ -22,7 +66,7 @@ Wrappers created: false.
 Validator behavior changed: false.
 Push/tag/release/deploy performed: false.
 Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
-Recommended next: C1aa exact-file commit readiness audit, then local commit, then push readiness; future route is C1ad paired exact move plus exact rewrite package dry-run.
+Recommended next: C1ad paired exact move plus exact rewrite package dry-run.
 ```
 
 ---

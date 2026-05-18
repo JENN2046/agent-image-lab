@@ -53,6 +53,10 @@ The current authority remains:
 - `docs/archive/DOCS_ARCHIVE_C1V_AGENT_BOARD_STALE_REFERENCE_CLEANUP_PACKAGE_DRY_RUN.md`, `docs/archive/DOCS_ARCHIVE_C1W_DOCS_ONLY_REWRITE_PACKAGE_DRY_RUN.md`, and `docs/archive/DOCS_ARCHIVE_C1X_HUMAN_NAVIGATION_REVIEW_PACKAGE_DRY_RUN.md` record the C1v-C1x dry-run rule packages.
 - `docs/archive/DOCS_ARCHIVE_C1Y_EXACT_LOW_RISK_REWRITE_EXECUTION_REVIEW.md` and `docs/archive/DOCS_ARCHIVE_C1Z_RESIDUAL_WRAPPER_DECISION_CLOSEOUT.md` record the C1y/C1z verifier decision that standalone rewrite is blocked until an exact paired move/rewrite or minimal wrapper strategy exists.
 - `docs/archive/DOCS_ARCHIVE_C1AA_EXACT_FILE_COMMIT_READINESS_AUDIT.md` records the exact-file commit readiness audit for the C1u-C1z machine-triage changes.
+- `docs/archive/DOCS_ARCHIVE_C1AD_PAIRED_EXACT_MOVE_REWRITE_PACKAGE_DRY_RUN.md` records the C1ad paired exact move/rewrite package dry-run, with complete CSV evidence in `docs/archive/DOCS_ARCHIVE_C1AD_PAIRED_EXACT_MOVE_REWRITE_PACKAGE.csv`.
+- `docs/archive/DOCS_ARCHIVE_C1AE_PAIRED_PACKAGE_VERIFIER_REVIEW.md` and `docs/archive/DOCS_ARCHIVE_C1AF_PACKAGE_SPLIT_DECISION.md` record the verifier review and future batch split decision.
+- `docs/archive/DOCS_ARCHIVE_D1_MINIMAL_DOCS_REGISTRY_SCHEMA_DRAFT.md`, `docs/archive/DOCS_ARCHIVE_D2_REGISTRY_SCANNER_DRY_RUN.md`, and `docs/archive/DOCS_ARCHIVE_D3_REGISTRY_VALIDATOR_DRY_RUN.md` record the minimal registry evidence-index design.
+- `docs/archive/DOCS_ARCHIVE_C1AG_EXACT_FILE_COMMIT_READINESS_AUDIT.md` records the exact-file commit readiness audit for C1ad-D3 changes.
 
 ## Non-Authorization
 

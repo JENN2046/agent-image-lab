@@ -40,6 +40,16 @@ C1x human-navigation review rules CSV: `docs/archive/DOCS_ARCHIVE_C1X_HUMAN_NAVI
 C1y exact low-risk rewrite execution review: `docs/archive/DOCS_ARCHIVE_C1Y_EXACT_LOW_RISK_REWRITE_EXECUTION_REVIEW.md`
 C1z residual wrapper decision closeout: `docs/archive/DOCS_ARCHIVE_C1Z_RESIDUAL_WRAPPER_DECISION_CLOSEOUT.md`
 C1aa exact-file commit readiness audit: `docs/archive/DOCS_ARCHIVE_C1AA_EXACT_FILE_COMMIT_READINESS_AUDIT.md`
+C1ad paired exact move/rewrite package dry-run: `docs/archive/DOCS_ARCHIVE_C1AD_PAIRED_EXACT_MOVE_REWRITE_PACKAGE_DRY_RUN.md`
+C1ad paired exact move/rewrite package CSV: `docs/archive/DOCS_ARCHIVE_C1AD_PAIRED_EXACT_MOVE_REWRITE_PACKAGE.csv`
+C1ae paired package verifier review: `docs/archive/DOCS_ARCHIVE_C1AE_PAIRED_PACKAGE_VERIFIER_REVIEW.md`
+C1ae paired package blockers CSV: `docs/archive/DOCS_ARCHIVE_C1AE_PAIRED_PACKAGE_BLOCKERS.csv`
+C1af package split decision: `docs/archive/DOCS_ARCHIVE_C1AF_PACKAGE_SPLIT_DECISION.md`
+C1af package split decision CSV: `docs/archive/DOCS_ARCHIVE_C1AF_PACKAGE_SPLIT_DECISION.csv`
+D1 minimal docs registry schema draft: `docs/archive/DOCS_ARCHIVE_D1_MINIMAL_DOCS_REGISTRY_SCHEMA_DRAFT.md`
+D2 registry scanner dry-run: `docs/archive/DOCS_ARCHIVE_D2_REGISTRY_SCANNER_DRY_RUN.md`
+D3 registry validator dry-run: `docs/archive/DOCS_ARCHIVE_D3_REGISTRY_VALIDATOR_DRY_RUN.md`
+C1ag exact-file commit readiness audit: `docs/archive/DOCS_ARCHIVE_C1AG_EXACT_FILE_COMMIT_READINESS_AUDIT.md`
 
 This manifest records proposed future archive targets for historical `docs/` records. It is not a file-move authorization.
 

@@ -7702,6 +7702,10 @@ if (-not $node) {
       'PROJECT_MASTER_PLAN.md',
       'production/plans/french_summer_rattan_bag_v3_production_candidate_001_plan.yaml',
       'RELEASE_NOTES.md',
+      'docs_registry/README.md',
+      'docs_registry/document_registry_schema_v1.yaml',
+      'docs_registry/registry_scanner_dry_run.md',
+      'docs_registry/registry_validator_dry_run.md',
       'docs/00_project_roadmap.md',
       'tests/validation_checklist.md'
     )

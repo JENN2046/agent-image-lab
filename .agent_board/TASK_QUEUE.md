@@ -6,17 +6,49 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current C1ad-D3 Paired Package And Registry Drafts
+
+```text
+Current archive task: c1ad_d3_paired_package_and_registry_drafts.
+Status: completed validated pending commit.
+Purpose: create C1ad paired exact move/rewrite dry-run evidence and D1-D3 minimal registry drafts.
+C1ad package: docs/archive/DOCS_ARCHIVE_C1AD_PAIRED_EXACT_MOVE_REWRITE_PACKAGE_DRY_RUN.md.
+C1ae review: docs/archive/DOCS_ARCHIVE_C1AE_PAIRED_PACKAGE_VERIFIER_REVIEW.md.
+C1af split: docs/archive/DOCS_ARCHIVE_C1AF_PACKAGE_SPLIT_DECISION.md.
+D1-D3 registry drafts: docs_registry/.
+Decision: no move, no rewrite, no wrappers; future execution must use small exact batches and human-navigation review.
+Validator scope alignment: exact allowlist only for docs_registry draft files.
+Recommended next: C1ag exact-file commit readiness audit.
+Not allowed now: push/tag/release/deploy, file movement, reference rewrite, wrapper creation, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
+```
+
+---
+
+## Current C1ag Exact-File Commit Readiness Audit
+
+```text
+Current archive task: c1ag_exact_file_commit_readiness_audit.
+Status: completed validated pending commit.
+Purpose: confirm C1ad-D3 changes are ready for exact-file staging and local commit.
+Readiness audit: docs/archive/DOCS_ARCHIVE_C1AG_EXACT_FILE_COMMIT_READINESS_AUDIT.md.
+Decision: exact-file staging and local commit may proceed after validation passes.
+Recommended next: C1ah exact-file staging plus local commit.
+Not allowed now: push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
+```
+
+---
+
 ## Current C1u-C1z Wrapper-Required 200 Machine Triage
 
 ```text
 Current archive task: c1u_c1aa_wrapper_required_200_machine_triage.
-Status: completed validated pending commit.
+Status: completed validated pushed.
 Purpose: machine-bucket 200 wrapper-required records and decide whether standalone low-risk rewrite is safe.
 Link graph: docs/archive/DOCS_ARCHIVE_C1U_WRAPPER_REQUIRED_LINK_GRAPH_DRY_RUN.md.
 Rule packages: C1v agent_board, C1w docs-only, C1x human-navigation.
 C1y decision: no rewrite executed because all archive targets are missing.
 C1z decision: do not create 200 wrappers; next route should be paired exact move plus exact rewrite package dry-run.
-Recommended next: C1ab exact-file staging plus local commit after C1aa audit passes.
+Recommended next: C1ad paired exact move/rewrite package dry-run.
 Not allowed now: push/tag/release/deploy, wrapper creation, file movement, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
 ```
 

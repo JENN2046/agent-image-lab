@@ -1,0 +1,87 @@
+schema_id: document_registry_schema_v1
+status: draft
+authority: evidence_index_only
+not_authority_source: true
+record:
+  path:
+    type: string
+    required: true
+    description: Git-tracked document path or known archived path.
+  archive_target:
+    type: string
+    required: false
+    description: Proposed or actual docs/archive target.
+  doc_type:
+    type: enum
+    required: true
+    values:
+      - phase_gate
+      - closeout
+      - audit
+      - plan
+      - evidence
+      - authorization_package
+      - reference_map
+      - registry
+      - unknown
+  lifecycle_status:
+    type: enum
+    required: true
+    values:
+      - active
+      - evidence
+      - superseded
+      - archive_candidate
+      - archived
+      - blocked
+  reference_class:
+    type: enum
+    required: true
+    values:
+      - zero_ref
+      - docs_only
+      - human_navigation
+      - agent_board
+      - agent_board_plus_docs
+      - validator_blocked
+      - scripts_tests
+      - archive_only
+      - unknown
+  current_path_exists:
+    type: boolean
+    required: true
+  archive_target_exists:
+    type: boolean
+    required: false
+  source_refs:
+    type: array
+    required: true
+    item_fields:
+      source_file: string
+      scope: string
+      hit_count: integer
+  scripts_refs:
+    type: array
+    required: true
+  tests_refs:
+    type: array
+    required: true
+  human_navigation_refs:
+    type: array
+    required: true
+  validator_blocked:
+    type: boolean
+    required: true
+  scan_source:
+    type: string
+    required: true
+  last_scanned_at:
+    type: string
+    required: true
+    format: local_timestamp_or_commit_ref
+validation_principles:
+  - registry_records_must_match_current_git_scan
+  - registry_must_not_mark_missing_paths_active_without_blocker
+  - archived_records_must_not_be_current_authority
+  - archive_target_must_be_under_docs_archive
+  - scripts_or_tests_refs_force_validator_blocked

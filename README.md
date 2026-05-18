@@ -40,6 +40,10 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 - `docs/archive/DOCS_ARCHIVE_C1V_AGENT_BOARD_STALE_REFERENCE_CLEANUP_PACKAGE_DRY_RUN.md`、`docs/archive/DOCS_ARCHIVE_C1W_DOCS_ONLY_REWRITE_PACKAGE_DRY_RUN.md`、`docs/archive/DOCS_ARCHIVE_C1X_HUMAN_NAVIGATION_REVIEW_PACKAGE_DRY_RUN.md` 记录 C1v-C1x 规则包 dry-run。
 - `docs/archive/DOCS_ARCHIVE_C1Y_EXACT_LOW_RISK_REWRITE_EXECUTION_REVIEW.md` 和 `docs/archive/DOCS_ARCHIVE_C1Z_RESIDUAL_WRAPPER_DECISION_CLOSEOUT.md` 记录 C1y/C1z Verifier 裁决：当前不能 standalone rewrite，下一步应准备 paired exact move plus rewrite 包。
 - `docs/archive/DOCS_ARCHIVE_C1AA_EXACT_FILE_COMMIT_READINESS_AUDIT.md` 记录 C1u-C1z 机器分桶变更的 exact-file commit readiness 审计。
+- `docs/archive/DOCS_ARCHIVE_C1AD_PAIRED_EXACT_MOVE_REWRITE_PACKAGE_DRY_RUN.md` 记录 C1ad paired exact move/rewrite dry-run 包；CSV 为 `docs/archive/DOCS_ARCHIVE_C1AD_PAIRED_EXACT_MOVE_REWRITE_PACKAGE.csv`。
+- `docs/archive/DOCS_ARCHIVE_C1AE_PAIRED_PACKAGE_VERIFIER_REVIEW.md` 和 `docs/archive/DOCS_ARCHIVE_C1AF_PACKAGE_SPLIT_DECISION.md` 记录 C1ad 包审查与 21 个未来小批拆分决策。
+- `docs_registry/` 是 D1-D3 minimal Document Registry evidence-index 草案；它不是 authority source，不替代 git reality / reference scan / validators。
+- `docs/archive/DOCS_ARCHIVE_C1AG_EXACT_FILE_COMMIT_READINESS_AUDIT.md` 记录 C1ad-D3 变更的 exact-file commit readiness 审计。
 - `asset_archive/accepted_samples/<sample_id>/manifest.json + preview.webp` 是新的 accepted sample portable evidence capsule 目标路径。
 - 历史 `docs/v*` 阶段记录、旧 closeout、旧 authorization 草案是审计记录，不等于当前授权。
 - 未经明确 A5 授权，不要运行 provider/plugin/API/image generation/DailyNote/VCP memory/runtime/push/tag/release/deploy 相关入口。

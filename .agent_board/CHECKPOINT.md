@@ -1,10 +1,53 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## C1ad-D3 Paired Package And Registry Drafts
+
+```yaml
+phase: c1ad_d3_paired_package_and_registry_drafts
+status: completed_validated_pending_commit
+goal: create C1ad paired exact move/rewrite dry-run package and D1-D3 minimal registry drafts
+completed:
+  - generated docs/archive/DOCS_ARCHIVE_C1AD_PAIRED_EXACT_MOVE_REWRITE_PACKAGE_DRY_RUN.md
+  - generated docs/archive/DOCS_ARCHIVE_C1AD_PAIRED_EXACT_MOVE_REWRITE_PACKAGE.csv
+  - generated docs/archive/DOCS_ARCHIVE_C1AE_PAIRED_PACKAGE_VERIFIER_REVIEW.md
+  - generated docs/archive/DOCS_ARCHIVE_C1AE_PAIRED_PACKAGE_BLOCKERS.csv
+  - generated docs/archive/DOCS_ARCHIVE_C1AF_PACKAGE_SPLIT_DECISION.md
+  - generated docs/archive/DOCS_ARCHIVE_C1AF_PACKAGE_SPLIT_DECISION.csv
+  - generated docs_registry minimal evidence-index drafts
+  - generated D1-D3 archive records
+  - generated docs/archive/DOCS_ARCHIVE_C1AG_EXACT_FILE_COMMIT_READINESS_AUDIT.md
+  - updated scripts/validate_mvp.ps1 exact allowlist for four docs_registry draft files
+  - updated README.md and docs/archive indexes
+  - updated .agent_board HANDOFF/RUN_STATE/TASK_QUEUE/CHECKPOINT surfaces
+not_performed:
+  - no file movement
+  - no reference rewrite
+  - no wrappers created
+  - no existing validator behavior changed beyond exact local commit scope allowlist alignment
+  - no push, tag, release, or deploy
+```
+
+## C1ag Exact-File Commit Readiness Audit
+
+```yaml
+phase: c1ag_exact_file_commit_readiness_audit
+status: completed_validated_pending_commit
+goal: confirm C1ad-D3 changes are ready for exact-file staging and local commit
+completed:
+  - confirmed exact staging preview passed
+  - confirmed forbidden path hits count 0
+  - confirmed existing validator behavior changed false
+not_performed:
+  - no staging yet
+  - no commit yet
+  - no push, tag, release, or deploy
+```
+
 ## C1u-C1z Wrapper-Required 200 Machine Triage
 
 ```yaml
 phase: c1u_c1aa_wrapper_required_200_machine_triage
-status: completed_validated_pending_commit
+status: completed_validated_pushed
 goal: machine-bucket wrapper-required 200 and verify whether low-risk standalone rewrite can execute
 completed:
   - generated docs/archive/DOCS_ARCHIVE_C1U_WRAPPER_REQUIRED_LINK_GRAPH_DRY_RUN.md

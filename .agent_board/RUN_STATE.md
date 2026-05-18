@@ -1,10 +1,59 @@
 # RUN_STATE.md — Agent Image Lab
 
+## C1ad-D3 Paired Package And Registry Drafts
+
+```yaml
+phase: c1ad_d3_paired_package_and_registry_drafts
+status: completed_validated_pending_commit
+mode: A4.8_safe_local_docs_only_dry_run_package_schema
+goal: create paired exact move/rewrite dry-run package and minimal registry evidence-index drafts
+evidence:
+  c1ad_package: docs/archive/DOCS_ARCHIVE_C1AD_PAIRED_EXACT_MOVE_REWRITE_PACKAGE_DRY_RUN.md
+  c1ad_csv: docs/archive/DOCS_ARCHIVE_C1AD_PAIRED_EXACT_MOVE_REWRITE_PACKAGE.csv
+  c1ae_review: docs/archive/DOCS_ARCHIVE_C1AE_PAIRED_PACKAGE_VERIFIER_REVIEW.md
+  c1af_split: docs/archive/DOCS_ARCHIVE_C1AF_PACKAGE_SPLIT_DECISION.md
+  d1_schema: docs_registry/document_registry_schema_v1.yaml
+  d2_scanner: docs_registry/registry_scanner_dry_run.md
+  d3_validator: docs_registry/registry_validator_dry_run.md
+summary:
+  candidate_records: 200
+  future_split_batches: 21
+  human_navigation_blockers: 39
+  files_moved: false
+  references_rewritten: false
+  wrappers_created: false
+  existing_validator_behavior_changed: false
+  validator_scope_alignment:
+    file: scripts/validate_mvp.ps1
+    type: exact_file_allowlist_only
+    allowed_docs_registry_draft_files: 4
+decision:
+  c1ag_commit_readiness_ready: true
+  push_allowed_now: false
+  recommended_next: c1ag_exact_file_commit_readiness_audit
+```
+
+## C1ag Exact-File Commit Readiness Audit
+
+```yaml
+phase: c1ag_exact_file_commit_readiness_audit
+status: completed_validated_pending_commit
+mode: A4.8_safe_local_commit_readiness_audit_only
+goal: confirm C1ad-D3 changes are ready for exact-file staging and local commit
+readiness_audit: docs/archive/DOCS_ARCHIVE_C1AG_EXACT_FILE_COMMIT_READINESS_AUDIT.md
+validator_scope_alignment: scripts/validate_mvp.ps1 exact file allowlist only
+decision:
+  ready_for_exact_file_staging: true
+  ready_for_guarded_local_commit: true
+  push_allowed_now: false
+  recommended_next: c1ah_exact_file_staging_plus_local_commit
+```
+
 ## C1u-C1z Wrapper-Required 200 Machine Triage
 
 ```yaml
 phase: c1u_c1aa_wrapper_required_200_machine_triage
-status: completed_validated_pending_commit
+status: completed_validated_pushed
 mode: A4.8_safe_local_docs_only_scan_package_verifier_closeout
 goal: machine-bucket wrapper-required 200 and determine whether low-risk standalone rewrite can execute
 evidence:
@@ -25,7 +74,7 @@ decision:
   files_moved: false
   c1aa_commit_readiness_ready: true
   push_allowed_now: false
-  recommended_next: c1ab_exact_file_staging_plus_local_commit
+  recommended_next: c1ad_paired_exact_move_plus_exact_rewrite_package_dry_run
   future_route: c1ad_paired_exact_move_plus_exact_rewrite_package_dry_run
 ```
 
