@@ -6,14 +6,14 @@
     "execution_mode": "local_worktree_audit_only",
     "audit_scope": {
       "target_phase_range": "v14.165-v14.208",
-      "reason": "post-commit clean worktree needs push safety gate before any remote action",
+      "reason": "post-sync clean branch has no pending push gate; local untracked mode records still require explicit exact-file commit approval",
       "worktree_dirty_expected": false,
       "commit_readiness_claimed": false,
       "push_readiness_claimed": false
     },
     "observed_git_state": {
       "branch": "master",
-      "ahead_count": 20,
+      "ahead_count": 0,
       "behind_count": 0,
       "staged_file_count": 0,
       "tracked_modified_file_count": 0,

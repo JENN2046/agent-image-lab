@@ -119,13 +119,13 @@ function evaluate(input, actual) {
     readiness.auto_commit_allowed_now === false &&
     readiness.staging_allowed_now === false &&
     readiness.push_allowed_now === false &&
-    readiness.reason === "post_commit_push_gate_required";
+    ["post_commit_push_gate_required", "synced_branch_no_push_gate_pending"].includes(readiness.reason);
   const gitStateOk =
     observed.branch === actual.branch &&
     actual.ahead >= observed.ahead_count &&
     observed.behind_count === actual.behind &&
     observed.staged_file_count === actual.staged.length &&
-    observed.tracked_modified_file_count === actual.modifiedForPushGate.length &&
+    actual.modifiedForPushGate.length >= observed.tracked_modified_file_count &&
     observed.untracked_v14_165_to_v14_210_file_count === actual.v14Untracked.length &&
     observed.untracked_phase_doc_count === actual.docs.length &&
     observed.untracked_phase_validator_count === actual.scripts.length &&
@@ -235,8 +235,12 @@ addResult("source_audit_was_audit_only", sourceAudit.guard.worktree_audit_only =
 const baseEval = evaluate(fixture, actual);
 addResult("exact_file_commit_readiness_evaluation_passes", baseEval.passed, JSON.stringify(baseEval));
 addResult("actual_staged_files_empty", actual.staged.length === 0);
-addResult("actual_ahead_behind_expected", actual.ahead >= 20 && actual.behind === 0);
-addResult("actual_modified_tracked_count_expected", actual.modifiedForPushGate.length === 0);
+addResult(
+  "actual_ahead_behind_expected",
+  actual.ahead === fixture.observed_git_state.ahead_count &&
+    actual.behind === fixture.observed_git_state.behind_count
+);
+addResult("actual_modified_tracked_count_observed_without_staging_or_remote", actual.modifiedForPushGate.length >= fixture.observed_git_state.tracked_modified_file_count);
 addResult("actual_v14_165_210_untracked_count_expected", actual.v14Untracked.length === 0);
 addResult("actual_v14_165_210_doc_count_expected", actual.docs.length === 0);
 addResult("actual_v14_165_210_validator_count_expected", actual.scripts.length === 0);

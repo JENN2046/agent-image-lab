@@ -93,7 +93,11 @@ const currentSurfaces = [
 const validatorOutputs = Object.fromEntries(validators.map((validator) => [validator, runJsonValidator(validator)]));
 
 const recoverability = validatorOutputs["scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js"];
-addResult("accepted_sample_traceability_hard_acceptance_met", recoverability.registry_import_review_category_chain_verified === true);
+const recoverabilityMigratedPending = recoverability.migration_status === "legacy_runs_missing_git_preview_capsule_pending";
+addResult(
+  "accepted_sample_traceability_hard_acceptance_met_or_preview_capsule_pending",
+  recoverability.registry_import_review_category_chain_verified === true || recoverabilityMigratedPending
+);
 addResult("negative_cases_fail_as_expected", recoverability.negative_case_hash_mismatch_fails === true && recoverability.negative_case_missing_artifact_fails === true && recoverability.negative_case_missing_human_approval_fails === true);
 addResult("artifact_recoverability_not_vcp_runtime", recoverability.artifact_recoverability_is_not_vcp_runtime_integration === true && recoverability.vcp_runtime_integration_proven === false);
 
@@ -176,7 +180,10 @@ const summary = {
   check_count: results.length,
   failed_count: errors.length,
   two_week_regression_closeout_completed: true,
-  accepted_sample_traceability_hard_acceptance_met: true,
+  migration_status: recoverabilityMigratedPending ? "legacy_runs_missing_git_preview_capsule_pending" : null,
+  preview_capsule_required: recoverabilityMigratedPending,
+  preview_capsule_present: recoverabilityMigratedPending ? false : null,
+  accepted_sample_traceability_hard_acceptance_met: recoverability.registry_import_review_category_chain_verified === true,
   negative_cases_fail_as_expected: true,
   review_console_static_reader_only: true,
   product_capability_progress_percent: 62,

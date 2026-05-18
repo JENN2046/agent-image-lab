@@ -3,6 +3,7 @@
 ## Active Blockers
 
 ```text
+0. v14.230 old artifact restoration is superseded by v14.231. The current route is a new durable archive baseline: Git-tracked preview evidence capsules with preview.webp long_edge 512, no Base64, no original sha256 requirement, and no runs/real_generation restoration before the next baseline. Spec: docs/v14_231_git_tracked_preview_evidence_capsule_baseline.md.
 1. Default A4 docs-only continuation is blocked unless the next task creates clear non-redundant product value.
 2. Active A5 product image execution is blocked by repeated Doubao quota/rate-limit failure; same provider/model/account retry is not allowed now.
 3. Active A5 product image execution is blocked by execution surface mismatch: the approval phrase matches AUTH-PENDING-20260512-001, but no safe callable VCPToolBox / DoubaoGen execution entry is available in the current tool surface. Native/local runners require additional scope such as env/config or plugin-dir access and must not be substituted silently.

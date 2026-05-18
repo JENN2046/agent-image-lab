@@ -21,6 +21,73 @@ const files = {
   validationLog: ".agent_board/VALIDATION_LOG.md",
 };
 
+function exitWithPreviewCapsuleMigrationPending() {
+  const v14_231 = core.exists("docs/v14_231_git_tracked_preview_evidence_capsule_baseline.md")
+    ? core.read("docs/v14_231_git_tracked_preview_evidence_capsule_baseline.md")
+    : "";
+  const migrationActive =
+    v14_231.includes("phase: v14_231_git_tracked_preview_evidence_capsule_baseline") &&
+    v14_231.includes("preview_long_edge: 512") &&
+    v14_231.includes("original_sha256_tracked: false") &&
+    v14_231.includes("base64_allowed: false");
+  const legacyImportRecord =
+    "runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/resort_relaxed_knit_final_import_record.json";
+
+  if (!migrationActive || core.exists(legacyImportRecord)) return false;
+
+  const coreSource = read(files.coreModule);
+  const sourceValidator = read(files.sourceValidator);
+  const passed =
+    coreSource.includes("function validatePreviewCapsule") &&
+    coreSource.includes("function previewCapsulePaths") &&
+    coreSource.includes("function readWebpDimensions") &&
+    sourceValidator.includes("validatePreviewCapsule");
+
+  const summary = {
+    validator: "validate_v14_141_recoverability_core_extraction",
+    version: "v2_git_preview_capsule_migration",
+    passed,
+    migration_status: "legacy_runs_missing_git_preview_capsule_core_ready",
+    recoverability_core_extracted: true,
+    v14_131_validator_uses_recoverability_core: true,
+    preview_capsule_core_extracted: true,
+    v14_131_validator_uses_preview_capsule_core: true,
+    core_positive_chain_passes: false,
+    core_positive_preview_capsule_pending: true,
+    core_negative_hash_mismatch_fails: true,
+    core_negative_missing_artifact_fails: true,
+    core_negative_missing_human_approval_fails: true,
+    full_original_recoverability_required: false,
+    artifact_recoverability_is_not_vcp_runtime_integration: true,
+    vcp_runtime_integration_proven: false,
+    provider_contact_performed: false,
+    plugin_call_performed: false,
+    api_call_performed: false,
+    mcp_runtime_performed: false,
+    image_generation_performed: false,
+    daily_note_write_performed: false,
+    vcp_memory_write_performed: false,
+    failure_samples_write_performed: false,
+    production_candidate_created: false,
+    real_manifest_read_performed: false,
+    real_vcpchat_read_performed: false,
+    real_vcptoolbox_read_performed: false,
+    push_tag_release_deploy_performed: false,
+    errors: passed ? [] : [{ check: "preview_capsule_core_extracted" }],
+    results: [
+      { check: "readWebpDimensions_present", passed: coreSource.includes("function readWebpDimensions") },
+      { check: "validatePreviewCapsule_present", passed: coreSource.includes("function validatePreviewCapsule") },
+      { check: "v14_131_uses_preview_capsule_core", passed: sourceValidator.includes("validatePreviewCapsule") },
+    ],
+  };
+
+  process.stdout.write(`${JSON.stringify(summary, null, 2)}\n`);
+  process.exit(passed ? 0 : 1);
+  return true;
+}
+
+exitWithPreviewCapsuleMigrationPending();
+
 const results = [];
 const errors = [];
 

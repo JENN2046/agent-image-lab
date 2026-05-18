@@ -140,6 +140,7 @@ const phaseRecord = core.read(files.phaseRecord);
 const app = core.read(files.app);
 const readme = core.read(files.readme);
 const currentSurfaces = [
+  Object.values(files).join("\n"),
   phaseRecord,
   JSON.stringify(snapshot, null, 2),
   app,

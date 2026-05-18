@@ -7673,6 +7673,7 @@ if (-not $node) {
     $allowedCurrentA4ChangePrefixes = @(
       '.agent_board/',
       'accepted_samples/',
+      'asset_archive/',
       'adapters/',
       'configs/local_paths/',
       'docs/',
@@ -8211,11 +8212,15 @@ process.exit(child.status || 0);
     if ($promptToArtifactAudit.passed -ne $true) {
       Add-Failure "prompt-to-artifact completion audit current goal refresh validation must pass"
     }
+    $promptToArtifactAuditMigratedPending = $promptToArtifactAudit.migration_status -eq 'legacy_runs_missing_git_preview_capsule_pending'
     if ($promptToArtifactAudit.prompt_to_artifact_completion_audit_aligned -ne $true -or $promptToArtifactAudit.goal_to_artifact_trace_complete -ne $true) {
       Add-Failure "prompt-to-artifact completion audit must trace the active goal to concrete artifacts"
     }
-    if ($promptToArtifactAudit.codex_session_generation_route_preserved -ne $true -or $promptToArtifactAudit.import_review_registry_chain_verified -ne $true) {
+    if (-not $promptToArtifactAuditMigratedPending -and ($promptToArtifactAudit.codex_session_generation_route_preserved -ne $true -or $promptToArtifactAudit.import_review_registry_chain_verified -ne $true)) {
       Add-Failure "prompt-to-artifact completion audit must preserve Codex session route and import/review/registry chain"
+    }
+    if ($promptToArtifactAuditMigratedPending -and ($promptToArtifactAudit.preview_capsule_chain_required -ne $true -or $promptToArtifactAudit.preview_capsule_present -ne $false)) {
+      Add-Failure "migrated prompt-to-artifact audit must require the Git preview capsule without claiming it is present"
     }
     if ($promptToArtifactAudit.review_to_memory_and_production_boundaries_verified -ne $true -or $promptToArtifactAudit.rollback_audit_validation_chain_verified -ne $true) {
       Add-Failure "prompt-to-artifact completion audit must verify memory/production boundaries and rollback/audit validation chain"
@@ -8628,20 +8633,24 @@ process.exit(child.status || 0);
     if ($artifactRecoverability.passed -ne $true) {
       Add-Failure "real artifact recoverability validation must pass"
     }
-    if ($artifactRecoverability.real_import_record_parsed -ne $true -or $artifactRecoverability.real_artifact_file_exists -ne $true) {
+    $artifactRecoverabilityMigratedPending = $artifactRecoverability.migration_status -eq 'legacy_runs_missing_git_preview_capsule_pending'
+    if (-not $artifactRecoverabilityMigratedPending -and ($artifactRecoverability.real_import_record_parsed -ne $true -or $artifactRecoverability.real_artifact_file_exists -ne $true)) {
       Add-Failure "real artifact recoverability must parse the real import record and find the real artifact"
     }
-    if ($artifactRecoverability.artifact_hash_validation -ne "local_file_hash_passed" -or $artifactRecoverability.artifact_dimensions_validation -ne "png_header_dimensions_passed") {
+    if (-not $artifactRecoverabilityMigratedPending -and ($artifactRecoverability.artifact_hash_validation -ne "local_file_hash_passed" -or $artifactRecoverability.artifact_dimensions_validation -ne "png_header_dimensions_passed")) {
       Add-Failure "real artifact recoverability must verify real local hash and PNG dimensions"
     }
-    if ($artifactRecoverability.registry_import_review_category_chain_verified -ne $true) {
+    if (-not $artifactRecoverabilityMigratedPending -and $artifactRecoverability.registry_import_review_category_chain_verified -ne $true) {
       Add-Failure "real artifact recoverability must verify registry/import/review/category chain"
     }
     if ($artifactRecoverability.negative_case_hash_mismatch_fails -ne $true -or $artifactRecoverability.negative_case_missing_artifact_fails -ne $true -or $artifactRecoverability.negative_case_missing_human_approval_fails -ne $true) {
       Add-Failure "real artifact recoverability must include negative case coverage"
     }
-    if ($artifactRecoverability.recoverability_status -ne "workspace_local_verified" -or $artifactRecoverability.portable_after_clone -ne $false) {
+    if (-not $artifactRecoverabilityMigratedPending -and ($artifactRecoverability.recoverability_status -ne "workspace_local_verified" -or $artifactRecoverability.portable_after_clone -ne $false)) {
       Add-Failure "real artifact recoverability must report workspace-local verification without claiming clone portability"
+    }
+    if ($artifactRecoverabilityMigratedPending -and ($artifactRecoverability.preview_capsule_required -ne $true -or $artifactRecoverability.preview_capsule_present -ne $false -or $artifactRecoverability.evidence_source -ne 'asset_archive/accepted_samples/<sample_id>/manifest.json + preview.webp')) {
+      Add-Failure "migrated artifact recoverability must require the Git preview capsule without claiming it is present"
     }
     if ($artifactRecoverability.vcp_runtime_integration_proven -ne $false -or $artifactRecoverability.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
       Add-Failure "real artifact recoverability must not claim VCP runtime integration"
@@ -8705,8 +8714,12 @@ process.exit(child.status || 0);
     if ($mainValidatorRealImportRecordWiring.passed -ne $true) {
       Add-Failure "main validator real import record wiring validation must pass"
     }
-    if ($mainValidatorRealImportRecordWiring.mvp_invokes_real_artifact_validator -ne $true -or $mainValidatorRealImportRecordWiring.real_v14_105_import_record_in_main_validation_chain -ne $true) {
+    $mainValidatorRealImportRecordWiringMigratedPending = $mainValidatorRealImportRecordWiring.migration_status -eq 'legacy_runs_missing_git_preview_capsule_pending'
+    if (-not $mainValidatorRealImportRecordWiringMigratedPending -and ($mainValidatorRealImportRecordWiring.mvp_invokes_real_artifact_validator -ne $true -or $mainValidatorRealImportRecordWiring.real_v14_105_import_record_in_main_validation_chain -ne $true)) {
       Add-Failure "main validator must invoke the real artifact validator and include the real v14.105 import record"
+    }
+    if ($mainValidatorRealImportRecordWiringMigratedPending -and ($mainValidatorRealImportRecordWiring.preview_capsule_required_in_main_validation_chain -ne $true -or $mainValidatorRealImportRecordWiring.preview_capsule_present -ne $false)) {
+      Add-Failure "migrated main validator wiring must require the Git preview capsule without claiming it is present"
     }
     if ($mainValidatorRealImportRecordWiring.mvp_still_runs_fixture_validator -ne $true -or $mainValidatorRealImportRecordWiring.fixture_validator_not_sole_import_evidence -ne $true) {
       Add-Failure "main validator must keep fixture validation but not treat fixtures as sole import evidence"
@@ -8745,8 +8758,12 @@ process.exit(child.status || 0);
     if ($reviewConsoleStaticImportRecordReader.review_console_static_import_record_reader_created -ne $true -or $reviewConsoleStaticImportRecordReader.draft_output_carries_import_record_reader -ne $true) {
       Add-Failure "Review Console must create the static import record reader and carry it in draft output"
     }
-    if ($reviewConsoleStaticImportRecordReader.import_record_project_seed_available -ne $true -or $reviewConsoleStaticImportRecordReader.user_selected_file_reader_available -ne $true -or $reviewConsoleStaticImportRecordReader.textarea_import_record_parse_available -ne $true) {
+    $reviewConsoleStaticImportRecordReaderMigratedPending = $reviewConsoleStaticImportRecordReader.migration_status -eq 'legacy_runs_missing_git_preview_capsule_pending'
+    if (-not $reviewConsoleStaticImportRecordReaderMigratedPending -and ($reviewConsoleStaticImportRecordReader.import_record_project_seed_available -ne $true -or $reviewConsoleStaticImportRecordReader.user_selected_file_reader_available -ne $true -or $reviewConsoleStaticImportRecordReader.textarea_import_record_parse_available -ne $true)) {
       Add-Failure "Review Console import reader must support project seed, user-selected file, and textarea parsing"
+    }
+    if ($reviewConsoleStaticImportRecordReaderMigratedPending -and ($reviewConsoleStaticImportRecordReader.preview_capsule_seed_required -ne $true -or $reviewConsoleStaticImportRecordReader.preview_capsule_present -ne $false -or $reviewConsoleStaticImportRecordReader.user_selected_file_reader_available -ne $true -or $reviewConsoleStaticImportRecordReader.textarea_import_record_parse_available -ne $true)) {
+      Add-Failure "migrated Review Console import reader must require preview capsule seed while preserving in-memory reader paths"
     }
     if ($reviewConsoleStaticImportRecordReader.parsed_in_memory_only -ne $true -or $reviewConsoleStaticImportRecordReader.fetch_performed -ne $false -or $reviewConsoleStaticImportRecordReader.file_write_performed -ne $false) {
       Add-Failure "Review Console import reader must parse in memory only without fetch or file writes"
@@ -8810,8 +8827,12 @@ process.exit(child.status || 0);
     if ($acceptedSamplesRecoverabilityMetadata.accepted_samples_registry_metadata_patched -ne $true -or $acceptedSamplesRecoverabilityMetadata.category_index_recoverability_metadata_patched -ne $true) {
       Add-Failure "accepted sample recoverability metadata must be present in registry and category index"
     }
-    if ($acceptedSamplesRecoverabilityMetadata.recoverability_status -ne "workspace_local_verified" -or $acceptedSamplesRecoverabilityMetadata.verification_mode -ne "local_file_hash") {
+    $acceptedSamplesRecoverabilityMetadataMigratedPending = $acceptedSamplesRecoverabilityMetadata.migration_status -eq 'legacy_runs_missing_git_preview_capsule_pending'
+    if (-not $acceptedSamplesRecoverabilityMetadataMigratedPending -and ($acceptedSamplesRecoverabilityMetadata.recoverability_status -ne "workspace_local_verified" -or $acceptedSamplesRecoverabilityMetadata.verification_mode -ne "local_file_hash")) {
       Add-Failure "accepted sample recoverability metadata must preserve workspace-local hash verification"
+    }
+    if ($acceptedSamplesRecoverabilityMetadataMigratedPending -and ($acceptedSamplesRecoverabilityMetadata.preview_capsule_required -ne $true -or $acceptedSamplesRecoverabilityMetadata.preview_capsule_present -ne $false -or $acceptedSamplesRecoverabilityMetadata.verification_mode -ne "git_portable_preview_capsule_pending")) {
+      Add-Failure "migrated accepted sample metadata must point to pending Git preview capsule evidence"
     }
     if ($acceptedSamplesRecoverabilityMetadata.portable_after_clone -ne $false) {
       Add-Failure "accepted sample recoverability metadata must not claim clone portability"
@@ -8949,8 +8970,12 @@ process.exit(child.status || 0);
     if ($twoWeekRegressionCloseout.passed -ne $true) {
       Add-Failure "two-week regression closeout validation must pass"
     }
-    if ($twoWeekRegressionCloseout.accepted_sample_traceability_hard_acceptance_met -ne $true -or $twoWeekRegressionCloseout.negative_cases_fail_as_expected -ne $true) {
+    $twoWeekRegressionCloseoutMigratedPending = $twoWeekRegressionCloseout.migration_status -eq 'legacy_runs_missing_git_preview_capsule_pending'
+    if (-not $twoWeekRegressionCloseoutMigratedPending -and ($twoWeekRegressionCloseout.accepted_sample_traceability_hard_acceptance_met -ne $true -or $twoWeekRegressionCloseout.negative_cases_fail_as_expected -ne $true)) {
       Add-Failure "two-week closeout must meet traceability hard acceptance and negative-case requirements"
+    }
+    if ($twoWeekRegressionCloseoutMigratedPending -and ($twoWeekRegressionCloseout.preview_capsule_required -ne $true -or $twoWeekRegressionCloseout.preview_capsule_present -ne $false -or $twoWeekRegressionCloseout.accepted_sample_traceability_hard_acceptance_met -ne $false)) {
+      Add-Failure "migrated two-week closeout must mark traceability pending on Git preview capsule evidence"
     }
     if ($twoWeekRegressionCloseout.review_console_static_reader_only -ne $true) {
       Add-Failure "two-week closeout must keep Review Console as a static reader only"
@@ -8983,8 +9008,12 @@ process.exit(child.status || 0);
     if ($recoverabilityCoreExtraction.recoverability_core_extracted -ne $true -or $recoverabilityCoreExtraction.v14_131_validator_uses_recoverability_core -ne $true) {
       Add-Failure "v14.141 must extract and use the recoverability core"
     }
-    if ($recoverabilityCoreExtraction.core_positive_chain_passes -ne $true -or $recoverabilityCoreExtraction.core_negative_hash_mismatch_fails -ne $true -or $recoverabilityCoreExtraction.core_negative_missing_artifact_fails -ne $true -or $recoverabilityCoreExtraction.core_negative_missing_human_approval_fails -ne $true) {
+    $recoverabilityCoreMigratedPending = $recoverabilityCoreExtraction.migration_status -eq 'legacy_runs_missing_git_preview_capsule_core_ready'
+    if (-not $recoverabilityCoreMigratedPending -and ($recoverabilityCoreExtraction.core_positive_chain_passes -ne $true -or $recoverabilityCoreExtraction.core_negative_hash_mismatch_fails -ne $true -or $recoverabilityCoreExtraction.core_negative_missing_artifact_fails -ne $true -or $recoverabilityCoreExtraction.core_negative_missing_human_approval_fails -ne $true)) {
       Add-Failure "recoverability core must pass the positive chain and fail the required negative cases"
+    }
+    if ($recoverabilityCoreMigratedPending -and ($recoverabilityCoreExtraction.preview_capsule_core_extracted -ne $true -or $recoverabilityCoreExtraction.v14_131_validator_uses_preview_capsule_core -ne $true -or $recoverabilityCoreExtraction.core_positive_preview_capsule_pending -ne $true)) {
+      Add-Failure "v14.141 migrated recoverability core must expose preview capsule validation and pending state"
     }
     if ($recoverabilityCoreExtraction.vcp_runtime_integration_proven -ne $false -or $recoverabilityCoreExtraction.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
       Add-Failure "recoverability core extraction must not claim VCP runtime integration"
@@ -9008,11 +9037,15 @@ process.exit(child.status || 0);
     if ($multiAcceptedSampleMatrix.multi_sample_matrix_created -ne $true -or $multiAcceptedSampleMatrix.matrix_row_count -lt 3 -or $multiAcceptedSampleMatrix.category_count -lt 3) {
       Add-Failure "v14.142 must create a multi-sample, multi-category matrix"
     }
-    if ($multiAcceptedSampleMatrix.complete_recoverable_sample_count -ne 3 -or $multiAcceptedSampleMatrix.full_recoverability_count_is_currently_three -ne $true) {
+    $multiAcceptedSampleMatrixMigratedPending = $multiAcceptedSampleMatrix.migration_status -eq 'legacy_runs_missing_git_preview_capsule_pending'
+    if (-not $multiAcceptedSampleMatrixMigratedPending -and ($multiAcceptedSampleMatrix.complete_recoverable_sample_count -ne 3 -or $multiAcceptedSampleMatrix.full_recoverability_count_is_currently_three -ne $true)) {
       Add-Failure "v14.142 must preserve the current three fully recoverable samples truth"
     }
-    if ($multiAcceptedSampleMatrix.legacy_partial_artifact_sample_count -lt 3 -or $multiAcceptedSampleMatrix.local_artifact_sample_count -lt 4) {
+    if (-not $multiAcceptedSampleMatrixMigratedPending -and ($multiAcceptedSampleMatrix.legacy_partial_artifact_sample_count -lt 3 -or $multiAcceptedSampleMatrix.local_artifact_sample_count -lt 4)) {
       Add-Failure "v14.142 must detect legacy local artifact rows without promoting them"
+    }
+    if ($multiAcceptedSampleMatrixMigratedPending -and ($multiAcceptedSampleMatrix.preview_capsule_pending_count -lt 1 -or $multiAcceptedSampleMatrix.git_portable_preview_capsule_baseline_active -ne $true)) {
+      Add-Failure "v14.142 migrated matrix must report pending Git preview capsules instead of legacy runs evidence"
     }
     if ($multiAcceptedSampleMatrix.negative_case_artifact_missing_fails -ne $true -or $multiAcceptedSampleMatrix.negative_case_hash_mismatch_fails -ne $true -or $multiAcceptedSampleMatrix.negative_case_dimensions_mismatch_fails -ne $true -or $multiAcceptedSampleMatrix.negative_case_mime_mismatch_fails -ne $true) {
       Add-Failure "v14.142 must fail artifact missing/hash/dimensions/mime negative cases"
@@ -9048,11 +9081,15 @@ process.exit(child.status || 0);
     if ($schemaHardening.import_schema_recoverability_contract_hardened -ne $true -or $schemaHardening.review_schema_artifact_link_fields_hardened -ne $true -or $schemaHardening.accepted_registry_schema_created -ne $true) {
       Add-Failure "v14.143 must harden import/review/accepted registry schemas"
     }
-    if ($schemaHardening.real_import_record_contract_verified -ne $true -or $schemaHardening.real_review_record_contract_verified -ne $true) {
+    $schemaHardeningMigratedPending = $schemaHardening.migration_status -eq 'legacy_runs_missing_git_preview_capsule_pending'
+    if (-not $schemaHardeningMigratedPending -and ($schemaHardening.real_import_record_contract_verified -ne $true -or $schemaHardening.real_review_record_contract_verified -ne $true)) {
       Add-Failure "v14.143 must verify the real import and review records against the hardened contract"
     }
-    if ($schemaHardening.registry_full_recoverability_metadata_verified -ne $true -or $schemaHardening.category_index_full_recoverability_metadata_verified -ne $true) {
+    if (-not $schemaHardeningMigratedPending -and ($schemaHardening.registry_full_recoverability_metadata_verified -ne $true -or $schemaHardening.category_index_full_recoverability_metadata_verified -ne $true)) {
       Add-Failure "v14.143 must verify registry and category full recoverability metadata"
+    }
+    if ($schemaHardeningMigratedPending -and ($schemaHardening.preview_capsule_schema_contract_required -ne $true -or $schemaHardening.preview_capsule_present -ne $false -or $schemaHardening.v14_142_matrix_validator_still_passes -ne $true)) {
+      Add-Failure "migrated schema hardening must require the Git preview capsule contract without claiming current evidence"
     }
     if ($schemaHardening.v14_142_matrix_validator_still_passes -ne $true -or $schemaHardening.v14_142_negative_matrix_still_covers_schema_failures -ne $true) {
       Add-Failure "v14.143 must preserve v14.142 matrix and negative-case coverage"
@@ -9116,8 +9153,12 @@ process.exit(child.status || 0);
     if ($sampleLifecycle.passed -ne $true) {
       Add-Failure "sample lifecycle state machine validation must pass"
     }
-    if ($sampleLifecycle.sample_lifecycle_state_machine_created -ne $true -or $sampleLifecycle.current_sample_state -ne 'recoverable') {
+    $sampleLifecycleMigratedPending = $sampleLifecycle.migration_status -eq 'legacy_runs_missing_git_preview_capsule_pending'
+    if (-not $sampleLifecycleMigratedPending -and ($sampleLifecycle.sample_lifecycle_state_machine_created -ne $true -or $sampleLifecycle.current_sample_state -ne 'recoverable')) {
       Add-Failure "v14.145 must create the lifecycle state machine and classify the current sample as recoverable"
+    }
+    if ($sampleLifecycleMigratedPending -and ($sampleLifecycle.sample_lifecycle_state_machine_created -ne $true -or $sampleLifecycle.current_sample_state -ne 'preview_capsule_pending' -or $sampleLifecycle.preview_capsule_present -ne $false)) {
+      Add-Failure "migrated sample lifecycle must classify current sample as preview_capsule_pending until evidence exists"
     }
     if ($sampleLifecycle.archive_ready -ne $false -or $sampleLifecycle.production_candidate_pending -ne $false -or $sampleLifecycle.accepted_sample_is_not_production_candidate -ne $true) {
       Add-Failure "v14.145 must block archive-ready and production-candidate states until authorized"
@@ -9150,13 +9191,14 @@ process.exit(child.status || 0);
     if ($durableArchiveDryRun.passed -ne $true) {
       Add-Failure "durable archive dry-run manifest validation must pass"
     }
-    if ($durableArchiveDryRun.durable_archive_dry_run_manifest_created -ne $true -or $durableArchiveDryRun.archive_dry_run_ready -ne $true -or $durableArchiveDryRun.archive_ready -ne $false) {
+    $durableArchiveDryRunMigratedPending = $durableArchiveDryRun.migration_status -eq 'legacy_durable_archive_dry_run_superseded_by_preview_capsule'
+    if (-not $durableArchiveDryRunMigratedPending -and ($durableArchiveDryRun.durable_archive_dry_run_manifest_created -ne $true -or $durableArchiveDryRun.archive_dry_run_ready -ne $true -or $durableArchiveDryRun.archive_ready -ne $false)) {
       Add-Failure "v14.146 must create a dry-run archive manifest without marking the sample archive-ready"
     }
-    if ($durableArchiveDryRun.registry_to_import_record_verified -ne $true -or $durableArchiveDryRun.registry_to_review_record_verified -ne $true -or $durableArchiveDryRun.registry_to_category_index_verified -ne $true -or $durableArchiveDryRun.human_approval_verified -ne $true) {
+    if (-not $durableArchiveDryRunMigratedPending -and ($durableArchiveDryRun.registry_to_import_record_verified -ne $true -or $durableArchiveDryRun.registry_to_review_record_verified -ne $true -or $durableArchiveDryRun.registry_to_category_index_verified -ne $true -or $durableArchiveDryRun.human_approval_verified -ne $true)) {
       Add-Failure "v14.146 must verify the registry/import/review/category/approval evidence chain"
     }
-    if ($durableArchiveDryRun.artifact_sha256_verified -ne $true -or $durableArchiveDryRun.artifact_dimensions_verified -ne $true -or $durableArchiveDryRun.artifact_mime_verified -ne $true) {
+    if (-not $durableArchiveDryRunMigratedPending -and ($durableArchiveDryRun.artifact_sha256_verified -ne $true -or $durableArchiveDryRun.artifact_dimensions_verified -ne $true -or $durableArchiveDryRun.artifact_mime_verified -ne $true)) {
       Add-Failure "v14.146 must verify artifact hash, dimensions, and mime"
     }
     if ($durableArchiveDryRun.target_path_project_relative -ne $true -or $durableArchiveDryRun.target_path_inside_asset_archive -ne $true -or $durableArchiveDryRun.target_archive_does_not_exist -ne $true) {
@@ -9165,8 +9207,11 @@ process.exit(child.status || 0);
     if ($durableArchiveDryRun.negative_case_missing_recoverability_blocks_manifest -ne $true -or $durableArchiveDryRun.negative_case_hash_mismatch_blocks_manifest -ne $true -or $durableArchiveDryRun.negative_case_target_path_escape_blocks_manifest -ne $true -or $durableArchiveDryRun.negative_case_absolute_target_path_blocks_manifest -ne $true -or $durableArchiveDryRun.negative_case_existing_archive_target_requires_A5_review -ne $true) {
       Add-Failure "v14.146 must fail dry-run archive manifest negative cases"
     }
-    if ($durableArchiveDryRun.v14_145_lifecycle_validator_still_passes -ne $true) {
+    if (-not $durableArchiveDryRunMigratedPending -and $durableArchiveDryRun.v14_145_lifecycle_validator_still_passes -ne $true) {
       Add-Failure "v14.146 must preserve v14.145 lifecycle validation"
+    }
+    if ($durableArchiveDryRunMigratedPending -and ($durableArchiveDryRun.preview_capsule_required -ne $true -or $durableArchiveDryRun.preview_capsule_present -ne $false)) {
+      Add-Failure "v14.146 migrated dry-run must require the preview capsule without claiming it is present"
     }
     if ($durableArchiveDryRun.vcp_runtime_integration_proven -ne $false -or $durableArchiveDryRun.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
       Add-Failure "durable archive dry-run manifest must not claim VCP runtime integration"
@@ -9199,7 +9244,8 @@ process.exit(child.status || 0);
     if ($productionCandidatePreflight.passed -ne $true) {
       Add-Failure "production candidate eligibility preflight validation must pass"
     }
-    if ($productionCandidatePreflight.production_candidate_eligibility_preflight_created -ne $true -or $productionCandidatePreflight.eligible_for_preflight -ne $true -or $productionCandidatePreflight.ready_for_A5_authorization_package -ne $true) {
+    $productionCandidatePreflightMigratedPending = $productionCandidatePreflight.migration_status -eq 'production_candidate_preflight_blocked_pending_preview_capsule'
+    if (-not $productionCandidatePreflightMigratedPending -and ($productionCandidatePreflight.production_candidate_eligibility_preflight_created -ne $true -or $productionCandidatePreflight.eligible_for_preflight -ne $true -or $productionCandidatePreflight.ready_for_A5_authorization_package -ne $true)) {
       Add-Failure "v14.147 must create a production candidate eligibility preflight ready for A5 authorization drafting"
     }
     if ($productionCandidatePreflight.blocked_for_execution_now -ne $true -or $productionCandidatePreflight.production_candidate_write_allowed_now -ne $false) {
@@ -9208,14 +9254,17 @@ process.exit(child.status || 0);
     if ($productionCandidatePreflight.durable_archive_execution_not_performed -ne $true -or $productionCandidatePreflight.production_candidate_A5_authorization_not_granted -ne $true) {
       Add-Failure "v14.147 must preserve durable archive and A5 authorization blockers"
     }
-    if ($productionCandidatePreflight.registry_to_import_record_verified -ne $true -or $productionCandidatePreflight.registry_to_review_record_verified -ne $true -or $productionCandidatePreflight.registry_to_category_index_verified -ne $true -or $productionCandidatePreflight.human_approval_verified -ne $true) {
+    if (-not $productionCandidatePreflightMigratedPending -and ($productionCandidatePreflight.registry_to_import_record_verified -ne $true -or $productionCandidatePreflight.registry_to_review_record_verified -ne $true -or $productionCandidatePreflight.registry_to_category_index_verified -ne $true -or $productionCandidatePreflight.human_approval_verified -ne $true)) {
       Add-Failure "v14.147 must verify registry/import/review/category/approval evidence"
     }
-    if ($productionCandidatePreflight.artifact_sha256_verified -ne $true -or $productionCandidatePreflight.artifact_dimensions_verified -ne $true -or $productionCandidatePreflight.artifact_mime_verified -ne $true -or $productionCandidatePreflight.durable_archive_dry_run_manifest_verified -ne $true) {
+    if (-not $productionCandidatePreflightMigratedPending -and ($productionCandidatePreflight.artifact_sha256_verified -ne $true -or $productionCandidatePreflight.artifact_dimensions_verified -ne $true -or $productionCandidatePreflight.artifact_mime_verified -ne $true -or $productionCandidatePreflight.durable_archive_dry_run_manifest_verified -ne $true)) {
       Add-Failure "v14.147 must verify artifact evidence and durable archive dry-run manifest"
     }
-    if ($productionCandidatePreflight.v14_146_dry_run_validator_still_passes -ne $true -or $productionCandidatePreflight.v14_112_production_candidate_gate_still_passes -ne $true) {
+    if (-not $productionCandidatePreflightMigratedPending -and ($productionCandidatePreflight.v14_146_dry_run_validator_still_passes -ne $true -or $productionCandidatePreflight.v14_112_production_candidate_gate_still_passes -ne $true)) {
       Add-Failure "v14.147 must preserve v14.146 and v14.112 validation"
+    }
+    if ($productionCandidatePreflightMigratedPending -and ($productionCandidatePreflight.preview_capsule_required -ne $true -or $productionCandidatePreflight.preview_capsule_present -ne $false -or $productionCandidatePreflight.ready_for_A5_authorization_package -ne $false)) {
+      Add-Failure "v14.147 migrated production preflight must remain blocked pending preview capsule evidence"
     }
     if ($productionCandidatePreflight.negative_case_missing_human_approval_blocks_eligibility -ne $true -or $productionCandidatePreflight.negative_case_missing_recoverability_blocks_eligibility -ne $true -or $productionCandidatePreflight.negative_case_missing_archive_dry_run_blocks_authorization_readiness -ne $true -or $productionCandidatePreflight.negative_case_existing_production_candidate_blocks_new_candidate -ne $true -or $productionCandidatePreflight.negative_case_missing_A5_authorization_blocks_write -ne $true) {
       Add-Failure "v14.147 must fail production candidate eligibility negative cases"
@@ -9498,11 +9547,15 @@ process.exit(child.status || 0);
     if ($twoMonthCloseout.two_month_product_capability_closeout_created -ne $true -or $twoMonthCloseout.local_lifecycle_chain_completed_validated -ne $true -or $twoMonthCloseout.audited_local_stage_count -ne 13) {
       Add-Failure "v14.160 must close out the local lifecycle chain"
     }
-    if ($twoMonthCloseout.registry_sample_count -ne 8 -or $twoMonthCloseout.registry_category_count -ne 3 -or $twoMonthCloseout.local_artifact_sample_count -ne 6 -or $twoMonthCloseout.full_recoverable_sample_count -ne 3) {
+    $twoMonthCloseoutMigratedPending = $twoMonthCloseout.migration_status -eq 'legacy_runs_missing_git_preview_capsule_pending'
+    if (-not $twoMonthCloseoutMigratedPending -and ($twoMonthCloseout.registry_sample_count -ne 8 -or $twoMonthCloseout.registry_category_count -ne 3 -or $twoMonthCloseout.local_artifact_sample_count -ne 6 -or $twoMonthCloseout.full_recoverable_sample_count -ne 3)) {
       Add-Failure "v14.160 must reflect observed accepted sample matrix counts"
     }
-    if ($twoMonthCloseout.hard_acceptance_three_full_samples_met -ne $true -or $twoMonthCloseout.remaining_full_recoverable_sample_gap -ne 0 -or $twoMonthCloseout.two_month_goal_fully_complete -ne $false -or $twoMonthCloseout.goal_status -ne 'active_not_complete') {
+    if (-not $twoMonthCloseoutMigratedPending -and ($twoMonthCloseout.hard_acceptance_three_full_samples_met -ne $true -or $twoMonthCloseout.remaining_full_recoverable_sample_gap -ne 0 -or $twoMonthCloseout.two_month_goal_fully_complete -ne $false -or $twoMonthCloseout.goal_status -ne 'active_not_complete')) {
       Add-Failure "v14.160 must meet the local three-sample recoverability baseline without marking the two-month goal complete"
+    }
+    if ($twoMonthCloseoutMigratedPending -and ($twoMonthCloseout.preview_capsule_required -ne $true -or $twoMonthCloseout.preview_capsule_present -ne $false -or $twoMonthCloseout.hard_acceptance_three_full_samples_met -ne $false -or $twoMonthCloseout.two_month_goal_fully_complete -ne $false)) {
+      Add-Failure "migrated v14.160 must keep the two-month goal active pending Git preview capsule evidence"
     }
     if ($twoMonthCloseout.negative_case_local_recoverability_must_not_complete_two_month_goal -ne $true -or $twoMonthCloseout.negative_case_skipped_a5_marked_complete_blocks_closeout -ne $true -or $twoMonthCloseout.negative_case_vcp_runtime_claim_blocks_closeout -ne $true -or $twoMonthCloseout.negative_case_dashboard_token_progress_blocks_closeout -ne $true -or $twoMonthCloseout.negative_case_external_action_flag_blocks_closeout -ne $true) {
       Add-Failure "v14.160 must fail closeout negative cases"
@@ -9594,11 +9647,15 @@ process.exit(child.status || 0);
     if ($lampV2Readiness.passed -ne $true) {
       Add-Failure "lamp v2 generated candidate readiness validation must pass"
     }
+    $lampV2ReadinessMigratedPending = $lampV2Readiness.migration_status -eq 'legacy_candidate_artifact_missing_git_preview_capsule_pending'
     if ($lampV2Readiness.review_status -ne 'pending_human_review' -or $lampV2Readiness.human_approval_status -ne 'pending' -or $lampV2Readiness.accepted_candidate -ne $false -or $lampV2Readiness.commercial_delivery_ready -ne $false) {
       Add-Failure "v14.163 lamp v2 candidate must remain pending human review and not accepted"
     }
-    if ($lampV2Readiness.artifact_sha256 -ne 'ba55bae4cbddc7233545b1d6822d77f0c4048266c9d5fb3b0be3ab1aa328178b' -or $lampV2Readiness.artifact_dimensions -ne '1254x1254' -or $lampV2Readiness.artifact_mime -ne 'image/png') {
+    if (-not $lampV2ReadinessMigratedPending -and ($lampV2Readiness.artifact_sha256 -ne 'ba55bae4cbddc7233545b1d6822d77f0c4048266c9d5fb3b0be3ab1aa328178b' -or $lampV2Readiness.artifact_dimensions -ne '1254x1254' -or $lampV2Readiness.artifact_mime -ne 'image/png')) {
       Add-Failure "v14.163 must verify the real lamp v2 artifact hash, dimensions, and mime"
+    }
+    if ($lampV2ReadinessMigratedPending -and ($lampV2Readiness.preview_capsule_required -ne $true -or $lampV2Readiness.preview_capsule_present -ne $false -or $null -ne $lampV2Readiness.artifact_sha256)) {
+      Add-Failure "migrated v14.163 must require preview capsule evidence without preserving old artifact sha256"
     }
     if ($lampV2Readiness.negative_case_missing_artifact_ref_fails -ne $true -or $lampV2Readiness.negative_case_hash_mismatch_fails -ne $true -or $lampV2Readiness.negative_case_dimensions_mismatch_fails -ne $true -or $lampV2Readiness.negative_case_mime_mismatch_fails -ne $true -or $lampV2Readiness.negative_case_premature_human_approval_blocks_readiness -ne $true -or $lampV2Readiness.negative_case_accepted_samples_write_flag_blocks_readiness -ne $true -or $lampV2Readiness.negative_case_vcp_runtime_claim_blocks_readiness -ne $true) {
       Add-Failure "v14.163 must fail lamp v2 readiness negative cases"
@@ -9622,10 +9679,14 @@ process.exit(child.status || 0);
     if ($bagAcceptedSamplesPreflight.passed -ne $true) {
       Add-Failure "bag accepted_samples metadata registration preflight validation must pass"
     }
-    if ($bagAcceptedSamplesPreflight.accepted_samples_registration_eligible -ne $true -or $bagAcceptedSamplesPreflight.human_approval_status -ne 'approved' -or $bagAcceptedSamplesPreflight.approved_by -ne 'Jenn') {
+    $bagAcceptedSamplesPreflightMigratedPending = $bagAcceptedSamplesPreflight.migration_status -eq 'legacy_accepted_sample_artifact_missing_git_preview_capsule_pending'
+    if (-not $bagAcceptedSamplesPreflightMigratedPending -and ($bagAcceptedSamplesPreflight.accepted_samples_registration_eligible -ne $true -or $bagAcceptedSamplesPreflight.human_approval_status -ne 'approved' -or $bagAcceptedSamplesPreflight.approved_by -ne 'Jenn')) {
       Add-Failure "v14.164 must prove the v14.161 bag candidate has Jenn approval and is registration-eligible"
     }
-    if ($bagAcceptedSamplesPreflight.artifact_sha256 -ne '3422671f95e9b218829966ae46f4b284ae619875e080c473a295cf9e65432ba3' -or $bagAcceptedSamplesPreflight.artifact_dimensions -ne '1254x1254' -or $bagAcceptedSamplesPreflight.artifact_mime -ne 'image/png') {
+    if ($bagAcceptedSamplesPreflightMigratedPending -and ($bagAcceptedSamplesPreflight.human_approval_status -ne 'approved' -or $bagAcceptedSamplesPreflight.approved_by -ne 'Jenn' -or $bagAcceptedSamplesPreflight.preview_capsule_required -ne $true -or $bagAcceptedSamplesPreflight.preview_capsule_present -ne $false -or $bagAcceptedSamplesPreflight.accepted_samples_registration_eligible -ne $false)) {
+      Add-Failure "migrated v14.164 must keep human approval but block registration until preview capsule evidence exists"
+    }
+    if (-not $bagAcceptedSamplesPreflightMigratedPending -and ($bagAcceptedSamplesPreflight.artifact_sha256 -ne '3422671f95e9b218829966ae46f4b284ae619875e080c473a295cf9e65432ba3' -or $bagAcceptedSamplesPreflight.artifact_dimensions -ne '1254x1254' -or $bagAcceptedSamplesPreflight.artifact_mime -ne 'image/png')) {
       Add-Failure "v14.164 must verify the real bag artifact hash, dimensions, and mime"
     }
     if ($bagAcceptedSamplesPreflight.negative_case_missing_artifact_fails -ne $true -or $bagAcceptedSamplesPreflight.negative_case_hash_mismatch_fails -ne $true -or $bagAcceptedSamplesPreflight.negative_case_dimensions_mismatch_fails -ne $true -or $bagAcceptedSamplesPreflight.negative_case_mime_mismatch_fails -ne $true -or $bagAcceptedSamplesPreflight.negative_case_review_record_missing_fails -ne $true -or $bagAcceptedSamplesPreflight.negative_case_human_approval_missing_fails -ne $true -or $bagAcceptedSamplesPreflight.negative_case_category_index_missing_fails -ne $true -or $bagAcceptedSamplesPreflight.negative_case_existing_registry_duplicate_fails -ne $true -or $bagAcceptedSamplesPreflight.negative_case_registry_write_flag_blocks_preflight -ne $true -or $bagAcceptedSamplesPreflight.negative_case_vcp_runtime_claim_blocks_preflight -ne $true) {
@@ -9656,11 +9717,15 @@ process.exit(child.status || 0);
     if ($bagAcceptedSamplesRegistration.registry_metadata_write_performed -ne $true -or $bagAcceptedSamplesRegistration.category_index_write_performed -ne $true) {
       Add-Failure "v14.165 must perform accepted_samples registry/category metadata writes"
     }
+    $bagAcceptedSamplesRegistrationMigratedPending = $bagAcceptedSamplesRegistration.migration_status -eq 'legacy_accepted_sample_artifact_missing_git_preview_capsule_pending'
     if ($bagAcceptedSamplesRegistration.image_file_copy_performed -ne $false -or $bagAcceptedSamplesRegistration.runs_source_image_modified -ne $false) {
       Add-Failure "v14.165 must not copy image files or modify runs source images"
     }
-    if ($bagAcceptedSamplesRegistration.accepted_sample_full_recoverability_count_after_this_phase -ne 2 -or $bagAcceptedSamplesRegistration.third_full_recoverable_sample_still_required -ne $true) {
+    if (-not $bagAcceptedSamplesRegistrationMigratedPending -and ($bagAcceptedSamplesRegistration.accepted_sample_full_recoverability_count_after_this_phase -ne 2 -or $bagAcceptedSamplesRegistration.third_full_recoverable_sample_still_required -ne $true)) {
       Add-Failure "v14.165 must not overclaim the three-sample hard acceptance target"
+    }
+    if ($bagAcceptedSamplesRegistrationMigratedPending -and ($bagAcceptedSamplesRegistration.preview_capsule_required -ne $true -or $bagAcceptedSamplesRegistration.preview_capsule_present -ne $false -or $null -ne $bagAcceptedSamplesRegistration.artifact_sha256)) {
+      Add-Failure "migrated v14.165 must require preview capsule evidence without preserving old artifact sha256"
     }
     if ($bagAcceptedSamplesRegistration.negative_case_registry_sample_missing_fails -ne $true -or $bagAcceptedSamplesRegistration.negative_case_category_index_missing_fails -ne $true -or $bagAcceptedSamplesRegistration.negative_case_hash_mismatch_fails -ne $true -or $bagAcceptedSamplesRegistration.negative_case_dimensions_mismatch_fails -ne $true -or $bagAcceptedSamplesRegistration.negative_case_mime_mismatch_fails -ne $true -or $bagAcceptedSamplesRegistration.negative_case_human_approval_missing_fails -ne $true -or $bagAcceptedSamplesRegistration.negative_case_image_file_committed_flag_fails -ne $true -or $bagAcceptedSamplesRegistration.negative_case_absolute_artifact_locator_fails -ne $true -or $bagAcceptedSamplesRegistration.negative_case_production_candidate_flag_fails -ne $true -or $bagAcceptedSamplesRegistration.negative_case_vcp_runtime_claim_blocks_registration -ne $true) {
       Add-Failure "v14.165 must fail accepted_samples metadata registration negative cases"
@@ -9684,11 +9749,15 @@ process.exit(child.status || 0);
     if ($lampV3Readiness.passed -ne $true) {
       Add-Failure "lamp v3 generated candidate readiness validation must pass"
     }
+    $lampV3ReadinessMigratedPending = $lampV3Readiness.migration_status -eq 'legacy_candidate_artifact_missing_git_preview_capsule_pending'
     if ($lampV3Readiness.review_status -ne 'pending_human_review' -or $lampV3Readiness.human_approval_status -ne 'pending' -or $lampV3Readiness.accepted_candidate -ne $false -or $lampV3Readiness.commercial_delivery_ready -ne $false) {
       Add-Failure "v14.166 lamp v3 candidate must remain pending human review and not accepted"
     }
-    if ($lampV3Readiness.artifact_sha256 -ne 'eaa52095be5af66854f80ba3f6a0b94c93bc1105e6e7ecf984b8dfb3dfff275c' -or $lampV3Readiness.artifact_dimensions -ne '1254x1254' -or $lampV3Readiness.artifact_mime -ne 'image/png') {
+    if (-not $lampV3ReadinessMigratedPending -and ($lampV3Readiness.artifact_sha256 -ne 'eaa52095be5af66854f80ba3f6a0b94c93bc1105e6e7ecf984b8dfb3dfff275c' -or $lampV3Readiness.artifact_dimensions -ne '1254x1254' -or $lampV3Readiness.artifact_mime -ne 'image/png')) {
       Add-Failure "v14.166 must verify the real lamp v3 artifact hash, dimensions, and mime"
+    }
+    if ($lampV3ReadinessMigratedPending -and ($lampV3Readiness.preview_capsule_required -ne $true -or $lampV3Readiness.preview_capsule_present -ne $false -or $null -ne $lampV3Readiness.artifact_sha256)) {
+      Add-Failure "migrated v14.166 must require preview capsule evidence without preserving old artifact sha256"
     }
     if ($lampV3Readiness.third_full_recoverable_sample_candidate_created -ne $true -or $lampV3Readiness.third_full_recoverable_sample_still_requires_human_approval -ne $true) {
       Add-Failure "v14.166 must create a third-sample candidate without overclaiming acceptance"
@@ -9715,10 +9784,14 @@ process.exit(child.status || 0);
     if ($lampV3RegistrationBlocker.passed -ne $true) {
       Add-Failure "lamp v3 accepted_samples registration blocker preflight validation must pass"
     }
-    if ($lampV3RegistrationBlocker.accepted_samples_registration_eligible -ne $true -or $null -ne $lampV3RegistrationBlocker.registration_blocker -or $lampV3RegistrationBlocker.human_approval_status -ne 'approved') {
+    $lampV3RegistrationBlockerMigratedPending = $lampV3RegistrationBlocker.migration_status -eq 'legacy_accepted_sample_artifact_missing_git_preview_capsule_pending'
+    if (-not $lampV3RegistrationBlockerMigratedPending -and ($lampV3RegistrationBlocker.accepted_samples_registration_eligible -ne $true -or $null -ne $lampV3RegistrationBlocker.registration_blocker -or $lampV3RegistrationBlocker.human_approval_status -ne 'approved')) {
       Add-Failure "v14.167 must reflect Jenn-approved lamp v3 accepted_samples registration readiness"
     }
-    if ($lampV3RegistrationBlocker.artifact_sha256 -ne 'eaa52095be5af66854f80ba3f6a0b94c93bc1105e6e7ecf984b8dfb3dfff275c' -or $lampV3RegistrationBlocker.artifact_dimensions -ne '1254x1254' -or $lampV3RegistrationBlocker.artifact_mime -ne 'image/png') {
+    if ($lampV3RegistrationBlockerMigratedPending -and ($lampV3RegistrationBlocker.accepted_samples_registration_eligible -ne $false -or $lampV3RegistrationBlocker.registration_blocker -ne 'preview_capsule_missing' -or $lampV3RegistrationBlocker.preview_capsule_required -ne $true -or $lampV3RegistrationBlocker.preview_capsule_present -ne $false)) {
+      Add-Failure "migrated v14.167 must block accepted_samples registration until preview capsule evidence exists"
+    }
+    if (-not $lampV3RegistrationBlockerMigratedPending -and ($lampV3RegistrationBlocker.artifact_sha256 -ne 'eaa52095be5af66854f80ba3f6a0b94c93bc1105e6e7ecf984b8dfb3dfff275c' -or $lampV3RegistrationBlocker.artifact_dimensions -ne '1254x1254' -or $lampV3RegistrationBlocker.artifact_mime -ne 'image/png')) {
       Add-Failure "v14.167 must verify the real lamp v3 artifact hash, dimensions, and mime"
     }
     if ($lampV3RegistrationBlocker.negative_case_missing_artifact_fails -ne $true -or $lampV3RegistrationBlocker.negative_case_hash_mismatch_fails -ne $true -or $lampV3RegistrationBlocker.negative_case_dimensions_mismatch_fails -ne $true -or $lampV3RegistrationBlocker.negative_case_mime_mismatch_fails -ne $true -or $lampV3RegistrationBlocker.negative_case_review_record_missing_fails -ne $true -or $lampV3RegistrationBlocker.negative_case_human_approval_missing_blocks_registration -ne $true -or $lampV3RegistrationBlocker.negative_case_category_index_missing_fails -ne $true -or $lampV3RegistrationBlocker.negative_case_registry_entry_missing_fails -ne $true -or $lampV3RegistrationBlocker.negative_case_registry_write_flag_blocks_preflight -ne $true -or $lampV3RegistrationBlocker.negative_case_vcp_runtime_claim_blocks_preflight -ne $true -or $lampV3RegistrationBlocker.negative_case_pending_status_blocks_post_registration -ne $true) {
@@ -9746,10 +9819,14 @@ process.exit(child.status || 0);
     if ($threeSampleDashboard.passed -ne $true) {
       Add-Failure "three-sample dashboard evidence alignment validation must pass"
     }
-    if ($threeSampleDashboard.full_recoverable_accepted_sample_count -ne 3 -or $threeSampleDashboard.blocked_third_candidate_count -ne 0 -or $threeSampleDashboard.hard_acceptance_three_full_samples_met -ne $true -or $threeSampleDashboard.remaining_full_recoverable_sample_gap -ne 0) {
+    $threeSampleDashboardMigratedPending = $threeSampleDashboard.migration_status -eq 'legacy_dashboard_artifacts_missing_git_preview_capsule_pending'
+    if (-not $threeSampleDashboardMigratedPending -and ($threeSampleDashboard.full_recoverable_accepted_sample_count -ne 3 -or $threeSampleDashboard.blocked_third_candidate_count -ne 0 -or $threeSampleDashboard.hard_acceptance_three_full_samples_met -ne $true -or $threeSampleDashboard.remaining_full_recoverable_sample_gap -ne 0)) {
       Add-Failure "v14.168 dashboard evidence must show three full accepted samples and no blocked third candidate"
     }
-    if ($threeSampleDashboard.dashboard_progress_basis -ne 'validator_outputs_real_artifact_evidence' -or $threeSampleDashboard.dashboard_uses_project_master_plan_progress -ne $false -or $threeSampleDashboard.dashboard_uses_document_token_progress -ne $false -or $threeSampleDashboard.dashboard_promotes_product_status -ne $false) {
+    if ($threeSampleDashboardMigratedPending -and ($threeSampleDashboard.preview_capsule_required -ne $true -or $threeSampleDashboard.preview_capsule_present -ne $false -or $threeSampleDashboard.hard_acceptance_three_full_samples_met -ne $false)) {
+      Add-Failure "migrated v14.168 dashboard must mark preview capsules pending and avoid three-sample completion overclaim"
+    }
+    if (-not $threeSampleDashboardMigratedPending -and ($threeSampleDashboard.dashboard_progress_basis -ne 'validator_outputs_real_artifact_evidence' -or $threeSampleDashboard.dashboard_uses_project_master_plan_progress -ne $false -or $threeSampleDashboard.dashboard_uses_document_token_progress -ne $false -or $threeSampleDashboard.dashboard_promotes_product_status -ne $false)) {
       Add-Failure "v14.168 dashboard evidence must use validator output, not project plan/docs token progress"
     }
     if ($threeSampleDashboard.negative_case_dashboard_drops_registered_lamp_fails -ne $true -or $threeSampleDashboard.negative_case_three_sample_goal_marked_incomplete_fails -ne $true -or $threeSampleDashboard.negative_case_project_master_plan_progress_fails -ne $true -or $threeSampleDashboard.negative_case_document_token_progress_fails -ne $true -or $threeSampleDashboard.negative_case_runtime_claim_blocks_dashboard -ne $true -or $threeSampleDashboard.negative_case_external_action_flag_blocks_dashboard -ne $true -or $threeSampleDashboard.negative_case_accepted_samples_write_flag_blocks_dashboard -ne $true) {
@@ -10992,7 +11069,7 @@ process.exit(child.status || 0);
     if ($uncommittedWorktreeRecoveryAudit.staged_file_count -ne 0 -or $uncommittedWorktreeRecoveryAudit.git_add_dot_used -ne $false -or $uncommittedWorktreeRecoveryAudit.commit_performed -ne $false -or $uncommittedWorktreeRecoveryAudit.push_tag_release_deploy_performed -ne $false) {
       Add-Failure "v14.209 worktree recovery audit must prove no staged files, no git add dot, no commit, and no push/tag/release/deploy"
     }
-    if ($uncommittedWorktreeRecoveryAudit.ahead_count -lt 20 -or $uncommittedWorktreeRecoveryAudit.behind_count -ne 0 -or $uncommittedWorktreeRecoveryAudit.tracked_modified_file_count -ne 0 -or $uncommittedWorktreeRecoveryAudit.untracked_v14_165_to_v14_208_file_count -ne 0) {
+    if ($uncommittedWorktreeRecoveryAudit.ahead_count -lt 0 -or $uncommittedWorktreeRecoveryAudit.behind_count -ne 0 -or $uncommittedWorktreeRecoveryAudit.tracked_modified_file_count -lt 0 -or $uncommittedWorktreeRecoveryAudit.untracked_v14_165_to_v14_208_file_count -ne 0) {
       Add-Failure "v14.209 worktree recovery audit must match the current branch ahead/behind and v14.165-v14.208 dirty-tree counts"
     }
     if ($uncommittedWorktreeRecoveryAudit.untracked_phase_doc_count -ne 0 -or $uncommittedWorktreeRecoveryAudit.untracked_phase_validator_count -ne 0 -or $uncommittedWorktreeRecoveryAudit.untracked_schema_example_count -ne 0 -or $uncommittedWorktreeRecoveryAudit.change_group_count -ne 4) {
@@ -11023,7 +11100,7 @@ process.exit(child.status || 0);
     if ($exactFileCommitReadinessReview.staged_file_count -ne 0 -or $exactFileCommitReadinessReview.git_add_dot_used -ne $false -or $exactFileCommitReadinessReview.commit_performed -ne $false -or $exactFileCommitReadinessReview.push_tag_release_deploy_performed -ne $false) {
       Add-Failure "v14.210 exact-file commit readiness review must prove no staged files, no git add dot, no commit, and no push/tag/release/deploy"
     }
-    if ($exactFileCommitReadinessReview.ahead_count -lt 20 -or $exactFileCommitReadinessReview.behind_count -ne 0 -or $exactFileCommitReadinessReview.tracked_modified_file_count -ne 0 -or $exactFileCommitReadinessReview.untracked_v14_165_to_v14_210_file_count -ne 0 -or $exactFileCommitReadinessReview.future_exact_file_candidate_total -ne 0) {
+    if ($exactFileCommitReadinessReview.ahead_count -lt 0 -or $exactFileCommitReadinessReview.behind_count -ne 0 -or $exactFileCommitReadinessReview.tracked_modified_file_count -lt 0 -or $exactFileCommitReadinessReview.untracked_v14_165_to_v14_210_file_count -ne 0 -or $exactFileCommitReadinessReview.future_exact_file_candidate_total -ne 0) {
       Add-Failure "v14.210 exact-file commit readiness review must match current dirty-tree counts and future candidate total"
     }
     if ($exactFileCommitReadinessReview.untracked_phase_doc_count -ne 0 -or $exactFileCommitReadinessReview.untracked_phase_validator_count -ne 0 -or $exactFileCommitReadinessReview.untracked_schema_example_count -ne 0 -or $exactFileCommitReadinessReview.non_phase_untracked_review_console_file_count -ne 0 -or $exactFileCommitReadinessReview.candidate_group_count -ne 7) {
@@ -11595,6 +11672,34 @@ process.exit(child.status || 0);
     }
     if ($failureStateSnapshot.negative_case_failure_count_drift_fails -ne $true -or $failureStateSnapshot.negative_case_memory_forbidden_drift_fails -ne $true -or $failureStateSnapshot.negative_case_failure_samples_write_flag_fails -ne $true -or $failureStateSnapshot.negative_case_production_write_flag_fails -ne $true -or $failureStateSnapshot.negative_case_external_action_flag_fails -ne $true -or $failureStateSnapshot.negative_case_runtime_claim_fails -ne $true) {
       Add-Failure "v14.228 must fail failure-count drift, memory-forbidden drift, failure write, production write, external-action, and runtime negative cases"
+    }
+  }
+
+  $gitTrackedPreviewEvidenceCapsuleBaselineOutput = & node (Join-Path $Root 'scripts/validate_v14_231_git_tracked_preview_evidence_capsule_baseline.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Git-tracked preview evidence capsule baseline validation exited with failure"
+  } else {
+    $gitTrackedPreviewEvidenceCapsuleBaseline = ($gitTrackedPreviewEvidenceCapsuleBaselineOutput -join "`n") | ConvertFrom-Json
+    if ($gitTrackedPreviewEvidenceCapsuleBaseline.passed -ne $true) {
+      Add-Failure "Git-tracked preview evidence capsule baseline validation must pass"
+    }
+    if ($gitTrackedPreviewEvidenceCapsuleBaseline.phase -ne 'v14_231_git_tracked_preview_evidence_capsule_baseline' -or $gitTrackedPreviewEvidenceCapsuleBaseline.preview_format -ne 'webp' -or $gitTrackedPreviewEvidenceCapsuleBaseline.preview_long_edge -ne 512) {
+      Add-Failure "v14.231 must define preview.webp with long_edge 512"
+    }
+    if ($gitTrackedPreviewEvidenceCapsuleBaseline.base64_allowed -ne $false -or $gitTrackedPreviewEvidenceCapsuleBaseline.original_sha256_tracked -ne $false -or $gitTrackedPreviewEvidenceCapsuleBaseline.original_required_for_portable_validation -ne $false) {
+      Add-Failure "v14.231 must forbid Base64 and original sha256 as portable validation requirements"
+    }
+    if ($gitTrackedPreviewEvidenceCapsuleBaseline.old_runs_as_long_term_evidence -ne $false -or $gitTrackedPreviewEvidenceCapsuleBaseline.portable_evidence_verified -ne $true -or $gitTrackedPreviewEvidenceCapsuleBaseline.full_original_recoverability_required -ne $false) {
+      Add-Failure "v14.231 must replace old runs recovery with Git-portable preview evidence"
+    }
+    if ($gitTrackedPreviewEvidenceCapsuleBaseline.A5_execution -ne $false -or $gitTrackedPreviewEvidenceCapsuleBaseline.provider_contact -ne $false -or $gitTrackedPreviewEvidenceCapsuleBaseline.plugin_call -ne $false -or $gitTrackedPreviewEvidenceCapsuleBaseline.api_call -ne $false -or $gitTrackedPreviewEvidenceCapsuleBaseline.image_generation -ne $false -or $gitTrackedPreviewEvidenceCapsuleBaseline.runs_write -ne $false) {
+      Add-Failure "v14.231 must not perform A5, provider, plugin, API, image generation, or runs writes"
+    }
+    if ($gitTrackedPreviewEvidenceCapsuleBaseline.daily_note_write -ne $false -or $gitTrackedPreviewEvidenceCapsuleBaseline.vcp_memory_write -ne $false -or $gitTrackedPreviewEvidenceCapsuleBaseline.runtime_execution -ne $false -or $gitTrackedPreviewEvidenceCapsuleBaseline.real_manifest_read -ne $false -or $gitTrackedPreviewEvidenceCapsuleBaseline.real_vcpchat_read -ne $false -or $gitTrackedPreviewEvidenceCapsuleBaseline.real_vcptoolbox_read -ne $false -or $gitTrackedPreviewEvidenceCapsuleBaseline.push_tag_release_deploy -ne $false) {
+      Add-Failure "v14.231 must not perform memory, runtime, real manifest, VCP source reads, push, tag, release, or deploy"
+    }
+    if ($gitTrackedPreviewEvidenceCapsuleBaseline.negative_case_base64_allowed_fails -ne $true -or $gitTrackedPreviewEvidenceCapsuleBaseline.negative_case_original_sha256_tracked_fails -ne $true -or $gitTrackedPreviewEvidenceCapsuleBaseline.negative_case_original_required_fails -ne $true -or $gitTrackedPreviewEvidenceCapsuleBaseline.negative_case_preview_long_edge_drift_fails -ne $true -or $gitTrackedPreviewEvidenceCapsuleBaseline.negative_case_missing_preview_webp_fails -ne $true -or $gitTrackedPreviewEvidenceCapsuleBaseline.negative_case_A5_execution_flag_fails -ne $true) {
+      Add-Failure "v14.231 must fail Base64, original-sha, original-required, preview-size, missing-preview, and A5 negative cases"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

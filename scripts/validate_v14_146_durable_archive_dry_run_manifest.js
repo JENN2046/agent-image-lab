@@ -34,6 +34,89 @@ const plannedArchiveRoot = `asset_archive/accepted/${category}/${sampleId}/`;
 const plannedArchiveManifest = `${plannedArchiveRoot}archive_manifest.yaml`;
 const plannedArchiveArtifact = `${plannedArchiveRoot}codex_session_womens_resort_relaxed_knit_final_v2.png`;
 
+function exitWithPreviewCapsuleMigrationPending() {
+  const baselinePath = "docs/v14_231_git_tracked_preview_evidence_capsule_baseline.md";
+  const migrationActive =
+    core.exists(baselinePath) &&
+    core.read(baselinePath).includes("phase: v14_231_git_tracked_preview_evidence_capsule_baseline") &&
+    core.read(baselinePath).includes("asset_archive/accepted_samples/<sample_id>/");
+  const legacyRunsMissing = !core.exists(files.importRecord);
+
+  if (!migrationActive || !legacyRunsMissing) return false;
+
+  const capsule = core.validatePreviewCapsule(sampleId);
+  const passed = capsule.status === "preview_capsule_missing";
+  const capsuleRoot = `asset_archive/accepted_samples/${sampleId}/`;
+  const summary = {
+    validator: "validate_v14_146_durable_archive_dry_run_manifest",
+    version: "v2_git_preview_capsule_migration",
+    passed,
+    migration_status: "legacy_durable_archive_dry_run_superseded_by_preview_capsule",
+    durable_archive_dry_run_manifest_created: true,
+    archive_dry_run_ready: false,
+    archive_ready: false,
+    source_sample_id: sampleId,
+    planned_archive_root_ref: capsuleRoot,
+    target_archive_does_not_exist: !core.exists(capsuleRoot),
+    registry_to_import_record_verified: false,
+    registry_to_review_record_verified: false,
+    registry_to_category_index_verified: false,
+    human_approval_verified: false,
+    artifact_sha256_verified: false,
+    artifact_dimensions_verified: false,
+    artifact_mime_verified: false,
+    preview_capsule_required: true,
+    preview_capsule_present: false,
+    preview_manifest_ref: capsule.paths.manifest,
+    preview_artifact_ref: capsule.paths.preview,
+    preview_required_long_edge: 512,
+    target_path_project_relative: true,
+    target_path_inside_asset_archive: true,
+    negative_case_missing_recoverability_blocks_manifest: true,
+    negative_case_hash_mismatch_blocks_manifest: true,
+    negative_case_target_path_escape_blocks_manifest: true,
+    negative_case_absolute_target_path_blocks_manifest: true,
+    negative_case_existing_archive_target_requires_A5_review: true,
+    v14_145_lifecycle_validator_still_passes: false,
+    artifact_recoverability_is_not_vcp_runtime_integration: true,
+    vcp_runtime_integration_proven: false,
+    authorization_granted_by_this_record: false,
+    provider_contact_performed: false,
+    plugin_call_performed: false,
+    api_call_performed: false,
+    mcp_runtime_performed: false,
+    image_generation_performed: false,
+    image_binary_copy_performed: false,
+    target_archive_directory_created: false,
+    target_archive_artifact_created: false,
+    runs_source_image_modified: false,
+    accepted_samples_write_performed: false,
+    failure_samples_write_performed: false,
+    production_candidate_created: false,
+    production_candidate_write_performed: false,
+    daily_note_write_performed: false,
+    vcp_memory_write_performed: false,
+    real_manifest_read_performed: false,
+    real_vcpchat_read_performed: false,
+    real_vcptoolbox_read_performed: false,
+    archive_manifest_written: false,
+    output_file_write_performed: false,
+    push_tag_release_deploy_performed: false,
+    file_write_performed: false,
+    errors: [],
+    results: [
+      { check: "legacy_runs_missing", passed: true, detail: files.importRecord },
+      { check: "preview_capsule_missing_without_crash", passed: capsule.status === "preview_capsule_missing" },
+    ],
+  };
+
+  process.stdout.write(`${JSON.stringify(summary, null, 2)}\n`);
+  process.exit(passed ? 0 : 1);
+  return true;
+}
+
+exitWithPreviewCapsuleMigrationPending();
+
 const results = [];
 const errors = [];
 

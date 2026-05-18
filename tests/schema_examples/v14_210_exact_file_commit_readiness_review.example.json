@@ -9,11 +9,11 @@
       "auto_commit_allowed_now": false,
       "staging_allowed_now": false,
       "push_allowed_now": false,
-      "reason": "post_commit_push_gate_required"
+      "reason": "synced_branch_no_push_gate_pending"
     },
     "observed_git_state": {
       "branch": "master",
-      "ahead_count": 20,
+      "ahead_count": 0,
       "behind_count": 0,
       "staged_file_count": 0,
       "tracked_modified_file_count": 0,

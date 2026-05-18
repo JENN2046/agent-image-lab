@@ -1,0 +1,70 @@
+{
+  "git_tracked_preview_evidence_capsule_baseline": {
+    "version": "v1",
+    "phase": "v14_231_git_tracked_preview_evidence_capsule_baseline",
+    "status": "completed_pending_validation",
+    "execution_mode": "policy_and_schema_baseline_only",
+    "artifact_portability_policy": {
+      "old_runs_as_long_term_evidence": false,
+      "base64_allowed": false,
+      "original_sha256_tracked": false,
+      "original_required_for_portable_validation": false,
+      "preview_required": true,
+      "preview_format": "webp",
+      "preview_long_edge": 512,
+      "preview_git_tracked": true,
+      "preview_sha256_in_manifest": true
+    },
+    "capsule_layout": {
+      "root_pattern": "asset_archive/accepted_samples/<sample_id>/",
+      "required_files": [
+        "manifest.json",
+        "preview.webp",
+        "import_record.json",
+        "review_record.json",
+        "approval_record.json"
+      ]
+    },
+    "manifest_contract": {
+      "must_include": [
+        "sample_id",
+        "artifact.preview",
+        "chain.import_record",
+        "chain.review_record",
+        "chain.approval_record"
+      ],
+      "must_not_include": [
+        "artifact.original.sha256",
+        "preview_base64",
+        "thumbnail_base64",
+        "original_base64"
+      ]
+    },
+    "preview_contract": {
+      "format": "webp",
+      "long_edge": 512,
+      "resize_policy": "preserve_aspect_ratio_downscale_to_long_edge_512",
+      "sha256_in_manifest": true
+    },
+    "validator_semantics": {
+      "portable_evidence_verified": true,
+      "full_original_recoverability_required": false,
+      "legacy_runs_missing_result": "evidence_loss_recorded_do_not_claim_old_full_recoverability"
+    },
+    "guard": {
+      "A5_execution": false,
+      "provider_contact": false,
+      "plugin_call": false,
+      "api_call": false,
+      "image_generation": false,
+      "runs_write": false,
+      "DailyNote_write": false,
+      "VCP_memory_write": false,
+      "runtime_execution": false,
+      "real_manifest_read": false,
+      "real_vcpchat_read": false,
+      "real_vcptoolbox_read": false,
+      "push_tag_release_deploy": false
+    }
+  }
+}

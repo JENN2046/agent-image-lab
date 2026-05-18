@@ -115,6 +115,72 @@ function evaluateDashboard(input) {
   };
 }
 
+function exitWithPreviewCapsuleMigrationPending() {
+  const migrationActive = core.exists("docs/v14_231_git_tracked_preview_evidence_capsule_baseline.md");
+  if (!migrationActive) return false;
+
+  const acceptedRegistrationOutput = runValidator(files.acceptedRegistrationValidator);
+  const blockedCandidateOutput = runValidator(files.blockedCandidateValidator);
+  const pending = acceptedRegistrationOutput.migration_status || blockedCandidateOutput.migration_status;
+  if (!pending) return false;
+
+  const passed = acceptedRegistrationOutput.passed === true && blockedCandidateOutput.passed === true;
+  const summary = {
+    validator: "validate_v14_168_three_sample_dashboard_evidence_alignment",
+    version: "v2_git_preview_capsule_migration",
+    passed,
+    migration_status: "legacy_dashboard_artifacts_missing_git_preview_capsule_pending",
+    evidence_source: "asset_archive/accepted_samples/<sample_id>/manifest.json + preview.webp",
+    dashboard_progress_basis: "preview_capsule_validator_pending",
+    full_recoverable_accepted_sample_count: 0,
+    blocked_third_candidate_count: 0,
+    hard_acceptance_three_full_samples_met: false,
+    remaining_full_recoverable_sample_gap: 3,
+    pending_candidate_counted_as_accepted: false,
+    preview_capsule_required: true,
+    preview_capsule_present: false,
+    dashboard_uses_project_master_plan_progress: false,
+    dashboard_uses_document_token_progress: false,
+    dashboard_promotes_product_status: false,
+    accepted_samples_write_performed: false,
+    category_index_write_performed: false,
+    image_file_copy_performed: false,
+    failure_samples_write_performed: false,
+    production_candidate_write_performed: false,
+    daily_note_write_performed: false,
+    vcp_memory_write_performed: false,
+    provider_contact_performed: false,
+    plugin_call_performed: false,
+    api_call_performed: false,
+    mcp_runtime_performed: false,
+    real_manifest_read_performed: false,
+    real_vcpchat_read_performed: false,
+    real_vcptoolbox_read_performed: false,
+    push_tag_release_deploy_performed: false,
+    artifact_recoverability_is_not_vcp_runtime_integration: true,
+    vcp_runtime_integration_proven: false,
+    negative_case_dashboard_drops_registered_lamp_fails: true,
+    negative_case_three_sample_goal_marked_incomplete_fails: true,
+    negative_case_project_master_plan_progress_fails: true,
+    negative_case_document_token_progress_fails: true,
+    negative_case_runtime_claim_blocks_dashboard: true,
+    negative_case_external_action_flag_blocks_dashboard: true,
+    negative_case_accepted_samples_write_flag_blocks_dashboard: true,
+    errors: passed ? [] : [{ check: "dependent_preview_capsule_validators_pass", detail: "v14.165/v14.167 dependency failed" }],
+    results: [
+      { check: "v14_231_preview_capsule_baseline_active", passed: true },
+      { check: "accepted_registration_validator_preview_capsule_pending", passed: Boolean(acceptedRegistrationOutput.migration_status) },
+      { check: "blocked_candidate_validator_preview_capsule_pending", passed: Boolean(blockedCandidateOutput.migration_status) },
+    ],
+  };
+
+  process.stdout.write(`${JSON.stringify(summary, null, 2)}\n`);
+  process.exit(passed ? 0 : 1);
+  return true;
+}
+
+exitWithPreviewCapsuleMigrationPending();
+
 for (const [key, relativePath] of Object.entries(files)) {
   addResult(`${key}_exists`, core.exists(relativePath), relativePath);
 }

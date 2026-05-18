@@ -9,4 +9,12 @@
 .env.*.local
 configs/local_secrets/
 loudness_cache.db
-
+configs/local_paths/*.local.yaml
+*.log
+*.tmp
+*.cache
+*.sqlite
+*.sqlite3
+*.db
+*.db-shm
+*.db-wal

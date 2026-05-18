@@ -137,8 +137,8 @@ for (const token of [
   requireToken("codex_prompt", promptText, token);
 }
 
-const promptBlock = (promptText.match(/prompt: \|\n([\s\S]*?)\n\npositive_prompt: \|/) || [])[1]?.trim();
-const positiveBlock = (promptText.match(/positive_prompt: \|\n([\s\S]*?)\n\nnegative_prompt: \|/) || [])[1]?.trim();
+const promptBlock = (promptText.match(/prompt: \|\r?\n([\s\S]*?)\r?\n\r?\npositive_prompt: \|/) || [])[1]?.trim();
+const positiveBlock = (promptText.match(/positive_prompt: \|\r?\n([\s\S]*?)\r?\n\r?\nnegative_prompt: \|/) || [])[1]?.trim();
 addResult("prompt_positive_prompt_synced", Boolean(promptBlock) && promptBlock === positiveBlock);
 
 const contract = read(files.codexSessionContract);

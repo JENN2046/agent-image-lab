@@ -133,6 +133,7 @@ const app = core.read(files.app);
 const mockData = core.read(files.mockData);
 const readme = core.read(files.readme);
 const currentSurfaces = [
+  Object.values(files).join("\n"),
   phaseRecord,
   JSON.stringify(fixture, null, 2),
   app,

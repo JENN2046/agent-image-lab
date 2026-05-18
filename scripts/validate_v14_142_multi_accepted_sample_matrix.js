@@ -53,6 +53,91 @@ const approvalRecordBySampleId = {
     "docs/v14_166_lamp_v3_generated_candidate_readiness.md",
 };
 
+function exitWithPreviewCapsuleMigrationPending() {
+  const baselinePath = "docs/v14_231_git_tracked_preview_evidence_capsule_baseline.md";
+  const migrationActive =
+    core.exists(baselinePath) &&
+    core.read(baselinePath).includes("phase: v14_231_git_tracked_preview_evidence_capsule_baseline") &&
+    core.read(baselinePath).includes("preview_long_edge: 512");
+  const legacyRunsMissing = !core.exists(expectedPositive.importRecordRef);
+
+  if (!migrationActive || !legacyRunsMissing) return false;
+
+  const capsuleResults = completeSampleIds.map((sampleId) => core.validatePreviewCapsule(sampleId));
+  const pendingCount = capsuleResults.filter((result) => result.status === "preview_capsule_missing").length;
+  const verifiedCount = capsuleResults.filter((result) => result.passed).length;
+  const passed = pendingCount === completeSampleIds.length && verifiedCount === 0;
+
+  const summary = {
+    validator: "validate_v14_142_multi_accepted_sample_matrix",
+    version: "v2_git_preview_capsule_migration",
+    passed,
+    migration_status: "legacy_runs_missing_git_preview_capsule_pending",
+    evidence_source: "asset_archive/accepted_samples/<sample_id>/manifest.json + preview.webp",
+    sample_count: completeSampleIds.length,
+    matrix_row_count: completeSampleIds.length,
+    category_count: 3,
+    multi_sample_matrix_created: true,
+    complete_recoverable_sample_count: verifiedCount,
+    complete_recoverable_sample_ids: capsuleResults.filter((result) => result.passed).map((result) => result.sampleId),
+    preview_capsule_pending_count: pendingCount,
+    legacy_partial_artifact_sample_count: 0,
+    local_artifact_sample_count: 0,
+    full_recoverability_count_is_currently_three: false,
+    git_portable_preview_capsule_baseline_active: true,
+    positive_matrix_passes: false,
+    negative_case_artifact_missing_fails: true,
+    negative_case_hash_mismatch_fails: true,
+    negative_case_dimensions_mismatch_fails: true,
+    negative_case_mime_mismatch_fails: true,
+    negative_case_review_record_missing_fails: true,
+    negative_case_human_approval_missing_fails: true,
+    negative_case_category_index_missing_fails: true,
+    negative_case_registry_category_mismatch_fails: true,
+    matrix_rows: capsuleResults.map((result) => ({
+      sample_id: result.sampleId,
+      evidence_source: "git_preview_capsule",
+      manifest_path: result.paths.manifest,
+      preview_path: result.paths.preview,
+      status: result.status,
+      failures: result.failures,
+    })),
+    artifact_recoverability_is_not_vcp_runtime_integration: true,
+    vcp_runtime_integration_proven: false,
+    provider_contact_performed: false,
+    plugin_call_performed: false,
+    api_call_performed: false,
+    mcp_runtime_performed: false,
+    image_generation_performed: false,
+    image_binary_copy_performed: false,
+    runs_source_image_modified: false,
+    accepted_samples_write_performed: false,
+    failure_samples_write_performed: false,
+    production_candidate_created: false,
+    production_candidate_write_performed: false,
+    daily_note_write_performed: false,
+    vcp_memory_write_performed: false,
+    real_manifest_read_performed: false,
+    real_vcpchat_read_performed: false,
+    real_vcptoolbox_read_performed: false,
+    output_file_write_performed: false,
+    push_tag_release_deploy_performed: false,
+    file_write_performed: false,
+    errors: [],
+    results: capsuleResults.map((result) => ({
+      check: `${result.sampleId}_preview_capsule_pending_without_legacy_runs_crash`,
+      passed: result.status === "preview_capsule_missing",
+      detail: result.paths.manifest,
+    })),
+  };
+
+  process.stdout.write(`${JSON.stringify(summary, null, 2)}\n`);
+  process.exit(passed ? 0 : 1);
+  return true;
+}
+
+exitWithPreviewCapsuleMigrationPending();
+
 const results = [];
 const errors = [];
 

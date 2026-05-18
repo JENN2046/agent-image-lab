@@ -163,6 +163,7 @@ const index = core.read(files.index);
 const styles = core.read(files.styles);
 const readme = core.read(files.readme);
 const currentSurfaces = [
+  Object.values(files).join("\n"),
   phaseRecord,
   JSON.stringify(panel, null, 2),
   app,

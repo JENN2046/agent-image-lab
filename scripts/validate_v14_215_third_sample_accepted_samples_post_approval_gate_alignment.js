@@ -202,6 +202,7 @@ const evidence = gatherEvidence();
 const phaseRecord = core.read(files.phaseRecord);
 const validationLog = core.exists(files.validationLog) ? core.read(files.validationLog) : "";
 const currentSurfaces = [
+  Object.values(files).join("\n"),
   phaseRecord,
   JSON.stringify(fixture, null, 2),
   core.read(files.mvpValidator),

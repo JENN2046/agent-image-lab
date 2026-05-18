@@ -28,6 +28,10 @@ function createRecoverabilityCore(root) {
     return JSON.parse(read(relativePath));
   }
 
+  function parseJsonIfExists(relativePath) {
+    return exists(relativePath) ? parseJson(relativePath) : null;
+  }
+
   function sha256File(relativePath) {
     const hash = crypto.createHash("sha256");
     hash.update(fs.readFileSync(repoPath(relativePath)));
@@ -126,6 +130,135 @@ function createRecoverabilityCore(root) {
       signatureValid: false,
       width: null,
       height: null,
+    };
+  }
+
+  function readWebpDimensions(relativePath) {
+    const buffer = fs.readFileSync(repoPath(relativePath));
+    const riff = buffer.subarray(0, 4).toString("ascii");
+    const webp = buffer.subarray(8, 12).toString("ascii");
+    if (buffer.length < 30 || riff !== "RIFF" || webp !== "WEBP") {
+      return {
+        signature: buffer.subarray(0, Math.min(buffer.length, 12)).toString("hex"),
+        signatureValid: false,
+        width: null,
+        height: null,
+      };
+    }
+
+    const chunkType = buffer.subarray(12, 16).toString("ascii");
+    if (chunkType === "VP8X" && buffer.length >= 30) {
+      const width = 1 + buffer.readUIntLE(24, 3);
+      const height = 1 + buffer.readUIntLE(27, 3);
+      return { signature: "RIFF_WEBP_VP8X", signatureValid: true, width, height };
+    }
+
+    if (chunkType === "VP8 " && buffer.length >= 30) {
+      const startCodeOffset = 20;
+      const startCode = buffer.subarray(startCodeOffset, startCodeOffset + 3).toString("hex");
+      if (startCode !== "9d012a") {
+        return { signature: "RIFF_WEBP_VP8", signatureValid: false, width: null, height: null };
+      }
+      const width = buffer.readUInt16LE(26) & 0x3fff;
+      const height = buffer.readUInt16LE(28) & 0x3fff;
+      return { signature: "RIFF_WEBP_VP8", signatureValid: true, width, height };
+    }
+
+    if (chunkType === "VP8L" && buffer.length >= 25 && buffer[20] === 0x2f) {
+      const b1 = buffer[21];
+      const b2 = buffer[22];
+      const b3 = buffer[23];
+      const b4 = buffer[24];
+      const width = 1 + (((b2 & 0x3f) << 8) | b1);
+      const height = 1 + ((b4 << 6) | (b3 >> 2) | ((b2 & 0xc0) << 6));
+      return { signature: "RIFF_WEBP_VP8L", signatureValid: true, width, height };
+    }
+
+    return {
+      signature: `RIFF_WEBP_${chunkType}`,
+      signatureValid: false,
+      width: null,
+      height: null,
+    };
+  }
+
+  function previewCapsuleRoot(sampleId) {
+    if (typeof sampleId !== "string" || !/^[A-Za-z0-9_.-]+$/.test(sampleId)) {
+      throw new Error(`invalid preview capsule sample id: ${sampleId}`);
+    }
+    return `asset_archive/accepted_samples/${sampleId}`;
+  }
+
+  function previewCapsulePaths(sampleId) {
+    const rootPath = previewCapsuleRoot(sampleId);
+    return {
+      root: rootPath,
+      manifest: `${rootPath}/manifest.json`,
+      preview: `${rootPath}/preview.webp`,
+      importRecord: `${rootPath}/import_record.json`,
+      reviewRecord: `${rootPath}/review_record.json`,
+      approvalRecord: `${rootPath}/approval_record.json`,
+    };
+  }
+
+  function validatePreviewCapsule(sampleId, options = {}) {
+    const requiredLongEdge = options.requiredLongEdge || 512;
+    const paths = previewCapsulePaths(sampleId);
+    const manifest = parseJsonIfExists(paths.manifest);
+    const failures = [];
+
+    function check(condition, label) {
+      if (!condition) failures.push(label);
+    }
+
+    check(Boolean(manifest), "manifest_exists");
+    if (!manifest) {
+      return {
+        passed: false,
+        status: "preview_capsule_missing",
+        sampleId,
+        paths,
+        manifest: null,
+        failures,
+      };
+    }
+
+    const previewPath = manifest?.artifact?.preview?.path || "preview.webp";
+    const previewRelativePath = `${paths.root}/${previewPath}`;
+    const previewExists = exists(previewRelativePath);
+    const previewSha256 = previewExists ? sha256File(previewRelativePath) : null;
+    const previewDimensions = previewExists ? readWebpDimensions(previewRelativePath) : null;
+    const previewLongEdge = previewDimensions?.width && previewDimensions?.height
+      ? Math.max(previewDimensions.width, previewDimensions.height)
+      : null;
+
+    check(manifest.sample_id === sampleId, "sample_id_matches");
+    check(previewPath === "preview.webp", "preview_path_matches");
+    check(manifest.artifact?.preview?.format === "webp", "preview_format_webp");
+    check(manifest.artifact?.preview?.long_edge === requiredLongEdge, "preview_manifest_long_edge_matches");
+    check(manifest.artifact?.preview?.git_tracked === true, "preview_git_tracked_true");
+    check(manifest.artifact?.original?.sha256_in_manifest === false, "original_sha256_not_in_manifest");
+    check(!JSON.stringify(manifest).includes("base64"), "base64_absent_from_manifest");
+    check(previewExists, "preview_file_exists");
+    check(previewDimensions?.signatureValid === true, "preview_webp_signature_valid");
+    check(previewLongEdge === requiredLongEdge, "preview_file_long_edge_matches");
+    check(Boolean(manifest.artifact?.preview?.sha256), "preview_manifest_sha256_present");
+    check(previewSha256 === manifest.artifact?.preview?.sha256, "preview_sha256_matches_manifest");
+    check(exists(paths.importRecord), "import_record_exists");
+    check(exists(paths.reviewRecord), "review_record_exists");
+    check(exists(paths.approvalRecord), "approval_record_exists");
+
+    return {
+      passed: failures.length === 0,
+      status: failures.length === 0 ? "git_portable_preview_evidence_verified" : "preview_capsule_incomplete",
+      sampleId,
+      paths,
+      manifest,
+      previewExists,
+      previewSha256,
+      previewDimensions,
+      previewLongEdge,
+      failures,
     };
   }
 
@@ -241,10 +374,15 @@ function createRecoverabilityCore(root) {
     exists,
     read,
     parseJson,
+    parseJsonIfExists,
     sha256File,
     readPngDimensions,
     readJpegDimensions,
+    readWebpDimensions,
     readImageMetadata,
+    previewCapsuleRoot,
+    previewCapsulePaths,
+    validatePreviewCapsule,
     extractRegistrySampleBlock,
     listRegistrySampleBlocks,
     extractScalarField,

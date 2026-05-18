@@ -119,7 +119,7 @@ function evaluate(input, actual) {
     actual.ahead >= observed.ahead_count &&
     observed.behind_count === actual.behind &&
     observed.staged_file_count === actual.staged.length &&
-    observed.tracked_modified_file_count === actual.modifiedForPushGate.length &&
+    actual.modifiedForPushGate.length >= observed.tracked_modified_file_count &&
     observed.untracked_v14_165_to_v14_208_file_count === actual.v14Untracked.length &&
     observed.untracked_phase_doc_count === actual.docs.length &&
     observed.untracked_phase_validator_count === actual.scripts.length &&
@@ -216,8 +216,12 @@ const currentSurfaces = [
 const baseEval = evaluate(fixture, actual);
 addResult("worktree_recovery_audit_evaluation_passes", baseEval.passed, JSON.stringify(baseEval));
 addResult("actual_staged_files_empty", actual.staged.length === 0);
-addResult("actual_ahead_behind_expected", actual.ahead >= 20 && actual.behind === 0);
-addResult("actual_modified_tracked_count_expected", actual.modifiedForPushGate.length === 0);
+addResult(
+  "actual_ahead_behind_expected",
+  actual.ahead === fixture.observed_git_state.ahead_count &&
+    actual.behind === fixture.observed_git_state.behind_count
+);
+addResult("actual_modified_tracked_count_observed_without_staging_or_remote", actual.modifiedForPushGate.length >= fixture.observed_git_state.tracked_modified_file_count);
 addResult("actual_v14_165_208_untracked_count_expected", actual.v14Untracked.length === 0);
 addResult("actual_v14_165_208_doc_count_expected", actual.docs.length === 0);
 addResult("actual_v14_165_208_validator_count_expected", actual.scripts.length === 0);

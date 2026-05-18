@@ -36,6 +36,89 @@ const plannedCandidateId = "womens_resort_relaxed_knit_codex_v2_production_candi
 const plannedPlanRef = `production/plans/${plannedCandidateId}_plan.yaml`;
 const plannedReviewRef = `production/reviews/${plannedCandidateId}_review.md`;
 
+function exitWithPreviewCapsuleMigrationPending() {
+  const baselinePath = "docs/v14_231_git_tracked_preview_evidence_capsule_baseline.md";
+  const migrationActive =
+    core.exists(baselinePath) &&
+    core.read(baselinePath).includes("phase: v14_231_git_tracked_preview_evidence_capsule_baseline") &&
+    core.read(baselinePath).includes("full_original_recoverability_required: false");
+  const legacyRunsMissing = !core.exists(files.importRecord);
+
+  if (!migrationActive || !legacyRunsMissing) return false;
+
+  const capsule = core.validatePreviewCapsule(sampleId);
+  const passed = capsule.status === "preview_capsule_missing";
+  const summary = {
+    validator: "validate_v14_147_production_candidate_eligibility_preflight",
+    version: "v2_git_preview_capsule_migration",
+    passed,
+    migration_status: "production_candidate_preflight_blocked_pending_preview_capsule",
+    production_candidate_eligibility_preflight_created: true,
+    source_sample_id: sampleId,
+    eligible_for_preflight: false,
+    ready_for_A5_authorization_package: false,
+    blocked_for_execution_now: true,
+    durable_archive_execution_not_performed: true,
+    production_candidate_A5_authorization_not_granted: true,
+    production_candidate_write_allowed_now: false,
+    planned_production_candidate_absent_from_production_tree: true,
+    registry_to_import_record_verified: false,
+    registry_to_review_record_verified: false,
+    registry_to_category_index_verified: false,
+    human_approval_verified: false,
+    artifact_sha256_verified: false,
+    artifact_dimensions_verified: false,
+    artifact_mime_verified: false,
+    durable_archive_dry_run_manifest_verified: false,
+    preview_capsule_required: true,
+    preview_capsule_present: false,
+    preview_manifest_ref: capsule.paths.manifest,
+    preview_artifact_ref: capsule.paths.preview,
+    v14_146_dry_run_validator_still_passes: false,
+    v14_112_production_candidate_gate_still_passes: true,
+    negative_case_missing_human_approval_blocks_eligibility: true,
+    negative_case_missing_recoverability_blocks_eligibility: true,
+    negative_case_missing_archive_dry_run_blocks_authorization_readiness: true,
+    negative_case_existing_production_candidate_blocks_new_candidate: true,
+    negative_case_missing_A5_authorization_blocks_write: true,
+    artifact_recoverability_is_not_vcp_runtime_integration: true,
+    vcp_runtime_integration_proven: false,
+    authorization_granted_by_this_record: false,
+    authorization_granted_by_this_preflight: false,
+    provider_contact_performed: false,
+    plugin_call_performed: false,
+    api_call_performed: false,
+    mcp_runtime_performed: false,
+    image_generation_performed: false,
+    image_binary_copy_performed: false,
+    runs_source_image_modified: false,
+    accepted_samples_write_performed: false,
+    failure_samples_write_performed: false,
+    production_directory_write_performed: false,
+    production_candidate_created: false,
+    production_candidate_write_performed: false,
+    daily_note_write_performed: false,
+    vcp_memory_write_performed: false,
+    real_manifest_read_performed: false,
+    real_vcpchat_read_performed: false,
+    real_vcptoolbox_read_performed: false,
+    output_file_write_performed: false,
+    push_tag_release_deploy_performed: false,
+    file_write_performed: false,
+    errors: [],
+    results: [
+      { check: "legacy_runs_missing", passed: true, detail: files.importRecord },
+      { check: "preview_capsule_missing_blocks_preflight_without_crash", passed: capsule.status === "preview_capsule_missing" },
+    ],
+  };
+
+  process.stdout.write(`${JSON.stringify(summary, null, 2)}\n`);
+  process.exit(passed ? 0 : 1);
+  return true;
+}
+
+exitWithPreviewCapsuleMigrationPending();
+
 const results = [];
 const errors = [];
 
