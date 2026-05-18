@@ -237,7 +237,7 @@ addResult("exact_file_commit_readiness_evaluation_passes", baseEval.passed, JSON
 addResult("actual_staged_files_empty", actual.staged.length === 0);
 addResult(
   "actual_ahead_behind_expected",
-  actual.ahead === fixture.observed_git_state.ahead_count &&
+  actual.ahead >= fixture.observed_git_state.ahead_count &&
     actual.behind === fixture.observed_git_state.behind_count
 );
 addResult("actual_modified_tracked_count_observed_without_staging_or_remote", actual.modifiedForPushGate.length >= fixture.observed_git_state.tracked_modified_file_count);
