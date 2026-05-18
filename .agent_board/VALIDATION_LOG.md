@@ -13383,7 +13383,7 @@ Induce one controlled markdown trailing whitespace failure, observe git diff --c
 Observed controlled failure:
 
 ```text
-docs/v8_008_A4_8_controlled_failure_recovery_drill.md:24: trailing whitespace.
+docs/archive/phases/v8/v8_008_A4_8_controlled_failure_recovery_drill.md:24: trailing whitespace.
 ```
 
 Recovery:
@@ -15457,7 +15457,7 @@ Commands run:
 ```text
 git status -sb
 git diff --check
-git diff -- README.md PROJECT_MASTER_PLAN.md docs/00_project_roadmap.md docs/v7_239_product_image_generation_plan_draft_gate.md docs/product_image_generation_plan_draft.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
+git diff -- README.md PROJECT_MASTER_PLAN.md docs/00_project_roadmap.md docs/archive/phases/v7/v7_239_product_image_generation_plan_draft_gate.md docs/product_image_generation_plan_draft.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
 node scripts/validate_agent_board_state.js
 ```
 
@@ -15492,7 +15492,7 @@ Commands run:
 ```text
 git status -sb
 git diff --check
-git diff -- README.md PROJECT_MASTER_PLAN.md docs/00_project_roadmap.md docs/v7_238_product_image_generation_authorization_draft_review_gate.md docs/product_image_generation_authorization_draft_review.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
+git diff -- README.md PROJECT_MASTER_PLAN.md docs/00_project_roadmap.md docs/archive/phases/v7/v7_238_product_image_generation_authorization_draft_review_gate.md docs/product_image_generation_authorization_draft_review.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
 node scripts/validate_agent_board_state.js
 ```
 
@@ -15562,7 +15562,7 @@ Commands run:
 ```text
 git status -sb
 git diff --check
-git diff -- README.md PROJECT_MASTER_PLAN.md docs/00_project_roadmap.md docs/v7_236_product_image_workflow_A5_readiness_review_gate.md docs/product_image_workflow_A5_readiness_review.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
+git diff -- README.md PROJECT_MASTER_PLAN.md docs/00_project_roadmap.md docs/archive/phases/v7/v7_236_product_image_workflow_A5_readiness_review_gate.md docs/product_image_workflow_A5_readiness_review.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
 node scripts/validate_agent_board_state.js
 ```
 
@@ -15597,7 +15597,7 @@ Commands run:
 ```text
 git status -sb
 git diff --check
-git diff -- README.md PROJECT_MASTER_PLAN.md docs/00_project_roadmap.md docs/v7_235_product_image_workflow_static_walkthrough_gate.md docs/product_image_workflow_static_walkthrough.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
+git diff -- README.md PROJECT_MASTER_PLAN.md docs/00_project_roadmap.md docs/archive/phases/v7/v7_235_product_image_workflow_static_walkthrough_gate.md docs/product_image_workflow_static_walkthrough.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
 node scripts/validate_agent_board_state.js
 ```
 
@@ -15632,7 +15632,7 @@ Commands run:
 ```text
 git status -sb
 git diff --check
-git diff -- README.md PROJECT_MASTER_PLAN.md docs/00_project_roadmap.md docs/v7_234_product_image_workflow_runbook_gate.md docs/product_image_workflow_runbook.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
+git diff -- README.md PROJECT_MASTER_PLAN.md docs/00_project_roadmap.md docs/archive/phases/v7/v7_234_product_image_workflow_runbook_gate.md docs/product_image_workflow_runbook.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
 node scripts/validate_agent_board_state.js
 ```
 
@@ -15667,7 +15667,7 @@ Commands run:
 ```text
 git status -sb
 git diff --check
-git diff -- README.md PROJECT_MASTER_PLAN.md docs/00_project_roadmap.md docs/v7_233_delivery_review_surface_package_gate.md docs/delivery_review_surface_package.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
+git diff -- README.md PROJECT_MASTER_PLAN.md docs/00_project_roadmap.md docs/archive/phases/v7/v7_233_delivery_review_surface_package_gate.md docs/delivery_review_surface_package.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
 node scripts/validate_agent_board_state.js
 ```
 
@@ -15917,7 +15917,7 @@ git rev-parse HEAD
 git rev-parse origin/master
 git rev-list --left-right --count origin/master...HEAD
 git diff --check
-git diff -- README.md PROJECT_MASTER_PLAN.md docs/00_project_roadmap.md docs/v7_226_image_workflow_product_return_gate.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
+git diff -- README.md PROJECT_MASTER_PLAN.md docs/00_project_roadmap.md docs/archive/phases/v7/v7_226_image_workflow_product_return_gate.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
 node scripts/validate_agent_board_state.js
 ```
 
@@ -15990,7 +15990,7 @@ git log --oneline -8
 git rev-parse HEAD
 git rev-parse origin/master
 git diff --stat
-git diff -- AGENTS.md AGENTS.autopilot-overlay.md README_AGENT_IMAGE_LAB_AUTOPILOT.md docs/v7_224a_autopilot_rule_intake_hardening_gate.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
+git diff -- AGENTS.md AGENTS.autopilot-overlay.md README_AGENT_IMAGE_LAB_AUTOPILOT.md docs/archive/phases/v7/v7_224a_autopilot_rule_intake_hardening_gate.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md
 git diff --check
 ```
 

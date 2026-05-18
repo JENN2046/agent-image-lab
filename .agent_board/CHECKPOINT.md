@@ -1,10 +1,32 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## C1am Agent-Board-Only 03 Execution
+
+```yaml
+phase: c1am_agent_board_only_03_execution
+status: completed_validated_pending_commit
+goal: execute third low-risk agent-board-only paired move/rewrite batch
+completed:
+  - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_03_EXECUTION_PACKAGE.md
+  - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_03_EXECUTION_PACKAGE.csv
+  - moved 20 exact files to docs/archive/
+  - rewrote 29 exact old-path references in .agent_board source files
+  - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_03_EXECUTION_RECORD.md
+  - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_03_POST_MOVE_REFERENCE_MAP.csv
+  - generated docs_registry/generated/c1am_agent_board_only_03_registry_evidence.csv
+  - confirmed non-archive active old-path hit records count 0
+not_performed:
+  - no files outside move allowlist moved
+  - no files deleted
+  - no wrappers created
+  - no push, tag, release, or deploy
+```
+
 ## C1am Agent-Board-Only 02 Execution
 
 ```yaml
 phase: c1am_agent_board_only_02_execution
-status: completed_validated_pending_commit
+status: completed_validated_committed
 goal: execute second low-risk agent-board-only paired move/rewrite batch
 completed:
   - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_02_EXECUTION_PACKAGE.md
@@ -13861,7 +13883,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v8_018_second_product_prompt_or_runner_static_fix_gate
 source_commit: d7db551471fdedbfe3f5d98d96d8e64282ccaaea
 purpose: present Option A/B/C for whether to authorize a second minimal real generation trial
-phase_record_ref: docs/v8_019_second_product_second_trial_authorization_decision_gate.md
+phase_record_ref: docs/archive/phases/v8/v8_019_second_product_second_trial_authorization_decision_gate.md
 prompt_mapping_fix_completed: true
 prompt_package_path: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
 retry_allowed_now: false
@@ -13889,7 +13911,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate
 source_commit: e59fe0cac8df4d61e5b705f10640c6057ceb916f
 purpose: fix the second-product prompt package mapping risk by adding runner-facing canonical prompt
-phase_record_ref: docs/v8_018_second_product_prompt_or_runner_static_fix_gate.md
+phase_record_ref: docs/archive/phases/v8/v8_018_second_product_prompt_or_runner_static_fix_gate.md
 mapping_fix_ref: docs/second_product_prompt_runner_mapping_fix.md
 prompt_package_path: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
 canonical_prompt_field_added_or_confirmed: true
@@ -13919,7 +13941,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v8_016_second_product_minimal_real_generation_trial_execution
 source_commit: be841c1affce059da662d64f6ae85978d7009d58
 purpose: record sanitized v8.016 failure and decide whether prompt or runner static fixes are needed before any new authorization
-phase_record_ref: docs/v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate.md
+phase_record_ref: docs/archive/phases/v8/v8_017_second_product_failed_trial_review_or_prompt_fix_decision_gate.md
 review_ref: reviews/v8_017_second_product_failed_generation_review.md
 approved_product: multi_color_mesh_sports_visor
 prompt_package_used: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
@@ -13971,7 +13993,7 @@ phase_id: v8_015_second_product_A5_authorization_decision_gate
 status: completed_remote_synced_after_guarded_push
 source_commit: 4c7f4461089d0181e3c0f1172b7b31934b05632a
 purpose: record human Option A approval for one controlled minimal real generation trial of the Route B second product
-phase_record_ref: docs/v8_015_second_product_A5_authorization_decision_gate.md
+phase_record_ref: docs/archive/phases/v8/v8_015_second_product_A5_authorization_decision_gate.md
 approved_product: multi_color_mesh_sports_visor
 approved_prompt_package: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
 approved_output_directory: runs/real_generation/v8_016_multi_color_mesh_sports_visor_trial/
@@ -13997,7 +14019,7 @@ phase_id: v8_014_second_product_prompt_static_review_gate
 status: completed_remote_synced_after_guarded_push
 source_commit: 52d5cc8dbc9ee5e658e61d0915c818ffe7c11fc8
 purpose: statically review the second product prompt package and stop before any A5 decision
-phase_record_ref: docs/v8_014_second_product_prompt_static_review_gate.md
+phase_record_ref: docs/archive/phases/v8/v8_014_second_product_prompt_static_review_gate.md
 review_ref: reviews/v8_014_second_product_prompt_static_review.md
 review_result: pass_with_minor_watch_items
 Route_B_initial_docs_sequence_completed: true
@@ -14021,7 +14043,7 @@ phase_id: v8_013_second_product_prompt_package_draft_gate
 status: completed_remote_synced_after_guarded_push
 source_commit: 23066edc1b0235671fe0d0f7c6ae1ac742275af3
 purpose: create a non-executing prompt package draft for the multi-color mesh sports visor
-phase_record_ref: docs/v8_013_second_product_prompt_package_draft_gate.md
+phase_record_ref: docs/archive/phases/v8/v8_013_second_product_prompt_package_draft_gate.md
 prompt_package_ref: prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v1.yaml
 A5_authorization_required_later: true
 provider_contact: false
@@ -14043,7 +14065,7 @@ phase_id: v8_012_second_product_candidate_and_brief_gate
 status: completed_remote_synced_after_guarded_push
 source_commit: 5fae1c0dc3c24a59c1f0a7d3ad8d383a4446dc08
 purpose: select the second Route B product and create a product brief for prompt package drafting
-phase_record_ref: docs/v8_012_second_product_candidate_and_brief_gate.md
+phase_record_ref: docs/archive/phases/v8/v8_012_second_product_candidate_and_brief_gate.md
 selected_second_product: multi_color_mesh_sports_visor
 brief_ref: briefs/product_brief_multi_color_mesh_sports_visor_v1.md
 provider_contact: false
@@ -14065,7 +14087,7 @@ phase_id: v8_011_route_B_multi_product_expansion_selection_gate
 status: completed_remote_synced_after_guarded_push
 source_commit: 720d0ea5fc2d5395448880d818a101b7a21b513e
 purpose: record human selection of Route B multi-product prompt package expansion and lock the docs-only boundary
-phase_record_ref: docs/v8_011_route_B_multi_product_expansion_selection_gate.md
+phase_record_ref: docs/archive/phases/v8/v8_011_route_B_multi_product_expansion_selection_gate.md
 selected_route: multi_product_prompt_package_expansion
 selected_route_zh: 多商品 prompt package 扩展
 Route_B_changes_v7_accepted_candidate_status: false
@@ -14088,7 +14110,7 @@ phase_id: v8_010_A4_8_comprehensive_validation_closeout
 status: completed_remote_synced_after_guarded_push
 source_commit: 082640b8e7df8fd4786a782a6109237a5ab4e738
 purpose: close out the A4.8 comprehensive validation track after rule intake, mutation live run, controlled failure recovery, and hard stop probe all passed
-phase_record_ref: docs/v8_010_A4_8_comprehensive_validation_closeout.md
+phase_record_ref: docs/archive/phases/v8/v8_010_A4_8_comprehensive_validation_closeout.md
 rule_intake_passed: true
 idempotent_live_run_passed: true
 mutation_live_run_passed: true
@@ -14115,7 +14137,7 @@ phase_id: v8_008_A4_8_controlled_failure_recovery_drill
 status: completed_remote_synced_after_guarded_push
 source_commit: 2c227ca952f28ac98e29e9be8e181d9c781c663f
 purpose: induce one controlled git diff --check trailing whitespace failure, fix it before commit, rerun validation, and avoid committing or pushing the failed state
-phase_record_ref: docs/v8_008_A4_8_controlled_failure_recovery_drill.md
+phase_record_ref: docs/archive/phases/v8/v8_008_A4_8_controlled_failure_recovery_drill.md
 controlled_failure_induced: true
 failure_type: git_diff_check_trailing_whitespace
 committed_failure_state: false
@@ -14140,7 +14162,7 @@ phase_id: v8_007_A4_8_mutation_live_run_docs_only
 status: in_progress
 source_head: e059ba49e31d69770d50e355d433f1f066280f03
 purpose: verify A4.8 can make a low-risk docs-only mutation, update status surfaces, validate, exact stage, guarded commit, and safe push
-phase_record_ref: docs/v8_007_A4_8_mutation_live_run_docs_only.md
+phase_record_ref: docs/archive/phases/v8/v8_007_A4_8_mutation_live_run_docs_only.md
 provider_contact: false
 image_generation: false
 env_local_secret_value_read: false
@@ -17795,7 +17817,7 @@ closeout_docs:
   - docs/v7_51f_read_only_bridge_adapter_security_gate_validation_result.yaml
   - docs/v7_51g_read_only_bridge_adapter_fixture_regression_report.md
   - docs/v7_51g_read_only_bridge_adapter_fixture_regression_result.yaml
-  - docs/v7_51h_read_only_bridge_adapter_validation_closeout.md
+  - docs/archive/phases/v7/v7_51h_read_only_bridge_adapter_validation_closeout.md
 
 VCP call performed: false
 VCPChat bridge call performed: false

@@ -1,10 +1,34 @@
 # RUN_STATE.md — Agent Image Lab
 
+## C1am Agent-Board-Only 03 Execution
+
+```yaml
+phase: c1am_agent_board_only_03_execution
+status: completed_validated_pending_commit
+mode: A4.8_safe_local_docs_only_exact_move_rewrite
+goal: execute third low-risk agent-board-only paired move/rewrite batch
+evidence:
+  execution_package: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_03_EXECUTION_PACKAGE.md
+  execution_record: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_03_EXECUTION_RECORD.md
+  post_map: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_03_POST_MOVE_REFERENCE_MAP.csv
+  registry_evidence: docs_registry/generated/c1am_agent_board_only_03_registry_evidence.csv
+result:
+  files_moved: 20
+  rewrite_hits: 29
+  non_archive_active_old_path_hits: 0
+  wrappers_created: false
+  files_deleted: false
+decision:
+  validation_ready: true
+  push_allowed_now: false
+  recommended_next: validate_and_commit_third_batch
+```
+
 ## C1am Agent-Board-Only 02 Execution
 
 ```yaml
 phase: c1am_agent_board_only_02_execution
-status: completed_validated_pending_commit
+status: completed_validated_committed
 mode: A4.8_safe_local_exact_move_rewrite
 goal: execute second low-risk agent-board-only paired move/rewrite batch
 evidence:
@@ -22,7 +46,7 @@ result:
 decision:
   validation_ready: true
   push_allowed_now: false
-  recommended_next: validate_and_commit_second_batch
+  recommended_next: c1am_continue_low_risk_batches
 ```
 
 ## C1aj/C1ak Agent-Board-Only 01 Execution
@@ -13546,22 +13570,22 @@ recommended_next_zh: 执行一次已授权 prompt v2 最小真实生成，然后
 v8_003b_A4_8_rule_intake_smoke_test: passed
 v8_006_A4_8_state_and_rule_intake_review: passed_read_only
 v8_007_A4_8_mutation_live_run_docs_only: completed_remote_synced_after_guarded_push
-v8_007_phase_record_ref: docs/v8_007_A4_8_mutation_live_run_docs_only.md
+v8_007_phase_record_ref: docs/archive/phases/v8/v8_007_A4_8_mutation_live_run_docs_only.md
 v8_008_A4_8_controlled_failure_recovery_drill: completed_remote_synced_after_guarded_push
-v8_008_phase_record_ref: docs/v8_008_A4_8_controlled_failure_recovery_drill.md
+v8_008_phase_record_ref: docs/archive/phases/v8/v8_008_A4_8_controlled_failure_recovery_drill.md
 v8_008_controlled_failure_induced: true
 v8_008_committed_failure_state: false
 v8_008_pushed_failure_state: false
 v8_008_fixed_before_commit: true
 v8_009_A4_8_hard_stop_probe: passed_read_only
 v8_010_A4_8_comprehensive_validation_closeout: in_progress
-v8_010_phase_record_ref: docs/v8_010_A4_8_comprehensive_validation_closeout.md
+v8_010_phase_record_ref: docs/archive/phases/v8/v8_010_A4_8_comprehensive_validation_closeout.md
 A4_8_comprehensive_validation_passed: true
 A4_8_validated: true
 v8_011_route_B_multi_product_expansion_selection_gate: in_progress
 v8_011_selected_route: multi_product_prompt_package_expansion
 v8_011_selected_route_zh: 多商品 prompt package 扩展
-v8_011_phase_record_ref: docs/v8_011_route_B_multi_product_expansion_selection_gate.md
+v8_011_phase_record_ref: docs/archive/phases/v8/v8_011_route_B_multi_product_expansion_selection_gate.md
 Route_B_changes_v7_accepted_candidate_status: false
 v8_012_second_product_candidate_and_brief_gate: in_progress
 v8_012_selected_second_product: multi_color_mesh_sports_visor

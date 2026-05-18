@@ -60,6 +60,11 @@ C1am agent-board-only 02 execution package CSV: `docs/archive/DOCS_ARCHIVE_C1AM_
 C1am agent-board-only 02 execution record: `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_02_EXECUTION_RECORD.md`
 C1am agent-board-only 02 moved files CSV: `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_02_MOVED_FILES.csv`
 C1am agent-board-only 02 post-move reference map CSV: `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_02_POST_MOVE_REFERENCE_MAP.csv`
+C1am agent-board-only 03 execution package: `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_03_EXECUTION_PACKAGE.md`
+C1am agent-board-only 03 execution package CSV: `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_03_EXECUTION_PACKAGE.csv`
+C1am agent-board-only 03 execution record: `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_03_EXECUTION_RECORD.md`
+C1am agent-board-only 03 moved files CSV: `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_03_MOVED_FILES.csv`
+C1am agent-board-only 03 post-move reference map CSV: `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_03_POST_MOVE_REFERENCE_MAP.csv`
 
 This manifest records proposed future archive targets for historical `docs/` records. It is not a file-move authorization.
 

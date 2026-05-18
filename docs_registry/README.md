@@ -19,6 +19,7 @@ Current files:
 - `generated/` contains batch-scoped evidence generated from approved local archive cleanup work.
   - `generated/c1ak_agent_board_only_01_registry_evidence.csv`
   - `generated/c1am_agent_board_only_02_registry_evidence.csv`
+  - `generated/c1am_agent_board_only_03_registry_evidence.csv`
 
 Non-authorization:
 
