@@ -8,7 +8,7 @@ gate_template:
   intent: planning
   risk_level: R1
   allowed_files:
-    - docs/v12_003_prompt_schema_validator_rule_specification_gate.md
+    - docs/archive/phases/v12/v12_003_prompt_schema_validator_rule_specification_gate.md
     - docs/prompt_schema_validator_rule_specification.md
     - docs/prompt_schema_validator_fixture_matrix.md
     - README.md

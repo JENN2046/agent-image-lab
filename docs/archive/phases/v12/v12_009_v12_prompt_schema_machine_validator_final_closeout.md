@@ -59,11 +59,11 @@ Synthetic fixture harness:
 
 Route records:
 
-- `docs/v12_005_prompt_schema_validator_implementation_authorization_gate.md`
-- `docs/v12_006_prompt_schema_minimal_validator_implementation_gate.md`
-- `docs/v12_007_prompt_schema_validator_static_review_and_syntax_gate.md`
-- `docs/v12_008_prompt_schema_validator_fixture_execution_gate.md`
-- `docs/v12_009_v12_prompt_schema_machine_validator_final_closeout.md`
+- `docs/archive/phases/v12/v12_005_prompt_schema_validator_implementation_authorization_gate.md`
+- `docs/archive/phases/v12/v12_006_prompt_schema_minimal_validator_implementation_gate.md`
+- `docs/archive/phases/v12/v12_007_prompt_schema_validator_static_review_and_syntax_gate.md`
+- `docs/archive/phases/v12/v12_008_prompt_schema_validator_fixture_execution_gate.md`
+- `docs/archive/phases/v12/v12_009_v12_prompt_schema_machine_validator_final_closeout.md`
 
 ## Validation Result
 

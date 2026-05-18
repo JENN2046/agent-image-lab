@@ -64,6 +64,7 @@ The current authority remains:
 - `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_05_EXECUTION_PACKAGE.md` and `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_05_EXECUTION_RECORD.md` record the fifth low-risk agent-board-only paired move/rewrite execution batch and close the agent-board-only lane.
 - `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_01_EXECUTION_PACKAGE.md` and `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_01_EXECUTION_RECORD.md` record the first agent-board-plus-docs paired move/rewrite execution batch.
 - `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_02_EXECUTION_PACKAGE.md` and `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_02_EXECUTION_RECORD.md` record the second agent-board-plus-docs paired move/rewrite execution batch.
+- `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_03_EXECUTION_PACKAGE.md` and `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_03_EXECUTION_RECORD.md` record the third agent-board-plus-docs paired move/rewrite execution batch, including four zero-reference confirmed moves.
 
 ## Non-Authorization
 

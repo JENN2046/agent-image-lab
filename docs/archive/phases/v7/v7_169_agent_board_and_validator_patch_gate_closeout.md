@@ -8,10 +8,10 @@ Phase v7.169 completed as a docs-only patch authorization gate. 5 repair scopes 
 
 | File | Action |
 |------|--------|
-| `docs/v7_169_agent_board_and_validator_patch_gate.md` | created |
-| `docs/v7_169_agent_board_and_validator_patch_gate.yaml` | created |
-| `docs/v7_169_agent_board_and_validator_patch_gate_closeout.md` | created |
-| `docs/v7_169_agent_board_and_validator_patch_gate_closeout.yaml` | created |
+| `docs/archive/phases/v7/v7_169_agent_board_and_validator_patch_gate.md` | created |
+| `docs/archive/phases/v7/v7_169_agent_board_and_validator_patch_gate.yaml` | created |
+| `docs/archive/phases/v7/v7_169_agent_board_and_validator_patch_gate_closeout.md` | created |
+| `docs/archive/phases/v7/v7_169_agent_board_and_validator_patch_gate_closeout.yaml` | created |
 | `README.md` | updated |
 | `.agent_board/CHECKPOINT.md` | updated |
 

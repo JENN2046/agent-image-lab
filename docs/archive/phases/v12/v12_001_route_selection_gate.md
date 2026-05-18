@@ -8,7 +8,7 @@ gate_template:
   intent: planning
   risk_level: R1
   allowed_files:
-    - docs/v12_001_route_selection_gate.md
+    - docs/archive/phases/v12/v12_001_route_selection_gate.md
     - README.md
     - docs/00_project_roadmap.md
     - PROJECT_MASTER_PLAN.md

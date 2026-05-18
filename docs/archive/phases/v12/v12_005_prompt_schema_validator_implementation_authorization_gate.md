@@ -30,7 +30,7 @@ v12.006 may add or modify only:
 - `tests/fixtures/prompt_schema_validator/pass/*`
 - `tests/fixtures/prompt_schema_validator/fail/*`
 - `tests/fixtures/prompt_schema_validator/warn/*`
-- `docs/v12_006_prompt_schema_minimal_validator_implementation_gate.md`
+- `docs/archive/phases/v12/v12_006_prompt_schema_minimal_validator_implementation_gate.md`
 - allowed status surfaces listed in the current phase contract
 
 The validator must be:

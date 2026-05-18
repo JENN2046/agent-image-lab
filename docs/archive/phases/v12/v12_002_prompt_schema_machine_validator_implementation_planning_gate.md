@@ -8,7 +8,7 @@ gate_template:
   intent: planning
   risk_level: R1
   allowed_files:
-    - docs/v12_002_prompt_schema_machine_validator_implementation_planning_gate.md
+    - docs/archive/phases/v12/v12_002_prompt_schema_machine_validator_implementation_planning_gate.md
     - docs/prompt_schema_machine_validator_implementation_plan.md
     - docs/prompt_schema_machine_validator_rule_inventory.md
     - README.md
