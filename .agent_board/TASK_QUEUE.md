@@ -6,18 +6,35 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current C1am Agent-Board-Only 02 Execution
+
+```text
+Current archive task: c1am_agent_board_only_02_execution.
+Status: completed validated pending commit.
+Purpose: execute second low-risk agent-board-only paired move/rewrite batch.
+Execution package: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_02_EXECUTION_PACKAGE.md.
+Execution record: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_02_EXECUTION_RECORD.md.
+Files moved: 20.
+Rewrite hits: 31 plus one exact metadata reference repair.
+Non-archive active old-path hits after rewrite: 0.
+Recommended next: validate and commit second batch.
+Not allowed now: push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
+```
+
+---
+
 ## Current C1aj/C1ak Agent-Board-Only 01 Execution
 
 ```text
 Current archive task: c1aj_c1ak_agent_board_only_01_execution.
-Status: completed validated pending commit.
+Status: completed validated committed.
 Purpose: execute first low-risk agent-board-only paired move/rewrite batch.
 Execution package: docs/archive/DOCS_ARCHIVE_C1AJ_AGENT_BOARD_ONLY_01_EXECUTION_PACKAGE.md.
 Execution record: docs/archive/DOCS_ARCHIVE_C1AK_AGENT_BOARD_ONLY_01_EXECUTION_RECORD.md.
 Files moved: 20.
 Rewrite hits: 20.
 Non-archive old-path hits after rewrite: 0.
-Recommended next: C1al validate and commit first batch.
+Recommended next: continue C1am low-risk batches.
 Not allowed now: push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
 ```
 
@@ -5222,7 +5239,7 @@ Status: completed_prompt_package_static_validated.
 Purpose: create a stronger v3 product-first prompt package for the third NativeDoubaoImage camping lantern hero trial, without running generation.
 prompt_package_created: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v3.yaml.
 source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml.
-source_review_record: docs/v14_084_pvos_lantern_v2_hero_second_review_record.md.
+source_review_record: docs/archive/phases/v14/v14_084_pvos_lantern_v2_hero_second_review_record.md.
 source_generation_result: runs/real_generation/v14_083_pvos_premium_portable_led_camping_lantern_v2_hero_trial/native_doubao_1778998955426_0.jpg.
 revision_goal: product larger and more decisive; modern rechargeable LED design; weaker darker farther blurred background; dark shallow low-activity lower layer; controlled readable diffuser.
 target_role: premium_outdoor_lifestyle_hero_product_shot.
@@ -5242,7 +5259,7 @@ recommended_next_auto_execution_allowed: false.
 Current active local objective: v14_084_pvos_lantern_v2_hero_second_review_record.
 Status: completed_docs_only_review_record_validated.
 Purpose: record two review passes for the NativeDoubaoImage v2 hero output and keep it as revision evidence, not an accepted candidate.
-phase_record_created: docs/v14_084_pvos_lantern_v2_hero_second_review_record.md.
+phase_record_created: docs/archive/phases/v14/v14_084_pvos_lantern_v2_hero_second_review_record.md.
 source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml.
 reviewed_output: runs/real_generation/v14_083_pvos_premium_portable_led_camping_lantern_v2_hero_trial/native_doubao_1778998955426_0.jpg.
 review_passes_recorded: 2.

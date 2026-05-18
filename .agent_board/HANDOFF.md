@@ -1,9 +1,31 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — C1am Agent-Board-Only 02 Execution
+
+```text
+Status: c1am_agent_board_only_02_execution completed_validated_pending_commit.
+Reason: Continue low-risk exact-file archive execution batches of up to 20 files.
+Execution mode: A4.8 local exact move/rewrite execution.
+Execution package: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_02_EXECUTION_PACKAGE.md.
+Execution record: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_02_EXECUTION_RECORD.md.
+Post-map: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_02_POST_MOVE_REFERENCE_MAP.csv.
+Registry evidence: docs_registry/generated/c1am_agent_board_only_02_registry_evidence.csv.
+Files moved: 20.
+Rewrite hits: 31 plus one postflight exact metadata reference repair.
+Non-archive active old-path hits after rewrite: 0.
+Wrappers created: false.
+Files deleted: false.
+Existing validator behavior changed: false; exact local commit scope allowlist updated for one docs_registry generated evidence file.
+Push/tag/release/deploy performed: false.
+Recommended next: validate and commit second batch, then continue next low-risk batch.
+```
+
+---
+
 ## Current Handoff Update — C1aj/C1ak Agent-Board-Only 01 Execution
 
 ```text
-Status: c1aj_c1ak_agent_board_only_01_execution completed_validated_pending_commit.
+Status: c1aj_c1ak_agent_board_only_01_execution completed_validated_committed.
 Reason: Jenn allowed low-risk exact-file archive execution batches of up to 20 files.
 Execution mode: A4.8 local docs-only exact move/rewrite execution.
 Execution package: docs/archive/DOCS_ARCHIVE_C1AJ_AGENT_BOARD_ONLY_01_EXECUTION_PACKAGE.md.
@@ -18,7 +40,7 @@ Wrappers created: false.
 Files deleted: false.
 Existing validator behavior changed: false; exact local commit scope allowlist updated for one docs_registry generated evidence file.
 Push/tag/release/deploy performed: false.
-Recommended next: C1al validate and commit first batch, then continue C1am low-risk batches.
+Recommended next: continue C1am low-risk batches.
 ```
 
 ---
@@ -6062,7 +6084,7 @@ Current repository: project_root
 Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
 Worktree: dirty with v14.084 review record, v2 prompt package, v3 prompt package, validator drift fixes, and .agent_board sync until validation/commit decision.
 Prompt package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v3.yaml
-Source review record: docs/v14_084_pvos_lantern_v2_hero_second_review_record.md
+Source review record: docs/archive/phases/v14/v14_084_pvos_lantern_v2_hero_second_review_record.md
 Source generation result: runs/real_generation/v14_083_pvos_premium_portable_led_camping_lantern_v2_hero_trial/native_doubao_1778998955426_0.jpg
 future_authorization_package_id_recommended: AUTH-PENDING-PVOS-LANTERN-V3-HERO-20260517-001
 future_output_directory_ref: runs/real_generation/v14_086_pvos_premium_portable_led_camping_lantern_v3_hero_trial/
@@ -6085,7 +6107,7 @@ Reason: NativeDoubaoImage v2 hero output was reviewed twice and remains revision
 Current repository: project_root
 Branch: master tracking origin/master; local commits exist and local branch is ahead of origin. Verify with `git status --short --branch` before any remote decision.
 Worktree: dirty with docs-only v14.084 review record, .agent_board sync, and the untracked v2 prompt package until validation/commit decision.
-Phase record: docs/v14_084_pvos_lantern_v2_hero_second_review_record.md
+Phase record: docs/archive/phases/v14/v14_084_pvos_lantern_v2_hero_second_review_record.md
 Source prompt package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml
 Reviewed output: runs/real_generation/v14_083_pvos_premium_portable_led_camping_lantern_v2_hero_trial/native_doubao_1778998955426_0.jpg
 review_passes_recorded: 2

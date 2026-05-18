@@ -1,10 +1,35 @@
 # RUN_STATE.md — Agent Image Lab
 
+## C1am Agent-Board-Only 02 Execution
+
+```yaml
+phase: c1am_agent_board_only_02_execution
+status: completed_validated_pending_commit
+mode: A4.8_safe_local_exact_move_rewrite
+goal: execute second low-risk agent-board-only paired move/rewrite batch
+evidence:
+  execution_package: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_02_EXECUTION_PACKAGE.md
+  execution_record: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_02_EXECUTION_RECORD.md
+  post_map: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_02_POST_MOVE_REFERENCE_MAP.csv
+  registry_evidence: docs_registry/generated/c1am_agent_board_only_02_registry_evidence.csv
+result:
+  files_moved: 20
+  rewrite_hits: 31
+  postflight_exact_metadata_reference_repairs: 1
+  non_archive_active_old_path_hits: 0
+  wrappers_created: false
+  files_deleted: false
+decision:
+  validation_ready: true
+  push_allowed_now: false
+  recommended_next: validate_and_commit_second_batch
+```
+
 ## C1aj/C1ak Agent-Board-Only 01 Execution
 
 ```yaml
 phase: c1aj_c1ak_agent_board_only_01_execution
-status: completed_validated_pending_commit
+status: completed_validated_committed
 mode: A4.8_safe_local_docs_only_exact_move_rewrite
 goal: execute first low-risk agent-board-only paired move/rewrite batch
 evidence:
@@ -21,7 +46,7 @@ result:
 decision:
   c1al_validation_ready: true
   push_allowed_now: false
-  recommended_next: c1al_validate_and_commit_first_batch
+  recommended_next: c1am_continue_low_risk_batches
 ```
 
 ## C1ad-D3 Paired Package And Registry Drafts
@@ -6471,7 +6496,7 @@ mode: Persistent 4-Agent Council local loop
 phase_id: v14_085_pvos_lantern_v3_prompt_revision_plan
 prompt_package_created: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v3.yaml
 source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml
-source_review_record: docs/v14_084_pvos_lantern_v2_hero_second_review_record.md
+source_review_record: docs/archive/phases/v14/v14_084_pvos_lantern_v2_hero_second_review_record.md
 source_generation_result: runs/real_generation/v14_083_pvos_premium_portable_led_camping_lantern_v2_hero_trial/native_doubao_1778998955426_0.jpg
 revision_goal: make product larger, more modern, more premium, and more visually dominant while weakening the background and lower tabletop layer
 target_role: premium_outdoor_lifestyle_hero_product_shot
@@ -6502,7 +6527,7 @@ objective: v14.084 NativeDoubaoImage v2 hero two-pass review record
 status: completed_docs_only_review_record_validated
 mode: Persistent 4-Agent Council local loop
 phase_id: v14_084_pvos_lantern_v2_hero_second_review_record
-phase_record: docs/v14_084_pvos_lantern_v2_hero_second_review_record.md
+phase_record: docs/archive/phases/v14/v14_084_pvos_lantern_v2_hero_second_review_record.md
 source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml
 reviewed_output: runs/real_generation/v14_083_pvos_premium_portable_led_camping_lantern_v2_hero_trial/native_doubao_1778998955426_0.jpg
 review_passes_recorded: 2

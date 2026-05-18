@@ -17,6 +17,8 @@ Current files:
 - `registry_scanner_dry_run.md` describes the read-only scanner design.
 - `registry_validator_dry_run.md` describes the validator rules.
 - `generated/` contains batch-scoped evidence generated from approved local archive cleanup work.
+  - `generated/c1ak_agent_board_only_01_registry_evidence.csv`
+  - `generated/c1am_agent_board_only_02_registry_evidence.csv`
 
 Non-authorization:
 

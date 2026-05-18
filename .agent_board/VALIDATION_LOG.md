@@ -5738,7 +5738,7 @@ Result:
 ```text
 prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v3.yaml
 source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml
-source_review_record: docs/v14_084_pvos_lantern_v2_hero_second_review_record.md
+source_review_record: docs/archive/phases/v14/v14_084_pvos_lantern_v2_hero_second_review_record.md
 source_generation_result: runs/real_generation/v14_083_pvos_premium_portable_led_camping_lantern_v2_hero_trial/native_doubao_1778998955426_0.jpg
 revision_result: stronger product-first prompt with larger modern lantern, weaker background, darker lower layer, and stricter diffuser control
 prompt_schema: passed
@@ -5777,7 +5777,7 @@ powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
 Result:
 
 ```text
-phase_record: docs/v14_084_pvos_lantern_v2_hero_second_review_record.md
+phase_record: docs/archive/phases/v14/v14_084_pvos_lantern_v2_hero_second_review_record.md
 source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml
 reviewed_output: runs/real_generation/v14_083_pvos_premium_portable_led_camping_lantern_v2_hero_trial/native_doubao_1778998955426_0.jpg
 review_passes_recorded: 2
@@ -9159,7 +9159,7 @@ Sync v14.020 post-push state surfaces, split source_commit / phase_commit / remo
 Result:
 
 ```text
-phase_record: docs/v14_021a_post_push_state_sync_and_validator_alignment_patch.md
+phase_record: docs/archive/phases/v14/v14_021a_post_push_state_sync_and_validator_alignment_patch.md
 source_commit: 48d634c9cedb8b4ea221bb1e6788867d830475cc
 v14_020_source_commit: e5705dbb678acb60339ef1ad3f3476223c338711
 v14_020_phase_commit: 48d634c9cedb8b4ea221bb1e6788867d830475cc
@@ -9947,7 +9947,7 @@ Result:
 
 ```text
 source_commit: 312c5e0695254e4f5df2898eeafde87b763ec0ab
-phase_record: docs/v14_001_route_selection_gate.md
+phase_record: docs/archive/phases/v14/v14_001_route_selection_gate.md
 v13_camping_lantern_route_closed: true
 final_asset_status: accepted_candidate_with_minor_watch_items
 commercial_delivery_ready: false
@@ -16018,7 +16018,7 @@ No validator is run in v7.224a because this phase only hardens the rule text; v7
 Task:
 
 ```text
-Align README.md, docs/00_project_roadmap.md, docs/v7_224_mainline_status_freshness_alignment_gate.md, and .agent_board resume surfaces after v7.223 selected v7.224 as the only safe next task.
+Align README.md, docs/00_project_roadmap.md, docs/archive/phases/v7/v7_224_mainline_status_freshness_alignment_gate.md, and .agent_board resume surfaces after v7.223 selected v7.224 as the only safe next task.
 ```
 
 Commands run:
@@ -16029,7 +16029,7 @@ git log --oneline -8
 git rev-parse HEAD
 git rev-parse origin/master
 git diff --stat
-git diff -- README.md docs/00_project_roadmap.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md docs/v7_224_mainline_status_freshness_alignment_gate.md
+git diff -- README.md docs/00_project_roadmap.md .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md .agent_board/VALIDATION_LOG.md docs/archive/phases/v7/v7_224_mainline_status_freshness_alignment_gate.md
 git diff --check
 node scripts/validate_agent_board_state.js
 guarded push preflight checks

@@ -1,10 +1,33 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## C1am Agent-Board-Only 02 Execution
+
+```yaml
+phase: c1am_agent_board_only_02_execution
+status: completed_validated_pending_commit
+goal: execute second low-risk agent-board-only paired move/rewrite batch
+completed:
+  - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_02_EXECUTION_PACKAGE.md
+  - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_02_EXECUTION_PACKAGE.csv
+  - moved 20 exact files to docs/archive/
+  - rewrote 31 exact old-path references in .agent_board source files
+  - repaired one prompt metadata source_review_record reference to the moved archive target
+  - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_02_EXECUTION_RECORD.md
+  - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_02_POST_MOVE_REFERENCE_MAP.csv
+  - generated docs_registry/generated/c1am_agent_board_only_02_registry_evidence.csv
+  - confirmed non-archive active old-path hit records count 0
+not_performed:
+  - no files outside move allowlist moved
+  - no files deleted
+  - no wrappers created
+  - no push, tag, release, or deploy
+```
+
 ## C1aj/C1ak Agent-Board-Only 01 Execution
 
 ```yaml
 phase: c1aj_c1ak_agent_board_only_01_execution
-status: completed_validated_pending_commit
+status: completed_validated_committed
 goal: execute first low-risk agent-board-only paired move/rewrite batch
 completed:
   - generated docs/archive/DOCS_ARCHIVE_C1AJ_AGENT_BOARD_ONLY_01_EXECUTION_PACKAGE.md
@@ -6215,7 +6238,7 @@ phase_id: v14_085_pvos_lantern_v3_prompt_revision_plan
 status: completed_prompt_package_static_validated
 prompt_package_created: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v3.yaml
 source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml
-source_review_record: docs/v14_084_pvos_lantern_v2_hero_second_review_record.md
+source_review_record: docs/archive/phases/v14/v14_084_pvos_lantern_v2_hero_second_review_record.md
 source_generation_result: runs/real_generation/v14_083_pvos_premium_portable_led_camping_lantern_v2_hero_trial/native_doubao_1778998955426_0.jpg
 revision_goal: stronger product-first hero main image; larger and more modern lantern; weaker background; darker shallower lower layer; controlled diffuser glow
 target_role: premium_outdoor_lifestyle_hero_product_shot
@@ -6242,7 +6265,7 @@ recommended_next_auto_execution_allowed: false
 ```text
 phase_id: v14_084_pvos_lantern_v2_hero_second_review_record
 status: completed_docs_only_review_record_validated
-phase_record_created: docs/v14_084_pvos_lantern_v2_hero_second_review_record.md
+phase_record_created: docs/archive/phases/v14/v14_084_pvos_lantern_v2_hero_second_review_record.md
 source_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml
 reviewed_output: runs/real_generation/v14_083_pvos_premium_portable_led_camping_lantern_v2_hero_trial/native_doubao_1778998955426_0.jpg
 review_passes_recorded: 2
@@ -9908,7 +9931,7 @@ status: completed_validated_route_selection_record
 source_phase: v13_016_camping_lantern_delivery_readiness_review_and_lane_closeout_gate
 source_commit: 312c5e0695254e4f5df2898eeafde87b763ec0ab
 purpose: present V14 next-route options and wait for human selection
-phase_record_ref: docs/v14_001_route_selection_gate.md
+phase_record_ref: docs/archive/phases/v14/v14_001_route_selection_gate.md
 v13_camping_lantern_route_closed: true
 final_asset_status: accepted_candidate_with_minor_watch_items
 commercial_delivery_ready: false
@@ -9948,7 +9971,7 @@ status: completed_validated_delivery_readiness_review_and_lane_closeout_record
 source_phase: v13_015_camping_lantern_delivery_readiness_planning_gate
 source_commit: 181b33464dd1cf193e4a9252e98677c9f7cfe335
 purpose: review camping lantern delivery readiness and close the lane as accepted candidate without downstream execution
-phase_record_ref: docs/v13_016_camping_lantern_delivery_readiness_review_and_lane_closeout_gate.md
+phase_record_ref: docs/archive/phases/v13/v13_016_camping_lantern_delivery_readiness_review_and_lane_closeout_gate.md
 delivery_readiness_review_ref: docs/camping_lantern_delivery_readiness_review_v1.md
 route_closeout_ref: docs/camping_lantern_route_closeout_v1.md
 delivery_readiness_package_ref: docs/camping_lantern_delivery_readiness_package_v1.md
@@ -9997,7 +10020,7 @@ status: completed_validated_delivery_readiness_planning_record
 source_phase: v13_014_camping_lantern_post_generation_review_and_route_decision_gate
 source_commit: f6f0a1cbca223017d2b8642b524e1d04cb8ec078
 purpose: create camping lantern docs-only delivery readiness package without retouch or delivery execution
-phase_record_ref: docs/v13_015_camping_lantern_delivery_readiness_planning_gate.md
+phase_record_ref: docs/archive/phases/v13/v13_015_camping_lantern_delivery_readiness_planning_gate.md
 delivery_readiness_package_ref: docs/camping_lantern_delivery_readiness_package_v1.md
 evidence_package_ref: docs/camping_lantern_accepted_candidate_evidence_package_v1.md
 selected_product: premium_portable_led_camping_lantern
@@ -10042,7 +10065,7 @@ status: completed_validated_post_generation_review_record
 source_phase: v13_013_one_minimal_real_generation_execution
 source_commit: 8ab8d952cb5ebb0afb7aff505aadb6878c670702
 purpose: review camping lantern first real output and choose route without retry or downstream execution
-phase_record_ref: docs/v13_014_camping_lantern_post_generation_review_and_route_decision_gate.md
+phase_record_ref: docs/archive/phases/v13/v13_014_camping_lantern_post_generation_review_and_route_decision_gate.md
 evidence_package_ref: docs/camping_lantern_accepted_candidate_evidence_package_v1.md
 approved_product: premium_portable_led_camping_lantern
 prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml
@@ -10094,7 +10117,7 @@ status: completed_validated_pre_execution_package_record
 source_phase: v13_011_camping_lantern_minimal_generation_authorization_draft_gate
 source_commit: 4d8420ed75aa53f96c9a095050591388f4c1bd03
 purpose: consolidate camping lantern one-shot A5 pre-execution package without execution
-phase_record_ref: docs/v13_012_camping_lantern_A5_pre_execution_package_gate.md
+phase_record_ref: docs/archive/phases/v13/v13_012_camping_lantern_A5_pre_execution_package_gate.md
 approved_product: premium_portable_led_camping_lantern
 approved_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml
 output_directory: runs/real_generation/v13_012_premium_portable_led_camping_lantern_first_trial/
@@ -10146,7 +10169,7 @@ status: completed_validated_execution_confirmation_record
 source_phase: v13_011_camping_lantern_minimal_generation_authorization_draft_gate
 source_commit: 4d8420ed75aa53f96c9a095050591388f4c1bd03
 purpose: confirm camping lantern one-shot generation execution boundary without execution
-phase_record_ref: docs/v13_012_camping_lantern_minimal_generation_execution_confirmation_gate.md
+phase_record_ref: docs/archive/phases/v13/v13_012_camping_lantern_minimal_generation_execution_confirmation_gate.md
 approved_product: premium_portable_led_camping_lantern
 approved_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml
 output_directory: runs/real_generation/v13_012_premium_portable_led_camping_lantern_first_trial/
@@ -10192,7 +10215,7 @@ status: completed_validated_A5_authorization_draft_record
 source_phase: v13_010_premium_portable_led_camping_lantern_A5_authorization_decision_gate
 source_commit: 7d6b16ab0baf54f95e7a05f3dc8395aef3061651
 purpose: draft camping lantern one-shot generation authorization boundaries only
-phase_record_ref: docs/v13_011_camping_lantern_minimal_generation_authorization_draft_gate.md
+phase_record_ref: docs/archive/phases/v13/v13_011_camping_lantern_minimal_generation_authorization_draft_gate.md
 human_selected_option: authorize_one_minimal_real_generation_trial_later
 approved_product: premium_portable_led_camping_lantern
 approved_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml
@@ -10239,7 +10262,7 @@ status: completed_validated_A5_path_decision_gate_record
 source_phase: v13_009_premium_portable_led_camping_lantern_prompt_package_static_review_gate
 source_commit: b89bba38918f44c56e3032d0e2d25e337a1c76f9
 purpose: present camping lantern A5 path options and stop before execution
-phase_record_ref: docs/v13_010_premium_portable_led_camping_lantern_A5_authorization_decision_gate.md
+phase_record_ref: docs/archive/phases/v13/v13_010_premium_portable_led_camping_lantern_A5_authorization_decision_gate.md
 prompt_package_ref: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml
 selected_product: premium_portable_led_camping_lantern
 static_review_result: pass_ready_for_A5_decision
@@ -10281,7 +10304,7 @@ status: completed_validated_prompt_package_static_review_record
 source_phase: v13_008_premium_portable_led_camping_lantern_prompt_package_draft_gate
 source_commit: 0ba2a60763cbca560072b75f5db3685e2bb5d4a1
 purpose: statically review camping lantern prompt package
-phase_record_ref: docs/v13_009_premium_portable_led_camping_lantern_prompt_package_static_review_gate.md
+phase_record_ref: docs/archive/phases/v13/v13_009_premium_portable_led_camping_lantern_prompt_package_static_review_gate.md
 static_review_ref: docs/premium_portable_led_camping_lantern_prompt_package_static_review_v1.md
 prompt_package_ref: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml
 selected_product: premium_portable_led_camping_lantern
@@ -10417,7 +10440,7 @@ source_phase: v13_005_existing_asset_loop_reconstruction_docs_only_gate
 source_commit: 9fb10d57fd1586eab2bab79d3418c37af501b01a
 purpose: close V13 Visual Production Loop foundation and present next route options
 phase_record_ref: docs/archive/phases/v13/v13_006_visual_production_loop_foundation_closeout_or_next_route_decision_gate.md
-foundation_closeout_ref: docs/v13_visual_production_loop_foundation_closeout.md
+foundation_closeout_ref: docs/archive/phases/v13/v13_visual_production_loop_foundation_closeout.md
 v13_foundation_closed: true
 canonical_model_created: true
 state_machine_created: true
@@ -21394,10 +21417,10 @@ correction_status: fields_added
 target_file_type: markdown_only
 
 files_modified:
-  - docs/v7_127_controlled_long_task_chain_authorization_gate.md
-  - docs/v7_126_selected_docs_rescan_execution_closeout.md
-  - docs/v7_125_selected_docs_rescan_authorization_gate.md
-  - docs/v7_123_closeout_integrity_correction_implementation_gate.md
+  - docs/archive/phases/v7/v7_127_controlled_long_task_chain_authorization_gate.md
+  - docs/archive/phases/v7/v7_126_selected_docs_rescan_execution_closeout.md
+  - docs/archive/phases/v7/v7_125_selected_docs_rescan_authorization_gate.md
+  - docs/archive/phases/v7/v7_123_closeout_integrity_correction_implementation_gate.md
 
 yaml_files_modified: 0
 historical_facts_rewritten: false
@@ -22308,9 +22331,9 @@ Phase: v7.162
 Status: batch_004_correction_implementation_completed
 
 files_modified:
-  - docs/v7_157_batch_003_rescan_execution_closeout.yaml (7 fields)
-  - docs/v7_156_batch_003_rescan_authorization_gate.md (8 fields)
-  - docs/v7_153_batch_003_exact_finding_recovery.md (8 fields)
+  - docs/archive/phases/v7/v7_157_batch_003_rescan_execution_closeout.yaml (7 fields)
+  - docs/archive/phases/v7/v7_156_batch_003_rescan_authorization_gate.md (8 fields)
+  - docs/archive/phases/v7/v7_153_batch_003_exact_finding_recovery.md (8 fields)
 
 clean_files_untouched: true
 historical_facts_rewritten: false
