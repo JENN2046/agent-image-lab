@@ -6,6 +6,36 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current C1u-C1z Wrapper-Required 200 Machine Triage
+
+```text
+Current archive task: c1u_c1aa_wrapper_required_200_machine_triage.
+Status: completed validated pending commit.
+Purpose: machine-bucket 200 wrapper-required records and decide whether standalone low-risk rewrite is safe.
+Link graph: docs/archive/DOCS_ARCHIVE_C1U_WRAPPER_REQUIRED_LINK_GRAPH_DRY_RUN.md.
+Rule packages: C1v agent_board, C1w docs-only, C1x human-navigation.
+C1y decision: no rewrite executed because all archive targets are missing.
+C1z decision: do not create 200 wrappers; next route should be paired exact move plus exact rewrite package dry-run.
+Recommended next: C1ab exact-file staging plus local commit after C1aa audit passes.
+Not allowed now: push/tag/release/deploy, wrapper creation, file movement, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
+```
+
+---
+
+## Current C1aa Exact-File Commit Readiness Audit
+
+```text
+Current archive task: c1aa_exact_file_commit_readiness_audit.
+Status: completed validated pending commit.
+Purpose: confirm C1u-C1z machine-triage changes are ready for exact-file staging and guarded local commit.
+Readiness audit: docs/archive/DOCS_ARCHIVE_C1AA_EXACT_FILE_COMMIT_READINESS_AUDIT.md.
+Decision: exact-file staging and local commit may proceed after validation passes.
+Recommended next: C1ab exact-file staging plus local commit.
+Not allowed now: push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
+```
+
+---
+
 ## Current C1t Wrapper-Required 200 Route Planning
 
 ```text

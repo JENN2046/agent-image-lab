@@ -49,6 +49,10 @@ The current authority remains:
 - `docs/archive/DOCS_ARCHIVE_C1Q_EXACT_MOVE_EXECUTION_RECORD.md` records the C1q exact-file physical move for 67 docs-only-reference candidates.
 - `docs/archive/DOCS_ARCHIVE_C1R_POST_MOVE_REFERENCE_MAP.md` records the C1r post-move reference map and confirms remaining old-path hits are archive-only.
 - `docs/archive/DOCS_ARCHIVE_C1T_WRAPPER_REQUIRED_200_ROUTE_PLANNING.md` records the C1t wrapper-required 200 route planning and recommends link-graph separation before any wrapper creation.
+- `docs/archive/DOCS_ARCHIVE_C1U_WRAPPER_REQUIRED_LINK_GRAPH_DRY_RUN.md` records the C1u machine link graph for the 200 wrapper-required records, with complete CSV evidence in `docs/archive/DOCS_ARCHIVE_C1U_WRAPPER_REQUIRED_LINK_GRAPH.csv`.
+- `docs/archive/DOCS_ARCHIVE_C1V_AGENT_BOARD_STALE_REFERENCE_CLEANUP_PACKAGE_DRY_RUN.md`, `docs/archive/DOCS_ARCHIVE_C1W_DOCS_ONLY_REWRITE_PACKAGE_DRY_RUN.md`, and `docs/archive/DOCS_ARCHIVE_C1X_HUMAN_NAVIGATION_REVIEW_PACKAGE_DRY_RUN.md` record the C1v-C1x dry-run rule packages.
+- `docs/archive/DOCS_ARCHIVE_C1Y_EXACT_LOW_RISK_REWRITE_EXECUTION_REVIEW.md` and `docs/archive/DOCS_ARCHIVE_C1Z_RESIDUAL_WRAPPER_DECISION_CLOSEOUT.md` record the C1y/C1z verifier decision that standalone rewrite is blocked until an exact paired move/rewrite or minimal wrapper strategy exists.
+- `docs/archive/DOCS_ARCHIVE_C1AA_EXACT_FILE_COMMIT_READINESS_AUDIT.md` records the exact-file commit readiness audit for the C1u-C1z machine-triage changes.
 
 ## Non-Authorization
 

@@ -36,6 +36,10 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 - `docs/archive/DOCS_ARCHIVE_C1Q_EXACT_MOVE_EXECUTION_RECORD.md` 记录 C1q 67 个 docs-only-reference candidates 的 exact-file physical move 执行。
 - `docs/archive/DOCS_ARCHIVE_C1R_POST_MOVE_REFERENCE_MAP.md` 记录 C1r post-move 引用图；它确认旧路径命中只剩 `docs/archive/` 内历史审计/规划记录。
 - `docs/archive/DOCS_ARCHIVE_C1T_WRAPPER_REQUIRED_200_ROUTE_PLANNING.md` 记录 C1t wrapper-required 200 路线规划；它决定先做 link graph 和陈旧引用分流，不默认创建 200 个 wrappers。
+- `docs/archive/DOCS_ARCHIVE_C1U_WRAPPER_REQUIRED_LINK_GRAPH_DRY_RUN.md` 记录 C1u wrapper-required 200 机器引用图；完整 CSV 为 `docs/archive/DOCS_ARCHIVE_C1U_WRAPPER_REQUIRED_LINK_GRAPH.csv`。
+- `docs/archive/DOCS_ARCHIVE_C1V_AGENT_BOARD_STALE_REFERENCE_CLEANUP_PACKAGE_DRY_RUN.md`、`docs/archive/DOCS_ARCHIVE_C1W_DOCS_ONLY_REWRITE_PACKAGE_DRY_RUN.md`、`docs/archive/DOCS_ARCHIVE_C1X_HUMAN_NAVIGATION_REVIEW_PACKAGE_DRY_RUN.md` 记录 C1v-C1x 规则包 dry-run。
+- `docs/archive/DOCS_ARCHIVE_C1Y_EXACT_LOW_RISK_REWRITE_EXECUTION_REVIEW.md` 和 `docs/archive/DOCS_ARCHIVE_C1Z_RESIDUAL_WRAPPER_DECISION_CLOSEOUT.md` 记录 C1y/C1z Verifier 裁决：当前不能 standalone rewrite，下一步应准备 paired exact move plus rewrite 包。
+- `docs/archive/DOCS_ARCHIVE_C1AA_EXACT_FILE_COMMIT_READINESS_AUDIT.md` 记录 C1u-C1z 机器分桶变更的 exact-file commit readiness 审计。
 - `asset_archive/accepted_samples/<sample_id>/manifest.json + preview.webp` 是新的 accepted sample portable evidence capsule 目标路径。
 - 历史 `docs/v*` 阶段记录、旧 closeout、旧 authorization 草案是审计记录，不等于当前授权。
 - 未经明确 A5 授权，不要运行 provider/plugin/API/image generation/DailyNote/VCP memory/runtime/push/tag/release/deploy 相关入口。

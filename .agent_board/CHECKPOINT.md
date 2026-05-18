@@ -1,5 +1,46 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## C1u-C1z Wrapper-Required 200 Machine Triage
+
+```yaml
+phase: c1u_c1aa_wrapper_required_200_machine_triage
+status: completed_validated_pending_commit
+goal: machine-bucket wrapper-required 200 and verify whether low-risk standalone rewrite can execute
+completed:
+  - generated docs/archive/DOCS_ARCHIVE_C1U_WRAPPER_REQUIRED_LINK_GRAPH_DRY_RUN.md
+  - generated docs/archive/DOCS_ARCHIVE_C1U_WRAPPER_REQUIRED_LINK_GRAPH.csv
+  - generated C1v agent board cleanup dry-run package and rules CSV
+  - generated C1w docs-only rewrite dry-run package and rules CSV
+  - generated C1x human-navigation review dry-run package and rules CSV
+  - generated C1y execution review and confirmed standalone rewrite is unsafe now
+  - generated C1z residual wrapper decision closeout
+  - started C1aa exact-file commit readiness audit
+  - updated README.md and docs/archive indexes
+  - updated .agent_board HANDOFF/RUN_STATE/TASK_QUEUE/CHECKPOINT surfaces
+not_performed:
+  - no reference rewrite executed
+  - no docs moved
+  - no wrappers created
+  - no validator behavior changed
+  - no push, tag, release, or deploy
+```
+
+## C1aa Exact-File Commit Readiness Audit
+
+```yaml
+phase: c1aa_exact_file_commit_readiness_audit
+status: completed_validated_pending_commit
+goal: confirm C1u-C1z changes are ready for exact-file staging and local commit
+completed:
+  - prepared audit target docs/archive/DOCS_ARCHIVE_C1AA_EXACT_FILE_COMMIT_READINESS_AUDIT.md
+  - confirmed C1u-C1z change scope is docs/archive evidence plus README/archive indexes and .agent_board sync
+  - confirmed exact-file staging can proceed after validation passes
+not_performed:
+  - no staging yet
+  - no commit yet
+  - no push, tag, release, or deploy
+```
+
 ## C1t Wrapper-Required 200 Route Planning
 
 ```yaml

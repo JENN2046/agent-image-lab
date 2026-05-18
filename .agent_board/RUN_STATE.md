@@ -1,5 +1,49 @@
 # RUN_STATE.md — Agent Image Lab
 
+## C1u-C1z Wrapper-Required 200 Machine Triage
+
+```yaml
+phase: c1u_c1aa_wrapper_required_200_machine_triage
+status: completed_validated_pending_commit
+mode: A4.8_safe_local_docs_only_scan_package_verifier_closeout
+goal: machine-bucket wrapper-required 200 and determine whether low-risk standalone rewrite can execute
+evidence:
+  link_graph: docs/archive/DOCS_ARCHIVE_C1U_WRAPPER_REQUIRED_LINK_GRAPH_DRY_RUN.md
+  link_graph_csv: docs/archive/DOCS_ARCHIVE_C1U_WRAPPER_REQUIRED_LINK_GRAPH.csv
+  c1v_package: docs/archive/DOCS_ARCHIVE_C1V_AGENT_BOARD_STALE_REFERENCE_CLEANUP_PACKAGE_DRY_RUN.md
+  c1w_package: docs/archive/DOCS_ARCHIVE_C1W_DOCS_ONLY_REWRITE_PACKAGE_DRY_RUN.md
+  c1x_package: docs/archive/DOCS_ARCHIVE_C1X_HUMAN_NAVIGATION_REVIEW_PACKAGE_DRY_RUN.md
+  c1y_review: docs/archive/DOCS_ARCHIVE_C1Y_EXACT_LOW_RISK_REWRITE_EXECUTION_REVIEW.md
+  c1z_closeout: docs/archive/DOCS_ARCHIVE_C1Z_RESIDUAL_WRAPPER_DECISION_CLOSEOUT.md
+scan:
+  wrapper_required_records: 200
+  archive_targets_existing: 0
+  standalone_rewrite_safe_rules: 0
+decision:
+  c1y_rewrite_executed: false
+  wrappers_created: false
+  files_moved: false
+  c1aa_commit_readiness_ready: true
+  push_allowed_now: false
+  recommended_next: c1ab_exact_file_staging_plus_local_commit
+  future_route: c1ad_paired_exact_move_plus_exact_rewrite_package_dry_run
+```
+
+## C1aa Exact-File Commit Readiness Audit
+
+```yaml
+phase: c1aa_exact_file_commit_readiness_audit
+status: completed_validated_pending_commit
+mode: A4.8_safe_local_commit_readiness_audit_only
+goal: confirm C1u-C1z changes are ready for exact-file staging and guarded local commit
+readiness_audit: docs/archive/DOCS_ARCHIVE_C1AA_EXACT_FILE_COMMIT_READINESS_AUDIT.md
+decision:
+  ready_for_exact_file_staging: true
+  ready_for_guarded_local_commit: true
+  push_allowed_now: false
+  recommended_next: c1ab_exact_file_staging_plus_local_commit
+```
+
 ## C1t Wrapper-Required 200 Route Planning
 
 ```yaml

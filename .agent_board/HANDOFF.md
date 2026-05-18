@@ -1,5 +1,46 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — C1u-C1z Wrapper-Required 200 Machine Triage
+
+```text
+Status: c1u_c1aa_wrapper_required_200_machine_triage completed_validated_pending_commit.
+Reason: Jenn approved machine-bucketed C1 wrapper-required 200 triage under A4.8 docs-only boundaries.
+Execution mode: A4.8 local docs-only scan/package/verifier closeout.
+Link graph: docs/archive/DOCS_ARCHIVE_C1U_WRAPPER_REQUIRED_LINK_GRAPH_DRY_RUN.md.
+Machine graph CSV: docs/archive/DOCS_ARCHIVE_C1U_WRAPPER_REQUIRED_LINK_GRAPH.csv.
+C1v package: docs/archive/DOCS_ARCHIVE_C1V_AGENT_BOARD_STALE_REFERENCE_CLEANUP_PACKAGE_DRY_RUN.md.
+C1w package: docs/archive/DOCS_ARCHIVE_C1W_DOCS_ONLY_REWRITE_PACKAGE_DRY_RUN.md.
+C1x package: docs/archive/DOCS_ARCHIVE_C1X_HUMAN_NAVIGATION_REVIEW_PACKAGE_DRY_RUN.md.
+C1y review: docs/archive/DOCS_ARCHIVE_C1Y_EXACT_LOW_RISK_REWRITE_EXECUTION_REVIEW.md.
+C1z closeout: docs/archive/DOCS_ARCHIVE_C1Z_RESIDUAL_WRAPPER_DECISION_CLOSEOUT.md.
+Wrapper-required records scanned: 200.
+Archive targets already existing: 0.
+Standalone rewrite-safe rules: 0.
+Rewrite executed: false.
+Files moved: false.
+Wrappers created: false.
+Validator behavior changed: false.
+Push/tag/release/deploy performed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Recommended next: C1aa exact-file commit readiness audit, then local commit, then push readiness; future route is C1ad paired exact move plus exact rewrite package dry-run.
+```
+
+---
+
+## Current Handoff Update — C1aa Exact-File Commit Readiness Audit
+
+```text
+Status: c1aa_exact_file_commit_readiness_audit completed_validated_pending_commit.
+Reason: C1u-C1z produced only docs/archive evidence, README/archive indexes, and .agent_board sync.
+Execution mode: A4.8 local commit-readiness audit.
+Readiness audit: docs/archive/DOCS_ARCHIVE_C1AA_EXACT_FILE_COMMIT_READINESS_AUDIT.md.
+Decision: exact-file staging and local commit may proceed after validation passes.
+Push/tag/release/deploy performed: false.
+Recommended next: C1ab exact-file staging plus local commit, then C1ac push readiness report.
+```
+
+---
+
 ## Current Handoff Update — C1t Wrapper-Required 200 Route Planning
 
 ```text

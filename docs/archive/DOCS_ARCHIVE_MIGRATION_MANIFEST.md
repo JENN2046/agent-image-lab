@@ -29,6 +29,17 @@ C1p post-rewrite reference map: `docs/archive/DOCS_ARCHIVE_C1P_POST_REWRITE_REFE
 C1q exact-move execution record: `docs/archive/DOCS_ARCHIVE_C1Q_EXACT_MOVE_EXECUTION_RECORD.md`
 C1r post-move reference map: `docs/archive/DOCS_ARCHIVE_C1R_POST_MOVE_REFERENCE_MAP.md`
 C1t wrapper-required 200 route planning: `docs/archive/DOCS_ARCHIVE_C1T_WRAPPER_REQUIRED_200_ROUTE_PLANNING.md`
+C1u wrapper-required link graph dry-run: `docs/archive/DOCS_ARCHIVE_C1U_WRAPPER_REQUIRED_LINK_GRAPH_DRY_RUN.md`
+C1u wrapper-required link graph CSV: `docs/archive/DOCS_ARCHIVE_C1U_WRAPPER_REQUIRED_LINK_GRAPH.csv`
+C1v agent board stale reference cleanup package dry-run: `docs/archive/DOCS_ARCHIVE_C1V_AGENT_BOARD_STALE_REFERENCE_CLEANUP_PACKAGE_DRY_RUN.md`
+C1v agent board stale reference cleanup rules CSV: `docs/archive/DOCS_ARCHIVE_C1V_AGENT_BOARD_STALE_REFERENCE_CLEANUP_RULES.csv`
+C1w docs-only rewrite package dry-run: `docs/archive/DOCS_ARCHIVE_C1W_DOCS_ONLY_REWRITE_PACKAGE_DRY_RUN.md`
+C1w docs-only rewrite rules CSV: `docs/archive/DOCS_ARCHIVE_C1W_DOCS_ONLY_REWRITE_RULES.csv`
+C1x human-navigation review package dry-run: `docs/archive/DOCS_ARCHIVE_C1X_HUMAN_NAVIGATION_REVIEW_PACKAGE_DRY_RUN.md`
+C1x human-navigation review rules CSV: `docs/archive/DOCS_ARCHIVE_C1X_HUMAN_NAVIGATION_REVIEW_RULES.csv`
+C1y exact low-risk rewrite execution review: `docs/archive/DOCS_ARCHIVE_C1Y_EXACT_LOW_RISK_REWRITE_EXECUTION_REVIEW.md`
+C1z residual wrapper decision closeout: `docs/archive/DOCS_ARCHIVE_C1Z_RESIDUAL_WRAPPER_DECISION_CLOSEOUT.md`
+C1aa exact-file commit readiness audit: `docs/archive/DOCS_ARCHIVE_C1AA_EXACT_FILE_COMMIT_READINESS_AUDIT.md`
 
 This manifest records proposed future archive targets for historical `docs/` records. It is not a file-move authorization.
 
