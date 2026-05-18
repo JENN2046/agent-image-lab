@@ -1,5 +1,326 @@
 # RUN_STATE.md — Agent Image Lab
 
+## C1l Exact-File Commit Readiness Audit
+
+```yaml
+phase: c1l_exact_file_commit_readiness_audit
+status: completed_validated
+mode: A4.8_safe_local_commit_readiness_audit_only
+goal: confirm C1h-C1k current uncommitted route-planning changes are ready for exact-file staging and guarded local commit
+readiness_audit: docs/archive/DOCS_ARCHIVE_C1L_EXACT_FILE_COMMIT_READINESS_AUDIT.md
+source_records:
+  - docs/archive/DOCS_ARCHIVE_C1H_REMAINING_ARCHIVE_ROUTE_DECISION_DRY_RUN.md
+  - docs/archive/DOCS_ARCHIVE_C1I_DOCS_ONLY_REFERENCE_LINK_GRAPH_DRY_RUN.md
+  - docs/archive/DOCS_ARCHIVE_C1J_DOCS_ONLY_REFERENCE_REWRITE_PACKAGE_DRY_RUN.md
+  - docs/archive/DOCS_ARCHIVE_C1K_DOCS_ONLY_REFERENCE_REWRITE_AUTHORIZATION_PACKAGE_DRY_RUN.md
+repo_reality:
+  branch: master
+  upstream: origin/master
+  ahead_behind_before_audit: 0/0
+  staged_files_before_audit: 0
+commit_readiness:
+  modified_tracked_files: 7
+  new_archive_report_files: 5
+  deleted_files: 0
+  moved_files: 0
+  exact_staging_paths: 12
+  exact_staging_preview_passed: true
+decision:
+  ready_for_exact_file_staging: true
+  ready_for_guarded_local_commit_after_authorization: true
+  staging_allowed_now: false
+  commit_allowed_now: false
+  push_allowed_now: false
+  recommended_next: c1m_exact_file_staging_guarded_local_commit_after_explicit_authorization
+changed_surfaces:
+  - docs/archive/DOCS_ARCHIVE_C1L_EXACT_FILE_COMMIT_READINESS_AUDIT.md
+  - docs/archive/README.md
+  - docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md
+  - README.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+blocked_actions:
+  docs_move: true
+  reference_rewrite: true
+  wrapper_creation: true
+  validator_behavior_change: true
+  staging: true
+  commit: true
+  push_tag_release_deploy: true
+  A5_execution: false
+  provider_contact: false
+  plugin_call: false
+  api_call: false
+  image_generation: false
+  DailyNote_write: false
+  VCP_memory_write: false
+  runtime_execution: false
+  real_manifest_read: false
+  real_vcpchat_read: false
+  real_vcptoolbox_read: false
+  dependency_change: false
+  secret_or_env_read: false
+validation_completed:
+  - git add -n -A -- 12 exact paths
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+  - powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: c1m_exact_file_staging_guarded_local_commit_after_explicit_authorization
+```
+
+## C1k Docs-Only Reference Rewrite Authorization Package Dry Run
+
+```yaml
+phase: c1k_docs_only_reference_rewrite_authorization_package_dry_run
+status: completed_validated
+mode: A4.8_safe_local_authorization_package_dry_run_only
+goal: prepare exact authorization package for future docs-only-reference rewrite execution
+authorization_package: docs/archive/DOCS_ARCHIVE_C1K_DOCS_ONLY_REFERENCE_REWRITE_AUTHORIZATION_PACKAGE_DRY_RUN.md
+source_rewrite_package: docs/archive/DOCS_ARCHIVE_C1J_DOCS_ONLY_REFERENCE_REWRITE_PACKAGE_DRY_RUN.md
+authorization_scope:
+  source_docs_allowlist: 29
+  replacement_rules: 65
+  expected_replacement_hits: 98
+  future_exact_approval_text_included: true
+  rewrite_execution_performed: false
+  docs_moved: false
+  wrappers_created: false
+  validator_behavior_changed: false
+decision:
+  package_ready_for_human_review: true
+  execution_allowed_now: false
+  staging_commit_push_allowed_now: false
+  recommended_next: human_review_c1k_package_or_explicit_rewrite_execution_authorization
+changed_surfaces:
+  - docs/archive/DOCS_ARCHIVE_C1K_DOCS_ONLY_REFERENCE_REWRITE_AUTHORIZATION_PACKAGE_DRY_RUN.md
+  - docs/archive/README.md
+  - docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md
+  - README.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+blocked_actions:
+  docs_move: true
+  reference_rewrite: true
+  wrapper_creation: true
+  validator_behavior_change: true
+  staging: true
+  commit: true
+  push_tag_release_deploy: true
+  A5_execution: false
+  provider_contact: false
+  plugin_call: false
+  api_call: false
+  image_generation: false
+  DailyNote_write: false
+  VCP_memory_write: false
+  runtime_execution: false
+  real_manifest_read: false
+  real_vcpchat_read: false
+  real_vcptoolbox_read: false
+  dependency_change: false
+  secret_or_env_read: false
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+  - powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: human_review_c1k_package_or_explicit_rewrite_execution_authorization
+```
+
+## C1j Docs-Only Reference Rewrite Package Dry Run
+
+```yaml
+phase: c1j_docs_only_reference_rewrite_package_dry_run
+status: completed_validated
+mode: A4.8_safe_local_rewrite_package_dry_run_only
+goal: define exact docs-only-reference rewrite package without executing rewrites
+rewrite_package_report: docs/archive/DOCS_ARCHIVE_C1J_DOCS_ONLY_REFERENCE_REWRITE_PACKAGE_DRY_RUN.md
+source_link_graph: docs/archive/DOCS_ARCHIVE_C1I_DOCS_ONLY_REFERENCE_LINK_GRAPH_DRY_RUN.md
+scan:
+  targets_requiring_rewrite_package: 65
+  zero_current_reference_drift_candidates_excluded: 2
+  source_docs_in_rewrite_allowlist: 29
+  exact_rewrite_edge_records: 96
+  exact_replacement_hits: 98
+  target_replacement_rules: 65
+decision:
+  rewrite_execution_allowed_now: false
+  physical_move_allowed_now: false
+  wrapper_creation_allowed_now: false
+  next_authorization_package_dry_run_ready: true
+  recommended_next: c1k_docs_only_reference_rewrite_authorization_package_dry_run
+changed_surfaces:
+  - docs/archive/DOCS_ARCHIVE_C1J_DOCS_ONLY_REFERENCE_REWRITE_PACKAGE_DRY_RUN.md
+  - docs/archive/README.md
+  - docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md
+  - README.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+blocked_actions:
+  docs_move: true
+  reference_rewrite: true
+  wrapper_creation: true
+  validator_behavior_change: true
+  staging: true
+  commit: true
+  push_tag_release_deploy: true
+  A5_execution: false
+  provider_contact: false
+  plugin_call: false
+  api_call: false
+  image_generation: false
+  DailyNote_write: false
+  VCP_memory_write: false
+  runtime_execution: false
+  real_manifest_read: false
+  real_vcpchat_read: false
+  real_vcptoolbox_read: false
+  dependency_change: false
+  secret_or_env_read: false
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+  - powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: c1k_docs_only_reference_rewrite_authorization_package_dry_run
+```
+
+## C1i Docs-Only Reference Link Graph Dry Run
+
+```yaml
+phase: c1i_docs_only_reference_link_graph_dry_run
+status: completed_validated
+mode: A4.8_safe_local_link_graph_audit_only
+goal: build current link graph for docs-only-reference archive candidates
+link_graph_report: docs/archive/DOCS_ARCHIVE_C1I_DOCS_ONLY_REFERENCE_LINK_GRAPH_DRY_RUN.md
+source_route_decision: docs/archive/DOCS_ARCHIVE_C1H_REMAINING_ARCHIVE_ROUTE_DECISION_DRY_RUN.md
+scan:
+  non_archive_docs_files_scanned: 788
+  docs_only_reference_targets_checked: 67
+  current_edge_records: 96
+  current_edge_hits: 98
+  targets_with_current_refs: 65
+  targets_with_zero_current_refs: 2
+  source_docs_with_outbound_refs: 29
+distribution:
+  numbered_legacy_targets: 1
+  phases_v6_targets: 1
+  phases_v7_targets: 65
+decision:
+  physical_move_allowed_now: false
+  reference_rewrite_allowed_now: false
+  wrapper_creation_allowed_now: false
+  next_rewrite_package_dry_run_targets: 65
+  future_exact_move_drift_candidates: 2
+  recommended_next: c1j_docs_only_reference_rewrite_package_dry_run
+changed_surfaces:
+  - docs/archive/DOCS_ARCHIVE_C1I_DOCS_ONLY_REFERENCE_LINK_GRAPH_DRY_RUN.md
+  - docs/archive/README.md
+  - docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md
+  - README.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+blocked_actions:
+  docs_move: true
+  reference_rewrite: true
+  wrapper_creation: true
+  validator_behavior_change: true
+  staging: true
+  commit: true
+  push_tag_release_deploy: true
+  A5_execution: false
+  provider_contact: false
+  plugin_call: false
+  api_call: false
+  image_generation: false
+  DailyNote_write: false
+  VCP_memory_write: false
+  runtime_execution: false
+  real_manifest_read: false
+  real_vcpchat_read: false
+  real_vcptoolbox_read: false
+  dependency_change: false
+  secret_or_env_read: false
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+  - powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: c1j_docs_only_reference_rewrite_package_dry_run
+```
+
+## C1h Remaining Archive Route Decision Dry Run
+
+```yaml
+phase: c1h_remaining_archive_route_decision_dry_run
+status: completed_validated
+mode: A4.8_safe_local_route_decision_only
+goal: decide the next safe archive route after C1f commit and push
+route_decision_report: docs/archive/DOCS_ARCHIVE_C1H_REMAINING_ARCHIVE_ROUTE_DECISION_DRY_RUN.md
+source_baseline: a51c5c5 docs: archive C1f docs migration records
+branch: master
+upstream: origin/master
+ahead_behind_before_edit: 0/0
+inventory:
+  c1e_rows_checked: 710
+  current_remaining_top_level_historical_docs: 690
+  c1f_moved_rows_now_missing_from_top_level: 20
+remaining_classification:
+  validator_blocked: 423
+  wrapper_required: 200
+  docs_only_reference: 67
+  future_exact_move_candidates: 0
+decision:
+  exact_move_safe_candidate_lane_closed: true
+  next_physical_move_package_allowed: false
+  recommended_next: c1i_docs_only_reference_link_graph_dry_run
+changed_surfaces:
+  - docs/archive/DOCS_ARCHIVE_C1H_REMAINING_ARCHIVE_ROUTE_DECISION_DRY_RUN.md
+  - docs/archive/README.md
+  - docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md
+  - README.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+blocked_actions:
+  docs_move: true
+  reference_rewrite: true
+  wrapper_creation: true
+  validator_behavior_change: true
+  staging: true
+  commit: true
+  push_tag_release_deploy: true
+  A5_execution: false
+  provider_contact: false
+  plugin_call: false
+  api_call: false
+  image_generation: false
+  DailyNote_write: false
+  VCP_memory_write: false
+  runtime_execution: false
+  real_manifest_read: false
+  real_vcpchat_read: false
+  real_vcptoolbox_read: false
+  dependency_change: false
+  secret_or_env_read: false
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+  - powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: c1i_docs_only_reference_link_graph_dry_run
+```
+
 ## C1g Exact-File Commit Readiness Audit
 
 ```yaml

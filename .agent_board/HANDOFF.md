@@ -1,5 +1,148 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — C1l Exact-File Commit Readiness Audit
+
+```text
+Status: c1l_exact_file_commit_readiness_audit completed validated.
+Reason: project owner requested C1l commit readiness audit for C1h-C1k current uncommitted route-planning changes.
+Execution mode: A4.8 local documentation and commit-readiness audit only.
+Readiness audit: docs/archive/DOCS_ARCHIVE_C1L_EXACT_FILE_COMMIT_READINESS_AUDIT.md.
+Branch/upstream: master / origin/master.
+Ahead/behind before audit: 0/0.
+Staged files before audit: 0.
+Modified tracked files: 7.
+New archive/report files: 5.
+Deleted files in this batch: 0.
+Moved files in this batch: 0.
+Exact staging paths identified: 12.
+Exact staging dry-run preview: passed with git add -n -A -- 12 exact paths.
+Decision: ready for future exact-file staging and guarded local commit only after Jenn explicitly authorizes the 12-path allowlist.
+Staging performed: false.
+Commit performed: false.
+Push/tag/release/deploy performed: false.
+Docs moved by this phase: false.
+References rewritten: false.
+Wrappers created: false.
+Validator behavior changed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Validated: git add -n -A -- 12 exact paths; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+Recommended next: C1m exact-file staging plus guarded local commit only after explicit authorization; push remains separately authorized.
+```
+
+---
+
+## Current Handoff Update — C1k Docs-Only Reference Rewrite Authorization Package Dry Run
+
+```text
+Status: c1k_docs_only_reference_rewrite_authorization_package_dry_run completed validated.
+Reason: project owner requested an authorization package dry-run for the docs-only-reference rewrite package.
+Execution mode: A4.8 local documentation and authorization-package dry-run only.
+Authorization package: docs/archive/DOCS_ARCHIVE_C1K_DOCS_ONLY_REFERENCE_REWRITE_AUTHORIZATION_PACKAGE_DRY_RUN.md.
+Source rewrite package: docs/archive/DOCS_ARCHIVE_C1J_DOCS_ONLY_REFERENCE_REWRITE_PACKAGE_DRY_RUN.md.
+Source docs allowlist: 29.
+Replacement rules: 65.
+Expected replacement hits: 98.
+Preflight commands documented: git status --short --branch; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+Postflight commands documented: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+Future exact approval text included: true.
+Rewrite executed by this phase: false.
+Docs moved by this phase: false.
+Wrappers created: false.
+Validator behavior changed: false.
+Staging/commit/push/tag/release/deploy performed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Validated: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+Recommended next: human review C1k package; execution remains blocked until explicit approval.
+```
+
+---
+
+## Current Handoff Update — C1j Docs-Only Reference Rewrite Package Dry Run
+
+```text
+Status: c1j_docs_only_reference_rewrite_package_dry_run completed validated.
+Reason: project owner requested C1j docs-only-reference rewrite package dry-run.
+Execution mode: A4.8 local documentation and rewrite-package dry-run only.
+Rewrite package report: docs/archive/DOCS_ARCHIVE_C1J_DOCS_ONLY_REFERENCE_REWRITE_PACKAGE_DRY_RUN.md.
+Source link graph: docs/archive/DOCS_ARCHIVE_C1I_DOCS_ONLY_REFERENCE_LINK_GRAPH_DRY_RUN.md.
+Targets requiring rewrite package: 65.
+Zero-current-reference drift candidates excluded: 2.
+Source docs in rewrite allowlist: 29.
+Exact rewrite edge records: 96.
+Exact replacement hits: 98.
+Target replacement rules: 65.
+Decision: future rewrite is bounded enough for authorization package dry-run, but no rewrite was executed.
+Recommended next: C1k docs-only-reference rewrite authorization package dry-run.
+Docs moved by this phase: false.
+References rewritten: false.
+Wrappers created: false.
+Validator behavior changed: false.
+Staging/commit/push/tag/release/deploy performed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Validated: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+```
+
+---
+
+## Current Handoff Update — C1i Docs-Only Reference Link Graph Dry Run
+
+```text
+Status: c1i_docs_only_reference_link_graph_dry_run completed validated.
+Reason: project owner requested C1i docs-only-reference link graph dry-run after C1h route decision.
+Execution mode: A4.8 local documentation and link-graph audit only.
+Link graph report: docs/archive/DOCS_ARCHIVE_C1I_DOCS_ONLY_REFERENCE_LINK_GRAPH_DRY_RUN.md.
+Source route decision: docs/archive/DOCS_ARCHIVE_C1H_REMAINING_ARCHIVE_ROUTE_DECISION_DRY_RUN.md.
+Docs-only-reference targets checked: 67.
+Non-archive docs files scanned: 788.
+Current edge records: 96.
+Current edge hits: 98.
+Targets with current refs: 65.
+Targets with zero current refs: 2.
+Source docs with outbound refs: 29.
+Top source docs: docs/vcp_integration/agent_image_lab_vcp_integration_full_execution_backlog_v2.md; docs/vcp_integration/agent_image_lab_vcp_integration_full_landing_plan_v1.md; docs/v7_50_vcp_read_only_bridge_contract.md.
+Decision: do not move; prepare C1j docs-only-reference rewrite package dry-run for 65 referenced targets and separately preflight the 2 zero-reference drift candidates.
+Docs moved by this phase: false.
+References rewritten: false.
+Wrappers created: false.
+Validator behavior changed: false.
+Staging/commit/push/tag/release/deploy performed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Validated: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+Recommended next: C1j docs-only-reference rewrite package dry-run.
+```
+
+---
+
+## Current Handoff Update — C1h Remaining Archive Route Decision Dry Run
+
+```text
+Status: c1h_remaining_archive_route_decision_dry_run completed validated.
+Reason: project owner requested the next Route C decision after C1f commit and push.
+Execution mode: A4.8 local documentation and route decision only.
+Route decision report: docs/archive/DOCS_ARCHIVE_C1H_REMAINING_ARCHIVE_ROUTE_DECISION_DRY_RUN.md.
+Source baseline: a51c5c5 docs: archive C1f docs migration records.
+Branch/upstream before C1h edit: master / origin/master.
+Ahead/behind before C1h edit: 0/0.
+C1e rows checked against current filesystem: 710.
+Current remaining top-level historical docs: 690.
+C1f moved rows now missing from top-level: 20.
+Remaining validator-blocked: 423.
+Remaining wrapper-required: 200.
+Remaining docs-only-reference: 67.
+Remaining future exact-move candidates: 0.
+Decision: close exact-move safe-candidate lane for the C1e batch; do not prepare another physical move package unless a new scan finds new zero-active-reference candidates.
+Recommended next: C1i docs-only-reference link graph dry-run.
+Docs moved by this phase: false.
+References rewritten: false.
+Wrappers created: false.
+Validator behavior changed: false.
+Staging/commit/push/tag/release/deploy performed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Validated: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+```
+
+---
+
 ## Current Handoff Update — C1g Exact-File Commit Readiness Audit
 
 ```text

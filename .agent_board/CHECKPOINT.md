@@ -1,5 +1,189 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## C1l Exact-File Commit Readiness Audit
+
+```yaml
+phase: c1l_exact_file_commit_readiness_audit
+status: completed_validated
+goal: confirm C1h-C1k current uncommitted route-planning changes are ready for exact-file staging and guarded local commit
+completed:
+  - read AGENTS.md, AGENTS.autopilot-overlay.md, and .agent_board resume surfaces
+  - checked git status --short --branch
+  - checked git diff --name-status and untracked file list
+  - confirmed branch master is 0/0 against origin/master
+  - confirmed staged files before audit count is 0
+  - confirmed 7 modified tracked files
+  - confirmed 5 new archive/report files including this C1l audit
+  - confirmed 0 deleted files and 0 moved files in this batch
+  - confirmed 12 exact staging paths
+  - confirmed git add -n -A -- 12 exact paths preview passed
+  - generated docs/archive/DOCS_ARCHIVE_C1L_EXACT_FILE_COMMIT_READINESS_AUDIT.md
+  - updated README.md and docs/archive indexes
+  - updated .agent_board HANDOFF/RUN_STATE/TASK_QUEUE/CHECKPOINT surfaces
+not_performed:
+  - no staging
+  - no commit
+  - no push, tag, release, or deploy
+  - no docs moved
+  - no files deleted
+  - no wrappers created
+  - no references rewritten
+  - no validator behavior changed
+  - no scripts split
+  - no runs processed
+  - no provider/plugin/API/DailyNote/VCP memory/runtime/real manifest/VCP source reads
+validation_completed:
+  - git add -n -A -- 12 exact paths
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+  - powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+## C1k Docs-Only Reference Rewrite Authorization Package Dry Run
+
+```yaml
+phase: c1k_docs_only_reference_rewrite_authorization_package_dry_run
+status: completed_validated
+goal: prepare exact authorization package for future docs-only-reference rewrite execution
+completed:
+  - read AGENTS.md, AGENTS.autopilot-overlay.md, and .agent_board resume surfaces
+  - read docs/archive/DOCS_ARCHIVE_C1J_DOCS_ONLY_REFERENCE_REWRITE_PACKAGE_DRY_RUN.md
+  - prepared authorization package with 29 source docs
+  - prepared authorization package with 65 exact replacement rules
+  - documented preflight and postflight validation commands
+  - documented stop conditions
+  - included future exact approval text
+  - generated docs/archive/DOCS_ARCHIVE_C1K_DOCS_ONLY_REFERENCE_REWRITE_AUTHORIZATION_PACKAGE_DRY_RUN.md
+  - updated README.md and docs/archive indexes
+  - updated .agent_board HANDOFF/RUN_STATE/TASK_QUEUE/CHECKPOINT surfaces
+not_performed:
+  - no docs moved
+  - no files deleted
+  - no wrappers created
+  - no references rewritten
+  - no validator behavior changed
+  - no scripts split
+  - no runs processed
+  - no provider/plugin/API/DailyNote/VCP memory/runtime/real manifest/VCP source reads
+  - no staging, commit, push, tag, release, or deploy
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+  - powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+## C1j Docs-Only Reference Rewrite Package Dry Run
+
+```yaml
+phase: c1j_docs_only_reference_rewrite_package_dry_run
+status: completed_validated
+goal: define exact docs-only-reference rewrite package without executing rewrites
+completed:
+  - read AGENTS.md, AGENTS.autopilot-overlay.md, and .agent_board resume surfaces
+  - read docs/archive/DOCS_ARCHIVE_C1I_DOCS_ONLY_REFERENCE_LINK_GRAPH_DRY_RUN.md
+  - regenerated current docs-only-reference rewrite edge map
+  - confirmed 65 targets require rewrite package
+  - confirmed 2 zero-current-reference drift candidates remain excluded
+  - confirmed 29 source docs in rewrite allowlist
+  - confirmed 96 exact rewrite edge records
+  - confirmed 98 exact replacement hits
+  - confirmed 65 target replacement rules
+  - generated docs/archive/DOCS_ARCHIVE_C1J_DOCS_ONLY_REFERENCE_REWRITE_PACKAGE_DRY_RUN.md
+  - updated README.md and docs/archive indexes
+  - updated .agent_board HANDOFF/RUN_STATE/TASK_QUEUE/CHECKPOINT surfaces
+not_performed:
+  - no docs moved
+  - no files deleted
+  - no wrappers created
+  - no references rewritten
+  - no validator behavior changed
+  - no scripts split
+  - no runs processed
+  - no provider/plugin/API/DailyNote/VCP memory/runtime/real manifest/VCP source reads
+  - no staging, commit, push, tag, release, or deploy
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+  - powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+## C1i Docs-Only Reference Link Graph Dry Run
+
+```yaml
+phase: c1i_docs_only_reference_link_graph_dry_run
+status: completed_validated
+goal: build current link graph for docs-only-reference archive candidates
+completed:
+  - read AGENTS.md, AGENTS.autopilot-overlay.md, and .agent_board resume surfaces
+  - read docs/archive/DOCS_ARCHIVE_C1E_REMAINING_DOCS_RECLASSIFICATION_REFRESH.md
+  - read docs/archive/DOCS_ARCHIVE_C1H_REMAINING_ARCHIVE_ROUTE_DECISION_DRY_RUN.md
+  - extracted 67 current docs-only-reference targets
+  - scanned 788 current non-archive docs files
+  - found 96 current edge records and 98 current edge hits
+  - confirmed 65 targets still have current refs
+  - confirmed 2 targets now have zero current refs
+  - confirmed 29 source docs with outbound refs
+  - generated docs/archive/DOCS_ARCHIVE_C1I_DOCS_ONLY_REFERENCE_LINK_GRAPH_DRY_RUN.md
+  - updated README.md and docs/archive indexes
+  - updated .agent_board HANDOFF/RUN_STATE/TASK_QUEUE/CHECKPOINT surfaces
+not_performed:
+  - no docs moved
+  - no files deleted
+  - no wrappers created
+  - no references rewritten
+  - no validator behavior changed
+  - no scripts split
+  - no runs processed
+  - no provider/plugin/API/DailyNote/VCP memory/runtime/real manifest/VCP source reads
+  - no staging, commit, push, tag, release, or deploy
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+  - powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+## C1h Remaining Archive Route Decision Dry Run
+
+```yaml
+phase: c1h_remaining_archive_route_decision_dry_run
+status: completed_validated
+goal: decide the next safe archive route after C1f commit and push
+completed:
+  - read AGENTS.md, AGENTS.autopilot-overlay.md, and .agent_board resume surfaces
+  - confirmed branch master is synced with origin/master at a51c5c5 before C1h edit
+  - read docs/archive/DOCS_ARCHIVE_C1E_REMAINING_DOCS_RECLASSIFICATION_REFRESH.md
+  - read docs/archive/DOCS_ARCHIVE_C1F_POST_MOVE_REFERENCE_MAP_DRY_RUN.md
+  - checked 710 C1e rows against the current filesystem
+  - confirmed 690 current remaining top-level historical docs
+  - confirmed 20 C1f moved rows are now absent from top-level docs
+  - confirmed remaining validator-blocked count 423
+  - confirmed remaining wrapper-required count 200
+  - confirmed remaining docs-only-reference count 67
+  - confirmed remaining future exact-move candidate count 0
+  - generated docs/archive/DOCS_ARCHIVE_C1H_REMAINING_ARCHIVE_ROUTE_DECISION_DRY_RUN.md
+  - updated README.md and docs/archive indexes
+  - updated .agent_board HANDOFF/RUN_STATE/TASK_QUEUE/CHECKPOINT surfaces
+not_performed:
+  - no docs moved
+  - no files deleted
+  - no wrappers created
+  - no references rewritten
+  - no validator behavior changed
+  - no scripts split
+  - no runs processed
+  - no provider/plugin/API/DailyNote/VCP memory/runtime/real manifest/VCP source reads
+  - no staging, commit, push, tag, release, or deploy
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+  - powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
 ## C1g Exact-File Commit Readiness Audit
 
 ```yaml

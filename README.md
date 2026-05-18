@@ -25,6 +25,11 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 - `docs/archive/DOCS_ARCHIVE_C1F_MOVE_EXECUTION_RECORD.md` 记录 C1f exact-file 物理移动执行结果；它移动了授权包中的 20 个文件，不授权后续 wrapper 或引用改写。
 - `docs/archive/DOCS_ARCHIVE_C1F_POST_MOVE_REFERENCE_MAP_DRY_RUN.md` 记录 C1f 移动后的旧路径 / 新路径引用影响；它只审查断链风险，不授权 wrapper 或引用改写。
 - `docs/archive/DOCS_ARCHIVE_C1G_EXACT_FILE_COMMIT_READINESS_AUDIT.md` 记录 C1 累积归档变更的 exact-file commit readiness 审计；它只确认 allowlist，不执行 staging/commit/push。
+- `docs/archive/DOCS_ARCHIVE_C1H_REMAINING_ARCHIVE_ROUTE_DECISION_DRY_RUN.md` 记录 C1f 后剩余 archive 路线裁决；它确认当前没有剩余 exact-move safe candidates，并建议转入 docs-only-reference link graph dry-run。
+- `docs/archive/DOCS_ARCHIVE_C1I_DOCS_ONLY_REFERENCE_LINK_GRAPH_DRY_RUN.md` 记录 67 个 docs-only-reference 的当前引用图；它确认 65 个仍需引用改写策略、2 个变成零引用候选。
+- `docs/archive/DOCS_ARCHIVE_C1J_DOCS_ONLY_REFERENCE_REWRITE_PACKAGE_DRY_RUN.md` 记录 docs-only-reference 改写包 dry-run；它锁定 29 个 source docs 和 65 条 target replacement rules，但不执行改写。
+- `docs/archive/DOCS_ARCHIVE_C1K_DOCS_ONLY_REFERENCE_REWRITE_AUTHORIZATION_PACKAGE_DRY_RUN.md` 记录 C1k 改写执行授权包 dry-run；它给出 29 个 source docs、65 条 replacement rules、预检/后检和未来精确批准语句，但不执行改写。
+- `docs/archive/DOCS_ARCHIVE_C1L_EXACT_FILE_COMMIT_READINESS_AUDIT.md` 记录 C1h-C1k 当前未提交改动的 exact-file commit readiness 审计；它确认 12 个精确路径可进入后续授权 staging/commit，但不执行 staging/commit/push。
 - `asset_archive/accepted_samples/<sample_id>/manifest.json + preview.webp` 是新的 accepted sample portable evidence capsule 目标路径。
 - 历史 `docs/v*` 阶段记录、旧 closeout、旧 authorization 草案是审计记录，不等于当前授权。
 - 未经明确 A5 授权，不要运行 provider/plugin/API/image generation/DailyNote/VCP memory/runtime/push/tag/release/deploy 相关入口。

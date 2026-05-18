@@ -38,6 +38,11 @@ The current authority remains:
 - `docs/archive/DOCS_ARCHIVE_C1F_MOVE_EXECUTION_RECORD.md` records the authorized C1f exact-file physical move of those 20 files.
 - `docs/archive/DOCS_ARCHIVE_C1F_POST_MOVE_REFERENCE_MAP_DRY_RUN.md` records the C1f post-move reference map and confirms operational old-path reference impact.
 - `docs/archive/DOCS_ARCHIVE_C1G_EXACT_FILE_COMMIT_READINESS_AUDIT.md` records the exact-file commit readiness audit for the accumulated C1 archive migration changes without staging or committing.
+- `docs/archive/DOCS_ARCHIVE_C1H_REMAINING_ARCHIVE_ROUTE_DECISION_DRY_RUN.md` records the post-C1f remaining archive route decision and confirms there are no remaining exact-move safe candidates in the C1e batch.
+- `docs/archive/DOCS_ARCHIVE_C1I_DOCS_ONLY_REFERENCE_LINK_GRAPH_DRY_RUN.md` records the current link graph for the 67 docs-only-reference records and separates 65 rewrite-planning targets from 2 zero-reference drift candidates.
+- `docs/archive/DOCS_ARCHIVE_C1J_DOCS_ONLY_REFERENCE_REWRITE_PACKAGE_DRY_RUN.md` records the docs-only-reference rewrite package dry-run with 29 source docs and 65 target replacement rules, without executing rewrites.
+- `docs/archive/DOCS_ARCHIVE_C1K_DOCS_ONLY_REFERENCE_REWRITE_AUTHORIZATION_PACKAGE_DRY_RUN.md` records the C1k rewrite execution authorization package dry-run, including source allowlist, replacement rules, preflight/postflight, and future exact approval text.
+- `docs/archive/DOCS_ARCHIVE_C1L_EXACT_FILE_COMMIT_READINESS_AUDIT.md` records the exact-file commit readiness audit for the current C1h-C1k route-planning changes without staging or committing.
 
 ## Non-Authorization
 

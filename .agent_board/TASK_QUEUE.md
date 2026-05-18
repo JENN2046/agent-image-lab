@@ -6,6 +6,111 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current C1l Exact-File Commit Readiness Audit
+
+```text
+Current archive task: c1l_exact_file_commit_readiness_audit.
+Status: completed validated.
+Purpose: confirm C1h-C1k current uncommitted route-planning changes are ready for exact-file staging and guarded local commit.
+Readiness audit: docs/archive/DOCS_ARCHIVE_C1L_EXACT_FILE_COMMIT_READINESS_AUDIT.md.
+Branch/upstream: master / origin/master.
+Ahead/behind: 0/0.
+Staged files before audit: 0.
+Modified tracked files: 7.
+New archive/report files: 5.
+Exact staging paths identified: 12.
+Exact staging dry-run preview: passed with git add -n -A -- 12 exact paths.
+Decision: exact-file staging and guarded local commit are ready only after explicit authorization naming the 12-path allowlist.
+Recommended next: C1m exact-file staging plus guarded local commit after explicit authorization; push remains separate.
+Not allowed now: moving docs, deleting files, creating wrappers, rewriting references, changing validator behavior, splitting scripts, processing runs, staging, committing, pushing, tag/release/deploy, A5, provider/plugin/API/image generation/DailyNote/VCP memory/runtime.
+Validation completed: git add -n -A -- 12 exact paths; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+```
+
+---
+
+## Current C1k Docs-Only Reference Rewrite Authorization Package Dry Run
+
+```text
+Current archive task: c1k_docs_only_reference_rewrite_authorization_package_dry_run.
+Status: completed validated.
+Purpose: prepare exact authorization package for future docs-only-reference rewrite execution.
+Authorization package: docs/archive/DOCS_ARCHIVE_C1K_DOCS_ONLY_REFERENCE_REWRITE_AUTHORIZATION_PACKAGE_DRY_RUN.md.
+Source rewrite package: docs/archive/DOCS_ARCHIVE_C1J_DOCS_ONLY_REFERENCE_REWRITE_PACKAGE_DRY_RUN.md.
+Source docs allowlist: 29.
+Replacement rules: 65.
+Expected replacement hits: 98.
+Future exact approval text included: true.
+Rewrite executed: false.
+Decision: package ready for human review; rewrite execution remains blocked until explicit approval.
+Recommended next: human review C1k package or explicit rewrite execution authorization.
+Not allowed now: moving docs, deleting files, creating wrappers, rewriting references, changing validator behavior, splitting scripts, processing runs, staging, committing, pushing, tag/release/deploy, A5, provider/plugin/API/image generation/DailyNote/VCP memory/runtime.
+Validation completed: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+```
+
+---
+
+## Current C1j Docs-Only Reference Rewrite Package Dry Run
+
+```text
+Current archive task: c1j_docs_only_reference_rewrite_package_dry_run.
+Status: completed validated.
+Purpose: define exact docs-only-reference rewrite package without executing rewrites.
+Rewrite package report: docs/archive/DOCS_ARCHIVE_C1J_DOCS_ONLY_REFERENCE_REWRITE_PACKAGE_DRY_RUN.md.
+Targets requiring rewrite package: 65.
+Zero-current-reference drift candidates excluded: 2.
+Source docs in rewrite allowlist: 29.
+Exact rewrite edge records/hits: 96/98.
+Target replacement rules: 65.
+Decision: future rewrite is bounded enough for authorization package dry-run, but no rewrite was executed.
+Recommended next: C1k docs-only-reference rewrite authorization package dry-run.
+Not allowed now: moving docs, deleting files, creating wrappers, rewriting references, changing validator behavior, splitting scripts, processing runs, staging, committing, pushing, tag/release/deploy, A5, provider/plugin/API/image generation/DailyNote/VCP memory/runtime.
+Validation completed: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+```
+
+---
+
+## Current C1i Docs-Only Reference Link Graph Dry Run
+
+```text
+Current archive task: c1i_docs_only_reference_link_graph_dry_run.
+Status: completed validated.
+Purpose: build current link graph for the 67 docs-only-reference records.
+Link graph report: docs/archive/DOCS_ARCHIVE_C1I_DOCS_ONLY_REFERENCE_LINK_GRAPH_DRY_RUN.md.
+Non-archive docs files scanned: 788.
+Docs-only-reference targets checked: 67.
+Current edge records/hits: 96/98.
+Targets with current refs: 65.
+Targets with zero current refs: 2.
+Source docs with outbound refs: 29.
+Decision: do not move; next prepare rewrite package dry-run for 65 referenced targets and separately preflight 2 zero-reference drift candidates.
+Recommended next: C1j docs-only-reference rewrite package dry-run.
+Not allowed now: moving docs, deleting files, creating wrappers, rewriting references, changing validator behavior, splitting scripts, processing runs, staging, committing, pushing, tag/release/deploy, A5, provider/plugin/API/image generation/DailyNote/VCP memory/runtime.
+Validation completed: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+```
+
+---
+
+## Current C1h Remaining Archive Route Decision Dry Run
+
+```text
+Current archive task: c1h_remaining_archive_route_decision_dry_run.
+Status: completed validated.
+Purpose: decide the next safe archive route after C1f commit and push.
+Route decision report: docs/archive/DOCS_ARCHIVE_C1H_REMAINING_ARCHIVE_ROUTE_DECISION_DRY_RUN.md.
+Source baseline: a51c5c5 docs: archive C1f docs migration records.
+Current remaining top-level historical docs: 690.
+Remaining validator-blocked: 423.
+Remaining wrapper-required: 200.
+Remaining docs-only-reference: 67.
+Remaining future exact-move candidates: 0.
+Decision: no more C1e exact-move packages; next work must be reference/wrapper/validator compatibility planning.
+Recommended next: C1i docs-only-reference link graph dry-run.
+Not allowed now: moving docs, deleting files, creating wrappers, rewriting references, changing validator behavior, splitting scripts, processing runs, staging, committing, pushing, tag/release/deploy, A5, provider/plugin/API/image generation/DailyNote/VCP memory/runtime.
+Validation completed: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+```
+
+---
+
 ## Current C1g Exact-File Commit Readiness Audit
 
 ```text
