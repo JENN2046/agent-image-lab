@@ -1,0 +1,141 @@
+{
+  "review_console_runtime_gap_trace_matrix_static_regression": {
+    "version": "v1",
+    "phase": "v14_207_review_console_runtime_gap_trace_matrix_static_regression",
+    "trace_status": "contract_ui_draft_trace_locked",
+    "source_contract_ref": "tests/schema_examples/v14_204_review_console_runtime_gap_dashboard_contract.example.json",
+    "source_static_panel_ref": "docs/v14_205_review_console_runtime_gap_static_ui_panel.md",
+    "source_draft_snapshot_ref": "tests/schema_examples/v14_206_review_console_runtime_gap_draft_output_snapshot_static_regression.example.json",
+    "surface_count": 3,
+    "runtime_gap_row_count": 7,
+    "local_capability_row_count": 3,
+    "a5_boundary_row_count": 4,
+    "dashboard_progress_basis": "validator_outputs_and_static_fixtures_only",
+    "runtime_claim_allowed": false,
+    "surfaces": [
+      {
+        "surface_id": "contract",
+        "source_ref": "tests/schema_examples/v14_204_review_console_runtime_gap_dashboard_contract.example.json",
+        "status": "static_runtime_gap_contract_ready",
+        "row_count": 7,
+        "runtime_claim_allowed": false,
+        "vcp_runtime_integration_proven": false
+      },
+      {
+        "surface_id": "static_ui_seed",
+        "source_ref": "review_console/static_prototype/mock_data.js#review_console_runtime_gap_dashboard_contract_seed",
+        "status": "wired_static_only",
+        "row_count": 7,
+        "runtime_claim_allowed": false,
+        "vcp_runtime_integration_proven": false
+      },
+      {
+        "surface_id": "draft_output_snapshot",
+        "source_ref": "tests/schema_examples/v14_206_review_console_runtime_gap_draft_output_snapshot_static_regression.example.json#review_console_runtime_gap_dashboard_state",
+        "status": "golden_static_snapshot",
+        "row_count": 7,
+        "runtime_claim_allowed": false,
+        "vcp_runtime_integration_proven": false
+      }
+    ],
+    "row_trace": [
+      {
+        "row_id": "artifact_recoverability",
+        "row_kind": "local_capability",
+        "present_in_contract": true,
+        "present_in_static_ui_seed": true,
+        "present_in_draft_snapshot": true,
+        "requires_a5_authorization_before_execution": false,
+        "runtime_integration_claim_allowed": false
+      },
+      {
+        "row_id": "accepted_samples_gap",
+        "row_kind": "local_capability",
+        "present_in_contract": true,
+        "present_in_static_ui_seed": true,
+        "present_in_draft_snapshot": true,
+        "requires_a5_authorization_before_execution": false,
+        "runtime_integration_claim_allowed": false
+      },
+      {
+        "row_id": "authorization_handoff_cards",
+        "row_kind": "local_capability",
+        "present_in_contract": true,
+        "present_in_static_ui_seed": true,
+        "present_in_draft_snapshot": true,
+        "requires_a5_authorization_before_execution": false,
+        "runtime_integration_claim_allowed": false
+      },
+      {
+        "row_id": "manifest_read",
+        "row_kind": "a5_boundary",
+        "present_in_contract": true,
+        "present_in_static_ui_seed": true,
+        "present_in_draft_snapshot": true,
+        "requires_a5_authorization_before_execution": true,
+        "runtime_integration_claim_allowed": false
+      },
+      {
+        "row_id": "vcpchat_vcptoolbox_runtime",
+        "row_kind": "a5_boundary",
+        "present_in_contract": true,
+        "present_in_static_ui_seed": true,
+        "present_in_draft_snapshot": true,
+        "requires_a5_authorization_before_execution": true,
+        "runtime_integration_claim_allowed": false
+      },
+      {
+        "row_id": "daily_note_vcp_memory",
+        "row_kind": "a5_boundary",
+        "present_in_contract": true,
+        "present_in_static_ui_seed": true,
+        "present_in_draft_snapshot": true,
+        "requires_a5_authorization_before_execution": true,
+        "runtime_integration_claim_allowed": false
+      },
+      {
+        "row_id": "production_candidate_archive",
+        "row_kind": "a5_boundary",
+        "present_in_contract": true,
+        "present_in_static_ui_seed": true,
+        "present_in_draft_snapshot": true,
+        "requires_a5_authorization_before_execution": true,
+        "runtime_integration_claim_allowed": false
+      }
+    ],
+    "guard": {
+      "static_trace_matrix_only": true,
+      "fetch_performed": false,
+      "file_write_performed": false,
+      "authorization_execution_performed": false,
+      "package_execution_performed": false,
+      "accepted_samples_write_performed": false,
+      "manifest_read_performed": false,
+      "durable_archive_copy_performed": false,
+      "production_candidate_write_performed": false,
+      "failure_samples_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_expected": {
+      "missing_surface_fails": true,
+      "missing_row_trace_fails": true,
+      "row_missing_from_static_ui_seed_fails": true,
+      "row_missing_from_draft_snapshot_fails": true,
+      "docs_progress_basis_fails": true,
+      "runtime_claim_fails": true,
+      "package_execution_flag_fails": true,
+      "memory_write_flag_fails": true
+    }
+  }
+}

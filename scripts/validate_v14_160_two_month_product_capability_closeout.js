@@ -50,9 +50,9 @@ function evaluateCloseout(input) {
     input.registrySampleCount >= 3 &&
     input.registryCategoryCount >= 3 &&
     input.localArtifactSampleCount >= 4 &&
-    input.fullRecoverableSampleCount === 1 &&
-    input.hardAcceptanceThreeFullSamplesMet === false &&
-    input.remainingFullRecoverableSampleGap === 2;
+    input.fullRecoverableSampleCount === 3 &&
+    input.hardAcceptanceThreeFullSamplesMet === true &&
+    input.remainingFullRecoverableSampleGap === 0;
   const goalNotOverclaimed = input.twoMonthGoalFullyComplete === false && input.updateGoalCalled === false;
   const skippedA5Ok = input.a5ExecutionSlotsSkippedWithoutAuthorization === true && input.skippedA5MarkedComplete === false;
   const noRuntimeClaim =
@@ -110,12 +110,12 @@ for (const token of [
   "two_month_product_capability_closeout:",
   "execution_mode: local_closeout_only",
   "local_lifecycle_chain_completed_validated: true",
-  "registry_sample_count: 6",
+  "registry_sample_count: 8",
   "registry_category_count: 3",
-  "local_artifact_sample_count: 4",
-  "full_recoverable_sample_count: 1",
-  "hard_acceptance_three_full_samples_met: false",
-  "remaining_full_recoverable_sample_gap: 2",
+  "local_artifact_sample_count: 6",
+  "full_recoverable_sample_count: 3",
+  "hard_acceptance_three_full_samples_met: true",
+  "remaining_full_recoverable_sample_gap: 0",
   "two_month_goal_fully_complete: false",
   "vcp_runtime_integration_proven: false",
 ]) {
@@ -154,12 +154,12 @@ const observed = {
   remainingFullRecoverableSampleGap: Math.max(0, 3 - (v14_142?.complete_recoverable_sample_count || 0)),
 };
 
-addResult("observed_registry_sample_count_is_6", observed.registrySampleCount === 6, `${observed.registrySampleCount}`);
+addResult("observed_registry_sample_count_is_8", observed.registrySampleCount === 8, `${observed.registrySampleCount}`);
 addResult("observed_registry_category_count_is_3", observed.registryCategoryCount === 3, `${observed.registryCategoryCount}`);
-addResult("observed_local_artifact_sample_count_is_4", observed.localArtifactSampleCount === 4, `${observed.localArtifactSampleCount}`);
-addResult("observed_full_recoverable_sample_count_is_1", observed.fullRecoverableSampleCount === 1, `${observed.fullRecoverableSampleCount}`);
-addResult("observed_three_sample_hard_acceptance_not_met", observed.hardAcceptanceThreeFullSamplesMet === false);
-addResult("observed_remaining_full_sample_gap_is_2", observed.remainingFullRecoverableSampleGap === 2, `${observed.remainingFullRecoverableSampleGap}`);
+addResult("observed_local_artifact_sample_count_is_6", observed.localArtifactSampleCount === 6, `${observed.localArtifactSampleCount}`);
+addResult("observed_full_recoverable_sample_count_is_3", observed.fullRecoverableSampleCount === 3, `${observed.fullRecoverableSampleCount}`);
+addResult("observed_three_sample_hard_acceptance_met", observed.hardAcceptanceThreeFullSamplesMet === true);
+addResult("observed_remaining_full_sample_gap_is_0", observed.remainingFullRecoverableSampleGap === 0, `${observed.remainingFullRecoverableSampleGap}`);
 
 const baseInput = {
   localLifecycleChainCompletedValidated: true,
@@ -194,13 +194,13 @@ const baseInput = {
 const evaluation = evaluateCloseout(baseInput);
 addResult("two_month_product_capability_closeout_evaluation_passes", evaluation.passed, JSON.stringify(evaluation));
 
-const threeSamplesOverclaimed = evaluateCloseout({ ...baseInput, hardAcceptanceThreeFullSamplesMet: true, remainingFullRecoverableSampleGap: 0, twoMonthGoalFullyComplete: true });
+const localRecoverabilityOverclaimed = evaluateCloseout({ ...baseInput, twoMonthGoalFullyComplete: true });
 const skippedA5Complete = evaluateCloseout({ ...baseInput, skippedA5MarkedComplete: true });
 const runtimeClaim = evaluateCloseout({ ...baseInput, artifactRecoverabilityIsNotVcpRuntimeIntegration: false, vcpRuntimeIntegrationProven: true });
-const dashboardTokenProgress = evaluateCloseout({ ...baseInput, fullRecoverableSampleCount: 3, hardAcceptanceThreeFullSamplesMet: true, remainingFullRecoverableSampleGap: 0 });
+const dashboardTokenProgress = evaluateCloseout({ ...baseInput, fullRecoverableSampleCount: 4, hardAcceptanceThreeFullSamplesMet: true, remainingFullRecoverableSampleGap: 0 });
 const externalAction = evaluateCloseout({ ...baseInput, pluginCallPerformed: true });
 
-addResult("negative_case_three_sample_gap_must_block_goal_completion", threeSamplesOverclaimed.passed === false && threeSamplesOverclaimed.goalNotOverclaimed === false);
+addResult("negative_case_local_recoverability_must_not_complete_two_month_goal", localRecoverabilityOverclaimed.passed === false && localRecoverabilityOverclaimed.goalNotOverclaimed === false);
 addResult("negative_case_skipped_a5_marked_complete_blocks_closeout", skippedA5Complete.passed === false && skippedA5Complete.skippedA5Ok === false);
 addResult("negative_case_vcp_runtime_claim_blocks_closeout", runtimeClaim.passed === false && runtimeClaim.noRuntimeClaim === false);
 addResult("negative_case_dashboard_token_progress_blocks_closeout", dashboardTokenProgress.passed === false && dashboardTokenProgress.matrixCountsOk === false);
@@ -210,12 +210,12 @@ for (const token of [
   "phase: v14_160_two_month_product_capability_closeout",
   "two_month_product_capability_closeout_created: true",
   "local_lifecycle_chain_completed_validated: true",
-  "full_recoverable_sample_count: 1",
-  "hard_acceptance_three_full_samples_met: false",
-  "remaining_full_recoverable_sample_gap: 2",
+  "full_recoverable_sample_count: 3",
+  "hard_acceptance_three_full_samples_met: true",
+  "remaining_full_recoverable_sample_gap: 0",
   "two_month_goal_fully_complete: false",
   "product_capability_progress:",
-  "approximate_progress_percent: 72",
+  "approximate_progress_percent: 78",
   "governance_capability_progress:",
   "approximate_progress_percent: 90",
   "real_vcp_integration_progress:",
@@ -240,7 +240,6 @@ for (const token of [
 }
 
 forbidPattern("phase_surfaces", phaseSurfaces, /authorization_granted_by_this_record:\s+true/i);
-forbidPattern("phase_surfaces", phaseSurfaces, /hard_acceptance_three_full_samples_met:\s+true/i);
 forbidPattern("phase_surfaces", phaseSurfaces, /two_month_goal_fully_complete:\s+true/i);
 forbidPattern("phase_surfaces", phaseSurfaces, /update_goal_called:\s+true/i);
 forbidPattern("phase_surfaces", phaseSurfaces, /provider_contact_performed:\s+true/i);
@@ -275,13 +274,13 @@ const summary = {
   full_recoverable_sample_count: observed.fullRecoverableSampleCount,
   hard_acceptance_three_full_samples_met: observed.hardAcceptanceThreeFullSamplesMet,
   remaining_full_recoverable_sample_gap: observed.remainingFullRecoverableSampleGap,
-  product_capability_progress_percent: 72,
+  product_capability_progress_percent: 78,
   governance_capability_progress_percent: 90,
   real_vcp_integration_progress_percent: 38,
   a5_execution_slots_skipped_without_authorization: true,
   two_month_goal_fully_complete: false,
   goal_status: "active_not_complete",
-  negative_case_three_sample_gap_must_block_goal_completion: threeSamplesOverclaimed.passed === false && threeSamplesOverclaimed.goalNotOverclaimed === false,
+  negative_case_local_recoverability_must_not_complete_two_month_goal: localRecoverabilityOverclaimed.passed === false && localRecoverabilityOverclaimed.goalNotOverclaimed === false,
   negative_case_skipped_a5_marked_complete_blocks_closeout: skippedA5Complete.passed === false && skippedA5Complete.skippedA5Ok === false,
   negative_case_vcp_runtime_claim_blocks_closeout: runtimeClaim.passed === false && runtimeClaim.noRuntimeClaim === false,
   negative_case_dashboard_token_progress_blocks_closeout: dashboardTokenProgress.passed === false && dashboardTokenProgress.matrixCountsOk === false,

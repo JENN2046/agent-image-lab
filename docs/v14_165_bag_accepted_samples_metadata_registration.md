@@ -1,0 +1,94 @@
+# v14.165 Bag Accepted Samples Metadata Registration
+
+## Scope
+
+```text
+phase: v14_165_bag_accepted_samples_metadata_registration
+base_contract: AGENTS.md
+mode: A4.8
+intent: local_implementation
+risk_level: R2
+execution_mode: accepted_samples_metadata_registry_write_only
+source_preflight_ref: docs/v14_164_bag_accepted_samples_metadata_registration_preflight.md
+source_candidate_id: v14_161_fashion_lifestyle_woven_crossbody_bag_candidate_001
+source_import_record_ref: tests/schema_examples/v14_161_fashion_lifestyle_woven_crossbody_bag_import_record.json
+source_review_record_ref: docs/v14_161_codex_session_generated_candidate_readiness.md
+sample_id: accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001
+registry_ref: accepted_samples/accepted_sample_registry.yaml
+category_index_ref: accepted_samples/categories/fashion_lifestyle_still_life.yaml
+metadata_registry_write_performed: true
+category_index_write_performed: true
+image_file_copy_performed: false
+runs_source_image_modified: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+```
+
+## Registered Sample
+
+```text
+sample_id: accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001
+category: fashion_lifestyle_still_life
+provider_type: codex_session_image
+plugin_id: null
+model: codex_session_builtin_image_generation
+prompt_package_ref: session_prompt_inline:v14_161_fashion_lifestyle_woven_crossbody_bag_candidate_001
+image_path: runs/real_generation/v14_161_codex_session_two_more_recoverable_samples_generation_trial/codex_session_v14_161_fashion_lifestyle_woven_crossbody_bag_candidate_001.png
+image_sha256: 3422671f95e9b218829966ae46f4b284ae619875e080c473a295cf9e65432ba3
+image_dimensions: 1254x1254
+verified_mime: image/png
+human_approval_status: approved
+approved_by: Jenn
+approval_statement: 第二张可以接受通过
+recoverability_status: workspace_local_verified
+artifact_locator_scope: project_relative_runs
+verification_mode: local_file_hash
+portable_after_clone: false
+image_files_committed_to_git: false
+write_to_memory_allowed: false
+daily_note_write_allowed: false
+```
+
+## Boundary Result
+
+This phase performs only accepted_samples metadata registration. It does not
+copy image files, does not modify `runs/real_generation/`, does not promote a
+production candidate, does not write DailyNote or VCP memory, and does not prove
+real VCP runtime integration.
+
+## Negative Case Coverage
+
+```text
+negative_case_registry_sample_missing_fails: true
+negative_case_category_index_missing_fails: true
+negative_case_hash_mismatch_fails: true
+negative_case_dimensions_mismatch_fails: true
+negative_case_mime_mismatch_fails: true
+negative_case_human_approval_missing_fails: true
+negative_case_image_file_committed_flag_fails: true
+negative_case_absolute_artifact_locator_fails: true
+negative_case_production_candidate_flag_fails: true
+negative_case_vcp_runtime_claim_blocks_registration: true
+```
+
+## Next Gate
+
+```text
+recommended_next: obtain_or_generate_one_more_human_approved_recoverable_sample_for_third_full_sample
+automatic_next_generation_recommended: false
+third_full_recoverable_sample_still_required: true
+accepted_samples_total_full_codex_recoverable_count_after_this_phase: 2
+artifact_recoverability_is_not_vcp_runtime_integration: true
+```

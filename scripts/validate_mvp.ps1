@@ -226,6 +226,25 @@ $requiredFiles = @(
   'scripts/validate_v14_162_lamp_prompt_revision_after_v14_161_review.js',
   'scripts/validate_v14_163_lamp_v2_generated_candidate_readiness.js',
   'scripts/validate_v14_164_bag_accepted_samples_metadata_registration_preflight.js',
+  'scripts/validate_v14_165_bag_accepted_samples_metadata_registration.js',
+  'scripts/validate_v14_166_lamp_v3_generated_candidate_readiness.js',
+  'scripts/validate_v14_167_lamp_v3_accepted_samples_registration_blocker_preflight.js',
+  'scripts/validate_v14_168_three_sample_dashboard_evidence_alignment.js',
+  'scripts/validate_v14_214_lamp_third_sample_human_approval_intake_validator.js',
+  'scripts/validate_v14_215_third_sample_accepted_samples_post_approval_gate_alignment.js',
+  'scripts/validate_v14_216_review_console_post_approval_gate_static_panel.js',
+  'scripts/validate_v14_217_review_console_post_approval_gate_snapshot_static_regression.js',
+  'scripts/validate_v14_218_review_console_human_approval_blocker_queue_static_panel.js',
+  'scripts/validate_v14_219_review_console_human_approval_blocker_queue_snapshot_static_regression.js',
+  'scripts/validate_v14_220_agent_board_current_recommendation_alignment.js',
+  'scripts/validate_v14_221_review_console_recoverability_matrix_static_workbench.js',
+  'scripts/validate_v14_222_review_console_recoverability_matrix_snapshot_static_regression.js',
+  'scripts/validate_v14_223_review_console_schema_binding_coverage_static_panel.js',
+  'scripts/validate_v14_224_review_console_schema_binding_coverage_snapshot_static_regression.js',
+  'scripts/validate_v14_225_review_console_six_month_goal_gap_static_panel.js',
+  'scripts/validate_v14_226_review_console_six_month_goal_gap_snapshot_static_regression.js',
+  'scripts/validate_v14_227_review_console_failure_state_static_workbench.js',
+  'scripts/validate_v14_228_review_console_failure_state_snapshot_static_regression.js',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -415,6 +434,16 @@ $requiredFiles = @(
   'tests/schema_examples/v14_163_lamp_v2_generated_candidate_import_record.json',
   'docs/v14_164_bag_accepted_samples_metadata_registration_preflight.md',
   'tests/schema_examples/v14_164_bag_accepted_samples_metadata_registration_preflight.example.json',
+  'docs/v14_165_bag_accepted_samples_metadata_registration.md',
+  'tests/schema_examples/v14_165_bag_accepted_samples_metadata_registration.example.json',
+  'tests/schema_examples/v14_165_bag_accepted_samples_metadata_registration_negative_missing_registry_sample.example.json',
+  'docs/v14_166_lamp_v3_generated_candidate_readiness.md',
+  'tests/schema_examples/v14_166_lamp_v3_generated_candidate_readiness.example.json',
+  'tests/schema_examples/v14_166_lamp_v3_generated_candidate_import_record.json',
+  'docs/v14_167_lamp_v3_accepted_samples_registration_blocker_preflight.md',
+  'tests/schema_examples/v14_167_lamp_v3_accepted_samples_registration_blocker_preflight.example.json',
+  'docs/v14_168_three_sample_dashboard_evidence_alignment.md',
+  'tests/schema_examples/v14_168_three_sample_dashboard_evidence_alignment.example.json',
   'docs/00_project_roadmap.md',
   'docs/20_real_loop_completion_plan.md',
   'docs/30_release_readiness_report.md',
@@ -8979,8 +9008,8 @@ process.exit(child.status || 0);
     if ($multiAcceptedSampleMatrix.multi_sample_matrix_created -ne $true -or $multiAcceptedSampleMatrix.matrix_row_count -lt 3 -or $multiAcceptedSampleMatrix.category_count -lt 3) {
       Add-Failure "v14.142 must create a multi-sample, multi-category matrix"
     }
-    if ($multiAcceptedSampleMatrix.complete_recoverable_sample_count -ne 1 -or $multiAcceptedSampleMatrix.full_recoverability_count_is_currently_one -ne $true) {
-      Add-Failure "v14.142 must preserve the current one fully recoverable sample truth"
+    if ($multiAcceptedSampleMatrix.complete_recoverable_sample_count -ne 3 -or $multiAcceptedSampleMatrix.full_recoverability_count_is_currently_three -ne $true) {
+      Add-Failure "v14.142 must preserve the current three fully recoverable samples truth"
     }
     if ($multiAcceptedSampleMatrix.legacy_partial_artifact_sample_count -lt 3 -or $multiAcceptedSampleMatrix.local_artifact_sample_count -lt 4) {
       Add-Failure "v14.142 must detect legacy local artifact rows without promoting them"
@@ -9469,13 +9498,13 @@ process.exit(child.status || 0);
     if ($twoMonthCloseout.two_month_product_capability_closeout_created -ne $true -or $twoMonthCloseout.local_lifecycle_chain_completed_validated -ne $true -or $twoMonthCloseout.audited_local_stage_count -ne 13) {
       Add-Failure "v14.160 must close out the local lifecycle chain"
     }
-    if ($twoMonthCloseout.registry_sample_count -ne 6 -or $twoMonthCloseout.registry_category_count -ne 3 -or $twoMonthCloseout.local_artifact_sample_count -ne 4 -or $twoMonthCloseout.full_recoverable_sample_count -ne 1) {
+    if ($twoMonthCloseout.registry_sample_count -ne 8 -or $twoMonthCloseout.registry_category_count -ne 3 -or $twoMonthCloseout.local_artifact_sample_count -ne 6 -or $twoMonthCloseout.full_recoverable_sample_count -ne 3) {
       Add-Failure "v14.160 must reflect observed accepted sample matrix counts"
     }
-    if ($twoMonthCloseout.hard_acceptance_three_full_samples_met -ne $false -or $twoMonthCloseout.remaining_full_recoverable_sample_gap -ne 2 -or $twoMonthCloseout.two_month_goal_fully_complete -ne $false -or $twoMonthCloseout.goal_status -ne 'active_not_complete') {
-      Add-Failure "v14.160 must not mark the two-month goal complete while only one full recoverable sample exists"
+    if ($twoMonthCloseout.hard_acceptance_three_full_samples_met -ne $true -or $twoMonthCloseout.remaining_full_recoverable_sample_gap -ne 0 -or $twoMonthCloseout.two_month_goal_fully_complete -ne $false -or $twoMonthCloseout.goal_status -ne 'active_not_complete') {
+      Add-Failure "v14.160 must meet the local three-sample recoverability baseline without marking the two-month goal complete"
     }
-    if ($twoMonthCloseout.negative_case_three_sample_gap_must_block_goal_completion -ne $true -or $twoMonthCloseout.negative_case_skipped_a5_marked_complete_blocks_closeout -ne $true -or $twoMonthCloseout.negative_case_vcp_runtime_claim_blocks_closeout -ne $true -or $twoMonthCloseout.negative_case_dashboard_token_progress_blocks_closeout -ne $true -or $twoMonthCloseout.negative_case_external_action_flag_blocks_closeout -ne $true) {
+    if ($twoMonthCloseout.negative_case_local_recoverability_must_not_complete_two_month_goal -ne $true -or $twoMonthCloseout.negative_case_skipped_a5_marked_complete_blocks_closeout -ne $true -or $twoMonthCloseout.negative_case_vcp_runtime_claim_blocks_closeout -ne $true -or $twoMonthCloseout.negative_case_dashboard_token_progress_blocks_closeout -ne $true -or $twoMonthCloseout.negative_case_external_action_flag_blocks_closeout -ne $true) {
       Add-Failure "v14.160 must fail closeout negative cases"
     }
     if ($twoMonthCloseout.vcp_runtime_integration_proven -ne $false -or $twoMonthCloseout.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
@@ -9613,6 +9642,1959 @@ process.exit(child.status || 0);
     }
     if ($bagAcceptedSamplesPreflight.vcp_runtime_integration_proven -ne $false -or $bagAcceptedSamplesPreflight.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
       Add-Failure "v14.164 must not claim VCP runtime integration"
+    }
+  }
+
+  $bagAcceptedSamplesRegistrationOutput = & node (Join-Path $Root 'scripts/validate_v14_165_bag_accepted_samples_metadata_registration.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "bag accepted_samples metadata registration validation exited with failure"
+  } else {
+    $bagAcceptedSamplesRegistration = ($bagAcceptedSamplesRegistrationOutput -join "`n") | ConvertFrom-Json
+    if ($bagAcceptedSamplesRegistration.passed -ne $true) {
+      Add-Failure "bag accepted_samples metadata registration validation must pass"
+    }
+    if ($bagAcceptedSamplesRegistration.registry_metadata_write_performed -ne $true -or $bagAcceptedSamplesRegistration.category_index_write_performed -ne $true) {
+      Add-Failure "v14.165 must perform accepted_samples registry/category metadata writes"
+    }
+    if ($bagAcceptedSamplesRegistration.image_file_copy_performed -ne $false -or $bagAcceptedSamplesRegistration.runs_source_image_modified -ne $false) {
+      Add-Failure "v14.165 must not copy image files or modify runs source images"
+    }
+    if ($bagAcceptedSamplesRegistration.accepted_sample_full_recoverability_count_after_this_phase -ne 2 -or $bagAcceptedSamplesRegistration.third_full_recoverable_sample_still_required -ne $true) {
+      Add-Failure "v14.165 must not overclaim the three-sample hard acceptance target"
+    }
+    if ($bagAcceptedSamplesRegistration.negative_case_registry_sample_missing_fails -ne $true -or $bagAcceptedSamplesRegistration.negative_case_category_index_missing_fails -ne $true -or $bagAcceptedSamplesRegistration.negative_case_hash_mismatch_fails -ne $true -or $bagAcceptedSamplesRegistration.negative_case_dimensions_mismatch_fails -ne $true -or $bagAcceptedSamplesRegistration.negative_case_mime_mismatch_fails -ne $true -or $bagAcceptedSamplesRegistration.negative_case_human_approval_missing_fails -ne $true -or $bagAcceptedSamplesRegistration.negative_case_image_file_committed_flag_fails -ne $true -or $bagAcceptedSamplesRegistration.negative_case_absolute_artifact_locator_fails -ne $true -or $bagAcceptedSamplesRegistration.negative_case_production_candidate_flag_fails -ne $true -or $bagAcceptedSamplesRegistration.negative_case_vcp_runtime_claim_blocks_registration -ne $true) {
+      Add-Failure "v14.165 must fail accepted_samples metadata registration negative cases"
+    }
+    if ($bagAcceptedSamplesRegistration.failure_samples_write_performed -ne $false -or $bagAcceptedSamplesRegistration.production_candidate_write_performed -ne $false -or $bagAcceptedSamplesRegistration.daily_note_write_performed -ne $false -or $bagAcceptedSamplesRegistration.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.165 must not write failure/production/memory outputs"
+    }
+    if ($bagAcceptedSamplesRegistration.provider_contact_performed -ne $false -or $bagAcceptedSamplesRegistration.plugin_call_performed -ne $false -or $bagAcceptedSamplesRegistration.api_call_performed -ne $false -or $bagAcceptedSamplesRegistration.mcp_runtime_performed -ne $false -or $bagAcceptedSamplesRegistration.real_manifest_read_performed -ne $false -or $bagAcceptedSamplesRegistration.real_vcpchat_read_performed -ne $false -or $bagAcceptedSamplesRegistration.real_vcptoolbox_read_performed -ne $false -or $bagAcceptedSamplesRegistration.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.165 must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($bagAcceptedSamplesRegistration.vcp_runtime_integration_proven -ne $false -or $bagAcceptedSamplesRegistration.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.165 must not claim VCP runtime integration"
+    }
+  }
+
+  $lampV3ReadinessOutput = & node (Join-Path $Root 'scripts/validate_v14_166_lamp_v3_generated_candidate_readiness.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "lamp v3 generated candidate readiness validation exited with failure"
+  } else {
+    $lampV3Readiness = ($lampV3ReadinessOutput -join "`n") | ConvertFrom-Json
+    if ($lampV3Readiness.passed -ne $true) {
+      Add-Failure "lamp v3 generated candidate readiness validation must pass"
+    }
+    if ($lampV3Readiness.review_status -ne 'pending_human_review' -or $lampV3Readiness.human_approval_status -ne 'pending' -or $lampV3Readiness.accepted_candidate -ne $false -or $lampV3Readiness.commercial_delivery_ready -ne $false) {
+      Add-Failure "v14.166 lamp v3 candidate must remain pending human review and not accepted"
+    }
+    if ($lampV3Readiness.artifact_sha256 -ne 'eaa52095be5af66854f80ba3f6a0b94c93bc1105e6e7ecf984b8dfb3dfff275c' -or $lampV3Readiness.artifact_dimensions -ne '1254x1254' -or $lampV3Readiness.artifact_mime -ne 'image/png') {
+      Add-Failure "v14.166 must verify the real lamp v3 artifact hash, dimensions, and mime"
+    }
+    if ($lampV3Readiness.third_full_recoverable_sample_candidate_created -ne $true -or $lampV3Readiness.third_full_recoverable_sample_still_requires_human_approval -ne $true) {
+      Add-Failure "v14.166 must create a third-sample candidate without overclaiming acceptance"
+    }
+    if ($lampV3Readiness.negative_case_missing_artifact_ref_fails -ne $true -or $lampV3Readiness.negative_case_hash_mismatch_fails -ne $true -or $lampV3Readiness.negative_case_dimensions_mismatch_fails -ne $true -or $lampV3Readiness.negative_case_mime_mismatch_fails -ne $true -or $lampV3Readiness.negative_case_premature_human_approval_blocks_readiness -ne $true -or $lampV3Readiness.negative_case_accepted_samples_write_flag_blocks_readiness -ne $true -or $lampV3Readiness.negative_case_vcp_runtime_claim_blocks_readiness -ne $true -or $lampV3Readiness.negative_case_third_sample_overclaim_blocks_readiness -ne $true) {
+      Add-Failure "v14.166 must fail lamp v3 readiness negative cases"
+    }
+    if ($lampV3Readiness.accepted_samples_write_performed -ne $false -or $lampV3Readiness.failure_samples_write_performed -ne $false -or $lampV3Readiness.production_candidate_write_performed -ne $false -or $lampV3Readiness.daily_note_write_performed -ne $false -or $lampV3Readiness.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.166 must not write accepted/failure/production/memory outputs"
+    }
+    if ($lampV3Readiness.durable_archive_copy_performed -ne $false -or $lampV3Readiness.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.166 must not copy to durable archive or push/tag/release/deploy"
+    }
+    if ($lampV3Readiness.vcp_runtime_integration_proven -ne $false -or $lampV3Readiness.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.166 must not claim VCP runtime integration"
+    }
+  }
+
+  $lampV3RegistrationBlockerOutput = & node (Join-Path $Root 'scripts/validate_v14_167_lamp_v3_accepted_samples_registration_blocker_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "lamp v3 accepted_samples registration blocker preflight validation exited with failure"
+  } else {
+    $lampV3RegistrationBlocker = ($lampV3RegistrationBlockerOutput -join "`n") | ConvertFrom-Json
+    if ($lampV3RegistrationBlocker.passed -ne $true) {
+      Add-Failure "lamp v3 accepted_samples registration blocker preflight validation must pass"
+    }
+    if ($lampV3RegistrationBlocker.accepted_samples_registration_eligible -ne $true -or $null -ne $lampV3RegistrationBlocker.registration_blocker -or $lampV3RegistrationBlocker.human_approval_status -ne 'approved') {
+      Add-Failure "v14.167 must reflect Jenn-approved lamp v3 accepted_samples registration readiness"
+    }
+    if ($lampV3RegistrationBlocker.artifact_sha256 -ne 'eaa52095be5af66854f80ba3f6a0b94c93bc1105e6e7ecf984b8dfb3dfff275c' -or $lampV3RegistrationBlocker.artifact_dimensions -ne '1254x1254' -or $lampV3RegistrationBlocker.artifact_mime -ne 'image/png') {
+      Add-Failure "v14.167 must verify the real lamp v3 artifact hash, dimensions, and mime"
+    }
+    if ($lampV3RegistrationBlocker.negative_case_missing_artifact_fails -ne $true -or $lampV3RegistrationBlocker.negative_case_hash_mismatch_fails -ne $true -or $lampV3RegistrationBlocker.negative_case_dimensions_mismatch_fails -ne $true -or $lampV3RegistrationBlocker.negative_case_mime_mismatch_fails -ne $true -or $lampV3RegistrationBlocker.negative_case_review_record_missing_fails -ne $true -or $lampV3RegistrationBlocker.negative_case_human_approval_missing_blocks_registration -ne $true -or $lampV3RegistrationBlocker.negative_case_category_index_missing_fails -ne $true -or $lampV3RegistrationBlocker.negative_case_registry_entry_missing_fails -ne $true -or $lampV3RegistrationBlocker.negative_case_registry_write_flag_blocks_preflight -ne $true -or $lampV3RegistrationBlocker.negative_case_vcp_runtime_claim_blocks_preflight -ne $true -or $lampV3RegistrationBlocker.negative_case_pending_status_blocks_post_registration -ne $true) {
+      Add-Failure "v14.167 must fail lamp v3 accepted_samples blocker negative cases"
+    }
+    if ($lampV3RegistrationBlocker.accepted_samples_write_performed -ne $false -or $lampV3RegistrationBlocker.category_index_write_performed -ne $false -or $lampV3RegistrationBlocker.image_file_copy_performed -ne $false) {
+      Add-Failure "v14.167 must not write accepted_samples/category index or copy image files"
+    }
+    if ($lampV3RegistrationBlocker.failure_samples_write_performed -ne $false -or $lampV3RegistrationBlocker.production_candidate_write_performed -ne $false -or $lampV3RegistrationBlocker.daily_note_write_performed -ne $false -or $lampV3RegistrationBlocker.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.167 must not write failure/production/memory outputs"
+    }
+    if ($lampV3RegistrationBlocker.provider_contact_performed -ne $false -or $lampV3RegistrationBlocker.plugin_call_performed -ne $false -or $lampV3RegistrationBlocker.api_call_performed -ne $false -or $lampV3RegistrationBlocker.mcp_runtime_performed -ne $false -or $lampV3RegistrationBlocker.real_manifest_read_performed -ne $false -or $lampV3RegistrationBlocker.real_vcpchat_read_performed -ne $false -or $lampV3RegistrationBlocker.real_vcptoolbox_read_performed -ne $false -or $lampV3RegistrationBlocker.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.167 must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($lampV3RegistrationBlocker.vcp_runtime_integration_proven -ne $false -or $lampV3RegistrationBlocker.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.167 must not claim VCP runtime integration"
+    }
+  }
+
+  $threeSampleDashboardOutput = & node (Join-Path $Root 'scripts/validate_v14_168_three_sample_dashboard_evidence_alignment.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "three-sample dashboard evidence alignment validation exited with failure"
+  } else {
+    $threeSampleDashboard = ($threeSampleDashboardOutput -join "`n") | ConvertFrom-Json
+    if ($threeSampleDashboard.passed -ne $true) {
+      Add-Failure "three-sample dashboard evidence alignment validation must pass"
+    }
+    if ($threeSampleDashboard.full_recoverable_accepted_sample_count -ne 3 -or $threeSampleDashboard.blocked_third_candidate_count -ne 0 -or $threeSampleDashboard.hard_acceptance_three_full_samples_met -ne $true -or $threeSampleDashboard.remaining_full_recoverable_sample_gap -ne 0) {
+      Add-Failure "v14.168 dashboard evidence must show three full accepted samples and no blocked third candidate"
+    }
+    if ($threeSampleDashboard.dashboard_progress_basis -ne 'validator_outputs_real_artifact_evidence' -or $threeSampleDashboard.dashboard_uses_project_master_plan_progress -ne $false -or $threeSampleDashboard.dashboard_uses_document_token_progress -ne $false -or $threeSampleDashboard.dashboard_promotes_product_status -ne $false) {
+      Add-Failure "v14.168 dashboard evidence must use validator output, not project plan/docs token progress"
+    }
+    if ($threeSampleDashboard.negative_case_dashboard_drops_registered_lamp_fails -ne $true -or $threeSampleDashboard.negative_case_three_sample_goal_marked_incomplete_fails -ne $true -or $threeSampleDashboard.negative_case_project_master_plan_progress_fails -ne $true -or $threeSampleDashboard.negative_case_document_token_progress_fails -ne $true -or $threeSampleDashboard.negative_case_runtime_claim_blocks_dashboard -ne $true -or $threeSampleDashboard.negative_case_external_action_flag_blocks_dashboard -ne $true -or $threeSampleDashboard.negative_case_accepted_samples_write_flag_blocks_dashboard -ne $true) {
+      Add-Failure "v14.168 must fail dashboard evidence negative cases"
+    }
+    if ($threeSampleDashboard.accepted_samples_write_performed -ne $false -or $threeSampleDashboard.category_index_write_performed -ne $false -or $threeSampleDashboard.image_file_copy_performed -ne $false) {
+      Add-Failure "v14.168 must not write accepted_samples/category index or copy image files"
+    }
+    if ($threeSampleDashboard.failure_samples_write_performed -ne $false -or $threeSampleDashboard.production_candidate_write_performed -ne $false -or $threeSampleDashboard.daily_note_write_performed -ne $false -or $threeSampleDashboard.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.168 must not write failure/production/memory outputs"
+    }
+    if ($threeSampleDashboard.provider_contact_performed -ne $false -or $threeSampleDashboard.plugin_call_performed -ne $false -or $threeSampleDashboard.api_call_performed -ne $false -or $threeSampleDashboard.mcp_runtime_performed -ne $false -or $threeSampleDashboard.real_manifest_read_performed -ne $false -or $threeSampleDashboard.real_vcpchat_read_performed -ne $false -or $threeSampleDashboard.real_vcptoolbox_read_performed -ne $false -or $threeSampleDashboard.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.168 must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($threeSampleDashboard.vcp_runtime_integration_proven -ne $false -or $threeSampleDashboard.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.168 must not claim VCP runtime integration"
+    }
+  }
+
+  $reviewConsoleLifecycleReaderOutput = & node (Join-Path $Root 'scripts/validate_v14_169_review_console_artifact_lifecycle_state_reader.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console artifact lifecycle state reader validation exited with failure"
+  } else {
+    $reviewConsoleLifecycleReader = ($reviewConsoleLifecycleReaderOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleLifecycleReader.passed -ne $true) {
+      Add-Failure "Review Console artifact lifecycle state reader validation must pass"
+    }
+    if ($reviewConsoleLifecycleReader.parse_status -ne 'parsed' -or $reviewConsoleLifecycleReader.recoverable_accepted_sample_count -ne 2 -or $reviewConsoleLifecycleReader.blocked_registration_candidate_count -ne 1 -or $reviewConsoleLifecycleReader.remaining_full_recoverable_sample_gap -ne 1 -or $reviewConsoleLifecycleReader.hard_acceptance_three_full_samples_met -ne $false) {
+      Add-Failure "v14.169 lifecycle reader must show two recoverable accepted samples plus one blocked third candidate"
+    }
+    if ($reviewConsoleLifecycleReader.negative_case_pending_candidate_counted_as_accepted_fails -ne $true -or $reviewConsoleLifecycleReader.negative_case_three_sample_goal_overclaim_fails -ne $true -or $reviewConsoleLifecycleReader.negative_case_fetch_guard_flag_blocks_reader -ne $true -or $reviewConsoleLifecycleReader.negative_case_file_write_guard_flag_blocks_reader -ne $true -or $reviewConsoleLifecycleReader.negative_case_accepted_samples_write_guard_flag_blocks_reader -ne $true -or $reviewConsoleLifecycleReader.negative_case_production_candidate_guard_flag_blocks_reader -ne $true -or $reviewConsoleLifecycleReader.negative_case_runtime_claim_blocks_reader -ne $true -or $reviewConsoleLifecycleReader.negative_case_missing_human_approval_keeps_lamp_blocked -ne $true) {
+      Add-Failure "v14.169 must fail lifecycle reader negative cases"
+    }
+    if ($reviewConsoleLifecycleReader.fetch_performed -ne $false -or $reviewConsoleLifecycleReader.file_write_performed -ne $false -or $reviewConsoleLifecycleReader.accepted_samples_write_performed -ne $false -or $reviewConsoleLifecycleReader.failure_samples_write_performed -ne $false -or $reviewConsoleLifecycleReader.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.169 lifecycle reader must not fetch, write files, accepted_samples, failure_samples, or production_candidate"
+    }
+    if ($reviewConsoleLifecycleReader.provider_contact_performed -ne $false -or $reviewConsoleLifecycleReader.plugin_call_performed -ne $false -or $reviewConsoleLifecycleReader.api_call_performed -ne $false -or $reviewConsoleLifecycleReader.mcp_runtime_performed -ne $false -or $reviewConsoleLifecycleReader.real_manifest_read_performed -ne $false -or $reviewConsoleLifecycleReader.real_vcpchat_read_performed -ne $false -or $reviewConsoleLifecycleReader.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleLifecycleReader.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.169 lifecycle reader must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($reviewConsoleLifecycleReader.vcp_runtime_integration_proven -ne $false -or $reviewConsoleLifecycleReader.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.169 lifecycle reader must not claim VCP runtime integration"
+    }
+  }
+
+  $reviewConsoleLifecycleSnapshotOutput = & node (Join-Path $Root 'scripts/validate_v14_170_review_console_artifact_lifecycle_state_reader_draft_output_snapshot.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console artifact lifecycle state reader snapshot validation exited with failure"
+  } else {
+    $reviewConsoleLifecycleSnapshot = ($reviewConsoleLifecycleSnapshotOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleLifecycleSnapshot.passed -ne $true) {
+      Add-Failure "Review Console artifact lifecycle state reader snapshot validation must pass"
+    }
+    if ($reviewConsoleLifecycleSnapshot.snapshot_status -ne 'golden_static_snapshot' -or $reviewConsoleLifecycleSnapshot.draft_output_key -ne 'artifact_lifecycle_state_reader') {
+      Add-Failure "v14.170 must validate the artifact_lifecycle_state_reader draft output snapshot"
+    }
+    if ($reviewConsoleLifecycleSnapshot.recoverable_accepted_sample_count -ne 2 -or $reviewConsoleLifecycleSnapshot.blocked_registration_candidate_count -ne 1 -or $reviewConsoleLifecycleSnapshot.remaining_full_recoverable_sample_gap -ne 1 -or $reviewConsoleLifecycleSnapshot.hard_acceptance_three_full_samples_met -ne $false) {
+      Add-Failure "v14.170 lifecycle snapshot must preserve two recoverable accepted samples plus one blocked third candidate"
+    }
+    if ($reviewConsoleLifecycleSnapshot.negative_case_missing_snapshot_key_fails -ne $true -or $reviewConsoleLifecycleSnapshot.negative_case_counts_mismatch_fails -ne $true -or $reviewConsoleLifecycleSnapshot.negative_case_lamp_marked_recoverable_fails -ne $true -or $reviewConsoleLifecycleSnapshot.negative_case_accepted_samples_write_flag_fails -ne $true -or $reviewConsoleLifecycleSnapshot.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.170 must fail lifecycle snapshot negative cases"
+    }
+    if ($reviewConsoleLifecycleSnapshot.fetch_performed -ne $false -or $reviewConsoleLifecycleSnapshot.file_write_performed -ne $false -or $reviewConsoleLifecycleSnapshot.accepted_samples_write_performed -ne $false -or $reviewConsoleLifecycleSnapshot.failure_samples_write_performed -ne $false -or $reviewConsoleLifecycleSnapshot.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.170 lifecycle snapshot must not fetch, write files, accepted_samples, failure_samples, or production_candidate"
+    }
+    if ($reviewConsoleLifecycleSnapshot.provider_contact_performed -ne $false -or $reviewConsoleLifecycleSnapshot.plugin_call_performed -ne $false -or $reviewConsoleLifecycleSnapshot.api_call_performed -ne $false -or $reviewConsoleLifecycleSnapshot.mcp_runtime_performed -ne $false -or $reviewConsoleLifecycleSnapshot.real_manifest_read_performed -ne $false -or $reviewConsoleLifecycleSnapshot.real_vcpchat_read_performed -ne $false -or $reviewConsoleLifecycleSnapshot.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleLifecycleSnapshot.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.170 lifecycle snapshot must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($reviewConsoleLifecycleSnapshot.vcp_runtime_integration_proven -ne $false -or $reviewConsoleLifecycleSnapshot.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.170 lifecycle snapshot must not claim VCP runtime integration"
+    }
+  }
+
+  $reviewConsoleLifecycleFilterOutput = & node (Join-Path $Root 'scripts/validate_v14_171_review_console_lifecycle_state_local_filter_controls.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console lifecycle state local filter controls validation exited with failure"
+  } else {
+    $reviewConsoleLifecycleFilter = ($reviewConsoleLifecycleFilterOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleLifecycleFilter.passed -ne $true) {
+      Add-Failure "Review Console lifecycle state local filter controls validation must pass"
+    }
+    if ($reviewConsoleLifecycleFilter.visible_count_all -ne 3 -or $reviewConsoleLifecycleFilter.visible_count_recoverable -ne 2 -or $reviewConsoleLifecycleFilter.visible_count_blocked -ne 1 -or $reviewConsoleLifecycleFilter.filter_is_local_ui_only -ne $true) {
+      Add-Failure "v14.171 lifecycle filters must be local-only and preserve all/recoverable/blocked counts"
+    }
+    if ($reviewConsoleLifecycleFilter.negative_case_unknown_filter_falls_back_to_all -ne $true -or $reviewConsoleLifecycleFilter.negative_case_recoverable_filter_must_not_show_blocked_lamp -ne $true -or $reviewConsoleLifecycleFilter.negative_case_blocked_filter_must_show_only_lamp -ne $true -or $reviewConsoleLifecycleFilter.negative_case_accepted_samples_write_flag_fails -ne $true -or $reviewConsoleLifecycleFilter.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.171 must fail lifecycle filter negative cases"
+    }
+    if ($reviewConsoleLifecycleFilter.fetch_performed -ne $false -or $reviewConsoleLifecycleFilter.file_write_performed -ne $false -or $reviewConsoleLifecycleFilter.accepted_samples_write_performed -ne $false -or $reviewConsoleLifecycleFilter.failure_samples_write_performed -ne $false -or $reviewConsoleLifecycleFilter.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.171 lifecycle filters must not fetch, write files, accepted_samples, failure_samples, or production_candidate"
+    }
+    if ($reviewConsoleLifecycleFilter.provider_contact_performed -ne $false -or $reviewConsoleLifecycleFilter.plugin_call_performed -ne $false -or $reviewConsoleLifecycleFilter.api_call_performed -ne $false -or $reviewConsoleLifecycleFilter.mcp_runtime_performed -ne $false -or $reviewConsoleLifecycleFilter.real_manifest_read_performed -ne $false -or $reviewConsoleLifecycleFilter.real_vcpchat_read_performed -ne $false -or $reviewConsoleLifecycleFilter.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleLifecycleFilter.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.171 lifecycle filters must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($reviewConsoleLifecycleFilter.vcp_runtime_integration_proven -ne $false -or $reviewConsoleLifecycleFilter.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.171 lifecycle filters must not claim VCP runtime integration"
+    }
+  }
+
+  $reviewConsolePromptCompletionOutput = & node (Join-Path $Root 'scripts/validate_v14_172_review_console_prompt_to_artifact_completion_static_panel.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console prompt-to-artifact completion static panel validation exited with failure"
+  } else {
+    $reviewConsolePromptCompletion = ($reviewConsolePromptCompletionOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsolePromptCompletion.passed -ne $true) {
+      Add-Failure "Review Console prompt-to-artifact completion static panel validation must pass"
+    }
+    if ($reviewConsolePromptCompletion.record_count -ne 3 -or $reviewConsolePromptCompletion.review_complete_count -ne 2 -or $reviewConsolePromptCompletion.blocked_count -ne 1 -or $reviewConsolePromptCompletion.average_completion_score -ne 84 -or $reviewConsolePromptCompletion.hard_acceptance_three_full_samples_met -ne $false) {
+      Add-Failure "v14.172 prompt completion panel must show two complete records plus one blocked lamp candidate"
+    }
+    if ($reviewConsolePromptCompletion.negative_case_missing_prompt_ref_fails -ne $true -or $reviewConsolePromptCompletion.negative_case_missing_completion_status_fails -ne $true -or $reviewConsolePromptCompletion.negative_case_lamp_without_blocker_fails -ne $true -or $reviewConsolePromptCompletion.negative_case_accepted_samples_write_flag_fails -ne $true -or $reviewConsolePromptCompletion.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.172 must fail prompt completion panel negative cases"
+    }
+    if ($reviewConsolePromptCompletion.fetch_performed -ne $false -or $reviewConsolePromptCompletion.file_write_performed -ne $false -or $reviewConsolePromptCompletion.accepted_samples_write_performed -ne $false -or $reviewConsolePromptCompletion.failure_samples_write_performed -ne $false -or $reviewConsolePromptCompletion.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.172 prompt completion panel must not fetch, write files, accepted_samples, failure_samples, or production_candidate"
+    }
+    if ($reviewConsolePromptCompletion.provider_contact_performed -ne $false -or $reviewConsolePromptCompletion.plugin_call_performed -ne $false -or $reviewConsolePromptCompletion.api_call_performed -ne $false -or $reviewConsolePromptCompletion.mcp_runtime_performed -ne $false -or $reviewConsolePromptCompletion.real_manifest_read_performed -ne $false -or $reviewConsolePromptCompletion.real_vcpchat_read_performed -ne $false -or $reviewConsolePromptCompletion.real_vcptoolbox_read_performed -ne $false -or $reviewConsolePromptCompletion.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.172 prompt completion panel must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($reviewConsolePromptCompletion.vcp_runtime_integration_proven -ne $false -or $reviewConsolePromptCompletion.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.172 prompt completion panel must not claim VCP runtime integration"
+    }
+  }
+
+  $reviewConsolePromptCompletionSnapshotOutput = & node (Join-Path $Root 'scripts/validate_v14_173_review_console_prompt_completion_snapshot_static_regression.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console prompt completion snapshot static regression validation exited with failure"
+  } else {
+    $reviewConsolePromptCompletionSnapshot = ($reviewConsolePromptCompletionSnapshotOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsolePromptCompletionSnapshot.passed -ne $true) {
+      Add-Failure "Review Console prompt completion snapshot static regression validation must pass"
+    }
+    if ($reviewConsolePromptCompletionSnapshot.snapshot_status -ne 'golden_static_snapshot' -or $reviewConsolePromptCompletionSnapshot.draft_output_key -ne 'artifact_prompt_completion_state') {
+      Add-Failure "v14.173 must validate the artifact_prompt_completion_state golden snapshot"
+    }
+    if ($reviewConsolePromptCompletionSnapshot.record_count -ne 3 -or $reviewConsolePromptCompletionSnapshot.review_complete_count -ne 2 -or $reviewConsolePromptCompletionSnapshot.blocked_count -ne 1 -or $reviewConsolePromptCompletionSnapshot.average_completion_score -ne 84 -or $reviewConsolePromptCompletionSnapshot.hard_acceptance_three_full_samples_met -ne $false -or $reviewConsolePromptCompletionSnapshot.lamp_blocker -ne 'human_approval_missing') {
+      Add-Failure "v14.173 prompt completion snapshot must preserve the static completion evidence and lamp blocker"
+    }
+    if ($reviewConsolePromptCompletionSnapshot.negative_case_missing_lamp_blocker_fails -ne $true -or $reviewConsolePromptCompletionSnapshot.negative_case_average_score_mismatch_fails -ne $true -or $reviewConsolePromptCompletionSnapshot.negative_case_three_sample_overclaim_fails -ne $true -or $reviewConsolePromptCompletionSnapshot.negative_case_accepted_samples_write_flag_fails -ne $true -or $reviewConsolePromptCompletionSnapshot.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.173 must fail prompt completion snapshot negative cases"
+    }
+    if ($reviewConsolePromptCompletionSnapshot.fetch_performed -ne $false -or $reviewConsolePromptCompletionSnapshot.file_write_performed -ne $false -or $reviewConsolePromptCompletionSnapshot.accepted_samples_write_performed -ne $false -or $reviewConsolePromptCompletionSnapshot.failure_samples_write_performed -ne $false -or $reviewConsolePromptCompletionSnapshot.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.173 prompt completion snapshot must not fetch, write files, accepted_samples, failure_samples, or production_candidate"
+    }
+    if ($reviewConsolePromptCompletionSnapshot.provider_contact_performed -ne $false -or $reviewConsolePromptCompletionSnapshot.plugin_call_performed -ne $false -or $reviewConsolePromptCompletionSnapshot.api_call_performed -ne $false -or $reviewConsolePromptCompletionSnapshot.mcp_runtime_performed -ne $false -or $reviewConsolePromptCompletionSnapshot.real_manifest_read_performed -ne $false -or $reviewConsolePromptCompletionSnapshot.real_vcpchat_read_performed -ne $false -or $reviewConsolePromptCompletionSnapshot.real_vcptoolbox_read_performed -ne $false -or $reviewConsolePromptCompletionSnapshot.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.173 prompt completion snapshot must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($reviewConsolePromptCompletionSnapshot.vcp_runtime_integration_proven -ne $false -or $reviewConsolePromptCompletionSnapshot.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.173 prompt completion snapshot must not claim VCP runtime integration"
+    }
+  }
+
+  $reviewConsoleArtifactDetailDrawerOutput = & node (Join-Path $Root 'scripts/validate_v14_174_review_console_local_artifact_detail_drawer.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console local artifact detail drawer validation exited with failure"
+  } else {
+    $reviewConsoleArtifactDetailDrawer = ($reviewConsoleArtifactDetailDrawerOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleArtifactDetailDrawer.passed -ne $true) {
+      Add-Failure "Review Console local artifact detail drawer validation must pass"
+    }
+    if ($reviewConsoleArtifactDetailDrawer.expected_selectable_count -ne 3 -or $reviewConsoleArtifactDetailDrawer.static_detail_only -ne $true) {
+      Add-Failure "v14.174 artifact detail drawer must be static-only and expose three selectable lifecycle records"
+    }
+    if ($reviewConsoleArtifactDetailDrawer.negative_case_missing_artifact_ref_fails -ne $true -or $reviewConsoleArtifactDetailDrawer.negative_case_missing_hash_fails -ne $true -or $reviewConsoleArtifactDetailDrawer.negative_case_unknown_selected_artifact_falls_back_to_first -ne $true -or $reviewConsoleArtifactDetailDrawer.negative_case_accepted_samples_write_flag_fails -ne $true -or $reviewConsoleArtifactDetailDrawer.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.174 must fail artifact detail drawer negative cases"
+    }
+    if ($reviewConsoleArtifactDetailDrawer.fetch_performed -ne $false -or $reviewConsoleArtifactDetailDrawer.file_write_performed -ne $false -or $reviewConsoleArtifactDetailDrawer.accepted_samples_write_performed -ne $false -or $reviewConsoleArtifactDetailDrawer.failure_samples_write_performed -ne $false -or $reviewConsoleArtifactDetailDrawer.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.174 artifact detail drawer must not fetch, write files, accepted_samples, failure_samples, or production_candidate"
+    }
+    if ($reviewConsoleArtifactDetailDrawer.provider_contact_performed -ne $false -or $reviewConsoleArtifactDetailDrawer.plugin_call_performed -ne $false -or $reviewConsoleArtifactDetailDrawer.api_call_performed -ne $false -or $reviewConsoleArtifactDetailDrawer.mcp_runtime_performed -ne $false -or $reviewConsoleArtifactDetailDrawer.real_manifest_read_performed -ne $false -or $reviewConsoleArtifactDetailDrawer.real_vcpchat_read_performed -ne $false -or $reviewConsoleArtifactDetailDrawer.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleArtifactDetailDrawer.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.174 artifact detail drawer must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($reviewConsoleArtifactDetailDrawer.vcp_runtime_integration_proven -ne $false -or $reviewConsoleArtifactDetailDrawer.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.174 artifact detail drawer must not claim VCP runtime integration"
+    }
+  }
+
+  $reviewConsoleArtifactDetailDrawerSnapshotOutput = & node (Join-Path $Root 'scripts/validate_v14_175_review_console_artifact_detail_drawer_snapshot_static_regression.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console artifact detail drawer snapshot validation exited with failure"
+  } else {
+    $reviewConsoleArtifactDetailDrawerSnapshot = ($reviewConsoleArtifactDetailDrawerSnapshotOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleArtifactDetailDrawerSnapshot.passed -ne $true) {
+      Add-Failure "Review Console artifact detail drawer snapshot validation must pass"
+    }
+    if ($reviewConsoleArtifactDetailDrawerSnapshot.snapshot_status -ne 'golden_static_snapshot' -or $reviewConsoleArtifactDetailDrawerSnapshot.draft_output_key -ne 'artifact_detail_drawer_state') {
+      Add-Failure "v14.175 must validate the artifact_detail_drawer_state golden snapshot"
+    }
+    if ($reviewConsoleArtifactDetailDrawerSnapshot.selected_artifact_id -ne 'accepted_womens_resort_relaxed_knit_codex_v2_001' -or $reviewConsoleArtifactDetailDrawerSnapshot.detail_field_count -ne 10 -or $reviewConsoleArtifactDetailDrawerSnapshot.expected_selectable_count -ne 3 -or $reviewConsoleArtifactDetailDrawerSnapshot.lamp_blocker -ne 'human_approval_missing' -or $reviewConsoleArtifactDetailDrawerSnapshot.hard_acceptance_three_full_samples_met -ne $false) {
+      Add-Failure "v14.175 detail drawer snapshot must preserve selected artifact details and lamp blocker"
+    }
+    if ($reviewConsoleArtifactDetailDrawerSnapshot.negative_case_selected_hash_mismatch_fails -ne $true -or $reviewConsoleArtifactDetailDrawerSnapshot.negative_case_detail_field_count_mismatch_fails -ne $true -or $reviewConsoleArtifactDetailDrawerSnapshot.negative_case_lamp_blocker_missing_fails -ne $true -or $reviewConsoleArtifactDetailDrawerSnapshot.negative_case_accepted_samples_write_flag_fails -ne $true -or $reviewConsoleArtifactDetailDrawerSnapshot.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.175 must fail artifact detail drawer snapshot negative cases"
+    }
+    if ($reviewConsoleArtifactDetailDrawerSnapshot.fetch_performed -ne $false -or $reviewConsoleArtifactDetailDrawerSnapshot.file_write_performed -ne $false -or $reviewConsoleArtifactDetailDrawerSnapshot.accepted_samples_write_performed -ne $false -or $reviewConsoleArtifactDetailDrawerSnapshot.failure_samples_write_performed -ne $false -or $reviewConsoleArtifactDetailDrawerSnapshot.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.175 artifact detail drawer snapshot must not fetch, write files, accepted_samples, failure_samples, or production_candidate"
+    }
+    if ($reviewConsoleArtifactDetailDrawerSnapshot.provider_contact_performed -ne $false -or $reviewConsoleArtifactDetailDrawerSnapshot.plugin_call_performed -ne $false -or $reviewConsoleArtifactDetailDrawerSnapshot.api_call_performed -ne $false -or $reviewConsoleArtifactDetailDrawerSnapshot.mcp_runtime_performed -ne $false -or $reviewConsoleArtifactDetailDrawerSnapshot.real_manifest_read_performed -ne $false -or $reviewConsoleArtifactDetailDrawerSnapshot.real_vcpchat_read_performed -ne $false -or $reviewConsoleArtifactDetailDrawerSnapshot.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleArtifactDetailDrawerSnapshot.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.175 artifact detail drawer snapshot must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($reviewConsoleArtifactDetailDrawerSnapshot.vcp_runtime_integration_proven -ne $false -or $reviewConsoleArtifactDetailDrawerSnapshot.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.175 artifact detail drawer snapshot must not claim VCP runtime integration"
+    }
+  }
+
+  $reviewConsoleArtifactEvidenceCompareOutput = & node (Join-Path $Root 'scripts/validate_v14_176_review_console_artifact_evidence_side_by_side_compare.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console artifact evidence side-by-side compare validation exited with failure"
+  } else {
+    $reviewConsoleArtifactEvidenceCompare = ($reviewConsoleArtifactEvidenceCompareOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleArtifactEvidenceCompare.passed -ne $true) {
+      Add-Failure "Review Console artifact evidence side-by-side compare validation must pass"
+    }
+    if ($reviewConsoleArtifactEvidenceCompare.primary_artifact_id -ne 'accepted_womens_resort_relaxed_knit_codex_v2_001' -or $reviewConsoleArtifactEvidenceCompare.comparison_artifact_id -ne 'accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001' -or $reviewConsoleArtifactEvidenceCompare.compared_field_count -ne 10) {
+      Add-Failure "v14.176 artifact evidence compare must preserve the selected accepted sample and blocked lamp candidate pair"
+    }
+    if ($reviewConsoleArtifactEvidenceCompare.primary_recoverable -ne $true -or $reviewConsoleArtifactEvidenceCompare.comparison_blocked -ne $true -or $reviewConsoleArtifactEvidenceCompare.lamp_blocker -ne 'human_approval_missing' -or $reviewConsoleArtifactEvidenceCompare.hard_acceptance_three_full_samples_met -ne $false) {
+      Add-Failure "v14.176 artifact evidence compare must preserve recoverable-vs-blocked state and avoid three-sample overclaim"
+    }
+    if ($reviewConsoleArtifactEvidenceCompare.negative_case_missing_comparison_blocker_fails -ne $true -or $reviewConsoleArtifactEvidenceCompare.negative_case_primary_not_recoverable_fails -ne $true -or $reviewConsoleArtifactEvidenceCompare.negative_case_compare_field_count_mismatch_fails -ne $true -or $reviewConsoleArtifactEvidenceCompare.negative_case_accepted_samples_write_flag_fails -ne $true -or $reviewConsoleArtifactEvidenceCompare.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.176 must fail artifact evidence compare negative cases"
+    }
+    if ($reviewConsoleArtifactEvidenceCompare.fetch_performed -ne $false -or $reviewConsoleArtifactEvidenceCompare.file_write_performed -ne $false -or $reviewConsoleArtifactEvidenceCompare.accepted_samples_write_performed -ne $false -or $reviewConsoleArtifactEvidenceCompare.failure_samples_write_performed -ne $false -or $reviewConsoleArtifactEvidenceCompare.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.176 artifact evidence compare must not fetch, write files, accepted_samples, failure_samples, or production_candidate"
+    }
+    if ($reviewConsoleArtifactEvidenceCompare.provider_contact_performed -ne $false -or $reviewConsoleArtifactEvidenceCompare.plugin_call_performed -ne $false -or $reviewConsoleArtifactEvidenceCompare.api_call_performed -ne $false -or $reviewConsoleArtifactEvidenceCompare.mcp_runtime_performed -ne $false -or $reviewConsoleArtifactEvidenceCompare.real_manifest_read_performed -ne $false -or $reviewConsoleArtifactEvidenceCompare.real_vcpchat_read_performed -ne $false -or $reviewConsoleArtifactEvidenceCompare.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleArtifactEvidenceCompare.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.176 artifact evidence compare must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($reviewConsoleArtifactEvidenceCompare.vcp_runtime_integration_proven -ne $false -or $reviewConsoleArtifactEvidenceCompare.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.176 artifact evidence compare must not claim VCP runtime integration"
+    }
+  }
+
+  $reviewConsoleCompareSnapshotOutput = & node (Join-Path $Root 'scripts/validate_v14_177_review_console_compare_state_snapshot_static_regression.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console compare state snapshot validation exited with failure"
+  } else {
+    $reviewConsoleCompareSnapshot = ($reviewConsoleCompareSnapshotOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleCompareSnapshot.passed -ne $true) {
+      Add-Failure "Review Console compare state snapshot validation must pass"
+    }
+    if ($reviewConsoleCompareSnapshot.snapshot_status -ne 'golden_static_snapshot' -or $reviewConsoleCompareSnapshot.draft_output_key -ne 'artifact_evidence_compare_state') {
+      Add-Failure "v14.177 must validate the artifact_evidence_compare_state golden snapshot"
+    }
+    if ($reviewConsoleCompareSnapshot.primary_artifact_id -ne 'accepted_womens_resort_relaxed_knit_codex_v2_001' -or $reviewConsoleCompareSnapshot.comparison_artifact_id -ne 'accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001' -or $reviewConsoleCompareSnapshot.compare_pair_status -ne 'recoverable_vs_blocked_registration' -or $reviewConsoleCompareSnapshot.compared_field_count -ne 10) {
+      Add-Failure "v14.177 compare snapshot must preserve the recoverable-vs-blocked artifact pair and field count"
+    }
+    if ($reviewConsoleCompareSnapshot.primary_recoverable -ne $true -or $reviewConsoleCompareSnapshot.comparison_blocked -ne $true -or $reviewConsoleCompareSnapshot.lamp_blocker -ne 'human_approval_missing' -or $reviewConsoleCompareSnapshot.hard_acceptance_three_full_samples_met -ne $false) {
+      Add-Failure "v14.177 compare snapshot must preserve blocker state and avoid three-sample overclaim"
+    }
+    if ($reviewConsoleCompareSnapshot.negative_case_comparison_id_mismatch_fails -ne $true -or $reviewConsoleCompareSnapshot.negative_case_compare_field_count_mismatch_fails -ne $true -or $reviewConsoleCompareSnapshot.negative_case_three_sample_overclaim_fails -ne $true -or $reviewConsoleCompareSnapshot.negative_case_accepted_samples_write_flag_fails -ne $true -or $reviewConsoleCompareSnapshot.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.177 must fail compare state snapshot negative cases"
+    }
+    if ($reviewConsoleCompareSnapshot.fetch_performed -ne $false -or $reviewConsoleCompareSnapshot.file_write_performed -ne $false -or $reviewConsoleCompareSnapshot.accepted_samples_write_performed -ne $false -or $reviewConsoleCompareSnapshot.failure_samples_write_performed -ne $false -or $reviewConsoleCompareSnapshot.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.177 compare snapshot must not fetch, write files, accepted_samples, failure_samples, or production_candidate"
+    }
+    if ($reviewConsoleCompareSnapshot.provider_contact_performed -ne $false -or $reviewConsoleCompareSnapshot.plugin_call_performed -ne $false -or $reviewConsoleCompareSnapshot.api_call_performed -ne $false -or $reviewConsoleCompareSnapshot.mcp_runtime_performed -ne $false -or $reviewConsoleCompareSnapshot.real_manifest_read_performed -ne $false -or $reviewConsoleCompareSnapshot.real_vcpchat_read_performed -ne $false -or $reviewConsoleCompareSnapshot.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleCompareSnapshot.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.177 compare snapshot must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($reviewConsoleCompareSnapshot.vcp_runtime_integration_proven -ne $false -or $reviewConsoleCompareSnapshot.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.177 compare snapshot must not claim VCP runtime integration"
+    }
+  }
+
+  $reviewConsoleCompareFilterLockOutput = & node (Join-Path $Root 'scripts/validate_v14_178_review_console_artifact_evidence_compare_filter_lock.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console artifact evidence compare filter lock validation exited with failure"
+  } else {
+    $reviewConsoleCompareFilterLock = ($reviewConsoleCompareFilterLockOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleCompareFilterLock.passed -ne $true) {
+      Add-Failure "Review Console artifact evidence compare filter lock validation must pass"
+    }
+    if ($reviewConsoleCompareFilterLock.draft_output_key -ne 'artifact_evidence_compare_state' -or $reviewConsoleCompareFilterLock.static_filter_lock_only -ne $true) {
+      Add-Failure "v14.178 must validate a static artifact_evidence_compare_state filter lock"
+    }
+    if ($reviewConsoleCompareFilterLock.primary_artifact_id -ne 'accepted_womens_resort_relaxed_knit_codex_v2_001' -or $reviewConsoleCompareFilterLock.comparison_artifact_id -ne 'accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001') {
+      Add-Failure "v14.178 compare filter lock must preserve the recoverable-vs-blocked artifact pair"
+    }
+    if ($reviewConsoleCompareFilterLock.locked_to_blocked_candidate -ne $true -or $reviewConsoleCompareFilterLock.locked_blocker -ne 'human_approval_missing' -or $reviewConsoleCompareFilterLock.ignores_lifecycle_filter -ne $true -or $reviewConsoleCompareFilterLock.comparison_source -ne 'blocked_registration_candidate') {
+      Add-Failure "v14.178 compare filter lock must stay locked to the blocked lamp candidate and ignore local lifecycle filters"
+    }
+    if ($reviewConsoleCompareFilterLock.locked_comparison_artifact_id -ne 'accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001' -or $reviewConsoleCompareFilterLock.comparison_blocked -ne $true -or $reviewConsoleCompareFilterLock.lamp_blocker -ne 'human_approval_missing' -or $reviewConsoleCompareFilterLock.hard_acceptance_three_full_samples_met -ne $false) {
+      Add-Failure "v14.178 compare filter lock must preserve blocker state and avoid three-sample overclaim"
+    }
+    if ($reviewConsoleCompareFilterLock.negative_case_locked_to_blocked_candidate_false_fails -ne $true -or $reviewConsoleCompareFilterLock.negative_case_locked_blocker_mismatch_fails -ne $true -or $reviewConsoleCompareFilterLock.negative_case_filter_lock_missing_fails -ne $true -or $reviewConsoleCompareFilterLock.negative_case_accepted_samples_write_flag_fails -ne $true -or $reviewConsoleCompareFilterLock.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.178 must fail compare filter lock negative cases"
+    }
+    if ($reviewConsoleCompareFilterLock.fetch_performed -ne $false -or $reviewConsoleCompareFilterLock.file_write_performed -ne $false -or $reviewConsoleCompareFilterLock.accepted_samples_write_performed -ne $false -or $reviewConsoleCompareFilterLock.failure_samples_write_performed -ne $false -or $reviewConsoleCompareFilterLock.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.178 compare filter lock must not fetch, write files, accepted_samples, failure_samples, or production_candidate"
+    }
+    if ($reviewConsoleCompareFilterLock.provider_contact_performed -ne $false -or $reviewConsoleCompareFilterLock.plugin_call_performed -ne $false -or $reviewConsoleCompareFilterLock.api_call_performed -ne $false -or $reviewConsoleCompareFilterLock.mcp_runtime_performed -ne $false -or $reviewConsoleCompareFilterLock.real_manifest_read_performed -ne $false -or $reviewConsoleCompareFilterLock.real_vcpchat_read_performed -ne $false -or $reviewConsoleCompareFilterLock.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleCompareFilterLock.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.178 compare filter lock must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($reviewConsoleCompareFilterLock.vcp_runtime_integration_proven -ne $false -or $reviewConsoleCompareFilterLock.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.178 compare filter lock must not claim VCP runtime integration"
+    }
+  }
+
+  $reviewConsoleCompareFilterLockSnapshotOutput = & node (Join-Path $Root 'scripts/validate_v14_179_review_console_compare_filter_lock_snapshot_static_regression.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console compare filter lock snapshot validation exited with failure"
+  } else {
+    $reviewConsoleCompareFilterLockSnapshot = ($reviewConsoleCompareFilterLockSnapshotOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleCompareFilterLockSnapshot.passed -ne $true) {
+      Add-Failure "Review Console compare filter lock snapshot validation must pass"
+    }
+    if ($reviewConsoleCompareFilterLockSnapshot.snapshot_status -ne 'golden_static_snapshot' -or $reviewConsoleCompareFilterLockSnapshot.draft_output_key -ne 'artifact_evidence_compare_state') {
+      Add-Failure "v14.179 must validate the compare filter lock golden snapshot"
+    }
+    if ($reviewConsoleCompareFilterLockSnapshot.primary_artifact_id -ne 'accepted_womens_resort_relaxed_knit_codex_v2_001' -or $reviewConsoleCompareFilterLockSnapshot.comparison_artifact_id -ne 'accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001') {
+      Add-Failure "v14.179 compare filter lock snapshot must preserve the recoverable-vs-blocked artifact pair"
+    }
+    if ($reviewConsoleCompareFilterLockSnapshot.locked_to_blocked_candidate -ne $true -or $reviewConsoleCompareFilterLockSnapshot.locked_blocker -ne 'human_approval_missing' -or $reviewConsoleCompareFilterLockSnapshot.ignores_lifecycle_filter -ne $true -or $reviewConsoleCompareFilterLockSnapshot.locked_comparison_artifact_id -ne 'accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001') {
+      Add-Failure "v14.179 compare filter lock snapshot must preserve the locked blocked lamp candidate"
+    }
+    if ($reviewConsoleCompareFilterLockSnapshot.comparison_blocked -ne $true -or $reviewConsoleCompareFilterLockSnapshot.lamp_blocker -ne 'human_approval_missing' -or $reviewConsoleCompareFilterLockSnapshot.hard_acceptance_three_full_samples_met -ne $false) {
+      Add-Failure "v14.179 compare filter lock snapshot must preserve blocker state and avoid three-sample overclaim"
+    }
+    if ($reviewConsoleCompareFilterLockSnapshot.negative_case_locked_comparison_artifact_id_mismatch_fails -ne $true -or $reviewConsoleCompareFilterLockSnapshot.negative_case_locked_blocker_mismatch_fails -ne $true -or $reviewConsoleCompareFilterLockSnapshot.negative_case_filter_lock_overclaim_fails -ne $true -or $reviewConsoleCompareFilterLockSnapshot.negative_case_accepted_samples_write_flag_fails -ne $true -or $reviewConsoleCompareFilterLockSnapshot.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.179 must fail compare filter lock snapshot negative cases"
+    }
+    if ($reviewConsoleCompareFilterLockSnapshot.fetch_performed -ne $false -or $reviewConsoleCompareFilterLockSnapshot.file_write_performed -ne $false -or $reviewConsoleCompareFilterLockSnapshot.accepted_samples_write_performed -ne $false -or $reviewConsoleCompareFilterLockSnapshot.failure_samples_write_performed -ne $false -or $reviewConsoleCompareFilterLockSnapshot.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.179 compare filter lock snapshot must not fetch, write files, accepted_samples, failure_samples, or production_candidate"
+    }
+    if ($reviewConsoleCompareFilterLockSnapshot.provider_contact_performed -ne $false -or $reviewConsoleCompareFilterLockSnapshot.plugin_call_performed -ne $false -or $reviewConsoleCompareFilterLockSnapshot.api_call_performed -ne $false -or $reviewConsoleCompareFilterLockSnapshot.mcp_runtime_performed -ne $false -or $reviewConsoleCompareFilterLockSnapshot.real_manifest_read_performed -ne $false -or $reviewConsoleCompareFilterLockSnapshot.real_vcpchat_read_performed -ne $false -or $reviewConsoleCompareFilterLockSnapshot.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleCompareFilterLockSnapshot.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.179 compare filter lock snapshot must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($reviewConsoleCompareFilterLockSnapshot.vcp_runtime_integration_proven -ne $false -or $reviewConsoleCompareFilterLockSnapshot.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.179 compare filter lock snapshot must not claim VCP runtime integration"
+    }
+  }
+
+  $reviewConsoleArtifactEvidenceStatusSortOutput = & node (Join-Path $Root 'scripts/validate_v14_180_review_console_artifact_evidence_status_sort.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console artifact evidence status sort validation exited with failure"
+  } else {
+    $reviewConsoleArtifactEvidenceStatusSort = ($reviewConsoleArtifactEvidenceStatusSortOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleArtifactEvidenceStatusSort.passed -ne $true) {
+      Add-Failure "Review Console artifact evidence status sort validation must pass"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSort.draft_output_key -ne 'artifact_evidence_status_sort_state' -or $reviewConsoleArtifactEvidenceStatusSort.sort_mode -ne 'blocked_candidates_first') {
+      Add-Failure "v14.180 must validate artifact evidence blocked-candidates-first status sort"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSort.blocked_candidate_first -ne $true -or $reviewConsoleArtifactEvidenceStatusSort.blocked_candidate_artifact_id -ne 'accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001' -or $reviewConsoleArtifactEvidenceStatusSort.blocked_candidate_blocker -ne 'human_approval_missing') {
+      Add-Failure "v14.180 status sort must keep the blocked lamp candidate first"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSort.recoverable_count -ne 2 -or $reviewConsoleArtifactEvidenceStatusSort.blocked_count -ne 1 -or $reviewConsoleArtifactEvidenceStatusSort.hard_acceptance_three_full_samples_met -ne $false) {
+      Add-Failure "v14.180 status sort must preserve two recoverable samples, one blocked candidate, and no three-sample overclaim"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSort.negative_case_blocked_candidate_not_first_fails -ne $true -or $reviewConsoleArtifactEvidenceStatusSort.negative_case_missing_lamp_blocker_fails -ne $true -or $reviewConsoleArtifactEvidenceStatusSort.negative_case_three_sample_overclaim_fails -ne $true -or $reviewConsoleArtifactEvidenceStatusSort.negative_case_accepted_samples_write_flag_fails -ne $true -or $reviewConsoleArtifactEvidenceStatusSort.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.180 must fail artifact evidence status sort negative cases"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSort.fetch_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSort.file_write_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSort.accepted_samples_write_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSort.failure_samples_write_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSort.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.180 status sort must not fetch, write files, accepted_samples, failure_samples, or production_candidate"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSort.provider_contact_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSort.plugin_call_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSort.api_call_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSort.mcp_runtime_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSort.real_manifest_read_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSort.real_vcpchat_read_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSort.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSort.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.180 status sort must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSort.vcp_runtime_integration_proven -ne $false -or $reviewConsoleArtifactEvidenceStatusSort.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.180 status sort must not claim VCP runtime integration"
+    }
+  }
+
+  $reviewConsoleArtifactEvidenceStatusSortSnapshotOutput = & node (Join-Path $Root 'scripts/validate_v14_181_review_console_artifact_evidence_status_sort_snapshot_static_regression.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console artifact evidence status sort snapshot validation exited with failure"
+  } else {
+    $reviewConsoleArtifactEvidenceStatusSortSnapshot = ($reviewConsoleArtifactEvidenceStatusSortSnapshotOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleArtifactEvidenceStatusSortSnapshot.passed -ne $true) {
+      Add-Failure "Review Console artifact evidence status sort snapshot validation must pass"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSortSnapshot.snapshot_status -ne 'golden_static_snapshot' -or $reviewConsoleArtifactEvidenceStatusSortSnapshot.draft_output_key -ne 'artifact_evidence_status_sort_state') {
+      Add-Failure "v14.181 must validate the artifact evidence status sort golden snapshot"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSortSnapshot.sort_mode -ne 'blocked_candidates_first' -or $reviewConsoleArtifactEvidenceStatusSortSnapshot.blocked_candidate_first -ne $true) {
+      Add-Failure "v14.181 status sort snapshot must preserve blocked-candidates-first order"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSortSnapshot.blocked_candidate_artifact_id -ne 'accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001' -or $reviewConsoleArtifactEvidenceStatusSortSnapshot.blocked_candidate_blocker -ne 'human_approval_missing') {
+      Add-Failure "v14.181 status sort snapshot must preserve the blocked lamp candidate"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSortSnapshot.recoverable_count -ne 2 -or $reviewConsoleArtifactEvidenceStatusSortSnapshot.blocked_count -ne 1 -or $reviewConsoleArtifactEvidenceStatusSortSnapshot.hard_acceptance_three_full_samples_met -ne $false) {
+      Add-Failure "v14.181 status sort snapshot must preserve two recoverable samples, one blocked candidate, and no three-sample overclaim"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSortSnapshot.negative_case_sorted_artifact_order_mismatch_fails -ne $true -or $reviewConsoleArtifactEvidenceStatusSortSnapshot.negative_case_blocked_candidate_not_first_fails -ne $true -or $reviewConsoleArtifactEvidenceStatusSortSnapshot.negative_case_three_sample_overclaim_fails -ne $true -or $reviewConsoleArtifactEvidenceStatusSortSnapshot.negative_case_accepted_samples_write_flag_fails -ne $true -or $reviewConsoleArtifactEvidenceStatusSortSnapshot.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.181 must fail artifact evidence status sort snapshot negative cases"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSortSnapshot.fetch_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortSnapshot.file_write_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortSnapshot.accepted_samples_write_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortSnapshot.failure_samples_write_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortSnapshot.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.181 status sort snapshot must not fetch, write files, accepted_samples, failure_samples, or production_candidate"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSortSnapshot.provider_contact_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortSnapshot.plugin_call_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortSnapshot.api_call_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortSnapshot.mcp_runtime_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortSnapshot.real_manifest_read_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortSnapshot.real_vcpchat_read_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortSnapshot.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortSnapshot.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.181 status sort snapshot must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSortSnapshot.vcp_runtime_integration_proven -ne $false -or $reviewConsoleArtifactEvidenceStatusSortSnapshot.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.181 status sort snapshot must not claim VCP runtime integration"
+    }
+  }
+
+  $reviewConsoleArtifactEvidenceStatusSortFilterOutput = & node (Join-Path $Root 'scripts/validate_v14_182_review_console_artifact_evidence_status_sort_filter_interaction.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console artifact evidence status sort/filter interaction validation exited with failure"
+  } else {
+    $reviewConsoleArtifactEvidenceStatusSortFilter = ($reviewConsoleArtifactEvidenceStatusSortFilterOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleArtifactEvidenceStatusSortFilter.passed -ne $true) {
+      Add-Failure "Review Console artifact evidence status sort/filter interaction validation must pass"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSortFilter.draft_output_key -ne 'artifact_evidence_status_sort_filter_interaction_state' -or $reviewConsoleArtifactEvidenceStatusSortFilter.source_sort_key -ne 'artifact_evidence_status_sort_state') {
+      Add-Failure "v14.182 must validate artifact evidence status sort/filter interaction state"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSortFilter.sort_mode -ne 'blocked_candidates_first' -or $reviewConsoleArtifactEvidenceStatusSortFilter.local_filter_only -ne $true -or $reviewConsoleArtifactEvidenceStatusSortFilter.static_interaction_only -ne $true) {
+      Add-Failure "v14.182 filter interaction must remain local static blocked-candidates-first UI state"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSortFilter.all_filter_blocked_candidate_first -ne $true -or $reviewConsoleArtifactEvidenceStatusSortFilter.recoverable_filter_excludes_blocked_candidate -ne $true -or $reviewConsoleArtifactEvidenceStatusSortFilter.blocked_filter_only_blocked_candidate -ne $true) {
+      Add-Failure "v14.182 filter interaction must preserve all/recoverable/blocked visibility semantics"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSortFilter.negative_case_all_filter_blocked_candidate_not_first_fails -ne $true -or $reviewConsoleArtifactEvidenceStatusSortFilter.negative_case_recoverable_filter_includes_blocked_candidate_fails -ne $true -or $reviewConsoleArtifactEvidenceStatusSortFilter.negative_case_blocked_filter_extra_artifact_fails -ne $true -or $reviewConsoleArtifactEvidenceStatusSortFilter.negative_case_accepted_samples_write_flag_fails -ne $true -or $reviewConsoleArtifactEvidenceStatusSortFilter.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.182 must fail artifact evidence status sort/filter interaction negative cases"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSortFilter.fetch_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortFilter.file_write_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortFilter.accepted_samples_write_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortFilter.failure_samples_write_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortFilter.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.182 sort/filter interaction must not fetch, write files, accepted_samples, failure_samples, or production_candidate"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSortFilter.provider_contact_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortFilter.plugin_call_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortFilter.api_call_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortFilter.mcp_runtime_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortFilter.real_manifest_read_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortFilter.real_vcpchat_read_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortFilter.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortFilter.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.182 sort/filter interaction must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSortFilter.vcp_runtime_integration_proven -ne $false -or $reviewConsoleArtifactEvidenceStatusSortFilter.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.182 sort/filter interaction must not claim VCP runtime integration"
+    }
+  }
+
+  $reviewConsoleArtifactEvidenceStatusSortFilterSnapshotOutput = & node (Join-Path $Root 'scripts/validate_v14_183_review_console_artifact_evidence_status_sort_filter_snapshot_static_regression.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console artifact evidence status sort/filter snapshot validation exited with failure"
+  } else {
+    $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot = ($reviewConsoleArtifactEvidenceStatusSortFilterSnapshotOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.passed -ne $true) {
+      Add-Failure "Review Console artifact evidence status sort/filter snapshot validation must pass"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.snapshot_status -ne 'golden_static_snapshot' -or $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.draft_output_key -ne 'artifact_evidence_status_sort_filter_interaction_state') {
+      Add-Failure "v14.183 must validate the artifact evidence status sort/filter golden snapshot"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.sort_mode -ne 'blocked_candidates_first' -or $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.local_filter_only -ne $true -or $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.static_snapshot_only -ne $true) {
+      Add-Failure "v14.183 filter snapshot must remain local static blocked-candidates-first UI state"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.all_filter_blocked_candidate_first -ne $true -or $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.recoverable_filter_excludes_blocked_candidate -ne $true -or $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.blocked_filter_only_blocked_candidate -ne $true) {
+      Add-Failure "v14.183 filter snapshot must preserve all/recoverable/blocked visibility semantics"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.all_visible_count -ne 3 -or $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.recoverable_visible_count -ne 2 -or $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.blocked_visible_count -ne 1 -or $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.blocked_candidate_artifact_id -ne 'accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001') {
+      Add-Failure "v14.183 filter snapshot must preserve visible counts and the blocked lamp candidate"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.negative_case_all_filter_blocked_candidate_not_first_fails -ne $true -or $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.negative_case_recoverable_filter_includes_blocked_candidate_fails -ne $true -or $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.negative_case_blocked_filter_extra_artifact_fails -ne $true -or $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.negative_case_accepted_samples_write_flag_fails -ne $true -or $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.183 must fail artifact evidence status sort/filter snapshot negative cases"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.fetch_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.file_write_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.accepted_samples_write_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.failure_samples_write_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.183 sort/filter snapshot must not fetch, write files, accepted_samples, failure_samples, or production_candidate"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.provider_contact_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.plugin_call_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.api_call_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.mcp_runtime_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.real_manifest_read_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.real_vcpchat_read_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.183 sort/filter snapshot must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.vcp_runtime_integration_proven -ne $false -or $reviewConsoleArtifactEvidenceStatusSortFilterSnapshot.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.183 sort/filter snapshot must not claim VCP runtime integration"
+    }
+  }
+
+  $reviewConsoleArtifactEvidenceReviewNotesOutput = & node (Join-Path $Root 'scripts/validate_v14_184_review_console_artifact_evidence_review_notes_panel.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console artifact evidence review notes panel validation exited with failure"
+  } else {
+    $reviewConsoleArtifactEvidenceReviewNotes = ($reviewConsoleArtifactEvidenceReviewNotesOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleArtifactEvidenceReviewNotes.passed -ne $true) {
+      Add-Failure "Review Console artifact evidence review notes panel validation must pass"
+    }
+    if ($reviewConsoleArtifactEvidenceReviewNotes.draft_output_key -ne 'artifact_evidence_review_notes_state' -or $reviewConsoleArtifactEvidenceReviewNotes.static_notes_only -ne $true) {
+      Add-Failure "v14.184 must validate static artifact evidence review notes state"
+    }
+    if ($reviewConsoleArtifactEvidenceReviewNotes.note_count -ne 3 -or $reviewConsoleArtifactEvidenceReviewNotes.approved_note_count -ne 2 -or $reviewConsoleArtifactEvidenceReviewNotes.pending_note_count -ne 1 -or $reviewConsoleArtifactEvidenceReviewNotes.blocked_note_count -ne 1) {
+      Add-Failure "v14.184 review notes must preserve 2 approved notes, 1 pending note, and 1 blocked note"
+    }
+    if ($reviewConsoleArtifactEvidenceReviewNotes.lamp_blocker -ne 'human_approval_missing') {
+      Add-Failure "v14.184 review notes must preserve the lamp human approval blocker"
+    }
+    if ($reviewConsoleArtifactEvidenceReviewNotes.negative_case_missing_review_record_ref_fails -ne $true -or $reviewConsoleArtifactEvidenceReviewNotes.negative_case_lamp_blocker_missing_fails -ne $true -or $reviewConsoleArtifactEvidenceReviewNotes.negative_case_approved_note_count_mismatch_fails -ne $true -or $reviewConsoleArtifactEvidenceReviewNotes.negative_case_accepted_samples_write_flag_fails -ne $true -or $reviewConsoleArtifactEvidenceReviewNotes.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.184 must fail artifact evidence review notes negative cases"
+    }
+    if ($reviewConsoleArtifactEvidenceReviewNotes.fetch_performed -ne $false -or $reviewConsoleArtifactEvidenceReviewNotes.file_write_performed -ne $false -or $reviewConsoleArtifactEvidenceReviewNotes.accepted_samples_write_performed -ne $false -or $reviewConsoleArtifactEvidenceReviewNotes.failure_samples_write_performed -ne $false -or $reviewConsoleArtifactEvidenceReviewNotes.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.184 review notes must not fetch, write files, accepted_samples, failure_samples, or production_candidate"
+    }
+    if ($reviewConsoleArtifactEvidenceReviewNotes.provider_contact_performed -ne $false -or $reviewConsoleArtifactEvidenceReviewNotes.plugin_call_performed -ne $false -or $reviewConsoleArtifactEvidenceReviewNotes.api_call_performed -ne $false -or $reviewConsoleArtifactEvidenceReviewNotes.mcp_runtime_performed -ne $false -or $reviewConsoleArtifactEvidenceReviewNotes.real_manifest_read_performed -ne $false -or $reviewConsoleArtifactEvidenceReviewNotes.real_vcpchat_read_performed -ne $false -or $reviewConsoleArtifactEvidenceReviewNotes.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleArtifactEvidenceReviewNotes.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.184 review notes must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($reviewConsoleArtifactEvidenceReviewNotes.vcp_runtime_integration_proven -ne $false -or $reviewConsoleArtifactEvidenceReviewNotes.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.184 review notes must not claim VCP runtime integration"
+    }
+  }
+
+  $reviewConsoleArtifactEvidenceReviewNotesSnapshotOutput = & node (Join-Path $Root 'scripts/validate_v14_185_review_console_artifact_evidence_review_notes_snapshot_static_regression.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console artifact evidence review notes snapshot validation exited with failure"
+  } else {
+    $reviewConsoleArtifactEvidenceReviewNotesSnapshot = ($reviewConsoleArtifactEvidenceReviewNotesSnapshotOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleArtifactEvidenceReviewNotesSnapshot.passed -ne $true) {
+      Add-Failure "Review Console artifact evidence review notes snapshot validation must pass"
+    }
+    if ($reviewConsoleArtifactEvidenceReviewNotesSnapshot.snapshot_status -ne 'golden_static_snapshot' -or $reviewConsoleArtifactEvidenceReviewNotesSnapshot.draft_output_key -ne 'artifact_evidence_review_notes_state') {
+      Add-Failure "v14.185 must validate the artifact evidence review notes golden snapshot"
+    }
+    if ($reviewConsoleArtifactEvidenceReviewNotesSnapshot.note_count -ne 3 -or $reviewConsoleArtifactEvidenceReviewNotesSnapshot.approved_note_count -ne 2 -or $reviewConsoleArtifactEvidenceReviewNotesSnapshot.pending_note_count -ne 1 -or $reviewConsoleArtifactEvidenceReviewNotesSnapshot.blocked_note_count -ne 1) {
+      Add-Failure "v14.185 review notes snapshot must preserve 2 approved notes, 1 pending note, and 1 blocked note"
+    }
+    if ($reviewConsoleArtifactEvidenceReviewNotesSnapshot.blocked_artifact_id -ne 'accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001' -or $reviewConsoleArtifactEvidenceReviewNotesSnapshot.lamp_blocker -ne 'human_approval_missing' -or $reviewConsoleArtifactEvidenceReviewNotesSnapshot.blocked_accepted_samples_metadata_registered -ne $false -or $reviewConsoleArtifactEvidenceReviewNotesSnapshot.blocked_production_candidate_status -ne 'not_created') {
+      Add-Failure "v14.185 review notes snapshot must preserve the blocked unregistered lamp candidate"
+    }
+    if ($reviewConsoleArtifactEvidenceReviewNotesSnapshot.negative_case_approved_artifact_ids_mismatch_fails -ne $true -or $reviewConsoleArtifactEvidenceReviewNotesSnapshot.negative_case_blocked_artifact_id_mismatch_fails -ne $true -or $reviewConsoleArtifactEvidenceReviewNotesSnapshot.negative_case_lamp_blocker_missing_fails -ne $true -or $reviewConsoleArtifactEvidenceReviewNotesSnapshot.negative_case_accepted_samples_write_flag_fails -ne $true -or $reviewConsoleArtifactEvidenceReviewNotesSnapshot.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.185 must fail artifact evidence review notes snapshot negative cases"
+    }
+    if ($reviewConsoleArtifactEvidenceReviewNotesSnapshot.fetch_performed -ne $false -or $reviewConsoleArtifactEvidenceReviewNotesSnapshot.file_write_performed -ne $false -or $reviewConsoleArtifactEvidenceReviewNotesSnapshot.accepted_samples_write_performed -ne $false -or $reviewConsoleArtifactEvidenceReviewNotesSnapshot.failure_samples_write_performed -ne $false -or $reviewConsoleArtifactEvidenceReviewNotesSnapshot.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.185 review notes snapshot must not fetch, write files, accepted_samples, failure_samples, or production_candidate"
+    }
+    if ($reviewConsoleArtifactEvidenceReviewNotesSnapshot.provider_contact_performed -ne $false -or $reviewConsoleArtifactEvidenceReviewNotesSnapshot.plugin_call_performed -ne $false -or $reviewConsoleArtifactEvidenceReviewNotesSnapshot.api_call_performed -ne $false -or $reviewConsoleArtifactEvidenceReviewNotesSnapshot.mcp_runtime_performed -ne $false -or $reviewConsoleArtifactEvidenceReviewNotesSnapshot.real_manifest_read_performed -ne $false -or $reviewConsoleArtifactEvidenceReviewNotesSnapshot.real_vcpchat_read_performed -ne $false -or $reviewConsoleArtifactEvidenceReviewNotesSnapshot.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleArtifactEvidenceReviewNotesSnapshot.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.185 review notes snapshot must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($reviewConsoleArtifactEvidenceReviewNotesSnapshot.vcp_runtime_integration_proven -ne $false -or $reviewConsoleArtifactEvidenceReviewNotesSnapshot.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.185 review notes snapshot must not claim VCP runtime integration"
+    }
+  }
+
+  $reviewConsoleThreeSampleGapOutput = & node (Join-Path $Root 'scripts/validate_v14_186_review_console_three_sample_gap_summary_panel.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console three-sample gap summary panel validation exited with failure"
+  } else {
+    $reviewConsoleThreeSampleGap = ($reviewConsoleThreeSampleGapOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleThreeSampleGap.passed -ne $true) {
+      Add-Failure "Review Console three-sample gap summary panel validation must pass"
+    }
+    if ($reviewConsoleThreeSampleGap.draft_output_key -ne 'three_sample_gap_summary_state' -or $reviewConsoleThreeSampleGap.local_summary_only -ne $true) {
+      Add-Failure "v14.186 must validate static three-sample gap summary state"
+    }
+    if ($reviewConsoleThreeSampleGap.required_full_recoverable_sample_count -ne 3 -or $reviewConsoleThreeSampleGap.recoverable_accepted_sample_count -ne 2 -or $reviewConsoleThreeSampleGap.blocked_registration_candidate_count -ne 1 -or $reviewConsoleThreeSampleGap.remaining_full_recoverable_sample_gap -ne 1) {
+      Add-Failure "v14.186 gap summary must preserve required=3, recoverable=2, blocked=1, remaining=1"
+    }
+    if ($reviewConsoleThreeSampleGap.hard_acceptance_three_full_samples_met -ne $false -or $reviewConsoleThreeSampleGap.pending_candidate_counted_as_accepted -ne $false -or $reviewConsoleThreeSampleGap.gap_status -ne 'blocked_by_human_approval_missing') {
+      Add-Failure "v14.186 gap summary must not overclaim three-sample completion"
+    }
+    if ($reviewConsoleThreeSampleGap.blocker_candidate_id -ne 'accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001' -or $reviewConsoleThreeSampleGap.blocker_reason -ne 'human_approval_missing') {
+      Add-Failure "v14.186 gap summary must preserve the blocked lamp candidate"
+    }
+    if ($reviewConsoleThreeSampleGap.negative_case_gap_zero_overclaim_fails -ne $true -or $reviewConsoleThreeSampleGap.negative_case_pending_counted_as_accepted_fails -ne $true -or $reviewConsoleThreeSampleGap.negative_case_blocker_candidate_missing_fails -ne $true -or $reviewConsoleThreeSampleGap.negative_case_accepted_samples_write_flag_fails -ne $true -or $reviewConsoleThreeSampleGap.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.186 must fail three-sample gap negative cases"
+    }
+    if ($reviewConsoleThreeSampleGap.fetch_performed -ne $false -or $reviewConsoleThreeSampleGap.file_write_performed -ne $false -or $reviewConsoleThreeSampleGap.accepted_samples_write_performed -ne $false -or $reviewConsoleThreeSampleGap.failure_samples_write_performed -ne $false -or $reviewConsoleThreeSampleGap.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.186 gap summary must not fetch, write files, accepted_samples, failure_samples, or production_candidate"
+    }
+    if ($reviewConsoleThreeSampleGap.provider_contact_performed -ne $false -or $reviewConsoleThreeSampleGap.plugin_call_performed -ne $false -or $reviewConsoleThreeSampleGap.api_call_performed -ne $false -or $reviewConsoleThreeSampleGap.mcp_runtime_performed -ne $false -or $reviewConsoleThreeSampleGap.real_manifest_read_performed -ne $false -or $reviewConsoleThreeSampleGap.real_vcpchat_read_performed -ne $false -or $reviewConsoleThreeSampleGap.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleThreeSampleGap.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.186 gap summary must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($reviewConsoleThreeSampleGap.vcp_runtime_integration_proven -ne $false -or $reviewConsoleThreeSampleGap.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.186 gap summary must not claim VCP runtime integration"
+    }
+  }
+
+  $reviewConsoleThreeSampleGapSnapshotOutput = & node (Join-Path $Root 'scripts/validate_v14_187_review_console_three_sample_gap_snapshot_static_regression.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console three-sample gap snapshot validation exited with failure"
+  } else {
+    $reviewConsoleThreeSampleGapSnapshot = ($reviewConsoleThreeSampleGapSnapshotOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleThreeSampleGapSnapshot.passed -ne $true) {
+      Add-Failure "Review Console three-sample gap snapshot validation must pass"
+    }
+    if ($reviewConsoleThreeSampleGapSnapshot.snapshot_status -ne 'golden_static_snapshot' -or $reviewConsoleThreeSampleGapSnapshot.draft_output_key -ne 'three_sample_gap_summary_state' -or $reviewConsoleThreeSampleGapSnapshot.static_snapshot_only -ne $true) {
+      Add-Failure "v14.187 must validate static three-sample gap golden snapshot state"
+    }
+    if ($reviewConsoleThreeSampleGapSnapshot.required_full_recoverable_sample_count -ne 3 -or $reviewConsoleThreeSampleGapSnapshot.recoverable_accepted_sample_count -ne 2 -or $reviewConsoleThreeSampleGapSnapshot.blocked_registration_candidate_count -ne 1 -or $reviewConsoleThreeSampleGapSnapshot.remaining_full_recoverable_sample_gap -ne 1) {
+      Add-Failure "v14.187 gap snapshot must preserve required=3, recoverable=2, blocked=1, remaining=1"
+    }
+    if ($reviewConsoleThreeSampleGapSnapshot.hard_acceptance_three_full_samples_met -ne $false -or $reviewConsoleThreeSampleGapSnapshot.pending_candidate_counted_as_accepted -ne $false -or $reviewConsoleThreeSampleGapSnapshot.gap_status -ne 'blocked_by_human_approval_missing') {
+      Add-Failure "v14.187 gap snapshot must not overclaim three-sample completion"
+    }
+    if ($reviewConsoleThreeSampleGapSnapshot.blocker_candidate_id -ne 'accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001' -or $reviewConsoleThreeSampleGapSnapshot.blocker_reason -ne 'human_approval_missing' -or $reviewConsoleThreeSampleGapSnapshot.blocker_accepted_samples_metadata_registered -ne $false -or $reviewConsoleThreeSampleGapSnapshot.blocker_production_candidate_status -ne 'not_created') {
+      Add-Failure "v14.187 gap snapshot must preserve the blocked unregistered lamp candidate"
+    }
+    if ($reviewConsoleThreeSampleGapSnapshot.negative_case_gap_zero_overclaim_fails -ne $true -or $reviewConsoleThreeSampleGapSnapshot.negative_case_pending_counted_as_accepted_fails -ne $true -or $reviewConsoleThreeSampleGapSnapshot.negative_case_blocker_candidate_mismatch_fails -ne $true -or $reviewConsoleThreeSampleGapSnapshot.negative_case_accepted_samples_write_flag_fails -ne $true -or $reviewConsoleThreeSampleGapSnapshot.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.187 must fail three-sample gap snapshot negative cases"
+    }
+    if ($reviewConsoleThreeSampleGapSnapshot.fetch_performed -ne $false -or $reviewConsoleThreeSampleGapSnapshot.file_write_performed -ne $false -or $reviewConsoleThreeSampleGapSnapshot.accepted_samples_write_performed -ne $false -or $reviewConsoleThreeSampleGapSnapshot.failure_samples_write_performed -ne $false -or $reviewConsoleThreeSampleGapSnapshot.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.187 gap snapshot must not fetch, write files, accepted_samples, failure_samples, or production_candidate"
+    }
+    if ($reviewConsoleThreeSampleGapSnapshot.provider_contact_performed -ne $false -or $reviewConsoleThreeSampleGapSnapshot.plugin_call_performed -ne $false -or $reviewConsoleThreeSampleGapSnapshot.api_call_performed -ne $false -or $reviewConsoleThreeSampleGapSnapshot.mcp_runtime_performed -ne $false -or $reviewConsoleThreeSampleGapSnapshot.real_manifest_read_performed -ne $false -or $reviewConsoleThreeSampleGapSnapshot.real_vcpchat_read_performed -ne $false -or $reviewConsoleThreeSampleGapSnapshot.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleThreeSampleGapSnapshot.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.187 gap snapshot must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($reviewConsoleThreeSampleGapSnapshot.vcp_runtime_integration_proven -ne $false -or $reviewConsoleThreeSampleGapSnapshot.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.187 gap snapshot must not claim VCP runtime integration"
+    }
+  }
+
+  $reviewConsoleThirdSampleReadinessOutput = & node (Join-Path $Root 'scripts/validate_v14_188_review_console_third_sample_acceptance_readiness.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console third-sample acceptance readiness validation exited with failure"
+  } else {
+    $reviewConsoleThirdSampleReadiness = ($reviewConsoleThirdSampleReadinessOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleThirdSampleReadiness.passed -ne $true) {
+      Add-Failure "Review Console third-sample acceptance readiness validation must pass"
+    }
+    if ($reviewConsoleThirdSampleReadiness.draft_output_key -ne 'third_sample_acceptance_readiness_state' -or $reviewConsoleThirdSampleReadiness.local_readiness_only -ne $true) {
+      Add-Failure "v14.188 must validate static third-sample acceptance readiness state"
+    }
+    if ($reviewConsoleThirdSampleReadiness.target_sample_id -ne 'accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001' -or $reviewConsoleThirdSampleReadiness.target_candidate_id -ne 'v14_166_lamp_v3_generated_candidate_001') {
+      Add-Failure "v14.188 readiness must target the blocked lamp candidate"
+    }
+    if ($reviewConsoleThirdSampleReadiness.readiness_status -ne 'blocked_missing_human_approval' -or $reviewConsoleThirdSampleReadiness.required_approval_by -ne 'Jenn' -or $reviewConsoleThirdSampleReadiness.human_approval_status -ne 'pending' -or $null -ne $reviewConsoleThirdSampleReadiness.approved_by) {
+      Add-Failure "v14.188 readiness must preserve missing Jenn human approval"
+    }
+    if ($reviewConsoleThirdSampleReadiness.registration_ready -ne $false -or $reviewConsoleThirdSampleReadiness.accepted_samples_registration_eligible -ne $false -or $reviewConsoleThirdSampleReadiness.accepted_samples_metadata_registered -ne $false) {
+      Add-Failure "v14.188 readiness must not mark the third sample as registration ready"
+    }
+    if ($reviewConsoleThirdSampleReadiness.accepted_samples_write_allowed -ne $false -or $reviewConsoleThirdSampleReadiness.production_candidate_write_allowed -ne $false -or $reviewConsoleThirdSampleReadiness.failure_samples_write_allowed -ne $false) {
+      Add-Failure "v14.188 readiness must not allow accepted_samples, production_candidate, or failure_samples writes"
+    }
+    if ($reviewConsoleThirdSampleReadiness.present_evidence_count -ne 9 -or $reviewConsoleThirdSampleReadiness.missing_requirement_count -ne 2 -or $reviewConsoleThirdSampleReadiness.next_allowed_local_action -ne 'wait_for_jenn_human_approval') {
+      Add-Failure "v14.188 readiness must preserve evidence count, missing requirements, and next local action"
+    }
+    if ($reviewConsoleThirdSampleReadiness.negative_case_approval_overclaim_fails -ne $true -or $reviewConsoleThirdSampleReadiness.negative_case_missing_requirements_empty_fails -ne $true -or $reviewConsoleThirdSampleReadiness.negative_case_target_candidate_mismatch_fails -ne $true -or $reviewConsoleThirdSampleReadiness.negative_case_accepted_samples_write_flag_fails -ne $true -or $reviewConsoleThirdSampleReadiness.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.188 must fail third-sample acceptance readiness negative cases"
+    }
+    if ($reviewConsoleThirdSampleReadiness.fetch_performed -ne $false -or $reviewConsoleThirdSampleReadiness.file_write_performed -ne $false -or $reviewConsoleThirdSampleReadiness.accepted_samples_write_performed -ne $false -or $reviewConsoleThirdSampleReadiness.failure_samples_write_performed -ne $false -or $reviewConsoleThirdSampleReadiness.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.188 readiness must not fetch, write files, accepted_samples, failure_samples, or production_candidate"
+    }
+    if ($reviewConsoleThirdSampleReadiness.provider_contact_performed -ne $false -or $reviewConsoleThirdSampleReadiness.plugin_call_performed -ne $false -or $reviewConsoleThirdSampleReadiness.api_call_performed -ne $false -or $reviewConsoleThirdSampleReadiness.mcp_runtime_performed -ne $false -or $reviewConsoleThirdSampleReadiness.real_manifest_read_performed -ne $false -or $reviewConsoleThirdSampleReadiness.real_vcpchat_read_performed -ne $false -or $reviewConsoleThirdSampleReadiness.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleThirdSampleReadiness.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.188 readiness must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($reviewConsoleThirdSampleReadiness.vcp_runtime_integration_proven -ne $false -or $reviewConsoleThirdSampleReadiness.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.188 readiness must not claim VCP runtime integration"
+    }
+  }
+
+  $reviewConsoleThirdSampleReadinessSnapshotOutput = & node (Join-Path $Root 'scripts/validate_v14_189_review_console_third_sample_acceptance_readiness_snapshot_static_regression.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console third-sample acceptance readiness snapshot validation exited with failure"
+  } else {
+    $reviewConsoleThirdSampleReadinessSnapshot = ($reviewConsoleThirdSampleReadinessSnapshotOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleThirdSampleReadinessSnapshot.passed -ne $true) {
+      Add-Failure "Review Console third-sample acceptance readiness snapshot validation must pass"
+    }
+    if ($reviewConsoleThirdSampleReadinessSnapshot.snapshot_status -ne 'golden_static_snapshot' -or $reviewConsoleThirdSampleReadinessSnapshot.draft_output_key -ne 'third_sample_acceptance_readiness_state' -or $reviewConsoleThirdSampleReadinessSnapshot.static_snapshot_only -ne $true) {
+      Add-Failure "v14.189 must validate static third-sample readiness golden snapshot state"
+    }
+    if ($reviewConsoleThirdSampleReadinessSnapshot.target_sample_id -ne 'accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001' -or $reviewConsoleThirdSampleReadinessSnapshot.target_candidate_id -ne 'v14_166_lamp_v3_generated_candidate_001') {
+      Add-Failure "v14.189 readiness snapshot must target the blocked lamp candidate"
+    }
+    if ($reviewConsoleThirdSampleReadinessSnapshot.readiness_status -ne 'blocked_missing_human_approval' -or $reviewConsoleThirdSampleReadinessSnapshot.required_approval_by -ne 'Jenn' -or $reviewConsoleThirdSampleReadinessSnapshot.human_approval_status -ne 'pending' -or $null -ne $reviewConsoleThirdSampleReadinessSnapshot.approved_by) {
+      Add-Failure "v14.189 readiness snapshot must preserve missing Jenn human approval"
+    }
+    if ($reviewConsoleThirdSampleReadinessSnapshot.registration_ready -ne $false -or $reviewConsoleThirdSampleReadinessSnapshot.accepted_samples_registration_eligible -ne $false -or $reviewConsoleThirdSampleReadinessSnapshot.accepted_samples_metadata_registered -ne $false) {
+      Add-Failure "v14.189 readiness snapshot must not mark the third sample as registration ready"
+    }
+    if ($reviewConsoleThirdSampleReadinessSnapshot.accepted_samples_write_allowed -ne $false -or $reviewConsoleThirdSampleReadinessSnapshot.production_candidate_write_allowed -ne $false -or $reviewConsoleThirdSampleReadinessSnapshot.failure_samples_write_allowed -ne $false) {
+      Add-Failure "v14.189 readiness snapshot must not allow accepted_samples, production_candidate, or failure_samples writes"
+    }
+    if ($reviewConsoleThirdSampleReadinessSnapshot.present_evidence_count -ne 9 -or $reviewConsoleThirdSampleReadinessSnapshot.missing_requirement_count -ne 2 -or $reviewConsoleThirdSampleReadinessSnapshot.next_allowed_local_action -ne 'wait_for_jenn_human_approval') {
+      Add-Failure "v14.189 readiness snapshot must preserve evidence count, missing requirements, and next local action"
+    }
+    if ($reviewConsoleThirdSampleReadinessSnapshot.negative_case_approval_overclaim_fails -ne $true -or $reviewConsoleThirdSampleReadinessSnapshot.negative_case_registration_ready_overclaim_fails -ne $true -or $reviewConsoleThirdSampleReadinessSnapshot.negative_case_target_candidate_mismatch_fails -ne $true -or $reviewConsoleThirdSampleReadinessSnapshot.negative_case_accepted_samples_write_flag_fails -ne $true -or $reviewConsoleThirdSampleReadinessSnapshot.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.189 must fail third-sample readiness snapshot negative cases"
+    }
+    if ($reviewConsoleThirdSampleReadinessSnapshot.fetch_performed -ne $false -or $reviewConsoleThirdSampleReadinessSnapshot.file_write_performed -ne $false -or $reviewConsoleThirdSampleReadinessSnapshot.accepted_samples_write_performed -ne $false -or $reviewConsoleThirdSampleReadinessSnapshot.failure_samples_write_performed -ne $false -or $reviewConsoleThirdSampleReadinessSnapshot.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.189 readiness snapshot must not fetch, write files, accepted_samples, failure_samples, or production_candidate"
+    }
+    if ($reviewConsoleThirdSampleReadinessSnapshot.provider_contact_performed -ne $false -or $reviewConsoleThirdSampleReadinessSnapshot.plugin_call_performed -ne $false -or $reviewConsoleThirdSampleReadinessSnapshot.api_call_performed -ne $false -or $reviewConsoleThirdSampleReadinessSnapshot.mcp_runtime_performed -ne $false -or $reviewConsoleThirdSampleReadinessSnapshot.real_manifest_read_performed -ne $false -or $reviewConsoleThirdSampleReadinessSnapshot.real_vcpchat_read_performed -ne $false -or $reviewConsoleThirdSampleReadinessSnapshot.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleThirdSampleReadinessSnapshot.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.189 readiness snapshot must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($reviewConsoleThirdSampleReadinessSnapshot.vcp_runtime_integration_proven -ne $false -or $reviewConsoleThirdSampleReadinessSnapshot.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.189 readiness snapshot must not claim VCP runtime integration"
+    }
+  }
+
+  $thirdSampleAcceptedSamplesAuthorizationDraftOutput = & node (Join-Path $Root 'scripts/validate_v14_190_third_sample_accepted_samples_registration_authorization_package_draft.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Third-sample accepted_samples registration authorization package draft validation exited with failure"
+  } else {
+    $thirdSampleAcceptedSamplesAuthorizationDraft = ($thirdSampleAcceptedSamplesAuthorizationDraftOutput -join "`n") | ConvertFrom-Json
+    if ($thirdSampleAcceptedSamplesAuthorizationDraft.passed -ne $true) {
+      Add-Failure "Third-sample accepted_samples registration authorization package draft validation must pass"
+    }
+    if ($thirdSampleAcceptedSamplesAuthorizationDraft.authorization_package_status -ne 'prepared_blocked_not_granted' -or $thirdSampleAcceptedSamplesAuthorizationDraft.authorization_granted_by_this_record -ne $false -or $thirdSampleAcceptedSamplesAuthorizationDraft.execution_ready -ne $false) {
+      Add-Failure "v14.190 authorization package must remain prepared, blocked, and not granted"
+    }
+    if ($thirdSampleAcceptedSamplesAuthorizationDraft.blocker -ne 'human_approval_missing' -or $thirdSampleAcceptedSamplesAuthorizationDraft.human_approval_status -ne 'pending' -or $null -ne $thirdSampleAcceptedSamplesAuthorizationDraft.approved_by -or $thirdSampleAcceptedSamplesAuthorizationDraft.registration_ready -ne $false) {
+      Add-Failure "v14.190 authorization package must preserve missing Jenn approval"
+    }
+    if ($thirdSampleAcceptedSamplesAuthorizationDraft.target_sample_id -ne 'accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001' -or $thirdSampleAcceptedSamplesAuthorizationDraft.target_candidate_id -ne 'v14_166_lamp_v3_generated_candidate_001') {
+      Add-Failure "v14.190 authorization package must target the blocked lamp candidate"
+    }
+    if ($thirdSampleAcceptedSamplesAuthorizationDraft.allowed_file_count -ne 2 -or $thirdSampleAcceptedSamplesAuthorizationDraft.validation_command_count -lt 5 -or $thirdSampleAcceptedSamplesAuthorizationDraft.draft_only -ne $true) {
+      Add-Failure "v14.190 authorization package must keep exact write scope, validation, and draft-only status"
+    }
+    if ($thirdSampleAcceptedSamplesAuthorizationDraft.accepted_samples_write_performed -ne $false -or $thirdSampleAcceptedSamplesAuthorizationDraft.category_index_write_performed -ne $false -or $thirdSampleAcceptedSamplesAuthorizationDraft.image_file_copy_performed -ne $false -or $thirdSampleAcceptedSamplesAuthorizationDraft.failure_samples_write_performed -ne $false -or $thirdSampleAcceptedSamplesAuthorizationDraft.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.190 authorization package draft must not perform accepted_samples, category, image copy, failure, or production writes"
+    }
+    if ($thirdSampleAcceptedSamplesAuthorizationDraft.provider_contact_performed -ne $false -or $thirdSampleAcceptedSamplesAuthorizationDraft.plugin_call_performed -ne $false -or $thirdSampleAcceptedSamplesAuthorizationDraft.api_call_performed -ne $false -or $thirdSampleAcceptedSamplesAuthorizationDraft.mcp_runtime_performed -ne $false -or $thirdSampleAcceptedSamplesAuthorizationDraft.real_manifest_read_performed -ne $false -or $thirdSampleAcceptedSamplesAuthorizationDraft.real_vcpchat_read_performed -ne $false -or $thirdSampleAcceptedSamplesAuthorizationDraft.real_vcptoolbox_read_performed -ne $false -or $thirdSampleAcceptedSamplesAuthorizationDraft.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.190 authorization package draft must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($thirdSampleAcceptedSamplesAuthorizationDraft.vcp_runtime_integration_proven -ne $false -or $thirdSampleAcceptedSamplesAuthorizationDraft.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.190 authorization package draft must not claim VCP runtime integration"
+    }
+    if ($thirdSampleAcceptedSamplesAuthorizationDraft.negative_case_granted_package_fails -ne $true -or $thirdSampleAcceptedSamplesAuthorizationDraft.negative_case_execution_ready_without_approval_fails -ne $true -or $thirdSampleAcceptedSamplesAuthorizationDraft.negative_case_missing_exact_statement_fails -ne $true -or $thirdSampleAcceptedSamplesAuthorizationDraft.negative_case_broad_write_scope_fails -ne $true -or $thirdSampleAcceptedSamplesAuthorizationDraft.negative_case_accepted_samples_write_flag_fails -ne $true -or $thirdSampleAcceptedSamplesAuthorizationDraft.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.190 authorization package draft must fail authorization, scope, write, and runtime negative cases"
+    }
+  }
+
+  $reviewConsoleAuthorizationPackagePanelOutput = & node (Join-Path $Root 'scripts/validate_v14_191_review_console_accepted_samples_authorization_package_panel.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console accepted_samples authorization package panel validation exited with failure"
+  } else {
+    $reviewConsoleAuthorizationPackagePanel = ($reviewConsoleAuthorizationPackagePanelOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleAuthorizationPackagePanel.passed -ne $true) {
+      Add-Failure "Review Console accepted_samples authorization package panel validation must pass"
+    }
+    if ($reviewConsoleAuthorizationPackagePanel.draft_output_key -ne 'third_sample_accepted_samples_authorization_package_state') {
+      Add-Failure "v14.191 authorization package panel must expose the expected draft output key"
+    }
+    if ($reviewConsoleAuthorizationPackagePanel.authorization_package_status -ne 'prepared_blocked_not_granted' -or $reviewConsoleAuthorizationPackagePanel.authorization_granted_by_this_record -ne $false -or $reviewConsoleAuthorizationPackagePanel.execution_ready -ne $false) {
+      Add-Failure "v14.191 authorization package panel must remain prepared, blocked, not granted, and not execution ready"
+    }
+    if ($reviewConsoleAuthorizationPackagePanel.blocker -ne 'human_approval_missing' -or $reviewConsoleAuthorizationPackagePanel.human_approval_status -ne 'pending' -or $null -ne $reviewConsoleAuthorizationPackagePanel.approved_by -or $reviewConsoleAuthorizationPackagePanel.registration_ready -ne $false) {
+      Add-Failure "v14.191 authorization package panel must preserve missing Jenn approval"
+    }
+    if ($reviewConsoleAuthorizationPackagePanel.target_sample_id -ne 'accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001' -or $reviewConsoleAuthorizationPackagePanel.target_candidate_id -ne 'v14_166_lamp_v3_generated_candidate_001') {
+      Add-Failure "v14.191 authorization package panel must target the blocked lamp candidate"
+    }
+    if ($reviewConsoleAuthorizationPackagePanel.exact_allowed_file_count -ne 2 -or $reviewConsoleAuthorizationPackagePanel.missing_requirement_count -ne 3 -or $reviewConsoleAuthorizationPackagePanel.exact_approval_statement_draft_present -ne $true -or $reviewConsoleAuthorizationPackagePanel.static_panel_only -ne $true) {
+      Add-Failure "v14.191 authorization package panel must keep exact scope, missing requirements, statement visibility, and static-only status"
+    }
+    if ($reviewConsoleAuthorizationPackagePanel.accepted_samples_write_performed -ne $false -or $reviewConsoleAuthorizationPackagePanel.category_index_write_performed -ne $false -or $reviewConsoleAuthorizationPackagePanel.image_file_copy_performed -ne $false -or $reviewConsoleAuthorizationPackagePanel.failure_samples_write_performed -ne $false -or $reviewConsoleAuthorizationPackagePanel.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.191 authorization package panel must not perform accepted_samples, category, image copy, failure, or production writes"
+    }
+    if ($reviewConsoleAuthorizationPackagePanel.provider_contact_performed -ne $false -or $reviewConsoleAuthorizationPackagePanel.plugin_call_performed -ne $false -or $reviewConsoleAuthorizationPackagePanel.api_call_performed -ne $false -or $reviewConsoleAuthorizationPackagePanel.mcp_runtime_performed -ne $false -or $reviewConsoleAuthorizationPackagePanel.real_manifest_read_performed -ne $false -or $reviewConsoleAuthorizationPackagePanel.real_vcpchat_read_performed -ne $false -or $reviewConsoleAuthorizationPackagePanel.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleAuthorizationPackagePanel.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.191 authorization package panel must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($reviewConsoleAuthorizationPackagePanel.vcp_runtime_integration_proven -ne $false -or $reviewConsoleAuthorizationPackagePanel.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.191 authorization package panel must not claim VCP runtime integration"
+    }
+    if ($reviewConsoleAuthorizationPackagePanel.negative_case_authorization_granted_overclaim_fails -ne $true -or $reviewConsoleAuthorizationPackagePanel.negative_case_execution_ready_overclaim_fails -ne $true -or $reviewConsoleAuthorizationPackagePanel.negative_case_missing_statement_fails -ne $true -or $reviewConsoleAuthorizationPackagePanel.negative_case_broad_allowed_files_fails -ne $true -or $reviewConsoleAuthorizationPackagePanel.negative_case_accepted_samples_write_flag_fails -ne $true -or $reviewConsoleAuthorizationPackagePanel.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.191 authorization package panel must fail authorization, execution, statement, scope, write, and runtime negative cases"
+    }
+  }
+
+  $reviewConsoleAuthorizationPackageSnapshotOutput = & node (Join-Path $Root 'scripts/validate_v14_192_review_console_accepted_samples_authorization_package_snapshot_static_regression.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console accepted_samples authorization package snapshot validation exited with failure"
+  } else {
+    $reviewConsoleAuthorizationPackageSnapshot = ($reviewConsoleAuthorizationPackageSnapshotOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleAuthorizationPackageSnapshot.passed -ne $true) {
+      Add-Failure "Review Console accepted_samples authorization package snapshot validation must pass"
+    }
+    if ($reviewConsoleAuthorizationPackageSnapshot.snapshot_status -ne 'golden_static_snapshot' -or $reviewConsoleAuthorizationPackageSnapshot.draft_output_key -ne 'third_sample_accepted_samples_authorization_package_state') {
+      Add-Failure "v14.192 authorization package snapshot must preserve the golden snapshot and draft output key"
+    }
+    if ($reviewConsoleAuthorizationPackageSnapshot.authorization_package_status -ne 'prepared_blocked_not_granted' -or $reviewConsoleAuthorizationPackageSnapshot.authorization_granted_by_this_record -ne $false -or $reviewConsoleAuthorizationPackageSnapshot.execution_ready -ne $false) {
+      Add-Failure "v14.192 authorization package snapshot must remain prepared, blocked, not granted, and not execution ready"
+    }
+    if ($reviewConsoleAuthorizationPackageSnapshot.blocker -ne 'human_approval_missing' -or $reviewConsoleAuthorizationPackageSnapshot.human_approval_status -ne 'pending' -or $null -ne $reviewConsoleAuthorizationPackageSnapshot.approved_by -or $reviewConsoleAuthorizationPackageSnapshot.registration_ready -ne $false) {
+      Add-Failure "v14.192 authorization package snapshot must preserve missing Jenn approval"
+    }
+    if ($reviewConsoleAuthorizationPackageSnapshot.target_sample_id -ne 'accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001' -or $reviewConsoleAuthorizationPackageSnapshot.target_candidate_id -ne 'v14_166_lamp_v3_generated_candidate_001') {
+      Add-Failure "v14.192 authorization package snapshot must target the blocked lamp candidate"
+    }
+    if ($reviewConsoleAuthorizationPackageSnapshot.exact_allowed_file_count -ne 2 -or $reviewConsoleAuthorizationPackageSnapshot.forbidden_operation_count -ne 10 -or $reviewConsoleAuthorizationPackageSnapshot.missing_requirement_count -ne 3 -or $reviewConsoleAuthorizationPackageSnapshot.exact_approval_statement_draft_present -ne $true -or $reviewConsoleAuthorizationPackageSnapshot.static_panel_only -ne $true -or $reviewConsoleAuthorizationPackageSnapshot.static_snapshot_only -ne $true) {
+      Add-Failure "v14.192 authorization package snapshot must freeze exact scope, blocker counts, statement visibility, panel-only, and snapshot-only status"
+    }
+    if ($reviewConsoleAuthorizationPackageSnapshot.accepted_samples_write_performed -ne $false -or $reviewConsoleAuthorizationPackageSnapshot.category_index_write_performed -ne $false -or $reviewConsoleAuthorizationPackageSnapshot.image_file_copy_performed -ne $false -or $reviewConsoleAuthorizationPackageSnapshot.failure_samples_write_performed -ne $false -or $reviewConsoleAuthorizationPackageSnapshot.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.192 authorization package snapshot must not perform accepted_samples, category, image copy, failure, or production writes"
+    }
+    if ($reviewConsoleAuthorizationPackageSnapshot.provider_contact_performed -ne $false -or $reviewConsoleAuthorizationPackageSnapshot.plugin_call_performed -ne $false -or $reviewConsoleAuthorizationPackageSnapshot.api_call_performed -ne $false -or $reviewConsoleAuthorizationPackageSnapshot.mcp_runtime_performed -ne $false -or $reviewConsoleAuthorizationPackageSnapshot.real_manifest_read_performed -ne $false -or $reviewConsoleAuthorizationPackageSnapshot.real_vcpchat_read_performed -ne $false -or $reviewConsoleAuthorizationPackageSnapshot.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleAuthorizationPackageSnapshot.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.192 authorization package snapshot must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($reviewConsoleAuthorizationPackageSnapshot.vcp_runtime_integration_proven -ne $false -or $reviewConsoleAuthorizationPackageSnapshot.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.192 authorization package snapshot must not claim VCP runtime integration"
+    }
+    if ($reviewConsoleAuthorizationPackageSnapshot.negative_case_authorization_granted_overclaim_fails -ne $true -or $reviewConsoleAuthorizationPackageSnapshot.negative_case_execution_ready_overclaim_fails -ne $true -or $reviewConsoleAuthorizationPackageSnapshot.negative_case_missing_statement_fails -ne $true -or $reviewConsoleAuthorizationPackageSnapshot.negative_case_allowed_file_count_drift_fails -ne $true -or $reviewConsoleAuthorizationPackageSnapshot.negative_case_accepted_samples_write_flag_fails -ne $true -or $reviewConsoleAuthorizationPackageSnapshot.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.192 authorization package snapshot must fail authorization, execution, statement, scope, write, and runtime negative cases"
+    }
+  }
+
+  $thirdSampleAcceptedSamplesDryRunPatchOutput = & node (Join-Path $Root 'scripts/validate_v14_193_third_sample_accepted_samples_registration_dry_run_patch_preview.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Third-sample accepted_samples registration dry-run patch preview validation exited with failure"
+  } else {
+    $thirdSampleAcceptedSamplesDryRunPatch = ($thirdSampleAcceptedSamplesDryRunPatchOutput -join "`n") | ConvertFrom-Json
+    if ($thirdSampleAcceptedSamplesDryRunPatch.passed -ne $true) {
+      Add-Failure "Third-sample accepted_samples registration dry-run patch preview validation must pass"
+    }
+    if ($thirdSampleAcceptedSamplesDryRunPatch.dry_run_status -ne 'blocked_pending_human_approval' -or $thirdSampleAcceptedSamplesDryRunPatch.registration_executable_now -ne $false) {
+      Add-Failure "v14.193 dry-run patch preview must stay blocked and non-executable"
+    }
+    if ($thirdSampleAcceptedSamplesDryRunPatch.target_sample_id -ne 'accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001' -or $thirdSampleAcceptedSamplesDryRunPatch.target_candidate_id -ne 'v14_166_lamp_v3_generated_candidate_001' -or $thirdSampleAcceptedSamplesDryRunPatch.category -ne 'product_still_life') {
+      Add-Failure "v14.193 dry-run patch preview must target the lamp candidate and product_still_life category"
+    }
+    if ($thirdSampleAcceptedSamplesDryRunPatch.human_approval_status -ne 'pending' -or $null -ne $thirdSampleAcceptedSamplesDryRunPatch.approved_by) {
+      Add-Failure "v14.193 dry-run patch preview must preserve missing Jenn approval"
+    }
+    if ($thirdSampleAcceptedSamplesDryRunPatch.proposed_registry_sample_id -ne 'accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001' -or $thirdSampleAcceptedSamplesDryRunPatch.proposed_category_index_ref -ne 'accepted_samples/categories/product_still_life.yaml' -or $thirdSampleAcceptedSamplesDryRunPatch.sample_count_delta_after_execution -ne 1 -or $thirdSampleAcceptedSamplesDryRunPatch.sample_count_after_execution -ne 2) {
+      Add-Failure "v14.193 dry-run patch preview must preserve the exact proposed registry/category patch"
+    }
+    if ($thirdSampleAcceptedSamplesDryRunPatch.dry_run_only -ne $true -or $thirdSampleAcceptedSamplesDryRunPatch.accepted_samples_write_performed -ne $false -or $thirdSampleAcceptedSamplesDryRunPatch.category_index_write_performed -ne $false -or $thirdSampleAcceptedSamplesDryRunPatch.image_file_copy_performed -ne $false -or $thirdSampleAcceptedSamplesDryRunPatch.runs_source_image_modified -ne $false -or $thirdSampleAcceptedSamplesDryRunPatch.failure_samples_write_performed -ne $false -or $thirdSampleAcceptedSamplesDryRunPatch.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.193 dry-run patch preview must not perform registry, category, image, runs, failure, or production writes"
+    }
+    if ($thirdSampleAcceptedSamplesDryRunPatch.provider_contact_performed -ne $false -or $thirdSampleAcceptedSamplesDryRunPatch.plugin_call_performed -ne $false -or $thirdSampleAcceptedSamplesDryRunPatch.api_call_performed -ne $false -or $thirdSampleAcceptedSamplesDryRunPatch.mcp_runtime_performed -ne $false -or $thirdSampleAcceptedSamplesDryRunPatch.real_manifest_read_performed -ne $false -or $thirdSampleAcceptedSamplesDryRunPatch.real_vcpchat_read_performed -ne $false -or $thirdSampleAcceptedSamplesDryRunPatch.real_vcptoolbox_read_performed -ne $false -or $thirdSampleAcceptedSamplesDryRunPatch.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.193 dry-run patch preview must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($thirdSampleAcceptedSamplesDryRunPatch.vcp_runtime_integration_proven -ne $false -or $thirdSampleAcceptedSamplesDryRunPatch.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.193 dry-run patch preview must not claim VCP runtime integration"
+    }
+    if ($thirdSampleAcceptedSamplesDryRunPatch.negative_case_human_approval_overclaim_fails -ne $true -or $thirdSampleAcceptedSamplesDryRunPatch.negative_case_hash_mismatch_fails -ne $true -or $thirdSampleAcceptedSamplesDryRunPatch.negative_case_absolute_artifact_locator_fails -ne $true -or $thirdSampleAcceptedSamplesDryRunPatch.negative_case_category_mismatch_fails -ne $true -or $thirdSampleAcceptedSamplesDryRunPatch.negative_case_accepted_samples_write_flag_fails -ne $true -or $thirdSampleAcceptedSamplesDryRunPatch.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.193 dry-run patch preview must fail approval, hash, locator, category, write, and runtime negative cases"
+    }
+  }
+
+  $thirdSampleAcceptedSamplesExecutionPreflightOutput = & node (Join-Path $Root 'scripts/validate_v14_194_third_sample_accepted_samples_registration_execution_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Third-sample accepted_samples registration execution preflight validation exited with failure"
+  } else {
+    $thirdSampleAcceptedSamplesExecutionPreflight = ($thirdSampleAcceptedSamplesExecutionPreflightOutput -join "`n") | ConvertFrom-Json
+    if ($thirdSampleAcceptedSamplesExecutionPreflight.passed -ne $true) {
+      Add-Failure "Third-sample accepted_samples registration execution preflight validation must pass"
+    }
+    if ($thirdSampleAcceptedSamplesExecutionPreflight.preflight_status -ne 'blocked' -or $thirdSampleAcceptedSamplesExecutionPreflight.blocker -ne 'missing_human_approval_and_exact_authorization' -or $thirdSampleAcceptedSamplesExecutionPreflight.execution_allowed_now -ne $false) {
+      Add-Failure "v14.194 execution preflight must remain blocked and not execution allowed"
+    }
+    if ($thirdSampleAcceptedSamplesExecutionPreflight.target_sample_id -ne 'accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001' -or $thirdSampleAcceptedSamplesExecutionPreflight.target_candidate_id -ne 'v14_166_lamp_v3_generated_candidate_001' -or $thirdSampleAcceptedSamplesExecutionPreflight.category -ne 'product_still_life') {
+      Add-Failure "v14.194 execution preflight must target the lamp candidate and product_still_life category"
+    }
+    if ($thirdSampleAcceptedSamplesExecutionPreflight.human_approval_status -ne 'pending' -or $null -ne $thirdSampleAcceptedSamplesExecutionPreflight.approved_by -or $thirdSampleAcceptedSamplesExecutionPreflight.authorization_package_status -ne 'prepared_blocked_not_granted' -or $thirdSampleAcceptedSamplesExecutionPreflight.authorization_granted_by_this_record -ne $false -or $thirdSampleAcceptedSamplesExecutionPreflight.dry_run_patch_ready -ne $true) {
+      Add-Failure "v14.194 execution preflight must preserve missing approval, ungranted authorization, and ready dry-run patch"
+    }
+    if ($thirdSampleAcceptedSamplesExecutionPreflight.allowed_file_count_after_approval -ne 2 -or $thirdSampleAcceptedSamplesExecutionPreflight.required_before_execution_count -lt 4 -or $thirdSampleAcceptedSamplesExecutionPreflight.validation_required_before_execution_count -lt 5) {
+      Add-Failure "v14.194 execution preflight must preserve exact write scope and required validation chain"
+    }
+    if ($thirdSampleAcceptedSamplesExecutionPreflight.preflight_only -ne $true -or $thirdSampleAcceptedSamplesExecutionPreflight.accepted_samples_write_performed -ne $false -or $thirdSampleAcceptedSamplesExecutionPreflight.category_index_write_performed -ne $false -or $thirdSampleAcceptedSamplesExecutionPreflight.image_file_copy_performed -ne $false -or $thirdSampleAcceptedSamplesExecutionPreflight.runs_source_image_modified -ne $false -or $thirdSampleAcceptedSamplesExecutionPreflight.failure_samples_write_performed -ne $false -or $thirdSampleAcceptedSamplesExecutionPreflight.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.194 execution preflight must not perform registry, category, image, runs, failure, or production writes"
+    }
+    if ($thirdSampleAcceptedSamplesExecutionPreflight.provider_contact_performed -ne $false -or $thirdSampleAcceptedSamplesExecutionPreflight.plugin_call_performed -ne $false -or $thirdSampleAcceptedSamplesExecutionPreflight.api_call_performed -ne $false -or $thirdSampleAcceptedSamplesExecutionPreflight.mcp_runtime_performed -ne $false -or $thirdSampleAcceptedSamplesExecutionPreflight.real_manifest_read_performed -ne $false -or $thirdSampleAcceptedSamplesExecutionPreflight.real_vcpchat_read_performed -ne $false -or $thirdSampleAcceptedSamplesExecutionPreflight.real_vcptoolbox_read_performed -ne $false -or $thirdSampleAcceptedSamplesExecutionPreflight.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.194 execution preflight must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($thirdSampleAcceptedSamplesExecutionPreflight.vcp_runtime_integration_proven -ne $false -or $thirdSampleAcceptedSamplesExecutionPreflight.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.194 execution preflight must not claim VCP runtime integration"
+    }
+    if ($thirdSampleAcceptedSamplesExecutionPreflight.negative_case_human_approval_overclaim_fails -ne $true -or $thirdSampleAcceptedSamplesExecutionPreflight.negative_case_authorization_granted_overclaim_fails -ne $true -or $thirdSampleAcceptedSamplesExecutionPreflight.negative_case_dry_run_target_mismatch_fails -ne $true -or $thirdSampleAcceptedSamplesExecutionPreflight.negative_case_broad_allowed_files_fails -ne $true -or $thirdSampleAcceptedSamplesExecutionPreflight.negative_case_accepted_samples_write_flag_fails -ne $true -or $thirdSampleAcceptedSamplesExecutionPreflight.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.194 execution preflight must fail approval, authorization, target, scope, write, and runtime negative cases"
+    }
+  }
+
+  $acceptedSamplesAuthorizationPackageCompilerContractOutput = & node (Join-Path $Root 'scripts/validate_v14_195_authorization_package_compiler_contract_accepted_samples_registration.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "accepted_samples authorization package compiler contract validation exited with failure"
+  } else {
+    $acceptedSamplesAuthorizationPackageCompilerContract = ($acceptedSamplesAuthorizationPackageCompilerContractOutput -join "`n") | ConvertFrom-Json
+    if ($acceptedSamplesAuthorizationPackageCompilerContract.passed -ne $true) {
+      Add-Failure "accepted_samples authorization package compiler contract validation must pass"
+    }
+    if ($acceptedSamplesAuthorizationPackageCompilerContract.compiler_status -ne 'contract_ready_execution_blocked' -or $acceptedSamplesAuthorizationPackageCompilerContract.package_type -ne 'accepted_samples_metadata_registration' -or $acceptedSamplesAuthorizationPackageCompilerContract.compiled_package_status -ne 'blocked_not_granted') {
+      Add-Failure "v14.195 compiler contract must remain contract-ready, accepted_samples-scoped, and blocked"
+    }
+    if ($acceptedSamplesAuthorizationPackageCompilerContract.compiled_package_id -ne 'AUTH-PENDING-LAMP-V14-166-ACCEPTED-SAMPLES-REGISTRATION-20260518-001') {
+      Add-Failure "v14.195 compiler contract must preserve the exact pending package id"
+    }
+    if ($acceptedSamplesAuthorizationPackageCompilerContract.target_sample_id -ne 'accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001' -or $acceptedSamplesAuthorizationPackageCompilerContract.target_candidate_id -ne 'v14_166_lamp_v3_generated_candidate_001' -or $acceptedSamplesAuthorizationPackageCompilerContract.category -ne 'product_still_life') {
+      Add-Failure "v14.195 compiler contract must target the lamp candidate and product_still_life category"
+    }
+    if ($acceptedSamplesAuthorizationPackageCompilerContract.human_approval_status -ne 'pending' -or $null -ne $acceptedSamplesAuthorizationPackageCompilerContract.approved_by -or $acceptedSamplesAuthorizationPackageCompilerContract.authorization_granted_by_this_record -ne $false -or $acceptedSamplesAuthorizationPackageCompilerContract.execution_allowed_now -ne $false) {
+      Add-Failure "v14.195 compiler contract must not overclaim approval, authorization, or execution readiness"
+    }
+    if ($acceptedSamplesAuthorizationPackageCompilerContract.allowed_file_count_after_approval -ne 2 -or $acceptedSamplesAuthorizationPackageCompilerContract.forbidden_operation_count -lt 10 -or $acceptedSamplesAuthorizationPackageCompilerContract.required_before_execution_count -lt 5 -or $acceptedSamplesAuthorizationPackageCompilerContract.validation_required_count -lt 6) {
+      Add-Failure "v14.195 compiler contract must preserve exact file scope, forbidden operations, requirements, and validation chain"
+    }
+    if ($acceptedSamplesAuthorizationPackageCompilerContract.compiler_only -ne $true -or $acceptedSamplesAuthorizationPackageCompilerContract.accepted_samples_write_performed -ne $false -or $acceptedSamplesAuthorizationPackageCompilerContract.category_index_write_performed -ne $false -or $acceptedSamplesAuthorizationPackageCompilerContract.image_file_copy_performed -ne $false -or $acceptedSamplesAuthorizationPackageCompilerContract.runs_source_image_modified -ne $false -or $acceptedSamplesAuthorizationPackageCompilerContract.failure_samples_write_performed -ne $false -or $acceptedSamplesAuthorizationPackageCompilerContract.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.195 compiler contract must not perform registry, category, image, runs, failure, or production writes"
+    }
+    if ($acceptedSamplesAuthorizationPackageCompilerContract.provider_contact_performed -ne $false -or $acceptedSamplesAuthorizationPackageCompilerContract.plugin_call_performed -ne $false -or $acceptedSamplesAuthorizationPackageCompilerContract.api_call_performed -ne $false -or $acceptedSamplesAuthorizationPackageCompilerContract.mcp_runtime_performed -ne $false -or $acceptedSamplesAuthorizationPackageCompilerContract.real_manifest_read_performed -ne $false -or $acceptedSamplesAuthorizationPackageCompilerContract.real_vcpchat_read_performed -ne $false -or $acceptedSamplesAuthorizationPackageCompilerContract.real_vcptoolbox_read_performed -ne $false -or $acceptedSamplesAuthorizationPackageCompilerContract.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.195 compiler contract must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($acceptedSamplesAuthorizationPackageCompilerContract.vcp_runtime_integration_proven -ne $false -or $acceptedSamplesAuthorizationPackageCompilerContract.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.195 compiler contract must not claim VCP runtime integration"
+    }
+    if ($acceptedSamplesAuthorizationPackageCompilerContract.negative_case_missing_source_preflight_fails -ne $true -or $acceptedSamplesAuthorizationPackageCompilerContract.negative_case_human_approval_overclaim_fails -ne $true -or $acceptedSamplesAuthorizationPackageCompilerContract.negative_case_authorization_granted_overclaim_fails -ne $true -or $acceptedSamplesAuthorizationPackageCompilerContract.negative_case_broad_allowed_file_scope_fails -ne $true -or $acceptedSamplesAuthorizationPackageCompilerContract.negative_case_forbidden_operation_missing_fails -ne $true -or $acceptedSamplesAuthorizationPackageCompilerContract.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.195 compiler contract must fail source, approval, authorization, scope, forbidden-operation, and runtime negative cases"
+    }
+  }
+
+  $authorizationPackageCompilerTypeMatrixOutput = & node (Join-Path $Root 'scripts/validate_v14_196_authorization_package_compiler_type_matrix.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Authorization package compiler type matrix validation exited with failure"
+  } else {
+    $authorizationPackageCompilerTypeMatrix = ($authorizationPackageCompilerTypeMatrixOutput -join "`n") | ConvertFrom-Json
+    if ($authorizationPackageCompilerTypeMatrix.passed -ne $true) {
+      Add-Failure "Authorization package compiler type matrix validation must pass"
+    }
+    if ($authorizationPackageCompilerTypeMatrix.compiler_matrix_status -ne 'local_contract_ready_execution_blocked' -or $authorizationPackageCompilerTypeMatrix.execution_allowed_now -ne $false) {
+      Add-Failure "v14.196 compiler type matrix must remain local, contract-ready, and execution blocked"
+    }
+    if ($authorizationPackageCompilerTypeMatrix.package_type_count -ne 5) {
+      Add-Failure "v14.196 compiler type matrix must cover five authorization package types"
+    }
+    foreach ($requiredType in @('accepted_samples_metadata_registration', 'manifest_read', 'durable_archive', 'production_candidate', 'daily_note_vcp_memory')) {
+      if ($authorizationPackageCompilerTypeMatrix.package_types -notcontains $requiredType) {
+        Add-Failure "v14.196 compiler type matrix missing package type: $requiredType"
+      }
+    }
+    if ($authorizationPackageCompilerTypeMatrix.shared_required_field_count -lt 11 -or $authorizationPackageCompilerTypeMatrix.validation_required_count -lt 5) {
+      Add-Failure "v14.196 compiler type matrix must preserve shared required fields and validation chain"
+    }
+    if ($authorizationPackageCompilerTypeMatrix.type_matrix_only -ne $true -or $authorizationPackageCompilerTypeMatrix.authorization_execution_performed -ne $false -or $authorizationPackageCompilerTypeMatrix.accepted_samples_write_performed -ne $false -or $authorizationPackageCompilerTypeMatrix.manifest_read_performed -ne $false -or $authorizationPackageCompilerTypeMatrix.durable_archive_copy_performed -ne $false -or $authorizationPackageCompilerTypeMatrix.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.196 compiler type matrix must not execute authorization, accepted_samples, manifest, archive, or production candidate actions"
+    }
+    if ($authorizationPackageCompilerTypeMatrix.daily_note_write_performed -ne $false -or $authorizationPackageCompilerTypeMatrix.vcp_memory_write_performed -ne $false -or $authorizationPackageCompilerTypeMatrix.provider_contact_performed -ne $false -or $authorizationPackageCompilerTypeMatrix.plugin_call_performed -ne $false -or $authorizationPackageCompilerTypeMatrix.api_call_performed -ne $false -or $authorizationPackageCompilerTypeMatrix.mcp_runtime_performed -ne $false -or $authorizationPackageCompilerTypeMatrix.real_vcpchat_read_performed -ne $false -or $authorizationPackageCompilerTypeMatrix.real_vcptoolbox_read_performed -ne $false -or $authorizationPackageCompilerTypeMatrix.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.196 compiler type matrix must not perform DailyNote/VCP memory/provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($authorizationPackageCompilerTypeMatrix.vcp_runtime_integration_proven -ne $false -or $authorizationPackageCompilerTypeMatrix.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.196 compiler type matrix must not claim VCP runtime integration"
+    }
+    if ($authorizationPackageCompilerTypeMatrix.negative_case_missing_package_type_fails -ne $true -or $authorizationPackageCompilerTypeMatrix.negative_case_direct_execution_allowed_fails -ne $true -or $authorizationPackageCompilerTypeMatrix.negative_case_accepted_samples_broad_scope_fails -ne $true -or $authorizationPackageCompilerTypeMatrix.negative_case_manifest_read_execution_allowed_fails -ne $true -or $authorizationPackageCompilerTypeMatrix.negative_case_memory_write_without_blocker_fails -ne $true -or $authorizationPackageCompilerTypeMatrix.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.196 compiler type matrix must fail package type, execution, scope, manifest, memory, and runtime negative cases"
+    }
+  }
+
+  $manifestReadAuthorizationCompilerOutputPreflightOutput = & node (Join-Path $Root 'scripts/validate_v14_197_manifest_read_authorization_compiler_output_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Manifest read authorization compiler output preflight validation exited with failure"
+  } else {
+    $manifestReadAuthorizationCompilerOutputPreflight = ($manifestReadAuthorizationCompilerOutputPreflightOutput -join "`n") | ConvertFrom-Json
+    if ($manifestReadAuthorizationCompilerOutputPreflight.passed -ne $true) {
+      Add-Failure "Manifest read authorization compiler output preflight validation must pass"
+    }
+    if ($manifestReadAuthorizationCompilerOutputPreflight.package_type -ne 'manifest_read' -or $manifestReadAuthorizationCompilerOutputPreflight.package_status -ne 'draft_blocked_missing_exact_manifest_authorization') {
+      Add-Failure "v14.197 manifest read preflight must stay manifest_read and blocked"
+    }
+    if ($manifestReadAuthorizationCompilerOutputPreflight.source_read_authorized -ne $false -or $manifestReadAuthorizationCompilerOutputPreflight.source_read_performed -ne $false -or $manifestReadAuthorizationCompilerOutputPreflight.real_manifest_path_provided -ne $false -or $manifestReadAuthorizationCompilerOutputPreflight.read_command_permission -ne $false -or $manifestReadAuthorizationCompilerOutputPreflight.execution_allowed_now -ne $false) {
+      Add-Failure "v14.197 manifest read preflight must not authorize or perform source reads"
+    }
+    if ($manifestReadAuthorizationCompilerOutputPreflight.exact_allowed_read_path_count -ne 0 -or $manifestReadAuthorizationCompilerOutputPreflight.required_before_execution_count -lt 7 -or $manifestReadAuthorizationCompilerOutputPreflight.validation_required_count -lt 5) {
+      Add-Failure "v14.197 manifest read preflight must keep empty read paths and full requirements"
+    }
+    if ($manifestReadAuthorizationCompilerOutputPreflight.preflight_only -ne $true -or $manifestReadAuthorizationCompilerOutputPreflight.real_manifest_read_performed -ne $false -or $manifestReadAuthorizationCompilerOutputPreflight.real_vcpchat_read_performed -ne $false -or $manifestReadAuthorizationCompilerOutputPreflight.real_vcptoolbox_read_performed -ne $false -or $manifestReadAuthorizationCompilerOutputPreflight.file_write_performed -ne $false) {
+      Add-Failure "v14.197 manifest read preflight must not read real sources or write files"
+    }
+    if ($manifestReadAuthorizationCompilerOutputPreflight.daily_note_write_performed -ne $false -or $manifestReadAuthorizationCompilerOutputPreflight.vcp_memory_write_performed -ne $false -or $manifestReadAuthorizationCompilerOutputPreflight.provider_contact_performed -ne $false -or $manifestReadAuthorizationCompilerOutputPreflight.plugin_call_performed -ne $false -or $manifestReadAuthorizationCompilerOutputPreflight.api_call_performed -ne $false -or $manifestReadAuthorizationCompilerOutputPreflight.mcp_runtime_performed -ne $false -or $manifestReadAuthorizationCompilerOutputPreflight.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.197 manifest read preflight must not perform DailyNote/VCP memory/provider/plugin/API/MCP/remote actions"
+    }
+    if ($manifestReadAuthorizationCompilerOutputPreflight.vcp_runtime_integration_proven -ne $false -or $manifestReadAuthorizationCompilerOutputPreflight.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.197 manifest read preflight must not claim VCP runtime integration"
+    }
+    if ($manifestReadAuthorizationCompilerOutputPreflight.negative_case_real_manifest_path_filled_without_authorization_fails -ne $true -or $manifestReadAuthorizationCompilerOutputPreflight.negative_case_source_read_performed_fails -ne $true -or $manifestReadAuthorizationCompilerOutputPreflight.negative_case_read_command_permission_fails -ne $true -or $manifestReadAuthorizationCompilerOutputPreflight.negative_case_broad_allowed_read_path_fails -ne $true -or $manifestReadAuthorizationCompilerOutputPreflight.negative_case_missing_reviewer_requirement_fails -ne $true -or $manifestReadAuthorizationCompilerOutputPreflight.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.197 manifest read preflight must fail path, read, permission, broad path, reviewer, and runtime negative cases"
+    }
+  }
+
+  $durableArchiveAuthorizationCompilerOutputPreflightOutput = & node (Join-Path $Root 'scripts/validate_v14_198_durable_archive_authorization_compiler_output_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Durable archive authorization compiler output preflight validation exited with failure"
+  } else {
+    $durableArchiveAuthorizationCompilerOutputPreflight = ($durableArchiveAuthorizationCompilerOutputPreflightOutput -join "`n") | ConvertFrom-Json
+    if ($durableArchiveAuthorizationCompilerOutputPreflight.passed -ne $true) {
+      Add-Failure "Durable archive authorization compiler output preflight validation must pass"
+    }
+    if ($durableArchiveAuthorizationCompilerOutputPreflight.package_type -ne 'durable_archive' -or $durableArchiveAuthorizationCompilerOutputPreflight.package_status -ne 'draft_blocked_missing_archive_copy_authorization') {
+      Add-Failure "v14.198 durable archive preflight must stay durable_archive and blocked"
+    }
+    if ($durableArchiveAuthorizationCompilerOutputPreflight.archive_copy_authorized -ne $false -or $durableArchiveAuthorizationCompilerOutputPreflight.archive_copy_performed -ne $false -or $durableArchiveAuthorizationCompilerOutputPreflight.target_archive_path_provided -ne $false -or $durableArchiveAuthorizationCompilerOutputPreflight.write_command_permission -ne $false -or $durableArchiveAuthorizationCompilerOutputPreflight.execution_allowed_now -ne $false) {
+      Add-Failure "v14.198 durable archive preflight must not authorize or perform archive copy"
+    }
+    if ($durableArchiveAuthorizationCompilerOutputPreflight.exact_allowed_write_path_count -ne 0 -or $durableArchiveAuthorizationCompilerOutputPreflight.hash_verification_required -ne $true -or $durableArchiveAuthorizationCompilerOutputPreflight.required_before_execution_count -lt 7 -or $durableArchiveAuthorizationCompilerOutputPreflight.validation_required_count -lt 5) {
+      Add-Failure "v14.198 durable archive preflight must keep empty write paths, hash verification, and full requirements"
+    }
+    if ($durableArchiveAuthorizationCompilerOutputPreflight.preflight_only -ne $true -or $durableArchiveAuthorizationCompilerOutputPreflight.durable_archive_copy_performed -ne $false -or $durableArchiveAuthorizationCompilerOutputPreflight.image_file_copy_performed -ne $false -or $durableArchiveAuthorizationCompilerOutputPreflight.runs_source_image_modified -ne $false -or $durableArchiveAuthorizationCompilerOutputPreflight.accepted_samples_write_performed -ne $false -or $durableArchiveAuthorizationCompilerOutputPreflight.failure_samples_write_performed -ne $false -or $durableArchiveAuthorizationCompilerOutputPreflight.production_candidate_write_performed -ne $false) {
+      Add-Failure "v14.198 durable archive preflight must not copy images or write runs/accepted/failure/production surfaces"
+    }
+    if ($durableArchiveAuthorizationCompilerOutputPreflight.daily_note_write_performed -ne $false -or $durableArchiveAuthorizationCompilerOutputPreflight.vcp_memory_write_performed -ne $false -or $durableArchiveAuthorizationCompilerOutputPreflight.provider_contact_performed -ne $false -or $durableArchiveAuthorizationCompilerOutputPreflight.plugin_call_performed -ne $false -or $durableArchiveAuthorizationCompilerOutputPreflight.api_call_performed -ne $false -or $durableArchiveAuthorizationCompilerOutputPreflight.mcp_runtime_performed -ne $false -or $durableArchiveAuthorizationCompilerOutputPreflight.real_manifest_read_performed -ne $false -or $durableArchiveAuthorizationCompilerOutputPreflight.real_vcpchat_read_performed -ne $false -or $durableArchiveAuthorizationCompilerOutputPreflight.real_vcptoolbox_read_performed -ne $false -or $durableArchiveAuthorizationCompilerOutputPreflight.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.198 durable archive preflight must not perform DailyNote/VCP memory/provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($durableArchiveAuthorizationCompilerOutputPreflight.vcp_runtime_integration_proven -ne $false -or $durableArchiveAuthorizationCompilerOutputPreflight.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.198 durable archive preflight must not claim VCP runtime integration"
+    }
+    if ($durableArchiveAuthorizationCompilerOutputPreflight.negative_case_target_archive_path_filled_without_authorization_fails -ne $true -or $durableArchiveAuthorizationCompilerOutputPreflight.negative_case_archive_copy_performed_fails -ne $true -or $durableArchiveAuthorizationCompilerOutputPreflight.negative_case_broad_allowed_write_path_fails -ne $true -or $durableArchiveAuthorizationCompilerOutputPreflight.negative_case_missing_hash_verification_fails -ne $true -or $durableArchiveAuthorizationCompilerOutputPreflight.negative_case_production_candidate_write_flag_fails -ne $true -or $durableArchiveAuthorizationCompilerOutputPreflight.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.198 durable archive preflight must fail path, copy, broad path, hash, production, and runtime negative cases"
+    }
+  }
+
+  $productionCandidateAuthorizationCompilerOutputPreflightOutput = & node (Join-Path $Root 'scripts/validate_v14_199_production_candidate_authorization_compiler_output_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Production candidate authorization compiler output preflight validation exited with failure"
+  } else {
+    $productionCandidateAuthorizationCompilerOutputPreflight = ($productionCandidateAuthorizationCompilerOutputPreflightOutput -join "`n") | ConvertFrom-Json
+    if ($productionCandidateAuthorizationCompilerOutputPreflight.passed -ne $true) {
+      Add-Failure "Production candidate authorization compiler output preflight validation must pass"
+    }
+    if ($productionCandidateAuthorizationCompilerOutputPreflight.package_type -ne 'production_candidate' -or $productionCandidateAuthorizationCompilerOutputPreflight.package_status -ne 'draft_blocked_missing_production_candidate_authorization') {
+      Add-Failure "v14.199 production candidate preflight must stay production_candidate and blocked"
+    }
+    if ($productionCandidateAuthorizationCompilerOutputPreflight.production_candidate_authorized -ne $false -or $productionCandidateAuthorizationCompilerOutputPreflight.production_candidate_write_performed -ne $false -or $productionCandidateAuthorizationCompilerOutputPreflight.eligibility_preflight_present -ne $false -or $productionCandidateAuthorizationCompilerOutputPreflight.write_command_permission -ne $false -or $productionCandidateAuthorizationCompilerOutputPreflight.execution_allowed_now -ne $false) {
+      Add-Failure "v14.199 production candidate preflight must not authorize or perform production_candidate write"
+    }
+    if ($productionCandidateAuthorizationCompilerOutputPreflight.exact_allowed_write_path_count -ne 0 -or $productionCandidateAuthorizationCompilerOutputPreflight.required_before_execution_count -lt 8 -or $productionCandidateAuthorizationCompilerOutputPreflight.validation_required_count -lt 5) {
+      Add-Failure "v14.199 production candidate preflight must keep empty write paths and full requirements"
+    }
+    if ($productionCandidateAuthorizationCompilerOutputPreflight.preflight_only -ne $true -or $productionCandidateAuthorizationCompilerOutputPreflight.durable_archive_copy_performed -ne $false -or $productionCandidateAuthorizationCompilerOutputPreflight.image_file_copy_performed -ne $false -or $productionCandidateAuthorizationCompilerOutputPreflight.runs_source_image_modified -ne $false -or $productionCandidateAuthorizationCompilerOutputPreflight.accepted_samples_write_performed -ne $false -or $productionCandidateAuthorizationCompilerOutputPreflight.failure_samples_write_performed -ne $false) {
+      Add-Failure "v14.199 production candidate preflight must not copy images or write runs/accepted/failure surfaces"
+    }
+    if ($productionCandidateAuthorizationCompilerOutputPreflight.daily_note_write_performed -ne $false -or $productionCandidateAuthorizationCompilerOutputPreflight.vcp_memory_write_performed -ne $false -or $productionCandidateAuthorizationCompilerOutputPreflight.provider_contact_performed -ne $false -or $productionCandidateAuthorizationCompilerOutputPreflight.plugin_call_performed -ne $false -or $productionCandidateAuthorizationCompilerOutputPreflight.api_call_performed -ne $false -or $productionCandidateAuthorizationCompilerOutputPreflight.mcp_runtime_performed -ne $false -or $productionCandidateAuthorizationCompilerOutputPreflight.real_manifest_read_performed -ne $false -or $productionCandidateAuthorizationCompilerOutputPreflight.real_vcpchat_read_performed -ne $false -or $productionCandidateAuthorizationCompilerOutputPreflight.real_vcptoolbox_read_performed -ne $false -or $productionCandidateAuthorizationCompilerOutputPreflight.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.199 production candidate preflight must not perform DailyNote/VCP memory/provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($productionCandidateAuthorizationCompilerOutputPreflight.vcp_runtime_integration_proven -ne $false -or $productionCandidateAuthorizationCompilerOutputPreflight.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.199 production candidate preflight must not claim VCP runtime integration"
+    }
+    if ($productionCandidateAuthorizationCompilerOutputPreflight.negative_case_accepted_sample_ref_without_eligibility_fails -ne $true -or $productionCandidateAuthorizationCompilerOutputPreflight.negative_case_production_candidate_write_performed_fails -ne $true -or $productionCandidateAuthorizationCompilerOutputPreflight.negative_case_broad_allowed_write_path_fails -ne $true -or $productionCandidateAuthorizationCompilerOutputPreflight.negative_case_blocker_missing_fails -ne $true -or $productionCandidateAuthorizationCompilerOutputPreflight.negative_case_memory_write_flag_fails -ne $true -or $productionCandidateAuthorizationCompilerOutputPreflight.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.199 production candidate preflight must fail sample, write, scope, blocker, memory, and runtime negative cases"
+    }
+  }
+
+  $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflightOutput = & node (Join-Path $Root 'scripts/validate_v14_200_daily_note_vcp_memory_authorization_compiler_output_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "DailyNote/VCP memory authorization compiler output preflight validation exited with failure"
+  } else {
+    $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight = ($dailyNoteVcpMemoryAuthorizationCompilerOutputPreflightOutput -join "`n") | ConvertFrom-Json
+    if ($dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.passed -ne $true) {
+      Add-Failure "DailyNote/VCP memory authorization compiler output preflight validation must pass"
+    }
+    if ($dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.package_type -ne 'daily_note_vcp_memory' -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.package_status -ne 'draft_blocked_missing_daily_note_vcp_memory_write_authorization') {
+      Add-Failure "v14.200 DailyNote/VCP memory preflight must stay daily_note_vcp_memory and blocked"
+    }
+    if ($dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.daily_note_write_authorized -ne $false -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.vcp_memory_write_authorized -ne $false -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.memory_delta_draft_present -ne $false -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.sensitive_data_scan_present -ne $false -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.write_command_permission -ne $false -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.execution_allowed_now -ne $false) {
+      Add-Failure "v14.200 DailyNote/VCP memory preflight must not authorize or perform memory writes"
+    }
+    if ($dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.exact_allowed_memory_target_count -ne 0 -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.required_before_execution_count -lt 8 -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.validation_required_count -lt 5) {
+      Add-Failure "v14.200 DailyNote/VCP memory preflight must keep empty memory targets and full requirements"
+    }
+    if ($dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.preflight_only -ne $true -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.daily_note_write_performed -ne $false -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.vcp_memory_write_performed -ne $false -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.memory_delta_written_to_runtime -ne $false -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.secret_or_private_path_included -ne $false -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.image_binary_included -ne $false) {
+      Add-Failure "v14.200 DailyNote/VCP memory preflight must not write memory, include secrets/private paths, or include image binaries"
+    }
+    if ($dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.production_candidate_write_performed -ne $false -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.durable_archive_copy_performed -ne $false -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.image_file_copy_performed -ne $false -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.runs_source_image_modified -ne $false -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.accepted_samples_write_performed -ne $false -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.failure_samples_write_performed -ne $false) {
+      Add-Failure "v14.200 DailyNote/VCP memory preflight must not copy images or write runs/accepted/failure/production surfaces"
+    }
+    if ($dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.provider_contact_performed -ne $false -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.plugin_call_performed -ne $false -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.api_call_performed -ne $false -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.mcp_runtime_performed -ne $false -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.real_manifest_read_performed -ne $false -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.real_vcpchat_read_performed -ne $false -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.real_vcptoolbox_read_performed -ne $false -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.200 DailyNote/VCP memory preflight must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.vcp_runtime_integration_proven -ne $false -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.200 DailyNote/VCP memory preflight must not claim VCP runtime integration"
+    }
+    if ($dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.negative_case_memory_delta_ref_without_scan_fails -ne $true -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.negative_case_daily_note_write_performed_fails -ne $true -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.negative_case_vcp_memory_write_performed_fails -ne $true -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.negative_case_broad_allowed_memory_target_fails -ne $true -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.negative_case_blocker_missing_fails -ne $true -or $dailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.200 DailyNote/VCP memory preflight must fail draft, write, target, blocker, and runtime negative cases"
+    }
+  }
+
+  $authorizationPackageCompilerCoverageCloseoutOutput = & node (Join-Path $Root 'scripts/validate_v14_201_authorization_package_compiler_coverage_closeout.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Authorization package compiler coverage closeout validation exited with failure"
+  } else {
+    $authorizationPackageCompilerCoverageCloseout = ($authorizationPackageCompilerCoverageCloseoutOutput -join "`n") | ConvertFrom-Json
+    if ($authorizationPackageCompilerCoverageCloseout.passed -ne $true) {
+      Add-Failure "Authorization package compiler coverage closeout validation must pass"
+    }
+    if ($authorizationPackageCompilerCoverageCloseout.coverage_status -ne 'complete_local_blocked_coverage' -or $authorizationPackageCompilerCoverageCloseout.package_type_count_expected -ne 5 -or $authorizationPackageCompilerCoverageCloseout.package_type_count_covered -ne 5 -or $authorizationPackageCompilerCoverageCloseout.validator_pass_count -ne 5) {
+      Add-Failure "v14.201 authorization compiler coverage closeout must cover all five package types and validators"
+    }
+    if ($authorizationPackageCompilerCoverageCloseout.coverage_closeout_only -ne $true -or $authorizationPackageCompilerCoverageCloseout.authorization_execution_performed -ne $false -or $authorizationPackageCompilerCoverageCloseout.accepted_samples_write_performed -ne $false -or $authorizationPackageCompilerCoverageCloseout.manifest_read_performed -ne $false -or $authorizationPackageCompilerCoverageCloseout.durable_archive_copy_performed -ne $false -or $authorizationPackageCompilerCoverageCloseout.production_candidate_write_performed -ne $false -or $authorizationPackageCompilerCoverageCloseout.daily_note_write_performed -ne $false -or $authorizationPackageCompilerCoverageCloseout.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.201 authorization compiler coverage closeout must not execute any package action"
+    }
+    if ($authorizationPackageCompilerCoverageCloseout.provider_contact_performed -ne $false -or $authorizationPackageCompilerCoverageCloseout.plugin_call_performed -ne $false -or $authorizationPackageCompilerCoverageCloseout.api_call_performed -ne $false -or $authorizationPackageCompilerCoverageCloseout.mcp_runtime_performed -ne $false -or $authorizationPackageCompilerCoverageCloseout.real_manifest_read_performed -ne $false -or $authorizationPackageCompilerCoverageCloseout.real_vcpchat_read_performed -ne $false -or $authorizationPackageCompilerCoverageCloseout.real_vcptoolbox_read_performed -ne $false -or $authorizationPackageCompilerCoverageCloseout.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.201 authorization compiler coverage closeout must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($authorizationPackageCompilerCoverageCloseout.vcp_runtime_integration_proven -ne $false -or $authorizationPackageCompilerCoverageCloseout.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.201 authorization compiler coverage closeout must not claim VCP runtime integration"
+    }
+    if ($authorizationPackageCompilerCoverageCloseout.negative_case_missing_package_coverage_fails -ne $true -or $authorizationPackageCompilerCoverageCloseout.negative_case_execution_allowed_package_fails -ne $true -or $authorizationPackageCompilerCoverageCloseout.negative_case_validator_missing_fails -ne $true -or $authorizationPackageCompilerCoverageCloseout.negative_case_wrong_blocked_status_fails -ne $true -or $authorizationPackageCompilerCoverageCloseout.negative_case_memory_write_flag_fails -ne $true -or $authorizationPackageCompilerCoverageCloseout.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.201 authorization compiler coverage closeout must fail coverage, execution, validator, status, memory, and runtime negative cases"
+    }
+  }
+
+  $authorizationPackageBlockerArbiterContractOutput = & node (Join-Path $Root 'scripts/validate_v14_202_authorization_package_blocker_arbiter_contract.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Authorization package blocker arbiter contract validation exited with failure"
+  } else {
+    $authorizationPackageBlockerArbiterContract = ($authorizationPackageBlockerArbiterContractOutput -join "`n") | ConvertFrom-Json
+    if ($authorizationPackageBlockerArbiterContract.passed -ne $true) {
+      Add-Failure "Authorization package blocker arbiter contract validation must pass"
+    }
+    if ($authorizationPackageBlockerArbiterContract.arbiter_status -ne 'all_package_types_blocked_pending_exact_authorization' -or $authorizationPackageBlockerArbiterContract.package_type_count -ne 5 -or $authorizationPackageBlockerArbiterContract.blocker_decision_count -ne 5 -or $authorizationPackageBlockerArbiterContract.all_execution_allowed_now -ne $false) {
+      Add-Failure "v14.202 blocker arbiter must keep all five package types blocked"
+    }
+    if ($authorizationPackageBlockerArbiterContract.blocker_arbiter_contract_only -ne $true -or $authorizationPackageBlockerArbiterContract.authorization_execution_performed -ne $false -or $authorizationPackageBlockerArbiterContract.accepted_samples_write_performed -ne $false -or $authorizationPackageBlockerArbiterContract.manifest_read_performed -ne $false -or $authorizationPackageBlockerArbiterContract.durable_archive_copy_performed -ne $false -or $authorizationPackageBlockerArbiterContract.production_candidate_write_performed -ne $false -or $authorizationPackageBlockerArbiterContract.daily_note_write_performed -ne $false -or $authorizationPackageBlockerArbiterContract.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.202 blocker arbiter must not execute any package action"
+    }
+    if ($authorizationPackageBlockerArbiterContract.provider_contact_performed -ne $false -or $authorizationPackageBlockerArbiterContract.plugin_call_performed -ne $false -or $authorizationPackageBlockerArbiterContract.api_call_performed -ne $false -or $authorizationPackageBlockerArbiterContract.mcp_runtime_performed -ne $false -or $authorizationPackageBlockerArbiterContract.real_manifest_read_performed -ne $false -or $authorizationPackageBlockerArbiterContract.real_vcpchat_read_performed -ne $false -or $authorizationPackageBlockerArbiterContract.real_vcptoolbox_read_performed -ne $false -or $authorizationPackageBlockerArbiterContract.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.202 blocker arbiter must not perform provider/plugin/API/MCP/VCP/remote actions"
+    }
+    if ($authorizationPackageBlockerArbiterContract.vcp_runtime_integration_proven -ne $false -or $authorizationPackageBlockerArbiterContract.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.202 blocker arbiter must not claim VCP runtime integration"
+    }
+    if ($authorizationPackageBlockerArbiterContract.negative_case_missing_blocker_decision_fails -ne $true -or $authorizationPackageBlockerArbiterContract.negative_case_execution_allowed_package_fails -ne $true -or $authorizationPackageBlockerArbiterContract.negative_case_unknown_package_type_fails -ne $true -or $authorizationPackageBlockerArbiterContract.negative_case_missing_exact_scope_requirement_fails -ne $true -or $authorizationPackageBlockerArbiterContract.negative_case_memory_write_flag_fails -ne $true -or $authorizationPackageBlockerArbiterContract.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.202 blocker arbiter must fail missing decision, execution, unknown type, scope, memory, and runtime negative cases"
+    }
+  }
+
+  $authorizationCompilerReviewConsoleHandoffStateOutput = & node (Join-Path $Root 'scripts/validate_v14_203_authorization_compiler_review_console_handoff_state.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Authorization compiler Review Console handoff state validation exited with failure"
+  } else {
+    $authorizationCompilerReviewConsoleHandoffState = ($authorizationCompilerReviewConsoleHandoffStateOutput -join "`n") | ConvertFrom-Json
+    if ($authorizationCompilerReviewConsoleHandoffState.passed -ne $true) {
+      Add-Failure "Authorization compiler Review Console handoff state validation must pass"
+    }
+    if ($authorizationCompilerReviewConsoleHandoffState.handoff_state_status -ne 'static_ready_no_runtime' -or $authorizationCompilerReviewConsoleHandoffState.package_card_count -ne 5 -or $authorizationCompilerReviewConsoleHandoffState.runtime_integration_allowed -ne $false -or $authorizationCompilerReviewConsoleHandoffState.package_execution_allowed -ne $false) {
+      Add-Failure "v14.203 Review Console handoff state must expose five blocked static cards with no runtime or package execution"
+    }
+    if ($authorizationCompilerReviewConsoleHandoffState.review_console_handoff_state_only -ne $true -or $authorizationCompilerReviewConsoleHandoffState.authorization_execution_performed -ne $false -or $authorizationCompilerReviewConsoleHandoffState.package_execution_performed -ne $false -or $authorizationCompilerReviewConsoleHandoffState.accepted_samples_write_performed -ne $false -or $authorizationCompilerReviewConsoleHandoffState.manifest_read_performed -ne $false -or $authorizationCompilerReviewConsoleHandoffState.durable_archive_copy_performed -ne $false -or $authorizationCompilerReviewConsoleHandoffState.production_candidate_write_performed -ne $false -or $authorizationCompilerReviewConsoleHandoffState.failure_samples_write_performed -ne $false -or $authorizationCompilerReviewConsoleHandoffState.daily_note_write_performed -ne $false -or $authorizationCompilerReviewConsoleHandoffState.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.203 Review Console handoff state must not execute or write package outputs"
+    }
+    if ($authorizationCompilerReviewConsoleHandoffState.provider_contact_performed -ne $false -or $authorizationCompilerReviewConsoleHandoffState.plugin_call_performed -ne $false -or $authorizationCompilerReviewConsoleHandoffState.api_call_performed -ne $false -or $authorizationCompilerReviewConsoleHandoffState.mcp_runtime_performed -ne $false -or $authorizationCompilerReviewConsoleHandoffState.fetch_performed -ne $false -or $authorizationCompilerReviewConsoleHandoffState.file_write_performed -ne $false -or $authorizationCompilerReviewConsoleHandoffState.review_console_runtime_integration_performed -ne $false -or $authorizationCompilerReviewConsoleHandoffState.ipc_preload_renderer_integration_performed -ne $false -or $authorizationCompilerReviewConsoleHandoffState.real_manifest_read_performed -ne $false -or $authorizationCompilerReviewConsoleHandoffState.real_vcpchat_read_performed -ne $false -or $authorizationCompilerReviewConsoleHandoffState.real_vcptoolbox_read_performed -ne $false -or $authorizationCompilerReviewConsoleHandoffState.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.203 Review Console handoff state must not perform provider/plugin/API/MCP/fetch/file/VCP/runtime/remote actions"
+    }
+    if ($authorizationCompilerReviewConsoleHandoffState.vcp_runtime_integration_proven -ne $false -or $authorizationCompilerReviewConsoleHandoffState.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.203 Review Console handoff state must not claim VCP runtime integration"
+    }
+    if ($authorizationCompilerReviewConsoleHandoffState.negative_case_missing_package_card_fails -ne $true -or $authorizationCompilerReviewConsoleHandoffState.negative_case_execution_allowed_card_fails -ne $true -or $authorizationCompilerReviewConsoleHandoffState.negative_case_missing_source_contract_fails -ne $true -or $authorizationCompilerReviewConsoleHandoffState.negative_case_runtime_flag_fails -ne $true -or $authorizationCompilerReviewConsoleHandoffState.negative_case_vcpchat_read_flag_fails -ne $true -or $authorizationCompilerReviewConsoleHandoffState.negative_case_memory_write_flag_fails -ne $true) {
+      Add-Failure "v14.203 Review Console handoff state must fail card, source, runtime, VCPChat, and memory negative cases"
+    }
+  }
+
+  $reviewConsoleRuntimeGapDashboardContractOutput = & node (Join-Path $Root 'scripts/validate_v14_204_review_console_runtime_gap_dashboard_contract.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console runtime gap dashboard contract validation exited with failure"
+  } else {
+    $reviewConsoleRuntimeGapDashboardContract = ($reviewConsoleRuntimeGapDashboardContractOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleRuntimeGapDashboardContract.passed -ne $true) {
+      Add-Failure "Review Console runtime gap dashboard contract validation must pass"
+    }
+    if ($reviewConsoleRuntimeGapDashboardContract.dashboard_contract_status -ne 'static_runtime_gap_contract_ready' -or $reviewConsoleRuntimeGapDashboardContract.dashboard_progress_basis -ne 'validator_outputs_and_static_fixtures_only' -or $reviewConsoleRuntimeGapDashboardContract.runtime_gap_row_count -ne 7 -or $reviewConsoleRuntimeGapDashboardContract.local_capability_row_count -ne 3 -or $reviewConsoleRuntimeGapDashboardContract.a5_boundary_row_count -ne 4 -or $reviewConsoleRuntimeGapDashboardContract.runtime_claim_allowed -ne $false) {
+      Add-Failure "v14.204 runtime gap dashboard must separate local capabilities from A5 runtime boundaries"
+    }
+    if ($reviewConsoleRuntimeGapDashboardContract.runtime_gap_dashboard_contract_only -ne $true -or $reviewConsoleRuntimeGapDashboardContract.dashboard_uses_project_master_plan_progress -ne $false -or $reviewConsoleRuntimeGapDashboardContract.dashboard_uses_document_token_progress -ne $false -or $reviewConsoleRuntimeGapDashboardContract.dashboard_promotes_product_status -ne $false) {
+      Add-Failure "v14.204 runtime gap dashboard must use validator/static evidence only and must not promote product status"
+    }
+    if ($reviewConsoleRuntimeGapDashboardContract.authorization_execution_performed -ne $false -or $reviewConsoleRuntimeGapDashboardContract.package_execution_performed -ne $false -or $reviewConsoleRuntimeGapDashboardContract.accepted_samples_write_performed -ne $false -or $reviewConsoleRuntimeGapDashboardContract.manifest_read_performed -ne $false -or $reviewConsoleRuntimeGapDashboardContract.durable_archive_copy_performed -ne $false -or $reviewConsoleRuntimeGapDashboardContract.production_candidate_write_performed -ne $false -or $reviewConsoleRuntimeGapDashboardContract.failure_samples_write_performed -ne $false -or $reviewConsoleRuntimeGapDashboardContract.daily_note_write_performed -ne $false -or $reviewConsoleRuntimeGapDashboardContract.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.204 runtime gap dashboard must not execute or write package outputs"
+    }
+    if ($reviewConsoleRuntimeGapDashboardContract.provider_contact_performed -ne $false -or $reviewConsoleRuntimeGapDashboardContract.plugin_call_performed -ne $false -or $reviewConsoleRuntimeGapDashboardContract.api_call_performed -ne $false -or $reviewConsoleRuntimeGapDashboardContract.mcp_runtime_performed -ne $false -or $reviewConsoleRuntimeGapDashboardContract.fetch_performed -ne $false -or $reviewConsoleRuntimeGapDashboardContract.file_write_performed -ne $false -or $reviewConsoleRuntimeGapDashboardContract.review_console_runtime_integration_performed -ne $false -or $reviewConsoleRuntimeGapDashboardContract.ipc_preload_renderer_integration_performed -ne $false -or $reviewConsoleRuntimeGapDashboardContract.real_manifest_read_performed -ne $false -or $reviewConsoleRuntimeGapDashboardContract.real_vcpchat_read_performed -ne $false -or $reviewConsoleRuntimeGapDashboardContract.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleRuntimeGapDashboardContract.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.204 runtime gap dashboard must not perform provider/plugin/API/MCP/fetch/file/VCP/runtime/remote actions"
+    }
+    if ($reviewConsoleRuntimeGapDashboardContract.vcp_runtime_integration_proven -ne $false -or $reviewConsoleRuntimeGapDashboardContract.artifact_recoverability_is_not_vcp_runtime_integration -ne $true) {
+      Add-Failure "v14.204 runtime gap dashboard must not claim VCP runtime integration"
+    }
+    if ($reviewConsoleRuntimeGapDashboardContract.negative_case_missing_gap_row_fails -ne $true -or $reviewConsoleRuntimeGapDashboardContract.negative_case_docs_progress_basis_fails -ne $true -or $reviewConsoleRuntimeGapDashboardContract.negative_case_runtime_claim_fails -ne $true -or $reviewConsoleRuntimeGapDashboardContract.negative_case_manifest_read_flag_fails -ne $true -or $reviewConsoleRuntimeGapDashboardContract.negative_case_package_execution_flag_fails -ne $true -or $reviewConsoleRuntimeGapDashboardContract.negative_case_memory_write_flag_fails -ne $true) {
+      Add-Failure "v14.204 runtime gap dashboard must fail missing row, docs progress, runtime, manifest, package execution, and memory negative cases"
+    }
+  }
+
+  $reviewConsoleRuntimeGapStaticUiPanelOutput = & node (Join-Path $Root 'scripts/validate_v14_205_review_console_runtime_gap_static_ui_panel.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console runtime gap static UI panel validation exited with failure"
+  } else {
+    $reviewConsoleRuntimeGapStaticUiPanel = ($reviewConsoleRuntimeGapStaticUiPanelOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleRuntimeGapStaticUiPanel.passed -ne $true) {
+      Add-Failure "Review Console runtime gap static UI panel validation must pass"
+    }
+    if ($reviewConsoleRuntimeGapStaticUiPanel.static_ui_panel_status -ne 'wired_static_only' -or $reviewConsoleRuntimeGapStaticUiPanel.runtime_gap_row_count -ne 7 -or $reviewConsoleRuntimeGapStaticUiPanel.local_capability_row_count -ne 3 -or $reviewConsoleRuntimeGapStaticUiPanel.a5_boundary_row_count -ne 4 -or $reviewConsoleRuntimeGapStaticUiPanel.runtime_claim_allowed -ne $false) {
+      Add-Failure "v14.205 runtime gap static UI panel must display seven rows split into local capabilities and A5 boundaries"
+    }
+    if ($reviewConsoleRuntimeGapStaticUiPanel.runtime_gap_dashboard_static_ui_only -ne $true -or $reviewConsoleRuntimeGapStaticUiPanel.fetch_performed -ne $false -or $reviewConsoleRuntimeGapStaticUiPanel.file_write_performed -ne $false -or $reviewConsoleRuntimeGapStaticUiPanel.package_execution_performed -ne $false -or $reviewConsoleRuntimeGapStaticUiPanel.real_manifest_read_performed -ne $false -or $reviewConsoleRuntimeGapStaticUiPanel.real_vcpchat_read_performed -ne $false -or $reviewConsoleRuntimeGapStaticUiPanel.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleRuntimeGapStaticUiPanel.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "v14.205 runtime gap static UI panel must remain static with no fetch/write/package/VCP/runtime action"
+    }
+  }
+
+  $reviewConsoleRuntimeGapDraftOutputSnapshotOutput = & node (Join-Path $Root 'scripts/validate_v14_206_review_console_runtime_gap_draft_output_snapshot_static_regression.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console runtime gap draft output snapshot static regression validation exited with failure"
+  } else {
+    $reviewConsoleRuntimeGapDraftOutputSnapshot = ($reviewConsoleRuntimeGapDraftOutputSnapshotOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleRuntimeGapDraftOutputSnapshot.passed -ne $true) {
+      Add-Failure "Review Console runtime gap draft output snapshot static regression validation must pass"
+    }
+    if ($reviewConsoleRuntimeGapDraftOutputSnapshot.snapshot_status -ne 'golden_static_snapshot' -or $reviewConsoleRuntimeGapDraftOutputSnapshot.draft_output_key -ne 'review_console_runtime_gap_dashboard_state' -or $reviewConsoleRuntimeGapDraftOutputSnapshot.runtime_gap_row_count -ne 7 -or $reviewConsoleRuntimeGapDraftOutputSnapshot.local_capability_row_count -ne 3 -or $reviewConsoleRuntimeGapDraftOutputSnapshot.a5_boundary_row_count -ne 4 -or $reviewConsoleRuntimeGapDraftOutputSnapshot.runtime_claim_allowed -ne $false) {
+      Add-Failure "v14.206 runtime gap draft output snapshot must preserve seven static rows and no runtime claim"
+    }
+    if ($reviewConsoleRuntimeGapDraftOutputSnapshot.dashboard_progress_basis -ne 'validator_outputs_and_static_fixtures_only' -or $reviewConsoleRuntimeGapDraftOutputSnapshot.runtime_gap_dashboard_static_ui_only -ne $true -or $reviewConsoleRuntimeGapDraftOutputSnapshot.package_execution_performed -ne $false -or $reviewConsoleRuntimeGapDraftOutputSnapshot.real_manifest_read_performed -ne $false -or $reviewConsoleRuntimeGapDraftOutputSnapshot.real_vcpchat_read_performed -ne $false -or $reviewConsoleRuntimeGapDraftOutputSnapshot.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleRuntimeGapDraftOutputSnapshot.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "v14.206 runtime gap draft output snapshot must remain validator/static-only with no package/VCP/runtime action"
+    }
+    if ($reviewConsoleRuntimeGapDraftOutputSnapshot.negative_case_missing_draft_output_key_fails -ne $true -or $reviewConsoleRuntimeGapDraftOutputSnapshot.negative_case_missing_gap_row_fails -ne $true -or $reviewConsoleRuntimeGapDraftOutputSnapshot.negative_case_docs_progress_basis_fails -ne $true -or $reviewConsoleRuntimeGapDraftOutputSnapshot.negative_case_runtime_claim_fails -ne $true -or $reviewConsoleRuntimeGapDraftOutputSnapshot.negative_case_package_execution_flag_fails -ne $true -or $reviewConsoleRuntimeGapDraftOutputSnapshot.negative_case_manifest_read_flag_fails -ne $true -or $reviewConsoleRuntimeGapDraftOutputSnapshot.negative_case_memory_write_flag_fails -ne $true) {
+      Add-Failure "v14.206 runtime gap draft output snapshot must fail missing key, row, docs-basis, runtime, package, manifest, and memory negative cases"
+    }
+  }
+
+  $reviewConsoleRuntimeGapTraceMatrixOutput = & node (Join-Path $Root 'scripts/validate_v14_207_review_console_runtime_gap_trace_matrix_static_regression.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console runtime gap trace matrix static regression validation exited with failure"
+  } else {
+    $reviewConsoleRuntimeGapTraceMatrix = ($reviewConsoleRuntimeGapTraceMatrixOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleRuntimeGapTraceMatrix.passed -ne $true) {
+      Add-Failure "Review Console runtime gap trace matrix static regression validation must pass"
+    }
+    if ($reviewConsoleRuntimeGapTraceMatrix.trace_status -ne 'contract_ui_draft_trace_locked' -or $reviewConsoleRuntimeGapTraceMatrix.surface_count -ne 3 -or $reviewConsoleRuntimeGapTraceMatrix.runtime_gap_row_count -ne 7 -or $reviewConsoleRuntimeGapTraceMatrix.local_capability_row_count -ne 3 -or $reviewConsoleRuntimeGapTraceMatrix.a5_boundary_row_count -ne 4 -or $reviewConsoleRuntimeGapTraceMatrix.runtime_claim_allowed -ne $false) {
+      Add-Failure "v14.207 runtime gap trace matrix must link three surfaces and seven rows without runtime claim"
+    }
+    if ($reviewConsoleRuntimeGapTraceMatrix.all_rows_present_in_contract -ne $true -or $reviewConsoleRuntimeGapTraceMatrix.all_rows_present_in_static_ui_seed -ne $true -or $reviewConsoleRuntimeGapTraceMatrix.all_rows_present_in_draft_snapshot -ne $true -or $reviewConsoleRuntimeGapTraceMatrix.dashboard_progress_basis -ne 'validator_outputs_and_static_fixtures_only') {
+      Add-Failure "v14.207 runtime gap trace matrix must prove row continuity across contract, UI seed, and draft snapshot using validator/static evidence"
+    }
+    if ($reviewConsoleRuntimeGapTraceMatrix.static_trace_matrix_only -ne $true -or $reviewConsoleRuntimeGapTraceMatrix.package_execution_performed -ne $false -or $reviewConsoleRuntimeGapTraceMatrix.real_manifest_read_performed -ne $false -or $reviewConsoleRuntimeGapTraceMatrix.real_vcpchat_read_performed -ne $false -or $reviewConsoleRuntimeGapTraceMatrix.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleRuntimeGapTraceMatrix.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "v14.207 runtime gap trace matrix must remain static-only with no package/VCP/runtime action"
+    }
+    if ($reviewConsoleRuntimeGapTraceMatrix.negative_case_missing_surface_fails -ne $true -or $reviewConsoleRuntimeGapTraceMatrix.negative_case_missing_row_trace_fails -ne $true -or $reviewConsoleRuntimeGapTraceMatrix.negative_case_row_missing_from_static_ui_seed_fails -ne $true -or $reviewConsoleRuntimeGapTraceMatrix.negative_case_row_missing_from_draft_snapshot_fails -ne $true -or $reviewConsoleRuntimeGapTraceMatrix.negative_case_docs_progress_basis_fails -ne $true -or $reviewConsoleRuntimeGapTraceMatrix.negative_case_runtime_claim_fails -ne $true -or $reviewConsoleRuntimeGapTraceMatrix.negative_case_package_execution_flag_fails -ne $true -or $reviewConsoleRuntimeGapTraceMatrix.negative_case_memory_write_flag_fails -ne $true) {
+      Add-Failure "v14.207 runtime gap trace matrix must fail surface, row, basis, runtime, package, and memory negative cases"
+    }
+  }
+
+  $reviewConsoleBrowserStaticReviewBlockerOutput = & node (Join-Path $Root 'scripts/validate_v14_208_review_console_browser_static_review_blocker_handoff.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console browser static review blocker handoff validation exited with failure"
+  } else {
+    $reviewConsoleBrowserStaticReviewBlocker = ($reviewConsoleBrowserStaticReviewBlockerOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleBrowserStaticReviewBlocker.passed -ne $true) {
+      Add-Failure "Review Console browser static review blocker handoff validation must pass"
+    }
+    if ($reviewConsoleBrowserStaticReviewBlocker.blocker_status -ne 'active' -or $reviewConsoleBrowserStaticReviewBlocker.browser_static_review_status -ne 'blocked_unavailable' -or $reviewConsoleBrowserStaticReviewBlocker.browser_static_review_passed -ne $false -or $reviewConsoleBrowserStaticReviewBlocker.browser_static_review_claim_allowed -ne $false -or $reviewConsoleBrowserStaticReviewBlocker.static_regression_substitute_is_browser_review -ne $false) {
+      Add-Failure "v14.208 browser blocker must keep browser review blocked and prevent static regressions from being claimed as browser review"
+    }
+    if ($reviewConsoleBrowserStaticReviewBlocker.static_regression_ref_count -ne 3 -or $reviewConsoleBrowserStaticReviewBlocker.covered_surface_count -ne 3 -or $reviewConsoleBrowserStaticReviewBlocker.static_html_present -ne $true) {
+      Add-Failure "v14.208 browser blocker must reference the three static regression surfaces and the static HTML surface"
+    }
+    if ($reviewConsoleBrowserStaticReviewBlocker.dependency_install_allowed -ne $false -or $reviewConsoleBrowserStaticReviewBlocker.package_json_modified -ne $false -or $reviewConsoleBrowserStaticReviewBlocker.package_lock_modified -ne $false -or $reviewConsoleBrowserStaticReviewBlocker.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "v14.208 browser blocker must not allow dependency changes or VCP runtime claims"
+    }
+    if ($reviewConsoleBrowserStaticReviewBlocker.negative_case_browser_review_marked_passed_fails -ne $true -or $reviewConsoleBrowserStaticReviewBlocker.negative_case_static_regression_claimed_as_browser_review_fails -ne $true -or $reviewConsoleBrowserStaticReviewBlocker.negative_case_missing_static_regression_ref_fails -ne $true -or $reviewConsoleBrowserStaticReviewBlocker.negative_case_missing_html_surface_fails -ne $true -or $reviewConsoleBrowserStaticReviewBlocker.negative_case_dependency_install_allowed_fails -ne $true -or $reviewConsoleBrowserStaticReviewBlocker.negative_case_package_json_modified_fails -ne $true -or $reviewConsoleBrowserStaticReviewBlocker.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.208 browser blocker must fail browser-pass, static-substitute, missing-ref, missing-html, dependency, package, and runtime negative cases"
+    }
+  }
+
+  $uncommittedWorktreeRecoveryAuditOutput = & node (Join-Path $Root 'scripts/validate_v14_209_uncommitted_worktree_recovery_audit.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Uncommitted worktree recovery audit validation exited with failure"
+  } else {
+    $uncommittedWorktreeRecoveryAudit = ($uncommittedWorktreeRecoveryAuditOutput -join "`n") | ConvertFrom-Json
+    if ($uncommittedWorktreeRecoveryAudit.passed -ne $true) {
+      Add-Failure "Uncommitted worktree recovery audit validation must pass"
+    }
+    if ($uncommittedWorktreeRecoveryAudit.worktree_audit_only -ne $true -or $uncommittedWorktreeRecoveryAudit.commit_readiness_claimed -ne $false -or $uncommittedWorktreeRecoveryAudit.push_readiness_claimed -ne $false) {
+      Add-Failure "v14.209 worktree recovery audit must remain audit-only and must not claim commit or push readiness"
+    }
+    if ($uncommittedWorktreeRecoveryAudit.staged_file_count -ne 0 -or $uncommittedWorktreeRecoveryAudit.git_add_dot_used -ne $false -or $uncommittedWorktreeRecoveryAudit.commit_performed -ne $false -or $uncommittedWorktreeRecoveryAudit.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.209 worktree recovery audit must prove no staged files, no git add dot, no commit, and no push/tag/release/deploy"
+    }
+    if ($uncommittedWorktreeRecoveryAudit.ahead_count -ne 19 -or $uncommittedWorktreeRecoveryAudit.behind_count -ne 0 -or $uncommittedWorktreeRecoveryAudit.tracked_modified_file_count -ne 24 -or $uncommittedWorktreeRecoveryAudit.untracked_v14_165_to_v14_208_file_count -ne 133) {
+      Add-Failure "v14.209 worktree recovery audit must match the current branch ahead/behind and v14.165-v14.208 dirty-tree counts"
+    }
+    if ($uncommittedWorktreeRecoveryAudit.untracked_phase_doc_count -ne 44 -or $uncommittedWorktreeRecoveryAudit.untracked_phase_validator_count -ne 44 -or $uncommittedWorktreeRecoveryAudit.untracked_schema_example_count -ne 45 -or $uncommittedWorktreeRecoveryAudit.change_group_count -ne 4) {
+      Add-Failure "v14.209 worktree recovery audit must preserve the four exact-file groups and doc/validator/fixture counts"
+    }
+    if ($uncommittedWorktreeRecoveryAudit.provider_contact_performed -ne $false -or $uncommittedWorktreeRecoveryAudit.plugin_call_performed -ne $false -or $uncommittedWorktreeRecoveryAudit.api_call_performed -ne $false -or $uncommittedWorktreeRecoveryAudit.mcp_runtime_performed -ne $false -or $uncommittedWorktreeRecoveryAudit.image_generation_performed -ne $false -or $uncommittedWorktreeRecoveryAudit.env_or_secret_read_performed -ne $false -or $uncommittedWorktreeRecoveryAudit.real_manifest_read_performed -ne $false -or $uncommittedWorktreeRecoveryAudit.real_vcpchat_read_performed -ne $false -or $uncommittedWorktreeRecoveryAudit.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "v14.209 worktree recovery audit must not perform provider, plugin, API, MCP, image, secret, manifest, VCPChat, or VCPToolBox actions"
+    }
+    if ($uncommittedWorktreeRecoveryAudit.failure_samples_write_performed -ne $false -or $uncommittedWorktreeRecoveryAudit.production_candidate_write_performed -ne $false -or $uncommittedWorktreeRecoveryAudit.daily_note_write_performed -ne $false -or $uncommittedWorktreeRecoveryAudit.vcp_memory_write_performed -ne $false -or $uncommittedWorktreeRecoveryAudit.dependency_change_performed -ne $false -or $uncommittedWorktreeRecoveryAudit.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "v14.209 worktree recovery audit must not write failure/production/memory surfaces, change dependencies, or claim VCP runtime integration"
+    }
+    if ($uncommittedWorktreeRecoveryAudit.negative_case_staged_file_present_fails -ne $true -or $uncommittedWorktreeRecoveryAudit.negative_case_untracked_v14_count_mismatch_fails -ne $true -or $uncommittedWorktreeRecoveryAudit.negative_case_group_count_mismatch_fails -ne $true -or $uncommittedWorktreeRecoveryAudit.negative_case_package_change_flag_fails -ne $true -or $uncommittedWorktreeRecoveryAudit.negative_case_runtime_claim_fails -ne $true -or $uncommittedWorktreeRecoveryAudit.negative_case_push_claim_fails -ne $true) {
+      Add-Failure "v14.209 worktree recovery audit must fail staged, count, group, package, runtime, and push negative cases"
+    }
+  }
+
+  $exactFileCommitReadinessReviewOutput = & node (Join-Path $Root 'scripts/validate_v14_210_exact_file_commit_readiness_review.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact-file commit readiness review validation exited with failure"
+  } else {
+    $exactFileCommitReadinessReview = ($exactFileCommitReadinessReviewOutput -join "`n") | ConvertFrom-Json
+    if ($exactFileCommitReadinessReview.passed -ne $true) {
+      Add-Failure "Exact-file commit readiness review validation must pass"
+    }
+    if ($exactFileCommitReadinessReview.exact_file_commit_readiness_review_only -ne $true -or $exactFileCommitReadinessReview.auto_commit_allowed_now -ne $false -or $exactFileCommitReadinessReview.staging_allowed_now -ne $false -or $exactFileCommitReadinessReview.push_allowed_now -ne $false) {
+      Add-Failure "v14.210 exact-file commit readiness review must remain review-only and must not allow auto commit, staging, or push"
+    }
+    if ($exactFileCommitReadinessReview.staged_file_count -ne 0 -or $exactFileCommitReadinessReview.git_add_dot_used -ne $false -or $exactFileCommitReadinessReview.commit_performed -ne $false -or $exactFileCommitReadinessReview.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.210 exact-file commit readiness review must prove no staged files, no git add dot, no commit, and no push/tag/release/deploy"
+    }
+    if ($exactFileCommitReadinessReview.ahead_count -ne 19 -or $exactFileCommitReadinessReview.behind_count -ne 0 -or $exactFileCommitReadinessReview.tracked_modified_file_count -ne 24 -or $exactFileCommitReadinessReview.untracked_v14_165_to_v14_210_file_count -ne 139 -or $exactFileCommitReadinessReview.future_exact_file_candidate_total -ne 163) {
+      Add-Failure "v14.210 exact-file commit readiness review must match current dirty-tree counts and future candidate total"
+    }
+    if ($exactFileCommitReadinessReview.untracked_phase_doc_count -ne 46 -or $exactFileCommitReadinessReview.untracked_phase_validator_count -ne 46 -or $exactFileCommitReadinessReview.untracked_schema_example_count -ne 47 -or $exactFileCommitReadinessReview.non_phase_untracked_review_console_file_count -ne 1 -or $exactFileCommitReadinessReview.candidate_group_count -ne 7) {
+      Add-Failure "v14.210 exact-file commit readiness review must preserve candidate group and phase file counts"
+    }
+    if ($exactFileCommitReadinessReview.provider_contact_performed -ne $false -or $exactFileCommitReadinessReview.plugin_call_performed -ne $false -or $exactFileCommitReadinessReview.api_call_performed -ne $false -or $exactFileCommitReadinessReview.mcp_runtime_performed -ne $false -or $exactFileCommitReadinessReview.image_generation_performed -ne $false -or $exactFileCommitReadinessReview.env_or_secret_read_performed -ne $false -or $exactFileCommitReadinessReview.real_manifest_read_performed -ne $false -or $exactFileCommitReadinessReview.real_vcpchat_read_performed -ne $false -or $exactFileCommitReadinessReview.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "v14.210 exact-file commit readiness review must not perform provider, plugin, API, MCP, image, secret, manifest, VCPChat, or VCPToolBox actions"
+    }
+    if ($exactFileCommitReadinessReview.failure_samples_write_performed -ne $false -or $exactFileCommitReadinessReview.production_candidate_write_performed -ne $false -or $exactFileCommitReadinessReview.daily_note_write_performed -ne $false -or $exactFileCommitReadinessReview.vcp_memory_write_performed -ne $false -or $exactFileCommitReadinessReview.dependency_change_performed -ne $false -or $exactFileCommitReadinessReview.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "v14.210 exact-file commit readiness review must not write failure/production/memory surfaces, change dependencies, or claim VCP runtime integration"
+    }
+    if ($exactFileCommitReadinessReview.negative_case_auto_commit_allowed_fails -ne $true -or $exactFileCommitReadinessReview.negative_case_staging_allowed_fails -ne $true -or $exactFileCommitReadinessReview.negative_case_staged_file_present_fails -ne $true -or $exactFileCommitReadinessReview.negative_case_candidate_total_mismatch_fails -ne $true -or $exactFileCommitReadinessReview.negative_case_group_count_mismatch_fails -ne $true -or $exactFileCommitReadinessReview.negative_case_runtime_claim_fails -ne $true -or $exactFileCommitReadinessReview.negative_case_push_claim_fails -ne $true) {
+      Add-Failure "v14.210 exact-file commit readiness review must fail auto-commit, staging, staged-file, total, group, runtime, and push negative cases"
+    }
+  }
+
+  $recoverabilityBaselineExactFileStagingAuthorizationPackageDraftOutput = & node (Join-Path $Root 'scripts/validate_v14_211_recoverability_baseline_exact_file_staging_authorization_package_draft.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Recoverability baseline exact-file staging authorization package draft validation exited with failure"
+  } else {
+    $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft = ($recoverabilityBaselineExactFileStagingAuthorizationPackageDraftOutput -join "`n") | ConvertFrom-Json
+    if ($recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.passed -ne $true) {
+      Add-Failure "Recoverability baseline exact-file staging authorization package draft validation must pass"
+    }
+    if ($recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.draft_only -ne $true -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.authorization_granted_by_this_record -ne $false -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.execution_ready -ne $false) {
+      Add-Failure "v14.211 exact-file staging authorization package must remain draft-only and blocked"
+    }
+    if ($recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.exact_stage_file_count -ne 14 -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.source_group_id -ne 'recoverability_three_sample_baseline' -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.source_group_count -ne 14) {
+      Add-Failure "v14.211 exact-file staging authorization package must target the 14-file recoverability_three_sample_baseline group"
+    }
+    if ($recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.staged_file_count -ne 0 -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.git_add_dot_used -ne $false -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.staged_files_created -ne $false -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.commit_performed -ne $false -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "v14.211 exact-file staging authorization package draft must prove no staged files, no git add dot, no staging, no commit, and no push/tag/release/deploy"
+    }
+    if ($recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.provider_contact_performed -ne $false -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.plugin_call_performed -ne $false -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.api_call_performed -ne $false -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.mcp_runtime_performed -ne $false -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.image_generation_performed -ne $false -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.env_or_secret_read_performed -ne $false -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.real_manifest_read_performed -ne $false -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.real_vcpchat_read_performed -ne $false -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "v14.211 exact-file staging authorization package draft must not perform provider, plugin, API, MCP, image, secret, manifest, VCPChat, or VCPToolBox actions"
+    }
+    if ($recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.accepted_samples_write_performed -ne $false -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.failure_samples_write_performed -ne $false -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.production_candidate_write_performed -ne $false -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.daily_note_write_performed -ne $false -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.vcp_memory_write_performed -ne $false -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.dependency_change_performed -ne $false -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "v14.211 exact-file staging authorization package draft must not write accepted/failure/production/memory surfaces, change dependencies, or claim VCP runtime integration"
+    }
+    if ($recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.negative_case_missing_exact_file_fails -ne $true -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.negative_case_extra_exact_file_fails -ne $true -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.negative_case_staging_allowed_fails -ne $true -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.negative_case_git_add_dot_allowed_fails -ne $true -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.negative_case_commit_performed_fails -ne $true -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.negative_case_push_claim_fails -ne $true -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.negative_case_missing_commit_trailer_fails -ne $true -or $recoverabilityBaselineExactFileStagingAuthorizationPackageDraft.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.211 exact-file staging authorization package draft must fail missing-file, extra-file, staging, git-add-dot, commit, push, trailer, and runtime negative cases"
+    }
+  }
+
+  $sixMonthGoalPromptToArtifactCompletionAuditOutput = & node (Join-Path $Root 'scripts/validate_v14_212_six_month_goal_prompt_to_artifact_completion_audit.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Six-month goal prompt-to-artifact completion audit validation exited with failure"
+  } else {
+    $sixMonthGoalPromptToArtifactCompletionAudit = ($sixMonthGoalPromptToArtifactCompletionAuditOutput -join "`n") | ConvertFrom-Json
+    if ($sixMonthGoalPromptToArtifactCompletionAudit.passed -ne $true) {
+      Add-Failure "Six-month goal prompt-to-artifact completion audit validation must pass"
+    }
+    if ($sixMonthGoalPromptToArtifactCompletionAudit.goal_complete -ne $false -or $sixMonthGoalPromptToArtifactCompletionAudit.prompt_to_artifact_audit_only -ne $true) {
+      Add-Failure "v14.212 six-month goal audit must remain incomplete and audit-only"
+    }
+    if ($sixMonthGoalPromptToArtifactCompletionAudit.recoverable_accepted_sample_count -ne 3 -or $sixMonthGoalPromptToArtifactCompletionAudit.blocked_third_candidate_count -ne 0 -or $sixMonthGoalPromptToArtifactCompletionAudit.remaining_full_recoverable_sample_gap -ne 0) {
+      Add-Failure "v14.212 six-month goal audit must preserve the current three-sample local recoverability baseline"
+    }
+    if ($sixMonthGoalPromptToArtifactCompletionAudit.success_criteria_count -ne 8 -or $sixMonthGoalPromptToArtifactCompletionAudit.met_count -ne 3 -or $sixMonthGoalPromptToArtifactCompletionAudit.partial_count -ne 3 -or $sixMonthGoalPromptToArtifactCompletionAudit.not_met_count -ne 2 -or $sixMonthGoalPromptToArtifactCompletionAudit.blocked_by_a5_count -ne 1) {
+      Add-Failure "v14.212 six-month goal audit must preserve the prompt-to-artifact checklist counts"
+    }
+    if ($sixMonthGoalPromptToArtifactCompletionAudit.provider_contact_performed -ne $false -or $sixMonthGoalPromptToArtifactCompletionAudit.plugin_call_performed -ne $false -or $sixMonthGoalPromptToArtifactCompletionAudit.api_call_performed -ne $false -or $sixMonthGoalPromptToArtifactCompletionAudit.mcp_runtime_performed -ne $false -or $sixMonthGoalPromptToArtifactCompletionAudit.image_generation_performed -ne $false -or $sixMonthGoalPromptToArtifactCompletionAudit.env_or_secret_read_performed -ne $false -or $sixMonthGoalPromptToArtifactCompletionAudit.real_manifest_read_performed -ne $false -or $sixMonthGoalPromptToArtifactCompletionAudit.real_vcpchat_read_performed -ne $false -or $sixMonthGoalPromptToArtifactCompletionAudit.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "v14.212 six-month goal audit must not perform provider, plugin, API, MCP, image, secret, manifest, VCPChat, or VCPToolBox actions"
+    }
+    if ($sixMonthGoalPromptToArtifactCompletionAudit.accepted_samples_write_performed -ne $false -or $sixMonthGoalPromptToArtifactCompletionAudit.failure_samples_write_performed -ne $false -or $sixMonthGoalPromptToArtifactCompletionAudit.production_candidate_write_performed -ne $false -or $sixMonthGoalPromptToArtifactCompletionAudit.daily_note_write_performed -ne $false -or $sixMonthGoalPromptToArtifactCompletionAudit.vcp_memory_write_performed -ne $false -or $sixMonthGoalPromptToArtifactCompletionAudit.commit_performed -ne $false -or $sixMonthGoalPromptToArtifactCompletionAudit.push_tag_release_deploy_performed -ne $false -or $sixMonthGoalPromptToArtifactCompletionAudit.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "v14.212 six-month goal audit must not write accepted/failure/production/memory surfaces, commit, push, or claim VCP runtime integration"
+    }
+    if ($sixMonthGoalPromptToArtifactCompletionAudit.negative_case_goal_complete_true_fails -ne $true -or $sixMonthGoalPromptToArtifactCompletionAudit.negative_case_three_sample_goal_marked_missing_fails -ne $true -or $sixMonthGoalPromptToArtifactCompletionAudit.negative_case_local_recoverability_marked_goal_complete_fails -ne $true -or $sixMonthGoalPromptToArtifactCompletionAudit.negative_case_missing_evidence_ref_fails -ne $true -or $sixMonthGoalPromptToArtifactCompletionAudit.negative_case_runtime_claim_fails -ne $true -or $sixMonthGoalPromptToArtifactCompletionAudit.negative_case_external_action_flag_fails -ne $true) {
+      Add-Failure "v14.212 six-month goal audit must fail completion, missing-three-sample, local-recoverability-overclaim, missing-evidence, runtime, and external-action negative cases"
+    }
+  }
+
+  $lampThirdSampleHumanApprovalRequestPackageOutput = & node (Join-Path $Root 'scripts/validate_v14_213_lamp_third_sample_human_approval_request_package.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Lamp third sample human approval request package validation exited with failure"
+  } else {
+    $lampThirdSampleHumanApprovalRequestPackage = ($lampThirdSampleHumanApprovalRequestPackageOutput -join "`n") | ConvertFrom-Json
+    if ($lampThirdSampleHumanApprovalRequestPackage.passed -ne $true) {
+      Add-Failure "Lamp third sample human approval request package validation must pass"
+    }
+    if ($lampThirdSampleHumanApprovalRequestPackage.current_human_approval_status -ne 'pending' -or $lampThirdSampleHumanApprovalRequestPackage.current_registration_blocker -ne 'human_approval_missing') {
+      Add-Failure "v14.213 must preserve the current lamp human approval blocker"
+    }
+    if ($lampThirdSampleHumanApprovalRequestPackage.human_approval_granted_by_this_record -ne $false -or $lampThirdSampleHumanApprovalRequestPackage.accepted_samples_registration_ready_now -ne $false -or $lampThirdSampleHumanApprovalRequestPackage.human_approval_request_package_only -ne $true) {
+      Add-Failure "v14.213 must remain a request package and must not grant approval or registration readiness"
+    }
+    if ($lampThirdSampleHumanApprovalRequestPackage.accepted_samples_write_performed -ne $false -or $lampThirdSampleHumanApprovalRequestPackage.category_index_write_performed -ne $false -or $lampThirdSampleHumanApprovalRequestPackage.failure_samples_write_performed -ne $false -or $lampThirdSampleHumanApprovalRequestPackage.production_candidate_write_performed -ne $false -or $lampThirdSampleHumanApprovalRequestPackage.daily_note_write_performed -ne $false -or $lampThirdSampleHumanApprovalRequestPackage.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.213 must not write accepted/category/failure/production/memory surfaces"
+    }
+    if ($lampThirdSampleHumanApprovalRequestPackage.provider_contact_performed -ne $false -or $lampThirdSampleHumanApprovalRequestPackage.plugin_call_performed -ne $false -or $lampThirdSampleHumanApprovalRequestPackage.api_call_performed -ne $false -or $lampThirdSampleHumanApprovalRequestPackage.mcp_runtime_performed -ne $false -or $lampThirdSampleHumanApprovalRequestPackage.image_generation_performed -ne $false -or $lampThirdSampleHumanApprovalRequestPackage.env_or_secret_read_performed -ne $false -or $lampThirdSampleHumanApprovalRequestPackage.real_manifest_read_performed -ne $false -or $lampThirdSampleHumanApprovalRequestPackage.real_vcpchat_read_performed -ne $false -or $lampThirdSampleHumanApprovalRequestPackage.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "v14.213 must not perform provider, plugin, API, MCP, image, secret, manifest, VCPChat, or VCPToolBox actions"
+    }
+    if ($lampThirdSampleHumanApprovalRequestPackage.commit_performed -ne $false -or $lampThirdSampleHumanApprovalRequestPackage.push_tag_release_deploy_performed -ne $false -or $lampThirdSampleHumanApprovalRequestPackage.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "v14.213 must not commit, push, deploy, or claim VCP runtime integration"
+    }
+    if ($lampThirdSampleHumanApprovalRequestPackage.negative_case_approval_granted_by_record_fails -ne $true -or $lampThirdSampleHumanApprovalRequestPackage.negative_case_registration_ready_now_fails -ne $true -or $lampThirdSampleHumanApprovalRequestPackage.negative_case_missing_jenn_fails -ne $true -or $lampThirdSampleHumanApprovalRequestPackage.negative_case_missing_candidate_id_fails -ne $true -or $lampThirdSampleHumanApprovalRequestPackage.negative_case_missing_artifact_hash_fails -ne $true -or $lampThirdSampleHumanApprovalRequestPackage.negative_case_broad_write_scope_fails -ne $true -or $lampThirdSampleHumanApprovalRequestPackage.negative_case_external_action_flag_fails -ne $true -or $lampThirdSampleHumanApprovalRequestPackage.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.213 must fail approval-granted, registration-ready, missing-Jenn, missing-candidate, missing-hash, broad-scope, external-action, and runtime negative cases"
+    }
+  }
+
+  $lampThirdSampleHumanApprovalIntakeValidatorOutput = & node (Join-Path $Root 'scripts/validate_v14_214_lamp_third_sample_human_approval_intake_validator.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Lamp third sample human approval intake validator validation exited with failure"
+  } else {
+    $lampThirdSampleHumanApprovalIntakeValidator = ($lampThirdSampleHumanApprovalIntakeValidatorOutput -join "`n") | ConvertFrom-Json
+    if ($lampThirdSampleHumanApprovalIntakeValidator.passed -ne $true) {
+      Add-Failure "Lamp third sample human approval intake validator validation must pass"
+    }
+    if ($lampThirdSampleHumanApprovalIntakeValidator.approval_statement_matches_required_form -ne $true -or $lampThirdSampleHumanApprovalIntakeValidator.approval_statement_source_is_user_submission -ne $false) {
+      Add-Failure "v14.214 must validate the exact approval form without treating the fixture as a user submission"
+    }
+    if ($lampThirdSampleHumanApprovalIntakeValidator.human_approval_captured_now -ne $false -or $lampThirdSampleHumanApprovalIntakeValidator.accepted_samples_registration_ready_now -ne $false -or $lampThirdSampleHumanApprovalIntakeValidator.current_registration_blocker -ne 'human_approval_missing') {
+      Add-Failure "v14.214 must preserve the current lamp human approval blocker until real Jenn approval is captured"
+    }
+    if ($lampThirdSampleHumanApprovalIntakeValidator.registration_unlocks_only_after_external_user_approval -ne $true -or $lampThirdSampleHumanApprovalIntakeValidator.approval_intake_validator_only -ne $true) {
+      Add-Failure "v14.214 must remain an approval intake validator only"
+    }
+    if ($lampThirdSampleHumanApprovalIntakeValidator.accepted_samples_write_performed -ne $false -or $lampThirdSampleHumanApprovalIntakeValidator.category_index_write_performed -ne $false -or $lampThirdSampleHumanApprovalIntakeValidator.failure_samples_write_performed -ne $false -or $lampThirdSampleHumanApprovalIntakeValidator.production_candidate_write_performed -ne $false -or $lampThirdSampleHumanApprovalIntakeValidator.daily_note_write_performed -ne $false -or $lampThirdSampleHumanApprovalIntakeValidator.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.214 must not write accepted/category/failure/production/memory surfaces"
+    }
+    if ($lampThirdSampleHumanApprovalIntakeValidator.provider_contact_performed -ne $false -or $lampThirdSampleHumanApprovalIntakeValidator.plugin_call_performed -ne $false -or $lampThirdSampleHumanApprovalIntakeValidator.api_call_performed -ne $false -or $lampThirdSampleHumanApprovalIntakeValidator.mcp_runtime_performed -ne $false -or $lampThirdSampleHumanApprovalIntakeValidator.image_generation_performed -ne $false -or $lampThirdSampleHumanApprovalIntakeValidator.env_or_secret_read_performed -ne $false -or $lampThirdSampleHumanApprovalIntakeValidator.real_manifest_read_performed -ne $false -or $lampThirdSampleHumanApprovalIntakeValidator.real_vcpchat_read_performed -ne $false -or $lampThirdSampleHumanApprovalIntakeValidator.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "v14.214 must not perform provider, plugin, API, MCP, image, secret, manifest, VCPChat, or VCPToolBox actions"
+    }
+    if ($lampThirdSampleHumanApprovalIntakeValidator.commit_performed -ne $false -or $lampThirdSampleHumanApprovalIntakeValidator.push_tag_release_deploy_performed -ne $false -or $lampThirdSampleHumanApprovalIntakeValidator.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "v14.214 must not commit, push, deploy, or claim VCP runtime integration"
+    }
+    if ($lampThirdSampleHumanApprovalIntakeValidator.negative_case_missing_reviewer_fails -ne $true -or $lampThirdSampleHumanApprovalIntakeValidator.negative_case_missing_candidate_id_fails -ne $true -or $lampThirdSampleHumanApprovalIntakeValidator.negative_case_missing_artifact_hash_fails -ne $true -or $lampThirdSampleHumanApprovalIntakeValidator.negative_case_wrong_category_fails -ne $true -or $lampThirdSampleHumanApprovalIntakeValidator.negative_case_broad_write_scope_fails -ne $true -or $lampThirdSampleHumanApprovalIntakeValidator.negative_case_external_action_flag_fails -ne $true -or $lampThirdSampleHumanApprovalIntakeValidator.negative_case_premature_registration_ready_fails -ne $true -or $lampThirdSampleHumanApprovalIntakeValidator.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.214 must fail missing-reviewer, missing-candidate, missing-hash, wrong-category, broad-scope, external-action, premature-ready, and runtime negative cases"
+    }
+  }
+
+  $thirdSampleAcceptedSamplesPostApprovalGateAlignmentOutput = & node (Join-Path $Root 'scripts/validate_v14_215_third_sample_accepted_samples_post_approval_gate_alignment.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Third sample accepted_samples post-approval gate alignment validation exited with failure"
+  } else {
+    $thirdSampleAcceptedSamplesPostApprovalGateAlignment = ($thirdSampleAcceptedSamplesPostApprovalGateAlignmentOutput -join "`n") | ConvertFrom-Json
+    if ($thirdSampleAcceptedSamplesPostApprovalGateAlignment.passed -ne $true) {
+      Add-Failure "Third sample accepted_samples post-approval gate alignment validation must pass"
+    }
+    if ($thirdSampleAcceptedSamplesPostApprovalGateAlignment.v14_214_intake_validator_passed -ne $true -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.future_registration_requires_v14_214_user_submission -ne $true) {
+      Add-Failure "v14.215 must require the v14.214 intake validator before future registration"
+    }
+    if ($thirdSampleAcceptedSamplesPostApprovalGateAlignment.gate_status -ne 'blocked' -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.current_registration_blocker -ne 'human_approval_missing') {
+      Add-Failure "v14.215 must preserve the current human approval blocker"
+    }
+    if ($thirdSampleAcceptedSamplesPostApprovalGateAlignment.approval_statement_source_is_user_submission -ne $false -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.human_approval_captured_now -ne $false -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.accepted_samples_registration_ready_now -ne $false) {
+      Add-Failure "v14.215 must not overclaim user-submitted approval, captured approval, or registration readiness"
+    }
+    if ($thirdSampleAcceptedSamplesPostApprovalGateAlignment.post_approval_gate_alignment_only -ne $true -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.staged_file_count -ne 0) {
+      Add-Failure "v14.215 must remain a gate-alignment-only local validation with no staged files"
+    }
+    if ($thirdSampleAcceptedSamplesPostApprovalGateAlignment.accepted_samples_write_performed -ne $false -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.category_index_write_performed -ne $false -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.failure_samples_write_performed -ne $false -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.production_candidate_write_performed -ne $false -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.daily_note_write_performed -ne $false -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.215 must not write accepted/category/failure/production/memory surfaces"
+    }
+    if ($thirdSampleAcceptedSamplesPostApprovalGateAlignment.provider_contact_performed -ne $false -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.plugin_call_performed -ne $false -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.api_call_performed -ne $false -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.mcp_runtime_performed -ne $false -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.image_generation_performed -ne $false -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.env_or_secret_read_performed -ne $false -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.real_manifest_read_performed -ne $false -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.real_vcpchat_read_performed -ne $false -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "v14.215 must not perform provider, plugin, API, MCP, image, secret, manifest, VCPChat, or VCPToolBox actions"
+    }
+    if ($thirdSampleAcceptedSamplesPostApprovalGateAlignment.commit_performed -ne $false -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.push_tag_release_deploy_performed -ne $false -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "v14.215 must not commit, push, deploy, or claim VCP runtime integration"
+    }
+    if ($thirdSampleAcceptedSamplesPostApprovalGateAlignment.negative_case_missing_v14_214_requirement_fails -ne $true -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.negative_case_user_submission_overclaim_fails -ne $true -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.negative_case_human_approval_overclaim_fails -ne $true -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.negative_case_registration_ready_overclaim_fails -ne $true -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.negative_case_broad_allowed_files_fails -ne $true -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.negative_case_accepted_samples_write_flag_fails -ne $true -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.negative_case_external_action_flag_fails -ne $true -or $thirdSampleAcceptedSamplesPostApprovalGateAlignment.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.215 must fail missing-v14.214-requirement, overclaim, broad-scope, write, external-action, and runtime negative cases"
+    }
+  }
+
+  $reviewConsolePostApprovalGateStaticPanelOutput = & node (Join-Path $Root 'scripts/validate_v14_216_review_console_post_approval_gate_static_panel.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console post-approval gate static panel validation exited with failure"
+  } else {
+    $reviewConsolePostApprovalGateStaticPanel = ($reviewConsolePostApprovalGateStaticPanelOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsolePostApprovalGateStaticPanel.passed -ne $true) {
+      Add-Failure "Review Console post-approval gate static panel validation must pass"
+    }
+    if ($reviewConsolePostApprovalGateStaticPanel.draft_output_key -ne 'third_sample_post_approval_gate_state' -or $reviewConsolePostApprovalGateStaticPanel.static_panel_only -ne $true) {
+      Add-Failure "v14.216 must expose only the static third_sample_post_approval_gate_state"
+    }
+    if ($reviewConsolePostApprovalGateStaticPanel.gate_status -ne 'blocked' -or $reviewConsolePostApprovalGateStaticPanel.blocker -ne 'human_approval_missing' -or $reviewConsolePostApprovalGateStaticPanel.future_registration_requires_v14_214_user_submission -ne $true) {
+      Add-Failure "v14.216 must preserve the v14.215 human approval blocker and v14.214 intake requirement"
+    }
+    if ($reviewConsolePostApprovalGateStaticPanel.approval_statement_source_is_user_submission -ne $false -or $reviewConsolePostApprovalGateStaticPanel.human_approval_captured_now -ne $false -or $reviewConsolePostApprovalGateStaticPanel.accepted_samples_registration_ready_now -ne $false) {
+      Add-Failure "v14.216 must not overclaim user-submitted approval, captured approval, or registration readiness"
+    }
+    if ($reviewConsolePostApprovalGateStaticPanel.accepted_samples_write_performed -ne $false -or $reviewConsolePostApprovalGateStaticPanel.category_index_write_performed -ne $false -or $reviewConsolePostApprovalGateStaticPanel.failure_samples_write_performed -ne $false -or $reviewConsolePostApprovalGateStaticPanel.production_candidate_write_performed -ne $false -or $reviewConsolePostApprovalGateStaticPanel.daily_note_write_performed -ne $false -or $reviewConsolePostApprovalGateStaticPanel.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.216 must not write accepted/category/failure/production/memory surfaces"
+    }
+    if ($reviewConsolePostApprovalGateStaticPanel.provider_contact_performed -ne $false -or $reviewConsolePostApprovalGateStaticPanel.plugin_call_performed -ne $false -or $reviewConsolePostApprovalGateStaticPanel.api_call_performed -ne $false -or $reviewConsolePostApprovalGateStaticPanel.mcp_runtime_performed -ne $false -or $reviewConsolePostApprovalGateStaticPanel.image_generation_performed -ne $false -or $reviewConsolePostApprovalGateStaticPanel.env_or_secret_read_performed -ne $false -or $reviewConsolePostApprovalGateStaticPanel.real_manifest_read_performed -ne $false -or $reviewConsolePostApprovalGateStaticPanel.real_vcpchat_read_performed -ne $false -or $reviewConsolePostApprovalGateStaticPanel.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "v14.216 must not perform provider, plugin, API, MCP, image, secret, manifest, VCPChat, or VCPToolBox actions"
+    }
+    if ($reviewConsolePostApprovalGateStaticPanel.push_tag_release_deploy_performed -ne $false -or $reviewConsolePostApprovalGateStaticPanel.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "v14.216 must not push, deploy, or claim VCP runtime integration"
+    }
+    if ($reviewConsolePostApprovalGateStaticPanel.negative_case_missing_v14_215_source_fails -ne $true -or $reviewConsolePostApprovalGateStaticPanel.negative_case_user_submission_overclaim_fails -ne $true -or $reviewConsolePostApprovalGateStaticPanel.negative_case_human_approval_overclaim_fails -ne $true -or $reviewConsolePostApprovalGateStaticPanel.negative_case_registration_ready_overclaim_fails -ne $true -or $reviewConsolePostApprovalGateStaticPanel.negative_case_accepted_samples_write_flag_fails -ne $true -or $reviewConsolePostApprovalGateStaticPanel.negative_case_external_action_flag_fails -ne $true -or $reviewConsolePostApprovalGateStaticPanel.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.216 must fail missing-source, approval-overclaim, registration-ready, write, external-action, and runtime negative cases"
+    }
+  }
+
+  $reviewConsolePostApprovalGateSnapshotOutput = & node (Join-Path $Root 'scripts/validate_v14_217_review_console_post_approval_gate_snapshot_static_regression.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console post-approval gate snapshot validation exited with failure"
+  } else {
+    $reviewConsolePostApprovalGateSnapshot = ($reviewConsolePostApprovalGateSnapshotOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsolePostApprovalGateSnapshot.passed -ne $true) {
+      Add-Failure "Review Console post-approval gate snapshot validation must pass"
+    }
+    if ($reviewConsolePostApprovalGateSnapshot.snapshot_status -ne 'golden_static_snapshot' -or $reviewConsolePostApprovalGateSnapshot.draft_output_key -ne 'third_sample_post_approval_gate_state' -or $reviewConsolePostApprovalGateSnapshot.static_snapshot_only -ne $true) {
+      Add-Failure "v14.217 must preserve the golden static snapshot for third_sample_post_approval_gate_state"
+    }
+    if ($reviewConsolePostApprovalGateSnapshot.gate_status -ne 'blocked' -or $reviewConsolePostApprovalGateSnapshot.blocker -ne 'human_approval_missing' -or $reviewConsolePostApprovalGateSnapshot.future_registration_requires_v14_214_user_submission -ne $true) {
+      Add-Failure "v14.217 must keep the post-approval gate blocked on v14.214 user-submission approval"
+    }
+    if ($reviewConsolePostApprovalGateSnapshot.approval_statement_source_is_user_submission -ne $false -or $reviewConsolePostApprovalGateSnapshot.human_approval_captured_now -ne $false -or $reviewConsolePostApprovalGateSnapshot.accepted_samples_registration_ready_now -ne $false) {
+      Add-Failure "v14.217 must not overclaim approval source, captured approval, or registration readiness"
+    }
+    if ($reviewConsolePostApprovalGateSnapshot.accepted_samples_write_performed -ne $false -or $reviewConsolePostApprovalGateSnapshot.category_index_write_performed -ne $false -or $reviewConsolePostApprovalGateSnapshot.failure_samples_write_performed -ne $false -or $reviewConsolePostApprovalGateSnapshot.production_candidate_write_performed -ne $false -or $reviewConsolePostApprovalGateSnapshot.daily_note_write_performed -ne $false -or $reviewConsolePostApprovalGateSnapshot.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.217 must not write accepted/category/failure/production/memory surfaces"
+    }
+    if ($reviewConsolePostApprovalGateSnapshot.provider_contact_performed -ne $false -or $reviewConsolePostApprovalGateSnapshot.plugin_call_performed -ne $false -or $reviewConsolePostApprovalGateSnapshot.api_call_performed -ne $false -or $reviewConsolePostApprovalGateSnapshot.mcp_runtime_performed -ne $false -or $reviewConsolePostApprovalGateSnapshot.image_generation_performed -ne $false -or $reviewConsolePostApprovalGateSnapshot.env_or_secret_read_performed -ne $false -or $reviewConsolePostApprovalGateSnapshot.real_manifest_read_performed -ne $false -or $reviewConsolePostApprovalGateSnapshot.real_vcpchat_read_performed -ne $false -or $reviewConsolePostApprovalGateSnapshot.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "v14.217 must not perform provider, plugin, API, MCP, image, secret, manifest, VCPChat, or VCPToolBox actions"
+    }
+    if ($reviewConsolePostApprovalGateSnapshot.push_tag_release_deploy_performed -ne $false -or $reviewConsolePostApprovalGateSnapshot.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "v14.217 must not push, deploy, or claim VCP runtime integration"
+    }
+    if ($reviewConsolePostApprovalGateSnapshot.negative_case_missing_v14_216_source_fails -ne $true -or $reviewConsolePostApprovalGateSnapshot.negative_case_user_submission_overclaim_fails -ne $true -or $reviewConsolePostApprovalGateSnapshot.negative_case_human_approval_overclaim_fails -ne $true -or $reviewConsolePostApprovalGateSnapshot.negative_case_registration_ready_overclaim_fails -ne $true -or $reviewConsolePostApprovalGateSnapshot.negative_case_required_count_drift_fails -ne $true -or $reviewConsolePostApprovalGateSnapshot.negative_case_accepted_samples_write_flag_fails -ne $true -or $reviewConsolePostApprovalGateSnapshot.negative_case_external_action_flag_fails -ne $true -or $reviewConsolePostApprovalGateSnapshot.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.217 must fail missing-source, approval-overclaim, count-drift, write, external-action, and runtime negative cases"
+    }
+  }
+
+  $humanApprovalBlockerQueueOutput = & node (Join-Path $Root 'scripts/validate_v14_218_review_console_human_approval_blocker_queue_static_panel.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console human approval blocker queue validation exited with failure"
+  } else {
+    $humanApprovalBlockerQueue = ($humanApprovalBlockerQueueOutput -join "`n") | ConvertFrom-Json
+    if ($humanApprovalBlockerQueue.passed -ne $true) {
+      Add-Failure "Review Console human approval blocker queue validation must pass"
+    }
+    if ($humanApprovalBlockerQueue.draft_output_key -ne 'human_approval_blocker_queue_state' -or $humanApprovalBlockerQueue.queue_status -ne 'active_blocker_queue' -or $humanApprovalBlockerQueue.total_blockers -ne 1) {
+      Add-Failure "v14.218 must expose exactly one active human approval blocker queue state"
+    }
+    if ($humanApprovalBlockerQueue.blocker_type -ne 'human_approval_missing' -or $humanApprovalBlockerQueue.target_candidate_id -ne 'v14_166_lamp_v3_generated_candidate_001') {
+      Add-Failure "v14.218 must keep the lamp third sample blocked on human_approval_missing"
+    }
+    if ($humanApprovalBlockerQueue.approval_statement_source_is_user_submission -ne $false -or $humanApprovalBlockerQueue.human_approval_captured_now -ne $false -or $humanApprovalBlockerQueue.accepted_samples_registration_ready_now -ne $false -or $humanApprovalBlockerQueue.next_write_action_allowed_now -ne $false) {
+      Add-Failure "v14.218 must not overclaim approval, registration readiness, or write permission"
+    }
+    if ($humanApprovalBlockerQueue.static_panel_only -ne $true -or $humanApprovalBlockerQueue.read_only_queue -ne $true -or $humanApprovalBlockerQueue.approval_capture_performed -ne $false) {
+      Add-Failure "v14.218 must remain a read-only static queue and must not capture approval"
+    }
+    if ($humanApprovalBlockerQueue.accepted_samples_write_performed -ne $false -or $humanApprovalBlockerQueue.category_index_write_performed -ne $false -or $humanApprovalBlockerQueue.failure_samples_write_performed -ne $false -or $humanApprovalBlockerQueue.production_candidate_write_performed -ne $false -or $humanApprovalBlockerQueue.daily_note_write_performed -ne $false -or $humanApprovalBlockerQueue.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.218 must not write accepted/category/failure/production/memory surfaces"
+    }
+    if ($humanApprovalBlockerQueue.provider_contact_performed -ne $false -or $humanApprovalBlockerQueue.plugin_call_performed -ne $false -or $humanApprovalBlockerQueue.api_call_performed -ne $false -or $humanApprovalBlockerQueue.mcp_runtime_performed -ne $false -or $humanApprovalBlockerQueue.image_generation_performed -ne $false -or $humanApprovalBlockerQueue.env_or_secret_read_performed -ne $false -or $humanApprovalBlockerQueue.real_manifest_read_performed -ne $false -or $humanApprovalBlockerQueue.real_vcpchat_read_performed -ne $false -or $humanApprovalBlockerQueue.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "v14.218 must not perform provider, plugin, API, MCP, image, secret, manifest, VCPChat, or VCPToolBox actions"
+    }
+    if ($humanApprovalBlockerQueue.push_tag_release_deploy_performed -ne $false -or $humanApprovalBlockerQueue.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "v14.218 must not push, deploy, or claim VCP runtime integration"
+    }
+    if ($humanApprovalBlockerQueue.negative_case_missing_v14_217_source_fails -ne $true -or $humanApprovalBlockerQueue.negative_case_blocker_count_mismatch_fails -ne $true -or $humanApprovalBlockerQueue.negative_case_approval_capture_overclaim_fails -ne $true -or $humanApprovalBlockerQueue.negative_case_human_approval_overclaim_fails -ne $true -or $humanApprovalBlockerQueue.negative_case_registration_ready_overclaim_fails -ne $true -or $humanApprovalBlockerQueue.negative_case_next_write_action_allowed_fails -ne $true -or $humanApprovalBlockerQueue.negative_case_accepted_samples_write_flag_fails -ne $true -or $humanApprovalBlockerQueue.negative_case_external_action_flag_fails -ne $true -or $humanApprovalBlockerQueue.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.218 must fail missing-source, count mismatch, approval-overclaim, write, external-action, and runtime negative cases"
+    }
+  }
+
+  $humanApprovalBlockerQueueSnapshotOutput = & node (Join-Path $Root 'scripts/validate_v14_219_review_console_human_approval_blocker_queue_snapshot_static_regression.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console human approval blocker queue snapshot validation exited with failure"
+  } else {
+    $humanApprovalBlockerQueueSnapshot = ($humanApprovalBlockerQueueSnapshotOutput -join "`n") | ConvertFrom-Json
+    if ($humanApprovalBlockerQueueSnapshot.passed -ne $true) {
+      Add-Failure "Review Console human approval blocker queue snapshot validation must pass"
+    }
+    if ($humanApprovalBlockerQueueSnapshot.snapshot_status -ne 'golden_static_snapshot' -or $humanApprovalBlockerQueueSnapshot.draft_output_key -ne 'human_approval_blocker_queue_state' -or $humanApprovalBlockerQueueSnapshot.queue_status -ne 'active_blocker_queue' -or $humanApprovalBlockerQueueSnapshot.total_blockers -ne 1) {
+      Add-Failure "v14.219 must preserve the golden static snapshot for human_approval_blocker_queue_state"
+    }
+    if ($humanApprovalBlockerQueueSnapshot.blocker_type -ne 'human_approval_missing' -or $humanApprovalBlockerQueueSnapshot.target_candidate_id -ne 'v14_166_lamp_v3_generated_candidate_001') {
+      Add-Failure "v14.219 must keep the lamp third sample blocked on human_approval_missing"
+    }
+    if ($humanApprovalBlockerQueueSnapshot.approval_statement_source_is_user_submission -ne $false -or $humanApprovalBlockerQueueSnapshot.human_approval_captured_now -ne $false -or $humanApprovalBlockerQueueSnapshot.accepted_samples_registration_ready_now -ne $false -or $humanApprovalBlockerQueueSnapshot.next_write_action_allowed_now -ne $false) {
+      Add-Failure "v14.219 must not overclaim approval, registration readiness, or write permission"
+    }
+    if ($humanApprovalBlockerQueueSnapshot.static_snapshot_only -ne $true -or $humanApprovalBlockerQueueSnapshot.read_only_queue -ne $true -or $humanApprovalBlockerQueueSnapshot.approval_capture_performed -ne $false) {
+      Add-Failure "v14.219 must remain a read-only static snapshot and must not capture approval"
+    }
+    if ($humanApprovalBlockerQueueSnapshot.accepted_samples_write_performed -ne $false -or $humanApprovalBlockerQueueSnapshot.category_index_write_performed -ne $false -or $humanApprovalBlockerQueueSnapshot.failure_samples_write_performed -ne $false -or $humanApprovalBlockerQueueSnapshot.production_candidate_write_performed -ne $false -or $humanApprovalBlockerQueueSnapshot.daily_note_write_performed -ne $false -or $humanApprovalBlockerQueueSnapshot.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.219 must not write accepted/category/failure/production/memory surfaces"
+    }
+    if ($humanApprovalBlockerQueueSnapshot.provider_contact_performed -ne $false -or $humanApprovalBlockerQueueSnapshot.plugin_call_performed -ne $false -or $humanApprovalBlockerQueueSnapshot.api_call_performed -ne $false -or $humanApprovalBlockerQueueSnapshot.mcp_runtime_performed -ne $false -or $humanApprovalBlockerQueueSnapshot.image_generation_performed -ne $false -or $humanApprovalBlockerQueueSnapshot.env_or_secret_read_performed -ne $false -or $humanApprovalBlockerQueueSnapshot.real_manifest_read_performed -ne $false -or $humanApprovalBlockerQueueSnapshot.real_vcpchat_read_performed -ne $false -or $humanApprovalBlockerQueueSnapshot.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "v14.219 must not perform provider, plugin, API, MCP, image, secret, manifest, VCPChat, or VCPToolBox actions"
+    }
+    if ($humanApprovalBlockerQueueSnapshot.push_tag_release_deploy_performed -ne $false -or $humanApprovalBlockerQueueSnapshot.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "v14.219 must not push, deploy, or claim VCP runtime integration"
+    }
+    if ($humanApprovalBlockerQueueSnapshot.negative_case_missing_v14_218_source_fails -ne $true -or $humanApprovalBlockerQueueSnapshot.negative_case_blocker_count_mismatch_fails -ne $true -or $humanApprovalBlockerQueueSnapshot.negative_case_approval_capture_overclaim_fails -ne $true -or $humanApprovalBlockerQueueSnapshot.negative_case_human_approval_overclaim_fails -ne $true -or $humanApprovalBlockerQueueSnapshot.negative_case_registration_ready_overclaim_fails -ne $true -or $humanApprovalBlockerQueueSnapshot.negative_case_next_write_action_allowed_fails -ne $true -or $humanApprovalBlockerQueueSnapshot.negative_case_accepted_samples_write_flag_fails -ne $true -or $humanApprovalBlockerQueueSnapshot.negative_case_external_action_flag_fails -ne $true -or $humanApprovalBlockerQueueSnapshot.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.219 must fail missing-source, count mismatch, approval-overclaim, write, external-action, and runtime negative cases"
+    }
+  }
+
+  $agentBoardCurrentRecommendationAlignmentOutput = & node (Join-Path $Root 'scripts/validate_v14_220_agent_board_current_recommendation_alignment.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Agent board current recommendation alignment validation exited with failure"
+  } else {
+    $agentBoardCurrentRecommendationAlignment = ($agentBoardCurrentRecommendationAlignmentOutput -join "`n") | ConvertFrom-Json
+    if ($agentBoardCurrentRecommendationAlignment.passed -ne $true) {
+      Add-Failure "Agent board current recommendation alignment validation must pass"
+    }
+    if ($agentBoardCurrentRecommendationAlignment.phase -ne 'v14_220_agent_board_current_recommendation_alignment' -or $agentBoardCurrentRecommendationAlignment.source_completed_phase -ne 'v14_219_review_console_human_approval_blocker_queue_snapshot_static_regression') {
+      Add-Failure "v14.220 must align from the completed v14.219 snapshot phase"
+    }
+    if ($agentBoardCurrentRecommendationAlignment.recommended_next -ne 'wait_for_jenn_human_approval_or_continue_review_console_static_productization') {
+      Add-Failure "v14.220 must replace stale v14.218 recommended_next with the current human approval/static productization route"
+    }
+    if ($agentBoardCurrentRecommendationAlignment.human_approval_captured_now -ne $false -or $agentBoardCurrentRecommendationAlignment.accepted_samples_write_allowed_now -ne $false) {
+      Add-Failure "v14.220 must not overclaim human approval or accepted_samples write permission"
+    }
+    if ($agentBoardCurrentRecommendationAlignment.agent_board_alignment_only -ne $true -or $agentBoardCurrentRecommendationAlignment.accepted_samples_write_performed -ne $false -or $agentBoardCurrentRecommendationAlignment.daily_note_write_performed -ne $false -or $agentBoardCurrentRecommendationAlignment.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.220 must remain board alignment only and must not write accepted_samples or memory surfaces"
+    }
+    if ($agentBoardCurrentRecommendationAlignment.provider_contact_performed -ne $false -or $agentBoardCurrentRecommendationAlignment.plugin_call_performed -ne $false -or $agentBoardCurrentRecommendationAlignment.api_call_performed -ne $false -or $agentBoardCurrentRecommendationAlignment.mcp_runtime_performed -ne $false -or $agentBoardCurrentRecommendationAlignment.image_generation_performed -ne $false -or $agentBoardCurrentRecommendationAlignment.env_or_secret_read_performed -ne $false -or $agentBoardCurrentRecommendationAlignment.real_manifest_read_performed -ne $false -or $agentBoardCurrentRecommendationAlignment.real_vcpchat_read_performed -ne $false -or $agentBoardCurrentRecommendationAlignment.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "v14.220 must not perform provider, plugin, API, MCP, image, secret, manifest, VCPChat, or VCPToolBox actions"
+    }
+    if ($agentBoardCurrentRecommendationAlignment.push_tag_release_deploy_performed -ne $false -or $agentBoardCurrentRecommendationAlignment.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "v14.220 must not push, deploy, or claim VCP runtime integration"
+    }
+    if ($agentBoardCurrentRecommendationAlignment.negative_case_stale_v14_218_recommendation_fails -ne $true -or $agentBoardCurrentRecommendationAlignment.negative_case_approval_capture_overclaim_fails -ne $true -or $agentBoardCurrentRecommendationAlignment.negative_case_accepted_samples_write_allowed_fails -ne $true -or $agentBoardCurrentRecommendationAlignment.negative_case_runtime_claim_fails -ne $true -or $agentBoardCurrentRecommendationAlignment.negative_case_external_action_flag_fails -ne $true) {
+      Add-Failure "v14.220 must fail stale recommendation, approval/write overclaim, runtime, and external-action negative cases"
+    }
+  }
+
+  $recoverabilityMatrixOutput = & node (Join-Path $Root 'scripts/validate_v14_221_review_console_recoverability_matrix_static_workbench.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console recoverability matrix validation exited with failure"
+  } else {
+    $recoverabilityMatrix = ($recoverabilityMatrixOutput -join "`n") | ConvertFrom-Json
+    if ($recoverabilityMatrix.passed -ne $true) {
+      Add-Failure "Review Console recoverability matrix validation must pass"
+    }
+    if ($recoverabilityMatrix.phase -ne 'v14_221_review_console_recoverability_matrix_static_workbench' -or $recoverabilityMatrix.draft_output_key -ne 'recoverability_matrix_state') {
+      Add-Failure "v14.221 must expose the recoverability_matrix_state draft output"
+    }
+    if ($recoverabilityMatrix.row_count -ne 3 -or $recoverabilityMatrix.complete_recoverable_sample_count -ne 2 -or $recoverabilityMatrix.blocked_registration_candidate_count -ne 1 -or $recoverabilityMatrix.remaining_full_recoverable_sample_gap -ne 1) {
+      Add-Failure "v14.221 must show 2 complete recoverable samples, 1 blocked candidate, and 1 remaining gap"
+    }
+    if ($recoverabilityMatrix.matrix_status -ne 'blocked_by_human_approval_missing' -or $recoverabilityMatrix.pending_candidate_counted_as_accepted -ne $false) {
+      Add-Failure "v14.221 must keep the lamp pending candidate out of accepted sample count"
+    }
+    if ($recoverabilityMatrix.accepted_samples_write_performed -ne $false -or $recoverabilityMatrix.production_candidate_write_performed -ne $false -or $recoverabilityMatrix.daily_note_write_performed -ne $false -or $recoverabilityMatrix.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.221 must not write accepted_samples, production candidate, DailyNote, or VCP memory"
+    }
+    if ($recoverabilityMatrix.provider_contact_performed -ne $false -or $recoverabilityMatrix.plugin_call_performed -ne $false -or $recoverabilityMatrix.api_call_performed -ne $false -or $recoverabilityMatrix.mcp_runtime_performed -ne $false -or $recoverabilityMatrix.image_generation_performed -ne $false -or $recoverabilityMatrix.env_or_secret_read_performed -ne $false -or $recoverabilityMatrix.real_manifest_read_performed -ne $false -or $recoverabilityMatrix.real_vcpchat_read_performed -ne $false -or $recoverabilityMatrix.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "v14.221 must not perform provider, plugin, API, MCP, image, secret, manifest, VCPChat, or VCPToolBox actions"
+    }
+    if ($recoverabilityMatrix.push_tag_release_deploy_performed -ne $false -or $recoverabilityMatrix.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "v14.221 must not push, deploy, or claim VCP runtime integration"
+    }
+    if ($recoverabilityMatrix.negative_case_missing_required_field_fails -ne $true -or $recoverabilityMatrix.negative_case_pending_candidate_counted_as_accepted_fails -ne $true -or $recoverabilityMatrix.negative_case_human_approval_overclaim_fails -ne $true -or $recoverabilityMatrix.negative_case_accepted_samples_write_flag_fails -ne $true -or $recoverabilityMatrix.negative_case_external_action_flag_fails -ne $true -or $recoverabilityMatrix.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.221 must fail field, pending-count, approval, write, external-action, and runtime negative cases"
+    }
+  }
+
+  $recoverabilityMatrixSnapshotOutput = & node (Join-Path $Root 'scripts/validate_v14_222_review_console_recoverability_matrix_snapshot_static_regression.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console recoverability matrix snapshot validation exited with failure"
+  } else {
+    $recoverabilityMatrixSnapshot = ($recoverabilityMatrixSnapshotOutput -join "`n") | ConvertFrom-Json
+    if ($recoverabilityMatrixSnapshot.passed -ne $true) {
+      Add-Failure "Review Console recoverability matrix snapshot validation must pass"
+    }
+    if ($recoverabilityMatrixSnapshot.phase -ne 'v14_222_review_console_recoverability_matrix_snapshot_static_regression' -or $recoverabilityMatrixSnapshot.snapshot_status -ne 'golden_static_snapshot' -or $recoverabilityMatrixSnapshot.draft_output_key -ne 'recoverability_matrix_state') {
+      Add-Failure "v14.222 must freeze recoverability_matrix_state as a golden static snapshot"
+    }
+    if ($recoverabilityMatrixSnapshot.row_count -ne 3 -or $recoverabilityMatrixSnapshot.complete_recoverable_sample_count -ne 2 -or $recoverabilityMatrixSnapshot.blocked_registration_candidate_count -ne 1 -or $recoverabilityMatrixSnapshot.remaining_full_recoverable_sample_gap -ne 1) {
+      Add-Failure "v14.222 must preserve the 2 complete plus 1 blocked recoverability matrix"
+    }
+    if ($recoverabilityMatrixSnapshot.matrix_status -ne 'blocked_by_human_approval_missing' -or $recoverabilityMatrixSnapshot.pending_candidate_counted_as_accepted -ne $false -or $recoverabilityMatrixSnapshot.blocker -ne 'human_approval_missing') {
+      Add-Failure "v14.222 must preserve the lamp human approval blocker and prevent pending candidate acceptance overclaim"
+    }
+    if ($recoverabilityMatrixSnapshot.accepted_samples_write_performed -ne $false -or $recoverabilityMatrixSnapshot.production_candidate_write_performed -ne $false -or $recoverabilityMatrixSnapshot.daily_note_write_performed -ne $false -or $recoverabilityMatrixSnapshot.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.222 must not write accepted_samples, production candidate, DailyNote, or VCP memory"
+    }
+    if ($recoverabilityMatrixSnapshot.provider_contact_performed -ne $false -or $recoverabilityMatrixSnapshot.plugin_call_performed -ne $false -or $recoverabilityMatrixSnapshot.api_call_performed -ne $false -or $recoverabilityMatrixSnapshot.mcp_runtime_performed -ne $false -or $recoverabilityMatrixSnapshot.image_generation_performed -ne $false -or $recoverabilityMatrixSnapshot.env_or_secret_read_performed -ne $false -or $recoverabilityMatrixSnapshot.real_manifest_read_performed -ne $false -or $recoverabilityMatrixSnapshot.real_vcpchat_read_performed -ne $false -or $recoverabilityMatrixSnapshot.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "v14.222 must not perform provider, plugin, API, MCP, image, secret, manifest, VCPChat, or VCPToolBox actions"
+    }
+    if ($recoverabilityMatrixSnapshot.push_tag_release_deploy_performed -ne $false -or $recoverabilityMatrixSnapshot.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "v14.222 must not push, deploy, or claim VCP runtime integration"
+    }
+    if ($recoverabilityMatrixSnapshot.negative_case_three_sample_overclaim_fails -ne $true -or $recoverabilityMatrixSnapshot.negative_case_pending_candidate_counted_as_accepted_fails -ne $true -or $recoverabilityMatrixSnapshot.negative_case_human_approval_overclaim_fails -ne $true -or $recoverabilityMatrixSnapshot.negative_case_accepted_samples_write_flag_fails -ne $true -or $recoverabilityMatrixSnapshot.negative_case_external_action_flag_fails -ne $true -or $recoverabilityMatrixSnapshot.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.222 must fail count, pending-count, approval, write, external-action, and runtime negative cases"
+    }
+  }
+
+  $schemaBindingCoverageOutput = & node (Join-Path $Root 'scripts/validate_v14_223_review_console_schema_binding_coverage_static_panel.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console schema binding coverage validation exited with failure"
+  } else {
+    $schemaBindingCoverage = ($schemaBindingCoverageOutput -join "`n") | ConvertFrom-Json
+    if ($schemaBindingCoverage.passed -ne $true) {
+      Add-Failure "Review Console schema binding coverage validation must pass"
+    }
+    if ($schemaBindingCoverage.phase -ne 'v14_223_review_console_schema_binding_coverage_static_panel' -or $schemaBindingCoverage.draft_output_key -ne 'review_console_schema_binding_coverage_state' -or $schemaBindingCoverage.execution_mode -ne 'review_console_static_schema_binding_coverage_only') {
+      Add-Failure "v14.223 must expose review_console_schema_binding_coverage_state as a static-only panel"
+    }
+    if ($schemaBindingCoverage.bound_schema_count -ne 3 -or $schemaBindingCoverage.matrix_required_field_count -ne 10 -or $schemaBindingCoverage.covered_matrix_required_field_count -ne 10 -or $schemaBindingCoverage.schema_binding_coverage_complete -ne $true) {
+      Add-Failure "v14.223 must cover three schemas and all ten recoverability matrix fields"
+    }
+    if ($schemaBindingCoverage.binding_status -ne 'covered_static_read_only' -or $schemaBindingCoverage.pending_candidate_counted_as_accepted -ne $false -or $schemaBindingCoverage.hard_acceptance_three_full_samples_met -ne $false) {
+      Add-Failure "v14.223 must remain static read-only and must not count the pending lamp candidate as accepted"
+    }
+    if ($schemaBindingCoverage.accepted_samples_write_performed -ne $false -or $schemaBindingCoverage.production_candidate_write_performed -ne $false -or $schemaBindingCoverage.daily_note_write_performed -ne $false -or $schemaBindingCoverage.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.223 must not write accepted_samples, production candidate, DailyNote, or VCP memory"
+    }
+    if ($schemaBindingCoverage.provider_contact_performed -ne $false -or $schemaBindingCoverage.plugin_call_performed -ne $false -or $schemaBindingCoverage.api_call_performed -ne $false -or $schemaBindingCoverage.mcp_runtime_performed -ne $false -or $schemaBindingCoverage.image_generation_performed -ne $false -or $schemaBindingCoverage.env_or_secret_read_performed -ne $false -or $schemaBindingCoverage.real_manifest_read_performed -ne $false -or $schemaBindingCoverage.real_vcpchat_read_performed -ne $false -or $schemaBindingCoverage.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "v14.223 must not perform provider, plugin, API, MCP, image, secret, manifest, VCPChat, or VCPToolBox actions"
+    }
+    if ($schemaBindingCoverage.push_tag_release_deploy_performed -ne $false -or $schemaBindingCoverage.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "v14.223 must not push, deploy, or claim VCP runtime integration"
+    }
+    if ($schemaBindingCoverage.negative_case_missing_bound_schema_fails -ne $true -or $schemaBindingCoverage.negative_case_missing_matrix_field_coverage_fails -ne $true -or $schemaBindingCoverage.negative_case_accepted_samples_write_flag_fails -ne $true -or $schemaBindingCoverage.negative_case_external_action_flag_fails -ne $true -or $schemaBindingCoverage.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.223 must fail missing schema, missing field coverage, write, external-action, and runtime negative cases"
+    }
+  }
+
+  $schemaBindingCoverageSnapshotOutput = & node (Join-Path $Root 'scripts/validate_v14_224_review_console_schema_binding_coverage_snapshot_static_regression.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console schema binding coverage snapshot validation exited with failure"
+  } else {
+    $schemaBindingCoverageSnapshot = ($schemaBindingCoverageSnapshotOutput -join "`n") | ConvertFrom-Json
+    if ($schemaBindingCoverageSnapshot.passed -ne $true) {
+      Add-Failure "Review Console schema binding coverage snapshot validation must pass"
+    }
+    if ($schemaBindingCoverageSnapshot.phase -ne 'v14_224_review_console_schema_binding_coverage_snapshot_static_regression' -or $schemaBindingCoverageSnapshot.snapshot_status -ne 'golden_static_snapshot' -or $schemaBindingCoverageSnapshot.draft_output_key -ne 'review_console_schema_binding_coverage_state') {
+      Add-Failure "v14.224 must freeze review_console_schema_binding_coverage_state as a golden static snapshot"
+    }
+    if ($schemaBindingCoverageSnapshot.bound_schema_count -ne 3 -or $schemaBindingCoverageSnapshot.matrix_required_field_count -ne 10 -or $schemaBindingCoverageSnapshot.covered_matrix_required_field_count -ne 10 -or $schemaBindingCoverageSnapshot.schema_binding_coverage_complete -ne $true) {
+      Add-Failure "v14.224 must preserve three schemas and full ten-field schema coverage"
+    }
+    if ($schemaBindingCoverageSnapshot.binding_status -ne 'covered_static_read_only' -or $schemaBindingCoverageSnapshot.pending_candidate_counted_as_accepted -ne $false -or $schemaBindingCoverageSnapshot.hard_acceptance_three_full_samples_met -ne $false) {
+      Add-Failure "v14.224 must preserve static read-only coverage and prevent pending candidate acceptance overclaim"
+    }
+    if ($schemaBindingCoverageSnapshot.accepted_samples_write_performed -ne $false -or $schemaBindingCoverageSnapshot.production_candidate_write_performed -ne $false -or $schemaBindingCoverageSnapshot.daily_note_write_performed -ne $false -or $schemaBindingCoverageSnapshot.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.224 must not write accepted_samples, production candidate, DailyNote, or VCP memory"
+    }
+    if ($schemaBindingCoverageSnapshot.provider_contact_performed -ne $false -or $schemaBindingCoverageSnapshot.plugin_call_performed -ne $false -or $schemaBindingCoverageSnapshot.api_call_performed -ne $false -or $schemaBindingCoverageSnapshot.mcp_runtime_performed -ne $false -or $schemaBindingCoverageSnapshot.image_generation_performed -ne $false -or $schemaBindingCoverageSnapshot.env_or_secret_read_performed -ne $false -or $schemaBindingCoverageSnapshot.real_manifest_read_performed -ne $false -or $schemaBindingCoverageSnapshot.real_vcpchat_read_performed -ne $false -or $schemaBindingCoverageSnapshot.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "v14.224 must not perform provider, plugin, API, MCP, image, secret, manifest, VCPChat, or VCPToolBox actions"
+    }
+    if ($schemaBindingCoverageSnapshot.push_tag_release_deploy_performed -ne $false -or $schemaBindingCoverageSnapshot.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "v14.224 must not push, deploy, or claim VCP runtime integration"
+    }
+    if ($schemaBindingCoverageSnapshot.negative_case_schema_count_drift_fails -ne $true -or $schemaBindingCoverageSnapshot.negative_case_field_coverage_drift_fails -ne $true -or $schemaBindingCoverageSnapshot.negative_case_accepted_samples_write_flag_fails -ne $true -or $schemaBindingCoverageSnapshot.negative_case_external_action_flag_fails -ne $true -or $schemaBindingCoverageSnapshot.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.224 must fail schema-count, field-coverage, write, external-action, and runtime negative cases"
+    }
+  }
+
+  $sixMonthGoalGapOutput = & node (Join-Path $Root 'scripts/validate_v14_225_review_console_six_month_goal_gap_static_panel.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console six-month goal gap validation exited with failure"
+  } else {
+    $sixMonthGoalGap = ($sixMonthGoalGapOutput -join "`n") | ConvertFrom-Json
+    if ($sixMonthGoalGap.passed -ne $true) {
+      Add-Failure "Review Console six-month goal gap validation must pass"
+    }
+    if ($sixMonthGoalGap.phase -ne 'v14_225_review_console_six_month_goal_gap_static_panel' -or $sixMonthGoalGap.draft_output_key -ne 'six_month_goal_gap_state' -or $sixMonthGoalGap.execution_mode -ne 'review_console_static_six_month_goal_gap_only') {
+      Add-Failure "v14.225 must expose six_month_goal_gap_state as a static-only panel"
+    }
+    if ($sixMonthGoalGap.month_count -ne 6 -or $sixMonthGoalGap.complete_recoverable_sample_count -ne 2 -or $sixMonthGoalGap.required_full_recoverable_sample_count -ne 3 -or $sixMonthGoalGap.remaining_full_recoverable_sample_gap -ne 1) {
+      Add-Failure "v14.225 must preserve the six-month map and the current 2 of 3 recoverable sample gap"
+    }
+    if ($sixMonthGoalGap.hard_acceptance_three_full_samples_met -ne $false -or $sixMonthGoalGap.pending_candidate_counted_as_accepted -ne $false -or $sixMonthGoalGap.overall_status -ne 'month_1_blocked_by_third_sample_human_approval') {
+      Add-Failure "v14.225 must not count the pending lamp candidate or overclaim Month 1 completion"
+    }
+    if ($sixMonthGoalGap.accepted_samples_write_performed -ne $false -or $sixMonthGoalGap.production_candidate_write_performed -ne $false -or $sixMonthGoalGap.daily_note_write_performed -ne $false -or $sixMonthGoalGap.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.225 must not write accepted_samples, production candidate, DailyNote, or VCP memory"
+    }
+    if ($sixMonthGoalGap.provider_contact_performed -ne $false -or $sixMonthGoalGap.plugin_call_performed -ne $false -or $sixMonthGoalGap.api_call_performed -ne $false -or $sixMonthGoalGap.mcp_runtime_performed -ne $false -or $sixMonthGoalGap.image_generation_performed -ne $false -or $sixMonthGoalGap.env_or_secret_read_performed -ne $false -or $sixMonthGoalGap.real_manifest_read_performed -ne $false -or $sixMonthGoalGap.real_vcpchat_read_performed -ne $false -or $sixMonthGoalGap.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "v14.225 must not perform provider, plugin, API, MCP, image, secret, manifest, VCPChat, or VCPToolBox actions"
+    }
+    if ($sixMonthGoalGap.push_tag_release_deploy_performed -ne $false -or $sixMonthGoalGap.vcp_runtime_integration_proven -ne $false -or $sixMonthGoalGap.vcp_runtime_integration_proven_month_count -ne 0) {
+      Add-Failure "v14.225 must not push, deploy, or claim VCP runtime integration"
+    }
+    if ($sixMonthGoalGap.negative_case_month_1_overclaim_fails -ne $true -or $sixMonthGoalGap.negative_case_pending_candidate_counted_as_accepted_fails -ne $true -or $sixMonthGoalGap.negative_case_accepted_samples_write_flag_fails -ne $true -or $sixMonthGoalGap.negative_case_external_action_flag_fails -ne $true -or $sixMonthGoalGap.negative_case_runtime_claim_fails -ne $true -or $sixMonthGoalGap.negative_case_missing_month_record_fails -ne $true) {
+      Add-Failure "v14.225 must fail Month 1 overclaim, pending-count, write, external-action, runtime, and missing-month negative cases"
+    }
+  }
+
+  $sixMonthGoalGapSnapshotOutput = & node (Join-Path $Root 'scripts/validate_v14_226_review_console_six_month_goal_gap_snapshot_static_regression.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console six-month goal gap snapshot validation exited with failure"
+  } else {
+    $sixMonthGoalGapSnapshot = ($sixMonthGoalGapSnapshotOutput -join "`n") | ConvertFrom-Json
+    if ($sixMonthGoalGapSnapshot.passed -ne $true) {
+      Add-Failure "Review Console six-month goal gap snapshot validation must pass"
+    }
+    if ($sixMonthGoalGapSnapshot.phase -ne 'v14_226_review_console_six_month_goal_gap_snapshot_static_regression' -or $sixMonthGoalGapSnapshot.snapshot_status -ne 'golden_static_snapshot' -or $sixMonthGoalGapSnapshot.draft_output_key -ne 'six_month_goal_gap_state') {
+      Add-Failure "v14.226 must freeze six_month_goal_gap_state as a golden static snapshot"
+    }
+    if ($sixMonthGoalGapSnapshot.month_count -ne 6 -or $sixMonthGoalGapSnapshot.complete_recoverable_sample_count -ne 2 -or $sixMonthGoalGapSnapshot.required_full_recoverable_sample_count -ne 3 -or $sixMonthGoalGapSnapshot.remaining_full_recoverable_sample_gap -ne 1) {
+      Add-Failure "v14.226 must preserve the six-month map and current 2 of 3 recoverable sample gap"
+    }
+    if ($sixMonthGoalGapSnapshot.month_1_status -ne 'blocked_by_human_approval_missing' -or $sixMonthGoalGapSnapshot.month_5_status -ne 'blocked_requires_jenn_A5' -or $sixMonthGoalGapSnapshot.hard_acceptance_three_full_samples_met -ne $false -or $sixMonthGoalGapSnapshot.pending_candidate_counted_as_accepted -ne $false) {
+      Add-Failure "v14.226 must preserve Month 1 human-approval blocker, Month 5 A5 blocker, and no pending accepted overclaim"
+    }
+    if ($sixMonthGoalGapSnapshot.accepted_samples_write_performed -ne $false -or $sixMonthGoalGapSnapshot.production_candidate_write_performed -ne $false -or $sixMonthGoalGapSnapshot.daily_note_write_performed -ne $false -or $sixMonthGoalGapSnapshot.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.226 must not write accepted_samples, production candidate, DailyNote, or VCP memory"
+    }
+    if ($sixMonthGoalGapSnapshot.provider_contact_performed -ne $false -or $sixMonthGoalGapSnapshot.plugin_call_performed -ne $false -or $sixMonthGoalGapSnapshot.api_call_performed -ne $false -or $sixMonthGoalGapSnapshot.mcp_runtime_performed -ne $false -or $sixMonthGoalGapSnapshot.image_generation_performed -ne $false -or $sixMonthGoalGapSnapshot.env_or_secret_read_performed -ne $false -or $sixMonthGoalGapSnapshot.real_manifest_read_performed -ne $false -or $sixMonthGoalGapSnapshot.real_vcpchat_read_performed -ne $false -or $sixMonthGoalGapSnapshot.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "v14.226 must not perform provider, plugin, API, MCP, image, secret, manifest, VCPChat, or VCPToolBox actions"
+    }
+    if ($sixMonthGoalGapSnapshot.push_tag_release_deploy_performed -ne $false -or $sixMonthGoalGapSnapshot.vcp_runtime_integration_proven -ne $false -or $sixMonthGoalGapSnapshot.vcp_runtime_integration_proven_month_count -ne 0) {
+      Add-Failure "v14.226 must not push, deploy, or claim VCP runtime integration"
+    }
+    if ($sixMonthGoalGapSnapshot.negative_case_month_1_overclaim_fails -ne $true -or $sixMonthGoalGapSnapshot.negative_case_pending_candidate_counted_as_accepted_fails -ne $true -or $sixMonthGoalGapSnapshot.negative_case_accepted_samples_write_flag_fails -ne $true -or $sixMonthGoalGapSnapshot.negative_case_external_action_flag_fails -ne $true -or $sixMonthGoalGapSnapshot.negative_case_runtime_claim_fails -ne $true -or $sixMonthGoalGapSnapshot.negative_case_missing_month_count_fails -ne $true) {
+      Add-Failure "v14.226 must fail Month 1 overclaim, pending-count, write, external-action, runtime, and missing-month negative cases"
+    }
+  }
+
+  $failureStateWorkbenchOutput = & node (Join-Path $Root 'scripts/validate_v14_227_review_console_failure_state_static_workbench.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console failure state workbench validation exited with failure"
+  } else {
+    $failureStateWorkbench = ($failureStateWorkbenchOutput -join "`n") | ConvertFrom-Json
+    if ($failureStateWorkbench.passed -ne $true) {
+      Add-Failure "Review Console failure state workbench validation must pass"
+    }
+    if ($failureStateWorkbench.phase -ne 'v14_227_review_console_failure_state_static_workbench' -or $failureStateWorkbench.draft_output_key -ne 'failure_state_static_workbench_state' -or $failureStateWorkbench.execution_mode -ne 'review_console_static_failure_state_only') {
+      Add-Failure "v14.227 must expose failure_state_static_workbench_state as a static-only panel"
+    }
+    if ($failureStateWorkbench.failure_candidate_count -ne 2 -or $failureStateWorkbench.memory_forbidden_count -ne 1 -or $failureStateWorkbench.never_production_count -ne 2 -or $failureStateWorkbench.production_exclusion_count -ne 2) {
+      Add-Failure "v14.227 must preserve the negative ReviewReport failure counts"
+    }
+    if ($failureStateWorkbench.failure_samples_write_allowed -ne $false -or $failureStateWorkbench.failure_samples_write_performed -ne $false) {
+      Add-Failure "v14.227 must not allow or perform failure_samples writes"
+    }
+    if ($failureStateWorkbench.production_candidate_write_performed -ne $false -or $failureStateWorkbench.daily_note_write_performed -ne $false -or $failureStateWorkbench.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.227 must not write production candidate, DailyNote, or VCP memory"
+    }
+    if ($failureStateWorkbench.provider_contact_performed -ne $false -or $failureStateWorkbench.plugin_call_performed -ne $false -or $failureStateWorkbench.api_call_performed -ne $false -or $failureStateWorkbench.mcp_runtime_performed -ne $false -or $failureStateWorkbench.image_generation_performed -ne $false -or $failureStateWorkbench.env_or_secret_read_performed -ne $false -or $failureStateWorkbench.real_manifest_read_performed -ne $false -or $failureStateWorkbench.real_vcpchat_read_performed -ne $false -or $failureStateWorkbench.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "v14.227 must not perform provider, plugin, API, MCP, image, secret, manifest, VCPChat, or VCPToolBox actions"
+    }
+    if ($failureStateWorkbench.push_tag_release_deploy_performed -ne $false -or $failureStateWorkbench.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "v14.227 must not push, deploy, or claim VCP runtime integration"
+    }
+    if ($failureStateWorkbench.negative_case_missing_failure_record_fails -ne $true -or $failureStateWorkbench.negative_case_missing_memory_forbidden_fails -ne $true -or $failureStateWorkbench.negative_case_failure_samples_write_flag_fails -ne $true -or $failureStateWorkbench.negative_case_production_write_flag_fails -ne $true -or $failureStateWorkbench.negative_case_external_action_flag_fails -ne $true -or $failureStateWorkbench.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.227 must fail missing failure, missing memory-forbidden, failure write, production write, external-action, and runtime negative cases"
+    }
+  }
+
+  $failureStateSnapshotOutput = & node (Join-Path $Root 'scripts/validate_v14_228_review_console_failure_state_snapshot_static_regression.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console failure state snapshot validation exited with failure"
+  } else {
+    $failureStateSnapshot = ($failureStateSnapshotOutput -join "`n") | ConvertFrom-Json
+    if ($failureStateSnapshot.passed -ne $true) {
+      Add-Failure "Review Console failure state snapshot validation must pass"
+    }
+    if ($failureStateSnapshot.phase -ne 'v14_228_review_console_failure_state_snapshot_static_regression' -or $failureStateSnapshot.snapshot_status -ne 'golden_static_snapshot' -or $failureStateSnapshot.draft_output_key -ne 'failure_state_static_workbench_state') {
+      Add-Failure "v14.228 must freeze failure_state_static_workbench_state as a golden static snapshot"
+    }
+    if ($failureStateSnapshot.failure_candidate_count -ne 2 -or $failureStateSnapshot.memory_forbidden_count -ne 1 -or $failureStateSnapshot.never_production_count -ne 2 -or $failureStateSnapshot.production_exclusion_count -ne 2) {
+      Add-Failure "v14.228 must preserve the negative ReviewReport failure counts"
+    }
+    if ($failureStateSnapshot.failure_samples_write_allowed -ne $false -or $failureStateSnapshot.failure_samples_write_performed -ne $false) {
+      Add-Failure "v14.228 must not allow or perform failure_samples writes"
+    }
+    if ($failureStateSnapshot.production_candidate_write_performed -ne $false -or $failureStateSnapshot.daily_note_write_performed -ne $false -or $failureStateSnapshot.vcp_memory_write_performed -ne $false) {
+      Add-Failure "v14.228 must not write production candidate, DailyNote, or VCP memory"
+    }
+    if ($failureStateSnapshot.provider_contact_performed -ne $false -or $failureStateSnapshot.plugin_call_performed -ne $false -or $failureStateSnapshot.api_call_performed -ne $false -or $failureStateSnapshot.mcp_runtime_performed -ne $false -or $failureStateSnapshot.image_generation_performed -ne $false -or $failureStateSnapshot.env_or_secret_read_performed -ne $false -or $failureStateSnapshot.real_manifest_read_performed -ne $false -or $failureStateSnapshot.real_vcpchat_read_performed -ne $false -or $failureStateSnapshot.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "v14.228 must not perform provider, plugin, API, MCP, image, secret, manifest, VCPChat, or VCPToolBox actions"
+    }
+    if ($failureStateSnapshot.push_tag_release_deploy_performed -ne $false -or $failureStateSnapshot.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "v14.228 must not push, deploy, or claim VCP runtime integration"
+    }
+    if ($failureStateSnapshot.negative_case_failure_count_drift_fails -ne $true -or $failureStateSnapshot.negative_case_memory_forbidden_drift_fails -ne $true -or $failureStateSnapshot.negative_case_failure_samples_write_flag_fails -ne $true -or $failureStateSnapshot.negative_case_production_write_flag_fails -ne $true -or $failureStateSnapshot.negative_case_external_action_flag_fails -ne $true -or $failureStateSnapshot.negative_case_runtime_claim_fails -ne $true) {
+      Add-Failure "v14.228 must fail failure-count drift, memory-forbidden drift, failure write, production write, external-action, and runtime negative cases"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

@@ -1,0 +1,6 @@
+{
+  "negative_case": "registry_sample_missing",
+  "expected_result": "fail",
+  "sample_id": "accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001",
+  "reason": "accepted_samples registry must contain the registered sample id before the category index can count it as a formal sample"
+}

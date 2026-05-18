@@ -51,6 +51,387 @@ window.REVIEW_CONSOLE_MOCK = {
     real_vcpchat_read_performed: false,
     real_vcptoolbox_read_performed: false
   },
+  artifact_lifecycle_state_reader_seed: {
+    version: "v1",
+    phase: "v14_169_review_console_artifact_lifecycle_state_reader",
+    source_mode: "project_local_static_fixture",
+    records: [
+      {
+        sample_id: "accepted_womens_resort_relaxed_knit_codex_v2_001",
+        candidate_id: "v14_105_womens_resort_relaxed_knit_final_v2",
+        visual_task: "fashion_lookbook_portrait",
+        lifecycle_state: "recoverable",
+        accepted_samples_metadata_registered: true,
+        artifact_ref: "runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/codex_session_womens_resort_relaxed_knit_final_v2.png",
+        sha256: "9d23208d05427b02ffc177664c1918ed73bf57831a9694be16522fe9a8f3c910",
+        dimensions: "1254x1254",
+        mime: "image/png",
+        prompt_package_ref: "session_prompt_inline:womens_resort_relaxed_knit_final_v2",
+        import_record_ref: "runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/resort_relaxed_knit_final_import_record.json",
+        review_record_ref: "docs/v14_105_codex_session_womens_resort_relaxed_knit_final_review.md",
+        human_approval_status: "approved",
+        approved_by: "Jenn",
+        accepted_samples_registration_eligible: true,
+        registration_blocker: null,
+        category_index_ref: "accepted_samples/categories/fashion_lookbook_portrait.yaml",
+        accepted_registry_ref: "accepted_samples/accepted_sample_registry.yaml",
+        production_candidate_status: "not_created",
+        prompt_to_artifact_completion: {
+          score: 92,
+          status: "review_complete",
+          evidence: ["prompt_ref_present", "artifact_verified", "human_approval_present"],
+          blocker: null
+        },
+        artifact_recoverability_is_not_vcp_runtime_integration: true,
+        vcp_runtime_integration_proven: false
+      },
+      {
+        sample_id: "accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001",
+        candidate_id: "v14_161_fashion_lifestyle_woven_crossbody_bag_candidate_001",
+        visual_task: "fashion_lifestyle_still_life",
+        lifecycle_state: "recoverable",
+        accepted_samples_metadata_registered: true,
+        artifact_ref: "runs/real_generation/v14_161_codex_session_two_more_recoverable_samples_generation_trial/codex_session_v14_161_fashion_lifestyle_woven_crossbody_bag_candidate_001.png",
+        sha256: "3422671f95e9b218829966ae46f4b284ae619875e080c473a295cf9e65432ba3",
+        dimensions: "1254x1254",
+        mime: "image/png",
+        prompt_package_ref: "session_prompt_inline:v14_161_fashion_lifestyle_woven_crossbody_bag_candidate_001",
+        import_record_ref: "tests/schema_examples/v14_161_fashion_lifestyle_woven_crossbody_bag_import_record.json",
+        review_record_ref: "docs/v14_161_codex_session_generated_candidate_readiness.md",
+        human_approval_status: "approved",
+        approved_by: "Jenn",
+        accepted_samples_registration_eligible: true,
+        registration_blocker: null,
+        category_index_ref: "accepted_samples/categories/fashion_lifestyle_still_life.yaml",
+        accepted_registry_ref: "accepted_samples/accepted_sample_registry.yaml",
+        production_candidate_status: "not_created",
+        prompt_to_artifact_completion: {
+          score: 88,
+          status: "review_complete",
+          evidence: ["prompt_ref_present", "artifact_verified", "human_approval_present"],
+          blocker: null
+        },
+        artifact_recoverability_is_not_vcp_runtime_integration: true,
+        vcp_runtime_integration_proven: false
+      },
+      {
+        sample_id: "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001",
+        candidate_id: "v14_166_lamp_v3_generated_candidate_001",
+        visual_task: "product_lifestyle_portable_led_camping_lantern",
+        lifecycle_state: "reviewed_pending_human_approval",
+        accepted_samples_metadata_registered: false,
+        artifact_ref: "runs/real_generation/v14_166_codex_session_premium_portable_led_camping_lantern_v3_generation_trial/codex_session_v14_166_premium_portable_led_camping_lantern_v3_candidate_001.png",
+        sha256: "eaa52095be5af66854f80ba3f6a0b94c93bc1105e6e7ecf984b8dfb3dfff275c",
+        dimensions: "1254x1254",
+        mime: "image/png",
+        prompt_package_ref: "session_prompt_inline:v14_166_premium_portable_led_camping_lantern_v3_candidate_001",
+        import_record_ref: "tests/schema_examples/v14_166_lamp_v3_generated_candidate_import_record.json",
+        review_record_ref: "docs/v14_166_lamp_v3_generated_candidate_readiness.md",
+        human_approval_status: "pending",
+        approved_by: null,
+        accepted_samples_registration_eligible: false,
+        registration_blocker: "human_approval_missing",
+        category_index_ref: "accepted_samples/categories/product_still_life.yaml",
+        accepted_registry_ref: "accepted_samples/accepted_sample_registry.yaml",
+        production_candidate_status: "not_created",
+        prompt_to_artifact_completion: {
+          score: 72,
+          status: "pending_human_review",
+          evidence: ["prompt_ref_present", "artifact_verified", "review_record_present"],
+          blocker: "human_approval_missing"
+        },
+        artifact_recoverability_is_not_vcp_runtime_integration: true,
+        vcp_runtime_integration_proven: false
+      }
+    ],
+    dashboard_counts: {
+      pending_candidate_counted_as_accepted: false,
+      hard_acceptance_three_full_samples_met: false
+    },
+    guard: {
+      fetch_performed: false,
+      file_write_performed: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      mcp_runtime_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      accepted_samples_write_performed: false,
+      failure_samples_write_performed: false,
+      production_candidate_write_performed: false,
+      durable_archive_copy_performed: false,
+      real_manifest_read_performed: false,
+      real_vcpchat_read_performed: false,
+      real_vcptoolbox_read_performed: false,
+      push_tag_release_deploy_performed: false,
+      vcp_runtime_integration_proven: false
+    }
+  },
+  third_sample_accepted_samples_authorization_package_seed: {
+    version: "v1",
+    phase: "v14_191_review_console_accepted_samples_authorization_package_panel_static_only",
+    source_authorization_package_ref: "tests/schema_examples/v14_190_third_sample_accepted_samples_registration_authorization_package_draft.example.json",
+    source_readiness_ref: "tests/schema_examples/v14_188_review_console_third_sample_acceptance_readiness.example.json",
+    source_blocker_preflight_ref: "tests/schema_examples/v14_167_lamp_v3_accepted_samples_registration_blocker_preflight.example.json",
+    draft_output_key: "third_sample_accepted_samples_authorization_package_state",
+    authorization_package_status: "prepared_blocked_not_granted",
+    authorization_granted_by_this_record: false,
+    execution_ready: false,
+    blocker: "human_approval_missing",
+    target: {
+      sample_id: "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001",
+      candidate_id: "v14_166_lamp_v3_generated_candidate_001",
+      import_record_ref: "tests/schema_examples/v14_166_lamp_v3_generated_candidate_import_record.json",
+      review_record_ref: "docs/v14_166_lamp_v3_generated_candidate_readiness.md",
+      artifact_ref: "runs/real_generation/v14_166_codex_session_premium_portable_led_camping_lantern_v3_generation_trial/codex_session_v14_166_premium_portable_led_camping_lantern_v3_candidate_001.png",
+      human_approval_status: "pending",
+      approved_by: null,
+      registration_ready: false
+    },
+    exact_approval_statement_draft: "批准进入 AUTH-PENDING-LAMP-V14-166-ACCEPTED-SAMPLES-REGISTRATION-20260518-001 A4.8 accepted_samples metadata registry write execution：将 tests/schema_examples/v14_166_lamp_v3_generated_candidate_import_record.json 与 docs/v14_166_lamp_v3_generated_candidate_readiness.md 对应的灯图候选 accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001 登记为第 3 个 accepted sample；允许仅修改 accepted_samples/accepted_sample_registry.yaml 和 accepted_samples/categories/product_still_life.yaml；不允许复制或提交图片文件，不允许修改 runs/real_generation/ 源图，不允许写 failure_samples，不允许写 production_candidate，不允许写 DailyNote，不允许写 VCP memory，不允许 provider/API/plugin/MCP 调用，不允许读取 .env/.env.local，不允许读取 real manifest/VCPChat/VCPToolBox，不允许 push/tag/release/deploy；写入后运行 git diff --check、node scripts/validate_v14_190_third_sample_accepted_samples_registration_authorization_package_draft.js、node scripts/validate_agent_board_state.js、powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1、powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1 并停止汇报结果；审批人 Jenn。",
+    draft_scope: {
+      would_modify_files: [
+        "accepted_samples/accepted_sample_registry.yaml",
+        "accepted_samples/categories/product_still_life.yaml"
+      ],
+      forbidden_operations: [
+        "copy_or_commit_image_files",
+        "modify_runs_real_generation_source_images",
+        "write_failure_samples",
+        "write_production_candidate",
+        "write_DailyNote",
+        "write_VCP_memory",
+        "provider_or_api_or_plugin_or_mcp_call",
+        "read_env_or_env_local",
+        "read_real_manifest_or_VCPChat_or_VCPToolBox",
+        "push_tag_release_deploy"
+      ],
+      validation_required: [
+        "git diff --check",
+        "node scripts/validate_v14_190_third_sample_accepted_samples_registration_authorization_package_draft.js",
+        "node scripts/validate_agent_board_state.js",
+        "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1",
+        "powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1"
+      ]
+    },
+    missing_requirements: [
+      "human_approval_status: approved",
+      "approved_by: Jenn",
+      "explicit authorization statement from Jenn"
+    ],
+    guard: {
+      static_panel_only: true,
+      accepted_samples_write_performed: false,
+      category_index_write_performed: false,
+      image_file_copy_performed: false,
+      failure_samples_write_performed: false,
+      production_candidate_write_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      mcp_runtime_performed: false,
+      real_manifest_read_performed: false,
+      real_vcpchat_read_performed: false,
+      real_vcptoolbox_read_performed: false,
+      push_tag_release_deploy_performed: false,
+      artifact_recoverability_is_not_vcp_runtime_integration: true,
+      vcp_runtime_integration_proven: false
+    }
+  },
+  third_sample_post_approval_gate_seed: {
+    version: "v1",
+    phase: "v14_216_review_console_post_approval_gate_static_panel",
+    source_gate_ref: "tests/schema_examples/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.example.json",
+    source_intake_validator_ref: "scripts/validate_v14_214_lamp_third_sample_human_approval_intake_validator.js",
+    draft_output_key: "third_sample_post_approval_gate_state",
+    gate_status: "blocked",
+    blocker: "human_approval_missing",
+    target: {
+      sample_id: "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001",
+      candidate_id: "v14_166_lamp_v3_generated_candidate_001",
+      category: "product_still_life",
+      approval_statement_source_is_user_submission: false,
+      human_approval_captured_now: false,
+      accepted_samples_registration_ready_now: false,
+      future_registration_requires_v14_214_user_submission: true
+    },
+    required_before_write: [
+      "v14.214 intake validator reports approval_statement_source_is_user_submission=true",
+      "v14.214 intake validator reports human_approval_captured_now=true",
+      "allowed write set remains exactly accepted_samples/accepted_sample_registry.yaml and accepted_samples/categories/product_still_life.yaml",
+      "no image copy, no runs source image modification, no production_candidate, no failure_samples, no DailyNote, no VCP memory"
+    ],
+    guard: {
+      static_panel_only: true,
+      accepted_samples_write_performed: false,
+      category_index_write_performed: false,
+      image_file_copy_performed: false,
+      runs_source_image_modified: false,
+      failure_samples_write_performed: false,
+      production_candidate_write_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      mcp_runtime_performed: false,
+      image_generation_performed: false,
+      env_or_secret_read_performed: false,
+      real_manifest_read_performed: false,
+      real_vcpchat_read_performed: false,
+      real_vcptoolbox_read_performed: false,
+      push_tag_release_deploy_performed: false,
+      artifact_recoverability_is_not_vcp_runtime_integration: true,
+      vcp_runtime_integration_proven: false
+    }
+  },
+  human_approval_blocker_queue_seed: {
+    version: "v1",
+    phase: "v14_218_review_console_human_approval_blocker_queue_static_panel",
+    source_snapshot_ref: "tests/schema_examples/v14_217_review_console_post_approval_gate_snapshot_static_regression.example.json",
+    source_panel_ref: "tests/schema_examples/v14_216_review_console_post_approval_gate_static_panel.example.json",
+    source_gate_ref: "tests/schema_examples/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.example.json",
+    source_intake_validator_ref: "scripts/validate_v14_214_lamp_third_sample_human_approval_intake_validator.js",
+    draft_output_key: "human_approval_blocker_queue_state",
+    queue_status: "active_blocker_queue",
+    total_blockers: 1,
+    blockers: [
+      {
+        blocker_id: "lamp_v3_third_sample_human_approval_missing",
+        blocker_type: "human_approval_missing",
+        severity: "hard_blocker",
+        target_sample_id: "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001",
+        target_candidate_id: "v14_166_lamp_v3_generated_candidate_001",
+        target_category: "product_still_life",
+        required_evidence_count: 4,
+        required_evidence: [
+          "Jenn explicit human approval user submission",
+          "v14.214 intake validator approval_statement_source_is_user_submission=true",
+          "v14.214 intake validator human_approval_captured_now=true",
+          "post-approval registration preflight remains limited to accepted_samples metadata"
+        ],
+        approval_statement_source_is_user_submission: false,
+        human_approval_captured_now: false,
+        accepted_samples_registration_ready_now: false,
+        next_allowed_local_action: "wait_for_jenn_user_submission_then_run_v14_214_intake",
+        next_write_action_allowed_now: false
+      }
+    ],
+    guard: {
+      static_panel_only: true,
+      read_only_queue: true,
+      approval_capture_performed: false,
+      accepted_samples_write_performed: false,
+      category_index_write_performed: false,
+      image_file_copy_performed: false,
+      runs_source_image_modified: false,
+      failure_samples_write_performed: false,
+      production_candidate_write_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      mcp_runtime_performed: false,
+      image_generation_performed: false,
+      env_or_secret_read_performed: false,
+      real_manifest_read_performed: false,
+      real_vcpchat_read_performed: false,
+      real_vcptoolbox_read_performed: false,
+      push_tag_release_deploy_performed: false,
+      artifact_recoverability_is_not_vcp_runtime_integration: true,
+      vcp_runtime_integration_proven: false
+    }
+  },
+  review_console_runtime_gap_dashboard_contract_seed: {
+    version: "v1",
+    phase: "v14_205_review_console_runtime_gap_static_ui_panel",
+    source_contract_ref: "tests/schema_examples/v14_204_review_console_runtime_gap_dashboard_contract.example.json",
+    dashboard_contract_status: "static_runtime_gap_contract_ready",
+    dashboard_progress_basis: "validator_outputs_and_static_fixtures_only",
+    runtime_gap_row_count: 7,
+    local_capability_row_count: 3,
+    a5_boundary_row_count: 4,
+    runtime_claim_allowed: false,
+    rows: [
+      {
+        row_id: "artifact_recoverability",
+        row_kind: "local_capability",
+        current_status: "local_verified_two_full_samples",
+        source_evidence_ref: "tests/schema_examples/v14_168_three_sample_dashboard_evidence_alignment.example.json",
+        requires_a5_authorization_before_execution: false
+      },
+      {
+        row_id: "accepted_samples_gap",
+        row_kind: "local_capability",
+        current_status: "two_complete_one_remaining_gap",
+        source_evidence_ref: "tests/schema_examples/v14_168_three_sample_dashboard_evidence_alignment.example.json",
+        requires_a5_authorization_before_execution: false
+      },
+      {
+        row_id: "authorization_handoff_cards",
+        row_kind: "local_capability",
+        current_status: "five_blocked_cards_static_ready",
+        source_evidence_ref: "tests/schema_examples/v14_203_authorization_compiler_review_console_handoff_state.example.json",
+        requires_a5_authorization_before_execution: false
+      },
+      {
+        row_id: "manifest_read",
+        row_kind: "a5_boundary",
+        current_status: "not_performed_requires_exact_a5",
+        source_evidence_ref: "tests/schema_examples/v14_202_authorization_package_blocker_arbiter_contract.example.json",
+        requires_a5_authorization_before_execution: true
+      },
+      {
+        row_id: "vcpchat_vcptoolbox_runtime",
+        row_kind: "a5_boundary",
+        current_status: "not_performed_requires_exact_a5",
+        source_evidence_ref: "tests/schema_examples/v14_203_authorization_compiler_review_console_handoff_state.example.json",
+        requires_a5_authorization_before_execution: true
+      },
+      {
+        row_id: "daily_note_vcp_memory",
+        row_kind: "a5_boundary",
+        current_status: "not_performed_requires_exact_a5",
+        source_evidence_ref: "tests/schema_examples/v14_200_daily_note_vcp_memory_authorization_compiler_output_preflight.example.json",
+        requires_a5_authorization_before_execution: true
+      },
+      {
+        row_id: "production_candidate_archive",
+        row_kind: "a5_boundary",
+        current_status: "not_performed_requires_exact_a5",
+        source_evidence_ref: "tests/schema_examples/v14_201_authorization_package_compiler_coverage_closeout.example.json",
+        requires_a5_authorization_before_execution: true
+      }
+    ],
+    guard: {
+      runtime_gap_dashboard_static_ui_only: true,
+      fetch_performed: false,
+      file_write_performed: false,
+      authorization_execution_performed: false,
+      package_execution_performed: false,
+      accepted_samples_write_performed: false,
+      manifest_read_performed: false,
+      durable_archive_copy_performed: false,
+      production_candidate_write_performed: false,
+      failure_samples_write_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      mcp_runtime_performed: false,
+      real_manifest_read_performed: false,
+      real_vcpchat_read_performed: false,
+      real_vcptoolbox_read_performed: false,
+      push_tag_release_deploy_performed: false,
+      artifact_recoverability_is_not_vcp_runtime_integration: true,
+      vcp_runtime_integration_proven: false
+    }
+  },
   review_session: {
     session_id: "session-photo-studio-os-001",
     task_id: "task-photo-studio-os-001",

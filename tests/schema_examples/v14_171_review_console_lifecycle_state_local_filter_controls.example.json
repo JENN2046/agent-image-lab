@@ -1,0 +1,30 @@
+{
+  "review_console_lifecycle_state_local_filter_controls": {
+    "version": "v1",
+    "phase": "v14_171_review_console_lifecycle_state_local_filter_controls_static_only",
+    "source_snapshot_ref": "tests/schema_examples/v14_170_review_console_artifact_lifecycle_state_reader_draft_output_snapshot.example.json",
+    "allowed_filters": ["all", "recoverable", "blocked"],
+    "expected_visible_counts": {
+      "all": 3,
+      "recoverable": 2,
+      "blocked": 1
+    },
+    "draft_output_key": "artifact_lifecycle_filter_state",
+    "filter_state": {
+      "selected_filter": "all",
+      "filter_is_local_ui_only": true,
+      "fetch_performed": false,
+      "file_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_expected": {
+      "unknown_filter_falls_back_to_all": true,
+      "recoverable_filter_must_not_show_blocked_lamp": true,
+      "blocked_filter_must_show_only_lamp": true,
+      "accepted_samples_write_flag_fails": true,
+      "runtime_claim_fails": true
+    }
+  }
+}

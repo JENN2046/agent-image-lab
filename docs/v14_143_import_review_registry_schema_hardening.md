@@ -58,7 +58,7 @@ registry_full_recoverability_metadata_verified: true
 category_index_full_recoverability_metadata_verified: true
 v14_142_matrix_validator_still_passes: true
 v14_142_negative_matrix_still_covers_schema_failures: true
-full_recoverability_count_is_currently_one: true
+full_recoverability_count_is_currently_two: true
 ```
 
 ## Negative Coverage

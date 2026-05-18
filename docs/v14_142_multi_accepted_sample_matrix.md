@@ -45,19 +45,21 @@ metadata and local artifact files.
 
 ```yaml
 multi_sample_matrix_created: true
-registry_sample_count: 6
-matrix_row_count: 6
+registry_sample_count: 8
+matrix_row_count: 8
 category_count: 3
-local_artifact_sample_count: 4
-complete_recoverable_sample_count: 1
+local_artifact_sample_count: 6
+complete_recoverable_sample_count: 3
 complete_recoverable_sample_ids:
   - accepted_womens_resort_relaxed_knit_codex_v2_001
+  - accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001
+  - accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
 legacy_partial_artifact_sample_count: 3
 legacy_partial_artifact_sample_ids:
   - accepted_french_summer_rattan_bucket_bag_002_shot_1
   - accepted_french_summer_rattan_bucket_bag_003_shot_2
   - accepted_french_summer_rattan_bucket_bag_004_shot_3
-full_recoverability_count_is_currently_one: true
+full_recoverability_count_is_currently_three: true
 ```
 
 The matrix deliberately keeps the old v7 accepted entries as partial, not full,

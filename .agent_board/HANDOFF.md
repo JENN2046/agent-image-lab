@@ -3,6 +3,2924 @@
 ## Handoff Summary
 
 ```text
+Status: v14_229_third_sample_post_registration_validator_alignment completed validated.
+Reason: Jenn-approved lamp sample is now the third accepted sample; validators/docs/fixtures/board were synced from human_approval_missing to three-sample local recoverability.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead 19 and behind 0 at review time.
+Worktree: dirty by design; no files are staged by v14.229.
+Sample: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+Artifact: runs/real_generation/v14_166_codex_session_premium_portable_led_camping_lantern_v3_generation_trial/codex_session_v14_166_premium_portable_led_camping_lantern_v3_candidate_001.png
+post_registration_aligned_surfaces: scripts/validate_v14_215_third_sample_accepted_samples_post_approval_gate_alignment.js; tests/schema_examples/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.example.json; docs/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.md; scripts/validate_v14_217_review_console_post_approval_gate_snapshot_static_regression.js; tests/schema_examples/v14_217_review_console_post_approval_gate_snapshot_static_regression.example.json; docs/v14_217_review_console_post_approval_gate_snapshot_static_regression.md; scripts/validate_v14_222_review_console_recoverability_matrix_snapshot_static_regression.js; tests/schema_examples/v14_222_review_console_recoverability_matrix_snapshot_static_regression.example.json; docs/v14_222_review_console_recoverability_matrix_snapshot_static_regression.md; scripts/validate_v14_225_review_console_six_month_goal_gap_static_panel.js; tests/schema_examples/v14_225_review_console_six_month_goal_gap_static_panel.example.json; docs/v14_225_review_console_six_month_goal_gap_static_panel.md; scripts/validate_v14_226_review_console_six_month_goal_gap_snapshot_static_regression.js; tests/schema_examples/v14_226_review_console_six_month_goal_gap_snapshot_static_regression.example.json; docs/v14_226_review_console_six_month_goal_gap_snapshot_static_regression.md; scripts/validate_v14_227_review_console_failure_state_static_workbench.js; tests/schema_examples/v14_227_review_console_failure_state_static_workbench.example.json; docs/v14_227_review_console_failure_state_static_workbench.md; scripts/validate_v14_228_review_console_failure_state_snapshot_static_regression.js; tests/schema_examples/v14_228_review_console_failure_state_snapshot_static_regression.example.json; docs/v14_228_review_console_failure_state_snapshot_static_regression.md
+full_recoverable_accepted_sample_count: 3
+remaining_full_recoverable_sample_gap: 0
+hard_acceptance_three_full_samples_met: true
+goal_complete: false
+execution_mode: local_validator_state_alignment_only
+accepted_samples_write_performed_by_this_phase: false
+category_index_write_performed_by_this_phase: false
+image_file_copy_performed: false
+runs_source_image_modified: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+env_or_secret_read_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+staging_performed: false
+commit_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validator Governance Chain v1: closed
+A5 active authorization package: none
+batch_005_allowed_now: false
+production_candidate_002_allowed_now: false
+memory_write_path_allowed_now: false
+production actions remain blocked
+Push/tag/release: blocked without separate explicit authorization
+Resume prompt: read AGENTS.md, AGENTS.autopilot-overlay.md, and .agent_board/*; 不要读取真实 VCPChat/VCPToolBox; 用中文汇报.
+recommended_next: continue_review_console_static_productization_from_three_sample_evidence_baseline
+recommended_next_auto_execution_allowed: true_A4_8_static_review_console_only_no_staging_no_commit_no_push
+validated_now: node scripts/validate_v14_215_third_sample_accepted_samples_post_approval_gate_alignment.js; node scripts/validate_v14_217_review_console_post_approval_gate_snapshot_static_regression.js; node scripts/validate_v14_222_review_console_recoverability_matrix_snapshot_static_regression.js; node scripts/validate_v14_225_review_console_six_month_goal_gap_static_panel.js; node scripts/validate_v14_226_review_console_six_month_goal_gap_snapshot_static_regression.js; node scripts/validate_v14_227_review_console_failure_state_static_workbench.js; node scripts/validate_v14_228_review_console_failure_state_snapshot_static_regression.js; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+---
+
+```text
+Status: v14_228_review_console_failure_state_snapshot_static_regression completed validated.
+Reason: v14.227 exposed failure state in Review Console; v14.228 freezes it as a static regression snapshot.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead 19 and behind 0 at review time.
+Worktree: dirty by design; no files are staged by v14.228.
+Phase record: docs/v14_228_review_console_failure_state_snapshot_static_regression.md
+Fixture: tests/schema_examples/v14_228_review_console_failure_state_snapshot_static_regression.example.json
+Source workbench: tests/schema_examples/v14_227_review_console_failure_state_static_workbench.example.json
+Source workbench record: docs/v14_227_review_console_failure_state_static_workbench.md
+Regression chain refs: docs/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.md; tests/schema_examples/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.example.json; docs/v14_217_review_console_post_approval_gate_snapshot_static_regression.md; tests/schema_examples/v14_217_review_console_post_approval_gate_snapshot_static_regression.example.json; docs/v14_221_review_console_recoverability_matrix_static_workbench.md; tests/schema_examples/v14_221_review_console_recoverability_matrix_static_workbench.example.json; docs/v14_222_review_console_recoverability_matrix_snapshot_static_regression.md; tests/schema_examples/v14_222_review_console_recoverability_matrix_snapshot_static_regression.example.json; docs/v14_225_review_console_six_month_goal_gap_static_panel.md; tests/schema_examples/v14_225_review_console_six_month_goal_gap_static_panel.example.json; docs/v14_226_review_console_six_month_goal_gap_snapshot_static_regression.md; tests/schema_examples/v14_226_review_console_six_month_goal_gap_snapshot_static_regression.example.json; docs/v14_227_review_console_failure_state_static_workbench.md; tests/schema_examples/v14_227_review_console_failure_state_static_workbench.example.json
+Validator created: scripts/validate_v14_228_review_console_failure_state_snapshot_static_regression.js
+MVP validator updated: scripts/validate_mvp.ps1
+Review Console static files updated: review_console/static_prototype/README.md
+execution_mode: review_console_static_failure_state_snapshot_only
+snapshot_status: golden_static_snapshot
+draft_output_key: failure_state_static_workbench_state
+failure_candidate_count: 2
+memory_forbidden_count: 1
+never_production_count: 2
+production_exclusion_count: 2
+failure_samples_state: static_review_only_not_written
+failure_samples_write_allowed: false
+failure_samples_write_performed: false
+static_snapshot_only: true
+local_static_workbench_only: true
+accepted_samples_write_performed: false
+category_index_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+env_or_secret_read_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+staging_performed: false
+commit_performed: false
+push_tag_release_deploy_performed: false
+failure_state_is_not_failure_samples_registry_write: true
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+A5 active authorization package: none
+production actions remain blocked
+Push/tag/release: blocked without separate explicit authorization
+Resume prompt: read AGENTS.md, AGENTS.autopilot-overlay.md, and .agent_board/*; 不要读取真实 VCPChat/VCPToolBox; 用中文汇报.
+recommended_next: stop_after_v14_228_per_user_instruction_then_wait_for_jenn_human_approval_or_resume_static_productization
+recommended_next_auto_execution_allowed: false_user_requested_stop_after_this_task
+validated_now: node --check scripts/validate_v14_228_review_console_failure_state_snapshot_static_regression.js; node scripts/validate_v14_228_review_console_failure_state_snapshot_static_regression.js; node scripts/validate_v14_227_review_console_failure_state_static_workbench.js; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+---
+
+```text
+Status: v14_227_review_console_failure_state_static_workbench completed validated.
+Reason: v14.226 froze the six-month goal gap; v14.227 exposes failure state in Review Console without writing failure_samples.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead 19 and behind 0 at review time.
+Worktree: dirty by design; no files are staged by v14.227.
+Phase record: docs/v14_227_review_console_failure_state_static_workbench.md
+Fixture: tests/schema_examples/v14_227_review_console_failure_state_static_workbench.example.json
+Regression chain refs: docs/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.md; tests/schema_examples/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.example.json; docs/v14_217_review_console_post_approval_gate_snapshot_static_regression.md; tests/schema_examples/v14_217_review_console_post_approval_gate_snapshot_static_regression.example.json; docs/v14_221_review_console_recoverability_matrix_static_workbench.md; tests/schema_examples/v14_221_review_console_recoverability_matrix_static_workbench.example.json; docs/v14_222_review_console_recoverability_matrix_snapshot_static_regression.md; tests/schema_examples/v14_222_review_console_recoverability_matrix_snapshot_static_regression.example.json; docs/v14_225_review_console_six_month_goal_gap_static_panel.md; tests/schema_examples/v14_225_review_console_six_month_goal_gap_static_panel.example.json; docs/v14_226_review_console_six_month_goal_gap_snapshot_static_regression.md; tests/schema_examples/v14_226_review_console_six_month_goal_gap_snapshot_static_regression.example.json; scripts/validate_v14_226_review_console_six_month_goal_gap_snapshot_static_regression.js
+Validator created: scripts/validate_v14_227_review_console_failure_state_static_workbench.js
+MVP validator updated: scripts/validate_mvp.ps1
+Review Console static files updated: review_console/static_prototype/app.js; review_console/static_prototype/index.html; review_console/static_prototype/styles.css; review_console/static_prototype/README.md
+execution_mode: review_console_static_failure_state_only
+draft_output_key: failure_state_static_workbench_state
+failure_candidate_count: 2
+memory_forbidden_count: 1
+never_production_count: 2
+production_exclusion_count: 2
+failure_samples_state: static_review_only_not_written
+failure_samples_write_allowed: false
+failure_samples_write_performed: false
+local_static_workbench_only: true
+accepted_samples_write_performed: false
+category_index_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+env_or_secret_read_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+staging_performed: false
+commit_performed: false
+push_tag_release_deploy_performed: false
+failure_state_is_not_failure_samples_registry_write: true
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+A5 active authorization package: none
+production actions remain blocked
+Push/tag/release: blocked without separate explicit authorization
+Resume prompt: read AGENTS.md, AGENTS.autopilot-overlay.md, and .agent_board/*; 不要读取真实 VCPChat/VCPToolBox; 用中文汇报.
+recommended_next: wait_for_jenn_human_approval_for_third_sample_or_continue_review_console_static_productization
+recommended_next_auto_execution_allowed: true_A4_8_static_validation_only_no_failure_samples_write
+validated_now: node --check review_console/static_prototype/app.js; node --check scripts/validate_v14_227_review_console_failure_state_static_workbench.js; node scripts/validate_v14_227_review_console_failure_state_static_workbench.js; node scripts/validate_v14_226_review_console_six_month_goal_gap_snapshot_static_regression.js; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+---
+
+```text
+Status: v14_226_review_console_six_month_goal_gap_snapshot_static_regression completed validated.
+Reason: v14.225 exposed Month 1-6 goal gaps; v14.226 freezes that state as a static regression snapshot.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead 19 and behind 0 at review time.
+Worktree: dirty by design; no files are staged by v14.226.
+Phase record: docs/v14_226_review_console_six_month_goal_gap_snapshot_static_regression.md
+Fixture: tests/schema_examples/v14_226_review_console_six_month_goal_gap_snapshot_static_regression.example.json
+Source panel: tests/schema_examples/v14_225_review_console_six_month_goal_gap_static_panel.example.json
+Source panel record: docs/v14_225_review_console_six_month_goal_gap_static_panel.md
+Regression chain refs: docs/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.md; tests/schema_examples/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.example.json; docs/v14_217_review_console_post_approval_gate_snapshot_static_regression.md; tests/schema_examples/v14_217_review_console_post_approval_gate_snapshot_static_regression.example.json; docs/v14_221_review_console_recoverability_matrix_static_workbench.md; tests/schema_examples/v14_221_review_console_recoverability_matrix_static_workbench.example.json; docs/v14_222_review_console_recoverability_matrix_snapshot_static_regression.md; tests/schema_examples/v14_222_review_console_recoverability_matrix_snapshot_static_regression.example.json; docs/v14_223_review_console_schema_binding_coverage_static_panel.md; tests/schema_examples/v14_223_review_console_schema_binding_coverage_static_panel.example.json; docs/v14_224_review_console_schema_binding_coverage_snapshot_static_regression.md; tests/schema_examples/v14_224_review_console_schema_binding_coverage_snapshot_static_regression.example.json; docs/v14_225_review_console_six_month_goal_gap_static_panel.md; tests/schema_examples/v14_225_review_console_six_month_goal_gap_static_panel.example.json
+Validator created: scripts/validate_v14_226_review_console_six_month_goal_gap_snapshot_static_regression.js
+MVP validator updated: scripts/validate_mvp.ps1
+Review Console static files updated: review_console/static_prototype/README.md
+execution_mode: review_console_static_six_month_goal_gap_snapshot_only
+snapshot_status: golden_static_snapshot
+draft_output_key: six_month_goal_gap_state
+month_count: 6
+complete_recoverable_sample_count: 2
+required_full_recoverable_sample_count: 3
+remaining_full_recoverable_sample_gap: 1
+hard_acceptance_three_full_samples_met: false
+pending_candidate_counted_as_accepted: false
+overall_status: month_1_blocked_by_third_sample_human_approval
+vcp_runtime_integration_proven_month_count: 0
+month_1_status: blocked_by_human_approval_missing
+month_5_status: blocked_requires_jenn_A5
+static_snapshot_only: true
+accepted_samples_write_performed: false
+category_index_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+env_or_secret_read_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+staging_performed: false
+commit_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+dry_run_adapter_is_not_vcp_runtime_integration: true
+review_console_static_read_is_not_vcp_runtime_integration: true
+authorization_package_draft_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+A5 active authorization package: none
+production actions remain blocked
+Validator Governance Chain v1: closed
+batch_005_allowed_now: false
+production_candidate_002_allowed_now: false
+memory_write_path_allowed_now: false
+Push/tag/release: blocked without separate explicit authorization
+Resume prompt: read AGENTS.md, AGENTS.autopilot-overlay.md, and .agent_board/*; 不要读取真实 VCPChat/VCPToolBox; 用中文汇报.
+recommended_next: wait_for_jenn_human_approval_or_continue_review_console_static_productization
+recommended_next_auto_execution_allowed: true_A4_8_static_validation_only_no_accepted_samples_write_until_user_approval_captured
+validated_now: node --check scripts/validate_v14_226_review_console_six_month_goal_gap_snapshot_static_regression.js; node scripts/validate_v14_226_review_console_six_month_goal_gap_snapshot_static_regression.js; node scripts/validate_v14_225_review_console_six_month_goal_gap_static_panel.js; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+---
+
+```text
+Status: v14_225_review_console_six_month_goal_gap_static_panel completed validated.
+Reason: v14.224 froze schema coverage; v14.225 exposes Month 1-6 goal gaps in Review Console without overclaiming runtime integration.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead 19 and behind 0 at review time.
+Worktree: dirty by design; no files are staged by v14.225.
+Phase record: docs/v14_225_review_console_six_month_goal_gap_static_panel.md
+Fixture: tests/schema_examples/v14_225_review_console_six_month_goal_gap_static_panel.example.json
+Source matrix: tests/schema_examples/v14_221_review_console_recoverability_matrix_static_workbench.example.json
+Source schema binding snapshot: tests/schema_examples/v14_224_review_console_schema_binding_coverage_snapshot_static_regression.example.json
+Regression chain refs: docs/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.md; tests/schema_examples/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.example.json; docs/v14_217_review_console_post_approval_gate_snapshot_static_regression.md; tests/schema_examples/v14_217_review_console_post_approval_gate_snapshot_static_regression.example.json; docs/v14_221_review_console_recoverability_matrix_static_workbench.md; tests/schema_examples/v14_221_review_console_recoverability_matrix_static_workbench.example.json; docs/v14_222_review_console_recoverability_matrix_snapshot_static_regression.md; tests/schema_examples/v14_222_review_console_recoverability_matrix_snapshot_static_regression.example.json; docs/v14_223_review_console_schema_binding_coverage_static_panel.md; tests/schema_examples/v14_223_review_console_schema_binding_coverage_static_panel.example.json; docs/v14_224_review_console_schema_binding_coverage_snapshot_static_regression.md; tests/schema_examples/v14_224_review_console_schema_binding_coverage_snapshot_static_regression.example.json
+Validator created: scripts/validate_v14_225_review_console_six_month_goal_gap_static_panel.js
+MVP validator updated: scripts/validate_mvp.ps1
+Review Console static files updated: review_console/static_prototype/app.js; review_console/static_prototype/index.html; review_console/static_prototype/styles.css; review_console/static_prototype/README.md
+execution_mode: review_console_static_six_month_goal_gap_only
+draft_output_key: six_month_goal_gap_state
+month_count: 6
+complete_recoverable_sample_count: 2
+required_full_recoverable_sample_count: 3
+remaining_full_recoverable_sample_gap: 1
+hard_acceptance_three_full_samples_met: false
+pending_candidate_counted_as_accepted: false
+overall_status: month_1_blocked_by_third_sample_human_approval
+vcp_runtime_integration_proven_month_count: 0
+local_static_panel_only: true
+accepted_samples_write_performed: false
+category_index_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+env_or_secret_read_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+staging_performed: false
+commit_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+dry_run_adapter_is_not_vcp_runtime_integration: true
+review_console_static_read_is_not_vcp_runtime_integration: true
+authorization_package_draft_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+A5 active authorization package: none
+production actions remain blocked
+Validator Governance Chain v1: closed
+batch_005_allowed_now: false
+production_candidate_002_allowed_now: false
+memory_write_path_allowed_now: false
+Push/tag/release: blocked without separate explicit authorization
+Resume prompt: read AGENTS.md, AGENTS.autopilot-overlay.md, and .agent_board/*; 不要读取真实 VCPChat/VCPToolBox; 用中文汇报.
+recommended_next: wait_for_jenn_human_approval_or_continue_review_console_static_productization
+recommended_next_auto_execution_allowed: true_A4_8_static_validation_only_no_accepted_samples_write_until_user_approval_captured
+validated_now: node --check review_console/static_prototype/app.js; node --check scripts/validate_v14_225_review_console_six_month_goal_gap_static_panel.js; node scripts/validate_v14_225_review_console_six_month_goal_gap_static_panel.js; node scripts/validate_v14_224_review_console_schema_binding_coverage_snapshot_static_regression.js; node scripts/validate_v14_223_review_console_schema_binding_coverage_static_panel.js; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+---
+
+```text
+Status: v14_224_review_console_schema_binding_coverage_snapshot_static_regression completed validated.
+Reason: v14.223 exposed schema binding coverage; v14.224 freezes that panel state as a static regression snapshot.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead 19 and behind 0 at review time.
+Worktree: dirty by design; no files are staged by v14.224.
+Phase record: docs/v14_224_review_console_schema_binding_coverage_snapshot_static_regression.md
+Fixture: tests/schema_examples/v14_224_review_console_schema_binding_coverage_snapshot_static_regression.example.json
+Source panel: tests/schema_examples/v14_223_review_console_schema_binding_coverage_static_panel.example.json
+Source panel record: docs/v14_223_review_console_schema_binding_coverage_static_panel.md
+Regression chain refs: docs/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.md; tests/schema_examples/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.example.json; docs/v14_217_review_console_post_approval_gate_snapshot_static_regression.md; tests/schema_examples/v14_217_review_console_post_approval_gate_snapshot_static_regression.example.json; docs/v14_221_review_console_recoverability_matrix_static_workbench.md; tests/schema_examples/v14_221_review_console_recoverability_matrix_static_workbench.example.json; docs/v14_222_review_console_recoverability_matrix_snapshot_static_regression.md; tests/schema_examples/v14_222_review_console_recoverability_matrix_snapshot_static_regression.example.json; docs/v14_223_review_console_schema_binding_coverage_static_panel.md; tests/schema_examples/v14_223_review_console_schema_binding_coverage_static_panel.example.json
+Validator created: scripts/validate_v14_224_review_console_schema_binding_coverage_snapshot_static_regression.js
+MVP validator updated: scripts/validate_mvp.ps1
+Review Console static files updated: review_console/static_prototype/README.md
+execution_mode: review_console_static_schema_binding_coverage_snapshot_only
+snapshot_status: golden_static_snapshot
+draft_output_key: review_console_schema_binding_coverage_state
+bound_schema_count: 3
+matrix_required_field_count: 10
+covered_matrix_required_field_count: 10
+missing_matrix_required_fields: []
+binding_status: covered_static_read_only
+schema_binding_coverage_complete: true
+pending_candidate_counted_as_accepted: false
+hard_acceptance_three_full_samples_met: false
+static_snapshot_only: true
+accepted_samples_write_performed: false
+category_index_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+env_or_secret_read_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+staging_performed: false
+commit_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+A5 active authorization package: none
+production actions remain blocked
+Validator Governance Chain v1: closed
+batch_005_allowed_now: false
+production_candidate_002_allowed_now: false
+memory_write_path_allowed_now: false
+Push/tag/release: blocked without separate explicit authorization
+Resume prompt: read AGENTS.md, AGENTS.autopilot-overlay.md, and .agent_board/*; 不要读取真实 VCPChat/VCPToolBox; 用中文汇报.
+recommended_next: wait_for_jenn_human_approval_or_continue_review_console_static_productization
+recommended_next_auto_execution_allowed: true_A4_8_static_validation_only_no_accepted_samples_write_until_user_approval_captured
+validated_now: node --check scripts/validate_v14_224_review_console_schema_binding_coverage_snapshot_static_regression.js; node scripts/validate_v14_224_review_console_schema_binding_coverage_snapshot_static_regression.js; node scripts/validate_v14_223_review_console_schema_binding_coverage_static_panel.js; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+---
+
+```text
+Status: v14_223_review_console_schema_binding_coverage_static_panel completed validated.
+Reason: v14.222 froze the recoverability matrix; v14.223 exposes static schema binding coverage for the matrix fields inside Review Console.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead 19 and behind 0 at review time.
+Worktree: dirty by design; no files are staged by v14.223.
+Phase record: docs/v14_223_review_console_schema_binding_coverage_static_panel.md
+Fixture: tests/schema_examples/v14_223_review_console_schema_binding_coverage_static_panel.example.json
+Source schema binding: review_console/static_prototype/SCHEMA_BINDING.md
+Source recoverability matrix: tests/schema_examples/v14_221_review_console_recoverability_matrix_static_workbench.example.json
+Regression chain refs: docs/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.md; tests/schema_examples/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.example.json; docs/v14_217_review_console_post_approval_gate_snapshot_static_regression.md; tests/schema_examples/v14_217_review_console_post_approval_gate_snapshot_static_regression.example.json; docs/v14_221_review_console_recoverability_matrix_static_workbench.md; tests/schema_examples/v14_221_review_console_recoverability_matrix_static_workbench.example.json; docs/v14_222_review_console_recoverability_matrix_snapshot_static_regression.md; tests/schema_examples/v14_222_review_console_recoverability_matrix_snapshot_static_regression.example.json
+Validator created: scripts/validate_v14_223_review_console_schema_binding_coverage_static_panel.js
+MVP validator updated: scripts/validate_mvp.ps1
+Review Console static files updated: review_console/static_prototype/app.js; review_console/static_prototype/index.html; review_console/static_prototype/styles.css; review_console/static_prototype/README.md
+execution_mode: review_console_static_schema_binding_coverage_only
+draft_output_key: review_console_schema_binding_coverage_state
+bound_schema_count: 3
+matrix_required_field_count: 10
+covered_matrix_required_field_count: 10
+missing_matrix_required_fields: []
+binding_status: covered_static_read_only
+schema_binding_coverage_complete: true
+pending_candidate_counted_as_accepted: false
+hard_acceptance_three_full_samples_met: false
+local_static_panel_only: true
+accepted_samples_write_performed: false
+category_index_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+env_or_secret_read_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+staging_performed: false
+commit_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+A5 active authorization package: none
+production actions remain blocked
+Validator Governance Chain v1: closed
+batch_005_allowed_now: false
+production_candidate_002_allowed_now: false
+memory_write_path_allowed_now: false
+Push/tag/release: blocked without separate explicit authorization
+Resume prompt: read AGENTS.md, AGENTS.autopilot-overlay.md, and .agent_board/*; 不要读取真实 VCPChat/VCPToolBox; 用中文汇报.
+recommended_next: wait_for_jenn_human_approval_or_continue_review_console_static_productization
+recommended_next_auto_execution_allowed: true_A4_8_static_validation_only_no_accepted_samples_write_until_user_approval_captured
+validated_now: node --check review_console/static_prototype/app.js; node --check scripts/validate_v14_223_review_console_schema_binding_coverage_static_panel.js; node scripts/validate_v14_223_review_console_schema_binding_coverage_static_panel.js; node scripts/validate_v14_222_review_console_recoverability_matrix_snapshot_static_regression.js; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+---
+
+```text
+Status: v14_222_review_console_recoverability_matrix_snapshot_static_regression completed validated.
+Reason: v14.221 added the recoverability matrix; v14.222 freezes it as a static regression snapshot.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead 19 and behind 0 at review time.
+Worktree: dirty by design; no files are staged by v14.222.
+Phase record: docs/v14_222_review_console_recoverability_matrix_snapshot_static_regression.md
+Fixture: tests/schema_examples/v14_222_review_console_recoverability_matrix_snapshot_static_regression.example.json
+Source workbench: tests/schema_examples/v14_221_review_console_recoverability_matrix_static_workbench.example.json
+Source workbench record: docs/v14_221_review_console_recoverability_matrix_static_workbench.md
+Regression chain refs: docs/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.md; tests/schema_examples/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.example.json; docs/v14_217_review_console_post_approval_gate_snapshot_static_regression.md; tests/schema_examples/v14_217_review_console_post_approval_gate_snapshot_static_regression.example.json
+Validator created: scripts/validate_v14_222_review_console_recoverability_matrix_snapshot_static_regression.js
+MVP validator updated: scripts/validate_mvp.ps1
+Review Console static files updated: review_console/static_prototype/app.js; review_console/static_prototype/index.html; review_console/static_prototype/styles.css; review_console/static_prototype/README.md
+execution_mode: review_console_static_recoverability_matrix_snapshot_only
+snapshot_status: golden_static_snapshot
+draft_output_key: recoverability_matrix_state
+row_count: 3
+required_full_recoverable_sample_count: 3
+complete_recoverable_sample_count: 2
+blocked_registration_candidate_count: 1
+remaining_full_recoverable_sample_gap: 1
+hard_acceptance_three_full_samples_met: false
+pending_candidate_counted_as_accepted: false
+matrix_status: blocked_by_human_approval_missing
+blocked_sample_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+blocked_candidate_id: v14_166_lamp_v3_generated_candidate_001
+blocker_type: human_approval_missing
+local_static_matrix_only: true
+accepted_samples_write_performed: false
+category_index_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+env_or_secret_read_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+staging_performed: false
+commit_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+A5 active authorization package: none
+production actions remain blocked
+Validator Governance Chain v1: closed
+batch_005_allowed_now: false
+production_candidate_002_allowed_now: false
+memory_write_path_allowed_now: false
+Push/tag/release: blocked without separate explicit authorization
+Resume prompt: read AGENTS.md, AGENTS.autopilot-overlay.md, and .agent_board/*; 不要读取真实 VCPChat/VCPToolBox; 用中文汇报.
+recommended_next: validate_v14_222_then_wait_for_jenn_human_approval_or_continue_review_console_static_productization
+recommended_next_auto_execution_allowed: true_A4_8_static_validation_only_no_accepted_samples_write_until_user_approval_captured
+validated_now: node --check scripts/validate_v14_222_review_console_recoverability_matrix_snapshot_static_regression.js; node scripts/validate_v14_222_review_console_recoverability_matrix_snapshot_static_regression.js; node scripts/validate_v14_221_review_console_recoverability_matrix_static_workbench.js; node scripts/validate_v14_217_review_console_post_approval_gate_snapshot_static_regression.js; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+---
+
+```text
+Status: v14_221_review_console_recoverability_matrix_static_workbench completed validated.
+Reason: Month 1 third accepted sample registration remains blocked by human_approval_missing, so the next safe local action is Month 2 Review Console static productization: expose the current recoverability matrix.
+Phase record: docs/v14_221_review_console_recoverability_matrix_static_workbench.md
+Fixture: tests/schema_examples/v14_221_review_console_recoverability_matrix_static_workbench.example.json
+Validator created: scripts/validate_v14_221_review_console_recoverability_matrix_static_workbench.js
+draft_output_key: recoverability_matrix_state
+complete_recoverable_sample_count: 2
+blocked_registration_candidate_count: 1
+accepted_samples_write_performed: false
+vcp_runtime_integration_proven: false
+```
+
+---
+
+```text
+Status: v14_220_agent_board_current_recommendation_alignment completed required local validation.
+Reason: v14.219 completed validation, but current board recommendation still needed alignment away from stale v14.218 wording.
+Phase record: docs/v14_220_agent_board_current_recommendation_alignment.md
+Fixture: tests/schema_examples/v14_220_agent_board_current_recommendation_alignment.example.json
+Validator created: scripts/validate_v14_220_agent_board_current_recommendation_alignment.js
+recommended_next: wait_for_jenn_human_approval_or_continue_review_console_static_productization
+accepted_samples_write_performed: false
+vcp_runtime_integration_proven: false
+```
+
+---
+
+```text
+Status: v14_217_review_console_post_approval_gate_snapshot_static_regression completed local target validation.
+Reason: v14.216 exposes the post-approval gate in the Review Console; v14.217 freezes that panel state so approval, registration, write, or runtime claims cannot drift.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead 19 and behind 0 at review time.
+Worktree: dirty by design; no files are staged by v14.217.
+Phase record: docs/v14_217_review_console_post_approval_gate_snapshot_static_regression.md
+Fixture: tests/schema_examples/v14_217_review_console_post_approval_gate_snapshot_static_regression.example.json
+Source panel record: docs/v14_216_review_console_post_approval_gate_static_panel.md
+Source panel fixture: tests/schema_examples/v14_216_review_console_post_approval_gate_static_panel.example.json
+Source gate record: docs/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.md
+Source gate fixture: tests/schema_examples/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.example.json
+Validator created: scripts/validate_v14_217_review_console_post_approval_gate_snapshot_static_regression.js
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: review_console_static_snapshot_regression_only
+snapshot_status: golden_static_snapshot
+draft_output_key: third_sample_post_approval_gate_state
+candidate_id: v14_166_lamp_v3_generated_candidate_001
+proposed_sample_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+gate_status: blocked
+current_registration_blocker: human_approval_missing
+approval_statement_source_is_user_submission: false
+human_approval_captured_now: false
+accepted_samples_registration_ready_now: false
+future_registration_requires_v14_214_user_submission: true
+static_snapshot_only: true
+accepted_samples_write_performed: false
+category_index_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+env_or_secret_read_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+staging_performed: false
+commit_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+recommended_next: validate_v14_217_then_continue_review_console_static_productization_or_wait_for_jenn_approval
+recommended_next_auto_execution_allowed: true_A4_8_static_validation_only_no_accepted_samples_write_until_user_approval_captured
+validated_now: node --check scripts/validate_v14_217_review_console_post_approval_gate_snapshot_static_regression.js; node scripts/validate_v14_217_review_console_post_approval_gate_snapshot_static_regression.js; node scripts/validate_v14_216_review_console_post_approval_gate_static_panel.js; node scripts/validate_v14_215_third_sample_accepted_samples_post_approval_gate_alignment.js
+```
+
+---
+
+```text
+Status: v14_216_review_console_post_approval_gate_static_panel completed local target validation.
+Reason: v14.215 aligned the future third-sample accepted_samples post-approval gate; v14.216 exposes that gate as a read-only Review Console static panel so reviewers can see the blocker without writing metadata.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead 19 and behind 0 at review time.
+Worktree: dirty by design; no files are staged by v14.216.
+Phase record: docs/v14_216_review_console_post_approval_gate_static_panel.md
+Fixture: tests/schema_examples/v14_216_review_console_post_approval_gate_static_panel.example.json
+Source gate record: docs/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.md
+Source gate fixture: tests/schema_examples/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.example.json
+Validator created: scripts/validate_v14_216_review_console_post_approval_gate_static_panel.js
+MVP validator updated: scripts/validate_mvp.ps1
+Review Console surfaces updated: review_console/static_prototype/app.js; review_console/static_prototype/mock_data.js; review_console/static_prototype/index.html; review_console/static_prototype/styles.css; review_console/static_prototype/README.md
+execution_mode: review_console_static_post_approval_gate_panel_only
+draft_output_key: third_sample_post_approval_gate_state
+candidate_id: v14_166_lamp_v3_generated_candidate_001
+proposed_sample_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+gate_status: blocked
+current_registration_blocker: human_approval_missing
+approval_statement_source_is_user_submission: false
+human_approval_captured_now: false
+accepted_samples_registration_ready_now: false
+future_registration_requires_v14_214_user_submission: true
+static_panel_only: true
+accepted_samples_write_performed: false
+category_index_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+env_or_secret_read_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+staging_performed: false
+commit_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+recommended_next: validate_v14_216_then_wait_for_jenn_human_approval_or_continue_review_console_static_productization
+recommended_next_auto_execution_allowed: true_A4_8_static_validation_only_no_accepted_samples_write_until_user_approval_captured
+validated_now: node --check review_console/static_prototype/app.js; node --check review_console/static_prototype/mock_data.js; node --check scripts/validate_v14_216_review_console_post_approval_gate_static_panel.js; node scripts/validate_v14_216_review_console_post_approval_gate_static_panel.js
+```
+
+---
+
+```text
+Status: v14_215_third_sample_accepted_samples_post_approval_gate_alignment completed local target validation.
+Reason: v14.214 validates the exact approval form; v14.215 aligns the future accepted_samples registration gate so it requires v14.214 user-submission approval evidence before any metadata write.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead 19 and behind 0 at review time.
+Worktree: dirty by design; no files are staged by v14.215.
+Phase record: docs/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.md
+Fixture: tests/schema_examples/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.example.json
+Validator created: scripts/validate_v14_215_third_sample_accepted_samples_post_approval_gate_alignment.js
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: post_approval_gate_alignment_only
+candidate_id: v14_166_lamp_v3_generated_candidate_001
+proposed_sample_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+gate_status: blocked
+current_registration_blocker: human_approval_missing
+v14_214_intake_validator_required: true
+approval_statement_source_is_user_submission: false
+human_approval_captured_now: false
+accepted_samples_registration_ready_now: false
+future_registration_requires_v14_214_user_submission: true
+accepted_samples_write_performed: false
+category_index_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+env_or_secret_read_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+staging_performed: false
+commit_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+recommended_next: wait_for_jenn_human_approval_then_run_post_approval_registration_preflight_or_continue_exact_file_recovery
+recommended_next_auto_execution_allowed: true_A4_8_validation_only_no_accepted_samples_write_until_user_approval_captured
+validated_now: node --check scripts/validate_v14_215_third_sample_accepted_samples_post_approval_gate_alignment.js; node scripts/validate_v14_215_third_sample_accepted_samples_post_approval_gate_alignment.js
+```
+
+---
+
+## Previous Handoff Summary
+
+```text
+Status: v14_214_lamp_third_sample_human_approval_intake_validator completed local target validation.
+Reason: v14.213 prepared the exact Jenn approval sentence; v14.214 adds a local intake validator so a future approval can be checked before accepted_samples metadata registration.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead 19 and behind 0 at review time.
+Worktree: dirty by design; no files are staged by v14.214.
+Phase record: docs/v14_214_lamp_third_sample_human_approval_intake_validator.md
+Fixture: tests/schema_examples/v14_214_lamp_third_sample_human_approval_intake_validator.example.json
+Validator created: scripts/validate_v14_214_lamp_third_sample_human_approval_intake_validator.js
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: approval_intake_validator_only
+candidate_id: v14_166_lamp_v3_generated_candidate_001
+proposed_sample_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+approval_statement_matches_required_form: true
+approval_statement_source_is_user_submission: false
+human_approval_captured_now: false
+current_registration_blocker: human_approval_missing
+registration_unlocks_only_after_external_user_approval: true
+accepted_samples_registration_ready_now: false
+accepted_samples_write_performed: false
+category_index_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+env_or_secret_read_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+commit_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+recommended_next: wait_for_jenn_human_approval_then_run_accepted_samples_registration_preflight
+recommended_next_auto_execution_allowed: true_A4_8_validation_only_no_accepted_samples_write_until_user_approval_captured
+validated_now: node --check scripts/validate_v14_214_lamp_third_sample_human_approval_intake_validator.js; node scripts/validate_v14_214_lamp_third_sample_human_approval_intake_validator.js
+```
+
+---
+
+## Previous Handoff Summary
+
+```text
+Status: v14_213_lamp_third_sample_human_approval_request_package completed local target validation.
+Reason: the six-month audit proved the third accepted sample gap is blocked by missing Jenn human approval for the v14.166 lamp candidate.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead 19 and behind 0 at review time.
+Worktree: dirty by design; no files are staged by v14.213.
+Phase record: docs/v14_213_lamp_third_sample_human_approval_request_package.md
+Fixture: tests/schema_examples/v14_213_lamp_third_sample_human_approval_request_package.example.json
+Validator created: scripts/validate_v14_213_lamp_third_sample_human_approval_request_package.js
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: human_approval_request_package_only
+candidate_id: v14_166_lamp_v3_generated_candidate_001
+proposed_sample_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+current_human_approval_status: pending
+current_registration_blocker: human_approval_missing
+human_approval_granted_by_this_record: false
+accepted_samples_registration_ready_now: false
+accepted_samples_write_performed: false
+category_index_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+env_or_secret_read_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+commit_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+recommended_next: wait_for_jenn_human_approval_or_continue_exact_file_commit_recovery
+recommended_next_auto_execution_allowed: true_A4_8_draft_or_read_only_only_no_accepted_samples_write
+validated_now: node --check scripts/validate_v14_213_lamp_third_sample_human_approval_request_package.js; node scripts/validate_v14_213_lamp_third_sample_human_approval_request_package.js
+```
+
+---
+
+## Previous Handoff Summary
+
+```text
+Status: v14_212_six_month_goal_prompt_to_artifact_completion_audit completed local validation.
+Reason: developer completion-audit requirement and the active six-month mission require a prompt-to-artifact checklist against real project evidence before any completion claim.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead 19 and behind 0 at review time.
+Worktree: dirty by design; no files are staged by v14.212.
+Phase record: docs/v14_212_six_month_goal_prompt_to_artifact_completion_audit.md
+Fixture: tests/schema_examples/v14_212_six_month_goal_prompt_to_artifact_completion_audit.example.json
+Validator created: scripts/validate_v14_212_six_month_goal_prompt_to_artifact_completion_audit.js
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: prompt_to_artifact_audit_only
+goal_complete: false
+recoverable_accepted_sample_count: 2
+blocked_third_candidate_count: 1
+remaining_full_recoverable_sample_gap: 1
+success_criteria_count: 8
+met_count: 0
+partial_count: 5
+not_met_count: 3
+blocked_by_a5_count: 1
+prompt_to_artifact_audit_only: true
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+env_or_secret_read_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+commit_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+recommended_next: exact_file_authorization_or_third_sample_human_approval_route_decision
+recommended_next_auto_execution_allowed: true_A4_8_audit_or_draft_only_no_staging_no_commit_no_push
+validated_now: node --check scripts/validate_v14_212_six_month_goal_prompt_to_artifact_completion_audit.js; node scripts/validate_v14_212_six_month_goal_prompt_to_artifact_completion_audit.js; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+```
+
+---
+
+## Previous Handoff Summary
+
+```text
+Status: v14_211_recoverability_baseline_exact_file_staging_authorization_package_draft completed local target validation.
+Reason: v14.210 defined exact-file candidate groups; v14.211 drafts a future exact-file staging and local commit authorization package for the first 14-file recoverability baseline group.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead 19 and behind 0 at review time.
+Worktree: dirty by design; no files are staged by v14.211.
+Phase record: docs/v14_211_recoverability_baseline_exact_file_staging_authorization_package_draft.md
+Fixture: tests/schema_examples/v14_211_recoverability_baseline_exact_file_staging_authorization_package_draft.example.json
+Validator created: scripts/validate_v14_211_recoverability_baseline_exact_file_staging_authorization_package_draft.js
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: authorization_package_draft_only
+source_group_id: recoverability_three_sample_baseline
+exact_stage_file_count: 14
+authorization_package_status: prepared_blocked_not_granted
+authorization_granted_by_this_record: false
+execution_ready: false
+draft_only: true
+staged_file_count: 0
+git_add_dot_used: false
+staged_files_created: false
+commit_performed: false
+push_tag_release_deploy_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+env_or_secret_read_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+recommended_next: request_human_exact_file_staging_commit_authorization_or_continue_read_only_group_inspection
+recommended_next_auto_execution_allowed: true_A4_8_draft_or_read_only_only_no_staging_no_commit_no_push
+validated_now: node --check scripts/validate_v14_211_recoverability_baseline_exact_file_staging_authorization_package_draft.js; node scripts/validate_v14_211_recoverability_baseline_exact_file_staging_authorization_package_draft.js
+```
+
+---
+
+## Handoff Summary
+
+```text
+Status: v14_210_exact_file_commit_readiness_review completed local validation.
+Reason: v14.209 defined the dirty worktree recovery groups; v14.210 converts them into future exact-file commit candidate boundaries without staging or committing.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead 19 and behind 0 at review time.
+Worktree: dirty by design; review records 23 tracked modified files, 139 untracked v14.165-v14.210 files, one non-phase Review Console file, and 163 future exact-file candidates.
+Phase record: docs/v14_210_exact_file_commit_readiness_review.md
+Fixture: tests/schema_examples/v14_210_exact_file_commit_readiness_review.example.json
+Validator created: scripts/validate_v14_210_exact_file_commit_readiness_review.js
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: exact_file_commit_readiness_review_only
+exact_file_commit_readiness_review_only: true
+future_exact_file_candidate_total: 163
+candidate_group_count: 7
+staged_file_count: 0
+auto_commit_allowed_now: false
+staging_allowed_now: false
+push_allowed_now: false
+git_add_dot_used: false
+commit_performed: false
+push_tag_release_deploy_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+env_or_secret_read_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_210_exact_file_commit_readiness_review.js; node scripts/validate_v14_210_exact_file_commit_readiness_review.js; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+Next safe action: human-reviewed exact-file staging authorization package, or continue read-only commit candidate inspection; stop before staging, commit, push, dependencies, A5, provider, runtime, image, DailyNote, or VCP memory.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_209_uncommitted_worktree_recovery_audit completed local validation.
+Reason: The current v14.165-v14.208 dirty worktree is large enough that exact-file recovery and future staging boundaries must be explicit before any commit decision.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead 19 and behind 0 at audit time.
+Worktree: dirty by design; audit records 23 tracked modified files and 133 untracked v14.165-v14.208 files.
+Phase record: docs/v14_209_uncommitted_worktree_recovery_audit.md
+Fixture: tests/schema_examples/v14_209_uncommitted_worktree_recovery_audit.example.json
+Validator created: scripts/validate_v14_209_uncommitted_worktree_recovery_audit.js
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: local_worktree_audit_only
+worktree_audit_only: true
+tracked_modified_file_count: 23
+untracked_v14_165_to_v14_208_file_count: 133
+untracked_phase_doc_count: 44
+untracked_phase_validator_count: 44
+untracked_schema_example_count: 45
+change_group_count: 4
+staged_file_count: 0
+git_add_dot_used: false
+commit_readiness_claimed: false
+push_readiness_claimed: false
+commit_performed: false
+push_tag_release_deploy_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+env_or_secret_read_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_209_uncommitted_worktree_recovery_audit.js; node scripts/validate_v14_209_uncommitted_worktree_recovery_audit.js; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+Next safe action: exact-file commit readiness review, or continue local validator consolidation; stop before staging, commit, push, dependencies, A5, provider, runtime, image, DailyNote, or VCP memory.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_208_review_console_browser_static_review_blocker_handoff completed local validation.
+Reason: Browser static review remains unavailable, so the gap is now an explicit blocker and static regressions cannot be claimed as browser review.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.208 blocker handoff doc, fixture, validator, MVP wiring, validation log, and .agent_board sync until commit decision.
+Phase record: docs/v14_208_review_console_browser_static_review_blocker_handoff.md
+Fixture: tests/schema_examples/v14_208_review_console_browser_static_review_blocker_handoff.example.json
+Validator created: scripts/validate_v14_208_review_console_browser_static_review_blocker_handoff.js
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: review_console_browser_blocker_handoff_only
+blocker_status: active
+browser_static_review_status: blocked_unavailable
+browser_static_review_passed: false
+browser_static_review_artifact_present: false
+browser_static_review_claim_allowed: false
+static_regression_substitute_present: true
+static_regression_substitute_is_browser_review: false
+static_regression_ref_count: 3
+covered_surface_count: 3
+node_repl_js_tool_exposed: false
+local_playwright_project_binary_present: false
+local_browser_command_discovered: false
+static_html_present: true
+dependency_install_allowed: false
+package_json_modified: false
+package_lock_modified: false
+fetch_performed: false
+file_write_performed_by_review_console: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_208_review_console_browser_static_review_blocker_handoff.js; node scripts/validate_v14_208_review_console_browser_static_review_blocker_handoff.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Next safe action: restore browser static review tooling, or continue non-browser local Review Console validation; stop before dependency changes or real runtime actions.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_207_review_console_runtime_gap_trace_matrix_static_regression completed local validation.
+Reason: Review Console runtime-gap evidence now needs a trace matrix that links the v14.204 contract, v14.205 UI seed, and v14.206 draft snapshot without runtime overclaim.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.207 trace matrix doc, fixture, validator, MVP wiring, validation log, and .agent_board sync until commit decision.
+Phase record: docs/v14_207_review_console_runtime_gap_trace_matrix_static_regression.md
+Fixture: tests/schema_examples/v14_207_review_console_runtime_gap_trace_matrix_static_regression.example.json
+Source contract: tests/schema_examples/v14_204_review_console_runtime_gap_dashboard_contract.example.json
+Source static panel: docs/v14_205_review_console_runtime_gap_static_ui_panel.md
+Source draft snapshot: tests/schema_examples/v14_206_review_console_runtime_gap_draft_output_snapshot_static_regression.example.json
+Validator created: scripts/validate_v14_207_review_console_runtime_gap_trace_matrix_static_regression.js
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: review_console_static_trace_matrix_only
+trace_status: contract_ui_draft_trace_locked
+surface_count: 3
+runtime_gap_row_count: 7
+local_capability_row_count: 3
+a5_boundary_row_count: 4
+dashboard_progress_basis: validator_outputs_and_static_fixtures_only
+runtime_claim_allowed: false
+all_rows_present_in_contract: true
+all_rows_present_in_static_ui_seed: true
+all_rows_present_in_draft_snapshot: true
+static_trace_matrix_only: true
+fetch_performed: false
+file_write_performed: false
+authorization_execution_performed: false
+package_execution_performed: false
+accepted_samples_write_performed: false
+manifest_read_performed: false
+durable_archive_copy_performed: false
+production_candidate_write_performed: false
+failure_samples_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_207_review_console_runtime_gap_trace_matrix_static_regression.js; node scripts/validate_v14_207_review_console_runtime_gap_trace_matrix_static_regression.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Next safe action: continue local Review Console static regression coverage, or rerun browser static review when the Browser tool is available; stop before any real runtime action.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_206_review_console_runtime_gap_draft_output_snapshot_static_regression completed local validation.
+Reason: The v14.205 Runtime Gap static panel now needs a golden draft-output snapshot to provide local regression coverage when browser static review is unavailable.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.206 snapshot doc, fixture, validator, MVP wiring, validation log, and .agent_board sync until commit decision.
+Phase record: docs/v14_206_review_console_runtime_gap_draft_output_snapshot_static_regression.md
+Fixture: tests/schema_examples/v14_206_review_console_runtime_gap_draft_output_snapshot_static_regression.example.json
+Source contract: tests/schema_examples/v14_204_review_console_runtime_gap_dashboard_contract.example.json
+Source static panel: docs/v14_205_review_console_runtime_gap_static_ui_panel.md
+Validator created: scripts/validate_v14_206_review_console_runtime_gap_draft_output_snapshot_static_regression.js
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: review_console_static_snapshot_only
+snapshot_status: golden_static_snapshot
+draft_output_key: review_console_runtime_gap_dashboard_state
+dashboard_progress_basis: validator_outputs_and_static_fixtures_only
+runtime_gap_row_count: 7
+local_capability_row_count: 3
+a5_boundary_row_count: 4
+runtime_claim_allowed: false
+runtime_gap_dashboard_static_ui_only: true
+fetch_performed: false
+file_write_performed: false
+authorization_execution_performed: false
+package_execution_performed: false
+accepted_samples_write_performed: false
+manifest_read_performed: false
+durable_archive_copy_performed: false
+production_candidate_write_performed: false
+failure_samples_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_206_review_console_runtime_gap_draft_output_snapshot_static_regression.js; node scripts/validate_v14_206_review_console_runtime_gap_draft_output_snapshot_static_regression.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Next safe action: continue local Review Console static regression coverage, or rerun browser static review when the Browser tool is available; stop before any real runtime action.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_205_review_console_runtime_gap_static_ui_panel completed local validation; browser static review unavailable.
+Reason: Review Console needs the v14.204 runtime-gap dashboard contract visible as a static UI panel and included in draft output.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.205 static UI panel changes, validator, MVP wiring, validation log, and .agent_board sync until commit decision.
+Phase record: docs/v14_205_review_console_runtime_gap_static_ui_panel.md
+Validator created: scripts/validate_v14_205_review_console_runtime_gap_static_ui_panel.js
+Static UI files updated: review_console/static_prototype/index.html; review_console/static_prototype/mock_data.js; review_console/static_prototype/app.js; review_console/static_prototype/styles.css
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: review_console_static_ui_only
+static_ui_panel_status: wired_static_only
+runtime_gap_row_count: 7
+local_capability_row_count: 3
+a5_boundary_row_count: 4
+runtime_claim_allowed: false
+runtime_gap_dashboard_static_ui_only: true
+fetch_performed: false
+file_write_performed: false
+authorization_execution_performed: false
+package_execution_performed: false
+accepted_samples_write_performed: false
+manifest_read_performed: false
+durable_archive_copy_performed: false
+production_candidate_write_performed: false
+failure_samples_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+production actions remain blocked by A5 active authorization package requirement
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check review_console/static_prototype/app.js; node --check review_console/static_prototype/mock_data.js; node --check scripts/validate_v14_205_review_console_runtime_gap_static_ui_panel.js; node scripts/validate_v14_205_review_console_runtime_gap_static_ui_panel.js; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+Browser static review: not run because the node_repl browser tool was unavailable and local Playwright was missing.
+Next safe action: continue local Review Console static validation, or rerun browser static review when the Browser tool is available; stop before any real runtime action.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_204_review_console_runtime_gap_dashboard_contract completed locally and target validation passed.
+Reason: Review Console needs a static dashboard contract that separates local validated control-layer capabilities from A5-only real VCP runtime actions.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.204 runtime-gap dashboard doc, fixture, validator, MVP wiring, validation log, and .agent_board sync until commit decision.
+Phase record: docs/v14_204_review_console_runtime_gap_dashboard_contract.md
+Fixture: tests/schema_examples/v14_204_review_console_runtime_gap_dashboard_contract.example.json
+Source dashboard evidence: tests/schema_examples/v14_168_three_sample_dashboard_evidence_alignment.example.json
+Source Review Console handoff: tests/schema_examples/v14_203_authorization_compiler_review_console_handoff_state.example.json
+Validator created: scripts/validate_v14_204_review_console_runtime_gap_dashboard_contract.js
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: static_runtime_gap_dashboard_contract_only
+dashboard_contract_status: static_runtime_gap_contract_ready
+dashboard_progress_basis: validator_outputs_and_static_fixtures_only
+runtime_gap_row_count: 7
+local_capability_row_count: 3
+a5_boundary_row_count: 4
+runtime_claim_allowed: false
+runtime_gap_dashboard_contract_only: true
+authorization_execution_performed: false
+package_execution_performed: false
+accepted_samples_write_performed: false
+manifest_read_performed: false
+durable_archive_copy_performed: false
+production_candidate_write_performed: false
+failure_samples_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+fetch_performed: false
+file_write_performed: false
+review_console_runtime_integration_performed: false
+ipc_preload_renderer_integration_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+production actions remain blocked by A5 active authorization package requirement
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_204_review_console_runtime_gap_dashboard_contract.js; node scripts/validate_v14_204_review_console_runtime_gap_dashboard_contract.js; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+Next safe action: continue local Review Console dashboard static UI work, or stop for Jenn A5 authorization before any real runtime action.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_203_authorization_compiler_review_console_handoff_state completed locally and target validation passed.
+Reason: The authorization package compiler blocker arbiter now needs a static Review Console handoff state so the UI layer can display blocked packages without executing them.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.203 handoff state doc, fixture, validator, MVP wiring, validation log, and .agent_board sync until commit decision.
+Phase record: docs/v14_203_authorization_compiler_review_console_handoff_state.md
+Fixture: tests/schema_examples/v14_203_authorization_compiler_review_console_handoff_state.example.json
+Source blocker arbiter: tests/schema_examples/v14_202_authorization_package_blocker_arbiter_contract.example.json
+Source coverage closeout: tests/schema_examples/v14_201_authorization_package_compiler_coverage_closeout.example.json
+Validator created: scripts/validate_v14_203_authorization_compiler_review_console_handoff_state.js
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: review_console_static_handoff_state_only
+handoff_state_status: static_ready_no_runtime
+package_card_count: 5
+runtime_integration_allowed: false
+package_execution_performed: false
+file_write_performed: false
+fetch_performed: false
+review_console_runtime_integration_performed: false
+ipc_preload_renderer_integration_performed: false
+authorization_execution_performed: false
+accepted_samples_write_performed: false
+manifest_read_performed: false
+durable_archive_copy_performed: false
+production_candidate_write_performed: false
+failure_samples_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+production actions remain blocked by A5 active authorization package requirement
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_203_authorization_compiler_review_console_handoff_state.js; node scripts/validate_v14_203_authorization_compiler_review_console_handoff_state.js; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+Next safe action: continue local Review Console authorization handoff or static runtime-gap dashboard work, or wait for Jenn approval before any real package execution.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_202_authorization_package_blocker_arbiter_contract completed locally and target validation passed.
+Reason: The authorization package compiler needs a reusable local blocker arbiter that keeps all five package types blocked until exact authorization and package-specific evidence exist.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.202 blocker arbiter doc, fixture, validator, MVP wiring, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_202_authorization_package_blocker_arbiter_contract.md
+Fixture: tests/schema_examples/v14_202_authorization_package_blocker_arbiter_contract.example.json
+Source coverage closeout: tests/schema_examples/v14_201_authorization_package_compiler_coverage_closeout.example.json
+Validator created: scripts/validate_v14_202_authorization_package_blocker_arbiter_contract.js
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: authorization_package_blocker_arbiter_contract_only
+arbiter_status: all_package_types_blocked_pending_exact_authorization
+package_type_count: 5
+all_execution_allowed_now: false
+blocker_decision_count: 5
+blocker_arbiter_contract_only: true
+authorization_execution_performed: false
+accepted_samples_write_performed: false
+manifest_read_performed: false
+durable_archive_copy_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_202_authorization_package_blocker_arbiter_contract.js; node scripts/validate_v14_202_authorization_package_blocker_arbiter_contract.js; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+Next safe action: continue local authorization compiler UX / Review Console handoff state work, or wait for Jenn approval before any package execution.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_201_authorization_package_compiler_coverage_closeout completed locally and target validation passed.
+Reason: The v14.196 package type matrix now needs a single local coverage closeout proving all five package types have blocked contract/preflight coverage and validators.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.201 authorization compiler coverage closeout doc, fixture, validator, MVP wiring, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_201_authorization_package_compiler_coverage_closeout.md
+Fixture: tests/schema_examples/v14_201_authorization_package_compiler_coverage_closeout.example.json
+Source type matrix: tests/schema_examples/v14_196_authorization_package_compiler_type_matrix.example.json
+Validator created: scripts/validate_v14_201_authorization_package_compiler_coverage_closeout.js
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: authorization_package_compiler_coverage_closeout_only
+coverage_status: complete_local_blocked_coverage
+package_type_count_expected: 5
+package_type_count_covered: 5
+validator_pass_count: 5
+covered_package_types: accepted_samples_metadata_registration; manifest_read; durable_archive; production_candidate; daily_note_vcp_memory
+coverage_closeout_only: true
+authorization_execution_performed: false
+accepted_samples_write_performed: false
+manifest_read_performed: false
+durable_archive_copy_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_201_authorization_package_compiler_coverage_closeout.js; node scripts/validate_v14_201_authorization_package_compiler_coverage_closeout.js; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+Next safe action: continue local blocker arbiter / authorization compiler UX work, or wait for Jenn approval before any package execution.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_200_daily_note_vcp_memory_authorization_compiler_output_preflight completed locally and target validation passed.
+Reason: The daily_note_vcp_memory package type needs a concrete compiler output preflight that remains blocked with no memory_delta draft, no sensitive scan, no exact memory target, and no write permission.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.200 DailyNote/VCP memory preflight doc, fixture, validator, MVP wiring, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_200_daily_note_vcp_memory_authorization_compiler_output_preflight.md
+Fixture: tests/schema_examples/v14_200_daily_note_vcp_memory_authorization_compiler_output_preflight.example.json
+Source type matrix: tests/schema_examples/v14_196_authorization_package_compiler_type_matrix.example.json
+Validator created: scripts/validate_v14_200_daily_note_vcp_memory_authorization_compiler_output_preflight.js
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: daily_note_vcp_memory_authorization_compiler_output_preflight_only
+package_type: daily_note_vcp_memory
+package_status: draft_blocked_missing_daily_note_vcp_memory_write_authorization
+daily_note_write_authorized: false
+vcp_memory_write_authorized: false
+memory_delta_draft_present: false
+sensitive_data_scan_present: false
+write_command_permission: false
+execution_allowed_now: false
+exact_allowed_memory_target_count: 0
+preflight_only: true
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+memory_delta_written_to_runtime: false
+secret_or_private_path_included: false
+image_binary_included: false
+production_candidate_write_performed: false
+durable_archive_copy_performed: false
+image_file_copy_performed: false
+runs_source_image_modified: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_200_daily_note_vcp_memory_authorization_compiler_output_preflight.js; node scripts/validate_v14_200_daily_note_vcp_memory_authorization_compiler_output_preflight.js; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+Next safe action: continue local authorization control layer work, or wait for Jenn approval before any DailyNote/VCP memory write.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_199_production_candidate_authorization_compiler_output_preflight completed locally and target validation passed.
+Reason: The production_candidate package type needs a concrete compiler output preflight that remains blocked with no eligibility preflight and no write permission.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.199 production candidate preflight doc, fixture, validator, MVP wiring, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_199_production_candidate_authorization_compiler_output_preflight.md
+Fixture: tests/schema_examples/v14_199_production_candidate_authorization_compiler_output_preflight.example.json
+Source type matrix: tests/schema_examples/v14_196_authorization_package_compiler_type_matrix.example.json
+Validator created: scripts/validate_v14_199_production_candidate_authorization_compiler_output_preflight.js
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: production_candidate_authorization_compiler_output_preflight_only
+package_type: production_candidate
+package_status: draft_blocked_missing_production_candidate_authorization
+production_candidate_authorized: false
+production_candidate_write_performed: false
+eligibility_preflight_present: false
+write_command_permission: false
+execution_allowed_now: false
+exact_allowed_write_path_count: 0
+preflight_only: true
+durable_archive_copy_performed: false
+image_file_copy_performed: false
+runs_source_image_modified: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_199_production_candidate_authorization_compiler_output_preflight.js; node scripts/validate_v14_199_production_candidate_authorization_compiler_output_preflight.js; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+Next safe action: continue local authorization control layer work, or wait for Jenn approval before any production_candidate write.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_198_durable_archive_authorization_compiler_output_preflight completed locally and target validation passed.
+Reason: The durable_archive package type needs a concrete compiler output preflight that remains blocked with no target archive path and no copy permission.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.198 durable archive preflight doc, fixture, validator, MVP wiring, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_198_durable_archive_authorization_compiler_output_preflight.md
+Fixture: tests/schema_examples/v14_198_durable_archive_authorization_compiler_output_preflight.example.json
+Source type matrix: tests/schema_examples/v14_196_authorization_package_compiler_type_matrix.example.json
+Validator created: scripts/validate_v14_198_durable_archive_authorization_compiler_output_preflight.js
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: durable_archive_authorization_compiler_output_preflight_only
+package_type: durable_archive
+package_status: draft_blocked_missing_archive_copy_authorization
+archive_copy_authorized: false
+archive_copy_performed: false
+target_archive_path_provided: false
+write_command_permission: false
+execution_allowed_now: false
+exact_allowed_write_path_count: 0
+hash_verification_required: true
+preflight_only: true
+durable_archive_copy_performed: false
+image_file_copy_performed: false
+runs_source_image_modified: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_198_durable_archive_authorization_compiler_output_preflight.js; node scripts/validate_v14_198_durable_archive_authorization_compiler_output_preflight.js; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+Next safe action: continue local authorization control layer work, or wait for Jenn approval before any archive copy.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_197_manifest_read_authorization_compiler_output_preflight completed locally and target validation passed.
+Reason: The manifest_read package type needs a concrete compiler output preflight that remains blocked with no real manifest path and no read permission.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.197 manifest read preflight doc, fixture, validator, MVP wiring, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_197_manifest_read_authorization_compiler_output_preflight.md
+Fixture: tests/schema_examples/v14_197_manifest_read_authorization_compiler_output_preflight.example.json
+Source type matrix: tests/schema_examples/v14_196_authorization_package_compiler_type_matrix.example.json
+Validator created: scripts/validate_v14_197_manifest_read_authorization_compiler_output_preflight.js
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: manifest_read_authorization_compiler_output_preflight_only
+package_type: manifest_read
+package_status: draft_blocked_missing_exact_manifest_authorization
+source_read_authorized: false
+source_read_performed: false
+real_manifest_path_provided: false
+read_command_permission: false
+execution_allowed_now: false
+exact_allowed_read_path_count: 0
+preflight_only: true
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+file_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_197_manifest_read_authorization_compiler_output_preflight.js; node scripts/validate_v14_197_manifest_read_authorization_compiler_output_preflight.js; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+Next safe action: continue local authorization control layer work, or wait for Jenn approval before any real manifest read or registry write.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_196_authorization_package_compiler_type_matrix completed locally and target validation passed.
+Reason: The authorization package compiler needs a reusable local type matrix before it can generate separate future package families for manifest read, durable archive, production_candidate, and DailyNote/VCP memory.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.196 type matrix doc, fixture, validator, MVP wiring, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_196_authorization_package_compiler_type_matrix.md
+Fixture: tests/schema_examples/v14_196_authorization_package_compiler_type_matrix.example.json
+Source compiler contract: tests/schema_examples/v14_195_authorization_package_compiler_contract_accepted_samples_registration.example.json
+Validator created: scripts/validate_v14_196_authorization_package_compiler_type_matrix.js
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: authorization_package_compiler_type_matrix_only
+compiler_matrix_status: local_contract_ready_execution_blocked
+execution_allowed_now: false
+package_type_count: 5
+package_types: accepted_samples_metadata_registration; manifest_read; durable_archive; production_candidate; daily_note_vcp_memory
+type_matrix_only: true
+authorization_execution_performed: false
+accepted_samples_write_performed: false
+manifest_read_performed: false
+durable_archive_copy_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_196_authorization_package_compiler_type_matrix.js; node scripts/validate_v14_196_authorization_package_compiler_type_matrix.js; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+Next safe action: continue local authorization control layer work, or wait for Jenn approval before any registry write.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_195_authorization_package_compiler_contract_accepted_samples_registration completed locally and target validation passed.
+Reason: The future accepted_samples metadata write needs a reusable compiler contract that turns readiness, dry-run patch, and authorization draft evidence into a blocked package without granting execution.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.195 compiler contract doc, fixture, validator, MVP wiring, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_195_authorization_package_compiler_contract_accepted_samples_registration.md
+Fixture: tests/schema_examples/v14_195_authorization_package_compiler_contract_accepted_samples_registration.example.json
+Source preflight: tests/schema_examples/v14_194_third_sample_accepted_samples_registration_execution_preflight.example.json
+Source dry-run patch: tests/schema_examples/v14_193_third_sample_accepted_samples_registration_dry_run_patch_preview.example.json
+Source authorization draft: tests/schema_examples/v14_190_third_sample_accepted_samples_registration_authorization_package_draft.example.json
+Validator created: scripts/validate_v14_195_authorization_package_compiler_contract_accepted_samples_registration.js
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: authorization_package_compiler_contract_only
+compiler_status: contract_ready_execution_blocked
+package_type: accepted_samples_metadata_registration
+compiled_package_id: AUTH-PENDING-LAMP-V14-166-ACCEPTED-SAMPLES-REGISTRATION-20260518-001
+compiled_package_status: blocked_not_granted
+target_sample_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+target_candidate_id: v14_166_lamp_v3_generated_candidate_001
+category: product_still_life
+human_approval_status: pending
+authorization_granted_by_this_record: false
+execution_allowed_now: false
+allowed_file_count_after_approval: 2
+compiler_only: true
+accepted_samples_write_performed: false
+category_index_write_performed: false
+image_file_copy_performed: false
+runs_source_image_modified: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_195_authorization_package_compiler_contract_accepted_samples_registration.js; node scripts/validate_v14_195_authorization_package_compiler_contract_accepted_samples_registration.js; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+Next safe action: wait for Jenn approval before any registry write, or continue local authorization control layer work that does not execute writes.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_194_third_sample_accepted_samples_registration_execution_preflight completed locally and target validation passed.
+Reason: Registration needs a single go/no-go preflight that combines readiness, authorization draft, and dry-run patch before any future Jenn-approved metadata write.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.194 execution preflight doc, fixture, validator, MVP wiring, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_194_third_sample_accepted_samples_registration_execution_preflight.md
+Fixture: tests/schema_examples/v14_194_third_sample_accepted_samples_registration_execution_preflight.example.json
+Source readiness: docs/v14_166_lamp_v3_generated_candidate_readiness.md
+Source authorization package: tests/schema_examples/v14_190_third_sample_accepted_samples_registration_authorization_package_draft.example.json
+Source dry-run patch: tests/schema_examples/v14_193_third_sample_accepted_samples_registration_dry_run_patch_preview.example.json
+Validator created: scripts/validate_v14_194_third_sample_accepted_samples_registration_execution_preflight.js
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: accepted_samples_registration_execution_preflight_only
+preflight_status: blocked
+blocker: missing_human_approval_and_exact_authorization
+target_sample_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+target_candidate_id: v14_166_lamp_v3_generated_candidate_001
+category: product_still_life
+human_approval_status: pending
+authorization_package_status: prepared_blocked_not_granted
+authorization_granted_by_this_record: false
+dry_run_patch_ready: true
+execution_allowed_now: false
+allowed_file_count_after_approval: 2
+preflight_only: true
+accepted_samples_write_performed: false
+category_index_write_performed: false
+image_file_copy_performed: false
+runs_source_image_modified: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_194_third_sample_accepted_samples_registration_execution_preflight.js; node scripts/validate_v14_194_third_sample_accepted_samples_registration_execution_preflight.js.
+Next safe action: run MVP, board, diff, and local validation; wait for Jenn approval before any registry write.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_193_third_sample_accepted_samples_registration_dry_run_patch_preview completed locally and target validation passed.
+Reason: The future third-sample accepted_samples registration needs an exact dry-run patch preview before any Jenn-approved metadata write.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.193 dry-run patch preview doc, fixture, validator, MVP wiring, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_193_third_sample_accepted_samples_registration_dry_run_patch_preview.md
+Fixture: tests/schema_examples/v14_193_third_sample_accepted_samples_registration_dry_run_patch_preview.example.json
+Source import record: tests/schema_examples/v14_166_lamp_v3_generated_candidate_import_record.json
+Source review record: docs/v14_166_lamp_v3_generated_candidate_readiness.md
+Source authorization package: tests/schema_examples/v14_190_third_sample_accepted_samples_registration_authorization_package_draft.example.json
+Validator created: scripts/validate_v14_193_third_sample_accepted_samples_registration_dry_run_patch_preview.js
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: accepted_samples_registration_dry_run_patch_preview_only
+dry_run_status: blocked_pending_human_approval
+target_sample_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+target_candidate_id: v14_166_lamp_v3_generated_candidate_001
+category: product_still_life
+human_approval_status: pending
+approved_by: null
+registration_executable_now: false
+proposed_category_index_ref: accepted_samples/categories/product_still_life.yaml
+sample_count_delta_after_execution: 1
+sample_count_after_execution: 2
+dry_run_only: true
+accepted_samples_write_performed: false
+category_index_write_performed: false
+image_file_copy_performed: false
+runs_source_image_modified: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_193_third_sample_accepted_samples_registration_dry_run_patch_preview.js; node scripts/validate_v14_193_third_sample_accepted_samples_registration_dry_run_patch_preview.js.
+Next safe action: run MVP, board, diff, and local validation; wait for Jenn approval before any registry write.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_192_review_console_accepted_samples_authorization_package_snapshot_static_regression completed locally and target validation passed.
+Reason: The v14.191 authorization package panel needs a golden snapshot so future UI/mock changes cannot turn blocked package state into granted, execution-ready, or written accepted_samples state.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.192 snapshot doc, fixture, validator, MVP wiring, README update, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_192_review_console_accepted_samples_authorization_package_snapshot_static_regression.md
+Snapshot: tests/schema_examples/v14_192_review_console_accepted_samples_authorization_package_snapshot_static_regression.example.json
+Source fixture: tests/schema_examples/v14_191_review_console_accepted_samples_authorization_package_panel.example.json
+Validator created: scripts/validate_v14_192_review_console_accepted_samples_authorization_package_snapshot_static_regression.js
+MVP validator updated: scripts/validate_mvp.ps1
+snapshot_status: golden_static_snapshot
+draft_output_key: third_sample_accepted_samples_authorization_package_state
+authorization_package_status: prepared_blocked_not_granted
+authorization_granted_by_this_record: false
+execution_ready: false
+blocker: human_approval_missing
+target_sample_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+target_candidate_id: v14_166_lamp_v3_generated_candidate_001
+human_approval_status: pending
+approved_by: null
+registration_ready: false
+exact_allowed_file_count: 2
+forbidden_operation_count: 10
+missing_requirement_count: 3
+static_snapshot_only: true
+accepted_samples_write_performed: false
+category_index_write_performed: false
+image_file_copy_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_192_review_console_accepted_samples_authorization_package_snapshot_static_regression.js; node scripts/validate_v14_192_review_console_accepted_samples_authorization_package_snapshot_static_regression.js.
+Next safe action: run MVP, board, diff, and local validation; continue local Review Console productization if clean.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_191_review_console_accepted_samples_authorization_package_panel_static_only completed locally and target validation passed.
+Reason: Review Console needs to display the v14.190 third-sample accepted_samples registration authorization package as a blocked, non-executing control panel.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.191 static UI, doc, fixture, validator, MVP wiring, README update, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_191_review_console_accepted_samples_authorization_package_panel.md
+Fixture: tests/schema_examples/v14_191_review_console_accepted_samples_authorization_package_panel.example.json
+Source authorization package fixture: tests/schema_examples/v14_190_third_sample_accepted_samples_registration_authorization_package_draft.example.json
+Validator created: scripts/validate_v14_191_review_console_accepted_samples_authorization_package_panel.js
+MVP validator updated: scripts/validate_mvp.ps1
+draft_output_key: third_sample_accepted_samples_authorization_package_state
+authorization_package_status: prepared_blocked_not_granted
+authorization_granted_by_this_record: false
+execution_ready: false
+blocker: human_approval_missing
+target_sample_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+target_candidate_id: v14_166_lamp_v3_generated_candidate_001
+human_approval_status: pending
+approved_by: null
+registration_ready: false
+exact_allowed_file_count: 2
+missing_requirement_count: 3
+static_panel_only: true
+accepted_samples_write_performed: false
+category_index_write_performed: false
+image_file_copy_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check review_console/static_prototype/app.js; node --check scripts/validate_v14_191_review_console_accepted_samples_authorization_package_panel.js; node scripts/validate_v14_191_review_console_accepted_samples_authorization_package_panel.js.
+Next safe action: run MVP, board, diff, and local validation; continue local Review Console productization if clean.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_190_third_sample_accepted_samples_registration_authorization_package_draft completed locally and validated.
+Reason: The blocked lamp candidate needs an exact future approval package so Jenn can authorize only the metadata registration later without ambiguity.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.190 authorization package draft doc, fixture, validator, MVP wiring, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_190_third_sample_accepted_samples_registration_authorization_package_draft.md
+Fixture: tests/schema_examples/v14_190_third_sample_accepted_samples_registration_authorization_package_draft.example.json
+Source readiness fixture: tests/schema_examples/v14_188_review_console_third_sample_acceptance_readiness.example.json
+Source blocker preflight fixture: tests/schema_examples/v14_167_lamp_v3_accepted_samples_registration_blocker_preflight.example.json
+Validator created: scripts/validate_v14_190_third_sample_accepted_samples_registration_authorization_package_draft.js
+MVP validator updated: scripts/validate_mvp.ps1
+execution_mode: authorization_package_draft_only
+authorization_package_status: prepared_blocked_not_granted
+authorization_granted_by_this_record: false
+execution_ready: false
+blocker: human_approval_missing
+target_sample_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+target_candidate_id: v14_166_lamp_v3_generated_candidate_001
+human_approval_status: pending
+approved_by: null
+registration_ready: false
+allowed_registry_file: accepted_samples/accepted_sample_registry.yaml
+allowed_category_file: accepted_samples/categories/product_still_life.yaml
+accepted_samples_write_performed: false
+category_index_write_performed: false
+image_file_copy_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_190_third_sample_accepted_samples_registration_authorization_package_draft.js; node scripts/validate_v14_190_third_sample_accepted_samples_registration_authorization_package_draft.js.
+Next safe action: wait for Jenn human approval before accepted_samples registration, or continue static local Review Console productization without registry write.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_189_review_console_third_sample_acceptance_readiness_snapshot_static_regression completed locally and validated.
+Reason: The v14.188 third-sample readiness panel needs a golden snapshot so future UI/mock changes cannot turn pending Jenn approval into registration-ready state.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.189 snapshot doc, fixture, validator, MVP wiring, README update, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_189_review_console_third_sample_acceptance_readiness_snapshot_static_regression.md
+Snapshot: tests/schema_examples/v14_189_review_console_third_sample_acceptance_readiness_snapshot_static_regression.example.json
+Source fixture: tests/schema_examples/v14_188_review_console_third_sample_acceptance_readiness.example.json
+Validator created: scripts/validate_v14_189_review_console_third_sample_acceptance_readiness_snapshot_static_regression.js
+MVP validator updated: scripts/validate_mvp.ps1
+snapshot_status: golden_static_snapshot
+draft_output_key: third_sample_acceptance_readiness_state
+target_sample_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+target_candidate_id: v14_166_lamp_v3_generated_candidate_001
+readiness_status: blocked_missing_human_approval
+required_approval_by: Jenn
+human_approval_status: pending
+approved_by: null
+registration_ready: false
+accepted_samples_registration_eligible: false
+accepted_samples_metadata_registered: false
+accepted_samples_write_allowed: false
+production_candidate_write_allowed: false
+failure_samples_write_allowed: false
+present_evidence_count: 9
+missing_requirement_count: 2
+next_allowed_local_action: wait_for_jenn_human_approval
+static_snapshot_only: true
+fetch_performed: false
+file_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_189_review_console_third_sample_acceptance_readiness_snapshot_static_regression.js; node scripts/validate_v14_189_review_console_third_sample_acceptance_readiness_snapshot_static_regression.js.
+Next safe action: v14.190 third-sample accepted_samples registration authorization package draft.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_188_review_console_third_sample_acceptance_readiness_static_panel completed locally and validated.
+Reason: Review Console needs a visible readiness panel for the blocked lamp candidate so the third accepted sample path is explicit without writing accepted_samples.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.188 static UI, doc, fixture, validator, MVP wiring, README update, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_188_review_console_third_sample_acceptance_readiness.md
+Fixture: tests/schema_examples/v14_188_review_console_third_sample_acceptance_readiness.example.json
+Source lifecycle fixture: tests/schema_examples/v14_169_review_console_artifact_lifecycle_state_reader.example.json
+Validator created: scripts/validate_v14_188_review_console_third_sample_acceptance_readiness.js
+MVP validator updated: scripts/validate_mvp.ps1
+draft_output_key: third_sample_acceptance_readiness_state
+target_sample_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+target_candidate_id: v14_166_lamp_v3_generated_candidate_001
+readiness_status: blocked_missing_human_approval
+required_approval_by: Jenn
+human_approval_status: pending
+approved_by: null
+registration_ready: false
+accepted_samples_registration_eligible: false
+accepted_samples_metadata_registered: false
+accepted_samples_write_allowed: false
+production_candidate_write_allowed: false
+failure_samples_write_allowed: false
+present_evidence_count: 9
+missing_requirement_count: 2
+next_allowed_local_action: wait_for_jenn_human_approval
+local_readiness_only: true
+fetch_performed: false
+file_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check review_console/static_prototype/app.js; node --check scripts/validate_v14_188_review_console_third_sample_acceptance_readiness.js; node scripts/validate_v14_188_review_console_third_sample_acceptance_readiness.js.
+Next safe action: v14.189 Review Console third-sample acceptance readiness snapshot static regression.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_187_review_console_three_sample_gap_snapshot_static_regression completed locally and validated.
+Reason: The v14.186 three-sample gap summary needs a golden snapshot so future UI/mock/dashboard changes cannot count the pending lamp candidate as accepted or close the hard acceptance gap.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.187 snapshot doc, fixture, validator, MVP wiring, README update, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_187_review_console_three_sample_gap_snapshot_static_regression.md
+Snapshot: tests/schema_examples/v14_187_review_console_three_sample_gap_snapshot_static_regression.example.json
+Source fixture: tests/schema_examples/v14_186_review_console_three_sample_gap_summary_panel.example.json
+Validator created: scripts/validate_v14_187_review_console_three_sample_gap_snapshot_static_regression.js
+MVP validator updated: scripts/validate_mvp.ps1
+snapshot_status: golden_static_snapshot
+draft_output_key: three_sample_gap_summary_state
+required_full_recoverable_sample_count: 3
+recoverable_accepted_sample_count: 2
+blocked_registration_candidate_count: 1
+remaining_full_recoverable_sample_gap: 1
+hard_acceptance_three_full_samples_met: false
+pending_candidate_counted_as_accepted: false
+gap_status: blocked_by_human_approval_missing
+blocker_candidate_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+blocker_reason: human_approval_missing
+blocker_accepted_samples_metadata_registered: false
+blocker_production_candidate_status: not_created
+static_snapshot_only: true
+fetch_performed: false
+file_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_187_review_console_three_sample_gap_snapshot_static_regression.js; node scripts/validate_v14_187_review_console_three_sample_gap_snapshot_static_regression.js.
+Next safe action: v14.188 Review Console third-sample acceptance readiness static panel.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_186_review_console_three_sample_gap_summary_panel_static_only completed locally and validated.
+Reason: Review Console needs a direct static summary of the remaining three-sample hard acceptance gap so the pending lamp candidate cannot be counted as accepted.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.186 static UI, doc, fixture, validator, MVP wiring, README update, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_186_review_console_three_sample_gap_summary_panel.md
+Fixture: tests/schema_examples/v14_186_review_console_three_sample_gap_summary_panel.example.json
+Source lifecycle fixture: tests/schema_examples/v14_169_review_console_artifact_lifecycle_state_reader.example.json
+Validator created: scripts/validate_v14_186_review_console_three_sample_gap_summary_panel.js
+MVP validator updated: scripts/validate_mvp.ps1
+draft_output_key: three_sample_gap_summary_state
+required_full_recoverable_sample_count: 3
+recoverable_accepted_sample_count: 2
+blocked_registration_candidate_count: 1
+remaining_full_recoverable_sample_gap: 1
+hard_acceptance_three_full_samples_met: false
+pending_candidate_counted_as_accepted: false
+gap_status: blocked_by_human_approval_missing
+blocker_candidate_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+blocker_reason: human_approval_missing
+local_summary_only: true
+fetch_performed: false
+file_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_186_review_console_three_sample_gap_summary_panel.js; node scripts/validate_v14_186_review_console_three_sample_gap_summary_panel.js.
+Next safe action: v14.187 Review Console three-sample gap snapshot static regression.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_185_review_console_artifact_evidence_review_notes_snapshot_static_regression completed locally and validated.
+Reason: The v14.184 Review Notes panel needs a golden snapshot so future UI/mock changes cannot alter the two approved notes, hide the blocked lamp note, or overclaim accepted_samples/production status.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.185 snapshot doc, fixture, validator, MVP wiring, README update, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_185_review_console_artifact_evidence_review_notes_snapshot_static_regression.md
+Snapshot: tests/schema_examples/v14_185_review_console_artifact_evidence_review_notes_snapshot_static_regression.example.json
+Source fixture: tests/schema_examples/v14_184_review_console_artifact_evidence_review_notes_panel.example.json
+Validator created: scripts/validate_v14_185_review_console_artifact_evidence_review_notes_snapshot_static_regression.js
+MVP validator updated: scripts/validate_mvp.ps1
+snapshot_status: golden_static_snapshot
+draft_output_key: artifact_evidence_review_notes_state
+note_count: 3
+approved_note_count: 2
+pending_note_count: 1
+blocked_note_count: 1
+lamp_blocker: human_approval_missing
+blocked_artifact_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+blocked_accepted_samples_metadata_registered: false
+blocked_production_candidate_status: not_created
+static_snapshot_only: true
+fetch_performed: false
+file_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_185_review_console_artifact_evidence_review_notes_snapshot_static_regression.js; node scripts/validate_v14_185_review_console_artifact_evidence_review_notes_snapshot_static_regression.js.
+Next safe action: v14.186 Review Console three-sample gap summary panel static-only.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_184_review_console_artifact_evidence_review_notes_panel_static_only completed locally and validated.
+Reason: Review Console needs a static review notes panel so the two Jenn-approved recoverable samples and the blocked lamp candidate are visible without reading review files or writing registries.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.184 static UI, doc, fixture, validator, MVP wiring, README update, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_184_review_console_artifact_evidence_review_notes_panel.md
+Fixture: tests/schema_examples/v14_184_review_console_artifact_evidence_review_notes_panel.example.json
+Source lifecycle fixture: tests/schema_examples/v14_169_review_console_artifact_lifecycle_state_reader.example.json
+Validator created: scripts/validate_v14_184_review_console_artifact_evidence_review_notes_panel.js
+MVP validator updated: scripts/validate_mvp.ps1
+draft_output_key: artifact_evidence_review_notes_state
+note_count: 3
+approved_note_count: 2
+pending_note_count: 1
+blocked_note_count: 1
+lamp_blocker: human_approval_missing
+static_notes_only: true
+fetch_performed: false
+file_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_184_review_console_artifact_evidence_review_notes_panel.js; node scripts/validate_v14_184_review_console_artifact_evidence_review_notes_panel.js.
+Next safe action: v14.185 Review Console artifact evidence review notes snapshot static regression.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_183_review_console_artifact_evidence_status_sort_filter_snapshot_static_regression completed locally and validated.
+Reason: The v14.182 filter/sort interaction needs a golden snapshot so future UI/mock changes cannot alter local filter semantics or hide the blocked lamp candidate.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.183 snapshot doc, fixture, validator, MVP wiring, README update, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_183_review_console_artifact_evidence_status_sort_filter_snapshot_static_regression.md
+Snapshot: tests/schema_examples/v14_183_review_console_artifact_evidence_status_sort_filter_snapshot_static_regression.example.json
+Source fixture: tests/schema_examples/v14_182_review_console_artifact_evidence_status_sort_filter_interaction.example.json
+Validator created: scripts/validate_v14_183_review_console_artifact_evidence_status_sort_filter_snapshot_static_regression.js
+MVP validator updated: scripts/validate_mvp.ps1
+snapshot_status: golden_static_snapshot
+draft_output_key: artifact_evidence_status_sort_filter_interaction_state
+sort_mode: blocked_candidates_first
+all_filter_blocked_candidate_first: true
+recoverable_filter_excludes_blocked_candidate: true
+blocked_filter_only_blocked_candidate: true
+all_visible_count: 3
+recoverable_visible_count: 2
+blocked_visible_count: 1
+blocked_candidate_artifact_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+local_filter_only: true
+static_snapshot_only: true
+fetch_performed: false
+file_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_183_review_console_artifact_evidence_status_sort_filter_snapshot_static_regression.js; node scripts/validate_v14_183_review_console_artifact_evidence_status_sort_filter_snapshot_static_regression.js.
+Next safe action: v14.184 Review Console artifact evidence review notes panel static-only.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_182_review_console_artifact_evidence_status_sort_filter_interaction completed locally and validated.
+Reason: Review Console needs a machine-checkable contract for how local filters interact with blocked-first artifact evidence sort without changing sample state.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.182 filter/sort interaction doc, fixture, validator, MVP wiring, static UI output, README update, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_182_review_console_artifact_evidence_status_sort_filter_interaction.md
+Fixture: tests/schema_examples/v14_182_review_console_artifact_evidence_status_sort_filter_interaction.example.json
+Source sort fixture: tests/schema_examples/v14_180_review_console_artifact_evidence_status_sort.example.json
+Validator created: scripts/validate_v14_182_review_console_artifact_evidence_status_sort_filter_interaction.js
+MVP validator updated: scripts/validate_mvp.ps1
+draft_output_key: artifact_evidence_status_sort_filter_interaction_state
+source_sort_key: artifact_evidence_status_sort_state
+sort_mode: blocked_candidates_first
+all_filter_blocked_candidate_first: true
+recoverable_filter_excludes_blocked_candidate: true
+blocked_filter_only_blocked_candidate: true
+local_filter_only: true
+static_interaction_only: true
+fetch_performed: false
+file_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_182_review_console_artifact_evidence_status_sort_filter_interaction.js; node scripts/validate_v14_182_review_console_artifact_evidence_status_sort_filter_interaction.js.
+Next safe action: v14.183 Review Console artifact evidence status sort/filter snapshot static regression.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_181_review_console_artifact_evidence_status_sort_snapshot_static_regression completed locally and validated.
+Reason: The v14.180 status sort needs a golden snapshot so future UI/mock changes cannot hide the blocked lamp candidate or overclaim the third accepted sample.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.181 snapshot doc, fixture, validator, MVP wiring, README update, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_181_review_console_artifact_evidence_status_sort_snapshot_static_regression.md
+Snapshot: tests/schema_examples/v14_181_review_console_artifact_evidence_status_sort_snapshot_static_regression.example.json
+Source fixture: tests/schema_examples/v14_180_review_console_artifact_evidence_status_sort.example.json
+Validator created: scripts/validate_v14_181_review_console_artifact_evidence_status_sort_snapshot_static_regression.js
+MVP validator updated: scripts/validate_mvp.ps1
+snapshot_status: golden_static_snapshot
+draft_output_key: artifact_evidence_status_sort_state
+sort_mode: blocked_candidates_first
+blocked_candidate_first: true
+blocked_candidate_artifact_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+blocked_candidate_blocker: human_approval_missing
+recoverable_count: 2
+blocked_count: 1
+hard_acceptance_three_full_samples_met: false
+static_snapshot_only: true
+fetch_performed: false
+file_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_181_review_console_artifact_evidence_status_sort_snapshot_static_regression.js; node scripts/validate_v14_181_review_console_artifact_evidence_status_sort_snapshot_static_regression.js.
+Next safe action: v14.182 Review Console artifact evidence status sort/filter interaction static-only.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_180_review_console_artifact_evidence_status_sort completed locally and validated.
+Reason: Review Console needs the blocked lamp candidate visible before recoverable samples so reviewers do not miss the remaining one-sample gap.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.180 status sort doc, fixture, validator, MVP wiring, static UI output, README update, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_180_review_console_artifact_evidence_status_sort.md
+Fixture: tests/schema_examples/v14_180_review_console_artifact_evidence_status_sort.example.json
+Source lifecycle fixture: tests/schema_examples/v14_169_review_console_artifact_lifecycle_state_reader.example.json
+Validator created: scripts/validate_v14_180_review_console_artifact_evidence_status_sort.js
+MVP validator updated: scripts/validate_mvp.ps1
+draft_output_key: artifact_evidence_status_sort_state
+sort_mode: blocked_candidates_first
+blocked_candidate_first: true
+blocked_candidate_artifact_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+blocked_candidate_blocker: human_approval_missing
+recoverable_count: 2
+blocked_count: 1
+hard_acceptance_three_full_samples_met: false
+static_sort_only: true
+fetch_performed: false
+file_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_180_review_console_artifact_evidence_status_sort.js; node scripts/validate_v14_180_review_console_artifact_evidence_status_sort.js.
+Next safe action: v14.181 Review Console artifact evidence status sort snapshot static regression.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_179_review_console_compare_filter_lock_snapshot_static_regression completed locally and validated.
+Reason: The v14.178 compare filter lock needs a golden snapshot so future UI/mock changes cannot silently unlock the blocked lamp candidate, change the blocker, or overclaim the third accepted sample.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.179 snapshot doc, fixture, validator, MVP wiring, README update, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_179_review_console_compare_filter_lock_snapshot_static_regression.md
+Snapshot: tests/schema_examples/v14_179_review_console_compare_filter_lock_snapshot_static_regression.example.json
+Source fixture: tests/schema_examples/v14_178_review_console_artifact_evidence_compare_filter_lock.example.json
+Validator created: scripts/validate_v14_179_review_console_compare_filter_lock_snapshot_static_regression.js
+MVP validator updated: scripts/validate_mvp.ps1
+snapshot_status: golden_static_snapshot
+draft_output_key: artifact_evidence_compare_state
+primary_artifact_id: accepted_womens_resort_relaxed_knit_codex_v2_001
+comparison_artifact_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+locked_to_blocked_candidate: true
+locked_blocker: human_approval_missing
+ignores_lifecycle_filter: true
+comparison_source: blocked_registration_candidate
+locked_comparison_artifact_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+comparison_blocked: true
+lamp_blocker: human_approval_missing
+hard_acceptance_three_full_samples_met: false
+static_snapshot_only: true
+fetch_performed: false
+file_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_179_review_console_compare_filter_lock_snapshot_static_regression.js; node scripts/validate_v14_179_review_console_compare_filter_lock_snapshot_static_regression.js.
+Next safe action: v14.180 Review Console artifact evidence status sort static-only.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_178_review_console_artifact_evidence_compare_filter_lock completed locally and validated.
+Reason: The compare panel must keep the blocked lamp candidate visible even when lifecycle filters show only recoverable samples, so the third accepted-sample gap is not hidden.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.178 filter-lock doc, fixture, validator, MVP wiring, README update, static UI output, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_178_review_console_artifact_evidence_compare_filter_lock.md
+Fixture: tests/schema_examples/v14_178_review_console_artifact_evidence_compare_filter_lock.example.json
+Source fixture: tests/schema_examples/v14_176_review_console_artifact_evidence_side_by_side_compare.example.json
+Source snapshot: tests/schema_examples/v14_177_review_console_compare_state_snapshot_static_regression.example.json
+Validator created: scripts/validate_v14_178_review_console_artifact_evidence_compare_filter_lock.js
+MVP validator updated: scripts/validate_mvp.ps1
+draft_output_key: artifact_evidence_compare_state
+primary_artifact_id: accepted_womens_resort_relaxed_knit_codex_v2_001
+comparison_artifact_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+locked_to_blocked_candidate: true
+locked_blocker: human_approval_missing
+ignores_lifecycle_filter: true
+comparison_source: blocked_registration_candidate
+locked_comparison_artifact_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+comparison_blocked: true
+lamp_blocker: human_approval_missing
+hard_acceptance_three_full_samples_met: false
+static_filter_lock_only: true
+fetch_performed: false
+file_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_178_review_console_artifact_evidence_compare_filter_lock.js; node scripts/validate_v14_178_review_console_artifact_evidence_compare_filter_lock.js.
+Next safe action: v14.179 Review Console compare filter lock snapshot static regression, still no runtime.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_177_review_console_compare_state_snapshot_static_regression completed locally and validated.
+Reason: The v14.176 compare state needs a golden snapshot so future UI/mock changes cannot silently change the recoverable-vs-blocked pair, field count, lamp blocker, or three-sample completion status.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.177 snapshot doc, fixture, validator, MVP wiring, README update, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_177_review_console_compare_state_snapshot_static_regression.md
+Snapshot: tests/schema_examples/v14_177_review_console_compare_state_snapshot_static_regression.example.json
+Source fixture: tests/schema_examples/v14_176_review_console_artifact_evidence_side_by_side_compare.example.json
+Validator created: scripts/validate_v14_177_review_console_compare_state_snapshot_static_regression.js
+MVP validator updated: scripts/validate_mvp.ps1
+snapshot_status: golden_static_snapshot
+draft_output_key: artifact_evidence_compare_state
+primary_artifact_id: accepted_womens_resort_relaxed_knit_codex_v2_001
+comparison_artifact_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+compare_pair_status: recoverable_vs_blocked_registration
+compared_field_count: 10
+primary_recoverable: true
+comparison_blocked: true
+lamp_blocker: human_approval_missing
+hard_acceptance_three_full_samples_met: false
+static_snapshot_only: true
+fetch_performed: false
+file_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_177_review_console_compare_state_snapshot_static_regression.js; node scripts/validate_v14_177_review_console_compare_state_snapshot_static_regression.js.
+Next safe action: v14.178 Review Console artifact evidence compare filter lock, static-only and no runtime.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_176_review_console_artifact_evidence_side_by_side_compare completed locally and validated.
+Reason: Review Console needs a static side-by-side comparison between a recoverable accepted sample and the blocked lamp candidate so reviewers can see artifact/hash/status/blocker differences without writing or executing anything.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.176 compare doc, fixture, validator, static UI changes, MVP wiring, README update, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_176_review_console_artifact_evidence_side_by_side_compare.md
+Fixture: tests/schema_examples/v14_176_review_console_artifact_evidence_side_by_side_compare.example.json
+Source lifecycle fixture: tests/schema_examples/v14_169_review_console_artifact_lifecycle_state_reader.example.json
+Source detail snapshot: tests/schema_examples/v14_175_review_console_artifact_detail_drawer_snapshot_static_regression.example.json
+Validator created: scripts/validate_v14_176_review_console_artifact_evidence_side_by_side_compare.js
+MVP validator updated: scripts/validate_mvp.ps1
+draft_output_key: artifact_evidence_compare_state
+primary_artifact_id: accepted_womens_resort_relaxed_knit_codex_v2_001
+comparison_artifact_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+compared_field_count: 10
+primary_recoverable: true
+comparison_blocked: true
+lamp_blocker: human_approval_missing
+hard_acceptance_three_full_samples_met: false
+static_compare_only: true
+fetch_performed: false
+file_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_176_review_console_artifact_evidence_side_by_side_compare.js; node scripts/validate_v14_176_review_console_artifact_evidence_side_by_side_compare.js.
+Next safe action: v14.177 Review Console compare-state snapshot static regression.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_175_review_console_artifact_detail_drawer_snapshot_static_regression completed locally and validated.
+Reason: The v14.174 artifact detail drawer needs a golden snapshot so future UI or fixture changes cannot silently change selected artifact details, hash, field count, selectable count, or the lamp blocker.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.175 snapshot doc, fixture, validator, MVP wiring, README update, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_175_review_console_artifact_detail_drawer_snapshot_static_regression.md
+Snapshot: tests/schema_examples/v14_175_review_console_artifact_detail_drawer_snapshot_static_regression.example.json
+Source fixture: tests/schema_examples/v14_174_review_console_local_artifact_detail_drawer.example.json
+Source lifecycle fixture: tests/schema_examples/v14_169_review_console_artifact_lifecycle_state_reader.example.json
+Validator created: scripts/validate_v14_175_review_console_artifact_detail_drawer_snapshot_static_regression.js
+MVP validator updated: scripts/validate_mvp.ps1
+snapshot_status: golden_static_snapshot
+draft_output_key: artifact_detail_drawer_state
+selected_artifact_id: accepted_womens_resort_relaxed_knit_codex_v2_001
+detail_field_count: 10
+expected_selectable_count: 3
+lamp_blocker: human_approval_missing
+hard_acceptance_three_full_samples_met: false
+static_snapshot_only: true
+fetch_performed: false
+file_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_175_review_console_artifact_detail_drawer_snapshot_static_regression.js; node scripts/validate_v14_175_review_console_artifact_detail_drawer_snapshot_static_regression.js.
+Next safe action: v14.176 Review Console artifact evidence side-by-side compare view, static-only and no runtime.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_174_review_console_local_artifact_detail_drawer completed locally and validated.
+Reason: Review Console needs a local detail drawer to inspect artifact/hash/prompt/import/review/category fields for already-loaded lifecycle records without reading files or crossing runtime/write boundaries.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.174 drawer doc, fixture, validator, static UI changes, MVP wiring, README update, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_174_review_console_local_artifact_detail_drawer.md
+Fixture: tests/schema_examples/v14_174_review_console_local_artifact_detail_drawer.example.json
+Source fixture: tests/schema_examples/v14_169_review_console_artifact_lifecycle_state_reader.example.json
+Validator created: scripts/validate_v14_174_review_console_local_artifact_detail_drawer.js
+MVP validator updated: scripts/validate_mvp.ps1
+selected_artifact_id: accepted_womens_resort_relaxed_knit_codex_v2_001
+expected_selectable_count: 3
+static_detail_only: true
+fetch_performed: false
+file_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_174_review_console_local_artifact_detail_drawer.js; node scripts/validate_v14_174_review_console_local_artifact_detail_drawer.js.
+Next safe action: v14.175 Review Console local artifact detail drawer snapshot static regression.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_173_review_console_lifecycle_completion_snapshot_static_regression completed locally and validated.
+Reason: Prompt-to-artifact completion state needed a golden snapshot so future changes cannot remove the lamp blocker, alter completion counts, or overclaim the three-sample hard target.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.173 snapshot doc, fixture, validator, MVP wiring, README update, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_173_review_console_prompt_completion_snapshot_static_regression.md
+Snapshot: tests/schema_examples/v14_173_review_console_prompt_completion_snapshot_static_regression.example.json
+Source fixture: tests/schema_examples/v14_172_review_console_prompt_to_artifact_completion_static_panel.example.json
+Validator created: scripts/validate_v14_173_review_console_prompt_completion_snapshot_static_regression.js
+MVP validator updated: scripts/validate_mvp.ps1
+snapshot_status: golden_static_snapshot
+draft_output_key: artifact_prompt_completion_state
+record_count: 3
+review_complete_count: 2
+blocked_count: 1
+average_completion_score: 84
+hard_acceptance_three_full_samples_met: false
+lamp_blocker: human_approval_missing
+static_snapshot_only: true
+fetch_performed: false
+file_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_173_review_console_prompt_completion_snapshot_static_regression.js; node scripts/validate_v14_173_review_console_prompt_completion_snapshot_static_regression.js.
+Next safe action: v14.174 Review Console local artifact detail drawer, static-only and no runtime.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_172_review_console_lifecycle_state_prompt_to_artifact_completion_static_panel completed locally and validated.
+Reason: Review Console needs static prompt-to-artifact completion evidence for each lifecycle record without treating pending lamp review as accepted or runtime-integrated.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.172 completion panel doc, fixture, validator, static UI/mock/reader changes, MVP wiring, README update, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_172_review_console_prompt_to_artifact_completion_static_panel.md
+Fixture: tests/schema_examples/v14_172_review_console_prompt_to_artifact_completion_static_panel.example.json
+Validator created: scripts/validate_v14_172_review_console_prompt_to_artifact_completion_static_panel.js
+MVP validator updated: scripts/validate_mvp.ps1
+record_count: 3
+review_complete_count: 2
+blocked_count: 1
+average_completion_score: 84
+hard_acceptance_three_full_samples_met: false
+lamp_blocker: human_approval_missing
+static_panel_only: true
+fetch_performed: false
+file_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_172_review_console_prompt_to_artifact_completion_static_panel.js; node scripts/validate_v14_172_review_console_prompt_to_artifact_completion_static_panel.js.
+Next safe action: v14.173 Review Console lifecycle completion snapshot static regression, still no runtime.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_171_review_console_lifecycle_state_local_filter_controls completed locally and validated.
+Reason: Review Console lifecycle records need local filter controls for all/recoverable/blocked states without changing sample status or crossing runtime/write boundaries.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.171 filter doc, fixture, validator, static UI changes, MVP wiring, README update, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_171_review_console_lifecycle_state_local_filter_controls.md
+Fixture: tests/schema_examples/v14_171_review_console_lifecycle_state_local_filter_controls.example.json
+Source snapshot: tests/schema_examples/v14_170_review_console_artifact_lifecycle_state_reader_draft_output_snapshot.example.json
+Validator created: scripts/validate_v14_171_review_console_lifecycle_state_local_filter_controls.js
+MVP validator updated: scripts/validate_mvp.ps1
+allowed_filters: all,recoverable,blocked
+visible_count_all: 3
+visible_count_recoverable: 2
+visible_count_blocked: 1
+filter_is_local_ui_only: true
+fetch_performed: false
+file_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_171_review_console_lifecycle_state_local_filter_controls.js; node scripts/validate_v14_171_review_console_lifecycle_state_local_filter_controls.js.
+Next safe action: v14.172 Review Console lifecycle prompt-to-artifact completion static panel, still no runtime.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_170_review_console_artifact_lifecycle_state_reader_draft_output_snapshot completed locally and validated.
+Reason: Review Console lifecycle reader output needed a static golden snapshot so UI/mock changes cannot silently count the pending lamp candidate as accepted.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.170 snapshot doc, fixture, validator, MVP wiring, README update, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_170_review_console_artifact_lifecycle_state_reader_draft_output_snapshot.md
+Snapshot: tests/schema_examples/v14_170_review_console_artifact_lifecycle_state_reader_draft_output_snapshot.example.json
+Source fixture: tests/schema_examples/v14_169_review_console_artifact_lifecycle_state_reader.example.json
+Validator created: scripts/validate_v14_170_review_console_artifact_lifecycle_state_reader_draft_output_snapshot.js
+MVP validator updated: scripts/validate_mvp.ps1
+snapshot_status: golden_static_snapshot
+draft_output_key: artifact_lifecycle_state_reader
+recoverable_accepted_sample_count: 2
+blocked_registration_candidate_count: 1
+hard_acceptance_three_full_samples_met: false
+remaining_full_recoverable_sample_gap: 1
+pending_candidate_counted_as_accepted: false
+static_snapshot_only: true
+fetch_performed: false
+file_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_170_review_console_artifact_lifecycle_state_reader_draft_output_snapshot.js; node scripts/validate_v14_170_review_console_artifact_lifecycle_state_reader_draft_output_snapshot.js.
+Next safe action: v14.171 Review Console local lifecycle filter controls, static-only and no runtime.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_169_review_console_artifact_lifecycle_state_reader completed locally and validated.
+Reason: Month 1 third accepted sample remains blocked by Jenn human review, so safe local work advanced Month 2 Review Console productization with a static artifact lifecycle state reader.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.169 Review Console reader module, UI/mock/doc/fixture/validator, MVP wiring, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_169_review_console_artifact_lifecycle_state_reader.md
+Fixture: tests/schema_examples/v14_169_review_console_artifact_lifecycle_state_reader.example.json
+Reader module: review_console/static_prototype/artifact_lifecycle_state_reader.js
+Validator created: scripts/validate_v14_169_review_console_artifact_lifecycle_state_reader.js
+MVP validator updated: scripts/validate_mvp.ps1
+parse_status: parsed
+recoverable_accepted_sample_count: 2
+blocked_registration_candidate_count: 1
+hard_acceptance_three_full_samples_met: false
+remaining_full_recoverable_sample_gap: 1
+pending_candidate_counted_as_accepted: false
+static_reader_only: true
+fetch_performed: false
+file_write_performed: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_169_review_console_artifact_lifecycle_state_reader.js; node scripts/validate_v14_169_review_console_artifact_lifecycle_state_reader.js.
+Next safe action: v14.170 static Review Console lifecycle reader snapshot / fixture-read validation, still no runtime and no accepted_samples write.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_168_three_sample_dashboard_evidence_alignment completed locally and validated.
+Reason: The project needs dashboard evidence to show two full accepted samples plus one blocked third candidate without overclaiming the three-sample hard target.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.168 dashboard evidence doc, fixture, validator, MVP wiring, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_168_three_sample_dashboard_evidence_alignment.md
+Fixture: tests/schema_examples/v14_168_three_sample_dashboard_evidence_alignment.example.json
+Validator created: scripts/validate_v14_168_three_sample_dashboard_evidence_alignment.js
+MVP validator updated: scripts/validate_mvp.ps1
+dashboard_progress_basis: validator_outputs_real_artifact_evidence
+full_recoverable_accepted_sample_count: 2
+blocked_third_candidate_count: 1
+hard_acceptance_three_full_samples_met: false
+remaining_full_recoverable_sample_gap: 1
+dashboard_must_not_count_pending_candidate_as_accepted: true
+dashboard_uses_project_master_plan_progress: false
+dashboard_uses_document_token_progress: false
+dashboard_promotes_product_status: false
+accepted_samples_write_performed: false
+category_index_write_performed: false
+image_file_copy_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_168_three_sample_dashboard_evidence_alignment.js; node scripts/validate_v14_168_three_sample_dashboard_evidence_alignment.js.
+Next safe action: run broader local validation, then stop for Jenn human review before any accepted_samples metadata write.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_167_lamp_v3_accepted_samples_registration_blocker_preflight completed locally and validated.
+Reason: The v14.166 lamp v3 candidate has real artifact evidence but lacks Jenn approval, so accepted_samples registration must be blocked.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.167 blocker preflight doc, fixture, validator, MVP wiring, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_167_lamp_v3_accepted_samples_registration_blocker_preflight.md
+Fixture: tests/schema_examples/v14_167_lamp_v3_accepted_samples_registration_blocker_preflight.example.json
+Source import record: tests/schema_examples/v14_166_lamp_v3_generated_candidate_import_record.json
+Source review record: docs/v14_166_lamp_v3_generated_candidate_readiness.md
+Validator created: scripts/validate_v14_167_lamp_v3_accepted_samples_registration_blocker_preflight.js
+MVP validator updated: scripts/validate_mvp.ps1
+proposed_sample_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+artifact_ref: runs/real_generation/v14_166_codex_session_premium_portable_led_camping_lantern_v3_generation_trial/codex_session_v14_166_premium_portable_led_camping_lantern_v3_candidate_001.png
+artifact_sha256: eaa52095be5af66854f80ba3f6a0b94c93bc1105e6e7ecf984b8dfb3dfff275c
+artifact_dimensions: 1254x1254
+artifact_mime: image/png
+review_status: pending_human_review
+human_approval_status: pending
+accepted_samples_registration_eligible: false
+registration_blocker: human_approval_missing
+accepted_samples_write_performed: false
+category_index_write_performed: false
+image_file_copy_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_167_lamp_v3_accepted_samples_registration_blocker_preflight.js; node scripts/validate_v14_167_lamp_v3_accepted_samples_registration_blocker_preflight.js.
+Next safe action: run broader local validation, then stop for Jenn human review before any accepted_samples metadata write.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_166_lamp_v3_generated_candidate_readiness completed locally and validated.
+Reason: The newly generated lamp v3 Codex-session artifact needs local import/review readiness evidence before Jenn decides whether it can become the third recoverable accepted sample.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.166 readiness doc, import record, fixture, validator, MVP wiring, and .agent_board sync until validation/commit decision.
+Phase record: docs/v14_166_lamp_v3_generated_candidate_readiness.md
+Fixture: tests/schema_examples/v14_166_lamp_v3_generated_candidate_readiness.example.json
+Import record: tests/schema_examples/v14_166_lamp_v3_generated_candidate_import_record.json
+Validator created: scripts/validate_v14_166_lamp_v3_generated_candidate_readiness.js
+MVP validator updated: scripts/validate_mvp.ps1
+artifact_ref: runs/real_generation/v14_166_codex_session_premium_portable_led_camping_lantern_v3_generation_trial/codex_session_v14_166_premium_portable_led_camping_lantern_v3_candidate_001.png
+artifact_sha256: eaa52095be5af66854f80ba3f6a0b94c93bc1105e6e7ecf984b8dfb3dfff275c
+artifact_dimensions: 1254x1254
+artifact_mime: image/png
+review_status: pending_human_review
+human_approval_status: pending
+accepted_candidate: false
+commercial_delivery_ready: false
+third_full_recoverable_sample_candidate_created: true
+third_full_recoverable_sample_still_requires_human_approval: true
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed_by_project: false
+plugin_call_performed_by_project: false
+api_call_performed_by_project: false
+mcp_runtime_performed_by_project: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+durable_archive_copy_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_166_lamp_v3_generated_candidate_readiness.js; node scripts/validate_v14_166_lamp_v3_generated_candidate_readiness.js.
+Next safe action: run broader local validation, then stop for Jenn human review before any accepted_samples metadata write.
+```
+
+## Previous Handoff Summary
+
+```text
+Status: v14_165_bag_accepted_samples_metadata_registration completed locally and validated.
+Reason: The v14.161 woven crossbody bag candidate passed v14.164 registration preflight and is being registered as accepted_samples metadata only.
+Current repository: project_root
+Branch: master tracking origin/master; local commits are ahead. Verify with `git status --short --branch` before any remote decision.
+Worktree: dirty with v14.165 registry/category metadata, doc, fixture, validator, MVP wiring, accepted_samples validator update, and .agent_board sync until commit decision.
+Phase record: docs/v14_165_bag_accepted_samples_metadata_registration.md
+Fixture: tests/schema_examples/v14_165_bag_accepted_samples_metadata_registration.example.json
+Negative fixture: tests/schema_examples/v14_165_bag_accepted_samples_metadata_registration_negative_missing_registry_sample.example.json
+Registry: accepted_samples/accepted_sample_registry.yaml
+Category index: accepted_samples/categories/fashion_lifestyle_still_life.yaml
+Validator created: scripts/validate_v14_165_bag_accepted_samples_metadata_registration.js
+Accepted registry validator updated: scripts/validate_v7_32_accepted_sample_registry_update.js
+MVP validator updated: scripts/validate_mvp.ps1
+sample_id: accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001
+artifact_ref: runs/real_generation/v14_161_codex_session_two_more_recoverable_samples_generation_trial/codex_session_v14_161_fashion_lifestyle_woven_crossbody_bag_candidate_001.png
+artifact_sha256: 3422671f95e9b218829966ae46f4b284ae619875e080c473a295cf9e65432ba3
+artifact_dimensions: 1254x1254
+artifact_mime: image/png
+human_approval_status: approved
+approved_by: Jenn
+registry_metadata_write_performed: true
+category_index_write_performed: true
+image_file_copy_performed: false
+runs_source_image_modified: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+accepted_sample_full_recoverability_count_after_this_phase: 2
+third_full_recoverable_sample_still_required: true
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+Validation run: node --check scripts/validate_v14_165_bag_accepted_samples_metadata_registration.js; node scripts/validate_v14_165_bag_accepted_samples_metadata_registration.js; node scripts/validate_v7_32_accepted_sample_registry_update.js.
+Next safe action: run broader validation, exact-stage v14.165 files, create a guarded local commit, then obtain or generate one more human-approved recoverable sample for the third full sample.
+```
+
+## Previous Handoff Summary
+
+```text
 Status: v14_164_bag_accepted_samples_metadata_registration_preflight completed locally and validated.
 Reason: The v14.161 woven crossbody bag candidate has Jenn approval and needs a local preflight proving accepted_samples metadata registration eligibility without writing registry/category metadata.
 Current repository: project_root

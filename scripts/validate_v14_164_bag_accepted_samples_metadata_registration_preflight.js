@@ -12,6 +12,7 @@ const files = {
   fixture: "tests/schema_examples/v14_164_bag_accepted_samples_metadata_registration_preflight.example.json",
   importRecord: "tests/schema_examples/v14_161_fashion_lifestyle_woven_crossbody_bag_import_record.json",
   sourceReviewRecord: "docs/v14_161_codex_session_generated_candidate_readiness.md",
+  consumedByRegistrationRecord: "docs/v14_165_bag_accepted_samples_metadata_registration.md",
   registry: "accepted_samples/accepted_sample_registry.yaml",
   categoryIndex: "accepted_samples/categories/fashion_lifestyle_still_life.yaml",
   currentValidator: "scripts/validate_v14_164_bag_accepted_samples_metadata_registration_preflight.js",
@@ -66,8 +67,11 @@ function evaluatePreflight(input, options = {}) {
   const categoryText = options.categoryText || "";
   const reviewExists = options.reviewExists !== false;
   const artifactExists = options.artifactExists !== false;
+  const registrationConsumed = options.registrationConsumed === true;
   const registryDuplicateAbsent = !registryText.includes(expected.proposedSampleId);
   const categoryDuplicateAbsent = !categoryText.includes(expected.proposedSampleId);
+  const registryStateOk = registryDuplicateAbsent || registrationConsumed;
+  const categoryStateOk = categoryDuplicateAbsent || registrationConsumed;
   const categoryTargetPresent = categoryText.includes("category: fashion_lifestyle_still_life");
 
   const sourceOk =
@@ -108,8 +112,8 @@ function evaluatePreflight(input, options = {}) {
     eligibility.review_record_present === reviewExists &&
     eligibility.human_approval_present === true &&
     eligibility.category_index_target_present === categoryTargetPresent &&
-    eligibility.registry_duplicate_absent === registryDuplicateAbsent &&
-    eligibility.category_duplicate_absent === categoryDuplicateAbsent &&
+    (eligibility.registry_duplicate_absent === registryDuplicateAbsent || registrationConsumed) &&
+    (eligibility.category_duplicate_absent === categoryDuplicateAbsent || registrationConsumed) &&
     eligibility.accepted_samples_registration_eligible === true;
 
   const noWrites =
@@ -143,8 +147,8 @@ function evaluatePreflight(input, options = {}) {
       noWrites &&
       noExternal &&
       noRuntimeClaim &&
-      registryDuplicateAbsent &&
-      categoryDuplicateAbsent &&
+      registryStateOk &&
+      categoryStateOk &&
       categoryTargetPresent &&
       artifactExists &&
       reviewExists,
@@ -156,6 +160,9 @@ function evaluatePreflight(input, options = {}) {
     noRuntimeClaim,
     registryDuplicateAbsent,
     categoryDuplicateAbsent,
+    registrationConsumed,
+    registryStateOk,
+    categoryStateOk,
     categoryTargetPresent,
     artifactExists,
     reviewExists,
@@ -172,9 +179,17 @@ const importRecord = core.parseJson(files.importRecord).codex_session_image_impo
 const sourceReviewRecord = core.read(files.sourceReviewRecord);
 const registryText = core.read(files.registry);
 const categoryText = core.read(files.categoryIndex);
-const currentSurfaces = [
+const registrationConsumed =
+  core.exists(files.consumedByRegistrationRecord) &&
+  registryText.includes(expected.proposedSampleId) &&
+  categoryText.includes(expected.proposedSampleId);
+const phaseSurfaces = [
   phaseRecord,
   JSON.stringify(fixture, null, 2),
+  core.read(files.importRecord),
+].join("\n");
+const currentSurfaces = [
+  phaseSurfaces,
   core.read(files.runState),
   core.read(files.taskQueue),
   core.read(files.checkpoint),
@@ -221,11 +236,12 @@ addResult("source_review_records_approval_statement", sourceReviewRecord.include
 addResult("source_review_records_accepted_candidate_true", sourceReviewRecord.includes("candidate_2_accepted_candidate: true"));
 addResult("registry_target_exists", core.exists(files.registry));
 addResult("category_index_target_exists", core.exists(files.categoryIndex));
-addResult("registry_duplicate_absent_now", !registryText.includes(expected.proposedSampleId));
-addResult("category_duplicate_absent_now", !categoryText.includes(expected.proposedSampleId));
+addResult("preflight_consumed_by_v14_165_registration", registrationConsumed);
+addResult("registry_duplicate_absent_now_or_consumed", !registryText.includes(expected.proposedSampleId) || registrationConsumed);
+addResult("category_duplicate_absent_now_or_consumed", !categoryText.includes(expected.proposedSampleId) || registrationConsumed);
 addResult("category_index_is_fashion_lifestyle_still_life", categoryText.includes("category: fashion_lifestyle_still_life"));
 
-const preflightEval = evaluatePreflight(fixture, { registryText, categoryText });
+const preflightEval = evaluatePreflight(fixture, { registryText, categoryText, registrationConsumed });
 addResult("preflight_evaluation_passes", preflightEval.passed, JSON.stringify(preflightEval));
 
 const missingArtifactEval = evaluatePreflight(fixture, { registryText, categoryText, artifactExists: false });
@@ -308,7 +324,7 @@ for (const token of [
 }
 
 forbidPattern("current_surfaces", currentSurfaces, /accepted_samples_write_performed:\s+true/i);
-forbidPattern("current_surfaces", currentSurfaces, /category_index_write_performed:\s+true/i);
+forbidPattern("phase_surfaces", phaseSurfaces, /category_index_write_performed:\s+true/i);
 forbidPattern("current_surfaces", currentSurfaces, /failure_samples_write_performed:\s+true/i);
 forbidPattern("current_surfaces", currentSurfaces, /production_candidate_write_performed:\s+true/i);
 forbidPattern("current_surfaces", currentSurfaces, /DailyNote_write_performed:\s+true/i);

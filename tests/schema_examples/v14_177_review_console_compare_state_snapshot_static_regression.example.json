@@ -1,0 +1,58 @@
+{
+  "review_console_compare_state_snapshot_static_regression": {
+    "version": "v1",
+    "phase": "v14_177_review_console_compare_state_snapshot_static_regression",
+    "source_fixture_ref": "tests/schema_examples/v14_176_review_console_artifact_evidence_side_by_side_compare.example.json",
+    "draft_output_key": "artifact_evidence_compare_state",
+    "snapshot_status": "golden_static_snapshot",
+    "snapshot": {
+      "primary_artifact_id": "accepted_womens_resort_relaxed_knit_codex_v2_001",
+      "comparison_artifact_id": "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001",
+      "compare_pair_status": "recoverable_vs_blocked_registration",
+      "compared_field_count": 10,
+      "primary_recoverable": true,
+      "comparison_blocked": true,
+      "lamp_blocker": "human_approval_missing",
+      "hard_acceptance_three_full_samples_met": false,
+      "compare_fields": [
+        "lifecycle_state",
+        "human_approval_status",
+        "recoverable",
+        "artifact_ref",
+        "sha256",
+        "dimensions",
+        "prompt_package_ref",
+        "review_record_ref",
+        "category_index_ref",
+        "registration_blocker"
+      ]
+    },
+    "guard": {
+      "static_snapshot_only": true,
+      "fetch_performed": false,
+      "file_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_expected": {
+      "comparison_id_mismatch_fails": true,
+      "compare_field_count_mismatch_fails": true,
+      "three_sample_overclaim_fails": true,
+      "accepted_samples_write_flag_fails": true,
+      "runtime_claim_fails": true
+    }
+  }
+}

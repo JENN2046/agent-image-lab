@@ -23,14 +23,18 @@ const files = {
   validationLog: ".agent_board/VALIDATION_LOG.md",
 };
 
-const completeSampleId = "accepted_womens_resort_relaxed_knit_codex_v2_001";
+const completeSampleIds = [
+  "accepted_womens_resort_relaxed_knit_codex_v2_001",
+  "accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001",
+  "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001",
+];
 const legacyArtifactSampleIds = [
   "accepted_french_summer_rattan_bucket_bag_002_shot_1",
   "accepted_french_summer_rattan_bucket_bag_003_shot_2",
   "accepted_french_summer_rattan_bucket_bag_004_shot_3",
 ];
 const expectedPositive = {
-  sampleId: completeSampleId,
+  sampleId: completeSampleIds[0],
   importRecordRef: "runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/resort_relaxed_knit_final_import_record.json",
   reviewRecordRef: "docs/v14_105_codex_session_womens_resort_relaxed_knit_final_review.md",
   closeoutRef: "docs/v14_107_womens_resort_relaxed_knit_accepted_sample_closeout.md",
@@ -39,6 +43,14 @@ const expectedPositive = {
   dimensions: "1254x1254",
   mimeType: "image/png",
   category: "fashion_lookbook_portrait",
+};
+const approvalRecordBySampleId = {
+  accepted_womens_resort_relaxed_knit_codex_v2_001:
+    "docs/v14_107_womens_resort_relaxed_knit_accepted_sample_closeout.md",
+  accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001:
+    "docs/v14_161_codex_session_generated_candidate_readiness.md",
+  accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001:
+    "docs/v14_166_lamp_v3_generated_candidate_readiness.md",
 };
 
 const results = [];
@@ -80,7 +92,10 @@ function matrixRowFromBlock(sampleBlock) {
   const actualSha256 = artifactExists ? core.sha256File(imagePath) : null;
   const categoryIndexText = category ? readIfExists(categoryIndexPath(category)) : "";
   const categoryIndexSamples = core.extractCategoryIndexSamples(categoryIndexText);
-  const closeoutText = sampleId === completeSampleId ? readIfExists(expectedPositive.closeoutRef) : "";
+  const approvalText = approvalRecordBySampleId[sampleId] ? readIfExists(approvalRecordBySampleId[sampleId]) : "";
+  const registryApprovalPresent =
+    /human_approval:[\s\S]*?approved:\s+true[\s\S]*?approved_by:\s+Jenn/.test(block) ||
+    /human_approval:[\s\S]*?approved_by:\s+Jenn/.test(block);
 
   return {
     sample_id: sampleId,
@@ -98,7 +113,7 @@ function matrixRowFromBlock(sampleBlock) {
     category_index_contains_sample: categoryIndexSamples.includes(sampleId),
     import_record_exists: Boolean(importRecordRef && core.exists(importRecordRef)),
     review_record_exists: Boolean(reviewRecordRef && core.exists(reviewRecordRef)),
-    human_approval_present: closeoutText.includes("approved_by: Jenn"),
+    human_approval_present: approvalText.includes("approved_by: Jenn") || registryApprovalPresent,
   };
 }
 
@@ -153,19 +168,26 @@ const fullRows = matrixRows.filter((row) => validateRecoverabilityRow(row).passe
 const localArtifactRows = matrixRows.filter((row) => row.artifact_exists);
 const legacyArtifactRows = matrixRows.filter((row) => legacyArtifactSampleIds.includes(row.sample_id) && row.artifact_exists);
 const categorySet = new Set(matrixRows.map((row) => row.category).filter(Boolean));
-const positiveRow = matrixRows.find((row) => row.sample_id === completeSampleId);
-const positiveValidation = positiveRow ? validateRecoverabilityRow(positiveRow) : { passed: false, failures: ["positive_row_missing"] };
+const positiveRows = completeSampleIds.map((sampleId) => matrixRows.find((row) => row.sample_id === sampleId)).filter(Boolean);
+const positiveValidations = positiveRows.map((row) => validateRecoverabilityRow(row));
 
 addResult("registry_has_multiple_samples", registryBlocks.length >= 3, `${registryBlocks.length}`);
 addResult("matrix_has_multiple_rows", matrixRows.length >= 3, `${matrixRows.length}`);
 addResult("matrix_has_multiple_categories", categorySet.size >= 3, `${categorySet.size}`);
-addResult("complete_recoverable_positive_sample_present", Boolean(positiveRow));
-addResult("complete_recoverable_positive_sample_passes", positiveValidation.passed, positiveValidation.failures.join("; "));
+addResult("complete_recoverable_positive_samples_present", positiveRows.length === completeSampleIds.length, `${positiveRows.length}`);
+addResult(
+  "complete_recoverable_positive_samples_pass",
+  positiveValidations.length === completeSampleIds.length && positiveValidations.every((validation) => validation.passed),
+  positiveValidations.map((validation) => validation.failures.join("; ")).join(" | "),
+);
 addResult("legacy_artifact_rows_detected", legacyArtifactRows.length >= 3, `${legacyArtifactRows.length}`);
 addResult("legacy_rows_not_promoted_to_full_recoverability", legacyArtifactRows.every((row) => !validateRecoverabilityRow(row).passed));
 addResult("local_artifact_rows_detected", localArtifactRows.length >= 4, `${localArtifactRows.length}`);
-addResult("full_recoverability_count_is_currently_one", fullRows.length === 1, `${fullRows.length}`);
-addResult("full_recoverability_sample_is_v14_105", fullRows.length === 1 && fullRows[0].sample_id === completeSampleId);
+addResult("full_recoverability_count_is_currently_three", fullRows.length === 3, `${fullRows.length}`);
+addResult(
+  "full_recoverability_samples_are_v14_105_v14_161_bag_and_v14_166_lamp",
+  completeSampleIds.every((sampleId) => fullRows.some((row) => row.sample_id === sampleId)),
+);
 
 for (const token of [
   "function readJpegDimensions",
@@ -180,9 +202,9 @@ for (const token of [
 for (const token of [
   "phase: v14_142_multi_accepted_sample_matrix",
   "multi_sample_matrix_created: true",
-  "complete_recoverable_sample_count: 1",
+  "complete_recoverable_sample_count: 3",
   "legacy_partial_artifact_sample_count: 3",
-  "full_recoverability_count_is_currently_one: true",
+  "full_recoverability_count_is_currently_three: true",
   "accepted_samples_write_performed: false",
   "image_binary_copy_performed: false",
   "vcp_runtime_integration_proven: false",
@@ -196,20 +218,21 @@ for (const token of [
   "docs/v14_142_multi_accepted_sample_matrix.md",
   "v14_142_multi_accepted_sample_matrix",
   "multi_sample_matrix_created: true",
-  "complete_recoverable_sample_count: 1",
+  "complete_recoverable_sample_count: 3",
   "legacy_partial_artifact_sample_count: 3",
 ]) {
   requireToken("current_surfaces", currentSurfaces, token);
 }
 
-const missingArtifactNegative = validateRecoverabilityRow(positiveRow, { artifact_exists: false });
-const hashMismatchNegative = validateRecoverabilityRow(positiveRow, { verified_sha256: "0".repeat(64) });
-const dimensionsMismatchNegative = validateRecoverabilityRow(positiveRow, { verified_dimensions: "1x1" });
-const mimeMismatchNegative = validateRecoverabilityRow(positiveRow, { verified_mime: "image/jpeg" });
-const reviewMissingNegative = validateRecoverabilityRow(positiveRow, { review_record_exists: false });
-const approvalMissingNegative = validateRecoverabilityRow(positiveRow, { human_approval_present: false });
-const categoryIndexMissingNegative = validateRecoverabilityRow(positiveRow, { category_index_contains_sample: false });
-const registryCategoryMismatchNegative = validateRecoverabilityRow(positiveRow, {
+const negativeBaseRow = positiveRows[0] || {};
+const missingArtifactNegative = validateRecoverabilityRow(negativeBaseRow, { artifact_exists: false });
+const hashMismatchNegative = validateRecoverabilityRow(negativeBaseRow, { verified_sha256: "0".repeat(64) });
+const dimensionsMismatchNegative = validateRecoverabilityRow(negativeBaseRow, { verified_dimensions: "1x1" });
+const mimeMismatchNegative = validateRecoverabilityRow(negativeBaseRow, { verified_mime: "image/jpeg" });
+const reviewMissingNegative = validateRecoverabilityRow(negativeBaseRow, { review_record_exists: false });
+const approvalMissingNegative = validateRecoverabilityRow(negativeBaseRow, { human_approval_present: false });
+const categoryIndexMissingNegative = validateRecoverabilityRow(negativeBaseRow, { category_index_contains_sample: false });
+const registryCategoryMismatchNegative = validateRecoverabilityRow(negativeBaseRow, {
   category: "product_still_life",
   category_index_contains_sample: false,
 });
@@ -266,8 +289,8 @@ const summary = {
   complete_recoverable_sample_ids: fullRows.map((row) => row.sample_id),
   legacy_partial_artifact_sample_count: legacyArtifactRows.length,
   local_artifact_sample_count: localArtifactRows.length,
-  full_recoverability_count_is_currently_one: fullRows.length === 1,
-  positive_matrix_passes: positiveValidation.passed,
+  full_recoverability_count_is_currently_three: fullRows.length === 3,
+  positive_matrix_passes: positiveValidations.length === completeSampleIds.length && positiveValidations.every((validation) => validation.passed),
   negative_case_artifact_missing_fails: !negativeCases.artifact_missing.passed,
   negative_case_hash_mismatch_fails: !negativeCases.hash_mismatch.passed,
   negative_case_dimensions_mismatch_fails: !negativeCases.dimensions_mismatch.passed,

@@ -1,0 +1,78 @@
+{
+  "third_sample_accepted_samples_registration_authorization_package_draft": {
+    "version": "v1",
+    "phase": "v14_190_third_sample_accepted_samples_registration_authorization_package_draft",
+    "execution_mode": "authorization_package_draft_only",
+    "source_readiness_ref": "tests/schema_examples/v14_188_review_console_third_sample_acceptance_readiness.example.json",
+    "source_blocker_preflight_ref": "tests/schema_examples/v14_167_lamp_v3_accepted_samples_registration_blocker_preflight.example.json",
+    "authorization_package_status": "prepared_blocked_not_granted",
+    "authorization_granted_by_this_record": false,
+    "execution_ready": false,
+    "blocker": "human_approval_missing",
+    "target": {
+      "sample_id": "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001",
+      "candidate_id": "v14_166_lamp_v3_generated_candidate_001",
+      "import_record_ref": "tests/schema_examples/v14_166_lamp_v3_generated_candidate_import_record.json",
+      "review_record_ref": "docs/v14_166_lamp_v3_generated_candidate_readiness.md",
+      "artifact_ref": "runs/real_generation/v14_166_codex_session_premium_portable_led_camping_lantern_v3_generation_trial/codex_session_v14_166_premium_portable_led_camping_lantern_v3_candidate_001.png",
+      "verified_sha256": "eaa52095be5af66854f80ba3f6a0b94c93bc1105e6e7ecf984b8dfb3dfff275c",
+      "verified_dimensions": "1254x1254",
+      "verified_mime": "image/png",
+      "human_approval_status": "pending",
+      "approved_by": null,
+      "registration_ready": false
+    },
+    "exact_approval_statement_draft": "批准进入 AUTH-PENDING-LAMP-V14-166-ACCEPTED-SAMPLES-REGISTRATION-20260518-001 A4.8 accepted_samples metadata registry write execution：将 tests/schema_examples/v14_166_lamp_v3_generated_candidate_import_record.json 与 docs/v14_166_lamp_v3_generated_candidate_readiness.md 对应的灯图候选 accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001 登记为第 3 个 accepted sample；允许仅修改 accepted_samples/accepted_sample_registry.yaml 和 accepted_samples/categories/product_still_life.yaml；不允许复制或提交图片文件，不允许修改 runs/real_generation/ 源图，不允许写 failure_samples，不允许写 production_candidate，不允许写 DailyNote，不允许写 VCP memory，不允许 provider/API/plugin/MCP 调用，不允许读取 .env/.env.local，不允许读取 real manifest/VCPChat/VCPToolBox，不允许 push/tag/release/deploy；写入后运行 git diff --check、node scripts/validate_v14_190_third_sample_accepted_samples_registration_authorization_package_draft.js、node scripts/validate_agent_board_state.js、powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1、powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1 并停止汇报结果；审批人 Jenn。",
+    "draft_scope": {
+      "would_modify_files": [
+        "accepted_samples/accepted_sample_registry.yaml",
+        "accepted_samples/categories/product_still_life.yaml"
+      ],
+      "forbidden_paths": [
+        "runs/real_generation/",
+        "production_candidate/",
+        "failure_samples/",
+        ".env",
+        ".env.local",
+        "real manifest",
+        "VCPChat",
+        "VCPToolBox"
+      ],
+      "validation_required": [
+        "git diff --check",
+        "node scripts/validate_v14_190_third_sample_accepted_samples_registration_authorization_package_draft.js",
+        "node scripts/validate_agent_board_state.js",
+        "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1",
+        "powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1"
+      ]
+    },
+    "guard": {
+      "draft_only": true,
+      "accepted_samples_write_performed": false,
+      "category_index_write_performed": false,
+      "image_file_copy_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_expected": {
+      "granted_package_fails": true,
+      "execution_ready_without_approval_fails": true,
+      "missing_exact_statement_fails": true,
+      "broad_write_scope_fails": true,
+      "accepted_samples_write_flag_fails": true,
+      "runtime_claim_fails": true
+    }
+  }
+}

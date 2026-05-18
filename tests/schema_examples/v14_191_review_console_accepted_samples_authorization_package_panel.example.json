@@ -1,0 +1,73 @@
+{
+  "review_console_accepted_samples_authorization_package_panel": {
+    "version": "v1",
+    "phase": "v14_191_review_console_accepted_samples_authorization_package_panel_static_only",
+    "execution_mode": "review_console_static_authorization_package_display_only",
+    "draft_output_key": "third_sample_accepted_samples_authorization_package_state",
+    "source_authorization_package_ref": "tests/schema_examples/v14_190_third_sample_accepted_samples_registration_authorization_package_draft.example.json",
+    "source_readiness_ref": "tests/schema_examples/v14_188_review_console_third_sample_acceptance_readiness.example.json",
+    "source_blocker_preflight_ref": "tests/schema_examples/v14_167_lamp_v3_accepted_samples_registration_blocker_preflight.example.json",
+    "target": {
+      "sample_id": "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001",
+      "candidate_id": "v14_166_lamp_v3_generated_candidate_001",
+      "human_approval_status": "pending",
+      "approved_by": null,
+      "registration_ready": false,
+      "accepted_samples_metadata_registered": false
+    },
+    "authorization_package_status": "prepared_blocked_not_granted",
+    "authorization_granted_by_this_record": false,
+    "execution_ready": false,
+    "blocker": "human_approval_missing",
+    "exact_allowed_files": [
+      "accepted_samples/accepted_sample_registry.yaml",
+      "accepted_samples/categories/product_still_life.yaml"
+    ],
+    "forbidden_operations": [
+      "copy_or_commit_image_files",
+      "modify_runs_real_generation_source_images",
+      "write_failure_samples",
+      "write_production_candidate",
+      "write_DailyNote",
+      "write_VCP_memory",
+      "provider_or_api_or_plugin_or_mcp_call",
+      "read_env_or_env_local",
+      "read_real_manifest_or_VCPChat_or_VCPToolBox",
+      "push_tag_release_deploy"
+    ],
+    "missing_requirements": [
+      "human_approval_status: approved",
+      "approved_by: Jenn",
+      "explicit authorization statement from Jenn"
+    ],
+    "exact_approval_statement_draft_present": true,
+    "static_panel_guard": {
+      "static_panel_only": true,
+      "accepted_samples_write_performed": false,
+      "category_index_write_performed": false,
+      "image_file_copy_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_expected": {
+      "authorization_granted_overclaim_fails": true,
+      "execution_ready_overclaim_fails": true,
+      "missing_statement_fails": true,
+      "broad_allowed_files_fails": true,
+      "accepted_samples_write_flag_fails": true,
+      "runtime_claim_fails": true
+    }
+  }
+}

@@ -258,12 +258,153 @@
             </div>
             <div id="artifactEvidenceSummary" class="protocol-summary" aria-label="真实样片证据摘要"></div>
           </section>
+          <section class="runtime-gap-dashboard" aria-labelledby="runtimeGapTitle">
+            <div class="section-head">
+              <p class="eyebrow">Runtime Gap</p>
+              <h2 id="runtimeGapTitle">本地能力 / VCP 接入缺口</h2>
+            </div>
+            <div id="runtimeGapSummary" class="protocol-summary" aria-label="Runtime Gap 摘要"></div>
+            <div id="runtimeGapBody" class="runtime-gap-body" aria-label="Runtime Gap 列表"></div>
+            <div id="runtimeGapGuard" class="protocol-guard" aria-label="Runtime Gap 边界"></div>
+          </section>
+          <section class="artifact-lifecycle-state" aria-labelledby="artifactLifecycleTitle">
+            <div class="section-head">
+              <p class="eyebrow">Lifecycle State</p>
+              <h2 id="artifactLifecycleTitle">样片生命周期</h2>
+            </div>
+            <div id="artifactLifecycleSummary" class="protocol-summary" aria-label="样片生命周期摘要"></div>
+            <div class="action-group lifecycle-filter-actions" aria-label="样片生命周期筛选">
+              <button type="button" data-lifecycle-filter="all" class="is-active">全部</button>
+              <button type="button" data-lifecycle-filter="recoverable">可恢复</button>
+              <button type="button" data-lifecycle-filter="blocked">阻断</button>
+            </div>
+            <div id="artifactLifecycleList" class="artifact-lifecycle-list" aria-label="样片生命周期列表"></div>
+            <div id="artifactLifecycleGuard" class="protocol-guard" aria-label="样片生命周期读取边界"></div>
+          </section>
+          <section class="artifact-prompt-completion" aria-labelledby="artifactPromptCompletionTitle">
+            <div class="section-head">
+              <p class="eyebrow">Prompt Completion</p>
+              <h2 id="artifactPromptCompletionTitle">Prompt 到成片完成度</h2>
+            </div>
+            <div id="artifactPromptCompletionSummary" class="protocol-summary" aria-label="Prompt 到成片完成度摘要"></div>
+            <div id="artifactPromptCompletionList" class="artifact-prompt-completion-list" aria-label="Prompt 到成片完成度列表"></div>
+            <div id="artifactPromptCompletionGuard" class="protocol-guard" aria-label="Prompt 到成片完成度边界"></div>
+          </section>
+          <section class="artifact-detail-drawer" aria-labelledby="artifactDetailTitle">
+            <div class="section-head">
+              <p class="eyebrow">Artifact Detail</p>
+              <h2 id="artifactDetailTitle">样片详情</h2>
+            </div>
+            <div id="artifactDetailSummary" class="protocol-summary" aria-label="样片详情摘要"></div>
+            <div id="artifactDetailBody" class="artifact-detail-body" aria-label="样片详情内容"></div>
+            <div id="artifactDetailGuard" class="protocol-guard" aria-label="样片详情边界"></div>
+          </section>
+          <section class="artifact-evidence-compare" aria-labelledby="artifactCompareTitle">
+            <div class="section-head">
+              <p class="eyebrow">Evidence Compare</p>
+              <h2 id="artifactCompareTitle">样片证据对比</h2>
+            </div>
+            <div id="artifactCompareSummary" class="protocol-summary" aria-label="样片证据对比摘要"></div>
+            <div id="artifactCompareBody" class="artifact-compare-body" aria-label="样片证据对比内容"></div>
+            <div id="artifactCompareGuard" class="protocol-guard" aria-label="样片证据对比边界"></div>
+          </section>
+          <section class="artifact-review-notes" aria-labelledby="artifactReviewNotesTitle">
+            <div class="section-head">
+              <p class="eyebrow">Review Notes</p>
+              <h2 id="artifactReviewNotesTitle">审查意见</h2>
+            </div>
+            <div id="artifactReviewNotesSummary" class="protocol-summary" aria-label="样片审查意见摘要"></div>
+            <div id="artifactReviewNotesList" class="artifact-review-notes-list" aria-label="样片审查意见列表"></div>
+            <div id="artifactReviewNotesGuard" class="protocol-guard" aria-label="样片审查意见边界"></div>
+          </section>
+          <section class="failure-state-workbench" aria-labelledby="failureStateTitle">
+            <div class="section-head">
+              <p class="eyebrow">Failure State</p>
+              <h2 id="failureStateTitle">失败状态</h2>
+            </div>
+            <div id="failureStateSummary" class="protocol-summary" aria-label="失败状态摘要"></div>
+            <div id="failureStateBody" class="failure-state-body" aria-label="失败状态内容"></div>
+            <div id="failureStateGuard" class="protocol-guard" aria-label="失败状态边界"></div>
+          </section>
+          <section class="three-sample-gap" aria-labelledby="threeSampleGapTitle">
+            <div class="section-head">
+              <p class="eyebrow">3-Sample Gap</p>
+              <h2 id="threeSampleGapTitle">三样片缺口</h2>
+            </div>
+            <div id="threeSampleGapSummary" class="protocol-summary" aria-label="三样片缺口摘要"></div>
+            <div id="threeSampleGapBody" class="three-sample-gap-body" aria-label="三样片缺口内容"></div>
+            <div id="threeSampleGapGuard" class="protocol-guard" aria-label="三样片缺口边界"></div>
+          </section>
+          <section class="recoverability-matrix" aria-labelledby="recoverabilityMatrixTitle">
+            <div class="section-head">
+              <p class="eyebrow">Recoverability Matrix</p>
+              <h2 id="recoverabilityMatrixTitle">可恢复样片矩阵</h2>
+            </div>
+            <div id="recoverabilityMatrixSummary" class="protocol-summary" aria-label="可恢复样片矩阵摘要"></div>
+            <div id="recoverabilityMatrixBody" class="recoverability-matrix-body" aria-label="可恢复样片矩阵内容"></div>
+            <div id="recoverabilityMatrixGuard" class="protocol-guard" aria-label="可恢复样片矩阵边界"></div>
+          </section>
+          <section class="schema-binding-coverage" aria-labelledby="schemaBindingCoverageTitle">
+            <div class="section-head">
+              <p class="eyebrow">Schema Binding</p>
+              <h2 id="schemaBindingCoverageTitle">Schema 覆盖</h2>
+            </div>
+            <div id="schemaBindingCoverageSummary" class="protocol-summary" aria-label="Schema 覆盖摘要"></div>
+            <div id="schemaBindingCoverageBody" class="schema-binding-coverage-body" aria-label="Schema 覆盖内容"></div>
+            <div id="schemaBindingCoverageGuard" class="protocol-guard" aria-label="Schema 覆盖边界"></div>
+          </section>
+          <section class="six-month-goal-gap" aria-labelledby="sixMonthGoalGapTitle">
+            <div class="section-head">
+              <p class="eyebrow">Six-Month Goal Gap</p>
+              <h2 id="sixMonthGoalGapTitle">6 个月目标缺口</h2>
+            </div>
+            <div id="sixMonthGoalGapSummary" class="protocol-summary" aria-label="6 个月目标缺口摘要"></div>
+            <div id="sixMonthGoalGapBody" class="six-month-goal-gap-body" aria-label="6 个月目标缺口内容"></div>
+            <div id="sixMonthGoalGapGuard" class="protocol-guard" aria-label="6 个月目标缺口边界"></div>
+          </section>
+          <section class="third-sample-readiness" aria-labelledby="thirdSampleReadinessTitle">
+            <div class="section-head">
+              <p class="eyebrow">Third Sample Readiness</p>
+              <h2 id="thirdSampleReadinessTitle">第 3 样片准备度</h2>
+            </div>
+            <div id="thirdSampleReadinessSummary" class="protocol-summary" aria-label="第 3 样片准备度摘要"></div>
+            <div id="thirdSampleReadinessBody" class="third-sample-readiness-body" aria-label="第 3 样片准备度内容"></div>
+            <div id="thirdSampleReadinessGuard" class="protocol-guard" aria-label="第 3 样片准备度边界"></div>
+          </section>
+          <section class="third-sample-post-approval-gate" aria-labelledby="thirdSamplePostApprovalGateTitle">
+            <div class="section-head">
+              <p class="eyebrow">Post-Approval Gate</p>
+              <h2 id="thirdSamplePostApprovalGateTitle">第 3 样片批准后门禁</h2>
+            </div>
+            <div id="thirdSamplePostApprovalGateSummary" class="protocol-summary" aria-label="第 3 样片批准后门禁摘要"></div>
+            <div id="thirdSamplePostApprovalGateBody" class="third-sample-post-approval-gate-body" aria-label="第 3 样片批准后门禁内容"></div>
+            <div id="thirdSamplePostApprovalGateGuard" class="protocol-guard" aria-label="第 3 样片批准后门禁边界"></div>
+          </section>
+          <section class="human-approval-blocker-queue" aria-labelledby="humanApprovalBlockerQueueTitle">
+            <div class="section-head">
+              <p class="eyebrow">Human Approval Blockers</p>
+              <h2 id="humanApprovalBlockerQueueTitle">人工批准阻断队列</h2>
+            </div>
+            <div id="humanApprovalBlockerQueueSummary" class="protocol-summary" aria-label="人工批准阻断队列摘要"></div>
+            <div id="humanApprovalBlockerQueueBody" class="human-approval-blocker-queue-body" aria-label="人工批准阻断队列内容"></div>
+            <div id="humanApprovalBlockerQueueGuard" class="protocol-guard" aria-label="人工批准阻断队列边界"></div>
+          </section>
+          <section class="third-sample-authorization-package" aria-labelledby="thirdSampleAuthorizationPackageTitle">
+            <div class="section-head">
+              <p class="eyebrow">Authorization Package</p>
+              <h2 id="thirdSampleAuthorizationPackageTitle">第 3 样片登记授权包</h2>
+            </div>
+            <div id="thirdSampleAuthorizationPackageSummary" class="protocol-summary" aria-label="第 3 样片登记授权包摘要"></div>
+            <div id="thirdSampleAuthorizationPackageBody" class="third-sample-authorization-package-body" aria-label="第 3 样片登记授权包内容"></div>
+            <div id="thirdSampleAuthorizationPackageGuard" class="protocol-guard" aria-label="第 3 样片登记授权包边界"></div>
+          </section>
           <textarea id="draftOutput" rows="14" readonly></textarea>
         </section>
       </section>
     </main>
 
     <script src="./mock_data.js"></script>
+    <script src="./artifact_lifecycle_state_reader.js"></script>
     <script src="./app.js"></script>
   </body>
 </html>

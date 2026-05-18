@@ -7,7 +7,7 @@ mode: A4_8_safe_project_operator_rail
 intent: review
 risk_level: R2
 source_phase: v14_159_end_to_end_audit_and_rollback_package
-status: completed_validated_with_remaining_hard_acceptance_gap
+status: completed_validated_three_sample_local_recoverability_baseline
 ```
 
 ## Purpose
@@ -24,12 +24,12 @@ three fully recoverable accepted samples is not yet met.
 two_month_product_capability_closeout_created: true
 local_lifecycle_chain_completed_validated: true
 audited_local_stage_count: 13
-registry_sample_count: 6
+registry_sample_count: 8
 registry_category_count: 3
-local_artifact_sample_count: 4
-full_recoverable_sample_count: 1
-hard_acceptance_three_full_samples_met: false
-remaining_full_recoverable_sample_gap: 2
+local_artifact_sample_count: 6
+full_recoverable_sample_count: 3
+hard_acceptance_three_full_samples_met: true
+remaining_full_recoverable_sample_gap: 0
 a5_execution_slots_skipped_without_authorization: true
 two_month_goal_fully_complete: false
 ```
@@ -38,15 +38,15 @@ two_month_goal_fully_complete: false
 
 ```yaml
 product_capability_progress:
-  status: local_artifact_lifecycle_control_layer_validated_with_sample_gap
-  approximate_progress_percent: 72
+  status: local_artifact_lifecycle_control_layer_validated_three_sample_baseline
+  approximate_progress_percent: 78
   evidence:
     - recoverability core extracted and reused
-    - multi accepted sample matrix covers six samples across three categories
-    - one sample has full traceability to artifact, import record, sha256, dimensions, mime, review record, human approval, registry, and category index
+    - multi accepted sample matrix covers eight samples across three categories
+    - three samples have full traceability to artifact, import record, sha256, dimensions, mime, review record, human approval, registry, and category index
     - Review Console static handoff and manifest authorization gate are locally validated
   not_done:
-    - two more fully recoverable accepted samples
+    - one more fully recoverable accepted sample
     - durable archive binary copy and archive manifest execution
     - production_candidate promotion
 governance_capability_progress:
@@ -113,11 +113,11 @@ node scripts/validate_v14_160_two_month_product_capability_closeout.js
 ```yaml
 goal_status: active_not_complete
 safe_local_chain_status: v14_141_to_v14_160_completed_validated
-continue_without_new_authorization: false
+continue_without_new_authorization: true_for_A4_8_local_review_console_and_validator_work_only
 reason: >
-  The safe local chain is closed out, but the hard acceptance target still
-  needs two additional fully recoverable accepted samples. Creating or
-  importing new images, writing new human approvals, or crossing any A5 boundary
-  must follow the active authorization rules.
-recommended_next: prepare_two_more_codex_session_sample_recoverability_plan_or_wait_for_generation_authorization
+  The three-sample local recoverability target is met, but product completion
+  still depends on Review Console productization and later separately
+  authorized production_candidate, durable archive, memory, and real VCP
+  runtime paths.
+recommended_next: continue_review_console_static_productization_from_three_sample_evidence_baseline
 ```

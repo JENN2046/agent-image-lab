@@ -1,0 +1,133 @@
+{
+  "review_console_six_month_goal_gap_static_panel": {
+    "phase": "v14_225_review_console_six_month_goal_gap_static_panel",
+    "execution_mode": "review_console_static_six_month_goal_gap_only",
+    "draft_output_key": "six_month_goal_gap_state",
+    "source_goal_ref": "thread_active_goal_2026_05_18",
+    "source_recoverability_matrix_ref": "tests/schema_examples/v14_221_review_console_recoverability_matrix_static_workbench.example.json",
+    "source_schema_binding_snapshot_ref": "tests/schema_examples/v14_224_review_console_schema_binding_coverage_snapshot_static_regression.example.json",
+    "month_count": 6,
+    "blocked_or_incomplete_month_count": 5,
+    "complete_recoverable_sample_count": 2,
+    "required_full_recoverable_sample_count": 3,
+    "remaining_full_recoverable_sample_gap": 1,
+    "hard_acceptance_three_full_samples_met": false,
+    "pending_candidate_counted_as_accepted": false,
+    "vcp_runtime_integration_proven_month_count": 0,
+    "overall_status": "month_1_blocked_by_third_sample_human_approval",
+    "goals": [
+      {
+        "month": 1,
+        "objective": "three_full_recoverable_accepted_samples",
+        "status": "blocked_by_human_approval_missing",
+        "evidence_refs": [
+          "tests/schema_examples/v14_221_review_console_recoverability_matrix_static_workbench.example.json",
+          "tests/schema_examples/v14_222_review_console_recoverability_matrix_snapshot_static_regression.example.json",
+          "docs/v14_166_lamp_v3_generated_candidate_readiness.md"
+        ],
+        "proven_count": 2,
+        "required_count": 3,
+        "remaining_gap": 1,
+        "blocker": "human_approval_missing",
+        "next_local_action": "wait_for_jenn_human_approval_or_run_intake"
+      },
+      {
+        "month": 2,
+        "objective": "review_console_static_productization",
+        "status": "in_progress_static_read_only",
+        "evidence_refs": [
+          "docs/v14_169_review_console_artifact_lifecycle_state_reader.md",
+          "docs/v14_221_review_console_recoverability_matrix_static_workbench.md",
+          "docs/v14_223_review_console_schema_binding_coverage_static_panel.md",
+          "docs/v14_224_review_console_schema_binding_coverage_snapshot_static_regression.md"
+        ],
+        "proven_count": 1,
+        "required_count": 1,
+        "remaining_gap": 0,
+        "blocker": null,
+        "next_local_action": "continue_static_review_console_workbench_regression"
+      },
+      {
+        "month": 3,
+        "objective": "authorization_control_layer",
+        "status": "draft_preflight_contracts_present_not_executed",
+        "evidence_refs": [
+          "docs/v14_195_authorization_package_compiler_contract_accepted_samples_registration.md",
+          "docs/v14_196_authorization_package_compiler_type_matrix.md",
+          "docs/v14_202_authorization_package_blocker_arbiter_contract.md"
+        ],
+        "proven_count": 0,
+        "required_count": 1,
+        "remaining_gap": 1,
+        "blocker": "execution_requires_explicit_A5",
+        "next_local_action": "harden_authorization_package_compiler_validator"
+      },
+      {
+        "month": 4,
+        "objective": "vcp_dry_run_adapter_productization",
+        "status": "dry_run_contract_only",
+        "evidence_refs": [
+          "docs/v14_203_authorization_compiler_review_console_handoff_state.md",
+          "docs/v14_204_review_console_runtime_gap_dashboard_contract.md",
+          "docs/v14_207_review_console_runtime_gap_trace_matrix_static_regression.md"
+        ],
+        "proven_count": 0,
+        "required_count": 1,
+        "remaining_gap": 1,
+        "blocker": "real_runtime_integration_forbidden_without_A5",
+        "next_local_action": "expand_dry_run_contract_test_suite"
+      },
+      {
+        "month": 5,
+        "objective": "authorized_real_integration_pilot",
+        "status": "blocked_requires_jenn_A5",
+        "evidence_refs": [
+          "docs/v14_197_manifest_read_authorization_compiler_output_preflight.md",
+          "docs/v14_200_daily_note_vcp_memory_authorization_compiler_output_preflight.md"
+        ],
+        "proven_count": 0,
+        "required_count": 1,
+        "remaining_gap": 1,
+        "blocker": "no_active_A5_authorization",
+        "next_local_action": "prepare_minimal_A5_preflight_only"
+      },
+      {
+        "month": 6,
+        "objective": "v1_visual_production_control_layer_closeout",
+        "status": "not_started_not_proven",
+        "evidence_refs": [],
+        "proven_count": 0,
+        "required_count": 1,
+        "remaining_gap": 1,
+        "blocker": "depends_on_month_1_to_5_evidence",
+        "next_local_action": "do_not_claim_v1_until_real_evidence_chain_exists"
+      }
+    ],
+    "guard": {
+      "local_static_panel_only": true,
+      "fetch_performed": false,
+      "file_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "category_index_write_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "image_generation_performed": false,
+      "env_or_secret_read_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "dry_run_adapter_is_not_vcp_runtime_integration": true,
+      "review_console_static_read_is_not_vcp_runtime_integration": true,
+      "authorization_package_draft_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    }
+  }
+}

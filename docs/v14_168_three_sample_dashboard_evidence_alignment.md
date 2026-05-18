@@ -1,0 +1,78 @@
+# v14.168 Three-Sample Dashboard Evidence Alignment
+
+## Scope
+
+```text
+phase: v14_168_three_sample_dashboard_evidence_alignment
+base_contract: AGENTS.md
+mode: A4.8
+intent: local_implementation
+risk_level: R2
+execution_mode: dashboard_evidence_alignment_only
+source_accepted_registration_validator: scripts/validate_v14_165_bag_accepted_samples_metadata_registration.js
+source_blocked_candidate_validator: scripts/validate_v14_167_lamp_v3_accepted_samples_registration_blocker_preflight.js
+dashboard_progress_basis: validator_outputs_real_artifact_evidence
+full_recoverable_accepted_sample_count: 3
+blocked_third_candidate_count: 0
+hard_acceptance_three_full_samples_met: true
+remaining_full_recoverable_sample_gap: 0
+dashboard_must_not_count_pending_candidate_as_accepted: true
+dashboard_uses_project_master_plan_progress: false
+dashboard_uses_document_token_progress: false
+dashboard_promotes_product_status: false
+accepted_samples_write_performed: false
+category_index_write_performed: false
+image_file_copy_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+```
+
+## Dashboard Evidence Result
+
+```text
+accepted_sample_1: accepted_womens_resort_relaxed_knit_codex_v2_001
+accepted_sample_2: accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001
+accepted_sample_3: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+blocked_candidate_count: 0
+dashboard_status: three_full_recoverable_accepted_samples
+month_1_hard_acceptance_status: met_local_recoverability_only
+```
+
+The dashboard evidence now counts the v14.166 lamp v3 artifact as the third
+accepted sample because Jenn approved it and the metadata-only accepted_samples
+registration passed validation. This still does not prove production_candidate,
+durable archive, memory write, or real VCP runtime integration.
+
+## Negative Case Coverage
+
+```text
+negative_case_dashboard_drops_registered_lamp_fails: true
+negative_case_three_sample_goal_marked_incomplete_fails: true
+negative_case_project_master_plan_progress_fails: true
+negative_case_document_token_progress_fails: true
+negative_case_runtime_claim_blocks_dashboard: true
+negative_case_external_action_flag_blocks_dashboard: true
+negative_case_accepted_samples_write_flag_blocks_dashboard: true
+```
+
+## Next Gate
+
+```text
+recommended_next: post_registration_three_sample_recoverability_alignment
+automatic_next_generation_recommended: false
+automatic_accepted_samples_write_performed: false
+accepted_samples_write_allowed_after_human_approval: completed_by_prior_jenn_authorized_metadata_write
+artifact_recoverability_is_not_vcp_runtime_integration: true
+```

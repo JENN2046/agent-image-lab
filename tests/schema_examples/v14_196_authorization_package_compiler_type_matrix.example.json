@@ -1,0 +1,191 @@
+{
+  "authorization_package_compiler_type_matrix": {
+    "version": "v1",
+    "phase": "v14_196_authorization_package_compiler_type_matrix",
+    "execution_mode": "authorization_package_compiler_type_matrix_only",
+    "source_compiler_contract_ref": "tests/schema_examples/v14_195_authorization_package_compiler_contract_accepted_samples_registration.example.json",
+    "compiler_matrix_status": "local_contract_ready_execution_blocked",
+    "execution_allowed_now": false,
+    "package_types": [
+      {
+        "package_type": "accepted_samples_metadata_registration",
+        "source_contract_required": true,
+        "minimum_authorization_level": "A4.8_exact_metadata_write_authorization",
+        "default_blocker": "missing_human_approval_or_exact_authorization",
+        "default_execution_allowed": false,
+        "required_fields": [
+          "package_id",
+          "target_sample_id",
+          "target_candidate_id",
+          "exact_allowed_paths",
+          "human_approval",
+          "validation_required",
+          "rollback_plan",
+          "reviewer",
+          "stop_conditions"
+        ],
+        "forbidden_operations": [
+          "copy_or_commit_image_files",
+          "modify_runs_source_image",
+          "write_failure_samples",
+          "write_production_candidate",
+          "write_DailyNote",
+          "write_VCP_memory",
+          "provider_or_api_or_plugin_or_mcp_call",
+          "read_env_or_env_local",
+          "read_real_manifest_or_VCPChat_or_VCPToolBox",
+          "push_tag_release_deploy"
+        ]
+      },
+      {
+        "package_type": "manifest_read",
+        "source_contract_required": false,
+        "minimum_authorization_level": "A5_exact_manifest_read_authorization",
+        "default_blocker": "missing_real_manifest_read_authorization",
+        "default_execution_allowed": false,
+        "required_fields": [
+          "package_id",
+          "real_manifest_target",
+          "exact_allowed_read_paths",
+          "forbidden_read_paths",
+          "allowed_extracted_fields",
+          "validation_required",
+          "rollback_plan",
+          "reviewer",
+          "stop_conditions"
+        ],
+        "forbidden_operations": [
+          "write_files",
+          "read_env_or_env_local",
+          "call_provider_or_api_or_plugin_or_mcp",
+          "read_VCPChat_or_VCPToolBox_source",
+          "push_tag_release_deploy"
+        ]
+      },
+      {
+        "package_type": "durable_archive",
+        "source_contract_required": false,
+        "minimum_authorization_level": "A5_exact_archive_copy_authorization",
+        "default_blocker": "missing_archive_copy_authorization",
+        "default_execution_allowed": false,
+        "required_fields": [
+          "package_id",
+          "source_artifact_ref",
+          "target_archive_path",
+          "exact_allowed_write_paths",
+          "hash_verification",
+          "validation_required",
+          "rollback_plan",
+          "reviewer",
+          "stop_conditions"
+        ],
+        "forbidden_operations": [
+          "modify_runs_source_image",
+          "write_production_candidate",
+          "write_DailyNote",
+          "write_VCP_memory",
+          "provider_or_api_or_plugin_or_mcp_call",
+          "push_tag_release_deploy"
+        ]
+      },
+      {
+        "package_type": "production_candidate",
+        "source_contract_required": false,
+        "minimum_authorization_level": "A5_exact_production_candidate_authorization",
+        "default_blocker": "missing_production_candidate_authorization",
+        "default_execution_allowed": false,
+        "required_fields": [
+          "package_id",
+          "accepted_sample_ref",
+          "eligibility_preflight_ref",
+          "exact_allowed_write_paths",
+          "blocker_decision",
+          "validation_required",
+          "rollback_plan",
+          "reviewer",
+          "stop_conditions"
+        ],
+        "forbidden_operations": [
+          "skip_eligibility_preflight",
+          "copy_unverified_artifact",
+          "write_DailyNote",
+          "write_VCP_memory",
+          "provider_or_api_or_plugin_or_mcp_call",
+          "push_tag_release_deploy"
+        ]
+      },
+      {
+        "package_type": "daily_note_vcp_memory",
+        "source_contract_required": false,
+        "minimum_authorization_level": "A5_exact_memory_write_authorization",
+        "default_blocker": "missing_daily_note_vcp_memory_write_authorization",
+        "default_execution_allowed": false,
+        "required_fields": [
+          "package_id",
+          "memory_delta_draft_ref",
+          "daily_note_body_language",
+          "sensitive_data_scan",
+          "exact_allowed_memory_targets",
+          "validation_required",
+          "rollback_plan",
+          "reviewer",
+          "stop_conditions"
+        ],
+        "forbidden_operations": [
+          "write_without_memory_approval",
+          "include_secrets_or_private_paths",
+          "include_image_binary",
+          "call_provider_or_plugin",
+          "push_tag_release_deploy"
+        ]
+      }
+    ],
+    "shared_required_fields": [
+      "package_id",
+      "package_type",
+      "target_scope",
+      "exact_allowed_paths",
+      "forbidden_paths",
+      "allowed_operations",
+      "forbidden_operations",
+      "validation_required",
+      "rollback_plan",
+      "reviewer",
+      "stop_conditions"
+    ],
+    "validation_required": [
+      "git diff --check",
+      "node scripts/validate_v14_195_authorization_package_compiler_contract_accepted_samples_registration.js",
+      "node scripts/validate_agent_board_state.js",
+      "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1",
+      "powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1"
+    ],
+    "guard": {
+      "type_matrix_only": true,
+      "authorization_execution_performed": false,
+      "accepted_samples_write_performed": false,
+      "manifest_read_performed": false,
+      "durable_archive_copy_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_expected": {
+      "missing_package_type_fails": true,
+      "direct_execution_allowed_fails": true,
+      "accepted_samples_broad_scope_fails": true,
+      "manifest_read_execution_allowed_fails": true,
+      "memory_write_without_blocker_fails": true,
+      "runtime_claim_fails": true
+    }
+  }
+}

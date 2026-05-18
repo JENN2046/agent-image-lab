@@ -1,0 +1,94 @@
+# v14.167 Lamp v3 Accepted Samples Registration Blocker Preflight
+
+## Scope
+
+```text
+phase: v14_167_lamp_v3_accepted_samples_registration_blocker_preflight
+base_contract: AGENTS.md
+mode: A4.8
+intent: local_implementation
+risk_level: R2
+execution_mode: accepted_samples_registration_blocker_preflight_only
+source_candidate_id: v14_166_lamp_v3_generated_candidate_001
+source_import_record_ref: tests/schema_examples/v14_166_lamp_v3_generated_candidate_import_record.json
+source_review_record_ref: docs/v14_166_lamp_v3_generated_candidate_readiness.md
+source_artifact_ref: runs/real_generation/v14_166_codex_session_premium_portable_led_camping_lantern_v3_generation_trial/codex_session_v14_166_premium_portable_led_camping_lantern_v3_candidate_001.png
+source_artifact_sha256: eaa52095be5af66854f80ba3f6a0b94c93bc1105e6e7ecf984b8dfb3dfff275c
+source_artifact_dimensions: 1254x1254
+source_artifact_mime: image/png
+human_approval_status: approved
+approved_by: Jenn
+approval_statement: Jenn explicitly approved v14_166_lamp_v3_generated_candidate_001 for accepted_samples metadata registration.
+accepted_samples_registration_eligible: true
+registration_blocker: null
+accepted_samples_write_performed: false
+category_index_write_performed: false
+image_file_copy_performed: false
+failure_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+```
+
+## Registered Target
+
+```text
+proposed_sample_id: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+registry_ref: accepted_samples/accepted_sample_registry.yaml
+category_index_ref: accepted_samples/categories/product_still_life.yaml
+category: product_still_life
+artifact_locator_scope: project_relative_runs
+verification_mode: local_file_hash
+portable_after_clone: false
+image_files_committed_to_git: false
+```
+
+## Post-Approval Result
+
+The v14.166 lamp v3 candidate has a real local artifact, verified hash,
+verified dimensions, verified MIME type, import record, review record, and a
+category index target. Jenn has now approved the image, and the sample is
+present in `accepted_samples` metadata as the third fully recoverable accepted
+sample.
+
+This phase does not perform a new accepted_samples write. It only proves that
+the post-approval registry/category state is locally recoverable and still does
+not imply production_candidate or VCP runtime integration.
+
+## Negative Case Coverage
+
+```text
+negative_case_missing_artifact_fails: true
+negative_case_hash_mismatch_fails: true
+negative_case_dimensions_mismatch_fails: true
+negative_case_mime_mismatch_fails: true
+negative_case_review_record_missing_fails: true
+negative_case_human_approval_missing_blocks_registration: true
+negative_case_category_index_missing_fails: true
+negative_case_registry_entry_missing_fails: true
+negative_case_registry_write_flag_blocks_preflight: true
+negative_case_vcp_runtime_claim_blocks_preflight: true
+negative_case_pending_status_blocks_post_registration: true
+```
+
+## Next Gate
+
+```text
+recommended_next: post_registration_three_sample_recoverability_alignment
+automatic_next_generation_recommended: false
+automatic_accepted_samples_write_performed: false
+accepted_samples_write_allowed_after_human_approval: completed_by_prior_jenn_authorized_metadata_write
+production_candidate_write_requires_separate_authorization: true
+memory_write_requires_separate_authorization: true
+artifact_recoverability_is_not_vcp_runtime_integration: true
+```

@@ -1,0 +1,56 @@
+{
+  "three_sample_dashboard_evidence_alignment": {
+    "version": "v1",
+    "phase": "v14_168_three_sample_dashboard_evidence_alignment",
+    "execution_mode": "dashboard_evidence_alignment_only",
+    "source_validators": {
+      "accepted_registration_validator": "scripts/validate_v14_165_bag_accepted_samples_metadata_registration.js",
+      "blocked_candidate_validator": "scripts/validate_v14_167_lamp_v3_accepted_samples_registration_blocker_preflight.js"
+    },
+    "dashboard_progress_basis": "validator_outputs_real_artifact_evidence",
+    "accepted_samples": [
+      "accepted_womens_resort_relaxed_knit_codex_v2_001",
+      "accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001",
+      "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001"
+    ],
+    "blocked_candidates": [],
+    "dashboard_counts": {
+      "full_recoverable_accepted_sample_count": 3,
+      "blocked_third_candidate_count": 0,
+      "hard_acceptance_three_full_samples_met": true,
+      "remaining_full_recoverable_sample_gap": 0,
+      "pending_candidate_counted_as_accepted": false
+    },
+    "guard": {
+      "dashboard_uses_project_master_plan_progress": false,
+      "dashboard_uses_document_token_progress": false,
+      "dashboard_promotes_product_status": false,
+      "accepted_samples_write_performed": false,
+      "category_index_write_performed": false,
+      "image_file_copy_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_expected": {
+      "dashboard_drops_registered_lamp_fails": true,
+      "three_sample_goal_marked_incomplete_fails": true,
+      "project_master_plan_progress_fails": true,
+      "document_token_progress_fails": true,
+      "runtime_claim_blocks_dashboard": true,
+      "external_action_flag_blocks_dashboard": true,
+      "accepted_samples_write_flag_blocks_dashboard": true
+    }
+  }
+}

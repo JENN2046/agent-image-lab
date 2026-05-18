@@ -16,8 +16,12 @@ const requiredSampleIds = [
   "accepted_french_summer_rattan_bucket_bag_003_shot_2",
   "accepted_french_summer_rattan_bucket_bag_004_shot_3",
   "accepted_womens_resort_relaxed_knit_codex_v2_001",
+  "accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001",
+  "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001",
 ];
 const requiredCodexSample = "accepted_womens_resort_relaxed_knit_codex_v2_001";
+const requiredBagCodexSample = "accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001";
+const requiredLampCodexSample = "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001";
 const imageExtensions = /\.(png|jpe?g|webp|gif|psd|tiff?)$/i;
 
 let passed = true;
@@ -109,6 +113,20 @@ check("codex_session_sample_category", () => extractField(sampleBlocks.get(requi
 check("codex_session_sample_image_not_committed", () => (sampleBlocks.get(requiredCodexSample) || "").includes("image_files_committed_to_git: false"));
 check("codex_session_sample_no_memory_write", () => (sampleBlocks.get(requiredCodexSample) || "").includes("write_to_memory_allowed: false"));
 check("codex_session_sample_no_daily_note_write", () => (sampleBlocks.get(requiredCodexSample) || "").includes("daily_note_write_allowed: false"));
+check("bag_codex_session_sample_present", () => sampleBlocks.has(requiredBagCodexSample));
+check("bag_codex_session_sample_provider_type", () => extractField(sampleBlocks.get(requiredBagCodexSample) || "", "provider_type") === "codex_session_image");
+check("bag_codex_session_sample_plugin_null", () => extractField(sampleBlocks.get(requiredBagCodexSample) || "", "plugin_id") === "null");
+check("bag_codex_session_sample_category", () => extractField(sampleBlocks.get(requiredBagCodexSample) || "", "category") === "fashion_lifestyle_still_life");
+check("bag_codex_session_sample_image_not_committed", () => (sampleBlocks.get(requiredBagCodexSample) || "").includes("image_files_committed_to_git: false"));
+check("bag_codex_session_sample_no_memory_write", () => (sampleBlocks.get(requiredBagCodexSample) || "").includes("write_to_memory_allowed: false"));
+check("bag_codex_session_sample_no_daily_note_write", () => (sampleBlocks.get(requiredBagCodexSample) || "").includes("daily_note_write_allowed: false"));
+check("lamp_codex_session_sample_present", () => sampleBlocks.has(requiredLampCodexSample));
+check("lamp_codex_session_sample_provider_type", () => extractField(sampleBlocks.get(requiredLampCodexSample) || "", "provider_type") === "codex_session_image");
+check("lamp_codex_session_sample_plugin_null", () => extractField(sampleBlocks.get(requiredLampCodexSample) || "", "plugin_id") === "null");
+check("lamp_codex_session_sample_category", () => extractField(sampleBlocks.get(requiredLampCodexSample) || "", "category") === "product_still_life");
+check("lamp_codex_session_sample_image_not_committed", () => (sampleBlocks.get(requiredLampCodexSample) || "").includes("image_files_committed_to_git: false"));
+check("lamp_codex_session_sample_no_memory_write", () => (sampleBlocks.get(requiredLampCodexSample) || "").includes("write_to_memory_allowed: false"));
+check("lamp_codex_session_sample_no_daily_note_write", () => (sampleBlocks.get(requiredLampCodexSample) || "").includes("daily_note_write_allowed: false"));
 check("legacy_wallet_sample_present", () => sampleBlocks.has("accepted_product_still_life_tennis_wallet_001"));
 check("legacy_rattan_bag_samples_present", () => requiredSampleIds.slice(1, 5).every((id) => sampleBlocks.has(id)));
 check("watermark_false_history_preserved", () => registry.includes("watermark_requested: false"));
@@ -126,8 +144,8 @@ for (const index of categoryIndexes) {
   );
 }
 
-check("product_category_count_1", () => fileContains("accepted_samples/categories/product_still_life.yaml", "sample_count: 1"));
-check("fashion_lifestyle_category_count_4", () => fileContains("accepted_samples/categories/fashion_lifestyle_still_life.yaml", "sample_count: 4"));
+check("product_category_count_2", () => fileContains("accepted_samples/categories/product_still_life.yaml", "sample_count: 2"));
+check("fashion_lifestyle_category_count_5", () => fileContains("accepted_samples/categories/fashion_lifestyle_still_life.yaml", "sample_count: 5"));
 check("fashion_lookbook_category_count_1", () => fileContains("accepted_samples/categories/fashion_lookbook_portrait.yaml", "sample_count: 1"));
 check("tracked_accepted_samples_are_metadata_only", () =>
   listTrackedAcceptedSamplesFiles().every((file) => !imageExtensions.test(file))

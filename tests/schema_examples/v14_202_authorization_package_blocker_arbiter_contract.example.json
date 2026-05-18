@@ -1,0 +1,123 @@
+{
+  "authorization_package_blocker_arbiter_contract": {
+    "version": "v1",
+    "phase": "v14_202_authorization_package_blocker_arbiter_contract",
+    "execution_mode": "authorization_package_blocker_arbiter_contract_only",
+    "source_coverage_closeout_ref": "tests/schema_examples/v14_201_authorization_package_compiler_coverage_closeout.example.json",
+    "arbiter_status": "all_package_types_blocked_pending_exact_authorization",
+    "package_type_count": 5,
+    "all_execution_allowed_now": false,
+    "blocker_decisions": [
+      {
+        "package_type": "accepted_samples_metadata_registration",
+        "blocker_code": "blocked_missing_human_approval_or_exact_authorization",
+        "execution_allowed_now": false,
+        "unblock_requires_jenn_exact_authorization": true,
+        "exact_scope_required": true,
+        "rollback_required": true,
+        "reviewer_required": true,
+        "stop_conditions_required": true,
+        "package_specific_required": [
+          "human approval",
+          "registry/category exact file scope",
+          "recoverability validator pass"
+        ]
+      },
+      {
+        "package_type": "manifest_read",
+        "blocker_code": "blocked_missing_exact_manifest_read_authorization",
+        "execution_allowed_now": false,
+        "unblock_requires_jenn_exact_authorization": true,
+        "exact_scope_required": true,
+        "rollback_required": true,
+        "reviewer_required": true,
+        "stop_conditions_required": true,
+        "package_specific_required": [
+          "real manifest target",
+          "exact allowed read paths",
+          "allowed extracted fields"
+        ]
+      },
+      {
+        "package_type": "durable_archive",
+        "blocker_code": "blocked_missing_archive_copy_authorization",
+        "execution_allowed_now": false,
+        "unblock_requires_jenn_exact_authorization": true,
+        "exact_scope_required": true,
+        "rollback_required": true,
+        "reviewer_required": true,
+        "stop_conditions_required": true,
+        "package_specific_required": [
+          "source artifact ref",
+          "target archive path",
+          "hash verification"
+        ]
+      },
+      {
+        "package_type": "production_candidate",
+        "blocker_code": "blocked_missing_production_candidate_authorization",
+        "execution_allowed_now": false,
+        "unblock_requires_jenn_exact_authorization": true,
+        "exact_scope_required": true,
+        "rollback_required": true,
+        "reviewer_required": true,
+        "stop_conditions_required": true,
+        "package_specific_required": [
+          "recoverable accepted sample ref",
+          "eligibility preflight ref",
+          "blocker decision"
+        ]
+      },
+      {
+        "package_type": "daily_note_vcp_memory",
+        "blocker_code": "blocked_missing_daily_note_vcp_memory_write_authorization",
+        "execution_allowed_now": false,
+        "unblock_requires_jenn_exact_authorization": true,
+        "exact_scope_required": true,
+        "rollback_required": true,
+        "reviewer_required": true,
+        "stop_conditions_required": true,
+        "package_specific_required": [
+          "reviewed Chinese memory_delta draft",
+          "sensitive data scan pass",
+          "exact memory targets"
+        ]
+      }
+    ],
+    "validation_required": [
+      "git diff --check",
+      "node scripts/validate_v14_201_authorization_package_compiler_coverage_closeout.js",
+      "node scripts/validate_agent_board_state.js",
+      "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1",
+      "powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1"
+    ],
+    "guard": {
+      "blocker_arbiter_contract_only": true,
+      "authorization_execution_performed": false,
+      "accepted_samples_write_performed": false,
+      "manifest_read_performed": false,
+      "durable_archive_copy_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_expected": {
+      "missing_blocker_decision_fails": true,
+      "execution_allowed_package_fails": true,
+      "unknown_package_type_fails": true,
+      "missing_exact_scope_requirement_fails": true,
+      "memory_write_flag_fails": true,
+      "runtime_claim_fails": true
+    }
+  }
+}

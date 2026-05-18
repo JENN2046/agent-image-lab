@@ -8,12 +8,12 @@ two_month_product_capability_closeout:
   authorization_granted_by_this_record: false
   local_lifecycle_chain_completed_validated: true
   audited_local_stage_count: 13
-  registry_sample_count: 6
+  registry_sample_count: 8
   registry_category_count: 3
-  local_artifact_sample_count: 4
-  full_recoverable_sample_count: 1
-  hard_acceptance_three_full_samples_met: false
-  remaining_full_recoverable_sample_gap: 2
+  local_artifact_sample_count: 6
+  full_recoverable_sample_count: 3
+  hard_acceptance_three_full_samples_met: true
+  remaining_full_recoverable_sample_gap: 0
   a5_execution_slots_skipped_without_authorization: true
   two_month_goal_fully_complete: false
 

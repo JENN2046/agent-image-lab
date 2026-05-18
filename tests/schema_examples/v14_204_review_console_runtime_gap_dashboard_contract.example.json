@@ -1,0 +1,124 @@
+{
+  "review_console_runtime_gap_dashboard_contract": {
+    "version": "v1",
+    "phase": "v14_204_review_console_runtime_gap_dashboard_contract",
+    "execution_mode": "static_runtime_gap_dashboard_contract_only",
+    "source_dashboard_evidence_ref": "tests/schema_examples/v14_168_three_sample_dashboard_evidence_alignment.example.json",
+    "source_review_console_handoff_ref": "tests/schema_examples/v14_203_authorization_compiler_review_console_handoff_state.example.json",
+    "dashboard_contract_status": "static_runtime_gap_contract_ready",
+    "dashboard_progress_basis": "validator_outputs_and_static_fixtures_only",
+    "runtime_gap_row_count": 7,
+    "local_capability_row_count": 3,
+    "a5_boundary_row_count": 4,
+    "runtime_claim_allowed": false,
+    "rows": [
+      {
+        "row_id": "artifact_recoverability",
+        "row_kind": "local_capability",
+        "current_status": "local_verified_two_full_samples",
+        "source_evidence_ref": "tests/schema_examples/v14_168_three_sample_dashboard_evidence_alignment.example.json",
+        "display_allowed": true,
+        "runtime_integration_claim_allowed": false,
+        "requires_a5_authorization_before_execution": false
+      },
+      {
+        "row_id": "accepted_samples_gap",
+        "row_kind": "local_capability",
+        "current_status": "two_complete_one_remaining_gap",
+        "source_evidence_ref": "tests/schema_examples/v14_168_three_sample_dashboard_evidence_alignment.example.json",
+        "display_allowed": true,
+        "runtime_integration_claim_allowed": false,
+        "requires_a5_authorization_before_execution": false
+      },
+      {
+        "row_id": "authorization_handoff_cards",
+        "row_kind": "local_capability",
+        "current_status": "five_blocked_cards_static_ready",
+        "source_evidence_ref": "tests/schema_examples/v14_203_authorization_compiler_review_console_handoff_state.example.json",
+        "display_allowed": true,
+        "runtime_integration_claim_allowed": false,
+        "requires_a5_authorization_before_execution": false
+      },
+      {
+        "row_id": "manifest_read",
+        "row_kind": "a5_boundary",
+        "current_status": "not_performed_requires_exact_a5",
+        "source_evidence_ref": "tests/schema_examples/v14_202_authorization_package_blocker_arbiter_contract.example.json",
+        "display_allowed": true,
+        "runtime_integration_claim_allowed": false,
+        "requires_a5_authorization_before_execution": true
+      },
+      {
+        "row_id": "vcpchat_vcptoolbox_runtime",
+        "row_kind": "a5_boundary",
+        "current_status": "not_performed_requires_exact_a5",
+        "source_evidence_ref": "tests/schema_examples/v14_203_authorization_compiler_review_console_handoff_state.example.json",
+        "display_allowed": true,
+        "runtime_integration_claim_allowed": false,
+        "requires_a5_authorization_before_execution": true
+      },
+      {
+        "row_id": "daily_note_vcp_memory",
+        "row_kind": "a5_boundary",
+        "current_status": "not_performed_requires_exact_a5",
+        "source_evidence_ref": "tests/schema_examples/v14_200_daily_note_vcp_memory_authorization_compiler_output_preflight.example.json",
+        "display_allowed": true,
+        "runtime_integration_claim_allowed": false,
+        "requires_a5_authorization_before_execution": true
+      },
+      {
+        "row_id": "production_candidate_archive",
+        "row_kind": "a5_boundary",
+        "current_status": "not_performed_requires_exact_a5",
+        "source_evidence_ref": "tests/schema_examples/v14_201_authorization_package_compiler_coverage_closeout.example.json",
+        "display_allowed": true,
+        "runtime_integration_claim_allowed": false,
+        "requires_a5_authorization_before_execution": true
+      }
+    ],
+    "validation_required": [
+      "git diff --check",
+      "node scripts/validate_v14_168_three_sample_dashboard_evidence_alignment.js",
+      "node scripts/validate_v14_203_authorization_compiler_review_console_handoff_state.js",
+      "node scripts/validate_agent_board_state.js",
+      "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1"
+    ],
+    "guard": {
+      "runtime_gap_dashboard_contract_only": true,
+      "dashboard_uses_project_master_plan_progress": false,
+      "dashboard_uses_document_token_progress": false,
+      "dashboard_promotes_product_status": false,
+      "authorization_execution_performed": false,
+      "package_execution_performed": false,
+      "accepted_samples_write_performed": false,
+      "manifest_read_performed": false,
+      "durable_archive_copy_performed": false,
+      "production_candidate_write_performed": false,
+      "failure_samples_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "fetch_performed": false,
+      "file_write_performed": false,
+      "review_console_runtime_integration_performed": false,
+      "ipc_preload_renderer_integration_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_expected": {
+      "missing_gap_row_fails": true,
+      "docs_progress_basis_fails": true,
+      "runtime_claim_fails": true,
+      "manifest_read_flag_fails": true,
+      "package_execution_flag_fails": true,
+      "memory_write_flag_fails": true
+    }
+  }
+}

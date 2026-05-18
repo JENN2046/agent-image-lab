@@ -1,0 +1,55 @@
+{
+  "review_console_artifact_detail_drawer_snapshot_static_regression": {
+    "version": "v1",
+    "phase": "v14_175_review_console_artifact_detail_drawer_snapshot_static_regression",
+    "source_fixture_ref": "tests/schema_examples/v14_174_review_console_local_artifact_detail_drawer.example.json",
+    "source_lifecycle_fixture_ref": "tests/schema_examples/v14_169_review_console_artifact_lifecycle_state_reader.example.json",
+    "draft_output_key": "artifact_detail_drawer_state",
+    "snapshot_status": "golden_static_snapshot",
+    "snapshot": {
+      "selected_artifact_id": "accepted_womens_resort_relaxed_knit_codex_v2_001",
+      "selected_candidate_id": "v14_105_womens_resort_relaxed_knit_final_v2",
+      "selected_lifecycle_state": "recoverable",
+      "selected_human_approval_status": "approved",
+      "selected_artifact_ref": "runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/codex_session_womens_resort_relaxed_knit_final_v2.png",
+      "selected_sha256": "9d23208d05427b02ffc177664c1918ed73bf57831a9694be16522fe9a8f3c910",
+      "selected_dimensions": "1254x1254",
+      "selected_mime": "image/png",
+      "selected_prompt_package_ref": "session_prompt_inline:womens_resort_relaxed_knit_final_v2",
+      "selected_import_record_ref": "runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/resort_relaxed_knit_final_import_record.json",
+      "selected_review_record_ref": "docs/v14_105_codex_session_womens_resort_relaxed_knit_final_review.md",
+      "selected_category_index_ref": "accepted_samples/categories/fashion_lookbook_portrait.yaml",
+      "detail_field_count": 10,
+      "expected_selectable_count": 3,
+      "lamp_blocker": "human_approval_missing",
+      "hard_acceptance_three_full_samples_met": false
+    },
+    "guard": {
+      "static_snapshot_only": true,
+      "fetch_performed": false,
+      "file_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_expected": {
+      "selected_hash_mismatch_fails": true,
+      "detail_field_count_mismatch_fails": true,
+      "lamp_blocker_missing_fails": true,
+      "accepted_samples_write_flag_fails": true,
+      "runtime_claim_fails": true
+    }
+  }
+}

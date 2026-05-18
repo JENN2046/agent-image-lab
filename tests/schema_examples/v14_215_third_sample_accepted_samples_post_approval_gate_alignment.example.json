@@ -1,0 +1,83 @@
+{
+  "third_sample_accepted_samples_post_approval_gate_alignment": {
+    "version": "v1",
+    "phase": "v14_215_third_sample_accepted_samples_post_approval_gate_alignment",
+    "status": "completed_pending_validation",
+    "execution_mode": "post_approval_gate_alignment_only",
+    "source_refs": {
+      "readiness": "tests/schema_examples/v14_166_lamp_v3_generated_candidate_readiness.example.json",
+      "blocker_preflight": "tests/schema_examples/v14_167_lamp_v3_accepted_samples_registration_blocker_preflight.example.json",
+      "approval_request_package": "tests/schema_examples/v14_213_lamp_third_sample_human_approval_request_package.example.json",
+      "approval_intake_validator": "scripts/validate_v14_214_lamp_third_sample_human_approval_intake_validator.js"
+    },
+    "target": {
+      "candidate_id": "v14_166_lamp_v3_generated_candidate_001",
+      "proposed_sample_id": "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001",
+      "category": "product_still_life",
+      "artifact_ref": "runs/real_generation/v14_166_codex_session_premium_portable_led_camping_lantern_v3_generation_trial/codex_session_v14_166_premium_portable_led_camping_lantern_v3_candidate_001.png",
+      "verified_sha256": "eaa52095be5af66854f80ba3f6a0b94c93bc1105e6e7ecf984b8dfb3dfff275c",
+      "verified_dimensions": "1254x1254",
+      "verified_mime": "image/png"
+    },
+    "gate": {
+      "gate_status": "blocked",
+      "blocker": "human_approval_missing",
+      "approval_statement_matches_required_form": true,
+      "approval_statement_source_is_user_submission": false,
+      "human_approval_captured_now": false,
+      "registration_unlocks_only_after_external_user_approval": true,
+      "accepted_samples_registration_ready_now": false,
+      "future_registration_requires_v14_214_user_submission": true
+    },
+    "future_allowed_files_after_approval": [
+      "accepted_samples/accepted_sample_registry.yaml",
+      "accepted_samples/categories/product_still_life.yaml"
+    ],
+    "future_required_before_write": [
+      "v14.166 readiness evidence still passes",
+      "v14.167 blocker is cleared by real Jenn approval",
+      "v14.213 exact approval sentence is used",
+      "v14.214 intake validator reports approval_statement_source_is_user_submission=true",
+      "v14.214 intake validator reports human_approval_captured_now=true",
+      "allowed write set remains exactly accepted_samples/accepted_sample_registry.yaml and accepted_samples/categories/product_still_life.yaml",
+      "no image copy, no runs source image modification, no production_candidate, no failure_samples, no DailyNote, no VCP memory"
+    ],
+    "guard": {
+      "post_approval_gate_alignment_only": true,
+      "accepted_samples_write_performed": false,
+      "category_index_write_performed": false,
+      "image_file_copy_performed": false,
+      "runs_source_image_modified": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "image_generation_performed": false,
+      "env_or_secret_read_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "staging_performed": false,
+      "commit_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_required": {
+      "missing_v14_214_requirement_fails": true,
+      "user_submission_overclaim_fails": true,
+      "human_approval_overclaim_fails": true,
+      "registration_ready_overclaim_fails": true,
+      "broad_allowed_files_fails": true,
+      "accepted_samples_write_flag_fails": true,
+      "external_action_flag_fails": true,
+      "runtime_claim_fails": true
+    },
+    "recommended_next": "wait_for_jenn_human_approval_then_run_post_approval_registration_preflight",
+    "recommended_next_auto_execution_allowed": "true_A4_8_validation_only_no_accepted_samples_write_until_user_approval_captured"
+  }
+}

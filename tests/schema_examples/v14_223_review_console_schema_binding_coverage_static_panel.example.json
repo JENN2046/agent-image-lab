@@ -1,0 +1,82 @@
+{
+  "review_console_schema_binding_coverage_static_panel": {
+    "phase": "v14_223_review_console_schema_binding_coverage_static_panel",
+    "execution_mode": "review_console_static_schema_binding_coverage_only",
+    "draft_output_key": "review_console_schema_binding_coverage_state",
+    "source_schema_binding_ref": "review_console/static_prototype/SCHEMA_BINDING.md",
+    "source_recoverability_matrix_ref": "tests/schema_examples/v14_221_review_console_recoverability_matrix_static_workbench.example.json",
+    "bound_schema_count": 3,
+    "bound_schemas": [
+      {
+        "schema_key": "codex_session_image_import",
+        "schema_ref": "schemas/codex_session_image_import.schema.yaml",
+        "source_ref": "review_console/static_prototype/SCHEMA_BINDING.md",
+        "covered_fields": [
+          "prompt_package_ref",
+          "artifact_ref",
+          "sha256",
+          "dimensions",
+          "mime",
+          "import_record_ref",
+          "review_record_ref"
+        ]
+      },
+      {
+        "schema_key": "local_review_record",
+        "schema_ref": "schemas/local_review_record.schema.yaml",
+        "source_ref": "review_console/static_prototype/SCHEMA_BINDING.md",
+        "covered_fields": [
+          "artifact_ref",
+          "import_record_ref",
+          "review_record_ref",
+          "human_approval_status"
+        ]
+      },
+      {
+        "schema_key": "accepted_sample_registry",
+        "schema_ref": "schemas/accepted_sample_registry.schema.yaml",
+        "source_ref": "review_console/static_prototype/SCHEMA_BINDING.md",
+        "covered_fields": [
+          "artifact_ref",
+          "sha256",
+          "dimensions",
+          "mime",
+          "import_record_ref",
+          "human_approval_status",
+          "category_index_ref",
+          "accepted_registry_ref"
+        ]
+      }
+    ],
+    "matrix_required_field_count": 10,
+    "covered_matrix_required_field_count": 10,
+    "missing_matrix_required_fields": [],
+    "binding_status": "covered_static_read_only",
+    "schema_binding_coverage_complete": true,
+    "pending_candidate_counted_as_accepted": false,
+    "hard_acceptance_three_full_samples_met": false,
+    "guard": {
+      "local_static_panel_only": true,
+      "fetch_performed": false,
+      "file_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "category_index_write_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "image_generation_performed": false,
+      "env_or_secret_read_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    }
+  }
+}

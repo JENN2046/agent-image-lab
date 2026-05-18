@@ -1,0 +1,147 @@
+{
+  "six_month_goal_prompt_to_artifact_completion_audit": {
+    "version": "v1",
+    "phase": "v14_212_six_month_goal_prompt_to_artifact_completion_audit",
+    "status": "completed_pending_validation",
+    "execution_mode": "prompt_to_artifact_audit_only",
+    "goal_complete": false,
+    "objective_restated": true,
+    "source_evidence_refs": {
+      "registry": "accepted_samples/accepted_sample_registry.yaml",
+      "dashboard_evidence": "tests/schema_examples/v14_168_three_sample_dashboard_evidence_alignment.example.json",
+      "lamp_readiness": "tests/schema_examples/v14_166_lamp_v3_generated_candidate_readiness.example.json",
+      "exact_file_authorization_draft": "tests/schema_examples/v14_211_recoverability_baseline_exact_file_staging_authorization_package_draft.example.json",
+      "review_console_reader": "review_console/static_prototype/artifact_lifecycle_state_reader.js"
+    },
+    "observed_counts": {
+      "recoverable_accepted_sample_count": 3,
+      "blocked_third_candidate_count": 0,
+      "remaining_full_recoverable_sample_gap": 0,
+      "success_criteria_count": 8,
+      "met_count": 3,
+      "partial_count": 3,
+      "not_met_count": 2,
+      "blocked_by_a5_count": 1
+    },
+    "success_criteria": [
+      {
+        "id": "three_full_recoverable_accepted_samples",
+        "status": "met",
+        "required": "at least three full recoverable accepted samples",
+        "evidence_refs": [
+          "tests/schema_examples/v14_168_three_sample_dashboard_evidence_alignment.example.json",
+          "accepted_samples/accepted_sample_registry.yaml"
+        ],
+        "gap": "none for local artifact recoverability; VCP runtime integration remains separate"
+      },
+      {
+        "id": "third_sample_lamp_candidate_readiness",
+        "status": "met_registered",
+        "required": "lamp candidate has artifact evidence, human approval, and accepted_samples registration",
+        "evidence_refs": [
+          "tests/schema_examples/v14_166_lamp_v3_generated_candidate_readiness.example.json",
+          "tests/schema_examples/v14_166_lamp_v3_generated_candidate_import_record.json",
+          "docs/v14_167_lamp_v3_accepted_samples_registration_blocker_preflight.md"
+        ],
+        "gap": "none for accepted_samples metadata registration"
+      },
+      {
+        "id": "accepted_samples_metadata_registration",
+        "status": "met_three_registered",
+        "required": "only approved reviewed candidates may be registered to accepted_samples metadata",
+        "evidence_refs": [
+          "accepted_samples/accepted_sample_registry.yaml",
+          "docs/v14_165_bag_accepted_samples_metadata_registration.md",
+          "docs/v14_190_third_sample_accepted_samples_registration_authorization_package_draft.md"
+        ],
+        "gap": "none for the three-sample local recoverability baseline"
+      },
+      {
+        "id": "review_console_static_productization",
+        "status": "in_progress_static_only",
+        "required": "static Review Console reads local evidence and remains read-only",
+        "evidence_refs": [
+          "review_console/static_prototype/artifact_lifecycle_state_reader.js",
+          "docs/v14_172_review_console_prompt_to_artifact_completion_static_panel.md",
+          "docs/v14_208_review_console_browser_static_review_blocker_handoff.md"
+        ],
+        "gap": "browser review remains blocked and no runtime integration is proven"
+      },
+      {
+        "id": "authorization_control_layer",
+        "status": "in_progress_draft_preflight_only",
+        "required": "A5 compiler, blocker arbiter, preflight, and rollback packages for high-risk actions",
+        "evidence_refs": [
+          "docs/v14_195_authorization_package_compiler_contract_accepted_samples_registration.md",
+          "docs/v14_196_authorization_package_compiler_type_matrix.md",
+          "docs/v14_202_authorization_package_blocker_arbiter_contract.md"
+        ],
+        "gap": "draft/preflight exists but no real A5 execution"
+      },
+      {
+        "id": "vcp_dry_run_adapter_productization",
+        "status": "partial_dry_run_only",
+        "required": "VCP handoff and adapter contracts exist without real runtime execution",
+        "evidence_refs": [
+          "docs/v14_203_authorization_compiler_review_console_handoff_state.md",
+          "docs/v14_204_review_console_runtime_gap_dashboard_contract.md",
+          "docs/v14_207_review_console_runtime_gap_trace_matrix_static_regression.md"
+        ],
+        "gap": "dry-run contract is not VCP runtime integration"
+      },
+      {
+        "id": "authorized_real_vcp_pilot",
+        "status": "not_started_blocked_by_a5",
+        "required": "real VCP reads/writes only after Jenn A5 authorization",
+        "evidence_refs": [
+          "AGENTS.md",
+          ".agent_board/RUN_STATE.md"
+        ],
+        "gap": "no real manifest/VCPChat/VCPToolBox/DailyNote/VCP memory action has been authorized or performed"
+      },
+      {
+        "id": "v1_visual_production_control_layer_closeout",
+        "status": "not_met",
+        "required": "production gate, durable archive, taxonomy, memory chain, audit dashboard, and v1 closeout",
+        "evidence_refs": [
+          "docs/v14_160_two_month_product_capability_closeout.md",
+          "docs/v14_212_six_month_goal_prompt_to_artifact_completion_audit.md"
+        ],
+        "gap": "v1 closeout is not complete"
+      }
+    ],
+    "guard": {
+      "prompt_to_artifact_audit_only": true,
+      "accepted_samples_write_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "durable_archive_copy_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "image_generation_performed": false,
+      "env_or_secret_read_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "staging_performed": false,
+      "commit_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_required": {
+      "goal_complete_true_fails": true,
+      "three_sample_goal_marked_missing_fails": true,
+      "local_recoverability_marked_goal_complete_fails": true,
+      "missing_evidence_ref_fails": true,
+      "runtime_claim_fails": true,
+      "external_action_flag_fails": true
+    },
+    "recommended_next": "exact_file_authorization_or_third_sample_human_approval_route_decision",
+    "recommended_next_auto_execution_allowed": "true_A4_8_audit_or_draft_only_no_staging_no_commit_no_push"
+  }
+}

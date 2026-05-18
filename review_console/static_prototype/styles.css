@@ -581,6 +581,260 @@ input[type="range"] {
   border-left-color: var(--amber);
 }
 
+.artifact-lifecycle-list {
+  display: grid;
+  gap: 10px;
+}
+
+.artifact-prompt-completion-list {
+  display: grid;
+  gap: 10px;
+}
+
+.artifact-detail-body {
+  display: grid;
+  gap: 10px;
+}
+
+.artifact-compare-body {
+  display: grid;
+  gap: 10px;
+}
+
+.artifact-compare-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.artifact-review-notes-list {
+  display: grid;
+  gap: 10px;
+}
+
+.failure-state-body {
+  display: grid;
+  gap: 10px;
+}
+
+.three-sample-gap-body {
+  display: grid;
+  gap: 10px;
+}
+
+.third-sample-readiness-body,
+.recoverability-matrix-body,
+.schema-binding-coverage-body,
+.six-month-goal-gap-body {
+  display: grid;
+  gap: 10px;
+}
+
+.third-sample-authorization-package-body,
+.third-sample-post-approval-gate-body {
+  display: grid;
+  gap: 10px;
+}
+
+.lifecycle-filter-actions {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.artifact-lifecycle-card {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--amber);
+  border-radius: 8px;
+  background: #0e1518;
+}
+
+.artifact-lifecycle-card.recoverable {
+  border-left-color: var(--cyan);
+}
+
+.artifact-lifecycle-card.blocked {
+  border-left-color: var(--amber);
+}
+
+.artifact-prompt-completion-card {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--cyan);
+  border-radius: 8px;
+  background: #0e1518;
+}
+
+.artifact-prompt-completion-card.blocked {
+  border-left-color: var(--amber);
+}
+
+.artifact-compare-card {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--cyan);
+  border-radius: 8px;
+  background: #0e1518;
+}
+
+.artifact-compare-card.blocked {
+  border-left-color: var(--amber);
+}
+
+.artifact-review-note-card {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--cyan);
+  border-radius: 8px;
+  background: #0e1518;
+}
+
+.artifact-review-note-card.blocked {
+  border-left-color: var(--amber);
+}
+
+.failure-state-card {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--amber);
+  border-radius: 8px;
+  background: #0e1518;
+}
+
+.failure-state-card.memory-forbidden {
+  border-left-color: var(--red);
+}
+
+.failure-state-card.never-production {
+  border-left-color: var(--amber);
+}
+
+.artifact-review-note-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.three-sample-gap-card {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--amber);
+  border-radius: 8px;
+  background: #0e1518;
+}
+
+.three-sample-gap-card.met,
+.recoverability-matrix-card.complete,
+.schema-binding-coverage-card,
+.six-month-goal-gap-card.ready {
+  border-left-color: var(--cyan);
+}
+
+.recoverability-matrix-card,
+.schema-binding-coverage-card,
+.six-month-goal-gap-card {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--cyan);
+  border-radius: 8px;
+  background: #0e1518;
+}
+
+.recoverability-matrix-card.blocked {
+  border-left-color: var(--amber);
+}
+
+.recoverability-matrix-card p,
+.schema-binding-coverage-card p,
+.six-month-goal-gap-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.six-month-goal-gap-card.blocked {
+  border-left-color: var(--amber);
+}
+
+.third-sample-readiness-card {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--amber);
+  border-radius: 8px;
+  background: #0e1518;
+}
+
+.third-sample-readiness-card.ready {
+  border-left-color: var(--cyan);
+}
+
+.human-approval-blocker-queue-body {
+  display: grid;
+  gap: 10px;
+}
+
+.third-sample-authorization-package-card,
+.third-sample-post-approval-gate-card,
+.human-approval-blocker-queue-card {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--amber);
+  border-radius: 8px;
+  background: #0e1518;
+}
+
+.third-sample-authorization-package-card.blocked,
+.third-sample-post-approval-gate-card.blocked,
+.human-approval-blocker-queue-card.blocked {
+  border-left-color: var(--amber);
+}
+
+.authorization-statement {
+  max-height: 180px;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin: 0;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #10191d;
+  color: var(--muted);
+  font: 12px/1.45 ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+}
+
+.artifact-lifecycle-card,
+.artifact-prompt-completion-card {
+  cursor: pointer;
+}
+
 .protocol-card-head {
   display: flex;
   justify-content: space-between;
@@ -614,7 +868,17 @@ input[type="range"] {
 .blocker-card dl,
 .blocker-arbiter-card dl,
 .review-report-card dl,
-.adapter-negative-card dl {
+.adapter-negative-card dl,
+.artifact-review-note-card dl,
+.failure-state-card dl,
+.three-sample-gap-card dl,
+.recoverability-matrix-card dl,
+.schema-binding-coverage-card dl,
+.six-month-goal-gap-card dl,
+.third-sample-readiness-card dl,
+.third-sample-authorization-package-card dl,
+.third-sample-post-approval-gate-card dl,
+.human-approval-blocker-queue-card dl {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
@@ -626,7 +890,17 @@ input[type="range"] {
 .blocker-card dl div,
 .blocker-arbiter-card dl div,
 .review-report-card dl div,
-.adapter-negative-card dl div {
+.adapter-negative-card dl div,
+.artifact-review-note-card dl div,
+.failure-state-card dl div,
+.three-sample-gap-card dl div,
+.recoverability-matrix-card dl div,
+.schema-binding-coverage-card dl div,
+.six-month-goal-gap-card dl div,
+.third-sample-readiness-card dl div,
+.third-sample-authorization-package-card dl div,
+.third-sample-post-approval-gate-card dl div,
+.human-approval-blocker-queue-card dl div {
   min-width: 0;
   padding: 8px;
   border: 1px solid var(--line);
@@ -639,7 +913,18 @@ input[type="range"] {
 .blocker-card dt,
 .blocker-arbiter-card dt,
 .review-report-card dt,
-.adapter-negative-card dt {
+.adapter-negative-card dt,
+.artifact-review-note-card dt,
+.failure-state-card dt,
+.three-sample-gap-card dt,
+.recoverability-matrix-card dt,
+.schema-binding-coverage-card dt,
+.six-month-goal-gap-card dt,
+.third-sample-readiness-card dt,
+.third-sample-authorization-package-card dt,
+.third-sample-post-approval-gate-card dt,
+.human-approval-blocker-queue-card dt,
+.runtime-gap-card dt {
   color: var(--muted);
   font-size: 12px;
 }
@@ -649,7 +934,118 @@ input[type="range"] {
 .blocker-card dd,
 .blocker-arbiter-card dd,
 .review-report-card dd,
-.adapter-negative-card dd {
+.adapter-negative-card dd,
+.artifact-review-note-card dd,
+.failure-state-card dd,
+.three-sample-gap-card dd,
+.recoverability-matrix-card dd,
+.schema-binding-coverage-card dd,
+.six-month-goal-gap-card dd,
+.third-sample-readiness-card dd,
+.third-sample-authorization-package-card dd,
+.third-sample-post-approval-gate-card dd,
+.human-approval-blocker-queue-card dd,
+.runtime-gap-card dd {
+  margin: 3px 0 0;
+  overflow-wrap: anywhere;
+}
+
+.artifact-lifecycle-card dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 0;
+}
+
+.artifact-prompt-completion-card dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 0;
+}
+
+.artifact-detail-body dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 0;
+}
+
+.artifact-compare-card dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 0;
+}
+
+.artifact-lifecycle-card dl div {
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #10191d;
+}
+
+.artifact-prompt-completion-card dl div {
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #10191d;
+}
+
+.artifact-detail-body dl div {
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #10191d;
+}
+
+.artifact-compare-card dl div {
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #10191d;
+}
+
+.artifact-lifecycle-card dt {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.artifact-prompt-completion-card dt {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.artifact-detail-body dt {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.artifact-compare-card dt {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.artifact-lifecycle-card dd {
+  margin: 3px 0 0;
+  overflow-wrap: anywhere;
+}
+
+.artifact-prompt-completion-card dd {
+  margin: 3px 0 0;
+  overflow-wrap: anywhere;
+}
+
+.artifact-detail-body dd {
+  margin: 3px 0 0;
+  overflow-wrap: anywhere;
+}
+
+.artifact-compare-card dd {
   margin: 3px 0 0;
   overflow-wrap: anywhere;
 }
@@ -689,6 +1085,41 @@ input[type="range"] {
 .decision-package-card li {
   display: grid;
   gap: 3px;
+}
+
+.runtime-gap-body {
+  display: grid;
+  gap: 10px;
+}
+
+.runtime-gap-card {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--green);
+  border-radius: 8px;
+  background: #0e1518;
+}
+
+.runtime-gap-card.blocked {
+  border-left-color: var(--amber);
+}
+
+.runtime-gap-card dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 0;
+}
+
+.runtime-gap-card dl div {
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #10191d;
 }
 
 .decision-package-card small {
@@ -758,6 +1189,31 @@ input[type="range"] {
   .blocker-card dl,
   .review-report-card dl,
   .adapter-negative-card dl {
+    grid-template-columns: 1fr;
+  }
+
+  .artifact-lifecycle-card dl {
+    grid-template-columns: 1fr;
+  }
+
+  .artifact-prompt-completion-card dl {
+    grid-template-columns: 1fr;
+  }
+
+  .artifact-detail-body dl {
+    grid-template-columns: 1fr;
+  }
+
+  .artifact-compare-grid,
+  .artifact-compare-card dl,
+    .artifact-review-note-card dl,
+    .three-sample-gap-card dl,
+    .recoverability-matrix-card dl,
+    .schema-binding-coverage-card dl,
+    .third-sample-readiness-card dl,
+    .third-sample-authorization-package-card dl,
+    .third-sample-post-approval-gate-card dl,
+    .runtime-gap-card dl {
     grid-template-columns: 1fr;
   }
 

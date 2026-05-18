@@ -1,0 +1,92 @@
+{
+  "review_console_failure_state_snapshot_static_regression": {
+    "phase": "v14_228_review_console_failure_state_snapshot_static_regression",
+    "snapshot_status": "golden_static_snapshot",
+    "source_workbench_ref": "tests/schema_examples/v14_227_review_console_failure_state_static_workbench.example.json",
+    "source_workbench_record_ref": "docs/v14_227_review_console_failure_state_static_workbench.md",
+    "source_validator_ref": "scripts/validate_v14_227_review_console_failure_state_static_workbench.js",
+    "source_execution_mode": "review_console_static_failure_state_only",
+    "execution_mode": "review_console_static_failure_state_snapshot_only",
+    "draft_output_key": "failure_state_static_workbench_state",
+    "source_negative_review_report_ref": "review_console/static_prototype/mock_data.js#review_report_negative_guard_static_handoff",
+    "source_adapter_negative_ref": "review_console/static_prototype/mock_data.js#review_evidence_blocker_adapter_negative_static_handoff",
+    "failure_candidate_count": 2,
+    "memory_forbidden_count": 1,
+    "never_production_count": 2,
+    "production_exclusion_count": 2,
+    "failure_samples_state": "static_review_only_not_written",
+    "failure_samples_write_allowed": false,
+    "failure_samples_write_performed": false,
+    "memory_forbidden_candidate_ids": [
+      "candidate_reject_unknown_guard_001"
+    ],
+    "never_production_candidate_ids": [
+      "candidate_reject_mapped_guard_001",
+      "candidate_reject_unknown_guard_001"
+    ],
+    "production_exclusion_candidate_ids": [
+      "candidate_reject_mapped_guard_001",
+      "candidate_reject_unknown_guard_001"
+    ],
+    "records": [
+      {
+        "candidate_id": "candidate_reject_mapped_guard_001",
+        "review_outcome": "reject",
+        "final_route": "reject_failure_learning_only_never_production",
+        "failure_tags": [
+          "composition_failure",
+          "style_mismatch"
+        ],
+        "unknown_failure_tags": [],
+        "memory_forbidden": false,
+        "never_production": true,
+        "production_exclusion_record_id": "production_exclusion_candidate_reject_mapped_guard_001",
+        "memory_allowed_output_now": "failure_lesson_draft_only",
+        "production_allowed_output_now": "failure_learning_only",
+        "writes_allowed_now_count": 0
+      },
+      {
+        "candidate_id": "candidate_reject_unknown_guard_001",
+        "review_outcome": "reject",
+        "final_route": "reject_memory_forbidden_never_production",
+        "failure_tags": [
+          "composition_failure"
+        ],
+        "unknown_failure_tags": [
+          "unknown_failure_tag"
+        ],
+        "memory_forbidden": true,
+        "never_production": true,
+        "production_exclusion_record_id": "production_exclusion_candidate_reject_unknown_guard_001",
+        "memory_allowed_output_now": "forbidden",
+        "production_allowed_output_now": "failure_learning_only",
+        "writes_allowed_now_count": 0
+      }
+    ],
+    "guard": {
+      "static_snapshot_only": true,
+      "local_static_workbench_only": true,
+      "fetch_performed": false,
+      "file_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "category_index_write_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "image_generation_performed": false,
+      "env_or_secret_read_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "failure_state_is_not_failure_samples_registry_write": true,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    }
+  }
+}

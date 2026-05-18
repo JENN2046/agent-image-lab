@@ -1,7 +1,20 @@
 category: fashion_lifestyle_still_life
-sample_count: 4
+sample_count: 5
 samples:
   - accepted_french_summer_rattan_bucket_bag_001
   - accepted_french_summer_rattan_bucket_bag_002_shot_1
   - accepted_french_summer_rattan_bucket_bag_003_shot_2
   - accepted_french_summer_rattan_bucket_bag_004_shot_3
+  - accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001
+recoverability_metadata:
+  accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001:
+    recoverability_status: workspace_local_verified
+    artifact_locator_scope: project_relative_runs
+    verification_mode: local_file_hash
+    verified_sha256: 3422671f95e9b218829966ae46f4b284ae619875e080c473a295cf9e65432ba3
+    verified_dimensions: 1254x1254
+    verified_mime: image/png
+    verification_record_ref: docs/v14_165_bag_accepted_samples_metadata_registration.md
+    import_record_ref: tests/schema_examples/v14_161_fashion_lifestyle_woven_crossbody_bag_import_record.json
+    portable_after_clone: false
+    artifact_recoverability_is_not_vcp_runtime_integration: true

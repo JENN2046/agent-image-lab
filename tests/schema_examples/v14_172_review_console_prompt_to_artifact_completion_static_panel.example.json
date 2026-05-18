@@ -1,0 +1,65 @@
+{
+  "review_console_prompt_to_artifact_completion_static_panel": {
+    "version": "v1",
+    "phase": "v14_172_review_console_lifecycle_state_prompt_to_artifact_completion_static_panel",
+    "source_fixture_ref": "tests/schema_examples/v14_169_review_console_artifact_lifecycle_state_reader.example.json",
+    "draft_output_key": "artifact_prompt_completion_state",
+    "records": [
+      {
+        "sample_id": "accepted_womens_resort_relaxed_knit_codex_v2_001",
+        "prompt_package_ref": "session_prompt_inline:womens_resort_relaxed_knit_final_v2",
+        "completion_score": 92,
+        "completion_status": "review_complete",
+        "blocker": null
+      },
+      {
+        "sample_id": "accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001",
+        "prompt_package_ref": "session_prompt_inline:v14_161_fashion_lifestyle_woven_crossbody_bag_candidate_001",
+        "completion_score": 88,
+        "completion_status": "review_complete",
+        "blocker": null
+      },
+      {
+        "sample_id": "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001",
+        "prompt_package_ref": "session_prompt_inline:v14_166_premium_portable_led_camping_lantern_v3_candidate_001",
+        "completion_score": 72,
+        "completion_status": "pending_human_review",
+        "blocker": "human_approval_missing"
+      }
+    ],
+    "summary": {
+      "record_count": 3,
+      "review_complete_count": 2,
+      "blocked_count": 1,
+      "average_completion_score": 84,
+      "hard_acceptance_three_full_samples_met": false
+    },
+    "guard": {
+      "static_panel_only": true,
+      "fetch_performed": false,
+      "file_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_expected": {
+      "missing_prompt_ref_fails": true,
+      "missing_completion_status_fails": true,
+      "lamp_without_blocker_fails": true,
+      "accepted_samples_write_flag_fails": true,
+      "runtime_claim_fails": true
+    }
+  }
+}

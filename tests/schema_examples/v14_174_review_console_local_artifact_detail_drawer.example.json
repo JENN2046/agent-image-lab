@@ -1,0 +1,49 @@
+{
+  "review_console_local_artifact_detail_drawer": {
+    "version": "v1",
+    "phase": "v14_174_review_console_local_artifact_detail_drawer_static_only",
+    "source_fixture_ref": "tests/schema_examples/v14_169_review_console_artifact_lifecycle_state_reader.example.json",
+    "draft_output_key": "artifact_detail_drawer_state",
+    "selected_artifact_id": "accepted_womens_resort_relaxed_knit_codex_v2_001",
+    "required_detail_fields": [
+      "artifact_ref",
+      "sha256",
+      "dimensions",
+      "mime",
+      "prompt_package_ref",
+      "import_record_ref",
+      "review_record_ref",
+      "category_index_ref",
+      "human_approval_status",
+      "registration_blocker"
+    ],
+    "expected_selectable_count": 3,
+    "guard": {
+      "static_detail_only": true,
+      "fetch_performed": false,
+      "file_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_expected": {
+      "missing_artifact_ref_fails": true,
+      "missing_hash_fails": true,
+      "unknown_selected_artifact_falls_back_to_first": true,
+      "accepted_samples_write_flag_fails": true,
+      "runtime_claim_fails": true
+    }
+  }
+}

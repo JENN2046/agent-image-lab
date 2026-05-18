@@ -1,0 +1,98 @@
+{
+  "authorization_package_compiler_coverage_closeout": {
+    "version": "v1",
+    "phase": "v14_201_authorization_package_compiler_coverage_closeout",
+    "execution_mode": "authorization_package_compiler_coverage_closeout_only",
+    "compiler_matrix_ref": "tests/schema_examples/v14_196_authorization_package_compiler_type_matrix.example.json",
+    "coverage_status": "complete_local_blocked_coverage",
+    "package_type_count_expected": 5,
+    "package_type_count_covered": 5,
+    "covered_packages": [
+      {
+        "package_type": "accepted_samples_metadata_registration",
+        "coverage_kind": "compiler_contract",
+        "coverage_ref": "tests/schema_examples/v14_195_authorization_package_compiler_contract_accepted_samples_registration.example.json",
+        "validator_ref": "scripts/validate_v14_195_authorization_package_compiler_contract_accepted_samples_registration.js",
+        "blocked_status_field": "compiled_package_status",
+        "blocked_status_value": "blocked_not_granted",
+        "execution_allowed_now": false
+      },
+      {
+        "package_type": "manifest_read",
+        "coverage_kind": "compiler_output_preflight",
+        "coverage_ref": "tests/schema_examples/v14_197_manifest_read_authorization_compiler_output_preflight.example.json",
+        "validator_ref": "scripts/validate_v14_197_manifest_read_authorization_compiler_output_preflight.js",
+        "blocked_status_field": "package_status",
+        "blocked_status_value": "draft_blocked_missing_exact_manifest_authorization",
+        "execution_allowed_now": false
+      },
+      {
+        "package_type": "durable_archive",
+        "coverage_kind": "compiler_output_preflight",
+        "coverage_ref": "tests/schema_examples/v14_198_durable_archive_authorization_compiler_output_preflight.example.json",
+        "validator_ref": "scripts/validate_v14_198_durable_archive_authorization_compiler_output_preflight.js",
+        "blocked_status_field": "package_status",
+        "blocked_status_value": "draft_blocked_missing_archive_copy_authorization",
+        "execution_allowed_now": false
+      },
+      {
+        "package_type": "production_candidate",
+        "coverage_kind": "compiler_output_preflight",
+        "coverage_ref": "tests/schema_examples/v14_199_production_candidate_authorization_compiler_output_preflight.example.json",
+        "validator_ref": "scripts/validate_v14_199_production_candidate_authorization_compiler_output_preflight.js",
+        "blocked_status_field": "package_status",
+        "blocked_status_value": "draft_blocked_missing_production_candidate_authorization",
+        "execution_allowed_now": false
+      },
+      {
+        "package_type": "daily_note_vcp_memory",
+        "coverage_kind": "compiler_output_preflight",
+        "coverage_ref": "tests/schema_examples/v14_200_daily_note_vcp_memory_authorization_compiler_output_preflight.example.json",
+        "validator_ref": "scripts/validate_v14_200_daily_note_vcp_memory_authorization_compiler_output_preflight.js",
+        "blocked_status_field": "package_status",
+        "blocked_status_value": "draft_blocked_missing_daily_note_vcp_memory_write_authorization",
+        "execution_allowed_now": false
+      }
+    ],
+    "validation_required": [
+      "git diff --check",
+      "node scripts/validate_v14_195_authorization_package_compiler_contract_accepted_samples_registration.js",
+      "node scripts/validate_v14_196_authorization_package_compiler_type_matrix.js",
+      "node scripts/validate_v14_197_manifest_read_authorization_compiler_output_preflight.js",
+      "node scripts/validate_v14_198_durable_archive_authorization_compiler_output_preflight.js",
+      "node scripts/validate_v14_199_production_candidate_authorization_compiler_output_preflight.js",
+      "node scripts/validate_v14_200_daily_note_vcp_memory_authorization_compiler_output_preflight.js",
+      "node scripts/validate_agent_board_state.js",
+      "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1",
+      "powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1"
+    ],
+    "guard": {
+      "coverage_closeout_only": true,
+      "authorization_execution_performed": false,
+      "accepted_samples_write_performed": false,
+      "manifest_read_performed": false,
+      "durable_archive_copy_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_expected": {
+      "missing_package_coverage_fails": true,
+      "execution_allowed_package_fails": true,
+      "validator_missing_fails": true,
+      "wrong_blocked_status_fails": true,
+      "memory_write_flag_fails": true,
+      "runtime_claim_fails": true
+    }
+  }
+}

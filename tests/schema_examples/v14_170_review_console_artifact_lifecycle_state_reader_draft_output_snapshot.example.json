@@ -1,0 +1,90 @@
+{
+  "review_console_artifact_lifecycle_state_reader_draft_output_snapshot": {
+    "version": "v1",
+    "phase": "v14_170_review_console_artifact_lifecycle_state_reader_draft_output_snapshot",
+    "source_fixture_ref": "tests/schema_examples/v14_169_review_console_artifact_lifecycle_state_reader.example.json",
+    "review_console_static_module_ref": "review_console/static_prototype/artifact_lifecycle_state_reader.js",
+    "draft_output_key": "artifact_lifecycle_state_reader",
+    "snapshot_status": "golden_static_snapshot",
+    "artifact_lifecycle_state_reader": {
+      "reader_version": "v1",
+      "source_mode": "project_local_static_fixture",
+      "parse_status": "parsed",
+      "errors": [],
+      "counts": {
+        "total_records": 3,
+        "recoverable_accepted_sample_count": 2,
+        "blocked_registration_candidate_count": 1,
+        "remaining_full_recoverable_sample_gap": 1,
+        "hard_acceptance_three_full_samples_met": false,
+        "pending_candidate_counted_as_accepted": false
+      },
+      "record_expectations": [
+        {
+          "sample_id": "accepted_womens_resort_relaxed_knit_codex_v2_001",
+          "lifecycle_state": "recoverable",
+          "recoverable": true,
+          "blocked_registration": false,
+          "human_approval_status": "approved",
+          "production_candidate_status": "not_created",
+          "vcp_runtime_integration_proven": false
+        },
+        {
+          "sample_id": "accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001",
+          "lifecycle_state": "recoverable",
+          "recoverable": true,
+          "blocked_registration": false,
+          "human_approval_status": "approved",
+          "production_candidate_status": "not_created",
+          "vcp_runtime_integration_proven": false
+        },
+        {
+          "sample_id": "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001",
+          "lifecycle_state": "reviewed_pending_human_approval",
+          "recoverable": false,
+          "blocked_registration": true,
+          "human_approval_status": "pending",
+          "registration_blocker": "human_approval_missing",
+          "production_candidate_status": "not_created",
+          "vcp_runtime_integration_proven": false
+        }
+      ],
+      "guard": {
+        "static_reader_only": true,
+        "fetch_performed": false,
+        "file_write_performed": false,
+        "provider_contact_performed": false,
+        "plugin_call_performed": false,
+        "api_call_performed": false,
+        "mcp_runtime_performed": false,
+        "DailyNote_write_performed": false,
+        "VCP_memory_write_performed": false,
+        "accepted_samples_write_performed": false,
+        "failure_samples_write_performed": false,
+        "production_candidate_write_performed": false,
+        "durable_archive_copy_performed": false,
+        "real_manifest_read_performed": false,
+        "real_vcpchat_read_performed": false,
+        "real_vcptoolbox_read_performed": false,
+        "push_tag_release_deploy_performed": false,
+        "artifact_recoverability_is_not_vcp_runtime_integration": true,
+        "vcp_runtime_integration_proven": false,
+        "guard_failures": []
+      }
+    },
+    "prototype_guard": {
+      "api_called": false,
+      "daily_note_called": false,
+      "vcp_plugin_called": false,
+      "disk_write_performed": false,
+      "image_file_created": false
+    },
+    "negative_cases_expected": {
+      "missing_snapshot_key_fails": true,
+      "counts_mismatch_fails": true,
+      "lamp_marked_recoverable_fails": true,
+      "accepted_samples_write_flag_fails": true,
+      "runtime_claim_fails": true
+    }
+  }
+}

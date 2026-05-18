@@ -1,0 +1,51 @@
+{
+  "review_console_artifact_evidence_review_notes_snapshot_static_regression": {
+    "version": "v1",
+    "phase": "v14_185_review_console_artifact_evidence_review_notes_snapshot_static_regression",
+    "source_fixture_ref": "tests/schema_examples/v14_184_review_console_artifact_evidence_review_notes_panel.example.json",
+    "draft_output_key": "artifact_evidence_review_notes_state",
+    "snapshot_status": "golden_static_snapshot",
+    "snapshot": {
+      "note_count": 3,
+      "approved_note_count": 2,
+      "pending_note_count": 1,
+      "blocked_note_count": 1,
+      "lamp_blocker": "human_approval_missing",
+      "approved_artifact_ids": [
+        "accepted_womens_resort_relaxed_knit_codex_v2_001",
+        "accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001"
+      ],
+      "blocked_artifact_id": "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001",
+      "blocked_review_record_ref": "docs/v14_166_lamp_v3_generated_candidate_readiness.md",
+      "blocked_accepted_samples_metadata_registered": false,
+      "blocked_production_candidate_status": "not_created"
+    },
+    "guard": {
+      "static_snapshot_only": true,
+      "fetch_performed": false,
+      "file_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_expected": {
+      "approved_artifact_ids_mismatch_fails": true,
+      "blocked_artifact_id_mismatch_fails": true,
+      "lamp_blocker_missing_fails": true,
+      "accepted_samples_write_flag_fails": true,
+      "runtime_claim_fails": true
+    }
+  }
+}

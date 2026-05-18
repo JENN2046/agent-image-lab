@@ -30,6 +30,13 @@ const state = {
   review_report_negative_guard_static_handoff: mock.review_report_negative_guard_static_handoff,
   review_evidence_blocker_adapter_negative_static_handoff: mock.review_evidence_blocker_adapter_negative_static_handoff,
   artifact_dashboard_evidence: mock.artifact_recoverability_dashboard_evidence,
+  artifact_lifecycle_state_reader: mock.artifact_lifecycle_state_reader_seed,
+  third_sample_authorization_package: mock.third_sample_accepted_samples_authorization_package_seed,
+  third_sample_post_approval_gate: mock.third_sample_post_approval_gate_seed,
+  human_approval_blocker_queue: mock.human_approval_blocker_queue_seed,
+  runtime_gap_dashboard: mock.review_console_runtime_gap_dashboard_contract_seed,
+  lifecycleFilter: "all",
+  selectedArtifactId: mock.artifact_lifecycle_state_reader_seed.records[0].sample_id,
   import_record_reader: {
     source_mode: "project_local_seed",
     parsed: null,
@@ -209,6 +216,1480 @@ function renderArtifactEvidenceDashboard() {
     <span>hash <strong>${escapeHtml(evidence.verified_sha256.slice(0, 12))}</strong></span>
     <span>basis <strong>${escapeHtml(evidence.dashboard_progress_basis)}</strong></span>
     <span>runtime <strong>${escapeHtml(evidence.vcp_runtime_integration_proven)}</strong></span>
+  `;
+}
+
+function artifactLifecycleReaderApi() {
+  return window.ArtifactLifecycleStateReader;
+}
+
+function normalizeArtifactLifecycleState() {
+  const api = artifactLifecycleReaderApi();
+  if (!api || typeof api.normalizeArtifactLifecycleState !== "function") {
+    return {
+      parse_status: "blocked",
+      errors: ["ArtifactLifecycleStateReader is not loaded"],
+      records: [],
+      counts: {
+        total_records: 0,
+        recoverable_accepted_sample_count: 0,
+        blocked_registration_candidate_count: 0,
+        remaining_full_recoverable_sample_gap: 3,
+        hard_acceptance_three_full_samples_met: false,
+        pending_candidate_counted_as_accepted: false
+      },
+      guard: {
+        static_reader_only: true,
+        fetch_performed: false,
+        file_write_performed: false,
+        provider_contact_performed: false,
+        plugin_call_performed: false,
+        api_call_performed: false,
+        mcp_runtime_performed: false,
+        DailyNote_write_performed: false,
+        VCP_memory_write_performed: false,
+        accepted_samples_write_performed: false,
+        failure_samples_write_performed: false,
+        production_candidate_write_performed: false,
+        real_manifest_read_performed: false,
+        real_vcpchat_read_performed: false,
+        real_vcptoolbox_read_performed: false,
+        vcp_runtime_integration_proven: false
+      }
+    };
+  }
+  return api.normalizeArtifactLifecycleState(state.artifact_lifecycle_state_reader);
+}
+
+const artifactEvidenceStatusPriority = {
+  blocked_registration_candidate: 0,
+  reviewed_pending_human_approval: 1,
+  recoverable_accepted_sample: 2,
+  recoverable: 2
+};
+
+function artifactEvidenceStatusKey(record) {
+  if (record.registration_blocker || record.blocked_registration) return "blocked_registration_candidate";
+  if (record.human_approval_status === "pending") return "reviewed_pending_human_approval";
+  if (record.recoverable === true) return "recoverable_accepted_sample";
+  return record.lifecycle_state || "unknown";
+}
+
+function artifactEvidenceFilterRecords(records, filter) {
+  return records.filter((record) => {
+    if (filter === "recoverable") return record.recoverable === true;
+    if (filter === "blocked") return record.blocked_registration === true;
+    return true;
+  });
+}
+
+function artifactEvidenceStatusSortState() {
+  const lifecycle = normalizeArtifactLifecycleState();
+  const ranked = lifecycle.records.map((record, index) => {
+    const statusKey = artifactEvidenceStatusKey(record);
+    return {
+      artifact_id: record.sample_id || record.candidate_id,
+      status_key: statusKey,
+      sort_priority: artifactEvidenceStatusPriority[statusKey] ?? 9,
+      registration_blocker: record.registration_blocker || null,
+      recoverable: record.recoverable === true,
+      original_index: index
+    };
+  });
+  const sorted = ranked.slice().sort((left, right) => {
+    if (left.sort_priority !== right.sort_priority) return left.sort_priority - right.sort_priority;
+    return left.original_index - right.original_index;
+  });
+  return {
+    draft_output_key: "artifact_evidence_status_sort_state",
+    sort_mode: "blocked_candidates_first",
+    sorted_artifact_ids: sorted.map((item) => item.artifact_id),
+    blocked_candidate_first: sorted[0]?.registration_blocker === "human_approval_missing",
+    blocked_candidate_artifact_id: sorted.find((item) => item.registration_blocker === "human_approval_missing")?.artifact_id || null,
+    recoverable_count: ranked.filter((item) => item.recoverable).length,
+    blocked_count: ranked.filter((item) => item.registration_blocker).length,
+    hard_acceptance_three_full_samples_met: lifecycle.counts.hard_acceptance_three_full_samples_met,
+    status_rows: sorted,
+    static_sort_only: true,
+    fetch_performed: false,
+    file_write_performed: false,
+    accepted_samples_write_performed: false,
+    failure_samples_write_performed: false,
+    production_candidate_write_performed: false,
+    DailyNote_write_performed: false,
+    VCP_memory_write_performed: false,
+    provider_contact_performed: false,
+    plugin_call_performed: false,
+    api_call_performed: false,
+    mcp_runtime_performed: false,
+    real_manifest_read_performed: false,
+    real_vcpchat_read_performed: false,
+    real_vcptoolbox_read_performed: false,
+    push_tag_release_deploy_performed: false,
+    artifact_recoverability_is_not_vcp_runtime_integration: true,
+    vcp_runtime_integration_proven: false
+  };
+}
+
+function artifactEvidenceStatusSortFilterInteractionState() {
+  const lifecycle = normalizeArtifactLifecycleState();
+  const sortState = artifactEvidenceStatusSortState();
+  const sortedIdOrder = new Map(sortState.sorted_artifact_ids.map((id, index) => [id, index]));
+  const filterResults = ["all", "recoverable", "blocked"].map((filter) => {
+    const visible = artifactEvidenceFilterRecords(lifecycle.records, filter).slice().sort((left, right) => {
+      const leftId = left.sample_id || left.candidate_id;
+      const rightId = right.sample_id || right.candidate_id;
+      return (sortedIdOrder.get(leftId) ?? 99) - (sortedIdOrder.get(rightId) ?? 99);
+    });
+    return {
+      filter,
+      visible_artifact_ids: visible.map((record) => record.sample_id || record.candidate_id),
+      visible_count: visible.length,
+      first_visible_artifact_id: visible[0] ? (visible[0].sample_id || visible[0].candidate_id) : null
+    };
+  });
+  return {
+    draft_output_key: "artifact_evidence_status_sort_filter_interaction_state",
+    source_sort_key: "artifact_evidence_status_sort_state",
+    sort_mode: sortState.sort_mode,
+    filter_results: filterResults,
+    all_filter_blocked_candidate_first: filterResults.find((item) => item.filter === "all")?.first_visible_artifact_id === sortState.blocked_candidate_artifact_id,
+    recoverable_filter_excludes_blocked_candidate: !filterResults.find((item) => item.filter === "recoverable")?.visible_artifact_ids.includes(sortState.blocked_candidate_artifact_id),
+    blocked_filter_only_blocked_candidate: JSON.stringify(filterResults.find((item) => item.filter === "blocked")?.visible_artifact_ids || []) === JSON.stringify([sortState.blocked_candidate_artifact_id]),
+    current_lifecycle_filter: state.lifecycleFilter,
+    local_filter_only: true,
+    static_interaction_only: true,
+    fetch_performed: false,
+    file_write_performed: false,
+    accepted_samples_write_performed: false,
+    failure_samples_write_performed: false,
+    production_candidate_write_performed: false,
+    DailyNote_write_performed: false,
+    VCP_memory_write_performed: false,
+    provider_contact_performed: false,
+    plugin_call_performed: false,
+    api_call_performed: false,
+    mcp_runtime_performed: false,
+    real_manifest_read_performed: false,
+    real_vcpchat_read_performed: false,
+    real_vcptoolbox_read_performed: false,
+    push_tag_release_deploy_performed: false,
+    artifact_recoverability_is_not_vcp_runtime_integration: true,
+    vcp_runtime_integration_proven: false
+  };
+}
+
+function renderArtifactLifecycleStateReader() {
+  const lifecycle = normalizeArtifactLifecycleState();
+  const counts = lifecycle.counts;
+  const statusSort = artifactEvidenceStatusSortState();
+  const sortedIdOrder = new Map(statusSort.sorted_artifact_ids.map((id, index) => [id, index]));
+  const visibleRecords = artifactEvidenceFilterRecords(lifecycle.records, state.lifecycleFilter).slice().sort((left, right) => {
+    const leftId = left.sample_id || left.candidate_id;
+    const rightId = right.sample_id || right.candidate_id;
+    return (sortedIdOrder.get(leftId) ?? 99) - (sortedIdOrder.get(rightId) ?? 99);
+  });
+  qsa("[data-lifecycle-filter]").forEach((button) => {
+    button.classList.toggle("is-active", button.dataset.lifecycleFilter === state.lifecycleFilter);
+  });
+  qs("#artifactLifecycleSummary").innerHTML = `
+    <span>parsed <strong>${escapeHtml(lifecycle.parse_status)}</strong></span>
+    <span>recoverable <strong>${escapeHtml(counts.recoverable_accepted_sample_count)}</strong></span>
+    <span>blocked <strong>${escapeHtml(counts.blocked_registration_candidate_count)}</strong></span>
+    <span>gap <strong>${escapeHtml(counts.remaining_full_recoverable_sample_gap)}</strong></span>
+    <span>3-sample met <strong>${escapeHtml(counts.hard_acceptance_three_full_samples_met)}</strong></span>
+    <span>sort <strong>${escapeHtml(statusSort.sort_mode)}</strong></span>
+    <span>filter <strong>${escapeHtml(state.lifecycleFilter)}</strong></span>
+  `;
+
+  const root = qs("#artifactLifecycleList");
+  root.innerHTML = "";
+  visibleRecords.forEach((record) => {
+    const card = document.createElement("article");
+    card.className = `artifact-lifecycle-card ${record.recoverable ? "recoverable" : "blocked"}`;
+    card.innerHTML = `
+      <div class="protocol-card-head">
+        <strong>${escapeHtml(record.sample_id || record.candidate_id)}</strong>
+        <span>${escapeHtml(record.lifecycle_state)}</span>
+      </div>
+      <dl>
+        <div><dt>Task</dt><dd>${escapeHtml(record.visual_task)}</dd></div>
+        <div><dt>Approval</dt><dd>${escapeHtml(record.human_approval_status)}</dd></div>
+        <div><dt>Recoverable</dt><dd>${escapeHtml(record.recoverable)}</dd></div>
+        <div><dt>Blocker</dt><dd>${escapeHtml(record.registration_blocker || "none")}</dd></div>
+        <div><dt>Artifact</dt><dd>${escapeHtml(record.artifact_ref)}</dd></div>
+        <div><dt>Hash</dt><dd>${escapeHtml((record.sha256 || "").slice(0, 12))}</dd></div>
+      </dl>
+    `;
+    card.addEventListener("click", () => setSelectedArtifact(record.sample_id || record.candidate_id));
+    root.appendChild(card);
+  });
+
+  qs("#artifactLifecycleGuard").innerHTML = `
+    <span>static reader only: ${escapeHtml(lifecycle.guard.static_reader_only)}</span>
+    <span>fetch: ${escapeHtml(lifecycle.guard.fetch_performed)}</span>
+    <span>file write: ${escapeHtml(lifecycle.guard.file_write_performed)}</span>
+    <span>accepted_samples write: ${escapeHtml(lifecycle.guard.accepted_samples_write_performed)}</span>
+    <span>production candidate: ${escapeHtml(lifecycle.guard.production_candidate_write_performed)}</span>
+    <span>VCP runtime proven: ${escapeHtml(lifecycle.guard.vcp_runtime_integration_proven)}</span>
+  `;
+}
+
+function setSelectedArtifact(id) {
+  state.selectedArtifactId = id;
+  renderArtifactDetailDrawer();
+  renderArtifactEvidenceCompare();
+  renderDraft();
+}
+
+function setLifecycleFilter(filter) {
+  state.lifecycleFilter = ["all", "recoverable", "blocked"].includes(filter) ? filter : "all";
+  renderArtifactLifecycleStateReader();
+  renderArtifactPromptCompletionPanel();
+  renderDraft();
+}
+
+function renderArtifactPromptCompletionPanel() {
+  const lifecycle = normalizeArtifactLifecycleState();
+  const records = lifecycle.records;
+  const scoredRecords = records.filter((record) => typeof record.prompt_to_artifact_completion.score === "number");
+  const average = scoredRecords.length
+    ? Math.round(scoredRecords.reduce((sum, record) => sum + record.prompt_to_artifact_completion.score, 0) / scoredRecords.length)
+    : 0;
+  const blocked = records.filter((record) => record.prompt_to_artifact_completion.blocker);
+  qs("#artifactPromptCompletionSummary").innerHTML = `
+    <span>records <strong>${escapeHtml(records.length)}</strong></span>
+    <span>average <strong>${escapeHtml(average)}</strong></span>
+    <span>complete <strong>${escapeHtml(records.filter((record) => record.prompt_to_artifact_completion.status === "review_complete").length)}</strong></span>
+    <span>blocked <strong>${escapeHtml(blocked.length)}</strong></span>
+  `;
+
+  const root = qs("#artifactPromptCompletionList");
+  root.innerHTML = "";
+  records.forEach((record) => {
+    const completion = record.prompt_to_artifact_completion;
+    const card = document.createElement("article");
+    card.className = `artifact-prompt-completion-card ${completion.blocker ? "blocked" : "complete"}`;
+    card.innerHTML = `
+      <div class="protocol-card-head">
+        <strong>${escapeHtml(record.sample_id || record.candidate_id)}</strong>
+        <span>${escapeHtml(completion.score ?? "n/a")}</span>
+      </div>
+      <dl>
+        <div><dt>Status</dt><dd>${escapeHtml(completion.status)}</dd></div>
+        <div><dt>Blocker</dt><dd>${escapeHtml(completion.blocker || "none")}</dd></div>
+        <div><dt>Prompt</dt><dd>${escapeHtml(record.prompt_package_ref)}</dd></div>
+        <div><dt>Evidence</dt><dd>${inlineList(completion.evidence)}</dd></div>
+      </dl>
+    `;
+    card.addEventListener("click", () => setSelectedArtifact(record.sample_id || record.candidate_id));
+    root.appendChild(card);
+  });
+
+  qs("#artifactPromptCompletionGuard").innerHTML = `
+    <span>static panel only: true</span>
+    <span>fetch: false</span>
+    <span>file write: false</span>
+    <span>accepted_samples write: false</span>
+    <span>production candidate: false</span>
+    <span>VCP runtime proven: false</span>
+  `;
+}
+
+function currentArtifactDetail() {
+  const lifecycle = normalizeArtifactLifecycleState();
+  return lifecycle.records.find((record) => record.sample_id === state.selectedArtifactId || record.candidate_id === state.selectedArtifactId) || lifecycle.records[0] || null;
+}
+
+function renderArtifactDetailDrawer() {
+  const record = currentArtifactDetail();
+  const body = qs("#artifactDetailBody");
+  if (!record) {
+    qs("#artifactDetailSummary").innerHTML = "<span>selected <strong>none</strong></span>";
+    body.innerHTML = "";
+    return;
+  }
+  qs("#artifactDetailSummary").innerHTML = `
+    <span>selected <strong>${escapeHtml(record.sample_id || record.candidate_id)}</strong></span>
+    <span>state <strong>${escapeHtml(record.lifecycle_state)}</strong></span>
+    <span>approval <strong>${escapeHtml(record.human_approval_status)}</strong></span>
+    <span>recoverable <strong>${escapeHtml(record.recoverable)}</strong></span>
+  `;
+  body.innerHTML = `
+    <dl>
+      <div><dt>Artifact</dt><dd>${escapeHtml(record.artifact_ref)}</dd></div>
+      <div><dt>SHA256</dt><dd>${escapeHtml(record.sha256)}</dd></div>
+      <div><dt>Dimensions</dt><dd>${escapeHtml(record.dimensions)}</dd></div>
+      <div><dt>MIME</dt><dd>${escapeHtml(record.mime)}</dd></div>
+      <div><dt>Prompt</dt><dd>${escapeHtml(record.prompt_package_ref)}</dd></div>
+      <div><dt>Import record</dt><dd>${escapeHtml(record.import_record_ref)}</dd></div>
+      <div><dt>Review record</dt><dd>${escapeHtml(record.review_record_ref)}</dd></div>
+      <div><dt>Category index</dt><dd>${escapeHtml(record.category_index_ref)}</dd></div>
+      <div><dt>Completion</dt><dd>${escapeHtml(record.prompt_to_artifact_completion.score ?? "n/a")} / ${escapeHtml(record.prompt_to_artifact_completion.status)}</dd></div>
+      <div><dt>Blocker</dt><dd>${escapeHtml(record.registration_blocker || record.prompt_to_artifact_completion.blocker || "none")}</dd></div>
+    </dl>
+  `;
+  qs("#artifactDetailGuard").innerHTML = `
+    <span>static detail only: true</span>
+    <span>selected id: ${escapeHtml(state.selectedArtifactId)}</span>
+    <span>fetch: false</span>
+    <span>file write: false</span>
+    <span>accepted_samples write: false</span>
+    <span>production candidate: false</span>
+    <span>VCP runtime proven: false</span>
+  `;
+}
+
+const artifactCompareFields = [
+  ["lifecycle_state", "State"],
+  ["human_approval_status", "Approval"],
+  ["recoverable", "Recoverable"],
+  ["artifact_ref", "Artifact"],
+  ["sha256", "SHA256"],
+  ["dimensions", "Dimensions"],
+  ["prompt_package_ref", "Prompt"],
+  ["review_record_ref", "Review"],
+  ["category_index_ref", "Category"],
+  ["registration_blocker", "Blocker"]
+];
+
+function artifactEvidenceCompareState() {
+  const lifecycle = normalizeArtifactLifecycleState();
+  const primary = currentArtifactDetail();
+  const comparison = lifecycle.records.find((record) => record.registration_blocker === "human_approval_missing") ||
+    lifecycle.records.find((record) => (record.sample_id || record.candidate_id) !== state.selectedArtifactId) ||
+    lifecycle.records[0] ||
+    null;
+  return {
+    primary_artifact_id: primary ? (primary.sample_id || primary.candidate_id) : null,
+    comparison_artifact_id: comparison ? (comparison.sample_id || comparison.candidate_id) : null,
+    primary_artifact: primary,
+    comparison_artifact: comparison,
+    compare_fields: artifactCompareFields.map(([key]) => key),
+    compared_field_count: artifactCompareFields.length,
+    lamp_blocker: comparison?.registration_blocker || null,
+    hard_acceptance_three_full_samples_met: lifecycle.counts.hard_acceptance_three_full_samples_met,
+    compare_filter_lock: {
+      locked_to_blocked_candidate: true,
+      locked_blocker: "human_approval_missing",
+      ignores_lifecycle_filter: true,
+      current_lifecycle_filter: state.lifecycleFilter,
+      locked_comparison_artifact_id: comparison ? (comparison.sample_id || comparison.candidate_id) : null,
+      comparison_source: "blocked_registration_candidate"
+    },
+    static_compare_only: true,
+    fetch_performed: false,
+    file_write_performed: false,
+    accepted_samples_write_performed: false,
+    failure_samples_write_performed: false,
+    production_candidate_write_performed: false,
+    DailyNote_write_performed: false,
+    VCP_memory_write_performed: false,
+    provider_contact_performed: false,
+    plugin_call_performed: false,
+    api_call_performed: false,
+    mcp_runtime_performed: false,
+    real_manifest_read_performed: false,
+    real_vcpchat_read_performed: false,
+    real_vcptoolbox_read_performed: false,
+    vcp_runtime_integration_proven: false
+  };
+}
+
+function renderCompareCard(record, label) {
+  if (!record) {
+    return `
+      <article class="artifact-compare-card blocked">
+        <div class="protocol-card-head">
+          <strong>${escapeHtml(label)}</strong>
+          <span>missing</span>
+        </div>
+      </article>
+    `;
+  }
+  return `
+    <article class="artifact-compare-card ${record.registration_blocker ? "blocked" : "recoverable"}">
+      <div class="protocol-card-head">
+        <strong>${escapeHtml(label)}</strong>
+        <span>${escapeHtml(record.lifecycle_state)}</span>
+      </div>
+      <dl>
+        ${artifactCompareFields.map(([key, fieldLabel]) => `
+          <div>
+            <dt>${escapeHtml(fieldLabel)}</dt>
+            <dd>${escapeHtml(record[key] ?? "none")}</dd>
+          </div>
+        `).join("")}
+      </dl>
+    </article>
+  `;
+}
+
+function renderArtifactEvidenceCompare() {
+  const compare = artifactEvidenceCompareState();
+  qs("#artifactCompareSummary").innerHTML = `
+    <span>primary <strong>${escapeHtml(compare.primary_artifact_id || "none")}</strong></span>
+    <span>comparison <strong>${escapeHtml(compare.comparison_artifact_id || "none")}</strong></span>
+    <span>fields <strong>${escapeHtml(compare.compared_field_count)}</strong></span>
+    <span>lamp blocker <strong>${escapeHtml(compare.lamp_blocker || "none")}</strong></span>
+    <span>filter lock <strong>${escapeHtml(compare.compare_filter_lock.locked_to_blocked_candidate)}</strong></span>
+    <span>3-sample met <strong>${escapeHtml(compare.hard_acceptance_three_full_samples_met)}</strong></span>
+  `;
+  qs("#artifactCompareBody").innerHTML = `
+    <div class="artifact-compare-grid">
+      ${renderCompareCard(compare.primary_artifact, "Selected")}
+      ${renderCompareCard(compare.comparison_artifact, "Blocked candidate")}
+    </div>
+  `;
+  qs("#artifactCompareGuard").innerHTML = `
+    <span>static compare only: ${escapeHtml(compare.static_compare_only)}</span>
+    <span>fetch: ${escapeHtml(compare.fetch_performed)}</span>
+    <span>file write: ${escapeHtml(compare.file_write_performed)}</span>
+    <span>accepted_samples write: ${escapeHtml(compare.accepted_samples_write_performed)}</span>
+    <span>production candidate: ${escapeHtml(compare.production_candidate_write_performed)}</span>
+    <span>VCP runtime proven: ${escapeHtml(compare.vcp_runtime_integration_proven)}</span>
+  `;
+}
+
+function artifactEvidenceReviewNotesState() {
+  const lifecycle = normalizeArtifactLifecycleState();
+  const notes = lifecycle.records.map((record) => {
+    const artifactId = record.sample_id || record.candidate_id;
+    const blocker = record.registration_blocker || null;
+    return {
+      artifact_id: artifactId,
+      visual_task: record.visual_task,
+      review_record_ref: record.review_record_ref,
+      human_approval_status: record.human_approval_status || "unknown",
+      approved_by: record.approved_by || null,
+      registration_blocker: blocker,
+      review_note_summary: blocker
+        ? "Blocked from accepted_samples registration until Jenn human approval exists."
+        : "Approved recoverable sample with accepted_samples metadata registered.",
+      accepted_samples_metadata_registered: record.accepted_samples_metadata_registered === true,
+      production_candidate_status: record.production_candidate_status || "not_created"
+    };
+  });
+  return {
+    draft_output_key: "artifact_evidence_review_notes_state",
+    note_count: notes.length,
+    approved_note_count: notes.filter((note) => note.human_approval_status === "approved").length,
+    pending_note_count: notes.filter((note) => note.human_approval_status === "pending").length,
+    blocked_note_count: notes.filter((note) => note.registration_blocker).length,
+    lamp_blocker: notes.find((note) => note.registration_blocker === "human_approval_missing")?.registration_blocker || null,
+    notes,
+    static_notes_only: true,
+    fetch_performed: false,
+    file_write_performed: false,
+    accepted_samples_write_performed: false,
+    failure_samples_write_performed: false,
+    production_candidate_write_performed: false,
+    DailyNote_write_performed: false,
+    VCP_memory_write_performed: false,
+    provider_contact_performed: false,
+    plugin_call_performed: false,
+    api_call_performed: false,
+    mcp_runtime_performed: false,
+    real_manifest_read_performed: false,
+    real_vcpchat_read_performed: false,
+    real_vcptoolbox_read_performed: false,
+    push_tag_release_deploy_performed: false,
+    artifact_recoverability_is_not_vcp_runtime_integration: true,
+    vcp_runtime_integration_proven: false
+  };
+}
+
+function renderArtifactEvidenceReviewNotes() {
+  const reviewNotes = artifactEvidenceReviewNotesState();
+  qs("#artifactReviewNotesSummary").innerHTML = `
+    <span>notes <strong>${escapeHtml(reviewNotes.note_count)}</strong></span>
+    <span>approved <strong>${escapeHtml(reviewNotes.approved_note_count)}</strong></span>
+    <span>pending <strong>${escapeHtml(reviewNotes.pending_note_count)}</strong></span>
+    <span>blocked <strong>${escapeHtml(reviewNotes.blocked_note_count)}</strong></span>
+    <span>lamp blocker <strong>${escapeHtml(reviewNotes.lamp_blocker || "none")}</strong></span>
+  `;
+  qs("#artifactReviewNotesList").innerHTML = reviewNotes.notes.map((note) => `
+    <article class="artifact-review-note-card ${note.registration_blocker ? "blocked" : "approved"}">
+      <div class="protocol-card-head">
+        <strong>${escapeHtml(note.artifact_id)}</strong>
+        <span>${escapeHtml(note.human_approval_status)}</span>
+      </div>
+      <p>${escapeHtml(note.review_note_summary)}</p>
+      <dl>
+        <div><dt>Task</dt><dd>${escapeHtml(note.visual_task)}</dd></div>
+        <div><dt>Review record</dt><dd>${escapeHtml(note.review_record_ref)}</dd></div>
+        <div><dt>Approved by</dt><dd>${escapeHtml(note.approved_by || "none")}</dd></div>
+        <div><dt>Registration blocker</dt><dd>${escapeHtml(note.registration_blocker || "none")}</dd></div>
+        <div><dt>Accepted metadata</dt><dd>${escapeHtml(note.accepted_samples_metadata_registered)}</dd></div>
+        <div><dt>Production candidate</dt><dd>${escapeHtml(note.production_candidate_status)}</dd></div>
+      </dl>
+    </article>
+  `).join("");
+  qs("#artifactReviewNotesGuard").innerHTML = `
+    <span>static notes only: ${escapeHtml(reviewNotes.static_notes_only)}</span>
+    <span>fetch: ${escapeHtml(reviewNotes.fetch_performed)}</span>
+    <span>file write: ${escapeHtml(reviewNotes.file_write_performed)}</span>
+    <span>accepted_samples write: ${escapeHtml(reviewNotes.accepted_samples_write_performed)}</span>
+    <span>production candidate: ${escapeHtml(reviewNotes.production_candidate_write_performed)}</span>
+    <span>VCP runtime proven: ${escapeHtml(reviewNotes.vcp_runtime_integration_proven)}</span>
+  `;
+}
+
+function threeSampleGapSummaryState() {
+  const lifecycle = normalizeArtifactLifecycleState();
+  const counts = lifecycle.counts;
+  const blockedCandidate = lifecycle.records.find((record) => record.registration_blocker === "human_approval_missing") || null;
+  const requiredCount = 3;
+  return {
+    draft_output_key: "three_sample_gap_summary_state",
+    required_full_recoverable_sample_count: requiredCount,
+    recoverable_accepted_sample_count: counts.recoverable_accepted_sample_count,
+    blocked_registration_candidate_count: counts.blocked_registration_candidate_count,
+    remaining_full_recoverable_sample_gap: counts.remaining_full_recoverable_sample_gap,
+    hard_acceptance_three_full_samples_met: counts.hard_acceptance_three_full_samples_met,
+    pending_candidate_counted_as_accepted: counts.pending_candidate_counted_as_accepted,
+    gap_status: counts.remaining_full_recoverable_sample_gap > 0 ? "blocked_by_human_approval_missing" : "met",
+    blocker_candidate_id: blockedCandidate ? (blockedCandidate.sample_id || blockedCandidate.candidate_id) : null,
+    blocker_reason: blockedCandidate?.registration_blocker || null,
+    blocker_human_approval_status: blockedCandidate?.human_approval_status || null,
+    blocker_accepted_samples_metadata_registered: blockedCandidate?.accepted_samples_metadata_registered === true,
+    blocker_production_candidate_status: blockedCandidate?.production_candidate_status || "not_created",
+    local_summary_only: true,
+    fetch_performed: false,
+    file_write_performed: false,
+    accepted_samples_write_performed: false,
+    failure_samples_write_performed: false,
+    production_candidate_write_performed: false,
+    DailyNote_write_performed: false,
+    VCP_memory_write_performed: false,
+    provider_contact_performed: false,
+    plugin_call_performed: false,
+    api_call_performed: false,
+    mcp_runtime_performed: false,
+    real_manifest_read_performed: false,
+    real_vcpchat_read_performed: false,
+    real_vcptoolbox_read_performed: false,
+    push_tag_release_deploy_performed: false,
+    artifact_recoverability_is_not_vcp_runtime_integration: true,
+    vcp_runtime_integration_proven: false
+  };
+}
+
+function renderThreeSampleGapSummary() {
+  const gap = threeSampleGapSummaryState();
+  qs("#threeSampleGapSummary").innerHTML = `
+    <span>required <strong>${escapeHtml(gap.required_full_recoverable_sample_count)}</strong></span>
+    <span>recoverable <strong>${escapeHtml(gap.recoverable_accepted_sample_count)}</strong></span>
+    <span>remaining <strong>${escapeHtml(gap.remaining_full_recoverable_sample_gap)}</strong></span>
+    <span>status <strong>${escapeHtml(gap.gap_status)}</strong></span>
+    <span>met <strong>${escapeHtml(gap.hard_acceptance_three_full_samples_met)}</strong></span>
+  `;
+  qs("#threeSampleGapBody").innerHTML = `
+    <article class="three-sample-gap-card ${gap.hard_acceptance_three_full_samples_met ? "met" : "blocked"}">
+      <div class="protocol-card-head">
+        <strong>${escapeHtml(gap.gap_status)}</strong>
+        <span>${escapeHtml(gap.remaining_full_recoverable_sample_gap)} remaining</span>
+      </div>
+      <dl>
+        <div><dt>Required recoverable samples</dt><dd>${escapeHtml(gap.required_full_recoverable_sample_count)}</dd></div>
+        <div><dt>Current recoverable samples</dt><dd>${escapeHtml(gap.recoverable_accepted_sample_count)}</dd></div>
+        <div><dt>Blocked candidate</dt><dd>${escapeHtml(gap.blocker_candidate_id || "none")}</dd></div>
+        <div><dt>Blocker reason</dt><dd>${escapeHtml(gap.blocker_reason || "none")}</dd></div>
+        <div><dt>Human approval</dt><dd>${escapeHtml(gap.blocker_human_approval_status || "none")}</dd></div>
+        <div><dt>Accepted metadata</dt><dd>${escapeHtml(gap.blocker_accepted_samples_metadata_registered)}</dd></div>
+        <div><dt>Production candidate</dt><dd>${escapeHtml(gap.blocker_production_candidate_status)}</dd></div>
+        <div><dt>Pending counted as accepted</dt><dd>${escapeHtml(gap.pending_candidate_counted_as_accepted)}</dd></div>
+      </dl>
+    </article>
+  `;
+  qs("#threeSampleGapGuard").innerHTML = `
+    <span>local summary only: ${escapeHtml(gap.local_summary_only)}</span>
+    <span>fetch: ${escapeHtml(gap.fetch_performed)}</span>
+    <span>file write: ${escapeHtml(gap.file_write_performed)}</span>
+    <span>accepted_samples write: ${escapeHtml(gap.accepted_samples_write_performed)}</span>
+    <span>production candidate: ${escapeHtml(gap.production_candidate_write_performed)}</span>
+    <span>VCP runtime proven: ${escapeHtml(gap.vcp_runtime_integration_proven)}</span>
+  `;
+}
+
+function recoverabilityMatrixState() {
+  const lifecycle = normalizeArtifactLifecycleState();
+  const requiredFields = [
+    "artifact_ref",
+    "sha256",
+    "dimensions",
+    "mime",
+    "prompt_package_ref",
+    "import_record_ref",
+    "review_record_ref",
+    "human_approval_status",
+    "category_index_ref",
+    "accepted_registry_ref"
+  ];
+  const rows = lifecycle.records.map((record) => {
+    const fieldState = {
+      artifact_ref: Boolean(record.artifact_ref),
+      sha256: Boolean(record.sha256),
+      dimensions: Boolean(record.dimensions),
+      mime: Boolean(record.mime),
+      prompt_package_ref: Boolean(record.prompt_package_ref),
+      import_record_ref: Boolean(record.import_record_ref),
+      review_record_ref: Boolean(record.review_record_ref),
+      human_approval_status: record.human_approval_status === "approved" && Boolean(record.approved_by),
+      category_index_ref: Boolean(record.category_index_ref),
+      accepted_registry_ref: Boolean(record.accepted_registry_ref)
+    };
+    const missing_fields = requiredFields.filter((field) => !fieldState[field]);
+    const complete_recoverable =
+      record.lifecycle_state === "recoverable" &&
+      record.accepted_samples_metadata_registered === true &&
+      record.accepted_samples_registration_eligible === true &&
+      record.production_candidate_status === "not_created" &&
+      record.registration_blocker === null &&
+      missing_fields.length === 0;
+    return {
+      sample_id: record.sample_id,
+      candidate_id: record.candidate_id,
+      visual_task: record.visual_task,
+      category: record.category,
+      lifecycle_state: record.lifecycle_state,
+      complete_recoverable,
+      accepted_samples_metadata_registered: record.accepted_samples_metadata_registered === true,
+      accepted_samples_registration_eligible: record.accepted_samples_registration_eligible === true,
+      human_approval_status: record.human_approval_status,
+      approved_by: record.approved_by || null,
+      registration_blocker: record.registration_blocker || null,
+      production_candidate_status: record.production_candidate_status || "not_created",
+      prompt_to_artifact_status: record.prompt_to_artifact_completion?.status || null,
+      field_state: fieldState,
+      present_field_count: requiredFields.length - missing_fields.length,
+      required_field_count: requiredFields.length,
+      missing_fields,
+      pending_counted_as_accepted: false,
+      artifact_recoverability_is_not_vcp_runtime_integration: record.artifact_recoverability_is_not_vcp_runtime_integration === true,
+      vcp_runtime_integration_proven: record.vcp_runtime_integration_proven === true
+    };
+  });
+  const completeRows = rows.filter((row) => row.complete_recoverable);
+  const blockedRows = rows.filter((row) => row.registration_blocker);
+  return {
+    draft_output_key: "recoverability_matrix_state",
+    required_full_recoverable_sample_count: 3,
+    complete_recoverable_sample_count: completeRows.length,
+    blocked_registration_candidate_count: blockedRows.length,
+    remaining_full_recoverable_sample_gap: Math.max(0, 3 - completeRows.length),
+    hard_acceptance_three_full_samples_met: completeRows.length >= 3,
+    pending_candidate_counted_as_accepted: false,
+    matrix_status: completeRows.length >= 3 ? "three_sample_standard_met" : "blocked_by_human_approval_missing",
+    rows,
+    row_count: rows.length,
+    required_fields: requiredFields,
+    local_static_matrix_only: true,
+    fetch_performed: false,
+    file_write_performed: false,
+    accepted_samples_write_performed: false,
+    category_index_write_performed: false,
+    failure_samples_write_performed: false,
+    production_candidate_write_performed: false,
+    DailyNote_write_performed: false,
+    VCP_memory_write_performed: false,
+    provider_contact_performed: false,
+    plugin_call_performed: false,
+    api_call_performed: false,
+    mcp_runtime_performed: false,
+    image_generation_performed: false,
+    env_or_secret_read_performed: false,
+    real_manifest_read_performed: false,
+    real_vcpchat_read_performed: false,
+    real_vcptoolbox_read_performed: false,
+    push_tag_release_deploy_performed: false,
+    artifact_recoverability_is_not_vcp_runtime_integration: true,
+    vcp_runtime_integration_proven: false
+  };
+}
+
+function renderRecoverabilityMatrix() {
+  const matrix = recoverabilityMatrixState();
+  qs("#recoverabilityMatrixSummary").innerHTML = `
+    <span>complete <strong>${escapeHtml(matrix.complete_recoverable_sample_count)}</strong></span>
+    <span>required <strong>${escapeHtml(matrix.required_full_recoverable_sample_count)}</strong></span>
+    <span>remaining <strong>${escapeHtml(matrix.remaining_full_recoverable_sample_gap)}</strong></span>
+    <span>status <strong>${escapeHtml(matrix.matrix_status)}</strong></span>
+  `;
+  qs("#recoverabilityMatrixBody").innerHTML = matrix.rows.map((row) => `
+    <article class="recoverability-matrix-card ${row.complete_recoverable ? "complete" : "blocked"}">
+      <div class="protocol-card-head">
+        <strong>${escapeHtml(row.visual_task)}</strong>
+        <span>${escapeHtml(row.lifecycle_state)}</span>
+      </div>
+      <dl>
+        <div><dt>Sample</dt><dd>${escapeHtml(row.sample_id)}</dd></div>
+        <div><dt>Category</dt><dd>${escapeHtml(row.category)}</dd></div>
+        <div><dt>Fields</dt><dd>${escapeHtml(row.present_field_count)} / ${escapeHtml(row.required_field_count)}</dd></div>
+        <div><dt>Human approval</dt><dd>${escapeHtml(row.human_approval_status || "none")}</dd></div>
+        <div><dt>Approved by</dt><dd>${escapeHtml(row.approved_by || "none")}</dd></div>
+        <div><dt>Registration blocker</dt><dd>${escapeHtml(row.registration_blocker || "none")}</dd></div>
+        <div><dt>Accepted metadata</dt><dd>${escapeHtml(row.accepted_samples_metadata_registered)}</dd></div>
+        <div><dt>Complete recoverable</dt><dd>${escapeHtml(row.complete_recoverable)}</dd></div>
+      </dl>
+      <p>${escapeHtml(row.missing_fields.length ? `missing: ${row.missing_fields.join(", ")}` : "all required fields present")}</p>
+    </article>
+  `).join("");
+  qs("#recoverabilityMatrixGuard").innerHTML = `
+    <span>local static matrix only: ${escapeHtml(matrix.local_static_matrix_only)}</span>
+    <span>fetch: ${escapeHtml(matrix.fetch_performed)}</span>
+    <span>file write: ${escapeHtml(matrix.file_write_performed)}</span>
+    <span>accepted_samples write: ${escapeHtml(matrix.accepted_samples_write_performed)}</span>
+    <span>production candidate: ${escapeHtml(matrix.production_candidate_write_performed)}</span>
+    <span>VCP runtime proven: ${escapeHtml(matrix.vcp_runtime_integration_proven)}</span>
+  `;
+}
+
+function reviewConsoleSchemaBindingCoverageState() {
+  const matrix = recoverabilityMatrixState();
+  const boundSchemas = [
+    {
+      schema_key: "codex_session_image_import",
+      schema_ref: "schemas/codex_session_image_import.schema.yaml",
+      source_ref: "review_console/static_prototype/SCHEMA_BINDING.md",
+      covered_fields: [
+        "prompt_package_ref",
+        "artifact_ref",
+        "sha256",
+        "dimensions",
+        "mime",
+        "import_record_ref",
+        "review_record_ref"
+      ]
+    },
+    {
+      schema_key: "local_review_record",
+      schema_ref: "schemas/local_review_record.schema.yaml",
+      source_ref: "review_console/static_prototype/SCHEMA_BINDING.md",
+      covered_fields: [
+        "artifact_ref",
+        "import_record_ref",
+        "review_record_ref",
+        "human_approval_status"
+      ]
+    },
+    {
+      schema_key: "accepted_sample_registry",
+      schema_ref: "schemas/accepted_sample_registry.schema.yaml",
+      source_ref: "review_console/static_prototype/SCHEMA_BINDING.md",
+      covered_fields: [
+        "artifact_ref",
+        "sha256",
+        "dimensions",
+        "mime",
+        "import_record_ref",
+        "human_approval_status",
+        "category_index_ref",
+        "accepted_registry_ref"
+      ]
+    }
+  ];
+  const coveredFields = Array.from(new Set(boundSchemas.flatMap((schema) => schema.covered_fields))).sort();
+  const missingFields = matrix.required_fields.filter((field) => !coveredFields.includes(field));
+  return {
+    phase: "v14_223_review_console_schema_binding_coverage_static_panel",
+    execution_mode: "review_console_static_schema_binding_coverage_only",
+    draft_output_key: "review_console_schema_binding_coverage_state",
+    source_schema_binding_ref: "review_console/static_prototype/SCHEMA_BINDING.md",
+    source_recoverability_matrix_ref: "tests/schema_examples/v14_221_review_console_recoverability_matrix_static_workbench.example.json",
+    bound_schema_count: boundSchemas.length,
+    bound_schemas: boundSchemas,
+    matrix_required_field_count: matrix.required_fields.length,
+    covered_matrix_required_field_count: matrix.required_fields.length - missingFields.length,
+    missing_matrix_required_fields: missingFields,
+    binding_status: missingFields.length === 0 ? "covered_static_read_only" : "missing_schema_binding",
+    schema_binding_coverage_complete: missingFields.length === 0,
+    pending_candidate_counted_as_accepted: matrix.pending_candidate_counted_as_accepted,
+    hard_acceptance_three_full_samples_met: matrix.hard_acceptance_three_full_samples_met,
+    guard: {
+      local_static_panel_only: true,
+      fetch_performed: false,
+      file_write_performed: false,
+      accepted_samples_write_performed: false,
+      category_index_write_performed: false,
+      failure_samples_write_performed: false,
+      production_candidate_write_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      mcp_runtime_performed: false,
+      image_generation_performed: false,
+      env_or_secret_read_performed: false,
+      real_manifest_read_performed: false,
+      real_vcpchat_read_performed: false,
+      real_vcptoolbox_read_performed: false,
+      push_tag_release_deploy_performed: false,
+      artifact_recoverability_is_not_vcp_runtime_integration: true,
+      vcp_runtime_integration_proven: false
+    }
+  };
+}
+
+function renderReviewConsoleSchemaBindingCoverage() {
+  const coverage = reviewConsoleSchemaBindingCoverageState();
+  qs("#schemaBindingCoverageSummary").innerHTML = `
+    <span>schemas <strong>${escapeHtml(coverage.bound_schema_count)}</strong></span>
+    <span>fields <strong>${escapeHtml(coverage.covered_matrix_required_field_count)} / ${escapeHtml(coverage.matrix_required_field_count)}</strong></span>
+    <span>status <strong>${escapeHtml(coverage.binding_status)}</strong></span>
+    <span>runtime <strong>${escapeHtml(coverage.guard.vcp_runtime_integration_proven)}</strong></span>
+  `;
+  qs("#schemaBindingCoverageBody").innerHTML = coverage.bound_schemas.map((schema) => `
+    <article class="schema-binding-coverage-card">
+      <div class="protocol-card-head">
+        <strong>${escapeHtml(schema.schema_key)}</strong>
+        <span>bound</span>
+      </div>
+      <dl>
+        <div><dt>Schema</dt><dd>${escapeHtml(schema.schema_ref)}</dd></div>
+        <div><dt>Source</dt><dd>${escapeHtml(schema.source_ref)}</dd></div>
+        <div><dt>Fields</dt><dd>${inlineList(schema.covered_fields)}</dd></div>
+      </dl>
+    </article>
+  `).join("");
+  qs("#schemaBindingCoverageGuard").innerHTML = `
+    <span>static panel: ${escapeHtml(coverage.guard.local_static_panel_only)}</span>
+    <span>missing fields: ${inlineList(coverage.missing_matrix_required_fields)}</span>
+    <span>accepted_samples write: ${escapeHtml(coverage.guard.accepted_samples_write_performed)}</span>
+    <span>VCP runtime proven: ${escapeHtml(coverage.guard.vcp_runtime_integration_proven)}</span>
+  `;
+}
+
+function sixMonthGoalGapState() {
+  const matrix = recoverabilityMatrixState();
+  const schemaCoverage = reviewConsoleSchemaBindingCoverageState();
+  const completeSamples = matrix.complete_recoverable_sample_count;
+  const remainingGap = matrix.remaining_full_recoverable_sample_gap;
+  const monthGoals = [
+    {
+      month: 1,
+      objective: "three_full_recoverable_accepted_samples",
+      status: matrix.hard_acceptance_three_full_samples_met ? "met" : "blocked_by_human_approval_missing",
+      evidence_refs: [
+        "tests/schema_examples/v14_221_review_console_recoverability_matrix_static_workbench.example.json",
+        "tests/schema_examples/v14_222_review_console_recoverability_matrix_snapshot_static_regression.example.json",
+        "docs/v14_166_lamp_v3_generated_candidate_readiness.md"
+      ],
+      proven_count: completeSamples,
+      required_count: matrix.required_full_recoverable_sample_count,
+      remaining_gap: remainingGap,
+      blocker: remainingGap > 0 ? "human_approval_missing" : null,
+      next_local_action: remainingGap > 0 ? "wait_for_jenn_human_approval_or_run_intake" : "expand_multi_category_matrix"
+    },
+    {
+      month: 2,
+      objective: "review_console_static_productization",
+      status: "in_progress_static_read_only",
+      evidence_refs: [
+        "docs/v14_169_review_console_artifact_lifecycle_state_reader.md",
+        "docs/v14_221_review_console_recoverability_matrix_static_workbench.md",
+        "docs/v14_223_review_console_schema_binding_coverage_static_panel.md",
+        "docs/v14_224_review_console_schema_binding_coverage_snapshot_static_regression.md"
+      ],
+      proven_count: schemaCoverage.schema_binding_coverage_complete ? 1 : 0,
+      required_count: 1,
+      remaining_gap: schemaCoverage.schema_binding_coverage_complete ? 0 : 1,
+      blocker: null,
+      next_local_action: "continue_static_review_console_workbench_regression"
+    },
+    {
+      month: 3,
+      objective: "authorization_control_layer",
+      status: "draft_preflight_contracts_present_not_executed",
+      evidence_refs: [
+        "docs/v14_195_authorization_package_compiler_contract_accepted_samples_registration.md",
+        "docs/v14_196_authorization_package_compiler_type_matrix.md",
+        "docs/v14_202_authorization_package_blocker_arbiter_contract.md"
+      ],
+      proven_count: 0,
+      required_count: 1,
+      remaining_gap: 1,
+      blocker: "execution_requires_explicit_A5",
+      next_local_action: "harden_authorization_package_compiler_validator"
+    },
+    {
+      month: 4,
+      objective: "vcp_dry_run_adapter_productization",
+      status: "dry_run_contract_only",
+      evidence_refs: [
+        "docs/v14_203_authorization_compiler_review_console_handoff_state.md",
+        "docs/v14_204_review_console_runtime_gap_dashboard_contract.md",
+        "docs/v14_207_review_console_runtime_gap_trace_matrix_static_regression.md"
+      ],
+      proven_count: 0,
+      required_count: 1,
+      remaining_gap: 1,
+      blocker: "real_runtime_integration_forbidden_without_A5",
+      next_local_action: "expand_dry_run_contract_test_suite"
+    },
+    {
+      month: 5,
+      objective: "authorized_real_integration_pilot",
+      status: "blocked_requires_jenn_A5",
+      evidence_refs: [
+        "docs/v14_197_manifest_read_authorization_compiler_output_preflight.md",
+        "docs/v14_200_daily_note_vcp_memory_authorization_compiler_output_preflight.md"
+      ],
+      proven_count: 0,
+      required_count: 1,
+      remaining_gap: 1,
+      blocker: "no_active_A5_authorization",
+      next_local_action: "prepare_minimal_A5_preflight_only"
+    },
+    {
+      month: 6,
+      objective: "v1_visual_production_control_layer_closeout",
+      status: "not_started_not_proven",
+      evidence_refs: [],
+      proven_count: 0,
+      required_count: 1,
+      remaining_gap: 1,
+      blocker: "depends_on_month_1_to_5_evidence",
+      next_local_action: "do_not_claim_v1_until_real_evidence_chain_exists"
+    }
+  ];
+  const blockedGoals = monthGoals.filter((goal) => goal.remaining_gap > 0 || goal.blocker);
+  return {
+    phase: "v14_225_review_console_six_month_goal_gap_static_panel",
+    execution_mode: "review_console_static_six_month_goal_gap_only",
+    draft_output_key: "six_month_goal_gap_state",
+    source_goal_ref: "thread_active_goal_2026_05_18",
+    source_recoverability_matrix_ref: "tests/schema_examples/v14_221_review_console_recoverability_matrix_static_workbench.example.json",
+    source_schema_binding_snapshot_ref: "tests/schema_examples/v14_224_review_console_schema_binding_coverage_snapshot_static_regression.example.json",
+    month_count: monthGoals.length,
+    blocked_or_incomplete_month_count: blockedGoals.length,
+    complete_recoverable_sample_count: completeSamples,
+    required_full_recoverable_sample_count: matrix.required_full_recoverable_sample_count,
+    remaining_full_recoverable_sample_gap: remainingGap,
+    hard_acceptance_three_full_samples_met: matrix.hard_acceptance_three_full_samples_met,
+    pending_candidate_counted_as_accepted: matrix.pending_candidate_counted_as_accepted,
+    vcp_runtime_integration_proven_month_count: 0,
+    overall_status: matrix.hard_acceptance_three_full_samples_met ? "local_recoverability_baseline_expanding" : "month_1_blocked_by_third_sample_human_approval",
+    goals: monthGoals,
+    guard: {
+      local_static_panel_only: true,
+      fetch_performed: false,
+      file_write_performed: false,
+      accepted_samples_write_performed: false,
+      category_index_write_performed: false,
+      failure_samples_write_performed: false,
+      production_candidate_write_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      mcp_runtime_performed: false,
+      image_generation_performed: false,
+      env_or_secret_read_performed: false,
+      real_manifest_read_performed: false,
+      real_vcpchat_read_performed: false,
+      real_vcptoolbox_read_performed: false,
+      push_tag_release_deploy_performed: false,
+      artifact_recoverability_is_not_vcp_runtime_integration: true,
+      dry_run_adapter_is_not_vcp_runtime_integration: true,
+      review_console_static_read_is_not_vcp_runtime_integration: true,
+      authorization_package_draft_is_not_vcp_runtime_integration: true,
+      vcp_runtime_integration_proven: false
+    }
+  };
+}
+
+function renderSixMonthGoalGap() {
+  const gap = sixMonthGoalGapState();
+  qs("#sixMonthGoalGapSummary").innerHTML = `
+    <span>months <strong>${escapeHtml(gap.month_count)}</strong></span>
+    <span>samples <strong>${escapeHtml(gap.complete_recoverable_sample_count)} / ${escapeHtml(gap.required_full_recoverable_sample_count)}</strong></span>
+    <span>remaining <strong>${escapeHtml(gap.remaining_full_recoverable_sample_gap)}</strong></span>
+    <span>runtime proven <strong>${escapeHtml(gap.guard.vcp_runtime_integration_proven)}</strong></span>
+  `;
+  qs("#sixMonthGoalGapBody").innerHTML = gap.goals.map((goal) => `
+    <article class="six-month-goal-gap-card ${goal.remaining_gap > 0 || goal.blocker ? "blocked" : "ready"}">
+      <div class="protocol-card-head">
+        <strong>Month ${escapeHtml(goal.month)} · ${escapeHtml(goal.objective)}</strong>
+        <span>${escapeHtml(goal.status)}</span>
+      </div>
+      <dl>
+        <div><dt>Proven</dt><dd>${escapeHtml(goal.proven_count)} / ${escapeHtml(goal.required_count)}</dd></div>
+        <div><dt>Remaining gap</dt><dd>${escapeHtml(goal.remaining_gap)}</dd></div>
+        <div><dt>Blocker</dt><dd>${escapeHtml(goal.blocker || "none")}</dd></div>
+        <div><dt>Next local action</dt><dd>${escapeHtml(goal.next_local_action)}</dd></div>
+        <div><dt>Evidence refs</dt><dd>${inlineList(goal.evidence_refs)}</dd></div>
+      </dl>
+    </article>
+  `).join("");
+  qs("#sixMonthGoalGapGuard").innerHTML = `
+    <span>static panel: ${escapeHtml(gap.guard.local_static_panel_only)}</span>
+    <span>accepted_samples write: ${escapeHtml(gap.guard.accepted_samples_write_performed)}</span>
+    <span>real manifest read: ${escapeHtml(gap.guard.real_manifest_read_performed)}</span>
+    <span>VCPChat read: ${escapeHtml(gap.guard.real_vcpchat_read_performed)}</span>
+    <span>runtime proven: ${escapeHtml(gap.guard.vcp_runtime_integration_proven)}</span>
+  `;
+}
+
+function thirdSampleAcceptanceReadinessState() {
+  const lifecycle = normalizeArtifactLifecycleState();
+  const target = lifecycle.records.find((record) => record.registration_blocker === "human_approval_missing") || null;
+  const evidenceReferences = target ? [
+    target.artifact_ref,
+    target.sha256,
+    target.dimensions,
+    target.mime,
+    target.prompt_package_ref,
+    target.import_record_ref,
+    target.review_record_ref,
+    target.category_index_ref,
+    target.accepted_registry_ref
+  ].filter(Boolean) : [];
+  const missingRequirements = [];
+  if (target?.human_approval_status !== "approved") {
+    missingRequirements.push("human_approval_status: approved");
+  }
+  if (target?.approved_by !== "Jenn") {
+    missingRequirements.push("approved_by: Jenn");
+  }
+  const registrationReady = Boolean(target) && missingRequirements.length === 0 && target.accepted_samples_registration_eligible === true;
+  return {
+    draft_output_key: "third_sample_acceptance_readiness_state",
+    target_sample_id: target?.sample_id || null,
+    target_candidate_id: target?.candidate_id || null,
+    target_visual_task: target?.visual_task || null,
+    readiness_status: registrationReady ? "ready_for_metadata_registration_preflight" : "blocked_missing_human_approval",
+    required_approval_by: "Jenn",
+    human_approval_status: target?.human_approval_status || null,
+    approved_by: target?.approved_by || null,
+    registration_ready: registrationReady,
+    accepted_samples_registration_eligible: target?.accepted_samples_registration_eligible === true,
+    accepted_samples_metadata_registered: target?.accepted_samples_metadata_registered === true,
+    accepted_samples_write_allowed: false,
+    production_candidate_write_allowed: false,
+    failure_samples_write_allowed: false,
+    required_registry_files: [
+      "accepted_samples/accepted_sample_registry.yaml",
+      target?.category_index_ref || "accepted_samples/categories/product_still_life.yaml"
+    ],
+    evidence_refs: evidenceReferences,
+    present_evidence_count: evidenceReferences.length,
+    missing_requirements: missingRequirements,
+    missing_requirement_count: missingRequirements.length,
+    next_allowed_local_action: registrationReady ? "accepted_samples_metadata_registration_preflight" : "wait_for_jenn_human_approval",
+    local_readiness_only: true,
+    fetch_performed: false,
+    file_write_performed: false,
+    accepted_samples_write_performed: false,
+    failure_samples_write_performed: false,
+    production_candidate_write_performed: false,
+    DailyNote_write_performed: false,
+    VCP_memory_write_performed: false,
+    provider_contact_performed: false,
+    plugin_call_performed: false,
+    api_call_performed: false,
+    mcp_runtime_performed: false,
+    real_manifest_read_performed: false,
+    real_vcpchat_read_performed: false,
+    real_vcptoolbox_read_performed: false,
+    push_tag_release_deploy_performed: false,
+    artifact_recoverability_is_not_vcp_runtime_integration: true,
+    vcp_runtime_integration_proven: false
+  };
+}
+
+function thirdSampleAcceptedSamplesAuthorizationPackageState() {
+  const packageSeed = state.third_sample_authorization_package || {};
+  const target = packageSeed.target || {};
+  const scope = packageSeed.draft_scope || {};
+  const guard = packageSeed.guard || {};
+  const readiness = thirdSampleAcceptanceReadinessState();
+  const allowedFiles = scope.would_modify_files || [];
+  const forbiddenOperations = scope.forbidden_operations || [];
+  const missingRequirements = packageSeed.missing_requirements || [];
+  const exactStatement = packageSeed.exact_approval_statement_draft || "";
+  return {
+    draft_output_key: "third_sample_accepted_samples_authorization_package_state",
+    source_authorization_package_ref: packageSeed.source_authorization_package_ref || null,
+    source_readiness_ref: packageSeed.source_readiness_ref || null,
+    source_blocker_preflight_ref: packageSeed.source_blocker_preflight_ref || null,
+    target_sample_id: target.sample_id || readiness.target_sample_id,
+    target_candidate_id: target.candidate_id || readiness.target_candidate_id,
+    authorization_package_status: packageSeed.authorization_package_status || "missing",
+    authorization_granted_by_this_record: packageSeed.authorization_granted_by_this_record === true,
+    execution_ready: packageSeed.execution_ready === true,
+    blocker: packageSeed.blocker || readiness.readiness_status,
+    human_approval_status: target.human_approval_status || readiness.human_approval_status,
+    approved_by: target.approved_by || null,
+    registration_ready: target.registration_ready === true,
+    accepted_samples_metadata_registered: readiness.accepted_samples_metadata_registered === true,
+    exact_approval_statement_draft: exactStatement,
+    exact_approval_statement_present: exactStatement.length > 0,
+    exact_allowed_files: allowedFiles,
+    exact_allowed_file_count: allowedFiles.length,
+    forbidden_operations: forbiddenOperations,
+    forbidden_operation_count: forbiddenOperations.length,
+    missing_requirements: missingRequirements,
+    missing_requirement_count: missingRequirements.length,
+    next_allowed_local_action: "wait_for_jenn_human_approval_and_exact_authorization",
+    static_panel_only: guard.static_panel_only === true,
+    accepted_samples_write_performed: guard.accepted_samples_write_performed === true,
+    category_index_write_performed: guard.category_index_write_performed === true,
+    image_file_copy_performed: guard.image_file_copy_performed === true,
+    failure_samples_write_performed: guard.failure_samples_write_performed === true,
+    production_candidate_write_performed: guard.production_candidate_write_performed === true,
+    DailyNote_write_performed: guard.DailyNote_write_performed === true,
+    VCP_memory_write_performed: guard.VCP_memory_write_performed === true,
+    provider_contact_performed: guard.provider_contact_performed === true,
+    plugin_call_performed: guard.plugin_call_performed === true,
+    api_call_performed: guard.api_call_performed === true,
+    mcp_runtime_performed: guard.mcp_runtime_performed === true,
+    real_manifest_read_performed: guard.real_manifest_read_performed === true,
+    real_vcpchat_read_performed: guard.real_vcpchat_read_performed === true,
+    real_vcptoolbox_read_performed: guard.real_vcptoolbox_read_performed === true,
+    push_tag_release_deploy_performed: guard.push_tag_release_deploy_performed === true,
+    artifact_recoverability_is_not_vcp_runtime_integration: guard.artifact_recoverability_is_not_vcp_runtime_integration === true,
+    vcp_runtime_integration_proven: guard.vcp_runtime_integration_proven === true
+  };
+}
+
+function thirdSamplePostApprovalGateState() {
+  const gateSeed = state.third_sample_post_approval_gate || {};
+  const target = gateSeed.target || {};
+  const guard = gateSeed.guard || {};
+  const requirements = gateSeed.required_before_write || [];
+  const authorization = thirdSampleAcceptedSamplesAuthorizationPackageState();
+  return {
+    draft_output_key: "third_sample_post_approval_gate_state",
+    source_gate_ref: gateSeed.source_gate_ref || null,
+    source_intake_validator_ref: gateSeed.source_intake_validator_ref || null,
+    target_sample_id: target.sample_id || authorization.target_sample_id,
+    target_candidate_id: target.candidate_id || authorization.target_candidate_id,
+    category: target.category || "product_still_life",
+    gate_status: gateSeed.gate_status || "missing",
+    blocker: gateSeed.blocker || authorization.blocker,
+    approval_statement_source_is_user_submission: target.approval_statement_source_is_user_submission === true,
+    human_approval_captured_now: target.human_approval_captured_now === true,
+    accepted_samples_registration_ready_now: target.accepted_samples_registration_ready_now === true,
+    future_registration_requires_v14_214_user_submission: target.future_registration_requires_v14_214_user_submission === true,
+    authorization_package_status: authorization.authorization_package_status,
+    authorization_execution_ready: authorization.execution_ready,
+    required_before_write: requirements,
+    required_before_write_count: requirements.length,
+    next_allowed_local_action: "wait_for_jenn_human_approval_then_revalidate_intake_gate",
+    static_panel_only: guard.static_panel_only === true,
+    accepted_samples_write_performed: guard.accepted_samples_write_performed === true,
+    category_index_write_performed: guard.category_index_write_performed === true,
+    image_file_copy_performed: guard.image_file_copy_performed === true,
+    runs_source_image_modified: guard.runs_source_image_modified === true,
+    failure_samples_write_performed: guard.failure_samples_write_performed === true,
+    production_candidate_write_performed: guard.production_candidate_write_performed === true,
+    DailyNote_write_performed: guard.DailyNote_write_performed === true,
+    VCP_memory_write_performed: guard.VCP_memory_write_performed === true,
+    provider_contact_performed: guard.provider_contact_performed === true,
+    plugin_call_performed: guard.plugin_call_performed === true,
+    api_call_performed: guard.api_call_performed === true,
+    mcp_runtime_performed: guard.mcp_runtime_performed === true,
+    image_generation_performed: guard.image_generation_performed === true,
+    env_or_secret_read_performed: guard.env_or_secret_read_performed === true,
+    real_manifest_read_performed: guard.real_manifest_read_performed === true,
+    real_vcpchat_read_performed: guard.real_vcpchat_read_performed === true,
+    real_vcptoolbox_read_performed: guard.real_vcptoolbox_read_performed === true,
+    push_tag_release_deploy_performed: guard.push_tag_release_deploy_performed === true,
+    artifact_recoverability_is_not_vcp_runtime_integration: guard.artifact_recoverability_is_not_vcp_runtime_integration === true,
+    vcp_runtime_integration_proven: guard.vcp_runtime_integration_proven === true
+  };
+}
+
+function humanApprovalBlockerQueueState() {
+  const queueSeed = state.human_approval_blocker_queue || {};
+  const guard = queueSeed.guard || {};
+  const blockers = (queueSeed.blockers || []).map((blocker) => ({
+    blocker_id: blocker.blocker_id || "missing_blocker_id",
+    blocker_type: blocker.blocker_type || "missing_blocker_type",
+    severity: blocker.severity || "unknown",
+    target_sample_id: blocker.target_sample_id || null,
+    target_candidate_id: blocker.target_candidate_id || null,
+    target_category: blocker.target_category || null,
+    required_evidence_count: blocker.required_evidence_count || 0,
+    required_evidence: blocker.required_evidence || [],
+    approval_statement_source_is_user_submission: blocker.approval_statement_source_is_user_submission === true,
+    human_approval_captured_now: blocker.human_approval_captured_now === true,
+    accepted_samples_registration_ready_now: blocker.accepted_samples_registration_ready_now === true,
+    next_allowed_local_action: blocker.next_allowed_local_action || "wait_for_human_approval",
+    next_write_action_allowed_now: blocker.next_write_action_allowed_now === true
+  }));
+  return {
+    draft_output_key: "human_approval_blocker_queue_state",
+    phase: queueSeed.phase || "missing",
+    source_snapshot_ref: queueSeed.source_snapshot_ref || null,
+    source_panel_ref: queueSeed.source_panel_ref || null,
+    source_gate_ref: queueSeed.source_gate_ref || null,
+    source_intake_validator_ref: queueSeed.source_intake_validator_ref || null,
+    queue_status: queueSeed.queue_status || "missing",
+    total_blockers: queueSeed.total_blockers || blockers.length,
+    blockers,
+    static_panel_only: guard.static_panel_only === true,
+    read_only_queue: guard.read_only_queue === true,
+    approval_capture_performed: guard.approval_capture_performed === true,
+    accepted_samples_write_performed: guard.accepted_samples_write_performed === true,
+    category_index_write_performed: guard.category_index_write_performed === true,
+    image_file_copy_performed: guard.image_file_copy_performed === true,
+    runs_source_image_modified: guard.runs_source_image_modified === true,
+    failure_samples_write_performed: guard.failure_samples_write_performed === true,
+    production_candidate_write_performed: guard.production_candidate_write_performed === true,
+    DailyNote_write_performed: guard.DailyNote_write_performed === true,
+    VCP_memory_write_performed: guard.VCP_memory_write_performed === true,
+    provider_contact_performed: guard.provider_contact_performed === true,
+    plugin_call_performed: guard.plugin_call_performed === true,
+    api_call_performed: guard.api_call_performed === true,
+    mcp_runtime_performed: guard.mcp_runtime_performed === true,
+    image_generation_performed: guard.image_generation_performed === true,
+    env_or_secret_read_performed: guard.env_or_secret_read_performed === true,
+    real_manifest_read_performed: guard.real_manifest_read_performed === true,
+    real_vcpchat_read_performed: guard.real_vcpchat_read_performed === true,
+    real_vcptoolbox_read_performed: guard.real_vcptoolbox_read_performed === true,
+    push_tag_release_deploy_performed: guard.push_tag_release_deploy_performed === true,
+    artifact_recoverability_is_not_vcp_runtime_integration: guard.artifact_recoverability_is_not_vcp_runtime_integration === true,
+    vcp_runtime_integration_proven: guard.vcp_runtime_integration_proven === true
+  };
+}
+
+function renderThirdSampleAcceptanceReadiness() {
+  const readiness = thirdSampleAcceptanceReadinessState();
+  qs("#thirdSampleReadinessSummary").innerHTML = `
+    <span>status <strong>${escapeHtml(readiness.readiness_status)}</strong></span>
+    <span>approval <strong>${escapeHtml(readiness.human_approval_status || "missing")}</strong></span>
+    <span>missing <strong>${escapeHtml(readiness.missing_requirement_count)}</strong></span>
+    <span>write allowed <strong>${escapeHtml(readiness.accepted_samples_write_allowed)}</strong></span>
+  `;
+  qs("#thirdSampleReadinessBody").innerHTML = `
+    <article class="third-sample-readiness-card ${readiness.registration_ready ? "ready" : "blocked"}">
+      <div class="protocol-card-head">
+        <strong>${escapeHtml(readiness.target_sample_id || "no blocked target")}</strong>
+        <span>${escapeHtml(readiness.next_allowed_local_action)}</span>
+      </div>
+      <dl>
+        <div><dt>Candidate</dt><dd>${escapeHtml(readiness.target_candidate_id || "none")}</dd></div>
+        <div><dt>Visual task</dt><dd>${escapeHtml(readiness.target_visual_task || "none")}</dd></div>
+        <div><dt>Required approval</dt><dd>${escapeHtml(readiness.required_approval_by)}</dd></div>
+        <div><dt>Approved by</dt><dd>${escapeHtml(readiness.approved_by || "none")}</dd></div>
+        <div><dt>Registration ready</dt><dd>${escapeHtml(readiness.registration_ready)}</dd></div>
+        <div><dt>Metadata registered</dt><dd>${escapeHtml(readiness.accepted_samples_metadata_registered)}</dd></div>
+        <div><dt>Evidence refs</dt><dd>${escapeHtml(readiness.present_evidence_count)}</dd></div>
+        <div><dt>Missing requirements</dt><dd>${escapeHtml(readiness.missing_requirements.join("; ") || "none")}</dd></div>
+      </dl>
+    </article>
+  `;
+  qs("#thirdSampleReadinessGuard").innerHTML = `
+    <span>local readiness only: ${escapeHtml(readiness.local_readiness_only)}</span>
+    <span>fetch: ${escapeHtml(readiness.fetch_performed)}</span>
+    <span>file write: ${escapeHtml(readiness.file_write_performed)}</span>
+    <span>accepted_samples write: ${escapeHtml(readiness.accepted_samples_write_performed)}</span>
+    <span>accepted_samples write allowed: ${escapeHtml(readiness.accepted_samples_write_allowed)}</span>
+    <span>production candidate allowed: ${escapeHtml(readiness.production_candidate_write_allowed)}</span>
+    <span>VCP runtime proven: ${escapeHtml(readiness.vcp_runtime_integration_proven)}</span>
+  `;
+}
+
+function renderThirdSamplePostApprovalGate() {
+  const gate = thirdSamplePostApprovalGateState();
+  qs("#thirdSamplePostApprovalGateSummary").innerHTML = `
+    <span>status <strong>${escapeHtml(gate.gate_status)}</strong></span>
+    <span>blocker <strong>${escapeHtml(gate.blocker)}</strong></span>
+    <span>user submission <strong>${escapeHtml(gate.approval_statement_source_is_user_submission)}</strong></span>
+    <span>ready <strong>${escapeHtml(gate.accepted_samples_registration_ready_now)}</strong></span>
+  `;
+  qs("#thirdSamplePostApprovalGateBody").innerHTML = `
+    <article class="third-sample-post-approval-gate-card blocked">
+      <div class="protocol-card-head">
+        <strong>${escapeHtml(gate.target_sample_id || "no target sample")}</strong>
+        <span>${escapeHtml(gate.next_allowed_local_action)}</span>
+      </div>
+      <dl>
+        <div><dt>Candidate</dt><dd>${escapeHtml(gate.target_candidate_id || "none")}</dd></div>
+        <div><dt>Category</dt><dd>${escapeHtml(gate.category)}</dd></div>
+        <div><dt>Intake validator</dt><dd>${escapeHtml(gate.source_intake_validator_ref || "none")}</dd></div>
+        <div><dt>Human approval captured</dt><dd>${escapeHtml(gate.human_approval_captured_now)}</dd></div>
+        <div><dt>Requires v14.214 user submission</dt><dd>${escapeHtml(gate.future_registration_requires_v14_214_user_submission)}</dd></div>
+        <div><dt>Authorization status</dt><dd>${escapeHtml(gate.authorization_package_status)}</dd></div>
+        <div><dt>Required before write</dt><dd>${escapeHtml(gate.required_before_write.join("; ") || "none")}</dd></div>
+      </dl>
+    </article>
+  `;
+  qs("#thirdSamplePostApprovalGateGuard").innerHTML = `
+    <span>static panel only: ${escapeHtml(gate.static_panel_only)}</span>
+    <span>accepted_samples write: ${escapeHtml(gate.accepted_samples_write_performed)}</span>
+    <span>category write: ${escapeHtml(gate.category_index_write_performed)}</span>
+    <span>image copy: ${escapeHtml(gate.image_file_copy_performed)}</span>
+    <span>runs modified: ${escapeHtml(gate.runs_source_image_modified)}</span>
+    <span>production candidate: ${escapeHtml(gate.production_candidate_write_performed)}</span>
+    <span>DailyNote/VCP memory: ${escapeHtml(gate.DailyNote_write_performed || gate.VCP_memory_write_performed)}</span>
+    <span>provider/API/plugin/MCP: ${escapeHtml(gate.provider_contact_performed || gate.api_call_performed || gate.plugin_call_performed || gate.mcp_runtime_performed)}</span>
+    <span>VCP runtime proven: ${escapeHtml(gate.vcp_runtime_integration_proven)}</span>
+  `;
+}
+
+function renderHumanApprovalBlockerQueue() {
+  const queue = humanApprovalBlockerQueueState();
+  qs("#humanApprovalBlockerQueueSummary").innerHTML = `
+    <span>status <strong>${escapeHtml(queue.queue_status)}</strong></span>
+    <span>blockers <strong>${escapeHtml(queue.total_blockers)}</strong></span>
+    <span>read only <strong>${escapeHtml(queue.read_only_queue)}</strong></span>
+    <span>approval captured <strong>${escapeHtml(queue.approval_capture_performed)}</strong></span>
+  `;
+  qs("#humanApprovalBlockerQueueBody").innerHTML = queue.blockers
+    .map((blocker) => `
+      <article class="human-approval-blocker-queue-card blocked">
+        <div class="protocol-card-head">
+          <strong>${escapeHtml(blocker.target_sample_id || "no blocked sample")}</strong>
+          <span>${escapeHtml(blocker.severity)}</span>
+        </div>
+        <dl>
+          <div><dt>Blocker</dt><dd>${escapeHtml(blocker.blocker_type)}</dd></div>
+          <div><dt>Candidate</dt><dd>${escapeHtml(blocker.target_candidate_id || "none")}</dd></div>
+          <div><dt>Category</dt><dd>${escapeHtml(blocker.target_category || "none")}</dd></div>
+          <div><dt>Required evidence</dt><dd>${escapeHtml(blocker.required_evidence_count)}</dd></div>
+          <div><dt>User submission</dt><dd>${escapeHtml(blocker.approval_statement_source_is_user_submission)}</dd></div>
+          <div><dt>Approval captured</dt><dd>${escapeHtml(blocker.human_approval_captured_now)}</dd></div>
+          <div><dt>Registration ready</dt><dd>${escapeHtml(blocker.accepted_samples_registration_ready_now)}</dd></div>
+          <div><dt>Write allowed now</dt><dd>${escapeHtml(blocker.next_write_action_allowed_now)}</dd></div>
+          <div><dt>Next local action</dt><dd>${escapeHtml(blocker.next_allowed_local_action)}</dd></div>
+          <div><dt>Evidence checklist</dt><dd>${escapeHtml(blocker.required_evidence.join("; ") || "none")}</dd></div>
+        </dl>
+      </article>
+    `)
+    .join("");
+  qs("#humanApprovalBlockerQueueGuard").innerHTML = `
+    <span>static panel only: ${escapeHtml(queue.static_panel_only)}</span>
+    <span>read-only queue: ${escapeHtml(queue.read_only_queue)}</span>
+    <span>accepted_samples write: ${escapeHtml(queue.accepted_samples_write_performed)}</span>
+    <span>category write: ${escapeHtml(queue.category_index_write_performed)}</span>
+    <span>approval capture: ${escapeHtml(queue.approval_capture_performed)}</span>
+    <span>production candidate: ${escapeHtml(queue.production_candidate_write_performed)}</span>
+    <span>DailyNote/VCP memory: ${escapeHtml(queue.DailyNote_write_performed || queue.VCP_memory_write_performed)}</span>
+    <span>provider/API/plugin/MCP: ${escapeHtml(queue.provider_contact_performed || queue.api_call_performed || queue.plugin_call_performed || queue.mcp_runtime_performed)}</span>
+    <span>VCP runtime proven: ${escapeHtml(queue.vcp_runtime_integration_proven)}</span>
+  `;
+}
+
+function renderThirdSampleAcceptedSamplesAuthorizationPackage() {
+  const packageState = thirdSampleAcceptedSamplesAuthorizationPackageState();
+  qs("#thirdSampleAuthorizationPackageSummary").innerHTML = `
+    <span>status <strong>${escapeHtml(packageState.authorization_package_status)}</strong></span>
+    <span>granted <strong>${escapeHtml(packageState.authorization_granted_by_this_record)}</strong></span>
+    <span>execution <strong>${escapeHtml(packageState.execution_ready)}</strong></span>
+    <span>blocker <strong>${escapeHtml(packageState.blocker)}</strong></span>
+  `;
+  qs("#thirdSampleAuthorizationPackageBody").innerHTML = `
+    <article class="third-sample-authorization-package-card blocked">
+      <div class="protocol-card-head">
+        <strong>${escapeHtml(packageState.target_sample_id || "no target sample")}</strong>
+        <span>${escapeHtml(packageState.next_allowed_local_action)}</span>
+      </div>
+      <dl>
+        <div><dt>Candidate</dt><dd>${escapeHtml(packageState.target_candidate_id || "none")}</dd></div>
+        <div><dt>Approval</dt><dd>${escapeHtml(packageState.human_approval_status || "missing")}</dd></div>
+        <div><dt>Approved by</dt><dd>${escapeHtml(packageState.approved_by || "none")}</dd></div>
+        <div><dt>Registration ready</dt><dd>${escapeHtml(packageState.registration_ready)}</dd></div>
+        <div><dt>Allowed files</dt><dd>${inlineList(packageState.exact_allowed_files)}</dd></div>
+        <div><dt>Forbidden operations</dt><dd>${escapeHtml(packageState.forbidden_operation_count)}</dd></div>
+        <div><dt>Missing requirements</dt><dd>${escapeHtml(packageState.missing_requirements.join("; ") || "none")}</dd></div>
+        <div><dt>Statement present</dt><dd>${escapeHtml(packageState.exact_approval_statement_present)}</dd></div>
+      </dl>
+      <pre class="authorization-statement">${escapeHtml(packageState.exact_approval_statement_draft)}</pre>
+    </article>
+  `;
+  qs("#thirdSampleAuthorizationPackageGuard").innerHTML = `
+    <span>static panel only: ${escapeHtml(packageState.static_panel_only)}</span>
+    <span>accepted_samples write: ${escapeHtml(packageState.accepted_samples_write_performed)}</span>
+    <span>category write: ${escapeHtml(packageState.category_index_write_performed)}</span>
+    <span>image copy: ${escapeHtml(packageState.image_file_copy_performed)}</span>
+    <span>production candidate: ${escapeHtml(packageState.production_candidate_write_performed)}</span>
+    <span>DailyNote: ${escapeHtml(packageState.DailyNote_write_performed)}</span>
+    <span>VCP memory: ${escapeHtml(packageState.VCP_memory_write_performed)}</span>
+    <span>provider/API/plugin/MCP: ${escapeHtml(packageState.provider_contact_performed || packageState.api_call_performed || packageState.plugin_call_performed || packageState.mcp_runtime_performed)}</span>
+    <span>VCP runtime proven: ${escapeHtml(packageState.vcp_runtime_integration_proven)}</span>
+  `;
+}
+
+function reviewConsoleRuntimeGapDashboardState() {
+  const seed = state.runtime_gap_dashboard || {};
+  const rows = Array.isArray(seed.rows) ? seed.rows : [];
+  return {
+    draft_output_key: "review_console_runtime_gap_dashboard_state",
+    source_contract_ref: seed.source_contract_ref || null,
+    dashboard_contract_status: seed.dashboard_contract_status || "missing",
+    dashboard_progress_basis: seed.dashboard_progress_basis || "missing",
+    runtime_gap_row_count: rows.length,
+    local_capability_row_count: rows.filter((row) => row.row_kind === "local_capability").length,
+    a5_boundary_row_count: rows.filter((row) => row.row_kind === "a5_boundary").length,
+    runtime_claim_allowed: seed.runtime_claim_allowed === true,
+    rows: rows.map((row) => ({
+      row_id: row.row_id,
+      row_kind: row.row_kind,
+      current_status: row.current_status,
+      source_evidence_ref: row.source_evidence_ref,
+      requires_a5_authorization_before_execution: row.requires_a5_authorization_before_execution === true,
+      runtime_integration_claim_allowed: false
+    })),
+    guard: {
+      runtime_gap_dashboard_static_ui_only: true,
+      fetch_performed: false,
+      file_write_performed: false,
+      authorization_execution_performed: false,
+      package_execution_performed: false,
+      accepted_samples_write_performed: false,
+      manifest_read_performed: false,
+      durable_archive_copy_performed: false,
+      production_candidate_write_performed: false,
+      failure_samples_write_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      mcp_runtime_performed: false,
+      real_manifest_read_performed: false,
+      real_vcpchat_read_performed: false,
+      real_vcptoolbox_read_performed: false,
+      push_tag_release_deploy_performed: false,
+      artifact_recoverability_is_not_vcp_runtime_integration: true,
+      vcp_runtime_integration_proven: false
+    }
+  };
+}
+
+function renderReviewConsoleRuntimeGapDashboard() {
+  const dashboard = reviewConsoleRuntimeGapDashboardState();
+  qs("#runtimeGapSummary").innerHTML = `
+    <span>status <strong>${escapeHtml(dashboard.dashboard_contract_status)}</strong></span>
+    <span>basis <strong>${escapeHtml(dashboard.dashboard_progress_basis)}</strong></span>
+    <span>local <strong>${escapeHtml(dashboard.local_capability_row_count)}</strong></span>
+    <span>A5 boundary <strong>${escapeHtml(dashboard.a5_boundary_row_count)}</strong></span>
+    <span>runtime claim <strong>${escapeHtml(dashboard.runtime_claim_allowed)}</strong></span>
+  `;
+  qs("#runtimeGapBody").innerHTML = dashboard.rows.map((row) => `
+    <article class="runtime-gap-card ${row.row_kind === "a5_boundary" ? "blocked" : "local"}">
+      <strong>${escapeHtml(row.row_id)}</strong>
+      <dl>
+        <div><dt>Kind</dt><dd>${escapeHtml(row.row_kind)}</dd></div>
+        <div><dt>Status</dt><dd>${escapeHtml(row.current_status)}</dd></div>
+        <div><dt>A5 required</dt><dd>${escapeHtml(row.requires_a5_authorization_before_execution)}</dd></div>
+        <div><dt>Evidence</dt><dd>${escapeHtml(row.source_evidence_ref)}</dd></div>
+      </dl>
+    </article>
+  `).join("");
+  qs("#runtimeGapGuard").innerHTML = `
+    <span>static UI only: ${escapeHtml(dashboard.guard.runtime_gap_dashboard_static_ui_only)}</span>
+    <span>fetch: ${escapeHtml(dashboard.guard.fetch_performed)}</span>
+    <span>file write: ${escapeHtml(dashboard.guard.file_write_performed)}</span>
+    <span>package execution: ${escapeHtml(dashboard.guard.package_execution_performed)}</span>
+    <span>real manifest: ${escapeHtml(dashboard.guard.real_manifest_read_performed)}</span>
+    <span>VCP read: ${escapeHtml(dashboard.guard.real_vcpchat_read_performed || dashboard.guard.real_vcptoolbox_read_performed)}</span>
+    <span>VCP runtime proven: ${escapeHtml(dashboard.guard.vcp_runtime_integration_proven)}</span>
   `;
 }
 
@@ -888,6 +2369,106 @@ function renderAdapterNegativeHandoff() {
   `;
 }
 
+function failureStateStaticWorkbenchState() {
+  const negativeReport = state.review_report_negative_guard_static_handoff;
+  const adapterNegative = state.review_evidence_blocker_adapter_negative_static_handoff;
+  const records = negativeReport.report_items.map((item) => ({
+    candidate_id: item.candidate_id,
+    shot_id: item.shot_id,
+    review_outcome: item.review_outcome,
+    final_route: item.final_route,
+    failure_tags: item.failure_tags || [],
+    unknown_failure_tags: item.unknown_failure_tags || [],
+    memory_forbidden: item.memory_report.memory_forbidden === true,
+    never_production: item.production_report.never_production === true,
+    production_exclusion_record_id: item.production_exclusion_record_id || null,
+    memory_allowed_output_now: item.memory_report.allowed_output_now,
+    production_allowed_output_now: item.production_report.allowed_output_now,
+    writes_allowed_now_count: item.final_controls.writes_allowed_now.length,
+    execution_blocked: item.final_controls.execution_blocked || []
+  }));
+  const memoryForbiddenRecords = records.filter((record) => record.memory_forbidden);
+  const neverProductionRecords = records.filter((record) => record.never_production);
+  const productionExclusionRecords = records.filter((record) => record.production_exclusion_record_id);
+  return {
+    phase: "v14_227_review_console_failure_state_static_workbench",
+    execution_mode: "review_console_static_failure_state_only",
+    draft_output_key: "failure_state_static_workbench_state",
+    source_negative_review_report_ref: "review_console/static_prototype/mock_data.js#review_report_negative_guard_static_handoff",
+    source_adapter_negative_ref: "review_console/static_prototype/mock_data.js#review_evidence_blocker_adapter_negative_static_handoff",
+    failure_candidate_count: records.length,
+    memory_forbidden_count: memoryForbiddenRecords.length,
+    never_production_count: neverProductionRecords.length,
+    production_exclusion_count: productionExclusionRecords.length,
+    failure_samples_state: "static_review_only_not_written",
+    failure_samples_write_allowed: false,
+    failure_samples_write_performed: false,
+    memory_forbidden_candidate_ids: memoryForbiddenRecords.map((record) => record.candidate_id),
+    never_production_candidate_ids: neverProductionRecords.map((record) => record.candidate_id),
+    production_exclusion_candidate_ids: adapterNegative.production_exclusion_candidate_ids || productionExclusionRecords.map((record) => record.candidate_id),
+    records,
+    guard: {
+      local_static_workbench_only: true,
+      fetch_performed: false,
+      file_write_performed: false,
+      accepted_samples_write_performed: false,
+      category_index_write_performed: false,
+      failure_samples_write_performed: false,
+      production_candidate_write_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      mcp_runtime_performed: false,
+      image_generation_performed: false,
+      env_or_secret_read_performed: false,
+      real_manifest_read_performed: false,
+      real_vcpchat_read_performed: false,
+      real_vcptoolbox_read_performed: false,
+      push_tag_release_deploy_performed: false,
+      failure_state_is_not_failure_samples_registry_write: true,
+      artifact_recoverability_is_not_vcp_runtime_integration: true,
+      vcp_runtime_integration_proven: false
+    }
+  };
+}
+
+function renderFailureStateStaticWorkbench() {
+  const failureState = failureStateStaticWorkbenchState();
+  qs("#failureStateSummary").innerHTML = `
+    <span>failure candidates <strong>${escapeHtml(failureState.failure_candidate_count)}</strong></span>
+    <span>memory forbidden <strong>${escapeHtml(failureState.memory_forbidden_count)}</strong></span>
+    <span>never production <strong>${escapeHtml(failureState.never_production_count)}</strong></span>
+    <span>failure_samples write <strong>${escapeHtml(failureState.failure_samples_write_performed)}</strong></span>
+  `;
+  qs("#failureStateBody").innerHTML = failureState.records.map((record) => `
+    <article class="failure-state-card ${record.memory_forbidden ? "memory-forbidden" : "never-production"}">
+      <div class="protocol-card-head">
+        <strong>${escapeHtml(record.candidate_id)}</strong>
+        <span>${escapeHtml(record.final_route)}</span>
+      </div>
+      <dl>
+        <div><dt>Failure tags</dt><dd>${inlineList(record.failure_tags)}</dd></div>
+        <div><dt>Unknown tags</dt><dd>${inlineList(record.unknown_failure_tags)}</dd></div>
+        <div><dt>Memory forbidden</dt><dd>${escapeHtml(record.memory_forbidden)}</dd></div>
+        <div><dt>Never production</dt><dd>${escapeHtml(record.never_production)}</dd></div>
+        <div><dt>Production exclusion</dt><dd>${escapeHtml(record.production_exclusion_record_id || "none")}</dd></div>
+        <div><dt>Memory output</dt><dd>${escapeHtml(record.memory_allowed_output_now)}</dd></div>
+        <div><dt>Production output</dt><dd>${escapeHtml(record.production_allowed_output_now)}</dd></div>
+        <div><dt>Writes allowed now</dt><dd>${escapeHtml(record.writes_allowed_now_count)}</dd></div>
+      </dl>
+    </article>
+  `).join("");
+  qs("#failureStateGuard").innerHTML = `
+    <span>static workbench: ${escapeHtml(failureState.guard.local_static_workbench_only)}</span>
+    <span>failure_samples write: ${escapeHtml(failureState.guard.failure_samples_write_performed)}</span>
+    <span>production candidate: ${escapeHtml(failureState.guard.production_candidate_write_performed)}</span>
+    <span>DailyNote write: ${escapeHtml(failureState.guard.DailyNote_write_performed)}</span>
+    <span>VCP runtime proven: ${escapeHtml(failureState.guard.vcp_runtime_integration_proven)}</span>
+  `;
+}
+
 function approvalPayload() {
   if (state.memoryStatus === "approved") {
     return {
@@ -1066,7 +2647,58 @@ function renderDraft() {
     review_report_static_handoff: state.review_report_static_handoff,
     review_report_negative_guard_static_handoff: state.review_report_negative_guard_static_handoff,
     review_evidence_blocker_adapter_negative_static_handoff: state.review_evidence_blocker_adapter_negative_static_handoff,
+    failure_state_static_workbench_state: failureStateStaticWorkbenchState(),
     artifact_recoverability_dashboard_evidence: state.artifact_dashboard_evidence,
+    artifact_lifecycle_state_reader: normalizeArtifactLifecycleState(),
+    artifact_lifecycle_filter_state: {
+      selected_filter: state.lifecycleFilter,
+      allowed_filters: ["all", "recoverable", "blocked"],
+      filter_is_local_ui_only: true,
+      fetch_performed: false,
+      file_write_performed: false,
+      accepted_samples_write_performed: false,
+      production_candidate_write_performed: false,
+      vcp_runtime_integration_proven: false
+    },
+    artifact_evidence_status_sort_state: artifactEvidenceStatusSortState(),
+    artifact_evidence_status_sort_filter_interaction_state: artifactEvidenceStatusSortFilterInteractionState(),
+    artifact_prompt_completion_state: {
+      records: normalizeArtifactLifecycleState().records.map((record) => ({
+        sample_id: record.sample_id,
+        candidate_id: record.candidate_id,
+        visual_task: record.visual_task,
+        prompt_package_ref: record.prompt_package_ref,
+        artifact_ref: record.artifact_ref,
+        prompt_to_artifact_completion: record.prompt_to_artifact_completion
+      })),
+      static_panel_only: true,
+      fetch_performed: false,
+      file_write_performed: false,
+      accepted_samples_write_performed: false,
+      production_candidate_write_performed: false,
+      vcp_runtime_integration_proven: false
+    },
+    artifact_detail_drawer_state: {
+      selected_artifact_id: state.selectedArtifactId,
+      selected_artifact: currentArtifactDetail(),
+      static_detail_only: true,
+      fetch_performed: false,
+      file_write_performed: false,
+      accepted_samples_write_performed: false,
+      production_candidate_write_performed: false,
+      vcp_runtime_integration_proven: false
+    },
+    artifact_evidence_compare_state: artifactEvidenceCompareState(),
+    artifact_evidence_review_notes_state: artifactEvidenceReviewNotesState(),
+    three_sample_gap_summary_state: threeSampleGapSummaryState(),
+    recoverability_matrix_state: recoverabilityMatrixState(),
+    review_console_schema_binding_coverage_state: reviewConsoleSchemaBindingCoverageState(),
+    six_month_goal_gap_state: sixMonthGoalGapState(),
+    third_sample_acceptance_readiness_state: thirdSampleAcceptanceReadinessState(),
+    third_sample_post_approval_gate_state: thirdSamplePostApprovalGateState(),
+    human_approval_blocker_queue_state: humanApprovalBlockerQueueState(),
+    third_sample_accepted_samples_authorization_package_state: thirdSampleAcceptedSamplesAuthorizationPackageState(),
+    review_console_runtime_gap_dashboard_state: reviewConsoleRuntimeGapDashboardState(),
     codex_session_import_record_reader: state.import_record_reader,
     review_session: buildReviewSession(memoryApproval, humanTotal),
     image_case: buildImageCase(humanTotal),
@@ -1096,7 +2728,22 @@ function renderAll() {
   renderReviewReportHandoff();
   renderNegativeReviewReportHandoff();
   renderAdapterNegativeHandoff();
+  renderFailureStateStaticWorkbench();
   renderArtifactEvidenceDashboard();
+  renderArtifactLifecycleStateReader();
+  renderArtifactPromptCompletionPanel();
+  renderArtifactDetailDrawer();
+  renderArtifactEvidenceCompare();
+  renderArtifactEvidenceReviewNotes();
+  renderThreeSampleGapSummary();
+  renderRecoverabilityMatrix();
+  renderReviewConsoleSchemaBindingCoverage();
+  renderSixMonthGoalGap();
+  renderThirdSampleAcceptanceReadiness();
+  renderThirdSamplePostApprovalGate();
+  renderHumanApprovalBlockerQueue();
+  renderThirdSampleAcceptedSamplesAuthorizationPackage();
+  renderReviewConsoleRuntimeGapDashboard();
   loadImportRecordSeed();
   renderDraft();
 }
@@ -1111,6 +2758,9 @@ qsa("[data-archive]").forEach((button) => {
 });
 qsa("[data-memory]").forEach((button) => {
   button.addEventListener("click", () => setMemoryStatus(button.dataset.memory));
+});
+qsa("[data-lifecycle-filter]").forEach((button) => {
+  button.addEventListener("click", () => setLifecycleFilter(button.dataset.lifecycleFilter));
 });
 qs("#memoryTitle").addEventListener("input", renderDraft);
 qs("#memoryContent").addEventListener("input", renderDraft);

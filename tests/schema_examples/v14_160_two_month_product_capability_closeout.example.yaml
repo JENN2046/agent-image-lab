@@ -9,19 +9,19 @@ two_month_product_capability_closeout:
   authorization_granted_by_this_record: false
   local_lifecycle_chain_completed_validated: true
   audited_local_stage_count: 13
-  registry_sample_count: 6
+  registry_sample_count: 8
   registry_category_count: 3
-  local_artifact_sample_count: 4
-  full_recoverable_sample_count: 1
-  hard_acceptance_three_full_samples_met: false
-  remaining_full_recoverable_sample_gap: 2
+  local_artifact_sample_count: 6
+  full_recoverable_sample_count: 3
+  hard_acceptance_three_full_samples_met: true
+  remaining_full_recoverable_sample_gap: 0
   a5_execution_slots_skipped_without_authorization: true
   two_month_goal_fully_complete: false
 
   progress_sections:
     product_capability_progress:
-      status: local_artifact_lifecycle_control_layer_validated_with_sample_gap
-      approximate_progress_percent: 72
+      status: local_artifact_lifecycle_control_layer_validated_three_sample_baseline
+    approximate_progress_percent: 78
     governance_capability_progress:
       status: strong_local_authorization_and_validation_layer
       approximate_progress_percent: 90
@@ -32,10 +32,12 @@ two_month_product_capability_closeout:
     vcp_runtime_integration_proven: false
 
   remaining_gap:
-    needs_two_more_fully_recoverable_samples: true
+    needs_one_more_fully_recoverable_sample: false
     current_full_recoverable_sample_ids:
       - accepted_womens_resort_relaxed_knit_codex_v2_001
-    next_safe_action: prepare_two_more_codex_session_sample_recoverability_plan_or_wait_for_generation_authorization
+      - accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001
+      - accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+    next_safe_action: continue_review_console_static_productization_from_three_sample_evidence_baseline
 
   non_authorization:
     provider_contact_performed: false

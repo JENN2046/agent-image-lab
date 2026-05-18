@@ -1,0 +1,101 @@
+{
+  "exact_file_commit_readiness_review": {
+    "version": "v1",
+    "phase": "v14_210_exact_file_commit_readiness_review",
+    "status": "completed_pending_validation",
+    "execution_mode": "exact_file_commit_readiness_review_only",
+    "source_audit_ref": "tests/schema_examples/v14_209_uncommitted_worktree_recovery_audit.example.json",
+    "readiness_decision": {
+      "auto_commit_allowed_now": false,
+      "staging_allowed_now": false,
+      "push_allowed_now": false,
+      "reason": "large_dirty_worktree_requires_human_reviewed_exact_file_staging"
+    },
+    "observed_git_state": {
+      "branch": "master",
+      "ahead_count": 19,
+      "behind_count": 0,
+      "staged_file_count": 0,
+      "tracked_modified_file_count": 24,
+      "untracked_v14_165_to_v14_210_file_count": 139,
+      "untracked_phase_doc_count": 46,
+      "untracked_phase_validator_count": 46,
+      "untracked_schema_example_count": 47,
+      "non_phase_untracked_review_console_file_count": 1,
+      "future_exact_file_candidate_total": 163
+    },
+    "candidate_groups": [
+      {
+        "group_id": "recoverability_three_sample_baseline",
+        "count": 14,
+        "requires_review": true
+      },
+      {
+        "group_id": "review_console_static_prototype_shared",
+        "count": 6,
+        "requires_review": true
+      },
+      {
+        "group_id": "review_console_local_productization",
+        "count": 63,
+        "requires_review": true
+      },
+      {
+        "group_id": "authorization_control_layer",
+        "count": 42,
+        "requires_review": true
+      },
+      {
+        "group_id": "runtime_gap_and_browser_blocker",
+        "count": 14,
+        "requires_review": true
+      },
+      {
+        "group_id": "audit_and_commit_readiness",
+        "count": 6,
+        "requires_review": true
+      },
+      {
+        "group_id": "shared_support_and_registry_metadata",
+        "count": 18,
+        "requires_review": true
+      }
+    ],
+    "guard": {
+      "exact_file_commit_readiness_review_only": true,
+      "git_add_dot_used": false,
+      "staged_files_created": false,
+      "commit_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "image_generation_performed": false,
+      "env_or_secret_read_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "dependency_change_performed": false,
+      "package_json_modified_by_this_phase": false,
+      "package_lock_modified_by_this_phase": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_required": {
+      "auto_commit_allowed_fails": true,
+      "staging_allowed_fails": true,
+      "staged_file_present_fails": true,
+      "candidate_total_mismatch_fails": true,
+      "group_count_mismatch_fails": true,
+      "runtime_claim_fails": true,
+      "push_claim_fails": true
+    },
+    "recommended_next": "human_review_exact_file_staging_authorization_or_continue_read_only_commit_candidate_inspection",
+    "recommended_next_auto_execution_allowed": "true_A4_8_read_only_only_no_staging_no_commit_no_push"
+  }
+}

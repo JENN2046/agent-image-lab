@@ -1,0 +1,54 @@
+{
+  "review_console_third_sample_acceptance_readiness_snapshot_static_regression": {
+    "version": "v1",
+    "phase": "v14_189_review_console_third_sample_acceptance_readiness_snapshot_static_regression",
+    "snapshot_status": "golden_static_snapshot",
+    "source_fixture_ref": "tests/schema_examples/v14_188_review_console_third_sample_acceptance_readiness.example.json",
+    "draft_output_key": "third_sample_acceptance_readiness_state",
+    "snapshot": {
+      "target_sample_id": "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001",
+      "target_candidate_id": "v14_166_lamp_v3_generated_candidate_001",
+      "target_visual_task": "product_lifestyle_portable_led_camping_lantern",
+      "readiness_status": "blocked_missing_human_approval",
+      "required_approval_by": "Jenn",
+      "human_approval_status": "pending",
+      "approved_by": null,
+      "registration_ready": false,
+      "accepted_samples_registration_eligible": false,
+      "accepted_samples_metadata_registered": false,
+      "accepted_samples_write_allowed": false,
+      "production_candidate_write_allowed": false,
+      "failure_samples_write_allowed": false,
+      "present_evidence_count": 9,
+      "missing_requirement_count": 2,
+      "next_allowed_local_action": "wait_for_jenn_human_approval"
+    },
+    "guard": {
+      "static_snapshot_only": true,
+      "fetch_performed": false,
+      "file_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_expected": {
+      "approval_overclaim_fails": true,
+      "registration_ready_overclaim_fails": true,
+      "target_candidate_mismatch_fails": true,
+      "accepted_samples_write_flag_fails": true,
+      "runtime_claim_fails": true
+    }
+  }
+}

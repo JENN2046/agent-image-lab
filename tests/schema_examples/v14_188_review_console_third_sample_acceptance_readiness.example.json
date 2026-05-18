@@ -1,0 +1,70 @@
+{
+  "review_console_third_sample_acceptance_readiness": {
+    "version": "v1",
+    "phase": "v14_188_review_console_third_sample_acceptance_readiness_static_panel",
+    "source_lifecycle_fixture_ref": "tests/schema_examples/v14_169_review_console_artifact_lifecycle_state_reader.example.json",
+    "draft_output_key": "third_sample_acceptance_readiness_state",
+    "target_sample_id": "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001",
+    "target_candidate_id": "v14_166_lamp_v3_generated_candidate_001",
+    "target_visual_task": "product_lifestyle_portable_led_camping_lantern",
+    "readiness_status": "blocked_missing_human_approval",
+    "required_approval_by": "Jenn",
+    "human_approval_status": "pending",
+    "approved_by": null,
+    "registration_ready": false,
+    "accepted_samples_registration_eligible": false,
+    "accepted_samples_metadata_registered": false,
+    "accepted_samples_write_allowed": false,
+    "production_candidate_write_allowed": false,
+    "failure_samples_write_allowed": false,
+    "required_registry_files": [
+      "accepted_samples/accepted_sample_registry.yaml",
+      "accepted_samples/categories/product_still_life.yaml"
+    ],
+    "evidence_refs": [
+      "runs/real_generation/v14_166_codex_session_premium_portable_led_camping_lantern_v3_generation_trial/codex_session_v14_166_premium_portable_led_camping_lantern_v3_candidate_001.png",
+      "eaa52095be5af66854f80ba3f6a0b94c93bc1105e6e7ecf984b8dfb3dfff275c",
+      "1254x1254",
+      "image/png",
+      "session_prompt_inline:v14_166_premium_portable_led_camping_lantern_v3_candidate_001",
+      "tests/schema_examples/v14_166_lamp_v3_generated_candidate_import_record.json",
+      "docs/v14_166_lamp_v3_generated_candidate_readiness.md",
+      "accepted_samples/categories/product_still_life.yaml",
+      "accepted_samples/accepted_sample_registry.yaml"
+    ],
+    "present_evidence_count": 9,
+    "missing_requirements": [
+      "human_approval_status: approved",
+      "approved_by: Jenn"
+    ],
+    "missing_requirement_count": 2,
+    "next_allowed_local_action": "wait_for_jenn_human_approval",
+    "guard": {
+      "local_readiness_only": true,
+      "fetch_performed": false,
+      "file_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_expected": {
+      "approval_overclaim_fails": true,
+      "missing_requirements_empty_fails": true,
+      "target_candidate_mismatch_fails": true,
+      "accepted_samples_write_flag_fails": true,
+      "runtime_claim_fails": true
+    }
+  }
+}

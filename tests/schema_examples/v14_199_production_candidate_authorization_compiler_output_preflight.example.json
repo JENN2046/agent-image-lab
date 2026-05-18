@@ -1,0 +1,76 @@
+{
+  "production_candidate_authorization_compiler_output_preflight": {
+    "version": "v1",
+    "phase": "v14_199_production_candidate_authorization_compiler_output_preflight",
+    "execution_mode": "production_candidate_authorization_compiler_output_preflight_only",
+    "source_type_matrix_ref": "tests/schema_examples/v14_196_authorization_package_compiler_type_matrix.example.json",
+    "package_type": "production_candidate",
+    "package_id": "AUTH-DRAFT-PRODUCTION-CANDIDATE-PREFLIGHT-20260518-001",
+    "package_status": "draft_blocked_missing_production_candidate_authorization",
+    "production_candidate_authorized": false,
+    "production_candidate_write_performed": false,
+    "eligibility_preflight_present": false,
+    "write_command_permission": false,
+    "execution_allowed_now": false,
+    "target_scope": {
+      "accepted_sample_ref": null,
+      "eligibility_preflight_ref": null,
+      "blocker_decision": "blocked_missing_accepted_sample_and_authorization",
+      "exact_allowed_write_paths": [],
+      "forbidden_write_paths": [
+        "production_candidate/",
+        "runs/real_generation/",
+        "accepted_samples/",
+        "failure_samples/",
+        "DailyNote",
+        "VCP memory"
+      ]
+    },
+    "required_before_execution": [
+      "Jenn exact A5 production_candidate authorization",
+      "recoverable accepted sample ref",
+      "eligibility preflight ref",
+      "blocker decision",
+      "exact allowed production_candidate write path",
+      "rollback plan",
+      "reviewer",
+      "stop conditions"
+    ],
+    "validation_required": [
+      "git diff --check",
+      "node scripts/validate_v14_196_authorization_package_compiler_type_matrix.js",
+      "node scripts/validate_agent_board_state.js",
+      "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1",
+      "powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1"
+    ],
+    "guard": {
+      "preflight_only": true,
+      "production_candidate_write_performed": false,
+      "durable_archive_copy_performed": false,
+      "image_file_copy_performed": false,
+      "runs_source_image_modified": false,
+      "accepted_samples_write_performed": false,
+      "failure_samples_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_expected": {
+      "accepted_sample_ref_without_eligibility_fails": true,
+      "production_candidate_write_performed_fails": true,
+      "broad_allowed_write_path_fails": true,
+      "blocker_missing_fails": true,
+      "memory_write_flag_fails": true,
+      "runtime_claim_fails": true
+    }
+  }
+}

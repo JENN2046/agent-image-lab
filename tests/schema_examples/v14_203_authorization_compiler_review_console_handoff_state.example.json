@@ -1,0 +1,134 @@
+{
+  "review_console_authorization_handoff_state": {
+    "version": "v1",
+    "phase": "v14_203_authorization_compiler_review_console_handoff_state",
+    "execution_mode": "review_console_static_handoff_state_only",
+    "source_blocker_arbiter_ref": "tests/schema_examples/v14_202_authorization_package_blocker_arbiter_contract.example.json",
+    "source_coverage_closeout_ref": "tests/schema_examples/v14_201_authorization_package_compiler_coverage_closeout.example.json",
+    "handoff_state_status": "static_ready_no_runtime",
+    "view_surface": "review_console_authorization_handoff_cards",
+    "package_card_count": 5,
+    "display_contract": {
+      "read_model_only": true,
+      "read_only": true,
+      "fetch_allowed": false,
+      "file_write_allowed": false,
+      "runtime_integration_allowed": false,
+      "ipc_preload_renderer_integration_allowed": false,
+      "package_execution_allowed": false
+    },
+    "package_cards": [
+      {
+        "package_type": "accepted_samples_metadata_registration",
+        "card_status": "blocked_pending_exact_authorization",
+        "blocker_code": "blocked_missing_human_approval_or_exact_authorization",
+        "execution_allowed_now": false,
+        "source_blocker_decision_ref": "v14_202:accepted_samples_metadata_registration",
+        "review_console_action": "display_blocker_and_required_fields_only",
+        "next_authorization_class": "Jenn exact A5 accepted_samples metadata registration authorization",
+        "missing_requirements": [
+          "human approval",
+          "registry/category exact file scope",
+          "recoverability validator pass"
+        ]
+      },
+      {
+        "package_type": "manifest_read",
+        "card_status": "blocked_pending_exact_authorization",
+        "blocker_code": "blocked_missing_exact_manifest_read_authorization",
+        "execution_allowed_now": false,
+        "source_blocker_decision_ref": "v14_202:manifest_read",
+        "review_console_action": "display_blocker_and_required_fields_only",
+        "next_authorization_class": "Jenn exact A5 manifest read authorization",
+        "missing_requirements": [
+          "real manifest target",
+          "exact allowed read paths",
+          "allowed extracted fields"
+        ]
+      },
+      {
+        "package_type": "durable_archive",
+        "card_status": "blocked_pending_exact_authorization",
+        "blocker_code": "blocked_missing_archive_copy_authorization",
+        "execution_allowed_now": false,
+        "source_blocker_decision_ref": "v14_202:durable_archive",
+        "review_console_action": "display_blocker_and_required_fields_only",
+        "next_authorization_class": "Jenn exact A5 durable archive authorization",
+        "missing_requirements": [
+          "source artifact ref",
+          "target archive path",
+          "hash verification"
+        ]
+      },
+      {
+        "package_type": "production_candidate",
+        "card_status": "blocked_pending_exact_authorization",
+        "blocker_code": "blocked_missing_production_candidate_authorization",
+        "execution_allowed_now": false,
+        "source_blocker_decision_ref": "v14_202:production_candidate",
+        "review_console_action": "display_blocker_and_required_fields_only",
+        "next_authorization_class": "Jenn exact A5 production_candidate authorization",
+        "missing_requirements": [
+          "recoverable accepted sample ref",
+          "eligibility preflight ref",
+          "blocker decision"
+        ]
+      },
+      {
+        "package_type": "daily_note_vcp_memory",
+        "card_status": "blocked_pending_exact_authorization",
+        "blocker_code": "blocked_missing_daily_note_vcp_memory_write_authorization",
+        "execution_allowed_now": false,
+        "source_blocker_decision_ref": "v14_202:daily_note_vcp_memory",
+        "review_console_action": "display_blocker_and_required_fields_only",
+        "next_authorization_class": "Jenn exact A5 DailyNote/VCP memory authorization",
+        "missing_requirements": [
+          "reviewed Chinese memory_delta draft",
+          "sensitive data scan pass",
+          "exact memory targets"
+        ]
+      }
+    ],
+    "validation_required": [
+      "git diff --check",
+      "node scripts/validate_v14_202_authorization_package_blocker_arbiter_contract.js",
+      "node scripts/validate_v14_201_authorization_package_compiler_coverage_closeout.js",
+      "node scripts/validate_agent_board_state.js",
+      "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1"
+    ],
+    "guard": {
+      "review_console_handoff_state_only": true,
+      "authorization_execution_performed": false,
+      "package_execution_performed": false,
+      "accepted_samples_write_performed": false,
+      "manifest_read_performed": false,
+      "durable_archive_copy_performed": false,
+      "production_candidate_write_performed": false,
+      "failure_samples_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "fetch_performed": false,
+      "file_write_performed": false,
+      "review_console_runtime_integration_performed": false,
+      "ipc_preload_renderer_integration_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_expected": {
+      "missing_package_card_fails": true,
+      "execution_allowed_card_fails": true,
+      "missing_source_contract_fails": true,
+      "runtime_flag_fails": true,
+      "vcpchat_read_flag_fails": true,
+      "memory_write_flag_fails": true
+    }
+  }
+}

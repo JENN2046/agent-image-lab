@@ -1,0 +1,77 @@
+{
+  "manifest_read_authorization_compiler_output_preflight": {
+    "version": "v1",
+    "phase": "v14_197_manifest_read_authorization_compiler_output_preflight",
+    "execution_mode": "manifest_read_authorization_compiler_output_preflight_only",
+    "source_type_matrix_ref": "tests/schema_examples/v14_196_authorization_package_compiler_type_matrix.example.json",
+    "package_type": "manifest_read",
+    "package_id": "AUTH-DRAFT-MANIFEST-READ-PREFLIGHT-20260518-001",
+    "package_status": "draft_blocked_missing_exact_manifest_authorization",
+    "source_read_authorized": false,
+    "source_read_performed": false,
+    "real_manifest_path_provided": false,
+    "read_command_permission": false,
+    "execution_allowed_now": false,
+    "target_scope": {
+      "real_manifest_target": null,
+      "exact_allowed_read_paths": [],
+      "allowed_file_types": [],
+      "allowed_extracted_fields": [],
+      "forbidden_extracted_fields": [
+        "secret_values",
+        "tokens",
+        "cookies",
+        "private_paths",
+        "raw_source_copy"
+      ]
+    },
+    "forbidden_read_paths": [
+      ".env",
+      ".env.local",
+      "VCPChat",
+      "VCPToolBox",
+      "plugin-manifest.json",
+      "private local paths"
+    ],
+    "required_before_execution": [
+      "Jenn exact A5 manifest read authorization",
+      "real manifest target path supplied by Jenn",
+      "exact allowed read paths",
+      "allowed extracted fields",
+      "reviewer",
+      "rollback plan",
+      "stop conditions"
+    ],
+    "validation_required": [
+      "git diff --check",
+      "node scripts/validate_v14_196_authorization_package_compiler_type_matrix.js",
+      "node scripts/validate_agent_board_state.js",
+      "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1",
+      "powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1"
+    ],
+    "guard": {
+      "preflight_only": true,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "file_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_expected": {
+      "real_manifest_path_filled_without_authorization_fails": true,
+      "source_read_performed_fails": true,
+      "read_command_permission_fails": true,
+      "broad_allowed_read_path_fails": true,
+      "missing_reviewer_requirement_fails": true,
+      "runtime_claim_fails": true
+    }
+  }
+}

@@ -169,7 +169,7 @@ let matrixSummary = null;
 try {
   matrixSummary = JSON.parse(execFileSync(process.execPath, [files.matrixValidator], { cwd: root, encoding: "utf8" }));
   addResult("v14_142_matrix_validator_still_passes", matrixSummary.passed === true);
-  addResult("schema_hardening_keeps_partial_legacy_rows_partial", matrixSummary.full_recoverability_count_is_currently_one === true && matrixSummary.legacy_partial_artifact_sample_count >= 3);
+  addResult("schema_hardening_keeps_partial_legacy_rows_partial", matrixSummary.full_recoverability_count_is_currently_three === true && matrixSummary.legacy_partial_artifact_sample_count >= 3);
 } catch (error) {
   addResult("v14_142_matrix_validator_still_passes", false, error.message);
 }
@@ -245,7 +245,7 @@ const summary = {
   category_index_full_recoverability_metadata_verified: true,
   v14_142_matrix_validator_still_passes: matrixSummary?.passed === true,
   v14_142_negative_matrix_still_covers_schema_failures: Boolean(matrixSummary) && requiredNegativeFlags.every((flag) => matrixSummary[flag] === true),
-  full_recoverability_count_is_currently_one: matrixSummary?.full_recoverability_count_is_currently_one === true,
+  full_recoverability_count_is_currently_three: matrixSummary?.full_recoverability_count_is_currently_three === true,
   artifact_recoverability_is_not_vcp_runtime_integration: true,
   vcp_runtime_integration_proven: false,
   provider_contact_performed: false,

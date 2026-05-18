@@ -1,0 +1,59 @@
+{
+  "review_console_post_approval_gate_static_panel": {
+    "version": "v1",
+    "phase": "v14_216_review_console_post_approval_gate_static_panel",
+    "execution_mode": "review_console_static_post_approval_gate_panel_only",
+    "source_gate_ref": "tests/schema_examples/v14_215_third_sample_accepted_samples_post_approval_gate_alignment.example.json",
+    "source_intake_validator_ref": "scripts/validate_v14_214_lamp_third_sample_human_approval_intake_validator.js",
+    "draft_output_key": "third_sample_post_approval_gate_state",
+    "target": {
+      "sample_id": "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001",
+      "candidate_id": "v14_166_lamp_v3_generated_candidate_001",
+      "category": "product_still_life"
+    },
+    "gate_status": "blocked",
+    "blocker": "human_approval_missing",
+    "approval_statement_source_is_user_submission": false,
+    "human_approval_captured_now": false,
+    "accepted_samples_registration_ready_now": false,
+    "future_registration_requires_v14_214_user_submission": true,
+    "required_before_write": [
+      "v14.214 intake validator reports approval_statement_source_is_user_submission=true",
+      "v14.214 intake validator reports human_approval_captured_now=true",
+      "allowed write set remains exactly accepted_samples/accepted_sample_registry.yaml and accepted_samples/categories/product_still_life.yaml",
+      "no image copy, no runs source image modification, no production_candidate, no failure_samples, no DailyNote, no VCP memory"
+    ],
+    "static_panel_guard": {
+      "static_panel_only": true,
+      "accepted_samples_write_performed": false,
+      "category_index_write_performed": false,
+      "image_file_copy_performed": false,
+      "runs_source_image_modified": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "image_generation_performed": false,
+      "env_or_secret_read_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_required": {
+      "missing_v14_215_source_fails": true,
+      "user_submission_overclaim_fails": true,
+      "human_approval_overclaim_fails": true,
+      "registration_ready_overclaim_fails": true,
+      "accepted_samples_write_flag_fails": true,
+      "external_action_flag_fails": true,
+      "runtime_claim_fails": true
+    }
+  }
+}
