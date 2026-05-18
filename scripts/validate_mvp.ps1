@@ -7704,6 +7704,7 @@ if (-not $node) {
       'RELEASE_NOTES.md',
       'docs_registry/README.md',
       'docs_registry/document_registry_schema_v1.yaml',
+      'docs_registry/generated/c1ak_agent_board_only_01_registry_evidence.csv',
       'docs_registry/registry_scanner_dry_run.md',
       'docs_registry/registry_validator_dry_run.md',
       'docs/00_project_roadmap.md',

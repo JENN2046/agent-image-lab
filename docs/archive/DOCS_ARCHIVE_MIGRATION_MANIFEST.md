@@ -50,6 +50,11 @@ D1 minimal docs registry schema draft: `docs/archive/DOCS_ARCHIVE_D1_MINIMAL_DOC
 D2 registry scanner dry-run: `docs/archive/DOCS_ARCHIVE_D2_REGISTRY_SCANNER_DRY_RUN.md`
 D3 registry validator dry-run: `docs/archive/DOCS_ARCHIVE_D3_REGISTRY_VALIDATOR_DRY_RUN.md`
 C1ag exact-file commit readiness audit: `docs/archive/DOCS_ARCHIVE_C1AG_EXACT_FILE_COMMIT_READINESS_AUDIT.md`
+C1aj agent-board-only 01 execution package: `docs/archive/DOCS_ARCHIVE_C1AJ_AGENT_BOARD_ONLY_01_EXECUTION_PACKAGE.md`
+C1aj agent-board-only 01 execution package CSV: `docs/archive/DOCS_ARCHIVE_C1AJ_AGENT_BOARD_ONLY_01_EXECUTION_PACKAGE.csv`
+C1ak agent-board-only 01 execution record: `docs/archive/DOCS_ARCHIVE_C1AK_AGENT_BOARD_ONLY_01_EXECUTION_RECORD.md`
+C1ak agent-board-only 01 moved files CSV: `docs/archive/DOCS_ARCHIVE_C1AK_AGENT_BOARD_ONLY_01_MOVED_FILES.csv`
+C1ak agent-board-only 01 post-move reference map CSV: `docs/archive/DOCS_ARCHIVE_C1AK_AGENT_BOARD_ONLY_01_POST_MOVE_REFERENCE_MAP.csv`
 
 This manifest records proposed future archive targets for historical `docs/` records. It is not a file-move authorization.
 

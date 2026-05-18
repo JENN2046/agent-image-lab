@@ -16,6 +16,7 @@ Current files:
 - `document_registry_schema_v1.yaml` defines the minimum document record shape.
 - `registry_scanner_dry_run.md` describes the read-only scanner design.
 - `registry_validator_dry_run.md` describes the validator rules.
+- `generated/` contains batch-scoped evidence generated from approved local archive cleanup work.
 
 Non-authorization:
 

@@ -1,10 +1,32 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## C1aj/C1ak Agent-Board-Only 01 Execution
+
+```yaml
+phase: c1aj_c1ak_agent_board_only_01_execution
+status: completed_validated_pending_commit
+goal: execute first low-risk agent-board-only paired move/rewrite batch
+completed:
+  - generated docs/archive/DOCS_ARCHIVE_C1AJ_AGENT_BOARD_ONLY_01_EXECUTION_PACKAGE.md
+  - generated docs/archive/DOCS_ARCHIVE_C1AJ_AGENT_BOARD_ONLY_01_EXECUTION_PACKAGE.csv
+  - moved 20 exact files to docs/archive/
+  - rewrote 20 exact old-path references in one .agent_board source file
+  - generated docs/archive/DOCS_ARCHIVE_C1AK_AGENT_BOARD_ONLY_01_EXECUTION_RECORD.md
+  - generated docs/archive/DOCS_ARCHIVE_C1AK_AGENT_BOARD_ONLY_01_POST_MOVE_REFERENCE_MAP.csv
+  - generated docs_registry/generated/c1ak_agent_board_only_01_registry_evidence.csv
+  - confirmed non-archive old-path hit records count 0
+not_performed:
+  - no files outside allowlist moved
+  - no files deleted
+  - no wrappers created
+  - no push, tag, release, or deploy
+```
+
 ## C1ad-D3 Paired Package And Registry Drafts
 
 ```yaml
 phase: c1ad_d3_paired_package_and_registry_drafts
-status: completed_validated_pending_commit
+status: completed_validated_pushed
 goal: create C1ad paired exact move/rewrite dry-run package and D1-D3 minimal registry drafts
 completed:
   - generated docs/archive/DOCS_ARCHIVE_C1AD_PAIRED_EXACT_MOVE_REWRITE_PACKAGE_DRY_RUN.md
@@ -10305,7 +10327,7 @@ status: completed_validated_prompt_package_draft_record
 source_phase: v13_007_next_product_visual_production_trial_planning_gate
 source_commit: eaab60f16d3fef7467b5d2afc2b78e6e0ea3c150
 purpose: create camping lantern prompt package draft for static review only
-phase_record_ref: docs/v13_008_premium_portable_led_camping_lantern_prompt_package_draft_gate.md
+phase_record_ref: docs/archive/phases/v13/v13_008_premium_portable_led_camping_lantern_prompt_package_draft_gate.md
 prompt_package_ref: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml
 selected_product: premium_portable_led_camping_lantern
 prompt_package_created: true
@@ -10349,7 +10371,7 @@ status: completed_validated_next_product_planning_record
 source_phase: v13_006_visual_production_loop_foundation_closeout_or_next_route_decision_gate
 source_commit: a17be5c9b3c6960cb7e59881a79e2768b2c66b1a
 purpose: select fourth-product planning target and draft V13 loop planning objects
-phase_record_ref: docs/v13_007_next_product_visual_production_trial_planning_gate.md
+phase_record_ref: docs/archive/phases/v13/v13_007_next_product_visual_production_trial_planning_gate.md
 planning_ref: docs/next_product_visual_production_trial_plan_v13_007.md
 selected_product: premium_portable_led_camping_lantern
 selected_product_zh: 高端便携式 LED 露营灯
@@ -10394,7 +10416,7 @@ status: completed_validated_foundation_closeout_record
 source_phase: v13_005_existing_asset_loop_reconstruction_docs_only_gate
 source_commit: 9fb10d57fd1586eab2bab79d3418c37af501b01a
 purpose: close V13 Visual Production Loop foundation and present next route options
-phase_record_ref: docs/v13_006_visual_production_loop_foundation_closeout_or_next_route_decision_gate.md
+phase_record_ref: docs/archive/phases/v13/v13_006_visual_production_loop_foundation_closeout_or_next_route_decision_gate.md
 foundation_closeout_ref: docs/v13_visual_production_loop_foundation_closeout.md
 v13_foundation_closed: true
 canonical_model_created: true
@@ -10438,7 +10460,7 @@ status: completed_validated_loop_reconstruction_record
 source_phase: v13_004_existing_asset_loop_reconstruction_selection_gate
 source_commit: 4232ad8b1f7b8dfbcb547772ca805edad9ccfe6a
 purpose: reconstruct premium serum bottle visual production loop from existing docs
-phase_record_ref: docs/v13_005_existing_asset_loop_reconstruction_docs_only_gate.md
+phase_record_ref: docs/archive/phases/v13/v13_005_existing_asset_loop_reconstruction_docs_only_gate.md
 reconstruction_ref: docs/visual_production_loop_reconstruction_premium_serum_bottle_v1.md
 selected_asset: premium_serum_bottle_v10_011
 loop_reconstruction_created: true
@@ -10486,7 +10508,7 @@ status: completed_validated_reconstruction_selection_record
 source_phase: v13_003_visual_production_loop_canonical_model_static_review_gate
 source_commit: f33eff521056884931a04b22594ba2738bb30535
 purpose: select premium serum bottle as docs-only loop reconstruction sample
-phase_record_ref: docs/v13_004_existing_asset_loop_reconstruction_selection_gate.md
+phase_record_ref: docs/archive/phases/v13/v13_004_existing_asset_loop_reconstruction_selection_gate.md
 selected_asset: premium_serum_bottle_v10_011
 selected_product: cosmetic_skincare_bottle / premium_serum_bottle
 source_output: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg
@@ -10527,7 +10549,7 @@ status: completed_validated_static_review_record
 source_phase: v13_002_visual_production_loop_canonical_model_gate
 source_commit: b359d4015a9801e97efdc99b2b905060ec871b83
 purpose: statically review Visual Production Loop canonical model coverage
-phase_record_ref: docs/v13_003_visual_production_loop_canonical_model_static_review_gate.md
+phase_record_ref: docs/archive/phases/v13/v13_003_visual_production_loop_canonical_model_static_review_gate.md
 static_review_ref: docs/visual_production_loop_canonical_model_static_review.md
 canonical_model_static_review_completed: true
 coverage_matrix_created: true
@@ -10571,7 +10593,7 @@ status: completed_validated_canonical_model_record
 source_phase: v13_001_visual_production_loop_route_selection_gate
 source_commit: 46df48201ce770b79797c4c41db225417da5e2fd
 purpose: define Visual Production Loop canonical objects, state machine, forbidden transitions, and status taxonomy
-phase_record_ref: docs/v13_002_visual_production_loop_canonical_model_gate.md
+phase_record_ref: docs/archive/phases/v13/v13_002_visual_production_loop_canonical_model_gate.md
 canonical_model_ref: docs/visual_production_loop_canonical_model.md
 state_machine_ref: docs/visual_production_loop_state_machine.md
 selected_option: visual_production_loop_canonical_model
@@ -10615,7 +10637,7 @@ status: completed_validated_route_selection_record
 source_phase: v12_009_v12_prompt_schema_machine_validator_final_closeout
 source_commit: 8cced3101864ac90f787d8854db862cc71ddbcb6
 purpose: present V13 Visual Production Loop route options and wait for human selection
-phase_record_ref: docs/v13_001_visual_production_loop_route_selection_gate.md
+phase_record_ref: docs/archive/phases/v13/v13_001_visual_production_loop_route_selection_gate.md
 v12_closed: true
 machine_validator_implemented: true
 validator_passed_on_synthetic_fixtures: true
@@ -11669,7 +11691,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v10_018_v10_final_closeout_remote_sync
 source_commit: 223b1550f57e422c1bf4336c4619ef65ec4509c3
 purpose: present V11 route options and wait for human selection
-phase_record_ref: docs/v11_001_route_selection_gate.md
+phase_record_ref: docs/archive/phases/v11/v11_001_route_selection_gate.md
 v10_closed: true
 options_presented: prompt_schema_hardening | review_console_productization_planning | fourth_product_prompt_workflow_expansion | delivery_completion_package_track | memory_suitability_planning | production_candidate_002_readiness_planning
 recommended_option: prompt_schema_hardening
@@ -11739,7 +11761,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v10_016_post_push_status_sync_guard_improvement
 source_commit: f6b4e9ee36d8bc079bf8f2726e5fea78fce422a3
 purpose: close premium serum bottle third-product route as accepted candidate evidence
-phase_record_ref: docs/v10_017_third_product_route_closeout_gate.md
+phase_record_ref: docs/archive/phases/v10/v10_017_third_product_route_closeout_gate.md
 route_closeout_ref: docs/v10_third_product_route_closeout_premium_serum_bottle.md
 human_selected_option: close_third_product_route_as_accepted_candidate_evidence
 product: cosmetic_skincare_bottle / premium_serum_bottle
@@ -12031,7 +12053,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v10_007_third_product_A5_authorization_decision_gate
 source_commit: 089069cee8e48f8338b3b78cb8c784d2725bf564
 purpose: record fast-forward sync and correct v10.007 remote-synced status surfaces
-phase_record_ref: docs/v10_008_remote_sync_and_status_surface_correction_gate.md
+phase_record_ref: docs/archive/phases/v10/v10_008_remote_sync_and_status_surface_correction_gate.md
 fast_forward_performed: true
 local_equals_origin_after_sync: true
 ahead_behind_after_sync: 0/0
@@ -12065,7 +12087,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v10_006_third_product_prompt_package_static_review_and_yaml_format_fix_gate
 source_commit: 0ba94323c6f07412503c96cd6de48a0650094193
 purpose: present human decision options for a future third-product one-shot minimal real generation trial
-phase_record_ref: docs/v10_007_third_product_A5_authorization_decision_gate.md
+phase_record_ref: docs/archive/phases/v10/v10_007_third_product_A5_authorization_decision_gate.md
 selected_route: third_product_prompt_workflow_expansion
 selected_product: cosmetic_skincare_bottle / premium_serum_bottle
 locked_structure: frosted_translucent_glass_bottle_with_clean_dropper_cap
@@ -12101,7 +12123,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v10_005_third_product_prompt_package_draft_gate
 source_commit: 19c6a5a7f71d2af208c381a23a4c5ab0771ba533
 purpose: statically review serum bottle prompt package and fix YAML readability / runner-shape risk
-phase_record_ref: docs/v10_006_third_product_prompt_package_static_review_gate.md
+phase_record_ref: docs/archive/phases/v10/v10_006_third_product_prompt_package_static_review_gate.md
 static_review_ref: reviews/v10_006_third_product_prompt_package_static_review.md
 prompt_package_ref: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
 selected_route: third_product_prompt_workflow_expansion
@@ -12141,7 +12163,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v10_004_third_product_brief_gate
 source_commit: d3d2f41b44fb696d3bdaf1fc9e9c64d2f69e6d2f
 purpose: create docs-only prompt package draft for premium serum bottle
-phase_record_ref: docs/v10_005_third_product_prompt_package_draft_gate.md
+phase_record_ref: docs/archive/phases/v10/v10_005_third_product_prompt_package_draft_gate.md
 product_brief_ref: briefs/product_brief_premium_serum_bottle_v1.md
 prompt_package_ref: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
 selected_route: third_product_prompt_workflow_expansion
@@ -12176,7 +12198,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v10_003_third_product_prompt_workflow_expansion_route_gate
 source_commit: 155d30caae054821bb839f331fedbd62da36e0d2
 purpose: create product brief for premium serum bottle third product lane
-phase_record_ref: docs/v10_004_third_product_brief_gate.md
+phase_record_ref: docs/archive/phases/v10/v10_004_third_product_brief_gate.md
 product_brief_ref: briefs/product_brief_premium_serum_bottle_v1.md
 selected_route: third_product_prompt_workflow_expansion
 selected_product: cosmetic_skincare_bottle / premium_serum_bottle
@@ -12209,7 +12231,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v10_002_next_project_route_selection_gate
 source_commit: 266bbaa79fd49fc784830297b385ca5248ca9a4f
 purpose: select third product prompt workflow expansion direction and define Route C boundary
-phase_record_ref: docs/v10_003_third_product_prompt_workflow_expansion_route_gate.md
+phase_record_ref: docs/archive/phases/v10/v10_003_third_product_prompt_workflow_expansion_route_gate.md
 selected_route: third_product_prompt_workflow_expansion
 selected_product_category: cosmetic_skincare_bottle
 selected_product_direction: premium_serum_bottle
@@ -12242,7 +12264,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v10_001_closeout_and_project_route_reset_gate
 source_commit: b03089d51156cc5e5839a8e51e26bc0eb689b75c
 purpose: present V10 next project route options and wait for human selection
-phase_record_ref: docs/v10_002_next_project_route_selection_gate.md
+phase_record_ref: docs/archive/phases/v10/v10_002_next_project_route_selection_gate.md
 V9_delivery_readiness_layer_closed: true
 V10_route_reset_created: true
 options_presented: real_retouch_execution_authorization_track | delivery_completion_package_track | third_product_prompt_workflow_expansion | review_console_productization_planning | memory_suitability_planning | production_candidate_002_readiness_planning
@@ -12278,8 +12300,8 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v9_022_v9_delivery_readiness_layer_closeout_or_next_route_decision_gate
 source_commit: 908d8780b246b85c22a7f69ded23d6b57565dbea
 purpose: record V10 Option E closeout and project route reset
-phase_record_ref: docs/v10_001_closeout_and_project_route_reset_gate.md
-route_reset_ref: docs/v10_project_route_reset_after_v9_delivery_readiness.md
+phase_record_ref: docs/archive/phases/v10/v10_001_closeout_and_project_route_reset_gate.md
+route_reset_ref: docs/archive/phases/v10/v10_project_route_reset_after_v9_delivery_readiness.md
 selected_v10_route: closeout_and_project_route_reset
 selected_v10_route_meaning: 封存 V9 后重新选择下一条产品主线
 selected_v10_route_risk: low
@@ -22444,7 +22466,7 @@ recommended_next: chain_closed_see_readme
 Phase: v7.167
 Status: untracked_plugin_dashboard_plan_disposition_completed
 action: staged_and_committed
-file: docs/244_v6_8_plugin_dashboard_plan.md
+file: docs/archive/numbered_legacy/244_v6_8_plugin_dashboard_plan.md
 note: marked_as_historical_reference_only
 previously_untracked_for: entire_session
 known_untracked_file_touched: false (before this phase)

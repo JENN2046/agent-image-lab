@@ -6,11 +6,28 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current C1aj/C1ak Agent-Board-Only 01 Execution
+
+```text
+Current archive task: c1aj_c1ak_agent_board_only_01_execution.
+Status: completed validated pending commit.
+Purpose: execute first low-risk agent-board-only paired move/rewrite batch.
+Execution package: docs/archive/DOCS_ARCHIVE_C1AJ_AGENT_BOARD_ONLY_01_EXECUTION_PACKAGE.md.
+Execution record: docs/archive/DOCS_ARCHIVE_C1AK_AGENT_BOARD_ONLY_01_EXECUTION_RECORD.md.
+Files moved: 20.
+Rewrite hits: 20.
+Non-archive old-path hits after rewrite: 0.
+Recommended next: C1al validate and commit first batch.
+Not allowed now: push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
+```
+
+---
+
 ## Current C1ad-D3 Paired Package And Registry Drafts
 
 ```text
 Current archive task: c1ad_d3_paired_package_and_registry_drafts.
-Status: completed validated pending commit.
+Status: completed validated pushed.
 Purpose: create C1ad paired exact move/rewrite dry-run evidence and D1-D3 minimal registry drafts.
 C1ad package: docs/archive/DOCS_ARCHIVE_C1AD_PAIRED_EXACT_MOVE_REWRITE_PACKAGE_DRY_RUN.md.
 C1ae review: docs/archive/DOCS_ARCHIVE_C1AE_PAIRED_PACKAGE_VERIFIER_REVIEW.md.
@@ -18,7 +35,7 @@ C1af split: docs/archive/DOCS_ARCHIVE_C1AF_PACKAGE_SPLIT_DECISION.md.
 D1-D3 registry drafts: docs_registry/.
 Decision: no move, no rewrite, no wrappers; future execution must use small exact batches and human-navigation review.
 Validator scope alignment: exact allowlist only for docs_registry draft files.
-Recommended next: C1ag exact-file commit readiness audit.
+Recommended next: C1aj agent-board-only paired execution package.
 Not allowed now: push/tag/release/deploy, file movement, reference rewrite, wrapper creation, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
 ```
 

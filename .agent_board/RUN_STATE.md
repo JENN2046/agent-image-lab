@@ -1,10 +1,34 @@
 # RUN_STATE.md — Agent Image Lab
 
+## C1aj/C1ak Agent-Board-Only 01 Execution
+
+```yaml
+phase: c1aj_c1ak_agent_board_only_01_execution
+status: completed_validated_pending_commit
+mode: A4.8_safe_local_docs_only_exact_move_rewrite
+goal: execute first low-risk agent-board-only paired move/rewrite batch
+evidence:
+  execution_package: docs/archive/DOCS_ARCHIVE_C1AJ_AGENT_BOARD_ONLY_01_EXECUTION_PACKAGE.md
+  execution_record: docs/archive/DOCS_ARCHIVE_C1AK_AGENT_BOARD_ONLY_01_EXECUTION_RECORD.md
+  post_map: docs/archive/DOCS_ARCHIVE_C1AK_AGENT_BOARD_ONLY_01_POST_MOVE_REFERENCE_MAP.csv
+  registry_evidence: docs_registry/generated/c1ak_agent_board_only_01_registry_evidence.csv
+result:
+  files_moved: 20
+  rewrite_hits: 20
+  non_archive_old_path_hits: 0
+  wrappers_created: false
+  files_deleted: false
+decision:
+  c1al_validation_ready: true
+  push_allowed_now: false
+  recommended_next: c1al_validate_and_commit_first_batch
+```
+
 ## C1ad-D3 Paired Package And Registry Drafts
 
 ```yaml
 phase: c1ad_d3_paired_package_and_registry_drafts
-status: completed_validated_pending_commit
+status: completed_validated_pushed
 mode: A4.8_safe_local_docs_only_dry_run_package_schema
 goal: create paired exact move/rewrite dry-run package and minimal registry evidence-index drafts
 evidence:
@@ -30,7 +54,7 @@ summary:
 decision:
   c1ag_commit_readiness_ready: true
   push_allowed_now: false
-  recommended_next: c1ag_exact_file_commit_readiness_audit
+  recommended_next: c1aj_agent_board_only_paired_execution_package
 ```
 
 ## C1ag Exact-File Commit Readiness Audit

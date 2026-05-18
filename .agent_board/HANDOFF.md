@@ -1,9 +1,32 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — C1aj/C1ak Agent-Board-Only 01 Execution
+
+```text
+Status: c1aj_c1ak_agent_board_only_01_execution completed_validated_pending_commit.
+Reason: Jenn allowed low-risk exact-file archive execution batches of up to 20 files.
+Execution mode: A4.8 local docs-only exact move/rewrite execution.
+Execution package: docs/archive/DOCS_ARCHIVE_C1AJ_AGENT_BOARD_ONLY_01_EXECUTION_PACKAGE.md.
+Execution record: docs/archive/DOCS_ARCHIVE_C1AK_AGENT_BOARD_ONLY_01_EXECUTION_RECORD.md.
+Post-map: docs/archive/DOCS_ARCHIVE_C1AK_AGENT_BOARD_ONLY_01_POST_MOVE_REFERENCE_MAP.csv.
+Registry evidence: docs_registry/generated/c1ak_agent_board_only_01_registry_evidence.csv.
+Files moved: 20.
+Rewrite hits: 20.
+Rewrite source files: 1.
+Non-archive old-path hits after rewrite: 0.
+Wrappers created: false.
+Files deleted: false.
+Existing validator behavior changed: false; exact local commit scope allowlist updated for one docs_registry generated evidence file.
+Push/tag/release/deploy performed: false.
+Recommended next: C1al validate and commit first batch, then continue C1am low-risk batches.
+```
+
+---
+
 ## Current Handoff Update — C1ad-D3 Paired Package And Registry Drafts
 
 ```text
-Status: c1ad_d3_paired_package_and_registry_drafts completed_validated_pending_commit.
+Status: c1ad_d3_paired_package_and_registry_drafts completed_validated_pushed.
 Reason: Jenn set the next goal to create C1ad paired move/rewrite dry-run evidence and minimal registry design without execution.
 Execution mode: A4.8 local docs-only dry-run/package/schema work.
 C1ad package: docs/archive/DOCS_ARCHIVE_C1AD_PAIRED_EXACT_MOVE_REWRITE_PACKAGE_DRY_RUN.md.
@@ -22,7 +45,7 @@ Wrappers created: false.
 Existing validator behavior changed: false; exact local commit scope allowlist updated for four docs_registry draft files.
 Push/tag/release/deploy performed: false.
 Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
-Recommended next: C1ag exact-file commit readiness audit, then local commit, then push readiness.
+Recommended next: C1aj agent-board-only paired execution package.
 ```
 
 ---

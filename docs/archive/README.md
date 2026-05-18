@@ -57,6 +57,7 @@ The current authority remains:
 - `docs/archive/DOCS_ARCHIVE_C1AE_PAIRED_PACKAGE_VERIFIER_REVIEW.md` and `docs/archive/DOCS_ARCHIVE_C1AF_PACKAGE_SPLIT_DECISION.md` record the verifier review and future batch split decision.
 - `docs/archive/DOCS_ARCHIVE_D1_MINIMAL_DOCS_REGISTRY_SCHEMA_DRAFT.md`, `docs/archive/DOCS_ARCHIVE_D2_REGISTRY_SCANNER_DRY_RUN.md`, and `docs/archive/DOCS_ARCHIVE_D3_REGISTRY_VALIDATOR_DRY_RUN.md` record the minimal registry evidence-index design.
 - `docs/archive/DOCS_ARCHIVE_C1AG_EXACT_FILE_COMMIT_READINESS_AUDIT.md` records the exact-file commit readiness audit for C1ad-D3 changes.
+- `docs/archive/DOCS_ARCHIVE_C1AJ_AGENT_BOARD_ONLY_01_EXECUTION_PACKAGE.md` and `docs/archive/DOCS_ARCHIVE_C1AK_AGENT_BOARD_ONLY_01_EXECUTION_RECORD.md` record the first low-risk agent-board-only paired move/rewrite execution batch.
 
 ## Non-Authorization
 
