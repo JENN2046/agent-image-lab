@@ -44,7 +44,7 @@ created:
   - docs/AUTOPILOT_FAILURE_RECOVERY.md
   - .agent_board/PHASE_PROTOCOL.md
   - .agent_board/CLOSEOUT_SCHEMA.md
-  - docs/v8_003a_A4_8_safe_project_operator_rail_package.md
+  - docs/archive/phases/v8/v8_003a_A4_8_safe_project_operator_rail_package.md
 updated:
   - AGENTS.md
   - AGENTS.autopilot-overlay.md

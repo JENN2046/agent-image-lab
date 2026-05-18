@@ -1,9 +1,32 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — C1am Agent-Board-Plus-Docs 04 Execution
+
+```text
+Status: c1am_agent_board_plus_docs_04_execution completed_validated_pending_commit.
+Reason: Continue low-risk paired exact move/rewrite batches after agent-board-only lane closed.
+Execution mode: A4.8 local docs-only exact move/rewrite execution.
+Execution package: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_04_EXECUTION_PACKAGE.md.
+Execution record: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_04_EXECUTION_RECORD.md.
+Post-map: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_04_POST_MOVE_REFERENCE_MAP.csv.
+Registry evidence: docs_registry/generated/c1am_agent_board_plus_docs_04_registry_evidence.csv.
+Files moved: 20.
+Rewrite hits: 14.
+Zero-reference confirmed moves: 7.
+Non-archive active old-path hits after rewrite: 0.
+Wrappers created: false.
+Files deleted: false.
+Existing validator behavior changed: false; exact local commit scope allowlist updated for one docs_registry generated evidence file.
+Push/tag/release/deploy performed: false.
+Recommended next: validate and commit agent-board-plus-docs 04, then finish final agent-board-plus-docs batch.
+```
+
+---
+
 ## Current Handoff Update — C1am Agent-Board-Plus-Docs 03 Execution
 
 ```text
-Status: c1am_agent_board_plus_docs_03_execution completed_validated_pending_commit.
+Status: c1am_agent_board_plus_docs_03_execution completed_validated_committed.
 Reason: Continue low-risk paired exact move/rewrite batches after agent-board-only lane closed.
 Execution mode: A4.8 local docs-only exact move/rewrite execution.
 Execution package: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_03_EXECUTION_PACKAGE.md.
@@ -18,7 +41,7 @@ Wrappers created: false.
 Files deleted: false.
 Existing validator behavior changed: false; exact local commit scope allowlist updated for one docs_registry generated evidence file.
 Push/tag/release/deploy performed: false.
-Recommended next: validate and commit agent-board-plus-docs 03, then continue remaining agent-board-plus-docs batches.
+Recommended next: continue remaining agent-board-plus-docs batches.
 ```
 
 ---

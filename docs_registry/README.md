@@ -25,6 +25,7 @@ Current files:
   - `generated/c1am_agent_board_plus_docs_01_registry_evidence.csv`
   - `generated/c1am_agent_board_plus_docs_02_registry_evidence.csv`
   - `generated/c1am_agent_board_plus_docs_03_registry_evidence.csv`
+  - `generated/c1am_agent_board_plus_docs_04_registry_evidence.csv`
 
 Non-authorization:
 

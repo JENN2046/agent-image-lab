@@ -1,10 +1,33 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## C1am Agent-Board-Plus-Docs 04 Execution
+
+```yaml
+phase: c1am_agent_board_plus_docs_04_execution
+status: completed_validated_pending_commit
+goal: execute fourth low-risk agent-board-plus-docs paired move/rewrite batch
+completed:
+  - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_04_EXECUTION_PACKAGE.md
+  - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_04_EXECUTION_PACKAGE.csv
+  - moved 20 exact files to docs/archive/
+  - rewrote 14 exact active old-path references in .agent_board and docs source files
+  - confirmed 7 moved files had zero active old-path references before movement
+  - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_04_EXECUTION_RECORD.md
+  - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_04_POST_MOVE_REFERENCE_MAP.csv
+  - generated docs_registry/generated/c1am_agent_board_plus_docs_04_registry_evidence.csv
+  - confirmed non-archive active old-path hit records count 0
+not_performed:
+  - no files outside move allowlist moved
+  - no files deleted
+  - no wrappers created
+  - no push, tag, release, or deploy
+```
+
 ## C1am Agent-Board-Plus-Docs 03 Execution
 
 ```yaml
 phase: c1am_agent_board_plus_docs_03_execution
-status: completed_validated_pending_commit
+status: completed_validated_committed
 goal: execute third low-risk agent-board-plus-docs paired move/rewrite batch
 completed:
   - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_03_EXECUTION_PACKAGE.md

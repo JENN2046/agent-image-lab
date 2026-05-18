@@ -38,7 +38,7 @@ It does not read real VCP memory, VCPChat, VCPToolBox, or manifests.
 phase_delta:
   creates:
     - docs/memory_suitability_decision_matrix.md
-    - docs/v7_232_memory_suitability_decision_matrix_gate.md
+    - docs/archive/phases/v7/v7_232_memory_suitability_decision_matrix_gate.md
   updates_status_surfaces:
     - README.md
     - docs/00_project_roadmap.md

@@ -7712,6 +7712,7 @@ if (-not $node) {
       'docs_registry/generated/c1am_agent_board_plus_docs_01_registry_evidence.csv',
       'docs_registry/generated/c1am_agent_board_plus_docs_02_registry_evidence.csv',
       'docs_registry/generated/c1am_agent_board_plus_docs_03_registry_evidence.csv',
+      'docs_registry/generated/c1am_agent_board_plus_docs_04_registry_evidence.csv',
       'docs_registry/registry_scanner_dry_run.md',
       'docs_registry/registry_validator_dry_run.md',
       'docs/00_project_roadmap.md',

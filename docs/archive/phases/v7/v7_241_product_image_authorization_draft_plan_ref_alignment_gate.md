@@ -1,15 +1,15 @@
-# v7.243 Product Image Active Authorization Package Skeleton Gate
+# v7.241 Product Image Authorization Draft Plan Ref Alignment Gate
 
 ```yaml
 gate_template:
-  phase: v7.243_product_image_active_authorization_package_skeleton_gate
+  phase: v7.241_product_image_authorization_draft_plan_ref_alignment_gate
   base_contract: AGENTS.md
   mode: A4.5
-  intent: local_draft
+  intent: local_implementation
   risk_level: R1
   allowed_files:
-    - docs/product_image_active_authorization_package_skeleton.md
-    - docs/v7_243_product_image_active_authorization_package_skeleton_gate.md
+    - docs/product_image_generation_authorization_draft.md
+    - docs/archive/phases/v7/v7_241_product_image_authorization_draft_plan_ref_alignment_gate.md
     - README.md
     - PROJECT_MASTER_PLAN.md
     - docs/00_project_roadmap.md
@@ -27,8 +27,9 @@ gate_template:
     - runs/*
     - image binaries
   allowed_actions:
-    - create a simplified preflight-pending authorization draft
-    - record user-filled approval fields without executing generation
+    - patch the non-active authorization draft with GP-DRAFT-20260512-001 / v1
+    - remove only the resolved plan-ref missing blockers
+    - keep all executable A5 fields as placeholders or blocked values
     - update local documentation indexes
     - update agent_board resume surfaces
     - run local validation
@@ -80,15 +81,13 @@ gate_template:
 ```yaml
 phase_diff:
   phase_value:
-    - creates a one-page preflight-pending authorization draft for a future A5 generation
-    - records plugin, model, call count, output directory, approval phrase, approver, and expiry in one place
-    - keeps execute_now=false and preflight_required=true
-    - closes the A4 paper-preparation loop without starting A5 execution
-  source_artifacts:
+    - resolves only generation_plan_ref_missing and generation_plan_version_missing in the non-active authorization draft
+    - preserves draft / not_requested status
+    - keeps model, plugin, call budget, output, review console, expiry, and preflight blockers active
+  source_match_review:
+    - docs/product_image_generation_plan_authorization_match_review.md
+  patched_artifact:
     - docs/product_image_generation_authorization_draft.md
-    - docs/product_image_authorization_activation_gap_review.md
-  created_artifact:
-    - docs/product_image_active_authorization_package_skeleton.md
 ```
 
 ## Gate Result
@@ -96,25 +95,32 @@ phase_diff:
 ```yaml
 gate_result:
   status: completed_validated
-  simplified_preflight_pending_draft_created: true
-  draft_id: AUTH-PENDING-20260512-001
-  package_status: preflight_pending
-  execute_now: false
-  preflight_required: true
-  selected_plugin_id: DoubaoGen
-  selected_plugin_command: generate
-  selected_plugin_model: doubao-seedream-5-0-260128
-  max_plugin_calls: 1
-  retry_limit: 0
-  output_directory_ref: A:\agent-image-lab-IMAGE-OUTPUT
-  active_A5_ready_now: false
+  authorization_draft_patched: true
+  generation_plan_ref: GP-DRAFT-20260512-001
+  generation_plan_version: v1
+  resolved_blockers:
+    - generation_plan_ref_missing
+    - generation_plan_version_missing
+  remaining_blockers:
+    - authorization_status_is_draft
+    - approval_status_is_not_requested
+    - target_model_or_plugin_missing
+    - allowed_call_count_missing
+    - retry_limit_missing
+    - output_directory_ref_missing
+    - output_save_policy_missing
+    - review_console_ref_missing
+    - exact_approval_phrase_not_usable
+    - expires_at_missing
+    - pre_execution_lock_not_run
+  ready_for_active_A5_execution: false
   active_A5_authorization_created: false
   provider_contact_allowed_now: false
   plugin_call_allowed_now: false
   image_generation_allowed_now: false
   output_save_allowed_now: false
   memory_write_allowed_now: false
-  recommended_next: run_active_a5_preflight_only
+  recommended_next: v7.242_product_image_authorization_activation_gap_review_gate
 ```
 
 ## Closeout

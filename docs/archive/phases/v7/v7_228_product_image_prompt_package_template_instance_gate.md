@@ -37,7 +37,7 @@ The template is fillable and reviewable. It is not a real generation task, not a
 phase_delta:
   creates:
     - prompt_templates/product_image_prompt_package_instance_template.md
-    - docs/v7_228_product_image_prompt_package_template_instance_gate.md
+    - docs/archive/phases/v7/v7_228_product_image_prompt_package_template_instance_gate.md
   updates_status_surfaces:
     - README.md
     - docs/00_project_roadmap.md

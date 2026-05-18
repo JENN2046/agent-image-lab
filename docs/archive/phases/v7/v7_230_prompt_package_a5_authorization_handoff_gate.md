@@ -38,7 +38,7 @@ It prevents a human review approval from being misread as generation approval. A
 phase_delta:
   creates:
     - prompt_templates/product_image_prompt_package_a5_authorization_handoff.md
-    - docs/v7_230_prompt_package_a5_authorization_handoff_gate.md
+    - docs/archive/phases/v7/v7_230_prompt_package_a5_authorization_handoff_gate.md
   updates_status_surfaces:
     - README.md
     - docs/00_project_roadmap.md

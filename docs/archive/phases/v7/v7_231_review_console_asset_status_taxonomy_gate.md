@@ -38,7 +38,7 @@ It does not assume any generated asset exists now.
 phase_delta:
   creates:
     - docs/review_console_asset_status_taxonomy.md
-    - docs/v7_231_review_console_asset_status_taxonomy_gate.md
+    - docs/archive/phases/v7/v7_231_review_console_asset_status_taxonomy_gate.md
   updates_status_surfaces:
     - README.md
     - docs/00_project_roadmap.md

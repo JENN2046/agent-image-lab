@@ -38,7 +38,7 @@ It does not authorize generation, provider contact, plugin calls, runtime execut
 phase_delta:
   creates:
     - prompt_templates/product_image_prompt_package_human_review_checklist.md
-    - docs/v7_229_prompt_package_human_review_checklist_gate.md
+    - docs/archive/phases/v7/v7_229_prompt_package_human_review_checklist_gate.md
   updates_status_surfaces:
     - README.md
     - docs/00_project_roadmap.md

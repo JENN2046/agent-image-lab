@@ -1,21 +1,22 @@
-# v7.241 Product Image Authorization Draft Plan Ref Alignment Gate
+# v7.240 Product Image Generation Plan Authorization Match Review Gate
 
 ```yaml
 gate_template:
-  phase: v7.241_product_image_authorization_draft_plan_ref_alignment_gate
+  phase: v7.240_product_image_generation_plan_authorization_match_review_gate
   base_contract: AGENTS.md
   mode: A4.5
-  intent: local_implementation
+  intent: review
   risk_level: R1
   allowed_files:
-    - docs/product_image_generation_authorization_draft.md
-    - docs/v7_241_product_image_authorization_draft_plan_ref_alignment_gate.md
+    - docs/product_image_generation_plan_authorization_match_review.md
+    - docs/archive/phases/v7/v7_240_product_image_generation_plan_authorization_match_review_gate.md
     - README.md
     - PROJECT_MASTER_PLAN.md
     - docs/00_project_roadmap.md
     - .agent_board/HANDOFF.md
     - .agent_board/RUN_STATE.md
     - .agent_board/TASK_QUEUE.md
+    - .agent_board/BLOCKERS.md
     - .agent_board/CHECKPOINT.md
     - .agent_board/VALIDATION_LOG.md
   forbidden_files:
@@ -27,15 +28,13 @@ gate_template:
     - runs/*
     - image binaries
   allowed_actions:
-    - patch the non-active authorization draft with GP-DRAFT-20260512-001 / v1
-    - remove only the resolved plan-ref missing blockers
-    - keep all executable A5 fields as placeholders or blocked values
+    - compare non-executing generation plan draft to non-active authorization draft
+    - create paper-level match review
     - update local documentation indexes
     - update agent_board resume surfaces
     - run local validation
   forbidden_actions:
     - A5 activation
-    - provider or plugin selection
     - provider contact
     - plugin call
     - API call
@@ -55,8 +54,6 @@ gate_template:
       - git status --short --branch
       - git diff --check
       - node scripts/validate_agent_board_state.js
-      - powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
-      - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
     forbidden:
       - provider calls
       - plugin/API calls
@@ -81,13 +78,15 @@ gate_template:
 ```yaml
 phase_diff:
   phase_value:
-    - resolves only generation_plan_ref_missing and generation_plan_version_missing in the non-active authorization draft
-    - preserves draft / not_requested status
-    - keeps model, plugin, call budget, output, review console, expiry, and preflight blockers active
-  source_match_review:
-    - docs/product_image_generation_plan_authorization_match_review.md
-  patched_artifact:
+    - verifies whether GP-DRAFT-20260512-001 can safely reduce the authorization draft's missing generation_plan_ref blocker
+    - separates paper-level compatibility from active execution readiness
+    - identifies the smallest next non-active authorization draft patch
+  reviewed_inputs:
+    - docs/product_image_generation_plan_draft.md
     - docs/product_image_generation_authorization_draft.md
+    - docs/product_image_generation_authorization_draft_review.md
+  output_artifact:
+    - docs/product_image_generation_plan_authorization_match_review.md
 ```
 
 ## Gate Result
@@ -95,24 +94,11 @@ phase_diff:
 ```yaml
 gate_result:
   status: completed_validated
-  authorization_draft_patched: true
-  generation_plan_ref: GP-DRAFT-20260512-001
-  generation_plan_version: v1
-  resolved_blockers:
-    - generation_plan_ref_missing
-    - generation_plan_version_missing
-  remaining_blockers:
-    - authorization_status_is_draft
-    - approval_status_is_not_requested
-    - target_model_or_plugin_missing
-    - allowed_call_count_missing
-    - retry_limit_missing
-    - output_directory_ref_missing
-    - output_save_policy_missing
-    - review_console_ref_missing
-    - exact_approval_phrase_not_usable
-    - expires_at_missing
-    - pre_execution_lock_not_run
+  paper_level_match_review_created: true
+  prompt_package_scope_matches: true
+  generation_plan_ref_available: true
+  authorization_draft_references_plan_now: false
+  ready_to_patch_authorization_draft_with_plan_ref: true
   ready_for_active_A5_execution: false
   active_A5_authorization_created: false
   provider_contact_allowed_now: false
@@ -120,7 +106,7 @@ gate_result:
   image_generation_allowed_now: false
   output_save_allowed_now: false
   memory_write_allowed_now: false
-  recommended_next: v7.242_product_image_authorization_activation_gap_review_gate
+  recommended_next: v7.241_product_image_authorization_draft_plan_ref_alignment_gate
 ```
 
 ## Closeout

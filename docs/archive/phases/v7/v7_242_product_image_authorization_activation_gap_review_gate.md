@@ -1,22 +1,21 @@
-# v7.240 Product Image Generation Plan Authorization Match Review Gate
+# v7.242 Product Image Authorization Activation Gap Review Gate
 
 ```yaml
 gate_template:
-  phase: v7.240_product_image_generation_plan_authorization_match_review_gate
+  phase: v7.242_product_image_authorization_activation_gap_review_gate
   base_contract: AGENTS.md
   mode: A4.5
   intent: review
   risk_level: R1
   allowed_files:
-    - docs/product_image_generation_plan_authorization_match_review.md
-    - docs/v7_240_product_image_generation_plan_authorization_match_review_gate.md
+    - docs/product_image_authorization_activation_gap_review.md
+    - docs/archive/phases/v7/v7_242_product_image_authorization_activation_gap_review_gate.md
     - README.md
     - PROJECT_MASTER_PLAN.md
     - docs/00_project_roadmap.md
     - .agent_board/HANDOFF.md
     - .agent_board/RUN_STATE.md
     - .agent_board/TASK_QUEUE.md
-    - .agent_board/BLOCKERS.md
     - .agent_board/CHECKPOINT.md
     - .agent_board/VALIDATION_LOG.md
   forbidden_files:
@@ -28,13 +27,14 @@ gate_template:
     - runs/*
     - image binaries
   allowed_actions:
-    - compare non-executing generation plan draft to non-active authorization draft
-    - create paper-level match review
+    - review remaining active A5 activation gaps after v7.241
+    - classify which gaps are paper-preparable versus activation-only
     - update local documentation indexes
     - update agent_board resume surfaces
     - run local validation
   forbidden_actions:
     - A5 activation
+    - provider or plugin selection
     - provider contact
     - plugin call
     - API call
@@ -54,6 +54,8 @@ gate_template:
       - git status --short --branch
       - git diff --check
       - node scripts/validate_agent_board_state.js
+      - powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+      - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
     forbidden:
       - provider calls
       - plugin/API calls
@@ -78,15 +80,14 @@ gate_template:
 ```yaml
 phase_diff:
   phase_value:
-    - verifies whether GP-DRAFT-20260512-001 can safely reduce the authorization draft's missing generation_plan_ref blocker
-    - separates paper-level compatibility from active execution readiness
-    - identifies the smallest next non-active authorization draft patch
-  reviewed_inputs:
-    - docs/product_image_generation_plan_draft.md
+    - turns remaining blockers into a concrete activation gap matrix
+    - separates A4 paper-preparable fields from fields that require active human authorization
+    - defines the minimum future active package shape without activating it
+  source_artifacts:
     - docs/product_image_generation_authorization_draft.md
-    - docs/product_image_generation_authorization_draft_review.md
-  output_artifact:
-    - docs/product_image_generation_plan_authorization_match_review.md
+    - docs/archive/phases/v7/v7_241_product_image_authorization_draft_plan_ref_alignment_gate.md
+  created_artifact:
+    - docs/product_image_authorization_activation_gap_review.md
 ```
 
 ## Gate Result
@@ -94,19 +95,19 @@ phase_diff:
 ```yaml
 gate_result:
   status: completed_validated
-  paper_level_match_review_created: true
-  prompt_package_scope_matches: true
-  generation_plan_ref_available: true
-  authorization_draft_references_plan_now: false
-  ready_to_patch_authorization_draft_with_plan_ref: true
-  ready_for_active_A5_execution: false
+  activation_gap_review_created: true
+  source_authorization_package: AUTH-DRAFT-20260512-001
+  source_generation_plan: GP-DRAFT-20260512-001
+  plan_ref_gap_closed: true
+  remaining_gaps_classified: true
+  active_A5_ready_now: false
   active_A5_authorization_created: false
   provider_contact_allowed_now: false
   plugin_call_allowed_now: false
   image_generation_allowed_now: false
   output_save_allowed_now: false
   memory_write_allowed_now: false
-  recommended_next: v7.241_product_image_authorization_draft_plan_ref_alignment_gate
+  recommended_next: v7.243_product_image_active_authorization_package_skeleton_gate
 ```
 
 ## Closeout

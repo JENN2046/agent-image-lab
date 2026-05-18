@@ -43,7 +43,7 @@ Stop if the brief requires secrets, private paths, real customer data, or immedi
 Use:
 
 ```text
-docs/v7_227_prompt_package_builder_taskbook_gate.md
+docs/archive/phases/v7/v7_227_prompt_package_builder_taskbook_gate.md
 prompt_templates/product_image_prompt_package_instance_template.md
 ```
 
