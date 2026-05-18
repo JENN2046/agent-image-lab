@@ -7,7 +7,7 @@
     "source_review_ref": "docs/v14_210_exact_file_commit_readiness_review.md",
     "source_fixture_ref": "tests/schema_examples/v14_210_exact_file_commit_readiness_review.example.json",
     "source_group_id": "recoverability_three_sample_baseline",
-    "source_group_count": 14,
+    "source_group_count": 0,
     "authorization": {
       "authorization_package_id": "AUTH-PENDING-RECOVERABILITY-THREE-SAMPLE-BASELINE-EXACT-FILE-COMMIT-20260518-001",
       "authorization_package_status": "prepared_blocked_not_granted",

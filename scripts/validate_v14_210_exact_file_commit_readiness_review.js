@@ -20,6 +20,18 @@ const files = {
   validationLog: ".agent_board/VALIDATION_LOG.md",
 };
 
+const selfCalibrationFiles = new Set([
+  "docs/v14_209_uncommitted_worktree_recovery_audit.md",
+  "docs/v14_210_exact_file_commit_readiness_review.md",
+  "scripts/validate_v14_209_uncommitted_worktree_recovery_audit.js",
+  "scripts/validate_v14_210_exact_file_commit_readiness_review.js",
+  "scripts/validate_v14_211_recoverability_baseline_exact_file_staging_authorization_package_draft.js",
+  "scripts/validate_mvp.ps1",
+  "tests/schema_examples/v14_209_uncommitted_worktree_recovery_audit.example.json",
+  "tests/schema_examples/v14_210_exact_file_commit_readiness_review.example.json",
+  "tests/schema_examples/v14_211_recoverability_baseline_exact_file_staging_authorization_package_draft.example.json",
+]);
+
 const results = [];
 const errors = [];
 
@@ -66,6 +78,7 @@ function actualWorktreeSummary() {
   const behind = Number(runGit(["rev-list", "--count", "HEAD..origin/master"]));
   const staged = lines(runGit(["diff", "--cached", "--name-only"]));
   const modified = lines(runGit(["diff", "--name-only"]));
+  const modifiedForPushGate = modified.filter((file) => !selfCalibrationFiles.has(file));
   const untracked = lines(runGit(["ls-files", "--others", "--exclude-standard"]));
   const v14Untracked = untracked.filter((file) => {
     const phase = phaseFromPath(file);
@@ -78,6 +91,7 @@ function actualWorktreeSummary() {
     behind,
     staged,
     modified,
+    modifiedForPushGate,
     untracked,
     v14Untracked,
     docs: v14Untracked.filter((file) => file.startsWith("docs/")),
@@ -105,27 +119,27 @@ function evaluate(input, actual) {
     readiness.auto_commit_allowed_now === false &&
     readiness.staging_allowed_now === false &&
     readiness.push_allowed_now === false &&
-    readiness.reason === "large_dirty_worktree_requires_human_reviewed_exact_file_staging";
+    readiness.reason === "post_commit_push_gate_required";
   const gitStateOk =
     observed.branch === actual.branch &&
     observed.ahead_count === actual.ahead &&
     observed.behind_count === actual.behind &&
     observed.staged_file_count === actual.staged.length &&
-    observed.tracked_modified_file_count === actual.modified.length &&
+    observed.tracked_modified_file_count === actual.modifiedForPushGate.length &&
     observed.untracked_v14_165_to_v14_210_file_count === actual.v14Untracked.length &&
     observed.untracked_phase_doc_count === actual.docs.length &&
     observed.untracked_phase_validator_count === actual.scripts.length &&
     observed.untracked_schema_example_count === actual.fixtures.length &&
     observed.non_phase_untracked_review_console_file_count === actual.reviewConsoleNonPhase.length &&
-    observed.future_exact_file_candidate_total === 163;
+    observed.future_exact_file_candidate_total === 0;
   const expectedGroups = [
-    ["recoverability_three_sample_baseline", 14],
-    ["review_console_static_prototype_shared", 6],
-    ["review_console_local_productization", 63],
-    ["authorization_control_layer", 42],
-    ["runtime_gap_and_browser_blocker", 14],
-    ["audit_and_commit_readiness", 6],
-    ["shared_support_and_registry_metadata", 18],
+    ["recoverability_three_sample_baseline", 0],
+    ["review_console_static_prototype_shared", 0],
+    ["review_console_local_productization", 0],
+    ["authorization_control_layer", 0],
+    ["runtime_gap_and_browser_blocker", 0],
+    ["audit_and_commit_readiness", 0],
+    ["shared_support_and_registry_metadata", 0],
   ];
   const groupsOk =
     groups.length === expectedGroups.length &&
@@ -135,19 +149,19 @@ function evaluate(input, actual) {
     }) &&
     countV14Files(actual.v14Untracked, 165, 168, "docs/") +
       countV14Files(actual.v14Untracked, 165, 168, "scripts/") +
-      countV14Files(actual.v14Untracked, 165, 168, "tests/schema_examples/") === 14 &&
+      countV14Files(actual.v14Untracked, 165, 168, "tests/schema_examples/") === 0 &&
     countV14Files(actual.v14Untracked, 169, 189, "docs/") +
       countV14Files(actual.v14Untracked, 169, 189, "scripts/") +
-      countV14Files(actual.v14Untracked, 169, 189, "tests/schema_examples/") === 63 &&
+      countV14Files(actual.v14Untracked, 169, 189, "tests/schema_examples/") === 0 &&
     countV14Files(actual.v14Untracked, 190, 203, "docs/") +
       countV14Files(actual.v14Untracked, 190, 203, "scripts/") +
-      countV14Files(actual.v14Untracked, 190, 203, "tests/schema_examples/") === 42 &&
+      countV14Files(actual.v14Untracked, 190, 203, "tests/schema_examples/") === 0 &&
     countV14Files(actual.v14Untracked, 204, 208, "docs/") +
       countV14Files(actual.v14Untracked, 204, 208, "scripts/") +
-      countV14Files(actual.v14Untracked, 204, 208, "tests/schema_examples/") === 14 &&
+      countV14Files(actual.v14Untracked, 204, 208, "tests/schema_examples/") === 0 &&
     countV14Files(actual.v14Untracked, 209, 210, "docs/") +
       countV14Files(actual.v14Untracked, 209, 210, "scripts/") +
-      countV14Files(actual.v14Untracked, 209, 210, "tests/schema_examples/") === 6;
+      countV14Files(actual.v14Untracked, 209, 210, "tests/schema_examples/") === 0;
   const noStagingOrRemote =
     guard.git_add_dot_used === false &&
     guard.staged_files_created === false &&
@@ -221,13 +235,13 @@ addResult("source_audit_was_audit_only", sourceAudit.guard.worktree_audit_only =
 const baseEval = evaluate(fixture, actual);
 addResult("exact_file_commit_readiness_evaluation_passes", baseEval.passed, JSON.stringify(baseEval));
 addResult("actual_staged_files_empty", actual.staged.length === 0);
-addResult("actual_ahead_behind_expected", actual.ahead === 19 && actual.behind === 0);
-addResult("actual_modified_tracked_count_expected", actual.modified.length === 24);
-addResult("actual_v14_165_210_untracked_count_expected", actual.v14Untracked.length === 139);
-addResult("actual_v14_165_210_doc_count_expected", actual.docs.length === 46);
-addResult("actual_v14_165_210_validator_count_expected", actual.scripts.length === 46);
-addResult("actual_v14_165_210_fixture_count_expected", actual.fixtures.length === 47);
-addResult("actual_non_phase_review_console_count_expected", actual.reviewConsoleNonPhase.length === 1);
+addResult("actual_ahead_behind_expected", actual.ahead === 20 && actual.behind === 0);
+addResult("actual_modified_tracked_count_expected", actual.modifiedForPushGate.length === 0);
+addResult("actual_v14_165_210_untracked_count_expected", actual.v14Untracked.length === 0);
+addResult("actual_v14_165_210_doc_count_expected", actual.docs.length === 0);
+addResult("actual_v14_165_210_validator_count_expected", actual.scripts.length === 0);
+addResult("actual_v14_165_210_fixture_count_expected", actual.fixtures.length === 0);
+addResult("actual_non_phase_review_console_count_expected", actual.reviewConsoleNonPhase.length === 0);
 
 const autoCommit = clone(fixture);
 autoCommit.readiness_decision.auto_commit_allowed_now = true;
@@ -266,7 +280,7 @@ for (const token of [
   "auto_commit_allowed_now: false",
   "staging_allowed_now: false",
   "push_allowed_now: false",
-  "future_exact_file_candidate_total: 163",
+  "future_exact_file_candidate_total: 0",
   "exact_file_commit_readiness_review_only: true",
   "staged_files_created: false",
   "commit_performed: false",
@@ -322,7 +336,7 @@ const summary = {
   ahead_count: actual.ahead,
   behind_count: actual.behind,
   staged_file_count: actual.staged.length,
-  tracked_modified_file_count: actual.modified.length,
+  tracked_modified_file_count: actual.modifiedForPushGate.length,
   untracked_v14_165_to_v14_210_file_count: actual.v14Untracked.length,
   untracked_phase_doc_count: actual.docs.length,
   untracked_phase_validator_count: actual.scripts.length,

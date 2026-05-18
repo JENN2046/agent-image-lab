@@ -6,58 +6,58 @@
     "execution_mode": "local_worktree_audit_only",
     "audit_scope": {
       "target_phase_range": "v14.165-v14.208",
-      "reason": "large validated dirty worktree needs exact-file recovery and staging boundaries before any future commit decision",
-      "worktree_dirty_expected": true,
+      "reason": "post-commit clean worktree needs push safety gate before any remote action",
+      "worktree_dirty_expected": false,
       "commit_readiness_claimed": false,
       "push_readiness_claimed": false
     },
     "observed_git_state": {
       "branch": "master",
-      "ahead_count": 19,
+      "ahead_count": 20,
       "behind_count": 0,
       "staged_file_count": 0,
-      "tracked_modified_file_count": 24,
-      "untracked_v14_165_to_v14_208_file_count": 133,
-      "untracked_phase_doc_count": 44,
-      "untracked_phase_validator_count": 44,
-      "untracked_schema_example_count": 45
+      "tracked_modified_file_count": 0,
+      "untracked_v14_165_to_v14_208_file_count": 0,
+      "untracked_phase_doc_count": 0,
+      "untracked_phase_validator_count": 0,
+      "untracked_schema_example_count": 0
     },
     "change_groups": [
       {
         "group_id": "recoverability_three_sample_baseline",
         "phase_start": 165,
         "phase_end": 168,
-        "phase_docs": 4,
-        "validators": 4,
-        "schema_examples": 6,
-        "commit_readiness": "requires_exact_file_review"
+        "phase_docs": 0,
+        "validators": 0,
+        "schema_examples": 0,
+        "commit_readiness": "committed_requires_push_safety_gate"
       },
       {
         "group_id": "review_console_local_productization",
         "phase_start": 169,
         "phase_end": 189,
-        "phase_docs": 21,
-        "validators": 21,
-        "schema_examples": 21,
-        "commit_readiness": "requires_exact_file_review"
+        "phase_docs": 0,
+        "validators": 0,
+        "schema_examples": 0,
+        "commit_readiness": "committed_requires_push_safety_gate"
       },
       {
         "group_id": "authorization_control_layer",
         "phase_start": 190,
         "phase_end": 203,
-        "phase_docs": 14,
-        "validators": 14,
-        "schema_examples": 14,
-        "commit_readiness": "requires_exact_file_review"
+        "phase_docs": 0,
+        "validators": 0,
+        "schema_examples": 0,
+        "commit_readiness": "committed_requires_push_safety_gate"
       },
       {
         "group_id": "runtime_gap_and_browser_blocker",
         "phase_start": 204,
         "phase_end": 208,
-        "phase_docs": 5,
-        "validators": 5,
-        "schema_examples": 4,
-        "commit_readiness": "requires_exact_file_review"
+        "phase_docs": 0,
+        "validators": 0,
+        "schema_examples": 0,
+        "commit_readiness": "committed_requires_push_safety_gate"
       }
     ],
     "guard": {

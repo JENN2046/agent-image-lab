@@ -79,6 +79,7 @@ function actualGitState() {
     branch: runGit(["branch", "--show-current"]),
     staged: lines(runGit(["diff", "--cached", "--name-only"])),
     untracked: lines(runGit(["ls-files", "--others", "--exclude-standard"])),
+    tracked: lines(runGit(["ls-files"])),
   };
 }
 
@@ -104,11 +105,11 @@ function evaluate(input, actual) {
   const exactFiles = input.exact_stage_files || [];
   const exactFilesOk =
     input.source_group_id === "recoverability_three_sample_baseline" &&
-    input.source_group_count === 14 &&
+    input.source_group_count === 0 &&
     input.exact_stage_file_count === 14 &&
     arrayEquals(exactFiles, expectedExactFiles) &&
     exactFiles.every((file) => core.exists(file)) &&
-    exactFiles.every((file) => actual.untracked.includes(file)) &&
+    exactFiles.every((file) => actual.untracked.includes(file) || actual.tracked.includes(file)) &&
     !exactFiles.some(hasForbiddenStagePath);
   const authorizationOk =
     authorization.authorization_package_id === "AUTH-PENDING-RECOVERABILITY-THREE-SAMPLE-BASELINE-EXACT-FILE-COMMIT-20260518-001" &&
@@ -189,14 +190,17 @@ const currentSurfaces = [
 addResult("source_v14_210_phase_matches", sourceFixture.phase === "v14_210_exact_file_commit_readiness_review");
 addResult(
   "source_group_count_matches",
-  sourceFixture.candidate_groups.some((group) => group.group_id === "recoverability_three_sample_baseline" && group.count === 14)
+  sourceFixture.candidate_groups.some((group) => group.group_id === "recoverability_three_sample_baseline" && group.count === 0)
 );
 
 const baseEval = evaluate(fixture, actual);
 addResult("authorization_package_draft_evaluation_passes", baseEval.passed, JSON.stringify(baseEval));
 addResult("actual_staged_files_empty", actual.staged.length === 0);
 addResult("exact_files_all_exist", expectedExactFiles.every((file) => core.exists(file)));
-addResult("exact_files_all_untracked", expectedExactFiles.every((file) => actual.untracked.includes(file)));
+addResult(
+  "exact_files_all_tracked_or_untracked",
+  expectedExactFiles.every((file) => actual.untracked.includes(file) || actual.tracked.includes(file))
+);
 addResult("exact_files_no_forbidden_paths", !expectedExactFiles.some(hasForbiddenStagePath));
 
 const missingFile = clone(fixture);

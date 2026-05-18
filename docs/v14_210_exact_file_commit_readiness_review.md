@@ -89,7 +89,7 @@ readiness_decision:
   auto_commit_allowed_now: false
   staging_allowed_now: false
   push_allowed_now: false
-  reason: large_dirty_worktree_requires_human_reviewed_exact_file_staging
+  reason: post_commit_push_gate_required
   staged_files_now: 0
   git_add_dot_allowed: false
 ```
@@ -137,7 +137,7 @@ candidate_groups:
 The computed future exact-file candidate total is:
 
 ```yaml
-future_exact_file_candidate_total: 163
+future_exact_file_candidate_total: 0
 ```
 
 ## Non-Readiness Boundaries
@@ -185,7 +185,7 @@ v14.210 passes only if the validator proves:
 
 - no files are staged now
 - auto commit, staging, and push are all false
-- the future exact-file candidate total is 163
+- the post-commit future exact-file candidate total is 0
 - every candidate group count matches current repository reality
 - no forbidden path family is staged or authorized
 - no runtime, provider, image, dependency, DailyNote, memory, production, or remote action is claimed

@@ -84,13 +84,13 @@ The audit covers the existing v14.165-v14.208 local chain:
 
 ```yaml
 observed_scope:
-  tracked_modified_files: 24
-  untracked_v14_165_to_v14_208_files: 133
+  tracked_modified_files: 0
+  untracked_v14_165_to_v14_208_files: 0
   untracked_phase_docs: 44
   untracked_phase_validators: 44
   untracked_schema_examples: 45
   staged_files_now: 0
-  branch_ahead_origin_master: 19
+  branch_ahead_origin_master: 20
   branch_behind_origin_master: 0
 ```
 
@@ -104,7 +104,7 @@ change_groups:
     phase_docs: 4
     validators: 4
     schema_examples: 6
-    commit_readiness: requires_exact_file_review
+    commit_readiness: committed_requires_push_safety_gate
 
   - group_id: review_console_local_productization
     phase_range: v14.169-v14.189
@@ -112,7 +112,7 @@ change_groups:
     phase_docs: 21
     validators: 21
     schema_examples: 21
-    commit_readiness: requires_exact_file_review
+    commit_readiness: committed_requires_push_safety_gate
 
   - group_id: authorization_control_layer
     phase_range: v14.190-v14.203
@@ -120,7 +120,7 @@ change_groups:
     phase_docs: 14
     validators: 14
     schema_examples: 14
-    commit_readiness: requires_exact_file_review
+    commit_readiness: committed_requires_push_safety_gate
 
   - group_id: runtime_gap_and_browser_blocker
     phase_range: v14.204-v14.208
@@ -128,7 +128,7 @@ change_groups:
     phase_docs: 5
     validators: 5
     schema_examples: 4
-    commit_readiness: requires_exact_file_review
+    commit_readiness: committed_requires_push_safety_gate
 ```
 
 ## Commit And Rollback Meaning
@@ -182,5 +182,6 @@ v14.209 passes only if the validator proves:
 - no files are staged
 - `git add .` was not used
 - the branch is ahead of origin but not behind
+- the dirty worktree captured by this audit has been committed locally and now requires push safety gate validation before any remote action
 - package/dependency/runtime/provider/image/memory/push actions remain false
 - the audit cannot be misread as VCP runtime integration or production readiness

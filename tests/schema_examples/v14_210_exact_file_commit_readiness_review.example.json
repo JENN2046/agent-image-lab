@@ -9,55 +9,55 @@
       "auto_commit_allowed_now": false,
       "staging_allowed_now": false,
       "push_allowed_now": false,
-      "reason": "large_dirty_worktree_requires_human_reviewed_exact_file_staging"
+      "reason": "post_commit_push_gate_required"
     },
     "observed_git_state": {
       "branch": "master",
-      "ahead_count": 19,
+      "ahead_count": 20,
       "behind_count": 0,
       "staged_file_count": 0,
-      "tracked_modified_file_count": 24,
-      "untracked_v14_165_to_v14_210_file_count": 139,
-      "untracked_phase_doc_count": 46,
-      "untracked_phase_validator_count": 46,
-      "untracked_schema_example_count": 47,
-      "non_phase_untracked_review_console_file_count": 1,
-      "future_exact_file_candidate_total": 163
+      "tracked_modified_file_count": 0,
+      "untracked_v14_165_to_v14_210_file_count": 0,
+      "untracked_phase_doc_count": 0,
+      "untracked_phase_validator_count": 0,
+      "untracked_schema_example_count": 0,
+      "non_phase_untracked_review_console_file_count": 0,
+      "future_exact_file_candidate_total": 0
     },
     "candidate_groups": [
       {
         "group_id": "recoverability_three_sample_baseline",
-        "count": 14,
+        "count": 0,
         "requires_review": true
       },
       {
         "group_id": "review_console_static_prototype_shared",
-        "count": 6,
+        "count": 0,
         "requires_review": true
       },
       {
         "group_id": "review_console_local_productization",
-        "count": 63,
+        "count": 0,
         "requires_review": true
       },
       {
         "group_id": "authorization_control_layer",
-        "count": 42,
+        "count": 0,
         "requires_review": true
       },
       {
         "group_id": "runtime_gap_and_browser_blocker",
-        "count": 14,
+        "count": 0,
         "requires_review": true
       },
       {
         "group_id": "audit_and_commit_readiness",
-        "count": 6,
+        "count": 0,
         "requires_review": true
       },
       {
         "group_id": "shared_support_and_registry_metadata",
-        "count": 18,
+        "count": 0,
         "requires_review": true
       }
     ],
