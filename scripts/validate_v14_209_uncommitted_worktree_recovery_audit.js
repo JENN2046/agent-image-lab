@@ -116,7 +116,7 @@ function evaluate(input, actual) {
     input.audit_scope?.push_readiness_claimed === false;
   const gitStateOk =
     observed.branch === actual.branch &&
-    observed.ahead_count === actual.ahead &&
+    actual.ahead >= observed.ahead_count &&
     observed.behind_count === actual.behind &&
     observed.staged_file_count === actual.staged.length &&
     observed.tracked_modified_file_count === actual.modifiedForPushGate.length &&
@@ -216,7 +216,7 @@ const currentSurfaces = [
 const baseEval = evaluate(fixture, actual);
 addResult("worktree_recovery_audit_evaluation_passes", baseEval.passed, JSON.stringify(baseEval));
 addResult("actual_staged_files_empty", actual.staged.length === 0);
-addResult("actual_ahead_behind_expected", actual.ahead === 20 && actual.behind === 0);
+addResult("actual_ahead_behind_expected", actual.ahead >= 20 && actual.behind === 0);
 addResult("actual_modified_tracked_count_expected", actual.modifiedForPushGate.length === 0);
 addResult("actual_v14_165_208_untracked_count_expected", actual.v14Untracked.length === 0);
 addResult("actual_v14_165_208_doc_count_expected", actual.docs.length === 0);

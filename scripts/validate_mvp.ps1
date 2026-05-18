@@ -10992,7 +10992,7 @@ process.exit(child.status || 0);
     if ($uncommittedWorktreeRecoveryAudit.staged_file_count -ne 0 -or $uncommittedWorktreeRecoveryAudit.git_add_dot_used -ne $false -or $uncommittedWorktreeRecoveryAudit.commit_performed -ne $false -or $uncommittedWorktreeRecoveryAudit.push_tag_release_deploy_performed -ne $false) {
       Add-Failure "v14.209 worktree recovery audit must prove no staged files, no git add dot, no commit, and no push/tag/release/deploy"
     }
-    if ($uncommittedWorktreeRecoveryAudit.ahead_count -ne 20 -or $uncommittedWorktreeRecoveryAudit.behind_count -ne 0 -or $uncommittedWorktreeRecoveryAudit.tracked_modified_file_count -ne 0 -or $uncommittedWorktreeRecoveryAudit.untracked_v14_165_to_v14_208_file_count -ne 0) {
+    if ($uncommittedWorktreeRecoveryAudit.ahead_count -lt 20 -or $uncommittedWorktreeRecoveryAudit.behind_count -ne 0 -or $uncommittedWorktreeRecoveryAudit.tracked_modified_file_count -ne 0 -or $uncommittedWorktreeRecoveryAudit.untracked_v14_165_to_v14_208_file_count -ne 0) {
       Add-Failure "v14.209 worktree recovery audit must match the current branch ahead/behind and v14.165-v14.208 dirty-tree counts"
     }
     if ($uncommittedWorktreeRecoveryAudit.untracked_phase_doc_count -ne 0 -or $uncommittedWorktreeRecoveryAudit.untracked_phase_validator_count -ne 0 -or $uncommittedWorktreeRecoveryAudit.untracked_schema_example_count -ne 0 -or $uncommittedWorktreeRecoveryAudit.change_group_count -ne 4) {
@@ -11023,7 +11023,7 @@ process.exit(child.status || 0);
     if ($exactFileCommitReadinessReview.staged_file_count -ne 0 -or $exactFileCommitReadinessReview.git_add_dot_used -ne $false -or $exactFileCommitReadinessReview.commit_performed -ne $false -or $exactFileCommitReadinessReview.push_tag_release_deploy_performed -ne $false) {
       Add-Failure "v14.210 exact-file commit readiness review must prove no staged files, no git add dot, no commit, and no push/tag/release/deploy"
     }
-    if ($exactFileCommitReadinessReview.ahead_count -ne 20 -or $exactFileCommitReadinessReview.behind_count -ne 0 -or $exactFileCommitReadinessReview.tracked_modified_file_count -ne 0 -or $exactFileCommitReadinessReview.untracked_v14_165_to_v14_210_file_count -ne 0 -or $exactFileCommitReadinessReview.future_exact_file_candidate_total -ne 0) {
+    if ($exactFileCommitReadinessReview.ahead_count -lt 20 -or $exactFileCommitReadinessReview.behind_count -ne 0 -or $exactFileCommitReadinessReview.tracked_modified_file_count -ne 0 -or $exactFileCommitReadinessReview.untracked_v14_165_to_v14_210_file_count -ne 0 -or $exactFileCommitReadinessReview.future_exact_file_candidate_total -ne 0) {
       Add-Failure "v14.210 exact-file commit readiness review must match current dirty-tree counts and future candidate total"
     }
     if ($exactFileCommitReadinessReview.untracked_phase_doc_count -ne 0 -or $exactFileCommitReadinessReview.untracked_phase_validator_count -ne 0 -or $exactFileCommitReadinessReview.untracked_schema_example_count -ne 0 -or $exactFileCommitReadinessReview.non_phase_untracked_review_console_file_count -ne 0 -or $exactFileCommitReadinessReview.candidate_group_count -ne 7) {

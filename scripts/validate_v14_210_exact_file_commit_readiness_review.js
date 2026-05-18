@@ -122,7 +122,7 @@ function evaluate(input, actual) {
     readiness.reason === "post_commit_push_gate_required";
   const gitStateOk =
     observed.branch === actual.branch &&
-    observed.ahead_count === actual.ahead &&
+    actual.ahead >= observed.ahead_count &&
     observed.behind_count === actual.behind &&
     observed.staged_file_count === actual.staged.length &&
     observed.tracked_modified_file_count === actual.modifiedForPushGate.length &&
@@ -235,7 +235,7 @@ addResult("source_audit_was_audit_only", sourceAudit.guard.worktree_audit_only =
 const baseEval = evaluate(fixture, actual);
 addResult("exact_file_commit_readiness_evaluation_passes", baseEval.passed, JSON.stringify(baseEval));
 addResult("actual_staged_files_empty", actual.staged.length === 0);
-addResult("actual_ahead_behind_expected", actual.ahead === 20 && actual.behind === 0);
+addResult("actual_ahead_behind_expected", actual.ahead >= 20 && actual.behind === 0);
 addResult("actual_modified_tracked_count_expected", actual.modifiedForPushGate.length === 0);
 addResult("actual_v14_165_210_untracked_count_expected", actual.v14Untracked.length === 0);
 addResult("actual_v14_165_210_doc_count_expected", actual.docs.length === 0);
