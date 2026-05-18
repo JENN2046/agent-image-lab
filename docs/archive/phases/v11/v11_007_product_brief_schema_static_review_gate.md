@@ -8,7 +8,7 @@ gate_template:
   intent: review
   risk_level: R1
   allowed_files:
-    - docs/v11_007_product_brief_schema_static_review_gate.md
+    - docs/archive/phases/v11/v11_007_product_brief_schema_static_review_gate.md
     - README.md
     - docs/00_project_roadmap.md
     - PROJECT_MASTER_PLAN.md
@@ -84,7 +84,7 @@ V11.007 statically reviews [product_brief_canonical_schema.md](product_brief_can
 static_review:
   reviewed_schema: docs/product_brief_canonical_schema.md
   source_inventory: docs/prompt_artifact_schema_inventory.md
-  review_record: docs/v11_007_product_brief_schema_static_review_gate.md
+  review_record: docs/archive/phases/v11/v11_007_product_brief_schema_static_review_gate.md
   result: pass_for_schema_static_review
   brief_identity_fields_covered: true
   product_identity_lock_covered: true

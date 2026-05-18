@@ -8,7 +8,7 @@ gate_template:
   intent: review
   risk_level: R1
   allowed_files:
-    - docs/v11_005_prompt_package_schema_static_review_gate.md
+    - docs/archive/phases/v11/v11_005_prompt_package_schema_static_review_gate.md
     - README.md
     - docs/00_project_roadmap.md
     - PROJECT_MASTER_PLAN.md
@@ -83,7 +83,7 @@ V11.005 statically reviews [prompt_package_canonical_schema.md](prompt_package_c
 static_review:
   reviewed_schema: docs/prompt_package_canonical_schema.md
   source_inventory: docs/prompt_artifact_schema_inventory.md
-  review_record: docs/v11_005_prompt_package_schema_static_review_gate.md
+  review_record: docs/archive/phases/v11/v11_005_prompt_package_schema_static_review_gate.md
   result: pass_for_schema_static_review
   prompt_positive_prompt_sync_covered: true
   yaml_literal_block_shape_covered: true

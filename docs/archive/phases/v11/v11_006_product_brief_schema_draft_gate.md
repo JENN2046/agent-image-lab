@@ -1,15 +1,15 @@
-# v11.012 Human Review Schema Draft Gate
+# v11.006 Product Brief Schema Draft Gate
 
 ```yaml
 gate_template:
-  phase: v11_012_human_review_schema_draft_gate
+  phase: v11_006_product_brief_schema_draft_gate
   base_contract: AGENTS.md
   mode: A4.8
   intent: local_draft
   risk_level: R1
   allowed_files:
-    - docs/v11_012_human_review_schema_draft_gate.md
-    - docs/human_review_canonical_schema.md
+    - docs/archive/phases/v11/v11_006_product_brief_schema_draft_gate.md
+    - docs/product_brief_canonical_schema.md
     - README.md
     - docs/00_project_roadmap.md
     - PROJECT_MASTER_PLAN.md
@@ -19,19 +19,20 @@ gate_template:
     - .agent_board/CHECKPOINT.md
     - .agent_board/VALIDATION_LOG.md
   forbidden_files:
-    - reviews/
-    - runs/
-    - accepted_samples/
+    - briefs/
     - prompts/image_generation/
+    - schemas/
     - scripts/
     - plugins/
     - adapters/
+    - runs/
+    - accepted_samples/
     - .env
     - .env.local
     - package.json
     - package-lock.json
   allowed_actions:
-    - draft human review canonical schema
+    - draft canonical product brief schema
     - document validation strategy
     - update local project status surfaces
     - run local validation
@@ -42,11 +43,12 @@ gate_template:
     - retry
     - env local secret value read
     - memory write
-    - accepted samples write
     - production candidate promotion
     - runtime, CDP, bridge, or MCP
-    - review artifact migration
+    - brief behavior change
+    - prompt package behavior change
     - machine validator implementation
+    - A5 generation authorization creation
   validation:
     required:
       - git status -sb
@@ -61,7 +63,7 @@ gate_template:
       - scripts/run_native_doubao_image_generation.js
   commit:
     allowed: true
-    message: docs: draft human review canonical schema
+    message: docs: draft product brief canonical schema
   push:
     allowed: false
   explicit_non_authorization:
@@ -75,35 +77,41 @@ gate_template:
 
 ## Phase Diff
 
-V11.012 drafts a canonical human review schema from the ceramic mug, sports visor, and serum bottle review records. This gate does not migrate existing reviews, write memory, write accepted samples, promote production, or create delivery-ready status.
+V11.006 drafts a canonical product brief schema from the existing sports visor and premium serum bottle briefs, while preserving the ceramic mug route as a legacy route without a dedicated `briefs/` artifact.
+
+This gate does not edit existing brief files, create prompt packages, implement a validator, create A5 authorization, or perform generation.
 
 ## Schema Draft Output
 
-The human review schema draft is recorded in [human_review_canonical_schema.md](human_review_canonical_schema.md).
+The product brief schema draft is recorded in [product_brief_canonical_schema.md](product_brief_canonical_schema.md).
 
 It defines:
 
-- review identity and reviewed output reference
-- product and prompt lineage
-- local persistence verification fields
-- asset status and decision fields
-- separate accepted candidate, commercial delivery, and memory suitability fields
-- strengths, watch items, scores, revision focus, and next gate
-- safety boundary fields
-- validation strategy for future machine checks
+- brief identity and route lineage
+- product identity lock
+- structure lock
+- material and texture constraints
+- color or finish strategy
+- scene and composition boundary
+- text / label / logo policy
+- acceptance criteria and known risks
+- no-execution handoff fields
+- legacy policy for routes without dedicated brief artifacts
 
 ## Risk Coverage
 
 ```yaml
 risk_coverage:
-  accepted_candidate_commercial_delivery_ready_confusion: covered
-  memory_suitability_auto_inference: covered
-  reviewable_sample_missing: covered
-  local_persistence_fields_not_uniform: covered
-  output_image_git_boundary_missing: covered
-  accepted_samples_write_confusion: covered
-  production_candidate_confusion: covered
-  next_generation_without_authorization_confusion: covered
+  product_identity_drift: covered
+  structure_lock_missing: covered
+  material_constraints_missing: covered
+  color_or_finish_strategy_missing: covered
+  scene_boundary_missing: covered
+  label_fake_text_logo_boundary_missing: covered
+  A5_authorization_confusion: covered_by_no_execution_handoff
+  memory_suitability_auto_inference: covered_by_no_memory_write_boundary
+  runs_output_accidental_commit: covered_by_no_output_boundary
+  legacy_ceramic_mug_missing_brief: documented_as_legacy_gap
 ```
 
 ## Boundary Confirmation
@@ -124,7 +132,8 @@ safety:
   package_json_modified: false
   runs_output_committed: false
   accepted_samples_written: false
-  review_artifact_migration_performed: false
+  brief_behavior_changed: false
+  prompt_package_behavior_changed: false
   machine_validator_implemented: false
 ```
 
@@ -132,19 +141,19 @@ safety:
 
 ```yaml
 recommended_next:
-  phase: v11_013_human_review_schema_static_review_gate
+  phase: v11_007_product_brief_schema_static_review_gate
   auto_execution_allowed: true
-  purpose: 静态审查 human review canonical schema 是否覆盖 v11.003 inventory 风险；仍不接 provider、不生成图、不写 memory。
+  purpose: 静态审查 product brief canonical schema 是否覆盖 v11.003 inventory 风险；仍不接 provider、不生成图、不写 memory。
 ```
 
 ## Closeout Template
 
 ```yaml
 closeout:
-  phase: v11_012_human_review_schema_draft_gate
-  commit_message: "docs: draft human review canonical schema"
+  phase: v11_006_product_brief_schema_draft_gate
+  commit_message: "docs: draft product brief canonical schema"
   branch: master
-  source_commit: 0bc443f71d4f71b8cd198fe7e14089aa747a9bd6
+  source_commit: 28852990878776dcc32b0febcab84a5328165c60
   push: not_performed
   git_status: clean
   final_state:

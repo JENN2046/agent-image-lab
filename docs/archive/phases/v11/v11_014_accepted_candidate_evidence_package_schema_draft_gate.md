@@ -8,7 +8,7 @@ gate_template:
   intent: local_draft
   risk_level: R1
   allowed_files:
-    - docs/v11_014_accepted_candidate_evidence_package_schema_draft_gate.md
+    - docs/archive/phases/v11/v11_014_accepted_candidate_evidence_package_schema_draft_gate.md
     - docs/accepted_candidate_evidence_package_canonical_schema.md
     - README.md
     - docs/00_project_roadmap.md
@@ -107,7 +107,7 @@ source_inventory:
 schema_draft:
   drafted_schema: docs/accepted_candidate_evidence_package_canonical_schema.md
   source_inventory: docs/prompt_artifact_schema_inventory.md
-  phase_record: docs/v11_014_accepted_candidate_evidence_package_schema_draft_gate.md
+  phase_record: docs/archive/phases/v11/v11_014_accepted_candidate_evidence_package_schema_draft_gate.md
   accepted_candidate_evidence_package_schema_drafted: true
   source_output_canonical_field_defined: true
   prompt_package_canonical_field_defined: true

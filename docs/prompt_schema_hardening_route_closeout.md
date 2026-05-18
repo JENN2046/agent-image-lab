@@ -37,13 +37,13 @@ route_closeout:
 |---|---|---|---|
 | Route activation and scope | `docs/prompt_schema_hardening_scope.md` | `docs/archive/phases/v11/v11_002_prompt_schema_hardening_route_activation_gate.md` | completed |
 | Artifact inventory | `docs/prompt_artifact_schema_inventory.md` | `docs/archive/phases/v11/v11_003_existing_prompt_artifact_schema_inventory_gate.md` | completed |
-| Prompt package | `docs/prompt_package_canonical_schema.md` | `docs/archive/phases/v11/v11_004_prompt_package_schema_draft_gate.md`; `docs/v11_005_prompt_package_schema_static_review_gate.md` | drafted_and_reviewed |
-| Product brief | `docs/product_brief_canonical_schema.md` | `docs/v11_006_product_brief_schema_draft_gate.md`; `docs/v11_007_product_brief_schema_static_review_gate.md` | drafted_and_reviewed |
-| Static review | `docs/static_review_canonical_schema.md` | `docs/v11_008_static_review_schema_draft_gate.md`; `docs/v11_009_static_review_schema_static_review_gate.md` | drafted_and_reviewed |
-| A5 authorization | `docs/a5_authorization_canonical_schema.md` | `docs/v11_010_A5_authorization_schema_draft_gate.md`; `docs/v11_011_A5_authorization_schema_static_review_gate.md` | drafted_and_reviewed |
-| Human review | `docs/human_review_canonical_schema.md` | `docs/v11_012_human_review_schema_draft_gate.md`; `docs/v11_013_human_review_schema_static_review_gate.md` | drafted_and_reviewed |
-| Accepted candidate evidence package | `docs/accepted_candidate_evidence_package_canonical_schema.md` | `docs/v11_014_accepted_candidate_evidence_package_schema_draft_gate.md`; `docs/v11_015_accepted_candidate_evidence_package_schema_static_review_gate.md` | drafted_and_reviewed |
-| Route-level validation strategy | `docs/prompt_schema_hardening_validation_strategy.md` | `docs/v11_016_prompt_schema_hardening_validation_strategy_gate.md` | completed |
+| Prompt package | `docs/prompt_package_canonical_schema.md` | `docs/archive/phases/v11/v11_004_prompt_package_schema_draft_gate.md`; `docs/archive/phases/v11/v11_005_prompt_package_schema_static_review_gate.md` | drafted_and_reviewed |
+| Product brief | `docs/product_brief_canonical_schema.md` | `docs/archive/phases/v11/v11_006_product_brief_schema_draft_gate.md`; `docs/archive/phases/v11/v11_007_product_brief_schema_static_review_gate.md` | drafted_and_reviewed |
+| Static review | `docs/static_review_canonical_schema.md` | `docs/archive/phases/v11/v11_008_static_review_schema_draft_gate.md`; `docs/archive/phases/v11/v11_009_static_review_schema_static_review_gate.md` | drafted_and_reviewed |
+| A5 authorization | `docs/a5_authorization_canonical_schema.md` | `docs/archive/phases/v11/v11_010_A5_authorization_schema_draft_gate.md`; `docs/archive/phases/v11/v11_011_A5_authorization_schema_static_review_gate.md` | drafted_and_reviewed |
+| Human review | `docs/human_review_canonical_schema.md` | `docs/archive/phases/v11/v11_012_human_review_schema_draft_gate.md`; `docs/archive/phases/v11/v11_013_human_review_schema_static_review_gate.md` | drafted_and_reviewed |
+| Accepted candidate evidence package | `docs/accepted_candidate_evidence_package_canonical_schema.md` | `docs/archive/phases/v11/v11_014_accepted_candidate_evidence_package_schema_draft_gate.md`; `docs/archive/phases/v11/v11_015_accepted_candidate_evidence_package_schema_static_review_gate.md` | drafted_and_reviewed |
+| Route-level validation strategy | `docs/prompt_schema_hardening_validation_strategy.md` | `docs/archive/phases/v11/v11_016_prompt_schema_hardening_validation_strategy_gate.md` | completed |
 
 ## What V11 Proved
 

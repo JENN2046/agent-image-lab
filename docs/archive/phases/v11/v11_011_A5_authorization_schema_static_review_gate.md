@@ -8,7 +8,7 @@ gate_template:
   intent: review
   risk_level: R1
   allowed_files:
-    - docs/v11_011_A5_authorization_schema_static_review_gate.md
+    - docs/archive/phases/v11/v11_011_A5_authorization_schema_static_review_gate.md
     - README.md
     - docs/00_project_roadmap.md
     - PROJECT_MASTER_PLAN.md
@@ -83,7 +83,7 @@ V11.011 statically reviews [a5_authorization_canonical_schema.md](a5_authorizati
 static_review:
   reviewed_schema: docs/a5_authorization_canonical_schema.md
   source_inventory: docs/prompt_artifact_schema_inventory.md
-  review_record: docs/v11_011_A5_authorization_schema_static_review_gate.md
+  review_record: docs/archive/phases/v11/v11_011_A5_authorization_schema_static_review_gate.md
   result: pass_for_schema_static_review
   authorization_draft_execution_confirmation_split_covered: true
   execution_closeout_schema_covered: true

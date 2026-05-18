@@ -6,18 +6,35 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current C1am Agent-Board-Plus-Docs 02 Execution
+
+```text
+Current archive task: c1am_agent_board_plus_docs_02_execution.
+Status: completed validated pending commit.
+Purpose: execute second low-risk agent-board-plus-docs paired move/rewrite batch.
+Execution package: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_02_EXECUTION_PACKAGE.md.
+Execution record: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_02_EXECUTION_RECORD.md.
+Files moved: 12.
+Rewrite hits: 31.
+Non-archive active old-path hits after rewrite: 0.
+Recommended next: validate and commit agent-board-plus-docs 02.
+Not allowed now: push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
+```
+
+---
+
 ## Current C1am Agent-Board-Plus-Docs 01 Execution
 
 ```text
 Current archive task: c1am_agent_board_plus_docs_01_execution.
-Status: completed validated pending commit.
+Status: completed validated committed.
 Purpose: execute first low-risk agent-board-plus-docs paired move/rewrite batch.
 Execution package: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_01_EXECUTION_PACKAGE.md.
 Execution record: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_01_EXECUTION_RECORD.md.
 Files moved: 12.
 Rewrite hits: 29.
 Non-archive active old-path hits after rewrite: 0.
-Recommended next: validate and commit agent-board-plus-docs 01.
+Recommended next: continue remaining agent-board-plus-docs batches.
 Not allowed now: push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
 ```
 

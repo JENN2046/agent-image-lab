@@ -8,7 +8,7 @@ gate_template:
   intent: review
   risk_level: R1
   allowed_files:
-    - docs/v11_015_accepted_candidate_evidence_package_schema_static_review_gate.md
+    - docs/archive/phases/v11/v11_015_accepted_candidate_evidence_package_schema_static_review_gate.md
     - README.md
     - docs/00_project_roadmap.md
     - PROJECT_MASTER_PLAN.md
@@ -83,7 +83,7 @@ V11.015 statically reviews [accepted_candidate_evidence_package_canonical_schema
 static_review:
   reviewed_schema: docs/accepted_candidate_evidence_package_canonical_schema.md
   source_inventory: docs/prompt_artifact_schema_inventory.md
-  review_record: docs/v11_015_accepted_candidate_evidence_package_schema_static_review_gate.md
+  review_record: docs/archive/phases/v11/v11_015_accepted_candidate_evidence_package_schema_static_review_gate.md
   result: pass_for_schema_static_review
   source_output_canonical_field_covered: true
   prompt_package_canonical_field_covered: true

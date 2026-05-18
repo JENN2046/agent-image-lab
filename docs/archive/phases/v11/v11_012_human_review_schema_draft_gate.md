@@ -1,15 +1,15 @@
-# v11.008 Static Review Schema Draft Gate
+# v11.012 Human Review Schema Draft Gate
 
 ```yaml
 gate_template:
-  phase: v11_008_static_review_schema_draft_gate
+  phase: v11_012_human_review_schema_draft_gate
   base_contract: AGENTS.md
   mode: A4.8
   intent: local_draft
   risk_level: R1
   allowed_files:
-    - docs/v11_008_static_review_schema_draft_gate.md
-    - docs/static_review_canonical_schema.md
+    - docs/archive/phases/v11/v11_012_human_review_schema_draft_gate.md
+    - docs/human_review_canonical_schema.md
     - README.md
     - docs/00_project_roadmap.md
     - PROJECT_MASTER_PLAN.md
@@ -19,20 +19,19 @@ gate_template:
     - .agent_board/CHECKPOINT.md
     - .agent_board/VALIDATION_LOG.md
   forbidden_files:
-    - briefs/
+    - reviews/
+    - runs/
+    - accepted_samples/
     - prompts/image_generation/
-    - schemas/
     - scripts/
     - plugins/
     - adapters/
-    - runs/
-    - accepted_samples/
     - .env
     - .env.local
     - package.json
     - package-lock.json
   allowed_actions:
-    - draft canonical static review schema
+    - draft human review canonical schema
     - document validation strategy
     - update local project status surfaces
     - run local validation
@@ -43,12 +42,11 @@ gate_template:
     - retry
     - env local secret value read
     - memory write
+    - accepted samples write
     - production candidate promotion
     - runtime, CDP, bridge, or MCP
-    - prompt package behavior change
     - review artifact migration
     - machine validator implementation
-    - A5 generation authorization creation
   validation:
     required:
       - git status -sb
@@ -63,7 +61,7 @@ gate_template:
       - scripts/run_native_doubao_image_generation.js
   commit:
     allowed: true
-    message: docs: draft static review canonical schema
+    message: docs: draft human review canonical schema
   push:
     allowed: false
   explicit_non_authorization:
@@ -77,35 +75,35 @@ gate_template:
 
 ## Phase Diff
 
-V11.008 drafts a canonical static review schema from the v11.003 inventory and the v8.024 prompt v2 static review pattern. It does not migrate existing reviews, implement a validator, modify prompt packages, or create an A5 authorization.
+V11.012 drafts a canonical human review schema from the ceramic mug, sports visor, and serum bottle review records. This gate does not migrate existing reviews, write memory, write accepted samples, promote production, or create delivery-ready status.
 
 ## Schema Draft Output
 
-The static review schema draft is recorded in [static_review_canonical_schema.md](static_review_canonical_schema.md).
+The human review schema draft is recorded in [human_review_canonical_schema.md](human_review_canonical_schema.md).
 
 It defines:
 
-- review identity and target lineage
-- source findings and review inputs
-- checklist shape with result/evidence/risk level
-- review verdict and authorization readiness boundary
-- remaining risks and next gate
-- no-execution safety fields
+- review identity and reviewed output reference
+- product and prompt lineage
+- local persistence verification fields
+- asset status and decision fields
+- separate accepted candidate, commercial delivery, and memory suitability fields
+- strengths, watch items, scores, revision focus, and next gate
+- safety boundary fields
 - validation strategy for future machine checks
 
 ## Risk Coverage
 
 ```yaml
 risk_coverage:
-  static_review_field_name_drift: covered
-  pass_fail_semantics_prose_only: covered
-  source_findings_missing: covered
-  checklist_evidence_missing: covered
-  A5_authorization_created_by_static_review_confusion: covered
-  provider_contact_image_generation_confusion: covered
-  memory_suitability_auto_inference: covered
   accepted_candidate_commercial_delivery_ready_confusion: covered
-  next_gate_auto_execution_confusion: covered
+  memory_suitability_auto_inference: covered
+  reviewable_sample_missing: covered
+  local_persistence_fields_not_uniform: covered
+  output_image_git_boundary_missing: covered
+  accepted_samples_write_confusion: covered
+  production_candidate_confusion: covered
+  next_generation_without_authorization_confusion: covered
 ```
 
 ## Boundary Confirmation
@@ -126,7 +124,6 @@ safety:
   package_json_modified: false
   runs_output_committed: false
   accepted_samples_written: false
-  prompt_package_behavior_changed: false
   review_artifact_migration_performed: false
   machine_validator_implemented: false
 ```
@@ -135,19 +132,19 @@ safety:
 
 ```yaml
 recommended_next:
-  phase: v11_009_static_review_schema_static_review_gate
+  phase: v11_013_human_review_schema_static_review_gate
   auto_execution_allowed: true
-  purpose: 静态审查 static review canonical schema 是否覆盖 v11.003 inventory 风险；仍不接 provider、不生成图、不写 memory。
+  purpose: 静态审查 human review canonical schema 是否覆盖 v11.003 inventory 风险；仍不接 provider、不生成图、不写 memory。
 ```
 
 ## Closeout Template
 
 ```yaml
 closeout:
-  phase: v11_008_static_review_schema_draft_gate
-  commit_message: "docs: draft static review canonical schema"
+  phase: v11_012_human_review_schema_draft_gate
+  commit_message: "docs: draft human review canonical schema"
   branch: master
-  source_commit: 8f8b3356326d49a7e0f14953aaa82d86ef374e7f
+  source_commit: 0bc443f71d4f71b8cd198fe7e14089aa747a9bd6
   push: not_performed
   git_status: clean
   final_state:

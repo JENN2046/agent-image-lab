@@ -8,7 +8,7 @@ gate_template:
   intent: review
   risk_level: R1
   allowed_files:
-    - docs/v11_013_human_review_schema_static_review_gate.md
+    - docs/archive/phases/v11/v11_013_human_review_schema_static_review_gate.md
     - README.md
     - docs/00_project_roadmap.md
     - PROJECT_MASTER_PLAN.md
@@ -82,7 +82,7 @@ V11.013 statically reviews [human_review_canonical_schema.md](human_review_canon
 static_review:
   reviewed_schema: docs/human_review_canonical_schema.md
   source_inventory: docs/prompt_artifact_schema_inventory.md
-  review_record: docs/v11_013_human_review_schema_static_review_gate.md
+  review_record: docs/archive/phases/v11/v11_013_human_review_schema_static_review_gate.md
   result: pass_for_schema_static_review
   reviewed_output_reference_covered: true
   product_prompt_lineage_covered: true

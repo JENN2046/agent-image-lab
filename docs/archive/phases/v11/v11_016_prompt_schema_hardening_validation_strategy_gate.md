@@ -8,7 +8,7 @@ gate_template:
   intent: planning
   risk_level: R1
   allowed_files:
-    - docs/v11_016_prompt_schema_hardening_validation_strategy_gate.md
+    - docs/archive/phases/v11/v11_016_prompt_schema_hardening_validation_strategy_gate.md
     - docs/prompt_schema_hardening_validation_strategy.md
     - README.md
     - docs/00_project_roadmap.md

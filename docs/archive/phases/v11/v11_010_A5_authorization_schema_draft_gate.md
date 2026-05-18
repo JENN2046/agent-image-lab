@@ -8,7 +8,7 @@ gate_template:
   intent: local_draft
   risk_level: R1
   allowed_files:
-    - docs/v11_010_A5_authorization_schema_draft_gate.md
+    - docs/archive/phases/v11/v11_010_A5_authorization_schema_draft_gate.md
     - docs/a5_authorization_canonical_schema.md
     - README.md
     - docs/00_project_roadmap.md
