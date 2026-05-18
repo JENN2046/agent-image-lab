@@ -1,9 +1,25 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — Final Project Organization Checkpoint
+
+```text
+Status: final_project_organization_checkpoint completed_validated_pending_commit.
+Reason: Close the current docs archive cleanup cycle and define return-to-product-mainline conditions.
+Execution mode: A4.8 local docs-only checkpoint.
+Checkpoint: docs/archive/DOCS_ARCHIVE_FINAL_PROJECT_ORGANIZATION_CHECKPOINT.md.
+Low-risk wrapper-required records moved: 161.
+Human-navigation records remaining: 39.
+Validator-blocked records strategy-classified: 423.
+Push/tag/release/deploy performed: false.
+Recommended next: validate and commit final checkpoint, then prepare push readiness report and wait for Jenn push authorization.
+```
+
+---
+
 ## Current Handoff Update — C2b Validator-Blocked Strategy Package
 
 ```text
-Status: c2b_validator_blocked_strategy_package completed_validated_pending_commit.
+Status: c2b_validator_blocked_strategy_package completed_validated_committed.
 Reason: Convert C2a live dependency graph into movement-blocking strategy buckets.
 Execution mode: A4.8 local docs-only strategy package.
 Strategy package: docs/archive/DOCS_ARCHIVE_C2B_VALIDATOR_BLOCKED_STRATEGY_PACKAGE.md.
@@ -13,7 +29,7 @@ Movement allowed now: false.
 Validator behavior changed: false.
 Wrappers created: false.
 Push/tag/release/deploy performed: false.
-Recommended next: validate and commit C2b, then produce final project organization checkpoint.
+Recommended next: produce final project organization checkpoint.
 ```
 
 ---

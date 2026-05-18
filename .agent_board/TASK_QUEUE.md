@@ -6,17 +6,33 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current Final Project Organization Checkpoint
+
+```text
+Current archive task: final_project_organization_checkpoint.
+Status: completed validated pending commit.
+Purpose: close current docs archive cleanup cycle and define return-to-product-mainline conditions.
+Checkpoint: docs/archive/DOCS_ARCHIVE_FINAL_PROJECT_ORGANIZATION_CHECKPOINT.md.
+Low-risk wrapper-required records moved: 161.
+Human-navigation records remaining: 39.
+Validator-blocked records strategy-classified: 423.
+Recommended next: validate and commit final checkpoint, then prepare push readiness report.
+Not allowed now: push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
+```
+
+---
+
 ## Current C2b Validator-Blocked Strategy Package
 
 ```text
 Current archive task: c2b_validator_blocked_strategy_package.
-Status: completed validated pending commit.
+Status: completed validated committed.
 Purpose: classify validator-blocked records into compatibility strategy buckets without movement or validator changes.
 Strategy package: docs/archive/DOCS_ARCHIVE_C2B_VALIDATOR_BLOCKED_STRATEGY_PACKAGE.md.
 Strategy CSV: docs/archive/DOCS_ARCHIVE_C2B_VALIDATOR_BLOCKED_STRATEGY_PACKAGE.csv.
 Records classified: 423.
 Movement allowed now: false.
-Recommended next: validate and commit C2b, then produce final project organization checkpoint.
+Recommended next: produce final project organization checkpoint.
 Not allowed now: file movement, validator behavior changes, wrappers, push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
 ```
 

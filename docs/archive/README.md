@@ -70,6 +70,7 @@ The current authority remains:
 - `docs/archive/DOCS_ARCHIVE_C1AP_WRAPPER_REQUIRED_LOW_RISK_LANE_CLOSEOUT.md` and `docs/archive/DOCS_ARCHIVE_C1AN_HUMAN_NAVIGATION_DECISION_PACKAGE.md` close out 161 low-risk wrapper-required moves and classify the remaining 39 human-navigation records as decision-pending.
 - `docs/archive/DOCS_ARCHIVE_C2A_VALIDATOR_BLOCKED_DEPENDENCY_GRAPH_DRY_RUN.md` records the live scripts/tests dependency graph for 423 validator-blocked records without moving files or changing validator behavior.
 - `docs/archive/DOCS_ARCHIVE_C2B_VALIDATOR_BLOCKED_STRATEGY_PACKAGE.md` classifies 423 validator-blocked records into compatibility strategy buckets and keeps movement blocked.
+- `docs/archive/DOCS_ARCHIVE_FINAL_PROJECT_ORGANIZATION_CHECKPOINT.md` records the current project organization checkpoint, remaining blockers, and return-to-product-mainline conditions.
 
 ## Non-Authorization
 

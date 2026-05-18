@@ -1,10 +1,29 @@
 # RUN_STATE.md — Agent Image Lab
 
+## Final Project Organization Checkpoint
+
+```yaml
+phase: final_project_organization_checkpoint
+status: completed_validated_pending_commit
+mode: A4.8_safe_local_docs_only_checkpoint
+goal: close current docs archive cleanup cycle and define return-to-product-mainline conditions
+evidence:
+  checkpoint: docs/archive/DOCS_ARCHIVE_FINAL_PROJECT_ORGANIZATION_CHECKPOINT.md
+result:
+  low_risk_wrapper_required_records_moved: 161
+  remaining_human_navigation_records: 39
+  validator_blocked_records_strategy_classified: 423
+decision:
+  validation_ready: true
+  push_allowed_now: false
+  recommended_next: push_readiness_after_final_checkpoint_commit
+```
+
 ## C2b Validator-Blocked Strategy Package
 
 ```yaml
 phase: c2b_validator_blocked_strategy_package
-status: completed_validated_pending_commit
+status: completed_validated_committed
 mode: A4.8_safe_local_docs_only_strategy_package
 goal: classify validator-blocked records into compatibility strategy buckets without movement or validator changes
 evidence:

@@ -1,10 +1,30 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## Final Project Organization Checkpoint
+
+```yaml
+phase: final_project_organization_checkpoint
+status: completed_validated_pending_commit
+goal: close current docs archive cleanup cycle and define return-to-product-mainline conditions
+completed:
+  - generated docs/archive/DOCS_ARCHIVE_FINAL_PROJECT_ORGANIZATION_CHECKPOINT.md
+  - summarized current entry clarity
+  - summarized archive completion and reference safety
+  - summarized docs_registry maturity
+  - summarized remaining blockers and product-mainline return conditions
+not_performed:
+  - no file movement
+  - no reference rewrite
+  - no wrapper creation
+  - no validator behavior changed
+  - no push, tag, release, or deploy
+```
+
 ## C2b Validator-Blocked Strategy Package
 
 ```yaml
 phase: c2b_validator_blocked_strategy_package
-status: completed_validated_pending_commit
+status: completed_validated_committed
 goal: classify validator-blocked records into compatibility strategy buckets without movement or validator changes
 completed:
   - generated docs/archive/DOCS_ARCHIVE_C2B_VALIDATOR_BLOCKED_STRATEGY_PACKAGE.md

@@ -107,6 +107,7 @@ C2a validator-blocked dependency graph dry-run: `docs/archive/DOCS_ARCHIVE_C2A_V
 C2a validator-blocked dependency graph CSV: `docs/archive/DOCS_ARCHIVE_C2A_VALIDATOR_BLOCKED_DEPENDENCY_GRAPH_DRY_RUN.csv`
 C2b validator-blocked strategy package: `docs/archive/DOCS_ARCHIVE_C2B_VALIDATOR_BLOCKED_STRATEGY_PACKAGE.md`
 C2b validator-blocked strategy package CSV: `docs/archive/DOCS_ARCHIVE_C2B_VALIDATOR_BLOCKED_STRATEGY_PACKAGE.csv`
+Final project organization checkpoint: `docs/archive/DOCS_ARCHIVE_FINAL_PROJECT_ORGANIZATION_CHECKPOINT.md`
 
 This manifest records proposed future archive targets for historical `docs/` records. It is not a file-move authorization.
 
