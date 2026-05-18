@@ -16,7 +16,7 @@ gate_template:
     - .agent_board/TASK_QUEUE.md
     - .agent_board/CHECKPOINT.md
     - .agent_board/VALIDATION_LOG.md
-    - docs/v9_018_sports_visor_commercial_delivery_review_execution_decision_gate.md
+    - docs/archive/phases/v9/v9_018_sports_visor_commercial_delivery_review_execution_decision_gate.md
   forbidden_files:
     - runs/**
     - accepted_samples/**

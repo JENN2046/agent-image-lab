@@ -158,7 +158,7 @@ goal_component_status:
   production_candidate_gate:
     status: present_as_blocked_path
     evidence:
-      - docs/v9_delivery_readiness_layer_route_selection_gate.md
+      - docs/archive/phases/v9/v9_delivery_readiness_layer_route_selection_gate.md
       - docs/v14_079_review_report_final_local_closeout_gate.md
   rollback_audit_validation_package:
     status: present_but_needs_continuous_stage_evidence

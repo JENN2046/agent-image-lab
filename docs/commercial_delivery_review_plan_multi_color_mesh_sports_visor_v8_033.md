@@ -77,7 +77,7 @@ lineage:
   accepted_candidate_evidence:
     ref: docs/accepted_candidate_evidence_package_multi_color_mesh_sports_visor_v1.md
   route_B_evidence_package:
-    ref: docs/v8_035_route_B_second_product_accepted_candidate_evidence_package.md
+    ref: docs/archive/phases/v8/v8_035_route_B_second_product_accepted_candidate_evidence_package.md
   v9_015_delivery_readiness_package:
     ref: docs/delivery_readiness_package_multi_color_mesh_sports_visor_v8_033.md
   v9_016_acceptance_criteria:
@@ -91,7 +91,7 @@ Use these documents as the review input set:
 - `docs/delivery_readiness_package_multi_color_mesh_sports_visor_v8_033.md`
 - `docs/delivery_readiness_acceptance_criteria_multi_color_mesh_sports_visor_v8_033.md`
 - `docs/accepted_candidate_evidence_package_multi_color_mesh_sports_visor_v1.md`
-- `docs/v8_035_route_B_second_product_accepted_candidate_evidence_package.md`
+- `docs/archive/phases/v8/v8_035_route_B_second_product_accepted_candidate_evidence_package.md`
 - `reviews/v8_034_multi_color_mesh_sports_visor_v2_human_review.md`
 - `prompts/image_generation/product_lifestyle_multi_color_mesh_sports_visor_v2.yaml`
 

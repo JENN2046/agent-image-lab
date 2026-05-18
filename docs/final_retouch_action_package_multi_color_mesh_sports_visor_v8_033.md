@@ -53,7 +53,7 @@ review_lineage:
     ref: reviews/v9_019_sports_visor_v8_033_commercial_delivery_review.md
     review_result: needs_minor_retouch
   review_result_decision:
-    ref: docs/v9_020_sports_visor_commercial_delivery_review_result_decision_gate.md
+    ref: docs/archive/phases/v9/v9_020_sports_visor_commercial_delivery_review_result_decision_gate.md
     selected_route: create_sports_visor_final_retouch_action_package
 ```
 

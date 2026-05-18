@@ -40,7 +40,7 @@ route_B_cross_product_reuse_validated: true
 | Real output | `runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg` |
 | Human review | `reviews/v8_034_multi_color_mesh_sports_visor_v2_human_review.md` |
 | Accepted candidate package | `docs/accepted_candidate_evidence_package_multi_color_mesh_sports_visor_v1.md` |
-| Route B evidence package | `docs/v8_035_route_B_second_product_accepted_candidate_evidence_package.md` |
+| Route B evidence package | `docs/archive/phases/v8/v8_035_route_B_second_product_accepted_candidate_evidence_package.md` |
 
 ## Current Accepted Candidate Status
 
