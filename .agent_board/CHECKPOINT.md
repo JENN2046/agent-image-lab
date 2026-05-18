@@ -1,5 +1,155 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## C1g Exact-File Commit Readiness Audit
+
+```yaml
+phase: c1g_exact_file_commit_readiness_audit
+status: completed_validated
+goal: confirm accumulated C1 archive migration changes are ready for exact-file staging and guarded local commit
+completed:
+  - read AGENTS.md, AGENTS.autopilot-overlay.md, and .agent_board resume surfaces
+  - checked git status --short --branch
+  - checked git diff --name-status and untracked file list
+  - confirmed branch master is 0/0 against origin/master
+  - confirmed 7 modified tracked files
+  - confirmed 20 deleted former C1f source files
+  - confirmed 24 new archive/report files including this C1g audit
+  - confirmed 51 exact staging paths
+  - confirmed git add -n -A -- 51 exact paths preview passed
+  - checked 20 moved file pairs by Git blob hash
+  - confirmed 0 moved file hash mismatches
+  - generated docs/archive/DOCS_ARCHIVE_C1G_EXACT_FILE_COMMIT_READINESS_AUDIT.md
+  - updated README.md and docs/archive indexes
+  - updated .agent_board HANDOFF/RUN_STATE/TASK_QUEUE/CHECKPOINT surfaces
+not_performed:
+  - no staging
+  - no commit
+  - no push, tag, release, or deploy
+  - no additional docs moved
+  - no files deleted beyond the already authorized C1f move state
+  - no wrappers created
+  - no references rewritten
+  - no validator behavior changed
+  - no scripts split
+  - no runs processed
+  - no provider/plugin/API/DailyNote/VCP memory/runtime/real manifest/VCP source reads
+validation_completed:
+  - git add -n -A -- 51 exact paths
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+  - powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+## C1f Post-Move Reference Map Dry Run
+
+```yaml
+phase: c1f_post_move_reference_map_dry_run
+status: completed_validated
+goal: audit old and new path references after the C1f exact-file physical move
+completed:
+  - read docs/archive/DOCS_ARCHIVE_C1F_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md
+  - read docs/archive/DOCS_ARCHIVE_C1F_MOVE_EXECUTION_RECORD.md
+  - scanned README.md, PROJECT_MASTER_PLAN.md, AGENTS.md, AGENTS.autopilot-overlay.md, .agent_board, scripts, tests, and docs
+  - reviewed 20 old source paths and 20 new archive paths
+  - found 0 old-path operational hits in scripts/tests
+  - found 0 old-path authority/navigation hits
+  - found 0 old-path .agent_board hits
+  - found 0 old-path non-archive docs hits
+  - found 140 old-path archive planning/audit hits
+  - confirmed C1f wrapper required false
+  - confirmed C1f reference rewrite required false
+  - generated docs/archive/DOCS_ARCHIVE_C1F_POST_MOVE_REFERENCE_MAP_DRY_RUN.md
+  - updated README.md and docs/archive indexes
+  - updated .agent_board HANDOFF/RUN_STATE/TASK_QUEUE/CHECKPOINT surfaces
+not_performed:
+  - no additional docs moved
+  - no files deleted
+  - no wrappers created
+  - no references rewritten
+  - no validator behavior changed
+  - no scripts split
+  - no runs processed
+  - no provider/plugin/API/DailyNote/VCP memory/runtime/real manifest/VCP source reads
+  - no staging, commit, push, tag, release, or deploy
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+  - powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+## C1f Exact-File Physical Move
+
+```yaml
+phase: c1f_exact_file_physical_move
+status: completed_validated
+goal: move the exact 20 C1f future exact-move candidates into docs/archive/phases/v7
+completed:
+  - parsed docs/archive/DOCS_ARCHIVE_C1F_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md
+  - confirmed exactly 20 allowlist rows
+  - confirmed 0 missing source files before move
+  - confirmed 0 existing destinations before move
+  - confirmed 0 missing destination parent directories before move
+  - confirmed 0 duplicate sources and destinations before move
+  - confirmed 0 source/destination boundary violations before move
+  - moved exactly 20 files with no glob movement and no overwrite
+  - confirmed 0 source paths still exist after move
+  - confirmed 20 destination files exist after move
+  - generated docs/archive/DOCS_ARCHIVE_C1F_MOVE_EXECUTION_RECORD.md
+  - updated README.md and docs/archive indexes
+  - updated .agent_board HANDOFF/RUN_STATE/TASK_QUEUE/CHECKPOINT surfaces
+not_performed:
+  - no additional docs moved
+  - no unrelated files deleted
+  - no wrappers created
+  - no references rewritten
+  - no validator behavior changed
+  - no scripts split
+  - no runs processed
+  - no provider/plugin/API/DailyNote/VCP memory/runtime/real manifest/VCP source reads
+  - no staging, commit, push, tag, release, or deploy
+validation_completed:
+  - git status --short --branch
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+```
+
+## C1f Exact-Move Authorization Package Dry Run
+
+```yaml
+phase: c1f_exact_move_authorization_package_dry_run
+status: completed_validated
+goal: prepare exact-move authorization package for the 20 C1e future exact-move candidates without moving files
+completed:
+  - read docs/archive/DOCS_ARCHIVE_C1E_REMAINING_DOCS_RECLASSIFICATION_REFRESH.md
+  - extracted exactly 20 future exact-move candidates
+  - confirmed 0 missing source files
+  - confirmed 0 existing destinations
+  - confirmed 0 missing destination parent directories
+  - confirmed 0 duplicate sources
+  - confirmed 0 duplicate destinations
+  - confirmed 0 source/destination boundary violations
+  - generated docs/archive/DOCS_ARCHIVE_C1F_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md
+  - updated README.md and docs/archive indexes with the C1f authorization package dry-run
+  - updated .agent_board HANDOFF/RUN_STATE/TASK_QUEUE/CHECKPOINT surfaces
+not_performed:
+  - no docs moved
+  - no files deleted
+  - no wrappers created
+  - no references rewritten
+  - no validator behavior changed
+  - no scripts split
+  - no runs processed
+  - no provider/plugin/API/DailyNote/VCP memory/runtime/real manifest/VCP source reads
+  - no staging, commit, push, tag, release, or deploy
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+```
+
 ## C1e Remaining Docs Reclassification Refresh
 
 ```yaml

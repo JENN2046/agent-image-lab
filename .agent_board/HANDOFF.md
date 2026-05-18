@@ -1,5 +1,127 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — C1g Exact-File Commit Readiness Audit
+
+```text
+Status: c1g_exact_file_commit_readiness_audit completed validated.
+Reason: project owner requested exact-file commit readiness audit for accumulated C1 archive migration changes.
+Execution mode: A4.8 local documentation and commit-readiness audit only.
+Readiness audit: docs/archive/DOCS_ARCHIVE_C1G_EXACT_FILE_COMMIT_READINESS_AUDIT.md.
+Branch/upstream: master / origin/master.
+Ahead/behind before audit: 0/0.
+Exact staging paths identified: 51.
+Exact staging dry-run preview: passed with git add -n -A -- 51 exact paths.
+Modified tracked files: 7.
+Deleted former C1f source files: 20.
+New archive/report files: 24.
+Moved file pairs checked: 20.
+Moved file hash mismatches: 0.
+Unauthorized generated assets in scope: 0.
+Secret/env path hits in scope: 0.
+Real VCP source reads performed: false.
+Staging performed: false.
+Commit performed: false.
+Push/tag/release/deploy performed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Decision: ready for future exact-file staging and guarded local commit only after Jenn explicitly authorizes the 51-path allowlist.
+Validated: git add -n -A -- 51 exact paths; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+Recommended next: request explicit exact-file staging and local commit authorization, or review the C1g audit first.
+```
+
+---
+
+## Current Handoff Update — C1f Post-Move Reference Map Dry Run
+
+```text
+Status: c1f_post_move_reference_map_dry_run completed validated.
+Reason: project owner requested C1f post-move reference-map dry-run after the authorized C1f physical move.
+Execution mode: A4.8 local documentation and reference audit only.
+Reference map report: docs/archive/DOCS_ARCHIVE_C1F_POST_MOVE_REFERENCE_MAP_DRY_RUN.md.
+Move record: docs/archive/DOCS_ARCHIVE_C1F_MOVE_EXECUTION_RECORD.md.
+Authorization package: docs/archive/DOCS_ARCHIVE_C1F_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md.
+C1f moved candidates reviewed: 20.
+Scanned files: 2477.
+Old-path hit total: 140.
+New-path hit total: 84.
+Old-path operational hits in scripts/tests: 0.
+Old-path authority/navigation hits in README/PROJECT_MASTER_PLAN/AGENTS/AGENTS.autopilot-overlay.md: 0.
+Old-path .agent_board hits: 0.
+Old-path non-archive docs hits: 0.
+Old-path archive planning/audit hits: 140.
+Wrappers required for C1f moved files: false.
+Reference rewrites required for C1f moved files: false.
+Docs moved by this phase: false.
+Files deleted: false.
+Validator behavior changed: false.
+Scripts split: false.
+runs processed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Staging/commit/push/tag/release/deploy performed: false.
+Validated: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+Recommended next: exact-file commit readiness audit for accumulated C1 archive migration changes, unless another local archive classification step is requested.
+```
+
+---
+
+## Current Handoff Update — C1f Exact-File Physical Move
+
+```text
+Status: c1f_exact_file_physical_move completed validated.
+Reason: project owner authorized C1f physical movement after the C1f exact-move authorization package dry-run.
+Execution mode: A4.8 local documentation archive movement only.
+Authorization package: docs/archive/DOCS_ARCHIVE_C1F_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md.
+Execution record: docs/archive/DOCS_ARCHIVE_C1F_MOVE_EXECUTION_RECORD.md.
+Exact files moved: 20.
+Source paths still existing after move: 0.
+Destination files existing after move: 20.
+Missing source files before move: 0.
+Existing destinations before move: 0.
+Duplicate sources/destinations before move: 0/0.
+Invalid source/destination boundaries before move: 0/0.
+Wrappers created: false.
+References rewritten: false.
+Validator behavior changed: false.
+Scripts split: false.
+runs processed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Staging/commit/push/tag/release/deploy performed: false.
+Validated: git status --short --branch; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: complete C1f post-move validation, then run C1f post-move reference-map dry-run before wrapper/reference work.
+```
+
+---
+
+## Current Handoff Update — C1f Exact-Move Authorization Package Dry Run
+
+```text
+Status: c1f_exact_move_authorization_package_dry_run completed validated.
+Reason: project owner requested a C1f authorization package dry-run for the 20 future exact-move candidates from C1e.
+Execution mode: A4.8 local documentation and preflight package only.
+Authorization package: docs/archive/DOCS_ARCHIVE_C1F_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md.
+Source classification: docs/archive/DOCS_ARCHIVE_C1E_REMAINING_DOCS_RECLASSIFICATION_REFRESH.md.
+Future exact-move candidates: 20.
+Missing source files: 0.
+Existing destinations: 0.
+Missing destination parent directories: 0.
+Duplicate sources: 0.
+Duplicate destinations: 0.
+Invalid source boundaries: 0.
+Invalid destination boundaries: 0.
+Docs moved by this phase: false.
+Wrappers created: false.
+References rewritten: false.
+Files deleted: false.
+Validator behavior changed: false.
+Scripts split: false.
+runs processed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Staging/commit/push/tag/release/deploy performed: false.
+Validated: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: human review C1f package; physical C1f move still requires separate explicit authorization naming this package.
+```
+
+---
+
 ## Current Handoff Update — C1e Remaining Docs Reclassification Refresh
 
 ```text

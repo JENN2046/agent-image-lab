@@ -1,6 +1,6 @@
 # Docs Archive
 
-Status: archive directory with planning records plus C1a and C1d moved historical records
+Status: archive directory with planning records plus C1a, C1d, and C1f moved historical records
 Mode: A4.8 local documentation
 
 This directory is reserved for future historical documentation archives. Its presence does not authorize moving, deleting, staging, committing, pushing, tagging, releasing, deploying, or running any A5 action.
@@ -34,6 +34,10 @@ The current authority remains:
 - `docs/archive/DOCS_ARCHIVE_C1D_MOVE_EXECUTION_RECORD.md` records the authorized C1d exact-file physical move of those 208 files.
 - `docs/archive/DOCS_ARCHIVE_C1D_POST_MOVE_REFERENCE_MAP_DRY_RUN.md` records the C1d post-move reference map and confirms operational old-path reference impact.
 - `docs/archive/DOCS_ARCHIVE_C1E_REMAINING_DOCS_RECLASSIFICATION_REFRESH.md` records the C1e refreshed classification of remaining top-level historical docs after C1a and C1d.
+- `docs/archive/DOCS_ARCHIVE_C1F_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md` records the C1f exact-move authorization package dry-run for 20 future exact-move candidates without moving files.
+- `docs/archive/DOCS_ARCHIVE_C1F_MOVE_EXECUTION_RECORD.md` records the authorized C1f exact-file physical move of those 20 files.
+- `docs/archive/DOCS_ARCHIVE_C1F_POST_MOVE_REFERENCE_MAP_DRY_RUN.md` records the C1f post-move reference map and confirms operational old-path reference impact.
+- `docs/archive/DOCS_ARCHIVE_C1G_EXACT_FILE_COMMIT_READINESS_AUDIT.md` records the exact-file commit readiness audit for the accumulated C1 archive migration changes without staging or committing.
 
 ## Non-Authorization
 

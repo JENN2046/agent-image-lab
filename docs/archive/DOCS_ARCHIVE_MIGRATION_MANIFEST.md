@@ -14,6 +14,10 @@ C1d exact-move authorization package dry-run: `docs/archive/DOCS_ARCHIVE_C1D_EXA
 C1d move execution record: `docs/archive/DOCS_ARCHIVE_C1D_MOVE_EXECUTION_RECORD.md`
 C1d post-move reference map dry-run: `docs/archive/DOCS_ARCHIVE_C1D_POST_MOVE_REFERENCE_MAP_DRY_RUN.md`
 C1e remaining docs reclassification refresh: `docs/archive/DOCS_ARCHIVE_C1E_REMAINING_DOCS_RECLASSIFICATION_REFRESH.md`
+C1f exact-move authorization package dry-run: `docs/archive/DOCS_ARCHIVE_C1F_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md`
+C1f move execution record: `docs/archive/DOCS_ARCHIVE_C1F_MOVE_EXECUTION_RECORD.md`
+C1f post-move reference map dry-run: `docs/archive/DOCS_ARCHIVE_C1F_POST_MOVE_REFERENCE_MAP_DRY_RUN.md`
+C1g exact-file commit readiness audit: `docs/archive/DOCS_ARCHIVE_C1G_EXACT_FILE_COMMIT_READINESS_AUDIT.md`
 
 This manifest records proposed future archive targets for historical `docs/` records. It is not a file-move authorization.
 

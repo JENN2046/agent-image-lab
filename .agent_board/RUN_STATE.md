@@ -1,5 +1,265 @@
 # RUN_STATE.md — Agent Image Lab
 
+## C1g Exact-File Commit Readiness Audit
+
+```yaml
+phase: c1g_exact_file_commit_readiness_audit
+status: completed_validated
+mode: A4.8_safe_local_commit_readiness_audit_only
+goal: confirm accumulated C1 archive migration changes are ready for exact-file staging and guarded local commit
+readiness_audit: docs/archive/DOCS_ARCHIVE_C1G_EXACT_FILE_COMMIT_READINESS_AUDIT.md
+branch: master
+upstream: origin/master
+ahead_behind: 0/0
+exact_staging:
+  total_paths: 51
+  dry_run_preview_passed: true
+  dry_run_preview_command: git add -n -A -- 51 exact paths
+  modified_tracked_files: 7
+  deleted_former_source_files: 20
+  new_archive_report_files: 24
+move_integrity:
+  moved_pairs_checked: 20
+  hash_mismatches: 0
+scope_check:
+  unauthorized_generated_assets: 0
+  secret_env_path_hits: 0
+  real_vcp_source_reads: false
+  false_positive_vcpchat_filename_hits: true
+decision:
+  exact_file_staging_ready: true
+  guarded_local_commit_ready: true
+  staging_performed: false
+  commit_performed: false
+  push_tag_release_deploy_performed: false
+changed_surfaces:
+  - docs/archive/DOCS_ARCHIVE_C1G_EXACT_FILE_COMMIT_READINESS_AUDIT.md
+  - docs/archive/README.md
+  - docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md
+  - README.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+blocked_actions:
+  staging_requires_explicit_authorization: true
+  commit_requires_explicit_authorization: true
+  push_requires_separate_explicit_authorization: true
+  A5_execution: false
+  provider_contact: false
+  plugin_call: false
+  api_call: false
+  image_generation: false
+  DailyNote_write: false
+  VCP_memory_write: false
+  runtime_execution: false
+  real_manifest_read: false
+  real_vcpchat_read: false
+  real_vcptoolbox_read: false
+  dependency_change: false
+  secret_or_env_read: false
+validation_completed:
+  - git add -n -A -- 51 exact paths
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+  - powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: explicit_exact_file_staging_and_guarded_local_commit_authorization_or_human_review_c1g_audit
+```
+
+## C1f Post-Move Reference Map Dry Run
+
+```yaml
+phase: c1f_post_move_reference_map_dry_run
+status: completed_validated
+mode: A4.8_safe_local_reference_audit_only
+goal: audit old and new path references after the C1f exact-file physical move
+reference_map_report: docs/archive/DOCS_ARCHIVE_C1F_POST_MOVE_REFERENCE_MAP_DRY_RUN.md
+move_record: docs/archive/DOCS_ARCHIVE_C1F_MOVE_EXECUTION_RECORD.md
+authorization_package: docs/archive/DOCS_ARCHIVE_C1F_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md
+scan:
+  moved_candidates_reviewed: 20
+  scanned_files: 2477
+  old_path_hit_records: 124
+  old_path_hit_total: 140
+  new_path_hit_records: 84
+  new_path_hit_total: 84
+  unique_old_paths_referenced: 20
+  unique_new_paths_referenced: 20
+old_path_risk:
+  operational_scripts_tests_hits: 0
+  authority_navigation_hits: 0
+  agent_board_hits: 0
+  non_archive_docs_hits: 0
+  archive_planning_audit_hits: 140
+decision:
+  wrappers_required: false
+  reference_rewrites_required: false
+changed_surfaces:
+  - docs/archive/DOCS_ARCHIVE_C1F_POST_MOVE_REFERENCE_MAP_DRY_RUN.md
+  - docs/archive/README.md
+  - docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md
+  - README.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+route_c_policy:
+  physical_move_authorized_now: false
+  wrappers_created: false
+  references_rewritten: false
+  validator_behavior_changed: false
+  scripts_split: false
+  runs_processed: false
+  staging_performed: false
+  commit_performed: false
+  push_tag_release_deploy_performed: false
+blocked_actions:
+  A5_execution: false
+  provider_contact: false
+  plugin_call: false
+  api_call: false
+  image_generation: false
+  DailyNote_write: false
+  VCP_memory_write: false
+  runtime_execution: false
+  real_manifest_read: false
+  real_vcpchat_read: false
+  real_vcptoolbox_read: false
+  dependency_change: false
+  secret_or_env_read: false
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+  - powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+recommended_next: exact_file_commit_readiness_audit_for_accumulated_c1_archive_migration_changes
+```
+
+## C1f Exact-File Physical Move
+
+```yaml
+phase: c1f_exact_file_physical_move
+status: completed_validated
+mode: A4.8_safe_local_docs_archive_movement_only
+goal: move the exact 20 C1f future exact-move candidates into docs/archive/phases/v7
+authorization_package: docs/archive/DOCS_ARCHIVE_C1F_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md
+execution_record: docs/archive/DOCS_ARCHIVE_C1F_MOVE_EXECUTION_RECORD.md
+preflight:
+  exact_allowlist_rows: 20
+  missing_source_files: 0
+  existing_destinations: 0
+  missing_destination_parent_directories: 0
+  duplicate_sources: 0
+  duplicate_destinations: 0
+  invalid_source_boundaries: 0
+  invalid_destination_boundaries: 0
+post_move:
+  moved_files: 20
+  source_paths_still_existing: 0
+  destination_files_existing: 20
+changed_surfaces:
+  - docs/archive/DOCS_ARCHIVE_C1F_MOVE_EXECUTION_RECORD.md
+  - docs/archive/DOCS_ARCHIVE_C1F_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md
+  - docs/archive/README.md
+  - docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md
+  - README.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+route_c_policy:
+  physical_move_authorized_now: true
+  exact_allowlist_only: true
+  wrappers_created: false
+  references_rewritten: false
+  validator_behavior_changed: false
+  scripts_split: false
+  runs_processed: false
+  staging_performed: false
+  commit_performed: false
+  push_tag_release_deploy_performed: false
+blocked_actions:
+  A5_execution: false
+  provider_contact: false
+  plugin_call: false
+  api_call: false
+  image_generation: false
+  DailyNote_write: false
+  VCP_memory_write: false
+  runtime_execution: false
+  real_manifest_read: false
+  real_vcpchat_read: false
+  real_vcptoolbox_read: false
+  dependency_change: false
+  secret_or_env_read: false
+validation_completed:
+  - git status --short --branch
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+recommended_next: c1f_post_move_validation_then_c1f_post_move_reference_map_dry_run_before_any_wrapper_or_reference_work
+```
+
+## C1f Exact-Move Authorization Package Dry Run
+
+```yaml
+phase: c1f_exact_move_authorization_package_dry_run
+status: completed_validated
+mode: A4.8_safe_local_docs_and_preflight_package_only
+goal: prepare exact-move authorization package for the 20 C1e future exact-move candidates without moving files
+authorization_package: docs/archive/DOCS_ARCHIVE_C1F_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md
+source_classification: docs/archive/DOCS_ARCHIVE_C1E_REMAINING_DOCS_RECLASSIFICATION_REFRESH.md
+preflight:
+  future_exact_move_candidates: 20
+  missing_source_files: 0
+  existing_destinations: 0
+  missing_destination_parent_directories: 0
+  duplicate_sources: 0
+  duplicate_destinations: 0
+  invalid_source_boundaries: 0
+  invalid_destination_boundaries: 0
+distribution:
+  phases_v7: 20
+  md_files: 16
+  yaml_files: 4
+changed_surfaces:
+  - docs/archive/DOCS_ARCHIVE_C1F_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md
+  - docs/archive/README.md
+  - docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md
+  - README.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+blocked_actions:
+  docs_move: false
+  wrapper_creation: false
+  reference_rewrite: false
+  validator_behavior_change: false
+  scripts_split: false
+  runs_processed: false
+  staging_performed: false
+  commit_performed: false
+  push_tag_release_deploy_performed: false
+  A5_execution: false
+  provider_contact: false
+  plugin_call: false
+  api_call: false
+  image_generation: false
+  DailyNote_write: false
+  VCP_memory_write: false
+  runtime_execution: false
+  real_manifest_read: false
+  real_vcpchat_read: false
+  real_vcptoolbox_read: false
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+recommended_next: human_review_c1f_package_then_separate_explicit_c1f_physical_move_authorization_or_exact_file_commit_readiness_audit
+```
+
 ## C1e Remaining Docs Reclassification Refresh
 
 ```yaml

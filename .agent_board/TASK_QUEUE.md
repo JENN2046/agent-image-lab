@@ -6,6 +6,95 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current C1g Exact-File Commit Readiness Audit
+
+```text
+Current archive task: c1g_exact_file_commit_readiness_audit.
+Status: completed validated.
+Purpose: confirm accumulated C1 archive migration changes are ready for exact-file staging and guarded local commit.
+Readiness audit: docs/archive/DOCS_ARCHIVE_C1G_EXACT_FILE_COMMIT_READINESS_AUDIT.md.
+Branch/upstream: master / origin/master.
+Ahead/behind: 0/0.
+Exact staging paths identified: 51.
+Exact staging dry-run preview: passed with git add -n -A -- 51 exact paths.
+Modified tracked files: 7.
+Deleted former C1f source files: 20.
+New archive/report files: 24.
+Moved file pairs checked: 20.
+Moved file hash mismatches: 0.
+Decision: exact-file staging ready and guarded local commit ready only after explicit authorization.
+Not allowed now: git add ., staging without exact allowlist authorization, committing without authorization, pushing, tag/release/deploy, A5, provider/plugin/API/image generation/DailyNote/VCP memory/runtime.
+Validation completed: git add -n -A -- 51 exact paths; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+Recommended next: request explicit exact-file staging and local commit authorization, or review the C1g audit first.
+```
+
+---
+
+## Current C1f Post-Move Reference Map Dry Run
+
+```text
+Current archive task: c1f_post_move_reference_map_dry_run.
+Status: completed validated.
+Purpose: audit old and new path references after the C1f exact-file physical move.
+Reference map report: docs/archive/DOCS_ARCHIVE_C1F_POST_MOVE_REFERENCE_MAP_DRY_RUN.md.
+Move record: docs/archive/DOCS_ARCHIVE_C1F_MOVE_EXECUTION_RECORD.md.
+C1f moved candidates reviewed: 20.
+Scanned files: 2477.
+Old-path hit total: 140.
+New-path hit total: 84.
+Old-path operational hits in scripts/tests: 0.
+Old-path authority/navigation hits: 0.
+Old-path .agent_board hits: 0.
+Old-path non-archive docs hits: 0.
+Old-path archive planning/audit hits: 140.
+C1f wrapper required: false.
+C1f reference rewrite required: false.
+Not allowed now: moving additional docs, deleting files, creating wrappers, rewriting references, changing validator behavior, splitting scripts, processing runs, staging, committing, pushing, tag/release/deploy, A5, provider/plugin/API/image generation/DailyNote/VCP memory/runtime.
+Validation completed: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+Recommended next: exact-file commit readiness audit for accumulated C1 archive migration changes, unless another local archive classification step is requested.
+```
+
+---
+
+## Current C1f Physical Move
+
+```text
+Current archive task: c1f_exact_file_physical_move.
+Status: completed validated.
+Purpose: move the exact 20 C1f future exact-move candidates into docs/archive/phases/v7 after user authorization.
+Authorization package: docs/archive/DOCS_ARCHIVE_C1F_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md.
+Execution record: docs/archive/DOCS_ARCHIVE_C1F_MOVE_EXECUTION_RECORD.md.
+Exact files moved: 20.
+Source paths still existing: 0.
+Destination files existing: 20.
+Not allowed now: moving additional docs, deleting files, creating wrappers, rewriting references, changing validator behavior, splitting scripts, processing runs, staging, committing, pushing, tag/release/deploy, A5, provider/plugin/API/image generation/DailyNote/VCP memory/runtime.
+Validation completed: git status --short --branch; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: C1f post-move validation, then C1f post-move reference-map dry-run before wrapper/reference work.
+```
+
+---
+
+## Current C1f Exact-Move Authorization Package Dry Run
+
+```text
+Current archive task: c1f_exact_move_authorization_package_dry_run.
+Status: completed_validated.
+Purpose: prepare exact-move authorization package for the 20 C1e future exact-move candidates without moving files.
+Authorization package: docs/archive/DOCS_ARCHIVE_C1F_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md.
+Source classification: docs/archive/DOCS_ARCHIVE_C1E_REMAINING_DOCS_RECLASSIFICATION_REFRESH.md.
+Future exact-move candidates: 20.
+Missing source files: 0.
+Existing destinations: 0.
+Duplicate sources: 0.
+Duplicate destinations: 0.
+Invalid source/destination boundaries: 0/0.
+Not allowed now: moving docs, deleting files, creating wrappers, rewriting references, changing validator behavior, splitting scripts, processing runs, staging, committing, pushing, tag/release/deploy, A5, provider/plugin/API/image generation/DailyNote/VCP memory/runtime.
+Validation completed: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: human review C1f package; physical C1f move still requires separate explicit authorization naming this package.
+```
+
+---
+
 ## Current C1e Remaining Docs Reclassification
 
 ```text
