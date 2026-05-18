@@ -1,9 +1,27 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — C2b Validator-Blocked Strategy Package
+
+```text
+Status: c2b_validator_blocked_strategy_package completed_validated_pending_commit.
+Reason: Convert C2a live dependency graph into movement-blocking strategy buckets.
+Execution mode: A4.8 local docs-only strategy package.
+Strategy package: docs/archive/DOCS_ARCHIVE_C2B_VALIDATOR_BLOCKED_STRATEGY_PACKAGE.md.
+Strategy CSV: docs/archive/DOCS_ARCHIVE_C2B_VALIDATOR_BLOCKED_STRATEGY_PACKAGE.csv.
+Records classified: 423.
+Movement allowed now: false.
+Validator behavior changed: false.
+Wrappers created: false.
+Push/tag/release/deploy performed: false.
+Recommended next: validate and commit C2b, then produce final project organization checkpoint.
+```
+
+---
+
 ## Current Handoff Update — C2a Validator-Blocked Dependency Graph Dry Run
 
 ```text
-Status: c2a_validator_blocked_dependency_graph_dry_run completed_validated_pending_commit.
+Status: c2a_validator_blocked_dependency_graph_dry_run completed_validated_committed.
 Reason: Begin C2 validator-blocked strategy by proving live scripts/tests dependencies before any movement or validator change.
 Execution mode: A4.8 local docs-only read-only dependency graph.
 Dependency graph: docs/archive/DOCS_ARCHIVE_C2A_VALIDATOR_BLOCKED_DEPENDENCY_GRAPH_DRY_RUN.md.
@@ -16,7 +34,7 @@ Stale or non-live dependencies: 0.
 Files moved: 0.
 Validator behavior changed: false.
 Push/tag/release/deploy performed: false.
-Recommended next: validate and commit C2a, then prepare C2b validator-blocked strategy package.
+Recommended next: prepare C2b validator-blocked strategy package.
 ```
 
 ---

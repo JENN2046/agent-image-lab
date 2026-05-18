@@ -1,10 +1,29 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## C2b Validator-Blocked Strategy Package
+
+```yaml
+phase: c2b_validator_blocked_strategy_package
+status: completed_validated_pending_commit
+goal: classify validator-blocked records into compatibility strategy buckets without movement or validator changes
+completed:
+  - generated docs/archive/DOCS_ARCHIVE_C2B_VALIDATOR_BLOCKED_STRATEGY_PACKAGE.md
+  - generated docs/archive/DOCS_ARCHIVE_C2B_VALIDATOR_BLOCKED_STRATEGY_PACKAGE.csv
+  - classified 423 validator-blocked records
+  - confirmed movement remains blocked for all validator-blocked records
+not_performed:
+  - no validator-blocked files moved
+  - no reference rewrite executed
+  - no wrappers created
+  - no validator behavior changed
+  - no push, tag, release, or deploy
+```
+
 ## C2a Validator-Blocked Dependency Graph Dry Run
 
 ```yaml
 phase: c2a_validator_blocked_dependency_graph_dry_run
-status: completed_validated_pending_commit
+status: completed_validated_committed
 goal: scan validator-blocked records for live scripts/tests dependencies before any movement or validator strategy
 completed:
   - generated docs/archive/DOCS_ARCHIVE_C2A_VALIDATOR_BLOCKED_DEPENDENCY_GRAPH_DRY_RUN.md

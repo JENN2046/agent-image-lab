@@ -105,6 +105,8 @@ C1an human-navigation decision package: `docs/archive/DOCS_ARCHIVE_C1AN_HUMAN_NA
 C1an human-navigation decision package CSV: `docs/archive/DOCS_ARCHIVE_C1AN_HUMAN_NAVIGATION_DECISION_PACKAGE.csv`
 C2a validator-blocked dependency graph dry-run: `docs/archive/DOCS_ARCHIVE_C2A_VALIDATOR_BLOCKED_DEPENDENCY_GRAPH_DRY_RUN.md`
 C2a validator-blocked dependency graph CSV: `docs/archive/DOCS_ARCHIVE_C2A_VALIDATOR_BLOCKED_DEPENDENCY_GRAPH_DRY_RUN.csv`
+C2b validator-blocked strategy package: `docs/archive/DOCS_ARCHIVE_C2B_VALIDATOR_BLOCKED_STRATEGY_PACKAGE.md`
+C2b validator-blocked strategy package CSV: `docs/archive/DOCS_ARCHIVE_C2B_VALIDATOR_BLOCKED_STRATEGY_PACKAGE.csv`
 
 This manifest records proposed future archive targets for historical `docs/` records. It is not a file-move authorization.
 

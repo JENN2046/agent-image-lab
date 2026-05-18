@@ -6,11 +6,27 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current C2b Validator-Blocked Strategy Package
+
+```text
+Current archive task: c2b_validator_blocked_strategy_package.
+Status: completed validated pending commit.
+Purpose: classify validator-blocked records into compatibility strategy buckets without movement or validator changes.
+Strategy package: docs/archive/DOCS_ARCHIVE_C2B_VALIDATOR_BLOCKED_STRATEGY_PACKAGE.md.
+Strategy CSV: docs/archive/DOCS_ARCHIVE_C2B_VALIDATOR_BLOCKED_STRATEGY_PACKAGE.csv.
+Records classified: 423.
+Movement allowed now: false.
+Recommended next: validate and commit C2b, then produce final project organization checkpoint.
+Not allowed now: file movement, validator behavior changes, wrappers, push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
+```
+
+---
+
 ## Current C2a Validator-Blocked Dependency Graph Dry Run
 
 ```text
 Current archive task: c2a_validator_blocked_dependency_graph_dry_run.
-Status: completed validated pending commit.
+Status: completed validated committed.
 Purpose: scan 423 validator-blocked records for live scripts/tests dependencies before any movement or validator strategy.
 Dependency graph: docs/archive/DOCS_ARCHIVE_C2A_VALIDATOR_BLOCKED_DEPENDENCY_GRAPH_DRY_RUN.md.
 Dependency CSV: docs/archive/DOCS_ARCHIVE_C2A_VALIDATOR_BLOCKED_DEPENDENCY_GRAPH_DRY_RUN.csv.
@@ -18,7 +34,7 @@ Scripts and tests dependencies: 192.
 Scripts-only dependencies: 197.
 Tests-only dependencies: 34.
 Stale or non-live dependencies: 0.
-Recommended next: validate and commit C2a, then prepare C2b validator-blocked strategy package.
+Recommended next: prepare C2b validator-blocked strategy package.
 Not allowed now: file movement, validator behavior changes, push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
 ```
 

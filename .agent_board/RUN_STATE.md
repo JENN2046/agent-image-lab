@@ -1,10 +1,31 @@
 # RUN_STATE.md — Agent Image Lab
 
+## C2b Validator-Blocked Strategy Package
+
+```yaml
+phase: c2b_validator_blocked_strategy_package
+status: completed_validated_pending_commit
+mode: A4.8_safe_local_docs_only_strategy_package
+goal: classify validator-blocked records into compatibility strategy buckets without movement or validator changes
+evidence:
+  strategy_package: docs/archive/DOCS_ARCHIVE_C2B_VALIDATOR_BLOCKED_STRATEGY_PACKAGE.md
+  strategy_csv: docs/archive/DOCS_ARCHIVE_C2B_VALIDATOR_BLOCKED_STRATEGY_PACKAGE.csv
+result:
+  records_classified: 423
+  movement_allowed_now: false
+  validator_behavior_changed: false
+  wrappers_created: false
+decision:
+  validation_ready: true
+  push_allowed_now: false
+  recommended_next: final_project_organization_checkpoint
+```
+
 ## C2a Validator-Blocked Dependency Graph Dry Run
 
 ```yaml
 phase: c2a_validator_blocked_dependency_graph_dry_run
-status: completed_validated_pending_commit
+status: completed_validated_committed
 mode: A4.8_safe_local_docs_only_read_only_dependency_graph
 goal: scan validator-blocked records for live scripts/tests dependencies before any movement or validator strategy
 evidence:
