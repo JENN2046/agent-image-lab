@@ -49,7 +49,7 @@ source_chain:
   static_walkthrough: docs/product_image_workflow_static_walkthrough.md
   authorization_draft: docs/product_image_generation_authorization_draft.md
   authorization_draft_review: docs/product_image_generation_authorization_draft_review.md
-  generation_plan_blueprint: docs/v7_181_generation_plan_package_blueprint_gate.md
+  generation_plan_blueprint: docs/archive/phases/v7/v7_181_generation_plan_package_blueprint_gate.md
 ```
 
 ## Plan Scope

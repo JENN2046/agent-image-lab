@@ -45,12 +45,12 @@ This patch only adds the base URL to the A5 request text draft. It does not subm
 
 | File | Action |
 |------|--------|
-| `docs/v7_58j_memory_overview_independent_A5_request_text.md` | patched — added `target_identity`, changed URL to full endpoint |
-| `docs/v7_58j_memory_overview_independent_A5_request_text.yaml` | patched — added `target_identity` with `base_url_locked: true` |
-| `docs/v7_58j_memory_overview_A5_request_pre_submission_checklist.md` | patched — added 3 base URL checks |
-| `docs/v7_58l_memory_overview_base_url_patch.md` | created |
-| `docs/v7_58l_memory_overview_base_url_patch.yaml` | created |
-| `docs/v7_58l_memory_overview_base_url_patch_closeout.md` | created |
-| `docs/v7_58l_memory_overview_base_url_patch_closeout.yaml` | created |
+| `docs/archive/phases/v7/v7_58j_memory_overview_independent_A5_request_text.md` | patched — added `target_identity`, changed URL to full endpoint |
+| `docs/archive/phases/v7/v7_58j_memory_overview_independent_A5_request_text.yaml` | patched — added `target_identity` with `base_url_locked: true` |
+| `docs/archive/phases/v7/v7_58j_memory_overview_A5_request_pre_submission_checklist.md` | patched — added 3 base URL checks |
+| `docs/archive/phases/v7/v7_58l_memory_overview_base_url_patch.md` | created |
+| `docs/archive/phases/v7/v7_58l_memory_overview_base_url_patch.yaml` | created |
+| `docs/archive/phases/v7/v7_58l_memory_overview_base_url_patch_closeout.md` | created |
+| `docs/archive/phases/v7/v7_58l_memory_overview_base_url_patch_closeout.yaml` | created |
 | `README.md` | updated |
 | `.agent_board/CHECKPOINT.md` | updated |

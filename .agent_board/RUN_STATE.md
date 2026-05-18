@@ -1,5 +1,159 @@
 # RUN_STATE.md — Agent Image Lab
 
+## C1q/C1r Exact Move And Post-Move Validation
+
+```yaml
+phase: c1q_c1r_exact_move_and_post_move_validation
+status: completed_validated
+mode: A4.8_safe_local_docs_only_exact_move_and_post_move_validation
+goal: move 67 docs-only-reference candidates and verify post-move reference state
+move_record: docs/archive/DOCS_ARCHIVE_C1Q_EXACT_MOVE_EXECUTION_RECORD.md
+post_move_map: docs/archive/DOCS_ARCHIVE_C1R_POST_MOVE_REFERENCE_MAP.md
+move:
+  c1k_pairs: 65
+  drift_pairs: 2
+  total_pairs: 67
+  created_parent_dirs: 1
+  created_parent_dir: docs/archive/phases/v6
+  moved_files: 67
+  source_paths_still_existing: 0
+  destination_files_missing: 0
+post_move_scan:
+  old_path_hit_records: 394
+  old_path_hits: 508
+  archive_only_hit_records: 394
+  operational_hits_scripts_tests: 0
+  authority_navigation_hits: 0
+  agent_board_hits: 0
+  non_archive_docs_hits: 0
+  production_other_non_archive_hits: 0
+  production_plan_one_line_repair_authorized_by_jenn: true
+validator_scope_update:
+  validator: scripts/validate_mvp.ps1
+  exact_file_allowed: production/plans/french_summer_rattan_bag_v3_production_candidate_001_plan.yaml
+decision:
+  c1s_commit_readiness_ready: true
+  scope_decision_required: false
+  push_allowed_now: false
+  recommended_next: c1s_exact_file_commit_readiness_audit
+```
+
+## C1s Exact-File Commit Readiness Audit
+
+```yaml
+phase: c1s_exact_file_commit_readiness_audit
+status: completed_validated
+mode: A4.8_safe_local_commit_readiness_audit_only
+goal: confirm C1n-C1r archive migration changes are ready for exact-file staging and guarded local commit
+readiness_audit: docs/archive/DOCS_ARCHIVE_C1S_EXACT_FILE_COMMIT_READINESS_AUDIT.md
+repo_reality:
+  branch: master
+  upstream: origin/master
+  ahead_behind_before_audit: 0/0
+  staged_files_before_audit: 0
+commit_readiness:
+  exact_staging_dry_run_paths_before_audit_file: 171
+  tracked_modified_deleted_paths_before_audit_file: 99
+  untracked_archive_report_paths_before_audit_file: 72
+  exact_staging_preview_passed: true
+decision:
+  ready_for_exact_file_staging: true
+  ready_for_guarded_local_commit: true
+  push_allowed_now: false
+  recommended_next: exact_file_staging_plus_guarded_local_commit
+```
+
+## C1p Post-Rewrite Reference Map
+
+```yaml
+phase: c1p_post_rewrite_reference_map
+status: completed_validated
+mode: A4.8_safe_local_docs_only_reference_map
+goal: verify C1o post-rewrite old-path reference state before 67-candidate move
+reference_map: docs/archive/DOCS_ARCHIVE_C1P_POST_REWRITE_REFERENCE_MAP.md
+scan:
+  c1k_targets: 65
+  zero_reference_drift_candidates: 2
+  total_move_candidates: 67
+  non_archive_docs_scanned: 788
+  source_allowlist_old_path_hits: 0
+  non_self_old_path_hit_records: 0
+  non_self_old_path_hits: 0
+  target_self_reference_hit_records: 3
+  target_self_reference_hits: 9
+move_readiness:
+  missing_current_sources: 0
+  existing_archive_destinations: 0
+  missing_destination_parent_directories: 1
+  missing_destination_parent: docs/archive/phases/v6
+decision:
+  c1q_c1r_exact_move_ready: true
+  push_allowed_now: false
+  recommended_next: c1q_c1r_exact_file_physical_move_plus_post_move_validation
+```
+
+## C1o Docs-Only Reference Exact Rewrite Execution
+
+```yaml
+phase: c1o_docs_only_reference_exact_rewrite_execution
+status: completed_validated
+mode: A4.8_safe_local_docs_only_exact_rewrite_execution
+goal: rewrite C1 docs-only-reference source docs from old docs paths to archive paths
+execution_record: docs/archive/DOCS_ARCHIVE_C1O_REWRITE_EXECUTION_RECORD.md
+source_package: docs/archive/DOCS_ARCHIVE_C1K_DOCS_ONLY_REFERENCE_REWRITE_AUTHORIZATION_PACKAGE_DRY_RUN.md
+preflight: docs/archive/DOCS_ARCHIVE_C1N_REWRITE_EXECUTION_PREFLIGHT.md
+rewrite:
+  source_docs_allowlist: 29
+  replacement_rules: 65
+  changed_source_docs: 29
+  exact_replacements_performed: 100
+  source_old_path_hits_after: 0
+  source_archive_path_hits_after: 100
+  outside_source_allowlist_changes: 0
+decision:
+  c1p_post_rewrite_reference_map_ready: true
+  physical_move_allowed_now: false
+  push_allowed_now: false
+  recommended_next: c1p_post_rewrite_reference_map
+```
+
+## C1n Rewrite Execution Preflight
+
+```yaml
+phase: c1n_rewrite_execution_preflight
+status: completed_pass_with_warnings
+mode: A4.8_safe_local_docs_only_rewrite_preflight
+goal: refresh C1k rewrite package before C1o exact rewrite execution
+preflight_report: docs/archive/DOCS_ARCHIVE_C1N_REWRITE_EXECUTION_PREFLIGHT.md
+source_package: docs/archive/DOCS_ARCHIVE_C1K_DOCS_ONLY_REFERENCE_REWRITE_AUTHORIZATION_PACKAGE_DRY_RUN.md
+repo_reality:
+  branch: master
+  upstream: origin/master
+  ahead_behind_before_c1n: 0/0
+  staged_files_before_c1n: 0
+scan:
+  source_docs_allowlist: 29
+  replacement_rules: 65
+  missing_source_docs: 0
+  missing_old_target_files: 0
+  existing_archive_destinations: 0
+  non_archive_docs_scanned: 788
+  allowlist_hit_records: 98
+  allowlist_replacement_hits: 100
+  outside_non_archive_hit_records: 3
+  outside_non_archive_hit_total: 9
+  archive_planning_audit_hit_total: 466
+warnings:
+  c1k_expected_hits: 98
+  current_exact_source_hits: 100
+  target_self_reference_hits_deferred_to_move: 9
+decision:
+  c1o_allowed_under_narrowed_guard: true
+  physical_move_allowed_now: false
+  push_allowed_now: false
+  recommended_next: c1o_docs_only_reference_exact_rewrite_execution
+```
+
 ## C1l Exact-File Commit Readiness Audit
 
 ```yaml

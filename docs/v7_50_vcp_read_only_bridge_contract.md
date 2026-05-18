@@ -54,15 +54,15 @@ vcp_read_only_bridge_response:
 
 - README canonical state
 - `.agent_board/CHECKPOINT.md` latest checkpoint
-- `docs/v7_44_french_summer_rattan_bag_v3_closeout_production_readiness.md`
-- `docs/v7_45_french_summer_rattan_bag_v3_production_usage_sop.md`
-- `docs/v7_46_french_summer_rattan_bag_v3_one_shot_a5_template.md`
-- `docs/v7_47_french_summer_rattan_bag_v3_human_review_checklist.md`
-- `docs/v7_48_project_state_sync_pack.md`
-- `docs/v7_49_vcp_integration_readiness_pack.md`
+- `docs/archive/phases/v7/v7_44_french_summer_rattan_bag_v3_closeout_production_readiness.md`
+- `docs/archive/phases/v7/v7_45_french_summer_rattan_bag_v3_production_usage_sop.md`
+- `docs/archive/phases/v7/v7_46_french_summer_rattan_bag_v3_one_shot_a5_template.md`
+- `docs/archive/phases/v7/v7_47_french_summer_rattan_bag_v3_human_review_checklist.md`
+- `docs/archive/phases/v7/v7_48_project_state_sync_pack.md`
+- `docs/archive/phases/v7/v7_49_vcp_integration_readiness_pack.md`
 - `docs/v7_49_vcp_memory_write_boundary_spec.md`
-- `docs/v7_49_vcp_case_summary_schema.md`
-- `docs/v7_49_vcp_integration_execution_roadmap.md`
+- `docs/archive/phases/v7/v7_49_vcp_case_summary_schema.md`
+- `docs/archive/phases/v7/v7_49_vcp_integration_execution_roadmap.md`
 
 ## 5. Forbidden Read Resources
 

@@ -115,7 +115,7 @@ Phase v7.168 Post-Closeout Code Surface Review identified:
 - `scripts/validate_v6_8_plugin_dashboard.js`
 
 **Allowed new files:**
-- `docs/v6_8_plugin_dashboard_legacy_index.md`
+- `docs/archive/phases/v6/v6_8_plugin_dashboard_legacy_index.md`
 
 **Target state:**
 - docs/245 and docs/246: add `historical / reference-only` banner (matching docs/244 format)

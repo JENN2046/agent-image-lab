@@ -39,13 +39,13 @@ gate_scope:
 
 | # | File | Reason |
 |---|------|--------|
-| 1 | `docs/v7_139_batch_001_final_rescan_execution_closeout.md` | closeoutIntegrity violations |
-| 2 | `docs/v7_139_batch_001_final_rescan_execution_closeout.yaml` | closeoutIntegrity violations |
-| 3 | `docs/v7_138_batch_001_final_rescan_authorization_gate.md` | closeoutIntegrity violations |
-| 4 | `docs/v7_138_batch_001_final_rescan_authorization_gate.yaml` | closeoutIntegrity violations |
-| 5 | `docs/v7_136_batch_001_residual_correction_implementation_gate.md` | closeoutIntegrity violations |
-| 6 | `docs/v7_136_batch_001_residual_correction_implementation_gate.yaml` | closeoutIntegrity violations |
-| 7 | `docs/v7_135_batch_001_residual_correction_planning.md` | closeoutIntegrity violations |
+| 1 | `docs/archive/phases/v7/v7_139_batch_001_final_rescan_execution_closeout.md` | closeoutIntegrity violations |
+| 2 | `docs/archive/phases/v7/v7_139_batch_001_final_rescan_execution_closeout.yaml` | closeoutIntegrity violations |
+| 3 | `docs/archive/phases/v7/v7_138_batch_001_final_rescan_authorization_gate.md` | closeoutIntegrity violations |
+| 4 | `docs/archive/phases/v7/v7_138_batch_001_final_rescan_authorization_gate.yaml` | closeoutIntegrity violations |
+| 5 | `docs/archive/phases/v7/v7_136_batch_001_residual_correction_implementation_gate.md` | closeoutIntegrity violations |
+| 6 | `docs/archive/phases/v7/v7_136_batch_001_residual_correction_implementation_gate.yaml` | closeoutIntegrity violations |
+| 7 | `docs/archive/phases/v7/v7_135_batch_001_residual_correction_planning.md` | closeoutIntegrity violations |
 
 ---
 

@@ -29,13 +29,13 @@ gate_scope:
 
 | # | File |
 |---|------|
-| 1 | `docs/v7_139_batch_001_final_rescan_execution_closeout.md` |
-| 2 | `docs/v7_139_batch_001_final_rescan_execution_closeout.yaml` |
-| 3 | `docs/v7_138_batch_001_final_rescan_authorization_gate.md` |
-| 4 | `docs/v7_138_batch_001_final_rescan_authorization_gate.yaml` |
-| 5 | `docs/v7_136_batch_001_residual_correction_implementation_gate.md` |
-| 6 | `docs/v7_136_batch_001_residual_correction_implementation_gate.yaml` |
-| 7 | `docs/v7_135_batch_001_residual_correction_planning.md` |
+| 1 | `docs/archive/phases/v7/v7_139_batch_001_final_rescan_execution_closeout.md` |
+| 2 | `docs/archive/phases/v7/v7_139_batch_001_final_rescan_execution_closeout.yaml` |
+| 3 | `docs/archive/phases/v7/v7_138_batch_001_final_rescan_authorization_gate.md` |
+| 4 | `docs/archive/phases/v7/v7_138_batch_001_final_rescan_authorization_gate.yaml` |
+| 5 | `docs/archive/phases/v7/v7_136_batch_001_residual_correction_implementation_gate.md` |
+| 6 | `docs/archive/phases/v7/v7_136_batch_001_residual_correction_implementation_gate.yaml` |
+| 7 | `docs/archive/phases/v7/v7_135_batch_001_residual_correction_planning.md` |
 
 ---
 

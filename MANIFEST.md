@@ -68,7 +68,7 @@
 - v6.9A Release Panel Draft Surface：Release Panel 面板实现。`docs/248_v6_9a_release_panel_draft_surface.md`，validator `scripts/validate_v6_9a_release_panel_draft_surface.js`（17 checks）
 - v6.9B Release Panel Guard Hardening：runtime_guard 新增 `v6ReleaseReadinessIsSafe()`。`docs/249_v6_9b_release_panel_guard_hardening.md`，validator `scripts/validate_v6_9b_release_panel_guard_hardening.js`（12 checks）
 - v6.10 Product Runtime RC Readiness Matrix：全模块验收矩阵。`docs/250_v6_10_product_runtime_rc_readiness_matrix.md`，validator `scripts/validate_v6_10_product_runtime_rc_readiness_matrix.js`（8 checks）
-- Validator Quality Gate：v6 validators 质量 meta 检查。`docs/251_v6_validator_quality_gate.md`，validator `scripts/validate_v6_validator_quality_gate.js`（8 checks）
+- Validator Quality Gate：v6 validators 质量 meta 检查。`docs/archive/numbered_legacy/251_v6_validator_quality_gate.md`，validator `scripts/validate_v6_validator_quality_gate.js`（8 checks）
 - v6 Operator Runbook + Resume Capsule：运维手册与续跑胶囊。`docs/252_v6_product_runtime_operator_runbook.md` + `docs/253_v6_10_resume_capsule.md`，validator `scripts/validate_v6_operator_runbook_and_resume_capsule.js`（14 checks）
 - v7.0 Real Production Landing Preflight：真实生产落地预案 + A5 授权包模板。`docs/254_v7_0_real_production_landing_preflight.md` + `docs/255_v7_0_a5_single_generation_authorization_template.md`，validator `scripts/validate_v7_0_real_production_landing_preflight.js`（20 checks）
 - v7.1 Single Real Generation Controlled Run Package：单次真实生成受控运行包。`docs/256_v7_1_single_real_generation_controlled_run_package.md`，validator `scripts/validate_v7_1_single_real_generation_controlled_run_package.js`（13 checks）

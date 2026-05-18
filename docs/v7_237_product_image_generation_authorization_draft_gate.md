@@ -39,7 +39,7 @@ The draft is authorization paperwork only. It is not approval, activation, execu
 ```yaml
 source_chain:
   readiness_review: docs/product_image_workflow_A5_readiness_review.md
-  authorization_blueprint: docs/v7_182_generation_authorization_package_blueprint_gate.md
+  authorization_blueprint: docs/archive/phases/v7/v7_182_generation_authorization_package_blueprint_gate.md
   prompt_package_ref: PPI-20260512-matte-ceramic-mug-001
   synthetic_brief_ref: SYNBRIEF-20260512-001
   static_walkthrough: docs/product_image_workflow_static_walkthrough.md

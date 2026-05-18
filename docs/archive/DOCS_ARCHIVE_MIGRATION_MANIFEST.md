@@ -23,6 +23,11 @@ C1i docs-only-reference link graph dry-run: `docs/archive/DOCS_ARCHIVE_C1I_DOCS_
 C1j docs-only-reference rewrite package dry-run: `docs/archive/DOCS_ARCHIVE_C1J_DOCS_ONLY_REFERENCE_REWRITE_PACKAGE_DRY_RUN.md`
 C1k docs-only-reference rewrite authorization package dry-run: `docs/archive/DOCS_ARCHIVE_C1K_DOCS_ONLY_REFERENCE_REWRITE_AUTHORIZATION_PACKAGE_DRY_RUN.md`
 C1l exact-file commit readiness audit: `docs/archive/DOCS_ARCHIVE_C1L_EXACT_FILE_COMMIT_READINESS_AUDIT.md`
+C1n rewrite execution preflight: `docs/archive/DOCS_ARCHIVE_C1N_REWRITE_EXECUTION_PREFLIGHT.md`
+C1o docs-only-reference exact rewrite execution record: `docs/archive/DOCS_ARCHIVE_C1O_REWRITE_EXECUTION_RECORD.md`
+C1p post-rewrite reference map: `docs/archive/DOCS_ARCHIVE_C1P_POST_REWRITE_REFERENCE_MAP.md`
+C1q exact-move execution record: `docs/archive/DOCS_ARCHIVE_C1Q_EXACT_MOVE_EXECUTION_RECORD.md`
+C1r post-move reference map: `docs/archive/DOCS_ARCHIVE_C1R_POST_MOVE_REFERENCE_MAP.md`
 
 This manifest records proposed future archive targets for historical `docs/` records. It is not a file-move authorization.
 

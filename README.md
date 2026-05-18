@@ -30,6 +30,11 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 - `docs/archive/DOCS_ARCHIVE_C1J_DOCS_ONLY_REFERENCE_REWRITE_PACKAGE_DRY_RUN.md` 记录 docs-only-reference 改写包 dry-run；它锁定 29 个 source docs 和 65 条 target replacement rules，但不执行改写。
 - `docs/archive/DOCS_ARCHIVE_C1K_DOCS_ONLY_REFERENCE_REWRITE_AUTHORIZATION_PACKAGE_DRY_RUN.md` 记录 C1k 改写执行授权包 dry-run；它给出 29 个 source docs、65 条 replacement rules、预检/后检和未来精确批准语句，但不执行改写。
 - `docs/archive/DOCS_ARCHIVE_C1L_EXACT_FILE_COMMIT_READINESS_AUDIT.md` 记录 C1h-C1k 当前未提交改动的 exact-file commit readiness 审计；它确认 12 个精确路径可进入后续授权 staging/commit，但不执行 staging/commit/push。
+- `docs/archive/DOCS_ARCHIVE_C1N_REWRITE_EXECUTION_PREFLIGHT.md` 记录 C1n 改写执行预检；它确认 29 个 source docs、65 条规则当前可执行，并把 target self-reference hits 延后到 C1q/C1r 处理。
+- `docs/archive/DOCS_ARCHIVE_C1O_REWRITE_EXECUTION_RECORD.md` 记录 C1o exact rewrite 执行；它在 29 个 source docs 中完成 100 次精确替换，不移动文件、不创建 wrappers。
+- `docs/archive/DOCS_ARCHIVE_C1P_POST_REWRITE_REFERENCE_MAP.md` 记录 C1p post-rewrite 引用图；它确认 source docs 旧路径归零，剩余非 archive 命中仅为 3 个待移动目标文件的 self-reference。
+- `docs/archive/DOCS_ARCHIVE_C1Q_EXACT_MOVE_EXECUTION_RECORD.md` 记录 C1q 67 个 docs-only-reference candidates 的 exact-file physical move 执行。
+- `docs/archive/DOCS_ARCHIVE_C1R_POST_MOVE_REFERENCE_MAP.md` 记录 C1r post-move 引用图；它确认旧路径命中只剩 `docs/archive/` 内历史审计/规划记录。
 - `asset_archive/accepted_samples/<sample_id>/manifest.json + preview.webp` 是新的 accepted sample portable evidence capsule 目标路径。
 - 历史 `docs/v*` 阶段记录、旧 closeout、旧 authorization 草案是审计记录，不等于当前授权。
 - 未经明确 A5 授权，不要运行 provider/plugin/API/image generation/DailyNote/VCP memory/runtime/push/tag/release/deploy 相关入口。

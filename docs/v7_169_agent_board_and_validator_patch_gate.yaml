@@ -41,7 +41,7 @@ v7_169_agent_board_and_validator_patch_gate:
           - docs/246_v6_8b_plugin_dashboard_guard_hardening.md
           - scripts/validate_v6_8_plugin_dashboard.js
         allowed_new:
-          - docs/v6_8_plugin_dashboard_legacy_index.md
+          - docs/archive/phases/v6/v6_8_plugin_dashboard_legacy_index.md
         target: historical banners + legacy index
     - scope_5_board_freshness_gate:
         allowed_files:

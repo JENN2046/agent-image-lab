@@ -32,7 +32,7 @@ current_state:
   reviewed_artifact: review_console/static_mockups/v7_206_static_review_console_mockup.html
   source_spec: docs/v7_205_static_review_console_mockup_spec_gate.md
   file_gate: docs/v7_206_static_review_console_mockup_file_gate.md
-  review_index_gate: docs/v7_207_static_mockup_review_and_index_gate.md
+  review_index_gate: docs/archive/phases/v7/v7_207_static_mockup_review_and_index_gate.md
   artifact_status: standalone_static_html
   index_status: indexed_in_README_and_roadmap
 ```

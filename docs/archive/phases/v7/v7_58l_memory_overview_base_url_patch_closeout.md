@@ -8,13 +8,13 @@ Phase v7.58l completed as a docs-only base URL lock patch for the v7.58j A5 requ
 
 | File | Action |
 |------|--------|
-| `docs/v7_58j_memory_overview_independent_A5_request_text.md` | patched |
-| `docs/v7_58j_memory_overview_independent_A5_request_text.yaml` | patched |
-| `docs/v7_58j_memory_overview_A5_request_pre_submission_checklist.md` | patched |
-| `docs/v7_58l_memory_overview_base_url_patch.md` | created |
-| `docs/v7_58l_memory_overview_base_url_patch.yaml` | created |
-| `docs/v7_58l_memory_overview_base_url_patch_closeout.md` | created |
-| `docs/v7_58l_memory_overview_base_url_patch_closeout.yaml` | created |
+| `docs/archive/phases/v7/v7_58j_memory_overview_independent_A5_request_text.md` | patched |
+| `docs/archive/phases/v7/v7_58j_memory_overview_independent_A5_request_text.yaml` | patched |
+| `docs/archive/phases/v7/v7_58j_memory_overview_A5_request_pre_submission_checklist.md` | patched |
+| `docs/archive/phases/v7/v7_58l_memory_overview_base_url_patch.md` | created |
+| `docs/archive/phases/v7/v7_58l_memory_overview_base_url_patch.yaml` | created |
+| `docs/archive/phases/v7/v7_58l_memory_overview_base_url_patch_closeout.md` | created |
+| `docs/archive/phases/v7/v7_58l_memory_overview_base_url_patch_closeout.yaml` | created |
 | `README.md` | updated |
 | `.agent_board/CHECKPOINT.md` | updated |
 

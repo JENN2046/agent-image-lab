@@ -51,7 +51,7 @@ next_real_generation_requires_independent_a5: true
 - **不自动生成生产图** — 每次真实生成需独立 A5 授权
 - **不自动写 DailyNote / VCP memory** — 需独立授权
 - **不自动 push/tag/release** — 需独立授权
-- **任何真实生成必须用独立 A5** — 使用 `docs/v7_46_french_summer_rattan_bag_v3_one_shot_a5_template.md`
+- **任何真实生成必须用独立 A5** — 使用 `docs/archive/phases/v7/v7_46_french_summer_rattan_bag_v3_one_shot_a5_template.md`
 
 ## 5. Next Allowed Work
 
@@ -77,7 +77,7 @@ next_real_generation_requires_independent_a5: true
 
 - Prompt package: `prompts/image_generation/product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3.yaml`
 - Stability plan: `stability_tests/plans/french_summer_rattan_bag_v3_support_logic_dry_run_stability_plan.yaml`
-- A5 template: `docs/v7_46_french_summer_rattan_bag_v3_one_shot_a5_template.md`
-- Review checklist: `docs/v7_47_french_summer_rattan_bag_v3_human_review_checklist.md`
-- Production SOP: `docs/v7_45_french_summer_rattan_bag_v3_production_usage_sop.md`
-- Closeout: `docs/v7_44_french_summer_rattan_bag_v3_closeout_production_readiness.md`
+- A5 template: `docs/archive/phases/v7/v7_46_french_summer_rattan_bag_v3_one_shot_a5_template.md`
+- Review checklist: `docs/archive/phases/v7/v7_47_french_summer_rattan_bag_v3_human_review_checklist.md`
+- Production SOP: `docs/archive/phases/v7/v7_45_french_summer_rattan_bag_v3_production_usage_sop.md`
+- Closeout: `docs/archive/phases/v7/v7_44_french_summer_rattan_bag_v3_closeout_production_readiness.md`

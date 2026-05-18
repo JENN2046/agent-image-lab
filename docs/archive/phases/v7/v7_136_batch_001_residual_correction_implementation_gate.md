@@ -40,7 +40,7 @@ gate_scope:
 
 | # | File |
 |---|------|
-| 5 | `docs/v7_126_selected_docs_rescan_execution_closeout.yaml` |
+| 5 | `docs/archive/phases/v7/v7_126_selected_docs_rescan_execution_closeout.yaml` |
 
 ---
 

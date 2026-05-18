@@ -31,7 +31,7 @@
 - `scripts/validate_agent_image_lab_read_only_adapter_security_gates.js`
 - `scripts/validate_agent_image_lab_read_only_adapter_fixtures.js`
 - `docs/v7_51j_adapter_pro_review_findings_patch_report.md` (new)
-- `docs/v7_51j_adapter_pro_review_findings_patch_result.yaml` (new)
+- `docs/archive/phases/v7/v7_51j_adapter_pro_review_findings_patch_result.yaml` (new)
 - `README.md`
 - `.agent_board/CHECKPOINT.md`
 

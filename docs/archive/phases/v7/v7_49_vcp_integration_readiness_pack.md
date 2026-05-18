@@ -34,7 +34,7 @@ Agent Image Lab 在 VCP 生态中的位置分为 4 层：
 
 - 将 repository evidence 收束为结构化 case_summary
 - 供 VCP memory 写入前做最终内容确认
-- 定义见 `docs/v7_49_vcp_case_summary_schema.md`
+- 定义见 `docs/archive/phases/v7/v7_49_vcp_case_summary_schema.md`
 
 ### Layer 3: VCP Memory Candidate Layer
 

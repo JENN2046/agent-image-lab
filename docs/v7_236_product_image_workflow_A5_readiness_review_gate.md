@@ -59,7 +59,7 @@ reviewed_inputs:
   delivery_review_surface_package: docs/delivery_review_surface_package.md
   workflow_runbook: docs/product_image_workflow_runbook.md
   static_walkthrough: docs/product_image_workflow_static_walkthrough.md
-  authorization_blueprint: docs/v7_182_generation_authorization_package_blueprint_gate.md
+  authorization_blueprint: docs/archive/phases/v7/v7_182_generation_authorization_package_blueprint_gate.md
 ```
 
 ## Readiness Matrix

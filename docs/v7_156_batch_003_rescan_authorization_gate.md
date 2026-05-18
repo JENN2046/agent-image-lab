@@ -29,13 +29,13 @@ gate_scope:
 
 | # | File |
 |---|------|
-| 1 | `docs/v7_148_batch_002_rescan_execution_closeout.md` |
+| 1 | `docs/archive/phases/v7/v7_148_batch_002_rescan_execution_closeout.md` |
 | 2 | `docs/v7_148_batch_002_rescan_execution_closeout.yaml` |
 | 3 | `docs/v7_147_batch_002_rescan_authorization_gate.md` |
-| 4 | `docs/v7_147_batch_002_rescan_authorization_gate.yaml` |
+| 4 | `docs/archive/phases/v7/v7_147_batch_002_rescan_authorization_gate.yaml` |
 | 5 | `docs/v7_145_batch_002_correction_implementation_gate.md` |
-| 6 | `docs/v7_145_batch_002_correction_implementation_gate.yaml` |
-| 7 | `docs/v7_144_batch_002_permission_drift_analysis.md` |
+| 6 | `docs/archive/phases/v7/v7_145_batch_002_correction_implementation_gate.yaml` |
+| 7 | `docs/archive/phases/v7/v7_144_batch_002_permission_drift_analysis.md` |
 
 ---
 

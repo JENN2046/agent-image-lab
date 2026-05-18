@@ -6,6 +6,103 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current C1q/C1r Exact Move And Post-Move Validation
+
+```text
+Current archive task: c1q_c1r_exact_move_and_post_move_validation.
+Status: completed validated.
+Purpose: move 67 docs-only-reference candidates and verify post-move reference state.
+Move record: docs/archive/DOCS_ARCHIVE_C1Q_EXACT_MOVE_EXECUTION_RECORD.md.
+Post-move map: docs/archive/DOCS_ARCHIVE_C1R_POST_MOVE_REFERENCE_MAP.md.
+Moved files: 67.
+Source paths still existing: 0.
+Destination files missing: 0.
+Old-path hits outside docs/archive: 0 after the separately authorized one-line production plan repair.
+Decision: C1s exact-file commit readiness audit may proceed; scripts/validate_mvp.ps1 now allows only the exact authorized production plan file.
+Recommended next: C1s exact-file commit readiness audit.
+Not allowed now: push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
+```
+
+---
+
+## Current C1s Exact-File Commit Readiness Audit
+
+```text
+Current archive task: c1s_exact_file_commit_readiness_audit.
+Status: completed validated.
+Purpose: confirm C1n-C1r changes are ready for exact-file staging and guarded local commit.
+Readiness audit: docs/archive/DOCS_ARCHIVE_C1S_EXACT_FILE_COMMIT_READINESS_AUDIT.md.
+Ahead/behind before audit: 0/0.
+Staged files before audit: 0.
+Exact staging dry-run path count before C1s audit file: 171.
+Dry-run preview: passed.
+Decision: exact-file staging and guarded local commit may proceed; push remains separately blocked.
+Recommended next: exact-file staging plus guarded local commit.
+Not allowed now: push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
+```
+
+---
+
+## Current C1p Post-Rewrite Reference Map
+
+```text
+Current archive task: c1p_post_rewrite_reference_map.
+Status: completed validated.
+Purpose: verify C1o post-rewrite old-path reference state before 67-candidate move.
+Reference map: docs/archive/DOCS_ARCHIVE_C1P_POST_REWRITE_REFERENCE_MAP.md.
+Total move candidates: 67.
+Source allowlist old-path hits after C1o: 0.
+Non-self old-path hit records after C1o: 0.
+Target self-reference hits after C1o: 9 across 3 files.
+Missing current move sources: 0.
+Existing archive destinations: 0.
+Missing destination parent: docs/archive/phases/v6.
+Decision: C1q/C1r exact-file physical move plus post-move validation is ready.
+Recommended next: C1q/C1r exact-file physical move plus post-move validation.
+Not allowed now: push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
+```
+
+---
+
+## Current C1o Docs-Only Reference Exact Rewrite Execution
+
+```text
+Current archive task: c1o_docs_only_reference_exact_rewrite_execution.
+Status: completed validated.
+Purpose: rewrite C1 docs-only-reference source docs from old docs paths to archive paths.
+Execution record: docs/archive/DOCS_ARCHIVE_C1O_REWRITE_EXECUTION_RECORD.md.
+Source docs allowlist: 29.
+Replacement rules: 65.
+Changed source docs: 29.
+Exact replacements performed: 100.
+Source old path hits after rewrite: 0.
+Source archive path hits after rewrite: 100.
+Decision: C1p post-rewrite reference map is ready.
+Recommended next: C1p post-rewrite reference map.
+Not allowed now: push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
+```
+
+---
+
+## Current C1n Rewrite Execution Preflight
+
+```text
+Current archive task: c1n_rewrite_execution_preflight.
+Status: completed pass_with_warnings.
+Purpose: refresh C1k rewrite package before C1o exact rewrite execution.
+Preflight report: docs/archive/DOCS_ARCHIVE_C1N_REWRITE_EXECUTION_PREFLIGHT.md.
+Source docs allowlist: 29.
+Replacement rules: 65.
+Allowlist replacement hits: 100.
+Outside non-archive hit records: 3.
+Warning classification: outside hits are target-file self-references and deferred to C1q/C1r physical move cleanup.
+Decision: C1o may proceed with exact source-doc rewrite under narrowed guard.
+Recommended next: C1o docs-only-reference exact rewrite execution.
+Not allowed now: push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
+```
+
+---
+
 ## Current C1l Exact-File Commit Readiness Audit
 
 ```text

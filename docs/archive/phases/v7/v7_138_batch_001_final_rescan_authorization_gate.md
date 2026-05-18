@@ -30,11 +30,11 @@ gate_scope:
 | # | File |
 |---|------|
 | 1 | `docs/v7_127_controlled_long_task_chain_authorization_gate.md` |
-| 2 | `docs/v7_127_controlled_long_task_chain_authorization_gate.yaml` |
+| 2 | `docs/archive/phases/v7/v7_127_controlled_long_task_chain_authorization_gate.yaml` |
 | 3 | `docs/v7_126_selected_docs_rescan_execution_closeout.md` |
-| 4 | `docs/v7_126_selected_docs_rescan_execution_closeout.yaml` |
+| 4 | `docs/archive/phases/v7/v7_126_selected_docs_rescan_execution_closeout.yaml` |
 | 5 | `docs/v7_125_selected_docs_rescan_authorization_gate.md` |
-| 6 | `docs/v7_125_selected_docs_rescan_authorization_gate.yaml` |
+| 6 | `docs/archive/phases/v7/v7_125_selected_docs_rescan_authorization_gate.yaml` |
 | 7 | `docs/v7_123_closeout_integrity_correction_implementation_gate.md` |
 
 ---

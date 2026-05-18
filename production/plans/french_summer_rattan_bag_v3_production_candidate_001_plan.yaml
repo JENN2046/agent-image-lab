@@ -37,7 +37,7 @@ production_candidate_plan:
   review:
     planned_review_phase: v7_53
     human_review_required: true
-    review_checklist_ref: docs/v7_47_french_summer_rattan_bag_v3_human_review_checklist.md
+    review_checklist_ref: docs/archive/phases/v7/v7_47_french_summer_rattan_bag_v3_human_review_checklist.md
     allowed_asset_status:
       - accepted_candidate
       - accepted_with_minor_warning

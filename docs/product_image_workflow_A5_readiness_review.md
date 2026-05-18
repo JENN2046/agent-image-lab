@@ -52,7 +52,7 @@ evidence:
     status: present
     supports_A5_draft: true
   authorization_rules:
-    artifact: docs/v7_182_generation_authorization_package_blueprint_gate.md
+    artifact: docs/archive/phases/v7/v7_182_generation_authorization_package_blueprint_gate.md
     status: present
     supports_A5_draft: true
   runbook:

@@ -40,10 +40,10 @@ rescan_authorization:
 
 | # | File |
 |---|------|
-| 1 | `docs/v7_119_corrected_fixture_dry_run_execution_closeout.md` |
+| 1 | `docs/archive/phases/v7/v7_119_corrected_fixture_dry_run_execution_closeout.md` |
 | 2 | `docs/v7_119_corrected_fixture_dry_run_execution_closeout.yaml` |
-| 3 | `docs/v7_118_corrected_fixture_dry_run_authorization_gate.md` |
-| 4 | `docs/v7_118_corrected_fixture_dry_run_authorization_gate.yaml` |
+| 3 | `docs/archive/phases/v7/v7_118_corrected_fixture_dry_run_authorization_gate.md` |
+| 4 | `docs/archive/phases/v7/v7_118_corrected_fixture_dry_run_authorization_gate.yaml` |
 
 ---
 

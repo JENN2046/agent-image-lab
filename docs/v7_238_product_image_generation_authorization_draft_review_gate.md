@@ -43,7 +43,7 @@ enter runtime, write DailyNote, or write VCP memory.
 reviewed_inputs:
   draft: docs/product_image_generation_authorization_draft.md
   draft_gate: docs/v7_237_product_image_generation_authorization_draft_gate.md
-  authorization_blueprint: docs/v7_182_generation_authorization_package_blueprint_gate.md
+  authorization_blueprint: docs/archive/phases/v7/v7_182_generation_authorization_package_blueprint_gate.md
   readiness_review: docs/product_image_workflow_A5_readiness_review.md
 ```
 

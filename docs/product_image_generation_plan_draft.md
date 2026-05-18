@@ -29,7 +29,7 @@ source_references:
   prompt_package_review_status: approved_for_A5_authorization
   authorization_draft_ref: AUTH-DRAFT-20260512-001
   authorization_draft_status: draft
-  generation_plan_blueprint: docs/v7_181_generation_plan_package_blueprint_gate.md
+  generation_plan_blueprint: docs/archive/phases/v7/v7_181_generation_plan_package_blueprint_gate.md
 ```
 
 The synthetic prompt package review status is useful for planning only. It is

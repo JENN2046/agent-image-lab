@@ -35,9 +35,9 @@ current_state:
   source_refs:
     - README.md
     - docs/00_project_roadmap.md
-    - docs/v7_184_static_review_console_mockup_planning_gate.md
-    - docs/v7_185_core_independent_vcp_native_adr_gate.md
-    - docs/v7_186_static_review_console_mockup_alignment_gate.md
+    - docs/archive/phases/v7/v7_184_static_review_console_mockup_planning_gate.md
+    - docs/archive/phases/v7/v7_185_core_independent_vcp_native_adr_gate.md
+    - docs/archive/phases/v7/v7_186_static_review_console_mockup_alignment_gate.md
     - docs/v7_203_smart_commander_portable_release_candidate_gate.md
   smart_commander_status: portable_release_candidate_complete_support_layer
   product_mainline_status: ready_for_static_review_console_mockup_spec

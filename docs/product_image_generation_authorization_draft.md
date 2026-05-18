@@ -20,7 +20,7 @@ generation_authorization_package:
 ```yaml
 source_references:
   source_readiness_review: docs/product_image_workflow_A5_readiness_review.md
-  authorization_blueprint: docs/v7_182_generation_authorization_package_blueprint_gate.md
+  authorization_blueprint: docs/archive/phases/v7/v7_182_generation_authorization_package_blueprint_gate.md
   generation_plan_ref: GP-DRAFT-20260512-001
   generation_plan_version: v1
   generation_plan_document: docs/product_image_generation_plan_draft.md

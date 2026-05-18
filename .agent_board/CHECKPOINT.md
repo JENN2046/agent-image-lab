@@ -1,5 +1,133 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## C1q/C1r Exact Move And Post-Move Validation
+
+```yaml
+phase: c1q_c1r_exact_move_and_post_move_validation
+status: completed_validated
+goal: move 67 docs-only-reference candidates and verify post-move reference state
+completed:
+  - created exact missing parent directory docs/archive/phases/v6
+  - moved 67 exact docs-only-reference candidates
+  - confirmed source paths still existing count 0
+  - confirmed destination files missing count 0
+  - repaired 2 authority/navigation old-path links in MANIFEST.md and RELEASE_NOTES.md
+  - repaired 1 separately authorized production plan old-path link in production/plans/french_summer_rattan_bag_v3_production_candidate_001_plan.yaml
+  - scanned post-move old-path references
+  - confirmed old-path hits outside docs/archive count 0 after narrow repairs
+  - updated scripts/validate_mvp.ps1 to allow exactly production/plans/french_summer_rattan_bag_v3_production_candidate_001_plan.yaml for the authorized repair
+  - generated docs/archive/DOCS_ARCHIVE_C1Q_EXACT_MOVE_EXECUTION_RECORD.md
+  - generated docs/archive/DOCS_ARCHIVE_C1R_POST_MOVE_REFERENCE_MAP.md
+  - updated README.md and docs/archive indexes
+  - updated .agent_board HANDOFF/RUN_STATE/TASK_QUEUE/CHECKPOINT surfaces
+not_performed:
+  - no wrappers created
+  - no validator behavior changed
+  - no staging, commit, push, tag, release, or deploy
+```
+
+## C1s Exact-File Commit Readiness Audit
+
+```yaml
+phase: c1s_exact_file_commit_readiness_audit
+status: completed_validated
+goal: confirm C1n-C1r changes are ready for exact-file staging and guarded local commit
+completed:
+  - confirmed branch master is 0/0 against origin/master before audit
+  - confirmed staged files before audit count 0
+  - confirmed exact staging dry-run path count 171 before adding the C1s audit file
+  - confirmed tracked modified/deleted path count 99 before adding the C1s audit file
+  - confirmed untracked archive/report path count 72 before adding the C1s audit file
+  - confirmed git add -n -A -- exact path array passed
+  - generated docs/archive/DOCS_ARCHIVE_C1S_EXACT_FILE_COMMIT_READINESS_AUDIT.md
+not_performed:
+  - no staging
+  - no commit
+  - no push, tag, release, or deploy
+```
+
+## C1p Post-Rewrite Reference Map
+
+```yaml
+phase: c1p_post_rewrite_reference_map
+status: completed_validated
+goal: verify C1o post-rewrite old-path reference state before 67-candidate move
+completed:
+  - scanned 788 non-archive docs files
+  - confirmed 65 C1k replacement-rule targets
+  - added 2 zero-reference drift candidates
+  - confirmed total move candidate count 67
+  - confirmed source allowlist old-path hits after C1o count 0
+  - confirmed non-self old-path hit records after C1o count 0
+  - classified 9 target self-reference hits across 3 files
+  - confirmed missing current move source count 0
+  - confirmed existing archive destination count 0
+  - confirmed missing destination parent docs/archive/phases/v6
+  - generated docs/archive/DOCS_ARCHIVE_C1P_POST_REWRITE_REFERENCE_MAP.md
+  - updated README.md and docs/archive indexes
+  - updated .agent_board HANDOFF/RUN_STATE/TASK_QUEUE/CHECKPOINT surfaces
+not_performed:
+  - no docs moved
+  - no files deleted
+  - no wrappers created
+  - no validator behavior changed
+  - no staging, commit, push, tag, release, or deploy
+```
+
+## C1o Docs-Only Reference Exact Rewrite Execution
+
+```yaml
+phase: c1o_docs_only_reference_exact_rewrite_execution
+status: completed_validated
+goal: rewrite C1 docs-only-reference source docs from old docs paths to archive paths
+completed:
+  - used docs/archive/DOCS_ARCHIVE_C1K_DOCS_ONLY_REFERENCE_REWRITE_AUTHORIZATION_PACKAGE_DRY_RUN.md as rule source
+  - rewrote only the 29 source docs allowlist
+  - applied 65 exact replacement rules
+  - performed 100 exact replacements
+  - confirmed old path hits remaining in source docs count 0
+  - confirmed archive path hits in source docs after rewrite count 100
+  - generated docs/archive/DOCS_ARCHIVE_C1O_REWRITE_EXECUTION_RECORD.md
+  - updated README.md and docs/archive indexes
+  - updated .agent_board HANDOFF/RUN_STATE/TASK_QUEUE/CHECKPOINT surfaces
+not_performed:
+  - no docs moved
+  - no files deleted
+  - no wrappers created
+  - no validator behavior changed
+  - no staging, commit, push, tag, release, or deploy
+```
+
+## C1n Rewrite Execution Preflight
+
+```yaml
+phase: c1n_rewrite_execution_preflight
+status: completed_pass_with_warnings
+goal: refresh C1k rewrite package before C1o exact rewrite execution
+completed:
+  - read AGENTS.md, AGENTS.autopilot-overlay.md, and .agent_board resume surfaces
+  - confirmed master is synced with origin/master before C1n
+  - read docs/archive/DOCS_ARCHIVE_C1K_DOCS_ONLY_REFERENCE_REWRITE_AUTHORIZATION_PACKAGE_DRY_RUN.md
+  - refreshed 29 source docs allowlist
+  - refreshed 65 replacement rules
+  - confirmed missing source docs count 0
+  - confirmed missing old target files count 0
+  - confirmed existing archive destination count 0
+  - scanned 788 non-archive docs files
+  - confirmed 100 exact replacement hits inside source allowlist
+  - classified 9 outside non-archive hits as target self-reference hits deferred to C1q/C1r
+  - generated docs/archive/DOCS_ARCHIVE_C1N_REWRITE_EXECUTION_PREFLIGHT.md
+  - updated README.md and docs/archive indexes
+  - updated .agent_board HANDOFF/RUN_STATE/TASK_QUEUE/CHECKPOINT surfaces
+not_performed:
+  - no references rewritten
+  - no docs moved
+  - no files deleted
+  - no wrappers created
+  - no validator behavior changed
+  - no staging, commit, push, tag, release, or deploy
+```
+
 ## C1l Exact-File Commit Readiness Audit
 
 ```yaml

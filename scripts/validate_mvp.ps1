@@ -7700,6 +7700,7 @@ if (-not $node) {
       'README.md',
       'MANIFEST.md',
       'PROJECT_MASTER_PLAN.md',
+      'production/plans/french_summer_rattan_bag_v3_production_candidate_001_plan.yaml',
       'RELEASE_NOTES.md',
       'docs/00_project_roadmap.md',
       'tests/validation_checklist.md'

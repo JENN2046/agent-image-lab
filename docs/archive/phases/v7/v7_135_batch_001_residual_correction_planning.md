@@ -53,7 +53,7 @@ Allowed future target type: **markdown only**
 
 | Field | Affected file |
 |-------|---------------|
-| `runtime_execution`, `redacted_summary_only`, `raw_payload_recorded`, `commit_hash`, `branch`, `git_status`, `local_scope_result` | `docs/v7_126_selected_docs_rescan_execution_closeout.yaml` |
+| `runtime_execution`, `redacted_summary_only`, `raw_payload_recorded`, `commit_hash`, `branch`, `git_status`, `local_scope_result` | `docs/archive/phases/v7/v7_126_selected_docs_rescan_execution_closeout.yaml` |
 
 Note: YAML modification was not authorized in v7.132. A new explicit YAML correction gate is needed.
 
@@ -74,7 +74,7 @@ correction_strategy:
     add_field: next_phase_started: false
 
   stage_2_yaml:
-    file: docs/v7_126_selected_docs_rescan_execution_closeout.yaml
+    file: docs/archive/phases/v7/v7_126_selected_docs_rescan_execution_closeout.yaml
     add_fields:
       runtime_execution: false
       redacted_summary_only: true

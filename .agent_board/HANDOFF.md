@@ -1,5 +1,147 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — C1q/C1r Exact Move And Post-Move Validation
+
+```text
+Status: c1q_c1r_exact_move_and_post_move_validation completed_validated.
+Reason: C1p confirmed 67 candidates were ready for exact-file physical movement.
+Execution mode: A4.8 local docs-only exact-file movement and post-move validation.
+Move record: docs/archive/DOCS_ARCHIVE_C1Q_EXACT_MOVE_EXECUTION_RECORD.md.
+Post-move map: docs/archive/DOCS_ARCHIVE_C1R_POST_MOVE_REFERENCE_MAP.md.
+Move pairs: 67.
+Created parent directories: 1 (docs/archive/phases/v6).
+Moved files: 67.
+Source paths still existing after move: 0.
+Destination files missing after move: 0.
+Post-move old-path hit records: 394.
+Post-move old-path hits: 508.
+Archive-only old-path hit records: 394.
+Operational hits in scripts/tests: 0.
+Authority/navigation hits: 0.
+.agent_board hits: 0.
+Non-archive docs hits: 0.
+Production/other non-archive hits: 0.
+Narrow link repair performed: MANIFEST.md, RELEASE_NOTES.md, production/plans/french_summer_rattan_bag_v3_production_candidate_001_plan.yaml.
+Production plan one-line repair authorization: granted by Jenn after the initial C1r scope block.
+Validator scope update: scripts/validate_mvp.ps1 now allows exactly production/plans/french_summer_rattan_bag_v3_production_candidate_001_plan.yaml for this authorized repair.
+Wrappers created: false.
+Validator behavior changed: false.
+Staging/commit/push/tag/release/deploy performed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Recommended next: C1s exact-file commit readiness audit.
+```
+
+---
+
+## Current Handoff Update — C1s Exact-File Commit Readiness Audit
+
+```text
+Status: c1s_exact_file_commit_readiness_audit completed_validated.
+Reason: C1r completed after Jenn authorized the production plan one-line repair and exact MVP validator scope update.
+Execution mode: A4.8 local commit-readiness audit only.
+Readiness audit: docs/archive/DOCS_ARCHIVE_C1S_EXACT_FILE_COMMIT_READINESS_AUDIT.md.
+Branch/upstream: master / origin/master.
+Ahead/behind before audit: 0/0.
+Staged files before audit: 0.
+Exact staging dry-run path count before C1s audit file: 171.
+Tracked modified/deleted paths before C1s audit file: 99.
+Untracked archive/report paths before C1s audit file: 72.
+Dry-run preview: passed with git add -n -A -- exact path array.
+Decision: ready for exact-file staging and guarded local commit after including this C1s audit and board sync.
+Push/tag/release/deploy performed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Recommended next: exact-file staging plus guarded local commit; push remains separately blocked.
+```
+
+---
+
+## Current Handoff Update — C1p Post-Rewrite Reference Map
+
+```text
+Status: c1p_post_rewrite_reference_map completed validated.
+Reason: C1o exact rewrite completed and needed post-rewrite reference evidence before moving 67 candidates.
+Execution mode: A4.8 local docs-only reference map.
+Reference map: docs/archive/DOCS_ARCHIVE_C1P_POST_REWRITE_REFERENCE_MAP.md.
+C1k replacement-rule targets: 65.
+Zero-reference drift candidates added: 2.
+Total move candidates: 67.
+Non-archive docs scanned: 788.
+Old-path source allowlist hits after C1o: 0.
+Non-self old-path hit records after C1o: 0.
+Target self-reference hit records after C1o: 3.
+Target self-reference hits after C1o: 9.
+Missing current move sources: 0.
+Existing archive destinations: 0.
+Missing destination parent directories: 1 (docs/archive/phases/v6).
+Decision: C1q may create docs/archive/phases/v6 and execute exact-file physical move for 67 candidates.
+Docs moved by this phase: false.
+Files deleted: false.
+Wrappers created: false.
+Validator behavior changed: false.
+Staging/commit/push/tag/release/deploy performed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Recommended next: C1q/C1r exact-file physical move plus post-move validation.
+```
+
+---
+
+## Current Handoff Update — C1o Docs-Only Reference Exact Rewrite Execution
+
+```text
+Status: c1o_docs_only_reference_exact_rewrite_execution completed validated.
+Reason: C1n preflight passed with classified target self-reference warnings.
+Execution mode: A4.8 local docs-only exact rewrite execution.
+Execution record: docs/archive/DOCS_ARCHIVE_C1O_REWRITE_EXECUTION_RECORD.md.
+Source package: docs/archive/DOCS_ARCHIVE_C1K_DOCS_ONLY_REFERENCE_REWRITE_AUTHORIZATION_PACKAGE_DRY_RUN.md.
+Source docs allowlist: 29.
+Replacement rules: 65.
+Changed source docs: 29.
+Exact replacements performed: 100.
+Old path hits remaining in source docs: 0.
+Archive path hits in source docs after rewrite: 100.
+Changed files outside source allowlist and explicit status/index records: 0.
+Docs moved by this phase: false.
+Files deleted: false.
+Wrappers created: false.
+Validator behavior changed: false.
+Staging/commit/push/tag/release/deploy performed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Recommended next: C1p post-rewrite reference map.
+```
+
+---
+
+## Current Handoff Update — C1n Rewrite Execution Preflight
+
+```text
+Status: c1n_rewrite_execution_preflight completed pass_with_warnings.
+Reason: project owner set the C1n-C1t goal and allowed A4.8 local docs-only exact-file work except push.
+Execution mode: A4.8 local docs-only rewrite preflight.
+Preflight report: docs/archive/DOCS_ARCHIVE_C1N_REWRITE_EXECUTION_PREFLIGHT.md.
+Source package: docs/archive/DOCS_ARCHIVE_C1K_DOCS_ONLY_REFERENCE_REWRITE_AUTHORIZATION_PACKAGE_DRY_RUN.md.
+Branch/upstream before C1n: master / origin/master.
+Ahead/behind before C1n: 0/0.
+Source docs allowlist: 29.
+Replacement rules: 65.
+Missing source docs: 0.
+Missing old target files: 0.
+Existing archive destinations: 0.
+Allowlist replacement hits: 100.
+Outside non-archive hit records: 3.
+Outside non-archive hit total: 9.
+Warning classification: outside hits are target-file self-references and deferred to C1q/C1r physical move cleanup.
+Decision: C1o may proceed with 100 exact source-doc replacements under narrowed guard.
+Docs moved by this phase: false.
+References rewritten by this phase: false.
+Wrappers created: false.
+Validator behavior changed: false.
+Staging/commit/push/tag/release/deploy performed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Recommended next: C1o docs-only-reference exact rewrite execution.
+```
+
+---
+
 ## Current Handoff Update — C1l Exact-File Commit Readiness Audit
 
 ```text

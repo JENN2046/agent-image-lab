@@ -213,12 +213,12 @@ excluded:
 
 ```yaml
 deliverables:
-  - docs/v7_51c_read_only_bridge_adapter_implementation_planning.md
-  - docs/v7_51c_read_only_bridge_adapter_file_layout.md
-  - docs/v7_51c_read_only_bridge_adapter_error_codes.md
-  - docs/v7_51c_read_only_bridge_adapter_test_plan.md
-  - docs/v7_51c_read_only_bridge_adapter_security_gate_plan.md
-  - docs/v7_51c_read_only_bridge_adapter_implementation_plan.yaml
+  - docs/archive/phases/v7/v7_51c_read_only_bridge_adapter_implementation_planning.md
+  - docs/archive/phases/v7/v7_51c_read_only_bridge_adapter_file_layout.md
+  - docs/archive/phases/v7/v7_51c_read_only_bridge_adapter_error_codes.md
+  - docs/archive/phases/v7/v7_51c_read_only_bridge_adapter_test_plan.md
+  - docs/archive/phases/v7/v7_51c_read_only_bridge_adapter_security_gate_plan.md
+  - docs/archive/phases/v7/v7_51c_read_only_bridge_adapter_implementation_plan.yaml
   - README.md
   - .agent_board/CHECKPOINT.md
 ```
@@ -492,16 +492,16 @@ excluded:
 ```yaml
 deliverables:
   docs:
-    - docs/v7_52a_vcptoolbox_read_only_ingestion_planning.md
-    - docs/v7_52b_vcp_package_schema_mapping.md
-    - docs/v7_52c_vcptoolbox_no_write_bridge_contract.md
-    - docs/v7_52e_vcptoolbox_real_read_only_dry_run_a5_planning.md
-    - docs/v7_52f_vcptoolbox_read_only_ingestion_closeout.md
+    - docs/archive/phases/v7/v7_52a_vcptoolbox_read_only_ingestion_planning.md
+    - docs/archive/phases/v7/v7_52b_vcp_package_schema_mapping.md
+    - docs/archive/phases/v7/v7_52c_vcptoolbox_no_write_bridge_contract.md
+    - docs/archive/phases/v7/v7_52e_vcptoolbox_real_read_only_dry_run_a5_planning.md
+    - docs/archive/phases/v7/v7_52f_vcptoolbox_read_only_ingestion_closeout.md
 
   mock:
     - scripts/validate_vcptoolbox_read_only_ingestion_mock.js
-    - docs/v7_52d_vcptoolbox_mock_ingestion_validation_report.md
-    - docs/v7_52d_vcptoolbox_mock_ingestion_validation_result.yaml
+    - docs/archive/phases/v7/v7_52d_vcptoolbox_mock_ingestion_validation_report.md
+    - docs/archive/phases/v7/v7_52d_vcptoolbox_mock_ingestion_validation_result.yaml
 ```
 
 ## 完成门

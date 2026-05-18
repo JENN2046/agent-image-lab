@@ -43,6 +43,11 @@ The current authority remains:
 - `docs/archive/DOCS_ARCHIVE_C1J_DOCS_ONLY_REFERENCE_REWRITE_PACKAGE_DRY_RUN.md` records the docs-only-reference rewrite package dry-run with 29 source docs and 65 target replacement rules, without executing rewrites.
 - `docs/archive/DOCS_ARCHIVE_C1K_DOCS_ONLY_REFERENCE_REWRITE_AUTHORIZATION_PACKAGE_DRY_RUN.md` records the C1k rewrite execution authorization package dry-run, including source allowlist, replacement rules, preflight/postflight, and future exact approval text.
 - `docs/archive/DOCS_ARCHIVE_C1L_EXACT_FILE_COMMIT_READINESS_AUDIT.md` records the exact-file commit readiness audit for the current C1h-C1k route-planning changes without staging or committing.
+- `docs/archive/DOCS_ARCHIVE_C1N_REWRITE_EXECUTION_PREFLIGHT.md` records the C1n rewrite execution preflight and classifies target self-reference hits before C1o execution.
+- `docs/archive/DOCS_ARCHIVE_C1O_REWRITE_EXECUTION_RECORD.md` records the C1o exact rewrite execution across 29 source docs and 100 exact replacements.
+- `docs/archive/DOCS_ARCHIVE_C1P_POST_REWRITE_REFERENCE_MAP.md` records the post-rewrite reference map and confirms remaining non-archive old-path hits are limited to target self-references.
+- `docs/archive/DOCS_ARCHIVE_C1Q_EXACT_MOVE_EXECUTION_RECORD.md` records the C1q exact-file physical move for 67 docs-only-reference candidates.
+- `docs/archive/DOCS_ARCHIVE_C1R_POST_MOVE_REFERENCE_MAP.md` records the C1r post-move reference map and confirms remaining old-path hits are archive-only.
 
 ## Non-Authorization
 

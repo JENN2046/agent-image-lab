@@ -30,10 +30,10 @@ analysis_scope:
 | # | File examined | Purpose |
 |---|---------------|---------|
 | 1 | `tools/redaction-validator/rules/permissionDrift.js` | Rule scope and matching logic |
-| 2 | `docs/v7_135_batch_001_residual_correction_planning.yaml` | Source of non_permissions block |
-| 3 | `docs/v7_135_batch_001_residual_correction_planning.md` | Markdown version with YAML code block |
-| 4 | `docs/v7_142_batch_002_correction_planning.md` | Correction planning context |
-| 5 | `docs/v7_142_batch_002_correction_planning.yaml` | Correction planning YAML |
+| 2 | `docs/archive/phases/v7/v7_135_batch_001_residual_correction_planning.yaml` | Source of non_permissions block |
+| 3 | `docs/archive/phases/v7/v7_135_batch_001_residual_correction_planning.md` | Markdown version with YAML code block |
+| 4 | `docs/archive/phases/v7/v7_142_batch_002_correction_planning.md` | Correction planning context |
+| 5 | `docs/archive/phases/v7/v7_142_batch_002_correction_planning.yaml` | Correction planning YAML |
 
 No files were modified. Read-only analysis only.
 

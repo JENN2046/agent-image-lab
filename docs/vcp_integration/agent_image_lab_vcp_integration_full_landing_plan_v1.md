@@ -207,20 +207,20 @@ excluded:
 deliverables:
   static_surface_fixture:
     - scripts/validate_vcpchat_review_console_surface_static_fixture.js
-    - docs/v7_50d_vcpchat_review_console_surface_static_fixture_execution_report.md
+    - docs/archive/phases/v7/v7_50d_vcpchat_review_console_surface_static_fixture_execution_report.md
     - docs/v7_50d_vcpchat_review_console_surface_static_fixture_result.yaml
 
   v7_50e_planning:
     - docs/v7_50e_real_vcpchat_surface_check_planning.md
-    - docs/v7_50e_real_vcpchat_surface_check_safety_gates.md
+    - docs/archive/phases/v7/v7_50e_real_vcpchat_surface_check_safety_gates.md
 
   v7_51a_evidence_index:
-    - docs/v7_51a_agent_image_lab_read_only_evidence_index_spec.md
-    - docs/v7_51a_agent_image_lab_read_only_evidence_index.yaml
+    - docs/archive/phases/v7/v7_51a_agent_image_lab_read_only_evidence_index_spec.md
+    - docs/archive/phases/v7/v7_51a_agent_image_lab_read_only_evidence_index.yaml
 
   v7_51b_adapter_skeleton:
-    - docs/v7_51b_read_only_bridge_adapter_skeleton_plan.md
-    - docs/v7_51b_read_only_bridge_adapter_contract.yaml
+    - docs/archive/phases/v7/v7_51b_read_only_bridge_adapter_skeleton_plan.md
+    - docs/archive/phases/v7/v7_51b_read_only_bridge_adapter_contract.yaml
 
   state_files:
     - README.md
@@ -388,14 +388,14 @@ vcptoolbox_ingestion_policy:
 ```yaml
 deliverables:
   docs:
-    - docs/v7_52a_vcptoolbox_read_only_ingestion_planning.md
-    - docs/v7_52b_vcp_package_schema_mapping.md
-    - docs/v7_52c_vcptoolbox_no_write_bridge_contract.md
+    - docs/archive/phases/v7/v7_52a_vcptoolbox_read_only_ingestion_planning.md
+    - docs/archive/phases/v7/v7_52b_vcp_package_schema_mapping.md
+    - docs/archive/phases/v7/v7_52c_vcptoolbox_no_write_bridge_contract.md
 
   mock:
     - scripts/validate_vcptoolbox_read_only_ingestion_mock.js
-    - docs/v7_52d_vcptoolbox_mock_ingestion_validation_report.md
-    - docs/v7_52d_vcptoolbox_mock_ingestion_validation_result.yaml
+    - docs/archive/phases/v7/v7_52d_vcptoolbox_mock_ingestion_validation_report.md
+    - docs/archive/phases/v7/v7_52d_vcptoolbox_mock_ingestion_validation_result.yaml
 
   real_read_only:
     - docs/v7_52e_vcptoolbox_real_read_only_dry_run_a5.md
