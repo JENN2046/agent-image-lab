@@ -8,7 +8,7 @@ gate_template:
   intent: local_draft
   risk_level: R1
   allowed_files:
-    - docs/v11_003_existing_prompt_artifact_schema_inventory_gate.md
+    - docs/archive/phases/v11/v11_003_existing_prompt_artifact_schema_inventory_gate.md
     - docs/prompt_artifact_schema_inventory.md
     - README.md
     - docs/00_project_roadmap.md

@@ -1,9 +1,31 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — C1am Agent-Board-Plus-Docs 01 Execution
+
+```text
+Status: c1am_agent_board_plus_docs_01_execution completed_validated_pending_commit.
+Reason: Continue low-risk paired exact move/rewrite batches after agent-board-only lane closed.
+Execution mode: A4.8 local docs-only exact move/rewrite execution.
+Execution package: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_01_EXECUTION_PACKAGE.md.
+Execution record: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_01_EXECUTION_RECORD.md.
+Post-map: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_01_POST_MOVE_REFERENCE_MAP.csv.
+Registry evidence: docs_registry/generated/c1am_agent_board_plus_docs_01_registry_evidence.csv.
+Files moved: 12.
+Rewrite hits: 29.
+Non-archive active old-path hits after rewrite: 0.
+Wrappers created: false.
+Files deleted: false.
+Existing validator behavior changed: false; exact local commit scope allowlist updated for one docs_registry generated evidence file.
+Push/tag/release/deploy performed: false.
+Recommended next: validate and commit agent-board-plus-docs 01, then continue remaining agent-board-plus-docs batches.
+```
+
+---
+
 ## Current Handoff Update — C1am Agent-Board-Only 05 Execution
 
 ```text
-Status: c1am_agent_board_only_05_execution completed_validated_pending_commit.
+Status: c1am_agent_board_only_05_execution completed_validated_committed.
 Reason: Finish low-risk agent-board-only exact-file archive execution lane.
 Execution mode: A4.8 local docs-only exact move/rewrite execution.
 Execution package: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_05_EXECUTION_PACKAGE.md.
@@ -18,7 +40,7 @@ Wrappers created: false.
 Files deleted: false.
 Existing validator behavior changed: false; exact local commit scope allowlist updated for one docs_registry generated evidence file.
 Push/tag/release/deploy performed: false.
-Recommended next: validate and commit fifth batch, then prepare C1ap/C1an closeout and human-navigation decision package.
+Recommended next: continue agent-board-plus-docs low-risk batches.
 ```
 
 ---

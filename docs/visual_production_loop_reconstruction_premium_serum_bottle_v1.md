@@ -23,12 +23,12 @@ does not read, copy, move, edit, stage, or commit the source image.
 | ProductBrief | `briefs/product_brief_premium_serum_bottle_v1.md` | Created in v10.004 |
 | ShotPlan / visual strategy | Product brief and prompt package visual direction | Clean premium beauty product still life |
 | PromptPackage | `prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml` | Created in v10.005 and statically reviewed in v10.006 |
-| GenerationAuthorization | `docs/v10_009_third_product_minimal_generation_authorization_draft_gate.md` and `docs/v10_010_third_product_minimal_generation_execution_confirmation_gate.md` | One call, one attempt, one output, no retry |
+| GenerationAuthorization | `docs/archive/phases/v10/v10_009_third_product_minimal_generation_authorization_draft_gate.md` and `docs/archive/phases/v10/v10_010_third_product_minimal_generation_execution_confirmation_gate.md` | One call, one attempt, one output, no retry |
 | GenerationRun | v10.011 execution record summarized by v10.012 / evidence package | Success, one local output |
 | LocalOutput | `runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg` | Local persistence verified |
-| HumanReview | `docs/v10_012_human_review_of_third_product_first_real_output.md` | Accepted candidate with minor watch items |
+| HumanReview | `docs/archive/phases/v10/v10_012_human_review_of_third_product_first_real_output.md` | Accepted candidate with minor watch items |
 | AcceptedCandidate | `docs/accepted_candidate_evidence_package_premium_serum_bottle_v1.md` | Evidence package created |
-| RouteCloseout | `docs/v10_third_product_route_closeout_premium_serum_bottle.md` and `docs/v10_product_loop_final_closeout.md` | Third product route closed |
+| RouteCloseout | `docs/archive/phases/v10/v10_third_product_route_closeout_premium_serum_bottle.md` and `docs/archive/phases/v10/v10_product_loop_final_closeout.md` | Third product route closed |
 
 ## Object Mapping
 
@@ -41,7 +41,7 @@ does not read, copy, move, edit, stage, or commit the source image.
 | `GenerationAuthorization` | v10.009 draft and v10.010 confirmation | `provider_calls_max: 1`, `generation_attempts_max: 1`, `output_images_max: 1`, `auto_retry: false`. |
 | `GenerationRun` | v10.011 execution summarized by review/evidence | Provider call and generation attempt happened once under explicit authorization. |
 | `LocalOutput` | Source output path | `local_files_verified_count: 1`, `local_persistence_success: true`; image not added to Git. |
-| `HumanReview` | `docs/v10_012_human_review_of_third_product_first_real_output.md` | `asset_status: accepted_candidate_with_minor_watch_items`. |
+| `HumanReview` | `docs/archive/phases/v10/v10_012_human_review_of_third_product_first_real_output.md` | `asset_status: accepted_candidate_with_minor_watch_items`. |
 | `AcceptedCandidate` | Evidence package | `accepted_candidate: true`, `commercial_delivery_ready: false`, `memory_suitability: deferred`. |
 | `RetouchPlan` | Not created | Future planning should target label elegance, glass depth, dropper material quality, shadow/reflection polish. |
 | `DeliveryReadinessPackage` | Not created | Asset is not commercial delivery ready. |
@@ -98,8 +98,8 @@ image_generation_allowed_by_prompt_package: false
 ## GenerationAuthorization Reconstruction
 
 ```yaml
-authorization_draft_gate: docs/v10_009_third_product_minimal_generation_authorization_draft_gate.md
-execution_confirmation_gate: docs/v10_010_third_product_minimal_generation_execution_confirmation_gate.md
+authorization_draft_gate: docs/archive/phases/v10/v10_009_third_product_minimal_generation_authorization_draft_gate.md
+execution_confirmation_gate: docs/archive/phases/v10/v10_010_third_product_minimal_generation_execution_confirmation_gate.md
 approved_product: cosmetic_skincare_bottle / premium_serum_bottle
 approved_prompt_package: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
 output_directory: runs/real_generation/v10_010_premium_serum_bottle_first_trial/
@@ -128,7 +128,7 @@ output_image_added_to_git: false
 ## HumanReview Reconstruction
 
 ```yaml
-human_review_ref: docs/v10_012_human_review_of_third_product_first_real_output.md
+human_review_ref: docs/archive/phases/v10/v10_012_human_review_of_third_product_first_real_output.md
 asset_status: accepted_candidate_with_minor_watch_items
 accepted_candidate: true
 commercial_delivery_ready: false

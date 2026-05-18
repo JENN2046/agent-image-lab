@@ -27,8 +27,8 @@ read `.env.local`.
 evidence_package: docs/accepted_candidate_evidence_package_premium_serum_bottle_v1.md
 source_output: runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg
 prompt_package: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
-human_review_ref: docs/v10_012_human_review_of_third_product_first_real_output.md
-decision_gate_ref: docs/v10_013_third_product_prompt_revision_or_candidate_evidence_decision_gate.md
+human_review_ref: docs/archive/phases/v10/v10_012_human_review_of_third_product_first_real_output.md
+decision_gate_ref: docs/archive/phases/v10/v10_013_third_product_prompt_revision_or_candidate_evidence_decision_gate.md
 ```
 
 ## Candidate Status

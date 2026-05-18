@@ -1,10 +1,32 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## C1am Agent-Board-Plus-Docs 01 Execution
+
+```yaml
+phase: c1am_agent_board_plus_docs_01_execution
+status: completed_validated_pending_commit
+goal: execute first low-risk agent-board-plus-docs paired move/rewrite batch
+completed:
+  - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_01_EXECUTION_PACKAGE.md
+  - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_01_EXECUTION_PACKAGE.csv
+  - moved 12 exact files to docs/archive/
+  - rewrote 29 exact active old-path references in .agent_board and docs source files
+  - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_01_EXECUTION_RECORD.md
+  - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_01_POST_MOVE_REFERENCE_MAP.csv
+  - generated docs_registry/generated/c1am_agent_board_plus_docs_01_registry_evidence.csv
+  - confirmed non-archive active old-path hit records count 0
+not_performed:
+  - no files outside move allowlist moved
+  - no files deleted
+  - no wrappers created
+  - no push, tag, release, or deploy
+```
+
 ## C1am Agent-Board-Only 05 Execution
 
 ```yaml
 phase: c1am_agent_board_only_05_execution
-status: completed_validated_pending_commit
+status: completed_validated_committed
 goal: execute fifth and final low-risk agent-board-only paired move/rewrite batch
 completed:
   - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_05_EXECUTION_PACKAGE.md

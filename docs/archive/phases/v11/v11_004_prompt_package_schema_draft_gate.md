@@ -8,7 +8,7 @@ gate_template:
   intent: local_draft
   risk_level: R1
   allowed_files:
-    - docs/v11_004_prompt_package_schema_draft_gate.md
+    - docs/archive/phases/v11/v11_004_prompt_package_schema_draft_gate.md
     - docs/prompt_package_canonical_schema.md
     - docs/schemas/prompt_package_schema_v1.md
     - README.md

@@ -6,11 +6,28 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current C1am Agent-Board-Plus-Docs 01 Execution
+
+```text
+Current archive task: c1am_agent_board_plus_docs_01_execution.
+Status: completed validated pending commit.
+Purpose: execute first low-risk agent-board-plus-docs paired move/rewrite batch.
+Execution package: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_01_EXECUTION_PACKAGE.md.
+Execution record: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_01_EXECUTION_RECORD.md.
+Files moved: 12.
+Rewrite hits: 29.
+Non-archive active old-path hits after rewrite: 0.
+Recommended next: validate and commit agent-board-plus-docs 01.
+Not allowed now: push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
+```
+
+---
+
 ## Current C1am Agent-Board-Only 05 Execution
 
 ```text
 Current archive task: c1am_agent_board_only_05_execution.
-Status: completed validated pending commit.
+Status: completed validated committed.
 Purpose: execute fifth and final low-risk agent-board-only paired move/rewrite batch.
 Execution package: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_05_EXECUTION_PACKAGE.md.
 Execution record: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_05_EXECUTION_RECORD.md.
@@ -18,7 +35,7 @@ Files moved: 13.
 Rewrite hits: 13.
 Agent-board-only lane moved total: 93.
 Non-archive active old-path hits after rewrite: 0.
-Recommended next: validate and commit fifth batch, then C1ap/C1an closeout and decision package.
+Recommended next: continue agent-board-plus-docs low-risk batches.
 Not allowed now: push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
 ```
 

@@ -39,10 +39,10 @@ memory_suitability: deferred
 ```yaml
 product_brief: briefs/product_brief_premium_serum_bottle_v1.md
 prompt_package: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
-human_review: docs/v10_012_human_review_of_third_product_first_real_output.md
+human_review: docs/archive/phases/v10/v10_012_human_review_of_third_product_first_real_output.md
 evidence_package: docs/accepted_candidate_evidence_package_premium_serum_bottle_v1.md
-route_closeout: docs/v10_third_product_route_closeout_premium_serum_bottle.md
-final_closeout: docs/v10_018_v10_final_closeout.md
+route_closeout: docs/archive/phases/v10/v10_third_product_route_closeout_premium_serum_bottle.md
+final_closeout: docs/archive/phases/v10/v10_018_v10_final_closeout.md
 ```
 
 ## Safety State
