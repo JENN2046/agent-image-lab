@@ -6,7 +6,211 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current C1e Remaining Docs Reclassification
+
+```text
+Current archive task: c1e_remaining_docs_reclassification_refresh.
+Status: completed_validated.
+Purpose: refresh remaining top-level historical docs classification after C1a and C1d exact-file moves.
+Classification report: docs/archive/DOCS_ARCHIVE_C1E_REMAINING_DOCS_RECLASSIFICATION_REFRESH.md.
+Remaining top-level historical docs scanned: 710.
+validator-blocked: 423.
+wrapper-required: 200.
+docs-only-reference: 67.
+future exact-move candidates: 20.
+Not allowed now: moving additional docs, deleting files, creating wrappers, rewriting references, changing validator behavior, splitting scripts, processing runs, staging, committing, pushing, tag/release/deploy, A5, provider/plugin/API/image generation/DailyNote/VCP memory/runtime.
+Validation completed: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: C1f exact-move authorization package dry-run for 20 candidates, or exact-file commit readiness audit, with separate instruction.
+```
+
+---
+
+## Current C1d Post-Move Reference Map
+
+```text
+Current archive task: c1d_post_move_reference_map_dry_run.
+Status: completed_validated.
+Purpose: audit old/new path references after the C1d exact-file physical move.
+Reference map report: docs/archive/DOCS_ARCHIVE_C1D_POST_MOVE_REFERENCE_MAP_DRY_RUN.md.
+C1d moved candidates reviewed: 208.
+Scanned files: 1989.
+Old-path operational hits in scripts/tests: 0.
+Old-path authority/navigation hits: 0.
+Old-path .agent_board hits: 0.
+Old-path non-archive docs hits: 0.
+Old-path archive planning/audit hits: 856.
+C1d wrapper required: false.
+C1d reference rewrite required: false.
+Not allowed now: moving additional docs, deleting files, creating wrappers, rewriting references, changing validator behavior, splitting scripts, processing runs, staging, committing, pushing, tag/release/deploy, A5, provider/plugin/API/image generation/DailyNote/VCP memory/runtime.
+Validation completed: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: C1e remaining-docs reclassification refresh or exact-file commit readiness audit, with separate instruction.
+```
+
+---
+
+## Current C1d Physical Move
+
+```text
+Current archive task: c1d_exact_file_physical_move.
+Status: completed_validated.
+Purpose: move the exact 208 C1d future exact-move candidates into docs/archive/phases/v7 after user authorization.
+Authorization package: docs/archive/DOCS_ARCHIVE_C1D_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md.
+Execution record: docs/archive/DOCS_ARCHIVE_C1D_MOVE_EXECUTION_RECORD.md.
+Exact files moved: 208.
+Source paths still existing: 0.
+Destination files existing: 208.
+Not allowed now: moving additional docs, deleting files, creating wrappers, rewriting references, changing validator behavior, splitting scripts, processing runs, staging, committing, pushing, tag/release/deploy, A5, provider/plugin/API/image generation/DailyNote/VCP memory/runtime.
+Validation completed: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: C1d post-move reference-map dry-run before wrapper/reference work.
+```
+
+---
+
 ## Current Six-Month Visual Production Control Layer Mission
+
+```text
+Current archive task: c1d_exact_move_authorization_package_dry_run.
+Status: completed_validated.
+Purpose: prepare exact-move authorization package for the 208 C1c future exact-move candidates without moving files.
+Allowed now: local planning only if separately requested; no physical move by default.
+Authorization package: docs/archive/DOCS_ARCHIVE_C1D_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md.
+Future exact-move candidates: 208.
+Missing source files: 0.
+Existing destinations: 0.
+Duplicate sources: 0.
+Duplicate destinations: 0.
+Invalid source/destination boundaries: 0/0.
+Not allowed now: moving docs, deleting files, creating wrappers, rewriting references, changing validator behavior, splitting scripts, processing runs, staging, committing, pushing, tag/release/deploy, A5, provider/plugin/API/image generation/DailyNote/VCP memory/runtime.
+Validation completed: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: human review C1d package; physical C1d move still requires separate explicit authorization naming this package.
+```
+
+```text
+Current archive task: c1c_remaining_docs_classification_dry_run.
+Status: completed_validated.
+Purpose: classify remaining unmoved top-level historical docs after C1b without moving files.
+Allowed now: local planning only if separately requested; no additional moves by default.
+Remaining top-level historical docs scanned: 918.
+validator-blocked: 423.
+wrapper-required: 200.
+docs-only-reference: 87.
+future exact-move candidates: 208.
+Not allowed now: moving docs, deleting files, creating wrappers, rewriting references, changing validator behavior, splitting scripts, processing runs, staging, committing, pushing, tag/release/deploy, A5, provider/plugin/API/image generation/DailyNote/VCP memory/runtime.
+Validation completed: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: review C1c buckets, then either prepare C1d exact-move authorization for the 208 future exact-move candidates or prepare compatibility plans for validator-blocked and wrapper-required records.
+```
+
+```text
+Current archive task: c1b_docs_archive_reference_map_dry_run.
+Status: completed_validated.
+Purpose: record the post-C1a old-path to archive-path reference map without moving additional files.
+Allowed now: local planning only if separately requested; no additional moves by default.
+Mapped files: 276.
+Source paths still present: 0.
+Archive destinations present: 276.
+Old-path operational reference hits: 0.
+Archive-path operational reference hits: 0.
+Not allowed now: moving additional docs, deleting files, rewriting operational references, changing validator behavior, splitting scripts, processing runs, staging, committing, pushing, tag/release/deploy, A5, provider/plugin/API/image generation/DailyNote/VCP memory/runtime.
+Validation completed: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: review C1b map, then classify remaining top-level historical docs before any additional exact-file move authorization.
+```
+
+```text
+Current archive task: c1a_docs_archive_physical_move_execution.
+Status: completed_validated.
+Purpose: execute the separately authorized C1a physical move using the exact C1.3 YAML-aware candidate list.
+Allowed now: C1b planning dry-run only if separately requested; no additional moves by default.
+Moved files: 276.
+Created parent directories: 4.
+Not allowed now: moving additional docs, deleting files, changing validator behavior, splitting scripts, processing runs, staging, committing, pushing, tag/release/deploy, A5, provider/plugin/API/image generation/DailyNote/VCP memory/runtime.
+Validation completed: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; post-move operational reference scan found 0 operational hits for moved candidates; move-state check found 276 destinations present and 0 sources remaining.
+Recommended next: plan C1b reference-map dry-run; do not move additional files until separately authorized.
+```
+
+```text
+Current archive task: c1a_docs_archive_physical_move_authorization_package_dry_run.
+Status: completed_validated.
+Purpose: define the future C1a physical move authorization shape using the C1.3 YAML-aware exact list, without moving files.
+Allowed now: local docs and .agent_board updates only.
+Not allowed now: moving docs, deleting files, changing validator behavior, splitting scripts, processing runs, staging, committing, pushing, tag/release/deploy, A5, provider/plugin/API/image generation/DailyNote/VCP memory/runtime.
+Candidate source: docs/archive/DOCS_ARCHIVE_YAML_AWARE_ZERO_REFERENCE_CANDIDATES.md with 276 exact rows.
+Validation completed: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: human review of the C1a package, then either keep planning or issue separate explicit C1a physical move authorization.
+```
+
+```text
+Current archive task: c1_3_docs_archive_yaml_aware_candidate_list_dry_run.
+Status: completed_validated.
+Purpose: generate the stricter YAML-aware zero-reference candidate list without moving files.
+Allowed now: local docs and .agent_board updates only.
+Not allowed now: moving docs, deleting files, changing validator behavior, splitting scripts, processing runs, staging, committing, pushing, tag/release/deploy, A5, provider/plugin/API/image generation/DailyNote/VCP memory/runtime.
+Candidate list: 276 exact candidates under the YAML-aware operational reference rule; 184 candidates removed from the C1.2 markdown-target list due to YAML-aware references.
+Validation completed: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: optional C1a physical move authorization from the YAML-aware exact list, or keep planning only.
+```
+
+```text
+Current archive task: c1_2_docs_archive_zero_reference_candidate_list_dry_run.
+Status: completed_validated.
+Purpose: generate the exact C1.1-rule zero-external-reference archive candidate list without moving files.
+Allowed now: local docs and .agent_board updates only.
+Not allowed now: moving docs, deleting files, changing validator behavior, splitting scripts, processing runs, staging, committing, pushing, tag/release/deploy, A5, provider/plugin/API/image generation/DailyNote/VCP memory/runtime.
+Candidate list: 460 exact candidates under the C1.1 markdown-target reference rule; stricter YAML-aware zero-reference count observed as 276.
+Validation completed: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: decide whether to generate a stricter YAML-aware candidate list before any C1a physical move authorization.
+```
+
+```text
+Current archive task: c1_1_docs_archive_reference_policy_dry_run.
+Status: completed_validated.
+Purpose: land archive-aware reference policy so C1 docs movement cannot break validators, .agent_board, tests, README, or PROJECT_MASTER_PLAN references.
+Allowed now: local docs and .agent_board updates only.
+Not allowed now: moving docs, deleting files, changing validator behavior, splitting scripts, processing runs, staging, committing, pushing, tag/release/deploy, A5, provider/plugin/API/image generation/DailyNote/VCP memory/runtime.
+Reference-impact basis: 4769 refs scanned; 460 zero-external direct candidates; 126 docs-only reference candidates; 608 hard-surface or validator-blocked candidates.
+Validation completed: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: C1.2 generate exact zero-reference archive candidate list as dry-run only; do not move files.
+```
+
+```text
+Current archive task: c1_docs_archive_migration_manifest_dry_run.
+Status: completed_validated.
+Purpose: create docs/archive README and dry-run migration manifest for future docs historical archive.
+Allowed now: local docs and .agent_board updates only.
+Not allowed now: moving docs, deleting files, splitting scripts, processing runs, staging, committing, pushing, tag/release/deploy, A5, provider/plugin/API/image generation/DailyNote/VCP memory/runtime.
+Validation completed: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: C1 reference-impact audit before any physical file move.
+```
+
+```text
+Current restructure task: c0_5_project_restructure_preflight_plan_landing.
+Status: completed_validated.
+Purpose: land docs/PROJECT_RESTRUCTURE_PREFLIGHT_PLAN.md as the durable Route C migration blueprint.
+Allowed now: local docs and .agent_board updates only.
+Not allowed now: C1 execution, moving docs, splitting scripts, processing runs, deleting files, staging, committing, pushing, tag/release/deploy, A5, provider/plugin/API/image generation/DailyNote/VCP memory/runtime.
+Validation completed: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: C1 docs archive migration manifest dry-run, with no file moves until explicit approval.
+```
+
+```text
+Current structure task: v14_233_project_structure_balance_route_b.
+Status: completed_validated.
+Purpose: establish route B project structure navigation, accepted sample preview capsule landing path, validator layout policy, README entry guidance, and local-only ignore boundaries.
+Allowed now: local docs and board updates only.
+Not allowed now: move old files, delete files, create/copy preview.webp, generate images, call provider/plugin/API, write DailyNote/VCP memory, runtime integration, push/tag/release/deploy, git add .
+Validation completed: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: keep old files in place and use docs/PROJECT_STRUCTURE.md plus asset_archive/accepted_samples/<sample_id>/manifest.json and preview.webp as the next durable evidence baseline when explicitly authorized.
+```
+
+```text
+Current artifact portability task: v14_232_legacy_recoverability_validator_preview_capsule_migration.
+Status: completed_validated.
+Purpose: migrate old recoverability validators away from ignored runs/real_generation evidence and toward Git-tracked asset_archive preview capsules.
+Allowed now: local validation and first-capsule authorization planning only.
+Not allowed now: create/copy preview.webp, write runs outputs, generate images, call provider/plugin/API, write DailyNote/VCP memory, runtime integration, push/tag/release/deploy.
+Recommended next: create the first real asset_archive/accepted_samples/<sample_id>/manifest.json plus preview.webp capsule only after explicit preview source or generation authorization.
+```
+
+---
 
 ```text
 Current active six-month objective: build Agent Image Lab into the VCP ecosystem visual production control layer.
@@ -9854,4 +10058,53 @@ none
       Changed files:
       Validation:
       Result:
+```
+
+## v14.231 Current Task
+
+```text
+- [x] ID: v14.231
+      Title: Git-tracked preview evidence capsule baseline
+      Reason: user changed computer and old ignored runs evidence is unavailable; future evidence must survive clone/change-machine workflows.
+      Scope: define new durable archive baseline with preview.webp long_edge 512, preview sha256 in manifest, no Base64, and no original sha256 requirement.
+      Allowed files: docs/v14_231_git_tracked_preview_evidence_capsule_baseline.md; tests/schema_examples/v14_231_git_tracked_preview_evidence_capsule_baseline.example.json; scripts/validate_v14_231_git_tracked_preview_evidence_capsule_baseline.js; scripts/validate_mvp.ps1; .agent_board resume surfaces; docs/v14_230_artifact_restoration_a5_authorization_package_draft.md supersession note.
+      Forbidden files/actions: generated images; runs writes; asset binary creation; provider/plugin/API/DailyNote/VCP memory/runtime/real manifest/VCP source reads; push/tag/release/deploy; git add .
+      Validation: node --check and node validator; git diff --check; local validator suite; validate_mvp expected to remain blocked on legacy missing runs and dirty-tree gates.
+      Stop condition: any need to create/copy real preview.webp, restore old artifacts, read external source, or perform A5 execution.
+```
+
+## v14.232 Current Task
+
+```text
+- [x] ID: v14.232
+      Title: Legacy recoverability validator preview capsule migration
+      Reason: validate_mvp still fails because many older validators directly read ignored runs/real_generation evidence absent on the new computer.
+      Scope: migrate old recoverability validators to asset_archive/accepted_samples/<sample_id>/manifest.json plus preview.webp evidence source, with pending state when capsules are not created yet.
+      Done: core preview capsule API; v14.119; v14.121 CRLF prompt sync fix; v14.131; v14.133-v14.136; v14.140-v14.147; v14.160-v14.168; v14.209-v14.210 dirty-tree audit tolerance; v14.215/v14.217/v14.222/v14.225-v14.228 current surface path fixes; MVP checks for migrated pending states.
+      Remaining: first real asset_archive accepted sample capsule is not created yet.
+      Forbidden files/actions: generated images; preview.webp creation; runs writes; provider/plugin/API/DailyNote/VCP memory/runtime/real manifest/VCP source reads; push/tag/release/deploy; git add .
+      Validation: scripts/validate_mvp.ps1 passed; git diff --check passed; validate_agent_board_state passed.
+      Stop condition: any need to create/copy real preview.webp, restore old artifacts, read external source, or perform A5 execution.
+```
+
+## Deferred / Farther Plan Tasks
+
+```text
+- [ ] ID: v14.233
+      Title: Project structure balance route B
+      Reason: project structure audit found docs/scripts/tests growth, unclear current entry points, and missing asset_archive/accepted_samples landing path.
+      Scope: add docs/PROJECT_STRUCTURE.md; add asset_archive/accepted_samples/README.md and .gitkeep; add scripts/validators/README.md; update README top navigation; update .gitignore local-only patterns; update .agent_board resume surfaces.
+      Forbidden files/actions: moving old files; deleting files; staging; committing; pushing; tag/release/deploy; provider/plugin/API/DailyNote/VCP memory/runtime; image generation; preview.webp creation or conversion.
+      Validation: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+      Stop condition: any need to move/delete historical files, touch secrets, create images, run runtime/A5/provider/plugin/API, or perform remote actions.
+
+- [ ] ID: future.original-runs-source-harvest
+      Title: Use original-computer runs/ images only as source material for preview capsules
+      Timing: deferred until the user is back on the computer that still has the old ignored runs/ image files.
+      Reason: old runs/ evidence is no longer the portable validator baseline, but those images may still be valuable source material for creating Git-tracked preview capsules.
+      Scope: on the original computer, inspect the relevant old runs/ images only after explicit local source authorization; create long_edge=512 preview.webp outputs and matching asset_archive/accepted_samples/<sample_id>/manifest.json records under the new capsule contract.
+      Not the goal: do not restore old runs/ as the primary cross-machine evidence path; do not reintroduce original sha256 as required portable evidence.
+      Forbidden files/actions until explicit authorization: preview.webp creation/copying; image conversion; generated image creation; provider/plugin/API/DailyNote/VCP memory/runtime/real manifest/VCP source reads; push/tag/release/deploy; git add .
+      Validation when authorized later: validate preview WebP signature and dimensions; validate preview sha256 from manifest; run relevant recoverability validators and scripts/validate_mvp.ps1.
+      Stop condition: missing source path authorization, suspected private path/secret exposure, or any need for provider/plugin/API/image generation/runtime/memory action.
 ```

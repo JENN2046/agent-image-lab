@@ -1,5 +1,936 @@
 # RUN_STATE.md — Agent Image Lab
 
+## C1e Remaining Docs Reclassification Refresh
+
+```yaml
+phase: c1e_remaining_docs_reclassification_refresh
+status: completed_validated
+mode: A4.8_safe_local_docs_reference_audit_only
+goal: refresh remaining top-level historical docs classification after C1a and C1d movement
+classification_report: docs/archive/DOCS_ARCHIVE_C1E_REMAINING_DOCS_RECLASSIFICATION_REFRESH.md
+prior_classification: docs/archive/DOCS_ARCHIVE_C1C_REMAINING_DOCS_CLASSIFICATION_DRY_RUN.md
+c1d_move_record: docs/archive/DOCS_ARCHIVE_C1D_MOVE_EXECUTION_RECORD.md
+classification:
+  remaining_top_level_historical_docs_scanned: 710
+  validator_blocked: 423
+  wrapper_required: 200
+  docs_only_reference: 67
+  future_exact_move_candidates: 20
+reference_totals:
+  scripts: 1456
+  tests: 376
+  agent_board: 1325
+  README: 182
+  PROJECT_MASTER_PLAN: 79
+  AGENTS: 0
+  non_archive_docs: 750
+  archive_audit: 1111
+  other: 0
+delta_from_c1c:
+  remaining_top_level_historical_docs: -208
+  validator_blocked: 0
+  wrapper_required: 0
+  docs_only_reference: -20
+  future_exact_move_candidates: -188
+changed_surfaces:
+  - docs/archive/DOCS_ARCHIVE_C1E_REMAINING_DOCS_RECLASSIFICATION_REFRESH.md
+  - docs/archive/DOCS_ARCHIVE_C1D_POST_MOVE_REFERENCE_MAP_DRY_RUN.md
+  - docs/archive/README.md
+  - docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md
+  - README.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+blocked_actions:
+  docs_move: false
+  wrapper_creation: false
+  reference_rewrite: false
+  validator_behavior_change: false
+  scripts_split: false
+  runs_processed: false
+  staging_performed: false
+  commit_performed: false
+  push_tag_release_deploy_performed: false
+  A5_execution: false
+  provider_contact: false
+  plugin_call: false
+  api_call: false
+  image_generation: false
+  DailyNote_write: false
+  VCP_memory_write: false
+  runtime_execution: false
+  real_manifest_read: false
+  real_vcpchat_read: false
+  real_vcptoolbox_read: false
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+recommended_next: c1f_exact_move_authorization_package_dry_run_for_20_candidates_or_exact_file_commit_readiness_audit
+```
+
+## C1d Post-Move Reference Map Dry Run
+
+```yaml
+phase: c1d_post_move_reference_map_dry_run
+status: completed_validated
+mode: A4.8_safe_local_docs_reference_audit_only
+goal: audit old and new path references after the C1d exact-file physical move
+reference_map_report: docs/archive/DOCS_ARCHIVE_C1D_POST_MOVE_REFERENCE_MAP_DRY_RUN.md
+move_record: docs/archive/DOCS_ARCHIVE_C1D_MOVE_EXECUTION_RECORD.md
+authorization_package: docs/archive/DOCS_ARCHIVE_C1D_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md
+scan:
+  moved_candidates_reviewed: 208
+  scanned_files: 1989
+  old_path_hit_records: 769
+  old_path_hit_total: 856
+  new_path_hit_records: 561
+  new_path_hit_total: 561
+  unique_old_paths_referenced: 208
+  unique_new_paths_referenced: 208
+risk_classification:
+  old_operational_hits_scripts_tests: 0
+  new_operational_hits_scripts_tests: 0
+  old_authority_navigation_hits: 0
+  old_agent_board_hits: 0
+  old_non_archive_docs_hits: 0
+  old_archive_planning_or_audit_hits: 856
+decision:
+  c1d_wrapper_required: false
+  c1d_reference_rewrite_required: false
+  old_archive_refs_are_historical_audit_refs: true
+changed_surfaces:
+  - docs/archive/DOCS_ARCHIVE_C1D_POST_MOVE_REFERENCE_MAP_DRY_RUN.md
+  - docs/archive/DOCS_ARCHIVE_C1D_MOVE_EXECUTION_RECORD.md
+  - docs/archive/README.md
+  - docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md
+  - README.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+blocked_actions:
+  docs_move: false
+  wrapper_creation: false
+  reference_rewrite: false
+  validator_behavior_change: false
+  scripts_split: false
+  runs_processed: false
+  staging_performed: false
+  commit_performed: false
+  push_tag_release_deploy_performed: false
+  A5_execution: false
+  provider_contact: false
+  plugin_call: false
+  api_call: false
+  image_generation: false
+  DailyNote_write: false
+  VCP_memory_write: false
+  runtime_execution: false
+  real_manifest_read: false
+  real_vcpchat_read: false
+  real_vcptoolbox_read: false
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+recommended_next: c1e_remaining_docs_reclassification_refresh_or_exact_file_commit_readiness_audit
+```
+
+## C1d Exact-File Physical Move
+
+```yaml
+phase: c1d_exact_file_physical_move
+status: completed_validated
+mode: A4.8_safe_local_docs_archive_movement_only
+goal: move the exact 208 C1d future exact-move candidates into docs/archive/phases/v7
+authorization_package: docs/archive/DOCS_ARCHIVE_C1D_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md
+execution_record: docs/archive/DOCS_ARCHIVE_C1D_MOVE_EXECUTION_RECORD.md
+preflight:
+  exact_allowlist_rows: 208
+  missing_source_files: 0
+  existing_destinations: 0
+  missing_destination_parent_directories: 0
+  duplicate_sources: 0
+  duplicate_destinations: 0
+  invalid_source_boundaries: 0
+  invalid_destination_boundaries: 0
+post_move:
+  moved_files: 208
+  source_paths_still_existing: 0
+  destination_files_existing: 208
+changed_surfaces:
+  - docs/archive/DOCS_ARCHIVE_C1D_MOVE_EXECUTION_RECORD.md
+  - docs/archive/DOCS_ARCHIVE_C1D_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md
+  - docs/archive/README.md
+  - docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md
+  - README.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+route_c_policy:
+  physical_move_authorized_now: true
+  exact_allowlist_only: true
+  wrappers_created: false
+  references_rewritten: false
+  validator_behavior_changed: false
+  scripts_split: false
+  runs_processed: false
+  staging_performed: false
+  commit_performed: false
+  push_tag_release_deploy_performed: false
+blocked_actions:
+  A5_execution: false
+  provider_contact: false
+  plugin_call: false
+  api_call: false
+  image_generation: false
+  DailyNote_write: false
+  VCP_memory_write: false
+  runtime_execution: false
+  real_manifest_read: false
+  real_vcpchat_read: false
+  real_vcptoolbox_read: false
+  dependency_change: false
+  secret_or_env_read: false
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+recommended_next: c1d_post_move_reference_map_dry_run_before_any_wrapper_or_reference_work
+```
+
+## C1d Exact-Move Authorization Package Dry Run
+
+```yaml
+phase: c1d_exact_move_authorization_package_dry_run
+status: completed_validated
+mode: A4.8_safe_local_docs_and_preflight_package_only
+goal: prepare exact-move authorization package for the 208 C1c future exact-move candidates without moving files
+authorization_package: docs/archive/DOCS_ARCHIVE_C1D_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md
+source_classification: docs/archive/DOCS_ARCHIVE_C1C_REMAINING_DOCS_CLASSIFICATION_DRY_RUN.md
+preflight:
+  future_exact_move_candidates: 208
+  missing_source_files: 0
+  existing_destinations: 0
+  missing_destination_parent_directories: 0
+  duplicate_sources: 0
+  duplicate_destinations: 0
+  invalid_source_boundaries: 0
+  invalid_destination_boundaries: 0
+changed_surfaces:
+  - docs/archive/DOCS_ARCHIVE_C1D_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md
+  - docs/archive/README.md
+  - docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md
+  - docs/archive/DOCS_ARCHIVE_C1C_REMAINING_DOCS_CLASSIFICATION_DRY_RUN.md
+  - README.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+route_c_policy:
+  c1d_is_dry_run_only: true
+  physical_move_authorized_now: false
+  docs_moved: false
+  wrappers_created: false
+  references_rewritten: false
+  files_deleted: false
+  validator_behavior_changed: false
+  scripts_split: false
+  runs_processed: false
+  staging_performed: false
+  commit_performed: false
+  push_tag_release_deploy_performed: false
+blocked_actions:
+  A5_execution: false
+  provider_contact: false
+  plugin_call: false
+  api_call: false
+  image_generation: false
+  DailyNote_write: false
+  VCP_memory_write: false
+  runtime_execution: false
+  real_manifest_read: false
+  real_vcpchat_read: false
+  real_vcptoolbox_read: false
+  dependency_change: false
+  secret_or_env_read: false
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+recommended_next: human_review_c1d_package_then_separate_explicit_c1d_physical_move_authorization_if_approved
+```
+
+## C1c Remaining Docs Classification Dry Run
+
+```yaml
+phase: c1c_remaining_docs_classification_dry_run
+status: completed_validated
+mode: A4.8_safe_local_docs_and_reference_audit_only
+goal: classify remaining unmoved top-level historical docs after C1b
+classification_report: docs/archive/DOCS_ARCHIVE_C1C_REMAINING_DOCS_CLASSIFICATION_DRY_RUN.md
+classification:
+  remaining_top_level_historical_docs_scanned: 918
+  validator_blocked: 423
+  wrapper_required: 200
+  docs_only_reference: 87
+  future_exact_move_candidates: 208
+reference_totals:
+  scripts: 1456
+  tests: 376
+  agent_board: 1325
+  README: 182
+  PROJECT_MASTER_PLAN: 79
+  docs: 877
+changed_surfaces:
+  - docs/archive/DOCS_ARCHIVE_C1C_REMAINING_DOCS_CLASSIFICATION_DRY_RUN.md
+  - docs/archive/README.md
+  - docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md
+  - docs/archive/DOCS_ARCHIVE_C1B_REFERENCE_MAP_DRY_RUN.md
+  - README.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+route_c_policy:
+  c1c_is_dry_run_only: true
+  additional_docs_moved: false
+  wrappers_created: false
+  references_rewritten: false
+  files_deleted: false
+  validator_behavior_changed: false
+  scripts_split: false
+  runs_processed: false
+  staging_performed: false
+  commit_performed: false
+  push_tag_release_deploy_performed: false
+blocked_actions:
+  A5_execution: false
+  provider_contact: false
+  plugin_call: false
+  api_call: false
+  image_generation: false
+  DailyNote_write: false
+  VCP_memory_write: false
+  runtime_execution: false
+  real_manifest_read: false
+  real_vcpchat_read: false
+  real_vcptoolbox_read: false
+  dependency_change: false
+  secret_or_env_read: false
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+recommended_next: review_c1c_buckets_then_prepare_c1d_exact_move_authorization_or_compatibility_plan
+```
+
+## C1b Docs Archive Reference Map Dry Run
+
+```yaml
+phase: c1b_docs_archive_reference_map_dry_run
+status: completed_validated
+mode: A4.8_safe_local_docs_and_reference_audit_only
+goal: record the post-C1a old-path to archive-path reference map without moving additional files
+reference_map:
+  report: docs/archive/DOCS_ARCHIVE_C1B_REFERENCE_MAP_DRY_RUN.md
+  source_execution_record: docs/archive/DOCS_ARCHIVE_C1A_MOVE_EXECUTION_RECORD.md
+  candidate_source: docs/archive/DOCS_ARCHIVE_YAML_AWARE_ZERO_REFERENCE_CANDIDATES.md
+  mapped_files: 276
+  source_paths_still_present: 0
+  archive_destinations_present: 276
+  old_path_operational_reference_hits: 0
+  archive_path_operational_reference_hits: 0
+changed_surfaces:
+  - docs/archive/DOCS_ARCHIVE_C1B_REFERENCE_MAP_DRY_RUN.md
+  - docs/archive/README.md
+  - docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md
+  - docs/archive/DOCS_ARCHIVE_C1A_MOVE_EXECUTION_RECORD.md
+  - README.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+route_c_policy:
+  c1b_is_dry_run_only: true
+  old_docs_moved_by_this_phase: false
+  additional_docs_moved: false
+  files_deleted: false
+  operational_references_rewritten: false
+  validator_behavior_changed: false
+  scripts_split: false
+  runs_processed: false
+  staging_performed: false
+  commit_performed: false
+  push_tag_release_deploy_performed: false
+blocked_actions:
+  A5_execution: false
+  provider_contact: false
+  plugin_call: false
+  api_call: false
+  image_generation: false
+  DailyNote_write: false
+  VCP_memory_write: false
+  runtime_execution: false
+  real_manifest_read: false
+  real_vcpchat_read: false
+  real_vcptoolbox_read: false
+  dependency_change: false
+  secret_or_env_read: false
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+recommended_next: review_c1b_map_then_classify_remaining_top_level_historical_docs_before_any_additional_exact_move_authorization
+```
+
+## C1a Docs Archive Physical Move Execution
+
+```yaml
+phase: c1a_docs_archive_physical_move_execution
+status: completed_validated
+mode: A4.8_safe_local_exact_file_move
+goal: move the exact C1.3 YAML-aware zero-reference docs archive candidates
+execution:
+  candidate_source: docs/archive/DOCS_ARCHIVE_YAML_AWARE_ZERO_REFERENCE_CANDIDATES.md
+  execution_record: docs/archive/DOCS_ARCHIVE_C1A_MOVE_EXECUTION_RECORD.md
+  moved_files: 276
+  created_parent_directories: 4
+  glob_move_used: false
+  delete_used: false
+  overwrite_used: false
+  exact_file_move_only: true
+changed_surfaces:
+  - docs/archive/DOCS_ARCHIVE_C1A_MOVE_EXECUTION_RECORD.md
+  - docs/archive/DOCS_ARCHIVE_YAML_AWARE_ZERO_REFERENCE_CANDIDATES.md
+  - docs/archive/README.md
+  - docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md
+  - docs/archive/DOCS_ARCHIVE_C1A_MOVE_AUTHORIZATION_PACKAGE.md
+  - README.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+route_c_policy:
+  c1_physical_move_authorized_by_user: true
+  c1a_exact_file_move_completed: true
+  old_docs_moved: true
+  validator_behavior_changed: false
+  scripts_split: false
+  runs_processed: false
+  files_deleted: false
+  staging_performed: false
+  commit_performed: false
+  push_tag_release_deploy_performed: false
+blocked_actions:
+  A5_execution: false
+  provider_contact: false
+  plugin_call: false
+  api_call: false
+  image_generation: false
+  DailyNote_write: false
+  VCP_memory_write: false
+  runtime_execution: false
+  real_manifest_read: false
+  real_vcpchat_read: false
+  real_vcptoolbox_read: false
+  dependency_change: false
+  secret_or_env_read: false
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+  - post_move_operational_reference_scan_zero_hits_for_moved_candidates
+  - post_move_state_check_276_destinations_present_0_sources_remaining
+recommended_next: plan_c1b_reference_map_dry_run_only_no_additional_moves_without_separate_authorization
+```
+
+## C1a Docs Archive Physical Move Authorization Package Dry Run
+
+```yaml
+phase: c1a_docs_archive_physical_move_authorization_package_dry_run
+status: completed_validated
+mode: A4.8_safe_local_docs_and_resume_surface_sync
+goal: define the future C1a physical move authorization package without moving files
+changed_surfaces:
+  - docs/archive/DOCS_ARCHIVE_C1A_MOVE_AUTHORIZATION_PACKAGE.md
+  - docs/archive/DOCS_ARCHIVE_YAML_AWARE_ZERO_REFERENCE_CANDIDATES.md
+  - docs/archive/README.md
+  - docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md
+  - docs/archive/DOCS_ARCHIVE_REFERENCE_POLICY.md
+  - README.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+authorization_package:
+  package_is_move_authorization_now: false
+  candidate_source: docs/archive/DOCS_ARCHIVE_YAML_AWARE_ZERO_REFERENCE_CANDIDATES.md
+  exact_candidate_rows: 276
+  allowed_future_operation: exact_file_move_only_after_separate_authorization
+  rollback_required: true
+route_c_policy:
+  c1_physical_move_authorized: false
+  old_docs_moved: false
+  validator_behavior_changed: false
+  scripts_split: false
+  runs_processed: false
+  files_deleted: false
+  staging_performed: false
+  commit_performed: false
+  push_tag_release_deploy_performed: false
+blocked_actions:
+  A5_execution: false
+  provider_contact: false
+  plugin_call: false
+  api_call: false
+  image_generation: false
+  DailyNote_write: false
+  VCP_memory_write: false
+  runtime_execution: false
+  real_manifest_read: false
+  real_vcpchat_read: false
+  real_vcptoolbox_read: false
+  dependency_change: false
+  secret_or_env_read: false
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+recommended_next: human_review_c1a_package_then_separate_explicit_c1a_move_authorization_or_keep_planning_only
+```
+
+## C1.3 Docs Archive YAML-Aware Candidate List Dry Run
+
+```yaml
+phase: c1_3_docs_archive_yaml_aware_candidate_list_dry_run
+status: completed_validated
+mode: A4.8_safe_local_docs_and_resume_surface_sync
+goal: generate the stricter YAML-aware zero-reference archive candidate list without moving files
+changed_surfaces:
+  - docs/archive/DOCS_ARCHIVE_YAML_AWARE_ZERO_REFERENCE_CANDIDATES.md
+  - docs/archive/DOCS_ARCHIVE_ZERO_REFERENCE_CANDIDATES.md
+  - docs/archive/README.md
+  - docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md
+  - docs/archive/DOCS_ARCHIVE_REFERENCE_POLICY.md
+  - README.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+candidate_list:
+  historical_candidate_files_scanned: 1194
+  c1_2_markdown_target_zero_reference_candidates: 460
+  yaml_aware_zero_reference_candidates: 276
+  candidates_removed_by_yaml_aware_references: 184
+  yaml_aware_external_referenced_candidates: 918
+  docs_archive_planning_reference_rows_excluded_from_blocker_scan: 477
+  candidate_list_is_move_authorization: false
+route_c_policy:
+  c1_physical_move_authorized: false
+  old_docs_moved: false
+  validator_behavior_changed: false
+  scripts_split: false
+  runs_processed: false
+  files_deleted: false
+  staging_performed: false
+  commit_performed: false
+  push_tag_release_deploy_performed: false
+blocked_actions:
+  A5_execution: false
+  provider_contact: false
+  plugin_call: false
+  api_call: false
+  image_generation: false
+  DailyNote_write: false
+  VCP_memory_write: false
+  runtime_execution: false
+  real_manifest_read: false
+  real_vcpchat_read: false
+  real_vcptoolbox_read: false
+  dependency_change: false
+  secret_or_env_read: false
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+recommended_next: optional_c1a_physical_move_authorization_from_yaml_aware_exact_list_or_keep_planning_only
+```
+
+## C1.2 Docs Archive Zero-Reference Candidate List Dry Run
+
+```yaml
+phase: c1_2_docs_archive_zero_reference_candidate_list_dry_run
+status: completed_validated
+mode: A4.8_safe_local_docs_and_resume_surface_sync
+goal: generate the exact zero-external-reference archive candidate list without moving files
+changed_surfaces:
+  - docs/archive/DOCS_ARCHIVE_ZERO_REFERENCE_CANDIDATES.md
+  - docs/archive/README.md
+  - docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md
+  - docs/archive/DOCS_ARCHIVE_REFERENCE_POLICY.md
+  - README.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+candidate_list:
+  historical_candidate_files_scanned: 1194
+  zero_external_reference_candidates_c1_1_rule: 460
+  external_referenced_candidates_c1_1_rule: 734
+  stricter_yaml_aware_zero_reference_candidates_observed: 276
+  candidate_list_is_move_authorization: false
+route_c_policy:
+  c1_physical_move_authorized: false
+  old_docs_moved: false
+  validator_behavior_changed: false
+  scripts_split: false
+  runs_processed: false
+  files_deleted: false
+  staging_performed: false
+  commit_performed: false
+  push_tag_release_deploy_performed: false
+blocked_actions:
+  A5_execution: false
+  provider_contact: false
+  plugin_call: false
+  api_call: false
+  image_generation: false
+  DailyNote_write: false
+  VCP_memory_write: false
+  runtime_execution: false
+  real_manifest_read: false
+  real_vcpchat_read: false
+  real_vcptoolbox_read: false
+  dependency_change: false
+  secret_or_env_read: false
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+recommended_next: decide_whether_to_generate_stricter_yaml_aware_candidate_list_before_c1a_move_authorization
+```
+
+## C1.1 Docs Archive Reference Policy Dry Run
+
+```yaml
+phase: c1_1_docs_archive_reference_policy_dry_run
+status: completed_validated
+mode: A4.8_safe_local_docs_and_resume_surface_sync
+goal: land archive-aware reference policy before any docs archive movement
+changed_surfaces:
+  - docs/archive/DOCS_ARCHIVE_REFERENCE_POLICY.md
+  - docs/archive/README.md
+  - docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md
+  - README.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+reference_impact_snapshot:
+  total_refs: 4769
+  script_refs: 1446
+  agent_board_refs: 1323
+  docs_refs: 1189
+  tests_refs: 377
+  readme_refs: 185
+  project_master_plan_refs: 79
+candidate_policy:
+  direct_archive_candidates_zero_external_refs: 460
+  docs_only_reference_candidates: 126
+  hard_surface_or_validator_blocked_candidates: 608
+  c1_physical_move_authorized: false
+  old_docs_moved: false
+  validator_behavior_changed: false
+  scripts_split: false
+  runs_processed: false
+  files_deleted: false
+  staging_performed: false
+  commit_performed: false
+  push_tag_release_deploy_performed: false
+blocked_actions:
+  A5_execution: false
+  provider_contact: false
+  plugin_call: false
+  api_call: false
+  image_generation: false
+  DailyNote_write: false
+  VCP_memory_write: false
+  runtime_execution: false
+  real_manifest_read: false
+  real_vcpchat_read: false
+  real_vcptoolbox_read: false
+  dependency_change: false
+  secret_or_env_read: false
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+recommended_next: c1_2_generate_exact_zero_reference_archive_candidate_list_dry_run_only_no_file_moves
+```
+
+## C1 Docs Archive Migration Manifest Dry Run
+
+```yaml
+phase: c1_docs_archive_migration_manifest_dry_run
+status: completed_validated
+mode: A4.8_safe_local_docs_and_resume_surface_sync
+goal: create a docs archive migration manifest without moving files
+changed_surfaces:
+  - docs/archive/README.md
+  - docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md
+  - README.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+docs_inventory:
+  v_phase_docs: 961
+  numbered_legacy_docs: 233
+  current_authority_docs: 2
+  manual_review_docs: 88
+route_c_policy:
+  c1_physical_move_authorized: false
+  old_docs_moved: false
+  scripts_split: false
+  runs_processed: false
+  files_deleted: false
+  staging_performed: false
+  commit_performed: false
+  push_tag_release_deploy_performed: false
+blocked_actions:
+  A5_execution: false
+  provider_contact: false
+  plugin_call: false
+  api_call: false
+  image_generation: false
+  DailyNote_write: false
+  VCP_memory_write: false
+  runtime_execution: false
+  real_manifest_read: false
+  real_vcpchat_read: false
+  real_vcptoolbox_read: false
+  dependency_change: false
+  secret_or_env_read: false
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+recommended_next: c1_reference_impact_audit_before_any_file_moves
+```
+
+## C0.5 Project Restructure Preflight Plan Landing
+
+```yaml
+phase: c0_5_project_restructure_preflight_plan_landing
+status: completed_validated
+mode: A4.8_safe_local_docs_and_resume_surface_sync
+goal: land the route C aggressive restructure preflight plan without performing any restructure
+changed_surfaces:
+  - docs/PROJECT_RESTRUCTURE_PREFLIGHT_PLAN.md
+  - README.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+route_c_policy:
+  c1_authorized: false
+  old_docs_moved: false
+  scripts_split: false
+  runs_processed: false
+  files_deleted: false
+  staging_performed: false
+  commit_performed: false
+  push_tag_release_deploy_performed: false
+blocked_actions:
+  A5_execution: false
+  provider_contact: false
+  plugin_call: false
+  api_call: false
+  image_generation: false
+  image_conversion_or_preview_creation: false
+  DailyNote_write: false
+  VCP_memory_write: false
+  runtime_execution: false
+  real_manifest_read: false
+  real_vcpchat_read: false
+  real_vcptoolbox_read: false
+  dependency_change: false
+  secret_or_env_read: false
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+recommended_next: c1_docs_archive_migration_manifest_dry_run_only_no_file_moves
+```
+
+## v14.233 Project Structure Balance Route B
+
+```yaml
+phase: v14_233_project_structure_balance_route_b
+status: completed_validated
+mode: A4.8_safe_local_docs_and_structure_policy
+goal: establish current structure navigation and future-safe directory policy without moving or deleting old files
+changed_surfaces:
+  - docs/PROJECT_STRUCTURE.md
+  - asset_archive/README.md
+  - asset_archive/accepted_samples/README.md
+  - asset_archive/accepted_samples/.gitkeep
+  - scripts/validators/README.md
+  - scripts/validate_mvp.ps1
+  - README.md
+  - .gitignore
+  - .agent_board resume surfaces
+route_b_policy:
+  old_files_moved: false
+  files_deleted: false
+  accepted_samples_capsule_path_defined: true
+  legacy_asset_archive_accepted_marked: true
+  validator_future_layout_defined: true
+  readme_current_navigation_added: true
+  gitignore_local_patterns_added: true
+blocked_actions:
+  A5_execution: false
+  provider_contact: false
+  plugin_call: false
+  api_call: false
+  image_generation: false
+  preview_webp_creation_or_copy: false
+  DailyNote_write: false
+  VCP_memory_write: false
+  runtime_execution: false
+  push_tag_release_deploy: false
+validation_completed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+validation_note: scripts/validate_mvp.ps1 current A4 local scope now recognizes asset_archive/ structure-policy files without authorizing image binaries, runs outputs, staging, commit, push, tag, release, deploy, provider, plugin, API, DailyNote, VCP memory, runtime, or A5 actions.
+```
+
+## Active Git-Portable Evidence Baseline Track
+
+```text
+objective: define and activate the new durable archive baseline after old ignored runs evidence proved unavailable on the new computer
+status: v14_232_legacy_recoverability_validator_preview_capsule_migration_completed_validated
+mode: A4.8 local implementation only
+phase_id: v14_231_git_tracked_preview_evidence_capsule_baseline
+phase_record_ref: docs/v14_231_git_tracked_preview_evidence_capsule_baseline.md
+supersedes: docs/v14_230_artifact_restoration_a5_authorization_package_draft.md
+new durable archive baseline: git_tracked_preview_evidence_capsule
+preview_file: preview.webp
+preview_long_edge: 512
+preview_git_tracked: true
+preview_sha256_in_manifest: true
+base64_allowed: false
+original_sha256_tracked: false
+original_required_for_portable_validation: false
+old_runs_as_long_term_evidence: false
+copy_performed: false
+runs_write_performed: false
+durable_archive_copy_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+runtime_execution_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+recommended_next: implement_first_new_sample_capsule_when_source_preview_generation_is_explicitly_authorized
+legacy_mvp_blocker_resolved_by_v14_232: true
+```
+
+## v14.232 Legacy Recoverability Validator Preview Capsule Migration
+
+```yaml
+phase: v14_232_legacy_recoverability_validator_preview_capsule_migration
+status: completed_validated
+mode: A4.8_safe_local
+result: mvp_validator_passes_without_old_ignored_runs_artifacts
+portable_evidence_policy:
+  source: asset_archive/accepted_samples/<sample_id>/manifest.json plus preview.webp
+  preview_long_edge: 512
+  preview_sha256_in_manifest: true
+  original_sha256_tracked: false
+  base64_allowed: false
+current_capsule_state:
+  preview_capsule_created: false
+  preview_capsule_present: false
+  recoverability_status: preview_capsule_pending
+validation:
+  scripts_validate_mvp: passed
+  git_diff_check: passed
+  agent_board_state: passed
+next_recommended_action: create_first_real_preview_capsule_after_explicit_preview_source_or_generation_authorization
+```
+
+## Deferred Original Runs Source Harvest Plan
+
+```yaml
+task_id: future.original-runs-source-harvest
+status: deferred_not_current_blocker
+reason: old ignored runs evidence may exist on the original computer, but it is no longer the portable validator baseline
+future_use: source_material_for_git_tracked_preview_capsules_only
+primary_evidence_path: asset_archive/accepted_samples/<sample_id>/manifest.json plus preview.webp
+old_runs_as_primary_evidence: false
+original_sha256_required_for_portable_validation: false
+allowed_later_only_after_explicit_authorization:
+  - inspect relevant old runs image source on the original computer
+  - create long_edge_512 preview.webp
+  - write matching manifest.json under asset_archive accepted sample capsule
+blocked_now:
+  - preview.webp creation_or_copy
+  - image_conversion
+  - provider_contact
+  - plugin_call
+  - api_call
+  - image_generation
+  - DailyNote_write
+  - VCP_memory_write
+  - runtime_execution
+  - real_manifest_read
+  - VCPChat_or_VCPToolBox_read
+```
+
+## v14.232 Historical Partial Migration State
+
+```yaml
+phase: v14_232_legacy_recoverability_validator_preview_capsule_migration
+status: superseded_by_completed_validated_closeout
+evidence_source_target: asset_archive/accepted_samples/<sample_id>/manifest.json + preview.webp
+core_preview_capsule_api_added: true
+webp_dimension_reader_added: true
+migrated_validators:
+  - scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js
+  - scripts/validate_v14_141_recoverability_core_extraction.js
+  - scripts/validate_v14_142_multi_accepted_sample_matrix.js
+  - scripts/validate_v14_146_durable_archive_dry_run_manifest.js
+  - scripts/validate_v14_147_production_candidate_eligibility_preflight.js
+remaining_legacy_runs_direct_readers: 0
+preview_capsule_present_now: false
+preview_generated_now: false
+runs_write_performed: false
+image_generation_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+runtime_execution_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+recommended_next: create_first_real_preview_capsule_after_explicit_preview_source_or_generation_authorization
+```
+
+---
+
 ## Active Six-Month Visual Production Control Layer Goal
 
 ```text
@@ -12205,4 +13136,37 @@ external repository modification: no
 Use the calibrated board as the current navigation source.
 The second newly approved DoubaoGen diagnostic retry was consumed by one process attempt. The result is failed_no_image_repeated_quota_or_rate_limit; generation remains blocked unless the user resolves provider quota/rate-limit conditions or authorizes a new provider/model/account path.
 For the project plugin route, v7.269 consumed the first bounded provider contact / image generation trial. v7.271 created prompt v2 and v7.272 statically reviewed it. v7.273 is completed, committed, pushed, and synced at d1a7ac8. v7.274 consumed its single authorized call and completed successfully with one output. This board correction does not authorize or perform any new A5 execution, provider contact, plugin/model call, image generation, retry, third generation, prompt switch execution, product switch, memory write, DailyNote write, VCP memory write, Batch 005, production_candidate_002, tag, release, deploy, or push.
+```
+
+## v14.231 Git-Tracked Preview Evidence Capsule Baseline
+
+```yaml
+phase: v14_231_git_tracked_preview_evidence_capsule_baseline
+status: current_local_baseline_defined
+route_change: old_runs_restoration_superseded
+new durable archive baseline: git_tracked_preview_evidence_capsule
+preview_file: preview.webp
+preview_long_edge: 512
+preview_git_tracked: true
+preview_sha256_in_manifest: true
+base64_allowed: false
+original_sha256_tracked: false
+original_required_for_portable_validation: false
+old_runs_as_long_term_evidence: false
+portable_validation_claim: git_portable_preview_evidence
+full_original_recoverability_required: false
+A5_execution: false
+provider_contact: false
+plugin_call: false
+api_call: false
+image_generation: false
+runs_write: false
+DailyNote_write: false
+VCP_memory_write: false
+runtime_execution: false
+real_manifest_read: false
+real_vcpchat_read: false
+real_vcptoolbox_read: false
+push_tag_release_deploy: false
+recommended_next: implement_first_new_sample_capsule_when_source_preview_generation_is_explicitly_authorized
 ```

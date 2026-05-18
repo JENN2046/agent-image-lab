@@ -1,5 +1,369 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — C1e Remaining Docs Reclassification Refresh
+
+```text
+Status: c1e_remaining_docs_reclassification_refresh completed validated.
+Reason: project owner requested refreshed remaining-docs classification after C1a and C1d exact-file moves.
+Execution mode: A4.8 local documentation and reference audit only.
+Classification report: docs/archive/DOCS_ARCHIVE_C1E_REMAINING_DOCS_RECLASSIFICATION_REFRESH.md.
+Prior classification: docs/archive/DOCS_ARCHIVE_C1C_REMAINING_DOCS_CLASSIFICATION_DRY_RUN.md.
+C1d move record: docs/archive/DOCS_ARCHIVE_C1D_MOVE_EXECUTION_RECORD.md.
+Remaining top-level historical docs scanned: 710.
+validator-blocked: 423.
+wrapper-required: 200.
+docs-only-reference: 67.
+future exact-move candidates: 20.
+Reference totals: scripts 1456; tests 376; .agent_board 1325; README 182; PROJECT_MASTER_PLAN 79; AGENTS 0; non-archive docs 750; archive audit 1111.
+Docs moved by this phase: false.
+Files deleted: false.
+Wrappers created: false.
+References rewritten: false.
+Validator behavior changed: false.
+Scripts split: false.
+runs processed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Staging/commit/push/tag/release/deploy performed: false.
+Validated: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: C1f exact-move authorization package dry-run for 20 candidates, or exact-file commit readiness audit; either requires separate instruction.
+```
+
+---
+
+## Current Handoff Update — C1d Post-Move Reference Map Dry Run
+
+```text
+Status: c1d_post_move_reference_map_dry_run completed validated.
+Reason: project owner requested a post-move reference impact review for the 208 C1d moved files.
+Execution mode: A4.8 local documentation and reference audit only.
+Reference map report: docs/archive/DOCS_ARCHIVE_C1D_POST_MOVE_REFERENCE_MAP_DRY_RUN.md.
+Move record: docs/archive/DOCS_ARCHIVE_C1D_MOVE_EXECUTION_RECORD.md.
+Authorization package: docs/archive/DOCS_ARCHIVE_C1D_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md.
+C1d moved candidates reviewed: 208.
+Scanned files: 1989.
+Old-path hit total: 856.
+New-path hit total: 561.
+Old-path operational hits in scripts/tests: 0.
+Old-path authority/navigation hits in README/PROJECT_MASTER_PLAN/AGENTS: 0.
+Old-path .agent_board hits: 0.
+Old-path non-archive docs hits: 0.
+Old-path archive planning/audit hits: 856.
+Wrappers required for C1d moved files: false.
+Reference rewrites required for C1d moved files: false.
+Docs moved by this phase: false.
+Files deleted: false.
+Validator behavior changed: false.
+Scripts split: false.
+runs processed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Staging/commit/push/tag/release/deploy performed: false.
+Validated: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: C1e remaining-docs reclassification refresh or exact-file commit readiness audit; either requires separate instruction.
+```
+
+---
+
+## Current Handoff Update — C1d Exact-File Physical Move
+
+```text
+Status: c1d_exact_file_physical_move completed validated.
+Reason: project owner authorized C1d physical movement after the C1d exact-move authorization package dry-run.
+Execution mode: A4.8 local documentation archive movement only.
+Authorization package: docs/archive/DOCS_ARCHIVE_C1D_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md.
+Execution record: docs/archive/DOCS_ARCHIVE_C1D_MOVE_EXECUTION_RECORD.md.
+Exact files moved: 208.
+Source paths still existing after move: 0.
+Destination files existing after move: 208.
+Missing source files before move: 0.
+Existing destinations before move: 0.
+Duplicate sources/destinations before move: 0/0.
+Invalid source/destination boundaries before move: 0/0.
+Wrappers created: false.
+References rewritten: false.
+Validator behavior changed: false.
+Scripts split: false.
+runs processed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Staging/commit/push/tag/release/deploy performed: false.
+Validated: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: validate C1d move, then run a C1d post-move reference-map dry-run before any wrapper/reference work.
+```
+
+---
+
+## Current Handoff Update — C1d Exact-Move Authorization Package Dry Run
+
+```text
+Status: c1d_exact_move_authorization_package_dry_run completed validated.
+Reason: project owner requested a C1d authorization package dry-run only for the 208 future exact-move candidates from C1c.
+Execution mode: A4.8 local documentation and preflight package only.
+Authorization package: docs/archive/DOCS_ARCHIVE_C1D_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md.
+Source classification: docs/archive/DOCS_ARCHIVE_C1C_REMAINING_DOCS_CLASSIFICATION_DRY_RUN.md.
+Future exact-move candidates: 208.
+Missing source files: 0.
+Existing destinations: 0.
+Missing destination parent directories: 0.
+Duplicate sources: 0.
+Duplicate destinations: 0.
+Invalid source boundaries: 0.
+Invalid destination boundaries: 0.
+Docs moved by this phase: false.
+Wrappers created: false.
+References rewritten: false.
+Files deleted: false.
+Validator behavior changed: false.
+Scripts split: false.
+runs processed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Staging/commit/push/tag/release/deploy performed: false.
+Validated: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: human review C1d package; physical C1d move still requires separate explicit authorization naming this package.
+```
+
+---
+
+## Current Handoff Update — C1c Remaining Docs Classification Dry Run
+
+```text
+Status: c1c_remaining_docs_classification_dry_run completed validated.
+Reason: project owner requested classification of remaining unmoved top-level historical docs after C1b reference-map dry-run.
+Execution mode: A4.8 local documentation and reference audit only.
+Classification report: docs/archive/DOCS_ARCHIVE_C1C_REMAINING_DOCS_CLASSIFICATION_DRY_RUN.md.
+Remaining top-level historical docs scanned: 918.
+validator-blocked: 423.
+wrapper-required: 200.
+docs-only-reference: 87.
+future exact-move candidates: 208.
+Docs moved by this phase: false.
+Wrappers created: false.
+References rewritten: false.
+Files deleted: false.
+Validator behavior changed: false.
+Scripts split: false.
+runs processed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Staging/commit/push/tag/release/deploy performed: false.
+Validated: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: review C1c buckets, then either prepare C1d exact-move authorization for the 208 future exact-move candidates or prepare compatibility plans for validator-blocked and wrapper-required records.
+```
+
+---
+
+## Current Handoff Update — C1b Docs Archive Reference Map Dry Run
+
+```text
+Status: c1b_docs_archive_reference_map_dry_run completed validated.
+Reason: project owner requested C1b reference-map dry-run after C1a physical move completed validated.
+Execution mode: A4.8 local documentation and reference audit only.
+Reference map: docs/archive/DOCS_ARCHIVE_C1B_REFERENCE_MAP_DRY_RUN.md.
+Source execution record: docs/archive/DOCS_ARCHIVE_C1A_MOVE_EXECUTION_RECORD.md.
+Candidate source: docs/archive/DOCS_ARCHIVE_YAML_AWARE_ZERO_REFERENCE_CANDIDATES.md.
+Mapped files: 276.
+Source paths still present: 0.
+Archive destinations present: 276.
+Old-path operational reference hits: 0.
+Archive-path operational reference hits: 0.
+Docs moved by this phase: false.
+Files deleted: false.
+Operational references rewritten: false.
+Validator behavior changed: false.
+Scripts split: false.
+runs processed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Staging/commit/push/tag/release/deploy performed: false.
+Validated: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: review C1b map, then classify remaining top-level historical docs before any additional exact-file move authorization.
+```
+
+---
+
+## Current Handoff Update — C1a Docs Archive Physical Move Execution
+
+```text
+Status: c1a_docs_archive_physical_move_execution completed validated.
+Reason: project owner separately authorized C1a physical move after dry-run authorization package and pre-move readiness audit.
+Execution mode: A4.8 local exact-file move only.
+Moved files: 276.
+Created parent directories: 4.
+Candidate source: docs/archive/DOCS_ARCHIVE_YAML_AWARE_ZERO_REFERENCE_CANDIDATES.md.
+Execution record: docs/archive/DOCS_ARCHIVE_C1A_MOVE_EXECUTION_RECORD.md.
+Glob move used: false.
+Delete used: false.
+Overwrite used: false.
+Validator behavior changed: false.
+Scripts split: false.
+runs processed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Staging/commit/push/tag/release/deploy performed: false.
+Validated: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; post-move operational reference scan found 0 operational hits for moved candidates; move-state check found 276 destinations present and 0 sources remaining.
+Recommended next: plan C1b reference-map dry-run; do not move additional files until separately authorized.
+```
+
+---
+
+## Current Handoff Update — C1a Docs Archive Physical Move Authorization Package Dry Run
+
+```text
+Status: c1a_docs_archive_physical_move_authorization_package_dry_run completed validated.
+Reason: project owner requested a C1a physical move authorization package dry-run only; no file movement was authorized.
+Execution mode: A4.8 local docs and resume-surface sync only.
+Changed structure surfaces: docs/archive/DOCS_ARCHIVE_C1A_MOVE_AUTHORIZATION_PACKAGE.md; docs/archive/DOCS_ARCHIVE_YAML_AWARE_ZERO_REFERENCE_CANDIDATES.md; docs/archive/README.md; docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md; docs/archive/DOCS_ARCHIVE_REFERENCE_POLICY.md; README.md; .agent_board resume surfaces.
+Candidate source: docs/archive/DOCS_ARCHIVE_YAML_AWARE_ZERO_REFERENCE_CANDIDATES.md.
+Candidate count: 276 exact rows.
+Docs moved: false.
+Files deleted: false.
+Validator behavior changed: false.
+Scripts split: false.
+runs processed: false.
+C1 physical move authorized now: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Staging/commit/push/tag/release/deploy performed: false.
+Validated: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: human review of the C1a package, then either keep planning or issue separate explicit C1a physical move authorization.
+```
+
+---
+
+## Current Handoff Update — C1.3 Docs Archive YAML-Aware Candidate List Dry Run
+
+```text
+Status: c1_3_docs_archive_yaml_aware_candidate_list_dry_run completed validated.
+Reason: project owner approved generating the stricter YAML-aware zero-reference candidate list only, with no C1 physical file movement.
+Execution mode: A4.8 local docs and resume-surface sync only.
+Changed structure surfaces: docs/archive/DOCS_ARCHIVE_YAML_AWARE_ZERO_REFERENCE_CANDIDATES.md; docs/archive/DOCS_ARCHIVE_ZERO_REFERENCE_CANDIDATES.md; docs/archive/README.md; docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md; docs/archive/DOCS_ARCHIVE_REFERENCE_POLICY.md; README.md; .agent_board resume surfaces.
+Candidate count: 276 under the YAML-aware operational reference rule.
+C1.2 markdown-target count: 460.
+Candidates removed by YAML-aware references: 184.
+docs/archive planning rows excluded from blocker scan: 477.
+Docs moved: false.
+Files deleted: false.
+Validator behavior changed: false.
+Scripts split: false.
+runs processed: false.
+C1 physical move authorized: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Staging/commit/push/tag/release/deploy performed: false.
+Validated: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: if desired, authorize a narrow C1a physical move using the YAML-aware exact list; otherwise keep planning only.
+```
+
+---
+
+## Current Handoff Update — C1.2 Docs Archive Zero-Reference Candidate List Dry Run
+
+```text
+Status: c1_2_docs_archive_zero_reference_candidate_list_dry_run completed validated.
+Reason: project owner approved generating the exact zero-external-reference candidate list only, with no C1 physical file movement.
+Execution mode: A4.8 local docs and resume-surface sync only.
+Changed structure surfaces: docs/archive/DOCS_ARCHIVE_ZERO_REFERENCE_CANDIDATES.md; docs/archive/README.md; docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md; docs/archive/DOCS_ARCHIVE_REFERENCE_POLICY.md; README.md; .agent_board resume surfaces.
+Candidate count: 460 under the C1.1 markdown-target reference rule.
+Stricter YAML-aware zero-reference count observed: 276.
+Docs moved: false.
+Files deleted: false.
+Validator behavior changed: false.
+Scripts split: false.
+runs processed: false.
+C1 physical move authorized: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Staging/commit/push/tag/release/deploy performed: false.
+Validated: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: decide whether to generate a stricter YAML-aware candidate list before any C1a move authorization.
+```
+
+---
+
+## Current Handoff Update — C1.1 Docs Archive Reference Policy Dry Run
+
+```text
+Status: c1_1_docs_archive_reference_policy_dry_run completed validated.
+Reason: project owner approved C1.1 archive-aware reference policy dry-run and explicitly did not approve C1 physical file movement.
+Execution mode: A4.8 local docs and resume-surface sync only.
+Changed structure surfaces: docs/archive/DOCS_ARCHIVE_REFERENCE_POLICY.md; docs/archive/README.md; docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md; README.md; .agent_board resume surfaces.
+Docs moved: false.
+Files deleted: false.
+Scripts split: false.
+runs processed: false.
+C1 physical move authorized: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Staging/commit/push/tag/release/deploy performed: false.
+Validated: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: C1.2 generate exact zero-reference archive candidate list as dry-run only; do not move files.
+```
+
+---
+
+## Current Handoff Update — C1 Docs Archive Migration Manifest Dry Run
+
+```text
+Status: c1_docs_archive_migration_manifest_dry_run completed validated.
+Reason: Route C C1 was authorized only to create a docs archive migration manifest and archive README without moving files.
+Execution mode: A4.8 local docs and resume-surface sync only.
+Changed structure surfaces: docs/archive/README.md; docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md; README.md; .agent_board resume surfaces.
+Docs moved: false.
+Files deleted: false.
+Scripts split: false.
+runs processed: false.
+C1 physical move authorized: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Staging/commit/push/tag/release/deploy performed: false.
+Validated: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: review the manifest, then decide whether to run a C1 reference-impact audit before any move.
+```
+
+---
+
+## Current Handoff Update — C0.5 Project Restructure Preflight Plan Landing
+
+```text
+Status: c0_5_project_restructure_preflight_plan_landing completed validated.
+Reason: route C-preflight was approved for durable documentation so future agents can use a stable migration blueprint before any aggressive restructure.
+Execution mode: A4.8 local docs and resume-surface sync only.
+Changed structure surfaces: docs/PROJECT_RESTRUCTURE_PREFLIGHT_PLAN.md; README.md; .agent_board resume surfaces.
+C1 authorized: false.
+Docs moved: false.
+Scripts split: false.
+runs processed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Staging/commit/push/tag/release/deploy performed: false.
+Validated: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: run C1 docs archive migration manifest as dry-run only; do not move files until separately approved.
+```
+
+---
+
+## Current Handoff Update — v14.233 Project Structure Balance Route B
+
+```text
+Status: v14_233_project_structure_balance_route_b completed validated.
+Reason: route B was selected after project structure audit to clarify long-term directory responsibilities without moving or deleting old files.
+Execution mode: A4.8 local docs and structure policy only.
+Changed structure surfaces: docs/PROJECT_STRUCTURE.md; asset_archive/accepted_samples/README.md; asset_archive/accepted_samples/.gitkeep; scripts/validators/README.md; asset_archive/README.md; README.md; .gitignore; scripts/validate_mvp.ps1; .agent_board resume surfaces.
+No files moved: true.
+No files deleted: true.
+preview.webp created: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Validated: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Recommended next: use docs/PROJECT_STRUCTURE.md as the structure map and prepare the first asset_archive/accepted_samples/<sample_id>/manifest.json plus preview.webp capsule only after explicit source-preview or generation authorization.
+```
+
+---
+
+## Prior Handoff Update — v14.232 Legacy Recoverability Validator Preview Capsule Migration
+
+```text
+Status: v14_232_legacy_recoverability_validator_preview_capsule_migration completed validated.
+Reason: scripts/validate_mvp.ps1 now passes on this computer without old ignored runs/real_generation evidence.
+Evidence route: asset_archive/accepted_samples/<sample_id>/manifest.json plus preview.webp.
+Execution mode: A4.8 local validator migration only.
+preview.webp created: false.
+asset_archive accepted sample capsule created: false.
+runs write performed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox actions: false.
+Recommended next: create first real Git-tracked preview capsule only after explicit preview source or generation authorization.
+```
+
+---
+
 ## Handoff Summary
 
 ```text
@@ -11773,4 +12137,108 @@ Next action is v7.283 candidate acceptance or final retouch decision gate only. 
 不要进入 runtime/A5/release/tag，除非已有明确授权且 preflight 通过。
 不要继续新增 Smart Commander 调教 gate，除非 review 证明必要。
 不要编辑文件，直到 Autopilot Rule Intake 完成并复述 hard stops、no git add .、exact-file staging 和 agent_board update rule。
+```
+
+## v14.231 Handoff - Git-Tracked Preview Evidence Capsule Baseline
+
+```yaml
+current_phase: v14_231_git_tracked_preview_evidence_capsule_baseline
+current_status: completed_validated_with_legacy_mvp_blocker
+reason: user is on a different computer and old ignored runs evidence is unavailable
+decision:
+  old_artifact_restoration_route: superseded
+  new durable archive baseline: git_tracked_preview_evidence_capsule
+  preview_file: preview.webp
+  preview_long_edge: 512
+  preview_sha256_in_manifest: true
+  preview_git_tracked: true
+  base64_allowed: false
+  original_sha256_tracked: false
+  original_required_for_portable_validation: false
+not_done:
+  - no preview.webp created
+  - no real asset copied
+  - no old runs restored
+  - no provider/plugin/API/image generation performed
+  - no DailyNote or VCP memory write performed
+validation_completed:
+  - node --check scripts/validate_v14_231_git_tracked_preview_evidence_capsule_baseline.js: passed
+  - node scripts/validate_v14_231_git_tracked_preview_evidence_capsule_baseline.js: passed
+  - git diff --check: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1: passed_with_manual_review_warnings
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1: failed_expected_legacy_runs_and_dirty_tree_blocker
+next_safe_action: migrate legacy recoverability validators from ignored runs evidence to asset_archive preview capsule evidence
+hard_stop: creating or copying preview.webp requires explicit source/preview-generation authorization
+```
+
+## v14.232 Handoff - Historical Partial Migration State
+
+```yaml
+current_phase: v14_232_legacy_recoverability_validator_preview_capsule_migration
+current_status: superseded_by_completed_validated_closeout
+changed_code:
+  - scripts/lib/artifact_recoverability_core.js
+  - scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js
+  - scripts/validate_v14_141_recoverability_core_extraction.js
+  - scripts/validate_v14_142_multi_accepted_sample_matrix.js
+  - scripts/validate_v14_146_durable_archive_dry_run_manifest.js
+  - scripts/validate_v14_147_production_candidate_eligibility_preflight.js
+  - scripts/validate_mvp.ps1
+new_behavior: migrated validators now look for Git preview capsules and return pending/missing capsule state instead of crashing on missing ignored runs evidence
+remaining_direct_runs_readers: 0
+validation_state:
+  targeted_migrated_validators: passed_then_superseded
+  validate_mvp: passed_after_completed_migration
+next_safe_action: create first real Git preview capsule only after explicit preview source or generation authorization
+```
+
+## v14.232 Handoff - Completed Legacy Recoverability Validator Migration
+
+```yaml
+current_phase: v14_232_legacy_recoverability_validator_preview_capsule_migration
+current_status: completed_validated
+validation_completed:
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1: passed
+  - git diff --check: passed
+  - node scripts/validate_agent_board_state.js: passed
+current_truth:
+  old ignored runs evidence is no longer required for MVP validation on this machine
+  validators now report preview_capsule_pending instead of claiming old local artifact recoverability
+  no original sha256 is carried forward as portable evidence
+  no Base64 evidence path is used
+  asset_archive accepted sample capsules are still not created
+remaining_product_gap:
+  create real asset_archive/accepted_samples/<sample_id>/manifest.json
+  create or source real asset_archive/accepted_samples/<sample_id>/preview.webp with long_edge 512
+  verify preview sha256 and WebP dimensions from the committed capsule
+hard_stop:
+  preview.webp creation/copying still requires explicit source or generation authorization
+```
+
+## Deferred Plan - Original Runs Source Harvest On Original Computer
+
+```yaml
+task_id: future.original-runs-source-harvest
+status: deferred_not_current_blocker
+summary: when the user returns to the original computer that still has old runs/ images, those images may be used only as source material for creating Git-tracked preview capsules
+current_machine_blocker: false
+old_runs_primary_evidence_restoration_required: false
+new_target_path: asset_archive/accepted_samples/<sample_id>/manifest.json plus preview.webp
+preview_policy:
+  format: webp
+  long_edge: 512
+  manifest_tracks_preview_sha256: true
+  base64_allowed: false
+  original_sha256_required: false
+requires_later_explicit_authorization:
+  - exact old runs source image reference
+  - exact sample_id
+  - exact capsule output path
+  - permission to create/copy/convert preview.webp
+forbidden_without_later_authorization:
+  - image conversion or preview.webp write
+  - provider/plugin/API/image generation
+  - DailyNote/VCP memory/runtime action
+  - real manifest/VCPChat/VCPToolBox read
 ```

@@ -2,6 +2,29 @@
 
 Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不重新造生图插件，也不重新造记忆系统，而是把 VCP 的生图 / 编辑插件、VCPChat 的窗口能力、VCP 的长期记忆系统组织成一条可评审、可迭代、可归档、可沉淀的视觉生产线。
 
+## 当前结构导航
+
+当前操作入口以 `AGENTS.md`、`AGENTS.autopilot-overlay.md`、`.agent_board/` 和 `scripts/validate_mvp.ps1` 为准。
+
+- `.agent_board/RUN_STATE.md`、`.agent_board/TASK_QUEUE.md`、`.agent_board/HANDOFF.md` 是当前恢复和续跑状态面。
+- `docs/PROJECT_STRUCTURE.md` 说明顶层目录职责、Git-portable 与 local-only 边界、asset archive capsule 路线和 A5 硬停止路径。
+- `docs/PROJECT_RESTRUCTURE_PREFLIGHT_PLAN.md` 记录路线 C 激进重构的 C1/C2/C3/C4 迁移蓝图；它是计划，不授权移动、删除或 A5。
+- `docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md` 是 C1 docs 归档 dry-run 清单；它列出未来目标路径，但本身不授权移动文件。
+- `docs/archive/DOCS_ARCHIVE_REFERENCE_POLICY.md` 是 C1.1 归档引用策略；它要求 validator / 状态面引用的旧 docs 在兼容层完成前保持原位。
+- `docs/archive/DOCS_ARCHIVE_ZERO_REFERENCE_CANDIDATES.md` 是 C1.2 零外部引用候选清单；它只列出候选，不授权移动文件。
+- `docs/archive/DOCS_ARCHIVE_YAML_AWARE_ZERO_REFERENCE_CANDIDATES.md` 是 C1.3 更严格候选清单；它排除 `docs/archive/` 自身规划清单后同时检查 `.md/.yaml/.yml` 引用。
+- `docs/archive/DOCS_ARCHIVE_C1A_MOVE_AUTHORIZATION_PACKAGE.md` 是 C1a 物理移动授权包草案；它定义未来授权形状，不执行移动。
+- `docs/archive/DOCS_ARCHIVE_C1A_MOVE_EXECUTION_RECORD.md` 记录 C1a exact-file 物理移动执行结果；后续 C1b 仍需单独计划和授权。
+- `docs/archive/DOCS_ARCHIVE_C1B_REFERENCE_MAP_DRY_RUN.md` 记录 C1b post-move 引用映射 dry-run；它只证明旧路径引用影响，不授权继续移动文件。
+- `docs/archive/DOCS_ARCHIVE_C1C_REMAINING_DOCS_CLASSIFICATION_DRY_RUN.md` 记录 C1c 剩余顶层历史 docs 分类；它只分桶，不授权 wrapper、引用改写或继续移动。
+- `docs/archive/DOCS_ARCHIVE_C1D_EXACT_MOVE_AUTHORIZATION_PACKAGE_DRY_RUN.md` 记录 C1d 针对 208 个 future exact-move candidates 的授权包 dry-run；它不执行移动。
+- `docs/archive/DOCS_ARCHIVE_C1D_MOVE_EXECUTION_RECORD.md` 记录 C1d exact-file 物理移动执行结果；它移动了授权包中的 208 个文件，不授权后续 wrapper 或引用改写。
+- `docs/archive/DOCS_ARCHIVE_C1D_POST_MOVE_REFERENCE_MAP_DRY_RUN.md` 记录 C1d 移动后的旧路径 / 新路径引用影响；它只审查断链风险，不授权 wrapper 或引用改写。
+- `docs/archive/DOCS_ARCHIVE_C1E_REMAINING_DOCS_RECLASSIFICATION_REFRESH.md` 记录 C1a + C1d 后剩余顶层历史 docs 的重新分桶；它只刷新分类，不授权继续移动。
+- `asset_archive/accepted_samples/<sample_id>/manifest.json + preview.webp` 是新的 accepted sample portable evidence capsule 目标路径。
+- 历史 `docs/v*` 阶段记录、旧 closeout、旧 authorization 草案是审计记录，不等于当前授权。
+- 未经明确 A5 授权，不要运行 provider/plugin/API/image generation/DailyNote/VCP memory/runtime/push/tag/release/deploy 相关入口。
+
 ## 当前状态
 
 当前仓库处于：
