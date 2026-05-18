@@ -1,10 +1,32 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## C1am Agent-Board-Only 05 Execution
+
+```yaml
+phase: c1am_agent_board_only_05_execution
+status: completed_validated_pending_commit
+goal: execute fifth and final low-risk agent-board-only paired move/rewrite batch
+completed:
+  - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_05_EXECUTION_PACKAGE.md
+  - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_05_EXECUTION_PACKAGE.csv
+  - moved 13 exact files to docs/archive/
+  - rewrote 13 exact old-path references in one .agent_board source file
+  - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_05_EXECUTION_RECORD.md
+  - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_05_POST_MOVE_REFERENCE_MAP.csv
+  - generated docs_registry/generated/c1am_agent_board_only_05_registry_evidence.csv
+  - confirmed non-archive active old-path hit records count 0
+not_performed:
+  - no files outside move allowlist moved
+  - no files deleted
+  - no wrappers created
+  - no push, tag, release, or deploy
+```
+
 ## C1am Agent-Board-Only 04 Execution
 
 ```yaml
 phase: c1am_agent_board_only_04_execution
-status: completed_validated_pending_commit
+status: completed_validated_committed
 goal: execute fourth low-risk agent-board-only paired move/rewrite batch
 completed:
   - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_04_EXECUTION_PACKAGE.md
@@ -12405,8 +12427,8 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v9_021_sports_visor_final_retouch_action_package_gate
 source_commit: d40c9cb5a8bdc311ed620b1f9ec1b7f25a565f95
 purpose: close V9 delivery readiness layer and present V10 route options
-phase_record_ref: docs/v9_022_v9_delivery_readiness_layer_closeout_or_next_route_decision_gate.md
-closeout_ref: docs/v9_delivery_readiness_layer_closeout.md
+phase_record_ref: docs/archive/phases/v9/v9_022_v9_delivery_readiness_layer_closeout_or_next_route_decision_gate.md
+closeout_ref: docs/archive/phases/v9/v9_delivery_readiness_layer_closeout.md
 selected_route: delivery_readiness_layer
 delivery_readiness_layer_closed: true
 ceramic_mug_lane_completed: true
@@ -12444,7 +12466,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v9_020_sports_visor_commercial_delivery_review_result_decision_gate
 source_commit: 9f088d4aced2e09c2afbba161a84c68846f2c988
 purpose: create sports_visor_v8_033 final retouch action package
-phase_record_ref: docs/v9_021_sports_visor_final_retouch_action_package_gate.md
+phase_record_ref: docs/archive/phases/v9/v9_021_sports_visor_final_retouch_action_package_gate.md
 final_retouch_action_package_ref: docs/final_retouch_action_package_multi_color_mesh_sports_visor_v8_033.md
 selected_route: delivery_readiness_layer
 selected_asset: sports_visor_v8_033
@@ -12522,7 +12544,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v9_018_sports_visor_commercial_delivery_review_execution_decision_gate
 source_commit: a4fd9aac4d03660a84dbedb41ce26dd2db0d38a6
 purpose: execute docs-only commercial delivery review for sports_visor_v8_033
-phase_record_ref: docs/v9_019_sports_visor_commercial_delivery_review_docs_only_execution_gate.md
+phase_record_ref: docs/archive/phases/v9/v9_019_sports_visor_commercial_delivery_review_docs_only_execution_gate.md
 review_record_ref: reviews/v9_019_sports_visor_v8_033_commercial_delivery_review.md
 selected_route: delivery_readiness_layer
 selected_asset: sports_visor_v8_033
@@ -12606,7 +12628,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v9_016_sports_visor_delivery_readiness_acceptance_criteria_gate
 source_commit: fbb9009981b6b8e829aa66626e66bdac6b393df4
 purpose: create sports_visor_v8_033 commercial delivery review planning
-phase_record_ref: docs/v9_017_sports_visor_commercial_delivery_review_planning_gate.md
+phase_record_ref: docs/archive/phases/v9/v9_017_sports_visor_commercial_delivery_review_planning_gate.md
 commercial_delivery_review_plan_ref: docs/commercial_delivery_review_plan_multi_color_mesh_sports_visor_v8_033.md
 selected_route: delivery_readiness_layer
 selected_asset: sports_visor_v8_033
@@ -12647,7 +12669,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v9_015_sports_visor_delivery_readiness_package_gate
 source_commit: 645e00607cbe085b4e58f32df61ad6aa9c9975d9
 purpose: define sports_visor_v8_033 delivery readiness acceptance criteria
-phase_record_ref: docs/v9_016_sports_visor_delivery_readiness_acceptance_criteria_gate.md
+phase_record_ref: docs/archive/phases/v9/v9_016_sports_visor_delivery_readiness_acceptance_criteria_gate.md
 acceptance_criteria_ref: docs/delivery_readiness_acceptance_criteria_multi_color_mesh_sports_visor_v8_033.md
 selected_route: delivery_readiness_layer
 selected_asset: sports_visor_v8_033
@@ -12686,7 +12708,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v9_014_sports_visor_delivery_readiness_scope_and_asset_selection_gate
 source_commit: 84146f422703ae8831a1336af5724c0a00ee8d56
 purpose: create a docs-only delivery readiness package for sports_visor_v8_033
-phase_record_ref: docs/v9_015_sports_visor_delivery_readiness_package_gate.md
+phase_record_ref: docs/archive/phases/v9/v9_015_sports_visor_delivery_readiness_package_gate.md
 delivery_readiness_package_ref: docs/delivery_readiness_package_multi_color_mesh_sports_visor_v8_033.md
 selected_route: delivery_readiness_layer
 selected_asset: sports_visor_v8_033
@@ -12725,7 +12747,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v9_013_ceramic_mug_first_asset_delivery_lane_closeout_gate
 source_commit: af22c2eff3faf96891ce97536279bb9430948d8b
 purpose: select sports_visor_v8_033 as the second V9 delivery readiness lane
-phase_record_ref: docs/v9_014_sports_visor_delivery_readiness_scope_and_asset_selection_gate.md
+phase_record_ref: docs/archive/phases/v9/v9_014_sports_visor_delivery_readiness_scope_and_asset_selection_gate.md
 selected_route: delivery_readiness_layer
 selected_second_asset: sports_visor_v8_033
 selected_product: multi_color_mesh_sports_visor
@@ -12764,7 +12786,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v9_012_real_retouch_execution_authorization_decision_gate
 source_commit: f01c142c5a79bdf37fbf70e4fd71f3a54391736e
 purpose: close ceramic_mug_v4 first asset delivery lane at the real retouch authorization boundary
-phase_record_ref: docs/v9_013_ceramic_mug_first_asset_delivery_lane_closeout_gate.md
+phase_record_ref: docs/archive/phases/v9/v9_013_ceramic_mug_first_asset_delivery_lane_closeout_gate.md
 selected_route: delivery_readiness_layer
 selected_asset: ceramic_mug_v4
 source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
@@ -12845,7 +12867,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v9_010_final_retouch_execution_or_closeout_decision_gate
 source_commit: 4125dde4dfe9c2f936affbf9472cdc5a31248f12
 purpose: create a docs-only real retouch execution plan after human selected v9.010 Option A
-phase_record_ref: docs/v9_011_real_retouch_execution_planning_gate.md
+phase_record_ref: docs/archive/phases/v9/v9_011_real_retouch_execution_planning_gate.md
 real_retouch_execution_plan_ref: docs/real_retouch_execution_plan_matte_ceramic_mug_v4.md
 selected_route: delivery_readiness_layer
 selected_asset: ceramic_mug_v4
@@ -12885,7 +12907,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v9_009_final_retouch_action_package_gate
 source_commit: 0e3e40455a35db9a3a5bb268a5acb37ee3626a38
 purpose: present Option A/B/C after the ceramic_mug_v4 final retouch action package
-phase_record_ref: docs/v9_010_final_retouch_execution_or_closeout_decision_gate.md
+phase_record_ref: docs/archive/phases/v9/v9_010_final_retouch_execution_or_closeout_decision_gate.md
 selected_route: delivery_readiness_layer
 selected_asset: ceramic_mug_v4
 source_output: runs/real_generation/v7_281_matte_ceramic_mug_v4_trial/native_doubao_1778690863339_0.jpg
@@ -12925,7 +12947,7 @@ status: completed_remote_synced_after_guarded_push
 source_phase: v9_008_commercial_delivery_review_result_decision_gate
 source_commit: f1f87ab3e5a82e22004da8f83d19e400ded5ae0f
 purpose: create a docs-only final retouch action package after human selected v9.008 Option B
-phase_record_ref: docs/v9_009_final_retouch_action_package_gate.md
+phase_record_ref: docs/archive/phases/v9/v9_009_final_retouch_action_package_gate.md
 final_retouch_action_package_ref: docs/final_retouch_action_package_matte_ceramic_mug_v4.md
 selected_route: delivery_readiness_layer
 selected_asset: ceramic_mug_v4
@@ -13298,7 +13320,7 @@ source_commit: 615aa187e8909667ade600b22e2e9895e29bffa7
 purpose: seal V8 product loop after human selected Option A
 phase_record_ref: docs/archive/phases/v8/v8_038_v8_product_loop_final_closeout.md
 final_closeout_ref: docs/archive/phases/v8/v8_product_loop_final_closeout.md
-v9_recommendation_ref: docs/v9_delivery_readiness_layer_route_recommendation.md
+v9_recommendation_ref: docs/archive/phases/v9/v9_delivery_readiness_layer_route_recommendation.md
 v8_closed: true
 route_A_closed: true
 A4_8_validated: true

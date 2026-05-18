@@ -1,10 +1,35 @@
 # RUN_STATE.md — Agent Image Lab
 
+## C1am Agent-Board-Only 05 Execution
+
+```yaml
+phase: c1am_agent_board_only_05_execution
+status: completed_validated_pending_commit
+mode: A4.8_safe_local_docs_only_exact_move_rewrite
+goal: execute fifth and final low-risk agent-board-only paired move/rewrite batch
+evidence:
+  execution_package: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_05_EXECUTION_PACKAGE.md
+  execution_record: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_05_EXECUTION_RECORD.md
+  post_map: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_05_POST_MOVE_REFERENCE_MAP.csv
+  registry_evidence: docs_registry/generated/c1am_agent_board_only_05_registry_evidence.csv
+result:
+  files_moved: 13
+  rewrite_hits: 13
+  agent_board_only_lane_moved_total: 93
+  non_archive_active_old_path_hits: 0
+  wrappers_created: false
+  files_deleted: false
+decision:
+  validation_ready: true
+  push_allowed_now: false
+  recommended_next: validate_and_commit_fifth_batch_then_c1ap_closeout
+```
+
 ## C1am Agent-Board-Only 04 Execution
 
 ```yaml
 phase: c1am_agent_board_only_04_execution
-status: completed_validated_pending_commit
+status: completed_validated_committed
 mode: A4.8_safe_local_docs_only_exact_move_rewrite
 goal: execute fourth low-risk agent-board-only paired move/rewrite batch
 evidence:
@@ -21,7 +46,7 @@ result:
 decision:
   validation_ready: true
   push_allowed_now: false
-  recommended_next: validate_and_commit_fourth_batch
+  recommended_next: c1am_finish_agent_board_only_lane
 ```
 
 ## C1am Agent-Board-Only 03 Execution

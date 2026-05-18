@@ -1,9 +1,32 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — C1am Agent-Board-Only 05 Execution
+
+```text
+Status: c1am_agent_board_only_05_execution completed_validated_pending_commit.
+Reason: Finish low-risk agent-board-only exact-file archive execution lane.
+Execution mode: A4.8 local docs-only exact move/rewrite execution.
+Execution package: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_05_EXECUTION_PACKAGE.md.
+Execution record: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_05_EXECUTION_RECORD.md.
+Post-map: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_05_POST_MOVE_REFERENCE_MAP.csv.
+Registry evidence: docs_registry/generated/c1am_agent_board_only_05_registry_evidence.csv.
+Files moved: 13.
+Rewrite hits: 13.
+Agent-board-only lane moved total: 93.
+Non-archive active old-path hits after rewrite: 0.
+Wrappers created: false.
+Files deleted: false.
+Existing validator behavior changed: false; exact local commit scope allowlist updated for one docs_registry generated evidence file.
+Push/tag/release/deploy performed: false.
+Recommended next: validate and commit fifth batch, then prepare C1ap/C1an closeout and human-navigation decision package.
+```
+
+---
+
 ## Current Handoff Update — C1am Agent-Board-Only 04 Execution
 
 ```text
-Status: c1am_agent_board_only_04_execution completed_validated_pending_commit.
+Status: c1am_agent_board_only_04_execution completed_validated_committed.
 Reason: Continue low-risk exact-file archive execution batches of up to 20 files.
 Execution mode: A4.8 local docs-only exact move/rewrite execution.
 Execution package: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_ONLY_04_EXECUTION_PACKAGE.md.
@@ -17,7 +40,7 @@ Wrappers created: false.
 Files deleted: false.
 Existing validator behavior changed: false; exact local commit scope allowlist updated for one docs_registry generated evidence file.
 Push/tag/release/deploy performed: false.
-Recommended next: validate and commit fourth batch, then finish final agent-board-only low-risk batch.
+Recommended next: finish final agent-board-only low-risk batch.
 ```
 
 ---
