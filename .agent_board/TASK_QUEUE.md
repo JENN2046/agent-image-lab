@@ -6,11 +6,28 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current C1ap/C1an Low-Risk Lane Closeout And Human-Navigation Decision Package
+
+```text
+Current archive task: c1ap_c1an_low_risk_lane_closeout_and_human_navigation_decision_package.
+Status: completed validated pending commit.
+Purpose: close completed low-risk C1 wrapper-required lanes and isolate remaining human-navigation records.
+C1ap closeout: docs/archive/DOCS_ARCHIVE_C1AP_WRAPPER_REQUIRED_LOW_RISK_LANE_CLOSEOUT.md.
+C1an decision package: docs/archive/DOCS_ARCHIVE_C1AN_HUMAN_NAVIGATION_DECISION_PACKAGE.md.
+Low-risk records moved: 161.
+Remaining human-navigation records: 39.
+Automatic movement for human-navigation records: false.
+Recommended next: validate and commit C1ap/C1an, then enter C2a validator-blocked dependency graph dry-run.
+Not allowed now: push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
+```
+
+---
+
 ## Current C1am Agent-Board-Plus-Docs 05 Execution
 
 ```text
 Current archive task: c1am_agent_board_plus_docs_05_execution.
-Status: completed validated pending commit.
+Status: completed validated committed.
 Purpose: execute fifth and final low-risk agent-board-plus-docs paired move/rewrite batch.
 Execution package: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_05_EXECUTION_PACKAGE.md.
 Execution record: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_05_EXECUTION_RECORD.md.
@@ -19,7 +36,7 @@ Rewrite hits: 5.
 Zero-reference confirmed moves: 1.
 Agent-board-plus-docs lane moved total: 68.
 Non-archive active old-path hits after rewrite: 0.
-Recommended next: validate and commit agent-board-plus-docs 05, then produce C1ap closeout and C1an human-navigation decision package.
+Recommended next: produce C1ap closeout and C1an human-navigation decision package.
 Not allowed now: push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
 ```
 

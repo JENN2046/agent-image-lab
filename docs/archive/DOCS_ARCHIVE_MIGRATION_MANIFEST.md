@@ -100,6 +100,9 @@ C1am agent-board-plus-docs 05 execution package CSV: `docs/archive/DOCS_ARCHIVE_
 C1am agent-board-plus-docs 05 execution record: `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_05_EXECUTION_RECORD.md`
 C1am agent-board-plus-docs 05 moved files CSV: `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_05_MOVED_FILES.csv`
 C1am agent-board-plus-docs 05 post-move reference map CSV: `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_05_POST_MOVE_REFERENCE_MAP.csv`
+C1ap wrapper-required low-risk lane closeout: `docs/archive/DOCS_ARCHIVE_C1AP_WRAPPER_REQUIRED_LOW_RISK_LANE_CLOSEOUT.md`
+C1an human-navigation decision package: `docs/archive/DOCS_ARCHIVE_C1AN_HUMAN_NAVIGATION_DECISION_PACKAGE.md`
+C1an human-navigation decision package CSV: `docs/archive/DOCS_ARCHIVE_C1AN_HUMAN_NAVIGATION_DECISION_PACKAGE.csv`
 
 This manifest records proposed future archive targets for historical `docs/` records. It is not a file-move authorization.
 

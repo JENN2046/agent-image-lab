@@ -54,6 +54,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 - `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_03_EXECUTION_PACKAGE.md` 和 `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_03_EXECUTION_RECORD.md` 记录 C1 wrapper-required 第三批 agent-board-plus-docs 19 文件 paired move/rewrite 执行，含 4 个确认零引用移动。
 - `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_04_EXECUTION_PACKAGE.md` 和 `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_04_EXECUTION_RECORD.md` 记录 C1 wrapper-required 第四批 agent-board-plus-docs 20 文件 paired move/rewrite 执行，含 7 个确认零引用移动。
 - `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_05_EXECUTION_PACKAGE.md` 和 `docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_05_EXECUTION_RECORD.md` 记录 C1 wrapper-required 第五批 agent-board-plus-docs 5 文件 paired move/rewrite 执行，并收口低风险 agent-board-plus-docs lane。
+- `docs/archive/DOCS_ARCHIVE_C1AP_WRAPPER_REQUIRED_LOW_RISK_LANE_CLOSEOUT.md` 和 `docs/archive/DOCS_ARCHIVE_C1AN_HUMAN_NAVIGATION_DECISION_PACKAGE.md` 记录 C1 wrapper-required 低风险 161 文件收口和剩余 39 个 human-navigation 记录的语义裁决包。
 - `asset_archive/accepted_samples/<sample_id>/manifest.json + preview.webp` 是新的 accepted sample portable evidence capsule 目标路径。
 - 历史 `docs/v*` 阶段记录、旧 closeout、旧 authorization 草案是审计记录，不等于当前授权。
 - 未经明确 A5 授权，不要运行 provider/plugin/API/image generation/DailyNote/VCP memory/runtime/push/tag/release/deploy 相关入口。

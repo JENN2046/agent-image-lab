@@ -1,9 +1,29 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — C1ap/C1an Low-Risk Lane Closeout And Human-Navigation Decision Package
+
+```text
+Status: c1ap_c1an_low_risk_lane_closeout_and_human_navigation_decision_package completed_validated_pending_commit.
+Reason: Close completed C1 wrapper-required low-risk lanes and isolate remaining human-navigation records.
+Execution mode: A4.8 local docs-only closeout and decision package.
+C1ap closeout: docs/archive/DOCS_ARCHIVE_C1AP_WRAPPER_REQUIRED_LOW_RISK_LANE_CLOSEOUT.md.
+C1an decision package: docs/archive/DOCS_ARCHIVE_C1AN_HUMAN_NAVIGATION_DECISION_PACKAGE.md.
+C1an decision CSV: docs/archive/DOCS_ARCHIVE_C1AN_HUMAN_NAVIGATION_DECISION_PACKAGE.csv.
+Low-risk records moved: 161.
+Remaining human-navigation records: 39.
+Automatic movement for human-navigation records: false.
+Wrappers created: false.
+Files deleted: false.
+Push/tag/release/deploy performed: false.
+Recommended next: validate and commit C1ap/C1an, then enter C2a validator-blocked dependency graph dry-run.
+```
+
+---
+
 ## Current Handoff Update — C1am Agent-Board-Plus-Docs 05 Execution
 
 ```text
-Status: c1am_agent_board_plus_docs_05_execution completed_validated_pending_commit.
+Status: c1am_agent_board_plus_docs_05_execution completed_validated_committed.
 Reason: Finish low-risk paired exact move/rewrite agent-board-plus-docs lane.
 Execution mode: A4.8 local docs-only exact move/rewrite execution.
 Execution package: docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_05_EXECUTION_PACKAGE.md.
@@ -19,7 +39,7 @@ Wrappers created: false.
 Files deleted: false.
 Existing validator behavior changed: false; exact local commit scope allowlist updated for one docs_registry generated evidence file.
 Push/tag/release/deploy performed: false.
-Recommended next: validate and commit agent-board-plus-docs 05, then produce C1ap closeout and C1an human-navigation decision package.
+Recommended next: produce C1ap closeout and C1an human-navigation decision package.
 ```
 
 ---

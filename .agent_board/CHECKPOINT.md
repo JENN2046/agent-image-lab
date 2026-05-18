@@ -1,10 +1,29 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## C1ap/C1an Low-Risk Lane Closeout And Human-Navigation Decision Package
+
+```yaml
+phase: c1ap_c1an_low_risk_lane_closeout_and_human_navigation_decision_package
+status: completed_validated_pending_commit
+goal: close completed low-risk wrapper-required lanes and isolate remaining human-navigation records
+completed:
+  - generated docs/archive/DOCS_ARCHIVE_C1AP_WRAPPER_REQUIRED_LOW_RISK_LANE_CLOSEOUT.md
+  - generated docs/archive/DOCS_ARCHIVE_C1AN_HUMAN_NAVIGATION_DECISION_PACKAGE.md
+  - generated docs/archive/DOCS_ARCHIVE_C1AN_HUMAN_NAVIGATION_DECISION_PACKAGE.csv
+  - confirmed 161 low-risk wrapper-required records moved through exact batches
+  - classified 39 remaining human-navigation records as semantic-review pending
+not_performed:
+  - no human-navigation files moved
+  - no reference rewrite executed for human-navigation records
+  - no wrappers created
+  - no push, tag, release, or deploy
+```
+
 ## C1am Agent-Board-Plus-Docs 05 Execution
 
 ```yaml
 phase: c1am_agent_board_plus_docs_05_execution
-status: completed_validated_pending_commit
+status: completed_validated_committed
 goal: execute fifth and final low-risk agent-board-plus-docs paired move/rewrite batch
 completed:
   - generated docs/archive/DOCS_ARCHIVE_C1AM_AGENT_BOARD_PLUS_DOCS_05_EXECUTION_PACKAGE.md

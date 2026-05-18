@@ -1,10 +1,33 @@
 # RUN_STATE.md — Agent Image Lab
 
+## C1ap/C1an Low-Risk Lane Closeout And Human-Navigation Decision Package
+
+```yaml
+phase: c1ap_c1an_low_risk_lane_closeout_and_human_navigation_decision_package
+status: completed_validated_pending_commit
+mode: A4.8_safe_local_docs_only_closeout_decision_package
+goal: close completed low-risk wrapper-required lanes and isolate remaining human-navigation records
+evidence:
+  c1ap_closeout: docs/archive/DOCS_ARCHIVE_C1AP_WRAPPER_REQUIRED_LOW_RISK_LANE_CLOSEOUT.md
+  c1an_decision_package: docs/archive/DOCS_ARCHIVE_C1AN_HUMAN_NAVIGATION_DECISION_PACKAGE.md
+  c1an_decision_csv: docs/archive/DOCS_ARCHIVE_C1AN_HUMAN_NAVIGATION_DECISION_PACKAGE.csv
+result:
+  low_risk_records_moved: 161
+  remaining_human_navigation_records: 39
+  automatic_human_navigation_movement_allowed: false
+  wrappers_created: false
+  files_deleted: false
+decision:
+  validation_ready: true
+  push_allowed_now: false
+  recommended_next: c2a_validator_blocked_dependency_graph_dry_run
+```
+
 ## C1am Agent-Board-Plus-Docs 05 Execution
 
 ```yaml
 phase: c1am_agent_board_plus_docs_05_execution
-status: completed_validated_pending_commit
+status: completed_validated_committed
 mode: A4.8_safe_local_docs_only_exact_move_rewrite
 goal: execute fifth and final low-risk agent-board-plus-docs paired move/rewrite batch
 evidence:
@@ -23,7 +46,7 @@ result:
 decision:
   validation_ready: true
   push_allowed_now: false
-  recommended_next: validate_and_commit_agent_board_plus_docs_05
+  recommended_next: c1ap_c1an_low_risk_lane_closeout
 ```
 
 ## C1am Agent-Board-Plus-Docs 04 Execution
