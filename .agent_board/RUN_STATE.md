@@ -1,10 +1,34 @@
 # RUN_STATE.md — Agent Image Lab
 
+## C2a Validator-Blocked Dependency Graph Dry Run
+
+```yaml
+phase: c2a_validator_blocked_dependency_graph_dry_run
+status: completed_validated_pending_commit
+mode: A4.8_safe_local_docs_only_read_only_dependency_graph
+goal: scan validator-blocked records for live scripts/tests dependencies before any movement or validator strategy
+evidence:
+  dependency_graph: docs/archive/DOCS_ARCHIVE_C2A_VALIDATOR_BLOCKED_DEPENDENCY_GRAPH_DRY_RUN.md
+  dependency_csv: docs/archive/DOCS_ARCHIVE_C2A_VALIDATOR_BLOCKED_DEPENDENCY_GRAPH_DRY_RUN.csv
+result:
+  validator_blocked_records_scanned: 423
+  scripts_and_tests_dependencies: 192
+  scripts_only_dependencies: 197
+  tests_only_dependencies: 34
+  stale_or_nonlive_dependencies: 0
+  files_moved: 0
+  validator_behavior_changed: false
+decision:
+  validation_ready: true
+  push_allowed_now: false
+  recommended_next: c2b_validator_blocked_strategy_package
+```
+
 ## C1ap/C1an Low-Risk Lane Closeout And Human-Navigation Decision Package
 
 ```yaml
 phase: c1ap_c1an_low_risk_lane_closeout_and_human_navigation_decision_package
-status: completed_validated_pending_commit
+status: completed_validated_committed
 mode: A4.8_safe_local_docs_only_closeout_decision_package
 goal: close completed low-risk wrapper-required lanes and isolate remaining human-navigation records
 evidence:

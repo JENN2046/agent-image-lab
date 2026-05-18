@@ -103,6 +103,8 @@ C1am agent-board-plus-docs 05 post-move reference map CSV: `docs/archive/DOCS_AR
 C1ap wrapper-required low-risk lane closeout: `docs/archive/DOCS_ARCHIVE_C1AP_WRAPPER_REQUIRED_LOW_RISK_LANE_CLOSEOUT.md`
 C1an human-navigation decision package: `docs/archive/DOCS_ARCHIVE_C1AN_HUMAN_NAVIGATION_DECISION_PACKAGE.md`
 C1an human-navigation decision package CSV: `docs/archive/DOCS_ARCHIVE_C1AN_HUMAN_NAVIGATION_DECISION_PACKAGE.csv`
+C2a validator-blocked dependency graph dry-run: `docs/archive/DOCS_ARCHIVE_C2A_VALIDATOR_BLOCKED_DEPENDENCY_GRAPH_DRY_RUN.md`
+C2a validator-blocked dependency graph CSV: `docs/archive/DOCS_ARCHIVE_C2A_VALIDATOR_BLOCKED_DEPENDENCY_GRAPH_DRY_RUN.csv`
 
 This manifest records proposed future archive targets for historical `docs/` records. It is not a file-move authorization.
 

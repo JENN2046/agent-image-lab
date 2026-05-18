@@ -1,9 +1,30 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — C2a Validator-Blocked Dependency Graph Dry Run
+
+```text
+Status: c2a_validator_blocked_dependency_graph_dry_run completed_validated_pending_commit.
+Reason: Begin C2 validator-blocked strategy by proving live scripts/tests dependencies before any movement or validator change.
+Execution mode: A4.8 local docs-only read-only dependency graph.
+Dependency graph: docs/archive/DOCS_ARCHIVE_C2A_VALIDATOR_BLOCKED_DEPENDENCY_GRAPH_DRY_RUN.md.
+Dependency CSV: docs/archive/DOCS_ARCHIVE_C2A_VALIDATOR_BLOCKED_DEPENDENCY_GRAPH_DRY_RUN.csv.
+Validator-blocked records scanned: 423.
+Scripts and tests dependencies: 192.
+Scripts-only dependencies: 197.
+Tests-only dependencies: 34.
+Stale or non-live dependencies: 0.
+Files moved: 0.
+Validator behavior changed: false.
+Push/tag/release/deploy performed: false.
+Recommended next: validate and commit C2a, then prepare C2b validator-blocked strategy package.
+```
+
+---
+
 ## Current Handoff Update — C1ap/C1an Low-Risk Lane Closeout And Human-Navigation Decision Package
 
 ```text
-Status: c1ap_c1an_low_risk_lane_closeout_and_human_navigation_decision_package completed_validated_pending_commit.
+Status: c1ap_c1an_low_risk_lane_closeout_and_human_navigation_decision_package completed_validated_committed.
 Reason: Close completed C1 wrapper-required low-risk lanes and isolate remaining human-navigation records.
 Execution mode: A4.8 local docs-only closeout and decision package.
 C1ap closeout: docs/archive/DOCS_ARCHIVE_C1AP_WRAPPER_REQUIRED_LOW_RISK_LANE_CLOSEOUT.md.
@@ -15,7 +36,7 @@ Automatic movement for human-navigation records: false.
 Wrappers created: false.
 Files deleted: false.
 Push/tag/release/deploy performed: false.
-Recommended next: validate and commit C1ap/C1an, then enter C2a validator-blocked dependency graph dry-run.
+Recommended next: enter C2a validator-blocked dependency graph dry-run.
 ```
 
 ---

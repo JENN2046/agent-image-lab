@@ -6,18 +6,36 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current C2a Validator-Blocked Dependency Graph Dry Run
+
+```text
+Current archive task: c2a_validator_blocked_dependency_graph_dry_run.
+Status: completed validated pending commit.
+Purpose: scan 423 validator-blocked records for live scripts/tests dependencies before any movement or validator strategy.
+Dependency graph: docs/archive/DOCS_ARCHIVE_C2A_VALIDATOR_BLOCKED_DEPENDENCY_GRAPH_DRY_RUN.md.
+Dependency CSV: docs/archive/DOCS_ARCHIVE_C2A_VALIDATOR_BLOCKED_DEPENDENCY_GRAPH_DRY_RUN.csv.
+Scripts and tests dependencies: 192.
+Scripts-only dependencies: 197.
+Tests-only dependencies: 34.
+Stale or non-live dependencies: 0.
+Recommended next: validate and commit C2a, then prepare C2b validator-blocked strategy package.
+Not allowed now: file movement, validator behavior changes, push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
+```
+
+---
+
 ## Current C1ap/C1an Low-Risk Lane Closeout And Human-Navigation Decision Package
 
 ```text
 Current archive task: c1ap_c1an_low_risk_lane_closeout_and_human_navigation_decision_package.
-Status: completed validated pending commit.
+Status: completed validated committed.
 Purpose: close completed low-risk C1 wrapper-required lanes and isolate remaining human-navigation records.
 C1ap closeout: docs/archive/DOCS_ARCHIVE_C1AP_WRAPPER_REQUIRED_LOW_RISK_LANE_CLOSEOUT.md.
 C1an decision package: docs/archive/DOCS_ARCHIVE_C1AN_HUMAN_NAVIGATION_DECISION_PACKAGE.md.
 Low-risk records moved: 161.
 Remaining human-navigation records: 39.
 Automatic movement for human-navigation records: false.
-Recommended next: validate and commit C1ap/C1an, then enter C2a validator-blocked dependency graph dry-run.
+Recommended next: enter C2a validator-blocked dependency graph dry-run.
 Not allowed now: push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
 ```
 

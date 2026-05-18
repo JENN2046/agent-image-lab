@@ -1,10 +1,31 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## C2a Validator-Blocked Dependency Graph Dry Run
+
+```yaml
+phase: c2a_validator_blocked_dependency_graph_dry_run
+status: completed_validated_pending_commit
+goal: scan validator-blocked records for live scripts/tests dependencies before any movement or validator strategy
+completed:
+  - generated docs/archive/DOCS_ARCHIVE_C2A_VALIDATOR_BLOCKED_DEPENDENCY_GRAPH_DRY_RUN.md
+  - generated docs/archive/DOCS_ARCHIVE_C2A_VALIDATOR_BLOCKED_DEPENDENCY_GRAPH_DRY_RUN.csv
+  - scanned 423 validator-blocked records
+  - classified 192 records with scripts and tests dependencies
+  - classified 197 records with scripts-only dependencies
+  - classified 34 records with tests-only dependencies
+  - confirmed 0 stale or non-live dependencies
+not_performed:
+  - no validator-blocked files moved
+  - no reference rewrite executed
+  - no validator behavior changed
+  - no push, tag, release, or deploy
+```
+
 ## C1ap/C1an Low-Risk Lane Closeout And Human-Navigation Decision Package
 
 ```yaml
 phase: c1ap_c1an_low_risk_lane_closeout_and_human_navigation_decision_package
-status: completed_validated_pending_commit
+status: completed_validated_committed
 goal: close completed low-risk wrapper-required lanes and isolate remaining human-navigation records
 completed:
   - generated docs/archive/DOCS_ARCHIVE_C1AP_WRAPPER_REQUIRED_LOW_RISK_LANE_CLOSEOUT.md
