@@ -1,5 +1,19 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — Second Preview Capsule Pre-Execution Check
+
+```text
+Status: second_preview_capsule_pre_execution_check completed_validated_pending_creation_authorization.
+Reason: confirm accepted_product_still_life_tennis_wallet_001 is ready for a separate preview capsule creation authorization.
+Execution mode: A4.8 local readiness check and script guard patch.
+Source image exists: runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg.
+Source image metadata: jpeg 1920x1920, 1104027 bytes, Git ignored under /runs/, not Git tracked.
+Target capsule exists: false.
+Script readiness: scripts/create_preview_capsule.js now supports the second sample and rejects mismatched --source-image or --long-edge values.
+Not performed: no preview.webp creation/copy/conversion, no manifest/import/review/approval record write, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no push/tag/release/deploy.
+Recommended next: explicit creation authorization for npm run create-preview-capsule with sample accepted_product_still_life_tennis_wallet_001.
+```
+
 ## Current Handoff Update — P5-P8 Remaining Route Packages
 
 ```text

@@ -2,7 +2,7 @@
 
 base_contract: AGENTS.md
 mode: A4.8 authorization package only
-status: prepared_no_execution
+status: pre_execution_checked_script_ready_pending_creation_authorization
 
 ## Purpose
 
@@ -11,6 +11,32 @@ copying, converting, or generating any image file.
 
 This gate is a future authorization package. It does not authorize execution by
 itself.
+
+## Pre-Execution Check — 2026-05-19
+
+```yaml
+sample_id: accepted_product_still_life_tennis_wallet_001
+source_image_exists: true
+source_image_path: runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg
+source_image_git_tracked: false
+source_image_git_ignored: true
+source_image_size_bytes: 1104027
+source_image_format: jpeg
+source_image_width: 1920
+source_image_height: 1920
+target_capsule_exists: false
+sharp_available: true
+sharp_version: 0.33.5
+create_script_supports_sample: true
+create_script_source_arg_guard: exact_match_required
+create_script_long_edge_guard: exact_match_required
+preview_created: false
+manifest_written: false
+capsule_created: false
+```
+
+The repository is ready for a separate explicit creation authorization. The
+next step is still not automatic execution.
 
 ## Candidate Scan
 

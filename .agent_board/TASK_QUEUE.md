@@ -6,6 +6,21 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current Second Preview Capsule Pre-Execution Check
+
+```text
+Current product-mainline task: second_preview_capsule_pre_execution_check.
+Status: completed validated pending creation authorization.
+Sample: accepted_product_still_life_tennis_wallet_001.
+Source image: runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg exists, jpeg 1920x1920, Git ignored under /runs/, not Git tracked.
+Target capsule: asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/ does not exist.
+Script readiness: scripts/create_preview_capsule.js supports the sample and requires exact --source-image / --long-edge match.
+Not performed: no preview.webp creation/copy/conversion, no capsule records written, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no push/tag/release/deploy.
+Recommended next: explicit creation authorization for the second preview capsule.
+```
+
+---
+
 ## Current P5-P8 Remaining Route Packages
 
 ```text

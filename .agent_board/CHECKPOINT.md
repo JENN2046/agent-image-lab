@@ -1,5 +1,28 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## Second Preview Capsule Pre-Execution Check
+
+```yaml
+phase: second_preview_capsule_pre_execution_check
+status: completed_validated_pending_creation_authorization
+completed:
+  - confirmed source image exists for accepted_product_still_life_tennis_wallet_001
+  - confirmed source is ignored local runs evidence and not Git tracked
+  - confirmed target capsule directory does not exist
+  - confirmed sharp 0.33.5 is available
+  - patched scripts/create_preview_capsule.js to support the second sample
+  - added exact source-image and long-edge guards to the create script
+not_performed:
+  - no preview.webp creation, copy, conversion, or generation
+  - no manifest/import/review/approval record write
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no push, tag, release, or deploy
+next:
+  - explicit creation authorization is required before running npm run create-preview-capsule
+```
+
 ## P5-P8 Remaining Route Packages
 
 ```yaml

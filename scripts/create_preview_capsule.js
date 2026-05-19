@@ -9,6 +9,24 @@ const sharp = require("sharp");
 const repoRoot = path.resolve(__dirname, "..");
 
 const SAMPLES = {
+  accepted_product_still_life_tennis_wallet_001: {
+    sampleId: "accepted_product_still_life_tennis_wallet_001",
+    sourceImage:
+      "runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg",
+    targetRoot: "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001",
+    registryRef: "accepted_samples/accepted_sample_registry.yaml",
+    categoryRef: "accepted_samples/categories/product_still_life.yaml",
+    reviewDocRef: "docs/281_v7_24_native_doubao_v3_post_run_review_accepted_candidate.md",
+    promptPackageRef:
+      "prompts/image_generation/product_still_life_outdoor_tennis_wallet_hero_no_text_v3.yaml",
+    sourcePhase: "v7_24",
+    category: "product_still_life",
+    assetStatus: "accepted_candidate",
+    providerType: "direct_api",
+    pluginId: "NativeDoubaoImage",
+    model: "doubao-seedream-5-0-260128",
+    requiredLongEdge: 512,
+  },
   accepted_french_summer_rattan_bucket_bag_001: {
     sampleId: "accepted_french_summer_rattan_bucket_bag_001",
     sourceImage:
@@ -251,13 +269,23 @@ async function createCapsule(sample) {
 }
 
 async function main() {
-  const sampleArg = process.argv.find((arg) => arg.startsWith("--sample-id="));
-  const sampleId = sampleArg
-    ? sampleArg.slice("--sample-id=".length)
-    : "accepted_french_summer_rattan_bucket_bag_001";
+  const readArg = (name) => {
+    const prefix = `--${name}=`;
+    const found = process.argv.find((arg) => arg.startsWith(prefix));
+    return found ? found.slice(prefix.length) : null;
+  };
+  const sampleId = readArg("sample-id") || "accepted_french_summer_rattan_bucket_bag_001";
   const sample = SAMPLES[sampleId];
   if (!sample) {
     throw new Error(`unsupported sample id: ${sampleId}`);
+  }
+  const sourceImage = readArg("source-image");
+  if (sourceImage && sourceImage !== sample.sourceImage) {
+    throw new Error(`source image does not match authorized sample source: ${sourceImage}`);
+  }
+  const longEdge = readArg("long-edge");
+  if (longEdge && Number(longEdge) !== sample.requiredLongEdge) {
+    throw new Error(`long edge does not match authorized sample long_edge: ${longEdge}`);
   }
 
   const result = await createCapsule(sample);

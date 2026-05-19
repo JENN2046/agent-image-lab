@@ -1,5 +1,41 @@
 # RUN_STATE.md — Agent Image Lab
 
+## Second Preview Capsule Pre-Execution Check
+
+```yaml
+phase: second_preview_capsule_pre_execution_check
+status: completed_validated_pending_creation_authorization
+mode: A4.8_local_readiness_check
+sample_id: accepted_product_still_life_tennis_wallet_001
+source:
+  path: runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg
+  exists: true
+  git_tracked: false
+  git_ignored: true
+  format: jpeg
+  width: 1920
+  height: 1920
+  size_bytes: 1104027
+target:
+  root: asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001
+  exists: false
+tooling:
+  sharp_available: true
+  sharp_version: 0.33.5
+  create_script_supports_sample: true
+  source_arg_guard: exact_match_required
+  long_edge_guard: exact_match_required
+guard:
+  preview_created_or_copied: false
+  manifest_or_capsule_records_written: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  tag_release_deploy_performed_by_this_phase: false
+decision:
+  ready_for_separate_creation_authorization: true
+```
+
 ## P5-P8 Remaining Route Packages
 
 ```yaml
