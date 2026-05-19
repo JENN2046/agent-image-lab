@@ -4,7 +4,7 @@
 
 ```yaml
 phase: final_project_organization_checkpoint
-status: completed_validated_pending_commit
+status: completed_validated_remote_synced_after_post_merge_reconciliation
 goal: close current docs archive cleanup cycle and define return-to-product-mainline conditions
 completed:
   - generated docs/archive/DOCS_ARCHIVE_FINAL_PROJECT_ORGANIZATION_CHECKPOINT.md
@@ -12,6 +12,12 @@ completed:
   - summarized archive completion and reference safety
   - summarized docs_registry maturity
   - summarized remaining blockers and product-mainline return conditions
+  - reconciled post-merge state wording after fast-forward sync to d7f805432d913daf53de5183c5f28f465639b834
+sync_reality:
+  head: d7f805432d913daf53de5183c5f28f465639b834
+  origin_master: d7f805432d913daf53de5183c5f28f465639b834
+  ahead_behind: 0/0
+  worktree: clean
 not_performed:
   - no file movement
   - no reference rewrite
@@ -334,15 +340,16 @@ not_performed:
 
 ```yaml
 phase: c1ag_exact_file_commit_readiness_audit
-status: completed_validated_pending_commit
+status: completed_validated_committed_and_synced_in_later_followups
 goal: confirm C1ad-D3 changes are ready for exact-file staging and local commit
 completed:
   - confirmed exact staging preview passed
   - confirmed forbidden path hits count 0
   - confirmed existing validator behavior changed false
+  - reconciled stale pending-commit wording after later follow-up commits and remote sync
 not_performed:
-  - no staging yet
-  - no commit yet
+  - no staging by this audit phase
+  - no commit by this audit phase
   - no push, tag, release, or deploy
 ```
 
@@ -375,15 +382,16 @@ not_performed:
 
 ```yaml
 phase: c1aa_exact_file_commit_readiness_audit
-status: completed_validated_pending_commit
+status: completed_validated_committed_and_synced_in_later_followups
 goal: confirm C1u-C1z changes are ready for exact-file staging and local commit
 completed:
   - prepared audit target docs/archive/DOCS_ARCHIVE_C1AA_EXACT_FILE_COMMIT_READINESS_AUDIT.md
   - confirmed C1u-C1z change scope is docs/archive evidence plus README/archive indexes and .agent_board sync
   - confirmed exact-file staging can proceed after validation passes
+  - reconciled stale pending-commit wording after later follow-up commits and remote sync
 not_performed:
-  - no staging yet
-  - no commit yet
+  - no staging by this audit phase
+  - no commit by this audit phase
   - no push, tag, release, or deploy
 ```
 

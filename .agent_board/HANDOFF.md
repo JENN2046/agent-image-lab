@@ -3,15 +3,16 @@
 ## Current Handoff Update — Final Project Organization Checkpoint
 
 ```text
-Status: final_project_organization_checkpoint completed_validated_pending_commit.
+Status: final_project_organization_checkpoint completed_validated_remote_synced_after_post_merge_reconciliation.
 Reason: Close the current docs archive cleanup cycle and define return-to-product-mainline conditions.
 Execution mode: A4.8 local docs-only checkpoint.
 Checkpoint: docs/archive/DOCS_ARCHIVE_FINAL_PROJECT_ORGANIZATION_CHECKPOINT.md.
 Low-risk wrapper-required records moved: 161.
 Human-navigation records remaining: 39.
 Validator-blocked records strategy-classified: 423.
-Push/tag/release/deploy performed: false.
-Recommended next: validate and commit final checkpoint, then prepare push readiness report and wait for Jenn push authorization.
+Current sync reality: HEAD equals origin/master at d7f805432d913daf53de5183c5f28f465639b834; ahead/behind 0/0; worktree clean after fast-forward merge.
+Push/tag/release/deploy performed by this reconciliation: false.
+Recommended next: choose between C2 compatibility design for validator-blocked records or product-mainline evidence capsule work; do not continue physical docs movement by default.
 ```
 
 ---
@@ -331,16 +332,16 @@ Recommended next: C1aj agent-board-only paired execution package.
 ## Current Handoff Update — C1ag Exact-File Commit Readiness Audit
 
 ```text
-Status: c1ag_exact_file_commit_readiness_audit completed_validated_pending_commit.
+Status: c1ag_exact_file_commit_readiness_audit completed_validated_committed_and_synced_in_later_followups.
 Reason: C1ad-D3 changes are docs-only evidence/schema drafts and index/status sync.
 Execution mode: A4.8 local commit-readiness audit.
 Readiness audit: docs/archive/DOCS_ARCHIVE_C1AG_EXACT_FILE_COMMIT_READINESS_AUDIT.md.
 Exact staging preview: passed.
 Forbidden path hits: 0.
 Validator scope alignment: scripts/validate_mvp.ps1 exact allowlist updated for docs_registry draft files only.
-Decision: exact-file staging and local commit may proceed after validation passes.
+Decision: exact-file staging and local commit proceeded in later follow-up phases; no pending commit remains for this audit.
 Push/tag/release/deploy performed: false.
-Recommended next: C1ah exact-file staging plus local commit, then C1ai push readiness report.
+Recommended next: historical entry only; current route is final project organization checkpoint sync reality.
 ```
 
 ---
@@ -375,13 +376,13 @@ Recommended next: C1ad paired exact move plus exact rewrite package dry-run.
 ## Current Handoff Update — C1aa Exact-File Commit Readiness Audit
 
 ```text
-Status: c1aa_exact_file_commit_readiness_audit completed_validated_pending_commit.
+Status: c1aa_exact_file_commit_readiness_audit completed_validated_committed_and_synced_in_later_followups.
 Reason: C1u-C1z produced only docs/archive evidence, README/archive indexes, and .agent_board sync.
 Execution mode: A4.8 local commit-readiness audit.
 Readiness audit: docs/archive/DOCS_ARCHIVE_C1AA_EXACT_FILE_COMMIT_READINESS_AUDIT.md.
-Decision: exact-file staging and local commit may proceed after validation passes.
+Decision: exact-file staging and local commit proceeded in later follow-up phases; no pending commit remains for this audit.
 Push/tag/release/deploy performed: false.
-Recommended next: C1ab exact-file staging plus local commit, then C1ac push readiness report.
+Recommended next: historical entry only; current route is final project organization checkpoint sync reality.
 ```
 
 ---

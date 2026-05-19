@@ -4,7 +4,7 @@
 
 ```yaml
 phase: final_project_organization_checkpoint
-status: completed_validated_pending_commit
+status: completed_validated_remote_synced_after_post_merge_reconciliation
 mode: A4.8_safe_local_docs_only_checkpoint
 goal: close current docs archive cleanup cycle and define return-to-product-mainline conditions
 evidence:
@@ -13,10 +13,16 @@ result:
   low_risk_wrapper_required_records_moved: 161
   remaining_human_navigation_records: 39
   validator_blocked_records_strategy_classified: 423
+sync_reality:
+  head: d7f805432d913daf53de5183c5f28f465639b834
+  origin_master: d7f805432d913daf53de5183c5f28f465639b834
+  ahead_behind: 0/0
+  worktree: clean
+  fast_forward_merge_completed: true
 decision:
   validation_ready: true
-  push_allowed_now: false
-  recommended_next: push_readiness_after_final_checkpoint_commit
+  push_needed_now: false
+  recommended_next: c2_compatibility_design_or_product_mainline_evidence_capsule
 ```
 
 ## C2b Validator-Blocked Strategy Package
@@ -370,7 +376,7 @@ decision:
 
 ```yaml
 phase: c1ag_exact_file_commit_readiness_audit
-status: completed_validated_pending_commit
+status: completed_validated_committed_and_synced_in_later_followups
 mode: A4.8_safe_local_commit_readiness_audit_only
 goal: confirm C1ad-D3 changes are ready for exact-file staging and local commit
 readiness_audit: docs/archive/DOCS_ARCHIVE_C1AG_EXACT_FILE_COMMIT_READINESS_AUDIT.md
@@ -378,8 +384,9 @@ validator_scope_alignment: scripts/validate_mvp.ps1 exact file allowlist only
 decision:
   ready_for_exact_file_staging: true
   ready_for_guarded_local_commit: true
-  push_allowed_now: false
-  recommended_next: c1ah_exact_file_staging_plus_local_commit
+  later_followup_completed: true
+  pending_commit_now: false
+  recommended_next: historical_entry_superseded_by_current_sync_reality
 ```
 
 ## C1u-C1z Wrapper-Required 200 Machine Triage
@@ -415,15 +422,16 @@ decision:
 
 ```yaml
 phase: c1aa_exact_file_commit_readiness_audit
-status: completed_validated_pending_commit
+status: completed_validated_committed_and_synced_in_later_followups
 mode: A4.8_safe_local_commit_readiness_audit_only
 goal: confirm C1u-C1z changes are ready for exact-file staging and guarded local commit
 readiness_audit: docs/archive/DOCS_ARCHIVE_C1AA_EXACT_FILE_COMMIT_READINESS_AUDIT.md
 decision:
   ready_for_exact_file_staging: true
   ready_for_guarded_local_commit: true
-  push_allowed_now: false
-  recommended_next: c1ab_exact_file_staging_plus_local_commit
+  later_followup_completed: true
+  pending_commit_now: false
+  recommended_next: historical_entry_superseded_by_current_sync_reality
 ```
 
 ## C1t Wrapper-Required 200 Route Planning

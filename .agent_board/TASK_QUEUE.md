@@ -10,13 +10,14 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ```text
 Current archive task: final_project_organization_checkpoint.
-Status: completed validated pending commit.
+Status: completed validated and remote-synced after post-merge reconciliation.
 Purpose: close current docs archive cleanup cycle and define return-to-product-mainline conditions.
 Checkpoint: docs/archive/DOCS_ARCHIVE_FINAL_PROJECT_ORGANIZATION_CHECKPOINT.md.
 Low-risk wrapper-required records moved: 161.
 Human-navigation records remaining: 39.
 Validator-blocked records strategy-classified: 423.
-Recommended next: validate and commit final checkpoint, then prepare push readiness report.
+Current sync reality: HEAD equals origin/master at d7f805432d913daf53de5183c5f28f465639b834; ahead/behind 0/0; worktree clean.
+Recommended next: choose C2 compatibility design for validator-blocked records or return to product-mainline evidence capsule work.
 Not allowed now: push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
 ```
 
@@ -270,11 +271,11 @@ Not allowed now: push/tag/release/deploy, file movement, reference rewrite, wrap
 
 ```text
 Current archive task: c1ag_exact_file_commit_readiness_audit.
-Status: completed validated pending commit.
+Status: completed validated, committed, and synced in later follow-ups.
 Purpose: confirm C1ad-D3 changes are ready for exact-file staging and local commit.
 Readiness audit: docs/archive/DOCS_ARCHIVE_C1AG_EXACT_FILE_COMMIT_READINESS_AUDIT.md.
-Decision: exact-file staging and local commit may proceed after validation passes.
-Recommended next: C1ah exact-file staging plus local commit.
+Decision: exact-file staging and local commit proceeded in later follow-up phases; no uncommitted work remains for this audit.
+Recommended next: historical entry only; current route is final project organization checkpoint sync reality.
 Not allowed now: push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
 ```
 
@@ -300,11 +301,11 @@ Not allowed now: push/tag/release/deploy, wrapper creation, file movement, provi
 
 ```text
 Current archive task: c1aa_exact_file_commit_readiness_audit.
-Status: completed validated pending commit.
+Status: completed validated, committed, and synced in later follow-ups.
 Purpose: confirm C1u-C1z machine-triage changes are ready for exact-file staging and guarded local commit.
 Readiness audit: docs/archive/DOCS_ARCHIVE_C1AA_EXACT_FILE_COMMIT_READINESS_AUDIT.md.
-Decision: exact-file staging and local commit may proceed after validation passes.
-Recommended next: C1ab exact-file staging plus local commit.
+Decision: exact-file staging and local commit proceeded in later follow-up phases; no uncommitted work remains for this audit.
+Recommended next: historical entry only; current route is final project organization checkpoint sync reality.
 Not allowed now: push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
 ```
 
