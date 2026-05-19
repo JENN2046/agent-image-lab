@@ -1,3 +1,26 @@
+## Current Run State - Capsule Runtime Product Smoke Design
+
+```text
+phase_id: capsule_runtime_product_smoke_design_gate
+status: completed_validated_pending_commit
+mode: A4.8 design no_runtime
+objective: define static operator flow for unified_capsule_contract_report consumption
+record_ref: docs/CAPSULE_RUNTIME_PRODUCT_SMOKE_DESIGN.md
+browser_runtime_validator_performed: false
+asset_archive_ui_read_performed: false
+preview_loaded_or_rendered: false
+fetch_performed: false
+file_write_from_ui_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+push_tag_release_deploy_performed: false
+recommended_next: validation_and_guarded_commit_readiness_only
+```
 ## Current Run State - Capsule Manifest Schema Runtime Unification
 
 ```text

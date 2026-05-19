@@ -621,3 +621,16 @@ failure_samples / production_candidate，也不证明 VCP runtime integration。
 | `samples[].manifest_validation_status` | `unifiedCapsuleContractRows` | 每个样本必须显示 manifest contract 状态 |
 | `samples[].relation_validation_status` | `unifiedCapsuleContractRows` | failure sample 必须显示 resolved-by 状态 |
 | `samples[].guard_validation_status` | `unifiedCapsuleContractRows` | 每个样本必须显示 no-production/no-memory guard 状态 |
+
+## P6K Capsule Runtime Product Smoke Design
+
+本节用于验收 `unified_capsule_contract_report` 的真实 operator flow 设计。它仍然是 static/design-only，不接浏览器 runtime validator，不读取 `asset_archive/`，不加载 preview，不 fetch，不写文件，不调用 provider/plugin/API/DailyNote/VCP memory，不创建 production candidate。
+
+| Operator step | Review Console field | Rule |
+| --- | --- | --- |
+| Contract ingest | `unified_capsule_contract_report` | 只能来自 static mock / fixture / 外部本地 validator 输出，不由 UI 读取文件 |
+| Summary triage | `contract_status.*` + totals | registry、manifest、relation、guard、overall 必须分开显示 |
+| Per-capsule review | `samples[]` rows | 每行必须显示 manifest / relation / guard 状态和 reviewer action |
+| Failure relation review | `resolved_by_accepted_sample` + `relation_validation_status` | failure -> accepted 断链不能被 totals 掩盖 |
+| Guard review | `guard_validation_status` + guard summary | production / memory / runtime / provider guard 违规必须阻断 |
+| Reviewer action | `reviewer_action` | action 是人工指令，不是可执行按钮 |

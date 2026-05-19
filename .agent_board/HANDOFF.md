@@ -1,3 +1,14 @@
+## Current Handoff Update - Capsule Runtime Product Smoke Design
+
+```text
+Status: capsule_runtime_product_smoke_design_gate completed_validated_pending_commit.
+Reason: define how Review Console should consume unified_capsule_contract_report in a real operator flow while staying static/design-only.
+Execution mode: A4.8 design / no runtime.
+Design record: docs/CAPSULE_RUNTIME_PRODUCT_SMOKE_DESIGN.md.
+Changed Review Console docs: static README and FIELD_MAPPING now describe contract ingest, summary triage, per-capsule row review, failure relation review, guard review, and reviewer action.
+Boundary: no browser runtime validator, no asset_archive file read from UI, no preview load, no fetch, no file write, no provider/plugin/API/image generation, no DailyNote/VCP memory, no production candidate.
+Recommended next: validation and guarded local commit readiness only.
+```
 ## Current Handoff Update - Capsule Manifest Schema Runtime Unification
 
 ```text

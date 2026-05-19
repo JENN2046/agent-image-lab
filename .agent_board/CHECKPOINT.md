@@ -1,4 +1,16 @@
-# Capsule Manifest Schema Runtime Unification Checkpoint
+# Capsule Runtime Product Smoke Design Checkpoint
+
+```text
+phase_id: capsule_runtime_product_smoke_design_gate
+status: completed_validated_pending_commit
+checkpoint_reason: static Review Console operator flow design for unified capsule contract consumption
+completed_work: design record created; Review Console README and FIELD_MAPPING document contract ingest, triage, per-capsule review, relation review, guard review, and reviewer actions.
+validation_pending_final: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+not_performed: no browser runtime validator, no asset_archive UI read, no preview load, no fetch, no file write, no provider/plugin/API/image generation, no DailyNote/VCP memory, no production candidate, no push/tag/release/deploy.
+next_safe_action: validation and guarded local commit readiness.
+```
+
+---# Capsule Manifest Schema Runtime Unification Checkpoint
 
 ```text
 phase_id: capsule_manifest_schema_runtime_unification_gate

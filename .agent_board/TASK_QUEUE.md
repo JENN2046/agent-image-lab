@@ -1,4 +1,16 @@
-## Current Capsule Manifest Schema Runtime Unification
+## Current Capsule Runtime Product Smoke Design
+
+```text
+Current product-mainline task: capsule_runtime_product_smoke_design_gate.
+Status: completed validated pending guarded local commit.
+Purpose: define Review Console operator flow for consuming unified_capsule_contract_report without implementing runtime.
+Changed files: docs/CAPSULE_RUNTIME_PRODUCT_SMOKE_DESIGN.md, review_console/static_prototype/README.md, review_console/static_prototype/FIELD_MAPPING.md, README.md, .agent_board resume surfaces.
+Evidence: operator flow covers contract ingest, summary triage, per-capsule rows, failure relations, guard review, and reviewer action labels.
+Not performed: no browser runtime validator, no asset_archive UI read, no preview load, no provider/plugin/API/image generation, no DailyNote/VCP memory, no production candidate, no push/tag/release/deploy.
+Recommended next: validation and guarded local commit readiness only.
+```
+
+---## Current Capsule Manifest Schema Runtime Unification
 
 ```text
 Current product-mainline task: capsule_manifest_schema_runtime_unification_gate.
