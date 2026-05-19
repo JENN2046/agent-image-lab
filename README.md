@@ -73,6 +73,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 - `docs/P5F_FIRST_FAILURE_SAMPLE_CAPSULE_AUTHORIZATION_PACKAGE_DRY_RUN.md` 记录第一颗 failure sample capsule 授权包 dry-run；推荐 `failure_french_summer_rattan_bag_v7_29_001`，但不创建 capsule、不创建 preview。
 - `docs/P5G_FAILURE_SAMPLE_CAPSULE_CREATOR_DRY_RUN_IMPLEMENTATION.md` 记录专用 failure sample capsule creator 的 plan-only 实现；`--confirm-create=true` 仍需后续单独授权。
 - `docs/P5H_FAILURE_SAMPLE_CAPSULE_CREATOR_DRY_RUN_VALIDATOR.md` 记录 failure sample capsule creator 的 dry-run 安全验证并纳入 `scripts/validate_mvp.ps1`。
+- `docs/P5I_FIRST_FAILURE_SAMPLE_CAPSULE_CREATION_RECORD.md` 记录第一颗 Git-portable failure sample preview capsule 创建结果；样本为 `failure_french_summer_rattan_bag_v7_29_001`。
 - `docs/P6_C2_VALIDATOR_BLOCKED_COMPATIBILITY_NEXT_STEPS.md` 固定 C2 validator-blocked 后续兼容步骤；它不移动 423 个 records。
 - `docs/P7_HUMAN_NAVIGATION_39_DECISION_REVIEW_PLAN.md` 固定 39 个 human-navigation records 的人工语义裁决路线；它不自动移动或 wrapper。
 - `docs/P8_A5_PRODUCTION_VCP_AUTHORIZATION_PREP.md` 固定 A5 production / VCP 授权包准备顺序；它不授权任何 A5 执行。

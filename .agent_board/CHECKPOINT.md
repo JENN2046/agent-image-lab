@@ -1,5 +1,27 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## First Failure Sample Capsule Creation
+
+```yaml
+phase: first_failure_sample_capsule_creation
+status: completed_validated_pending_guarded_local_commit
+completed:
+  - ran the explicitly authorized create_failure_sample_capsule.js command with --confirm-create=true
+  - created asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/manifest.json
+  - created asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp
+  - created asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/failure_record.json
+  - created asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/review_record.json
+  - reconciled creator dry-run validation to preserve target directory state after creation
+not_performed:
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no production candidate
+  - no push, tag, release, or deploy
+next:
+  - Review Console static failure capsule display or clone-portable validation for accepted plus failure capsules
+```
+
 ## Failure Sample Capsule Creator Dry Run Validator
 
 ```yaml

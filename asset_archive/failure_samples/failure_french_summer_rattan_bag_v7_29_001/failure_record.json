@@ -1,0 +1,39 @@
+{
+  "record_type": "git_portable_failure_sample_capsule_failure_record",
+  "version": "v1",
+  "sample_id": "failure_french_summer_rattan_bag_v7_29_001",
+  "created_at": "2026-05-19T08:39:17.260Z",
+  "source": {
+    "source_phase": "v7_29",
+    "source_image_path": "runs/real_generation/v7_29_native_doubao_french_summer_rattan_bag_v2_single_real_run/native_doubao_1778325901725_0.jpg",
+    "source_image_git_tracked": false,
+    "source_image_hash_recorded": false,
+    "failure_registry_ref": "failure_samples/failure_registry.yaml",
+    "prompt_package_ref": "prompts/image_generation/product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v2.yaml"
+  },
+  "failure_summary": {
+    "failure_tags": [
+      "watermark_or_generated_mark_present",
+      "clean_image_corners_failed",
+      "prompt_watermark_control_insufficient",
+      "api_payload_missing_watermark_false"
+    ],
+    "resolved_by_accepted_sample": "accepted_french_summer_rattan_bucket_bag_001",
+    "memory_suitability": false,
+    "production_candidate_allowed": false
+  },
+  "registry_failure_block": "failure_id: failure_french_summer_rattan_bag_v7_29_001\n      source_phase: v7_29\n      asset_status: needs_human_review\n      provider_type: direct_api\n      plugin_id: NativeDoubaoImage\n      model: doubao-seedream-5-0-260128\n      prompt_package_ref: prompts/image_generation/product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v2.yaml\n      review_doc_ref: docs/285_v7_30_native_doubao_watermark_parameter_enforcement.md\n      image_path: runs/real_generation/v7_29_native_doubao_french_summer_rattan_bag_v2_single_real_run/native_doubao_1778325901725_0.jpg\n      failure_tags:\n        - watermark_or_generated_mark_present\n        - clean_image_corners_failed\n        - prompt_watermark_control_insufficient\n        - api_payload_missing_watermark_false\n      correction_phase: v7_30\n      corrected_by_code_ref: plugins/image_generation/native_doubao_image/native_doubao_image.js\n      resolved_by_accepted_sample: accepted_french_summer_rattan_bucket_bag_001\n      image_file_committed_to_git: false\n      memory_suitability: false",
+  "guard": {
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "runtime_execution_performed": false,
+    "real_manifest_read_performed": false,
+    "real_vcpchat_read_performed": false,
+    "real_vcptoolbox_read_performed": false,
+    "production_candidate_created": false
+  }
+}

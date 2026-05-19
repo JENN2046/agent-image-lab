@@ -47,4 +47,4 @@ powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
 ```
 
 The first command is zero-sample safe. The second command is a future readiness
-gate and should fail until at least one authorized failure sample capsule exists.
+gate and should pass after at least one authorized failure sample capsule exists.

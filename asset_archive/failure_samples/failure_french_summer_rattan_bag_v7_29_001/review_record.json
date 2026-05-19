@@ -1,0 +1,26 @@
+{
+  "record_type": "git_portable_failure_sample_capsule_review_record",
+  "version": "v1",
+  "sample_id": "failure_french_summer_rattan_bag_v7_29_001",
+  "created_at": "2026-05-19T08:39:17.260Z",
+  "review_doc_ref": "docs/285_v7_30_native_doubao_watermark_parameter_enforcement.md",
+  "review_summary": {
+    "final_route": "failure_learning_only_never_production",
+    "production_candidate_allowed": false,
+    "DailyNote_write_allowed": false,
+    "VCP_memory_write_allowed": false
+  },
+  "guard": {
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "runtime_execution_performed": false,
+    "real_manifest_read_performed": false,
+    "real_vcpchat_read_performed": false,
+    "real_vcptoolbox_read_performed": false,
+    "production_candidate_created": false
+  }
+}

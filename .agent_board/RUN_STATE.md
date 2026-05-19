@@ -1,5 +1,36 @@
 # RUN_STATE.md — Agent Image Lab
 
+## First Failure Sample Capsule Creation
+
+```yaml
+phase: first_failure_sample_capsule_creation
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_authorized_local_capsule_creation
+goal: create the first Git-portable failure sample preview capsule
+sample_id: failure_french_summer_rattan_bag_v7_29_001
+capsule_root: asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001
+created_files:
+  - manifest.json
+  - preview.webp
+  - failure_record.json
+  - review_record.json
+preview:
+  format: webp
+  width: 512
+  height: 512
+  long_edge: 512
+  sha256: 8addc3084099c1f2aab11a27c7b730f475ced21f80fff0b2e67d877c49d8c43e
+guard:
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  production_candidate_created: false
+  push_tag_release_deploy_performed: false
+decision:
+  first_failure_sample_capsule_created: true
+  recommended_next: review_console_static_failure_capsule_display_or_clone_portable_validation
+```
+
 ## Failure Sample Capsule Creator Dry Run Validator
 
 ```yaml

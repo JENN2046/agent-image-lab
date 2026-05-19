@@ -43,6 +43,7 @@ function expect(condition, check, detail = null) {
 
 const checks = [];
 const beforeTargetExists = fs.existsSync(targetRoot);
+const beforeTargetEntries = beforeTargetExists ? fs.readdirSync(targetRoot).sort() : [];
 
 const planOnly = runCreator([
   `--sample-id=${sampleId}`,
@@ -51,13 +52,19 @@ const planOnly = runCreator([
 ]);
 
 const afterPlanTargetExists = fs.existsSync(targetRoot);
+const afterPlanTargetEntries = afterPlanTargetExists ? fs.readdirSync(targetRoot).sort() : [];
 checks.push(expect(planOnly.exitCode === 0, "plan_only_exits_zero", planOnly.exitCode));
 checks.push(expect(planOnly.result?.passed === true, "plan_only_reports_passed_true", planOnly.result?.passed));
 checks.push(expect(planOnly.result?.mode === "plan_only", "plan_only_mode_reported", planOnly.result?.mode));
 checks.push(expect(planOnly.result?.writes_performed === false, "plan_only_writes_false", planOnly.result?.writes_performed));
 checks.push(expect(planOnly.result?.confirm_create_required === true, "plan_only_confirm_required", planOnly.result?.confirm_create_required));
 checks.push(expect(planOnly.result?.source_image_exists === true, "plan_only_source_exists", planOnly.result?.source_image_exists));
-checks.push(expect(beforeTargetExists === false && afterPlanTargetExists === false, "plan_only_does_not_create_target_directory", { beforeTargetExists, afterPlanTargetExists }));
+checks.push(expect(
+  beforeTargetExists === afterPlanTargetExists &&
+    JSON.stringify(beforeTargetEntries) === JSON.stringify(afterPlanTargetEntries),
+  "plan_only_preserves_target_directory_state",
+  { beforeTargetExists, afterPlanTargetExists, beforeTargetEntries, afterPlanTargetEntries }
+));
 checks.push(expect(planOnly.result?.planned_files?.length === 4, "plan_only_reports_four_planned_files", planOnly.result?.planned_files));
 checks.push(expect(planOnly.result?.guard?.provider_contact_performed === false, "plan_only_no_provider_contact", planOnly.result?.guard));
 checks.push(expect(planOnly.result?.guard?.plugin_call_performed === false, "plan_only_no_plugin_call", planOnly.result?.guard));
@@ -91,7 +98,13 @@ checks.push(expect(badSample.exitCode !== 0, "unsupported_sample_exits_nonzero",
 checks.push(expect(badSample.stderr.includes("unsupported failure sample id"), "unsupported_sample_reports_guard", badSample.stderr));
 
 const finalTargetExists = fs.existsSync(targetRoot);
-checks.push(expect(finalTargetExists === false, "validator_does_not_create_target_directory", finalTargetExists));
+const finalTargetEntries = finalTargetExists ? fs.readdirSync(targetRoot).sort() : [];
+checks.push(expect(
+  beforeTargetExists === finalTargetExists &&
+    JSON.stringify(beforeTargetEntries) === JSON.stringify(finalTargetEntries),
+  "validator_preserves_target_directory_state",
+  { beforeTargetExists, finalTargetExists, beforeTargetEntries, finalTargetEntries }
+));
 
 const failed = checks.filter((check) => !check.passed);
 const result = {
@@ -102,6 +115,7 @@ const result = {
   check_count: checks.length,
   failed_count: failed.length,
   sample_id: sampleId,
+  target_directory_existed_before_validation: beforeTargetExists,
   target_directory_exists_after_validation: finalTargetExists,
   confirm_create_executed: false,
   writes_performed: false,

@@ -1,5 +1,20 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — First Failure Sample Capsule Creation
+
+```text
+Status: first_failure_sample_capsule_creation completed_validated_pending_guarded_local_commit.
+Reason: create the first Git-portable failure sample preview capsule after explicit user authorization.
+Execution mode: A4.8 authorized local capsule creation.
+Sample: failure_french_summer_rattan_bag_v7_29_001.
+Capsule root: asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/.
+Created files: manifest.json, preview.webp, failure_record.json, review_record.json.
+Preview: webp 512x512, sha256 8addc3084099c1f2aab11a27c7b730f475ced21f80fff0b2e67d877c49d8c43e.
+Validation record: docs/P5I_FIRST_FAILURE_SAMPLE_CAPSULE_CREATION_RECORD.md.
+Not performed: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: Review Console static failure capsule display or clone-portable validation for accepted plus failure capsules.
+```
+
 ## Current Handoff Update — Failure Sample Capsule Creator Dry Run Validator
 
 ```text

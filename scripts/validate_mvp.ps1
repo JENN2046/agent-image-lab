@@ -693,7 +693,7 @@ $mediaExtensions = @('.png', '.jpg', '.jpeg', '.webp', '.gif', '.psd', '.zip')
 $mediaFiles = Get-ChildItem -LiteralPath $Root -Recurse -File -Force |
   Where-Object {
     $relativePath = $_.FullName.Substring($Root.Length + 1).Replace('\', '/')
-    $isGitPortablePreviewCapsule = $relativePath -match '^asset_archive/accepted_samples/[^/]+/preview\.webp$'
+    $isGitPortablePreviewCapsule = $relativePath -match '^asset_archive/(accepted_samples|failure_samples)/[^/]+/preview\.webp$'
     $isLocalOnlyValidationCopy = $relativePath -match '^\.agent_private/'
     $_.FullName -notlike '*\.git\*' -and
     $_.FullName -notlike '*\runs\*' -and
@@ -11774,8 +11774,8 @@ process.exit(child.status || 0);
     if ($failureSampleCapsuleRegistry.passed -ne $true -or $failureSampleCapsuleRegistry.status -ne 'failure_sample_capsules_verified' -or $failureSampleCapsuleRegistry.report_version -ne 'v1') {
       Add-Failure "Failure sample capsule registry validation must pass in zero-sample-safe mode"
     }
-    if ($failureSampleCapsuleRegistry.root -ne 'asset_archive/failure_samples' -or $failureSampleCapsuleRegistry.sample_count -ne 0 -or $failureSampleCapsuleRegistry.failed_count -ne 0) {
-      Add-Failure "Failure sample capsule registry must currently validate the empty failure sample lane with zero failures"
+    if ($failureSampleCapsuleRegistry.root -ne 'asset_archive/failure_samples' -or $failureSampleCapsuleRegistry.sample_count -lt 1 -or $failureSampleCapsuleRegistry.failed_count -ne 0) {
+      Add-Failure "Failure sample capsule registry must validate at least one failure sample with zero failures"
     }
     if ($failureSampleCapsuleRegistry.guard.provider_contact_performed -ne $false -or $failureSampleCapsuleRegistry.guard.plugin_call_performed -ne $false -or $failureSampleCapsuleRegistry.guard.api_call_performed -ne $false -or $failureSampleCapsuleRegistry.guard.image_generation_performed -ne $false -or $failureSampleCapsuleRegistry.guard.preview_creation_or_copy_performed -ne $false) {
       Add-Failure "Failure sample capsule registry validation must not perform provider, plugin, API, image generation, preview creation, or preview copy"
@@ -11812,8 +11812,8 @@ process.exit(child.status || 0);
     if ($failureSampleCapsuleCreatorDryRun.passed -ne $true -or $failureSampleCapsuleCreatorDryRun.status -ne 'failure_sample_capsule_creator_dry_run_verified') {
       Add-Failure "Failure sample capsule creator dry-run validation must pass"
     }
-    if ($failureSampleCapsuleCreatorDryRun.confirm_create_executed -ne $false -or $failureSampleCapsuleCreatorDryRun.writes_performed -ne $false -or $failureSampleCapsuleCreatorDryRun.target_directory_exists_after_validation -ne $false) {
-      Add-Failure "Failure sample capsule creator dry-run validation must not execute confirm-create, write files, or create target directory"
+    if ($failureSampleCapsuleCreatorDryRun.confirm_create_executed -ne $false -or $failureSampleCapsuleCreatorDryRun.writes_performed -ne $false -or $failureSampleCapsuleCreatorDryRun.target_directory_existed_before_validation -ne $failureSampleCapsuleCreatorDryRun.target_directory_exists_after_validation) {
+      Add-Failure "Failure sample capsule creator dry-run validation must not execute confirm-create, write files, or change target directory state"
     }
     if ($failureSampleCapsuleCreatorDryRun.preview_creation_or_copy_performed -ne $false -or $failureSampleCapsuleCreatorDryRun.provider_contact_performed -ne $false -or $failureSampleCapsuleCreatorDryRun.plugin_call_performed -ne $false -or $failureSampleCapsuleCreatorDryRun.api_call_performed -ne $false -or $failureSampleCapsuleCreatorDryRun.image_generation_performed -ne $false) {
       Add-Failure "Failure sample capsule creator dry-run validation must not perform preview creation/copy, provider, plugin, API, or image generation"
