@@ -1,5 +1,20 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — P2b Registry Validator Negative-Case Coverage
+
+```text
+Status: p2b_registry_validator_negative_case_coverage completed_validated_pending_guarded_local_commit.
+Reason: prove the registry-driven preview capsule validator fails closed for empty registry, missing manifest, missing preview, hash mismatch, and wrong long edge.
+Execution mode: A4.8 local validation helper.
+Validator added: scripts/validate_preview_capsule_registry_negative_cases.js.
+Fixture strategy: temporary text fixtures under ignored .agent_private/, cleaned before exit.
+Real capsule modified: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox performed: false.
+Validation passed: node --check negative-case validator, negative-case validator, registry validator, single preview capsule validator, git diff --check, agent board validator, and scripts/validate_mvp.ps1.
+Push performed by this P2b phase: false.
+Recommended next: guarded local auto-commit, then push safety gate if ahead.
+```
+
 ## Current Handoff Update — Guarded Local Auto-Commit Authorization
 
 ```text

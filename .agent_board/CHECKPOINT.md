@@ -1,5 +1,36 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## P2b Registry Validator Negative-Case Coverage
+
+```yaml
+phase: p2b_registry_validator_negative_case_coverage
+status: completed_validated_pending_guarded_local_commit
+goal: add local fail-closed coverage for registry-driven preview capsule validation
+completed:
+  - added scripts/validate_preview_capsule_registry_negative_cases.js
+  - added empty registry failure check
+  - added missing manifest failure check
+  - added missing preview failure check
+  - added hash mismatch failure check
+  - added wrong long edge failure check
+  - documented the negative-case command in asset_archive/accepted_samples/README.md
+validation:
+  - node --check scripts/validate_preview_capsule_registry_negative_cases.js
+  - node scripts/validate_preview_capsule_registry_negative_cases.js
+  - node scripts/validate_preview_capsule_registry.js
+  - npm run validate-preview-capsule -- --sample-id=accepted_french_summer_rattan_bucket_bag_001
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+not_performed:
+  - no real capsule modified
+  - no product preview.webp creation, copy, conversion, or generation
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no push, tag, release, or deploy
+```
+
 ## Guarded Local Auto-Commit Authorization
 
 ```yaml

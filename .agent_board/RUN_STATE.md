@@ -1,5 +1,35 @@
 # RUN_STATE.md — Agent Image Lab
 
+## P2b Registry Validator Negative-Case Coverage
+
+```yaml
+phase: p2b_registry_validator_negative_case_coverage
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_safe_local_validation_helper
+goal: add fail-closed coverage for registry-driven preview capsule validation
+evidence:
+  validator: scripts/validate_preview_capsule_registry_negative_cases.js
+  capsule_readme: asset_archive/accepted_samples/README.md
+negative_cases:
+  empty_registry_fails: true
+  missing_manifest_fails: true
+  missing_preview_fails: true
+  hash_mismatch_fails: true
+  wrong_long_edge_fails: true
+guard:
+  temp_fixture_root_class: ignored_agent_private
+  real_capsule_modified: false
+  preview_created_or_copied: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  push_tag_release_deploy_performed_by_this_phase: false
+decision:
+  validation_passed: true
+  ready_for_guarded_local_auto_commit: true
+  recommended_next: guarded_local_auto_commit_then_push_safety_gate_if_ahead
+```
+
 ## Guarded Local Auto-Commit Authorization
 
 ```yaml

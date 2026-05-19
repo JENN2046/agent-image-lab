@@ -6,6 +6,21 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current P2b Registry Validator Negative-Case Coverage
+
+```text
+Current product-mainline task: p2b_registry_validator_negative_case_coverage.
+Status: completed validated pending guarded local commit.
+Validator added: scripts/validate_preview_capsule_registry_negative_cases.js.
+Coverage: empty registry, missing manifest, missing preview, hash mismatch, wrong long edge.
+Fixture strategy: temporary text fixtures under ignored .agent_private/, cleaned before exit.
+Not performed: no real capsule modification, no preview.webp creation/copy/conversion for product evidence, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no push/tag/release/deploy.
+Validation passed: negative-case validator, registry validator, single preview capsule validator, git diff --check, agent board validator, and scripts/validate_mvp.ps1.
+Recommended next: guarded local auto-commit, then push safety gate if ahead.
+```
+
+---
+
 ## Current Guarded Local Auto-Commit Authorization
 
 ```text
