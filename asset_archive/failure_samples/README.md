@@ -39,6 +39,7 @@ Future validation should mirror the accepted preview capsule guard style:
 
 ```powershell
 node scripts/validate_failure_sample_capsule_registry.js
+node scripts/validate_failure_sample_capsule_registry_negative_cases.js
 node scripts/validate_failure_sample_capsule_registry.js --require-at-least=1
 npm run validate-preview-capsule-registry
 npm run validate-preview-capsule-negative-cases

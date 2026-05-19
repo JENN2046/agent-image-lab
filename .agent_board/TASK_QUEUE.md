@@ -6,6 +6,19 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current Failure Sample Capsule Negative Case Coverage
+
+```text
+Current product-mainline task: failure_sample_capsule_negative_case_coverage.
+Status: completed validated pending guarded local commit.
+Purpose: prove failure sample capsule validator fail-closed behavior with ignored .agent_private fixtures.
+Changed files: scripts/validate_failure_sample_capsule_registry_negative_cases.js, docs/P5D_FAILURE_SAMPLE_CAPSULE_NEGATIVE_CASE_COVERAGE.md, asset_archive/failure_samples/README.md, README.md, .agent_board resume surfaces.
+Not performed: no real failure sample capsule modified, no asset_archive/failure_samples/<sample_id>/ capsule created, no real manifest/preview/failure_record/review_record sample file created, no preview creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: decide whether to wire failure sample validators into scripts/validate_mvp.ps1.
+```
+
+---
+
 ## Current Failure Sample Capsule Registry Validator Implementation
 
 ```text

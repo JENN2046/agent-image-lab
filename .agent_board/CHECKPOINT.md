@@ -1,5 +1,30 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## Failure Sample Capsule Negative Case Coverage
+
+```yaml
+phase: failure_sample_capsule_negative_case_coverage
+status: completed_validated_pending_guarded_local_commit
+completed:
+  - added scripts/validate_failure_sample_capsule_registry_negative_cases.js
+  - covered empty registry default pass
+  - covered empty registry require-at-least failure
+  - covered missing manifest, missing preview, hash mismatch, missing records, and production/memory guard violations
+  - documented coverage in docs/P5D_FAILURE_SAMPLE_CAPSULE_NEGATIVE_CASE_COVERAGE.md
+not_performed:
+  - no real failure sample capsule modified
+  - no asset_archive/failure_samples/<sample_id>/ capsule created
+  - no real manifest, preview.webp, failure_record, or review_record sample file created
+  - no preview.webp creation, copy, conversion, or generation
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no production candidate
+  - no push, tag, release, or deploy
+next:
+  - decide MVP wiring for failure sample validators
+```
+
 ## Failure Sample Capsule Registry Validator Implementation
 
 ```yaml

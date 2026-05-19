@@ -1,5 +1,17 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — Failure Sample Capsule Negative Case Coverage
+
+```text
+Status: failure_sample_capsule_negative_case_coverage completed_validated_pending_guarded_local_commit.
+Reason: prove the failure sample capsule validator fails closed for malformed future capsules while preserving zero-sample default pass.
+Execution mode: A4.8 local validation helper.
+Negative-case validator: scripts/validate_failure_sample_capsule_registry_negative_cases.js.
+Coverage record: docs/P5D_FAILURE_SAMPLE_CAPSULE_NEGATIVE_CASE_COVERAGE.md.
+Not performed: no real failure sample capsule modified, no manifest/preview/failure_record/review_record sample file created in asset_archive, no preview creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: decide whether to wire failure sample validators into scripts/validate_mvp.ps1 or keep targeted until a real failure capsule exists.
+```
+
 ## Current Handoff Update — Failure Sample Capsule Registry Validator Implementation
 
 ```text

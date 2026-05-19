@@ -1,5 +1,40 @@
 # RUN_STATE.md — Agent Image Lab
 
+## Failure Sample Capsule Negative Case Coverage
+
+```yaml
+phase: failure_sample_capsule_negative_case_coverage
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_local_validation_helper
+goal: prove failure sample capsule validator fail-closed behavior without modifying real failure samples
+evidence:
+  negative_case_validator: scripts/validate_failure_sample_capsule_registry_negative_cases.js
+  coverage_record: docs/P5D_FAILURE_SAMPLE_CAPSULE_NEGATIVE_CASE_COVERAGE.md
+  failure_samples_readme: asset_archive/failure_samples/README.md
+  readme_navigation: README.md
+coverage:
+  empty_registry_default_passes: true
+  empty_registry_require_one_fails: true
+  missing_manifest_fails: true
+  missing_preview_fails: true
+  preview_hash_mismatch_fails: true
+  missing_failure_record_fails: true
+  missing_review_record_fails: true
+  production_or_memory_guard_violation_fails: true
+guard:
+  temp_fixture_root_class: ignored_agent_private
+  real_failure_capsule_modified: false
+  preview_creation_or_copy_performed: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  production_candidate_created: false
+  push_tag_release_deploy_performed: false
+decision:
+  negative_cases_ready: true
+  recommended_next: decide_mvp_wiring_for_failure_sample_validators
+```
+
 ## Failure Sample Capsule Registry Validator Implementation
 
 ```yaml
