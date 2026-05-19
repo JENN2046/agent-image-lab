@@ -4,6 +4,39 @@
 ## Current Capsule Productization Goal
 
 ```text
+phase: capsule_static_operator_checklist_ui_mapping_gate
+status: completed_validated
+mode: A4.8 static / no runtime
+objective: map validated operator reviewer action matrix into static Review Console checklist fields
+static_mock_field: operator_reviewer_checklist_state
+validator_ref: scripts/validate_capsule_static_operator_checklist_ui_mapping.js
+accepted: 2
+failure: 2
+total: 4
+checklist_item_count: 5
+ui_affordance: static_text_only_not_executable_button
+executable_ui_buttons_created: false
+browser_validator_executed: false
+runtime_execution_performed: false
+asset_archive_ui_read_performed: false
+preview_loaded_or_rendered: false
+capsule_creation_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+validated_now: node --check review_console/static_prototype/mock_data.js; node --check scripts/validate_capsule_static_operator_checklist_ui_mapping.js; node scripts/validate_capsule_static_operator_checklist_ui_mapping.js; git diff --check; node scripts/validate_agent_board_state.js
+recommended_next: commit_readiness_gate_for_capsule_static_operator_checklist_ui_mapping
+```
+
+---
+
+## Current Capsule Productization Goal
+
+```text
 phase: capsule_product_core_checkpoint_gate
 status: completed_validated
 mode: A4.8 review / docs-light

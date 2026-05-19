@@ -463,6 +463,108 @@ window.REVIEW_CONSOLE_MOCK = {
     "push_tag_release_deploy_performed": false
   }
 },
+  operator_reviewer_checklist_state: {
+  "phase": "capsule_static_operator_checklist_ui_mapping_gate",
+  "checklist_version": "v1",
+  "source_matrix_ref": "tests/schema_examples/CAPSULE_OPERATOR_REVIEWER_ACTION_MATRIX.example.json",
+  "draft_output_key": "operator_reviewer_checklist_state",
+  "baseline": {
+    "accepted": 2,
+    "failure": 2,
+    "total": 4
+  },
+  "checklist_status": "static_operator_checklist_ready",
+  "checklist_items": [
+    {
+      "checklist_id": "checklist_accept_contract_baseline",
+      "reviewer_action": "accept_contract_baseline",
+      "state": "pass",
+      "operator_decision": "acknowledge_static_baseline",
+      "checklist_item": "Confirm registry, manifest, relation, and guard states are green; keep the baseline as static evidence only.",
+      "ui_affordance": "static_text_only_not_executable_button",
+      "required_human_confirmation": true,
+      "production_allowed": false,
+      "memory_write_allowed": false,
+      "runtime_action_allowed": false,
+      "provider_or_api_allowed": false,
+      "preview_load_allowed": false
+    },
+    {
+      "checklist_id": "checklist_inspect_manifest_failure",
+      "reviewer_action": "inspect_manifest_failure",
+      "state": "fail_closed",
+      "operator_decision": "block_and_inspect_manifest_contract",
+      "checklist_item": "Stop product smoke acceptance and inspect manifest schema/runtime validation evidence before any further product claim.",
+      "ui_affordance": "static_text_only_not_executable_button",
+      "required_human_confirmation": true,
+      "production_allowed": false,
+      "memory_write_allowed": false,
+      "runtime_action_allowed": false,
+      "provider_or_api_allowed": false,
+      "preview_load_allowed": false
+    },
+    {
+      "checklist_id": "checklist_repair_relation_link",
+      "reviewer_action": "repair_relation_link",
+      "state": "fail_closed",
+      "operator_decision": "block_and_repair_failure_to_accepted_relation",
+      "checklist_item": "Keep the failure lane visible and repair the resolved-by relation before restoring clean summary.",
+      "ui_affordance": "static_text_only_not_executable_button",
+      "required_human_confirmation": true,
+      "production_allowed": false,
+      "memory_write_allowed": false,
+      "runtime_action_allowed": false,
+      "provider_or_api_allowed": false,
+      "preview_load_allowed": false
+    },
+    {
+      "checklist_id": "checklist_block_production_guard_violation",
+      "reviewer_action": "block_production_guard_violation",
+      "state": "fail_closed",
+      "operator_decision": "block_any_production_or_memory_escalation",
+      "checklist_item": "Treat any production, runtime, or memory guard relaxation as a hard block until the false guard is restored.",
+      "ui_affordance": "static_text_only_not_executable_button",
+      "required_human_confirmation": true,
+      "production_allowed": false,
+      "memory_write_allowed": false,
+      "runtime_action_allowed": false,
+      "provider_or_api_allowed": false,
+      "preview_load_allowed": false
+    },
+    {
+      "checklist_id": "checklist_rerun_local_validator_outside_ui",
+      "reviewer_action": "rerun_local_validator_outside_ui",
+      "state": "fail_closed",
+      "operator_decision": "rerun_local_validator_not_browser_runtime",
+      "checklist_item": "Rerun the local Node validator outside the UI when evidence is missing or stale; do not use browser runtime as proof.",
+      "ui_affordance": "static_text_only_not_executable_button",
+      "required_human_confirmation": true,
+      "production_allowed": false,
+      "memory_write_allowed": false,
+      "runtime_action_allowed": false,
+      "provider_or_api_allowed": false,
+      "preview_load_allowed": false
+    }
+  ],
+  "guard": {
+    "static_checklist_only": true,
+    "executable_ui_buttons_created": false,
+    "browser_validator_executed": false,
+    "runtime_execution_performed": false,
+    "asset_archive_read_performed": false,
+    "asset_archive_ui_read_performed": false,
+    "preview_loaded_or_rendered": false,
+    "capsule_creation_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "production_candidate_write_performed": false,
+    "push_tag_release_deploy_performed": false
+  }
+},
   artifact_lifecycle_state_reader_seed: {
     version: "v1",
     phase: "v14_169_review_console_artifact_lifecycle_state_reader",

@@ -215,3 +215,11 @@ P6J 新增 unified capsule contract 静态展示：`unified_capsule_contract_rep
 ## Capsule static product smoke Review Console snapshot
 
 The static prototype consumes the checked-in `unified_capsule_contract_report` smoke fixture shape through `mock_data.js` and exposes the same draft output key. Snapshot validation is local Node-only and does not run a browser, read `asset_archive`, or load previews.
+
+## Capsule static operator checklist UI mapping
+
+The static mock exposes `operator_reviewer_checklist_state` as human checklist text derived from `CAPSULE_OPERATOR_REVIEWER_ACTION_MATRIX.example.json`. Every item uses `static_text_only_not_executable_button`; no executable UI button, browser validator, asset archive read, preview load, provider/API call, memory write, or production promotion is added.
+
+erun_local_validator_outside_ui.
+
+Static checklist labels include pass action `accept_contract_baseline` and fail-closed actions `inspect_manifest_failure`, `repair_relation_link`, `block_production_guard_violation`, and `rerun_local_validator_outside_ui`.

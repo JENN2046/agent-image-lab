@@ -11971,6 +11971,21 @@ process.exit(child.status || 0);
       Add-Failure "Capsule static product smoke Review Console snapshot must remain static-only with no browser runtime, asset UI read, or preview load"
     }
   }
+  $capsuleStaticOperatorChecklistUiMappingOutput = & node (Join-Path $Root 'scripts/validate_capsule_static_operator_checklist_ui_mapping.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Capsule static operator checklist UI mapping validation exited with failure"
+  } else {
+    $capsuleStaticOperatorChecklistUiMapping = ($capsuleStaticOperatorChecklistUiMappingOutput -join "`n") | ConvertFrom-Json
+    if ($capsuleStaticOperatorChecklistUiMapping.passed -ne $true -or $capsuleStaticOperatorChecklistUiMapping.status -ne 'capsule_static_operator_checklist_ui_mapping_verified') {
+      Add-Failure "Capsule static operator checklist UI mapping must pass"
+    }
+    if ($capsuleStaticOperatorChecklistUiMapping.accepted_count -ne 2 -or $capsuleStaticOperatorChecklistUiMapping.failure_count -ne 2 -or $capsuleStaticOperatorChecklistUiMapping.total_count -ne 4) {
+      Add-Failure "Capsule static operator checklist UI mapping must preserve accepted=2, failure=2, total=4"
+    }
+    if ($capsuleStaticOperatorChecklistUiMapping.executable_ui_buttons_created -ne $false -or $capsuleStaticOperatorChecklistUiMapping.browser_validator_executed -ne $false -or $capsuleStaticOperatorChecklistUiMapping.runtime_execution_performed -ne $false -or $capsuleStaticOperatorChecklistUiMapping.asset_archive_ui_read_performed -ne $false -or $capsuleStaticOperatorChecklistUiMapping.preview_loaded_or_rendered -ne $false -or $capsuleStaticOperatorChecklistUiMapping.provider_contact_performed -ne $false -or $capsuleStaticOperatorChecklistUiMapping.plugin_call_performed -ne $false -or $capsuleStaticOperatorChecklistUiMapping.api_call_performed -ne $false -or $capsuleStaticOperatorChecklistUiMapping.image_generation_performed -ne $false -or $capsuleStaticOperatorChecklistUiMapping.DailyNote_write_performed -ne $false -or $capsuleStaticOperatorChecklistUiMapping.VCP_memory_write_performed -ne $false -or $capsuleStaticOperatorChecklistUiMapping.production_candidate_write_performed -ne $false) {
+      Add-Failure "Capsule static operator checklist UI mapping must remain static-only with no executable UI, runtime, asset UI read, preview load, external, memory, or production actions"
+    }
+  }
   $capsuleOperatorReviewerActionMatrixOutput = & node (Join-Path $Root 'scripts/validate_capsule_operator_reviewer_action_matrix.js')
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "Capsule operator reviewer action matrix validation exited with failure"

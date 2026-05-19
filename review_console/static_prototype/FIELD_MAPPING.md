@@ -658,3 +658,17 @@ failure_samples / production_candidate，也不证明 VCP runtime integration。
 | `guard.asset_archive_ui_read_performed` | Static guard line | Must remain false; UI does not read asset archive. |
 | `guard.preview_loaded_or_rendered` | Static guard line | Must remain false; no preview load. |
 | `guard.browser_runtime_validator_executed` | Static guard line | Must remain false; validator is Node-only. |
+
+## Capsule static operator checklist UI mapping
+
+| Source field | Static checklist field | Rule |
+| --- | --- | --- |
+| `operator_actions[].label` | `operator_reviewer_checklist_state.checklist_items[].reviewer_action` | Every matrix action must appear exactly once as human checklist text. |
+| `operator_actions[].human_action` | `checklist_items[].checklist_item` | Human reviewer instruction only; not an executable operation. |
+| `operator_actions[].state` | `checklist_items[].state` | Keeps one pass item and four fail-closed items visible. |
+| `checklist_items[].ui_affordance` | `static_text_only_not_executable_button` | Explicitly forbids executable UI buttons. |
+| `operator_reviewer_checklist_state.guard.*` | static boundary flags | Runtime, browser validator, asset reads, preview load, provider/API, memory, and production remain false. |
+| inspect_manifest_failure /
+erun_local_validator_outside_ui | fail-closed checklist rows | Must stay static human instructions and never become executable buttons. |
+
+| `inspect_manifest_failure` / `repair_relation_link` / `block_production_guard_violation` / `rerun_local_validator_outside_ui` | fail-closed checklist rows | Must stay static human instructions and never become executable buttons. |
