@@ -1,4 +1,17 @@
-# Capsule Registry YAML Parser Checkpoint
+# Capsule Manifest Schema Runtime Unification Checkpoint
+
+```text
+phase_id: capsule_manifest_schema_runtime_unification_gate
+status: completed_validated_pending_commit
+checkpoint_reason: schema/runtime drift prevention for capsule manifest contract
+completed_work: schema fields bound to JS runtime constants; manifest validator reports schema_runtime_binding_status; drift validator added; MVP gate updated.
+validation_record: docs/CAPSULE_MANIFEST_SCHEMA_RUNTIME_UNIFICATION_CLOSEOUT.md
+validation_pending_final: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+not_performed: no capsule creation, no image generation, no provider/plugin/API, no DailyNote/VCP memory, no real manifest/VCPChat/VCPToolBox read, no runtime, no production candidate, no push/tag/release/deploy.
+next_safe_action: final local validation and exact-file commit readiness report.
+```
+
+---# Capsule Registry YAML Parser Checkpoint
 
 ```text
 phase_id: capsule_registry_yaml_parser

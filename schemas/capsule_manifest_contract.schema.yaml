@@ -32,6 +32,40 @@ capsule_manifest_contract_schema:
     - missing_chain_file
     - chain_record_mismatch
     - production_or_memory_guard_violation
+  guard_required_false:
+    - provider_contact_performed
+    - plugin_call_performed
+    - api_call_performed
+    - image_generation_performed
+    - DailyNote_write_performed
+    - VCP_memory_write_performed
+    - runtime_execution_performed
+    - real_manifest_read_performed
+    - real_vcpchat_read_performed
+    - real_vcptoolbox_read_performed
+  manifest_guard_required_false:
+    - provider_contact_performed
+    - plugin_call_performed
+    - api_call_performed
+    - image_generation_performed
+    - DailyNote_write_performed
+    - VCP_memory_write_performed
+    - runtime_execution_performed
+    - real_manifest_read_performed
+    - real_vcpchat_read_performed
+    - real_vcptoolbox_read_performed
+    - production_candidate_created
+    - push_tag_release_deploy_performed
+  accepted_top_level_required_false:
+    - production_candidate_allowed
+    - memory_write_allowed
+    - DailyNote_write_allowed
+    - VCP_memory_write_allowed
+    - commercial_delivery_allowed
+  failure_top_level_required_false:
+    - production_candidate_allowed
+    - memory_write_allowed
+    - DailyNote_write_allowed
   forbidden_authorizations:
     provider_contact_performed: true
     plugin_call_performed: true

@@ -5655,3 +5655,4 @@ git diff --check
 
 - `sharp dependency policy`: `sharp` is allowed only for local preview WebP capsule generation after explicit `--confirm-create=true`; it must not be used for provider generation, unapproved source-path processing, production export, DailyNote, VCP memory, or runtime integration.
 - `yaml dependency policy`: `yaml` is allowed only for local registry parsing and fail-closed validation of `accepted_samples/accepted_sample_registry.yaml`; it must not read external manifests, VCPChat, VCPToolBox, provider payloads, secrets, or runtime configuration.
+- `docs/CAPSULE_MANIFEST_SCHEMA_RUNTIME_UNIFICATION_CLOSEOUT.md` records the local-only binding between `schemas/capsule_manifest_contract.schema.yaml` and `scripts/lib/capsule_manifest_contract.js`; schema/runtime drift now fails closed in validation.

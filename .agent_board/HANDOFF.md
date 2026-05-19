@@ -1,3 +1,18 @@
+## Current Handoff Update - Capsule Manifest Schema Runtime Unification
+
+```text
+Status: capsule_manifest_schema_runtime_unification_gate completed_validated_pending_commit.
+Reason: bind schemas/capsule_manifest_contract.schema.yaml to the JS manifest validator so schema/runtime drift fails closed.
+Execution mode: A4.8 local implementation / no runtime.
+Validation record: docs/CAPSULE_MANIFEST_SCHEMA_RUNTIME_UNIFICATION_CLOSEOUT.md.
+Changed contract: scripts/lib/capsule_manifest_contract.js now loads schema and reports schema_runtime_binding_status.
+Changed schema: schemas/capsule_manifest_contract.schema.yaml now declares runtime-bound guard and top-level false fields.
+Changed validator: scripts/validate_capsule_manifest_schema_runtime_binding.js verifies positive binding and synthetic drift fail-closed cases.
+Changed MVP: scripts/validate_mvp.ps1 directly runs manifest contract and schema/runtime binding validators.
+Baseline preserved: accepted=2, failure=2, total=4.
+Not performed: no capsule creation, no image generation, no provider/plugin/API, no DailyNote/VCP memory, no real manifest/VCPChat/VCPToolBox read, no runtime, no production candidate, no push/tag/release/deploy.
+Recommended next: final validation and exact-file commit readiness report only.
+```
 ## Current Handoff Update - Capsule Registry YAML Parser
 
 ```text

@@ -1,10 +1,51 @@
 "use strict";
 
 const fs = require("node:fs");
+const YAML = require("yaml");
 
 const ACCEPTED_ROOT = "asset_archive/accepted_samples";
 const FAILURE_ROOT = "asset_archive/failure_samples";
+const SCHEMA_REF = "schemas/capsule_manifest_contract.schema.yaml";
 const REQUIRED_LONG_EDGE = 512;
+const COMMON_GUARD_FALSE_FIELDS = [
+  "provider_contact_performed",
+  "plugin_call_performed",
+  "api_call_performed",
+  "image_generation_performed",
+  "DailyNote_write_performed",
+  "VCP_memory_write_performed",
+  "runtime_execution_performed",
+  "real_manifest_read_performed",
+  "real_vcpchat_read_performed",
+  "real_vcptoolbox_read_performed",
+];
+const MANIFEST_GUARD_FALSE_FIELDS = [
+  ...COMMON_GUARD_FALSE_FIELDS,
+  "production_candidate_created",
+  "push_tag_release_deploy_performed",
+];
+const COMMON_TOP_LEVEL_FALSE_FIELDS = [
+  "production_candidate_allowed",
+  "memory_write_allowed",
+  "DailyNote_write_allowed",
+];
+const ACCEPTED_TOP_LEVEL_FALSE_FIELDS = [
+  ...COMMON_TOP_LEVEL_FALSE_FIELDS,
+  "VCP_memory_write_allowed",
+  "commercial_delivery_allowed",
+];
+const FAILURE_TOP_LEVEL_FALSE_FIELDS = COMMON_TOP_LEVEL_FALSE_FIELDS;
+const FAIL_CLOSED_CLASSES = [
+  "missing_capsule_manifest",
+  "manifest_contract_mismatch",
+  "missing_preview_file",
+  "invalid_preview_signature",
+  "preview_long_edge_mismatch",
+  "preview_hash_mismatch",
+  "missing_chain_file",
+  "chain_record_mismatch",
+  "production_or_memory_guard_violation",
+];
 
 function capsuleRoot(lane, sampleId) {
   if (typeof sampleId !== "string" || !/^[A-Za-z0-9_.-]+$/.test(sampleId)) {
@@ -54,9 +95,42 @@ function classifyFailures(failures) {
 
 function validateGuardFalse(value, prefix, failures) {
   const guard = value || {};
-  for (const field of ["provider_contact_performed", "plugin_call_performed", "api_call_performed", "image_generation_performed", "DailyNote_write_performed", "VCP_memory_write_performed", "runtime_execution_performed", "real_manifest_read_performed", "real_vcpchat_read_performed", "real_vcptoolbox_read_performed"]) {
+  for (const field of COMMON_GUARD_FALSE_FIELDS) {
     if (guard[field] !== false) failures.push(`${prefix}_guard_${field}_false`);
   }
+}
+
+function arraysEqual(left, right) {
+  return Array.isArray(left) && Array.isArray(right) && left.length === right.length && left.every((value, index) => value === right[index]);
+}
+
+function loadCapsuleManifestSchema(core, schemaRef = SCHEMA_REF) {
+  if (!core.exists(schemaRef)) {
+    return { schema: null, schemaRef, failures: ["schema_exists"] };
+  }
+  const schemaText = core.read(schemaRef);
+  const parsed = YAML.parse(schemaText);
+  return { schema: parsed?.capsule_manifest_contract_schema || null, schemaRef, failures: parsed?.capsule_manifest_contract_schema ? [] : ["schema_root_present"] };
+}
+
+function validateSchemaRuntimeBinding(schema) {
+  const failures = [];
+  const acceptedSpec = chainSpec("accepted");
+  const failureSpec = chainSpec("failure");
+  const check = (condition, label) => { if (!condition) failures.push(label); };
+
+  check(schema?.version === "v1", "schema_version_v1");
+  check(schema?.accepted_manifest_type === acceptedSpec.manifestType, "schema_accepted_manifest_type_matches_runtime");
+  check(schema?.failure_manifest_type === failureSpec.manifestType, "schema_failure_manifest_type_matches_runtime");
+  check(arraysEqual(schema?.accepted_chain_required, Object.keys(acceptedSpec.files)), "schema_accepted_chain_matches_runtime");
+  check(arraysEqual(schema?.failure_chain_required, Object.keys(failureSpec.files)), "schema_failure_chain_matches_runtime");
+  check(arraysEqual(schema?.fail_closed_classes, FAIL_CLOSED_CLASSES), "schema_fail_closed_classes_match_runtime");
+  check(arraysEqual(schema?.guard_required_false, COMMON_GUARD_FALSE_FIELDS), "schema_common_guard_fields_match_runtime");
+  check(arraysEqual(schema?.manifest_guard_required_false, MANIFEST_GUARD_FALSE_FIELDS), "schema_manifest_guard_fields_match_runtime");
+  check(arraysEqual(schema?.accepted_top_level_required_false, ACCEPTED_TOP_LEVEL_FALSE_FIELDS), "schema_accepted_top_level_false_fields_match_runtime");
+  check(arraysEqual(schema?.failure_top_level_required_false, FAILURE_TOP_LEVEL_FALSE_FIELDS), "schema_failure_top_level_false_fields_match_runtime");
+  check(schema?.forbidden_authorizations?.provider_contact_performed === true, "schema_forbidden_authorizations_present");
+  return { passed: failures.length === 0, failures };
 }
 
 function validateCapsuleManifest(core, lane, sampleId, options = {}) {
@@ -96,18 +170,12 @@ function validateCapsuleManifest(core, lane, sampleId, options = {}) {
   check(Boolean(manifest.artifact?.preview?.sha256), "preview_manifest_sha256_present");
   check(previewSha256 === manifest.artifact?.preview?.sha256, "preview_sha256_matches_manifest");
   validateGuardFalse(manifest.guard, "manifest", failures);
-  check(manifest.guard?.production_candidate_created === false, "manifest_guard_production_candidate_created_false");
-  check(manifest.guard?.push_tag_release_deploy_performed === false, "manifest_guard_push_tag_release_deploy_performed_false");
+  for (const field of MANIFEST_GUARD_FALSE_FIELDS.filter((item) => !COMMON_GUARD_FALSE_FIELDS.includes(item))) {
+    check(manifest.guard?.[field] === false, `manifest_guard_${field}_false`);
+  }
 
-  if (lane === "accepted" || lane === "failure") {
-    check(manifest.production_candidate_allowed === false, "production_candidate_allowed_false");
-    check(manifest.memory_write_allowed === false, "memory_write_allowed_false");
-    check(manifest.DailyNote_write_allowed === false, "DailyNote_write_allowed_false");
-  }
-  if (lane === "accepted") {
-    check(manifest.VCP_memory_write_allowed === false, "VCP_memory_write_allowed_false");
-    check(manifest.commercial_delivery_allowed === false, "commercial_delivery_allowed_false");
-  }
+  const topLevelFalseFields = lane === "accepted" ? ACCEPTED_TOP_LEVEL_FALSE_FIELDS : FAILURE_TOP_LEVEL_FALSE_FIELDS;
+  for (const field of topLevelFalseFields) check(manifest[field] === false, `${field}_false`);
 
   const chainRefs = [];
   for (const [chainKey, expected] of Object.entries(spec.files)) {
@@ -136,13 +204,16 @@ function listCapsules(core, lane) {
 }
 
 function validateAllCapsuleManifests(core, options = {}) {
+  const schemaLoad = loadCapsuleManifestSchema(core, options.schemaRef);
+  const schemaBinding = schemaLoad.schema ? validateSchemaRuntimeBinding(schemaLoad.schema) : { passed: false, failures: schemaLoad.failures };
   const accepted = listCapsules(core, "accepted").map((sampleId) => validateCapsuleManifest(core, "accepted", sampleId, options));
   const failure = listCapsules(core, "failure").map((sampleId) => validateCapsuleManifest(core, "failure", sampleId, options));
   const samples = accepted.concat(failure);
   const failed = samples.filter((sample) => !sample.passed);
   const failureClassSummary = {};
   for (const sample of samples) for (const failureClass of sample.failure_classes) failureClassSummary[failureClass] = (failureClassSummary[failureClass] || 0) + 1;
-  return { passed: failed.length === 0, status: failed.length === 0 ? "capsule_manifest_contract_verified" : "capsule_manifest_contract_failed", report_version: "capsule_manifest_contract_v1", totals: { accepted: accepted.length, failure: failure.length, total: samples.length, passed: samples.length - failed.length, failed: failed.length }, samples, failed_sample_ids: failed.map((sample) => sample.sample_id), failure_class_summary: failureClassSummary, guard: { static_validator_only: true, preview_creation_or_copy_performed: false, provider_contact_performed: false, plugin_call_performed: false, api_call_performed: false, image_generation_performed: false, DailyNote_write_performed: false, VCP_memory_write_performed: false, runtime_execution_performed: false, real_manifest_read_performed: false, real_vcpchat_read_performed: false, real_vcptoolbox_read_performed: false, push_tag_release_deploy_performed: false } };
+  const passed = failed.length === 0 && schemaBinding.passed;
+  return { passed, status: passed ? "capsule_manifest_contract_verified" : "capsule_manifest_contract_failed", report_version: "capsule_manifest_contract_v1", schema_ref: schemaLoad.schemaRef, schema_runtime_binding_status: schemaBinding.passed ? "schema_runtime_binding_verified" : "schema_runtime_binding_failed", schema_runtime_binding_failures: schemaBinding.failures, totals: { accepted: accepted.length, failure: failure.length, total: samples.length, passed: samples.length - failed.length, failed: failed.length }, samples, failed_sample_ids: failed.map((sample) => sample.sample_id), failure_class_summary: failureClassSummary, guard: { static_validator_only: true, preview_creation_or_copy_performed: false, provider_contact_performed: false, plugin_call_performed: false, api_call_performed: false, image_generation_performed: false, DailyNote_write_performed: false, VCP_memory_write_performed: false, runtime_execution_performed: false, real_manifest_read_performed: false, real_vcpchat_read_performed: false, real_vcptoolbox_read_performed: false, push_tag_release_deploy_performed: false } };
 }
 
-module.exports = { ACCEPTED_ROOT, FAILURE_ROOT, REQUIRED_LONG_EDGE, classifyFailures, validateCapsuleManifest, validateAllCapsuleManifests };
+module.exports = { ACCEPTED_ROOT, FAILURE_ROOT, SCHEMA_REF, REQUIRED_LONG_EDGE, classifyFailures, loadCapsuleManifestSchema, validateSchemaRuntimeBinding, validateCapsuleManifest, validateAllCapsuleManifests };

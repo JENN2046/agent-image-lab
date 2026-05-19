@@ -11870,6 +11870,34 @@ process.exit(child.status || 0);
     }
   }
 
+  $capsuleManifestContractOutput = & node (Join-Path $Root 'scripts/validate_capsule_manifest_contract.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Capsule manifest contract validation exited with failure"
+  } else {
+    $capsuleManifestContract = ($capsuleManifestContractOutput -join "`n") | ConvertFrom-Json
+    if ($capsuleManifestContract.passed -ne $true -or $capsuleManifestContract.status -ne 'capsule_manifest_contract_verified' -or $capsuleManifestContract.schema_runtime_binding_status -ne 'schema_runtime_binding_verified') {
+      Add-Failure "Capsule manifest contract must pass and verify schema/runtime binding"
+    }
+    if ($capsuleManifestContract.totals.accepted -ne 2 -or $capsuleManifestContract.totals.failure -ne 2 -or $capsuleManifestContract.totals.total -ne 4) {
+      Add-Failure "Capsule manifest contract must preserve accepted=2, failure=2, total=4"
+    }
+    if ($capsuleManifestContract.guard.preview_creation_or_copy_performed -ne $false -or $capsuleManifestContract.guard.image_generation_performed -ne $false -or $capsuleManifestContract.guard.provider_contact_performed -ne $false -or $capsuleManifestContract.guard.plugin_call_performed -ne $false -or $capsuleManifestContract.guard.api_call_performed -ne $false -or $capsuleManifestContract.guard.DailyNote_write_performed -ne $false -or $capsuleManifestContract.guard.VCP_memory_write_performed -ne $false -or $capsuleManifestContract.guard.runtime_execution_performed -ne $false -or $capsuleManifestContract.guard.real_manifest_read_performed -ne $false -or $capsuleManifestContract.guard.real_vcpchat_read_performed -ne $false -or $capsuleManifestContract.guard.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "Capsule manifest contract validation must remain local-only with no external, memory, runtime, image, or source-read actions"
+    }
+  }
+
+  $capsuleManifestSchemaBindingOutput = & node (Join-Path $Root 'scripts/validate_capsule_manifest_schema_runtime_binding.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Capsule manifest schema/runtime binding validation exited with failure"
+  } else {
+    $capsuleManifestSchemaBinding = ($capsuleManifestSchemaBindingOutput -join "`n") | ConvertFrom-Json
+    if ($capsuleManifestSchemaBinding.passed -ne $true -or $capsuleManifestSchemaBinding.status -ne 'capsule_manifest_schema_runtime_binding_verified') {
+      Add-Failure "Capsule manifest schema/runtime binding validator must pass"
+    }
+    if ($capsuleManifestSchemaBinding.no_capsule_created -ne $true -or $capsuleManifestSchemaBinding.preview_creation_or_copy_performed -ne $false -or $capsuleManifestSchemaBinding.image_generation_performed -ne $false -or $capsuleManifestSchemaBinding.provider_contact_performed -ne $false -or $capsuleManifestSchemaBinding.plugin_call_performed -ne $false -or $capsuleManifestSchemaBinding.api_call_performed -ne $false -or $capsuleManifestSchemaBinding.DailyNote_write_performed -ne $false -or $capsuleManifestSchemaBinding.VCP_memory_write_performed -ne $false -or $capsuleManifestSchemaBinding.runtime_execution_performed -ne $false -or $capsuleManifestSchemaBinding.real_manifest_read_performed -ne $false -or $capsuleManifestSchemaBinding.real_vcpchat_read_performed -ne $false -or $capsuleManifestSchemaBinding.real_vcptoolbox_read_performed -ne $false) {
+      Add-Failure "Capsule manifest schema/runtime binding validator must remain no-capsule, local-only, and no-external"
+    }
+  }
   $capsuleRegistryReportV2Output = & node (Join-Path $Root 'scripts/validate_capsule_registry_report_v2.js')
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "Capsule registry report v2 validation exited with failure"

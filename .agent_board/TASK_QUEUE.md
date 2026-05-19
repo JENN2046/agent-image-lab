@@ -1,4 +1,17 @@
-## Current Capsule Registry YAML Parser
+## Current Capsule Manifest Schema Runtime Unification
+
+```text
+Current product-mainline task: capsule_manifest_schema_runtime_unification_gate.
+Status: completed validated pending guarded local commit.
+Purpose: ensure capsule manifest schema and JS runtime validator cannot drift silently.
+Changed files: schemas/capsule_manifest_contract.schema.yaml, scripts/lib/capsule_manifest_contract.js, scripts/validate_capsule_manifest_schema_runtime_binding.js, scripts/validate_mvp.ps1, README.md, docs/CAPSULE_MANIFEST_SCHEMA_RUNTIME_UNIFICATION_CLOSEOUT.md, .agent_board resume surfaces.
+Evidence: schema_runtime_binding_status is reported by manifest validation; synthetic manifest type, chain, guard, and accepted top-level drift fail closed.
+Baseline preserved: accepted=2, failure=2, total=4.
+Not performed: no capsule creation, no image generation, no provider/plugin/API, no DailyNote/VCP memory, no real manifest/VCPChat/VCPToolBox read, no runtime, no production candidate, no push/tag/release/deploy.
+Recommended next: final validation and exact-file commit readiness report only.
+```
+
+---## Current Capsule Registry YAML Parser
 
 ```text
 Current product-mainline task: capsule_registry_yaml_parser.
