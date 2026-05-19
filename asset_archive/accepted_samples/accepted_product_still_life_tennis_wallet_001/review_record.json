@@ -1,0 +1,27 @@
+{
+  "record_type": "git_portable_preview_capsule_review_record",
+  "version": "v1",
+  "sample_id": "accepted_product_still_life_tennis_wallet_001",
+  "created_at": "2026-05-19T07:25:24.159Z",
+  "review_doc_ref": "docs/281_v7_24_native_doubao_v3_post_run_review_accepted_candidate.md",
+  "registry_sample_block": "sample_id: accepted_product_still_life_tennis_wallet_001\r\n      source_phase: v7_24\r\n      asset_status: accepted_candidate\r\n      provider_type: direct_api\r\n      plugin_id: NativeDoubaoImage\r\n      model: doubao-seedream-5-0-260128\r\n      prompt_package_ref: prompts/image_generation/product_still_life_outdoor_tennis_wallet_hero_no_text_v3.yaml\r\n      review_doc_ref: docs/281_v7_24_native_doubao_v3_post_run_review_accepted_candidate.md\r\n      image_path: runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg\r\n      category: product_still_life\r\n      style_tags:\r\n        - outdoor_tennis\r\n        - leather_accessory\r\n        - commercial_product_photography\r\n        - accepted_candidate\r\n      acceptance_summary:\r\n        prompt_subject_match: pass\r\n        product_fully_visible: pass\r\n        product_unobstructed: pass\r\n        no_watermark_or_generated_mark: pass\r\n        commercial_usability: pass\r\n        memory_suitability: false\r\n      known_minor_issues:\r\n        - wallet_shape_can_be_more_specific\r\n        - sunlight_and_surface_texture_can_be_more_refined\r\n      commercial_use_level: accepted_candidate\r\n      write_to_memory_allowed: false\r\n      daily_note_write_allowed: false",
+  "review_summary": {
+    "asset_status": "accepted_candidate",
+    "category": "product_still_life",
+    "source_phase": "v7_24",
+    "commercial_use_level": "accepted_candidate",
+    "memory_suitability": false
+  },
+  "guard": {
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "runtime_execution_performed": false,
+    "real_manifest_read_performed": false,
+    "real_vcpchat_read_performed": false,
+    "real_vcptoolbox_read_performed": false
+  }
+}

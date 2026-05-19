@@ -1,0 +1,36 @@
+{
+  "record_type": "git_portable_preview_capsule_import_record",
+  "version": "v1",
+  "sample_id": "accepted_product_still_life_tennis_wallet_001",
+  "created_at": "2026-05-19T07:25:24.159Z",
+  "source": {
+    "source_phase": "v7_24",
+    "source_image_path": "runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg",
+    "source_image_git_tracked": false,
+    "source_image_hash_recorded": false,
+    "registry_ref": "accepted_samples/accepted_sample_registry.yaml",
+    "category_ref": "accepted_samples/categories/product_still_life.yaml",
+    "prompt_package_ref": "prompts/image_generation/product_still_life_outdoor_tennis_wallet_hero_no_text_v3.yaml"
+  },
+  "imported_artifact": {
+    "path": "preview.webp",
+    "format": "webp",
+    "long_edge": 512,
+    "sha256": "125f5fb6fad2c72c23a345ec41fea49ce89285e66056410817eb2b0d0f86542b",
+    "git_tracked": true,
+    "width": 512,
+    "height": 512
+  },
+  "guard": {
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "runtime_execution_performed": false,
+    "real_manifest_read_performed": false,
+    "real_vcpchat_read_performed": false,
+    "real_vcptoolbox_read_performed": false
+  }
+}
