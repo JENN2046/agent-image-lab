@@ -6,6 +6,20 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current P6 Multi-Capsule Accepted / Failure Dashboard
+
+```text
+Current product-mainline task: p6_multi_capsule_accepted_failure_dashboard_productization.
+Status: completed validated pending guarded local commit.
+Purpose: make accepted=2 / failure=1 Git-portable capsule evidence visible in Review Console as a static dashboard and side-by-side accepted/failure relation.
+Changed files: review_console/static_prototype/app.js, index.html, styles.css, README.md, FIELD_MAPPING.md, docs/P6_MULTI_CAPSULE_ACCEPTED_FAILURE_DASHBOARD_PRODUCTIZATION.md, tests/schema_examples/P6_MULTI_CAPSULE_ACCEPTED_FAILURE_DASHBOARD.example.json, scripts/validate_multi_capsule_dashboard.js, scripts/validate_mvp.ps1, README.md, .agent_board resume surfaces.
+Evidence: multi_capsule_dashboard_state, accepted/failure per-sample report, resolved-by link from failure_french_summer_rattan_bag_v7_29_001 to accepted_french_summer_rattan_bucket_bag_001, future accepted/failure unified report shape, failure track expansion plan.
+Not performed: no preview load, no asset_archive read, no fetch, no file write outside static docs/scripts, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: registry report v2 design or second failure capsule authorization package; push remains separately authorized only.
+```
+
+---
+
 ## Current Review Console Failure Capsule Snapshot Validator
 
 ```text

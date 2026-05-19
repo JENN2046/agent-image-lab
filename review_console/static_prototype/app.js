@@ -237,6 +237,208 @@ function renderArtifactEvidenceDashboard() {
   `;
 }
 
+function multiCapsuleDashboardState() {
+  const acceptedCapsules = state.portable_preview_capsule_evidence_list || [state.portable_preview_capsule_evidence];
+  const failureCapsules = state.portable_failure_capsule_evidence_list || [state.portable_failure_capsule_evidence];
+  const acceptedById = new Map(acceptedCapsules.map((capsule) => [capsule.sample_id, capsule]));
+  const relations = failureCapsules.map((failure) => {
+    const accepted = acceptedById.get(failure.resolved_by_accepted_sample) || null;
+    return {
+      relation_id: `${failure.sample_id}__resolved_by__${failure.resolved_by_accepted_sample}`,
+      failure_sample_id: failure.sample_id,
+      accepted_sample_id: failure.resolved_by_accepted_sample,
+      relation_status: accepted ? "linked" : "missing_accepted_capsule",
+      failure_final_route: failure.final_route,
+      failure_tags: failure.failure_tags || [],
+      failure_manifest_ref: failure.manifest_ref,
+      failure_preview_ref: failure.preview_ref,
+      failure_record_ref: failure.failure_record_ref,
+      failure_review_record_ref: failure.review_record_ref,
+      accepted_manifest_ref: accepted?.manifest_ref || null,
+      accepted_preview_ref: accepted?.preview_ref || null,
+      accepted_import_record_ref: accepted?.import_record_ref || null,
+      accepted_review_record_ref: accepted?.review_record_ref || null,
+      accepted_approval_record_ref: accepted?.approval_record_ref || null,
+      accepted_is_reusable_positive_example: Boolean(accepted),
+      failure_is_never_production: failure.production_candidate_allowed === false && failure.final_route === "failure_learning_only_never_production"
+    };
+  });
+  const acceptedReportRows = acceptedCapsules.map((capsule) => ({
+    lane: "accepted",
+    sample_id: capsule.sample_id,
+    status: capsule.validation_status,
+    registry_validator_status: capsule.registry_validator_status,
+    clone_portable_validation_status: capsule.clone_portable_validation_status,
+    preview_ref: capsule.preview_ref,
+    manifest_ref: capsule.manifest_ref,
+    chain_refs: [capsule.import_record_ref, capsule.review_record_ref, capsule.approval_record_ref],
+    passed: capsule.clone_portable_validation_status === "passed" && capsule.registry_validator_status === "registry_driven_preview_capsules_verified"
+  }));
+  const failureReportRows = failureCapsules.map((capsule) => ({
+    lane: "failure",
+    sample_id: capsule.sample_id,
+    status: capsule.validation_status,
+    registry_validator_status: capsule.registry_validator_status,
+    clone_portable_validation_status: capsule.clone_portable_validation_status,
+    preview_ref: capsule.preview_ref,
+    manifest_ref: capsule.manifest_ref,
+    chain_refs: [capsule.failure_record_ref, capsule.review_record_ref],
+    resolved_by_accepted_sample: capsule.resolved_by_accepted_sample,
+    failure_tags: capsule.failure_tags || [],
+    final_route: capsule.final_route,
+    passed: capsule.clone_portable_validation_status === "passed" && capsule.registry_validator_status === "failure_sample_capsules_verified"
+  }));
+  const reportRows = acceptedReportRows.concat(failureReportRows);
+  return {
+    phase: "p6_multi_capsule_accepted_failure_dashboard_productization",
+    execution_mode: "review_console_static_multi_capsule_dashboard_only",
+    draft_output_key: "multi_capsule_dashboard_state",
+    accepted_capsule_count: acceptedCapsules.length,
+    failure_capsule_count: failureCapsules.length,
+    total_capsule_count: acceptedCapsules.length + failureCapsules.length,
+    accepted_sample_ids: acceptedCapsules.map((capsule) => capsule.sample_id),
+    failure_sample_ids: failureCapsules.map((capsule) => capsule.sample_id),
+    accepted_registry_statuses: Array.from(new Set(acceptedCapsules.map((capsule) => capsule.registry_validator_status))),
+    failure_registry_statuses: Array.from(new Set(failureCapsules.map((capsule) => capsule.registry_validator_status))),
+    clone_portable_statuses: Array.from(new Set(reportRows.map((row) => row.clone_portable_validation_status))),
+    old_runs_source_required_for_portable_validation: false,
+    old_runs_source_as_long_term_evidence: false,
+    directory_as_registry_currently_sufficient: true,
+    future_registry_report_shape: {
+      report_version: "accepted_failure_capsule_report_v1",
+      total: reportRows.length,
+      passed: reportRows.filter((row) => row.passed).length,
+      failed: reportRows.filter((row) => !row.passed).length,
+      fields: [
+        "lane",
+        "sample_id",
+        "status",
+        "registry_validator_status",
+        "clone_portable_validation_status",
+        "preview_ref",
+        "manifest_ref",
+        "chain_refs",
+        "failure_class_summary",
+        "resolved_by_links"
+      ]
+    },
+    per_sample_report: reportRows,
+    failure_class_summary: {
+      accepted_failed: acceptedReportRows.filter((row) => !row.passed).length,
+      failure_failed: failureReportRows.filter((row) => !row.passed).length,
+      missing_resolved_by_link: relations.filter((relation) => relation.relation_status !== "linked").length,
+      production_or_memory_guard_violation: failureReportRows.filter((row) => row.final_route !== "failure_learning_only_never_production").length
+    },
+    resolved_by_links: relations,
+    failure_track_expansion_plan: {
+      next_capsule_creation_allowed_now: false,
+      second_failure_capsule_requires_separate_authorization: true,
+      candidate_selection_criteria: [
+        "source failure has review record",
+        "source failure has failure tags",
+        "source failure has a useful accepted resolution link",
+        "preview can be long_edge 512 without using provider or image generation"
+      ],
+      required_authorization_fields: [
+        "sample_id",
+        "source_image",
+        "target_capsule_root",
+        "allowed_write_paths",
+        "validation_commands",
+        "stop_conditions"
+      ],
+      stop_conditions: [
+        "source image missing",
+        "target capsule exists",
+        "would overwrite existing capsule",
+        "provider/plugin/API/image generation needed",
+        "DailyNote/VCP memory/runtime needed"
+      ]
+    },
+    guard: {
+      static_dashboard_only: true,
+      mock_in_memory_only: true,
+      fetch_performed: false,
+      file_write_performed: false,
+      asset_archive_read_performed: false,
+      accepted_samples_write_performed: false,
+      failure_samples_write_performed: false,
+      preview_creation_or_copy_performed: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      image_generation_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      runtime_execution_performed: false,
+      real_manifest_read_performed: false,
+      real_vcpchat_read_performed: false,
+      real_vcptoolbox_read_performed: false,
+      production_candidate_write_performed: false,
+      push_tag_release_deploy_performed: false,
+      vcp_runtime_integration_proven: false
+    }
+  };
+}
+
+function renderMultiCapsuleDashboard() {
+  const dashboard = multiCapsuleDashboardState();
+  qs("#multiCapsuleSummary").innerHTML = `
+    <span>accepted <strong>${escapeHtml(dashboard.accepted_capsule_count)}</strong></span>
+    <span>failure <strong>${escapeHtml(dashboard.failure_capsule_count)}</strong></span>
+    <span>total <strong>${escapeHtml(dashboard.total_capsule_count)}</strong></span>
+    <span>clone portable <strong>${inlineList(dashboard.clone_portable_statuses)}</strong></span>
+    <span>old runs required <strong>${escapeHtml(dashboard.old_runs_source_required_for_portable_validation)}</strong></span>
+    <span>linked failures <strong>${escapeHtml(dashboard.resolved_by_links.filter((item) => item.relation_status === "linked").length)}</strong></span>
+  `;
+  qs("#multiCapsuleReport").innerHTML = dashboard.per_sample_report.map((row) => `
+    <article class="multi-capsule-card ${row.lane}">
+      <div class="protocol-card-head">
+        <strong>${escapeHtml(row.sample_id)}</strong>
+        <span>${escapeHtml(row.lane)}</span>
+      </div>
+      <dl>
+        <div><dt>Status</dt><dd>${escapeHtml(row.status)}</dd></div>
+        <div><dt>Registry</dt><dd>${escapeHtml(row.registry_validator_status)}</dd></div>
+        <div><dt>Clone portable</dt><dd>${escapeHtml(row.clone_portable_validation_status)}</dd></div>
+        <div><dt>Manifest</dt><dd>${escapeHtml(row.manifest_ref)}</dd></div>
+        <div><dt>Preview</dt><dd>${escapeHtml(row.preview_ref)}</dd></div>
+        <div><dt>Chain</dt><dd>${inlineList(row.chain_refs)}</dd></div>
+      </dl>
+    </article>
+  `).join("");
+  qs("#multiCapsuleRelations").innerHTML = dashboard.resolved_by_links.map((relation) => `
+    <article class="multi-capsule-card relation">
+      <div class="protocol-card-head">
+        <strong>${escapeHtml(relation.failure_sample_id)}</strong>
+        <span>${escapeHtml(relation.relation_status)}</span>
+      </div>
+      <dl>
+        <div><dt>Resolved by</dt><dd>${escapeHtml(relation.accepted_sample_id)}</dd></div>
+        <div><dt>Failure route</dt><dd>${escapeHtml(relation.failure_final_route)}</dd></div>
+        <div><dt>Failure tags</dt><dd>${inlineList(relation.failure_tags)}</dd></div>
+        <div><dt>Failure manifest</dt><dd>${escapeHtml(relation.failure_manifest_ref)}</dd></div>
+        <div><dt>Failure review</dt><dd>${escapeHtml(relation.failure_review_record_ref)}</dd></div>
+        <div><dt>Accepted manifest</dt><dd>${escapeHtml(relation.accepted_manifest_ref || "missing")}</dd></div>
+        <div><dt>Accepted import</dt><dd>${escapeHtml(relation.accepted_import_record_ref || "missing")}</dd></div>
+        <div><dt>Accepted review</dt><dd>${escapeHtml(relation.accepted_review_record_ref || "missing")}</dd></div>
+        <div><dt>Accepted approval</dt><dd>${escapeHtml(relation.accepted_approval_record_ref || "missing")}</dd></div>
+        <div><dt>Reusable positive</dt><dd>${escapeHtml(relation.accepted_is_reusable_positive_example)}</dd></div>
+        <div><dt>Failure never production</dt><dd>${escapeHtml(relation.failure_is_never_production)}</dd></div>
+      </dl>
+    </article>
+  `).join("");
+  qs("#multiCapsuleGuard").innerHTML = `
+    <span>static dashboard: ${escapeHtml(dashboard.guard.static_dashboard_only)}</span>
+    <span>mock memory only: ${escapeHtml(dashboard.guard.mock_in_memory_only)}</span>
+    <span>fetch: ${escapeHtml(dashboard.guard.fetch_performed)}</span>
+    <span>file write: ${escapeHtml(dashboard.guard.file_write_performed)}</span>
+    <span>asset archive read: ${escapeHtml(dashboard.guard.asset_archive_read_performed)}</span>
+    <span>preview copy: ${escapeHtml(dashboard.guard.preview_creation_or_copy_performed)}</span>
+    <span>VCP runtime proven: ${escapeHtml(dashboard.guard.vcp_runtime_integration_proven)}</span>
+  `;
+}
+
 function artifactLifecycleReaderApi() {
   return window.ArtifactLifecycleStateReader;
 }
@@ -2717,6 +2919,7 @@ function renderDraft() {
     review_report_static_handoff: state.review_report_static_handoff,
     review_report_negative_guard_static_handoff: state.review_report_negative_guard_static_handoff,
     review_evidence_blocker_adapter_negative_static_handoff: state.review_evidence_blocker_adapter_negative_static_handoff,
+    multi_capsule_dashboard_state: multiCapsuleDashboardState(),
     failure_state_static_workbench_state: failureStateStaticWorkbenchState(),
     artifact_recoverability_dashboard_evidence: state.artifact_dashboard_evidence,
     portable_preview_capsule_evidence: state.portable_preview_capsule_evidence,
@@ -2804,6 +3007,7 @@ function renderAll() {
   renderAdapterNegativeHandoff();
   renderFailureStateStaticWorkbench();
   renderArtifactEvidenceDashboard();
+  renderMultiCapsuleDashboard();
   renderArtifactLifecycleStateReader();
   renderArtifactPromptCompletionPanel();
   renderArtifactDetailDrawer();

@@ -1,5 +1,37 @@
 # RUN_STATE.md — Agent Image Lab
 
+## P6 Multi-Capsule Accepted / Failure Dashboard
+
+```yaml
+phase: p6_multi_capsule_accepted_failure_dashboard_productization
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_static_review_console_product_mainline
+goal: make accepted=2 / failure=1 Git-portable capsule evidence visible as a static Review Console dashboard
+static_output_key: multi_capsule_dashboard_state
+validator: scripts/validate_multi_capsule_dashboard.js
+fixture: tests/schema_examples/P6_MULTI_CAPSULE_ACCEPTED_FAILURE_DASHBOARD.example.json
+validation_record: docs/P6_MULTI_CAPSULE_ACCEPTED_FAILURE_DASHBOARD_PRODUCTIZATION.md
+counts:
+  accepted_capsules: 2
+  failure_capsules: 1
+  total_capsules: 3
+relation:
+  failure_sample: failure_french_summer_rattan_bag_v7_29_001
+  resolved_by: accepted_french_summer_rattan_bucket_bag_001
+guard:
+  static_mock_in_memory_only: true
+  old_runs_required_for_portable_validation: false
+  second_failure_capsule_creation_allowed_now: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  production_candidate_created: false
+  push_tag_release_deploy_performed: false
+decision:
+  accepted_failure_dashboard_productized: true
+  recommended_next: registry_report_v2_or_second_failure_capsule_authorization_package
+```
+
 ## Review Console Failure Capsule Snapshot Validator
 
 ```yaml

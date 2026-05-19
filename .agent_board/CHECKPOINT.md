@@ -1,5 +1,34 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## P6 Multi-Capsule Accepted / Failure Dashboard
+
+```yaml
+phase: p6_multi_capsule_accepted_failure_dashboard_productization
+status: completed_validated_pending_guarded_local_commit
+completed:
+  - added Review Console Capsule Dashboard static panel
+  - added multi_capsule_dashboard_state to draft output
+  - displayed accepted=2, failure=1, total=3 capsule counts
+  - displayed accepted and failure capsule sample ids
+  - displayed accepted/failure side-by-side resolved-by link
+  - documented second failure capsule expansion requirements without creating it
+  - documented accepted/failure unified report shape
+  - added P6 schema example snapshot
+  - added scripts/validate_multi_capsule_dashboard.js
+  - wired P6 validator into scripts/validate_mvp.ps1
+not_performed:
+  - no preview.webp load, copy, conversion, or creation
+  - no asset_archive file read
+  - no accepted_samples or failure_samples write
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no production candidate
+  - no push, tag, release, or deploy
+next:
+  - registry report v2 design or second failure capsule authorization package
+```
+
 ## Review Console Failure Capsule Snapshot Validator
 
 ```yaml

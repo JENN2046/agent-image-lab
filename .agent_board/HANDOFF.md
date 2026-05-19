@@ -1,5 +1,20 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — P6 Multi-Capsule Accepted / Failure Dashboard
+
+```text
+Status: p6_multi_capsule_accepted_failure_dashboard_productization completed_validated_pending_guarded_local_commit.
+Reason: productize accepted=2 / failure=1 Git-portable capsule evidence into a static Review Console dashboard with accepted/failure side-by-side relation.
+Execution mode: A4.8 static Review Console product-mainline.
+UI surface: Capsule Dashboard / multi_capsule_dashboard_state.
+Validator: scripts/validate_multi_capsule_dashboard.js.
+Fixture: tests/schema_examples/P6_MULTI_CAPSULE_ACCEPTED_FAILURE_DASHBOARD.example.json.
+Validation record: docs/P6_MULTI_CAPSULE_ACCEPTED_FAILURE_DASHBOARD_PRODUCTIZATION.md.
+Relation: failure_french_summer_rattan_bag_v7_29_001 resolved by accepted_french_summer_rattan_bucket_bag_001.
+Not performed: no preview load, no asset_archive read, no fetch, no file write outside allowed static/docs/script surfaces, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: registry report v2 design or second failure capsule authorization package. Push remains separately authorized only.
+```
+
 ## Current Handoff Update — Review Console Failure Capsule Snapshot Validator
 
 ```text

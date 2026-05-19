@@ -11840,8 +11840,33 @@ process.exit(child.status || 0);
     if ($reviewConsoleFailureCapsuleSnapshot.production_candidate_allowed -ne $false -or $reviewConsoleFailureCapsuleSnapshot.memory_write_allowed -ne $false -or $reviewConsoleFailureCapsuleSnapshot.daily_note_write_allowed -ne $false) {
       Add-Failure "Review Console failure capsule snapshot must not allow production, memory write, or DailyNote write"
     }
-    if ($reviewConsoleFailureCapsuleSnapshot.fetch_performed -ne $false -or $reviewConsoleFailureCapsuleSnapshot.file_write_performed -ne $false -or $reviewConsoleFailureCapsuleSnapshot.image_generation_performed -ne $false -or $reviewConsoleFailureCapsuleSnapshot.real_manifest_read_performed -ne $false -or $reviewConsoleFailureCapsuleSnapshot.real_vcpchat_read_performed -ne $false -or $reviewConsoleFailureCapsuleSnapshot.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleFailureCapsuleSnapshot.vcp_runtime_integration_proven -ne $false) {
+  if ($reviewConsoleFailureCapsuleSnapshot.fetch_performed -ne $false -or $reviewConsoleFailureCapsuleSnapshot.file_write_performed -ne $false -or $reviewConsoleFailureCapsuleSnapshot.image_generation_performed -ne $false -or $reviewConsoleFailureCapsuleSnapshot.real_manifest_read_performed -ne $false -or $reviewConsoleFailureCapsuleSnapshot.real_vcpchat_read_performed -ne $false -or $reviewConsoleFailureCapsuleSnapshot.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleFailureCapsuleSnapshot.vcp_runtime_integration_proven -ne $false) {
       Add-Failure "Review Console failure capsule snapshot must remain static-only with no fetch, writes, image generation, real source reads, or runtime claim"
+    }
+  }
+
+  $multiCapsuleDashboardOutput = & node (Join-Path $Root 'scripts/validate_multi_capsule_dashboard.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Multi-capsule dashboard validation exited with failure"
+  } else {
+    $multiCapsuleDashboard = ($multiCapsuleDashboardOutput -join "`n") | ConvertFrom-Json
+    if ($multiCapsuleDashboard.passed -ne $true -or $multiCapsuleDashboard.phase -ne 'p6_multi_capsule_accepted_failure_dashboard_productization') {
+      Add-Failure "Multi-capsule dashboard validation must pass"
+    }
+    if ($multiCapsuleDashboard.accepted_capsule_count -ne 2 -or $multiCapsuleDashboard.failure_capsule_count -ne 1 -or $multiCapsuleDashboard.total_capsule_count -ne 3) {
+      Add-Failure "Multi-capsule dashboard must preserve accepted=2, failure=1, total=3"
+    }
+    if ($multiCapsuleDashboard.linked_relation_count -lt 1 -or $multiCapsuleDashboard.report_version -ne 'accepted_failure_capsule_report_v1' -or $multiCapsuleDashboard.report_passed -ne 3 -or $multiCapsuleDashboard.report_failed -ne 0) {
+      Add-Failure "Multi-capsule dashboard must expose linked accepted/failure relation and passing unified report shape"
+    }
+    if ($multiCapsuleDashboard.old_runs_source_required_for_portable_validation -ne $false -or $multiCapsuleDashboard.directory_as_registry_currently_sufficient -ne $true) {
+      Add-Failure "Multi-capsule dashboard must not require old runs source and must keep directory-as-registry sufficient for current state"
+    }
+    if ($multiCapsuleDashboard.next_capsule_creation_allowed_now -ne $false -or $multiCapsuleDashboard.second_failure_capsule_requires_separate_authorization -ne $true) {
+      Add-Failure "Multi-capsule dashboard must keep second failure capsule creation blocked pending separate authorization"
+    }
+    if ($multiCapsuleDashboard.provider_contact_performed -ne $false -or $multiCapsuleDashboard.plugin_call_performed -ne $false -or $multiCapsuleDashboard.api_call_performed -ne $false -or $multiCapsuleDashboard.image_generation_performed -ne $false -or $multiCapsuleDashboard.DailyNote_write_performed -ne $false -or $multiCapsuleDashboard.VCP_memory_write_performed -ne $false -or $multiCapsuleDashboard.runtime_execution_performed -ne $false -or $multiCapsuleDashboard.real_manifest_read_performed -ne $false -or $multiCapsuleDashboard.real_vcpchat_read_performed -ne $false -or $multiCapsuleDashboard.real_vcptoolbox_read_performed -ne $false -or $multiCapsuleDashboard.production_candidate_write_performed -ne $false -or $multiCapsuleDashboard.push_tag_release_deploy_performed -ne $false -or $multiCapsuleDashboard.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "Multi-capsule dashboard must remain static-only with no external, memory, runtime, production, or remote actions"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

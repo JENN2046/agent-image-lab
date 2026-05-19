@@ -162,6 +162,26 @@ Phase 9 审批记录必须满足：
 
 `P5L_REVIEW_CONSOLE_FAILURE_CAPSULE_SNAPSHOT.example.json` 固定本节映射的 golden snapshot。后续如果 `portable_failure_capsule_evidence`、`portable_failure_capsule_evidence_list` 或 `failure_state_static_workbench_state.portable_failure_capsule_records` 发生结构漂移，必须同步更新 snapshot validator 并保持 no-fetch / no-write / no-runtime 边界。
 
+## P6 Multi-Capsule Accepted / Failure Dashboard 映射
+
+本节用于验收 accepted/failure Git-portable capsules 进入静态 Review Console 的总览面板和草案输出。它只汇总 `mock_data.js` 内置静态 seed，不读取 `asset_archive/` 文件，不加载 `preview.webp`，不 fetch，不写文件，不调用 runtime、provider、plugin、API、DailyNote 或 VCP memory。
+
+| Static seed 字段 | Review Console 可见/草案字段 | 说明 |
+| --- | --- | --- |
+| `portable_preview_capsule_evidence_list` | `multi_capsule_dashboard_state.accepted_sample_ids` / `multiCapsuleReport` | 当前 accepted capsule count 必须为 2 |
+| `portable_failure_capsule_evidence_list` | `multi_capsule_dashboard_state.failure_sample_ids` / `multiCapsuleReport` | 当前 failure capsule count 必须为 1 |
+| accepted capsule `manifest_ref` / `preview_ref` / `import_record_ref` / `review_record_ref` / `approval_record_ref` | `multi_capsule_dashboard_state.per_sample_report[]` / `multiCapsuleReport` | 只显示 repo-relative refs，不读取文件 |
+| failure capsule `manifest_ref` / `preview_ref` / `failure_record_ref` / `review_record_ref` | `multi_capsule_dashboard_state.per_sample_report[]` / `multiCapsuleReport` | 只显示 repo-relative refs，不读取文件 |
+| `resolved_by_accepted_sample` | `multi_capsule_dashboard_state.resolved_by_links[]` / `multiCapsuleRelations` | 连接 `failure_french_summer_rattan_bag_v7_29_001` 到 `accepted_french_summer_rattan_bucket_bag_001` |
+| `failure_tags` / `final_route` | `multi_capsule_dashboard_state.resolved_by_links[]` / `multiCapsuleRelations` | failure route 必须保持 `failure_learning_only_never_production` |
+| `clone_portable_validation_status` | `multi_capsule_dashboard_state.clone_portable_statuses` / `multiCapsuleSummary` | 显示 clean clone 可验证状态 |
+| `registry_validator_status` | `multi_capsule_dashboard_state.accepted_registry_statuses` / `failure_registry_statuses` | 显示 accepted/failure registry validator 状态 |
+| `old_runs_source_required_for_portable_validation` | `multi_capsule_dashboard_state.old_runs_source_required_for_portable_validation` | 必须为 false，旧 `runs/` source 不再是 portable validation 必需项 |
+| `future_registry_report_shape` | `multi_capsule_dashboard_state.future_registry_report_shape` | 设计 accepted/failure unified report shape |
+| `failure_track_expansion_plan` | `multi_capsule_dashboard_state.failure_track_expansion_plan` | 第二颗 failure capsule 仍需单独授权 |
+
+`P6_MULTI_CAPSULE_ACCEPTED_FAILURE_DASHBOARD.example.json` 固定本节映射的 golden snapshot。后续如果 accepted/failure capsule summary、resolved-by link、future report shape 或 failure expansion plan 发生结构漂移，必须同步更新 snapshot validator 并保持 no-fetch / no-write / no-runtime / no-image-generation 边界。
+
 ## v14.048 Review Decision Package Static Handoff 映射
 
 本节用于验收 PVOS adapter 输出中的 `review_decision_package` 进入静态 Review Console 可见 UI 与草案输出。它仍然只读取项目内 mock / fixture，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。

@@ -510,7 +510,9 @@ input[type="range"] {
 .blocker-decision-list,
 .blocker-arbiter-list,
 .review-report-list,
-.adapter-negative-list {
+.adapter-negative-list,
+.multi-capsule-report,
+.multi-capsule-relations {
   display: grid;
   gap: 10px;
 }
@@ -533,7 +535,8 @@ input[type="range"] {
 .blocker-card,
 .blocker-arbiter-card,
 .review-report-card,
-.adapter-negative-card {
+.adapter-negative-card,
+.multi-capsule-card {
   display: grid;
   gap: 10px;
   min-width: 0;
@@ -578,6 +581,18 @@ input[type="range"] {
 }
 
 .adapter-negative-card.memory-forbidden {
+  border-left-color: var(--amber);
+}
+
+.multi-capsule-card.accepted {
+  border-left-color: var(--green);
+}
+
+.multi-capsule-card.failure {
+  border-left-color: var(--red);
+}
+
+.multi-capsule-card.relation {
   border-left-color: var(--amber);
 }
 
@@ -869,6 +884,7 @@ input[type="range"] {
 .blocker-arbiter-card dl,
 .review-report-card dl,
 .adapter-negative-card dl,
+.multi-capsule-card dl,
 .artifact-review-note-card dl,
 .failure-state-card dl,
 .three-sample-gap-card dl,
@@ -891,6 +907,7 @@ input[type="range"] {
 .blocker-arbiter-card dl div,
 .review-report-card dl div,
 .adapter-negative-card dl div,
+.multi-capsule-card dl div,
 .artifact-review-note-card dl div,
 .failure-state-card dl div,
 .three-sample-gap-card dl div,
@@ -914,6 +931,7 @@ input[type="range"] {
 .blocker-arbiter-card dt,
 .review-report-card dt,
 .adapter-negative-card dt,
+.multi-capsule-card dt,
 .artifact-review-note-card dt,
 .failure-state-card dt,
 .three-sample-gap-card dt,
@@ -935,6 +953,7 @@ input[type="range"] {
 .blocker-arbiter-card dd,
 .review-report-card dd,
 .adapter-negative-card dd,
+.multi-capsule-card dd,
 .artifact-review-note-card dd,
 .failure-state-card dd,
 .three-sample-gap-card dd,
@@ -1188,7 +1207,8 @@ input[type="range"] {
   .evidence-card dl,
   .blocker-card dl,
   .review-report-card dl,
-  .adapter-negative-card dl {
+  .adapter-negative-card dl,
+  .multi-capsule-card dl {
     grid-template-columns: 1fr;
   }
 
