@@ -27,3 +27,7 @@ Legacy note:
 
 - `asset_archive/accepted/` is a legacy bucket name.
 - New accepted sample evidence capsules should use `asset_archive/accepted_samples/<sample_id>/`.
+
+Current capsules:
+
+- `accepted_french_summer_rattan_bucket_bag_001/` — first Git-portable preview capsule, generated from the local v7.31 accepted sample source with `preview.webp` long edge `512`.

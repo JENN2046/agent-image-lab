@@ -1,4 +1,5 @@
 /runs/
+/node_modules/
 /release_packages/
 /.agent_private/
 /.omc/

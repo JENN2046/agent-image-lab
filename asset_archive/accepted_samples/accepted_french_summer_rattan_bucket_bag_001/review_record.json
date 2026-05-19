@@ -1,0 +1,27 @@
+{
+  "record_type": "git_portable_preview_capsule_review_record",
+  "version": "v1",
+  "sample_id": "accepted_french_summer_rattan_bucket_bag_001",
+  "created_at": "2026-05-19T05:01:21.183Z",
+  "review_doc_ref": "docs/286_v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_post_run_review_accepted_candidate.md",
+  "registry_sample_block": "sample_id: accepted_french_summer_rattan_bucket_bag_001\r\n      source_phase: v7_31\r\n      asset_status: accepted_candidate\r\n      provider_type: direct_api\r\n      plugin_id: NativeDoubaoImage\r\n      model: doubao-seedream-5-0-260128\r\n      watermark_requested: false\r\n      watermark_parameter_sent: true\r\n      watermark_policy: disabled_by_request_payload\r\n      prompt_package_ref: prompts/image_generation/product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v2.yaml\r\n      review_doc_ref: docs/286_v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_post_run_review_accepted_candidate.md\r\n      image_path: runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg\r\n      category: fashion_lifestyle_still_life\r\n      style_tags:\r\n        - french_summer\r\n        - rattan_bag\r\n        - vintage_bicycle\r\n        - fashion_lifestyle\r\n        - watermark_off\r\n        - accepted_candidate\r\n      acceptance_summary:\r\n        prompt_subject_match: pass\r\n        product_fully_visible: pass\r\n        product_unobstructed: pass\r\n        no_leaf_obstruction: pass\r\n        no_readable_book_text: pass\r\n        no_watermark_or_generated_mark: pass\r\n        clean_image_corners: pass\r\n        commercial_usability: pass\r\n        memory_suitability: false\r\n      known_minor_issues:\r\n        - bag_shape_can_be_more_bucket_like\r\n        - french_riviera_street_air_can_be_stronger\r\n        - left_side_props_slightly_dense\r\n      commercial_use_level: accepted_candidate\r\n      validates_watermark_false_parameter: true\r\n      write_to_memory_allowed: false\r\n      daily_note_write_allowed: false",
+  "review_summary": {
+    "asset_status": "accepted_candidate",
+    "category": "fashion_lifestyle_still_life",
+    "source_phase": "v7_31",
+    "commercial_use_level": "accepted_candidate",
+    "memory_suitability": false
+  },
+  "guard": {
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "runtime_execution_performed": false,
+    "real_manifest_read_performed": false,
+    "real_vcpchat_read_performed": false,
+    "real_vcptoolbox_read_performed": false
+  }
+}

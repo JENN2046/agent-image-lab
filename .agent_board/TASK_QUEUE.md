@@ -41,16 +41,19 @@ Not allowed now: preview.webp creation/copy/conversion, file movement, validator
 ## Current P1 First Preview Capsule Authorization Package
 
 ```text
-Current product-mainline task: p1_first_git_portable_preview_capsule_authorization_package.
-Status: retargeted validated pending capsule creation authorization.
+Current product-mainline task: p1_first_git_portable_preview_capsule_created.
+Status: validated pending commit.
 Authorization package: docs/FIRST_GIT_PORTABLE_PREVIEW_CAPSULE_AUTHORIZATION_GATE.md.
 Selected sample: accepted_french_summer_rattan_bucket_bag_001.
 Target capsule path: asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/.
 Required capsule files: manifest.json, preview.webp, import_record.json, review_record.json, approval_record.json.
 Required preview: WebP, long_edge 512, sha256 recorded in manifest.
 Approved source candidate path: runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg.
-Required human input before execution: explicit capsule creation authorization.
-Not allowed now: preview.webp creation/copy/conversion, old runs restoration, Base64, original sha256, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, push/tag/release/deploy.
+Preview created: true.
+Preview sha256: 455bbbc5be93b68f7eb02287ac6d861d1b2397a0f5d793d58ea7ab670f8d6cb3.
+Generator: scripts/create_preview_capsule.js with sharp.
+Required human input before push: explicit git push authorization.
+Not allowed now: additional preview.webp creation/copy/conversion, old runs restoration, Base64, original sha256, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, push/tag/release/deploy.
 ```
 
 ---

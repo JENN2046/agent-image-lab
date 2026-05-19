@@ -1,0 +1,14 @@
+{
+  "name": "agent-image-lab",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Local tooling for Agent Image Lab evidence capsules.",
+  "type": "commonjs",
+  "scripts": {
+    "create-preview-capsule": "node scripts/create_preview_capsule.js",
+    "validate-preview-capsule": "node scripts/validate_preview_capsule.js"
+  },
+  "dependencies": {
+    "sharp": "0.33.5"
+  }
+}

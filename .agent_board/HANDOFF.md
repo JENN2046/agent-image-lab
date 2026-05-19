@@ -22,18 +22,21 @@ Recommended next: exact-file commit this planning/status update, then run push s
 ## Current Handoff Update — P1 First Preview Capsule Authorization Package
 
 ```text
-Status: p1_first_git_portable_preview_capsule_authorization_package retargeted_validated_pending_capsule_creation_authorization.
-Reason: Retarget first preview capsule from unavailable womens knit source to a registered accepted sample with a local project-relative source image.
-Execution mode: A4.8 local docs-only authorization package.
+Status: p1_first_git_portable_preview_capsule_created validated_pending_commit.
+Reason: Create the first Git-portable preview capsule from a registered accepted sample with a local project-relative source image.
+Execution mode: A4.8 local capsule creation with approved dependency change.
 Authorization package: docs/FIRST_GIT_PORTABLE_PREVIEW_CAPSULE_AUTHORIZATION_GATE.md.
 Selected sample: accepted_french_summer_rattan_bucket_bag_001.
 Target capsule: asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/.
 Preview long edge: 512.
 Source availability verified by read-only project-relative path check: true.
-Preview creation/copy/conversion performed: false.
+Preview creation/conversion performed: true, local sharp encoder only.
+Preview sha256: 455bbbc5be93b68f7eb02287ac6d861d1b2397a0f5d793d58ea7ab670f8d6cb3.
+Generator: scripts/create_preview_capsule.js.
+Validator: scripts/validate_preview_capsule.js.
 Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox performed: false.
-Push completed before this P1 retarget phase: true, for the prior P1 authorization package commit.
-Recommended next: exact-file local commit this retarget package if clean; do not execute capsule creation until explicit creation authorization is given.
+Push performed by this P1 capsule creation phase: false.
+Recommended next: exact-file local commit this capsule, tooling, and status update if validation remains clean; do not push until explicitly authorized.
 ```
 
 ---

@@ -154,7 +154,7 @@ function createRecoverabilityCore(root) {
     }
 
     if (chunkType === "VP8 " && buffer.length >= 30) {
-      const startCodeOffset = 20;
+      const startCodeOffset = 23;
       const startCode = buffer.subarray(startCodeOffset, startCodeOffset + 3).toString("hex");
       if (startCode !== "9d012a") {
         return { signature: "RIFF_WEBP_VP8", signatureValid: false, width: null, height: null };

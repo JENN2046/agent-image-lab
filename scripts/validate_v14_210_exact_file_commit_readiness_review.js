@@ -101,6 +101,15 @@ function actualWorktreeSummary() {
   };
 }
 
+function authorizedPreviewCapsuleDependencyChangeActive() {
+  const runState = core.read(files.runState);
+  return (
+    runState.includes("phase: p1_first_git_portable_preview_capsule_created") &&
+    runState.includes("dependency_change_authorized: true") &&
+    runState.includes("dependency_name: sharp")
+  );
+}
+
 function clone(value) {
   return JSON.parse(JSON.stringify(value));
 }
@@ -184,6 +193,11 @@ function evaluate(input, actual) {
     guard.DailyNote_write_performed === false &&
     guard.VCP_memory_write_performed === false;
   const noDependency =
+    authorizedPreviewCapsuleDependencyChangeActive()
+      ? guard.dependency_change_performed === false &&
+        guard.package_json_modified_by_this_phase === false &&
+        guard.package_lock_modified_by_this_phase === false
+      :
     guard.dependency_change_performed === false &&
     guard.package_json_modified_by_this_phase === false &&
     guard.package_lock_modified_by_this_phase === false &&

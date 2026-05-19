@@ -1,0 +1,27 @@
+{
+  "record_type": "git_portable_preview_capsule_approval_record",
+  "version": "v1",
+  "sample_id": "accepted_french_summer_rattan_bucket_bag_001",
+  "created_at": "2026-05-19T05:01:21.183Z",
+  "approval_source_ref": "docs/286_v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_post_run_review_accepted_candidate.md",
+  "approval_basis": "existing accepted_sample_registry entry and accepted_candidate post-run review",
+  "approval_state": {
+    "accepted_sample_registered": true,
+    "portable_preview_capsule_creation_authorized_by_user": true,
+    "production_candidate_authorized": false,
+    "memory_write_authorized": false,
+    "DailyNote_write_authorized": false
+  },
+  "guard": {
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "runtime_execution_performed": false,
+    "real_manifest_read_performed": false,
+    "real_vcpchat_read_performed": false,
+    "real_vcptoolbox_read_performed": false
+  }
+}

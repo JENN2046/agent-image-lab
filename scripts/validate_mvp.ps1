@@ -692,9 +692,12 @@ if (Test-Path -LiteralPath (Join-Path $Root 'agent-image-lab') -PathType Contain
 $mediaExtensions = @('.png', '.jpg', '.jpeg', '.webp', '.gif', '.psd', '.zip')
 $mediaFiles = Get-ChildItem -LiteralPath $Root -Recurse -File -Force |
   Where-Object {
+    $relativePath = $_.FullName.Substring($Root.Length + 1).Replace('\', '/')
+    $isGitPortablePreviewCapsule = $relativePath -match '^asset_archive/accepted_samples/[^/]+/preview\.webp$'
     $_.FullName -notlike '*\.git\*' -and
     $_.FullName -notlike '*\runs\*' -and
     $_.FullName -notlike '*\release_packages\*' -and
+    -not $isGitPortablePreviewCapsule -and
     $mediaExtensions -contains $_.Extension.ToLowerInvariant()
   }
 foreach ($file in $mediaFiles) {
@@ -7699,6 +7702,8 @@ if (-not $node) {
       'CLAUDE.md',
       'README.md',
       'MANIFEST.md',
+      'package.json',
+      'package-lock.json',
       'PROJECT_MASTER_PLAN.md',
       'production/plans/french_summer_rattan_bag_v3_production_candidate_001_plan.yaml',
       'RELEASE_NOTES.md',

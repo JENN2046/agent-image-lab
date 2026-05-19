@@ -29,18 +29,19 @@ not_performed:
 ## P1 First Preview Capsule Authorization Package
 
 ```yaml
-phase: p1_first_git_portable_preview_capsule_authorization_package
-status: retargeted_validated_pending_capsule_creation_authorization
-goal: retarget the exact first Git-portable preview capsule authorization package to a source image that exists on this computer
+phase: p1_first_git_portable_preview_capsule_created
+status: validated_pending_commit
+goal: create the first Git-portable preview capsule from a source image that exists on this computer
 completed:
   - changed first capsule target from accepted_womens_resort_relaxed_knit_codex_v2_001 to accepted_french_summer_rattan_bucket_bag_001
   - fixed retargeted capsule path under asset_archive/accepted_samples/
   - confirmed the project-relative source image path exists by read-only check
-  - defined required capsule files and manifest contract
-  - updated minimum approval text for the retargeted sample
-  - added stop conditions
+  - added project-local package.json and package-lock.json with sharp WebP encoder dependency
+  - added scripts/create_preview_capsule.js
+  - added scripts/validate_preview_capsule.js
+  - created manifest.json, preview.webp, import_record.json, review_record.json, and approval_record.json
+  - validated preview.webp long_edge 512 and sha256 455bbbc5be93b68f7eb02287ac6d861d1b2397a0f5d793d58ea7ab670f8d6cb3
 not_performed:
-  - no preview.webp creation, copy, or conversion
   - no provider, plugin, API, or image generation
   - no DailyNote or VCP memory write
   - no runtime, real manifest, VCPChat, or VCPToolBox read

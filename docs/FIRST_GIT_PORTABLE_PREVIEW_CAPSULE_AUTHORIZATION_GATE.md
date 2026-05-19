@@ -2,7 +2,7 @@
 
 base_contract: AGENTS.md
 mode: A4.8 authorization package only
-status: retargeted_package_validated_pending_capsule_creation_authorization
+status: capsule_created_validated_local_pending_commit
 
 ## Purpose
 
@@ -12,6 +12,31 @@ sample preview capsule.
 This package is concrete enough for human review, but it still does not
 authorize creating, copying, converting, staging, committing, or pushing
 `preview.webp`.
+
+## Execution Result
+
+```yaml
+execution_status: completed_locally
+sample_id: accepted_french_summer_rattan_bucket_bag_001
+target_capsule: asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/
+created_files:
+  - manifest.json
+  - preview.webp
+  - import_record.json
+  - review_record.json
+  - approval_record.json
+preview:
+  format: webp
+  long_edge: 512
+  sha256: 455bbbc5be93b68f7eb02287ac6d861d1b2397a0f5d793d58ea7ab670f8d6cb3
+generator:
+  script: scripts/create_preview_capsule.js
+  encoder_dependency: sharp
+validator:
+  script: scripts/validate_preview_capsule.js
+  status: passed
+push_performed: false
+```
 
 ## Selected First Sample
 
@@ -160,10 +185,10 @@ run powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
 - any operation would overwrite user-owned files
 - any validation command fails twice after one narrow local fix
 
-## Non-Authorization
+## Continuing Non-Authorization
 
-- no preview creation now
-- no image copy or conversion now
+- no additional preview creation without a new exact sample authorization
+- no additional image copy or conversion without a new exact sample authorization
 - no provider/API/plugin call
 - no image generation
 - no source image read for capsule creation now
