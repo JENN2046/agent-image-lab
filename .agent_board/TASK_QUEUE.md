@@ -6,18 +6,36 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current Two-Capsule Clone-Portable Validation
+
+```text
+Current product-mainline task: two_capsule_clone_portable_validation.
+Status: completed validated pending guarded local commit.
+Purpose: prove both Git-portable accepted preview capsules validate in a clean local checkout without old ignored source images or current workspace node_modules.
+Baseline: 685afc6b3ee8e4acb77de9d3ecd918f71dd8e3c0.
+Clean checkout root class: .agent_private.
+Old source images absent: v7_24 tennis wallet jpg and v7_31 rattan bag jpg.
+Validation passed: both single capsule validators, registry validator total_samples=2 passed_count=2, negative cases, agent board validator, and scripts/validate_mvp.ps1.
+Report: docs/TWO_CAPSULE_CLONE_PORTABLE_VALIDATION_DRY_RUN.md.
+Not performed: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no preview creation/copy/conversion, no production candidate, no tag/release/deploy/push.
+Recommended next: guarded local auto-commit, then Review Console two-capsule static display or failure sample evidence track.
+```
+
+---
+
 ## Current Second Preview Capsule Creation
 
 ```text
 Current product-mainline task: second_preview_capsule_creation.
-Status: completed validated committed not pushed.
+Status: completed validated committed and pushed.
 Sample: accepted_product_still_life_tennis_wallet_001.
 Capsule root: asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/.
 Created files: manifest.json, preview.webp, import_record.json, review_record.json, approval_record.json.
 Preview: webp 512x512, sha256 125f5fb6fad2c72c23a345ec41fea49ce89285e66056410817eb2b0d0f86542b.
 Registry result: total_samples=2, passed_count=2.
-Not performed: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
-Recommended next: push safety gate for ahead local commits, or clone-portable validation for the two-capsule registry.
+Not performed: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy.
+Push baseline event: 685afc6b3ee8e4acb77de9d3ecd918f71dd8e3c0.
+Recommended next: clone-portable validation for the two-capsule registry.
 ```
 
 ---

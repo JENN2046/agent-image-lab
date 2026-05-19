@@ -1,10 +1,46 @@
 # RUN_STATE.md — Agent Image Lab
 
+## Two-Capsule Clone-Portable Validation
+
+```yaml
+phase: two_capsule_clone_portable_validation
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_local_validation_dry_run
+baseline: 685afc6b3ee8e4acb77de9d3ecd918f71dd8e3c0
+clean_checkout:
+  root_class: .agent_private
+  method: git clone --local --no-hardlinks
+  workspace_node_modules_reused: false
+  dependency_restore: npm ci
+old_source_images_absent:
+  - runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg
+  - runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg
+validation:
+  accepted_french_summer_rattan_bucket_bag_001: passed
+  accepted_product_still_life_tennis_wallet_001: passed
+  registry_total_samples: 2
+  registry_passed_count: 2
+  registry_failed_count: 0
+  negative_cases: passed
+  agent_board: passed
+  mvp: passed
+guard:
+  provider_plugin_api_image_generation_performed: false
+  preview_creation_or_copy_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  production_candidate_created: false
+  push_tag_release_deploy_performed: false
+decision:
+  git_portable_evidence_surface_proven_for_two_samples: true
+  ready_for_guarded_local_auto_commit: true
+```
+
 ## Second Preview Capsule Created
 
 ```yaml
 phase: second_preview_capsule_creation
-status: completed_validated_committed_not_pushed
+status: completed_validated_committed_and_pushed
 mode: A4.8_authorized_local_capsule_creation
 sample_id: accepted_product_still_life_tennis_wallet_001
 commit: fffa45b
@@ -31,9 +67,9 @@ guard:
   runtime_or_real_manifest_read_performed: false
   production_candidate_created: false
   tag_release_deploy_performed_by_this_phase: false
-  push_performed_by_this_phase: false
+  push_performed_by_this_phase: true
 decision:
-  ready_for_push_safety_gate: true
+  push_baseline_event: 685afc6b3ee8e4acb77de9d3ecd918f71dd8e3c0
   next_product_validation_option: two_capsule_clone_portable_validation
 ```
 

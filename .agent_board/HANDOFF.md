@@ -1,9 +1,25 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — Two-Capsule Clone-Portable Validation
+
+```text
+Status: two_capsule_clone_portable_validation completed_validated_pending_guarded_local_commit.
+Reason: prove both accepted preview capsules validate from a clean local checkout without old ignored source images or current workspace node_modules.
+Execution mode: A4.8 local validation dry-run.
+Validated baseline: 685afc6b3ee8e4acb77de9d3ecd918f71dd8e3c0.
+Clean checkout root class: .agent_private.
+Old source images absent in clean checkout: v7_24 tennis wallet jpg and v7_31 rattan bag jpg.
+Dependency restore: npm ci inside clean checkout.
+Validation passed: both single capsule validators, registry validator total_samples=2 passed_count=2, negative cases, agent board validator, and scripts/validate_mvp.ps1.
+Report: docs/TWO_CAPSULE_CLONE_PORTABLE_VALIDATION_DRY_RUN.md.
+Not performed: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no preview creation/copy/conversion, no production candidate, no tag/release/deploy/push.
+Recommended next: guarded local commit for this validation record, then continue to Review Console two-capsule static display or failure sample evidence track.
+```
+
 ## Current Handoff Update — Second Preview Capsule Created
 
 ```text
-Status: second_preview_capsule_creation completed_validated_committed_not_pushed.
+Status: second_preview_capsule_creation completed_validated_committed_and_pushed.
 Reason: create the second Git-portable preview capsule after explicit user authorization.
 Execution mode: A4.8 authorized local capsule creation.
 Sample: accepted_product_still_life_tennis_wallet_001.
@@ -12,8 +28,9 @@ Created files: manifest.json, preview.webp, import_record.json, review_record.js
 Preview: webp 512x512, sha256 125f5fb6fad2c72c23a345ec41fea49ce89285e66056410817eb2b0d0f86542b.
 Registry result: total_samples=2, passed_count=2.
 Commit: fffa45b feat: create second preview capsule.
-Not performed: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
-Recommended next: push safety gate for ahead local commits, or clone-portable validation for the two-capsule registry.
+Not performed: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy.
+Push baseline event: 685afc6b3ee8e4acb77de9d3ecd918f71dd8e3c0.
+Recommended next: clone-portable validation for the two-capsule registry.
 ```
 
 ## Current Handoff Update — Second Preview Capsule Pre-Execution Check

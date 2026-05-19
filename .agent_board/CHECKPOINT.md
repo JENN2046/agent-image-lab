@@ -1,10 +1,39 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## Two-Capsule Clone-Portable Validation
+
+```yaml
+phase: two_capsule_clone_portable_validation
+status: completed_validated_pending_guarded_local_commit
+completed:
+  - created a clean local checkout under .agent_private
+  - confirmed current workspace node_modules was not reused
+  - restored dependencies with npm ci inside the clean checkout
+  - confirmed the old v7_24 and v7_31 source jpg files are absent in the clean checkout
+  - validated accepted_french_summer_rattan_bucket_bag_001
+  - validated accepted_product_still_life_tennis_wallet_001
+  - validated registry total_samples=2 and passed_count=2
+  - validated negative cases
+  - validated agent board state
+  - validated scripts/validate_mvp.ps1
+report: docs/TWO_CAPSULE_CLONE_PORTABLE_VALIDATION_DRY_RUN.md
+not_performed:
+  - no provider, plugin, API, or image generation
+  - no preview.webp creation, copy, conversion, or generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no production candidate
+  - no push, tag, release, or deploy
+next:
+  - guarded local commit for validation record
+  - then Review Console two-capsule static display or failure sample evidence track
+```
+
 ## Second Preview Capsule Creation
 
 ```yaml
 phase: second_preview_capsule_creation
-status: completed_validated_committed_not_pushed
+status: completed_validated_committed_and_pushed
 completed:
   - created asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/manifest.json
   - created asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp
@@ -30,7 +59,8 @@ not_performed:
   - no DailyNote or VCP memory write
   - no runtime, real manifest, VCPChat, or VCPToolBox read
   - no production candidate
-  - no push, tag, release, or deploy
+  - no tag, release, or deploy
+  - pushed separately at baseline 685afc6b3ee8e4acb77de9d3ecd918f71dd8e3c0
 ```
 
 ## Second Preview Capsule Pre-Execution Check
