@@ -1,5 +1,32 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## P5-P8 Remaining Route Packages
+
+```yaml
+phase: p5_p8_remaining_route_packages
+status: completed_validated_pending_guarded_local_commit
+goal: lock remaining local route packages without execution
+completed:
+  - added P5 failure sample evidence track dry-run
+  - added P6 C2 validator-blocked compatibility next steps
+  - added P7 human-navigation 39 decision review plan
+  - added P8 A5 production and VCP authorization prep
+  - updated README navigation
+not_performed:
+  - no failure sample created
+  - no file movement, wrapper creation, or reference rewrite
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no push, tag, release, or deploy
+validation:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - npm run validate-preview-capsule-registry
+  - npm run validate-preview-capsule-negative-cases
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+```
+
 ## P4 Review Console Portable Capsule Static Reader
 
 ```yaml

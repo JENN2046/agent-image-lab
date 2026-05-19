@@ -6,6 +6,20 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current P5-P8 Remaining Route Packages
+
+```text
+Current route task: p5_p8_remaining_route_packages.
+Status: completed validated pending guarded local commit.
+Docs added: docs/P5_FAILURE_SAMPLE_EVIDENCE_TRACK_DRY_RUN.md, docs/P6_C2_VALIDATOR_BLOCKED_COMPATIBILITY_NEXT_STEPS.md, docs/P7_HUMAN_NAVIGATION_39_DECISION_REVIEW_PLAN.md, docs/P8_A5_PRODUCTION_VCP_AUTHORIZATION_PREP.md.
+Purpose: lock the remaining local route without executing failure sample creation, C2 movement, human-navigation movement, or A5.
+Not performed: no failure sample creation, no file movement, no wrapper/rewrite execution, no A5/provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no push/tag/release/deploy.
+Validation passed: git diff --check, agent board validator, registry validator alias, negative-case validator alias, and scripts/validate_mvp.ps1.
+Recommended next: guarded local auto-commit if clean.
+```
+
+---
+
 ## Current P4 Review Console Portable Capsule Static Reader
 
 ```text

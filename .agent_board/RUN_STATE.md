@@ -1,5 +1,34 @@
 # RUN_STATE.md — Agent Image Lab
 
+## P5-P8 Remaining Route Packages
+
+```yaml
+phase: p5_p8_remaining_route_packages
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_docs_only_route_packaging
+goal: lock failure sample, C2 compatibility, human navigation, and A5 prep routes without execution
+evidence:
+  p5_failure_samples: docs/P5_FAILURE_SAMPLE_EVIDENCE_TRACK_DRY_RUN.md
+  p6_c2_compatibility: docs/P6_C2_VALIDATOR_BLOCKED_COMPATIBILITY_NEXT_STEPS.md
+  p7_human_navigation: docs/P7_HUMAN_NAVIGATION_39_DECISION_REVIEW_PLAN.md
+  p8_a5_prep: docs/P8_A5_PRODUCTION_VCP_AUTHORIZATION_PREP.md
+guard:
+  failure_sample_created: false
+  file_movement_performed: false
+  wrapper_or_rewrite_performed: false
+  A5_or_external_action_performed: false
+  push_tag_release_deploy_performed_by_this_phase: false
+decision:
+  validation_passed: true
+  ready_for_guarded_local_auto_commit: true
+validation:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - npm run validate-preview-capsule-registry
+  - npm run validate-preview-capsule-negative-cases
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+```
+
 ## P4 Review Console Portable Capsule Static Reader
 
 ```yaml

@@ -1,5 +1,17 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — P5-P8 Remaining Route Packages
+
+```text
+Status: p5_p8_remaining_route_packages completed_validated_pending_guarded_local_commit.
+Reason: lock the remaining local route after preview capsule productization without crossing A5.
+Execution mode: A4.8 docs-only route packaging.
+Docs added: docs/P5_FAILURE_SAMPLE_EVIDENCE_TRACK_DRY_RUN.md, docs/P6_C2_VALIDATOR_BLOCKED_COMPATIBILITY_NEXT_STEPS.md, docs/P7_HUMAN_NAVIGATION_39_DECISION_REVIEW_PLAN.md, docs/P8_A5_PRODUCTION_VCP_AUTHORIZATION_PREP.md.
+Not performed: no failure sample creation, no file movement, no wrapper/rewrite execution, no A5/provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no push/tag/release/deploy.
+Validation passed: git diff --check, agent board validator, registry validator alias, negative-case validator alias, and scripts/validate_mvp.ps1.
+Recommended next: guarded local auto-commit if clean.
+```
+
 ## Current Handoff Update — P4 Review Console Portable Capsule Static Reader
 
 ```text

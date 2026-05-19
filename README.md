@@ -65,6 +65,10 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 - `docs/C2_VALIDATOR_BLOCKED_COMPATIBILITY_DESIGN_DRY_RUN.md` 是 423 个 validator-blocked records 的兼容设计 dry-run；它不移动文件、不改 validator。
 - `docs/C1_HUMAN_NAVIGATION_RECORDS_DECISION_PACKAGE.md` 是 39 个 human-navigation records 的人工语义裁决包；它不自动移动、rewrite 或 wrapper。
 - `docs/PRODUCT_MAINLINE_RESUME_PLAN.md` 记录 archive cleanup 之后回到 artifact recoverability / Review Console / accepted-failure samples 的产品主线顺序。
+- `docs/P5_FAILURE_SAMPLE_EVIDENCE_TRACK_DRY_RUN.md` 定义 failure sample evidence lane；它不创建 failure sample、不创建 preview、不写 memory。
+- `docs/P6_C2_VALIDATOR_BLOCKED_COMPATIBILITY_NEXT_STEPS.md` 固定 C2 validator-blocked 后续兼容步骤；它不移动 423 个 records。
+- `docs/P7_HUMAN_NAVIGATION_39_DECISION_REVIEW_PLAN.md` 固定 39 个 human-navigation records 的人工语义裁决路线；它不自动移动或 wrapper。
+- `docs/P8_A5_PRODUCTION_VCP_AUTHORIZATION_PREP.md` 固定 A5 production / VCP 授权包准备顺序；它不授权任何 A5 执行。
 - `asset_archive/accepted_samples/<sample_id>/manifest.json + preview.webp` 是新的 accepted sample portable evidence capsule 目标路径。
 - 历史 `docs/v*` 阶段记录、旧 closeout、旧 authorization 草案是审计记录，不等于当前授权。
 - 未经明确 A5 授权，不要运行 provider/plugin/API/image generation/DailyNote/VCP memory/runtime/push/tag/release/deploy 相关入口。
