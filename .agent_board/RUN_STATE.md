@@ -4,8 +4,10 @@
 
 ```yaml
 phase: review_console_two_capsule_static_display
-status: completed_validated_pending_guarded_local_commit
+status: completed_validated_committed_and_pushed
 mode: A4.8_static_prototype_enhancement
+commit: df64adc
+push_baseline_event: df64adc6880e24a40eb6c8f9eba09b78e16f2455
 evidence:
   static_seed: review_console/static_prototype/mock_data.js
   static_app: review_console/static_prototype/app.js
@@ -23,10 +25,12 @@ guard:
   DailyNote_or_VCP_memory_write_performed: false
   runtime_or_real_manifest_read_performed: false
   production_candidate_created: false
-  push_tag_release_deploy_performed: false
+  tag_release_deploy_performed_by_phase: false
+  push_performed_after_separate_authorization: true
 decision:
   validation_passed: true
-  ready_for_guarded_local_auto_commit: true
+  committed_and_pushed: true
+  current_sync_truth_source: git status and git rev-parse
 validation:
   - node --check review_console/static_prototype/app.js
   - node --check review_console/static_prototype/mock_data.js
@@ -42,9 +46,11 @@ validation:
 
 ```yaml
 phase: two_capsule_clone_portable_validation
-status: completed_validated_pending_guarded_local_commit
+status: completed_validated_committed_and_pushed
 mode: A4.8_local_validation_dry_run
 baseline: 685afc6b3ee8e4acb77de9d3ecd918f71dd8e3c0
+commit: b2c52c4
+push_baseline_event: df64adc6880e24a40eb6c8f9eba09b78e16f2455
 clean_checkout:
   root_class: .agent_private
   method: git clone --local --no-hardlinks
@@ -68,10 +74,12 @@ guard:
   DailyNote_or_VCP_memory_write_performed: false
   runtime_or_real_manifest_read_performed: false
   production_candidate_created: false
-  push_tag_release_deploy_performed: false
+  tag_release_deploy_performed_by_phase: false
+  push_performed_after_separate_authorization: true
 decision:
   git_portable_evidence_surface_proven_for_two_samples: true
-  ready_for_guarded_local_auto_commit: true
+  committed_and_pushed: true
+  current_sync_truth_source: git status and git rev-parse
 ```
 
 ## Second Preview Capsule Created

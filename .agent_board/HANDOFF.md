@@ -3,21 +3,23 @@
 ## Current Handoff Update — Review Console Two-Capsule Static Display
 
 ```text
-Status: review_console_two_capsule_static_display completed_validated_pending_guarded_local_commit.
+Status: review_console_two_capsule_static_display completed_validated_committed_and_pushed.
 Reason: let Review Console static prototype represent the current two-capsule Git-portable evidence surface.
 Execution mode: A4.8 static prototype enhancement.
 Changed static seed: review_console/static_prototype/mock_data.js.
 Changed UI summary: review_console/static_prototype/app.js.
 Design record: docs/P4B_REVIEW_CONSOLE_TWO_CAPSULE_STATIC_DISPLAY.md.
-Not performed: no asset_archive runtime file read, no fetch, no file write from prototype, no preview creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Commit: df64adc feat: show two preview capsules in review console.
+Push baseline event: df64adc6880e24a40eb6c8f9eba09b78e16f2455.
+Not performed by the phase work: no asset_archive runtime file read, no fetch, no file write from prototype, no preview creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy. Push was performed later by separate explicit remote authorization.
 Validation passed: node --check static app/mock, v14.135 safety validator, Review Console adapter handoff validator, registry validator, negative cases, agent board validator, and scripts/validate_mvp.ps1.
-Recommended next: guarded local commit if clean.
+Recommended next: failure sample evidence track dry-run or C2 compatibility dry-run, keeping product-mainline priority.
 ```
 
 ## Current Handoff Update — Two-Capsule Clone-Portable Validation
 
 ```text
-Status: two_capsule_clone_portable_validation completed_validated_pending_guarded_local_commit.
+Status: two_capsule_clone_portable_validation completed_validated_committed_and_pushed.
 Reason: prove both accepted preview capsules validate from a clean local checkout without old ignored source images or current workspace node_modules.
 Execution mode: A4.8 local validation dry-run.
 Validated baseline: 685afc6b3ee8e4acb77de9d3ecd918f71dd8e3c0.
@@ -26,8 +28,10 @@ Old source images absent in clean checkout: v7_24 tennis wallet jpg and v7_31 ra
 Dependency restore: npm ci inside clean checkout.
 Validation passed: both single capsule validators, registry validator total_samples=2 passed_count=2, negative cases, agent board validator, and scripts/validate_mvp.ps1.
 Report: docs/TWO_CAPSULE_CLONE_PORTABLE_VALIDATION_DRY_RUN.md.
-Not performed: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no preview creation/copy/conversion, no production candidate, no tag/release/deploy/push.
-Recommended next: guarded local commit for this validation record, then continue to Review Console two-capsule static display or failure sample evidence track.
+Commit: b2c52c4 docs: record two-capsule clone-portable validation.
+Push baseline event: df64adc6880e24a40eb6c8f9eba09b78e16f2455.
+Not performed by the phase work: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no preview creation/copy/conversion, no production candidate, no tag/release/deploy. Push was performed later by separate explicit remote authorization.
+Recommended next: Review Console two-capsule static display completed; continue to failure sample evidence track dry-run or C2 compatibility dry-run.
 ```
 
 ## Current Handoff Update — Second Preview Capsule Created

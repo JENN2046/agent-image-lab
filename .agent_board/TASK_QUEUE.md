@@ -10,13 +10,15 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ```text
 Current product-mainline task: review_console_two_capsule_static_display.
-Status: completed validated pending guarded local commit.
+Status: completed validated committed and pushed.
 Purpose: let Review Console static prototype display the current two-capsule Git-portable evidence surface.
 Changed files: review_console/static_prototype/mock_data.js, app.js, FIELD_MAPPING.md, README.md.
 Design record: docs/P4B_REVIEW_CONSOLE_TWO_CAPSULE_STATIC_DISPLAY.md.
-Not performed: no asset_archive runtime file read, no fetch, no prototype file write, no preview creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Commit: df64adc feat: show two preview capsules in review console.
+Push baseline event: df64adc6880e24a40eb6c8f9eba09b78e16f2455.
+Not performed by the phase work: no asset_archive runtime file read, no fetch, no prototype file write, no preview creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy. Push was performed later by separate explicit remote authorization.
 Validation passed: node --check static app/mock, v14.135 safety validator, Review Console adapter handoff validator, registry validator, negative cases, agent board validator, and scripts/validate_mvp.ps1.
-Recommended next: guarded local commit if clean.
+Recommended next: failure sample evidence track dry-run or C2 compatibility dry-run.
 ```
 
 ---
@@ -25,15 +27,17 @@ Recommended next: guarded local commit if clean.
 
 ```text
 Current product-mainline task: two_capsule_clone_portable_validation.
-Status: completed validated pending guarded local commit.
+Status: completed validated committed and pushed.
 Purpose: prove both Git-portable accepted preview capsules validate in a clean local checkout without old ignored source images or current workspace node_modules.
 Baseline: 685afc6b3ee8e4acb77de9d3ecd918f71dd8e3c0.
 Clean checkout root class: .agent_private.
 Old source images absent: v7_24 tennis wallet jpg and v7_31 rattan bag jpg.
 Validation passed: both single capsule validators, registry validator total_samples=2 passed_count=2, negative cases, agent board validator, and scripts/validate_mvp.ps1.
 Report: docs/TWO_CAPSULE_CLONE_PORTABLE_VALIDATION_DRY_RUN.md.
-Not performed: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no preview creation/copy/conversion, no production candidate, no tag/release/deploy/push.
-Recommended next: guarded local auto-commit, then Review Console two-capsule static display or failure sample evidence track.
+Commit: b2c52c4 docs: record two-capsule clone-portable validation.
+Push baseline event: df64adc6880e24a40eb6c8f9eba09b78e16f2455.
+Not performed by the phase work: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no preview creation/copy/conversion, no production candidate, no tag/release/deploy. Push was performed later by separate explicit remote authorization.
+Recommended next: Review Console two-capsule static display completed; continue to failure sample evidence track dry-run or C2 compatibility dry-run.
 ```
 
 ---

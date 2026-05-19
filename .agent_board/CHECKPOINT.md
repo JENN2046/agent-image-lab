@@ -4,7 +4,9 @@
 
 ```yaml
 phase: review_console_two_capsule_static_display
-status: completed_validated_pending_guarded_local_commit
+status: completed_validated_committed_and_pushed
+commit: df64adc
+push_baseline_event: df64adc6880e24a40eb6c8f9eba09b78e16f2455
 completed:
   - added portable_preview_capsule_evidence_list static seed with two accepted samples
   - updated Artifact Evidence summary to show capsule count and ids
@@ -18,7 +20,8 @@ not_performed:
   - no DailyNote or VCP memory write
   - no runtime, real manifest, VCPChat, or VCPToolBox read
   - no production candidate
-  - no push, tag, release, or deploy
+  - no tag, release, or deploy
+  - push performed later by separate explicit remote authorization
 validation:
   - node --check review_console/static_prototype/app.js
   - node --check review_console/static_prototype/mock_data.js
@@ -34,7 +37,9 @@ validation:
 
 ```yaml
 phase: two_capsule_clone_portable_validation
-status: completed_validated_pending_guarded_local_commit
+status: completed_validated_committed_and_pushed
+commit: b2c52c4
+push_baseline_event: df64adc6880e24a40eb6c8f9eba09b78e16f2455
 completed:
   - created a clean local checkout under .agent_private
   - confirmed current workspace node_modules was not reused
@@ -53,10 +58,11 @@ not_performed:
   - no DailyNote or VCP memory write
   - no runtime, real manifest, VCPChat, or VCPToolBox read
   - no production candidate
-  - no push, tag, release, or deploy
+  - no tag, release, or deploy
+  - push performed later by separate explicit remote authorization
 next:
-  - guarded local commit for validation record
-  - then Review Console two-capsule static display or failure sample evidence track
+  - Review Console two-capsule static display completed
+  - continue to failure sample evidence track dry-run or C2 compatibility dry-run
 ```
 
 ## Second Preview Capsule Creation
