@@ -1,0 +1,98 @@
+schema_id: runs_restore_report_dry_run_v1
+version: v1
+kind: user_reported_runs_restore_report
+purpose: >-
+  Capture what the user reports was restored under project-relative runs/ paths
+  without performing any actual runs scan, image binary read, hash extraction,
+  dimension extraction, preview generation, cloud-drive access, provider/API call,
+  memory write, or production promotion.
+required_fields:
+  - report_version
+  - report_id
+  - reported_at_local
+  - reporter
+  - restore_root_project_relative
+  - restored_path_summary
+  - restored_path_examples
+  - user_reported_counts
+  - verification_handoff
+  - forbidden_fields
+  - guard
+field_rules:
+  report_version:
+    const: v1
+  restore_root_project_relative:
+    const: runs/
+  restored_path_summary:
+    description: User-reported summary only; no filesystem scan evidence.
+    required:
+      - source_type
+      - report_source
+      - path_scope
+    allowed_source_type:
+      - user_reported
+    required_path_scope: project_relative_under_runs
+  restored_path_examples:
+    description: Optional fake or user-reported project-relative paths only.
+    item_rules:
+      must_start_with: runs/
+      must_not_be_absolute: true
+      must_not_claim_verified_exists: true
+      must_not_include_secret_or_private_path: true
+  user_reported_counts:
+    description: Counts are user-reported or unknown; not derived by scanning runs/.
+    required:
+      - file_count_reported
+      - directory_count_reported
+      - count_source
+    allowed_count_source:
+      - user_reported
+      - unknown_not_scanned
+  verification_handoff:
+    description: Later verification requires separate authorization and should not be implied by this dry-run schema.
+    required:
+      - later_verification_required
+      - allowed_future_verification
+      - authorization_required_before_verification
+    later_verification_required: true
+    authorization_required_before_verification: true
+    allowed_future_verification:
+      - project_relative_path_existence_check_after_authorization
+      - hash_verification_after_separate_image_binary_read_authorization
+      - dimensions_verification_after_separate_image_binary_read_authorization
+forbidden_fields:
+  must_be_null:
+    - absolute_source_path
+    - absolute_restore_path
+    - cloud_drive_path
+    - secret
+    - token
+    - cookie
+    - password
+    - api_key
+    - provider_credential
+    - raw_chat_history
+    - customer_private_data
+    - image_binary_inline
+    - base64_image
+    - extracted_sha256
+    - extracted_width
+    - extracted_height
+    - preview_binary
+    - production_candidate_path
+guard:
+  must_be_false:
+    - actual_runs_scan_performed
+    - runs_mutation_performed
+    - image_binary_read_performed
+    - hash_extraction_performed
+    - dimensions_extraction_performed
+    - preview_generation_performed
+    - cloud_drive_read_performed
+    - cloud_drive_write_performed
+    - provider_contact_performed
+    - plugin_call_performed
+    - api_call_performed
+    - DailyNote_write_performed
+    - VCP_memory_write_performed
+    - production_candidate_write_performed

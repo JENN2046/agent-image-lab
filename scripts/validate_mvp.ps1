@@ -11983,6 +11983,18 @@ process.exit(child.status || 0);
       Add-Failure "Runs backup manifest schema must not perform runs scan/mutation, image binary read, hashing, preview, cloud, provider/API, memory, or production actions"
     }
   }
+  $runsRestoreReportDryRunSchemaOutput = & node (Join-Path $Root 'scripts/validate_runs_restore_report_dry_run_schema.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Runs restore report dry-run schema validation exited with failure"
+  } else {
+    $runsRestoreReportDryRunSchema = ($runsRestoreReportDryRunSchemaOutput -join "`n") | ConvertFrom-Json
+    if ($runsRestoreReportDryRunSchema.passed -ne $true -or $runsRestoreReportDryRunSchema.status -ne 'runs_restore_report_dry_run_schema_verified') {
+      Add-Failure "Runs restore report dry-run schema must pass"
+    }
+    if ($runsRestoreReportDryRunSchema.actual_runs_scan_performed -ne $false -or $runsRestoreReportDryRunSchema.runs_mutation_performed -ne $false -or $runsRestoreReportDryRunSchema.image_binary_read_performed -ne $false -or $runsRestoreReportDryRunSchema.hash_extraction_performed -ne $false -or $runsRestoreReportDryRunSchema.dimensions_extraction_performed -ne $false -or $runsRestoreReportDryRunSchema.preview_generation_performed -ne $false -or $runsRestoreReportDryRunSchema.cloud_drive_read_performed -ne $false -or $runsRestoreReportDryRunSchema.cloud_drive_write_performed -ne $false -or $runsRestoreReportDryRunSchema.provider_contact_performed -ne $false -or $runsRestoreReportDryRunSchema.plugin_call_performed -ne $false -or $runsRestoreReportDryRunSchema.api_call_performed -ne $false -or $runsRestoreReportDryRunSchema.DailyNote_write_performed -ne $false -or $runsRestoreReportDryRunSchema.VCP_memory_write_performed -ne $false -or $runsRestoreReportDryRunSchema.production_candidate_write_performed -ne $false) {
+      Add-Failure "Runs restore report dry-run schema must not perform runs scan/mutation, image binary read, hash/dimensions extraction, preview, cloud, provider/API, memory, or production actions"
+    }
+  }
   $capsuleStaticOperatorChecklistUiMappingOutput = & node (Join-Path $Root 'scripts/validate_capsule_static_operator_checklist_ui_mapping.js')
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "Capsule static operator checklist UI mapping validation exited with failure"

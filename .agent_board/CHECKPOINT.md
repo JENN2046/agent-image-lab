@@ -24212,3 +24212,29 @@ VCP_memory_write_performed: false
 production_candidate_write_performed: false
 recommended_next: capsule_runs_backup_manifest_schema_commit_readiness_gate
 ```
+## runs_restore_report_dry_run_schema_gate
+
+```yaml
+phase: runs_restore_report_dry_run_schema_gate
+status: completed_validated
+mode: A4.8 schema/docs only
+objective: define user-reported runs restore report dry-run schema and fake-path example
+schema_ref: schemas/runs_restore_report.schema.yaml
+example_ref: tests/schema_examples/runs_restore_report.example.json
+validator_ref: scripts/validate_runs_restore_report_dry_run_schema.js
+actual_runs_scan_performed: false
+runs_mutation_performed: false
+image_binary_read_performed: false
+hash_extraction_performed: false
+dimensions_extraction_performed: false
+preview_generation_performed: false
+cloud_drive_read_performed: false
+cloud_drive_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+recommended_next: runs_restore_report_dry_run_schema_commit_readiness_gate
+```

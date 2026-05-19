@@ -1,0 +1,67 @@
+{
+  "report_version": "v1",
+  "report_id": "runs_restore_report_dry_run_example_001",
+  "reported_at_local": "2026-05-20T00:00:00+08:00",
+  "reporter": "user_reported_dry_run_example",
+  "restore_root_project_relative": "runs/",
+  "restored_path_summary": {
+    "source_type": "user_reported",
+    "report_source": "manual_user_statement",
+    "path_scope": "project_relative_under_runs",
+    "verified_by_filesystem_scan": false
+  },
+  "restored_path_examples": [
+    "runs/example_restored_batch_001/fake_user_reported_artifact_001.png",
+    "runs/example_restored_batch_001/fake_user_reported_artifact_001.import_record.json"
+  ],
+  "user_reported_counts": {
+    "file_count_reported": null,
+    "directory_count_reported": null,
+    "count_source": "unknown_not_scanned"
+  },
+  "verification_handoff": {
+    "later_verification_required": true,
+    "authorization_required_before_verification": true,
+    "allowed_future_verification": [
+      "project_relative_path_existence_check_after_authorization",
+      "hash_verification_after_separate_image_binary_read_authorization",
+      "dimensions_verification_after_separate_image_binary_read_authorization"
+    ]
+  },
+  "forbidden_fields": {
+    "absolute_source_path": null,
+    "absolute_restore_path": null,
+    "cloud_drive_path": null,
+    "secret": null,
+    "token": null,
+    "cookie": null,
+    "password": null,
+    "api_key": null,
+    "provider_credential": null,
+    "raw_chat_history": null,
+    "customer_private_data": null,
+    "image_binary_inline": null,
+    "base64_image": null,
+    "extracted_sha256": null,
+    "extracted_width": null,
+    "extracted_height": null,
+    "preview_binary": null,
+    "production_candidate_path": null
+  },
+  "guard": {
+    "actual_runs_scan_performed": false,
+    "runs_mutation_performed": false,
+    "image_binary_read_performed": false,
+    "hash_extraction_performed": false,
+    "dimensions_extraction_performed": false,
+    "preview_generation_performed": false,
+    "cloud_drive_read_performed": false,
+    "cloud_drive_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "production_candidate_write_performed": false
+  }
+}
