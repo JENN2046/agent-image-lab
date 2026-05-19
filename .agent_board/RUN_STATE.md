@@ -4,6 +4,36 @@
 ## Current Capsule Productization Goal
 
 ```text
+phase: capsule_product_core_checkpoint_gate
+status: completed_validated
+mode: A4.8 review / docs-light
+objective: summarize current capsule product core and choose exactly one next product move
+sealed_commit_chain: 93eda2e; f1eab26; 37a9bb1; 3f8a8a7; b9bc5b8; 8b5aed1
+accepted: 2
+failure: 2
+total: 4
+current_capability: Git-portable accepted/failure preview capsule static product core with schema/runtime binding, unified smoke fixture, Review Console static snapshot, and operator reviewer action matrix
+runtime_execution_performed: false
+executable_ui_buttons_created: false
+asset_archive_ui_read_performed: false
+preview_loaded_or_rendered: false
+capsule_creation_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+next_move_selected: A_static_operator_checklist_ui_mapping
+recommended_next: capsule_static_operator_checklist_ui_mapping_gate_no_runtime_no_executable_buttons
+```
+
+---
+
+## Current Capsule Productization Goal
+
+```text
 phase: capsule_operator_reviewer_action_matrix_gate
 status: completed_validated
 mode: A4.8 static / no runtime
