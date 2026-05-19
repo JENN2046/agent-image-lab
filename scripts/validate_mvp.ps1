@@ -11730,11 +11730,14 @@ process.exit(child.status || 0);
     Add-Failure "Preview capsule registry validation exited with failure"
   } else {
     $previewCapsuleRegistry = ($previewCapsuleRegistryOutput -join "`n") | ConvertFrom-Json
-    if ($previewCapsuleRegistry.passed -ne $true -or $previewCapsuleRegistry.status -ne 'registry_driven_preview_capsules_verified') {
+    if ($previewCapsuleRegistry.passed -ne $true -or $previewCapsuleRegistry.status -ne 'registry_driven_preview_capsules_verified' -or $previewCapsuleRegistry.report_version -ne 'v2') {
       Add-Failure "Preview capsule registry validation must pass"
     }
-    if ($previewCapsuleRegistry.sample_count -lt 1 -or $previewCapsuleRegistry.failed_count -ne 0) {
+    if ($previewCapsuleRegistry.sample_count -lt 1 -or $previewCapsuleRegistry.total_samples -lt 1 -or $previewCapsuleRegistry.failed_count -ne 0) {
       Add-Failure "Preview capsule registry must verify at least one sample with zero failures"
+    }
+    if ($previewCapsuleRegistry.failed_sample_ids.Count -ne 0 -or $previewCapsuleRegistry.failure_class_summary.sample_failed -ne 0) {
+      Add-Failure "Preview capsule registry v2 report must expose zero failed sample ids and zero sample_failed summary for the current capsule set"
     }
     if ($previewCapsuleRegistry.guard.provider_contact_performed -ne $false -or $previewCapsuleRegistry.guard.plugin_call_performed -ne $false -or $previewCapsuleRegistry.guard.api_call_performed -ne $false -or $previewCapsuleRegistry.guard.image_generation_performed -ne $false -or $previewCapsuleRegistry.guard.preview_creation_or_copy_performed -ne $false) {
       Add-Failure "Preview capsule registry validation must not perform provider, plugin, API, image generation, preview creation, or preview copy"
@@ -11752,7 +11755,7 @@ process.exit(child.status || 0);
     if ($previewCapsuleNegative.passed -ne $true -or $previewCapsuleNegative.status -ne 'registry_preview_capsule_negative_cases_verified') {
       Add-Failure "Preview capsule registry negative-case validation must pass"
     }
-    if ($previewCapsuleNegative.failed_count -ne 0 -or $previewCapsuleNegative.check_count -lt 5) {
+    if ($previewCapsuleNegative.failed_count -ne 0 -or $previewCapsuleNegative.check_count -lt 10) {
       Add-Failure "Preview capsule registry negative-case validation must include passing fail-closed checks"
     }
     if ($previewCapsuleNegative.temp_workspace_root_class -ne '.agent_private' -or $previewCapsuleNegative.real_capsule_modified -ne $false -or $previewCapsuleNegative.preview_creation_or_copy_performed -ne $false) {

@@ -1,5 +1,35 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## P3 Registry Validator v2 Reporting
+
+```yaml
+phase: p3_registry_validator_v2_reporting
+status: completed_validated_pending_guarded_local_commit
+goal: add stable multi-capsule report fields and failure classification to registry-driven preview capsule validation
+completed:
+  - added report_version v2
+  - added total_samples and failed_sample_ids
+  - added per-sample failure_classes
+  - added failure_class_summary
+  - extended negative-case coverage for v2 classification
+  - documented the v2 reporting surface
+validation:
+  - node --check scripts/validate_preview_capsule_registry.js
+  - node --check scripts/validate_preview_capsule_registry_negative_cases.js
+  - npm run validate-preview-capsule-registry
+  - npm run validate-preview-capsule-negative-cases
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+not_performed:
+  - no capsule content modified
+  - no product preview.webp creation, copy, conversion, or generation
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no push, tag, release, or deploy
+```
+
 ## P2 Second Git-Portable Preview Capsule Authorization Package
 
 ```yaml

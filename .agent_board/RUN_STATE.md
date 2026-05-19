@@ -1,5 +1,35 @@
 # RUN_STATE.md — Agent Image Lab
 
+## P3 Registry Validator v2 Reporting
+
+```yaml
+phase: p3_registry_validator_v2_reporting
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_safe_local_validator_reporting_enhancement
+goal: add stable multi-capsule report fields and failure classification to the preview capsule registry validator
+evidence:
+  validator: scripts/validate_preview_capsule_registry.js
+  negative_case_validator: scripts/validate_preview_capsule_registry_negative_cases.js
+  mvp_validator: scripts/validate_mvp.ps1
+  design_record: docs/P3_REGISTRY_VALIDATOR_V2_REPORTING_DRY_RUN.md
+reporting_fields:
+  report_version: v2
+  total_samples: true
+  failed_sample_ids: true
+  failure_class_summary: true
+  per_sample_failure_classes: true
+guard:
+  capsule_content_modified: false
+  preview_created_or_copied: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  push_tag_release_deploy_performed_by_this_phase: false
+decision:
+  validation_passed: true
+  ready_for_guarded_local_auto_commit: true
+```
+
 ## P2 Second Git-Portable Preview Capsule Authorization Package
 
 ```yaml

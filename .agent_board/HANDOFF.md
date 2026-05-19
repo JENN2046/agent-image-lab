@@ -1,5 +1,20 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — P3 Registry Validator v2 Reporting
+
+```text
+Status: p3_registry_validator_v2_reporting completed_validated_pending_guarded_local_commit.
+Reason: make registry-driven preview capsule validation maintainable for multiple capsules and classified failures.
+Execution mode: A4.8 local validator reporting enhancement.
+Validator changed: scripts/validate_preview_capsule_registry.js.
+Negative-case validator updated: scripts/validate_preview_capsule_registry_negative_cases.js.
+MVP validator updated: scripts/validate_mvp.ps1.
+Design record: docs/P3_REGISTRY_VALIDATOR_V2_REPORTING_DRY_RUN.md.
+Not performed: no capsule content change, no preview.webp creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no push/tag/release/deploy.
+Validation passed: node --check for changed validators, registry alias, negative-case alias, git diff --check, agent board validator, and scripts/validate_mvp.ps1.
+Recommended next: guarded local auto-commit if clean.
+```
+
 ## Current Handoff Update — P2 Second Preview Capsule Authorization Package
 
 ```text

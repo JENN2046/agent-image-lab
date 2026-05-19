@@ -6,6 +6,22 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current P3 Registry Validator v2 Reporting
+
+```text
+Current product-mainline task: p3_registry_validator_v2_reporting.
+Status: completed validated pending guarded local commit.
+Purpose: make registry-driven preview capsule validation maintainable for multiple capsules and classified failures.
+Changed validator: scripts/validate_preview_capsule_registry.js.
+Updated negative coverage: scripts/validate_preview_capsule_registry_negative_cases.js.
+Design record: docs/P3_REGISTRY_VALIDATOR_V2_REPORTING_DRY_RUN.md.
+Not performed: no capsule content modification, no preview.webp creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no push/tag/release/deploy.
+Validation passed: node --check for changed validators, registry alias, negative-case alias, git diff --check, agent board validator, and scripts/validate_mvp.ps1.
+Recommended next: guarded local auto-commit if clean.
+```
+
+---
+
 ## Current P2 Second Git-Portable Preview Capsule Authorization Package
 
 ```text

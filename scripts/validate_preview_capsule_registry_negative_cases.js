@@ -119,7 +119,9 @@ try {
   const empty = runValidator(emptyRoot);
   checks.push(expect(empty.exitCode !== 0, "empty_registry_exits_nonzero", empty.exitCode));
   checks.push(expect(empty.result.passed === false, "empty_registry_passed_false", empty.result.status));
+  checks.push(expect(empty.result.report_version === "v2", "empty_registry_reports_v2", empty.result.report_version));
   checks.push(expect(empty.result.failures?.includes("sample_count_below_required_minimum"), "empty_registry_reports_minimum_failure", empty.result.failures));
+  checks.push(expect(empty.result.failure_class_summary?.registry_configuration === 1, "empty_registry_classifies_registry_configuration_failure", empty.result.failure_class_summary));
 
   const missingManifestRoot = makeWorkspace("p2b-missing-manifest");
   workspaces.push(missingManifestRoot);
@@ -128,6 +130,8 @@ try {
   checks.push(expect(missingManifest.exitCode !== 0, "missing_manifest_exits_nonzero", missingManifest.exitCode));
   checks.push(expect(missingManifest.result.failed_count === 1, "missing_manifest_failed_count_one", missingManifest.result.failed_count));
   checks.push(expect(missingManifest.result.samples?.[0]?.status === "preview_capsule_missing", "missing_manifest_status_preview_capsule_missing", missingManifest.result.samples?.[0]));
+  checks.push(expect(missingManifest.result.samples?.[0]?.failure_classes?.includes("missing_capsule_manifest"), "missing_manifest_classified", missingManifest.result.samples?.[0]?.failure_classes));
+  checks.push(expect(missingManifest.result.failure_class_summary?.missing_capsule_manifest === 1, "missing_manifest_summary_count_one", missingManifest.result.failure_class_summary));
 
   const missingPreviewRoot = makeWorkspace("p2b-missing-preview");
   workspaces.push(missingPreviewRoot);
@@ -135,6 +139,7 @@ try {
   const missingPreview = runValidator(missingPreviewRoot);
   checks.push(expect(missingPreview.exitCode !== 0, "missing_preview_exits_nonzero", missingPreview.exitCode));
   checks.push(expect(missingPreview.result.samples?.[0]?.failures?.includes("preview_file_exists"), "missing_preview_reports_preview_file_exists_failure", missingPreview.result.samples?.[0]?.failures));
+  checks.push(expect(missingPreview.result.samples?.[0]?.failure_classes?.includes("missing_preview_file"), "missing_preview_classified", missingPreview.result.samples?.[0]?.failure_classes));
 
   const hashMismatchRoot = makeWorkspace("p2b-hash-mismatch");
   workspaces.push(hashMismatchRoot);
@@ -143,11 +148,13 @@ try {
   const hashMismatch = runValidator(hashMismatchRoot);
   checks.push(expect(hashMismatch.exitCode !== 0, "hash_mismatch_exits_nonzero", hashMismatch.exitCode));
   checks.push(expect(hashMismatch.result.samples?.[0]?.failures?.includes("preview_sha256_matches_manifest"), "hash_mismatch_reports_sha256_failure", hashMismatch.result.samples?.[0]?.failures));
+  checks.push(expect(hashMismatch.result.samples?.[0]?.failure_classes?.includes("preview_hash_mismatch"), "hash_mismatch_classified", hashMismatch.result.samples?.[0]?.failure_classes));
 
   const currentShaMismatch = runValidator(repoRoot, ["--long-edge=1024"]);
   checks.push(expect(currentShaMismatch.exitCode !== 0, "wrong_long_edge_exits_nonzero", currentShaMismatch.exitCode));
   checks.push(expect(currentShaMismatch.result.samples?.[0]?.failures?.includes("preview_manifest_long_edge_matches"), "wrong_long_edge_reports_manifest_long_edge_failure", currentShaMismatch.result.samples?.[0]?.failures));
   checks.push(expect(currentShaMismatch.result.samples?.[0]?.failures?.includes("preview_file_long_edge_matches"), "wrong_long_edge_reports_file_long_edge_failure", currentShaMismatch.result.samples?.[0]?.failures));
+  checks.push(expect(currentShaMismatch.result.samples?.[0]?.failure_classes?.includes("preview_long_edge_mismatch"), "wrong_long_edge_classified", currentShaMismatch.result.samples?.[0]?.failure_classes));
 } finally {
   for (const workspace of workspaces) {
     cleanup(workspace);
