@@ -1,5 +1,30 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## Failure Sample Capsule Registry Validator Implementation
+
+```yaml
+phase: failure_sample_capsule_registry_validator_implementation
+status: completed_validated_pending_guarded_local_commit
+completed:
+  - added scripts/validate_failure_sample_capsule_registry.js
+  - added zero-sample-safe default validation for asset_archive/failure_samples
+  - added fail-closed --require-at-least support
+  - documented implementation in docs/P5C_FAILURE_SAMPLE_CAPSULE_REGISTRY_VALIDATOR_IMPLEMENTATION.md
+  - updated failure_samples README and root README navigation
+not_performed:
+  - no package.json change
+  - no asset_archive/failure_samples/<sample_id>/ capsule created
+  - no manifest, preview.webp, failure_record, or review_record sample file created
+  - no preview.webp creation, copy, conversion, or generation
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no production candidate
+  - no push, tag, release, or deploy
+next:
+  - failure sample validator negative-case coverage
+```
+
 ## Failure Sample Capsule Validator Dry Run Design
 
 ```yaml

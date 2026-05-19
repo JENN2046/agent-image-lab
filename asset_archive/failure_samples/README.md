@@ -38,7 +38,12 @@ Non-authorization:
 Future validation should mirror the accepted preview capsule guard style:
 
 ```powershell
+node scripts/validate_failure_sample_capsule_registry.js
+node scripts/validate_failure_sample_capsule_registry.js --require-at-least=1
 npm run validate-preview-capsule-registry
 npm run validate-preview-capsule-negative-cases
 powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
 ```
+
+The first command is zero-sample safe. The second command is a future readiness
+gate and should fail until at least one authorized failure sample capsule exists.

@@ -6,6 +6,19 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current Failure Sample Capsule Registry Validator Implementation
+
+```text
+Current product-mainline task: failure_sample_capsule_registry_validator_implementation.
+Status: completed validated pending guarded local commit.
+Purpose: implement zero-sample-safe validation for future failure sample capsules without creating any sample.
+Changed files: scripts/validate_failure_sample_capsule_registry.js, docs/P5C_FAILURE_SAMPLE_CAPSULE_REGISTRY_VALIDATOR_IMPLEMENTATION.md, asset_archive/failure_samples/README.md, README.md, .agent_board resume surfaces.
+Not performed: no package.json change, no asset_archive/failure_samples/<sample_id>/ capsule created, no manifest/preview/failure_record/review_record sample file created, no preview creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: failure sample validator negative-case coverage.
+```
+
+---
+
 ## Current Failure Sample Capsule Validator Dry Run Design
 
 ```text
