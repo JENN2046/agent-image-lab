@@ -1,5 +1,25 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — P1b Clone-Portable Preview Capsule Validation Dry Run
+
+```text
+Status: p1b_clone_portable_preview_capsule_validation_dry_run completed_validated_pending_commit_readiness.
+Reason: prove the first Git-tracked preview capsule validates from a clean local clone without old ignored runs/ source evidence or current workspace node_modules.
+Execution mode: A4.8 local clean-clone validation dry run.
+Evidence record: docs/P1B_CLONE_PORTABLE_PREVIEW_CAPSULE_VALIDATION_DRY_RUN.md.
+Selected sample: accepted_french_summer_rattan_bucket_bag_001.
+Clean copy location class: ignored .agent_private/ local validation clone.
+Runs dependency test: runs/ was disabled in the clean copy before capsule validation.
+Dependency restore: npm ci from package-lock.json in the clean copy.
+Validator: npm run validate-preview-capsule -- --sample-id=accepted_french_summer_rattan_bucket_bag_001.
+Result: passed, git_portable_preview_evidence_verified.
+Preview sha256: 455bbbc5be93b68f7eb02287ac6d861d1b2397a0f5d793d58ea7ab670f8d6cb3.
+Validation reconciliation: scripts/validate_mvp.ps1 now ignores .agent_private/ local-only validation clones during media pollution scan.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox performed: false.
+Push performed by this P1b phase: false.
+Recommended next: exact-file local commit readiness for the P1b record and board sync; push still requires separate authorization.
+```
+
 ## Current Handoff Update — Final Project Organization Checkpoint
 
 ```text

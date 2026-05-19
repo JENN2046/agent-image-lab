@@ -1,5 +1,44 @@
 # RUN_STATE.md — Agent Image Lab
 
+## P1b Clone-Portable Preview Capsule Validation Dry Run
+
+```yaml
+phase: p1b_clone_portable_preview_capsule_validation_dry_run
+status: completed_validated_pending_commit_readiness
+mode: A4.8_safe_local_clean_clone_validation
+goal: prove the first Git-tracked preview capsule validates without old ignored runs source evidence or current workspace node_modules
+evidence:
+  dry_run_record: docs/P1B_CLONE_PORTABLE_PREVIEW_CAPSULE_VALIDATION_DRY_RUN.md
+  validator: scripts/validate_preview_capsule.js
+  package_manifest: package.json
+  package_lock: package-lock.json
+selected_sample:
+  sample_id: accepted_french_summer_rattan_bucket_bag_001
+  target_capsule: asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/
+  preview_long_edge: 512
+  preview_sha256: 455bbbc5be93b68f7eb02287ac6d861d1b2397a0f5d793d58ea7ab670f8d6cb3
+clean_clone_validation:
+  clean_copy_location_class: ignored_agent_private_local_clone
+  reused_current_workspace_node_modules: false
+  npm_ci_performed: true
+  runs_path_disabled_before_capsule_validation: true
+  old_runs_original_required: false
+  result: git_portable_preview_evidence_verified
+validation_reconciliation:
+  mvp_validator_ignored_agent_private_media_scan: true
+  validator_behavior_expansion: false
+  reason: ignored local-only clean clones are not repository artifact content
+guard:
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  push_tag_release_deploy_performed_by_this_phase: false
+decision:
+  clone_portable_preview_capsule_verified: true
+  validation_ready: true
+  recommended_next: exact_file_local_commit_readiness_for_p1b_then_push_safety_gate_only_if_requested
+```
+
 ## Final Project Organization Checkpoint
 
 ```yaml

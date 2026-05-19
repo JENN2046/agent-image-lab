@@ -6,6 +6,23 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current P1b Clone-Portable Preview Capsule Validation Dry Run
+
+```text
+Current product-mainline task: p1b_clone_portable_preview_capsule_validation_dry_run.
+Status: completed validated pending commit readiness.
+Evidence record: docs/P1B_CLONE_PORTABLE_PREVIEW_CAPSULE_VALIDATION_DRY_RUN.md.
+Selected sample: accepted_french_summer_rattan_bucket_bag_001.
+Validation method: local clean clone under ignored .agent_private/, npm ci from package-lock.json, runs/ disabled before validator execution.
+Validator command: npm run validate-preview-capsule -- --sample-id=accepted_french_summer_rattan_bucket_bag_001.
+Result: passed, git_portable_preview_evidence_verified.
+Preview sha256: 455bbbc5be93b68f7eb02287ac6d861d1b2397a0f5d793d58ea7ab670f8d6cb3.
+Validation reconciliation: scripts/validate_mvp.ps1 ignores ignored .agent_private/ local-only validation clones during media pollution scan.
+Product evidence status: first preview capsule is clone-portable by local dry-run evidence.
+Required human input before push: explicit git push authorization.
+Not allowed now: additional preview.webp creation/copy/conversion, old runs restoration, Base64, original sha256, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, push/tag/release/deploy.
+```
+
 ## Current Final Project Organization Checkpoint
 
 ```text

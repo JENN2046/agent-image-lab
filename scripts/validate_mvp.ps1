@@ -694,9 +694,11 @@ $mediaFiles = Get-ChildItem -LiteralPath $Root -Recurse -File -Force |
   Where-Object {
     $relativePath = $_.FullName.Substring($Root.Length + 1).Replace('\', '/')
     $isGitPortablePreviewCapsule = $relativePath -match '^asset_archive/accepted_samples/[^/]+/preview\.webp$'
+    $isLocalOnlyValidationCopy = $relativePath -match '^\.agent_private/'
     $_.FullName -notlike '*\.git\*' -and
     $_.FullName -notlike '*\runs\*' -and
     $_.FullName -notlike '*\release_packages\*' -and
+    -not $isLocalOnlyValidationCopy -and
     -not $isGitPortablePreviewCapsule -and
     $mediaExtensions -contains $_.Extension.ToLowerInvariant()
   }

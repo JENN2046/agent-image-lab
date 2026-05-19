@@ -1,5 +1,30 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## P1b Clone-Portable Preview Capsule Validation Dry Run
+
+```yaml
+phase: p1b_clone_portable_preview_capsule_validation_dry_run
+status: completed_validated_pending_commit_readiness
+goal: prove the first Git-tracked preview capsule validates in a clean local clone without old ignored runs source evidence
+completed:
+  - created a local clean clone under ignored .agent_private/
+  - confirmed clean clone HEAD matched the current validation baseline event
+  - confirmed current workspace node_modules was not reused
+  - ran npm ci in the clean copy from package-lock.json
+  - disabled runs/ in the clean copy before capsule validation
+  - ran npm run validate-preview-capsule -- --sample-id=accepted_french_summer_rattan_bucket_bag_001
+  - validated preview.webp sha256 455bbbc5be93b68f7eb02287ac6d861d1b2397a0f5d793d58ea7ab670f8d6cb3
+  - validated preview.webp dimensions 512x512 and long_edge 512
+  - reconciled scripts/validate_mvp.ps1 to ignore ignored .agent_private/ local-only validation clones during media pollution scan
+not_performed:
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no old runs source restoration
+  - no new preview creation or conversion
+  - no push, tag, release, or deploy
+```
+
 ## Final Project Organization Checkpoint
 
 ```yaml
