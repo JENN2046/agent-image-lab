@@ -1,5 +1,36 @@
 # RUN_STATE.md — Agent Image Lab
 
+## P6F Accepted / Failure 2x2 Clone-Portable Baseline
+
+```yaml
+phase: p6f_accepted_failure_2x2_clone_portable_baseline
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_local_validation_checkpoint
+goal: freeze the accepted=2 / failure=2 Git-portable capsule baseline and stop third-capsule expansion
+source_head: 07ff0055235adb508ff16f1da3fbd29a7e24a52e
+validation_record: docs/P6F_ACCEPTED_FAILURE_2X2_CLONE_PORTABLE_BASELINE.md
+validated_in_clean_clone: true
+dependency_restore: npm_ci
+counts:
+  accepted_capsules: 2
+  failure_capsules: 2
+  total_capsules: 4
+  passed: 4
+  failed: 0
+decision:
+  create_third_failure_capsule_now: false
+  create_third_accepted_capsule_now: false
+  future_third_capsule_requires_separate_authorization: true
+  recommended_next: registry_report_v2_negative_state_design
+guard:
+  provider_plugin_api_image_generation_performed: false
+  new_preview_or_capsule_created: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  production_candidate_created: false
+  push_tag_release_deploy_performed: false
+```
+
 ## P6E Second Failure Sample Capsule Creation
 
 ```yaml

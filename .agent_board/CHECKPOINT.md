@@ -1,5 +1,29 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## P6F Accepted / Failure 2x2 Clone-Portable Baseline
+
+```yaml
+phase: p6f_accepted_failure_2x2_clone_portable_baseline
+status: completed_validated_pending_guarded_local_commit
+completed:
+  - created a fresh local clone under .agent_private
+  - restored dependencies with npm ci inside the clone
+  - verified accepted registry and accepted negative cases in the clone
+  - verified failure registry with require-at-least=2 and failure negative cases in the clone
+  - verified capsule registry report v2 in the clone
+  - verified scripts/validate_mvp.ps1 in the clone
+  - documented accepted=2 / failure=2 as the current no-third baseline
+not_performed:
+  - no provider, plugin, API, or image generation
+  - no new preview or capsule creation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no production candidate
+  - no push, tag, release, or deploy
+next:
+  - registry_report_v2 negative-state design with no sample-count expansion
+```
+
 ## P6E Second Failure Sample Capsule Creation
 
 ```yaml

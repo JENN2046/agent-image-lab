@@ -1,5 +1,18 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — P6F Accepted / Failure 2x2 Clone-Portable Baseline
+
+```text
+Status: p6f_accepted_failure_2x2_clone_portable_baseline completed_validated_pending_guarded_local_commit.
+Reason: freeze accepted=2 / failure=2 as the current Git-portable capsule baseline and stop third-capsule expansion.
+Execution mode: A4.8 local validation checkpoint.
+Validation record: docs/P6F_ACCEPTED_FAILURE_2X2_CLONE_PORTABLE_BASELINE.md.
+Clean clone validation: local clone under .agent_private, npm ci, accepted registry, accepted negative cases, failure registry require-at-least=2, failure negative cases, capsule registry report v2, and scripts/validate_mvp.ps1 all passed.
+Decision: no third accepted or failure capsule now; future third capsule requires separate authorization.
+Not performed: no provider/plugin/API/image generation/new capsule creation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: registry_report_v2 negative-state design with no sample-count expansion.
+```
+
 ## Current Handoff Update — P6E Second Failure Sample Capsule Creation
 
 ```text

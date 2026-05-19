@@ -6,6 +6,20 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current P6F Accepted / Failure 2x2 Clone-Portable Baseline
+
+```text
+Current product-mainline task: p6f_accepted_failure_2x2_clone_portable_baseline.
+Status: completed validated pending guarded local commit.
+Purpose: freeze accepted=2 / failure=2 as the current Git-portable capsule baseline and stop third-capsule expansion.
+Validation: clean local clone under .agent_private, npm ci, accepted registry, accepted negative cases, failure registry require-at-least=2, failure negative cases, capsule registry report v2, and scripts/validate_mvp.ps1 all passed.
+Decision: no third accepted or failure capsule now; future third capsule requires separate authorization.
+Not performed: no provider/plugin/API/image generation/new capsule creation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: registry_report_v2 negative-state design with no sample-count expansion.
+```
+
+---
+
 ## Current P6E Second Failure Sample Capsule Creation
 
 ```text

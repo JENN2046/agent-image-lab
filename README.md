@@ -82,6 +82,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 - `docs/P6C_REVIEW_CONSOLE_REGISTRY_REPORT_V2_STATE.md` 记录 Review Console `registry_report_v2_state` 静态展示；它把 P6B 正式 report 形状接回 UI / draft output，不读取 `asset_archive/`、不加载 preview、不执行 validator runtime。
 - `docs/P6D_SECOND_FAILURE_SAMPLE_CAPSULE_AUTHORIZATION_PACKAGE_DRY_RUN.md` 记录第二颗 failure sample capsule 授权包 dry-run；当前推荐 `failure_tennis_wallet_v7_21_001`，但不创建 capsule、不创建/转换 `preview.webp`、不修改 `asset_archive/`。
 - `docs/P6E_SECOND_FAILURE_SAMPLE_CAPSULE_CREATION_RECORD.md` 记录第二颗 Git-portable failure sample preview capsule 创建结果；样本为 `failure_tennis_wallet_v7_21_001`，当前 accepted=2 / failure=2 / total=4。
+- `docs/P6F_ACCEPTED_FAILURE_2X2_CLONE_PORTABLE_BASELINE.md` 记录 accepted=2 / failure=2 的 clean clone portable baseline，并明确当前不做第三颗 capsule。
 - `docs/P6_C2_VALIDATOR_BLOCKED_COMPATIBILITY_NEXT_STEPS.md` 固定 C2 validator-blocked 后续兼容步骤；它不移动 423 个 records。
 - `docs/P7_HUMAN_NAVIGATION_39_DECISION_REVIEW_PLAN.md` 固定 39 个 human-navigation records 的人工语义裁决路线；它不自动移动或 wrapper。
 - `docs/P8_A5_PRODUCTION_VCP_AUTHORIZATION_PREP.md` 固定 A5 production / VCP 授权包准备顺序；它不授权任何 A5 执行。
