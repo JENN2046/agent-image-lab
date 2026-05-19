@@ -31,11 +31,13 @@ Legacy note:
 Current capsules:
 
 - `accepted_french_summer_rattan_bucket_bag_001/` — first Git-portable preview capsule, generated from the local v7.31 accepted sample source with `preview.webp` long edge `512`.
+- `accepted_product_still_life_tennis_wallet_001/` — second Git-portable preview capsule, generated from the local v7.24 accepted sample source with `preview.webp` long edge `512`.
 
 Validation:
 
 ```powershell
 npm run validate-preview-capsule -- --sample-id=accepted_french_summer_rattan_bucket_bag_001
+npm run validate-preview-capsule -- --sample-id=accepted_product_still_life_tennis_wallet_001
 npm run validate-preview-capsule-registry
 npm run validate-preview-capsule-negative-cases
 ```

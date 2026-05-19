@@ -1,10 +1,43 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## Second Preview Capsule Creation
+
+```yaml
+phase: second_preview_capsule_creation
+status: completed_validated_committed_not_pushed
+completed:
+  - created asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/manifest.json
+  - created asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp
+  - created asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/import_record.json
+  - created asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/review_record.json
+  - created asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/approval_record.json
+  - validated the second capsule directly
+  - validated registry total_samples=2 and passed_count=2
+commit: fffa45b
+preview:
+  format: webp
+  width: 512
+  height: 512
+  sha256: 125f5fb6fad2c72c23a345ec41fea49ce89285e66056410817eb2b0d0f86542b
+validation:
+  - npm run validate-preview-capsule -- --sample-id=accepted_product_still_life_tennis_wallet_001
+  - npm run validate-preview-capsule-registry
+  - npm run validate-preview-capsule-negative-cases
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+not_performed:
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no production candidate
+  - no push, tag, release, or deploy
+```
+
 ## Second Preview Capsule Pre-Execution Check
 
 ```yaml
 phase: second_preview_capsule_pre_execution_check
-status: completed_validated_pending_creation_authorization
+status: superseded_by_second_preview_capsule_creation
 completed:
   - confirmed source image exists for accepted_product_still_life_tennis_wallet_001
   - confirmed source is ignored local runs evidence and not Git tracked
@@ -20,7 +53,7 @@ not_performed:
   - no runtime, real manifest, VCPChat, or VCPToolBox read
   - no push, tag, release, or deploy
 next:
-  - explicit creation authorization is required before running npm run create-preview-capsule
+  - superseded by completed second preview capsule creation
 ```
 
 ## P5-P8 Remaining Route Packages

@@ -1,5 +1,21 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — Second Preview Capsule Created
+
+```text
+Status: second_preview_capsule_creation completed_validated_committed_not_pushed.
+Reason: create the second Git-portable preview capsule after explicit user authorization.
+Execution mode: A4.8 authorized local capsule creation.
+Sample: accepted_product_still_life_tennis_wallet_001.
+Capsule root: asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/.
+Created files: manifest.json, preview.webp, import_record.json, review_record.json, approval_record.json.
+Preview: webp 512x512, sha256 125f5fb6fad2c72c23a345ec41fea49ce89285e66056410817eb2b0d0f86542b.
+Registry result: total_samples=2, passed_count=2.
+Commit: fffa45b feat: create second preview capsule.
+Not performed: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: push safety gate for ahead local commits, or clone-portable validation for the two-capsule registry.
+```
+
 ## Current Handoff Update — Second Preview Capsule Pre-Execution Check
 
 ```text

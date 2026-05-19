@@ -1,10 +1,47 @@
 # RUN_STATE.md — Agent Image Lab
 
+## Second Preview Capsule Created
+
+```yaml
+phase: second_preview_capsule_creation
+status: completed_validated_committed_not_pushed
+mode: A4.8_authorized_local_capsule_creation
+sample_id: accepted_product_still_life_tennis_wallet_001
+commit: fffa45b
+capsule:
+  root: asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001
+  manifest: manifest.json
+  preview: preview.webp
+  import_record: import_record.json
+  review_record: review_record.json
+  approval_record: approval_record.json
+preview:
+  format: webp
+  width: 512
+  height: 512
+  long_edge: 512
+  sha256: 125f5fb6fad2c72c23a345ec41fea49ce89285e66056410817eb2b0d0f86542b
+registry:
+  total_samples: 2
+  passed_count: 2
+  failed_count: 0
+guard:
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  production_candidate_created: false
+  tag_release_deploy_performed_by_this_phase: false
+  push_performed_by_this_phase: false
+decision:
+  ready_for_push_safety_gate: true
+  next_product_validation_option: two_capsule_clone_portable_validation
+```
+
 ## Second Preview Capsule Pre-Execution Check
 
 ```yaml
 phase: second_preview_capsule_pre_execution_check
-status: completed_validated_pending_creation_authorization
+status: superseded_by_second_preview_capsule_creation
 mode: A4.8_local_readiness_check
 sample_id: accepted_product_still_life_tennis_wallet_001
 source:

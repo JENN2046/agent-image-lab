@@ -1,8 +1,8 @@
 # Second Git-Portable Preview Capsule Authorization Gate
 
 base_contract: AGENTS.md
-mode: A4.8 authorization package only
-status: pre_execution_checked_script_ready_pending_creation_authorization
+mode: A4.8 authorized local capsule creation completed
+status: completed_validated_committed
 
 ## Purpose
 
@@ -35,8 +35,34 @@ manifest_written: false
 capsule_created: false
 ```
 
-The repository is ready for a separate explicit creation authorization. The
-next step is still not automatic execution.
+The repository was ready for a separate explicit creation authorization.
+
+## Creation Closeout — 2026-05-19
+
+```yaml
+sample_id: accepted_product_still_life_tennis_wallet_001
+creation_authorized_by_user: true
+created_capsule_root: asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/
+created_files:
+  - manifest.json
+  - preview.webp
+  - import_record.json
+  - review_record.json
+  - approval_record.json
+preview_format: webp
+preview_width: 512
+preview_height: 512
+preview_long_edge: 512
+preview_sha256: 125f5fb6fad2c72c23a345ec41fea49ce89285e66056410817eb2b0d0f86542b
+registry_total_samples_after_creation: 2
+registry_passed_samples_after_creation: 2
+commit: fffa45b
+push_performed: false
+```
+
+Creation did not call provider/plugin/API and did not perform image generation.
+It converted an already-present local accepted source image into the Git-tracked
+portable `preview.webp` authorized by this package.
 
 ## Candidate Scan
 
@@ -74,9 +100,9 @@ base64_allowed: false
 original_sha256_required: false
 ```
 
-## Future Execution Scope
+## Executed Scope
 
-If explicitly authorized later, create exactly this capsule:
+The explicit authorization created exactly this capsule:
 
 ```text
 asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/
@@ -87,13 +113,13 @@ asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/
   approval_record.json
 ```
 
-Allowed future command shape:
+Executed command shape:
 
 ```powershell
 npm run create-preview-capsule -- --sample-id=accepted_product_still_life_tennis_wallet_001 --source-image=runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg --long-edge=512
 ```
 
-Required future validation:
+Completed validation:
 
 ```powershell
 npm run validate-preview-capsule -- --sample-id=accepted_product_still_life_tennis_wallet_001
@@ -104,7 +130,7 @@ powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
 
 ## Stop Conditions
 
-Stop before execution if any are true:
+Stop before any future re-execution if any are true:
 
 - source image is missing
 - target capsule directory already exists with non-empty content
@@ -117,9 +143,9 @@ Stop before execution if any are true:
 - any command would read real manifest, VCPChat, or VCPToolBox
 - any command would create production candidate, tag, release, deploy, or push
 
-## Non-Authorization
+## Continuing Non-Authorization
 
-- no `preview.webp` creation, copy, conversion, or generation by this gate
+- no additional `preview.webp` creation, copy, conversion, or generation by this gate
 - no Base64 evidence
 - no original image sha256 requirement
 - no provider, plugin, API, or image generation

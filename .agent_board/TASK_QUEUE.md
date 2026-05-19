@@ -6,17 +6,33 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current Second Preview Capsule Creation
+
+```text
+Current product-mainline task: second_preview_capsule_creation.
+Status: completed validated committed not pushed.
+Sample: accepted_product_still_life_tennis_wallet_001.
+Capsule root: asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/.
+Created files: manifest.json, preview.webp, import_record.json, review_record.json, approval_record.json.
+Preview: webp 512x512, sha256 125f5fb6fad2c72c23a345ec41fea49ce89285e66056410817eb2b0d0f86542b.
+Registry result: total_samples=2, passed_count=2.
+Not performed: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: push safety gate for ahead local commits, or clone-portable validation for the two-capsule registry.
+```
+
+---
+
 ## Current Second Preview Capsule Pre-Execution Check
 
 ```text
 Current product-mainline task: second_preview_capsule_pre_execution_check.
-Status: completed validated pending creation authorization.
+Status: superseded by second_preview_capsule_creation.
 Sample: accepted_product_still_life_tennis_wallet_001.
 Source image: runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg exists, jpeg 1920x1920, Git ignored under /runs/, not Git tracked.
-Target capsule: asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/ does not exist.
+Target capsule: asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/ now exists after explicit creation authorization.
 Script readiness: scripts/create_preview_capsule.js supports the sample and requires exact --source-image / --long-edge match.
 Not performed: no preview.webp creation/copy/conversion, no capsule records written, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no push/tag/release/deploy.
-Recommended next: explicit creation authorization for the second preview capsule.
+Recommended next: see Current Second Preview Capsule Creation.
 ```
 
 ---
