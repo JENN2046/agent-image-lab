@@ -42,6 +42,7 @@ function expect(condition, check, detail = null) {
 }
 
 const checks = [];
+const creatorSource = fs.readFileSync(creatorPath, "utf8");
 const beforeTargetExists = fs.existsSync(targetRoot);
 const beforeTargetEntries = beforeTargetExists ? fs.readdirSync(targetRoot).sort() : [];
 
@@ -76,6 +77,9 @@ checks.push(expect(planOnly.result?.guard?.api_call_performed === false, "plan_o
 checks.push(expect(planOnly.result?.guard?.image_generation_performed === false, "plan_only_no_image_generation", planOnly.result?.guard));
 checks.push(expect(planOnly.result?.guard?.DailyNote_write_performed === false, "plan_only_no_dailynote_write", planOnly.result?.guard));
 checks.push(expect(planOnly.result?.guard?.VCP_memory_write_performed === false, "plan_only_no_vcp_memory_write", planOnly.result?.guard));
+checks.push(expect(creatorSource.includes(".tmp-"), "creator_uses_temp_capsule_directory"));
+checks.push(expect(creatorSource.includes("fs.renameSync"), "creator_finalizes_with_rename"));
+checks.push(expect(creatorSource.includes("removeTempTarget"), "creator_cleans_temp_target_on_failure"));
 
 const badSource = runCreator([
   `--sample-id=${sampleId}`,

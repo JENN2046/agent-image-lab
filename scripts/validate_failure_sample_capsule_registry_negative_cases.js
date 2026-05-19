@@ -78,8 +78,47 @@ function writeMinimalManifest(tempRoot, sampleId, overrides = {}) {
     memory_write_allowed: overrides.memoryWriteAllowed ?? false,
     DailyNote_write_allowed: overrides.dailyNoteWriteAllowed ?? false,
   });
-  if (overrides.failureRecord !== false) writeJson(path.join(root, "failure_record.json"), { fixture: true });
-  if (overrides.reviewRecord !== false) writeJson(path.join(root, "review_record.json"), { fixture: true });
+  const guard = {
+    provider_contact_performed: false,
+    plugin_call_performed: false,
+    api_call_performed: false,
+    image_generation_performed: false,
+    DailyNote_write_performed: false,
+    VCP_memory_write_performed: false,
+    runtime_execution_performed: false,
+    real_manifest_read_performed: false,
+    real_vcpchat_read_performed: false,
+    real_vcptoolbox_read_performed: false,
+    production_candidate_created: false,
+  };
+  if (overrides.failureRecord !== false) {
+    writeJson(path.join(root, "failure_record.json"), {
+      record_type: overrides.failureRecordType || "git_portable_failure_sample_capsule_failure_record",
+      version: "v1",
+      sample_id: overrides.failureRecordSampleId || sampleId,
+      failure_summary: {
+        failure_tags: ["synthetic_negative_case"],
+        resolved_by_accepted_sample: "accepted_synthetic_positive",
+        memory_suitability: overrides.failureRecordMemorySuitability ?? false,
+        production_candidate_allowed: overrides.failureRecordProductionCandidateAllowed ?? false,
+      },
+      guard,
+    });
+  }
+  if (overrides.reviewRecord !== false) {
+    writeJson(path.join(root, "review_record.json"), {
+      record_type: overrides.reviewRecordType || "git_portable_failure_sample_capsule_review_record",
+      version: "v1",
+      sample_id: overrides.reviewRecordSampleId || sampleId,
+      review_summary: {
+        final_route: overrides.reviewFinalRoute || "failure_learning_only_never_production",
+        production_candidate_allowed: overrides.reviewProductionCandidateAllowed ?? false,
+        DailyNote_write_allowed: overrides.reviewDailyNoteWriteAllowed ?? false,
+        VCP_memory_write_allowed: overrides.reviewVcpMemoryWriteAllowed ?? false,
+      },
+      guard,
+    });
+  }
   return root;
 }
 
@@ -144,6 +183,18 @@ try {
   checks.push(expect(missingRecord.result.samples?.[0]?.failures?.includes("failure_record_exists"), "missing_failure_record_reported", missingRecord.result.samples?.[0]?.failures));
   checks.push(expect(missingRecord.result.samples?.[0]?.failures?.includes("review_record_exists"), "missing_review_record_reported", missingRecord.result.samples?.[0]?.failures));
   checks.push(expect(missingRecord.result.samples?.[0]?.failure_classes?.includes("missing_chain_file"), "missing_records_classified", missingRecord.result.samples?.[0]?.failure_classes));
+
+  const mismatchedRecordRoot = makeWorkspace("p5d-mismatched-records");
+  workspaces.push(mismatchedRecordRoot);
+  writeMinimalManifest(mismatchedRecordRoot, "sample_mismatched_records", {
+    failureRecordSampleId: "other_failure_sample",
+    reviewRecordSampleId: "other_review_sample",
+  });
+  const mismatchedRecord = runValidator(mismatchedRecordRoot);
+  checks.push(expect(mismatchedRecord.exitCode !== 0, "mismatched_records_exit_nonzero", mismatchedRecord.exitCode));
+  checks.push(expect(mismatchedRecord.result.samples?.[0]?.failures?.includes("failure_record_sample_id_matches"), "mismatched_failure_record_sample_id_reported", mismatchedRecord.result.samples?.[0]?.failures));
+  checks.push(expect(mismatchedRecord.result.samples?.[0]?.failures?.includes("review_record_sample_id_matches"), "mismatched_review_record_sample_id_reported", mismatchedRecord.result.samples?.[0]?.failures));
+  checks.push(expect(mismatchedRecord.result.samples?.[0]?.failure_classes?.includes("chain_record_mismatch"), "mismatched_records_classified", mismatchedRecord.result.samples?.[0]?.failure_classes));
 
   const guardViolationRoot = makeWorkspace("p5d-guard-violation");
   workspaces.push(guardViolationRoot);

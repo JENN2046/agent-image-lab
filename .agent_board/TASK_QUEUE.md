@@ -6,6 +6,21 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current P6H Push Review Warning Fixes
+
+```text
+Current product-mainline task: p6h_push_review_warning_fixes.
+Status: completed validated pending guarded local commit.
+Purpose: fix quick review warnings before push while preserving accepted=2 / failure=2 / total=4.
+Changed files: scripts/create_failure_sample_capsule.js, scripts/validate_failure_sample_capsule_registry.js, scripts/validate_failure_sample_capsule_registry_negative_cases.js, scripts/validate_failure_sample_capsule_creator_dry_run.js, scripts/validate_capsule_registry_report_v2.js, docs/P6H_PUSH_REVIEW_WARNING_FIXES.md, README.md, .agent_board resume surfaces.
+Evidence: chain files are parsed and bound by record_type/sample_id/route/guard; mismatched chain records fail closed as chain_record_mismatch; creator uses a temporary .tmp-* directory before final placement.
+Decision: no third capsule and no real capsule mutation.
+Not performed: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: push safety gate or Review Console negative-state visibility design.
+```
+
+---
+
 ## Current P6G Registry Report v2 Negative-State Design
 
 ```text

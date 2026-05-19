@@ -50,6 +50,14 @@ function classifyFailures(failures) {
     } else if (failure === "failure_record_exists" || failure === "review_record_exists") {
       classes.add("missing_chain_file");
     } else if (
+      failure === "failure_record_type_matches" ||
+      failure === "failure_record_sample_id_matches" ||
+      failure === "review_record_type_matches" ||
+      failure === "review_record_sample_id_matches" ||
+      failure === "review_record_final_route_matches"
+    ) {
+      classes.add("chain_record_mismatch");
+    } else if (
       failure === "sample_id_matches" ||
       failure === "preview_path_matches" ||
       failure === "preview_format_webp" ||
@@ -60,7 +68,24 @@ function classifyFailures(failures) {
     } else if (
       failure === "production_candidate_allowed_false" ||
       failure === "memory_write_allowed_false" ||
-      failure === "DailyNote_write_allowed_false"
+      failure === "DailyNote_write_allowed_false" ||
+      failure === "failure_record_production_candidate_allowed_false" ||
+      failure === "failure_record_memory_suitability_false" ||
+      failure === "failure_record_no_provider_contact" ||
+      failure === "failure_record_no_plugin_call" ||
+      failure === "failure_record_no_api_call" ||
+      failure === "failure_record_no_image_generation" ||
+      failure === "failure_record_no_dailynote_write" ||
+      failure === "failure_record_no_vcp_memory_write" ||
+      failure === "review_record_production_candidate_allowed_false" ||
+      failure === "review_record_dailynote_write_allowed_false" ||
+      failure === "review_record_vcp_memory_write_allowed_false" ||
+      failure === "review_record_no_provider_contact" ||
+      failure === "review_record_no_plugin_call" ||
+      failure === "review_record_no_api_call" ||
+      failure === "review_record_no_image_generation" ||
+      failure === "review_record_no_dailynote_write" ||
+      failure === "review_record_no_vcp_memory_write"
     ) {
       classes.add("production_or_memory_guard_violation");
     } else {
@@ -80,6 +105,7 @@ function summarizeFailureClasses(samples, failures) {
     preview_long_edge_mismatch: 0,
     preview_hash_mismatch: 0,
     missing_chain_file: 0,
+    chain_record_mismatch: 0,
     manifest_contract_mismatch: 0,
     production_or_memory_guard_violation: 0,
     other: 0,
@@ -150,8 +176,36 @@ function validateFailureCapsule(core, root, sampleId, requiredLongEdge) {
   check(previewLongEdge === requiredLongEdge, "preview_file_long_edge_matches");
   check(Boolean(manifest.artifact?.preview?.sha256), "preview_manifest_sha256_present");
   check(previewSha256 === manifest.artifact?.preview?.sha256, "preview_sha256_matches_manifest");
-  check(core.exists(paths.failureRecord), "failure_record_exists");
-  check(core.exists(paths.reviewRecord), "review_record_exists");
+  const failureRecord = core.parseJsonIfExists(paths.failureRecord);
+  const reviewRecord = core.parseJsonIfExists(paths.reviewRecord);
+  check(Boolean(failureRecord), "failure_record_exists");
+  check(Boolean(reviewRecord), "review_record_exists");
+  if (failureRecord) {
+    check(failureRecord.record_type === "git_portable_failure_sample_capsule_failure_record", "failure_record_type_matches");
+    check(failureRecord.sample_id === sampleId, "failure_record_sample_id_matches");
+    check(failureRecord.failure_summary?.production_candidate_allowed === false, "failure_record_production_candidate_allowed_false");
+    check(failureRecord.failure_summary?.memory_suitability === false, "failure_record_memory_suitability_false");
+    check(failureRecord.guard?.provider_contact_performed === false, "failure_record_no_provider_contact");
+    check(failureRecord.guard?.plugin_call_performed === false, "failure_record_no_plugin_call");
+    check(failureRecord.guard?.api_call_performed === false, "failure_record_no_api_call");
+    check(failureRecord.guard?.image_generation_performed === false, "failure_record_no_image_generation");
+    check(failureRecord.guard?.DailyNote_write_performed === false, "failure_record_no_dailynote_write");
+    check(failureRecord.guard?.VCP_memory_write_performed === false, "failure_record_no_vcp_memory_write");
+  }
+  if (reviewRecord) {
+    check(reviewRecord.record_type === "git_portable_failure_sample_capsule_review_record", "review_record_type_matches");
+    check(reviewRecord.sample_id === sampleId, "review_record_sample_id_matches");
+    check(reviewRecord.review_summary?.final_route === "failure_learning_only_never_production", "review_record_final_route_matches");
+    check(reviewRecord.review_summary?.production_candidate_allowed === false, "review_record_production_candidate_allowed_false");
+    check(reviewRecord.review_summary?.DailyNote_write_allowed === false, "review_record_dailynote_write_allowed_false");
+    check(reviewRecord.review_summary?.VCP_memory_write_allowed === false, "review_record_vcp_memory_write_allowed_false");
+    check(reviewRecord.guard?.provider_contact_performed === false, "review_record_no_provider_contact");
+    check(reviewRecord.guard?.plugin_call_performed === false, "review_record_no_plugin_call");
+    check(reviewRecord.guard?.api_call_performed === false, "review_record_no_api_call");
+    check(reviewRecord.guard?.image_generation_performed === false, "review_record_no_image_generation");
+    check(reviewRecord.guard?.DailyNote_write_performed === false, "review_record_no_dailynote_write");
+    check(reviewRecord.guard?.VCP_memory_write_performed === false, "review_record_no_vcp_memory_write");
+  }
 
   return {
     sample_id: sampleId,

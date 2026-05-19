@@ -1,5 +1,20 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — P6H Push Review Warning Fixes
+
+```text
+Status: p6h_push_review_warning_fixes completed_validated_pending_guarded_local_commit.
+Reason: fix quick push-readiness review warnings before remote push.
+Execution mode: A4.8 local validator hardening.
+Validation record: docs/P6H_PUSH_REVIEW_WARNING_FIXES.md.
+Changed implementation: scripts/create_failure_sample_capsule.js now writes to a temporary .tmp-* capsule directory before final placement.
+Changed validator: scripts/validate_failure_sample_capsule_registry.js now validates failure_record/review_record record_type, sample_id, route, and guard bindings instead of only checking file existence.
+Changed report: scripts/validate_capsule_registry_report_v2.js now carries chain_record_mismatch into the unified failure class summary.
+Changed negative coverage: scripts/validate_failure_sample_capsule_registry_negative_cases.js now verifies chain_record_mismatch fail-closed behavior.
+Not performed: no real capsule mutation, no third capsule, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: push safety gate or Review Console negative-state visibility design.
+```
+
 ## Current Handoff Update — P6G Registry Report v2 Negative-State Design
 
 ```text

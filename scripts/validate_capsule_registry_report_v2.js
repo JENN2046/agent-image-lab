@@ -137,6 +137,7 @@ function summarizeClassCounts(rows, relations) {
       row.failure_classes.includes("production_or_memory_guard_violation")
     ).length,
     missing_chain_file: rows.filter((row) => row.failure_classes.includes("missing_chain_file")).length,
+    chain_record_mismatch: rows.filter((row) => row.failure_classes.includes("chain_record_mismatch")).length,
     manifest_contract_mismatch: rows.filter((row) => row.failure_classes.includes("manifest_contract_mismatch")).length,
     preview_hash_mismatch: rows.filter((row) => row.failure_classes.includes("preview_hash_mismatch")).length,
     preview_long_edge_mismatch: rows.filter((row) => row.failure_classes.includes("preview_long_edge_mismatch")).length

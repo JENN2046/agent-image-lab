@@ -1,5 +1,30 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## P6H Push Review Warning Fixes
+
+```yaml
+phase: p6h_push_review_warning_fixes
+status: completed_validated_pending_guarded_local_commit
+completed:
+  - strengthened failure capsule registry validation from file-exists checks to chain record content binding checks
+  - added chain_record_mismatch classification for failure_record/review_record mismatch
+  - added negative coverage for mismatched failure/review record sample_id
+  - changed failure capsule creator to build in asset_archive/failure_samples/.tmp-* before final placement
+  - carried chain_record_mismatch into registry_report_v2 failure_class_summary
+  - documented the warning fixes in docs/P6H_PUSH_REVIEW_WARNING_FIXES.md
+not_performed:
+  - no real capsule mutation
+  - no third capsule
+  - no preview.webp creation, copy, conversion, or generation
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no production candidate
+  - no push, tag, release, or deploy
+next:
+  - push safety gate or Review Console negative-state visibility design
+```
+
 ## P6G Registry Report v2 Negative-State Design
 
 ```yaml

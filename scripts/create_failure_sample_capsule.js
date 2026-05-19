@@ -114,6 +114,19 @@ function capsulePaths(sample) {
   };
 }
 
+function tempTargetRoot(sample) {
+  return `asset_archive/failure_samples/.tmp-${sample.sampleId}-${process.pid}-${Date.now()}`;
+}
+
+function removeTempTarget(relativePath) {
+  const resolved = repoPath(relativePath);
+  const relative = path.relative(repoRoot, resolved).replace(/\\/g, "/");
+  if (!relative.startsWith("asset_archive/failure_samples/.tmp-")) {
+    throw new Error(`refusing to remove non-temp capsule path: ${relativePath}`);
+  }
+  fs.rmSync(resolved, { recursive: true, force: true });
+}
+
 function assertTargetClean(sample) {
   const targetRoot = repoPath(sample.targetRoot);
   if (!fs.existsSync(targetRoot)) return;
@@ -160,15 +173,18 @@ async function createCapsule(sample) {
   requireExists(sample.promptPackageRef, "prompt package");
   assertTargetClean(sample);
 
-  const paths = capsulePaths(sample);
-  fs.mkdirSync(repoPath(sample.targetRoot), { recursive: true });
-
-  for (const plannedFile of Object.values(paths)) {
+  const finalPaths = capsulePaths(sample);
+  for (const plannedFile of Object.values(finalPaths)) {
     if (fs.existsSync(repoPath(plannedFile))) {
       throw new Error(`refusing to overwrite existing capsule file: ${plannedFile}`);
     }
   }
 
+  const tempSample = { ...sample, targetRoot: tempTargetRoot(sample) };
+  const tempPaths = capsulePaths(tempSample);
+  fs.mkdirSync(repoPath(tempSample.targetRoot), { recursive: true });
+
+  try {
   await sharp(repoPath(sample.sourceImage))
     .rotate()
     .resize({
@@ -178,9 +194,9 @@ async function createCapsule(sample) {
       withoutEnlargement: true,
     })
     .webp({ quality: 90 })
-    .toFile(repoPath(paths.preview));
+      .toFile(repoPath(tempPaths.preview));
 
-  const previewMetadata = await sharp(repoPath(paths.preview)).metadata();
+    const previewMetadata = await sharp(repoPath(tempPaths.preview)).metadata();
   const previewLongEdge = Math.max(previewMetadata.width || 0, previewMetadata.height || 0);
   if (previewMetadata.format !== "webp" || previewLongEdge !== sample.requiredLongEdge) {
     throw new Error(
@@ -188,7 +204,7 @@ async function createCapsule(sample) {
     );
   }
 
-  const previewSha256 = sha256File(paths.preview);
+    const previewSha256 = sha256File(tempPaths.preview);
   const registryText = readText(sample.failureRegistryRef);
   const failureBlock = extractFailureBlock(registryText, sample.sampleId);
   if (!failureBlock) {
@@ -210,7 +226,7 @@ async function createCapsule(sample) {
     production_candidate_created: false,
   };
 
-  writeJson(paths.failureRecord, {
+    writeJson(tempPaths.failureRecord, {
     record_type: "git_portable_failure_sample_capsule_failure_record",
     version: "v1",
     sample_id: sample.sampleId,
@@ -233,7 +249,7 @@ async function createCapsule(sample) {
     guard: commonGuard,
   });
 
-  writeJson(paths.reviewRecord, {
+    writeJson(tempPaths.reviewRecord, {
     record_type: "git_portable_failure_sample_capsule_review_record",
     version: "v1",
     sample_id: sample.sampleId,
@@ -248,7 +264,7 @@ async function createCapsule(sample) {
     guard: commonGuard,
   });
 
-  writeJson(paths.manifest, {
+    writeJson(tempPaths.manifest, {
     manifest_type: "git_portable_failure_sample_capsule_manifest",
     version: "v1",
     sample_id: sample.sampleId,
@@ -283,20 +299,26 @@ async function createCapsule(sample) {
     guard: commonGuard,
   });
 
+    fs.renameSync(repoPath(tempSample.targetRoot), repoPath(sample.targetRoot));
+
   return {
     passed: true,
     mode: "create",
     sample_id: sample.sampleId,
     target_root: sample.targetRoot,
-    created_files: Object.values(paths),
+      created_files: Object.values(finalPaths),
     preview: {
-      path: paths.preview,
+        path: finalPaths.preview,
       width: previewMetadata.width,
       height: previewMetadata.height,
       long_edge: previewLongEdge,
       sha256: previewSha256,
     },
   };
+  } catch (error) {
+    removeTempTarget(tempSample.targetRoot);
+    throw error;
+  }
 }
 
 async function main() {

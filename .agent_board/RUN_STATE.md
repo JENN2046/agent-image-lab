@@ -1,5 +1,35 @@
 # RUN_STATE.md — Agent Image Lab
 
+## P6H Push Review Warning Fixes
+
+```yaml
+phase: p6h_push_review_warning_fixes
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_local_validator_hardening
+goal: fix quick review warnings before push without changing capsule contents
+validation_record: docs/P6H_PUSH_REVIEW_WARNING_FIXES.md
+changed_surfaces:
+  - scripts/create_failure_sample_capsule.js
+  - scripts/validate_failure_sample_capsule_registry.js
+  - scripts/validate_failure_sample_capsule_registry_negative_cases.js
+  - scripts/validate_failure_sample_capsule_creator_dry_run.js
+  - scripts/validate_capsule_registry_report_v2.js
+fixes:
+  - failure capsule registry now validates chain record content bindings
+  - failure capsule creator now writes to a temporary capsule directory before final placement
+negative_coverage:
+  - chain_record_mismatch
+guard:
+  real_capsule_modified: false
+  third_capsule_created: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  production_candidate_created: false
+  push_tag_release_deploy_performed: false
+recommended_next: push_safety_gate_or_review_console_negative_state_visibility_design
+```
+
 ## P6G Registry Report v2 Negative-State Design
 
 ```yaml
