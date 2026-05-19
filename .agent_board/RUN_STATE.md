@@ -1,5 +1,34 @@
 # RUN_STATE.md — Agent Image Lab
 
+## P2 Registry-Driven Preview Capsule Validator Dry Run Design
+
+```yaml
+phase: p2_registry_driven_preview_capsule_validator_dry_run_design
+status: completed_validated_pending_commit_readiness
+mode: A4.8_safe_local_design_package_only
+goal: prepare a registry-driven preview capsule validator without creating images or changing capsule contents
+evidence:
+  design_package: docs/P2_REGISTRY_DRIVEN_PREVIEW_CAPSULE_VALIDATOR_DRY_RUN_DESIGN.md
+  current_single_sample_validator: scripts/validate_preview_capsule.js
+  recoverability_core: scripts/lib/artifact_recoverability_core.js
+selected_direction:
+  first_mode: archive_directory_inventory
+  root: asset_archive/accepted_samples/
+  current_sample_count: 1
+  current_sample_id: accepted_french_summer_rattan_bucket_bag_001
+guard:
+  preview_created_or_copied: false
+  capsule_manifest_modified: false
+  validator_behavior_changed: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  push_tag_release_deploy_performed_by_this_phase: false
+decision:
+  design_ready: true
+  recommended_next: p2a_registry_driven_preview_capsule_validator_implementation
+```
+
 ## P1b Clone-Portable Preview Capsule Validation Dry Run
 
 ```yaml

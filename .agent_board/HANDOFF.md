@@ -1,5 +1,22 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — P2 Registry-Driven Preview Capsule Validator Dry Run Design
+
+```text
+Status: p2_registry_driven_preview_capsule_validator_dry_run_design completed_validated_pending_commit_readiness.
+Reason: prepare the next product-mainline step after the first clone-portable capsule proof.
+Execution mode: A4.8 local design package only.
+Design package: docs/P2_REGISTRY_DRIVEN_PREVIEW_CAPSULE_VALIDATOR_DRY_RUN_DESIGN.md.
+Target next implementation: scripts/validate_preview_capsule_registry.js.
+Recommended first mode: archive-directory inventory under asset_archive/accepted_samples/.
+Current proven sample: accepted_french_summer_rattan_bucket_bag_001.
+Behavior planned: discover capsule directories, call validatePreviewCapsule per sample, emit per-sample report.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox performed: false.
+Capsule, manifest, preview.webp, and validator behavior changed by this design phase: false.
+Push performed by this P2 design phase: false.
+Recommended next: exact-file local commit for the design package and board sync, then P2a implementation if authorized.
+```
+
 ## Current Handoff Update — P1b Clone-Portable Preview Capsule Validation Dry Run
 
 ```text

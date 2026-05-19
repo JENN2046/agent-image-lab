@@ -1,5 +1,28 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## P2 Registry-Driven Preview Capsule Validator Dry Run Design
+
+```yaml
+phase: p2_registry_driven_preview_capsule_validator_dry_run_design
+status: completed_validated_pending_commit_readiness
+goal: design a registry-driven preview capsule validator without creating images or touching capsule contents
+completed:
+  - created docs/P2_REGISTRY_DRIVEN_PREVIEW_CAPSULE_VALIDATOR_DRY_RUN_DESIGN.md
+  - defined archive-directory inventory as the first registry-driven mode
+  - defined future scripts/validate_preview_capsule_registry.js contract
+  - defined per-sample JSON report shape
+  - defined negative cases for later implementation
+  - identified P2a implementation boundary and validation commands
+not_performed:
+  - no preview.webp creation, copy, or conversion
+  - no capsule manifest or preview file changed
+  - no existing validator behavior changed
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no push, tag, release, or deploy
+```
+
 ## P1b Clone-Portable Preview Capsule Validation Dry Run
 
 ```yaml
