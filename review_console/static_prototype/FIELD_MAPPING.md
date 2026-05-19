@@ -634,3 +634,16 @@ failure_samples / production_candidate，也不证明 VCP runtime integration。
 | Failure relation review | `resolved_by_accepted_sample` + `relation_validation_status` | failure -> accepted 断链不能被 totals 掩盖 |
 | Guard review | `guard_validation_status` + guard summary | production / memory / runtime / provider guard 违规必须阻断 |
 | Reviewer action | `reviewer_action` | action 是人工指令，不是可执行按钮 |
+
+## P6L Capsule Static Product Smoke Fixture
+
+本节用于验收 checked-in `unified_capsule_contract_report` fixture。fixture 位于 `tests/schema_examples/CAPSULE_STATIC_PRODUCT_SMOKE_UNIFIED_CONTRACT.example.json`，只作为静态输入，不由 UI 读取 `asset_archive/`，不加载 preview，不执行浏览器 validator。
+
+| Fixture field | Review Console contract | Rule |
+| --- | --- | --- |
+| `totals.accepted/failure/total` | `unified_capsule_contract_report.totals` | 必须保持 accepted=2 / failure=2 / total=4 |
+| `samples[].sample_id` | `unified_capsule_contract_report.samples[]` | 必须匹配本地 capsule registry report v2 输出 |
+| `samples[].reviewer_action` | operator action label | pass 样本使用 `accept_contract_baseline` |
+| `reviewer_action_catalog[].state=fail_closed` | fail-closed reviewer actions | 必须包含 manifest failure、relation repair、guard block、rerun local validator |
+| `guard.asset_archive_ui_read_performed=false` | UI no-read boundary | UI 不读取 `asset_archive/` |
+| `guard.preview_loaded_or_rendered=false` | preview boundary | UI 不加载 preview |

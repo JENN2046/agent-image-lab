@@ -1,4 +1,16 @@
-## Current Capsule Runtime Product Smoke Design
+## Current Capsule Static Product Smoke Fixture
+
+```text
+Current product-mainline task: capsule_static_product_smoke_fixture_gate.
+Status: completed validated pending guarded local commit.
+Purpose: create and validate a checked-in static unified_capsule_contract_report fixture for Review Console product smoke flow.
+Changed files: tests/schema_examples/CAPSULE_STATIC_PRODUCT_SMOKE_UNIFIED_CONTRACT.example.json, scripts/validate_capsule_static_product_smoke_fixture.js, scripts/validate_mvp.ps1, docs/CAPSULE_STATIC_PRODUCT_SMOKE_FIXTURE_CLOSEOUT.md, README.md, review_console/static_prototype/README.md, review_console/static_prototype/FIELD_MAPPING.md, .agent_board resume surfaces.
+Evidence: fixture preserves accepted=2/failure=2/total=4 and includes pass plus fail-closed reviewer_action labels.
+Not performed: no browser runtime validator, no asset_archive UI read, no preview load, no provider/plugin/API/image generation, no DailyNote/VCP memory, no production candidate, no VCPChat/VCPToolBox runtime, no push/tag/release/deploy.
+Recommended next: validation and guarded local commit readiness only.
+```
+
+---## Current Capsule Runtime Product Smoke Design
 
 ```text
 Current product-mainline task: capsule_runtime_product_smoke_design_gate.

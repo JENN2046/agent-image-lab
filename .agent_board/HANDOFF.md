@@ -1,3 +1,17 @@
+## Current Handoff Update - Capsule Static Product Smoke Fixture
+
+```text
+Status: capsule_static_product_smoke_fixture_gate completed_validated_pending_commit.
+Reason: add a checked-in static fixture for unified_capsule_contract_report and validate it against local capsule report outputs.
+Execution mode: A4.8 local implementation / static fixture only.
+Fixture: tests/schema_examples/CAPSULE_STATIC_PRODUCT_SMOKE_UNIFIED_CONTRACT.example.json.
+Validator: scripts/validate_capsule_static_product_smoke_fixture.js.
+Closeout: docs/CAPSULE_STATIC_PRODUCT_SMOKE_FIXTURE_CLOSEOUT.md.
+Baseline: accepted=2, failure=2, total=4, passed=4, failed=0.
+Reviewer actions: pass label accept_contract_baseline plus fail-closed labels inspect_manifest_failure, repair_relation_link, block_production_guard_violation, rerun_local_validator_outside_ui.
+Boundary: no browser runtime validator, no asset_archive UI read, no preview load, no provider/plugin/API/image generation, no DailyNote/VCP memory, no production candidate, no VCPChat/VCPToolBox runtime, no push/tag/release/deploy.
+Recommended next: validation and guarded local commit readiness only.
+```
 ## Current Handoff Update - Capsule Runtime Product Smoke Design
 
 ```text

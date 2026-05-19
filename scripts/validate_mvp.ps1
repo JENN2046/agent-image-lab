@@ -11941,6 +11941,21 @@ process.exit(child.status || 0);
     }
   }
 
+  $capsuleStaticProductSmokeFixtureOutput = & node (Join-Path $Root 'scripts/validate_capsule_static_product_smoke_fixture.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Capsule static product smoke fixture validation exited with failure"
+  } else {
+    $capsuleStaticProductSmokeFixture = ($capsuleStaticProductSmokeFixtureOutput -join "`n") | ConvertFrom-Json
+    if ($capsuleStaticProductSmokeFixture.passed -ne $true -or $capsuleStaticProductSmokeFixture.status -ne 'capsule_static_product_smoke_fixture_verified') {
+      Add-Failure "Capsule static product smoke fixture must pass"
+    }
+    if ($capsuleStaticProductSmokeFixture.accepted_count -ne 2 -or $capsuleStaticProductSmokeFixture.failure_count -ne 2 -or $capsuleStaticProductSmokeFixture.total_count -ne 4) {
+      Add-Failure "Capsule static product smoke fixture must preserve accepted=2, failure=2, total=4"
+    }
+    if ($capsuleStaticProductSmokeFixture.browser_runtime_validator_executed -ne $false -or $capsuleStaticProductSmokeFixture.asset_archive_ui_read_performed -ne $false -or $capsuleStaticProductSmokeFixture.preview_loaded_or_rendered -ne $false -or $capsuleStaticProductSmokeFixture.provider_contact_performed -ne $false -or $capsuleStaticProductSmokeFixture.plugin_call_performed -ne $false -or $capsuleStaticProductSmokeFixture.api_call_performed -ne $false -or $capsuleStaticProductSmokeFixture.image_generation_performed -ne $false -or $capsuleStaticProductSmokeFixture.DailyNote_write_performed -ne $false -or $capsuleStaticProductSmokeFixture.VCP_memory_write_performed -ne $false -or $capsuleStaticProductSmokeFixture.production_candidate_write_performed -ne $false) {
+      Add-Failure "Capsule static product smoke fixture must remain static-only with no browser runtime, asset UI read, preview load, external, memory, or production actions"
+    }
+  }
   $reviewConsoleRegistryReportV2Output = & node (Join-Path $Root 'scripts/validate_review_console_registry_report_v2_state.js')
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "Review Console registry report v2 state validation exited with failure"

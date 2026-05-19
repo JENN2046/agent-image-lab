@@ -1,3 +1,29 @@
+## Current Run State - Capsule Static Product Smoke Fixture
+
+```text
+phase_id: capsule_static_product_smoke_fixture_gate
+status: completed_validated_pending_commit
+mode: A4.8 local implementation static_fixture_only
+fixture_ref: tests/schema_examples/CAPSULE_STATIC_PRODUCT_SMOKE_UNIFIED_CONTRACT.example.json
+validator_ref: scripts/validate_capsule_static_product_smoke_fixture.js
+accepted_count: 2
+failure_count: 2
+total_count: 4
+pass_reviewer_action: accept_contract_baseline
+fail_closed_reviewer_actions: inspect_manifest_failure, repair_relation_link, block_production_guard_violation, rerun_local_validator_outside_ui
+browser_runtime_validator_executed: false
+asset_archive_ui_read_performed: false
+preview_loaded_or_rendered: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+push_tag_release_deploy_performed: false
+recommended_next: validation_and_guarded_commit_readiness_only
+```
 ## Current Run State - Capsule Runtime Product Smoke Design
 
 ```text

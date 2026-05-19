@@ -1,0 +1,111 @@
+{
+  "phase": "capsule_static_product_smoke_fixture_gate",
+  "fixture_version": "v1",
+  "draft_output_key": "unified_capsule_contract_report",
+  "unified_capsule_contract_report": {
+    "report_version": "unified_capsule_contract_v1",
+    "status": "capsule_contract_verified",
+    "source_contracts": {
+      "registry_report_v2": "accepted_failure_capsule_registry_report_v2",
+      "manifest_contract": "capsule_manifest_contract_v1",
+      "review_console_contract": "review_console_static_unified_capsule_contract_v1"
+    },
+    "contract_status": {
+      "registry_passed": true,
+      "manifest_passed": true,
+      "relation_passed": true,
+      "guard_passed": true,
+      "overall_passed": true
+    },
+    "totals": {
+      "accepted": 2,
+      "failure": 2,
+      "total": 4,
+      "passed": 4,
+      "failed": 0
+    },
+    "samples": [
+      {
+        "lane": "accepted",
+        "sample_id": "accepted_french_summer_rattan_bucket_bag_001",
+        "manifest_validation_status": "capsule_manifest_contract_verified",
+        "relation_validation_status": "not_applicable",
+        "guard_validation_status": "passed",
+        "reviewer_action": "accept_contract_baseline"
+      },
+      {
+        "lane": "accepted",
+        "sample_id": "accepted_product_still_life_tennis_wallet_001",
+        "manifest_validation_status": "capsule_manifest_contract_verified",
+        "relation_validation_status": "not_applicable",
+        "guard_validation_status": "passed",
+        "reviewer_action": "accept_contract_baseline"
+      },
+      {
+        "lane": "failure",
+        "sample_id": "failure_french_summer_rattan_bag_v7_29_001",
+        "manifest_validation_status": "capsule_manifest_contract_verified",
+        "relation_validation_status": "linked",
+        "guard_validation_status": "passed",
+        "resolved_by_accepted_sample": "accepted_french_summer_rattan_bucket_bag_001",
+        "reviewer_action": "accept_contract_baseline"
+      },
+      {
+        "lane": "failure",
+        "sample_id": "failure_tennis_wallet_v7_21_001",
+        "manifest_validation_status": "capsule_manifest_contract_verified",
+        "relation_validation_status": "linked",
+        "guard_validation_status": "passed",
+        "resolved_by_accepted_sample": "accepted_product_still_life_tennis_wallet_001",
+        "reviewer_action": "accept_contract_baseline"
+      }
+    ],
+    "reviewer_action_catalog": [
+      {
+        "label": "accept_contract_baseline",
+        "state": "pass",
+        "description": "All registry, manifest, relation, and guard statuses pass; keep review as static evidence only."
+      },
+      {
+        "label": "inspect_manifest_failure",
+        "state": "fail_closed",
+        "description": "A manifest contract failure must block the product smoke flow until repaired."
+      },
+      {
+        "label": "repair_relation_link",
+        "state": "fail_closed",
+        "description": "A failure capsule without a valid resolved-by accepted sample must stay visible and blocked."
+      },
+      {
+        "label": "block_production_guard_violation",
+        "state": "fail_closed",
+        "description": "Any production, runtime, or memory guard violation blocks escalation."
+      },
+      {
+        "label": "rerun_local_validator_outside_ui",
+        "state": "fail_closed",
+        "description": "Missing or stale contract evidence requires local validator rerun outside the UI."
+      }
+    ],
+    "guard": {
+      "static_fixture_only": true,
+      "browser_runtime_validator_executed": false,
+      "asset_archive_ui_read_performed": false,
+      "preview_loaded_or_rendered": false,
+      "fetch_performed": false,
+      "file_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "runtime_execution_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "production_candidate_write_performed": false,
+      "push_tag_release_deploy_performed": false
+    }
+  }
+}

@@ -1,4 +1,16 @@
-# Capsule Runtime Product Smoke Design Checkpoint
+# Capsule Static Product Smoke Fixture Checkpoint
+
+```text
+phase_id: capsule_static_product_smoke_fixture_gate
+status: completed_validated_pending_commit
+checkpoint_reason: checked-in static unified capsule contract fixture
+completed_work: fixture added; validator added; MVP wired; Review Console README and FIELD_MAPPING updated.
+validation_pending_final: node --check scripts\validate_capsule_static_product_smoke_fixture.js; node scripts\validate_capsule_static_product_smoke_fixture.js; git diff --check; node scripts\validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+not_performed: no browser runtime validator, no asset_archive UI read, no preview load, no provider/plugin/API/image generation, no DailyNote/VCP memory, no production candidate, no VCPChat/VCPToolBox runtime, no push/tag/release/deploy.
+next_safe_action: validation and guarded local commit readiness.
+```
+
+---# Capsule Runtime Product Smoke Design Checkpoint
 
 ```text
 phase_id: capsule_runtime_product_smoke_design_gate
