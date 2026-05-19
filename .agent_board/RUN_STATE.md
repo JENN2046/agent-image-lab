@@ -1,5 +1,37 @@
 # RUN_STATE.md — Agent Image Lab
 
+## Failure Sample Validators MVP Wiring
+
+```yaml
+phase: failure_sample_validators_mvp_wiring
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_local_validation_wiring
+goal: include failure sample capsule validators in scripts/validate_mvp.ps1
+evidence:
+  mvp_validator: scripts/validate_mvp.ps1
+  wiring_record: docs/P5E_FAILURE_SAMPLE_VALIDATORS_MVP_WIRING.md
+  readme_navigation: README.md
+validators_added_to_mvp:
+  - scripts/validate_failure_sample_capsule_registry.js
+  - scripts/validate_failure_sample_capsule_registry_negative_cases.js
+current_behavior:
+  failure_sample_total_samples: 0
+  zero_sample_state_passes: true
+  negative_cases_pass: true
+guard:
+  package_json_modified: false
+  failure_sample_capsule_created: false
+  failure_sample_preview_created_or_copied: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  production_candidate_created: false
+  push_tag_release_deploy_performed: false
+decision:
+  mvp_wiring_ready: true
+  recommended_next: first_failure_sample_capsule_authorization_package_when_source_selected
+```
+
 ## Failure Sample Capsule Negative Case Coverage
 
 ```yaml

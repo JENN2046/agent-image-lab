@@ -1,5 +1,17 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — Failure Sample Validators MVP Wiring
+
+```text
+Status: failure_sample_validators_mvp_wiring completed_validated_pending_guarded_local_commit.
+Reason: make the failure sample capsule lane part of the stable MVP validation surface while keeping zero-sample state valid.
+Execution mode: A4.8 local validation wiring.
+Changed validator: scripts/validate_mvp.ps1.
+Wiring record: docs/P5E_FAILURE_SAMPLE_VALIDATORS_MVP_WIRING.md.
+Not performed: no package.json change, no real failure sample capsule created, no manifest/preview/failure_record/review_record sample file created, no preview creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: first failure sample capsule authorization package only after selecting exact rejected source and review record.
+```
+
 ## Current Handoff Update — Failure Sample Capsule Negative Case Coverage
 
 ```text

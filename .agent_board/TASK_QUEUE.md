@@ -6,6 +6,19 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current Failure Sample Validators MVP Wiring
+
+```text
+Current product-mainline task: failure_sample_validators_mvp_wiring.
+Status: completed validated pending guarded local commit.
+Purpose: include failure sample capsule validators in scripts/validate_mvp.ps1 while keeping current zero-sample state valid.
+Changed files: scripts/validate_mvp.ps1, docs/P5E_FAILURE_SAMPLE_VALIDATORS_MVP_WIRING.md, README.md, .agent_board resume surfaces.
+Not performed: no package.json change, no real failure sample capsule created, no real manifest/preview/failure_record/review_record sample file created, no preview creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: first failure sample capsule authorization package only after selecting exact rejected source and review record.
+```
+
+---
+
 ## Current Failure Sample Capsule Negative Case Coverage
 
 ```text

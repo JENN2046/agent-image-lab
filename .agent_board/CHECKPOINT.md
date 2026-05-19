@@ -1,5 +1,29 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## Failure Sample Validators MVP Wiring
+
+```yaml
+phase: failure_sample_validators_mvp_wiring
+status: completed_validated_pending_guarded_local_commit
+completed:
+  - wired scripts/validate_failure_sample_capsule_registry.js into scripts/validate_mvp.ps1
+  - wired scripts/validate_failure_sample_capsule_registry_negative_cases.js into scripts/validate_mvp.ps1
+  - documented wiring in docs/P5E_FAILURE_SAMPLE_VALIDATORS_MVP_WIRING.md
+  - updated README navigation
+not_performed:
+  - no package.json change
+  - no real failure sample capsule created
+  - no real manifest, preview.webp, failure_record, or review_record sample file created
+  - no preview.webp creation, copy, conversion, or generation
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no production candidate
+  - no push, tag, release, or deploy
+next:
+  - first failure sample capsule authorization package when exact source and review record are selected
+```
+
 ## Failure Sample Capsule Negative Case Coverage
 
 ```yaml

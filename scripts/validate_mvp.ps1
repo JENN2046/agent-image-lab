@@ -11765,6 +11765,44 @@ process.exit(child.status || 0);
       Add-Failure "Preview capsule negative-case validation must not perform external, memory, runtime, source read, push, tag, release, or deploy actions"
     }
   }
+
+  $failureSampleCapsuleRegistryOutput = & node (Join-Path $Root 'scripts/validate_failure_sample_capsule_registry.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Failure sample capsule registry validation exited with failure"
+  } else {
+    $failureSampleCapsuleRegistry = ($failureSampleCapsuleRegistryOutput -join "`n") | ConvertFrom-Json
+    if ($failureSampleCapsuleRegistry.passed -ne $true -or $failureSampleCapsuleRegistry.status -ne 'failure_sample_capsules_verified' -or $failureSampleCapsuleRegistry.report_version -ne 'v1') {
+      Add-Failure "Failure sample capsule registry validation must pass in zero-sample-safe mode"
+    }
+    if ($failureSampleCapsuleRegistry.root -ne 'asset_archive/failure_samples' -or $failureSampleCapsuleRegistry.sample_count -ne 0 -or $failureSampleCapsuleRegistry.failed_count -ne 0) {
+      Add-Failure "Failure sample capsule registry must currently validate the empty failure sample lane with zero failures"
+    }
+    if ($failureSampleCapsuleRegistry.guard.provider_contact_performed -ne $false -or $failureSampleCapsuleRegistry.guard.plugin_call_performed -ne $false -or $failureSampleCapsuleRegistry.guard.api_call_performed -ne $false -or $failureSampleCapsuleRegistry.guard.image_generation_performed -ne $false -or $failureSampleCapsuleRegistry.guard.preview_creation_or_copy_performed -ne $false) {
+      Add-Failure "Failure sample capsule registry validation must not perform provider, plugin, API, image generation, preview creation, or preview copy"
+    }
+    if ($failureSampleCapsuleRegistry.guard.DailyNote_write_performed -ne $false -or $failureSampleCapsuleRegistry.guard.VCP_memory_write_performed -ne $false -or $failureSampleCapsuleRegistry.guard.runtime_execution_performed -ne $false -or $failureSampleCapsuleRegistry.guard.real_manifest_read_performed -ne $false -or $failureSampleCapsuleRegistry.guard.real_vcpchat_read_performed -ne $false -or $failureSampleCapsuleRegistry.guard.real_vcptoolbox_read_performed -ne $false -or $failureSampleCapsuleRegistry.guard.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Failure sample capsule registry validation must not perform memory, runtime, real manifest, VCP source reads, push, tag, release, or deploy"
+    }
+  }
+
+  $failureSampleCapsuleNegativeOutput = & node (Join-Path $Root 'scripts/validate_failure_sample_capsule_registry_negative_cases.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Failure sample capsule registry negative-case validation exited with failure"
+  } else {
+    $failureSampleCapsuleNegative = ($failureSampleCapsuleNegativeOutput -join "`n") | ConvertFrom-Json
+    if ($failureSampleCapsuleNegative.passed -ne $true -or $failureSampleCapsuleNegative.status -ne 'failure_sample_capsule_negative_cases_verified') {
+      Add-Failure "Failure sample capsule registry negative-case validation must pass"
+    }
+    if ($failureSampleCapsuleNegative.failed_count -ne 0 -or $failureSampleCapsuleNegative.check_count -lt 10) {
+      Add-Failure "Failure sample capsule registry negative-case validation must include passing fail-closed checks"
+    }
+    if ($failureSampleCapsuleNegative.temp_workspace_root_class -ne '.agent_private' -or $failureSampleCapsuleNegative.real_failure_capsule_modified -ne $false -or $failureSampleCapsuleNegative.preview_creation_or_copy_performed -ne $false) {
+      Add-Failure "Failure sample capsule negative-case fixtures must stay in .agent_private and must not modify real failure capsules or create/copy previews"
+    }
+    if ($failureSampleCapsuleNegative.provider_contact_performed -ne $false -or $failureSampleCapsuleNegative.plugin_call_performed -ne $false -or $failureSampleCapsuleNegative.api_call_performed -ne $false -or $failureSampleCapsuleNegative.image_generation_performed -ne $false -or $failureSampleCapsuleNegative.DailyNote_write_performed -ne $false -or $failureSampleCapsuleNegative.VCP_memory_write_performed -ne $false -or $failureSampleCapsuleNegative.runtime_execution_performed -ne $false -or $failureSampleCapsuleNegative.real_manifest_read_performed -ne $false -or $failureSampleCapsuleNegative.real_vcpchat_read_performed -ne $false -or $failureSampleCapsuleNegative.real_vcptoolbox_read_performed -ne $false -or $failureSampleCapsuleNegative.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Failure sample capsule negative-case validation must not perform external, memory, runtime, source read, push, tag, release, or deploy actions"
+    }
+  }
   [Console]::OutputEncoding = $prevOutputEncoding
 }
 
