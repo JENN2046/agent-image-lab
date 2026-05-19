@@ -1,5 +1,43 @@
 # RUN_STATE.md — Agent Image Lab
 
+## Review Console Two-Capsule Static Display
+
+```yaml
+phase: review_console_two_capsule_static_display
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_static_prototype_enhancement
+evidence:
+  static_seed: review_console/static_prototype/mock_data.js
+  static_app: review_console/static_prototype/app.js
+  field_mapping: review_console/static_prototype/FIELD_MAPPING.md
+  readme: review_console/static_prototype/README.md
+  design_record: docs/P4B_REVIEW_CONSOLE_TWO_CAPSULE_STATIC_DISPLAY.md
+capsules:
+  - accepted_french_summer_rattan_bucket_bag_001
+  - accepted_product_still_life_tennis_wallet_001
+guard:
+  asset_archive_runtime_read_performed: false
+  fetch_performed: false
+  file_write_from_prototype_performed: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  production_candidate_created: false
+  push_tag_release_deploy_performed: false
+decision:
+  validation_passed: true
+  ready_for_guarded_local_auto_commit: true
+validation:
+  - node --check review_console/static_prototype/app.js
+  - node --check review_console/static_prototype/mock_data.js
+  - node scripts/validate_v14_135_review_console_import_reader_safety_review.js
+  - node scripts/validate_review_console_adapter_handoff.js
+  - npm run validate-preview-capsule-registry
+  - npm run validate-preview-capsule-negative-cases
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+```
+
 ## Two-Capsule Clone-Portable Validation
 
 ```yaml

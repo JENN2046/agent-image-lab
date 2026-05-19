@@ -1,5 +1,19 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — Review Console Two-Capsule Static Display
+
+```text
+Status: review_console_two_capsule_static_display completed_validated_pending_guarded_local_commit.
+Reason: let Review Console static prototype represent the current two-capsule Git-portable evidence surface.
+Execution mode: A4.8 static prototype enhancement.
+Changed static seed: review_console/static_prototype/mock_data.js.
+Changed UI summary: review_console/static_prototype/app.js.
+Design record: docs/P4B_REVIEW_CONSOLE_TWO_CAPSULE_STATIC_DISPLAY.md.
+Not performed: no asset_archive runtime file read, no fetch, no file write from prototype, no preview creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Validation passed: node --check static app/mock, v14.135 safety validator, Review Console adapter handoff validator, registry validator, negative cases, agent board validator, and scripts/validate_mvp.ps1.
+Recommended next: guarded local commit if clean.
+```
+
 ## Current Handoff Update — Two-Capsule Clone-Portable Validation
 
 ```text

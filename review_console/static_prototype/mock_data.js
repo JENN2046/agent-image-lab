@@ -89,6 +89,48 @@ window.REVIEW_CONSOLE_MOCK = {
       push_tag_release_deploy_performed: false
     }
   },
+  portable_preview_capsule_evidence_list: [
+    {
+      evidence_version: "v1",
+      evidence_source: "asset_archive_accepted_samples_preview_capsule",
+      sample_id: "accepted_french_summer_rattan_bucket_bag_001",
+      capsule_root: "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/",
+      manifest_ref: "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/manifest.json",
+      preview_ref: "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp",
+      preview_format: "webp",
+      preview_long_edge: 512,
+      preview_dimensions: "512x512",
+      preview_sha256: "455bbbc5be93b68f7eb02287ac6d861d1b2397a0f5d793d58ea7ab670f8d6cb3",
+      import_record_ref: "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/import_record.json",
+      review_record_ref: "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/review_record.json",
+      approval_record_ref: "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/approval_record.json",
+      validation_status: "git_portable_preview_evidence_verified",
+      registry_validator_status: "registry_driven_preview_capsules_verified",
+      clone_portable_validation_status: "passed",
+      source_original_required_for_portable_validation: false,
+      base64_evidence_used: false
+    },
+    {
+      evidence_version: "v1",
+      evidence_source: "asset_archive_accepted_samples_preview_capsule",
+      sample_id: "accepted_product_still_life_tennis_wallet_001",
+      capsule_root: "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/",
+      manifest_ref: "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/manifest.json",
+      preview_ref: "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp",
+      preview_format: "webp",
+      preview_long_edge: 512,
+      preview_dimensions: "512x512",
+      preview_sha256: "125f5fb6fad2c72c23a345ec41fea49ce89285e66056410817eb2b0d0f86542b",
+      import_record_ref: "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/import_record.json",
+      review_record_ref: "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/review_record.json",
+      approval_record_ref: "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/approval_record.json",
+      validation_status: "git_portable_preview_evidence_verified",
+      registry_validator_status: "registry_driven_preview_capsules_verified",
+      clone_portable_validation_status: "passed",
+      source_original_required_for_portable_validation: false,
+      base64_evidence_used: false
+    }
+  ],
   artifact_lifecycle_state_reader_seed: {
     version: "v1",
     phase: "v14_169_review_console_artifact_lifecycle_state_reader",

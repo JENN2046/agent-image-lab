@@ -498,14 +498,16 @@ runtime integration。
 
 ## P4 Portable Preview Capsule Evidence
 
-`portable_preview_capsule_evidence` 只能从 `mock_data.js` 静态 seed 生成
-preview capsule 摘要。它展示 Git-portable `preview.webp`、manifest、
+`portable_preview_capsule_evidence` 和
+`portable_preview_capsule_evidence_list` 只能从 `mock_data.js` 静态 seed
+生成 preview capsule 摘要。它展示 Git-portable `preview.webp`、manifest、
 import/review/approval record refs、clone-portable validation 和 registry
 validation 状态。
 
 | Static field | Review Console field | Notes |
 | --- | --- | --- |
 | `sample_id` | `portable_preview_capsule_evidence.sample_id` | 指向 accepted sample id |
+| `sample_id[]` | `portable_preview_capsule_evidence_list[].sample_id` | 当前两颗 accepted preview capsules |
 | `capsule_root` | `portable_preview_capsule_evidence.capsule_root` | 只作为 Git-portable evidence ref |
 | `manifest_ref` | `portable_preview_capsule_evidence.manifest_ref` | 不读取文件 |
 | `preview_ref` | `portable_preview_capsule_evidence.preview_ref` | 不创建、不复制、不转换 |

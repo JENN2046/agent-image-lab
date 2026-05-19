@@ -1,5 +1,35 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## Review Console Two-Capsule Static Display
+
+```yaml
+phase: review_console_two_capsule_static_display
+status: completed_validated_pending_guarded_local_commit
+completed:
+  - added portable_preview_capsule_evidence_list static seed with two accepted samples
+  - updated Artifact Evidence summary to show capsule count and ids
+  - included portable_preview_capsule_evidence_list in draft output
+  - documented field mapping and static prototype boundary
+not_performed:
+  - no asset_archive runtime file read
+  - no fetch or file write from the prototype
+  - no preview.webp creation, copy, conversion, or generation
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no production candidate
+  - no push, tag, release, or deploy
+validation:
+  - node --check review_console/static_prototype/app.js
+  - node --check review_console/static_prototype/mock_data.js
+  - node scripts/validate_v14_135_review_console_import_reader_safety_review.js
+  - node scripts/validate_review_console_adapter_handoff.js
+  - npm run validate-preview-capsule-registry
+  - npm run validate-preview-capsule-negative-cases
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+```
+
 ## Two-Capsule Clone-Portable Validation
 
 ```yaml

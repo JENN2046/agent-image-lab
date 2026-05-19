@@ -6,6 +6,21 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current Review Console Two-Capsule Static Display
+
+```text
+Current product-mainline task: review_console_two_capsule_static_display.
+Status: completed validated pending guarded local commit.
+Purpose: let Review Console static prototype display the current two-capsule Git-portable evidence surface.
+Changed files: review_console/static_prototype/mock_data.js, app.js, FIELD_MAPPING.md, README.md.
+Design record: docs/P4B_REVIEW_CONSOLE_TWO_CAPSULE_STATIC_DISPLAY.md.
+Not performed: no asset_archive runtime file read, no fetch, no prototype file write, no preview creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Validation passed: node --check static app/mock, v14.135 safety validator, Review Console adapter handoff validator, registry validator, negative cases, agent board validator, and scripts/validate_mvp.ps1.
+Recommended next: guarded local commit if clean.
+```
+
+---
+
 ## Current Two-Capsule Clone-Portable Validation
 
 ```text

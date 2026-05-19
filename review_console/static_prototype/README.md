@@ -77,6 +77,7 @@ v14.226 新增 6 个月目标缺口 snapshot 回归：固定 `six_month_goal_gap
 v14.227 新增 failure state 静态工作台：从负向 ReviewReport 和 adapter negative guard mock 中展示失败候选、failure tags、memory forbidden、never production 和 production exclusion 状态；只读、不写 `failure_samples`、不晋级 production、不调用 runtime。
 v14.228 新增 failure state snapshot 回归：固定 `failure_state_static_workbench_state` 仍为 2 个失败候选、1 个 memory-forbidden、2 个 never-production、2 个 production exclusion，防止后续把静态失败审查漂移成 `failure_samples` 写入、production 晋级或 VCP runtime integration。
 P4 新增 portable preview capsule evidence 静态展示：`portable_preview_capsule_evidence` 只从 `mock_data.js` 展示 `asset_archive/accepted_samples/<sample_id>/manifest.json + preview.webp + import/review/approval records` 的 Git-portable 证据摘要；不 fetch、不写文件、不读取真实 manifest / VCPChat / VCPToolBox、不创建或复制图片。
+P4b 将静态 evidence 扩展为 `portable_preview_capsule_evidence_list`，展示两颗已 clone-portable 验证的 accepted preview capsules；仍只读静态 seed，不读取 `asset_archive/` 文件。
 草案输出还会携带 `review_result_protocol_static_handoff`，用于展示每个候选为什么 pass、为什么 reject、如何进入记忆草案，以及何时必须永远不得进入 production。
 审片结果协议面板还会显示 `review_protocol_guard_summary`：包括 `memory_forbidden_count`、`memory_forbidden_candidate_ids`、`never_production_candidate_ids`、`negative_guard_observed` 和 production candidate 创建阻断状态。
 草案输出还会携带 `review_decision_package_static_handoff`，用于展示 accepted/rejected sample 草案、memory delta 草案、production exclusion register，以及 `production_candidate_created=false`、`direct_memory_write_performed=false`、`accepted_samples_write_performed=false` 的决策包阻断状态。
@@ -129,6 +130,7 @@ v14.079 还用 `tests/schema_examples/review_report_protocol_final_closeout.exam
 - `artifact_evidence_review_notes_state`
 - `failure_state_static_workbench_state`
 - `portable_preview_capsule_evidence`
+- `portable_preview_capsule_evidence_list`
 - `three_sample_gap_summary_state`
 - `recoverability_matrix_state`
 - `six_month_goal_gap_state`
