@@ -11865,8 +11865,30 @@ process.exit(child.status || 0);
     if ($multiCapsuleDashboard.next_capsule_creation_allowed_now -ne $false -or $multiCapsuleDashboard.second_failure_capsule_requires_separate_authorization -ne $true) {
       Add-Failure "Multi-capsule dashboard must keep second failure capsule creation blocked pending separate authorization"
     }
-    if ($multiCapsuleDashboard.provider_contact_performed -ne $false -or $multiCapsuleDashboard.plugin_call_performed -ne $false -or $multiCapsuleDashboard.api_call_performed -ne $false -or $multiCapsuleDashboard.image_generation_performed -ne $false -or $multiCapsuleDashboard.DailyNote_write_performed -ne $false -or $multiCapsuleDashboard.VCP_memory_write_performed -ne $false -or $multiCapsuleDashboard.runtime_execution_performed -ne $false -or $multiCapsuleDashboard.real_manifest_read_performed -ne $false -or $multiCapsuleDashboard.real_vcpchat_read_performed -ne $false -or $multiCapsuleDashboard.real_vcptoolbox_read_performed -ne $false -or $multiCapsuleDashboard.production_candidate_write_performed -ne $false -or $multiCapsuleDashboard.push_tag_release_deploy_performed -ne $false -or $multiCapsuleDashboard.vcp_runtime_integration_proven -ne $false) {
+  if ($multiCapsuleDashboard.provider_contact_performed -ne $false -or $multiCapsuleDashboard.plugin_call_performed -ne $false -or $multiCapsuleDashboard.api_call_performed -ne $false -or $multiCapsuleDashboard.image_generation_performed -ne $false -or $multiCapsuleDashboard.DailyNote_write_performed -ne $false -or $multiCapsuleDashboard.VCP_memory_write_performed -ne $false -or $multiCapsuleDashboard.runtime_execution_performed -ne $false -or $multiCapsuleDashboard.real_manifest_read_performed -ne $false -or $multiCapsuleDashboard.real_vcpchat_read_performed -ne $false -or $multiCapsuleDashboard.real_vcptoolbox_read_performed -ne $false -or $multiCapsuleDashboard.production_candidate_write_performed -ne $false -or $multiCapsuleDashboard.push_tag_release_deploy_performed -ne $false -or $multiCapsuleDashboard.vcp_runtime_integration_proven -ne $false) {
       Add-Failure "Multi-capsule dashboard must remain static-only with no external, memory, runtime, production, or remote actions"
+    }
+  }
+
+  $capsuleRegistryReportV2Output = & node (Join-Path $Root 'scripts/validate_capsule_registry_report_v2.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Capsule registry report v2 validation exited with failure"
+  } else {
+    $capsuleRegistryReportV2 = ($capsuleRegistryReportV2Output -join "`n") | ConvertFrom-Json
+    if ($capsuleRegistryReportV2.passed -ne $true -or $capsuleRegistryReportV2.phase -ne 'p6b_capsule_registry_report_v2' -or $capsuleRegistryReportV2.report_version -ne 'accepted_failure_capsule_registry_report_v2') {
+      Add-Failure "Capsule registry report v2 must pass with the expected phase and report version"
+    }
+    if ($capsuleRegistryReportV2.totals.accepted -ne 2 -or $capsuleRegistryReportV2.totals.failure -ne 1 -or $capsuleRegistryReportV2.totals.total -ne 3 -or $capsuleRegistryReportV2.totals.passed -ne 3 -or $capsuleRegistryReportV2.totals.failed -ne 0) {
+      Add-Failure "Capsule registry report v2 must preserve accepted=2, failure=1, total=3, passed=3, failed=0"
+    }
+    if ($capsuleRegistryReportV2.resolved_by_links.Count -lt 1 -or $capsuleRegistryReportV2.failure_class_summary.missing_resolved_by_link -ne 0 -or $capsuleRegistryReportV2.failure_class_summary.production_or_memory_guard_violation -ne 0) {
+      Add-Failure "Capsule registry report v2 must preserve resolved-by links and clean failure guard summary"
+    }
+    if ($capsuleRegistryReportV2.guard.old_runs_source_required_for_portable_validation -ne $false -or $capsuleRegistryReportV2.guard.preview_creation_or_copy_performed -ne $false -or $capsuleRegistryReportV2.guard.accepted_samples_write_performed -ne $false -or $capsuleRegistryReportV2.guard.failure_samples_write_performed -ne $false) {
+      Add-Failure "Capsule registry report v2 must not require old runs source or mutate capsule files"
+    }
+    if ($capsuleRegistryReportV2.guard.provider_contact_performed -ne $false -or $capsuleRegistryReportV2.guard.plugin_call_performed -ne $false -or $capsuleRegistryReportV2.guard.api_call_performed -ne $false -or $capsuleRegistryReportV2.guard.image_generation_performed -ne $false -or $capsuleRegistryReportV2.guard.DailyNote_write_performed -ne $false -or $capsuleRegistryReportV2.guard.VCP_memory_write_performed -ne $false -or $capsuleRegistryReportV2.guard.runtime_execution_performed -ne $false -or $capsuleRegistryReportV2.guard.real_manifest_read_performed -ne $false -or $capsuleRegistryReportV2.guard.real_vcpchat_read_performed -ne $false -or $capsuleRegistryReportV2.guard.real_vcptoolbox_read_performed -ne $false -or $capsuleRegistryReportV2.guard.production_candidate_write_performed -ne $false -or $capsuleRegistryReportV2.guard.push_tag_release_deploy_performed -ne $false -or $capsuleRegistryReportV2.guard.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "Capsule registry report v2 must remain local-only with no external, memory, runtime, production, or remote actions"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

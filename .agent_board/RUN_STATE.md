@@ -1,5 +1,41 @@
 # RUN_STATE.md — Agent Image Lab
 
+## P6B Capsule Registry Report v2
+
+```yaml
+phase: p6b_capsule_registry_report_v2
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_local_validator
+goal: promote accepted/failure unified registry report shape into formal validator output
+validator: scripts/validate_capsule_registry_report_v2.js
+fixture: tests/schema_examples/P6B_CAPSULE_REGISTRY_REPORT_V2.example.json
+validation_record: docs/P6B_CAPSULE_REGISTRY_REPORT_V2.md
+source_validators:
+  accepted: scripts/validate_preview_capsule_registry.js
+  failure: scripts/validate_failure_sample_capsule_registry.js --require-at-least=1
+counts:
+  accepted_capsules: 2
+  failure_capsules: 1
+  total_capsules: 3
+  passed: 3
+  failed: 0
+relation:
+  failure_sample: failure_french_summer_rattan_bag_v7_29_001
+  resolved_by: accepted_french_summer_rattan_bucket_bag_001
+guard:
+  old_runs_required_for_portable_validation: false
+  preview_creation_or_copy_performed: false
+  accepted_or_failure_capsule_write_performed: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  production_candidate_created: false
+  push_tag_release_deploy_performed: false
+decision:
+  registry_report_v2_formalized: true
+  recommended_next: expose_registry_report_v2_in_review_console_or_second_failure_capsule_authorization_package
+```
+
 ## P6 Multi-Capsule Accepted / Failure Dashboard
 
 ```yaml

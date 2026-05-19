@@ -6,6 +6,20 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current P6B Capsule Registry Report v2
+
+```text
+Current product-mainline task: p6b_capsule_registry_report_v2.
+Status: completed validated pending guarded local commit.
+Purpose: turn the accepted/failure unified report shape into a formal validator output.
+Changed files: scripts/validate_capsule_registry_report_v2.js, tests/schema_examples/P6B_CAPSULE_REGISTRY_REPORT_V2.example.json, docs/P6B_CAPSULE_REGISTRY_REPORT_V2.md, scripts/validate_mvp.ps1, README.md, .agent_board resume surfaces.
+Evidence: accepted=2, failure=1, total=3, passed=3, failed=0, resolved-by link from failure_french_summer_rattan_bag_v7_29_001 to accepted_french_summer_rattan_bucket_bag_001, clean failure class summary.
+Not performed: no old runs source validation dependency, no preview creation/copy/conversion, no accepted/failure capsule mutation, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: expose registry_report_v2_state in Review Console or prepare second failure capsule authorization package.
+```
+
+---
+
 ## Current P6 Multi-Capsule Accepted / Failure Dashboard
 
 ```text

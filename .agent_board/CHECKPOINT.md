@@ -1,5 +1,32 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## P6B Capsule Registry Report v2
+
+```yaml
+phase: p6b_capsule_registry_report_v2
+status: completed_validated_pending_guarded_local_commit
+completed:
+  - added scripts/validate_capsule_registry_report_v2.js
+  - added tests/schema_examples/P6B_CAPSULE_REGISTRY_REPORT_V2.example.json
+  - documented the formal report in docs/P6B_CAPSULE_REGISTRY_REPORT_V2.md
+  - wired the report validator into scripts/validate_mvp.ps1
+  - synchronized README and .agent_board resume surfaces
+  - combined accepted registry and failure registry into one report output
+  - verified accepted=2, failure=1, total=3, passed=3, failed=0
+  - verified resolved-by link from failure_french_summer_rattan_bag_v7_29_001 to accepted_french_summer_rattan_bucket_bag_001
+not_performed:
+  - no old runs source dependency
+  - no preview.webp load, copy, conversion, or creation
+  - no accepted_samples or failure_samples write
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no production candidate
+  - no push, tag, release, or deploy
+next:
+  - expose registry_report_v2_state in Review Console or prepare second failure capsule authorization package
+```
+
 ## P6 Multi-Capsule Accepted / Failure Dashboard
 
 ```yaml

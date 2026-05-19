@@ -1,5 +1,20 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — P6B Capsule Registry Report v2
+
+```text
+Status: p6b_capsule_registry_report_v2 completed_validated_pending_guarded_local_commit.
+Reason: promote the P6 accepted/failure unified report shape into a formal local validator output.
+Execution mode: A4.8 local validator.
+Validator: scripts/validate_capsule_registry_report_v2.js.
+Fixture: tests/schema_examples/P6B_CAPSULE_REGISTRY_REPORT_V2.example.json.
+Validation record: docs/P6B_CAPSULE_REGISTRY_REPORT_V2.md.
+Source validators: scripts/validate_preview_capsule_registry.js and scripts/validate_failure_sample_capsule_registry.js --require-at-least=1.
+Current report: accepted=2, failure=1, total=3, passed=3, failed=0; failure_french_summer_rattan_bag_v7_29_001 resolves to accepted_french_summer_rattan_bucket_bag_001.
+Not performed: no old runs source dependency, no preview creation/copy/conversion, no accepted/failure capsule mutation, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: expose registry_report_v2_state in Review Console or prepare second failure capsule authorization package.
+```
+
 ## Current Handoff Update — P6 Multi-Capsule Accepted / Failure Dashboard
 
 ```text
