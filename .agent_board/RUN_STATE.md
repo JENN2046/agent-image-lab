@@ -15964,3 +15964,32 @@ VCP_memory_write_performed: false
 production_candidate_write_performed: false
 recommended_next: runs_restore_report_dry_run_schema_commit_readiness_gate
 ```
+
+## runs_data_stewardship_checkpoint_gate
+
+```yaml
+phase: runs_data_stewardship_checkpoint_gate
+status: completed_validated
+mode: A4.8 docs-light / no filesystem read
+checkpoint_ref: docs/RUNS_DATA_STEWARDSHIP_CHECKPOINT.md
+sealed_commits:
+  - 5408b9e docs: define runs backup restore protocol
+  - ff5a934 test: add runs backup manifest schema
+  - c8a5193 test: add runs restore report dry-run schema
+actual_runs_scan_performed: false
+runs_mutation_performed: false
+image_binary_read_performed: false
+hash_extraction_performed: false
+dimensions_extraction_performed: false
+preview_generation_performed: false
+cloud_drive_read_performed: false
+cloud_drive_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+selected_next_move: A_restore_verification_authorization_package_draft
+recommended_next: runs_restore_verification_authorization_package_draft_gate
+```
