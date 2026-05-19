@@ -4,6 +4,38 @@
 ## Current Capsule Productization Goal
 
 ```text
+phase: capsule_static_smoke_baseline_closeout_gate
+status: completed_validated
+mode: A4.8 review / docs-light
+objective: summarize sealed capsule static smoke baseline and name exactly one next product move
+sealed_remote_commit: 3f8a8a7
+sealed_remote_branch: origin/master
+accepted: 2
+failure: 2
+total: 4
+capability: Git-portable accepted/failure preview capsule static smoke baseline with Review Console static fixture and snapshot validation
+browser_runtime_validator_executed: false
+asset_archive_ui_read_performed: false
+preview_loaded_or_rendered: false
+capsule_creation_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+VCPChat_or_VCPToolBox_runtime_performed: false
+exactly_one_next_product_move: capsule_operator_reviewer_action_matrix_gate
+validated_now: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts\\validate-agent-image-lab-local.ps1
+recommended_next: capsule_operator_reviewer_action_matrix_gate_static_only_no_runtime_no_production
+```
+
+---
+
+## Current Capsule Productization Goal
+
+```text
 phase: capsule_static_product_smoke_review_console_snapshot_gate
 status: completed_validated
 mode: A4.8 local implementation / static snapshot only
