@@ -1,5 +1,31 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## Failure Sample Capsule Creator Dry Run Validator
+
+```yaml
+phase: failure_sample_capsule_creator_dry_run_validator
+status: completed_validated_pending_guarded_local_commit
+completed:
+  - added scripts/validate_failure_sample_capsule_creator_dry_run.js
+  - validated plan-only default behavior
+  - validated mismatched source, mismatched long edge, and unsupported sample fail closed
+  - wired creator dry-run validator into scripts/validate_mvp.ps1
+  - documented validation in docs/P5H_FAILURE_SAMPLE_CAPSULE_CREATOR_DRY_RUN_VALIDATOR.md
+  - updated README navigation
+not_performed:
+  - no --confirm-create execution
+  - no asset_archive/failure_samples/<sample_id>/ capsule created
+  - no manifest, preview.webp, failure_record, or review_record written
+  - no preview.webp creation, copy, conversion, or generation
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no production candidate
+  - no push, tag, release, or deploy
+next:
+  - stop for explicit --confirm-create authorization before first failure capsule creation
+```
+
 ## Failure Sample Capsule Creator Dry Run Implementation
 
 ```yaml

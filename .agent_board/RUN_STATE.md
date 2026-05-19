@@ -1,5 +1,37 @@
 # RUN_STATE.md — Agent Image Lab
 
+## Failure Sample Capsule Creator Dry Run Validator
+
+```yaml
+phase: failure_sample_capsule_creator_dry_run_validator
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_local_validation_helper
+goal: verify the failure sample capsule creator is safe by default and wired into MVP validation
+evidence:
+  validator: scripts/validate_failure_sample_capsule_creator_dry_run.js
+  mvp_validator: scripts/validate_mvp.ps1
+  validation_record: docs/P5H_FAILURE_SAMPLE_CAPSULE_CREATOR_DRY_RUN_VALIDATOR.md
+validated_behavior:
+  default_mode_plan_only: true
+  confirm_create_required: true
+  bad_source_fails: true
+  bad_long_edge_fails: true
+  unsupported_sample_fails: true
+  target_directory_created_by_validator: false
+guard:
+  confirm_create_executed: false
+  failure_sample_capsule_created: false
+  failure_sample_preview_created_or_copied: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  production_candidate_created: false
+  push_tag_release_deploy_performed: false
+decision:
+  creator_dry_run_guarded_by_mvp: true
+  recommended_next: explicit_confirm_create_authorization_or_continue_non_writing_product_lane
+```
+
 ## Failure Sample Capsule Creator Dry Run Implementation
 
 ```yaml

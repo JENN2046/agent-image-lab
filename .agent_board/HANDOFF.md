@@ -1,5 +1,18 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — Failure Sample Capsule Creator Dry Run Validator
+
+```text
+Status: failure_sample_capsule_creator_dry_run_validator completed_validated_pending_guarded_local_commit.
+Reason: make the new failure capsule creator part of the stable validation surface without executing capsule creation.
+Execution mode: A4.8 local validation helper.
+New validator: scripts/validate_failure_sample_capsule_creator_dry_run.js.
+MVP wiring: scripts/validate_mvp.ps1.
+Validation record: docs/P5H_FAILURE_SAMPLE_CAPSULE_CREATOR_DRY_RUN_VALIDATOR.md.
+Not performed: no --confirm-create execution, no asset_archive/failure_samples/<sample_id>/ capsule created, no manifest/preview/failure_record/review_record written, no preview creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: explicit --confirm-create authorization is the next hard boundary for creating the first failure capsule.
+```
+
 ## Current Handoff Update — Failure Sample Capsule Creator Dry Run Implementation
 
 ```text

@@ -11803,6 +11803,25 @@ process.exit(child.status || 0);
       Add-Failure "Failure sample capsule negative-case validation must not perform external, memory, runtime, source read, push, tag, release, or deploy actions"
     }
   }
+
+  $failureSampleCapsuleCreatorDryRunOutput = & node (Join-Path $Root 'scripts/validate_failure_sample_capsule_creator_dry_run.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Failure sample capsule creator dry-run validation exited with failure"
+  } else {
+    $failureSampleCapsuleCreatorDryRun = ($failureSampleCapsuleCreatorDryRunOutput -join "`n") | ConvertFrom-Json
+    if ($failureSampleCapsuleCreatorDryRun.passed -ne $true -or $failureSampleCapsuleCreatorDryRun.status -ne 'failure_sample_capsule_creator_dry_run_verified') {
+      Add-Failure "Failure sample capsule creator dry-run validation must pass"
+    }
+    if ($failureSampleCapsuleCreatorDryRun.confirm_create_executed -ne $false -or $failureSampleCapsuleCreatorDryRun.writes_performed -ne $false -or $failureSampleCapsuleCreatorDryRun.target_directory_exists_after_validation -ne $false) {
+      Add-Failure "Failure sample capsule creator dry-run validation must not execute confirm-create, write files, or create target directory"
+    }
+    if ($failureSampleCapsuleCreatorDryRun.preview_creation_or_copy_performed -ne $false -or $failureSampleCapsuleCreatorDryRun.provider_contact_performed -ne $false -or $failureSampleCapsuleCreatorDryRun.plugin_call_performed -ne $false -or $failureSampleCapsuleCreatorDryRun.api_call_performed -ne $false -or $failureSampleCapsuleCreatorDryRun.image_generation_performed -ne $false) {
+      Add-Failure "Failure sample capsule creator dry-run validation must not perform preview creation/copy, provider, plugin, API, or image generation"
+    }
+    if ($failureSampleCapsuleCreatorDryRun.DailyNote_write_performed -ne $false -or $failureSampleCapsuleCreatorDryRun.VCP_memory_write_performed -ne $false -or $failureSampleCapsuleCreatorDryRun.runtime_execution_performed -ne $false -or $failureSampleCapsuleCreatorDryRun.real_manifest_read_performed -ne $false -or $failureSampleCapsuleCreatorDryRun.real_vcpchat_read_performed -ne $false -or $failureSampleCapsuleCreatorDryRun.real_vcptoolbox_read_performed -ne $false -or $failureSampleCapsuleCreatorDryRun.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Failure sample capsule creator dry-run validation must not perform memory, runtime, real manifest, VCP source reads, push, tag, release, or deploy"
+    }
+  }
   [Console]::OutputEncoding = $prevOutputEncoding
 }
 

@@ -6,6 +6,19 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current Failure Sample Capsule Creator Dry Run Validator
+
+```text
+Current product-mainline task: failure_sample_capsule_creator_dry_run_validator.
+Status: completed validated pending guarded local commit.
+Purpose: verify the failure sample capsule creator remains plan-only by default and wire the guard into scripts/validate_mvp.ps1.
+Changed files: scripts/validate_failure_sample_capsule_creator_dry_run.js, scripts/validate_mvp.ps1, docs/P5H_FAILURE_SAMPLE_CAPSULE_CREATOR_DRY_RUN_VALIDATOR.md, README.md, .agent_board resume surfaces.
+Not performed: no --confirm-create execution, no asset_archive/failure_samples/<sample_id>/ capsule created, no manifest/preview/failure_record/review_record written, no preview creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: explicit --confirm-create authorization if creating the first failure capsule is desired; otherwise continue non-writing product lane.
+```
+
+---
+
 ## Current Failure Sample Capsule Creator Dry Run Implementation
 
 ```text
