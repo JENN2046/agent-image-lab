@@ -25,6 +25,32 @@ decision:
   physical_docs_movement_by_default: false
 ```
 
+## P1 First Preview Capsule Authorization Package
+
+```yaml
+phase: p1_first_git_portable_preview_capsule_authorization_package
+status: validated_pending_source_authorization
+mode: A4.8_safe_local_docs_only_authorization_package
+goal: prepare a concrete approval package for the first Git-portable preview capsule without creating the capsule
+evidence:
+  authorization_package: docs/FIRST_GIT_PORTABLE_PREVIEW_CAPSULE_AUTHORIZATION_GATE.md
+selected_sample:
+  sample_id: accepted_womens_resort_relaxed_knit_codex_v2_001
+  target_capsule: asset_archive/accepted_samples/accepted_womens_resort_relaxed_knit_codex_v2_001/
+  preview_long_edge: 512
+guard:
+  source_image_read_performed: false
+  preview_created_or_copied: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  push_tag_release_deploy_performed_by_this_phase: false
+decision:
+  execution_allowed_now: false
+  source_path_required_before_execution: true
+  recommended_next: exact_file_local_commit_or_request_source_authorization
+```
+
 ## C2b Validator-Blocked Strategy Package
 
 ```yaml

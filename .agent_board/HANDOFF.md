@@ -19,6 +19,25 @@ Recommended next: exact-file commit this planning/status update, then run push s
 
 ---
 
+## Current Handoff Update — P1 First Preview Capsule Authorization Package
+
+```text
+Status: p1_first_git_portable_preview_capsule_authorization_package validated_pending_source_authorization.
+Reason: Enter product evidence-chain mainline after pushing the state truth model and next-task plan.
+Execution mode: A4.8 local docs-only authorization package.
+Authorization package: docs/FIRST_GIT_PORTABLE_PREVIEW_CAPSULE_AUTHORIZATION_GATE.md.
+Selected sample: accepted_womens_resort_relaxed_knit_codex_v2_001.
+Target capsule: asset_archive/accepted_samples/accepted_womens_resort_relaxed_knit_codex_v2_001/.
+Preview long edge: 512.
+Source image or source preview read performed: false.
+Preview creation/copy/conversion performed: false.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox performed: false.
+Push completed before this P1 docs phase: true, for the prior state truth model commit.
+Recommended next: exact-file local commit this P1 authorization package if clean; do not execute capsule creation until source path authorization is explicit.
+```
+
+---
+
 ## Current Handoff Update — C2b Validator-Blocked Strategy Package
 
 ```text

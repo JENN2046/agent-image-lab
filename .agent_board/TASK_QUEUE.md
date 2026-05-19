@@ -38,6 +38,22 @@ Not allowed now: preview.webp creation/copy/conversion, file movement, validator
 
 ---
 
+## Current P1 First Preview Capsule Authorization Package
+
+```text
+Current product-mainline task: p1_first_git_portable_preview_capsule_authorization_package.
+Status: validated pending source authorization.
+Authorization package: docs/FIRST_GIT_PORTABLE_PREVIEW_CAPSULE_AUTHORIZATION_GATE.md.
+Selected sample: accepted_womens_resort_relaxed_knit_codex_v2_001.
+Target capsule path: asset_archive/accepted_samples/accepted_womens_resort_relaxed_knit_codex_v2_001/.
+Required capsule files: manifest.json, preview.webp, import_record.json, review_record.json, approval_record.json.
+Required preview: WebP, long_edge 512, sha256 recorded in manifest.
+Required human input before execution: exact approved source preview or source original path.
+Not allowed now: source image read, preview.webp creation/copy/conversion, old runs restoration, Base64, original sha256, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, push/tag/release/deploy.
+```
+
+---
+
 ## Current C2b Validator-Blocked Strategy Package
 
 ```text
