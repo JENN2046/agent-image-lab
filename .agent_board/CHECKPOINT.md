@@ -4,6 +4,34 @@
 ## Current Capsule Productization Goal
 
 ```text
+phase: capsule_runs_backup_restore_protocol_gate
+status: completed_validated
+mode: A4.8 docs/protocol only
+objective: define backup, naming, restore, verification handoff, and cloud-drive boundary for user-owned runs data
+protocol_ref: docs/CAPSULE_RUNS_BACKUP_RESTORE_PROTOCOL.md
+runs_owner: user
+canonical_project_relative_root: runs/
+restore_target_root: runs/
+runs_mutation_performed: false
+image_binary_read_performed: false
+preview_generation_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+cloud_drive_read_performed: false
+cloud_drive_write_performed: false
+validated_now: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+recommended_next: capsule_runs_backup_manifest_schema_gate_schema_docs_only_no_runs_read_no_runs_mutation
+```
+
+---
+
+## Current Capsule Productization Goal
+
+```text
 phase: capsule_operator_surface_closeout_gate
 status: completed_validated
 mode: A4.8 review / docs-light
