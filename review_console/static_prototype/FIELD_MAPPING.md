@@ -197,6 +197,20 @@ Phase 9 审批记录必须满足：
 
 `P6C_REVIEW_CONSOLE_REGISTRY_REPORT_V2_STATE.example.json` 固定本节映射的 golden snapshot。后续如果 `registry_report_v2_state` 的 totals、relation、guard 或 draft output key 漂移，必须同步更新 snapshot validator 并保持 no-fetch / no-write / no-runtime / no-image-generation 边界。
 
+## P6I Registry Report v2 Negative Visibility 映射
+
+本节用于验收 P6G negative-state design 进入静态 Review Console 的可见面板与草案输出。它只展示静态 mock 中的合成 fail-closed 场景，不在浏览器内执行 validator，不读取 `asset_archive/` 文件，不加载 `preview.webp`，不 fetch，不写文件。
+
+| Negative visibility 字段 | Review Console 可见/草案字段 | 说明 |
+| --- | --- | --- |
+| `negative_state_classes[]` | `registry_report_v2_negative_visibility_state.negative_state_classes` / `registryReportV2NegativeSummary` | 当前必须显示 `accepted_registry_failed`、`failure_registry_failed`、`missing_resolved_by_link`、`production_or_memory_guard_violation` 这 4 类 fail-closed negative states |
+| `scenarios[]` | `registry_report_v2_negative_visibility_state.scenarios[]` / `registryReportV2NegativeRows` | 每个场景必须显示 failure class、severity、affected samples、expected status、visible reason 和 reviewer action |
+| `baseline_totals` | `registry_report_v2_negative_visibility_state.baseline_totals` / `registryReportV2NegativeSummary` | 仍以 accepted=2 / failure=2 / total=4 为背景，不掩盖负向状态 |
+| `fail_closed_contract` | `registry_report_v2_negative_visibility_state.fail_closed_contract` | 必须明确 report 不能假装保持绿色、relation 不能隐藏、guard violation 不能被摘要吞掉 |
+| `guard` | `registry_report_v2_negative_visibility_state.guard` / `registryReportV2NegativeGuard` | 必须保持 static-only、no fetch、no file write、no asset archive read、no runtime |
+
+`P6I_REVIEW_CONSOLE_REGISTRY_REPORT_V2_NEGATIVE_VISIBILITY.example.json` 固定本节映射的 golden snapshot。后续如果 `registry_report_v2_negative_visibility_state` 的 classes、scenario count、guard 或 draft output key 漂移，必须同步更新 snapshot validator 并保持 no-fetch / no-write / no-runtime / no-image-generation 边界。
+
 ## v14.048 Review Decision Package Static Handoff 映射
 
 本节用于验收 PVOS adapter 输出中的 `review_decision_package` 进入静态 Review Console 可见 UI 与草案输出。它仍然只读取项目内 mock / fixture，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
@@ -593,3 +607,17 @@ failure_samples / production_candidate，也不证明 VCP runtime integration。
 ```
 
 该标记只用于人工验收，不代表运行时权限。
+
+## P6J Unified Capsule Contract
+
+本节用于验收 `unified_capsule_contract_report` 静态 contract。它只从 mock 中模拟 `accepted_failure_capsule_registry_report_v2` + `capsule_manifest_contract_v1`，不得在浏览器执行 validator，不得读取 `asset_archive/`，不得加载 preview，不得写文件。
+
+| Source | Review Console field | Rule |
+| --- | --- | --- |
+| `contract_status.registry_passed` | `unified_capsule_contract_report.contract_status.registry_passed` | accepted/failure registry 必须单独可见 |
+| `contract_status.manifest_passed` | `unified_capsule_contract_report.contract_status.manifest_passed` | capsule manifest schema 结果必须单独可见 |
+| `contract_status.relation_passed` | `unified_capsule_contract_report.contract_status.relation_passed` | failure -> accepted relation 不能被 totals 掩盖 |
+| `contract_status.guard_passed` | `unified_capsule_contract_report.contract_status.guard_passed` | production / memory guard 不能被 clean summary 掩盖 |
+| `samples[].manifest_validation_status` | `unifiedCapsuleContractRows` | 每个样本必须显示 manifest contract 状态 |
+| `samples[].relation_validation_status` | `unifiedCapsuleContractRows` | failure sample 必须显示 resolved-by 状态 |
+| `samples[].guard_validation_status` | `unifiedCapsuleContractRows` | 每个样本必须显示 no-production/no-memory guard 状态 |

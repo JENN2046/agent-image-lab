@@ -514,7 +514,8 @@ input[type="range"] {
 .multi-capsule-report,
 .multi-capsule-relations,
 .registry-report-v2-list,
-.registry-report-v2-relations {
+.registry-report-v2-relations,
+.registry-report-v2-negative-list {
   display: grid;
   gap: 10px;
 }
@@ -539,7 +540,8 @@ input[type="range"] {
 .review-report-card,
 .adapter-negative-card,
 .multi-capsule-card,
-.registry-report-v2-card {
+.registry-report-v2-card,
+.registry-report-v2-negative-card {
   display: grid;
   gap: 10px;
   min-width: 0;
@@ -609,6 +611,14 @@ input[type="range"] {
 
 .registry-report-v2-card.relation {
   border-left-color: var(--amber);
+}
+
+.registry-report-v2-negative-card.high {
+  border-left-color: var(--amber);
+}
+
+.registry-report-v2-negative-card.critical {
+  border-left-color: var(--red);
 }
 
 .artifact-lifecycle-list {
@@ -901,6 +911,7 @@ input[type="range"] {
 .adapter-negative-card dl,
 .multi-capsule-card dl,
 .registry-report-v2-card dl,
+.registry-report-v2-negative-card dl,
 .artifact-review-note-card dl,
 .failure-state-card dl,
 .three-sample-gap-card dl,
@@ -925,6 +936,7 @@ input[type="range"] {
 .adapter-negative-card dl div,
 .multi-capsule-card dl div,
 .registry-report-v2-card dl div,
+.registry-report-v2-negative-card dl div,
 .artifact-review-note-card dl div,
 .failure-state-card dl div,
 .three-sample-gap-card dl div,
@@ -950,6 +962,7 @@ input[type="range"] {
 .adapter-negative-card dt,
 .multi-capsule-card dt,
 .registry-report-v2-card dt,
+.registry-report-v2-negative-card dt,
 .artifact-review-note-card dt,
 .failure-state-card dt,
 .three-sample-gap-card dt,
@@ -973,6 +986,7 @@ input[type="range"] {
 .adapter-negative-card dd,
 .multi-capsule-card dd,
 .registry-report-v2-card dd,
+.registry-report-v2-negative-card dd,
 .artifact-review-note-card dd,
 .failure-state-card dd,
 .three-sample-gap-card dd,
@@ -1228,7 +1242,8 @@ input[type="range"] {
   .review-report-card dl,
   .adapter-negative-card dl,
   .multi-capsule-card dl,
-  .registry-report-v2-card dl {
+  .registry-report-v2-card dl,
+  .registry-report-v2-negative-card dl {
     grid-template-columns: 1fr;
   }
 
@@ -1266,3 +1281,9 @@ input[type="range"] {
   }
 }
 
+
+
+.unified-capsule-contract-dashboard {
+  display: grid;
+  gap: 1rem;
+}

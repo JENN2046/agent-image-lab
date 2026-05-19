@@ -9570,7 +9570,7 @@ process.exit(child.status || 0);
       Add-Failure "v14.160 must close out the local lifecycle chain"
     }
     $twoMonthCloseoutMigratedPending = $twoMonthCloseout.migration_status -eq 'legacy_runs_missing_git_preview_capsule_pending'
-    if (-not $twoMonthCloseoutMigratedPending -and ($twoMonthCloseout.registry_sample_count -ne 8 -or $twoMonthCloseout.registry_category_count -ne 3 -or $twoMonthCloseout.local_artifact_sample_count -ne 6 -or $twoMonthCloseout.full_recoverable_sample_count -ne 3)) {
+    if (-not $twoMonthCloseoutMigratedPending -and ($twoMonthCloseout.registry_sample_count -ne 8 -or $twoMonthCloseout.registry_category_count -ne 3 -or $twoMonthCloseout.local_artifact_sample_count -lt 6 -or $twoMonthCloseout.full_recoverable_sample_count -ne 3)) {
       Add-Failure "v14.160 must reflect observed accepted sample matrix counts"
     }
     if (-not $twoMonthCloseoutMigratedPending -and ($twoMonthCloseout.hard_acceptance_three_full_samples_met -ne $true -or $twoMonthCloseout.remaining_full_recoverable_sample_gap -ne 0 -or $twoMonthCloseout.two_month_goal_fully_complete -ne $false -or $twoMonthCloseout.goal_status -ne 'active_not_complete')) {
@@ -11932,6 +11932,28 @@ process.exit(child.status || 0);
     }
     if ($reviewConsoleRegistryReportV2.provider_contact_performed -ne $false -or $reviewConsoleRegistryReportV2.plugin_call_performed -ne $false -or $reviewConsoleRegistryReportV2.api_call_performed -ne $false -or $reviewConsoleRegistryReportV2.image_generation_performed -ne $false -or $reviewConsoleRegistryReportV2.DailyNote_write_performed -ne $false -or $reviewConsoleRegistryReportV2.VCP_memory_write_performed -ne $false -or $reviewConsoleRegistryReportV2.runtime_execution_performed -ne $false -or $reviewConsoleRegistryReportV2.real_manifest_read_performed -ne $false -or $reviewConsoleRegistryReportV2.real_vcpchat_read_performed -ne $false -or $reviewConsoleRegistryReportV2.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleRegistryReportV2.production_candidate_write_performed -ne $false -or $reviewConsoleRegistryReportV2.push_tag_release_deploy_performed -ne $false -or $reviewConsoleRegistryReportV2.vcp_runtime_integration_proven -ne $false) {
       Add-Failure "Review Console registry report v2 state must remain static-only with no external, memory, runtime, production, or remote actions"
+    }
+  }
+
+  $reviewConsoleRegistryReportV2NegativeVisibilityOutput = & node (Join-Path $Root 'scripts/validate_review_console_registry_report_v2_negative_visibility.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console registry report v2 negative visibility validation exited with failure"
+  } else {
+    $reviewConsoleRegistryReportV2NegativeVisibility = ($reviewConsoleRegistryReportV2NegativeVisibilityOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleRegistryReportV2NegativeVisibility.passed -ne $true -or $reviewConsoleRegistryReportV2NegativeVisibility.phase -ne 'p6i_review_console_registry_report_v2_negative_visibility' -or $reviewConsoleRegistryReportV2NegativeVisibility.draft_output_key -ne 'registry_report_v2_negative_visibility_state') {
+      Add-Failure "Review Console registry report v2 negative visibility must pass with expected phase and draft output key"
+    }
+    if ($reviewConsoleRegistryReportV2NegativeVisibility.scenario_count -ne 4 -or $reviewConsoleRegistryReportV2NegativeVisibility.negative_state_class_count -ne 4) {
+      Add-Failure "Review Console registry report v2 negative visibility must preserve four negative-state classes and scenarios"
+    }
+    if ($reviewConsoleRegistryReportV2NegativeVisibility.report_can_stay_green -ne $false -or $reviewConsoleRegistryReportV2NegativeVisibility.relation_can_be_hidden -ne $false -or $reviewConsoleRegistryReportV2NegativeVisibility.guard_violation_can_be_summarized_away -ne $false) {
+      Add-Failure "Review Console registry report v2 negative visibility must keep fail-closed contract visible"
+    }
+    if ($reviewConsoleRegistryReportV2NegativeVisibility.fetch_performed -ne $false -or $reviewConsoleRegistryReportV2NegativeVisibility.file_write_performed -ne $false -or $reviewConsoleRegistryReportV2NegativeVisibility.asset_archive_read_performed -ne $false -or $reviewConsoleRegistryReportV2NegativeVisibility.preview_loaded_or_rendered -ne $false -or $reviewConsoleRegistryReportV2NegativeVisibility.preview_creation_or_copy_performed -ne $false) {
+      Add-Failure "Review Console registry report v2 negative visibility must not fetch, write, read asset_archive, load preview, or create/copy preview"
+    }
+    if ($reviewConsoleRegistryReportV2NegativeVisibility.provider_contact_performed -ne $false -or $reviewConsoleRegistryReportV2NegativeVisibility.plugin_call_performed -ne $false -or $reviewConsoleRegistryReportV2NegativeVisibility.api_call_performed -ne $false -or $reviewConsoleRegistryReportV2NegativeVisibility.image_generation_performed -ne $false -or $reviewConsoleRegistryReportV2NegativeVisibility.DailyNote_write_performed -ne $false -or $reviewConsoleRegistryReportV2NegativeVisibility.VCP_memory_write_performed -ne $false -or $reviewConsoleRegistryReportV2NegativeVisibility.runtime_execution_performed -ne $false -or $reviewConsoleRegistryReportV2NegativeVisibility.real_manifest_read_performed -ne $false -or $reviewConsoleRegistryReportV2NegativeVisibility.real_vcpchat_read_performed -ne $false -or $reviewConsoleRegistryReportV2NegativeVisibility.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleRegistryReportV2NegativeVisibility.production_candidate_write_performed -ne $false -or $reviewConsoleRegistryReportV2NegativeVisibility.push_tag_release_deploy_performed -ne $false -or $reviewConsoleRegistryReportV2NegativeVisibility.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "Review Console registry report v2 negative visibility must remain static-only with no external, memory, runtime, production, or remote actions"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

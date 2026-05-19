@@ -80,6 +80,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 - `docs/P6_MULTI_CAPSULE_ACCEPTED_FAILURE_DASHBOARD_PRODUCTIZATION.md` 记录 Review Console multi-capsule accepted/failure evidence dashboard；它把当前 accepted=2 / failure=2 的 Git-portable capsules 做成静态汇总、side-by-side resolved-by 关联和 unified report 设计，不加载 preview、不接 runtime。
 - `docs/P6B_CAPSULE_REGISTRY_REPORT_V2.md` 记录正式 accepted/failure capsule registry report v2 validator；`scripts/validate_capsule_registry_report_v2.js` 汇总 accepted registry + failure registry，输出 per-sample results、resolved-by links 和 failure class summary，不读取旧 `runs/` source、不修改 capsule。
 - `docs/P6C_REVIEW_CONSOLE_REGISTRY_REPORT_V2_STATE.md` 记录 Review Console `registry_report_v2_state` 静态展示；它把 P6B 正式 report 形状接回 UI / draft output，不读取 `asset_archive/`、不加载 preview、不执行 validator runtime。
+- `docs/P6I_REVIEW_CONSOLE_REGISTRY_REPORT_V2_NEGATIVE_VISIBILITY.md` 记录 Review Console `registry_report_v2_negative_visibility_state` 静态展示；它把 P6G fail-closed negative states 接回 UI / draft output，明确 relation 断链和 guard violation 必须可见，不读取 `asset_archive/`、不加载 preview、不执行 validator runtime。
 - `docs/P6D_SECOND_FAILURE_SAMPLE_CAPSULE_AUTHORIZATION_PACKAGE_DRY_RUN.md` 记录第二颗 failure sample capsule 授权包 dry-run；当前推荐 `failure_tennis_wallet_v7_21_001`，但不创建 capsule、不创建/转换 `preview.webp`、不修改 `asset_archive/`。
 - `docs/P6E_SECOND_FAILURE_SAMPLE_CAPSULE_CREATION_RECORD.md` 记录第二颗 Git-portable failure sample preview capsule 创建结果；样本为 `failure_tennis_wallet_v7_21_001`，当前 accepted=2 / failure=2 / total=4。
 - `docs/P6F_ACCEPTED_FAILURE_2X2_CLONE_PORTABLE_BASELINE.md` 记录 accepted=2 / failure=2 的 clean clone portable baseline，并明确当前不做第三颗 capsule。
@@ -5649,3 +5650,5 @@ git diff --check
 ## 不做什么
 
 本包不包含密钥、不包含 raw 插件输出、不包含 raw endpoint、不包含运行日志、不把图片大文件纳入 Git。v0.5 曾在用户授权下把 Adapter-only dry-run 包安装到 VCPToolBox 预发布候选工作线；该安装不代表真实生图插件长期启用。v10.26 记录 v10.25 已完成一次 DailyNote/VCP memory 真实写入；v10.27 记录未来 DailyNoteWrite 写入根目录已修正为 `vcp_root_dailynote`；v10.28 记录插件 `success` 不再足以判定写入完成，必须通过 canonical location 和 hash 校验。该单次授权已消耗，第二次写入、追加生图、submitDraft、commit、push、tag、PR 和 release 仍需后续单独授权和通过对应安全门。
+- `schemas/capsule_manifest_contract.schema.yaml`、`scripts/validate_capsule_manifest_contract.js` 和 `scripts/validate_capsule_manifest_contract_negative_cases.js` 定义并验证 accepted/failure preview capsule manifest v1；`scripts/create_preview_capsule.js` 现在从 accepted sample registry 派生样本配置，不再维护硬编码 `SAMPLES`。
+- Review Console 新增 `unified_capsule_contract_report` 静态 contract 面板，把 registry、manifest、relation、guard 四类状态汇总到同一个可审查界面，不读取 `asset_archive/`、不加载 preview、不执行 runtime。

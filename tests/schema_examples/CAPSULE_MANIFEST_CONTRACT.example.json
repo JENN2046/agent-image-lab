@@ -1,0 +1,33 @@
+{
+  "capsule_manifest_contract": {
+    "phase": "capsule_contract_productization",
+    "report_version": "capsule_manifest_contract_v1",
+    "totals": {
+      "accepted": 2,
+      "failure": 2,
+      "total": 4,
+      "passed": 4,
+      "failed": 0
+    },
+    "required_failure_classes": [
+      "missing_capsule_manifest",
+      "manifest_contract_mismatch",
+      "missing_preview_file",
+      "preview_hash_mismatch",
+      "production_or_memory_guard_violation"
+    ],
+    "guard": {
+      "preview_creation_or_copy_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "runtime_execution_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false
+    }
+  }
+}

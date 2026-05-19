@@ -1,4 +1,78 @@
+## Capsule Contract Productization
+
+```yaml
+phase: capsule_contract_productization
+status: completed_validated
+mode: A4.8_local_product_core_implementation
+goal: make preview capsule creator, manifest validation, registry report v2, and Review Console static contract consume one local capsule contract
+validation_record: docs/CAPSULE_CONTRACT_PRODUCTIZATION_CLOSEOUT.md
+contract_outputs:
+  - capsule_manifest_contract_v1
+  - accepted_failure_capsule_registry_report_v2.contract_status
+  - unified_capsule_contract_report
+validation_passed:
+  - node scripts/validate_create_preview_capsule_registry_source.js
+  - node scripts/validate_capsule_manifest_contract.js
+  - node scripts/validate_capsule_manifest_contract_negative_cases.js
+  - node scripts/validate_capsule_registry_report_v2.js
+  - node scripts/validate_capsule_registry_report_v2_negative_states.js
+  - node scripts/validate_review_console_registry_report_v2_negative_visibility.js
+  - node scripts/validate_review_console_unified_capsule_contract.js
+  - git diff --check
+  - powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+guard:
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  VCPChat_or_VCPToolBox_read_performed: false
+  runs_mutated: false
+  image_binary_created_or_copied: false
+  production_candidate_created: false
+  push_tag_release_deploy_performed: false
+recommended_next: exact_file_commit_readiness_review
+```
 # RUN_STATE.md — Agent Image Lab
+
+## P6I Review Console Registry Report v2 Negative Visibility
+
+```yaml
+phase: p6i_review_console_registry_report_v2_negative_visibility
+status: completed_validated
+mode: A4.8_static_review_console_negative_visibility
+goal: expose P6G fail-closed negative states as a visible static Review Console panel and draft output surface; apply external review P1 temp-dir rename guard to accepted preview capsule creation
+validation_record: docs/P6I_REVIEW_CONSOLE_REGISTRY_REPORT_V2_NEGATIVE_VISIBILITY.md
+static_output_key: registry_report_v2_negative_visibility_state
+validation_passed:
+  - node --check review_console/static_prototype/app.js
+  - node --check review_console/static_prototype/mock_data.js
+  - node --check scripts/validate_review_console_registry_report_v2_negative_visibility.js
+  - node --check scripts/create_preview_capsule.js
+  - node --check scripts/validate_v14_160_two_month_product_capability_closeout.js
+  - node scripts/validate_review_console_registry_report_v2_negative_visibility.js
+  - node scripts/validate_v14_160_two_month_product_capability_closeout.js
+  - git diff --check
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+negative_state_classes:
+  - accepted_registry_failed
+  - failure_registry_failed
+  - missing_resolved_by_link
+  - production_or_memory_guard_violation
+scenario_count: 4
+guard:
+  browser_executes_validator: false
+  asset_archive_read_performed: false
+  preview_loaded_or_rendered: false
+  preview_creation_or_copy_performed: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  production_candidate_created: false
+  push_tag_release_deploy_performed: false
+decision:
+  fail_closed_negative_states_visible_in_review_console: true
+  accepted_preview_capsule_creation_uses_temp_dir_rename: true
+  recommended_next: registry_driven_capsule_source_and_manifest_schema_follow_up
+```
 
 ## P6H Push Review Warning Fixes
 

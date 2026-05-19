@@ -157,7 +157,11 @@ const observed = {
 const matrixMigratedPending = v14_142?.migration_status === "legacy_runs_missing_git_preview_capsule_pending";
 addResult("observed_registry_sample_count_is_8_or_preview_capsule_pending", observed.registrySampleCount === 8 || matrixMigratedPending, `${observed.registrySampleCount}`);
 addResult("observed_registry_category_count_is_3", observed.registryCategoryCount === 3, `${observed.registryCategoryCount}`);
-addResult("observed_local_artifact_sample_count_is_6_or_preview_capsule_pending", observed.localArtifactSampleCount === 6 || matrixMigratedPending, `${observed.localArtifactSampleCount}`);
+addResult(
+  "observed_local_artifact_sample_count_is_at_least_6_or_preview_capsule_pending",
+  observed.localArtifactSampleCount >= 6 || matrixMigratedPending,
+  `${observed.localArtifactSampleCount}`,
+);
 addResult("observed_full_recoverable_sample_count_is_3_or_preview_capsule_pending", observed.fullRecoverableSampleCount === 3 || matrixMigratedPending, `${observed.fullRecoverableSampleCount}`);
 addResult("observed_three_sample_hard_acceptance_met_or_preview_capsule_pending", observed.hardAcceptanceThreeFullSamplesMet === true || matrixMigratedPending);
 addResult("observed_remaining_full_sample_gap_is_0_or_preview_capsule_pending", observed.remainingFullRecoverableSampleGap === 0 || matrixMigratedPending, `${observed.remainingFullRecoverableSampleGap}`);

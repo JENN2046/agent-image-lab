@@ -82,6 +82,7 @@ P5K 新增 portable failure capsule evidence 静态展示：`portable_failure_ca
 P5L 新增 failure capsule snapshot 回归：`validate_review_console_failure_capsule_snapshot.js` 固定 P5K 的 `portable_failure_capsule_evidence`、`portable_failure_capsule_evidence_list` 和 `failure_state_static_workbench_state.portable_failure_capsule_records`，防止后续静态面板漂移。
 P6 新增 multi-capsule accepted/failure dashboard：`multi_capsule_dashboard_state` 汇总当前 accepted=2 / failure=2 的 Git-portable capsules，展示 accepted/failure side-by-side resolved-by 关联、clone-portable / registry validator 状态和 future unified report shape；仍只用静态 mock / in-memory，不读取 `asset_archive/`、不加载 preview、不 fetch、不写文件、不调用 runtime。
 P6C 新增 registry report v2 静态展示：`registry_report_v2_state` 把 P6B 正式 accepted/failure capsule registry report v2 形状接回 Review Console，展示 totals、per-sample rows、resolved-by links 和 guard；它只从静态 capsule mock 派生，不执行 validator、不读取 `asset_archive/`、不加载 preview。
+P6I 新增 registry report v2 negative visibility：`registry_report_v2_negative_visibility_state` 把 P6G fail-closed negative states 做成可见静态面板，展示 `accepted_registry_failed`、`failure_registry_failed`、`missing_resolved_by_link`、`production_or_memory_guard_violation` 这 4 类场景；它只展示合成状态，不执行 validator、不读取 `asset_archive/`、不加载 preview、不 fetch、不写文件。
 草案输出还会携带 `review_result_protocol_static_handoff`，用于展示每个候选为什么 pass、为什么 reject、如何进入记忆草案，以及何时必须永远不得进入 production。
 审片结果协议面板还会显示 `review_protocol_guard_summary`：包括 `memory_forbidden_count`、`memory_forbidden_candidate_ids`、`never_production_candidate_ids`、`negative_guard_observed` 和 production candidate 创建阻断状态。
 草案输出还会携带 `review_decision_package_static_handoff`，用于展示 accepted/rejected sample 草案、memory delta 草案、production exclusion register，以及 `production_candidate_created=false`、`direct_memory_write_performed=false`、`accepted_samples_write_performed=false` 的决策包阻断状态。
@@ -139,6 +140,7 @@ v14.079 还用 `tests/schema_examples/review_report_protocol_final_closeout.exam
 - `portable_failure_capsule_evidence_list`
 - `multi_capsule_dashboard_state`
 - `registry_report_v2_state`
+- `registry_report_v2_negative_visibility_state`
 - `three_sample_gap_summary_state`
 - `recoverability_matrix_state`
 - `six_month_goal_gap_state`
@@ -162,6 +164,7 @@ v14.079 还用 `tests/schema_examples/review_report_protocol_final_closeout.exam
 `portable_failure_capsule_evidence` 必须作为本地静态 failure preview capsule 证据呈现；它只能展示 Git-tracked `preview.webp`、manifest、failure/review records、clone-portable validation、failure tags、resolved accepted sample 和 never-production route，不得读取文件、不得 fetch、不得加载 preview、不得创建/复制/转换图片、不得写 failure_samples、不得写 DailyNote/VCP memory、不得晋级 production_candidate 或声称 VCP runtime integration。
 `multi_capsule_dashboard_state` 必须作为本地静态 accepted/failure capsule 总览呈现；它只能汇总 `portable_preview_capsule_evidence_list` 与 `portable_failure_capsule_evidence_list` 的 mock / in-memory seed，展示 accepted=2、failure=2、resolved-by links、unified report shape 和 failure track expansion plan，不得读取 `asset_archive/`、不得要求旧 `runs/` source、不得写 accepted/failure samples、不得调用 runtime 或声称 VCP runtime integration。
 `registry_report_v2_state` 必须作为本地静态正式 report 展示面呈现；它只能把 P6B validator 的 accepted/failure report shape 显示到 UI 和 draft output，不得在浏览器执行 validator、不得读取 `asset_archive/`、不得加载 preview、不得 fetch、不得写文件、不得创建/复制/转换图片、不得声称 VCP runtime integration。
+`registry_report_v2_negative_visibility_state` 必须作为本地静态负向状态展示面呈现；它只能把 P6G validator 的 fail-closed negative-state classes 显示到 UI 和 draft output，明确 relation 断链和 guard violation 不能被 totals 掩盖，不得在浏览器执行 validator、不得读取 `asset_archive/`、不得加载 preview、不得 fetch、不得写文件、不得创建/复制/转换图片、不得声称 VCP runtime integration。
 `artifact_lifecycle_state_reader` 必须作为本地静态 lifecycle 读取者呈现；它只能展示 import/review/accepted_samples/blocker state 的内存解析结果，不能 fetch、写文件、调用 runtime、读取 VCPChat/VCPToolBox、写 accepted_samples、写 failure_samples、写 production_candidate、写 DailyNote 或写 VCP memory。
 `review_console_artifact_lifecycle_state_reader_draft_output_snapshot.example.json` 必须与 v14.169 reader 输出保持一致；它是静态回归证据，不是浏览器执行、accepted_samples 写入或 VCP runtime integration。
 `review_console_lifecycle_state_local_filter_controls.example.json` 必须验证本地筛选状态不会改变底层样片状态：`recoverable` 只显示 2 个已通过样片，`blocked` 只显示 pending lamp candidate，未知 filter 回落到 `all`。
@@ -204,3 +207,5 @@ v14.079 还用 `tests/schema_examples/review_report_protocol_final_closeout.exam
 `review_report_memory_admission_register.example.json` 必须验证 ReviewReport admission matrix 的 memory 路径只产生草案或永久禁止记录，且不允许 DailyNote、VCP memory、direct memory、accepted_samples 或 production candidate 写入；它是回归证据，不是执行授权。
 `review_report_memory_delta_draft_register.example.json` 必须验证 ReviewReport memory admission 的可起草候选只产生待人工审批的中文 memory_delta / failure lesson 草案，memory-forbidden 候选不得创建草案，且不允许任何真实记忆或生产写入；它是回归证据，不是执行授权。
 `review_report_protocol_final_closeout.example.json` 必须验证 ReviewReport 从 route summary 到 memory draft register 的本地证据链闭合，且不允许任何真实记忆、生产、provider、plugin、API 或图片动作；它是回归证据，不是执行授权。
+
+P6J 新增 unified capsule contract 静态展示：`unified_capsule_contract_report` 把 registry report v2、capsule manifest contract、relation status 和 guard status 合成一个 Review Console 可消费的产品 contract。它展示 `manifest_validation_status`、`relation_validation_status`、`guard_validation_status` 和 reviewer action；只使用静态 mock，不执行 validator、不读取 `asset_archive/`、不加载 preview、不 fetch、不写文件。

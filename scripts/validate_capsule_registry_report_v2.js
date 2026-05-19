@@ -4,6 +4,7 @@
 const { spawnSync } = require("node:child_process");
 const path = require("node:path");
 const { createRecoverabilityCore } = require("./lib/artifact_recoverability_core");
+const { validateAllCapsuleManifests } = require("./lib/capsule_manifest_contract");
 
 const root = path.resolve(__dirname, "..");
 const core = createRecoverabilityCore(root);
@@ -74,9 +75,10 @@ function rel(rootPath, fileName) {
   return `${rootPath.replace(/\/+$/, "")}/${fileName}`;
 }
 
-function readAcceptedSample(row) {
+function readAcceptedSample(row, manifestById = new Map()) {
   const sampleRoot = `asset_archive/accepted_samples/${row.sample_id}`;
   const manifest = core.parseJsonIfExists(rel(sampleRoot, "manifest.json")) || {};
+  const manifestContract = manifestById.get(row.sample_id) || {};
   return {
     lane: "accepted",
     sample_id: row.sample_id,
@@ -84,6 +86,10 @@ function readAcceptedSample(row) {
     status: row.status,
     registry_validator_status: "registry_driven_preview_capsules_verified",
     portable_validation_status: row.passed === true ? "passed" : "failed",
+    manifest_validation_status: manifestContract.manifest_validation_status || "manifest_contract_not_evaluated",
+    manifest_contract_passed: typeof manifestContract.passed === "boolean" ? manifestContract.passed === true : null,
+    relation_validation_status: "not_applicable",
+    guard_validation_status: row.failure_classes?.includes("production_or_memory_guard_violation") ? "failed" : "passed",
     manifest_ref: rel(sampleRoot, "manifest.json"),
     preview_ref: rel(sampleRoot, manifest.artifact?.preview?.path || "preview.webp"),
     preview_sha256: row.preview_sha256,
@@ -100,9 +106,10 @@ function readAcceptedSample(row) {
   };
 }
 
-function readFailureSample(row) {
+function readFailureSample(row, manifestById = new Map()) {
   const sampleRoot = `asset_archive/failure_samples/${row.sample_id}`;
   const manifest = core.parseJsonIfExists(rel(sampleRoot, "manifest.json")) || {};
+  const manifestContract = manifestById.get(row.sample_id) || {};
   const failureRecord = core.parseJsonIfExists(rel(sampleRoot, manifest.chain?.failure_record || "failure_record.json")) || {};
   const summary = failureRecord.failure_summary || {};
   return {
@@ -112,6 +119,10 @@ function readFailureSample(row) {
     status: row.status,
     registry_validator_status: "failure_sample_capsules_verified",
     portable_validation_status: row.passed === true ? "passed" : "failed",
+    manifest_validation_status: manifestContract.manifest_validation_status || "manifest_contract_not_evaluated",
+    manifest_contract_passed: typeof manifestContract.passed === "boolean" ? manifestContract.passed === true : null,
+    relation_validation_status: summary.resolved_by_accepted_sample ? "linked_pending_report_check" : "missing_resolved_by_link",
+    guard_validation_status: row.failure_classes?.includes("production_or_memory_guard_violation") ? "failed" : "passed",
     manifest_ref: rel(sampleRoot, "manifest.json"),
     preview_ref: rel(sampleRoot, manifest.artifact?.preview?.path || "preview.webp"),
     preview_sha256: row.preview_sha256,
@@ -144,9 +155,10 @@ function summarizeClassCounts(rows, relations) {
   };
 }
 
-function buildReport(acceptedRegistry, failureRegistry) {
-  const acceptedRows = (acceptedRegistry.samples || []).map(readAcceptedSample);
-  const failureRows = (failureRegistry.samples || []).map(readFailureSample);
+function buildReport(acceptedRegistry, failureRegistry, manifestContract = null) {
+  const manifestById = new Map((manifestContract?.samples || []).map((sample) => [sample.sample_id, sample]));
+  const acceptedRows = (acceptedRegistry.samples || []).map((row) => readAcceptedSample(row, manifestById));
+  const failureRows = (failureRegistry.samples || []).map((row) => readFailureSample(row, manifestById));
   const rows = acceptedRows.concat(failureRows);
   const acceptedIds = new Set(acceptedRows.map((row) => row.sample_id));
   const resolvedByLinks = failureRows.map((row) => ({
@@ -161,13 +173,22 @@ function buildReport(acceptedRegistry, failureRegistry) {
     accepted_is_reusable_positive_example: Boolean(row.resolved_by_accepted_sample && acceptedIds.has(row.resolved_by_accepted_sample)),
     failure_is_never_production: row.final_route === "failure_learning_only_never_production"
   }));
+  for (const row of failureRows) {
+    const relation = resolvedByLinks.find((item) => item.failure_sample_id === row.sample_id);
+    row.relation_validation_status = relation?.relation_status === "linked" ? "linked" : "missing_resolved_by_link";
+  }
 
+  const manifestFailedRows = rows.filter((row) => row.manifest_contract_passed !== true);
+  const relationFailedRows = [];
+  const guardFailedRows = rows.filter((row) => row.guard_validation_status !== "passed");
   const reportFailures = [];
   if (acceptedRegistry.passed !== true) reportFailures.push("accepted_registry_failed");
   if (failureRegistry.passed !== true) reportFailures.push("failure_registry_failed");
+  if (manifestContract && manifestContract.passed !== true) reportFailures.push("manifest_contract_failed");
   for (const relation of resolvedByLinks) {
     if (relation.relation_status !== "linked") {
       reportFailures.push(`missing_resolved_by_link:${relation.failure_sample_id}`);
+      relationFailedRows.push(relation.failure_sample_id);
     }
   }
 
@@ -204,7 +225,16 @@ function buildReport(acceptedRegistry, failureRegistry) {
       accepted_registry_status: acceptedRegistry.status,
       accepted_registry_report_version: acceptedRegistry.report_version,
       failure_registry_status: failureRegistry.status,
-      failure_registry_report_version: failureRegistry.report_version
+      failure_registry_report_version: failureRegistry.report_version,
+      manifest_contract_status: manifestContract?.status || "manifest_contract_not_evaluated",
+      manifest_contract_report_version: manifestContract?.report_version || null
+    },
+    contract_status: {
+      registry_passed: acceptedRegistry.passed === true && failureRegistry.passed === true,
+      manifest_passed: manifestContract ? manifestContract.passed === true : "not_evaluated",
+      relation_passed: relationFailedRows.length === 0,
+      guard_passed: guardFailedRows.length === 0,
+      overall_passed: reportFailures.length === 0
     },
     totals: {
       accepted: acceptedRows.length,
@@ -225,6 +255,10 @@ function buildReport(acceptedRegistry, failureRegistry) {
       "status",
       "registry_validator_status",
       "portable_validation_status",
+      "manifest_validation_status",
+      "manifest_contract_passed",
+      "relation_validation_status",
+      "guard_validation_status",
       "manifest_ref",
       "preview_ref",
       "chain_refs",
@@ -266,6 +300,17 @@ function evaluate(report, fixture, currentSurfaces) {
     report.failure_class_summary.failure_failed === 0 &&
     report.failure_class_summary.missing_resolved_by_link === 0 &&
     report.failure_class_summary.production_or_memory_guard_violation === 0);
+  add("contract_statuses_pass", report.contract_status.registry_passed === true &&
+    report.contract_status.manifest_passed === true &&
+    report.contract_status.relation_passed === true &&
+    report.contract_status.guard_passed === true &&
+    report.contract_status.overall_passed === true);
+  add("per_sample_contract_fields_present", report.per_sample_results.every((row) =>
+    typeof row.manifest_validation_status === "string" &&
+    row.manifest_contract_passed === true &&
+    typeof row.relation_validation_status === "string" &&
+    typeof row.guard_validation_status === "string"
+  ));
   add("old_runs_not_required", report.guard.old_runs_source_required_for_portable_validation === false);
   add("no_write_or_external_guard", report.guard.preview_creation_or_copy_performed === false &&
     report.guard.accepted_samples_write_performed === false &&
@@ -297,7 +342,8 @@ function main() {
   const failureRun = runJsonValidator(files.failureValidator, ["--require-at-least=1"]);
   const acceptedRegistry = acceptedRun.parsed || { passed: false, samples: [], status: "missing_accepted_report" };
   const failureRegistry = failureRun.parsed || { passed: false, samples: [], status: "missing_failure_report" };
-  const report = buildReport(acceptedRegistry, failureRegistry);
+  const manifestContract = validateAllCapsuleManifests(core);
+  const report = buildReport(acceptedRegistry, failureRegistry, manifestContract);
 
   const fixture = core.parseJsonIfExists(files.fixture)?.capsule_registry_report_v2 || {};
   const currentSurfaces = [

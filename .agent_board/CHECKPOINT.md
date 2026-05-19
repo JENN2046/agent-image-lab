@@ -1,4 +1,103 @@
+## Capsule Contract Productization
+
+```yaml
+phase: capsule_contract_productization
+status: completed_validated
+completed:
+  - replaced hardcoded accepted creator sample table with accepted registry-derived source resolution
+  - added capsule manifest contract schema and validators for accepted/failure capsules
+  - added fail-closed negative manifest contract validation
+  - extended registry report v2 with registry, manifest, relation, guard, and overall contract status
+  - exposed unified_capsule_contract_report in static Review Console UI and draft output
+validated:
+  - node scripts/validate_create_preview_capsule_registry_source.js
+  - node scripts/validate_capsule_manifest_contract.js
+  - node scripts/validate_capsule_manifest_contract_negative_cases.js
+  - node scripts/validate_capsule_registry_report_v2.js
+  - node scripts/validate_capsule_registry_report_v2_negative_states.js
+  - node scripts/validate_review_console_registry_report_v2_negative_visibility.js
+  - node scripts/validate_review_console_unified_capsule_contract.js
+  - git diff --check
+  - powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+not_performed:
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no runs mutation
+  - no image binary creation, copy, conversion, or commit
+  - no production candidate
+  - no commit, push, tag, release, or deploy
+next:
+  - exact-file commit-readiness review if the user wants a local commit package
+```
+## Capsule Contract Productization
+
+```yaml
+phase: capsule_contract_productization
+status: completed_validated
+completed:
+  - replaced hardcoded accepted creator sample table with accepted registry-derived source resolution
+  - added capsule manifest contract schema and validators for accepted/failure capsules
+  - added fail-closed negative manifest contract validation
+  - extended registry report v2 with registry, manifest, relation, guard, and overall contract status
+  - exposed unified_capsule_contract_report in static Review Console UI and draft output
+validated:
+  - node scripts/validate_create_preview_capsule_registry_source.js
+  - node scripts/validate_capsule_manifest_contract.js
+  - node scripts/validate_capsule_manifest_contract_negative_cases.js
+  - node scripts/validate_capsule_registry_report_v2.js
+  - node scripts/validate_capsule_registry_report_v2_negative_states.js
+  - node scripts/validate_review_console_registry_report_v2_negative_visibility.js
+  - node scripts/validate_review_console_unified_capsule_contract.js
+  - git diff --check
+  - powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+not_performed:
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no runs mutation
+  - no image binary creation, copy, conversion, or commit
+  - no production candidate
+  - no commit, push, tag, release, or deploy
+next:
+  - exact-file commit-readiness review if the user wants a local commit package
+```
 # CHECKPOINT.md — Agent Image Lab
+
+## P6I Review Console Registry Report v2 Negative Visibility
+
+```yaml
+phase: p6i_review_console_registry_report_v2_negative_visibility
+status: completed_validated
+completed:
+  - added registry_report_v2_negative_visibility_state to static draft output
+  - added a visible static Review Console panel for 4 fail-closed negative-state scenarios
+  - documented negative-state visibility mapping in FIELD_MAPPING.md and README.md
+  - added a golden snapshot fixture and dedicated validator entry for the new static surface
+  - changed accepted preview capsule creation to write under .tmp-* and rename into final position
+validated:
+  - node --check review_console/static_prototype/app.js
+  - node --check review_console/static_prototype/mock_data.js
+  - node --check scripts/validate_review_console_registry_report_v2_negative_visibility.js
+  - node --check scripts/create_preview_capsule.js
+  - node --check scripts/validate_v14_160_two_month_product_capability_closeout.js
+  - node scripts/validate_review_console_registry_report_v2_negative_visibility.js
+  - node scripts/validate_v14_160_two_month_product_capability_closeout.js
+  - git diff --check
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+not_performed:
+  - no validator runtime in browser
+  - no asset_archive file read
+  - no preview.webp load, render, copy, conversion, or creation
+  - no accepted_samples or failure_samples write
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no production candidate
+  - no push, tag, release, or deploy
+next:
+  - design registry-driven accepted capsule source and capsule manifest schema
+```
 
 ## P6H Push Review Warning Fixes
 

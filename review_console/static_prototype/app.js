@@ -32,6 +32,7 @@ const state = {
   artifact_dashboard_evidence: mock.artifact_recoverability_dashboard_evidence,
   portable_preview_capsule_evidence: mock.portable_preview_capsule_evidence,
   portable_preview_capsule_evidence_list: mock.portable_preview_capsule_evidence_list,
+  unified_capsule_contract_report: mock.unified_capsule_contract_report,
   portable_failure_capsule_evidence: mock.portable_failure_capsule_evidence,
   portable_failure_capsule_evidence_list: mock.portable_failure_capsule_evidence_list,
   artifact_lifecycle_state_reader: mock.artifact_lifecycle_state_reader_seed,
@@ -436,6 +437,67 @@ function renderMultiCapsuleDashboard() {
     <span>asset archive read: ${escapeHtml(dashboard.guard.asset_archive_read_performed)}</span>
     <span>preview copy: ${escapeHtml(dashboard.guard.preview_creation_or_copy_performed)}</span>
     <span>VCP runtime proven: ${escapeHtml(dashboard.guard.vcp_runtime_integration_proven)}</span>
+  `;
+}
+
+function registryReportV2NegativeVisibilityState() {
+  const seed = mock.registry_report_v2_negative_state_seed;
+  return {
+    phase: seed.phase,
+    source_validator_phase: seed.source_validator_phase,
+    source_validator_ref: seed.source_validator_ref,
+    report_version: seed.report_version,
+    status: seed.status,
+    execution_mode: "review_console_static_registry_report_v2_negative_visibility_only",
+    draft_output_key: seed.draft_output_key,
+    baseline_totals: seed.baseline_totals,
+    scenario_count: seed.scenario_count,
+    scenario_ids: seed.scenario_ids,
+    negative_state_classes: seed.negative_state_classes,
+    scenarios: seed.scenarios.map((scenario) => ({
+      scenario_id: scenario.scenario_id,
+      failure_class: scenario.failure_class,
+      severity: scenario.severity,
+      affected_lane: scenario.affected_lane,
+      affected_sample_ids: scenario.affected_sample_ids,
+      expected_report_status: scenario.expected_report_status,
+      visible_reason_cn: scenario.visible_reason_cn,
+      reviewer_action_cn: scenario.reviewer_action_cn
+    })),
+    fail_closed_contract: seed.fail_closed_contract,
+    guard: seed.guard
+  };
+}
+
+function renderRegistryReportV2NegativeVisibility() {
+  const stateView = registryReportV2NegativeVisibilityState();
+  qs("#registryReportV2NegativeSummary").innerHTML = `
+    <span>classes <strong>${escapeHtml(stateView.negative_state_classes.length)}</strong></span>
+    <span>scenarios <strong>${escapeHtml(stateView.scenario_count)}</strong></span>
+    <span>baseline <strong>${escapeHtml(`${stateView.baseline_totals.accepted}/${stateView.baseline_totals.failure}/${stateView.baseline_totals.total}`)}</strong></span>
+    <span>green allowed <strong>${escapeHtml(stateView.fail_closed_contract.report_can_stay_green)}</strong></span>
+  `;
+  qs("#registryReportV2NegativeRows").innerHTML = stateView.scenarios.map((scenario) => `
+    <article class="registry-report-v2-negative-card ${safeClassToken(scenario.severity)}">
+      <div class="protocol-card-head">
+        <strong>${escapeHtml(scenario.failure_class)}</strong>
+        <span>${escapeHtml(scenario.severity)}</span>
+      </div>
+      <dl>
+        <div><dt>Scenario</dt><dd>${escapeHtml(scenario.scenario_id)}</dd></div>
+        <div><dt>Lane</dt><dd>${escapeHtml(scenario.affected_lane)}</dd></div>
+        <div><dt>Affected samples</dt><dd>${inlineList(scenario.affected_sample_ids)}</dd></div>
+        <div><dt>Expected status</dt><dd>${escapeHtml(scenario.expected_report_status)}</dd></div>
+        <div><dt>Visible reason</dt><dd>${escapeHtml(scenario.visible_reason_cn)}</dd></div>
+        <div><dt>Reviewer action</dt><dd>${escapeHtml(scenario.reviewer_action_cn)}</dd></div>
+      </dl>
+    </article>
+  `).join("");
+  qs("#registryReportV2NegativeGuard").innerHTML = `
+    <span>static only: ${escapeHtml(stateView.guard.static_negative_state_view_only)}</span>
+    <span>asset archive read: ${escapeHtml(stateView.guard.asset_archive_read_performed)}</span>
+    <span>preview loaded: ${escapeHtml(stateView.guard.preview_loaded_or_rendered)}</span>
+    <span>runtime proven: ${escapeHtml(stateView.guard.vcp_runtime_integration_proven)}</span>
   `;
 }
 
@@ -3046,6 +3108,35 @@ function buildMemoryDelta(memoryApproval) {
   };
 }
 
+function unifiedCapsuleContractReportState() {
+  return state.unified_capsule_contract_report;
+}
+
+function renderUnifiedCapsuleContractReport() {
+  const report = unifiedCapsuleContractReportState();
+  const summary = qs("#unifiedCapsuleContractSummary");
+  const rows = qs("#unifiedCapsuleContractRows");
+  const guard = qs("#unifiedCapsuleContractGuard");
+  if (!summary || !rows || !guard || !report) return;
+  summary.innerHTML = [
+    ["overall", report.contract_status.overall_passed ? "passed" : "failed"],
+    ["registry", report.contract_status.registry_passed ? "passed" : "failed"],
+    ["manifest", report.contract_status.manifest_passed ? "passed" : "failed"],
+    ["relation", report.contract_status.relation_passed ? "passed" : "failed"],
+    ["guard", report.contract_status.guard_passed ? "passed" : "failed"],
+    ["total", String(report.totals.total)]
+  ].map(([label, value]) => `<span><strong>${label}</strong>${value}</span>`).join("");
+  rows.innerHTML = report.samples.map((sample) => `
+    <article class="registry-report-v2-card">
+      <strong>${sample.sample_id}</strong>
+      <p>${sample.lane} | manifest: ${sample.manifest_validation_status} | relation: ${sample.relation_validation_status} | guard: ${sample.guard_validation_status}</p>
+      <p>${sample.reviewer_action_cn}</p>
+    </article>
+  `).join("");
+  guard.innerHTML = Object.entries(report.guard)
+    .map(([key, value]) => `<span>${key}: ${value}</span>`)
+    .join("");
+}
 function renderDraft() {
   const memoryApproval = approvalPayload();
   const humanTotal = totalFrom(state.humanScores);
@@ -3060,6 +3151,8 @@ function renderDraft() {
     review_evidence_blocker_adapter_negative_static_handoff: state.review_evidence_blocker_adapter_negative_static_handoff,
     multi_capsule_dashboard_state: multiCapsuleDashboardState(),
     registry_report_v2_state: registryReportV2State(),
+    registry_report_v2_negative_visibility_state: registryReportV2NegativeVisibilityState(),
+    unified_capsule_contract_report: unifiedCapsuleContractReportState(),
     failure_state_static_workbench_state: failureStateStaticWorkbenchState(),
     artifact_recoverability_dashboard_evidence: state.artifact_dashboard_evidence,
     portable_preview_capsule_evidence: state.portable_preview_capsule_evidence,
@@ -3149,6 +3242,8 @@ function renderAll() {
   renderArtifactEvidenceDashboard();
   renderMultiCapsuleDashboard();
   renderRegistryReportV2State();
+  renderUnifiedCapsuleContractReport();
+  renderRegistryReportV2NegativeVisibility();
   renderArtifactLifecycleStateReader();
   renderArtifactPromptCompletionPanel();
   renderArtifactDetailDrawer();

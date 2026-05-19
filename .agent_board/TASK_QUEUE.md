@@ -4,6 +4,33 @@ Persistent task queue for guarded local work.
 
 This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin calls, DailyNote writes, API calls, image creation, VCP memory writes, pushes, tags, releases, dependency changes, destructive commands, or writes outside the workspace root.
 
+## Current Capsule Contract Productization
+
+```text
+Current product-mainline task: capsule_contract_productization.
+Status: completed validated.
+Purpose: turn preview capsule handling into a product-core contract across registry-driven creator input, manifest validation, registry report v2, and Review Console static consumption.
+Changed files: scripts/create_preview_capsule.js, scripts/lib/accepted_sample_registry_source.js, scripts/lib/capsule_manifest_contract.js, scripts/validate_create_preview_capsule_registry_source.js, scripts/validate_capsule_manifest_contract.js, scripts/validate_capsule_manifest_contract_negative_cases.js, scripts/validate_capsule_registry_report_v2.js, scripts/validate_mvp.ps1, schemas/capsule_manifest_contract.schema.yaml, tests/schema_examples/CAPSULE_MANIFEST_CONTRACT.example.json, review_console/static_prototype app/mock/index/styles/README/FIELD_MAPPING, docs/CAPSULE_CONTRACT_PRODUCTIZATION_CLOSEOUT.md, README.md, .agent_board resume surfaces.
+Evidence: creator no longer keeps hardcoded SAMPLES; manifest contract validates accepted=2/failure=2; registry report v2 exposes registry/manifest/relation/guard/overall status; Review Console draft output includes unified_capsule_contract_report.
+Validation passed: new creator, manifest, registry, Review Console validators; git diff --check; scripts/validate_mvp.ps1.
+Not performed: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no runs mutation, no image binary creation/copy/conversion, no production candidate, no tag/release/deploy/push.
+Recommended next: exact-file commit-readiness review, then local commit only if explicitly authorized.
+```
+
+---
+## Current P6I Review Console Registry Report v2 Negative Visibility
+
+```text
+Current product-mainline task: p6i_review_console_registry_report_v2_negative_visibility.
+Status: completed validated.
+Purpose: expose P6G fail-closed negative states in the static Review Console and draft output so relation drift and guard violations cannot hide behind clean totals; address external review P1 by making accepted preview capsule creation use temp-dir then final rename.
+Changed files: review_console/static_prototype/app.js, mock_data.js, index.html, styles.css, FIELD_MAPPING.md, README.md, tests/schema_examples/P6I_REVIEW_CONSOLE_REGISTRY_REPORT_V2_NEGATIVE_VISIBILITY.example.json, scripts/validate_review_console_registry_report_v2_negative_visibility.js, scripts/create_preview_capsule.js, scripts/validate_v14_160_two_month_product_capability_closeout.js, scripts/validate_mvp.ps1, docs/P6I_REVIEW_CONSOLE_REGISTRY_REPORT_V2_NEGATIVE_VISIBILITY.md, README.md, .agent_board resume surfaces.
+Evidence: registry_report_v2_negative_visibility_state shows 4 negative-state classes and 4 synthetic fail-closed scenarios with visible reviewer actions.
+Validation passed: node --check for changed JS validators/static files; node scripts/validate_review_console_registry_report_v2_negative_visibility.js; node scripts/validate_v14_160_two_month_product_capability_closeout.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Not performed: no browser validator execution, no asset_archive read, no preview load/render/copy/conversion/creation, no accepted/failure capsule mutation, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: design registry-driven accepted capsule source and capsule manifest schema as a product-core follow-up.
+```
+
 ---
 
 ## Current P6H Push Review Warning Fixes

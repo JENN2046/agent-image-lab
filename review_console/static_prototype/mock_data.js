@@ -245,7 +245,211 @@ window.REVIEW_CONSOLE_MOCK = {
       DailyNote_write_allowed: false
     }
   ],
-  artifact_lifecycle_state_reader_seed: {
+  registry_report_v2_negative_state_seed: {
+    phase: "p6i_review_console_registry_report_v2_negative_visibility",
+    source_validator_phase: "p6g_registry_report_v2_negative_state_design",
+    source_validator_ref: "scripts/validate_capsule_registry_report_v2_negative_states.js",
+    draft_output_key: "registry_report_v2_negative_visibility_state",
+    status: "negative_states_visible_fail_closed",
+    report_version: "accepted_failure_capsule_registry_report_v2_negative_visibility_v1",
+    baseline_totals: {
+      accepted: 2,
+      failure: 2,
+      total: 4,
+      passed: 4,
+      failed: 0
+    },
+    scenario_count: 4,
+    scenario_ids: [
+      "accepted_registry_failed_case",
+      "failure_registry_failed_case",
+      "missing_resolved_by_link_case",
+      "production_or_memory_guard_violation_case"
+    ],
+    negative_state_classes: [
+      "accepted_registry_failed",
+      "failure_registry_failed",
+      "missing_resolved_by_link",
+      "production_or_memory_guard_violation"
+    ],
+    scenarios: [
+      {
+        scenario_id: "accepted_registry_failed_case",
+        failure_class: "accepted_registry_failed",
+        severity: "critical",
+        affected_lane: "accepted",
+        affected_sample_ids: [
+          "accepted_french_summer_rattan_bucket_bag_001"
+        ],
+        expected_report_status: "failed_closed",
+        visible_reason_cn: "accepted capsule registry 失配时，正式报告必须转为 failed_closed，不能继续显示 clean pass。",
+        reviewer_action_cn: "先修复 accepted registry 绑定，再恢复主报告显示。"
+      },
+      {
+        scenario_id: "failure_registry_failed_case",
+        failure_class: "failure_registry_failed",
+        severity: "critical",
+        affected_lane: "failure",
+        affected_sample_ids: [
+          "failure_tennis_wallet_v7_21_001"
+        ],
+        expected_report_status: "failed_closed",
+        visible_reason_cn: "failure capsule registry 失配时，failure lane 必须整体阻断，不能继续显示可复用学习闭环。",
+        reviewer_action_cn: "先修复 failure capsule registry，再复核 resolved-by 关系。"
+      },
+      {
+        scenario_id: "missing_resolved_by_link_case",
+        failure_class: "missing_resolved_by_link",
+        severity: "high",
+        affected_lane: "relation",
+        affected_sample_ids: [
+          "failure_french_summer_rattan_bag_v7_29_001",
+          "accepted_french_summer_rattan_bucket_bag_001"
+        ],
+        expected_report_status: "failed_closed",
+        visible_reason_cn: "failure -> accepted 的 resolved-by 链缺失时，Review Console 必须明确暴露断链状态。",
+        reviewer_action_cn: "补回 resolved-by relation 后，才允许恢复 clean summary。"
+      },
+      {
+        scenario_id: "production_or_memory_guard_violation_case",
+        failure_class: "production_or_memory_guard_violation",
+        severity: "critical",
+        affected_lane: "guard",
+        affected_sample_ids: [
+          "failure_french_summer_rattan_bag_v7_29_001",
+          "failure_tennis_wallet_v7_21_001"
+        ],
+        expected_report_status: "failed_closed",
+        visible_reason_cn: "任何 production 或 memory guard 被放松，都必须在静态台面上被看见，而不是被 totals 掩盖。",
+        reviewer_action_cn: "恢复 never-production / no-memory-write guard 后，才能重新视为通过。"
+      }
+    ],
+    fail_closed_contract: {
+      report_can_stay_green: false,
+      relation_can_be_hidden: false,
+      guard_violation_can_be_summarized_away: false,
+      synthetic_visibility_only: true
+    },
+    guard: {
+      static_negative_state_view_only: true,
+      derived_from_static_capsule_mock: true,
+      validator_runtime_executed_in_browser: false,
+      old_runs_source_required_for_portable_validation: false,
+      fetch_performed: false,
+      file_write_performed: false,
+      asset_archive_read_performed: false,
+      preview_loaded_or_rendered: false,
+      preview_creation_or_copy_performed: false,
+      accepted_samples_write_performed: false,
+      failure_samples_write_performed: false,
+      production_candidate_write_performed: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      image_generation_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      runtime_execution_performed: false,
+      real_manifest_read_performed: false,
+      real_vcpchat_read_performed: false,
+      real_vcptoolbox_read_performed: false,
+      push_tag_release_deploy_performed: false,
+      vcp_runtime_integration_proven: false
+    }
+  },
+  unified_capsule_contract_report: {
+    phase: "capsule_contract_productization",
+    report_version: "unified_capsule_contract_v1",
+    status: "capsule_contract_verified",
+    source_contracts: {
+      registry_report_v2: "accepted_failure_capsule_registry_report_v2",
+      manifest_contract: "capsule_manifest_contract_v1",
+      review_console_contract: "review_console_static_unified_capsule_contract_v1"
+    },
+    contract_status: {
+      registry_passed: true,
+      manifest_passed: true,
+      relation_passed: true,
+      guard_passed: true,
+      overall_passed: true
+    },
+    totals: {
+      accepted: 2,
+      failure: 2,
+      total: 4,
+      passed: 4,
+      failed: 0
+    },
+    samples: [
+      {
+        lane: "accepted",
+        sample_id: "accepted_french_summer_rattan_bucket_bag_001",
+        registry_validator_status: "registry_driven_preview_capsules_verified",
+        portable_validation_status: "passed",
+        manifest_validation_status: "capsule_manifest_contract_verified",
+        manifest_contract_passed: true,
+        relation_validation_status: "not_applicable",
+        guard_validation_status: "passed",
+        reviewer_action_cn: "可作为正向样本复用；继续禁止 production / memory 自动写入。"
+      },
+      {
+        lane: "accepted",
+        sample_id: "accepted_product_still_life_tennis_wallet_001",
+        registry_validator_status: "registry_driven_preview_capsules_verified",
+        portable_validation_status: "passed",
+        manifest_validation_status: "capsule_manifest_contract_verified",
+        manifest_contract_passed: true,
+        relation_validation_status: "not_applicable",
+        guard_validation_status: "passed",
+        reviewer_action_cn: "可作为正向样本复用；继续禁止 production / memory 自动写入。"
+      },
+      {
+        lane: "failure",
+        sample_id: "failure_french_summer_rattan_bag_v7_29_001",
+        registry_validator_status: "failure_sample_capsules_verified",
+        portable_validation_status: "passed",
+        manifest_validation_status: "capsule_manifest_contract_verified",
+        manifest_contract_passed: true,
+        relation_validation_status: "linked",
+        resolved_by_accepted_sample: "accepted_french_summer_rattan_bucket_bag_001",
+        guard_validation_status: "passed",
+        reviewer_action_cn: "作为 failure learning 复盘；只允许映射到 accepted 样本，不允许生产晋级。"
+      },
+      {
+        lane: "failure",
+        sample_id: "failure_tennis_wallet_v7_21_001",
+        registry_validator_status: "failure_sample_capsules_verified",
+        portable_validation_status: "passed",
+        manifest_validation_status: "capsule_manifest_contract_verified",
+        manifest_contract_passed: true,
+        relation_validation_status: "linked",
+        resolved_by_accepted_sample: "accepted_product_still_life_tennis_wallet_001",
+        guard_validation_status: "passed",
+        reviewer_action_cn: "作为 failure learning 复盘；只允许映射到 accepted 样本，不允许生产晋级。"
+      }
+    ],
+    guard: {
+      static_contract_view_only: true,
+      validator_runtime_executed_in_browser: false,
+      asset_archive_read_performed: false,
+      preview_loaded_or_rendered: false,
+      preview_creation_or_copy_performed: false,
+      accepted_samples_write_performed: false,
+      failure_samples_write_performed: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      image_generation_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      runtime_execution_performed: false,
+      real_manifest_read_performed: false,
+      real_vcpchat_read_performed: false,
+      real_vcptoolbox_read_performed: false,
+      production_candidate_write_performed: false,
+      push_tag_release_deploy_performed: false
+    }
+  },  artifact_lifecycle_state_reader_seed: {
     version: "v1",
     phase: "v14_169_review_console_artifact_lifecycle_state_reader",
     source_mode: "project_local_static_fixture",

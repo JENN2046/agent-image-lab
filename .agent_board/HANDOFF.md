@@ -1,4 +1,33 @@
+## Current Handoff Update — Capsule Contract Productization
+
+```text
+Status: capsule_contract_productization completed_validated.
+Reason: implement the one-week product-core mainline by making creator input registry-driven, adding a capsule manifest contract, carrying manifest/relation/guard state into registry report v2, and exposing one unified Review Console contract.
+Execution mode: A4.8 local product-core implementation.
+Validation record: docs/CAPSULE_CONTRACT_PRODUCTIZATION_CLOSEOUT.md.
+Changed creator: scripts/create_preview_capsule.js now derives accepted sample configuration from accepted_samples/accepted_sample_registry.yaml instead of hardcoded SAMPLES.
+Changed contract: schemas/capsule_manifest_contract.schema.yaml plus manifest validators cover accepted/failure capsule manifests and negative cases.
+Changed report: scripts/validate_capsule_registry_report_v2.js now exposes registry_passed, manifest_passed, relation_passed, guard_passed, and overall_passed.
+Changed Review Console: unified_capsule_contract_report shows per-sample manifest_validation_status, relation_validation_status, guard_validation_status, and reviewer action.
+Validated: node scripts/validate_create_preview_capsule_registry_source.js; node scripts/validate_capsule_manifest_contract.js; node scripts/validate_capsule_manifest_contract_negative_cases.js; node scripts/validate_capsule_registry_report_v2.js; node scripts/validate_capsule_registry_report_v2_negative_states.js; node scripts/validate_review_console_registry_report_v2_negative_visibility.js; node scripts/validate_review_console_unified_capsule_contract.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1.
+Not performed: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no runs mutation, no image binary creation/copy/conversion, no production candidate, no commit/tag/release/deploy/push.
+Recommended next: exact-file commit-readiness review, then local commit only if explicitly authorized.
+```
 # HANDOFF.md — Agent Image Lab
+
+## Current Handoff Update — P6I Review Console Registry Report v2 Negative Visibility
+
+```text
+Status: p6i_review_console_registry_report_v2_negative_visibility completed_validated.
+Reason: make P6G fail-closed negative states visible inside the static Review Console and draft output, and address external review P1 for accepted preview capsule atomic creation.
+Execution mode: A4.8 static Review Console negative-state visibility.
+Changed surface: registry_report_v2_negative_visibility_state.
+Changed capsule creator: scripts/create_preview_capsule.js now writes accepted preview capsule outputs under .tmp-* before final rename.
+Visible classes: accepted_registry_failed, failure_registry_failed, missing_resolved_by_link, production_or_memory_guard_violation.
+Validated: node --check review_console/static_prototype/app.js; node --check review_console/static_prototype/mock_data.js; node --check scripts/validate_review_console_registry_report_v2_negative_visibility.js; node --check scripts/create_preview_capsule.js; node --check scripts/validate_v14_160_two_month_product_capability_closeout.js; node scripts/validate_review_console_registry_report_v2_negative_visibility.js; node scripts/validate_v14_160_two_month_product_capability_closeout.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
+Not performed: no validator runtime in browser, no asset_archive read, no preview load/render/copy/conversion/creation, no accepted/failure capsule mutation, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: design registry-driven accepted capsule source and capsule manifest schema.
+```
 
 ## Current Handoff Update — P6H Push Review Warning Fixes
 

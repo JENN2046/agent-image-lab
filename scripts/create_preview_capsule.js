@@ -5,48 +5,11 @@ const crypto = require("node:crypto");
 const fs = require("node:fs");
 const path = require("node:path");
 const sharp = require("sharp");
+const { createRecoverabilityCore } = require("./lib/artifact_recoverability_core");
+const { loadAcceptedSampleFromRegistry } = require("./lib/accepted_sample_registry_source");
 
 const repoRoot = path.resolve(__dirname, "..");
-
-const SAMPLES = {
-  accepted_product_still_life_tennis_wallet_001: {
-    sampleId: "accepted_product_still_life_tennis_wallet_001",
-    sourceImage:
-      "runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg",
-    targetRoot: "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001",
-    registryRef: "accepted_samples/accepted_sample_registry.yaml",
-    categoryRef: "accepted_samples/categories/product_still_life.yaml",
-    reviewDocRef: "docs/281_v7_24_native_doubao_v3_post_run_review_accepted_candidate.md",
-    promptPackageRef:
-      "prompts/image_generation/product_still_life_outdoor_tennis_wallet_hero_no_text_v3.yaml",
-    sourcePhase: "v7_24",
-    category: "product_still_life",
-    assetStatus: "accepted_candidate",
-    providerType: "direct_api",
-    pluginId: "NativeDoubaoImage",
-    model: "doubao-seedream-5-0-260128",
-    requiredLongEdge: 512,
-  },
-  accepted_french_summer_rattan_bucket_bag_001: {
-    sampleId: "accepted_french_summer_rattan_bucket_bag_001",
-    sourceImage:
-      "runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg",
-    targetRoot: "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001",
-    registryRef: "accepted_samples/accepted_sample_registry.yaml",
-    categoryRef: "accepted_samples/categories/fashion_lifestyle_still_life.yaml",
-    reviewDocRef:
-      "docs/286_v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_post_run_review_accepted_candidate.md",
-    promptPackageRef:
-      "prompts/image_generation/product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v2.yaml",
-    sourcePhase: "v7_31",
-    category: "fashion_lifestyle_still_life",
-    assetStatus: "accepted_candidate",
-    providerType: "direct_api",
-    pluginId: "NativeDoubaoImage",
-    model: "doubao-seedream-5-0-260128",
-    requiredLongEdge: 512,
-  },
-};
+const core = createRecoverabilityCore(repoRoot);
 
 function repoPath(relativePath) {
   const resolved = path.resolve(repoRoot, relativePath);
@@ -86,12 +49,54 @@ function requireExists(relativePath, label) {
   }
 }
 
+function capsulePaths(sample) {
+  return {
+    manifest: `${sample.targetRoot}/manifest.json`,
+    preview: `${sample.targetRoot}/preview.webp`,
+    importRecord: `${sample.targetRoot}/import_record.json`,
+    reviewRecord: `${sample.targetRoot}/review_record.json`,
+    approvalRecord: `${sample.targetRoot}/approval_record.json`,
+  };
+}
+
+function tempTargetRoot(sample) {
+  return `asset_archive/accepted_samples/.tmp-${sample.sampleId}-${process.pid}-${Date.now()}`;
+}
+
+function removeTempTarget(relativePath) {
+  const resolved = repoPath(relativePath);
+  const relative = path.relative(repoRoot, resolved).replace(/\\/g, "/");
+  if (!relative.startsWith("asset_archive/accepted_samples/.tmp-")) {
+    throw new Error(`refusing to remove non-temp capsule path: ${relativePath}`);
+  }
+  fs.rmSync(resolved, { recursive: true, force: true });
+}
+
 function assertTargetClean(sample) {
   const targetRoot = repoPath(sample.targetRoot);
   if (!fs.existsSync(targetRoot)) return;
   const entries = fs.readdirSync(targetRoot).filter((entry) => entry !== ".gitkeep");
   if (entries.length > 0) {
     throw new Error(`target capsule directory is not empty: ${sample.targetRoot}`);
+  }
+}
+
+function readArg(name) {
+  const prefix = `--${name}=`;
+  const found = process.argv.find((arg) => arg.startsWith(prefix));
+  return found ? found.slice(prefix.length) : null;
+}
+
+function resolveSampleFromRegistry(sampleId) {
+  return loadAcceptedSampleFromRegistry(core, sampleId);
+}
+
+function validateCliAgainstRegistry(sample, sourceImage, longEdge) {
+  if (sourceImage && sourceImage !== sample.sourceImage) {
+    throw new Error(`source image does not match accepted registry image_path: ${sourceImage}`);
+  }
+  if (longEdge && Number(longEdge) !== sample.requiredLongEdge) {
+    throw new Error(`long edge does not match accepted registry preview long_edge: ${longEdge}`);
   }
 }
 
@@ -102,197 +107,127 @@ async function createCapsule(sample) {
   requireExists(sample.reviewDocRef, "review document");
   assertTargetClean(sample);
 
-  fs.mkdirSync(repoPath(sample.targetRoot), { recursive: true });
-
-  const paths = {
-    manifest: `${sample.targetRoot}/manifest.json`,
-    preview: `${sample.targetRoot}/preview.webp`,
-    importRecord: `${sample.targetRoot}/import_record.json`,
-    reviewRecord: `${sample.targetRoot}/review_record.json`,
-    approvalRecord: `${sample.targetRoot}/approval_record.json`,
-  };
-
-  const plannedFiles = Object.values(paths);
+  const finalPaths = capsulePaths(sample);
+  const plannedFiles = Object.values(finalPaths);
   for (const plannedFile of plannedFiles) {
     if (fs.existsSync(repoPath(plannedFile))) {
       throw new Error(`refusing to overwrite existing capsule file: ${plannedFile}`);
     }
   }
 
-  await sharp(repoPath(sample.sourceImage))
-    .rotate()
-    .resize({
-      width: sample.requiredLongEdge,
-      height: sample.requiredLongEdge,
-      fit: "inside",
-      withoutEnlargement: true,
-    })
-    .webp({ quality: 90 })
-    .toFile(repoPath(paths.preview));
+  const tempSample = { ...sample, targetRoot: tempTargetRoot(sample) };
+  const tempPaths = capsulePaths(tempSample);
+  fs.mkdirSync(repoPath(tempSample.targetRoot), { recursive: true });
 
-  const previewMetadata = await sharp(repoPath(paths.preview)).metadata();
-  const previewLongEdge = Math.max(previewMetadata.width || 0, previewMetadata.height || 0);
-  if (previewMetadata.format !== "webp" || previewLongEdge !== sample.requiredLongEdge) {
-    throw new Error(
-      `preview validation failed: format=${previewMetadata.format}, long_edge=${previewLongEdge}`
-    );
-  }
+  try {
+    await sharp(repoPath(sample.sourceImage))
+      .rotate()
+      .resize({ width: sample.requiredLongEdge, height: sample.requiredLongEdge, fit: "inside", withoutEnlargement: true })
+      .webp({ quality: 90 })
+      .toFile(repoPath(tempPaths.preview));
 
-  const previewSha256 = sha256File(paths.preview);
-  const registryText = readText(sample.registryRef);
-  const sampleBlock = extractRegistrySampleBlock(registryText, sample.sampleId);
-  if (!sampleBlock) {
-    throw new Error(`sample not found in registry: ${sample.sampleId}`);
-  }
+    const previewMetadata = await sharp(repoPath(tempPaths.preview)).metadata();
+    const previewLongEdge = Math.max(previewMetadata.width || 0, previewMetadata.height || 0);
+    if (previewMetadata.format !== "webp" || previewLongEdge !== sample.requiredLongEdge) {
+      throw new Error(`preview validation failed: format=${previewMetadata.format}, long_edge=${previewLongEdge}`);
+    }
 
-  const createdAt = new Date().toISOString();
-  const commonGuard = {
-    provider_contact_performed: false,
-    plugin_call_performed: false,
-    api_call_performed: false,
-    image_generation_performed: false,
-    DailyNote_write_performed: false,
-    VCP_memory_write_performed: false,
-    runtime_execution_performed: false,
-    real_manifest_read_performed: false,
-    real_vcpchat_read_performed: false,
-    real_vcptoolbox_read_performed: false,
-  };
+    const previewSha256 = sha256File(tempPaths.preview);
+    const registryText = readText(sample.registryRef);
+    const sampleBlock = extractRegistrySampleBlock(registryText, sample.sampleId);
+    if (!sampleBlock) throw new Error(`sample not found in registry: ${sample.sampleId}`);
 
-  writeJson(paths.importRecord, {
-    record_type: "git_portable_preview_capsule_import_record",
-    version: "v1",
-    sample_id: sample.sampleId,
-    created_at: createdAt,
-    source: {
-      source_phase: sample.sourcePhase,
-      source_image_path: sample.sourceImage,
-      source_image_git_tracked: false,
-      source_image_hash_recorded: false,
-      registry_ref: sample.registryRef,
-      category_ref: sample.categoryRef,
-      prompt_package_ref: sample.promptPackageRef,
-    },
-    imported_artifact: {
-      path: "preview.webp",
-      format: "webp",
-      long_edge: sample.requiredLongEdge,
-      sha256: previewSha256,
-      git_tracked: true,
-      width: previewMetadata.width,
-      height: previewMetadata.height,
-    },
-    guard: commonGuard,
-  });
+    const createdAt = new Date().toISOString();
+    const commonGuard = {
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      image_generation_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      runtime_execution_performed: false,
+      real_manifest_read_performed: false,
+      real_vcpchat_read_performed: false,
+      real_vcptoolbox_read_performed: false,
+    };
 
-  writeJson(paths.reviewRecord, {
-    record_type: "git_portable_preview_capsule_review_record",
-    version: "v1",
-    sample_id: sample.sampleId,
-    created_at: createdAt,
-    review_doc_ref: sample.reviewDocRef,
-    registry_sample_block: sampleBlock,
-    review_summary: {
-      asset_status: sample.assetStatus,
-      category: sample.category,
-      source_phase: sample.sourcePhase,
-      commercial_use_level: "accepted_candidate",
-      memory_suitability: false,
-    },
-    guard: commonGuard,
-  });
-
-  writeJson(paths.approvalRecord, {
-    record_type: "git_portable_preview_capsule_approval_record",
-    version: "v1",
-    sample_id: sample.sampleId,
-    created_at: createdAt,
-    approval_source_ref: sample.reviewDocRef,
-    approval_basis: "existing accepted_sample_registry entry and accepted_candidate post-run review",
-    approval_state: {
-      accepted_sample_registered: true,
-      portable_preview_capsule_creation_authorized_by_user: true,
-      production_candidate_authorized: false,
-      memory_write_authorized: false,
-      DailyNote_write_authorized: false,
-    },
-    guard: commonGuard,
-  });
-
-  writeJson(paths.manifest, {
-    manifest_type: "git_portable_preview_capsule_manifest",
-    version: "v1",
-    sample_id: sample.sampleId,
-    created_at: createdAt,
-    artifact: {
-      preview: {
-        path: "preview.webp",
-        format: "webp",
-        long_edge: sample.requiredLongEdge,
-        width: previewMetadata.width,
-        height: previewMetadata.height,
-        sha256: previewSha256,
-        git_tracked: true,
+    writeJson(tempPaths.importRecord, {
+      record_type: "git_portable_preview_capsule_import_record",
+      version: "v1",
+      sample_id: sample.sampleId,
+      created_at: createdAt,
+      source: {
+        source_phase: sample.sourcePhase,
+        source_image_path: sample.sourceImage,
+        source_image_git_tracked: false,
+        source_image_hash_recorded: false,
+        registry_ref: sample.registryRef,
+        category_ref: sample.categoryRef,
+        prompt_package_ref: sample.promptPackageRef,
+        registry_driven_source: true,
       },
-      original: {
-        git_tracked: false,
-        sha256_in_manifest: false,
-        required_for_portable_validation: false,
-      },
-    },
-    chain: {
-      import_record: "import_record.json",
-      review_record: "review_record.json",
-      approval_record: "approval_record.json",
-    },
-    source_refs: {
-      registry_ref: sample.registryRef,
-      category_ref: sample.categoryRef,
+      imported_artifact: { path: "preview.webp", format: "webp", long_edge: sample.requiredLongEdge, sha256: previewSha256, git_tracked: true, width: previewMetadata.width, height: previewMetadata.height },
+      guard: commonGuard,
+    });
+
+    writeJson(tempPaths.reviewRecord, {
+      record_type: "git_portable_preview_capsule_review_record",
+      version: "v1",
+      sample_id: sample.sampleId,
+      created_at: createdAt,
       review_doc_ref: sample.reviewDocRef,
-      prompt_package_ref: sample.promptPackageRef,
-    },
-    guard: commonGuard,
-  });
+      registry_sample_block: sampleBlock,
+      review_summary: { asset_status: sample.assetStatus, category: sample.category, source_phase: sample.sourcePhase, commercial_use_level: sample.assetStatus, memory_suitability: false },
+      guard: commonGuard,
+    });
 
-  return {
-    sample_id: sample.sampleId,
-    target_root: sample.targetRoot,
-    preview: {
-      path: paths.preview,
-      width: previewMetadata.width,
-      height: previewMetadata.height,
-      long_edge: previewLongEdge,
-      sha256: previewSha256,
-    },
-    created_files: plannedFiles,
-  };
+    writeJson(tempPaths.approvalRecord, {
+      record_type: "git_portable_preview_capsule_approval_record",
+      version: "v1",
+      sample_id: sample.sampleId,
+      created_at: createdAt,
+      approval_source_ref: sample.reviewDocRef,
+      approval_basis: "existing accepted_sample_registry entry and accepted_candidate post-run review",
+      approval_state: { accepted_sample_registered: true, portable_preview_capsule_creation_authorized_by_user: true, production_candidate_authorized: false, memory_write_authorized: false, DailyNote_write_authorized: false },
+      guard: commonGuard,
+    });
+
+    writeJson(tempPaths.manifest, {
+      manifest_type: "git_portable_preview_capsule_manifest",
+      version: "v1",
+      sample_id: sample.sampleId,
+      created_at: createdAt,
+      artifact: {
+        preview: { path: "preview.webp", format: "webp", long_edge: sample.requiredLongEdge, width: previewMetadata.width, height: previewMetadata.height, sha256: previewSha256, git_tracked: true },
+        original: { git_tracked: false, sha256_in_manifest: false, required_for_portable_validation: false },
+      },
+      chain: { import_record: "import_record.json", review_record: "review_record.json", approval_record: "approval_record.json" },
+      source_refs: { registry_ref: sample.registryRef, category_ref: sample.categoryRef, review_doc_ref: sample.reviewDocRef, prompt_package_ref: sample.promptPackageRef },
+      guard: commonGuard,
+    });
+
+    fs.renameSync(repoPath(tempSample.targetRoot), repoPath(sample.targetRoot));
+
+    return { sample_id: sample.sampleId, target_root: sample.targetRoot, registry_driven_source: true, preview: { path: finalPaths.preview, width: previewMetadata.width, height: previewMetadata.height, long_edge: previewLongEdge, sha256: previewSha256 }, created_files: plannedFiles };
+  } catch (error) {
+    removeTempTarget(tempSample.targetRoot);
+    throw error;
+  }
 }
 
 async function main() {
-  const readArg = (name) => {
-    const prefix = `--${name}=`;
-    const found = process.argv.find((arg) => arg.startsWith(prefix));
-    return found ? found.slice(prefix.length) : null;
-  };
   const sampleId = readArg("sample-id") || "accepted_french_summer_rattan_bucket_bag_001";
-  const sample = SAMPLES[sampleId];
-  if (!sample) {
-    throw new Error(`unsupported sample id: ${sampleId}`);
-  }
-  const sourceImage = readArg("source-image");
-  if (sourceImage && sourceImage !== sample.sourceImage) {
-    throw new Error(`source image does not match authorized sample source: ${sourceImage}`);
-  }
-  const longEdge = readArg("long-edge");
-  if (longEdge && Number(longEdge) !== sample.requiredLongEdge) {
-    throw new Error(`long edge does not match authorized sample long_edge: ${longEdge}`);
-  }
-
+  const sample = resolveSampleFromRegistry(sampleId);
+  validateCliAgainstRegistry(sample, readArg("source-image"), readArg("long-edge"));
   const result = await createCapsule(sample);
   process.stdout.write(`${JSON.stringify({ passed: true, result }, null, 2)}\n`);
 }
 
-main().catch((error) => {
-  process.stderr.write(`${error.stack || error.message}\n`);
-  process.exit(1);
-});
+module.exports = { resolveSampleFromRegistry, validateCliAgainstRegistry, createCapsule };
+
+if (require.main === module) {
+  main().catch((error) => {
+    process.stderr.write(`${error.stack || error.message}\n`);
+    process.exit(1);
+  });
+}

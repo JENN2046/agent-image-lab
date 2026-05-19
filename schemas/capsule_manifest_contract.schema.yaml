@@ -1,0 +1,48 @@
+capsule_manifest_contract_schema:
+  version: v1
+  purpose: Validate Git-portable accepted/failure preview capsule manifests without reading runs source images or performing production actions.
+  common_required_fields:
+    - manifest_type
+    - version
+    - sample_id
+    - artifact.preview.path
+    - artifact.preview.format
+    - artifact.preview.long_edge
+    - artifact.preview.sha256
+    - artifact.preview.git_tracked
+    - artifact.original.required_for_portable_validation
+    - chain
+    - guard
+  accepted_manifest_type: git_portable_preview_capsule_manifest
+  failure_manifest_type: git_portable_failure_sample_capsule_manifest
+  accepted_chain_required:
+    - import_record
+    - review_record
+    - approval_record
+  failure_chain_required:
+    - failure_record
+    - review_record
+  fail_closed_classes:
+    - missing_capsule_manifest
+    - manifest_contract_mismatch
+    - missing_preview_file
+    - invalid_preview_signature
+    - preview_long_edge_mismatch
+    - preview_hash_mismatch
+    - missing_chain_file
+    - chain_record_mismatch
+    - production_or_memory_guard_violation
+  forbidden_authorizations:
+    provider_contact_performed: true
+    plugin_call_performed: true
+    api_call_performed: true
+    image_generation_performed: true
+    DailyNote_write_performed: true
+    VCP_memory_write_performed: true
+    runtime_execution_performed: true
+    real_manifest_read_performed: true
+    real_vcpchat_read_performed: true
+    real_vcptoolbox_read_performed: true
+  validation_entrypoints:
+    - scripts/validate_capsule_manifest_contract.js
+    - scripts/validate_capsule_manifest_contract_negative_cases.js
