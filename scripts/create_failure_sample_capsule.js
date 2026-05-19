@@ -8,30 +8,7 @@ const sharp = require("sharp");
 
 const repoRoot = path.resolve(__dirname, "..");
 
-const SAMPLES = {
-  failure_french_summer_rattan_bag_v7_29_001: {
-    sampleId: "failure_french_summer_rattan_bag_v7_29_001",
-    sourceImage:
-      "runs/real_generation/v7_29_native_doubao_french_summer_rattan_bag_v2_single_real_run/native_doubao_1778325901725_0.jpg",
-    targetRoot: "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001",
-    failureRegistryRef: "failure_samples/failure_registry.yaml",
-    reviewDocRef: "docs/285_v7_30_native_doubao_watermark_parameter_enforcement.md",
-    promptPackageRef:
-      "prompts/image_generation/product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v2.yaml",
-    sourcePhase: "v7_29",
-    providerType: "direct_api",
-    pluginId: "NativeDoubaoImage",
-    model: "doubao-seedream-5-0-260128",
-    requiredLongEdge: 512,
-    failureTags: [
-      "watermark_or_generated_mark_present",
-      "clean_image_corners_failed",
-      "prompt_watermark_control_insufficient",
-      "api_payload_missing_watermark_false",
-    ],
-    resolvedByAcceptedSample: "accepted_french_summer_rattan_bucket_bag_001",
-  },
-};
+const FAILURE_REGISTRY_REF = "failure_samples/failure_registry.yaml";
 
 function repoPath(relativePath) {
   const resolved = path.resolve(repoRoot, relativePath);
@@ -79,6 +56,53 @@ function extractFailureBlock(registryText, sampleId) {
   const rest = registryText.slice(start);
   const next = rest.search(/\n\s+- failure_id: /);
   return next >= 0 ? rest.slice(0, next).trimEnd() : rest.trimEnd();
+}
+
+function parseScalar(block, key) {
+  const match = block.match(new RegExp(`^\\s*${key}:\\s*(.*)$`, "m"));
+  if (!match) return null;
+  const value = match[1].trim();
+  return value === "null" ? null : value;
+}
+
+function parseList(block, key) {
+  const lines = block.split(/\r?\n/);
+  const start = lines.findIndex((line) => line.match(new RegExp(`^\\s*${key}:\\s*$`)));
+  if (start < 0) return [];
+  const values = [];
+  for (const line of lines.slice(start + 1)) {
+    const item = line.match(/^\s*-\s*(.+?)\s*$/);
+    if (item) {
+      values.push(item[1]);
+      continue;
+    }
+    if (line.trim() && line.match(/^\s*[a-zA-Z_]+:/)) break;
+  }
+  return values;
+}
+
+function loadSample(sampleId) {
+  const registryText = readText(FAILURE_REGISTRY_REF);
+  const block = extractFailureBlock(registryText, sampleId);
+  if (!block) {
+    throw new Error(`unsupported failure sample id: ${sampleId}`);
+  }
+
+  return {
+    sampleId,
+    sourceImage: parseScalar(block, "image_path"),
+    targetRoot: `asset_archive/failure_samples/${sampleId}`,
+    failureRegistryRef: FAILURE_REGISTRY_REF,
+    reviewDocRef: parseScalar(block, "review_doc_ref"),
+    promptPackageRef: parseScalar(block, "prompt_package_ref"),
+    sourcePhase: parseScalar(block, "source_phase"),
+    providerType: parseScalar(block, "provider_type"),
+    pluginId: parseScalar(block, "plugin_id"),
+    model: parseScalar(block, "model"),
+    requiredLongEdge: 512,
+    failureTags: parseList(block, "failure_tags"),
+    resolvedByAcceptedSample: parseScalar(block, "resolved_by_accepted_sample"),
+  };
 }
 
 function capsulePaths(sample) {
@@ -277,10 +301,7 @@ async function createCapsule(sample) {
 
 async function main() {
   const sampleId = readArg("sample-id") || "failure_french_summer_rattan_bag_v7_29_001";
-  const sample = SAMPLES[sampleId];
-  if (!sample) {
-    throw new Error(`unsupported failure sample id: ${sampleId}`);
-  }
+  const sample = loadSample(sampleId);
 
   const sourceImage = readArg("source-image");
   if (sourceImage && sourceImage !== sample.sourceImage) {

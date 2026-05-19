@@ -6,6 +6,22 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current P6E Second Failure Sample Capsule Creation
+
+```text
+Current product-mainline task: p6e_second_failure_sample_capsule_creation.
+Status: completed validated pending guarded local commit.
+Purpose: create the second Git-portable failure sample preview capsule from existing local source evidence.
+Sample: failure_tennis_wallet_v7_21_001.
+Created files: asset_archive/failure_samples/failure_tennis_wallet_v7_21_001/manifest.json, preview.webp, failure_record.json, review_record.json.
+Preview: webp 512x512, sha256 7170004f47f0da42577036b0e2ad70c8f152556b73a4cadb3238eb749e20b8fc.
+Registry state: accepted=2, failure=2, total=4, passed=4, failed=0.
+Not performed: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: clone-portable validation for accepted=2/failure=2 or Review Console report refresh closeout.
+```
+
+---
+
 ## Current P6D Second Failure Sample Capsule Authorization Package Dry Run
 
 ```text
@@ -29,7 +45,7 @@ Current product-mainline task: p6c_review_console_registry_report_v2_state.
 Status: completed validated pending guarded local commit.
 Purpose: expose the formal P6B accepted/failure capsule registry report v2 in Review Console static UI and draft output.
 Changed files: review_console/static_prototype/app.js, index.html, styles.css, README.md, FIELD_MAPPING.md, docs/P6C_REVIEW_CONSOLE_REGISTRY_REPORT_V2_STATE.md, tests/schema_examples/P6C_REVIEW_CONSOLE_REGISTRY_REPORT_V2_STATE.example.json, scripts/validate_review_console_registry_report_v2_state.js, scripts/validate_mvp.ps1, README.md, .agent_board resume surfaces.
-Evidence: registry_report_v2_state, accepted=2, failure=1, total=3, passed=3, failed=0, resolved-by link from failure_french_summer_rattan_bag_v7_29_001 to accepted_french_summer_rattan_bucket_bag_001.
+Evidence: registry_report_v2_state, accepted=2, failure=2, total=4, passed=4, failed=0, with two resolved-by links.
 Not performed: no browser validator execution, no asset_archive read, no preview load/render/copy/conversion/creation, no accepted/failure capsule mutation, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
 Recommended next: second failure capsule authorization package or registry_report_v2 negative-state design.
 ```
@@ -43,7 +59,7 @@ Current product-mainline task: p6b_capsule_registry_report_v2.
 Status: completed validated pending guarded local commit.
 Purpose: turn the accepted/failure unified report shape into a formal validator output.
 Changed files: scripts/validate_capsule_registry_report_v2.js, tests/schema_examples/P6B_CAPSULE_REGISTRY_REPORT_V2.example.json, docs/P6B_CAPSULE_REGISTRY_REPORT_V2.md, scripts/validate_mvp.ps1, README.md, .agent_board resume surfaces.
-Evidence: accepted=2, failure=1, total=3, passed=3, failed=0, resolved-by link from failure_french_summer_rattan_bag_v7_29_001 to accepted_french_summer_rattan_bucket_bag_001, clean failure class summary.
+Evidence: accepted=2, failure=2, total=4, passed=4, failed=0, two resolved-by links, clean failure class summary.
 Not performed: no old runs source validation dependency, no preview creation/copy/conversion, no accepted/failure capsule mutation, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
 Recommended next: expose registry_report_v2_state in Review Console or prepare second failure capsule authorization package.
 ```
@@ -55,7 +71,7 @@ Recommended next: expose registry_report_v2_state in Review Console or prepare s
 ```text
 Current product-mainline task: p6_multi_capsule_accepted_failure_dashboard_productization.
 Status: completed validated pending guarded local commit.
-Purpose: make accepted=2 / failure=1 Git-portable capsule evidence visible in Review Console as a static dashboard and side-by-side accepted/failure relation.
+Purpose: make accepted=2 / failure=2 Git-portable capsule evidence visible in Review Console as a static dashboard and side-by-side accepted/failure relations.
 Changed files: review_console/static_prototype/app.js, index.html, styles.css, README.md, FIELD_MAPPING.md, docs/P6_MULTI_CAPSULE_ACCEPTED_FAILURE_DASHBOARD_PRODUCTIZATION.md, tests/schema_examples/P6_MULTI_CAPSULE_ACCEPTED_FAILURE_DASHBOARD.example.json, scripts/validate_multi_capsule_dashboard.js, scripts/validate_mvp.ps1, README.md, .agent_board resume surfaces.
 Evidence: multi_capsule_dashboard_state, accepted/failure per-sample report, resolved-by link from failure_french_summer_rattan_bag_v7_29_001 to accepted_french_summer_rattan_bucket_bag_001, future accepted/failure unified report shape, failure track expansion plan.
 Not performed: no preview load, no asset_archive read, no fetch, no file write outside static docs/scripts, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.

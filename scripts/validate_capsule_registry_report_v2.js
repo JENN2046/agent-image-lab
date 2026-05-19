@@ -29,12 +29,19 @@ const expected = {
     "accepted_product_still_life_tennis_wallet_001"
   ],
   failureIds: [
-    "failure_french_summer_rattan_bag_v7_29_001"
+    "failure_french_summer_rattan_bag_v7_29_001",
+    "failure_tennis_wallet_v7_21_001"
   ],
-  relation: {
-    failure_sample_id: "failure_french_summer_rattan_bag_v7_29_001",
-    accepted_sample_id: "accepted_french_summer_rattan_bucket_bag_001"
-  }
+  relations: [
+    {
+      failure_sample_id: "failure_french_summer_rattan_bag_v7_29_001",
+      accepted_sample_id: "accepted_french_summer_rattan_bucket_bag_001"
+    },
+    {
+      failure_sample_id: "failure_tennis_wallet_v7_21_001",
+      accepted_sample_id: "accepted_product_still_life_tennis_wallet_001"
+    }
+  ]
 };
 
 function runJsonValidator(relativePath, args = []) {
@@ -242,15 +249,17 @@ function evaluate(report, fixture, currentSurfaces) {
   add("phase_matches", report.phase === expected.phase);
   add("report_version_matches", report.report_version === expected.reportVersion);
   add("accepted_count_two", report.totals.accepted === 2);
-  add("failure_count_one", report.totals.failure === 1);
-  add("total_count_three", report.totals.total === 3);
-  add("all_samples_passed", report.totals.passed === 3 && report.totals.failed === 0);
+  add("failure_count_matches", report.totals.failure === expected.failureIds.length);
+  add("total_count_matches", report.totals.total === expected.acceptedIds.length + expected.failureIds.length);
+  add("all_samples_passed", report.totals.passed === report.totals.total && report.totals.failed === 0);
   add("accepted_ids_match", includesAll(report.accepted_sample_ids, expected.acceptedIds));
   add("failure_ids_match", includesAll(report.failure_sample_ids, expected.failureIds));
-  add("resolved_by_link_present", report.resolved_by_links.some((relation) =>
-    relation.failure_sample_id === expected.relation.failure_sample_id &&
-    relation.accepted_sample_id === expected.relation.accepted_sample_id &&
-    relation.relation_status === "linked"
+  add("resolved_by_links_present", expected.relations.every((expectedRelation) =>
+    report.resolved_by_links.some((relation) =>
+      relation.failure_sample_id === expectedRelation.failure_sample_id &&
+      relation.accepted_sample_id === expectedRelation.accepted_sample_id &&
+      relation.relation_status === "linked"
+    )
   ));
   add("failure_summary_clean", report.failure_class_summary.accepted_failed === 0 &&
     report.failure_class_summary.failure_failed === 0 &&
@@ -274,7 +283,7 @@ function evaluate(report, fixture, currentSurfaces) {
     report.guard.push_tag_release_deploy_performed === false);
   add("fixture_declares_same_phase", fixture.phase === expected.phase);
   add("fixture_declares_same_report_version", fixture.report_version === expected.reportVersion);
-  add("fixture_counts_match", fixture.totals.accepted === 2 && fixture.totals.failure === 1 && fixture.totals.total === 3);
+  add("fixture_counts_match", fixture.totals.accepted === 2 && fixture.totals.failure === 2 && fixture.totals.total === 4);
   add("current_surfaces_reference_report", currentSurfaces.includes("p6b_capsule_registry_report_v2") &&
     currentSurfaces.includes("scripts/validate_capsule_registry_report_v2.js") &&
     currentSurfaces.includes("accepted_failure_capsule_registry_report_v2"));

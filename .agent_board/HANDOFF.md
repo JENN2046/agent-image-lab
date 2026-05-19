@@ -1,5 +1,21 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — P6E Second Failure Sample Capsule Creation
+
+```text
+Status: p6e_second_failure_sample_capsule_creation completed_validated_pending_guarded_local_commit.
+Reason: create the second Git-portable failure sample preview capsule from the P6D authorization package.
+Execution mode: A4.8 authorized local capsule creation.
+Sample: failure_tennis_wallet_v7_21_001.
+Capsule root: asset_archive/failure_samples/failure_tennis_wallet_v7_21_001/.
+Created files: manifest.json, preview.webp, failure_record.json, review_record.json.
+Preview: webp 512x512, sha256 7170004f47f0da42577036b0e2ad70c8f152556b73a4cadb3238eb749e20b8fc.
+Resolved by accepted sample: accepted_product_still_life_tennis_wallet_001.
+Registry state after creation: accepted=2, failure=2, total=4, passed=4, failed=0.
+Not performed: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: clone-portable validation for accepted=2/failure=2 or Review Console report refresh closeout.
+```
+
 ## Current Handoff Update — P6D Second Failure Sample Capsule Authorization Package Dry Run
 
 ```text
@@ -27,7 +43,7 @@ UI surface: Registry Report v2 / registry_report_v2_state.
 Validator: scripts/validate_review_console_registry_report_v2_state.js.
 Fixture: tests/schema_examples/P6C_REVIEW_CONSOLE_REGISTRY_REPORT_V2_STATE.example.json.
 Validation record: docs/P6C_REVIEW_CONSOLE_REGISTRY_REPORT_V2_STATE.md.
-Current report view: accepted=2, failure=1, total=3, passed=3, failed=0; failure_french_summer_rattan_bag_v7_29_001 resolves to accepted_french_summer_rattan_bucket_bag_001.
+Current report view: accepted=2, failure=2, total=4, passed=4, failed=0; two failure capsules resolve to their accepted samples.
 Not performed: no browser validator execution, no asset_archive read, no preview load/render/copy/conversion/creation, no accepted/failure capsule mutation, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
 Recommended next: second failure capsule authorization package or registry_report_v2 negative-state design.
 ```
@@ -42,7 +58,7 @@ Validator: scripts/validate_capsule_registry_report_v2.js.
 Fixture: tests/schema_examples/P6B_CAPSULE_REGISTRY_REPORT_V2.example.json.
 Validation record: docs/P6B_CAPSULE_REGISTRY_REPORT_V2.md.
 Source validators: scripts/validate_preview_capsule_registry.js and scripts/validate_failure_sample_capsule_registry.js --require-at-least=1.
-Current report: accepted=2, failure=1, total=3, passed=3, failed=0; failure_french_summer_rattan_bag_v7_29_001 resolves to accepted_french_summer_rattan_bucket_bag_001.
+Current report: accepted=2, failure=2, total=4, passed=4, failed=0; failure capsules resolve to accepted_french_summer_rattan_bucket_bag_001 and accepted_product_still_life_tennis_wallet_001.
 Not performed: no old runs source dependency, no preview creation/copy/conversion, no accepted/failure capsule mutation, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
 Recommended next: expose registry_report_v2_state in Review Console or prepare second failure capsule authorization package.
 ```
@@ -51,7 +67,7 @@ Recommended next: expose registry_report_v2_state in Review Console or prepare s
 
 ```text
 Status: p6_multi_capsule_accepted_failure_dashboard_productization completed_validated_pending_guarded_local_commit.
-Reason: productize accepted=2 / failure=1 Git-portable capsule evidence into a static Review Console dashboard with accepted/failure side-by-side relation.
+Reason: productize accepted=2 / failure=2 Git-portable capsule evidence into a static Review Console dashboard with accepted/failure side-by-side relations.
 Execution mode: A4.8 static Review Console product-mainline.
 UI surface: Capsule Dashboard / multi_capsule_dashboard_state.
 Validator: scripts/validate_multi_capsule_dashboard.js.

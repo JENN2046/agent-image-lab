@@ -1,0 +1,39 @@
+{
+  "record_type": "git_portable_failure_sample_capsule_failure_record",
+  "version": "v1",
+  "sample_id": "failure_tennis_wallet_v7_21_001",
+  "created_at": "2026-05-19T09:59:09.359Z",
+  "source": {
+    "source_phase": "v7_21",
+    "source_image_path": "runs/real_generation/v7_21_native_doubao_first_real_run/native_doubao_1778320041596_0.jpg",
+    "source_image_git_tracked": false,
+    "source_image_hash_recorded": false,
+    "failure_registry_ref": "failure_samples/failure_registry.yaml",
+    "prompt_package_ref": "prompts/image_generation/product_still_life_outdoor_tennis_wallet_hero_v2.yaml"
+  },
+  "failure_summary": {
+    "failure_tags": [
+      "watermark_or_generation_mark_risk",
+      "foreground_tennis_balls_too_large",
+      "background_material_direction_drift",
+      "commercial_usability_partial"
+    ],
+    "resolved_by_accepted_sample": "accepted_product_still_life_tennis_wallet_001",
+    "memory_suitability": false,
+    "production_candidate_allowed": false
+  },
+  "registry_failure_block": "failure_id: failure_tennis_wallet_v7_21_001\n      source_phase: v7_21\n      asset_status: needs_human_review\n      provider_type: direct_api\n      plugin_id: NativeDoubaoImage\n      model: doubao-seedream-5-0-260128\n      prompt_package_ref: prompts/image_generation/product_still_life_outdoor_tennis_wallet_hero_v2.yaml\n      review_doc_ref: docs/278_v7_21_native_doubao_first_real_generation_post_run_review.md\n      image_path: runs/real_generation/v7_21_native_doubao_first_real_run/native_doubao_1778320041596_0.jpg\n      failure_tags:\n        - watermark_or_generation_mark_risk\n        - foreground_tennis_balls_too_large\n        - background_material_direction_drift\n        - commercial_usability_partial\n      correction_phase: v7_22\n      corrected_by_prompt_ref: prompts/image_generation/product_still_life_outdoor_tennis_wallet_hero_no_text_v3.yaml\n      resolved_by_accepted_sample: accepted_product_still_life_tennis_wallet_001\n      image_file_committed_to_git: false\n      memory_suitability: false",
+  "guard": {
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "runtime_execution_performed": false,
+    "real_manifest_read_performed": false,
+    "real_vcpchat_read_performed": false,
+    "real_vcptoolbox_read_performed": false,
+    "production_candidate_created": false
+  }
+}

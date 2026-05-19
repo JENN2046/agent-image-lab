@@ -29,8 +29,20 @@ const expected = {
     "accepted_french_summer_rattan_bucket_bag_001",
     "accepted_product_still_life_tennis_wallet_001"
   ],
-  failureId: "failure_french_summer_rattan_bag_v7_29_001",
-  resolvedBy: "accepted_french_summer_rattan_bucket_bag_001",
+  failureIds: [
+    "failure_french_summer_rattan_bag_v7_29_001",
+    "failure_tennis_wallet_v7_21_001"
+  ],
+  relations: [
+    {
+      failureId: "failure_french_summer_rattan_bag_v7_29_001",
+      resolvedBy: "accepted_french_summer_rattan_bucket_bag_001"
+    },
+    {
+      failureId: "failure_tennis_wallet_v7_21_001",
+      resolvedBy: "accepted_product_still_life_tennis_wallet_001"
+    }
+  ],
   reportVersion: "accepted_failure_capsule_report_v1"
 };
 
@@ -64,7 +76,6 @@ function evaluate(snapshot) {
   const failurePlan = snapshot.failure_track_expansion_plan || {};
   const perSample = snapshot.per_sample_report || [];
   const relations = snapshot.resolved_by_links || [];
-  const relation = relations.find((item) => item.failure_sample_id === expected.failureId);
 
   const identityOk =
     snapshot.phase === expected.phase &&
@@ -76,10 +87,10 @@ function evaluate(snapshot) {
 
   const countOk =
     snapshot.accepted_capsule_count === 2 &&
-    snapshot.failure_capsule_count === 1 &&
-    snapshot.total_capsule_count === 3 &&
+    snapshot.failure_capsule_count === 2 &&
+    snapshot.total_capsule_count === 4 &&
     includesAll(snapshot.accepted_sample_ids, expected.acceptedIds) &&
-    includesAll(snapshot.failure_sample_ids, [expected.failureId]);
+    includesAll(snapshot.failure_sample_ids, expected.failureIds);
 
   const validationOk =
     includesAll(snapshot.clone_portable_statuses, ["passed"]) &&
@@ -90,16 +101,19 @@ function evaluate(snapshot) {
     snapshot.directory_as_registry_currently_sufficient === true;
 
   const relationOk =
-    relations.length >= 1 &&
-    relation &&
-    relation.accepted_sample_id === expected.resolvedBy &&
-    relation.relation_status === "linked" &&
-    relation.failure_final_route === "failure_learning_only_never_production" &&
-    relation.accepted_is_reusable_positive_example === true &&
-    relation.failure_is_never_production === true;
+    relations.length >= 2 &&
+    expected.relations.every((expectedRelation) => {
+      const relation = relations.find((item) => item.failure_sample_id === expectedRelation.failureId);
+      return relation &&
+        relation.accepted_sample_id === expectedRelation.resolvedBy &&
+        relation.relation_status === "linked" &&
+        relation.failure_final_route === "failure_learning_only_never_production" &&
+        relation.accepted_is_reusable_positive_example === true &&
+        relation.failure_is_never_production === true;
+    });
 
   const perSampleOk =
-    perSample.length === 3 &&
+    perSample.length === 4 &&
     expected.acceptedIds.every((sampleId) => perSample.some((row) =>
       row.lane === "accepted" &&
       row.sample_id === sampleId &&
@@ -107,20 +121,20 @@ function evaluate(snapshot) {
       row.clone_portable_validation_status === "passed" &&
       row.passed === true
     )) &&
-    perSample.some((row) =>
+    expected.relations.every((expectedRelation) => perSample.some((row) =>
       row.lane === "failure" &&
-      row.sample_id === expected.failureId &&
-      row.resolved_by_accepted_sample === expected.resolvedBy &&
+      row.sample_id === expectedRelation.failureId &&
+      row.resolved_by_accepted_sample === expectedRelation.resolvedBy &&
       row.final_route === "failure_learning_only_never_production" &&
       row.registry_validator_status === "failure_sample_capsules_verified" &&
       row.clone_portable_validation_status === "passed" &&
       row.passed === true
-    );
+    ));
 
   const reportShapeOk =
     reportShape.report_version === expected.reportVersion &&
-    reportShape.total === 3 &&
-    reportShape.passed === 3 &&
+    reportShape.total === 4 &&
+    reportShape.passed === 4 &&
     reportShape.failed === 0 &&
     includesAll(reportShape.fields, [
       "lane",
@@ -283,8 +297,8 @@ for (const token of [
 
 for (const token of [
   ...expected.acceptedIds,
-  expected.failureId,
-  expected.resolvedBy,
+  ...expected.failureIds,
+  ...expected.relations.map((relation) => relation.resolvedBy),
   "portable_preview_capsule_evidence_list",
   "portable_failure_capsule_evidence_list"
 ]) {
@@ -296,7 +310,9 @@ for (const token of [
   "multi_capsule_dashboard_state",
   "accepted_failure_capsule_report_v1",
   "failure_french_summer_rattan_bag_v7_29_001",
-  "accepted_french_summer_rattan_bucket_bag_001"
+  "accepted_french_summer_rattan_bucket_bag_001",
+  "failure_tennis_wallet_v7_21_001",
+  "accepted_product_still_life_tennis_wallet_001"
 ]) {
   requireToken("current_surfaces", currentSurfaces, token);
 }

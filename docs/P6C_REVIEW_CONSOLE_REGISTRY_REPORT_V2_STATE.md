@@ -19,14 +19,16 @@ The static panel exposes:
 - `report_version: accepted_failure_capsule_registry_report_v2`
 - `status: accepted_failure_capsule_registry_report_v2_verified`
 - `accepted=2`
-- `failure=1`
-- `total=3`
-- `passed=3`
+- `failure=2`
+- `total=4`
+- `passed=4`
 - `failed=0`
 - per-sample accepted/failure result rows
 - resolved-by link:
   - `failure_french_summer_rattan_bag_v7_29_001`
   - `accepted_french_summer_rattan_bucket_bag_001`
+  - `failure_tennis_wallet_v7_21_001`
+  - `accepted_product_still_life_tennis_wallet_001`
 - clean failure class summary
 
 ## Boundary

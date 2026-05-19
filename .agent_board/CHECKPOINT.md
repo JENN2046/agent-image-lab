@@ -1,5 +1,28 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## P6E Second Failure Sample Capsule Creation
+
+```yaml
+phase: p6e_second_failure_sample_capsule_creation
+status: completed_validated_pending_guarded_local_commit
+completed:
+  - created asset_archive/failure_samples/failure_tennis_wallet_v7_21_001/manifest.json
+  - created asset_archive/failure_samples/failure_tennis_wallet_v7_21_001/preview.webp
+  - created asset_archive/failure_samples/failure_tennis_wallet_v7_21_001/failure_record.json
+  - created asset_archive/failure_samples/failure_tennis_wallet_v7_21_001/review_record.json
+  - updated scripts/create_failure_sample_capsule.js to read registered failure metadata from failure_samples/failure_registry.yaml
+  - synchronized registry report v2 and Review Console static state to accepted=2, failure=2, total=4
+  - documented creation in docs/P6E_SECOND_FAILURE_SAMPLE_CAPSULE_CREATION_RECORD.md
+not_performed:
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no production candidate
+  - no push, tag, release, or deploy
+next:
+  - clone-portable validation for accepted=2/failure=2 or Review Console report refresh closeout
+```
+
 ## P6D Second Failure Sample Capsule Authorization Package Dry Run
 
 ```yaml
@@ -34,7 +57,7 @@ status: completed_validated_pending_guarded_local_commit
 completed:
   - added Registry Report v2 static panel to Review Console
   - added registry_report_v2_state to draft output
-  - displayed accepted=2, failure=1, total=3, passed=3, failed=0
+  - displayed accepted=2, failure=2, total=4, passed=4, failed=0
   - displayed per-sample report rows and resolved-by relation
   - added tests/schema_examples/P6C_REVIEW_CONSOLE_REGISTRY_REPORT_V2_STATE.example.json
   - added scripts/validate_review_console_registry_report_v2_state.js
@@ -66,7 +89,7 @@ completed:
   - wired the report validator into scripts/validate_mvp.ps1
   - synchronized README and .agent_board resume surfaces
   - combined accepted registry and failure registry into one report output
-  - verified accepted=2, failure=1, total=3, passed=3, failed=0
+  - verified accepted=2, failure=2, total=4, passed=4, failed=0
   - verified resolved-by link from failure_french_summer_rattan_bag_v7_29_001 to accepted_french_summer_rattan_bucket_bag_001
 not_performed:
   - no old runs source dependency
@@ -89,7 +112,7 @@ status: completed_validated_pending_guarded_local_commit
 completed:
   - added Review Console Capsule Dashboard static panel
   - added multi_capsule_dashboard_state to draft output
-  - displayed accepted=2, failure=1, total=3 capsule counts
+  - displayed accepted=2, failure=2, total=4 capsule counts
   - displayed accepted and failure capsule sample ids
   - displayed accepted/failure side-by-side resolved-by link
   - documented second failure capsule expansion requirements without creating it

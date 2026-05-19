@@ -169,7 +169,7 @@ Phase 9 审批记录必须满足：
 | Static seed 字段 | Review Console 可见/草案字段 | 说明 |
 | --- | --- | --- |
 | `portable_preview_capsule_evidence_list` | `multi_capsule_dashboard_state.accepted_sample_ids` / `multiCapsuleReport` | 当前 accepted capsule count 必须为 2 |
-| `portable_failure_capsule_evidence_list` | `multi_capsule_dashboard_state.failure_sample_ids` / `multiCapsuleReport` | 当前 failure capsule count 必须为 1 |
+| `portable_failure_capsule_evidence_list` | `multi_capsule_dashboard_state.failure_sample_ids` / `multiCapsuleReport` | 当前 failure capsule count 必须为 2 |
 | accepted capsule `manifest_ref` / `preview_ref` / `import_record_ref` / `review_record_ref` / `approval_record_ref` | `multi_capsule_dashboard_state.per_sample_report[]` / `multiCapsuleReport` | 只显示 repo-relative refs，不读取文件 |
 | failure capsule `manifest_ref` / `preview_ref` / `failure_record_ref` / `review_record_ref` | `multi_capsule_dashboard_state.per_sample_report[]` / `multiCapsuleReport` | 只显示 repo-relative refs，不读取文件 |
 | `resolved_by_accepted_sample` | `multi_capsule_dashboard_state.resolved_by_links[]` / `multiCapsuleRelations` | 连接 `failure_french_summer_rattan_bag_v7_29_001` 到 `accepted_french_summer_rattan_bucket_bag_001` |
@@ -189,7 +189,7 @@ Phase 9 审批记录必须满足：
 | Report v2 字段 | Review Console 可见/草案字段 | 说明 |
 | --- | --- | --- |
 | `report_version` | `registry_report_v2_state.report_version` / `registryReportV2Summary` | 必须为 `accepted_failure_capsule_registry_report_v2` |
-| `totals.accepted` / `failure` / `total` / `passed` / `failed` | `registry_report_v2_state.totals` / `registryReportV2Summary` | 当前固定为 accepted=2、failure=1、total=3、passed=3、failed=0 |
+| `totals.accepted` / `failure` / `total` / `passed` / `failed` | `registry_report_v2_state.totals` / `registryReportV2Summary` | 当前固定为 accepted=2、failure=2、total=4、passed=4、failed=0 |
 | `per_sample_results[]` | `registry_report_v2_state.per_sample_results` / `registryReportV2Rows` | 展示 accepted/failure lane、status、registry status、portable status、manifest/preview/chain refs |
 | `resolved_by_links[]` | `registry_report_v2_state.resolved_by_links` / `registryReportV2Relations` | 展示 failure -> accepted 关联 |
 | `failure_class_summary` | `registry_report_v2_state.failure_class_summary` | 必须保持 clean summary，不得隐藏 missing link 或 guard violation |

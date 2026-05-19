@@ -1,5 +1,43 @@
 # RUN_STATE.md — Agent Image Lab
 
+## P6E Second Failure Sample Capsule Creation
+
+```yaml
+phase: p6e_second_failure_sample_capsule_creation
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_authorized_local_capsule_creation
+goal: create the second Git-portable failure sample preview capsule from existing local source evidence
+sample_id: failure_tennis_wallet_v7_21_001
+capsule_root: asset_archive/failure_samples/failure_tennis_wallet_v7_21_001
+created_files:
+  - asset_archive/failure_samples/failure_tennis_wallet_v7_21_001/manifest.json
+  - asset_archive/failure_samples/failure_tennis_wallet_v7_21_001/preview.webp
+  - asset_archive/failure_samples/failure_tennis_wallet_v7_21_001/failure_record.json
+  - asset_archive/failure_samples/failure_tennis_wallet_v7_21_001/review_record.json
+preview:
+  format: webp
+  width: 512
+  height: 512
+  long_edge: 512
+  sha256: 7170004f47f0da42577036b0e2ad70c8f152556b73a4cadb3238eb749e20b8fc
+registry_state:
+  accepted_capsules: 2
+  failure_capsules: 2
+  total_capsules: 4
+  passed: 4
+  failed: 0
+guard:
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  production_candidate_created: false
+  push_tag_release_deploy_performed: false
+decision:
+  second_failure_capsule_created: true
+  creator_registry_driven: true
+  recommended_next: clone_portable_validation_for_accepted_2_failure_2_or_review_console_report_refresh
+```
+
 ## P6D Second Failure Sample Capsule Authorization Package Dry Run
 
 ```yaml
@@ -48,9 +86,9 @@ fixture: tests/schema_examples/P6C_REVIEW_CONSOLE_REGISTRY_REPORT_V2_STATE.examp
 validation_record: docs/P6C_REVIEW_CONSOLE_REGISTRY_REPORT_V2_STATE.md
 counts:
   accepted_capsules: 2
-  failure_capsules: 1
-  total_capsules: 3
-  passed: 3
+  failure_capsules: 2
+  total_capsules: 4
+  passed: 4
   failed: 0
 guard:
   browser_executes_validator: false
@@ -82,13 +120,15 @@ source_validators:
   failure: scripts/validate_failure_sample_capsule_registry.js --require-at-least=1
 counts:
   accepted_capsules: 2
-  failure_capsules: 1
-  total_capsules: 3
-  passed: 3
+  failure_capsules: 2
+  total_capsules: 4
+  passed: 4
   failed: 0
-relation:
-  failure_sample: failure_french_summer_rattan_bag_v7_29_001
-  resolved_by: accepted_french_summer_rattan_bucket_bag_001
+relations:
+  - failure_sample: failure_french_summer_rattan_bag_v7_29_001
+    resolved_by: accepted_french_summer_rattan_bucket_bag_001
+  - failure_sample: failure_tennis_wallet_v7_21_001
+    resolved_by: accepted_product_still_life_tennis_wallet_001
 guard:
   old_runs_required_for_portable_validation: false
   preview_creation_or_copy_performed: false
@@ -109,18 +149,20 @@ decision:
 phase: p6_multi_capsule_accepted_failure_dashboard_productization
 status: completed_validated_pending_guarded_local_commit
 mode: A4.8_static_review_console_product_mainline
-goal: make accepted=2 / failure=1 Git-portable capsule evidence visible as a static Review Console dashboard
+goal: make accepted=2 / failure=2 Git-portable capsule evidence visible as a static Review Console dashboard
 static_output_key: multi_capsule_dashboard_state
 validator: scripts/validate_multi_capsule_dashboard.js
 fixture: tests/schema_examples/P6_MULTI_CAPSULE_ACCEPTED_FAILURE_DASHBOARD.example.json
 validation_record: docs/P6_MULTI_CAPSULE_ACCEPTED_FAILURE_DASHBOARD_PRODUCTIZATION.md
 counts:
   accepted_capsules: 2
-  failure_capsules: 1
-  total_capsules: 3
-relation:
-  failure_sample: failure_french_summer_rattan_bag_v7_29_001
-  resolved_by: accepted_french_summer_rattan_bucket_bag_001
+  failure_capsules: 2
+  total_capsules: 4
+relations:
+  - failure_sample: failure_french_summer_rattan_bag_v7_29_001
+    resolved_by: accepted_french_summer_rattan_bucket_bag_001
+  - failure_sample: failure_tennis_wallet_v7_21_001
+    resolved_by: accepted_product_still_life_tennis_wallet_001
 guard:
   static_mock_in_memory_only: true
   old_runs_required_for_portable_validation: false

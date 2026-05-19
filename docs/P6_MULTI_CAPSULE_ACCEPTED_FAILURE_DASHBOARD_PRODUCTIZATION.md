@@ -8,8 +8,8 @@ status: completed_validated_pending_guarded_local_commit
 mode: A4.8_safe_project_operator_rail
 surface: review_console_static_prototype
 accepted_capsule_count: 2
-failure_capsule_count: 1
-total_capsule_count: 3
+failure_capsule_count: 2
+total_capsule_count: 4
 ```
 
 P6 turns the existing Git-portable capsule evidence into a clearer static Review Console product surface. It does not create new capsules, does not generate or convert images, and does not read runtime systems.
@@ -21,13 +21,14 @@ The Review Console now exposes `multi_capsule_dashboard_state` from static mock 
 It summarizes:
 
 - accepted capsule count: `2`
-- failure capsule count: `1`
-- total capsule count: `3`
+- failure capsule count: `2`
+- total capsule count: `4`
 - accepted sample ids:
   - `accepted_french_summer_rattan_bucket_bag_001`
   - `accepted_product_still_life_tennis_wallet_001`
 - failure sample ids:
   - `failure_french_summer_rattan_bag_v7_29_001`
+  - `failure_tennis_wallet_v7_21_001`
 - clone-portable validation status
 - registry validator status
 - per-sample manifest / preview / chain refs
@@ -42,6 +43,13 @@ The current side-by-side relation is:
 ```yaml
 failure_sample_id: failure_french_summer_rattan_bag_v7_29_001
 resolved_by_accepted_sample: accepted_french_summer_rattan_bucket_bag_001
+relation_status: linked
+failure_final_route: failure_learning_only_never_production
+failure_never_production: true
+accepted_is_reusable_positive_example: true
+---
+failure_sample_id: failure_tennis_wallet_v7_21_001
+resolved_by_accepted_sample: accepted_product_still_life_tennis_wallet_001
 relation_status: linked
 failure_final_route: failure_learning_only_never_production
 failure_never_production: true
@@ -101,7 +109,7 @@ resolved_by_links:
     relation_status: linked | missing_accepted_capsule
 ```
 
-Directory-as-registry remains sufficient for the current `accepted=2 / failure=1` state. A separate `registry.json` can be reconsidered after more capsules exist or after reporting needs exceed directory scanning.
+Directory-as-registry remains sufficient for the current `accepted=2 / failure=2` state. A separate `registry.json` can be reconsidered after more capsules exist or after reporting needs exceed directory scanning.
 
 ## Hard Stops
 

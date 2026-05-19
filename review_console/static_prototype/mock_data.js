@@ -212,6 +212,37 @@ window.REVIEW_CONSOLE_MOCK = {
       production_candidate_allowed: false,
       memory_write_allowed: false,
       DailyNote_write_allowed: false
+    },
+    {
+      evidence_version: "v1",
+      evidence_source: "asset_archive_failure_samples_preview_capsule",
+      sample_id: "failure_tennis_wallet_v7_21_001",
+      capsule_root: "asset_archive/failure_samples/failure_tennis_wallet_v7_21_001/",
+      manifest_ref: "asset_archive/failure_samples/failure_tennis_wallet_v7_21_001/manifest.json",
+      preview_ref: "asset_archive/failure_samples/failure_tennis_wallet_v7_21_001/preview.webp",
+      preview_format: "webp",
+      preview_long_edge: 512,
+      preview_dimensions: "512x512",
+      preview_sha256: "7170004f47f0da42577036b0e2ad70c8f152556b73a4cadb3238eb749e20b8fc",
+      failure_record_ref: "asset_archive/failure_samples/failure_tennis_wallet_v7_21_001/failure_record.json",
+      review_record_ref: "asset_archive/failure_samples/failure_tennis_wallet_v7_21_001/review_record.json",
+      failure_tags: [
+        "watermark_or_generation_mark_risk",
+        "foreground_tennis_balls_too_large",
+        "background_material_direction_drift",
+        "commercial_usability_partial"
+      ],
+      resolved_by_accepted_sample: "accepted_product_still_life_tennis_wallet_001",
+      validation_status: "git_portable_failure_preview_evidence_verified",
+      registry_validator_status: "failure_sample_capsules_verified",
+      clone_portable_validation_status: "passed",
+      source_original_required_for_portable_validation: false,
+      old_source_present_in_clean_clone: false,
+      base64_evidence_used: false,
+      final_route: "failure_learning_only_never_production",
+      production_candidate_allowed: false,
+      memory_write_allowed: false,
+      DailyNote_write_allowed: false
     }
   ],
   artifact_lifecycle_state_reader_seed: {

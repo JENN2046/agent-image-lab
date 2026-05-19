@@ -5,9 +5,9 @@
     "status": "accepted_failure_capsule_registry_report_v2_verified",
     "totals": {
       "accepted": 2,
-      "failure": 1,
-      "total": 3,
-      "passed": 3,
+      "failure": 2,
+      "total": 4,
+      "passed": 4,
       "failed": 0
     },
     "accepted_sample_ids": [
@@ -15,13 +15,23 @@
       "accepted_product_still_life_tennis_wallet_001"
     ],
     "failure_sample_ids": [
-      "failure_french_summer_rattan_bag_v7_29_001"
+      "failure_french_summer_rattan_bag_v7_29_001",
+      "failure_tennis_wallet_v7_21_001"
     ],
     "resolved_by_links": [
       {
         "relation_id": "failure_french_summer_rattan_bag_v7_29_001__resolved_by__accepted_french_summer_rattan_bucket_bag_001",
         "failure_sample_id": "failure_french_summer_rattan_bag_v7_29_001",
         "accepted_sample_id": "accepted_french_summer_rattan_bucket_bag_001",
+        "relation_status": "linked",
+        "failure_final_route": "failure_learning_only_never_production",
+        "accepted_is_reusable_positive_example": true,
+        "failure_is_never_production": true
+      },
+      {
+        "relation_id": "failure_tennis_wallet_v7_21_001__resolved_by__accepted_product_still_life_tennis_wallet_001",
+        "failure_sample_id": "failure_tennis_wallet_v7_21_001",
+        "accepted_sample_id": "accepted_product_still_life_tennis_wallet_001",
         "relation_status": "linked",
         "failure_final_route": "failure_learning_only_never_production",
         "accepted_is_reusable_positive_example": true,

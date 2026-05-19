@@ -11853,10 +11853,10 @@ process.exit(child.status || 0);
     if ($multiCapsuleDashboard.passed -ne $true -or $multiCapsuleDashboard.phase -ne 'p6_multi_capsule_accepted_failure_dashboard_productization') {
       Add-Failure "Multi-capsule dashboard validation must pass"
     }
-    if ($multiCapsuleDashboard.accepted_capsule_count -ne 2 -or $multiCapsuleDashboard.failure_capsule_count -ne 1 -or $multiCapsuleDashboard.total_capsule_count -ne 3) {
-      Add-Failure "Multi-capsule dashboard must preserve accepted=2, failure=1, total=3"
+    if ($multiCapsuleDashboard.accepted_capsule_count -ne 2 -or $multiCapsuleDashboard.failure_capsule_count -ne 2 -or $multiCapsuleDashboard.total_capsule_count -ne 4) {
+      Add-Failure "Multi-capsule dashboard must preserve accepted=2, failure=2, total=4"
     }
-    if ($multiCapsuleDashboard.linked_relation_count -lt 1 -or $multiCapsuleDashboard.report_version -ne 'accepted_failure_capsule_report_v1' -or $multiCapsuleDashboard.report_passed -ne 3 -or $multiCapsuleDashboard.report_failed -ne 0) {
+    if ($multiCapsuleDashboard.linked_relation_count -lt 2 -or $multiCapsuleDashboard.report_version -ne 'accepted_failure_capsule_report_v1' -or $multiCapsuleDashboard.report_passed -ne 4 -or $multiCapsuleDashboard.report_failed -ne 0) {
       Add-Failure "Multi-capsule dashboard must expose linked accepted/failure relation and passing unified report shape"
     }
     if ($multiCapsuleDashboard.old_runs_source_required_for_portable_validation -ne $false -or $multiCapsuleDashboard.directory_as_registry_currently_sufficient -ne $true) {
@@ -11878,10 +11878,10 @@ process.exit(child.status || 0);
     if ($capsuleRegistryReportV2.passed -ne $true -or $capsuleRegistryReportV2.phase -ne 'p6b_capsule_registry_report_v2' -or $capsuleRegistryReportV2.report_version -ne 'accepted_failure_capsule_registry_report_v2') {
       Add-Failure "Capsule registry report v2 must pass with the expected phase and report version"
     }
-    if ($capsuleRegistryReportV2.totals.accepted -ne 2 -or $capsuleRegistryReportV2.totals.failure -ne 1 -or $capsuleRegistryReportV2.totals.total -ne 3 -or $capsuleRegistryReportV2.totals.passed -ne 3 -or $capsuleRegistryReportV2.totals.failed -ne 0) {
-      Add-Failure "Capsule registry report v2 must preserve accepted=2, failure=1, total=3, passed=3, failed=0"
+    if ($capsuleRegistryReportV2.totals.accepted -ne 2 -or $capsuleRegistryReportV2.totals.failure -ne 2 -or $capsuleRegistryReportV2.totals.total -ne 4 -or $capsuleRegistryReportV2.totals.passed -ne 4 -or $capsuleRegistryReportV2.totals.failed -ne 0) {
+      Add-Failure "Capsule registry report v2 must preserve accepted=2, failure=2, total=4, passed=4, failed=0"
     }
-    if ($capsuleRegistryReportV2.resolved_by_links.Count -lt 1 -or $capsuleRegistryReportV2.failure_class_summary.missing_resolved_by_link -ne 0 -or $capsuleRegistryReportV2.failure_class_summary.production_or_memory_guard_violation -ne 0) {
+    if ($capsuleRegistryReportV2.resolved_by_links.Count -lt 2 -or $capsuleRegistryReportV2.failure_class_summary.missing_resolved_by_link -ne 0 -or $capsuleRegistryReportV2.failure_class_summary.production_or_memory_guard_violation -ne 0) {
       Add-Failure "Capsule registry report v2 must preserve resolved-by links and clean failure guard summary"
     }
     if ($capsuleRegistryReportV2.guard.old_runs_source_required_for_portable_validation -ne $false -or $capsuleRegistryReportV2.guard.preview_creation_or_copy_performed -ne $false -or $capsuleRegistryReportV2.guard.accepted_samples_write_performed -ne $false -or $capsuleRegistryReportV2.guard.failure_samples_write_performed -ne $false) {
@@ -11900,10 +11900,10 @@ process.exit(child.status || 0);
     if ($reviewConsoleRegistryReportV2.passed -ne $true -or $reviewConsoleRegistryReportV2.phase -ne 'p6c_review_console_registry_report_v2_state' -or $reviewConsoleRegistryReportV2.draft_output_key -ne 'registry_report_v2_state') {
       Add-Failure "Review Console registry report v2 state must pass with expected phase and draft output key"
     }
-    if ($reviewConsoleRegistryReportV2.accepted_count -ne 2 -or $reviewConsoleRegistryReportV2.failure_count -ne 1 -or $reviewConsoleRegistryReportV2.total_count -ne 3 -or $reviewConsoleRegistryReportV2.passed_count -ne 3 -or $reviewConsoleRegistryReportV2.failed_count_total -ne 0) {
-      Add-Failure "Review Console registry report v2 state must preserve accepted=2, failure=1, total=3, passed=3, failed=0"
+    if ($reviewConsoleRegistryReportV2.accepted_count -ne 2 -or $reviewConsoleRegistryReportV2.failure_count -ne 2 -or $reviewConsoleRegistryReportV2.total_count -ne 4 -or $reviewConsoleRegistryReportV2.passed_count -ne 4 -or $reviewConsoleRegistryReportV2.failed_count_total -ne 0) {
+      Add-Failure "Review Console registry report v2 state must preserve accepted=2, failure=2, total=4, passed=4, failed=0"
     }
-    if ($reviewConsoleRegistryReportV2.relation_count -lt 1 -or $reviewConsoleRegistryReportV2.old_runs_source_required_for_portable_validation -ne $false) {
+    if ($reviewConsoleRegistryReportV2.relation_count -lt 2 -or $reviewConsoleRegistryReportV2.old_runs_source_required_for_portable_validation -ne $false) {
       Add-Failure "Review Console registry report v2 state must expose relation and avoid old runs dependency"
     }
     if ($reviewConsoleRegistryReportV2.fetch_performed -ne $false -or $reviewConsoleRegistryReportV2.file_write_performed -ne $false -or $reviewConsoleRegistryReportV2.asset_archive_read_performed -ne $false -or $reviewConsoleRegistryReportV2.preview_loaded_or_rendered -ne $false -or $reviewConsoleRegistryReportV2.preview_creation_or_copy_performed -ne $false) {

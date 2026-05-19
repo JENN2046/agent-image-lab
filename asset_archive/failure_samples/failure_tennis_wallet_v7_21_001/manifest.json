@@ -1,0 +1,46 @@
+{
+  "manifest_type": "git_portable_failure_sample_capsule_manifest",
+  "version": "v1",
+  "sample_id": "failure_tennis_wallet_v7_21_001",
+  "created_at": "2026-05-19T09:59:09.359Z",
+  "artifact": {
+    "preview": {
+      "path": "preview.webp",
+      "format": "webp",
+      "long_edge": 512,
+      "width": 512,
+      "height": 512,
+      "sha256": "7170004f47f0da42577036b0e2ad70c8f152556b73a4cadb3238eb749e20b8fc",
+      "git_tracked": true
+    },
+    "original": {
+      "git_tracked": false,
+      "required_for_portable_validation": false
+    }
+  },
+  "chain": {
+    "failure_record": "failure_record.json",
+    "review_record": "review_record.json"
+  },
+  "source_refs": {
+    "failure_registry_ref": "failure_samples/failure_registry.yaml",
+    "review_doc_ref": "docs/278_v7_21_native_doubao_first_real_generation_post_run_review.md",
+    "prompt_package_ref": "prompts/image_generation/product_still_life_outdoor_tennis_wallet_hero_v2.yaml"
+  },
+  "production_candidate_allowed": false,
+  "memory_write_allowed": false,
+  "DailyNote_write_allowed": false,
+  "guard": {
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "runtime_execution_performed": false,
+    "real_manifest_read_performed": false,
+    "real_vcpchat_read_performed": false,
+    "real_vcptoolbox_read_performed": false,
+    "production_candidate_created": false
+  }
+}

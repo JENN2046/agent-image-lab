@@ -27,9 +27,9 @@ Current counts:
 
 ```yaml
 accepted: 2
-failure: 1
-total: 3
-passed: 3
+failure: 2
+total: 4
+passed: 4
 failed: 0
 ```
 
@@ -43,9 +43,9 @@ report_version: accepted_failure_capsule_registry_report_v2
 status: accepted_failure_capsule_registry_report_v2_verified
 totals:
   accepted: 2
-  failure: 1
-  total: 3
-  passed: 3
+  failure: 2
+  total: 4
+  passed: 4
   failed: 0
 per_sample_results:
   - lane: accepted | failure
@@ -62,6 +62,9 @@ per_sample_results:
 resolved_by_links:
   - failure_sample_id: failure_french_summer_rattan_bag_v7_29_001
     accepted_sample_id: accepted_french_summer_rattan_bucket_bag_001
+    relation_status: linked
+  - failure_sample_id: failure_tennis_wallet_v7_21_001
+    accepted_sample_id: accepted_product_still_life_tennis_wallet_001
     relation_status: linked
 failure_class_summary:
   accepted_failed: 0

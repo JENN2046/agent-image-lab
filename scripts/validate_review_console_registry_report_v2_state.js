@@ -27,8 +27,16 @@ const files = {
 const expected = {
   phase: "p6c_review_console_registry_report_v2_state",
   reportVersion: "accepted_failure_capsule_registry_report_v2",
-  failureId: "failure_french_summer_rattan_bag_v7_29_001",
-  acceptedId: "accepted_french_summer_rattan_bucket_bag_001"
+  relations: [
+    {
+      failureId: "failure_french_summer_rattan_bag_v7_29_001",
+      acceptedId: "accepted_french_summer_rattan_bucket_bag_001"
+    },
+    {
+      failureId: "failure_tennis_wallet_v7_21_001",
+      acceptedId: "accepted_product_still_life_tennis_wallet_001"
+    }
+  ]
 };
 
 const results = [];
@@ -54,7 +62,7 @@ function requireToken(label, text, token) {
 function evaluate(snapshot) {
   const guard = snapshot.guard || {};
   const totals = snapshot.totals || {};
-  const relation = (snapshot.resolved_by_links || [])[0] || {};
+  const relations = snapshot.resolved_by_links || [];
   const summary = snapshot.failure_class_summary || {};
 
   const identityOk =
@@ -69,18 +77,22 @@ function evaluate(snapshot) {
 
   const countsOk =
     totals.accepted === 2 &&
-    totals.failure === 1 &&
-    totals.total === 3 &&
-    totals.passed === 3 &&
+    totals.failure === 2 &&
+    totals.total === 4 &&
+    totals.passed === 4 &&
     totals.failed === 0;
 
   const relationOk =
-    relation.failure_sample_id === expected.failureId &&
-    relation.accepted_sample_id === expected.acceptedId &&
-    relation.relation_status === "linked" &&
-    relation.failure_final_route === "failure_learning_only_never_production" &&
-    relation.accepted_is_reusable_positive_example === true &&
-    relation.failure_is_never_production === true;
+    relations.length >= 2 &&
+    expected.relations.every((expectedRelation) => {
+      const relation = relations.find((item) => item.failure_sample_id === expectedRelation.failureId);
+      return relation &&
+        relation.accepted_sample_id === expectedRelation.acceptedId &&
+        relation.relation_status === "linked" &&
+        relation.failure_final_route === "failure_learning_only_never_production" &&
+        relation.accepted_is_reusable_positive_example === true &&
+        relation.failure_is_never_production === true;
+    });
 
   const summaryOk =
     summary.accepted_failed === 0 &&
@@ -199,8 +211,10 @@ for (const token of [
   "registry_report_v2_state",
   "scripts/validate_review_console_registry_report_v2_state.js",
   "accepted_failure_capsule_registry_report_v2",
-  expected.failureId,
-  expected.acceptedId
+  "failure_french_summer_rattan_bag_v7_29_001",
+  "accepted_french_summer_rattan_bucket_bag_001",
+  "failure_tennis_wallet_v7_21_001",
+  "accepted_product_still_life_tennis_wallet_001"
 ]) {
   requireToken("current_surfaces", currentSurfaces, token);
 }
