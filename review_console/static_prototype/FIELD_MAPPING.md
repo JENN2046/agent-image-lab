@@ -647,3 +647,14 @@ failure_samples / production_candidate，也不证明 VCP runtime integration。
 | `reviewer_action_catalog[].state=fail_closed` | fail-closed reviewer actions | 必须包含 manifest failure、relation repair、guard block、rerun local validator |
 | `guard.asset_archive_ui_read_performed=false` | UI no-read boundary | UI 不读取 `asset_archive/` |
 | `guard.preview_loaded_or_rendered=false` | preview boundary | UI 不加载 preview |
+
+## Capsule static product smoke Review Console snapshot mapping
+
+| Contract field | Static surface | Notes |
+| --- | --- | --- |
+| `unified_capsule_contract_report.totals` | Summary chips | Locked at accepted=2 / failure=2 / total=4 for the smoke fixture. |
+| `samples[].reviewer_action` | Capsule row reviewer action | Uses fixture label `accept_contract_baseline`; fail-closed labels live in `reviewer_action_catalog`. |
+| `reviewer_action_catalog[].state` | Snapshot validator action catalog | Requires pass and fail-closed labels to stay visible in static evidence. |
+| `guard.asset_archive_ui_read_performed` | Static guard line | Must remain false; UI does not read asset archive. |
+| `guard.preview_loaded_or_rendered` | Static guard line | Must remain false; no preview load. |
+| `guard.browser_runtime_validator_executed` | Static guard line | Must remain false; validator is Node-only. |

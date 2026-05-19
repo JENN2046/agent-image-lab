@@ -1,3 +1,33 @@
+
+---
+
+## Current Capsule Productization Goal
+
+```text
+phase: capsule_static_product_smoke_review_console_snapshot_gate
+status: completed_validated
+mode: A4.8 local implementation / static snapshot only
+objective: make Review Console static mock consume the checked-in smoke fixture shape and validate static/draft snapshot output
+fixture_ref: tests/schema_examples/CAPSULE_STATIC_PRODUCT_SMOKE_UNIFIED_CONTRACT.example.json
+snapshot_ref: tests/schema_examples/CAPSULE_STATIC_PRODUCT_SMOKE_REVIEW_CONSOLE_SNAPSHOT.example.json
+validator_ref: scripts/validate_capsule_static_product_smoke_review_console_snapshot.js
+accepted: 2
+failure: 2
+total: 4
+asset_archive_ui_read_performed: false
+preview_loaded_or_rendered: false
+browser_runtime_validator_executed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+push_tag_release_deploy_performed: false
+validated_now: node --check review_console/static_prototype/mock_data.js; node --check review_console/static_prototype/app.js; node --check scripts/validate_capsule_static_product_smoke_review_console_snapshot.js; node scripts/validate_capsule_static_product_smoke_review_console_snapshot.js; node scripts/validate_review_console_unified_capsule_contract.js; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts\\validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts\\validate-agent-image-lab-local.ps1
+recommended_next: commit_readiness_gate_for_capsule_static_product_smoke_review_console_snapshot
+```
 # Capsule Static Product Smoke Fixture Checkpoint
 
 ```text
@@ -2402,7 +2432,7 @@ validation_completed:
 
 ```text
 phase_id: v14_230_artifact_restoration_a5_authorization_package_draft
-status: completed_pending_validation
+status: completed_validated
 phase_record_ref: docs/v14_230_artifact_restoration_a5_authorization_package_draft.md
 purpose: define the smallest explicit A5 package needed to restore missing ignored runs/real_generation evidence for scripts/validate_mvp.ps1
 execution_mode: artifact_restoration_authorization_package_draft_only

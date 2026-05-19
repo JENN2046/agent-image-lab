@@ -211,3 +211,7 @@ v14.079 还用 `tests/schema_examples/review_report_protocol_final_closeout.exam
 `review_report_protocol_final_closeout.example.json` 必须验证 ReviewReport 从 route summary 到 memory draft register 的本地证据链闭合，且不允许任何真实记忆、生产、provider、plugin、API 或图片动作；它是回归证据，不是执行授权。
 
 P6J 新增 unified capsule contract 静态展示：`unified_capsule_contract_report` 把 registry report v2、capsule manifest contract、relation status 和 guard status 合成一个 Review Console 可消费的产品 contract。它展示 `manifest_validation_status`、`relation_validation_status`、`guard_validation_status` 和 reviewer action；只使用静态 mock，不执行 validator、不读取 `asset_archive/`、不加载 preview、不 fetch、不写文件。
+
+## Capsule static product smoke Review Console snapshot
+
+The static prototype consumes the checked-in `unified_capsule_contract_report` smoke fixture shape through `mock_data.js` and exposes the same draft output key. Snapshot validation is local Node-only and does not run a browser, read `asset_archive`, or load previews.

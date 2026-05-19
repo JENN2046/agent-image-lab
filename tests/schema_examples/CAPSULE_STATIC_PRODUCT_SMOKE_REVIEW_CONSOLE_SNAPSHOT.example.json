@@ -1,0 +1,60 @@
+{
+  "phase": "capsule_static_product_smoke_review_console_snapshot_gate",
+  "snapshot_version": "v1",
+  "source_fixture_ref": "tests/schema_examples/CAPSULE_STATIC_PRODUCT_SMOKE_UNIFIED_CONTRACT.example.json",
+  "static_mock_ref": "review_console/static_prototype/mock_data.js",
+  "draft_output_key": "unified_capsule_contract_report",
+  "render_surface": {
+    "summary_tokens": [
+      "overall:passed",
+      "registry:passed",
+      "manifest:passed",
+      "relation:passed",
+      "guard:passed",
+      "total:4"
+    ],
+    "row_count": 4,
+    "accepted": 2,
+    "failure": 2,
+    "total": 4,
+    "sample_ids": [
+      "accepted_french_summer_rattan_bucket_bag_001",
+      "accepted_product_still_life_tennis_wallet_001",
+      "failure_french_summer_rattan_bag_v7_29_001",
+      "failure_tennis_wallet_v7_21_001"
+    ],
+    "pass_reviewer_action": "accept_contract_baseline",
+    "fail_closed_reviewer_actions": [
+      "inspect_manifest_failure",
+      "repair_relation_link",
+      "block_production_guard_violation",
+      "rerun_local_validator_outside_ui"
+    ],
+    "row_fields": [
+      "sample_id",
+      "lane",
+      "manifest_validation_status",
+      "relation_validation_status",
+      "guard_validation_status",
+      "reviewer_action"
+    ]
+  },
+  "guard": {
+    "static_snapshot_only": true,
+    "browser_runtime_validator_executed": false,
+    "asset_archive_ui_read_performed": false,
+    "preview_loaded_or_rendered": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "runtime_execution_performed": false,
+    "real_manifest_read_performed": false,
+    "real_vcpchat_read_performed": false,
+    "real_vcptoolbox_read_performed": false,
+    "production_candidate_write_performed": false,
+    "push_tag_release_deploy_performed": false
+  }
+}

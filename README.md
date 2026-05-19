@@ -5658,3 +5658,7 @@ git diff --check
 - `docs/CAPSULE_MANIFEST_SCHEMA_RUNTIME_UNIFICATION_CLOSEOUT.md` records the local-only binding between `schemas/capsule_manifest_contract.schema.yaml` and `scripts/lib/capsule_manifest_contract.js`; schema/runtime drift now fails closed in validation.
 - `docs/CAPSULE_RUNTIME_PRODUCT_SMOKE_DESIGN.md` defines the static Review Console operator flow for consuming `unified_capsule_contract_report`; it is design-only and does not authorize browser runtime validation or `asset_archive` reads from UI.
 - `tests/schema_examples/CAPSULE_STATIC_PRODUCT_SMOKE_UNIFIED_CONTRACT.example.json` is the checked-in static product smoke fixture for `unified_capsule_contract_report`; `scripts/validate_capsule_static_product_smoke_fixture.js` compares it with local capsule report output while forbidding browser runtime, preview loading, provider/plugin/API, memory, and production paths.
+
+## Capsule static product smoke Review Console snapshot
+
+The Review Console static mock now mirrors `tests/schema_examples/CAPSULE_STATIC_PRODUCT_SMOKE_UNIFIED_CONTRACT.example.json`, with a static snapshot validator at `scripts/validate_capsule_static_product_smoke_review_console_snapshot.js`. This remains static-only: no browser runtime validator, no `asset_archive` UI read, and no preview load.

@@ -3130,7 +3130,7 @@ function renderUnifiedCapsuleContractReport() {
     <article class="registry-report-v2-card">
       <strong>${sample.sample_id}</strong>
       <p>${sample.lane} | manifest: ${sample.manifest_validation_status} | relation: ${sample.relation_validation_status} | guard: ${sample.guard_validation_status}</p>
-      <p>${sample.reviewer_action_cn}</p>
+      <p>${sample.reviewer_action || sample.reviewer_action_cn}</p>
     </article>
   `).join("");
   guard.innerHTML = Object.entries(report.guard)

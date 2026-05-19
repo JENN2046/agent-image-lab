@@ -11956,6 +11956,21 @@ process.exit(child.status || 0);
       Add-Failure "Capsule static product smoke fixture must remain static-only with no browser runtime, asset UI read, preview load, external, memory, or production actions"
     }
   }
+  $capsuleStaticProductSmokeReviewConsoleSnapshotOutput = & node (Join-Path $Root 'scripts/validate_capsule_static_product_smoke_review_console_snapshot.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Capsule static product smoke Review Console snapshot validation exited with failure"
+  } else {
+    $capsuleStaticProductSmokeReviewConsoleSnapshot = ($capsuleStaticProductSmokeReviewConsoleSnapshotOutput -join "`n") | ConvertFrom-Json
+    if ($capsuleStaticProductSmokeReviewConsoleSnapshot.passed -ne $true -or $capsuleStaticProductSmokeReviewConsoleSnapshot.status -ne 'capsule_static_product_smoke_review_console_snapshot_verified') {
+      Add-Failure "Capsule static product smoke Review Console snapshot must pass"
+    }
+    if ($capsuleStaticProductSmokeReviewConsoleSnapshot.totals.accepted -ne 2 -or $capsuleStaticProductSmokeReviewConsoleSnapshot.totals.failure -ne 2 -or $capsuleStaticProductSmokeReviewConsoleSnapshot.totals.total -ne 4) {
+      Add-Failure "Capsule static product smoke Review Console snapshot must preserve accepted=2, failure=2, total=4"
+    }
+    if ($capsuleStaticProductSmokeReviewConsoleSnapshot.browser_runtime_validator_executed -ne $false -or $capsuleStaticProductSmokeReviewConsoleSnapshot.asset_archive_ui_read_performed -ne $false -or $capsuleStaticProductSmokeReviewConsoleSnapshot.preview_loaded_or_rendered -ne $false) {
+      Add-Failure "Capsule static product smoke Review Console snapshot must remain static-only with no browser runtime, asset UI read, or preview load"
+    }
+  }
   $reviewConsoleRegistryReportV2Output = & node (Join-Path $Root 'scripts/validate_review_console_registry_report_v2_state.js')
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "Review Console registry report v2 state validation exited with failure"
