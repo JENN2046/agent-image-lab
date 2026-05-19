@@ -2,7 +2,7 @@
 
 base_contract: AGENTS.md
 mode: A4.8 authorization package only
-status: concrete_package_validated_pending_source_authorization
+status: retargeted_package_validated_pending_capsule_creation_authorization
 
 ## Purpose
 
@@ -16,27 +16,27 @@ authorize creating, copying, converting, staging, committing, or pushing
 ## Selected First Sample
 
 ```yaml
-selected_sample_id: accepted_womens_resort_relaxed_knit_codex_v2_001
+selected_sample_id: accepted_french_summer_rattan_bucket_bag_001
 selection_reason: >
-  This sample is the original v14.131 real artifact recoverability MVP sample.
-  It already has registry, category index, review, formal package, closeout,
-  import-record, hash, dimensions, and human approval lineage. It is the best
-  first target for migrating from old local-only runs evidence to a
-  Git-portable preview capsule.
+  The previously selected v14.131 womens knit original is not available on
+  this computer. This accepted rattan bag sample is already registered and its
+  project-relative source image exists locally, making it the smallest honest
+  first target for a Git-portable preview capsule.
 source_registry_ref: accepted_samples/accepted_sample_registry.yaml
-source_category_ref: accepted_samples/categories/fashion_lookbook_portrait.yaml
-legacy_import_record_ref: runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/resort_relaxed_knit_final_import_record.json
-legacy_review_record_ref: docs/v14_105_codex_session_womens_resort_relaxed_knit_final_review.md
-legacy_approval_record_ref: docs/v14_107_womens_resort_relaxed_knit_accepted_sample_closeout.md
-legacy_formal_sample_package_ref: docs/v14_106_womens_resort_relaxed_knit_formal_sample_promotion_package.md
-legacy_original_path_ref: runs/real_generation/v14_105_codex_session_womens_resort_relaxed_knit_final_candidate/codex_session_womens_resort_relaxed_knit_final_v2.png
-legacy_original_required_for_p1: false
+source_category_ref: accepted_samples/categories/fashion_lifestyle_still_life.yaml
+legacy_import_record_ref: registry_and_review_metadata_no_standalone_import_record
+legacy_review_record_ref: docs/286_v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_post_run_review_accepted_candidate.md
+legacy_approval_record_ref: docs/286_v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_post_run_review_accepted_candidate.md
+legacy_original_path_ref: runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg
+legacy_original_available_on_current_machine: true
+legacy_original_sha256_in_manifest_allowed: false
+legacy_original_required_for_portable_validation: false
 ```
 
 ## Target Capsule Layout
 
 ```text
-asset_archive/accepted_samples/accepted_womens_resort_relaxed_knit_codex_v2_001/
+asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/
   manifest.json
   preview.webp
   import_record.json
@@ -67,11 +67,11 @@ chain:
 
 ```yaml
 exact_allowed_target_paths_after_separate_authorization:
-  - asset_archive/accepted_samples/accepted_womens_resort_relaxed_knit_codex_v2_001/manifest.json
-  - asset_archive/accepted_samples/accepted_womens_resort_relaxed_knit_codex_v2_001/preview.webp
-  - asset_archive/accepted_samples/accepted_womens_resort_relaxed_knit_codex_v2_001/import_record.json
-  - asset_archive/accepted_samples/accepted_womens_resort_relaxed_knit_codex_v2_001/review_record.json
-  - asset_archive/accepted_samples/accepted_womens_resort_relaxed_knit_codex_v2_001/approval_record.json
+  - asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/manifest.json
+  - asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp
+  - asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/import_record.json
+  - asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/review_record.json
+  - asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/approval_record.json
 ```
 
 ## Source Requirement
@@ -86,7 +86,7 @@ source_option_A_existing_preview_webp:
     - source long edge must already be 512
     - source must be approved by reviewer for this sample
 source_option_B_existing_original_for_local_conversion:
-  source_original_image_path: "<TO_BE_FILLED_BY_USER>"
+  source_original_image_path: "runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg"
   allowed_conversion:
     format: webp
     long_edge: 512
@@ -105,18 +105,19 @@ If no exact source path is provided, the execution gate is blocked.
 ## Minimum Authorization Text
 
 Use this text only when the source path is known. Replace exactly one
-`<TO_BE_FILLED_BY_USER>` source placeholder before approval.
+source path only if the human chooses a different approved source.
 
 ```text
 批准执行 P1 first Git-portable preview capsule creation for
-accepted_womens_resort_relaxed_knit_codex_v2_001：
+accepted_french_summer_rattan_bucket_bag_001：
 允许在 Agent Image Lab 当前仓库内创建
-asset_archive/accepted_samples/accepted_womens_resort_relaxed_knit_codex_v2_001/
+asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/
 下的 manifest.json、preview.webp、import_record.json、review_record.json、
-approval_record.json；允许从 <TO_BE_FILLED_BY_USER> 读取已批准的本地源图片或
-preview，并在本地生成/复制 long_edge=512 的 preview.webp；允许计算 preview.webp
-sha256 并写入 manifest.json；允许把 import/review/approval 链路记录复制或提取
-为 capsule 内 JSON 记录。
+approval_record.json；允许从
+runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg
+读取已批准的本地源图片，并在本地生成 long_edge=512 的 preview.webp；允许计算
+preview.webp sha256 并写入 manifest.json；允许把 registry/review/approval 链路
+记录提取为 capsule 内 JSON 记录。
 
 禁止 Base64；禁止 original sha256；禁止 provider/plugin/API/image generation；
 禁止 DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox；禁止 production
@@ -165,7 +166,7 @@ run powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
 - no image copy or conversion now
 - no provider/API/plugin call
 - no image generation
-- no source image read now
+- no source image read for capsule creation now
 - no DailyNote or VCP memory write
 - no runtime/VCPChat/VCPToolBox/real manifest read
 - no production candidate or failure sample write

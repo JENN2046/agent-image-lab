@@ -29,17 +29,18 @@ decision:
 
 ```yaml
 phase: p1_first_git_portable_preview_capsule_authorization_package
-status: validated_pending_source_authorization
+status: retargeted_validated_pending_capsule_creation_authorization
 mode: A4.8_safe_local_docs_only_authorization_package
-goal: prepare a concrete approval package for the first Git-portable preview capsule without creating the capsule
+goal: retarget the concrete first Git-portable preview capsule package to a registered accepted sample with a local source image
 evidence:
   authorization_package: docs/FIRST_GIT_PORTABLE_PREVIEW_CAPSULE_AUTHORIZATION_GATE.md
 selected_sample:
-  sample_id: accepted_womens_resort_relaxed_knit_codex_v2_001
-  target_capsule: asset_archive/accepted_samples/accepted_womens_resort_relaxed_knit_codex_v2_001/
+  sample_id: accepted_french_summer_rattan_bucket_bag_001
+  target_capsule: asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/
+  source_image_path: runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg
   preview_long_edge: 512
 guard:
-  source_image_read_performed: false
+  source_availability_read_only_check_performed: true
   preview_created_or_copied: false
   provider_plugin_api_image_generation_performed: false
   DailyNote_or_VCP_memory_write_performed: false
@@ -47,8 +48,8 @@ guard:
   push_tag_release_deploy_performed_by_this_phase: false
 decision:
   execution_allowed_now: false
-  source_path_required_before_execution: true
-  recommended_next: exact_file_local_commit_or_request_source_authorization
+  capsule_creation_authorization_required: true
+  recommended_next: exact_file_local_commit_or_request_capsule_creation_authorization
 ```
 
 ## C2b Validator-Blocked Strategy Package

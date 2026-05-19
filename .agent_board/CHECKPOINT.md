@@ -30,16 +30,16 @@ not_performed:
 
 ```yaml
 phase: p1_first_git_portable_preview_capsule_authorization_package
-status: validated_pending_source_authorization
-goal: prepare the exact first Git-portable preview capsule authorization package
+status: retargeted_validated_pending_capsule_creation_authorization
+goal: retarget the exact first Git-portable preview capsule authorization package to a source image that exists on this computer
 completed:
-  - selected accepted_womens_resort_relaxed_knit_codex_v2_001 as first capsule target
-  - fixed target capsule path under asset_archive/accepted_samples/
+  - changed first capsule target from accepted_womens_resort_relaxed_knit_codex_v2_001 to accepted_french_summer_rattan_bucket_bag_001
+  - fixed retargeted capsule path under asset_archive/accepted_samples/
+  - confirmed the project-relative source image path exists by read-only check
   - defined required capsule files and manifest contract
-  - added source-option requirements and minimum approval text
+  - updated minimum approval text for the retargeted sample
   - added stop conditions
 not_performed:
-  - no source image read
   - no preview.webp creation, copy, or conversion
   - no provider, plugin, API, or image generation
   - no DailyNote or VCP memory write
