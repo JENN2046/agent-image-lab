@@ -1,3 +1,29 @@
+## Current Run State - Capsule Registry YAML Parser
+
+```text
+phase_id: capsule_registry_yaml_parser
+status: completed_validated_pending_commit
+mode: A4.8 local parser dependency hardening
+authorization: user explicitly authorized dependency-changing YAML parser fix
+primary_fixes: accepted_registry_yaml_parse, duplicate_sample_id_fail_closed, registry_memory_daily_note_false_guards, sample_memory_daily_note_false_guards
+validation_record: docs/CAPSULE_REGISTRY_YAML_PARSER_CLOSEOUT.md
+dependency_added: yaml@2.9.0
+runs_mutated: false
+preview_binary_created_or_copied: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+runtime_execution_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+production_candidate_write_performed: false
+push_tag_release_deploy_performed_by_local_parser_step: false
+recommended_next: final_validation_then_exact_file_commit_and_push_if_preflight_clean
+```
 ## Current Run State - Capsule Creator Review Hardening
 
 ```text

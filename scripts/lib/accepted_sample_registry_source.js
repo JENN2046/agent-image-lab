@@ -1,35 +1,28 @@
 "use strict";
 
+const YAML = require("yaml");
+
 const ACCEPTED_REGISTRY_REF = "accepted_samples/accepted_sample_registry.yaml";
 const ACCEPTED_CAPSULE_ROOT = "asset_archive/accepted_samples";
 const DEFAULT_LONG_EDGE = 512;
 
 function parseRegistryRows(registryText) {
-  const rows = [];
-  let currentId = null;
-  let currentLines = [];
-
-  for (const line of registryText.split(/\r?\n/)) {
-    const match = line.match(/^\s*-\s+sample_id:\s*(\S+)/);
-    if (match) {
-      if (currentId) rows.push({ sample_id: currentId, block: currentLines.join("\n") });
-      currentId = match[1];
-      currentLines = [line];
-    } else if (currentId) {
-      currentLines.push(line);
-    }
-  }
-
-  if (currentId) rows.push({ sample_id: currentId, block: currentLines.join("\n") });
-  return rows;
+  const document = YAML.parse(registryText);
+  const registry = document && document.accepted_sample_registry;
+  if (!registry || !Array.isArray(registry.samples)) return [];
+  return registry.samples.map((sample) => ({
+    sample_id: sample && sample.sample_id,
+    data: sample || {},
+    block: YAML.stringify(sample || {}).trim(),
+  }));
 }
 
-function scalar(block, field) {
-  const escaped = field.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const match = block.match(new RegExp("^\\s*" + escaped + ":\\s*(.+?)\\s*$", "m"));
-  if (!match) return null;
-  const value = match[1].trim();
-  return value === "null" ? null : value;
+function scalar(row, field) {
+  const value = row && row.data ? row.data[field] : null;
+  if (value === null || value === undefined) return null;
+  if (typeof value === "string") return value;
+  if (typeof value === "number" || typeof value === "boolean") return String(value);
+  return null;
 }
 
 function categoryContainsSample(categoryText, sampleId) {
@@ -48,31 +41,42 @@ function loadAcceptedSampleFromRegistry(core, sampleId, options = {}) {
   if (!core.exists(registryRef)) throw new Error(`accepted sample registry missing: ${registryRef}`);
 
   const registryText = core.read(registryRef);
-  const row = parseRegistryRows(registryText).find((item) => item.sample_id === sampleId);
+  const rows = parseRegistryRows(registryText);
+  const row = rows.find((item) => item.sample_id === sampleId);
   if (!row) throw new Error(`sample not found in accepted registry: ${sampleId}`);
+
+  const duplicateCount = rows.filter((item) => item.sample_id === sampleId).length;
+  if (duplicateCount > 1) throw new Error(`duplicate sample_id in accepted registry: ${sampleId}`);
+
+  const registry = YAML.parse(registryText).accepted_sample_registry;
 
   const sample = {
     sampleId,
-    sourceImage: scalar(row.block, "image_path"),
+    sourceImage: scalar(row, "image_path"),
     targetRoot: `${ACCEPTED_CAPSULE_ROOT}/${sampleId}`,
     registryRef,
-    category: scalar(row.block, "category"),
-    reviewDocRef: scalar(row.block, "review_doc_ref"),
-    promptPackageRef: scalar(row.block, "prompt_package_ref"),
-    sourcePhase: scalar(row.block, "source_phase"),
-    assetStatus: scalar(row.block, "asset_status"),
-    providerType: scalar(row.block, "provider_type"),
-    pluginId: scalar(row.block, "plugin_id"),
-    model: scalar(row.block, "model"),
+    category: scalar(row, "category"),
+    reviewDocRef: scalar(row, "review_doc_ref"),
+    promptPackageRef: scalar(row, "prompt_package_ref"),
+    sourcePhase: scalar(row, "source_phase"),
+    assetStatus: scalar(row, "asset_status"),
+    providerType: scalar(row, "provider_type"),
+    pluginId: scalar(row, "plugin_id"),
+    model: scalar(row, "model"),
     requiredLongEdge: DEFAULT_LONG_EDGE,
     registrySampleBlock: row.block,
     source: "accepted_sample_registry",
   };
 
   const failures = [];
+  if (!registry.version) failures.push("registry_field_missing:version");
+  if (registry.memory_write_allowed !== false) failures.push("registry_field_not_false:memory_write_allowed");
+  if (registry.daily_note_write_allowed !== false) failures.push("registry_field_not_false:daily_note_write_allowed");
   for (const field of ["sourceImage", "category", "reviewDocRef", "promptPackageRef", "sourcePhase", "assetStatus", "providerType", "model"]) {
     if (!sample[field]) failures.push(`registry_field_missing:${field}`);
   }
+  if (row.data.write_to_memory_allowed !== false) failures.push("sample_field_not_false:write_to_memory_allowed");
+  if (row.data.daily_note_write_allowed !== false) failures.push("sample_field_not_false:daily_note_write_allowed");
 
   if (sample.category) {
     sample.categoryRef = `accepted_samples/categories/${sample.category}.yaml`;

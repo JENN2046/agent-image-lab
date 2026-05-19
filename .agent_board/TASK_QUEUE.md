@@ -1,4 +1,16 @@
-## Current Capsule Creator Review Hardening
+## Current Capsule Registry YAML Parser
+
+```text
+Current product-mainline task: capsule_registry_yaml_parser.
+Status: completed validated pending guarded local commit.
+Purpose: replace regex-like accepted registry parsing with a formal YAML parser after explicit dependency-change authorization.
+Changed files: package.json, package-lock.json, scripts/lib/accepted_sample_registry_source.js, scripts/validate_create_preview_capsule_registry_source.js, README.md, docs/CAPSULE_REGISTRY_YAML_PARSER_CLOSEOUT.md, .agent_board resume surfaces.
+Evidence: registry source uses yaml@2.9.0, reads accepted_sample_registry.samples[] structurally, fails closed on duplicate sample_id and memory/DailyNote guard drift, and preserves creator CLI behavior.
+Not performed: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no runs mutation, no preview binary creation/copy/conversion, no production candidate, no tag/release/deploy/push by this local parser step.
+Recommended next: final validation, exact-file guarded local commit, then separately authorized push if preflight passes.
+```
+
+---## Current Capsule Creator Review Hardening
 
 ```text
 Current product-mainline task: capsule_creator_review_hardening.

@@ -1,4 +1,17 @@
-# Capsule Creator Review Hardening Checkpoint
+# Capsule Registry YAML Parser Checkpoint
+
+```text
+phase_id: capsule_registry_yaml_parser
+status: completed_validated_pending_commit
+checkpoint_reason: authorized P1-4 parser hardening
+completed_work: added yaml@2.9.0; replaced regex registry row parsing with YAML.parse; added duplicate sample_id and memory/DailyNote false guard checks; updated validator and dependency policy note.
+validation_record: docs/CAPSULE_REGISTRY_YAML_PARSER_CLOSEOUT.md
+validation_pending_final: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+not_performed: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no runs mutation, no preview binary creation/copy/conversion, no production candidate, no tag/release/deploy by this parser step.
+next_safe_action: final local validation and guarded exact-file commit.
+```
+
+---# Capsule Creator Review Hardening Checkpoint
 
 ```text
 phase_id: capsule_creator_review_hardening

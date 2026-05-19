@@ -1,3 +1,17 @@
+## Current Handoff Update - Capsule Registry YAML Parser
+
+```text
+Status: capsule_registry_yaml_parser completed_validated_pending_commit.
+Reason: implement the previously deferred P1-4 review fix after explicit dependency-change authorization.
+Execution mode: A4.8 local parser dependency hardening.
+Validation record: docs/CAPSULE_REGISTRY_YAML_PARSER_CLOSEOUT.md.
+Changed dependency: package.json/package-lock.json now include yaml@2.9.0.
+Changed parser: scripts/lib/accepted_sample_registry_source.js now parses accepted_sample_registry.yaml via YAML.parse instead of regex sample blocks.
+Changed validation: scripts/validate_create_preview_capsule_registry_source.js verifies yaml parser usage and absence of the old sample-id block regex.
+Guards: registry/sample memory and DailyNote write flags must remain false; duplicate sample_id fails closed.
+Not performed: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no runs mutation, no preview binary creation/copy/conversion, no production candidate, no tag/release/deploy/push by this local parser step.
+Recommended next: final validation, exact-file guarded commit, then push only if preflight passes.
+```
 ## Current Handoff Update - Capsule Creator Review Hardening
 
 ```text

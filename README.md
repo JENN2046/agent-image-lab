@@ -5654,3 +5654,4 @@ git diff --check
 - Review Console 新增 `unified_capsule_contract_report` 静态 contract 面板，把 registry、manifest、relation、guard 四类状态汇总到同一个可审查界面，不读取 `asset_archive/`、不加载 preview、不执行 runtime。
 
 - `sharp dependency policy`: `sharp` is allowed only for local preview WebP capsule generation after explicit `--confirm-create=true`; it must not be used for provider generation, unapproved source-path processing, production export, DailyNote, VCP memory, or runtime integration.
+- `yaml dependency policy`: `yaml` is allowed only for local registry parsing and fail-closed validation of `accepted_samples/accepted_sample_registry.yaml`; it must not read external manifests, VCPChat, VCPToolBox, provider payloads, secrets, or runtime configuration.
