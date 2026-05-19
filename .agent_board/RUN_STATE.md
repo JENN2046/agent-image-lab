@@ -1,5 +1,37 @@
 # RUN_STATE.md — Agent Image Lab
 
+## Accepted + Failure Capsules Clone-Portable Validation
+
+```yaml
+phase: accepted_failure_capsules_clone_portable_validation
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_local_validation
+goal: prove accepted plus failure preview capsules validate from a clean local Git clone
+source_head: 1d7feac9ea39945fad050d445b615cb88da828ae
+clone_root_class: .agent_private
+dependency_restore: npm_ci
+validated_counts:
+  accepted_preview_capsules: 2
+  failure_preview_capsules: 1
+old_failure_source_image_present_in_clone: false
+validation:
+  accepted_registry: passed
+  accepted_negative_cases: passed
+  failure_registry_require_at_least_1: passed
+  failure_negative_cases: passed
+  failure_creator_dry_run_guard: passed
+  mvp_validation: passed
+guard:
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  production_candidate_created: false
+  push_tag_release_deploy_performed: false
+decision:
+  clone_portable_accepted_failure_capsules_verified: true
+  recommended_next: review_console_static_failure_capsule_display
+```
+
 ## First Failure Sample Capsule Creation
 
 ```yaml

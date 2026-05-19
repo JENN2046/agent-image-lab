@@ -1,5 +1,28 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## Accepted + Failure Capsules Clone-Portable Validation
+
+```yaml
+phase: accepted_failure_capsules_clone_portable_validation
+status: completed_validated_pending_guarded_local_commit
+completed:
+  - created a clean local Git clone under .agent_private
+  - restored dependencies with npm ci
+  - confirmed old failure source image was absent in the clone
+  - verified 2 accepted preview capsules
+  - verified 1 failure preview capsule
+  - verified failure capsule creator dry-run guard with source_image_exists=false and target_capsule_exists=true
+  - verified scripts/validate_mvp.ps1 passes inside the clean Git clone
+not_performed:
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no production candidate
+  - no push, tag, release, or deploy
+next:
+  - Review Console static failure capsule display
+```
+
 ## First Failure Sample Capsule Creation
 
 ```yaml

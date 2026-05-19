@@ -6,6 +6,20 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current Accepted + Failure Capsules Clone-Portable Validation
+
+```text
+Current product-mainline task: accepted_failure_capsules_clone_portable_validation.
+Status: completed validated pending guarded local commit.
+Purpose: prove accepted and failure preview capsules validate from a clean local Git clone without old ignored source images.
+Changed files: docs/P5J_ACCEPTED_FAILURE_CAPSULES_CLONE_PORTABLE_VALIDATION.md, README.md, .agent_board resume surfaces.
+Validated counts: accepted=2, failure=1.
+Not performed: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: Review Console static failure capsule display.
+```
+
+---
+
 ## Current First Failure Sample Capsule Creation
 
 ```text

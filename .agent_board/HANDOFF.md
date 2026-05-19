@@ -1,5 +1,20 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — Accepted + Failure Capsules Clone-Portable Validation
+
+```text
+Status: accepted_failure_capsules_clone_portable_validation completed_validated_pending_guarded_local_commit.
+Reason: prove current Git-tracked accepted and failure preview capsules validate from a clean local Git clone without the ignored failure source image.
+Execution mode: A4.8 local validation.
+Source HEAD: 1d7feac9ea39945fad050d445b615cb88da828ae.
+Validation record: docs/P5J_ACCEPTED_FAILURE_CAPSULES_CLONE_PORTABLE_VALIDATION.md.
+Validated counts: accepted=2, failure=1.
+Old failure source image present in clone: false.
+Validation passed: accepted registry, accepted negative cases, failure registry require-at-least=1, failure negative cases, creator dry-run guard, and scripts/validate_mvp.ps1.
+Not performed: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: Review Console static failure capsule display.
+```
+
 ## Current Handoff Update — First Failure Sample Capsule Creation
 
 ```text
