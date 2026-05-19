@@ -11892,6 +11892,27 @@ process.exit(child.status || 0);
     }
   }
 
+  $capsuleRegistryReportV2NegativeOutput = & node (Join-Path $Root 'scripts/validate_capsule_registry_report_v2_negative_states.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Capsule registry report v2 negative-state validation exited with failure"
+  } else {
+    $capsuleRegistryReportV2Negative = ($capsuleRegistryReportV2NegativeOutput -join "`n") | ConvertFrom-Json
+    if ($capsuleRegistryReportV2Negative.passed -ne $true -or $capsuleRegistryReportV2Negative.phase -ne 'p6g_registry_report_v2_negative_state_design' -or $capsuleRegistryReportV2Negative.scenario_count -ne 4) {
+      Add-Failure "Capsule registry report v2 negative-state validation must pass with expected phase and scenario count"
+    }
+    foreach ($requiredNegativeClass in @('accepted_registry_failed', 'failure_registry_failed', 'missing_resolved_by_link', 'production_or_memory_guard_violation')) {
+      if ($capsuleRegistryReportV2Negative.negative_state_classes -notcontains $requiredNegativeClass) {
+        Add-Failure "Capsule registry report v2 negative-state validation must cover $requiredNegativeClass"
+      }
+    }
+    if ($capsuleRegistryReportV2Negative.no_real_capsule_modified -ne $true -or $capsuleRegistryReportV2Negative.no_third_capsule_creation -ne $true) {
+      Add-Failure "Capsule registry report v2 negative-state validation must avoid real capsule mutation and third capsule creation"
+    }
+    if ($capsuleRegistryReportV2Negative.guard.provider_contact_performed -ne $false -or $capsuleRegistryReportV2Negative.guard.plugin_call_performed -ne $false -or $capsuleRegistryReportV2Negative.guard.api_call_performed -ne $false -or $capsuleRegistryReportV2Negative.guard.image_generation_performed -ne $false -or $capsuleRegistryReportV2Negative.guard.DailyNote_write_performed -ne $false -or $capsuleRegistryReportV2Negative.guard.VCP_memory_write_performed -ne $false -or $capsuleRegistryReportV2Negative.guard.runtime_execution_performed -ne $false -or $capsuleRegistryReportV2Negative.guard.real_manifest_read_performed -ne $false -or $capsuleRegistryReportV2Negative.guard.real_vcpchat_read_performed -ne $false -or $capsuleRegistryReportV2Negative.guard.real_vcptoolbox_read_performed -ne $false -or $capsuleRegistryReportV2Negative.guard.production_candidate_write_performed -ne $false -or $capsuleRegistryReportV2Negative.guard.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Capsule registry report v2 negative-state validation must remain local-only with no external, memory, runtime, production, or remote actions"
+    }
+  }
+
   $reviewConsoleRegistryReportV2Output = & node (Join-Path $Root 'scripts/validate_review_console_registry_report_v2_state.js')
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "Review Console registry report v2 state validation exited with failure"

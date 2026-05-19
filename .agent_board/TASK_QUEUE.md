@@ -6,6 +6,21 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current P6G Registry Report v2 Negative-State Design
+
+```text
+Current product-mainline task: p6g_registry_report_v2_negative_state_design.
+Status: completed validated pending guarded local commit.
+Purpose: make registry_report_v2 fail closed for synthetic negative states while preserving accepted=2 / failure=2 / total=4.
+Changed files: scripts/validate_capsule_registry_report_v2.js, scripts/validate_capsule_registry_report_v2_negative_states.js, tests/schema_examples/P6G_REGISTRY_REPORT_V2_NEGATIVE_STATES.example.json, docs/P6G_REGISTRY_REPORT_V2_NEGATIVE_STATE_DESIGN.md, scripts/validate_mvp.ps1, README.md, .agent_board resume surfaces.
+Evidence: accepted_registry_failed, failure_registry_failed, missing_resolved_by_link, missing_chain_file, preview_hash_mismatch, and production_or_memory_guard_violation are classified as fail-closed states.
+Decision: no third capsule; this is a design and validator hardening step only.
+Not performed: no real capsule mutation, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: Review Console negative-state visibility design.
+```
+
+---
+
 ## Current P6F Accepted / Failure 2x2 Clone-Portable Baseline
 
 ```text

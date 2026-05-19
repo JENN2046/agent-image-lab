@@ -108,7 +108,6 @@ P6B does not authorize:
 
 ## Next
 
-The next useful local step is either:
+P6G extends this validator surface with `scripts/validate_capsule_registry_report_v2_negative_states.js`, a synthetic negative-state validator for `accepted_registry_failed`, `failure_registry_failed`, `missing_resolved_by_link`, `missing_chain_file`, `preview_hash_mismatch`, and `production_or_memory_guard_violation`. It does not modify real capsules and keeps the no third capsule baseline.
 
-- expose this report in the Review Console dashboard as `registry_report_v2_state`, or
-- prepare the second failure capsule authorization package.
+The next useful local step after P6G is Review Console negative-state visibility design, so the static UI can explain report failure states without reading runtime data or mutating capsules.

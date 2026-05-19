@@ -1,0 +1,47 @@
+{
+  "capsule_registry_report_v2_negative_states": {
+    "phase": "p6g_registry_report_v2_negative_state_design",
+    "snapshot_status": "negative_state_design_fixture",
+    "source_validator": "scripts/validate_capsule_registry_report_v2.js",
+    "negative_validator": "scripts/validate_capsule_registry_report_v2_negative_states.js",
+    "baseline_counts": {
+      "accepted": 2,
+      "failure": 2,
+      "total": 4
+    },
+    "negative_state_classes": [
+      "accepted_registry_failed",
+      "failure_registry_failed",
+      "missing_resolved_by_link",
+      "missing_chain_file",
+      "preview_hash_mismatch",
+      "production_or_memory_guard_violation"
+    ],
+    "required_behavior": {
+      "accepted_registry_failure_fails_closed": true,
+      "failure_registry_failure_fails_closed": true,
+      "missing_resolved_by_link_fails_closed": true,
+      "guard_violation_fails_closed": true,
+      "per_sample_failure_classes_preserved": true,
+      "failure_class_summary_counted": true,
+      "old_runs_source_required_for_portable_validation": false
+    },
+    "no_third_capsule_creation": true,
+    "guard": {
+      "synthetic_reports_only": true,
+      "real_capsule_modified": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "runtime_execution_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "production_candidate_write_performed": false,
+      "push_tag_release_deploy_performed": false
+    }
+  }
+}

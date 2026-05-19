@@ -1,5 +1,39 @@
 # RUN_STATE.md — Agent Image Lab
 
+## P6G Registry Report v2 Negative-State Design
+
+```yaml
+phase: p6g_registry_report_v2_negative_state_design
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_local_validation_design
+goal: make registry_report_v2 fail closed for negative states without sample-count expansion
+validation_record: docs/P6G_REGISTRY_REPORT_V2_NEGATIVE_STATE_DESIGN.md
+validator: scripts/validate_capsule_registry_report_v2_negative_states.js
+fixture: tests/schema_examples/P6G_REGISTRY_REPORT_V2_NEGATIVE_STATES.example.json
+baseline_counts:
+  accepted_capsules: 2
+  failure_capsules: 2
+  total_capsules: 4
+negative_state_classes:
+  - accepted_registry_failed
+  - failure_registry_failed
+  - missing_resolved_by_link
+  - missing_chain_file
+  - preview_hash_mismatch
+  - production_or_memory_guard_violation
+decision:
+  no_third_capsule_now: true
+  third_capsule_creation_now: false
+  recommended_next: review_console_negative_state_visibility_design
+guard:
+  real_capsule_modified: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  production_candidate_created: false
+  push_tag_release_deploy_performed: false
+```
+
 ## P6F Accepted / Failure 2x2 Clone-Portable Baseline
 
 ```yaml

@@ -291,53 +291,65 @@ function evaluate(report, fixture, currentSurfaces) {
   return checks;
 }
 
-const acceptedRun = runJsonValidator(files.acceptedValidator);
-const failureRun = runJsonValidator(files.failureValidator, ["--require-at-least=1"]);
-const acceptedRegistry = acceptedRun.parsed || { passed: false, samples: [], status: "missing_accepted_report" };
-const failureRegistry = failureRun.parsed || { passed: false, samples: [], status: "missing_failure_report" };
-const report = buildReport(acceptedRegistry, failureRegistry);
+function main() {
+  const acceptedRun = runJsonValidator(files.acceptedValidator);
+  const failureRun = runJsonValidator(files.failureValidator, ["--require-at-least=1"]);
+  const acceptedRegistry = acceptedRun.parsed || { passed: false, samples: [], status: "missing_accepted_report" };
+  const failureRegistry = failureRun.parsed || { passed: false, samples: [], status: "missing_failure_report" };
+  const report = buildReport(acceptedRegistry, failureRegistry);
 
-const fixture = core.parseJsonIfExists(files.fixture)?.capsule_registry_report_v2 || {};
-const currentSurfaces = [
-  JSON.stringify(fixture, null, 2),
-  ...Object.values(files).filter((file) => core.exists(file)).map((file) => {
-    const text = core.read(file);
-    return file.startsWith(".agent_board/") ? currentBoardBlock(text) : text;
-  })
-].join("\n");
-const checks = evaluate(report, fixture, currentSurfaces);
+  const fixture = core.parseJsonIfExists(files.fixture)?.capsule_registry_report_v2 || {};
+  const currentSurfaces = [
+    JSON.stringify(fixture, null, 2),
+    ...Object.values(files).filter((file) => core.exists(file)).map((file) => {
+      const text = core.read(file);
+      return file.startsWith(".agent_board/") ? currentBoardBlock(text) : text;
+    })
+  ].join("\n");
+  const checks = evaluate(report, fixture, currentSurfaces);
 
-if (acceptedRun.exit_code !== 0) report.failures.push("accepted_registry_validator_exited_nonzero");
-if (failureRun.exit_code !== 0) report.failures.push("failure_registry_validator_exited_nonzero");
-for (const check of checks) {
-  if (!check.passed) report.failures.push(`check_failed:${check.check}`);
+  if (acceptedRun.exit_code !== 0) report.failures.push("accepted_registry_validator_exited_nonzero");
+  if (failureRun.exit_code !== 0) report.failures.push("failure_registry_validator_exited_nonzero");
+  for (const check of checks) {
+    if (!check.passed) report.failures.push(`check_failed:${check.check}`);
+  }
+
+  report.passed = report.failures.length === 0;
+  report.status = report.passed
+    ? "accepted_failure_capsule_registry_report_v2_verified"
+    : "accepted_failure_capsule_registry_report_v2_failed";
+
+  const output = {
+    ...report,
+    check_count: checks.length,
+    failed_count: checks.filter((check) => !check.passed).length,
+    checks,
+    validator_runs: {
+      accepted: {
+        command: acceptedRun.command,
+        exit_code: acceptedRun.exit_code,
+        passed: acceptedRegistry.passed === true,
+        status: acceptedRegistry.status
+      },
+      failure: {
+        command: failureRun.command,
+        exit_code: failureRun.exit_code,
+        passed: failureRegistry.passed === true,
+        status: failureRegistry.status
+      }
+    }
+  };
+
+  process.stdout.write(`${JSON.stringify(output, null, 2)}\n`);
+  process.exit(output.passed ? 0 : 1);
 }
 
-report.passed = report.failures.length === 0;
-report.status = report.passed
-  ? "accepted_failure_capsule_registry_report_v2_verified"
-  : "accepted_failure_capsule_registry_report_v2_failed";
-
-const output = {
-  ...report,
-  check_count: checks.length,
-  failed_count: checks.filter((check) => !check.passed).length,
-  checks,
-  validator_runs: {
-    accepted: {
-      command: acceptedRun.command,
-      exit_code: acceptedRun.exit_code,
-      passed: acceptedRegistry.passed === true,
-      status: acceptedRegistry.status
-    },
-    failure: {
-      command: failureRun.command,
-      exit_code: failureRun.exit_code,
-      passed: failureRegistry.passed === true,
-      status: failureRegistry.status
-    }
-  }
+module.exports = {
+  buildReport,
+  evaluate,
+  expected
 };
 
-process.stdout.write(`${JSON.stringify(output, null, 2)}\n`);
-process.exit(output.passed ? 0 : 1);
+if (require.main === module) {
+  main();
+}

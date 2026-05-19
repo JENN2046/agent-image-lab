@@ -1,5 +1,36 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## P6G Registry Report v2 Negative-State Design
+
+```yaml
+phase: p6g_registry_report_v2_negative_state_design
+status: completed_validated_pending_guarded_local_commit
+completed:
+  - documented registry_report_v2 negative-state behavior in docs/P6G_REGISTRY_REPORT_V2_NEGATIVE_STATE_DESIGN.md
+  - added tests/schema_examples/P6G_REGISTRY_REPORT_V2_NEGATIVE_STATES.example.json
+  - exported buildReport from scripts/validate_capsule_registry_report_v2.js for synthetic report validation
+  - added scripts/validate_capsule_registry_report_v2_negative_states.js
+  - wired the negative-state validator into scripts/validate_mvp.ps1
+  - synchronized README and .agent_board resume surfaces
+negative_states:
+  - accepted_registry_failed
+  - failure_registry_failed
+  - missing_resolved_by_link
+  - missing_chain_file
+  - preview_hash_mismatch
+  - production_or_memory_guard_violation
+not_performed:
+  - no third capsule
+  - no real capsule mutation
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no production candidate
+  - no push, tag, release, or deploy
+next:
+  - Review Console negative-state visibility design
+```
+
 ## P6F Accepted / Failure 2x2 Clone-Portable Baseline
 
 ```yaml

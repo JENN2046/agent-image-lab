@@ -1,5 +1,20 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — P6G Registry Report v2 Negative-State Design
+
+```text
+Status: p6g_registry_report_v2_negative_state_design completed_validated_pending_guarded_local_commit.
+Reason: make registry_report_v2 fail closed for negative states without creating a third capsule or mutating real capsule files.
+Execution mode: A4.8 local validation design.
+Validation record: docs/P6G_REGISTRY_REPORT_V2_NEGATIVE_STATE_DESIGN.md.
+Validator: scripts/validate_capsule_registry_report_v2_negative_states.js.
+Fixture: tests/schema_examples/P6G_REGISTRY_REPORT_V2_NEGATIVE_STATES.example.json.
+Negative states covered: accepted_registry_failed, failure_registry_failed, missing_resolved_by_link, missing_chain_file, preview_hash_mismatch, production_or_memory_guard_violation.
+Baseline preserved: accepted=2, failure=2, total=4; no third capsule.
+Not performed: no real capsule mutation, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: Review Console negative-state visibility design.
+```
+
 ## Current Handoff Update — P6F Accepted / Failure 2x2 Clone-Portable Baseline
 
 ```text
