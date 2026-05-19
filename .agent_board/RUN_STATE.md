@@ -1,5 +1,31 @@
 # RUN_STATE.md — Agent Image Lab
 
+## Review Console Failure Capsule Snapshot Validator
+
+```yaml
+phase: review_console_failure_capsule_snapshot_validator
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_static_snapshot_validator
+goal: freeze P5K Review Console failure capsule UI and draft output as a regression snapshot
+validator: scripts/validate_review_console_failure_capsule_snapshot.js
+fixture: tests/schema_examples/P5L_REVIEW_CONSOLE_FAILURE_CAPSULE_SNAPSHOT.example.json
+validation_record: docs/P5L_REVIEW_CONSOLE_FAILURE_CAPSULE_SNAPSHOT_VALIDATOR.md
+mvp_wiring: scripts/validate_mvp.ps1
+guard:
+  static_snapshot_only: true
+  preview_loaded_or_rendered: false
+  asset_archive_read_performed: false
+  fetch_or_file_write_performed: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  production_candidate_created: false
+  push_tag_release_deploy_performed: false
+decision:
+  p5k_failure_capsule_display_snapshot_locked: true
+  recommended_next: multi_capsule_accepted_failure_dashboard_reporting
+```
+
 ## Review Console Static Failure Capsule Display
 
 ```yaml

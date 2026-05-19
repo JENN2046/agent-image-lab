@@ -1,5 +1,29 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## Review Console Failure Capsule Snapshot Validator
+
+```yaml
+phase: review_console_failure_capsule_snapshot_validator
+status: completed_validated_pending_guarded_local_commit
+completed:
+  - added tests/schema_examples/P5L_REVIEW_CONSOLE_FAILURE_CAPSULE_SNAPSHOT.example.json
+  - added scripts/validate_review_console_failure_capsule_snapshot.js
+  - documented the snapshot validator in docs/P5L_REVIEW_CONSOLE_FAILURE_CAPSULE_SNAPSHOT_VALIDATOR.md
+  - wired the validator into scripts/validate_mvp.ps1
+  - updated README and Review Console field mapping / static prototype notes
+not_performed:
+  - no preview.webp load or rendering
+  - no asset_archive file read
+  - no fetch or file write
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no production candidate
+  - no push, tag, release, or deploy
+next:
+  - multi-capsule accepted/failure dashboard reporting or Review Console static accepted/failure capsule side-by-side design
+```
+
 ## Review Console Static Failure Capsule Display
 
 ```yaml

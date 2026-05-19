@@ -6,6 +6,19 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current Review Console Failure Capsule Snapshot Validator
+
+```text
+Current product-mainline task: review_console_failure_capsule_snapshot_validator.
+Status: completed validated pending guarded local commit.
+Purpose: freeze the P5K static Review Console failure capsule display as a regression snapshot.
+Changed files: scripts/validate_review_console_failure_capsule_snapshot.js, tests/schema_examples/P5L_REVIEW_CONSOLE_FAILURE_CAPSULE_SNAPSHOT.example.json, docs/P5L_REVIEW_CONSOLE_FAILURE_CAPSULE_SNAPSHOT_VALIDATOR.md, scripts/validate_mvp.ps1, README.md, review_console/static_prototype/README.md, review_console/static_prototype/FIELD_MAPPING.md, .agent_board resume surfaces.
+Not performed: no preview load, no asset_archive read, no fetch, no file write, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: multi-capsule accepted/failure dashboard reporting or Review Console static accepted/failure capsule side-by-side design.
+```
+
+---
+
 ## Current Review Console Static Failure Capsule Display
 
 ```text

@@ -1,0 +1,73 @@
+{
+  "review_console_failure_capsule_snapshot": {
+    "phase": "p5l_review_console_failure_capsule_snapshot_validator",
+    "snapshot_status": "golden_static_snapshot",
+    "source_display_record_ref": "docs/P5K_REVIEW_CONSOLE_STATIC_FAILURE_CAPSULE_DISPLAY.md",
+    "source_static_mock_ref": "review_console/static_prototype/mock_data.js#portable_failure_capsule_evidence",
+    "source_static_app_ref": "review_console/static_prototype/app.js#failureStateStaticWorkbenchState",
+    "execution_mode": "review_console_static_failure_capsule_snapshot_only",
+    "draft_output_keys": [
+      "portable_failure_capsule_evidence",
+      "portable_failure_capsule_evidence_list",
+      "failure_state_static_workbench_state.portable_failure_capsule_records"
+    ],
+    "sample_id": "failure_french_summer_rattan_bag_v7_29_001",
+    "capsule_root": "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/",
+    "manifest_ref": "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/manifest.json",
+    "preview_ref": "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp",
+    "failure_record_ref": "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/failure_record.json",
+    "review_record_ref": "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/review_record.json",
+    "preview": {
+      "format": "webp",
+      "dimensions": "512x512",
+      "long_edge": 512,
+      "sha256": "8addc3084099c1f2aab11a27c7b730f475ced21f80fff0b2e67d877c49d8c43e"
+    },
+    "failure_tags": [
+      "watermark_or_generated_mark_present",
+      "clean_image_corners_failed",
+      "prompt_watermark_control_insufficient",
+      "api_payload_missing_watermark_false"
+    ],
+    "resolved_by_accepted_sample": "accepted_french_summer_rattan_bucket_bag_001",
+    "clone_portable_validation_status": "passed",
+    "registry_validator_status": "failure_sample_capsules_verified",
+    "final_route": "failure_learning_only_never_production",
+    "source_original_required_for_portable_validation": false,
+    "old_source_present_in_clean_clone": false,
+    "base64_evidence_used": false,
+    "production_candidate_allowed": false,
+    "memory_write_allowed": false,
+    "DailyNote_write_allowed": false,
+    "ui_summary_expectations": {
+      "artifact_evidence_summary_shows_failure_count": true,
+      "artifact_evidence_summary_shows_failure_id": true,
+      "failure_state_workbench_shows_capsule_record": true,
+      "draft_output_carries_capsule_evidence": true
+    },
+    "guard": {
+      "static_snapshot_only": true,
+      "static_mock_only": true,
+      "in_memory_only": true,
+      "preview_loaded_or_rendered": false,
+      "asset_archive_read_performed": false,
+      "fetch_performed": false,
+      "file_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "image_generation_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "vcp_runtime_integration_proven": false
+    }
+  }
+}

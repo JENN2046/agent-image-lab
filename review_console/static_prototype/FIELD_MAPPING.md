@@ -160,6 +160,8 @@ Phase 9 审批记录必须满足：
 
 `portable_failure_capsule_evidence` 是静态显示层，不是 `failure_samples` 写入动作。它不得授权 production candidate、DailyNote/VCP memory、provider/plugin/API、runtime、real manifest、VCPChat 或 VCPToolBox。
 
+`P5L_REVIEW_CONSOLE_FAILURE_CAPSULE_SNAPSHOT.example.json` 固定本节映射的 golden snapshot。后续如果 `portable_failure_capsule_evidence`、`portable_failure_capsule_evidence_list` 或 `failure_state_static_workbench_state.portable_failure_capsule_records` 发生结构漂移，必须同步更新 snapshot validator 并保持 no-fetch / no-write / no-runtime 边界。
+
 ## v14.048 Review Decision Package Static Handoff 映射
 
 本节用于验收 PVOS adapter 输出中的 `review_decision_package` 进入静态 Review Console 可见 UI 与草案输出。它仍然只读取项目内 mock / fixture，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。

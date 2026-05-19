@@ -1,5 +1,19 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — Review Console Failure Capsule Snapshot Validator
+
+```text
+Status: review_console_failure_capsule_snapshot_validator completed_validated_pending_guarded_local_commit.
+Reason: freeze the P5K static Review Console failure capsule UI / draft-output surface as a regression snapshot.
+Execution mode: A4.8 static snapshot validator.
+Validator: scripts/validate_review_console_failure_capsule_snapshot.js.
+Fixture: tests/schema_examples/P5L_REVIEW_CONSOLE_FAILURE_CAPSULE_SNAPSHOT.example.json.
+Validation record: docs/P5L_REVIEW_CONSOLE_FAILURE_CAPSULE_SNAPSHOT_VALIDATOR.md.
+MVP wiring: scripts/validate_mvp.ps1.
+Not performed: no preview load, no asset_archive read, no fetch, no file write, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: multi-capsule accepted/failure dashboard reporting or Review Console static accepted/failure capsule side-by-side design.
+```
+
 ## Current Handoff Update — Review Console Static Failure Capsule Display
 
 ```text

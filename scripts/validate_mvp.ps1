@@ -11822,6 +11822,28 @@ process.exit(child.status || 0);
       Add-Failure "Failure sample capsule creator dry-run validation must not perform memory, runtime, real manifest, VCP source reads, push, tag, release, or deploy"
     }
   }
+
+  $reviewConsoleFailureCapsuleSnapshotOutput = & node (Join-Path $Root 'scripts/validate_review_console_failure_capsule_snapshot.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console failure capsule snapshot validation exited with failure"
+  } else {
+    $reviewConsoleFailureCapsuleSnapshot = ($reviewConsoleFailureCapsuleSnapshotOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleFailureCapsuleSnapshot.passed -ne $true -or $reviewConsoleFailureCapsuleSnapshot.phase -ne 'p5l_review_console_failure_capsule_snapshot_validator') {
+      Add-Failure "Review Console failure capsule snapshot validation must pass"
+    }
+    if ($reviewConsoleFailureCapsuleSnapshot.sample_id -ne 'failure_french_summer_rattan_bag_v7_29_001' -or $reviewConsoleFailureCapsuleSnapshot.preview_long_edge -ne 512 -or $reviewConsoleFailureCapsuleSnapshot.final_route -ne 'failure_learning_only_never_production') {
+      Add-Failure "Review Console failure capsule snapshot must pin sample id, long_edge 512, and never-production route"
+    }
+    if ($reviewConsoleFailureCapsuleSnapshot.clone_portable_validation_status -ne 'passed' -or $reviewConsoleFailureCapsuleSnapshot.registry_validator_status -ne 'failure_sample_capsules_verified') {
+      Add-Failure "Review Console failure capsule snapshot must preserve clone-portable and registry validation status"
+    }
+    if ($reviewConsoleFailureCapsuleSnapshot.production_candidate_allowed -ne $false -or $reviewConsoleFailureCapsuleSnapshot.memory_write_allowed -ne $false -or $reviewConsoleFailureCapsuleSnapshot.daily_note_write_allowed -ne $false) {
+      Add-Failure "Review Console failure capsule snapshot must not allow production, memory write, or DailyNote write"
+    }
+    if ($reviewConsoleFailureCapsuleSnapshot.fetch_performed -ne $false -or $reviewConsoleFailureCapsuleSnapshot.file_write_performed -ne $false -or $reviewConsoleFailureCapsuleSnapshot.image_generation_performed -ne $false -or $reviewConsoleFailureCapsuleSnapshot.real_manifest_read_performed -ne $false -or $reviewConsoleFailureCapsuleSnapshot.real_vcpchat_read_performed -ne $false -or $reviewConsoleFailureCapsuleSnapshot.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleFailureCapsuleSnapshot.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "Review Console failure capsule snapshot must remain static-only with no fetch, writes, image generation, real source reads, or runtime claim"
+    }
+  }
   [Console]::OutputEncoding = $prevOutputEncoding
 }
 
