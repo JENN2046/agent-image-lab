@@ -4,7 +4,7 @@
 
 ```yaml
 phase: p1b_clone_portable_preview_capsule_validation_dry_run
-status: completed_validated_pending_commit_readiness
+status: completed_validated_committed_and_pushed
 mode: A4.8_safe_local_clean_clone_validation
 goal: prove the first Git-tracked preview capsule validates without old ignored runs source evidence or current workspace node_modules
 evidence:
@@ -12,6 +12,10 @@ evidence:
   validator: scripts/validate_preview_capsule.js
   package_manifest: package.json
   package_lock: package-lock.json
+post_push_baseline_event:
+  commit: 2c84aa9c0ea6be3c04eccaa8b8c3f20aa7715ec7
+  ahead_behind_at_reconciliation_start: "0/0"
+  current_sync_truth_source: git_status_and_rev_parse
 selected_sample:
   sample_id: accepted_french_summer_rattan_bucket_bag_001
   target_capsule: asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/
@@ -36,7 +40,8 @@ guard:
 decision:
   clone_portable_preview_capsule_verified: true
   validation_ready: true
-  recommended_next: exact_file_local_commit_readiness_for_p1b_then_push_safety_gate_only_if_requested
+  committed_and_pushed: true
+  recommended_next: product_mainline_registry_driven_preview_capsule_validator_or_second_preview_capsule_planning
 ```
 
 ## Final Project Organization Checkpoint
@@ -68,7 +73,7 @@ decision:
 
 ```yaml
 phase: p1_first_git_portable_preview_capsule_created
-status: validated_pending_commit
+status: completed_validated_committed_and_pushed
 mode: A4.8_safe_local_capsule_creation_with_authorized_dependency_change
 goal: create the first Git-portable preview capsule from a registered accepted sample with a local source image
 evidence:
@@ -95,7 +100,8 @@ guard:
 decision:
   capsule_created: true
   validation_ready: true
-  recommended_next: exact_file_local_commit_then_push_only_after_explicit_authorization
+  committed_and_pushed: true
+  recommended_next: product_mainline_registry_driven_preview_capsule_validator_or_second_preview_capsule_planning
 ```
 
 ## C2b Validator-Blocked Strategy Package

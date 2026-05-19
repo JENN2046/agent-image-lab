@@ -3,10 +3,12 @@
 ## Current Handoff Update — P1b Clone-Portable Preview Capsule Validation Dry Run
 
 ```text
-Status: p1b_clone_portable_preview_capsule_validation_dry_run completed_validated_pending_commit_readiness.
+Status: p1b_clone_portable_preview_capsule_validation_dry_run completed_validated_committed_and_pushed.
 Reason: prove the first Git-tracked preview capsule validates from a clean local clone without old ignored runs/ source evidence or current workspace node_modules.
 Execution mode: A4.8 local clean-clone validation dry run.
 Evidence record: docs/P1B_CLONE_PORTABLE_PREVIEW_CAPSULE_VALIDATION_DRY_RUN.md.
+Post-push baseline event: 2c84aa9c0ea6be3c04eccaa8b8c3f20aa7715ec7.
+Current synchronization truth source: git status and git rev-parse.
 Selected sample: accepted_french_summer_rattan_bucket_bag_001.
 Clean copy location class: ignored .agent_private/ local validation clone.
 Runs dependency test: runs/ was disabled in the clean copy before capsule validation.
@@ -16,8 +18,8 @@ Result: passed, git_portable_preview_evidence_verified.
 Preview sha256: 455bbbc5be93b68f7eb02287ac6d861d1b2397a0f5d793d58ea7ab670f8d6cb3.
 Validation reconciliation: scripts/validate_mvp.ps1 now ignores .agent_private/ local-only validation clones during media pollution scan.
 Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox performed: false.
-Push performed by this P1b phase: false.
-Recommended next: exact-file local commit readiness for the P1b record and board sync; push still requires separate authorization.
+Push status: explicit push to origin/master completed after P1b commit; this record is now post-push synchronized.
+Recommended next: product-mainline registry-driven preview capsule validator or second preview capsule planning.
 ```
 
 ## Current Handoff Update — Final Project Organization Checkpoint
@@ -42,7 +44,7 @@ Recommended next: exact-file commit this planning/status update, then run push s
 ## Current Handoff Update — P1 First Preview Capsule Authorization Package
 
 ```text
-Status: p1_first_git_portable_preview_capsule_created validated_pending_commit.
+Status: p1_first_git_portable_preview_capsule_created completed_validated_committed_and_pushed.
 Reason: Create the first Git-portable preview capsule from a registered accepted sample with a local project-relative source image.
 Execution mode: A4.8 local capsule creation with approved dependency change.
 Authorization package: docs/FIRST_GIT_PORTABLE_PREVIEW_CAPSULE_AUTHORIZATION_GATE.md.
@@ -55,8 +57,8 @@ Preview sha256: 455bbbc5be93b68f7eb02287ac6d861d1b2397a0f5d793d58ea7ab670f8d6cb3
 Generator: scripts/create_preview_capsule.js.
 Validator: scripts/validate_preview_capsule.js.
 Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox performed: false.
-Push performed by this P1 capsule creation phase: false.
-Recommended next: exact-file local commit this capsule, tooling, and status update if validation remains clean; do not push until explicitly authorized.
+Push status: explicit push to origin/master completed after P1b clone-portable validation.
+Recommended next: product-mainline registry-driven preview capsule validator or second preview capsule planning.
 ```
 
 ---

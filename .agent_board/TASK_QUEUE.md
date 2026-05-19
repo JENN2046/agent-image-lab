@@ -10,8 +10,10 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ```text
 Current product-mainline task: p1b_clone_portable_preview_capsule_validation_dry_run.
-Status: completed validated pending commit readiness.
+Status: completed validated committed and pushed.
 Evidence record: docs/P1B_CLONE_PORTABLE_PREVIEW_CAPSULE_VALIDATION_DRY_RUN.md.
+Post-push baseline event: 2c84aa9c0ea6be3c04eccaa8b8c3f20aa7715ec7.
+Current synchronization truth source: git status and git rev-parse.
 Selected sample: accepted_french_summer_rattan_bucket_bag_001.
 Validation method: local clean clone under ignored .agent_private/, npm ci from package-lock.json, runs/ disabled before validator execution.
 Validator command: npm run validate-preview-capsule -- --sample-id=accepted_french_summer_rattan_bucket_bag_001.
@@ -19,8 +21,9 @@ Result: passed, git_portable_preview_evidence_verified.
 Preview sha256: 455bbbc5be93b68f7eb02287ac6d861d1b2397a0f5d793d58ea7ab670f8d6cb3.
 Validation reconciliation: scripts/validate_mvp.ps1 ignores ignored .agent_private/ local-only validation clones during media pollution scan.
 Product evidence status: first preview capsule is clone-portable by local dry-run evidence.
-Required human input before push: explicit git push authorization.
-Not allowed now: additional preview.webp creation/copy/conversion, old runs restoration, Base64, original sha256, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, push/tag/release/deploy.
+Push status: explicit push to origin/master completed after P1b commit.
+Recommended next: product-mainline registry-driven preview capsule validator or second preview capsule planning.
+Not allowed now: additional preview.webp creation/copy/conversion, old runs restoration, Base64, original sha256, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, push/tag/release/deploy unless separately authorized.
 ```
 
 ## Current Final Project Organization Checkpoint
@@ -59,7 +62,7 @@ Not allowed now: preview.webp creation/copy/conversion, file movement, validator
 
 ```text
 Current product-mainline task: p1_first_git_portable_preview_capsule_created.
-Status: validated pending commit.
+Status: completed validated committed and pushed.
 Authorization package: docs/FIRST_GIT_PORTABLE_PREVIEW_CAPSULE_AUTHORIZATION_GATE.md.
 Selected sample: accepted_french_summer_rattan_bucket_bag_001.
 Target capsule path: asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/.
@@ -69,8 +72,8 @@ Approved source candidate path: runs/real_generation/v7_31_native_doubao_french_
 Preview created: true.
 Preview sha256: 455bbbc5be93b68f7eb02287ac6d861d1b2397a0f5d793d58ea7ab670f8d6cb3.
 Generator: scripts/create_preview_capsule.js with sharp.
-Required human input before push: explicit git push authorization.
-Not allowed now: additional preview.webp creation/copy/conversion, old runs restoration, Base64, original sha256, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, push/tag/release/deploy.
+Push status: explicit push to origin/master completed after P1b clone-portable validation.
+Not allowed now: additional preview.webp creation/copy/conversion, old runs restoration, Base64, original sha256, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, push/tag/release/deploy unless separately authorized.
 ```
 
 ---

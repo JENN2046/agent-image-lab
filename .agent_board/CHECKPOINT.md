@@ -4,8 +4,12 @@
 
 ```yaml
 phase: p1b_clone_portable_preview_capsule_validation_dry_run
-status: completed_validated_pending_commit_readiness
+status: completed_validated_committed_and_pushed
 goal: prove the first Git-tracked preview capsule validates in a clean local clone without old ignored runs source evidence
+post_push_baseline_event:
+  commit: 2c84aa9c0ea6be3c04eccaa8b8c3f20aa7715ec7
+  ahead_behind_at_reconciliation_start: "0/0"
+  current_sync_truth_source: git_status_and_rev_parse
 completed:
   - created a local clean clone under ignored .agent_private/
   - confirmed clean clone HEAD matched the current validation baseline event
@@ -22,7 +26,9 @@ not_performed:
   - no runtime, real manifest, VCPChat, or VCPToolBox read
   - no old runs source restoration
   - no new preview creation or conversion
-  - no push, tag, release, or deploy
+  - no tag, release, or deploy
+push_status:
+  - explicit push to origin/master completed after P1b commit
 ```
 
 ## Final Project Organization Checkpoint
@@ -55,7 +61,7 @@ not_performed:
 
 ```yaml
 phase: p1_first_git_portable_preview_capsule_created
-status: validated_pending_commit
+status: completed_validated_committed_and_pushed
 goal: create the first Git-portable preview capsule from a source image that exists on this computer
 completed:
   - changed first capsule target from accepted_womens_resort_relaxed_knit_codex_v2_001 to accepted_french_summer_rattan_bucket_bag_001
@@ -70,7 +76,9 @@ not_performed:
   - no provider, plugin, API, or image generation
   - no DailyNote or VCP memory write
   - no runtime, real manifest, VCPChat, or VCPToolBox read
-  - no push, tag, release, or deploy by this P1 phase
+  - no tag, release, or deploy by this P1 phase
+push_status:
+  - explicit push to origin/master completed after P1b clone-portable validation
 ```
 
 ## C2b Validator-Blocked Strategy Package

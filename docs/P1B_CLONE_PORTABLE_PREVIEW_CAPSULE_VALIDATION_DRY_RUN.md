@@ -6,7 +6,7 @@ base_contract: AGENTS.md
 mode: A4.8
 intent: local_implementation
 risk_level: R2
-status: completed_validated_pending_commit_readiness
+status: completed_validated_committed_and_pushed
 sample_id: accepted_french_summer_rattan_bucket_bag_001
 ```
 
@@ -66,9 +66,11 @@ validation_baseline:
   head_at_validation: 7f9f6ec896c9476d17bce186a9b1589e69e52c8b
   origin_master_at_validation: 4a771cea4c04f600c444ec0a395b4aaf7e98846e
   ahead_behind_at_validation: "0/2"
-  pending_commits_at_validation:
+  local_commits_ahead_at_validation_before_later_push:
     - 7f9f6ec feat: create first preview capsule
     - 214c9d8 docs: retarget first preview capsule source
+  post_push_baseline_event: 2c84aa9c0ea6be3c04eccaa8b8c3f20aa7715ec7
+  post_push_ahead_behind_event: "0/0"
   latest_sync_truth_source: git status and git rev-parse
 ```
 
@@ -126,7 +128,8 @@ decision:
   package_lock_dependency_restore_required: true
   mvp_validator_local_private_clone_ignore_required: true
   product_evidence_chain_status: first_preview_capsule_clone_portable
-  recommended_next: exact_file_local_commit_readiness_for_p1b_then_product_mainline_or_push_safety_gate
+  committed_and_pushed: true
+  recommended_next: product_mainline_registry_driven_preview_capsule_validator_or_second_preview_capsule
 ```
 
 ## Validation Reconciliation
@@ -144,9 +147,22 @@ mvp_validator_reconciliation:
   production_or_runtime_change: false
 ```
 
-## Commit Readiness Scope
+## Post-Push State
 
-This dry run is suitable for an exact-file local commit package if the repository validation remains clean.
+This dry run has already been committed and pushed as part of the post-P1b sync baseline event.
+
+```yaml
+post_push_state:
+  p1b_commit: 2c84aa9 docs: record clone-portable preview capsule validation
+  pushed_to_origin_master: true
+  head_equals_origin_master_at_reconciliation_start: true
+  ahead_behind_at_reconciliation_start: "0/0"
+  current_sync_truth_source: git status and git rev-parse
+```
+
+## Reconciliation Commit Scope
+
+This post-push wording reconciliation is suitable for an exact-file local commit package if the repository validation remains clean.
 
 Allowlist:
 
