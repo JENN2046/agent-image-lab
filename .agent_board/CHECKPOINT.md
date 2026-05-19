@@ -1,5 +1,29 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## P2a Registry-Driven Preview Capsule Validator Implementation
+
+```yaml
+phase: p2a_registry_driven_preview_capsule_validator_implementation
+status: completed_validated_pending_commit_readiness
+goal: implement a local registry-driven preview capsule validator without creating images or touching capsule contents
+completed:
+  - added scripts/validate_preview_capsule_registry.js
+  - implemented archive-directory discovery under asset_archive/accepted_samples/
+  - reused validatePreviewCapsule for per-sample validation
+  - added per-sample JSON report fields
+  - documented validation commands in asset_archive/accepted_samples/README.md
+  - validated node syntax and registry-driven output for one capsule
+  - validated existing single-sample capsule path still passes
+  - validated project board and MVP suite
+not_performed:
+  - no preview.webp creation, copy, or conversion
+  - no capsule manifest or preview file changed
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no push, tag, release, or deploy
+```
+
 ## P2 Registry-Driven Preview Capsule Validator Dry Run Design
 
 ```yaml

@@ -6,6 +6,22 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current P2a Registry-Driven Preview Capsule Validator Implementation
+
+```text
+Current product-mainline task: p2a_registry_driven_preview_capsule_validator_implementation.
+Status: completed validated pending commit readiness.
+Implemented validator: scripts/validate_preview_capsule_registry.js.
+Documentation updated: asset_archive/accepted_samples/README.md and docs/P2_REGISTRY_DRIVEN_PREVIEW_CAPSULE_VALIDATOR_DRY_RUN_DESIGN.md.
+Mode: archive-directory inventory under asset_archive/accepted_samples/.
+Current sample inventory: 1 capsule, accepted_french_summer_rattan_bucket_bag_001.
+Not performed: no preview.webp creation/copy/conversion, no capsule manifest change, no preview.webp change, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no push/tag/release/deploy.
+Validation: node --check, registry validator, single-sample capsule validator, git diff --check, agent_board validator, and validate_mvp all passed.
+Recommended next: exact-file local commit readiness.
+```
+
+---
+
 ## Current P2 Registry-Driven Preview Capsule Validator Dry Run Design
 
 ```text

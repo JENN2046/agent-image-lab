@@ -31,3 +31,12 @@ Legacy note:
 Current capsules:
 
 - `accepted_french_summer_rattan_bucket_bag_001/` — first Git-portable preview capsule, generated from the local v7.31 accepted sample source with `preview.webp` long edge `512`.
+
+Validation:
+
+```powershell
+node scripts/validate_preview_capsule.js --sample-id=accepted_french_summer_rattan_bucket_bag_001
+node scripts/validate_preview_capsule_registry.js
+```
+
+The registry-driven validator reads capsule directories only; it does not create, copy, convert, or generate image files.

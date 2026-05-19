@@ -1,5 +1,23 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — P2a Registry-Driven Preview Capsule Validator Implementation
+
+```text
+Status: p2a_registry_driven_preview_capsule_validator_implementation completed_validated_pending_commit_readiness.
+Reason: implement the P2 design as a local directory-driven capsule validator.
+Execution mode: A4.8 local validator implementation.
+Implemented validator: scripts/validate_preview_capsule_registry.js.
+Documentation updated: asset_archive/accepted_samples/README.md; docs/P2_REGISTRY_DRIVEN_PREVIEW_CAPSULE_VALIDATOR_DRY_RUN_DESIGN.md.
+Mode: archive-directory inventory under asset_archive/accepted_samples/.
+Current sample inventory: accepted_french_summer_rattan_bucket_bag_001.
+Behavior: discover sample directories and call validatePreviewCapsule per sample.
+Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox performed: false.
+Capsule, manifest, and preview.webp changed by this P2a phase: false.
+Push performed by this P2a phase: false.
+Validation: node --check scripts/validate_preview_capsule_registry.js; node scripts/validate_preview_capsule_registry.js; npm run validate-preview-capsule -- --sample-id=accepted_french_summer_rattan_bucket_bag_001; git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1 all passed.
+Recommended next: exact-file local commit readiness if clean.
+```
+
 ## Current Handoff Update — P2 Registry-Driven Preview Capsule Validator Dry Run Design
 
 ```text

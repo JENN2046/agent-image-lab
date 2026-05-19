@@ -6,7 +6,7 @@ base_contract: AGENTS.md
 mode: A4.8
 intent: local_draft
 risk_level: R2
-status: design_package_completed_pending_validation
+status: design_package_completed_p2a_implementation_completed_validated
 ```
 
 ## Purpose
@@ -218,7 +218,10 @@ powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
 
 ```yaml
 decision:
-  recommended_next: p2a_registry_driven_preview_capsule_validator_implementation
+  p2a_implementation_completed: true
+  p2a_validation_passed: true
+  implemented_validator: scripts/validate_preview_capsule_registry.js
+  recommended_next: exact_file_local_commit_readiness_for_p2a_registry_validator
   implementation_risk: low_to_medium
   product_value: converts single-capsule proof into multi-capsule verification rail
   first_implementation_mode: archive-directory inventory
