@@ -6,6 +6,22 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current P6D Second Failure Sample Capsule Authorization Package Dry Run
+
+```text
+Current product-mainline task: p6d_second_failure_sample_capsule_authorization_package_dry_run.
+Status: completed validated pending guarded local commit.
+Purpose: prepare the second Git-portable failure sample capsule authorization package without creating the capsule.
+Changed files: docs/P6D_SECOND_FAILURE_SAMPLE_CAPSULE_AUTHORIZATION_PACKAGE_DRY_RUN.md, README.md, .agent_board resume surfaces.
+Primary candidate: failure_tennis_wallet_v7_21_001 from runs/real_generation/v7_21_native_doubao_first_real_run/native_doubao_1778320041596_0.jpg.
+Backup candidate: failure_french_summer_rattan_bag_v7_26_001, blocked only by missing resolved_by_accepted_sample relation.
+Evidence: failure_samples/failure_registry.yaml, docs/278_v7_21_native_doubao_first_real_generation_post_run_review.md, local source image exists, resolved by accepted_product_still_life_tennis_wallet_001.
+Not performed: no capsule creation, no preview.webp creation/copy/conversion, no asset_archive write, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: separate authorization for second failure capsule creation or registry_report_v2 negative-state design.
+```
+
+---
+
 ## Current P6C Review Console Registry Report v2 State
 
 ```text

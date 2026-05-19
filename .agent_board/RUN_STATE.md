@@ -1,5 +1,40 @@
 # RUN_STATE.md — Agent Image Lab
 
+## P6D Second Failure Sample Capsule Authorization Package Dry Run
+
+```yaml
+phase: p6d_second_failure_sample_capsule_authorization_package_dry_run
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_local_draft
+goal: prepare the second Git-portable failure sample capsule authorization package without creating the capsule
+validation_record: docs/P6D_SECOND_FAILURE_SAMPLE_CAPSULE_AUTHORIZATION_PACKAGE_DRY_RUN.md
+candidate_scan:
+  registry_failure_count: 3
+  existing_failure_capsules: 1
+  primary_candidate: failure_tennis_wallet_v7_21_001
+  backup_candidate: failure_french_summer_rattan_bag_v7_26_001
+  already_capsuled_control: failure_french_summer_rattan_bag_v7_29_001
+recommended_future_sample:
+  sample_id: failure_tennis_wallet_v7_21_001
+  source_image: runs/real_generation/v7_21_native_doubao_first_real_run/native_doubao_1778320041596_0.jpg
+  review_doc_ref: docs/278_v7_21_native_doubao_first_real_generation_post_run_review.md
+  resolved_by_accepted_sample: accepted_product_still_life_tennis_wallet_001
+  target_root: asset_archive/failure_samples/failure_tennis_wallet_v7_21_001/
+guard:
+  capsule_created_now: false
+  preview_created_or_converted_now: false
+  asset_archive_modified: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  production_candidate_created: false
+  push_tag_release_deploy_performed: false
+decision:
+  authorization_package_ready: true
+  future_creation_requires_separate_authorization: true
+  recommended_next: second_failure_capsule_creation_authorization_or_registry_report_v2_negative_state_design
+```
+
 ## P6C Review Console Registry Report v2 State
 
 ```yaml

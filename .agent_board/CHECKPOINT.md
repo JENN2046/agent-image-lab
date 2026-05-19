@@ -1,5 +1,31 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## P6D Second Failure Sample Capsule Authorization Package Dry Run
+
+```yaml
+phase: p6d_second_failure_sample_capsule_authorization_package_dry_run
+status: completed_validated_pending_guarded_local_commit
+completed:
+  - scanned failure_samples/failure_registry.yaml for second failure capsule candidates
+  - confirmed the first failure capsule already uses failure_french_summer_rattan_bag_v7_29_001
+  - confirmed local source images exist for failure_tennis_wallet_v7_21_001 and failure_french_summer_rattan_bag_v7_26_001
+  - selected failure_tennis_wallet_v7_21_001 as the primary second failure capsule candidate
+  - recorded failure_french_summer_rattan_bag_v7_26_001 as backup pending accepted-link decision
+  - added docs/P6D_SECOND_FAILURE_SAMPLE_CAPSULE_AUTHORIZATION_PACKAGE_DRY_RUN.md
+  - synchronized README and .agent_board resume surfaces
+not_performed:
+  - no capsule creation
+  - no preview.webp creation, copy, conversion, or generation
+  - no asset_archive write
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no production candidate
+  - no push, tag, release, or deploy
+next:
+  - separate authorization for second failure capsule creation or registry_report_v2 negative-state design
+```
+
 ## P6C Review Console Registry Report v2 State
 
 ```yaml
