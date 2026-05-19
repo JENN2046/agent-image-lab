@@ -4,6 +4,39 @@
 ## Current Capsule Productization Goal
 
 ```text
+phase: capsule_operator_reviewer_action_matrix_gate
+status: completed_validated
+mode: A4.8 static / no runtime
+objective: turn reviewer_action_catalog into a static human operator action matrix
+matrix_fixture_ref: tests/schema_examples/CAPSULE_OPERATOR_REVIEWER_ACTION_MATRIX.example.json
+validator_ref: scripts/validate_capsule_operator_reviewer_action_matrix.js
+accepted: 2
+failure: 2
+total: 4
+pass_action: accept_contract_baseline
+fail_closed_actions: inspect_manifest_failure; repair_relation_link; block_production_guard_violation; rerun_local_validator_outside_ui
+executable_buttons_created: false
+browser_validator_executed: false
+runtime_execution_performed: false
+asset_archive_ui_read_performed: false
+preview_loaded_or_rendered: false
+capsule_creation_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+validated_now: node --check scripts/validate_capsule_operator_reviewer_action_matrix.js; node scripts/validate_capsule_operator_reviewer_action_matrix.js; git diff --check; node scripts/validate_agent_board_state.js
+recommended_next: commit_readiness_gate_for_capsule_operator_reviewer_action_matrix
+```
+
+---
+
+## Current Capsule Productization Goal
+
+```text
 phase: capsule_static_smoke_baseline_closeout_gate
 status: completed_validated
 mode: A4.8 review / docs-light

@@ -1,0 +1,85 @@
+{
+  "phase": "capsule_operator_reviewer_action_matrix_gate",
+  "matrix_version": "v1",
+  "source_fixture_ref": "tests/schema_examples/CAPSULE_STATIC_PRODUCT_SMOKE_UNIFIED_CONTRACT.example.json",
+  "source_contract_key": "unified_capsule_contract_report.reviewer_action_catalog",
+  "baseline": {
+    "accepted": 2,
+    "failure": 2,
+    "total": 4
+  },
+  "matrix_status": "static_operator_action_matrix_ready",
+  "operator_actions": [
+    {
+      "label": "accept_contract_baseline",
+      "state": "pass",
+      "operator_decision": "acknowledge_static_baseline",
+      "human_action": "Confirm registry, manifest, relation, and guard states are green; keep the baseline as static evidence only.",
+      "escalation_allowed": false,
+      "production_allowed": false,
+      "memory_write_allowed": false,
+      "runtime_action_allowed": false
+    },
+    {
+      "label": "inspect_manifest_failure",
+      "state": "fail_closed",
+      "operator_decision": "block_and_inspect_manifest_contract",
+      "human_action": "Stop product smoke acceptance and inspect manifest schema/runtime validation evidence before any further product claim.",
+      "escalation_allowed": true,
+      "production_allowed": false,
+      "memory_write_allowed": false,
+      "runtime_action_allowed": false
+    },
+    {
+      "label": "repair_relation_link",
+      "state": "fail_closed",
+      "operator_decision": "block_and_repair_failure_to_accepted_relation",
+      "human_action": "Keep the failure lane visible and repair the resolved-by relation before restoring clean summary.",
+      "escalation_allowed": true,
+      "production_allowed": false,
+      "memory_write_allowed": false,
+      "runtime_action_allowed": false
+    },
+    {
+      "label": "block_production_guard_violation",
+      "state": "fail_closed",
+      "operator_decision": "block_any_production_or_memory_escalation",
+      "human_action": "Treat any production, runtime, or memory guard relaxation as a hard block until the false guard is restored.",
+      "escalation_allowed": true,
+      "production_allowed": false,
+      "memory_write_allowed": false,
+      "runtime_action_allowed": false
+    },
+    {
+      "label": "rerun_local_validator_outside_ui",
+      "state": "fail_closed",
+      "operator_decision": "rerun_local_validator_not_browser_runtime",
+      "human_action": "Rerun the local Node validator outside the UI when evidence is missing or stale; do not use browser runtime as proof.",
+      "escalation_allowed": true,
+      "production_allowed": false,
+      "memory_write_allowed": false,
+      "runtime_action_allowed": false
+    }
+  ],
+  "guard": {
+    "static_matrix_only": true,
+    "executable_buttons_created": false,
+    "browser_validator_executed": false,
+    "asset_archive_read_performed": false,
+    "asset_archive_ui_read_performed": false,
+    "preview_loaded_or_rendered": false,
+    "capsule_creation_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "runtime_execution_performed": false,
+    "real_manifest_read_performed": false,
+    "real_vcpchat_read_performed": false,
+    "real_vcptoolbox_read_performed": false,
+    "production_candidate_write_performed": false,
+    "push_tag_release_deploy_performed": false
+  }
+}

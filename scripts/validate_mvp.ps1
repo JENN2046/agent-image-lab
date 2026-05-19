@@ -11971,6 +11971,21 @@ process.exit(child.status || 0);
       Add-Failure "Capsule static product smoke Review Console snapshot must remain static-only with no browser runtime, asset UI read, or preview load"
     }
   }
+  $capsuleOperatorReviewerActionMatrixOutput = & node (Join-Path $Root 'scripts/validate_capsule_operator_reviewer_action_matrix.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Capsule operator reviewer action matrix validation exited with failure"
+  } else {
+    $capsuleOperatorReviewerActionMatrix = ($capsuleOperatorReviewerActionMatrixOutput -join "`n") | ConvertFrom-Json
+    if ($capsuleOperatorReviewerActionMatrix.passed -ne $true -or $capsuleOperatorReviewerActionMatrix.status -ne 'capsule_operator_reviewer_action_matrix_verified') {
+      Add-Failure "Capsule operator reviewer action matrix must pass"
+    }
+    if ($capsuleOperatorReviewerActionMatrix.accepted_count -ne 2 -or $capsuleOperatorReviewerActionMatrix.failure_count -ne 2 -or $capsuleOperatorReviewerActionMatrix.total_count -ne 4) {
+      Add-Failure "Capsule operator reviewer action matrix must preserve accepted=2, failure=2, total=4"
+    }
+    if ($capsuleOperatorReviewerActionMatrix.runtime_execution_performed -ne $false -or $capsuleOperatorReviewerActionMatrix.asset_archive_ui_read_performed -ne $false -or $capsuleOperatorReviewerActionMatrix.preview_loaded_or_rendered -ne $false -or $capsuleOperatorReviewerActionMatrix.provider_contact_performed -ne $false -or $capsuleOperatorReviewerActionMatrix.plugin_call_performed -ne $false -or $capsuleOperatorReviewerActionMatrix.api_call_performed -ne $false -or $capsuleOperatorReviewerActionMatrix.image_generation_performed -ne $false -or $capsuleOperatorReviewerActionMatrix.DailyNote_write_performed -ne $false -or $capsuleOperatorReviewerActionMatrix.VCP_memory_write_performed -ne $false -or $capsuleOperatorReviewerActionMatrix.production_candidate_write_performed -ne $false) {
+      Add-Failure "Capsule operator reviewer action matrix must remain static-only with no runtime, asset UI read, preview load, external, memory, or production actions"
+    }
+  }
   $reviewConsoleRegistryReportV2Output = & node (Join-Path $Root 'scripts/validate_review_console_registry_report_v2_state.js')
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "Review Console registry report v2 state validation exited with failure"
