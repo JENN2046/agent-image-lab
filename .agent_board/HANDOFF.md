@@ -1,5 +1,18 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — P4 Review Console Portable Capsule Static Reader
+
+```text
+Status: p4_review_console_portable_capsule_static_reader completed_validated_pending_guarded_local_commit.
+Reason: let Review Console static prototype display Git-portable preview capsule evidence without runtime integration.
+Execution mode: A4.8 static prototype enhancement.
+Changed static files: review_console/static_prototype/mock_data.js, app.js, README.md, FIELD_MAPPING.md.
+Design record: docs/P4_REVIEW_CONSOLE_PORTABLE_CAPSULE_STATIC_READER.md.
+Not performed: no asset_archive file read, no preview.webp creation/copy/conversion, no fetch/runtime/VCPChat/VCPToolBox/provider/plugin/API/DailyNote/VCP memory, no accepted_samples/failure_samples/production_candidate write, no push/tag/release/deploy.
+Validation passed: node --check static app/mock, v14.135 safety validator, Review Console adapter handoff validator, git diff --check, agent board validator, and scripts/validate_mvp.ps1.
+Recommended next: guarded local auto-commit if clean.
+```
+
 ## Current Handoff Update — P3 Registry Validator v2 Reporting
 
 ```text

@@ -1,5 +1,33 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## P4 Review Console Portable Capsule Static Reader
+
+```yaml
+phase: p4_review_console_portable_capsule_static_reader
+status: completed_validated_pending_guarded_local_commit
+goal: display Git-portable preview capsule evidence in Review Console static prototype
+completed:
+  - added portable_preview_capsule_evidence static seed
+  - rendered capsule sample, preview format, long edge, and clone-portable status in Artifact Evidence panel
+  - included portable_preview_capsule_evidence in draft output
+  - documented field mapping and static prototype boundary
+validation:
+  - node --check review_console/static_prototype/app.js
+  - node --check review_console/static_prototype/mock_data.js
+  - node scripts/validate_v14_135_review_console_import_reader_safety_review.js
+  - node scripts/validate_review_console_adapter_handoff.js
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+not_performed:
+  - no asset_archive file read
+  - no preview.webp creation, copy, conversion, or generation
+  - no fetch, runtime, real manifest, VCPChat, or VCPToolBox read
+  - no provider, plugin, API, DailyNote, or VCP memory action
+  - no accepted_samples, failure_samples, or production_candidate write
+  - no push, tag, release, or deploy
+```
+
 ## P3 Registry Validator v2 Reporting
 
 ```yaml

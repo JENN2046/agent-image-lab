@@ -30,6 +30,7 @@ const state = {
   review_report_negative_guard_static_handoff: mock.review_report_negative_guard_static_handoff,
   review_evidence_blocker_adapter_negative_static_handoff: mock.review_evidence_blocker_adapter_negative_static_handoff,
   artifact_dashboard_evidence: mock.artifact_recoverability_dashboard_evidence,
+  portable_preview_capsule_evidence: mock.portable_preview_capsule_evidence,
   artifact_lifecycle_state_reader: mock.artifact_lifecycle_state_reader_seed,
   third_sample_authorization_package: mock.third_sample_accepted_samples_authorization_package_seed,
   third_sample_post_approval_gate: mock.third_sample_post_approval_gate_seed,
@@ -209,6 +210,7 @@ function renderImportRecordReader() {
 
 function renderArtifactEvidenceDashboard() {
   const evidence = state.artifact_dashboard_evidence;
+  const capsule = state.portable_preview_capsule_evidence;
   qs("#artifactEvidenceSummary").innerHTML = `
     <span>sample <strong>${escapeHtml(evidence.accepted_sample_id)}</strong></span>
     <span>status <strong>${escapeHtml(evidence.recoverability_status)}</strong></span>
@@ -216,6 +218,9 @@ function renderArtifactEvidenceDashboard() {
     <span>hash <strong>${escapeHtml(evidence.verified_sha256.slice(0, 12))}</strong></span>
     <span>basis <strong>${escapeHtml(evidence.dashboard_progress_basis)}</strong></span>
     <span>runtime <strong>${escapeHtml(evidence.vcp_runtime_integration_proven)}</strong></span>
+    <span>capsule <strong>${escapeHtml(capsule.sample_id)}</strong></span>
+    <span>preview <strong>${escapeHtml(capsule.preview_format)} ${escapeHtml(capsule.preview_long_edge)}</strong></span>
+    <span>portable <strong>${escapeHtml(capsule.clone_portable_validation_status)}</strong></span>
   `;
 }
 
@@ -2649,6 +2654,7 @@ function renderDraft() {
     review_evidence_blocker_adapter_negative_static_handoff: state.review_evidence_blocker_adapter_negative_static_handoff,
     failure_state_static_workbench_state: failureStateStaticWorkbenchState(),
     artifact_recoverability_dashboard_evidence: state.artifact_dashboard_evidence,
+    portable_preview_capsule_evidence: state.portable_preview_capsule_evidence,
     artifact_lifecycle_state_reader: normalizeArtifactLifecycleState(),
     artifact_lifecycle_filter_state: {
       selected_filter: state.lifecycleFilter,

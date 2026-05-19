@@ -76,6 +76,7 @@ v14.225 新增 6 个月目标缺口静态面板：把 Month 1-6 的产品目标�
 v14.226 新增 6 个月目标缺口 snapshot 回归：固定 `six_month_goal_gap_state` 仍为 Month 1 被 human approval 缺失阻断、2 / 3 可恢复样片、Month 5 需要 Jenn A5、VCP runtime integration 未证明，防止后续看板过度宣称。
 v14.227 新增 failure state 静态工作台：从负向 ReviewReport 和 adapter negative guard mock 中展示失败候选、failure tags、memory forbidden、never production 和 production exclusion 状态；只读、不写 `failure_samples`、不晋级 production、不调用 runtime。
 v14.228 新增 failure state snapshot 回归：固定 `failure_state_static_workbench_state` 仍为 2 个失败候选、1 个 memory-forbidden、2 个 never-production、2 个 production exclusion，防止后续把静态失败审查漂移成 `failure_samples` 写入、production 晋级或 VCP runtime integration。
+P4 新增 portable preview capsule evidence 静态展示：`portable_preview_capsule_evidence` 只从 `mock_data.js` 展示 `asset_archive/accepted_samples/<sample_id>/manifest.json + preview.webp + import/review/approval records` 的 Git-portable 证据摘要；不 fetch、不写文件、不读取真实 manifest / VCPChat / VCPToolBox、不创建或复制图片。
 草案输出还会携带 `review_result_protocol_static_handoff`，用于展示每个候选为什么 pass、为什么 reject、如何进入记忆草案，以及何时必须永远不得进入 production。
 审片结果协议面板还会显示 `review_protocol_guard_summary`：包括 `memory_forbidden_count`、`memory_forbidden_candidate_ids`、`never_production_candidate_ids`、`negative_guard_observed` 和 production candidate 创建阻断状态。
 草案输出还会携带 `review_decision_package_static_handoff`，用于展示 accepted/rejected sample 草案、memory delta 草案、production exclusion register，以及 `production_candidate_created=false`、`direct_memory_write_performed=false`、`accepted_samples_write_performed=false` 的决策包阻断状态。
@@ -127,6 +128,7 @@ v14.079 还用 `tests/schema_examples/review_report_protocol_final_closeout.exam
 - `artifact_evidence_compare_state`
 - `artifact_evidence_review_notes_state`
 - `failure_state_static_workbench_state`
+- `portable_preview_capsule_evidence`
 - `three_sample_gap_summary_state`
 - `recoverability_matrix_state`
 - `six_month_goal_gap_state`
@@ -146,6 +148,7 @@ v14.079 还用 `tests/schema_examples/review_report_protocol_final_closeout.exam
 `review_evidence_blocker_adapter_negative_static_handoff` 必须作为可见 UI guard 呈现；它只显示 adapter negative fixture 的阻断证据，不代表真实 adapter runtime、provider contact、plugin/API 调用、图片生成、accepted_samples 写入、记忆写入或 production promotion。
 `codex_session_import_record_reader` 必须作为本地静态读取者呈现；它只解析 import record JSON 到内存摘要，不读取 real manifest / VCPChat / VCPToolBox，不 fetch，不写文件，不调用 runtime、provider、plugin、API、DailyNote 或 VCP memory。
 `artifact_recoverability_dashboard_evidence` 必须作为本地静态 dashboard 证据呈现；它只能展示 v14.131 validator、真实 artifact、sha256、dimensions、review record、human approval、registry 和 category index 证据，不能把文档存在、旧 ledger 或 token 数量当成产品进度，也不能声称 VCP runtime integration。
+`portable_preview_capsule_evidence` 必须作为本地静态 preview capsule 证据呈现；它只能展示 Git-tracked `preview.webp`、manifest、import/review/approval records、clone-portable validation 和 registry validation 状态，不得读取文件、不得 fetch、不得创建/复制/转换图片、不得写 accepted_samples、不得晋级 production_candidate 或声称 VCP runtime integration。
 `artifact_lifecycle_state_reader` 必须作为本地静态 lifecycle 读取者呈现；它只能展示 import/review/accepted_samples/blocker state 的内存解析结果，不能 fetch、写文件、调用 runtime、读取 VCPChat/VCPToolBox、写 accepted_samples、写 failure_samples、写 production_candidate、写 DailyNote 或写 VCP memory。
 `review_console_artifact_lifecycle_state_reader_draft_output_snapshot.example.json` 必须与 v14.169 reader 输出保持一致；它是静态回归证据，不是浏览器执行、accepted_samples 写入或 VCP runtime integration。
 `review_console_lifecycle_state_local_filter_controls.example.json` 必须验证本地筛选状态不会改变底层样片状态：`recoverable` 只显示 2 个已通过样片，`blocked` 只显示 pending lamp candidate，未知 filter 回落到 `all`。

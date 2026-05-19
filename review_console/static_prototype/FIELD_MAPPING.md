@@ -496,6 +496,28 @@ recoverability validator 证明过的字段生成 dashboard 摘要：
 ledger 推高产品进度。该 evidence 只证明 artifact recoverability，不证明 VCP
 runtime integration。
 
+## P4 Portable Preview Capsule Evidence
+
+`portable_preview_capsule_evidence` 只能从 `mock_data.js` 静态 seed 生成
+preview capsule 摘要。它展示 Git-portable `preview.webp`、manifest、
+import/review/approval record refs、clone-portable validation 和 registry
+validation 状态。
+
+| Static field | Review Console field | Notes |
+| --- | --- | --- |
+| `sample_id` | `portable_preview_capsule_evidence.sample_id` | 指向 accepted sample id |
+| `capsule_root` | `portable_preview_capsule_evidence.capsule_root` | 只作为 Git-portable evidence ref |
+| `manifest_ref` | `portable_preview_capsule_evidence.manifest_ref` | 不读取文件 |
+| `preview_ref` | `portable_preview_capsule_evidence.preview_ref` | 不创建、不复制、不转换 |
+| `preview_sha256` | `portable_preview_capsule_evidence.preview_sha256` | 来自已验证 capsule seed |
+| `preview_dimensions` | `portable_preview_capsule_evidence.preview_dimensions` | 当前 preview 为 `512x512` |
+| `import_record_ref` / `review_record_ref` / `approval_record_ref` | same | 只展示 chain refs |
+| `guard` | `portable_preview_capsule_evidence.guard` | 所有 external/runtime/write flags 必须为 false |
+
+该 evidence 不读取 `asset_archive/` 文件，不 fetch，不写文件，不调用 runtime、
+provider、plugin、API、DailyNote 或 VCP memory，不写 accepted_samples /
+failure_samples / production_candidate，也不证明 VCP runtime integration。
+
 ## 原型防越界标记
 
 草案输出包含：

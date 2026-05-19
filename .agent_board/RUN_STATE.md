@@ -1,5 +1,30 @@
 # RUN_STATE.md — Agent Image Lab
 
+## P4 Review Console Portable Capsule Static Reader
+
+```yaml
+phase: p4_review_console_portable_capsule_static_reader
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_static_prototype_enhancement
+goal: display Git-portable preview capsule evidence in Review Console static prototype
+evidence:
+  static_mock: review_console/static_prototype/mock_data.js
+  static_app: review_console/static_prototype/app.js
+  field_mapping: review_console/static_prototype/FIELD_MAPPING.md
+  readme: review_console/static_prototype/README.md
+  design_record: docs/P4_REVIEW_CONSOLE_PORTABLE_CAPSULE_STATIC_READER.md
+guard:
+  asset_archive_file_read_performed: false
+  preview_created_or_copied: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  push_tag_release_deploy_performed_by_this_phase: false
+decision:
+  validation_passed: true
+  ready_for_guarded_local_auto_commit: true
+```
+
 ## P3 Registry Validator v2 Reporting
 
 ```yaml
