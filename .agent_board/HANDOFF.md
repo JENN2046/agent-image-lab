@@ -1,5 +1,17 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — First Failure Sample Capsule Authorization Package Dry Run
+
+```text
+Status: first_failure_sample_capsule_authorization_package_dry_run completed_validated_pending_guarded_local_commit.
+Reason: select the first failure sample capsule candidate and define the future exact authorization shape without creating the capsule.
+Execution mode: A4.8 local dry-run planning.
+Recommended sample: failure_french_summer_rattan_bag_v7_29_001.
+Authorization package: docs/P5F_FIRST_FAILURE_SAMPLE_CAPSULE_AUTHORIZATION_PACKAGE_DRY_RUN.md.
+Not performed: no asset_archive/failure_samples/<sample_id>/ capsule created, no manifest/preview/failure_record/review_record written, no preview creation/copy/conversion, no new creation script, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: separately authorize a dedicated failure-capsule creator or scoped script extension before any real failure preview capsule creation.
+```
+
 ## Current Handoff Update — Failure Sample Validators MVP Wiring
 
 ```text

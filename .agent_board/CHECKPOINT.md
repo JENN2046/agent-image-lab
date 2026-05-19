@@ -1,5 +1,30 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## First Failure Sample Capsule Authorization Package Dry Run
+
+```yaml
+phase: first_failure_sample_capsule_authorization_package_dry_run
+status: completed_validated_pending_guarded_local_commit
+completed:
+  - selected failure_french_summer_rattan_bag_v7_29_001 as the recommended first failure capsule candidate
+  - confirmed its ignored local source image exists on the current machine
+  - documented the future target layout under asset_archive/failure_samples/<sample_id>/
+  - documented exact future allowed write paths and stop conditions
+  - updated README navigation
+not_performed:
+  - no asset_archive/failure_samples/<sample_id>/ capsule created
+  - no manifest, preview.webp, failure_record, or review_record written
+  - no preview.webp creation, copy, conversion, or generation
+  - no failure capsule creation script added or modified
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no production candidate
+  - no push, tag, release, or deploy
+next:
+  - prepare or authorize a dedicated failure-capsule creator before creating the first failure preview capsule
+```
+
 ## Failure Sample Validators MVP Wiring
 
 ```yaml

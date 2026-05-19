@@ -6,6 +6,20 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current First Failure Sample Capsule Authorization Package Dry Run
+
+```text
+Current product-mainline task: first_failure_sample_capsule_authorization_package_dry_run.
+Status: completed validated pending guarded local commit.
+Purpose: select the first future failure sample capsule candidate without creating any capsule files.
+Recommended sample: failure_french_summer_rattan_bag_v7_29_001.
+Changed files: docs/P5F_FIRST_FAILURE_SAMPLE_CAPSULE_AUTHORIZATION_PACKAGE_DRY_RUN.md, README.md, .agent_board resume surfaces.
+Not performed: no asset_archive/failure_samples/<sample_id>/ capsule created, no manifest/preview/failure_record/review_record written, no preview creation/copy/conversion, no new creation script, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: prepare a dedicated failure-capsule creator or scoped script extension before any real failure preview capsule creation.
+```
+
+---
+
 ## Current Failure Sample Validators MVP Wiring
 
 ```text

@@ -1,5 +1,38 @@
 # RUN_STATE.md — Agent Image Lab
 
+## First Failure Sample Capsule Authorization Package Dry Run
+
+```yaml
+phase: first_failure_sample_capsule_authorization_package_dry_run
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_local_dry_run_planning
+goal: prepare the first failure sample capsule authorization package without creating the capsule
+evidence:
+  authorization_package: docs/P5F_FIRST_FAILURE_SAMPLE_CAPSULE_AUTHORIZATION_PACKAGE_DRY_RUN.md
+  failure_registry: failure_samples/failure_registry.yaml
+recommended_sample:
+  sample_id: failure_french_summer_rattan_bag_v7_29_001
+  source_image: runs/real_generation/v7_29_native_doubao_french_summer_rattan_bag_v2_single_real_run/native_doubao_1778325901725_0.jpg
+  source_image_exists_on_current_machine: true
+  source_image_git_tracked: false
+  source_image_ignored_by_git: true
+  resolved_by_accepted_sample: accepted_french_summer_rattan_bucket_bag_001
+guard:
+  failure_sample_capsule_created: false
+  failure_sample_manifest_created: false
+  failure_sample_preview_created_or_copied: false
+  creation_script_changed: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  production_candidate_created: false
+  push_tag_release_deploy_performed: false
+decision:
+  authorization_package_ready: true
+  future_creation_requires_separate_authorization: true
+  recommended_next: dedicated_failure_capsule_creator_or_scoped_script_extension_authorization
+```
+
 ## Failure Sample Validators MVP Wiring
 
 ```yaml
