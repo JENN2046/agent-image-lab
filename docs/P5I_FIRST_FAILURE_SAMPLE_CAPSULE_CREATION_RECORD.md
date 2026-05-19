@@ -48,6 +48,10 @@ new invariant: plan-only validation must preserve target directory state
 
 This keeps the validator useful after the first capsule exists.
 
+The creator dry-run validator also treats source image absence as acceptable once
+the Git-tracked failure capsule exists. This preserves clone-portable validation:
+the old ignored `runs/` source is not required to validate the committed capsule.
+
 ## Explicit Non-Execution
 
 ```yaml

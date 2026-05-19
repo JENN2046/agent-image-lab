@@ -58,7 +58,11 @@ checks.push(expect(planOnly.result?.passed === true, "plan_only_reports_passed_t
 checks.push(expect(planOnly.result?.mode === "plan_only", "plan_only_mode_reported", planOnly.result?.mode));
 checks.push(expect(planOnly.result?.writes_performed === false, "plan_only_writes_false", planOnly.result?.writes_performed));
 checks.push(expect(planOnly.result?.confirm_create_required === true, "plan_only_confirm_required", planOnly.result?.confirm_create_required));
-checks.push(expect(planOnly.result?.source_image_exists === true, "plan_only_source_exists", planOnly.result?.source_image_exists));
+checks.push(expect(
+  planOnly.result?.source_image_exists === true || beforeTargetExists === true,
+  "plan_only_source_exists_or_capsule_already_portable",
+  { source_image_exists: planOnly.result?.source_image_exists, target_capsule_exists: beforeTargetExists }
+));
 checks.push(expect(
   beforeTargetExists === afterPlanTargetExists &&
     JSON.stringify(beforeTargetEntries) === JSON.stringify(afterPlanTargetEntries),

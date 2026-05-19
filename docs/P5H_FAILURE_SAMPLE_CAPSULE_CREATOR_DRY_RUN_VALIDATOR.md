@@ -24,7 +24,8 @@ The validator checks:
 - default command exits successfully in `plan_only` mode
 - `writes_performed` remains `false`
 - `confirm_create_required` is `true`
-- the target capsule directory remains absent
+- the target capsule directory state is preserved
+- source image availability is required only before the capsule exists; once the Git-tracked capsule exists, clone-portable validation may pass without `runs/`
 - mismatched source image fails
 - mismatched long edge fails
 - unsupported sample id fails
