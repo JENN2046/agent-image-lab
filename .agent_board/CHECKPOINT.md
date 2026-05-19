@@ -1,5 +1,31 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## Failure Sample Capsule Creator Dry Run Implementation
+
+```yaml
+phase: failure_sample_capsule_creator_dry_run_implementation
+status: completed_validated_pending_guarded_local_commit
+completed:
+  - added scripts/create_failure_sample_capsule.js
+  - constrained the script to failure_french_summer_rattan_bag_v7_29_001
+  - made plan-only the default behavior
+  - required --confirm-create=true before any capsule write
+  - documented implementation in docs/P5G_FAILURE_SAMPLE_CAPSULE_CREATOR_DRY_RUN_IMPLEMENTATION.md
+  - updated README navigation
+not_performed:
+  - no --confirm-create execution
+  - no asset_archive/failure_samples/<sample_id>/ capsule created
+  - no manifest, preview.webp, failure_record, or review_record written
+  - no preview.webp creation, copy, conversion, or generation
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no production candidate
+  - no push, tag, release, or deploy
+next:
+  - run only a separately authorized --confirm-create execution package if the first failure capsule should be created
+```
+
 ## First Failure Sample Capsule Authorization Package Dry Run
 
 ```yaml

@@ -1,5 +1,17 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — Failure Sample Capsule Creator Dry Run Implementation
+
+```text
+Status: failure_sample_capsule_creator_dry_run_implementation completed_validated_pending_guarded_local_commit.
+Reason: add a dedicated plan-only creator for the future first failure sample capsule while keeping real capsule creation behind a separate exact authorization.
+Execution mode: A4.8 local implementation.
+New script: scripts/create_failure_sample_capsule.js.
+Implementation record: docs/P5G_FAILURE_SAMPLE_CAPSULE_CREATOR_DRY_RUN_IMPLEMENTATION.md.
+Not performed: no --confirm-create execution, no asset_archive/failure_samples/<sample_id>/ capsule created, no manifest/preview/failure_record/review_record written, no preview creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: explicitly authorize running create_failure_sample_capsule.js with --confirm-create=true if the user wants the first failure preview capsule created.
+```
+
 ## Current Handoff Update — First Failure Sample Capsule Authorization Package Dry Run
 
 ```text

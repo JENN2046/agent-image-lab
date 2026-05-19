@@ -1,5 +1,37 @@
 # RUN_STATE.md — Agent Image Lab
 
+## Failure Sample Capsule Creator Dry Run Implementation
+
+```yaml
+phase: failure_sample_capsule_creator_dry_run_implementation
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_local_implementation
+goal: add a plan-only dedicated creator for the first future failure sample capsule
+evidence:
+  creator_script: scripts/create_failure_sample_capsule.js
+  implementation_record: docs/P5G_FAILURE_SAMPLE_CAPSULE_CREATOR_DRY_RUN_IMPLEMENTATION.md
+supported_sample:
+  sample_id: failure_french_summer_rattan_bag_v7_29_001
+  source_image: runs/real_generation/v7_29_native_doubao_french_summer_rattan_bag_v2_single_real_run/native_doubao_1778325901725_0.jpg
+  required_long_edge: 512
+current_behavior:
+  default_mode: plan_only
+  confirm_create_required_for_writes: true
+  package_json_modified: false
+guard:
+  confirm_create_executed: false
+  failure_sample_capsule_created: false
+  failure_sample_preview_created_or_copied: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  production_candidate_created: false
+  push_tag_release_deploy_performed: false
+decision:
+  creator_ready_for_separate_execution_authorization: true
+  recommended_next: authorize_confirm_create_for_first_failure_capsule_or_continue_local_product_lane
+```
+
 ## First Failure Sample Capsule Authorization Package Dry Run
 
 ```yaml
