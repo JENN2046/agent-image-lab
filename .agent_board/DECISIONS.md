@@ -53,3 +53,13 @@ Chosen: Continue only when a next task creates new product value, or when explic
 Reason: Autonomy should improve the project, not generate redundant gates.
 Risk: Useful maintenance could be delayed if value is not recognized.
 Mitigation: Commander may still run a value test and propose or execute a small safe local task when repository reality shows a real gap.
+
+### DECISION-AIL-AUTO-008 — Guarded local auto-commit authorized
+
+Context: The project owner explicitly authorized future local commits without repeated approval when the work meets the project standard.
+Chosen: Codex may automatically create local commits for coherent completed local work when all guarded commit conditions are met.
+Required conditions: exact-file staging only; no `git add .`; validation passed or documented; no secrets; no `.env` changes; no dependency changes unless separately authorized; no A5/provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox action; no tag/release/deploy; no user-owned unrelated changes; no destructive action; diff inspected.
+Still not authorized: push, tag, release, deploy, force push, destructive Git/filesystem actions, provider/plugin/API calls, image generation, DailyNote/VCP memory writes, runtime integration, real manifest reads, VCPChat/VCPToolBox reads, dependency changes, or secrets edits.
+Reason: Reduce unnecessary project-owner interruptions while preserving safety boundaries.
+Risk: A future agent may over-broaden "local" work into unrelated commits.
+Mitigation: Commits must remain exact-file, coherent, task-scoped, validated, and reviewable; remote actions remain separately authorized.

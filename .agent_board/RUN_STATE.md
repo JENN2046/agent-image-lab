@@ -1,5 +1,29 @@
 # RUN_STATE.md — Agent Image Lab
 
+## Guarded Local Auto-Commit Authorization
+
+```yaml
+phase: guarded_local_auto_commit_authorization
+status: recorded_pending_validation
+mode: A4.8_guarded_local_commit_policy
+decision_record: .agent_board/DECISIONS.md#DECISION-AIL-AUTO-008
+authorized_by_project_owner: true
+local_commit_without_repeated_approval_allowed: true
+required_conditions:
+  exact_file_staging_only: true
+  git_add_dot_allowed: false
+  validation_required: true
+  coherent_task_scope_required: true
+  no_unrelated_user_owned_changes: true
+still_requires_separate_authorization:
+  push: true
+  tag_release_deploy: true
+  A5_provider_plugin_api_image_runtime_memory: true
+  dependency_changes: true
+  secrets_or_env_changes: true
+  destructive_actions: true
+```
+
 ## P2a Registry-Driven Preview Capsule Validator Implementation
 
 ```yaml

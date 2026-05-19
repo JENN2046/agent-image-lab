@@ -1,5 +1,15 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — Guarded Local Auto-Commit Authorization
+
+```text
+Status: guarded_local_auto_commit_authorization recorded_pending_validation.
+Reason: project owner authorized future local commits without repeated approval when guarded commit standards are met.
+Decision record: .agent_board/DECISIONS.md DECISION-AIL-AUTO-008.
+Allowed: coherent completed local commits after exact-file staging, diff inspection, and validation.
+Still blocked: push/tag/release/deploy, A5, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, dependency changes unless separately authorized, secrets, destructive actions, unrelated user-owned changes.
+```
+
 ## Current Handoff Update — P2a Registry-Driven Preview Capsule Validator Implementation
 
 ```text

@@ -6,6 +6,18 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current Guarded Local Auto-Commit Authorization
+
+```text
+Current governance task: guarded_local_auto_commit_authorization.
+Status: recorded pending validation.
+Decision record: .agent_board/DECISIONS.md DECISION-AIL-AUTO-008.
+Meaning: future coherent completed local work may be committed automatically when exact-file staging, validation, diff inspection, and safety conditions pass.
+Still requires explicit authorization: push, tag, release, deploy, A5/provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, dependency changes, secrets/env changes, destructive actions, unrelated user-owned changes.
+```
+
+---
+
 ## Current P2a Registry-Driven Preview Capsule Validator Implementation
 
 ```text

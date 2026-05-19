@@ -1,5 +1,23 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## Guarded Local Auto-Commit Authorization
+
+```yaml
+phase: guarded_local_auto_commit_authorization
+status: recorded_pending_validation
+goal: persist the project-owner authorization for future guarded local auto-commits
+completed:
+  - recorded DECISION-AIL-AUTO-008 in .agent_board/DECISIONS.md
+  - summarized required guarded commit conditions in .agent_board current surfaces
+not_authorized:
+  - no automatic push
+  - no tag, release, or deploy
+  - no A5/provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox
+  - no dependency changes unless separately authorized
+  - no secrets or .env edits
+  - no destructive actions
+```
+
 ## P2a Registry-Driven Preview Capsule Validator Implementation
 
 ```yaml
