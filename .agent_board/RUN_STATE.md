@@ -1,5 +1,33 @@
 # RUN_STATE.md — Agent Image Lab
 
+## P2 Second Git-Portable Preview Capsule Authorization Package
+
+```yaml
+phase: p2_second_git_portable_preview_capsule_authorization_package
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_authorization_package_only
+goal: prepare the second accepted sample preview capsule without executing capsule creation
+evidence:
+  authorization_package: docs/SECOND_GIT_PORTABLE_PREVIEW_CAPSULE_AUTHORIZATION_GATE.md
+recommended_sample:
+  sample_id: accepted_product_still_life_tennis_wallet_001
+  source_image_path: runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg
+  source_image_exists_locally: true
+  source_image_git_tracked: false
+  target_capsule: asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/
+guard:
+  preview_created_or_copied: false
+  capsule_content_written: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  push_tag_release_deploy_performed_by_this_phase: false
+decision:
+  validation_passed: true
+  ready_for_guarded_local_auto_commit: true
+  future_creation_requires_separate_authorization: true
+```
+
 ## P1 Preview Capsule Validation Productization
 
 ```yaml

@@ -1,5 +1,37 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## P2 Second Git-Portable Preview Capsule Authorization Package
+
+```yaml
+phase: p2_second_git_portable_preview_capsule_authorization_package
+status: completed_validated_pending_guarded_local_commit
+goal: prepare the second accepted sample preview capsule authorization package without executing capsule creation
+completed:
+  - scanned Git-tracked image surfaces and local ignored runs image availability
+  - selected accepted_product_still_life_tennis_wallet_001 as the recommended second capsule candidate
+  - created docs/SECOND_GIT_PORTABLE_PREVIEW_CAPSULE_AUTHORIZATION_GATE.md
+  - added README navigation for the second capsule authorization package
+validation:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - npm run validate-preview-capsule-registry
+  - npm run validate-preview-capsule-negative-cases
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+candidate:
+  sample_id: accepted_product_still_life_tennis_wallet_001
+  source_image_path: runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg
+  source_image_exists_locally: true
+  source_image_git_tracked: false
+  target_capsule: asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/
+not_performed:
+  - no preview.webp creation, copy, conversion, or generation
+  - no capsule content written
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no push, tag, release, or deploy
+```
+
 ## P1 Preview Capsule Validation Productization
 
 ```yaml

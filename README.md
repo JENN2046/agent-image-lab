@@ -60,6 +60,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 - `docs/archive/DOCS_ARCHIVE_C2B_VALIDATOR_BLOCKED_STRATEGY_PACKAGE.md` 将 423 个 validator-blocked 文件拆为 scripts+tests、scripts-only、tests-only 三类策略；当前结论是不移动、不改 validator、先做兼容设计。
 - `docs/archive/DOCS_ARCHIVE_FINAL_PROJECT_ORGANIZATION_CHECKPOINT.md` 记录本轮项目整理 checkpoint：当前入口、archive 完成度、引用安全、registry 成熟度、剩余 blockers 和回到产品主线条件。
 - `docs/FIRST_GIT_PORTABLE_PREVIEW_CAPSULE_AUTHORIZATION_GATE.md` 是第一颗 Git-portable preview capsule 的具体授权包草案，当前 retarget 到本机存在旧图的 `accepted_french_summer_rattan_bucket_bag_001`；它不创建或复制 `preview.webp`。
+- `docs/SECOND_GIT_PORTABLE_PREVIEW_CAPSULE_AUTHORIZATION_GATE.md` 是第二颗 Git-portable preview capsule 的授权包草案；当前推荐 `accepted_product_still_life_tennis_wallet_001`，但不创建或复制 `preview.webp`。
 - `scripts/create_preview_capsule.js` 和 `scripts/validate_preview_capsule.js` 是标准 preview capsule 生成/验证入口；WebP 编码依赖由 `package.json` 锁定为 `sharp`。
 - `docs/C2_VALIDATOR_BLOCKED_COMPATIBILITY_DESIGN_DRY_RUN.md` 是 423 个 validator-blocked records 的兼容设计 dry-run；它不移动文件、不改 validator。
 - `docs/C1_HUMAN_NAVIGATION_RECORDS_DECISION_PACKAGE.md` 是 39 个 human-navigation records 的人工语义裁决包；它不自动移动、rewrite 或 wrapper。

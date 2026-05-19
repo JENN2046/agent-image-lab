@@ -6,6 +6,22 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current P2 Second Git-Portable Preview Capsule Authorization Package
+
+```text
+Current product-mainline task: p2_second_git_portable_preview_capsule_authorization_package.
+Status: completed validated pending guarded local commit.
+Authorization package: docs/SECOND_GIT_PORTABLE_PREVIEW_CAPSULE_AUTHORIZATION_GATE.md.
+Recommended sample: accepted_product_still_life_tennis_wallet_001.
+Recommended source image: runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg.
+Target capsule: asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/.
+Not performed: no preview.webp creation/copy/conversion, no capsule content write, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no push/tag/release/deploy.
+Validation passed: git diff --check, agent board validator, registry validator alias, negative-case validator alias, and scripts/validate_mvp.ps1.
+Recommended next: guarded local auto-commit if clean.
+```
+
+---
+
 ## Current P1 Preview Capsule Validation Productization
 
 ```text
