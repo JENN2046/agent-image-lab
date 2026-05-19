@@ -1,5 +1,33 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## P6C Review Console Registry Report v2 State
+
+```yaml
+phase: p6c_review_console_registry_report_v2_state
+status: completed_validated_pending_guarded_local_commit
+completed:
+  - added Registry Report v2 static panel to Review Console
+  - added registry_report_v2_state to draft output
+  - displayed accepted=2, failure=1, total=3, passed=3, failed=0
+  - displayed per-sample report rows and resolved-by relation
+  - added tests/schema_examples/P6C_REVIEW_CONSOLE_REGISTRY_REPORT_V2_STATE.example.json
+  - added scripts/validate_review_console_registry_report_v2_state.js
+  - documented the static UI binding in docs/P6C_REVIEW_CONSOLE_REGISTRY_REPORT_V2_STATE.md
+  - wired the validator into scripts/validate_mvp.ps1
+not_performed:
+  - no browser validator execution
+  - no asset_archive file read
+  - no preview.webp load, render, copy, conversion, or creation
+  - no accepted_samples or failure_samples write
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no production candidate
+  - no push, tag, release, or deploy
+next:
+  - second failure capsule authorization package or registry_report_v2 negative-state design
+```
+
 ## P6B Capsule Registry Report v2
 
 ```yaml

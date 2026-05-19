@@ -182,6 +182,21 @@ Phase 9 审批记录必须满足：
 
 `P6_MULTI_CAPSULE_ACCEPTED_FAILURE_DASHBOARD.example.json` 固定本节映射的 golden snapshot。后续如果 accepted/failure capsule summary、resolved-by link、future report shape 或 failure expansion plan 发生结构漂移，必须同步更新 snapshot validator 并保持 no-fetch / no-write / no-runtime / no-image-generation 边界。
 
+## P6C Registry Report v2 State 映射
+
+本节用于验收 P6B 正式 registry report v2 形状进入静态 Review Console 可见 UI 与草案输出。它只从现有 static capsule mock 派生显示，不在浏览器内执行 validator，不读取 `asset_archive/` 文件，不加载 `preview.webp`，不 fetch，不写文件。
+
+| Report v2 字段 | Review Console 可见/草案字段 | 说明 |
+| --- | --- | --- |
+| `report_version` | `registry_report_v2_state.report_version` / `registryReportV2Summary` | 必须为 `accepted_failure_capsule_registry_report_v2` |
+| `totals.accepted` / `failure` / `total` / `passed` / `failed` | `registry_report_v2_state.totals` / `registryReportV2Summary` | 当前固定为 accepted=2、failure=1、total=3、passed=3、failed=0 |
+| `per_sample_results[]` | `registry_report_v2_state.per_sample_results` / `registryReportV2Rows` | 展示 accepted/failure lane、status、registry status、portable status、manifest/preview/chain refs |
+| `resolved_by_links[]` | `registry_report_v2_state.resolved_by_links` / `registryReportV2Relations` | 展示 failure -> accepted 关联 |
+| `failure_class_summary` | `registry_report_v2_state.failure_class_summary` | 必须保持 clean summary，不得隐藏 missing link 或 guard violation |
+| `guard` | `registry_report_v2_state.guard` / `registryReportV2Guard` | 必须保持 static-only、no fetch、no file write、no asset archive read、no runtime |
+
+`P6C_REVIEW_CONSOLE_REGISTRY_REPORT_V2_STATE.example.json` 固定本节映射的 golden snapshot。后续如果 `registry_report_v2_state` 的 totals、relation、guard 或 draft output key 漂移，必须同步更新 snapshot validator 并保持 no-fetch / no-write / no-runtime / no-image-generation 边界。
+
 ## v14.048 Review Decision Package Static Handoff 映射
 
 本节用于验收 PVOS adapter 输出中的 `review_decision_package` 进入静态 Review Console 可见 UI 与草案输出。它仍然只读取项目内 mock / fixture，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。

@@ -11887,8 +11887,30 @@ process.exit(child.status || 0);
     if ($capsuleRegistryReportV2.guard.old_runs_source_required_for_portable_validation -ne $false -or $capsuleRegistryReportV2.guard.preview_creation_or_copy_performed -ne $false -or $capsuleRegistryReportV2.guard.accepted_samples_write_performed -ne $false -or $capsuleRegistryReportV2.guard.failure_samples_write_performed -ne $false) {
       Add-Failure "Capsule registry report v2 must not require old runs source or mutate capsule files"
     }
-    if ($capsuleRegistryReportV2.guard.provider_contact_performed -ne $false -or $capsuleRegistryReportV2.guard.plugin_call_performed -ne $false -or $capsuleRegistryReportV2.guard.api_call_performed -ne $false -or $capsuleRegistryReportV2.guard.image_generation_performed -ne $false -or $capsuleRegistryReportV2.guard.DailyNote_write_performed -ne $false -or $capsuleRegistryReportV2.guard.VCP_memory_write_performed -ne $false -or $capsuleRegistryReportV2.guard.runtime_execution_performed -ne $false -or $capsuleRegistryReportV2.guard.real_manifest_read_performed -ne $false -or $capsuleRegistryReportV2.guard.real_vcpchat_read_performed -ne $false -or $capsuleRegistryReportV2.guard.real_vcptoolbox_read_performed -ne $false -or $capsuleRegistryReportV2.guard.production_candidate_write_performed -ne $false -or $capsuleRegistryReportV2.guard.push_tag_release_deploy_performed -ne $false -or $capsuleRegistryReportV2.guard.vcp_runtime_integration_proven -ne $false) {
+  if ($capsuleRegistryReportV2.guard.provider_contact_performed -ne $false -or $capsuleRegistryReportV2.guard.plugin_call_performed -ne $false -or $capsuleRegistryReportV2.guard.api_call_performed -ne $false -or $capsuleRegistryReportV2.guard.image_generation_performed -ne $false -or $capsuleRegistryReportV2.guard.DailyNote_write_performed -ne $false -or $capsuleRegistryReportV2.guard.VCP_memory_write_performed -ne $false -or $capsuleRegistryReportV2.guard.runtime_execution_performed -ne $false -or $capsuleRegistryReportV2.guard.real_manifest_read_performed -ne $false -or $capsuleRegistryReportV2.guard.real_vcpchat_read_performed -ne $false -or $capsuleRegistryReportV2.guard.real_vcptoolbox_read_performed -ne $false -or $capsuleRegistryReportV2.guard.production_candidate_write_performed -ne $false -or $capsuleRegistryReportV2.guard.push_tag_release_deploy_performed -ne $false -or $capsuleRegistryReportV2.guard.vcp_runtime_integration_proven -ne $false) {
       Add-Failure "Capsule registry report v2 must remain local-only with no external, memory, runtime, production, or remote actions"
+    }
+  }
+
+  $reviewConsoleRegistryReportV2Output = & node (Join-Path $Root 'scripts/validate_review_console_registry_report_v2_state.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console registry report v2 state validation exited with failure"
+  } else {
+    $reviewConsoleRegistryReportV2 = ($reviewConsoleRegistryReportV2Output -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleRegistryReportV2.passed -ne $true -or $reviewConsoleRegistryReportV2.phase -ne 'p6c_review_console_registry_report_v2_state' -or $reviewConsoleRegistryReportV2.draft_output_key -ne 'registry_report_v2_state') {
+      Add-Failure "Review Console registry report v2 state must pass with expected phase and draft output key"
+    }
+    if ($reviewConsoleRegistryReportV2.accepted_count -ne 2 -or $reviewConsoleRegistryReportV2.failure_count -ne 1 -or $reviewConsoleRegistryReportV2.total_count -ne 3 -or $reviewConsoleRegistryReportV2.passed_count -ne 3 -or $reviewConsoleRegistryReportV2.failed_count_total -ne 0) {
+      Add-Failure "Review Console registry report v2 state must preserve accepted=2, failure=1, total=3, passed=3, failed=0"
+    }
+    if ($reviewConsoleRegistryReportV2.relation_count -lt 1 -or $reviewConsoleRegistryReportV2.old_runs_source_required_for_portable_validation -ne $false) {
+      Add-Failure "Review Console registry report v2 state must expose relation and avoid old runs dependency"
+    }
+    if ($reviewConsoleRegistryReportV2.fetch_performed -ne $false -or $reviewConsoleRegistryReportV2.file_write_performed -ne $false -or $reviewConsoleRegistryReportV2.asset_archive_read_performed -ne $false -or $reviewConsoleRegistryReportV2.preview_loaded_or_rendered -ne $false -or $reviewConsoleRegistryReportV2.preview_creation_or_copy_performed -ne $false) {
+      Add-Failure "Review Console registry report v2 state must not fetch, write, read asset_archive, load preview, or create/copy preview"
+    }
+    if ($reviewConsoleRegistryReportV2.provider_contact_performed -ne $false -or $reviewConsoleRegistryReportV2.plugin_call_performed -ne $false -or $reviewConsoleRegistryReportV2.api_call_performed -ne $false -or $reviewConsoleRegistryReportV2.image_generation_performed -ne $false -or $reviewConsoleRegistryReportV2.DailyNote_write_performed -ne $false -or $reviewConsoleRegistryReportV2.VCP_memory_write_performed -ne $false -or $reviewConsoleRegistryReportV2.runtime_execution_performed -ne $false -or $reviewConsoleRegistryReportV2.real_manifest_read_performed -ne $false -or $reviewConsoleRegistryReportV2.real_vcpchat_read_performed -ne $false -or $reviewConsoleRegistryReportV2.real_vcptoolbox_read_performed -ne $false -or $reviewConsoleRegistryReportV2.production_candidate_write_performed -ne $false -or $reviewConsoleRegistryReportV2.push_tag_release_deploy_performed -ne $false -or $reviewConsoleRegistryReportV2.vcp_runtime_integration_proven -ne $false) {
+      Add-Failure "Review Console registry report v2 state must remain static-only with no external, memory, runtime, production, or remote actions"
     }
   }
   [Console]::OutputEncoding = $prevOutputEncoding

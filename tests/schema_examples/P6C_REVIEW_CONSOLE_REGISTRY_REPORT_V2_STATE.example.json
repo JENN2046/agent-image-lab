@@ -1,0 +1,68 @@
+{
+  "review_console_registry_report_v2_state_snapshot": {
+    "phase": "p6c_review_console_registry_report_v2_state",
+    "snapshot_status": "golden_static_snapshot",
+    "source_validator_phase": "p6b_capsule_registry_report_v2",
+    "source_static_app_ref": "review_console/static_prototype/app.js#registryReportV2State",
+    "execution_mode": "review_console_static_registry_report_v2_state_only",
+    "draft_output_key": "registry_report_v2_state",
+    "report_version": "accepted_failure_capsule_registry_report_v2",
+    "status": "accepted_failure_capsule_registry_report_v2_verified",
+    "totals": {
+      "accepted": 2,
+      "failure": 1,
+      "total": 3,
+      "passed": 3,
+      "failed": 0
+    },
+    "accepted_sample_ids": [
+      "accepted_french_summer_rattan_bucket_bag_001",
+      "accepted_product_still_life_tennis_wallet_001"
+    ],
+    "failure_sample_ids": [
+      "failure_french_summer_rattan_bag_v7_29_001"
+    ],
+    "resolved_by_links": [
+      {
+        "failure_sample_id": "failure_french_summer_rattan_bag_v7_29_001",
+        "accepted_sample_id": "accepted_french_summer_rattan_bucket_bag_001",
+        "relation_status": "linked",
+        "failure_final_route": "failure_learning_only_never_production",
+        "accepted_is_reusable_positive_example": true,
+        "failure_is_never_production": true
+      }
+    ],
+    "failure_class_summary": {
+      "accepted_failed": 0,
+      "failure_failed": 0,
+      "missing_resolved_by_link": 0,
+      "production_or_memory_guard_violation": 0
+    },
+    "guard": {
+      "static_report_view_only": true,
+      "derived_from_static_capsule_mock": true,
+      "validator_output_represented": true,
+      "old_runs_source_required_for_portable_validation": false,
+      "fetch_performed": false,
+      "file_write_performed": false,
+      "asset_archive_read_performed": false,
+      "preview_loaded_or_rendered": false,
+      "preview_creation_or_copy_performed": false,
+      "accepted_samples_write_performed": false,
+      "failure_samples_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "runtime_execution_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "production_candidate_write_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "vcp_runtime_integration_proven": false
+    }
+  }
+}

@@ -439,6 +439,145 @@ function renderMultiCapsuleDashboard() {
   `;
 }
 
+function registryReportV2State() {
+  const dashboard = multiCapsuleDashboardState();
+  const rows = dashboard.per_sample_report.map((row) => ({
+    lane: row.lane,
+    sample_id: row.sample_id,
+    passed: row.passed,
+    status: row.status,
+    registry_validator_status: row.registry_validator_status,
+    portable_validation_status: row.clone_portable_validation_status,
+    manifest_ref: row.manifest_ref,
+    preview_ref: row.preview_ref,
+    chain_refs: row.chain_refs,
+    resolved_by_accepted_sample: row.resolved_by_accepted_sample || null,
+    failure_tags: row.failure_tags || [],
+    failure_classes: []
+  }));
+  return {
+    phase: "p6c_review_console_registry_report_v2_state",
+    source_validator_phase: "p6b_capsule_registry_report_v2",
+    report_version: "accepted_failure_capsule_registry_report_v2",
+    status: "accepted_failure_capsule_registry_report_v2_verified",
+    execution_mode: "review_console_static_registry_report_v2_state_only",
+    draft_output_key: "registry_report_v2_state",
+    source_reports: {
+      accepted_registry_status: "registry_driven_preview_capsules_verified",
+      accepted_registry_report_version: "v2",
+      failure_registry_status: "failure_sample_capsules_verified",
+      failure_registry_report_version: "v1"
+    },
+    totals: {
+      accepted: dashboard.accepted_capsule_count,
+      failure: dashboard.failure_capsule_count,
+      total: dashboard.total_capsule_count,
+      passed: rows.filter((row) => row.passed).length,
+      failed: rows.filter((row) => !row.passed).length
+    },
+    accepted_sample_ids: dashboard.accepted_sample_ids,
+    failure_sample_ids: dashboard.failure_sample_ids,
+    per_sample_results: rows,
+    resolved_by_links: dashboard.resolved_by_links,
+    failure_class_summary: dashboard.failure_class_summary,
+    report_fields: [
+      "lane",
+      "sample_id",
+      "passed",
+      "status",
+      "registry_validator_status",
+      "portable_validation_status",
+      "manifest_ref",
+      "preview_ref",
+      "chain_refs",
+      "resolved_by_accepted_sample",
+      "failure_tags",
+      "failure_classes"
+    ],
+    guard: {
+      static_report_view_only: true,
+      derived_from_static_capsule_mock: true,
+      validator_output_represented: true,
+      old_runs_source_required_for_portable_validation: false,
+      fetch_performed: false,
+      file_write_performed: false,
+      asset_archive_read_performed: false,
+      preview_loaded_or_rendered: false,
+      preview_creation_or_copy_performed: false,
+      accepted_samples_write_performed: false,
+      failure_samples_write_performed: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      image_generation_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      runtime_execution_performed: false,
+      real_manifest_read_performed: false,
+      real_vcpchat_read_performed: false,
+      real_vcptoolbox_read_performed: false,
+      production_candidate_write_performed: false,
+      push_tag_release_deploy_performed: false,
+      vcp_runtime_integration_proven: false
+    }
+  };
+}
+
+function renderRegistryReportV2State() {
+  const report = registryReportV2State();
+  qs("#registryReportV2Summary").innerHTML = `
+    <span>version <strong>${escapeHtml(report.report_version)}</strong></span>
+    <span>status <strong>${escapeHtml(report.status)}</strong></span>
+    <span>accepted <strong>${escapeHtml(report.totals.accepted)}</strong></span>
+    <span>failure <strong>${escapeHtml(report.totals.failure)}</strong></span>
+    <span>passed <strong>${escapeHtml(report.totals.passed)}</strong></span>
+    <span>failed <strong>${escapeHtml(report.totals.failed)}</strong></span>
+  `;
+  qs("#registryReportV2Rows").innerHTML = report.per_sample_results.map((row) => `
+    <article class="registry-report-v2-card ${row.lane}">
+      <div class="protocol-card-head">
+        <strong>${escapeHtml(row.sample_id)}</strong>
+        <span>${escapeHtml(row.lane)}</span>
+      </div>
+      <dl>
+        <div><dt>Passed</dt><dd>${escapeHtml(row.passed)}</dd></div>
+        <div><dt>Status</dt><dd>${escapeHtml(row.status)}</dd></div>
+        <div><dt>Registry</dt><dd>${escapeHtml(row.registry_validator_status)}</dd></div>
+        <div><dt>Portable</dt><dd>${escapeHtml(row.portable_validation_status)}</dd></div>
+        <div><dt>Manifest</dt><dd>${escapeHtml(row.manifest_ref)}</dd></div>
+        <div><dt>Preview</dt><dd>${escapeHtml(row.preview_ref)}</dd></div>
+        <div><dt>Chain</dt><dd>${inlineList(row.chain_refs)}</dd></div>
+        <div><dt>Resolved by</dt><dd>${escapeHtml(row.resolved_by_accepted_sample || "none")}</dd></div>
+        <div><dt>Failure tags</dt><dd>${inlineList(row.failure_tags)}</dd></div>
+      </dl>
+    </article>
+  `).join("");
+  qs("#registryReportV2Relations").innerHTML = report.resolved_by_links.map((relation) => `
+    <article class="registry-report-v2-card relation">
+      <div class="protocol-card-head">
+        <strong>${escapeHtml(relation.failure_sample_id)}</strong>
+        <span>${escapeHtml(relation.relation_status)}</span>
+      </div>
+      <dl>
+        <div><dt>Accepted sample</dt><dd>${escapeHtml(relation.accepted_sample_id)}</dd></div>
+        <div><dt>Failure route</dt><dd>${escapeHtml(relation.failure_final_route)}</dd></div>
+        <div><dt>Accepted reusable</dt><dd>${escapeHtml(relation.accepted_is_reusable_positive_example)}</dd></div>
+        <div><dt>Failure never production</dt><dd>${escapeHtml(relation.failure_is_never_production)}</dd></div>
+      </dl>
+    </article>
+  `).join("");
+  qs("#registryReportV2Guard").innerHTML = `
+    <span>static view: ${escapeHtml(report.guard.static_report_view_only)}</span>
+    <span>validator represented: ${escapeHtml(report.guard.validator_output_represented)}</span>
+    <span>old runs required: ${escapeHtml(report.guard.old_runs_source_required_for_portable_validation)}</span>
+    <span>fetch: ${escapeHtml(report.guard.fetch_performed)}</span>
+    <span>file write: ${escapeHtml(report.guard.file_write_performed)}</span>
+    <span>asset archive read: ${escapeHtml(report.guard.asset_archive_read_performed)}</span>
+    <span>preview render: ${escapeHtml(report.guard.preview_loaded_or_rendered)}</span>
+    <span>runtime proven: ${escapeHtml(report.guard.vcp_runtime_integration_proven)}</span>
+  `;
+}
+
 function artifactLifecycleReaderApi() {
   return window.ArtifactLifecycleStateReader;
 }
@@ -2920,6 +3059,7 @@ function renderDraft() {
     review_report_negative_guard_static_handoff: state.review_report_negative_guard_static_handoff,
     review_evidence_blocker_adapter_negative_static_handoff: state.review_evidence_blocker_adapter_negative_static_handoff,
     multi_capsule_dashboard_state: multiCapsuleDashboardState(),
+    registry_report_v2_state: registryReportV2State(),
     failure_state_static_workbench_state: failureStateStaticWorkbenchState(),
     artifact_recoverability_dashboard_evidence: state.artifact_dashboard_evidence,
     portable_preview_capsule_evidence: state.portable_preview_capsule_evidence,
@@ -3008,6 +3148,7 @@ function renderAll() {
   renderFailureStateStaticWorkbench();
   renderArtifactEvidenceDashboard();
   renderMultiCapsuleDashboard();
+  renderRegistryReportV2State();
   renderArtifactLifecycleStateReader();
   renderArtifactPromptCompletionPanel();
   renderArtifactDetailDrawer();

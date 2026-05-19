@@ -1,5 +1,37 @@
 # RUN_STATE.md — Agent Image Lab
 
+## P6C Review Console Registry Report v2 State
+
+```yaml
+phase: p6c_review_console_registry_report_v2_state
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_static_review_console
+goal: expose the formal P6B capsule registry report v2 as Review Console static UI and draft output
+static_output_key: registry_report_v2_state
+validator: scripts/validate_review_console_registry_report_v2_state.js
+fixture: tests/schema_examples/P6C_REVIEW_CONSOLE_REGISTRY_REPORT_V2_STATE.example.json
+validation_record: docs/P6C_REVIEW_CONSOLE_REGISTRY_REPORT_V2_STATE.md
+counts:
+  accepted_capsules: 2
+  failure_capsules: 1
+  total_capsules: 3
+  passed: 3
+  failed: 0
+guard:
+  browser_executes_validator: false
+  asset_archive_read_performed: false
+  preview_loaded_or_rendered: false
+  preview_creation_or_copy_performed: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  production_candidate_created: false
+  push_tag_release_deploy_performed: false
+decision:
+  registry_report_v2_visible_in_review_console: true
+  recommended_next: second_failure_capsule_authorization_package_or_registry_report_v2_negative_state_design
+```
+
 ## P6B Capsule Registry Report v2
 
 ```yaml

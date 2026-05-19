@@ -512,7 +512,9 @@ input[type="range"] {
 .review-report-list,
 .adapter-negative-list,
 .multi-capsule-report,
-.multi-capsule-relations {
+.multi-capsule-relations,
+.registry-report-v2-list,
+.registry-report-v2-relations {
   display: grid;
   gap: 10px;
 }
@@ -536,7 +538,8 @@ input[type="range"] {
 .blocker-arbiter-card,
 .review-report-card,
 .adapter-negative-card,
-.multi-capsule-card {
+.multi-capsule-card,
+.registry-report-v2-card {
   display: grid;
   gap: 10px;
   min-width: 0;
@@ -593,6 +596,18 @@ input[type="range"] {
 }
 
 .multi-capsule-card.relation {
+  border-left-color: var(--amber);
+}
+
+.registry-report-v2-card.accepted {
+  border-left-color: var(--green);
+}
+
+.registry-report-v2-card.failure {
+  border-left-color: var(--red);
+}
+
+.registry-report-v2-card.relation {
   border-left-color: var(--amber);
 }
 
@@ -885,6 +900,7 @@ input[type="range"] {
 .review-report-card dl,
 .adapter-negative-card dl,
 .multi-capsule-card dl,
+.registry-report-v2-card dl,
 .artifact-review-note-card dl,
 .failure-state-card dl,
 .three-sample-gap-card dl,
@@ -908,6 +924,7 @@ input[type="range"] {
 .review-report-card dl div,
 .adapter-negative-card dl div,
 .multi-capsule-card dl div,
+.registry-report-v2-card dl div,
 .artifact-review-note-card dl div,
 .failure-state-card dl div,
 .three-sample-gap-card dl div,
@@ -932,6 +949,7 @@ input[type="range"] {
 .review-report-card dt,
 .adapter-negative-card dt,
 .multi-capsule-card dt,
+.registry-report-v2-card dt,
 .artifact-review-note-card dt,
 .failure-state-card dt,
 .three-sample-gap-card dt,
@@ -954,6 +972,7 @@ input[type="range"] {
 .review-report-card dd,
 .adapter-negative-card dd,
 .multi-capsule-card dd,
+.registry-report-v2-card dd,
 .artifact-review-note-card dd,
 .failure-state-card dd,
 .three-sample-gap-card dd,
@@ -1208,7 +1227,8 @@ input[type="range"] {
   .blocker-card dl,
   .review-report-card dl,
   .adapter-negative-card dl,
-  .multi-capsule-card dl {
+  .multi-capsule-card dl,
+  .registry-report-v2-card dl {
     grid-template-columns: 1fr;
   }
 

@@ -6,6 +6,20 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current P6C Review Console Registry Report v2 State
+
+```text
+Current product-mainline task: p6c_review_console_registry_report_v2_state.
+Status: completed validated pending guarded local commit.
+Purpose: expose the formal P6B accepted/failure capsule registry report v2 in Review Console static UI and draft output.
+Changed files: review_console/static_prototype/app.js, index.html, styles.css, README.md, FIELD_MAPPING.md, docs/P6C_REVIEW_CONSOLE_REGISTRY_REPORT_V2_STATE.md, tests/schema_examples/P6C_REVIEW_CONSOLE_REGISTRY_REPORT_V2_STATE.example.json, scripts/validate_review_console_registry_report_v2_state.js, scripts/validate_mvp.ps1, README.md, .agent_board resume surfaces.
+Evidence: registry_report_v2_state, accepted=2, failure=1, total=3, passed=3, failed=0, resolved-by link from failure_french_summer_rattan_bag_v7_29_001 to accepted_french_summer_rattan_bucket_bag_001.
+Not performed: no browser validator execution, no asset_archive read, no preview load/render/copy/conversion/creation, no accepted/failure capsule mutation, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: second failure capsule authorization package or registry_report_v2 negative-state design.
+```
+
+---
+
 ## Current P6B Capsule Registry Report v2
 
 ```text

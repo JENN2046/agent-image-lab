@@ -1,5 +1,20 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — P6C Review Console Registry Report v2 State
+
+```text
+Status: p6c_review_console_registry_report_v2_state completed_validated_pending_guarded_local_commit.
+Reason: expose the formal P6B capsule registry report v2 as Review Console static UI and draft output.
+Execution mode: A4.8 static Review Console.
+UI surface: Registry Report v2 / registry_report_v2_state.
+Validator: scripts/validate_review_console_registry_report_v2_state.js.
+Fixture: tests/schema_examples/P6C_REVIEW_CONSOLE_REGISTRY_REPORT_V2_STATE.example.json.
+Validation record: docs/P6C_REVIEW_CONSOLE_REGISTRY_REPORT_V2_STATE.md.
+Current report view: accepted=2, failure=1, total=3, passed=3, failed=0; failure_french_summer_rattan_bag_v7_29_001 resolves to accepted_french_summer_rattan_bucket_bag_001.
+Not performed: no browser validator execution, no asset_archive read, no preview load/render/copy/conversion/creation, no accepted/failure capsule mutation, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: second failure capsule authorization package or registry_report_v2 negative-state design.
+```
+
 ## Current Handoff Update — P6B Capsule Registry Report v2
 
 ```text
