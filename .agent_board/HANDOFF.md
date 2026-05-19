@@ -1,5 +1,17 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — Failure Sample Capsule Validator Dry Run Design
+
+```text
+Status: failure_sample_capsule_validator_dry_run_design completed_validated_pending_guarded_local_commit.
+Reason: define a zero-sample-safe future validator for failure sample capsules before any real failure sample is authorized.
+Execution mode: A4.8 validator design dry-run.
+Design record: docs/P5B_FAILURE_SAMPLE_CAPSULE_VALIDATOR_DRY_RUN_DESIGN.md.
+README navigation updated: README.md.
+Not performed: no validator behavior changed, no failure sample capsule created, no manifest/preview/failure_record/review_record sample file created, no preview creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: implement zero-sample-safe failure sample capsule registry validator.
+```
+
 ## Current Handoff Update — Failure Sample Capsule Directory Policy
 
 ```text

@@ -1,5 +1,29 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## Failure Sample Capsule Validator Dry Run Design
+
+```yaml
+phase: failure_sample_capsule_validator_dry_run_design
+status: completed_validated_pending_guarded_local_commit
+completed:
+  - added docs/P5B_FAILURE_SAMPLE_CAPSULE_VALIDATOR_DRY_RUN_DESIGN.md
+  - documented zero-sample-safe validator behavior
+  - documented future per-sample checks and negative cases
+  - updated README navigation
+not_performed:
+  - no validator behavior changed
+  - no asset_archive/failure_samples/<sample_id>/ capsule created
+  - no manifest, preview.webp, failure_record, or review_record sample file created
+  - no preview.webp creation, copy, conversion, or generation
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no production candidate
+  - no push, tag, release, or deploy
+next:
+  - implement zero-sample-safe failure sample capsule registry validator
+```
+
 ## Failure Sample Capsule Directory Policy
 
 ```yaml

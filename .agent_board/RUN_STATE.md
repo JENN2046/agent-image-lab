@@ -1,5 +1,32 @@
 # RUN_STATE.md — Agent Image Lab
 
+## Failure Sample Capsule Validator Dry Run Design
+
+```yaml
+phase: failure_sample_capsule_validator_dry_run_design
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_validator_design_dry_run
+goal: design a zero-sample-safe validator for future failure sample capsules
+evidence:
+  design_record: docs/P5B_FAILURE_SAMPLE_CAPSULE_VALIDATOR_DRY_RUN_DESIGN.md
+  readme_navigation: README.md
+planned_future_validator: scripts/validate_failure_sample_capsule_registry.js
+planned_root: asset_archive/failure_samples
+planned_require_at_least_initial: 0
+guard:
+  validator_behavior_changed: false
+  failure_sample_capsule_created: false
+  failure_sample_preview_created_or_copied: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  production_candidate_created: false
+  push_tag_release_deploy_performed: false
+decision:
+  design_ready: true
+  recommended_next: implement_zero_sample_safe_failure_sample_capsule_validator
+```
+
 ## Failure Sample Capsule Directory Policy
 
 ```yaml

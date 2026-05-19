@@ -6,6 +6,19 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current Failure Sample Capsule Validator Dry Run Design
+
+```text
+Current product-mainline task: failure_sample_capsule_validator_dry_run_design.
+Status: completed validated pending guarded local commit.
+Purpose: design the future failure sample capsule registry validator before implementing behavior or creating any failure capsule.
+Changed files: docs/P5B_FAILURE_SAMPLE_CAPSULE_VALIDATOR_DRY_RUN_DESIGN.md, README.md, .agent_board resume surfaces.
+Not performed: no validator behavior changed, no asset_archive/failure_samples/<sample_id>/ capsule created, no manifest/preview/failure_record/review_record sample file created, no preview creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: implement zero-sample-safe failure sample capsule registry validator.
+```
+
+---
+
 ## Current Failure Sample Capsule Directory Policy
 
 ```text
