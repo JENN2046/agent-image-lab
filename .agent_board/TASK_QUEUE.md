@@ -4,6 +4,37 @@
 ## Current Capsule Productization Goal
 
 ```text
+phase: capsule_operator_surface_closeout_gate
+status: completed_validated
+mode: A4.8 review / docs-light
+objective: summarize sealed operator-facing static surfaces and choose next product move
+sealed_remote_head: 9dedc70
+accepted: 2
+failure: 2
+total: 4
+operator_surfaces_sealed: unified smoke fixture; Review Console snapshot; static smoke baseline; reviewer action matrix; static checklist UI mapping
+runtime_execution_performed: false
+executable_ui_buttons_created: false
+browser_validator_executed: false
+asset_archive_ui_read_performed: false
+preview_loaded_or_rendered: false
+capsule_creation_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+next_move_selected: A_runs_backup_restore_protocol
+recommended_next: capsule_runs_backup_restore_protocol_gate_docs_only_no_runs_mutation
+```
+
+---
+
+## Current Capsule Productization Goal
+
+```text
 phase: capsule_static_operator_checklist_ui_mapping_gate
 status: completed_validated
 mode: A4.8 static / no runtime
