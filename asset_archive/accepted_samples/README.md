@@ -35,9 +35,9 @@ Current capsules:
 Validation:
 
 ```powershell
-node scripts/validate_preview_capsule.js --sample-id=accepted_french_summer_rattan_bucket_bag_001
-node scripts/validate_preview_capsule_registry.js
-node scripts/validate_preview_capsule_registry_negative_cases.js
+npm run validate-preview-capsule -- --sample-id=accepted_french_summer_rattan_bucket_bag_001
+npm run validate-preview-capsule-registry
+npm run validate-preview-capsule-negative-cases
 ```
 
 The registry-driven validator reads capsule directories only; it does not create, copy, convert, or generate image files.

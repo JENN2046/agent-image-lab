@@ -11724,6 +11724,44 @@ process.exit(child.status || 0);
       Add-Failure "v14.231 must fail Base64, original-sha, original-required, preview-size, missing-preview, and A5 negative cases"
     }
   }
+
+  $previewCapsuleRegistryOutput = & node (Join-Path $Root 'scripts/validate_preview_capsule_registry.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Preview capsule registry validation exited with failure"
+  } else {
+    $previewCapsuleRegistry = ($previewCapsuleRegistryOutput -join "`n") | ConvertFrom-Json
+    if ($previewCapsuleRegistry.passed -ne $true -or $previewCapsuleRegistry.status -ne 'registry_driven_preview_capsules_verified') {
+      Add-Failure "Preview capsule registry validation must pass"
+    }
+    if ($previewCapsuleRegistry.sample_count -lt 1 -or $previewCapsuleRegistry.failed_count -ne 0) {
+      Add-Failure "Preview capsule registry must verify at least one sample with zero failures"
+    }
+    if ($previewCapsuleRegistry.guard.provider_contact_performed -ne $false -or $previewCapsuleRegistry.guard.plugin_call_performed -ne $false -or $previewCapsuleRegistry.guard.api_call_performed -ne $false -or $previewCapsuleRegistry.guard.image_generation_performed -ne $false -or $previewCapsuleRegistry.guard.preview_creation_or_copy_performed -ne $false) {
+      Add-Failure "Preview capsule registry validation must not perform provider, plugin, API, image generation, preview creation, or preview copy"
+    }
+    if ($previewCapsuleRegistry.guard.DailyNote_write_performed -ne $false -or $previewCapsuleRegistry.guard.VCP_memory_write_performed -ne $false -or $previewCapsuleRegistry.guard.runtime_execution_performed -ne $false -or $previewCapsuleRegistry.guard.real_manifest_read_performed -ne $false -or $previewCapsuleRegistry.guard.real_vcpchat_read_performed -ne $false -or $previewCapsuleRegistry.guard.real_vcptoolbox_read_performed -ne $false -or $previewCapsuleRegistry.guard.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Preview capsule registry validation must not perform memory, runtime, real manifest, VCP source reads, push, tag, release, or deploy"
+    }
+  }
+
+  $previewCapsuleNegativeOutput = & node (Join-Path $Root 'scripts/validate_preview_capsule_registry_negative_cases.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Preview capsule registry negative-case validation exited with failure"
+  } else {
+    $previewCapsuleNegative = ($previewCapsuleNegativeOutput -join "`n") | ConvertFrom-Json
+    if ($previewCapsuleNegative.passed -ne $true -or $previewCapsuleNegative.status -ne 'registry_preview_capsule_negative_cases_verified') {
+      Add-Failure "Preview capsule registry negative-case validation must pass"
+    }
+    if ($previewCapsuleNegative.failed_count -ne 0 -or $previewCapsuleNegative.check_count -lt 5) {
+      Add-Failure "Preview capsule registry negative-case validation must include passing fail-closed checks"
+    }
+    if ($previewCapsuleNegative.temp_workspace_root_class -ne '.agent_private' -or $previewCapsuleNegative.real_capsule_modified -ne $false -or $previewCapsuleNegative.preview_creation_or_copy_performed -ne $false) {
+      Add-Failure "Preview capsule negative-case fixtures must stay in .agent_private and must not modify real capsules or create/copy product previews"
+    }
+    if ($previewCapsuleNegative.provider_contact_performed -ne $false -or $previewCapsuleNegative.plugin_call_performed -ne $false -or $previewCapsuleNegative.api_call_performed -ne $false -or $previewCapsuleNegative.image_generation_performed -ne $false -or $previewCapsuleNegative.DailyNote_write_performed -ne $false -or $previewCapsuleNegative.VCP_memory_write_performed -ne $false -or $previewCapsuleNegative.runtime_execution_performed -ne $false -or $previewCapsuleNegative.real_manifest_read_performed -ne $false -or $previewCapsuleNegative.real_vcpchat_read_performed -ne $false -or $previewCapsuleNegative.real_vcptoolbox_read_performed -ne $false -or $previewCapsuleNegative.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Preview capsule negative-case validation must not perform external, memory, runtime, source read, push, tag, release, or deploy actions"
+    }
+  }
   [Console]::OutputEncoding = $prevOutputEncoding
 }
 

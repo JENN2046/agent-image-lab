@@ -1,10 +1,39 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## P1 Preview Capsule Validation Productization
+
+```yaml
+phase: p1_preview_capsule_validation_productization
+status: completed_validated_pending_guarded_local_commit
+goal: make preview capsule validation a stable project validation surface
+completed:
+  - added package.json aliases for registry and negative-case preview capsule validation
+  - updated asset_archive/accepted_samples/README.md to use npm validation aliases
+  - wired scripts/validate_mvp.ps1 to run registry and negative-case validators
+validation:
+  - git diff --check
+  - npm run validate-preview-capsule-registry
+  - npm run validate-preview-capsule-negative-cases
+  - npm run validate-preview-capsule -- --sample-id=accepted_french_summer_rattan_bucket_bag_001
+  - node scripts/validate_agent_board_state.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+post_p2b_push_baseline_event:
+  commit: 6604390a29149d9a2b55eb6cb04144960a979673
+  current_sync_truth_source: git_status_and_rev_parse
+not_performed:
+  - no capsule content modified
+  - no product preview.webp creation, copy, conversion, or generation
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no push, tag, release, or deploy
+```
+
 ## P2b Registry Validator Negative-Case Coverage
 
 ```yaml
 phase: p2b_registry_validator_negative_case_coverage
-status: completed_validated_pending_guarded_local_commit
+status: completed_validated_committed_and_pushed
 goal: add local fail-closed coverage for registry-driven preview capsule validation
 completed:
   - added scripts/validate_preview_capsule_registry_negative_cases.js
@@ -22,6 +51,9 @@ validation:
   - git diff --check
   - node scripts/validate_agent_board_state.js
   - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+post_push:
+  commit: 6604390a29149d9a2b55eb6cb04144960a979673
+  current_sync_truth_source: git_status_and_rev_parse
 not_performed:
   - no real capsule modified
   - no product preview.webp creation, copy, conversion, or generation

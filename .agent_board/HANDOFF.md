@@ -1,9 +1,23 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — P1 Preview Capsule Validation Productization
+
+```text
+Status: p1_preview_capsule_validation_productization completed_validated_pending_guarded_local_commit.
+Reason: make preview capsule validation a stable project validation surface after P2b was pushed.
+Execution mode: A4.8 local validation wiring.
+Changed validation surface: package.json aliases, asset_archive/accepted_samples/README.md commands, and scripts/validate_mvp.ps1 registry checks.
+P2b post-push baseline event: 6604390a29149d9a2b55eb6cb04144960a979673.
+Current synchronization truth source: git status and git rev-parse.
+Not performed: no capsule content change, no preview.webp creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no push/tag/release/deploy.
+Validation passed: git diff --check, npm registry validator alias, npm negative-case validator alias, single preview capsule validator, agent board validator, and scripts/validate_mvp.ps1.
+Recommended next: guarded local auto-commit if clean.
+```
+
 ## Current Handoff Update — P2b Registry Validator Negative-Case Coverage
 
 ```text
-Status: p2b_registry_validator_negative_case_coverage completed_validated_pending_guarded_local_commit.
+Status: p2b_registry_validator_negative_case_coverage completed_validated_committed_and_pushed.
 Reason: prove the registry-driven preview capsule validator fails closed for empty registry, missing manifest, missing preview, hash mismatch, and wrong long edge.
 Execution mode: A4.8 local validation helper.
 Validator added: scripts/validate_preview_capsule_registry_negative_cases.js.
@@ -11,8 +25,10 @@ Fixture strategy: temporary text fixtures under ignored .agent_private/, cleaned
 Real capsule modified: false.
 Provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox performed: false.
 Validation passed: node --check negative-case validator, negative-case validator, registry validator, single preview capsule validator, git diff --check, agent board validator, and scripts/validate_mvp.ps1.
-Push performed by this P2b phase: false.
-Recommended next: guarded local auto-commit, then push safety gate if ahead.
+P2b commit and push completed at baseline event: 6604390a29149d9a2b55eb6cb04144960a979673.
+Current synchronization truth source: git status and git rev-parse.
+Push performed by this P2b phase: true.
+Recommended next: P1 preview capsule validation productization.
 ```
 
 ## Current Handoff Update — Guarded Local Auto-Commit Authorization

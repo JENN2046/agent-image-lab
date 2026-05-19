@@ -1,10 +1,37 @@
 # RUN_STATE.md — Agent Image Lab
 
+## P1 Preview Capsule Validation Productization
+
+```yaml
+phase: p1_preview_capsule_validation_productization
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_safe_local_validation_wiring
+goal: make Git-portable preview capsule validation part of the stable project validation surface
+evidence:
+  package_scripts: package.json
+  capsule_readme: asset_archive/accepted_samples/README.md
+  mvp_validator: scripts/validate_mvp.ps1
+post_p2b_push_baseline_event:
+  commit: 6604390a29149d9a2b55eb6cb04144960a979673
+  current_sync_truth_source: git_status_and_rev_parse
+guard:
+  capsule_content_modified: false
+  preview_created_or_copied: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  push_tag_release_deploy_performed_by_this_phase: false
+decision:
+  validation_passed: true
+  ready_for_guarded_local_auto_commit: true
+  recommended_next: guarded_local_auto_commit_if_clean
+```
+
 ## P2b Registry Validator Negative-Case Coverage
 
 ```yaml
 phase: p2b_registry_validator_negative_case_coverage
-status: completed_validated_pending_guarded_local_commit
+status: completed_validated_committed_and_pushed
 mode: A4.8_safe_local_validation_helper
 goal: add fail-closed coverage for registry-driven preview capsule validation
 evidence:
@@ -26,8 +53,10 @@ guard:
   push_tag_release_deploy_performed_by_this_phase: false
 decision:
   validation_passed: true
-  ready_for_guarded_local_auto_commit: true
-  recommended_next: guarded_local_auto_commit_then_push_safety_gate_if_ahead
+  committed_and_pushed: true
+  post_push_baseline_event: 6604390a29149d9a2b55eb6cb04144960a979673
+  current_sync_truth_source: git_status_and_rev_parse
+  recommended_next: p1_preview_capsule_validation_productization
 ```
 
 ## Guarded Local Auto-Commit Authorization
