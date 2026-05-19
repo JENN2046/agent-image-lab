@@ -15993,3 +15993,36 @@ production_candidate_write_performed: false
 selected_next_move: A_restore_verification_authorization_package_draft
 recommended_next: runs_restore_verification_authorization_package_draft_gate
 ```
+
+## runs_restore_verification_authorization_package_draft_gate
+
+```yaml
+phase: runs_restore_verification_authorization_package_draft_gate
+status: completed_validated
+mode: A4.8 docs-only / authorization draft only
+draft_ref: docs/RUNS_RESTORE_VERIFICATION_AUTHORIZATION_PACKAGE_DRAFT.md
+authorization_state: draft_not_active
+exact_allowed_project_relative_paths_under_runs:
+  - runs/example_restored_batch_001/fake_user_reported_artifact_001.png
+  - runs/example_restored_batch_001/fake_user_reported_artifact_001.import_record.json
+max_scan_scope: listed_paths_only_max_2_no_recursive_scan
+image_binary_read_allowed: false
+hash_extraction_allowed: false
+dimensions_extraction_allowed: false
+output_report_path: reports/runs_restore_verification/runs_restore_verification_report.example.json
+actual_runs_scan_performed: false
+runs_mutation_performed: false
+image_binary_read_performed: false
+hash_extraction_performed: false
+dimensions_extraction_performed: false
+preview_generation_performed: false
+cloud_drive_read_performed: false
+cloud_drive_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+recommended_next: runs_restore_verification_authorization_package_draft_commit_readiness_gate
+```
