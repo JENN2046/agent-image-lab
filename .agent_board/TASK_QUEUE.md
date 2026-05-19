@@ -10,15 +10,30 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ```text
 Current archive task: final_project_organization_checkpoint.
-Status: completed validated and remote-synced after post-merge reconciliation.
+Status: completed validated with state-truth-model follow-up planned.
 Purpose: close current docs archive cleanup cycle and define return-to-product-mainline conditions.
 Checkpoint: docs/archive/DOCS_ARCHIVE_FINAL_PROJECT_ORGANIZATION_CHECKPOINT.md.
 Low-risk wrapper-required records moved: 161.
 Human-navigation records remaining: 39.
 Validator-blocked records strategy-classified: 423.
-Current sync reality: HEAD equals origin/master at d7f805432d913daf53de5183c5f28f465639b834; ahead/behind 0/0; worktree clean.
-Recommended next: choose C2 compatibility design for validator-blocked records or return to product-mainline evidence capsule work.
+State truth model: use git status/rev-parse for current sync reality; tracked board files record baseline events, not durable current HEAD claims.
+Post-merge baseline event: d7f805432d913daf53de5183c5f28f465639b834.
+Recommended next: first Git-portable preview capsule authorization gate; keep C2 compatibility design and human-navigation review as planning-only follow-ups.
 Not allowed now: push/tag/release/deploy, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox.
+```
+
+---
+
+## Current Next-Task Plan
+
+```text
+Current plan: state truth cleanup -> first preview capsule authorization -> C2 compatibility design -> human-navigation semantic review -> product mainline resume.
+State truth model: docs/PROJECT_STATE_TRUTH_MODEL.md.
+First preview capsule gate: docs/FIRST_GIT_PORTABLE_PREVIEW_CAPSULE_AUTHORIZATION_GATE.md.
+C2 compatibility dry-run: docs/C2_VALIDATOR_BLOCKED_COMPATIBILITY_DESIGN_DRY_RUN.md.
+Human-navigation decision package: docs/C1_HUMAN_NAVIGATION_RECORDS_DECISION_PACKAGE.md.
+Product mainline resume: docs/PRODUCT_MAINLINE_RESUME_PLAN.md.
+Not allowed now: preview.webp creation/copy/conversion, file movement, validator behavior change, provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, push/tag/release/deploy.
 ```
 
 ---

@@ -4,25 +4,25 @@
 
 ```yaml
 phase: final_project_organization_checkpoint
-status: completed_validated_remote_synced_after_post_merge_reconciliation
+status: completed_validated_with_state_truth_model_followup_planned
 mode: A4.8_safe_local_docs_only_checkpoint
 goal: close current docs archive cleanup cycle and define return-to-product-mainline conditions
 evidence:
   checkpoint: docs/archive/DOCS_ARCHIVE_FINAL_PROJECT_ORGANIZATION_CHECKPOINT.md
+  state_truth_model: docs/PROJECT_STATE_TRUTH_MODEL.md
+  next_product_plan: docs/PRODUCT_MAINLINE_RESUME_PLAN.md
 result:
   low_risk_wrapper_required_records_moved: 161
   remaining_human_navigation_records: 39
   validator_blocked_records_strategy_classified: 423
-sync_reality:
-  head: d7f805432d913daf53de5183c5f28f465639b834
-  origin_master: d7f805432d913daf53de5183c5f28f465639b834
-  ahead_behind: 0/0
-  worktree: clean
-  fast_forward_merge_completed: true
+state_truth_model:
+  current_sync_truth_source: git_status_and_rev_parse
+  tracked_files_record_current_head_forever: false
+  post_merge_baseline_event: d7f805432d913daf53de5183c5f28f465639b834
 decision:
   validation_ready: true
-  push_needed_now: false
-  recommended_next: c2_compatibility_design_or_product_mainline_evidence_capsule
+  recommended_next: first_git_portable_preview_capsule_authorization_gate
+  physical_docs_movement_by_default: false
 ```
 
 ## C2b Validator-Blocked Strategy Package

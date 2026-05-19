@@ -3,16 +3,18 @@
 ## Current Handoff Update — Final Project Organization Checkpoint
 
 ```text
-Status: final_project_organization_checkpoint completed_validated_remote_synced_after_post_merge_reconciliation.
+Status: final_project_organization_checkpoint completed_validated_with_state_truth_model_followup_planned.
 Reason: Close the current docs archive cleanup cycle and define return-to-product-mainline conditions.
 Execution mode: A4.8 local docs-only checkpoint.
 Checkpoint: docs/archive/DOCS_ARCHIVE_FINAL_PROJECT_ORGANIZATION_CHECKPOINT.md.
 Low-risk wrapper-required records moved: 161.
 Human-navigation records remaining: 39.
 Validator-blocked records strategy-classified: 423.
-Current sync reality: HEAD equals origin/master at d7f805432d913daf53de5183c5f28f465639b834; ahead/behind 0/0; worktree clean after fast-forward merge.
-Push/tag/release/deploy performed by this reconciliation: false.
-Recommended next: choose between C2 compatibility design for validator-blocked records or product-mainline evidence capsule work; do not continue physical docs movement by default.
+State truth model: Git commands are the current synchronization truth; tracked board files record baseline events, not durable current HEAD claims.
+Post-merge baseline event: fast-forward sync previously reached d7f805432d913daf53de5183c5f28f465639b834 before the later state wording follow-up.
+Next task plan: state truth cleanup first, then first Git-portable preview capsule authorization planning, C2 compatibility design, human-navigation decision package, and product-mainline resume.
+Push/tag/release/deploy performed by this task: false.
+Recommended next: exact-file commit this planning/status update, then run push safety gate; push still requires separate authorization.
 ```
 
 ---

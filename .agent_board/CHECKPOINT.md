@@ -4,7 +4,7 @@
 
 ```yaml
 phase: final_project_organization_checkpoint
-status: completed_validated_remote_synced_after_post_merge_reconciliation
+status: completed_validated_with_state_truth_model_followup_planned
 goal: close current docs archive cleanup cycle and define return-to-product-mainline conditions
 completed:
   - generated docs/archive/DOCS_ARCHIVE_FINAL_PROJECT_ORGANIZATION_CHECKPOINT.md
@@ -12,12 +12,12 @@ completed:
   - summarized archive completion and reference safety
   - summarized docs_registry maturity
   - summarized remaining blockers and product-mainline return conditions
-  - reconciled post-merge state wording after fast-forward sync to d7f805432d913daf53de5183c5f28f465639b834
-sync_reality:
-  head: d7f805432d913daf53de5183c5f28f465639b834
-  origin_master: d7f805432d913daf53de5183c5f28f465639b834
-  ahead_behind: 0/0
-  worktree: clean
+  - added state truth model follow-up to avoid durable current HEAD claims in tracked files
+  - added next-task plan artifacts for preview capsule authorization, C2 compatibility, human-navigation review, and product-mainline resume
+state_truth_model:
+  current_sync_truth_source: git_status_and_rev_parse
+  post_merge_baseline_event: d7f805432d913daf53de5183c5f28f465639b834
+  tracked_current_head_claims_allowed: false
 not_performed:
   - no file movement
   - no reference rewrite

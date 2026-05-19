@@ -8,6 +8,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 
 - `.agent_board/RUN_STATE.md`、`.agent_board/TASK_QUEUE.md`、`.agent_board/HANDOFF.md` 是当前恢复和续跑状态面。
 - `docs/PROJECT_STRUCTURE.md` 说明顶层目录职责、Git-portable 与 local-only 边界、asset archive capsule 路线和 A5 硬停止路径。
+- `docs/PROJECT_STATE_TRUTH_MODEL.md` 说明 Git 命令是当前同步真相；tracked 状态面只能记录历史基线事件，不应长期声明当前 HEAD 哈希。
 - `docs/PROJECT_RESTRUCTURE_PREFLIGHT_PLAN.md` 记录路线 C 激进重构的 C1/C2/C3/C4 迁移蓝图；它是计划，不授权移动、删除或 A5。
 - `docs/archive/DOCS_ARCHIVE_MIGRATION_MANIFEST.md` 是 C1 docs 归档 dry-run 清单；它列出未来目标路径，但本身不授权移动文件。
 - `docs/archive/DOCS_ARCHIVE_REFERENCE_POLICY.md` 是 C1.1 归档引用策略；它要求 validator / 状态面引用的旧 docs 在兼容层完成前保持原位。
@@ -58,6 +59,10 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 - `docs/archive/DOCS_ARCHIVE_C2A_VALIDATOR_BLOCKED_DEPENDENCY_GRAPH_DRY_RUN.md` 记录 423 个 validator-blocked 文件的 scripts/tests live dependency graph；它只读扫描，不移动文件、不改 validator。
 - `docs/archive/DOCS_ARCHIVE_C2B_VALIDATOR_BLOCKED_STRATEGY_PACKAGE.md` 将 423 个 validator-blocked 文件拆为 scripts+tests、scripts-only、tests-only 三类策略；当前结论是不移动、不改 validator、先做兼容设计。
 - `docs/archive/DOCS_ARCHIVE_FINAL_PROJECT_ORGANIZATION_CHECKPOINT.md` 记录本轮项目整理 checkpoint：当前入口、archive 完成度、引用安全、registry 成熟度、剩余 blockers 和回到产品主线条件。
+- `docs/FIRST_GIT_PORTABLE_PREVIEW_CAPSULE_AUTHORIZATION_GATE.md` 是第一颗 Git-portable preview capsule 的未来授权草案；它不创建或复制 `preview.webp`。
+- `docs/C2_VALIDATOR_BLOCKED_COMPATIBILITY_DESIGN_DRY_RUN.md` 是 423 个 validator-blocked records 的兼容设计 dry-run；它不移动文件、不改 validator。
+- `docs/C1_HUMAN_NAVIGATION_RECORDS_DECISION_PACKAGE.md` 是 39 个 human-navigation records 的人工语义裁决包；它不自动移动、rewrite 或 wrapper。
+- `docs/PRODUCT_MAINLINE_RESUME_PLAN.md` 记录 archive cleanup 之后回到 artifact recoverability / Review Console / accepted-failure samples 的产品主线顺序。
 - `asset_archive/accepted_samples/<sample_id>/manifest.json + preview.webp` 是新的 accepted sample portable evidence capsule 目标路径。
 - 历史 `docs/v*` 阶段记录、旧 closeout、旧 authorization 草案是审计记录，不等于当前授权。
 - 未经明确 A5 授权，不要运行 provider/plugin/API/image generation/DailyNote/VCP memory/runtime/push/tag/release/deploy 相关入口。

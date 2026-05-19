@@ -2,8 +2,9 @@
 
 base_contract: AGENTS.md
 mode: A4.8 local docs-only checkpoint
-status: completed_remote_synced_after_post_merge_reconciliation
-current_sync_reality: HEAD equals origin/master at d7f805432d913daf53de5183c5f28f465639b834; ahead/behind 0/0; worktree clean.
+status: completed_with_state_truth_model_followup
+state_truth_model: Current sync truth must be verified with `git status`, `git rev-parse HEAD`, `git rev-parse origin/master`, and `git rev-list --left-right --count origin/master...HEAD`.
+post_merge_baseline_event: fast-forward sync reached d7f805432d913daf53de5183c5f28f465639b834 before the later state wording follow-up.
 
 ## Current Entry Clarity
 
@@ -37,7 +38,7 @@ current_sync_reality: HEAD equals origin/master at d7f805432d913daf53de5183c5f28
 
 - 39 human-navigation records require semantic decision before any move/rewrite/wrapper action.
 - 423 validator-blocked records require scripts/tests compatibility strategy before any move.
-- No push is currently pending after the fast-forward sync to `d7f805432d913daf53de5183c5f28f465639b834`.
+- Push status is not stored as a durable fact in this checkpoint; verify it with Git before any remote action.
 
 ## Return-To-Product-Mainline Conditions
 
