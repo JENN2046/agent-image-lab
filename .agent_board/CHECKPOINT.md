@@ -1,5 +1,27 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## Failure Sample Capsule Directory Policy
+
+```yaml
+phase: failure_sample_capsule_directory_policy
+status: completed_validated_pending_guarded_local_commit
+completed:
+  - added asset_archive/failure_samples/README.md
+  - added asset_archive/failure_samples/.gitkeep
+  - updated asset_archive/README.md to name failure_samples as the future failure capsule lane
+not_performed:
+  - no asset_archive/failure_samples/<sample_id>/ capsule created
+  - no manifest, preview.webp, failure_record, or review_record sample file created
+  - no preview.webp creation, copy, conversion, or generation
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no production candidate
+  - no push, tag, release, or deploy
+next:
+  - failure sample capsule validator design dry-run
+```
+
 ## Review Console Two-Capsule Static Display
 
 ```yaml

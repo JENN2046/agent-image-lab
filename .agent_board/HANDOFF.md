@@ -1,5 +1,18 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — Failure Sample Capsule Directory Policy
+
+```text
+Status: failure_sample_capsule_directory_policy completed_validated_pending_guarded_local_commit.
+Reason: give the P5 failure sample evidence track a clear Git-portable landing path without creating any failure sample capsule.
+Execution mode: A4.8 local policy/documentation update.
+Changed archive policy: asset_archive/README.md.
+New policy directory: asset_archive/failure_samples/.
+New policy files: asset_archive/failure_samples/README.md and .gitkeep.
+Not performed: no asset_archive/failure_samples/<sample_id>/ capsule created, no manifest/preview/failure_record/review_record sample file created, no preview creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: add failure sample capsule validator design before any real failure sample creation.
+```
+
 ## Current Handoff Update — Review Console Two-Capsule Static Display
 
 ```text

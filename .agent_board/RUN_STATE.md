@@ -1,5 +1,30 @@
 # RUN_STATE.md — Agent Image Lab
 
+## Failure Sample Capsule Directory Policy
+
+```yaml
+phase: failure_sample_capsule_directory_policy
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_local_policy_documentation
+goal: define the failure sample Git-portable capsule landing path without creating a sample capsule
+evidence:
+  archive_readme: asset_archive/README.md
+  policy_readme: asset_archive/failure_samples/README.md
+  directory_placeholder: asset_archive/failure_samples/.gitkeep
+guard:
+  failure_sample_capsule_created: false
+  failure_sample_manifest_created: false
+  failure_sample_preview_created_or_copied: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  production_candidate_created: false
+  push_tag_release_deploy_performed: false
+decision:
+  failure_sample_landing_path_defined: true
+  future_real_failure_sample_requires_separate_authorization: true
+```
+
 ## Review Console Two-Capsule Static Display
 
 ```yaml

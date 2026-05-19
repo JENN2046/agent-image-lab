@@ -6,6 +6,19 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current Failure Sample Capsule Directory Policy
+
+```text
+Current product-mainline task: failure_sample_capsule_directory_policy.
+Status: completed validated pending guarded local commit.
+Purpose: establish the future failure sample Git-portable capsule landing path without creating any sample capsule.
+Changed files: asset_archive/README.md, asset_archive/failure_samples/README.md, asset_archive/failure_samples/.gitkeep.
+Not performed: no asset_archive/failure_samples/<sample_id>/ capsule created, no manifest/preview/failure_record/review_record sample file created, no preview creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: failure sample capsule validator design dry-run.
+```
+
+---
+
 ## Current Review Console Two-Capsule Static Display
 
 ```text
