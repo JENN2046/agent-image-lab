@@ -1,5 +1,19 @@
 # HANDOFF.md — Agent Image Lab
 
+## Current Handoff Update — Review Console Static Failure Capsule Display
+
+```text
+Status: review_console_static_failure_capsule_display completed_validated_pending_guarded_local_commit.
+Reason: show the first Git-portable failure sample preview capsule in the static Review Console using mock/in-memory evidence only.
+Execution mode: A4.8 static prototype only.
+Sample: failure_french_summer_rattan_bag_v7_29_001.
+UI surface: Artifact Evidence summary and Failure State workbench.
+Draft output keys: portable_failure_capsule_evidence, portable_failure_capsule_evidence_list, failure_state_static_workbench_state.portable_failure_capsule_records.
+Validation record: docs/P5K_REVIEW_CONSOLE_STATIC_FAILURE_CAPSULE_DISPLAY.md.
+Not performed: no preview load, no asset_archive read, no fetch, no file write, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: static Review Console failure capsule snapshot validator or multi-capsule accepted/failure dashboard reporting.
+```
+
 ## Current Handoff Update — Accepted + Failure Capsules Clone-Portable Validation
 
 ```text

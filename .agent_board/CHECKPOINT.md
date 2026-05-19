@@ -1,5 +1,29 @@
 # CHECKPOINT.md — Agent Image Lab
 
+## Review Console Static Failure Capsule Display
+
+```yaml
+phase: review_console_static_failure_capsule_display
+status: completed_validated_pending_guarded_local_commit
+completed:
+  - added portable_failure_capsule_evidence static seed for failure_french_summer_rattan_bag_v7_29_001
+  - displayed failure capsule count, id, route, and clone-portable status in Artifact Evidence summary
+  - displayed capsule manifest/preview/failure/review refs and failure tags in Failure State workbench
+  - added portable_failure_capsule_evidence and portable_failure_capsule_evidence_list to draft output
+  - documented the static display boundary in docs/P5K_REVIEW_CONSOLE_STATIC_FAILURE_CAPSULE_DISPLAY.md
+not_performed:
+  - no preview.webp load or rendering
+  - no asset_archive file read
+  - no fetch or file write
+  - no provider, plugin, API, or image generation
+  - no DailyNote or VCP memory write
+  - no runtime, real manifest, VCPChat, or VCPToolBox read
+  - no production candidate
+  - no push, tag, release, or deploy
+next:
+  - static Review Console failure capsule snapshot validator or multi-capsule accepted/failure dashboard reporting
+```
+
 ## Accepted + Failure Capsules Clone-Portable Validation
 
 ```yaml

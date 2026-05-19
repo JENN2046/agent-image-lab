@@ -32,6 +32,8 @@ const state = {
   artifact_dashboard_evidence: mock.artifact_recoverability_dashboard_evidence,
   portable_preview_capsule_evidence: mock.portable_preview_capsule_evidence,
   portable_preview_capsule_evidence_list: mock.portable_preview_capsule_evidence_list,
+  portable_failure_capsule_evidence: mock.portable_failure_capsule_evidence,
+  portable_failure_capsule_evidence_list: mock.portable_failure_capsule_evidence_list,
   artifact_lifecycle_state_reader: mock.artifact_lifecycle_state_reader_seed,
   third_sample_authorization_package: mock.third_sample_accepted_samples_authorization_package_seed,
   third_sample_post_approval_gate: mock.third_sample_post_approval_gate_seed,
@@ -213,7 +215,10 @@ function renderArtifactEvidenceDashboard() {
   const evidence = state.artifact_dashboard_evidence;
   const capsule = state.portable_preview_capsule_evidence;
   const capsules = state.portable_preview_capsule_evidence_list || [capsule];
+  const failureCapsule = state.portable_failure_capsule_evidence;
+  const failureCapsules = state.portable_failure_capsule_evidence_list || (failureCapsule ? [failureCapsule] : []);
   const capsuleIds = capsules.map((item) => item.sample_id).join(", ");
+  const failureCapsuleIds = failureCapsules.map((item) => item.sample_id).join(", ");
   qs("#artifactEvidenceSummary").innerHTML = `
     <span>sample <strong>${escapeHtml(evidence.accepted_sample_id)}</strong></span>
     <span>status <strong>${escapeHtml(evidence.recoverability_status)}</strong></span>
@@ -225,6 +230,10 @@ function renderArtifactEvidenceDashboard() {
     <span>capsule ids <strong>${escapeHtml(capsuleIds)}</strong></span>
     <span>preview <strong>${escapeHtml(capsule.preview_format)} ${escapeHtml(capsule.preview_long_edge)}</strong></span>
     <span>portable <strong>${escapeHtml(capsule.clone_portable_validation_status)}</strong></span>
+    <span>failure capsules <strong>${escapeHtml(failureCapsules.length)}</strong></span>
+    <span>failure ids <strong>${escapeHtml(failureCapsuleIds || "none")}</strong></span>
+    <span>failure route <strong>${escapeHtml(failureCapsule?.final_route || "none")}</strong></span>
+    <span>failure portable <strong>${escapeHtml(failureCapsule?.clone_portable_validation_status || "none")}</strong></span>
   `;
 }
 
@@ -2381,6 +2390,8 @@ function renderAdapterNegativeHandoff() {
 function failureStateStaticWorkbenchState() {
   const negativeReport = state.review_report_negative_guard_static_handoff;
   const adapterNegative = state.review_evidence_blocker_adapter_negative_static_handoff;
+  const failureCapsule = state.portable_failure_capsule_evidence;
+  const failureCapsules = state.portable_failure_capsule_evidence_list || (failureCapsule ? [failureCapsule] : []);
   const records = negativeReport.report_items.map((item) => ({
     candidate_id: item.candidate_id,
     shot_id: item.shot_id,
@@ -2412,6 +2423,31 @@ function failureStateStaticWorkbenchState() {
     failure_samples_state: "static_review_only_not_written",
     failure_samples_write_allowed: false,
     failure_samples_write_performed: false,
+    portable_failure_capsule_count: failureCapsules.length,
+    portable_failure_capsule_ids: failureCapsules.map((capsule) => capsule.sample_id),
+    portable_failure_capsule_records: failureCapsules.map((capsule) => ({
+      sample_id: capsule.sample_id,
+      capsule_root: capsule.capsule_root,
+      manifest_ref: capsule.manifest_ref,
+      preview_ref: capsule.preview_ref,
+      failure_record_ref: capsule.failure_record_ref,
+      review_record_ref: capsule.review_record_ref,
+      preview_format: capsule.preview_format,
+      preview_long_edge: capsule.preview_long_edge,
+      preview_dimensions: capsule.preview_dimensions,
+      preview_sha256: capsule.preview_sha256,
+      clone_portable_validation_status: capsule.clone_portable_validation_status,
+      registry_validator_status: capsule.registry_validator_status,
+      final_route: capsule.final_route,
+      failure_tags: capsule.failure_tags || [],
+      resolved_by_accepted_sample: capsule.resolved_by_accepted_sample,
+      source_original_required_for_portable_validation: capsule.source_original_required_for_portable_validation === true,
+      old_source_present_in_clean_clone: capsule.old_source_present_in_clean_clone === true,
+      base64_evidence_used: capsule.base64_evidence_used === true,
+      production_candidate_allowed: capsule.production_candidate_allowed === true,
+      memory_write_allowed: capsule.memory_write_allowed === true,
+      DailyNote_write_allowed: capsule.DailyNote_write_allowed === true
+    })),
     memory_forbidden_candidate_ids: memoryForbiddenRecords.map((record) => record.candidate_id),
     never_production_candidate_ids: neverProductionRecords.map((record) => record.candidate_id),
     production_exclusion_candidate_ids: adapterNegative.production_exclusion_candidate_ids || productionExclusionRecords.map((record) => record.candidate_id),
@@ -2449,9 +2485,10 @@ function renderFailureStateStaticWorkbench() {
     <span>failure candidates <strong>${escapeHtml(failureState.failure_candidate_count)}</strong></span>
     <span>memory forbidden <strong>${escapeHtml(failureState.memory_forbidden_count)}</strong></span>
     <span>never production <strong>${escapeHtml(failureState.never_production_count)}</strong></span>
+    <span>portable capsules <strong>${escapeHtml(failureState.portable_failure_capsule_count)}</strong></span>
     <span>failure_samples write <strong>${escapeHtml(failureState.failure_samples_write_performed)}</strong></span>
   `;
-  qs("#failureStateBody").innerHTML = failureState.records.map((record) => `
+  const reviewCards = failureState.records.map((record) => `
     <article class="failure-state-card ${record.memory_forbidden ? "memory-forbidden" : "never-production"}">
       <div class="protocol-card-head">
         <strong>${escapeHtml(record.candidate_id)}</strong>
@@ -2469,6 +2506,30 @@ function renderFailureStateStaticWorkbench() {
       </dl>
     </article>
   `).join("");
+  const capsuleCards = failureState.portable_failure_capsule_records.map((capsule) => `
+    <article class="failure-state-card never-production">
+      <div class="protocol-card-head">
+        <strong>${escapeHtml(capsule.sample_id)}</strong>
+        <span>${escapeHtml(capsule.final_route)}</span>
+      </div>
+      <dl>
+        <div><dt>Capsule root</dt><dd>${escapeHtml(capsule.capsule_root)}</dd></div>
+        <div><dt>Manifest</dt><dd>${escapeHtml(capsule.manifest_ref)}</dd></div>
+        <div><dt>Preview</dt><dd>${escapeHtml(capsule.preview_ref)}</dd></div>
+        <div><dt>Preview spec</dt><dd>${escapeHtml(`${capsule.preview_format} ${capsule.preview_dimensions} long_edge=${capsule.preview_long_edge}`)}</dd></div>
+        <div><dt>Preview hash</dt><dd>${escapeHtml(capsule.preview_sha256.slice(0, 12))}</dd></div>
+        <div><dt>Failure record</dt><dd>${escapeHtml(capsule.failure_record_ref)}</dd></div>
+        <div><dt>Review record</dt><dd>${escapeHtml(capsule.review_record_ref)}</dd></div>
+        <div><dt>Failure tags</dt><dd>${inlineList(capsule.failure_tags)}</dd></div>
+        <div><dt>Resolved by</dt><dd>${escapeHtml(capsule.resolved_by_accepted_sample)}</dd></div>
+        <div><dt>Clone portable</dt><dd>${escapeHtml(capsule.clone_portable_validation_status)}</dd></div>
+        <div><dt>Old source in clone</dt><dd>${escapeHtml(capsule.old_source_present_in_clean_clone)}</dd></div>
+        <div><dt>Production allowed</dt><dd>${escapeHtml(capsule.production_candidate_allowed)}</dd></div>
+        <div><dt>Memory write allowed</dt><dd>${escapeHtml(capsule.memory_write_allowed)}</dd></div>
+      </dl>
+    </article>
+  `).join("");
+  qs("#failureStateBody").innerHTML = reviewCards + capsuleCards;
   qs("#failureStateGuard").innerHTML = `
     <span>static workbench: ${escapeHtml(failureState.guard.local_static_workbench_only)}</span>
     <span>failure_samples write: ${escapeHtml(failureState.guard.failure_samples_write_performed)}</span>
@@ -2660,6 +2721,8 @@ function renderDraft() {
     artifact_recoverability_dashboard_evidence: state.artifact_dashboard_evidence,
     portable_preview_capsule_evidence: state.portable_preview_capsule_evidence,
     portable_preview_capsule_evidence_list: state.portable_preview_capsule_evidence_list,
+    portable_failure_capsule_evidence: state.portable_failure_capsule_evidence,
+    portable_failure_capsule_evidence_list: state.portable_failure_capsule_evidence_list,
     artifact_lifecycle_state_reader: normalizeArtifactLifecycleState(),
     artifact_lifecycle_filter_state: {
       selected_filter: state.lifecycleFilter,

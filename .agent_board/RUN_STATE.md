@@ -1,5 +1,36 @@
 # RUN_STATE.md — Agent Image Lab
 
+## Review Console Static Failure Capsule Display
+
+```yaml
+phase: review_console_static_failure_capsule_display
+status: completed_validated_pending_guarded_local_commit
+mode: A4.8_static_prototype_only
+goal: display the first Git-portable failure sample preview capsule in the static Review Console
+sample_id: failure_french_summer_rattan_bag_v7_29_001
+display_surface:
+  - review_console/static_prototype/mock_data.js#portable_failure_capsule_evidence
+  - review_console/static_prototype/app.js#renderArtifactEvidenceDashboard
+  - review_console/static_prototype/app.js#renderFailureStateStaticWorkbench
+draft_output:
+  - portable_failure_capsule_evidence
+  - portable_failure_capsule_evidence_list
+  - failure_state_static_workbench_state.portable_failure_capsule_records
+guard:
+  static_mock_only: true
+  preview_loaded_or_rendered: false
+  asset_archive_read_performed: false
+  fetch_or_file_write_performed: false
+  provider_plugin_api_image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_or_real_manifest_read_performed: false
+  production_candidate_created: false
+  push_tag_release_deploy_performed: false
+decision:
+  review_console_can_display_failure_capsule_static_evidence: true
+  recommended_next: static_failure_capsule_snapshot_validator_or_multi_capsule_dashboard_reporting
+```
+
 ## Accepted + Failure Capsules Clone-Portable Validation
 
 ```yaml

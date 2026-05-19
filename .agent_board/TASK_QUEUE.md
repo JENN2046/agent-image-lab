@@ -6,6 +6,19 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ---
 
+## Current Review Console Static Failure Capsule Display
+
+```text
+Current product-mainline task: review_console_static_failure_capsule_display.
+Status: completed validated pending guarded local commit.
+Purpose: display the first Git-portable failure sample preview capsule in Review Console using static mock/in-memory evidence only.
+Changed files: review_console/static_prototype/mock_data.js, review_console/static_prototype/app.js, review_console/static_prototype/README.md, review_console/static_prototype/FIELD_MAPPING.md, docs/P5K_REVIEW_CONSOLE_STATIC_FAILURE_CAPSULE_DISPLAY.md, README.md, .agent_board resume surfaces.
+Not performed: no preview load, no asset_archive read, no fetch, no file write, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no production candidate, no tag/release/deploy/push.
+Recommended next: static Review Console failure capsule snapshot validator or multi-capsule accepted/failure dashboard reporting.
+```
+
+---
+
 ## Current Accepted + Failure Capsules Clone-Portable Validation
 
 ```text

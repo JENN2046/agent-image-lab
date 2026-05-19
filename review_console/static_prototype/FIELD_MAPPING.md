@@ -141,6 +141,25 @@ Phase 9 审批记录必须满足：
 
 负向 guard UI affordance 只负责让审片员看见阻断原因与阻断对象。它不创建 production candidate，不批准记忆写入，也不绕过 `memory_approval`。
 
+## P5K Portable Failure Capsule Static Display 映射
+
+本节用于验收第一颗 Git-portable failure sample preview capsule 进入静态 Review Console 的可见 UI 与草案输出。它只读取 `mock_data.js` 内置静态 seed，不读取 `asset_archive/` 文件，不加载 `preview.webp`，不 fetch，不写文件，不调用 runtime、provider、plugin、API、DailyNote 或 VCP memory。
+
+| Failure capsule seed 字段 | Review Console 可见/草案字段 | 说明 |
+| --- | --- | --- |
+| `portable_failure_capsule_evidence.sample_id` | `failure_state_static_workbench_state.portable_failure_capsule_records[].sample_id` / `failureStateBody` | 显示 failure capsule ID |
+| `manifest_ref` | `portable_failure_capsule_records[].manifest_ref` / `failureStateBody` | 只显示 repo-relative manifest ref，不读取文件 |
+| `preview_ref` | `portable_failure_capsule_records[].preview_ref` / `failureStateBody` | 只显示 preview ref，不加载图片二进制 |
+| `preview_format` / `preview_dimensions` / `preview_long_edge` / `preview_sha256` | `portable_failure_capsule_records[].preview_*` / `failureStateBody` | 展示 512 WebP capsule metadata |
+| `failure_record_ref` / `review_record_ref` | `portable_failure_capsule_records[].failure_record_ref` / `review_record_ref` | 展示证据链引用，不读取记录 |
+| `failure_tags` | `portable_failure_capsule_records[].failure_tags` | 展示失败原因标签 |
+| `resolved_by_accepted_sample` | `portable_failure_capsule_records[].resolved_by_accepted_sample` | 连接 accepted capsule 学习闭环 |
+| `final_route` | `portable_failure_capsule_records[].final_route` | 必须保持 `failure_learning_only_never_production` |
+| `clone_portable_validation_status` | `portable_failure_capsule_records[].clone_portable_validation_status` | 显示已通过 clean clone 验证 |
+| `production_candidate_allowed` / `memory_write_allowed` / `DailyNote_write_allowed` | `portable_failure_capsule_records[]` | 必须为 false |
+
+`portable_failure_capsule_evidence` 是静态显示层，不是 `failure_samples` 写入动作。它不得授权 production candidate、DailyNote/VCP memory、provider/plugin/API、runtime、real manifest、VCPChat 或 VCPToolBox。
+
 ## v14.048 Review Decision Package Static Handoff 映射
 
 本节用于验收 PVOS adapter 输出中的 `review_decision_package` 进入静态 Review Console 可见 UI 与草案输出。它仍然只读取项目内 mock / fixture，不读取真实 VCPChat / VCPToolBox，不调用插件、API、DailyNote，不写文件，不保存图片。
