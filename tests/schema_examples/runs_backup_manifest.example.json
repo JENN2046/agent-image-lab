@@ -1,0 +1,69 @@
+{
+  "manifest_version": "runs_backup_manifest_v1",
+  "backup_id": "runs-backup-example-20260520-000000",
+  "created_at_local": "2026-05-20T00:00:00+08:00",
+  "source_project_relative_root": "runs/",
+  "restore_target_project_relative_root": "runs/",
+  "file_count": 2,
+  "directory_count": 1,
+  "selected_path_list": [
+    "runs/example_batch_001/fake_artifact_001.png",
+    "runs/example_batch_001/fake_artifact_001.import_record.json"
+  ],
+  "hash_algorithm": "not_recorded_no_binary_read",
+  "dimensions_recording_policy": "not_recorded_no_binary_read",
+  "verification_authorization_required": true,
+  "verification_handoff": {
+    "hash_algorithm_after_authorization": "sha256",
+    "dimensions_fields_after_authorization": ["width_px", "height_px"],
+    "verification_record_required_fields": [
+      "project_relative_path",
+      "sha256",
+      "width_px",
+      "height_px",
+      "mime_or_extension",
+      "source_backup_id",
+      "verification_tool",
+      "verification_time"
+    ]
+  },
+  "cloud_drive_boundary": {
+    "user_manual_backup_allowed": true,
+    "cloud_drive_read_performed": false,
+    "cloud_drive_write_performed": false,
+    "cloud_drive_target_redacted": true
+  },
+  "forbidden_fields": {
+    "absolute_source_path": null,
+    "absolute_backup_path": null,
+    "secret": null,
+    "token": null,
+    "cookie": null,
+    "password": null,
+    "api_key": null,
+    "provider_credential": null,
+    "raw_chat_history": null,
+    "customer_private_data": null,
+    "image_binary_inline": null,
+    "base64_image": null,
+    "preview_binary": null
+  },
+  "guard": {
+    "schema_docs_only": true,
+    "fake_sample_paths_only": true,
+    "actual_runs_scan_performed": false,
+    "runs_mutation_performed": false,
+    "image_binary_read_performed": false,
+    "real_image_hashing_performed": false,
+    "preview_generation_performed": false,
+    "cloud_drive_read_performed": false,
+    "cloud_drive_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "production_candidate_write_performed": false,
+    "push_tag_release_deploy_performed": false
+  }
+}

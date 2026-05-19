@@ -1,0 +1,75 @@
+schema_id: runs_backup_manifest_v1
+version: v1
+description: Redacted schema for documenting user-owned runs backups without reading or mutating runs data.
+required_fields:
+  - manifest_version
+  - backup_id
+  - created_at_local
+  - source_project_relative_root
+  - restore_target_project_relative_root
+  - file_count
+  - directory_count
+  - selected_path_list
+  - hash_algorithm
+  - dimensions_recording_policy
+  - verification_authorization_required
+  - cloud_drive_boundary
+  - forbidden_fields
+  - guard
+field_rules:
+  manifest_version:
+    const: runs_backup_manifest_v1
+  source_project_relative_root:
+    const: runs/
+  restore_target_project_relative_root:
+    const: runs/
+  selected_path_list:
+    type: array
+    path_style: project_relative
+    must_start_with: runs/
+    fake_or_redacted_only: true
+  hash_algorithm:
+    allowed_values:
+      - sha256
+      - not_recorded_no_binary_read
+  dimensions_recording_policy:
+    allowed_values:
+      - not_recorded_no_binary_read
+      - record_after_separate_image_binary_read_authorization
+  verification_authorization_required:
+    const: true
+  cloud_drive_boundary:
+    required:
+      - cloud_drive_read_performed
+      - cloud_drive_write_performed
+      - user_manual_backup_allowed
+  forbidden_fields:
+    disallow:
+      - absolute_source_path
+      - absolute_backup_path
+      - secret
+      - token
+      - cookie
+      - password
+      - api_key
+      - provider_credential
+      - raw_chat_history
+      - customer_private_data
+      - image_binary_inline
+      - base64_image
+      - preview_binary
+  guard:
+    required_false:
+      - actual_runs_scan_performed
+      - runs_mutation_performed
+      - image_binary_read_performed
+      - real_image_hashing_performed
+      - preview_generation_performed
+      - cloud_drive_read_performed
+      - cloud_drive_write_performed
+      - provider_contact_performed
+      - plugin_call_performed
+      - api_call_performed
+      - DailyNote_write_performed
+      - VCP_memory_write_performed
+      - production_candidate_write_performed

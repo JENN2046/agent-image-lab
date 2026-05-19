@@ -11971,6 +11971,18 @@ process.exit(child.status || 0);
       Add-Failure "Capsule static product smoke Review Console snapshot must remain static-only with no browser runtime, asset UI read, or preview load"
     }
   }
+  $runsBackupManifestSchemaOutput = & node (Join-Path $Root 'scripts/validate_runs_backup_manifest_schema.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Runs backup manifest schema validation exited with failure"
+  } else {
+    $runsBackupManifestSchema = ($runsBackupManifestSchemaOutput -join "`n") | ConvertFrom-Json
+    if ($runsBackupManifestSchema.passed -ne $true -or $runsBackupManifestSchema.status -ne 'runs_backup_manifest_schema_verified') {
+      Add-Failure "Runs backup manifest schema must pass"
+    }
+    if ($runsBackupManifestSchema.actual_runs_scan_performed -ne $false -or $runsBackupManifestSchema.runs_mutation_performed -ne $false -or $runsBackupManifestSchema.image_binary_read_performed -ne $false -or $runsBackupManifestSchema.real_image_hashing_performed -ne $false -or $runsBackupManifestSchema.preview_generation_performed -ne $false -or $runsBackupManifestSchema.cloud_drive_read_performed -ne $false -or $runsBackupManifestSchema.cloud_drive_write_performed -ne $false -or $runsBackupManifestSchema.provider_contact_performed -ne $false -or $runsBackupManifestSchema.plugin_call_performed -ne $false -or $runsBackupManifestSchema.api_call_performed -ne $false -or $runsBackupManifestSchema.DailyNote_write_performed -ne $false -or $runsBackupManifestSchema.VCP_memory_write_performed -ne $false -or $runsBackupManifestSchema.production_candidate_write_performed -ne $false) {
+      Add-Failure "Runs backup manifest schema must not perform runs scan/mutation, image binary read, hashing, preview, cloud, provider/API, memory, or production actions"
+    }
+  }
   $capsuleStaticOperatorChecklistUiMappingOutput = & node (Join-Path $Root 'scripts/validate_capsule_static_operator_checklist_ui_mapping.js')
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "Capsule static operator checklist UI mapping validation exited with failure"

@@ -15913,3 +15913,28 @@ real_vcptoolbox_read: false
 push_tag_release_deploy: false
 recommended_next: implement_first_new_sample_capsule_when_source_preview_generation_is_explicitly_authorized
 ```
+## capsule_runs_backup_manifest_schema_gate
+
+```yaml
+phase: capsule_runs_backup_manifest_schema_gate
+status: completed_validated
+mode: A4.8 schema/docs only
+objective: define redacted runs backup manifest schema and fake-path example
+schema_ref: schemas/runs_backup_manifest.schema.yaml
+example_ref: tests/schema_examples/runs_backup_manifest.example.json
+validator_ref: scripts/validate_runs_backup_manifest_schema.js
+actual_runs_scan_performed: false
+runs_mutation_performed: false
+image_binary_read_performed: false
+real_image_hashing_performed: false
+preview_generation_performed: false
+cloud_drive_read_performed: false
+cloud_drive_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+recommended_next: capsule_runs_backup_manifest_schema_commit_readiness_gate
+```
