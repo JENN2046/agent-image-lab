@@ -10,12 +10,13 @@ This board does not authorize external reads, VCPToolBox/VCPChat changes, plugin
 
 ```text
 Current route task: p5_p8_remaining_route_packages.
-Status: completed validated pending guarded local commit.
+Status: completed validated committed and pushed.
 Docs added: docs/P5_FAILURE_SAMPLE_EVIDENCE_TRACK_DRY_RUN.md, docs/P6_C2_VALIDATOR_BLOCKED_COMPATIBILITY_NEXT_STEPS.md, docs/P7_HUMAN_NAVIGATION_39_DECISION_REVIEW_PLAN.md, docs/P8_A5_PRODUCTION_VCP_AUTHORIZATION_PREP.md.
 Purpose: lock the remaining local route without executing failure sample creation, C2 movement, human-navigation movement, or A5.
-Not performed: no failure sample creation, no file movement, no wrapper/rewrite execution, no A5/provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no push/tag/release/deploy.
+Not performed by the phase work: no failure sample creation, no file movement, no wrapper/rewrite execution, no A5/provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no tag/release/deploy.
 Validation passed: git diff --check, agent board validator, registry validator alias, negative-case validator alias, and scripts/validate_mvp.ps1.
-Recommended next: guarded local auto-commit if clean.
+P1-P8 push baseline event: 8bca9da2911bdf598d8cc0afee53289d03bbc44f.
+Recommended next: second preview capsule creation authorization package or C2 compatibility dry-run, depending on product priority.
 ```
 
 ---
@@ -24,13 +25,13 @@ Recommended next: guarded local auto-commit if clean.
 
 ```text
 Current product-mainline task: p4_review_console_portable_capsule_static_reader.
-Status: completed validated pending guarded local commit.
+Status: completed validated committed and pushed.
 Purpose: let Review Console static prototype display Git-portable preview capsule evidence.
 Changed static files: review_console/static_prototype/mock_data.js, app.js, README.md, FIELD_MAPPING.md.
 Design record: docs/P4_REVIEW_CONSOLE_PORTABLE_CAPSULE_STATIC_READER.md.
-Not performed: no asset_archive file read, no preview.webp creation/copy/conversion, no fetch/runtime/VCPChat/VCPToolBox/provider/plugin/API/DailyNote/VCP memory, no accepted_samples/failure_samples/production_candidate write, no push/tag/release/deploy.
+Not performed by the phase work: no asset_archive file read, no preview.webp creation/copy/conversion, no fetch/runtime/VCPChat/VCPToolBox/provider/plugin/API/DailyNote/VCP memory, no accepted_samples/failure_samples/production_candidate write, no tag/release/deploy.
 Validation passed: node --check static app/mock, v14.135 safety validator, Review Console adapter handoff validator, git diff --check, agent board validator, and scripts/validate_mvp.ps1.
-Recommended next: guarded local auto-commit if clean.
+P1-P8 push baseline event: 8bca9da2911bdf598d8cc0afee53289d03bbc44f.
 ```
 
 ---
@@ -39,14 +40,14 @@ Recommended next: guarded local auto-commit if clean.
 
 ```text
 Current product-mainline task: p3_registry_validator_v2_reporting.
-Status: completed validated pending guarded local commit.
+Status: completed validated committed and pushed.
 Purpose: make registry-driven preview capsule validation maintainable for multiple capsules and classified failures.
 Changed validator: scripts/validate_preview_capsule_registry.js.
 Updated negative coverage: scripts/validate_preview_capsule_registry_negative_cases.js.
 Design record: docs/P3_REGISTRY_VALIDATOR_V2_REPORTING_DRY_RUN.md.
-Not performed: no capsule content modification, no preview.webp creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no push/tag/release/deploy.
+Not performed by the phase work: no capsule content modification, no preview.webp creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no tag/release/deploy.
 Validation passed: node --check for changed validators, registry alias, negative-case alias, git diff --check, agent board validator, and scripts/validate_mvp.ps1.
-Recommended next: guarded local auto-commit if clean.
+P1-P8 push baseline event: 8bca9da2911bdf598d8cc0afee53289d03bbc44f.
 ```
 
 ---
@@ -55,14 +56,14 @@ Recommended next: guarded local auto-commit if clean.
 
 ```text
 Current product-mainline task: p2_second_git_portable_preview_capsule_authorization_package.
-Status: completed validated pending guarded local commit.
+Status: completed validated committed and pushed.
 Authorization package: docs/SECOND_GIT_PORTABLE_PREVIEW_CAPSULE_AUTHORIZATION_GATE.md.
 Recommended sample: accepted_product_still_life_tennis_wallet_001.
 Recommended source image: runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg.
 Target capsule: asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/.
-Not performed: no preview.webp creation/copy/conversion, no capsule content write, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no push/tag/release/deploy.
+Not performed by the phase work: no preview.webp creation/copy/conversion, no capsule content write, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no tag/release/deploy.
 Validation passed: git diff --check, agent board validator, registry validator alias, negative-case validator alias, and scripts/validate_mvp.ps1.
-Recommended next: guarded local auto-commit if clean.
+P1-P8 push baseline event: 8bca9da2911bdf598d8cc0afee53289d03bbc44f.
 ```
 
 ---
@@ -71,14 +72,14 @@ Recommended next: guarded local auto-commit if clean.
 
 ```text
 Current product-mainline task: p1_preview_capsule_validation_productization.
-Status: completed validated pending guarded local commit.
+Status: completed validated committed and pushed.
 Purpose: make preview capsule validation a stable project validation surface.
 Validation surface changes: package.json aliases, asset_archive/accepted_samples/README.md commands, and scripts/validate_mvp.ps1 registry checks.
 P2b post-push baseline event: 6604390a29149d9a2b55eb6cb04144960a979673.
 Current synchronization truth source: git status and git rev-parse.
-Not performed: no capsule content modification, no preview.webp creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no push/tag/release/deploy.
+Not performed by the phase work: no capsule content modification, no preview.webp creation/copy/conversion, no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no tag/release/deploy.
 Validation passed: git diff --check, npm registry validator alias, npm negative-case validator alias, single preview capsule validator, agent board validator, and scripts/validate_mvp.ps1.
-Recommended next: guarded local auto-commit if clean.
+P1-P8 push baseline event: 8bca9da2911bdf598d8cc0afee53289d03bbc44f.
 ```
 
 ---

@@ -4,7 +4,7 @@
 
 ```yaml
 phase: p5_p8_remaining_route_packages
-status: completed_validated_pending_guarded_local_commit
+status: completed_validated_committed_and_pushed
 mode: A4.8_docs_only_route_packaging
 goal: lock failure sample, C2 compatibility, human navigation, and A5 prep routes without execution
 evidence:
@@ -17,10 +17,12 @@ guard:
   file_movement_performed: false
   wrapper_or_rewrite_performed: false
   A5_or_external_action_performed: false
-  push_tag_release_deploy_performed_by_this_phase: false
+  tag_release_deploy_performed_by_this_phase: false
 decision:
   validation_passed: true
-  ready_for_guarded_local_auto_commit: true
+  phase_committed_and_pushed: true
+  push_baseline_event: 8bca9da2911bdf598d8cc0afee53289d03bbc44f
+  current_sync_truth_source: git status and git rev-parse
 validation:
   - git diff --check
   - node scripts/validate_agent_board_state.js
@@ -33,7 +35,7 @@ validation:
 
 ```yaml
 phase: p4_review_console_portable_capsule_static_reader
-status: completed_validated_pending_guarded_local_commit
+status: completed_validated_committed_and_pushed
 mode: A4.8_static_prototype_enhancement
 goal: display Git-portable preview capsule evidence in Review Console static prototype
 evidence:
@@ -48,17 +50,18 @@ guard:
   provider_plugin_api_image_generation_performed: false
   DailyNote_or_VCP_memory_write_performed: false
   runtime_or_real_manifest_read_performed: false
-  push_tag_release_deploy_performed_by_this_phase: false
+  tag_release_deploy_performed_by_this_phase: false
 decision:
   validation_passed: true
-  ready_for_guarded_local_auto_commit: true
+  phase_committed_and_pushed: true
+  push_baseline_event: 8bca9da2911bdf598d8cc0afee53289d03bbc44f
 ```
 
 ## P3 Registry Validator v2 Reporting
 
 ```yaml
 phase: p3_registry_validator_v2_reporting
-status: completed_validated_pending_guarded_local_commit
+status: completed_validated_committed_and_pushed
 mode: A4.8_safe_local_validator_reporting_enhancement
 goal: add stable multi-capsule report fields and failure classification to the preview capsule registry validator
 evidence:
@@ -78,17 +81,18 @@ guard:
   provider_plugin_api_image_generation_performed: false
   DailyNote_or_VCP_memory_write_performed: false
   runtime_or_real_manifest_read_performed: false
-  push_tag_release_deploy_performed_by_this_phase: false
+  tag_release_deploy_performed_by_this_phase: false
 decision:
   validation_passed: true
-  ready_for_guarded_local_auto_commit: true
+  phase_committed_and_pushed: true
+  push_baseline_event: 8bca9da2911bdf598d8cc0afee53289d03bbc44f
 ```
 
 ## P2 Second Git-Portable Preview Capsule Authorization Package
 
 ```yaml
 phase: p2_second_git_portable_preview_capsule_authorization_package
-status: completed_validated_pending_guarded_local_commit
+status: completed_validated_committed_and_pushed
 mode: A4.8_authorization_package_only
 goal: prepare the second accepted sample preview capsule without executing capsule creation
 evidence:
@@ -105,10 +109,11 @@ guard:
   provider_plugin_api_image_generation_performed: false
   DailyNote_or_VCP_memory_write_performed: false
   runtime_or_real_manifest_read_performed: false
-  push_tag_release_deploy_performed_by_this_phase: false
+  tag_release_deploy_performed_by_this_phase: false
 decision:
   validation_passed: true
-  ready_for_guarded_local_auto_commit: true
+  phase_committed_and_pushed: true
+  push_baseline_event: 8bca9da2911bdf598d8cc0afee53289d03bbc44f
   future_creation_requires_separate_authorization: true
 ```
 
@@ -116,7 +121,7 @@ decision:
 
 ```yaml
 phase: p1_preview_capsule_validation_productization
-status: completed_validated_pending_guarded_local_commit
+status: completed_validated_committed_and_pushed
 mode: A4.8_safe_local_validation_wiring
 goal: make Git-portable preview capsule validation part of the stable project validation surface
 evidence:
@@ -132,10 +137,11 @@ guard:
   provider_plugin_api_image_generation_performed: false
   DailyNote_or_VCP_memory_write_performed: false
   runtime_or_real_manifest_read_performed: false
-  push_tag_release_deploy_performed_by_this_phase: false
+  tag_release_deploy_performed_by_this_phase: false
 decision:
   validation_passed: true
-  ready_for_guarded_local_auto_commit: true
+  phase_committed_and_pushed: true
+  push_baseline_event: 8bca9da2911bdf598d8cc0afee53289d03bbc44f
   recommended_next: guarded_local_auto_commit_if_clean
 ```
 

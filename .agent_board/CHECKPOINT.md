@@ -4,7 +4,7 @@
 
 ```yaml
 phase: p5_p8_remaining_route_packages
-status: completed_validated_pending_guarded_local_commit
+status: completed_validated_committed_and_pushed
 goal: lock remaining local route packages without execution
 completed:
   - added P5 failure sample evidence track dry-run
@@ -18,7 +18,8 @@ not_performed:
   - no provider, plugin, API, or image generation
   - no DailyNote or VCP memory write
   - no runtime, real manifest, VCPChat, or VCPToolBox read
-  - no push, tag, release, or deploy
+  - phase work did not perform tag, release, or deploy
+  - P1-P8 phase commits were pushed in a separate remote-authorized action at 8bca9da2911bdf598d8cc0afee53289d03bbc44f
 validation:
   - git diff --check
   - node scripts/validate_agent_board_state.js
@@ -31,7 +32,7 @@ validation:
 
 ```yaml
 phase: p4_review_console_portable_capsule_static_reader
-status: completed_validated_pending_guarded_local_commit
+status: completed_validated_committed_and_pushed
 goal: display Git-portable preview capsule evidence in Review Console static prototype
 completed:
   - added portable_preview_capsule_evidence static seed
@@ -52,14 +53,15 @@ not_performed:
   - no fetch, runtime, real manifest, VCPChat, or VCPToolBox read
   - no provider, plugin, API, DailyNote, or VCP memory action
   - no accepted_samples, failure_samples, or production_candidate write
-  - no push, tag, release, or deploy
+  - phase work did not perform tag, release, or deploy
+  - P1-P8 phase commits were pushed in a separate remote-authorized action at 8bca9da2911bdf598d8cc0afee53289d03bbc44f
 ```
 
 ## P3 Registry Validator v2 Reporting
 
 ```yaml
 phase: p3_registry_validator_v2_reporting
-status: completed_validated_pending_guarded_local_commit
+status: completed_validated_committed_and_pushed
 goal: add stable multi-capsule report fields and failure classification to registry-driven preview capsule validation
 completed:
   - added report_version v2
@@ -82,14 +84,15 @@ not_performed:
   - no provider, plugin, API, or image generation
   - no DailyNote or VCP memory write
   - no runtime, real manifest, VCPChat, or VCPToolBox read
-  - no push, tag, release, or deploy
+  - phase work did not perform tag, release, or deploy
+  - P1-P8 phase commits were pushed in a separate remote-authorized action at 8bca9da2911bdf598d8cc0afee53289d03bbc44f
 ```
 
 ## P2 Second Git-Portable Preview Capsule Authorization Package
 
 ```yaml
 phase: p2_second_git_portable_preview_capsule_authorization_package
-status: completed_validated_pending_guarded_local_commit
+status: completed_validated_committed_and_pushed
 goal: prepare the second accepted sample preview capsule authorization package without executing capsule creation
 completed:
   - scanned Git-tracked image surfaces and local ignored runs image availability
@@ -114,14 +117,15 @@ not_performed:
   - no provider, plugin, API, or image generation
   - no DailyNote or VCP memory write
   - no runtime, real manifest, VCPChat, or VCPToolBox read
-  - no push, tag, release, or deploy
+  - phase work did not perform tag, release, or deploy
+  - P1-P8 phase commits were pushed in a separate remote-authorized action at 8bca9da2911bdf598d8cc0afee53289d03bbc44f
 ```
 
 ## P1 Preview Capsule Validation Productization
 
 ```yaml
 phase: p1_preview_capsule_validation_productization
-status: completed_validated_pending_guarded_local_commit
+status: completed_validated_committed_and_pushed
 goal: make preview capsule validation a stable project validation surface
 completed:
   - added package.json aliases for registry and negative-case preview capsule validation
@@ -143,7 +147,8 @@ not_performed:
   - no provider, plugin, API, or image generation
   - no DailyNote or VCP memory write
   - no runtime, real manifest, VCPChat, or VCPToolBox read
-  - no push, tag, release, or deploy
+  - phase work did not perform tag, release, or deploy
+  - P1-P8 phase commits were pushed in a separate remote-authorized action at 8bca9da2911bdf598d8cc0afee53289d03bbc44f
 ```
 
 ## P2b Registry Validator Negative-Case Coverage
