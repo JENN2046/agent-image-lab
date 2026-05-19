@@ -40,6 +40,14 @@
     "runtime_execution_performed": false,
     "real_manifest_read_performed": false,
     "real_vcpchat_read_performed": false,
-    "real_vcptoolbox_read_performed": false
-  }
+    "real_vcptoolbox_read_performed": false,
+    "production_candidate_created": false,
+    "push_tag_release_deploy_performed": false,
+    "commercial_delivery_performed": false
+  },
+  "production_candidate_allowed": false,
+  "memory_write_allowed": false,
+  "DailyNote_write_allowed": false,
+  "VCP_memory_write_allowed": false,
+  "commercial_delivery_allowed": false
 }

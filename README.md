@@ -5652,3 +5652,5 @@ git diff --check
 本包不包含密钥、不包含 raw 插件输出、不包含 raw endpoint、不包含运行日志、不把图片大文件纳入 Git。v0.5 曾在用户授权下把 Adapter-only dry-run 包安装到 VCPToolBox 预发布候选工作线；该安装不代表真实生图插件长期启用。v10.26 记录 v10.25 已完成一次 DailyNote/VCP memory 真实写入；v10.27 记录未来 DailyNoteWrite 写入根目录已修正为 `vcp_root_dailynote`；v10.28 记录插件 `success` 不再足以判定写入完成，必须通过 canonical location 和 hash 校验。该单次授权已消耗，第二次写入、追加生图、submitDraft、commit、push、tag、PR 和 release 仍需后续单独授权和通过对应安全门。
 - `schemas/capsule_manifest_contract.schema.yaml`、`scripts/validate_capsule_manifest_contract.js` 和 `scripts/validate_capsule_manifest_contract_negative_cases.js` 定义并验证 accepted/failure preview capsule manifest v1；`scripts/create_preview_capsule.js` 现在从 accepted sample registry 派生样本配置，不再维护硬编码 `SAMPLES`。
 - Review Console 新增 `unified_capsule_contract_report` 静态 contract 面板，把 registry、manifest、relation、guard 四类状态汇总到同一个可审查界面，不读取 `asset_archive/`、不加载 preview、不执行 runtime。
+
+- `sharp dependency policy`: `sharp` is allowed only for local preview WebP capsule generation after explicit `--confirm-create=true`; it must not be used for provider generation, unapproved source-path processing, production export, DailyNote, VCP memory, or runtime integration.

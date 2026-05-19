@@ -129,10 +129,8 @@ function removeTempTarget(relativePath) {
 
 function assertTargetClean(sample) {
   const targetRoot = repoPath(sample.targetRoot);
-  if (!fs.existsSync(targetRoot)) return;
-  const entries = fs.readdirSync(targetRoot).filter((entry) => entry !== ".gitkeep");
-  if (entries.length > 0) {
-    throw new Error(`target capsule directory is not empty: ${sample.targetRoot}`);
+  if (fs.existsSync(targetRoot)) {
+    throw new Error(`target capsule directory already exists: ${sample.targetRoot}`);
   }
 }
 

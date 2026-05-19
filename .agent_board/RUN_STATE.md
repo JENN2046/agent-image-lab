@@ -1,3 +1,29 @@
+## Current Run State - Capsule Creator Review Hardening
+
+```text
+phase_id: capsule_creator_review_hardening
+status: completed_validated_pending_commit
+mode: A4.8 local product-core hardening
+source_review: Agent Image Lab code review pass_with_warnings
+primary_fixes: accepted_creator_plan_only_default, explicit_confirm_create_required, target_dir_existing_blocked, accepted_manifest_guard_parity, short_png_dimension_fail_closed
+validation_record: docs/CAPSULE_CREATOR_REVIEW_HARDENING_CLOSEOUT.md
+runs_mutated: false
+preview_binary_created_or_copied: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+runtime_execution_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+production_candidate_write_performed: false
+push_tag_release_deploy_performed_by_local_hardening: false
+remaining_followups: yaml_parser_dependency_requires_approval, schema_runtime_unification, baseline_general_validator_split
+recommended_next: final_validation_then_exact_file_commit_and_push_only_if_authorized
+```
 ## Capsule Contract Productization
 
 ```yaml

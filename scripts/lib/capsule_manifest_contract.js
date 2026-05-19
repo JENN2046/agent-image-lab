@@ -96,11 +96,17 @@ function validateCapsuleManifest(core, lane, sampleId, options = {}) {
   check(Boolean(manifest.artifact?.preview?.sha256), "preview_manifest_sha256_present");
   check(previewSha256 === manifest.artifact?.preview?.sha256, "preview_sha256_matches_manifest");
   validateGuardFalse(manifest.guard, "manifest", failures);
+  check(manifest.guard?.production_candidate_created === false, "manifest_guard_production_candidate_created_false");
+  check(manifest.guard?.push_tag_release_deploy_performed === false, "manifest_guard_push_tag_release_deploy_performed_false");
 
-  if (lane === "failure") {
+  if (lane === "accepted" || lane === "failure") {
     check(manifest.production_candidate_allowed === false, "production_candidate_allowed_false");
     check(manifest.memory_write_allowed === false, "memory_write_allowed_false");
     check(manifest.DailyNote_write_allowed === false, "DailyNote_write_allowed_false");
+  }
+  if (lane === "accepted") {
+    check(manifest.VCP_memory_write_allowed === false, "VCP_memory_write_allowed_false");
+    check(manifest.commercial_delivery_allowed === false, "commercial_delivery_allowed_false");
   }
 
   const chainRefs = [];

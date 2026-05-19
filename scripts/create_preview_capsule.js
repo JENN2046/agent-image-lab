@@ -74,10 +74,8 @@ function removeTempTarget(relativePath) {
 
 function assertTargetClean(sample) {
   const targetRoot = repoPath(sample.targetRoot);
-  if (!fs.existsSync(targetRoot)) return;
-  const entries = fs.readdirSync(targetRoot).filter((entry) => entry !== ".gitkeep");
-  if (entries.length > 0) {
-    throw new Error(`target capsule directory is not empty: ${sample.targetRoot}`);
+  if (fs.existsSync(targetRoot)) {
+    throw new Error(`target capsule directory already exists: ${sample.targetRoot}`);
   }
 }
 
@@ -85,6 +83,10 @@ function readArg(name) {
   const prefix = `--${name}=`;
   const found = process.argv.find((arg) => arg.startsWith(prefix));
   return found ? found.slice(prefix.length) : null;
+}
+
+function boolArg(name) {
+  return readArg(name) === "true";
 }
 
 function resolveSampleFromRegistry(sampleId) {
@@ -98,6 +100,39 @@ function validateCliAgainstRegistry(sample, sourceImage, longEdge) {
   if (longEdge && Number(longEdge) !== sample.requiredLongEdge) {
     throw new Error(`long edge does not match accepted registry preview long_edge: ${longEdge}`);
   }
+}
+
+function planOnly(sample) {
+  const paths = capsulePaths(sample);
+  return {
+    passed: true,
+    mode: "plan_only",
+    sample_id: sample.sampleId,
+    registry_driven_source: true,
+    source_image: sample.sourceImage,
+    source_image_exists: fs.existsSync(repoPath(sample.sourceImage)),
+    target_root: sample.targetRoot,
+    target_root_exists: fs.existsSync(repoPath(sample.targetRoot)),
+    required_long_edge: sample.requiredLongEdge,
+    planned_files: Object.values(paths),
+    writes_performed: false,
+    confirm_create_required: true,
+    guard: {
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      image_generation_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      runtime_execution_performed: false,
+      real_manifest_read_performed: false,
+      real_vcpchat_read_performed: false,
+      real_vcptoolbox_read_performed: false,
+      production_candidate_created: false,
+      push_tag_release_deploy_performed: false,
+      commercial_delivery_performed: false,
+    },
+  };
 }
 
 async function createCapsule(sample) {
@@ -188,7 +223,7 @@ async function createCapsule(sample) {
       created_at: createdAt,
       approval_source_ref: sample.reviewDocRef,
       approval_basis: "existing accepted_sample_registry entry and accepted_candidate post-run review",
-      approval_state: { accepted_sample_registered: true, portable_preview_capsule_creation_authorized_by_user: true, production_candidate_authorized: false, memory_write_authorized: false, DailyNote_write_authorized: false },
+      approval_state: { accepted_sample_registered: true, portable_preview_capsule_creation_authorized_by_user: true, production_candidate_authorized: false, memory_write_authorized: false, DailyNote_write_authorized: false, commercial_delivery_authorized: false },
       guard: commonGuard,
     });
 
@@ -219,11 +254,11 @@ async function main() {
   const sampleId = readArg("sample-id") || "accepted_french_summer_rattan_bucket_bag_001";
   const sample = resolveSampleFromRegistry(sampleId);
   validateCliAgainstRegistry(sample, readArg("source-image"), readArg("long-edge"));
-  const result = await createCapsule(sample);
-  process.stdout.write(`${JSON.stringify({ passed: true, result }, null, 2)}\n`);
+  const result = boolArg("confirm-create") ? await createCapsule(sample) : planOnly(sample);
+  process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
 }
 
-module.exports = { resolveSampleFromRegistry, validateCliAgainstRegistry, createCapsule };
+module.exports = { resolveSampleFromRegistry, validateCliAgainstRegistry, planOnly, createCapsule };
 
 if (require.main === module) {
   main().catch((error) => {

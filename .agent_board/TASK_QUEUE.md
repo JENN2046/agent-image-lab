@@ -1,4 +1,17 @@
-# TASK_QUEUE.md — Agent Image Lab Sustained Autopilot
+## Current Capsule Creator Review Hardening
+
+```text
+Current product-mainline task: capsule_creator_review_hardening.
+Status: completed validated pending guarded local commit.
+Purpose: harden accepted/failure preview capsule write boundaries after external code review without expanding product scope.
+Changed files: package.json, scripts/create_preview_capsule.js, scripts/create_failure_sample_capsule.js, scripts/lib/capsule_manifest_contract.js, scripts/lib/artifact_recoverability_core.js, scripts/validate_create_preview_capsule_registry_source.js, scripts/validate_artifact_recoverability_core_image_safety.js, scripts/validate_mvp.ps1, schemas/capsule_manifest_contract.schema.yaml, accepted/failure manifest metadata, README.md, docs/CAPSULE_CREATOR_REVIEW_HARDENING_CLOSEOUT.md, .agent_board resume surfaces.
+Evidence: accepted creator defaults to plan-only, writes require --confirm-create=true, target directories fail closed if already present, accepted manifest guard parity is enforced, short PNG dimensions fail closed.
+Deferred: YAML parser replacement requires dependency-change approval; schema-runtime unification and baseline/general validator split remain follow-ups.
+Not performed: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no runs mutation, no preview binary creation/copy/conversion, no production candidate, no tag/release/deploy/push by this local hardening step.
+Recommended next: final local validation, exact-file guarded local commit, then separately authorized push if preflight passes.
+```
+
+---# TASK_QUEUE.md — Agent Image Lab Sustained Autopilot
 
 Persistent task queue for guarded local work.
 

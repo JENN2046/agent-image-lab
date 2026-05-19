@@ -40,7 +40,15 @@ function createRecoverabilityCore(root) {
 
   function readPngDimensions(relativePath) {
     const buffer = fs.readFileSync(repoPath(relativePath));
-    const signature = buffer.subarray(0, 8).toString("hex");
+    const signature = buffer.subarray(0, Math.min(buffer.length, 8)).toString("hex");
+    if (buffer.length < 24) {
+      return {
+        signature,
+        signatureValid: false,
+        width: null,
+        height: null,
+      };
+    }
     return {
       signature,
       signatureValid: signature === "89504e470d0a1a0a",

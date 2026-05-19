@@ -1,4 +1,17 @@
-## Capsule Contract Productization
+# Capsule Creator Review Hardening Checkpoint
+
+```text
+phase_id: capsule_creator_review_hardening
+status: completed_validated_pending_commit
+checkpoint_reason: post-productization code review hardening
+completed_work: accepted creator default plan-only; explicit --confirm-create=true writes; existing target directories blocked; accepted guard parity enforced; short PNG dimension parsing fail-closed; sharp policy documented.
+validation_record: docs/CAPSULE_CREATOR_REVIEW_HARDENING_CLOSEOUT.md
+validation_pending_final: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+not_performed: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no runs mutation, no preview binary creation/copy/conversion, no production candidate, no tag/release/deploy by this local hardening step.
+next_safe_action: final local validation and guarded exact-file commit.
+```
+
+---## Capsule Contract Productization
 
 ```yaml
 phase: capsule_contract_productization

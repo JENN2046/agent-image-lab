@@ -1,3 +1,18 @@
+## Current Handoff Update - Capsule Creator Review Hardening
+
+```text
+Status: capsule_creator_review_hardening completed_validated_pending_commit.
+Reason: address post-productization code-review P1/P2 hardening for accepted creator write boundaries, manifest guard parity, target directory safety, and PNG dimension fail-closed behavior.
+Execution mode: A4.8 local product-core hardening.
+Validation record: docs/CAPSULE_CREATOR_REVIEW_HARDENING_CLOSEOUT.md.
+Changed creator: scripts/create_preview_capsule.js is plan-only by default and requires --confirm-create=true for writes; confirmed creation still uses temp-dir then final rename.
+Changed scripts: package.json splits plan and confirmed npm commands; accepted/failure creators now block any existing target capsule directory.
+Changed contract: accepted manifests and capsule_manifest_contract validation now enforce production, memory, DailyNote, VCP memory, and commercial delivery false guards.
+Changed safety: artifact recoverability PNG dimension parsing fails closed for short buffers.
+Not implemented: YAML parser dependency replacement is deferred because dependency changes need separate approval.
+Not performed: no provider/plugin/API/image generation/DailyNote/VCP memory/runtime/real manifest/VCPChat/VCPToolBox, no runs mutation, no preview binary creation/copy/conversion, no production candidate, no tag/release/deploy/push by this local hardening step.
+Recommended next: final local validation, exact-file guarded commit, then push only if explicit push authorization is still intended and preflight passes.
+```
 ## Current Handoff Update — Capsule Contract Productization
 
 ```text

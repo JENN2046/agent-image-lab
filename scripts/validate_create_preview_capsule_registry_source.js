@@ -5,11 +5,13 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { createRecoverabilityCore } = require("./lib/artifact_recoverability_core");
 const { loadAcceptedSampleFromRegistry } = require("./lib/accepted_sample_registry_source");
-const { resolveSampleFromRegistry, validateCliAgainstRegistry } = require("./create_preview_capsule");
+const { resolveSampleFromRegistry, validateCliAgainstRegistry, planOnly } = require("./create_preview_capsule");
 
 const root = path.resolve(__dirname, "..");
 const core = createRecoverabilityCore(root);
 const sourceText = fs.readFileSync(path.join(root, "scripts", "create_preview_capsule.js"), "utf8");
+const failureCreatorText = fs.readFileSync(path.join(root, "scripts", "create_failure_sample_capsule.js"), "utf8");
+const packageJson = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
 const checks = [];
 const add = (check, passed, detail = null) => checks.push({ check, passed: Boolean(passed), ...(detail === null ? {} : { detail }) });
 
@@ -17,6 +19,11 @@ add("hardcoded_samples_table_removed", !sourceText.includes("const SAMPLES"));
 add("creator_uses_registry_source_lib", sourceText.includes("loadAcceptedSampleFromRegistry"));
 add("creator_preserves_temp_dir_rename", sourceText.includes("tempTargetRoot") && sourceText.includes("fs.renameSync"));
 add("creator_exports_dry_run_functions", sourceText.includes("module.exports") && sourceText.includes("resolveSampleFromRegistry"));
+add("creator_requires_confirm_create", sourceText.includes("confirm-create") && sourceText.includes("planOnly(sample)"));
+add("target_dir_existing_is_blocked", sourceText.includes("target capsule directory already exists"));
+add("failure_creator_target_dir_existing_is_blocked", failureCreatorText.includes("target capsule directory already exists"));
+add("npm_default_script_is_plan_only", packageJson.scripts["create-preview-capsule"] === "node scripts/create_preview_capsule.js");
+add("npm_confirmed_script_is_explicit", packageJson.scripts["create-preview-capsule:confirmed"] === "node scripts/create_preview_capsule.js --confirm-create=true");
 
 const sample = resolveSampleFromRegistry("accepted_french_summer_rattan_bucket_bag_001");
 add("known_sample_resolves_from_registry", sample.sampleId === "accepted_french_summer_rattan_bucket_bag_001", sample);
@@ -24,6 +31,9 @@ add("sample_target_root_derived_from_sample_id", sample.targetRoot === "asset_ar
 add("sample_source_image_from_registry", sample.sourceImage === "runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg", sample.sourceImage);
 add("sample_category_ref_from_registry", sample.categoryRef === "accepted_samples/categories/fashion_lifestyle_still_life.yaml", sample.categoryRef);
 add("sample_long_edge_default_512", sample.requiredLongEdge === 512, sample.requiredLongEdge);
+const plan = planOnly(sample);
+add("default_mode_plan_only", plan.mode === "plan_only" && plan.writes_performed === false && plan.confirm_create_required === true, plan);
+add("plan_only_reports_existing_target_without_writing", plan.target_root_exists === true && plan.preview_creation_or_copy_performed !== true, plan);
 
 try {
   resolveSampleFromRegistry("unknown_registry_sample_001");

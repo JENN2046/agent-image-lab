@@ -41,6 +41,7 @@
     "real_manifest_read_performed": false,
     "real_vcpchat_read_performed": false,
     "real_vcptoolbox_read_performed": false,
-    "production_candidate_created": false
+    "production_candidate_created": false,
+    "push_tag_release_deploy_performed": false
   }
 }
