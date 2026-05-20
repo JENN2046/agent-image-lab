@@ -1,28 +1,18 @@
 "use strict";
 
-const YAML = require("yaml");
+const {
+  countRowsById,
+  parseRegistryRows: parseCommonRegistryRows,
+  parseYamlDocument,
+  scalar,
+} = require("./capsule_registry_source_common");
 
 const ACCEPTED_REGISTRY_REF = "accepted_samples/accepted_sample_registry.yaml";
 const ACCEPTED_CAPSULE_ROOT = "asset_archive/accepted_samples";
 const DEFAULT_LONG_EDGE = 512;
 
 function parseRegistryRows(registryText) {
-  const document = YAML.parse(registryText);
-  const registry = document && document.accepted_sample_registry;
-  if (!registry || !Array.isArray(registry.samples)) return [];
-  return registry.samples.map((sample) => ({
-    sample_id: sample && sample.sample_id,
-    data: sample || {},
-    block: YAML.stringify(sample || {}).trim(),
-  }));
-}
-
-function scalar(row, field) {
-  const value = row && row.data ? row.data[field] : null;
-  if (value === null || value === undefined) return null;
-  if (typeof value === "string") return value;
-  if (typeof value === "number" || typeof value === "boolean") return String(value);
-  return null;
+  return parseCommonRegistryRows(registryText, "accepted_sample_registry", "samples", "sample_id");
 }
 
 function categoryContainsSample(categoryText, sampleId) {
@@ -45,10 +35,10 @@ function loadAcceptedSampleFromRegistry(core, sampleId, options = {}) {
   const row = rows.find((item) => item.sample_id === sampleId);
   if (!row) throw new Error(`sample not found in accepted registry: ${sampleId}`);
 
-  const duplicateCount = rows.filter((item) => item.sample_id === sampleId).length;
+  const duplicateCount = countRowsById(rows, "sample_id", sampleId);
   if (duplicateCount > 1) throw new Error(`duplicate sample_id in accepted registry: ${sampleId}`);
 
-  const registry = YAML.parse(registryText).accepted_sample_registry;
+  const registry = parseYamlDocument(registryText).accepted_sample_registry;
 
   const sample = {
     sampleId,

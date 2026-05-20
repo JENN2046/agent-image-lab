@@ -10,28 +10,71 @@ function Invoke-CapsuleProductCoreValidation {
     [string]$Section = 'All'
   )
 
+  function Invoke-CapsuleNodeJsonValidator {
+    param(
+      [Parameter(Mandatory = $true)]
+      [string]$ScriptRelativePath,
+
+      [Parameter(Mandatory = $true)]
+      [string]$FailureMessage
+    )
+
+    $validatorOutput = & node (Join-Path $Root $ScriptRelativePath)
+    if ($LASTEXITCODE -ne 0) {
+      & $AddFailure $FailureMessage
+      return $null
+    }
+
+    return ($validatorOutput -join "`n") | ConvertFrom-Json
+  }
+
+  function Test-CapsuleNoExternalActionFlags {
+    param(
+      [Parameter(Mandatory = $true)]
+      [object]$Report,
+
+      [Parameter(Mandatory = $true)]
+      [string]$FailureMessage,
+
+      [string[]]$ExtraFields = @()
+    )
+
+    $fields = @(
+      'provider_contact_performed',
+      'plugin_call_performed',
+      'api_call_performed',
+      'image_generation_performed',
+      'DailyNote_write_performed',
+      'VCP_memory_write_performed',
+      'runtime_execution_performed',
+      'real_manifest_read_performed',
+      'real_vcpchat_read_performed',
+      'real_vcptoolbox_read_performed',
+      'push_tag_release_deploy_performed'
+    ) + $ExtraFields
+
+    foreach ($field in $fields) {
+      if ($Report.$field -ne $false) {
+        & $AddFailure $FailureMessage
+        return
+      }
+    }
+  }
+
   if ($Section -eq 'PreRuns' -or $Section -eq 'All') {
-  $capsuleStatusTaxonomyOutput = & node (Join-Path $Root 'scripts/validate_capsule_status_taxonomy.js')
-  if ($LASTEXITCODE -ne 0) {
-    & $AddFailure "Capsule status taxonomy validation exited with failure"
-  } else {
-    $capsuleStatusTaxonomy = ($capsuleStatusTaxonomyOutput -join "`n") | ConvertFrom-Json
+  $capsuleStatusTaxonomy = Invoke-CapsuleNodeJsonValidator 'scripts/validate_capsule_status_taxonomy.js' "Capsule status taxonomy validation exited with failure"
+  if ($null -ne $capsuleStatusTaxonomy) {
     if ($capsuleStatusTaxonomy.passed -ne $true -or $capsuleStatusTaxonomy.status -ne 'capsule_status_taxonomy_verified') {
       & $AddFailure "Capsule status taxonomy validation must pass"
     }
     if ($capsuleStatusTaxonomy.taxonomy_shared_by_registry_validators -ne $true -or $capsuleStatusTaxonomy.writes_performed -ne $false -or $capsuleStatusTaxonomy.preview_creation_or_copy_performed -ne $false) {
       & $AddFailure "Capsule status taxonomy validation must prove shared registry validator taxonomy without writes or preview creation/copy"
     }
-    if ($capsuleStatusTaxonomy.provider_contact_performed -ne $false -or $capsuleStatusTaxonomy.plugin_call_performed -ne $false -or $capsuleStatusTaxonomy.api_call_performed -ne $false -or $capsuleStatusTaxonomy.image_generation_performed -ne $false -or $capsuleStatusTaxonomy.DailyNote_write_performed -ne $false -or $capsuleStatusTaxonomy.VCP_memory_write_performed -ne $false -or $capsuleStatusTaxonomy.runtime_execution_performed -ne $false -or $capsuleStatusTaxonomy.real_manifest_read_performed -ne $false -or $capsuleStatusTaxonomy.real_vcpchat_read_performed -ne $false -or $capsuleStatusTaxonomy.real_vcptoolbox_read_performed -ne $false -or $capsuleStatusTaxonomy.production_candidate_write_performed -ne $false -or $capsuleStatusTaxonomy.push_tag_release_deploy_performed -ne $false) {
-      & $AddFailure "Capsule status taxonomy validation must remain local-only with no external, memory, runtime, production, or remote actions"
-    }
+    Test-CapsuleNoExternalActionFlags $capsuleStatusTaxonomy "Capsule status taxonomy validation must remain local-only with no external, memory, runtime, production, or remote actions" @('production_candidate_write_performed')
   }
 
-  $capsuleManifestContractNegativeOutput = & node (Join-Path $Root 'scripts/validate_capsule_manifest_contract_negative_cases.js')
-  if ($LASTEXITCODE -ne 0) {
-    & $AddFailure "Capsule manifest contract negative-case validation exited with failure"
-  } else {
-    $capsuleManifestContractNegative = ($capsuleManifestContractNegativeOutput -join "`n") | ConvertFrom-Json
+  $capsuleManifestContractNegative = Invoke-CapsuleNodeJsonValidator 'scripts/validate_capsule_manifest_contract_negative_cases.js' "Capsule manifest contract negative-case validation exited with failure"
+  if ($null -ne $capsuleManifestContractNegative) {
     if ($capsuleManifestContractNegative.passed -ne $true -or $capsuleManifestContractNegative.status -ne 'capsule_manifest_contract_negative_cases_verified') {
       & $AddFailure "Capsule manifest contract negative-case validation must pass"
     }
@@ -41,25 +84,18 @@ function Invoke-CapsuleProductCoreValidation {
     if ($capsuleManifestContractNegative.temp_workspace_root_class -ne '.agent_private' -or $capsuleManifestContractNegative.real_capsule_modified -ne $false -or $capsuleManifestContractNegative.preview_creation_or_copy_performed -ne $false) {
       & $AddFailure "Capsule manifest contract negative-case fixtures must stay in .agent_private and must not modify real capsules or create/copy previews"
     }
-    if ($capsuleManifestContractNegative.provider_contact_performed -ne $false -or $capsuleManifestContractNegative.plugin_call_performed -ne $false -or $capsuleManifestContractNegative.api_call_performed -ne $false -or $capsuleManifestContractNegative.image_generation_performed -ne $false -or $capsuleManifestContractNegative.DailyNote_write_performed -ne $false -or $capsuleManifestContractNegative.VCP_memory_write_performed -ne $false -or $capsuleManifestContractNegative.runtime_execution_performed -ne $false -or $capsuleManifestContractNegative.real_manifest_read_performed -ne $false -or $capsuleManifestContractNegative.real_vcpchat_read_performed -ne $false -or $capsuleManifestContractNegative.real_vcptoolbox_read_performed -ne $false -or $capsuleManifestContractNegative.push_tag_release_deploy_performed -ne $false) {
-      & $AddFailure "Capsule manifest contract negative-case validation must remain local-only with no external, memory, runtime, source read, push, tag, release, or deploy actions"
-    }
+    Test-CapsuleNoExternalActionFlags $capsuleManifestContractNegative "Capsule manifest contract negative-case validation must remain local-only with no external, memory, runtime, source read, push, tag, release, or deploy actions"
   }
 
-  $capsuleCreatorCommonSafetyOutput = & node (Join-Path $Root 'scripts/validate_capsule_creator_common_safety.js')
-  if ($LASTEXITCODE -ne 0) {
-    & $AddFailure "Capsule creator common safety validation exited with failure"
-  } else {
-    $capsuleCreatorCommonSafety = ($capsuleCreatorCommonSafetyOutput -join "`n") | ConvertFrom-Json
+  $capsuleCreatorCommonSafety = Invoke-CapsuleNodeJsonValidator 'scripts/validate_capsule_creator_common_safety.js' "Capsule creator common safety validation exited with failure"
+  if ($null -ne $capsuleCreatorCommonSafety) {
     if ($capsuleCreatorCommonSafety.passed -ne $true -or $capsuleCreatorCommonSafety.status -ne 'capsule_creator_common_safety_verified') {
       & $AddFailure "Capsule creator common safety validation must pass"
     }
     if ($capsuleCreatorCommonSafety.duplicated_creator_safety_logic_reduced -ne $true -or $capsuleCreatorCommonSafety.writes_performed -ne $false -or $capsuleCreatorCommonSafety.preview_creation_or_copy_performed -ne $false) {
       & $AddFailure "Capsule creator common safety validation must reduce duplication without writes or preview creation/copy"
     }
-    if ($capsuleCreatorCommonSafety.provider_contact_performed -ne $false -or $capsuleCreatorCommonSafety.plugin_call_performed -ne $false -or $capsuleCreatorCommonSafety.api_call_performed -ne $false -or $capsuleCreatorCommonSafety.image_generation_performed -ne $false -or $capsuleCreatorCommonSafety.DailyNote_write_performed -ne $false -or $capsuleCreatorCommonSafety.VCP_memory_write_performed -ne $false -or $capsuleCreatorCommonSafety.runtime_execution_performed -ne $false -or $capsuleCreatorCommonSafety.real_manifest_read_performed -ne $false -or $capsuleCreatorCommonSafety.real_vcpchat_read_performed -ne $false -or $capsuleCreatorCommonSafety.real_vcptoolbox_read_performed -ne $false -or $capsuleCreatorCommonSafety.production_candidate_write_performed -ne $false -or $capsuleCreatorCommonSafety.push_tag_release_deploy_performed -ne $false) {
-      & $AddFailure "Capsule creator common safety validation must remain local-only with no external, memory, runtime, production, or remote actions"
-    }
+    Test-CapsuleNoExternalActionFlags $capsuleCreatorCommonSafety "Capsule creator common safety validation must remain local-only with no external, memory, runtime, production, or remote actions" @('production_candidate_write_performed')
   }
 
   $gitTrackedPreviewEvidenceCapsuleBaselineOutput = & node (Join-Path $Root 'scripts/validate_v14_231_git_tracked_preview_evidence_capsule_baseline.js')
@@ -177,12 +213,23 @@ function Invoke-CapsuleProductCoreValidation {
     if ($failureSampleRegistrySource.passed -ne $true -or $failureSampleRegistrySource.status -ne 'failure_sample_registry_source_verified') {
       & $AddFailure "Failure sample registry source validation must pass"
     }
-    if ($failureSampleRegistrySource.registry_driven_source -ne $true -or $failureSampleRegistrySource.yaml_parser_aligned_with_accepted_lane -ne $true -or $failureSampleRegistrySource.writes_performed -ne $false -or $failureSampleRegistrySource.preview_creation_or_copy_performed -ne $false) {
+    if ($failureSampleRegistrySource.registry_driven_source -ne $true -or $failureSampleRegistrySource.yaml_parser_aligned_with_accepted_lane -ne $true -or $failureSampleRegistrySource.shared_registry_source_common -ne $true -or $failureSampleRegistrySource.writes_performed -ne $false -or $failureSampleRegistrySource.preview_creation_or_copy_performed -ne $false) {
       & $AddFailure "Failure sample registry source validation must use structured YAML parsing without writes or preview creation/copy"
     }
     if ($failureSampleRegistrySource.provider_contact_performed -ne $false -or $failureSampleRegistrySource.plugin_call_performed -ne $false -or $failureSampleRegistrySource.api_call_performed -ne $false -or $failureSampleRegistrySource.image_generation_performed -ne $false -or $failureSampleRegistrySource.DailyNote_write_performed -ne $false -or $failureSampleRegistrySource.VCP_memory_write_performed -ne $false -or $failureSampleRegistrySource.runtime_execution_performed -ne $false -or $failureSampleRegistrySource.real_manifest_read_performed -ne $false -or $failureSampleRegistrySource.real_vcpchat_read_performed -ne $false -or $failureSampleRegistrySource.real_vcptoolbox_read_performed -ne $false -or $failureSampleRegistrySource.production_candidate_write_performed -ne $false -or $failureSampleRegistrySource.push_tag_release_deploy_performed -ne $false) {
       & $AddFailure "Failure sample registry source validation must remain local-only with no external, memory, runtime, production, or remote actions"
     }
+  }
+
+  $capsuleCodeDebtCompletionAudit = Invoke-CapsuleNodeJsonValidator 'scripts/validate_capsule_code_debt_completion_audit.js' "Capsule code debt completion audit validation exited with failure"
+  if ($null -ne $capsuleCodeDebtCompletionAudit) {
+    if ($capsuleCodeDebtCompletionAudit.passed -ne $true -or $capsuleCodeDebtCompletionAudit.status -ne 'capsule_code_debt_completion_audit_verified') {
+      & $AddFailure "Capsule code debt completion audit validation must pass"
+    }
+    if ($capsuleCodeDebtCompletionAudit.docs_pile_created -ne $false -or $capsuleCodeDebtCompletionAudit.writes_performed -ne $false -or $capsuleCodeDebtCompletionAudit.preview_creation_or_copy_performed -ne $false) {
+      & $AddFailure "Capsule code debt completion audit must remain read-only and avoid docs pile or preview creation/copy"
+    }
+    Test-CapsuleNoExternalActionFlags $capsuleCodeDebtCompletionAudit "Capsule code debt completion audit must remain local-only with no external, memory, runtime, production, or remote actions" @('production_candidate_write_performed')
   }
 
   $failureSampleCapsuleCreatorDryRunOutput = & node (Join-Path $Root 'scripts/validate_failure_sample_capsule_creator_dry_run.js')

@@ -24301,6 +24301,46 @@ production_candidate_write_performed: false
 recommended_next: runs_restore_verification_authorization_package_draft_commit_readiness_gate
 ```
 
+## Checkpoint - Capsule Code Debt Tasks 5-10
+
+```text
+phase: capsule_code_debt_tasks_5_10_gate
+status: completed_targeted_validated
+mode: A4.8 local implementation / validator code-debt followups
+completed:
+- initialized manifest contract failure summaries from shared manifest summary keys
+- added scripts/lib/capsule_registry_source_common.js and aligned accepted/failure registry sources to it
+- aligned scripts/validate_capsule_registry_report_v2.js class counts to shared taxonomy constants
+- preserved failure capsule creator behavior while normalizing the edited block formatting
+- added reusable JSON validator and no-external guard helpers in scripts/validate_mvp_capsule_product_core.ps1
+- added scripts/validate_capsule_code_debt_completion_audit.js for read-only completion evidence
+validation_completed:
+- node --check changed JavaScript files
+- PowerShell parser check for scripts/validate_mvp_capsule_product_core.ps1
+- node scripts/validate_capsule_code_debt_completion_audit.js
+- node scripts/validate_capsule_status_taxonomy.js
+- node scripts/validate_create_preview_capsule_registry_source.js
+validation_not_run_due_boundary:
+- scripts/validate_mvp.ps1
+- validators requiring preview binary reads, hash extraction, dimensions extraction, or broader actual-runs scanning
+hard_stop_flags:
+  docs_pile_created: false
+  actual_runs_scan_performed: false
+  image_binary_read_performed: false
+  hash_extraction_performed: false
+  dimensions_extraction_performed: false
+  preview_generation_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  dependency_change_performed: false
+  runtime_browser_execution_performed: false
+recommended_next: guarded_commit_only_unless_push_gate_can_be_satisfied_without_image_binary_reads
+```
+
 ## Runs Restore Verification Authorization Package Closeout Checkpoint
 
 ```yaml

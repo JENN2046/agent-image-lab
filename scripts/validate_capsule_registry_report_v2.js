@@ -5,6 +5,9 @@ const { spawnSync } = require("node:child_process");
 const path = require("node:path");
 const { createRecoverabilityCore } = require("./lib/artifact_recoverability_core");
 const { validateAllCapsuleManifests } = require("./lib/capsule_manifest_contract");
+const {
+  FAILURE_CLASS,
+} = require("./lib/capsule_status_taxonomy");
 
 const root = path.resolve(__dirname, "..");
 const core = createRecoverabilityCore(root);
@@ -145,13 +148,13 @@ function summarizeClassCounts(rows, relations) {
     failure_failed: rows.filter((row) => row.lane === "failure" && !row.passed).length,
     missing_resolved_by_link: relations.filter((relation) => relation.relation_status !== "linked").length,
     production_or_memory_guard_violation: rows.filter((row) =>
-      row.failure_classes.includes("production_or_memory_guard_violation")
+      row.failure_classes.includes(FAILURE_CLASS.PRODUCTION_OR_MEMORY_GUARD_VIOLATION)
     ).length,
-    missing_chain_file: rows.filter((row) => row.failure_classes.includes("missing_chain_file")).length,
-    chain_record_mismatch: rows.filter((row) => row.failure_classes.includes("chain_record_mismatch")).length,
-    manifest_contract_mismatch: rows.filter((row) => row.failure_classes.includes("manifest_contract_mismatch")).length,
-    preview_hash_mismatch: rows.filter((row) => row.failure_classes.includes("preview_hash_mismatch")).length,
-    preview_long_edge_mismatch: rows.filter((row) => row.failure_classes.includes("preview_long_edge_mismatch")).length
+    missing_chain_file: rows.filter((row) => row.failure_classes.includes(FAILURE_CLASS.MISSING_CHAIN_FILE)).length,
+    chain_record_mismatch: rows.filter((row) => row.failure_classes.includes(FAILURE_CLASS.CHAIN_RECORD_MISMATCH)).length,
+    manifest_contract_mismatch: rows.filter((row) => row.failure_classes.includes(FAILURE_CLASS.MANIFEST_CONTRACT_MISMATCH)).length,
+    preview_hash_mismatch: rows.filter((row) => row.failure_classes.includes(FAILURE_CLASS.PREVIEW_HASH_MISMATCH)).length,
+    preview_long_edge_mismatch: rows.filter((row) => row.failure_classes.includes(FAILURE_CLASS.PREVIEW_LONG_EDGE_MISMATCH)).length
   };
 }
 

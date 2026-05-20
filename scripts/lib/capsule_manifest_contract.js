@@ -4,6 +4,8 @@ const fs = require("node:fs");
 const YAML = require("yaml");
 const {
   classifyManifestFailures,
+  createFailureClassSummary,
+  MANIFEST_FAILURE_CLASS_SUMMARY_KEYS,
 } = require("./capsule_status_taxonomy");
 
 const ACCEPTED_ROOT = "asset_archive/accepted_samples";
@@ -196,7 +198,7 @@ function validateAllCapsuleManifests(core, options = {}) {
   const failure = listCapsules(core, "failure").map((sampleId) => validateCapsuleManifest(core, "failure", sampleId, options));
   const samples = accepted.concat(failure);
   const failed = samples.filter((sample) => !sample.passed);
-  const failureClassSummary = {};
+  const failureClassSummary = createFailureClassSummary(MANIFEST_FAILURE_CLASS_SUMMARY_KEYS);
   for (const sample of samples) for (const failureClass of sample.failure_classes) failureClassSummary[failureClass] = (failureClassSummary[failureClass] || 0) + 1;
   const passed = failed.length === 0 && schemaBinding.passed;
   return { passed, status: passed ? "capsule_manifest_contract_verified" : "capsule_manifest_contract_failed", report_version: "capsule_manifest_contract_v1", schema_ref: schemaLoad.schemaRef, schema_runtime_binding_status: schemaBinding.passed ? "schema_runtime_binding_verified" : "schema_runtime_binding_failed", schema_runtime_binding_failures: schemaBinding.failures, totals: { accepted: accepted.length, failure: failure.length, total: samples.length, passed: samples.length - failed.length, failed: failed.length }, samples, failed_sample_ids: failed.map((sample) => sample.sample_id), failure_class_summary: failureClassSummary, guard: { static_validator_only: true, preview_creation_or_copy_performed: false, provider_contact_performed: false, plugin_call_performed: false, api_call_performed: false, image_generation_performed: false, DailyNote_write_performed: false, VCP_memory_write_performed: false, runtime_execution_performed: false, real_manifest_read_performed: false, real_vcpchat_read_performed: false, real_vcptoolbox_read_performed: false, push_tag_release_deploy_performed: false } };

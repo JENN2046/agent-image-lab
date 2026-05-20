@@ -97,125 +97,125 @@ async function createCapsule(sample) {
   ensureDir(tempSample.targetRoot);
 
   try {
-  await sharp(repoPath(sample.sourceImage))
-    .rotate()
-    .resize({
-      width: sample.requiredLongEdge,
-      height: sample.requiredLongEdge,
-      fit: "inside",
-      withoutEnlargement: true,
-    })
-    .webp({ quality: 90 })
+    await sharp(repoPath(sample.sourceImage))
+      .rotate()
+      .resize({
+        width: sample.requiredLongEdge,
+        height: sample.requiredLongEdge,
+        fit: "inside",
+        withoutEnlargement: true,
+      })
+      .webp({ quality: 90 })
       .toFile(repoPath(tempPaths.preview));
 
     const previewMetadata = await sharp(repoPath(tempPaths.preview)).metadata();
-  const previewLongEdge = Math.max(previewMetadata.width || 0, previewMetadata.height || 0);
-  if (previewMetadata.format !== "webp" || previewLongEdge !== sample.requiredLongEdge) {
-    throw new Error(
-      `preview validation failed: format=${previewMetadata.format}, long_edge=${previewLongEdge}`
-    );
-  }
+    const previewLongEdge = Math.max(previewMetadata.width || 0, previewMetadata.height || 0);
+    if (previewMetadata.format !== "webp" || previewLongEdge !== sample.requiredLongEdge) {
+      throw new Error(
+        `preview validation failed: format=${previewMetadata.format}, long_edge=${previewLongEdge}`
+      );
+    }
 
     const previewSha256 = sha256File(tempPaths.preview);
-  const failureBlock = sample.registryFailureBlock;
-  if (!failureBlock) {
-    throw new Error(`failure sample not found in registry: ${sample.sampleId}`);
-  }
+    const failureBlock = sample.registryFailureBlock;
+    if (!failureBlock) {
+      throw new Error(`failure sample not found in registry: ${sample.sampleId}`);
+    }
 
-  const createdAt = new Date().toISOString();
-  const commonGuard = createNoExecutionGuard({
-    production_candidate_created: false,
-  });
+    const createdAt = new Date().toISOString();
+    const commonGuard = createNoExecutionGuard({
+      production_candidate_created: false,
+    });
 
     writeJson(tempPaths.failureRecord, {
-    record_type: "git_portable_failure_sample_capsule_failure_record",
-    version: "v1",
-    sample_id: sample.sampleId,
-    created_at: createdAt,
-    source: {
-      source_phase: sample.sourcePhase,
-      source_image_path: sample.sourceImage,
-      source_image_git_tracked: false,
-      source_image_hash_recorded: false,
-      failure_registry_ref: sample.failureRegistryRef,
-      prompt_package_ref: sample.promptPackageRef,
-    },
-    failure_summary: {
-      failure_tags: sample.failureTags,
-      resolved_by_accepted_sample: sample.resolvedByAcceptedSample,
-      memory_suitability: false,
-      production_candidate_allowed: false,
-    },
-    registry_failure_block: failureBlock,
-    guard: commonGuard,
-  });
+      record_type: "git_portable_failure_sample_capsule_failure_record",
+      version: "v1",
+      sample_id: sample.sampleId,
+      created_at: createdAt,
+      source: {
+        source_phase: sample.sourcePhase,
+        source_image_path: sample.sourceImage,
+        source_image_git_tracked: false,
+        source_image_hash_recorded: false,
+        failure_registry_ref: sample.failureRegistryRef,
+        prompt_package_ref: sample.promptPackageRef,
+      },
+      failure_summary: {
+        failure_tags: sample.failureTags,
+        resolved_by_accepted_sample: sample.resolvedByAcceptedSample,
+        memory_suitability: false,
+        production_candidate_allowed: false,
+      },
+      registry_failure_block: failureBlock,
+      guard: commonGuard,
+    });
 
     writeJson(tempPaths.reviewRecord, {
-    record_type: "git_portable_failure_sample_capsule_review_record",
-    version: "v1",
-    sample_id: sample.sampleId,
-    created_at: createdAt,
-    review_doc_ref: sample.reviewDocRef,
-    review_summary: {
-      final_route: "failure_learning_only_never_production",
-      production_candidate_allowed: false,
-      DailyNote_write_allowed: false,
-      VCP_memory_write_allowed: false,
-    },
-    guard: commonGuard,
-  });
+      record_type: "git_portable_failure_sample_capsule_review_record",
+      version: "v1",
+      sample_id: sample.sampleId,
+      created_at: createdAt,
+      review_doc_ref: sample.reviewDocRef,
+      review_summary: {
+        final_route: "failure_learning_only_never_production",
+        production_candidate_allowed: false,
+        DailyNote_write_allowed: false,
+        VCP_memory_write_allowed: false,
+      },
+      guard: commonGuard,
+    });
 
     writeJson(tempPaths.manifest, {
-    manifest_type: "git_portable_failure_sample_capsule_manifest",
-    version: "v1",
-    sample_id: sample.sampleId,
-    created_at: createdAt,
-    artifact: {
-      preview: {
-        path: "preview.webp",
-        format: "webp",
-        long_edge: sample.requiredLongEdge,
-        width: previewMetadata.width,
-        height: previewMetadata.height,
-        sha256: previewSha256,
-        git_tracked: true,
+      manifest_type: "git_portable_failure_sample_capsule_manifest",
+      version: "v1",
+      sample_id: sample.sampleId,
+      created_at: createdAt,
+      artifact: {
+        preview: {
+          path: "preview.webp",
+          format: "webp",
+          long_edge: sample.requiredLongEdge,
+          width: previewMetadata.width,
+          height: previewMetadata.height,
+          sha256: previewSha256,
+          git_tracked: true,
+        },
+        original: {
+          git_tracked: false,
+          required_for_portable_validation: false,
+        },
       },
-      original: {
-        git_tracked: false,
-        required_for_portable_validation: false,
+      chain: {
+        failure_record: "failure_record.json",
+        review_record: "review_record.json",
       },
-    },
-    chain: {
-      failure_record: "failure_record.json",
-      review_record: "review_record.json",
-    },
-    source_refs: {
-      failure_registry_ref: sample.failureRegistryRef,
-      review_doc_ref: sample.reviewDocRef,
-      prompt_package_ref: sample.promptPackageRef,
-    },
-    production_candidate_allowed: false,
-    memory_write_allowed: false,
-    DailyNote_write_allowed: false,
-    guard: commonGuard,
-  });
+      source_refs: {
+        failure_registry_ref: sample.failureRegistryRef,
+        review_doc_ref: sample.reviewDocRef,
+        prompt_package_ref: sample.promptPackageRef,
+      },
+      production_candidate_allowed: false,
+      memory_write_allowed: false,
+      DailyNote_write_allowed: false,
+      guard: commonGuard,
+    });
 
     renamePath(tempSample.targetRoot, sample.targetRoot);
 
-  return {
-    passed: true,
-    mode: "create",
-    sample_id: sample.sampleId,
-    target_root: sample.targetRoot,
+    return {
+      passed: true,
+      mode: "create",
+      sample_id: sample.sampleId,
+      target_root: sample.targetRoot,
       created_files: Object.values(finalPaths),
-    preview: {
+      preview: {
         path: finalPaths.preview,
-      width: previewMetadata.width,
-      height: previewMetadata.height,
-      long_edge: previewLongEdge,
-      sha256: previewSha256,
-    },
-  };
+        width: previewMetadata.width,
+        height: previewMetadata.height,
+        long_edge: previewLongEdge,
+        sha256: previewSha256,
+      },
+    };
   } catch (error) {
     removeTempTarget(tempSample.targetRoot);
     throw error;

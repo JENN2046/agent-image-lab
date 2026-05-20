@@ -14,6 +14,7 @@ const {
 const repoRoot = path.resolve(__dirname, "..");
 const creatorText = fs.readFileSync(path.join(repoRoot, "scripts", "create_failure_sample_capsule.js"), "utf8");
 const registrySourceText = fs.readFileSync(path.join(repoRoot, "scripts", "lib", "failure_sample_registry_source.js"), "utf8");
+const registryCommonText = fs.readFileSync(path.join(repoRoot, "scripts", "lib", "capsule_registry_source_common.js"), "utf8");
 const registryText = fs.readFileSync(path.join(repoRoot, FAILURE_REGISTRY_REF), "utf8");
 
 const reader = {
@@ -31,8 +32,9 @@ function expect(condition, check, detail = null) {
 
 const checks = [];
 
-checks.push(expect(registrySourceText.includes('require("yaml")'), "failure_registry_source_uses_yaml_package"));
-checks.push(expect(registrySourceText.includes("YAML.parse"), "failure_registry_source_uses_yaml_parse"));
+checks.push(expect(registrySourceText.includes("parseCommonRegistryRows"), "failure_registry_source_uses_common_parser"));
+checks.push(expect(registryCommonText.includes('require("yaml")'), "registry_common_source_uses_yaml_package"));
+checks.push(expect(registryCommonText.includes("YAML.parse"), "registry_common_source_uses_yaml_parse"));
 checks.push(expect(!registrySourceText.includes("new RegExp"), "failure_registry_source_no_regex_field_parser"));
 checks.push(expect(!creatorText.includes("function parseScalar"), "failure_creator_scalar_regex_removed"));
 checks.push(expect(!creatorText.includes("function parseList"), "failure_creator_list_regex_removed"));
@@ -132,6 +134,7 @@ const output = {
   failed_count: failed.length,
   registry_driven_source: true,
   yaml_parser_aligned_with_accepted_lane: failed.length === 0,
+  shared_registry_source_common: failed.length === 0,
   real_capsule_created: false,
   writes_performed: false,
   preview_creation_or_copy_performed: false,

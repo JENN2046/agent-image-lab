@@ -11,6 +11,7 @@ const root = path.resolve(__dirname, "..");
 const core = createRecoverabilityCore(root);
 const sourceText = fs.readFileSync(path.join(root, "scripts", "create_preview_capsule.js"), "utf8");
 const registrySourceText = fs.readFileSync(path.join(root, "scripts", "lib", "accepted_sample_registry_source.js"), "utf8");
+const registryCommonText = fs.readFileSync(path.join(root, "scripts", "lib", "capsule_registry_source_common.js"), "utf8");
 const creatorCommonText = fs.readFileSync(path.join(root, "scripts", "lib", "capsule_creator_common.js"), "utf8");
 const failureCreatorText = fs.readFileSync(path.join(root, "scripts", "create_failure_sample_capsule.js"), "utf8");
 const packageJson = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
@@ -19,7 +20,7 @@ const add = (check, passed, detail = null) => checks.push({ check, passed: Boole
 
 add("hardcoded_samples_table_removed", !sourceText.includes("const SAMPLES"));
 add("creator_uses_registry_source_lib", sourceText.includes("loadAcceptedSampleFromRegistry"));
-add("registry_source_uses_yaml_parser", registrySourceText.includes('require("yaml")') && registrySourceText.includes("YAML.parse"));
+add("registry_source_uses_common_yaml_parser", registrySourceText.includes("parseCommonRegistryRows") && registryCommonText.includes('require("yaml")') && registryCommonText.includes("YAML.parse"));
 add("registry_source_no_sample_id_block_regex", !registrySourceText.includes("line.match(/^\\s*-\\s+sample_id"));
 add("creator_preserves_temp_dir_rename", sourceText.includes("tempTargetRoot") && sourceText.includes("renamePath") && creatorCommonText.includes("fs.renameSync"));
 add("creator_uses_common_safety_helper", sourceText.includes("createCapsuleCreatorCommon"));
@@ -77,6 +78,7 @@ const output = {
   check_count: checks.length,
   failed_count: failed.length,
   registry_driven_source: true,
+  shared_registry_source_common: failed.length === 0,
   hardcoded_samples_table_present: sourceText.includes("const SAMPLES"),
   real_capsule_created: false,
   preview_creation_or_copy_performed: false,

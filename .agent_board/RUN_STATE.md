@@ -16027,6 +16027,35 @@ production_candidate_write_performed: false
 recommended_next: runs_restore_verification_authorization_package_draft_commit_readiness_gate
 ```
 
+## Current Capsule Productization Goal
+
+```text
+phase: capsule_code_debt_tasks_5_10_gate
+status: completed_targeted_validated
+mode: A4.8 local implementation / validator code-debt followups
+objective: finish prioritized capsule product-core code-debt items 5-10 without broad docs accumulation or A5/runtime/image/provider side effects
+helper_ref: scripts/lib/capsule_registry_source_common.js
+audit_ref: scripts/validate_capsule_code_debt_completion_audit.js
+manifest_summary_key_stability: true
+product_core_powershell_helper: true
+failure_creator_formatting_cleanup: true
+shared_registry_source_common: true
+registry_report_v2_taxonomy_alignment: true
+completion_audit_validator: true
+docs_pile_created: false
+actual_runs_scan_performed: false
+image_binary_read_performed: false
+hash_or_dimensions_extraction_performed: false
+preview_generation_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+dependency_change_performed: false
+production_candidate_performed: false
+runtime_browser_execution_performed: false
+tag_release_deploy_performed: false
+recommended_next: guarded_commit_only_unless_push_gate_can_be_satisfied_without_image_binary_reads
+```
+
 ## runs_restore_verification_authorization_package_closeout_gate
 
 ```yaml

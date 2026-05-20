@@ -1,34 +1,19 @@
 "use strict";
 
-const YAML = require("yaml");
+const {
+  countRowsById,
+  parseRegistryRows: parseCommonRegistryRows,
+  parseYamlDocument,
+  scalar,
+  stringList,
+} = require("./capsule_registry_source_common");
 
 const FAILURE_REGISTRY_REF = "failure_samples/failure_registry.yaml";
 const FAILURE_CAPSULE_ROOT = "asset_archive/failure_samples";
 const DEFAULT_LONG_EDGE = 512;
 
 function parseRegistryRows(registryText) {
-  const document = YAML.parse(registryText);
-  const registry = document && document.failure_registry;
-  if (!registry || !Array.isArray(registry.failures)) return [];
-  return registry.failures.map((failure) => ({
-    failure_id: failure && failure.failure_id,
-    data: failure || {},
-    block: YAML.stringify(failure || {}).trim(),
-  }));
-}
-
-function scalar(row, field) {
-  const value = row && row.data ? row.data[field] : null;
-  if (value === null || value === undefined) return null;
-  if (typeof value === "string") return value;
-  if (typeof value === "number" || typeof value === "boolean") return String(value);
-  return null;
-}
-
-function stringList(row, field) {
-  const value = row && row.data ? row.data[field] : null;
-  if (!Array.isArray(value)) return [];
-  return value.filter((item) => typeof item === "string");
+  return parseCommonRegistryRows(registryText, "failure_registry", "failures", "failure_id");
 }
 
 function loadFailureSampleFromRegistry(reader, sampleId, options = {}) {
@@ -40,13 +25,13 @@ function loadFailureSampleFromRegistry(reader, sampleId, options = {}) {
   if (!reader.exists(registryRef)) throw new Error(`failure sample registry missing: ${registryRef}`);
 
   const registryText = reader.readText(registryRef);
-  const document = YAML.parse(registryText);
+  const document = parseYamlDocument(registryText);
   const registry = document && document.failure_registry;
   const rows = parseRegistryRows(registryText);
   const row = rows.find((item) => item.failure_id === sampleId);
   if (!row) throw new Error(`failure sample not found in registry: ${sampleId}`);
 
-  const duplicateCount = rows.filter((item) => item.failure_id === sampleId).length;
+  const duplicateCount = countRowsById(rows, "failure_id", sampleId);
   if (duplicateCount > 1) throw new Error(`duplicate failure_id in failure registry: ${sampleId}`);
 
   const sample = {
