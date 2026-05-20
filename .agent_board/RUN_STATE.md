@@ -16339,7 +16339,7 @@ recommended_next: guarded_commit_and_push_this_docs_gate_if_validation_and_prefl
 
 ```text
 phase: capsule_validator_code_debt_route_control_checkpoint
-status: completed_validated
+status: completed_committed_pushed
 mode: A4.8 docs-only / route-control checkpoint
 objective: keep the validator/code-debt convergence route on capsule product core after the docs-first plan and authorization gate were committed and pushed
 checkpoint_ref: docs/CAPSULE_VALIDATOR_CODE_DEBT_ROUTE_CONTROL_CHECKPOINT.md
@@ -16367,4 +16367,34 @@ tag_release_deploy_performed: false
 validated_now: git diff --check; node scripts/validate_agent_board_state.js; pwsh -NoProfile -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
 validate_agent_image_lab_local_result: passed_with_manual_review_warnings
 recommended_next: stop_or_explicitly_authorize_capsule_mvp_validator_slice_code_refactor
+```
+
+## Current Capsule Productization Goal
+
+```text
+phase: capsule_mvp_validator_slice_code_refactor
+status: completed_validated
+mode: A4.8 local implementation / validator refactor
+objective: reduce validate_mvp.ps1 review friction by moving capsule product-core checks into a focused helper without changing validator semantics
+changed_code: scripts/validate_mvp.ps1; scripts/validate_mvp_capsule_product_core.ps1
+top_level_orchestrator_preserved: true
+runs_stewardship_validators_left_in_top_level: true
+validate_mvp_ps1_result: passed
+full_local_validation_result: passed_with_manual_review_warnings
+code_refactor_performed: true
+actual_runs_scan_performed: false
+image_binary_read_performed: false
+hash_extraction_performed: false
+dimensions_extraction_performed: false
+preview_generation_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+dependency_change_performed: false
+runtime_browser_execution_performed: false
+tag_release_deploy_performed: false
+recommended_next: guarded_commit_and_push_if_preflight_clean
 ```

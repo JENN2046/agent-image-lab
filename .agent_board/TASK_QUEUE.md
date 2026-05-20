@@ -11758,8 +11758,17 @@ recommended_next: runs_restore_verification_authorization_package_draft_commit_r
       Allowed files: docs/CAPSULE_VALIDATOR_CODE_DEBT_ROUTE_CONTROL_CHECKPOINT.md; .agent_board/CHECKPOINT.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md.
       Forbidden files/actions: scripts/validate_mvp.ps1; scripts/validate_mvp_capsule_product_core.ps1; scripts/**/*.js; schemas/**; review_console/**; runs/**; asset_archive/**; package.json; package-lock.json; actual runs scan; image binary reads; hash/dimensions extraction; preview generation; provider/plugin/API; DailyNote/VCP memory; runtime/browser; production candidate; tag/release/deploy; git add .
       Validation: git diff --check passed; validate_agent_board_state passed; validate-agent-image-lab-local passed with manual-review warnings.
-      Result: completed_validated.
+      Result: completed_committed_pushed as cf954c8.
       Stop condition: validation failure, out-of-scope file, or any pressure to enter code refactor without explicit authorization.
+
+- [x] ID: capsule_mvp_validator_slice_code_refactor
+      Title: Extract capsule product-core checks from validate_mvp.ps1
+      Reason: user redirected away from docs accumulation and back to mainline validator/code-debt convergence.
+      Scope: local PowerShell refactor only; preserve validate_mvp.ps1 as top-level orchestrator and keep runs stewardship validators in the top-level script.
+      Changed files: scripts/validate_mvp.ps1; scripts/validate_mvp_capsule_product_core.ps1; .agent_board resume surfaces.
+      Validation: PowerShell parse checks passed; validate_mvp.ps1 passed; validate_agent_board_state passed; validate-agent-image-lab-local passed with manual-review warnings; git diff --check passed.
+      Result: completed_validated.
+      Stop condition: validation failure requiring non-mechanical semantics, out-of-scope file, dependency change, actual runs/image/runtime/A5 action.
 ```
 
 ## BHA / AGENTS v0.3.1 Selective Adaptation Plan
@@ -11830,11 +11839,26 @@ recommended_next: capsule_validator_code_debt_route_control_checkpoint
 ## Current Task - Capsule Validator Code Debt Route Control Checkpoint
 
 ```text
-status: completed_validated
+status: completed_committed_pushed
 mode: A4.8 docs-only / route-control checkpoint
 done: drafted docs/CAPSULE_VALIDATOR_CODE_DEBT_ROUTE_CONTROL_CHECKPOINT.md; corrected route state for the pushed authorization gate; kept code refactor blocked
-in_progress: commit_push_readiness
+in_progress: none
 blocked: actual code refactor remains blocked until separate explicit authorization
+remaining: none for this gate
+commit: cf954c8 docs: control capsule validator debt route
+push: completed to origin/master
+recommended_next: capsule_mvp_validator_slice_code_refactor
+```
+
+## Current Task - Capsule MVP Validator Slice Code Refactor
+
+```text
+status: completed_validated
+mode: A4.8 local implementation / validator refactor
+done: extracted capsule product-core checks into scripts/validate_mvp_capsule_product_core.ps1; updated scripts/validate_mvp.ps1 to dot-source and call helper; kept runs stewardship validators in top-level script; validate_mvp.ps1 passed
+in_progress: commit_push_readiness
+blocked: none
 remaining: exact-file guarded local commit, push preflight, push if clean
-recommended_next: stop_or_explicitly_authorize_capsule_mvp_validator_slice_code_refactor
+validation: PowerShell parse checks passed; validate_mvp.ps1 passed; validate_agent_board_state passed; validate-agent-image-lab-local passed with manual-review warnings; git diff --check passed
+recommended_next: guarded_commit_and_push_if_preflight_clean
 ```

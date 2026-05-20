@@ -24567,7 +24567,7 @@ recommended_next: guarded_commit_and_push_this_docs_gate_if_validation_and_prefl
 
 ```text
 phase: capsule_validator_code_debt_route_control_checkpoint
-status: completed_validated
+status: completed_committed_pushed
 mode: A4.8 docs-only / route-control checkpoint
 completed:
 - drafted docs/CAPSULE_VALIDATOR_CODE_DEBT_ROUTE_CONTROL_CHECKPOINT.md
@@ -24596,4 +24596,40 @@ hard_stop_flags:
   production_candidate_write_performed: false
   dependency_change_performed: false
 recommended_next: stop_or_explicitly_authorize_capsule_mvp_validator_slice_code_refactor
+```
+
+## Checkpoint - Capsule MVP Validator Slice Code Refactor
+
+```text
+phase: capsule_mvp_validator_slice_code_refactor
+status: completed_validated
+mode: A4.8 local implementation / validator refactor
+completed:
+- created scripts/validate_mvp_capsule_product_core.ps1
+- moved capsule product-core validator calls and assertions into Invoke-CapsuleProductCoreValidation
+- updated scripts/validate_mvp.ps1 to dot-source the helper and call PreRuns/PostRuns sections
+- kept runs backup/restore dry-run schema validators in scripts/validate_mvp.ps1
+- preserved scripts/validate_mvp.ps1 as top-level orchestrator
+validation_completed:
+- PowerShell parse check for scripts/validate_mvp.ps1
+- PowerShell parse check for scripts/validate_mvp_capsule_product_core.ps1
+- scripts/validate_mvp.ps1 passed
+- git diff --check
+- node scripts/validate_agent_board_state.js
+- scripts/validate-agent-image-lab-local.ps1 passed_with_manual_review_warnings
+hard_stop_flags:
+  actual_runs_scan_performed: false
+  image_binary_read_performed: false
+  hash_extraction_performed: false
+  dimensions_extraction_performed: false
+  preview_generation_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  dependency_change_performed: false
+  runtime_browser_execution_performed: false
+recommended_next: guarded_commit_and_push_if_preflight_clean
 ```

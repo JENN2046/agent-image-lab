@@ -14275,7 +14275,7 @@ recommended_next: guarded_commit_and_push_this_docs_gate_if_validation_and_prefl
 
 ```text
 phase: capsule_validator_code_debt_route_control_checkpoint
-status: completed_validated
+status: completed_committed_pushed
 mode: A4.8 docs-only / route-control checkpoint
 summary: Correct route state after the validator slice authorization gate was committed and pushed, and keep the next move constrained to the explicit code-refactor authorization package.
 checkpoint_ref: docs/CAPSULE_VALIDATOR_CODE_DEBT_ROUTE_CONTROL_CHECKPOINT.md
@@ -14296,4 +14296,31 @@ tag_release_deploy_performed: false
 recommended_next: capsule_mvp_validator_slice_code_refactor_blocked_until_explicit_authorization
 validated_now: git diff --check; node scripts/validate_agent_board_state.js; pwsh -NoProfile -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
 validate_agent_image_lab_local_result: passed_with_manual_review_warnings
+```
+
+## Current Handoff Update - Capsule MVP Validator Slice Code Refactor
+
+```text
+phase: capsule_mvp_validator_slice_code_refactor
+status: completed_validated
+mode: A4.8 local implementation / validator refactor
+summary: Extracted the capsule product-core validation cluster from scripts/validate_mvp.ps1 into scripts/validate_mvp_capsule_product_core.ps1 while preserving validate_mvp.ps1 as top-level orchestrator.
+changed_code: scripts/validate_mvp.ps1; scripts/validate_mvp_capsule_product_core.ps1
+top_level_orchestrator_preserved: true
+helper_function: Invoke-CapsuleProductCoreValidation
+runs_stewardship_validators_left_in_validate_mvp: true
+validate_mvp_ps1_result: passed
+full_local_validation_result: passed_with_manual_review_warnings
+code_refactor_performed: true
+actual_runs_scan_performed: false
+image_binary_read_performed: false
+hash_or_dimensions_extraction_performed: false
+preview_generation_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+dependency_change_performed: false
+production_candidate_performed: false
+runtime_browser_execution_performed: false
+tag_release_deploy_performed: false
+recommended_next: guarded_commit_and_push_if_preflight_clean
 ```
