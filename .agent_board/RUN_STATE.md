@@ -16362,6 +16362,37 @@ recommended_next: governance_matrix_commit_readiness_or_manual_review_gate
 ```
 ---
 
+## Current Capsule Productization Goal - Runs Asset Verification And Archive Dry Run
+
+```text
+phase: runs_asset_verification_and_archive_dry_run_gate
+status: completed_validated
+mode: A5 asset verification evidence + A4.8 dry-run archive mapping
+objective: close the 14-image hash/dim verification line, wire validators into MVP, and prepare archive/production/memory next gates without copying assets or writing production/memory
+asset_report_ref: reports/runs_asset_verification/2026-05-20_hash_dimensions_report.json
+asset_validator_ref: scripts/validate_runs_asset_verification_report.js
+archive_dry_run_manifest_ref: reports/full_asset_archive_dry_run_manifest/2026-05-20_full_asset_archive_dry_run_manifest.json
+archive_dry_run_validator_ref: scripts/validate_full_asset_archive_dry_run_manifest.js
+closeout_ref: docs/RUNS_ASSET_VERIFICATION_CLOSEOUT.md
+verified_image_count: 14
+asset_verification_image_binary_read_performed: true
+asset_verification_hash_extraction_performed: true
+asset_verification_dimensions_extraction_performed: true
+dry_run_archive_image_binary_read_performed: false
+dry_run_archive_hash_extraction_performed: false
+dry_run_archive_dimensions_extraction_performed: false
+runs_mutation_performed: false
+preview_generation_performed: false
+archive_copy_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+production_candidate_performed: false
+validated_now: node --check changed JS; node asset verification validator; node full asset archive dry-run validator; git diff --check; node scripts/validate_agent_board_state.js; powershell scripts/validate_mvp.ps1; powershell scripts/validate-agent-image-lab-local.ps1
+recommended_next: exact_file_commit_push_if_user_authorizes_otherwise_stop_before_durable_archive_copy_A5
+```
+
+---
+
 ## Current Capsule Productization Goal
 
 ```text

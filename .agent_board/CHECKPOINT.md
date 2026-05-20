@@ -1,6 +1,40 @@
 
 ---
 
+## Checkpoint - Runs Asset Verification And Archive Dry Run
+
+```text
+phase: runs_asset_verification_and_archive_dry_run_gate
+status: completed_validated
+completed:
+- documented completed 14-image A5 hash/dim verification in docs/RUNS_RESTORE_VERIFICATION_AUTHORIZATION_PACKAGE_DRAFT.md
+- added docs/RUNS_ASSET_VERIFICATION_CLOSEOUT.md with boundary and next authorization packages
+- generated reports/full_asset_archive_dry_run_manifest/2026-05-20_full_asset_archive_dry_run_manifest.json from the verified asset report
+- added scripts/validate_full_asset_archive_dry_run_manifest.js
+- wired scripts/validate_runs_asset_verification_report.js and scripts/validate_full_asset_archive_dry_run_manifest.js into scripts/validate_mvp.ps1
+validation_completed:
+- node --check changed JS
+- node scripts/validate_runs_asset_verification_report.js reports/runs_asset_verification/2026-05-20_hash_dimensions_report.json
+- node scripts/validate_full_asset_archive_dry_run_manifest.js
+- git diff --check
+- node scripts/validate_agent_board_state.js
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+- powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+hard_stop_flags:
+  dry_run_archive_image_binary_read_performed: false
+  dry_run_archive_hash_extraction_performed: false
+  dry_run_archive_dimensions_extraction_performed: false
+  runs_mutation_performed: false
+  preview_generation_performed: false
+  archive_copy_performed: false
+  provider_plugin_api_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  production_candidate_performed: false
+next_safe_action: exact-file commit/push only if user authorizes; stop before durable archive copy or production/memory A5 execution.
+```
+
+---
+
 ## Current Capsule Productization Goal
 
 ```text

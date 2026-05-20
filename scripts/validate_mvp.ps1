@@ -11729,6 +11729,45 @@ process.exit(child.status || 0);
       Add-Failure "Runs restore report dry-run schema must not perform runs scan/mutation, image binary read, hash/dimensions extraction, preview, cloud, provider/API, memory, or production actions"
     }
   }
+  $runsAssetVerificationReportOutput = & node (Join-Path $Root 'scripts/validate_runs_asset_verification_report.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Runs asset verification report validation exited with failure"
+  } else {
+    $runsAssetVerificationReport = ($runsAssetVerificationReportOutput -join "`n") | ConvertFrom-Json
+    if ($runsAssetVerificationReport.passed -ne $true -or $runsAssetVerificationReport.status -ne 'runs_asset_verification_report_verified') {
+      Add-Failure "Runs asset verification report must pass"
+    }
+    if ($runsAssetVerificationReport.exact_allowed_path_count -ne 14 -or $runsAssetVerificationReport.verified_file_count -ne 14 -or $runsAssetVerificationReport.failed_count -ne 0) {
+      Add-Failure "Runs asset verification report must preserve the verified 14-image result set"
+    }
+    if ($runsAssetVerificationReport.image_binary_read_performed -ne $true -or $runsAssetVerificationReport.hash_extraction_performed -ne $true -or $runsAssetVerificationReport.dimensions_extraction_performed -ne $true) {
+      Add-Failure "Runs asset verification report must record the authorized A5 image binary, hash, and dimensions verification"
+    }
+    if ($runsAssetVerificationReport.preview_generation_performed -ne $false -or $runsAssetVerificationReport.runs_mutation_performed -ne $false -or $runsAssetVerificationReport.provider_contact_performed -ne $false -or $runsAssetVerificationReport.plugin_call_performed -ne $false -or $runsAssetVerificationReport.api_call_performed -ne $false -or $runsAssetVerificationReport.DailyNote_write_performed -ne $false -or $runsAssetVerificationReport.VCP_memory_write_performed -ne $false -or $runsAssetVerificationReport.production_candidate_write_performed -ne $false) {
+      Add-Failure "Runs asset verification report must not perform preview generation, runs mutation, provider/API, memory, or production actions"
+    }
+  }
+  $fullAssetArchiveDryRunManifestOutput = & node (Join-Path $Root 'scripts/validate_full_asset_archive_dry_run_manifest.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Full asset archive dry-run manifest validation exited with failure"
+  } else {
+    $fullAssetArchiveDryRunManifest = ($fullAssetArchiveDryRunManifestOutput -join "`n") | ConvertFrom-Json
+    if ($fullAssetArchiveDryRunManifest.passed -ne $true -or $fullAssetArchiveDryRunManifest.status -ne 'full_asset_archive_dry_run_manifest_verified') {
+      Add-Failure "Full asset archive dry-run manifest must pass"
+    }
+    if ($fullAssetArchiveDryRunManifest.asset_count -ne 14 -or $fullAssetArchiveDryRunManifest.dry_run_only -ne $true) {
+      Add-Failure "Full asset archive dry-run manifest must preserve the 14-image dry-run mapping"
+    }
+    if ($fullAssetArchiveDryRunManifest.dry_run_image_binary_read_performed -ne $false -or $fullAssetArchiveDryRunManifest.dry_run_hash_extraction_performed -ne $false -or $fullAssetArchiveDryRunManifest.dry_run_dimensions_extraction_performed -ne $false) {
+      Add-Failure "Full asset archive dry-run manifest must not read image binaries or extract hash/dimensions during the dry run"
+    }
+    if ($fullAssetArchiveDryRunManifest.archive_copy_performed -ne $false -or $fullAssetArchiveDryRunManifest.runs_mutation_performed -ne $false -or $fullAssetArchiveDryRunManifest.preview_generation_performed -ne $false -or $fullAssetArchiveDryRunManifest.provider_contact_performed -ne $false -or $fullAssetArchiveDryRunManifest.plugin_call_performed -ne $false -or $fullAssetArchiveDryRunManifest.api_call_performed -ne $false -or $fullAssetArchiveDryRunManifest.DailyNote_write_performed -ne $false -or $fullAssetArchiveDryRunManifest.VCP_memory_write_performed -ne $false -or $fullAssetArchiveDryRunManifest.production_candidate_write_performed -ne $false) {
+      Add-Failure "Full asset archive dry-run manifest must not copy/archive assets, mutate runs, preview-generate, call provider/API, write memory, or write production candidate"
+    }
+    if ($fullAssetArchiveDryRunManifest.negative_case_missing_hash_fails -ne $true -or $fullAssetArchiveDryRunManifest.negative_case_missing_dimensions_fails -ne $true -or $fullAssetArchiveDryRunManifest.negative_case_path_escape_fails -ne $true -or $fullAssetArchiveDryRunManifest.negative_case_mime_mismatch_fails -ne $true) {
+      Add-Failure "Full asset archive dry-run manifest must fail missing hash, missing dimensions, path escape, and MIME mismatch cases"
+    }
+  }
   Invoke-CapsuleProductCoreValidation -Root $Root -AddFailure $capsuleProductCoreAddFailure -Section PostRuns
   [Console]::OutputEncoding = $prevOutputEncoding
 }

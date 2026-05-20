@@ -1,6 +1,27 @@
 
 ---
 
+## Current Handoff Update - Runs Asset Verification And Archive Dry Run
+
+```text
+phase: runs_asset_verification_and_archive_dry_run_gate
+status: completed_validated
+mode: A5 asset verification evidence + A4.8 dry-run archive mapping
+summary: Closed the 14-image runs hash/dimensions verification line, documented it in the authorization draft and closeout, wired its static validator plus the full asset archive dry-run validator into scripts/validate_mvp.ps1, and generated a proposed source-to-archive target mapping without copying assets.
+asset_report_ref: reports/runs_asset_verification/2026-05-20_hash_dimensions_report.json
+asset_validator_ref: scripts/validate_runs_asset_verification_report.js
+archive_dry_run_manifest_ref: reports/full_asset_archive_dry_run_manifest/2026-05-20_full_asset_archive_dry_run_manifest.json
+archive_dry_run_validator_ref: scripts/validate_full_asset_archive_dry_run_manifest.js
+closeout_ref: docs/RUNS_ASSET_VERIFICATION_CLOSEOUT.md
+verified_image_count: 14
+not_performed: no runs mutation, no preview generation, no archive copy, no provider/plugin/API, no DailyNote/VCP memory, no production candidate.
+blocked_next: durable archive copy requires a separate active A5 package; production candidate write and VCP memory write remain blocked behind later explicit authorization.
+validated_now: node --check changed JS; node asset verification validator; node full asset archive dry-run validator; git diff --check; node scripts/validate_agent_board_state.js; powershell scripts/validate_mvp.ps1; powershell scripts/validate-agent-image-lab-local.ps1.
+recommended_next: exact-file commit/push only if user authorizes; otherwise stop before durable archive copy A5.
+```
+
+---
+
 ## Current Capsule Productization Goal
 
 ```text

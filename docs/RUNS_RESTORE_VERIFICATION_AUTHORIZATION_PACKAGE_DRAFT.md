@@ -124,6 +124,51 @@ runs_restore_path_existence_verification_A5:
 
 Any future rerun must explicitly keep image/hash/dimension/preview/runs-mutation permissions false unless a separate A5 package widens those permissions.
 
+## Current A5 hash/dimensions verification package
+
+This package was activated after the path-existence scan produced a bounded 14-image exact path list.
+
+```yaml
+asset_hash_dimensions_verification_A5:
+  authorization_state: completed_validated
+  source_report: reports/runs_path_existence_verification/20260520T092525Z_runs_path_existence_scan_report.json
+  exact_allowed_paths_source: source_report.exact_target_results where existing=true and extension in [.png, .jpg, .jpeg, .webp]
+  exact_allowed_path_count: 14
+  max_file_count: 14
+  output_report_path: reports/runs_asset_verification/2026-05-20_hash_dimensions_report.json
+  validator_ref: scripts/validate_runs_asset_verification_report.js
+  commit: ed00da4
+  reviewer: Jenn
+  allowed_operations_completed:
+    - image_binary_read
+    - sha256_hash_extraction
+    - image_dimensions_extraction
+    - image_format_and_mime_identification
+  latest_execution_result:
+    verified_file_count: 14
+    failed_count: 0
+    image_binary_read_performed: true
+    hash_extraction_performed: true
+    dimensions_extraction_performed: true
+    preview_generation_performed: false
+    runs_mutation_performed: false
+    copy_move_delete_performed: false
+    provider_contact_performed: false
+    plugin_call_performed: false
+    api_call_performed: false
+    DailyNote_write_performed: false
+    VCP_memory_write_performed: false
+    production_candidate_write_performed: false
+  validation:
+    - node scripts/validate_runs_asset_verification_report.js reports/runs_asset_verification/2026-05-20_hash_dimensions_report.json
+    - git diff --check
+    - node scripts/validate_agent_board_state.js
+    - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+    - powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+```
+
+Follow-up archive work must use the report above as evidence. It must not reread source image binaries, recalculate hash/dimensions, copy originals, mutate `runs/`, or write production candidates unless a later package explicitly authorizes that exact action.
+
 ## Draft authorization package
 
 ```yaml

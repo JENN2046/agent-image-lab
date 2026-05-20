@@ -1,6 +1,27 @@
 
 ---
 
+## Current Task - Runs Asset Verification And Archive Dry Run
+
+```text
+status: completed_validated
+mode: A5 asset verification evidence + A4.8 dry-run archive mapping
+done: updated runs restore authorization draft; added asset verification closeout; generated full asset archive dry-run manifest; added dry-run archive validator; wired asset and archive validators into scripts/validate_mvp.ps1
+in_progress: none
+blocked: durable archive copy, production candidate write, and DailyNote/VCP memory write require later explicit authorization
+remaining: exact-file commit/push only if user authorizes; otherwise stop before durable archive copy A5
+asset_report_ref: reports/runs_asset_verification/2026-05-20_hash_dimensions_report.json
+archive_dry_run_manifest_ref: reports/full_asset_archive_dry_run_manifest/2026-05-20_full_asset_archive_dry_run_manifest.json
+verified_image_count: 14
+runs_mutation_performed: false
+preview_generation_performed: false
+archive_copy_performed: false
+production_candidate_performed: false
+recommended_next: durable_archive_copy_A5_authorization_package_only_after_validation
+```
+
+---
+
 ## Current Capsule Productization Goal
 
 ```text
