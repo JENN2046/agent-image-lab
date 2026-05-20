@@ -61,12 +61,27 @@ function Invoke-CapsuleProductCoreValidation {
     }
   }
 
+  function Test-CapsuleExpectedStatus {
+    param(
+      [Parameter(Mandatory = $true)]
+      [object]$Report,
+
+      [Parameter(Mandatory = $true)]
+      [string]$ExpectedStatus,
+
+      [Parameter(Mandatory = $true)]
+      [string]$FailureMessage
+    )
+
+    if ($Report.passed -ne $true -or $Report.status -ne $ExpectedStatus) {
+      & $AddFailure $FailureMessage
+    }
+  }
+
   if ($Section -eq 'PreRuns' -or $Section -eq 'All') {
   $capsuleStatusTaxonomy = Invoke-CapsuleNodeJsonValidator 'scripts/validate_capsule_status_taxonomy.js' "Capsule status taxonomy validation exited with failure"
   if ($null -ne $capsuleStatusTaxonomy) {
-    if ($capsuleStatusTaxonomy.passed -ne $true -or $capsuleStatusTaxonomy.status -ne 'capsule_status_taxonomy_verified') {
-      & $AddFailure "Capsule status taxonomy validation must pass"
-    }
+    Test-CapsuleExpectedStatus $capsuleStatusTaxonomy 'capsule_status_taxonomy_verified' "Capsule status taxonomy validation must pass"
     if ($capsuleStatusTaxonomy.taxonomy_shared_by_registry_validators -ne $true -or $capsuleStatusTaxonomy.writes_performed -ne $false -or $capsuleStatusTaxonomy.preview_creation_or_copy_performed -ne $false) {
       & $AddFailure "Capsule status taxonomy validation must prove shared registry validator taxonomy without writes or preview creation/copy"
     }
@@ -75,9 +90,7 @@ function Invoke-CapsuleProductCoreValidation {
 
   $capsuleManifestContractNegative = Invoke-CapsuleNodeJsonValidator 'scripts/validate_capsule_manifest_contract_negative_cases.js' "Capsule manifest contract negative-case validation exited with failure"
   if ($null -ne $capsuleManifestContractNegative) {
-    if ($capsuleManifestContractNegative.passed -ne $true -or $capsuleManifestContractNegative.status -ne 'capsule_manifest_contract_negative_cases_verified') {
-      & $AddFailure "Capsule manifest contract negative-case validation must pass"
-    }
+    Test-CapsuleExpectedStatus $capsuleManifestContractNegative 'capsule_manifest_contract_negative_cases_verified' "Capsule manifest contract negative-case validation must pass"
     if ($capsuleManifestContractNegative.fixture_count -lt 4 -or $capsuleManifestContractNegative.failed_count -ne 0) {
       & $AddFailure "Capsule manifest contract negative-case validation must keep fail-closed coverage"
     }
@@ -89,9 +102,7 @@ function Invoke-CapsuleProductCoreValidation {
 
   $capsuleCreatorCommonSafety = Invoke-CapsuleNodeJsonValidator 'scripts/validate_capsule_creator_common_safety.js' "Capsule creator common safety validation exited with failure"
   if ($null -ne $capsuleCreatorCommonSafety) {
-    if ($capsuleCreatorCommonSafety.passed -ne $true -or $capsuleCreatorCommonSafety.status -ne 'capsule_creator_common_safety_verified') {
-      & $AddFailure "Capsule creator common safety validation must pass"
-    }
+    Test-CapsuleExpectedStatus $capsuleCreatorCommonSafety 'capsule_creator_common_safety_verified' "Capsule creator common safety validation must pass"
     if ($capsuleCreatorCommonSafety.duplicated_creator_safety_logic_reduced -ne $true -or $capsuleCreatorCommonSafety.writes_performed -ne $false -or $capsuleCreatorCommonSafety.preview_creation_or_copy_performed -ne $false) {
       & $AddFailure "Capsule creator common safety validation must reduce duplication without writes or preview creation/copy"
     }
@@ -100,9 +111,7 @@ function Invoke-CapsuleProductCoreValidation {
 
   $capsuleCreatorManifestContractRegression = Invoke-CapsuleNodeJsonValidator 'scripts/validate_capsule_creator_manifest_contract_regression.js' "Capsule creator manifest contract regression validation exited with failure"
   if ($null -ne $capsuleCreatorManifestContractRegression) {
-    if ($capsuleCreatorManifestContractRegression.passed -ne $true -or $capsuleCreatorManifestContractRegression.status -ne 'capsule_creator_manifest_contract_regression_verified') {
-      & $AddFailure "Capsule creator manifest contract regression validation must pass"
-    }
+    Test-CapsuleExpectedStatus $capsuleCreatorManifestContractRegression 'capsule_creator_manifest_contract_regression_verified' "Capsule creator manifest contract regression validation must pass"
     if ($capsuleCreatorManifestContractRegression.static_validator_only -ne $true -or $capsuleCreatorManifestContractRegression.real_capsule_created -ne $false -or $capsuleCreatorManifestContractRegression.preview_creation_or_copy_performed -ne $false) {
       & $AddFailure "Capsule creator manifest contract regression must stay static-only without capsule creation or preview creation/copy"
     }
@@ -142,7 +151,8 @@ function Invoke-CapsuleProductCoreValidation {
     & $AddFailure "Preview capsule registry validation exited with failure"
   } else {
     $previewCapsuleRegistry = ($previewCapsuleRegistryOutput -join "`n") | ConvertFrom-Json
-    if ($previewCapsuleRegistry.passed -ne $true -or $previewCapsuleRegistry.status -ne 'registry_driven_preview_capsules_verified' -or $previewCapsuleRegistry.report_version -ne 'v2') {
+    Test-CapsuleExpectedStatus $previewCapsuleRegistry 'registry_driven_preview_capsules_verified' "Preview capsule registry validation must pass"
+    if ($previewCapsuleRegistry.report_version -ne 'v2') {
       & $AddFailure "Preview capsule registry validation must pass"
     }
     if ($previewCapsuleRegistry.sample_count -lt 1 -or $previewCapsuleRegistry.total_samples -lt 1 -or $previewCapsuleRegistry.failed_count -ne 0) {
@@ -164,9 +174,7 @@ function Invoke-CapsuleProductCoreValidation {
     & $AddFailure "Preview capsule registry negative-case validation exited with failure"
   } else {
     $previewCapsuleNegative = ($previewCapsuleNegativeOutput -join "`n") | ConvertFrom-Json
-    if ($previewCapsuleNegative.passed -ne $true -or $previewCapsuleNegative.status -ne 'registry_preview_capsule_negative_cases_verified') {
-      & $AddFailure "Preview capsule registry negative-case validation must pass"
-    }
+    Test-CapsuleExpectedStatus $previewCapsuleNegative 'registry_preview_capsule_negative_cases_verified' "Preview capsule registry negative-case validation must pass"
     if ($previewCapsuleNegative.failed_count -ne 0 -or $previewCapsuleNegative.check_count -lt 10) {
       & $AddFailure "Preview capsule registry negative-case validation must include passing fail-closed checks"
     }
@@ -183,7 +191,8 @@ function Invoke-CapsuleProductCoreValidation {
     & $AddFailure "Failure sample capsule registry validation exited with failure"
   } else {
     $failureSampleCapsuleRegistry = ($failureSampleCapsuleRegistryOutput -join "`n") | ConvertFrom-Json
-    if ($failureSampleCapsuleRegistry.passed -ne $true -or $failureSampleCapsuleRegistry.status -ne 'failure_sample_capsules_verified' -or $failureSampleCapsuleRegistry.report_version -ne 'v1') {
+    Test-CapsuleExpectedStatus $failureSampleCapsuleRegistry 'failure_sample_capsules_verified' "Failure sample capsule registry validation must pass in zero-sample-safe mode"
+    if ($failureSampleCapsuleRegistry.report_version -ne 'v1') {
       & $AddFailure "Failure sample capsule registry validation must pass in zero-sample-safe mode"
     }
     if ($failureSampleCapsuleRegistry.root -ne 'asset_archive/failure_samples' -or $failureSampleCapsuleRegistry.sample_count -lt 1 -or $failureSampleCapsuleRegistry.failed_count -ne 0) {
@@ -202,9 +211,7 @@ function Invoke-CapsuleProductCoreValidation {
     & $AddFailure "Failure sample capsule registry negative-case validation exited with failure"
   } else {
     $failureSampleCapsuleNegative = ($failureSampleCapsuleNegativeOutput -join "`n") | ConvertFrom-Json
-    if ($failureSampleCapsuleNegative.passed -ne $true -or $failureSampleCapsuleNegative.status -ne 'failure_sample_capsule_negative_cases_verified') {
-      & $AddFailure "Failure sample capsule registry negative-case validation must pass"
-    }
+    Test-CapsuleExpectedStatus $failureSampleCapsuleNegative 'failure_sample_capsule_negative_cases_verified' "Failure sample capsule registry negative-case validation must pass"
     if ($failureSampleCapsuleNegative.failed_count -ne 0 -or $failureSampleCapsuleNegative.check_count -lt 10) {
       & $AddFailure "Failure sample capsule registry negative-case validation must include passing fail-closed checks"
     }

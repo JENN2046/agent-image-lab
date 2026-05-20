@@ -16590,7 +16590,7 @@ recommended_next: guarded_commit_and_push_if_preflight_clean
 
 ```text
 phase: capsule_creator_contract_regression_gate
-status: completed_targeted_validated
+status: completed_validated
 mode: A4.8 autonomous batch train / local implementation
 objective: keep accepted and failure capsule creator manifest output aligned with capsule_manifest_contract without creating real capsules
 changed_code: scripts/lib/capsule_manifest_contract.js; scripts/create_failure_sample_capsule.js; scripts/validate_capsule_creator_manifest_contract_regression.js; scripts/validate_mvp_capsule_product_core.ps1
@@ -16609,5 +16609,28 @@ production_candidate_performed: false
 dependency_change_performed: false
 validate_mvp_result: passed
 validate_agent_image_lab_local_result: passed_with_warnings_ok_for_manual_review
+validate_agent_image_lab_local_result: passed_with_warnings_ok_for_manual_review
+recommended_next: guarded_commit_and_push
+```
+
+## Current Capsule Productization Goal
+
+```text
+phase: capsule_product_core_helper_dedup_gate
+status: completed_targeted_validated
+mode: A4.8 autonomous batch train / local refactor
+objective: reduce repeated capsule product-core helper assertions without changing validator semantics
+changed_code: scripts/validate_mvp_capsule_product_core.ps1
+helper_added: Test-CapsuleExpectedStatus
+validator_order_preserved: true
+failure_messages_preserved: true
+validate_mvp_result: passed
+real_capsule_created: false
+preview_generation_performed: false
+runs_source_image_binary_read_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+production_candidate_performed: false
+dependency_change_performed: false
 recommended_next: guarded_commit_and_push
 ```

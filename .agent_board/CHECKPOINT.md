@@ -24901,7 +24901,7 @@ recommended_next: guarded_commit_and_push_if_preflight_clean
 
 ```text
 phase: capsule_creator_contract_regression_gate
-status: completed_targeted_validated
+status: completed_validated
 mode: A4.8 autonomous batch train / local implementation
 completed:
 - exported canonical creator/manifest contract field arrays from scripts/lib/capsule_manifest_contract.js
@@ -24926,6 +24926,39 @@ hard_stop_flags:
   real_capsule_created: false
   preview_generation_performed: false
   preview_creation_or_copy_performed: false
+  runs_source_image_binary_read_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  dependency_change_performed: false
+validate_mvp_result: passed
+validate_agent_image_lab_local_result: passed_with_warnings_ok_for_manual_review
+recommended_next: guarded_commit_and_push
+```
+
+## Checkpoint - Capsule Product Core Helper Dedup
+
+```text
+phase: capsule_product_core_helper_dedup_gate
+status: completed_targeted_validated
+mode: A4.8 autonomous batch train / local refactor
+completed:
+- added Test-CapsuleExpectedStatus to scripts/validate_mvp_capsule_product_core.ps1
+- replaced repeated passed/status assertions in the first capsule product-core validator cluster
+- preserved validator execution order
+- preserved existing Add-Failure message text
+validation_completed:
+- PowerShell parser check for scripts\validate_mvp_capsule_product_core.ps1
+- powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+- git diff --check
+- node scripts\validate_agent_board_state.js
+- powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+hard_stop_flags:
+  real_capsule_created: false
+  preview_generation_performed: false
   runs_source_image_binary_read_performed: false
   provider_contact_performed: false
   plugin_call_performed: false
