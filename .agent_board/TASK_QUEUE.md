@@ -11683,6 +11683,30 @@ production_candidate_write_performed: false
 recommended_next: runs_restore_verification_authorization_package_draft_commit_readiness_gate
 ```
 
+## Runs Restore Verification Authorization Package Closeout
+
+```text
+- [x] ID: runs_restore_verification_authorization_package_closeout_gate
+      Title: Runs restore verification authorization package closeout
+      Reason: user requested a docs-light closeout summarizing the sealed draft package and deciding whether future real verification remains blocked.
+      Changed files: docs/RUNS_RESTORE_VERIFICATION_AUTHORIZATION_PACKAGE_CLOSEOUT.md; .agent_board resume surfaces.
+      Boundary: no actual runs scan; no image binary reads; no hash/dimensions extraction; no preview generation; no cloud-drive read/write; no provider/plugin/API; no DailyNote/VCP memory; no production candidate.
+      Decision: future real verification remains blocked until a later explicit authorization names real project-relative paths, read booleans, output report path, and reviewer.
+      Validation: git diff --check passed; validate_agent_board_state passed; validate-agent-image-lab-local passed with manual-review warnings; validate_mvp passed; exact changed-file set comparison passed.
+      Result: completed_validated.
+
+- [ ] ID: runs_restore_verification_closeout_commit_readiness_gate
+      Title: Runs restore verification closeout commit readiness
+      Reason: optional next step if the closeout validates and the user wants a local commit.
+      Scope: inspect exact changed files and prepare guarded local commit with the user-provided message.
+      Allowed files: docs/RUNS_RESTORE_VERIFICATION_AUTHORIZATION_PACKAGE_CLOSEOUT.md; .agent_board/CHECKPOINT.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md.
+      Forbidden files/actions: git add .; actual runs scan; image reads; hash/dimensions extraction; preview generation; cloud-drive read/write; provider/plugin/API; DailyNote/VCP memory; production candidate; push/tag/release/deploy.
+      Validation: exact diff review passed; authorization draft_not_active confirmed; future real verification blocked confirmed; no forbidden read/extraction/preview/cloud/provider/memory/production action performed.
+      Commit message: docs: close runs restore verification authorization draft.
+      Result: completed_pending_commit.
+      Stop condition: validation failure, out-of-scope file, or any need for real verification.
+```
+
 ## BHA / AGENTS v0.3.1 Selective Adaptation Plan
 
 ```text

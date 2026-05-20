@@ -24301,6 +24301,55 @@ production_candidate_write_performed: false
 recommended_next: runs_restore_verification_authorization_package_draft_commit_readiness_gate
 ```
 
+## Runs Restore Verification Authorization Package Closeout Checkpoint
+
+```yaml
+phase: runs_restore_verification_authorization_package_closeout_gate
+status: completed_validated
+completed:
+  - read sealed draft authorization package
+  - recorded exact fake project-relative paths
+  - recorded all read/extraction booleans remain false
+  - decided future real verification remains blocked
+changed:
+  - docs/RUNS_RESTORE_VERIFICATION_AUTHORIZATION_PACKAGE_CLOSEOUT.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/CHECKPOINT.md
+validated:
+  - git diff --check: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - scripts/validate-agent-image-lab-local.ps1: passed_with_manual_review_warnings
+  - scripts/validate_mvp.ps1: passed
+  - exact changed-file set comparison: passed
+not_validated: []
+risk: docs-light closeout; no filesystem read or A5 authority opened
+next: optionally prepare commit readiness
+```
+
+## Runs Restore Verification Closeout Commit Readiness Checkpoint
+
+```yaml
+phase: runs_restore_verification_closeout_commit_readiness_gate
+status: completed_pending_commit
+completed:
+  - reviewed exact diff
+  - confirmed only closeout doc and .agent_board resume surfaces changed
+  - confirmed authorization remains draft_not_active
+  - confirmed future real verification remains blocked
+  - confirmed no actual runs scan, image reads, hash/dimensions extraction, preview/cloud/provider/memory/production action
+allowed_files_exact:
+  - docs/RUNS_RESTORE_VERIFICATION_AUTHORIZATION_PACKAGE_CLOSEOUT.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+commit_message: "docs: close runs restore verification authorization draft"
+validated: pending final pre-commit checks
+next: exact-stage allowed files and create guarded local commit
+```
+
 ## BHA / AGENTS v0.3.1 Selective Adaptation Plan Checkpoint
 
 ```yaml

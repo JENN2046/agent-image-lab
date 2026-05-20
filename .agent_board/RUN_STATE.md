@@ -16027,6 +16027,84 @@ production_candidate_write_performed: false
 recommended_next: runs_restore_verification_authorization_package_draft_commit_readiness_gate
 ```
 
+## runs_restore_verification_authorization_package_closeout_gate
+
+```yaml
+phase: runs_restore_verification_authorization_package_closeout_gate
+status: completed_validated
+mode: A4.8 docs-light / no filesystem read
+closeout_ref: docs/RUNS_RESTORE_VERIFICATION_AUTHORIZATION_PACKAGE_CLOSEOUT.md
+source_draft: docs/RUNS_RESTORE_VERIFICATION_AUTHORIZATION_PACKAGE_DRAFT.md
+authorization_state: draft_not_active
+future_real_verification_status: blocked
+exact_fake_project_relative_paths_under_runs:
+  - runs/example_restored_batch_001/fake_user_reported_artifact_001.png
+  - runs/example_restored_batch_001/fake_user_reported_artifact_001.import_record.json
+path_existence_metadata_check_allowed: false
+directory_entry_listing_allowed: false
+json_text_read_allowed: false
+image_binary_read_allowed: false
+hash_extraction_allowed: false
+dimensions_extraction_allowed: false
+preview_generation_allowed: false
+cloud_drive_read_write_allowed: false
+actual_runs_scan_performed: false
+runs_mutation_performed: false
+image_binary_read_performed: false
+hash_extraction_performed: false
+dimensions_extraction_performed: false
+preview_generation_performed: false
+cloud_drive_read_performed: false
+cloud_drive_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+validation:
+  - git diff --check: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - scripts/validate-agent-image-lab-local.ps1: passed_with_manual_review_warnings
+  - scripts/validate_mvp.ps1: passed
+  - exact changed-file set comparison: passed
+recommended_next: runs_restore_verification_closeout_commit_readiness_gate
+```
+
+## runs_restore_verification_closeout_commit_readiness_gate
+
+```yaml
+phase: runs_restore_verification_closeout_commit_readiness_gate
+status: completed_pending_commit
+mode: A4.8 read-only / commit-readiness
+objective: exact-file diff review and guarded local commit
+commit_message: "docs: close runs restore verification authorization draft"
+allowed_files_exact:
+  - docs/RUNS_RESTORE_VERIFICATION_AUTHORIZATION_PACKAGE_CLOSEOUT.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+exact_file_diff_review: passed
+authorization_state_confirmed: draft_not_active
+future_real_verification_status_confirmed: blocked
+actual_runs_scan_performed: false
+runs_mutation_performed: false
+image_binary_read_performed: false
+hash_extraction_performed: false
+dimensions_extraction_performed: false
+preview_generation_performed: false
+cloud_drive_read_performed: false
+cloud_drive_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+push_tag_release_deploy_performed: false
+```
+
 ## bha_agents_v0_3_1_selective_adaptation_plan_gate
 
 ```yaml

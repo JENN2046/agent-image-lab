@@ -14013,6 +14013,60 @@ production_candidate_write_performed: false
 recommended_next: runs_restore_verification_authorization_package_draft_commit_readiness_gate
 ```
 
+## Runs Restore Verification Authorization Package Closeout Handoff
+
+```yaml
+phase: runs_restore_verification_authorization_package_closeout_gate
+status: completed_validated
+workspace: A:/agent-image-lab/agent-image-lab-v0.2
+branch: master
+closeout_ref: docs/RUNS_RESTORE_VERIFICATION_AUTHORIZATION_PACKAGE_CLOSEOUT.md
+source_draft: docs/RUNS_RESTORE_VERIFICATION_AUTHORIZATION_PACKAGE_DRAFT.md
+summary: >-
+  Summarized the sealed draft authorization package. The only listed runs/
+  paths are fake project-relative examples, every read/extraction boolean is
+  false, and future real verification remains blocked until a later explicit
+  authorization package opens exact real paths and read permissions.
+not_authorized:
+  - actual runs scan
+  - image binary reads
+  - hash/dimensions extraction
+  - preview generation
+  - cloud-drive read/write
+  - provider/plugin/API
+  - DailyNote/VCP memory
+  - production candidate
+validation:
+  - git diff --check: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - scripts/validate-agent-image-lab-local.ps1: passed_with_manual_review_warnings
+  - scripts/validate_mvp.ps1: passed
+  - exact changed-file set comparison: passed
+next_safe_action: optionally prepare commit readiness
+```
+
+## Runs Restore Verification Closeout Commit Readiness Handoff
+
+```yaml
+phase: runs_restore_verification_closeout_commit_readiness_gate
+status: completed_pending_commit
+workspace: A:/agent-image-lab/agent-image-lab-v0.2
+branch: master
+commit_message: "docs: close runs restore verification authorization draft"
+exact_file_diff_review: passed
+allowed_files_exact:
+  - docs/RUNS_RESTORE_VERIFICATION_AUTHORIZATION_PACKAGE_CLOSEOUT.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+authorization_state_confirmed: draft_not_active
+future_real_verification_status_confirmed: blocked
+forbidden_actions_performed: false
+push_tag_release_deploy_performed: false
+next_safe_action: exact-stage allowed files, commit locally, then validate from clean worktree
+```
+
 ## BHA / AGENTS v0.3.1 Selective Adaptation Plan Handoff
 
 ```yaml
