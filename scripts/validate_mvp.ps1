@@ -11768,6 +11768,24 @@ process.exit(child.status || 0);
       Add-Failure "Full asset archive dry-run manifest must fail missing hash, missing dimensions, path escape, and MIME mismatch cases"
     }
   }
+  $durableArchiveCopyAuthorizationOutput = & node (Join-Path $Root 'scripts/validate_durable_archive_copy_authorization_package.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Durable archive copy authorization package validation exited with failure"
+  } else {
+    $durableArchiveCopyAuthorization = ($durableArchiveCopyAuthorizationOutput -join "`n") | ConvertFrom-Json
+    if ($durableArchiveCopyAuthorization.passed -ne $true -or $durableArchiveCopyAuthorization.status -ne 'durable_archive_copy_authorization_package_verified') {
+      Add-Failure "Durable archive copy authorization package must pass"
+    }
+    if ($durableArchiveCopyAuthorization.authorization_state -ne 'draft_not_active' -or $durableArchiveCopyAuthorization.exact_copy_pair_count -ne 14 -or $durableArchiveCopyAuthorization.max_file_count -ne 14) {
+      Add-Failure "Durable archive copy authorization package must remain inactive with the exact 14-copy-pair scope"
+    }
+    if ($durableArchiveCopyAuthorization.durable_archive_copy_performed -ne $false -or $durableArchiveCopyAuthorization.runs_mutation_performed -ne $false -or $durableArchiveCopyAuthorization.preview_generation_performed -ne $false) {
+      Add-Failure "Durable archive copy authorization package must not perform copy, runs mutation, or preview generation"
+    }
+    if ($durableArchiveCopyAuthorization.provider_contact_performed -ne $false -or $durableArchiveCopyAuthorization.plugin_call_performed -ne $false -or $durableArchiveCopyAuthorization.api_call_performed -ne $false -or $durableArchiveCopyAuthorization.DailyNote_write_performed -ne $false -or $durableArchiveCopyAuthorization.VCP_memory_write_performed -ne $false -or $durableArchiveCopyAuthorization.production_candidate_write_performed -ne $false) {
+      Add-Failure "Durable archive copy authorization package must not perform provider/API, memory, or production actions"
+    }
+  }
   Invoke-CapsuleProductCoreValidation -Root $Root -AddFailure $capsuleProductCoreAddFailure -Section PostRuns
   [Console]::OutputEncoding = $prevOutputEncoding
 }

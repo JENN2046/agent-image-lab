@@ -16393,6 +16393,30 @@ recommended_next: exact_file_commit_push_if_user_authorizes_otherwise_stop_befor
 
 ---
 
+## Current Capsule Productization Goal - Durable Archive Copy A5 Authorization Package
+
+```text
+phase: durable_archive_copy_A5_authorization_package
+status: completed_validated
+mode: A4.8 authorization package / no copy execution
+objective: prepare exact-pair inactive A5 copy authorization from the full asset archive dry-run manifest without copying assets or mutating runs
+authorization_package_ref: reports/durable_archive_copy_authorization/2026-05-20_durable_archive_copy_A5_authorization_package.json
+validator_ref: scripts/validate_durable_archive_copy_authorization_package.js
+source_manifest_ref: reports/full_asset_archive_dry_run_manifest/2026-05-20_full_asset_archive_dry_run_manifest.json
+exact_copy_pair_count: 14
+authorization_state: draft_not_active
+durable_archive_copy_performed: false
+runs_mutation_performed: false
+preview_generation_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+production_candidate_performed: false
+validated_now: node --check scripts/validate_durable_archive_copy_authorization_package.js; node scripts/validate_durable_archive_copy_authorization_package.js; git diff --check; node scripts/validate_agent_board_state.js; powershell scripts/validate_mvp.ps1; powershell scripts/validate-agent-image-lab-local.ps1
+recommended_next: stop_before_real_durable_archive_copy_A5_or_prepare_production_candidate_preflight
+```
+
+---
+
 ## Current Capsule Productization Goal
 
 ```text

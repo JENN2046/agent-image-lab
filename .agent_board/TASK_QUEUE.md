@@ -1,6 +1,26 @@
 
 ---
 
+## Current Task - Durable Archive Copy A5 Authorization Package
+
+```text
+status: completed_validated
+mode: A4.8 authorization package / no copy execution
+done: generated inactive exact-pair copy authorization package; added static validator; wired validator into scripts/validate_mvp.ps1
+in_progress: none
+blocked: real archive copy execution requires explicit A5 activation
+remaining: optional exact-file commit/push if user authorizes; otherwise stop before real copy A5
+authorization_package_ref: reports/durable_archive_copy_authorization/2026-05-20_durable_archive_copy_A5_authorization_package.json
+exact_copy_pair_count: 14
+durable_archive_copy_performed: false
+runs_mutation_performed: false
+preview_generation_performed: false
+production_candidate_performed: false
+recommended_next: stop_before_real_durable_archive_copy_A5
+```
+
+---
+
 ## Current Task - Runs Asset Verification And Archive Dry Run
 
 ```text

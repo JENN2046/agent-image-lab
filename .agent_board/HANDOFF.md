@@ -1,6 +1,24 @@
 
 ---
 
+## Current Handoff Update - Durable Archive Copy A5 Authorization Package
+
+```text
+phase: durable_archive_copy_A5_authorization_package
+status: completed_validated
+mode: A4.8 authorization package / no copy execution
+summary: Prepared an inactive A5 authorization package with 14 exact source-to-target copy pairs derived from the full asset archive dry-run manifest, plus a static validator wired into scripts/validate_mvp.ps1.
+authorization_package_ref: reports/durable_archive_copy_authorization/2026-05-20_durable_archive_copy_A5_authorization_package.json
+validator_ref: scripts/validate_durable_archive_copy_authorization_package.js
+source_manifest_ref: reports/full_asset_archive_dry_run_manifest/2026-05-20_full_asset_archive_dry_run_manifest.json
+not_performed: no durable archive copy, no archive target creation, no runs mutation, no preview generation, no provider/plugin/API, no DailyNote/VCP memory, no production candidate.
+blocked_next: real durable archive copy execution requires explicit A5 activation.
+validated_now: node --check scripts/validate_durable_archive_copy_authorization_package.js; node scripts/validate_durable_archive_copy_authorization_package.js; git diff --check; node scripts/validate_agent_board_state.js; powershell scripts/validate_mvp.ps1; powershell scripts/validate-agent-image-lab-local.ps1.
+recommended_next: stop before real durable archive copy A5, or prepare production candidate preflight without writing production candidate.
+```
+
+---
+
 ## Current Handoff Update - Runs Asset Verification And Archive Dry Run
 
 ```text

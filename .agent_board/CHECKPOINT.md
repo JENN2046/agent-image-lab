@@ -1,6 +1,37 @@
 
 ---
 
+## Checkpoint - Durable Archive Copy A5 Authorization Package
+
+```text
+phase: durable_archive_copy_A5_authorization_package
+status: completed_validated
+completed:
+- generated reports/durable_archive_copy_authorization/2026-05-20_durable_archive_copy_A5_authorization_package.json
+- derived 14 exact copy pairs from the full asset archive dry-run manifest
+- added scripts/validate_durable_archive_copy_authorization_package.js
+- wired durable archive copy authorization validation into scripts/validate_mvp.ps1
+validation_completed:
+- node --check scripts/validate_durable_archive_copy_authorization_package.js
+- node scripts/validate_durable_archive_copy_authorization_package.js
+- git diff --check
+- node scripts/validate_agent_board_state.js
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+- powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+hard_stop_flags:
+  durable_archive_copy_performed: false
+  target_archive_directory_created: false
+  target_archive_artifact_created: false
+  runs_mutation_performed: false
+  preview_generation_performed: false
+  provider_plugin_api_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  production_candidate_performed: false
+next_safe_action: optional exact-file commit/push if user authorizes; otherwise stop before real durable archive copy A5.
+```
+
+---
+
 ## Checkpoint - Runs Asset Verification And Archive Dry Run
 
 ```text
