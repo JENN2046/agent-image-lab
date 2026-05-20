@@ -11,6 +11,22 @@ function Invoke-CapsuleProductCoreValidation {
   )
 
   if ($Section -eq 'PreRuns' -or $Section -eq 'All') {
+  $capsuleStatusTaxonomyOutput = & node (Join-Path $Root 'scripts/validate_capsule_status_taxonomy.js')
+  if ($LASTEXITCODE -ne 0) {
+    & $AddFailure "Capsule status taxonomy validation exited with failure"
+  } else {
+    $capsuleStatusTaxonomy = ($capsuleStatusTaxonomyOutput -join "`n") | ConvertFrom-Json
+    if ($capsuleStatusTaxonomy.passed -ne $true -or $capsuleStatusTaxonomy.status -ne 'capsule_status_taxonomy_verified') {
+      & $AddFailure "Capsule status taxonomy validation must pass"
+    }
+    if ($capsuleStatusTaxonomy.taxonomy_shared_by_registry_validators -ne $true -or $capsuleStatusTaxonomy.writes_performed -ne $false -or $capsuleStatusTaxonomy.preview_creation_or_copy_performed -ne $false) {
+      & $AddFailure "Capsule status taxonomy validation must prove shared registry validator taxonomy without writes or preview creation/copy"
+    }
+    if ($capsuleStatusTaxonomy.provider_contact_performed -ne $false -or $capsuleStatusTaxonomy.plugin_call_performed -ne $false -or $capsuleStatusTaxonomy.api_call_performed -ne $false -or $capsuleStatusTaxonomy.image_generation_performed -ne $false -or $capsuleStatusTaxonomy.DailyNote_write_performed -ne $false -or $capsuleStatusTaxonomy.VCP_memory_write_performed -ne $false -or $capsuleStatusTaxonomy.runtime_execution_performed -ne $false -or $capsuleStatusTaxonomy.real_manifest_read_performed -ne $false -or $capsuleStatusTaxonomy.real_vcpchat_read_performed -ne $false -or $capsuleStatusTaxonomy.real_vcptoolbox_read_performed -ne $false -or $capsuleStatusTaxonomy.production_candidate_write_performed -ne $false -or $capsuleStatusTaxonomy.push_tag_release_deploy_performed -ne $false) {
+      & $AddFailure "Capsule status taxonomy validation must remain local-only with no external, memory, runtime, production, or remote actions"
+    }
+  }
+
   $capsuleCreatorCommonSafetyOutput = & node (Join-Path $Root 'scripts/validate_capsule_creator_common_safety.js')
   if ($LASTEXITCODE -ne 0) {
     & $AddFailure "Capsule creator common safety validation exited with failure"

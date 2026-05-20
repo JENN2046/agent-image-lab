@@ -14325,6 +14325,27 @@ tag_release_deploy_performed: false
 recommended_next: guarded_commit_and_push_if_preflight_clean
 ```
 
+## Current Handoff Update - Capsule Status Taxonomy
+
+```text
+phase: capsule_status_taxonomy_gate
+status: completed_validated
+mode: A4.8 local implementation / validator taxonomy refactor
+summary: Centralized preview and failure sample registry failure-class labels and summaries into scripts/lib/capsule_status_taxonomy.js, then wired both registry validators and capsule product-core validation to the shared helper.
+changed_code: scripts/lib/capsule_status_taxonomy.js; scripts/validate_preview_capsule_registry.js; scripts/validate_failure_sample_capsule_registry.js; scripts/validate_capsule_status_taxonomy.js; scripts/validate_mvp_capsule_product_core.ps1
+taxonomy_shared_by_registry_validators: true
+writes_performed_by_taxonomy_validation: false
+preview_creation_or_copy_performed: false
+preview_generation_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+dependency_change_performed: false
+production_candidate_performed: false
+runtime_browser_execution_performed: false
+tag_release_deploy_performed: false
+recommended_next: guarded_commit_and_push_if_preflight_clean
+```
+
 ## Current Handoff Update - Capsule Creator Shared Utils
 
 ```text

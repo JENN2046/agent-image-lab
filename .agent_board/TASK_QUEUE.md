@@ -11863,6 +11863,19 @@ validation: PowerShell parse checks passed; validate_mvp.ps1 passed; validate_ag
 recommended_next: guarded_commit_and_push_if_preflight_clean
 ```
 
+## Current Task - Capsule Status Taxonomy
+
+```text
+status: completed_validated
+mode: A4.8 local implementation / validator taxonomy refactor
+done: added scripts/lib/capsule_status_taxonomy.js; refactored preview and failure sample registry validators to share failure class classification and summary helpers; added scripts/validate_capsule_status_taxonomy.js; wired it into scripts/validate_mvp_capsule_product_core.ps1
+in_progress: commit_push_readiness
+blocked: none
+remaining: full validation, exact-file guarded local commit, push preflight, push if clean
+validation: targeted JS syntax, taxonomy validator, preview registry validator, and failure sample registry validator passed before full validation
+recommended_next: guarded_commit_and_push_if_preflight_clean
+```
+
 ## Current Task - Capsule Creator Shared Utils
 
 ```text

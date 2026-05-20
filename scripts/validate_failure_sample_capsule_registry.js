@@ -3,6 +3,11 @@
 
 const fs = require("node:fs");
 const { createRecoverabilityCore } = require("./lib/artifact_recoverability_core");
+const {
+  FAILURE_SAMPLE_FAILURE_CLASS_SUMMARY_KEYS,
+  classifyFailureSampleFailures,
+  summarizeFailureClasses,
+} = require("./lib/capsule_status_taxonomy");
 
 const DEFAULT_ROOT = "asset_archive/failure_samples";
 
@@ -34,100 +39,6 @@ function failureCapsulePaths(root, sampleId) {
   };
 }
 
-function classifyFailures(failures) {
-  const classes = new Set();
-  for (const failure of failures || []) {
-    if (failure === "manifest_exists") {
-      classes.add("missing_capsule_manifest");
-    } else if (failure === "preview_file_exists") {
-      classes.add("missing_preview_file");
-    } else if (failure === "preview_webp_signature_valid") {
-      classes.add("invalid_preview_signature");
-    } else if (failure === "preview_manifest_long_edge_matches" || failure === "preview_file_long_edge_matches") {
-      classes.add("preview_long_edge_mismatch");
-    } else if (failure === "preview_manifest_sha256_present" || failure === "preview_sha256_matches_manifest") {
-      classes.add("preview_hash_mismatch");
-    } else if (failure === "failure_record_exists" || failure === "review_record_exists") {
-      classes.add("missing_chain_file");
-    } else if (
-      failure === "failure_record_type_matches" ||
-      failure === "failure_record_sample_id_matches" ||
-      failure === "review_record_type_matches" ||
-      failure === "review_record_sample_id_matches" ||
-      failure === "review_record_final_route_matches"
-    ) {
-      classes.add("chain_record_mismatch");
-    } else if (
-      failure === "sample_id_matches" ||
-      failure === "preview_path_matches" ||
-      failure === "preview_format_webp" ||
-      failure === "base64_absent_from_manifest" ||
-      failure === "original_sha256_not_required"
-    ) {
-      classes.add("manifest_contract_mismatch");
-    } else if (
-      failure === "production_candidate_allowed_false" ||
-      failure === "memory_write_allowed_false" ||
-      failure === "DailyNote_write_allowed_false" ||
-      failure === "failure_record_production_candidate_allowed_false" ||
-      failure === "failure_record_memory_suitability_false" ||
-      failure === "failure_record_no_provider_contact" ||
-      failure === "failure_record_no_plugin_call" ||
-      failure === "failure_record_no_api_call" ||
-      failure === "failure_record_no_image_generation" ||
-      failure === "failure_record_no_dailynote_write" ||
-      failure === "failure_record_no_vcp_memory_write" ||
-      failure === "review_record_production_candidate_allowed_false" ||
-      failure === "review_record_dailynote_write_allowed_false" ||
-      failure === "review_record_vcp_memory_write_allowed_false" ||
-      failure === "review_record_no_provider_contact" ||
-      failure === "review_record_no_plugin_call" ||
-      failure === "review_record_no_api_call" ||
-      failure === "review_record_no_image_generation" ||
-      failure === "review_record_no_dailynote_write" ||
-      failure === "review_record_no_vcp_memory_write"
-    ) {
-      classes.add("production_or_memory_guard_violation");
-    } else {
-      classes.add("other");
-    }
-  }
-  return Array.from(classes).sort();
-}
-
-function summarizeFailureClasses(samples, failures) {
-  const summary = {
-    registry_configuration: 0,
-    sample_failed: 0,
-    missing_capsule_manifest: 0,
-    missing_preview_file: 0,
-    invalid_preview_signature: 0,
-    preview_long_edge_mismatch: 0,
-    preview_hash_mismatch: 0,
-    missing_chain_file: 0,
-    chain_record_mismatch: 0,
-    manifest_contract_mismatch: 0,
-    production_or_memory_guard_violation: 0,
-    other: 0,
-  };
-
-  for (const sample of samples) {
-    for (const failureClass of sample.failure_classes || []) {
-      summary[failureClass] = (summary[failureClass] || 0) + 1;
-    }
-  }
-
-  for (const failure of failures) {
-    if (failure.startsWith("sample_failed:")) {
-      summary.sample_failed += 1;
-    } else {
-      summary.registry_configuration += 1;
-    }
-  }
-
-  return summary;
-}
-
 function validateFailureCapsule(core, root, sampleId, requiredLongEdge) {
   const paths = failureCapsulePaths(root, sampleId);
   const manifest = core.parseJsonIfExists(paths.manifest);
@@ -148,7 +59,7 @@ function validateFailureCapsule(core, root, sampleId, requiredLongEdge) {
       preview_height: null,
       preview_long_edge: null,
       failures,
-      failure_classes: classifyFailures(failures),
+      failure_classes: classifyFailureSampleFailures(failures),
     };
   }
 
@@ -216,7 +127,7 @@ function validateFailureCapsule(core, root, sampleId, requiredLongEdge) {
     preview_height: previewDimensions?.height || null,
     preview_long_edge: previewLongEdge,
     failures,
-    failure_classes: classifyFailures(failures),
+    failure_classes: classifyFailureSampleFailures(failures),
   };
 }
 
@@ -282,7 +193,7 @@ function main() {
     passed_count: samples.filter((sample) => sample.passed).length,
     failed_count: failedSamples.length,
     failed_sample_ids: failedSamples.map((sample) => sample.sample_id),
-    failure_class_summary: summarizeFailureClasses(samples, failures),
+    failure_class_summary: summarizeFailureClasses(samples, failures, FAILURE_SAMPLE_FAILURE_CLASS_SUMMARY_KEYS),
     samples,
     guard: {
       provider_contact_performed: false,

@@ -16402,6 +16402,30 @@ recommended_next: guarded_commit_and_push_if_preflight_clean
 ## Current Capsule Productization Goal
 
 ```text
+phase: capsule_status_taxonomy_gate
+status: completed_validated
+mode: A4.8 local implementation / validator taxonomy refactor
+objective: reduce duplicated failure-class taxonomy logic across preview and failure sample registry validators without changing registry validation semantics
+helper_ref: scripts/lib/capsule_status_taxonomy.js
+validator_ref: scripts/validate_capsule_status_taxonomy.js
+preview_registry_refactored: true
+failure_registry_refactored: true
+mvp_helper_wired: true
+writes_performed_by_taxonomy_validation: false
+preview_creation_or_copy_performed: false
+preview_generation_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+dependency_change_performed: false
+production_candidate_performed: false
+runtime_browser_execution_performed: false
+tag_release_deploy_performed: false
+recommended_next: guarded_commit_and_push_if_preflight_clean
+```
+
+## Current Capsule Productization Goal
+
+```text
 phase: capsule_creator_shared_utils_gate
 status: completed_validated
 mode: A4.8 local implementation / creator safety refactor

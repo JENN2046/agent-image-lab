@@ -24634,6 +24634,38 @@ hard_stop_flags:
 recommended_next: guarded_commit_and_push_if_preflight_clean
 ```
 
+## Checkpoint - Capsule Status Taxonomy
+
+```text
+phase: capsule_status_taxonomy_gate
+status: completed_validated
+mode: A4.8 local implementation / validator taxonomy refactor
+completed:
+- added scripts/lib/capsule_status_taxonomy.js
+- refactored scripts/validate_preview_capsule_registry.js and scripts/validate_failure_sample_capsule_registry.js to share failure-class taxonomy and summary helpers
+- added scripts/validate_capsule_status_taxonomy.js
+- wired the new taxonomy validator into scripts/validate_mvp_capsule_product_core.ps1
+validation_completed:
+- node --check for changed JS files
+- PowerShell parser check for scripts/validate_mvp_capsule_product_core.ps1
+- node scripts/validate_capsule_status_taxonomy.js
+- node scripts/validate_preview_capsule_registry.js
+- node scripts/validate_failure_sample_capsule_registry.js
+hard_stop_flags:
+  writes_performed_by_taxonomy_validation: false
+  preview_creation_or_copy_performed: false
+  preview_generation_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  dependency_change_performed: false
+  runtime_browser_execution_performed: false
+recommended_next: guarded_commit_and_push_if_preflight_clean
+```
+
 ## Checkpoint - Capsule Creator Shared Utils
 
 ```text
