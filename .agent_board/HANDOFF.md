@@ -14325,6 +14325,28 @@ tag_release_deploy_performed: false
 recommended_next: guarded_commit_and_push_if_preflight_clean
 ```
 
+## Current Handoff Update - Manifest Taxonomy Gate
+
+```text
+phase: capsule_manifest_taxonomy_gate
+status: completed_targeted_validated
+mode: A4.8 local implementation / validator taxonomy refactor
+summary: Wired scripts/validate_capsule_manifest_contract_negative_cases.js into scripts/validate_mvp_capsule_product_core.ps1 and moved capsule manifest failure classification onto scripts/lib/capsule_status_taxonomy.js.
+changed_code: scripts/lib/capsule_status_taxonomy.js; scripts/lib/capsule_manifest_contract.js; scripts/validate_capsule_status_taxonomy.js; scripts/validate_capsule_manifest_contract_negative_cases.js; scripts/validate_mvp_capsule_product_core.ps1
+manifest_contract_local_classifier_removed: true
+manifest_negative_gate_wired: true
+targeted_validation: node --check changed JS; PowerShell parser check; node scripts/validate_capsule_status_taxonomy.js; git diff --check
+not_run_due_boundary: scripts/validate_mvp.ps1 and manifest validators that read preview binaries / hash / dimensions
+preview_generation_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+dependency_change_performed: false
+production_candidate_performed: false
+runtime_browser_execution_performed: false
+tag_release_deploy_performed: false
+recommended_next: capsule_manifest_summary_key_stability
+```
+
 ## Current Handoff Update - Capsule Status Taxonomy
 
 ```text

@@ -11863,6 +11863,19 @@ validation: PowerShell parse checks passed; validate_mvp.ps1 passed; validate_ag
 recommended_next: guarded_commit_and_push_if_preflight_clean
 ```
 
+## Current Task - Manifest Taxonomy Gate
+
+```text
+status: completed_targeted_validated
+mode: A4.8 local implementation / validator taxonomy refactor
+done: wired manifest negative-case validation into capsule product-core validation; extended shared taxonomy with manifest classes; refactored capsule manifest contract to use shared classifyManifestFailures; strengthened taxonomy validator for manifest coverage
+in_progress: commit_push_readiness
+blocked: full validation requiring preview binary / hash / dimension reads is skipped by current boundary
+remaining: exact-file guarded local commit, push preflight, push if clean
+validation: node --check changed JS; PowerShell parser check; node scripts/validate_capsule_status_taxonomy.js; git diff --check
+recommended_next: capsule_manifest_summary_key_stability
+```
+
 ## Current Task - Capsule Status Taxonomy
 
 ```text

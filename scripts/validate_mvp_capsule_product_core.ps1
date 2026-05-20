@@ -27,6 +27,25 @@ function Invoke-CapsuleProductCoreValidation {
     }
   }
 
+  $capsuleManifestContractNegativeOutput = & node (Join-Path $Root 'scripts/validate_capsule_manifest_contract_negative_cases.js')
+  if ($LASTEXITCODE -ne 0) {
+    & $AddFailure "Capsule manifest contract negative-case validation exited with failure"
+  } else {
+    $capsuleManifestContractNegative = ($capsuleManifestContractNegativeOutput -join "`n") | ConvertFrom-Json
+    if ($capsuleManifestContractNegative.passed -ne $true -or $capsuleManifestContractNegative.status -ne 'capsule_manifest_contract_negative_cases_verified') {
+      & $AddFailure "Capsule manifest contract negative-case validation must pass"
+    }
+    if ($capsuleManifestContractNegative.fixture_count -lt 4 -or $capsuleManifestContractNegative.failed_count -ne 0) {
+      & $AddFailure "Capsule manifest contract negative-case validation must keep fail-closed coverage"
+    }
+    if ($capsuleManifestContractNegative.temp_workspace_root_class -ne '.agent_private' -or $capsuleManifestContractNegative.real_capsule_modified -ne $false -or $capsuleManifestContractNegative.preview_creation_or_copy_performed -ne $false) {
+      & $AddFailure "Capsule manifest contract negative-case fixtures must stay in .agent_private and must not modify real capsules or create/copy previews"
+    }
+    if ($capsuleManifestContractNegative.provider_contact_performed -ne $false -or $capsuleManifestContractNegative.plugin_call_performed -ne $false -or $capsuleManifestContractNegative.api_call_performed -ne $false -or $capsuleManifestContractNegative.image_generation_performed -ne $false -or $capsuleManifestContractNegative.DailyNote_write_performed -ne $false -or $capsuleManifestContractNegative.VCP_memory_write_performed -ne $false -or $capsuleManifestContractNegative.runtime_execution_performed -ne $false -or $capsuleManifestContractNegative.real_manifest_read_performed -ne $false -or $capsuleManifestContractNegative.real_vcpchat_read_performed -ne $false -or $capsuleManifestContractNegative.real_vcptoolbox_read_performed -ne $false -or $capsuleManifestContractNegative.push_tag_release_deploy_performed -ne $false) {
+      & $AddFailure "Capsule manifest contract negative-case validation must remain local-only with no external, memory, runtime, source read, push, tag, release, or deploy actions"
+    }
+  }
+
   $capsuleCreatorCommonSafetyOutput = & node (Join-Path $Root 'scripts/validate_capsule_creator_common_safety.js')
   if ($LASTEXITCODE -ne 0) {
     & $AddFailure "Capsule creator common safety validation exited with failure"

@@ -7,14 +7,17 @@ const {
   FAILURE_CLASS,
   PREVIEW_FAILURE_CLASS_SUMMARY_KEYS,
   FAILURE_SAMPLE_FAILURE_CLASS_SUMMARY_KEYS,
+  MANIFEST_FAILURE_CLASS_SUMMARY_KEYS,
   classifyPreviewFailures,
   classifyFailureSampleFailures,
+  classifyManifestFailures,
   summarizeFailureClasses,
 } = require("./lib/capsule_status_taxonomy");
 
 const repoRoot = path.resolve(__dirname, "..");
 const previewValidatorText = fs.readFileSync(path.join(repoRoot, "scripts", "validate_preview_capsule_registry.js"), "utf8");
 const failureValidatorText = fs.readFileSync(path.join(repoRoot, "scripts", "validate_failure_sample_capsule_registry.js"), "utf8");
+const manifestContractText = fs.readFileSync(path.join(repoRoot, "scripts", "lib", "capsule_manifest_contract.js"), "utf8");
 
 function expect(condition, check, detail = null) {
   return { check, passed: Boolean(condition), ...(detail === null ? {} : { detail }) };
@@ -24,12 +27,16 @@ const checks = [];
 
 checks.push(expect(previewValidatorText.includes("classifyPreviewFailures"), "preview_validator_uses_shared_taxonomy"));
 checks.push(expect(failureValidatorText.includes("classifyFailureSampleFailures"), "failure_validator_uses_shared_taxonomy"));
+checks.push(expect(manifestContractText.includes("classifyManifestFailures"), "manifest_contract_uses_shared_taxonomy"));
 checks.push(expect(!previewValidatorText.includes("function classifyFailures"), "preview_validator_local_classifier_removed"));
 checks.push(expect(!failureValidatorText.includes("function classifyFailures"), "failure_validator_local_classifier_removed"));
+checks.push(expect(!manifestContractText.includes("function classifyFailures"), "manifest_contract_local_classifier_removed"));
 checks.push(expect(PREVIEW_FAILURE_CLASS_SUMMARY_KEYS.includes(FAILURE_CLASS.MANIFEST_CONTRACT_MISMATCH), "preview_summary_keys_include_manifest_contract"));
 checks.push(expect(!PREVIEW_FAILURE_CLASS_SUMMARY_KEYS.includes(FAILURE_CLASS.PRODUCTION_OR_MEMORY_GUARD_VIOLATION), "preview_summary_keys_omit_failure_only_guard_class"));
 checks.push(expect(FAILURE_SAMPLE_FAILURE_CLASS_SUMMARY_KEYS.includes(FAILURE_CLASS.CHAIN_RECORD_MISMATCH), "failure_summary_keys_include_chain_mismatch"));
 checks.push(expect(FAILURE_SAMPLE_FAILURE_CLASS_SUMMARY_KEYS.includes(FAILURE_CLASS.PRODUCTION_OR_MEMORY_GUARD_VIOLATION), "failure_summary_keys_include_guard_violation"));
+checks.push(expect(MANIFEST_FAILURE_CLASS_SUMMARY_KEYS.includes(FAILURE_CLASS.CHAIN_RECORD_MISMATCH), "manifest_summary_keys_include_chain_mismatch"));
+checks.push(expect(MANIFEST_FAILURE_CLASS_SUMMARY_KEYS.includes(FAILURE_CLASS.PRODUCTION_OR_MEMORY_GUARD_VIOLATION), "manifest_summary_keys_include_guard_violation"));
 
 const previewClasses = classifyPreviewFailures([
   "manifest_exists",
@@ -52,6 +59,20 @@ checks.push(expect(failureClasses.includes(FAILURE_CLASS.CHAIN_RECORD_MISMATCH),
 checks.push(expect(failureClasses.includes(FAILURE_CLASS.PRODUCTION_OR_MEMORY_GUARD_VIOLATION), "failure_guard_violation_classified", failureClasses));
 checks.push(expect(failureClasses.includes(FAILURE_CLASS.MANIFEST_CONTRACT_MISMATCH), "failure_manifest_contract_mismatch_classified", failureClasses));
 
+const manifestClasses = classifyManifestFailures([
+  "manifest_exists",
+  "manifest_type_matches",
+  "approval_record_exists",
+  "review_record_sample_id_matches",
+  "manifest_guard_VCP_memory_write_performed_false",
+  "commercial_delivery_allowed_false",
+]);
+checks.push(expect(manifestClasses.includes(FAILURE_CLASS.MISSING_CAPSULE_MANIFEST), "manifest_missing_classified", manifestClasses));
+checks.push(expect(manifestClasses.includes(FAILURE_CLASS.MANIFEST_CONTRACT_MISMATCH), "manifest_contract_mismatch_classified", manifestClasses));
+checks.push(expect(manifestClasses.includes(FAILURE_CLASS.MISSING_CHAIN_FILE), "manifest_missing_chain_classified", manifestClasses));
+checks.push(expect(manifestClasses.includes(FAILURE_CLASS.CHAIN_RECORD_MISMATCH), "manifest_chain_record_mismatch_classified", manifestClasses));
+checks.push(expect(manifestClasses.includes(FAILURE_CLASS.PRODUCTION_OR_MEMORY_GUARD_VIOLATION), "manifest_guard_violation_classified", manifestClasses));
+
 const summary = summarizeFailureClasses(
   [
     { failure_classes: [FAILURE_CLASS.CHAIN_RECORD_MISMATCH, FAILURE_CLASS.PRODUCTION_OR_MEMORY_GUARD_VIOLATION] },
@@ -65,6 +86,18 @@ checks.push(expect(summary.production_or_memory_guard_violation === 1, "summary_
 checks.push(expect(summary.missing_preview_file === 1, "summary_counts_missing_preview_file", summary));
 checks.push(expect(summary.sample_failed === 1, "summary_counts_sample_failed", summary));
 checks.push(expect(summary.registry_configuration === 1, "summary_counts_registry_configuration", summary));
+
+const manifestSummary = summarizeFailureClasses(
+  [
+    { failure_classes: [FAILURE_CLASS.MISSING_CAPSULE_MANIFEST, FAILURE_CLASS.CHAIN_RECORD_MISMATCH] },
+    { failure_classes: [FAILURE_CLASS.PRODUCTION_OR_MEMORY_GUARD_VIOLATION] },
+  ],
+  [],
+  MANIFEST_FAILURE_CLASS_SUMMARY_KEYS
+);
+checks.push(expect(manifestSummary.missing_capsule_manifest === 1, "manifest_summary_counts_missing_manifest", manifestSummary));
+checks.push(expect(manifestSummary.chain_record_mismatch === 1, "manifest_summary_counts_chain_mismatch", manifestSummary));
+checks.push(expect(manifestSummary.production_or_memory_guard_violation === 1, "manifest_summary_counts_guard_violation", manifestSummary));
 
 const failed = checks.filter((check) => !check.passed);
 const output = {

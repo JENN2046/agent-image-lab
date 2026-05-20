@@ -24634,6 +24634,40 @@ hard_stop_flags:
 recommended_next: guarded_commit_and_push_if_preflight_clean
 ```
 
+## Checkpoint - Manifest Taxonomy Gate
+
+```text
+phase: capsule_manifest_taxonomy_gate
+status: completed_targeted_validated
+mode: A4.8 local implementation / validator taxonomy refactor
+completed:
+- wired scripts/validate_capsule_manifest_contract_negative_cases.js into scripts/validate_mvp_capsule_product_core.ps1
+- extended scripts/lib/capsule_status_taxonomy.js with manifest failure classes and classifyManifestFailures
+- refactored scripts/lib/capsule_manifest_contract.js away from its local classifyFailures implementation
+- strengthened scripts/validate_capsule_status_taxonomy.js to assert manifest taxonomy coverage
+validation_completed:
+- node --check for changed JS files
+- PowerShell parser check for scripts/validate_mvp_capsule_product_core.ps1
+- node scripts/validate_capsule_status_taxonomy.js
+- git diff --check
+validation_not_run:
+- scripts/validate_mvp.ps1
+- scripts/validate_capsule_manifest_contract.js
+- scripts/validate_capsule_manifest_contract_negative_cases.js
+validation_skip_reason: current task boundary forbids preview binary reads, hash extraction, and dimension extraction
+hard_stop_flags:
+  preview_generation_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  dependency_change_performed: false
+  runtime_browser_execution_performed: false
+recommended_next: capsule_manifest_summary_key_stability
+```
+
 ## Checkpoint - Capsule Status Taxonomy
 
 ```text

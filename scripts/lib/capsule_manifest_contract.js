@@ -2,6 +2,9 @@
 
 const fs = require("node:fs");
 const YAML = require("yaml");
+const {
+  classifyManifestFailures,
+} = require("./capsule_status_taxonomy");
 
 const ACCEPTED_ROOT = "asset_archive/accepted_samples";
 const FAILURE_ROOT = "asset_archive/failure_samples";
@@ -76,23 +79,6 @@ function chainSpec(lane) {
   };
 }
 
-function classifyFailures(failures) {
-  const classes = new Set();
-  for (const failure of failures || []) {
-    if (failure === "manifest_exists") classes.add("missing_capsule_manifest");
-    else if (["manifest_type_matches", "manifest_version_v1", "sample_id_matches", "preview_path_matches", "preview_format_webp", "preview_git_tracked_true", "original_not_required", "base64_absent_from_manifest"].includes(failure)) classes.add("manifest_contract_mismatch");
-    else if (failure === "preview_file_exists") classes.add("missing_preview_file");
-    else if (failure === "preview_webp_signature_valid") classes.add("invalid_preview_signature");
-    else if (["preview_manifest_long_edge_matches", "preview_file_long_edge_matches"].includes(failure)) classes.add("preview_long_edge_mismatch");
-    else if (["preview_manifest_sha256_present", "preview_sha256_matches_manifest"].includes(failure)) classes.add("preview_hash_mismatch");
-    else if (failure.endsWith("_exists")) classes.add("missing_chain_file");
-    else if (failure.endsWith("_record_type_matches") || failure.endsWith("_sample_id_matches") || failure === "failure_review_final_route_matches") classes.add("chain_record_mismatch");
-    else if (failure.includes("guard_") || failure.includes("allowed_false") || failure.includes("production_candidate")) classes.add("production_or_memory_guard_violation");
-    else classes.add("other");
-  }
-  return Array.from(classes).sort();
-}
-
 function validateGuardFalse(value, prefix, failures) {
   const guard = value || {};
   for (const field of COMMON_GUARD_FALSE_FIELDS) {
@@ -144,7 +130,7 @@ function validateCapsuleManifest(core, lane, sampleId, options = {}) {
 
   check(Boolean(manifest), "manifest_exists");
   if (!manifest) {
-    return { lane, sample_id: sampleId, passed: false, manifest_validation_status: "manifest_missing", manifest_ref: manifestRef, preview_ref: `${root}/preview.webp`, preview_sha256: null, preview_long_edge: null, chain_refs: [], failures, failure_classes: classifyFailures(failures) };
+    return { lane, sample_id: sampleId, passed: false, manifest_validation_status: "manifest_missing", manifest_ref: manifestRef, preview_ref: `${root}/preview.webp`, preview_sha256: null, preview_long_edge: null, chain_refs: [], failures, failure_classes: classifyManifestFailures(failures) };
   }
 
   const previewPath = manifest.artifact?.preview?.path || "preview.webp";
@@ -194,7 +180,7 @@ function validateCapsuleManifest(core, lane, sampleId, options = {}) {
     }
   }
 
-  return { lane, sample_id: sampleId, passed: failures.length === 0, manifest_validation_status: failures.length === 0 ? "capsule_manifest_contract_verified" : "capsule_manifest_contract_failed", manifest_ref: manifestRef, preview_ref: previewRef, preview_sha256: previewSha256, preview_width: previewDimensions?.width || null, preview_height: previewDimensions?.height || null, preview_long_edge: previewLongEdge, chain_refs: chainRefs, failures, failure_classes: classifyFailures(failures) };
+  return { lane, sample_id: sampleId, passed: failures.length === 0, manifest_validation_status: failures.length === 0 ? "capsule_manifest_contract_verified" : "capsule_manifest_contract_failed", manifest_ref: manifestRef, preview_ref: previewRef, preview_sha256: previewSha256, preview_width: previewDimensions?.width || null, preview_height: previewDimensions?.height || null, preview_long_edge: previewLongEdge, chain_refs: chainRefs, failures, failure_classes: classifyManifestFailures(failures) };
 }
 
 function listCapsules(core, lane) {
@@ -216,4 +202,4 @@ function validateAllCapsuleManifests(core, options = {}) {
   return { passed, status: passed ? "capsule_manifest_contract_verified" : "capsule_manifest_contract_failed", report_version: "capsule_manifest_contract_v1", schema_ref: schemaLoad.schemaRef, schema_runtime_binding_status: schemaBinding.passed ? "schema_runtime_binding_verified" : "schema_runtime_binding_failed", schema_runtime_binding_failures: schemaBinding.failures, totals: { accepted: accepted.length, failure: failure.length, total: samples.length, passed: samples.length - failed.length, failed: failed.length }, samples, failed_sample_ids: failed.map((sample) => sample.sample_id), failure_class_summary: failureClassSummary, guard: { static_validator_only: true, preview_creation_or_copy_performed: false, provider_contact_performed: false, plugin_call_performed: false, api_call_performed: false, image_generation_performed: false, DailyNote_write_performed: false, VCP_memory_write_performed: false, runtime_execution_performed: false, real_manifest_read_performed: false, real_vcpchat_read_performed: false, real_vcptoolbox_read_performed: false, push_tag_release_deploy_performed: false } };
 }
 
-module.exports = { ACCEPTED_ROOT, FAILURE_ROOT, SCHEMA_REF, REQUIRED_LONG_EDGE, classifyFailures, loadCapsuleManifestSchema, validateSchemaRuntimeBinding, validateCapsuleManifest, validateAllCapsuleManifests };
+module.exports = { ACCEPTED_ROOT, FAILURE_ROOT, SCHEMA_REF, REQUIRED_LONG_EDGE, classifyFailures: classifyManifestFailures, loadCapsuleManifestSchema, validateSchemaRuntimeBinding, validateCapsuleManifest, validateAllCapsuleManifests };
