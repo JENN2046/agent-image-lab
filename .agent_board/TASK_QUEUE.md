@@ -11741,15 +11741,25 @@ recommended_next: runs_restore_verification_authorization_package_draft_commit_r
       Result: completed_validated_docs_scope.
       Stop condition: any change that loosens validation, skips current capsule gates, or requires runtime/A5/image/runs access.
 
-- [ ] ID: capsule_mvp_validator_slice_code_refactor_authorization_gate
+- [x] ID: capsule_mvp_validator_slice_code_refactor_authorization_gate
       Title: Capsule MVP validator slice code refactor authorization gate
       Reason: the docs-first slice is complete, but code refactor remains blocked until an exact future authorization package names files, commands, proof obligations, and stop conditions.
       Scope: docs-only authorization package plus .agent_board sync; no code edits.
       Allowed files: docs/CAPSULE_MVP_VALIDATOR_SLICE_CODE_REFACTOR_AUTHORIZATION_GATE.md; .agent_board/CHECKPOINT.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md.
       Forbidden files/actions: scripts/validate_mvp.ps1; scripts/validate_mvp_capsule_product_core.ps1; scripts/**/*.js; schemas/**; review_console/**; dependency manifests; actual runs scan; image binary reads; hash/dimensions extraction; preview generation; provider/plugin/API; DailyNote/VCP memory; runtime/browser; production candidate; tag/release/deploy; git add .
       Validation: git diff --check passed; validate_agent_board_state passed; validate-agent-image-lab-local passed with manual-review warnings.
-      Result: completed_validated.
+      Result: completed_committed_pushed as 58fa49f.
       Stop condition: validation failure, out-of-scope file, or any need to perform the code refactor before separate explicit authorization.
+
+- [x] ID: capsule_validator_code_debt_route_control_checkpoint
+      Title: Capsule validator code debt route control checkpoint
+      Reason: user asked to keep the route controlled after docs-first planning, authorization gate, commit, and push.
+      Scope: docs-only route-control checkpoint plus .agent_board post-push state correction.
+      Allowed files: docs/CAPSULE_VALIDATOR_CODE_DEBT_ROUTE_CONTROL_CHECKPOINT.md; .agent_board/CHECKPOINT.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md.
+      Forbidden files/actions: scripts/validate_mvp.ps1; scripts/validate_mvp_capsule_product_core.ps1; scripts/**/*.js; schemas/**; review_console/**; runs/**; asset_archive/**; package.json; package-lock.json; actual runs scan; image binary reads; hash/dimensions extraction; preview generation; provider/plugin/API; DailyNote/VCP memory; runtime/browser; production candidate; tag/release/deploy; git add .
+      Validation: git diff --check passed; validate_agent_board_state passed; validate-agent-image-lab-local passed with manual-review warnings.
+      Result: completed_validated.
+      Stop condition: validation failure, out-of-scope file, or any pressure to enter code refactor without explicit authorization.
 ```
 
 ## BHA / AGENTS v0.3.1 Selective Adaptation Plan
@@ -11806,11 +11816,25 @@ recommended_next: capsule_mvp_validator_slice_code_refactor_authorization_gate
 ## Current Task - Capsule MVP Validator Slice Code Refactor Authorization Gate
 
 ```text
-status: completed_validated
+status: completed_committed_pushed
 mode: A4.8 docs-only / authorization package draft
 done: drafted docs/CAPSULE_MVP_VALIDATOR_SLICE_CODE_REFACTOR_AUTHORIZATION_GATE.md; kept future code refactor inactive; updated .agent_board resume surfaces
+in_progress: none
+blocked: actual code refactor remains blocked until separate explicit authorization
+remaining: none for this gate
+commit: 58fa49f docs: gate capsule MVP validator slice refactor
+push: completed to origin/master
+recommended_next: capsule_validator_code_debt_route_control_checkpoint
+```
+
+## Current Task - Capsule Validator Code Debt Route Control Checkpoint
+
+```text
+status: completed_validated
+mode: A4.8 docs-only / route-control checkpoint
+done: drafted docs/CAPSULE_VALIDATOR_CODE_DEBT_ROUTE_CONTROL_CHECKPOINT.md; corrected route state for the pushed authorization gate; kept code refactor blocked
 in_progress: commit_push_readiness
 blocked: actual code refactor remains blocked until separate explicit authorization
 remaining: exact-file guarded local commit, push preflight, push if clean
-recommended_next: guarded_commit_and_push_this_docs_gate_if_validation_and_preflight_pass
+recommended_next: stop_or_explicitly_authorize_capsule_mvp_validator_slice_code_refactor
 ```

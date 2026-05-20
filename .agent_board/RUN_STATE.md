@@ -16307,7 +16307,7 @@ recommended_next: capsule_mvp_validator_slice_code_refactor_authorization_gate
 
 ```text
 phase: capsule_mvp_validator_slice_code_refactor_authorization_gate
-status: completed_validated
+status: completed_committed_pushed
 mode: A4.8 docs-only / authorization package draft
 objective: define the exact future authorization package for extracting capsule product-core checks from scripts/validate_mvp.ps1 into a local helper
 auth_ref: docs/CAPSULE_MVP_VALIDATOR_SLICE_CODE_REFACTOR_AUTHORIZATION_GATE.md
@@ -16333,4 +16333,38 @@ local_commit_and_push_authorized_for_this_docs_gate: true
 validated_now: git diff --check; node scripts/validate_agent_board_state.js; pwsh -NoProfile -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
 validate_agent_image_lab_local_result: passed_with_manual_review_warnings
 recommended_next: guarded_commit_and_push_this_docs_gate_if_validation_and_preflight_pass
+```
+
+## Current Capsule Productization Goal
+
+```text
+phase: capsule_validator_code_debt_route_control_checkpoint
+status: completed_validated
+mode: A4.8 docs-only / route-control checkpoint
+objective: keep the validator/code-debt convergence route on capsule product core after the docs-first plan and authorization gate were committed and pushed
+checkpoint_ref: docs/CAPSULE_VALIDATOR_CODE_DEBT_ROUTE_CONTROL_CHECKPOINT.md
+sealed_chain: 38f1808; 25c8afc; 58fa49f
+route_focus: capsule_product_core_validator_debt
+next_product_move: capsule_mvp_validator_slice_code_refactor
+next_product_move_status: blocked_until_explicit_code_refactor_authorization
+code_refactor_performed: false
+validate_mvp_ps1_modified: false
+helper_script_created: false
+actual_runs_scan_performed: false
+image_binary_read_performed: false
+hash_extraction_performed: false
+dimensions_extraction_performed: false
+preview_generation_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+dependency_change_performed: false
+runtime_browser_execution_performed: false
+tag_release_deploy_performed: false
+validated_now: git diff --check; node scripts/validate_agent_board_state.js; pwsh -NoProfile -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+validate_agent_image_lab_local_result: passed_with_manual_review_warnings
+recommended_next: stop_or_explicitly_authorize_capsule_mvp_validator_slice_code_refactor
 ```
