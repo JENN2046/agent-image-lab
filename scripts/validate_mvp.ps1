@@ -7691,6 +7691,7 @@ if (-not $node) {
       'review_console/embed_contract/',
       'review_console/runtime_prototype/',
       'review_console/static_prototype/',
+      'reports/',
       'schemas/',
       'scripts/',
       'stability_tests/',

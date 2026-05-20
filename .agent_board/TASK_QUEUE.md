@@ -12075,3 +12075,26 @@ runs_mutation_performed: false
 production_candidate_performed: false
 recommended_next: stop_before_A5
 ```
+
+## Current Task - Runs Path Existence Verification A5 Scan
+
+```text
+status: completed_validated
+mode: A5 path/directory metadata scan only
+done: added reusable scanner and validator; extracted 140 safe project-relative runs/ candidates; scanned runs/ metadata; wrote canonical JSON report; updated authorization draft
+in_progress: guarded commit/push
+blocked: hash/dimensions/image-content verification remains separately blocked
+remaining: exact-file stage, guarded commit, guarded push
+report_ref: reports/runs_path_existence_verification/20260520T092525Z_runs_path_existence_scan_report.json
+candidate_path_count: 140
+scanned_file_count: 429
+scanned_directory_count: 292
+exact_existing_count: 57
+exact_missing_count: 83
+image_binary_read_performed: false
+hash_extraction_performed: false
+dimensions_extraction_performed: false
+preview_generation_performed: false
+runs_mutation_performed: false
+recommended_next: asset_hash_dimensions_verification_A5_requires_separate_authorization
+```

@@ -25117,3 +25117,37 @@ hard_stop_flags:
   production_candidate_write_performed: false
 recommended_next: stop_before_A5
 ```
+
+## Checkpoint - Runs Path Existence Verification A5 Scan
+
+```text
+phase: runs_path_existence_verification_A5_scan_train_v1
+status: completed_validated
+mode: A5 path/directory metadata scan only
+completed:
+- added scripts/scan_runs_path_existence_report.js
+- added scripts/validate_runs_path_existence_report.js
+- extracted 140 safe project-relative runs/ candidates from docs/.agent_board/tests/schemas/scripts
+- scanned runs/ directory metadata: 429 files and 292 directories
+- wrote reports/runs_path_existence_verification/20260520T092525Z_runs_path_existence_scan_report.json
+- updated docs/RUNS_RESTORE_VERIFICATION_AUTHORIZATION_PACKAGE_DRAFT.md with report refs and latest execution result
+validation_completed:
+- node --check scripts\scan_runs_path_existence_report.js
+- node --check scripts\validate_runs_path_existence_report.js
+- node scripts\validate_runs_path_existence_report.js reports/runs_path_existence_verification/20260520T092525Z_runs_path_existence_scan_report.json
+- git diff --check
+hard_stop_flags:
+  file_content_read_under_runs_performed: false
+  image_binary_read_performed: false
+  hash_extraction_performed: false
+  dimensions_extraction_performed: false
+  preview_generation_performed: false
+  runs_mutation_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+recommended_next: asset_hash_dimensions_verification_A5_requires_separate_authorization
+```

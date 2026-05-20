@@ -14643,3 +14643,31 @@ DailyNote_or_VCP_memory_write_performed: false
 production_candidate_performed: false
 recommended_next: stop_before_A5
 ```
+
+## Current Handoff Update - Runs Path Existence Verification A5 Scan
+
+```text
+phase: runs_path_existence_verification_A5_scan_train_v1
+status: completed_validated
+mode: A5 path/directory metadata scan only
+summary: Extracted safe project-relative runs/ candidates from repository text surfaces, scanned runs/ directory metadata, wrote a canonical report, and validated that no image content, hash/dimensions, preview generation, or runs mutation occurred.
+report_ref: reports/runs_path_existence_verification/20260520T092525Z_runs_path_existence_scan_report.json
+scanner_ref: scripts/scan_runs_path_existence_report.js
+validator_ref: scripts/validate_runs_path_existence_report.js
+candidate_path_count: 140
+scanned_file_count: 429
+scanned_directory_count: 292
+exact_existing_count: 57
+exact_missing_count: 83
+matched_by_basename_count: 39
+file_content_read_under_runs_performed: false
+image_binary_read_performed: false
+hash_extraction_performed: false
+dimensions_extraction_performed: false
+preview_generation_performed: false
+runs_mutation_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+production_candidate_performed: false
+recommended_next: asset_hash_dimensions_verification_A5_requires_separate_authorization
+```

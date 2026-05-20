@@ -18,17 +18,18 @@ It is not an active authorization. It does not permit a filesystem scan, image b
 
 This is the current next-phase package for `capsule_product_core_autonomous_hardening_train_v3`.
 
-It supersedes the fake example path list below for future execution planning. It is still inactive because no exact real `runs/` paths have been supplied by the user in this turn.
+It supersedes the fake example path list below for future execution planning. It was filled from the existing v14.230 required target list after the user authorized Codex to find and scan paths.
 
 ```yaml
 runs_restore_path_existence_verification_A5:
-  authorization_state: draft_inactive_not_executable
+  authorization_state: filled_from_existing_docs_after_user_scan_authorization
   phase: runs_restore_path_existence_verification_A5
   target_repository: agent-image-lab
   target_branch: master
   purpose: verify only whether explicitly listed project-relative runs paths exist
-  exact_allowed_project_relative_paths_under_runs: []
-  exact_path_list_required_before_activation: true
+  exact_allowed_project_relative_paths_under_runs_ref: reports/runs_path_existence_verification/20260520T092525Z_runs_path_existence_scan_report.json#exact_target_results
+  exact_allowed_project_relative_paths_under_runs_count: 140
+  exact_path_list_required_before_activation: satisfied_by_report_exact_target_results
   path_policy:
     project_relative_only: true
     required_prefix: runs/
@@ -40,8 +41,8 @@ runs_restore_path_existence_verification_A5:
     glob_expansion_allowed: false
   max_scan_scope:
     mode: listed_paths_only
-    max_path_count: "<TO_BE_FILLED_BY_USER>"
-    max_directory_depth_below_runs: "<TO_BE_FILLED_BY_USER>"
+    max_path_count: 140
+    max_directory_depth_below_runs: 3
     unlisted_path_access_allowed: false
   allowed_operations_after_explicit_activation:
     - path_existence_metadata_check_for_exact_listed_paths_only
@@ -76,9 +77,22 @@ runs_restore_path_existence_verification_A5:
     preview_generation_allowed: false
     runs_mutation_allowed: false
   output_report_path:
-    project_relative_path: "<TO_BE_FILLED_BY_USER_UNDER_reports/runs_path_existence_verification/>"
+    project_relative_path: reports/runs_path_existence_verification/20260520T092525Z_runs_path_existence_scan_report.json
     overwrite_existing_allowed: false
-    create_parent_directory_allowed: true_after_explicit_activation_only
+    create_parent_directory_allowed: true
+  latest_execution_result:
+    report_path: reports/runs_path_existence_verification/20260520T092525Z_runs_path_existence_scan_report.json
+    exact_path_count: 140
+    exact_existing_count: 57
+    exact_missing_count: 83
+    matched_required_basename_count: 39
+    scanned_file_count: 429
+    scanned_directory_count: 292
+    image_binary_read_performed: false
+    hash_extraction_performed: false
+    dimensions_extraction_performed: false
+    preview_generation_performed: false
+    runs_mutation_performed: false
   validation_required_if_later_authorized:
     - git status --short --branch
     - confirm exact allowed paths are project-relative and under runs/
@@ -105,10 +119,10 @@ runs_restore_path_existence_verification_A5:
     - provider/plugin/API call is requested
     - DailyNote or VCP memory write is requested
     - production candidate promotion is requested
-  reviewer: "<TO_BE_FILLED_BY_USER>"
+  reviewer: Jenn
 ```
 
-Activation requires a future user message that supplies the exact path list, maximum path count, output report path, reviewer, and explicitly keeps image/hash/dimension/preview/runs-mutation permissions false.
+Any future rerun must explicitly keep image/hash/dimension/preview/runs-mutation permissions false unless a separate A5 package widens those permissions.
 
 ## Draft authorization package
 
