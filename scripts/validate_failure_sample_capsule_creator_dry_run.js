@@ -7,6 +7,7 @@ const { spawnSync } = require("node:child_process");
 
 const repoRoot = path.resolve(__dirname, "..");
 const creatorPath = path.join(repoRoot, "scripts", "create_failure_sample_capsule.js");
+const commonPath = path.join(repoRoot, "scripts", "lib", "capsule_creator_common.js");
 const sampleId = "failure_french_summer_rattan_bag_v7_29_001";
 const sourceImage =
   "runs/real_generation/v7_29_native_doubao_french_summer_rattan_bag_v2_single_real_run/native_doubao_1778325901725_0.jpg";
@@ -43,6 +44,7 @@ function expect(condition, check, detail = null) {
 
 const checks = [];
 const creatorSource = fs.readFileSync(creatorPath, "utf8");
+const commonSource = fs.readFileSync(commonPath, "utf8");
 const beforeTargetExists = fs.existsSync(targetRoot);
 const beforeTargetEntries = beforeTargetExists ? fs.readdirSync(targetRoot).sort() : [];
 
@@ -77,8 +79,8 @@ checks.push(expect(planOnly.result?.guard?.api_call_performed === false, "plan_o
 checks.push(expect(planOnly.result?.guard?.image_generation_performed === false, "plan_only_no_image_generation", planOnly.result?.guard));
 checks.push(expect(planOnly.result?.guard?.DailyNote_write_performed === false, "plan_only_no_dailynote_write", planOnly.result?.guard));
 checks.push(expect(planOnly.result?.guard?.VCP_memory_write_performed === false, "plan_only_no_vcp_memory_write", planOnly.result?.guard));
-checks.push(expect(creatorSource.includes(".tmp-"), "creator_uses_temp_capsule_directory"));
-checks.push(expect(creatorSource.includes("fs.renameSync"), "creator_finalizes_with_rename"));
+checks.push(expect(creatorSource.includes("tempTargetRoot") && commonSource.includes(".tmp-"), "creator_uses_temp_capsule_directory"));
+checks.push(expect(creatorSource.includes("renamePath") && commonSource.includes("fs.renameSync"), "creator_finalizes_with_rename"));
 checks.push(expect(creatorSource.includes("removeTempTarget"), "creator_cleans_temp_target_on_failure"));
 
 const badSource = runCreator([

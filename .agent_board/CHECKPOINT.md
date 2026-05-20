@@ -24633,3 +24633,37 @@ hard_stop_flags:
   runtime_browser_execution_performed: false
 recommended_next: guarded_commit_and_push_if_preflight_clean
 ```
+
+## Checkpoint - Capsule Creator Shared Utils
+
+```text
+phase: capsule_creator_shared_utils_gate
+status: completed_validated
+mode: A4.8 local implementation / creator safety refactor
+completed:
+- added scripts/lib/capsule_creator_common.js
+- refactored scripts/create_preview_capsule.js and scripts/create_failure_sample_capsule.js to share safety helpers
+- added scripts/validate_capsule_creator_common_safety.js
+- updated creator validators to assert the shared helper still preserves temp-dir final rename and target overwrite blocking
+- wired the new validator into scripts/validate_mvp_capsule_product_core.ps1
+validation_completed:
+- node --check for changed JS files
+- node scripts/validate_capsule_creator_common_safety.js
+- node scripts/validate_create_preview_capsule_registry_source.js
+- node scripts/validate_failure_sample_capsule_creator_dry_run.js
+hard_stop_flags:
+  actual_runs_scan_performed: false
+  image_binary_read_performed: false
+  hash_extraction_performed: false
+  dimensions_extraction_performed: false
+  preview_generation_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  dependency_change_performed: false
+  runtime_browser_execution_performed: false
+recommended_next: guarded_commit_and_push_if_preflight_clean
+```

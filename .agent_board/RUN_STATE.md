@@ -16398,3 +16398,30 @@ runtime_browser_execution_performed: false
 tag_release_deploy_performed: false
 recommended_next: guarded_commit_and_push_if_preflight_clean
 ```
+
+## Current Capsule Productization Goal
+
+```text
+phase: capsule_creator_shared_utils_gate
+status: completed_validated
+mode: A4.8 local implementation / creator safety refactor
+objective: reduce duplicated safety-critical creator behavior across accepted and failure capsule creators without changing creator semantics
+helper_ref: scripts/lib/capsule_creator_common.js
+validator_ref: scripts/validate_capsule_creator_common_safety.js
+accepted_creator_refactored: true
+failure_creator_refactored: true
+mvp_helper_wired: true
+writes_performed_by_validation: false
+preview_creation_or_copy_performed: false
+actual_runs_scan_performed: false
+image_binary_read_performed: false
+hash_or_dimensions_extraction_performed: false
+preview_generation_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+dependency_change_performed: false
+production_candidate_performed: false
+runtime_browser_execution_performed: false
+tag_release_deploy_performed: false
+recommended_next: guarded_commit_and_push_if_preflight_clean
+```

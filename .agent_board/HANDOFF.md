@@ -14324,3 +14324,26 @@ runtime_browser_execution_performed: false
 tag_release_deploy_performed: false
 recommended_next: guarded_commit_and_push_if_preflight_clean
 ```
+
+## Current Handoff Update - Capsule Creator Shared Utils
+
+```text
+phase: capsule_creator_shared_utils_gate
+status: completed_validated
+mode: A4.8 local implementation / creator safety refactor
+summary: Extracted duplicated accepted/failure capsule creator safety helpers into scripts/lib/capsule_creator_common.js while preserving plan-only defaults, temp-dir final rename, target overwrite blocking, and no-execution guard flags.
+changed_code: scripts/lib/capsule_creator_common.js; scripts/create_preview_capsule.js; scripts/create_failure_sample_capsule.js; scripts/validate_capsule_creator_common_safety.js; scripts/validate_create_preview_capsule_registry_source.js; scripts/validate_failure_sample_capsule_creator_dry_run.js; scripts/validate_mvp_capsule_product_core.ps1
+writes_performed_by_validation: false
+preview_creation_or_copy_performed: false
+actual_runs_scan_performed: false
+image_binary_read_performed: false
+hash_or_dimensions_extraction_performed: false
+preview_generation_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+dependency_change_performed: false
+production_candidate_performed: false
+runtime_browser_execution_performed: false
+tag_release_deploy_performed: false
+recommended_next: guarded_commit_and_push_if_preflight_clean
+```

@@ -1,38 +1,31 @@
 #!/usr/bin/env node
 "use strict";
 
-const crypto = require("node:crypto");
-const fs = require("node:fs");
 const path = require("node:path");
 const sharp = require("sharp");
 const { createRecoverabilityCore } = require("./lib/artifact_recoverability_core");
 const { loadAcceptedSampleFromRegistry } = require("./lib/accepted_sample_registry_source");
+const { createCapsuleCreatorCommon } = require("./lib/capsule_creator_common");
 
 const repoRoot = path.resolve(__dirname, "..");
 const core = createRecoverabilityCore(repoRoot);
-
-function repoPath(relativePath) {
-  const resolved = path.resolve(repoRoot, relativePath);
-  const relative = path.relative(repoRoot, resolved);
-  if (relative.startsWith("..") || path.isAbsolute(relative)) {
-    throw new Error(`path escapes repository root: ${relativePath}`);
-  }
-  return resolved;
-}
-
-function readText(relativePath) {
-  return fs.readFileSync(repoPath(relativePath), "utf8");
-}
-
-function writeJson(relativePath, value) {
-  fs.writeFileSync(repoPath(relativePath), `${JSON.stringify(value, null, 2)}\n`, "utf8");
-}
-
-function sha256File(relativePath) {
-  const hash = crypto.createHash("sha256");
-  hash.update(fs.readFileSync(repoPath(relativePath)));
-  return hash.digest("hex");
-}
+const creatorCommon = createCapsuleCreatorCommon(repoRoot, {
+  tempRootParent: "asset_archive/accepted_samples",
+});
+const {
+  repoPath,
+  readText,
+  writeJson,
+  sha256File,
+  exists,
+  requireExists,
+  tempTargetRoot,
+  removeTempTarget,
+  assertTargetClean,
+  ensureDir,
+  renamePath,
+  createNoExecutionGuard,
+} = creatorCommon;
 
 function extractRegistrySampleBlock(registryText, sampleId) {
   const marker = `sample_id: ${sampleId}`;
@@ -43,12 +36,6 @@ function extractRegistrySampleBlock(registryText, sampleId) {
   return next >= 0 ? rest.slice(0, next).trimEnd() : rest.trimEnd();
 }
 
-function requireExists(relativePath, label) {
-  if (!fs.existsSync(repoPath(relativePath))) {
-    throw new Error(`${label} missing: ${relativePath}`);
-  }
-}
-
 function capsulePaths(sample) {
   return {
     manifest: `${sample.targetRoot}/manifest.json`,
@@ -57,26 +44,6 @@ function capsulePaths(sample) {
     reviewRecord: `${sample.targetRoot}/review_record.json`,
     approvalRecord: `${sample.targetRoot}/approval_record.json`,
   };
-}
-
-function tempTargetRoot(sample) {
-  return `asset_archive/accepted_samples/.tmp-${sample.sampleId}-${process.pid}-${Date.now()}`;
-}
-
-function removeTempTarget(relativePath) {
-  const resolved = repoPath(relativePath);
-  const relative = path.relative(repoRoot, resolved).replace(/\\/g, "/");
-  if (!relative.startsWith("asset_archive/accepted_samples/.tmp-")) {
-    throw new Error(`refusing to remove non-temp capsule path: ${relativePath}`);
-  }
-  fs.rmSync(resolved, { recursive: true, force: true });
-}
-
-function assertTargetClean(sample) {
-  const targetRoot = repoPath(sample.targetRoot);
-  if (fs.existsSync(targetRoot)) {
-    throw new Error(`target capsule directory already exists: ${sample.targetRoot}`);
-  }
 }
 
 function readArg(name) {
@@ -110,28 +77,18 @@ function planOnly(sample) {
     sample_id: sample.sampleId,
     registry_driven_source: true,
     source_image: sample.sourceImage,
-    source_image_exists: fs.existsSync(repoPath(sample.sourceImage)),
+    source_image_exists: exists(sample.sourceImage),
     target_root: sample.targetRoot,
-    target_root_exists: fs.existsSync(repoPath(sample.targetRoot)),
+    target_root_exists: exists(sample.targetRoot),
     required_long_edge: sample.requiredLongEdge,
     planned_files: Object.values(paths),
     writes_performed: false,
     confirm_create_required: true,
-    guard: {
-      provider_contact_performed: false,
-      plugin_call_performed: false,
-      api_call_performed: false,
-      image_generation_performed: false,
-      DailyNote_write_performed: false,
-      VCP_memory_write_performed: false,
-      runtime_execution_performed: false,
-      real_manifest_read_performed: false,
-      real_vcpchat_read_performed: false,
-      real_vcptoolbox_read_performed: false,
+    guard: createNoExecutionGuard({
       production_candidate_created: false,
       push_tag_release_deploy_performed: false,
       commercial_delivery_performed: false,
-    },
+    }),
   };
 }
 
@@ -145,14 +102,14 @@ async function createCapsule(sample) {
   const finalPaths = capsulePaths(sample);
   const plannedFiles = Object.values(finalPaths);
   for (const plannedFile of plannedFiles) {
-    if (fs.existsSync(repoPath(plannedFile))) {
+    if (exists(plannedFile)) {
       throw new Error(`refusing to overwrite existing capsule file: ${plannedFile}`);
     }
   }
 
   const tempSample = { ...sample, targetRoot: tempTargetRoot(sample) };
   const tempPaths = capsulePaths(tempSample);
-  fs.mkdirSync(repoPath(tempSample.targetRoot), { recursive: true });
+  ensureDir(tempSample.targetRoot);
 
   try {
     await sharp(repoPath(sample.sourceImage))
@@ -173,18 +130,7 @@ async function createCapsule(sample) {
     if (!sampleBlock) throw new Error(`sample not found in registry: ${sample.sampleId}`);
 
     const createdAt = new Date().toISOString();
-    const commonGuard = {
-      provider_contact_performed: false,
-      plugin_call_performed: false,
-      api_call_performed: false,
-      image_generation_performed: false,
-      DailyNote_write_performed: false,
-      VCP_memory_write_performed: false,
-      runtime_execution_performed: false,
-      real_manifest_read_performed: false,
-      real_vcpchat_read_performed: false,
-      real_vcptoolbox_read_performed: false,
-    };
+    const commonGuard = createNoExecutionGuard();
 
     writeJson(tempPaths.importRecord, {
       record_type: "git_portable_preview_capsule_import_record",
@@ -241,7 +187,7 @@ async function createCapsule(sample) {
       guard: commonGuard,
     });
 
-    fs.renameSync(repoPath(tempSample.targetRoot), repoPath(sample.targetRoot));
+    renamePath(tempSample.targetRoot, sample.targetRoot);
 
     return { sample_id: sample.sampleId, target_root: sample.targetRoot, registry_driven_source: true, preview: { path: finalPaths.preview, width: previewMetadata.width, height: previewMetadata.height, long_edge: previewLongEdge, sha256: previewSha256 }, created_files: plannedFiles };
   } catch (error) {

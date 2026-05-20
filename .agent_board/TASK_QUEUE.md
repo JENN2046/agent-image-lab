@@ -11862,3 +11862,16 @@ remaining: exact-file guarded local commit, push preflight, push if clean
 validation: PowerShell parse checks passed; validate_mvp.ps1 passed; validate_agent_board_state passed; validate-agent-image-lab-local passed with manual-review warnings; git diff --check passed
 recommended_next: guarded_commit_and_push_if_preflight_clean
 ```
+
+## Current Task - Capsule Creator Shared Utils
+
+```text
+status: completed_validated
+mode: A4.8 local implementation / creator safety refactor
+done: added scripts/lib/capsule_creator_common.js; refactored accepted and failure capsule creators to share repo-path, JSON write, temp-dir, overwrite guard, and no-execution guard helpers; added scripts/validate_capsule_creator_common_safety.js; wired it into scripts/validate_mvp_capsule_product_core.ps1
+in_progress: commit_push_readiness
+blocked: none
+remaining: full validation, exact-file guarded local commit, push preflight, push if clean
+validation: targeted JS syntax and creator safety validators passed before full validation
+recommended_next: guarded_commit_and_push_if_preflight_clean
+```

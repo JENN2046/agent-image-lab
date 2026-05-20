@@ -11,6 +11,22 @@ function Invoke-CapsuleProductCoreValidation {
   )
 
   if ($Section -eq 'PreRuns' -or $Section -eq 'All') {
+  $capsuleCreatorCommonSafetyOutput = & node (Join-Path $Root 'scripts/validate_capsule_creator_common_safety.js')
+  if ($LASTEXITCODE -ne 0) {
+    & $AddFailure "Capsule creator common safety validation exited with failure"
+  } else {
+    $capsuleCreatorCommonSafety = ($capsuleCreatorCommonSafetyOutput -join "`n") | ConvertFrom-Json
+    if ($capsuleCreatorCommonSafety.passed -ne $true -or $capsuleCreatorCommonSafety.status -ne 'capsule_creator_common_safety_verified') {
+      & $AddFailure "Capsule creator common safety validation must pass"
+    }
+    if ($capsuleCreatorCommonSafety.duplicated_creator_safety_logic_reduced -ne $true -or $capsuleCreatorCommonSafety.writes_performed -ne $false -or $capsuleCreatorCommonSafety.preview_creation_or_copy_performed -ne $false) {
+      & $AddFailure "Capsule creator common safety validation must reduce duplication without writes or preview creation/copy"
+    }
+    if ($capsuleCreatorCommonSafety.provider_contact_performed -ne $false -or $capsuleCreatorCommonSafety.plugin_call_performed -ne $false -or $capsuleCreatorCommonSafety.api_call_performed -ne $false -or $capsuleCreatorCommonSafety.image_generation_performed -ne $false -or $capsuleCreatorCommonSafety.DailyNote_write_performed -ne $false -or $capsuleCreatorCommonSafety.VCP_memory_write_performed -ne $false -or $capsuleCreatorCommonSafety.runtime_execution_performed -ne $false -or $capsuleCreatorCommonSafety.real_manifest_read_performed -ne $false -or $capsuleCreatorCommonSafety.real_vcpchat_read_performed -ne $false -or $capsuleCreatorCommonSafety.real_vcptoolbox_read_performed -ne $false -or $capsuleCreatorCommonSafety.production_candidate_write_performed -ne $false -or $capsuleCreatorCommonSafety.push_tag_release_deploy_performed -ne $false) {
+      & $AddFailure "Capsule creator common safety validation must remain local-only with no external, memory, runtime, production, or remote actions"
+    }
+  }
+
   $gitTrackedPreviewEvidenceCapsuleBaselineOutput = & node (Join-Path $Root 'scripts/validate_v14_231_git_tracked_preview_evidence_capsule_baseline.js')
   if ($LASTEXITCODE -ne 0) {
     & $AddFailure "Git-tracked preview evidence capsule baseline validation exited with failure"

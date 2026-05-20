@@ -1,37 +1,30 @@
 #!/usr/bin/env node
 "use strict";
 
-const crypto = require("node:crypto");
-const fs = require("node:fs");
 const path = require("node:path");
 const sharp = require("sharp");
+const { createCapsuleCreatorCommon } = require("./lib/capsule_creator_common");
 
 const repoRoot = path.resolve(__dirname, "..");
+const creatorCommon = createCapsuleCreatorCommon(repoRoot, {
+  tempRootParent: "asset_archive/failure_samples",
+});
+const {
+  repoPath,
+  readText,
+  writeJson,
+  sha256File,
+  exists,
+  requireExists,
+  tempTargetRoot,
+  removeTempTarget,
+  assertTargetClean,
+  ensureDir,
+  renamePath,
+  createNoExecutionGuard,
+} = creatorCommon;
 
 const FAILURE_REGISTRY_REF = "failure_samples/failure_registry.yaml";
-
-function repoPath(relativePath) {
-  const resolved = path.resolve(repoRoot, relativePath);
-  const relative = path.relative(repoRoot, resolved);
-  if (relative.startsWith("..") || path.isAbsolute(relative)) {
-    throw new Error(`path escapes repository root: ${relativePath}`);
-  }
-  return resolved;
-}
-
-function readText(relativePath) {
-  return fs.readFileSync(repoPath(relativePath), "utf8");
-}
-
-function writeJson(relativePath, value) {
-  fs.writeFileSync(repoPath(relativePath), `${JSON.stringify(value, null, 2)}\n`, "utf8");
-}
-
-function sha256File(relativePath) {
-  const hash = crypto.createHash("sha256");
-  hash.update(fs.readFileSync(repoPath(relativePath)));
-  return hash.digest("hex");
-}
 
 function readArg(name) {
   const prefix = `--${name}=`;
@@ -41,12 +34,6 @@ function readArg(name) {
 
 function boolArg(name) {
   return readArg(name) === "true";
-}
-
-function requireExists(relativePath, label) {
-  if (!fs.existsSync(repoPath(relativePath))) {
-    throw new Error(`${label} missing: ${relativePath}`);
-  }
 }
 
 function extractFailureBlock(registryText, sampleId) {
@@ -114,26 +101,6 @@ function capsulePaths(sample) {
   };
 }
 
-function tempTargetRoot(sample) {
-  return `asset_archive/failure_samples/.tmp-${sample.sampleId}-${process.pid}-${Date.now()}`;
-}
-
-function removeTempTarget(relativePath) {
-  const resolved = repoPath(relativePath);
-  const relative = path.relative(repoRoot, resolved).replace(/\\/g, "/");
-  if (!relative.startsWith("asset_archive/failure_samples/.tmp-")) {
-    throw new Error(`refusing to remove non-temp capsule path: ${relativePath}`);
-  }
-  fs.rmSync(resolved, { recursive: true, force: true });
-}
-
-function assertTargetClean(sample) {
-  const targetRoot = repoPath(sample.targetRoot);
-  if (fs.existsSync(targetRoot)) {
-    throw new Error(`target capsule directory already exists: ${sample.targetRoot}`);
-  }
-}
-
 function planOnly(sample) {
   const paths = capsulePaths(sample);
   return {
@@ -141,26 +108,16 @@ function planOnly(sample) {
     mode: "plan_only",
     sample_id: sample.sampleId,
     source_image: sample.sourceImage,
-    source_image_exists: fs.existsSync(repoPath(sample.sourceImage)),
+    source_image_exists: exists(sample.sourceImage),
     target_root: sample.targetRoot,
     required_long_edge: sample.requiredLongEdge,
     planned_files: Object.values(paths),
     writes_performed: false,
     confirm_create_required: true,
-    guard: {
-      provider_contact_performed: false,
-      plugin_call_performed: false,
-      api_call_performed: false,
-      image_generation_performed: false,
-      DailyNote_write_performed: false,
-      VCP_memory_write_performed: false,
-      runtime_execution_performed: false,
-      real_manifest_read_performed: false,
-      real_vcpchat_read_performed: false,
-      real_vcptoolbox_read_performed: false,
+    guard: createNoExecutionGuard({
       production_candidate_created: false,
       push_tag_release_deploy_performed: false,
-    },
+    }),
   };
 }
 
@@ -173,14 +130,14 @@ async function createCapsule(sample) {
 
   const finalPaths = capsulePaths(sample);
   for (const plannedFile of Object.values(finalPaths)) {
-    if (fs.existsSync(repoPath(plannedFile))) {
+    if (exists(plannedFile)) {
       throw new Error(`refusing to overwrite existing capsule file: ${plannedFile}`);
     }
   }
 
   const tempSample = { ...sample, targetRoot: tempTargetRoot(sample) };
   const tempPaths = capsulePaths(tempSample);
-  fs.mkdirSync(repoPath(tempSample.targetRoot), { recursive: true });
+  ensureDir(tempSample.targetRoot);
 
   try {
   await sharp(repoPath(sample.sourceImage))
@@ -210,19 +167,9 @@ async function createCapsule(sample) {
   }
 
   const createdAt = new Date().toISOString();
-  const commonGuard = {
-    provider_contact_performed: false,
-    plugin_call_performed: false,
-    api_call_performed: false,
-    image_generation_performed: false,
-    DailyNote_write_performed: false,
-    VCP_memory_write_performed: false,
-    runtime_execution_performed: false,
-    real_manifest_read_performed: false,
-    real_vcpchat_read_performed: false,
-    real_vcptoolbox_read_performed: false,
+  const commonGuard = createNoExecutionGuard({
     production_candidate_created: false,
-  };
+  });
 
     writeJson(tempPaths.failureRecord, {
     record_type: "git_portable_failure_sample_capsule_failure_record",
@@ -297,7 +244,7 @@ async function createCapsule(sample) {
     guard: commonGuard,
   });
 
-    fs.renameSync(repoPath(tempSample.targetRoot), repoPath(sample.targetRoot));
+    renamePath(tempSample.targetRoot, sample.targetRoot);
 
   return {
     passed: true,
