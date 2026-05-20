@@ -4,7 +4,7 @@
 ## Current Task - Durable Archive Copy A5 Authorization Package
 
 ```text
-status: completed_validated
+status: completed_validated_then_A5_copy_executed_validated
 mode: A4.8 authorization package / no copy execution
 done: generated inactive exact-pair copy authorization package; added static validator; wired validator into scripts/validate_mvp.ps1
 in_progress: none
@@ -17,6 +17,26 @@ runs_mutation_performed: false
 preview_generation_performed: false
 production_candidate_performed: false
 recommended_next: stop_before_real_durable_archive_copy_A5
+```
+
+---
+
+## Current Task - Durable Archive Copy A5 Execution
+
+```text
+status: completed_validated_uncommitted_binary_artifacts
+mode: A5 exact archive copy execution
+done: copied 14 exact authorized source images into asset_archive/original_assets/by_sha256/; wrote execution report; added execution report validator; verified copied target binaries
+in_progress: none
+blocked: push requires explicit authorization; production candidate remains blocked
+remaining: validate and commit verified archive binaries with execution evidence
+execution_report_ref: reports/durable_archive_copy_execution/2026-05-20_durable_archive_copy_A5_execution_report.json
+copied_count: 14
+runs_mutation_performed: false
+preview_generation_performed: false
+production_candidate_performed: false
+tracking_policy_ref: docs/ASSET_ARCHIVE_GIT_TRACKING_POLICY.md
+recommended_next: commit_verified_archive_binaries_with_execution_evidence
 ```
 
 ---

@@ -5,7 +5,7 @@
 
 ```text
 phase: durable_archive_copy_A5_authorization_package
-status: completed_validated
+status: completed_validated_then_A5_copy_executed_validated
 mode: A4.8 authorization package / no copy execution
 summary: Prepared an inactive A5 authorization package with 14 exact source-to-target copy pairs derived from the full asset archive dry-run manifest, plus a static validator wired into scripts/validate_mvp.ps1.
 authorization_package_ref: reports/durable_archive_copy_authorization/2026-05-20_durable_archive_copy_A5_authorization_package.json
@@ -15,6 +15,27 @@ not_performed: no durable archive copy, no archive target creation, no runs muta
 blocked_next: real durable archive copy execution requires explicit A5 activation.
 validated_now: node --check scripts/validate_durable_archive_copy_authorization_package.js; node scripts/validate_durable_archive_copy_authorization_package.js; git diff --check; node scripts/validate_agent_board_state.js; powershell scripts/validate_mvp.ps1; powershell scripts/validate-agent-image-lab-local.ps1.
 recommended_next: stop before real durable archive copy A5, or prepare production candidate preflight without writing production candidate.
+```
+
+---
+
+## Current Handoff Update - Durable Archive Copy A5 Execution
+
+```text
+phase: durable_archive_copy_A5_execution
+status: completed_validated_uncommitted_binary_artifacts
+mode: A5 exact archive copy execution
+summary: Executed the 14 exact copy pairs from runs/ into asset_archive/original_assets/by_sha256/, wrote an execution report, and validated actual copied target binaries by sha256, dimensions, and MIME.
+authorization_package_ref: reports/durable_archive_copy_authorization/2026-05-20_durable_archive_copy_A5_authorization_package.json
+execution_report_ref: reports/durable_archive_copy_execution/2026-05-20_durable_archive_copy_A5_execution_report.json
+execution_validator_ref: scripts/validate_durable_archive_copy_execution_report.js
+copied_count: 14
+post_copy_verified_count: 14
+failed_count: 0
+not_performed: no runs mutation, no source move/delete, no overwrite, no preview generation, no provider/plugin/API, no DailyNote/VCP memory, no production candidate.
+tracking_policy_decision: user decided verified durable image binaries enter Git.
+tracking_policy_ref: docs/ASSET_ARCHIVE_GIT_TRACKING_POLICY.md
+recommended_next: validate and commit verified archive binaries with execution evidence; push still requires explicit authorization.
 ```
 
 ---

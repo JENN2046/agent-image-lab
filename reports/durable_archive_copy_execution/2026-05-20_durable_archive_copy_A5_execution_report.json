@@ -1,0 +1,426 @@
+{
+  "report_version": 1,
+  "phase": "durable_archive_copy_A5_execution",
+  "status": "completed_validated",
+  "generated_at_local": "2026-05-20T10:03:50.497Z",
+  "authorization_package_ref": "reports/durable_archive_copy_authorization/2026-05-20_durable_archive_copy_A5_authorization_package.json",
+  "execution_report_path": "reports/durable_archive_copy_execution/2026-05-20_durable_archive_copy_A5_execution_report.json",
+  "reviewer": "Jenn",
+  "exact_copy_pair_count": 14,
+  "copied_count": 14,
+  "post_copy_verified_count": 14,
+  "failed_count": 0,
+  "durable_archive_copy_performed": true,
+  "target_archive_directory_created": true,
+  "target_archive_artifact_created": true,
+  "source_image_binary_read_performed_for_copy_and_verify": true,
+  "target_image_binary_read_performed_for_verify": true,
+  "hash_extraction_performed_for_copy_verify": true,
+  "dimensions_extraction_performed_for_copy_verify": true,
+  "runs_mutation_performed": false,
+  "source_move_performed": false,
+  "source_delete_performed": false,
+  "overwrite_performed": false,
+  "preview_generation_performed": false,
+  "provider_contact_performed": false,
+  "plugin_call_performed": false,
+  "api_call_performed": false,
+  "DailyNote_write_performed": false,
+  "VCP_memory_write_performed": false,
+  "production_candidate_write_performed": false,
+  "results": [
+    {
+      "source_runs_path": "runs/a5_complete_delivery_photo_studio_os/image/doubaogen/fa3d1a57-efdc-4806-8153-03d986856dee.jpg",
+      "target_archive_path": "asset_archive/original_assets/by_sha256/430b313954d1abb72ca32e9ab0778572b288772a1ed073e231822e4d3c544215.jpg",
+      "source_sha256": "430b313954d1abb72ca32e9ab0778572b288772a1ed073e231822e4d3c544215",
+      "target_sha256": "430b313954d1abb72ca32e9ab0778572b288772a1ed073e231822e4d3c544215",
+      "expected_sha256": "430b313954d1abb72ca32e9ab0778572b288772a1ed073e231822e4d3c544215",
+      "source_dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "target_dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "expected_dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "target_mime_type": "image/jpeg",
+      "expected_mime_type": "image/jpeg",
+      "target_size_bytes": 231316,
+      "expected_size_bytes": 231316,
+      "copy_performed": true,
+      "move_performed": false,
+      "delete_performed": false,
+      "overwrite_performed": false,
+      "post_copy_verified": true
+    },
+    {
+      "source_runs_path": "runs/a5_positive_still_life_prompt_v1/image/doubaogen/35bc0610-3f7c-4295-887b-8b2a2dcf8999.jpg",
+      "target_archive_path": "asset_archive/original_assets/by_sha256/4a6aff4ff19127d8e817439ee585fa7eaf55874a1c6408abb3b76bde9e67092f.jpg",
+      "source_sha256": "4a6aff4ff19127d8e817439ee585fa7eaf55874a1c6408abb3b76bde9e67092f",
+      "target_sha256": "4a6aff4ff19127d8e817439ee585fa7eaf55874a1c6408abb3b76bde9e67092f",
+      "expected_sha256": "4a6aff4ff19127d8e817439ee585fa7eaf55874a1c6408abb3b76bde9e67092f",
+      "source_dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "target_dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "expected_dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "target_mime_type": "image/jpeg",
+      "expected_mime_type": "image/jpeg",
+      "target_size_bytes": 336179,
+      "expected_size_bytes": 336179,
+      "copy_performed": true,
+      "move_performed": false,
+      "delete_performed": false,
+      "overwrite_performed": false,
+      "post_copy_verified": true
+    },
+    {
+      "source_runs_path": "runs/photo_studio_os_v0_10_doubao_retry/image/doubaogen/bcbe3b60-6f7b-4e92-8a9d-b5044a86b7c3.jpg",
+      "target_archive_path": "asset_archive/original_assets/by_sha256/b162fab50e6a5bf95b8f761441149ee27d498a3b136eafe6322f05c5499d06f0.jpg",
+      "source_sha256": "b162fab50e6a5bf95b8f761441149ee27d498a3b136eafe6322f05c5499d06f0",
+      "target_sha256": "b162fab50e6a5bf95b8f761441149ee27d498a3b136eafe6322f05c5499d06f0",
+      "expected_sha256": "b162fab50e6a5bf95b8f761441149ee27d498a3b136eafe6322f05c5499d06f0",
+      "source_dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "target_dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "expected_dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "target_mime_type": "image/jpeg",
+      "expected_mime_type": "image/jpeg",
+      "target_size_bytes": 286631,
+      "expected_size_bytes": 286631,
+      "copy_performed": true,
+      "move_performed": false,
+      "delete_performed": false,
+      "overwrite_performed": false,
+      "post_copy_verified": true
+    },
+    {
+      "source_runs_path": "runs/photo_studio_os_v0_7/image/doubaogen/9d38c556-cd87-44ec-9828-f96a5c305c1e.jpg",
+      "target_archive_path": "asset_archive/original_assets/by_sha256/222e434177c15fa8ae58ffa19f81f82ba9839afbdc3ef0a09006163afcbb280d.jpg",
+      "source_sha256": "222e434177c15fa8ae58ffa19f81f82ba9839afbdc3ef0a09006163afcbb280d",
+      "target_sha256": "222e434177c15fa8ae58ffa19f81f82ba9839afbdc3ef0a09006163afcbb280d",
+      "expected_sha256": "222e434177c15fa8ae58ffa19f81f82ba9839afbdc3ef0a09006163afcbb280d",
+      "source_dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "target_dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "expected_dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "target_mime_type": "image/jpeg",
+      "expected_mime_type": "image/jpeg",
+      "target_size_bytes": 241390,
+      "expected_size_bytes": 241390,
+      "copy_performed": true,
+      "move_performed": false,
+      "delete_performed": false,
+      "overwrite_performed": false,
+      "post_copy_verified": true
+    },
+    {
+      "source_runs_path": "runs/photo_studio_os_v0_9_retry/image/doubaogen/41c7b649-62df-41b2-8707-36792edc77b0.jpg",
+      "target_archive_path": "asset_archive/original_assets/by_sha256/642ea5d5a8de70eedcdd8a612b2cd9ae3e8b1ea263386bb34ee50be2124b4e35.jpg",
+      "source_sha256": "642ea5d5a8de70eedcdd8a612b2cd9ae3e8b1ea263386bb34ee50be2124b4e35",
+      "target_sha256": "642ea5d5a8de70eedcdd8a612b2cd9ae3e8b1ea263386bb34ee50be2124b4e35",
+      "expected_sha256": "642ea5d5a8de70eedcdd8a612b2cd9ae3e8b1ea263386bb34ee50be2124b4e35",
+      "source_dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "target_dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "expected_dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "target_mime_type": "image/jpeg",
+      "expected_mime_type": "image/jpeg",
+      "target_size_bytes": 305895,
+      "expected_size_bytes": 305895,
+      "copy_performed": true,
+      "move_performed": false,
+      "delete_performed": false,
+      "overwrite_performed": false,
+      "post_copy_verified": true
+    },
+    {
+      "source_runs_path": "runs/real_generation/v10_010_premium_serum_bottle_first_trial/native_doubao_1778809662218_0.jpg",
+      "target_archive_path": "asset_archive/original_assets/by_sha256/3f7a93b58004023cd336dc9db36492a9d48971f30ad6d0158135f2d653decd89.jpg",
+      "source_sha256": "3f7a93b58004023cd336dc9db36492a9d48971f30ad6d0158135f2d653decd89",
+      "target_sha256": "3f7a93b58004023cd336dc9db36492a9d48971f30ad6d0158135f2d653decd89",
+      "expected_sha256": "3f7a93b58004023cd336dc9db36492a9d48971f30ad6d0158135f2d653decd89",
+      "source_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "target_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "expected_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "target_mime_type": "image/jpeg",
+      "expected_mime_type": "image/jpeg",
+      "target_size_bytes": 154814,
+      "expected_size_bytes": 154814,
+      "copy_performed": true,
+      "move_performed": false,
+      "delete_performed": false,
+      "overwrite_performed": false,
+      "post_copy_verified": true
+    },
+    {
+      "source_runs_path": "runs/real_generation/v13_012_premium_portable_led_camping_lantern_first_trial/native_doubao_1778838659034_0.jpg",
+      "target_archive_path": "asset_archive/original_assets/by_sha256/2e3876efca3788941588e8034d4e0b83cec5c1014cae9ca5a4660f0b8761e62c.jpg",
+      "source_sha256": "2e3876efca3788941588e8034d4e0b83cec5c1014cae9ca5a4660f0b8761e62c",
+      "target_sha256": "2e3876efca3788941588e8034d4e0b83cec5c1014cae9ca5a4660f0b8761e62c",
+      "expected_sha256": "2e3876efca3788941588e8034d4e0b83cec5c1014cae9ca5a4660f0b8761e62c",
+      "source_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "target_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "expected_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "target_mime_type": "image/jpeg",
+      "expected_mime_type": "image/jpeg",
+      "target_size_bytes": 240457,
+      "expected_size_bytes": 240457,
+      "copy_performed": true,
+      "move_performed": false,
+      "delete_performed": false,
+      "overwrite_performed": false,
+      "post_copy_verified": true
+    },
+    {
+      "source_runs_path": "runs/real_generation/v7_21_native_doubao_first_real_run/native_doubao_1778320041596_0.jpg",
+      "target_archive_path": "asset_archive/original_assets/by_sha256/02b81e022fffc885197e4f8f53a85c2da69d758c5895b85028eab047daffdfaf.jpg",
+      "source_sha256": "02b81e022fffc885197e4f8f53a85c2da69d758c5895b85028eab047daffdfaf",
+      "target_sha256": "02b81e022fffc885197e4f8f53a85c2da69d758c5895b85028eab047daffdfaf",
+      "expected_sha256": "02b81e022fffc885197e4f8f53a85c2da69d758c5895b85028eab047daffdfaf",
+      "source_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "target_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "expected_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "target_mime_type": "image/jpeg",
+      "expected_mime_type": "image/jpeg",
+      "target_size_bytes": 843939,
+      "expected_size_bytes": 843939,
+      "copy_performed": true,
+      "move_performed": false,
+      "delete_performed": false,
+      "overwrite_performed": false,
+      "post_copy_verified": true
+    },
+    {
+      "source_runs_path": "runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg",
+      "target_archive_path": "asset_archive/original_assets/by_sha256/8853c34f7e6a841590bcd04617591e6c572a7f6f0a88dc4970bec78246d7e580.jpg",
+      "source_sha256": "8853c34f7e6a841590bcd04617591e6c572a7f6f0a88dc4970bec78246d7e580",
+      "target_sha256": "8853c34f7e6a841590bcd04617591e6c572a7f6f0a88dc4970bec78246d7e580",
+      "expected_sha256": "8853c34f7e6a841590bcd04617591e6c572a7f6f0a88dc4970bec78246d7e580",
+      "source_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "target_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "expected_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "target_mime_type": "image/jpeg",
+      "expected_mime_type": "image/jpeg",
+      "target_size_bytes": 1104027,
+      "expected_size_bytes": 1104027,
+      "copy_performed": true,
+      "move_performed": false,
+      "delete_performed": false,
+      "overwrite_performed": false,
+      "post_copy_verified": true
+    },
+    {
+      "source_runs_path": "runs/real_generation/v7_26_native_doubao_french_summer_rattan_bag_first_run/native_doubao_1778324208801_0.jpg",
+      "target_archive_path": "asset_archive/original_assets/by_sha256/4ec0a371838bee5faa89a7616258c5fc8114805bc6419666f02dbf83000d623d.jpg",
+      "source_sha256": "4ec0a371838bee5faa89a7616258c5fc8114805bc6419666f02dbf83000d623d",
+      "target_sha256": "4ec0a371838bee5faa89a7616258c5fc8114805bc6419666f02dbf83000d623d",
+      "expected_sha256": "4ec0a371838bee5faa89a7616258c5fc8114805bc6419666f02dbf83000d623d",
+      "source_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "target_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "expected_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "target_mime_type": "image/jpeg",
+      "expected_mime_type": "image/jpeg",
+      "target_size_bytes": 612525,
+      "expected_size_bytes": 612525,
+      "copy_performed": true,
+      "move_performed": false,
+      "delete_performed": false,
+      "overwrite_performed": false,
+      "post_copy_verified": true
+    },
+    {
+      "source_runs_path": "runs/real_generation/v7_29_native_doubao_french_summer_rattan_bag_v2_single_real_run/native_doubao_1778325901725_0.jpg",
+      "target_archive_path": "asset_archive/original_assets/by_sha256/e25e2f9d95d082ff14da3ac50ed44798b1ee2bc2e1b76272ee8eccc532b17ac8.jpg",
+      "source_sha256": "e25e2f9d95d082ff14da3ac50ed44798b1ee2bc2e1b76272ee8eccc532b17ac8",
+      "target_sha256": "e25e2f9d95d082ff14da3ac50ed44798b1ee2bc2e1b76272ee8eccc532b17ac8",
+      "expected_sha256": "e25e2f9d95d082ff14da3ac50ed44798b1ee2bc2e1b76272ee8eccc532b17ac8",
+      "source_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "target_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "expected_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "target_mime_type": "image/jpeg",
+      "expected_mime_type": "image/jpeg",
+      "target_size_bytes": 523630,
+      "expected_size_bytes": 523630,
+      "copy_performed": true,
+      "move_performed": false,
+      "delete_performed": false,
+      "overwrite_performed": false,
+      "post_copy_verified": true
+    },
+    {
+      "source_runs_path": "runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg",
+      "target_archive_path": "asset_archive/original_assets/by_sha256/be1718c30602394ad0d1b84d134408b9c592682e7de96e9734c29cd4c5c1d607.jpg",
+      "source_sha256": "be1718c30602394ad0d1b84d134408b9c592682e7de96e9734c29cd4c5c1d607",
+      "target_sha256": "be1718c30602394ad0d1b84d134408b9c592682e7de96e9734c29cd4c5c1d607",
+      "expected_sha256": "be1718c30602394ad0d1b84d134408b9c592682e7de96e9734c29cd4c5c1d607",
+      "source_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "target_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "expected_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "target_mime_type": "image/jpeg",
+      "expected_mime_type": "image/jpeg",
+      "target_size_bytes": 614311,
+      "expected_size_bytes": 614311,
+      "copy_performed": true,
+      "move_performed": false,
+      "delete_performed": false,
+      "overwrite_performed": false,
+      "post_copy_verified": true
+    },
+    {
+      "source_runs_path": "runs/real_generation/v8_021_multi_color_mesh_sports_visor_second_trial/native_doubao_1778733554203_0.jpg",
+      "target_archive_path": "asset_archive/original_assets/by_sha256/8c4e5d52056885d53fa16f0f2b0523055eda16bc974c404147cc994e4dc7c923.jpg",
+      "source_sha256": "8c4e5d52056885d53fa16f0f2b0523055eda16bc974c404147cc994e4dc7c923",
+      "target_sha256": "8c4e5d52056885d53fa16f0f2b0523055eda16bc974c404147cc994e4dc7c923",
+      "expected_sha256": "8c4e5d52056885d53fa16f0f2b0523055eda16bc974c404147cc994e4dc7c923",
+      "source_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "target_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "expected_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "target_mime_type": "image/jpeg",
+      "expected_mime_type": "image/jpeg",
+      "target_size_bytes": 209714,
+      "expected_size_bytes": 209714,
+      "copy_performed": true,
+      "move_performed": false,
+      "delete_performed": false,
+      "overwrite_performed": false,
+      "post_copy_verified": true
+    },
+    {
+      "source_runs_path": "runs/real_generation/v8_033_multi_color_mesh_sports_visor_v2_after_persistence_fix_trial/native_doubao_1778748094308_0.jpg",
+      "target_archive_path": "asset_archive/original_assets/by_sha256/c78c09a6feace5fd569708d0fc5712f36cf8eb6bf30531794c79ee91691f0002.jpg",
+      "source_sha256": "c78c09a6feace5fd569708d0fc5712f36cf8eb6bf30531794c79ee91691f0002",
+      "target_sha256": "c78c09a6feace5fd569708d0fc5712f36cf8eb6bf30531794c79ee91691f0002",
+      "expected_sha256": "c78c09a6feace5fd569708d0fc5712f36cf8eb6bf30531794c79ee91691f0002",
+      "source_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "target_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "expected_dimensions": {
+        "width": 1920,
+        "height": 1920
+      },
+      "target_mime_type": "image/jpeg",
+      "expected_mime_type": "image/jpeg",
+      "target_size_bytes": 494806,
+      "expected_size_bytes": 494806,
+      "copy_performed": true,
+      "move_performed": false,
+      "delete_performed": false,
+      "overwrite_performed": false,
+      "post_copy_verified": true
+    }
+  ],
+  "failures": []
+}

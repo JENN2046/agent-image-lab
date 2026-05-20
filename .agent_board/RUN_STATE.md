@@ -16397,7 +16397,7 @@ recommended_next: exact_file_commit_push_if_user_authorizes_otherwise_stop_befor
 
 ```text
 phase: durable_archive_copy_A5_authorization_package
-status: completed_validated
+status: completed_validated_then_A5_copy_executed_validated
 mode: A4.8 authorization package / no copy execution
 objective: prepare exact-pair inactive A5 copy authorization from the full asset archive dry-run manifest without copying assets or mutating runs
 authorization_package_ref: reports/durable_archive_copy_authorization/2026-05-20_durable_archive_copy_A5_authorization_package.json
@@ -16413,6 +16413,36 @@ DailyNote_or_VCP_memory_write_performed: false
 production_candidate_performed: false
 validated_now: node --check scripts/validate_durable_archive_copy_authorization_package.js; node scripts/validate_durable_archive_copy_authorization_package.js; git diff --check; node scripts/validate_agent_board_state.js; powershell scripts/validate_mvp.ps1; powershell scripts/validate-agent-image-lab-local.ps1
 recommended_next: stop_before_real_durable_archive_copy_A5_or_prepare_production_candidate_preflight
+```
+
+---
+
+## Current Capsule Productization Goal - Durable Archive Copy A5 Execution
+
+```text
+phase: durable_archive_copy_A5_execution
+status: completed_validated_uncommitted_binary_artifacts
+mode: A5 exact archive copy execution
+authorization_package_ref: reports/durable_archive_copy_authorization/2026-05-20_durable_archive_copy_A5_authorization_package.json
+execution_report_ref: reports/durable_archive_copy_execution/2026-05-20_durable_archive_copy_A5_execution_report.json
+execution_validator_ref: scripts/validate_durable_archive_copy_execution_report.js
+copied_count: 14
+post_copy_verified_count: 14
+failed_count: 0
+durable_archive_copy_performed: true
+target_archive_artifact_created: true
+runs_mutation_performed: false
+source_move_performed: false
+source_delete_performed: false
+overwrite_performed: false
+preview_generation_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+production_candidate_performed: false
+tracking_policy_blocker: copied image binaries are untracked and current MVP push-safety blocks image files by default
+tracking_policy_decision: user decided verified durable image binaries enter Git
+tracking_policy_ref: docs/ASSET_ARCHIVE_GIT_TRACKING_POLICY.md
+recommended_next: validate_and_commit_verified_archive_binaries_with_execution_evidence
 ```
 
 ---

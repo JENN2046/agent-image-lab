@@ -690,16 +690,26 @@ if (Test-Path -LiteralPath (Join-Path $Root 'agent-image-lab') -PathType Contain
 }
 
 $mediaExtensions = @('.png', '.jpg', '.jpeg', '.webp', '.gif', '.psd', '.zip')
+$verifiedDurableOriginalAssetFiles = @()
+$durableArchiveExecutionReportPathForMediaGate = Join-Path $Root 'reports/durable_archive_copy_execution/2026-05-20_durable_archive_copy_A5_execution_report.json'
+if (Test-Path $durableArchiveExecutionReportPathForMediaGate) {
+  $durableArchiveExecutionReportForMediaGate = Get-Content $durableArchiveExecutionReportPathForMediaGate -Raw | ConvertFrom-Json
+  if ($durableArchiveExecutionReportForMediaGate.status -eq 'completed_validated' -and $durableArchiveExecutionReportForMediaGate.copied_count -eq 14 -and $durableArchiveExecutionReportForMediaGate.failed_count -eq 0 -and $durableArchiveExecutionReportForMediaGate.runs_mutation_performed -eq $false -and $durableArchiveExecutionReportForMediaGate.production_candidate_write_performed -eq $false) {
+    $verifiedDurableOriginalAssetFiles = @($durableArchiveExecutionReportForMediaGate.results | Where-Object { $_.post_copy_verified -eq $true } | ForEach-Object { $_.target_archive_path })
+  }
+}
 $mediaFiles = Get-ChildItem -LiteralPath $Root -Recurse -File -Force |
   Where-Object {
     $relativePath = $_.FullName.Substring($Root.Length + 1).Replace('\', '/')
     $isGitPortablePreviewCapsule = $relativePath -match '^asset_archive/(accepted_samples|failure_samples)/[^/]+/preview\.webp$'
+    $isVerifiedDurableOriginalAsset = $verifiedDurableOriginalAssetFiles -contains $relativePath
     $isLocalOnlyValidationCopy = $relativePath -match '^\.agent_private/'
     $_.FullName -notlike '*\.git\*' -and
     $_.FullName -notlike '*\runs\*' -and
     $_.FullName -notlike '*\release_packages\*' -and
     -not $isLocalOnlyValidationCopy -and
     -not $isGitPortablePreviewCapsule -and
+    -not $isVerifiedDurableOriginalAsset -and
     $mediaExtensions -contains $_.Extension.ToLowerInvariant()
   }
 foreach ($file in $mediaFiles) {
@@ -6108,7 +6118,18 @@ if (-not $node) {
     $stagedFiles = @(& git diff --cached --name-only | Where-Object { $_.Trim() -ne '' } | ForEach-Object { $_.Trim() })
     $untrackedFiles = @(& git ls-files --others --exclude-standard | Where-Object { $_.Trim() -ne '' } | ForEach-Object { $_.Trim() })
     $allCandidateFiles = $stagedFiles + $untrackedFiles
-    $stagedImages = @($allCandidateFiles | Where-Object { $pushSafetyImageExts -contains [System.IO.Path]::GetExtension($_).ToLower() })
+    $verifiedArchiveImageFiles = @()
+    $durableArchiveExecutionReportPath = Join-Path $Root 'reports/durable_archive_copy_execution/2026-05-20_durable_archive_copy_A5_execution_report.json'
+    if (Test-Path $durableArchiveExecutionReportPath) {
+      $durableArchiveExecutionReport = Get-Content $durableArchiveExecutionReportPath -Raw | ConvertFrom-Json
+      if ($durableArchiveExecutionReport.status -eq 'completed_validated' -and $durableArchiveExecutionReport.copied_count -eq 14 -and $durableArchiveExecutionReport.failed_count -eq 0 -and $durableArchiveExecutionReport.runs_mutation_performed -eq $false -and $durableArchiveExecutionReport.production_candidate_write_performed -eq $false) {
+        $verifiedArchiveImageFiles = @($durableArchiveExecutionReport.results | Where-Object { $_.post_copy_verified -eq $true } | ForEach-Object { $_.target_archive_path })
+      }
+    }
+    $stagedImages = @($allCandidateFiles | Where-Object {
+      ($pushSafetyImageExts -contains [System.IO.Path]::GetExtension($_).ToLower()) -and
+      -not ($verifiedArchiveImageFiles -contains $_)
+    })
     $stagedRuns = @($allCandidateFiles | Where-Object { $_.StartsWith('runs/') })
     if ($stagedImages.Count -gt 0) {
       Add-Failure "Push Safety Gate: image files must not be staged: $($stagedImages -join ', ')"
@@ -11784,6 +11805,24 @@ process.exit(child.status || 0);
     }
     if ($durableArchiveCopyAuthorization.provider_contact_performed -ne $false -or $durableArchiveCopyAuthorization.plugin_call_performed -ne $false -or $durableArchiveCopyAuthorization.api_call_performed -ne $false -or $durableArchiveCopyAuthorization.DailyNote_write_performed -ne $false -or $durableArchiveCopyAuthorization.VCP_memory_write_performed -ne $false -or $durableArchiveCopyAuthorization.production_candidate_write_performed -ne $false) {
       Add-Failure "Durable archive copy authorization package must not perform provider/API, memory, or production actions"
+    }
+  }
+  $durableArchiveCopyExecutionOutput = & node (Join-Path $Root 'scripts/validate_durable_archive_copy_execution_report.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Durable archive copy execution report validation exited with failure"
+  } else {
+    $durableArchiveCopyExecution = ($durableArchiveCopyExecutionOutput -join "`n") | ConvertFrom-Json
+    if ($durableArchiveCopyExecution.passed -ne $true -or $durableArchiveCopyExecution.status -ne 'durable_archive_copy_execution_report_verified') {
+      Add-Failure "Durable archive copy execution report must pass"
+    }
+    if ($durableArchiveCopyExecution.copied_count -ne 14 -or $durableArchiveCopyExecution.post_copy_verified_count -ne 14 -or $durableArchiveCopyExecution.failed_count -ne 0) {
+      Add-Failure "Durable archive copy execution report must preserve the verified 14-image copy result set"
+    }
+    if ($durableArchiveCopyExecution.durable_archive_copy_performed -ne $true) {
+      Add-Failure "Durable archive copy execution report must record the authorized A5 copy execution"
+    }
+    if ($durableArchiveCopyExecution.runs_mutation_performed -ne $false -or $durableArchiveCopyExecution.preview_generation_performed -ne $false -or $durableArchiveCopyExecution.provider_contact_performed -ne $false -or $durableArchiveCopyExecution.plugin_call_performed -ne $false -or $durableArchiveCopyExecution.api_call_performed -ne $false -or $durableArchiveCopyExecution.DailyNote_write_performed -ne $false -or $durableArchiveCopyExecution.VCP_memory_write_performed -ne $false -or $durableArchiveCopyExecution.production_candidate_write_performed -ne $false) {
+      Add-Failure "Durable archive copy execution report must not perform runs mutation, preview generation, provider/API, memory, or production actions"
     }
   }
   Invoke-CapsuleProductCoreValidation -Root $Root -AddFailure $capsuleProductCoreAddFailure -Section PostRuns

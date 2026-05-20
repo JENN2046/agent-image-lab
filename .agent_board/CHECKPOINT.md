@@ -5,7 +5,7 @@
 
 ```text
 phase: durable_archive_copy_A5_authorization_package
-status: completed_validated
+status: completed_validated_then_A5_copy_executed_validated
 completed:
 - generated reports/durable_archive_copy_authorization/2026-05-20_durable_archive_copy_A5_authorization_package.json
 - derived 14 exact copy pairs from the full asset archive dry-run manifest
@@ -28,6 +28,39 @@ hard_stop_flags:
   DailyNote_or_VCP_memory_write_performed: false
   production_candidate_performed: false
 next_safe_action: optional exact-file commit/push if user authorizes; otherwise stop before real durable archive copy A5.
+```
+
+---
+
+## Checkpoint - Durable Archive Copy A5 Execution
+
+```text
+phase: durable_archive_copy_A5_execution
+status: completed_validated_uncommitted_binary_artifacts
+completed:
+- copied 14 exact source images into asset_archive/original_assets/by_sha256/
+- wrote reports/durable_archive_copy_execution/2026-05-20_durable_archive_copy_A5_execution_report.json
+- added scripts/validate_durable_archive_copy_execution_report.js
+- validated actual copied target binaries by sha256, dimensions, MIME, and size
+validation_completed:
+- node --check scripts/validate_durable_archive_copy_execution_report.js
+- node scripts/validate_durable_archive_copy_execution_report.js
+- git diff --check
+hard_stop_flags:
+  runs_mutation_performed: false
+  source_move_performed: false
+  source_delete_performed: false
+  overwrite_performed: false
+  preview_generation_performed: false
+  provider_plugin_api_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  production_candidate_performed: false
+blocker:
+  push_requires_explicit_authorization: true
+tracking_policy_decision:
+  copied_image_binaries_enter_git: true
+  tracking_policy_ref: docs/ASSET_ARCHIVE_GIT_TRACKING_POLICY.md
+next_safe_action: validate and commit verified archive binaries with execution evidence; do not push without explicit authorization.
 ```
 
 ---
