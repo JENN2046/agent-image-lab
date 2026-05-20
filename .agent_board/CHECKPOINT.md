@@ -24305,7 +24305,7 @@ recommended_next: runs_restore_verification_authorization_package_draft_commit_r
 
 ```text
 phase: capsule_code_debt_tasks_5_10_gate
-status: completed_targeted_validated
+status: completed_committed_pushed
 mode: A4.8 local implementation / validator code-debt followups
 completed:
 - initialized manifest contract failure summaries from shared manifest summary keys
@@ -24314,6 +24314,8 @@ completed:
 - preserved failure capsule creator behavior while normalizing the edited block formatting
 - added reusable JSON validator and no-external guard helpers in scripts/validate_mvp_capsule_product_core.ps1
 - added scripts/validate_capsule_code_debt_completion_audit.js for read-only completion evidence
+- committed 3b1ad53 refactor: settle capsule code debt followups
+- pushed master to origin/master
 validation_completed:
 - node --check changed JavaScript files
 - PowerShell parser check for scripts/validate_mvp_capsule_product_core.ps1
@@ -24338,7 +24340,7 @@ hard_stop_flags:
   production_candidate_write_performed: false
   dependency_change_performed: false
   runtime_browser_execution_performed: false
-recommended_next: guarded_commit_only_unless_push_gate_can_be_satisfied_without_image_binary_reads
+recommended_next: capsule_product_core_next_priority_after_tasks_5_10
 ```
 
 ## Runs Restore Verification Authorization Package Closeout Checkpoint

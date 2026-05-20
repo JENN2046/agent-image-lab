@@ -11686,14 +11686,14 @@ recommended_next: runs_restore_verification_authorization_package_draft_commit_r
 ## Current Task - Capsule Code Debt Tasks 5-10
 
 ```text
-status: completed_targeted_validated
+status: completed_committed_pushed
 mode: A4.8 local implementation / validator code-debt followups
-done: stabilized manifest failure summary keys; extracted shared registry source parser; aligned accepted/failure registry sources to the shared parser; aligned registry report v2 class counts to shared taxonomy constants; cleaned failure creator formatting without intended behavior change; added product-core PowerShell JSON/no-external helpers; added completion audit validator
-in_progress: commit_readiness
-blocked: push remains gated if full push validation requires preview binary/hash/dimension reads
-remaining: exact-file guarded local commit; push only if preflight can satisfy both project gate and current no-image-read boundary
+done: stabilized manifest failure summary keys; extracted shared registry source parser; aligned accepted/failure registry sources to the shared parser; aligned registry report v2 class counts to shared taxonomy constants; cleaned failure creator formatting without intended behavior change; added product-core PowerShell JSON/no-external helpers; added completion audit validator; committed 3b1ad53; pushed to origin/master
+in_progress: none
+blocked: none for tasks 5-10
+remaining: none for tasks 5-10; full validate_mvp.ps1 remains intentionally not run under the current no-image-binary/hash/dimension boundary
 validation: targeted JS syntax; PowerShell parser check; code debt completion audit; taxonomy validator; preview registry source validator
-recommended_next: guarded_commit_only_unless_push_gate_can_be_satisfied_without_image_binary_reads
+recommended_next: capsule_product_core_next_priority_after_tasks_5_10
 ```
 
 ## Runs Restore Verification Authorization Package Closeout

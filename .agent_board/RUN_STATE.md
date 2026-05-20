@@ -16031,11 +16031,13 @@ recommended_next: runs_restore_verification_authorization_package_draft_commit_r
 
 ```text
 phase: capsule_code_debt_tasks_5_10_gate
-status: completed_targeted_validated
+status: completed_committed_pushed
 mode: A4.8 local implementation / validator code-debt followups
 objective: finish prioritized capsule product-core code-debt items 5-10 without broad docs accumulation or A5/runtime/image/provider side effects
 helper_ref: scripts/lib/capsule_registry_source_common.js
 audit_ref: scripts/validate_capsule_code_debt_completion_audit.js
+commit: 3b1ad53 refactor: settle capsule code debt followups
+push: completed to origin/master
 manifest_summary_key_stability: true
 product_core_powershell_helper: true
 failure_creator_formatting_cleanup: true
@@ -16053,7 +16055,7 @@ dependency_change_performed: false
 production_candidate_performed: false
 runtime_browser_execution_performed: false
 tag_release_deploy_performed: false
-recommended_next: guarded_commit_only_unless_push_gate_can_be_satisfied_without_image_binary_reads
+recommended_next: capsule_product_core_next_priority_after_tasks_5_10
 ```
 
 ## runs_restore_verification_authorization_package_closeout_gate

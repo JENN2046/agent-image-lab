@@ -14017,13 +14017,15 @@ recommended_next: runs_restore_verification_authorization_package_draft_commit_r
 
 ```text
 phase: capsule_code_debt_tasks_5_10_gate
-status: completed_targeted_validated
+status: completed_committed_pushed
 mode: A4.8 local implementation / validator code-debt followups
 summary: Completed tasks 5-10 by stabilizing manifest summary keys, adding shared registry YAML parsing, aligning report v2 taxonomy constants, preserving failure creator behavior through formatting-only cleanup, adding a product-core PowerShell JSON runner/no-external guard helper, and adding a completion audit validator.
 changed_code: scripts/lib/capsule_registry_source_common.js; scripts/lib/accepted_sample_registry_source.js; scripts/lib/failure_sample_registry_source.js; scripts/lib/capsule_manifest_contract.js; scripts/validate_capsule_registry_report_v2.js; scripts/validate_capsule_code_debt_completion_audit.js; scripts/create_failure_sample_capsule.js; scripts/validate_create_preview_capsule_registry_source.js; scripts/validate_failure_sample_registry_source.js; scripts/validate_mvp_capsule_product_core.ps1
 tasks_completed: manifest_summary_key_stability; product_core_powershell_helper; failure_creator_formatting_cleanup; shared_registry_source_common; registry_report_v2_taxonomy_alignment; completion_audit_validator
 targeted_validation: node --check changed JS; PowerShell parser check; node scripts/validate_capsule_code_debt_completion_audit.js; node scripts/validate_capsule_status_taxonomy.js; node scripts/validate_create_preview_capsule_registry_source.js
 not_run_due_boundary: scripts/validate_mvp.ps1 and validators that require preview binary reads, hash extraction, dimension extraction, or broader actual-runs scanning
+commit: 3b1ad53 refactor: settle capsule code debt followups
+push: completed to origin/master
 docs_pile_created: false
 actual_runs_scan_performed: false
 image_binary_read_performed: false
@@ -14035,7 +14037,7 @@ dependency_change_performed: false
 production_candidate_performed: false
 runtime_browser_execution_performed: false
 tag_release_deploy_performed: false
-recommended_next: guarded_commit_only_unless_push_gate_can_be_satisfied_without_image_binary_reads
+recommended_next: capsule_product_core_next_priority_after_tasks_5_10
 ```
 
 ## Runs Restore Verification Authorization Package Closeout Handoff
