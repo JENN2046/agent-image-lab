@@ -1,0 +1,72 @@
+{
+  "manifest_version": "v1",
+  "manifest_type": "full_asset_archive_manifest",
+  "sample_id": "accepted_womens_resort_relaxed_knit_codex_v2_001",
+  "lane": "accepted",
+  "created_by": "static_schema_example_only",
+  "preview_capsule_ref": {
+    "capsule_root": "asset_archive/accepted_samples/accepted_womens_resort_relaxed_knit_codex_v2_001/",
+    "manifest_ref": "asset_archive/accepted_samples/accepted_womens_resort_relaxed_knit_codex_v2_001/manifest.json",
+    "preview_artifact_ref": "asset_archive/accepted_samples/accepted_womens_resort_relaxed_knit_codex_v2_001/preview.webp"
+  },
+  "preview_validation": {
+    "git_tracked_preview_static_validation_allowed": true,
+    "preview_required_long_edge": 512,
+    "preview_format": "webp",
+    "preview_sha256_status": "existing_git_tracked_preview_static_validator_only",
+    "preview_dimensions_status": "existing_git_tracked_preview_static_validator_only",
+    "source_image_binary_read_required": false,
+    "original_asset_required_for_portable_validation": false
+  },
+  "original_asset": {
+    "storage_strategy": "not_yet_verified",
+    "original_asset_ref": null,
+    "original_sha256": null,
+    "original_dimensions": null,
+    "original_mime_type": null,
+    "verification_status": "blocked_until_A5_authorization",
+    "required_for_full_archive_ready": true,
+    "required_for_production_candidate": true
+  },
+  "recovery": {
+    "clone_restore_preview_capsule_ready": true,
+    "missing_original_blocks_full_archive_ready": true,
+    "missing_original_blocks_production_candidate": true,
+    "missing_original_invalidates_preview_capsule": false
+  },
+  "forbidden_fields": {
+    "absolute_original_asset_path": null,
+    "absolute_preview_capsule_path": null,
+    "secret": null,
+    "token": null,
+    "cookie": null,
+    "password": null,
+    "api_key": null,
+    "provider_credential": null,
+    "raw_chat_history": null,
+    "customer_private_data": null,
+    "image_binary_inline": null,
+    "base64_image": null,
+    "generated_preview_binary": null,
+    "production_candidate_path": null
+  },
+  "guard": {
+    "actual_runs_scan_performed": false,
+    "runs_mutation_performed": false,
+    "source_image_binary_read_performed": false,
+    "image_binary_read_performed": false,
+    "hash_extraction_performed": false,
+    "dimensions_extraction_performed": false,
+    "preview_generation_performed": false,
+    "original_copy_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "production_candidate_allowed": false,
+    "production_candidate_write_performed": false,
+    "memory_write_allowed": false,
+    "commercial_delivery_allowed": false
+  }
+}

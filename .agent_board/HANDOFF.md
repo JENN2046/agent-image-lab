@@ -14592,3 +14592,29 @@ validate_mvp_result: passed
 validate_agent_image_lab_local_result: passed_with_warnings_ok_for_manual_review
 recommended_next: full_asset_archive_manifest_schema_gate
 ```
+
+## Current Handoff Update - Full Asset Archive Manifest Schema
+
+```text
+phase: full_asset_archive_manifest_schema_gate
+status: completed_validated
+mode: A4.8 schema/example/validator
+summary: Added a full asset archive manifest contract that binds Git-portable preview capsule refs to future original asset evidence while fail-closing production/full-archive readiness until A5 verification.
+changed_files: schemas/full_asset_archive_manifest.schema.yaml; tests/schema_examples/full_asset_archive_manifest.example.json; scripts/validate_full_asset_archive_manifest.js; scripts/validate_mvp_capsule_product_core.ps1
+validator_checks: positive example plus fail-closed negative cases for absolute preview path, path escape, source image binary requirement, blocked original sha256, missing original production blocker, and production candidate guard drift.
+actual_runs_scan_performed: false
+source_image_binary_read_performed: false
+image_binary_read_performed: false
+hash_extraction_performed: false
+dimensions_extraction_performed: false
+preview_generation_performed: false
+original_copy_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+production_candidate_performed: false
+dependency_change_performed: false
+validate_full_asset_archive_manifest_result: passed
+validate_capsules_result: passed
+validate_mvp_result: passed
+recommended_next: prepare_minimal_A5_runs_path_existence_authorization_package_then_stop
+```

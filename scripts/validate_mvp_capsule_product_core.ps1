@@ -118,6 +118,15 @@ function Invoke-CapsuleProductCoreValidation {
     Test-CapsuleNoExternalActionFlags $capsuleCreatorManifestContractRegression "Capsule creator manifest contract regression must remain local-only with no external, memory, runtime, production, or remote actions" @('production_candidate_write_performed')
   }
 
+  $fullAssetArchiveManifest = Invoke-CapsuleNodeJsonValidator 'scripts/validate_full_asset_archive_manifest.js' "Full asset archive manifest validation exited with failure"
+  if ($null -ne $fullAssetArchiveManifest) {
+    Test-CapsuleExpectedStatus $fullAssetArchiveManifest 'full_asset_archive_manifest_verified' "Full asset archive manifest validation must pass"
+    if ($fullAssetArchiveManifest.static_validator_only -ne $true -or $fullAssetArchiveManifest.existing_git_tracked_preview_static_validation_allowed -ne $true) {
+      & $AddFailure "Full asset archive manifest validation must stay static-only while allowing only existing Git-tracked preview static validation"
+    }
+    Test-CapsuleNoExternalActionFlags $fullAssetArchiveManifest "Full asset archive manifest validation must remain local-only with no external, memory, runtime, production, or remote actions" @('actual_runs_scan_performed', 'runs_mutation_performed', 'source_image_binary_read_performed', 'image_binary_read_performed', 'hash_extraction_performed', 'dimensions_extraction_performed', 'preview_generation_performed', 'original_copy_performed', 'production_candidate_write_performed')
+  }
+
   $gitTrackedPreviewEvidenceCapsuleBaselineOutput = & node (Join-Path $Root 'scripts/validate_v14_231_git_tracked_preview_evidence_capsule_baseline.js')
   if ($LASTEXITCODE -ne 0) {
     & $AddFailure "Git-tracked preview evidence capsule baseline validation exited with failure"

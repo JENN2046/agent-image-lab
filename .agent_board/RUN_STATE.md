@@ -16683,3 +16683,33 @@ production_candidate_performed: false
 dependency_change_performed: false
 recommended_next: guarded_commit_and_push
 ```
+
+## Current Capsule Productization Goal
+
+```text
+phase: full_asset_archive_manifest_schema_gate
+status: completed_validated
+mode: A4.8 schema/example/validator
+objective: define and statically validate the full asset archive manifest contract without real runs or source image reads
+schema_ref: schemas/full_asset_archive_manifest.schema.yaml
+example_ref: tests/schema_examples/full_asset_archive_manifest.example.json
+validator_ref: scripts/validate_full_asset_archive_manifest.js
+helper_wired: scripts/validate_mvp_capsule_product_core.ps1
+preview_capsule_ref_scope: asset_archive/accepted_samples or asset_archive/failure_samples project-relative only
+original_asset_status: blocked_until_A5_authorization
+fail_closed_rules: missing original blocks full archive readiness and production candidate; preview capsule remains Git-portable validation evidence
+actual_runs_scan_performed: false
+source_image_binary_read_performed: false
+hash_extraction_performed: false
+dimensions_extraction_performed: false
+preview_generation_performed: false
+original_copy_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+production_candidate_performed: false
+dependency_change_performed: false
+validate_full_asset_archive_manifest_result: passed
+validate_capsules_result: passed
+validate_mvp_result: passed
+recommended_next: prepare_minimal_A5_runs_path_existence_authorization_package_then_stop
+```

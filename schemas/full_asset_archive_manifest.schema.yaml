@@ -1,0 +1,120 @@
+schema_id: full_asset_archive_manifest_v1
+version: v1
+manifest_type: full_asset_archive_manifest
+purpose: >-
+  Describe the relationship between a Git-portable preview capsule and its
+  future original asset archive evidence without reading source image binaries,
+  generating previews, scanning real runs, or promoting production candidates.
+required_fields:
+  - manifest_version
+  - manifest_type
+  - sample_id
+  - lane
+  - preview_capsule_ref
+  - preview_validation
+  - original_asset
+  - recovery
+  - forbidden_fields
+  - guard
+field_rules:
+  manifest_version:
+    const: v1
+  manifest_type:
+    const: full_asset_archive_manifest
+  lane:
+    allowed:
+      - accepted
+      - failure
+  preview_capsule_ref:
+    description: Existing Git-portable preview capsule references only.
+    required:
+      - capsule_root
+      - manifest_ref
+      - preview_artifact_ref
+    path_scope:
+      project_relative_only: true
+      allowed_roots:
+        - asset_archive/accepted_samples/
+        - asset_archive/failure_samples/
+      absolute_paths_allowed: false
+      path_escape_allowed: false
+  preview_validation:
+    description: Existing Git-tracked preview static validation may be cited; no new preview generation or source image read is authorized.
+    required:
+      - git_tracked_preview_static_validation_allowed
+      - preview_required_long_edge
+      - preview_format
+      - source_image_binary_read_required
+      - original_asset_required_for_portable_validation
+    preview_required_long_edge: 512
+    preview_format: webp
+    git_tracked_preview_static_validation_allowed: true
+    source_image_binary_read_required: false
+    original_asset_required_for_portable_validation: false
+  original_asset:
+    description: Original asset evidence remains blocked until explicit A5 verification.
+    required:
+      - storage_strategy
+      - original_asset_ref
+      - original_sha256
+      - original_dimensions
+      - original_mime_type
+      - verification_status
+      - required_for_full_archive_ready
+      - required_for_production_candidate
+    storage_strategy_allowed:
+      - not_yet_verified
+      - missing
+      - external_local
+      - external_cloud
+    blocked_until_A5_requires_null:
+      - original_asset_ref
+      - original_sha256
+      - original_dimensions
+      - original_mime_type
+  recovery:
+    required:
+      - clone_restore_preview_capsule_ready
+      - missing_original_blocks_full_archive_ready
+      - missing_original_blocks_production_candidate
+      - missing_original_invalidates_preview_capsule
+    fail_closed_rules:
+      clone_restore_preview_capsule_ready: true
+      missing_original_blocks_full_archive_ready: true
+      missing_original_blocks_production_candidate: true
+      missing_original_invalidates_preview_capsule: false
+forbidden_fields:
+  must_be_null:
+    - absolute_original_asset_path
+    - absolute_preview_capsule_path
+    - secret
+    - token
+    - cookie
+    - password
+    - api_key
+    - provider_credential
+    - raw_chat_history
+    - customer_private_data
+    - image_binary_inline
+    - base64_image
+    - generated_preview_binary
+    - production_candidate_path
+guard:
+  must_be_false:
+    - actual_runs_scan_performed
+    - runs_mutation_performed
+    - source_image_binary_read_performed
+    - image_binary_read_performed
+    - hash_extraction_performed
+    - dimensions_extraction_performed
+    - preview_generation_performed
+    - original_copy_performed
+    - provider_contact_performed
+    - plugin_call_performed
+    - api_call_performed
+    - DailyNote_write_performed
+    - VCP_memory_write_performed
+    - production_candidate_allowed
+    - production_candidate_write_performed
+    - memory_write_allowed
+    - commercial_delivery_allowed

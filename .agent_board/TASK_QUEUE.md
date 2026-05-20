@@ -12029,3 +12029,28 @@ preview_generation_performed: false
 runs_source_image_binary_read_performed: false
 recommended_next: guarded_commit_and_push
 ```
+
+## Current Task - Full Asset Archive Manifest Schema
+
+```text
+status: completed_validated
+mode: A4.8 schema/example/validator
+done: added full_asset_archive_manifest schema, static example, and validator; wired validator into capsule product-core helper; kept original asset evidence blocked until A5
+in_progress: guarded commit/push
+blocked: none for A4.8 schema gate
+remaining: exact-file stage, guarded commit, guarded push, then prepare minimal inactive A5 runs path verification package
+schema_ref: schemas/full_asset_archive_manifest.schema.yaml
+example_ref: tests/schema_examples/full_asset_archive_manifest.example.json
+validator_ref: scripts/validate_full_asset_archive_manifest.js
+actual_runs_scan_performed: false
+source_image_binary_read_performed: false
+hash_extraction_performed: false
+dimensions_extraction_performed: false
+preview_generation_performed: false
+original_copy_performed: false
+production_candidate_performed: false
+validate_full_asset_archive_manifest_result: passed
+validate_capsules_result: passed
+validate_mvp_result: passed
+recommended_next: guarded_commit_and_push
+```

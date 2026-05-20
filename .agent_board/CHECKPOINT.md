@@ -25045,3 +25045,41 @@ validate_mvp_result: passed
 validate_agent_image_lab_local_result: passed_with_warnings_ok_for_manual_review
 recommended_next: guarded_commit_and_push
 ```
+
+## Checkpoint - Full Asset Archive Manifest Schema
+
+```text
+phase: full_asset_archive_manifest_schema_gate
+status: completed_validated
+mode: A4.8 schema/example/validator
+completed:
+- added schemas/full_asset_archive_manifest.schema.yaml
+- added tests/schema_examples/full_asset_archive_manifest.example.json
+- added scripts/validate_full_asset_archive_manifest.js
+- wired the validator into scripts/validate_mvp_capsule_product_core.ps1
+- preserved original asset verification as blocked_until_A5_authorization
+validation_completed:
+- node --check scripts\validate_full_asset_archive_manifest.js
+- node scripts\validate_full_asset_archive_manifest.js
+- PowerShell parser check for scripts\validate_mvp_capsule_product_core.ps1
+- npm run validate:capsules
+- powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+- git diff --check
+- node scripts\validate_agent_board_state.js
+hard_stop_flags:
+  actual_runs_scan_performed: false
+  source_image_binary_read_performed: false
+  image_binary_read_performed: false
+  hash_extraction_performed: false
+  dimensions_extraction_performed: false
+  preview_generation_performed: false
+  original_copy_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  dependency_change_performed: false
+recommended_next: prepare_minimal_A5_runs_path_existence_authorization_package_then_stop
+```
