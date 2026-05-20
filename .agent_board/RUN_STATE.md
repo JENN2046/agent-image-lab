@@ -16616,6 +16616,32 @@ recommended_next: guarded_commit_and_push
 ## Current Capsule Productization Goal
 
 ```text
+phase: capsule_npm_script_index_gate
+status: completed_validated
+mode: A4.8 package script patch
+objective: expose clear validator entrypoints without dependency or lockfile changes
+changed_files: package.json; scripts/validate_mvp_capsule_product_core.ps1
+package_lock_modified: false
+dependency_change_performed: false
+direct_capsule_helper_entrypoint: true
+scripts_added: validate:mvp; validate:capsules; validate:review-console-static; validate:runs-stewardship
+validate_capsules_result: passed
+validate_mvp_result: passed
+review_console_static_result: passed
+runs_stewardship_result: passed
+validate_agent_image_lab_local_result: passed_with_warnings_ok_for_manual_review
+actual_runs_scan_performed: false
+runs_source_image_binary_read_performed: false
+preview_generation_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+production_candidate_performed: false
+recommended_next: guarded_commit_and_push
+```
+
+## Current Capsule Productization Goal
+
+```text
 phase: capsule_product_core_helper_dedup_gate
 status: completed_targeted_validated
 mode: A4.8 autonomous batch train / local refactor

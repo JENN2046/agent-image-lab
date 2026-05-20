@@ -497,3 +497,22 @@ function Invoke-CapsuleProductCoreValidation {
 
   }
 }
+
+if ($MyInvocation.InvocationName -ne '.') {
+  $capsuleProductCoreFailures = @()
+  $addCapsuleProductCoreFailure = {
+    param([string]$Message)
+    $script:capsuleProductCoreFailures += $Message
+  }
+  $repoRoot = Split-Path -Parent (Split-Path -Parent $PSCommandPath)
+  Invoke-CapsuleProductCoreValidation -Root $repoRoot -AddFailure $addCapsuleProductCoreFailure -Section All
+
+  if ($capsuleProductCoreFailures.Count -gt 0) {
+    foreach ($failure in $capsuleProductCoreFailures) {
+      Write-Error $failure
+    }
+    exit 1
+  }
+
+  Write-Output "Capsule product-core validation passed."
+}

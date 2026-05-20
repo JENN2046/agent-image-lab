@@ -11979,6 +11979,23 @@ validate_agent_image_lab_local_result: passed_with_warnings_ok_for_manual_review
 recommended_next: guarded_commit_and_push
 ```
 
+## Current Task - Capsule NPM Script Index
+
+```text
+status: completed_validated
+mode: A4.8 package script patch
+done: added npm scripts validate:mvp, validate:capsules, validate:review-console-static, validate:runs-stewardship; made scripts/validate_mvp_capsule_product_core.ps1 directly executable
+in_progress: guarded commit/push
+blocked: none
+remaining: exact-file stage, guarded commit, guarded push
+package_lock_modified: false
+dependency_change_performed: false
+validate_capsules_result: passed
+validate_mvp_result: passed
+validate_agent_image_lab_local_result: passed_with_warnings_ok_for_manual_review
+recommended_next: guarded_commit_and_push
+```
+
 ## Current Task - Capsule Product Core Helper Dedup
 
 ```text

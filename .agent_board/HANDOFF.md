@@ -14528,7 +14528,7 @@ recommended_next: guarded_commit_and_push
 
 ```text
 phase: capsule_product_core_helper_dedup_gate
-status: completed_targeted_validated
+status: completed_validated
 mode: A4.8 autonomous batch train / local refactor
 summary: Reduced repeated passed/status assertions in scripts/validate_mvp_capsule_product_core.ps1 with Test-CapsuleExpectedStatus while preserving validator order and failure messages.
 changed_code: scripts/validate_mvp_capsule_product_core.ps1
@@ -14541,5 +14541,32 @@ provider_plugin_api_performed: false
 DailyNote_or_VCP_memory_write_performed: false
 production_candidate_performed: false
 dependency_change_performed: false
+recommended_next: guarded_commit_and_push
+```
+
+## Current Handoff Update - Capsule NPM Script Index
+
+```text
+phase: capsule_npm_script_index_gate
+status: completed_targeted_validated
+mode: A4.8 package script patch
+summary: Added clear npm validator aliases and made scripts/validate_mvp_capsule_product_core.ps1 executable directly while preserving dot-source helper behavior.
+changed_files: package.json; scripts/validate_mvp_capsule_product_core.ps1
+package_lock_modified: false
+dependency_change_performed: false
+scripts_added: validate:mvp; validate:capsules; validate:review-console-static; validate:runs-stewardship
+validate_capsules_result: passed
+validate_mvp_result: passed
+review_console_static_result: passed
+runs_stewardship_result: passed
+validate_agent_image_lab_local_result: passed_with_warnings_ok_for_manual_review
+real_capsule_created: false
+actual_runs_scan_performed: false
+runs_mutation_performed: false
+runs_source_image_binary_read_performed: false
+preview_generation_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+production_candidate_performed: false
 recommended_next: guarded_commit_and_push
 ```

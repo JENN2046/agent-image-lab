@@ -24939,6 +24939,46 @@ validate_agent_image_lab_local_result: passed_with_warnings_ok_for_manual_review
 recommended_next: guarded_commit_and_push
 ```
 
+## Checkpoint - Capsule NPM Script Index
+
+```text
+phase: capsule_npm_script_index_gate
+status: completed_validated
+mode: A4.8 package script patch
+completed:
+- added validate:mvp npm alias
+- added validate:capsules npm alias
+- added validate:review-console-static npm alias
+- added validate:runs-stewardship npm alias
+- made scripts/validate_mvp_capsule_product_core.ps1 run validation when invoked directly
+- preserved dot-source helper behavior for scripts/validate_mvp.ps1
+validation_completed:
+- node package.json parse check
+- PowerShell parser check for scripts\validate_mvp_capsule_product_core.ps1
+- npm run validate:review-console-static
+- npm run validate:runs-stewardship
+- npm run validate:capsules
+- npm run validate:mvp
+- git diff --check
+- node scripts\validate_agent_board_state.js
+- powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+hard_stop_flags:
+  package_lock_modified: false
+  dependency_change_performed: false
+  actual_runs_scan_performed: false
+  runs_mutation_performed: false
+  runs_source_image_binary_read_performed: false
+  preview_generation_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+validate_agent_image_lab_local_result: passed_with_warnings_ok_for_manual_review
+recommended_next: guarded_commit_and_push
+```
+
 ## Checkpoint - Capsule Product Core Helper Dedup
 
 ```text

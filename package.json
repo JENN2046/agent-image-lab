@@ -10,7 +10,11 @@
     "validate-preview-capsule-registry": "node scripts/validate_preview_capsule_registry.js",
     "validate-preview-capsule-negative-cases": "node scripts/validate_preview_capsule_registry_negative_cases.js",
     "create-preview-capsule:plan": "node scripts/create_preview_capsule.js",
-    "create-preview-capsule:confirmed": "node scripts/create_preview_capsule.js --confirm-create=true"
+    "create-preview-capsule:confirmed": "node scripts/create_preview_capsule.js --confirm-create=true",
+    "validate:mvp": "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1",
+    "validate:capsules": "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp_capsule_product_core.ps1",
+    "validate:review-console-static": "node scripts/validate_capsule_static_product_smoke_review_console_snapshot.js",
+    "validate:runs-stewardship": "node scripts/validate_runs_backup_manifest_schema.js && node scripts/validate_runs_restore_report_dry_run_schema.js"
   },
   "dependencies": {
     "sharp": "0.33.5",
