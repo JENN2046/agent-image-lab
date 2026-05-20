@@ -11731,12 +11731,25 @@ recommended_next: runs_restore_verification_authorization_package_draft_commit_r
       Result: completed_validated.
       Stop condition: any need for A5, runtime execution, dependency change, image read/write, runs mutation, or unclear debt remediation scope.
 
-- [ ] ID: capsule_mvp_validator_slice_gate
+- [x] ID: capsule_mvp_validator_slice_gate
       Title: Slice capsule product-core checks out of validate_mvp.ps1
       Reason: capsule_code_debt_audit found validate_mvp.ps1 is the highest review-friction surface at 12083 lines.
       Scope: docs-first plan or separately authorized local refactor that preserves validate_mvp.ps1 as top-level orchestrator while moving capsule aggregate calls into a focused helper.
       Forbidden files/actions until explicit code-refactor authorization: code changes, dependency changes, actual runs scan, image binary reads, hash/dimensions extraction, preview generation, provider/plugin/API, DailyNote/VCP memory, production candidate, push/tag/release/deploy.
+      Changed files: docs/CAPSULE_MVP_VALIDATOR_SLICE_PLAN.md; .agent_board resume surfaces.
+      Validation: git diff --check passed; validate_agent_board_state passed; validate-agent-image-lab-local passed with manual-review warnings.
+      Result: completed_validated_docs_scope.
       Stop condition: any change that loosens validation, skips current capsule gates, or requires runtime/A5/image/runs access.
+
+- [ ] ID: capsule_mvp_validator_slice_code_refactor_authorization_gate
+      Title: Capsule MVP validator slice code refactor authorization gate
+      Reason: the docs-first slice is complete, but code refactor remains blocked until an exact future authorization package names files, commands, proof obligations, and stop conditions.
+      Scope: docs-only authorization package plus .agent_board sync; no code edits.
+      Allowed files: docs/CAPSULE_MVP_VALIDATOR_SLICE_CODE_REFACTOR_AUTHORIZATION_GATE.md; .agent_board/CHECKPOINT.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md.
+      Forbidden files/actions: scripts/validate_mvp.ps1; scripts/validate_mvp_capsule_product_core.ps1; scripts/**/*.js; schemas/**; review_console/**; dependency manifests; actual runs scan; image binary reads; hash/dimensions extraction; preview generation; provider/plugin/API; DailyNote/VCP memory; runtime/browser; production candidate; tag/release/deploy; git add .
+      Validation: git diff --check passed; validate_agent_board_state passed; validate-agent-image-lab-local passed with manual-review warnings.
+      Result: completed_validated.
+      Stop condition: validation failure, out-of-scope file, or any need to perform the code refactor before separate explicit authorization.
 ```
 
 ## BHA / AGENTS v0.3.1 Selective Adaptation Plan
@@ -11788,4 +11801,16 @@ blocked: code refactor remains blocked until explicit authorization
 remaining: closeout; optional later commit-readiness if requested
 validated_now: git diff --check; node scripts/validate_agent_board_state.js; pwsh -NoProfile -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
 recommended_next: capsule_mvp_validator_slice_code_refactor_authorization_gate
+```
+
+## Current Task - Capsule MVP Validator Slice Code Refactor Authorization Gate
+
+```text
+status: completed_validated
+mode: A4.8 docs-only / authorization package draft
+done: drafted docs/CAPSULE_MVP_VALIDATOR_SLICE_CODE_REFACTOR_AUTHORIZATION_GATE.md; kept future code refactor inactive; updated .agent_board resume surfaces
+in_progress: commit_push_readiness
+blocked: actual code refactor remains blocked until separate explicit authorization
+remaining: exact-file guarded local commit, push preflight, push if clean
+recommended_next: guarded_commit_and_push_this_docs_gate_if_validation_and_preflight_pass
 ```

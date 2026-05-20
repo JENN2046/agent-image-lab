@@ -14250,3 +14250,23 @@ validate_mvp_ps1_run_now: false
 validate_mvp_ps1_skip_reason: docs-first/no-code-change gate with explicit no runtime/browser execution boundary
 recommended_next: capsule_mvp_validator_slice_code_refactor_authorization_gate
 ```
+
+## Current Handoff Update - Capsule MVP Validator Slice Code Refactor Authorization Gate
+
+```text
+phase: capsule_mvp_validator_slice_code_refactor_authorization_gate
+status: completed_validated
+mode: A4.8 docs-only / authorization package draft
+summary: Drafted the exact future code-refactor authorization package for moving capsule product-core checks out of scripts/validate_mvp.ps1 while keeping validate_mvp.ps1 as top-level orchestrator.
+auth_ref: docs/CAPSULE_MVP_VALIDATOR_SLICE_CODE_REFACTOR_AUTHORIZATION_GATE.md
+authorization_state: draft_ready_not_active
+code_refactor_performed: false
+validate_mvp_ps1_modified: false
+helper_script_created: false
+local_commit_and_push_authorized_for_this_docs_gate: true
+future_code_refactor_requires_separate_explicit_instruction: true
+hard_stops_preserved: no runtime/browser; no actual runs scan; no image binary reads; no hash/dimensions extraction; no preview generation; no provider/plugin/API; no DailyNote/VCP memory; no dependency change; no production candidate; no tag/release/deploy
+validated_now: git diff --check; node scripts/validate_agent_board_state.js; pwsh -NoProfile -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+validate_agent_image_lab_local_result: passed_with_manual_review_warnings
+recommended_next: guarded_commit_and_push_this_docs_gate_if_validation_and_preflight_pass
+```
