@@ -14548,7 +14548,7 @@ recommended_next: guarded_commit_and_push
 
 ```text
 phase: capsule_npm_script_index_gate
-status: completed_targeted_validated
+status: completed_validated
 mode: A4.8 package script patch
 summary: Added clear npm validator aliases and made scripts/validate_mvp_capsule_product_core.ps1 executable directly while preserving dot-source helper behavior.
 changed_files: package.json; scripts/validate_mvp_capsule_product_core.ps1
@@ -14569,4 +14569,26 @@ provider_plugin_api_performed: false
 DailyNote_or_VCP_memory_write_performed: false
 production_candidate_performed: false
 recommended_next: guarded_commit_and_push
+```
+
+## Current Handoff Update - Full Asset Archive Design
+
+```text
+phase: full_asset_archive_design_gate
+status: completed_targeted_validated
+mode: A4.8 docs/design
+summary: Defined the preview capsule versus original asset archive relationship for capsule product core.
+design_ref: docs/FULL_ASSET_ARCHIVE_DESIGN.md
+decision: preview capsule remains Git-portable evidence; original asset remains outside Git by default and requires A5 verification before full archive or production readiness claims.
+schema_next: full_asset_archive_manifest_schema_gate
+original_binary_read_performed: false
+preview_generation_performed: false
+original_copy_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+production_candidate_performed: false
+dependency_change_performed: false
+validate_mvp_result: passed
+validate_agent_image_lab_local_result: passed_with_warnings_ok_for_manual_review
+recommended_next: full_asset_archive_manifest_schema_gate
 ```

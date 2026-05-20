@@ -16642,6 +16642,29 @@ recommended_next: guarded_commit_and_push
 ## Current Capsule Productization Goal
 
 ```text
+phase: full_asset_archive_design_gate
+status: completed_validated
+mode: A4.8 docs/design
+objective: define full asset archive relationship between Git-portable preview capsules and original assets
+design_ref: docs/FULL_ASSET_ARCHIVE_DESIGN.md
+preview_capsule_layer: Git-portable validation evidence
+original_asset_layer: outside Git by default; blocked until A5 verification
+hash_dimensions_rule: existing Git-tracked preview static validation allowed; new original hash/dim extraction blocked without A5
+original_binary_read_performed: false
+preview_generation_performed: false
+original_copy_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+production_candidate_performed: false
+dependency_change_performed: false
+validate_mvp_result: passed
+validate_agent_image_lab_local_result: passed_with_warnings_ok_for_manual_review
+recommended_next: full_asset_archive_manifest_schema_gate
+```
+
+## Current Capsule Productization Goal
+
+```text
 phase: capsule_product_core_helper_dedup_gate
 status: completed_targeted_validated
 mode: A4.8 autonomous batch train / local refactor

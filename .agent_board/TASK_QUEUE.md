@@ -11996,6 +11996,23 @@ validate_agent_image_lab_local_result: passed_with_warnings_ok_for_manual_review
 recommended_next: guarded_commit_and_push
 ```
 
+## Current Task - Full Asset Archive Design
+
+```text
+status: completed_validated
+mode: A4.8 docs/design
+done: added docs/FULL_ASSET_ARCHIVE_DESIGN.md defining preview/original binding, Git boundary, hash/dim rule, fail-closed cases, recovery semantics, and next schema gate
+in_progress: guarded commit/push
+blocked: none
+remaining: exact-file stage, guarded commit, guarded push
+original_binary_read_performed: false
+preview_generation_performed: false
+production_candidate_performed: false
+validate_mvp_result: passed
+validate_agent_image_lab_local_result: passed_with_warnings_ok_for_manual_review
+recommended_next: full_asset_archive_manifest_schema_gate
+```
+
 ## Current Task - Capsule Product Core Helper Dedup
 
 ```text

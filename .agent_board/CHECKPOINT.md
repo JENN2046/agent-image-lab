@@ -24979,6 +24979,40 @@ validate_agent_image_lab_local_result: passed_with_warnings_ok_for_manual_review
 recommended_next: guarded_commit_and_push
 ```
 
+## Checkpoint - Full Asset Archive Design
+
+```text
+phase: full_asset_archive_design_gate
+status: completed_validated
+mode: A4.8 docs/design
+completed:
+- added docs/FULL_ASSET_ARCHIVE_DESIGN.md
+- defined preview capsule layer as Git-portable validation evidence
+- defined original asset layer as outside Git by default and blocked until A5 verification
+- defined preview/original manifest binding model
+- defined hash/dimensions rule and fail-closed cases
+- set next schema gate deliverables
+validation_completed:
+- git diff --check
+- node scripts\validate_agent_board_state.js
+- powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+- powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+hard_stop_flags:
+  original_binary_read_performed: false
+  preview_generation_performed: false
+  original_copy_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  dependency_change_performed: false
+validate_mvp_result: passed
+validate_agent_image_lab_local_result: passed_with_warnings_ok_for_manual_review
+recommended_next: full_asset_archive_manifest_schema_gate
+```
+
 ## Checkpoint - Capsule Product Core Helper Dedup
 
 ```text
