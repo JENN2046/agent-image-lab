@@ -24769,7 +24769,7 @@ recommended_next: guarded_commit_and_push_if_preflight_clean
 
 ```text
 phase: capsule_manifest_taxonomy_gate
-status: completed_targeted_validated
+status: completed_validated
 mode: A4.8 local implementation / validator taxonomy refactor
 completed:
 - wired scripts/validate_capsule_manifest_contract_negative_cases.js into scripts/validate_mvp_capsule_product_core.ps1
@@ -24895,4 +24895,46 @@ hard_stop_flags:
   dependency_change_performed: false
   runtime_browser_execution_performed: false
 recommended_next: guarded_commit_and_push_if_preflight_clean
+```
+
+## Checkpoint - Capsule Creator Contract Regression
+
+```text
+phase: capsule_creator_contract_regression_gate
+status: completed_targeted_validated
+mode: A4.8 autonomous batch train / local implementation
+completed:
+- exported canonical creator/manifest contract field arrays from scripts/lib/capsule_manifest_contract.js
+- aligned scripts/create_failure_sample_capsule.js fresh manifest guard with push_tag_release_deploy_performed=false
+- added scripts/validate_capsule_creator_manifest_contract_regression.js
+- wired the new validator into scripts/validate_mvp_capsule_product_core.ps1
+validation_completed:
+- node --check scripts/create_failure_sample_capsule.js
+- node --check scripts/lib/capsule_manifest_contract.js
+- node --check scripts/validate_capsule_creator_manifest_contract_regression.js
+- node scripts/validate_capsule_creator_manifest_contract_regression.js
+- node scripts/validate_create_preview_capsule_registry_source.js
+- node scripts/validate_failure_sample_capsule_creator_dry_run.js
+- node scripts/validate_capsule_manifest_schema_runtime_binding.js
+- node scripts/validate_capsule_manifest_contract.js
+- PowerShell parser check for scripts\validate_mvp_capsule_product_core.ps1
+- git diff --check
+- node scripts\validate_agent_board_state.js
+- powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+- powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+hard_stop_flags:
+  real_capsule_created: false
+  preview_generation_performed: false
+  preview_creation_or_copy_performed: false
+  runs_source_image_binary_read_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  dependency_change_performed: false
+validate_mvp_result: passed
+validate_agent_image_lab_local_result: passed_with_warnings_ok_for_manual_review
+recommended_next: guarded_commit_and_push
 ```

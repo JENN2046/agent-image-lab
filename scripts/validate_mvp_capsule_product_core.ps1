@@ -98,6 +98,17 @@ function Invoke-CapsuleProductCoreValidation {
     Test-CapsuleNoExternalActionFlags $capsuleCreatorCommonSafety "Capsule creator common safety validation must remain local-only with no external, memory, runtime, production, or remote actions" @('production_candidate_write_performed')
   }
 
+  $capsuleCreatorManifestContractRegression = Invoke-CapsuleNodeJsonValidator 'scripts/validate_capsule_creator_manifest_contract_regression.js' "Capsule creator manifest contract regression validation exited with failure"
+  if ($null -ne $capsuleCreatorManifestContractRegression) {
+    if ($capsuleCreatorManifestContractRegression.passed -ne $true -or $capsuleCreatorManifestContractRegression.status -ne 'capsule_creator_manifest_contract_regression_verified') {
+      & $AddFailure "Capsule creator manifest contract regression validation must pass"
+    }
+    if ($capsuleCreatorManifestContractRegression.static_validator_only -ne $true -or $capsuleCreatorManifestContractRegression.real_capsule_created -ne $false -or $capsuleCreatorManifestContractRegression.preview_creation_or_copy_performed -ne $false) {
+      & $AddFailure "Capsule creator manifest contract regression must stay static-only without capsule creation or preview creation/copy"
+    }
+    Test-CapsuleNoExternalActionFlags $capsuleCreatorManifestContractRegression "Capsule creator manifest contract regression must remain local-only with no external, memory, runtime, production, or remote actions" @('production_candidate_write_performed')
+  }
+
   $gitTrackedPreviewEvidenceCapsuleBaselineOutput = & node (Join-Path $Root 'scripts/validate_v14_231_git_tracked_preview_evidence_capsule_baseline.js')
   if ($LASTEXITCODE -ne 0) {
     & $AddFailure "Git-tracked preview evidence capsule baseline validation exited with failure"

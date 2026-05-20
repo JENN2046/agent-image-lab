@@ -125,6 +125,7 @@ async function createCapsule(sample) {
     const createdAt = new Date().toISOString();
     const commonGuard = createNoExecutionGuard({
       production_candidate_created: false,
+      push_tag_release_deploy_performed: false,
     });
 
     writeJson(tempPaths.failureRecord, {

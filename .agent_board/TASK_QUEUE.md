@@ -11913,7 +11913,7 @@ recommended_next: guarded_commit_and_push_if_preflight_clean
 ## Current Task - Manifest Taxonomy Gate
 
 ```text
-status: completed_targeted_validated
+status: completed_validated
 mode: A4.8 local implementation / validator taxonomy refactor
 done: wired manifest negative-case validation into capsule product-core validation; extended shared taxonomy with manifest classes; refactored capsule manifest contract to use shared classifyManifestFailures; strengthened taxonomy validator for manifest coverage
 in_progress: commit_push_readiness
@@ -11960,4 +11960,21 @@ blocked: none
 remaining: full validation, exact-file guarded local commit, push preflight, push if clean
 validation: targeted JS syntax, failure registry source validator, and failure creator dry-run passed before full validation
 recommended_next: guarded_commit_and_push_if_preflight_clean
+```
+
+## Current Task - Capsule Creator Contract Regression
+
+```text
+status: completed_targeted_validated
+mode: A4.8 autonomous batch train / local implementation
+done: exported canonical manifest contract field arrays; aligned failure creator manifest guard with push_tag_release_deploy_performed=false; added scripts/validate_capsule_creator_manifest_contract_regression.js; wired the validator into scripts/validate_mvp_capsule_product_core.ps1
+in_progress: guarded commit/push
+blocked: none
+remaining: exact-file stage, guarded commit, guarded push
+real_capsule_created: false
+preview_generation_performed: false
+runs_source_image_binary_read_performed: false
+validate_mvp_result: passed
+validate_agent_image_lab_local_result: passed_with_warnings_ok_for_manual_review
+recommended_next: guarded_commit_and_push
 ```

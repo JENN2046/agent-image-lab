@@ -14412,7 +14412,7 @@ recommended_next: guarded_commit_and_push_if_preflight_clean
 
 ```text
 phase: capsule_manifest_taxonomy_gate
-status: completed_targeted_validated
+status: completed_validated
 mode: A4.8 local implementation / validator taxonomy refactor
 summary: Wired scripts/validate_capsule_manifest_contract_negative_cases.js into scripts/validate_mvp_capsule_product_core.ps1 and moved capsule manifest failure classification onto scripts/lib/capsule_status_taxonomy.js.
 changed_code: scripts/lib/capsule_status_taxonomy.js; scripts/lib/capsule_manifest_contract.js; scripts/validate_capsule_status_taxonomy.js; scripts/validate_capsule_manifest_contract_negative_cases.js; scripts/validate_mvp_capsule_product_core.ps1
@@ -14495,4 +14495,30 @@ production_candidate_performed: false
 runtime_browser_execution_performed: false
 tag_release_deploy_performed: false
 recommended_next: guarded_commit_and_push_if_preflight_clean
+```
+
+## Current Handoff Update - Capsule Creator Contract Regression
+
+```text
+phase: capsule_creator_contract_regression_gate
+status: completed_targeted_validated
+mode: A4.8 autonomous batch train / local implementation
+summary: Added canonical manifest-contract regression coverage for accepted and failure capsule creators, using scripts/lib/capsule_manifest_contract.js field exports as the source of truth.
+changed_code: scripts/lib/capsule_manifest_contract.js; scripts/create_failure_sample_capsule.js; scripts/validate_capsule_creator_manifest_contract_regression.js; scripts/validate_mvp_capsule_product_core.ps1
+accepted_creator_contract_regression: verified
+failure_creator_contract_regression: verified
+failure_creator_manifest_guard_aligned: push_tag_release_deploy_performed=false
+static_validator_only: true
+real_capsule_created: false
+preview_generation_performed: false
+preview_creation_or_copy_performed: false
+runs_source_image_binary_read_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+production_candidate_performed: false
+dependency_change_performed: false
+validation_targeted: node --check changed JS; node scripts/validate_capsule_creator_manifest_contract_regression.js; node scripts/validate_create_preview_capsule_registry_source.js; node scripts/validate_failure_sample_capsule_creator_dry_run.js; node scripts/validate_capsule_manifest_schema_runtime_binding.js; node scripts/validate_capsule_manifest_contract.js; PowerShell parser check for scripts/validate_mvp_capsule_product_core.ps1
+validate_mvp_result: passed
+validate_agent_image_lab_local_result: passed_with_warnings_ok_for_manual_review
+recommended_next: guarded_commit_and_push
 ```

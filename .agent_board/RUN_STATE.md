@@ -16491,7 +16491,7 @@ recommended_next: guarded_commit_and_push_if_preflight_clean
 
 ```text
 phase: capsule_manifest_taxonomy_gate
-status: completed_targeted_validated
+status: completed_validated
 mode: A4.8 local implementation / validator taxonomy refactor
 objective: close the manifest negative-case gate gap and remove manifest contract failure-class taxonomy duplication without changing product capsule semantics
 helper_ref: scripts/lib/capsule_status_taxonomy.js
@@ -16584,4 +16584,30 @@ production_candidate_performed: false
 runtime_browser_execution_performed: false
 tag_release_deploy_performed: false
 recommended_next: guarded_commit_and_push_if_preflight_clean
+```
+
+## Current Capsule Productization Goal
+
+```text
+phase: capsule_creator_contract_regression_gate
+status: completed_targeted_validated
+mode: A4.8 autonomous batch train / local implementation
+objective: keep accepted and failure capsule creator manifest output aligned with capsule_manifest_contract without creating real capsules
+changed_code: scripts/lib/capsule_manifest_contract.js; scripts/create_failure_sample_capsule.js; scripts/validate_capsule_creator_manifest_contract_regression.js; scripts/validate_mvp_capsule_product_core.ps1
+contract_source_of_truth: scripts/lib/capsule_manifest_contract.js
+accepted_creator_contract_regression: verified
+failure_creator_contract_regression: verified
+failure_creator_manifest_guard_aligned: push_tag_release_deploy_performed=false
+static_validator_only: true
+real_capsule_created: false
+preview_generation_performed: false
+preview_creation_or_copy_performed: false
+runs_source_image_binary_read_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+production_candidate_performed: false
+dependency_change_performed: false
+validate_mvp_result: passed
+validate_agent_image_lab_local_result: passed_with_warnings_ok_for_manual_review
+recommended_next: guarded_commit_and_push
 ```

@@ -204,4 +204,19 @@ function validateAllCapsuleManifests(core, options = {}) {
   return { passed, status: passed ? "capsule_manifest_contract_verified" : "capsule_manifest_contract_failed", report_version: "capsule_manifest_contract_v1", schema_ref: schemaLoad.schemaRef, schema_runtime_binding_status: schemaBinding.passed ? "schema_runtime_binding_verified" : "schema_runtime_binding_failed", schema_runtime_binding_failures: schemaBinding.failures, totals: { accepted: accepted.length, failure: failure.length, total: samples.length, passed: samples.length - failed.length, failed: failed.length }, samples, failed_sample_ids: failed.map((sample) => sample.sample_id), failure_class_summary: failureClassSummary, guard: { static_validator_only: true, preview_creation_or_copy_performed: false, provider_contact_performed: false, plugin_call_performed: false, api_call_performed: false, image_generation_performed: false, DailyNote_write_performed: false, VCP_memory_write_performed: false, runtime_execution_performed: false, real_manifest_read_performed: false, real_vcpchat_read_performed: false, real_vcptoolbox_read_performed: false, push_tag_release_deploy_performed: false } };
 }
 
-module.exports = { ACCEPTED_ROOT, FAILURE_ROOT, SCHEMA_REF, REQUIRED_LONG_EDGE, classifyFailures: classifyManifestFailures, loadCapsuleManifestSchema, validateSchemaRuntimeBinding, validateCapsuleManifest, validateAllCapsuleManifests };
+module.exports = {
+  ACCEPTED_ROOT,
+  FAILURE_ROOT,
+  SCHEMA_REF,
+  REQUIRED_LONG_EDGE,
+  COMMON_GUARD_FALSE_FIELDS,
+  MANIFEST_GUARD_FALSE_FIELDS,
+  COMMON_TOP_LEVEL_FALSE_FIELDS,
+  ACCEPTED_TOP_LEVEL_FALSE_FIELDS,
+  FAILURE_TOP_LEVEL_FALSE_FIELDS,
+  classifyFailures: classifyManifestFailures,
+  loadCapsuleManifestSchema,
+  validateSchemaRuntimeBinding,
+  validateCapsuleManifest,
+  validateAllCapsuleManifests,
+};
