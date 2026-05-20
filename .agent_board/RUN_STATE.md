@@ -16272,3 +16272,33 @@ validation:
   - scripts/validate_mvp.ps1: passed
 recommended_next: governance_matrix_commit_readiness_or_manual_review_gate
 ```
+---
+
+## Current Capsule Productization Goal
+
+```text
+phase: capsule_mvp_validator_slice_gate
+status: completed_validated_docs_scope
+mode: A4.8 docs-first / code-refactor only if explicitly authorized
+objective: design how to slice capsule product-core checks out of validate_mvp.ps1 while keeping validate_mvp.ps1 as top-level orchestrator
+plan_ref: docs/CAPSULE_MVP_VALIDATOR_SLICE_PLAN.md
+code_refactor_performed: false
+validate_mvp_ps1_modified: false
+capsule_gate_skipped: false
+actual_runs_scan_performed: false
+image_binary_read_performed: false
+hash_extraction_performed: false
+dimensions_extraction_performed: false
+preview_generation_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+dependency_change_performed: false
+validated_now: git diff --check; node scripts/validate_agent_board_state.js; pwsh -NoProfile -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+validate_mvp_ps1_run_now: false
+validate_mvp_ps1_skip_reason: docs-first/no-code-change gate with explicit no runtime/browser execution boundary
+recommended_next: capsule_mvp_validator_slice_code_refactor_authorization_gate
+```

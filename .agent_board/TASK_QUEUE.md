@@ -11775,3 +11775,17 @@ recommended_next: runs_restore_verification_authorization_package_draft_commit_r
       Validation: git status --short --branch; git diff --stat; git diff --check; exact-file staging only if user authorizes commit.
       Stop condition: user does not authorize commit, validation fails, or changed files fall outside the task chain.
 ```
+---
+
+## Current Task - Capsule MVP Validator Slice Gate
+
+```text
+status: completed_validated_docs_scope
+mode: A4.8 docs-first / code-refactor only if explicitly authorized
+done: inspected validate_mvp.ps1 capsule product-core cluster; drafted docs/CAPSULE_MVP_VALIDATOR_SLICE_PLAN.md; updated .agent_board resume surfaces; ran docs/.agent_board validation
+in_progress: none
+blocked: code refactor remains blocked until explicit authorization
+remaining: closeout; optional later commit-readiness if requested
+validated_now: git diff --check; node scripts/validate_agent_board_state.js; pwsh -NoProfile -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+recommended_next: capsule_mvp_validator_slice_code_refactor_authorization_gate
+```

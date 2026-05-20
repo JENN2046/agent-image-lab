@@ -14231,3 +14231,22 @@ validation:
   - scripts/validate_mvp.ps1: passed
 next_safe_action: decide whether to prepare guarded local commit or leave changes for manual review
 ```
+---
+
+## Current Handoff Update - Capsule MVP Validator Slice Gate
+
+```text
+phase: capsule_mvp_validator_slice_gate
+status: completed_validated_docs_scope
+mode: A4.8 docs-first / code-refactor only if explicitly authorized
+summary: Added a docs-first plan for extracting capsule product-core checks from scripts/validate_mvp.ps1 into a future helper while preserving validate_mvp.ps1 as top-level orchestrator.
+changed_files_expected: docs/CAPSULE_MVP_VALIDATOR_SLICE_PLAN.md; .agent_board/RUN_STATE.md; .agent_board/HANDOFF.md; .agent_board/TASK_QUEUE.md; .agent_board/CHECKPOINT.md
+code_changes_performed: false
+validate_mvp_ps1_modified: false
+dependency_change_performed: false
+hard_stops_preserved: no actual runs scan; no image binary reads; no hash/dimensions extraction; no preview generation; no provider/plugin/API; no DailyNote/VCP memory; no production candidate
+validated_now: git diff --check; node scripts/validate_agent_board_state.js; pwsh -NoProfile -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+validate_mvp_ps1_run_now: false
+validate_mvp_ps1_skip_reason: docs-first/no-code-change gate with explicit no runtime/browser execution boundary
+recommended_next: capsule_mvp_validator_slice_code_refactor_authorization_gate
+```

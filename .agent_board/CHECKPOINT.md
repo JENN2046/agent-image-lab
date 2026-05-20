@@ -24491,3 +24491,38 @@ not_validated: []
 risk: docs-only governance matrix; no A5 authority opened
 next: decide whether to prepare guarded local commit or leave changes for manual review
 ```
+---
+
+## Checkpoint - Capsule MVP Validator Slice Gate
+
+```text
+phase: capsule_mvp_validator_slice_gate
+status: completed_validated_docs_scope
+mode: A4.8 docs-first / code-refactor only if explicitly authorized
+completed:
+- completed Autopilot Rule Intake
+- inspected scripts/validate_mvp.ps1 and capsule validator surfaces without code changes
+- added docs/CAPSULE_MVP_VALIDATOR_SLICE_PLAN.md
+- updated .agent_board resume surfaces
+validation_completed:
+- git diff --check
+- node scripts/validate_agent_board_state.js
+- scripts/validate-agent-image-lab-local.ps1
+validation_not_run:
+- scripts/validate_mvp.ps1
+validation_not_run_reason: docs-first/no-code-change gate with explicit no runtime/browser execution boundary
+hard_stop_flags:
+  actual_runs_scan_performed: false
+  image_binary_read_performed: false
+  hash_extraction_performed: false
+  dimensions_extraction_performed: false
+  preview_generation_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  dependency_change_performed: false
+recommended_next: capsule_mvp_validator_slice_code_refactor_authorization_gate
+```
