@@ -16425,3 +16425,29 @@ runtime_browser_execution_performed: false
 tag_release_deploy_performed: false
 recommended_next: guarded_commit_and_push_if_preflight_clean
 ```
+
+## Current Capsule Productization Goal
+
+```text
+phase: failure_registry_yaml_parser_alignment_gate
+status: completed_validated
+mode: A4.8 local implementation / registry parser alignment
+objective: align failure registry parsing with accepted registry structured YAML parsing without dependency changes or capsule mutation
+helper_ref: scripts/lib/failure_sample_registry_source.js
+validator_ref: scripts/validate_failure_sample_registry_source.js
+failure_creator_refactored: true
+mvp_helper_wired: true
+dependency_change_performed: false
+writes_performed_by_validation: false
+preview_creation_or_copy_performed: false
+actual_runs_scan_performed: false
+image_binary_read_performed: false
+hash_or_dimensions_extraction_performed: false
+preview_generation_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+production_candidate_performed: false
+runtime_browser_execution_performed: false
+tag_release_deploy_performed: false
+recommended_next: guarded_commit_and_push_if_preflight_clean
+```

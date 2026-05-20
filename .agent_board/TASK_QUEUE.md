@@ -11875,3 +11875,16 @@ remaining: full validation, exact-file guarded local commit, push preflight, pus
 validation: targeted JS syntax and creator safety validators passed before full validation
 recommended_next: guarded_commit_and_push_if_preflight_clean
 ```
+
+## Current Task - Failure Registry YAML Parser Alignment
+
+```text
+status: completed_validated
+mode: A4.8 local implementation / registry parser alignment
+done: added scripts/lib/failure_sample_registry_source.js; refactored scripts/create_failure_sample_capsule.js to load failure samples through YAML.parse; added scripts/validate_failure_sample_registry_source.js; wired it into scripts/validate_mvp_capsule_product_core.ps1
+in_progress: commit_push_readiness
+blocked: none
+remaining: full validation, exact-file guarded local commit, push preflight, push if clean
+validation: targeted JS syntax, failure registry source validator, and failure creator dry-run passed before full validation
+recommended_next: guarded_commit_and_push_if_preflight_clean
+```

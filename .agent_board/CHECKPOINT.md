@@ -24667,3 +24667,35 @@ hard_stop_flags:
   runtime_browser_execution_performed: false
 recommended_next: guarded_commit_and_push_if_preflight_clean
 ```
+
+## Checkpoint - Failure Registry YAML Parser Alignment
+
+```text
+phase: failure_registry_yaml_parser_alignment_gate
+status: completed_validated
+mode: A4.8 local implementation / registry parser alignment
+completed:
+- added scripts/lib/failure_sample_registry_source.js
+- refactored scripts/create_failure_sample_capsule.js away from regex/string field parsing
+- added scripts/validate_failure_sample_registry_source.js
+- wired the new validator into scripts/validate_mvp_capsule_product_core.ps1
+validation_completed:
+- node --check for changed JS files
+- node scripts/validate_failure_sample_registry_source.js
+- node scripts/validate_failure_sample_capsule_creator_dry_run.js
+hard_stop_flags:
+  actual_runs_scan_performed: false
+  image_binary_read_performed: false
+  hash_extraction_performed: false
+  dimensions_extraction_performed: false
+  preview_generation_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  dependency_change_performed: false
+  runtime_browser_execution_performed: false
+recommended_next: guarded_commit_and_push_if_preflight_clean
+```

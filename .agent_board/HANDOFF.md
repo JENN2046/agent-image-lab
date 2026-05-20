@@ -14347,3 +14347,26 @@ runtime_browser_execution_performed: false
 tag_release_deploy_performed: false
 recommended_next: guarded_commit_and_push_if_preflight_clean
 ```
+
+## Current Handoff Update - Failure Registry YAML Parser Alignment
+
+```text
+phase: failure_registry_yaml_parser_alignment_gate
+status: completed_validated
+mode: A4.8 local implementation / registry parser alignment
+summary: Aligned failure sample creator source loading with the accepted lane by adding scripts/lib/failure_sample_registry_source.js using YAML.parse, duplicate failure_id fail-closed checks, and memory/DailyNote guard checks.
+changed_code: scripts/lib/failure_sample_registry_source.js; scripts/create_failure_sample_capsule.js; scripts/validate_failure_sample_registry_source.js; scripts/validate_mvp_capsule_product_core.ps1
+dependency_change_performed: false
+writes_performed_by_validation: false
+preview_creation_or_copy_performed: false
+actual_runs_scan_performed: false
+image_binary_read_performed: false
+hash_or_dimensions_extraction_performed: false
+preview_generation_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+production_candidate_performed: false
+runtime_browser_execution_performed: false
+tag_release_deploy_performed: false
+recommended_next: guarded_commit_and_push_if_preflight_clean
+```

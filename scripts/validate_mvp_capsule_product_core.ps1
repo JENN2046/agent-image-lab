@@ -134,6 +134,22 @@ function Invoke-CapsuleProductCoreValidation {
     }
   }
 
+  $failureSampleRegistrySourceOutput = & node (Join-Path $Root 'scripts/validate_failure_sample_registry_source.js')
+  if ($LASTEXITCODE -ne 0) {
+    & $AddFailure "Failure sample registry source validation exited with failure"
+  } else {
+    $failureSampleRegistrySource = ($failureSampleRegistrySourceOutput -join "`n") | ConvertFrom-Json
+    if ($failureSampleRegistrySource.passed -ne $true -or $failureSampleRegistrySource.status -ne 'failure_sample_registry_source_verified') {
+      & $AddFailure "Failure sample registry source validation must pass"
+    }
+    if ($failureSampleRegistrySource.registry_driven_source -ne $true -or $failureSampleRegistrySource.yaml_parser_aligned_with_accepted_lane -ne $true -or $failureSampleRegistrySource.writes_performed -ne $false -or $failureSampleRegistrySource.preview_creation_or_copy_performed -ne $false) {
+      & $AddFailure "Failure sample registry source validation must use structured YAML parsing without writes or preview creation/copy"
+    }
+    if ($failureSampleRegistrySource.provider_contact_performed -ne $false -or $failureSampleRegistrySource.plugin_call_performed -ne $false -or $failureSampleRegistrySource.api_call_performed -ne $false -or $failureSampleRegistrySource.image_generation_performed -ne $false -or $failureSampleRegistrySource.DailyNote_write_performed -ne $false -or $failureSampleRegistrySource.VCP_memory_write_performed -ne $false -or $failureSampleRegistrySource.runtime_execution_performed -ne $false -or $failureSampleRegistrySource.real_manifest_read_performed -ne $false -or $failureSampleRegistrySource.real_vcpchat_read_performed -ne $false -or $failureSampleRegistrySource.real_vcptoolbox_read_performed -ne $false -or $failureSampleRegistrySource.production_candidate_write_performed -ne $false -or $failureSampleRegistrySource.push_tag_release_deploy_performed -ne $false) {
+      & $AddFailure "Failure sample registry source validation must remain local-only with no external, memory, runtime, production, or remote actions"
+    }
+  }
+
   $failureSampleCapsuleCreatorDryRunOutput = & node (Join-Path $Root 'scripts/validate_failure_sample_capsule_creator_dry_run.js')
   if ($LASTEXITCODE -ne 0) {
     & $AddFailure "Failure sample capsule creator dry-run validation exited with failure"

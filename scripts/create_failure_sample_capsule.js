@@ -4,6 +4,10 @@
 const path = require("node:path");
 const sharp = require("sharp");
 const { createCapsuleCreatorCommon } = require("./lib/capsule_creator_common");
+const {
+  FAILURE_REGISTRY_REF,
+  loadFailureSampleFromRegistry,
+} = require("./lib/failure_sample_registry_source");
 
 const repoRoot = path.resolve(__dirname, "..");
 const creatorCommon = createCapsuleCreatorCommon(repoRoot, {
@@ -24,8 +28,6 @@ const {
   createNoExecutionGuard,
 } = creatorCommon;
 
-const FAILURE_REGISTRY_REF = "failure_samples/failure_registry.yaml";
-
 function readArg(name) {
   const prefix = `--${name}=`;
   const found = process.argv.find((arg) => arg.startsWith(prefix));
@@ -36,60 +38,15 @@ function boolArg(name) {
   return readArg(name) === "true";
 }
 
-function extractFailureBlock(registryText, sampleId) {
-  const marker = `failure_id: ${sampleId}`;
-  const start = registryText.indexOf(marker);
-  if (start < 0) return "";
-  const rest = registryText.slice(start);
-  const next = rest.search(/\n\s+- failure_id: /);
-  return next >= 0 ? rest.slice(0, next).trimEnd() : rest.trimEnd();
-}
-
-function parseScalar(block, key) {
-  const match = block.match(new RegExp(`^\\s*${key}:\\s*(.*)$`, "m"));
-  if (!match) return null;
-  const value = match[1].trim();
-  return value === "null" ? null : value;
-}
-
-function parseList(block, key) {
-  const lines = block.split(/\r?\n/);
-  const start = lines.findIndex((line) => line.match(new RegExp(`^\\s*${key}:\\s*$`)));
-  if (start < 0) return [];
-  const values = [];
-  for (const line of lines.slice(start + 1)) {
-    const item = line.match(/^\s*-\s*(.+?)\s*$/);
-    if (item) {
-      values.push(item[1]);
-      continue;
-    }
-    if (line.trim() && line.match(/^\s*[a-zA-Z_]+:/)) break;
-  }
-  return values;
-}
-
 function loadSample(sampleId) {
-  const registryText = readText(FAILURE_REGISTRY_REF);
-  const block = extractFailureBlock(registryText, sampleId);
-  if (!block) {
-    throw new Error(`unsupported failure sample id: ${sampleId}`);
+  try {
+    return loadFailureSampleFromRegistry({ exists, readText }, sampleId);
+  } catch (error) {
+    if (/failure sample not found/.test(error.message)) {
+      throw new Error(`unsupported failure sample id: ${sampleId}`);
+    }
+    throw error;
   }
-
-  return {
-    sampleId,
-    sourceImage: parseScalar(block, "image_path"),
-    targetRoot: `asset_archive/failure_samples/${sampleId}`,
-    failureRegistryRef: FAILURE_REGISTRY_REF,
-    reviewDocRef: parseScalar(block, "review_doc_ref"),
-    promptPackageRef: parseScalar(block, "prompt_package_ref"),
-    sourcePhase: parseScalar(block, "source_phase"),
-    providerType: parseScalar(block, "provider_type"),
-    pluginId: parseScalar(block, "plugin_id"),
-    model: parseScalar(block, "model"),
-    requiredLongEdge: 512,
-    failureTags: parseList(block, "failure_tags"),
-    resolvedByAcceptedSample: parseScalar(block, "resolved_by_accepted_sample"),
-  };
 }
 
 function capsulePaths(sample) {
@@ -160,8 +117,7 @@ async function createCapsule(sample) {
   }
 
     const previewSha256 = sha256File(tempPaths.preview);
-  const registryText = readText(sample.failureRegistryRef);
-  const failureBlock = extractFailureBlock(registryText, sample.sampleId);
+  const failureBlock = sample.registryFailureBlock;
   if (!failureBlock) {
     throw new Error(`failure sample not found in registry: ${sample.sampleId}`);
   }
