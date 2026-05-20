@@ -24301,6 +24301,51 @@ production_candidate_write_performed: false
 recommended_next: runs_restore_verification_authorization_package_draft_commit_readiness_gate
 ```
 
+## Checkpoint - Accepted Capsule Creator Manifest Contract Parity
+
+```text
+phase: accepted_capsule_creator_manifest_contract_parity_gate
+status: completed_validated
+mode: A4.8 narrow code patch / no runtime / no image or runs access
+completed:
+- updated scripts/create_preview_capsule.js so accepted manifest output writes production_candidate_allowed=false
+- updated scripts/create_preview_capsule.js so accepted manifest output writes memory_write_allowed=false
+- updated scripts/create_preview_capsule.js so accepted manifest output writes DailyNote_write_allowed=false
+- updated scripts/create_preview_capsule.js so accepted manifest output writes VCP_memory_write_allowed=false
+- updated scripts/create_preview_capsule.js so accepted manifest output writes commercial_delivery_allowed=false
+- updated manifest guard creation to include production_candidate_created=false and push_tag_release_deploy_performed=false
+- updated scripts/validate_create_preview_capsule_registry_source.js with static evidence checks
+- added docs/ACCEPTED_CAPSULE_CREATOR_MANIFEST_CONTRACT_PARITY_CLOSEOUT.md
+validation_completed:
+- node --check scripts/create_preview_capsule.js
+- node --check scripts/validate_create_preview_capsule_registry_source.js
+- node scripts/validate_create_preview_capsule_registry_source.js
+- node scripts/validate_capsule_manifest_contract.js
+- node scripts/validate_capsule_manifest_schema_runtime_binding.js
+- node scripts/validate_agent_board_state.js
+- git diff --check
+- powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+- powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+hard_stop_flags:
+  real_capsule_created: false
+  accepted_capsule_created: false
+  failure_capsule_created: false
+  runs_modified: false
+  source_image_binary_read_performed: false
+  preview_generation_performed: false
+  preview_creation_or_copy_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  dependency_change_performed: false
+  runtime_browser_execution_performed: false
+recommended_next: capsule_mvp_validator_slice_gate
+next_phase_started: false
+```
+
 ## Checkpoint - Capsule Validator Debt Convergence Plan
 
 ```text

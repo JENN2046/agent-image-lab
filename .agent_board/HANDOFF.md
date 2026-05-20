@@ -14013,6 +14013,36 @@ production_candidate_write_performed: false
 recommended_next: runs_restore_verification_authorization_package_draft_commit_readiness_gate
 ```
 
+## Current Handoff Update - Accepted Capsule Creator Manifest Contract Parity
+
+```text
+phase: accepted_capsule_creator_manifest_contract_parity_gate
+status: completed_validated
+mode: A4.8 narrow code patch / no runtime / no image or runs access
+summary: Aligned scripts/create_preview_capsule.js fresh accepted manifest output with scripts/lib/capsule_manifest_contract.js by writing accepted top-level false fields and manifest guard false fields, then added static validator evidence.
+changed_code: scripts/create_preview_capsule.js; scripts/validate_create_preview_capsule_registry_source.js
+closeout_ref: docs/ACCEPTED_CAPSULE_CREATOR_MANIFEST_CONTRACT_PARITY_CLOSEOUT.md
+fixed_manifest_fields: production_candidate_allowed=false; memory_write_allowed=false; DailyNote_write_allowed=false; VCP_memory_write_allowed=false; commercial_delivery_allowed=false
+fixed_manifest_guard_fields: production_candidate_created=false; push_tag_release_deploy_performed=false
+manifest_contract_validation: passed
+validate_mvp_result: passed
+validate_agent_image_lab_local_result: passed_with_warnings_ok_for_manual_review
+real_capsule_created: false
+accepted_capsule_created: false
+failure_capsule_created: false
+runs_modified: false
+source_image_binary_read_performed: false
+preview_generation_performed: false
+preview_creation_or_copy_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+production_candidate_performed: false
+dependency_change_performed: false
+runtime_browser_execution_performed: false
+recommended_next: capsule_mvp_validator_slice_gate
+next_phase_started: false
+```
+
 ## Current Handoff Update - Capsule Validator Debt Convergence Plan
 
 ```text

@@ -130,7 +130,10 @@ async function createCapsule(sample) {
     if (!sampleBlock) throw new Error(`sample not found in registry: ${sample.sampleId}`);
 
     const createdAt = new Date().toISOString();
-    const commonGuard = createNoExecutionGuard();
+    const commonGuard = createNoExecutionGuard({
+      production_candidate_created: false,
+      push_tag_release_deploy_performed: false,
+    });
 
     writeJson(tempPaths.importRecord, {
       record_type: "git_portable_preview_capsule_import_record",
@@ -184,6 +187,11 @@ async function createCapsule(sample) {
       },
       chain: { import_record: "import_record.json", review_record: "review_record.json", approval_record: "approval_record.json" },
       source_refs: { registry_ref: sample.registryRef, category_ref: sample.categoryRef, review_doc_ref: sample.reviewDocRef, prompt_package_ref: sample.promptPackageRef },
+      production_candidate_allowed: false,
+      memory_write_allowed: false,
+      DailyNote_write_allowed: false,
+      VCP_memory_write_allowed: false,
+      commercial_delivery_allowed: false,
       guard: commonGuard,
     });
 

@@ -26,6 +26,14 @@ add("creator_preserves_temp_dir_rename", sourceText.includes("tempTargetRoot") &
 add("creator_uses_common_safety_helper", sourceText.includes("createCapsuleCreatorCommon"));
 add("creator_exports_dry_run_functions", sourceText.includes("module.exports") && sourceText.includes("resolveSampleFromRegistry"));
 add("creator_requires_confirm_create", sourceText.includes("confirm-create") && sourceText.includes("planOnly(sample)"));
+add("creator_manifest_writes_accepted_top_level_false_fields", [
+  "production_candidate_allowed",
+  "memory_write_allowed",
+  "DailyNote_write_allowed",
+  "VCP_memory_write_allowed",
+  "commercial_delivery_allowed",
+].every((field) => sourceText.includes(`${field}: false`)));
+add("creator_manifest_guard_writes_contract_false_fields", sourceText.includes("production_candidate_created: false") && sourceText.includes("push_tag_release_deploy_performed: false"));
 add("target_dir_existing_is_blocked", sourceText.includes("assertTargetClean") && creatorCommonText.includes("target capsule directory already exists"));
 add("failure_creator_target_dir_existing_is_blocked", failureCreatorText.includes("assertTargetClean") && creatorCommonText.includes("target capsule directory already exists"));
 add("npm_default_script_is_plan_only", packageJson.scripts["create-preview-capsule"] === "node scripts/create_preview_capsule.js");

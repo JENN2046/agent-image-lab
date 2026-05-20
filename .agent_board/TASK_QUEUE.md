@@ -11683,6 +11683,25 @@ production_candidate_write_performed: false
 recommended_next: runs_restore_verification_authorization_package_draft_commit_readiness_gate
 ```
 
+## Current Task - Accepted Capsule Creator Manifest Contract Parity
+
+```text
+status: completed_validated
+mode: A4.8 narrow code patch / no runtime / no image or runs access
+done: updated scripts/create_preview_capsule.js to write accepted manifest top-level false fields; updated scripts/validate_create_preview_capsule_registry_source.js with static evidence checks; added docs/ACCEPTED_CAPSULE_CREATOR_MANIFEST_CONTRACT_PARITY_CLOSEOUT.md
+in_progress: none
+blocked: none for this gate
+remaining: none for this gate; next phase not started
+manifest_contract_validation: passed
+validate_mvp_result: passed
+validate_agent_image_lab_local_result: passed_with_warnings_ok_for_manual_review
+real_capsule_created: false
+preview_generation_performed: false
+source_image_binary_read_performed: false
+recommended_next: capsule_mvp_validator_slice_gate
+next_phase_started: false
+```
+
 ## Current Task - Capsule Validator Debt Convergence Plan
 
 ```text

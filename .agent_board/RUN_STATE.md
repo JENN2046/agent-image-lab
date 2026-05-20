@@ -16030,6 +16030,36 @@ recommended_next: runs_restore_verification_authorization_package_draft_commit_r
 ## Current Capsule Productization Goal
 
 ```text
+phase: accepted_capsule_creator_manifest_contract_parity_gate
+status: completed_validated
+mode: A4.8 narrow code patch / no runtime / no image or runs access
+objective: make fresh accepted capsule creator manifest output match current capsule_manifest_contract accepted requirements
+changed_code: scripts/create_preview_capsule.js; scripts/validate_create_preview_capsule_registry_source.js
+closeout_ref: docs/ACCEPTED_CAPSULE_CREATOR_MANIFEST_CONTRACT_PARITY_CLOSEOUT.md
+creator_manifest_contract_parity: true
+fixed_manifest_fields: production_candidate_allowed=false; memory_write_allowed=false; DailyNote_write_allowed=false; VCP_memory_write_allowed=false; commercial_delivery_allowed=false
+fixed_manifest_guard_fields: production_candidate_created=false; push_tag_release_deploy_performed=false
+static_validator_evidence: creator_manifest_writes_accepted_top_level_false_fields; creator_manifest_guard_writes_contract_false_fields
+manifest_contract_validation: passed
+validate_mvp_result: passed
+validate_agent_image_lab_local_result: passed_with_warnings_ok_for_manual_review
+real_capsule_created: false
+runs_modified: false
+source_image_binary_read_performed: false
+preview_generation_performed: false
+preview_creation_or_copy_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+production_candidate_performed: false
+dependency_change_performed: false
+runtime_browser_execution_performed: false
+recommended_next: capsule_mvp_validator_slice_gate
+next_phase_started: false
+```
+
+## Current Capsule Productization Goal
+
+```text
 phase: capsule_product_core_validator_debt_convergence_train
 status: completed_validated
 mode: A4.8 batch train / docs-first only / no runtime
