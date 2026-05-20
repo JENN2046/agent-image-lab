@@ -16075,10 +16075,13 @@ recommended_next: runs_restore_verification_closeout_commit_readiness_gate
 
 ```yaml
 phase: runs_restore_verification_closeout_commit_readiness_gate
-status: completed_pending_commit
+status: completed_committed_pushed
 mode: A4.8 read-only / commit-readiness
 objective: exact-file diff review and guarded local commit
 commit_message: "docs: close runs restore verification authorization draft"
+commit: 331ed5f docs: close runs restore verification authorization draft
+remote: origin/master
+local_remote_aligned_after_push: true
 allowed_files_exact:
   - docs/RUNS_RESTORE_VERIFICATION_AUTHORIZATION_PACKAGE_CLOSEOUT.md
   - .agent_board/CHECKPOINT.md
@@ -16103,6 +16106,40 @@ DailyNote_write_performed: false
 VCP_memory_write_performed: false
 production_candidate_write_performed: false
 push_tag_release_deploy_performed: false
+```
+
+## capsule_product_core_return_gate
+
+```yaml
+phase: capsule_product_core_return_gate
+status: completed_validated
+mode: A4.8 review / docs-light
+objective: close the runs stewardship support branch, keep real runs verification blocked, and return roadmap to capsule product core
+runs_stewardship_support_branch: closed
+real_runs_verification_status: blocked
+authorization_state: draft_not_active
+selected_next_product_move: B_capsule_code_debt_audit
+recommended_next: capsule_code_debt_audit_gate_read_only_docs_light
+actual_runs_scan_performed: false
+runs_mutation_performed: false
+image_binary_read_performed: false
+hash_extraction_performed: false
+dimensions_extraction_performed: false
+preview_generation_performed: false
+cloud_drive_read_performed: false
+cloud_drive_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+validation:
+  - git diff --check: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - scripts/validate-agent-image-lab-local.ps1: passed_with_manual_review_warnings
+  - scripts/validate_mvp.ps1: passed
+next_phase_started: false
 ```
 
 ## bha_agents_v0_3_1_selective_adaptation_plan_gate

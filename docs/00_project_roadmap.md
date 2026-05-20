@@ -2,6 +2,40 @@
 
 本文是 Agent Image Lab 的总路线图，用来把 v0.2 基线、v0.3 授权门槛、MVP-B dry-run 和未来真实闭环串成一条可执行路径。
 
+## 当前产品主线恢复点
+
+```yaml
+current_phase: capsule_product_core_return_gate
+phase_status: completed_validated
+source_branch: runs_stewardship_support_branch
+runs_stewardship_support_branch: closed
+real_runs_verification_status: blocked
+real_runs_verification_reason: latest package remains draft_not_active and uses fake project-relative example paths only
+returned_roadmap_target: capsule_product_core
+selected_next_product_move: B_capsule_code_debt_audit
+recommended_next: capsule_code_debt_audit_gate_read_only_docs_light
+recommended_next_auto_execution_allowed: false
+actual_runs_scan_performed: false
+runs_mutation_performed: false
+image_binary_read_performed: false
+hash_extraction_performed: false
+dimensions_extraction_performed: false
+preview_generation_performed: false
+cloud_drive_read_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_created: false
+validation_passed:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - scripts/validate-agent-image-lab-local.ps1
+  - scripts/validate_mvp.ps1
+next_phase_started: false
+```
+
 ## 完成定义
 
 Agent Image Lab 不是在第一次能生成图片时才算完成。项目完成分为四层：

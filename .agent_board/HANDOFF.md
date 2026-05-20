@@ -14049,10 +14049,13 @@ next_safe_action: optionally prepare commit readiness
 
 ```yaml
 phase: runs_restore_verification_closeout_commit_readiness_gate
-status: completed_pending_commit
+status: completed_committed_pushed
 workspace: A:/agent-image-lab/agent-image-lab-v0.2
 branch: master
 commit_message: "docs: close runs restore verification authorization draft"
+commit: 331ed5f docs: close runs restore verification authorization draft
+remote: origin/master
+local_remote_aligned_after_push: true
 exact_file_diff_review: passed
 allowed_files_exact:
   - docs/RUNS_RESTORE_VERIFICATION_AUTHORIZATION_PACKAGE_CLOSEOUT.md
@@ -14064,7 +14067,41 @@ authorization_state_confirmed: draft_not_active
 future_real_verification_status_confirmed: blocked
 forbidden_actions_performed: false
 push_tag_release_deploy_performed: false
-next_safe_action: exact-stage allowed files, commit locally, then validate from clean worktree
+next_safe_action: return to capsule product core; real runs verification remains blocked
+```
+
+## Capsule Product Core Return Gate Handoff
+
+```yaml
+phase: capsule_product_core_return_gate
+status: completed_validated
+workspace: A:/agent-image-lab/agent-image-lab-v0.2
+branch: master
+closeout_ref: docs/CAPSULE_PRODUCT_CORE_RETURN_GATE.md
+roadmap_ref: docs/00_project_roadmap.md
+summary: >-
+  Closed the runs stewardship support branch as a documentation/governance
+  support branch. Real runs verification remains blocked because the latest
+  package is draft_not_active and uses fake project-relative example paths
+  only. The roadmap is returned to capsule product core.
+selected_next_product_move: B_capsule_code_debt_audit
+recommended_next: capsule_code_debt_audit_gate_read_only_docs_light
+not_authorized:
+  - actual runs scan
+  - runs mutation
+  - image binary reads
+  - hash/dimensions extraction
+  - preview generation
+  - cloud-drive read/write
+  - provider/plugin/API
+  - DailyNote/VCP memory
+  - production candidate
+validation:
+  - git diff --check: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - scripts/validate-agent-image-lab-local.ps1: passed_with_manual_review_warnings
+  - scripts/validate_mvp.ps1: passed
+next_phase_started: false
 ```
 
 ## BHA / AGENTS v0.3.1 Selective Adaptation Plan Handoff

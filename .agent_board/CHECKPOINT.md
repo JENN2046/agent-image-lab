@@ -24332,13 +24332,15 @@ next: optionally prepare commit readiness
 
 ```yaml
 phase: runs_restore_verification_closeout_commit_readiness_gate
-status: completed_pending_commit
+status: completed_committed_pushed
 completed:
   - reviewed exact diff
   - confirmed only closeout doc and .agent_board resume surfaces changed
   - confirmed authorization remains draft_not_active
   - confirmed future real verification remains blocked
   - confirmed no actual runs scan, image reads, hash/dimensions extraction, preview/cloud/provider/memory/production action
+  - created guarded local commit 331ed5f
+  - pushed only commit 331ed5f to origin/master after explicit authorization
 allowed_files_exact:
   - docs/RUNS_RESTORE_VERIFICATION_AUTHORIZATION_PACKAGE_CLOSEOUT.md
   - .agent_board/CHECKPOINT.md
@@ -24346,8 +24348,39 @@ allowed_files_exact:
   - .agent_board/RUN_STATE.md
   - .agent_board/TASK_QUEUE.md
 commit_message: "docs: close runs restore verification authorization draft"
-validated: pending final pre-commit checks
-next: exact-stage allowed files and create guarded local commit
+validated: push readiness passed before push; local and remote aligned after push
+next: return to capsule product core; real runs verification remains blocked
+```
+
+## Capsule Product Core Return Gate Checkpoint
+
+```yaml
+phase: capsule_product_core_return_gate
+status: completed_validated
+completed:
+  - closed the runs stewardship support branch as documentation/governance support
+  - recorded real runs verification remains blocked
+  - returned roadmap to capsule product core
+  - selected exactly one next product move
+changed:
+  - docs/CAPSULE_PRODUCT_CORE_RETURN_GATE.md
+  - docs/00_project_roadmap.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/CHECKPOINT.md
+selected_next_product_move: B_capsule_code_debt_audit
+not_selected:
+  - A_full_asset_archive_design
+  - C_review_console_static_ux_polish
+validated:
+  - git diff --check: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - scripts/validate-agent-image-lab-local.ps1: passed_with_manual_review_warnings
+  - scripts/validate_mvp.ps1: passed
+not_validated: []
+risk: docs-light roadmap and board update only; no A5 authority opened
+next: stop without starting the next phase; recommended next is capsule_code_debt_audit_gate_read_only_docs_light
 ```
 
 ## BHA / AGENTS v0.3.1 Selective Adaptation Plan Checkpoint

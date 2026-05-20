@@ -11695,7 +11695,7 @@ recommended_next: runs_restore_verification_authorization_package_draft_commit_r
       Validation: git diff --check passed; validate_agent_board_state passed; validate-agent-image-lab-local passed with manual-review warnings; validate_mvp passed; exact changed-file set comparison passed.
       Result: completed_validated.
 
-- [ ] ID: runs_restore_verification_closeout_commit_readiness_gate
+- [x] ID: runs_restore_verification_closeout_commit_readiness_gate
       Title: Runs restore verification closeout commit readiness
       Reason: optional next step if the closeout validates and the user wants a local commit.
       Scope: inspect exact changed files and prepare guarded local commit with the user-provided message.
@@ -11703,8 +11703,29 @@ recommended_next: runs_restore_verification_authorization_package_draft_commit_r
       Forbidden files/actions: git add .; actual runs scan; image reads; hash/dimensions extraction; preview generation; cloud-drive read/write; provider/plugin/API; DailyNote/VCP memory; production candidate; push/tag/release/deploy.
       Validation: exact diff review passed; authorization draft_not_active confirmed; future real verification blocked confirmed; no forbidden read/extraction/preview/cloud/provider/memory/production action performed.
       Commit message: docs: close runs restore verification authorization draft.
-      Result: completed_pending_commit.
+      Result: completed_committed_pushed as 331ed5f.
       Stop condition: validation failure, out-of-scope file, or any need for real verification.
+```
+
+## Capsule Product Core Return Gate
+
+```text
+- [x] ID: capsule_product_core_return_gate
+      Title: Close runs stewardship support branch and return to capsule product core
+      Reason: user requested docs-light closeout of the runs stewardship support branch and selection of one next product move.
+      Changed files: docs/CAPSULE_PRODUCT_CORE_RETURN_GATE.md; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      Decision: real runs verification remains blocked; roadmap returns to capsule product core.
+      Selected next move: B_capsule_code_debt_audit.
+      Boundary: no actual runs scan; no runs mutation; no image binary reads; no hash/dimensions extraction; no preview generation; no cloud-drive read/write; no provider/plugin/API; no DailyNote/VCP memory; no production candidate.
+      Validation: git diff --check passed; validate_agent_board_state passed; validate-agent-image-lab-local passed with manual-review warnings; validate_mvp passed.
+      Result: completed_validated.
+
+- [ ] ID: capsule_code_debt_audit_gate_read_only_docs_light
+      Title: Capsule code debt audit
+      Reason: chosen next product move after returning from the runs stewardship support branch.
+      Scope: inspect local capsule creators, validators, schema bindings, Review Console static contracts, and debt hotspots; produce a docs-light audit and recommended fix order.
+      Forbidden files/actions: code changes unless separately authorized; actual runs scan; image binary reads; hash/dimensions extraction; preview generation; provider/plugin/API; DailyNote/VCP memory; production candidate; push/tag/release/deploy.
+      Stop condition: any need for A5, runtime execution, dependency change, image read/write, runs mutation, or unclear debt remediation scope.
 ```
 
 ## BHA / AGENTS v0.3.1 Selective Adaptation Plan
