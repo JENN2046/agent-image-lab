@@ -1,6 +1,286 @@
 
 ---
 
+## controlled_visual_production_loop_commit_and_authorization_readiness_audit
+
+```text
+phase: controlled_visual_production_loop_commit_and_authorization_readiness_audit
+status: completed_pending_validation
+mode: A4.8 goal-level readiness audit only
+objective: prove the active long-range goal is locally satisfied through commit-ready and authorization-ready evidence without opening commit or A5 execution
+phase_record_ref: docs/CONTROLLED_VISUAL_PRODUCTION_LOOP_COMMIT_AND_AUTHORIZATION_READINESS_AUDIT.md
+fixture_ref: tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_COMMIT_AND_AUTHORIZATION_READINESS_AUDIT.example.json
+validator_ref: scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js
+branch: master
+ahead_count: 0
+behind_count: 0
+staged_file_count: 0
+exact_changed_file_count: 41
+goal_level_local_readiness_verified: true
+local_commit_ready_after_explicit_human_review: true
+authorization_ready_for_future_A5: true
+production_candidate_authorization_state: draft_not_active
+memory_write_authorization_state: draft_not_active
+memory_write_route_currently_blocked: true
+A5_execution_allowed_now: false
+recommended_next: explicit_local_commit_instruction_or_explicit_A5_activation_decision_after_goal_audit
+```
+
+---
+
+## controlled_visual_production_loop_memory_write_A5_authorization_draft_gate
+
+```text
+phase: controlled_visual_production_loop_memory_write_A5_authorization_draft_gate
+status: completed_validated
+mode: A4.8 local authorization drafting only
+objective: prepare the smallest inactive A5 package for the tennis-wallet DailyNote and VCP memory write path while keeping the current route blocked because memory_suitability=false
+phase_record_ref: docs/CONTROLLED_VISUAL_PRODUCTION_LOOP_MEMORY_WRITE_A5_AUTHORIZATION_DRAFT_GATE.md
+authorization_package_ref: reports/memory_write_authorization/2026-05-20_tennis_wallet_memory_write_A5_authorization_package.json
+validator_ref: scripts/validate_controlled_visual_production_loop_memory_write_authorization.js
+source_sample_id: accepted_product_still_life_tennis_wallet_001
+source_failure_sample_id: failure_tennis_wallet_v7_21_001
+authorization_state: draft_not_active
+read_ref_count: 8
+future_external_operation_count: 2
+current_blocker: source_memory_suitability_false
+human_override_present: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+runtime_execution_performed: false
+recommended_next: explicit_A5_activation_decision_for_controlled_visual_production_loop_production_candidate_static_only
+```
+
+---
+
+## controlled_visual_production_loop_exact_file_commit_readiness_review
+
+```text
+phase: controlled_visual_production_loop_exact_file_commit_readiness_review
+status: completed_validated
+mode: A4.8 exact-file commit-readiness review only
+objective: prove the current controlled visual production loop slice is ready for a future exact-file local commit without opening execution or remote authority
+phase_record_ref: docs/CONTROLLED_VISUAL_PRODUCTION_LOOP_EXACT_FILE_COMMIT_READINESS_REVIEW.md
+fixture_ref: tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_EXACT_FILE_COMMIT_READINESS_REVIEW.example.json
+validator_ref: scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js
+branch: master
+ahead_count: 0
+behind_count: 0
+staged_file_count: 0
+exact_stage_file_count: 38
+local_commit_ready_after_explicit_human_review: true
+auto_commit_allowed_now: false
+staging_allowed_now: false
+commit_allowed_now: false
+push_allowed_now: false
+suggested_commit_message: chore: ready controlled visual production loop slice
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+runtime_execution_performed: false
+recommended_next: explicit_A5_activation_decision_for_controlled_visual_production_loop_production_candidate_static_only
+```
+
+---
+
+## controlled_visual_production_loop_production_candidate_A5_authorization_draft_gate
+
+```text
+phase: controlled_visual_production_loop_production_candidate_A5_authorization_draft_gate
+status: completed_validated
+mode: A4.8 local authorization drafting only
+objective: prepare the smallest inactive A5 package for a tennis-wallet production candidate metadata write without executing it
+phase_record_ref: docs/CONTROLLED_VISUAL_PRODUCTION_LOOP_PRODUCTION_CANDIDATE_A5_AUTHORIZATION_DRAFT_GATE.md
+authorization_package_ref: reports/production_candidate_authorization/2026-05-20_tennis_wallet_production_candidate_A5_authorization_package.json
+validator_ref: scripts/validate_controlled_visual_production_loop_production_candidate_authorization.js
+source_sample_id: accepted_product_still_life_tennis_wallet_001
+source_failure_sample_id: failure_tennis_wallet_v7_21_001
+authorization_state: draft_not_active
+exact_future_write_path_count: 2
+exact_changed_file_count: 32
+activation_requires_future_user_authorization: true
+production_candidate_write_performed: false
+image_binary_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+runtime_execution_performed: false
+recommended_next: controlled_visual_production_loop_exact_file_commit_readiness_review
+```
+
+---
+
+## controlled_visual_production_loop_checkpoint_readiness_gate
+
+```text
+phase: controlled_visual_production_loop_checkpoint_readiness_gate
+status: completed_validated
+mode: A4.8 exact-file checkpoint readiness review only
+objective: prove the current local archive-baseline and controlled-loop changes form one coherent exact-file commit-ready slice
+phase_record_ref: docs/CONTROLLED_VISUAL_PRODUCTION_LOOP_CHECKPOINT_READINESS_GATE.md
+fixture_ref: tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_CHECKPOINT_READINESS.example.json
+validator_ref: scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js
+branch: master
+ahead_count: 0
+behind_count: 0
+staged_file_count: 0
+exact_changed_file_count: 35
+local_slice_ready_for_human_reviewed_commit: true
+staging_allowed_now: false
+commit_allowed_now: false
+push_allowed_now: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+runtime_execution_performed: false
+recommended_next: controlled_visual_production_loop_exact_file_commit_readiness_review
+```
+
+---
+
+## controlled_visual_production_loop_review_bridge_gate
+
+```text
+phase: controlled_visual_production_loop_review_bridge_gate
+status: completed_validated
+mode: A4.8 local implementation / static review-bridge alignment
+objective: bind the local review flow to the same tennis-wallet canonical route already shared by capsule and archive contracts
+phase_record_ref: docs/CONTROLLED_VISUAL_PRODUCTION_LOOP_REVIEW_BRIDGE_GATE.md
+fixture_ref: tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_REVIEW_BRIDGE_STATE.example.json
+validator_ref: scripts/validate_controlled_visual_production_loop_review_bridge.js
+static_mock_ref: review_console/static_prototype/mock_data.js
+static_app_ref: review_console/static_prototype/app.js
+field_mapping_ref: review_console/static_prototype/FIELD_MAPPING.md
+accepted_sample_id: accepted_product_still_life_tennis_wallet_001
+failure_sample_id: failure_tennis_wallet_v7_21_001
+review_report_binding_status: sample_route_bound_static_only
+sample_count: 2
+never_production_count: 1
+asset_archive_read_performed: false
+preview_loaded_or_rendered: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+runtime_execution_performed: false
+push_tag_release_deploy_performed: false
+recommended_next: controlled_visual_production_loop_checkpoint_readiness_gate_exact_files_only
+```
+
+---
+
+## controlled_visual_production_loop_contract_alignment_gate
+
+```text
+phase: controlled_visual_production_loop_review_bridge_gate
+status: completed_validated
+mode: A4.8 local implementation / static loop contract bridge
+objective: pin the current tennis-wallet canonical route into one explicit local-only controlled visual production loop contract
+phase_record_ref: docs/CONTROLLED_VISUAL_PRODUCTION_LOOP_CONTRACT_ALIGNMENT_GATE.md
+fixture_ref: tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_CONTRACT.example.json
+validator_ref: scripts/validate_controlled_visual_production_loop_contract.js
+static_mock_ref: review_console/static_prototype/mock_data.js
+static_app_ref: review_console/static_prototype/app.js
+field_mapping_ref: review_console/static_prototype/FIELD_MAPPING.md
+accepted_sample_id: accepted_product_still_life_tennis_wallet_001
+failure_sample_id: failure_tennis_wallet_v7_21_001
+route_alignment_status: capsule_archive_review_bridge_aligned_authorization_pending
+review_report_sample_bound_now: true
+aligned_segment_count: 5
+blocked_segment_count: 0
+asset_archive_read_performed: false
+preview_loaded_or_rendered: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+runtime_execution_performed: false
+push_tag_release_deploy_performed: false
+recommended_next: controlled_visual_production_loop_checkpoint_readiness_gate_exact_files_only
+```
+
+---
+
+## review_console_full_asset_archive_baseline_bridge_gate
+
+```text
+phase: review_console_full_asset_archive_baseline_bridge_gate
+status: completed_validated
+mode: A4.8 local implementation / static Review Console bridge
+objective: expose the verified durable-original Git baseline inside the static Review Console and draft output without runtime or asset file reads
+phase_record_ref: docs/REVIEW_CONSOLE_FULL_ASSET_ARCHIVE_BASELINE_BRIDGE_GATE.md
+fixture_ref: tests/schema_examples/REVIEW_CONSOLE_FULL_ASSET_ARCHIVE_BASELINE_STATE.example.json
+validator_ref: scripts/validate_review_console_full_asset_archive_baseline.js
+static_mock_ref: review_console/static_prototype/mock_data.js
+static_app_ref: review_console/static_prototype/app.js
+field_mapping_ref: review_console/static_prototype/FIELD_MAPPING.md
+source_manifest_ref: tests/schema_examples/full_asset_archive_manifest.example.json
+execution_report_ref: reports/durable_archive_copy_execution/2026-05-20_durable_archive_copy_A5_execution_report.json
+tracking_policy_ref: docs/ASSET_ARCHIVE_GIT_TRACKING_POLICY.md
+full_asset_archive_baseline_visible_in_review_console: true
+draft_output_key: full_asset_archive_baseline_state
+asset_archive_read_performed: false
+preview_loaded_or_rendered: false
+preview_creation_or_copy_performed: false
+runs_mutation_performed: false
+source_image_binary_read_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+runtime_execution_performed: false
+push_tag_release_deploy_performed: false
+recommended_next: controlled_visual_production_loop_contract_alignment_gate_static_only_no_runtime_no_file_reads
+```
+
+---
+
+## full_asset_archive_verified_git_tracked_baseline_gate
+
+```text
+phase: full_asset_archive_verified_git_tracked_baseline_gate
+status: completed_validated
+mode: A4.8 local implementation
+objective: align the full asset archive manifest bridge with the current verified durable-original Git baseline
+phase_record_ref: docs/FULL_ASSET_ARCHIVE_VERIFIED_GIT_TRACKED_BASELINE_GATE.md
+design_ref: docs/FULL_ASSET_ARCHIVE_DESIGN.md
+schema_ref: schemas/full_asset_archive_manifest.schema.yaml
+example_ref: tests/schema_examples/full_asset_archive_manifest.example.json
+validator_ref: scripts/validate_full_asset_archive_manifest.js
+execution_report_ref: reports/durable_archive_copy_execution/2026-05-20_durable_archive_copy_A5_execution_report.json
+tracking_policy_ref: docs/ASSET_ARCHIVE_GIT_TRACKING_POLICY.md
+verified_git_tracked_durable_archive_supported: true
+blocked_pre_A5_state_supported: true
+new_A5_execution_performed: false
+runs_mutation_performed: false
+source_image_binary_read_performed: false
+hash_extraction_performed: false
+dimensions_extraction_performed: false
+preview_generation_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+push_tag_release_deploy_performed: false
+recommended_next: review_console_full_asset_archive_baseline_bridge_gate_static_only_no_runtime_no_file_reads
+```
+
+---
+
 ## Current Capsule Productization Goal
 
 ```text

@@ -1,6 +1,299 @@
 
 ---
 
+## Checkpoint - Controlled Visual Production Loop Commit And Authorization Readiness Audit
+
+```text
+phase: controlled_visual_production_loop_commit_and_authorization_readiness_audit
+status: completed_pending_validation
+completed:
+- added a goal-level readiness audit record, fixture, and validator
+- expanded checkpoint-readiness and exact-file commit-readiness from 38 to 41 files by including the new audit surfaces
+- re-bound roadmap and resume surfaces to the post-audit decision point instead of treating A5 activation as the default next move
+- kept commit, A5 execution, provider/plugin/API, image, memory, runtime, and remote actions blocked
+validation_completed:
+- node --check scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js
+hard_stop_flags:
+  commit_performed: false
+  provider_plugin_api_performed: false
+  image_generation_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  production_candidate_performed: false
+  runtime_execution_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_action: run the final full local validation chain and only then decide whether the active thread goal is fully proven complete.
+recommended_next: explicit_local_commit_instruction_or_explicit_A5_activation_decision_after_goal_audit
+```
+
+---
+
+## Checkpoint - Controlled Visual Production Loop Memory Write A5 Authorization Draft
+
+```text
+phase: controlled_visual_production_loop_memory_write_A5_authorization_draft_gate
+status: completed_validated
+completed:
+- added an inactive tennis-wallet memory-write A5 authorization package
+- kept the package explicitly blocked by source memory_suitability=false and memory_write_authorized=false evidence
+- added a dedicated validator for the blocked memory-write package
+- expanded exact-file checkpoint and commit-readiness from 35 to 38 files
+- re-anchored roadmap and resume surfaces from local drafting to the next explicit A5 activation decision
+validation_completed:
+- node --check scripts/validate_controlled_visual_production_loop_memory_write_authorization.js
+- node scripts/validate_controlled_visual_production_loop_memory_write_authorization.js
+- node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js
+- node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js
+- git diff --check
+- node scripts/validate_agent_board_state.js
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+- powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+hard_stop_flags:
+  DailyNote_or_VCP_memory_write_performed: false
+  provider_plugin_api_performed: false
+  image_binary_read_performed: false
+  production_candidate_performed: false
+  runtime_execution_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_action: keep the new blocked memory-write package inactive and, if A5 must be opened now, decide against the already narrower production-candidate package instead of forcing a memory override.
+recommended_next: explicit_A5_activation_decision_for_controlled_visual_production_loop_production_candidate_static_only
+```
+
+---
+
+## Checkpoint - Controlled Visual Production Loop Exact-File Commit Readiness Review
+
+```text
+phase: controlled_visual_production_loop_exact_file_commit_readiness_review
+status: completed_validated
+completed:
+- added an exact-file local commit-readiness review for the current controlled visual production loop slice
+- fixed the future local commit candidate to 38 exact files
+- recorded the suggested future commit message and required Codex trailer
+- kept staging, commit, push, A5, image, memory, runtime, and remote actions fully blocked
+- re-anchored roadmap and resume surfaces toward the next memory-write authorization draft
+validation_completed:
+- node --check scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js
+- node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js
+- node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js
+- git diff --check
+- node scripts/validate_agent_board_state.js
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+- powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+hard_stop_flags:
+  staged_files_created: false
+  commit_performed: false
+  push_tag_release_deploy_performed: false
+  provider_plugin_api_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  production_candidate_performed: false
+  runtime_execution_performed: false
+next_safe_action: keep the current 38-file slice untouched and wait for either an explicit local commit instruction or an explicit A5 activation decision.
+recommended_next: explicit_A5_activation_decision_for_controlled_visual_production_loop_production_candidate_static_only
+```
+
+---
+
+## Checkpoint - Controlled Visual Production Loop Production Candidate A5 Authorization Draft
+
+```text
+phase: controlled_visual_production_loop_production_candidate_A5_authorization_draft_gate
+status: completed_validated
+completed:
+- added an inactive production-candidate A5 authorization package for the tennis-wallet canonical route
+- limited the future write scope to one plan YAML and one review Markdown path under production/
+- added a dedicated validator for the authorization package
+- expanded the checkpoint-readiness exact-file allowlist to include the new A5 draft surfaces
+- re-anchored roadmap and resume surfaces from local drafting to explicit activation decision
+validation_completed:
+- node --check scripts/validate_controlled_visual_production_loop_production_candidate_authorization.js
+- node scripts/validate_controlled_visual_production_loop_production_candidate_authorization.js
+- node scripts/validate_controlled_visual_proDUCTION_loop_checkpoint_readiness.js
+- git diff --check
+- node scripts/validate_agent_board_state.js
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+- powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+hard_stop_flags:
+  production_candidate_write_performed: false
+  image_binary_read_performed: false
+  archive_write_performed: false
+  provider_plugin_api_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_execution_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_action: wait for an explicit A5 activation decision against the exact draft package, or keep working locally without executing it.
+recommended_next: controlled_visual_production_loop_exact_file_commit_readiness_review
+```
+
+---
+
+## Checkpoint - Controlled Visual Production Loop Checkpoint Readiness
+
+```text
+phase: controlled_visual_production_loop_checkpoint_readiness_gate
+status: completed_validated
+completed:
+- added an exact-file checkpoint readiness gate record, fixture, and validator
+- allowlisted the full current local slice as 35 exact files
+- proved the current worktree is one coherent future commit slice with zero staged files and synced master
+- re-anchored roadmap and resume surfaces from local alignment work to next A5-package drafting
+validation_completed:
+- node --check scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js
+- node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js
+- git diff --check
+- node scripts/validate_agent_board_state.js
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+- powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+hard_stop_flags:
+  staged_files_created: false
+  commit_performed: false
+  push_tag_release_deploy_performed: false
+  provider_plugin_api_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  production_candidate_performed: false
+  runtime_execution_performed: false
+next_safe_action: draft the smallest A5 authorization package for one real action while keeping the local slice unchanged.
+recommended_next: controlled_visual_production_loop_exact_file_commit_readiness_review
+```
+
+---
+
+## Checkpoint - Controlled Visual Production Loop Review Bridge
+
+```text
+phase: controlled_visual_production_loop_review_bridge_gate
+status: completed_validated
+completed:
+- added a static controlled loop review bridge panel and draft output state
+- added tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_REVIEW_BRIDGE_STATE.example.json
+- added scripts/validate_controlled_visual_production_loop_review_bridge.js
+- updated the controlled loop contract so review binding is now aligned through a separate sample-bound bridge
+- updated review_console/static_prototype/FIELD_MAPPING.md and README.md for the new review bridge surface
+- re-anchored docs/00_project_roadmap.md and .agent_board resume surfaces to checkpoint-readiness as the next local move
+validation_completed:
+- node --check review_console/static_prototype/mock_data.js
+- node --check review_console/static_prototype/app.js
+- node --check scripts/validate_controlled_visual_production_loop_review_bridge.js
+- node scripts/validate_controlled_visual_production_loop_review_bridge.js
+- node scripts/validate_controlled_visual_production_loop_contract.js
+- git diff --check
+- node scripts/validate_agent_board_state.js
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+- powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+hard_stop_flags:
+  asset_archive_read_performed: false
+  preview_loaded_or_rendered: false
+  provider_plugin_api_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  production_candidate_performed: false
+  runtime_execution_performed: false
+next_safe_action: reduce the current controlled loop slice to exact-file checkpoint readiness, now that capsule, review, and archive contracts are locally aligned around the same route.
+```
+
+---
+
+## Checkpoint - Controlled Visual Production Loop Contract Alignment
+
+```text
+phase: controlled_visual_production_loop_review_bridge_gate
+status: completed_validated
+completed:
+- added a static controlled visual production loop contract panel and draft output state
+- added tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_CONTRACT.example.json
+- added scripts/validate_controlled_visual_production_loop_contract.js
+- wired the new controlled loop contract validator into scripts/validate_mvp_capsule_product_core.ps1
+- updated review_console/static_prototype/FIELD_MAPPING.md and README.md for the new loop contract surface
+- re-anchored docs/00_project_roadmap.md and .agent_board resume surfaces to checkpoint-readiness as the next local move
+validation_completed:
+- node --check review_console/static_prototype/mock_data.js
+- node --check review_console/static_prototype/app.js
+- node --check scripts/validate_controlled_visual_production_loop_contract.js
+- node scripts/validate_controlled_visual_production_loop_contract.js
+- git diff --check
+- node scripts/validate_agent_board_state.js
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+- powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+hard_stop_flags:
+  asset_archive_read_performed: false
+  preview_loaded_or_rendered: false
+  provider_plugin_api_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  production_candidate_performed: false
+  runtime_execution_performed: false
+next_safe_action: reduce the current local slice to exact-file checkpoint readiness now that the review bridge is locally aligned.
+```
+
+---
+
+## Checkpoint - Review Console Full Asset Archive Baseline Bridge
+
+```text
+phase: review_console_full_asset_archive_baseline_bridge_gate
+status: completed_validated
+completed:
+- added a static Review Console full asset archive baseline panel and draft output state
+- added tests/schema_examples/REVIEW_CONSOLE_FULL_ASSET_ARCHIVE_BASELINE_STATE.example.json
+- added scripts/validate_review_console_full_asset_archive_baseline.js
+- wired the new Review Console archive baseline validator into scripts/validate_mvp_capsule_product_core.ps1
+- updated review_console/static_prototype/FIELD_MAPPING.md and README.md for the new static archive baseline bridge
+- re-anchored docs/00_project_roadmap.md and .agent_board resume surfaces to the next controlled loop contract-alignment step
+validation_completed:
+- node --check review_console/static_prototype/mock_data.js
+- node --check review_console/static_prototype/app.js
+- node --check scripts/validate_review_console_full_asset_archive_baseline.js
+- node scripts/validate_review_console_full_asset_archive_baseline.js
+- git diff --check
+- node scripts/validate_agent_board_state.js
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+- powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+hard_stop_flags:
+  asset_archive_read_performed: false
+  preview_loaded_or_rendered: false
+  preview_creation_or_copy_performed: false
+  runs_mutation_performed: false
+  source_image_binary_read_performed: false
+  provider_plugin_api_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  production_candidate_performed: false
+  runtime_execution_performed: false
+next_safe_action: align capsule core, review flow, and archive flow into one tighter local-only controlled visual production loop contract.
+```
+
+---
+
+## Checkpoint - Full Asset Archive Verified Git-Tracked Baseline
+
+```text
+phase: full_asset_archive_verified_git_tracked_baseline_gate
+status: completed_validated
+completed:
+- added docs/FULL_ASSET_ARCHIVE_VERIFIED_GIT_TRACKED_BASELINE_GATE.md
+- updated docs/FULL_ASSET_ARCHIVE_DESIGN.md to model the verified by_sha256 Git-tracked durable-original state
+- updated schemas/full_asset_archive_manifest.schema.yaml to support both blocked pre-A5 and verified Git-tracked durable archive states
+- updated tests/schema_examples/full_asset_archive_manifest.example.json to match the current verified baseline
+- updated scripts/validate_full_asset_archive_manifest.js to verify the checked-in execution report and durable-original path/sha/dimensions/mime evidence
+- re-anchored docs/00_project_roadmap.md to the current archive-backed baseline and next bridge move
+validation_completed:
+- node --check scripts/validate_full_asset_archive_manifest.js
+- node scripts/validate_full_asset_archive_manifest.js
+- git diff --check
+- node scripts/validate_agent_board_state.js
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+- powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+hard_stop_flags:
+  new_A5_execution_performed: false
+  runs_mutation_performed: false
+  source_image_binary_read_performed: false
+  hash_extraction_performed: false
+  dimensions_extraction_performed: false
+  preview_generation_performed: false
+  provider_plugin_api_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  production_candidate_performed: false
+next_safe_action: expose the verified durable-original baseline in the static Review Console without browser file reads or runtime execution.
+```
+
+---
+
 ## Checkpoint - Durable Archive Copy A5 Authorization Package
 
 ```text

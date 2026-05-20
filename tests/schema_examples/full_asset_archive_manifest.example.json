@@ -1,13 +1,13 @@
 {
   "manifest_version": "v1",
   "manifest_type": "full_asset_archive_manifest",
-  "sample_id": "accepted_womens_resort_relaxed_knit_codex_v2_001",
+  "sample_id": "accepted_product_still_life_tennis_wallet_001",
   "lane": "accepted",
   "created_by": "static_schema_example_only",
   "preview_capsule_ref": {
-    "capsule_root": "asset_archive/accepted_samples/accepted_womens_resort_relaxed_knit_codex_v2_001/",
-    "manifest_ref": "asset_archive/accepted_samples/accepted_womens_resort_relaxed_knit_codex_v2_001/manifest.json",
-    "preview_artifact_ref": "asset_archive/accepted_samples/accepted_womens_resort_relaxed_knit_codex_v2_001/preview.webp"
+    "capsule_root": "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/",
+    "manifest_ref": "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/manifest.json",
+    "preview_artifact_ref": "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp"
   },
   "preview_validation": {
     "git_tracked_preview_static_validation_allowed": true,
@@ -19,12 +19,16 @@
     "original_asset_required_for_portable_validation": false
   },
   "original_asset": {
-    "storage_strategy": "not_yet_verified",
-    "original_asset_ref": null,
-    "original_sha256": null,
-    "original_dimensions": null,
-    "original_mime_type": null,
-    "verification_status": "blocked_until_A5_authorization",
+    "storage_strategy": "git_tracked_durable_archive",
+    "original_asset_ref": "asset_archive/original_assets/by_sha256/8853c34f7e6a841590bcd04617591e6c572a7f6f0a88dc4970bec78246d7e580.jpg",
+    "original_sha256": "8853c34f7e6a841590bcd04617591e6c572a7f6f0a88dc4970bec78246d7e580",
+    "original_dimensions": {
+      "width": 1920,
+      "height": 1920
+    },
+    "original_mime_type": "image/jpeg",
+    "verification_status": "verified_durable_archive_git_tracked",
+    "verification_evidence_ref": "reports/durable_archive_copy_execution/2026-05-20_durable_archive_copy_A5_execution_report.json",
     "required_for_full_archive_ready": true,
     "required_for_production_candidate": true
   },

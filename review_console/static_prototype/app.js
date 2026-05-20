@@ -32,6 +32,9 @@ const state = {
   artifact_dashboard_evidence: mock.artifact_recoverability_dashboard_evidence,
   portable_preview_capsule_evidence: mock.portable_preview_capsule_evidence,
   portable_preview_capsule_evidence_list: mock.portable_preview_capsule_evidence_list,
+  full_asset_archive_baseline_state: mock.full_asset_archive_baseline_state_seed,
+  controlled_visual_production_loop_contract: mock.controlled_visual_production_loop_contract_seed,
+  controlled_visual_production_loop_review_bridge_state: mock.controlled_visual_production_loop_review_bridge_seed,
   unified_capsule_contract_report: mock.unified_capsule_contract_report,
   portable_failure_capsule_evidence: mock.portable_failure_capsule_evidence,
   portable_failure_capsule_evidence_list: mock.portable_failure_capsule_evidence_list,
@@ -235,6 +238,149 @@ function renderArtifactEvidenceDashboard() {
     <span>failure ids <strong>${escapeHtml(failureCapsuleIds || "none")}</strong></span>
     <span>failure route <strong>${escapeHtml(failureCapsule?.final_route || "none")}</strong></span>
     <span>failure portable <strong>${escapeHtml(failureCapsule?.clone_portable_validation_status || "none")}</strong></span>
+  `;
+}
+
+function fullAssetArchiveBaselineState() {
+  return state.full_asset_archive_baseline_state;
+}
+
+function renderFullAssetArchiveBaseline() {
+  const archive = fullAssetArchiveBaselineState();
+  qs("#fullAssetArchiveBaselineSummary").innerHTML = `
+    <span>sample <strong>${escapeHtml(archive.sample_id)}</strong></span>
+    <span>archive <strong>${escapeHtml(archive.archive_baseline_status)}</strong></span>
+    <span>storage <strong>${escapeHtml(archive.storage_strategy)}</strong></span>
+    <span>preview portable <strong>${escapeHtml(archive.preview_clone_portable_validation_status)}</strong></span>
+    <span>full archive <strong>${escapeHtml(archive.full_archive_readiness_status)}</strong></span>
+    <span>runtime <strong>${escapeHtml(archive.guard.vcp_runtime_integration_proven)}</strong></span>
+  `;
+  qs("#fullAssetArchiveBaselineBody").innerHTML = `
+    <article class="multi-capsule-card accepted">
+      <div class="protocol-card-head">
+        <strong>${escapeHtml(archive.sample_id)}</strong>
+        <span>${escapeHtml(archive.category)}</span>
+      </div>
+      <dl>
+        <div><dt>Manifest</dt><dd>${escapeHtml(archive.source_manifest_ref)}</dd></div>
+        <div><dt>Preview capsule</dt><dd>${escapeHtml(archive.source_portable_preview_capsule_ref)}</dd></div>
+        <div><dt>Durable original</dt><dd>${escapeHtml(archive.durable_original_ref)}</dd></div>
+        <div><dt>SHA256</dt><dd>${escapeHtml(archive.durable_original_sha256)}</dd></div>
+        <div><dt>Dimensions</dt><dd>${escapeHtml(archive.durable_original_dimensions)}</dd></div>
+        <div><dt>MIME</dt><dd>${escapeHtml(archive.durable_original_mime_type)}</dd></div>
+        <div><dt>Evidence</dt><dd>${escapeHtml(archive.verification_evidence_ref)}</dd></div>
+        <div><dt>Tracking policy</dt><dd>${escapeHtml(archive.tracking_policy_decision)}</dd></div>
+        <div><dt>Production write now</dt><dd>${escapeHtml(archive.production_candidate_write_allowed_now)}</dd></div>
+        <div><dt>Memory write now</dt><dd>${escapeHtml(archive.memory_write_allowed_now)}</dd></div>
+        <div><dt>Next blockers</dt><dd>${inlineList(archive.next_blockers)}</dd></div>
+      </dl>
+    </article>
+  `;
+  qs("#fullAssetArchiveBaselineGuard").innerHTML = `
+    <span>static panel: ${escapeHtml(archive.guard.static_panel_only)}</span>
+    <span>asset archive read: ${escapeHtml(archive.guard.asset_archive_read_performed)}</span>
+    <span>preview loaded: ${escapeHtml(archive.guard.preview_loaded_or_rendered)}</span>
+    <span>file write: ${escapeHtml(archive.guard.file_write_performed)}</span>
+    <span>provider/plugin/API: ${escapeHtml(archive.guard.provider_contact_performed || archive.guard.plugin_call_performed || archive.guard.api_call_performed)}</span>
+    <span>runtime proven: ${escapeHtml(archive.guard.vcp_runtime_integration_proven)}</span>
+  `;
+}
+
+function controlledVisualProductionLoopContractState() {
+  return state.controlled_visual_production_loop_contract;
+}
+
+function renderControlledVisualProductionLoopContract() {
+  const loop = controlledVisualProductionLoopContractState();
+  qs("#controlledLoopSummary").innerHTML = `
+    <span>route <strong>${escapeHtml(loop.route_alignment_status)}</strong></span>
+    <span>accepted <strong>${escapeHtml(loop.accepted_sample_id)}</strong></span>
+    <span>failure <strong>${escapeHtml(loop.failure_sample_id)}</strong></span>
+    <span>aligned <strong>${escapeHtml(loop.alignment_summary.aligned_segment_count)}</strong></span>
+    <span>blocked <strong>${escapeHtml(loop.alignment_summary.blocked_segment_count)}</strong></span>
+    <span>review bound <strong>${escapeHtml(loop.alignment_summary.review_report_sample_bound_now)}</strong></span>
+    <span>runtime <strong>${escapeHtml(loop.guard.vcp_runtime_integration_proven)}</strong></span>
+  `;
+  qs("#controlledLoopBody").innerHTML = loop.route_segments.map((segment) => `
+    <article class="registry-report-v2-card">
+      <strong>${escapeHtml(segment.segment)}</strong>
+      <p>status: ${escapeHtml(segment.status)}</p>
+      <p>sample: ${escapeHtml(segment.sample_id || loop.accepted_sample_id)}</p>
+      <p>detail: ${escapeHtml(segment.validator_status || segment.contract_status || segment.verification_status || segment.blocker || segment.final_route || "n/a")}</p>
+    </article>
+  `).join("") + `
+    <article class="multi-capsule-card accepted">
+      <div class="protocol-card-head">
+        <strong>${escapeHtml(loop.canonical_route_id)}</strong>
+        <span>${escapeHtml(loop.category)}</span>
+      </div>
+      <dl>
+        <div><dt>Capsule contract</dt><dd>${escapeHtml(loop.source_contract_links.capsule_contract_fixture_ref)}</dd></div>
+        <div><dt>Archive manifest</dt><dd>${escapeHtml(loop.source_contract_links.archive_manifest_ref)}</dd></div>
+        <div><dt>Archive snapshot</dt><dd>${escapeHtml(loop.source_contract_links.archive_baseline_snapshot_ref)}</dd></div>
+        <div><dt>Review handoff</dt><dd>${escapeHtml(loop.source_contract_links.review_report_handoff_key)}</dd></div>
+        <div><dt>Review bridge fixture</dt><dd>${escapeHtml(loop.source_contract_links.review_bridge_fixture_ref)}</dd></div>
+        <div><dt>Review bridge status</dt><dd>${escapeHtml(loop.review_report_bridge.binding_status)}</dd></div>
+        <div><dt>Next blockers</dt><dd>${inlineList(loop.next_blockers)}</dd></div>
+        <div><dt>Next local moves</dt><dd>${inlineList(loop.next_local_moves)}</dd></div>
+      </dl>
+    </article>
+  `;
+  qs("#controlledLoopGuard").innerHTML = `
+    <span>static panel: ${escapeHtml(loop.guard.static_panel_only)}</span>
+    <span>asset archive read: ${escapeHtml(loop.guard.asset_archive_read_performed)}</span>
+    <span>preview loaded: ${escapeHtml(loop.guard.preview_loaded_or_rendered)}</span>
+    <span>file write: ${escapeHtml(loop.guard.file_write_performed)}</span>
+    <span>provider/plugin/API: ${escapeHtml(loop.guard.provider_contact_performed || loop.guard.plugin_call_performed || loop.guard.api_call_performed)}</span>
+    <span>production write: ${escapeHtml(loop.guard.production_candidate_write_performed)}</span>
+    <span>runtime proven: ${escapeHtml(loop.guard.vcp_runtime_integration_proven)}</span>
+  `;
+}
+
+function controlledVisualProductionLoopReviewBridgeState() {
+  return state.controlled_visual_production_loop_review_bridge_state;
+}
+
+function renderControlledVisualProductionLoopReviewBridge() {
+  const bridge = controlledVisualProductionLoopReviewBridgeState();
+  qs("#controlledLoopReviewBridgeSummary").innerHTML = `
+    <span>binding <strong>${escapeHtml(bridge.review_report_binding_status)}</strong></span>
+    <span>accepted <strong>${escapeHtml(bridge.accepted_sample_id)}</strong></span>
+    <span>failure <strong>${escapeHtml(bridge.failure_sample_id)}</strong></span>
+    <span>samples <strong>${escapeHtml(bridge.bridge_summary.sample_count)}</strong></span>
+    <span>never production <strong>${escapeHtml(bridge.bridge_summary.never_production_count)}</strong></span>
+    <span>generic handoff <strong>${escapeHtml(bridge.bridge_summary.generic_review_report_handoff_still_present)}</strong></span>
+  `;
+  qs("#controlledLoopReviewBridgeBody").innerHTML = bridge.bridge_rows.map((row) => `
+    <article class="registry-report-v2-card">
+      <strong>${escapeHtml(row.sample_id)}</strong>
+      <p>${escapeHtml(row.lane)} | outcome: ${escapeHtml(row.review_outcome)} | status: ${escapeHtml(row.review_status)}</p>
+      <p>memory: ${escapeHtml(row.memory_route)} | production: ${escapeHtml(row.production_route)}</p>
+      <p>evidence: ${escapeHtml(row.review_evidence_status)}</p>
+    </article>
+  `).join("") + `
+    <article class="multi-capsule-card accepted">
+      <div class="protocol-card-head">
+        <strong>${escapeHtml(bridge.canonical_route_id)}</strong>
+        <span>${escapeHtml(bridge.review_bridge_version)}</span>
+      </div>
+      <dl>
+        <div><dt>Loop contract</dt><dd>${escapeHtml(bridge.source_links.loop_contract_ref)}</dd></div>
+        <div><dt>Generic handoff</dt><dd>${escapeHtml(bridge.source_links.generic_review_report_handoff_key)}</dd></div>
+        <div><dt>Accepted capsule</dt><dd>${escapeHtml(bridge.source_links.accepted_capsule_ref)}</dd></div>
+        <div><dt>Failure capsule</dt><dd>${escapeHtml(bridge.source_links.failure_capsule_ref)}</dd></div>
+        <div><dt>Next blockers</dt><dd>${inlineList(bridge.next_blockers)}</dd></div>
+      </dl>
+    </article>
+  `;
+  qs("#controlledLoopReviewBridgeGuard").innerHTML = `
+    <span>static panel: ${escapeHtml(bridge.guard.static_panel_only)}</span>
+    <span>asset archive read: ${escapeHtml(bridge.guard.asset_archive_read_performed)}</span>
+    <span>preview loaded: ${escapeHtml(bridge.guard.preview_loaded_or_rendered)}</span>
+    <span>file write: ${escapeHtml(bridge.guard.file_write_performed)}</span>
+    <span>provider/plugin/API: ${escapeHtml(bridge.guard.provider_contact_performed || bridge.guard.plugin_call_performed || bridge.guard.api_call_performed)}</span>
+    <span>production write: ${escapeHtml(bridge.guard.production_candidate_write_performed)}</span>
+    <span>runtime proven: ${escapeHtml(bridge.guard.vcp_runtime_integration_proven)}</span>
   `;
 }
 
@@ -3149,6 +3295,9 @@ function renderDraft() {
     review_report_static_handoff: state.review_report_static_handoff,
     review_report_negative_guard_static_handoff: state.review_report_negative_guard_static_handoff,
     review_evidence_blocker_adapter_negative_static_handoff: state.review_evidence_blocker_adapter_negative_static_handoff,
+    full_asset_archive_baseline_state: fullAssetArchiveBaselineState(),
+    controlled_visual_production_loop_contract: controlledVisualProductionLoopContractState(),
+    controlled_visual_production_loop_review_bridge_state: controlledVisualProductionLoopReviewBridgeState(),
     multi_capsule_dashboard_state: multiCapsuleDashboardState(),
     registry_report_v2_state: registryReportV2State(),
     registry_report_v2_negative_visibility_state: registryReportV2NegativeVisibilityState(),
@@ -3240,6 +3389,9 @@ function renderAll() {
   renderAdapterNegativeHandoff();
   renderFailureStateStaticWorkbench();
   renderArtifactEvidenceDashboard();
+  renderFullAssetArchiveBaseline();
+  renderControlledVisualProductionLoopContract();
+  renderControlledVisualProductionLoopReviewBridge();
   renderMultiCapsuleDashboard();
   renderRegistryReportV2State();
   renderUnifiedCapsuleContractReport();

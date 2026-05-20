@@ -83,6 +83,9 @@ P5L 新增 failure capsule snapshot 回归：`validate_review_console_failure_ca
 P6 新增 multi-capsule accepted/failure dashboard：`multi_capsule_dashboard_state` 汇总当前 accepted=2 / failure=2 的 Git-portable capsules，展示 accepted/failure side-by-side resolved-by 关联、clone-portable / registry validator 状态和 future unified report shape；仍只用静态 mock / in-memory，不读取 `asset_archive/`、不加载 preview、不 fetch、不写文件、不调用 runtime。
 P6C 新增 registry report v2 静态展示：`registry_report_v2_state` 把 P6B 正式 accepted/failure capsule registry report v2 形状接回 Review Console，展示 totals、per-sample rows、resolved-by links 和 guard；它只从静态 capsule mock 派生，不执行 validator、不读取 `asset_archive/`、不加载 preview。
 P6I 新增 registry report v2 negative visibility：`registry_report_v2_negative_visibility_state` 把 P6G fail-closed negative states 做成可见静态面板，展示 `accepted_registry_failed`、`failure_registry_failed`、`missing_resolved_by_link`、`production_or_memory_guard_violation` 这 4 类场景；它只展示合成状态，不执行 validator、不读取 `asset_archive/`、不加载 preview、不 fetch、不写文件。
+P6M 新增 full asset archive baseline bridge：`full_asset_archive_baseline_state` 把已验证的 preview capsule ref、durable original by_sha256 ref、execution report ref 和 tracking policy 以静态方式暴露给 Review Console；它只读 `mock_data.js` seed，不读取 `asset_archive/` 文件，不加载 preview，不 fetch，不写文件，不再次执行 archive copy，也不开放 production candidate、memory 或 runtime。
+P6N 新增 controlled visual production loop contract：`controlled_visual_production_loop_contract` 把 tennis wallet 这条 canonical route 的 accepted capsule、failure relation、unified capsule contract、durable archive baseline 和 sample-bound review bridge 收成一个静态闭环合同；它只读 `mock_data.js` seed，不读取 `asset_archive/`，不加载 preview，不 fetch，不写文件，也不开放 production candidate、memory 或 runtime。
+P6O 新增 controlled visual production loop review bridge：`controlled_visual_production_loop_review_bridge_state` 把 tennis wallet route 的 review flow 绑定到 sample 级别，显式区分 accepted positive example 和 failure-learning / never-production route；它只读 `mock_data.js` seed，不读取 `asset_archive/`，不加载 preview，不 fetch，不写文件，也不开放 production candidate、memory 或 runtime。
 P6K 新增 capsule runtime product smoke design：`unified_capsule_contract_report` 的 operator flow 只作为静态产品烟测设计，展示 contract ingest、summary triage、per-capsule row review、failure relation review、guard review 和 reviewer action；不执行浏览器 validator、不读取 `asset_archive/`、不加载 preview、不 fetch、不写文件、不调用 provider/plugin/API/DailyNote/VCP memory，也不创建 production candidate。
 P6L 新增 capsule static product smoke fixture：`tests/schema_examples/CAPSULE_STATIC_PRODUCT_SMOKE_UNIFIED_CONTRACT.example.json` 固化 `unified_capsule_contract_report` 的 accepted=2 / failure=2 / total=4 静态烟测输入，并包含 pass 与 fail-closed reviewer action labels；它由本地 validator 对齐 capsule report 输出，不由 UI 读取 `asset_archive/` 或加载 preview。
 草案输出还会携带 `review_result_protocol_static_handoff`，用于展示每个候选为什么 pass、为什么 reject、如何进入记忆草案，以及何时必须永远不得进入 production。
@@ -131,6 +134,9 @@ v14.079 还用 `tests/schema_examples/review_report_protocol_final_closeout.exam
 - `review_evidence_blocker_adapter_negative_static_handoff`
 - `codex_session_import_record_reader`
 - `artifact_recoverability_dashboard_evidence`
+- `full_asset_archive_baseline_state`
+- `controlled_visual_production_loop_contract`
+- `controlled_visual_production_loop_review_bridge_state`
 - `artifact_lifecycle_state_reader`
 - `artifact_detail_drawer_state`
 - `artifact_evidence_compare_state`

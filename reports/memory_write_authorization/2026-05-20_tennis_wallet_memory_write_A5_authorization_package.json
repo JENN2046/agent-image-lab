@@ -1,0 +1,135 @@
+{
+  "report_version": 1,
+  "phase": "controlled_visual_production_loop_memory_write_A5_authorization_draft",
+  "authorization_id": "AUTH-PENDING-TENNIS-WALLET-MEMORY-WRITE-20260520-001",
+  "authorization_state": "draft_not_active",
+  "generated_at_local": "2026-05-20T00:00:00Z",
+  "canonical_route_id": "accepted_product_still_life_tennis_wallet_001__failure_tennis_wallet_v7_21_001",
+  "source_sample_id": "accepted_product_still_life_tennis_wallet_001",
+  "source_failure_sample_id": "failure_tennis_wallet_v7_21_001",
+  "source_category": "product_still_life",
+  "output_report_path": "reports/memory_write_authorization/2026-05-20_tennis_wallet_memory_write_A5_authorization_package.json",
+  "reviewer": "Jenn",
+  "purpose": "Prepare the smallest future DailyNote and VCP memory write authorization package for the accepted tennis-wallet route only, while keeping execution blocked because source memory_suitability=false and no human override exists.",
+  "activation_requires_future_user_authorization": true,
+  "target_systems": [
+    "DailyNote",
+    "VCP_memory"
+  ],
+  "exact_allowed_read_refs": [
+    "accepted_samples/accepted_sample_registry.yaml",
+    "accepted_samples/categories/product_still_life.yaml",
+    "docs/281_v7_24_native_doubao_v3_post_run_review_accepted_candidate.md",
+    "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/review_record.json",
+    "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/approval_record.json",
+    "docs/v7_49_vcp_memory_write_boundary_spec.md",
+    "docs/259_v7_4_memory_write_gate_package.md",
+    "tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_REVIEW_BRIDGE_STATE.example.json"
+  ],
+  "exact_future_external_operations": [
+    "write_one_DailyNote_entry_in_Chinese_only",
+    "write_one_VCP_memory_summary_only_after_DailyNote_success"
+  ],
+  "allowed_operations_after_activation": {
+    "read_exact_metadata_refs_only": true,
+    "write_one_DailyNote_entry_in_Chinese_only": true,
+    "write_one_VCP_memory_entry_only_after_DailyNote_success": true,
+    "use_memory_delta_only_payload_no_binary_or_secret_content": true,
+    "create_or_update_local_project_files": false,
+    "update_existing_external_records_allowed": false
+  },
+  "future_memory_delta_requirements": {
+    "source_memory_delta_draft_ref": null,
+    "future_memory_delta_draft_required_before_execution": true,
+    "chinese_only": true,
+    "preserved_original_allowed": false,
+    "direct_daily_note_write_allowed": false
+  },
+  "required_preconditions": {
+    "accepted_sample_registry_entry_present": true,
+    "category_index_entry_present": true,
+    "accepted_capsule_review_record_present": true,
+    "accepted_capsule_approval_record_present": true,
+    "memory_boundary_spec_present": true,
+    "memory_gate_package_present": true,
+    "review_bridge_route_present": true,
+    "source_memory_suitability_false_confirmed": true,
+    "source_memory_write_authorized_false_confirmed": true,
+    "human_override_for_memory_suitability_false_present": false,
+    "explicit_memory_write_authorization_present": false,
+    "source_memory_delta_draft_present": false
+  },
+  "current_blockers": [
+    "source_memory_suitability_false",
+    "memory_write_authorized_false_in_approval_record",
+    "DailyNote_write_authorized_false",
+    "human_override_missing",
+    "source_memory_delta_draft_missing"
+  ],
+  "forbidden_operations": {
+    "image_binary_read": true,
+    "image_binary_copy": true,
+    "runs_source_modification": true,
+    "accepted_samples_write": true,
+    "failure_samples_write": true,
+    "production_candidate_write": true,
+    "durable_archive_write": true,
+    "local_project_file_write": true,
+    "provider_contact": true,
+    "plugin_call": true,
+    "api_call": true,
+    "runtime_execution": true,
+    "real_manifest_VCPChat_VCPToolBox_read": true,
+    "push_tag_release_deploy": true,
+    "dependency_change": true
+  },
+  "payload_constraints": {
+    "chinese_daily_note_required": true,
+    "memory_delta_draft_only_until_human_override": true,
+    "image_binary_included": false,
+    "raw_secret_or_private_path_allowed": false,
+    "raw_prompt_or_response_payload_allowed": false,
+    "customer_private_data_allowed": false
+  },
+  "rollback_plan": {
+    "mode": "revoke_exact_memory_write_request_only_if_future_execution_fails",
+    "local_project_cleanup_allowed": false,
+    "delete_any_unlisted_path_allowed": false,
+    "external_revoke_required_after_future_write": true
+  },
+  "stop_conditions": [
+    "source_sample_id differs from accepted_product_still_life_tennis_wallet_001",
+    "source_failure_sample_id differs from failure_tennis_wallet_v7_21_001",
+    "memory_suitability remains false and no explicit human override is recorded",
+    "memory_write_authorized remains false in approval evidence",
+    "source memory_delta draft is absent when future execution expects it",
+    "any allowed read ref is missing or not project-relative",
+    "any image binary read or copy is needed",
+    "any runs/, accepted_samples/, failure_samples/, asset_archive/, or production/ write is needed",
+    "any provider/plugin/API/runtime or real manifest/VCPChat/VCPToolBox access is needed",
+    "any push, tag, release, deploy, or dependency change is requested"
+  ],
+  "exact_future_approval_phrase": "批准进入 AUTH-PENDING-TENNIS-WALLET-MEMORY-WRITE-20260520-001 A5 DailyNote and VCP memory write execution：以 accepted_product_still_life_tennis_wallet_001 为唯一 source sample；允许只读取 accepted_samples/accepted_sample_registry.yaml、accepted_samples/categories/product_still_life.yaml、docs/281_v7_24_native_doubao_v3_post_run_review_accepted_candidate.md、asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/review_record.json、asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/approval_record.json、docs/v7_49_vcp_memory_write_boundary_spec.md、docs/259_v7_4_memory_write_gate_package.md 和 tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_REVIEW_BRIDGE_STATE.example.json；只允许在 source memory_suitability=false 已被人工显式 override、且单独 memory write 审批已明确通过之后，写入 1 条中文 DailyNote 记录，并且仅在 DailyNote 写入成功后写入 1 条对应 VCP memory 摘要；不允许读取或复制图片二进制，不允许修改 runs/、accepted_samples/、failure_samples/、asset_archive/ 或 production/，不允许 provider/plugin/API/runtime/real manifest/VCPChat/VCPToolBox 调用，不允许 push/tag/release/deploy；若 human override 缺失、memory_delta draft 缺失、或任一读源不存在则立即停止；完成后运行 git diff --check、node scripts/validate_controlled_visual_production_loop_memory_write_authorization.js、node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js、node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js、node scripts/validate_agent_board_state.js、powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1、powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1 并停止汇报结果；审批人 Jenn。",
+  "execution_performed": {
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "direct_memory_write_performed": false,
+    "image_binary_read_performed": false,
+    "image_binary_copy_performed": false,
+    "runs_source_modification_performed": false,
+    "accepted_samples_write_performed": false,
+    "failure_samples_write_performed": false,
+    "production_candidate_write_performed": false,
+    "durable_archive_write_performed": false,
+    "local_project_file_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "runtime_execution_performed": false,
+    "real_manifest_read_performed": false,
+    "real_vcpchat_read_performed": false,
+    "real_vcptoolbox_read_performed": false,
+    "push_tag_release_deploy_performed": false,
+    "dependency_change_performed": false
+  }
+}

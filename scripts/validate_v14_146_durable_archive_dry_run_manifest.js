@@ -33,6 +33,11 @@ const category = "fashion_lookbook_portrait";
 const plannedArchiveRoot = `asset_archive/accepted/${category}/${sampleId}/`;
 const plannedArchiveManifest = `${plannedArchiveRoot}archive_manifest.yaml`;
 const plannedArchiveArtifact = `${plannedArchiveRoot}codex_session_womens_resort_relaxed_knit_final_v2.png`;
+const verifiedDurableArchiveBaselineFiles = {
+  phaseRecord: "docs/FULL_ASSET_ARCHIVE_VERIFIED_GIT_TRACKED_BASELINE_GATE.md",
+  trackingPolicy: "docs/ASSET_ARCHIVE_GIT_TRACKING_POLICY.md",
+  executionReport: "reports/durable_archive_copy_execution/2026-05-20_durable_archive_copy_A5_execution_report.json",
+};
 
 function exitWithPreviewCapsuleMigrationPending() {
   const baselinePath = "docs/v14_231_git_tracked_preview_evidence_capsule_baseline.md";
@@ -209,6 +214,12 @@ const currentSurfaces = [
   core.read(files.validationLog),
   core.read(files.mvpValidator),
 ].join("\n");
+const verifiedDurableArchiveBaselineActive =
+  core.exists(verifiedDurableArchiveBaselineFiles.phaseRecord) &&
+  core.exists(verifiedDurableArchiveBaselineFiles.trackingPolicy) &&
+  core.exists(verifiedDurableArchiveBaselineFiles.executionReport) &&
+  core.read(verifiedDurableArchiveBaselineFiles.phaseRecord).includes("phase: full_asset_archive_verified_git_tracked_baseline_gate") &&
+  core.read(verifiedDurableArchiveBaselineFiles.trackingPolicy).includes("track verified durable original assets in Git");
 
 for (const token of [
   "durable_archive_dry_run_manifest:",
@@ -343,7 +354,11 @@ forbidPattern("current_surfaces", currentSurfaces, /authorization_granted_by_thi
 forbidPattern("current_surfaces", currentSurfaces, /archive_manifest_written:\s+true/i);
 forbidPattern("current_surfaces", currentSurfaces, /image_binary_copy_performed:\s+true/i);
 forbidPattern("current_surfaces", currentSurfaces, /target_archive_directory_created:\s+true/i);
-forbidPattern("current_surfaces", currentSurfaces, /target_archive_artifact_created:\s+true/i);
+addResult(
+  "current_surfaces_target_archive_artifact_created_true_allowed_only_in_verified_git_tracked_baseline",
+  verifiedDurableArchiveBaselineActive || !/target_archive_artifact_created:\s+true/i.test(currentSurfaces),
+  verifiedDurableArchiveBaselineActive ? "later verified durable archive baseline is active" : "/target_archive_artifact_created:\\s+true/i"
+);
 forbidPattern("current_surfaces", currentSurfaces, /runs_source_image_modified:\s+true/i);
 forbidPattern("current_surfaces", currentSurfaces, /accepted_samples_write_performed:\s+true/i);
 forbidPattern("current_surfaces", currentSurfaces, /failure_samples_write_performed:\s+true/i);
@@ -375,6 +390,7 @@ const summary = {
   source_lifecycle_state: lifecycleSummary?.current_sample_state || null,
   planned_archive_root_ref: plannedArchiveRoot,
   target_archive_does_not_exist: dryRun.targetClear,
+  verified_durable_archive_baseline_active: verifiedDurableArchiveBaselineActive,
   registry_to_import_record_verified: baseInput.importRecordExists,
   registry_to_review_record_verified: baseInput.reviewRecordExists,
   registry_to_category_index_verified: baseInput.categoryIndexContainsSample,

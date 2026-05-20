@@ -5,18 +5,32 @@
 ## 当前产品主线恢复点
 
 ```yaml
-current_phase: capsule_product_core_return_gate
-phase_status: completed_validated
-source_branch: runs_stewardship_support_branch
-runs_stewardship_support_branch: closed
-real_runs_verification_status: blocked
-real_runs_verification_reason: latest package remains draft_not_active and uses fake project-relative example paths only
-returned_roadmap_target: capsule_product_core
-selected_next_product_move: B_capsule_code_debt_audit
-recommended_next: capsule_code_debt_audit_gate_read_only_docs_light
+current_phase: controlled_visual_production_loop_commit_and_authorization_readiness_audit
+phase_status: completed_validated_pending_final_full_chain_recheck
+source_phase: controlled_visual_production_loop_memory_write_A5_authorization_draft_gate
+validated_baseline:
+  capsule_product_core_validator_route: completed
+  full_asset_archive_manifest_bridge: aligned_to_verified_git_tracked_durable_archive
+  durable_original_git_tracking_policy: active_for_verified_by_sha256_assets_only
+  review_console_full_asset_archive_baseline_visibility: static_only_verified
+  controlled_visual_production_loop_contract: aligned_with_sample_bound_review_bridge
+  controlled_visual_production_loop_review_bridge: static_only_verified
+  controlled_visual_production_loop_checkpoint_readiness: exact_file_slice_validated
+  controlled_visual_production_loop_commit_and_authorization_readiness_audit: local_goal_proof_present
+  controlled_visual_production_loop_production_candidate_A5_authorization_draft: prepared_not_active
+  controlled_visual_production_loop_memory_write_A5_authorization_draft: prepared_not_active_blocked_by_source_memory_suitability_false
+  controlled_visual_production_loop_exact_file_commit_readiness: validated
+archive_execution_evidence_ref: reports/durable_archive_copy_execution/2026-05-20_durable_archive_copy_A5_execution_report.json
+tracking_policy_ref: docs/ASSET_ARCHIVE_GIT_TRACKING_POLICY.md
+production_candidate_authorization_package_ref: reports/production_candidate_authorization/2026-05-20_tennis_wallet_production_candidate_A5_authorization_package.json
+memory_write_authorization_package_ref: reports/memory_write_authorization/2026-05-20_tennis_wallet_memory_write_A5_authorization_package.json
+goal_level_local_readiness_verified: true
+selected_next_product_move: explicit_local_commit_instruction_or_explicit_A5_activation_decision_after_goal_audit
+recommended_next: explicit_local_commit_instruction_or_explicit_A5_activation_decision_after_goal_audit
 recommended_next_auto_execution_allowed: false
 actual_runs_scan_performed: false
 runs_mutation_performed: false
+source_image_binary_read_performed: false
 image_binary_read_performed: false
 hash_extraction_performed: false
 dimensions_extraction_performed: false
@@ -28,7 +42,29 @@ api_call_performed: false
 DailyNote_write_performed: false
 VCP_memory_write_performed: false
 production_candidate_created: false
+production_candidate_authorization_draft_created: true
+memory_write_authorization_draft_created: true
+local_commit_ready_after_explicit_human_review: true
+authorization_ready_for_future_A5: true
 validation_passed:
+  - node --check scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js
+  - node scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js
+  - node --check scripts/validate_controlled_visual_production_loop_memory_write_authorization.js
+  - node scripts/validate_controlled_visual_production_loop_memory_write_authorization.js
+  - node --check scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js
+  - node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js
+  - node --check scripts/validate_controlled_visual_production_loop_production_candidate_authorization.js
+  - node scripts/validate_controlled_visual_production_loop_production_candidate_authorization.js
+  - node --check scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js
+  - node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js
+  - node --check scripts/validate_controlled_visual_production_loop_review_bridge.js
+  - node scripts/validate_controlled_visual_production_loop_review_bridge.js
+  - node --check scripts/validate_controlled_visual_production_loop_contract.js
+  - node scripts/validate_controlled_visual_production_loop_contract.js
+  - node --check scripts/validate_review_console_full_asset_archive_baseline.js
+  - node scripts/validate_review_console_full_asset_archive_baseline.js
+  - node --check scripts/validate_full_asset_archive_manifest.js
+  - node scripts/validate_full_asset_archive_manifest.js
   - git diff --check
   - node scripts/validate_agent_board_state.js
   - scripts/validate-agent-image-lab-local.ps1

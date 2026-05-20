@@ -1,6 +1,110 @@
 
 ---
 
+- [x] ID: controlled_visual_production_loop_commit_and_authorization_readiness_audit
+      Title: Audit the active long-range goal against current local repository evidence
+      Reason: the repo already has aligned capsule/review/archive contracts plus inactive A5 draft packages, but the thread still needed one direct proof surface that the goal is locally satisfied without commit or A5 execution.
+      Changed files: docs/CONTROLLED_VISUAL_PRODUCTION_LOOP_COMMIT_AND_AUTHORIZATION_READINESS_AUDIT.md; tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_COMMIT_AND_AUTHORIZATION_READINESS_AUDIT.example.json; scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js; tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_CHECKPOINT_READINESS.example.json; tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_EXACT_FILE_COMMIT_READINESS_REVIEW.example.json; docs/CONTROLLED_VISUAL_PRODUCTION_LOOP_CHECKPOINT_READINESS_GATE.md; docs/CONTROLLED_VISUAL_PRODUCTION_LOOP_EXACT_FILE_COMMIT_READINESS_REVIEW.md; scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js; scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js; scripts/validate_mvp_capsule_product_core.ps1; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      Decision: the repo now carries a goal-level local readiness audit that binds the 41-file exact slice, the inactive production-candidate package, the blocked inactive memory-write package, and the preserved A5 boundaries into one explicit completion-proof candidate.
+      Validation: pending the full final chain re-run after fixture and board sync.
+      Result: completed_pending_validation.
+      Recommended next: explicit_local_commit_instruction_or_explicit_A5_activation_decision_after_goal_audit.
+      Stop condition: any request to treat this audit as implicit commit or implicit A5 activation, or to widen into provider/plugin/API/image/memory/runtime/remote actions.
+
+---
+
+- [x] ID: controlled_visual_production_loop_memory_write_A5_authorization_draft_gate
+      Title: Draft the smallest inactive A5 package for the tennis-wallet memory-write path
+      Reason: the current loop already has a validated inactive production-candidate package, but the route still needed an explicit memory-write authorization object that preserves the real blocker instead of inferring write readiness from accepted status.
+      Changed files: docs/CONTROLLED_VISUAL_PRODUCTION_LOOP_MEMORY_WRITE_A5_AUTHORIZATION_DRAFT_GATE.md; reports/memory_write_authorization/2026-05-20_tennis_wallet_memory_write_A5_authorization_package.json; scripts/validate_controlled_visual_production_loop_memory_write_authorization.js; tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_CHECKPOINT_READINESS.example.json; tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_EXACT_FILE_COMMIT_READINESS_REVIEW.example.json; docs/CONTROLLED_VISUAL_PRODUCTION_LOOP_CHECKPOINT_READINESS_GATE.md; docs/CONTROLLED_VISUAL_PRODUCTION_LOOP_EXACT_FILE_COMMIT_READINESS_REVIEW.md; scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js; scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js; scripts/validate_mvp_capsule_product_core.ps1; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      Decision: the repo now contains an inactive exact-scope A5 memory-write package for the tennis-wallet route, but it stays explicitly blocked because source memory_suitability=false, approval evidence keeps memory_write_authorized=false, and no human override or memory_delta draft exists.
+      Validation: node --check scripts/validate_controlled_visual_production_loop_memory_write_authorization.js passed; node scripts/validate_controlled_visual_production_loop_memory_write_authorization.js passed; node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js passed; node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js passed; git diff --check passed; validate_agent_board_state passed; validate-agent-image-lab-local passed; validate_mvp passed.
+      Result: completed_validated.
+      Recommended next: explicit_A5_activation_decision_for_controlled_visual_production_loop_production_candidate_static_only.
+      Stop condition: any request to treat accepted status as memory-write readiness, perform DailyNote/VCP memory writes, read image binaries, widen the read scope, or enter runtime/provider/plugin/API.
+
+---
+
+- [x] ID: controlled_visual_production_loop_exact_file_commit_readiness_review
+      Title: Prove the current controlled-loop slice is ready for an exact-file local commit
+      Reason: the loop already has a validated inactive A5 production-candidate package, but the goal still needed stronger evidence that the current local slice can be committed later without `git add .`.
+      Changed files: docs/CONTROLLED_VISUAL_PRODUCTION_LOOP_EXACT_FILE_COMMIT_READINESS_REVIEW.md; tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_EXACT_FILE_COMMIT_READINESS_REVIEW.example.json; scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js; tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_CHECKPOINT_READINESS.example.json; docs/CONTROLLED_VISUAL_PRODUCTION_LOOP_CHECKPOINT_READINESS_GATE.md; scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js; scripts/validate_mvp_capsule_product_core.ps1; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      Decision: the repo now carries a 38-file exact local commit candidate with a fixed suggested commit message, exact future staging scope, zero staged files, and no widened execution authority.
+      Validation: node --check scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js passed; node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js passed; node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js passed; git diff --check passed; validate_agent_board_state passed; validate-agent-image-lab-local passed; validate_mvp passed.
+      Result: completed_validated.
+      Recommended next: explicit_A5_activation_decision_for_controlled_visual_production_loop_production_candidate_static_only.
+      Stop condition: any request to stage, commit, push, widen exact file scope, touch image binaries, write memory, enter runtime, or execute A5 now.
+
+---
+
+- [x] ID: controlled_visual_production_loop_production_candidate_A5_authorization_draft_gate
+      Title: Draft the smallest inactive A5 package for the tennis-wallet production candidate path
+      Reason: the controlled loop is locally aligned and checkpoint-ready, so the next highest-value step is to prepare one exact production-candidate authorization package without opening archive, memory, runtime, or provider scope.
+      Changed files: docs/CONTROLLED_VISUAL_PRODUCTION_LOOP_PRODUCTION_CANDIDATE_A5_AUTHORIZATION_DRAFT_GATE.md; reports/production_candidate_authorization/2026-05-20_tennis_wallet_production_candidate_A5_authorization_package.json; scripts/validate_controlled_visual_production_loop_production_candidate_authorization.js; tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_CHECKPOINT_READINESS.example.json; docs/CONTROLLED_VISUAL_PRODUCTION_LOOP_CHECKPOINT_READINESS_GATE.md; scripts/validate_mvp_capsule_product_core.ps1; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      Decision: the repo now contains an inactive exact-scope A5 package for one tennis-wallet production-candidate metadata write with two exact future write paths and no image, memory, runtime, or remote authority.
+      Validation: node --check scripts/validate_controlled_visual_production_loop_production_candidate_authorization.js passed; node scripts/validate_controlled_visual_production_loop_production_candidate_authorization.js passed; node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js passed; git diff --check passed; validate_agent_board_state passed; validate-agent-image-lab-local passed; validate_mvp passed.
+      Result: completed_validated.
+      Recommended next: controlled_visual_production_loop_exact_file_commit_readiness_review.
+      Stop condition: any request to execute A5 now, widen write scope, touch image binaries, write memory, enter runtime, or perform remote side effects.
+
+---
+
+- [x] ID: controlled_visual_production_loop_checkpoint_readiness_gate
+      Title: Prove the current local controlled-loop worktree is one exact-file commit-ready slice
+      Reason: capsule, review, and archive contracts are now locally aligned, but the objective still needed evidence that the dirty worktree is one coherent exact-file slice ready for a future human-reviewed local commit.
+      Changed files: docs/CONTROLLED_VISUAL_PRODUCTION_LOOP_CHECKPOINT_READINESS_GATE.md; tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_CHECKPOINT_READINESS.example.json; scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js; scripts/validate_mvp_capsule_product_core.ps1; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      Decision: the current 35-file local slice is now explicitly allowlisted and validated as commit-ready in principle, while staging, commit, and push remain blocked until explicit authorization.
+      Validation: node --check scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js passed; node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js passed; git diff --check passed; validate_agent_board_state passed; validate-agent-image-lab-local passed; validate_mvp passed.
+      Result: completed_validated.
+      Recommended next: controlled_visual_production_loop_exact_file_commit_readiness_review.
+      Stop condition: any need for staging, commit, push, provider/plugin/API, image generation, DailyNote/VCP memory, runtime, dependency change, or remote side effects.
+
+---
+
+- [x] ID: controlled_visual_production_loop_review_bridge_gate
+      Title: Bind the local review flow to the tennis-wallet canonical route
+      Reason: the controlled loop contract already aligned capsule and archive evidence, but the review flow still needed its own sample-bound bridge so the local loop could describe one coherent accepted/failure route.
+      Changed files: review_console/static_prototype/index.html; review_console/static_prototype/mock_data.js; review_console/static_prototype/app.js; review_console/static_prototype/FIELD_MAPPING.md; review_console/static_prototype/README.md; tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_REVIEW_BRIDGE_STATE.example.json; tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_CONTRACT.example.json; scripts/validate_controlled_visual_production_loop_review_bridge.js; scripts/validate_controlled_visual_production_loop_contract.js; scripts/validate_mvp_capsule_product_core.ps1; docs/CONTROLLED_VISUAL_PRODUCTION_LOOP_REVIEW_BRIDGE_GATE.md; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      Decision: Review Console now exposes `controlled_visual_production_loop_review_bridge_state` as a sample-bound local review bridge for the tennis-wallet route, and the main loop contract now treats review binding as aligned instead of pending.
+      Validation: node --check review_console/static_prototype/mock_data.js passed; node --check review_console/static_prototype/app.js passed; node --check scripts/validate_controlled_visual_production_loop_review_bridge.js passed; node scripts/validate_controlled_visual_production_loop_review_bridge.js passed; node scripts/validate_controlled_visual_production_loop_contract.js passed; git diff --check passed; validate_agent_board_state passed; validate-agent-image-lab-local passed; validate_mvp passed.
+      Result: completed_validated.
+      Stop condition: any need for asset file reads, preview load/render, provider/plugin/API, DailyNote/VCP memory, production candidate, runtime, dependency change, or remote side effects.
+
+---
+
+- [x] ID: controlled_visual_production_loop_contract_alignment_gate
+      Title: Anchor the current tennis-wallet route as one local-only controlled visual production loop contract
+      Reason: capsule contract, failure relation, preview evidence, and durable archive baseline were already aligned around one sample route, but the repo still lacked one explicit contract that exposed that route in the same place before the sample-bound review bridge was added.
+      Changed files: review_console/static_prototype/index.html; review_console/static_prototype/mock_data.js; review_console/static_prototype/app.js; review_console/static_prototype/FIELD_MAPPING.md; review_console/static_prototype/README.md; tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_CONTRACT.example.json; scripts/validate_controlled_visual_production_loop_contract.js; scripts/validate_mvp_capsule_product_core.ps1; docs/CONTROLLED_VISUAL_PRODUCTION_LOOP_CONTRACT_ALIGNMENT_GATE.md; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      Decision: Review Console now exposes `controlled_visual_production_loop_contract` as a static draft-output contract for the tennis-wallet route, and the contract has since been tightened to include the sample-bound review bridge while keeping authorization/runtime blockers explicit.
+      Validation: node --check review_console/static_prototype/mock_data.js passed; node --check review_console/static_prototype/app.js passed; node --check scripts/validate_controlled_visual_production_loop_contract.js passed; node scripts/validate_controlled_visual_production_loop_contract.js passed; git diff --check passed; validate_agent_board_state passed; validate-agent-image-lab-local passed; validate_mvp passed.
+      Result: completed_validated.
+      Stop condition: any need for asset file reads, preview load/render, provider/plugin/API, DailyNote/VCP memory, production candidate, runtime, dependency change, or remote side effects.
+
+---
+
+- [x] ID: review_console_full_asset_archive_baseline_bridge_gate
+      Title: Expose verified full asset archive baseline inside static Review Console
+      Reason: the archive manifest bridge is validated, but the static Review Console still lacked a local-only surface that shows the verified durable-original baseline, execution evidence, and remaining blockers.
+      Changed files: review_console/static_prototype/index.html; review_console/static_prototype/mock_data.js; review_console/static_prototype/app.js; review_console/static_prototype/FIELD_MAPPING.md; review_console/static_prototype/README.md; tests/schema_examples/REVIEW_CONSOLE_FULL_ASSET_ARCHIVE_BASELINE_STATE.example.json; scripts/validate_review_console_full_asset_archive_baseline.js; scripts/validate_mvp_capsule_product_core.ps1; docs/REVIEW_CONSOLE_FULL_ASSET_ARCHIVE_BASELINE_BRIDGE_GATE.md; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      Decision: Review Console now surfaces the verified durable-original by_sha256 baseline as a static panel plus draft output key `full_asset_archive_baseline_state`, while preserving no file reads, no runtime, and no new archive execution.
+      Validation: node --check review_console/static_prototype/mock_data.js passed; node --check review_console/static_prototype/app.js passed; node --check scripts/validate_review_console_full_asset_archive_baseline.js passed; node scripts/validate_review_console_full_asset_archive_baseline.js passed; git diff --check passed; validate_agent_board_state passed; validate-agent-image-lab-local passed; validate_mvp passed.
+      Result: completed_validated.
+      Stop condition: any need for asset file reads, preview load/render, new archive copy, provider/plugin/API, DailyNote/VCP memory, production candidate, runtime, dependency change, or remote side effects.
+
+---
+
+- [x] ID: full_asset_archive_verified_git_tracked_baseline_gate
+      Title: Align full asset archive manifest bridge to verified Git-tracked durable originals
+      Reason: the repository now tracks verified durable originals under `asset_archive/original_assets/by_sha256/`, but the design/schema/example/validator still modeled only the blocked pre-A5 original-asset state.
+      Changed files: docs/FULL_ASSET_ARCHIVE_VERIFIED_GIT_TRACKED_BASELINE_GATE.md; docs/FULL_ASSET_ARCHIVE_DESIGN.md; schemas/full_asset_archive_manifest.schema.yaml; tests/schema_examples/full_asset_archive_manifest.example.json; scripts/validate_full_asset_archive_manifest.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      Decision: full asset archive modeling now supports both blocked pre-A5 state and verified Git-tracked durable archive state; the checked-in example now reflects the current verified baseline backed by the execution report.
+      Validation: node --check scripts/validate_full_asset_archive_manifest.js passed; node scripts/validate_full_asset_archive_manifest.js passed; git diff --check passed; validate_agent_board_state passed; validate-agent-image-lab-local passed; validate_mvp passed.
+      Result: completed_validated.
+      Stop condition: any need for new A5 execution, runs mutation, new image binary reads, provider/plugin/API, DailyNote/VCP memory, production candidate, dependency change, or remote side effects.
+
+---
+
 ## Current Task - Durable Archive Copy A5 Authorization Package
 
 ```text

@@ -587,8 +587,78 @@ validation 状态。
 | `guard` | `portable_preview_capsule_evidence.guard` | 所有 external/runtime/write flags 必须为 false |
 
 该 evidence 不读取 `asset_archive/` 文件，不 fetch，不写文件，不调用 runtime、
-provider、plugin、API、DailyNote 或 VCP memory，不写 accepted_samples /
-failure_samples / production_candidate，也不证明 VCP runtime integration。
+ provider、plugin、API、DailyNote 或 VCP memory，不写 accepted_samples /
+ failure_samples / production_candidate，也不证明 VCP runtime integration。
+
+## P4C Full Asset Archive Baseline Bridge
+
+`full_asset_archive_baseline_state` 只把已经验证过的完整归档基线以静态面板和
+draft output 形式暴露给 Review Console。它引用
+`tests/schema_examples/full_asset_archive_manifest.example.json`、
+`docs/FULL_ASSET_ARCHIVE_VERIFIED_GIT_TRACKED_BASELINE_GATE.md`、
+`docs/ASSET_ARCHIVE_GIT_TRACKING_POLICY.md` 和
+`reports/durable_archive_copy_execution/2026-05-20_durable_archive_copy_A5_execution_report.json`
+作为链路证据，但浏览器本身不读取这些文件。
+
+| Source | Review Console field | Rule |
+| --- | --- | --- |
+| `sample_id` | `full_asset_archive_baseline_state.sample_id` | 当前桥接样本固定为 `accepted_product_still_life_tennis_wallet_001` |
+| `source_manifest_ref` | `full_asset_archive_baseline_state.source_manifest_ref` | 只展示 full archive manifest ref，不在浏览器读取 |
+| `source_portable_preview_capsule_ref` | `fullAssetArchiveBaselineBody` | 只展示 Git-portable preview capsule ref |
+| `durable_original_ref` | `fullAssetArchiveBaselineBody` | 只展示 `asset_archive/original_assets/by_sha256/` durable original ref |
+| `archive_baseline_status` | `fullAssetArchiveBaselineSummary` | 必须保持 `verified_durable_archive_git_tracked` |
+| `storage_strategy` | `fullAssetArchiveBaselineSummary` | 必须保持 `git_tracked_durable_archive` |
+| `preview_clone_portable_validation_status` | `fullAssetArchiveBaselineSummary` | 必须继续证明 preview capsule clone-portable |
+| `full_archive_readiness_status` | `fullAssetArchiveBaselineSummary` | 只证明 durable original 已被验证，不等于 production write 已开放 |
+| `next_blockers[]` | `fullAssetArchiveBaselineBody` | 必须继续暴露 production / memory / runtime blocker |
+| `guard` | `full_asset_archive_baseline_state.guard` / `fullAssetArchiveBaselineGuard` | 必须保持 static-only、no fetch、no file write、no asset archive read、no runtime |
+
+本节只展示“完整归档基线已经在仓库里被证明存在”，不代表允许再次复制 durable
+archive、也不代表 `production_candidate`、`DailyNote`、`VCP memory` 或 VCP
+runtime integration 已经开放。它不得读取 `asset_archive/` 文件，不加载 preview，
+不 fetch，不写文件，不调用 runtime、provider、plugin、API、DailyNote 或 VCP
+memory。
+
+## P6N Controlled Visual Production Loop Contract
+
+`controlled_visual_production_loop_contract` 把当前已经本地对齐的 tennis wallet
+canonical route 收束成一个单独的静态合同：accepted preview capsule、
+failure-learning relation、`unified_capsule_contract_report`、verified durable
+archive baseline，以及已经接上的 sample-bound review bridge。当前 route status
+固定为 `capsule_archive_review_bridge_aligned_authorization_pending`。
+
+| Source | Review Console field | Rule |
+| --- | --- | --- |
+| `accepted_product_still_life_tennis_wallet_001` | `controlled_visual_production_loop_contract.accepted_sample_id` | 当前 canonical accepted sample 固定为 tennis wallet |
+| `failure_tennis_wallet_v7_21_001` | `controlled_visual_production_loop_contract.failure_sample_id` | 当前 canonical failure sample 必须继续解析到 tennis wallet |
+| `full_asset_archive_baseline_state.archive_baseline_status` | `controlled_visual_production_loop_contract.route_segments[]` | durable archive segment 必须保持 `verified_durable_archive_git_tracked` |
+| `unified_capsule_contract_report.contract_status.overall_passed` | `controlled_visual_production_loop_contract.route_segments[]` | capsule contract segment 必须保持 aligned |
+| `review_report_static_handoff` | `controlled_visual_production_loop_contract.review_report_bridge` | 保留 generic handoff 存在性，但当前 canonical route 已通过独立 review bridge sample-bound |
+| `sample_route_bound_static_only` | `controlled_visual_production_loop_contract.review_report_bridge.binding_status` | review bridge 必须以静态方式绑定到 tennis wallet route |
+
+该合同只用于暴露当前本地受控闭环已经对齐到哪里、还差哪里。它不得读取
+`asset_archive/` 文件，不加载 preview，不 fetch，不写文件，不调用 runtime、
+provider、plugin、API、DailyNote 或 VCP memory，也不开放 production
+candidate 写入。
+
+## P6O Controlled Visual Production Loop Review Bridge
+
+`controlled_visual_production_loop_review_bridge_state` 把当前 canonical route 的
+review flow 绑定到样本级别，而不是继续停留在通用 candidate-template handoff：
+accepted tennis wallet 样本作为 static positive example，failure tennis wallet
+样本作为 failure-learning only / never-production。
+
+| Source | Review Console field | Rule |
+| --- | --- | --- |
+| `accepted_product_still_life_tennis_wallet_001` | `controlled_visual_production_loop_review_bridge_state.bridge_rows[]` | accepted row 必须是 `pass`，但仍不得直接进入 memory 或 production |
+| `failure_tennis_wallet_v7_21_001` | `controlled_visual_production_loop_review_bridge_state.bridge_rows[]` | failure row 必须是 `reject` 且 `never_production=true` |
+| `review_report_static_handoff` | `controlled_visual_production_loop_review_bridge_state.source_links.generic_review_report_handoff_key` | generic handoff 继续保留，但不再承担 canonical route 的 sample-bound 表达 |
+| `git_portable_preview_evidence_verified` / `git_portable_failure_preview_evidence_verified` | `review_evidence_status` | review bridge 只能复用现有本地验证结果，不得读取 asset 二进制 |
+| `sample_route_bound_static_only` | `review_report_binding_status` | 当前桥接只证明本地静态绑定成立，不代表 runtime / production / memory 已开放 |
+
+该 bridge 只对齐当前本地 review flow 合同，不替代旧的 adapter handoff 校验链，
+也不得读取 `asset_archive/` 文件、加载 preview、fetch、写文件、调用 runtime、
+provider、plugin、API、DailyNote 或 VCP memory。
 
 ## 原型防越界标记
 

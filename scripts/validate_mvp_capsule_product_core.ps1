@@ -127,6 +127,110 @@ function Invoke-CapsuleProductCoreValidation {
     Test-CapsuleNoExternalActionFlags $fullAssetArchiveManifest "Full asset archive manifest validation must remain local-only with no external, memory, runtime, production, or remote actions" @('actual_runs_scan_performed', 'runs_mutation_performed', 'source_image_binary_read_performed', 'image_binary_read_performed', 'hash_extraction_performed', 'dimensions_extraction_performed', 'preview_generation_performed', 'original_copy_performed', 'production_candidate_write_performed')
   }
 
+  $reviewConsoleFullAssetArchiveBaseline = Invoke-CapsuleNodeJsonValidator 'scripts/validate_review_console_full_asset_archive_baseline.js' "Review Console full asset archive baseline validation exited with failure"
+  if ($null -ne $reviewConsoleFullAssetArchiveBaseline) {
+    Test-CapsuleExpectedStatus $reviewConsoleFullAssetArchiveBaseline 'review_console_full_asset_archive_baseline_verified' "Review Console full asset archive baseline validation must pass"
+    if ($reviewConsoleFullAssetArchiveBaseline.draft_output_key -ne 'full_asset_archive_baseline_state' -or $reviewConsoleFullAssetArchiveBaseline.snapshot_status -ne 'golden_static_snapshot') {
+      & $AddFailure "Review Console full asset archive baseline must expose a golden static draft output state"
+    }
+    if ($reviewConsoleFullAssetArchiveBaseline.archive_baseline_status -ne 'verified_durable_archive_git_tracked' -or $reviewConsoleFullAssetArchiveBaseline.storage_strategy -ne 'git_tracked_durable_archive') {
+      & $AddFailure "Review Console full asset archive baseline must stay aligned to the verified git-tracked durable archive baseline"
+    }
+    Test-CapsuleNoExternalActionFlags $reviewConsoleFullAssetArchiveBaseline "Review Console full asset archive baseline validation must remain local-only with no external, memory, runtime, production, or remote actions" @('asset_archive_read_performed', 'preview_loaded_or_rendered', 'preview_creation_or_copy_performed', 'runs_mutation_performed', 'source_image_binary_read_performed', 'production_candidate_write_performed')
+  }
+
+  $controlledVisualProductionLoopReviewBridge = Invoke-CapsuleNodeJsonValidator 'scripts/validate_controlled_visual_production_loop_review_bridge.js' "Controlled visual production loop review bridge validation exited with failure"
+  if ($null -ne $controlledVisualProductionLoopReviewBridge) {
+    Test-CapsuleExpectedStatus $controlledVisualProductionLoopReviewBridge 'controlled_visual_production_loop_review_bridge_verified' "Controlled visual production loop review bridge validation must pass"
+    if ($controlledVisualProductionLoopReviewBridge.draft_output_key -ne 'controlled_visual_production_loop_review_bridge_state' -or $controlledVisualProductionLoopReviewBridge.review_report_binding_status -ne 'sample_route_bound_static_only') {
+      & $AddFailure "Controlled visual production loop review bridge must expose the expected draft output key and sample-bound review status"
+    }
+    if ($controlledVisualProductionLoopReviewBridge.accepted_sample_id -ne 'accepted_product_still_life_tennis_wallet_001' -or $controlledVisualProductionLoopReviewBridge.failure_sample_id -ne 'failure_tennis_wallet_v7_21_001' -or $controlledVisualProductionLoopReviewBridge.sample_count -ne 2 -or $controlledVisualProductionLoopReviewBridge.never_production_count -ne 1) {
+      & $AddFailure "Controlled visual production loop review bridge must stay aligned to the tennis wallet accepted/failure pair"
+    }
+    Test-CapsuleNoExternalActionFlags $controlledVisualProductionLoopReviewBridge "Controlled visual production loop review bridge validation must remain local-only with no external, memory, runtime, production, or remote actions" @('asset_archive_read_performed', 'preview_loaded_or_rendered', 'production_candidate_write_performed', 'vcp_runtime_integration_proven')
+  }
+
+  $controlledVisualProductionLoopProductionCandidateAuthorization = Invoke-CapsuleNodeJsonValidator 'scripts/validate_controlled_visual_production_loop_production_candidate_authorization.js' "Controlled visual production loop production candidate authorization validation exited with failure"
+  if ($null -ne $controlledVisualProductionLoopProductionCandidateAuthorization) {
+    Test-CapsuleExpectedStatus $controlledVisualProductionLoopProductionCandidateAuthorization 'controlled_visual_production_loop_production_candidate_authorization_verified' "Controlled visual production loop production candidate authorization validation must pass"
+    if ($controlledVisualProductionLoopProductionCandidateAuthorization.source_sample_id -ne 'accepted_product_still_life_tennis_wallet_001' -or $controlledVisualProductionLoopProductionCandidateAuthorization.source_failure_sample_id -ne 'failure_tennis_wallet_v7_21_001' -or $controlledVisualProductionLoopProductionCandidateAuthorization.write_path_count -ne 2) {
+      & $AddFailure "Controlled visual production loop production candidate authorization must stay scoped to the tennis wallet canonical route and exactly two future write paths"
+    }
+    if ($controlledVisualProductionLoopProductionCandidateAuthorization.execution_allowed_now -ne $false -or $controlledVisualProductionLoopProductionCandidateAuthorization.production_candidate_write_performed -ne $false) {
+      & $AddFailure "Controlled visual production loop production candidate authorization must stay draft-only with no execution now"
+    }
+    Test-CapsuleNoExternalActionFlags $controlledVisualProductionLoopProductionCandidateAuthorization "Controlled visual production loop production candidate authorization validation must remain local-only with no external, memory, runtime, production, or remote actions" @('image_binary_read_performed', 'production_candidate_write_performed', 'dependency_change_performed')
+  }
+
+  $controlledVisualProductionLoopMemoryWriteAuthorization = Invoke-CapsuleNodeJsonValidator 'scripts/validate_controlled_visual_production_loop_memory_write_authorization.js' "Controlled visual production loop memory write authorization validation exited with failure"
+  if ($null -ne $controlledVisualProductionLoopMemoryWriteAuthorization) {
+    Test-CapsuleExpectedStatus $controlledVisualProductionLoopMemoryWriteAuthorization 'controlled_visual_production_loop_memory_write_authorization_verified' "Controlled visual production loop memory write authorization validation must pass"
+    if ($controlledVisualProductionLoopMemoryWriteAuthorization.source_sample_id -ne 'accepted_product_still_life_tennis_wallet_001' -or $controlledVisualProductionLoopMemoryWriteAuthorization.external_operation_count -ne 2 -or $controlledVisualProductionLoopMemoryWriteAuthorization.read_ref_count -ne 8) {
+      & $AddFailure "Controlled visual production loop memory write authorization must stay scoped to the tennis wallet route, two future external operations, and eight exact metadata refs"
+    }
+    if ($controlledVisualProductionLoopMemoryWriteAuthorization.human_override_present -ne $false -or $controlledVisualProductionLoopMemoryWriteAuthorization.memory_write_execution_allowed_now -ne $false -or $controlledVisualProductionLoopMemoryWriteAuthorization.current_blocker_count -lt 5) {
+      & $AddFailure "Controlled visual production loop memory write authorization must remain draft-only and currently blocked by explicit memory suitability barriers"
+    }
+    Test-CapsuleNoExternalActionFlags $controlledVisualProductionLoopMemoryWriteAuthorization "Controlled visual production loop memory write authorization validation must remain local-only with no external, memory, runtime, production, or remote actions" @('direct_memory_write_performed', 'dependency_change_performed')
+  }
+
+  $controlledVisualProductionLoopExactFileCommitReadiness = Invoke-CapsuleNodeJsonValidator 'scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js' "Controlled visual production loop exact-file commit readiness review validation exited with failure"
+  if ($null -ne $controlledVisualProductionLoopExactFileCommitReadiness) {
+    Test-CapsuleExpectedStatus $controlledVisualProductionLoopExactFileCommitReadiness 'controlled_visual_production_loop_exact_file_commit_readiness_review_verified' "Controlled visual production loop exact-file commit readiness review validation must pass"
+    if ($controlledVisualProductionLoopExactFileCommitReadiness.local_commit_ready_after_explicit_human_review -ne $true -or $controlledVisualProductionLoopExactFileCommitReadiness.auto_commit_allowed_now -ne $false -or $controlledVisualProductionLoopExactFileCommitReadiness.staging_allowed_now -ne $false -or $controlledVisualProductionLoopExactFileCommitReadiness.commit_allowed_now -ne $false -or $controlledVisualProductionLoopExactFileCommitReadiness.push_allowed_now -ne $false) {
+      & $AddFailure "Controlled visual production loop exact-file commit readiness review must keep commit execution blocked while proving the slice is locally commit-ready"
+    }
+    if ($controlledVisualProductionLoopExactFileCommitReadiness.exact_stage_file_count -ne 41 -or $controlledVisualProductionLoopExactFileCommitReadiness.suggested_commit_message -ne 'chore: ready controlled visual production loop slice') {
+      & $AddFailure "Controlled visual production loop exact-file commit readiness review must keep the current exact stage set at 41 files with the expected suggested commit message"
+    }
+    Test-CapsuleNoExternalActionFlags $controlledVisualProductionLoopExactFileCommitReadiness "Controlled visual production loop exact-file commit readiness review validation must remain local-only with no external, memory, runtime, production, or remote actions" @('production_candidate_write_performed', 'dependency_change_performed')
+  }
+
+  $controlledVisualProductionLoopCheckpointReadiness = Invoke-CapsuleNodeJsonValidator 'scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js' "Controlled visual production loop checkpoint readiness validation exited with failure"
+  if ($null -ne $controlledVisualProductionLoopCheckpointReadiness) {
+    Test-CapsuleExpectedStatus $controlledVisualProductionLoopCheckpointReadiness 'controlled_visual_production_loop_checkpoint_readiness_verified' "Controlled visual production loop checkpoint readiness validation must pass"
+    if ($controlledVisualProductionLoopCheckpointReadiness.local_slice_ready_for_human_reviewed_commit -ne $true -or $controlledVisualProductionLoopCheckpointReadiness.staging_allowed_now -ne $false -or $controlledVisualProductionLoopCheckpointReadiness.commit_allowed_now -ne $false -or $controlledVisualProductionLoopCheckpointReadiness.push_allowed_now -ne $false) {
+      & $AddFailure "Controlled visual production loop checkpoint readiness must prove a commit-ready local slice while keeping staging, commit, and push blocked"
+    }
+    if ($controlledVisualProductionLoopCheckpointReadiness.branch -ne 'master' -or $controlledVisualProductionLoopCheckpointReadiness.ahead_count -ne 0 -or $controlledVisualProductionLoopCheckpointReadiness.behind_count -ne 0 -or $controlledVisualProductionLoopCheckpointReadiness.staged_file_count -ne 0) {
+      & $AddFailure "Controlled visual production loop checkpoint readiness must remain on synced master with zero staged files"
+    }
+    if ($controlledVisualProductionLoopCheckpointReadiness.exact_changed_file_count -ne 41) {
+      & $AddFailure "Controlled visual production loop checkpoint readiness must keep the current exact file slice at 41 files"
+    }
+  }
+
+  $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit = Invoke-CapsuleNodeJsonValidator 'scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js' "Controlled visual production loop commit and authorization readiness audit validation exited with failure"
+  if ($null -ne $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit) {
+    Test-CapsuleExpectedStatus $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit 'controlled_visual_production_loop_commit_and_authorization_readiness_audit_verified' "Controlled visual production loop commit and authorization readiness audit validation must pass"
+    if ($controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.goal_level_local_readiness_verified -ne $true -or $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.local_commit_ready_after_explicit_human_review -ne $true -or $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.authorization_ready_for_future_A5 -ne $true) {
+      & $AddFailure "Controlled visual production loop commit and authorization readiness audit must prove the active goal is locally satisfied without opening commit or A5 execution"
+    }
+    if ($controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.exact_changed_file_count -ne 41 -or $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.production_candidate_authorization_state -ne 'draft_not_active' -or $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.memory_write_authorization_state -ne 'draft_not_active') {
+      & $AddFailure "Controlled visual production loop commit and authorization readiness audit must keep the current 41-file slice and both A5 packages inactive"
+    }
+    if ($controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.memory_write_route_currently_blocked -ne $true -or $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.A5_execution_allowed_now -ne $false) {
+      & $AddFailure "Controlled visual production loop commit and authorization readiness audit must keep the memory path blocked and A5 execution closed"
+    }
+    Test-CapsuleNoExternalActionFlags $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit "Controlled visual production loop commit and authorization readiness audit must remain local-only with no external, memory, runtime, production, or remote actions" @('production_candidate_write_performed', 'dependency_change_performed')
+  }
+
+  $controlledVisualProductionLoopContract = Invoke-CapsuleNodeJsonValidator 'scripts/validate_controlled_visual_production_loop_contract.js' "Controlled visual production loop contract validation exited with failure"
+  if ($null -ne $controlledVisualProductionLoopContract) {
+    Test-CapsuleExpectedStatus $controlledVisualProductionLoopContract 'controlled_visual_production_loop_contract_verified' "Controlled visual production loop contract validation must pass"
+    if ($controlledVisualProductionLoopContract.draft_output_key -ne 'controlled_visual_production_loop_contract' -or $controlledVisualProductionLoopContract.route_alignment_status -ne 'capsule_archive_review_bridge_aligned_authorization_pending') {
+      & $AddFailure "Controlled visual production loop contract must expose the expected draft output key and route-alignment status"
+    }
+    if ($controlledVisualProductionLoopContract.accepted_sample_id -ne 'accepted_product_still_life_tennis_wallet_001' -or $controlledVisualProductionLoopContract.failure_sample_id -ne 'failure_tennis_wallet_v7_21_001') {
+      & $AddFailure "Controlled visual production loop contract must stay anchored on the tennis wallet canonical route"
+    }
+    if ($controlledVisualProductionLoopContract.review_report_sample_bound_now -ne $true -or $controlledVisualProductionLoopContract.aligned_segment_count -ne 5 -or $controlledVisualProductionLoopContract.blocked_segment_count -ne 0) {
+      & $AddFailure "Controlled visual production loop contract must include the sample-bound review bridge and preserve five aligned local segments"
+    }
+    Test-CapsuleNoExternalActionFlags $controlledVisualProductionLoopContract "Controlled visual production loop contract validation must remain local-only with no external, memory, runtime, production, or remote actions" @('asset_archive_read_performed', 'preview_loaded_or_rendered', 'production_candidate_write_performed', 'vcp_runtime_integration_proven')
+  }
+
   $gitTrackedPreviewEvidenceCapsuleBaselineOutput = & node (Join-Path $Root 'scripts/validate_v14_231_git_tracked_preview_evidence_capsule_baseline.js')
   if ($LASTEXITCODE -ne 0) {
     & $AddFailure "Git-tracked preview evidence capsule baseline validation exited with failure"

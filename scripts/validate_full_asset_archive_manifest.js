@@ -9,6 +9,9 @@ const root = path.resolve(__dirname, "..");
 const schemaRef = "schemas/full_asset_archive_manifest.schema.yaml";
 const exampleRef = "tests/schema_examples/full_asset_archive_manifest.example.json";
 const designRef = "docs/FULL_ASSET_ARCHIVE_DESIGN.md";
+const executionReportRef = "reports/durable_archive_copy_execution/2026-05-20_durable_archive_copy_A5_execution_report.json";
+const durableArchiveRoot = "asset_archive/original_assets/by_sha256/";
+const sha256Pattern = /^[a-f0-9]{64}$/;
 
 function readProjectFile(projectRelativePath) {
   return fs.readFileSync(path.join(root, projectRelativePath), "utf8");
@@ -30,7 +33,15 @@ function isPreviewCapsuleRoot(value, lane) {
   return isProjectRelative(value) && value.startsWith(expectedRoot) && value.endsWith("/");
 }
 
-function validateManifest(manifest) {
+function isDurableArchivePath(value) {
+  return isProjectRelative(value) && value.startsWith(durableArchiveRoot);
+}
+
+function basenameStem(value) {
+  return path.posix.basename(value || "", path.posix.extname(value || ""));
+}
+
+function validateManifest(manifest, executionReport) {
   const failures = [];
 
   function requireCheck(name, passed, detail) {
@@ -57,12 +68,37 @@ function validateManifest(manifest) {
   requireCheck("original_not_required_for_portable_validation", preview.original_asset_required_for_portable_validation === false);
 
   const original = manifest.original_asset || {};
-  requireCheck("original_storage_strategy_allowed", ["not_yet_verified", "missing", "external_local", "external_cloud"].includes(original.storage_strategy));
-  requireCheck("original_verification_blocked", original.verification_status === "blocked_until_A5_authorization");
-  requireCheck("blocked_original_ref_null", original.original_asset_ref === null);
-  requireCheck("blocked_original_sha256_null", original.original_sha256 === null);
-  requireCheck("blocked_original_dimensions_null", original.original_dimensions === null);
-  requireCheck("blocked_original_mime_null", original.original_mime_type === null);
+  requireCheck("original_storage_strategy_allowed", ["not_yet_verified", "missing", "external_local", "external_cloud", "git_tracked_durable_archive"].includes(original.storage_strategy));
+  requireCheck("original_verification_status_allowed", ["blocked_until_A5_authorization", "verified_durable_archive_git_tracked"].includes(original.verification_status));
+
+  if (original.verification_status === "blocked_until_A5_authorization") {
+    requireCheck("blocked_original_ref_null", original.original_asset_ref === null);
+    requireCheck("blocked_original_sha256_null", original.original_sha256 === null);
+    requireCheck("blocked_original_dimensions_null", original.original_dimensions === null);
+    requireCheck("blocked_original_mime_null", original.original_mime_type === null);
+    requireCheck("blocked_original_verification_evidence_ref_null", original.verification_evidence_ref === null);
+  }
+
+  if (original.verification_status === "verified_durable_archive_git_tracked") {
+    requireCheck("verified_storage_strategy_git_tracked_durable_archive", original.storage_strategy === "git_tracked_durable_archive");
+    requireCheck("verified_original_ref_safe", isDurableArchivePath(original.original_asset_ref), original.original_asset_ref);
+    requireCheck("verified_original_sha256_format", sha256Pattern.test(original.original_sha256 || ""), original.original_sha256);
+    requireCheck("verified_original_path_stem_matches_sha256", basenameStem(original.original_asset_ref) === original.original_sha256, original.original_asset_ref);
+    requireCheck("verified_original_dimensions_object", Number.isInteger(original.original_dimensions?.width) && original.original_dimensions.width > 0 && Number.isInteger(original.original_dimensions?.height) && original.original_dimensions.height > 0, original.original_dimensions);
+    requireCheck("verified_original_mime_present", typeof original.original_mime_type === "string" && original.original_mime_type.startsWith("image/"), original.original_mime_type);
+    requireCheck("verified_original_evidence_ref", original.verification_evidence_ref === executionReportRef, original.verification_evidence_ref);
+    requireCheck("verified_original_target_exists", fs.existsSync(path.join(root, original.original_asset_ref)));
+
+    const matchedResult = (executionReport.results || []).find((result) => result.target_archive_path === original.original_asset_ref);
+    requireCheck("verified_original_result_present_in_execution_report", Boolean(matchedResult), original.original_asset_ref);
+    if (matchedResult) {
+      requireCheck("verified_original_sha256_matches_execution_report", matchedResult.target_sha256 === original.original_sha256 && matchedResult.expected_sha256 === original.original_sha256, matchedResult.target_sha256);
+      requireCheck("verified_original_dimensions_match_execution_report", matchedResult.expected_dimensions?.width === original.original_dimensions.width && matchedResult.expected_dimensions?.height === original.original_dimensions.height, matchedResult.expected_dimensions);
+      requireCheck("verified_original_mime_matches_execution_report", matchedResult.expected_mime_type === original.original_mime_type, matchedResult.expected_mime_type);
+      requireCheck("verified_original_post_copy_verified", matchedResult.post_copy_verified === true);
+    }
+  }
+
   requireCheck("original_required_for_full_archive_ready", original.required_for_full_archive_ready === true);
   requireCheck("original_required_for_production_candidate", original.required_for_production_candidate === true);
 
@@ -90,6 +126,7 @@ const schemaText = readProjectFile(schemaRef);
 const schema = YAML.parse(schemaText);
 const example = JSON.parse(readProjectFile(exampleRef));
 const designText = readProjectFile(designRef);
+const executionReport = JSON.parse(readProjectFile(executionReportRef));
 const checks = [];
 
 function check(name, passed, details) {
@@ -138,7 +175,9 @@ check("schema_manifest_type", schema.manifest_type === "full_asset_archive_manif
 check("schema_required_fields", ["preview_capsule_ref", "preview_validation", "original_asset", "recovery", "guard"].every((field) => schema.required_fields.includes(field)));
 check("schema_allowed_preview_roots", schema.field_rules.preview_capsule_ref.path_scope.allowed_roots.includes("asset_archive/accepted_samples/") && schema.field_rules.preview_capsule_ref.path_scope.allowed_roots.includes("asset_archive/failure_samples/"));
 check("schema_preview_static_validation_only", schema.field_rules.preview_validation.source_image_binary_read_required === false && schema.field_rules.preview_validation.original_asset_required_for_portable_validation === false);
-check("schema_original_blocked_until_A5", schema.field_rules.original_asset.blocked_until_A5_requires_null.includes("original_sha256") && schema.field_rules.original_asset.blocked_until_A5_requires_null.includes("original_dimensions"));
+check("schema_original_blocked_until_A5", schema.field_rules.original_asset.blocked_until_A5_requires_null.includes("original_sha256") && schema.field_rules.original_asset.blocked_until_A5_requires_null.includes("verification_evidence_ref"));
+check("schema_original_verified_git_tracked_allowed", schema.field_rules.original_asset.storage_strategy_allowed.includes("git_tracked_durable_archive") && schema.field_rules.original_asset.verification_status_allowed.includes("verified_durable_archive_git_tracked"));
+check("schema_verified_git_tracked_root", schema.field_rules.original_asset.verified_git_tracked_durable_archive.path_scope.allowed_roots.includes(durableArchiveRoot));
 
 for (const field of forbiddenFields) {
   check(`schema_forbidden_${field}`, schema.forbidden_fields.must_be_null.includes(field));
@@ -147,9 +186,12 @@ for (const field of guardFalseFields) {
   check(`schema_guard_${field}`, schema.guard.must_be_false.includes(field));
 }
 
-const positiveFailures = validateManifest(example);
+check("execution_report_completed_validated", executionReport.status === "completed_validated");
+check("execution_report_target_root", (executionReport.results || []).every((result) => typeof result.target_archive_path === "string" && result.target_archive_path.startsWith(durableArchiveRoot)));
+
+const positiveFailures = validateManifest(example, executionReport);
 check("example_positive_manifest_valid", positiveFailures.length === 0, positiveFailures);
-check("design_ref_present", /preview capsule/i.test(designText) && /original asset/i.test(designText) && /A5/i.test(designText));
+check("design_ref_present", /preview capsule/i.test(designText) && /original asset/i.test(designText) && /A5/i.test(designText) && /by_sha256/i.test(designText));
 
 const negativeFixtures = [
   {
@@ -184,7 +226,31 @@ const negativeFixtures = [
     fixture: makeNegativeFixture({
       original_asset: {
         ...example.original_asset,
+        storage_strategy: "not_yet_verified",
+        verification_status: "blocked_until_A5_authorization",
+        original_asset_ref: null,
         original_sha256: "abc123",
+        original_dimensions: null,
+        original_mime_type: null,
+        verification_evidence_ref: null,
+      },
+    }),
+  },
+  {
+    name: "verified_original_bad_target_root_fails",
+    fixture: makeNegativeFixture({
+      original_asset: {
+        ...example.original_asset,
+        original_asset_ref: "asset_archive/accepted_samples/not-allowed.jpg",
+      },
+    }),
+  },
+  {
+    name: "verified_original_bad_report_ref_fails",
+    fixture: makeNegativeFixture({
+      original_asset: {
+        ...example.original_asset,
+        verification_evidence_ref: "reports/other_execution_report.json",
       },
     }),
   },
@@ -209,7 +275,7 @@ const negativeFixtures = [
 ];
 
 for (const negative of negativeFixtures) {
-  check(`negative_${negative.name}`, validateManifest(negative.fixture).length > 0);
+  check(`negative_${negative.name}`, validateManifest(negative.fixture, executionReport).length > 0);
 }
 
 const failures = checks.filter((item) => !item.passed);
@@ -221,6 +287,7 @@ const result = {
   schema_ref: schemaRef,
   example_ref: exampleRef,
   design_ref: designRef,
+  execution_report_ref: executionReportRef,
   static_validator_only: true,
   existing_git_tracked_preview_static_validation_allowed: true,
   source_image_binary_read_performed: false,

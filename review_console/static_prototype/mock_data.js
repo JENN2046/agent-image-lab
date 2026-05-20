@@ -131,6 +131,272 @@ window.REVIEW_CONSOLE_MOCK = {
       base64_evidence_used: false
     }
   ],
+  full_asset_archive_baseline_state_seed: {
+    phase: "review_console_full_asset_archive_baseline_bridge_gate",
+    snapshot_status: "golden_static_snapshot",
+    execution_mode: "review_console_static_full_asset_archive_baseline_only",
+    draft_output_key: "full_asset_archive_baseline_state",
+    source_manifest_ref: "tests/schema_examples/full_asset_archive_manifest.example.json",
+    source_phase_record_ref: "docs/FULL_ASSET_ARCHIVE_VERIFIED_GIT_TRACKED_BASELINE_GATE.md",
+    source_tracking_policy_ref: "docs/ASSET_ARCHIVE_GIT_TRACKING_POLICY.md",
+    source_execution_report_ref: "reports/durable_archive_copy_execution/2026-05-20_durable_archive_copy_A5_execution_report.json",
+    source_portable_preview_capsule_ref: "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/",
+    sample_id: "accepted_product_still_life_tennis_wallet_001",
+    lane: "accepted",
+    category: "product_still_life",
+    archive_baseline_status: "verified_durable_archive_git_tracked",
+    storage_strategy: "git_tracked_durable_archive",
+    preview_clone_portable_validation_status: "passed",
+    preview_validation_status: "git_portable_preview_evidence_verified",
+    preview_source_original_required: false,
+    durable_original_ref: "asset_archive/original_assets/by_sha256/8853c34f7e6a841590bcd04617591e6c572a7f6f0a88dc4970bec78246d7e580.jpg",
+    durable_original_sha256: "8853c34f7e6a841590bcd04617591e6c572a7f6f0a88dc4970bec78246d7e580",
+    durable_original_dimensions: "1920x1920",
+    durable_original_mime_type: "image/jpeg",
+    verification_evidence_ref: "reports/durable_archive_copy_execution/2026-05-20_durable_archive_copy_A5_execution_report.json",
+    tracking_policy_decision: "verified_durable_image_binaries_enter_git",
+    full_archive_readiness_status: "verified_durable_original_present",
+    production_candidate_write_allowed_now: false,
+    memory_write_allowed_now: false,
+    separate_a5_required_for_new_copy_or_overwrite: true,
+    next_blockers: [
+      "production_candidate_requires_separate_authorization",
+      "memory_write_requires_separate_authorization",
+      "vcp_runtime_integration_unproven"
+    ],
+    guard: {
+      static_panel_only: true,
+      fetch_performed: false,
+      file_write_performed: false,
+      asset_archive_read_performed: false,
+      preview_loaded_or_rendered: false,
+      preview_creation_or_copy_performed: false,
+      runs_mutation_performed: false,
+      source_image_binary_read_performed: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      image_generation_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      production_candidate_write_performed: false,
+      runtime_execution_performed: false,
+      real_manifest_read_performed: false,
+      real_vcpchat_read_performed: false,
+      real_vcptoolbox_read_performed: false,
+      push_tag_release_deploy_performed: false,
+      vcp_runtime_integration_proven: false
+    }
+  },
+  controlled_visual_production_loop_contract_seed: {
+    phase: "controlled_visual_production_loop_review_bridge_gate",
+    snapshot_status: "golden_static_snapshot",
+    execution_mode: "review_console_static_controlled_visual_production_loop_contract_only",
+    draft_output_key: "controlled_visual_production_loop_contract",
+    loop_contract_version: "v1",
+    canonical_route_id: "accepted_product_still_life_tennis_wallet_001__failure_tennis_wallet_v7_21_001",
+    accepted_sample_id: "accepted_product_still_life_tennis_wallet_001",
+    failure_sample_id: "failure_tennis_wallet_v7_21_001",
+    resolved_by_accepted_sample: "accepted_product_still_life_tennis_wallet_001",
+    category: "product_still_life",
+    route_alignment_status: "capsule_archive_review_bridge_aligned_authorization_pending",
+    source_contract_links: {
+      capsule_contract_fixture_ref: "tests/schema_examples/CAPSULE_STATIC_PRODUCT_SMOKE_UNIFIED_CONTRACT.example.json",
+      archive_manifest_ref: "tests/schema_examples/full_asset_archive_manifest.example.json",
+      archive_baseline_snapshot_ref: "tests/schema_examples/REVIEW_CONSOLE_FULL_ASSET_ARCHIVE_BASELINE_STATE.example.json",
+      review_report_handoff_key: "review_report_static_handoff",
+      review_bridge_fixture_ref: "tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_REVIEW_BRIDGE_STATE.example.json"
+    },
+    alignment_summary: {
+      accepted_preview_capsule_verified: true,
+      failure_capsule_verified: true,
+      failure_relation_verified: true,
+      durable_archive_verified: true,
+      review_report_contract_present: true,
+      review_report_sample_bound_now: true,
+      aligned_segment_count: 5,
+      blocked_segment_count: 0
+    },
+    route_segments: [
+      {
+        segment: "accepted_preview_capsule",
+        status: "aligned",
+        sample_id: "accepted_product_still_life_tennis_wallet_001",
+        evidence_ref: "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/",
+        validator_status: "git_portable_preview_evidence_verified"
+      },
+      {
+        segment: "failure_learning_route",
+        status: "aligned",
+        sample_id: "failure_tennis_wallet_v7_21_001",
+        resolved_by_accepted_sample: "accepted_product_still_life_tennis_wallet_001",
+        final_route: "failure_learning_only_never_production",
+        validator_status: "git_portable_failure_preview_evidence_verified"
+      },
+      {
+        segment: "capsule_contract",
+        status: "aligned",
+        contract_status: "overall_passed",
+        reviewer_action: "accept_contract_baseline"
+      },
+      {
+        segment: "durable_archive_baseline",
+        status: "aligned",
+        verification_status: "verified_durable_archive_git_tracked",
+        durable_original_ref: "asset_archive/original_assets/by_sha256/8853c34f7e6a841590bcd04617591e6c572a7f6f0a88dc4970bec78246d7e580.jpg"
+      },
+      {
+        segment: "review_report_binding",
+        status: "aligned",
+        review_report_contract_present: true,
+        report_items_count: 2,
+        generic_candidate_template_detected: true,
+        sample_bound_now: true,
+        binding_status: "sample_route_bound_static_only"
+      }
+    ],
+    review_report_bridge: {
+      source_handoff_key: "review_report_static_handoff",
+      source_bridge_ref: "tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_REVIEW_BRIDGE_STATE.example.json",
+      review_report_contract_present: true,
+      report_items_count: 2,
+      generic_candidate_template_detected: true,
+      sample_bound_now: true,
+      binding_status: "sample_route_bound_static_only",
+      binding_blocker: null
+    },
+    next_blockers: [
+      "production_candidate_requires_separate_authorization",
+      "memory_write_requires_separate_authorization",
+      "vcp_runtime_integration_unproven"
+    ],
+    next_local_moves: [
+      "prepare_exact_file_checkpoint_readiness",
+      "reduce_current_slice_to_exact_files",
+      "draft_next_smallest_A5_package_after_local_loop_stabilizes"
+    ],
+    next_authorization_candidates: [
+      "production_candidate_authorization_package",
+      "memory_write_authorization_package",
+      "runtime_source_read_authorization_package"
+    ],
+    guard: {
+      static_panel_only: true,
+      fetch_performed: false,
+      file_write_performed: false,
+      asset_archive_read_performed: false,
+      preview_loaded_or_rendered: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      image_generation_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      production_candidate_write_performed: false,
+      runtime_execution_performed: false,
+      real_manifest_read_performed: false,
+      real_vcpchat_read_performed: false,
+      real_vcptoolbox_read_performed: false,
+      push_tag_release_deploy_performed: false,
+      vcp_runtime_integration_proven: false
+    }
+  },
+  controlled_visual_production_loop_review_bridge_seed: {
+    phase: "controlled_visual_production_loop_review_bridge_gate",
+    snapshot_status: "golden_static_snapshot",
+    execution_mode: "review_console_static_controlled_visual_production_loop_review_bridge_only",
+    draft_output_key: "controlled_visual_production_loop_review_bridge_state",
+    review_bridge_version: "v1",
+    canonical_route_id: "accepted_product_still_life_tennis_wallet_001__failure_tennis_wallet_v7_21_001",
+    accepted_sample_id: "accepted_product_still_life_tennis_wallet_001",
+    failure_sample_id: "failure_tennis_wallet_v7_21_001",
+    review_report_binding_status: "sample_route_bound_static_only",
+    source_links: {
+      loop_contract_ref: "tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_CONTRACT.example.json",
+      generic_review_report_handoff_key: "review_report_static_handoff",
+      accepted_capsule_ref: "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/",
+      failure_capsule_ref: "asset_archive/failure_samples/failure_tennis_wallet_v7_21_001/"
+    },
+    bridge_rows: [
+      {
+        sample_id: "accepted_product_still_life_tennis_wallet_001",
+        lane: "accepted",
+        review_outcome: "pass",
+        review_status: "static_positive_example_verified",
+        memory_route: "memory_delta_draft_only_pending_human_approval",
+        production_route: "blocked_pending_separate_authorization",
+        review_evidence_status: "git_portable_preview_evidence_verified",
+        source_record_links: [
+          "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/review_record.json",
+          "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/approval_record.json"
+        ],
+        memory_entry_allowed_now: false,
+        production_promotion_allowed_now: false,
+        never_production: false
+      },
+      {
+        sample_id: "failure_tennis_wallet_v7_21_001",
+        lane: "failure",
+        review_outcome: "reject",
+        review_status: "failure_learning_route_verified",
+        memory_route: "failure_lesson_draft_only_pending_human_approval",
+        production_route: "never_production",
+        review_evidence_status: "git_portable_failure_preview_evidence_verified",
+        failure_tags: [
+          "watermark_or_generation_mark_risk",
+          "foreground_tennis_balls_too_large",
+          "background_material_direction_drift",
+          "commercial_usability_partial"
+        ],
+        source_record_links: [
+          "asset_archive/failure_samples/failure_tennis_wallet_v7_21_001/failure_record.json",
+          "asset_archive/failure_samples/failure_tennis_wallet_v7_21_001/review_record.json"
+        ],
+        memory_entry_allowed_now: false,
+        production_promotion_allowed_now: false,
+        never_production: true
+      }
+    ],
+    bridge_summary: {
+      sample_count: 2,
+      accepted_positive_example_count: 1,
+      failure_learning_count: 1,
+      memory_entry_allowed_now_count: 0,
+      production_promotion_allowed_now_count: 0,
+      writes_allowed_now_count: 0,
+      never_production_count: 1,
+      never_production_sample_ids: [
+        "failure_tennis_wallet_v7_21_001"
+      ],
+      generic_review_report_handoff_still_present: true,
+      generic_review_report_replaced: false
+    },
+    next_blockers: [
+      "production_candidate_requires_separate_authorization",
+      "memory_write_requires_separate_authorization",
+      "vcp_runtime_integration_unproven"
+    ],
+    guard: {
+      static_panel_only: true,
+      fetch_performed: false,
+      file_write_performed: false,
+      asset_archive_read_performed: false,
+      preview_loaded_or_rendered: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      image_generation_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      production_candidate_write_performed: false,
+      runtime_execution_performed: false,
+      real_manifest_read_performed: false,
+      real_vcpchat_read_performed: false,
+      real_vcptoolbox_read_performed: false,
+      push_tag_release_deploy_performed: false,
+      vcp_runtime_integration_proven: false
+    }
+  },
   portable_failure_capsule_evidence: {
     evidence_version: "v1",
     evidence_source: "asset_archive_failure_samples_preview_capsule",

@@ -52,7 +52,7 @@ field_rules:
     source_image_binary_read_required: false
     original_asset_required_for_portable_validation: false
   original_asset:
-    description: Original asset evidence remains blocked until explicit A5 verification.
+    description: Original asset evidence is blocked until explicit A5 verification, then may point to a verified Git-tracked durable original under asset_archive/original_assets/by_sha256/ when a checked-in execution report proves the copy.
     required:
       - storage_strategy
       - original_asset_ref
@@ -60,6 +60,7 @@ field_rules:
       - original_dimensions
       - original_mime_type
       - verification_status
+      - verification_evidence_ref
       - required_for_full_archive_ready
       - required_for_production_candidate
     storage_strategy_allowed:
@@ -67,11 +68,30 @@ field_rules:
       - missing
       - external_local
       - external_cloud
+      - git_tracked_durable_archive
+    verification_status_allowed:
+      - blocked_until_A5_authorization
+      - verified_durable_archive_git_tracked
     blocked_until_A5_requires_null:
       - original_asset_ref
       - original_sha256
       - original_dimensions
       - original_mime_type
+      - verification_evidence_ref
+    verified_git_tracked_durable_archive:
+      required:
+        - original_asset_ref
+        - original_sha256
+        - original_dimensions
+        - original_mime_type
+        - verification_evidence_ref
+      path_scope:
+        project_relative_only: true
+        allowed_roots:
+          - asset_archive/original_assets/by_sha256/
+        absolute_paths_allowed: false
+        path_escape_allowed: false
+      sha256_filename_stem_must_match_original_sha256: true
   recovery:
     required:
       - clone_restore_preview_capsule_ready
