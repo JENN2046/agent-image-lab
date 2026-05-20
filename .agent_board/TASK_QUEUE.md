@@ -11682,3 +11682,40 @@ VCP_memory_write_performed: false
 production_candidate_write_performed: false
 recommended_next: runs_restore_verification_authorization_package_draft_commit_readiness_gate
 ```
+
+## BHA / AGENTS v0.3.1 Selective Adaptation Plan
+
+```text
+- [x] ID: bha_agents_v0_3_1_selective_adaptation_plan_gate
+      Title: BHA / AGENTS v0.3.1 selective adaptation plan
+      Reason: user asked to capture how the external AGENTS v0.3.1 / BHA dry-run material should fit this project without replacing the A4.8 constitution.
+      Changed files: docs/BHA_AGENTS_V0_3_1_SELECTIVE_ADAPTATION_PLAN.md; .agent_board resume surfaces.
+      Boundary: docs-only; no AGENTS.md replacement; no zip extraction; no BHA runtime creation; no A5/runtime/provider/plugin/API/image generation/DailyNote/VCP memory/real manifest/VCP source read.
+      Validation: git diff --check passed; validate_agent_board_state passed; validate-agent-image-lab-local passed with manual-review warnings; validate_mvp passed.
+      Result: completed_validated.
+
+- [x] ID: bha_agents_v0_3_1_overlay_patch_draft_gate
+      Title: BHA-aware overlay additive patch
+      Reason: user approved the next gate from the selective adaptation plan.
+      Changed files: AGENTS.autopilot-overlay.md; scripts/validate_mvp.ps1; .agent_board resume surfaces.
+      Boundary: additive terminology/evidence patch plus MVP allowlist sync only; no AGENTS.md replacement; no .bha runtime creation; no zip extraction; no A5/runtime/provider/plugin/API/image generation/DailyNote/VCP memory/real manifest/VCP source read.
+      Validation: git diff --check passed; validate_agent_board_state passed; validate-agent-image-lab-local passed with manual-review warnings; validate_mvp passed.
+      Result: completed_validated.
+
+- [x] ID: governance_dry_run_acceptance_matrix_projectization_gate
+      Title: Projectize governance dry-run acceptance matrix
+      Reason: user approved continuing from the overlay patch gate.
+      Changed files: docs/GOVERNANCE_DRY_RUN_ACCEPTANCE_MATRIX.md; .agent_board resume surfaces.
+      Boundary: project-specific dry-run matrix only; no AGENTS.md replacement; no full zip extraction; no .bha runtime creation; no A5/runtime/provider/plugin/API/image generation/DailyNote/VCP memory/real manifest/VCP source read.
+      Validation: git diff --check passed; validate_agent_board_state passed; validate-agent-image-lab-local passed with manual-review warnings; validate_mvp passed.
+      Result: completed_validated.
+
+- [ ] ID: governance_matrix_commit_readiness_or_manual_review_gate
+      Title: Governance matrix commit readiness or manual review
+      Reason: optional next step after validation, depending on whether the user wants a local commit.
+      Scope: inspect exact changed files, decide whether to prepare guarded local commit or leave changes for manual review.
+      Allowed files: no new content files unless validation closeout needs board-only correction.
+      Forbidden files/actions: git add .; push/tag/release/deploy; A5/runtime/provider/plugin/API/image generation/DailyNote/VCP memory/real manifest/VCP source reads.
+      Validation: git status --short --branch; git diff --stat; git diff --check; exact-file staging only if user authorizes commit.
+      Stop condition: user does not authorize commit, validation fails, or changed files fall outside the task chain.
+```

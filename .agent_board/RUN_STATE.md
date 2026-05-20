@@ -16026,3 +16026,102 @@ VCP_memory_write_performed: false
 production_candidate_write_performed: false
 recommended_next: runs_restore_verification_authorization_package_draft_commit_readiness_gate
 ```
+
+## bha_agents_v0_3_1_selective_adaptation_plan_gate
+
+```yaml
+phase: bha_agents_v0_3_1_selective_adaptation_plan_gate
+status: completed_validated
+mode: A4.8 docs-only / governance planning
+plan_ref: docs/BHA_AGENTS_V0_3_1_SELECTIVE_ADAPTATION_PLAN.md
+decision: selectively_adapt_external_agents_v0_3_1_bha_material
+replacement_allowed: false
+project_agents_md_modified: false
+overlay_modified: false
+zip_extracted_into_repo: false
+bha_runtime_required: false
+bha_runtime_created: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+runtime_execution_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+validation:
+  - git diff --check: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - scripts/validate-agent-image-lab-local.ps1: passed_with_manual_review_warnings
+  - scripts/validate_mvp.ps1: passed
+recommended_next: bha_agents_v0_3_1_overlay_patch_draft_gate
+```
+
+## bha_agents_v0_3_1_overlay_patch_draft_gate
+
+```yaml
+phase: bha_agents_v0_3_1_overlay_patch_draft_gate
+status: completed_validated
+mode: A4.8 overlay additive patch plus validation allowlist sync
+overlay_ref: AGENTS.autopilot-overlay.md
+source_plan_ref: docs/BHA_AGENTS_V0_3_1_SELECTIVE_ADAPTATION_PLAN.md
+patch_type: additive_only
+validation_sync_ref: scripts/validate_mvp.ps1
+project_agents_md_modified: false
+bha_runtime_required: false
+bha_runtime_created: false
+zip_extracted_into_repo: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+runtime_execution_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+validation:
+  - git diff --check: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - scripts/validate-agent-image-lab-local.ps1: passed_with_manual_review_warnings
+  - scripts/validate_mvp.ps1: passed
+recommended_next: governance_dry_run_acceptance_matrix_projectization_gate
+```
+
+## governance_dry_run_acceptance_matrix_projectization_gate
+
+```yaml
+phase: governance_dry_run_acceptance_matrix_projectization_gate
+status: completed_validated
+mode: A4.8 docs-only / governance acceptance planning
+matrix_ref: docs/GOVERNANCE_DRY_RUN_ACCEPTANCE_MATRIX.md
+source_plan_ref: docs/BHA_AGENTS_V0_3_1_SELECTIVE_ADAPTATION_PLAN.md
+overlay_ref: AGENTS.autopilot-overlay.md
+project_agents_md_modified: false
+external_package_imported: false
+zip_extracted_into_repo: false
+bha_runtime_required: false
+bha_runtime_created: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+runtime_execution_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+push_tag_release_deploy_performed: false
+validation:
+  - git diff --check: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - scripts/validate-agent-image-lab-local.ps1: passed_with_manual_review_warnings
+  - scripts/validate_mvp.ps1: passed
+recommended_next: governance_matrix_commit_readiness_or_manual_review_gate
+```

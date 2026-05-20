@@ -24300,3 +24300,83 @@ VCP_memory_write_performed: false
 production_candidate_write_performed: false
 recommended_next: runs_restore_verification_authorization_package_draft_commit_readiness_gate
 ```
+
+## BHA / AGENTS v0.3.1 Selective Adaptation Plan Checkpoint
+
+```yaml
+phase: bha_agents_v0_3_1_selective_adaptation_plan_gate
+status: completed_validated
+completed:
+  - reviewed current project hard stops and board state
+  - confirmed no existing BHA / AGENTS v0.3.1 adaptation document
+  - added docs/BHA_AGENTS_V0_3_1_SELECTIVE_ADAPTATION_PLAN.md
+  - recorded selective adaptation decision
+changed:
+  - docs/BHA_AGENTS_V0_3_1_SELECTIVE_ADAPTATION_PLAN.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/CHECKPOINT.md
+validated:
+  - git diff --check: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - scripts/validate-agent-image-lab-local.ps1: passed_with_manual_review_warnings
+  - scripts/validate_mvp.ps1: passed
+not_validated: []
+risk: docs-only governance patch; no A5 authority opened
+next: optionally draft a narrow additive overlay patch
+```
+
+## BHA / AGENTS v0.3.1 Overlay Patch Draft Checkpoint
+
+```yaml
+phase: bha_agents_v0_3_1_overlay_patch_draft_gate
+status: completed_validated
+completed:
+  - added BHA state vocabulary to AGENTS.autopilot-overlay.md
+  - clarified .agent_board continuity is not runtime proof
+  - clarified BHA is not mandatory for existing A5 packages by default
+  - added evidence and validation honesty rules
+  - synced validate_mvp current A4 allowlist for AGENTS.autopilot-overlay.md
+changed:
+  - AGENTS.autopilot-overlay.md
+  - scripts/validate_mvp.ps1
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/CHECKPOINT.md
+validated:
+  - git diff --check: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - scripts/validate-agent-image-lab-local.ps1: passed_with_manual_review_warnings
+  - scripts/validate_mvp.ps1: passed
+not_validated: []
+risk: overlay governance patch plus validation allowlist sync; no A5 authority opened
+next: optionally projectize a compact governance dry-run matrix
+```
+
+## Governance Dry-Run Acceptance Matrix Checkpoint
+
+```yaml
+phase: governance_dry_run_acceptance_matrix_projectization_gate
+status: completed_validated
+completed:
+  - added docs/GOVERNANCE_DRY_RUN_ACCEPTANCE_MATRIX.md
+  - converted external dry-run package ideas into Agent Image Lab-specific acceptance scenarios
+  - preserved A4.8 default mode and existing A5 authorization mechanics
+  - confirmed the matrix does not import the external package or create BHA runtime files
+changed:
+  - docs/GOVERNANCE_DRY_RUN_ACCEPTANCE_MATRIX.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/CHECKPOINT.md
+validated:
+  - git diff --check: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - scripts/validate-agent-image-lab-local.ps1: passed_with_manual_review_warnings
+  - scripts/validate_mvp.ps1: passed
+not_validated: []
+risk: docs-only governance matrix; no A5 authority opened
+next: decide whether to prepare guarded local commit or leave changes for manual review
+```

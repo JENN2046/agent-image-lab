@@ -84,6 +84,43 @@ Allowed without additional authorization, if inside the project root:
 
 ---
 
+## 2.5 BHA-Aware Governance Vocabulary
+
+This project may use BHA terminology as a governance vocabulary, but it is not
+BHA-dependent by default.
+
+Valid BHA state labels:
+
+```text
+BHA_ABSENT
+BHA_DETECTED
+BHA_VERIFIED
+BHA_STALE
+BHA_INVALID
+```
+
+Use them as follows:
+
+- `BHA_ABSENT`: no BHA runtime surfaces are present.
+- `BHA_DETECTED`: BHA-like files or directories exist, but verifier evidence was not checked.
+- `BHA_VERIFIED`: readable BHA policy/mission plus verifier checks passed for the current claim.
+- `BHA_STALE`: BHA evidence exists, but freshness is not proven for the current claim.
+- `BHA_INVALID`: BHA verifier, policy, mission, or evidence failed.
+
+Rules:
+
+- `.agent_board` is continuity state, not runtime proof.
+- BHA file existence is not proof.
+- Only `BHA_VERIFIED` may support a BHA-backed trust claim.
+- If BHA is absent, continue under `AGENTS.md` text governance and `.agent_board`
+  continuity only.
+- Do not make BHA runtime mandatory for existing Agent Image Lab A5 authorization
+  packages unless a later explicit policy gate approves that change.
+- Do not create `.bha/`, run BHA commands, issue capabilities, or consume
+  capabilities unless a later exact allowlist authorizes those actions.
+
+---
+
 ## 3. Memory Policy Summary
 
 DailyNote and memory-related examples must obey:
@@ -183,6 +220,15 @@ bash scripts/validate-agent-image-lab-local.sh
 ```
 
 Do not claim validation that was not run.
+
+Evidence and closeout rules:
+
+- Do not claim BHA-backed proof unless BHA state is `BHA_VERIFIED`.
+- Do not claim `.agent_board` status as machine-verifiable proof.
+- Name the actual evidence source: command output, validator result, checked file,
+  or explicit closeout record.
+- Mark skipped validation plainly.
+- Targeted checks do not equal full validation.
 
 Use result labels:
 

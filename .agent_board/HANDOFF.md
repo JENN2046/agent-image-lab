@@ -14012,3 +14012,98 @@ VCP_memory_write_performed: false
 production_candidate_write_performed: false
 recommended_next: runs_restore_verification_authorization_package_draft_commit_readiness_gate
 ```
+
+## BHA / AGENTS v0.3.1 Selective Adaptation Plan Handoff
+
+```yaml
+phase: bha_agents_v0_3_1_selective_adaptation_plan_gate
+status: completed_validated
+workspace: A:/agent-image-lab/agent-image-lab-v0.2
+branch: master
+plan_ref: docs/BHA_AGENTS_V0_3_1_SELECTIVE_ADAPTATION_PLAN.md
+summary: >-
+  Captured a selective adaptation plan for the external AGENTS v0.3.1 / BHA
+  dry-run package. The plan recommends importing BHA state vocabulary,
+  commit_policy terminology, validation honesty, evidence closeout rules, and
+  dry-run acceptance matrices while preserving project A4.8, exact-file staging,
+  and current A5 authorization mechanics.
+not_authorized:
+  - replace AGENTS.md
+  - extract the zip package into the repository
+  - create BHA runtime files
+  - require BHA for all existing A5 flows
+  - provider/plugin/API/image generation
+  - DailyNote or VCP memory write
+  - runtime execution
+  - real manifest / VCPChat / VCPToolBox source read
+  - push/tag/release/deploy
+validation:
+  - git diff --check: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - scripts/validate-agent-image-lab-local.ps1: passed_with_manual_review_warnings
+  - scripts/validate_mvp.ps1: passed
+next_safe_action: optionally draft a narrow additive overlay patch
+```
+
+## BHA / AGENTS v0.3.1 Overlay Patch Draft Handoff
+
+```yaml
+phase: bha_agents_v0_3_1_overlay_patch_draft_gate
+status: completed_validated
+workspace: A:/agent-image-lab/agent-image-lab-v0.2
+branch: master
+overlay_ref: AGENTS.autopilot-overlay.md
+source_plan_ref: docs/BHA_AGENTS_V0_3_1_SELECTIVE_ADAPTATION_PLAN.md
+summary: >-
+  Added BHA state vocabulary and evidence honesty rules to the project overlay
+  without changing the root AGENTS.md, default A4.8 mode, or current A5
+  authorization mechanics. Synced scripts/validate_mvp.ps1 so the existing
+  overlay file is accepted by the current A4 changed-file scope.
+not_authorized:
+  - replace AGENTS.md
+  - create .bha runtime files
+  - extract the external zip package
+  - make BHA mandatory for existing A5 flows
+  - provider/plugin/API/image generation
+  - DailyNote or VCP memory write
+  - runtime execution
+  - real manifest / VCPChat / VCPToolBox source read
+  - push/tag/release/deploy
+validation:
+  - git diff --check: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - scripts/validate-agent-image-lab-local.ps1: passed_with_manual_review_warnings
+  - scripts/validate_mvp.ps1: passed
+next_safe_action: optionally projectize a compact governance dry-run matrix
+```
+
+## Governance Dry-Run Acceptance Matrix Handoff
+
+```yaml
+phase: governance_dry_run_acceptance_matrix_projectization_gate
+status: completed_validated
+workspace: A:/agent-image-lab/agent-image-lab-v0.2
+branch: master
+matrix_ref: docs/GOVERNANCE_DRY_RUN_ACCEPTANCE_MATRIX.md
+source_plan_ref: docs/BHA_AGENTS_V0_3_1_SELECTIVE_ADAPTATION_PLAN.md
+summary: >-
+  Projectized the external dry-run acceptance ideas into a compact Agent Image
+  Lab governance matrix covering BHA absence/detection, board-not-proof,
+  vague approval non-escalation, validation honesty, exact-file staging, and
+  real runs/image verification hard stops.
+not_authorized:
+  - replace AGENTS.md
+  - extract the external zip package
+  - create .bha runtime files
+  - provider/plugin/API/image generation
+  - DailyNote or VCP memory write
+  - runtime execution
+  - real manifest / VCPChat / VCPToolBox source read
+  - push/tag/release/deploy
+validation:
+  - git diff --check: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - scripts/validate-agent-image-lab-local.ps1: passed_with_manual_review_warnings
+  - scripts/validate_mvp.ps1: passed
+next_safe_action: decide whether to prepare guarded local commit or leave changes for manual review
+```

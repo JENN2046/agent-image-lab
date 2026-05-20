@@ -7701,6 +7701,7 @@ if (-not $node) {
       '.env.local.example',
       '.gitignore',
       'AGENTS.md',
+      'AGENTS.autopilot-overlay.md',
       'CLAUDE.md',
       'README.md',
       'MANIFEST.md',
