@@ -24301,6 +24301,50 @@ production_candidate_write_performed: false
 recommended_next: runs_restore_verification_authorization_package_draft_commit_readiness_gate
 ```
 
+## Checkpoint - Capsule Validator Debt Convergence Plan
+
+```text
+phase: capsule_product_core_validator_debt_convergence_train
+status: completed_validated
+mode: A4.8 batch train / docs-first only / no runtime
+completed:
+- completed Autopilot Rule Intake
+- inspected scripts/create_preview_capsule.js and scripts/create_failure_sample_capsule.js
+- inspected scripts/lib/capsule_manifest_contract.js accepted manifest requirements
+- inspected shared registry parser state
+- inspected scripts/validate_mvp.ps1 and scripts/validate_mvp_capsule_product_core.ps1 aggregation debt
+- inspected package.json validator entrypoints
+- inspected Review Console static prototype file sizes
+- created docs/CAPSULE_VALIDATOR_DEBT_CONVERGENCE_PLAN.md
+- selected accepted_capsule_creator_manifest_contract_parity_gate as first repair target
+evidence:
+- create_preview_capsule.js manifest output currently omits production_candidate_allowed, memory_write_allowed, DailyNote_write_allowed, VCP_memory_write_allowed, and commercial_delivery_allowed
+- capsule_manifest_contract.js requires those accepted top-level fields to be false
+- current checked-in accepted manifests contain those fields, so existing archive state can mask fresh creator output drift
+validation_completed:
+- git diff --check
+- node scripts/validate_agent_board_state.js
+- powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+hard_stop_flags:
+  code_changes_performed: false
+  validate_mvp_ps1_modified: false
+  helper_script_created: false
+  dependency_change_performed: false
+  actual_runs_scan_performed: false
+  image_binary_read_performed: false
+  hash_extraction_performed: false
+  dimensions_extraction_performed: false
+  preview_generation_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  runtime_browser_execution_performed: false
+recommended_next: accepted_capsule_creator_manifest_contract_parity_gate
+```
+
 ## Checkpoint - Capsule Code Debt Tasks 5-10
 
 ```text

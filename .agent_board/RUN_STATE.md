@@ -16030,6 +16030,33 @@ recommended_next: runs_restore_verification_authorization_package_draft_commit_r
 ## Current Capsule Productization Goal
 
 ```text
+phase: capsule_product_core_validator_debt_convergence_train
+status: completed_validated
+mode: A4.8 batch train / docs-first only / no runtime
+objective: create a docs-first convergence plan for capsule product-core validator/code debt and choose the first repair target
+plan_ref: docs/CAPSULE_VALIDATOR_DEBT_CONVERGENCE_PLAN.md
+creator_contract_parity_drift_exists: true
+selected_first_repair_target: accepted_capsule_creator_manifest_contract_parity_gate
+why_selected: accepted creator manifest output omits accepted top-level false fields required by scripts/lib/capsule_manifest_contract.js
+why_not_capsule_mvp_validator_slice_gate_first: validate_mvp slicing has already moved capsule product-core checks into scripts/validate_mvp_capsule_product_core.ps1; remaining debt is lower priority than creator output contract drift
+code_changes_performed: false
+validate_mvp_ps1_modified: false
+helper_script_created: false
+dependency_change_performed: false
+actual_runs_scan_performed: false
+image_binary_read_performed: false
+hash_or_dimensions_extraction_performed: false
+preview_generation_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+production_candidate_performed: false
+runtime_browser_execution_performed: false
+recommended_next: accepted_capsule_creator_manifest_contract_parity_gate
+```
+
+## Current Capsule Productization Goal
+
+```text
 phase: capsule_code_debt_tasks_5_10_gate
 status: completed_committed_pushed
 mode: A4.8 local implementation / validator code-debt followups

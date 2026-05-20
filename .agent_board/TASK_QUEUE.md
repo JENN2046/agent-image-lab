@@ -11683,6 +11683,21 @@ production_candidate_write_performed: false
 recommended_next: runs_restore_verification_authorization_package_draft_commit_readiness_gate
 ```
 
+## Current Task - Capsule Validator Debt Convergence Plan
+
+```text
+status: completed_validated
+mode: A4.8 batch train / docs-first only / no runtime
+done: inspected accepted/failure capsule creators; inspected manifest contract accepted requirements; inspected shared registry parsers; inspected validate_mvp aggregation and package.json entrypoints; inspected Review Console static surface sizes; added docs/CAPSULE_VALIDATOR_DEBT_CONVERGENCE_PLAN.md; selected accepted_capsule_creator_manifest_contract_parity_gate as first repair target
+in_progress: none
+blocked: none for docs-first plan
+remaining: next implementation gate is accepted_capsule_creator_manifest_contract_parity_gate
+selected_first_repair_target: accepted_capsule_creator_manifest_contract_parity_gate
+rejected_first_target: capsule_mvp_validator_slice_gate
+validation: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+recommended_next: accepted_capsule_creator_manifest_contract_parity_gate
+```
+
 ## Current Task - Capsule Code Debt Tasks 5-10
 
 ```text

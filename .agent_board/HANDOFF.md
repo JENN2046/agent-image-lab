@@ -14013,6 +14013,32 @@ production_candidate_write_performed: false
 recommended_next: runs_restore_verification_authorization_package_draft_commit_readiness_gate
 ```
 
+## Current Handoff Update - Capsule Validator Debt Convergence Plan
+
+```text
+phase: capsule_product_core_validator_debt_convergence_train
+status: completed_validated
+mode: A4.8 batch train / docs-first only / no runtime
+summary: Created a docs-first convergence plan for capsule product-core validator/code debt and selected accepted_capsule_creator_manifest_contract_parity_gate as the first repair target because accepted creator output omits top-level false fields required by capsule_manifest_contract accepted manifests.
+plan_ref: docs/CAPSULE_VALIDATOR_DEBT_CONVERGENCE_PLAN.md
+selected_first_repair_target: accepted_capsule_creator_manifest_contract_parity_gate
+rejected_first_target: capsule_mvp_validator_slice_gate
+rejection_reason: MVP helper slicing is already substantially done; creator/contract parity is a fresh-output correctness issue.
+code_changes_performed: false
+validate_mvp_ps1_modified: false
+helper_script_created: false
+dependency_change_performed: false
+actual_runs_scan_performed: false
+image_binary_read_performed: false
+hash_or_dimensions_extraction_performed: false
+preview_generation_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+production_candidate_performed: false
+runtime_browser_execution_performed: false
+recommended_next: accepted_capsule_creator_manifest_contract_parity_gate
+```
+
 ## Current Handoff Update - Capsule Code Debt Tasks 5-10
 
 ```text
