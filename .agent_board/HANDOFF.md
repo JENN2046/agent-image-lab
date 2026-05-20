@@ -14104,6 +14104,39 @@ validation:
 next_phase_started: false
 ```
 
+## Capsule Code Debt Audit Handoff
+
+```yaml
+phase: capsule_code_debt_audit_gate_read_only_docs_light
+status: completed_validated
+workspace: A:/agent-image-lab/agent-image-lab-v0.2
+branch: master
+audit_ref: docs/CAPSULE_CODE_DEBT_AUDIT.md
+summary: >-
+  Inspected capsule creators, capsule validators, schema/runtime binding,
+  Review Console static contracts, package scripts, and validate_mvp.ps1 growth.
+  The highest-friction debt is the 12083-line MVP validator, followed by
+  duplicated accepted/failure capsule creator safety logic and uneven registry
+  parsing between accepted and failure lanes.
+highest_priority_next: capsule_mvp_validator_slice_gate
+recommended_next: capsule_mvp_validator_slice_gate_docs_first_or_authorized_code_refactor
+not_authorized:
+  - code changes
+  - actual runs scan
+  - image binary reads
+  - hash/dimensions extraction
+  - preview generation
+  - provider/plugin/API
+  - DailyNote/VCP memory
+  - production candidate
+validation:
+  - git diff --check: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - scripts/validate-agent-image-lab-local.ps1: passed_with_manual_review_warnings
+  - scripts/validate_mvp.ps1: passed
+next_phase_started: false
+```
+
 ## BHA / AGENTS v0.3.1 Selective Adaptation Plan Handoff
 
 ```yaml

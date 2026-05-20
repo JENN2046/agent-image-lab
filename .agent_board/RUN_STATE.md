@@ -16142,6 +16142,38 @@ validation:
 next_phase_started: false
 ```
 
+## capsule_code_debt_audit_gate_read_only_docs_light
+
+```yaml
+phase: capsule_code_debt_audit_gate_read_only_docs_light
+status: completed_validated
+mode: A4.8 read-only / docs-light
+objective: inspect capsule creators, validators, schema/runtime binding drift, Review Console static contracts, and validate_mvp.ps1 growth
+audit_ref: docs/CAPSULE_CODE_DEBT_AUDIT.md
+decision: product_core_debt_identified_without_code_changes
+highest_priority_next: capsule_mvp_validator_slice_gate
+recommended_next: capsule_mvp_validator_slice_gate_docs_first_or_authorized_code_refactor
+code_changes_performed: false
+actual_runs_scan_performed: false
+runs_mutation_performed: false
+image_binary_read_performed: false
+hash_extraction_performed: false
+dimensions_extraction_performed: false
+preview_generation_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+validation:
+  - git diff --check: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - scripts/validate-agent-image-lab-local.ps1: passed_with_manual_review_warnings
+  - scripts/validate_mvp.ps1: passed
+next_phase_started: false
+```
+
 ## bha_agents_v0_3_1_selective_adaptation_plan_gate
 
 ```yaml

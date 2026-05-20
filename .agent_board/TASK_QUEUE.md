@@ -11720,12 +11720,23 @@ recommended_next: runs_restore_verification_authorization_package_draft_commit_r
       Validation: git diff --check passed; validate_agent_board_state passed; validate-agent-image-lab-local passed with manual-review warnings; validate_mvp passed.
       Result: completed_validated.
 
-- [ ] ID: capsule_code_debt_audit_gate_read_only_docs_light
+- [x] ID: capsule_code_debt_audit_gate_read_only_docs_light
       Title: Capsule code debt audit
       Reason: chosen next product move after returning from the runs stewardship support branch.
       Scope: inspect local capsule creators, validators, schema bindings, Review Console static contracts, and debt hotspots; produce a docs-light audit and recommended fix order.
       Forbidden files/actions: code changes unless separately authorized; actual runs scan; image binary reads; hash/dimensions extraction; preview generation; provider/plugin/API; DailyNote/VCP memory; production candidate; push/tag/release/deploy.
+      Changed files: docs/CAPSULE_CODE_DEBT_AUDIT.md; .agent_board resume surfaces.
+      Decision: highest priority is capsule_mvp_validator_slice_gate before creator refactor, failure registry YAML alignment, status taxonomy index, manifest schema depth, or Review Console static slicing.
+      Validation: git diff --check passed; validate_agent_board_state passed; validate-agent-image-lab-local passed with manual-review warnings; validate_mvp passed.
+      Result: completed_validated.
       Stop condition: any need for A5, runtime execution, dependency change, image read/write, runs mutation, or unclear debt remediation scope.
+
+- [ ] ID: capsule_mvp_validator_slice_gate
+      Title: Slice capsule product-core checks out of validate_mvp.ps1
+      Reason: capsule_code_debt_audit found validate_mvp.ps1 is the highest review-friction surface at 12083 lines.
+      Scope: docs-first plan or separately authorized local refactor that preserves validate_mvp.ps1 as top-level orchestrator while moving capsule aggregate calls into a focused helper.
+      Forbidden files/actions until explicit code-refactor authorization: code changes, dependency changes, actual runs scan, image binary reads, hash/dimensions extraction, preview generation, provider/plugin/API, DailyNote/VCP memory, production candidate, push/tag/release/deploy.
+      Stop condition: any change that loosens validation, skips current capsule gates, or requires runtime/A5/image/runs access.
 ```
 
 ## BHA / AGENTS v0.3.1 Selective Adaptation Plan

@@ -24383,6 +24383,35 @@ risk: docs-light roadmap and board update only; no A5 authority opened
 next: stop without starting the next phase; recommended next is capsule_code_debt_audit_gate_read_only_docs_light
 ```
 
+## Capsule Code Debt Audit Checkpoint
+
+```yaml
+phase: capsule_code_debt_audit_gate_read_only_docs_light
+status: completed_validated
+completed:
+  - inspected capsule creators
+  - inspected capsule validators
+  - inspected schema/runtime binding drift surface
+  - inspected Review Console static contracts
+  - inspected validate_mvp.ps1 growth
+  - produced code debt audit and fix order
+changed:
+  - docs/CAPSULE_CODE_DEBT_AUDIT.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/CHECKPOINT.md
+highest_priority_next: capsule_mvp_validator_slice_gate
+validated:
+  - git diff --check: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - scripts/validate-agent-image-lab-local.ps1: passed_with_manual_review_warnings
+  - scripts/validate_mvp.ps1: passed
+not_validated: []
+risk: docs-light audit only; no code changes and no A5 authority opened
+next: stop without starting the next phase; recommended next is capsule_mvp_validator_slice_gate_docs_first_or_authorized_code_refactor
+```
+
 ## BHA / AGENTS v0.3.1 Selective Adaptation Plan Checkpoint
 
 ```yaml
