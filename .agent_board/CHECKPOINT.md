@@ -25083,3 +25083,37 @@ hard_stop_flags:
   dependency_change_performed: false
 recommended_next: prepare_minimal_A5_runs_path_existence_authorization_package_then_stop
 ```
+
+## Checkpoint - Minimal A5 Runs Path Existence Authorization Package
+
+```text
+phase: prepare_minimal_A5_runs_path_existence_authorization_package
+status: completed_validated_blocked_before_A5
+mode: A4.8 authorization draft update only
+completed:
+- updated docs/RUNS_RESTORE_VERIFICATION_AUTHORIZATION_PACKAGE_DRAFT.md with the current minimal inactive A5 path-existence package
+- kept exact_allowed_project_relative_paths_under_runs empty until the user supplies real paths
+- kept image binary read, hash extraction, dimensions extraction, preview generation, runs mutation, production, provider/plugin/API, DailyNote, and VCP memory blocked
+validation_completed:
+- git diff --check
+- node scripts\validate_agent_board_state.js
+- powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1
+- powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1
+hard_stop_flags:
+  real_runs_verification_performed: false
+  actual_runs_scan_performed: false
+  directory_enumeration_performed: false
+  source_image_binary_read_performed: false
+  image_binary_read_performed: false
+  hash_extraction_performed: false
+  dimensions_extraction_performed: false
+  preview_generation_performed: false
+  runs_mutation_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+recommended_next: stop_before_A5
+```

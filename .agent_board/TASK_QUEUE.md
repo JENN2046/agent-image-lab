@@ -12054,3 +12054,24 @@ validate_capsules_result: passed
 validate_mvp_result: passed
 recommended_next: guarded_commit_and_push
 ```
+
+## Current Task - Minimal A5 Runs Path Existence Authorization Package
+
+```text
+status: completed_validated_blocked_before_A5
+mode: A4.8 authorization draft update only
+done: updated the existing runs restore verification authorization draft with a current minimal inactive A5 path-existence package
+in_progress: none
+blocked: real runs verification requires future exact user-supplied runs/ paths, max path count, output report path, reviewer, and explicit A5 activation
+remaining: none inside current A4.8 goal after commit/push
+package_ref: docs/RUNS_RESTORE_VERIFICATION_AUTHORIZATION_PACKAGE_DRAFT.md
+real_runs_verification_performed: false
+actual_runs_scan_performed: false
+source_image_binary_read_performed: false
+hash_extraction_performed: false
+dimensions_extraction_performed: false
+preview_generation_performed: false
+runs_mutation_performed: false
+production_candidate_performed: false
+recommended_next: stop_before_A5
+```

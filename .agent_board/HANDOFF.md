@@ -14618,3 +14618,28 @@ validate_capsules_result: passed
 validate_mvp_result: passed
 recommended_next: prepare_minimal_A5_runs_path_existence_authorization_package_then_stop
 ```
+
+## Current Handoff Update - Minimal A5 Runs Path Existence Authorization Package
+
+```text
+phase: prepare_minimal_A5_runs_path_existence_authorization_package
+status: completed_validated_blocked_before_A5
+mode: A4.8 authorization draft update only
+summary: Updated the existing runs restore verification authorization draft with a current minimal inactive A5 package for exact listed project-relative runs/ path-existence checks only.
+package_ref: docs/RUNS_RESTORE_VERIFICATION_AUTHORIZATION_PACKAGE_DRAFT.md
+authorization_state: draft_inactive_not_executable
+unblock_requires: exact real runs/ paths; max path count; output report path; reviewer; explicit A5 activation; image/hash/dimension/preview/runs-mutation permissions kept false
+real_runs_verification_performed: false
+actual_runs_scan_performed: false
+directory_enumeration_performed: false
+source_image_binary_read_performed: false
+image_binary_read_performed: false
+hash_extraction_performed: false
+dimensions_extraction_performed: false
+preview_generation_performed: false
+runs_mutation_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+production_candidate_performed: false
+recommended_next: stop_before_A5
+```

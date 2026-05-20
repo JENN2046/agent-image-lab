@@ -16713,3 +16713,28 @@ validate_capsules_result: passed
 validate_mvp_result: passed
 recommended_next: prepare_minimal_A5_runs_path_existence_authorization_package_then_stop
 ```
+
+## Current Capsule Productization Goal
+
+```text
+phase: prepare_minimal_A5_runs_path_existence_authorization_package
+status: completed_validated_blocked_before_A5
+mode: A4.8 authorization draft update only
+objective: prepare the minimal inactive A5 package for exact listed runs/ path-existence verification and stop before execution
+package_ref: docs/RUNS_RESTORE_VERIFICATION_AUTHORIZATION_PACKAGE_DRAFT.md
+authorization_state: draft_inactive_not_executable
+exact_allowed_project_relative_paths_under_runs_supplied: false
+real_runs_verification_performed: false
+actual_runs_scan_performed: false
+directory_enumeration_performed: false
+source_image_binary_read_performed: false
+hash_extraction_performed: false
+dimensions_extraction_performed: false
+preview_generation_performed: false
+runs_mutation_performed: false
+provider_plugin_api_performed: false
+DailyNote_or_VCP_memory_write_performed: false
+production_candidate_performed: false
+dependency_change_performed: false
+recommended_next: capsule_mvp_validator_slice_gate_or_user_supplied_A5_exact_path_authorization
+```
