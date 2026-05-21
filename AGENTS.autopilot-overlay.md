@@ -83,6 +83,12 @@ destructive_action_allowed: false
 
 Green Lane executes directly and records after the fact. Amber Lane plans, executes, validates, records receipts, and continues inside budget without step-by-step approval. Red Lane stops and asks.
 
+After a meaningful Amber receipt action completes, Codex must automatically run
+a separate Green Lane status-surface sync when README, roadmap, `.agent_board`
+resume surfaces, ledger, validators, or authoritative refs changed or gained new
+refs. This Green sync is local closeout work and does not consume the preceding
+Amber action's `max_write_files` budget. It must not cross Red Lane gates.
+
 Red Lane includes push, tag, release, deploy, destructive actions, force push/history rewrite, secret value read/edit, raw private data or raw chat history exposure, external repository broad modification, broad VCPChat/VCPToolBox writes, uncapped cost, unbounded loops, overwriting existing artifacts without explicit overwrite allowance, dependency changes without exact package/action lists, and validation failure requiring non-obvious judgment.
 
 ---

@@ -5,11 +5,12 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 ## 当前权限策略
 
 ```yaml
-current_phase: smart_autopilot_governance_kernel_validation_baseline
+current_phase: amber_receipt_closeout_status_sync_policy
 standing_owner_smart_authorization_v3_active: true
 autonomy_envelope_active: true
 green_lane_direct: true
 amber_lane_autonomous_with_budget_and_receipts: true
+amber_closeout_status_sync_required: true
 red_lane_requires_user: true
 push_tag_release_deploy_allowed_automatically: false
 secret_value_access_allowed_automatically: false
@@ -20,6 +21,13 @@ recommended_next: pending_human_push_or_next_autonomous_envelope_task
 Smart Standing Authorization v3 means Codex can continue Green work directly and Amber work inside the budgeted envelope without step-by-step approval. It must stop at Red Lane conditions such as push/tag/release/deploy, destructive actions, secret value access, raw private data exposure, uncapped cost, unbounded loops, broad external repository modification, or dependency changes without an exact package/action list.
 
 `docs/SMART_AUTOPILOT_GOVERNANCE_KERNEL.md` defines the local governance kernel for v3: Goal Compiler, Truth Model, Lane Classifier, Budget Engine, Receipt Recorder, and Continuation Judge. `scripts/validate_autopilot_governance_kernel.js` validates the envelope and receipt schemas/examples and is wired into `scripts/validate_mvp.ps1`.
+
+Amber receipt closeout now has an automatic Green Lane status-sync rule: after meaningful Amber receipt work, Codex must align README, roadmap, `.agent_board` resume surfaces, ledger, validators, and authoritative refs when they changed or gained new refs. This Green sync is local closeout work and does not consume the preceding Amber action's write budget.
+
+Current Amber receipts:
+
+- Amber-01 local receipt trial: `docs/AMBER_01_LOCAL_RECEIPT_TRIAL.md`
+- Amber-02 production candidate metadata receipt replay: `docs/AMBER_02_PRODUCTION_CANDIDATE_RECEIPT_REPLAY.md`
 
 ## 当前结构导航
 

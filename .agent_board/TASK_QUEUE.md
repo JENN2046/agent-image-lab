@@ -1,6 +1,17 @@
 
 ---
 
+- [x] ID: amber_receipt_closeout_status_sync_policy
+      Title: Add automatic Green status sync after Amber receipts
+      Reason: Amber-02 proved the receipt replay but left README, roadmap, and resume surfaces behind because the Amber write budget was interpreted too narrowly.
+      Changed files: AGENTS.md; AGENTS.autopilot-overlay.md; docs/SMART_AUTOPILOT_GOVERNANCE_KERNEL.md; README.md; docs/00_project_roadmap.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md; .agent_board/CHECKPOINT.md.
+      Decision: after meaningful Amber receipt work, Codex must automatically run a separate Green Lane status-surface sync when README, roadmap, .agent_board resume surfaces, ledger, validators, or authoritative refs changed or gained new refs.
+      Result: completed_validated_guarded_local_commit.
+      Recommended next: pending_push_safety_gate_or_next_autonomous_envelope_task.
+      Stop condition: any request to push/tag/release/deploy, read secrets, perform destructive actions, call provider/plugin/API/image/memory/runtime, or write production metadata without a valid envelope.
+
+---
+
 - [x] ID: smart_autopilot_governance_kernel_validation_baseline
       Title: Build machine-verifiable envelope and receipt baseline
       Reason: Smart Standing Authorization v3 needs local schemas, examples, and validation before real Amber actions.

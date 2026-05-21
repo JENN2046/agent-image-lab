@@ -163,6 +163,7 @@ standing_owner_smart_authorization_v3:
   operating_requirements:
     - Green Lane executes directly and records after the fact
     - Amber Lane plans, executes, validates, records receipts, and continues inside budget without step-by-step approval
+    - after a meaningful Amber receipt action, Codex must automatically run a separate Green Lane status-surface sync when README, roadmap, .agent_board resume surfaces, ledger, validators, or authoritative refs changed or gained new refs
     - stop and ask when a Red Lane condition appears
     - allow only one obvious, safe, local repair or retry after a validation or transient failure
     - prefer the smallest useful action inside the envelope
@@ -185,6 +186,8 @@ Red Lane:
 ```
 
 Continuation rule: Codex may continue through multiple Amber steps when the user goal is clear, each step stays inside the envelope budget, each step has a clear target and validation path, no Red condition appears, each meaningful Amber action records a receipt, and any validation or transient failure receives at most one obvious safe local repair or retry.
+
+Amber closeout sync rule: after a meaningful Amber receipt action completes, Codex must automatically enter a separate Green Lane status-surface sync when README, roadmap, `.agent_board` resume surfaces, the ledger, validators, or authoritative refs changed or gained new refs. This Green sync does not consume the preceding Amber action's `max_write_files` budget. It must remain local, reversible, non-external, non-secret-bearing, non-runtime, non-dependency, non-production-writing, and non-remote. It may update README, roadmap, `.agent_board/HANDOFF.md`, `.agent_board/RUN_STATE.md`, `.agent_board/TASK_QUEUE.md`, `.agent_board/CHECKPOINT.md`, and related local validation references; it must validate and may use guarded local commit rules when validation passes.
 
 Ambiguous instructions such as `继续`, `go ahead`, or `自动推进` may continue Green work and Amber work inside the active envelope. They never cross a Red Lane gate.
 

@@ -1,6 +1,42 @@
 
 ---
 
+## Checkpoint - Amber Receipt Closeout Status Sync Policy
+
+```text
+phase: amber_receipt_closeout_status_sync_policy
+phase_id: amber_receipt_closeout_status_sync_policy
+status: completed_validated_guarded_local_commit
+completed:
+- added the automatic Green Lane status-surface sync rule after meaningful Amber receipt actions
+- clarified that the closeout sync does not consume the prior Amber action's max_write_files budget
+- aligned README and roadmap to Amber-01 / Amber-02 receipt refs
+- aligned .agent_board resume surfaces to the new closeout rule and Amber-02 state
+validation_completed:
+- git status --short --branch
+- git diff --check
+- git diff --cached --check
+- git diff --cached --name-only
+- node --check scripts/validate_autopilot_governance_kernel.js
+- node scripts/validate_autopilot_governance_kernel.js
+- node scripts/validate_agent_board_state.js
+- powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+not_performed:
+- no push
+- no tag/release/deploy
+- no provider/plugin/API/image generation
+- no DailyNote/VCP memory write
+- no real manifest/VCPChat/VCPToolBox read
+- no dependency change
+- no runtime probe
+- no secret read
+- no production metadata write
+recommended_next: pending_push_safety_gate_or_next_autonomous_envelope_task
+```
+
+---
+
 ## Checkpoint - Smart Autopilot Governance Kernel Validation Baseline
 
 ```text

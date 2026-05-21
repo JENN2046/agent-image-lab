@@ -126,6 +126,29 @@ next_auto_step_allowed
 stop_reason
 ```
 
+## Amber Closeout Sync
+
+After a meaningful Amber receipt action completes, Codex must automatically run a
+separate Green Lane status-surface sync when any of these surfaces changed or
+gained new authoritative refs:
+
+```text
+README
+roadmap
+.agent_board resume surfaces
+Autopilot ledger
+validators
+local validation references
+```
+
+This sync is local closeout work. It does not consume the preceding Amber
+action's `max_write_files` budget. It must remain local, reversible,
+non-external, non-secret-bearing, non-runtime, non-dependency,
+non-production-writing, and non-remote. It may update README, roadmap,
+`.agent_board/HANDOFF.md`, `.agent_board/RUN_STATE.md`,
+`.agent_board/TASK_QUEUE.md`, `.agent_board/CHECKPOINT.md`, and related local
+validation references. It must run validation before completion.
+
 ### Continuation Judge
 
 Allows continued autonomy only when all are true:

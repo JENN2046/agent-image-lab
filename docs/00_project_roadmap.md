@@ -5,9 +5,9 @@
 ## 当前产品主线恢复点
 
 ```yaml
-current_phase: smart_autopilot_governance_kernel_validation_baseline
+current_phase: amber_receipt_closeout_status_sync_policy
 phase_status: completed_validated_guarded_local_commit
-source_phase: standing_owner_smart_authorization_v3_budgeted_autonomy_envelope
+source_phase: amber_02_production_candidate_metadata_receipt_replay
 validated_baseline:
   capsule_product_core_validator_route: completed
   full_asset_archive_manifest_bridge: aligned_to_verified_git_tracked_durable_archive
@@ -32,6 +32,11 @@ smart_autopilot_governance_kernel_ref: docs/SMART_AUTOPILOT_GOVERNANCE_KERNEL.md
 smart_autopilot_governance_validator_ref: scripts/validate_autopilot_governance_kernel.js
 autopilot_autonomy_envelope_schema_ref: schemas/autopilot_autonomy_envelope.schema.yaml
 autopilot_execution_receipt_schema_ref: schemas/autopilot_execution_receipt.schema.yaml
+autopilot_ledger_ref: .agent_board/AUTOPILOT_LEDGER.md
+amber_01_local_receipt_trial_ref: docs/AMBER_01_LOCAL_RECEIPT_TRIAL.md
+amber_01_local_receipt_trial_fixture_ref: tests/schema_examples/autopilot_execution_receipt.amber_01_local_trial.example.json
+amber_02_production_candidate_receipt_replay_ref: docs/AMBER_02_PRODUCTION_CANDIDATE_RECEIPT_REPLAY.md
+amber_02_production_candidate_receipt_fixture_ref: tests/schema_examples/autopilot_execution_receipt.amber_02_production_candidate_replay.example.json
 branch: master
 origin_branch: origin/master
 head_commit_before_edit: 38da1aa
@@ -46,6 +51,7 @@ standing_owner_smart_authorization_v3_active: true
 autonomy_envelope_active: true
 green_lane_direct: true
 amber_lane_autonomous_with_budget_and_receipts: true
+amber_closeout_status_sync_required: true
 red_lane_requires_user: true
 A5_allowed_in_amber_envelope: true
 provider_plugin_API_image_allowed_in_amber_envelope: true

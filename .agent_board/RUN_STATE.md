@@ -1,6 +1,29 @@
 
 ---
 
+## amber_receipt_closeout_status_sync_policy
+
+```text
+phase: amber_receipt_closeout_status_sync_policy
+phase_id: amber_receipt_closeout_status_sync_policy
+status: completed_validated_guarded_local_commit
+mode: Green Lane status-surface sync after Amber receipt
+objective: make Amber receipt closeout status sync automatic and align Amber-02 refs across README, roadmap, and resume surfaces
+branch: master
+origin_branch: origin/master
+source_receipt: amber_02_production_candidate_metadata_receipt_replay
+source_receipt_commit: d5b474b
+standing_owner_smart_authorization_v3_active: true
+autonomy_envelope_active: true
+amber_closeout_status_sync_required: true
+green_sync_consumes_prior_amber_write_budget: false
+changed_surfaces: AGENTS.md; AGENTS.autopilot-overlay.md; docs/SMART_AUTOPILOT_GOVERNANCE_KERNEL.md; README.md; docs/00_project_roadmap.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md; .agent_board/CHECKPOINT.md
+not_performed: no push; no tag/release/deploy; no provider/plugin/API/image generation; no DailyNote/VCP memory write; no real manifest/VCPChat/VCPToolBox read; no dependency change; no runtime probe; no secret read; no production metadata write
+recommended_next: pending_push_safety_gate_or_next_autonomous_envelope_task
+```
+
+---
+
 ## smart_autopilot_governance_kernel_validation_baseline
 
 ```text

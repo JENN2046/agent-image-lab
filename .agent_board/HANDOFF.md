@@ -1,6 +1,24 @@
 
 ---
 
+## Current Handoff Update - Amber Receipt Closeout Status Sync Policy
+
+```text
+phase: amber_receipt_closeout_status_sync_policy
+phase_id: amber_receipt_closeout_status_sync_policy
+status: completed_validated_guarded_local_commit
+mode: Green Lane status-surface sync after Amber receipt
+summary: Added the missing rule that a meaningful Amber receipt action must automatically trigger a separate Green Lane status-surface sync when README, roadmap, .agent_board resume surfaces, ledger, validators, or authoritative refs changed or gained new refs. Also aligned Amber-02 refs across README, roadmap, and resume surfaces.
+source_receipt: amber_02_production_candidate_metadata_receipt_replay
+source_receipt_commit: d5b474b
+policy_refs: AGENTS.md; AGENTS.autopilot-overlay.md; docs/SMART_AUTOPILOT_GOVERNANCE_KERNEL.md
+amber_refs: docs/AMBER_01_LOCAL_RECEIPT_TRIAL.md; docs/AMBER_02_PRODUCTION_CANDIDATE_RECEIPT_REPLAY.md; .agent_board/AUTOPILOT_LEDGER.md
+not_performed: no push, no tag/release/deploy, no provider/plugin/API/image generation, no DailyNote/VCP memory write, no real manifest/VCPChat/VCPToolBox read, no dependency change, no runtime probe, no secret read, no production metadata write.
+recommended_next: pending_push_safety_gate_or_next_autonomous_envelope_task.
+```
+
+---
+
 ## Current Handoff Update - Smart Autopilot Governance Kernel Validation Baseline
 
 ```text
