@@ -1,5 +1,21 @@
 ---
 
+- [x] ID: next_safe_task_orchestrator_v1
+      Title: Select the next safe executable task deterministically
+      Reason: Product-grade autopilot needs a local selector that advances only Green or valid budgeted Amber tasks while preserving Red blockers.
+      Source snapshot: tests/schema_examples/autopilot_goal_decomposition_materialized.example.json.
+      selected_next_safe_task: add_goal_decomposition_runtime_validation.
+      eligible_executable_tasks: add_goal_decomposition_runtime_validation; future_budgeted_amber_receipt_task.
+      blocked_red_items: blocked-red-push-origin-master.
+      Orchestrator: scripts/orchestrate_next_safe_task.js.
+      Validator: scripts/validate_next_safe_task_orchestrator.js.
+      Result: completed_validated_guarded_local_commit.
+      Commit message: test: add next safe task orchestrator.
+      Recommended next: amber_dry_run_execution_loop_v1.
+      Stop condition: Red Lane action, invalid Amber envelope, missing receipt requirement, missing validation, secret read, destructive action, provider/plugin/API/image/memory/source-read/dependency/runtime requirement, or validation failure requiring judgment.
+
+---
+
 - [x] ID: agent_board_queue_reconciler_v1
       Title: Reconcile materialized goal decomposition snapshot with .agent_board queue surfaces
       Reason: Prevent drift between goal_id, current goal, executable queue, blocked Red items, next_safe_task, RUN_STATE, and CHECKPOINT.

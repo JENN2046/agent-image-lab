@@ -35,6 +35,11 @@ queue and resume surfaces so `goal`, `route_plan`, executable `task_queue`,
 `blocked_red_items`, and `next_safe_task` do not drift. It is not a real executor
 and must not call external systems or execute queued tasks.
 
+Next Safe Task Orchestrator rule: `scripts/orchestrate_next_safe_task.js` selects
+the next safe executable task from the materialized snapshot. Red tasks remain
+blocked, Green tasks may be selected directly, and Amber tasks require envelope,
+budget, receipt, validation, and stop-condition proof before selection.
+
 This document does not authorize provider contact, plugin calls, API calls,
 image generation, DailyNote writes, VCP memory writes, real manifest reads, real
 VCPChat reads, real VCPToolBox reads, dependency changes, runtime probes, push,

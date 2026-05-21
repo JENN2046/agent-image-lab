@@ -128,6 +128,16 @@ Risk: If the receipt or budget model stays prose-only, future Amber actions coul
 Mitigation: The validator checks lane definitions, default budgets, Red gates, Amber receipt requirements, example fixtures, and no-real-A5 guard flags.
 ---
 
+## DECISION-AIL-AUTO-017 — Next Safe Task Orchestrator is local selection only
+
+Status: accepted.
+
+Decision: The Next Safe Task Orchestrator selects only Green or valid budgeted Amber tasks from the materialized snapshot and preserves Red blocked items. It previews advancement but does not execute tasks or write production state.
+
+Boundary: This is local deterministic orchestration validation only. It does not call provider/plugin/API/image/memory/source-read/runtime/dependency actions, read secrets, or authorize push/tag/release/deploy.
+
+---
+
 ## DECISION-AIL-AUTO-016 — Agent board queue reconciliation is required for materialized snapshots
 
 Status: accepted.

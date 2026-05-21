@@ -5,7 +5,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 ## 当前权限策略
 
 ```yaml
-current_phase: agent_board_queue_reconciler_v1
+current_phase: next_safe_task_orchestrator_v1
 current_autonomy_model: Smart Standing Authorization v3
 startup_default_model: Smart Standing Authorization v3
 a4_8_status: retained_as_green_lane_substrate
@@ -20,12 +20,13 @@ cost_rollback_schema_hardened: true
 goal_decomposition_runtime_active: true
 goal_decomposition_materializer_active: true
 agent_board_queue_reconciler_active: true
+next_safe_task_orchestrator_active: true
 amber_closeout_status_sync_required: true
 red_lane_requires_user: true
 push_tag_release_deploy_allowed_automatically: false
 secret_value_access_allowed_automatically: false
 destructive_action_allowed_automatically: false
-recommended_next: pending_goal_compiler_driven_autonomous_task_after_queue_reconciliation
+recommended_next: amber_dry_run_execution_loop_v1
 ```
 
 Smart Standing Authorization v3 means Codex can continue Green work directly and Amber work inside the budgeted envelope without step-by-step approval. It must stop at Red Lane conditions such as push/tag/release/deploy, destructive actions, secret value access, raw private data exposure, uncapped cost, unbounded loops, broad external repository modification, or dependency changes without an exact package/action list.
@@ -39,6 +40,8 @@ Smart Standing Authorization v3 means Codex can continue Green work directly and
 `scripts/materialize_autopilot_goal_decomposition.js` is the local dry-run materializer for that runtime. It reads the runtime example and emits a deterministic materialized snapshot; it is not a real executor and does not call provider/plugin/API/image/memory/source-read/runtime/dependency actions.
 
 `scripts/reconcile_agent_board_queue.js` validates that the materialized snapshot is represented by `.agent_board` queue surfaces. It checks the current goal, executable queue, blocked Red items, next safe task, run state, checkpoint, and no-push boundary as local consistency proof only; it does not execute tasks or contact external systems.
+
+`scripts/orchestrate_next_safe_task.js` selects the next safe executable task from the materialized snapshot. It can select Green tasks directly and Amber tasks only when envelope, budget, receipt, validation, and stop-condition requirements are present; it is local dry-run orchestration, not a real executor.
 
 Amber receipt closeout now has an automatic Green Lane status-sync rule: after meaningful Amber receipt work, Codex must align README, roadmap, `.agent_board` resume surfaces, ledger, validators, and authoritative refs when they changed or gained new refs. This Green sync is local closeout work and does not consume the preceding Amber action's write budget.
 

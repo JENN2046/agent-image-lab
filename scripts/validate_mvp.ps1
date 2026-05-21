@@ -61,6 +61,8 @@ $requiredFiles = @(
   'scripts/materialize_autopilot_goal_decomposition.js',
   'scripts/reconcile_agent_board_queue.js',
   'scripts/validate_agent_board_queue_reconciliation.js',
+  'scripts/orchestrate_next_safe_task.js',
+  'scripts/validate_next_safe_task_orchestrator.js',
   'scripts/validate_local_checkpoint_manifest.js',
   'scripts/validate_local_commit_scope.js',
   'scripts/validate_post_push_state.js',
@@ -253,6 +255,7 @@ $requiredFiles = @(
   'docs/SMART_AUTOPILOT_GOVERNANCE_KERNEL.md',
   'docs/AUTOPILOT_GOAL_COMPILER_V1.md',
   'docs/AUTOPILOT_GOAL_DECOMPOSITION_RUNTIME.md',
+  'docs/AUTOPILOT_NEXT_SAFE_TASK_ORCHESTRATOR.md',
   'schemas/autopilot_autonomy_envelope.schema.yaml',
   'schemas/autopilot_execution_receipt.schema.yaml',
   'schemas/autopilot_goal.schema.yaml',
@@ -266,6 +269,7 @@ $requiredFiles = @(
   'tests/schema_examples/autopilot_goal_decomposition_runtime.example.json',
   'tests/schema_examples/autopilot_goal_decomposition_materialized.example.json',
   'tests/schema_examples/agent_board_queue_reconciliation.example.json',
+  'tests/schema_examples/next_safe_task_orchestration.example.json',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -11825,6 +11829,28 @@ process.exit(child.status || 0);
     }
     if ($agentBoardQueueReconciliation.real_manifest_read_performed -ne $false -or $agentBoardQueueReconciliation.real_vcpchat_read_performed -ne $false -or $agentBoardQueueReconciliation.real_vcptoolbox_read_performed -ne $false -or $agentBoardQueueReconciliation.dependency_change_performed -ne $false -or $agentBoardQueueReconciliation.runtime_probe_performed -ne $false -or $agentBoardQueueReconciliation.secret_value_read_performed -ne $false -or $agentBoardQueueReconciliation.push_tag_release_deploy_performed -ne $false) {
       Add-Failure "Agent board queue reconciliation must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
+    }
+  }
+
+  $nextSafeTaskOrchestratorOutput = & node (Join-Path $Root 'scripts/validate_next_safe_task_orchestrator.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Next Safe Task Orchestrator validation exited with failure"
+  } else {
+    $nextSafeTaskOrchestrator = ($nextSafeTaskOrchestratorOutput -join "`n") | ConvertFrom-Json
+    if ($nextSafeTaskOrchestrator.passed -ne $true -or $nextSafeTaskOrchestrator.phase -ne 'next_safe_task_orchestrator_v1') {
+      Add-Failure "Next Safe Task Orchestrator v1 validation must pass"
+    }
+    if (-not $nextSafeTaskOrchestrator.selected_next_safe_task -or $nextSafeTaskOrchestrator.eligible_executable_task_count -lt 1 -or $nextSafeTaskOrchestrator.blocked_red_items_preserved -lt 1) {
+      Add-Failure "Next Safe Task Orchestrator must select a task, preserve executable tasks, and keep Red items blocked"
+    }
+    if ($nextSafeTaskOrchestrator.deterministic_output_verified -ne $true -or $nextSafeTaskOrchestrator.fixture_verified -ne $true -or $nextSafeTaskOrchestrator.no_real_state_write -ne $true) {
+      Add-Failure "Next Safe Task Orchestrator must verify deterministic fixture output and avoid real state writes"
+    }
+    if ($nextSafeTaskOrchestrator.provider_contact_performed -ne $false -or $nextSafeTaskOrchestrator.plugin_call_performed -ne $false -or $nextSafeTaskOrchestrator.api_call_performed -ne $false -or $nextSafeTaskOrchestrator.image_generation_performed -ne $false -or $nextSafeTaskOrchestrator.DailyNote_write_performed -ne $false -or $nextSafeTaskOrchestrator.VCP_memory_write_performed -ne $false) {
+      Add-Failure "Next Safe Task Orchestrator must not perform provider, plugin, API, image, DailyNote, or VCP memory actions"
+    }
+    if ($nextSafeTaskOrchestrator.real_manifest_read_performed -ne $false -or $nextSafeTaskOrchestrator.real_vcpchat_read_performed -ne $false -or $nextSafeTaskOrchestrator.real_vcptoolbox_read_performed -ne $false -or $nextSafeTaskOrchestrator.dependency_change_performed -ne $false -or $nextSafeTaskOrchestrator.runtime_probe_performed -ne $false -or $nextSafeTaskOrchestrator.secret_value_read_performed -ne $false -or $nextSafeTaskOrchestrator.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Next Safe Task Orchestrator must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
     }
   }
 

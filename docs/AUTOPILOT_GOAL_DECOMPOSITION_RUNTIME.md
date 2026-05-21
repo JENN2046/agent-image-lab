@@ -147,6 +147,11 @@ items, next safe task, run state, checkpoint, and no-push boundary alignment. It
 is not a real executor and must not rewrite production files, execute tasks, or
 contact external systems.
 
+The Next Safe Task Orchestrator is the next local layer. It reads the
+materialized snapshot, chooses the first safe Green or valid budgeted Amber
+task, preserves Red blocked items, and emits a deterministic orchestration
+report. It previews advancement only; it does not execute the selected task.
+
 The validator must prove that the runtime example has no provider/plugin/API,
 image, memory, source-read, runtime, dependency, secret, push, tag, release, or
 deploy side-effect signals.

@@ -63,6 +63,11 @@ fails on missing required surfaces, next-safe-task drift, or missing blocked Red
 items, while allowing harmless prose differences as warnings. It is not a real
 executor and must not perform external actions.
 
+`scripts/orchestrate_next_safe_task.js` provides the local Next Safe Task
+Orchestrator. It selects only Green tasks or valid budgeted Amber tasks from the
+materialized snapshot, preserves blocked Red items, previews state advancement,
+and keeps all external side-effect flags false. It is not a real executor.
+
 ### Truth Model
 
 Uses repository reality as ground:

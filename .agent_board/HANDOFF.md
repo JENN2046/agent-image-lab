@@ -1,5 +1,27 @@
 ---
 
+## Current Handoff Update - Next Safe Task Orchestrator v1
+
+```text
+phase: next_safe_task_orchestrator_v1
+phase_id: next_safe_task_orchestrator_v1
+status: completed_validated_guarded_local_commit
+mode: Green Lane local tooling and validation
+summary: Added a deterministic local orchestrator that selects the next safe executable task from the materialized goal decomposition snapshot without executing it.
+current_autonomy_model: Smart Standing Authorization v3
+startup_default_model: Smart Standing Authorization v3
+orchestrator_ref: scripts/orchestrate_next_safe_task.js
+orchestrator_validator_ref: scripts/validate_next_safe_task_orchestrator.js
+orchestrator_fixture_ref: tests/schema_examples/next_safe_task_orchestration.example.json
+selected_next_safe_task: add_goal_decomposition_runtime_validation
+blocked_red_items_preserved: true
+commit_message: test: add next safe task orchestrator
+not_performed: no push, no tag/release/deploy, no provider/plugin/API/image generation, no DailyNote/VCP memory write, no real manifest/VCPChat/VCPToolBox read, no dependency change, no runtime probe, no secret read.
+recommended_next: amber_dry_run_execution_loop_v1.
+```
+
+---
+
 ## Current Handoff Update - Agent Board Queue Reconciler v1
 
 ```text

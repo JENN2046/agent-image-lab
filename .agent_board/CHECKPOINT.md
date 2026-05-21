@@ -1,5 +1,40 @@
 ---
 
+## Checkpoint - Next Safe Task Orchestrator v1
+
+```text
+phase: next_safe_task_orchestrator_v1
+phase_id: next_safe_task_orchestrator_v1
+status: completed_validated_guarded_local_commit
+completed:
+- added deterministic local Next Safe Task Orchestrator
+- added next-safe-task orchestration fixture
+- added independent validator and MVP wiring
+- updated docs and .agent_board resume surfaces
+latest_validation:
+- node --check scripts/orchestrate_next_safe_task.js
+- node scripts/orchestrate_next_safe_task.js
+- node --check scripts/validate_next_safe_task_orchestrator.js
+- node scripts/validate_next_safe_task_orchestrator.js
+- node scripts/validate_agent_board_state.js
+- git diff --check
+- powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1 after guarded local commit
+not_performed:
+- no push
+- no tag/release/deploy
+- no provider/plugin/API/image generation
+- no DailyNote/VCP memory write
+- no real manifest/VCPChat/VCPToolBox read
+- no dependency change
+- no runtime probe
+- no secret read
+commit_message: test: add next safe task orchestrator
+recommended_next: amber_dry_run_execution_loop_v1
+```
+
+---
+
 ## Checkpoint - Agent Board Queue Reconciler v1
 
 ```text

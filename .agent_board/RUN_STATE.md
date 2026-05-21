@@ -1,5 +1,33 @@
 ---
 
+## next_safe_task_orchestrator_v1
+
+```text
+phase: next_safe_task_orchestrator_v1
+phase_id: next_safe_task_orchestrator_v1
+status: completed_validated_guarded_local_commit
+stage: Green Lane local next-safe-task orchestration validation
+mode: Green Lane local tooling and validation
+objective: select the next safe executable task from the materialized goal decomposition snapshot
+current_task_id: next_safe_task_orchestrator_v1
+current_autonomy_model: Smart Standing Authorization v3
+startup_default_model: Smart Standing Authorization v3
+baseline_before_edit: 194355f
+ahead_count_before_edit: 3
+orchestrator_ref: scripts/orchestrate_next_safe_task.js
+orchestrator_validator_ref: scripts/validate_next_safe_task_orchestrator.js
+orchestrator_fixture_ref: tests/schema_examples/next_safe_task_orchestration.example.json
+selected_next_safe_task: add_goal_decomposition_runtime_validation
+blocked_red_items_preserved: true
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
+push_allowed: false
+validation_status: completed_validated_guarded_local_commit
+commit_message: test: add next safe task orchestrator
+recommended_next: amber_dry_run_execution_loop_v1
+```
+
+---
+
 ## agent_board_queue_reconciler_v1
 
 ```text
