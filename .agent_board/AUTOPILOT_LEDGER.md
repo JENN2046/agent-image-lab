@@ -105,6 +105,34 @@ guard:
 ```
 ---
 
+## autopilot_evolution_engine_v1
+
+```yaml
+task_id: autopilot_evolution_engine_v1
+lane: Green
+action_performed: local_governance_gap_detection_and_backlog_proposal
+backlog: tests/schema_examples/autopilot_evolution_backlog.example.json
+proposal_count: 5
+next_recommended_task: complete_autopilot_readiness_gate_v1
+red_lane_self_authorized: false
+result: completed_validated_guarded_local_commit
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+dependency_change_performed: false
+runtime_probe_performed: false
+secret_value_read_performed: false
+push_tag_release_deploy_performed: false
+```
+
+---
+
 ## amber_dry_run_execution_loop_v1
 
 ```yaml

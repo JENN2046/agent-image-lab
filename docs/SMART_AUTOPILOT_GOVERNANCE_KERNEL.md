@@ -73,6 +73,11 @@ shape without external side effects: envelope, action packet, zero-cost dry-run
 action, execution receipt, receipt registry entry, validation, and continuation
 decision.
 
+`scripts/detect_autopilot_evolution_gaps.js` is the local Evolution Engine. It
+inspects known governance docs, validators, examples, receipts, and `.agent_board`
+surfaces to propose future local tasks. It writes no live state, self-authorizes
+no Red Lane item, and exists only to keep the autopilot backlog evolving.
+
 ### Truth Model
 
 Uses repository reality as ground:

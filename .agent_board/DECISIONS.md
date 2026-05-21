@@ -128,6 +128,16 @@ Risk: If the receipt or budget model stays prose-only, future Amber actions coul
 Mitigation: The validator checks lane definitions, default budgets, Red gates, Amber receipt requirements, example fixtures, and no-real-A5 guard flags.
 ---
 
+## DECISION-AIL-AUTO-019 — Evolution Engine proposes local backlog without Red self-authorization
+
+Status: accepted.
+
+Decision: The autopilot may use a local deterministic Evolution Engine to detect governance gaps and propose future tasks, but Red Lane proposals remain blocked and require explicit authorization/action.
+
+Boundary: The engine reads known local governance surfaces only and does not execute external, runtime, provider, plugin, API, image, memory, source-read, dependency, secret, push, tag, release, or deploy actions.
+
+---
+
 ## DECISION-AIL-AUTO-018 — Amber dry-run loop proves receipts before real Amber actions
 
 Status: accepted.

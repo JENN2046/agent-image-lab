@@ -65,6 +65,8 @@ $requiredFiles = @(
   'scripts/validate_next_safe_task_orchestrator.js',
   'scripts/simulate_amber_dry_run_execution_loop.js',
   'scripts/validate_amber_dry_run_execution_loop.js',
+  'scripts/detect_autopilot_evolution_gaps.js',
+  'scripts/validate_autopilot_evolution_engine.js',
   'scripts/validate_local_checkpoint_manifest.js',
   'scripts/validate_local_commit_scope.js',
   'scripts/validate_post_push_state.js',
@@ -259,6 +261,7 @@ $requiredFiles = @(
   'docs/AUTOPILOT_GOAL_DECOMPOSITION_RUNTIME.md',
   'docs/AUTOPILOT_NEXT_SAFE_TASK_ORCHESTRATOR.md',
   'docs/AUTOPILOT_AMBER_DRY_RUN_EXECUTION_LOOP.md',
+  'docs/AUTOPILOT_EVOLUTION_ENGINE.md',
   'schemas/autopilot_autonomy_envelope.schema.yaml',
   'schemas/autopilot_execution_receipt.schema.yaml',
   'schemas/autopilot_goal.schema.yaml',
@@ -275,6 +278,7 @@ $requiredFiles = @(
   'tests/schema_examples/next_safe_task_orchestration.example.json',
   'tests/schema_examples/amber_dry_run_execution_loop.example.json',
   'tests/schema_examples/autopilot_execution_receipt.amber_dry_run_loop.example.json',
+  'tests/schema_examples/autopilot_evolution_backlog.example.json',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -11878,6 +11882,28 @@ process.exit(child.status || 0);
     }
     if ($amberDryRunExecutionLoop.real_manifest_read_performed -ne $false -or $amberDryRunExecutionLoop.real_vcpchat_read_performed -ne $false -or $amberDryRunExecutionLoop.real_vcptoolbox_read_performed -ne $false -or $amberDryRunExecutionLoop.dependency_change_performed -ne $false -or $amberDryRunExecutionLoop.runtime_probe_performed -ne $false -or $amberDryRunExecutionLoop.secret_value_read_performed -ne $false -or $amberDryRunExecutionLoop.push_tag_release_deploy_performed -ne $false) {
       Add-Failure "Amber dry-run execution loop must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
+    }
+  }
+
+  $autopilotEvolutionEngineOutput = & node (Join-Path $Root 'scripts/validate_autopilot_evolution_engine.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Autopilot Evolution Engine validation exited with failure"
+  } else {
+    $autopilotEvolutionEngine = ($autopilotEvolutionEngineOutput -join "`n") | ConvertFrom-Json
+    if ($autopilotEvolutionEngine.passed -ne $true -or $autopilotEvolutionEngine.phase -ne 'autopilot_evolution_engine_v1') {
+      Add-Failure "Autopilot Evolution Engine v1 validation must pass"
+    }
+    if ($autopilotEvolutionEngine.deterministic_output_verified -ne $true -or $autopilotEvolutionEngine.fixture_verified -ne $true -or $autopilotEvolutionEngine.detected_gap_count -lt 4) {
+      Add-Failure "Autopilot Evolution Engine must verify deterministic fixture output and multiple proposals"
+    }
+    if ($autopilotEvolutionEngine.next_recommended_task -ne 'complete_autopilot_readiness_gate_v1' -or $autopilotEvolutionEngine.local_write_targets_only -ne $true -or $autopilotEvolutionEngine.red_lane_self_authorized -ne $false) {
+      Add-Failure "Autopilot Evolution Engine must recommend the readiness gate, stay local, and avoid Red self-authorization"
+    }
+    if ($autopilotEvolutionEngine.provider_contact_performed -ne $false -or $autopilotEvolutionEngine.plugin_call_performed -ne $false -or $autopilotEvolutionEngine.api_call_performed -ne $false -or $autopilotEvolutionEngine.image_generation_performed -ne $false -or $autopilotEvolutionEngine.DailyNote_write_performed -ne $false -or $autopilotEvolutionEngine.VCP_memory_write_performed -ne $false) {
+      Add-Failure "Autopilot Evolution Engine must not perform provider, plugin, API, image, DailyNote, or VCP memory actions"
+    }
+    if ($autopilotEvolutionEngine.real_manifest_read_performed -ne $false -or $autopilotEvolutionEngine.real_vcpchat_read_performed -ne $false -or $autopilotEvolutionEngine.real_vcptoolbox_read_performed -ne $false -or $autopilotEvolutionEngine.dependency_change_performed -ne $false -or $autopilotEvolutionEngine.runtime_probe_performed -ne $false -or $autopilotEvolutionEngine.secret_value_read_performed -ne $false -or $autopilotEvolutionEngine.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Autopilot Evolution Engine must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
     }
   }
 

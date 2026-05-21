@@ -1,5 +1,37 @@
 ---
 
+## Checkpoint - Autopilot Evolution Engine v1
+
+```text
+phase: autopilot_evolution_engine_v1
+phase_id: autopilot_evolution_engine_v1
+status: completed_validated_guarded_local_commit
+completed:
+- added local Evolution Engine detector
+- added deterministic evolution backlog fixture
+- added independent validator and MVP wiring
+- synchronized README, roadmap, governance docs, and .agent_board status surfaces
+latest_validation:
+- node --check scripts/detect_autopilot_evolution_gaps.js
+- node scripts/detect_autopilot_evolution_gaps.js
+- node --check scripts/validate_autopilot_evolution_engine.js
+- node scripts/validate_autopilot_evolution_engine.js
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1 after guarded local commit
+not_performed:
+- no push
+- no tag/release/deploy
+- no provider/plugin/API/image generation
+- no DailyNote/VCP memory write
+- no real manifest/VCPChat/VCPToolBox read
+- no dependency change
+- no runtime probe
+- no secret read
+commit_message: test: add autopilot evolution engine
+recommended_next: complete_autopilot_readiness_gate_v1
+```
+
+---
+
 ## Checkpoint - Amber Dry-Run Execution Loop v1
 
 ```text

@@ -44,6 +44,11 @@ Amber dry-run loop rule: `scripts/simulate_amber_dry_run_execution_loop.js`
 proves that an Amber task can move from envelope to action packet to receipt and
 continuation decision with known zero cost and no external side effects.
 
+Evolution rule: `scripts/detect_autopilot_evolution_gaps.js` may propose future
+local backlog tasks from known governance surfaces, but Red Lane proposals remain
+blocked until explicit authorization or a valid future envelope removes every
+Red condition.
+
 This document does not authorize provider contact, plugin calls, API calls,
 image generation, DailyNote writes, VCP memory writes, real manifest reads, real
 VCPChat reads, real VCPToolBox reads, dependency changes, runtime probes, push,

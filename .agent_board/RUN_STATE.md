@@ -1,5 +1,31 @@
 ---
 
+## autopilot_evolution_engine_v1
+
+```text
+phase: autopilot_evolution_engine_v1
+phase_id: autopilot_evolution_engine_v1
+status: completed_validated_guarded_local_commit
+mode: Green Lane local backlog proposal validation
+objective: detect governance gaps and propose future local tasks without crossing Red Lane
+current_task_id: autopilot_evolution_engine_v1
+current_autonomy_model: Smart Standing Authorization v3
+baseline_before_edit: 7f77054
+ahead_count_before_edit: 5
+evolution_engine_ref: scripts/detect_autopilot_evolution_gaps.js
+evolution_engine_validator_ref: scripts/validate_autopilot_evolution_engine.js
+evolution_backlog_fixture_ref: tests/schema_examples/autopilot_evolution_backlog.example.json
+next_recommended_task: complete_autopilot_readiness_gate_v1
+red_lane_self_authorized: false
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
+push_allowed: false
+validation_status: completed_validated_guarded_local_commit
+commit_message: test: add autopilot evolution engine
+recommended_next: complete_autopilot_readiness_gate_v1
+```
+
+---
+
 ## amber_dry_run_execution_loop_v1
 
 ```text

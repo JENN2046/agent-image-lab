@@ -1,5 +1,24 @@
 ---
 
+- [x] ID: autopilot_evolution_engine_v1
+      Title: Detect autopilot governance gaps and propose future tasks
+      Reason: Product-grade long-evolving autopilot needs a local backlog generator that finds missing validation, stale state, weak rollback coverage, and manual-step gaps without crossing Red Lane.
+      Detector: scripts/detect_autopilot_evolution_gaps.js.
+      Validator: scripts/validate_autopilot_evolution_engine.js.
+      Backlog fixture: tests/schema_examples/autopilot_evolution_backlog.example.json.
+      Result: completed_validated_guarded_local_commit.
+      Commit message: test: add autopilot evolution engine.
+      Recommended next: complete_autopilot_readiness_gate_v1.
+      Stop condition: any provider/plugin/API/image/memory/source-read/runtime/dependency/secret/push signal, Red self-authorization, missing fixture, or validation failure requiring judgment.
+
+- [ ] ID: complete_autopilot_readiness_gate_v1
+      Title: Prove the full autopilot chain in one readiness validator
+      Reason: The system now has stage validators; the next Green task should prove the whole chain end-to-end before final closeout.
+      Source proposal: tests/schema_examples/autopilot_evolution_backlog.example.json.
+      Stop condition: push/tag/release/deploy, secret read, destructive action, provider/plugin/API/image/memory/source-read/dependency/runtime requirement, or validation failure requiring judgment.
+
+---
+
 - [x] ID: amber_dry_run_execution_loop_v1
       Title: Prove the local Amber envelope-to-receipt loop
       Reason: Product-grade autopilot needs a no-side-effect proof that Amber execution can be budgeted, receipted, registered, validated, and continued.
