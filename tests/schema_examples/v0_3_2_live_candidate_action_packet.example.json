@@ -1,0 +1,194 @@
+{
+  "v0_3_2_live_candidate_action_packet": {
+    "version": "v1",
+    "phase": "v0_3_2_live_candidate_action_packet",
+    "long_term_goal": "v0_3_controlled_real_provider_production_loop",
+    "source_phase": "v0_3_1_real_provider_cost_boundary_plan",
+    "lane": "Red-gated preflight",
+    "packet_id": "packet-v0-3-2-live-candidate-action-packet",
+    "task_id": "first_controlled_real_generation_candidate",
+    "packet_status": "filled_pending_v0_3_3_execution_gate",
+    "selected_task": "fill_first_live_candidate_action_packet_without_execution",
+    "execution_authorized_by_this_packet": false,
+    "live_provider_call_allowed_now": false,
+    "plugin_call_allowed_now": false,
+    "api_call_allowed_now": false,
+    "image_generation_allowed_now": false,
+    "output_write_allowed_now": false,
+    "daily_note_write_allowed_now": false,
+    "vcp_memory_write_allowed_now": false,
+    "runtime_probe_allowed_now": false,
+    "push_allowed_now": false,
+    "current_candidate_fields": {
+      "provider_target": "codex_builtin_image_generation",
+      "plugin_id_or_provider_route": "image_gen.imagegen",
+      "model": "managed_by_codex_image_tool",
+      "command": "generate",
+      "visual_task_id": "v0_3_3_first_codex_sample_generation",
+      "prompt_package_ref": "prompts/image_generation/fashion_night_balcony_vertical_portrait_v1.yaml",
+      "max_provider_calls": 1,
+      "max_image_candidates": 1,
+      "retry_limit": 0,
+      "cost_cap_amount": 1,
+      "cost_cap_currency": "usage_unit_or_lowest_available_quota",
+      "output_directory": "runs/real_generation/v0_3_3_codex_sample_first_trial/",
+      "receipt_path": "reports/provider_receipts/v0_3_3_codex_sample_first_trial_receipt.json",
+      "registry_path": "reports/provider_receipts/provider_receipt_registry.json",
+      "review_console_bridge_ref": "review_console/live_receipt_bridge/v0_3_3_codex_sample_first_trial",
+      "rollback_limitations_acknowledged": true,
+      "owner_authorization_phrase": "批准填充 v0_3_2 候选包：使用 Codex 内置 image generation，生成 1 张夜景城市阳台竖屏时装人像，prompt_package_ref=prompts/image_generation/fashion_night_balcony_vertical_portrait_v1.yaml，max_provider_calls=1，max_image_candidates=1，retry_limit=0，成本上限为 1 usage unit；仅写入指定 output/receipt/registry 路径，不覆盖已有文件，不读 secret，不写 DailyNote/VCP memory，不 push/tag/release；审批人 Jenn。"
+    },
+    "missing_required_fields": [],
+    "filled_required_fields": [
+      "provider_target",
+      "plugin_id_or_provider_route",
+      "model",
+      "command",
+      "visual_task_id",
+      "prompt_package_ref",
+      "max_provider_calls_greater_than_zero_and_within_cap",
+      "max_image_candidates_greater_than_zero_and_within_cap",
+      "retry_limit_within_cap",
+      "cost_cap_amount",
+      "cost_cap_currency",
+      "output_directory",
+      "receipt_path",
+      "registry_path",
+      "review_console_bridge_ref",
+      "rollback_limitations_acknowledged",
+      "owner_authorization_phrase"
+    ],
+    "current_execution_budgets": {
+      "provider_calls": 0,
+      "plugin_calls": 0,
+      "api_calls": 0,
+      "image_candidates": 0,
+      "runtime_probe_minutes": 0,
+      "cost_amount": 0,
+      "cost_currency": "not_applicable",
+      "cost_tracking_required": true,
+      "cost_unknown_is_red": true
+    },
+    "candidate_fill_budgets": {
+      "provider_calls": 1,
+      "plugin_calls": 1,
+      "api_calls": 1,
+      "image_candidates": 1,
+      "retry_limit": 0,
+      "cost_cap_amount": 1,
+      "cost_cap_currency": "usage_unit_or_lowest_available_quota"
+    },
+    "future_fill_limits": {
+      "max_provider_calls_cap": 1,
+      "max_plugin_calls_cap": 1,
+      "max_api_calls_cap": 1,
+      "max_image_candidates_cap": 1,
+      "retry_limit_cap": 0,
+      "overwrite_existing_files_allowed": false,
+      "secret_value_read_allowed": false,
+      "raw_private_data_print_allowed": false,
+      "raw_provider_payload_capture_allowed": false,
+      "raw_provider_response_capture_allowed": false
+    },
+    "stop_conditions": [
+      "missing_exact_provider_target",
+      "missing_prompt_package",
+      "missing_cost_cap",
+      "unknown_or_uncapped_cost",
+      "missing_output_directory",
+      "output_path_collision_without_overwrite_authorization",
+      "missing_receipt_or_registry_path",
+      "missing_review_console_bridge_ref",
+      "missing_rollback_limitations_acknowledgement",
+      "owner_authorization_phrase_missing",
+      "secret_value_required",
+      "raw_request_or_response_capture_requested",
+      "live_provider_or_plugin_or_api_or_image_action_requested_now",
+      "validation_failure_requiring_judgment"
+    ],
+    "side_effect_flags": {
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "runtime_probe_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "secret_value_read_performed": false,
+      "push_tag_release_deploy_performed": false
+    },
+    "activation_blocked_by_missing_exact_owner_target": false,
+    "execution_still_requires_v0_3_3_gate": true,
+    "candidate_packet_reviewable": true,
+    "negative_cases": [
+      {
+        "case_id": "execution_authorized_by_packet_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "packet must not authorize execution"
+      },
+      {
+        "case_id": "live_provider_call_allowed_now_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "live provider call must be blocked now"
+      },
+      {
+        "case_id": "provider_target_drift_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "provider target mismatch"
+      },
+      {
+        "case_id": "current_provider_budget_nonzero_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "current provider call budget must be zero"
+      },
+      {
+        "case_id": "future_provider_cap_too_high_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "future provider cap must stay one-shot"
+      },
+      {
+        "case_id": "cost_unknown_not_red_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "unknown cost must remain Red"
+      },
+      {
+        "case_id": "overwrite_allowed_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "overwrite must remain false"
+      },
+      {
+        "case_id": "raw_provider_payload_capture_allowed_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "raw provider payload capture must remain false"
+      },
+      {
+        "case_id": "owner_phrase_subject_drift_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "owner authorization phrase mismatch"
+      },
+      {
+        "case_id": "side_effect_flag_true_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "image_generation_performed must remain false"
+      }
+    ],
+    "negative_case_count": 10,
+    "caught_negative_case_count": 10,
+    "all_negative_cases_caught": true,
+    "recommended_next": "v0_3_3_first_live_generation_pilot",
+    "next_phase_after_owner_fill": "v0_3_3_first_live_generation_pilot"
+  }
+}

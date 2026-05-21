@@ -1,0 +1,126 @@
+{
+  "v0_3_1_real_provider_cost_boundary_plan": {
+    "version": "v1",
+    "phase": "v0_3_1_real_provider_cost_boundary_plan",
+    "long_term_goal": "v0_3_controlled_real_provider_production_loop",
+    "lane": "Red-gated planning",
+    "selected_task": "define_real_provider_cost_boundary_before_live_calls",
+    "execution_authorized_by_this_plan": false,
+    "live_provider_call_allowed_now": false,
+    "plugin_call_allowed_now": false,
+    "api_call_allowed_now": false,
+    "image_generation_allowed_now": false,
+    "current_live_call_budget": 0,
+    "current_image_generation_budget": 0,
+    "current_cost_budget": 0,
+    "exact_provider_target_required": true,
+    "selected_provider_target_now": null,
+    "max_provider_calls_after_authorization_cap": 3,
+    "max_image_candidates_after_authorization_cap": 3,
+    "retry_limit_after_authorization_cap": 1,
+    "cost_cap_required": true,
+    "cost_unknown_is_red": true,
+    "rollback_limitations_acknowledged": true,
+    "provider_cost_spend_reversible": false,
+    "external_provider_request_reversible": false,
+    "receipt_required": true,
+    "registry_entry_required": true,
+    "review_console_bridge_required": true,
+    "future_authorization_required_fields": [
+      "provider_target",
+      "plugin_id_or_provider_route",
+      "model",
+      "command",
+      "visual_task_id",
+      "prompt_package_ref",
+      "max_provider_calls",
+      "max_image_candidates",
+      "retry_limit",
+      "cost_cap_amount",
+      "cost_cap_currency",
+      "output_directory",
+      "receipt_path",
+      "registry_path",
+      "rollback_limitations_acknowledged",
+      "owner_authorization_phrase"
+    ],
+    "stop_conditions": [
+      "missing_exact_provider_target",
+      "missing_call_budget",
+      "missing_cost_cap",
+      "unknown_or_uncapped_cost",
+      "missing_rollback_limitations",
+      "secret_value_required",
+      "raw_request_or_response_would_be_recorded",
+      "endpoint_or_token_would_be_recorded",
+      "output_path_collision_without_overwrite_authorization",
+      "owner_authorization_phrase_missing",
+      "validation_failure_requiring_judgment"
+    ],
+    "negative_cases": [
+      {
+        "case_id": "execution_authorized_by_plan_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "plan must not authorize execution"
+      },
+      {
+        "case_id": "live_provider_call_allowed_now_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "live provider call must be blocked now"
+      },
+      {
+        "case_id": "missing_cost_cap_requirement_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "cost cap is required before future live call"
+      },
+      {
+        "case_id": "cost_unknown_not_red_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "unknown cost must remain Red"
+      },
+      {
+        "case_id": "future_provider_budget_too_high_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "future provider call cap must stay within standing envelope"
+      },
+      {
+        "case_id": "missing_rollback_limitations_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "rollback limitations must be acknowledged"
+      },
+      {
+        "case_id": "secret_boundary_weakened_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "secret_value_read_performed must remain false"
+      },
+      {
+        "case_id": "side_effect_flag_true_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "provider_contact_performed must remain false"
+      }
+    ],
+    "negative_case_count": 8,
+    "caught_negative_case_count": 8,
+    "all_negative_cases_caught": true,
+    "side_effect_flags": {
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "runtime_probe_performed": false,
+      "secret_value_read_performed": false,
+      "push_tag_release_deploy_performed": false
+    },
+    "recommended_next": "v0_3_2_live_candidate_action_packet"
+  }
+}

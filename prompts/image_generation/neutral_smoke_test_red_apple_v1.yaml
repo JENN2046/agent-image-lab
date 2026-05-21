@@ -1,0 +1,31 @@
+prompt_package_id: neutral_smoke_test_red_apple_v1
+version: v1
+language: en
+mode: text_to_image
+reference_policy: no_reference_image_neutral_smoke_test
+
+title_cn: "极简中性红苹果生图烟测"
+purpose_cn: "v0_3_3_smoke_001_neutral 使用的极简中性 smoke test prompt；用于区分 Codex 内置 image generation 工具/路由问题与特定人物时装 prompt 问题"
+scene_type: neutral_product_still_life
+subject_category: object_only_food
+aspect_ratio: "9:16"
+style_direction: "simple realistic studio product photography"
+
+prompt: |
+  Simple realistic vertical 9:16 studio photograph of one red apple centered on a matte white tabletop. Plain soft light gray background, soft natural studio lighting, crisp focus, clean minimal composition, no people, no text, no logo, no watermark.
+
+negative_prompt: |
+  people, hands, face, readable text, logo, watermark, brand mark, extra objects, cartoon, anime, CGI look, low resolution, blurry subject, distorted apple
+
+acceptance_gate:
+  prompt_subject_match: true
+  neutral_object_only: true
+  people_expected: false
+  vertical_9_16_composition: true
+  no_readable_text_or_logo_unless_expected: true
+  no_watermark: true
+
+memory_write_allowed: false
+daily_note_write_allowed: false
+plugin_call_allowed_by_this_file: false
+image_generation_allowed_by_this_file: false

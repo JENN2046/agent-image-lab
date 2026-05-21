@@ -14,8 +14,11 @@ const resumeSurfacePaths = [
 ];
 
 const currentPhase = "agent_board_resume_compaction_guard_v1";
+const activeCurrentPhase = "v0_3_3_first_live_generation_pilot";
+const activeSourcePhase = "v0_3_2_live_candidate_action_packet";
 const completedTraceabilityPhase = "amber_packet_to_receipt_traceability_v1";
 const nextBoundary = "future_real_provider_cost_boundary_v1";
+const activeNextDecision = "inspect_failed_provider_tool_attempt_or_authorize_new_trial";
 
 const sideEffectFlags = {
   provider_contact_performed: false,
@@ -116,39 +119,74 @@ function replaceTaskQueueItemBlock(text, taskId, replacer) {
 
 function validateSurface(pathName, text) {
   const latest = latestSection(text);
-  assert(latest.includes(currentPhase), `${pathName} latest section must cite current phase`);
-  assert(latest.includes(completedTraceabilityPhase), `${pathName} latest section must cite completed traceability phase`);
-  assert(latest.includes(nextBoundary), `${pathName} latest section must cite next Red boundary`);
+  assert(latest.includes(activeCurrentPhase), `${pathName} latest section must cite active current phase`);
+  assert(latest.includes(activeSourcePhase), `${pathName} latest section must cite active source phase`);
+  assert(latest.includes(activeNextDecision), `${pathName} latest section must cite active next Red decision`);
+  assert(latest.includes("push_status: not_performed") || latest.includes("push_allowed: false"), `${pathName} latest section must preserve no-push state`);
   assert(latest.includes("push_status: not_performed") || latest.includes("push_allowed: false"), `${pathName} latest section must preserve no-push state`);
   assert(
-    latest.includes("provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false") ||
-      latest.includes("provider_contact_performed: false"),
-    `${pathName} latest section must preserve no external/provider/runtime action state`
+    latest.includes("image_generation_performed: false") ||
+      latest.includes("actual_image_generation_performed: false") ||
+      latest.includes("Actual image generation performed: false"),
+    `${pathName} latest section must record no generated image`
+  );
+  assert(
+    latest.includes("secret_value_read_performed: false") ||
+      latest.includes("Secret value read performed: false") ||
+      latest.includes("no secret read"),
+    `${pathName} latest section must preserve no-secret state`
   );
   return {
     path: pathName,
-    current_phase_present: latest.includes(currentPhase),
-    completed_traceability_present: latest.includes(completedTraceabilityPhase),
-    next_boundary_present: latest.includes(nextBoundary),
+    current_phase_present: latest.includes(activeCurrentPhase),
+    active_source_phase_present: latest.includes(activeSourcePhase),
+    next_boundary_present: latest.includes(activeNextDecision),
     no_push_present: latest.includes("push_status: not_performed") || latest.includes("push_allowed: false")
   };
 }
 
 function validateRoadmap(text) {
-  assert(text.includes("current_phase: agent_board_resume_compaction_guard_v1"), "roadmap current_phase mismatch");
+  assert(
+    text.includes("current_phase: agent_board_resume_compaction_guard_v1") ||
+      (
+        text.includes("current_phase: v0_3_1_real_provider_cost_boundary_plan") &&
+        text.includes("source_phase: agent_board_resume_compaction_guard_v1")
+      ) ||
+      (
+        text.includes("current_phase: v0_3_2_live_candidate_action_packet") &&
+        text.includes("source_phase: v0_3_1_real_provider_cost_boundary_plan")
+      ) ||
+      (
+        text.includes(`current_phase: ${activeCurrentPhase}`) &&
+        text.includes(`source_phase: ${activeSourcePhase}`)
+      ),
+    "roadmap current_phase mismatch"
+  );
   assert(text.includes("agent_board_resume_compaction_guard_active: true"), "roadmap active flag missing");
-  assert(text.includes("evolution_next_recommended_task: future_real_provider_cost_boundary_v1"), "roadmap next boundary mismatch");
+  assert(
+      text.includes("evolution_next_recommended_task: future_real_provider_cost_boundary_v1") ||
+      text.includes("evolution_next_recommended_task: v0_3_2_live_candidate_action_packet") ||
+      text.includes("evolution_next_recommended_task: v0_3_3_first_live_generation_pilot") ||
+      text.includes(`evolution_next_recommended_task: ${activeNextDecision}`),
+    "roadmap next boundary mismatch"
+  );
 }
 
 function validateTaskQueue(text) {
   const resumeGuardBlock = taskQueueItemBlock(text, currentPhase);
-  const futureProviderBlock = taskQueueItemBlock(text, nextBoundary);
+  const sourceBlock = taskQueueItemBlock(text, activeSourcePhase);
+  const activeBlock = taskQueueItemBlock(text, activeCurrentPhase);
+  const activeDecisionBlock = taskQueueItemBlock(text, activeNextDecision);
   assert(resumeGuardBlock.includes(`- [x] ID: ${currentPhase}`), "task queue must mark resume guard completed");
-  assert(futureProviderBlock.includes(`- [ ] ID: ${nextBoundary}`), "task queue must record future Red provider boundary as pending");
-  assert(futureProviderBlock.includes("Lane: Red."), "future provider boundary must remain Red");
-  assert(futureProviderBlock.includes("Required authorization:"), "future provider boundary must require authorization inside its own task block");
-  for (const token of ["provider target", "call budget", "cost cap", "rollback"]) {
-    assert(futureProviderBlock.includes(token), `future provider boundary authorization must mention ${token}`);
+  assert(sourceBlock.includes(`- [x] ID: ${activeSourcePhase}`), "task queue must mark v0.3.2 packet completed");
+  assert(sourceBlock.includes("filled_pending_v0_3_3_execution_gate"), "v0.3.2 packet must be filled and pending v0.3.3 execution gate");
+  assert(activeBlock.includes(`- [x] ID: ${activeCurrentPhase}`), "task queue must mark v0.3.3 gate entered");
+  assert(activeBlock.includes("attempted_failed_no_retry"), "v0.3.3 gate must record the failed no-retry attempt");
+  assert(activeDecisionBlock.includes(`- [ ] ID: ${activeNextDecision}`), "task queue must record v0.3.3 authorize/reject decision as pending");
+  assert(activeDecisionBlock.includes("Lane: Red human decision."), "v0.3.3 execution decision must remain Red");
+  assert(activeDecisionBlock.includes("Required authorization:"), "v0.3.3 execution decision must require authorization inside its own task block");
+  for (const token of ["prompt package", "output directory", "receipt path", "registry path"]) {
+    assert(activeDecisionBlock.includes(token), `v0.3.3 execution gate authorization must mention ${token}`);
   }
 }
 
@@ -187,32 +225,38 @@ function buildReport() {
 
   const negativeCases = [
     expectFailure("run_state_missing_current_phase_fails", (surfaces) => {
-      surfaces[".agent_board/RUN_STATE.md"] = surfaces[".agent_board/RUN_STATE.md"].split(currentPhase).join("stale_phase");
+      surfaces[".agent_board/RUN_STATE.md"] = surfaces[".agent_board/RUN_STATE.md"].split(activeCurrentPhase).join("stale_phase");
     }),
     expectFailure("run_state_latest_section_missing_current_phase_even_when_history_has_it_fails", (surfaces) => {
       surfaces[".agent_board/RUN_STATE.md"] = replaceLatestSection(
         surfaces[".agent_board/RUN_STATE.md"],
-        (latest) => latest.split(currentPhase).join("stale_phase")
+        (latest) => latest.split(activeCurrentPhase).join("stale_phase")
       );
     }),
     expectFailure("task_queue_missing_red_boundary_fails", (surfaces) => {
-      surfaces[".agent_board/TASK_QUEUE.md"] = surfaces[".agent_board/TASK_QUEUE.md"].split(nextBoundary).join("missing_red_boundary");
+      surfaces[".agent_board/TASK_QUEUE.md"] = surfaces[".agent_board/TASK_QUEUE.md"].split(activeNextDecision).join("missing_red_boundary");
     }),
-    expectFailure("task_queue_future_provider_missing_bound_authorization_fails", (surfaces) => {
+    expectFailure("task_queue_v0_3_3_missing_bound_authorization_fails", (surfaces) => {
       surfaces[".agent_board/TASK_QUEUE.md"] = replaceTaskQueueItemBlock(
         surfaces[".agent_board/TASK_QUEUE.md"],
-        nextBoundary,
+        activeNextDecision,
         (block) => block.replace("Required authorization:", "Authorization moved outside this task:")
       );
     }),
-    expectFailure("checkpoint_missing_traceability_completion_fails", (surfaces) => {
-      surfaces[".agent_board/CHECKPOINT.md"] = surfaces[".agent_board/CHECKPOINT.md"].split(completedTraceabilityPhase).join("missing_traceability");
+    expectFailure("checkpoint_missing_active_source_phase_fails", (surfaces) => {
+      surfaces[".agent_board/CHECKPOINT.md"] = replaceLatestSection(
+        surfaces[".agent_board/CHECKPOINT.md"],
+        (latest) => latest.split(activeSourcePhase).join("missing_source_phase")
+      );
     }),
     expectFailure("handoff_missing_no_push_state_fails", (surfaces) => {
       surfaces[".agent_board/HANDOFF.md"] = surfaces[".agent_board/HANDOFF.md"].split("push_status: not_performed").join("push_status: ambiguous");
     }),
     expectFailure("roadmap_current_phase_drift_fails", (surfaces) => {
-      surfaces["docs/00_project_roadmap.md"] = surfaces["docs/00_project_roadmap.md"].replace("current_phase: agent_board_resume_compaction_guard_v1", "current_phase: stale_phase");
+      surfaces["docs/00_project_roadmap.md"] = surfaces["docs/00_project_roadmap.md"]
+        .replace("current_phase: agent_board_resume_compaction_guard_v1", "current_phase: stale_phase")
+        .replace("current_phase: v0_3_1_real_provider_cost_boundary_plan", "current_phase: stale_phase")
+        .replace(`current_phase: ${activeCurrentPhase}`, "current_phase: stale_phase");
     })
   ];
 
@@ -224,9 +268,9 @@ function buildReport() {
       selected_task_lane: "Green",
       resume_surface_count: resumeSurfacePaths.length,
       resume_surfaces: surfaceResults,
-      all_resume_surfaces_current: surfaceResults.every((surface) => surface.current_phase_present && surface.next_boundary_present),
+      all_resume_surfaces_current: surfaceResults.every((surface) => surface.current_phase_present && surface.active_source_phase_present && surface.next_boundary_present),
       completed_traceability_phase: completedTraceabilityPhase,
-      next_recommended_task: nextBoundary,
+      next_recommended_task: activeNextDecision,
       next_recommended_task_lane: "Red",
       red_boundary_requires_authorization: true,
       evolution_completed_capability_verified: true,
@@ -257,7 +301,7 @@ function main() {
   assert(actual.selected_task_lane === "Green", "selected task lane mismatch");
   assert(actual.resume_surface_count === resumeSurfacePaths.length, "resume surface count mismatch");
   assert(actual.all_resume_surfaces_current === true, "all resume surfaces must be current");
-  assert(actual.next_recommended_task === nextBoundary, "next recommended task mismatch");
+  assert(actual.next_recommended_task === activeNextDecision, "next recommended task mismatch");
   assert(actual.next_recommended_task_lane === "Red", "next recommended lane must be Red");
   assert(actual.red_boundary_requires_authorization === true, "Red boundary must require authorization");
   assert(actual.negative_case_count >= 5, "at least five resume negative cases are required");

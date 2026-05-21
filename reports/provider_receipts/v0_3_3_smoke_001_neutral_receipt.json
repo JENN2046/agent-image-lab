@@ -1,0 +1,82 @@
+{
+  "receipt_id": "receipt-v0-3-3-smoke-001-neutral",
+  "task_id": "v0_3_3_smoke_001_neutral",
+  "visual_task_id": "v0_3_3_smoke_001_neutral_red_apple",
+  "lane": "Amber",
+  "envelope_id": "smart_standing_authorization_v3_budgeted_autonomy_envelope",
+  "status": "succeeded_image_generated",
+  "attempted_at": "2026-05-22T01:46:15.9831032+08:00",
+  "owner_authorization_phrase": "单独授权一个极简中性 smoke test",
+  "action_performed": "called_codex_builtin_image_generation_once_with_neutral_object_prompt",
+  "target_systems": [
+    "codex_builtin_image_generation"
+  ],
+  "provider_target": "codex_builtin_image_generation",
+  "plugin_id_or_provider_route": "image_gen.imagegen",
+  "model": "managed_by_codex_image_tool",
+  "command": "generate",
+  "prompt_package_ref": "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml",
+  "prompt_package_sha256": "f0923cb2fd2c3f789693b5188e5be128d69988a223ed14d135195396586e26f0",
+  "output_directory": "runs/real_generation/v0_3_3_smoke_001_neutral/",
+  "attempt_result_path": "runs/real_generation/v0_3_3_smoke_001_neutral/generation_attempt_result.json",
+  "output_image_path": "runs/real_generation/v0_3_3_smoke_001_neutral/neutral_smoke_test_red_apple_v1.png",
+  "output_image_sha256": "c5ce931f31d815c1a59dfa250a5c610538234747810baa2eaa11e44b41dcd2d8",
+  "source_image_path": "C:/Users/51529/.codex/generated_images/019e4a93-9c8a-73c1-aaf9-7a8fcc7e0be2/ig_0ab09f3070735e01016a0f44b5f7c48191b0b210a7113e565c.png",
+  "review_console_bridge_ref": "review_console/live_receipt_bridge/v0_3_3_smoke_001_neutral",
+  "calls_used": {
+    "provider_calls": 1,
+    "plugin_calls": 1,
+    "api_calls": 0,
+    "image_candidates_requested": 1,
+    "image_candidates_generated": 1,
+    "retries_used": 0
+  },
+  "budgets": {
+    "max_provider_calls": 1,
+    "max_image_candidates": 1,
+    "retry_limit": 0,
+    "cost_cap_amount": 1,
+    "cost_cap_currency": "usage_unit_or_lowest_available_quota"
+  },
+  "cost": {
+    "tracked": true,
+    "known_exact_amount": false,
+    "amount_charged": null,
+    "currency": "usage_unit_or_lowest_available_quota",
+    "cost_cap_amount": 1,
+    "cost_cap_exceeded": false
+  },
+  "files_read": [
+    "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml"
+  ],
+  "files_written": [
+    "runs/real_generation/v0_3_3_smoke_001_neutral/generation_attempt_result.json",
+    "runs/real_generation/v0_3_3_smoke_001_neutral/neutral_smoke_test_red_apple_v1.png",
+    "reports/provider_receipts/v0_3_3_smoke_001_neutral_receipt.json",
+    "reports/provider_receipts/v0_3_3_smoke_001_neutral_registry.json"
+  ],
+  "failure": null,
+  "diagnostic_interpretation": "Neutral object-only smoke test succeeded, so prior repeated UserError is not explained by a global built-in image generation route outage. The remaining leading hypothesis is content/prompt-specific rejection or handling for the earlier fashion-person prompt path.",
+  "validation_run": [
+    "preflight_output_receipt_registry_paths_absent",
+    "prompt_package_hash_recorded",
+    "post_attempt_new_image_artifact_copied_to_project_output_directory",
+    "output_image_hash_recorded"
+  ],
+  "validation_result": "smoke_test_succeeded",
+  "rollback_or_cleanup_available": true,
+  "rollback_or_cleanup_plan": "Remove this smoke test output directory and matching receipt/registry entries if the diagnostic record is rejected before commit.",
+  "next_auto_step_allowed": false,
+  "stop_reason": "diagnostic_smoke_test_complete",
+  "secret_value_read_performed": false,
+  "raw_private_data_print_performed": false,
+  "raw_provider_payload_capture_performed": false,
+  "raw_provider_response_capture_performed": false,
+  "DailyNote_write_performed": false,
+  "VCP_memory_write_performed": false,
+  "runtime_probe_performed": false,
+  "real_manifest_read_performed": false,
+  "real_vcpchat_read_performed": false,
+  "real_vcptoolbox_read_performed": false,
+  "push_tag_release_deploy_performed": false
+}

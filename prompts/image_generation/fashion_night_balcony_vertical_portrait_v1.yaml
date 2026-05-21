@@ -1,0 +1,39 @@
+prompt_package_id: fashion_night_balcony_vertical_portrait_v1
+version: v1
+language: en
+mode: text_to_image
+reference_policy: derived_from_user_supplied_reference_image_text_only_no_image_input
+
+title_cn: "夜景城市阳台竖屏时装人像"
+purpose_cn: "根据用户提供的参考图提炼竖屏 9:16 城市夜景时装人像提示词；本文件不授权生图执行"
+scene_type: urban_night_fashion_portrait
+subject_category: adult_fashion_model
+aspect_ratio: "9:16"
+style_direction: "realistic editorial night street fashion photography"
+
+prompt: |
+  Cinematic vertical night street fashion portrait of an adult woman standing on an elevated urban balcony walkway, leaning lightly against a cream concrete railing with black metal bars. Full-body 9:16 composition, low-angle fashion framing, long legs emphasized naturally, relaxed asymmetrical pose, looking off to the side. She wears a vivid red off-shoulder crop top, high-waisted denim shorts, black strappy heels, and a small black crossbody bag. Deep navy night sky, tall city buildings in the background, soft neon signs and window lights blurred into bokeh, shallow depth of field. Soft on-camera flash mixed with ambient city light, crisp subject focus, realistic skin tones, glossy editorial nightlife mood, high-end urban street style photography.
+
+negative_prompt: |
+  watermark, logo, readable text, brand mark, explicit nudity, underage subject, extra limbs, distorted hands, distorted face, bad anatomy, duplicate person, blurry subject, overexposed skin, plastic skin, harsh HDR, cartoon, anime, CGI look, low resolution, messy background, warped railing, broken shoes, unnatural pose
+
+composition_notes_cn:
+  - "竖屏 9:16，全身人像，人物居中略偏左或偏右均可。"
+  - "保留城市夜景、栏杆、浅景深、闪光灯与环境光混合的质感。"
+  - "不要生成水印、网站字样、品牌 logo 或可读文字。"
+
+acceptance_gate:
+  prompt_subject_match: true
+  style_direction_match: true
+  adult_subject_only: true
+  person_expected: true
+  face_allowed: true
+  no_readable_text_or_logo_unless_expected: true
+  no_watermark: true
+  vertical_9_16_composition: true
+  commercial_usability: true
+
+memory_write_allowed: false
+daily_note_write_allowed: false
+plugin_call_allowed_by_this_file: false
+image_generation_allowed_by_this_file: false

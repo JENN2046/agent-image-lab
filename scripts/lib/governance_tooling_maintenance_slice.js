@@ -43,6 +43,97 @@ const EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE = [
   "tests/schema_examples/complete_autopilot_readiness_gate.example.json"
 ].sort();
 
+const EXPECTED_V0_3_1_REAL_PROVIDER_COST_BOUNDARY_PLAN_SLICE = [
+  ".agent_board/AUTOPILOT_LEDGER.md",
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_3_1_REAL_PROVIDER_COST_BOUNDARY_PLAN.md",
+  "docs/V0_3_CONTROLLED_REAL_PROVIDER_PRODUCTION_LOOP.md",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_autopilot_agent_board_resume_compaction_guard.js",
+  "scripts/validate_v0_3_1_real_provider_cost_boundary_plan.js",
+  "tests/schema_examples/autopilot_agent_board_resume_compaction_guard.example.json",
+  "tests/schema_examples/v0_3_1_real_provider_cost_boundary_plan.example.json"
+].sort();
+
+const EXPECTED_V0_3_2_LIVE_CANDIDATE_ACTION_PACKET_SLICE = [
+  ".agent_board/AUTOPILOT_LEDGER.md",
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_3_1_REAL_PROVIDER_COST_BOUNDARY_PLAN.md",
+  "docs/V0_3_2_LIVE_CANDIDATE_ACTION_PACKET.md",
+  "docs/V0_3_CONTROLLED_REAL_PROVIDER_PRODUCTION_LOOP.md",
+  "prompts/image_generation/fashion_night_balcony_vertical_portrait_v1.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_autopilot_agent_board_resume_compaction_guard.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_v0_3_1_real_provider_cost_boundary_plan.js",
+  "scripts/validate_v0_3_2_live_candidate_action_packet.js",
+  "tests/schema_examples/autopilot_agent_board_resume_compaction_guard.example.json",
+  "tests/schema_examples/v0_3_1_real_provider_cost_boundary_plan.example.json",
+  "tests/schema_examples/v0_3_2_live_candidate_action_packet.example.json"
+].sort();
+
+const EXPECTED_V0_3_3_FIRST_LIVE_GENERATION_PILOT_GATE_SLICE = [
+  ".agent_board/AUTOPILOT_LEDGER.md",
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_3_1_REAL_PROVIDER_COST_BOUNDARY_PLAN.md",
+  "docs/V0_3_2_LIVE_CANDIDATE_ACTION_PACKET.md",
+  "docs/V0_3_3_FIRST_LIVE_GENERATION_PILOT_GATE.md",
+  "docs/V0_3_CONTROLLED_REAL_PROVIDER_PRODUCTION_LOOP.md",
+  "prompts/image_generation/fashion_night_balcony_vertical_portrait_v1.yaml",
+  "prompts/image_generation/fashion_night_balcony_vertical_portrait_retry_001_simple.yaml",
+  "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml",
+  "prompts/image_generation/safe_adult_editorial_portrait_v1.yaml",
+  "reports/provider_receipts/provider_receipt_registry.json",
+  "reports/provider_receipts/v0_3_3_codex_sample_first_trial_receipt.json",
+  "reports/provider_receipts/v0_3_3_retry_001_receipt.json",
+  "reports/provider_receipts/v0_3_3_retry_001_registry.json",
+  "reports/provider_receipts/v0_3_3_safe_portrait_001_receipt.json",
+  "reports/provider_receipts/v0_3_3_safe_portrait_001_registry.json",
+  "reports/provider_receipts/v0_3_3_smoke_001_neutral_receipt.json",
+  "reports/provider_receipts/v0_3_3_smoke_001_neutral_registry.json",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_autopilot_agent_board_resume_compaction_guard.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_v0_3_1_real_provider_cost_boundary_plan.js",
+  "scripts/validate_v0_3_2_live_candidate_action_packet.js",
+  "scripts/validate_v0_3_3_first_live_generation_pilot_gate.js",
+  "tests/schema_examples/autopilot_agent_board_resume_compaction_guard.example.json",
+  "tests/schema_examples/v0_3_1_real_provider_cost_boundary_plan.example.json",
+  "tests/schema_examples/v0_3_2_live_candidate_action_packet.example.json",
+  "tests/schema_examples/v0_3_3_first_live_generation_pilot_gate.example.json"
+].sort();
+
+const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
+  {
+    id: "governance_tooling_maintenance_slice_v1",
+    files: EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE
+  },
+  {
+    id: "v0_3_1_real_provider_cost_boundary_plan_slice",
+    files: EXPECTED_V0_3_1_REAL_PROVIDER_COST_BOUNDARY_PLAN_SLICE
+  },
+  {
+    id: "v0_3_2_live_candidate_action_packet_slice",
+    files: EXPECTED_V0_3_2_LIVE_CANDIDATE_ACTION_PACKET_SLICE
+  },
+  {
+    id: "v0_3_3_first_live_generation_pilot_gate_slice",
+    files: EXPECTED_V0_3_3_FIRST_LIVE_GENERATION_PILOT_GATE_SLICE
+  }
+];
+
 function cloneJson(value) {
   return JSON.parse(JSON.stringify(value));
 }
@@ -74,7 +165,26 @@ function diffStringList(actual, expected) {
 }
 
 function fileAllowedInGovernanceToolingSlice(file) {
-  return EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.includes(file);
+  return GOVERNANCE_TOOLING_ALLOWED_SLICES.some((slice) => slice.files.includes(file));
+}
+
+function findMatchingGovernanceToolingSlice(changedFiles) {
+  return GOVERNANCE_TOOLING_ALLOWED_SLICES.find((slice) => sameStringList(changedFiles, slice.files)) || null;
+}
+
+function closestGovernanceToolingSlice(changedFiles) {
+  const sortedChangedFiles = [...changedFiles].sort();
+  return GOVERNANCE_TOOLING_ALLOWED_SLICES
+    .map((slice) => {
+      const diff = diffStringList(sortedChangedFiles, slice.files);
+      return {
+        id: slice.id,
+        files: slice.files,
+        diff,
+        distance: diff.unexpected_files.length + diff.missing_files.length
+      };
+    })
+    .sort((left, right) => left.distance - right.distance || left.id.localeCompare(right.id))[0];
 }
 
 function packageChangeIsPreviewScriptOnly(currentPackageJson, baselinePackageJson, changedFiles) {
@@ -115,9 +225,13 @@ function packageChangeIsPreviewScriptOnly(currentPackageJson, baselinePackageJso
 function buildGovernanceToolingMaintenanceSliceReport({ changedFiles, stagedFiles, behind, currentPackageJson, baselinePackageJson }) {
   const sortedChangedFiles = [...changedFiles].sort();
   const pathAllowed = sortedChangedFiles.every(fileAllowedInGovernanceToolingSlice);
-  const exactSliceMatches = sameStringList(sortedChangedFiles, EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE);
+  const matchingSlice = findMatchingGovernanceToolingSlice(sortedChangedFiles);
+  const closestSlice = matchingSlice || closestGovernanceToolingSlice(sortedChangedFiles);
+  const exactSliceMatches = matchingSlice !== null;
   const packageReport = packageChangeIsPreviewScriptOnly(currentPackageJson, baselinePackageJson, sortedChangedFiles);
-  const fileDiff = diffStringList(sortedChangedFiles, EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE);
+  const fileDiff = closestSlice
+    ? diffStringList(sortedChangedFiles, closestSlice.files)
+    : { unexpected_files: sortedChangedFiles, missing_files: [] };
 
   return {
     passed: behind === 0
@@ -130,9 +244,11 @@ function buildGovernanceToolingMaintenanceSliceReport({ changedFiles, stagedFile
     staged_file_count_is_zero: stagedFiles.length === 0,
     path_allowed: pathAllowed,
     exact_slice_matches: exactSliceMatches,
+    matched_slice_id: matchingSlice?.id || null,
+    closest_slice_id: closestSlice?.id || null,
     package_change_allowed: packageReport.allowed,
     package_change_mode: packageReport.mode,
-    expected_file_count: EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.length,
+    expected_file_count: closestSlice?.files.length || 0,
     actual_file_count: sortedChangedFiles.length,
     unexpected_files: fileDiff.unexpected_files,
     missing_files: fileDiff.missing_files
@@ -167,11 +283,27 @@ function governanceToolingMaintenanceSliceSelfCheck() {
     },
     {
       check: "exact_slice_matches_expected",
-      passed: sameStringList(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE, EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE)
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE)?.id
+        === "governance_tooling_maintenance_slice_v1"
+    },
+    {
+      check: "exact_slice_matches_v0_3_1_plan",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_3_1_REAL_PROVIDER_COST_BOUNDARY_PLAN_SLICE)?.id
+        === "v0_3_1_real_provider_cost_boundary_plan_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_3_2_packet",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_3_2_LIVE_CANDIDATE_ACTION_PACKET_SLICE)?.id
+        === "v0_3_2_live_candidate_action_packet_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_3_3_gate",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_3_3_FIRST_LIVE_GENERATION_PILOT_GATE_SLICE)?.id
+        === "v0_3_3_first_live_generation_pilot_gate_slice"
     },
     {
       check: "exact_slice_rejects_missing_file",
-      passed: !sameStringList(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1), EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE)
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
     {
       check: "package_allows_preview_script_only",
@@ -196,6 +328,10 @@ function governanceToolingMaintenanceSliceSelfCheck() {
 
 module.exports = {
   EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE,
+  EXPECTED_V0_3_1_REAL_PROVIDER_COST_BOUNDARY_PLAN_SLICE,
+  EXPECTED_V0_3_2_LIVE_CANDIDATE_ACTION_PACKET_SLICE,
+  EXPECTED_V0_3_3_FIRST_LIVE_GENERATION_PILOT_GATE_SLICE,
+  GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,
   governanceToolingMaintenanceSliceSelfCheck,

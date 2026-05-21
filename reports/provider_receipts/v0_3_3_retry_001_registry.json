@@ -1,0 +1,25 @@
+{
+  "registry_id": "provider-receipt-registry-v0-3-3-retry-001",
+  "version": "v1",
+  "updated_at": "2026-05-22T01:26:53.9233691+08:00",
+  "entries": [
+    {
+      "receipt_id": "receipt-v0-3-3-retry-001",
+      "task_id": "v0_3_3_retry_001",
+      "visual_task_id": "v0_3_3_retry_001_codex_sample_generation",
+      "status": "failed_no_image_generated",
+      "provider_target": "codex_builtin_image_generation",
+      "plugin_id_or_provider_route": "image_gen.imagegen",
+      "prompt_package_ref": "prompts/image_generation/fashion_night_balcony_vertical_portrait_retry_001_simple.yaml",
+      "receipt_path": "reports/provider_receipts/v0_3_3_retry_001_receipt.json",
+      "attempt_result_path": "runs/real_generation/v0_3_3_retry_001_codex_sample/generation_attempt_result.json",
+      "output_image_path": null,
+      "provider_calls_used": 1,
+      "image_candidates_generated": 0,
+      "retry_limit": 0,
+      "retries_used": 0,
+      "stop_reason": "provider_tool_user_error_no_retry_budget",
+      "created_at": "2026-05-22T01:26:53.9233691+08:00"
+    }
+  ]
+}

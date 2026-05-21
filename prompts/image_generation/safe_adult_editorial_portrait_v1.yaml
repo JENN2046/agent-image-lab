@@ -1,0 +1,32 @@
+prompt_package_id: safe_adult_editorial_portrait_v1
+version: v1
+language: en
+mode: text_to_image
+reference_policy: safe_prompt_variant_no_image_input
+
+title_cn: "安全成人编辑风人像测试"
+purpose_cn: "v0_3_3_safe_portrait_001 使用的安全成人 editorial portrait prompt；用于区分人物人像题材是否可在更保守表述下通过 Codex 内置 image generation"
+scene_type: editorial_portrait
+subject_category: adult_fashion_portrait
+aspect_ratio: "9:16"
+style_direction: "safe realistic editorial portrait photography"
+
+prompt: |
+  Realistic vertical 9:16 editorial portrait of one adult woman in her late twenties standing on a modern city terrace at dusk. She wears an elegant red blazer over a simple white top, tailored dark trousers, and minimal jewelry. Calm confident expression, relaxed natural pose, hands visible, respectful fashion magazine styling. Soft city lights blurred in the background, balanced natural skin tones, clean professional lighting, crisp focus, tasteful contemporary portrait photography. No text, no logo, no watermark.
+
+negative_prompt: |
+  underage subject, revealing outfit, explicit nudity, sexualized pose, bedroom setting, nightclub mood, watermark, logo, readable text, distorted hands, distorted face, bad anatomy, duplicate person, cartoon, anime, CGI look, low resolution, blurry subject
+
+acceptance_gate:
+  prompt_subject_match: true
+  adult_subject_only: true
+  person_expected: true
+  respectful_nonsexual_styling: true
+  vertical_9_16_composition: true
+  no_readable_text_or_logo_unless_expected: true
+  no_watermark: true
+
+memory_write_allowed: false
+daily_note_write_allowed: false
+plugin_call_allowed_by_this_file: false
+image_generation_allowed_by_this_file: false

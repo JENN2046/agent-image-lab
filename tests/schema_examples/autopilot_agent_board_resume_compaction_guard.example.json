@@ -9,49 +9,49 @@
       {
         "path": ".agent_board/RUN_STATE.md",
         "current_phase_present": true,
-        "completed_traceability_present": true,
+        "active_source_phase_present": true,
         "next_boundary_present": true,
         "no_push_present": true
       },
       {
         "path": ".agent_board/TASK_QUEUE.md",
         "current_phase_present": true,
-        "completed_traceability_present": true,
+        "active_source_phase_present": true,
         "next_boundary_present": true,
         "no_push_present": true
       },
       {
         "path": ".agent_board/CHECKPOINT.md",
         "current_phase_present": true,
-        "completed_traceability_present": true,
+        "active_source_phase_present": true,
         "next_boundary_present": true,
         "no_push_present": true
       },
       {
         "path": ".agent_board/HANDOFF.md",
         "current_phase_present": true,
-        "completed_traceability_present": true,
+        "active_source_phase_present": true,
         "next_boundary_present": true,
         "no_push_present": true
       },
       {
         "path": ".agent_board/AUTOPILOT_LEDGER.md",
         "current_phase_present": true,
-        "completed_traceability_present": true,
+        "active_source_phase_present": true,
         "next_boundary_present": true,
         "no_push_present": true
       },
       {
         "path": "docs/00_project_roadmap.md",
         "current_phase_present": true,
-        "completed_traceability_present": true,
+        "active_source_phase_present": true,
         "next_boundary_present": true,
         "no_push_present": true
       }
     ],
     "all_resume_surfaces_current": true,
     "completed_traceability_phase": "amber_packet_to_receipt_traceability_v1",
-    "next_recommended_task": "future_real_provider_cost_boundary_v1",
+    "next_recommended_task": "inspect_failed_provider_tool_attempt_or_authorize_new_trial",
     "next_recommended_task_lane": "Red",
     "red_boundary_requires_authorization": true,
     "evolution_completed_capability_verified": true,
@@ -60,31 +60,31 @@
         "case_id": "run_state_missing_current_phase_fails",
         "result": "caught",
         "expected_failure": true,
-        "failure_message": ".agent_board/RUN_STATE.md latest section must cite current phase"
+        "failure_message": ".agent_board/RUN_STATE.md latest section must cite active current phase"
       },
       {
         "case_id": "run_state_latest_section_missing_current_phase_even_when_history_has_it_fails",
         "result": "caught",
         "expected_failure": true,
-        "failure_message": ".agent_board/RUN_STATE.md latest section must cite current phase"
+        "failure_message": ".agent_board/RUN_STATE.md latest section must cite active current phase"
       },
       {
         "case_id": "task_queue_missing_red_boundary_fails",
         "result": "caught",
         "expected_failure": true,
-        "failure_message": ".agent_board/TASK_QUEUE.md latest section must cite next Red boundary"
+        "failure_message": ".agent_board/TASK_QUEUE.md latest section must cite active next Red decision"
       },
       {
-        "case_id": "task_queue_future_provider_missing_bound_authorization_fails",
+        "case_id": "task_queue_v0_3_3_missing_bound_authorization_fails",
         "result": "caught",
         "expected_failure": true,
-        "failure_message": "future provider boundary must require authorization inside its own task block"
+        "failure_message": "v0.3.3 execution decision must require authorization inside its own task block"
       },
       {
-        "case_id": "checkpoint_missing_traceability_completion_fails",
+        "case_id": "checkpoint_missing_active_source_phase_fails",
         "result": "caught",
         "expected_failure": true,
-        "failure_message": ".agent_board/CHECKPOINT.md latest section must cite completed traceability phase"
+        "failure_message": ".agent_board/CHECKPOINT.md latest section must cite active source phase"
       },
       {
         "case_id": "handoff_missing_no_push_state_fails",
@@ -96,7 +96,7 @@
         "case_id": "roadmap_current_phase_drift_fails",
         "result": "caught",
         "expected_failure": true,
-        "failure_message": "docs/00_project_roadmap.md latest section must cite current phase"
+        "failure_message": "roadmap current_phase mismatch"
       }
     ],
     "negative_case_count": 7,

@@ -8,6 +8,187 @@ remain the source of truth.
 
 ---
 
+## v0.3.3 First Live Generation Pilot Gate
+
+```yaml
+phase: v0_3_3_first_live_generation_pilot
+long_term_goal: v0_3_controlled_real_provider_production_loop
+source_phase: v0_3_2_live_candidate_action_packet
+lane: Red-to-Amber execution gate
+action_performed: local gate, fixture, validator, roadmap, and agent_board status sync
+gate_id: gate-v0-3-3-first-live-generation-pilot
+packet_id: packet-v0-3-2-live-candidate-action-packet
+gate_status: attempted_failed_no_retry
+candidate_packet_status: filled_pending_v0_3_3_execution_gate
+execution_authorized_by_this_gate: true
+live_provider_call_allowed_now: false
+image_generation_allowed_now: false
+output_write_allowed_now: false
+receipt_write_allowed_now: false
+registry_write_allowed_now: false
+current_live_call_budget: 0
+current_cost_budget: 0
+cost_unknown_is_red: true
+actual_image_generation_performed: false
+image_generation_performed: false
+provider_contact_status: attempted_failed
+plugin_call_status: attempted_failed
+receipt_written: true
+registry_written: true
+output_directory_created: true
+secret_value_read_performed: false
+push_tag_release_deploy_performed: false
+provider_calls_used: 1
+image_candidates_generated: 0
+failure_class: provider_tool_user_error
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: true_provider_tool_failed
+push_status: not_performed
+validation_result: passed_failed_generation_recorded
+validation_evidence: complete MVP passed after failed provider tool attempt; controlled readiness validators matched v0_3_3_first_live_generation_pilot_gate_slice with 23 exact files
+next_auto_step_allowed: false_for_live_actions
+recommended_next: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+```
+
+---
+
+## v0.3.3 Retry 001 Simplified Prompt Attempt
+
+```yaml
+phase: v0_3_3_retry_001
+source_phase: v0_3_3_first_live_generation_pilot
+lane: Amber
+action_performed: called_codex_builtin_image_generation_once_with_simplified_prompt
+prompt_package_ref: prompts/image_generation/fashion_night_balcony_vertical_portrait_retry_001_simple.yaml
+receipt_ref: reports/provider_receipts/v0_3_3_retry_001_receipt.json
+registry_ref: reports/provider_receipts/v0_3_3_retry_001_registry.json
+status: failed_no_image_generated
+failure_class: provider_tool_user_error
+provider_calls_used: 1
+image_candidates_generated: 0
+retry_limit: 0
+retries_used: 0
+image_generation_performed: false
+secret_value_read_performed: false
+push_tag_release_deploy_performed: false
+next_auto_step_allowed: false_for_live_actions
+recommended_next: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+```
+
+---
+
+## v0.3.3 Smoke 001 Neutral Object Route Check
+
+```yaml
+phase: v0_3_3_smoke_001_neutral
+source_phase: v0_3_3_retry_001
+lane: Amber
+action_performed: called_codex_builtin_image_generation_once_with_neutral_object_prompt
+prompt_package_ref: prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml
+output_ref: runs/real_generation/v0_3_3_smoke_001_neutral/neutral_smoke_test_red_apple_v1.png
+receipt_ref: reports/provider_receipts/v0_3_3_smoke_001_neutral_receipt.json
+registry_ref: reports/provider_receipts/v0_3_3_smoke_001_neutral_registry.json
+status: succeeded_image_generated
+diagnostic_result: route_available_for_neutral_object_prompt
+provider_calls_used: 1
+image_candidates_generated: 1
+retry_limit: 0
+retries_used: 0
+validation_result: passed_smoke_image_generated
+validation_evidence: resume guard, controlled readiness validators, git diff --check, and complete MVP passed; current exact local slice has 29 files
+secret_value_read_performed: false
+push_tag_release_deploy_performed: false
+next_auto_step_allowed: false_for_live_actions
+diagnostic_next: conclude_prior_failure_likely_prompt_policy_specific_or_design_next_fashion_safe_trial
+recommended_next: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+```
+
+---
+
+## v0.3.3 Safe Portrait 001 Adult Editorial Route Check
+
+```yaml
+phase: v0_3_3_safe_portrait_001
+source_phase: v0_3_3_smoke_001_neutral
+lane: Amber
+action_performed: called_codex_builtin_image_generation_once_with_safe_adult_editorial_portrait_prompt
+prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+output_ref: runs/real_generation/v0_3_3_safe_portrait_001/safe_adult_editorial_portrait_v1.png
+receipt_ref: reports/provider_receipts/v0_3_3_safe_portrait_001_receipt.json
+registry_ref: reports/provider_receipts/v0_3_3_safe_portrait_001_registry.json
+status: succeeded_image_generated
+diagnostic_result: person_portrait_route_available_with_safe_adult_editorial_prompt
+provider_calls_used: 1
+image_candidates_generated: 1
+retry_limit: 0
+retries_used: 0
+validation_result: passed_safe_portrait_image_generated
+validation_evidence: resume guard, controlled readiness validators, git diff --check, and complete MVP passed; current exact local slice has 32 files
+secret_value_read_performed: false
+push_tag_release_deploy_performed: false
+next_auto_step_allowed: false_for_live_actions
+diagnostic_next: design_next_fashion_prompt_by_progressively_adding_one_style_risk_at_a_time
+recommended_next: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+```
+
+---
+
+## v0.3.2 Live Candidate Action Packet
+
+```yaml
+phase: v0_3_2_live_candidate_action_packet
+long_term_goal: v0_3_controlled_real_provider_production_loop
+source_phase: v0_3_1_real_provider_cost_boundary_plan
+lane: Red-gated preflight
+action_performed: local packet, fixture, validator, roadmap, and agent_board status sync
+packet_id: packet-v0-3-2-live-candidate-action-packet
+packet_status: filled_pending_v0_3_3_execution_gate
+execution_authorized_by_this_packet: false
+live_provider_call_allowed_now: false
+image_generation_allowed_now: false
+current_live_call_budget: 0
+current_cost_budget: 0
+cost_unknown_is_red: true
+activation_blocked_by_missing_exact_owner_target: false
+execution_still_requires_v0_3_3_gate: true
+filled_prompt_package_ref: prompts/image_generation/fashion_night_balcony_vertical_portrait_v1.yaml
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
+push_status: not_performed
+validation_result: passed
+validation_evidence: complete MVP passed; controlled readiness validators matched v0_3_2_live_candidate_action_packet_slice with 18 exact files
+next_auto_step_allowed: false_for_live_actions
+recommended_next: v0_3_3_first_live_generation_pilot
+next_phase_after_owner_fill: v0_3_3_first_live_generation_pilot
+```
+
+---
+
+## v0.3.1 Real Provider Cost Boundary Plan
+
+```yaml
+phase: v0_3_1_real_provider_cost_boundary_plan
+long_term_goal: v0_3_controlled_real_provider_production_loop
+source_phase: agent_board_resume_compaction_guard_v1
+lane: Red-gated planning
+action_performed: local plan, fixture, validator, roadmap, and agent_board status sync
+completed_traceability_phase: amber_packet_to_receipt_traceability_v1
+accepted_previous_red_boundary: future_real_provider_cost_boundary_v1
+execution_authorized_by_this_plan: false
+live_provider_call_allowed_now: false
+image_generation_allowed_now: false
+current_live_call_budget: 0
+current_cost_budget: 0
+cost_unknown_is_red: true
+rollback_limitations_acknowledged: true
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
+push_status: not_performed
+validation_result: passed
+validation_evidence: complete MVP passed; controlled readiness validators matched v0_3_1_real_provider_cost_boundary_plan_slice with 13 exact files
+next_auto_step_allowed: false_for_live_actions
+recommended_next: v0_3_2_live_candidate_action_packet
+```
+
+---
+
 ## agent_board_resume_compaction_guard_v1
 
 ```yaml

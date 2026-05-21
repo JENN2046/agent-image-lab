@@ -1,0 +1,17 @@
+{
+  "registry_id": "provider_receipt_registry_v0_3_3_smoke_001_neutral",
+  "updated_at": "2026-05-22T01:46:46.8970245+08:00",
+  "entries": [
+    {
+      "receipt_id": "receipt-v0-3-3-smoke-001-neutral",
+      "task_id": "v0_3_3_smoke_001_neutral",
+      "visual_task_id": "v0_3_3_smoke_001_neutral_red_apple",
+      "status": "succeeded_image_generated",
+      "receipt_path": "reports/provider_receipts/v0_3_3_smoke_001_neutral_receipt.json",
+      "attempt_result_path": "runs/real_generation/v0_3_3_smoke_001_neutral/generation_attempt_result.json",
+      "output_image_path": "runs/real_generation/v0_3_3_smoke_001_neutral/neutral_smoke_test_red_apple_v1.png",
+      "output_image_sha256": "c5ce931f31d815c1a59dfa250a5c610538234747810baa2eaa11e44b41dcd2d8",
+      "diagnostic_value": "confirms_codex_builtin_image_generation_route_available_for_neutral_object_prompt"
+    }
+  ]
+}

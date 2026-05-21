@@ -1,0 +1,31 @@
+prompt_package_id: fashion_night_balcony_vertical_portrait_retry_001_simple
+version: v1
+language: en
+mode: text_to_image
+reference_policy: simplified_retry_from_project_prompt_no_image_input
+
+title_cn: "夜景城市阳台竖屏时装人像简化重试"
+purpose_cn: "v0_3_3_retry_001 使用的简化提示词；降低复杂细节，仅保留成人时装人像、夜景阳台、竖屏构图和无水印要求"
+scene_type: urban_night_fashion_portrait
+subject_category: adult_fashion_model
+aspect_ratio: "9:16"
+style_direction: "realistic editorial night street fashion photography"
+
+prompt: |
+  Realistic vertical 9:16 night fashion portrait of an adult woman on a city balcony. Full-body editorial photo, red off-shoulder crop top, denim shorts, black heels, small black shoulder bag. She stands beside a cream railing with dark metal bars, city buildings and soft lights blurred in the background. Clean flash-lit subject, natural skin tone, shallow depth of field, stylish urban nightlife mood. No text, no logo, no watermark.
+
+negative_prompt: |
+  watermark, logo, readable text, underage subject, explicit nudity, extra limbs, distorted face, bad anatomy, duplicate person, cartoon, anime, low resolution
+
+acceptance_gate:
+  prompt_subject_match: true
+  adult_subject_only: true
+  person_expected: true
+  vertical_9_16_composition: true
+  no_readable_text_or_logo_unless_expected: true
+  no_watermark: true
+
+memory_write_allowed: false
+daily_note_write_allowed: false
+plugin_call_allowed_by_this_file: false
+image_generation_allowed_by_this_file: false

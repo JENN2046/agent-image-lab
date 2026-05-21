@@ -2,6 +2,188 @@
 
 ---
 
+## Checkpoint - v0.3.3 First Live Generation Pilot Gate
+
+```text
+phase: v0_3_3_first_live_generation_pilot
+phase_id: v0_3_3_first_live_generation_pilot
+status: attempted_failed_no_retry_uncommitted
+long_term_goal: v0_3_controlled_real_provider_production_loop
+source_phase: v0_3_2_live_candidate_action_packet
+completed:
+- entered the v0.3.3 Red-to-Amber execution gate from the filled v0.3.2 candidate packet
+- consumed the one authorized built-in image generation call
+- recorded the failed no-image result in the authorized output, receipt, and registry paths
+- added v0_3_3_retry_001 with a simplified prompt and separate failed receipt/registry paths
+- added v0_3_3_smoke_001_neutral with a neutral object-only red apple prompt, separate output/receipt/registry paths, and one successful image artifact
+- added v0_3_3_safe_portrait_001 with a safer adult editorial portrait prompt, separate output/receipt/registry paths, and one successful image artifact
+- created a local gate document, fixture, and validator for the first live generation pilot
+- kept remaining provider/plugin/API/image retry budgets at zero after the failed attempt
+- verified prompt package target, 9:16 portrait subject, output path, receipt path, registry path, one-shot candidate budget, zero retry, no-overwrite, no-secret, and no raw-payload constraints
+- recorded required pre-generation blockers for exact v0.3.3 execution authorization, output/receipt/registry write plans, and image tool artifact binding
+latest_validation:
+- node scripts/validate_v0_3_3_first_live_generation_pilot_gate.js --write-fixture
+- node scripts/validate_autopilot_agent_board_resume_compaction_guard.js --write-fixture
+- node scripts/validate_v0_3_3_first_live_generation_pilot_gate.js
+- node scripts/validate_v0_3_2_live_candidate_action_packet.js
+- node scripts/validate_autopilot_agent_board_resume_compaction_guard.js
+- node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js
+- node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js
+- node scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js
+- git diff --check
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+validation_evidence:
+- v0.3.3 gate validator passed with 10/10 negative cases caught
+- agent_board resume guard passed with next Red decision owner_authorize_or_reject_v0_3_3_execution
+- complete MVP passed after the safe portrait extension; controlled readiness validators matched v0_3_3_first_live_generation_pilot_gate_slice with 32 exact files
+- neutral smoke test and safe adult editorial portrait test each produced one project-copied image artifact and recorded receipt/registry evidence
+not_performed:
+- no API call
+- no successful image generation
+- no DailyNote/VCP memory write
+- no real manifest/VCPChat/VCPToolBox read
+- no dependency change
+- no runtime probe
+- no secret read
+- no push/tag/release/deploy
+execution_authorized_by_this_gate: true
+live_provider_call_allowed_now: false
+image_generation_allowed_now: false
+output_write_allowed_now: false
+receipt_write_allowed_now: false
+registry_write_allowed_now: false
+gate_status: attempted_failed_no_retry
+candidate_packet_status: filled_pending_v0_3_3_execution_gate
+actual_image_generation_performed: false
+image_generation_performed: false
+provider_contact_status: attempted_failed
+plugin_call_status: attempted_failed
+receipt_written: true
+registry_written: true
+output_directory_created: true
+secret_value_read_performed: false
+push_tag_release_deploy_performed: false
+provider_calls_used: 1
+image_candidates_generated: 0
+failure_class: provider_tool_user_error
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: true_provider_tool_failed
+push_status: not_performed
+recommended_next: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+smoke_001_status: succeeded_image_generated
+smoke_001_prompt_package_ref: prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml
+smoke_001_output_ref: runs/real_generation/v0_3_3_smoke_001_neutral/neutral_smoke_test_red_apple_v1.png
+smoke_001_diagnostic_result: route_available_for_neutral_object_prompt
+safe_portrait_001_status: succeeded_image_generated
+safe_portrait_001_prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+safe_portrait_001_output_ref: runs/real_generation/v0_3_3_safe_portrait_001/safe_adult_editorial_portrait_v1.png
+safe_portrait_001_diagnostic_result: person_portrait_route_available_with_safe_adult_editorial_prompt
+diagnostic_next: design_next_fashion_prompt_by_progressively_adding_one_style_risk_at_a_time
+```
+
+---
+
+## Checkpoint - v0.3.2 Live Candidate Action Packet
+
+```text
+phase: v0_3_2_live_candidate_action_packet
+phase_id: v0_3_2_live_candidate_action_packet
+status: filled_validated_uncommitted
+long_term_goal: v0_3_controlled_real_provider_production_loop
+source_phase: v0_3_1_real_provider_cost_boundary_plan
+completed:
+- filled the Red-gated live candidate action packet with owner-supplied target fields
+- encoded packet_status as filled_pending_v0_3_3_execution_gate
+- kept current provider/plugin/API/image/cost budgets at zero
+- verified owner-supplied provider route, model, command, visual task, prompt package, output, receipt, registry, Review Console bridge, rollback acknowledgement, and authorization phrase
+- added fail-closed negative cases for execution, invented provider target, nonzero budget, loosened cost/overwrite/raw-payload boundaries, missing owner phrase blocker, and side-effect flags
+latest_validation:
+- node --check scripts/validate_v0_3_2_live_candidate_action_packet.js
+- node --check scripts/validate_autopilot_agent_board_resume_compaction_guard.js
+- node --check scripts/lib/governance_tooling_maintenance_slice.js
+- node scripts/validate_v0_3_2_live_candidate_action_packet.js
+- node scripts/validate_autopilot_agent_board_resume_compaction_guard.js
+- node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js
+- node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js
+- node scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js
+- git diff --check
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+validation_evidence:
+- complete MVP passed after governance_tooling_maintenance_slice recognized v0_3_2_live_candidate_action_packet_slice
+- current exact local slice: 18 files
+not_performed:
+- no provider contact
+- no plugin call
+- no API call
+- no image generation
+- no output directory creation
+- no DailyNote/VCP memory write
+- no real manifest/VCPChat/VCPToolBox read
+- no dependency change
+- no runtime probe
+- no secret read
+- no push/tag/release/deploy
+execution_authorized_by_this_packet: false
+live_provider_call_allowed_now: false
+image_generation_allowed_now: false
+packet_status: filled_pending_v0_3_3_execution_gate
+activation_blocked_by_missing_exact_owner_target: false
+execution_still_requires_v0_3_3_gate: true
+filled_prompt_package_ref: prompts/image_generation/fashion_night_balcony_vertical_portrait_v1.yaml
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
+push_status: not_performed
+recommended_next: v0_3_3_first_live_generation_pilot
+next_phase_after_owner_fill: v0_3_3_first_live_generation_pilot
+```
+
+---
+
+## Checkpoint - v0.3.1 Real Provider Cost Boundary Plan
+
+```text
+phase: v0_3_1_real_provider_cost_boundary_plan
+phase_id: v0_3_1_real_provider_cost_boundary_plan
+status: completed_validated_uncommitted
+long_term_goal: v0_3_controlled_real_provider_production_loop
+source_phase: agent_board_resume_compaction_guard_v1
+completed:
+- selected v0.3 Controlled Real Provider Production Loop as the next long-term mainline
+- created Red-gated provider cost boundary plan before any live provider call
+- carried forward amber_packet_to_receipt_traceability_v1 and future_real_provider_cost_boundary_v1 as the completed source chain
+- required exact provider target, call budget, cost cap, rollback limitations, receipt, registry, and Review Console bridge before future activation
+- encoded cost_unknown_is_red and current live budgets as zero
+latest_validation:
+- node --check scripts/lib/governance_tooling_maintenance_slice.js
+- node scripts/validate_v0_3_1_real_provider_cost_boundary_plan.js
+- node scripts/validate_autopilot_agent_board_resume_compaction_guard.js
+- node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js
+- node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js
+- node scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js
+- git diff --check
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+validation_evidence:
+- complete MVP passed after governance_tooling_maintenance_slice recognized v0_3_1_real_provider_cost_boundary_plan_slice
+- current exact local slice: 13 files
+not_performed:
+- no provider contact
+- no plugin call
+- no API call
+- no image generation
+- no DailyNote/VCP memory write
+- no real manifest/VCPChat/VCPToolBox read
+- no dependency change
+- no runtime probe
+- no secret read
+- no push/tag/release/deploy
+execution_authorized_by_this_plan: false
+live_provider_call_allowed_now: false
+image_generation_allowed_now: false
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
+push_status: not_performed
+recommended_next: v0_3_2_live_candidate_action_packet
+```
+
+---
+
 ## Checkpoint - Agent Board Resume Compaction Guard v1
 
 ```text

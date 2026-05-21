@@ -2,6 +2,151 @@
 
 ---
 
+## Current Handoff Update - v0.3.3 First Live Generation Pilot Gate
+
+```text
+phase: v0_3_3_first_live_generation_pilot
+phase_id: v0_3_3_first_live_generation_pilot
+status: attempted_failed_no_retry_uncommitted
+mode: Amber one-shot provider execution attempted / no image artifact
+summary: Executed the first live generation pilot once under exact v0.3.3 authorization; the built-in image generation tool returned UserError for the fashion-night-balcony prompt path, retry_001 failed the same way, neutral object-only smoke succeeded, and safer adult editorial portrait also succeeded.
+current_autonomy_model: Smart Standing Authorization v3
+startup_default_model: Smart Standing Authorization v3
+a4_8_status: retained_as_green_lane_substrate
+a5_status: classified_by_lane_and_envelope
+long_term_goal: v0_3_controlled_real_provider_production_loop
+source_phase: v0_3_2_live_candidate_action_packet
+selected_task: enter_first_live_generation_pilot_gate_without_execution
+gate_id: gate-v0-3-3-first-live-generation-pilot
+packet_id: packet-v0-3-2-live-candidate-action-packet
+gate_status: attempted_failed_no_retry
+candidate_packet_status: filled_pending_v0_3_3_execution_gate
+validator_ref: scripts/validate_v0_3_3_first_live_generation_pilot_gate.js
+fixture_ref: tests/schema_examples/v0_3_3_first_live_generation_pilot_gate.example.json
+gate_ref: docs/V0_3_3_FIRST_LIVE_GENERATION_PILOT_GATE.md
+execution_authorized_by_this_gate: true
+live_provider_call_allowed_now: false
+image_generation_allowed_now: false
+output_write_allowed_now: false
+receipt_write_allowed_now: false
+registry_write_allowed_now: false
+can_execute_now: false
+exact_v0_3_3_execution_authorization_present: true
+provider_calls_used: 1
+image_candidates_generated: 0
+failure_class: provider_tool_user_error
+filled_prompt_package_ref: prompts/image_generation/fashion_night_balcony_vertical_portrait_v1.yaml
+cost_unknown_is_red: true
+push_status: not_performed
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: true_provider_tool_failed
+actual_image_generation_performed: false
+image_generation_performed: false
+provider_contact_status: attempted_failed
+plugin_call_status: attempted_failed
+receipt_written: true
+registry_written: true
+output_directory_created: true
+secret_value_read_performed: false
+push_tag_release_deploy_performed: false
+validation_status: completed_validated_uncommitted
+validation_evidence: failed provider tool attempt receipt written; neutral smoke test succeeded; safe adult editorial portrait test succeeded; resume guard, controlled readiness validators, git diff --check, and complete MVP passed; current exact local slice has 32 files.
+not_performed: no API call outside the provider route, no DailyNote/VCP memory write, no real manifest/VCPChat/VCPToolBox read, no dependency change, no runtime probe, no secret read, no push/tag/release/deploy.
+retry_001_status: attempted_failed_no_retry.
+retry_001_prompt_package_ref: prompts/image_generation/fashion_night_balcony_vertical_portrait_retry_001_simple.yaml.
+retry_001_receipt_ref: reports/provider_receipts/v0_3_3_retry_001_receipt.json.
+retry_001_registry_ref: reports/provider_receipts/v0_3_3_retry_001_registry.json.
+smoke_001_status: succeeded_image_generated.
+smoke_001_prompt_package_ref: prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml.
+smoke_001_output_ref: runs/real_generation/v0_3_3_smoke_001_neutral/neutral_smoke_test_red_apple_v1.png.
+smoke_001_receipt_ref: reports/provider_receipts/v0_3_3_smoke_001_neutral_receipt.json.
+smoke_001_registry_ref: reports/provider_receipts/v0_3_3_smoke_001_neutral_registry.json.
+smoke_001_diagnostic_result: route_available_for_neutral_object_prompt.
+safe_portrait_001_status: succeeded_image_generated.
+safe_portrait_001_prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml.
+safe_portrait_001_output_ref: runs/real_generation/v0_3_3_safe_portrait_001/safe_adult_editorial_portrait_v1.png.
+safe_portrait_001_receipt_ref: reports/provider_receipts/v0_3_3_safe_portrait_001_receipt.json.
+safe_portrait_001_registry_ref: reports/provider_receipts/v0_3_3_safe_portrait_001_registry.json.
+safe_portrait_001_diagnostic_result: person_portrait_route_available_with_safe_adult_editorial_prompt.
+diagnostic_next: design_next_fashion_prompt_by_progressively_adding_one_style_risk_at_a_time.
+recommended_next: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+```
+
+---
+
+## Current Handoff Update - v0.3.2 Live Candidate Action Packet
+
+```text
+phase: v0_3_2_live_candidate_action_packet
+phase_id: v0_3_2_live_candidate_action_packet
+status: filled_validated_uncommitted
+mode: Red-gated local preflight only
+summary: Filled the first live candidate action packet as a reviewable but still non-executable packet; v0.3.3 execution gate is still required before any provider/image action.
+current_autonomy_model: Smart Standing Authorization v3
+startup_default_model: Smart Standing Authorization v3
+a4_8_status: retained_as_green_lane_substrate
+a5_status: classified_by_lane_and_envelope
+long_term_goal: v0_3_controlled_real_provider_production_loop
+source_phase: v0_3_1_real_provider_cost_boundary_plan
+selected_task: draft_first_live_candidate_action_packet_without_execution
+packet_id: packet-v0-3-2-live-candidate-action-packet
+packet_status: filled_pending_v0_3_3_execution_gate
+validator_ref: scripts/validate_v0_3_2_live_candidate_action_packet.js
+fixture_ref: tests/schema_examples/v0_3_2_live_candidate_action_packet.example.json
+packet_ref: docs/V0_3_2_LIVE_CANDIDATE_ACTION_PACKET.md
+execution_authorized_by_this_packet: false
+live_provider_call_allowed_now: false
+image_generation_allowed_now: false
+activation_blocked_by_missing_exact_owner_target: false
+execution_still_requires_v0_3_3_gate: true
+filled_prompt_package_ref: prompts/image_generation/fashion_night_balcony_vertical_portrait_v1.yaml
+cost_unknown_is_red: true
+push_status: not_performed
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
+validation_status: completed_validated_uncommitted
+validation_evidence: complete MVP passed; controlled readiness validators matched v0_3_2_live_candidate_action_packet_slice with 18 exact files
+not_performed: no provider contact, no plugin call, no API call, no image generation, no output directory creation, no DailyNote/VCP memory write, no real manifest/VCPChat/VCPToolBox read, no dependency change, no runtime probe, no secret read, no push/tag/release/deploy.
+recommended_next: v0_3_3_first_live_generation_pilot.
+next_phase_after_owner_fill: v0_3_3_first_live_generation_pilot.
+```
+
+---
+
+## Current Handoff Update - v0.3.1 Real Provider Cost Boundary Plan
+
+```text
+phase: v0_3_1_real_provider_cost_boundary_plan
+phase_id: v0_3_1_real_provider_cost_boundary_plan
+status: completed_validated_uncommitted
+mode: Red-gated local planning only
+summary: Selected v0.3 Controlled Real Provider Production Loop as the long-term mainline and created the Red-gated provider cost boundary plan before any live provider/API/image action.
+current_autonomy_model: Smart Standing Authorization v3
+startup_default_model: Smart Standing Authorization v3
+a4_8_status: retained_as_green_lane_substrate
+a5_status: classified_by_lane_and_envelope
+long_term_goal: v0_3_controlled_real_provider_production_loop
+source_phase: agent_board_resume_compaction_guard_v1
+completed_traceability_phase: amber_packet_to_receipt_traceability_v1
+accepted_previous_red_boundary: future_real_provider_cost_boundary_v1
+selected_task: define_real_provider_cost_boundary_before_live_calls
+validator_ref: scripts/validate_v0_3_1_real_provider_cost_boundary_plan.js
+fixture_ref: tests/schema_examples/v0_3_1_real_provider_cost_boundary_plan.example.json
+plan_ref: docs/V0_3_1_REAL_PROVIDER_COST_BOUNDARY_PLAN.md
+long_term_goal_ref: docs/V0_3_CONTROLLED_REAL_PROVIDER_PRODUCTION_LOOP.md
+execution_authorized_by_this_plan: false
+live_provider_call_allowed_now: false
+image_generation_allowed_now: false
+cost_unknown_is_red: true
+rollback_limitations_acknowledged: true
+push_status: not_performed
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
+validation_status: completed_validated_uncommitted
+validation_evidence: complete MVP passed; controlled readiness validators matched v0_3_1_real_provider_cost_boundary_plan_slice with 13 exact files
+not_performed: no provider contact, no plugin call, no API call, no image generation, no DailyNote/VCP memory write, no real manifest/VCPChat/VCPToolBox read, no dependency change, no runtime probe, no secret read, no push/tag/release/deploy.
+recommended_next: v0_3_2_live_candidate_action_packet.
+```
+
+---
+
 ## Current Handoff Update - Agent Board Resume Compaction Guard v1
 
 ```text

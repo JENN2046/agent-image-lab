@@ -1,5 +1,144 @@
 ---
 
+- [x] ID: v0_3_3_first_live_generation_pilot
+      Title: Enter first Codex sample image generation pilot gate
+      Reason: The v0.3.2 candidate packet is filled, so the next safe local step is a Red-to-Amber execution gate that proves what remains blocked before the first real image call.
+      Long-term goal: v0_3_controlled_real_provider_production_loop.
+      Source phase: v0_3_2_live_candidate_action_packet.
+      Lane: Red-to-Amber execution gate.
+      Gate: docs/V0_3_3_FIRST_LIVE_GENERATION_PILOT_GATE.md.
+      Validator: scripts/validate_v0_3_3_first_live_generation_pilot_gate.js.
+      Fixture: tests/schema_examples/v0_3_3_first_live_generation_pilot_gate.example.json.
+      Status: attempted_failed_no_retry_uncommitted.
+      Validation evidence: failed provider tool attempt receipt written; neutral smoke test succeeded; safe adult editorial portrait test succeeded; complete MVP passed; controlled readiness validators matched v0_3_3_first_live_generation_pilot_gate_slice with 32 exact files.
+      Gate status: attempted_failed_no_retry.
+      Candidate packet status: filled_pending_v0_3_3_execution_gate.
+      Execution authorized by this gate: true.
+      Live provider call allowed now: false.
+      Image generation allowed now: false.
+      Output write allowed now: false.
+      Receipt write allowed now: false.
+      Registry write allowed now: false.
+      Actual image generation performed: false.
+      Provider contact status: attempted_failed.
+      Plugin call status: attempted_failed.
+      Receipt written: true.
+      Registry written: true.
+      Output directory created: true.
+      Provider calls used: 1.
+      Image candidates generated: 0.
+      Failure class: provider_tool_user_error.
+      Secret value read performed: false.
+      Push/tag/release/deploy performed: false.
+      Push status: push_status: not_performed.
+      External action state: provider_plugin_API_image_memory_source_read_dependency_runtime_performed: true_provider_tool_failed.
+      Cost unknown is Red: true.
+      Recommended next: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Stop condition: any provider/image call before v0.3.3 execution authorization, output path collision, missing receipt/registry write plan, missing image tool artifact binding plan, secret read, raw provider payload capture, push/tag/release/deploy, or validation failure requiring judgment.
+
+- [x] ID: owner_authorize_or_reject_v0_3_3_execution
+      Title: Authorize or reject the first live generation execution
+      Reason: The v0.3.3 gate required an exact owner decision before consuming the one-shot provider budget.
+      Lane: Red human decision.
+      Required authorization: exact v0.3.3 execution approval for provider route image_gen.imagegen, prompt package prompts/image_generation/fashion_night_balcony_vertical_portrait_v1.yaml, output directory runs/real_generation/v0_3_3_codex_sample_first_trial/, receipt path reports/provider_receipts/v0_3_3_codex_sample_first_trial_receipt.json, registry path reports/provider_receipts/provider_receipt_registry.json, max_provider_calls=1, max_image_candidates=1, retry_limit=0, cost cap=1 usage unit, no overwrite, no secret read, no raw payload capture, no push/tag/release.
+      Status: completed_by_owner_authorization_and_one_failed_provider_tool_attempt.
+      Stop condition: no retry because retry_limit=0.
+
+- [ ] ID: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+      Title: Inspect failed provider tool attempt or authorize a new trial
+      Reason: The first built-in image generation call returned UserError and produced no image artifact; retry_limit=0 prevents automatic retry.
+      Lane: Red human decision.
+      Required authorization: either accept the failed receipt as the v0.3.3 pilot result, or authorize a new exactly scoped trial with prompt package, output directory, receipt path, registry path, and budget.
+      Retry 001 status: attempted_failed_no_retry.
+      Retry 001 prompt package: prompts/image_generation/fashion_night_balcony_vertical_portrait_retry_001_simple.yaml.
+      Retry 001 receipt: reports/provider_receipts/v0_3_3_retry_001_receipt.json.
+      Smoke 001 status: succeeded_image_generated.
+      Smoke 001 prompt package: prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml.
+      Smoke 001 output: runs/real_generation/v0_3_3_smoke_001_neutral/neutral_smoke_test_red_apple_v1.png.
+      Smoke 001 receipt: reports/provider_receipts/v0_3_3_smoke_001_neutral_receipt.json.
+      Smoke 001 diagnostic result: route_available_for_neutral_object_prompt.
+      Safe portrait 001 status: succeeded_image_generated.
+      Safe portrait 001 prompt package: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml.
+      Safe portrait 001 output: runs/real_generation/v0_3_3_safe_portrait_001/safe_adult_editorial_portrait_v1.png.
+      Safe portrait 001 receipt: reports/provider_receipts/v0_3_3_safe_portrait_001_receipt.json.
+      Safe portrait 001 diagnostic result: person_portrait_route_available_with_safe_adult_editorial_prompt.
+      Stop condition: any retry or new provider call without a new exact authorization and non-colliding output/receipt/registry plan.
+
+---
+
+- [x] ID: v0_3_2_live_candidate_action_packet
+      Title: Draft first live candidate action packet without execution
+      Reason: The v0.3 loop needs a reviewable packet that names every field required before a real provider call, while staying blocked until the owner fills exact target and cost values.
+      Long-term goal: v0_3_controlled_real_provider_production_loop.
+      Source phase: v0_3_1_real_provider_cost_boundary_plan.
+      Lane: Red-gated preflight.
+      Packet: docs/V0_3_2_LIVE_CANDIDATE_ACTION_PACKET.md.
+      Validator: scripts/validate_v0_3_2_live_candidate_action_packet.js.
+      Fixture: tests/schema_examples/v0_3_2_live_candidate_action_packet.example.json.
+      Status: filled_validated_uncommitted.
+      Validation evidence: complete MVP passed; controlled readiness validators matched v0_3_2_live_candidate_action_packet_slice with 18 exact files.
+      Packet status: filled_pending_v0_3_3_execution_gate.
+      Execution authorized by this packet: false.
+      Live provider call allowed now: false.
+      Image generation allowed now: false.
+      Activation blocked by missing exact owner target: false.
+      Execution still requires v0.3.3 gate: true.
+      Filled prompt package: prompts/image_generation/fashion_night_balcony_vertical_portrait_v1.yaml.
+      Push status: push_status: not_performed.
+      External action state: provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false.
+      Cost unknown is Red: true.
+      Recommended next: v0_3_3_first_live_generation_pilot.
+      Next phase after owner fill: v0_3_3_first_live_generation_pilot.
+      Stop condition: any live provider/plugin/API/image action, unknown cost, missing exact target, missing prompt package, missing output/receipt/registry path, secret read, raw provider payload capture, push/tag/release/deploy, or validation failure requiring judgment.
+
+- [x] ID: owner_fill_or_reject_v0_3_2_live_candidate_action_packet
+      Title: Fill or reject the first live candidate packet
+      Reason: The packet is intentionally blocked until the owner selects exact provider route, model, command, visual task, prompt package, budget, cost cap, output, receipt, registry, Review Console bridge, rollback acknowledgement, and authorization phrase.
+      Lane: Red human decision.
+      Required authorization: exact owner-supplied packet fill or explicit rejection.
+      Status: completed_by_owner_fill.
+      Stop condition: any attempt to infer missing provider, cost, prompt, output, or authorization fields.
+
+- [ ] ID: v0_3_3_first_live_generation_pilot
+      Title: First Codex sample image generation pilot
+      Reason: The v0.3.2 candidate packet is filled, but execution still requires a separate v0.3.3 gate before any image generation or output write.
+      Lane: Red-to-Amber execution gate.
+      Required authorization: confirm v0.3.3 execution using the filled v0.3.2 packet, exact prompt package, output directory, receipt path, registry path, and no-overwrite/no-secret/no-push limits.
+      Stop condition: any provider/image call before v0.3.3 gate validation, output path collision, missing receipt/registry write plan, secret read, raw provider payload capture, or validation failure requiring judgment.
+
+---
+
+- [x] ID: v0_3_1_real_provider_cost_boundary_plan
+      Title: Define Red-gated real provider cost boundary before live calls
+      Reason: The v0.3 long-term mainline needs exact provider target, call budget, cost cap, rollback limitations, receipt, registry, and Review Console boundaries before any live provider/plugin/API/image action.
+      Long-term goal: v0_3_controlled_real_provider_production_loop.
+      Source phase: agent_board_resume_compaction_guard_v1.
+      Completed traceability phase: amber_packet_to_receipt_traceability_v1.
+      Accepted previous Red boundary: future_real_provider_cost_boundary_v1.
+      Lane: Red-gated planning.
+      Validator: scripts/validate_v0_3_1_real_provider_cost_boundary_plan.js.
+      Fixture: tests/schema_examples/v0_3_1_real_provider_cost_boundary_plan.example.json.
+      Plan: docs/V0_3_1_REAL_PROVIDER_COST_BOUNDARY_PLAN.md.
+      Status: completed_validated_uncommitted.
+      Validation evidence: complete MVP passed; controlled readiness validators matched v0_3_1_real_provider_cost_boundary_plan_slice with 13 exact files.
+      Execution authorized by this plan: false.
+      Live provider call allowed now: false.
+      Image generation allowed now: false.
+      Push status: push_status: not_performed.
+      External action state: provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false.
+      Cost unknown is Red: true.
+      Recommended next: v0_3_2_live_candidate_action_packet.
+      Stop condition: any live provider/plugin/API/image action, unknown cost, missing cost cap, secret read, raw request/response recording, push/tag/release/deploy, or validation failure requiring judgment.
+
+- [ ] ID: v0_3_2_live_candidate_action_packet
+      Title: Draft the first live candidate action packet
+      Reason: After v0.3.1, the next local step is to turn an exact future live task into a reviewable action packet candidate without executing it.
+      Lane: Red-gated preflight.
+      Required authorization: exact provider target, plugin/provider route, model, command, visual task, prompt package, call budget, cost cap, output directory, receipt path, registry path, rollback limitations, and owner phrase.
+      Stop condition: any live provider/plugin/API/image action or missing exact target/cost/budget/rollback field.
+
+---
+
 - [x] ID: agent_board_resume_compaction_guard_v1
       Title: Guard resume surfaces against long-session drift
       Reason: After packet-to-receipt traceability, the next Green hardening should verify compact resume surfaces cite the current phase and next safe task.
