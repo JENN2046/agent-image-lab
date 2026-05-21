@@ -105,6 +105,33 @@ guard:
 ```
 ---
 
+## local_full_autopilot_ready_closeout
+
+```yaml
+task_id: final_local_closeout
+lane: Green
+action_performed: local_full_autopilot_readiness_status_closeout
+status: COMPLETED_VALIDATED_LOCAL_FULL_AUTOPILOT_READY
+complete_readiness_gate: scripts/validate_complete_autopilot_readiness_gate.js
+result: completed_validated_guarded_local_commit
+push_status: not_performed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+dependency_change_performed: false
+runtime_probe_performed: false
+secret_value_read_performed: false
+push_tag_release_deploy_performed: false
+```
+
+---
+
 ## complete_autopilot_readiness_gate_v1
 
 ```yaml

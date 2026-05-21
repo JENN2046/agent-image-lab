@@ -55,6 +55,11 @@ agent-board reconciliation, next-safe-task selection, Amber dry-run receipt,
 receipt registry, checkpoint, and evolution backlog as one chain before local
 full-autopilot closeout.
 
+Closeout rule: the local full-autopilot label requires the complete readiness
+gate, MVP validation, and clean worktree after commit. It does not authorize
+push, tag, release, deploy, provider calls, runtime probes, source reads,
+dependency changes, memory writes, image generation, or secret access.
+
 This document does not authorize provider contact, plugin calls, API calls,
 image generation, DailyNote writes, VCP memory writes, real manifest reads, real
 VCPChat reads, real VCPToolBox reads, dependency changes, runtime probes, push,

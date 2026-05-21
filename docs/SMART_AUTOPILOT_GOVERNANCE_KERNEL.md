@@ -84,6 +84,11 @@ snapshot, `.agent_board` reconciliation, next-safe-task selection, Amber dry-run
 receipt, receipt registry, checkpoint, and evolution backlog line up before
 final closeout.
 
+Final local closeout rule: after the complete readiness gate passes, status
+surfaces may be marked `COMPLETED_VALIDATED_LOCAL_FULL_AUTOPILOT_READY` only when
+the worktree is clean after a guarded local commit, all local validators pass,
+and no Red Lane action was performed.
+
 ### Truth Model
 
 Uses repository reality as ground:

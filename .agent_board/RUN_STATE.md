@@ -1,5 +1,31 @@
 ---
 
+## local_full_autopilot_ready_closeout
+
+```text
+phase: local_full_autopilot_ready_closeout
+phase_id: local_full_autopilot_ready_closeout
+status: COMPLETED_VALIDATED_LOCAL_FULL_AUTOPILOT_READY
+mode: Green Lane final local closeout
+objective: close the local product-grade autopilot chain after all phase validators pass
+current_task_id: final_local_closeout
+current_autonomy_model: Smart Standing Authorization v3
+baseline_before_edit: 64cb305
+ahead_count_before_edit: 7
+completed_phases: agent_board_queue_reconciler_v1; next_safe_task_orchestrator_v1; amber_dry_run_execution_loop_v1; autopilot_evolution_engine_v1; complete_autopilot_readiness_gate_v1; final_local_closeout
+complete_readiness_gate_ref: scripts/validate_complete_autopilot_readiness_gate.js
+complete_readiness_fixture_ref: tests/schema_examples/complete_autopilot_readiness_gate.example.json
+final_validation_required: powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
+push_allowed: false
+push_status: not_performed
+validation_status: COMPLETED_VALIDATED_LOCAL_FULL_AUTOPILOT_READY
+commit_message: docs: close out local full autopilot readiness
+recommended_next: owner_push_safety_gate_after_review
+```
+
+---
+
 ## complete_autopilot_readiness_gate_v1
 
 ```text

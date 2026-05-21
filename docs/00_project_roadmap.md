@@ -5,9 +5,9 @@
 ## 当前产品主线恢复点
 
 ```yaml
-current_phase: complete_autopilot_readiness_gate_v1
-phase_status: completed_validated_guarded_local_commit
-source_phase: complete_autopilot_readiness_gate_v1
+current_phase: local_full_autopilot_ready_closeout
+phase_status: COMPLETED_VALIDATED_LOCAL_FULL_AUTOPILOT_READY
+source_phase: final_local_closeout
 current_autonomy_model: Smart Standing Authorization v3
 startup_default_model: Smart Standing Authorization v3
 a4_8_status: retained_as_green_lane_substrate
@@ -67,6 +67,7 @@ next_safe_task_orchestrator_active: true
 amber_dry_run_execution_loop_active: true
 autopilot_evolution_engine_active: true
 complete_autopilot_readiness_gate_active: true
+local_full_autopilot_ready: true
 autopilot_goal_schema_ref: schemas/autopilot_goal.schema.yaml
 autopilot_route_plan_schema_ref: schemas/autopilot_route_plan.schema.yaml
 autopilot_task_queue_schema_ref: schemas/autopilot_task_queue.schema.yaml

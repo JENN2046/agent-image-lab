@@ -128,6 +128,16 @@ Risk: If the receipt or budget model stays prose-only, future Amber actions coul
 Mitigation: The validator checks lane definitions, default budgets, Red gates, Amber receipt requirements, example fixtures, and no-real-A5 guard flags.
 ---
 
+## DECISION-AIL-AUTO-021 — Local full-autopilot readiness requires clean validated closeout
+
+Status: accepted.
+
+Decision: The project may declare `COMPLETED_VALIDATED_LOCAL_FULL_AUTOPILOT_READY` only after all local chain gates pass, status surfaces are aligned, a guarded local commit is made, and the worktree is clean.
+
+Boundary: Push remains unperformed and requires a separate owner-authorized push safety gate.
+
+---
+
 ## DECISION-AIL-AUTO-020 — Complete readiness gate is required before final closeout
 
 Status: accepted.
