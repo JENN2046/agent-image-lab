@@ -23,7 +23,7 @@
       "amber_readiness_claim": "future_amber_loop_fixture_validated_not_current_task_execution",
       "receipt_registry_count": 4,
       "amber_receipt_registered": true,
-      "evolution_backlog_next_task": "amber_action_packet_preflight_v1"
+      "evolution_backlog_next_task": "readiness_receipt_registry_cross_claims_v1"
     },
     "invariants": {
       "goal_route_queue_links_verified": true,

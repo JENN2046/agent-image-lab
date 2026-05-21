@@ -6,6 +6,43 @@ remain the source of truth.
 
 ---
 
+## amber_action_packet_preflight_v1
+
+```yaml
+task_id: amber_action_packet_preflight_v1
+lane: Green
+action_performed: local_action_packet_schema_fixture_validator_hardening
+selected_task: add_amber_action_packet_preflight_validator
+candidate_gap_count: 4
+negative_case_count: 12
+caught_negative_case_count: 12
+all_negative_cases_caught: true
+packet_valid: true
+packet_mirrors_embedded_dry_run_packet: true
+validator_ref: scripts/validate_autopilot_amber_action_packet_preflight.js
+schema_ref: schemas/autopilot_amber_action_packet.schema.yaml
+fixture_ref: tests/schema_examples/autopilot_amber_action_packet.example.json
+negative_fixture_ref: tests/schema_examples/autopilot_amber_action_packet_negative_cases.example.json
+result: completed_validated_guarded_local_commit
+next_recommended_task: readiness_receipt_registry_cross_claims_v1
+push_status: not_performed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+dependency_change_performed: false
+runtime_probe_performed: false
+secret_value_read_performed: false
+push_tag_release_deploy_performed: false
+```
+
+---
+
 ## receipt_registry_negative_cases_v1
 
 ```yaml

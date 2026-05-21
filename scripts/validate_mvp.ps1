@@ -70,6 +70,7 @@ $requiredFiles = @(
   'scripts/validate_complete_autopilot_readiness_gate.js',
   'scripts/validate_autopilot_false_readiness_negative_cases.js',
   'scripts/validate_autopilot_receipt_registry_negative_cases.js',
+  'scripts/validate_autopilot_amber_action_packet_preflight.js',
   'scripts/validate_local_checkpoint_manifest.js',
   'scripts/validate_local_commit_scope.js',
   'scripts/validate_post_push_state.js',
@@ -264,11 +265,13 @@ $requiredFiles = @(
   'docs/AUTOPILOT_GOAL_DECOMPOSITION_RUNTIME.md',
   'docs/AUTOPILOT_NEXT_SAFE_TASK_ORCHESTRATOR.md',
   'docs/AUTOPILOT_AMBER_DRY_RUN_EXECUTION_LOOP.md',
+  'docs/AUTOPILOT_AMBER_ACTION_PACKET_PREFLIGHT.md',
   'docs/AUTOPILOT_EVOLUTION_ENGINE.md',
   'docs/AUTOPILOT_COMPLETE_READINESS_GATE.md',
   'docs/AUTOPILOT_FALSE_READINESS_NEGATIVE_CASES.md',
   'schemas/autopilot_autonomy_envelope.schema.yaml',
   'schemas/autopilot_execution_receipt.schema.yaml',
+  'schemas/autopilot_amber_action_packet.schema.yaml',
   'schemas/autopilot_goal.schema.yaml',
   'schemas/autopilot_route_plan.schema.yaml',
   'schemas/autopilot_task_queue.schema.yaml',
@@ -283,6 +286,8 @@ $requiredFiles = @(
   'tests/schema_examples/next_safe_task_orchestration.example.json',
   'tests/schema_examples/amber_dry_run_execution_loop.example.json',
   'tests/schema_examples/autopilot_execution_receipt.amber_dry_run_loop.example.json',
+  'tests/schema_examples/autopilot_amber_action_packet.example.json',
+  'tests/schema_examples/autopilot_amber_action_packet_negative_cases.example.json',
   'tests/schema_examples/autopilot_evolution_backlog.example.json',
   'tests/schema_examples/complete_autopilot_readiness_gate.example.json',
   'tests/schema_examples/autopilot_false_readiness_negative_cases.example.json',
@@ -11821,6 +11826,40 @@ process.exit(child.status || 0);
     }
     if ($autopilotReceiptRegistryNegativeCases.real_manifest_read_performed -ne $false -or $autopilotReceiptRegistryNegativeCases.real_vcpchat_read_performed -ne $false -or $autopilotReceiptRegistryNegativeCases.real_vcptoolbox_read_performed -ne $false -or $autopilotReceiptRegistryNegativeCases.dependency_change_performed -ne $false -or $autopilotReceiptRegistryNegativeCases.runtime_probe_performed -ne $false -or $autopilotReceiptRegistryNegativeCases.secret_value_read_performed -ne $false -or $autopilotReceiptRegistryNegativeCases.push_tag_release_deploy_performed -ne $false) {
       Add-Failure "Autopilot receipt registry negative-case validation must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
+    }
+  }
+
+  $autopilotAmberActionPacketPreflightOutput = & node (Join-Path $Root 'scripts/validate_autopilot_amber_action_packet_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Autopilot Amber action packet preflight validation exited with failure"
+  } else {
+    $autopilotAmberActionPacketPreflight = ($autopilotAmberActionPacketPreflightOutput -join "`n") | ConvertFrom-Json
+    if ($autopilotAmberActionPacketPreflight.passed -ne $true -or $autopilotAmberActionPacketPreflight.phase -ne 'amber_action_packet_preflight_v1') {
+      Add-Failure "Autopilot Amber action packet preflight validation must pass"
+    }
+    if ($autopilotAmberActionPacketPreflight.deterministic_output_verified -ne $true -or $autopilotAmberActionPacketPreflight.fixture_verified -ne $true -or $autopilotAmberActionPacketPreflight.schema_verified -ne $true) {
+      Add-Failure "Autopilot Amber action packet preflight must verify schema and deterministic fixture output"
+    }
+    if ($autopilotAmberActionPacketPreflight.selected_task -ne 'add_amber_action_packet_preflight_validator' -or $autopilotAmberActionPacketPreflight.selected_task_lane -ne 'Green' -or $autopilotAmberActionPacketPreflight.candidate_gap_count -lt 3) {
+      Add-Failure "Autopilot Amber action packet preflight must select exactly one Green task from at least three gaps"
+    }
+    if ($autopilotAmberActionPacketPreflight.packet_valid -ne $true -or $autopilotAmberActionPacketPreflight.packet_mirrors_embedded_dry_run_packet -ne $true) {
+      Add-Failure "Autopilot Amber action packet preflight must validate a packet that mirrors the embedded dry-run packet"
+    }
+    if ($autopilotAmberActionPacketPreflight.cost_unknown_is_red -ne $true -or $autopilotAmberActionPacketPreflight.receipt_required -ne $true -or $autopilotAmberActionPacketPreflight.registry_entry_required -ne $true -or $autopilotAmberActionPacketPreflight.continuation_judge_required -ne $true) {
+      Add-Failure "Autopilot Amber action packet preflight must require known cost, receipt, registry entry, and continuation judge"
+    }
+    if ($autopilotAmberActionPacketPreflight.negative_case_count -lt 8 -or $autopilotAmberActionPacketPreflight.caught_negative_case_count -ne $autopilotAmberActionPacketPreflight.negative_case_count -or $autopilotAmberActionPacketPreflight.all_negative_cases_caught -ne $true) {
+      Add-Failure "Autopilot Amber action packet preflight must catch every negative case"
+    }
+    if ($autopilotAmberActionPacketPreflight.lower_priority_candidates.Count -lt 2 -or $autopilotAmberActionPacketPreflight.red_blocked_candidates -notcontains 'live_provider_action_packet_preflight') {
+      Add-Failure "Autopilot Amber action packet preflight must explain lower-priority and Red-blocked candidates"
+    }
+    if ($autopilotAmberActionPacketPreflight.provider_contact_performed -ne $false -or $autopilotAmberActionPacketPreflight.plugin_call_performed -ne $false -or $autopilotAmberActionPacketPreflight.api_call_performed -ne $false -or $autopilotAmberActionPacketPreflight.image_generation_performed -ne $false -or $autopilotAmberActionPacketPreflight.DailyNote_write_performed -ne $false -or $autopilotAmberActionPacketPreflight.VCP_memory_write_performed -ne $false) {
+      Add-Failure "Autopilot Amber action packet preflight must not perform provider, plugin, API, image, DailyNote, or VCP memory actions"
+    }
+    if ($autopilotAmberActionPacketPreflight.real_manifest_read_performed -ne $false -or $autopilotAmberActionPacketPreflight.real_vcpchat_read_performed -ne $false -or $autopilotAmberActionPacketPreflight.real_vcptoolbox_read_performed -ne $false -or $autopilotAmberActionPacketPreflight.dependency_change_performed -ne $false -or $autopilotAmberActionPacketPreflight.runtime_probe_performed -ne $false -or $autopilotAmberActionPacketPreflight.secret_value_read_performed -ne $false -or $autopilotAmberActionPacketPreflight.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Autopilot Amber action packet preflight must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
     }
   }
 

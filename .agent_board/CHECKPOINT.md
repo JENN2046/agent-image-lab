@@ -1,5 +1,44 @@
 ---
 
+## Checkpoint - Amber Action Packet Preflight v1
+
+```text
+phase: amber_action_packet_preflight_v1
+phase_id: amber_action_packet_preflight_v1
+status: completed_validated_guarded_local_commit
+completed:
+- compiled mission through Goal Decomposition Runtime
+- identified four real-Amber pre-execution safety gaps from current files
+- selected add_amber_action_packet_preflight_validator as the highest-value safe task
+- added standalone Amber action packet schema and fixture
+- added negative cases for missing identity, nonzero local provider budget, unknown cost, secret/raw-private-data/overwrite allowance, dependency changes without exact package list, missing rollback, missing validation, missing stop conditions, missing receipt requirement, and side-effect flag flips
+- advanced Evolution Engine beyond the completed packet preflight capability
+latest_validation:
+- node --check scripts/validate_autopilot_amber_action_packet_preflight.js
+- node scripts/validate_autopilot_amber_action_packet_preflight.js
+- node scripts/validate_autopilot_evolution_engine.js
+- node scripts/validate_complete_autopilot_readiness_gate.js
+- node scripts/validate_amber_dry_run_execution_loop.js
+- node scripts/validate_autopilot_governance_kernel.js
+- node scripts/validate_agent_board_state.js
+- git diff --check
+- powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1 after guarded local commit
+not_performed:
+- no push
+- no tag/release/deploy
+- no provider/plugin/API/image generation
+- no DailyNote/VCP memory write
+- no real manifest/VCPChat/VCPToolBox read
+- no dependency change
+- no runtime probe
+- no secret read
+commit_message: test: add amber action packet preflight
+recommended_next: readiness_receipt_registry_cross_claims_v1
+```
+
+---
+
 ## Checkpoint - Receipt Registry Negative Cases v1
 
 ```text

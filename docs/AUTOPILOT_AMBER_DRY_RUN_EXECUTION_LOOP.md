@@ -7,6 +7,10 @@ side effects:
 envelope -> action packet -> dry-run action -> execution receipt -> registry -> validation -> continuation decision
 ```
 
+The action packet shape is now also validated as a standalone preflight fixture
+by `scripts/validate_autopilot_amber_action_packet_preflight.js`. Future real
+Amber work must pass that preflight before receipt generation or real action.
+
 The dry-run envelope has zero provider/plugin/API/image/runtime calls, zero
 dependency actions, zero external reads, known zero cost, structured rollback,
 and all Red Lane gates still closed.

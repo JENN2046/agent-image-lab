@@ -48,10 +48,14 @@ required_authorization_or_action when applicable
 Green proposals may become future local tasks. Red proposals are advisory only
 and must never be self-authorized.
 
-After final local closeout, `complete_autopilot_readiness_gate_v1` belongs in
-`completed_capabilities`, not in future `proposals`. The next recommendation
-must advance to a real local hardening item such as
-`receipt_registry_negative_cases_v1` or another Green/Amber-safe local task.
+After final local closeout, completed hardening items belong in
+`completed_capabilities`, not in future `proposals`. This includes
+`complete_autopilot_readiness_gate_v1`,
+`receipt_registry_negative_cases_v1`, and
+`amber_action_packet_preflight_v1`. The next recommendation must advance to a
+real local hardening item such as
+`readiness_receipt_registry_cross_claims_v1` or another Green/Amber-safe local
+task.
 
 ## Validation
 

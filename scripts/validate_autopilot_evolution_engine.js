@@ -43,10 +43,13 @@ function main() {
   assert(Array.isArray(actual.completed_capabilities), "completed_capabilities must be present");
   assert(actual.completed_capabilities.some((capability) => capability.capability_id === "complete_autopilot_readiness_gate_v1"), "completed readiness gate must be recorded as completed capability evidence");
   assert(actual.completed_capabilities.some((capability) => capability.capability_id === "receipt_registry_negative_cases_v1"), "receipt registry negative cases must be recorded as completed capability evidence");
+  assert(actual.completed_capabilities.some((capability) => capability.capability_id === "amber_action_packet_preflight_v1"), "Amber action packet preflight must be recorded as completed capability evidence");
   assert(actual.proposals.every((proposal) => proposal.proposal_id !== "complete_autopilot_readiness_gate_v1"), "future proposals must not include completed readiness gate");
   assert(actual.proposals.every((proposal) => proposal.proposal_id !== "receipt_registry_negative_cases_v1"), "future proposals must not include completed receipt registry negative cases");
+  assert(actual.proposals.every((proposal) => proposal.proposal_id !== "amber_action_packet_preflight_v1"), "future proposals must not include completed Amber action packet preflight");
   assert(actual.next_recommended_task !== "complete_autopilot_readiness_gate_v1", "next task must advance beyond completed readiness gate");
   assert(actual.next_recommended_task !== "receipt_registry_negative_cases_v1", "next task must advance beyond completed receipt registry negative cases");
+  assert(actual.next_recommended_task !== "amber_action_packet_preflight_v1", "next task must advance beyond completed Amber action packet preflight");
   assert(!actual.completed_capabilities.some((capability) => capability.capability_id === actual.next_recommended_task), "next recommended task must not already be completed");
   const nextProposal = actual.proposals.find((proposal) => proposal.proposal_id === actual.next_recommended_task);
   assert(nextProposal, "next recommended task must reference an existing proposal");

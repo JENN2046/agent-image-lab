@@ -1,5 +1,29 @@
 ---
 
+- [x] ID: amber_action_packet_preflight_v1
+      Title: Add Amber action packet preflight validation
+      Reason: The Amber dry-run loop embedded an action packet shape, but future real Amber work needed a reusable packet preflight fixture before any provider/plugin/API/image/memory/source-read/runtime/dependency action.
+      Selected task: add_amber_action_packet_preflight_validator.
+      Lane: Green.
+      Candidate gaps found from files: embedded_action_packet_no_standalone_preflight; readiness_receipt_registry_cross_claims; agent_board_resume_compaction_guard; live_provider_action_packet_preflight.
+      Lower-priority candidates: readiness_receipt_registry_cross_claims; agent_board_resume_compaction_guard.
+      Red-blocked candidate: live_provider_action_packet_preflight.
+      Schema: schemas/autopilot_amber_action_packet.schema.yaml.
+      Validator: scripts/validate_autopilot_amber_action_packet_preflight.js.
+      Fixture: tests/schema_examples/autopilot_amber_action_packet.example.json.
+      Negative fixture: tests/schema_examples/autopilot_amber_action_packet_negative_cases.example.json.
+      Status: completed_validated_guarded_local_commit.
+      Commit message: test: add amber action packet preflight.
+      Recommended next: readiness_receipt_registry_cross_claims_v1.
+      Stop condition: push/tag/release/deploy, secret read, destructive action, provider/plugin/API/image/memory/source-read/dependency/runtime requirement, or validation failure requiring judgment.
+
+- [ ] ID: readiness_receipt_registry_cross_claims_v1
+      Title: Cross-check readiness claims against receipt registry and packet coverage
+      Reason: After packet preflight, the next Green hardening should prove readiness receipt claims map to registry entries and preflighted packet evidence.
+      Stop condition: any Red Lane action, external side effect, or validation failure requiring judgment.
+
+---
+
 - [x] ID: receipt_registry_negative_cases_v1
       Title: Add receipt registry negative-case validation
       Reason: Governance kernel validated compliant receipts, but invalid receipt and registry coverage cases needed explicit fail-closed proof.

@@ -76,6 +76,14 @@ shape without external side effects: envelope, action packet, zero-cost dry-run
 action, execution receipt, receipt registry entry, validation, and continuation
 decision.
 
+`scripts/validate_autopilot_amber_action_packet_preflight.js` promotes that
+embedded dry-run action packet into a reusable local preflight gate. Future real
+Amber work must first prove a packet has exact targets, forbidden targets,
+call/write/cost budgets, no secret or raw-private-data access, rollback,
+validation, stop conditions, receipt and registry requirements, and false
+side-effect flags. The preflight validator is fixture-only and does not execute
+provider/plugin/API/image/memory/source-read/runtime/dependency actions.
+
 `scripts/detect_autopilot_evolution_gaps.js` is the local Evolution Engine. It
 inspects known governance docs, validators, examples, receipts, and `.agent_board`
 surfaces to propose future local tasks. It writes no live state, self-authorizes
@@ -215,6 +223,12 @@ max_write_files, dependency action budget, and cost budget. The validator must
 iterate the registry rather than relying only on hardcoded receipt paths. Future
 real Amber execution must have an envelope, receipt schema compatibility, and a
 registry path before it proceeds.
+
+Future real Amber execution must also have a preflighted action packet before
+receipt generation. A packet with unknown cost, missing rollback, missing
+validation, missing stop conditions, missing receipt/registry requirement, true
+side-effect flags, or secret/raw-private-data access must fail closed before any
+real action begins.
 
 Cost unknown, missing cost tracking, uncapped cost, or a missing call budget is
 Red for real external Amber actions. Local-only receipt trials and replays must

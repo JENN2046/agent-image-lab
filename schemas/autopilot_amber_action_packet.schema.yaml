@@ -1,0 +1,91 @@
+# autopilot_amber_action_packet.schema.yaml
+# Machine-checkable contract for Amber action packet preflight fixtures.
+
+autopilot_amber_action_packet:
+  version: v1
+  contract_type: autopilot_amber_action_packet
+  policy_model: Smart Standing Authorization v3 — Budgeted Autonomy Envelope
+  phase: amber_action_packet_preflight_v1
+
+identity:
+  required:
+    - packet_id
+    - task_id
+    - lane
+    - intent
+  lane_allowed_values:
+    - Amber
+
+targets_required:
+  - target_systems
+  - exact_allowed_paths_or_objects
+  - forbidden_paths_or_objects
+  - allowed_commands_or_operations
+
+budget_required:
+  max_call_count:
+    provider_calls: integer
+    plugin_calls: integer
+    api_calls: integer
+    image_candidates: integer
+    runtime_probe_minutes: integer
+  max_write_count: integer
+  max_cost_when_applicable:
+    amount: number | not_applicable
+    currency: string | not_applicable
+    cost_tracking_required: boolean
+    cost_unknown_is_red: boolean
+
+execution_selection_required:
+  selected_plugin_id: string | null
+  command: string | null
+  model: string | null
+  input_reference: string
+  output_directory_or_write_target: string
+
+hard_safety_required:
+  overwrite_existing_files_allowed: boolean
+  secret_value_read_allowed: false
+  raw_private_data_print_allowed: false
+  dependency_manifest_change_allowed: boolean
+  dependency_manifest_change_allowed_exact_package_list: array
+  rollback_or_cleanup_plan: string
+  validation_required: array
+  stop_conditions: array
+  evidence_to_record: array
+  receipt_required: true
+  registry_entry_required: true
+  continuation_judge_required: true
+
+red_lane_fail_closed_conditions:
+  - missing packet id or task id
+  - missing exact target systems
+  - missing allowed and forbidden paths
+  - missing allowed operations
+  - unknown or unbounded cost
+  - provider/plugin/API/image budget without an explicit valid envelope
+  - runtime probe budget without an explicit valid envelope
+  - secret value read allowed
+  - raw private data print allowed
+  - overwrite existing files allowed without explicit overwrite scope
+  - dependency manifest change without exact package list
+  - missing rollback plan
+  - missing validation
+  - missing stop conditions
+  - missing receipt or registry requirement
+  - any side-effect flag set to true in local preflight fixtures
+
+side_effect_flags_required_false:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  real_manifest_read_performed: false
+  real_vcpchat_read_performed: false
+  real_vcptoolbox_read_performed: false
+  dependency_change_performed: false
+  runtime_probe_performed: false
+  secret_value_read_performed: false
+  push_tag_release_deploy_performed: false

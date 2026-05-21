@@ -1,0 +1,90 @@
+{
+  "autopilot_amber_action_packet": {
+    "version": "v1",
+    "contract_type": "autopilot_amber_action_packet",
+    "policy_model": "Smart Standing Authorization v3 — Budgeted Autonomy Envelope",
+    "phase": "amber_action_packet_preflight_v1",
+    "packet_id": "packet-amber-dry-run-execution-loop-v1",
+    "task_id": "future_budgeted_amber_receipt_task",
+    "lane": "Amber",
+    "intent": "preflight future local Amber dry-run task before any real external action",
+    "target_systems": [
+      "local_repository_fixture_only"
+    ],
+    "exact_allowed_paths_or_objects": [
+      "tests/schema_examples/amber_dry_run_execution_loop.example.json",
+      "tests/schema_examples/autopilot_execution_receipt.amber_dry_run_loop.example.json",
+      "tests/schema_examples/autopilot_receipt_registry.example.json",
+      "scripts/validate_amber_dry_run_execution_loop.js",
+      ".agent_board/AUTOPILOT_LEDGER.md"
+    ],
+    "forbidden_paths_or_objects": [
+      ".env*",
+      "external repositories",
+      "production runtime",
+      "real VCPChat",
+      "real VCPToolBox"
+    ],
+    "allowed_commands_or_operations": [
+      "node scripts/simulate_amber_dry_run_execution_loop.js",
+      "node scripts/validate_amber_dry_run_execution_loop.js"
+    ],
+    "max_call_count": {
+      "provider_calls": 0,
+      "plugin_calls": 0,
+      "api_calls": 0,
+      "image_candidates": 0,
+      "runtime_probe_minutes": 0
+    },
+    "max_write_count": 5,
+    "max_cost_when_applicable": {
+      "amount": 0,
+      "currency": "not_applicable",
+      "cost_tracking_required": true,
+      "cost_unknown_is_red": true
+    },
+    "selected_plugin_id": null,
+    "command": "local_fixture_dry_run",
+    "model": null,
+    "input_reference": "tests/schema_examples/autopilot_goal_decomposition_materialized.example.json",
+    "output_directory_or_write_target": "tests/schema_examples",
+    "overwrite_existing_files_allowed": false,
+    "secret_value_read_allowed": false,
+    "raw_private_data_print_allowed": false,
+    "dependency_manifest_change_allowed": false,
+    "dependency_manifest_change_allowed_exact_package_list": [],
+    "rollback_or_cleanup_plan": "Revert the local dry-run fixture, receipt, registry entry, validator, docs, and agent-board status surfaces.",
+    "validation_required": [
+      "node scripts/validate_amber_dry_run_execution_loop.js"
+    ],
+    "stop_conditions": [
+      "budget exceeded",
+      "receipt cannot be recorded",
+      "Red Lane condition appears"
+    ],
+    "evidence_to_record": [
+      "execution receipt",
+      "receipt registry entry",
+      "validation result",
+      "continuation decision"
+    ],
+    "receipt_required": true,
+    "registry_entry_required": true,
+    "continuation_judge_required": true,
+    "side_effect_flags": {
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "dependency_change_performed": false,
+      "runtime_probe_performed": false,
+      "secret_value_read_performed": false,
+      "push_tag_release_deploy_performed": false
+    }
+  }
+}

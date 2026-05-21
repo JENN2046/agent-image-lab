@@ -1,0 +1,165 @@
+{
+  "autopilot_amber_action_packet_negative_cases": {
+    "version": "v1",
+    "phase": "amber_action_packet_preflight_v1",
+    "selected_task": "add_amber_action_packet_preflight_validator",
+    "selected_task_lane": "Green",
+    "schema_path": "schemas/autopilot_amber_action_packet.schema.yaml",
+    "packet_fixture_path": "tests/schema_examples/autopilot_amber_action_packet.example.json",
+    "packet_id": "packet-amber-dry-run-execution-loop-v1",
+    "packet_valid": true,
+    "packet_mirrors_embedded_dry_run_packet": true,
+    "cost_unknown_is_red": true,
+    "receipt_required": true,
+    "registry_entry_required": true,
+    "continuation_judge_required": true,
+    "candidate_gaps": [
+      {
+        "gap_id": "embedded_action_packet_no_standalone_preflight",
+        "lane": "Green",
+        "priority": "highest",
+        "selected": true,
+        "source_evidence": [
+          "scripts/simulate_amber_dry_run_execution_loop.js",
+          "scripts/validate_amber_dry_run_execution_loop.js"
+        ],
+        "rationale": "The Amber dry-run loop embedded an action packet, but future real Amber work needs a reusable standalone preflight fixture and fail-closed validator."
+      },
+      {
+        "gap_id": "readiness_receipt_registry_cross_claims",
+        "lane": "Green",
+        "priority": "next",
+        "selected": false,
+        "source_evidence": [
+          "scripts/validate_complete_autopilot_readiness_gate.js",
+          "tests/schema_examples/autopilot_receipt_registry.example.json"
+        ],
+        "rationale": "Readiness-to-registry cross-claim checks are valuable after packet preflight, but packet validation is the nearer pre-execution boundary."
+      },
+      {
+        "gap_id": "agent_board_resume_compaction_guard",
+        "lane": "Green",
+        "priority": "later",
+        "selected": false,
+        "source_evidence": [
+          ".agent_board/RUN_STATE.md",
+          ".agent_board/TASK_QUEUE.md",
+          ".agent_board/CHECKPOINT.md"
+        ],
+        "rationale": "Resume drift remains important, but it is less directly tied to real Amber execution safety than action packet preflight."
+      },
+      {
+        "gap_id": "live_provider_action_packet_preflight",
+        "lane": "Red",
+        "priority": "blocked",
+        "selected": false,
+        "source_evidence": [
+          "AGENTS.md",
+          "docs/STANDING_OWNER_AUTOMATIC_AUTHORIZATION_POLICY.md"
+        ],
+        "rationale": "A live provider/plugin/API/image packet cannot be exercised in this mission because real external actions are explicitly forbidden."
+      }
+    ],
+    "candidate_gap_count": 4,
+    "lower_priority_candidates": [
+      "readiness_receipt_registry_cross_claims",
+      "agent_board_resume_compaction_guard"
+    ],
+    "red_blocked_candidates": [
+      "live_provider_action_packet_preflight"
+    ],
+    "negative_cases": [
+      {
+        "case_id": "missing_packet_id",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "packet_id is required"
+      },
+      {
+        "case_id": "provider_budget_nonzero_in_local_preflight",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "local preflight provider_calls must be 0"
+      },
+      {
+        "case_id": "cost_unknown_or_unbounded",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "local preflight cost amount must be 0"
+      },
+      {
+        "case_id": "secret_value_read_allowed_true",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "secret reads must be false"
+      },
+      {
+        "case_id": "raw_private_data_print_allowed_true",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "raw private data printing must be false"
+      },
+      {
+        "case_id": "overwrite_existing_files_allowed_true",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "overwrite must be false"
+      },
+      {
+        "case_id": "dependency_manifest_change_without_exact_package_list",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "dependency manifest changes must be false"
+      },
+      {
+        "case_id": "missing_rollback_plan",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "rollback plan is required"
+      },
+      {
+        "case_id": "missing_validation_required",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "validation_required is required"
+      },
+      {
+        "case_id": "missing_stop_conditions",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "stop_conditions must include Red Lane"
+      },
+      {
+        "case_id": "missing_receipt_requirement",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "receipt_required must be true"
+      },
+      {
+        "case_id": "side_effect_guard_true",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "provider_contact_performed must be false"
+      }
+    ],
+    "negative_case_count": 12,
+    "caught_negative_case_count": 12,
+    "all_negative_cases_caught": true,
+    "validator_strengthened": "Amber action packet preflight now rejects missing identity, budget, cost, rollback, validation, stop-condition, receipt, registry, and side-effect boundaries before real Amber work.",
+    "side_effect_flags": {
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "dependency_change_performed": false,
+      "runtime_probe_performed": false,
+      "secret_value_read_performed": false,
+      "push_tag_release_deploy_performed": false
+    }
+  }
+}

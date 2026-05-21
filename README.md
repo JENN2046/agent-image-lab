@@ -5,12 +5,13 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 ## 当前权限策略
 
 ```yaml
-current_phase: receipt_registry_negative_cases_v1
-current_goal: improve_autopilot_receipt_registry_and_readiness_reliability
+current_phase: amber_action_packet_preflight_v1
+current_goal: improve_autopilot_real_amber_pre_execution_safety
 semantic_tightening_active: true
 current_boundary_semantics_cleanup_active: true
 false_readiness_negative_cases_active: true
 receipt_registry_negative_cases_active: true
+amber_action_packet_preflight_active: true
 current_autonomy_model: Smart Standing Authorization v3
 startup_default_model: Smart Standing Authorization v3
 a4_8_status: retained_as_green_lane_substrate
@@ -31,6 +32,7 @@ autopilot_evolution_engine_active: true
 complete_autopilot_readiness_gate_active: true
 false_readiness_negative_case_validator_active: true
 receipt_registry_negative_case_validator_active: true
+amber_action_packet_preflight_validator_active: true
 local_full_autopilot_ready: true
 current_next_boundary: owner_push_safety_gate_after_review
 current_next_boundary_type: Red push-safety-gate boundary
@@ -40,12 +42,14 @@ selected_reliability_task: add_false_readiness_negative_case_validator
 selected_reliability_task_lane: Green
 selected_receipt_registry_task: add_receipt_registry_negative_case_validator
 selected_receipt_registry_task_lane: Green
+selected_amber_preflight_task: add_amber_action_packet_preflight_validator
+selected_amber_preflight_task_lane: Green
 amber_closeout_status_sync_required: true
 red_lane_requires_user: true
 push_tag_release_deploy_allowed_automatically: false
 secret_value_access_allowed_automatically: false
 destructive_action_allowed_automatically: false
-recommended_next: amber_action_packet_preflight_v1
+recommended_next: readiness_receipt_registry_cross_claims_v1
 ```
 
 Smart Standing Authorization v3 means Codex can continue Green work directly and Amber work inside the budgeted envelope without step-by-step approval. It must stop at Red Lane conditions such as push/tag/release/deploy, destructive actions, secret value access, raw private data exposure, uncapped cost, unbounded loops, broad external repository modification, or dependency changes without an exact package/action list.
@@ -81,6 +85,14 @@ irreversible actions, dependency-action overrun, and true side-effect flags; it
 also verifies that every local `autopilot_execution_receipt*.json` example is
 listed in the registry.
 
+`scripts/validate_autopilot_amber_action_packet_preflight.js` hardens the
+pre-execution boundary for future real Amber work. It validates a standalone
+Amber action packet schema and fixture, mirrors the existing dry-run action
+packet, and rejects missing identity, budget, cost, rollback, validation,
+stop-condition, receipt, registry, continuation, and side-effect boundaries
+before any real provider/plugin/API/image/memory/source-read/runtime/dependency
+action can be attempted.
+
 Local closeout status: the complete Green/local chain is ready for owner review and later push safety gate. Push remains unperformed and Red Lane until explicitly authorized.
 
 Semantic tightening status: readiness now distinguishes historical fixture
@@ -100,6 +112,11 @@ Receipt registry hardening status: `receipt_registry_negative_cases_v1` is now
 completed as a local Green validator. Evolution Engine completed capabilities
 include it, and the next recommended local hardening task is
 `amber_action_packet_preflight_v1`.
+
+Amber action packet preflight status: `amber_action_packet_preflight_v1` is now
+completed as a local Green validator. Evolution Engine completed capabilities
+include it, and the next recommended local hardening task is
+`readiness_receipt_registry_cross_claims_v1`.
 
 Amber receipt closeout now has an automatic Green Lane status-sync rule: after meaningful Amber receipt work, Codex must align README, roadmap, `.agent_board` resume surfaces, ledger, validators, and authoritative refs when they changed or gained new refs. This Green sync is local closeout work and does not consume the preceding Amber action's write budget.
 

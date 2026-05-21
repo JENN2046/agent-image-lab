@@ -2,6 +2,15 @@
 
 ## Decisions
 
+### DECISION-AIL-AUTO-026 — Amber action packet preflight is required before future real Amber execution
+
+Context: The Amber dry-run loop embedded an action packet shape, but future real Amber work needed a reusable packet preflight fixture and fail-closed validator before any real provider/plugin/API/image/memory/source-read/runtime/dependency action.
+Chosen: Add `amber_action_packet_preflight_v1` with a standalone schema, valid packet fixture, negative-case fixture, validator, docs, MVP wiring, and status-surface sync.
+Reason: This catches invalid packets before receipt generation or real action by rejecting missing identity, target, budget, cost, rollback, validation, stop-condition, receipt, registry, continuation, or side-effect boundaries.
+Risk: A packet fixture could be mistaken for authorization to perform live Amber actions.
+Mitigation: The validator keeps all side-effect flags false and the docs state that preflight is fixture-only and not an executor.
+Boundary: This is Green Lane local validation only; no real Amber external action, runtime probe, source read, dependency change, push, tag, release, or deploy was performed.
+
 ### DECISION-AIL-AUTO-025 — Receipt registry readiness requires negative-case proof
 
 Context: The governance kernel validated compliant receipt registry entries, but accepted fixtures alone could miss invalid registry or Amber receipt shapes.
