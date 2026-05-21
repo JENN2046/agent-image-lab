@@ -5,9 +5,9 @@
 ## 当前产品主线恢复点
 
 ```yaml
-current_phase: autopilot_evolution_engine_v1
+current_phase: complete_autopilot_readiness_gate_v1
 phase_status: completed_validated_guarded_local_commit
-source_phase: autopilot_evolution_engine_v1
+source_phase: complete_autopilot_readiness_gate_v1
 current_autonomy_model: Smart Standing Authorization v3
 startup_default_model: Smart Standing Authorization v3
 a4_8_status: retained_as_green_lane_substrate
@@ -45,6 +45,8 @@ amber_dry_run_execution_loop_ref: scripts/simulate_amber_dry_run_execution_loop.
 amber_dry_run_execution_loop_validator_ref: scripts/validate_amber_dry_run_execution_loop.js
 autopilot_evolution_engine_ref: scripts/detect_autopilot_evolution_gaps.js
 autopilot_evolution_engine_validator_ref: scripts/validate_autopilot_evolution_engine.js
+complete_autopilot_readiness_gate_ref: docs/AUTOPILOT_COMPLETE_READINESS_GATE.md
+complete_autopilot_readiness_gate_validator_ref: scripts/validate_complete_autopilot_readiness_gate.js
 autopilot_goal_compiler_validator_ref: scripts/validate_autopilot_goal_compiler.js
 autopilot_autonomy_envelope_schema_ref: schemas/autopilot_autonomy_envelope.schema.yaml
 autopilot_execution_receipt_schema_ref: schemas/autopilot_execution_receipt.schema.yaml
@@ -56,6 +58,7 @@ next_safe_task_orchestration_fixture_ref: tests/schema_examples/next_safe_task_o
 amber_dry_run_execution_loop_fixture_ref: tests/schema_examples/amber_dry_run_execution_loop.example.json
 amber_dry_run_execution_receipt_ref: tests/schema_examples/autopilot_execution_receipt.amber_dry_run_loop.example.json
 autopilot_evolution_backlog_fixture_ref: tests/schema_examples/autopilot_evolution_backlog.example.json
+complete_autopilot_readiness_gate_fixture_ref: tests/schema_examples/complete_autopilot_readiness_gate.example.json
 cost_rollback_schema_hardening: active
 goal_decomposition_runtime_active: true
 goal_decomposition_materializer_active: true
@@ -63,6 +66,7 @@ agent_board_queue_reconciler_active: true
 next_safe_task_orchestrator_active: true
 amber_dry_run_execution_loop_active: true
 autopilot_evolution_engine_active: true
+complete_autopilot_readiness_gate_active: true
 autopilot_goal_schema_ref: schemas/autopilot_goal.schema.yaml
 autopilot_route_plan_schema_ref: schemas/autopilot_route_plan.schema.yaml
 autopilot_task_queue_schema_ref: schemas/autopilot_task_queue.schema.yaml

@@ -1,5 +1,35 @@
 ---
 
+## Checkpoint - Complete Autopilot Readiness Gate v1
+
+```text
+phase: complete_autopilot_readiness_gate_v1
+phase_id: complete_autopilot_readiness_gate_v1
+status: completed_validated_guarded_local_commit
+completed:
+- added complete local readiness gate validator
+- added complete readiness gate fixture and doc
+- wired readiness gate into MVP validation
+- synchronized README, roadmap, governance docs, and .agent_board status surfaces
+latest_validation:
+- node --check scripts/validate_complete_autopilot_readiness_gate.js
+- node scripts/validate_complete_autopilot_readiness_gate.js
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1 after guarded local commit
+not_performed:
+- no push
+- no tag/release/deploy
+- no provider/plugin/API/image generation
+- no DailyNote/VCP memory write
+- no real manifest/VCPChat/VCPToolBox read
+- no dependency change
+- no runtime probe
+- no secret read
+commit_message: test: add complete autopilot readiness gate
+recommended_next: final_local_closeout
+```
+
+---
+
 ## Checkpoint - Autopilot Evolution Engine v1
 
 ```text

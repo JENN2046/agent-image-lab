@@ -67,6 +67,7 @@ $requiredFiles = @(
   'scripts/validate_amber_dry_run_execution_loop.js',
   'scripts/detect_autopilot_evolution_gaps.js',
   'scripts/validate_autopilot_evolution_engine.js',
+  'scripts/validate_complete_autopilot_readiness_gate.js',
   'scripts/validate_local_checkpoint_manifest.js',
   'scripts/validate_local_commit_scope.js',
   'scripts/validate_post_push_state.js',
@@ -262,6 +263,7 @@ $requiredFiles = @(
   'docs/AUTOPILOT_NEXT_SAFE_TASK_ORCHESTRATOR.md',
   'docs/AUTOPILOT_AMBER_DRY_RUN_EXECUTION_LOOP.md',
   'docs/AUTOPILOT_EVOLUTION_ENGINE.md',
+  'docs/AUTOPILOT_COMPLETE_READINESS_GATE.md',
   'schemas/autopilot_autonomy_envelope.schema.yaml',
   'schemas/autopilot_execution_receipt.schema.yaml',
   'schemas/autopilot_goal.schema.yaml',
@@ -279,6 +281,7 @@ $requiredFiles = @(
   'tests/schema_examples/amber_dry_run_execution_loop.example.json',
   'tests/schema_examples/autopilot_execution_receipt.amber_dry_run_loop.example.json',
   'tests/schema_examples/autopilot_evolution_backlog.example.json',
+  'tests/schema_examples/complete_autopilot_readiness_gate.example.json',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -11904,6 +11907,31 @@ process.exit(child.status || 0);
     }
     if ($autopilotEvolutionEngine.real_manifest_read_performed -ne $false -or $autopilotEvolutionEngine.real_vcpchat_read_performed -ne $false -or $autopilotEvolutionEngine.real_vcptoolbox_read_performed -ne $false -or $autopilotEvolutionEngine.dependency_change_performed -ne $false -or $autopilotEvolutionEngine.runtime_probe_performed -ne $false -or $autopilotEvolutionEngine.secret_value_read_performed -ne $false -or $autopilotEvolutionEngine.push_tag_release_deploy_performed -ne $false) {
       Add-Failure "Autopilot Evolution Engine must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
+    }
+  }
+
+  $completeAutopilotReadinessGateOutput = & node (Join-Path $Root 'scripts/validate_complete_autopilot_readiness_gate.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Complete Autopilot Readiness Gate validation exited with failure"
+  } else {
+    $completeAutopilotReadinessGate = ($completeAutopilotReadinessGateOutput -join "`n") | ConvertFrom-Json
+    if ($completeAutopilotReadinessGate.passed -ne $true -or $completeAutopilotReadinessGate.phase -ne 'complete_autopilot_readiness_gate_v1') {
+      Add-Failure "Complete Autopilot Readiness Gate v1 validation must pass"
+    }
+    if ($completeAutopilotReadinessGate.deterministic_output_verified -ne $true -or $completeAutopilotReadinessGate.fixture_verified -ne $true -or $completeAutopilotReadinessGate.invariants_verified -ne $true) {
+      Add-Failure "Complete Autopilot Readiness Gate must verify deterministic fixture output and invariants"
+    }
+    if (-not $completeAutopilotReadinessGate.goal_id -or -not $completeAutopilotReadinessGate.route_plan_id -or -not $completeAutopilotReadinessGate.task_queue_id -or -not $completeAutopilotReadinessGate.selected_next_safe_task) {
+      Add-Failure "Complete Autopilot Readiness Gate must include goal, route plan, task queue, and next safe task"
+    }
+    if (-not $completeAutopilotReadinessGate.amber_dry_run_receipt_id -or $completeAutopilotReadinessGate.receipt_registry_count -lt 4 -or $completeAutopilotReadinessGate.evolution_backlog_next_task -ne 'complete_autopilot_readiness_gate_v1') {
+      Add-Failure "Complete Autopilot Readiness Gate must include Amber receipt, registry, and evolution backlog"
+    }
+    if ($completeAutopilotReadinessGate.provider_contact_performed -ne $false -or $completeAutopilotReadinessGate.plugin_call_performed -ne $false -or $completeAutopilotReadinessGate.api_call_performed -ne $false -or $completeAutopilotReadinessGate.image_generation_performed -ne $false -or $completeAutopilotReadinessGate.DailyNote_write_performed -ne $false -or $completeAutopilotReadinessGate.VCP_memory_write_performed -ne $false) {
+      Add-Failure "Complete Autopilot Readiness Gate must not perform provider, plugin, API, image, DailyNote, or VCP memory actions"
+    }
+    if ($completeAutopilotReadinessGate.real_manifest_read_performed -ne $false -or $completeAutopilotReadinessGate.real_vcpchat_read_performed -ne $false -or $completeAutopilotReadinessGate.real_vcptoolbox_read_performed -ne $false -or $completeAutopilotReadinessGate.dependency_change_performed -ne $false -or $completeAutopilotReadinessGate.runtime_probe_performed -ne $false -or $completeAutopilotReadinessGate.secret_value_read_performed -ne $false -or $completeAutopilotReadinessGate.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Complete Autopilot Readiness Gate must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
     }
   }
 

@@ -128,6 +128,16 @@ Risk: If the receipt or budget model stays prose-only, future Amber actions coul
 Mitigation: The validator checks lane definitions, default budgets, Red gates, Amber receipt requirements, example fixtures, and no-real-A5 guard flags.
 ---
 
+## DECISION-AIL-AUTO-020 — Complete readiness gate is required before final closeout
+
+Status: accepted.
+
+Decision: The local full-autopilot system is not ready for final closeout until one validator proves the complete chain from user goal through evolution backlog.
+
+Boundary: The readiness gate is local validation only and does not authorize push, release, deploy, provider calls, runtime probes, source reads, dependency changes, memory writes, image generation, or secret access.
+
+---
+
 ## DECISION-AIL-AUTO-019 — Evolution Engine proposes local backlog without Red self-authorization
 
 Status: accepted.

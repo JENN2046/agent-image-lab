@@ -78,6 +78,12 @@ inspects known governance docs, validators, examples, receipts, and `.agent_boar
 surfaces to propose future local tasks. It writes no live state, self-authorizes
 no Red Lane item, and exists only to keep the autopilot backlog evolving.
 
+`scripts/validate_complete_autopilot_readiness_gate.js` is the final local chain
+gate. It proves user goal, compiled goal, route plan, task queue, materialized
+snapshot, `.agent_board` reconciliation, next-safe-task selection, Amber dry-run
+receipt, receipt registry, checkpoint, and evolution backlog line up before
+final closeout.
+
 ### Truth Model
 
 Uses repository reality as ground:

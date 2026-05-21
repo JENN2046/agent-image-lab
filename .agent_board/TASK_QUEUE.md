@@ -1,5 +1,22 @@
 ---
 
+- [x] ID: complete_autopilot_readiness_gate_v1
+      Title: Prove the full local autopilot chain
+      Reason: Before final closeout, the system needs one validator that ties the goal compiler, materializer, reconciler, orchestrator, Amber dry-run receipt, registry, checkpoint, and evolution backlog together.
+      Validator: scripts/validate_complete_autopilot_readiness_gate.js.
+      Fixture: tests/schema_examples/complete_autopilot_readiness_gate.example.json.
+      Result: completed_validated_guarded_local_commit.
+      Commit message: test: add complete autopilot readiness gate.
+      Recommended next: final_local_closeout.
+      Stop condition: any broken chain invariant, provider/plugin/API/image/memory/source-read/runtime/dependency/secret/push signal, missing fixture, or validation failure requiring judgment.
+
+- [ ] ID: final_local_closeout
+      Title: Final local closeout and full validation
+      Reason: Mark the system as locally full-autopilot ready only after all gates pass, status surfaces are aligned, and worktree is clean.
+      Stop condition: push/tag/release/deploy, secret read, destructive action, provider/plugin/API/image/memory/source-read/dependency/runtime requirement, or validation failure requiring judgment.
+
+---
+
 - [x] ID: autopilot_evolution_engine_v1
       Title: Detect autopilot governance gaps and propose future tasks
       Reason: Product-grade long-evolving autopilot needs a local backlog generator that finds missing validation, stale state, weak rollback coverage, and manual-step gaps without crossing Red Lane.

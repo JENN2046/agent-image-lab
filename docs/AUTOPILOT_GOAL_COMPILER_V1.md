@@ -49,6 +49,12 @@ local backlog tasks from known governance surfaces, but Red Lane proposals remai
 blocked until explicit authorization or a valid future envelope removes every
 Red condition.
 
+Readiness rule: `scripts/validate_complete_autopilot_readiness_gate.js` must be
+able to prove the compiled goal, route plan, task queue, materialized snapshot,
+agent-board reconciliation, next-safe-task selection, Amber dry-run receipt,
+receipt registry, checkpoint, and evolution backlog as one chain before local
+full-autopilot closeout.
+
 This document does not authorize provider contact, plugin calls, API calls,
 image generation, DailyNote writes, VCP memory writes, real manifest reads, real
 VCPChat reads, real VCPToolBox reads, dependency changes, runtime probes, push,
