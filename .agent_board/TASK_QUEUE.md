@@ -1,6 +1,18 @@
 
 ---
 
+- [x] ID: controlled_visual_production_loop_post_push_status_surface_alignment
+      Title: Align current status surfaces after guarded push
+      Reason: the validator repair was committed and pushed, so the current README, roadmap, and agent-board entry surfaces must stop pointing at the pre-push commit-readiness decision point.
+      Changed files: README.md; docs/00_project_roadmap.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md; .agent_board/CHECKPOINT.md.
+      Decision: origin/master points at ca52f0a `fix: handle committed visual loop readiness`; this follow-up status alignment is a local commit only, leaving master clean and ahead of origin/master by 1 with no additional push.
+      Validation: git diff --check; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1.
+      Result: completed_local_validated_ahead_of_origin_after_status_alignment.
+      Recommended next: pending_human_next_local_route_decision.
+      Stop condition: any request for another push, tag, release, deploy, provider/plugin/API call, image generation, DailyNote/VCP memory write, runtime execution, real manifest/VCP source read, dependency change, or destructive action requires separate explicit authorization.
+
+---
+
 - [x] ID: controlled_visual_production_loop_production_candidate_activation_preflight
       Title: Preflight the tennis-wallet production candidate A5 activation package
       Reason: the exact A5 phrase was provided, so the two authorized production candidate metadata files were created and validation surfaces now need post-activation alignment.

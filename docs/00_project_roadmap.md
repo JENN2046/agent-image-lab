@@ -5,9 +5,9 @@
 ## 当前产品主线恢复点
 
 ```yaml
-current_phase: controlled_visual_production_loop_production_candidate_activation_post_validation
-phase_status: completed_pending_final_validation
-source_phase: controlled_visual_production_loop_commit_and_authorization_readiness_audit
+current_phase: controlled_visual_production_loop_post_push_status_surface_alignment
+phase_status: completed_local_validated_ahead_of_origin_after_status_alignment
+source_phase: validator_readiness_clean_post_commit_repair
 validated_baseline:
   capsule_product_core_validator_route: completed
   full_asset_archive_manifest_bridge: aligned_to_verified_git_tracked_durable_archive
@@ -26,9 +26,24 @@ tracking_policy_ref: docs/ASSET_ARCHIVE_GIT_TRACKING_POLICY.md
 production_candidate_authorization_package_ref: reports/production_candidate_authorization/2026-05-20_tennis_wallet_production_candidate_A5_authorization_package.json
 production_candidate_activation_preflight_ref: reports/production_candidate_authorization/2026-05-21_tennis_wallet_production_candidate_A5_activation_preflight.json
 memory_write_authorization_package_ref: reports/memory_write_authorization/2026-05-20_tennis_wallet_memory_write_A5_authorization_package.json
+pushed_validator_repair_commit: ca52f0ac00cb5d8ec18bc45e1c35b1ba8928b184
+pushed_validator_repair_subject: fix: handle committed visual loop readiness
+local_status_alignment_commit: this_commit
+branch: master
+origin_branch: origin/master
+head_equals_origin_master: false
+ahead_count: 1
+behind_count: 0
+worktree_state: clean_after_local_status_alignment_commit
+remote_action_completed: git push origin master
+remote_action_authorized_by_user: true
+status_alignment_commit_pushed: false
+commit_readiness_validator_repair_closed: true
+validate_mvp_clean_post_commit_failure_closed: true
 goal_level_local_readiness_verified: true
-selected_next_product_move: explicit_local_commit_instruction_for_19_file_post_activation_slice
-recommended_next: explicit_local_commit_instruction_for_19_file_post_activation_slice
+selected_next_product_move: pending_human_next_local_route_decision
+recommended_next: pending_human_next_local_route_decision
+previous_recommended_next_closed: explicit_local_commit_instruction_for_19_file_post_activation_slice
 recommended_next_auto_execution_allowed: false
 actual_runs_scan_performed: false
 runs_mutation_performed: false
@@ -51,6 +66,10 @@ local_commit_ready_after_explicit_human_review: true
 authorization_ready_for_future_A5: true
 production_candidate_metadata_written: true
 validation_passed:
+  - git push origin master
+  - git status --short --branch
+  - git rev-parse HEAD
+  - git rev-parse origin/master
   - node --check scripts/validate_controlled_visual_production_loop_production_candidate_activation_preflight.js
   - node scripts/validate_controlled_visual_production_loop_production_candidate_activation_preflight.js
   - node --check scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js
