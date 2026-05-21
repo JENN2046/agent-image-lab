@@ -1,6 +1,28 @@
 
 ---
 
+## Current Handoff Update - Autopilot Goal Decomposition Materializer v1
+
+```text
+phase: autopilot_goal_decomposition_materializer_v1
+phase_id: autopilot_goal_decomposition_materializer_v1
+status: completed_validated_guarded_local_commit
+mode: Green Lane local tooling and fixture validation
+summary: Added a deterministic local dry-run materializer that turns the Goal Decomposition Runtime example into a validated materialized snapshot.
+current_autonomy_model: Smart Standing Authorization v3
+startup_default_model: Smart Standing Authorization v3
+materializer_ref: scripts/materialize_autopilot_goal_decomposition.js
+runtime_example_ref: tests/schema_examples/autopilot_goal_decomposition_runtime.example.json
+materialized_snapshot_ref: tests/schema_examples/autopilot_goal_decomposition_materialized.example.json
+validator_ref: scripts/validate_autopilot_goal_compiler.js
+validated_now: node --check scripts/materialize_autopilot_goal_decomposition.js; node scripts/materialize_autopilot_goal_decomposition.js; node --check scripts/validate_autopilot_goal_compiler.js; node scripts/validate_autopilot_goal_compiler.js; node --check scripts/validate_autopilot_governance_kernel.js; node scripts/validate_autopilot_governance_kernel.js; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1 after guarded local commit.
+commit_message: test: add autopilot goal decomposition materializer
+not_performed: no push, no tag/release/deploy, no provider/plugin/API/image generation, no DailyNote/VCP memory write, no real manifest/VCPChat/VCPToolBox read, no dependency change, no runtime probe, no secret read.
+recommended_next: pending_goal_compiler_driven_autonomous_task.
+```
+
+---
+
 ## Current Handoff Update - Autopilot Goal Decomposition Runtime v1
 
 ```text

@@ -11782,6 +11782,9 @@ process.exit(child.status || 0);
     if ($autopilotGoalCompiler.runtime_decomposition_verified -ne $true -or $autopilotGoalCompiler.blocked_red_items_verified -lt 1 -or $autopilotGoalCompiler.executable_task_queue_verified -ne $true -or $autopilotGoalCompiler.at_most_one_in_progress_verified -ne $true -or -not $autopilotGoalCompiler.next_safe_task_verified -or $autopilotGoalCompiler.agent_board_sync_required -ne $true) {
       Add-Failure "Autopilot Goal Compiler runtime must verify blocked Red items, executable queue, next safe task, and agent board sync"
     }
+    if ($autopilotGoalCompiler.materializer_verified -ne $true -or $autopilotGoalCompiler.materialized_snapshot_verified -ne $true -or -not $autopilotGoalCompiler.materialized_snapshot_path) {
+      Add-Failure "Autopilot Goal Compiler runtime must verify deterministic materializer and materialized snapshot"
+    }
     if ($autopilotGoalCompiler.push_allowed_default_false -ne $true -or $autopilotGoalCompiler.no_current_external_execution_signals -ne $true) {
       Add-Failure "Autopilot Goal Compiler v1 must keep push disabled and external execution signals false"
     }

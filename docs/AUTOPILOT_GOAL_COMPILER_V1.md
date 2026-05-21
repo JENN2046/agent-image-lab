@@ -24,6 +24,11 @@ blocked_red_items -> next_safe_task`, execute only `next_safe_task`, validate,
 update `.agent_board`, record a receipt if Amber, and continue until done,
 blocked, or a Red condition appears.
 
+Materializer rule: `scripts/materialize_autopilot_goal_decomposition.js` is a
+local dry-run materializer. It reads the runtime example and produces a
+deterministic materialized snapshot; it is not a real executor and must not call
+provider/plugin/API/image/memory/source-read/runtime/dependency actions.
+
 This document does not authorize provider contact, plugin calls, API calls,
 image generation, DailyNote writes, VCP memory writes, real manifest reads, real
 VCPChat reads, real VCPToolBox reads, dependency changes, runtime probes, push,

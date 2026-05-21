@@ -5,7 +5,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 ## 当前权限策略
 
 ```yaml
-current_phase: autopilot_goal_decomposition_runtime_v1
+current_phase: autopilot_goal_decomposition_materializer_v1
 current_autonomy_model: Smart Standing Authorization v3
 startup_default_model: Smart Standing Authorization v3
 a4_8_status: retained_as_green_lane_substrate
@@ -18,6 +18,7 @@ goal_compiler_v1_active: true
 receipt_registry_active: true
 cost_rollback_schema_hardened: true
 goal_decomposition_runtime_active: true
+goal_decomposition_materializer_active: true
 amber_closeout_status_sync_required: true
 red_lane_requires_user: true
 push_tag_release_deploy_allowed_automatically: false
@@ -33,6 +34,8 @@ Smart Standing Authorization v3 means Codex can continue Green work directly and
 `docs/AUTOPILOT_GOAL_COMPILER_V1.md` defines the first machine-verifiable Goal Compiler layer: goal intake, truth intake, route options, route selection, near-term task queues, Green/Amber/Red lane assignment, Amber envelope refs, validation plans, continuation policy, stop conditions, and resume-surface sync. `scripts/validate_autopilot_goal_compiler.js` validates the goal / route plan / task queue schemas and examples and is wired into `scripts/validate_mvp.ps1`.
 
 `docs/AUTOPILOT_GOAL_DECOMPOSITION_RUNTIME.md` defines the runtime rule for non-single-step goals: compile `goal -> route_plan -> executable task_queue -> blocked_red_items -> next_safe_task`, execute only `next_safe_task`, validate, update `.agent_board`, record an Amber receipt when needed, and continue until done, blocked, or Red.
+
+`scripts/materialize_autopilot_goal_decomposition.js` is the local dry-run materializer for that runtime. It reads the runtime example and emits a deterministic materialized snapshot; it is not a real executor and does not call provider/plugin/API/image/memory/source-read/runtime/dependency actions.
 
 Amber receipt closeout now has an automatic Green Lane status-sync rule: after meaningful Amber receipt work, Codex must align README, roadmap, `.agent_board` resume surfaces, ledger, validators, and authoritative refs when they changed or gained new refs. This Green sync is local closeout work and does not consume the preceding Amber action's write budget.
 

@@ -1,5 +1,6 @@
 const fs = require("node:fs");
 const path = require("node:path");
+const { materializeRuntime } = require("./materialize_autopilot_goal_decomposition.js");
 
 const root = path.resolve(__dirname, "..");
 
@@ -9,10 +10,12 @@ const files = {
   routePlanSchema: "schemas/autopilot_route_plan.schema.yaml",
   taskQueueSchema: "schemas/autopilot_task_queue.schema.yaml",
   runtimeDoc: "docs/AUTOPILOT_GOAL_DECOMPOSITION_RUNTIME.md",
+  materializer: "scripts/materialize_autopilot_goal_decomposition.js",
   goalExample: "tests/schema_examples/autopilot_goal.example.json",
   routePlanExample: "tests/schema_examples/autopilot_route_plan.example.json",
   taskQueueExample: "tests/schema_examples/autopilot_task_queue.example.json",
   runtimeExample: "tests/schema_examples/autopilot_goal_decomposition_runtime.example.json",
+  materializedExample: "tests/schema_examples/autopilot_goal_decomposition_materialized.example.json",
   agents: "AGENTS.md",
   overlay: "AGENTS.autopilot-overlay.md",
   readme: "README.md",
@@ -136,6 +139,12 @@ function assertGuardFalse(guard, label) {
   }
 }
 
+function assertDeepEqual(actual, expected, label) {
+  const actualText = JSON.stringify(actual, null, 2);
+  const expectedText = JSON.stringify(expected, null, 2);
+  assert(actualText === expectedText, `${label} mismatch`);
+}
+
 function main() {
   for (const relativePath of Object.values(files)) {
     assert(fs.existsSync(path.join(root, relativePath)), `Missing required file: ${relativePath}`);
@@ -150,6 +159,7 @@ function main() {
   const routePlan = readJson(files.routePlanExample).autopilot_route_plan;
   const taskQueue = readJson(files.taskQueueExample).autopilot_task_queue;
   const runtime = readJson(files.runtimeExample).autopilot_goal_decomposition_runtime;
+  const materialized = readJson(files.materializedExample).autopilot_goal_decomposition_materialized;
   const agents = read(files.agents);
   const overlay = read(files.overlay);
   const startupSurfaces = [
@@ -176,6 +186,11 @@ function main() {
     "execute only `next_safe_task`",
     "update `.agent_board`"
   ], "Goal decomposition runtime docs");
+  includesAll(runtimeDoc + doc, [
+    "materializer",
+    "local dry-run",
+    "not a real executor"
+  ], "Goal decomposition materializer docs");
   assert(defaultModeBlock.includes("Smart Standing Authorization v3") && !defaultModeBlock.includes("A4.8"), "AGENTS.md Default mode must be Smart Standing Authorization v3, not A4.8");
   assert(overlay.includes("Active startup model: Smart Standing Authorization v3."), "Overlay must declare v3 active startup model");
   includesAll(startupSurfaces, [
@@ -292,6 +307,28 @@ function main() {
   assert(runtime.continuation_policy.record_receipt_if_amber === true, "Runtime must record receipt if Amber");
   assertGuardFalse(runtime.guard, "Goal decomposition runtime example");
 
+  const materializedFromRuntime = materializeRuntime(runtime);
+  const materializedFromRuntimeAgain = materializeRuntime(runtime);
+  assertDeepEqual(materializedFromRuntimeAgain, materializedFromRuntime, "Materializer deterministic output");
+  assertDeepEqual(materialized, materializedFromRuntime, "Materialized fixture");
+  assert(materialized.goal_id === runtime.goal.goal_id, "Materialized snapshot must include goal_id");
+  assert(materialized.current_goal === runtime.goal.objective, "Materialized snapshot must include current_goal");
+  assert(Array.isArray(materialized.route_steps) && materialized.route_steps.length === runtime.route_plan.route_steps.length, "Materialized route_steps mismatch");
+  assert(Array.isArray(materialized.executable_tasks) && materialized.executable_tasks.length === runtime.task_queue.tasks.length, "Materialized executable_tasks mismatch");
+  assert(Array.isArray(materialized.blocked_red_items) && materialized.blocked_red_items.length === runtime.blocked_red_items.length, "Materialized blocked_red_items mismatch");
+  assert(materialized.next_safe_task && materialized.next_safe_task.task_id === runtime.next_safe_task.task_id, "Materialized next_safe_task mismatch");
+  assert(Array.isArray(materialized.validation_required) && materialized.validation_required.length > 0, "Materialized validation_required required");
+  assert(Array.isArray(materialized.receipt_required_tasks) && materialized.receipt_required_tasks.length >= 1, "Materialized receipt_required_tasks required");
+  assert(Array.isArray(materialized.red_lane_summary) && materialized.red_lane_summary.length >= 1, "Materialized red_lane_summary required");
+  assertGuardFalse(materialized.side_effect_flags, "Materialized side_effect_flags");
+  const materializedRedStepIds = new Set(materialized.route_steps.filter((step) => step.lane === "Red").map((step) => step.step_id));
+  for (const task of materialized.executable_tasks) {
+    assert(!materializedRedStepIds.has(task.source_step_id), `Materialized executable task ${task.task_id} must not come from Red step`);
+    if (task.lane === "Amber") {
+      assert(task.envelope_ref && task.receipt_required === true && task.budget_checked === true, `Materialized Amber task ${task.task_id} must be valid budgeted Amber`);
+    }
+  }
+
   const result = {
     passed: true,
     phase: "autopilot_goal_compiler_v1",
@@ -308,7 +345,8 @@ function main() {
       files.goalExample,
       files.routePlanExample,
       files.taskQueueExample,
-      files.runtimeExample
+      files.runtimeExample,
+      files.materializedExample
     ],
     runtime_decomposition_verified: true,
     blocked_red_items_verified: runtime.blocked_red_items.length,
@@ -316,6 +354,9 @@ function main() {
     executable_task_queue_verified: true,
     at_most_one_in_progress_verified: true,
     agent_board_sync_required: true,
+    materializer_verified: true,
+    materialized_snapshot_verified: true,
+    materialized_snapshot_path: files.materializedExample,
     task_count: taskQueue.tasks.length,
     amber_tasks_with_receipts_verified: taskQueue.tasks.filter((task) => task.lane === "Amber").length,
     rejected_red_routes_verified: routePlan.rejected_routes.filter((route) => route.lane === "Red").length,

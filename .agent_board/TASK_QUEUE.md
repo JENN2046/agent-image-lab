@@ -1,6 +1,19 @@
 
 ---
 
+- [x] ID: autopilot_goal_decomposition_materializer_v1
+      Title: Materialize Goal Decomposition Runtime dry-run snapshot
+      Reason: Future Codex sessions need deterministic local proof that a non-single-step goal can become a stable .agent_board-ready snapshot.
+      Changed files: materializer script; materialized fixture; Goal Compiler validator; MVP wiring; runtime/governance docs; README/roadmap/.agent_board status surfaces.
+      Decision: materializer is local dry-run only, not a real executor; validator compares deterministic output against the checked fixture.
+      Validation: node --check materializer; materializer; node --check goal compiler validator; goal compiler validator; governance validator; agent board validator; git diff --check; validate-agent-image-lab-local; validate_mvp after guarded local commit.
+      Result: completed_validated_guarded_local_commit.
+      Commit message: test: add autopilot goal decomposition materializer.
+      Recommended next: pending_goal_compiler_driven_autonomous_task.
+      Stop condition: push/tag/release/deploy, secret read, destructive action, provider/plugin/API/image/memory/source-read/dependency/runtime requirement, dirty unrelated worktree, or validation failure requiring judgment.
+
+---
+
 - [x] ID: autopilot_goal_decomposition_runtime_v1
       Title: Enforce Goal Compiler runtime decomposition
       Reason: Non-single-step goals should compile into goal, route_plan, executable task_queue, blocked_red_items, and next_safe_task before execution.

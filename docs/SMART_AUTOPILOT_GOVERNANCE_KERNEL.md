@@ -52,6 +52,11 @@ Codex may execute only `next_safe_task`. It must validate, update `.agent_board`
 record a receipt if the task is Amber, and continue until done, blocked, or a
 Red condition appears.
 
+`scripts/materialize_autopilot_goal_decomposition.js` provides the local dry-run
+materializer for that runtime flow. It normalizes the runtime example into a
+deterministic snapshot for validation. It is not a real executor and must not
+perform provider/plugin/API/image/memory/source-read/runtime/dependency actions.
+
 ### Truth Model
 
 Uses repository reality as ground:

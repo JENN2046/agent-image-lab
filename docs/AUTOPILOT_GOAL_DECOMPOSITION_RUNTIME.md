@@ -126,10 +126,19 @@ hard stop and kept the executable queue safe.
 The runtime is validated by:
 
 ```text
+scripts/materialize_autopilot_goal_decomposition.js
 tests/schema_examples/autopilot_goal_decomposition_runtime.example.json
+tests/schema_examples/autopilot_goal_decomposition_materialized.example.json
 scripts/validate_autopilot_goal_compiler.js
 scripts/validate_mvp.ps1
 ```
+
+The materializer is a local dry-run normalizer, not a real executor. It reads
+the runtime example, verifies the required objects, and emits a deterministic
+materialized snapshot containing `goal_id`, `current_goal`, `route_steps`,
+`executable_tasks`, `blocked_red_items`, `next_safe_task`,
+`validation_required`, `receipt_required_tasks`, `red_lane_summary`, and
+`side_effect_flags`. It must not execute tasks or contact external systems.
 
 The validator must prove that the runtime example has no provider/plugin/API,
 image, memory, source-read, runtime, dependency, secret, push, tag, release, or

@@ -1,6 +1,36 @@
 
 ---
 
+## autopilot_goal_decomposition_materializer_v1
+
+```text
+phase: autopilot_goal_decomposition_materializer_v1
+phase_id: autopilot_goal_decomposition_materializer_v1
+status: completed_validated_guarded_local_commit
+mode: Green Lane local tooling and fixture validation
+objective: materialize Goal Decomposition Runtime v1 into a deterministic local dry-run snapshot
+current_autonomy_model: Smart Standing Authorization v3
+startup_default_model: Smart Standing Authorization v3
+a4_8_status: retained_as_green_lane_substrate
+a5_status: classified_by_lane_and_envelope
+branch: master
+origin_branch: origin/master
+baseline_before_edit: 07a894e
+materializer_ref: scripts/materialize_autopilot_goal_decomposition.js
+runtime_example_ref: tests/schema_examples/autopilot_goal_decomposition_runtime.example.json
+materialized_snapshot_ref: tests/schema_examples/autopilot_goal_decomposition_materialized.example.json
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
+push_allowed: false
+tag_release_deploy_allowed: false
+destructive_action_allowed: false
+secret_value_read_allowed: false
+validation_status: completed_validated_guarded_local_commit
+commit_message: test: add autopilot goal decomposition materializer
+recommended_next: pending_goal_compiler_driven_autonomous_task
+```
+
+---
+
 ## autopilot_goal_decomposition_runtime_v1
 
 ```text

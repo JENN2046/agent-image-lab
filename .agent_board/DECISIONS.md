@@ -2,6 +2,14 @@
 
 ## Decisions
 
+### DECISION-AIL-AUTO-015 — Goal decomposition materializer is a local dry-run, not an executor
+
+Context: Goal Decomposition Runtime v1 defined and validated the runtime chain, but future sessions still needed deterministic proof that a runtime example can become a stable materialized snapshot for `.agent_board`.
+Chosen: Add `scripts/materialize_autopilot_goal_decomposition.js` and a checked materialized snapshot fixture.
+Reason: A deterministic materializer makes non-single-step goal decomposition repeatable without executing provider/plugin/API/image/memory/source-read/runtime/dependency actions.
+Risk: A materializer could be mistaken for an executor.
+Mitigation: Documentation and validator output label it local dry-run only; the script only reads the runtime example, emits normalized JSON, and enforces all side-effect flags false.
+
 ### DECISION-AIL-AUTO-014 — Goal Compiler runtime decomposition is mandatory for non-single-step goals
 
 Context: Goal Compiler v1 could express goals, routes, and task queues through schemas and examples, but future sessions still needed a runtime rule that forces decomposition before execution.
