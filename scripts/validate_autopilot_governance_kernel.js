@@ -11,6 +11,8 @@ const files = {
   receiptExample: "tests/schema_examples/autopilot_execution_receipt.example.json",
   amber01Doc: "docs/AMBER_01_LOCAL_RECEIPT_TRIAL.md",
   amber01ReceiptExample: "tests/schema_examples/autopilot_execution_receipt.amber_01_local_trial.example.json",
+  amber02Doc: "docs/AMBER_02_PRODUCTION_CANDIDATE_RECEIPT_REPLAY.md",
+  amber02ReceiptExample: "tests/schema_examples/autopilot_execution_receipt.amber_02_production_candidate_replay.example.json",
   autopilotLedger: ".agent_board/AUTOPILOT_LEDGER.md"
 };
 
@@ -136,9 +138,11 @@ function main() {
   const envelopeExampleRoot = readJson(files.envelopeExample);
   const receiptExampleRoot = readJson(files.receiptExample);
   const amber01ReceiptExampleRoot = readJson(files.amber01ReceiptExample);
+  const amber02ReceiptExampleRoot = readJson(files.amber02ReceiptExample);
   const envelope = envelopeExampleRoot.autopilot_autonomy_envelope;
   const receipt = receiptExampleRoot.autopilot_execution_receipt;
   const amber01Receipt = amber01ReceiptExampleRoot.autopilot_execution_receipt;
+  const amber02Receipt = amber02ReceiptExampleRoot.autopilot_execution_receipt;
 
   includesAll(doc, requiredKernelComponents, "kernel doc components");
   includesAll(doc, ["Green Lane", "Amber Lane", "Red Lane"], "kernel doc lanes");
@@ -219,6 +223,45 @@ function main() {
   assert(read(files.amber01Doc).includes("Continuation Judge"), "Amber-01 doc must record Continuation Judge");
   assert(read(files.autopilotLedger).includes("amber_01_local_receipt_trial"), "Autopilot ledger must record Amber-01");
 
+  const amber02ExpectedWrittenFiles = [
+    "docs/AMBER_02_PRODUCTION_CANDIDATE_RECEIPT_REPLAY.md",
+    "tests/schema_examples/autopilot_execution_receipt.amber_02_production_candidate_replay.example.json",
+    ".agent_board/AUTOPILOT_LEDGER.md",
+    "scripts/validate_autopilot_governance_kernel.js"
+  ];
+  const amber02ExpectedReadFiles = [
+    "reports/production_candidate_authorization/2026-05-21_tennis_wallet_production_candidate_A5_activation_preflight.json",
+    "production/plans/accepted_product_still_life_tennis_wallet_001_production_candidate_001_plan.yaml",
+    "production/reviews/accepted_product_still_life_tennis_wallet_001_production_candidate_001_review.md"
+  ];
+
+  assert(amber02Receipt.version === "v1", "Amber-02 receipt version must be v1");
+  assert(amber02Receipt.contract_type === "autopilot_execution_receipt", "Amber-02 receipt contract_type mismatch");
+  assert(amber02Receipt.policy_model === "Smart Standing Authorization v3 — Budgeted Autonomy Envelope", "Amber-02 policy model mismatch");
+  assert(amber02Receipt.task_id === "amber_02_production_candidate_metadata_receipt_replay", "Amber-02 task_id mismatch");
+  assert(amber02Receipt.lane === "Amber", "Amber-02 receipt lane must be Amber");
+  assert(amber02Receipt.envelope_id === "envelope-amber-02-production-candidate-receipt-replay", "Amber-02 envelope_id mismatch");
+  assert(amber02Receipt.action_performed === "local_production_candidate_metadata_receipt_replay", "Amber-02 action_performed mismatch");
+  assertArrayIncludesAll(amber02Receipt.target_systems, ["local_repository_only", "existing_production_candidate_metadata"], "Amber-02 target_systems");
+  assertZeroCalls(amber02Receipt.calls_used, "Amber-02 receipt");
+  assertArrayIncludesAll(amber02Receipt.files_read, amber02ExpectedReadFiles, "Amber-02 files_read");
+  assert(!amber02Receipt.files_read.some((file) => file.toLowerCase().includes(".env") || file.toLowerCase().includes("secret")), "Amber-02 files_read must not include secret paths");
+  assertArrayIncludesAll(amber02Receipt.files_written, amber02ExpectedWrittenFiles, "Amber-02 files_written");
+  assert(amber02Receipt.files_written.length <= 4, "Amber-02 files_written must not exceed max_write_files=4");
+  assert(Array.isArray(amber02Receipt.dependency_actions_used) && amber02Receipt.dependency_actions_used.length === 0, "Amber-02 must not use dependency actions");
+  assert(Array.isArray(amber02Receipt.validation_run) && amber02Receipt.validation_run.length > 0, "Amber-02 must record validation_run");
+  assert(amber02Receipt.validation_result === "passed", "Amber-02 validation_result must be passed");
+  assert(amber02Receipt.rollback_or_cleanup_available === true, "Amber-02 must record rollback/cleanup availability");
+  assert(typeof amber02Receipt.next_auto_step_allowed === "boolean", "Amber-02 next_auto_step_allowed must be boolean");
+  assert(amber02Receipt.stop_reason === "none", "Amber-02 stop_reason must be none");
+  assert(amber02Receipt.replay && amber02Receipt.replay.replayed_prior_action === true, "Amber-02 must mark replayed prior action");
+  assert(amber02Receipt.replay.new_production_candidate_created_now === false, "Amber-02 must not create a new production candidate");
+  assert(amber02Receipt.replay.production_candidate_metadata_written_now === false, "Amber-02 must not write production metadata now");
+  assert(amber02Receipt.replay.historical_production_candidate_write_performed === true, "Amber-02 must bind to the historical production candidate write");
+  assertGuardFalse(amber02Receipt.guard, "Amber-02 receipt");
+  assert(read(files.amber02Doc).includes("local replay"), "Amber-02 doc must record local replay");
+  assert(read(files.autopilotLedger).includes("amber_02_production_candidate_metadata_receipt_replay"), "Autopilot ledger must record Amber-02");
+
   const result = {
     passed: true,
     phase: "smart_autopilot_governance_kernel",
@@ -229,10 +272,14 @@ function main() {
     amber_01_local_receipt_trial_verified: true,
     amber_01_files_written_count: amber01Receipt.files_written.length,
     amber_01_max_write_files: 4,
+    amber_02_production_candidate_receipt_replay_verified: true,
+    amber_02_files_written_count: amber02Receipt.files_written.length,
+    amber_02_max_write_files: 4,
     examples_verified: [
       files.envelopeExample,
       files.receiptExample,
-      files.amber01ReceiptExample
+      files.amber01ReceiptExample,
+      files.amber02ReceiptExample
     ],
     no_real_a5_execution_signals: true,
     provider_contact_performed: false,

@@ -50,3 +50,56 @@ guard:
   secret_value_read_performed: false
   push_tag_release_deploy_performed: false
 ```
+
+---
+
+## Receipt: amber_02_production_candidate_metadata_receipt_replay
+
+```yaml
+receipt_id: receipt-amber-02-production-candidate-metadata-replay-001
+task_id: amber_02_production_candidate_metadata_receipt_replay
+lane: Amber
+envelope_id: envelope-amber-02-production-candidate-receipt-replay
+action_performed: local_production_candidate_metadata_receipt_replay
+target_systems:
+  - local_repository_only
+  - existing_production_candidate_metadata
+budget:
+  max_provider_calls: 0
+  max_plugin_calls: 0
+  max_api_calls: 0
+  max_image_candidates: 0
+  max_external_read_files: 0
+  max_write_files: 4
+  max_dependency_actions: 0
+  max_runtime_probe_minutes: 0
+  retry_count: 0
+files_written_count: 4
+receipt_ref: tests/schema_examples/autopilot_execution_receipt.amber_02_production_candidate_replay.example.json
+documentation_ref: docs/AMBER_02_PRODUCTION_CANDIDATE_RECEIPT_REPLAY.md
+source_evidence_ref: reports/production_candidate_authorization/2026-05-21_tennis_wallet_production_candidate_A5_activation_preflight.json
+historical_candidate_id: accepted_product_still_life_tennis_wallet_001_production_candidate_001
+historical_production_candidate_write_performed: true
+new_production_candidate_created_now: false
+production_candidate_metadata_written_now: false
+validator_ref: scripts/validate_autopilot_governance_kernel.js
+validation_result: passed
+rollback_or_cleanup_available: true
+next_auto_step_allowed: true
+stop_reason: none
+red_gates_triggered: []
+guard:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  real_manifest_read_performed: false
+  real_vcpchat_read_performed: false
+  real_vcptoolbox_read_performed: false
+  dependency_change_performed: false
+  runtime_probe_performed: false
+  secret_value_read_performed: false
+  push_tag_release_deploy_performed: false
+```
