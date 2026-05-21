@@ -5,10 +5,12 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 ## 当前权限策略
 
 ```yaml
-current_phase: autopilot_false_readiness_negative_cases_v1
+current_phase: receipt_registry_negative_cases_v1
+current_goal: improve_autopilot_receipt_registry_and_readiness_reliability
 semantic_tightening_active: true
 current_boundary_semantics_cleanup_active: true
 false_readiness_negative_cases_active: true
+receipt_registry_negative_cases_active: true
 current_autonomy_model: Smart Standing Authorization v3
 startup_default_model: Smart Standing Authorization v3
 a4_8_status: retained_as_green_lane_substrate
@@ -28,6 +30,7 @@ amber_dry_run_execution_loop_active: true
 autopilot_evolution_engine_active: true
 complete_autopilot_readiness_gate_active: true
 false_readiness_negative_case_validator_active: true
+receipt_registry_negative_case_validator_active: true
 local_full_autopilot_ready: true
 current_next_boundary: owner_push_safety_gate_after_review
 current_next_boundary_type: Red push-safety-gate boundary
@@ -35,12 +38,14 @@ fixture_next_safe_task_evidence: historical_test_fixture_only
 no_executable_local_task_required_before_push_safety_gate_unless_validator_fails: true
 selected_reliability_task: add_false_readiness_negative_case_validator
 selected_reliability_task_lane: Green
+selected_receipt_registry_task: add_receipt_registry_negative_case_validator
+selected_receipt_registry_task_lane: Green
 amber_closeout_status_sync_required: true
 red_lane_requires_user: true
 push_tag_release_deploy_allowed_automatically: false
 secret_value_access_allowed_automatically: false
 destructive_action_allowed_automatically: false
-recommended_next: receipt_registry_negative_cases_v1
+recommended_next: amber_action_packet_preflight_v1
 ```
 
 Smart Standing Authorization v3 means Codex can continue Green work directly and Amber work inside the budgeted envelope without step-by-step approval. It must stop at Red Lane conditions such as push/tag/release/deploy, destructive actions, secret value access, raw private data exposure, uncapped cost, unbounded loops, broad external repository modification, or dependency changes without an exact package/action list.
@@ -69,6 +74,13 @@ ambiguous next-task fields, fixture/current-boundary confusion, hidden queue
 drift, completed-work recursion, and side-effect flag flips, then proves each
 bad report is rejected.
 
+`scripts/validate_autopilot_receipt_registry_negative_cases.js` hardens the
+receipt registry against invalid Amber receipts. It rejects missing receipt
+files, registry/body id mismatches, write-budget overrun, unknown cost,
+irreversible actions, dependency-action overrun, and true side-effect flags; it
+also verifies that every local `autopilot_execution_receipt*.json` example is
+listed in the registry.
+
 Local closeout status: the complete Green/local chain is ready for owner review and later push safety gate. Push remains unperformed and Red Lane until explicitly authorized.
 
 Semantic tightening status: readiness now distinguishes historical fixture
@@ -83,6 +95,11 @@ queued or blocked: `receipt_registry_negative_cases_v1` is the next local
 hardening target, resume surface compaction drift is lower priority, and live
 provider cost-boundary checks remain Red-blocked under the current no-external
 constraint.
+
+Receipt registry hardening status: `receipt_registry_negative_cases_v1` is now
+completed as a local Green validator. Evolution Engine completed capabilities
+include it, and the next recommended local hardening task is
+`amber_action_packet_preflight_v1`.
 
 Amber receipt closeout now has an automatic Green Lane status-sync rule: after meaningful Amber receipt work, Codex must align README, roadmap, `.agent_board` resume surfaces, ledger, validators, and authoritative refs when they changed or gained new refs. This Green sync is local closeout work and does not consume the preceding Amber action's write budget.
 

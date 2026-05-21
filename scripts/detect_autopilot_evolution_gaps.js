@@ -91,28 +91,23 @@ function detectAutopilotEvolutionGaps() {
         "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1"
       ],
       red_boundary: "Do not push, deploy, read secrets, call providers, or touch real runtime/source systems."
+    },
+    {
+      capability_id: "receipt_registry_negative_cases_v1",
+      proposal_id: "receipt_registry_negative_cases_v1",
+      title: "Add negative-case coverage for receipt registry failures",
+      lane: "Green",
+      status: "completed_current_evidence",
+      evidence: "Receipt registry negative-case validation proves malformed receipt/registry examples fail, including missing files, id mismatch, over-budget writes, unknown cost, irreversible actions, dependency actions, and side-effect flags.",
+      validation: [
+        "node scripts/validate_autopilot_receipt_registry_negative_cases.js",
+        "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1"
+      ],
+      red_boundary: "Do not create real Amber side effects while testing negative cases."
     }
   ];
 
   const proposals = [
-    buildProposal({
-      proposal_id: "receipt_registry_negative_cases_v1",
-      title: "Add negative-case coverage for receipt registry failures",
-      lane: "Green",
-      detected_gap: "Registry validation currently proves accepted examples; future hardening should also prove missing cost, missing rollback, and over-budget receipts fail locally.",
-      proposed_local_task: "Add local invalid receipt fixtures and a validator branch that confirms they are rejected without weakening accepted receipt checks.",
-      allowed_write_targets: [
-        "scripts/",
-        "tests/schema_examples/",
-        "docs/",
-        ".agent_board/"
-      ],
-      validation: [
-        "node scripts/validate_autopilot_governance_kernel.js",
-        "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1"
-      ],
-      red_boundary: "Do not create real Amber side effects while testing negative cases."
-    }),
     buildProposal({
       proposal_id: "amber_action_packet_preflight_v1",
       title: "Promote Amber action packets into reusable preflight fixtures",
@@ -131,6 +126,25 @@ function detectAutopilotEvolutionGaps() {
         "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1"
       ],
       red_boundary: "Packet fixtures do not authorize provider calls, runtime probes, source reads, or dependency changes."
+    }),
+    buildProposal({
+      proposal_id: "readiness_receipt_registry_cross_claims_v1",
+      title: "Cross-check readiness claims against receipt registry coverage",
+      lane: "Green",
+      detected_gap: "Complete readiness proves the dry-run receipt is registered, but a future bridge can prove every readiness receipt claim maps to a registry entry and schema-valid receipt.",
+      proposed_local_task: "Add a local readiness-to-registry cross-claim validator that rejects missing registry links or stale receipt ids.",
+      allowed_write_targets: [
+        "scripts/",
+        "tests/schema_examples/",
+        "docs/",
+        ".agent_board/"
+      ],
+      validation: [
+        "node scripts/validate_complete_autopilot_readiness_gate.js",
+        "node scripts/validate_autopilot_receipt_registry_negative_cases.js",
+        "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1"
+      ],
+      red_boundary: "Cross-claim validation remains fixture-only and must not execute provider/plugin/API/image/memory/source-read/runtime/dependency actions."
     }),
     buildProposal({
       proposal_id: "agent_board_resume_compaction_guard_v1",
@@ -179,7 +193,7 @@ function detectAutopilotEvolutionGaps() {
     completed_capabilities: completedCapabilities,
     detected_gap_count: proposals.length,
     proposals,
-    next_recommended_task: "receipt_registry_negative_cases_v1",
+    next_recommended_task: "amber_action_packet_preflight_v1",
     next_recommended_task_lane: "Green",
     local_write_targets_only: true,
     red_lane_self_authorized: proposals.some((proposal) => proposal.lane === "Red" && proposal.self_authorized),

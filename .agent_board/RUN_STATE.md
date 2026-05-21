@@ -1,5 +1,39 @@
 ---
 
+## receipt_registry_negative_cases_v1
+
+```text
+phase: receipt_registry_negative_cases_v1
+phase_id: receipt_registry_negative_cases_v1
+status: completed_validated_guarded_local_commit
+mode: Green Lane local validator/docs/fixture/status hardening
+objective: improve Autopilot protection against invalid Amber receipt, registry coverage drift, and readiness proof gaps
+current_task_id: add_receipt_registry_negative_case_validator
+current_autonomy_model: Smart Standing Authorization v3
+baseline_before_edit: 5fcd354
+goal_decomposition_runtime_used: true
+compiled_goal: Improve Autopilot protection against invalid Amber receipt, registry coverage, and readiness proof gaps
+selected_task_1: add_receipt_registry_negative_case_validator
+selected_task_1_lane: Green
+selected_task_2: advance_evolution_backlog_beyond_completed_receipt_negative_cases
+selected_task_2_lane: Green
+candidate_gaps_identified: receipt_registry_negative_cases_missing; receipt_registry_fixture_coverage_drift; readiness_receipt_registry_cross_claims; real_amber_provider_receipt_preflight
+lower_priority_candidates: receipt_registry_fixture_coverage_drift; readiness_receipt_registry_cross_claims
+red_blocked_candidates: real_amber_provider_receipt_preflight
+validator_ref: scripts/validate_autopilot_receipt_registry_negative_cases.js
+fixture_ref: tests/schema_examples/autopilot_receipt_registry_negative_cases.example.json
+doc_ref: docs/AUTOPILOT_RECEIPT_REGISTRY_NEGATIVE_CASES.md
+evolution_next_recommended_task: amber_action_packet_preflight_v1
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
+push_allowed: false
+push_status: not_performed
+validation_status: completed_validated_guarded_local_commit
+commit_message: test: add receipt registry negative cases
+recommended_next: amber_action_packet_preflight_v1
+```
+
+---
+
 ## autopilot_false_readiness_negative_cases_v1
 
 ```text

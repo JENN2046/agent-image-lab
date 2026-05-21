@@ -1,5 +1,21 @@
 ---
 
+- [x] ID: receipt_registry_negative_cases_v1
+      Title: Add receipt registry negative-case validation
+      Reason: Governance kernel validated compliant receipts, but invalid receipt and registry coverage cases needed explicit fail-closed proof.
+      Selected task 1: add_receipt_registry_negative_case_validator.
+      Selected task 2: advance_evolution_backlog_beyond_completed_receipt_negative_cases.
+      Lane: Green.
+      Candidate gaps found from files: receipt_registry_negative_cases_missing; receipt_registry_fixture_coverage_drift; readiness_receipt_registry_cross_claims; real_amber_provider_receipt_preflight.
+      Lower-priority candidates: receipt_registry_fixture_coverage_drift; readiness_receipt_registry_cross_claims.
+      Red-blocked candidate: real_amber_provider_receipt_preflight.
+      Validator: scripts/validate_autopilot_receipt_registry_negative_cases.js.
+      Fixture: tests/schema_examples/autopilot_receipt_registry_negative_cases.example.json.
+      Status: completed_validated_guarded_local_commit.
+      Commit message: test: add receipt registry negative cases.
+      Recommended next: amber_action_packet_preflight_v1.
+      Stop condition: push/tag/release/deploy, secret read, destructive action, provider/plugin/API/image/memory/source-read/dependency/runtime requirement, or validation failure requiring judgment.
+
 - [x] ID: autopilot_false_readiness_negative_cases_v1
       Title: Add false-readiness negative-case validation
       Reason: Current readiness validators proved accepted outputs but did not separately prove that malformed semantic reports fail.
@@ -41,11 +57,6 @@
       Commit message: test: tighten autopilot readiness semantics.
       Recommended next: receipt_registry_negative_cases_v1_or_owner_push_safety_gate_after_review.
       Stop condition: push/tag/release/deploy, secret read, destructive action, provider/plugin/API/image/memory/source-read/dependency/runtime requirement, or validation failure requiring judgment.
-
-- [ ] ID: receipt_registry_negative_cases_v1
-      Title: Add negative-case coverage for receipt registry failures
-      Reason: Evolution Engine now recommends this as the next local hardening item after completed readiness closeout.
-      Stop condition: same Red Lane gates as Smart Standing Authorization v3.
 
 ---
 

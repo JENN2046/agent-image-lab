@@ -69,6 +69,7 @@ $requiredFiles = @(
   'scripts/validate_autopilot_evolution_engine.js',
   'scripts/validate_complete_autopilot_readiness_gate.js',
   'scripts/validate_autopilot_false_readiness_negative_cases.js',
+  'scripts/validate_autopilot_receipt_registry_negative_cases.js',
   'scripts/validate_local_checkpoint_manifest.js',
   'scripts/validate_local_commit_scope.js',
   'scripts/validate_post_push_state.js',
@@ -285,6 +286,7 @@ $requiredFiles = @(
   'tests/schema_examples/autopilot_evolution_backlog.example.json',
   'tests/schema_examples/complete_autopilot_readiness_gate.example.json',
   'tests/schema_examples/autopilot_false_readiness_negative_cases.example.json',
+  'tests/schema_examples/autopilot_receipt_registry_negative_cases.example.json',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -11788,6 +11790,37 @@ process.exit(child.status || 0);
     }
     if ($autopilotGovernanceKernel.real_manifest_read_performed -ne $false -or $autopilotGovernanceKernel.real_vcpchat_read_performed -ne $false -or $autopilotGovernanceKernel.real_vcptoolbox_read_performed -ne $false -or $autopilotGovernanceKernel.dependency_change_performed -ne $false -or $autopilotGovernanceKernel.runtime_probe_performed -ne $false -or $autopilotGovernanceKernel.secret_value_read_performed -ne $false -or $autopilotGovernanceKernel.push_tag_release_deploy_performed -ne $false) {
       Add-Failure "Smart Autopilot governance kernel must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
+    }
+  }
+
+  $autopilotReceiptRegistryNegativeCasesOutput = & node (Join-Path $Root 'scripts/validate_autopilot_receipt_registry_negative_cases.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Autopilot receipt registry negative-case validation exited with failure"
+  } else {
+    $autopilotReceiptRegistryNegativeCases = ($autopilotReceiptRegistryNegativeCasesOutput -join "`n") | ConvertFrom-Json
+    if ($autopilotReceiptRegistryNegativeCases.passed -ne $true -or $autopilotReceiptRegistryNegativeCases.phase -ne 'receipt_registry_negative_cases_v1') {
+      Add-Failure "Autopilot receipt registry negative-case validation must pass"
+    }
+    if ($autopilotReceiptRegistryNegativeCases.deterministic_output_verified -ne $true -or $autopilotReceiptRegistryNegativeCases.fixture_verified -ne $true) {
+      Add-Failure "Autopilot receipt registry negative-case validation must verify deterministic fixture output"
+    }
+    if ($autopilotReceiptRegistryNegativeCases.selected_task -ne 'add_receipt_registry_negative_case_validator' -or $autopilotReceiptRegistryNegativeCases.selected_task_lane -ne 'Green' -or $autopilotReceiptRegistryNegativeCases.candidate_gap_count -lt 3) {
+      Add-Failure "Autopilot receipt registry negative-case validation must select exactly one Green task from at least three gaps"
+    }
+    if ($autopilotReceiptRegistryNegativeCases.registry_coverage_verified -ne $true -or $autopilotReceiptRegistryNegativeCases.registry_receipt_count -lt 4 -or $autopilotReceiptRegistryNegativeCases.receipt_example_file_count -lt 4) {
+      Add-Failure "Autopilot receipt registry negative-case validation must verify registry coverage"
+    }
+    if ($autopilotReceiptRegistryNegativeCases.negative_case_count -lt 6 -or $autopilotReceiptRegistryNegativeCases.caught_negative_case_count -ne $autopilotReceiptRegistryNegativeCases.negative_case_count -or $autopilotReceiptRegistryNegativeCases.all_negative_cases_caught -ne $true) {
+      Add-Failure "Autopilot receipt registry negative-case validation must catch every negative case"
+    }
+    if ($autopilotReceiptRegistryNegativeCases.lower_priority_candidates.Count -lt 2 -or $autopilotReceiptRegistryNegativeCases.red_blocked_candidates -notcontains 'real_amber_provider_receipt_preflight') {
+      Add-Failure "Autopilot receipt registry negative-case validation must explain lower-priority and Red-blocked candidates"
+    }
+    if ($autopilotReceiptRegistryNegativeCases.provider_contact_performed -ne $false -or $autopilotReceiptRegistryNegativeCases.plugin_call_performed -ne $false -or $autopilotReceiptRegistryNegativeCases.api_call_performed -ne $false -or $autopilotReceiptRegistryNegativeCases.image_generation_performed -ne $false -or $autopilotReceiptRegistryNegativeCases.DailyNote_write_performed -ne $false -or $autopilotReceiptRegistryNegativeCases.VCP_memory_write_performed -ne $false) {
+      Add-Failure "Autopilot receipt registry negative-case validation must not perform provider, plugin, API, image, DailyNote, or VCP memory actions"
+    }
+    if ($autopilotReceiptRegistryNegativeCases.real_manifest_read_performed -ne $false -or $autopilotReceiptRegistryNegativeCases.real_vcpchat_read_performed -ne $false -or $autopilotReceiptRegistryNegativeCases.real_vcptoolbox_read_performed -ne $false -or $autopilotReceiptRegistryNegativeCases.dependency_change_performed -ne $false -or $autopilotReceiptRegistryNegativeCases.runtime_probe_performed -ne $false -or $autopilotReceiptRegistryNegativeCases.secret_value_read_performed -ne $false -or $autopilotReceiptRegistryNegativeCases.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Autopilot receipt registry negative-case validation must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
     }
   }
 

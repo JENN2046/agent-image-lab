@@ -1,5 +1,43 @@
 ---
 
+## Checkpoint - Receipt Registry Negative Cases v1
+
+```text
+phase: receipt_registry_negative_cases_v1
+phase_id: receipt_registry_negative_cases_v1
+status: completed_validated_guarded_local_commit
+completed:
+- compiled mission through Goal Decomposition Runtime
+- identified four receipt/readiness reliability gaps from current files
+- selected add_receipt_registry_negative_case_validator as the highest-value safe task
+- continued one additional Green task to advance Evolution Engine beyond the completed receipt negative-case capability
+- added negative cases for missing receipt files, id mismatches, write-budget overrun, unknown cost, irreversible actions, side-effect flags, and dependency-action overrun
+- verified registry coverage against all autopilot_execution_receipt*.json examples
+latest_validation:
+- node --check scripts/validate_autopilot_receipt_registry_negative_cases.js
+- node scripts/validate_autopilot_receipt_registry_negative_cases.js
+- node scripts/validate_autopilot_evolution_engine.js
+- node scripts/validate_complete_autopilot_readiness_gate.js
+- node scripts/validate_autopilot_governance_kernel.js
+- node scripts/validate_agent_board_state.js
+- git diff --check
+- powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1 after guarded local commit
+not_performed:
+- no push
+- no tag/release/deploy
+- no provider/plugin/API/image generation
+- no DailyNote/VCP memory write
+- no real manifest/VCPChat/VCPToolBox read
+- no dependency change
+- no runtime probe
+- no secret read
+commit_message: test: add receipt registry negative cases
+recommended_next: amber_action_packet_preflight_v1
+```
+
+---
+
 ## Checkpoint - Autopilot False Readiness Negative Cases v1
 
 ```text

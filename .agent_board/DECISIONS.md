@@ -2,6 +2,15 @@
 
 ## Decisions
 
+### DECISION-AIL-AUTO-025 — Receipt registry readiness requires negative-case proof
+
+Context: The governance kernel validated compliant receipt registry entries, but accepted fixtures alone could miss invalid registry or Amber receipt shapes.
+Chosen: Add `receipt_registry_negative_cases_v1` with local negative cases for missing receipt files, registry/body id mismatch, write-budget overrun, unknown cost, hidden irreversible actions, dependency-action overrun, and true side-effect flags.
+Reason: Future Amber receipts need fail-closed registry coverage before real external or production actions can be trusted.
+Risk: The Evolution Engine could continue recommending the completed negative-case task.
+Mitigation: Mark `receipt_registry_negative_cases_v1` as a completed capability and advance the next recommended task to `amber_action_packet_preflight_v1`.
+Boundary: This is Green Lane local validation only; no real Amber external action, runtime probe, source read, dependency change, push, tag, release, or deploy was performed.
+
 ### DECISION-AIL-AUTO-024 — False readiness must have negative-case proof
 
 Context: The local full-autopilot readiness chain had strong positive fixtures, but accepted fixtures alone can self-certify and miss future semantic regressions.

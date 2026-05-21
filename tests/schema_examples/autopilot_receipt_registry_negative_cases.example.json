@@ -1,0 +1,134 @@
+{
+  "autopilot_receipt_registry_negative_cases": {
+    "version": "v1",
+    "phase": "receipt_registry_negative_cases_v1",
+    "selected_task": "add_receipt_registry_negative_case_validator",
+    "selected_task_lane": "Green",
+    "candidate_gaps": [
+      {
+        "gap_id": "receipt_registry_negative_cases_missing",
+        "lane": "Green",
+        "priority": "highest",
+        "selected": true,
+        "source_evidence": [
+          "scripts/validate_autopilot_governance_kernel.js",
+          "tests/schema_examples/autopilot_receipt_registry.example.json"
+        ],
+        "rationale": "The registry validates compliant receipts but did not prove malformed registry/receipt cases fail."
+      },
+      {
+        "gap_id": "receipt_registry_fixture_coverage_drift",
+        "lane": "Green",
+        "priority": "high",
+        "selected": false,
+        "source_evidence": [
+          "tests/schema_examples/autopilot_execution_receipt*.json",
+          "tests/schema_examples/autopilot_receipt_registry.example.json"
+        ],
+        "rationale": "Coverage drift is now checked inside the selected validator by comparing registry paths against all receipt example files."
+      },
+      {
+        "gap_id": "readiness_receipt_registry_cross_claims",
+        "lane": "Green",
+        "priority": "next",
+        "selected": false,
+        "source_evidence": [
+          "scripts/validate_complete_autopilot_readiness_gate.js",
+          "tests/schema_examples/complete_autopilot_readiness_gate.example.json"
+        ],
+        "rationale": "Readiness gate can later assert richer per-receipt coverage, but registry negative cases are the smaller direct fix."
+      },
+      {
+        "gap_id": "real_amber_provider_receipt_preflight",
+        "lane": "Red",
+        "priority": "blocked",
+        "selected": false,
+        "source_evidence": [
+          "schemas/autopilot_autonomy_envelope.schema.yaml",
+          "schemas/autopilot_execution_receipt.schema.yaml"
+        ],
+        "rationale": "Testing live provider/API/image receipt behavior is blocked by the current no external action boundary."
+      }
+    ],
+    "candidate_gap_count": 4,
+    "registry_path": "tests/schema_examples/autopilot_receipt_registry.example.json",
+    "registry_receipt_count": 4,
+    "receipt_example_files": [
+      "tests/schema_examples/autopilot_execution_receipt.amber_01_local_trial.example.json",
+      "tests/schema_examples/autopilot_execution_receipt.amber_02_production_candidate_replay.example.json",
+      "tests/schema_examples/autopilot_execution_receipt.amber_dry_run_loop.example.json",
+      "tests/schema_examples/autopilot_execution_receipt.example.json"
+    ],
+    "registry_coverage_verified": true,
+    "negative_cases": [
+      {
+        "case_id": "registry_missing_receipt_file",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "Registry entry file missing: tests/schema_examples/missing_autopilot_execution_receipt.example.json"
+      },
+      {
+        "case_id": "registry_receipt_id_mismatch",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "receipt_id mismatch for tests/schema_examples/autopilot_execution_receipt.amber_dry_run_loop.example.json"
+      },
+      {
+        "case_id": "receipt_files_written_over_budget",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "files_written exceeds max_write_files for tests/schema_examples/autopilot_execution_receipt.amber_dry_run_loop.example.json"
+      },
+      {
+        "case_id": "receipt_cost_unknown_not_allowed",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "cost_unknown must be false for tests/schema_examples/autopilot_execution_receipt.amber_dry_run_loop.example.json"
+      },
+      {
+        "case_id": "receipt_irreversible_action_hidden",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "irreversible actions must not be hidden in tests/schema_examples/autopilot_execution_receipt.amber_dry_run_loop.example.json"
+      },
+      {
+        "case_id": "receipt_side_effect_guard_true",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "Receipt tests/schema_examples/autopilot_execution_receipt.amber_dry_run_loop.example.json must keep provider_contact_performed=false"
+      },
+      {
+        "case_id": "receipt_dependency_actions_over_budget",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "dependency actions exceed budget for tests/schema_examples/autopilot_execution_receipt.amber_dry_run_loop.example.json"
+      }
+    ],
+    "negative_case_count": 7,
+    "caught_negative_case_count": 7,
+    "all_negative_cases_caught": true,
+    "validator_strengthened": "Receipt registry validation now proves invalid Amber receipt and registry coverage cases fail.",
+    "lower_priority_candidates": [
+      "receipt_registry_fixture_coverage_drift",
+      "readiness_receipt_registry_cross_claims"
+    ],
+    "red_blocked_candidates": [
+      "real_amber_provider_receipt_preflight"
+    ],
+    "side_effect_flags": {
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "dependency_change_performed": false,
+      "runtime_probe_performed": false,
+      "secret_value_read_performed": false,
+      "push_tag_release_deploy_performed": false
+    }
+  }
+}
