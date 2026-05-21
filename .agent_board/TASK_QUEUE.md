@@ -1,5 +1,17 @@
 ---
 
+- [x] ID: amber_dry_run_execution_loop_v1
+      Title: Prove the local Amber envelope-to-receipt loop
+      Reason: Product-grade autopilot needs a no-side-effect proof that Amber execution can be budgeted, receipted, registered, validated, and continued.
+      Loop: envelope -> action_packet -> dry_run_action -> execution_receipt -> receipt_registry -> validation -> continuation.
+      Receipt: tests/schema_examples/autopilot_execution_receipt.amber_dry_run_loop.example.json.
+      Result: completed_validated_guarded_local_commit.
+      Commit message: test: add amber dry-run execution loop.
+      Recommended next: autopilot_evolution_engine_v1.
+      Stop condition: any nonzero cost, unknown cost, external call, runtime/source-read/dependency/secret/push signal, missing receipt, missing registry entry, or validation failure requiring judgment.
+
+---
+
 - [x] ID: next_safe_task_orchestrator_v1
       Title: Select the next safe executable task deterministically
       Reason: Product-grade autopilot needs a local selector that advances only Green or valid budgeted Amber tasks while preserving Red blockers.

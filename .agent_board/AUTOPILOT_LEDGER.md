@@ -105,6 +105,34 @@ guard:
 ```
 ---
 
+## amber_dry_run_execution_loop_v1
+
+```yaml
+task_id: amber_dry_run_execution_loop_v1
+lane: Amber
+action_performed: local_amber_envelope_packet_receipt_dry_run
+receipt: tests/schema_examples/autopilot_execution_receipt.amber_dry_run_loop.example.json
+cost_amount: 0
+cost_currency: not_applicable
+rollback_structured: true
+result: completed_validated_guarded_local_commit
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+dependency_change_performed: false
+runtime_probe_performed: false
+secret_value_read_performed: false
+push_tag_release_deploy_performed: false
+```
+
+---
+
 ## next_safe_task_orchestrator_v1
 
 ```yaml

@@ -1,5 +1,38 @@
 ---
 
+## Checkpoint - Amber Dry-Run Execution Loop v1
+
+```text
+phase: amber_dry_run_execution_loop_v1
+phase_id: amber_dry_run_execution_loop_v1
+status: completed_validated_guarded_local_commit
+completed:
+- added local Amber dry-run loop simulator
+- added dry-run loop fixture and execution receipt
+- registered receipt in receipt registry
+- added independent validator and MVP wiring
+latest_validation:
+- node --check scripts/simulate_amber_dry_run_execution_loop.js
+- node scripts/simulate_amber_dry_run_execution_loop.js
+- node --check scripts/validate_amber_dry_run_execution_loop.js
+- node scripts/validate_amber_dry_run_execution_loop.js
+- node scripts/validate_autopilot_governance_kernel.js
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1 after guarded local commit
+not_performed:
+- no push
+- no tag/release/deploy
+- no provider/plugin/API/image generation
+- no DailyNote/VCP memory write
+- no real manifest/VCPChat/VCPToolBox read
+- no dependency change
+- no runtime probe
+- no secret read
+commit_message: test: add amber dry-run execution loop
+recommended_next: autopilot_evolution_engine_v1
+```
+
+---
+
 ## Checkpoint - Next Safe Task Orchestrator v1
 
 ```text

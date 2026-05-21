@@ -63,6 +63,8 @@ $requiredFiles = @(
   'scripts/validate_agent_board_queue_reconciliation.js',
   'scripts/orchestrate_next_safe_task.js',
   'scripts/validate_next_safe_task_orchestrator.js',
+  'scripts/simulate_amber_dry_run_execution_loop.js',
+  'scripts/validate_amber_dry_run_execution_loop.js',
   'scripts/validate_local_checkpoint_manifest.js',
   'scripts/validate_local_commit_scope.js',
   'scripts/validate_post_push_state.js',
@@ -256,6 +258,7 @@ $requiredFiles = @(
   'docs/AUTOPILOT_GOAL_COMPILER_V1.md',
   'docs/AUTOPILOT_GOAL_DECOMPOSITION_RUNTIME.md',
   'docs/AUTOPILOT_NEXT_SAFE_TASK_ORCHESTRATOR.md',
+  'docs/AUTOPILOT_AMBER_DRY_RUN_EXECUTION_LOOP.md',
   'schemas/autopilot_autonomy_envelope.schema.yaml',
   'schemas/autopilot_execution_receipt.schema.yaml',
   'schemas/autopilot_goal.schema.yaml',
@@ -270,6 +273,8 @@ $requiredFiles = @(
   'tests/schema_examples/autopilot_goal_decomposition_materialized.example.json',
   'tests/schema_examples/agent_board_queue_reconciliation.example.json',
   'tests/schema_examples/next_safe_task_orchestration.example.json',
+  'tests/schema_examples/amber_dry_run_execution_loop.example.json',
+  'tests/schema_examples/autopilot_execution_receipt.amber_dry_run_loop.example.json',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -11851,6 +11856,28 @@ process.exit(child.status || 0);
     }
     if ($nextSafeTaskOrchestrator.real_manifest_read_performed -ne $false -or $nextSafeTaskOrchestrator.real_vcpchat_read_performed -ne $false -or $nextSafeTaskOrchestrator.real_vcptoolbox_read_performed -ne $false -or $nextSafeTaskOrchestrator.dependency_change_performed -ne $false -or $nextSafeTaskOrchestrator.runtime_probe_performed -ne $false -or $nextSafeTaskOrchestrator.secret_value_read_performed -ne $false -or $nextSafeTaskOrchestrator.push_tag_release_deploy_performed -ne $false) {
       Add-Failure "Next Safe Task Orchestrator must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
+    }
+  }
+
+  $amberDryRunExecutionLoopOutput = & node (Join-Path $Root 'scripts/validate_amber_dry_run_execution_loop.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Amber dry-run execution loop validation exited with failure"
+  } else {
+    $amberDryRunExecutionLoop = ($amberDryRunExecutionLoopOutput -join "`n") | ConvertFrom-Json
+    if ($amberDryRunExecutionLoop.passed -ne $true -or $amberDryRunExecutionLoop.phase -ne 'amber_dry_run_execution_loop_v1') {
+      Add-Failure "Amber dry-run execution loop v1 validation must pass"
+    }
+    if ($amberDryRunExecutionLoop.action_packet_verified -ne $true -or $amberDryRunExecutionLoop.receipt_verified -ne $true -or $amberDryRunExecutionLoop.registry_entry_verified -ne $true) {
+      Add-Failure "Amber dry-run execution loop must verify action packet, receipt, and registry entry"
+    }
+    if ($amberDryRunExecutionLoop.cost_known_zero -ne $true -or $amberDryRunExecutionLoop.rollback_structured -ne $true -or $amberDryRunExecutionLoop.continuation_allowed -ne $true) {
+      Add-Failure "Amber dry-run execution loop must prove known zero cost, structured rollback, and continuation"
+    }
+    if ($amberDryRunExecutionLoop.provider_contact_performed -ne $false -or $amberDryRunExecutionLoop.plugin_call_performed -ne $false -or $amberDryRunExecutionLoop.api_call_performed -ne $false -or $amberDryRunExecutionLoop.image_generation_performed -ne $false -or $amberDryRunExecutionLoop.DailyNote_write_performed -ne $false -or $amberDryRunExecutionLoop.VCP_memory_write_performed -ne $false) {
+      Add-Failure "Amber dry-run execution loop must not perform provider, plugin, API, image, DailyNote, or VCP memory actions"
+    }
+    if ($amberDryRunExecutionLoop.real_manifest_read_performed -ne $false -or $amberDryRunExecutionLoop.real_vcpchat_read_performed -ne $false -or $amberDryRunExecutionLoop.real_vcptoolbox_read_performed -ne $false -or $amberDryRunExecutionLoop.dependency_change_performed -ne $false -or $amberDryRunExecutionLoop.runtime_probe_performed -ne $false -or $amberDryRunExecutionLoop.secret_value_read_performed -ne $false -or $amberDryRunExecutionLoop.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Amber dry-run execution loop must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
     }
   }
 

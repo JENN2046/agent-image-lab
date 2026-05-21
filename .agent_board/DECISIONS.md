@@ -128,6 +128,16 @@ Risk: If the receipt or budget model stays prose-only, future Amber actions coul
 Mitigation: The validator checks lane definitions, default budgets, Red gates, Amber receipt requirements, example fixtures, and no-real-A5 guard flags.
 ---
 
+## DECISION-AIL-AUTO-018 — Amber dry-run loop proves receipts before real Amber actions
+
+Status: accepted.
+
+Decision: Amber actions must be provable through a local envelope, action packet, receipt, registry, validation, and continuation chain before real provider/plugin/API/image/memory/source-read/runtime/dependency work is attempted.
+
+Boundary: The v1 loop is dry-run only with known zero cost, structured rollback, and no external side effects.
+
+---
+
 ## DECISION-AIL-AUTO-017 — Next Safe Task Orchestrator is local selection only
 
 Status: accepted.

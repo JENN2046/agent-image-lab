@@ -68,6 +68,11 @@ Orchestrator. It selects only Green tasks or valid budgeted Amber tasks from the
 materialized snapshot, preserves blocked Red items, previews state advancement,
 and keeps all external side-effect flags false. It is not a real executor.
 
+`scripts/simulate_amber_dry_run_execution_loop.js` proves the Amber execution
+shape without external side effects: envelope, action packet, zero-cost dry-run
+action, execution receipt, receipt registry entry, validation, and continuation
+decision.
+
 ### Truth Model
 
 Uses repository reality as ground:

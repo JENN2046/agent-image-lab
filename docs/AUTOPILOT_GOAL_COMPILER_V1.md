@@ -40,6 +40,10 @@ the next safe executable task from the materialized snapshot. Red tasks remain
 blocked, Green tasks may be selected directly, and Amber tasks require envelope,
 budget, receipt, validation, and stop-condition proof before selection.
 
+Amber dry-run loop rule: `scripts/simulate_amber_dry_run_execution_loop.js`
+proves that an Amber task can move from envelope to action packet to receipt and
+continuation decision with known zero cost and no external side effects.
+
 This document does not authorize provider contact, plugin calls, API calls,
 image generation, DailyNote writes, VCP memory writes, real manifest reads, real
 VCPChat reads, real VCPToolBox reads, dependency changes, runtime probes, push,

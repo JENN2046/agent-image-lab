@@ -1,5 +1,26 @@
 ---
 
+## Current Handoff Update - Amber Dry-Run Execution Loop v1
+
+```text
+phase: amber_dry_run_execution_loop_v1
+phase_id: amber_dry_run_execution_loop_v1
+status: completed_validated_guarded_local_commit
+mode: Green Lane local Amber dry-run validation
+summary: Added a local Amber loop proof from envelope to action packet, zero-cost dry-run action, receipt, registry, validation, and continuation decision.
+current_autonomy_model: Smart Standing Authorization v3
+amber_dry_run_loop_ref: scripts/simulate_amber_dry_run_execution_loop.js
+amber_dry_run_validator_ref: scripts/validate_amber_dry_run_execution_loop.js
+amber_dry_run_receipt_ref: tests/schema_examples/autopilot_execution_receipt.amber_dry_run_loop.example.json
+cost_known_zero: true
+rollback_structured: true
+commit_message: test: add amber dry-run execution loop
+not_performed: no push, no tag/release/deploy, no provider/plugin/API/image generation, no DailyNote/VCP memory write, no real manifest/VCPChat/VCPToolBox read, no dependency change, no runtime probe, no secret read.
+recommended_next: autopilot_evolution_engine_v1.
+```
+
+---
+
 ## Current Handoff Update - Next Safe Task Orchestrator v1
 
 ```text

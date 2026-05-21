@@ -1,5 +1,31 @@
 ---
 
+## amber_dry_run_execution_loop_v1
+
+```text
+phase: amber_dry_run_execution_loop_v1
+phase_id: amber_dry_run_execution_loop_v1
+status: completed_validated_guarded_local_commit
+mode: Green Lane local Amber dry-run validation
+objective: prove envelope -> action packet -> dry-run action -> receipt -> registry -> validation -> continuation
+current_task_id: amber_dry_run_execution_loop_v1
+current_autonomy_model: Smart Standing Authorization v3
+baseline_before_edit: 03582b3
+ahead_count_before_edit: 4
+amber_dry_run_loop_ref: scripts/simulate_amber_dry_run_execution_loop.js
+amber_dry_run_validator_ref: scripts/validate_amber_dry_run_execution_loop.js
+amber_dry_run_receipt_ref: tests/schema_examples/autopilot_execution_receipt.amber_dry_run_loop.example.json
+cost_known_zero: true
+rollback_structured: true
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
+push_allowed: false
+validation_status: completed_validated_guarded_local_commit
+commit_message: test: add amber dry-run execution loop
+recommended_next: autopilot_evolution_engine_v1
+```
+
+---
+
 ## next_safe_task_orchestrator_v1
 
 ```text
