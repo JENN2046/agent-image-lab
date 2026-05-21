@@ -1384,6 +1384,10 @@ Boundary confirmation:
 Next recommended step:
 - recommend only the next step
 - do not automatically enter the next stage unless the task explicitly allows it
+
+Chinese task summary:
+- append a concise Chinese task summary at the end of every user-facing final response
+- keep it short, plain, and specific to what was done, validated, blocked, or left next
 ```
 
 For gate-style work, closeout YAML must also include:
