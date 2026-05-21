@@ -2,6 +2,15 @@
 
 ## Decisions
 
+### DECISION-AIL-AUTO-023 — Current boundary is separate from fixture next-safe evidence
+
+Context: Commander review found remaining ambiguity where Complete Readiness Gate and Reconciler could make the old fixture `next_safe_task` look like the current final task.
+Chosen: Treat `add_goal_decomposition_runtime_validation` as historical/test fixture evidence and make `owner_push_safety_gate_after_review` the current final boundary.
+Reason: The system is locally ready; no executable local task remains required before push safety gate unless a validator fails.
+Risk: Downstream agents could still confuse materialized fixture queue proof with current operating state.
+Mitigation: Validators expose `fixture_selected_next_safe_task`, `current_next_boundary`, and current-state reconciliation fields separately, and status surfaces name the push-safety boundary explicitly.
+Boundary: Push remains Red Lane and is not authorized by this cleanup.
+
 ### DECISION-AIL-AUTO-015 — Goal decomposition materializer is a local dry-run, not an executor
 
 Context: Goal Decomposition Runtime v1 defined and validated the runtime chain, but future sessions still needed deterministic proof that a runtime example can become a stable materialized snapshot for `.agent_board`.

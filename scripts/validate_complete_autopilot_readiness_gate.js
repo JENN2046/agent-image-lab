@@ -75,6 +75,16 @@ function buildCompleteAutopilotReadinessGate() {
   assert(taskQueue.includes("owner_push_safety_gate_after_review"), "TASK_QUEUE must record push safety gate as next boundary");
   assert(handoff.includes("ahead") && handoff.includes("push_status: not_performed"), "HANDOFF must record ahead/no-push boundary");
 
+  const fixtureSelectedNextSafeTask = orchestration.selected_next_safe_task.task_id;
+  const fixtureSelectedNextSafeTaskLane = orchestration.selected_next_safe_task.lane;
+  const currentNextBoundary = "owner_push_safety_gate_after_review";
+  const currentNextBoundaryType = "Red push-safety-gate boundary";
+
+  assert(fixtureSelectedNextSafeTask === "add_goal_decomposition_runtime_validation", "Fixture next safe task should remain historical test evidence");
+  assert(fixtureSelectedNextSafeTaskLane === "Green", "Fixture next safe task lane should remain Green");
+  assert(currentNextBoundary === "owner_push_safety_gate_after_review", "Current next boundary must be owner push safety gate after review");
+  assert(currentNextBoundaryType.includes("Red") && currentNextBoundaryType.includes("push-safety-gate"), "Current next boundary type must identify the Red push-safety-gate boundary");
+
   return {
     version: "v1",
     phase: "complete_autopilot_readiness_gate_v1",
@@ -87,8 +97,11 @@ function buildCompleteAutopilotReadinessGate() {
       materialized_snapshot: materializedSnapshotPath,
       materialized_goal_id: checkedMaterialized.goal_id,
       reconciled_agent_board: reconciliation.result,
-      selected_next_safe_task: orchestration.selected_next_safe_task.task_id,
-      selected_next_safe_task_lane: orchestration.selected_next_safe_task.lane,
+      fixture_selected_next_safe_task: fixtureSelectedNextSafeTask,
+      fixture_selected_next_safe_task_lane: fixtureSelectedNextSafeTaskLane,
+      fixture_next_safe_task_evidence_type: "historical_test_fixture",
+      current_next_boundary: currentNextBoundary,
+      current_next_boundary_type: currentNextBoundaryType,
       amber_dry_run_envelope_id: amberLoop.envelope.envelope_id,
       amber_dry_run_receipt_id: amberLoop.execution_receipt.receipt_id,
       amber_dry_run_task_id: amberLoop.amber_dry_run_task_id,
@@ -130,6 +143,12 @@ function main() {
   assertDeepEqual(actualAgain, actual, "Complete readiness gate deterministic output");
   assertDeepEqual(actual, expected, "Complete readiness gate fixture");
   assert(actual.readiness_result === "passed_local_full_autopilot_ready_no_push", "readiness result mismatch");
+  assert(actual.chain.fixture_selected_next_safe_task === "add_goal_decomposition_runtime_validation", "fixture selected next safe task mismatch");
+  assert(actual.chain.fixture_selected_next_safe_task_lane === "Green", "fixture selected next safe task lane mismatch");
+  assert(actual.chain.fixture_next_safe_task_evidence_type === "historical_test_fixture", "fixture next safe task evidence type mismatch");
+  assert(!Object.prototype.hasOwnProperty.call(actual.chain, "selected_next_safe_task"), "ambiguous selected_next_safe_task field must not be present");
+  assert(actual.chain.current_next_boundary === "owner_push_safety_gate_after_review", "current next boundary mismatch");
+  assert(actual.chain.current_next_boundary_type.includes("Red") && actual.chain.current_next_boundary_type.includes("push-safety-gate"), "current next boundary type mismatch");
   assert(Object.values(actual.invariants).every((value) => value === true), "all invariants must be true");
   assert(actual.local_only_boundaries.push_allowed === false, "push must remain blocked");
   assert(actual.local_only_boundaries.secret_value_read_allowed === false, "secret read must remain blocked");
@@ -144,7 +163,10 @@ function main() {
     goal_id: actual.chain.goal_id,
     route_plan_id: actual.chain.route_plan_id,
     task_queue_id: actual.chain.task_queue_id,
-    selected_next_safe_task: actual.chain.selected_next_safe_task,
+    fixture_selected_next_safe_task: actual.chain.fixture_selected_next_safe_task,
+    fixture_selected_next_safe_task_lane: actual.chain.fixture_selected_next_safe_task_lane,
+    current_next_boundary: actual.chain.current_next_boundary,
+    current_next_boundary_type: actual.chain.current_next_boundary_type,
     amber_dry_run_receipt_id: actual.chain.amber_dry_run_receipt_id,
     amber_dry_run_task_id: actual.chain.amber_dry_run_task_id,
     amber_dry_run_matches_current_next_safe_task: actual.chain.amber_dry_run_matches_current_next_safe_task,

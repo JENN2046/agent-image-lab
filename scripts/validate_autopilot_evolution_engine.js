@@ -38,8 +38,13 @@ function main() {
   assert(actual.phase === "autopilot_evolution_engine_v1", "phase mismatch");
   assert(actual.all_source_inputs_present === true, "all known local inputs must exist");
   assert(actual.detected_gap_count >= 4, "expected multiple evolution proposals");
+  assert(actual.detected_gap_count === actual.proposals.length, "detected_gap_count must count only future proposals/gaps");
   assert(actual.receipt_registry_count >= 4, "receipt registry should include existing Amber receipts");
+  assert(Array.isArray(actual.completed_capabilities), "completed_capabilities must be present");
+  assert(actual.completed_capabilities.some((capability) => capability.capability_id === "complete_autopilot_readiness_gate_v1"), "completed readiness gate must be recorded as completed capability evidence");
+  assert(actual.proposals.every((proposal) => proposal.proposal_id !== "complete_autopilot_readiness_gate_v1"), "future proposals must not include completed readiness gate");
   assert(actual.next_recommended_task !== "complete_autopilot_readiness_gate_v1", "next task must advance beyond completed readiness gate");
+  assert(!actual.completed_capabilities.some((capability) => capability.capability_id === actual.next_recommended_task), "next recommended task must not already be completed");
   const nextProposal = actual.proposals.find((proposal) => proposal.proposal_id === actual.next_recommended_task);
   assert(nextProposal, "next recommended task must reference an existing proposal");
   assert(["Green", "Amber"].includes(nextProposal.lane), "next recommended task must be Green or Amber-safe local hardening");
@@ -56,6 +61,7 @@ function main() {
     fixture_verified: true,
     detected_gap_count: actual.detected_gap_count,
     proposal_count: actual.proposals.length,
+    completed_capabilities: actual.completed_capabilities.map((capability) => capability.capability_id),
     next_recommended_task: actual.next_recommended_task,
     next_recommended_task_lane: actual.next_recommended_task_lane,
     receipt_registry_count: actual.receipt_registry_count,

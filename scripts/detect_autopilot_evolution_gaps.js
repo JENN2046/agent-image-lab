@@ -78,27 +78,23 @@ function detectAutopilotEvolutionGaps() {
     .filter(([, present]) => !present)
     .map(([input]) => input);
 
-  const proposals = [
-    buildProposal({
+  const completedCapabilities = [
+    {
+      capability_id: "complete_autopilot_readiness_gate_v1",
       proposal_id: "complete_autopilot_readiness_gate_v1",
       title: "Prove the complete autopilot chain in one readiness gate",
       lane: "Green",
-      detected_gap: "Completed evidence: the chain has a final local gate proving goal -> route -> queue -> materializer -> reconciler -> next safe task -> Amber dry-run receipt -> registry -> checkpoint -> evolution backlog.",
-      proposed_local_task: "Keep this proposal as completed/current evidence only; do not recommend it as the next task after final closeout.",
-      allowed_write_targets: [
-        "docs/",
-        "scripts/",
-        "tests/schema_examples/",
-        ".agent_board/",
-        "README.md",
-        "docs/00_project_roadmap.md"
-      ],
+      status: "completed_current_evidence",
+      evidence: "Final local gate proves goal -> route -> queue -> materializer -> reconciler -> fixture next-safe evidence -> Amber dry-run receipt -> registry -> checkpoint -> evolution backlog.",
       validation: [
         "node scripts/validate_complete_autopilot_readiness_gate.js",
         "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1"
       ],
       red_boundary: "Do not push, deploy, read secrets, call providers, or touch real runtime/source systems."
-    }),
+    }
+  ];
+
+  const proposals = [
     buildProposal({
       proposal_id: "receipt_registry_negative_cases_v1",
       title: "Add negative-case coverage for receipt registry failures",
@@ -180,6 +176,7 @@ function detectAutopilotEvolutionGaps() {
     all_source_inputs_present: missingInputs.length === 0,
     missing_source_inputs: missingInputs,
     receipt_registry_count: receiptRegistry.receipts.length,
+    completed_capabilities: completedCapabilities,
     detected_gap_count: proposals.length,
     proposals,
     next_recommended_task: "receipt_registry_negative_cases_v1",

@@ -1,5 +1,32 @@
 ---
 
+## current_boundary_semantics_cleanup_v1
+
+```text
+phase: current_boundary_semantics_cleanup_v1
+phase_id: current_boundary_semantics_cleanup_v1
+status: completed_validated_guarded_local_commit
+mode: Green Lane local validator/docs/fixture/status hardening
+objective: separate fixture next-safe-task evidence from the current final push-safety boundary
+current_task_id: current_boundary_semantics_cleanup_v1
+current_autonomy_model: Smart Standing Authorization v3
+baseline_before_edit: b1f326b
+ahead_count_before_edit: 10
+fixture_next_safe_task_evidence: add_goal_decomposition_runtime_validation
+fixture_next_safe_task_evidence_type: historical_test_fixture_only
+current_next_boundary: owner_push_safety_gate_after_review
+current_next_boundary_type: Red push-safety-gate boundary
+no_executable_local_task_required_before_push_safety_gate_unless_validator_fails: true
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
+push_allowed: false
+push_status: not_performed
+validation_status: completed_validated_guarded_local_commit
+commit_message: test: separate current boundary from fixture next task
+recommended_next: owner_push_safety_gate_after_review
+```
+
+---
+
 ## autopilot_readiness_semantic_tightening_v1
 
 ```text
@@ -88,13 +115,13 @@ ahead_count_before_edit: 5
 evolution_engine_ref: scripts/detect_autopilot_evolution_gaps.js
 evolution_engine_validator_ref: scripts/validate_autopilot_evolution_engine.js
 evolution_backlog_fixture_ref: tests/schema_examples/autopilot_evolution_backlog.example.json
-next_recommended_task: complete_autopilot_readiness_gate_v1
+next_recommended_task: receipt_registry_negative_cases_v1
 red_lane_self_authorized: false
 provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
 push_allowed: false
 validation_status: completed_validated_guarded_local_commit
 commit_message: test: add autopilot evolution engine
-recommended_next: complete_autopilot_readiness_gate_v1
+recommended_next: receipt_registry_negative_cases_v1
 ```
 
 ---
@@ -142,7 +169,7 @@ ahead_count_before_edit: 3
 orchestrator_ref: scripts/orchestrate_next_safe_task.js
 orchestrator_validator_ref: scripts/validate_next_safe_task_orchestrator.js
 orchestrator_fixture_ref: tests/schema_examples/next_safe_task_orchestration.example.json
-selected_next_safe_task: add_goal_decomposition_runtime_validation
+fixture_selected_next_safe_task_evidence: add_goal_decomposition_runtime_validation
 blocked_red_items_preserved: true
 provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
 push_allowed: false

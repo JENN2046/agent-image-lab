@@ -1,5 +1,25 @@
 ---
 
+- [x] ID: current_boundary_semantics_cleanup_v1
+      Title: Separate current boundary from fixture next task
+      Reason: Complete Readiness Gate and Reconciler must not imply old fixture next_safe_task evidence is the current final task.
+      Result: completed_validated_guarded_local_commit.
+      Fixture next-safe-task evidence: add_goal_decomposition_runtime_validation as historical_test_fixture_only.
+      Current final boundary: owner_push_safety_gate_after_review.
+      Current boundary type: Red push-safety-gate boundary.
+      No executable local task remains required before push safety gate unless a validator fails.
+      Commit message: test: separate current boundary from fixture next task.
+      Recommended next: owner_push_safety_gate_after_review.
+      Stop condition: push/tag/release/deploy, secret read, destructive action, provider/plugin/API/image/memory/source-read/dependency/runtime requirement, or validation failure requiring judgment.
+
+- [ ] ID: owner_push_safety_gate_after_review
+      Title: Run owner-reviewed push safety gate after local validation
+      Reason: Current final boundary is Red push-safety-gate review, not an executable Green fixture task.
+      Required authorization: explicit owner instruction for push safety gate / push.
+      Stop condition: any failed validator, dirty worktree, secret signal, image/runtime/A5 side effect, or missing owner push authorization.
+
+---
+
 - [x] ID: autopilot_readiness_semantic_tightening_v1
       Title: Tighten semantic claims in the local full-autopilot readiness chain
       Reason: Commander review found the validators could pass while overclaiming current next-safe-task execution, completed readiness recommendations, historical queue anchors, and final closeout proof.
@@ -43,13 +63,15 @@
       Backlog fixture: tests/schema_examples/autopilot_evolution_backlog.example.json.
       Result: completed_validated_guarded_local_commit.
       Commit message: test: add autopilot evolution engine.
-      Recommended next: complete_autopilot_readiness_gate_v1.
+      Recommended next: receipt_registry_negative_cases_v1; complete_autopilot_readiness_gate_v1 is completed evidence.
       Stop condition: any provider/plugin/API/image/memory/source-read/runtime/dependency/secret/push signal, Red self-authorization, missing fixture, or validation failure requiring judgment.
 
-- [ ] ID: complete_autopilot_readiness_gate_v1
+- [x] ID: complete_autopilot_readiness_gate_v1
       Title: Prove the full autopilot chain in one readiness validator
-      Reason: The system now has stage validators; the next Green task should prove the whole chain end-to-end before final closeout.
+      Reason: Historical proposal now completed by the readiness gate and final local closeout.
       Source proposal: tests/schema_examples/autopilot_evolution_backlog.example.json.
+      Result: completed_current_evidence.
+      Current next boundary: owner_push_safety_gate_after_review.
       Stop condition: push/tag/release/deploy, secret read, destructive action, provider/plugin/API/image/memory/source-read/dependency/runtime requirement, or validation failure requiring judgment.
 
 ---
@@ -70,7 +92,7 @@
       Title: Select the next safe executable task deterministically
       Reason: Product-grade autopilot needs a local selector that advances only Green or valid budgeted Amber tasks while preserving Red blockers.
       Source snapshot: tests/schema_examples/autopilot_goal_decomposition_materialized.example.json.
-      selected_next_safe_task: add_goal_decomposition_runtime_validation.
+      fixture_selected_next_safe_task_evidence: add_goal_decomposition_runtime_validation.
       eligible_executable_tasks: add_goal_decomposition_runtime_validation; future_budgeted_amber_receipt_task.
       blocked_red_items: blocked-red-push-origin-master.
       Orchestrator: scripts/orchestrate_next_safe_task.js.

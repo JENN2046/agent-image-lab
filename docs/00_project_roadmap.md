@@ -5,10 +5,11 @@
 ## 当前产品主线恢复点
 
 ```yaml
-current_phase: local_full_autopilot_ready_closeout
+current_phase: current_boundary_semantics_cleanup_v1
 phase_status: COMPLETED_VALIDATED_LOCAL_FULL_AUTOPILOT_READY
 source_phase: final_local_closeout
 semantic_tightening_active: true
+current_boundary_semantics_cleanup_active: true
 current_autonomy_model: Smart Standing Authorization v3
 startup_default_model: Smart Standing Authorization v3
 a4_8_status: retained_as_green_lane_substrate
@@ -70,6 +71,10 @@ autopilot_evolution_engine_active: true
 complete_autopilot_readiness_gate_active: true
 local_full_autopilot_ready: true
 autopilot_readiness_semantics_tightened: true
+current_next_boundary: owner_push_safety_gate_after_review
+current_next_boundary_type: Red push-safety-gate boundary
+fixture_next_safe_task_evidence: historical_test_fixture_only
+no_executable_local_task_required_before_push_safety_gate_unless_validator_fails: true
 autopilot_goal_schema_ref: schemas/autopilot_goal.schema.yaml
 autopilot_route_plan_schema_ref: schemas/autopilot_route_plan.schema.yaml
 autopilot_task_queue_schema_ref: schemas/autopilot_task_queue.schema.yaml
@@ -125,8 +130,8 @@ default_autonomy_envelope:
 commit_readiness_validator_repair_closed: true
 validate_mvp_clean_post_commit_failure_closed: true
 goal_level_local_readiness_verified: true
-selected_next_product_move: autopilot_goal_compiler_v1_green_infrastructure
-recommended_next: pending_goal_compiler_driven_autonomous_task
+selected_next_product_move: owner_push_safety_gate_after_review
+recommended_next: owner_push_safety_gate_after_review
 validation_passed:
   - git status --short --branch
   - node --check scripts/validate_autopilot_goal_compiler.js

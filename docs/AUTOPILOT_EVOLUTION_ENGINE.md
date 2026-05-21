@@ -30,9 +30,10 @@ receipt registry
 
 ## Output
 
-The output is a deterministic backlog:
+The output is a deterministic backlog plus completed-capability evidence:
 
 ```text
+completed_capabilities
 proposal_id
 title
 lane
@@ -47,11 +48,10 @@ required_authorization_or_action when applicable
 Green proposals may become future local tasks. Red proposals are advisory only
 and must never be self-authorized.
 
-After final local closeout, `complete_autopilot_readiness_gate_v1` may remain in
-the backlog as completed/current evidence, but it must not be the next
-recommended task. The next recommendation must advance to a real local
-hardening item such as `receipt_registry_negative_cases_v1` or another
-Green/Amber-safe local task.
+After final local closeout, `complete_autopilot_readiness_gate_v1` belongs in
+`completed_capabilities`, not in future `proposals`. The next recommendation
+must advance to a real local hardening item such as
+`receipt_registry_negative_cases_v1` or another Green/Amber-safe local task.
 
 ## Validation
 
@@ -62,6 +62,7 @@ the detector output is deterministic
 the checked fixture matches generated output
 known local inputs exist
 multiple future proposals exist
+completed capabilities are separated from future proposals
 Red proposals are not self-authorized
 side-effect flags are false
 ```

@@ -56,7 +56,7 @@ function reconcileAgentBoardQueue(materialized) {
   const handoff = contents.get(".agent_board/HANDOFF.md") || "";
   const combined = Array.from(contents.values()).join("\n");
 
-  const requiredTaskQueueTokens = [
+  const historicalTaskQueueTokens = [
     materialized.goal_id,
     materialized.current_goal,
     materialized.next_safe_task.task_id,
@@ -65,10 +65,10 @@ function reconcileAgentBoardQueue(materialized) {
     "next_safe_task"
   ];
   for (const task of materialized.executable_tasks) {
-    requiredTaskQueueTokens.push(task.task_id, task.source_step_id, task.lane);
+    historicalTaskQueueTokens.push(task.task_id, task.source_step_id, task.lane);
   }
   for (const item of materialized.blocked_red_items) {
-    requiredTaskQueueTokens.push(item.item_id, item.blocked_action, item.required_authorization_or_action);
+    historicalTaskQueueTokens.push(item.item_id, item.blocked_action, item.required_authorization_or_action);
   }
 
   const requiredCurrentStateTokens = [
@@ -81,6 +81,7 @@ function reconcileAgentBoardQueue(materialized) {
   ];
 
   const requiredHistoricalEvidenceTokens = [
+    ...historicalTaskQueueTokens,
     "phase: agent_board_queue_reconciler_v1",
     "latest_validation",
     "commit_message: test: add agent board queue reconciler",
@@ -88,15 +89,16 @@ function reconcileAgentBoardQueue(materialized) {
     "not_performed"
   ];
 
-  const taskQueueMissing = includesAll(taskQueue, requiredTaskQueueTokens);
   const currentStateMissing = includesAll(runState + "\n" + handoff + "\n" + checkpoint + "\n" + taskQueue, requiredCurrentStateTokens);
   const historicalEvidenceMissing = includesAll(combined, requiredHistoricalEvidenceTokens);
   const blockedRedPushRecorded = materialized.blocked_red_items.every((item) => combined.includes(item.item_id) && combined.includes(item.blocked_action));
   const readyForPushSafetyGateRecorded = combined.includes("owner_push_safety_gate_after_review");
+  const historicalEvidenceWarning = historicalEvidenceMissing.length > 0
+    ? "Historical fixture queue evidence is incomplete, but current final-state reconciliation is evaluated separately."
+    : null;
 
   const queueDriftDetected =
     missingRequiredSurfaces.length > 0 ||
-    taskQueueMissing.length > 0 ||
     currentStateMissing.length > 0 ||
     !blockedRedPushRecorded ||
     !readyForPushSafetyGateRecorded;
@@ -106,41 +108,49 @@ function reconcileAgentBoardQueue(materialized) {
     phase: "agent_board_queue_reconciler_v1",
     source_snapshot: materializedSnapshotPath,
     agent_board_files_checked: boardFiles,
-    matched_goal_id: !taskQueueMissing.includes(materialized.goal_id) && combined.includes(materialized.goal_id),
-    matched_current_goal: !taskQueueMissing.includes(materialized.current_goal),
+    matched_goal_id: !historicalEvidenceMissing.includes(materialized.goal_id) && combined.includes(materialized.goal_id),
+    matched_current_goal: !historicalEvidenceMissing.includes(materialized.current_goal),
     matched_executable_queue: materialized.executable_tasks.map((task) => ({
       task_id: task.task_id,
       source_step_id: task.source_step_id,
       lane: task.lane,
-      matched: !taskQueueMissing.includes(task.task_id) && !taskQueueMissing.includes(task.source_step_id)
+      matched: !historicalEvidenceMissing.includes(task.task_id) && !historicalEvidenceMissing.includes(task.source_step_id)
     })),
     matched_next_safe_task: {
       task_id: materialized.next_safe_task.task_id,
-      matched: !taskQueueMissing.includes(materialized.next_safe_task.task_id)
+      evidence_type: "historical_test_fixture",
+      matched: !historicalEvidenceMissing.includes(materialized.next_safe_task.task_id)
     },
     matched_blocked_red_items: materialized.blocked_red_items.map((item) => ({
       item_id: item.item_id,
       blocked_action: item.blocked_action,
-      matched: !taskQueueMissing.includes(item.item_id) && !taskQueueMissing.includes(item.blocked_action)
+      matched: !historicalEvidenceMissing.includes(item.item_id) && !historicalEvidenceMissing.includes(item.blocked_action)
     })),
     current_state_matches: {
       active_model: combined.includes("current_autonomy_model: Smart Standing Authorization v3"),
       no_push_boundary: combined.includes("push_allowed: false") && combined.includes("push_status: not_performed"),
       final_closeout_phase: combined.includes("local_full_autopilot_ready_closeout"),
       full_autopilot_ready_status: combined.includes("COMPLETED_VALIDATED_LOCAL_FULL_AUTOPILOT_READY"),
-      next_safe_task_or_ready_for_push_safety_gate: combined.includes(materialized.next_safe_task.task_id) || readyForPushSafetyGateRecorded,
+      current_next_boundary: readyForPushSafetyGateRecorded,
+      current_next_boundary_type: combined.includes("owner_push_safety_gate_after_review") && combined.includes("push"),
       blocked_red_push_item: blockedRedPushRecorded
     },
+    current_state_missing: currentStateMissing,
     historical_evidence_matches: {
       agent_board_queue_reconciler_v1: historicalEvidenceMissing.length === 0,
-      missing: historicalEvidenceMissing
+      fixture_goal_id: !historicalEvidenceMissing.includes(materialized.goal_id),
+      fixture_current_goal: !historicalEvidenceMissing.includes(materialized.current_goal),
+      fixture_next_safe_task: !historicalEvidenceMissing.includes(materialized.next_safe_task.task_id)
     },
+    historical_evidence_missing: historicalEvidenceMissing,
+    historical_evidence_warning: historicalEvidenceWarning,
     queue_drift_detected: queueDriftDetected,
     missing_required_surfaces: missingRequiredSurfaces,
-    warnings: [],
+    warnings: historicalEvidenceWarning ? [historicalEvidenceWarning] : [],
     result: queueDriftDetected ? "failed" : "passed",
     details: {
-      task_queue_missing: taskQueueMissing,
+      current_boundary: "owner_push_safety_gate_after_review",
+      current_boundary_type: "Red push-safety-gate boundary",
       current_state_missing: currentStateMissing,
       historical_evidence_missing: historicalEvidenceMissing
     }

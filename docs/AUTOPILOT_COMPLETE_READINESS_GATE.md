@@ -17,7 +17,8 @@ user goal
 -> task_queue
 -> materialized snapshot
 -> reconciled .agent_board
--> next_safe_task
+-> fixture next_safe_task evidence
+-> current final boundary
 -> Amber dry-run receipt
 -> receipt registry
 -> validation checkpoint
@@ -32,8 +33,10 @@ fixtures, receipts, status surfaces, and governance scripts.
 ```text
 goal / route_plan / task_queue links are consistent
 materialized snapshot is deterministic
-.agent_board reconciliation passes
-next_safe_task is selected and executable
+.agent_board current-state reconciliation passes
+fixture next_safe_task evidence is labeled historical/test fixture evidence
+current final boundary is owner_push_safety_gate_after_review
+current final boundary type is a Red push-safety-gate boundary
 Red items remain blocked
 Amber dry-run receipt validates and is registered without pretending to execute the current next_safe_task when ids differ
 final local closeout checkpoint, run state, task queue, handoff, and no-push boundary exist
@@ -54,3 +57,9 @@ The readiness result after final closeout is
 `passed_local_full_autopilot_ready_no_push`. This still does not authorize push;
 push remains a Red Lane action requiring a separate push safety gate and owner
 authorization.
+
+Current-boundary cleanup: the old fixture task
+`add_goal_decomposition_runtime_validation` may remain as historical test
+evidence, but the current final boundary is
+`owner_push_safety_gate_after_review`. No executable local task remains required
+before the push safety gate unless a validator fails.

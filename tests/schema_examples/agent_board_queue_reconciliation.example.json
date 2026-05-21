@@ -29,6 +29,7 @@
     ],
     "matched_next_safe_task": {
       "task_id": "add_goal_decomposition_runtime_validation",
+      "evidence_type": "historical_test_fixture",
       "matched": true
     },
     "matched_blocked_red_items": [
@@ -43,19 +44,26 @@
       "no_push_boundary": true,
       "final_closeout_phase": true,
       "full_autopilot_ready_status": true,
-      "next_safe_task_or_ready_for_push_safety_gate": true,
+      "current_next_boundary": true,
+      "current_next_boundary_type": true,
       "blocked_red_push_item": true
     },
+    "current_state_missing": [],
     "historical_evidence_matches": {
       "agent_board_queue_reconciler_v1": true,
-      "missing": []
+      "fixture_goal_id": true,
+      "fixture_current_goal": true,
+      "fixture_next_safe_task": true
     },
+    "historical_evidence_missing": [],
+    "historical_evidence_warning": null,
     "queue_drift_detected": false,
     "missing_required_surfaces": [],
     "warnings": [],
     "result": "passed",
     "details": {
-      "task_queue_missing": [],
+      "current_boundary": "owner_push_safety_gate_after_review",
+      "current_boundary_type": "Red push-safety-gate boundary",
       "current_state_missing": [],
       "historical_evidence_missing": []
     }

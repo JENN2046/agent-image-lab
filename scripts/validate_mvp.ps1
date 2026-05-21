@@ -11830,10 +11830,13 @@ process.exit(child.status || 0);
     if ($agentBoardQueueReconciliation.passed -ne $true -or $agentBoardQueueReconciliation.phase -ne 'agent_board_queue_reconciler_v1') {
       Add-Failure "Agent board queue reconciliation must pass"
     }
-    if ($agentBoardQueueReconciliation.queue_drift_detected -ne $false -or $agentBoardQueueReconciliation.result -ne 'passed' -or $agentBoardQueueReconciliation.matched_goal_id -ne $true -or -not $agentBoardQueueReconciliation.matched_next_safe_task) {
-      Add-Failure "Agent board queue reconciliation must verify no drift, goal id, and next safe task"
+    if ($agentBoardQueueReconciliation.queue_drift_detected -ne $false -or $agentBoardQueueReconciliation.result -ne 'passed' -or $agentBoardQueueReconciliation.matched_goal_id -ne $true -or $agentBoardQueueReconciliation.current_next_boundary -ne 'owner_push_safety_gate_after_review') {
+      Add-Failure "Agent board queue reconciliation must verify no current-state drift, goal id, and current push-safety boundary"
     }
-    if ($agentBoardQueueReconciliation.matched_blocked_red_items -lt 1 -or $agentBoardQueueReconciliation.missing_required_surfaces.Count -ne 0) {
+    if ($agentBoardQueueReconciliation.current_next_boundary_type -notlike '*Red*push-safety-gate*' -or $agentBoardQueueReconciliation.fixture_next_safe_task_evidence_type -ne 'historical_test_fixture') {
+      Add-Failure "Agent board queue reconciliation must separate historical fixture next-safe evidence from the current Red push-safety boundary"
+    }
+    if ($agentBoardQueueReconciliation.matched_blocked_red_items -lt 1 -or $agentBoardQueueReconciliation.missing_required_surfaces.Count -ne 0 -or $agentBoardQueueReconciliation.current_state_missing.Count -ne 0) {
       Add-Failure "Agent board queue reconciliation must verify blocked Red items and required surfaces"
     }
     if ($agentBoardQueueReconciliation.provider_contact_performed -ne $false -or $agentBoardQueueReconciliation.plugin_call_performed -ne $false -or $agentBoardQueueReconciliation.api_call_performed -ne $false -or $agentBoardQueueReconciliation.image_generation_performed -ne $false -or $agentBoardQueueReconciliation.DailyNote_write_performed -ne $false -or $agentBoardQueueReconciliation.VCP_memory_write_performed -ne $false) {
@@ -11902,6 +11905,9 @@ process.exit(child.status || 0);
     if ($autopilotEvolutionEngine.deterministic_output_verified -ne $true -or $autopilotEvolutionEngine.fixture_verified -ne $true -or $autopilotEvolutionEngine.detected_gap_count -lt 4) {
       Add-Failure "Autopilot Evolution Engine must verify deterministic fixture output and multiple proposals"
     }
+    if ($autopilotEvolutionEngine.completed_capabilities -notcontains 'complete_autopilot_readiness_gate_v1') {
+      Add-Failure "Autopilot Evolution Engine must keep completed readiness gate in completed_capabilities"
+    }
     if ($autopilotEvolutionEngine.next_recommended_task -eq 'complete_autopilot_readiness_gate_v1' -or $autopilotEvolutionEngine.next_recommended_task_lane -notin @('Green', 'Amber') -or $autopilotEvolutionEngine.local_write_targets_only -ne $true -or $autopilotEvolutionEngine.red_lane_self_authorized -ne $false) {
       Add-Failure "Autopilot Evolution Engine must advance beyond completed readiness gate, stay local, and avoid Red self-authorization"
     }
@@ -11924,8 +11930,11 @@ process.exit(child.status || 0);
     if ($completeAutopilotReadinessGate.deterministic_output_verified -ne $true -or $completeAutopilotReadinessGate.fixture_verified -ne $true -or $completeAutopilotReadinessGate.invariants_verified -ne $true) {
       Add-Failure "Complete Autopilot Readiness Gate must verify deterministic fixture output and invariants"
     }
-    if (-not $completeAutopilotReadinessGate.goal_id -or -not $completeAutopilotReadinessGate.route_plan_id -or -not $completeAutopilotReadinessGate.task_queue_id -or -not $completeAutopilotReadinessGate.selected_next_safe_task) {
-      Add-Failure "Complete Autopilot Readiness Gate must include goal, route plan, task queue, and next safe task"
+    if (-not $completeAutopilotReadinessGate.goal_id -or -not $completeAutopilotReadinessGate.route_plan_id -or -not $completeAutopilotReadinessGate.task_queue_id -or -not $completeAutopilotReadinessGate.fixture_selected_next_safe_task) {
+      Add-Failure "Complete Autopilot Readiness Gate must include goal, route plan, task queue, and fixture next-safe evidence"
+    }
+    if ($completeAutopilotReadinessGate.fixture_selected_next_safe_task -ne 'add_goal_decomposition_runtime_validation' -or $completeAutopilotReadinessGate.current_next_boundary -ne 'owner_push_safety_gate_after_review' -or $completeAutopilotReadinessGate.current_next_boundary_type -notlike '*Red*push-safety-gate*') {
+      Add-Failure "Complete Autopilot Readiness Gate must separate fixture next-safe evidence from the current Red push-safety boundary"
     }
     if (-not $completeAutopilotReadinessGate.amber_dry_run_receipt_id -or $completeAutopilotReadinessGate.receipt_registry_count -lt 4 -or $completeAutopilotReadinessGate.evolution_backlog_next_task -eq 'complete_autopilot_readiness_gate_v1') {
       Add-Failure "Complete Autopilot Readiness Gate must include Amber receipt, registry, and an evolution backlog that advances beyond completed readiness"

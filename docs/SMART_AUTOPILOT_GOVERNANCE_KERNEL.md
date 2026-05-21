@@ -59,9 +59,12 @@ perform provider/plugin/API/image/memory/source-read/runtime/dependency actions.
 
 `scripts/reconcile_agent_board_queue.js` provides the local queue reconciliation
 check between that deterministic snapshot and `.agent_board` status surfaces. It
-fails on missing required surfaces, next-safe-task drift, or missing blocked Red
-items, while allowing harmless prose differences as warnings. It is not a real
-executor and must not perform external actions.
+validates the current final state separately from historical fixture evidence:
+the current boundary is `owner_push_safety_gate_after_review`, while fixture
+`next_safe_task` tokens remain historical/test evidence. It fails on missing
+required current-state surfaces or missing blocked Red push items, while
+allowing harmless prose differences as warnings. It is not a real executor and
+must not perform external actions.
 
 `scripts/orchestrate_next_safe_task.js` provides the local Next Safe Task
 Orchestrator. It selects only Green tasks or valid budgeted Amber tasks from the
@@ -95,6 +98,11 @@ evidence that the current `next_safe_task` executed unless the task ids match.
 Evolution backlog recommendations must advance beyond completed gates, and
 queue reconciliation must validate current state separately from historical
 evidence.
+
+Current boundary cleanup rule: after local full-autopilot closeout, the final
+current boundary is `owner_push_safety_gate_after_review`. Fixture-level
+`next_safe_task` evidence is historical/test evidence only, and no executable
+local task remains required before the push safety gate unless a validator fails.
 
 ### Truth Model
 

@@ -1,5 +1,28 @@
 ---
 
+## Current Handoff Update - Current Boundary Semantics Cleanup v1
+
+```text
+phase: current_boundary_semantics_cleanup_v1
+phase_id: current_boundary_semantics_cleanup_v1
+status: completed_validated_guarded_local_commit
+mode: Green Lane local validator/docs/fixture/status hardening
+summary: Split fixture-level next_safe_task evidence from the current final boundary so readiness and reconciliation no longer imply an old Green fixture task remains current work.
+current_autonomy_model: Smart Standing Authorization v3
+ahead_before_edit: 10
+fixture_next_safe_task_evidence: add_goal_decomposition_runtime_validation
+fixture_next_safe_task_evidence_type: historical_test_fixture_only
+current_next_boundary: owner_push_safety_gate_after_review
+current_next_boundary_type: Red push-safety-gate boundary
+no_executable_local_task_required_before_push_safety_gate_unless_validator_fails: true
+push_status: not_performed
+commit_message: test: separate current boundary from fixture next task
+not_performed: no push, no tag/release/deploy, no provider/plugin/API/image generation, no DailyNote/VCP memory write, no real manifest/VCPChat/VCPToolBox read, no dependency change, no runtime probe, no secret read.
+recommended_next: owner_push_safety_gate_after_review.
+```
+
+---
+
 ## Current Handoff Update - Autopilot Readiness Semantic Tightening v1
 
 ```text
@@ -68,11 +91,11 @@ current_autonomy_model: Smart Standing Authorization v3
 evolution_engine_ref: scripts/detect_autopilot_evolution_gaps.js
 evolution_engine_validator_ref: scripts/validate_autopilot_evolution_engine.js
 evolution_backlog_fixture_ref: tests/schema_examples/autopilot_evolution_backlog.example.json
-next_recommended_task: complete_autopilot_readiness_gate_v1
+next_recommended_task: receipt_registry_negative_cases_v1
 red_lane_self_authorized: false
 commit_message: test: add autopilot evolution engine
 not_performed: no push, no tag/release/deploy, no provider/plugin/API/image generation, no DailyNote/VCP memory write, no real manifest/VCPChat/VCPToolBox read, no dependency change, no runtime probe, no secret read.
-recommended_next: complete_autopilot_readiness_gate_v1.
+recommended_next: receipt_registry_negative_cases_v1.
 ```
 
 ---
@@ -111,7 +134,7 @@ startup_default_model: Smart Standing Authorization v3
 orchestrator_ref: scripts/orchestrate_next_safe_task.js
 orchestrator_validator_ref: scripts/validate_next_safe_task_orchestrator.js
 orchestrator_fixture_ref: tests/schema_examples/next_safe_task_orchestration.example.json
-selected_next_safe_task: add_goal_decomposition_runtime_validation
+fixture_selected_next_safe_task_evidence: add_goal_decomposition_runtime_validation
 blocked_red_items_preserved: true
 commit_message: test: add next safe task orchestrator
 not_performed: no push, no tag/release/deploy, no provider/plugin/API/image generation, no DailyNote/VCP memory write, no real manifest/VCPChat/VCPToolBox read, no dependency change, no runtime probe, no secret read.

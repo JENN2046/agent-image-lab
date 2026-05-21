@@ -1,5 +1,33 @@
 ---
 
+## Checkpoint - Current Boundary Semantics Cleanup v1
+
+```text
+phase: current_boundary_semantics_cleanup_v1
+phase_id: current_boundary_semantics_cleanup_v1
+status: completed_validated_guarded_local_commit
+completed:
+- renamed Complete Readiness Gate next-safe output to fixture_selected_next_safe_task
+- added current_next_boundary: owner_push_safety_gate_after_review
+- made Reconciler current-state drift independent from historical fixture queue tokens
+- moved completed readiness gate evidence into Evolution Engine completed_capabilities
+latest_validation:
+- required semantic boundary cleanup validation set passed before guarded commit; scripts/validate_mvp.ps1 expectedly blocked only on dirty commit-readiness gates before commit
+not_performed:
+- no push
+- no tag/release/deploy
+- no provider/plugin/API/image generation
+- no DailyNote/VCP memory write
+- no real manifest/VCPChat/VCPToolBox read
+- no dependency change
+- no runtime probe
+- no secret read
+commit_message: test: separate current boundary from fixture next task
+recommended_next: owner_push_safety_gate_after_review
+```
+
+---
+
 ## Checkpoint - Autopilot Readiness Semantic Tightening v1
 
 ```text
@@ -118,7 +146,7 @@ not_performed:
 - no runtime probe
 - no secret read
 commit_message: test: add autopilot evolution engine
-recommended_next: complete_autopilot_readiness_gate_v1
+recommended_next: receipt_registry_negative_cases_v1
 ```
 
 ---
