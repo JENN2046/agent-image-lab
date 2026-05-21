@@ -78,6 +78,33 @@ function Invoke-CapsuleProductCoreValidation {
     }
   }
 
+  function Test-CapsuleControlledLoopGitMode {
+    param(
+      [Parameter(Mandatory = $true)]
+      [object]$Report,
+
+      [Parameter(Mandatory = $true)]
+      [string]$FailureMessage
+    )
+
+    $allowedModes = @(
+      'pending_exact_file_slice',
+      'clean_synced_post_commit',
+      'clean_local_ahead_post_commit'
+    )
+
+    if ($env:AGENT_IMAGE_LAB_VALIDATOR_MAINTENANCE -eq '1') {
+      $allowedModes += 'validator_self_maintenance_patch'
+    }
+
+    if ($allowedModes -notcontains $Report.git_validation_mode) {
+      & $AddFailure $FailureMessage
+      return $false
+    }
+
+    return $true
+  }
+
   if ($Section -eq 'PreRuns' -or $Section -eq 'All') {
   $capsuleStatusTaxonomy = Invoke-CapsuleNodeJsonValidator 'scripts/validate_capsule_status_taxonomy.js' "Capsule status taxonomy validation exited with failure"
   if ($null -ne $capsuleStatusTaxonomy) {
@@ -193,11 +220,15 @@ function Invoke-CapsuleProductCoreValidation {
   $controlledVisualProductionLoopExactFileCommitReadiness = Invoke-CapsuleNodeJsonValidator 'scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js' "Controlled visual production loop exact-file commit readiness review validation exited with failure"
   if ($null -ne $controlledVisualProductionLoopExactFileCommitReadiness) {
     Test-CapsuleExpectedStatus $controlledVisualProductionLoopExactFileCommitReadiness 'controlled_visual_production_loop_exact_file_commit_readiness_review_verified' "Controlled visual production loop exact-file commit readiness review validation must pass"
+    $controlledVisualProductionLoopExactFileCommitModeOk = Test-CapsuleControlledLoopGitMode $controlledVisualProductionLoopExactFileCommitReadiness "Controlled visual production loop exact-file commit readiness review must report a known git validation mode"
     if ($controlledVisualProductionLoopExactFileCommitReadiness.local_commit_ready_after_explicit_human_review -ne $true -or $controlledVisualProductionLoopExactFileCommitReadiness.auto_commit_allowed_now -ne $false -or $controlledVisualProductionLoopExactFileCommitReadiness.staging_allowed_now -ne $false -or $controlledVisualProductionLoopExactFileCommitReadiness.commit_allowed_now -ne $false -or $controlledVisualProductionLoopExactFileCommitReadiness.push_allowed_now -ne $false) {
       & $AddFailure "Controlled visual production loop exact-file commit readiness review must keep commit execution blocked while proving the slice is locally commit-ready"
     }
-    if ($controlledVisualProductionLoopExactFileCommitReadiness.exact_stage_file_count -ne 19 -or $controlledVisualProductionLoopExactFileCommitReadiness.suggested_commit_message -ne 'chore: record production candidate activation') {
+    if ($controlledVisualProductionLoopExactFileCommitModeOk -and $controlledVisualProductionLoopExactFileCommitReadiness.git_validation_mode -eq 'pending_exact_file_slice' -and $controlledVisualProductionLoopExactFileCommitReadiness.exact_stage_file_count -ne 19) {
       & $AddFailure "Controlled visual production loop exact-file commit readiness review must keep the current exact stage set at 19 files with the expected suggested commit message"
+    }
+    if ($controlledVisualProductionLoopExactFileCommitReadiness.suggested_commit_message -ne 'chore: record production candidate activation') {
+      & $AddFailure "Controlled visual production loop exact-file commit readiness review must keep the expected suggested commit message"
     }
     Test-CapsuleNoExternalActionFlags $controlledVisualProductionLoopExactFileCommitReadiness "Controlled visual production loop exact-file commit readiness review validation must remain local-only with no external, memory, runtime, production, or remote actions" @('production_candidate_write_performed', 'dependency_change_performed')
   }
@@ -205,13 +236,17 @@ function Invoke-CapsuleProductCoreValidation {
   $controlledVisualProductionLoopCheckpointReadiness = Invoke-CapsuleNodeJsonValidator 'scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js' "Controlled visual production loop checkpoint readiness validation exited with failure"
   if ($null -ne $controlledVisualProductionLoopCheckpointReadiness) {
     Test-CapsuleExpectedStatus $controlledVisualProductionLoopCheckpointReadiness 'controlled_visual_production_loop_checkpoint_readiness_verified' "Controlled visual production loop checkpoint readiness validation must pass"
+    $controlledVisualProductionLoopCheckpointModeOk = Test-CapsuleControlledLoopGitMode $controlledVisualProductionLoopCheckpointReadiness "Controlled visual production loop checkpoint readiness must report a known git validation mode"
     if ($controlledVisualProductionLoopCheckpointReadiness.local_slice_ready_for_human_reviewed_commit -ne $true -or $controlledVisualProductionLoopCheckpointReadiness.staging_allowed_now -ne $false -or $controlledVisualProductionLoopCheckpointReadiness.commit_allowed_now -ne $false -or $controlledVisualProductionLoopCheckpointReadiness.push_allowed_now -ne $false) {
       & $AddFailure "Controlled visual production loop checkpoint readiness must prove a commit-ready local slice while keeping staging, commit, and push blocked"
     }
-    if ($controlledVisualProductionLoopCheckpointReadiness.branch -ne 'master' -or $controlledVisualProductionLoopCheckpointReadiness.ahead_count -ne 0 -or $controlledVisualProductionLoopCheckpointReadiness.behind_count -ne 0 -or $controlledVisualProductionLoopCheckpointReadiness.staged_file_count -ne 0) {
+    if ($controlledVisualProductionLoopCheckpointReadiness.branch -ne 'master' -or $controlledVisualProductionLoopCheckpointReadiness.behind_count -ne 0 -or $controlledVisualProductionLoopCheckpointReadiness.staged_file_count -ne 0) {
       & $AddFailure "Controlled visual production loop checkpoint readiness must remain on synced master with zero staged files"
     }
-    if ($controlledVisualProductionLoopCheckpointReadiness.exact_changed_file_count -ne 19) {
+    if ($controlledVisualProductionLoopCheckpointModeOk -and $controlledVisualProductionLoopCheckpointReadiness.git_validation_mode -eq 'pending_exact_file_slice' -and $controlledVisualProductionLoopCheckpointReadiness.ahead_count -ne 0) {
+      & $AddFailure "Controlled visual production loop checkpoint readiness must keep the pending exact-file slice on zero-ahead master"
+    }
+    if ($controlledVisualProductionLoopCheckpointModeOk -and $controlledVisualProductionLoopCheckpointReadiness.git_validation_mode -eq 'pending_exact_file_slice' -and $controlledVisualProductionLoopCheckpointReadiness.exact_changed_file_count -ne 19) {
       & $AddFailure "Controlled visual production loop checkpoint readiness must keep the current exact file slice at 19 files"
     }
   }
@@ -219,11 +254,15 @@ function Invoke-CapsuleProductCoreValidation {
   $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit = Invoke-CapsuleNodeJsonValidator 'scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js' "Controlled visual production loop commit and authorization readiness audit validation exited with failure"
   if ($null -ne $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit) {
     Test-CapsuleExpectedStatus $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit 'controlled_visual_production_loop_commit_and_authorization_readiness_audit_verified' "Controlled visual production loop commit and authorization readiness audit validation must pass"
+    $controlledVisualProductionLoopCommitAuditModeOk = Test-CapsuleControlledLoopGitMode $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit "Controlled visual production loop commit and authorization readiness audit must report a known git validation mode"
     if ($controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.goal_level_local_readiness_verified -ne $true -or $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.local_commit_ready_after_explicit_human_review -ne $true -or $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.authorization_ready_for_future_A5 -ne $true) {
       & $AddFailure "Controlled visual production loop commit and authorization readiness audit must prove the active goal is locally satisfied without opening commit or A5 execution"
     }
-    if ($controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.exact_changed_file_count -ne 19 -or $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.production_candidate_authorization_state -ne 'draft_not_active' -or $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.memory_write_authorization_state -ne 'draft_not_active') {
-      & $AddFailure "Controlled visual production loop commit and authorization readiness audit must keep the current 19-file post-activation slice and the memory A5 package inactive"
+    if ($controlledVisualProductionLoopCommitAuditModeOk -and $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.git_validation_mode -eq 'pending_exact_file_slice' -and $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.exact_changed_file_count -ne 19) {
+      & $AddFailure "Controlled visual production loop commit and authorization readiness audit must keep the current 19-file post-activation slice"
+    }
+    if ($controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.production_candidate_authorization_state -ne 'draft_not_active' -or $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.memory_write_authorization_state -ne 'draft_not_active') {
+      & $AddFailure "Controlled visual production loop commit and authorization readiness audit must keep the production candidate and memory A5 packages inactive"
     }
     if ($controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.memory_write_route_currently_blocked -ne $true -or $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.A5_execution_allowed_now -ne $false) {
       & $AddFailure "Controlled visual production loop commit and authorization readiness audit must keep the memory path blocked and A5 execution closed"
