@@ -1,5 +1,19 @@
 ---
 
+- [x] ID: autopilot_false_readiness_negative_cases_v1
+      Title: Add false-readiness negative-case validation
+      Reason: Current readiness validators proved accepted outputs but did not separately prove that malformed semantic reports fail.
+      Selected task: add_false_readiness_negative_case_validator.
+      Lane: Green.
+      Candidate gaps found from files: positive_only_readiness_semantics; receipt_registry_cost_rollback_negative_cases; resume_surface_compaction_drift; live_provider_cost_boundary.
+      Lower-priority candidates: receipt_registry_cost_rollback_negative_cases; resume_surface_compaction_drift.
+      Red-blocked candidate: live_provider_cost_boundary.
+      Validator: scripts/validate_autopilot_false_readiness_negative_cases.js.
+      Fixture: tests/schema_examples/autopilot_false_readiness_negative_cases.example.json.
+      Status: completed_validated_guarded_local_commit.
+      Commit message: test: add false readiness negative cases.
+      Stop condition: push/tag/release/deploy, secret read, destructive action, provider/plugin/API/image/memory/source-read/dependency/runtime requirement, or validation failure requiring judgment.
+
 - [x] ID: current_boundary_semantics_cleanup_v1
       Title: Separate current boundary from fixture next task
       Reason: Complete Readiness Gate and Reconciler must not imply old fixture next_safe_task evidence is the current final task.

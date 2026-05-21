@@ -2,6 +2,15 @@
 
 ## Decisions
 
+### DECISION-AIL-AUTO-024 — False readiness must have negative-case proof
+
+Context: The local full-autopilot readiness chain had strong positive fixtures, but accepted fixtures alone can self-certify and miss future semantic regressions.
+Chosen: Add `autopilot_false_readiness_negative_cases_v1` with a validator that mutates canonical valid readiness, reconciliation, and evolution outputs into known-bad reports and requires each bad report to fail.
+Reason: This catches a class of false-readiness errors that positive fixture comparison cannot prove: ambiguous `selected_next_safe_task`, fixture/current-boundary confusion, hidden queue drift, completed-work recursion, and side-effect flag flips.
+Risk: Negative cases can become stale if the builders change.
+Mitigation: The validator imports current builders, compares deterministic output against a fixture, and is wired into `scripts/validate_mvp.ps1`.
+Boundary: This is Green Lane local validation only; push and real external actions remain blocked.
+
 ### DECISION-AIL-AUTO-023 — Current boundary is separate from fixture next-safe evidence
 
 Context: Commander review found remaining ambiguity where Complete Readiness Gate and Reconciler could make the old fixture `next_safe_task` look like the current final task.

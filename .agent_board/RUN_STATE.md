@@ -1,5 +1,36 @@
 ---
 
+## autopilot_false_readiness_negative_cases_v1
+
+```text
+phase: autopilot_false_readiness_negative_cases_v1
+phase_id: autopilot_false_readiness_negative_cases_v1
+status: completed_validated_guarded_local_commit
+mode: Green Lane local validator/docs/fixture/status hardening
+objective: improve resistance to false readiness, false validation, state drift, fixture self-certification, and Red/Amber boundary confusion
+current_task_id: add_false_readiness_negative_case_validator
+current_autonomy_model: Smart Standing Authorization v3
+baseline_before_edit: 53eadb9
+goal_decomposition_runtime_used: true
+compiled_goal: Improve Autopilot Reliability Against False Readiness Claims
+selected_reliability_task: add_false_readiness_negative_case_validator
+selected_reliability_task_lane: Green
+candidate_gaps_identified: positive_only_readiness_semantics; receipt_registry_cost_rollback_negative_cases; resume_surface_compaction_drift; live_provider_cost_boundary
+lower_priority_candidates: receipt_registry_cost_rollback_negative_cases; resume_surface_compaction_drift
+red_blocked_candidates: live_provider_cost_boundary
+validator_ref: scripts/validate_autopilot_false_readiness_negative_cases.js
+fixture_ref: tests/schema_examples/autopilot_false_readiness_negative_cases.example.json
+doc_ref: docs/AUTOPILOT_FALSE_READINESS_NEGATIVE_CASES.md
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
+push_allowed: false
+push_status: not_performed
+validation_status: completed_validated_guarded_local_commit
+commit_message: test: add false readiness negative cases
+recommended_next: receipt_registry_negative_cases_v1
+```
+
+---
+
 ## current_boundary_semantics_cleanup_v1
 
 ```text

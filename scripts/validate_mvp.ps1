@@ -68,6 +68,7 @@ $requiredFiles = @(
   'scripts/detect_autopilot_evolution_gaps.js',
   'scripts/validate_autopilot_evolution_engine.js',
   'scripts/validate_complete_autopilot_readiness_gate.js',
+  'scripts/validate_autopilot_false_readiness_negative_cases.js',
   'scripts/validate_local_checkpoint_manifest.js',
   'scripts/validate_local_commit_scope.js',
   'scripts/validate_post_push_state.js',
@@ -264,6 +265,7 @@ $requiredFiles = @(
   'docs/AUTOPILOT_AMBER_DRY_RUN_EXECUTION_LOOP.md',
   'docs/AUTOPILOT_EVOLUTION_ENGINE.md',
   'docs/AUTOPILOT_COMPLETE_READINESS_GATE.md',
+  'docs/AUTOPILOT_FALSE_READINESS_NEGATIVE_CASES.md',
   'schemas/autopilot_autonomy_envelope.schema.yaml',
   'schemas/autopilot_execution_receipt.schema.yaml',
   'schemas/autopilot_goal.schema.yaml',
@@ -282,6 +284,7 @@ $requiredFiles = @(
   'tests/schema_examples/autopilot_execution_receipt.amber_dry_run_loop.example.json',
   'tests/schema_examples/autopilot_evolution_backlog.example.json',
   'tests/schema_examples/complete_autopilot_readiness_gate.example.json',
+  'tests/schema_examples/autopilot_false_readiness_negative_cases.example.json',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -11947,6 +11950,34 @@ process.exit(child.status || 0);
     }
     if ($completeAutopilotReadinessGate.real_manifest_read_performed -ne $false -or $completeAutopilotReadinessGate.real_vcpchat_read_performed -ne $false -or $completeAutopilotReadinessGate.real_vcptoolbox_read_performed -ne $false -or $completeAutopilotReadinessGate.dependency_change_performed -ne $false -or $completeAutopilotReadinessGate.runtime_probe_performed -ne $false -or $completeAutopilotReadinessGate.secret_value_read_performed -ne $false -or $completeAutopilotReadinessGate.push_tag_release_deploy_performed -ne $false) {
       Add-Failure "Complete Autopilot Readiness Gate must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
+    }
+  }
+
+  $autopilotFalseReadinessNegativeCasesOutput = & node (Join-Path $Root 'scripts/validate_autopilot_false_readiness_negative_cases.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Autopilot false-readiness negative-case validation exited with failure"
+  } else {
+    $autopilotFalseReadinessNegativeCases = ($autopilotFalseReadinessNegativeCasesOutput -join "`n") | ConvertFrom-Json
+    if ($autopilotFalseReadinessNegativeCases.passed -ne $true -or $autopilotFalseReadinessNegativeCases.phase -ne 'autopilot_false_readiness_negative_cases_v1') {
+      Add-Failure "Autopilot false-readiness negative-case validation must pass"
+    }
+    if ($autopilotFalseReadinessNegativeCases.deterministic_output_verified -ne $true -or $autopilotFalseReadinessNegativeCases.fixture_verified -ne $true) {
+      Add-Failure "Autopilot false-readiness negative-case validation must verify deterministic fixture output"
+    }
+    if ($autopilotFalseReadinessNegativeCases.selected_task -ne 'add_false_readiness_negative_case_validator' -or $autopilotFalseReadinessNegativeCases.selected_task_lane -ne 'Green' -or $autopilotFalseReadinessNegativeCases.candidate_gap_count -lt 3) {
+      Add-Failure "Autopilot false-readiness validation must select exactly one Green reliability task from at least three gaps"
+    }
+    if ($autopilotFalseReadinessNegativeCases.negative_case_count -lt 4 -or $autopilotFalseReadinessNegativeCases.caught_negative_case_count -ne $autopilotFalseReadinessNegativeCases.negative_case_count -or $autopilotFalseReadinessNegativeCases.all_negative_cases_caught -ne $true) {
+      Add-Failure "Autopilot false-readiness validation must catch every negative case"
+    }
+    if ($autopilotFalseReadinessNegativeCases.lower_priority_candidates.Count -lt 2 -or $autopilotFalseReadinessNegativeCases.red_blocked_candidates -notcontains 'live_provider_cost_boundary') {
+      Add-Failure "Autopilot false-readiness validation must explain lower-priority and Red-blocked candidates"
+    }
+    if ($autopilotFalseReadinessNegativeCases.provider_contact_performed -ne $false -or $autopilotFalseReadinessNegativeCases.plugin_call_performed -ne $false -or $autopilotFalseReadinessNegativeCases.api_call_performed -ne $false -or $autopilotFalseReadinessNegativeCases.image_generation_performed -ne $false -or $autopilotFalseReadinessNegativeCases.DailyNote_write_performed -ne $false -or $autopilotFalseReadinessNegativeCases.VCP_memory_write_performed -ne $false) {
+      Add-Failure "Autopilot false-readiness validation must not perform provider, plugin, API, image, DailyNote, or VCP memory actions"
+    }
+    if ($autopilotFalseReadinessNegativeCases.real_manifest_read_performed -ne $false -or $autopilotFalseReadinessNegativeCases.real_vcpchat_read_performed -ne $false -or $autopilotFalseReadinessNegativeCases.real_vcptoolbox_read_performed -ne $false -or $autopilotFalseReadinessNegativeCases.dependency_change_performed -ne $false -or $autopilotFalseReadinessNegativeCases.runtime_probe_performed -ne $false -or $autopilotFalseReadinessNegativeCases.secret_value_read_performed -ne $false -or $autopilotFalseReadinessNegativeCases.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Autopilot false-readiness validation must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
     }
   }
 

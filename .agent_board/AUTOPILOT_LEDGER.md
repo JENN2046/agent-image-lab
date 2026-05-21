@@ -6,6 +6,38 @@ remain the source of truth.
 
 ---
 
+## autopilot_false_readiness_negative_cases_v1
+
+```yaml
+task_id: autopilot_false_readiness_negative_cases_v1
+lane: Green
+action_performed: local_false_readiness_negative_case_validation
+selected_task: add_false_readiness_negative_case_validator
+candidate_gap_count: 4
+negative_case_count: 6
+caught_negative_case_count: 6
+all_negative_cases_caught: true
+validator_ref: scripts/validate_autopilot_false_readiness_negative_cases.js
+fixture_ref: tests/schema_examples/autopilot_false_readiness_negative_cases.example.json
+result: completed_validated_guarded_local_commit
+push_status: not_performed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+dependency_change_performed: false
+runtime_probe_performed: false
+secret_value_read_performed: false
+push_tag_release_deploy_performed: false
+```
+
+---
+
 ## current_boundary_semantics_cleanup_v1
 
 ```yaml
