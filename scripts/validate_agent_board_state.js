@@ -31,13 +31,25 @@ function assert(condition, message) {
 
 function getAheadBehind() {
   try {
-    const output = execFileSync("git", ["rev-list", "--left-right", "--count", "origin/master...master"], {
+    const currentBranch = execFileSync("git", ["branch", "--show-current"], {
+      cwd: root,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "pipe"]
+    }).trim();
+    const upstreamRef = execFileSync("git", ["rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{upstream}"], {
+      cwd: root,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "pipe"]
+    }).trim();
+    const output = execFileSync("git", ["rev-list", "--left-right", "--count", `${upstreamRef}...HEAD`], {
       cwd: root,
       encoding: "utf8",
       stdio: ["ignore", "pipe", "pipe"]
     }).trim();
     const [behindRaw, aheadRaw] = output.split(/\s+/);
     return {
+      branch: currentBranch,
+      upstream: upstreamRef,
       behind: Number.parseInt(behindRaw, 10),
       ahead: Number.parseInt(aheadRaw, 10),
       raw: output
@@ -234,6 +246,8 @@ function main() {
       post_push_status_sync_verified: postPushStatusSyncVerified,
       stale_post_push_patterns_checked: stalePostPushPatterns,
       stale_post_push_matches: stalePostPushMatches,
+      current_branch: aheadBehind ? aheadBehind.branch : "unavailable",
+      upstream_ref: aheadBehind ? aheadBehind.upstream : "unavailable",
       ahead_behind: aheadBehind ? aheadBehind.raw : "unavailable",
       git_status_short: gitStatusShort === "" ? "clean" : gitStatusShort || "unavailable",
       current_phase_checked: currentPhase.phaseId,

@@ -35,7 +35,15 @@ function readJson(relativePath) {
 }
 
 function isValidAmber(task) {
-  return task.lane === "Amber" && task.envelope_ref && task.receipt_required === true && task.budget_checked === true && task.push_allowed === false;
+  return task.lane === "Amber" &&
+    task.envelope_ref &&
+    task.receipt_required === true &&
+    task.budget_checked === true &&
+    task.push_allowed === false &&
+    Array.isArray(task.validation_required) &&
+    task.validation_required.length > 0 &&
+    Array.isArray(task.stop_conditions) &&
+    task.stop_conditions.length > 0;
 }
 
 function isExecutable(task) {

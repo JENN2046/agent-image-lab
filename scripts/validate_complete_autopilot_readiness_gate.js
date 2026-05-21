@@ -73,7 +73,12 @@ function buildCompleteAutopilotReadinessGate() {
   assert(checkpoint.includes("local_full_autopilot_ready_closeout"), "Checkpoint must include final local closeout");
   assert(runState.includes("COMPLETED_VALIDATED_LOCAL_FULL_AUTOPILOT_READY"), "RUN_STATE must include final local readiness status");
   assert(taskQueue.includes("owner_push_safety_gate_after_review"), "TASK_QUEUE must record push safety gate as next boundary");
-  assert(handoff.includes("ahead") && handoff.includes("push_status: not_performed"), "HANDOFF must record ahead/no-push boundary");
+  assert(
+    handoff.includes("phase: local_full_autopilot_ready_closeout") &&
+      handoff.includes("push_status: not_performed") &&
+      handoff.includes("recommended_next: owner_push_safety_gate_after_review."),
+    "HANDOFF must record the final local closeout no-push boundary"
+  );
 
   const fixtureSelectedNextSafeTask = orchestration.selected_next_safe_task.task_id;
   const fixtureSelectedNextSafeTaskLane = orchestration.selected_next_safe_task.lane;

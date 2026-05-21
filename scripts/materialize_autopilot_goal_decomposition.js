@@ -60,6 +60,8 @@ function materializeRuntime(runtime) {
   for (const task of executableTasks) {
     assert(task.lane === "Green" || task.lane === "Amber", `Executable task ${task.task_id} must be Green or Amber`);
     assert(!redStepIds.has(task.source_step_id), `Executable task ${task.task_id} must not come from a Red route step`);
+    assert(Array.isArray(task.validation_required) && task.validation_required.length > 0, `Executable task ${task.task_id} requires validation_required`);
+    assert(Array.isArray(task.stop_conditions) && task.stop_conditions.length > 0, `Executable task ${task.task_id} requires stop_conditions`);
     if (task.lane === "Amber") {
       assert(task.envelope_ref, `Amber executable task ${task.task_id} requires envelope_ref`);
       assert(task.receipt_required === true, `Amber executable task ${task.task_id} requires receipt`);
