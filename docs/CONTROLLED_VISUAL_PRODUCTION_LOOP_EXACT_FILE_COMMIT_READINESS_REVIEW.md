@@ -74,6 +74,7 @@ commit_readiness_decision:
   push_allowed_now: false
   reason: explicit_local_commit_instruction_and_exact_file_staging_still_required
   suggested_commit_message: chore: ready controlled visual production loop slice
+current_preflight_suggested_commit_message: chore: record production candidate activation
   commit_trailer_required: Co-authored-by: Codex <noreply@openai.com>
 ```
 

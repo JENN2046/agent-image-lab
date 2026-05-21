@@ -1,0 +1,77 @@
+production_candidate_plan:
+  version: v1
+  candidate_id: accepted_product_still_life_tennis_wallet_001_production_candidate_001
+  authorization_id: AUTH-PENDING-TENNIS-WALLET-PRODUCTION-CANDIDATE-20260520-001
+  activation_mode: A5_metadata_write_only
+  reviewer: Jenn
+  created_at_local: "2026-05-21"
+  source_route:
+    canonical_route_id: accepted_product_still_life_tennis_wallet_001__failure_tennis_wallet_v7_21_001
+    source_sample_id: accepted_product_still_life_tennis_wallet_001
+    source_failure_sample_id: failure_tennis_wallet_v7_21_001
+    category: product_still_life
+    lane: accepted
+  source_evidence:
+    registry_ref: accepted_samples/accepted_sample_registry.yaml
+    category_index_ref: accepted_samples/categories/product_still_life.yaml
+    accepted_review_doc_ref: docs/281_v7_24_native_doubao_v3_post_run_review_accepted_candidate.md
+    capsule_review_record_ref: asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/review_record.json
+    capsule_approval_record_ref: asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/approval_record.json
+    full_archive_manifest_ref: tests/schema_examples/full_asset_archive_manifest.example.json
+    durable_archive_execution_ref: reports/durable_archive_copy_execution/2026-05-20_durable_archive_copy_A5_execution_report.json
+    review_bridge_ref: tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_REVIEW_BRIDGE_STATE.example.json
+  asset_basis:
+    provider_type: direct_api
+    plugin_id: NativeDoubaoImage
+    model: doubao-seedream-5-0-260128
+    prompt_package_ref: prompts/image_generation/product_still_life_outdoor_tennis_wallet_hero_no_text_v3.yaml
+    source_image_path_ref: runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg
+    durable_original_ref: asset_archive/original_assets/by_sha256/8853c34f7e6a841590bcd04617591e6c572a7f6f0a88dc4970bec78246d7e580.jpg
+    durable_original_sha256: 8853c34f7e6a841590bcd04617591e6c572a7f6f0a88dc4970bec78246d7e580
+    durable_original_dimensions: 1920x1920
+    durable_original_mime_type: image/jpeg
+    durable_archive_status: verified_durable_archive_git_tracked
+  acceptance_summary:
+    prompt_subject_match: pass
+    product_fully_visible: pass
+    product_unobstructed: pass
+    no_watermark_or_generated_mark: pass
+    commercial_usability: pass
+    memory_suitability: false
+    commercial_use_level: accepted_candidate
+  production_candidate_scope:
+    metadata_write_only: true
+    image_binary_read_performed: false
+    image_binary_copy_performed: false
+    runs_source_modification_performed: false
+    accepted_samples_write_performed: false
+    failure_samples_write_performed: false
+    durable_archive_write_performed: false
+    DailyNote_write_performed: false
+    VCP_memory_write_performed: false
+    provider_contact_performed: false
+    plugin_call_performed: false
+    api_call_performed: false
+    runtime_execution_performed: false
+    real_manifest_read_performed: false
+    real_vcpchat_read_performed: false
+    real_vcptoolbox_read_performed: false
+    push_tag_release_deploy_performed: false
+  production_candidate_actions:
+    - preserve accepted tennis-wallet still-life route as a production metadata candidate
+    - use the durable archive original as the recoverable artifact reference
+    - keep memory and DailyNote routes blocked because memory_suitability is false
+    - keep the failure sample on never_production route
+  known_minor_issues:
+    - wallet_shape_can_be_more_specific
+    - sunlight_and_surface_texture_can_be_more_refined
+  next_gate:
+    status: production_candidate_metadata_written_pending_validation
+    allowed_next: validate_only
+    blocked_next:
+      - memory_write
+      - DailyNote_write
+      - provider_or_plugin_call
+      - image_generation
+      - runtime_integration
+      - push_tag_release_deploy

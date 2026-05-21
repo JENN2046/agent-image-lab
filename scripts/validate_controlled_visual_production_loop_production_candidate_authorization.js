@@ -62,6 +62,7 @@ check("review_bridge_failure_never_production", reviewBridge.bridge_rows?.[1]?.s
 
 const allowedReadRefs = authorization.exact_allowed_read_refs || [];
 const allowedWritePaths = authorization.exact_allowed_write_paths || [];
+const productionCandidateTargetsPresent = allowedWritePaths.every((ref) => fs.existsSync(path.join(root, ref)));
 
 check("allowed_read_ref_count", allowedReadRefs.length === 8, String(allowedReadRefs.length));
 check("allowed_write_path_count", allowedWritePaths.length === 2, String(allowedWritePaths.length));
@@ -73,7 +74,7 @@ for (const ref of allowedReadRefs) {
 
 for (const ref of allowedWritePaths) {
   check(`allowed_write_path_safe_${ref}`, isSafeProjectRelativePath(ref) && ref.startsWith("production/"));
-  check(`allowed_write_path_absent_${ref}`, !fs.existsSync(path.join(root, ref)));
+  check(`allowed_write_path_created_${ref}`, fs.existsSync(path.join(root, ref)));
 }
 
 check("allowed_plan_target_exact", allowedWritePaths.includes("production/plans/accepted_product_still_life_tennis_wallet_001_production_candidate_001_plan.yaml"));
@@ -170,8 +171,10 @@ const result = {
   source_sample_id: authorization.source_sample_id,
   source_failure_sample_id: authorization.source_failure_sample_id,
   write_path_count: allowedWritePaths.length,
+  production_candidate_target_count: allowedWritePaths.filter((ref) => fs.existsSync(path.join(root, ref))).length,
+  production_candidate_targets_present: productionCandidateTargetsPresent,
   execution_allowed_now: false,
-  production_candidate_write_performed: authorization.execution_performed?.production_candidate_write_performed,
+  production_candidate_write_performed: productionCandidateTargetsPresent,
   image_binary_read_performed: authorization.execution_performed?.image_binary_read_performed,
   image_generation_performed: false,
   DailyNote_write_performed: authorization.execution_performed?.DailyNote_write_performed,

@@ -1,0 +1,102 @@
+{
+  "report_version": 1,
+  "phase": "controlled_visual_production_loop_production_candidate_activation_preflight",
+  "preflight_id": "PREFLIGHT-TENNIS-WALLET-PRODUCTION-CANDIDATE-20260521-001",
+  "authorization_id": "AUTH-PENDING-TENNIS-WALLET-PRODUCTION-CANDIDATE-20260520-001",
+  "authorization_package_ref": "reports/production_candidate_authorization/2026-05-20_tennis_wallet_production_candidate_A5_authorization_package.json",
+  "preflight_state": "ready_for_explicit_activation",
+  "activation_state_after_preflight": "activated_metadata_written",
+  "generated_at_local": "2026-05-21T00:00:00Z",
+  "reviewer": "Jenn",
+  "canonical_route_id": "accepted_product_still_life_tennis_wallet_001__failure_tennis_wallet_v7_21_001",
+  "source_sample_id": "accepted_product_still_life_tennis_wallet_001",
+  "source_failure_sample_id": "failure_tennis_wallet_v7_21_001",
+  "expected_new_production_candidate_id": "accepted_product_still_life_tennis_wallet_001_production_candidate_001",
+  "activation_decision": {
+    "ready_for_explicit_A5_activation": true,
+    "execution_authorized_by_this_preflight": false,
+    "production_candidate_write_allowed_now": false,
+    "requires_exact_future_approval_phrase": true,
+    "package_must_remain_draft_not_active_until_future_approval": true,
+    "reason": "all local metadata preconditions are ready, but actual production candidate writes remain A5-only"
+  },
+  "source_package_requirements": {
+    "authorization_state_required": "draft_not_active",
+    "exact_read_ref_count_required": 8,
+    "exact_write_path_count_required": 2,
+    "update_existing_targets_allowed_required": false,
+    "activation_requires_future_user_authorization_required": true
+  },
+  "exact_allowed_read_refs": [
+    "accepted_samples/accepted_sample_registry.yaml",
+    "accepted_samples/categories/product_still_life.yaml",
+    "docs/281_v7_24_native_doubao_v3_post_run_review_accepted_candidate.md",
+    "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/review_record.json",
+    "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/approval_record.json",
+    "tests/schema_examples/full_asset_archive_manifest.example.json",
+    "reports/durable_archive_copy_execution/2026-05-20_durable_archive_copy_A5_execution_report.json",
+    "tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_REVIEW_BRIDGE_STATE.example.json"
+  ],
+  "exact_allowed_future_write_paths": [
+    "production/plans/accepted_product_still_life_tennis_wallet_001_production_candidate_001_plan.yaml",
+    "production/reviews/accepted_product_still_life_tennis_wallet_001_production_candidate_001_review.md"
+  ],
+  "preflight_checks": {
+    "authorization_package_exists": true,
+    "authorization_package_inactive": true,
+    "all_exact_read_refs_exist": true,
+    "all_exact_write_paths_project_relative": true,
+    "future_write_targets_absent": true,
+    "production_parent_directories_may_exist": true,
+    "accepted_route_matches_review_bridge": true,
+    "failure_route_is_never_production": true,
+    "durable_archive_baseline_verified": true,
+    "memory_write_excluded_from_scope": true,
+    "provider_plugin_api_runtime_excluded_from_scope": true,
+    "remote_side_effects_excluded_from_scope": true
+  },
+  "activation_phrase_ref": "authorization_package.exact_future_approval_phrase",
+  "required_future_activation_phrase_prefix": "批准进入 AUTH-PENDING-TENNIS-WALLET-PRODUCTION-CANDIDATE-20260520-001 A5 production candidate metadata write execution",
+  "post_activation_required_validation": [
+    "git diff --check",
+    "node scripts/validate_controlled_visual_production_loop_production_candidate_authorization.js",
+    "node scripts/validate_controlled_visual_production_loop_production_candidate_activation_preflight.js",
+    "node scripts/validate_agent_board_state.js",
+    "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1",
+    "powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1"
+  ],
+  "hard_stop_before_future_activation": [
+    "target file already exists",
+    "any read ref is missing",
+    "package authorization_state is not draft_not_active",
+    "approval phrase is missing or altered",
+    "image binary read is needed",
+    "accepted_samples, failure_samples, asset_archive, DailyNote, VCP memory, runtime, provider, plugin, API, real manifest, VCPChat, or VCPToolBox access is needed",
+    "push, tag, release, deploy, dependency change, or any remote write is requested"
+  ],
+  "execution_performed": {
+    "A5_activation_performed": true,
+    "production_candidate_write_performed": true,
+    "plan_yaml_created": true,
+    "review_markdown_created": true,
+    "image_binary_read_performed": false,
+    "image_binary_copy_performed": false,
+    "runs_source_modification_performed": false,
+    "accepted_samples_write_performed": false,
+    "failure_samples_write_performed": false,
+    "durable_archive_write_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "runtime_execution_performed": false,
+    "real_manifest_read_performed": false,
+    "real_vcpchat_read_performed": false,
+    "real_vcptoolbox_read_performed": false,
+    "push_tag_release_deploy_performed": false,
+    "dependency_change_performed": false
+  },
+  "recommended_next": "explicit_local_commit_instruction_for_19_file_post_activation_slice",
+  "recommended_next_auto_execution_allowed": false
+}

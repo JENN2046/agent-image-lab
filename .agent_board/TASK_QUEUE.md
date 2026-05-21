@@ -1,6 +1,18 @@
 
 ---
 
+- [x] ID: controlled_visual_production_loop_production_candidate_activation_preflight
+      Title: Preflight the tennis-wallet production candidate A5 activation package
+      Reason: the exact A5 phrase was provided, so the two authorized production candidate metadata files were created and validation surfaces now need post-activation alignment.
+      Changed files: docs/CONTROLLED_VISUAL_PRODUCTION_LOOP_PRODUCTION_CANDIDATE_ACTIVATION_PREFLIGHT.md; reports/production_candidate_authorization/2026-05-21_tennis_wallet_production_candidate_A5_activation_preflight.json; production/plans/accepted_product_still_life_tennis_wallet_001_production_candidate_001_plan.yaml; production/reviews/accepted_product_still_life_tennis_wallet_001_production_candidate_001_review.md; scripts/validate_controlled_visual_production_loop_production_candidate_activation_preflight.js; scripts/validate_controlled_visual_production_loop_production_candidate_authorization.js; scripts/validate_mvp.ps1; scripts/validate_mvp_capsule_product_core.ps1; tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_CHECKPOINT_READINESS.example.json; tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_EXACT_FILE_COMMIT_READINESS_REVIEW.example.json; tests/schema_examples/CONTROLLED_VISUAL_PRODUCTION_LOOP_COMMIT_AND_AUTHORIZATION_READINESS_AUDIT.example.json; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      Decision: A5 metadata write produced exactly two production candidate files; no image binary read/copy, memory write, provider/plugin/API/runtime, real manifest/VCP source read, push/tag/release/deploy, or dependency change occurred.
+      Validation: targeted post-activation validators passed; full project validation pending final rerun.
+      Result: completed_pending_final_validation.
+      Recommended next: explicit_local_commit_instruction_for_19_file_post_activation_slice.
+      Stop condition: any request to perform additional A5 work, read/copy image binaries, write memory, call provider/plugin/API, enter runtime, or push/tag/release/deploy without separate explicit authorization.
+
+---
+
 - [x] ID: controlled_visual_production_loop_commit_and_authorization_readiness_audit
       Title: Audit the active long-range goal against current local repository evidence
       Reason: the repo already has aligned capsule/review/archive contracts plus inactive A5 draft packages, but the thread still needed one direct proof surface that the goal is locally satisfied without commit or A5 execution.

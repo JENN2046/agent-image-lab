@@ -1,6 +1,36 @@
 
 ---
 
+## Checkpoint - Controlled Visual Production Loop Production Candidate Activation Post Validation
+
+```text
+phase: controlled_visual_production_loop_production_candidate_activation_post_validation
+source_phase: controlled_visual_production_loop_production_candidate_activation_preflight
+status: completed_pending_final_validation
+preflight_ref: reports/production_candidate_authorization/2026-05-21_tennis_wallet_production_candidate_A5_activation_preflight.json
+source_authorization_ref: reports/production_candidate_authorization/2026-05-20_tennis_wallet_production_candidate_A5_authorization_package.json
+completed:
+- added a production candidate activation preflight report for AUTH-PENDING-TENNIS-WALLET-PRODUCTION-CANDIDATE-20260520-001
+- added a phase record and validator for the activation preflight
+- wired the validator into capsule product-core validation
+- created the two exact authorized production candidate metadata files
+- refreshed exact-file readiness fixtures to the current 19-file post-activation slice
+validation_completed:
+- targeted post-activation validators passed
+hard_stop_flags:
+  A5_activation_performed: true
+  production_candidate_metadata_written: true
+  provider_plugin_api_performed: false
+  image_binary_read_performed: false
+  DailyNote_or_VCP_memory_write_performed: false
+  runtime_execution_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_action: run git diff --check, agent board validation, validate_mvp, and local validation before considering this post-activation slice complete.
+recommended_next: explicit_local_commit_instruction_for_19_file_post_activation_slice
+```
+
+---
+
 ## Checkpoint - Controlled Visual Production Loop Commit And Authorization Readiness Audit
 
 ```text

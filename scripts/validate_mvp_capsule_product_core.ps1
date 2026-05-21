@@ -157,10 +157,25 @@ function Invoke-CapsuleProductCoreValidation {
     if ($controlledVisualProductionLoopProductionCandidateAuthorization.source_sample_id -ne 'accepted_product_still_life_tennis_wallet_001' -or $controlledVisualProductionLoopProductionCandidateAuthorization.source_failure_sample_id -ne 'failure_tennis_wallet_v7_21_001' -or $controlledVisualProductionLoopProductionCandidateAuthorization.write_path_count -ne 2) {
       & $AddFailure "Controlled visual production loop production candidate authorization must stay scoped to the tennis wallet canonical route and exactly two future write paths"
     }
-    if ($controlledVisualProductionLoopProductionCandidateAuthorization.execution_allowed_now -ne $false -or $controlledVisualProductionLoopProductionCandidateAuthorization.production_candidate_write_performed -ne $false) {
-      & $AddFailure "Controlled visual production loop production candidate authorization must stay draft-only with no execution now"
+    if ($controlledVisualProductionLoopProductionCandidateAuthorization.execution_allowed_now -ne $false -or $controlledVisualProductionLoopProductionCandidateAuthorization.production_candidate_targets_present -ne $true -or $controlledVisualProductionLoopProductionCandidateAuthorization.production_candidate_target_count -ne 2) {
+      & $AddFailure "Controlled visual production loop production candidate authorization must verify the two exact post-activation production candidate targets while keeping execution closed for any further writes"
     }
-    Test-CapsuleNoExternalActionFlags $controlledVisualProductionLoopProductionCandidateAuthorization "Controlled visual production loop production candidate authorization validation must remain local-only with no external, memory, runtime, production, or remote actions" @('image_binary_read_performed', 'production_candidate_write_performed', 'dependency_change_performed')
+    Test-CapsuleNoExternalActionFlags $controlledVisualProductionLoopProductionCandidateAuthorization "Controlled visual production loop production candidate authorization validation must remain local-only with no external, memory, runtime, or remote actions" @('image_binary_read_performed', 'dependency_change_performed')
+  }
+
+  $controlledVisualProductionLoopProductionCandidateActivationPreflight = Invoke-CapsuleNodeJsonValidator 'scripts/validate_controlled_visual_production_loop_production_candidate_activation_preflight.js' "Controlled visual production loop production candidate activation preflight validation exited with failure"
+  if ($null -ne $controlledVisualProductionLoopProductionCandidateActivationPreflight) {
+    Test-CapsuleExpectedStatus $controlledVisualProductionLoopProductionCandidateActivationPreflight 'controlled_visual_production_loop_production_candidate_activation_preflight_verified' "Controlled visual production loop production candidate activation preflight validation must pass"
+    if ($controlledVisualProductionLoopProductionCandidateActivationPreflight.ready_for_explicit_A5_activation -ne $true -or $controlledVisualProductionLoopProductionCandidateActivationPreflight.execution_authorized_by_this_preflight -ne $false -or $controlledVisualProductionLoopProductionCandidateActivationPreflight.production_candidate_write_allowed_now -ne $false) {
+      & $AddFailure "Controlled visual production loop production candidate activation preflight must retain the original activation decision while post-activation validation proves the exact write"
+    }
+    if ($controlledVisualProductionLoopProductionCandidateActivationPreflight.exact_read_ref_count -ne 8 -or $controlledVisualProductionLoopProductionCandidateActivationPreflight.exact_future_write_path_count -ne 2) {
+      & $AddFailure "Controlled visual production loop production candidate activation preflight must keep eight metadata read refs and two future write paths"
+    }
+    if ($controlledVisualProductionLoopProductionCandidateActivationPreflight.A5_activation_performed -ne $true -or $controlledVisualProductionLoopProductionCandidateActivationPreflight.production_candidate_write_performed -ne $true -or $controlledVisualProductionLoopProductionCandidateActivationPreflight.production_candidate_targets_present -ne $true -or $controlledVisualProductionLoopProductionCandidateActivationPreflight.production_candidate_target_count -ne 2) {
+      & $AddFailure "Controlled visual production loop production candidate activation preflight must prove the exact A5 metadata write produced two production candidate files"
+    }
+    Test-CapsuleNoExternalActionFlags $controlledVisualProductionLoopProductionCandidateActivationPreflight "Controlled visual production loop production candidate activation preflight validation must remain local-only with no external, memory, runtime, or remote actions" @('image_binary_read_performed', 'dependency_change_performed')
   }
 
   $controlledVisualProductionLoopMemoryWriteAuthorization = Invoke-CapsuleNodeJsonValidator 'scripts/validate_controlled_visual_production_loop_memory_write_authorization.js' "Controlled visual production loop memory write authorization validation exited with failure"
@@ -181,8 +196,8 @@ function Invoke-CapsuleProductCoreValidation {
     if ($controlledVisualProductionLoopExactFileCommitReadiness.local_commit_ready_after_explicit_human_review -ne $true -or $controlledVisualProductionLoopExactFileCommitReadiness.auto_commit_allowed_now -ne $false -or $controlledVisualProductionLoopExactFileCommitReadiness.staging_allowed_now -ne $false -or $controlledVisualProductionLoopExactFileCommitReadiness.commit_allowed_now -ne $false -or $controlledVisualProductionLoopExactFileCommitReadiness.push_allowed_now -ne $false) {
       & $AddFailure "Controlled visual production loop exact-file commit readiness review must keep commit execution blocked while proving the slice is locally commit-ready"
     }
-    if ($controlledVisualProductionLoopExactFileCommitReadiness.exact_stage_file_count -ne 41 -or $controlledVisualProductionLoopExactFileCommitReadiness.suggested_commit_message -ne 'chore: ready controlled visual production loop slice') {
-      & $AddFailure "Controlled visual production loop exact-file commit readiness review must keep the current exact stage set at 41 files with the expected suggested commit message"
+    if ($controlledVisualProductionLoopExactFileCommitReadiness.exact_stage_file_count -ne 19 -or $controlledVisualProductionLoopExactFileCommitReadiness.suggested_commit_message -ne 'chore: record production candidate activation') {
+      & $AddFailure "Controlled visual production loop exact-file commit readiness review must keep the current exact stage set at 19 files with the expected suggested commit message"
     }
     Test-CapsuleNoExternalActionFlags $controlledVisualProductionLoopExactFileCommitReadiness "Controlled visual production loop exact-file commit readiness review validation must remain local-only with no external, memory, runtime, production, or remote actions" @('production_candidate_write_performed', 'dependency_change_performed')
   }
@@ -196,8 +211,8 @@ function Invoke-CapsuleProductCoreValidation {
     if ($controlledVisualProductionLoopCheckpointReadiness.branch -ne 'master' -or $controlledVisualProductionLoopCheckpointReadiness.ahead_count -ne 0 -or $controlledVisualProductionLoopCheckpointReadiness.behind_count -ne 0 -or $controlledVisualProductionLoopCheckpointReadiness.staged_file_count -ne 0) {
       & $AddFailure "Controlled visual production loop checkpoint readiness must remain on synced master with zero staged files"
     }
-    if ($controlledVisualProductionLoopCheckpointReadiness.exact_changed_file_count -ne 41) {
-      & $AddFailure "Controlled visual production loop checkpoint readiness must keep the current exact file slice at 41 files"
+    if ($controlledVisualProductionLoopCheckpointReadiness.exact_changed_file_count -ne 19) {
+      & $AddFailure "Controlled visual production loop checkpoint readiness must keep the current exact file slice at 19 files"
     }
   }
 
@@ -207,8 +222,8 @@ function Invoke-CapsuleProductCoreValidation {
     if ($controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.goal_level_local_readiness_verified -ne $true -or $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.local_commit_ready_after_explicit_human_review -ne $true -or $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.authorization_ready_for_future_A5 -ne $true) {
       & $AddFailure "Controlled visual production loop commit and authorization readiness audit must prove the active goal is locally satisfied without opening commit or A5 execution"
     }
-    if ($controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.exact_changed_file_count -ne 41 -or $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.production_candidate_authorization_state -ne 'draft_not_active' -or $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.memory_write_authorization_state -ne 'draft_not_active') {
-      & $AddFailure "Controlled visual production loop commit and authorization readiness audit must keep the current 41-file slice and both A5 packages inactive"
+    if ($controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.exact_changed_file_count -ne 19 -or $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.production_candidate_authorization_state -ne 'draft_not_active' -or $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.memory_write_authorization_state -ne 'draft_not_active') {
+      & $AddFailure "Controlled visual production loop commit and authorization readiness audit must keep the current 19-file post-activation slice and the memory A5 package inactive"
     }
     if ($controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.memory_write_route_currently_blocked -ne $true -or $controlledVisualProductionLoopCommitAndAuthorizationReadinessAudit.A5_execution_allowed_now -ne $false) {
       & $AddFailure "Controlled visual production loop commit and authorization readiness audit must keep the memory path blocked and A5 execution closed"

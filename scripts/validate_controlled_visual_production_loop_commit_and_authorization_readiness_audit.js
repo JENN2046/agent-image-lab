@@ -99,6 +99,11 @@ add("archive_storage_strategy", archiveBaseline.storage_strategy === "git_tracke
 add("full_archive_manifest_verified_state", fullArchiveManifest.original_asset?.verification_status === "verified_durable_archive_git_tracked");
 add("production_authorization_inactive", productionAuthorization.authorization_state === "draft_not_active");
 add("production_authorization_two_write_paths", productionAuthorization.exact_allowed_write_paths?.length === 2);
+add(
+  "production_candidate_metadata_written",
+  productionAuthorization.exact_allowed_write_paths?.every((ref) => fs.existsSync(path.join(root, ref))) === true
+    && fixture.audit_decision.production_candidate_metadata_written === true
+);
 add("memory_authorization_inactive", memoryAuthorization.authorization_state === "draft_not_active");
 add("memory_authorization_two_external_ops", memoryAuthorization.exact_future_external_operations?.length === 2);
 add("memory_authorization_blocked_now", memoryAuthorization.current_blockers?.includes("source_memory_suitability_false") === true);
@@ -107,11 +112,15 @@ for (const token of fixture.required_validator_tokens) {
   add(`mvp_token_${token}`, readText(files.mvpWiring).includes(token));
 }
 
+add(
+  "phase_record_token_controlled_visual_production_loop_commit_and_authorization_readiness_audit",
+  readText(files.phaseRecord).includes("controlled_visual_production_loop_commit_and_authorization_readiness_audit")
+);
+
 for (const token of [
   "controlled_visual_production_loop_commit_and_authorization_readiness_audit",
-  "explicit_local_commit_instruction_or_explicit_A5_activation_decision_after_goal_audit"
+  fixture.recommended_next
 ]) {
-  add(`phase_record_token_${token}`, readText(files.phaseRecord).includes(token));
   add(`run_state_token_${token}`, readText(files.runState).includes(token));
   add(`task_queue_token_${token}`, readText(files.taskQueue).includes(token));
   add(`checkpoint_token_${token}`, readText(files.checkpoint).includes(token));
@@ -140,6 +149,7 @@ const output = {
   goal_level_local_readiness_verified: fixture.audit_decision.goal_level_local_readiness_verified,
   local_commit_ready_after_explicit_human_review: fixture.audit_decision.local_commit_ready_after_explicit_human_review,
   authorization_ready_for_future_A5: fixture.audit_decision.authorization_ready_for_future_A5,
+  production_candidate_metadata_written: fixture.audit_decision.production_candidate_metadata_written,
   production_candidate_authorization_state: fixture.audit_decision.production_candidate_authorization_state,
   memory_write_authorization_state: fixture.audit_decision.memory_write_authorization_state,
   memory_write_route_currently_blocked: fixture.audit_decision.memory_write_route_currently_blocked,

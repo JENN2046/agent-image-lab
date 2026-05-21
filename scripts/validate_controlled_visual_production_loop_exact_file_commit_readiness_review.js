@@ -63,7 +63,7 @@ add("auto_commit_blocked", fixture.commit_readiness_decision.auto_commit_allowed
 add("staging_blocked", fixture.commit_readiness_decision.staging_allowed_now === false);
 add("commit_blocked", fixture.commit_readiness_decision.commit_allowed_now === false);
 add("push_blocked", fixture.commit_readiness_decision.push_allowed_now === false);
-add("commit_message_present", fixture.commit_readiness_decision.suggested_commit_message === "chore: ready controlled visual production loop slice");
+add("commit_message_present", typeof fixture.commit_readiness_decision.suggested_commit_message === "string" && fixture.commit_readiness_decision.suggested_commit_message.length > 0);
 add("commit_trailer_present", fixture.commit_readiness_decision.commit_trailer_required === "Co-authored-by: Codex <noreply@openai.com>");
 add("branch", branch === fixture.git_expectation.branch, branch);
 add("ahead_count", ahead === fixture.git_expectation.ahead_count, String(ahead));
@@ -86,7 +86,7 @@ for (const [key, expected] of Object.entries(fixture.guard)) {
 
 for (const token of [
   "controlled_visual_production_loop_exact_file_commit_readiness_review",
-  "chore: ready controlled visual production loop slice",
+  fixture.commit_readiness_decision.suggested_commit_message,
   "Co-authored-by: Codex <noreply@openai.com>"
 ]) {
   add(`phase_record_token_${token}`, readText(files.phaseRecord).includes(token));

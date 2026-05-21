@@ -7731,6 +7731,8 @@ if (-not $node) {
       'package-lock.json',
       'PROJECT_MASTER_PLAN.md',
       'production/plans/french_summer_rattan_bag_v3_production_candidate_001_plan.yaml',
+      'production/plans/accepted_product_still_life_tennis_wallet_001_production_candidate_001_plan.yaml',
+      'production/reviews/accepted_product_still_life_tennis_wallet_001_production_candidate_001_review.md',
       'RELEASE_NOTES.md',
       'docs_registry/README.md',
       'docs_registry/document_registry_schema_v1.yaml',
