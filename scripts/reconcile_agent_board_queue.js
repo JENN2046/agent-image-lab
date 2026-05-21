@@ -53,6 +53,7 @@ function reconcileAgentBoardQueue(materialized) {
   const taskQueue = contents.get(".agent_board/TASK_QUEUE.md") || "";
   const runState = contents.get(".agent_board/RUN_STATE.md") || "";
   const checkpoint = contents.get(".agent_board/CHECKPOINT.md") || "";
+  const handoff = contents.get(".agent_board/HANDOFF.md") || "";
   const combined = Array.from(contents.values()).join("\n");
 
   const requiredTaskQueueTokens = [
@@ -70,17 +71,16 @@ function reconcileAgentBoardQueue(materialized) {
     requiredTaskQueueTokens.push(item.item_id, item.blocked_action, item.required_authorization_or_action);
   }
 
-  const requiredRunStateTokens = [
+  const requiredCurrentStateTokens = [
     "current_autonomy_model: Smart Standing Authorization v3",
-    "phase: agent_board_queue_reconciler_v1",
-    "phase_id: agent_board_queue_reconciler_v1",
-    "current_task_id: agent_board_queue_reconciler_v1",
-    "stage: Green Lane local queue reconciliation validation",
-    "ahead_count_before_edit: 2",
-    "push_allowed: false"
+    "local_full_autopilot_ready_closeout",
+    "COMPLETED_VALIDATED_LOCAL_FULL_AUTOPILOT_READY",
+    "push_allowed: false",
+    "push_status: not_performed",
+    "owner_push_safety_gate_after_review"
   ];
 
-  const requiredCheckpointTokens = [
+  const requiredHistoricalEvidenceTokens = [
     "phase: agent_board_queue_reconciler_v1",
     "latest_validation",
     "commit_message: test: add agent board queue reconciler",
@@ -89,14 +89,17 @@ function reconcileAgentBoardQueue(materialized) {
   ];
 
   const taskQueueMissing = includesAll(taskQueue, requiredTaskQueueTokens);
-  const runStateMissing = includesAll(runState, requiredRunStateTokens);
-  const checkpointMissing = includesAll(checkpoint, requiredCheckpointTokens);
+  const currentStateMissing = includesAll(runState + "\n" + handoff + "\n" + checkpoint + "\n" + taskQueue, requiredCurrentStateTokens);
+  const historicalEvidenceMissing = includesAll(combined, requiredHistoricalEvidenceTokens);
+  const blockedRedPushRecorded = materialized.blocked_red_items.every((item) => combined.includes(item.item_id) && combined.includes(item.blocked_action));
+  const readyForPushSafetyGateRecorded = combined.includes("owner_push_safety_gate_after_review");
 
   const queueDriftDetected =
     missingRequiredSurfaces.length > 0 ||
     taskQueueMissing.length > 0 ||
-    runStateMissing.length > 0 ||
-    checkpointMissing.length > 0;
+    currentStateMissing.length > 0 ||
+    !blockedRedPushRecorded ||
+    !readyForPushSafetyGateRecorded;
 
   return {
     version: "v1",
@@ -120,14 +123,26 @@ function reconcileAgentBoardQueue(materialized) {
       blocked_action: item.blocked_action,
       matched: !taskQueueMissing.includes(item.item_id) && !taskQueueMissing.includes(item.blocked_action)
     })),
+    current_state_matches: {
+      active_model: combined.includes("current_autonomy_model: Smart Standing Authorization v3"),
+      no_push_boundary: combined.includes("push_allowed: false") && combined.includes("push_status: not_performed"),
+      final_closeout_phase: combined.includes("local_full_autopilot_ready_closeout"),
+      full_autopilot_ready_status: combined.includes("COMPLETED_VALIDATED_LOCAL_FULL_AUTOPILOT_READY"),
+      next_safe_task_or_ready_for_push_safety_gate: combined.includes(materialized.next_safe_task.task_id) || readyForPushSafetyGateRecorded,
+      blocked_red_push_item: blockedRedPushRecorded
+    },
+    historical_evidence_matches: {
+      agent_board_queue_reconciler_v1: historicalEvidenceMissing.length === 0,
+      missing: historicalEvidenceMissing
+    },
     queue_drift_detected: queueDriftDetected,
     missing_required_surfaces: missingRequiredSurfaces,
     warnings: [],
     result: queueDriftDetected ? "failed" : "passed",
     details: {
       task_queue_missing: taskQueueMissing,
-      run_state_missing: runStateMissing,
-      checkpoint_missing: checkpointMissing
+      current_state_missing: currentStateMissing,
+      historical_evidence_missing: historicalEvidenceMissing
     }
   };
 }

@@ -11880,6 +11880,9 @@ process.exit(child.status || 0);
     if ($amberDryRunExecutionLoop.cost_known_zero -ne $true -or $amberDryRunExecutionLoop.rollback_structured -ne $true -or $amberDryRunExecutionLoop.continuation_allowed -ne $true) {
       Add-Failure "Amber dry-run execution loop must prove known zero cost, structured rollback, and continuation"
     }
+    if ($amberDryRunExecutionLoop.dry_run_scope -ne 'future_budgeted_amber_task_fixture' -or $amberDryRunExecutionLoop.amber_dry_run_matches_current_next_safe_task -ne $false -or $amberDryRunExecutionLoop.readiness_claim -ne 'future_amber_loop_fixture_validated_not_current_task_execution') {
+      Add-Failure "Amber dry-run execution loop must clearly identify future fixture scope and not claim current next_safe_task execution"
+    }
     if ($amberDryRunExecutionLoop.provider_contact_performed -ne $false -or $amberDryRunExecutionLoop.plugin_call_performed -ne $false -or $amberDryRunExecutionLoop.api_call_performed -ne $false -or $amberDryRunExecutionLoop.image_generation_performed -ne $false -or $amberDryRunExecutionLoop.DailyNote_write_performed -ne $false -or $amberDryRunExecutionLoop.VCP_memory_write_performed -ne $false) {
       Add-Failure "Amber dry-run execution loop must not perform provider, plugin, API, image, DailyNote, or VCP memory actions"
     }
@@ -11899,8 +11902,8 @@ process.exit(child.status || 0);
     if ($autopilotEvolutionEngine.deterministic_output_verified -ne $true -or $autopilotEvolutionEngine.fixture_verified -ne $true -or $autopilotEvolutionEngine.detected_gap_count -lt 4) {
       Add-Failure "Autopilot Evolution Engine must verify deterministic fixture output and multiple proposals"
     }
-    if ($autopilotEvolutionEngine.next_recommended_task -ne 'complete_autopilot_readiness_gate_v1' -or $autopilotEvolutionEngine.local_write_targets_only -ne $true -or $autopilotEvolutionEngine.red_lane_self_authorized -ne $false) {
-      Add-Failure "Autopilot Evolution Engine must recommend the readiness gate, stay local, and avoid Red self-authorization"
+    if ($autopilotEvolutionEngine.next_recommended_task -eq 'complete_autopilot_readiness_gate_v1' -or $autopilotEvolutionEngine.next_recommended_task_lane -notin @('Green', 'Amber') -or $autopilotEvolutionEngine.local_write_targets_only -ne $true -or $autopilotEvolutionEngine.red_lane_self_authorized -ne $false) {
+      Add-Failure "Autopilot Evolution Engine must advance beyond completed readiness gate, stay local, and avoid Red self-authorization"
     }
     if ($autopilotEvolutionEngine.provider_contact_performed -ne $false -or $autopilotEvolutionEngine.plugin_call_performed -ne $false -or $autopilotEvolutionEngine.api_call_performed -ne $false -or $autopilotEvolutionEngine.image_generation_performed -ne $false -or $autopilotEvolutionEngine.DailyNote_write_performed -ne $false -or $autopilotEvolutionEngine.VCP_memory_write_performed -ne $false) {
       Add-Failure "Autopilot Evolution Engine must not perform provider, plugin, API, image, DailyNote, or VCP memory actions"
@@ -11924,8 +11927,11 @@ process.exit(child.status || 0);
     if (-not $completeAutopilotReadinessGate.goal_id -or -not $completeAutopilotReadinessGate.route_plan_id -or -not $completeAutopilotReadinessGate.task_queue_id -or -not $completeAutopilotReadinessGate.selected_next_safe_task) {
       Add-Failure "Complete Autopilot Readiness Gate must include goal, route plan, task queue, and next safe task"
     }
-    if (-not $completeAutopilotReadinessGate.amber_dry_run_receipt_id -or $completeAutopilotReadinessGate.receipt_registry_count -lt 4 -or $completeAutopilotReadinessGate.evolution_backlog_next_task -ne 'complete_autopilot_readiness_gate_v1') {
-      Add-Failure "Complete Autopilot Readiness Gate must include Amber receipt, registry, and evolution backlog"
+    if (-not $completeAutopilotReadinessGate.amber_dry_run_receipt_id -or $completeAutopilotReadinessGate.receipt_registry_count -lt 4 -or $completeAutopilotReadinessGate.evolution_backlog_next_task -eq 'complete_autopilot_readiness_gate_v1') {
+      Add-Failure "Complete Autopilot Readiness Gate must include Amber receipt, registry, and an evolution backlog that advances beyond completed readiness"
+    }
+    if ($completeAutopilotReadinessGate.readiness_result -ne 'passed_local_full_autopilot_ready_no_push' -or $completeAutopilotReadinessGate.amber_dry_run_matches_current_next_safe_task -ne $false -or $completeAutopilotReadinessGate.amber_readiness_claim -ne 'future_amber_loop_fixture_validated_not_current_task_execution') {
+      Add-Failure "Complete Autopilot Readiness Gate must validate final closeout and scoped Amber fixture semantics"
     }
     if ($completeAutopilotReadinessGate.provider_contact_performed -ne $false -or $completeAutopilotReadinessGate.plugin_call_performed -ne $false -or $completeAutopilotReadinessGate.api_call_performed -ne $false -or $completeAutopilotReadinessGate.image_generation_performed -ne $false -or $completeAutopilotReadinessGate.DailyNote_write_performed -ne $false -or $completeAutopilotReadinessGate.VCP_memory_write_performed -ne $false) {
       Add-Failure "Complete Autopilot Readiness Gate must not perform provider, plugin, API, image, DailyNote, or VCP memory actions"

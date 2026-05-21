@@ -83,8 +83,8 @@ function detectAutopilotEvolutionGaps() {
       proposal_id: "complete_autopilot_readiness_gate_v1",
       title: "Prove the complete autopilot chain in one readiness gate",
       lane: "Green",
-      detected_gap: "The chain is validated by stage validators, but there is not yet one final local gate that proves goal -> route -> queue -> materializer -> reconciler -> next safe task -> Amber dry-run receipt -> registry -> checkpoint -> evolution backlog.",
-      proposed_local_task: "Add a complete local readiness validator, fixture, doc, MVP wiring, and status-surface sync.",
+      detected_gap: "Completed evidence: the chain has a final local gate proving goal -> route -> queue -> materializer -> reconciler -> next safe task -> Amber dry-run receipt -> registry -> checkpoint -> evolution backlog.",
+      proposed_local_task: "Keep this proposal as completed/current evidence only; do not recommend it as the next task after final closeout.",
       allowed_write_targets: [
         "docs/",
         "scripts/",
@@ -182,7 +182,8 @@ function detectAutopilotEvolutionGaps() {
     receipt_registry_count: receiptRegistry.receipts.length,
     detected_gap_count: proposals.length,
     proposals,
-    next_recommended_task: "complete_autopilot_readiness_gate_v1",
+    next_recommended_task: "receipt_registry_negative_cases_v1",
+    next_recommended_task_lane: "Green",
     local_write_targets_only: true,
     red_lane_self_authorized: proposals.some((proposal) => proposal.lane === "Red" && proposal.self_authorized),
     side_effect_flags: sideEffectFlags

@@ -47,6 +47,12 @@ required_authorization_or_action when applicable
 Green proposals may become future local tasks. Red proposals are advisory only
 and must never be self-authorized.
 
+After final local closeout, `complete_autopilot_readiness_gate_v1` may remain in
+the backlog as completed/current evidence, but it must not be the next
+recommended task. The next recommendation must advance to a real local
+hardening item such as `receipt_registry_negative_cases_v1` or another
+Green/Amber-safe local task.
+
 ## Validation
 
 `scripts/validate_autopilot_evolution_engine.js` verifies that:

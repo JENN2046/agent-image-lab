@@ -2,7 +2,7 @@
   "complete_autopilot_readiness_gate": {
     "version": "v1",
     "phase": "complete_autopilot_readiness_gate_v1",
-    "readiness_result": "passed_pending_final_local_closeout",
+    "readiness_result": "passed_local_full_autopilot_ready_no_push",
     "chain": {
       "user_goal": "Continue Agent Image Lab smart autopilot productization without external side effects.",
       "goal_id": "goal-agent-image-lab-smart-autopilot-productization-001",
@@ -15,9 +15,12 @@
       "selected_next_safe_task_lane": "Green",
       "amber_dry_run_envelope_id": "envelope-amber-dry-run-execution-loop-v1",
       "amber_dry_run_receipt_id": "receipt-amber-dry-run-execution-loop-v1",
+      "amber_dry_run_task_id": "future_budgeted_amber_receipt_task",
+      "amber_dry_run_matches_current_next_safe_task": false,
+      "amber_readiness_claim": "future_amber_loop_fixture_validated_not_current_task_execution",
       "receipt_registry_count": 4,
       "amber_receipt_registered": true,
-      "evolution_backlog_next_task": "complete_autopilot_readiness_gate_v1"
+      "evolution_backlog_next_task": "receipt_registry_negative_cases_v1"
     },
     "invariants": {
       "goal_route_queue_links_verified": true,
@@ -28,6 +31,8 @@
       "amber_dry_run_receipt_validated": true,
       "receipt_registry_validated": true,
       "checkpoint_present": true,
+      "final_closeout_state_verified": true,
+      "no_push_boundary_verified": true,
       "evolution_backlog_present": true,
       "mvp_wiring_expected": true
     },

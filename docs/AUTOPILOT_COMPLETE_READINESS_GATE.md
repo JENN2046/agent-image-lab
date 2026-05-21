@@ -35,8 +35,9 @@ materialized snapshot is deterministic
 .agent_board reconciliation passes
 next_safe_task is selected and executable
 Red items remain blocked
-Amber dry-run receipt validates and is registered
-checkpoint and evolution backlog exist
+Amber dry-run receipt validates and is registered without pretending to execute the current next_safe_task when ids differ
+final local closeout checkpoint, run state, task queue, handoff, and no-push boundary exist
+evolution backlog advances beyond the completed readiness gate
 push, deploy, secret read, provider calls, runtime probes, source reads, and dependency actions remain false
 ```
 
@@ -49,5 +50,7 @@ readiness report and compares it to:
 tests/schema_examples/complete_autopilot_readiness_gate.example.json
 ```
 
-The readiness result is `passed_pending_final_local_closeout` until the final
-local closeout phase updates the status surfaces and reruns full validation.
+The readiness result after final closeout is
+`passed_local_full_autopilot_ready_no_push`. This still does not authorize push;
+push remains a Red Lane action requiring a separate push safety gate and owner
+authorization.

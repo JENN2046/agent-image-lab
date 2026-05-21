@@ -1,5 +1,23 @@
 ---
 
+## Current Handoff Update - Autopilot Readiness Semantic Tightening v1
+
+```text
+phase: autopilot_readiness_semantic_tightening_v1
+phase_id: autopilot_readiness_semantic_tightening_v1
+status: completed_validated_guarded_local_commit
+mode: Green Lane local validator/docs/fixture/status hardening
+summary: Tightened readiness semantics so future Amber dry-run fixtures are not reported as current next_safe_task execution, Evolution Engine advances beyond the completed readiness gate, Reconciler validates current state separately from historical evidence, and Complete Readiness Gate verifies final closeout/no-push state.
+current_autonomy_model: Smart Standing Authorization v3
+ahead_before_edit: 8
+push_status: not_performed
+commit_message: test: tighten autopilot readiness semantics
+not_performed: no push, no tag/release/deploy, no provider/plugin/API/image generation, no DailyNote/VCP memory write, no real manifest/VCPChat/VCPToolBox read, no dependency change, no runtime probe, no secret read.
+recommended_next: receipt_registry_negative_cases_v1_or_owner_push_safety_gate_after_review.
+```
+
+---
+
 ## Current Handoff Update - Local Full Autopilot Readiness Closeout
 
 ```text

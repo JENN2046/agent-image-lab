@@ -3,6 +3,11 @@
     "version": "v1",
     "phase": "amber_dry_run_execution_loop_v1",
     "source_snapshot": "tests/schema_examples/autopilot_goal_decomposition_materialized.example.json",
+    "dry_run_scope": "future_budgeted_amber_task_fixture",
+    "selected_current_next_safe_task_id": "add_goal_decomposition_runtime_validation",
+    "amber_dry_run_task_id": "future_budgeted_amber_receipt_task",
+    "amber_dry_run_matches_current_next_safe_task": false,
+    "readiness_claim": "future_amber_loop_fixture_validated_not_current_task_execution",
     "envelope": {
       "envelope_id": "envelope-amber-dry-run-execution-loop-v1",
       "task_id": "future_budgeted_amber_receipt_task",
@@ -91,6 +96,11 @@
       "lane": "Amber",
       "envelope_id": "envelope-amber-dry-run-execution-loop-v1",
       "action_performed": "local_amber_envelope_packet_receipt_dry_run",
+      "dry_run_scope": "future_budgeted_amber_task_fixture",
+      "selected_current_next_safe_task_id": "add_goal_decomposition_runtime_validation",
+      "amber_dry_run_task_id": "future_budgeted_amber_receipt_task",
+      "amber_dry_run_matches_current_next_safe_task": false,
+      "readiness_claim": "future_amber_loop_fixture_validated_not_current_task_execution",
       "target_systems": [
         "local_repository_fixture_only"
       ],

@@ -32,10 +32,15 @@ function readJson(relativePath) {
 
 function buildAmberDryRunLoop(materialized) {
   const orchestration = orchestrateNextSafeTask(materialized);
+  const selectedCurrentNextSafeTaskId = orchestration.selected_next_safe_task.task_id;
   const amberTask = orchestration.eligible_executable_tasks.find((task) => task.lane === "Amber" && task.valid_budgeted_amber === true);
   if (!amberTask) {
     throw new Error("Amber dry-run loop requires one valid budgeted Amber task");
   }
+  const matchesCurrentNextSafeTask = amberTask.task_id === selectedCurrentNextSafeTaskId;
+  const readinessClaim = matchesCurrentNextSafeTask
+    ? "current_next_safe_task_amber_loop_validated"
+    : "future_amber_loop_fixture_validated_not_current_task_execution";
 
   const envelope = {
     envelope_id: "envelope-amber-dry-run-execution-loop-v1",
@@ -98,6 +103,11 @@ function buildAmberDryRunLoop(materialized) {
     lane: "Amber",
     envelope_id: envelope.envelope_id,
     action_performed: "local_amber_envelope_packet_receipt_dry_run",
+    dry_run_scope: "future_budgeted_amber_task_fixture",
+    selected_current_next_safe_task_id: selectedCurrentNextSafeTaskId,
+    amber_dry_run_task_id: amberTask.task_id,
+    amber_dry_run_matches_current_next_safe_task: matchesCurrentNextSafeTask,
+    readiness_claim: readinessClaim,
     target_systems: ["local_repository_fixture_only"],
     calls_used: {
       provider_calls: 0,
@@ -144,6 +154,11 @@ function buildAmberDryRunLoop(materialized) {
     version: "v1",
     phase: "amber_dry_run_execution_loop_v1",
     source_snapshot: materializedSnapshotPath,
+    dry_run_scope: "future_budgeted_amber_task_fixture",
+    selected_current_next_safe_task_id: selectedCurrentNextSafeTaskId,
+    amber_dry_run_task_id: amberTask.task_id,
+    amber_dry_run_matches_current_next_safe_task: matchesCurrentNextSafeTask,
+    readiness_claim: readinessClaim,
     envelope,
     action_packet: actionPacket,
     dry_run_action: {

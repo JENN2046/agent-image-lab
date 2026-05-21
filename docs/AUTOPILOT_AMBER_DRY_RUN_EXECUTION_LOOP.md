@@ -11,6 +11,13 @@ The dry-run envelope has zero provider/plugin/API/image/runtime calls, zero
 dependency actions, zero external reads, known zero cost, structured rollback,
 and all Red Lane gates still closed.
 
+Semantic scope: this loop validates a future budgeted Amber task fixture. It
+records `selected_current_next_safe_task_id`, `amber_dry_run_task_id`,
+`amber_dry_run_matches_current_next_safe_task`, and the readiness claim
+`future_amber_loop_fixture_validated_not_current_task_execution` when the Amber
+fixture is not the current next safe task. A passing dry-run receipt must not be
+reported as execution of the current next safe task unless the task ids match.
+
 This document and its validator do not authorize provider contact, plugin calls,
 API calls, image generation, memory writes, real source reads, runtime probes,
 dependency changes, push, tag, release, or deploy.

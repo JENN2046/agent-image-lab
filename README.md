@@ -6,6 +6,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 
 ```yaml
 current_phase: local_full_autopilot_ready_closeout
+semantic_tightening_active: true
 current_autonomy_model: Smart Standing Authorization v3
 startup_default_model: Smart Standing Authorization v3
 a4_8_status: retained_as_green_lane_substrate
@@ -30,7 +31,7 @@ red_lane_requires_user: true
 push_tag_release_deploy_allowed_automatically: false
 secret_value_access_allowed_automatically: false
 destructive_action_allowed_automatically: false
-recommended_next: owner_push_safety_gate_after_review
+recommended_next: receipt_registry_negative_cases_v1_or_owner_push_safety_gate_after_review
 ```
 
 Smart Standing Authorization v3 means Codex can continue Green work directly and Amber work inside the budgeted envelope without step-by-step approval. It must stop at Red Lane conditions such as push/tag/release/deploy, destructive actions, secret value access, raw private data exposure, uncapped cost, unbounded loops, broad external repository modification, or dependency changes without an exact package/action list.
@@ -54,6 +55,12 @@ Smart Standing Authorization v3 means Codex can continue Green work directly and
 `scripts/validate_complete_autopilot_readiness_gate.js` proves the full local chain from user goal to goal, route plan, task queue, materialized snapshot, reconciled `.agent_board`, next safe task, Amber dry-run receipt, receipt registry, checkpoint, and evolution backlog.
 
 Local closeout status: the complete Green/local chain is ready for owner review and later push safety gate. Push remains unperformed and Red Lane until explicitly authorized.
+
+Semantic tightening status: readiness now distinguishes current `next_safe_task`
+selection from future Amber dry-run fixtures, advances the Evolution Engine
+recommendation beyond the completed readiness gate, validates `.agent_board`
+current state separately from historical evidence, and requires final closeout
+state in the complete readiness gate.
 
 Amber receipt closeout now has an automatic Green Lane status-sync rule: after meaningful Amber receipt work, Codex must align README, roadmap, `.agent_board` resume surfaces, ledger, validators, and authoritative refs when they changed or gained new refs. This Green sync is local closeout work and does not consume the preceding Amber action's write budget.
 

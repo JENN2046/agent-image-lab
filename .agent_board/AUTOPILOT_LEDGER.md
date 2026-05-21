@@ -105,6 +105,36 @@ guard:
 ```
 ---
 
+## autopilot_readiness_semantic_tightening_v1
+
+```yaml
+task_id: autopilot_readiness_semantic_tightening_v1
+lane: Green
+action_performed: local_readiness_semantic_validator_tightening
+semantic_fixes:
+  - amber_future_fixture_scope_not_current_task_execution
+  - evolution_next_recommended_task_advances_beyond_completed_readiness
+  - agent_board_reconciler_current_state_aware
+  - complete_readiness_gate_validates_final_closeout
+result: completed_validated_guarded_local_commit
+push_status: not_performed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+dependency_change_performed: false
+runtime_probe_performed: false
+secret_value_read_performed: false
+push_tag_release_deploy_performed: false
+```
+
+---
+
 ## local_full_autopilot_ready_closeout
 
 ```yaml

@@ -40,6 +40,14 @@ function main() {
   assertDeepEqual(actual.execution_receipt, receipt, "Amber dry-run receipt");
   assert(registry.receipts.some((entry) => entry.receipt_id === receipt.receipt_id && entry.path === receiptPath), "Receipt registry must include Amber dry-run receipt");
   assert(actual.envelope.lane === "Amber", "Envelope lane must be Amber");
+  assert(actual.dry_run_scope === "future_budgeted_amber_task_fixture", "Amber dry-run scope must identify future fixture");
+  assert(actual.selected_current_next_safe_task_id, "Amber dry-run must record current next_safe_task id");
+  assert(actual.amber_dry_run_task_id === receipt.task_id, "Amber dry-run task id must match receipt task");
+  assert(actual.amber_dry_run_matches_current_next_safe_task === false, "Current fixture must not pretend future Amber task is current next_safe_task");
+  assert(actual.readiness_claim === "future_amber_loop_fixture_validated_not_current_task_execution", "Readiness claim must be semantically scoped to future Amber fixture");
+  assert(receipt.dry_run_scope === actual.dry_run_scope, "Receipt must record dry-run scope");
+  assert(receipt.selected_current_next_safe_task_id === actual.selected_current_next_safe_task_id, "Receipt must record selected current next_safe_task");
+  assert(receipt.amber_dry_run_matches_current_next_safe_task === false, "Receipt must not imply current next_safe_task execution");
   assert(actual.envelope.max_cost_amount === 0 && actual.envelope.cost_unknown_is_red === true, "Dry-run cost must be known zero");
   assert(actual.action_packet.secret_value_read_allowed === false, "Action packet must not allow secrets");
   assert(actual.action_packet.dependency_manifest_change_allowed === false, "Action packet must not allow dependency changes");
@@ -55,6 +63,11 @@ function main() {
     passed: true,
     phase: "amber_dry_run_execution_loop_v1",
     envelope_id: actual.envelope.envelope_id,
+    dry_run_scope: actual.dry_run_scope,
+    selected_current_next_safe_task_id: actual.selected_current_next_safe_task_id,
+    amber_dry_run_task_id: actual.amber_dry_run_task_id,
+    amber_dry_run_matches_current_next_safe_task: actual.amber_dry_run_matches_current_next_safe_task,
+    readiness_claim: actual.readiness_claim,
     action_packet_verified: true,
     receipt_verified: true,
     registry_entry_verified: true,

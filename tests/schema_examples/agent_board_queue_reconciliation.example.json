@@ -38,14 +38,26 @@
         "matched": true
       }
     ],
+    "current_state_matches": {
+      "active_model": true,
+      "no_push_boundary": true,
+      "final_closeout_phase": true,
+      "full_autopilot_ready_status": true,
+      "next_safe_task_or_ready_for_push_safety_gate": true,
+      "blocked_red_push_item": true
+    },
+    "historical_evidence_matches": {
+      "agent_board_queue_reconciler_v1": true,
+      "missing": []
+    },
     "queue_drift_detected": false,
     "missing_required_surfaces": [],
     "warnings": [],
     "result": "passed",
     "details": {
       "task_queue_missing": [],
-      "run_state_missing": [],
-      "checkpoint_missing": []
+      "current_state_missing": [],
+      "historical_evidence_missing": []
     }
   }
 }

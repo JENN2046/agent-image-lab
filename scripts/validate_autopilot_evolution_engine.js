@@ -39,7 +39,10 @@ function main() {
   assert(actual.all_source_inputs_present === true, "all known local inputs must exist");
   assert(actual.detected_gap_count >= 4, "expected multiple evolution proposals");
   assert(actual.receipt_registry_count >= 4, "receipt registry should include existing Amber receipts");
-  assert(actual.next_recommended_task === "complete_autopilot_readiness_gate_v1", "next task should be final readiness gate");
+  assert(actual.next_recommended_task !== "complete_autopilot_readiness_gate_v1", "next task must advance beyond completed readiness gate");
+  const nextProposal = actual.proposals.find((proposal) => proposal.proposal_id === actual.next_recommended_task);
+  assert(nextProposal, "next recommended task must reference an existing proposal");
+  assert(["Green", "Amber"].includes(nextProposal.lane), "next recommended task must be Green or Amber-safe local hardening");
   assert(actual.local_write_targets_only === true, "evolution proposals must write only local targets");
   assert(actual.red_lane_self_authorized === false, "Red proposals must not be self-authorized");
   assert(actual.proposals.some((proposal) => proposal.lane === "Red" && proposal.required_authorization_or_action), "Red proposal must require explicit authorization/action");
@@ -54,6 +57,7 @@ function main() {
     detected_gap_count: actual.detected_gap_count,
     proposal_count: actual.proposals.length,
     next_recommended_task: actual.next_recommended_task,
+    next_recommended_task_lane: actual.next_recommended_task_lane,
     receipt_registry_count: actual.receipt_registry_count,
     local_write_targets_only: actual.local_write_targets_only,
     red_lane_self_authorized: actual.red_lane_self_authorized,

@@ -58,19 +58,27 @@ function buildCompleteAutopilotReadinessGate() {
   const registry = readJson("tests/schema_examples/autopilot_receipt_registry.example.json").autopilot_receipt_registry;
   const evolution = detectAutopilotEvolutionGaps();
   const checkpoint = read(".agent_board/CHECKPOINT.md");
+  const runState = read(".agent_board/RUN_STATE.md");
+  const taskQueue = read(".agent_board/TASK_QUEUE.md");
+  const handoff = read(".agent_board/HANDOFF.md");
 
   assertDeepEqual(materialized, checkedMaterialized, "Materialized snapshot");
   assert(reconciliation.result === "passed", "Agent board reconciliation must pass");
   assert(orchestration.selected_next_safe_task.task_id === checkedMaterialized.next_safe_task.task_id, "Next safe task must match materialized snapshot");
   assert(amberLoop.execution_receipt.validation_result === "passed", "Amber dry-run receipt must pass");
+  assert(amberLoop.amber_dry_run_matches_current_next_safe_task === false, "Amber dry-run must not imply current next_safe_task execution when ids differ");
+  assert(amberLoop.readiness_claim === "future_amber_loop_fixture_validated_not_current_task_execution", "Amber dry-run readiness claim must be scoped");
   assert(registry.receipts.some((receipt) => receipt.receipt_id === amberLoop.execution_receipt.receipt_id), "Amber dry-run receipt must be in registry");
-  assert(evolution.next_recommended_task === "complete_autopilot_readiness_gate_v1", "Evolution backlog must recommend complete readiness gate");
-  assert(checkpoint.includes("autopilot_evolution_engine_v1"), "Checkpoint must include latest evolution engine stage");
+  assert(evolution.next_recommended_task !== "complete_autopilot_readiness_gate_v1", "Evolution backlog must advance beyond completed readiness gate");
+  assert(checkpoint.includes("local_full_autopilot_ready_closeout"), "Checkpoint must include final local closeout");
+  assert(runState.includes("COMPLETED_VALIDATED_LOCAL_FULL_AUTOPILOT_READY"), "RUN_STATE must include final local readiness status");
+  assert(taskQueue.includes("owner_push_safety_gate_after_review"), "TASK_QUEUE must record push safety gate as next boundary");
+  assert(handoff.includes("ahead") && handoff.includes("push_status: not_performed"), "HANDOFF must record ahead/no-push boundary");
 
   return {
     version: "v1",
     phase: "complete_autopilot_readiness_gate_v1",
-    readiness_result: "passed_pending_final_local_closeout",
+    readiness_result: "passed_local_full_autopilot_ready_no_push",
     chain: {
       user_goal: runtime.goal.objective,
       goal_id: runtime.goal.goal_id,
@@ -83,6 +91,9 @@ function buildCompleteAutopilotReadinessGate() {
       selected_next_safe_task_lane: orchestration.selected_next_safe_task.lane,
       amber_dry_run_envelope_id: amberLoop.envelope.envelope_id,
       amber_dry_run_receipt_id: amberLoop.execution_receipt.receipt_id,
+      amber_dry_run_task_id: amberLoop.amber_dry_run_task_id,
+      amber_dry_run_matches_current_next_safe_task: amberLoop.amber_dry_run_matches_current_next_safe_task,
+      amber_readiness_claim: amberLoop.readiness_claim,
       receipt_registry_count: registry.receipts.length,
       amber_receipt_registered: true,
       evolution_backlog_next_task: evolution.next_recommended_task
@@ -96,6 +107,8 @@ function buildCompleteAutopilotReadinessGate() {
       amber_dry_run_receipt_validated: true,
       receipt_registry_validated: true,
       checkpoint_present: true,
+      final_closeout_state_verified: true,
+      no_push_boundary_verified: true,
       evolution_backlog_present: evolution.detected_gap_count >= 4,
       mvp_wiring_expected: true
     },
@@ -116,7 +129,7 @@ function main() {
 
   assertDeepEqual(actualAgain, actual, "Complete readiness gate deterministic output");
   assertDeepEqual(actual, expected, "Complete readiness gate fixture");
-  assert(actual.readiness_result === "passed_pending_final_local_closeout", "readiness result mismatch");
+  assert(actual.readiness_result === "passed_local_full_autopilot_ready_no_push", "readiness result mismatch");
   assert(Object.values(actual.invariants).every((value) => value === true), "all invariants must be true");
   assert(actual.local_only_boundaries.push_allowed === false, "push must remain blocked");
   assert(actual.local_only_boundaries.secret_value_read_allowed === false, "secret read must remain blocked");
@@ -133,6 +146,9 @@ function main() {
     task_queue_id: actual.chain.task_queue_id,
     selected_next_safe_task: actual.chain.selected_next_safe_task,
     amber_dry_run_receipt_id: actual.chain.amber_dry_run_receipt_id,
+    amber_dry_run_task_id: actual.chain.amber_dry_run_task_id,
+    amber_dry_run_matches_current_next_safe_task: actual.chain.amber_dry_run_matches_current_next_safe_task,
+    amber_readiness_claim: actual.chain.amber_readiness_claim,
     receipt_registry_count: actual.chain.receipt_registry_count,
     evolution_backlog_next_task: actual.chain.evolution_backlog_next_task,
     invariants_verified: true,

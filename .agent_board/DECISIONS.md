@@ -128,6 +128,16 @@ Risk: If the receipt or budget model stays prose-only, future Amber actions coul
 Mitigation: The validator checks lane definitions, default budgets, Red gates, Amber receipt requirements, example fixtures, and no-real-A5 guard flags.
 ---
 
+## DECISION-AIL-AUTO-022 — Readiness validators must avoid semantic overclaim
+
+Status: accepted.
+
+Decision: Complete readiness may only claim what each fixture actually proves. Future Amber dry-run receipts must be scoped as future fixtures when they are not the current next safe task, Evolution Engine next recommendations must advance beyond completed gates, and Reconciler must separate current-state checks from historical evidence checks.
+
+Boundary: This is local validator/docs/fixture hardening only and does not authorize push or any external/production action.
+
+---
+
 ## DECISION-AIL-AUTO-021 — Local full-autopilot readiness requires clean validated closeout
 
 Status: accepted.

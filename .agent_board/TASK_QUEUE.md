@@ -1,5 +1,20 @@
 ---
 
+- [x] ID: autopilot_readiness_semantic_tightening_v1
+      Title: Tighten semantic claims in the local full-autopilot readiness chain
+      Reason: Commander review found the validators could pass while overclaiming current next-safe-task execution, completed readiness recommendations, historical queue anchors, and final closeout proof.
+      Result: completed_validated_guarded_local_commit.
+      Commit message: test: tighten autopilot readiness semantics.
+      Recommended next: receipt_registry_negative_cases_v1_or_owner_push_safety_gate_after_review.
+      Stop condition: push/tag/release/deploy, secret read, destructive action, provider/plugin/API/image/memory/source-read/dependency/runtime requirement, or validation failure requiring judgment.
+
+- [ ] ID: receipt_registry_negative_cases_v1
+      Title: Add negative-case coverage for receipt registry failures
+      Reason: Evolution Engine now recommends this as the next local hardening item after completed readiness closeout.
+      Stop condition: same Red Lane gates as Smart Standing Authorization v3.
+
+---
+
 - [x] ID: final_local_closeout
       Title: Final local closeout and full validation
       Reason: Mark the system as locally full-autopilot ready only after all gates pass, status surfaces are aligned, and worktree is clean.

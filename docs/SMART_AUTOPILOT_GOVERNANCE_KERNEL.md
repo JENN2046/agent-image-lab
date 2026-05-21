@@ -89,6 +89,13 @@ surfaces may be marked `COMPLETED_VALIDATED_LOCAL_FULL_AUTOPILOT_READY` only whe
 the worktree is clean after a guarded local commit, all local validators pass,
 and no Red Lane action was performed.
 
+Semantic tightening rule: readiness validators must not overclaim. A future
+Amber fixture receipt is evidence that the Amber loop shape validates; it is not
+evidence that the current `next_safe_task` executed unless the task ids match.
+Evolution backlog recommendations must advance beyond completed gates, and
+queue reconciliation must validate current state separately from historical
+evidence.
+
 ### Truth Model
 
 Uses repository reality as ground:
