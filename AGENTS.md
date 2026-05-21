@@ -12,21 +12,22 @@ Purpose: Enable Codex to work faster and more intelligently inside project bound
 Default mode:
 
 ```text
-A4.8 — Safe Project Operator Rail
+Smart Standing Authorization v3 — Budgeted Autonomy Envelope
 ```
 
-Codex should move automatically when the next action is all of:
+A4.8 is retained as a legacy local-safe rail and Green Lane substrate. It no
+longer defines the startup default; it supplies the local-safe behavior used
+inside v3 Green Lane work.
+
+Codex should first classify each next action through the v3 startup model:
 
 ```text
-local
-inside this repository
-reversible
-non-destructive
-non-secret-bearing
-non-production
-non-external
-validated by existing project checks
-inside the current task or project maintenance scope
+Goal Compiler
+Truth Model
+Green / Amber / Red Lane Classifier
+Autonomy Envelope
+Receipt Recorder
+Red Lane hard stops
 ```
 
 Exception: Section 0.7 now grants standing owner authorization as a bounded autonomy envelope for A5, provider/plugin/API/image, DailyNote/VCP memory, real manifest/VCPChat/VCPToolBox exact reads, bounded runtime/integration probes, production metadata writes, and small dependency changes. Those categories no longer require step-by-step approval inside the envelope, but they remain budgeted, receipted, validated, and blocked by Red Lane conditions.
@@ -210,6 +211,11 @@ AGENTS.autopilot-overlay.md loaded_or_missing: true
 .agent_board/RUN_STATE.md loaded: true
 .agent_board/TASK_QUEUE.md loaded: true
 .agent_board/CHECKPOINT.md loaded: true
+active_autonomy_model: Smart Standing Authorization v3
+a4_8_role: Green Lane substrate
+a5_status: classified_by_lane_and_envelope
+goal_compiler_available: true
+receipt_required_for_meaningful_Amber: true
 hard stops summarized: true
 exact-file staging / no git add . summarized: true
 .agent_board update rule summarized: true
@@ -311,13 +317,18 @@ The default current stage is:
 v10.8 A5 guarded delivery baseline
 ```
 
-The default local automation mode is:
+The active startup and autonomy model is:
 
 ```text
-A4.8 — Safe Project Operator Rail
+Smart Standing Authorization v3 — Budgeted Autonomy Envelope
 ```
 
-This means Codex may continue safe, local, reversible project work across the allowed documentation, schema, dry-run, authorization-template, validation, `.agent_board`, tests, fixtures, review packages, evidence packages, route decision, and static-prototype surfaces without asking for step-by-step confirmation.
+A4.8 remains available only as the legacy local-safe rail and Green Lane
+substrate. This means Codex may continue safe, local, reversible project work
+across the allowed documentation, schema, dry-run, authorization-template,
+validation, `.agent_board`, tests, fixtures, review packages, evidence
+packages, route decision, and static-prototype surfaces as Green Lane work
+without asking for step-by-step confirmation.
 
 The default next action may now include owner-authorized Amber Lane work inside the active autonomy envelope:
 
@@ -840,7 +851,8 @@ If any user-owned or unrelated change is present, Codex must not include it in a
 
 ### A4.8 — Safe Project Operator Rail
 
-A4.8 is the Safe Project Operator Rail / 安全项目运营轨.
+A4.8 is the legacy local-safe rail and Green Lane substrate for Smart Standing
+Authorization v3. It is not the project startup default.
 
 It allows Codex to keep advancing project operations when the task is clearly project-relevant, non-destructive, and inside the current repository or an owner-authorized connected target.
 

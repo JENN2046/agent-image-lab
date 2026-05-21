@@ -6,6 +6,13 @@ Target project: `agent-image-lab`
 
 This pack refactors the universal sustained autopilot rails into an Agent Image Lab-specific operating rail.
 
+Active startup model: Smart Standing Authorization v3 — Budgeted Autonomy Envelope.
+
+Every future Codex session should begin with the v3 intake: Goal Compiler,
+Truth Model, Green / Amber / Red Lane Classifier, Autonomy Envelope, Receipt,
+and Red Lane hard stops. A4.8 is retained only as the legacy local-safe rail and
+Green Lane substrate.
+
 It is intentionally conservative:
 
 ```text
@@ -47,15 +54,15 @@ Use:
 
 ```text
 请读取 AGENTS.md、AGENTS.autopilot-overlay.md、.agent_board/HANDOFF.md、.agent_board/RUN_STATE.md、.agent_board/TASK_QUEUE.md 和 .agent_board/CHECKPOINT.md。
-使用 Agent Image Lab A4-Guarded Sustained Autopilot。
+使用 Agent Image Lab Smart Standing Authorization v3 — Budgeted Autonomy Envelope。
 先只做 repo reality 检查和 Autopilot Rule Intake，不修改文件。
-请复述 hard stops、exact-file staging / no git add .、以及本任务是否需要更新 .agent_board resume surfaces。
+请复述 active_autonomy_model、a4_8_role、a5_status、goal_compiler_available、receipt_required_for_meaningful_Amber、hard stops、exact-file staging / no git add .、以及本任务是否需要更新 .agent_board resume surfaces。
 如果没有 hard stop，再执行 .agent_board/TASK_QUEUE.md 中的第一个安全本地任务。
 ```
 
 ## Current principle
 
 ```text
-Let Codex move bricks.
-Do not let Codex open the external source gate by itself.
+Let Codex move through v3 Green and budgeted Amber work.
+Do not let Codex cross Red Lane gates by implication.
 ```

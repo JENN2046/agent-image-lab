@@ -5,7 +5,11 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 ## 当前权限策略
 
 ```yaml
-current_phase: autopilot_goal_compiler_v1
+current_phase: default_startup_model_switch
+current_autonomy_model: Smart Standing Authorization v3
+startup_default_model: Smart Standing Authorization v3
+a4_8_status: retained_as_green_lane_substrate
+a5_status: classified_by_lane_and_envelope
 standing_owner_smart_authorization_v3_active: true
 autonomy_envelope_active: true
 green_lane_direct: true
@@ -16,7 +20,7 @@ red_lane_requires_user: true
 push_tag_release_deploy_allowed_automatically: false
 secret_value_access_allowed_automatically: false
 destructive_action_allowed_automatically: false
-recommended_next: pending_push_safety_gate_or_next_autonomous_envelope_task
+recommended_next: pending_goal_compiler_driven_autonomous_task
 ```
 
 Smart Standing Authorization v3 means Codex can continue Green work directly and Amber work inside the budgeted envelope without step-by-step approval. It must stop at Red Lane conditions such as push/tag/release/deploy, destructive actions, secret value access, raw private data exposure, uncapped cost, unbounded loops, broad external repository modification, or dependency changes without an exact package/action list.

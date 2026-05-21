@@ -2,7 +2,15 @@
 
 ## Decisions
 
-### DECISION-AIL-AUTO-011 — Goal Compiler v1 route and task queue baseline
+### DECISION-AIL-AUTO-011 — Smart Standing Authorization v3 is the default startup model
+
+Context: The project now has Smart Standing Authorization v3, the governance kernel, receipts, and Goal Compiler v1. Startup instructions still contained legacy A4.8 default wording.
+Chosen: Make Smart Standing Authorization v3 — Budgeted Autonomy Envelope the default startup and autonomy model for future Codex sessions.
+Reason: Every session should begin by compiling the goal, checking truth, assigning Green / Amber / Red lanes, applying the autonomy envelope, requiring receipts for meaningful Amber actions, and preserving Red Lane hard stops.
+Compatibility: A4.8 is retained for compatibility only as the legacy local-safe rail and Green Lane substrate.
+Mitigation: Validators check that AGENTS.md no longer declares A4.8 as the Default mode, that overlay and status surfaces declare v3 startup, and that Red Lane hard stops remain present.
+
+### DECISION-AIL-AUTO-012 — Goal Compiler v1 route and task queue baseline
 
 Context: Smart Autopilot v3 already has a governance kernel, autonomy envelope, and receipt validation, but it still needs a machine-verifiable way to compile a user goal into current truth, route options, selected route, near-term tasks, lane assignments, validation, and stop conditions.
 Chosen: Add Goal Compiler v1 as Green Lane local infrastructure with goal, route plan, and task queue schemas, example fixtures, and `scripts/validate_autopilot_goal_compiler.js` wired into `scripts/validate_mvp.ps1`.

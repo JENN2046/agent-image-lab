@@ -13,7 +13,15 @@ const files = {
   amber01ReceiptExample: "tests/schema_examples/autopilot_execution_receipt.amber_01_local_trial.example.json",
   amber02Doc: "docs/AMBER_02_PRODUCTION_CANDIDATE_RECEIPT_REPLAY.md",
   amber02ReceiptExample: "tests/schema_examples/autopilot_execution_receipt.amber_02_production_candidate_replay.example.json",
-  autopilotLedger: ".agent_board/AUTOPILOT_LEDGER.md"
+  autopilotLedger: ".agent_board/AUTOPILOT_LEDGER.md",
+  agents: "AGENTS.md",
+  overlay: "AGENTS.autopilot-overlay.md",
+  readme: "README.md",
+  roadmap: "docs/00_project_roadmap.md",
+  runState: ".agent_board/RUN_STATE.md",
+  handoff: ".agent_board/HANDOFF.md",
+  taskQueue: ".agent_board/TASK_QUEUE.md",
+  checkpoint: ".agent_board/CHECKPOINT.md"
 };
 
 const requiredKernelComponents = [
@@ -143,9 +151,33 @@ function main() {
   const receipt = receiptExampleRoot.autopilot_execution_receipt;
   const amber01Receipt = amber01ReceiptExampleRoot.autopilot_execution_receipt;
   const amber02Receipt = amber02ReceiptExampleRoot.autopilot_execution_receipt;
+  const agents = read(files.agents);
+  const overlay = read(files.overlay);
+  const startupSurfaces = [
+    agents,
+    overlay,
+    read(files.readme),
+    read(files.roadmap),
+    read(files.runState),
+    read(files.handoff),
+    read(files.taskQueue),
+    read(files.checkpoint),
+    doc
+  ].join("\n");
+  const defaultModeBlock = (agents.match(/Default mode:\s*```text\s*([\s\S]*?)```/) || [])[1] || "";
 
   includesAll(doc, requiredKernelComponents, "kernel doc components");
   includesAll(doc, ["Green Lane", "Amber Lane", "Red Lane"], "kernel doc lanes");
+  assert(defaultModeBlock.includes("Smart Standing Authorization v3") && !defaultModeBlock.includes("A4.8"), "AGENTS.md Default mode must be Smart Standing Authorization v3, not A4.8");
+  assert(overlay.includes("Active startup model: Smart Standing Authorization v3."), "Overlay must declare v3 active startup model");
+  includesAll(startupSurfaces, [
+    "current_autonomy_model: Smart Standing Authorization v3",
+    "startup_default_model: Smart Standing Authorization v3",
+    "a4_8_status: retained_as_green_lane_substrate",
+    "A4.8",
+    "Green Lane substrate"
+  ], "startup model surfaces");
+  includesAll(startupSurfaces, ["push", "tag", "release", "deploy", "secret", "destructive"], "startup Red Lane hard stops");
   includesAll(envelopeSchema, ["Green", "Amber", "Red"], "envelope schema lanes");
   includesAll(envelopeSchema, requiredBudgetKeys, "envelope schema budget");
   includesAll(envelopeSchema, requiredRedGates, "envelope schema Red gates");
@@ -275,6 +307,9 @@ function main() {
     amber_02_production_candidate_receipt_replay_verified: true,
     amber_02_files_written_count: amber02Receipt.files_written.length,
     amber_02_max_write_files: 4,
+    startup_default_v3_verified: true,
+    a4_8_green_lane_substrate_verified: true,
+    red_lane_hard_stops_verified: true,
     examples_verified: [
       files.envelopeExample,
       files.receiptExample,

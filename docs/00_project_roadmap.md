@@ -5,9 +5,13 @@
 ## 当前产品主线恢复点
 
 ```yaml
-current_phase: autopilot_goal_compiler_v1
+current_phase: default_startup_model_switch
 phase_status: completed_validated_guarded_local_commit
-source_phase: amber_receipt_closeout_status_sync_policy
+source_phase: autopilot_goal_compiler_v1
+current_autonomy_model: Smart Standing Authorization v3
+startup_default_model: Smart Standing Authorization v3
+a4_8_status: retained_as_green_lane_substrate
+a5_status: classified_by_lane_and_envelope
 validated_baseline:
   capsule_product_core_validator_route: completed
   full_asset_archive_manifest_bridge: aligned_to_verified_git_tracked_durable_archive
@@ -90,7 +94,7 @@ commit_readiness_validator_repair_closed: true
 validate_mvp_clean_post_commit_failure_closed: true
 goal_level_local_readiness_verified: true
 selected_next_product_move: autopilot_goal_compiler_v1_green_infrastructure
-recommended_next: pending_push_safety_gate_or_next_autonomous_envelope_task
+recommended_next: pending_goal_compiler_driven_autonomous_task
 validation_passed:
   - git status --short --branch
   - node --check scripts/validate_autopilot_goal_compiler.js

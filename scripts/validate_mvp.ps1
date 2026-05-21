@@ -7740,6 +7740,7 @@ if (-not $node) {
       'AGENTS.autopilot-overlay.md',
       'CLAUDE.md',
       'README.md',
+      'README_AGENT_IMAGE_LAB_AUTOPILOT.md',
       'MANIFEST.md',
       'package.json',
       'package-lock.json',
@@ -11750,6 +11751,9 @@ process.exit(child.status || 0);
     if ($autopilotGovernanceKernel.no_real_a5_execution_signals -ne $true) {
       Add-Failure "Smart Autopilot governance kernel must not record real A5 execution signals"
     }
+    if ($autopilotGovernanceKernel.startup_default_v3_verified -ne $true -or $autopilotGovernanceKernel.a4_8_green_lane_substrate_verified -ne $true -or $autopilotGovernanceKernel.red_lane_hard_stops_verified -ne $true) {
+      Add-Failure "Smart Autopilot governance kernel must verify v3 startup default, A4.8 Green Lane substrate, and Red Lane hard stops"
+    }
     if ($autopilotGovernanceKernel.provider_contact_performed -ne $false -or $autopilotGovernanceKernel.plugin_call_performed -ne $false -or $autopilotGovernanceKernel.api_call_performed -ne $false -or $autopilotGovernanceKernel.image_generation_performed -ne $false -or $autopilotGovernanceKernel.DailyNote_write_performed -ne $false -or $autopilotGovernanceKernel.VCP_memory_write_performed -ne $false) {
       Add-Failure "Smart Autopilot governance kernel must not perform provider, plugin, API, image, DailyNote, or VCP memory actions"
     }
@@ -11774,6 +11778,9 @@ process.exit(child.status || 0);
     }
     if ($autopilotGoalCompiler.push_allowed_default_false -ne $true -or $autopilotGoalCompiler.no_current_external_execution_signals -ne $true) {
       Add-Failure "Autopilot Goal Compiler v1 must keep push disabled and external execution signals false"
+    }
+    if ($autopilotGoalCompiler.startup_default_v3_verified -ne $true -or $autopilotGoalCompiler.a4_8_green_lane_substrate_verified -ne $true -or $autopilotGoalCompiler.red_lane_hard_stops_verified -ne $true) {
+      Add-Failure "Autopilot Goal Compiler v1 must verify v3 startup default, A4.8 Green Lane substrate, and Red Lane hard stops"
     }
     if ($autopilotGoalCompiler.provider_contact_performed -ne $false -or $autopilotGoalCompiler.plugin_call_performed -ne $false -or $autopilotGoalCompiler.api_call_performed -ne $false -or $autopilotGoalCompiler.image_generation_performed -ne $false -or $autopilotGoalCompiler.DailyNote_write_performed -ne $false -or $autopilotGoalCompiler.VCP_memory_write_performed -ne $false) {
       Add-Failure "Autopilot Goal Compiler v1 must not perform provider, plugin, API, image, DailyNote, or VCP memory actions"

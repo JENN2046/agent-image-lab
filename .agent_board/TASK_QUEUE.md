@@ -1,15 +1,18 @@
 
 ---
 
-- [x] ID: autopilot_goal_compiler_v1
-      Title: Add Goal Compiler v1 schemas, examples, validator, and MVP wiring
-      Reason: Smart Autopilot needs a machine-verifiable way to compile goals into route plans and near-term Green/Amber/Red task queues before future Amber work continues.
-      Changed files: docs/AUTOPILOT_GOAL_COMPILER_V1.md; schemas/autopilot_goal.schema.yaml; schemas/autopilot_route_plan.schema.yaml; schemas/autopilot_task_queue.schema.yaml; tests/schema_examples/autopilot_goal.example.json; tests/schema_examples/autopilot_route_plan.example.json; tests/schema_examples/autopilot_task_queue.example.json; scripts/validate_autopilot_goal_compiler.js; scripts/validate_mvp.ps1; README.md; docs/00_project_roadmap.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md; .agent_board/CHECKPOINT.md; .agent_board/DECISIONS.md.
-      Decision: implement as Green Lane local infrastructure; keep provider/plugin/API/image/memory/source-read/dependency/runtime execution signals false.
-      Validation: node --check validator passed; node validator passed; git diff --check passed; git diff --cached --check passed; exact-file cached name review passed; validate_agent_board_state passed; validate-agent-image-lab-local passed with known warning scan; validate_mvp passed after guarded local commit.
+- [x] ID: default_startup_model_switch
+      Title: Make Smart Standing Authorization v3 the default startup model
+      Reason: Future sessions should begin from v3 Goal Compiler / Truth Model / Green-Amber-Red / envelope / receipt / Red Lane hard-stop intake, not legacy A4.8 startup wording.
+      Changed files: AGENTS.md; AGENTS.autopilot-overlay.md; README_AGENT_IMAGE_LAB_AUTOPILOT.md; docs/STANDING_OWNER_AUTOMATIC_AUTHORIZATION_POLICY.md; docs/SMART_AUTOPILOT_GOVERNANCE_KERNEL.md; docs/AUTOPILOT_GOAL_COMPILER_V1.md; README.md; docs/00_project_roadmap.md; .agent_board resume surfaces; scripts/validate_agent_board_state.js; scripts/validate_autopilot_governance_kernel.js; scripts/validate_autopilot_goal_compiler.js; scripts/validate_mvp.ps1.
+      Decision: v3 becomes the active startup and autonomy model; A4.8 is retained only as legacy local-safe rail and Green Lane substrate.
+      Validation: node --check validators; node validators; git diff --check; validate-agent-image-lab-local; validate_mvp after guarded local commit.
       Result: completed_validated_guarded_local_commit.
-      Commit message: test: add autopilot goal compiler validation.
-      Recommended next: pending_push_safety_gate_or_next_autonomous_envelope_task.
+      Commit message: docs: make smart authorization v3 the startup default.
+      Current autonomy model: Smart Standing Authorization v3.
+      A4.8 status: retained_as_green_lane_substrate.
+      A5 status: classified_by_lane_and_envelope.
+      Recommended next: pending_goal_compiler_driven_autonomous_task.
       Stop condition: push/tag/release/deploy, secret read, destructive action, provider/plugin/API/image/memory/source-read/dependency/runtime requirement, dirty unrelated worktree, or validation failure requiring judgment.
 
 - [ ] ID: harden_amber_02_receipt_surfaces

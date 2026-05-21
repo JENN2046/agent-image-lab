@@ -10,7 +10,15 @@ const files = {
   taskQueueSchema: "schemas/autopilot_task_queue.schema.yaml",
   goalExample: "tests/schema_examples/autopilot_goal.example.json",
   routePlanExample: "tests/schema_examples/autopilot_route_plan.example.json",
-  taskQueueExample: "tests/schema_examples/autopilot_task_queue.example.json"
+  taskQueueExample: "tests/schema_examples/autopilot_task_queue.example.json",
+  agents: "AGENTS.md",
+  overlay: "AGENTS.autopilot-overlay.md",
+  readme: "README.md",
+  roadmap: "docs/00_project_roadmap.md",
+  runState: ".agent_board/RUN_STATE.md",
+  handoff: ".agent_board/HANDOFF.md",
+  taskQueueSurface: ".agent_board/TASK_QUEUE.md",
+  checkpoint: ".agent_board/CHECKPOINT.md"
 };
 
 const requiredDocComponents = [
@@ -137,9 +145,33 @@ function main() {
   const goal = readJson(files.goalExample).autopilot_goal;
   const routePlan = readJson(files.routePlanExample).autopilot_route_plan;
   const taskQueue = readJson(files.taskQueueExample).autopilot_task_queue;
+  const agents = read(files.agents);
+  const overlay = read(files.overlay);
+  const startupSurfaces = [
+    agents,
+    overlay,
+    read(files.readme),
+    read(files.roadmap),
+    read(files.runState),
+    read(files.handoff),
+    read(files.taskQueueSurface),
+    read(files.checkpoint),
+    doc
+  ].join("\n");
+  const defaultModeBlock = (agents.match(/Default mode:\s*```text\s*([\s\S]*?)```/) || [])[1] || "";
 
   includesAll(doc, requiredDocComponents, "Goal Compiler doc components");
   includesAll(doc, ["Green Lane", "Amber Lane", "Red Lane"], "Goal Compiler doc lanes");
+  assert(defaultModeBlock.includes("Smart Standing Authorization v3") && !defaultModeBlock.includes("A4.8"), "AGENTS.md Default mode must be Smart Standing Authorization v3, not A4.8");
+  assert(overlay.includes("Active startup model: Smart Standing Authorization v3."), "Overlay must declare v3 active startup model");
+  includesAll(startupSurfaces, [
+    "current_autonomy_model: Smart Standing Authorization v3",
+    "startup_default_model: Smart Standing Authorization v3",
+    "a4_8_status: retained_as_green_lane_substrate",
+    "A4.8",
+    "Green Lane substrate"
+  ], "startup model surfaces");
+  includesAll(startupSurfaces, ["push", "tag", "release", "deploy", "secret", "destructive"], "startup Red Lane hard stops");
   includesAll(goalSchema, requiredGoalFields, "goal schema fields");
   includesAll(routePlanSchema, requiredRoutePlanFields, "route plan schema fields");
   includesAll(taskQueueSchema, requiredTaskQueueFields, "task queue schema fields");
@@ -208,6 +240,9 @@ function main() {
     task_count: taskQueue.tasks.length,
     amber_tasks_with_receipts_verified: taskQueue.tasks.filter((task) => task.lane === "Amber").length,
     rejected_red_routes_verified: routePlan.rejected_routes.filter((route) => route.lane === "Red").length,
+    startup_default_v3_verified: true,
+    a4_8_green_lane_substrate_verified: true,
+    red_lane_hard_stops_verified: true,
     validation_strategy_present: true,
     stop_conditions_present: true,
     red_routes_excluded_from_executable_tasks: true,

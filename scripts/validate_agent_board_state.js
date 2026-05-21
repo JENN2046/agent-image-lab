@@ -97,8 +97,33 @@ function main() {
   const validationLog = read(".agent_board/VALIDATION_LOG.md");
   const decisions = read(".agent_board/DECISIONS.md");
   const checkpoint = read(".agent_board/CHECKPOINT.md");
+  const agents = read("AGENTS.md");
+  const overlay = read("AGENTS.autopilot-overlay.md");
+  const readme = read("README.md");
+  const roadmap = read("docs/00_project_roadmap.md");
 
-  const currentModeDeclared = hasAll(runState + taskQueue, ["A4 — Sustained Local Autopilot"]);
+  const agentsDefaultModeBlock = (agents.match(/Default mode:\s*```text\s*([\s\S]*?)```/) || [])[1] || "";
+  const startupDefaultV3Declared = agentsDefaultModeBlock.includes("Smart Standing Authorization v3") && !agentsDefaultModeBlock.includes("A4.8");
+  const overlayStartupV3Declared = overlay.includes("Active startup model: Smart Standing Authorization v3.");
+  const currentStatusSurfacesText = runState + "\n" + taskQueue + "\n" + checkpoint + "\n" + handoff + "\n" + readme + "\n" + roadmap;
+  const currentModeDeclared = hasAll(currentStatusSurfacesText, [
+    "current_autonomy_model: Smart Standing Authorization v3",
+    "startup_default_model: Smart Standing Authorization v3",
+    "a4_8_status: retained_as_green_lane_substrate",
+    "a5_status: classified_by_lane_and_envelope"
+  ]);
+  const a48GreenSubstrateDeclared = hasAll(agents + overlay + currentStatusSurfacesText, [
+    "A4.8",
+    "Green Lane substrate"
+  ]);
+  const redLaneHardStopsPresent = hasAll(agents + overlay + currentStatusSurfacesText, [
+    "push",
+    "tag",
+    "release",
+    "deploy",
+    "secret",
+    "destructive"
+  ]);
   const a5GateDeclared = hasAll(blockers + taskQueue + runState + handoff, [
     "A5",
     "active authorization package",
@@ -170,7 +195,11 @@ function main() {
     "memory_write_path_allowed_now: false"
   ]);
 
-  assert(currentModeDeclared, "Agent board must declare A4 sustained local autopilot mode.");
+  assert(startupDefaultV3Declared, "AGENTS.md must declare Smart Standing Authorization v3 as Default mode and not A4.8.");
+  assert(overlayStartupV3Declared, "AGENTS.autopilot-overlay.md must declare v3 as the active startup model.");
+  assert(currentModeDeclared, "Current status surfaces must declare Smart Standing Authorization v3 startup defaults.");
+  assert(a48GreenSubstrateDeclared, "A4.8 must be declared as Green Lane substrate.");
+  assert(redLaneHardStopsPresent, "Red Lane hard stops must remain declared.");
   assert(a5GateDeclared, "Agent board must declare A5 production-execution gate.");
   assert(noExternalReadGateDeclared, "Agent board must declare external-read gates.");
   assert(realExecutionGateDeclared, "Agent board must declare real-execution gates.");
@@ -190,6 +219,10 @@ function main() {
     agent_board_state: {
       required_files_present: true,
       current_mode_declared: currentModeDeclared,
+      startup_default_v3_declared: startupDefaultV3Declared,
+      overlay_startup_v3_declared: overlayStartupV3Declared,
+      a4_8_green_lane_substrate_declared: a48GreenSubstrateDeclared,
+      red_lane_hard_stops_present: redLaneHardStopsPresent,
       a5_gate_declared: a5GateDeclared,
       no_external_read_gate_declared: noExternalReadGateDeclared,
       real_execution_gate_declared: realExecutionGateDeclared,

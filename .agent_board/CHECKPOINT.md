@@ -1,28 +1,30 @@
 
 ---
 
-## Checkpoint - Autopilot Goal Compiler v1
+## Checkpoint - Default Startup Model Switch
 
 ```text
-phase: autopilot_goal_compiler_v1
-phase_id: autopilot_goal_compiler_v1
+phase: default_startup_model_switch
+phase_id: default_startup_model_switch
 status: completed_validated_guarded_local_commit
+current_autonomy_model: Smart Standing Authorization v3
+startup_default_model: Smart Standing Authorization v3
+a4_8_status: retained_as_green_lane_substrate
+a5_status: classified_by_lane_and_envelope
 completed:
-- added Goal Compiler v1 document
-- added goal, route plan, and task queue schemas
-- added three linked JSON examples
-- added local Node validator
-- wired Goal Compiler validator into scripts/validate_mvp.ps1
-- synchronized README, roadmap, and .agent_board resume surfaces
+- updated startup policy docs to make v3 the default model
+- demoted A4.8 to legacy local-safe rail and Green Lane substrate
+- updated validators to check v3 startup defaults
 validation_completed:
+- node --check scripts/validate_agent_board_state.js
+- node --check scripts/validate_autopilot_governance_kernel.js
 - node --check scripts/validate_autopilot_goal_compiler.js
+- node scripts/validate_agent_board_state.js
+- node scripts/validate_autopilot_governance_kernel.js
 - node scripts/validate_autopilot_goal_compiler.js
 - git diff --check
-- git diff --cached --check
-- git diff --cached --name-only
-- node scripts/validate_agent_board_state.js
 - powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
-- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1 after guarded local commit
 not_performed:
 - no push
 - no tag/release/deploy
@@ -32,8 +34,8 @@ not_performed:
 - no dependency change
 - no runtime probe
 - no secret read
-commit_message: test: add autopilot goal compiler validation
-recommended_next: pending_push_safety_gate_or_next_autonomous_envelope_task
+commit_message: docs: make smart authorization v3 the startup default
+recommended_next: pending_goal_compiler_driven_autonomous_task
 ```
 
 ---

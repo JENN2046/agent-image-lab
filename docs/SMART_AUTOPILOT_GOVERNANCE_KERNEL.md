@@ -4,6 +4,8 @@ base_contract: AGENTS.md
 policy_model: Smart Standing Authorization v3 — Budgeted Autonomy Envelope
 status: active_local_validation_kernel
 mode: Green Lane local implementation
+startup_default_model: Smart Standing Authorization v3
+a4_8_status: retained_as_green_lane_substrate
 
 ## Purpose
 
@@ -11,6 +13,9 @@ This kernel makes the Smart Standing Authorization v3 policy machine-checkable
 before any real Amber action is attempted. It defines the local governance
 objects that must exist around autonomy: the envelope, the receipt, and the
 continuation decision.
+
+Authority rule: v3 is the active startup and autonomy model. A4.8 only supplies
+Green Lane local-safe behavior.
 
 This document does not authorize provider contact, plugin calls, API calls,
 image generation, DailyNote writes, VCP memory writes, real manifest reads,

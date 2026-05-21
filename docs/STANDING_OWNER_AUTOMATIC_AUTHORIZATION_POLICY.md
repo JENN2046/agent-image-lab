@@ -3,12 +3,17 @@
 base_contract: AGENTS.md
 status: active
 date: 2026-05-21
+startup_default_model: Smart Standing Authorization v3
+a4_8_status: retained_as_green_lane_substrate
 
 ## Purpose
 
 Record the project owner's explicit instruction that selected formerly gated
 production categories now run inside a bounded autonomy envelope. Codex should
 not ask for step-by-step approval inside that envelope.
+
+Authority rule: v3 is the active startup and autonomy model for Agent Image Lab.
+A4.8 only supplies Green Lane local-safe behavior.
 
 Core rule:
 

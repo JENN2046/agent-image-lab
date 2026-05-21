@@ -3,6 +3,7 @@
 Version: v0.1-refactor
 Scope: overlay guidance for `agent-image-lab`
 Default user-facing language: Simplified Chinese
+Active startup model: Smart Standing Authorization v3.
 
 > This file is an overlay. It should not automatically replace the project root `AGENTS.md`.
 
@@ -38,6 +39,10 @@ resume surfaces:
 Summarize Smart Standing Authorization v3, the active autonomy envelope, remaining Red Lane stops,
 exact-file staging, `git add .` prohibition, and whether `.agent_board` must be
 updated for the current task. Do not edit files until that intake is complete.
+
+The intake must treat A4.8 as a Green Lane substrate only. Ambiguous
+continuation words may continue Green work and Amber work inside the active
+envelope, but Red Lane conditions must stop.
 
 ---
 

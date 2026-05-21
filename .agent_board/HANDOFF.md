@@ -1,27 +1,31 @@
 
 ---
 
-## Current Handoff Update - Autopilot Goal Compiler v1
+## Current Handoff Update - Default Startup Model Switch
 
 ```text
-phase: autopilot_goal_compiler_v1
-phase_id: autopilot_goal_compiler_v1
+phase: default_startup_model_switch
+phase_id: default_startup_model_switch
 status: completed_validated_guarded_local_commit
-mode: Green Lane local implementation
-summary: Build the first machine-verifiable Goal Compiler layer: goal schema, route plan schema, task queue schema, example fixtures, validator, MVP wiring, and status-surface refs.
+mode: Green Lane policy and validator alignment
+summary: Make Smart Standing Authorization v3 the default startup model and demote A4.8 to legacy local-safe rail / Green Lane substrate.
+current_autonomy_model: Smart Standing Authorization v3
+startup_default_model: Smart Standing Authorization v3
+a4_8_status: retained_as_green_lane_substrate
+a5_status: classified_by_lane_and_envelope
 branch: master
 origin_branch: origin/master
-baseline_before_edit: 8e13802 docs: add amber receipt closeout sync rule
+baseline_before_edit: 2ec6417 test: add autopilot goal compiler validation
 policy_model: Smart Standing Authorization v3 — Budgeted Autonomy Envelope
 goal_compiler_ref: docs/AUTOPILOT_GOAL_COMPILER_V1.md
 validator_ref: scripts/validate_autopilot_goal_compiler.js
 schema_refs: schemas/autopilot_goal.schema.yaml; schemas/autopilot_route_plan.schema.yaml; schemas/autopilot_task_queue.schema.yaml
 example_refs: tests/schema_examples/autopilot_goal.example.json; tests/schema_examples/autopilot_route_plan.example.json; tests/schema_examples/autopilot_task_queue.example.json
 amber_02_surface_hardening_preserved_as_future_task: true
-validated_now: node --check scripts/validate_autopilot_goal_compiler.js; node scripts/validate_autopilot_goal_compiler.js; git diff --check; git diff --cached --check; git diff --cached --name-only exact-file review; node scripts/validate_agent_board_state.js; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1.
-commit_message: test: add autopilot goal compiler validation
+validated_now: node --check scripts/validate_agent_board_state.js; node --check scripts/validate_autopilot_governance_kernel.js; node --check scripts/validate_autopilot_goal_compiler.js; node scripts/validate_agent_board_state.js; node scripts/validate_autopilot_governance_kernel.js; node scripts/validate_autopilot_goal_compiler.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1 after guarded local commit.
+commit_message: docs: make smart authorization v3 the startup default
 not_performed: no push, no tag/release/deploy, no provider/plugin/API/image generation, no DailyNote/VCP memory write, no real manifest/VCPChat/VCPToolBox read, no dependency change, no runtime probe, no secret read.
-recommended_next: pending_push_safety_gate_or_next_autonomous_envelope_task.
+recommended_next: pending_goal_compiler_driven_autonomous_task.
 ```
 
 ---

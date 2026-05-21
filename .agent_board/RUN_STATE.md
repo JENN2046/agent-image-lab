@@ -1,17 +1,21 @@
 
 ---
 
-## autopilot_goal_compiler_v1
+## default_startup_model_switch
 
 ```text
-phase: autopilot_goal_compiler_v1
-phase_id: autopilot_goal_compiler_v1
+phase: default_startup_model_switch
+phase_id: default_startup_model_switch
 status: completed_validated_guarded_local_commit
-mode: Green Lane local implementation
-objective: add machine-verifiable goal intake, route planning, and near-term task queue infrastructure for Smart Autopilot v3
+mode: Green Lane policy and validator alignment
+objective: make Smart Standing Authorization v3 the project startup default and retain A4.8 only as Green Lane substrate
+current_autonomy_model: Smart Standing Authorization v3
+startup_default_model: Smart Standing Authorization v3
+a4_8_status: retained_as_green_lane_substrate
+a5_status: classified_by_lane_and_envelope
 branch: master
 origin_branch: origin/master
-baseline_before_edit: 8e13802
+baseline_before_edit: 2ec6417
 standing_owner_smart_authorization_v3_active: true
 autonomy_envelope_active: true
 green_lane_direct: true
@@ -24,9 +28,9 @@ destructive_action_allowed: false
 secret_value_read_allowed: false
 provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
 amber_02_surface_hardening_preserved_as_future_task: true
-validation_status: completed_validated_after_guarded_local_commit
-commit_message: test: add autopilot goal compiler validation
-recommended_next: pending_push_safety_gate_or_next_autonomous_envelope_task
+validation_status: completed_validated_pending_clean_worktree_rerun_after_guarded_commit
+commit_message: docs: make smart authorization v3 the startup default
+recommended_next: pending_goal_compiler_driven_autonomous_task
 ```
 
 ---
