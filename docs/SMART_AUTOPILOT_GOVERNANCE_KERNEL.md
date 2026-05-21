@@ -80,6 +80,7 @@ destructive Git/filesystem action
 secret value read or edit
 raw private data / raw chat history exposure
 external repository broad modification
+cost unknown or unbounded for real external Amber action
 uncapped cost
 unbounded loops
 overwriting existing artifacts without explicit overwrite allowance
@@ -102,6 +103,10 @@ max_write_files: 10
 max_dependency_actions: 2
 max_retry_per_transient_failure: 1
 max_runtime_probe_minutes: 10
+max_cost_amount: bounded number or not_applicable
+max_cost_currency: explicit currency or not_applicable
+cost_tracking_required: true
+cost_unknown_is_red: true
 overwrite_existing_files_allowed: false
 secret_value_read_allowed: false
 raw_private_data_print_allowed: false
@@ -124,12 +129,38 @@ calls_used
 files_read
 files_written
 dependency_actions_used
+cost_accounting
 validation_run
 validation_result
 rollback_or_cleanup_available
+rollback_or_cleanup_plan
+files_to_revert
+cleanup_targets
+irreversible_actions_performed
 next_auto_step_allowed
 stop_reason
 ```
+
+The receipt registry is the entry point for all Amber receipt validation:
+
+```text
+tests/schema_examples/autopilot_receipt_registry.example.json
+```
+
+The registry lists each receipt fixture or replay, its path, envelope id,
+max_write_files, dependency action budget, and cost budget. The validator must
+iterate the registry rather than relying only on hardcoded receipt paths. Future
+real Amber execution must have an envelope, receipt schema compatibility, and a
+registry path before it proceeds.
+
+Cost unknown, missing cost tracking, uncapped cost, or a missing call budget is
+Red for real external Amber actions. Local-only receipt trials and replays must
+record cost as `0` or `not_applicable`.
+
+Rollback must be structured. Receipts must record whether rollback or cleanup is
+available, the rollback plan, files to revert, cleanup targets, and any
+irreversible actions. Irreversible actions must be explicit and require stricter
+stop or review conditions before continuation.
 
 ## Amber Closeout Sync
 
@@ -175,10 +206,12 @@ The kernel is validated by:
 schemas/autopilot_autonomy_envelope.schema.yaml
 schemas/autopilot_execution_receipt.schema.yaml
 tests/schema_examples/autopilot_autonomy_envelope.example.json
+tests/schema_examples/autopilot_receipt_registry.example.json
 tests/schema_examples/autopilot_execution_receipt.example.json
 scripts/validate_autopilot_governance_kernel.js
 ```
 
 The validator must prove the Green / Amber / Red definitions, default envelope
-budget, required Red gates, Amber receipt requirement, examples, and no-real-A5
-guard flags remain present.
+budget, required Red gates, Amber receipt requirement, receipt registry
+coverage, cost accounting, structured rollback, examples, and no-real-A5 guard
+flags remain present.

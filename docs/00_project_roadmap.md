@@ -5,9 +5,9 @@
 ## 当前产品主线恢复点
 
 ```yaml
-current_phase: default_startup_model_switch
+current_phase: autopilot_registry_hardening_v1
 phase_status: completed_validated_guarded_local_commit
-source_phase: autopilot_goal_compiler_v1
+source_phase: autopilot_registry_hardening_v1
 current_autonomy_model: Smart Standing Authorization v3
 startup_default_model: Smart Standing Authorization v3
 a4_8_status: retained_as_green_lane_substrate
@@ -38,6 +38,8 @@ autopilot_goal_compiler_ref: docs/AUTOPILOT_GOAL_COMPILER_V1.md
 autopilot_goal_compiler_validator_ref: scripts/validate_autopilot_goal_compiler.js
 autopilot_autonomy_envelope_schema_ref: schemas/autopilot_autonomy_envelope.schema.yaml
 autopilot_execution_receipt_schema_ref: schemas/autopilot_execution_receipt.schema.yaml
+autopilot_receipt_registry_ref: tests/schema_examples/autopilot_receipt_registry.example.json
+cost_rollback_schema_hardening: active
 autopilot_goal_schema_ref: schemas/autopilot_goal.schema.yaml
 autopilot_route_plan_schema_ref: schemas/autopilot_route_plan.schema.yaml
 autopilot_task_queue_schema_ref: schemas/autopilot_task_queue.schema.yaml

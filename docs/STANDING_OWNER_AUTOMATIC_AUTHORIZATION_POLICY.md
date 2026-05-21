@@ -41,6 +41,10 @@ default_autonomy_envelope:
   max_dependency_actions: 2
   max_retry_per_transient_failure: 1
   max_runtime_probe_minutes: 10
+  max_cost_amount: bounded number or not_applicable
+  max_cost_currency: explicit currency or not_applicable
+  cost_tracking_required: true
+  cost_unknown_is_red: true
   overwrite_existing_files_allowed: false
   secret_value_read_allowed: false
   raw_private_data_print_allowed: false
@@ -112,6 +116,7 @@ destructive Git or filesystem action
 secret value read or edit
 raw private data / raw chat history exposure
 external repository broad modification
+cost unknown or unbounded for real external Amber action
 uncapped cost
 unbounded loops
 overwriting existing artifacts without explicit overwrite allowance
@@ -134,12 +139,30 @@ calls_used
 files_read
 files_written
 dependency_actions_used
+cost_accounting
 validation_run
 validation_result
 rollback_or_cleanup_available
+rollback_or_cleanup_plan
+files_to_revert
+cleanup_targets
+irreversible_actions_performed
 next_auto_step_allowed
 stop_reason
 ```
+
+Every Amber receipt must be registered through:
+
+```text
+tests/schema_examples/autopilot_receipt_registry.example.json
+```
+
+The receipt registry is the durable local entry point for receipt validation. It
+must list each receipt path, envelope id, write budget, dependency action budget,
+and cost budget. Future real Amber execution must have an envelope, receipt, and
+registry path before execution. Cost unknown, uncapped cost, or missing call
+budget is Red. Rollback must be structured; any irreversible action must be
+explicit and trigger stricter stop or review conditions.
 
 ## Continuation Rule
 

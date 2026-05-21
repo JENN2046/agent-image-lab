@@ -1,0 +1,51 @@
+{
+  "autopilot_receipt_registry": {
+    "version": "v1",
+    "contract_type": "autopilot_receipt_registry",
+    "policy_model": "Smart Standing Authorization v3 — Budgeted Autonomy Envelope",
+    "registry_id": "registry-smart-standing-v3-receipts-001",
+    "registry_status": "active_local_validation_fixture",
+    "receipt_schema_ref": "schemas/autopilot_execution_receipt.schema.yaml",
+    "envelope_schema_ref": "schemas/autopilot_autonomy_envelope.schema.yaml",
+    "cost_unknown_is_red": true,
+    "rollback_structure_required": true,
+    "receipts": [
+      {
+        "receipt_id": "receipt-smart-standing-v3-green-kernel-validation-001",
+        "task_id": "task-smart-autopilot-governance-kernel-001",
+        "lane": "Green",
+        "path": "tests/schema_examples/autopilot_execution_receipt.example.json",
+        "envelope_id": "envelope-smart-standing-v3-default-001",
+        "receipt_only_or_replay": true,
+        "max_write_files": 10,
+        "max_dependency_actions": 0,
+        "max_cost_amount": 0,
+        "max_cost_currency": "not_applicable"
+      },
+      {
+        "receipt_id": "receipt-amber-01-local-receipt-trial-001",
+        "task_id": "amber_01_local_receipt_trial",
+        "lane": "Amber",
+        "path": "tests/schema_examples/autopilot_execution_receipt.amber_01_local_trial.example.json",
+        "envelope_id": "envelope-amber-01-local-receipt-trial",
+        "receipt_only_or_replay": true,
+        "max_write_files": 4,
+        "max_dependency_actions": 0,
+        "max_cost_amount": 0,
+        "max_cost_currency": "not_applicable"
+      },
+      {
+        "receipt_id": "receipt-amber-02-production-candidate-metadata-replay-001",
+        "task_id": "amber_02_production_candidate_metadata_receipt_replay",
+        "lane": "Amber",
+        "path": "tests/schema_examples/autopilot_execution_receipt.amber_02_production_candidate_replay.example.json",
+        "envelope_id": "envelope-amber-02-production-candidate-receipt-replay",
+        "receipt_only_or_replay": true,
+        "max_write_files": 4,
+        "max_dependency_actions": 0,
+        "max_cost_amount": 0,
+        "max_cost_currency": "not_applicable"
+      }
+    ]
+  }
+}

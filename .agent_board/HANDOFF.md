@@ -1,6 +1,27 @@
 
 ---
 
+## Current Handoff Update - Autopilot Registry Hardening v1
+
+```text
+phase: autopilot_registry_hardening_v1
+phase_id: autopilot_registry_hardening_v1
+status: completed_validated_guarded_local_commit
+mode: Green Lane local governance hardening
+summary: Added receipt registry validation and hardened envelope/receipt schemas with cost accounting and structured rollback for future Amber actions.
+current_autonomy_model: Smart Standing Authorization v3
+startup_default_model: Smart Standing Authorization v3
+receipt_registry_ref: tests/schema_examples/autopilot_receipt_registry.example.json
+schema_refs: schemas/autopilot_autonomy_envelope.schema.yaml; schemas/autopilot_execution_receipt.schema.yaml
+validator_ref: scripts/validate_autopilot_governance_kernel.js
+validated_now: node --check scripts/validate_autopilot_governance_kernel.js; node scripts/validate_autopilot_governance_kernel.js; node scripts/validate_autopilot_goal_compiler.js; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1 after guarded local commit.
+commit_message: test: harden autopilot receipt registry
+not_performed: no push, no tag/release/deploy, no provider/plugin/API/image generation, no DailyNote/VCP memory write, no real manifest/VCPChat/VCPToolBox read, no dependency change, no runtime probe, no secret read.
+recommended_next: pending_goal_compiler_driven_autonomous_task.
+```
+
+---
+
 ## Current Handoff Update - Default Startup Model Switch
 
 ```text

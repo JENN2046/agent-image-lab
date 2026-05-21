@@ -31,12 +31,30 @@
       "scripts/validate_autopilot_governance_kernel.js"
     ],
     "dependency_actions_used": [],
+    "cost_accounting": {
+      "cost_tracking_required": true,
+      "cost_amount": 0,
+      "cost_currency": "not_applicable",
+      "cost_unknown": false,
+      "cost_unknown_is_red": true
+    },
     "validation_run": [
       "node --check scripts/validate_autopilot_governance_kernel.js",
       "node scripts/validate_autopilot_governance_kernel.js"
     ],
     "validation_result": "passed",
     "rollback_or_cleanup_available": true,
+    "rollback_or_cleanup_plan": "Revert the listed local governance fixture files from the guarded local commit if validation regresses.",
+    "files_to_revert": [
+      "docs/SMART_AUTOPILOT_GOVERNANCE_KERNEL.md",
+      "schemas/autopilot_autonomy_envelope.schema.yaml",
+      "schemas/autopilot_execution_receipt.schema.yaml",
+      "tests/schema_examples/autopilot_autonomy_envelope.example.json",
+      "tests/schema_examples/autopilot_execution_receipt.example.json",
+      "scripts/validate_autopilot_governance_kernel.js"
+    ],
+    "cleanup_targets": [],
+    "irreversible_actions_performed": [],
     "next_auto_step_allowed": true,
     "stop_reason": "none",
     "guard": {

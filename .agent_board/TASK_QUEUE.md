@@ -1,6 +1,19 @@
 
 ---
 
+- [x] ID: autopilot_registry_hardening_v1
+      Title: Harden receipt registry, cost budget, and rollback validation
+      Reason: Future real Amber actions need a registry-driven receipt validation path plus explicit cost and rollback boundaries.
+      Changed files: governance docs; envelope and receipt schemas; receipt examples; receipt registry; governance validator; MVP wiring; README/roadmap/.agent_board status surfaces.
+      Decision: All Amber receipts must enter through the registry; unknown or unbounded cost is Red; rollback must be structured.
+      Validation: node --check governance validator; governance validator; goal compiler validator; agent board validator; git diff --check; validate-agent-image-lab-local; validate_mvp after guarded local commit.
+      Result: completed_validated_guarded_local_commit.
+      Commit message: test: harden autopilot receipt registry.
+      Recommended next: pending_goal_compiler_driven_autonomous_task.
+      Stop condition: push/tag/release/deploy, secret read, destructive action, provider/plugin/API/image/memory/source-read/dependency/runtime requirement, dirty unrelated worktree, or validation failure requiring judgment.
+
+---
+
 - [x] ID: default_startup_model_switch
       Title: Make Smart Standing Authorization v3 the default startup model
       Reason: Future sessions should begin from v3 Goal Compiler / Truth Model / Green-Amber-Red / envelope / receipt / Red Lane hard-stop intake, not legacy A4.8 startup wording.

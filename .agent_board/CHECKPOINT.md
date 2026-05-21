@@ -1,6 +1,40 @@
 
 ---
 
+## Checkpoint - Autopilot Registry Hardening v1
+
+```text
+phase: autopilot_registry_hardening_v1
+phase_id: autopilot_registry_hardening_v1
+status: completed_validated_guarded_local_commit
+completed:
+- added a receipt registry fixture for existing governance and Amber receipts
+- hardened autonomy envelope schema with cost budget fields
+- hardened execution receipt schema and examples with cost accounting and structured rollback
+- updated governance validator to iterate registry entries while preserving Amber-01 and Amber-02 protections
+validation_completed:
+- node --check scripts/validate_autopilot_governance_kernel.js
+- node scripts/validate_autopilot_governance_kernel.js
+- node scripts/validate_autopilot_goal_compiler.js
+- node scripts/validate_agent_board_state.js
+- git diff --check
+- powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1 after guarded local commit
+not_performed:
+- no push
+- no tag/release/deploy
+- no provider/plugin/API/image generation
+- no DailyNote/VCP memory write
+- no real manifest/VCPChat/VCPToolBox read
+- no dependency change
+- no runtime probe
+- no secret read
+commit_message: test: harden autopilot receipt registry
+recommended_next: pending_goal_compiler_driven_autonomous_task
+```
+
+---
+
 ## Checkpoint - Default Startup Model Switch
 
 ```text

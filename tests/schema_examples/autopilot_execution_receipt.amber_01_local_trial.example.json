@@ -35,6 +35,13 @@
       "scripts/validate_autopilot_governance_kernel.js"
     ],
     "dependency_actions_used": [],
+    "cost_accounting": {
+      "cost_tracking_required": true,
+      "cost_amount": 0,
+      "cost_currency": "not_applicable",
+      "cost_unknown": false,
+      "cost_unknown_is_red": true
+    },
     "validation_run": [
       "git status --short --branch",
       "node --check scripts/validate_autopilot_governance_kernel.js",
@@ -46,6 +53,15 @@
     ],
     "validation_result": "passed",
     "rollback_or_cleanup_available": true,
+    "rollback_or_cleanup_plan": "Revert the local Amber-01 documentation, receipt fixture, ledger entry, and validator edits if validation regresses.",
+    "files_to_revert": [
+      "docs/AMBER_01_LOCAL_RECEIPT_TRIAL.md",
+      "tests/schema_examples/autopilot_execution_receipt.amber_01_local_trial.example.json",
+      ".agent_board/AUTOPILOT_LEDGER.md",
+      "scripts/validate_autopilot_governance_kernel.js"
+    ],
+    "cleanup_targets": [],
+    "irreversible_actions_performed": [],
     "next_auto_step_allowed": true,
     "stop_reason": "none",
     "guard": {

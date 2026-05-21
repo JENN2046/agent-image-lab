@@ -2,6 +2,14 @@
 
 ## Decisions
 
+### DECISION-AIL-AUTO-013 — Receipt registry and cost/rollback hardening
+
+Context: Smart Standing Authorization v3 had envelope and receipt examples, but governance validation still depended on hardcoded receipt fixtures and did not yet require explicit cost and rollback structures.
+Chosen: Add a receipt registry fixture as the local entry point for receipt validation, extend envelope budgets with cost fields, and extend receipts with cost accounting plus structured rollback.
+Reason: Future real Amber provider/plugin/API/image/runtime actions need bounded cost, registry coverage, and rollback evidence before autonomous execution can be trusted.
+Risk: A receipt could appear valid while omitting cost or irreversible-action evidence.
+Mitigation: `scripts/validate_autopilot_governance_kernel.js` now iterates registry entries, checks cost accounting, checks rollback structure, preserves Amber-01 / Amber-02 protections, and keeps all real side-effect guard flags false.
+
 ### DECISION-AIL-AUTO-011 — Smart Standing Authorization v3 is the default startup model
 
 Context: The project now has Smart Standing Authorization v3, the governance kernel, receipts, and Goal Compiler v1. Startup instructions still contained legacy A4.8 default wording.

@@ -36,6 +36,10 @@ budget_limits_required:
   max_dependency_actions: integer
   max_retry_per_transient_failure: integer
   max_runtime_probe_minutes: integer
+  max_cost_amount: number | not_applicable
+  max_cost_currency: string | not_applicable
+  cost_tracking_required: boolean
+  cost_unknown_is_red: boolean
   overwrite_existing_files_allowed: boolean
   secret_value_read_allowed: boolean
   raw_private_data_print_allowed: boolean
@@ -58,9 +62,14 @@ target_boundaries_required:
     - files_read
     - files_written
     - dependency_actions_used
+    - cost_accounting
     - validation_run
     - validation_result
     - rollback_or_cleanup_available
+    - rollback_or_cleanup_plan
+    - files_to_revert
+    - cleanup_targets
+    - irreversible_actions_performed
     - next_auto_step_allowed
     - stop_reason
 
@@ -89,6 +98,7 @@ red_lane_required_stop_conditions:
   - secret value read or edit
   - raw private data / raw chat history exposure
   - external repository broad modification
+  - cost unknown or unbounded for real external Amber action
   - uncapped cost
   - unbounded loops
   - overwriting existing artifacts without explicit overwrite allowance

@@ -26,9 +26,14 @@ receipt_fields_required:
   - files_read
   - files_written
   - dependency_actions_used
+  - cost_accounting
   - validation_run
   - validation_result
   - rollback_or_cleanup_available
+  - rollback_or_cleanup_plan
+  - files_to_revert
+  - cleanup_targets
+  - irreversible_actions_performed
   - next_auto_step_allowed
   - stop_reason
 
@@ -42,11 +47,21 @@ usage_accounting_required:
   files_read: array
   files_written: array
   dependency_actions_used: array
+  cost_accounting:
+    cost_tracking_required: boolean
+    cost_amount: number | 0 | not_applicable
+    cost_currency: string | not_applicable
+    cost_unknown: boolean
+    cost_unknown_is_red: boolean
 
 validation_required:
   validation_run: array
   validation_result: passed | failed | blocked | not_run
   rollback_or_cleanup_available: boolean
+  rollback_or_cleanup_plan: string
+  files_to_revert: array
+  cleanup_targets: array
+  irreversible_actions_performed: array
   next_auto_step_allowed: boolean
   stop_reason: string
 
@@ -54,6 +69,8 @@ red_lane_guard:
   receipt_required_after_meaningful_action: true
   stop_if_red_condition_seen: true
   red_conditions_must_not_be_hidden_in_receipt: true
+  irreversible_actions_require_stop_or_review: true
+  cost_unknown_is_red_for_real_external_amber: true
 
 non_authorization:
   provider_contact_performed: false

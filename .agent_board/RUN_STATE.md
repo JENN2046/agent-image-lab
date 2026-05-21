@@ -1,6 +1,36 @@
 
 ---
 
+## autopilot_registry_hardening_v1
+
+```text
+phase: autopilot_registry_hardening_v1
+phase_id: autopilot_registry_hardening_v1
+status: completed_validated_guarded_local_commit
+mode: Green Lane local governance hardening
+objective: add receipt registry plus cost and rollback schema hardening for future Amber actions
+current_autonomy_model: Smart Standing Authorization v3
+startup_default_model: Smart Standing Authorization v3
+a4_8_status: retained_as_green_lane_substrate
+a5_status: classified_by_lane_and_envelope
+branch: master
+origin_branch: origin/master
+baseline_before_edit: 7921f01
+receipt_registry_ref: tests/schema_examples/autopilot_receipt_registry.example.json
+cost_unknown_is_red: true
+structured_rollback_required: true
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
+push_allowed: false
+tag_release_deploy_allowed: false
+destructive_action_allowed: false
+secret_value_read_allowed: false
+validation_status: completed_validated_guarded_local_commit
+commit_message: test: harden autopilot receipt registry
+recommended_next: pending_goal_compiler_driven_autonomous_task
+```
+
+---
+
 ## default_startup_model_switch
 
 ```text

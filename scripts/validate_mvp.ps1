@@ -11748,6 +11748,9 @@ process.exit(child.status || 0);
     if ($autopilotGovernanceKernel.default_budget_verified -ne $true -or $autopilotGovernanceKernel.amber_receipt_required -ne $true -or $autopilotGovernanceKernel.kernel_components_verified -lt 6) {
       Add-Failure "Smart Autopilot governance kernel must verify default budget, Amber receipts, and six kernel components"
     }
+    if ($autopilotGovernanceKernel.receipt_registry_verified -ne $true -or $autopilotGovernanceKernel.receipt_registry_count -lt 3 -or $autopilotGovernanceKernel.cost_budget_hardening_verified -ne $true -or $autopilotGovernanceKernel.rollback_structure_verified -ne $true) {
+      Add-Failure "Smart Autopilot governance kernel must verify receipt registry, cost budget hardening, and structured rollback"
+    }
     if ($autopilotGovernanceKernel.no_real_a5_execution_signals -ne $true) {
       Add-Failure "Smart Autopilot governance kernel must not record real A5 execution signals"
     }
