@@ -12,9 +12,11 @@
       "local_repository_fixture_only"
     ],
     "exact_allowed_paths_or_objects": [
+      "docs/AUTOPILOT_AMBER_DRY_RUN_EXECUTION_LOOP.md",
       "tests/schema_examples/amber_dry_run_execution_loop.example.json",
       "tests/schema_examples/autopilot_execution_receipt.amber_dry_run_loop.example.json",
       "tests/schema_examples/autopilot_receipt_registry.example.json",
+      "scripts/simulate_amber_dry_run_execution_loop.js",
       "scripts/validate_amber_dry_run_execution_loop.js",
       ".agent_board/AUTOPILOT_LEDGER.md"
     ],
@@ -36,7 +38,7 @@
       "image_candidates": 0,
       "runtime_probe_minutes": 0
     },
-    "max_write_count": 5,
+    "max_write_count": 7,
     "max_cost_when_applicable": {
       "amount": 0,
       "currency": "not_applicable",

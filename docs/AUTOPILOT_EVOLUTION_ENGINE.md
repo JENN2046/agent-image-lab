@@ -52,10 +52,13 @@ After final local closeout, completed hardening items belong in
 `completed_capabilities`, not in future `proposals`. This includes
 `complete_autopilot_readiness_gate_v1`,
 `receipt_registry_negative_cases_v1`, and
-`amber_action_packet_preflight_v1`. The next recommendation must advance to a
-real local hardening item such as
-`readiness_receipt_registry_cross_claims_v1` or another Green/Amber-safe local
-task.
+`amber_action_packet_preflight_v1`, and
+`readiness_receipt_registry_cross_claims_v1`, and
+`amber_packet_to_receipt_traceability_v1`, and
+`agent_board_resume_compaction_guard_v1`. Once no Green/Amber-safe local
+hardening remains, the next recommendation may advance to a Red-gated boundary
+such as `future_real_provider_cost_boundary_v1`, but Red proposals must still
+require explicit authorization and must not be self-authorized.
 
 ## Validation
 

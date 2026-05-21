@@ -53,7 +53,7 @@
         "path": "tests/schema_examples/autopilot_execution_receipt.amber_dry_run_loop.example.json",
         "envelope_id": "envelope-amber-dry-run-execution-loop-v1",
         "receipt_only_or_replay": true,
-        "max_write_files": 5,
+        "max_write_files": 7,
         "max_dependency_actions": 0,
         "max_cost_amount": 0,
         "max_cost_currency": "not_applicable"

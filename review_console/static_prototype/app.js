@@ -44,6 +44,7 @@ const state = {
   human_approval_blocker_queue: mock.human_approval_blocker_queue_seed,
   runtime_gap_dashboard: mock.review_console_runtime_gap_dashboard_contract_seed,
   lifecycleFilter: "all",
+  lifecycleSearch: "",
   selectedArtifactId: mock.artifact_lifecycle_state_reader_seed.records[0].sample_id,
   import_record_reader: {
     source_mode: "project_local_seed",
@@ -842,12 +843,34 @@ function artifactEvidenceStatusKey(record) {
   return record.lifecycle_state || "unknown";
 }
 
-function artifactEvidenceFilterRecords(records, filter) {
+function artifactEvidenceSearchText(record) {
+  return [
+    record.sample_id,
+    record.candidate_id,
+    record.visual_task,
+    record.lifecycle_state,
+    record.human_approval_status,
+    record.registration_blocker,
+    record.artifact_ref,
+    record.prompt_package_ref
+  ].filter(Boolean).join(" ").toLowerCase();
+}
+
+function artifactEvidenceFilterRecords(records, filter, searchQuery = "") {
+  const query = String(searchQuery || "").trim().toLowerCase();
   return records.filter((record) => {
-    if (filter === "recoverable") return record.recoverable === true;
-    if (filter === "blocked") return record.blocked_registration === true;
-    return true;
+    const statusMatches = filter === "recoverable"
+      ? record.recoverable === true
+      : filter === "blocked"
+        ? record.blocked_registration === true
+        : true;
+    const searchMatches = !query || artifactEvidenceSearchText(record).includes(query);
+    return statusMatches && searchMatches;
   });
+}
+
+function artifactLifecycleId(record) {
+  return record.sample_id || record.candidate_id;
 }
 
 function artifactEvidenceStatusSortState() {
@@ -902,28 +925,38 @@ function artifactEvidenceStatusSortFilterInteractionState() {
   const lifecycle = normalizeArtifactLifecycleState();
   const sortState = artifactEvidenceStatusSortState();
   const sortedIdOrder = new Map(sortState.sorted_artifact_ids.map((id, index) => [id, index]));
-  const filterResults = ["all", "recoverable", "blocked"].map((filter) => {
-    const visible = artifactEvidenceFilterRecords(lifecycle.records, filter).slice().sort((left, right) => {
-      const leftId = left.sample_id || left.candidate_id;
-      const rightId = right.sample_id || right.candidate_id;
+  const selectedArtifactExists = lifecycle.records.some((record) => artifactLifecycleId(record) === state.selectedArtifactId);
+  const currentVisibleRecords = artifactEvidenceFilterRecords(lifecycle.records, state.lifecycleFilter, state.lifecycleSearch);
+  const selectedArtifactVisible = currentVisibleRecords.some((record) => artifactLifecycleId(record) === state.selectedArtifactId);
+  const buildFilterResults = (searchQuery = "") => ["all", "recoverable", "blocked"].map((filter) => {
+    const visible = artifactEvidenceFilterRecords(lifecycle.records, filter, searchQuery).slice().sort((left, right) => {
+      const leftId = artifactLifecycleId(left);
+      const rightId = artifactLifecycleId(right);
       return (sortedIdOrder.get(leftId) ?? 99) - (sortedIdOrder.get(rightId) ?? 99);
     });
     return {
       filter,
-      visible_artifact_ids: visible.map((record) => record.sample_id || record.candidate_id),
+      visible_artifact_ids: visible.map((record) => artifactLifecycleId(record)),
       visible_count: visible.length,
-      first_visible_artifact_id: visible[0] ? (visible[0].sample_id || visible[0].candidate_id) : null
+      first_visible_artifact_id: visible[0] ? artifactLifecycleId(visible[0]) : null
     };
   });
+  const filterResults = buildFilterResults();
+  const searchFilterResults = buildFilterResults(state.lifecycleSearch);
   return {
     draft_output_key: "artifact_evidence_status_sort_filter_interaction_state",
     source_sort_key: "artifact_evidence_status_sort_state",
     sort_mode: sortState.sort_mode,
     filter_results: filterResults,
+    search_filter_results: searchFilterResults,
     all_filter_blocked_candidate_first: filterResults.find((item) => item.filter === "all")?.first_visible_artifact_id === sortState.blocked_candidate_artifact_id,
     recoverable_filter_excludes_blocked_candidate: !filterResults.find((item) => item.filter === "recoverable")?.visible_artifact_ids.includes(sortState.blocked_candidate_artifact_id),
     blocked_filter_only_blocked_candidate: JSON.stringify(filterResults.find((item) => item.filter === "blocked")?.visible_artifact_ids || []) === JSON.stringify([sortState.blocked_candidate_artifact_id]),
     current_lifecycle_filter: state.lifecycleFilter,
+    search_query: state.lifecycleSearch,
+    selected_artifact_id: state.selectedArtifactId,
+    selected_artifact_visible: selectedArtifactVisible,
+    selected_artifact_hidden_by_current_filter: selectedArtifactExists && !selectedArtifactVisible,
     local_filter_only: true,
     static_interaction_only: true,
     fetch_performed: false,
@@ -951,46 +984,85 @@ function renderArtifactLifecycleStateReader() {
   const counts = lifecycle.counts;
   const statusSort = artifactEvidenceStatusSortState();
   const sortedIdOrder = new Map(statusSort.sorted_artifact_ids.map((id, index) => [id, index]));
-  const visibleRecords = artifactEvidenceFilterRecords(lifecycle.records, state.lifecycleFilter).slice().sort((left, right) => {
-    const leftId = left.sample_id || left.candidate_id;
-    const rightId = right.sample_id || right.candidate_id;
+  const visibleRecords = artifactEvidenceFilterRecords(lifecycle.records, state.lifecycleFilter, state.lifecycleSearch).slice().sort((left, right) => {
+    const leftId = artifactLifecycleId(left);
+    const rightId = artifactLifecycleId(right);
     return (sortedIdOrder.get(leftId) ?? 99) - (sortedIdOrder.get(rightId) ?? 99);
   });
+  const selectedArtifactExists = lifecycle.records.some((record) => artifactLifecycleId(record) === state.selectedArtifactId);
+  const selectedArtifactVisible = visibleRecords.some((record) => artifactLifecycleId(record) === state.selectedArtifactId);
+  const selectedArtifactHidden = selectedArtifactExists && !selectedArtifactVisible;
+  const searchInput = qs("#artifactLifecycleSearch");
+  if (searchInput && document.activeElement !== searchInput) {
+    searchInput.value = state.lifecycleSearch;
+  }
   qsa("[data-lifecycle-filter]").forEach((button) => {
     button.classList.toggle("is-active", button.dataset.lifecycleFilter === state.lifecycleFilter);
+    button.setAttribute("aria-pressed", String(button.dataset.lifecycleFilter === state.lifecycleFilter));
   });
   qs("#artifactLifecycleSummary").innerHTML = `
     <span>parsed <strong>${escapeHtml(lifecycle.parse_status)}</strong></span>
+    <span>visible <strong>${escapeHtml(`${visibleRecords.length}/${lifecycle.records.length}`)}</strong></span>
     <span>recoverable <strong>${escapeHtml(counts.recoverable_accepted_sample_count)}</strong></span>
     <span>blocked <strong>${escapeHtml(counts.blocked_registration_candidate_count)}</strong></span>
     <span>gap <strong>${escapeHtml(counts.remaining_full_recoverable_sample_gap)}</strong></span>
     <span>3-sample met <strong>${escapeHtml(counts.hard_acceptance_three_full_samples_met)}</strong></span>
     <span>sort <strong>${escapeHtml(statusSort.sort_mode)}</strong></span>
     <span>filter <strong>${escapeHtml(state.lifecycleFilter)}</strong></span>
+    <span>search <strong>${escapeHtml(state.lifecycleSearch || "none")}</strong></span>
   `;
 
   const root = qs("#artifactLifecycleList");
   root.innerHTML = "";
-  visibleRecords.forEach((record) => {
-    const card = document.createElement("article");
-    card.className = `artifact-lifecycle-card ${record.recoverable ? "recoverable" : "blocked"}`;
-    card.innerHTML = `
-      <div class="protocol-card-head">
-        <strong>${escapeHtml(record.sample_id || record.candidate_id)}</strong>
-        <span>${escapeHtml(record.lifecycle_state)}</span>
+  qs("#artifactLifecycleFilterNotice").innerHTML = selectedArtifactHidden
+    ? `
+      <div class="lifecycle-filter-notice-card">
+        <span>当前选中样片 <strong>${escapeHtml(state.selectedArtifactId)}</strong> 已被筛选隐藏，详情仍保留在右侧上下文中。</span>
+        <button id="clearLifecycleFiltersBtn" type="button">清除筛选</button>
       </div>
-      <dl>
-        <div><dt>Task</dt><dd>${escapeHtml(record.visual_task)}</dd></div>
-        <div><dt>Approval</dt><dd>${escapeHtml(record.human_approval_status)}</dd></div>
-        <div><dt>Recoverable</dt><dd>${escapeHtml(record.recoverable)}</dd></div>
-        <div><dt>Blocker</dt><dd>${escapeHtml(record.registration_blocker || "none")}</dd></div>
-        <div><dt>Artifact</dt><dd>${escapeHtml(record.artifact_ref)}</dd></div>
-        <div><dt>Hash</dt><dd>${escapeHtml((record.sha256 || "").slice(0, 12))}</dd></div>
-      </dl>
+    `
+    : "";
+  const clearFiltersButton = qs("#clearLifecycleFiltersBtn");
+  if (clearFiltersButton) {
+    clearFiltersButton.addEventListener("click", clearLifecycleFilters);
+  }
+  if (visibleRecords.length === 0) {
+    root.innerHTML = `
+      <div class="artifact-lifecycle-empty" role="status">
+        没有匹配的样片。筛选仍然只作用于当前静态 mock 数据，没有触发 fetch、文件写入或外部调用。
+      </div>
     `;
-    card.addEventListener("click", () => setSelectedArtifact(record.sample_id || record.candidate_id));
-    root.appendChild(card);
-  });
+  } else {
+    visibleRecords.forEach((record) => {
+      const artifactId = artifactLifecycleId(record);
+      const card = document.createElement("article");
+      card.className = `artifact-lifecycle-card ${record.recoverable ? "recoverable" : "blocked"}${artifactId === state.selectedArtifactId ? " is-selected" : ""}`;
+      card.tabIndex = 0;
+      card.setAttribute("aria-selected", String(artifactId === state.selectedArtifactId));
+      card.innerHTML = `
+        <div class="protocol-card-head">
+          <strong>${escapeHtml(artifactId)}</strong>
+          <span>${escapeHtml(record.lifecycle_state)}</span>
+        </div>
+        <dl>
+          <div><dt>Task</dt><dd>${escapeHtml(record.visual_task)}</dd></div>
+          <div><dt>Approval</dt><dd>${escapeHtml(record.human_approval_status)}</dd></div>
+          <div><dt>Recoverable</dt><dd>${escapeHtml(record.recoverable)}</dd></div>
+          <div><dt>Blocker</dt><dd>${escapeHtml(record.registration_blocker || "none")}</dd></div>
+          <div><dt>Artifact</dt><dd>${escapeHtml(record.artifact_ref)}</dd></div>
+          <div><dt>Hash</dt><dd>${escapeHtml((record.sha256 || "").slice(0, 12))}</dd></div>
+        </dl>
+      `;
+      card.addEventListener("click", () => setSelectedArtifact(artifactId));
+      card.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          setSelectedArtifact(artifactId);
+        }
+      });
+      root.appendChild(card);
+    });
+  }
 
   qs("#artifactLifecycleGuard").innerHTML = `
     <span>static reader only: ${escapeHtml(lifecycle.guard.static_reader_only)}</span>
@@ -1004,6 +1076,7 @@ function renderArtifactLifecycleStateReader() {
 
 function setSelectedArtifact(id) {
   state.selectedArtifactId = id;
+  renderArtifactLifecycleStateReader();
   renderArtifactDetailDrawer();
   renderArtifactEvidenceCompare();
   renderDraft();
@@ -1011,6 +1084,20 @@ function setSelectedArtifact(id) {
 
 function setLifecycleFilter(filter) {
   state.lifecycleFilter = ["all", "recoverable", "blocked"].includes(filter) ? filter : "all";
+  renderArtifactLifecycleStateReader();
+  renderArtifactPromptCompletionPanel();
+  renderDraft();
+}
+
+function setLifecycleSearch(value) {
+  state.lifecycleSearch = String(value || "").trim();
+  renderArtifactLifecycleStateReader();
+  renderDraft();
+}
+
+function clearLifecycleFilters() {
+  state.lifecycleFilter = "all";
+  state.lifecycleSearch = "";
   renderArtifactLifecycleStateReader();
   renderArtifactPromptCompletionPanel();
   renderDraft();
@@ -3312,7 +3399,12 @@ function renderDraft() {
     artifact_lifecycle_filter_state: {
       selected_filter: state.lifecycleFilter,
       allowed_filters: ["all", "recoverable", "blocked"],
+      search_query: state.lifecycleSearch,
+      visible_count: artifactEvidenceFilterRecords(normalizeArtifactLifecycleState().records, state.lifecycleFilter, state.lifecycleSearch).length,
+      selected_artifact_id: state.selectedArtifactId,
+      selected_artifact_hidden_by_current_filter: artifactEvidenceStatusSortFilterInteractionState().selected_artifact_hidden_by_current_filter,
       filter_is_local_ui_only: true,
+      search_is_local_ui_only: true,
       fetch_performed: false,
       file_write_performed: false,
       accepted_samples_write_performed: false,
@@ -3428,6 +3520,7 @@ qsa("[data-memory]").forEach((button) => {
 qsa("[data-lifecycle-filter]").forEach((button) => {
   button.addEventListener("click", () => setLifecycleFilter(button.dataset.lifecycleFilter));
 });
+qs("#artifactLifecycleSearch").addEventListener("input", (event) => setLifecycleSearch(event.target.value));
 qs("#memoryTitle").addEventListener("input", renderDraft);
 qs("#memoryContent").addEventListener("input", renderDraft);
 

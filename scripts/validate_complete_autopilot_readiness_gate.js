@@ -127,7 +127,7 @@ function buildCompleteAutopilotReadinessGate() {
       checkpoint_present: true,
       final_closeout_state_verified: true,
       no_push_boundary_verified: true,
-      evolution_backlog_present: evolution.detected_gap_count >= 4,
+      evolution_backlog_present: evolution.detected_gap_count >= 1,
       mvp_wiring_expected: true
     },
     local_only_boundaries: {

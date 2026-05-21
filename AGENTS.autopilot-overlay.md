@@ -50,6 +50,35 @@ The intake must treat A4.8 as a Green Lane substrate only. Ambiguous
 continuation words may continue Green work and Amber work inside the active
 envelope, but Red Lane conditions must stop.
 
+### Light Intake
+
+After one full intake has been completed in the current session, Codex may use a
+Light Intake for later small Green tasks. A small Green task must have a clear
+one-sentence goal, an exact local file allowlist, no external system, no
+provider/plugin/API/image/DailyNote/VCP memory action, no real source read, no
+dependency action, no secret-sensitive path, no commit/push/tag/release/deploy,
+no dirty target overlap, and an available narrow validation path.
+
+Light Intake must still state the active model, Green Lane classification,
+allowlisted files, blocked Red items, dirty-worktree overlap result, validation
+plan, and the no `git add .` / no push boundary. If any condition is uncertain,
+upgrade to full intake.
+
+Governance authority changes, roadmap/status-surface changes, Amber/A5 work,
+cross-module work, dependency changes, runtime integration, unclear validation,
+or dirty target files never qualify for Light Intake.
+
+### Dirty Worktree Isolation
+
+Pre-existing dirty files outside the exact task allowlist do not block a small
+local task, but Codex must preserve them and report them separately from files
+changed by the current task. If a dirty file overlaps the task allowlist and is
+not clearly owned by the current task, stop and ask before editing.
+
+If `.agent_board` is dirty before the task and `.agent_board` is not explicitly
+in scope, read it for intake but do not update it. Closeout must report
+`agent_board_updated: false`, the reason, and `stale_risk`.
+
 ---
 
 ## 0.7 Smart Standing Authorization v3 — Budgeted Autonomy Envelope
@@ -323,7 +352,26 @@ Stage only the files in the current task scope.
 
 ## 8. Reporting Format
 
-After each task, report in Chinese:
+For small Green tasks that used Light Intake, report in Chinese with the compact
+format:
+
+```text
+Status:
+Changed:
+Validation:
+Not validated:
+Boundary:
+Next:
+Chinese task summary:
+```
+
+`Chinese task summary:` is a mandatory final footer for any task or goal
+closeout. It must remain present in compact reports and must not be removed for
+brevity.
+
+For full-intake, gate-style, Amber/A5, governance, dependency, dirty-target,
+failed-validation, commit, tag, push, release, or deploy-adjacent work, report in
+Chinese with the full format:
 
 ```text
 Status:
@@ -334,6 +382,12 @@ Validation:
 Boundary checks:
 Findings:
 Next recommended task:
+Chinese task summary:
 ```
+
+Before final response, Codex must verify that the closeout reports status,
+changes or no-change, validation, applicable blockers or skipped validation,
+boundary checks, and a final `Chinese task summary:` footer. If the footer is
+missing, add it before responding.
 
 If blocked, update `.agent_board/BLOCKERS.md` and `.agent_board/HANDOFF.md`.

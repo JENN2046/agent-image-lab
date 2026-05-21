@@ -10,16 +10,25 @@ const knownInputs = [
   "docs/AUTOPILOT_NEXT_SAFE_TASK_ORCHESTRATOR.md",
   "docs/AUTOPILOT_AMBER_DRY_RUN_EXECUTION_LOOP.md",
   "docs/AUTOPILOT_AMBER_ACTION_PACKET_PREFLIGHT.md",
+  "docs/AUTOPILOT_READINESS_RECEIPT_REGISTRY_CROSS_CLAIMS.md",
+  "docs/AUTOPILOT_AMBER_PACKET_TO_RECEIPT_TRACEABILITY.md",
+  "docs/AUTOPILOT_AGENT_BOARD_RESUME_COMPACTION_GUARD.md",
   "scripts/validate_autopilot_governance_kernel.js",
   "scripts/validate_autopilot_goal_compiler.js",
   "scripts/validate_agent_board_queue_reconciliation.js",
   "scripts/validate_next_safe_task_orchestrator.js",
   "scripts/validate_amber_dry_run_execution_loop.js",
   "scripts/validate_autopilot_amber_action_packet_preflight.js",
+  "scripts/validate_autopilot_readiness_receipt_registry_cross_claims.js",
+  "scripts/validate_autopilot_amber_packet_to_receipt_traceability.js",
+  "scripts/validate_autopilot_agent_board_resume_compaction_guard.js",
   "schemas/autopilot_amber_action_packet.schema.yaml",
   "tests/schema_examples/autopilot_amber_action_packet.example.json",
   "tests/schema_examples/autopilot_amber_action_packet_negative_cases.example.json",
   "tests/schema_examples/autopilot_receipt_registry.example.json",
+  "tests/schema_examples/autopilot_readiness_receipt_registry_cross_claims.example.json",
+  "tests/schema_examples/autopilot_amber_packet_to_receipt_traceability.example.json",
+  "tests/schema_examples/autopilot_agent_board_resume_compaction_guard.example.json",
   "tests/schema_examples/amber_dry_run_execution_loop.example.json",
   ".agent_board/TASK_QUEUE.md",
   ".agent_board/RUN_STATE.md",
@@ -122,67 +131,49 @@ function detectAutopilotEvolutionGaps() {
         "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1"
       ],
       red_boundary: "Packet fixtures do not authorize provider calls, runtime probes, source reads, dependency changes, or live external actions."
+    },
+    {
+      capability_id: "readiness_receipt_registry_cross_claims_v1",
+      proposal_id: "readiness_receipt_registry_cross_claims_v1",
+      title: "Cross-check readiness claims against receipt registry coverage",
+      lane: "Green",
+      status: "completed_current_evidence",
+      evidence: "Readiness cross-claim validation proves the complete readiness gate's Amber receipt claim maps to a registry entry and a schema-valid receipt fixture without overclaiming current task execution.",
+      validation: [
+        "node scripts/validate_autopilot_readiness_receipt_registry_cross_claims.js",
+        "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1"
+      ],
+      red_boundary: "Cross-claim validation stays local and must not execute provider, runtime, source-read, dependency, or remote actions."
+    },
+    {
+      capability_id: "amber_packet_to_receipt_traceability_v1",
+      proposal_id: "amber_packet_to_receipt_traceability_v1",
+      title: "Cross-check Amber packet fields against receipt fields",
+      lane: "Green",
+      status: "completed_current_evidence",
+      evidence: "Amber packet-to-receipt traceability validation proves receipt task, write, validation, rollback, cost, registry, and guard evidence trace to a preflight packet.",
+      validation: [
+        "node scripts/validate_autopilot_amber_packet_to_receipt_traceability.js",
+        "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1"
+      ],
+      red_boundary: "Traceability validation remains fixture-only and must not execute provider, runtime, source-read, dependency, or remote actions."
+    },
+    {
+      capability_id: "agent_board_resume_compaction_guard_v1",
+      proposal_id: "agent_board_resume_compaction_guard_v1",
+      title: "Guard resume surfaces against long-session drift",
+      lane: "Green",
+      status: "completed_current_evidence",
+      evidence: "Agent board resume compaction validation proves RUN_STATE, TASK_QUEUE, CHECKPOINT, HANDOFF, ledger, and roadmap cite the current phase, completed traceability bridge, no-push state, and the next Red boundary.",
+      validation: [
+        "node scripts/validate_autopilot_agent_board_resume_compaction_guard.js",
+        "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1"
+      ],
+      red_boundary: "Resume compaction validation remains local and must not overwrite unrelated status notes or perform remote, runtime, source-read, dependency, provider, or secret actions."
     }
   ];
 
   const proposals = [
-    buildProposal({
-      proposal_id: "readiness_receipt_registry_cross_claims_v1",
-      title: "Cross-check readiness claims against receipt registry coverage",
-      lane: "Green",
-      detected_gap: "Complete readiness proves the dry-run receipt is registered, but a future bridge can prove every readiness receipt claim maps to a registry entry and schema-valid receipt.",
-      proposed_local_task: "Add a local readiness-to-registry cross-claim validator that rejects missing registry links or stale receipt ids.",
-      allowed_write_targets: [
-        "scripts/",
-        "tests/schema_examples/",
-        "docs/",
-        ".agent_board/"
-      ],
-      validation: [
-        "node scripts/validate_complete_autopilot_readiness_gate.js",
-        "node scripts/validate_autopilot_receipt_registry_negative_cases.js",
-        "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1"
-      ],
-      red_boundary: "Cross-claim validation remains fixture-only and must not execute provider/plugin/API/image/memory/source-read/runtime/dependency actions."
-    }),
-    buildProposal({
-      proposal_id: "amber_packet_to_receipt_traceability_v1",
-      title: "Cross-check Amber packet fields against receipt fields",
-      lane: "Green",
-      detected_gap: "The packet preflight proves packet safety, but a future bridge should prove receipt ids, task ids, envelope ids, target systems, cost, rollback, and evidence fields trace back to the preflight packet.",
-      proposed_local_task: "Add a local packet-to-receipt traceability validator that rejects receipts whose claimed action was not preflighted.",
-      allowed_write_targets: [
-        "scripts/",
-        "tests/schema_examples/",
-        "docs/",
-        ".agent_board/"
-      ],
-      validation: [
-        "node scripts/validate_autopilot_amber_action_packet_preflight.js",
-        "node scripts/validate_amber_dry_run_execution_loop.js",
-        "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1"
-      ],
-      red_boundary: "Traceability validation remains fixture-only and must not execute provider/plugin/API/image/memory/source-read/runtime/dependency actions."
-    }),
-    buildProposal({
-      proposal_id: "agent_board_resume_compaction_guard_v1",
-      title: "Guard resume surfaces against long-session drift",
-      lane: "Green",
-      detected_gap: "Long-running sessions can update validators and receipts while resume prose lags behind; a compact resume guard would reduce handoff drift.",
-      proposed_local_task: "Add a local validator that checks README, roadmap, RUN_STATE, TASK_QUEUE, CHECKPOINT, HANDOFF, and AUTOPILOT_LEDGER all cite the current phase and next safe task.",
-      allowed_write_targets: [
-        "scripts/",
-        ".agent_board/",
-        "README.md",
-        "docs/00_project_roadmap.md"
-      ],
-      validation: [
-        "node scripts/validate_agent_board_state.js",
-        "node scripts/validate_agent_board_queue_reconciliation.js",
-        "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1"
-      ],
-      red_boundary: "Do not overwrite unrelated user-owned status notes."
-    }),
     buildProposal({
       proposal_id: "future_real_provider_cost_boundary_v1",
       title: "Design a Red-gated real provider cost boundary before live calls",
@@ -211,8 +202,8 @@ function detectAutopilotEvolutionGaps() {
     completed_capabilities: completedCapabilities,
     detected_gap_count: proposals.length,
     proposals,
-    next_recommended_task: "readiness_receipt_registry_cross_claims_v1",
-    next_recommended_task_lane: "Green",
+    next_recommended_task: "future_real_provider_cost_boundary_v1",
+    next_recommended_task_lane: "Red",
     local_write_targets_only: true,
     red_lane_self_authorized: proposals.some((proposal) => proposal.lane === "Red" && proposal.self_authorized),
     side_effect_flags: sideEffectFlags

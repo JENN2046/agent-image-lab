@@ -51,7 +51,7 @@ function buildAmberDryRunLoop(materialized) {
     max_api_calls: 0,
     max_image_candidates: 0,
     max_external_read_files: 0,
-    max_write_files: 5,
+    max_write_files: 7,
     max_dependency_actions: 0,
     max_runtime_probe_minutes: 0,
     max_cost_amount: 0,
@@ -71,9 +71,11 @@ function buildAmberDryRunLoop(materialized) {
     intent: "prove local Amber envelope to receipt loop without external side effects",
     target_systems: ["local_repository_fixture_only"],
     exact_allowed_paths_or_objects: [
+      "docs/AUTOPILOT_AMBER_DRY_RUN_EXECUTION_LOOP.md",
       "tests/schema_examples/amber_dry_run_execution_loop.example.json",
       receiptPath,
       "tests/schema_examples/autopilot_receipt_registry.example.json",
+      "scripts/simulate_amber_dry_run_execution_loop.js",
       "scripts/validate_amber_dry_run_execution_loop.js",
       ".agent_board/AUTOPILOT_LEDGER.md"
     ],

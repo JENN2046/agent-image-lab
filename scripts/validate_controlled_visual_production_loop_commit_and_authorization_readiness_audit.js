@@ -4,6 +4,10 @@
 const childProcess = require("node:child_process");
 const fs = require("node:fs");
 const path = require("node:path");
+const {
+  buildGovernanceToolingMaintenanceSliceReport,
+  governanceToolingMaintenanceSliceSelfCheck: runGovernanceToolingMaintenanceSliceSelfCheck
+} = require("./lib/governance_tooling_maintenance_slice");
 
 const root = path.resolve(__dirname, "..");
 const files = {
@@ -100,7 +104,22 @@ const isValidatorSelfMaintenancePatch = selfMaintenanceAllowed
   && stagedFiles.length === 0
   && untrackedFiles.length === 0
   && JSON.stringify([...modifiedTracked].sort()) === JSON.stringify(validatorMaintenanceFiles);
-const acceptsCurrentGitShape = isCleanPostCommit || isValidatorSelfMaintenancePatch;
+const governanceToolingMaintenanceSliceReport = buildGovernanceToolingMaintenanceSliceReport({
+  changedFiles,
+  stagedFiles,
+  behind,
+  currentPackageJson: readJson("package.json"),
+  baselinePackageJson: JSON.parse(runGit(["show", "HEAD:package.json"]))
+});
+const governanceToolingMaintenanceSliceSelfCheck = runGovernanceToolingMaintenanceSliceSelfCheck();
+const isGovernanceToolingMaintenanceSlice = governanceToolingMaintenanceSliceReport.passed;
+const shouldValidateGovernanceToolingSlice = changedFiles.length > 0
+  && !isValidatorSelfMaintenancePatch
+  && governanceToolingMaintenanceSliceReport.path_allowed;
+const acceptsCurrentGitShape = isCleanPostCommit || isValidatorSelfMaintenancePatch || isGovernanceToolingMaintenanceSlice;
+const currentPendingSliceEvidence = JSON.stringify(changedFiles) === JSON.stringify(exactExpected)
+  || isValidatorSelfMaintenancePatch
+  || isGovernanceToolingMaintenanceSlice;
 const productionAuthorization = readJson(files.productionAuthorization);
 const memoryAuthorization = readJson(files.memoryAuthorization);
 const loopContract = readJson(files.loopContract).controlled_visual_production_loop_contract_snapshot;
@@ -118,9 +137,12 @@ add("production_candidate_authorization_state", fixture.audit_decision.productio
 add("memory_write_authorization_state", fixture.audit_decision.memory_write_authorization_state === "draft_not_active");
 add("memory_write_route_currently_blocked", fixture.audit_decision.memory_write_route_currently_blocked === true);
 add("A5_execution_allowed_now_false", fixture.audit_decision.A5_execution_allowed_now === false);
+add("governance_tooling_slice_helper_self_check", governanceToolingMaintenanceSliceSelfCheck.passed, governanceToolingMaintenanceSliceSelfCheck.failures);
+add("governance_tooling_slice_exact_current_files", !shouldValidateGovernanceToolingSlice || governanceToolingMaintenanceSliceReport.exact_slice_matches, governanceToolingMaintenanceSliceReport);
+add("governance_tooling_package_preview_script_only", !shouldValidateGovernanceToolingSlice || !changedFiles.includes("package.json") || governanceToolingMaintenanceSliceReport.package_change_allowed, governanceToolingMaintenanceSliceReport.package_change_mode);
 
 add("branch", branch === fixture.git_expectation.branch, branch);
-add("ahead_count_or_clean_post_commit", isCleanPostCommit || ahead === fixture.git_expectation.ahead_count, String(ahead));
+add("ahead_count_or_clean_post_commit", acceptsCurrentGitShape || ahead === fixture.git_expectation.ahead_count, String(ahead));
 add("behind_count", behind === fixture.git_expectation.behind_count, String(behind));
 add("staged_file_count", stagedFiles.length === fixture.git_expectation.staged_file_count, String(stagedFiles.length));
 add("tracked_modified_count_or_allowed_post_commit_state", acceptsCurrentGitShape || modifiedTracked.length === fixture.git_expectation.tracked_modified_file_count, String(modifiedTracked.length));
@@ -128,7 +150,7 @@ add("untracked_file_count_or_allowed_post_commit_state", acceptsCurrentGitShape 
 add("exact_changed_file_count_or_allowed_post_commit_state", acceptsCurrentGitShape || changedFiles.length === fixture.git_expectation.exact_changed_file_count, String(changedFiles.length));
 add("requirement_groups_total_matches", requirementGroupsTotal === fixture.git_expectation.exact_changed_file_count, String(requirementGroupsTotal));
 add("exact_changed_files_match_or_allowed_post_commit_state", acceptsCurrentGitShape || JSON.stringify(changedFiles) === JSON.stringify(exactExpected));
-add("post_commit_proof_exists_or_pending_slice", postCommitProof !== null || JSON.stringify(changedFiles) === JSON.stringify(exactExpected) || isValidatorSelfMaintenancePatch, postCommitProof?.hash || null);
+add("post_commit_proof_exists_or_pending_slice", postCommitProof !== null || currentPendingSliceEvidence, currentPendingSliceEvidence ? "current_pending_slice_evidence" : postCommitProof?.hash || null);
 add("no_staged_files_now", stagedFiles.length === 0);
 
 add("loop_contract_route_aligned", loopContract.route_alignment_status === "capsule_archive_review_bridge_aligned_authorization_pending");
@@ -192,13 +214,17 @@ const output = {
   post_commit_proof_commit: postCommitProof?.hash || null,
   post_commit_proof_file_count: postCommitProof?.file_count || 0,
   post_commit_files_match_expected: headMatchesExpectedPostCommit,
+  governance_tooling_maintenance_slice_report: governanceToolingMaintenanceSliceReport,
   git_validation_mode: isCleanSyncedPostCommit
     ? "clean_synced_post_commit"
     : isCleanLocalAheadPostCommit
       ? "clean_local_ahead_post_commit"
       : isValidatorSelfMaintenancePatch
         ? "validator_self_maintenance_patch"
-        : "pending_exact_file_slice",
+        : isGovernanceToolingMaintenanceSlice
+          ? "governance_tooling_maintenance_slice"
+          : "pending_exact_file_slice",
+  governance_tooling_maintenance_slice: isGovernanceToolingMaintenanceSlice,
   goal_level_local_readiness_verified: fixture.audit_decision.goal_level_local_readiness_verified,
   local_commit_ready_after_explicit_human_review: fixture.audit_decision.local_commit_ready_after_explicit_human_review,
   authorization_ready_for_future_A5: fixture.audit_decision.authorization_ready_for_future_A5,

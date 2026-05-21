@@ -680,6 +680,42 @@ input[type="range"] {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.lifecycle-search-row {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.lifecycle-search-row input {
+  width: 100%;
+  min-width: 0;
+}
+
+.lifecycle-filter-notice {
+  min-height: 0;
+}
+
+.lifecycle-filter-notice-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid rgba(79, 214, 255, 0.36);
+  border-radius: 8px;
+  color: var(--muted);
+  background: rgba(79, 214, 255, 0.07);
+}
+
+.lifecycle-filter-notice-card strong {
+  color: var(--text);
+}
+
+.lifecycle-filter-notice-card button {
+  white-space: nowrap;
+}
+
 .artifact-lifecycle-card {
   display: grid;
   gap: 10px;
@@ -697,6 +733,24 @@ input[type="range"] {
 
 .artifact-lifecycle-card.blocked {
   border-left-color: var(--amber);
+}
+
+.artifact-lifecycle-card.is-selected {
+  border-color: rgba(79, 214, 255, 0.72);
+  box-shadow: 0 0 0 1px rgba(79, 214, 255, 0.28), 0 16px 36px rgba(79, 214, 255, 0.08);
+}
+
+.artifact-lifecycle-card:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+.artifact-lifecycle-empty {
+  padding: 14px;
+  border: 1px dashed rgba(255, 184, 77, 0.45);
+  border-radius: 8px;
+  color: var(--muted);
+  background: rgba(255, 184, 77, 0.06);
 }
 
 .artifact-prompt-completion-card {

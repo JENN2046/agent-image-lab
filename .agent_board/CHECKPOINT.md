@@ -1,5 +1,146 @@
 ---
 
+---
+
+## Checkpoint - Agent Board Resume Compaction Guard v1
+
+```text
+phase: agent_board_resume_compaction_guard_v1
+phase_id: agent_board_resume_compaction_guard_v1
+status: completed_validated_uncommitted
+completed:
+- added a local validator proving compact resume surfaces cite current phase, completed traceability bridge, no-push state, and next Red boundary
+- verified amber_packet_to_receipt_traceability_v1 remains the completed local traceability bridge
+- advanced Evolution Engine to future_real_provider_cost_boundary_v1 as an explicitly gated Red boundary
+latest_validation:
+- node scripts/validate_autopilot_agent_board_resume_compaction_guard.js
+not_performed:
+- no push
+- no tag/release/deploy
+- no provider/plugin/API/image generation
+- no DailyNote/VCP memory write
+- no real manifest/VCPChat/VCPToolBox read
+- no dependency change
+- no runtime probe
+- no secret read
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
+push_status: not_performed
+recommended_next: future_real_provider_cost_boundary_v1
+```
+
+---
+
+## Checkpoint - Amber Packet To Receipt Traceability v1
+
+```text
+phase: amber_packet_to_receipt_traceability_v1
+phase_id: amber_packet_to_receipt_traceability_v1
+status: completed_validated_uncommitted
+completed:
+- added a local validator proving Amber packet identity, call budget, write budget, write allowlist, validation, rollback, cost, registry, and guard evidence trace to the receipt
+- added negative cases for unpreflighted task ids, budget drift, out-of-allowlist writes, validation drift, cost overrun, rollback drift, secret boundary weakening, and side-effect guard flips
+- corrected the Amber dry-run packet allowlist so receipt files_written is fully covered by exact_allowed_paths_or_objects
+- advanced Evolution Engine beyond completed packet-to-receipt traceability
+latest_validation:
+- node scripts/validate_amber_dry_run_execution_loop.js
+- node scripts/validate_autopilot_amber_action_packet_preflight.js
+- node scripts/validate_autopilot_amber_packet_to_receipt_traceability.js
+- node scripts/validate_autopilot_evolution_engine.js
+- node scripts/validate_complete_autopilot_readiness_gate.js
+- node scripts/validate_autopilot_readiness_receipt_registry_cross_claims.js
+not_performed:
+- no push
+- no tag/release/deploy
+- no provider/plugin/API/image generation
+- no DailyNote/VCP memory write
+- no real manifest/VCPChat/VCPToolBox read
+- no dependency change
+- no runtime probe
+- no secret read
+recommended_next: agent_board_resume_compaction_guard_v1
+```
+
+---
+
+## Checkpoint - Smart Autopilot Handfeel Guard Tightening v1
+
+```text
+phase: smart_autopilot_handfeel_guard_tightening_v1
+phase_id: smart_autopilot_handfeel_guard_tightening_v1
+status: completed_validated_uncommitted
+completed:
+- centralized governance maintenance slice checks in scripts/lib/governance_tooling_maintenance_slice.js
+- changed governance maintenance acceptance from broad allowlist to exact current 39-file slice matching
+- restricted package.json acceptance to adding scripts.preview:review-console only
+- added helper self-check coverage for env rejection, missing-file rejection, dependency-change rejection, and arbitrary-script rejection
+- added Review Console notice and clear action when the selected artifact is hidden by lifecycle filter/search
+- fixed code-review finding so governance-only exact-slice checks no longer apply to unrelated exact-file or validator self-maintenance modes
+- fixed code-review finding so Review Console search results are recorded separately from the base sort/filter invariant
+latest_validation:
+- node --check review_console/static_prototype/app.js
+- node --check scripts/lib/governance_tooling_maintenance_slice.js
+- node --check scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js
+- node --check scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js
+- node --check scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js
+- node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js
+- node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js
+- node scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js
+- node scripts/validate_v14_171_review_console_lifecycle_state_local_filter_controls.js
+- node scripts/validate_v14_182_review_console_artifact_evidence_status_sort_filter_interaction.js
+- npm run validate:review-console-static
+- git diff --check
+- powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+not_performed:
+- no push
+- no tag/release/deploy
+- no provider/plugin/API/image generation
+- no DailyNote/VCP memory write
+- no real manifest/VCPChat/VCPToolBox read
+- no dependency change
+- no runtime probe
+- no secret read
+recommended_next: owner_review_or_exact_file_local_commit_if_requested
+```
+
+---
+
+## Checkpoint - Readiness Receipt Registry Cross Claims v1
+
+```text
+phase: readiness_receipt_registry_cross_claims_v1
+phase_id: readiness_receipt_registry_cross_claims_v1
+status: completed_validated_uncommitted
+completed:
+- compiled mission through Goal Decomposition Runtime
+- selected add_readiness_receipt_registry_cross_claim_validator as the highest-value safe task
+- added a local validator that binds complete readiness claims to a registry entry and schema-valid receipt fixture
+- added negative cases for missing registry links, stale readiness ids, stale envelope/task ids, registry count drift, and overclaimed receipt scope
+- advanced Evolution Engine beyond the completed readiness-to-registry bridge
+latest_validation:
+- node --check scripts/validate_autopilot_readiness_receipt_registry_cross_claims.js
+- node scripts/validate_autopilot_readiness_receipt_registry_cross_claims.js
+- node scripts/validate_autopilot_evolution_engine.js
+- node scripts/validate_complete_autopilot_readiness_gate.js
+- node scripts/validate_autopilot_receipt_registry_negative_cases.js
+- git diff --check
+- powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+not_performed:
+- no push
+- no tag/release/deploy
+- no provider/plugin/API/image generation
+- no DailyNote/VCP memory write
+- no real manifest/VCPChat/VCPToolBox read
+- no dependency change
+- no runtime probe
+- no secret read
+commit_message: test: add readiness receipt registry cross claims
+recommended_next: amber_packet_to_receipt_traceability_v1
+```
+
+---
+
 ## Checkpoint - Amber Action Packet Preflight v1
 
 ```text

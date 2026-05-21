@@ -67,6 +67,9 @@ $requiredFiles = @(
   'scripts/validate_amber_dry_run_execution_loop.js',
   'scripts/detect_autopilot_evolution_gaps.js',
   'scripts/validate_autopilot_evolution_engine.js',
+  'scripts/validate_autopilot_readiness_receipt_registry_cross_claims.js',
+  'scripts/validate_autopilot_amber_packet_to_receipt_traceability.js',
+  'scripts/validate_autopilot_agent_board_resume_compaction_guard.js',
   'scripts/validate_complete_autopilot_readiness_gate.js',
   'scripts/validate_autopilot_false_readiness_negative_cases.js',
   'scripts/validate_autopilot_receipt_registry_negative_cases.js',
@@ -266,6 +269,9 @@ $requiredFiles = @(
   'docs/AUTOPILOT_NEXT_SAFE_TASK_ORCHESTRATOR.md',
   'docs/AUTOPILOT_AMBER_DRY_RUN_EXECUTION_LOOP.md',
   'docs/AUTOPILOT_AMBER_ACTION_PACKET_PREFLIGHT.md',
+  'docs/AUTOPILOT_READINESS_RECEIPT_REGISTRY_CROSS_CLAIMS.md',
+  'docs/AUTOPILOT_AMBER_PACKET_TO_RECEIPT_TRACEABILITY.md',
+  'docs/AUTOPILOT_AGENT_BOARD_RESUME_COMPACTION_GUARD.md',
   'docs/AUTOPILOT_EVOLUTION_ENGINE.md',
   'docs/AUTOPILOT_COMPLETE_READINESS_GATE.md',
   'docs/AUTOPILOT_FALSE_READINESS_NEGATIVE_CASES.md',
@@ -288,6 +294,9 @@ $requiredFiles = @(
   'tests/schema_examples/autopilot_execution_receipt.amber_dry_run_loop.example.json',
   'tests/schema_examples/autopilot_amber_action_packet.example.json',
   'tests/schema_examples/autopilot_amber_action_packet_negative_cases.example.json',
+  'tests/schema_examples/autopilot_readiness_receipt_registry_cross_claims.example.json',
+  'tests/schema_examples/autopilot_amber_packet_to_receipt_traceability.example.json',
+  'tests/schema_examples/autopilot_agent_board_resume_compaction_guard.example.json',
   'tests/schema_examples/autopilot_evolution_backlog.example.json',
   'tests/schema_examples/complete_autopilot_readiness_gate.example.json',
   'tests/schema_examples/autopilot_false_readiness_negative_cases.example.json',
@@ -11977,20 +11986,119 @@ process.exit(child.status || 0);
     if ($autopilotEvolutionEngine.passed -ne $true -or $autopilotEvolutionEngine.phase -ne 'autopilot_evolution_engine_v1') {
       Add-Failure "Autopilot Evolution Engine v1 validation must pass"
     }
-    if ($autopilotEvolutionEngine.deterministic_output_verified -ne $true -or $autopilotEvolutionEngine.fixture_verified -ne $true -or $autopilotEvolutionEngine.detected_gap_count -lt 4) {
+    if ($autopilotEvolutionEngine.deterministic_output_verified -ne $true -or $autopilotEvolutionEngine.fixture_verified -ne $true -or $autopilotEvolutionEngine.detected_gap_count -lt 1) {
       Add-Failure "Autopilot Evolution Engine must verify deterministic fixture output and multiple proposals"
     }
-    if ($autopilotEvolutionEngine.completed_capabilities -notcontains 'complete_autopilot_readiness_gate_v1') {
-      Add-Failure "Autopilot Evolution Engine must keep completed readiness gate in completed_capabilities"
+    if ($autopilotEvolutionEngine.completed_capabilities -notcontains 'complete_autopilot_readiness_gate_v1' -or $autopilotEvolutionEngine.completed_capabilities -notcontains 'readiness_receipt_registry_cross_claims_v1' -or $autopilotEvolutionEngine.completed_capabilities -notcontains 'amber_packet_to_receipt_traceability_v1' -or $autopilotEvolutionEngine.completed_capabilities -notcontains 'agent_board_resume_compaction_guard_v1') {
+      Add-Failure "Autopilot Evolution Engine must keep completed readiness capabilities in completed_capabilities"
     }
-    if ($autopilotEvolutionEngine.next_recommended_task -eq 'complete_autopilot_readiness_gate_v1' -or $autopilotEvolutionEngine.next_recommended_task_lane -notin @('Green', 'Amber') -or $autopilotEvolutionEngine.local_write_targets_only -ne $true -or $autopilotEvolutionEngine.red_lane_self_authorized -ne $false) {
-      Add-Failure "Autopilot Evolution Engine must advance beyond completed readiness gate, stay local, and avoid Red self-authorization"
+    if ($autopilotEvolutionEngine.next_recommended_task -in @('complete_autopilot_readiness_gate_v1', 'readiness_receipt_registry_cross_claims_v1', 'amber_packet_to_receipt_traceability_v1', 'agent_board_resume_compaction_guard_v1') -or $autopilotEvolutionEngine.next_recommended_task_lane -notin @('Green', 'Amber', 'Red') -or $autopilotEvolutionEngine.local_write_targets_only -ne $true -or $autopilotEvolutionEngine.red_lane_self_authorized -ne $false) {
+      Add-Failure "Autopilot Evolution Engine must advance beyond completed readiness capabilities, stay local, and avoid Red self-authorization"
     }
     if ($autopilotEvolutionEngine.provider_contact_performed -ne $false -or $autopilotEvolutionEngine.plugin_call_performed -ne $false -or $autopilotEvolutionEngine.api_call_performed -ne $false -or $autopilotEvolutionEngine.image_generation_performed -ne $false -or $autopilotEvolutionEngine.DailyNote_write_performed -ne $false -or $autopilotEvolutionEngine.VCP_memory_write_performed -ne $false) {
       Add-Failure "Autopilot Evolution Engine must not perform provider, plugin, API, image, DailyNote, or VCP memory actions"
     }
     if ($autopilotEvolutionEngine.real_manifest_read_performed -ne $false -or $autopilotEvolutionEngine.real_vcpchat_read_performed -ne $false -or $autopilotEvolutionEngine.real_vcptoolbox_read_performed -ne $false -or $autopilotEvolutionEngine.dependency_change_performed -ne $false -or $autopilotEvolutionEngine.runtime_probe_performed -ne $false -or $autopilotEvolutionEngine.secret_value_read_performed -ne $false -or $autopilotEvolutionEngine.push_tag_release_deploy_performed -ne $false) {
       Add-Failure "Autopilot Evolution Engine must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
+    }
+  }
+
+  $autopilotReadinessReceiptRegistryCrossClaimsOutput = & node (Join-Path $Root 'scripts/validate_autopilot_readiness_receipt_registry_cross_claims.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Autopilot readiness receipt registry cross-claim validation exited with failure"
+  } else {
+    $autopilotReadinessReceiptRegistryCrossClaims = ($autopilotReadinessReceiptRegistryCrossClaimsOutput -join "`n") | ConvertFrom-Json
+    if ($autopilotReadinessReceiptRegistryCrossClaims.passed -ne $true -or $autopilotReadinessReceiptRegistryCrossClaims.phase -ne 'readiness_receipt_registry_cross_claims_v1') {
+      Add-Failure "Autopilot readiness receipt registry cross-claim validation must pass"
+    }
+    if ($autopilotReadinessReceiptRegistryCrossClaims.deterministic_output_verified -ne $true -or $autopilotReadinessReceiptRegistryCrossClaims.fixture_verified -ne $true) {
+      Add-Failure "Autopilot readiness receipt registry cross-claim validation must verify deterministic fixture output"
+    }
+    if ($autopilotReadinessReceiptRegistryCrossClaims.selected_task -ne 'add_readiness_receipt_registry_cross_claim_validator' -or $autopilotReadinessReceiptRegistryCrossClaims.selected_task_lane -ne 'Green' -or $autopilotReadinessReceiptRegistryCrossClaims.candidate_gap_count -lt 4) {
+      Add-Failure "Autopilot readiness receipt registry cross-claim validation must select exactly one Green task from at least four gaps"
+    }
+    if ($autopilotReadinessReceiptRegistryCrossClaims.readiness_claim_registry_bridge_verified -ne $true -or $autopilotReadinessReceiptRegistryCrossClaims.receipt_registry_entry_verified -ne $true -or $autopilotReadinessReceiptRegistryCrossClaims.schema_valid_receipt_link_verified -ne $true) {
+      Add-Failure "Autopilot readiness receipt registry cross-claim validation must bridge readiness, registry, and schema-valid receipt evidence"
+    }
+    if (-not $autopilotReadinessReceiptRegistryCrossClaims.mapped_receipt_id -or -not $autopilotReadinessReceiptRegistryCrossClaims.registry_entry_path -or $autopilotReadinessReceiptRegistryCrossClaims.evolution_next_recommended_task -eq 'readiness_receipt_registry_cross_claims_v1') {
+      Add-Failure "Autopilot readiness receipt registry cross-claim validation must map a receipt and advance the evolution backlog"
+    }
+    if ($autopilotReadinessReceiptRegistryCrossClaims.negative_case_count -lt 6 -or $autopilotReadinessReceiptRegistryCrossClaims.caught_negative_case_count -ne $autopilotReadinessReceiptRegistryCrossClaims.negative_case_count -or $autopilotReadinessReceiptRegistryCrossClaims.all_negative_cases_caught -ne $true) {
+      Add-Failure "Autopilot readiness receipt registry cross-claim validation must catch every negative case"
+    }
+    if ($autopilotReadinessReceiptRegistryCrossClaims.lower_priority_candidates.Count -lt 2 -or $autopilotReadinessReceiptRegistryCrossClaims.red_blocked_candidates -notcontains 'future_real_provider_cost_boundary') {
+      Add-Failure "Autopilot readiness receipt registry cross-claim validation must explain lower-priority and Red-blocked candidates"
+    }
+    if ($autopilotReadinessReceiptRegistryCrossClaims.provider_contact_performed -ne $false -or $autopilotReadinessReceiptRegistryCrossClaims.plugin_call_performed -ne $false -or $autopilotReadinessReceiptRegistryCrossClaims.api_call_performed -ne $false -or $autopilotReadinessReceiptRegistryCrossClaims.image_generation_performed -ne $false -or $autopilotReadinessReceiptRegistryCrossClaims.DailyNote_write_performed -ne $false -or $autopilotReadinessReceiptRegistryCrossClaims.VCP_memory_write_performed -ne $false) {
+      Add-Failure "Autopilot readiness receipt registry cross-claim validation must not perform provider, plugin, API, image, DailyNote, or VCP memory actions"
+    }
+    if ($autopilotReadinessReceiptRegistryCrossClaims.real_manifest_read_performed -ne $false -or $autopilotReadinessReceiptRegistryCrossClaims.real_vcpchat_read_performed -ne $false -or $autopilotReadinessReceiptRegistryCrossClaims.real_vcptoolbox_read_performed -ne $false -or $autopilotReadinessReceiptRegistryCrossClaims.dependency_change_performed -ne $false -or $autopilotReadinessReceiptRegistryCrossClaims.runtime_probe_performed -ne $false -or $autopilotReadinessReceiptRegistryCrossClaims.secret_value_read_performed -ne $false -or $autopilotReadinessReceiptRegistryCrossClaims.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Autopilot readiness receipt registry cross-claim validation must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
+    }
+  }
+
+  $autopilotAmberPacketToReceiptTraceabilityOutput = & node (Join-Path $Root 'scripts/validate_autopilot_amber_packet_to_receipt_traceability.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Autopilot Amber packet-to-receipt traceability validation exited with failure"
+  } else {
+    $autopilotAmberPacketToReceiptTraceability = ($autopilotAmberPacketToReceiptTraceabilityOutput -join "`n") | ConvertFrom-Json
+    if ($autopilotAmberPacketToReceiptTraceability.passed -ne $true -or $autopilotAmberPacketToReceiptTraceability.phase -ne 'amber_packet_to_receipt_traceability_v1') {
+      Add-Failure "Autopilot Amber packet-to-receipt traceability validation must pass"
+    }
+    if ($autopilotAmberPacketToReceiptTraceability.deterministic_output_verified -ne $true -or $autopilotAmberPacketToReceiptTraceability.fixture_verified -ne $true) {
+      Add-Failure "Autopilot Amber packet-to-receipt traceability validation must verify deterministic fixture output"
+    }
+    if ($autopilotAmberPacketToReceiptTraceability.selected_task -ne 'add_amber_packet_to_receipt_traceability_validator' -or $autopilotAmberPacketToReceiptTraceability.selected_task_lane -ne 'Green' -or $autopilotAmberPacketToReceiptTraceability.candidate_gap_count -lt 3) {
+      Add-Failure "Autopilot Amber packet-to-receipt traceability validation must select exactly one Green task from at least three gaps"
+    }
+    if ($autopilotAmberPacketToReceiptTraceability.task_id_trace_verified -ne $true -or $autopilotAmberPacketToReceiptTraceability.receipt_files_covered_by_packet -ne $true -or $autopilotAmberPacketToReceiptTraceability.validation_trace_verified -ne $true -or $autopilotAmberPacketToReceiptTraceability.rollback_trace_verified -ne $true -or $autopilotAmberPacketToReceiptTraceability.cost_trace_verified -ne $true -or $autopilotAmberPacketToReceiptTraceability.registry_trace_verified -ne $true) {
+      Add-Failure "Autopilot Amber packet-to-receipt traceability validation must bridge packet, receipt, validation, rollback, cost, and registry evidence"
+    }
+    if (-not $autopilotAmberPacketToReceiptTraceability.packet_id -or -not $autopilotAmberPacketToReceiptTraceability.receipt_id -or -not $autopilotAmberPacketToReceiptTraceability.registry_entry_path) {
+      Add-Failure "Autopilot Amber packet-to-receipt traceability validation must identify packet, receipt, and registry entry"
+    }
+    if ($autopilotAmberPacketToReceiptTraceability.negative_case_count -lt 8 -or $autopilotAmberPacketToReceiptTraceability.caught_negative_case_count -ne $autopilotAmberPacketToReceiptTraceability.negative_case_count -or $autopilotAmberPacketToReceiptTraceability.all_negative_cases_caught -ne $true) {
+      Add-Failure "Autopilot Amber packet-to-receipt traceability validation must catch every negative case"
+    }
+    if ($autopilotAmberPacketToReceiptTraceability.lower_priority_candidates.Count -lt 1 -or $autopilotAmberPacketToReceiptTraceability.red_blocked_candidates -notcontains 'future_real_provider_cost_boundary') {
+      Add-Failure "Autopilot Amber packet-to-receipt traceability validation must explain lower-priority and Red-blocked candidates"
+    }
+    if ($autopilotAmberPacketToReceiptTraceability.provider_contact_performed -ne $false -or $autopilotAmberPacketToReceiptTraceability.plugin_call_performed -ne $false -or $autopilotAmberPacketToReceiptTraceability.api_call_performed -ne $false -or $autopilotAmberPacketToReceiptTraceability.image_generation_performed -ne $false -or $autopilotAmberPacketToReceiptTraceability.DailyNote_write_performed -ne $false -or $autopilotAmberPacketToReceiptTraceability.VCP_memory_write_performed -ne $false) {
+      Add-Failure "Autopilot Amber packet-to-receipt traceability validation must not perform provider, plugin, API, image, DailyNote, or VCP memory actions"
+    }
+    if ($autopilotAmberPacketToReceiptTraceability.real_manifest_read_performed -ne $false -or $autopilotAmberPacketToReceiptTraceability.real_vcpchat_read_performed -ne $false -or $autopilotAmberPacketToReceiptTraceability.real_vcptoolbox_read_performed -ne $false -or $autopilotAmberPacketToReceiptTraceability.dependency_change_performed -ne $false -or $autopilotAmberPacketToReceiptTraceability.runtime_probe_performed -ne $false -or $autopilotAmberPacketToReceiptTraceability.secret_value_read_performed -ne $false -or $autopilotAmberPacketToReceiptTraceability.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Autopilot Amber packet-to-receipt traceability validation must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
+    }
+  }
+
+  $autopilotAgentBoardResumeCompactionGuardOutput = & node (Join-Path $Root 'scripts/validate_autopilot_agent_board_resume_compaction_guard.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Autopilot agent board resume compaction guard validation exited with failure"
+  } else {
+    $autopilotAgentBoardResumeCompactionGuard = ($autopilotAgentBoardResumeCompactionGuardOutput -join "`n") | ConvertFrom-Json
+    if ($autopilotAgentBoardResumeCompactionGuard.passed -ne $true -or $autopilotAgentBoardResumeCompactionGuard.phase -ne 'agent_board_resume_compaction_guard_v1') {
+      Add-Failure "Autopilot agent board resume compaction guard validation must pass"
+    }
+    if ($autopilotAgentBoardResumeCompactionGuard.deterministic_output_verified -ne $true -or $autopilotAgentBoardResumeCompactionGuard.fixture_verified -ne $true) {
+      Add-Failure "Autopilot agent board resume compaction guard validation must verify deterministic fixture output"
+    }
+    if ($autopilotAgentBoardResumeCompactionGuard.selected_task -ne 'add_agent_board_resume_compaction_guard_validator' -or $autopilotAgentBoardResumeCompactionGuard.selected_task_lane -ne 'Green') {
+      Add-Failure "Autopilot agent board resume compaction guard validation must select the Green resume guard task"
+    }
+    if ($autopilotAgentBoardResumeCompactionGuard.resume_surface_count -lt 6 -or $autopilotAgentBoardResumeCompactionGuard.all_resume_surfaces_current -ne $true) {
+      Add-Failure "Autopilot agent board resume compaction guard validation must keep all resume surfaces current"
+    }
+    if ($autopilotAgentBoardResumeCompactionGuard.completed_traceability_phase -ne 'amber_packet_to_receipt_traceability_v1' -or $autopilotAgentBoardResumeCompactionGuard.next_recommended_task -ne 'future_real_provider_cost_boundary_v1' -or $autopilotAgentBoardResumeCompactionGuard.next_recommended_task_lane -ne 'Red' -or $autopilotAgentBoardResumeCompactionGuard.red_boundary_requires_authorization -ne $true) {
+      Add-Failure "Autopilot agent board resume compaction guard validation must close traceability and surface the next Red boundary"
+    }
+    if ($autopilotAgentBoardResumeCompactionGuard.negative_case_count -lt 5 -or $autopilotAgentBoardResumeCompactionGuard.caught_negative_case_count -ne $autopilotAgentBoardResumeCompactionGuard.negative_case_count -or $autopilotAgentBoardResumeCompactionGuard.all_negative_cases_caught -ne $true) {
+      Add-Failure "Autopilot agent board resume compaction guard validation must catch every negative case"
+    }
+    if ($autopilotAgentBoardResumeCompactionGuard.provider_contact_performed -ne $false -or $autopilotAgentBoardResumeCompactionGuard.plugin_call_performed -ne $false -or $autopilotAgentBoardResumeCompactionGuard.api_call_performed -ne $false -or $autopilotAgentBoardResumeCompactionGuard.image_generation_performed -ne $false -or $autopilotAgentBoardResumeCompactionGuard.DailyNote_write_performed -ne $false -or $autopilotAgentBoardResumeCompactionGuard.VCP_memory_write_performed -ne $false) {
+      Add-Failure "Autopilot agent board resume compaction guard validation must not perform provider, plugin, API, image, DailyNote, or VCP memory actions"
+    }
+    if ($autopilotAgentBoardResumeCompactionGuard.real_manifest_read_performed -ne $false -or $autopilotAgentBoardResumeCompactionGuard.real_vcpchat_read_performed -ne $false -or $autopilotAgentBoardResumeCompactionGuard.real_vcptoolbox_read_performed -ne $false -or $autopilotAgentBoardResumeCompactionGuard.dependency_change_performed -ne $false -or $autopilotAgentBoardResumeCompactionGuard.runtime_probe_performed -ne $false -or $autopilotAgentBoardResumeCompactionGuard.secret_value_read_performed -ne $false -or $autopilotAgentBoardResumeCompactionGuard.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Autopilot agent board resume compaction guard validation must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
     }
   }
 

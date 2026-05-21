@@ -37,23 +37,35 @@ function main() {
   assertDeepEqual(actual, expected, "Evolution Engine fixture");
   assert(actual.phase === "autopilot_evolution_engine_v1", "phase mismatch");
   assert(actual.all_source_inputs_present === true, "all known local inputs must exist");
-  assert(actual.detected_gap_count >= 4, "expected multiple evolution proposals");
+  assert(actual.detected_gap_count >= 1, "expected at least one remaining evolution proposal or boundary");
   assert(actual.detected_gap_count === actual.proposals.length, "detected_gap_count must count only future proposals/gaps");
   assert(actual.receipt_registry_count >= 4, "receipt registry should include existing Amber receipts");
   assert(Array.isArray(actual.completed_capabilities), "completed_capabilities must be present");
   assert(actual.completed_capabilities.some((capability) => capability.capability_id === "complete_autopilot_readiness_gate_v1"), "completed readiness gate must be recorded as completed capability evidence");
   assert(actual.completed_capabilities.some((capability) => capability.capability_id === "receipt_registry_negative_cases_v1"), "receipt registry negative cases must be recorded as completed capability evidence");
   assert(actual.completed_capabilities.some((capability) => capability.capability_id === "amber_action_packet_preflight_v1"), "Amber action packet preflight must be recorded as completed capability evidence");
+  assert(actual.completed_capabilities.some((capability) => capability.capability_id === "readiness_receipt_registry_cross_claims_v1"), "readiness receipt registry cross claims must be recorded as completed capability evidence");
+  assert(actual.completed_capabilities.some((capability) => capability.capability_id === "amber_packet_to_receipt_traceability_v1"), "Amber packet-to-receipt traceability must be recorded as completed capability evidence");
+  assert(actual.completed_capabilities.some((capability) => capability.capability_id === "agent_board_resume_compaction_guard_v1"), "Agent board resume compaction guard must be recorded as completed capability evidence");
   assert(actual.proposals.every((proposal) => proposal.proposal_id !== "complete_autopilot_readiness_gate_v1"), "future proposals must not include completed readiness gate");
   assert(actual.proposals.every((proposal) => proposal.proposal_id !== "receipt_registry_negative_cases_v1"), "future proposals must not include completed receipt registry negative cases");
   assert(actual.proposals.every((proposal) => proposal.proposal_id !== "amber_action_packet_preflight_v1"), "future proposals must not include completed Amber action packet preflight");
+  assert(actual.proposals.every((proposal) => proposal.proposal_id !== "readiness_receipt_registry_cross_claims_v1"), "future proposals must not include completed readiness receipt registry cross claims");
+  assert(actual.proposals.every((proposal) => proposal.proposal_id !== "amber_packet_to_receipt_traceability_v1"), "future proposals must not include completed Amber packet-to-receipt traceability");
+  assert(actual.proposals.every((proposal) => proposal.proposal_id !== "agent_board_resume_compaction_guard_v1"), "future proposals must not include completed agent board resume compaction guard");
   assert(actual.next_recommended_task !== "complete_autopilot_readiness_gate_v1", "next task must advance beyond completed readiness gate");
   assert(actual.next_recommended_task !== "receipt_registry_negative_cases_v1", "next task must advance beyond completed receipt registry negative cases");
   assert(actual.next_recommended_task !== "amber_action_packet_preflight_v1", "next task must advance beyond completed Amber action packet preflight");
+  assert(actual.next_recommended_task !== "readiness_receipt_registry_cross_claims_v1", "next task must advance beyond completed readiness receipt registry cross claims");
+  assert(actual.next_recommended_task !== "amber_packet_to_receipt_traceability_v1", "next task must advance beyond completed Amber packet-to-receipt traceability");
+  assert(actual.next_recommended_task !== "agent_board_resume_compaction_guard_v1", "next task must advance beyond completed agent board resume compaction guard");
   assert(!actual.completed_capabilities.some((capability) => capability.capability_id === actual.next_recommended_task), "next recommended task must not already be completed");
   const nextProposal = actual.proposals.find((proposal) => proposal.proposal_id === actual.next_recommended_task);
   assert(nextProposal, "next recommended task must reference an existing proposal");
-  assert(["Green", "Amber"].includes(nextProposal.lane), "next recommended task must be Green or Amber-safe local hardening");
+  assert(
+    ["Green", "Amber"].includes(nextProposal.lane) || (nextProposal.lane === "Red" && nextProposal.required_authorization_or_action),
+    "next recommended task must be Green/Amber-safe local hardening or an explicitly gated Red boundary"
+  );
   assert(actual.local_write_targets_only === true, "evolution proposals must write only local targets");
   assert(actual.red_lane_self_authorized === false, "Red proposals must not be self-authorized");
   assert(actual.proposals.some((proposal) => proposal.lane === "Red" && proposal.required_authorization_or_action), "Red proposal must require explicit authorization/action");

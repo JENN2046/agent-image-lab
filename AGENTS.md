@@ -264,6 +264,86 @@ stale_risk: true | false
 
 No file edit may begin until the intake is complete.
 
+### Light Intake For Small Green Tasks
+
+After one full Autopilot Rule Intake has been completed in the current session,
+Codex may use a Light Intake for a later task only when every condition below is
+true:
+
+```text
+task intent is local implementation, local draft, review, or documentation
+goal is clear enough to state in one sentence
+scope is one local module or a small exact file allowlist
+work stays inside the project root
+work is Green Lane only
+no provider/plugin/API/image/DailyNote/VCP memory action is required
+no real manifest/VCPChat/VCPToolBox read is required
+no dependency add/remove/upgrade/downgrade is required
+no secret, token, cookie, .env, or private raw data access is required
+no production executable integration, release, deploy, tag, commit, or push is required
+existing dirty worktree entries do not overlap the exact task allowlist
+a narrow local validation path exists
+```
+
+Light Intake must still confirm:
+
+```text
+active_autonomy_model: Smart Standing Authorization v3
+lane: Green
+exact_file_allowlist: <paths>
+blocked_red_items: <items>
+dirty_worktree_overlap: false
+validation_plan: <commands or review method>
+no git add . / no push / no external system summarized: true
+```
+
+If any condition is false or uncertain, Codex must upgrade to full intake and
+normal task tracking before editing.
+
+The following signals always upgrade a task out of Light Intake:
+
+```text
+cross-module change
+AGENTS / governance / roadmap / .agent_board authority change
+external system or runtime integration
+provider/plugin/API/image/DailyNote/VCP memory action
+dependency manifest or lockfile change
+secret-sensitive path
+unclear validation
+dirty target file not created by the current task
+ambiguous product scope such as "optimize the whole console"
+```
+
+Light Intake reduces ceremony only. It does not weaken Red Lane stops, exact-file
+staging rules, validation requirements, secret handling, or push authorization.
+
+### Dirty Worktree Isolation Protocol
+
+If the worktree is dirty before a task begins, Codex must classify dirty entries
+against the exact task allowlist:
+
+```text
+outside_allowlist: record and avoid
+inside_allowlist: inspect before editing; stop if ownership is unclear
+.agent_board_dirty_before_task: read for intake, but do not update unless the task explicitly targets .agent_board or the owner authorizes merging status surfaces
+untracked_outside_allowlist: ignore and preserve
+```
+
+Pre-existing dirty files outside the allowlist do not block a small local task.
+They must not be staged, rewritten, reformatted, deleted, or summarized as new
+work. Closeout must separate `changed_by_this_task` from
+`pre_existing_dirty_worktree`.
+
+If a task changes README, roadmap, docs phase records, `recommended_next`, or
+status surfaces but `.agent_board` was already dirty before the task and is not
+explicitly in scope, the closeout must include:
+
+```yaml
+agent_board_updated: false
+reason: pre-existing .agent_board dirty state not owned by this task
+stale_risk: true
+```
+
 ---
 
 ## 1. Project Identity
@@ -1350,7 +1430,29 @@ Any task that changes the core visual laws must stop and ask for user confirmati
 
 ## 14. Post-task Closeout Format
 
-Every automatic task must end with:
+Small Green tasks that passed the Light Intake criteria may use this compact
+closeout:
+
+```text
+Status:
+Changed:
+Validation:
+Not validated:
+Boundary:
+Next:
+Chinese task summary:
+```
+
+`Chinese task summary:` is a mandatory final footer for any task or goal
+closeout. It must not be removed for brevity, even when using Light Intake,
+compact closeout, or a highly concise final answer.
+
+Full closeout is still required for gate-style work, Amber/A5 work, governance
+authority changes, `.agent_board` updates, commits, tags, pushes, release or
+deployment preflights, dependency changes, cross-module work, dirty-target
+conflicts, failed validation, or any task that did not qualify for Light Intake.
+
+Every other automatic task must end with:
 
 ```text
 Status: COMPLETED_VALIDATED / BLOCKED / FAILED
@@ -1395,6 +1497,22 @@ Chinese task summary:
 - append a concise Chinese task summary at the end of every user-facing final response
 - keep it short, plain, and specific to what was done, validated, blocked, or left next
 ```
+
+Before sending any task or goal closeout, Codex must run this final-output guard:
+
+```text
+status_reported: true
+changed_or_no_change_reported: true
+validation_reported: true
+not_validated_or_blocked_reported_when_applicable: true
+boundary_reported: true
+Chinese task summary footer_present: true
+Chinese task summary footer_is_last_closeout_item: true
+```
+
+If the footer is missing, add it before responding. This guard is a reporting
+requirement only; it does not authorize extra edits, staging, commits, pushes,
+external calls, or validation reruns.
 
 For gate-style work, closeout YAML must also include:
 

@@ -6,6 +6,150 @@ remain the source of truth.
 
 ---
 
+---
+
+## agent_board_resume_compaction_guard_v1
+
+```yaml
+task_id: agent_board_resume_compaction_guard_v1
+lane: Green
+action_performed: local_agent_board_resume_compaction_guard_validation
+selected_task: add_agent_board_resume_compaction_guard_validator
+resume_surface_count: 6
+completed_traceability_phase: amber_packet_to_receipt_traceability_v1
+next_recommended_task: future_real_provider_cost_boundary_v1
+next_recommended_task_lane: Red
+red_boundary_requires_authorization: true
+result: completed_validated_uncommitted
+push_status: not_performed
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+dependency_change_performed: false
+runtime_probe_performed: false
+secret_value_read_performed: false
+push_tag_release_deploy_performed: false
+```
+
+---
+
+## amber_packet_to_receipt_traceability_v1
+
+```yaml
+task_id: amber_packet_to_receipt_traceability_v1
+lane: Green
+action_performed: local_amber_packet_to_receipt_traceability_validation
+selected_task: add_amber_packet_to_receipt_traceability_validator
+candidate_gap_count: 3
+negative_case_count: 8
+caught_negative_case_count: 8
+all_negative_cases_caught: true
+task_id_trace_verified: true
+receipt_files_covered_by_packet: true
+validation_trace_verified: true
+rollback_trace_verified: true
+cost_trace_verified: true
+registry_trace_verified: true
+validator_ref: scripts/validate_autopilot_amber_packet_to_receipt_traceability.js
+fixture_ref: tests/schema_examples/autopilot_amber_packet_to_receipt_traceability.example.json
+result: completed_validated_uncommitted
+next_recommended_task: agent_board_resume_compaction_guard_v1
+push_status: not_performed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+dependency_change_performed: false
+runtime_probe_performed: false
+secret_value_read_performed: false
+push_tag_release_deploy_performed: false
+```
+
+---
+
+## smart_autopilot_handfeel_guard_tightening_v1
+
+```yaml
+task_id: smart_autopilot_handfeel_guard_tightening_v1
+lane: Green
+action_performed: local_validator_and_static_review_console_handfeel_hardening
+selected_tasks:
+  - tighten_governance_tooling_maintenance_slice_validator
+  - improve_review_console_filter_hidden_selection_feedback
+exact_slice_validation: true
+expected_governance_slice_file_count: 39
+package_json_allowed_change: scripts.preview:review-console only
+helper_ref: scripts/lib/governance_tooling_maintenance_slice.js
+review_console_filter_notice_added: true
+validation_status: completed_validated_uncommitted
+result: completed_validated_uncommitted
+next_recommended_task: owner_review_or_exact_file_local_commit_if_requested
+push_status: not_performed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+dependency_change_performed: false
+runtime_probe_performed: false
+secret_value_read_performed: false
+push_tag_release_deploy_performed: false
+```
+
+---
+
+## readiness_receipt_registry_cross_claims_v1
+
+```yaml
+task_id: readiness_receipt_registry_cross_claims_v1
+lane: Green
+action_performed: local_readiness_to_registry_cross_claim_validation
+selected_task: add_readiness_receipt_registry_cross_claim_validator
+candidate_gap_count: 4
+negative_case_count: 7
+caught_negative_case_count: 7
+all_negative_cases_caught: true
+readiness_claim_registry_bridge_verified: true
+receipt_registry_entry_verified: true
+schema_valid_receipt_link_verified: true
+validator_ref: scripts/validate_autopilot_readiness_receipt_registry_cross_claims.js
+fixture_ref: tests/schema_examples/autopilot_readiness_receipt_registry_cross_claims.example.json
+result: completed_validated_uncommitted
+next_recommended_task: amber_packet_to_receipt_traceability_v1
+push_status: not_performed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+dependency_change_performed: false
+runtime_probe_performed: false
+secret_value_read_performed: false
+push_tag_release_deploy_performed: false
+```
+
+---
+
 ## amber_action_packet_preflight_v1
 
 ```yaml

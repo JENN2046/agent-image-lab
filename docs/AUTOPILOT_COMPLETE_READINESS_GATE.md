@@ -58,6 +58,21 @@ The readiness result after final closeout is
 push remains a Red Lane action requiring a separate push safety gate and owner
 authorization.
 
+The readiness gate is now complemented by
+`scripts/validate_autopilot_readiness_receipt_registry_cross_claims.js`, which
+proves the gate's Amber receipt claim maps to a concrete registry entry and a
+schema-valid receipt fixture.
+
+It is also complemented by
+`scripts/validate_autopilot_amber_packet_to_receipt_traceability.js`, which
+proves the mapped Amber receipt's task, write, validation, rollback, cost,
+registry, and guard evidence trace to a preflight packet.
+
+The final local resume surface is guarded by
+`scripts/validate_autopilot_agent_board_resume_compaction_guard.js`, which keeps
+the compact handoff surfaces aligned on the current phase, completed
+traceability bridge, no-push state, and next Red boundary.
+
 Current-boundary cleanup: the old fixture task
 `add_goal_decomposition_runtime_validation` may remain as historical test
 evidence, but the current final boundary is

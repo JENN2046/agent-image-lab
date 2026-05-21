@@ -1,0 +1,138 @@
+{
+  "autopilot_amber_packet_to_receipt_traceability": {
+    "version": "v1",
+    "phase": "amber_packet_to_receipt_traceability_v1",
+    "selected_task": "add_amber_packet_to_receipt_traceability_validator",
+    "selected_task_lane": "Green",
+    "candidate_gaps": [
+      {
+        "gap_id": "amber_packet_to_receipt_traceability",
+        "lane": "Green",
+        "priority": "highest",
+        "selected": true,
+        "source_evidence": [
+          "tests/schema_examples/autopilot_amber_action_packet.example.json",
+          "tests/schema_examples/autopilot_execution_receipt.amber_dry_run_loop.example.json",
+          "tests/schema_examples/autopilot_receipt_registry.example.json"
+        ],
+        "rationale": "The receipt must prove its identity, budget, write set, validation, rollback, cost, and registry entry trace back to the preflight packet."
+      },
+      {
+        "gap_id": "agent_board_resume_compaction_guard",
+        "lane": "Green",
+        "priority": "next",
+        "selected": false,
+        "source_evidence": [
+          ".agent_board/RUN_STATE.md",
+          ".agent_board/TASK_QUEUE.md",
+          ".agent_board/CHECKPOINT.md",
+          ".agent_board/HANDOFF.md"
+        ],
+        "rationale": "After packet-to-receipt traceability, the next local hardening target is reducing long-session resume drift."
+      },
+      {
+        "gap_id": "future_real_provider_cost_boundary",
+        "lane": "Red",
+        "priority": "blocked",
+        "selected": false,
+        "source_evidence": [
+          "schemas/autopilot_autonomy_envelope.schema.yaml",
+          "schemas/autopilot_execution_receipt.schema.yaml"
+        ],
+        "rationale": "Live provider cost validation remains Red-gated and out of scope for fixture-only traceability."
+      }
+    ],
+    "candidate_gap_count": 3,
+    "packet_path": "tests/schema_examples/autopilot_amber_action_packet.example.json",
+    "packet_id": "packet-amber-dry-run-execution-loop-v1",
+    "receipt_path": "tests/schema_examples/autopilot_execution_receipt.amber_dry_run_loop.example.json",
+    "receipt_id": "receipt-amber-dry-run-execution-loop-v1",
+    "registry_path": "tests/schema_examples/autopilot_receipt_registry.example.json",
+    "registry_entry_path": "tests/schema_examples/autopilot_execution_receipt.amber_dry_run_loop.example.json",
+    "task_id_trace_verified": true,
+    "target_systems_trace_verified": true,
+    "call_budget_trace_verified": true,
+    "write_budget_trace_verified": true,
+    "receipt_files_covered_by_packet": true,
+    "validation_trace_verified": true,
+    "rollback_trace_verified": true,
+    "cost_trace_verified": true,
+    "registry_trace_verified": true,
+    "guard_trace_verified": true,
+    "negative_cases": [
+      {
+        "case_id": "receipt_task_id_not_preflighted_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "packet task_id must match receipt task_id"
+      },
+      {
+        "case_id": "registry_write_budget_not_traced_to_packet_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "registry max_write_files must trace to packet max_write_count"
+      },
+      {
+        "case_id": "receipt_file_outside_packet_allowlist_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "receipt files_written not covered by packet exact_allowed_paths_or_objects: docs/UNPREFLIGHTED_WRITE.md"
+      },
+      {
+        "case_id": "receipt_validation_not_required_by_packet_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "validation_run traces to packet validation_required mismatch"
+      },
+      {
+        "case_id": "receipt_cost_exceeds_packet_cap_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "receipt cost exceeds packet cost cap"
+      },
+      {
+        "case_id": "receipt_rollback_plan_drift_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "receipt rollback plan must trace to packet rollback plan"
+      },
+      {
+        "case_id": "packet_secret_boundary_weakened_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "packet secret read must remain false"
+      },
+      {
+        "case_id": "receipt_side_effect_guard_true_fails",
+        "result": "caught",
+        "expected_failure": true,
+        "failure_message": "receipt must keep provider_contact_performed=false"
+      }
+    ],
+    "negative_case_count": 8,
+    "caught_negative_case_count": 8,
+    "all_negative_cases_caught": true,
+    "validator_strengthened": "Amber packet-to-receipt traceability now rejects receipts whose task, write set, validation, rollback, cost, registry, or guard evidence does not trace to a preflight packet.",
+    "lower_priority_candidates": [
+      "agent_board_resume_compaction_guard"
+    ],
+    "red_blocked_candidates": [
+      "future_real_provider_cost_boundary"
+    ],
+    "side_effect_flags": {
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "dependency_change_performed": false,
+      "runtime_probe_performed": false,
+      "secret_value_read_performed": false,
+      "push_tag_release_deploy_performed": false
+    }
+  }
+}

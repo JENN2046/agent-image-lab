@@ -1,5 +1,35 @@
 ---
 
+- [x] ID: agent_board_resume_compaction_guard_v1
+      Title: Guard resume surfaces against long-session drift
+      Reason: After packet-to-receipt traceability, the next Green hardening should verify compact resume surfaces cite the current phase and next safe task.
+      Selected task: add_agent_board_resume_compaction_guard_validator.
+      Lane: Green.
+      Validator: scripts/validate_autopilot_agent_board_resume_compaction_guard.js.
+      Fixture: tests/schema_examples/autopilot_agent_board_resume_compaction_guard.example.json.
+      Status: completed_validated_uncommitted.
+      Push status: push_status: not_performed.
+      External action state: provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false.
+      Completed traceability phase: amber_packet_to_receipt_traceability_v1.
+      Recommended next: future_real_provider_cost_boundary_v1.
+      Stop condition: any Red Lane action, external side effect, or validation failure requiring judgment.
+
+---
+
+- [x] ID: smart_autopilot_handfeel_guard_tightening_v1
+      Title: Tighten Smart Autopilot handfeel guardrails
+      Reason: Review found that governance maintenance validation was too broad, package.json acceptance was under-specified, duplicated validator helpers could drift, and Review Console filters could hide the selected artifact without clear feedback.
+      Selected task 1: tighten_governance_tooling_maintenance_slice_validator.
+      Selected task 2: improve_review_console_filter_hidden_selection_feedback.
+      Lane: Green.
+      Helper: scripts/lib/governance_tooling_maintenance_slice.js.
+      UI refs: review_console/static_prototype/app.js; review_console/static_prototype/index.html; review_console/static_prototype/styles.css.
+      Status: completed_validated_uncommitted.
+      Recommended next: owner_review_or_exact_file_local_commit_if_requested.
+      Stop condition: push/tag/release/deploy, secret read, destructive action, provider/plugin/API/image/memory/source-read/dependency/runtime requirement, or validation failure requiring judgment.
+
+---
+
 - [x] ID: amber_action_packet_preflight_v1
       Title: Add Amber action packet preflight validation
       Reason: The Amber dry-run loop embedded an action packet shape, but future real Amber work needed a reusable packet preflight fixture before any provider/plugin/API/image/memory/source-read/runtime/dependency action.
@@ -17,9 +47,33 @@
       Recommended next: readiness_receipt_registry_cross_claims_v1.
       Stop condition: push/tag/release/deploy, secret read, destructive action, provider/plugin/API/image/memory/source-read/dependency/runtime requirement, or validation failure requiring judgment.
 
-- [ ] ID: readiness_receipt_registry_cross_claims_v1
+- [x] ID: readiness_receipt_registry_cross_claims_v1
       Title: Cross-check readiness claims against receipt registry and packet coverage
       Reason: After packet preflight, the next Green hardening should prove readiness receipt claims map to registry entries and preflighted packet evidence.
+      Selected task: add_readiness_receipt_registry_cross_claim_validator.
+      Lane: Green.
+      Validator: scripts/validate_autopilot_readiness_receipt_registry_cross_claims.js.
+      Fixture: tests/schema_examples/autopilot_readiness_receipt_registry_cross_claims.example.json.
+      Status: completed_validated_uncommitted.
+      Recommended next: amber_packet_to_receipt_traceability_v1.
+      Stop condition: any Red Lane action, external side effect, or validation failure requiring judgment.
+
+- [x] ID: amber_packet_to_receipt_traceability_v1
+      Title: Cross-check Amber packet fields against receipt fields
+      Reason: After the readiness-to-registry bridge, the next Green hardening should prove receipt claims trace directly to a preflighted packet.
+      Selected task: add_amber_packet_to_receipt_traceability_validator.
+      Lane: Green.
+      Validator: scripts/validate_autopilot_amber_packet_to_receipt_traceability.js.
+      Fixture: tests/schema_examples/autopilot_amber_packet_to_receipt_traceability.example.json.
+      Status: completed_validated_uncommitted.
+      Recommended next: agent_board_resume_compaction_guard_v1.
+      Stop condition: any Red Lane action, external side effect, or validation failure requiring judgment.
+
+- [ ] ID: future_real_provider_cost_boundary_v1
+      Title: Design a Red-gated real provider cost boundary before live calls
+      Reason: After local resume compaction, the only remaining next boundary is exact-cost/live-provider authorization planning.
+      Lane: Red.
+      Required authorization: exact provider target, call budget, cost cap, rollback limits, and owner approval before any live provider/plugin/API/image action.
       Stop condition: any Red Lane action, external side effect, or validation failure requiring judgment.
 
 ---

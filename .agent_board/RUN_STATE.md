@@ -1,5 +1,121 @@
 ---
 
+---
+
+## agent_board_resume_compaction_guard_v1
+
+```text
+phase: agent_board_resume_compaction_guard_v1
+phase_id: agent_board_resume_compaction_guard_v1
+status: completed_validated_uncommitted
+mode: Green Lane local resume-surface validation
+objective: verify compact resume surfaces cite current phase, completed traceability, no-push state, and next Red boundary
+current_task_id: add_agent_board_resume_compaction_guard_validator
+current_autonomy_model: Smart Standing Authorization v3
+completed_local_green_chain: amber_packet_to_receipt_traceability_v1
+selected_task: add_agent_board_resume_compaction_guard_validator
+selected_task_lane: Green
+validator_ref: scripts/validate_autopilot_agent_board_resume_compaction_guard.js
+fixture_ref: tests/schema_examples/autopilot_agent_board_resume_compaction_guard.example.json
+next_red_boundary: future_real_provider_cost_boundary_v1
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
+push_allowed: false
+push_status: not_performed
+validation_status: completed_validated_uncommitted
+recommended_next: future_real_provider_cost_boundary_v1
+```
+
+---
+
+## amber_packet_to_receipt_traceability_v1
+
+```text
+phase: amber_packet_to_receipt_traceability_v1
+phase_id: amber_packet_to_receipt_traceability_v1
+status: completed_validated_uncommitted
+mode: Green Lane local validator/docs/fixture/status hardening
+objective: prove Amber packet fields trace to execution receipt and registry evidence
+current_task_id: add_amber_packet_to_receipt_traceability_validator
+current_autonomy_model: Smart Standing Authorization v3
+goal_decomposition_runtime_used: true
+selected_task: add_amber_packet_to_receipt_traceability_validator
+selected_task_lane: Green
+candidate_gaps_identified: amber_packet_to_receipt_traceability; agent_board_resume_compaction_guard; future_real_provider_cost_boundary
+lower_priority_candidates: agent_board_resume_compaction_guard
+red_blocked_candidates: future_real_provider_cost_boundary
+validator_ref: scripts/validate_autopilot_amber_packet_to_receipt_traceability.js
+fixture_ref: tests/schema_examples/autopilot_amber_packet_to_receipt_traceability.example.json
+doc_ref: docs/AUTOPILOT_AMBER_PACKET_TO_RECEIPT_TRACEABILITY.md
+packet_allowlist_budget_aligned_to_receipt_files_written: true
+evolution_next_recommended_task: agent_board_resume_compaction_guard_v1
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
+push_allowed: false
+push_status: not_performed
+validation_status: completed_validated_uncommitted
+recommended_next: agent_board_resume_compaction_guard_v1
+```
+
+---
+
+## smart_autopilot_handfeel_guard_tightening_v1
+
+```text
+phase: smart_autopilot_handfeel_guard_tightening_v1
+phase_id: smart_autopilot_handfeel_guard_tightening_v1
+status: completed_validated_uncommitted
+mode: Green Lane local validator/static-prototype/status hardening
+objective: improve Codex operating feel by reducing false readiness, dirty worktree ambiguity, and Review Console filter confusion
+review_findings_fixed: governance exact-slice check is mode-scoped; search filter view is separated from base sort/filter invariant
+current_task_id: smart_autopilot_handfeel_guard_tightening_v1
+current_autonomy_model: Smart Standing Authorization v3
+goal_decomposition_runtime_used: true
+compiled_goal: Optimize Smart Autopilot handfeel issues identified by review
+selected_task_1: tighten_governance_tooling_maintenance_slice_validator
+selected_task_1_lane: Green
+selected_task_2: improve_review_console_filter_hidden_selection_feedback
+selected_task_2_lane: Green
+red_blocked_items: push/tag/release/deploy; destructive action; secret read; external repository modification; provider/plugin/API/image/memory/source-read/dependency/runtime action
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
+push_allowed: false
+push_status: not_performed
+validation_status: completed_validated_uncommitted
+recommended_next: owner_review_or_exact_file_local_commit_if_requested
+```
+
+---
+
+## readiness_receipt_registry_cross_claims_v1
+
+```text
+phase: readiness_receipt_registry_cross_claims_v1
+phase_id: readiness_receipt_registry_cross_claims_v1
+status: completed_validated_uncommitted
+mode: Green Lane local validator/docs/fixture/status hardening
+objective: prove readiness receipt claims map to registry entries and schema-valid receipt fixtures
+current_task_id: add_readiness_receipt_registry_cross_claim_validator
+current_autonomy_model: Smart Standing Authorization v3
+baseline_before_edit: 2702ddb
+goal_decomposition_runtime_used: true
+compiled_goal: Prove readiness receipt claims map to registry entries and schema-valid receipt fixtures
+selected_task: add_readiness_receipt_registry_cross_claim_validator
+selected_task_lane: Green
+candidate_gaps_identified: readiness_receipt_registry_cross_claims; amber_packet_to_receipt_traceability; agent_board_resume_compaction_guard; future_real_provider_cost_boundary
+lower_priority_candidates: amber_packet_to_receipt_traceability; agent_board_resume_compaction_guard
+red_blocked_candidates: future_real_provider_cost_boundary
+validator_ref: scripts/validate_autopilot_readiness_receipt_registry_cross_claims.js
+fixture_ref: tests/schema_examples/autopilot_readiness_receipt_registry_cross_claims.example.json
+doc_ref: docs/AUTOPILOT_READINESS_RECEIPT_REGISTRY_CROSS_CLAIMS.md
+evolution_next_recommended_task: amber_packet_to_receipt_traceability_v1
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
+push_allowed: false
+push_status: not_performed
+validation_status: completed_validated_uncommitted
+commit_message: test: add readiness receipt registry cross claims
+recommended_next: amber_packet_to_receipt_traceability_v1
+```
+
+---
+
 ## amber_action_packet_preflight_v1
 
 ```text

@@ -4,6 +4,10 @@
 const childProcess = require("node:child_process");
 const fs = require("node:fs");
 const path = require("node:path");
+const {
+  buildGovernanceToolingMaintenanceSliceReport,
+  governanceToolingMaintenanceSliceSelfCheck: runGovernanceToolingMaintenanceSliceSelfCheck
+} = require("./lib/governance_tooling_maintenance_slice");
 
 const root = path.resolve(__dirname, "..");
 const files = {
@@ -93,7 +97,22 @@ const isValidatorSelfMaintenancePatch = selfMaintenanceAllowed
   && stagedFiles.length === 0
   && untrackedFiles.length === 0
   && JSON.stringify([...modifiedTracked].sort()) === JSON.stringify(validatorMaintenanceFiles);
-const acceptsCurrentGitShape = isCleanPostCommit || isValidatorSelfMaintenancePatch;
+const governanceToolingMaintenanceSliceReport = buildGovernanceToolingMaintenanceSliceReport({
+  changedFiles,
+  stagedFiles,
+  behind,
+  currentPackageJson: readJson("package.json"),
+  baselinePackageJson: JSON.parse(runGit(["show", "HEAD:package.json"]))
+});
+const governanceToolingMaintenanceSliceSelfCheck = runGovernanceToolingMaintenanceSliceSelfCheck();
+const isGovernanceToolingMaintenanceSlice = governanceToolingMaintenanceSliceReport.passed;
+const shouldValidateGovernanceToolingSlice = changedFiles.length > 0
+  && !isValidatorSelfMaintenancePatch
+  && governanceToolingMaintenanceSliceReport.path_allowed;
+const acceptsCurrentGitShape = isCleanPostCommit || isValidatorSelfMaintenancePatch || isGovernanceToolingMaintenanceSlice;
+const currentPendingSliceEvidence = JSON.stringify(changedFiles) === JSON.stringify(exactExpected)
+  || isValidatorSelfMaintenancePatch
+  || isGovernanceToolingMaintenanceSlice;
 
 add("phase_record_exists", fs.existsSync(path.join(root, files.phaseRecord)));
 add("fixture_phase", fixture.phase === "controlled_visual_production_loop_exact_file_commit_readiness_review");
@@ -105,8 +124,11 @@ add("commit_blocked", fixture.commit_readiness_decision.commit_allowed_now === f
 add("push_blocked", fixture.commit_readiness_decision.push_allowed_now === false);
 add("commit_message_present", typeof fixture.commit_readiness_decision.suggested_commit_message === "string" && fixture.commit_readiness_decision.suggested_commit_message.length > 0);
 add("commit_trailer_present", fixture.commit_readiness_decision.commit_trailer_required === "Co-authored-by: Codex <noreply@openai.com>");
+add("governance_tooling_slice_helper_self_check", governanceToolingMaintenanceSliceSelfCheck.passed, governanceToolingMaintenanceSliceSelfCheck.failures);
+add("governance_tooling_slice_exact_current_files", !shouldValidateGovernanceToolingSlice || governanceToolingMaintenanceSliceReport.exact_slice_matches, governanceToolingMaintenanceSliceReport);
+add("governance_tooling_package_preview_script_only", !shouldValidateGovernanceToolingSlice || !changedFiles.includes("package.json") || governanceToolingMaintenanceSliceReport.package_change_allowed, governanceToolingMaintenanceSliceReport.package_change_mode);
 add("branch", branch === fixture.git_expectation.branch, branch);
-add("ahead_count_or_clean_post_commit", isCleanPostCommit || ahead === fixture.git_expectation.ahead_count, String(ahead));
+add("ahead_count_or_clean_post_commit", acceptsCurrentGitShape || ahead === fixture.git_expectation.ahead_count, String(ahead));
 add("behind_count", behind === fixture.git_expectation.behind_count, String(behind));
 add("staged_file_count", stagedFiles.length === fixture.git_expectation.staged_file_count, String(stagedFiles.length));
 add("tracked_modified_count_or_allowed_post_commit_state", acceptsCurrentGitShape || modifiedTracked.length === fixture.git_expectation.tracked_modified_file_count, String(modifiedTracked.length));
@@ -114,11 +136,12 @@ add("untracked_file_count_or_allowed_post_commit_state", acceptsCurrentGitShape 
 add("exact_stage_file_count_or_allowed_post_commit_state", acceptsCurrentGitShape || changedFiles.length === fixture.git_expectation.exact_stage_file_count, String(changedFiles.length));
 add("candidate_groups_total_matches", candidateGroupsTotal === fixture.git_expectation.exact_stage_file_count, String(candidateGroupsTotal));
 add("exact_stage_files_match_or_allowed_post_commit_state", acceptsCurrentGitShape || JSON.stringify(changedFiles) === JSON.stringify(exactExpected));
-add("post_commit_proof_exists_or_pending_slice", postCommitProof !== null || JSON.stringify(changedFiles) === JSON.stringify(exactExpected) || isValidatorSelfMaintenancePatch, postCommitProof?.hash || null);
+add("post_commit_proof_exists_or_pending_slice", postCommitProof !== null || currentPendingSliceEvidence, currentPendingSliceEvidence ? "current_pending_slice_evidence" : postCommitProof?.hash || null);
 add("no_staged_files_now", stagedFiles.length === 0);
 
 for (const forbidden of fixture.forbidden_path_families) {
-  add(`forbidden_path_${forbidden}_untouched`, !changedFiles.some((file) => file === forbidden || file.startsWith(forbidden)));
+  const packageJsonAllowed = forbidden === "package.json" && isGovernanceToolingMaintenanceSlice;
+  add(`forbidden_path_${forbidden}_untouched`, packageJsonAllowed || !changedFiles.some((file) => file === forbidden || file.startsWith(forbidden)));
 }
 
 for (const [key, expected] of Object.entries(fixture.guard)) {
@@ -171,13 +194,17 @@ const output = {
   post_commit_proof_commit: postCommitProof?.hash || null,
   post_commit_proof_file_count: postCommitProof?.file_count || 0,
   post_commit_files_match_expected: headMatchesExpectedPostCommit,
+  governance_tooling_maintenance_slice_report: governanceToolingMaintenanceSliceReport,
   git_validation_mode: isCleanSyncedPostCommit
     ? "clean_synced_post_commit"
     : isCleanLocalAheadPostCommit
       ? "clean_local_ahead_post_commit"
       : isValidatorSelfMaintenancePatch
         ? "validator_self_maintenance_patch"
-        : "pending_exact_file_slice",
+        : isGovernanceToolingMaintenanceSlice
+          ? "governance_tooling_maintenance_slice"
+          : "pending_exact_file_slice",
+  governance_tooling_maintenance_slice: isGovernanceToolingMaintenanceSlice,
   local_commit_ready_after_explicit_human_review: fixture.commit_readiness_decision.local_commit_ready_after_explicit_human_review,
   auto_commit_allowed_now: fixture.commit_readiness_decision.auto_commit_allowed_now,
   staging_allowed_now: fixture.commit_readiness_decision.staging_allowed_now,

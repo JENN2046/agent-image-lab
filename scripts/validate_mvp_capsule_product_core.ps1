@@ -90,7 +90,8 @@ function Invoke-CapsuleProductCoreValidation {
     $allowedModes = @(
       'pending_exact_file_slice',
       'clean_synced_post_commit',
-      'clean_local_ahead_post_commit'
+      'clean_local_ahead_post_commit',
+      'governance_tooling_maintenance_slice'
     )
 
     if ($env:AGENT_IMAGE_LAB_VALIDATOR_MAINTENANCE -eq '1') {

@@ -343,6 +343,11 @@
               <button type="button" data-lifecycle-filter="recoverable">可恢复</button>
               <button type="button" data-lifecycle-filter="blocked">阻断</button>
             </div>
+            <label class="lifecycle-search-row" for="artifactLifecycleSearch">
+              <span>本地搜索</span>
+              <input id="artifactLifecycleSearch" type="search" autocomplete="off" placeholder="样片 ID / 任务 / blocker / artifact ref" />
+            </label>
+            <div id="artifactLifecycleFilterNotice" class="lifecycle-filter-notice" aria-live="polite"></div>
             <div id="artifactLifecycleList" class="artifact-lifecycle-list" aria-label="样片生命周期列表"></div>
             <div id="artifactLifecycleGuard" class="protocol-guard" aria-label="样片生命周期读取边界"></div>
           </section>
