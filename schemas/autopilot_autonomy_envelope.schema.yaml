@@ -1,0 +1,112 @@
+# autopilot_autonomy_envelope.schema.yaml
+# Machine-checkable contract for Smart Standing Authorization v3 envelopes.
+
+autopilot_autonomy_envelope:
+  version: v1
+  contract_type: autopilot_autonomy_envelope
+  policy_model: Smart Standing Authorization v3 — Budgeted Autonomy Envelope
+  envelope_status: active_template
+
+identity:
+  required:
+    - envelope_id
+    - task_id
+    - lane
+    - goal
+  lane_allowed_values:
+    - Green
+    - Amber
+    - Red
+
+kernel_components_required:
+  - Goal Compiler
+  - Truth Model
+  - Lane Classifier
+  - Budget Engine
+  - Receipt Recorder
+  - Continuation Judge
+
+budget_limits_required:
+  max_provider_calls: integer
+  max_plugin_calls: integer
+  max_api_calls: integer
+  max_image_candidates: integer
+  max_external_read_files: integer
+  max_write_files: integer
+  max_dependency_actions: integer
+  max_retry_per_transient_failure: integer
+  max_runtime_probe_minutes: integer
+  overwrite_existing_files_allowed: boolean
+  secret_value_read_allowed: boolean
+  raw_private_data_print_allowed: boolean
+  push_allowed: boolean
+  tag_release_deploy_allowed: boolean
+  destructive_action_allowed: boolean
+
+target_boundaries_required:
+  allowed_targets: array
+  forbidden_targets: array
+  validation_required: array
+  red_lane_stop_conditions: array
+  receipt_requirements:
+    - task_id
+    - lane
+    - envelope_id
+    - action_performed
+    - target_systems
+    - calls_used
+    - files_read
+    - files_written
+    - dependency_actions_used
+    - validation_run
+    - validation_result
+    - rollback_or_cleanup_available
+    - next_auto_step_allowed
+    - stop_reason
+
+green_lane:
+  direct_local_execution: true
+  external_service_contact_allowed: false
+  cost_allowed: false
+  memory_write_allowed: false
+  dependency_change_allowed: false
+  secret_read_allowed: false
+
+amber_lane:
+  autonomous_with_budget: true
+  step_by_step_user_approval_required: false
+  receipt_required_after_meaningful_action: true
+  safe_repair_or_retry_limit: 1
+
+red_lane_required_stop_conditions:
+  - git push
+  - tag
+  - release
+  - deploy
+  - force push
+  - history rewrite
+  - destructive Git/filesystem action
+  - secret value read or edit
+  - raw private data / raw chat history exposure
+  - external repository broad modification
+  - uncapped cost
+  - unbounded loops
+  - overwriting existing artifacts without explicit overwrite allowance
+  - wide VCPChat / VCPToolBox write without exact scope
+  - dependency changes without exact package/action list
+  - validation failure requiring non-obvious judgment
+
+non_authorization:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  real_manifest_read_performed: false
+  real_vcpchat_read_performed: false
+  real_vcptoolbox_read_performed: false
+  dependency_change_performed: false
+  runtime_probe_performed: false
+  secret_value_read_performed: false
+  push_tag_release_deploy_performed: false

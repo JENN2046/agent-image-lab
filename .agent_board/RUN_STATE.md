@@ -1,6 +1,32 @@
 
 ---
 
+## smart_autopilot_governance_kernel_validation_baseline
+
+```text
+phase: smart_autopilot_governance_kernel_validation_baseline
+phase_id: smart_autopilot_governance_kernel_validation_baseline
+status: completed_validated_guarded_local_commit
+mode: Green Lane local implementation
+objective: create machine-verifiable Smart Standing Authorization v3 envelope and receipt baseline before real Amber execution
+branch: master
+origin_branch: origin/master
+standing_owner_smart_authorization_v3_active: true
+autonomy_envelope_active: true
+green_lane_direct: true
+amber_lane_autonomous_with_budget_and_receipts: true
+red_lane_requires_user: true
+kernel_components: Goal Compiler; Truth Model; Lane Classifier; Budget Engine; Receipt Recorder; Continuation Judge
+changed_surfaces: docs/SMART_AUTOPILOT_GOVERNANCE_KERNEL.md; schemas/autopilot_autonomy_envelope.schema.yaml; schemas/autopilot_execution_receipt.schema.yaml; tests/schema_examples/autopilot_autonomy_envelope.example.json; tests/schema_examples/autopilot_execution_receipt.example.json; scripts/validate_autopilot_governance_kernel.js; scripts/validate_mvp.ps1; README.md; docs/00_project_roadmap.md; .agent_board resume surfaces
+validation_passed: node --check scripts/validate_autopilot_governance_kernel.js; node scripts/validate_autopilot_governance_kernel.js; git diff --check; git diff --cached --check; git diff --cached --name-only exact-file review; node scripts/validate_agent_board_state.js; scripts/validate-agent-image-lab-local.ps1; scripts/validate_mvp.ps1
+validation_blocked: none
+commit_message: test: add smart autopilot governance kernel validation
+not_performed: no push; no tag/release/deploy; no provider/plugin/API/image generation; no DailyNote/VCP memory write; no real manifest/VCPChat/VCPToolBox read; no dependency change; no runtime probe; no secret read
+recommended_next: pending_human_push_or_next_autonomous_envelope_task
+```
+
+---
+
 ## standing_owner_smart_authorization_v3_budgeted_autonomy_envelope
 
 ```text

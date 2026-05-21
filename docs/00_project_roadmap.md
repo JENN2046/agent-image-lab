@@ -5,9 +5,9 @@
 ## 当前产品主线恢复点
 
 ```yaml
-current_phase: standing_owner_smart_authorization_v3_budgeted_autonomy_envelope
-phase_status: completed_validated_amended_local_strategy_commit
-source_phase: standing_owner_guarded_execution_packet_policy_tightening
+current_phase: smart_autopilot_governance_kernel_validation_baseline
+phase_status: completed_validated_guarded_local_commit
+source_phase: standing_owner_smart_authorization_v3_budgeted_autonomy_envelope
 validated_baseline:
   capsule_product_core_validator_route: completed
   full_asset_archive_manifest_bridge: aligned_to_verified_git_tracked_durable_archive
@@ -28,6 +28,10 @@ production_candidate_activation_preflight_ref: reports/production_candidate_auth
 memory_write_authorization_package_ref: reports/memory_write_authorization/2026-05-20_tennis_wallet_memory_write_A5_authorization_package.json
 standing_owner_auto_authorization_policy_ref: docs/STANDING_OWNER_AUTOMATIC_AUTHORIZATION_POLICY.md
 standing_owner_auto_authorization_decision_ref: DECISION-AIL-AUTO-009
+smart_autopilot_governance_kernel_ref: docs/SMART_AUTOPILOT_GOVERNANCE_KERNEL.md
+smart_autopilot_governance_validator_ref: scripts/validate_autopilot_governance_kernel.js
+autopilot_autonomy_envelope_schema_ref: schemas/autopilot_autonomy_envelope.schema.yaml
+autopilot_execution_receipt_schema_ref: schemas/autopilot_execution_receipt.schema.yaml
 branch: master
 origin_branch: origin/master
 head_commit_before_edit: 38da1aa
@@ -77,6 +81,8 @@ selected_next_product_move: pending_human_push_or_next_autonomous_envelope_task
 recommended_next: pending_human_push_or_next_autonomous_envelope_task
 validation_passed:
   - git status --short --branch
+  - node --check scripts/validate_autopilot_governance_kernel.js
+  - node scripts/validate_autopilot_governance_kernel.js
   - git diff --check
   - git diff --cached --check
   - git diff --cached --name-only

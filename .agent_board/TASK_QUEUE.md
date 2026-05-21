@@ -1,6 +1,18 @@
 
 ---
 
+- [x] ID: smart_autopilot_governance_kernel_validation_baseline
+      Title: Build machine-verifiable envelope and receipt baseline
+      Reason: Smart Standing Authorization v3 needs local schemas, examples, and validation before real Amber actions.
+      Changed files: docs/SMART_AUTOPILOT_GOVERNANCE_KERNEL.md; schemas/autopilot_autonomy_envelope.schema.yaml; schemas/autopilot_execution_receipt.schema.yaml; tests/schema_examples/autopilot_autonomy_envelope.example.json; tests/schema_examples/autopilot_execution_receipt.example.json; scripts/validate_autopilot_governance_kernel.js; scripts/validate_mvp.ps1; README.md; docs/00_project_roadmap.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md; .agent_board/CHECKPOINT.md; .agent_board/DECISIONS.md.
+      Decision: Green Lane local implementation only; no real Amber provider/plugin/API/image/memory/source-read/dependency/runtime action.
+      Validation: node --check validator; node validator; git diff --check; exact-file cached checks; validate_agent_board_state; validate-agent-image-lab-local; validate_mvp.
+      Result: completed_validated_guarded_local_commit.
+      Recommended next: pending_human_push_or_next_autonomous_envelope_task.
+      Stop condition: any request to push/tag/release/deploy or execute real Amber external/write actions without staying inside the v3 envelope and receipts.
+
+---
+
 - [x] ID: standing_owner_smart_authorization_v3_budgeted_autonomy_envelope
       Title: Upgrade standing authorization to Budgeted Autonomy Envelope
       Reason: the owner requested a smarter model: no step-by-step approval inside Green/Amber, but Red Lane remains a hard stop.

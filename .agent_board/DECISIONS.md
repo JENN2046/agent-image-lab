@@ -77,3 +77,12 @@ Still gated as Red Lane: git push, tag, release, deploy, force push, history rew
 Reason: The owner wants faster autonomous progress across production and integration surfaces.
 Risk: Production actions can create cost, external side effects, long-term memory pollution, dependency churn, or private-source exposure if envelope budgets and receipts are skipped.
 Mitigation: Standing authorization permits bounded autonomy, not unchecked execution; stop if a Red condition appears; do not print secrets, raw private data, or raw chat history; record receipts in status surfaces; run validation after changes; preserve exact-file staging and separate push authorization.
+
+### DECISION-AIL-AUTO-010 — Smart Autopilot Governance Kernel validation baseline
+
+Context: Smart Standing Authorization v3 needs machine-verifiable local infrastructure before any real Amber external action is attempted.
+Chosen: Define a Green Lane local governance kernel with envelope and receipt schemas, example JSON fixtures, and `scripts/validate_autopilot_governance_kernel.js`, then wire it into `scripts/validate_mvp.ps1`.
+Kernel components: Goal Compiler; Truth Model; Lane Classifier; Budget Engine; Receipt Recorder; Continuation Judge.
+Reason: The autonomy envelope should be testable before it controls provider/plugin/API/image/memory/source-read/dependency/runtime actions.
+Risk: If the receipt or budget model stays prose-only, future Amber actions could drift without machine checks.
+Mitigation: The validator checks lane definitions, default budgets, Red gates, Amber receipt requirements, example fixtures, and no-real-A5 guard flags.

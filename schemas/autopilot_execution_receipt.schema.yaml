@@ -1,0 +1,71 @@
+# autopilot_execution_receipt.schema.yaml
+# Machine-checkable contract for Amber Lane receipts.
+
+autopilot_execution_receipt:
+  version: v1
+  contract_type: autopilot_execution_receipt
+  policy_model: Smart Standing Authorization v3 — Budgeted Autonomy Envelope
+  receipt_status: template
+
+identity:
+  required:
+    - task_id
+    - lane
+    - envelope_id
+    - action_performed
+  lane_allowed_values:
+    - Amber
+
+receipt_fields_required:
+  - task_id
+  - lane
+  - envelope_id
+  - action_performed
+  - target_systems
+  - calls_used
+  - files_read
+  - files_written
+  - dependency_actions_used
+  - validation_run
+  - validation_result
+  - rollback_or_cleanup_available
+  - next_auto_step_allowed
+  - stop_reason
+
+usage_accounting_required:
+  calls_used:
+    provider_calls: integer
+    plugin_calls: integer
+    api_calls: integer
+    image_candidates: integer
+    runtime_probe_minutes: integer
+  files_read: array
+  files_written: array
+  dependency_actions_used: array
+
+validation_required:
+  validation_run: array
+  validation_result: passed | failed | blocked | not_run
+  rollback_or_cleanup_available: boolean
+  next_auto_step_allowed: boolean
+  stop_reason: string
+
+red_lane_guard:
+  receipt_required_after_meaningful_action: true
+  stop_if_red_condition_seen: true
+  red_conditions_must_not_be_hidden_in_receipt: true
+
+non_authorization:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  real_manifest_read_performed: false
+  real_vcpchat_read_performed: false
+  real_vcptoolbox_read_performed: false
+  dependency_change_performed: false
+  runtime_probe_performed: false
+  secret_value_read_performed: false
+  push_tag_release_deploy_performed: false

@@ -56,6 +56,7 @@ $requiredFiles = @(
   'scripts/validate-agent-image-lab-local.ps1',
   'scripts/validate-agent-image-lab-local.sh',
   'scripts/validate_agent_board_state.js',
+  'scripts/validate_autopilot_governance_kernel.js',
   'scripts/validate_local_checkpoint_manifest.js',
   'scripts/validate_local_commit_scope.js',
   'scripts/validate_post_push_state.js',
@@ -245,6 +246,11 @@ $requiredFiles = @(
   'scripts/validate_v14_226_review_console_six_month_goal_gap_snapshot_static_regression.js',
   'scripts/validate_v14_227_review_console_failure_state_static_workbench.js',
   'scripts/validate_v14_228_review_console_failure_state_snapshot_static_regression.js',
+  'docs/SMART_AUTOPILOT_GOVERNANCE_KERNEL.md',
+  'schemas/autopilot_autonomy_envelope.schema.yaml',
+  'schemas/autopilot_execution_receipt.schema.yaml',
+  'tests/schema_examples/autopilot_autonomy_envelope.example.json',
+  'tests/schema_examples/autopilot_execution_receipt.example.json',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -11719,6 +11725,28 @@ process.exit(child.status || 0);
     }
     if ($failureStateSnapshot.negative_case_failure_count_drift_fails -ne $true -or $failureStateSnapshot.negative_case_memory_forbidden_drift_fails -ne $true -or $failureStateSnapshot.negative_case_failure_samples_write_flag_fails -ne $true -or $failureStateSnapshot.negative_case_production_write_flag_fails -ne $true -or $failureStateSnapshot.negative_case_external_action_flag_fails -ne $true -or $failureStateSnapshot.negative_case_runtime_claim_fails -ne $true) {
       Add-Failure "v14.228 must fail failure-count drift, memory-forbidden drift, failure write, production write, external-action, and runtime negative cases"
+    }
+  }
+
+  $autopilotGovernanceKernelOutput = & node (Join-Path $Root 'scripts/validate_autopilot_governance_kernel.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Smart Autopilot governance kernel validation exited with failure"
+  } else {
+    $autopilotGovernanceKernel = ($autopilotGovernanceKernelOutput -join "`n") | ConvertFrom-Json
+    if ($autopilotGovernanceKernel.passed -ne $true -or $autopilotGovernanceKernel.phase -ne 'smart_autopilot_governance_kernel') {
+      Add-Failure "Smart Autopilot governance kernel validation must pass"
+    }
+    if ($autopilotGovernanceKernel.default_budget_verified -ne $true -or $autopilotGovernanceKernel.amber_receipt_required -ne $true -or $autopilotGovernanceKernel.kernel_components_verified -lt 6) {
+      Add-Failure "Smart Autopilot governance kernel must verify default budget, Amber receipts, and six kernel components"
+    }
+    if ($autopilotGovernanceKernel.no_real_a5_execution_signals -ne $true) {
+      Add-Failure "Smart Autopilot governance kernel must not record real A5 execution signals"
+    }
+    if ($autopilotGovernanceKernel.provider_contact_performed -ne $false -or $autopilotGovernanceKernel.plugin_call_performed -ne $false -or $autopilotGovernanceKernel.api_call_performed -ne $false -or $autopilotGovernanceKernel.image_generation_performed -ne $false -or $autopilotGovernanceKernel.DailyNote_write_performed -ne $false -or $autopilotGovernanceKernel.VCP_memory_write_performed -ne $false) {
+      Add-Failure "Smart Autopilot governance kernel must not perform provider, plugin, API, image, DailyNote, or VCP memory actions"
+    }
+    if ($autopilotGovernanceKernel.real_manifest_read_performed -ne $false -or $autopilotGovernanceKernel.real_vcpchat_read_performed -ne $false -or $autopilotGovernanceKernel.real_vcptoolbox_read_performed -ne $false -or $autopilotGovernanceKernel.dependency_change_performed -ne $false -or $autopilotGovernanceKernel.runtime_probe_performed -ne $false -or $autopilotGovernanceKernel.secret_value_read_performed -ne $false -or $autopilotGovernanceKernel.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Smart Autopilot governance kernel must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
     }
   }
 

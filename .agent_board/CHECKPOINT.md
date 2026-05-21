@@ -1,6 +1,41 @@
 
 ---
 
+## Checkpoint - Smart Autopilot Governance Kernel Validation Baseline
+
+```text
+phase: smart_autopilot_governance_kernel_validation_baseline
+phase_id: smart_autopilot_governance_kernel_validation_baseline
+status: completed_validated_guarded_local_commit
+completed:
+- defined Smart Autopilot Governance Kernel document
+- added autonomy envelope schema and example
+- added execution receipt schema and example
+- added Node validator for lanes, budgets, Red gates, Amber receipt requirements, examples, and no-real-A5 guard flags
+- wired validator into scripts/validate_mvp.ps1 without weakening existing validators
+validation_completed:
+- node --check scripts/validate_autopilot_governance_kernel.js
+- node scripts/validate_autopilot_governance_kernel.js
+- git diff --check
+- git diff --cached --check
+- git diff --cached --name-only
+- node scripts/validate_agent_board_state.js
+- powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+not_performed:
+- no push
+- no tag/release/deploy
+- no provider/plugin/API/image generation
+- no DailyNote/VCP memory write
+- no real manifest/VCPChat/VCPToolBox read
+- no dependency change
+- no runtime probe
+- no secret read
+recommended_next: pending_human_push_or_next_autonomous_envelope_task
+```
+
+---
+
 ## Checkpoint - Smart Standing Authorization v3 Budgeted Autonomy Envelope
 
 ```text
