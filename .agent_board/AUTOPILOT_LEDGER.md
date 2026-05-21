@@ -103,3 +103,29 @@ guard:
   secret_value_read_performed: false
   push_tag_release_deploy_performed: false
 ```
+---
+
+## agent_board_queue_reconciler_v1
+
+```yaml
+task_id: agent_board_queue_reconciler_v1
+lane: Green
+action_performed: local_agent_board_queue_reconciliation_validation
+source_snapshot: tests/schema_examples/autopilot_goal_decomposition_materialized.example.json
+reconciler: scripts/reconcile_agent_board_queue.js
+validator: scripts/validate_agent_board_queue_reconciliation.js
+result: completed_validated_guarded_local_commit
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+dependency_change_performed: false
+runtime_probe_performed: false
+secret_value_read_performed: false
+push_tag_release_deploy_performed: false
+```

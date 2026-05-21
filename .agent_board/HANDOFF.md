@@ -1,3 +1,24 @@
+---
+
+## Current Handoff Update - Agent Board Queue Reconciler v1
+
+```text
+phase: agent_board_queue_reconciler_v1
+phase_id: agent_board_queue_reconciler_v1
+status: completed_validated_guarded_local_commit
+mode: Green Lane local tooling and validation
+summary: Added a deterministic local reconciler that verifies the Goal Decomposition materialized snapshot is represented by .agent_board queue, run-state, checkpoint, handoff, decision, and ledger surfaces.
+current_autonomy_model: Smart Standing Authorization v3
+startup_default_model: Smart Standing Authorization v3
+queue_reconciler_ref: scripts/reconcile_agent_board_queue.js
+queue_reconciliation_validator_ref: scripts/validate_agent_board_queue_reconciliation.js
+source_snapshot_ref: tests/schema_examples/autopilot_goal_decomposition_materialized.example.json
+reconciliation_fixture_ref: tests/schema_examples/agent_board_queue_reconciliation.example.json
+validated_now: node --check scripts/reconcile_agent_board_queue.js; node scripts/reconcile_agent_board_queue.js; node --check scripts/validate_agent_board_queue_reconciliation.js; node scripts/validate_agent_board_queue_reconciliation.js; node --check scripts/materialize_autopilot_goal_decomposition.js; node scripts/materialize_autopilot_goal_decomposition.js; node --check scripts/validate_autopilot_goal_compiler.js; node scripts/validate_autopilot_goal_compiler.js; node --check scripts/validate_autopilot_governance_kernel.js; node scripts/validate_autopilot_governance_kernel.js; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1 after guarded local commit.
+commit_message: test: add agent board queue reconciler
+not_performed: no push, no tag/release/deploy, no provider/plugin/API/image generation, no DailyNote/VCP memory write, no real manifest/VCPChat/VCPToolBox read, no dependency change, no runtime probe, no secret read.
+recommended_next: pending_goal_compiler_driven_autonomous_task_after_queue_reconciliation.
+```
 
 ---
 

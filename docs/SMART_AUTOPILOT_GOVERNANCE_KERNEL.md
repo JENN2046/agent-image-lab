@@ -57,6 +57,12 @@ materializer for that runtime flow. It normalizes the runtime example into a
 deterministic snapshot for validation. It is not a real executor and must not
 perform provider/plugin/API/image/memory/source-read/runtime/dependency actions.
 
+`scripts/reconcile_agent_board_queue.js` provides the local queue reconciliation
+check between that deterministic snapshot and `.agent_board` status surfaces. It
+fails on missing required surfaces, next-safe-task drift, or missing blocked Red
+items, while allowing harmless prose differences as warnings. It is not a real
+executor and must not perform external actions.
+
 ### Truth Model
 
 Uses repository reality as ground:

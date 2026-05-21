@@ -126,3 +126,14 @@ Kernel components: Goal Compiler; Truth Model; Lane Classifier; Budget Engine; R
 Reason: The autonomy envelope should be testable before it controls provider/plugin/API/image/memory/source-read/dependency/runtime actions.
 Risk: If the receipt or budget model stays prose-only, future Amber actions could drift without machine checks.
 Mitigation: The validator checks lane definitions, default budgets, Red gates, Amber receipt requirements, example fixtures, and no-real-A5 guard flags.
+---
+
+## DECISION-AIL-AUTO-016 — Agent board queue reconciliation is required for materialized snapshots
+
+Status: accepted.
+
+Decision: The Goal Decomposition materialized snapshot must be locally reconciled against `.agent_board` queue and resume surfaces. Missing required surfaces, next-safe-task drift, or missing blocked Red items fail validation; harmless prose differences may be warnings.
+
+Scope: `scripts/reconcile_agent_board_queue.js`, `scripts/validate_agent_board_queue_reconciliation.js`, `tests/schema_examples/agent_board_queue_reconciliation.example.json`, and `.agent_board` resume surfaces.
+
+Boundary: This is local consistency validation only. It does not execute tasks, call provider/plugin/API/image/memory/source-read/runtime/dependency actions, read secrets, or authorize push/tag/release/deploy.

@@ -1,3 +1,36 @@
+---
+
+## agent_board_queue_reconciler_v1
+
+```text
+phase: agent_board_queue_reconciler_v1
+phase_id: agent_board_queue_reconciler_v1
+status: completed_validated_guarded_local_commit
+stage: Green Lane local queue reconciliation validation
+mode: Green Lane local tooling and validation
+objective: reconcile the deterministic goal decomposition materialized snapshot with .agent_board queue surfaces
+current_task_id: agent_board_queue_reconciler_v1
+current_autonomy_model: Smart Standing Authorization v3
+startup_default_model: Smart Standing Authorization v3
+a4_8_status: retained_as_green_lane_substrate
+a5_status: classified_by_lane_and_envelope
+branch: master
+origin_branch: origin/master
+baseline_before_edit: b095cd9
+ahead_count_before_edit: 2
+queue_reconciler_ref: scripts/reconcile_agent_board_queue.js
+queue_reconciliation_validator_ref: scripts/validate_agent_board_queue_reconciliation.js
+source_snapshot_ref: tests/schema_examples/autopilot_goal_decomposition_materialized.example.json
+reconciliation_fixture_ref: tests/schema_examples/agent_board_queue_reconciliation.example.json
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
+push_allowed: false
+tag_release_deploy_allowed: false
+destructive_action_allowed: false
+secret_value_read_allowed: false
+validation_status: completed_validated_guarded_local_commit
+commit_message: test: add agent board queue reconciler
+recommended_next: pending_goal_compiler_driven_autonomous_task_after_queue_reconciliation
+```
 
 ---
 

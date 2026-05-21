@@ -140,6 +140,13 @@ materialized snapshot containing `goal_id`, `current_goal`, `route_steps`,
 `validation_required`, `receipt_required_tasks`, `red_lane_summary`, and
 `side_effect_flags`. It must not execute tasks or contact external systems.
 
+The queue reconciler is also local validation only. `scripts/reconcile_agent_board_queue.js`
+reads the materialized snapshot and `.agent_board` status surfaces, then emits a
+deterministic reconciliation report for goal id, executable queue, blocked Red
+items, next safe task, run state, checkpoint, and no-push boundary alignment. It
+is not a real executor and must not rewrite production files, execute tasks, or
+contact external systems.
+
 The validator must prove that the runtime example has no provider/plugin/API,
 image, memory, source-read, runtime, dependency, secret, push, tag, release, or
 deploy side-effect signals.

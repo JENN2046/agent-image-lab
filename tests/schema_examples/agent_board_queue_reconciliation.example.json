@@ -1,0 +1,51 @@
+{
+  "agent_board_queue_reconciliation": {
+    "version": "v1",
+    "phase": "agent_board_queue_reconciler_v1",
+    "source_snapshot": "tests/schema_examples/autopilot_goal_decomposition_materialized.example.json",
+    "agent_board_files_checked": [
+      ".agent_board/TASK_QUEUE.md",
+      ".agent_board/RUN_STATE.md",
+      ".agent_board/CHECKPOINT.md",
+      ".agent_board/HANDOFF.md",
+      ".agent_board/DECISIONS.md",
+      ".agent_board/AUTOPILOT_LEDGER.md"
+    ],
+    "matched_goal_id": true,
+    "matched_current_goal": true,
+    "matched_executable_queue": [
+      {
+        "task_id": "add_goal_decomposition_runtime_validation",
+        "source_step_id": "step-green-hardening",
+        "lane": "Green",
+        "matched": true
+      },
+      {
+        "task_id": "future_budgeted_amber_receipt_task",
+        "source_step_id": "step-amber-future-receipt",
+        "lane": "Amber",
+        "matched": true
+      }
+    ],
+    "matched_next_safe_task": {
+      "task_id": "add_goal_decomposition_runtime_validation",
+      "matched": true
+    },
+    "matched_blocked_red_items": [
+      {
+        "item_id": "blocked-red-push-origin-master",
+        "blocked_action": "git push origin master",
+        "matched": true
+      }
+    ],
+    "queue_drift_detected": false,
+    "missing_required_surfaces": [],
+    "warnings": [],
+    "result": "passed",
+    "details": {
+      "task_queue_missing": [],
+      "run_state_missing": [],
+      "checkpoint_missing": []
+    }
+  }
+}

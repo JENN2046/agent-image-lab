@@ -29,6 +29,12 @@ local dry-run materializer. It reads the runtime example and produces a
 deterministic materialized snapshot; it is not a real executor and must not call
 provider/plugin/API/image/memory/source-read/runtime/dependency actions.
 
+Queue reconciliation rule: `scripts/reconcile_agent_board_queue.js` is local
+consistency validation. It compares the materialized snapshot with `.agent_board`
+queue and resume surfaces so `goal`, `route_plan`, executable `task_queue`,
+`blocked_red_items`, and `next_safe_task` do not drift. It is not a real executor
+and must not call external systems or execute queued tasks.
+
 This document does not authorize provider contact, plugin calls, API calls,
 image generation, DailyNote writes, VCP memory writes, real manifest reads, real
 VCPChat reads, real VCPToolBox reads, dependency changes, runtime probes, push,

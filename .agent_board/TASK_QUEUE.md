@@ -1,3 +1,23 @@
+---
+
+- [x] ID: agent_board_queue_reconciler_v1
+      Title: Reconcile materialized goal decomposition snapshot with .agent_board queue surfaces
+      Reason: Prevent drift between goal_id, current goal, executable queue, blocked Red items, next_safe_task, RUN_STATE, and CHECKPOINT.
+      Materialized source snapshot: tests/schema_examples/autopilot_goal_decomposition_materialized.example.json.
+      Current goal id: goal-agent-image-lab-smart-autopilot-productization-001.
+      Current goal: Continue Agent Image Lab smart autopilot productization without external side effects.
+      executable_queue:
+      - task_id: add_goal_decomposition_runtime_validation; source_step_id: step-green-hardening; lane: Green.
+      - task_id: future_budgeted_amber_receipt_task; source_step_id: step-amber-future-receipt; lane: Amber.
+      blocked_red_items:
+      - item_id: blocked-red-push-origin-master; blocked_action: git push origin master; required_authorization_or_action: Explicit user authorization naming git push origin master.
+      next_safe_task: add_goal_decomposition_runtime_validation.
+      Reconciler: scripts/reconcile_agent_board_queue.js.
+      Validator: scripts/validate_agent_board_queue_reconciliation.js.
+      Result: completed_validated_guarded_local_commit.
+      Commit message: test: add agent board queue reconciler.
+      Recommended next: pending_goal_compiler_driven_autonomous_task_after_queue_reconciliation.
+      Stop condition: missing required surface, next_safe_task drift, blocked Red item drift, push/tag/release/deploy, secret read, destructive action, provider/plugin/API/image/memory/source-read/dependency/runtime requirement, or validation failure requiring judgment.
 
 ---
 

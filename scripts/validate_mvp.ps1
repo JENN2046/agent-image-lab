@@ -58,6 +58,9 @@ $requiredFiles = @(
   'scripts/validate_agent_board_state.js',
   'scripts/validate_autopilot_governance_kernel.js',
   'scripts/validate_autopilot_goal_compiler.js',
+  'scripts/materialize_autopilot_goal_decomposition.js',
+  'scripts/reconcile_agent_board_queue.js',
+  'scripts/validate_agent_board_queue_reconciliation.js',
   'scripts/validate_local_checkpoint_manifest.js',
   'scripts/validate_local_commit_scope.js',
   'scripts/validate_post_push_state.js',
@@ -249,6 +252,7 @@ $requiredFiles = @(
   'scripts/validate_v14_228_review_console_failure_state_snapshot_static_regression.js',
   'docs/SMART_AUTOPILOT_GOVERNANCE_KERNEL.md',
   'docs/AUTOPILOT_GOAL_COMPILER_V1.md',
+  'docs/AUTOPILOT_GOAL_DECOMPOSITION_RUNTIME.md',
   'schemas/autopilot_autonomy_envelope.schema.yaml',
   'schemas/autopilot_execution_receipt.schema.yaml',
   'schemas/autopilot_goal.schema.yaml',
@@ -259,6 +263,9 @@ $requiredFiles = @(
   'tests/schema_examples/autopilot_goal.example.json',
   'tests/schema_examples/autopilot_route_plan.example.json',
   'tests/schema_examples/autopilot_task_queue.example.json',
+  'tests/schema_examples/autopilot_goal_decomposition_runtime.example.json',
+  'tests/schema_examples/autopilot_goal_decomposition_materialized.example.json',
+  'tests/schema_examples/agent_board_queue_reconciliation.example.json',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -11796,6 +11803,28 @@ process.exit(child.status || 0);
     }
     if ($autopilotGoalCompiler.real_manifest_read_performed -ne $false -or $autopilotGoalCompiler.real_vcpchat_read_performed -ne $false -or $autopilotGoalCompiler.real_vcptoolbox_read_performed -ne $false -or $autopilotGoalCompiler.dependency_change_performed -ne $false -or $autopilotGoalCompiler.runtime_probe_performed -ne $false -or $autopilotGoalCompiler.secret_value_read_performed -ne $false -or $autopilotGoalCompiler.push_tag_release_deploy_performed -ne $false) {
       Add-Failure "Autopilot Goal Compiler v1 must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
+    }
+  }
+
+  $agentBoardQueueReconciliationOutput = & node (Join-Path $Root 'scripts/validate_agent_board_queue_reconciliation.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Agent board queue reconciliation validation exited with failure"
+  } else {
+    $agentBoardQueueReconciliation = ($agentBoardQueueReconciliationOutput -join "`n") | ConvertFrom-Json
+    if ($agentBoardQueueReconciliation.passed -ne $true -or $agentBoardQueueReconciliation.phase -ne 'agent_board_queue_reconciler_v1') {
+      Add-Failure "Agent board queue reconciliation must pass"
+    }
+    if ($agentBoardQueueReconciliation.queue_drift_detected -ne $false -or $agentBoardQueueReconciliation.result -ne 'passed' -or $agentBoardQueueReconciliation.matched_goal_id -ne $true -or -not $agentBoardQueueReconciliation.matched_next_safe_task) {
+      Add-Failure "Agent board queue reconciliation must verify no drift, goal id, and next safe task"
+    }
+    if ($agentBoardQueueReconciliation.matched_blocked_red_items -lt 1 -or $agentBoardQueueReconciliation.missing_required_surfaces.Count -ne 0) {
+      Add-Failure "Agent board queue reconciliation must verify blocked Red items and required surfaces"
+    }
+    if ($agentBoardQueueReconciliation.provider_contact_performed -ne $false -or $agentBoardQueueReconciliation.plugin_call_performed -ne $false -or $agentBoardQueueReconciliation.api_call_performed -ne $false -or $agentBoardQueueReconciliation.image_generation_performed -ne $false -or $agentBoardQueueReconciliation.DailyNote_write_performed -ne $false -or $agentBoardQueueReconciliation.VCP_memory_write_performed -ne $false) {
+      Add-Failure "Agent board queue reconciliation must not perform provider, plugin, API, image, DailyNote, or VCP memory actions"
+    }
+    if ($agentBoardQueueReconciliation.real_manifest_read_performed -ne $false -or $agentBoardQueueReconciliation.real_vcpchat_read_performed -ne $false -or $agentBoardQueueReconciliation.real_vcptoolbox_read_performed -ne $false -or $agentBoardQueueReconciliation.dependency_change_performed -ne $false -or $agentBoardQueueReconciliation.runtime_probe_performed -ne $false -or $agentBoardQueueReconciliation.secret_value_read_performed -ne $false -or $agentBoardQueueReconciliation.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Agent board queue reconciliation must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
     }
   }
 
